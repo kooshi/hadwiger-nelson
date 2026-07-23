@@ -1,0 +1,9 @@
+# Lake build output — never tracked
+/.lake/
+**/.lake/
+# Older Lake layouts
+/build/
+**/build/
+
+# Local, machine-specific permissions (mirrors the source-repo convention)
+.claude/settings.local.json
