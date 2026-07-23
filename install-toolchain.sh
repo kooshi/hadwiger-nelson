@@ -13,6 +13,10 @@
 #
 # Alternative (a fixed, system-wide Lean without pinning): `paru -S lean4-bin`. Not recommended here,
 # because it does not honor ./lean-toolchain and fights the Mathlib cache. Prefer elan.
+#
+# It also wires the Arch build-env workaround (scripts/dev-env.sh): the toolchain's bundled clang is
+# broken against Arch's system LLVM, so native/C compiles (Mathlib's cache tool, executables, FFI)
+# need the system clang plus the toolchain's bundled libc++ on the linker path. See that file for why.
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -53,12 +57,25 @@ PIN="$(tr -d '[:space:]' < lean-toolchain)"
 log "Installing Lean toolchain: $PIN"
 elan toolchain install "$PIN"
 
-# --- 3. Verify (from this directory, so ./lean-toolchain is honored) --------------------------------
+# --- 3. Build environment (Arch clang/libc++ workaround) -------------------------------------------
+# Ensure interactive shells source scripts/dev-env.sh so `lake build` works here without a broken
+# bundled clang. Guarded by a marker so re-runs don't duplicate the block.
+DEV_ENV="$REPO_DIR/scripts/dev-env.sh"
+if [[ -f "$DEV_ENV" ]] && ! grep -qs 'lean-dir/scripts/dev-env.sh' "$HOME/.profile" 2>/dev/null; then
+  printf '\n# Lean build env for lean-dir (Arch clang/libc++ workaround)\n[ -f "%s" ] && . "%s"\n' \
+    "$DEV_ENV" "$DEV_ENV" >> "$HOME/.profile"
+  log "Wired scripts/dev-env.sh into ~/.profile."
+fi
+# shellcheck source=/dev/null
+[[ -f "$DEV_ENV" ]] && . "$DEV_ENV"
+
+# --- 4. Verify (from this directory, so ./lean-toolchain is honored) --------------------------------
 log "Verifying — versions in this workspace:"
 lean --version
 lake --version
 echo
 elan show
 
-log "Done. This directory is pinned to $PIN via ./lean-toolchain."
-log "Next: stand up the Lake package deliberately through the debruijn-init skill (per WORKFLOW)."
+log "Done. This directory is pinned to $PIN via ./lean-toolchain; build env sourced from scripts/dev-env.sh."
+log "Next (Mathlib project already scaffolded): 'lake exe cache get' then 'lake build' to get a green gate."
+log "Open a new shell (or 'source ~/.profile') so future shells pick up PATH + the build env."
