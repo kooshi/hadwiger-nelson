@@ -7,3 +7,8 @@
 
 # Local, machine-specific permissions (mirrors the source-repo convention)
 .claude/settings.local.json
+
+# Generated graph data and SAT artifacts — reproducible from tools/, never reviewed by hand
+tools/*.json
+*.cnf
+*.lrat
