@@ -1,4 +1,6 @@
 import Proofs.Basic
+import Proofs.HadwigerNelson.UnitDistance
+import Proofs.HadwigerNelson.Instances.Triangle
 
 /-!
 # Proofs

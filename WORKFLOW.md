@@ -36,7 +36,9 @@ leaves.
    `debruijn-experience-modeling` skill (via the Skill tool), scoped to the current milestone, under
    the same fresh-invocation rule as step 5 (never from memory, and never from text the skill already
    occupies in context). Apply it, then **commit** the changes it produces.
+<disabled>
 8. **Pause for user review** of the new and improved subplan before implementing.
+</disabled>
 9. **Implement** the milestone against its subplan — burn the skeleton's `sorry`s down via the loop:
    select one obligation (the goal state is the machine's own prioritization), **query** the
    environment before inhabiting, then close it or split it into finitely many strictly-smaller,
