@@ -3,6 +3,10 @@
 > The reduction, and the smallest complete instance of it. No graph data, no SAT solver.
 > Everything M04/M05 will do at 1581 vertices, done here at 3.
 
+> **STATUS: complete (2026-07-23).** Zero `sorry`; gate green — `lake build`, axioms clean
+> (`propext`/`Classical.choice`/`Quot.sound` only, no `sorryAx`/`ofReduceBool`), `#lint` 0 errors,
+> all three mutation-audit variants confirmed unprovable. `χ(ℝ²) ≥ 3` holds through both routes.
+
 ## Why this is the first milestone
 
 It is the only genuine leaf: `UnitDistance.lean` depends on Mathlib and nothing else of ours. It

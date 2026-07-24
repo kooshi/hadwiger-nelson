@@ -37,27 +37,61 @@ noncomputable def trianglePoints : Fin 3 → ℂ :=
 /-! The three real-number facts underneath the 9-case bash. Stated separately so the case analysis
 cites them rather than re-deriving `√3² = 3` six times. -/
 
-private theorem dist_01 : dist (trianglePoints 0) (trianglePoints 1) = 1 := by sorry
+/-- `dist z w = 1` reduces to `normSq (z - w) = 1`, since `‖·‖ = √ ∘ normSq` and `√1 = 1`. The
+one real fact the three leaves share. -/
+private theorem dist_of_normSq {z w : ℂ} (h : Complex.normSq (z - w) = 1) : dist z w = 1 := by
+  rw [Complex.dist_eq, Complex.norm_def, h, Real.sqrt_one]
 
-private theorem dist_02 : dist (trianglePoints 0) (trianglePoints 2) = 1 := by sorry
+private theorem dist_01 : dist (trianglePoints 0) (trianglePoints 1) = 1 := by
+  apply dist_of_normSq; rw [Complex.normSq_apply]; norm_num [trianglePoints]
 
-private theorem dist_12 : dist (trianglePoints 1) (trianglePoints 2) = 1 := by sorry
+private theorem dist_02 : dist (trianglePoints 0) (trianglePoints 2) = 1 := by
+  apply dist_of_normSq
+  have h3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  rw [Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, show (trianglePoints 0).re = 0 from rfl,
+    show (trianglePoints 0).im = 0 from rfl, show (trianglePoints 2).re = 1 / 2 from rfl,
+    show (trianglePoints 2).im = Real.sqrt 3 / 2 from rfl]
+  nlinarith [h3]
 
-/-- Every pair of distinct triangle vertices is a unit-distance pair. -/
+private theorem dist_12 : dist (trianglePoints 1) (trianglePoints 2) = 1 := by
+  apply dist_of_normSq
+  have h3 : Real.sqrt 3 ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+  rw [Complex.normSq_apply]
+  simp only [Complex.sub_re, Complex.sub_im, show (trianglePoints 1).re = 1 from rfl,
+    show (trianglePoints 1).im = 0 from rfl, show (trianglePoints 2).re = 1 / 2 from rfl,
+    show (trianglePoints 2).im = Real.sqrt 3 / 2 from rfl]
+  nlinarith [h3]
+
+/-- Every pair of distinct triangle vertices is a unit-distance pair. The 9-case bash: three
+diagonal cases die on `i ≠ j`, the six off-diagonal cases cite one of the three leaves (directly
+or through `dist_comm`). -/
 theorem trianglePoints_dist {i j : Fin 3} (h : i ≠ j) :
     dist (trianglePoints i) (trianglePoints j) = 1 := by
-  sorry
+  fin_cases i <;> fin_cases j <;>
+    first
+      | exact absurd rfl h
+      | exact dist_01
+      | exact dist_02
+      | exact dist_12
+      | (rw [dist_comm]; exact dist_01)
+      | (rw [dist_comm]; exact dist_02)
+      | (rw [dist_comm]; exact dist_12)
 
 /-! ## Route 1 — through the general reduction, with `⊤` -/
 
-/-- `K₃` is not 2-colourable — the combinatorial half of the witness. -/
+/-- `K₃` is not 2-colourable — the combinatorial half of the witness. `χ(K₃) = 3 > 2`. -/
 theorem not_colorable_two_top_fin_three : ¬ (⊤ : SimpleGraph (Fin 3)).Colorable 2 := by
-  sorry
+  rw [← chromaticNumber_le_iff_colorable, chromaticNumber_top, Fintype.card_fin]
+  decide
 
 /-- **χ(ℂ) ≥ 3**, via the general reduction applied to the triangle. -/
 theorem three_le_chromaticNumber_unitDistance_complex :
     3 ≤ (unitDistance ℂ).chromaticNumber := by
-  sorry
+  have h := add_one_le_chromaticNumber_unitDistance (G := (⊤ : SimpleGraph (Fin 3)))
+    trianglePoints (fun _ _ hij => trianglePoints_dist hij.ne) not_colorable_two_top_fin_three
+  norm_num at h
+  exact h
 
 /-! ## Route 2 — through the edge-list specialization
 
@@ -70,12 +104,19 @@ def triangleEdges : List (Fin 3 × Fin 3) := [(0, 1), (1, 2), (0, 2)]
 /-- The edge-list presentation agrees with `⊤` — a cross-check of `edgeGraph` against Mathlib's
 complete graph, at a size where both are transparently correct. -/
 theorem edgeGraph_triangleEdges_eq_top : edgeGraph 3 triangleEdges = ⊤ := by
-  sorry
+  ext i j
+  simp only [edgeGraph_adj, top_adj, triangleEdges]
+  fin_cases i <;> fin_cases j <;> decide
 
 /-- **χ(ℂ) ≥ 3** again, this time through the certificate-shaped route. -/
 theorem three_le_chromaticNumber_unitDistance_complex' :
     3 ≤ (unitDistance ℂ).chromaticNumber := by
-  sorry
+  have hnc : ¬ (edgeGraph 3 triangleEdges).Colorable 2 := by
+    rw [edgeGraph_triangleEdges_eq_top]; exact not_colorable_two_top_fin_three
+  have h := add_one_le_chromaticNumber_unitDistance_edgeList (k := 2) triangleEdges trianglePoints
+    (fun e he => by fin_cases he <;> first | exact dist_01 | exact dist_12 | exact dist_02) hnc
+  norm_num at h
+  exact h
 
 /-! ## The headline -/
 
@@ -83,15 +124,16 @@ theorem three_le_chromaticNumber_unitDistance_complex' :
 `ℂ ≃ᵢ EuclideanSpace ℝ (Fin 2)`. M05 will state its headline in exactly this shape. -/
 theorem three_le_chromaticNumber_plane :
     3 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := by
-  sorry
+  rw [← chromaticNumber_unitDistance_congr Complex.orthonormalBasisOneI.repr.toIsometryEquiv]
+  exact three_le_chromaticNumber_unitDistance_complex
 
 /-! ## Non-vacuity of the adjacency itself
 
 Guards against the failure where `unitDistance` has an empty `Adj` and every theorem above is
 true for the wrong reason. -/
 
-example : (unitDistance ℂ).Adj 0 1 := by sorry
+example : (unitDistance ℂ).Adj 0 1 := by rw [unitDistance_adj]; simp [Complex.dist_eq]
 
-example : ¬ (unitDistance ℂ).Adj 0 2 := by sorry
+example : ¬ (unitDistance ℂ).Adj 0 2 := by rw [unitDistance_adj, Complex.dist_eq]; norm_num
 
 end HadwigerNelson

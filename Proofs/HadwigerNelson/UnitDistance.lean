@@ -61,14 +61,15 @@ Stated as an `iff` because both directions get used — the `←` direction turn
 bound, and the `→` direction lets a proven bound rule out colourings. -/
 theorem lt_chromaticNumber_iff_not_colorable {G : SimpleGraph W} {n : ℕ} :
     (n : ℕ∞) < G.chromaticNumber ↔ ¬ G.Colorable n := by
-  sorry
+  rw [← not_le, chromaticNumber_le_iff_colorable]
 
 /-- Numeral form of the bound — what a headline states. Derived once here so that the `ℕ∞`
 arithmetic does not recur at every call site; arithmetic stays in `ℕ` and `ℕ∞` sees only the
 coercion and the order. -/
 theorem add_one_le_chromaticNumber_iff_not_colorable {G : SimpleGraph W} {n : ℕ} :
     ((n + 1 : ℕ) : ℕ∞) ≤ G.chromaticNumber ↔ ¬ G.Colorable n := by
-  sorry
+  rw [Nat.cast_add, Nat.cast_one, ENat.add_one_le_iff (by exact ENat.coe_ne_top n),
+    lt_chromaticNumber_iff_not_colorable]
 
 /-! ## The reduction -/
 
@@ -77,26 +78,32 @@ unit-distance graph. -/
 def unitDistanceHom [MetricSpace V] (G : SimpleGraph ι) (p : ι → V)
     (hp : ∀ i j, G.Adj i j → dist (p i) (p j) = 1) : G →g unitDistance V where
   toFun := p
-  map_rel' := by sorry
+  map_rel' := fun {i j} h => hp i j h
 
 /-- **The reduction.** A finite witness — any graph `G` drawn in `V` with unit-length edges and no
 `n`-colouring — forces the whole space to need more than `n` colours. -/
 theorem lt_chromaticNumber_unitDistance [MetricSpace V] {G : SimpleGraph ι} {n : ℕ}
     (p : ι → V) (hp : ∀ i j, G.Adj i j → dist (p i) (p j) = 1) (hG : ¬ G.Colorable n) :
-    (n : ℕ∞) < (unitDistance V).chromaticNumber := by
-  sorry
+    (n : ℕ∞) < (unitDistance V).chromaticNumber :=
+  calc (n : ℕ∞) < G.chromaticNumber := lt_chromaticNumber_iff_not_colorable.mpr hG
+    _ ≤ (unitDistance V).chromaticNumber := chromaticNumber_mono_of_hom (unitDistanceHom G p hp)
 
 /-- **The reduction, numeral form.** This is the theorem M04 and M05 call: supply `p` and `hp`
 (exact geometry) and `hG` (a verified LRAT certificate), and it returns the bound on the plane. -/
 theorem add_one_le_chromaticNumber_unitDistance [MetricSpace V] {G : SimpleGraph ι} {n : ℕ}
     (p : ι → V) (hp : ∀ i j, G.Adj i j → dist (p i) (p j) = 1) (hG : ¬ G.Colorable n) :
     ((n + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
-  sorry
+  rw [Nat.cast_add, Nat.cast_one, ENat.add_one_le_iff (ENat.coe_ne_top n)]
+  exact lt_chromaticNumber_unitDistance p hp hG
 
 /-- The bound does not see which model of the plane we chose. Lets the construction live in `ℂ`,
 where rotation is multiplication, while the headline is stated in `EuclideanSpace ℝ (Fin 2)`. -/
 theorem chromaticNumber_unitDistance_congr [MetricSpace V] [MetricSpace W] (e : V ≃ᵢ W) :
     (unitDistance V).chromaticNumber = (unitDistance W).chromaticNumber := by
-  sorry
+  refine le_antisymm ?_ ?_
+  · exact chromaticNumber_mono_of_hom
+      (unitDistanceHom _ e fun i j h => by rw [e.dist_eq]; exact (unitDistance_adj.mp h))
+  · exact chromaticNumber_mono_of_hom
+      (unitDistanceHom _ e.symm fun i j h => by rw [e.symm.dist_eq]; exact (unitDistance_adj.mp h))
 
 end HadwigerNelson

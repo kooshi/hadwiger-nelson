@@ -61,6 +61,10 @@ theorem add_one_le_chromaticNumber_unitDistance_edgeList {V : Type*} [MetricSpac
     (hp : ∀ e ∈ E, dist (p e.1) (p e.2) = 1)
     (hG : ¬ (edgeGraph n E).Colorable k) :
     ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
-  sorry
+  refine add_one_le_chromaticNumber_unitDistance p ?_ hG
+  -- Every edge of `edgeGraph` is a listed pair (up to direction); feed each to `hp`.
+  rintro i j ⟨-, hij | hji⟩
+  · exact hp (i, j) hij
+  · rw [dist_comm]; exact hp (j, i) hji
 
 end HadwigerNelson
