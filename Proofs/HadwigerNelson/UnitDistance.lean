@@ -53,6 +53,12 @@ theorem lt_chromaticNumber_of_not_colorable {G : SimpleGraph W} {n : ℕ}
     (h : ¬ G.Colorable n) : (n : ℕ∞) < G.chromaticNumber := by
   sorry
 
+/-- Numeral form of the bound, for headlines. Derived once here so the `ℕ∞` arithmetic does not
+recur at every call site. -/
+theorem add_one_le_chromaticNumber_of_not_colorable {G : SimpleGraph W} {n : ℕ}
+    (h : ¬ G.Colorable n) : ((n + 1 : ℕ) : ℕ∞) ≤ G.chromaticNumber := by
+  sorry
+
 /-! ## The reduction -/
 
 /-- A vertex map sending edges to unit-distance pairs is a graph homomorphism into the
@@ -70,6 +76,12 @@ This is the only theorem M04 and M05 need: they supply `p` and `hp` (exact geome
 theorem lt_chromaticNumber_unitDistance [MetricSpace V] {G : SimpleGraph ι} {n : ℕ}
     (p : ι → V) (hp : ∀ i j, G.Adj i j → dist (p i) (p j) = 1) (hG : ¬ G.Colorable n) :
     (n : ℕ∞) < (unitDistance V).chromaticNumber := by
+  sorry
+
+/-- Numeral form of the reduction — what the three headlines call. -/
+theorem add_one_le_chromaticNumber_unitDistance [MetricSpace V] {G : SimpleGraph ι} {n : ℕ}
+    (p : ι → V) (hp : ∀ i j, G.Adj i j → dist (p i) (p j) = 1) (hG : ¬ G.Colorable n) :
+    ((n + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
   sorry
 
 /-- The bound does not see which model of the plane we chose. Lets the construction live in `ℂ`,

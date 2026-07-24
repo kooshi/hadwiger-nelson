@@ -26,11 +26,22 @@ open SimpleGraph Complex
 
 /-! ## The points -/
 
-/-- Three points of `ℂ` pairwise at distance `1`: the unit equilateral triangle. -/
-noncomputable def trianglePoints : Fin 3 → ℂ
-  | 0 => 0
-  | 1 => 1
-  | 2 => ⟨1 / 2, Real.sqrt 3 / 2⟩
+/-- Three points of `ℂ` pairwise at distance `1`: the unit equilateral triangle.
+
+A vector literal rather than a `match` on `Fin 3` literals, deliberately: `fin_cases i <;> simp`
+is reliable against `Matrix.cons_val_*` and is not against a bare `match`, and the difference is a
+proof that transcribes versus a proof that fights. -/
+noncomputable def trianglePoints : Fin 3 → ℂ :=
+  ![0, 1, ⟨1 / 2, Real.sqrt 3 / 2⟩]
+
+/-! The three real-number facts underneath the 9-case bash. Stated separately so the case analysis
+cites them rather than re-deriving `√3² = 3` six times. -/
+
+private theorem dist_01 : dist (trianglePoints 0) (trianglePoints 1) = 1 := by sorry
+
+private theorem dist_02 : dist (trianglePoints 0) (trianglePoints 2) = 1 := by sorry
+
+private theorem dist_12 : dist (trianglePoints 1) (trianglePoints 2) = 1 := by sorry
 
 /-- Every pair of distinct triangle vertices is a unit-distance pair. -/
 theorem trianglePoints_dist {i j : Fin 3} (h : i ≠ j) :

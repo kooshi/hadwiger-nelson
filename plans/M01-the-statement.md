@@ -171,6 +171,49 @@ exists to make, and getting them wrong taxes every later milestone.
 4. **Whether `n + 1` or `n < χ`** is the normal form for the bound, i.e. which side of `Order.succ`
    the simp set should drive toward.
 
+## Obligation-modeling pass — findings (step 6, applied)
+
+Fresh `debruijn-obligation-modeling` pass over the 13 open obligations. Most are two-liners once
+the right statement exists; the pass's job was finding which statements those are.
+
+**The decomposition, with each proof's shape named.**
+
+| Obligation | Shape | Derives from |
+|---|---|---|
+| `lt_chromaticNumber_of_not_colorable` | one line | `not_le.mp` on `chromaticNumber_le_iff_colorable` |
+| `unitDistanceHom.map_rel'` | one line | `hp` directly — `unitDistance_adj_iff` is `Iff.rfl` |
+| `lt_chromaticNumber_unitDistance` | two-step `calc` | the primitive, then `chromaticNumber_mono_of_hom` |
+| `chromaticNumber_unitDistance_congr` | `le_antisymm` of two homs | **no new lemma** — `unitDistanceHom` already generalizes it, applied with `e` and `e.symm` |
+| `lt_chromaticNumber_unitDistance_edgeList` | `rcases` on the `Or` | two cases; the second is `dist_comm` |
+| `trianglePoints_dist` | 9-case bash over three real facts | three named `dist_ij` leaves |
+| `not_colorable_two_top_fin_three` | three lines | `chromaticNumber_top` + `Fintype.card_fin` |
+| `edgeGraph_triangleEdges_eq_top` | `ext i j; revert i j; decide` | the argument *is* "check all 9"; the kernel checks all 9 |
+| the three headlines | `simpa` | the numeral-form corollary below |
+
+**Three statements the pass added, each removing repeated work.**
+
+1. `add_one_le_chromaticNumber_of_not_colorable` and `add_one_le_chromaticNumber_unitDistance` —
+   the numeral forms, `((n + 1 : ℕ) : ℕ∞) ≤ χ`, derived once from the strict primitive via
+   `ENat.coe_add_one_le_iff`. Without them each of the three headlines re-derives the same `ℕ∞`
+   step. The domain pass's ruling stands — the primitive is strict and arithmetic-free — and these
+   are its stated corollaries, not a replacement.
+2. Three private leaves `dist_01`, `dist_02`, `dist_12`. The triangle's 9 cases collapse to three
+   real-number facts plus `dist_comm` plus `absurd rfl`; naming them turns a `nlinarith`-soup case
+   bash into a case bash that *cites*.
+
+**A definition reshaped backward from its proof.** `trianglePoints` moves from a `match` on `Fin 3`
+literals to the vector literal `![0, 1, ⟨1/2, √3/2⟩]`. `fin_cases i <;> simp` is reliable against
+`Matrix.cons_val_*`; against a bare `match` on `Fin` literals it is not, and the difference is a
+proof that transcribes versus a proof that fights. Back's corollary: the definition is the
+readout, the proof is the artifact.
+
+**Mutation audit — planned, and part of the gate.** A statement whose weakenings all still prove
+was vacuous. Each of these must *break*:
+
+- drop `h : i ≠ j` from `trianglePoints_dist` — must fail (`dist p₀ p₀ = 0`);
+- weaken `not_colorable_two_top_fin_three` to `¬ Colorable 3` — must fail (K₃ *is* 3-colourable);
+- weaken a headline from `3 ≤ χ` to `4 ≤ χ` — must fail.
+
 ## Terminal test (the M01 gate)
 
 - `lake build` green; zero `sorry`; `lake lint` silent.
