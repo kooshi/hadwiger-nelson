@@ -4,10 +4,10 @@ import Mathlib.Analysis.InnerProductSpace.PiL2
 /-!
 # The unit equilateral triangle — M01's model of its own hypotheses
 
-`lt_chromaticNumber_unitDistance` quantifies over a graph, a vertex map, an edge hypothesis and a
-non-colourability fact. A `∀` over an empty domain proves everything and means nothing, so before
-anything downstream leans on that theorem, this file exhibits one concrete instance of all four and
-reads off the resulting bound.
+`add_one_le_chromaticNumber_unitDistance` quantifies over a graph, a vertex map, an edge hypothesis
+and a non-colourability fact. A `∀` over an empty domain proves everything and means nothing, so
+before anything downstream leans on that theorem, this file exhibits one concrete instance of all
+four and reads off the resulting bound.
 
 The instance is the smallest possible: three points of `ℂ` pairwise at distance `1`, carrying `K₃`,
 which needs three colours. The conclusion — that the plane needs at least three colours — is
@@ -20,7 +20,7 @@ each other at a scale where both are obviously right, which is the same discipli
 the CNF encoder and the Moser spindle.
 -/
 
-namespace Proofs.HadwigerNelson
+namespace HadwigerNelson
 
 open SimpleGraph Complex
 
@@ -94,4 +94,4 @@ example : (unitDistance ℂ).Adj 0 1 := by sorry
 
 example : ¬ (unitDistance ℂ).Adj 0 2 := by sorry
 
-end Proofs.HadwigerNelson
+end HadwigerNelson

@@ -5,7 +5,7 @@ import Proofs.HadwigerNelson.UnitDistance
 
 The presentation every certificate uses. A finite graph arrives from an untrusted generator as a
 vertex count and a list of index pairs; `edgeGraph` is how that list becomes a `SimpleGraph`, and
-`edgeGraph_adj_iff` is the bridge both consumers cross.
+`edgeGraph_adj` is the bridge both consumers cross.
 
 ## Why this shape
 
@@ -28,37 +28,39 @@ the graph colourable, which would make `Colorable k G → Sat cnf` *false*. Both
 with `i : Fin n` needs no `!` and no bounds side condition on the certificate path.
 -/
 
-namespace Proofs.HadwigerNelson
+namespace HadwigerNelson
 
 open SimpleGraph
 
 variable {n : ℕ}
 
 /-- The graph on `Fin n` whose edges are exactly the listed pairs, symmetrised, with loops
-stripped. -/
+stripped. Reason about it through `edgeGraph_adj` and `edgeGraph_adj_of_mem`, never by unfolding. -/
 def edgeGraph (n : ℕ) (E : List (Fin n × Fin n)) : SimpleGraph (Fin n) where
   Adj i j := i ≠ j ∧ ((i, j) ∈ E ∨ (j, i) ∈ E)
   symm := ⟨fun _ _ h => ⟨h.1.symm, h.2.symm⟩⟩
   loopless := ⟨fun _ h => h.1 rfl⟩
 
-/-- Adjacency in `edgeGraph` unfolded. True by `rfl`; stated so no downstream proof unfolds
-`Adj`. -/
+/-- Adjacency in `edgeGraph` unfolded — the reasoning surface. `@[simp]` toward the same
+destination as `unitDistance_adj`: goals leave graph vocabulary for list membership, where
+`decide` and `List` lemmas close them. -/
 @[simp]
-theorem edgeGraph_adj_iff {E : List (Fin n × Fin n)} {i j : Fin n} :
+theorem edgeGraph_adj {E : List (Fin n × Fin n)} {i j : Fin n} :
     (edgeGraph n E).Adj i j ↔ i ≠ j ∧ ((i, j) ∈ E ∨ (j, i) ∈ E) := Iff.rfl
 
-/-- A listed non-loop pair is an edge — the direction M03's CNF soundness proof consumes. -/
+/-- A listed non-loop pair is an edge — the direction M03's CNF soundness proof consumes, packaged
+so that proof never has to reconstruct the `Or`. -/
 theorem edgeGraph_adj_of_mem {E : List (Fin n × Fin n)} {i j : Fin n}
     (hne : i ≠ j) (hmem : (i, j) ∈ E) : (edgeGraph n E).Adj i j := ⟨hne, Or.inl hmem⟩
 
 /-- **The reduction, in the certificate's own vocabulary.** The hypothesis `hp` is exactly what
 M04's exact-arithmetic edge check produces: one unit-distance fact per listed pair, with no
-`Adj` in sight. -/
-theorem lt_chromaticNumber_unitDistance_edgeList {V : Type*} [MetricSpace V] {k : ℕ}
+`Adj` in sight. This is the call site for the whole project's headline. -/
+theorem add_one_le_chromaticNumber_unitDistance_edgeList {V : Type*} [MetricSpace V] {k : ℕ}
     (E : List (Fin n × Fin n)) (p : Fin n → V)
     (hp : ∀ e ∈ E, dist (p e.1) (p e.2) = 1)
     (hG : ¬ (edgeGraph n E).Colorable k) :
-    (k : ℕ∞) < (unitDistance V).chromaticNumber := by
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
   sorry
 
-end Proofs.HadwigerNelson
+end HadwigerNelson

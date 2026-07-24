@@ -214,6 +214,34 @@ was vacuous. Each of these must *break*:
 - weaken `not_colorable_two_top_fin_three` to `¬ Colorable 3` — must fail (K₃ *is* 3-colourable);
 - weaken a headline from `3 ≤ χ` to `4 ≤ χ` — must fail.
 
+## Experience-modeling pass — findings (step 7, applied)
+
+M01 defines the vocabulary every later milestone and every outside reader consumes, so the surface
+pass earns its place. Three changes crossed the wire:
+
+1. **Namespace `HadwigerNelson`, not `Proofs.HadwigerNelson`.** Mathlib namespaces by mathematical
+   content, never by library name, so `exact?` returns `HadwigerNelson.add_one_le_chromaticNumber_unitDistance`
+   and it reads as the theorem it is. (`Proofs.Basic` keeps its own namespace; the two coexist.)
+
+2. **`unitDistance_adj` / `edgeGraph_adj`, dropping the `_iff` suffix.** Mathlib's
+   adjacency-unfolding lemmas are `top_adj`, `fromRel_adj`, `bot_adj` — `X_adj`, not `X_adj_iff`.
+   A user predicting the name from convention guesses `unitDistance_adj`; the deviant name would
+   plant a false belief across every future guess. Both drive the **same** normal form: goals leave
+   graph vocabulary — `unitDistance_adj` into metric vocabulary (`dist`, where `norm_num`/`positivity`
+   live), `edgeGraph_adj` into list membership (where `decide` closes). Stated destination, so no
+   user infers their own.
+
+3. **`lt_chromaticNumber_iff_not_colorable` and `add_one_le_chromaticNumber_iff_not_colorable` as
+   `iff`s.** The obligation pass found both directions used; stating one direction implies (Gricean
+   implicature) the other is false or hard. The `iff` says both hold and lets `simp`/`rw` travel
+   either way. The reduction wrappers stay one-directional — they consume a certificate and produce
+   a bound, and that asymmetry is real.
+
+**Docstrings carry the contract "do not unfold."** `unitDistance` and `edgeGraph` each say, in
+words, which lemma to reason through and that the definitional shape is not a promise. The
+API-only-proof test (prove downstream facts with `unfold` forbidden) is folded into the M01 gate:
+if a later milestone reaches for the source, the surface has a hole.
+
 ## Terminal test (the M01 gate)
 
 - `lake build` green; zero `sorry`; `lake lint` silent.
