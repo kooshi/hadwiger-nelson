@@ -82,7 +82,74 @@ theorem trianglePoints_dist : ∀ i j, i ≠ j → dist (trianglePoints i) (tria
 theorem three_le_chromaticNumber_plane : 3 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
 ```
 
-## Open representational questions — for the domain-modeling pass (step 5)
+## Domain-modeling pass — findings (step 5, applied)
+
+The four questions below were carried into a fresh `debruijn-domain-modeling` pass. Its results,
+and the reasoning that produced them, because the reasoning is what a later milestone will need
+when it wants to revisit a call:
+
+**The pipeline's load-bearing fact.** Trace what each consumer needs from the graph and the shape
+falls out. The CNF encoder (M03) needs `listed edge → Adj`, to turn a colouring into a satisfying
+assignment. The geometry (M04) needs `Adj → listed edge`, to build the homomorphism. Both
+directions are required, so the graph must be *exactly* the graph of the edge list, not merely
+contain it. That is intrinsic, not a convenience.
+
+**`Adj` is never evaluated at scale.** The geometry check iterates the edge *list*; the CNF encoder
+iterates the edge *list*; only the 3- and 7-vertex instances ever `decide` a colouring. So the
+adjacency test needs no efficient representation — which kills the `Bool` adjacency matrix
+(2.5M entries at n = 1581) as structure incidental to a performance worry that does not exist.
+
+1. **Unit-distance adjacency → direct `SimpleGraph.mk`, not `fromRel`.** `fromRel r` yields
+   `Adj x y ↔ x ≠ y ∧ (r x y ∨ r y x)`, and both extra conjuncts are redundant here: `dist` is
+   symmetric, and `dist x x = 0 ≠ 1` gives looplessness. Defining `Adj x y := dist x y = 1`
+   directly makes `unitDistance_adj_iff` literally `Iff.rfl` and spares every downstream proof the
+   peeling. The `@[simp]` lemma still earns its place as the reasoning surface — nobody should
+   unfold `Adj` — it just costs nothing to prove.
+
+2. **The finite witness → `edgeGraph n E` over `E : List (Fin n × Fin n)`**, with
+   `Adj i j := i ≠ j ∧ ((i,j) ∈ E ∨ (j,i) ∈ E)`. Symmetry and looplessness are then *structural*:
+   the definition is total on any list, so there is no well-formedness hypothesis, no smart
+   constructor, and no `Subtype` — a malformed list simply denotes a graph without those loops.
+   `Fin n` rather than `ℕ` because it buys **discharged** totality on the vertex lookup
+   (`p : Fin n → V`, `verts[i]` with `i : Fin n`), keeping the `!`-flavoured denial off the
+   certificate path entirely.
+
+   *The consequence M03 must honour*: because `edgeGraph` strips loops structurally, the CNF
+   encoder must strip them too, or `Colorable k G → Sat cnf` is **false** — a self-loop makes the
+   CNF trivially unsatisfiable while leaving the graph colourable. Both objects derive from `E` by
+   the same loop-stripping convention, and then the correspondence holds unconditionally. This is
+   the single sharpest trap in the milestone chain and it is recorded here because it is invisible
+   until M03 and fatal there.
+
+3. **The drawing stays extrinsic — no bundling.** The CNF side is independent of the geometry: it
+   consumes `n` and `E` and never `p` or `V`. Bundling `p` with `E` would hand the encoder an
+   object it mostly ignores — an index no consumer inspects. The three arguments at the M05 call
+   site (`p`, the distance proof, the non-colourability fact) are independently meaningful and
+   independently produced, with no must-agree relationship beyond the graph they share. A
+   `UnitDistanceWitness` structure would be speculative structure with one use. *Revisit trigger*:
+   M06 (shrinking) manipulates many witnesses at once; if it accumulates N identical call sites,
+   collapsing them into one type is subtraction and should happen then, not now.
+
+4. **Bound normal form → the strict, arithmetic-free `(n : ℕ∞) < χ` as the primitive.** It is the
+   exact contrapositive of `chromaticNumber_le_iff_colorable` and carries no `ℕ∞` arithmetic at
+   all. `ENat.coe_add_one_le_iff : ↑m + 1 ≤ n ↔ ↑m < n` converts to the `≤` form at the three
+   headlines that want a numeral. Arithmetic stays in `ℕ`; `ℕ∞` sees only the coercion and the
+   order.
+
+**Seams checked.** No adversarial instance survives: the hypotheses are self-defending. A constant
+`p` forces `dist (p i) (p i) = 1`, i.e. `0 = 1`, so it admits only edgeless graphs, which are
+colourable; `E = []` and `n = 0` both make `¬ Colorable k` false rather than the conclusion wrong.
+The remaining admitted-but-harmless states — duplicate edges, reversed duplicates — denote the same
+graph. The predicted next lemma (M06's "deleting a vertex preserves non-colourability") states as a
+filter on `E`, in the existing vocabulary.
+
+**Scope change this pass caused.** `edgeGraph` and the edge-list specialization of the reduction
+move *into* M01, and the triangle is built twice — once as `⊤ : SimpleGraph (Fin 3)` through the
+general reduction, once as an explicit edge list through the specialization. Pinning the decision
+in elaborated code rather than prose is the point; the double construction cross-checks
+`edgeGraph` against Mathlib's `⊤` at a scale where both are obviously right.
+
+## Open representational questions — carried into the pass above
 
 Deliberately *not* decided here; these are exactly the "which shape is true" calls the skill
 exists to make, and getting them wrong taxes every later milestone.
