@@ -106,20 +106,28 @@ theorem four_le_chromaticNumber_plane_certified :
 
 /-! ## Spec checks
 
-The encoder, checked against a real colouring in both directions on every build. `spindleFour`
-satisfies the formula at four colours and fails it at three — so `colouringCNF` is tracking the
-colouring rather than answering a constant, which no amount of `Unsat` evidence could establish. -/
+The encoder, checked against real assignments in both directions on every build — so `colouringCNF`
+is known to track the colouring rather than answer a constant, which no amount of `Unsat` evidence
+could establish.
+
+The assignments below are **written out by hand** rather than built with the module's own
+`ofColoring`. That is deliberate: an encoder checked with the same machinery that produced its
+satisfying assignments only tests self-consistency. Here the two sides are independent. -/
 
 section Spec
 
 -- Seven at-least-one clauses, plus three per edge.
 #guard (colouringCNF 3 7 moserSpindleEdges).clauses.size = 40
 
--- The positive direction, concretely: a real 4-colouring satisfies the 4-colour encoding.
-#guard CNF.eval (ofColoring 4 (colourFn spindleFour)) (colouringCNF 4 7 moserSpindleEdges)
+-- A real 4-colouring satisfies the 4-colour encoding. Variable `4 * v + c` is true iff vertex `v`
+-- has colour `c`.
+#guard CNF.eval (fun m => m % 4 == [0, 1, 2, 0, 1, 2, 3].getD (m / 4) 0)
+          (colouringCNF 4 7 moserSpindleEdges)
 
--- ...and the same colouring fails the 3-colour encoding, as it must.
-#guard !CNF.eval (ofColoring 3 (colourFn spindleFour)) (colouringCNF 3 7 moserSpindleEdges)
+-- The best available 3-colouring fails, and fails on an *edge* clause: vertices 3 and 6 are
+-- adjacent and both land on colour 0.
+#guard !CNF.eval (fun m => m % 3 == [0, 1, 2, 0, 1, 2, 0].getD (m / 3) 0)
+          (colouringCNF 3 7 moserSpindleEdges)
 
 -- Nine cubes over two vertices at three colours.
 #guard (allCubes 3 moserSpindleSplit).length = 9

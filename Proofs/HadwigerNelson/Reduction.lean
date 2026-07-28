@@ -27,11 +27,17 @@ open SimpleGraph
 
 variable {n k : ℕ}
 
-/-- The bound moved from `ℂ` — where the geometry is built, rotation being multiplication — to
-`EuclideanSpace ℝ (Fin 2)`, where a reader expects to find it. Done once here so no instance module
-repeats the isometry. -/
-theorem le_chromaticNumber_plane_of_complex {m : ℕ∞} (h : m ≤ (unitDistance ℂ).chromaticNumber) :
-    m ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
+/-- The two models of the plane give the same chromatic number: `ℂ`, where the geometry is built
+because rotation is multiplication and a point is a pair, and `EuclideanSpace ℝ (Fin 2)`, where a
+reader expects the theorem.
+
+Stated as an **equality** rather than as the one implication M03 happens to need. That is what
+`chromaticNumber_unitDistance_congr` actually gives, it is one line either way, and it hands the
+upper-bound direction to any later milestone that wants it (rung C's fractional and shrinking work
+needs `≤` the other way). A one-directional version would have been weaker than the truth. -/
+theorem chromaticNumber_plane_eq_complex :
+    (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber = (unitDistance ℂ).chromaticNumber :=
+  sorry
 
 /-- **The composite.** A valid certificate whose CNF encoding is unsatisfiable pushes the chromatic
 number of the plane above `k`.
