@@ -179,9 +179,14 @@ The de Bruijn criterion, operationalized. Audited by `scripts/Axioms.lean` at ev
 
 Two `Bool`s carry the weight, and each has a kernel route and a native route:
 
-1. **`UDCert.Valid deGrey`** — 7877 edge checks over a 16-dimensional ℤ-algebra. Kernel-feasible if
-   the checker avoids `Array` indexing (kernel `Array.get` is O(n) list traversal); designed as a
-   `List` fold over pre-resolved endpoint pairs with a direction table for the norms.
+1. **`UDCert.Valid deGrey`** — 7877 edge checks over a 16-dimensional ℤ-algebra. **Measured
+   (2026-07-23): kernel-feasible, but only in chunks.** ~0.17 s/edge and memory roughly linear in
+   the chunk size; a single `List.all` over all 7877 edges was still running at 5 minutes and 8.5 GB
+   when aborted, while 514 edges take 87 s and ~0.85 GB. M04 therefore splits the check into ~16–32
+   independent slices, which parallelise. No trust is spent — the chunks' conjunction is the whole
+   theorem. Two representation findings fed this: indexed lookup costs the same as pre-resolved
+   endpoint pairs (the tower arithmetic dominates, not the lookup), and multiplying by the radicand
+   as a *scalar* rather than a ring element is a measured 1.67×.
 2. **`LRAT.check π cnf`** — the certificate check. Measurement (§ 2.3) has already settled the
    monolithic case: not reducible by anything, kernel or native. The cube split is how this becomes
    tractable at all, and how it might become kernel-reducible. If it does not, we buy

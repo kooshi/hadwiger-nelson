@@ -126,6 +126,26 @@ non-dependent presentation carrying `n` as a parameter, matching M01's interface
 **(5) `Pt` stays a structure.** Named projections `x`/`y` read better than `.1`/`.2` at every use
 site and the `deriving DecidableEq` is the same either way.
 
+### Scale: the geometry must be checked in chunks (measured)
+
+| edges | kernel `decide` | peak RSS (incremental) |
+|---|---|---|
+| 99 | 13.8 s | small |
+| 514 | 87 s | ~0.85 GB |
+| 7877 (all of de Grey) | **aborted** — still running at 5 min, 8.5 GB and climbing | — |
+
+Cost is ~0.17 s/edge and memory is roughly linear in the chunk size, because a single
+`List.all` over the whole edge list builds one enormous kernel term. So **M04 must split the
+geometry check into chunks** — ~16–32 slices of 250–500 edges, each its own `decide`. Each slice is
+under a minute and under a gigabyte; slices are independent, so they parallelise across cores
+(≈12–16 at once fits this box's memory) for a few minutes of wall clock.
+
+This is the same shape as the colour-cube split on the SAT side, and it arrives for the same reason:
+one monolithic certified computation is infeasible, many small ones are routine. It costs nothing in
+trust — `Valid` over a chunk is the same theorem, and the chunks' conjunction is the whole.
+
+M02 itself is unaffected: the Moser spindle is 11 edges.
+
 ### The open risk this pass surfaced
 
 The measurements above used **bare core `Int` with granular instances**. The real M02 file has
