@@ -4,9 +4,10 @@
 > consumes, LRAT certificate ingestion, and the cube split. Everything M05 does at 1581 vertices,
 > done here at 7 — where an independent oracle still exists to check it against.
 
-> **STATUS: subplanned (2026-07-27), domain + obligation passes applied.** Skeleton elaborates,
-> 27 `sorry` at tracked leaves, 12 spec `#guard`s passing. Every leaf has a proof derived and
-> checked in scratch — see the obligation pass below.
+> **STATUS: subplanned (2026-07-27), all three modelling passes applied.** Skeleton elaborates,
+> 28 `sorry` at tracked leaves, 16 spec `#guard`s passing, linter clean. Every leaf has a proof
+> derived and checked in scratch, and the M05-shaped call site has been written cold against the
+> public API and shown to elaborate as a single term.
 
 ## De-risk already done (2026-07-27, before this plan was written)
 
@@ -16,7 +17,7 @@ The whole route was run end to end at spindle scale, and one architectural assum
 ### The pipeline works
 
 ```
-colouringCNF 3 7 moserSpindleEdges          21 variables, 40 clauses
+coloringCNF 3 7 moserSpindleEdges          21 variables, 40 clauses
   → CNF.dimacs (printed from the Lean def)  "p cnf 21 40"
   → cadical --lrat --no-binary              exit 20 (UNSAT), instant
   → 26 LRAT actions, 658 bytes
@@ -24,7 +25,7 @@ colouringCNF 3 7 moserSpindleEdges          21 variables, 40 clauses
 ```
 
 with the negative control passing too: the same certificate returns `false` against
-`colouringCNF 4 7 moserSpindleEdges`, so `check` is discriminating between formulas rather than
+`coloringCNF 4 7 moserSpindleEdges`, so `check` is discriminating between formulas rather than
 rubber-stamping.
 
 The brute-force oracle also runs: `∀ f : Fin 7 → Fin 3, ∃ e ∈ moserSpindleEdges, …` and its k = 4
@@ -75,7 +76,7 @@ colourings and answers the same question with no CNF, no solver, and no certific
 
 ## The encoding, and why this shape
 
-Variables are `x_{v,c}` at index `colourVar k v c = k * v + c`, over `ℕ` because that is what
+Variables are `x_{v,c}` at index `colorVar k v c = k * v + c`, over `ℕ` because that is what
 `LRAT.check` consumes. Two clause families:
 
 * one **at-least-one-colour** clause per vertex, `⋁_c x_{v,c}`;
@@ -88,14 +89,14 @@ colour per vertex. Fewer clauses, and the direction we prove is untouched.
 **Only `Colorable k G → satisfiable` is proved**, and the domain pass sharpened *why* that is safe
 rather than merely sufficient. Satisfiability is antitone in the clause set: an encoder emitting too
 few clauses gives a satisfiable formula, which has no refutation, so no certificate exists and no
-theorem is produced; an encoder emitting too many breaks `exists_sat_colouringCNF`, which fails to
+theorem is produced; an encoder emitting too many breaks `exists_sat_coloringCNF`, which fails to
 elaborate. **The encoder cannot be wrong in a way that produces a false bound** — only in a way that
 makes the certificate unobtainable. The residual risk is that the DIMACS handed to the solver is not
 this formula, which is exactly what `ARCHITECTURE.md` § 6's hard rule guards.
 
 **Loops are filtered, and must be.** `edgeGraph` strips loops structurally. A listed `(i, i)` left
 in the clause set contributes `¬x_{i,c} ∨ ¬x_{i,c}`, which makes the formula unsatisfiable while the
-graph stays colourable — i.e. it makes `exists_sat_colouringCNF` *false*. `colouringCNF` filters under the
+graph stays colourable — i.e. it makes `exists_sat_coloringCNF` *false*. `coloringCNF` filters under the
 same convention, and the correspondence is then unconditional. This is the constraint M01 recorded
 in `EdgeList.lean` for M03 to honour.
 
@@ -111,9 +112,11 @@ shape for "the big obligation is the conjunction of generated small ones":
 | geometry (M02) | combinatorics (M03) |
 |---|---|
 | `chunks : List (List Edge)` | `allCubes k W : List (Cube n k)` — generated, not listed |
-| `hjoin : chunks.flatten = c.edges` | `restrict_mem_allCubes` — proved once by induction on `W` |
-| `∀ ch ∈ chunks, ValidOn ch` | `∀ cb ∈ allCubes k W, Unsat (cnf ++ cubeCNF k cb)` |
+| `hjoin : chunks.flatten = c.edges`, by `rfl` | `hcover : allCubes k n W = cubes`, by `rfl` |
+| `∀ ch ∈ chunks, ValidOn ch` | `∀ cb ∈ cubes, Unsat (cnf ++ cubeCNF k n cb)` |
 | call site: `fin_cases hch; exacts [...]` | `fin_cases hcb; exacts [...]`, or a plain tuple |
+
+`cubeOf_mem_allCubes` is the covering lemma the `hcover` equation feeds.
 
 The alternative — an explicit cube list plus a covering hypothesis — was rejected: any covering
 condition phrased over colourings quantifies over `k ^ n`, which is not checkable at n = 1581.
@@ -125,11 +128,11 @@ split's own base case rather than a separate mechanism.
 
 **In.**
 
-1. `Sat/Encoding.lean` — `colourVar`, `atLeastOneClause`, `edgeClauses`, `colouringCNF`;
-   `exists_sat_colouringCNF` and its contrapositive `not_colorable_of_unsat`, over a **private**
-   `colourFn`/`ofColoring` and the arithmetic lemma underneath them.
-2. Cubes, same module — `Cube`, `cubeCNF`, `restrict`, `allCubes`, `restrict_mem_allCubes`,
-   `exists_sat_colouringCNF_cube`, `not_colorable_of_cubes`.
+1. `Sat/Encoding.lean` — `colorVar`, `atLeastOneClause`, `edgeClauses`, `coloringCNF`;
+   `exists_sat_coloringCNF` and its contrapositive `not_colorable_of_unsat`, over a **private**
+   `colorFn`/`ofColoring` and the arithmetic lemma underneath them.
+2. Cubes, same module — `Cube`, `cubeCNF`, `cubeOf`, `allCubes`, `cubeOf_mem_allCubes`,
+   `exists_sat_coloringCNF_cube`, `not_colorable_of_cubes`.
 3. The independent route — `colorable_iff_exists` and `not_colorable_edgeGraph_iff`, which put
    colourability in a shape `decide` can run. Mathlib has no `Decidable (G.Colorable n)` instance
    (checked), so this is ours to state.
@@ -168,21 +171,21 @@ Run before any proof effort was spent, against the real definitions:
 
 | check | result |
 |---|---|
-| `colourVar 3 2 1` | `7` = 2·3+1 |
-| `(colouringCNF 3 7 moserSpindleEdges).clauses.size` | `40` = 7 + 3·11 |
-| `(colouringCNF 3 2 [(0,0)]).clauses.size` | `2` — the self-loop contributes no clause |
-| `(colouringCNF 3 2 [(0,1)]).clauses.size` | `5` = 2 + 3 |
+| `colorVar 3 2 1` | `7` = 2·3+1 |
+| `(coloringCNF 3 7 moserSpindleEdges).clauses.size` | `40` = 7 + 3·11 |
+| `(coloringCNF 3 2 [(0,0)]).clauses.size` | `2` — the self-loop contributes no clause |
+| `(coloringCNF 3 2 [(0,1)]).clauses.size` | `5` = 2 + 3 |
 | `(allCubes 3 [0,1]).length` | `9` = 3², and the nine cubes print correctly |
-| `CNF.eval (ofColoring 4 (colourFn ![0,1,2,0,1,2,3])) (colouringCNF 4 …)` | `true` |
-| `CNF.eval (ofColoring 3 (colourFn ![0,1,2,0,1,2,3])) (colouringCNF 3 …)` | `false` |
-| `CNF.dimacs (colouringCNF 3 3 triangleEdges)` | `p cnf 9 12`, and the twelve clauses read correctly by eye |
+| `CNF.eval (ofColoring 4 (colorFn ![0,1,2,0,1,2,3])) (coloringCNF 4 …)` | `true` |
+| `CNF.eval (ofColoring 3 (colorFn ![0,1,2,0,1,2,3])) (coloringCNF 3 …)` | `false` |
+| `CNF.dimacs (coloringCNF 3 3 triangleEdges)` | `p cnf 9 12`, and the twelve clauses read correctly by eye |
 
 The last two rows are the two-sided check that matters: the same colouring satisfies the formula at
-four colours and fails it at three, so `colouringCNF` is tracking the colouring rather than
+four colours and fails it at three, so `coloringCNF` is tracking the colouring rather than
 answering a constant.
 
 **The concrete model of the hypotheses** is `spindleFour = ![0,1,2,0,1,2,3]`, a real 4-colouring of
-the spindle verified above. It instantiates `exists_sat_colouringCNF` with something concrete,
+the spindle verified above. It instantiates `exists_sat_coloringCNF` with something concrete,
 which is what stops `not_colorable_of_unsat` from being a `∀` over an empty domain.
 
 ## Skeleton
@@ -190,10 +193,10 @@ which is what stops `not_colorable_of_unsat` from being a `∀` over an empty do
 Elaborating now, `sorry` at every leaf:
 
 * `Proofs/HadwigerNelson/Sat/Encoding.lean` — 17 leaves, 10 of them private helpers
-* `Proofs/HadwigerNelson/Sat/Lrat.lean` — 0 leaves (`unsat_of_check` is a one-liner over
-  `check_sound`; the module's content is the boundary it documents)
+* `Proofs/HadwigerNelson/Sat/Lrat.lean` — 0 leaves (`unsat_of_check` over `check_sound`, plus the
+  `badCubes` diagnostic; the module's content is the boundary it documents)
 * `Proofs/HadwigerNelson/Reduction.lean` — 2 leaves (the two composites are derived terms)
-* `Proofs/HadwigerNelson/Instances/SpindleBound.lean` — 8 leaves
+* `Proofs/HadwigerNelson/Instances/SpindleBound.lean` — 9 leaves
 
 ## Obligation-modeling pass (2026-07-27)
 
@@ -201,9 +204,9 @@ Every leaf below was **derived and closed in scratch before being written down**
 finer agenda is a transcription of working proofs rather than a wish list. The leaf count went 20 →
 27: one `sorry` replaced by finitely many strictly smaller ones, which is the only legal move.
 
-### `sat_colouringCNF` — the milestone's theorem, and the space it lives in
+### `sat_coloringCNF` — the milestone's theorem, and the space it lives in
 
-There is no induction. `colouringCNF` is an append of two `map`s, so the space is the clause list and
+There is no induction. `coloringCNF` is an append of two `map`s, so the space is the clause list and
 `List.mem_append` carves it. The chain that gets there:
 
 ```
@@ -216,34 +219,34 @@ families, so the assembly is 18 lines with no step needing a walkthrough:
 
 | lemma | content |
 |---|---|
-| `ofColoring_colourVar` | the round trip. `simp [ofColoring, colourVar, Nat.mul_add_div hk, Nat.mod_eq_of_lt hc, Nat.div_eq_of_lt hc]` — pinned; `Nat.mul_add_mod` turns out unnecessary, simp finds it |
-| `colourFn_lt` | the extension lands in range everywhere — **this is where `hk` pays for the junk value** |
-| `colourFn_val` | it agrees with the colouring in range |
+| `ofColoring_colorVar` | the round trip. `simp [ofColoring, colorVar, Nat.mul_add_div hk, Nat.mod_eq_of_lt hc, Nat.div_eq_of_lt hc]` — pinned; `Nat.mul_add_mod` turns out unnecessary, simp finds it |
+| `colorFn_lt` | the extension lands in range everywhere — **this is where `hk` pays for the junk value** |
+| `colorFn_val` | it agrees with the colouring in range |
 | `ofColoring_self` | a vertex's own colour variable is set |
 | `ofColoring_ne` | any other colour's variable is unset |
-| `eval_atLeastOneClause` | the vertex clause, witnessed at `colourFn C v` |
-| `eval_edgeClause` | the edge clause, by case split on `c = colourFn C u`; each branch cites `ofColoring_ne` |
+| `eval_atLeastOneClause` | the vertex clause, witnessed at `colorFn C v` |
+| `eval_edgeClause` | the edge clause, by case split on `c = colorFn C u`; each branch cites `ofColoring_ne` |
 
 The edge side of the assembly crosses three seams in order, and each has exactly one citation:
 `List.mem_filter` (Bool `!=` to Prop `≠`, via `simpa`), `edgeGraph_adj_of_mem` (list membership to
 `Adj` — the packaging M01 wrote for this call site), `Coloring.valid` (`Adj` to `C i ≠ C j`), then
-`Fin.val_inj` to land on `colourFn`.
+`Fin.val_inj` to land on `colorFn`.
 
 ### One witness, named once
 
-`exists_sat_colouringCNF` and `exists_sat_colouringCNF_cube` must agree on the assignment — the cube
+`exists_sat_coloringCNF` and `exists_sat_coloringCNF_cube` must agree on the assignment — the cube
 split turns on a single `a` satisfying both halves of `CNF.eval_append`. So the witness is a private
-lemma (`sat_colouringCNF`) and both existentials cite it.
+lemma (`sat_coloringCNF`) and both existentials cite it.
 
-The cube half, `sat_cubeCNF_restrict`, takes an **arbitrary `C : Fin n → Fin k`**, not a colouring:
+The cube half, `sat_cubeCNF_cubeOf`, takes an **arbitrary `C : Fin n → Fin k`**, not a colouring:
 satisfying one's own cube has nothing to do with the graph. Polya's direction — the more general
 statement is the easier proof, and here it is also the honest one.
 
-### `restrict_mem_allCubes` — the only induction
+### `cubeOf_mem_allCubes` — the only induction
 
 Structural on `W`, and it is the recursor `allCubes` already recurses along, which is the sign the
 domain pass got the type right. Four lines: `nil` gives `[] ∈ [[]]` by `simp`; `cons` is
-`List.mem_flatMap` → `List.mem_map` → `List.mem_finRange`, picking `cb = restrict W C` from the IH
+`List.mem_flatMap` → `List.mem_map` → `List.mem_finRange`, picking `cb = cubeOf W C` from the IH
 and `c = C v`.
 
 ### The rest
@@ -251,7 +254,7 @@ and `c = C v`.
 * `not_colorable_of_unsat` / `not_colorable_of_cubes` — three and four lines. `rintro ⟨C⟩`, take the
   witness, contradict the `Unsat` at that assignment. The children are already-closed leaves, so the
   measure descends trivially. `not_colorable_of_cubes` is the one that also cites
-  `restrict_mem_allCubes`; that is the only thing the split needs beyond the monolithic case.
+  `cubeOf_mem_allCubes`; that is the only thing the split needs beyond the monolithic case.
 * `not_colorable_edgeGraph_iff` — split in two, because it is two arguments. `exists_adj_eq_iff`
   (private) crosses the `Adj`-to-membership seam and absorbs the symmetric `(j, i) ∈ E` case as two
   `.symm`s; the theorem itself is then `colorable_iff_exists`, `push Not`, `exists_adj_eq_iff`.
@@ -276,6 +279,105 @@ and `c = C v`.
   walking it **in that order** — the enumeration is never reimplemented on the Python side. Same
   discipline as § 6's rule for the CNF itself, one level down.
 
+## Experience-modeling pass (2026-07-27)
+
+Run with M05's generated module as the primary user, and the decisive move was writing that call
+site **cold, against the public API only**, before judging anything. It now elaborates as one term:
+
+```lean
+theorem headline : (4 : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber :=
+  moserSpindle.add_one_le_chromaticNumber_plane_of_cubes moserSpindle_valid
+    moserSpindleSplit moserSpindleCubes moserSpindleCubes_eq
+    (List.forall_iff_forall_mem.mp ⟨u₀, …, u₈⟩)
+```
+
+No `by decide` for the denominator, no `by norm_num` for `0 < k`, no `norm_num at h; exact h`. Four
+things had to change to get there.
+
+### The breakdown surface changed the *signature*
+
+The sharpest finding of the pass. With the obligation stated as `∀ cb ∈ allCubes k n W, …`, a
+certificate filed against the wrong cube reports
+
+```
+q₅ has type Q [(0, 2), (1, 1)]
+but is expected to have type
+  Q ((fun c => (0, c) :: (fun c => [(1, c)]) ((fun i => i) ⟨1, ⋯⟩)) ((fun i => i) ⟨1, ⋯⟩))
+```
+
+— the *enumeration's implementation*, unreduced, with no indication of which cube. At 256 cubes
+that is undiagnosable. Passing the cube list as a literal and tying it down with
+`hcover : allCubes k n W = cubes` (by `rfl`, measured under 4 s at 256 cubes) makes the same mistake
+report
+
+```
+q₅ has type Q [(0, 2), (1, 1)] but is expected to have type Q [(0, 1), (1, 1)]
+```
+
+So `not_colorable_of_cubes` and its `Reduction.lean` flavour now take `cubes` and `hcover`. This is
+the *third* independent reason to land on `valid_of_chunks`' shape — the project now has one shape
+for generated conjunctions, and it is the one whose errors name the culprit.
+
+Both discharge routes were measured with a deliberately misfiled entry: `fin_cases hcb; exacts […]`
+reports the first mismatch; `List.forall_iff_forall_mem.mp ⟨…⟩` reports *every* mismatch with column
+positions and does no tactic search. Prefer the tuple past ~100 cubes.
+
+### `n` had to become explicit
+
+`cubeCNF 3 [(0,0),(1,0)]` does not elaborate — `n` is not determined by a cube literal, so every one
+of M05's 256 generated theorems would have carried `(n := 1581)`. When every user writes the same
+argument, the argument is the bug. `cubeCNF k n cb` and `allCubes k n W` are now explicit, matching
+`coloringCNF k n E`, which already was.
+
+### British prose, American identifiers
+
+`colouringCNF` sat next to Mathlib's `Colorable` in every goal — two spellings of one word in one
+expression, and a user who knows Mathlib will type the other one. Identifiers are now `coloringCNF`,
+`colorVar`, `colorFn`; the prose stays British. `restrict` became `cubeOf`: it says what it returns
+and cannot be confused with `Function.restrict`.
+
+### `0 < k` and `denom ≠ 0` are `autoParam`s
+
+Every call site has `k` and `denom` as literals. `(hk : 0 < k := by norm_num)` and
+`(hd : c.denom ≠ 0 := by decide)` make the common path silent and the uncommon path stateable. They
+must sit **last** in the signature: an `autoParam` mentioning `k` fires before `k` is known if it
+comes before the hypothesis that determines it.
+
+### Diagnosis: `badCubes`, the analogue of `badEdges`
+
+`native_decide` can only say "no", and at 256 cubes it does not say which. `badCubes k n E cubes
+proofs` (in `Sat/Lrat.lean`) runs compiled and returns the failing cubes with their indices,
+including cubes with no certificate at all rather than letting `zip` drop them silently. Its
+docstring names the three causes in decreasing order of likelihood — stale certificate, wrong cube,
+genuinely satisfiable — because knowing *which* cube is only half of what the author needs.
+
+For the other breakdown, "route A and route B disagree", no new code: the two-sided spec `#guard`s
+already in `SpindleBound.lean` are the instrument, and the module docstring now names the diagnosis
+order.
+
+### The trust boundary, made a checked artifact rather than a reading
+
+Two halves. In the source, every declaration that evaluates a certificate opens its docstring with
+the exact phrase **"Trust purchase: native evaluation."**, so `grep -rn "Trust purchase" Proofs/`
+is the ledger. In the environment, `scripts/Axioms.lean` now prints machine-readable `=== CLEAN ===`
+and `=== PURCHASED ===` banners, and **`scripts/axioms.sh`** enforces the rule: no native axiom and
+no `sorryAx` above the banner, no `sorryAx` and no *missing* purchase below it. A stale ledger entry
+— a declaration that stopped needing the purchase and never told the audit — fails too.
+
+This exists because the gate hole found at subplan time was exactly the kind a human reading twenty
+`#print axioms` lines will miss: one long name, in the middle, that used to be spelled differently.
+The script rejoins `#print axioms`' wrapped output before matching, since the lists wrap and a
+line-oriented grep both misses records and mis-reports them.
+
+### Docstring contracts
+
+`coloringCNF` carries an unusual one, stated plainly: **it owes no lemma API and has none by
+design.** Nothing downstream reasons about the formula's shape — it is printed to DIMACS and handed
+to a checker — so the three theorems `exists_sat_coloringCNF` / `not_colorable_of_unsat` /
+`not_colorable_of_cubes` are the entire reasoning surface, and the docstring says what to do instead
+of unfolding. `ofColoring` and `colorFn` need no contract: they are `private`, so the question
+cannot arise.
+
 ## Domain-modeling pass (2026-07-27)
 
 Six questions went in; four confirmed the model, two changed it, and one measurement decided a
@@ -283,7 +385,7 @@ definition.
 
 **Confirmed.**
 
-* **`CNF ℕ` with `colourVar`, not `CNF (Fin n × Fin k)` + `CNF.relabel`.** A variable *is* a
+* **`CNF ℕ` with `colorVar`, not `CNF (Fin n × Fin k)` + `CNF.relabel`.** A variable *is* a
   (vertex, colour) pair — intrinsic structure — but the placement is extrinsic: the certificate, the
   DIMACS and `LRAT.check` all want a flat `ℕ`, and exactly one lemma needs the pairing. The relabel
   route does not remove the arithmetic either; `unsat_relabel_iff` moves it into an injectivity
@@ -300,22 +402,22 @@ definition.
   invites `decide` to attempt `4 ^ 1581` in a context nobody asked. Making the caller name the
   rewrite makes the brute-force route a choice. The `e.1 ≠ e.2` conjunct is load-bearing (without it
   a listed self-loop proves non-colourability on no evidence) and is the same convention `edgeGraph`
-  and `colouringCNF` apply — one convention, three sites.
+  and `coloringCNF` apply — one convention, three sites.
 * **The certificate does not carry its own ambient space.** `Q4` coordinates are Cartesian; the
   ambient space is an interpretation chosen once by `toPlane`, and indexing `UDCert` on it would tax
   every signature for something no consumer inspects.
 
 **Changed.**
 
-* **`colourVar k v c = k * v + c`**, not `v * k + c`. Measured: with `k * v + c` the round-trip lemma
+* **`colorVar k v c = k * v + c`**, not `v * k + c`. Measured: with `k * v + c` the round-trip lemma
   is one `simp` citing `Nat.mul_add_div` / `Nat.mul_add_mod`; with `v * k + c` the same call leaves
   `(v * k + c) / k = v` unsolved. Identical numbering, identical DIMACS — the definition was shaped
   around the statement, which is the whole move.
 * **The satisfying assignment is a witness nobody consumes, so it went behind `∃` and its
-  construction went `private`.** `colourFn` extends a colouring by a junk value off-range; that junk
+  construction went `private`.** `colorFn` extends a colouring by a junk value off-range; that junk
   was sitting in the statement of the milestone's main theorem, and every consumer discards the
-  assignment to contradict an `Unsat`. `sat_colouringCNF` became `exists_sat_colouringCNF`, and
-  `colourFn`/`ofColoring`/`colourFn_val`/the round-trip lemma left the public surface. The junk still
+  assignment to contradict an `Unsat`. `sat_coloringCNF` became `exists_sat_coloringCNF`, and
+  `colorFn`/`ofColoring`/`colorFn_val`/the round-trip lemma left the public surface. The junk still
   exists; it can no longer be tripped over.
   * A second win fell out: the spec check could no longer use `ofColoring`, so its assignments are
     now **written by hand**. Checking our encoder with our own assignment-builder only tested

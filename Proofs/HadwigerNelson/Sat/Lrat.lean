@@ -48,6 +48,16 @@ axiom foo._native.native_decide.ax_1_1 : decide (check π cnf = true) = true
 
 `Lean.ofReduceBool` does not appear at all. Any gate that greps only for that name will pass a
 native purchase in silence — see `scripts/Axioms.lean`.
+
+## The convention that makes the purchase visible
+
+Every declaration whose proof evaluates a certificate opens its docstring with the exact phrase
+
+> **Trust purchase: native evaluation.**
+
+so `grep -rn "Trust purchase" Proofs/` enumerates the ledger from the source, and so a reader who
+opens only that one theorem is told before they read the statement. `scripts/Axioms.lean` prints the
+same ledger from the *environment*; the two must agree, and the gate compares them.
 -/
 
 namespace HadwigerNelson
@@ -62,5 +72,33 @@ currently the only thing that can (see the module docstring), so a call site rea
 theorem unsat_of_check {π : Array LRAT.IntAction} {f : CNF ℕ} (h : LRAT.check π f = true) :
     f.Unsat :=
   LRAT.check_sound π f h
+
+/-! ## Diagnosis
+
+`native_decide` can only say "no". At de Grey scale it says "no" about one of 256 cubes without
+saying which, and the failing term is unreadable. This is the analogue of `UDCert.badEdges`: it runs
+compiled, so it is instant at any size, and it names the culprit. -/
+
+/-- The cubes whose certificates fail to check, each with its index in `cubes`.
+
+**Run `#eval badCubes k n E cubes proofs` the moment a cube's `native_decide` fails.** An empty list
+means every certificate checks. A cube appears here for one of three reasons, in decreasing order of
+likelihood:
+
+* the certificate is **stale** — the CNF was regenerated (different `E`, different `k`, reordered
+  edge list) and the certificate's clause ids no longer refer to the clauses they were derived from;
+* the certificate is attached to the **wrong cube** — an ordering mismatch between the emitter's
+  loop and `allCubes k W`;
+* the cube is genuinely **satisfiable**, in which case no certificate exists and the problem is
+  upstream: wrong graph, wrong `k`, or a colouring really does exist.
+
+Cubes with no certificate at all (a `proofs` list shorter than `cubes`) are reported too, rather
+than silently dropped by `zip`. -/
+def badCubes (k n : ℕ) (E : List (Fin n × Fin n)) (cubes : List (Cube n k))
+    (proofs : List (Array LRAT.IntAction)) : List (ℕ × Cube n k) :=
+  cubes.zipIdx.filterMap fun (cb, i) =>
+    match proofs[i]? with
+    | none => some (i, cb)
+    | some π => if LRAT.check π (coloringCNF k n E ++ cubeCNF k n cb) then none else some (i, cb)
 
 end HadwigerNelson
