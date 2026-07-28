@@ -77,6 +77,63 @@ M02 stops at "the spindle's 11 edges are certified unit distances", proved by `d
   not vacuously all-true); a `#guard` on the vertex/edge counts (7 / 11).
 - Mutation audit: perturb one vertex coordinate by 1 and confirm `Valid` flips to `false`.
 
+## Domain-modeling pass — findings (step 5, applied)
+
+Run as a fresh `debruijn-domain-modeling` pass. Three of the five questions were settled by
+**measurement** rather than inspection, using `tools/emit_geometry.py` — a self-contained Lean
+emitter (no Mathlib, granular instances) whose elapsed time is kernel reduction and nothing else.
+
+**(1) `Adjoin` must be ours; Mathlib's candidates are disqualified — for a *computational* reason.**
+`Zsqrtd d` has ℤ components and does not tower. `AdjoinRoot f` is `R[X] ⧸ span {f}` — a **quotient**,
+and `decide` cannot reduce through `Quotient.mk`. The whole point of M02 is kernel computation, so
+the right *mathematics* (a quotient of a polynomial ring) is the wrong *representation*. Define
+`Adjoin` concretely and prove `CommRing` directly. This is the recurring shape of the milestone:
+Mathlib is where the reasoning lives, a concrete structure is where the computing lives, and the
+two are joined by a bridge lemma rather than by picking one.
+
+**(2) `d : ℕ` stays a type index.** Intrinsic: `K[√3]` and `K[√5]` are genuinely different rings and
+`Mul` must dispatch on `d`. A field would make multiplication ill-defined between mismatched
+radicands — exactly the illegal state the index makes unrepresentable.
+
+**(3) The radicand acts as a *scalar*, not a ring element — measured 1.67× .** Writing the
+multiplication law as `x.re*y.re + (d : K) * (x.im*y.im)` treats `d` as a full tower element that
+is zero in 15 of its 16 components, turning each level's 4 sub-multiplications into 5: leaf-mult
+count per `Q4` product goes `4⁴ = 256` → `5⁴ = 625`. Measured at 60 vertices / 99 edges: kernel
+`decide` **23.1 s → 13.8 s** by replacing the cast with a scalar action pushed to the ℤ leaves.
+`Adjoin d K` is a free `K`-module of rank 2 whose multiplication uses `d` as a scalar; modelling it
+as a ring element was incidental structure borrowed from how the formula is written on paper.
+
+So M02 carries two layers, deliberately: a **computational** one (`Adjoin.mul`, `Adjoin.smulNat`,
+… defined directly, kernel-fast) and an **algebraic** one (the `CommRing` instance, `eval` as a
+`RingHom`), joined by `smulNat_eq : smulNat n x = (n : K) * x`. `distSq` is written with the bare
+computational operations, *not* typeclass notation, so kernel reduction never projects through
+Mathlib's algebraic hierarchy. Compute with the fast primitive, reason with the structure — the
+same Bool/Prop discipline one level up.
+
+**(4) `UDCert`'s dependent shape is wrong, but not for the reason expected.** Measured: the
+`indexed` presentation (`verts` list + `ℕ` index pairs, `Valid` doing lookups) and the `resolved`
+one (edges carrying their endpoint points, no lookup at all) cost **the same** — 24.7 s vs 26.1 s at
+60/99. **Lookup is not the bottleneck; the tower arithmetic is.** That frees the choice to be made
+on proof cleanliness and file size instead, where `indexed` wins outright: `resolved` duplicates
+every point once per incident edge (~10× at de Grey's average degree), and the emitted file is 56 K
+vs 20 K at 60 vertices.
+
+What *is* wrong is `edges : List (Fin verts.length × Fin verts.length)` — a field's type depending
+on another field's value, which will breed casts the moment M04 generates the data. Replace with a
+non-dependent presentation carrying `n` as a parameter, matching M01's interface (`p : Fin n → V`,
+`E : List (Fin n × Fin n)`) exactly.
+
+**(5) `Pt` stays a structure.** Named projections `x`/`y` read better than `.1`/`.2` at every use
+site and the `deriving DecidableEq` is the same either way.
+
+### The open risk this pass surfaced
+
+The measurements above used **bare core `Int` with granular instances**. The real M02 file has
+Mathlib's `CommRing` in scope, and kernel reduction through Mathlib's algebraic hierarchy
+(`CommRing.toRing.toMul…`) may be materially slower than through a bare `Mul` instance. The
+two-layer design is the mitigation — `distSq` calls `Adjoin.mul` directly — but **the cost must be
+re-measured on the real file** before M04 commits. Tracked as M02's first implementation task.
+
 ## Open questions for the modeling passes
 
 - **Domain (step 5):** the `CommRing (Adjoin d K)` discharge route (above); whether `Pt` is `K × K`
