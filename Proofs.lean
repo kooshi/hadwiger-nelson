@@ -1,6 +1,8 @@
 import Proofs.Basic
 import Proofs.HadwigerNelson.UnitDistance
 import Proofs.HadwigerNelson.EdgeList
+import Proofs.HadwigerNelson.Field.Quadratic
+import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.Instances.Triangle
 
 /-!
