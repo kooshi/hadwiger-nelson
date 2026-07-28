@@ -11,12 +11,22 @@ custom axiom.
 Run it:  `lake env lean scripts/Axioms.lean`
 
 **M01 — the statement. M02 — exact geometry.** Expected on every line: exactly `propext`,
-`Classical.choice`, `Quot.sound`. No `sorryAx`, no `Lean.ofReduceBool` (nothing native yet — that
-ledger opens at M05 if the LRAT check will not kernel-reduce).
+`Classical.choice`, `Quot.sound`. No `sorryAx`, and nothing native.
 
 `moserSpindle_valid` is the one to watch: it is discharged by `decide`, so it is the first
 declaration in this development whose truth rests on kernel *reduction* rather than on a written
-proof. If `native_decide` is ever bought, it shows up here as `Lean.ofReduceBool`.
+proof.
+
+**What a native purchase looks like here — grep for this, not for `Lean.ofReduceBool`.** At
+toolchain v4.32.0 `native_decide` mints a per-declaration axiom and `Lean.ofReduceBool` does not
+appear at all:
+
+```
+'foo' depends on axioms: [propext, Classical.choice, Quot.sound, foo._native.native_decide.ax_1_1]
+```
+
+so the audit is `grep 'native_decide\.ax'` over this file's output. Measured 2026-07-27; an audit
+written against the old name would pass a purchase in silence.
 -/
 
 open HadwigerNelson

@@ -116,9 +116,12 @@ theorem not_colorable_of_cubes (W : List (Fin n))
 ```
 
 — trivial to prove (a colouring induces its own cube), `k^|W|` independent CaDiCaL runs, and each
-subproblem is much easier. This is not only 32× wall-clock; **many small certificates are far more
-likely to be kernel-reducible than one large one**, which is the difference between paying
-`Lean.ofReduceBool` and not. Two multipliers on top:
+subproblem is much easier.
+
+**What the split does *not* buy, measured 2026-07-27 (M03 de-risk).** An earlier version of this
+section hoped that many small certificates might be kernel-reducible where one large one is not.
+That is false: `LRAT.check` does not kernel-reduce **at any size** — see § 5. The split's
+justification is solver tractability, certificate size, and 32× wall-clock. Two multipliers on top:
 
 - **Colour symmetry.** Max clique in a plane unit-distance graph is 3 (four mutually
   unit-distant points would be a regular tetrahedron), and these graphs are full of unit
@@ -137,11 +140,12 @@ Std.Sat ─┤
          │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
          │                 └─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
          │
-         ├─► HadwigerNelson/Sat/Encoding.lean      colouringCNF + Colorable → Sat        [M03]
-         │        └─► HadwigerNelson/Sat/Lrat.lean  certificate ingestion, cube cover    [M03]
+         ├─► HadwigerNelson/Sat/Encoding.lean   colouringCNF, Colorable → Sat, cubes     [M03]
+         │        └─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
          │
          └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
-                  ├─► Instances/Spindle.lean            χ ≥ 4                            [M03]
+                  ├─► Instances/SpindleBound.lean       χ ≥ 4, three routes              [M03]
+                  │        └─► Instances/SpindleLrat.lean   certificates — generated     [M03]
                   └─► Instances/DeGrey/Verts.lean       1581 points — its OWN module  [M04]
                            ├─► Instances/DeGrey/Chunk00.lean … Chunk31.lean   ~250 edges each
                            └─► Instances/DeGrey.lean    glue, Valid, χ ≥ 5        [M04–M05]
@@ -158,7 +162,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 |---|---|---|
 | **M01** ✅ | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
 | **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
-| **M03** | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | Spindle non-3-colourable **twice** — by `decide` and through LRAT — and `4 ≤ χ(ℝ²)` with a clean axiom list. |
+| **M03** | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | Spindle non-3-colourable **three ways** — brute-force `decide`, one LRAT certificate, and nine cube certificates — and `4 ≤ χ(ℝ²)` through the brute-force route, so the headline's axiom list is clean while the certificate routes carry the native axiom. |
 | **M04** | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | `deGrey.Valid = true`; vertex/edge counts match the paper (397 / 1581 / 7877 — already reproduced by `tools/degrey.py`). |
 | **M05** | **χ(ℝ²) ≥ 5.** Cube split, certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. |
 | **M06** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
@@ -175,7 +179,18 @@ The de Bruijn criterion, operationalized. Audited by `scripts/Axioms.lean` at ev
 |---|---|
 | `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
 | `sorryAx` | the gate fails on it |
-| `Lean.ofReduceBool` | **purchase — recorded below, per declaration** |
+| `<decl>._native.native_decide.ax_N_M` | **purchase — recorded below, per declaration** |
+
+**Grep for the right name.** At toolchain v4.32.0, `native_decide` mints a *per-declaration* axiom
+and `Lean.ofReduceBool` does **not** appear in `#print axioms` at all:
+
+```
+'foo' depends on axioms: [propext, Classical.choice, Quot.sound, foo._native.native_decide.ax_1_1]
+axiom foo._native.native_decide.ax_1_1 : decide (…) = true
+```
+
+An audit that looks only for `Lean.ofReduceBool` passes a native purchase in silence. Found
+2026-07-27; the audit now greps for `native_decide.ax`.
 
 *Purchases so far: none.* Verified at M02: `#print axioms` over the whole public surface reports
 exactly `propext, Classical.choice, Quot.sound`, and `moserSpindle_valid` — the first declaration
@@ -195,12 +210,20 @@ Two `Bool`s carry the weight, and each has a kernel route and a native route:
    theorem. Two representation findings fed this: indexed lookup costs the same as pre-resolved
    endpoint pairs (the tower arithmetic dominates, not the lookup), and multiplying by the radicand
    as a *scalar* rather than a ring element is a measured 1.67×.
-2. **`LRAT.check π cnf`** — the certificate check. Measurement (§ 2.3) has already settled the
-   monolithic case: not reducible by anything, kernel or native. The cube split is how this becomes
-   tractable at all, and how it might become kernel-reducible. If it does not, we buy
-   `Lean.ofReduceBool` here, name it in the docstring, and keep the kernel route as tracked open
-   work. **This is the one place where the project may end up trusting the compiler, and it will
-   say so out loud.**
+2. **`LRAT.check π cnf`** — the certificate check. **Settled, 2026-07-27: it does not
+   kernel-reduce, and the size of the certificate is irrelevant.** Measured on
+   `⟨#[[(0, true)], [(0, false)]]⟩`, the smallest unsatisfiable CNF there is, with a one-action
+   certificate: `decide` is stuck immediately (the elaborator will not unfold `@[irreducible]`
+   well-founded definitions, and `Array.anyM.loop` is one); `decide +kernel` gets much further —
+   it reduces `Array.any`, the `@[no_expose]` `Decidable (∃ v, VarMem v f)` instance, and
+   `compactLratChecker` on trivial input — then sticks inside `Formula.performRupAdd` after ~40 s;
+   `native_decide` succeeds instantly. Core's own `bv_decide` uses native evaluation for the same
+   step, so this is the state of the art rather than a gap in our setup.
+
+   **So χ(ℝ²) ≥ 5 will carry a native-evaluation axiom.** It is named per declaration, listed here,
+   and said out loud. The kernel-only route requires an LRAT checker written to reduce, with its own
+   soundness proof — a milestone-sized undertaking, tracked as open work and not attempted.
+   **This is the one place where the project trusts the compiler, and it says so.**
 
 `lean4checker` (independent kernel, via elan) re-checks at each milestone boundary.
 
@@ -231,9 +254,11 @@ Stated up front, per doctrine, and to be reported as-is:
 - **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
   Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
   rungs A–C are not, which is why the ratchet is built the way it is.
-- **Kernel-reducibility of the certificate is unproven at this size.** If it fails we pay
-  `ofReduceBool` and say so; the theorem is still worth having (it is the standard for SAT-backed
-  formalization) but it is a weaker artifact than a kernel-only one.
+- **The certificate check is not kernel-reducible — settled, not a risk any more.** We pay a
+  native-evaluation axiom and say so. The theorem is still worth having (it is the standard for
+  SAT-backed formalization, and core's own `bv_decide` sits in the same place) but it is a weaker
+  artifact than a kernel-only one, and the geometry half — which *is* kernel-only — is the part we
+  can claim without qualification.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

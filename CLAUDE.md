@@ -59,12 +59,16 @@ Audited at every milestone with `#print axioms` (see `scripts/Axioms.lean`) and 
 |---|---|
 | `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
 | `sorryAx` | the gate fails on it |
-| `Lean.ofReduceBool` (`native_decide`) | **explicit purchase, per use, recorded here** |
+| `<decl>._native.native_decide.ax_N_M` | **explicit purchase, per use, recorded here** |
 
-`native_decide` trusts the compiler and this CPU rather than the kernel. Where a `Bool` is too
-large to kernel-reduce we may buy it — but the purchase is named in the docstring of the
-declaration that makes it, listed in `ARCHITECTURE.md` § Trust, and the kernel-checked route is
-tracked as open work. Soundness theorems are identical either way; only the axiom list moves.
+`native_decide` trusts the compiler and this CPU rather than the kernel. Where a `Bool` cannot be
+kernel-reduced we may buy it — but the purchase is named in the docstring of the declaration that
+makes it, listed in `ARCHITECTURE.md` § Trust, and the kernel-checked route is tracked as open work.
+Soundness theorems are identical either way; only the axiom list moves.
+
+**Grep for the right name.** At v4.32.0 `native_decide` mints a *per-declaration* axiom;
+`Lean.ofReduceBool` never appears in `#print axioms`. An audit looking only for that name passes a
+native purchase in silence.
 
 ## Toolchain
 Managed by **elan** and pinned by `lean-toolchain` (`leanprover/lean4:v4.32.0`). If `lean` / `lake`

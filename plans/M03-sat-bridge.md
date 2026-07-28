@@ -1,0 +1,233 @@
+# M03 — The SAT bridge, and χ(ℝ²) ≥ 4
+
+> The CNF encoding of graph colouring, the one direction of the correspondence the project
+> consumes, LRAT certificate ingestion, and the cube split. Everything M05 does at 1581 vertices,
+> done here at 7 — where an independent oracle still exists to check it against.
+
+> **STATUS: subplanned (2026-07-27).** Skeleton elaborates, 20 `sorry` at tracked leaves, 8 spec
+> `#guard`s passing.
+
+## De-risk already done (2026-07-27, before this plan was written)
+
+The whole route was run end to end at spindle scale, and one architectural assumption was
+**falsified**. Both results are load-bearing, so they are stated first.
+
+### The pipeline works
+
+```
+colouringCNF 3 7 moserSpindleEdges          21 variables, 40 clauses
+  → CNF.dimacs (printed from the Lean def)  "p cnf 21 40"
+  → cadical --lrat --no-binary              exit 20 (UNSAT), instant
+  → 26 LRAT actions, 658 bytes
+  → Lean literal → LRAT.check → check_sound → Unsat        2.8 s for the whole module
+```
+
+with the negative control passing too: the same certificate returns `false` against
+`colouringCNF 4 7 moserSpindleEdges`, so `check` is discriminating between formulas rather than
+rubber-stamping.
+
+The brute-force oracle also runs: `∀ f : Fin 7 → Fin 3, ∃ e ∈ moserSpindleEdges, …` and its k = 4
+negation both close by `decide`, ~30 s of kernel work for the pair.
+
+### The falsified assumption: **`LRAT.check` does not kernel-reduce, at any size**
+
+`ARCHITECTURE.md` § 2.3 said "many small certificates are far more likely to be kernel-reducible
+than one large one, which is the difference between paying `Lean.ofReduceBool` and not." That hope
+is dead. Measured on `⟨#[[(0, true)], [(0, false)]]⟩` — the smallest unsatisfiable CNF there is,
+with a one-action certificate:
+
+| route | result |
+|---|---|
+| `by decide` | stuck immediately: the elaborator refuses `@[irreducible]` well-founded definitions, and `Array.anyM.loop` is one |
+| `by decide +kernel` | reduces `Array.any`, the `@[no_expose]` `Decidable (∃ v, VarMem v f)` instance, and `compactLratChecker` on trivial input — then sticks inside `Formula.performRupAdd` after ~40 s |
+| `by native_decide` | succeeds, instantly |
+
+Core's own `bv_decide` does the same thing (`Lean/Meta/Tactic/BVDecide/Prover/Bitblast.lean` calls
+`nativeEqTrue`), so this is the state of the art, not a defect in our setup. **The consequence for
+the project: the SAT half buys a native-evaluation axiom, and the cube split's justification is now
+solver tractability and memory alone — not trust.** A kernel-checked route would need an LRAT
+checker written to reduce, with its own soundness proof; that is a milestone-sized undertaking and
+is recorded as open work rather than attempted here.
+
+### A live gate hole, found by the same probe
+
+At v4.32.0 `native_decide` mints a **per-declaration** axiom and does **not** cite
+`Lean.ofReduceBool`:
+
+```
+'spindle3_unsat' depends on axioms:
+  [propext, Classical.choice, Quot.sound, spindle3_unsat._native.native_decide.ax_1_1]
+```
+
+`CLAUDE.md`, `ARCHITECTURE.md` § 5 and `scripts/Axioms.lean` all name `Lean.ofReduceBool` as the
+thing to watch for. As written, our gate would have passed a native purchase in silence. Fixed as
+part of this milestone: the audit greps for `native_decide.ax` as well.
+
+## Why now
+
+M02 left `UDCert.add_one_le_chromaticNumber_of_valid` wanting `¬ (edgeGraph n c.edges).Colorable k`.
+Producing that at 1581 vertices is the open problem M03 solves — not by proving it, but by building
+the machine that will consume a certificate for it. And M03 is the last milestone at which the
+machine can be checked against something independent: at 7 vertices `decide` enumerates all `3 ^ 7`
+colourings and answers the same question with no CNF, no solver, and no certificate in sight. At
+1581 vertices nothing does. **The cross-check is the milestone.**
+
+## The encoding, and why this shape
+
+Variables are `x_{v,c}` at index `colourVar k v c = v * k + c`, over `ℕ` because that is what
+`LRAT.check` consumes. Two clause families:
+
+* one **at-least-one-colour** clause per vertex, `⋁_c x_{v,c}`;
+* for each non-loop listed edge and each colour, `¬x_{u,c} ∨ ¬x_{w,c}`.
+
+**At-most-one clauses are deliberately omitted.** The edge clauses already force adjacent vertices'
+colour *sets* to be disjoint, so any satisfying assignment yields a proper colouring by picking a
+colour per vertex. Fewer clauses, and the direction we prove is untouched — the assignment
+`ofColoring` produces is exactly-one anyway.
+
+**Only `Colorable k G → Sat a cnf` is proved.** Its converse is true here and never used. Proving
+the wrong direction is a named failure mode (`ARCHITECTURE.md` § 6): a certificate establishes
+unsatisfiability, and only this direction turns that into `¬ Colorable`.
+
+**Loops are filtered, and must be.** `edgeGraph` strips loops structurally. A listed `(i, i)` left
+in the clause set contributes `¬x_{i,c} ∨ ¬x_{i,c}`, which makes the formula unsatisfiable while the
+graph stays colourable — i.e. it makes `sat_colouringCNF` *false*. `colouringCNF` filters under the
+same convention, and the correspondence is then unconditional. This is the constraint M01 recorded
+in `EdgeList.lean` for M03 to honour.
+
+## The cube split, and its shape
+
+A monolithic CaDiCaL run on de Grey's instance did not terminate in 10 minutes and had emitted
+2.0 GB of partial certificate. The split is mandatory: fix the colours of a small vertex set `W`,
+solve one much easier instance per assignment.
+
+The design mirrors `UDCert.valid_of_chunks` exactly, and deliberately — the project should have one
+shape for "the big obligation is the conjunction of generated small ones":
+
+| geometry (M02) | combinatorics (M03) |
+|---|---|
+| `chunks : List (List Edge)` | `allCubes k W : List (Cube n k)` — generated, not listed |
+| `hjoin : chunks.flatten = c.edges` | `restrict_mem_allCubes` — proved once by induction on `W` |
+| `∀ ch ∈ chunks, ValidOn ch` | `∀ cb ∈ allCubes k W, Unsat (cnf ++ cubeCNF k cb)` |
+| call site: `fin_cases hch; exacts [...]` | call site: `fin_cases hcb; exacts [...]` |
+
+The alternative — an explicit cube list plus a covering hypothesis — was rejected: any covering
+condition phrased over colourings quantifies over `k ^ n`, which is not checkable at n = 1581.
+Generating the enumeration makes the covering fact a *theorem* (structural induction on `W`) rather
+than a decision.
+
+## Scope
+
+**In.**
+
+1. `Sat/Encoding.lean` — `colourVar`, `atLeastOneClause`, `edgeClauses`, `colouringCNF`;
+   `colourFn`, `ofColoring` and the arithmetic lemma underneath them; `sat_colouringCNF` and its
+   contrapositive `not_colorable_of_unsat`.
+2. Cubes, same module — `Cube`, `cubeCNF`, `restrict`, `allCubes`, `restrict_mem_allCubes`,
+   `sat_cubeCNF_restrict`, `not_colorable_of_cubes`.
+3. The independent route — `colorable_iff_exists` and `not_colorable_edgeGraph_iff`, which put
+   colourability in a shape `decide` can run. Mathlib has no `Decidable (G.Colorable n)` instance
+   (checked), so this is ours to state.
+4. `Sat/Lrat.lean` — `unsat_of_check`, and the module docstring that names the trust boundary and
+   records the measurement above.
+5. `Reduction.lean` — the composite: valid certificate + unsatisfiable encoding ⟹ a bound on
+   χ(ℝ²), in the plane rather than in `ℂ`. Two flavours, monolithic and cube-split; the second is
+   the only thing M05's instance module calls.
+6. `Instances/SpindleBound.lean` — the terminal test. `¬ Colorable 3` three ways (brute force,
+   monolithic LRAT, cube split over `W = [0,1]`, 9 cubes), `Colorable 4` for non-vacuity, and
+   `4 ≤ χ(ℝ²)` proved through the brute-force route so the headline stays axiom-clean.
+7. `Instances/SpindleLrat.lean` — **generated**: the certificate arrays only, no theorems.
+8. `scripts/Dimacs.lean` — writes DIMACS **from the Lean definition** via `CNF.dimacs`
+   (`ARCHITECTURE.md` § 6's hard rule: the Python side never authors a CNF), one file per cube.
+9. `scripts/EmitLrat.lean` — reads CaDiCaL's LRAT with core's own parser (`LRAT.loadLRATProof`) and
+   prints the Lean literal. **No Python anywhere on the SAT path**, which removes a whole class of
+   format-mismatch bug: the same library parses the certificate that later checks it.
+10. `tools/solve.sh` — DIMACS in, LRAT out, one CaDiCaL invocation.
+11. Gate repair — `scripts/Axioms.lean`, `CLAUDE.md`, `ARCHITECTURE.md` corrected for the
+    `native_decide` axiom naming, and extended with M03's surface.
+
+**Out** (carried forward, stubs in `plans/`).
+
+* **Colour symmetry** — fixing a unit triangle to colours `0,1,2` cuts the cube space by `4! = 24`.
+  A real theorem (permute `Fin k` along a clique) and a pure optimization. → M05.
+* **Certificate trimming** (`LRAT.Trim`), binary LRAT, and anything about certificates too large to
+  embed as a Lean literal. M03's are 658 bytes. → M05.
+* **A kernel-reducible LRAT checker.** Now known to be the only route to a kernel-only χ ≥ 5. Not
+  attempted; recorded as open work. → its own milestone if ever.
+* **Cube-set search** — which `W` splits best is an empirical question about de Grey's graph, not
+  about the bridge. → M05.
+
+## The specification, validated at the skeleton
+
+Run before any proof effort was spent, against the real definitions:
+
+| check | result |
+|---|---|
+| `colourVar 3 2 1` | `7` = 2·3+1 |
+| `(colouringCNF 3 7 moserSpindleEdges).clauses.size` | `40` = 7 + 3·11 |
+| `(colouringCNF 3 2 [(0,0)]).clauses.size` | `2` — the self-loop contributes no clause |
+| `(colouringCNF 3 2 [(0,1)]).clauses.size` | `5` = 2 + 3 |
+| `(allCubes 3 [0,1]).length` | `9` = 3², and the nine cubes print correctly |
+| `CNF.eval (ofColoring 4 (colourFn ![0,1,2,0,1,2,3])) (colouringCNF 4 …)` | `true` |
+| `CNF.eval (ofColoring 3 (colourFn ![0,1,2,0,1,2,3])) (colouringCNF 3 …)` | `false` |
+| `CNF.dimacs (colouringCNF 3 3 triangleEdges)` | `p cnf 9 12`, and the twelve clauses read correctly by eye |
+
+The last two rows are the two-sided check that matters: the same colouring satisfies the formula at
+four colours and fails it at three, so `colouringCNF` is tracking the colouring rather than
+answering a constant.
+
+**The concrete model of the hypotheses** is `spindleFour = ![0,1,2,0,1,2,3]`, a real 4-colouring of
+the spindle verified above. It instantiates `sat_colouringCNF` with something concrete, which is
+what stops `not_colorable_of_unsat` from being a `∀` over an empty domain.
+
+## Skeleton
+
+Elaborating now, `sorry` at every leaf:
+
+* `Proofs/HadwigerNelson/Sat/Encoding.lean` — 9 leaves
+* `Proofs/HadwigerNelson/Sat/Lrat.lean` — 0 leaves (`unsat_of_check` is a one-liner over
+  `check_sound`; the module's content is the boundary it documents)
+* `Proofs/HadwigerNelson/Reduction.lean` — 3 leaves
+* `Proofs/HadwigerNelson/Instances/SpindleBound.lean` — 8 leaves
+
+## Obligations, and where the work actually is
+
+Most of the file is bookkeeping over `List.map`/`List.filter`/`Array.all`. Three leaves carry real
+content:
+
+1. **`ofColoring_colourVar`** — `(v * k + c) / k = v` and `(v * k + c) % k = c` for `c < k`. The
+   only place `0 < k` is consumed, and the reason it is a hypothesis rather than a special case:
+   `Nat` division by zero returns junk, and the model must not quietly ride on it.
+2. **`sat_colouringCNF`** — the milestone's theorem. Two clause families, two arguments: the
+   at-least-one clause is satisfied at the vertex's own colour; the edge clause is satisfied because
+   `C i ≠ C j` means at most one of `c = C i`, `c = C j` holds. The `Adj` fact needed for the second
+   is exactly `edgeGraph_adj_of_mem`, which M01 packaged for this call site.
+3. **`restrict_mem_allCubes`** — structural induction on `W`, `nil` giving `[] ∈ [[]]` and `cons`
+   picking the `C v` branch out of the `flatMap`. The local obligation that makes the split sound.
+
+`not_colorable_of_cubes` then costs five lines: instantiate at the colouring, satisfy both halves of
+the append, contradict. That cheapness is the sign the statement is right — the split is a *fact
+about colourings*, not an argument about formulas.
+
+## Failure modes, stated plainly
+
+* **The encoder is wrong and the certificate hides it.** A certificate proves *some* formula
+  unsatisfiable; it cannot tell you it is the wrong formula. This is why route A exists and why the
+  headline is proved through it. If routes A and B ever disagree, B is wrong.
+* **The native purchase.** Every claim routed through a certificate carries
+  `…_native.native_decide.ax_…`. It is named in the docstring of each such declaration, recorded in
+  `ARCHITECTURE.md` § 5, and the kernel-only route is tracked open work. `four_le_chromaticNumber_plane`
+  does not carry it.
+* **The cube split may not be enough for de Grey.** M03 proves the machinery correct, not that any
+  particular `W` makes the 1581-vertex instance solvable. That is M05's risk and it is untouched
+  here.
+* **`decide` on `∀ f : Fin n → Fin k` does not scale**, by design — it is the oracle, not a method.
+  Past ~10 vertices it is gone, and M03 is the last milestone that has it.
+
+## Gate
+
+`lake build` green · zero `sorry` · `#print axioms` on the M03 surface, with the native purchases
+enumerated and every other line clean · `lake exe runLinter Proofs` silent · spec `#guard`s passing ·
+`./scripts/lean4checker.sh` green · **and the milestone's own test**: routes A, B and C all prove
+`¬ (edgeGraph 7 moserSpindleEdges).Colorable 3`, and `4 ≤ χ(ℝ²)` reports exactly
+`[propext, Classical.choice, Quot.sound]`.

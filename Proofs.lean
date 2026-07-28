@@ -3,8 +3,12 @@ import Proofs.HadwigerNelson.UnitDistance
 import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Certificate
+import Proofs.HadwigerNelson.Sat.Encoding
+import Proofs.HadwigerNelson.Sat.Lrat
+import Proofs.HadwigerNelson.Reduction
 import Proofs.HadwigerNelson.Instances.Triangle
 import Proofs.HadwigerNelson.Instances.Spindle
+import Proofs.HadwigerNelson.Instances.SpindleBound
 
 /-!
 # Proofs
