@@ -124,9 +124,12 @@ instance addCommGroup : AddCommGroup (Adjoin d K) := by sorry
 instance commRing : CommRing (Adjoin d K) := by sorry
 
 /-- Evaluate into `ℝ`: given a base evaluation and a real square root `r` of `d`, send
-`⟨a,b⟩ ↦ evalBase a + evalBase b · r`. A `RingHom` because `r² = d` makes the `√d`-multiplication
-law hold in `ℝ`. -/
-def eval (evalBase : K →+* ℝ) (r : ℝ) (_hr : r ^ 2 = d) : Adjoin d K →+* ℝ where
+`⟨a,b⟩ ↦ evalBase a + evalBase b · r`.
+
+A `RingHom` precisely because `r² = d`: `map_mul'` needs the cross terms to agree, and they do
+exactly when `r²` and `d` coincide. `hr` carries no underscore because it is load-bearing — without
+it this is not multiplicative. -/
+def eval (evalBase : K →+* ℝ) (r : ℝ) (hr : r ^ 2 = d) : Adjoin d K →+* ℝ where
   toFun x := evalBase x.re + evalBase x.im * r
   map_one' := by sorry
   map_mul' := by sorry

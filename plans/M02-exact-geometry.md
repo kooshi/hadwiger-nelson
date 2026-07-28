@@ -154,6 +154,57 @@ Mathlib's `CommRing` in scope, and kernel reduction through Mathlib's algebraic 
 two-layer design is the mitigation — `distSq` calls `Adjoin.mul` directly — but **the cost must be
 re-measured on the real file** before M04 commits. Tracked as M02's first implementation task.
 
+## Obligation-modeling pass — findings (step 6, applied)
+
+Fresh `debruijn-obligation-modeling` pass. It caught a **false theorem** in the skeleton, which is
+the whole reason the pass exists.
+
+### The scaling bug — the skeleton stated something unprovable
+
+`Pt.toPlane p = ⟨eval p.x, eval p.y⟩` with `dist (toPlane p) (toPlane q) = 1` **cannot be proved**.
+Stored coordinates are multiplied by `denom` so they are integers, so `eval` of a stored coordinate
+is `denom` times the real one, and two endpoints of a listed edge sit at distance `denom`, not `1`.
+Checked against the spindle data: `distSq(A,B) = 144 = 12²` with `denom = 12`.
+
+The fix is not a weaker statement but the right one: the scale belongs to the **certificate**, so
+the plane point is `Pt.scaled p D = ⟨eval p.x / D, eval p.y / D⟩` and `UDCert.point` uses `c.denom`.
+The conclusion `dist = 1` then holds exactly.
+
+This also **locates `denom ≠ 0`**: it is consumed by the division, and nowhere else. A hypothesis
+whose use site you cannot name is either dead weight or a bug not yet found — here it was the
+second.
+
+The payoff is immediate and is the convergence signal the pass drives at:
+`add_one_le_chromaticNumber_of_valid` went from a `sorry` to a **one-line composition** of
+`add_one_le_chromaticNumber_unitDistance_edgeList` with `valid_sound`, because the statement finally
+matched what M01 consumes.
+
+### `eval`'s `hr` is load-bearing — the underscore was lying
+
+`map_mul'` is where `r ^ 2 = d` is consumed: expanding both sides leaves
+`d · eb(x.im) · eb(y.im)` against `eb(x.im) · eb(y.im) · r²`, equal exactly when `r² = d`. Renamed
+`_hr → hr`; an underscore claims a hypothesis is unused, and this one carries multiplicativity.
+
+### The decomposition
+
+| Obligation | Shape | Derives from |
+|---|---|---|
+| `NatScalar.smul_eq` (tower) | `ext <;> simp [NatScalar.smul_eq]` | the leaf's own `smul_eq`; the `0` components kill the cross terms |
+| `mul_re` | one `rw` | `NatScalar.smul_eq` — the *only* place the scalar action is traded for the cast |
+| `AddCommGroup`, `CommRing` | Zsqrtd's `refine { … with proofs := ?_ } <;> intros <;> ext <;> simp <;> ring` | pin `nsmul`/`zsmul`/`npow` to the `…Rec` forms and `natCast`/`intCast` to our instances, or the diamond returns |
+| `eval.map_zero'/map_one'/map_add'` | `simp` / `ring` | componentwise |
+| `eval.map_mul'` | `ring_nf` then `rw [hr]` | the one genuinely mathematical step |
+| `eval_distSq` | `map_sub`/`map_mul`/`map_add` | ring-hom-commutes-with-polynomial |
+| `dist_scaled_eq_one` | `Complex.dist_eq` → `norm_def` → `eval_distSq` → `√1 = 1` | needs `map_intCast` for `eval (D*D : ℤ) = (D:ℝ)²` |
+| `valid_sound` | `List.all_eq_true` + `of_decide_eq_true` | membership from the `Bool` fold |
+| `add_one_le_chromaticNumber_of_valid` | **closed** | direct composition |
+
+### Mutation audit for the M02 gate
+
+Each must **fail**: dropping `hD` from `dist_scaled_eq_one`; replacing `target` by `denom` (unscaled)
+so `Valid` becomes false on the spindle; perturbing one spindle coordinate by 1 and re-running
+`decide`.
+
 ## Open questions for the modeling passes
 
 - **Domain (step 5):** the `CommRing (Adjoin d K)` discharge route (above); whether `Pt` is `K × K`
