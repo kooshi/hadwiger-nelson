@@ -45,16 +45,25 @@ different rings and `Mul` must dispatch on it, so a field would make multiplicat
 mismatched radicands representable. `√d` itself is realised only by `eval`. -/
 @[ext]
 structure Adjoin (d : ℕ) (K : Type*) where
+  /-- The `√d`-free component. -/
   re : K
+  /-- The coefficient of `√d`. -/
   im : K
 deriving DecidableEq, Repr
 
 /-- A ℕ-scalar action that computes, bundled with the proof that it agrees with the ring cast.
 
 Carrying the law in the class is the point: `smul` is what the kernel reduces (straight to the ℤ
-leaves) and `smul_eq` is what the ring proofs rewrite with, so the two can never drift. -/
-class NatScalar (K : Type*) [NatCast K] [Mul K] where
+leaves) and `smul_eq` is what the ring proofs rewrite with, so the two can never drift.
+
+The parameter is `[CommRing K]`, not `[NatCast K] [Mul K]`. Instance parameters are matched
+syntactically, so a class indexed on the *pieces* only synthesizes where the ambient `NatCast` and
+`Mul` happen to be found by the same route that declared the instance — which for a tower is never
+reliably true. Indexing on the single bundled structure makes the route unique. -/
+class NatScalar (K : Type*) [CommRing K] where
+  /-- The fast action: multiply each `ℤ` leaf, never forming the tower element `(n : K)`. -/
   smul : ℕ → K → K
+  /-- …and it agrees with the ring cast, so the two can never drift. -/
   smul_eq : ∀ (n : ℕ) (x : K), smul n x = (n : K) * x
 
 /-- The ℤ leaf's scalar action: ordinary integer multiplication. -/
@@ -66,21 +75,141 @@ namespace Adjoin
 
 variable {d : ℕ} {K : Type*} [CommRing K]
 
-/-! ### Arithmetic — the data instances the kernel reduces -/
+/-! ### Arithmetic — the operations the kernel reduces
 
-instance : Zero (Adjoin d K) := ⟨⟨0, 0⟩⟩
-instance : One (Adjoin d K) := ⟨⟨1, 0⟩⟩
-instance : Add (Adjoin d K) := ⟨fun x y => ⟨x.re + y.re, x.im + y.im⟩⟩
-instance : Neg (Adjoin d K) := ⟨fun x => ⟨-x.re, -x.im⟩⟩
-instance : Sub (Adjoin d K) := ⟨fun x y => ⟨x.re - y.re, x.im - y.im⟩⟩
-instance : NatCast (Adjoin d K) := ⟨fun n => ⟨(n : K), 0⟩⟩
-instance : IntCast (Adjoin d K) := ⟨fun n => ⟨(n : K), 0⟩⟩
+Plain `def`s, not instances. There is exactly **one** arithmetic instance on `Adjoin` — `commRing`
+below — and every `+`, `*`, `-`, cast on the tower resolves through it. Declaring `Add`, `Mul`,
+`IntCast` … separately as well is the trap: instance search then picks the raw one for some
+operations and the `CommRing` projection for others, the two are defeq but not syntactically equal,
+and every Mathlib lemma (`map_add`, `map_intCast`, …) silently fails to match. That failure is not
+an error message — it is `ring` refusing a true goal — so the one-path rule is enforced here rather
+than debugged later. -/
+
+/-- Additive identity. -/
+def zero : Adjoin d K := ⟨0, 0⟩
+/-- Multiplicative identity. -/
+def one : Adjoin d K := ⟨1, 0⟩
+/-- Componentwise addition. -/
+def add (x y : Adjoin d K) : Adjoin d K := ⟨x.re + y.re, x.im + y.im⟩
+/-- Componentwise negation. -/
+def neg (x : Adjoin d K) : Adjoin d K := ⟨-x.re, -x.im⟩
+/-- Componentwise subtraction — a primitive rather than `add x (neg y)`, so the kernel walks the
+tower once instead of twice. -/
+def sub (x y : Adjoin d K) : Adjoin d K := ⟨x.re - y.re, x.im - y.im⟩
+/-- `ℕ` in the `√d`-free part. -/
+def natCast (n : ℕ) : Adjoin d K := ⟨(n : K), 0⟩
+/-- `ℤ` in the `√d`-free part. -/
+def intCast (n : ℤ) : Adjoin d K := ⟨(n : K), 0⟩
+
+/-- `(a + b√d)(c + e√d) = (ac + d·be) + (ae + bc)√d`, with `d·` a **scalar** action pushed to the
+leaves rather than a ring multiplication by a mostly-zero tower element.
+
+Reason about products through `mul_re` and `mul_im`, never by unfolding this definition: the scalar
+action is a computational detail this API does not promise, and `mul_re` already states the product
+in the form `ring` accepts. -/
+def mul [NatScalar K] (x y : Adjoin d K) : Adjoin d K :=
+  ⟨x.re * y.re + NatScalar.smul d (x.im * y.im), x.re * y.im + x.im * y.re⟩
+
+/-! ### The ring axioms, stated about the definitions
+
+Proved here rather than inline in the `CommRing` declaration, because inside that declaration the
+goals are phrased in the notation of the instance *being built* — `a + b`, not `Adjoin.add a b` —
+so `simp` cannot see the definitions to unfold. Stating each axiom about the plain `def` gives
+`simp` something to grip, and each is then accepted as a structure field by defeq.
+
+The proofs are uniform: `ext` into components, unfold, `ring`. That uniformity is the payoff of
+choosing a concrete representation — every ring axiom is the corresponding axiom in `K`, twice. -/
+
+section Axioms
+
+private theorem add_assoc' (a b c : Adjoin d K) : add (add a b) c = add a (add b c) := by
+  ext <;> simp [add] <;> ring
+private theorem zero_add' (a : Adjoin d K) : add zero a = a := by ext <;> simp [add, zero]
+private theorem add_zero' (a : Adjoin d K) : add a zero = a := by ext <;> simp [add, zero]
+private theorem add_comm' (a b : Adjoin d K) : add a b = add b a := by ext <;> simp [add] <;> ring
+private theorem neg_add_cancel' (a : Adjoin d K) : add (neg a) a = zero := by
+  ext <;> simp [add, neg, zero]
+private theorem sub_eq_add_neg' (a b : Adjoin d K) : sub a b = add a (neg b) := by
+  ext <;> simp [sub, add, neg] <;> ring
+private theorem natCast_zero' : (natCast 0 : Adjoin d K) = zero := by ext <;> simp [natCast, zero]
+private theorem natCast_succ' (n : ℕ) : (natCast (n + 1) : Adjoin d K) = add (natCast n) one := by
+  ext <;> simp [natCast, add, one]
+private theorem intCast_ofNat' (n : ℕ) : (intCast n : Adjoin d K) = natCast n := by
+  ext <;> simp [intCast, natCast]
+private theorem intCast_negSucc' (n : ℕ) :
+    (intCast (Int.negSucc n) : Adjoin d K) = neg (natCast (n + 1)) := by
+  ext <;> simp [intCast, natCast, neg]
+variable [NatScalar K]
+
+private theorem left_distrib' (a b c : Adjoin d K) :
+    mul a (add b c) = add (mul a b) (mul a c) := by
+  ext <;> simp [mul, add, NatScalar.smul_eq] <;> ring
+private theorem right_distrib' (a b c : Adjoin d K) :
+    mul (add a b) c = add (mul a c) (mul b c) := by
+  ext <;> simp [mul, add, NatScalar.smul_eq] <;> ring
+private theorem zero_mul' (a : Adjoin d K) : mul zero a = zero := by
+  ext <;> simp [mul, zero, NatScalar.smul_eq]
+private theorem mul_zero' (a : Adjoin d K) : mul a zero = zero := by
+  ext <;> simp [mul, zero, NatScalar.smul_eq]
+private theorem mul_assoc' (a b c : Adjoin d K) : mul (mul a b) c = mul a (mul b c) := by
+  ext <;> simp [mul, NatScalar.smul_eq] <;> ring
+private theorem one_mul' (a : Adjoin d K) : mul one a = a := by
+  ext <;> simp [mul, one, NatScalar.smul_eq]
+private theorem mul_one' (a : Adjoin d K) : mul a one = a := by
+  ext <;> simp [mul, one, NatScalar.smul_eq]
+private theorem mul_comm' (a b : Adjoin d K) : mul a b = mul b a := by
+  ext <;> simp [mul, NatScalar.smul_eq] <;> ring
+
+end Axioms
+
+/-! ### The ring structure
+
+Every data field is pinned to a definition above, so the `CommRing` projections reduce to *them*.
+`nsmul`, `zsmul` and `npow` are pinned to the `…Rec` forms deliberately: nothing on the certificate
+path ever computes them, and naming them keeps the field from being filled by a route the next
+Mathlib bump might change. -/
+
+/-- M02's one genuine proof obligation: everything downstream needs it, because `eval` must be a
+`RingHom` and `distSq`'s soundness rides on ring-hom-commutes-with-polynomial. -/
+instance commRing [NatScalar K] : CommRing (Adjoin d K) where
+  zero := zero
+  one := one
+  add := add
+  mul := mul
+  neg := neg
+  sub := sub
+  natCast := natCast
+  intCast := intCast
+  nsmul := @nsmulRec (Adjoin d K) ⟨zero⟩ ⟨add⟩
+  zsmul := @zsmulRec (Adjoin d K) ⟨zero⟩ ⟨add⟩ ⟨neg⟩ (@nsmulRec (Adjoin d K) ⟨zero⟩ ⟨add⟩)
+  npow := @npowRec (Adjoin d K) ⟨one⟩ ⟨mul⟩
+  add_assoc := add_assoc'
+  zero_add := zero_add'
+  add_zero := add_zero'
+  add_comm := add_comm'
+  neg_add_cancel := neg_add_cancel'
+  sub_eq_add_neg := sub_eq_add_neg'
+  natCast_zero := natCast_zero'
+  natCast_succ := natCast_succ'
+  intCast_ofNat := intCast_ofNat'
+  intCast_negSucc := intCast_negSucc'
+  left_distrib := left_distrib'
+  right_distrib := right_distrib'
+  zero_mul := zero_mul'
+  mul_zero := mul_zero'
+  mul_assoc := mul_assoc'
+  one_mul := one_mul'
+  mul_one := mul_one'
+  mul_comm := mul_comm'
+
+section Scalar
+variable [NatScalar K]
 
 /-! ### Component simp lemmas — the reasoning surface
 
 **The simp destination is components.** These drive any goal about `Adjoin` arithmetic out of the
-tower and into `K`, where `ring` closes it; that is how every ring axiom below is proved, and how
-downstream proofs should proceed. Nothing here should ever require unfolding an instance.
+tower and into `K`, where `ring` closes it. Nothing downstream should ever require unfolding a
+definition or a projection.
 
 All are `rfl` except `mul_re`, which is the one lemma that *changes* the term: it trades the fast
 `NatScalar.smul` for `(d : K) * _`, the form `ring` understands. That asymmetry is safe because the
@@ -98,40 +227,24 @@ kernel reduces toward speed. -/
 @[simp] theorem zero_im : (0 : Adjoin d K).im = 0 := rfl
 @[simp] theorem one_re : (1 : Adjoin d K).re = 1 := rfl
 @[simp] theorem one_im : (1 : Adjoin d K).im = 0 := rfl
-
-section Scalar
-variable [NatScalar K]
-
-/-- `(a + b√d)(c + e√d) = (ac + d·be) + (ae + bc)√d`, with `d·` a **scalar** action pushed to the
-leaves rather than a ring multiplication by a mostly-zero tower element.
-
-Reason about products through `mul_re` and `mul_im`, never by unfolding this instance: the scalar
-action is a computational detail this API does not promise, and `mul_re` already states the product
-in the form `ring` accepts. -/
-instance : Mul (Adjoin d K) :=
-  ⟨fun x y => ⟨x.re * y.re + NatScalar.smul d (x.im * y.im), x.re * y.im + x.im * y.re⟩⟩
-
-/-- The tower level's own scalar action: recurse into both components. -/
-instance : NatScalar (Adjoin d K) where
-  smul n x := ⟨NatScalar.smul n x.re, NatScalar.smul n x.im⟩
-  smul_eq := by sorry
+@[simp] theorem natCast_re (n : ℕ) : (n : Adjoin d K).re = (n : K) := rfl
+@[simp] theorem natCast_im (n : ℕ) : (n : Adjoin d K).im = 0 := rfl
+@[simp] theorem intCast_re (n : ℤ) : (n : Adjoin d K).re = (n : K) := rfl
+@[simp] theorem intCast_im (n : ℤ) : (n : Adjoin d K).im = 0 := rfl
 
 /-- Multiplication's real part, with the scalar action already rewritten to the cast — the form
 `ring` can work with. -/
 @[simp] theorem mul_re (x y : Adjoin d K) :
-    (x * y).re = x.re * y.re + (d : K) * (x.im * y.im) := by
-  sorry
+    (x * y).re = x.re * y.re + (d : K) * (x.im * y.im) :=
+  congrArg (x.re * y.re + ·) (NatScalar.smul_eq d (x.im * y.im))
 
 @[simp] theorem mul_im (x y : Adjoin d K) :
     (x * y).im = x.re * y.im + x.im * y.re := rfl
 
-/-! ### The ring structure -/
-
-instance addCommGroup : AddCommGroup (Adjoin d K) := by sorry
-
-/-- M02's one genuine proof obligation: everything downstream needs it, because `eval` must be a
-`RingHom` and `distSq`'s soundness rides on ring-hom-commutes-with-polynomial. -/
-instance commRing : CommRing (Adjoin d K) := by sorry
+/-- The tower level's own scalar action: recurse into both components. -/
+instance : NatScalar (Adjoin d K) where
+  smul n x := ⟨NatScalar.smul n x.re, NatScalar.smul n x.im⟩
+  smul_eq n x := by ext <;> simp [NatScalar.smul_eq]
 
 /-- Evaluate into `ℝ`: given a base evaluation and a real square root `r` of `d`, send
 `⟨a,b⟩ ↦ evalBase a + evalBase b · r`.
@@ -141,10 +254,12 @@ exactly when `r²` and `d` coincide. `hr` carries no underscore because it is lo
 it this is not multiplicative. -/
 def eval (evalBase : K →+* ℝ) (r : ℝ) (hr : r ^ 2 = d) : Adjoin d K →+* ℝ where
   toFun x := evalBase x.re + evalBase x.im * r
-  map_one' := by sorry
-  map_mul' := by sorry
-  map_zero' := by sorry
-  map_add' := by sorry
+  map_one' := by simp
+  map_mul' x y := by
+    simp only [mul_re, mul_im, map_add, map_mul, map_natCast]
+    linear_combination (-(evalBase x.im * evalBase y.im)) * hr
+  map_zero' := by simp
+  map_add' x y := by simp only [add_re, add_im, map_add]; ring
 
 end Scalar
 
@@ -162,7 +277,9 @@ by unfolding. That it is a ring hom is the *only* property anything downstream n
 it is **not** injective as far as this development is concerned, and no proof may assume it is. -/
 noncomputable def Q4.eval : Q4 →+* ℝ :=
   Adjoin.eval (Adjoin.eval (Adjoin.eval (Adjoin.eval (Int.castRingHom ℝ)
-    (Real.sqrt 3) (by sorry)) (Real.sqrt 5) (by sorry)) (Real.sqrt 7) (by sorry))
-    (Real.sqrt 11) (by sorry)
+    (Real.sqrt 3) (by rw [Real.sq_sqrt] <;> norm_num))
+    (Real.sqrt 5) (by rw [Real.sq_sqrt] <;> norm_num))
+    (Real.sqrt 7) (by rw [Real.sq_sqrt] <;> norm_num))
+    (Real.sqrt 11) (by rw [Real.sq_sqrt] <;> norm_num)
 
 end HadwigerNelson

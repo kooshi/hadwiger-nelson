@@ -134,17 +134,19 @@ Mathlib ─┐
          │
 Std.Sat ─┤
          ├─► HadwigerNelson/Field/Quadratic.lean   Adjoin d K, CommRing, eval : K →+* ℝ  [M02]
-         │        └─► HadwigerNelson/Geometry/Point.lean   Pt K, toPlane, distSq         [M02]
-         │                 └─► HadwigerNelson/Certificate.lean   UDCert, Valid, sound    [M02]
+         │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
+         │                 └─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
          │
          ├─► HadwigerNelson/Sat/Encoding.lean      colouringCNF + Colorable → Sat        [M03]
          │        └─► HadwigerNelson/Sat/Lrat.lean  certificate ingestion, cube cover    [M03]
          │
          └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
-                  ├─► HadwigerNelson/Instances/Spindle.lean   Moser spindle, χ ≥ 4       [M03]
-                  └─► HadwigerNelson/Instances/DeGrey.lean    1581 vertices, χ ≥ 5   [M04–M05]
+                  ├─► Instances/Spindle.lean            χ ≥ 4                            [M03]
+                  └─► Instances/DeGrey/Verts.lean       1581 points — its OWN module  [M04]
+                           ├─► Instances/DeGrey/Chunk00.lean … Chunk31.lean   ~250 edges each
+                           └─► Instances/DeGrey.lean    glue, Valid, χ ≥ 5        [M04–M05]
 
-HadwigerNelson.lean  — flat public surface
+Proofs.lean          — flat public surface
 tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
 ```
 
@@ -154,8 +156,8 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 
 | # | Milestone | Terminal test |
 |---|---|---|
-| **M01** | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
-| **M02** | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | Moser spindle's 7 points / 11 edges certified unit-distance by kernel `decide`; `#eval` shows the right numerics. |
+| **M01** ✅ | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
+| **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
 | **M03** | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | Spindle non-3-colourable **twice** — by `decide` and through LRAT — and `4 ≤ χ(ℝ²)` with a clean axiom list. |
 | **M04** | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | `deGrey.Valid = true`; vertex/edge counts match the paper (397 / 1581 / 7877 — already reproduced by `tools/degrey.py`). |
 | **M05** | **χ(ℝ²) ≥ 5.** Cube split, certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. |
@@ -175,7 +177,13 @@ The de Bruijn criterion, operationalized. Audited by `scripts/Axioms.lean` at ev
 | `sorryAx` | the gate fails on it |
 | `Lean.ofReduceBool` | **purchase — recorded below, per declaration** |
 
-*Purchases so far: none.*
+*Purchases so far: none.* Verified at M02: `#print axioms` over the whole public surface reports
+exactly `propext, Classical.choice, Quot.sound`, and `moserSpindle_valid` — the first declaration
+whose truth rests on kernel *reduction* rather than a written proof — reports `[propext,
+Quot.sound]`. No `Lean.ofReduceBool`.
+
+Independently re-checked: `scripts/lean4checker.sh` replays all 8 `Proofs` modules through
+lean4checker's separate kernel. Green at M02.
 
 Two `Bool`s carry the weight, and each has a kernel route and a native route:
 

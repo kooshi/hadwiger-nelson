@@ -4,6 +4,7 @@ import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.Instances.Triangle
+import Proofs.HadwigerNelson.Instances.Spindle
 
 /-!
 # Proofs

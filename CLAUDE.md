@@ -53,7 +53,7 @@ the emitted data. A generator bug can only produce data Lean refuses to certify.
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (see `scripts/Axioms.lean`) and re-checked with
-`lean4checker` at milestone boundaries. The standing entries:
+`lean4checker` at milestone boundaries (`./scripts/lean4checker.sh`). The standing entries:
 
 | Entry | Status |
 |---|---|

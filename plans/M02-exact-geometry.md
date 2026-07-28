@@ -1,5 +1,7 @@
 # M02 — Exact geometry
 
+> **STATUS: complete (2026-07-27), gate green.**
+>
 > The multiquadratic field as a kernel-computable ℤ-tower, the ring hom down to ℝ, and the
 > unit-distance certificate whose validity is a *decidable integer identity*. This is the
 > instrument M04/M05 point at 7877 edges; M02 aims it at the Moser spindle's 11.
@@ -270,3 +272,89 @@ needing it.
 - **Experience (step 7):** `UDCert`'s field names and the `Valid`/`toPlane`/soundness API M04 will
   call 7877 times; the docstring contract that nobody unfolds `eval` or `Adjoin.mul`; whether
   `moserSpindle` and `deGrey` share a constructor from `tools`-emitted data.
+
+---
+
+## Implementation record (2026-07-27) — STATUS: complete, gate green
+
+All 15 skeleton `sorry`s closed. `lake build` green (3153 jobs) · zero `sorry` in the library ·
+`#print axioms` exactly `[propext, Classical.choice, Quot.sound]` on the whole M01+M02 surface, with
+`moserSpindle_valid` at `[propext, Quot.sound]` — **no `Lean.ofReduceBool`, no native purchase** ·
+`lake exe runLinter Proofs` clean · spec examples passing.
+
+### The one design change implementation forced: exactly one arithmetic instance
+
+The skeleton followed `Zsqrtd`: declare `Zero/One/Add/Neg/Sub/Mul/NatCast/IntCast` as instances,
+then build `CommRing` from them. That elaborates, and it is **wrong here**. With both routes
+present, instance search picked the raw `Adjoin.instAdd` for `+`, the `CommRing` projection
+`Distrib.toMul` for `*`, and the raw `Adjoin.instIntCast` for casts. The three are pairwise defeq
+but not syntactically equal, so:
+
+- `map_add`, `map_mul`, `map_intCast` silently failed to match — `simp only [map_add]` reported the
+  argument *unused* and `ring` refused a true goal;
+- `#synth NatScalar Q4` and `#synth AddHomClass (Q4 →+* ℝ) Q4 ℝ` failed outright.
+
+The failure mode is the dangerous one: no error at the declaration that caused it, an error three
+files away that reads like a broken tactic. Fixes applied:
+
+1. The arithmetic is **plain `def`s** (`Adjoin.add`, `.mul`, …) and `commRing` is the sole instance.
+   Every `+`, `*`, `-`, cast on the tower now resolves one way.
+2. `NatScalar` is indexed on `[CommRing K]`, not on `[NatCast K] [Mul K]`. A class indexed on the
+   *pieces* only synthesizes where the ambient pieces are found by the same route that declared the
+   instance — never reliably true in a tower.
+3. The ring axioms are stated about the `def`s (`add_assoc'`, …) and fed to `CommRing` as fields.
+   Inside the `refine`, goals are phrased in the notation of the instance *being built*, so `simp`
+   cannot see the definitions; stating them separately gives `simp` something to grip.
+
+The invariant to preserve: **one arithmetic instance per carrier.** A second one is sound and
+silent, and it breaks Mathlib lemma matching everywhere downstream.
+
+### The measurement M02 owed (de Grey data, 1581 vertices, real file)
+
+| | fixed, per module | marginal |
+|---|---|---|
+| elaboration | 28 s | **0.16 s/edge** |
+| memory | 3.9 GB | ~12 MB/edge |
+
+**Answer to the flagged question: no regression.** 0.16 s/edge against the bare-`Int` harness's
+0.17 s/edge — routing arithmetic through Mathlib's hierarchy costs nothing, *given* the single
+instance above. The two-layer design contemplated as mitigation is unnecessary and was not built.
+
+**New finding, and it retargets M04.** The dominant cost is not the geometry but the **vertex table
+elaborating** — 1581 × 32 integer literals nested four deep, 28 s and 3.9 GB *before a single edge
+is checked*, and paid per module that defines it. Consequences:
+
+- M04 must put the vertex table in its **own module**; chunk modules import its `.olean`.
+- The earlier "indexed vs resolved lookup cost the same" result was measured at 60 vertices and
+  **does not extrapolate**; it is not evidence about de Grey scale. Superseded.
+- Extrapolating the marginal figures, all 7877 edges in one `decide` would want ~95 GB. Chunking
+  was already mandatory; this quantifies it. ~32 chunks of 250 edges at ~3 GB each.
+
+### Mutation audit
+
+| mutation | result |
+|---|---|
+| drop `hD : D ≠ 0` from `dist_toPlane_eq_one` | breaks — **and the mutant is provably false**: at `D = 0` both points collapse to the origin, so `dist = 0`. Counterexample proved, not just asserted. |
+| target `(D : Q4)` instead of `D * D` | breaks — the scale factor is load-bearing |
+| perturb spindle vertex 3 to the origin | `Valid = false`, and `badEdges` names exactly `[(3,6)]` — edges `(1,3)` and `(2,3)` survive because B and C are themselves at unit distance from the origin. The diagnostic located the real culprit rather than blaming the whole neighbourhood. |
+
+In-repo permanent versions: `unitPair` (non-vacuity, all the way to `dist … = 1` in `ℂ`) and
+`unitPairBad` (adversarial member) in `Certificate.lean`, plus `#guard`s that run every build.
+
+### Carried forward to M04
+
+- Vertex table in its own module (above).
+- `tools/emit_cert.py` emits the whole shape, `--chunk N` for slice size; it cites chunk theorems in
+  `valid_of_chunks` rather than re-`decide`ing, which would double the cost.
+- `tools/degrey.py` now also writes `tools/degrey_cert.json` with integer-leaf coordinates and
+  common denominator **768** (397 / 1581 / 7877 reproduced exactly).
+
+### Independent re-check
+
+`scripts/lean4checker.sh` (added at M02) replays all 8 `Proofs` modules through lean4checker's
+separate kernel — green. This is the check that matters most for `moserSpindle_valid`, whose truth
+is a kernel *reduction* over the `Q4` tower rather than a written proof term: lean4checker re-runs
+that reduction rather than trusting our `.olean`.
+
+lean4checker is not a package dependency (it pins its own toolchain and would drag ours around); the
+script clones and builds it on demand under `.lake/lean4checker` with our `lean-toolchain` forced.

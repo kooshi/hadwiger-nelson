@@ -236,3 +236,15 @@ if __name__ == "__main__":
     E = edges(G)
     print(f"|E(G)| = {len(E)}", file=sys.stderr)
     json.dump({"n": len(G), "edges": E}, open("tools/degrey_graph.json", "w"))
+
+    # Integer-leaf export, one global denominator, same shape as tools/spindle.json.
+    from math import gcd
+    L = 1
+    for p in G:
+        for comp in p:
+            for f in comp:
+                L = L * f.denominator // gcd(L, f.denominator)
+    coords = [[[int(f * L) for f in comp] for comp in p] for p in G]
+    json.dump({"names": [str(i) for i in range(len(G))], "denom": L, "coords": coords,
+               "edges": E, "primes": PRIMES}, open("tools/degrey_cert.json", "w"))
+    print(f"common denominator: {L}", file=sys.stderr)

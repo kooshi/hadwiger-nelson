@@ -10,8 +10,13 @@ custom axiom.
 
 Run it:  `lake env lean scripts/Axioms.lean`
 
-**M01 — the statement.** Expected on every line: exactly `propext`, `Classical.choice`,
-`Quot.sound`. No `sorryAx`, no `Lean.ofReduceBool` (nothing native yet — that ledger opens at M05).
+**M01 — the statement. M02 — exact geometry.** Expected on every line: exactly `propext`,
+`Classical.choice`, `Quot.sound`. No `sorryAx`, no `Lean.ofReduceBool` (nothing native yet — that
+ledger opens at M05 if the LRAT check will not kernel-reduce).
+
+`moserSpindle_valid` is the one to watch: it is discharged by `decide`, so it is the first
+declaration in this development whose truth rests on kernel *reduction* rather than on a written
+proof. If `native_decide` is ever bought, it shows up here as `Lean.ofReduceBool`.
 -/
 
 open HadwigerNelson
@@ -31,3 +36,16 @@ open HadwigerNelson
 #print axioms three_le_chromaticNumber_unitDistance_complex
 #print axioms three_le_chromaticNumber_unitDistance_complex'
 #print axioms three_le_chromaticNumber_plane
+
+-- M02: the exact-arithmetic tower and the certificate bridge.
+#print axioms Q4.eval
+#print axioms eval_distSq
+#print axioms dist_toPlane_eq_one
+#print axioms UDCert.validOn_iff
+#print axioms UDCert.valid_of_chunks
+#print axioms UDCert.valid_sound
+#print axioms UDCert.add_one_le_chromaticNumber_of_valid
+
+-- The kernel-decided instance: the spindle's geometry.
+#print axioms moserSpindleChunk0_valid
+#print axioms moserSpindle_valid
