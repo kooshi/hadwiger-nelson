@@ -78,9 +78,15 @@ instance : IntCast (Adjoin d K) := ⟨fun n => ⟨(n : K), 0⟩⟩
 
 /-! ### Component simp lemmas — the reasoning surface
 
-Every ring axiom is proved by `ext`-ing to components and calling `ring`, so these are what make
-that one-liner work. All true by `rfl` except `mul_re`, which trades the scalar action for the
-cast. -/
+**The simp destination is components.** These drive any goal about `Adjoin` arithmetic out of the
+tower and into `K`, where `ring` closes it; that is how every ring axiom below is proved, and how
+downstream proofs should proceed. Nothing here should ever require unfolding an instance.
+
+All are `rfl` except `mul_re`, which is the one lemma that *changes* the term: it trades the fast
+`NatScalar.smul` for `(d : K) * _`, the form `ring` understands. That asymmetry is safe because the
+computational path never consults `simp` — `Valid` is discharged by `decide`, i.e. by kernel
+reduction of the definitions, so the simp set is free to normalise toward provability while the
+kernel reduces toward speed. -/
 
 @[simp] theorem add_re (x y : Adjoin d K) : (x + y).re = x.re + y.re := rfl
 @[simp] theorem add_im (x y : Adjoin d K) : (x + y).im = x.im + y.im := rfl
@@ -97,7 +103,11 @@ section Scalar
 variable [NatScalar K]
 
 /-- `(a + b√d)(c + e√d) = (ac + d·be) + (ae + bc)√d`, with `d·` a **scalar** action pushed to the
-leaves rather than a ring multiplication by a mostly-zero tower element. -/
+leaves rather than a ring multiplication by a mostly-zero tower element.
+
+Reason about products through `mul_re` and `mul_im`, never by unfolding this instance: the scalar
+action is a computational detail this API does not promise, and `mul_re` already states the product
+in the form `ring` accepts. -/
 instance : Mul (Adjoin d K) :=
   ⟨fun x y => ⟨x.re * y.re + NatScalar.smul d (x.im * y.im), x.re * y.im + x.im * y.re⟩⟩
 
@@ -145,7 +155,11 @@ end Adjoin
 /-- `ℚ(√3,√5,√7,√11)` as a kernel-computable ℤ-algebra: sixteen ℤ leaves. -/
 abbrev Q4 : Type := Adjoin 11 (Adjoin 7 (Adjoin 5 (Adjoin 3 ℤ)))
 
-/-- `Q4 →+* ℝ`, the four generators sent to `√3, √5, √7, √11`. -/
+/-- `Q4 →+* ℝ`, the four generators sent to `√3, √5, √7, √11`.
+
+Reason about it through the `RingHom` API — `map_add`, `map_sub`, `map_mul`, `map_intCast` — never
+by unfolding. That it is a ring hom is the *only* property anything downstream needs; in particular
+it is **not** injective as far as this development is concerned, and no proof may assume it is. -/
 noncomputable def Q4.eval : Q4 →+* ℝ :=
   Adjoin.eval (Adjoin.eval (Adjoin.eval (Adjoin.eval (Int.castRingHom ℝ)
     (Real.sqrt 3) (by sorry)) (Real.sqrt 5) (by sorry)) (Real.sqrt 7) (by sorry))

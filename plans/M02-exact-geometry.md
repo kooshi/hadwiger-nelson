@@ -205,6 +205,58 @@ Each must **fail**: dropping `hD` from `dist_scaled_eq_one`; replacing `target` 
 so `Valid` becomes false on the spindle; perturbing one spindle coordinate by 1 and re-running
 `decide`.
 
+## Experience-modeling pass — findings (step 7, applied)
+
+Fresh `debruijn-experience-modeling` pass over the surface M03/M04/M05, the `tools/` emitters, and
+the automation consume.
+
+**(1) The simp destination is components, and the one asymmetry is safe.** `add_re`, `sub_im`, … are
+`rfl` and drive goals out of the tower into `K`, where `ring` closes them. `mul_re` is the only
+lemma that *changes* the term — it trades the fast `NatScalar.smul` for `(d : K) * _`. That is safe
+because **the computational path never consults `simp`**: `Valid` is discharged by `decide`, i.e.
+kernel reduction of the definitions. So the simp set normalises toward *provability* while the
+kernel reduces toward *speed*, and the two never meet. Stated in the module docs, because a simp set
+with no declared destination makes every user infer their own.
+
+**(2) The chunking API — `ValidOn` is the unit of work.** M04 cannot put 7877 edges through one
+`decide`, so the surface must make chunking natural rather than a workaround:
+
+- `ValidOn c es` — the check restricted to a sublist. One `decide` per chunk, and (the point) one
+  chunk per *module*, so they elaborate in parallel.
+- `Valid c = c.ValidOn c.edges`, by `rfl`.
+- `valid_of_chunks c chunks hjoin h` — glue. `hjoin : chunks.flatten = c.edges` is cheap for the
+  kernel: list equality of index pairs, no tower arithmetic.
+
+Chunking is a *proof strategy*, not a property of the object, so the certificate stays flat and only
+the proof splits. The alternative — chunked `edges` in the structure — would push a `flatten` into
+every downstream use, including M01's reduction.
+
+**(3) Names that were lying.**
+
+- `Pt.scaled` → **`Pt.toPlane p D`**. It *divides* by `D`; calling it `scaled` names the opposite
+  operation and would plant a false belief at every read. `toPlane` names the destination and keeps
+  M01's vocabulary.
+- `UDCert.target` → **`denomSq`**. `target` forces a jump to learn what it is; `denomSq` reads at
+  the use site.
+- `Valid` stays `Bool` with `= true` at call sites (Mathlib convention), but now has its bridge:
+  `validOn_iff : c.ValidOn es = true ↔ ∀ e ∈ es, …`, so downstream proofs never destructure a
+  `List.all`.
+
+**(4) The breakdown surface — `badEdges`.** When a certificate is wrong, `decide` says only "no",
+and at de Grey's scale its failure term is unreadable. `c.badEdges` returns the offending edges
+*with the squared distance actually found*, runs compiled (instant at any size), and is named in the
+module docstring as the first thing to run. This is the candidates-computed-while-failing move: the
+information exists at the moment of failure and dies unserialised unless the API emits it. It also
+distinguishes the two likely faults — a transcription error gives a wild value, a scale error gives
+a value off by a square factor.
+
+**(5) Docstring contracts.** `Mul (Adjoin d K)`: reason via `mul_re`/`mul_im`, never unfold — the
+scalar action is a computational detail the API does not promise. `Q4.eval`: reason via the `RingHom`
+API, and note explicitly that it is **not** injective as far as this development is concerned, so no
+proof may assume it is. That last sentence is load-bearing: injectivity is the assumption a reader
+would most naturally and wrongly reach for, and the whole cheapness of the design rests on never
+needing it.
+
 ## Open questions for the modeling passes
 
 - **Domain (step 5):** the `CommRing (Adjoin d K)` discharge route (above); whether `Pt` is `K × K`
