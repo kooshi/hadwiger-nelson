@@ -39,6 +39,14 @@ theorem chromaticNumber_plane_eq_complex :
     (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber = (unitDistance ℂ).chromaticNumber :=
   sorry
 
+/-- **The primitive.** Exact geometry plus non-colourability, however obtained, gives a bound on the
+plane. The two flavours below are this theorem composed with the two producers of `¬ Colorable`, and
+`Instances/SpindleBound.lean` calls it directly for its brute-force route — three consumers, one
+place where the isometry is crossed. -/
+theorem UDCert.add_one_le_chromaticNumber_plane_of_valid (c : UDCert n) (hd : c.denom ≠ 0)
+    (hv : c.Valid = true) (hG : ¬ (edgeGraph n c.edges).Colorable k) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
+
 /-- **The composite.** A valid certificate whose CNF encoding is unsatisfiable pushes the chromatic
 number of the plane above `k`.
 
@@ -46,13 +54,15 @@ Both hypotheses are certificates in the technical sense: `hv` is decided by the 
 from an LRAT proof and carries the axiom described in `Sat/Lrat.lean`. -/
 theorem UDCert.add_one_le_chromaticNumber_plane_of_unsat (c : UDCert n) (hd : c.denom ≠ 0)
     (hv : c.Valid = true) (hk : 0 < k) (hu : (colouringCNF k n c.edges).Unsat) :
-    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber :=
+  c.add_one_le_chromaticNumber_plane_of_valid hd hv (not_colorable_of_unsat hk hu)
 
 /-- **The composite, split.** The form M05 calls: the unsatisfiability obligation is discharged one
 cube at a time, since the monolithic instance is out of reach for the solver. -/
 theorem UDCert.add_one_le_chromaticNumber_plane_of_cubes (c : UDCert n) (hd : c.denom ≠ 0)
     (hv : c.Valid = true) (hk : 0 < k) (W : List (Fin n))
     (hu : ∀ cb ∈ allCubes k W, (colouringCNF k n c.edges ++ cubeCNF k cb).Unsat) :
-    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber :=
+  c.add_one_le_chromaticNumber_plane_of_valid hd hv (not_colorable_of_cubes hk W hu)
 
 end HadwigerNelson

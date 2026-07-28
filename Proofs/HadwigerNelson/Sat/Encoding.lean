@@ -92,13 +92,45 @@ as `colourFn`. -/
 private def ofColoring (k : ℕ) (f : ℕ → ℕ) : ℕ → Bool := fun m => m % k == f (m / k)
 
 /-- `ofColoring` reads a colour variable back — the one arithmetic fact underneath the whole
-encoding, and the only place `0 < k` is used. -/
+encoding, and the only place `0 < k` is used.
+
+Closes by `simp [ofColoring, colourVar, Nat.mul_add_div hk, Nat.mod_eq_of_lt hc,
+Nat.div_eq_of_lt hc]`; the citation is why `colourVar` is `k * v + c`. -/
 private theorem ofColoring_colourVar (hk : 0 < k) (f : ℕ → ℕ) {v c : ℕ} (hc : c < k) :
     ofColoring k f (colourVar k v c) = (c == f v) := sorry
+
+/-- `colourFn` lands in range everywhere — in range because the colouring does, off range because
+the junk value is `0` and `0 < k`. This is where `hk` pays for the junk. -/
+private theorem colourFn_lt (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) : colourFn C v < k := sorry
 
 /-- `colourFn` agrees with the colouring on the range where it matters. -/
 private theorem colourFn_val (C : Fin n → Fin k) (v : Fin n) :
     colourFn C v.val = (C v).val := sorry
+
+/-- A vertex's own colour variable is set. Half of what each clause case needs. -/
+private theorem ofColoring_self (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) :
+    ofColoring k (colourFn C) (colourVar k v (colourFn C v)) = true := sorry
+
+/-- Any other colour's variable is unset. The other half. -/
+private theorem ofColoring_ne (hk : 0 < k) (C : Fin n → Fin k) {v c : ℕ} (hc : c < k)
+    (h : c ≠ colourFn C v) : ofColoring k (colourFn C) (colourVar k v c) = false := sorry
+
+/-! ### The two clause families, one lemma each
+
+`colouringCNF` is an append of two `map`s, so its satisfaction is exactly these two facts plus
+`List.mem_append`. Stating them separately is what keeps the assembly a transcription rather than a
+forty-line block. -/
+
+/-- An at-least-one clause is satisfied — witnessed at the vertex's own colour. -/
+private theorem eval_atLeastOneClause (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) :
+    CNF.Clause.eval (ofColoring k (colourFn C)) (atLeastOneClause k v) = true := sorry
+
+/-- An edge clause is satisfied — because the endpoints' colours differ, colour `c` misses at least
+one of them. The case split is on `c = colourFn C u`, and each branch cites `ofColoring_ne`. -/
+private theorem eval_edgeClause (hk : 0 < k) (C : Fin n → Fin k) {u w c : ℕ} (hc : c < k)
+    (hne : colourFn C u ≠ colourFn C w) :
+    CNF.Clause.eval (ofColoring k (colourFn C))
+      [(colourVar k u c, false), (colourVar k w c, false)] = true := sorry
 
 /-! ## Soundness — the only direction we prove
 
@@ -106,6 +138,18 @@ private theorem colourFn_val (C : Fin n → Fin k) (v : Fin n) :
 emits one empty clause per vertex, hence unsatisfiable, and `Fin n → Fin 0` is indeed uninhabited
 for `n > 0`. The hypothesis is there because `ofColoring` divides by `k`, and `Nat` division by zero
 returns junk rather than failing. Every call site has `k` a literal. -/
+
+/-- The witness, named once. Both public existentials cite this, which is what lets the cube half
+share a single assignment with the encoding half across `CNF.eval_append`.
+
+The assembly is a transcription: `List.all_toArray` and `List.all_eq_true` carry `Array.all` down to
+`∀ cl ∈ _`, `List.mem_append` splits the two clause families, and each side is one of the two clause
+lemmas above. The edge side crosses the Bool/Prop seam on the loop filter with `List.mem_filter`,
+then reaches `Adj` through `edgeGraph_adj_of_mem` and `Coloring.valid` — the packaging M01 left for
+exactly this call site. -/
+private theorem sat_colouringCNF {E : List (Fin n × Fin n)} (hk : 0 < k)
+    (C : (edgeGraph n E).Coloring (Fin k)) :
+    CNF.Sat (ofColoring k (colourFn ⇑C)) (colouringCNF k n E) := sorry
 
 /-- **The bridge.** A proper colouring makes the encoding satisfiable. Every non-colourability claim
 in the project is this theorem contraposed. -/
@@ -163,8 +207,15 @@ obligation that makes the split sound. -/
 theorem restrict_mem_allCubes (W : List (Fin n)) (C : Fin n → Fin k) :
     restrict W C ∈ allCubes k W := sorry
 
+/-- The cube half of the witness `sat_colouringCNF` names. Note the hypothesis: an arbitrary
+`C : Fin n → Fin k`, not a colouring — satisfying one's own cube has nothing to do with the graph,
+and the weaker statement is the easier proof. -/
+private theorem sat_cubeCNF_restrict (hk : 0 < k) (W : List (Fin n)) (C : Fin n → Fin k) :
+    CNF.Sat (ofColoring k (colourFn C)) (cubeCNF k (restrict W C)) := sorry
+
 /-- A colouring makes the encoding *and its own cube* simultaneously satisfiable — one assignment
-for both halves, which is what the split turns on. -/
+for both halves, which is what the split turns on. Proof: `CNF.eval_append` splits the goal and the
+two private witness lemmas close the halves, with the *same* assignment on both. -/
 theorem exists_sat_colouringCNF_cube {E : List (Fin n × Fin n)} (hk : 0 < k) (W : List (Fin n))
     (C : (edgeGraph n E).Coloring (Fin k)) :
     ∃ a, CNF.Sat a (colouringCNF k n E ++ cubeCNF k (restrict W ⇑C)) := sorry
@@ -195,9 +246,19 @@ condition, no bundled `Coloring`. -/
 theorem colorable_iff_exists {G : SimpleGraph (Fin n)} :
     G.Colorable k ↔ ∃ f : Fin n → Fin k, ∀ i j, G.Adj i j → f i ≠ f j := sorry
 
+/-- A monochromatic edge, translated between graph vocabulary and list vocabulary. Split out from
+`not_colorable_edgeGraph_iff` because it is a different argument: that theorem pushes a negation
+through a quantifier, this one crosses the `Adj`-to-membership seam, and the symmetric case
+(`(j, i) ∈ E`) lives here where it is two `.symm`s rather than a detour mid-proof. -/
+private theorem exists_adj_eq_iff {E : List (Fin n × Fin n)} {f : Fin n → Fin k} :
+    (∃ i j, (edgeGraph n E).Adj i j ∧ f i = f j) ↔ ∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2 := sorry
+
 /-- Non-colourability of an edge-list graph, phrased over the list and closed by `decide`. The
 right-hand side mentions no `Adj` and no `SimpleGraph`, so the kernel sees only `Fin` arithmetic
 and list membership.
+
+Proof: `colorable_iff_exists`, then `push Not` (**not** `push_neg` — deprecated at v4.32.0), then
+`exists_adj_eq_iff`.
 
 The `e.1 ≠ e.2` conjunct is load-bearing, and is the same convention `edgeGraph` and `colouringCNF`
 apply: without it a listed self-loop would satisfy the right-hand side for every `f`, making the
