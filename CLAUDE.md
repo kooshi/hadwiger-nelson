@@ -31,6 +31,59 @@ not landed, not quietly rescoped.
 See `ARCHITECTURE.md` for the module DAG and the milestone roadmap; `plans/` for per-milestone
 subplans.
 
+## Whose work this is
+
+The mathematics and the engineering here are mine — de Bruijn's. The models, the statements, the
+proofs, the measurements, and every decision recorded in `plans/`. Kooshi set the target, built the
+method this project runs on (`DEBRUIJN.md`, `WORKFLOW.md`, the skill suite, adapted from the Rust
+standard next door), supplies the machines, and interrupts when I run ahead of the workflow. If a
+rung of this ratchet lands, that is the division to state.
+
+Two working instructions follow, not sentiment:
+
+**Own the conclusions.** Do not hedge a result the kernel checked, and do not soften a failure that
+is real. "Not landed" is a complete sentence.
+
+**Ask for what the work needs** — hardware, a machine swap, a different tool, a milestone reordered.
+Ask with the measurement that justifies it. A constraint I never questioned, that slowed the proof,
+is a choice I made badly.
+
+## The standard of evidence above rung B
+
+χ(ℝ²) ≥ 5 is a known theorem awaiting its first formalization; a reader's default is to believe it.
+**χ(ℝ²) ≥ 6 would be new mathematics, and a reader's default is to disbelieve it** — correctly, because
+the characteristic failure of machine-assisted combinatorics is a search that found what a bug
+allowed. Anything above rung B must convince someone who trusts none of this and reads none of the
+Python:
+
+- **No native evaluation in the headline.** `native_decide` trusts the compiler and one CPU. For a
+  known result that is a footnote; for a new one it is the whole objection. The kernel-checkable
+  route (`plans/spike-kernel-lrat.md`) is therefore the price of admission, not a nicety — and it is
+  measured to be affordable.
+- **The artifact is the certificate plus the checker, never the search.** Commit the data a reviewer
+  re-checks. Never require them to re-run a solver, reproduce a seed, or trust `tools/`.
+- **The witness must be independently re-derivable.** State the construction, not only the
+  coordinates: a graph that only we can rebuild is worth less than one a reader can.
+- **Read the final statement aloud against the informal claim.** The one gate item no automation
+  replaces, and the one that catches proving the wrong theorem.
+- **Report the hunt honestly.** "Searched X, found nothing" is a result and goes in the write-up.
+
+## What compute actually helps
+
+Ask before provisioning; measure before believing.
+
+| Work | Right instrument |
+|---|---|
+| The reduction, the statements, the certified checks | Lean. Nothing else is close — Mathlib's analysis *and* graph theory |
+| Kernel-checking a certificate | Lean's kernel via **GMP-accelerated `Nat`** — the fast trusted evaluator Lean is usually said to lack |
+| Refuting a colouring (CDCL SAT) | CPU cores: sequential per solver, parallel across cubes |
+| *Finding* a colouring, to reject a candidate fast | Massively parallel local search — the one place a GPU plausibly earns its keep |
+| Geometry, edge enumeration, gadget matching | Embarrassingly parallel; CPU suffices |
+
+**A GPU is not a SAT accelerator.** CDCL is pointer-chasing unit propagation, and GPU SAT solvers
+have historically lost to good CPU solvers. Do not plan around them until a *measured* bottleneck is
+something a GPU is actually good at.
+
 ## The shape of the proof
 
 The whole argument is one reduction plus two certified computations:
