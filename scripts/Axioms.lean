@@ -106,5 +106,6 @@ reaches above without them — which is the point of proving it twice. -/
 
 #print axioms moserSpindle_cnf_unsat
 #print axioms moserSpindle_not_colorable_three_lrat
+#print axioms moserSpindleCubes_unsat
 #print axioms moserSpindle_not_colorable_three_cubes
 #print axioms four_le_chromaticNumber_plane_certified

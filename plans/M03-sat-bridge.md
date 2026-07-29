@@ -466,3 +466,111 @@ enumerated and every other line clean · `lake exe runLinter Proofs` silent · s
 `./scripts/lean4checker.sh` green · **and the milestone's own test**: routes A, B and C all prove
 `¬ (edgeGraph 7 moserSpindleEdges).Colorable 3`, and `4 ≤ χ(ℝ²)` reports exactly
 `[propext, Classical.choice, Quot.sound]`.
+
+---
+
+## What landed (implementation, 2026-07-28)
+
+All 28 skeleton leaves closed. The gate is green in full; see the run below.
+
+### The pipeline, end to end
+
+```
+Sat/Encoding.lean  ──(scripts/Dimacs.lean)──▶  build/sat/*.cnf
+                                                    │
+                                             tools/solve.sh  (CaDiCaL 2.1.2, --lrat --no-binary)
+                                                    ▼
+                                              build/sat/*.lrat
+                                                    │
+                                          scripts/EmitLrat.lean  (core's own LRAT parser)
+                                                    ▼
+                              Instances/SpindleLrat.lean   ── committed, never hand-reviewed
+```
+
+Ten runs, all UNSAT: the monolithic instance (26 actions, 658 bytes) and nine cubes (5–20 actions
+each). Cubes 0, 4 and 8 — the ones giving adjacent vertices 0 and 1 the same colour — need only 5
+actions, which is the expected shape and a free sanity signal.
+
+**Nothing outside Lean authors a clause or parses a certificate.** DIMACS is printed by
+`Std.Sat.CNF.dimacs` applied to `coloringCNF` itself; the `.lrat` files are read by
+`LRAT.loadLRATProof`, the same parser `bv_decide` uses. The `Array IntAction` written into the
+generated module is by construction the one core's parser produces, so our reading of the LRAT
+format cannot disagree with core's.
+
+### Decisions implementation forced
+
+* **`decide +kernel`, not `decide`, for route A.** Plain `decide` evaluates the `Decidable` instance
+  in the elaborator *and* has the kernel re-check it, so the 2187-colouring enumeration runs twice:
+  8.3 s of work, and it needs `maxRecDepth` raised past 4000 because the elaborator's own recursion
+  tracks the enumeration. The kernel route runs it once, in 2.6 s, at the default recursion depth
+  and with no `set_option` anywhere. Same instance, same axioms — evaluated once instead of twice.
+  The alternative (raise `maxRecDepth` and keep plain `decide`) was live and rejected: it is 3×
+  slower and adds a knob whose correct value nobody could predict at M04 scale.
+* **The nine certificate checks are named once**, as `moserSpindleCubes_unsat`, rather than inlined
+  into each consumer. `moserSpindle_not_colorable_three_cubes` and
+  `four_le_chromaticNumber_plane_certified` both need the same `∀ cb ∈ cubes, Unsat` obligation;
+  inlining would have evaluated all nine certificates twice and minted 18 axioms instead of 9.
+* **`renderAction` emits dot notation**, not derived `Repr`. `Repr`'s output does re-elaborate, but
+  spells `Std.Tactic.BVDecide.LRAT.Action.addRup` in full — ~40 bytes of namespace per action. At
+  spindle scale that is cosmetic; at de Grey scale it is the difference between a file Lean can load
+  and one it cannot. The match is total and unabbreviated, so a future constructor turns the file
+  red rather than dropping actions.
+
+### The gate hole this pass closed
+
+`Sat/Lrat.lean` claimed *"`scripts/Axioms.lean` prints the same ledger from the environment; the two
+must agree, and the gate compares them."* **The gate did not compare them.** It does now:
+`scripts/axioms.sh` extracts the source-side ledger (declarations whose docstring opens with
+`**Trust purchase: native evaluation.**`) and the environment-side ledger (the `PURCHASED` banner),
+and fails on any disagreement in either direction. Verified by deleting a `#print axioms` line — the
+gate exits 1 and names the declaration.
+
+Writing the check found a second thing: matching the phrase anywhere caught `unsat_of_check`, whose
+*module* docstring quotes the convention while the theorem itself is axiom-clean. The check now
+matches `/-- **Trust purchase:` — the convention as actually stated, "opens its docstring".
+
+### Negative controls, now permanent
+
+The build proves every certificate *does* check; nothing in it proved one could **fail**, and a
+checker that accepted everything would have satisfied every theorem in the file. Four `#guard`s in
+`Instances/SpindleBound.lean` now run every build:
+
+| control | result |
+|---|---|
+| certificate 0 against cube 1 | fails — the refutation cannot transfer |
+| monolithic certificate against the *satisfiable* 4-colour formula | fails — no certificate exists |
+| `badCubes` on a ledger with 0 and 1 swapped | names exactly `[0, 1]` |
+| `badCubes` on a ledger missing two entries | names exactly `[7, 8]` |
+
+### The breakdown surface, confirmed in practice
+
+Deliberately swapping two certificates produces, for **both** wrong entries rather than the first:
+
+```
+error: Tactic `native_decide` evaluated that the proposition
+  LRAT.check spindleCubeCert2 (coloringCNF 3 7 moserSpindleEdges ++ cubeCNF 3 7 [(0, 1), (1, 0)]) = true
+is false
+```
+
+The cube is a readable literal. That is the payoff of the experience pass's signature change
+(`cubes` supplied literally, tied by `hcover : allCubes k n W = cubes`), and it is the property M05
+depends on at 256 cubes.
+
+### Gate run
+
+| check | result |
+|---|---|
+| `lake build` | green, 3158 jobs, no warnings |
+| `sorry` | none in `Proofs/` |
+| `lake exe runLinter Proofs` | "Linting passed for Proofs." |
+| spec `#guard`s | 19, all passing at elaboration (9 encoding, 8 spindle, 2 geometry) |
+| `./scripts/axioms.sh` | OK — 38 clean, 5 declared purchases, both ledgers agreeing |
+| `./scripts/lean4checker.sh` | OK — 13 modules through the independent kernel |
+| **routes A, B, C agree** | all three prove `¬ (edgeGraph 7 moserSpindleEdges).Colorable 3` |
+| **headline axioms** | `four_le_chromaticNumber_plane` → `[propext, Classical.choice, Quot.sound]` |
+
+### Carried to M05 unchanged
+
+Colour symmetry breaking (fixing a triangle to colours 0,1,2), certificate trimming and the binary
+LRAT format, which `W` splits the de Grey instance best, and the kernel-reducible LRAT checker
+(tracked open work, not attempted).

@@ -162,7 +162,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 |---|---|---|
 | **M01** ✅ | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
 | **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
-| **M03** | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | Spindle non-3-colourable **three ways** — brute-force `decide`, one LRAT certificate, and nine cube certificates — and `4 ≤ χ(ℝ²)` through the brute-force route, so the headline's axiom list is clean while the certificate routes carry the native axiom. |
+| **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
 | **M04** | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | `deGrey.Valid = true`; vertex/edge counts match the paper (397 / 1581 / 7877 — already reproduced by `tools/degrey.py`). |
 | **M05** | **χ(ℝ²) ≥ 5.** Cube split, certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. |
 | **M06** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
@@ -192,13 +192,32 @@ axiom foo._native.native_decide.ax_1_1 : decide (…) = true
 An audit that looks only for `Lean.ofReduceBool` passes a native purchase in silence. Found
 2026-07-27; the audit now greps for `native_decide.ax`.
 
-*Purchases so far: none.* Verified at M02: `#print axioms` over the whole public surface reports
-exactly `propext, Classical.choice, Quot.sound`, and `moserSpindle_valid` — the first declaration
-whose truth rests on kernel *reduction* rather than a written proof — reports `[propext,
-Quot.sound]`. No `Lean.ofReduceBool`.
+### The purchases, as of M03
 
-Independently re-checked: `scripts/lean4checker.sh` replays all 8 `Proofs` modules through
-lean4checker's separate kernel. Green at M02.
+Five declarations, all in `Instances/SpindleBound.lean`, all buying the same thing: the evaluation
+of `LRAT.check` on a CaDiCaL certificate.
+
+| Declaration | Axioms bought | Why |
+|---|---|---|
+| `moserSpindle_cnf_unsat` | `ax_1_1` | route B, the monolithic certificate |
+| `moserSpindle_not_colorable_three_lrat` | (inherits) | route B's conclusion |
+| `moserSpindleCubes_unsat` | `ax_1_1` … `ax_1_9` | route C, one per cube |
+| `moserSpindle_not_colorable_three_cubes` | (inherits) | route C's conclusion |
+| `four_le_chromaticNumber_plane_certified` | (inherits) | route C composed with the geometry |
+
+**The headline bound buys nothing.** `four_le_chromaticNumber_plane` goes through route A —
+`decide +kernel` over all `3 ^ 7` colourings — and reports exactly `propext, Classical.choice,
+Quot.sound`. The certificate routes exist beside it as cross-checks, and every one of them is a
+theorem route A also proves. That will not be true at M05, where route C is the only route.
+
+**Two ledgers, and the gate compares them.** Each purchasing declaration opens its docstring with
+`**Trust purchase: native evaluation.**` (the source-side ledger, `grep -rn "Trust purchase"
+Proofs/`), and each is listed under the `PURCHASED` banner in `scripts/Axioms.lean` (the
+environment-side ledger). `scripts/axioms.sh` extracts both and fails on any disagreement — a
+purchase with no docstring warning, or a docstring warning about a purchase no longer made.
+
+Independently re-checked: `scripts/lean4checker.sh` replays all 13 `Proofs` modules through
+lean4checker's separate kernel. Green at M03.
 
 Two `Bool`s carry the weight, and each has a kernel route and a native route:
 
@@ -238,7 +257,10 @@ produce a meaningless one, and the specific countermeasure for each:
 | Failure | Defence |
 |---|---|
 | `unitDistanceGraph` has vacuous `Adj` (e.g. `fromRel` collapsing) | `example : (unitDistanceGraph ℂ).Adj 0 1` proved; a non-adjacency proved too |
-| CNF encoding subtly wrong, making *any* graph "unsatisfiable" | Moser spindle proved non-3-colourable by `decide` **and** by LRAT; and `colouringCNF` on a 3-colourable graph shown **satisfiable** |
+| CNF encoding subtly wrong, making *any* graph "unsatisfiable" | ✅ M03: spindle proved non-3-colourable by `decide +kernel` **and** by LRAT **and** by nine cube certificates, all agreeing; `exists_sat_coloringCNF_four` shows the same encoder **satisfiable** at four colours, from a real colouring |
+| Encoder checked only against itself | ✅ M03: the spec `#guard`s in `Instances/SpindleBound.lean` evaluate the formula on **hand-written** assignments, not ones built by the module's own `ofColoring` |
+| Certificate checker that accepts everything | ✅ M03: committed negative controls — a certificate filed against the wrong cube fails, and no certificate refutes the satisfiable four-colour formula |
+| A cube certificate silently attached to the wrong cube | ✅ M03: the cube list is supplied literally and tied to `allCubes` by `rfl`, so a misfile is a type error naming the cube as a readable literal; `#eval badCubes …` reports every wrong *and* every missing index |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |

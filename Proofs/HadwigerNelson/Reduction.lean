@@ -50,7 +50,7 @@ upper-bound direction to any later milestone that wants it (rung C's fractional 
 needs `≤` the other way). A one-directional version would have been weaker than the truth. -/
 theorem chromaticNumber_plane_eq_complex :
     (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber = (unitDistance ℂ).chromaticNumber :=
-  sorry
+  (chromaticNumber_unitDistance_congr Complex.orthonormalBasisOneI.repr.toIsometryEquiv).symm
 
 /-- **The primitive.** Exact geometry plus non-colourability, however obtained, gives a bound on the
 plane. The two flavours below are this theorem composed with the two producers of `¬ Colorable`, and
@@ -59,7 +59,9 @@ place where the isometry is crossed. -/
 theorem UDCert.add_one_le_chromaticNumber_plane_of_valid (c : UDCert n)
     (hv : c.Valid = true) (hG : ¬ (edgeGraph n c.edges).Colorable k)
     (hd : c.denom ≠ 0 := by decide) :
-    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := by
+  rw [chromaticNumber_plane_eq_complex]
+  exact c.add_one_le_chromaticNumber_of_valid hd hv hG
 
 /-- **The composite.** A valid certificate whose CNF encoding is unsatisfiable pushes the chromatic
 number of the plane above `k`.

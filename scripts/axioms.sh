@@ -56,6 +56,32 @@ if [[ -n "${PURCHASED}" ]] && echo "${PURCHASED}" | grep -v 'native_decide' | gr
   BAD=1
 fi
 
+# The two ledgers must agree. `Sat/Lrat.lean` establishes the convention that every declaration
+# whose proof evaluates a certificate opens its docstring with "**Trust purchase: native
+# evaluation.**", so the *source* enumerates the purchases; the PURCHASED banner enumerates them
+# from the *environment*. A declaration in one and not the other is the failure this whole gate
+# exists to catch: a native purchase nobody wrote down, or a docstring warning about a purchase that
+# is no longer made.
+# Matches `/-- **Trust purchase:` specifically — the convention is that the phrase *opens the
+# declaration's docstring*, so prose that merely discusses the convention (as `Sat/Lrat.lean`'s
+# module docstring does, where it is a blockquote) is correctly not a ledger entry.
+SRC_LEDGER="$(awk '
+  /^\/-- \*\*Trust purchase:/ { pending = 1; next }
+  pending && /^(theorem|def|abbrev|instance) / {
+    name = $2; sub(/[^A-Za-z0-9_'"'"'.]+$/, "", name); print name; pending = 0
+  }
+' $(git -C "${REPO}" ls-files 'Proofs/**/*.lean' | sed "s|^|${REPO}/|") | sort -u)"
+
+ENV_LEDGER="$(echo "${PURCHASED}" | sed -n "s/^'[^']*\.\([^'.]*\)' depends on axioms.*/\1/p" | sort -u)"
+
+if ! DIFF="$(diff <(echo "${SRC_LEDGER}") <(echo "${ENV_LEDGER}"))"; then
+  echo "==> FAIL: the source ledger and the environment ledger disagree"
+  echo "    '<' = docstring says 'Trust purchase' but scripts/Axioms.lean never audits it"
+  echo "    '>' = audited as PURCHASED but the docstring does not warn the reader"
+  echo "${DIFF}"
+  BAD=1
+fi
+
 if [[ "${BAD}" -ne 0 ]]; then
   echo "==> axioms: FAIL"
   exit 1

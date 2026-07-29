@@ -124,22 +124,32 @@ encoding, and the only place `0 < k` is used.
 Closes by `simp [ofColoring, colorVar, Nat.mul_add_div hk, Nat.mod_eq_of_lt hc,
 Nat.div_eq_of_lt hc]`; the citation is why `colorVar` is `k * v + c`. -/
 private theorem ofColoring_colorVar (hk : 0 < k) (f : ℕ → ℕ) {v c : ℕ} (hc : c < k) :
-    ofColoring k f (colorVar k v c) = (c == f v) := sorry
+    ofColoring k f (colorVar k v c) = (c == f v) := by
+  simp [ofColoring, colorVar, Nat.mul_add_div hk, Nat.mod_eq_of_lt hc, Nat.div_eq_of_lt hc]
 
 /-- `colorFn` lands in range everywhere — in range because the coloring does, off range because the
 junk value is `0` and `0 < k`. This is where `hk` pays for the junk. -/
-private theorem colorFn_lt (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) : colorFn C v < k := sorry
+private theorem colorFn_lt (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) : colorFn C v < k := by
+  unfold colorFn
+  split
+  · exact (C _).isLt
+  · exact hk
 
 /-- `colorFn` agrees with the coloring on the range where it matters. -/
-private theorem colorFn_val (C : Fin n → Fin k) (v : Fin n) : colorFn C v.val = (C v).val := sorry
+private theorem colorFn_val (C : Fin n → Fin k) (v : Fin n) : colorFn C v.val = (C v).val := by
+  simp [colorFn, v.isLt]
 
 /-- A vertex's own colour variable is set. Half of what each clause case needs. -/
 private theorem ofColoring_self (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) :
-    ofColoring k (colorFn C) (colorVar k v (colorFn C v)) = true := sorry
+    ofColoring k (colorFn C) (colorVar k v (colorFn C v)) = true := by
+  rw [ofColoring_colorVar hk _ (colorFn_lt hk C v)]
+  simp
 
 /-- Any other colour's variable is unset. The other half. -/
 private theorem ofColoring_ne (hk : 0 < k) (C : Fin n → Fin k) {v c : ℕ} (hc : c < k)
-    (h : c ≠ colorFn C v) : ofColoring k (colorFn C) (colorVar k v c) = false := sorry
+    (h : c ≠ colorFn C v) : ofColoring k (colorFn C) (colorVar k v c) = false := by
+  rw [ofColoring_colorVar hk _ hc]
+  simpa using h
 
 /-! ### The two clause families, one lemma each
 
@@ -149,14 +159,21 @@ forty-line block. -/
 
 /-- An at-least-one clause is satisfied — witnessed at the vertex's own colour. -/
 private theorem eval_atLeastOneClause (hk : 0 < k) (C : Fin n → Fin k) (v : ℕ) :
-    CNF.Clause.eval (ofColoring k (colorFn C)) (atLeastOneClause k v) = true := sorry
+    CNF.Clause.eval (ofColoring k (colorFn C)) (atLeastOneClause k v) = true := by
+  simp only [atLeastOneClause, CNF.Clause.eval, List.any_map, List.any_eq_true, Function.comp_def,
+    List.mem_range]
+  exact ⟨colorFn C v, colorFn_lt hk C v, by simp [ofColoring_self hk C v]⟩
 
 /-- An edge clause is satisfied — because the endpoints' colours differ, colour `c` misses at least
 one of them. The case split is on `c = colorFn C u`, and each branch cites `ofColoring_ne`. -/
 private theorem eval_edgeClause (hk : 0 < k) (C : Fin n → Fin k) {u w c : ℕ} (hc : c < k)
     (hne : colorFn C u ≠ colorFn C w) :
     CNF.Clause.eval (ofColoring k (colorFn C))
-      [(colorVar k u c, false), (colorVar k w c, false)] = true := sorry
+      [(colorVar k u c, false), (colorVar k w c, false)] = true := by
+  by_cases h : c = colorFn C u
+  · have hw : c ≠ colorFn C w := by rw [h]; exact hne
+    simp [CNF.Clause.eval, ofColoring_ne hk C hc hw]
+  · simp [CNF.Clause.eval, ofColoring_ne hk C hc h]
 
 /-! ## Soundness — the only direction we prove
 
@@ -175,18 +192,36 @@ then reaches `Adj` through `edgeGraph_adj_of_mem` and `Coloring.valid` — the p
 exactly this call site. -/
 private theorem sat_coloringCNF {E : List (Fin n × Fin n)} (hk : 0 < k)
     (C : (edgeGraph n E).Coloring (Fin k)) :
-    CNF.Sat (ofColoring k (colorFn ⇑C)) (coloringCNF k n E) := sorry
+    CNF.Sat (ofColoring k (colorFn ⇑C)) (coloringCNF k n E) := by
+  simp only [CNF.Sat, CNF.eval, coloringCNF, List.all_toArray, List.all_eq_true]
+  intro cl hcl
+  rcases List.mem_append.mp hcl with h | h
+  · obtain ⟨v, -, rfl⟩ := List.mem_map.mp h
+    exact eval_atLeastOneClause hk _ v
+  · obtain ⟨e, he, hcl'⟩ := List.mem_flatMap.mp h
+    obtain ⟨c, hc, rfl⟩ := List.mem_map.mp hcl'
+    obtain ⟨heE, hbne⟩ := List.mem_filter.mp he
+    have hne : e.1 ≠ e.2 := by simpa using hbne
+    have hCne : C e.1 ≠ C e.2 := C.valid (edgeGraph_adj_of_mem hne heE)
+    have hfne : colorFn ⇑C e.1.val ≠ colorFn ⇑C e.2.val := by
+      rw [colorFn_val, colorFn_val]
+      exact fun hh => hCne (Fin.val_inj.mp hh)
+    exact eval_edgeClause hk _ (List.mem_range.mp hc) hfne
 
 /-- **The bridge.** A proper coloring makes the encoding satisfiable. Every non-colourability claim
 in the project is this theorem contraposed. -/
 theorem exists_sat_coloringCNF {E : List (Fin n × Fin n)}
     (C : (edgeGraph n E).Coloring (Fin k)) (hk : 0 < k := by norm_num) :
-    ∃ a, CNF.Sat a (coloringCNF k n E) := sorry
+    ∃ a, CNF.Sat a (coloringCNF k n E) :=
+  ⟨_, sat_coloringCNF hk C⟩
 
 /-- **The consumer's form.** An unsatisfiable encoding means no `k`-colouring — what an LRAT
 certificate is bought for. -/
 theorem not_colorable_of_unsat {E : List (Fin n × Fin n)} (h : (coloringCNF k n E).Unsat)
-    (hk : 0 < k := by norm_num) : ¬ (edgeGraph n E).Colorable k := sorry
+    (hk : 0 < k := by norm_num) : ¬ (edgeGraph n E).Colorable k := by
+  rintro ⟨C⟩
+  obtain ⟨a, ha⟩ := exists_sat_coloringCNF C hk
+  simp [CNF.Sat, h a] at ha
 
 /-! ## Cubes — the split that makes de Grey's instance solvable
 
@@ -234,20 +269,33 @@ def allCubes (k n : ℕ) : List (Fin n) → List (Cube n k)
 /-- **The covering fact.** Every coloring restricts to one of the enumerated cubes — the local
 obligation that makes the split sound. -/
 theorem cubeOf_mem_allCubes (W : List (Fin n)) (C : Fin n → Fin k) :
-    cubeOf W C ∈ allCubes k n W := sorry
+    cubeOf W C ∈ allCubes k n W := by
+  induction W with
+  | nil => simp [cubeOf, allCubes]
+  | cons v W ih =>
+      simp only [cubeOf, List.map_cons, allCubes, List.mem_flatMap, List.mem_map]
+      exact ⟨_, ih, C v, List.mem_finRange _, rfl⟩
 
 /-- The cube half of the witness `sat_coloringCNF` names. Note the hypothesis: an arbitrary
 `C : Fin n → Fin k`, not a coloring — satisfying one's own cube has nothing to do with the graph,
 and the weaker statement is the easier proof. -/
 private theorem sat_cubeCNF_cubeOf (hk : 0 < k) (W : List (Fin n)) (C : Fin n → Fin k) :
-    CNF.Sat (ofColoring k (colorFn C)) (cubeCNF k n (cubeOf W C)) := sorry
+    CNF.Sat (ofColoring k (colorFn C)) (cubeCNF k n (cubeOf W C)) := by
+  simp only [CNF.Sat, CNF.eval, cubeCNF, cubeOf, List.all_toArray, List.all_eq_true,
+    List.map_map, Function.comp_def]
+  intro cl hcl
+  obtain ⟨v, -, rfl⟩ := List.mem_map.mp hcl
+  simp [CNF.Clause.eval, ← colorFn_val C v, ofColoring_self hk C v.val]
 
 /-- A coloring makes the encoding *and its own cube* simultaneously satisfiable — one assignment for
 both halves, which is what the split turns on. Proof: `CNF.eval_append` splits the goal and the two
 private witness lemmas close the halves, with the *same* assignment on both. -/
 theorem exists_sat_coloringCNF_cube {E : List (Fin n × Fin n)} (W : List (Fin n))
     (C : (edgeGraph n E).Coloring (Fin k)) (hk : 0 < k := by norm_num) :
-    ∃ a, CNF.Sat a (coloringCNF k n E ++ cubeCNF k n (cubeOf W ⇑C)) := sorry
+    ∃ a, CNF.Sat a (coloringCNF k n E ++ cubeCNF k n (cubeOf W ⇑C)) :=
+  ⟨ofColoring k (colorFn ⇑C), by
+    simp only [CNF.Sat, CNF.eval_append, Bool.and_eq_true]
+    exact ⟨sat_coloringCNF hk C, sat_cubeCNF_cubeOf hk W ⇑C⟩⟩
 
 /-- **The split.** If every cube over `W` makes the encoding unsatisfiable, the graph has no
 `k`-colouring.
@@ -272,7 +320,10 @@ prefer the tuple past ~100 cubes; it also reports *every* mismatched entry rathe
 theorem not_colorable_of_cubes {E : List (Fin n × Fin n)} (W : List (Fin n))
     (cubes : List (Cube n k)) (hcover : allCubes k n W = cubes)
     (h : ∀ cb ∈ cubes, (coloringCNF k n E ++ cubeCNF k n cb).Unsat)
-    (hk : 0 < k := by norm_num) : ¬ (edgeGraph n E).Colorable k := sorry
+    (hk : 0 < k := by norm_num) : ¬ (edgeGraph n E).Colorable k := by
+  rintro ⟨C⟩
+  obtain ⟨a, ha⟩ := exists_sat_coloringCNF_cube W C hk
+  simp [CNF.Sat, h _ (hcover ▸ cubeOf_mem_allCubes W ⇑C) a] at ha
 
 /-! ## The independent route: deciding colourability directly
 
@@ -291,14 +342,22 @@ Also the way to *exhibit* a colouring: `colorable_iff_exists.mpr ⟨myColoring, 
 simp only [edgeGraph_adj]; decide⟩`. The `simp only` is what carries the goal out of graph
 vocabulary — there is deliberately no `DecidableRel (edgeGraph n E).Adj` instance. -/
 theorem colorable_iff_exists {G : SimpleGraph (Fin n)} :
-    G.Colorable k ↔ ∃ f : Fin n → Fin k, ∀ i j, G.Adj i j → f i ≠ f j := sorry
+    G.Colorable k ↔ ∃ f : Fin n → Fin k, ∀ i j, G.Adj i j → f i ≠ f j :=
+  ⟨fun ⟨C⟩ => ⟨C, fun _ _ h => C.valid h⟩,
+   fun ⟨f, hf⟩ => ⟨SimpleGraph.Coloring.mk f fun {i j} h => hf i j h⟩⟩
 
 /-- A monochromatic edge, translated between graph vocabulary and list vocabulary. Split out from
 `not_colorable_edgeGraph_iff` because it is a different argument: that theorem pushes a negation
 through a quantifier, this one crosses the `Adj`-to-membership seam, and the symmetric case
 (`(j, i) ∈ E`) lives here where it is two `.symm`s rather than a detour mid-proof. -/
 private theorem exists_adj_eq_iff {E : List (Fin n × Fin n)} {f : Fin n → Fin k} :
-    (∃ i j, (edgeGraph n E).Adj i j ∧ f i = f j) ↔ ∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2 := sorry
+    (∃ i j, (edgeGraph n E).Adj i j ∧ f i = f j) ↔ ∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2 := by
+  constructor
+  · rintro ⟨i, j, ⟨hne, hij | hji⟩, hf⟩
+    · exact ⟨(i, j), hij, hne, hf⟩
+    · exact ⟨(j, i), hji, hne.symm, hf.symm⟩
+  · rintro ⟨e, he, hne, hf⟩
+    exact ⟨e.1, e.2, edgeGraph_adj_of_mem hne he, hf⟩
 
 /-- Non-colourability of an edge-list graph, phrased over the list and closed by `decide`. The
 right-hand side mentions no `Adj` and no `SimpleGraph`, so the kernel sees only `Fin` arithmetic
@@ -312,7 +371,10 @@ apply: without it a listed self-loop would satisfy the right-hand side for every
 graph "non-colourable" on no evidence. -/
 theorem not_colorable_edgeGraph_iff {E : List (Fin n × Fin n)} :
     ¬ (edgeGraph n E).Colorable k ↔
-      ∀ f : Fin n → Fin k, ∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2 := sorry
+      ∀ f : Fin n → Fin k, ∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2 := by
+  rw [colorable_iff_exists]
+  push Not
+  simp only [← exists_adj_eq_iff]
 
 /-! ## Spec checks
 
