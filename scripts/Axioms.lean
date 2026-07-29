@@ -31,9 +31,10 @@ splits on them, and the rule is mechanical:
   (`grep -rn "Trust purchase" Proofs/` is the source-side ledger), and to an entry in
   `ARCHITECTURE.md` § 5. `sorryAx` still fails here.
 
-`moserSpindle_valid` is the one to watch in the clean section: it is discharged by `decide`, so it
-is the first declaration in this development whose truth rests on kernel *reduction* rather than on
-a written proof — and it stays inside the standard axiom set.
+`moserSpindle_valid` and `deGrey_valid` are the ones to watch in the clean section: both rest on
+kernel *reduction* rather than on a written proof, and both stay inside the standard axiom set.
+`deGrey_valid` is 7877 exact identities decided in 158 chunks — the geometry half of `χ(ℝ²) ≥ 5`,
+bought with no native evaluation at all.
 -/
 
 open HadwigerNelson
@@ -67,7 +68,6 @@ open HadwigerNelson
 #print axioms UDCert.valid_of_chunks
 #print axioms UDCert.valid_sound
 #print axioms UDCert.add_one_le_chromaticNumber_of_valid
-#print axioms moserSpindleChunk0_valid
 #print axioms moserSpindle_valid
 
 /-! ## M03 — the SAT bridge
@@ -95,6 +95,19 @@ clean regardless of how the hypothesis was obtained. -/
 #print axioms exists_sat_coloringCNF_four
 #print axioms moserSpindleCubes_eq
 #print axioms four_le_chromaticNumber_plane
+
+/-! ## M04 — de Grey's 1581 vertices, certified
+
+`deGrey_valid` is the milestone: 7877 edges, each an exact identity in `ℚ(√3,√5,√7,√11)`, decided
+by kernel reduction in 158 chunks. Nothing here is native — the whole geometry half of `χ(ℝ²) ≥ 5`
+stays inside the standard axiom set, and `deGrey_bound_of_not_colorable` shows what a fifth colour
+would still cost: one hypothesis, no geometry. -/
+
+#print axioms UDCert.validOn_flatten
+#print axioms UDCert.badEdges_eq_nil_iff
+#print axioms deGrey_valid
+#print axioms deGrey_unit_distances
+#print axioms deGrey_bound_of_not_colorable
 
 #eval IO.println "=== PURCHASED ==="
 

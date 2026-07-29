@@ -360,7 +360,58 @@ that name the offending edge. The tuning rationale lives in this plan, once.
 | 18 | Generated geometry modules carry the recovery commands | Leave the recovery instructions in `Certificate.lean`, where they already were | At the moment of failure the author is looking at the generated file, and context not on screen does not exist | **High** |
 | 19 | `valid_of_chunks` keeps `∀ ch ∈ chunks`, and the call site keeps the standard bridge | Take `List.Forall` so the one generated call site drops a name | Cold-read, the bridge's name says what it does, and there is exactly one caller — not enough evidence to specialise a general lemma to a literal-list encoding | **Medium** — one call site is thin evidence; if M06 generates many, revisit |
 
-## 7. Carried forward
+## 7. What landed (implementation, 2026-07-28)
+
+`deGrey_valid` is green: **all 7877 of de Grey's claimed edges have exact squared distance `768²`**
+in `ℚ(√3,√5,√7,√11)`, decided by the kernel in 158 chunks, axioms `[propext, Quot.sound]`. No native
+evaluation anywhere in the geometry — the larger of the two computations the project rests on is
+entirely kernel-checked.
+
+### The run, against the projection
+
+| | projected | actual |
+|---|---|---|
+| processor time, geometry | ~357 s | ~6 min across 16 modules |
+| wall clock, 5 jobs at a time | ~2–3 min | **1 min 49 s**, whole build |
+| peak per job | ~3.7 GB | fit in 23 GB at 5 concurrent, no swapping |
+
+Lake 5.0.0 has no `-j` flag, so the build was batched five modules at a time by naming targets
+explicitly. Worth knowing for M05: **the concurrency cap has to be imposed by hand.**
+
+### The gate
+
+| check | result |
+|---|---|
+| `lake build` | green, 3178 jobs |
+| `sorry` | **0** |
+| `lake exe runLinter Proofs` | passed |
+| `./scripts/axioms.sh` | OK — 42 clean, 5 declared purchases (all M03's) |
+| `./scripts/lean4checker.sh` | OK — **33 modules** replayed through an independent kernel |
+| spec checks | all pass, including `deGrey.badEdges` empty by compiled evaluation |
+
+The independent replay is the part worth naming: de Grey's 7877 distance identities have now been
+recomputed by a second kernel implementation, not only by the one that built them.
+
+### The gate hole this milestone found
+
+`scripts/Axioms.lean` named `moserSpindleChunk0_valid`, a declaration the regenerated spindle file
+no longer defines. The audit file therefore failed to elaborate — and under `set -e`, the failing
+command substitution aborted `axioms.sh` **with no output and no visible failure**, so a piped
+invocation read as a pass. The trust receipt was failing open.
+
+Fixed: the script captures the status explicitly and says what happened. Verified with a negative
+control (append a nonexistent name → exit 1, naming it).
+
+This is the **second** instance of this failure mode here — M03's was a two-ledger comparison
+documented as running when it was not. The pattern is the same: a check that reports nothing when it
+cannot run. Worth a standing habit at every milestone — *make the gate fail, and watch it fail*,
+rather than only watching it pass.
+
+| # | Choice | Alternative weighed | Why this one | Confidence |
+|---|---|---|---|---|
+| 20 | The audit script fails loudly when its own audit file will not elaborate | Just fix the stale name and move on | The stale name was the symptom; a receipt that fails open is the defect, and it would have recurred at every rename | **High** — negative control run |
+
+## 8. Carried forward
 
 ### From M02 (superseded where noted)
 

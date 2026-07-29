@@ -146,9 +146,11 @@ Std.Sat ─┤
          └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
                   ├─► Instances/SpindleBound.lean       χ ≥ 4, three routes              [M03]
                   │        └─► Instances/SpindleLrat.lean   certificates — generated     [M03]
-                  └─► Instances/DeGrey/Verts.lean       1581 points — its OWN module  [M04]
-                           ├─► Instances/DeGrey/Chunk00.lean … Chunk31.lean   ~250 edges each
-                           └─► Instances/DeGrey.lean    glue, Valid, χ ≥ 5        [M04–M05]
+                  └─► Instances/DeGrey/Table.lean    1581 points, its OWN module     [M04]
+                           └─► Instances/DeGrey/Edges.lean   158 chunks; edges := flatten
+                                    ├─► Instances/DeGrey/Geom00 … Geom15.lean   500 edges each
+                                    └─► Instances/DeGrey/Valid.lean   the 158 cited, not redecided
+                                             └─► Instances/DeGrey.lean   the claims, the hand-off
 
 Proofs.lean          — flat public surface
 tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
@@ -163,7 +165,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M01** ✅ | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
 | **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
 | **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
-| **M04** | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | `deGrey.Valid = true`; vertex/edge counts match the paper (397 / 1581 / 7877 — already reproduced by `tools/degrey.py`). |
+| **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
 | **M05** | **χ(ℝ²) ≥ 5.** Cube split, certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. |
 | **M06** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
 | **M07** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. |
@@ -192,7 +194,7 @@ axiom foo._native.native_decide.ax_1_1 : decide (…) = true
 An audit that looks only for `Lean.ofReduceBool` passes a native purchase in silence. Found
 2026-07-27; the audit now greps for `native_decide.ax`.
 
-### The purchases, as of M03
+### The purchases, as of M04
 
 Five declarations, all in `Instances/SpindleBound.lean`, all buying the same thing: the evaluation
 of `LRAT.check` on a CaDiCaL certificate.
@@ -205,6 +207,10 @@ of `LRAT.check` on a CaDiCaL certificate.
 | `moserSpindle_not_colorable_three_cubes` | (inherits) | route C's conclusion |
 | `four_le_chromaticNumber_plane_certified` | (inherits) | route C composed with the geometry |
 
+**M04 added no purchases.** The geometry of de Grey's 1581-vertex graph — the larger of the two
+computations the project rests on — is entirely kernel-checked: `deGrey_valid` reports `[propext,
+Quot.sound]`. Every native axiom in the project is still one of the ten below.
+
 **The headline bound buys nothing.** `four_le_chromaticNumber_plane` goes through route A —
 `decide +kernel` over all `3 ^ 7` colourings — and reports exactly `propext, Classical.choice,
 Quot.sound`. The certificate routes exist beside it as cross-checks, and every one of them is a
@@ -216,8 +222,16 @@ Proofs/`), and each is listed under the `PURCHASED` banner in `scripts/Axioms.le
 environment-side ledger). `scripts/axioms.sh` extracts both and fails on any disagreement — a
 purchase with no docstring warning, or a docstring warning about a purchase no longer made.
 
-Independently re-checked: `scripts/lean4checker.sh` replays all 13 `Proofs` modules through
-lean4checker's separate kernel. Green at M03.
+Independently re-checked: `scripts/lean4checker.sh` replays all 33 `Proofs` modules through
+lean4checker's separate kernel. Green at M04 — which means de Grey's 7877 exact distance identities
+have been recomputed by a second kernel implementation, not just the one that built them.
+
+**The audit can stop auditing, and did.** At M04 `scripts/Axioms.lean` named a declaration that a
+regenerated file no longer defined. Under `set -e` the failing command substitution aborted
+`axioms.sh` with *no output and no visible failure*, so a piped invocation read as a pass. The
+script now captures the status explicitly and reports it. A trust receipt that fails open is worse
+than none, and this is the second instance of that failure mode in this project (the first: the
+two-ledger comparison at M03, documented above as running when it did not).
 
 Two `Bool`s carry the weight, and each has a kernel route and a native route:
 

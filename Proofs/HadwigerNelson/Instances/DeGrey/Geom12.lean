@@ -22,15 +22,15 @@ a valid certificate (`UDCert.badEdges_eq_nil_iff`).
 
 namespace HadwigerNelson
 
-theorem deGreyChunk120_valid : deGrey.ValidOn deGreyChunk120 = true := sorry
-theorem deGreyChunk121_valid : deGrey.ValidOn deGreyChunk121 = true := sorry
-theorem deGreyChunk122_valid : deGrey.ValidOn deGreyChunk122 = true := sorry
-theorem deGreyChunk123_valid : deGrey.ValidOn deGreyChunk123 = true := sorry
-theorem deGreyChunk124_valid : deGrey.ValidOn deGreyChunk124 = true := sorry
-theorem deGreyChunk125_valid : deGrey.ValidOn deGreyChunk125 = true := sorry
-theorem deGreyChunk126_valid : deGrey.ValidOn deGreyChunk126 = true := sorry
-theorem deGreyChunk127_valid : deGrey.ValidOn deGreyChunk127 = true := sorry
-theorem deGreyChunk128_valid : deGrey.ValidOn deGreyChunk128 = true := sorry
-theorem deGreyChunk129_valid : deGrey.ValidOn deGreyChunk129 = true := sorry
+theorem deGreyChunk120_valid : deGrey.ValidOn deGreyChunk120 = true := by decide +kernel
+theorem deGreyChunk121_valid : deGrey.ValidOn deGreyChunk121 = true := by decide +kernel
+theorem deGreyChunk122_valid : deGrey.ValidOn deGreyChunk122 = true := by decide +kernel
+theorem deGreyChunk123_valid : deGrey.ValidOn deGreyChunk123 = true := by decide +kernel
+theorem deGreyChunk124_valid : deGrey.ValidOn deGreyChunk124 = true := by decide +kernel
+theorem deGreyChunk125_valid : deGrey.ValidOn deGreyChunk125 = true := by decide +kernel
+theorem deGreyChunk126_valid : deGrey.ValidOn deGreyChunk126 = true := by decide +kernel
+theorem deGreyChunk127_valid : deGrey.ValidOn deGreyChunk127 = true := by decide +kernel
+theorem deGreyChunk128_valid : deGrey.ValidOn deGreyChunk128 = true := by decide +kernel
+theorem deGreyChunk129_valid : deGrey.ValidOn deGreyChunk129 = true := by decide +kernel
 
 end HadwigerNelson

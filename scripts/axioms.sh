@@ -19,7 +19,16 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "${REPO}/scripts/dev-env.sh"
 
-RAW="$(cd "${REPO}" && lake env lean scripts/Axioms.lean)"
+# Capture the status explicitly. Under `set -e` a failing command substitution aborts the script
+# with no output at all, so an audit file that stops elaborating — a declaration renamed or removed
+# without updating it, which is exactly what this gate exists to catch — would look like a silent
+# pass to anyone who piped the output. Found the hard way at M04.
+if ! RAW="$(cd "${REPO}" && lake env lean scripts/Axioms.lean 2>&1)"; then
+  echo "${RAW}"
+  echo "==> axioms: FAIL — scripts/Axioms.lean did not elaborate (above)."
+  echo "    A missing constant here means the audit is no longer auditing what it names."
+  exit 1
+fi
 echo "${RAW}"
 echo
 
