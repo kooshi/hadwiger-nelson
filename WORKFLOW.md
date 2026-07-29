@@ -11,7 +11,12 @@ leaves.
    `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent.
    Validate the spec right there, where a wrong statement is cheap: `#eval` the definitions, keep a
    sanity `example` per definition, and exhibit one concrete model of the hypotheses before trusting
-   anything that assumes them. Refine scope here: if a milestone is bigger than it looked, push the
+   anything that assumes them.
+   **Where cost decides the shape, measure before specifying, not after.** At this project's scale a
+   representation choice is routinely a 3–5× difference, and it is invisible until measured: M04's
+   vertex table and its squared-distance definition each turned out that way, and because both were
+   settled with numbers in the subplan, implementation overturned nothing. A shape chosen from
+   plausibility and then benchmarked is a shape you will rewrite. Refine scope here: if a milestone is bigger than it looked, push the
    excess to a later milestone — and whenever we carry scope forward, drop a subplan **stub** in
    `plans/` capturing the carry-forward notes → `plans/<Mxx-milestone>.md`.
 4. **Commit** the subplan (skeleton included) and move directly to modeling without pausing.

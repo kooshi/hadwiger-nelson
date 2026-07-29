@@ -82,7 +82,29 @@ shell gets the same via `.claude/settings.local.json`.
 
 The toolchain also ships **`cadical`** at `$(lean --print-prefix)/bin/cadical` — no external SAT
 solver needs installing. It is single-threaded; use `tools/portfolio.sh` (config race) and the
-colour-cube split (embarrassingly parallel, one run per cube) to use the machine's 32 cores.
+colour-cube split (embarrassingly parallel, one run per cube) to use whatever cores you have.
+
+**Two machines.** A desktop (32 cores, 128 GB) and a laptop (12 cores, 31 GB). `nproc` disagreeing
+with a number written in a plan is the hardware moving, not an error — **ask which machine before
+treating a core or memory count as fact**, and ask to swap to the desktop when a step actually wants
+it (the SAT solving does; nothing else so far has). Timings recorded in `plans/` are only comparable
+within one machine: per-edge and per-operation *ratios* carry across, wall-clock totals and safe
+parallel-job counts do not. Measure in **CPU seconds (user + sys), minimum of three runs** — other
+builds on the box have inflated wall-clock readings 5× — and name the machine beside any number you
+write down.
+
+**Capping build concurrency is manual.** Lake 5.0.0 has no `-j`. It will launch `nproc` compilers,
+and this project's data modules peak at several GB each, so a default `lake build` can exhaust
+memory. Cap it by naming targets in batches:
+
+```bash
+lake build Proofs.…​.Geom00 Proofs.…​.Geom01 …   # one batch; at most this many run at once
+```
+
+**`decide +kernel`, not `decide`, for anything large.** Plain `decide` reduces the `Decidable`
+instance twice — once in the elaborator, once in the kernel — so it is ~2× slower and dies on
+`maxHeartbeats` well before the kernel itself would struggle. `+kernel` needs no `set_option` knob
+and buys the same axioms.
 
 ## The package
 The **`proofs`** package (`lakefile.toml`): library **`Proofs`** (`Proofs.lean` is the flat import
@@ -107,3 +129,25 @@ failure here:
 
 The InfoView is continuous testimony at zero cost — save and read the goal state after every step
 rather than debugging by guess.
+
+### Make the gate fail, and watch it fail
+
+**Run every check's negative control at every milestone.** Break the thing it guards on purpose,
+confirm it goes red and names the culprit, then put it back. A check is not known to work until it
+has been seen to fail.
+
+This is not a precaution, it is a repair. Twice now a gate here has been *failing open*:
+
+* M03 — `Sat/Lrat.lean` stated that the gate compared the source-side and environment-side ledgers
+  of native-evaluation purchases. It did not; both were maintained by hand and by hope.
+* M04 — `scripts/Axioms.lean` named a declaration a regenerated file no longer defined, so the audit
+  would not elaborate. Under `set -e`, the failing command substitution aborted `axioms.sh` with **no
+  output and no visible failure**, and a piped invocation read as a pass.
+
+Same shape both times: *a check that reports nothing when it cannot run.* A trust receipt that fails
+open is worse than none, because it is believed. When writing a check, make its failure path louder
+than its success path — and never let a shell pipeline swallow an exit status the gate depends on.
+
+The same discipline applies to the claims themselves: a `#guard` that could not fail proves nothing,
+so every discriminating check needs a partner that goes red — a certificate filed against the wrong
+problem, a vertex moved off the unit circle, a satisfiable formula handed to the checker.
