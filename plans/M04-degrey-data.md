@@ -140,7 +140,74 @@ on the plane whoever first drew it.
 
 ---
 
-## 4. Carried forward
+## 4. Domain-modeling pass
+
+**Measurement correction first.** § 1's figures were wall clock, taken while another project on this
+machine was saturating all 12 cores. Re-measured as **CPU seconds (user + sys), minimum of three
+runs**, they hold: `![…]` **0.219 s/edge** against `PtTable` **0.059 s/edge**, baseline 1.6–1.8 s.
+Read every projection in § 1 as CPU seconds. All figures below use the corrected method.
+
+### The one change the pass forced: squared distance is a sum of *squares*
+
+`Pt.distSq` was written `(p.x - q.x) * (p.x - q.x) + (p.y - q.y) * (p.y - q.y)`. The kernel cannot
+see that the two factors are the same term, so it ran the general product — and in a quadratic
+extension the general product is genuinely more expensive than a square:
+
+| | sub-products per level | leaf multiplications per `Q4` operation |
+|---|---|---|
+| `(a + b√d)(c + e√d)` | 4 | 256 |
+| `(a + b√d)²` | 3 | 136 |
+
+So the definition was asking the kernel to pay for a generality the expression never had. `FastSq`
+is the fix — a class carrying a fast squaring together with the proof that it agrees with the
+product, which is the *second* member of the family `NatScalar` already started in the same file for
+the same reason. Measured in situ against the real certificate, 400 edges, minimum of three:
+
+| `Pt.distSq` spelled as | per edge | full 7877 edges |
+|---|---|---|
+| `x * x` | 0.0625 s | 492 s |
+| `FastSq.sq x` | **0.0453 s** | **357 s** |
+
+The 1.38× matches the 512→272 leaf-multiplication prediction, which is the reason to believe it is
+structural rather than a lucky run.
+
+### The other four questions, and why nothing else moved
+
+**The pivot is memoization, not redundancy.** `node m l r`'s `m` is `l`'s leaf count and *is*
+recoverable from `l` — but recovering it costs a traversal per lookup, which is the whole structure
+thrown away. Storing it makes illegal states (pivot ≠ subtree size) representable, and that turns
+out to be harmless for a reason worth stating precisely, because the pass established it rather than
+assumed it: the reduction pulls a colouring **back** along the vertex map, so it needs neither
+injectivity nor any correctness property of the table. *Any* map `Fin n → Pt` whose listed pairs
+check out yields a true bound. A wrong table makes `Valid` false; it cannot make a theorem false.
+
+Indexing the table by its size — `PtTable : ℕ → Type` with `node : PtTable a → PtTable b →
+PtTable (a + b)` and `get : PtTable n → Fin n → Pt` — would make the junk unrepresentable and the
+truncating `Nat` subtraction total-by-discharge. **Rejected**: it taxes every context that mentions
+the type with an index no consumer inspects, and it buys protection against a failure mode the
+soundness argument already makes impossible. Extrinsic placement, per the rule.
+
+**`toVerts {n}` correctly discards the bound** — the table inspects `n` nowhere.
+
+**The chunking is incidental structure, correctly kept out of the type.** The test: if the memory
+budget changed tomorrow, what would move? Only the generated term (`edges := [one big literal]`). No
+type, no theorem, no consumer. That is exactly the mark of incidental structure that belongs in the
+term, and the type — a flat `List (Fin n × Fin n)` — stays the honest image of what an edge list is.
+
+**Chunk lists stay `List (Fin n × Fin n)`.** Grouping by source vertex (`List (Fin n × List (Fin n))`)
+would cut lookups from 2 per edge to ~1.2, worth roughly 45 s. **Rejected**: it makes the flat edge
+list derived rather than primary, and M05's certificates index edges by position.
+
+**The representation earns the next lemma.** M06 (shrinking) will want "a sublist of a valid edge
+list is valid". It states in one line from `validOn_iff`, in the existing vocabulary, with no
+restatement — which is the convergence signal this pass looks for.
+
+| # | Choice | Alternative weighed | Why this one | Confidence |
+|---|---|---|---|---|
+| 10 | `Pt.distSq` uses a fast squaring (`FastSq`) | Leave `x * x` — 2.5 minutes is not a bottleneck | The definition is a sum of squares and was not saying so; the speed follows from the faithfulness. 1.38× measured, matching the leaf-count prediction, and it compounds through M06's repeated re-verification | **High** on the number (measured in situ, min of 3, theory-confirmed); **medium** on whether ~25 lines was worth 2.5 minutes — if M06 turns out not to re-verify geometry repeatedly, this was a thin win |
+| 11 | The vertex table keeps its junk value out of range | Index `PtTable` by its size so the index arithmetic discharges the bound | The soundness argument needs nothing at all from the table, so the index would protect against an impossible failure while taxing every context that mentions the type | **High** — established by reading the reduction, not assumed |
+
+## 5. Carried forward
 
 ### From M02 (superseded where noted)
 

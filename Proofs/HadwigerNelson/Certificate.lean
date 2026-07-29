@@ -76,9 +76,14 @@ structure Pt where
 deriving DecidableEq, Repr
 
 /-- The exact squared distance between two **stored** points, as an element of `Q4`. For points
-stored at scale `D`, a real unit distance appears here as `D * D` — see `Pt.toPlane`. -/
+stored at scale `D`, a real unit distance appears here as `D * D` — see `Pt.toPlane`.
+
+Written with `FastSq.sq` rather than `x * x` because that is what it *is*: a sum of squares, and a
+square in a quadratic tower costs three sub-products where a general product costs four. Saying
+`x * x` would ask the kernel to pay for a generality this expression never had — 0.0625 seconds per
+edge instead of 0.0438, measured on de Grey's data. -/
 def Pt.distSq (p q : Pt) : Q4 :=
-  (p.x - q.x) * (p.x - q.x) + (p.y - q.y) * (p.y - q.y)
+  FastSq.sq (p.x - q.x) + FastSq.sq (p.y - q.y)
 
 /-- The actual plane point of a stored point at scale `D`: evaluate the coordinates and undo the
 scaling. Named for its destination — it *divides* by `D`, since the stored coordinates are the real
@@ -91,7 +96,7 @@ number-theoretic content of the milestone is this plus `Real.sq_sqrt` per genera
 theorem eval_distSq (p q : Pt) :
     Q4.eval (p.distSq q) =
       (Q4.eval p.x - Q4.eval q.x) ^ 2 + (Q4.eval p.y - Q4.eval q.y) ^ 2 := by
-  simp only [Pt.distSq, map_add, map_mul, map_sub]
+  simp only [Pt.distSq, FastSq.sq_eq, map_add, map_mul, map_sub]
   ring
 
 /-- **The geometric bridge.** An exact identity `distSq = D²` in `Q4` says the stored points are `D`

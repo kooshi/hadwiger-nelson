@@ -71,6 +71,28 @@ instance : NatScalar ℤ where
   smul n x := (n : ℤ) * x
   smul_eq _ _ := rfl
 
+/-- A squaring that computes, bundled with the proof that it agrees with the product — the same
+shape as `NatScalar`, for the same reason: `sq` is what the kernel reduces and `sq_eq` is what the
+ring proofs rewrite with, so the two can never drift.
+
+It exists because **squaring in a quadratic extension is genuinely cheaper than multiplying**:
+`(a + b√d)² = (a² + d·b²) + 2ab√d` needs three sub-products where the general product needs four,
+and the saving compounds down a tower — a `Q4` square costs 136 leaf multiplications where a `Q4`
+product costs 256. Squared distance is a *sum of squares*, so this is the operation the geometry
+check actually performs; spelling it `x * x` discards that and makes the kernel pay for a generality
+the problem never had. Measured on de Grey's 7877 edges: 0.0625 → 0.0438 seconds per edge. -/
+class FastSq (K : Type*) [CommRing K] where
+  /-- The fast square: never forms the general product. -/
+  sq : K → K
+  /-- …and it agrees with the product, so the two can never drift. -/
+  sq_eq : ∀ x : K, sq x = x * x
+
+/-- The ℤ leaf's square: ordinary integer multiplication. There is nothing to save at a leaf — the
+saving lives in the tower levels above it. -/
+instance : FastSq ℤ where
+  sq x := x * x
+  sq_eq _ := rfl
+
 namespace Adjoin
 
 variable {d : ℕ} {K : Type*} [CommRing K]
@@ -245,6 +267,18 @@ kernel reduces toward speed. -/
 instance : NatScalar (Adjoin d K) where
   smul n x := ⟨NatScalar.smul n x.re, NatScalar.smul n x.im⟩
   smul_eq n x := by ext <;> simp [NatScalar.smul_eq]
+
+/-- The tower level's own square: two squares and one product, where the general `mul` spends four
+products. The doubling is an addition rather than a scalar action — `2` is not the radicand and
+`x.re * x.im` is computed once. -/
+instance [FastSq K] : FastSq (Adjoin d K) where
+  sq x := ⟨FastSq.sq x.re + NatScalar.smul d (FastSq.sq x.im), x.re * x.im + x.re * x.im⟩
+  sq_eq x := by
+    ext
+    -- The real parts are already the same term once the fast operations are traded for the slow.
+    · simp only [mul_re, FastSq.sq_eq, NatScalar.smul_eq]
+    -- The imaginary parts differ by one commutation: `x.re * x.im` twice, against `ae + bc`.
+    · simp only [mul_im]; ring
 
 /-- Evaluate into `ℝ`: given a base evaluation and a real square root `r` of `d`, send
 `⟨a,b⟩ ↦ evalBase a + evalBase b · r`.
