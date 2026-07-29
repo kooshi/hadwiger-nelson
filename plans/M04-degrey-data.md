@@ -372,8 +372,14 @@ that name the offending edge. The tuning rationale lives in this plan, once.
   right, and confirmed**: 32 s and 3.75 GB, paid once.
 * Routing arithmetic through Mathlib's hierarchy still costs nothing, provided `Adjoin` keeps
   exactly one arithmetic instance.
-* `CLAUDE.md` says this machine has 32 cores. It has **12**. Parallelism is capped by memory at ~5
-  concurrent `lean` processes anyway.
+* **Two machines.** `CLAUDE.md`'s "32 cores" describes the desktop (32 cores, 128 GB); everything in
+  this plan was measured on the laptop (12 cores, 31 GB, ~20 GB free), which is where M04 was
+  subplanned. Not an error in `CLAUDE.md` — the hardware changed under it. Per-edge costs are
+  ratios and carry across; only the wall-clock projections are laptop-specific, and memory caps
+  useful parallelism at ~5 concurrent `lean` processes there regardless of core count.
+* M04 does not need the desktop: ~6 minutes of processor time, ~3.7 GB per job. **M05 probably
+  does** — the colour-cube split is embarrassingly parallel, so the solver run scales with cores,
+  and that is the one step in the project whose runtime is not already small.
 
 ### To M05
 
