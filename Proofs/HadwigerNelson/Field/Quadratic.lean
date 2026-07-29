@@ -49,7 +49,7 @@ structure Adjoin (d : ℕ) (K : Type*) where
   re : K
   /-- The coefficient of `√d`. -/
   im : K
-deriving DecidableEq, Repr
+deriving DecidableEq
 
 /-- A ℕ-scalar action that computes, bundled with the proof that it agrees with the ring cast.
 
@@ -96,6 +96,19 @@ instance : FastSq ℤ where
 namespace Adjoin
 
 variable {d : ℕ} {K : Type*} [CommRing K]
+
+/-- Print a tower element the way the domain writes it — `589824`, `3·√11`, `(2 + 3·√5)` — rather
+than as the nested pair it is stored as, dropping components that are zero.
+
+This is not decoration. A `Q4` value has sixteen components and the one or two that carry the answer
+are what a reader needs; the derived representation prints all sixteen, so the number a failing
+certificate is trying to report arrives buried in fifteen zeros and four levels of `{ re := …,
+im := … }`. Every diagnostic in this development is read through this instance. -/
+instance instRepr [Repr K] [DecidableEq K] : Repr (Adjoin d K) where
+  reprPrec x _ :=
+    if x.im = 0 then repr x.re
+    else if x.re = 0 then f!"{repr x.im}·√{d}"
+    else f!"({repr x.re} + {repr x.im}·√{d})"
 
 /-! ### Arithmetic — the operations the kernel reduces
 
@@ -315,5 +328,21 @@ noncomputable def Q4.eval : Q4 →+* ℝ :=
     (Real.sqrt 5) (by rw [Real.sq_sqrt] <;> norm_num))
     (Real.sqrt 7) (by rw [Real.sq_sqrt] <;> norm_num))
     (Real.sqrt 11) (by rw [Real.sq_sqrt] <;> norm_num)
+
+/-! ### The rendered form, pinned
+
+Every diagnostic in this development is read through `Adjoin.instRepr`, so the *rendered text* is
+the product here, not the instance behind it. These pin it: a plain integer, a lone radical, and a
+nested two-term value, which between them exercise all three branches. If any of these lines
+changes, someone reading a failing certificate is reading something different. -/
+
+/-- info: 7 -/
+#guard_msgs in #eval (7 : Q4)
+
+/-- info: 1·√3 -/
+#guard_msgs in #eval (⟨⟨⟨⟨0,1⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩ : Q4)
+
+/-- info: ((2 + 3·√3) + 5·√3·√11) -/
+#guard_msgs in #eval (⟨⟨⟨⟨2,3⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,5⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩ : Q4)
 
 end HadwigerNelson

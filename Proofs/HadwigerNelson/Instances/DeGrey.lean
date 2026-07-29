@@ -26,12 +26,24 @@ Checked here, by the kernel, from exact integers:
   1581, 7877), but that agreement is a property of the generator, not a theorem. It does not need to
   be one: a certificate does not claim provenance, it claims geometry, and a bound proved from *some*
   1581-point unit-distance graph is a bound on the plane whoever first drew it.
-* that the graph needs five colours. That is milestone M05.
+* that the graph needs five colours. That is the next milestone — a SAT solver's
+  refutation, re-checked here from a certificate the proof checker replays itself.
 
 ## The hand-off
 
-`deGrey_bound_of_not_colorable` states exactly what remains: supply "this graph has no 4-colouring"
-and the bound `χ(ℝ²) ≥ 5` follows. Every geometric obligation is already discharged inside it.
+`deGrey_bound_of_not_colorable` states exactly what remains: supply "this graph has no
+4-colouring" and the bound `χ(ℝ²) ≥ 5` follows. Every geometric hypothesis is already discharged
+inside it.
+
+## If the geometry ever fails to check
+
+```lean
+#eval deGrey.badEdges     -- every offending pair, and the squared distance it actually has
+#eval deGrey.denomSq      -- the squared distance a real unit edge must show
+```
+
+Both run compiled, so they are instant at this size, and an empty `badEdges` is exactly a valid
+certificate (`UDCert.badEdges_eq_nil_iff`).
 -/
 
 namespace HadwigerNelson

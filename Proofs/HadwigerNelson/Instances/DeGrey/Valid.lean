@@ -18,8 +18,16 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Geom15
 /-!
 # `deGrey` — the geometry, glued
 
-The 158 chunk theorems are **cited**, never re-decided: `by decide +kernel`
-here would redo every edge and double the cost of the milestone.
+`deGrey_valid` below is the whole geometric claim in one line: all 7877 listed
+pairs are exactly one unit apart. It is assembled from the 158 per-chunk
+theorems, which are *cited* — deciding again here would repeat every edge.
+
+The argument is `∀ chunk, the chunk checks`, supplied as one tuple; `List.Forall` over a
+literal list is a nested conjunction, and `List.forall_iff_forall_mem` is the standard
+bridge from that to the membership form the lemma takes.
+
+**This file is generated bookkeeping.** For what `deGrey` does and does not certify,
+read `Instances/DeGrey.lean`.
 -/
 
 namespace HadwigerNelson

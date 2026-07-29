@@ -157,7 +157,9 @@ def PtTable.toVerts (t : PtTable) {n : ℕ} : Fin n → Pt := fun i => t.get i.v
 /-- A unit-distance certificate on `n` vertices: exact points, an edge list, and a denominator
 clearing the coordinates to integers. Emitted by `tools/`, re-verified here. -/
 structure UDCert (n : ℕ) where
-  /-- The `n` points, coordinates exact and scaled by `denom`. -/
+  /-- The `n` points, coordinates exact and scaled by `denom`. Write `![p₀, p₁, …]` for a handful;
+  past a few dozen use `PtTable.toVerts`, or the check gets slower the further down the list an
+  edge's endpoints sit. -/
   verts : Fin n → Pt
   /-- The claimed unit-distance pairs. Order and duplicates are irrelevant to every theorem here;
   `edgeGraph` symmetrises and strips loops. -/
@@ -283,6 +285,16 @@ example : unitPairBad.Valid = false := by decide
 /-- The diagnostic and the verdict, tied together on a concrete certificate — the `↔` used in the
 direction a reader of `#eval c.badEdges` relies on. -/
 example : unitPair.badEdges = [] := (badEdges_eq_nil_iff unitPair).mpr (by decide)
+
+/-! What a person actually reads when a certificate fails is the *rendered* diagnostic, so that text
+is pinned here rather than left to drift: the offending edge, and the squared distance it really has
+against the `denomSq` it should have had. -/
+
+/-- info: [((0, 1), 4)] -/
+#guard_msgs in #eval unitPairBad.badEdges
+
+/-- info: 1 -/
+#guard_msgs in #eval unitPairBad.denomSq
 
 /-! #### The vertex table
 

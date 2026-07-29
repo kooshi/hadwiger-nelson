@@ -296,7 +296,71 @@ that an empty diagnostic means a valid certificate — is now a theorem.
 | 14 | Keep 50 edges per theorem | Retune to 100 for the marginally lower peak | Measured flat across 25–100; the 4% memory difference is inside run-to-run noise, and a number in a flat region should not be moved on noise | **High** — the flatness is the finding, not the 50 |
 | 15 | `valid_of_chunks` keeps the `∀ ch ∈ chunks` hypothesis | Take `List.Forall` so the generated call site drops one name | The membership form is the general one and composes with everything; the encoding is the caller's choice, and the caller here is a generator that does not care about one name | **Medium** — revisit in the experience pass, where call-site surface is the subject |
 
-## 6. Carried forward
+## 6. Experience-modeling pass
+
+The pass was run by breaking a certificate on purpose and reading what came back, rather than
+imagining it. Two things were wrong, and both were the author's own frame on the wire.
+
+### The diagnostic buried its answer in fifteen zeros
+
+A value in `ℚ(√3,√5,√7,√11)` has sixteen components, and in practice one or two carry the answer.
+The derived printer showed all sixteen. What an author saw when one edge was wrong:
+
+```
+[((0, 5),
+  { re := { re := { re := { re := 8552448, im := 0 }, im := { re := 0, im := 0 } },
+            im := { re := { re := 0, im := 0 }, im := { re := 0, im := 0 } } },
+    im := { re := { re := { re := 0, im := 0 }, im := { re := 0, im := 0 } },
+            im := { re := { re := 0, im := 0 }, im := { re := 0, im := 0 } } } })]
+```
+
+What they see now, with a printer that writes the domain's own notation and drops zero terms:
+
+```
+[((0, 5), 8552448), ((0, 6), (7225344 + 442368·√3·√7)), ((0, 7), (4571136 + 442368·√3·√7))]
+```
+
+— against `#eval deGrey.denomSq`, which prints `589824`. The answer is on one line. The rendered
+text is now pinned by `#guard_msgs` in both files, because the text *is* the product: if it changes,
+someone reading a failing certificate is reading something different.
+
+### The file an author lands on talked only about tuning
+
+When a chunk fails, the kernel reports the chunk and not the edge — and the author is looking at a
+generated geometry module whose docstring, in all sixteen copies, explained why `decide +kernel` was
+chosen over `decide`. That is what interested me while tuning, not what they need. Those modules now
+open with what the file claims, that it is generated and untrusted, and the two pasteable commands
+that name the offending edge. The tuning rationale lives in this plan, once.
+
+### What was already right
+
+* **`exact?` finds the lemmas** — it returns `deGrey_unit_distances e he` for the unit-distance goal
+  and `(UDCert.badEdges_eq_nil_iff c).mp h` for the diagnostic bridge. The machine users can
+  discover the surface.
+* **The API-only proof holds** — the milestone's hand-off is provable from public names with no
+  `unfold` anywhere.
+* **The landing module answers "what is certified and what is not"** without the repository open,
+  including the part that is *not* claimed: that these are the same 1581 points de Grey published.
+* **Almost no project jargon leaked** — one reference to a milestone by number, now replaced with
+  what it actually is.
+
+### Two smaller repairs
+
+* `UDCert.verts`' own docstring — the thing you read while filling the field — said nothing about
+  the table, so nothing routed a person building a large certificate to it. It does now.
+* The generated table writes `PtTable.node` in full rather than `.node`. That looks like something a
+  reader would tidy up, and tidying it reintroduces an elaborator timeout: anonymous-constructor
+  notation makes each of the ~1580 nodes resolve against an expected type, which exhausts the
+  heartbeat budget in `isDefEq`. The generator now says so where someone would go to change it.
+
+| # | Choice | Alternative weighed | Why this one | Confidence |
+|---|---|---|---|---|
+| 16 | Replace the derived printer for tower values with the domain's notation | Leave it and let readers scan sixteen components | Measured on a real broken certificate: the answer went from five wrapped lines of mostly zeros to one line comparable against `denomSq` at a glance | **High** |
+| 17 | Pin the rendered diagnostic with `#guard_msgs` | Trust that nobody changes the printer | The text is what a person consumes; without a pin it can drift with no build failure | **High** |
+| 18 | Generated geometry modules carry the recovery commands | Leave the recovery instructions in `Certificate.lean`, where they already were | At the moment of failure the author is looking at the generated file, and context not on screen does not exist | **High** |
+| 19 | `valid_of_chunks` keeps `∀ ch ∈ chunks`, and the call site keeps the standard bridge | Take `List.Forall` so the one generated call site drops a name | Cold-read, the bridge's name says what it does, and there is exactly one caller — not enough evidence to specialise a general lemma to a literal-list encoding | **Medium** — one call site is thin evidence; if M06 generates many, revisit |
+
+## 7. Carried forward
 
 ### From M02 (superseded where noted)
 
