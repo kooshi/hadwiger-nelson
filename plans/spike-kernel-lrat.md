@@ -3,13 +3,17 @@
 *Run 2026-07-29, laptop (12 cores, 31 GB). All timings CPU seconds (user + sys), minimum of three
 runs, baseline subtracted. Solver runs under a 6 GB cgroup cap.*
 
-**Verdict: GO.** Two findings, and the second is why the first is not enough.
+**Verdict: GO.** Three findings. The second is why the first is not enough, and the third removes
+what looked like the biggest obstacle.
 
 1. **The kernel can already check an LRAT refutation today, with no new soundness proof.** Verified
    end to end, axioms exactly `[propext, Classical.choice, Quot.sound]`.
 2. **But it is ~430× too slow** — 22.6 days of processor time for de Grey, measured, versus **1.26
    hours** for the big-integer design. So the fast checker is not an optimisation; it is the thing
    that makes a kernel-checked `χ(ℝ²) ≥ 5` possible at all.
+3. **Certificate delivery, which looked like the largest hazard, is solved** (§ 7b). The obvious
+   representation needs ~22 GB and will not elaborate; packing the certificate into big-integer
+   chunks — the same trick as the checker — brings it to **~80 MB, elaborating in seconds**.
 
 ---
 
@@ -138,6 +142,49 @@ make the check fail. Skeleton elaborates. Note `CNF.Unsat` quantifies over arbit
 `a : Nat → Bool`, so the bridge lemma must handle variables the formula never mentions;
 `Std.Sat.CNF.lt_numLiterals` is the route.
 
+## 7b. Certificate delivery — was the largest hazard, now solved (measured 2026-07-29)
+
+The obvious representation does not work, and it fails on **elaboration**, not on checking.
+
+Rendering one real depth-5 cube certificate as `Array IntAction` — the format core wants:
+
+| fraction of ONE cube | additions | hints | Lean source | elaborates? | olean |
+|---|---|---|---|---|---|
+| 10% | 327 | 10,138 | 89 KB | yes, 10.6 s | **17 MB** |
+| 50% | 1,638 | 85,932 | 630 KB | **no — `maxHeartbeats` in `isDefEq`** | — |
+| 100% | 3,276 | 134,396 | 969 KB | **no** | — |
+
+Extrapolated to the full proof that is **~22 GB and it does not elaborate at all**. Each `Int` in an
+array literal carries `OfNat` machinery, so ~1.7 KB of compiled module per hint entry.
+
+**The fix is the spike's own insight applied to the data**: put the certificate in `Nat`s, not in
+inductive structures. Pack each action's hint list into one `Nat` as fixed-width fields (24 bits per
+id, entry count in the low 16 bits; literals zig-zag encoded to make them unsigned). Field extraction
+is `(w >>> (24*k)) &&& 0xFFFFFF` — accelerated, the same operations the checker already uses.
+
+That alone took the whole certificate from "will not elaborate" to **7.5 s and 16.4 MB**. Tuning the
+chunk size then found a clean cost model — 391 KB of payload, split every which way:
+
+| chunks | bits/chunk | elaboration | olean | overhead/chunk |
+|---|---|---|---|---|
+| 3,276 | 976 | 3.8 s | 8.0 MB | 2.3 KB |
+| 328 | 9,756 | 2.3 s | 1.17 MB | 2.3 KB |
+| **64** | **50,000** | **5.3 s** | **556 KB** | 2.3 KB |
+| 16 | 200,000 | 18.8 s | 443 KB | 2.3 KB |
+| 4 | 800,000 | 71.5 s | 415 KB | 2.5 KB |
+| 1 | 3,200,000 | **298 s** | 405 KB | — |
+
+Two clean laws: **olean overhead is a flat ~2.3 KB per chunk** regardless of chunk size, and
+**elaboration time is linear in chunk size** (a single 3.2 Mbit literal is stored with *zero*
+overhead — 405 KB for 391 KB of data — but takes five minutes to parse).
+
+**Design: ~50 Kbit chunks, ~64 per cube.** Roughly 700 KB of compiled module per cube, so
+**~80 MB for the whole proof** — a downloadable, re-checkable artifact, against 22 GB for the naive
+form. Hex source is no cheaper than decimal (same olean, same time), so decimal is fine.
+
+Also learned from this: real certificates **do contain deletion lines** (381 of them here, removing
+2,770 clause ids). A checker may ignore them semantically but must *parse* them.
+
 ## 8. Kill criteria
 
 Abandon and fall back to `native_decide` if any of these is observed:
@@ -145,10 +192,10 @@ Abandon and fall back to `native_decide` if any of these is observed:
 1. The mask-to-assignment bridge lemma resists past a few days — it is the one genuinely new proof.
 2. A real de Grey cube certificate turns out to contain `.addRat` steps after the solver flags are
    pinned.
-3. Emitting ~94 MB of certificate data proves unworkable in Lean source *and* no
-   load-from-disk-at-elaboration route is acceptable for reproducibility. **This is unresolved and
-   is the largest remaining risk** — it is a delivery problem, not a checking problem, and it exists
-   for the `native_decide` fallback too.
+3. ~~Emitting ~94 MB of certificate data proves unworkable.~~ **Resolved — see § 7b.** Packed into
+   ~50 Kbit `Nat` chunks it is ~80 MB of compiled modules and elaborates in seconds. The naive
+   `Array IntAction` form was ~22 GB and would not elaborate; that is the trap, and it is now
+   measured and avoided.
 4. Measured per-step cost at full scale exceeds ~2 ms, which would put the total past a day.
 
 ## 9. What was left unmeasured
