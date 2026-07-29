@@ -12,3 +12,6 @@
 tools/*.json
 *.cnf
 *.lrat
+
+# Python bytecode from tools/
+__pycache__/

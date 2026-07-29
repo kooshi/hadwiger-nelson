@@ -9,6 +9,7 @@ import Proofs.HadwigerNelson.Reduction
 import Proofs.HadwigerNelson.Instances.Triangle
 import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleBound
+import Proofs.HadwigerNelson.Instances.DeGrey
 
 /-!
 # Proofs

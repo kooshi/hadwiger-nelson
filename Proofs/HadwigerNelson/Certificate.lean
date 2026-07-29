@@ -111,6 +111,44 @@ theorem dist_toPlane_eq_one {p q : Pt} {D : ℤ} (hD : D ≠ 0)
     linear_combination hev
   rw [Complex.dist_eq, Complex.norm_def, hnorm, Real.sqrt_one]
 
+/-! ### The vertex table
+
+`UDCert.verts` is a function, and past a few dozen vertices *how* that function is presented decides
+the cost of everything downstream. A `![p₀, …, p₁₅₈₀]` literal is `Fin.cons` nested 1581 deep, so
+kernel-reducing `verts i` walks `i` constructors — measured on a uniform sample of de Grey's edges,
+**0.218 s/edge**, and the last vertices cost four times the first. Splitting the index range at a
+pivot instead makes a lookup logarithmic and, more importantly for scheduling, the *same* price for
+every vertex: **0.066 s/edge**, flat.
+
+Small certificates keep writing `![…]`; `verts` is still a plain function and the spec section below
+uses one. -/
+
+/-- A table of points indexed by `Nat`, stored as a balanced split of the index range.
+
+Nothing is proved about a table and nothing needs to be. A certificate never claims its table is
+"the right" table — it claims the points the table yields are a unit distance apart, and `Valid`
+checks exactly that. A wrong table makes `Valid` false; it cannot make a theorem false. -/
+inductive PtTable where
+  /-- A subtable covering exactly one index. -/
+  | leaf : Pt → PtTable
+  /-- `node m l r` — indices below `m` are `l`'s; the rest are `r`'s, renumbered from zero. -/
+  | node : Nat → PtTable → PtTable → PtTable
+deriving Repr
+
+/-- Look up index `i`. Structural on the table, so a lookup costs the table's *depth* — about
+`log₂ n` kernel steps, identical for every `i`. That flatness is what makes chunk timings uniform
+and the parallel build schedule balanced.
+
+**Totality is denied for an out-of-range `i`:** `Nat` subtraction truncates, so a too-large index
+returns *some* point instead of failing. Reach this only through `toVerts`, which supplies `i < n`;
+the spec section pins the junk value so nobody discovers it by surprise. -/
+def PtTable.get : PtTable → Nat → Pt
+  | .leaf p, _ => p
+  | .node m l r, i => if i < m then l.get i else r.get (i - m)
+
+/-- The `Fin n → Pt` that `UDCert.verts` wants. `n` comes from the certificate being built. -/
+def PtTable.toVerts (t : PtTable) {n : ℕ} : Fin n → Pt := fun i => t.get i.val
+
 /-- A unit-distance certificate on `n` vertices: exact points, an edge list, and a denominator
 clearing the coordinates to integers. Emitted by `tools/`, re-verified here. -/
 structure UDCert (n : ℕ) where
@@ -215,6 +253,31 @@ private def unitPairBad : UDCert 2 := { unitPair with verts := ![⟨0, 0⟩, ⟨
 
 example : unitPairBad.Valid = false := by decide
 #guard unitPairBad.badEdges.length = 1
+
+/-! #### The vertex table
+
+The table is the one piece of this file with no theorem attached, so these are the only thing
+standing between a wrong lookup and a certificate that quietly checks the wrong points. -/
+
+/-- The same two points as `unitPair`, presented through a table instead of a `![…]` literal. -/
+private def unitPairTable : PtTable := .node 1 (.leaf ⟨0, 0⟩) (.leaf ⟨1, 0⟩)
+
+#guard unitPairTable.get 0 = (⟨0, 0⟩ : Pt)
+#guard unitPairTable.get 1 = (⟨1, 0⟩ : Pt)
+
+/-- Both presentations of the same certificate agree, and both certify. -/
+example : ({ unitPair with verts := unitPairTable.toVerts } : UDCert 2).Valid = true := by decide
+
+/-- The lookup is right at every index of a *ragged* table too — the shape a generator emits when
+the vertex count is not a power of two, and the case a padded power-of-two table would never
+exercise. -/
+private def threePts : PtTable := .node 1 (.leaf ⟨0, 0⟩) (.node 1 (.leaf ⟨1, 0⟩) (.leaf ⟨2, 0⟩))
+
+#guard (List.range 3).map threePts.get = [(⟨0, 0⟩ : Pt), ⟨1, 0⟩, ⟨2, 0⟩]
+
+-- **The denied obligation, pinned.** Out of range, `get` returns a point rather than failing —
+-- `Nat` subtraction truncated. Recorded here so the docstring's warning is a fact under test.
+#guard threePts.get 99 = (⟨2, 0⟩ : Pt)
 
 end Spec
 
