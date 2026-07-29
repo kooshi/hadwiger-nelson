@@ -207,7 +207,96 @@ restatement — which is the convergence signal this pass looks for.
 | 10 | `Pt.distSq` uses a fast squaring (`FastSq`) | Leave `x * x` — 2.5 minutes is not a bottleneck | The definition is a sum of squares and was not saying so; the speed follows from the faithfulness. 1.38× measured, matching the leaf-count prediction, and it compounds through M06's repeated re-verification | **High** on the number (measured in situ, min of 3, theory-confirmed); **medium** on whether ~25 lines was worth 2.5 minutes — if M06 turns out not to re-verify geometry repeatedly, this was a thin win |
 | 11 | The vertex table keeps its junk value out of range | Index `PtTable` by its size so the index arithmetic discharges the bound | The soundness argument needs nothing at all from the table, so the index would protect against an impossible failure while taxing every context that mentions the type | **High** — established by reading the reduction, not assumed |
 
-## 5. Carried forward
+## 5. Obligation-modeling pass
+
+### The burn-down measure, stated
+
+The milestone's global claim is one obligation quantified over **7877 edges**. `valid_of_chunks`
+replaces it with **158 obligations quantified over 50 edges each**, plus a join hypothesis that is
+`rfl`. Each of those is discharged by `decide +kernel`, a leaf with no children. The measure is the
+multiset of "edges each open obligation ranges over":
+
+```
+{7877}  →  {50 × 157, 27}  →  …  →  ∅
+```
+
+Strictly descending in the multiset order, terminating in 159 steps. Replacing one obligation with
+finitely many strictly smaller ones is the only move made.
+
+### Two things the pass changed
+
+**The chunking argument was a hand derivation of a core lemma.** `valid_of_chunks` was proved
+through `validOn_iff` and `List.mem_flatten` — five lines reconstructing something already in the
+standard library. The check is a `List.all`, and `List.all_flatten` says exactly that `all`
+distributes over `flatten`. So the general fact is now stated in its own right —
+
+```lean
+theorem validOn_flatten (c : UDCert n) (chunks : List (List (Fin n × Fin n))) :
+    c.ValidOn chunks.flatten = chunks.all (c.ValidOn ·) := List.all_flatten
+```
+
+— and `valid_of_chunks` is two lines of packaging on top of it. Nothing about certificates is
+involved in why chunking is sound, and the file now says so.
+
+**The diagnostic made a promise nothing backed.** The docstring of the "which edges failed" helper
+said *"An empty list means `Valid = true`."* That was an assertion in prose, not a theorem, and it
+is the exact claim a person relies on when they run the diagnostic and see `[]`. It also carries
+more weight than it looks: the certificate check is settled by **kernel reduction** while the
+diagnostic runs **compiled**, so they are two independent evaluators, and without a theorem tying
+them their agreement is a coincidence between two definitions that merely look alike. Now proved:
+
+```lean
+theorem badEdges_eq_nil_iff (c : UDCert n) : c.badEdges = [] ↔ c.Valid = true
+```
+
+This is what turns `#guard deGrey.badEdges.isEmpty` from a suggestive test into a real cross-check
+on the 158 kernel reductions.
+
+### Chunk granularity: measured, and it is not load-bearing
+
+400 edges through one module, split every which way. CPU seconds and peak RSS:
+
+| edges per theorem | CPU | peak |
+|---|---|---|
+| 10 | 18.7 s | 4237 MB |
+| 25 | 16.6 s | 3966 MB |
+| **50** | **16.5 s** | 3677 MB |
+| 100 | 17.5 s | **3518 MB** |
+| 400 (one theorem) | 18.5 s | 4728 MB |
+
+There is a flat optimum across **25–100**, and 50 sits in it. Both extremes cost: at 10 edges the
+per-theorem overhead — a list literal and a proof term retained in the environment for each — adds
+13%; at 400 the transient reduction adds 12% and 30% more memory. The earlier claim that smaller is
+always better on memory was drawn from comparing 50 against 250 and does not extend below 25. **Do
+not tune this further** — the curve is flat where we are standing.
+
+### The other three questions
+
+**The `FastSq` law is a permanent mutation audit.** `sq_eq` pins the fast definition against the
+product, so a wrong fast square cannot be declared as an instance at all — the optimisation
+self-checks, which is the entire reason to bundle the law into the class rather than prove it
+separately.
+
+**The asymmetry in `sq_eq`'s two cases is forced, not accidental.** The real part closes by rewriting
+alone; the imaginary part needs one commutation. That is because the fast square deliberately writes
+`x.re * x.im + x.re * x.im` where the general product writes `x.re * x.im + x.im * x.re` — computing
+one sub-product instead of two. The one `ring` step in the proof *is* the saving, paid once at the
+definition instead of on every edge.
+
+**The shape guards are correctly tests, not theorems.** Distinctness, sortedness, no isolated
+vertex, the counts — none is load-bearing for soundness. Duplicated edges are harmless, self-loops
+are stripped by the graph, and an isolated vertex only makes colouring easier. They exist to catch a
+regenerated file that silently changed, which is a test's job. The one claim that *was* only tested —
+that an empty diagnostic means a valid certificate — is now a theorem.
+
+| # | Choice | Alternative weighed | Why this one | Confidence |
+|---|---|---|---|---|
+| 12 | State `validOn_flatten` and derive the glue from it | Keep the five-line hand proof | The hand proof re-derived `List.all_flatten`. Naming the general fact shows chunking is free to justify and removes certificate-specific reasoning from a place it never belonged | **High** |
+| 13 | Prove the diagnostic's "empty means valid" claim | Leave it in the docstring | Two independent evaluators agreeing is only evidence if a theorem says they compute the same predicate | **High** |
+| 14 | Keep 50 edges per theorem | Retune to 100 for the marginally lower peak | Measured flat across 25–100; the 4% memory difference is inside run-to-run noise, and a number in a flat region should not be moved on noise | **High** — the flatness is the finding, not the 50 |
+| 15 | `valid_of_chunks` keeps the `∀ ch ∈ chunks` hypothesis | Take `List.Forall` so the generated call site drops one name | The membership form is the general one and composes with everything; the encoding is the caller's choice, and the caller here is a generator that does not care about one name | **Medium** — revisit in the experience pass, where call-site surface is the subject |
+
+## 6. Carried forward
 
 ### From M02 (superseded where noted)
 

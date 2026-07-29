@@ -194,16 +194,22 @@ theorem validOn_iff (c : UDCert n) (es : List (Fin n × Fin n)) :
     c.ValidOn es = true ↔ ∀ e ∈ es, (c.verts e.1).distSq (c.verts e.2) = c.denomSq := by
   simp [ValidOn]
 
+/-- **`ValidOn` distributes over `flatten`** — and that is the whole content of chunking. Nothing
+about certificates is involved: the check is a `List.all`, and this is `List.all`'s own lemma. Stated
+rather than inlined so a reader can see that splitting the work costs nothing to justify. -/
+theorem validOn_flatten (c : UDCert n) (chunks : List (List (Fin n × Fin n))) :
+    c.ValidOn chunks.flatten = chunks.all (c.ValidOn ·) :=
+  List.all_flatten
+
 /-- **The chunking glue.** Prove `ValidOn` for each chunk, show the chunks concatenate to the edge
 list, and get `Valid`. The `hjoin` check is cheap for the kernel — list equality of index pairs, no
-tower arithmetic. -/
+tower arithmetic — and is `rfl` outright for a certificate whose `edges` field *is* the flattened
+chunks, which is how the large ones are emitted. -/
 theorem valid_of_chunks (c : UDCert n) (chunks : List (List (Fin n × Fin n)))
     (hjoin : chunks.flatten = c.edges) (h : ∀ ch ∈ chunks, c.ValidOn ch = true) :
     c.Valid = true := by
-  rw [valid_eq, ← hjoin, validOn_iff]
-  intro e he
-  obtain ⟨ch, hch, hech⟩ := List.mem_flatten.mp he
-  exact (validOn_iff c ch).mp (h ch hch) e hech
+  rw [valid_eq, ← hjoin, validOn_flatten, List.all_eq_true]
+  exact h
 
 /-! ### Diagnosis
 
@@ -212,11 +218,26 @@ compiled, so they are instant at any size. -/
 
 /-- The listed edges that fail the unit-distance check, each with the squared distance actually
 found. **`#eval c.badEdges` is the first thing to run when `Valid` is `false`** — it names the
-culprit edge instead of leaving a wall of kernel term. An empty list means `Valid = true`. -/
+culprit edge instead of leaving a wall of kernel term. An empty list means `Valid = true`, and
+`badEdges_eq_nil_iff` is that promise as a theorem rather than a docstring's word. -/
 def badEdges (c : UDCert n) : List ((Fin n × Fin n) × Q4) :=
   c.edges.filterMap fun e =>
     let d := (c.verts e.1).distSq (c.verts e.2)
     if d = c.denomSq then none else some (e, d)
+
+/-- **The diagnostic's promise, proved.** No offending edges is *exactly* a valid certificate.
+
+This is what makes running `badEdges` more than suggestive. `Valid` is settled by kernel reduction
+and `badEdges` by the compiler, so they are two independent evaluators; without this theorem their
+agreement would be a coincidence about two definitions that merely look alike, and a reader who saw
+`[]` would still not know what had been established. Use `List.isEmpty_iff` to get here from an
+`isEmpty` check. -/
+theorem badEdges_eq_nil_iff (c : UDCert n) : c.badEdges = [] ↔ c.Valid = true := by
+  rw [valid_eq, validOn_iff, badEdges, List.filterMap_eq_nil_iff]
+  refine ⟨fun h e he => ?_, fun h e he => ?_⟩
+  · by_contra hne
+    simpa [hne] using h e he
+  · simp [h e he]
 
 /-! ### Soundness — the bridge into M01 -/
 
@@ -258,6 +279,10 @@ private def unitPairBad : UDCert 2 := { unitPair with verts := ![⟨0, 0⟩, ⟨
 
 example : unitPairBad.Valid = false := by decide
 #guard unitPairBad.badEdges.length = 1
+
+/-- The diagnostic and the verdict, tied together on a concrete certificate — the `↔` used in the
+direction a reader of `#eval c.badEdges` relies on. -/
+example : unitPair.badEdges = [] := (badEdges_eq_nil_iff unitPair).mpr (by decide)
 
 /-! #### The vertex table
 
