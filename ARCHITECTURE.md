@@ -166,12 +166,34 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
 | **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
 | **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
-| **M05** | **χ(ℝ²) ≥ 5.** Cube split, certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. |
-| **M06** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
-| **M07** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. |
-| **M08** | **The hunt.** Gadget algebra, spindle catalogs, composition search for a 6-chromatic witness. | Honest report — including "not found". |
+| **M05** | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | A real de Grey cube refutation checked by the **kernel**, axioms exactly `[propext, Classical.choice, Quot.sound]`, at a measured cost that scales to the full split. Fallback if the soundness proof stalls: rung B ships through `native_decide` on the *same* packed certificates, so nothing here is wasted. |
+| **M06** | **χ(ℝ²) ≥ 5.** Cube split at depth 5 (1024 cubes), certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. **Target: zero native purchases** — that is what M05 buys. |
+| **M07** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
+| **M08** | **Structure-aware geometry.** Difference-vector certificates: verify one norm per *distinct edge difference* (67 for de Grey, against 7877 edges) and a subtraction per edge. | The same `deGrey_valid` claim at a per-edge cost that no longer carries a multiplication, and a projection showing the expensive term is flat in graph size. Sequenced here because it changes the edge list's shape and would invalidate M06's certificates. |
+| **M09** | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | A composition theorem, and de Grey's own construction re-derived through it rather than asserted as coordinates. |
+| **M10** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. **Explicitly not a route to 6** — the known upper bound on χ_f is below 5, so this rung is independently publishable and cannot reach rung D. |
+| **M11** | **The hunt.** Composition search for a 6-chromatic witness, on M09's algebra. | Honest report — including "not found". |
 
-M01–M05 constitute rung B and are the publishable unit. M06+ is rung C, and M08 is rung D.
+M01–M06 constitute rung B and are the publishable unit. M07–M10 is rung C, and M11 is rung D.
+
+**Reordered 2026-07-29**, after `plans/spike-kernel-lrat.md` and `plans/spike-geometry-scaling.md`.
+Three changes, each forced by a measurement rather than a preference:
+
+* **The checker moved from "tracked open work" to M05, ahead of the headline.** It was written off as
+  needing its own soundness proof; core's generic `lratChecker` already kernel-reduces with an
+  axiom-clean soundness theorem, so what is missing is throughput, and the big-integer design is
+  measured at 430× core's. Ahead of the headline because the packed certificate format is shared work
+  either way, so doing it first means rung B ships once and the trust ledger never grows 1024 entries
+  only to have them removed.
+* **Structure-aware geometry became its own milestone (M08)** rather than an optimisation inside the
+  hunt. At 0.045 s/edge a 10⁵–10⁷-edge candidate costs hours to days of geometry *each*, which is
+  fatal for a search; 67 distinct differences against 7877 edges says the expensive term can be made
+  flat in graph size. It sits after M06 because it changes the edge list's shape.
+* **Gadget algebra became its own milestone (M09)** rather than a bullet inside the hunt. It is the
+  actual bet on rung D: de Grey, Exoo–Ismailescu and Parts all reason over gadgets with colouring
+  properties, informally. Making composition a theorem is what turns the search space from vertices
+  into properties, and it is the one advantage here that is not shared with everyone who already
+  tried and stalled.
 
 ## 5. Trust
 

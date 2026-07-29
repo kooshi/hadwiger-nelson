@@ -1,4 +1,20 @@
-# M05 — χ(ℝ²) ≥ 5  *(stub — carry-forward notes only)*
+# M06 — χ(ℝ²) ≥ 5  *(stub — carry-forward notes only)*
+
+> **Renumbered from M05 on 2026-07-29**, when the kernel-checkable checker took M05 ahead of it.
+> See `ARCHITECTURE.md` § Roadmap for why, and `plans/M05-kernel-checker.md` for what it buys:
+> if M05 lands, this milestone ships with **zero native purchases**.
+
+## Settled since this stub was written — see `plans/spike-kernel-lrat.md`
+
+* **Split at depth 5.** Cube depth is a cliff, not a curve: a properly-coloured cube at depth 4 needs
+  105.6M hint entries and a 951 MB certificate; at depth 5 it needs 134k and 962 KB. Depth 5 gives
+  1024 cubes, 96 of them non-trivial, 1.30 × 10⁷ hint entries in total.
+* **The full instance does not finish in 320 s** even without proof logging, so the split is
+  mandatory — and the *solving* is then trivial: under a second per cube, ~2 minutes for all of them.
+  Nothing here needs the big machine.
+* **Certificates must be packed into big-integer chunks.** `Array IntAction` needs ~22 GB and will not
+  elaborate. This is true for the `native_decide` route too, so the format is not optional.
+* **Colour symmetry is deferred to M09**, not needed here: 1024 cubes is already comfortable.
 
 > Cube split, certificates ingested, `¬ Colorable 4`, the headline theorem, trust receipt.
 > Terminal test: `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded,
