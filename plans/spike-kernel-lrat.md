@@ -106,7 +106,15 @@ That is the whole case. The fast checker converts a dead route into a 15-minute 
 ## 6. The design, as measured into shape
 
 * **Assignment: two big `Nat`s** (`trueMask`, `falseMask`) over 6324 variables. Invariant
-  `trueMask &&& falseMask = 0`, both ⊆ `W = 2^6324 - 1`. `Nat` has no complement — use `W ^^^ x`.
+  `trueMask &&& falseMask = 0`, both ⊆ `W = 2^6324 - 1`.
+* **Complement within the width is `W ^^^ x`, and "and-not" is `x ^^^ (x &&& y)`. Do not replace
+  either with `Nat.ldiff`.** This is a trap, and it is the shape a reader will want to tidy into.
+  `Nat.ldiff` *does* exist (Mathlib's, with `Nat.testBit_ldiff` ready-made) — an earlier note here
+  claiming `Nat` has no and-not was wrong. But it is **not hardware-accelerated**: it is defined by
+  recursion over bits, so at 6324 bits it costs thousands of steps where the accelerated operations
+  cost one. Measured at 6324 bits over 500 operations: `x &&& y` and `x ^^^ (x &&& y)` both ~0.8–0.9 µs
+  each; the `Nat.ldiff` version did not finish the same benchmark. Reaching for the cleaner-looking
+  primitive silently costs the entire speedup this spike rests on.
 * **Clauses: two big `Nat`s each** (`pos`, `neg`), dense. ~35,900 clauses per cube × 2 × 790 bytes ≈
   **56 MB** — the memory worry was misplaced: each cube adds only ~3,700 clauses, not the ~250,000 a
   pigeonhole instance suggested.
@@ -115,17 +123,28 @@ That is the whole case. The fast checker converts a dead route into a 15-minute 
 * **No RAT support needed.** Zero `.addRat` in the repo's spindle certificates, zero across a
   246,779-addition pigeonhole certificate, zero here. A RUP-only checker fails loudly if that ever
   changes. **Pin the solver flags** rather than relying on the default staying RUP-only.
-* **Never test "exactly one bit set".** `x &&& (x-1) = 0 → ∃ i, x = 2^i` is **not in Mathlib**
-  (`exact?` fails) and mixes `Nat` subtraction with bitwise-and, which has no good lemmas. Instead
-  **have the untrusted emitter name the unit variable `i` and verify `un = 2^i`** — one accelerated
-  shift, one accelerated compare, and `Nat.testBit_two_pow` then says exactly which bit it is. The
-  project's own idiom: generator proposes, kernel verifies.
+* **"Exactly one bit set" has two routes; both work, and the trade is measured.**
+  `x ≠ 0 → x &&& (x-1) = 0 → ∃ i, x = 2^i` is **genuinely not in Mathlib** (checked in several
+  phrasings — and note a failed `exact?` proves nothing on its own; the shape has to be varied).
+  - *Route A, no lemma:* have the untrusted emitter name the unit variable `i` and verify `un = 2^i`
+    — one accelerated shift, one accelerated compare, and `Nat.testBit_two_pow` says exactly which
+    bit it is. **Costs one extra field per propagation step, and there are 1.3 × 10⁷ of them**, so it
+    roughly doubles the artifact: ~80 MB → ~140 MB.
+  - *Route B, prove the lemma:* the checker derives the unit literal and the certificate carries no
+    extra field. The proof splits on parity and is tractable — for even `x = 2y` the trick on `x`
+    reduces exactly to the trick on `y` (`2y &&& (2y-1) = 2 * (y &&& (y-1))`), and for odd `x = 2y+1`
+    it forces `y = 0`, hence `x = 1`. Both steps follow from bit extensionality plus the parity
+    lemmas. Roughly 30–40 lines, and a genuine contribution back to Mathlib.
+  - **Take Route B inside M05, with Route A as the fallback.** It buys ~60 MB and a cleaner checker
+    for ~30 lines, and it is not a blocker either way.
 * **Reject tautological clauses at load** (`pos &&& neg ≠ 0`): the unassigned-literal mask counts
   *variables*, so a variable occurring both ways is one bit but two literals.
 * **Recurse structurally over a `List`, never `Nat.fold`** — `Nat.fold` is superlinear in the kernel
   (1,600 iterations costs 6.2 s with no data structures involved).
 * Lemmas confirmed present: `Nat.testBit_or`, `testBit_and`, `testBit_xor`, `testBit_two_pow`,
-  `Nat.eq_of_testBit_eq`.
+  `Nat.eq_of_testBit_eq`, `Nat.testBit_ldiff`, and — the one that makes the width-complement
+  legitimate, so it is the load-bearing one —
+  **`Nat.testBit_two_pow_sub_one : (2^n - 1).testBit i = decide (i < n)`**.
 
 ## 7. The soundness proof, sketched
 

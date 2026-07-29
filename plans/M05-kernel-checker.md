@@ -33,9 +33,21 @@ the same packed certificates** — so a stall costs the proof, not the milestone
   flat ~2.3 KB per chunk; elaboration time is linear in chunk size.
 * **No RAT support needed** (zero `.addRat` across three certificate families) but **deletion lines
   must be parsed** (381 in one real cube certificate), even though they may be ignored semantically.
-* **Never test "exactly one bit set"** — that lemma is not in Mathlib. Have the untrusted emitter name
-  the unit variable and verify `un = 2^i` instead.
 * **Recurse structurally over a `List`, never `Nat.fold`** — `Nat.fold` is superlinear in the kernel.
+* **Do not use `Nat.ldiff`.** It exists and looks like the right primitive; it is not accelerated and
+  loses the entire speedup. Use `x ^^^ (x &&& y)`. See the spike for the measurement.
+
+## Two scoped pieces of work inside this milestone
+
+**The "exactly one bit set" lemma** (`x ≠ 0 → x &&& (x-1) = 0 → ∃ i, x = 2^i`) is genuinely absent
+from Mathlib. Proving it lets the checker *derive* the forced literal instead of being told it, which
+removes one field from every one of 1.3 × 10⁷ propagation steps — **roughly halving the artifact,
+~140 MB → ~80 MB** — for about 30–40 lines. The recursion is worked out in the spike: split on parity.
+Worth doing here, and worth offering back to Mathlib. **Fallback if it resists: the emitter names the
+variable and the checker verifies `un = 2^i`, which needs no new lemma at all.**
+
+**The all-ones complement is already sound.** `Nat.testBit_two_pow_sub_one` is in Mathlib, so
+`W ^^^ x` as complement-within-width needs no new groundwork.
 
 ## The obligation
 

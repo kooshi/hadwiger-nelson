@@ -98,7 +98,9 @@ Neither computation is trusted on its own say-so. The geometry is exact — coor
 multiquadratic field ℚ(√3,√5,√7,√11) represented as an iterated quadratic extension over ℤ, so
 "distance = 1" is an integer identity, not a float comparison. The combinatorics goes through
 `Std.Tactic.BVDecide.LRAT.check` + `check_sound`, the LRAT checker that ships **verified** in
-core; CaDiCaL is an untrusted oracle that merely proposes the certificate.
+core; CaDiCaL is an untrusted oracle that merely proposes the certificate. That shipped checker
+cannot be run by the kernel (one cause: `Std.HashMap` reaching an `@[extern] opaque` word size), which
+is what M05 replaces.
 
 **Nothing in `tools/` is trusted.** The generator may be wrong; Lean re-derives every claim from
 the emitted data. A generator bug can only produce data Lean refuses to certify.
@@ -116,12 +118,18 @@ Audited at every milestone with `#print axioms` (see `scripts/Axioms.lean`) and 
 
 `native_decide` trusts the compiler and this CPU rather than the kernel. Where a `Bool` cannot be
 kernel-reduced we may buy it — but the purchase is named in the docstring of the declaration that
-makes it, listed in `ARCHITECTURE.md` § Trust, and the kernel-checked route is tracked as open work.
-Soundness theorems are identical either way; only the axiom list moves.
+makes it, and listed in `ARCHITECTURE.md` § Trust. Soundness theorems are identical either way; only
+the axiom list moves. **The kernel-checked route is no longer open work: it is M05**, measured
+affordable in `plans/spike-kernel-lrat.md`, and rung B's target is zero purchases.
 
 **Grep for the right name.** At v4.32.0 `native_decide` mints a *per-declaration* axiom;
 `Lean.ofReduceBool` never appears in `#print axioms`. An audit looking only for that name passes a
 native purchase in silence.
+
+**`lean4checker` cannot re-check a native purchase.** The purchase is recorded as an *axiom*, and
+axioms are accepted by every kernel by definition. So "replayed through an independent kernel" is a
+claim about the kernel-checked part only — never state it as covering the whole artifact. See
+`ARCHITECTURE.md` § Trust for why the purchase also lands on the one claim a human cannot inspect.
 
 ## Toolchain
 Managed by **elan** and pinned by `lean-toolchain` (`leanprover/lean4:v4.32.0`). If `lean` / `lake`
@@ -158,6 +166,17 @@ lake build Proofs.…​.Geom00 Proofs.…​.Geom01 …   # one batch; at most 
 instance twice — once in the elaborator, once in the kernel — so it is ~2× slower and dies on
 `maxHeartbeats` well before the kernel itself would struggle. `+kernel` needs no `set_option` knob
 and buys the same axioms.
+
+**Which operations the kernel does in hardware is invisible in the source, and it is usually the
+difference between viable and dead.** `Nat` arithmetic *and bitwise* operations are GMP-backed and
+effectively free at thousands of bits; `USize` is stuck forever (its width is an `@[extern] opaque`);
+`Nat.ldiff` exists, looks like the right primitive, and is not accelerated; `Nat.fold` is superlinear.
+**Measure before believing** — my instincts here have been wrong repeatedly (dense vs sparse clause
+masks, `ldiff`, and a lemma I reported missing that was present).
+
+**A failed `exact?` is not an absence.** It proves the *shape you asked for* was not found. Vary the
+statement — `= true` versus `decide (…)`, an `iff` versus an implication — before concluding Mathlib
+lacks something. `Nat.testBit_two_pow_sub_one` was reported missing here on exactly that error.
 
 ## The package
 The **`proofs`** package (`lakefile.toml`): library **`Proofs`** (`Proofs.lean` is the flat import

@@ -248,6 +248,39 @@ Independently re-checked: `scripts/lean4checker.sh` replays all 33 `Proofs` modu
 lean4checker's separate kernel. Green at M04 — which means de Grey's 7877 exact distance identities
 have been recomputed by a second kernel implementation, not just the one that built them.
 
+**But the independent replay cannot see a native purchase, and the claim must not be stated as if it
+could.** `native_decide` records its result as an **axiom**, and an axiom is accepted by every kernel
+by definition — that is what an axiom is. So lean4checker verifies everything *except* the native
+steps, which it takes on faith. "Replayed through an independent kernel" is therefore a claim about
+the kernel-checked part only. Say it that way.
+
+### Why the purchase sits on the worst possible claim
+
+The project rests on two computations, and they are not equally checkable by a human:
+
+* **Every listed edge is exactly one unit long.** If this is wrong it is *detectable* — pick three
+  edges, compute them in any computer-algebra system, and the error surfaces. Errors here do not hide.
+  This half is kernel-clean anyway.
+* **No `k`-colouring of this graph exists.** If this is wrong it is *not* detectable. It quantifies
+  over `4^1581` possibilities — a 952-digit number. There is no spot check, no partial verification,
+  no eyeball.
+
+A certificate is precisely what makes the second claim checkable at all: it converts "no colouring
+exists anywhere in that space" into "here is a finite chain of elementary deductions ending in a
+contradiction". Checking that chain with a compiled program rather than the kernel gives back a good
+part of what the certificate was for. **The native purchase lands on the one claim no human can
+verify by inspection** — which is why it is a footnote for a known theorem and the entire objection
+for a new one, and why M05 exists.
+
+### What compiled evaluation actually trusts
+
+Not just "more code" — there is a concrete hole. Lean permits a definition's *compiled* behaviour to
+differ from the definition itself (`@[implemented_by]`, `@[extern]`); that is a legitimate feature. It
+means native evaluation can return an answer the definition contradicts, anywhere in the dependency
+chain. The kernel cannot be misled that way, because it only unfolds definitions. Beyond that hole:
+the code generator, the C toolchain, the runtime and its GMP bindings, and the CPU — none written to
+be a proof checker.
+
 **The audit can stop auditing, and did.** At M04 `scripts/Axioms.lean` named a declaration that a
 regenerated file no longer defined. Under `set -e` the failing command substitution aborted
 `axioms.sh` with *no output and no visible failure*, so a piped invocation read as a pass. The
