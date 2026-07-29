@@ -290,11 +290,16 @@ Stated up front, per doctrine, and to be reported as-is:
 - **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
   Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
   rungs A–C are not, which is why the ratchet is built the way it is.
-- **The certificate check is not kernel-reducible — settled, not a risk any more.** We pay a
-  native-evaluation axiom and say so. The theorem is still worth having (it is the standard for
-  SAT-backed formalization, and core's own `bv_decide` sits in the same place) but it is a weaker
-  artifact than a kernel-only one, and the geometry half — which *is* kernel-only — is the part we
-  can claim without qualification.
+- **The certificate check is not kernel-reducible *as shipped* — but a kernel-only route now looks
+  reachable.** Reopened and measured 2026-07-29; see `plans/spike-kernel-lrat.md`. The shipped
+  `LRAT.check` is blocked by exactly one thing — `Std.HashMap` inside `DefaultClause.ofArray`, whose
+  bucket indexing computes on `USize`, whose width is an `@[extern] opaque` the kernel cannot unfold.
+  Core's *generic* `lratChecker` avoids it, kernel-reduces a real refutation, and its soundness
+  theorem is axiom-clean — so **the kernel route needs no new soundness proof, only throughput**. At
+  core's ~150 ms per propagation step de Grey costs 22.6 days; with a big-integer mask checker,
+  measured at 0.35 ms/step, **1.26 hours**. Until that is built we pay a native-evaluation axiom and
+  say so, and the geometry half — which *is* kernel-only — is the part we claim without
+  qualification.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

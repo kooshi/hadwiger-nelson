@@ -21,15 +21,54 @@ one-step certificate:
 | route | result |
 |---|---|
 | `by decide` | stuck immediately — the elaborator will not unfold `@[irreducible]` well-founded definitions (`Array.anyM.loop` among them) |
-| `by decide +kernel` | gets much further: it *does* reduce `Array.any`, the `@[no_expose]` `Decidable (∃ v, VarMem v f)` instance, and `compactLratChecker` on trivial input — then sticks inside `Formula.performRupAdd` after ~40 s |
+| `by decide +kernel` | stuck immediately too — in **under a second**, not after grinding |
 | `by native_decide` | succeeds, instantly |
 
 So the LRAT half of this project buys a native-evaluation axiom, and buys it for *every*
 certificate including the two-clause one. Core's own `bv_decide` does the same — its final step is
 `nativeEqTrue`, not a kernel reduction — so this is the state of the art rather than a gap in our
-setup. The kernel-checked route would require an LRAT checker written to reduce, with its own
-soundness proof; that is a milestone, not a tactic swap, and it is tracked as open work in
-`ARCHITECTURE.md` § 5.
+setup.
+
+### Where it sticks, and why that is good news
+
+Corrected 2026-07-29. An earlier version of this file said `decide +kernel` "sticks inside
+`Formula.performRupAdd` after ~40 s". **Both halves of that were wrong**, and anyone planning from
+it was aimed at the wrong target. `performRupAdd` reduces fine; so do the well-founded recursion,
+the `Array` mutation, and the whole propagation engine. The obstruction is one thing in one place:
+
+* `DefaultClause.ofArray` (`…/LRAT/Internal/Clause.lean`) builds every clause through an
+  `Std.HashMap` to detect duplicate and complementary literals — the only hash map in the entire
+  LRAT tree;
+* hash-map bucket indexing computes on `USize`, whose width is `System.Platform.numBits`;
+* `System.Platform.numBits` is `(System.Platform.getNumBits ()).val`, and `getNumBits` is
+  `@[extern] opaque` — **the kernel has no delta rule for it**, so `2 ^ numBits` never becomes a
+  literal and every `USize` operation is permanently stuck.
+
+Verified directly: `#reduce System.Platform.numBits` prints the unreduced
+`(System.Platform.getNumBits PUnit.unit).1`; `(USize.ofNat 8 - 1).toNat = 7` will not reduce, while
+the same statement over fixed-width `UInt64` reduces instantly.
+
+`ofArray` sits on both halves of `check`'s path — converting the input formula, and converting every
+`.addRup` step — which is why the shipped entry point is blocked for any certificate at all.
+
+### The kernel-checked route needs no new soundness proof
+
+The other correction, and the one that matters. This file used to say the kernel-checked route
+"would require an LRAT checker written to reduce, with its own soundness proof". **It does not.**
+Core already ships a second, HashMap-free entry point: the generic `lratChecker`, structurally
+recursive over `List (Action β α)` of *pre-converted* actions. It never calls `ofArray`, so it never
+touches a hash map — and `lratCheckerSound` is axiom-clean.
+
+Measured 2026-07-29: a genuine three-step RUP refutation of an unsatisfiable four-clause formula,
+with hand-built `DefaultClause`s, gives `lratChecker F prf = .success` **by `decide +kernel`**, and
+`lratCheckerSound` then yields `Unsatisfiable` with axioms exactly
+`[propext, Classical.choice, Quot.sound]`. No native evaluation anywhere.
+
+So the open question is **throughput, not possibility**: core's engine rebuilds a full assignment
+array per propagation and indexes clauses positionally, and whether that reaches de Grey's scale is
+a measurement, not a proof obligation. What a kernel-checked route costs is: emitting
+`DefaultClause` actions rather than `IntAction` (each clause carries two proof fields, so it wants
+one smart constructor proved once rather than a tactic call per clause), and enough speed.
 
 **What the purchase is not.** The geometry half stays kernel-clean (`UDCert.Valid` is decided by
 `decide`, `[propext, Quot.sound]`), and so does the spindle's non-3-colourability, which

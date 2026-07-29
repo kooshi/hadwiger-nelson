@@ -20,8 +20,13 @@ for the same step. Consequences M05 must plan around:
   named per declaration, listed in `ARCHITECTURE.md` § 5, and said out loud in the write-up.
 * At v4.32.0 the axiom is `<decl>._native.native_decide.ax_N_M`, **not** `Lean.ofReduceBool`. Grep
   for `native_decide.ax`.
-* The only route to a kernel-only bound is an LRAT checker written to reduce, with its own soundness
-  proof. That is a milestone-sized undertaking, not a tactic swap. Tracked as open work.
+* ~~The only route to a kernel-only bound is an LRAT checker written to reduce, with its own
+  soundness proof.~~ **Superseded 2026-07-29 — see `plans/spike-kernel-lrat.md`.** Core's generic
+  `lratChecker` already kernel-reduces a real refutation with an axiom-clean soundness theorem, so no
+  new soundness proof is needed for correctness — only speed. Measured: core is ~430× too slow
+  (22.6 days for de Grey), a big-integer mask checker is 1.26 hours. Also superseded there: the claim
+  above that `decide +kernel` sticks in `performRupAdd` after ~40 s. It sticks in
+  `DefaultClause.ofArray`, in under a second, because of `Std.HashMap`.
 
 ## Deferred from M03
 
