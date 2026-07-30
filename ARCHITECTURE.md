@@ -99,7 +99,55 @@ CaDiCaL (bundled at `$(lean --print-prefix)/bin/cadical`) is an untrusted oracle
 certificate. The residual trust question is only *how the `Bool` is evaluated* — kernel `decide`
 or `native_decide`. See § 5.
 
-### 2.3 The colour-cube split — mandatory, not an optimization
+#### 2.2.1 The colour-cube split is dead, and so was the native fallback — measured 2026-07-29/30
+
+**§ 2.3 below is superseded.** Everything in it about the split being "mandatory" is about solver
+tractability and is still true; everything about the split being a *route to a checked proof* is false,
+and so is § 5's long-standing assumption that χ(ℝ²) ≥ 5 would ship carrying a native-evaluation axiom.
+
+Measured in full on the desktop (32 cores), all 1,024 depth-5 cubes solved to UNSAT:
+
+| | |
+|---|---|
+| hint entries, complete | **3.06 × 10⁹** raw, **1.50 × 10⁹** after backward trimming |
+| kernel cost per hint entry, measured on a real cube's real table | **1.35 ms** |
+| **projected processor time** | **563 hours**, against a 40-hour abandon threshold |
+| the same certificate as embedded Lean data | **~4 GB of packed `Nat` literals** |
+
+`plans/spike-kernel-lrat.md` § 4 recorded the same total as 1.30 × 10⁷ — it sampled and extrapolated,
+and it was wrong by 115×.
+
+**And `native_decide` does not rescue it**, which is the correction with teeth. The obstacle is not
+trust, it is **data volume**: compiled evaluation checks a certificate the elaborator has to accept
+first, and the spike already measured that Lean will not elaborate certificate data at that scale. So
+the route this project planned around from M03 to M05 was never open in either form.
+
+Deeper splits are strictly worse (7.16× more total hints per three extra pinned vertices), monolithic
+does not finish in six configurations, at-most-one clauses do not help, and enlarging the point set adds
+disconnected copies. See `plans/M06-chi-ge-five.md` § 0.
+
+### 2.2.2 What replaced it: de Grey's own decomposition
+
+`deGrey.edges` decomposes **exactly** — two 791-vertex copies of one point set, sharing exactly one
+vertex (14) and joined by exactly one edge (11–802), 3938 + 3938 + 1 = 7877 — and SAT confirms the
+forcing that makes the construction work:
+
+| vertex 14 pinned to colour 0; its copy's endpoint at | 0 | 1 | 2 | 3 |
+|---|---|---|---|---|
+| copy A (vertex 11) | **SAT** | UNSAT | UNSAT | UNSAT |
+| copy B (vertex 802) | **SAT** | UNSAT | UNSAT | UNSAT |
+
+So every proper 4-colouring gives both ends of the joining edge the shared vertex's colour, which the
+joining edge forbids. **Two certificates instead of 1,024**, 34.2 × 10⁶ hint entries instead of
+1.50 × 10⁹, and one refutation per copy covers three colour cases because relabelling colours is free.
+**~23 hours of processor time and ~410 MB of source** — inside the threshold, 44× cheaper, and the proof
+is now de Grey's argument rather than a brute-force search.
+
+The check is split into 2,265 **segments** — each an implication between watermarks, so they elaborate
+in parallel. The segment size is set by *memory*: peak ≈ 3.4 GB + 0.81 GB per certificate chunk, and 24
+concurrent 57-chunk segments took the machine down before that was measured.
+
+## 2.3 The colour-cube split — mandatory, not an optimization *(superseded: see § 2.2.1)*
 
 **Measured, 2026-07-23, 32-core box.** A monolithic CaDiCaL run on the full 6324-variable /
 33089-clause instance (8 configurations raced: `--unsat`, default, `--plain`, `--sat`, two seeds
@@ -145,16 +193,23 @@ Std.Sat ─┤
          │
          ├─► HadwigerNelson/Sat/Mask.lean   clauses/assignments as bitmasks; propagate   [M05]
          │        └─► HadwigerNelson/Sat/ClauseTable.lean   literal chunk table; agreement
-         │                 └─► HadwigerNelson/Sat/MaskCheck.lean   decoder, checker, soundness
+         │                 └─► HadwigerNelson/Sat/MaskCheck.lean   decoder, checker, segments  [M05/M06]
+         │
+         ├─► HadwigerNelson/Sat/Forcing.lean   colour symmetry; two forcing subgraphs   [M06]
          │
          └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
                   ├─► Instances/SpindleBound.lean       χ ≥ 4, three routes              [M03]
                   │        └─► Instances/SpindleLrat.lean   certificates — generated     [M03]
                   └─► Instances/DeGrey/Table.lean    1581 points, its OWN module     [M04]
-                           └─► Instances/DeGrey/Edges.lean   158 chunks; edges := flatten
-                                    ├─► Instances/DeGrey/Geom00 … Geom15.lean   500 edges each
-                                    └─► Instances/DeGrey/Valid.lean   the 158 cited, not redecided
+                           └─► Instances/DeGrey/Edges.lean   45 chunks; edges := halfA ++ halfB ++ cross
+                                    ├─► Instances/DeGrey/Geom00 … Geom08.lean   179 edges/chunk
+                                    └─► Instances/DeGrey/Valid.lean   the 45 cited, not redecided
                                              └─► Instances/DeGrey.lean   the claims, the hand-off
+                                                      └─► Instances/DeGrey/Split.lean   the two copies  [M06]
+                                                               ├─► HalfA/, HalfB/  table + 2265 segments
+                                                               └─► Instances/DeGrey/Forcing.lean
+                                                                        └─► Instances/DeGrey/Bound.lean
+                                                                                 χ(R^2) >= 5
 
 Proofs.lean          — flat public surface
 tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
@@ -171,7 +226,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
 | **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
 | **M05** ✅ | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Landed 2026-07-29 (`plans/M05-kernel-checker.md`).* `maskCheck_sound` — a refutation checker whose two hypotheses are closed `Bool`s the **kernel** decides, axioms exactly `[propext, Classical.choice, Quot.sound]`, zero `sorry`. Soundness is proved for **every** decoder, so the certificate's packing is untrusted as a matter of type. Negative controls committed and *watched to fail*: a satisfiable formula is refused, a clause citing itself is refused, and mutating the conflict test or deleting the watermark guard breaks the soundness proofs rather than the checker's answer. The remaining work is throughput at de Grey's scale, projected at **5.4–9.0 h processor time, ~30–50 min wall over 96 independent cubes**; that measurement belongs to M06, which is where a real certificate first arrives. |
-| **M06** | **χ(ℝ²) ≥ 5.** Cube split at depth 5 (1024 cubes), certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. **Target: zero native purchases** — that is what M05 buys. |
+| **M06** | **χ(ℝ²) ≥ 5.** ~~Cube split at depth 5 (1024 cubes)~~ — **the cube split is dead; see below.** de Grey's own decomposition instead: two forcing lemmas, one certificate each. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. **Target: zero native purchases** — that is what M05 buys. |
 | **M07** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
 | **M08** | **Structure-aware geometry.** Difference-vector certificates: verify one norm per *distinct edge difference* (67 for de Grey, against 7877 edges) and a subtraction per edge. | The same `deGrey_valid` claim at a per-edge cost that no longer carries a multiplication, and a projection showing the expensive term is flat in graph size. Sequenced here because it changes the edge list's shape and would invalidate M06's certificates. |
 | **M09** | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | A composition theorem, and de Grey's own construction re-derived through it rather than asserted as coordinates. |
@@ -241,6 +296,19 @@ Quot.sound]`. Every native axiom in the project is still one of the ten below.
 Nine declarations from `Sat/{Mask,ClauseTable,MaskCheck}.lean` are now in the audit's clean section,
 `maskCheck_sound` among them. Nothing above depends on them yet — M06 is where the ten purchases
 below are meant to disappear, and until that lands they are still in the ledger.
+
+**M06 added no purchases, and the headline has none.** `chromaticNumber_plane_ge_five` depends on
+exactly `[propext, Classical.choice, Quot.sound]`. The ten purchases below are still in the ledger
+because the Moser spindle's certificate routes still exist as cross-checks of the encoder — they buy a
+bound that `four_le_chromaticNumber_plane` also proves without them, which is the point of proving it
+three ways.
+
+**And the sentence this section carried from M03 to M05 was wrong.** It said χ(ℝ²) ≥ 5 would ship
+carrying one native-evaluation axiom per certificate-backed declaration, as though the choice were
+kernel-versus-compiler. It was not: at the scale the cube split needed, the certificate is ~4 GB of
+embedded data and **Lean will not elaborate it either way** (§ 2.2.1). Compiled evaluation checks a
+term the elaborator has to accept first. What made the milestone possible was not the checker and not
+the trust position — it was finding a proof 44× smaller.
 
 **The headline bound buys nothing.** `four_le_chromaticNumber_plane` goes through route A —
 `decide +kernel` over all `3 ^ 7` colourings — and reports exactly `propext, Classical.choice,
@@ -345,6 +413,9 @@ produce a meaningless one, and the specific countermeasure for each:
 | The checker's answer and its diagnosis drift apart | ✅ M05: the `Bool` is *defined* as "the diagnostic reports no fault", so they are one computation. M04's arrangement — two functions related by a proved lemma — is the weaker version of this |
 | The packed certificate format is silently trusted | ✅ M05: the decoder is a **parameter** of the checker and soundness is proved for every function of its type, so a decoding bug is a failed check by construction, not by review |
 | A cube certificate silently attached to the wrong cube | ✅ M03: the cube list is supplied literally and tied to `allCubes` by `rfl`, so a misfile is a type error naming the cube as a readable literal; `#eval badCubes …` reports every wrong *and* every missing index |
+| A certificate segment attached at the wrong watermark, so the 2265-segment chain silently skips work | ✅ M06: segment *k* concludes at the watermark segment *k+1* assumes, so the composition **typechecks only if they chain** — the emitter's only arithmetic is checked by the elaborator, and a mismatch names both segments |
+| The two forcing lemmas proved about the wrong graph — e.g. a half that is not a subgraph | ✅ M06: the halves are *contiguous segments* of `deGrey.edges` by construction, so the inclusions are `List.mem_append_left`; and the shape of the split (3938 + 3938 + 1, one shared vertex, the joining edge in neither half) is asserted by `#guard` on every build |
+| The colour-symmetry step used to "prove" more than it can | ✅ M06: relabelling requires an **injection**, and that hypothesis is what the theorem consumes; a merging relabel does not apply. The SAT-satisfiable case (endpoint at the shared vertex's own colour) is recorded beside the lemma as the reason it is an equality and not something stronger |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
@@ -360,6 +431,12 @@ Stated up front, per doctrine, and to be reported as-is:
 - **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
   Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
   rungs A–C are not, which is why the ratchet is built the way it is.
+- **The witness is de Grey's 1581-vertex graph, and a smaller one would not obviously be cheaper.**
+  M06 lands by using the construction's own two-copy structure, not by shrinking the graph. Trimming to
+  a smaller 5-chromatic unit-distance graph (M07) makes the instance *less* constrained and so plausibly
+  *harder* to refute — measured here at one level down: the forcing does not hold on the 395-vertex
+  layer, where all four pin combinations are satisfiable. So "smaller graph, smaller proof" is an
+  assumption M07 must measure rather than inherit.
 - **The certificate check is not kernel-reducible *as shipped*, and M05 replaced it.** The shipped
   `LRAT.check` is blocked by exactly one thing — `Std.HashMap` inside `DefaultClause.ofArray`, whose
   bucket indexing computes on `USize`, whose width is an `@[extern] opaque` the kernel cannot unfold.
