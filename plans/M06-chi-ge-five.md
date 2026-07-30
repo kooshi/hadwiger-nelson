@@ -402,6 +402,52 @@ The emitter's contract is M05's table in `Sat/MaskCheck.lean`, unchanged, plus t
 | backward-trim from the empty clause, so every kept clause is reachable | (nothing: an untrimmed certificate is merely 2× slower) |
 | give each `Chunks.leaf` a slot capacity at least the longest clause in it | `TableFault.slotMismatch` |
 
+## 4.5 What implementation cost, and what it corrected
+
+*Written 2026-07-30, during the run.*
+
+**The workflow ran out of order, and that is worth recording before anything else.** WORKFLOW puts the
+three modeling passes between the subplan and the implementation. Here the measurements *were* the
+milestone's hard part — five hours of solving, trimming and kernel timing — and I went from subplan
+straight to code, then ran the passes afterwards with 22 hours of kernel checking already in flight.
+Each pass still found something (below), but two of the findings could only be recorded, and one had to
+be applied mid-run at the cost of invalidating everything built so far. The order is a real
+constraint, not ceremony.
+
+**Six things the subplan did not anticipate:**
+
+| what | why it was missed |
+|---|---|
+| a segment check peaks at **49.5 GB** | the subplan sized segments by *time* (~3 min each) and never asked what one costs in memory. Twenty-four concurrent took the desktop down. Peak = 3.4 GB + 0.81 GB per certificate chunk — `unpackAux`'s intermediate literal sets, which the kernel retains for a whole reduction |
+| the decoder needs `maxRecDepth` ~10⁶ | it peels one field per reduction step and a chunk holds ~2,600. Without it a segment runs 149 s and dies with a message too large to print |
+| the per-hint cost is **2.36 ms**, not 1.35 ms | 1.35 ms was measured on a 33,530-clause table with a depth-8 chunk tree; the real tables are 317,451 clauses and depth 13. The total moved from 12.8 h to ~23 h — still inside the threshold |
+| `agreesWithCNF` needs the *unpinned* formula as input | the emitter was handed the solved instance, whose clause count already includes the cube, and double-counted it by two. Caught by `halfA_size` failing, not by review |
+| editing anything upstream of the generated modules invalidates all 2,265 | obvious in hindsight; it cost one restart, and it is why the experience pass had to run before the build rather than during it |
+| M04's `#guard` on the chunk count | the split needs 179 edges per chunk (3938 = 22 × 179), not 50, so `deGreyChunks.length` moved from 158 to 45 |
+
+**What each modeling pass found**, all three run after implementation:
+
+* **Domain.** The gluing is the *construction's* structure, not the proof's: the argument consumes
+  three list inclusions and nothing else, so there is no glued-graph type and the vertex-sharing counts
+  are spec rather than model. That inverted into the milestone's best extraction —
+  `not_colorable_of_forcing` over an arbitrary graph, which makes the headline one citation. Also: M03's
+  reason for a lax `Cube` type had silently stopped applying, and Mathlib already has colour relabelling
+  (`SimpleGraph.recolorOfEmbedding`), found by grep rather than recalled.
+* **Obligation.** The two segment corollaries are the elimination rules for a non-invertible motive, not
+  duplication. The 2,265-deep composition is not a hand-written fold — a list of *declarations* is not a
+  Lean value — and its watermarks are checked by the elaborator, which is the guarantee worth stating.
+  Found a **false justification in my own comment** about the joining edge. And: this project has two
+  descent shapes, not one, and neither can express the other.
+* **Experience.** A build-fault table, because M06's faults are build faults that no `CertFault` covers —
+  including the one I needed myself, that a failed segment is diagnosed by `#eval` of the same
+  expression. `runChunks` renamed `runSegment` so the code and the theorems share one vocabulary.
+
+**And a negative control falsified a claim I had made twice.** I wrote, in a docstring and in a commit
+message, that a degenerate cube makes the pinned formula trivially unsatisfiable. It does not — the
+encoding has no at-most-one-colour clauses, so `[(u,0),(u,1)]` asks for two different variables to be
+true. Now committed as a theorem that it is *satisfiable*. This is the second milestone running where
+writing the control corrected the prose it was checking.
+
 ## 5. Negative controls — every check watched to fail
 
 | control | must fail with |
