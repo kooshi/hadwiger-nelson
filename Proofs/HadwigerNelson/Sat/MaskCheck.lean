@@ -8,21 +8,32 @@ A refutation checker Lean's **kernel** can run, and the theorem that says runnin
 ## What a certificate is here
 
 Nothing but hint lists. Because every clause — the formula's and the solver's derived ones alike —
-already lives in the emitted table (`Sat/ClauseTable.lean`), an action needs to carry neither a
-clause nor an id: ids are consumed densely and in order, so the checker's entire state is a
-**watermark**, and clause ids below it are the ones it has justified.
+already lives in the emitted table (`Sat/ClauseTable.lean`), an action needs to carry neither a clause
+nor an id: ids are consumed densely and in order, so the checker's entire state is a **watermark**,
+and clause ids below it are the ones it has justified.
 
 That is smaller than the format core's `LRAT.check` consumes, and it is what removes the growing
-clause database whose measured cost (16.7 ms per lookup at de Grey's scale, rising with database
-size) made the obvious design impossible.
+clause database whose measured cost (16.7 ms per lookup at de Grey's scale, rising with database size)
+made the obvious design impossible.
+
+## The decoder is untrusted, and the type says so
+
+`runStream` takes the decoder as a **parameter**, and `runStream_sound` is proved for *every* function
+of that type. That is the strongest available statement of "nothing about the decoder is trusted": not
+a docstring promise, but a universally quantified variable, so relying on the real decoder's behaviour
+would be a type error rather than a review question. A decoding bug can only cause a failed check.
+
+It also means the certificate's own packing — its field width — never appears in the soundness
+argument. It lives in the concrete decoder, separate from the clause table's packing, because one
+blob's layout is not the other's.
 
 ## Deletion lines are dropped by the emitter, not ignored here
 
 Real certificates contain them — 381 per de Grey cube, removing 2,770 clause ids. A larger clause
 database only makes propagation *harder*, so discarding deletions can never let a bad certificate
-through; and with the table emitted as a literal there is nothing to delete from. So the emitter
-drops them and `Action` stays two constructors wide. Recorded because "accepted and ignored" is
-normally a smell, and this is the case where it is a decision.
+through; and with the table emitted as a literal there is nothing to delete from. So the emitter drops
+them and `Action` stays two constructors wide. Recorded because "accepted and ignored" is normally a
+smell, and this is the case where it is a decision.
 
 ## Where the trust sits
 
@@ -45,22 +56,74 @@ inductive Action where
   | addEmpty (hints : List Nat)
 deriving DecidableEq, Repr, Inhabited
 
-/-! ### Decoding
+/-! ### Checking -/
 
-The decoder is **untrusted, structurally**: `maskCheck_sound` says nothing whatever about what
-`decodeChunk` means. Any `List Action` it produces is checked from scratch, so a decoding bug can
-only cause a failed check. That is why it is worth keeping simple rather than proving anything about
-it.
+/-- **Reverse unit propagation.** Starting from an assignment that falsifies the clause being derived,
+walk the hinted clauses; `true` means a conflict was reached, which is what justifies the clause.
 
-Certificate chunk format, all fields `L.field` bits wide, least significant first: one header field
-giving the number of fields that follow, then a sequence of actions, each a head field
-`2 * hintCount + tag` (tag 0 = `addRup`, 1 = `addEmpty`) followed by its hint fields. -/
+`h < w` is the discipline that keeps the watermark meaningful: a hint may only cite a clause already
+justified. Without it a certificate could bootstrap a clause from itself.
 
-/-- Peel `n` fields off a chunk, least significant first. Shifting the remainder keeps the work
-linear in the field count rather than quadratic in the chunk size. -/
-def fields (L : Layout) : Nat → Nat → List Nat
+There is no `ok` test on the hinted clause — the watermark invariant `Justified` already carries it,
+which is the point of having an invariant instead of re-checking. -/
+def rup (t : ClauseTable) (w : Nat) : LitSet → List Nat → Bool
+  | _, []      => false
+  | α, h :: hs =>
+      if h < w then
+        match propagate α (t.get h) with
+        | .conflict => true
+        | .prop α'  => rup t w α' hs
+        | .fail     => false
+      else false
+
+/-- What running a batch of actions produced. -/
+inductive Outcome where
+  /-- The empty clause was justified: the formula is unsatisfiable. -/
+  | done
+  /-- All actions checked out; the watermark has advanced this far. -/
+  | more (w : Nat)
+  /-- The certificate is wrong. -/
+  | fail
+deriving DecidableEq, Repr, Inhabited
+
+/-- Run a decoded action list from watermark `w`. Each `addRup` justifies the clause the table holds
+at `w` and advances the watermark by one; the clause must be non-tautological, which is the hypothesis
+`propagate_prop_sound` needs and the only check here that guards against a *false theorem* rather than
+a failed proof. -/
+def runActions (t : ClauseTable) : Nat → List Action → Outcome
+  | w, []                  => .more w
+  | w, .addRup hs :: rest  =>
+      let c := t.get w
+      if c.ok && rup t w c.negate hs then runActions t (w + 1) rest else .fail
+  | w, .addEmpty hs :: _   => if rup t w ⟨0, 0⟩ hs then .done else .fail
+
+/-- Run the certificate chunk by chunk, threading the watermark, decoding with **whatever decoder is
+handed in**. Reaching the end of the certificate without an `addEmpty` is a failure, not a success. -/
+def runStream (t : ClauseTable) (decode : Nat → Option (List Action)) : Nat → List Nat → Bool
+  | _, []       => false
+  | w, ch :: cs =>
+      match decode ch with
+      | none      => false
+      | some acts =>
+          match runActions t w acts with
+          | .done    => true
+          | .more w' => runStream t decode w' cs
+          | .fail    => false
+
+/-! ### The concrete decoder
+
+Certificate chunk format, all fields `fw` bits wide, least significant first: one header field giving
+the number of fields that follow, then a sequence of actions, each a head field
+`2 * hintCount + tag` (tag 0 = `addRup`, 1 = `addEmpty`) followed by its hint fields.
+
+None of this is trusted. It is one instantiation of `runStream`'s decoder parameter, and
+`runStream_sound` holds for all of them. -/
+
+/-- Peel `n` fields off a chunk, least significant first. Shifting the remainder keeps the work linear
+in the field count rather than quadratic in the chunk size. -/
+def fields (fw : Nat) : Nat → Nat → List Nat
   | 0,     _ => []
-  | n + 1, w => (w % (2 ^ L.field)) :: fields L n (w >>> L.field)
+  | n + 1, w => (w % (2 ^ fw)) :: fields fw n (w >>> fw)
 
 /-- Group a field list into actions. Structural on a fuel that the caller sets to the field count,
 which bounds the number of actions; running out with fields left over is a **failure**, not a quiet
@@ -76,110 +139,59 @@ def parseActions : Nat → List Nat → Option (List Action)
           (if hd % 2 == 0 then Action.addRup hs else Action.addEmpty hs) :: acts
       else none
 
-/-- Decode one certificate chunk. -/
-def decodeChunk (L : Layout) (w : Nat) : Option (List Action) :=
-  let n := w % (2 ^ L.field)
-  parseActions n (fields L n (w >>> L.field))
+/-- Decode one certificate chunk at field width `fw`. -/
+def decodeChunk (fw : Nat) (w : Nat) : Option (List Action) :=
+  let n := w % (2 ^ fw)
+  parseActions n (fields fw n (w >>> fw))
 
-/-! ### Checking -/
-
-/-- **Reverse unit propagation.** Starting from an assignment that falsifies the clause being
-derived, walk the hinted clauses; `true` means a conflict was reached, which is what justifies the
-clause.
-
-`h < w` is the discipline that keeps the watermark meaningful: a hint may only cite a clause already
-justified. Without it a certificate could bootstrap a clause from itself.
-
-There is no `Ok` test on the hinted clause — the watermark invariant `Justified` already carries it,
-which is the point of having an invariant instead of re-checking. -/
-def rup (L : Layout) (t : ClauseTable) (w : Nat) : Asg → List Nat → Bool
-  | _, []      => false
-  | α, h :: hs =>
-      if h < w then
-        match propagate α (t.get L h) with
-        | .conflict => true
-        | .prop α'  => rup L t w α' hs
-        | .fail     => false
-      else false
-
-/-- What running a chunk's actions produced. -/
-inductive Outcome where
-  /-- The empty clause was justified: the formula is unsatisfiable. -/
-  | done
-  /-- All actions checked out; the watermark has advanced this far. -/
-  | more (w : Nat)
-  /-- The certificate is wrong. -/
-  | fail
-deriving DecidableEq, Repr, Inhabited
-
-/-- Run a decoded action list from watermark `w`. Each `addRup` justifies the clause the table holds
-at `w` and advances the watermark by one; the clause must be non-tautological, which is the
-hypothesis `propagate_prop_sound` needs and the only check here that guards against a *false theorem*
-rather than a failed proof. -/
-def runActions (L : Layout) (t : ClauseTable) : Nat → List Action → Outcome
-  | w, []                  => .more w
-  | w, .addRup hs :: rest  =>
-      let c := t.get L w
-      if c.ok && rup L t w (Asg.negate c) hs then runActions L t (w + 1) rest else .fail
-  | w, .addEmpty hs :: _   => if rup L t w ⟨0, 0⟩ hs then .done else .fail
-
-/-- Run the certificate chunk by chunk, threading the watermark. Reaching the end of the
-certificate without an `addEmpty` is a failure, not a success. -/
-def runChunks (L : Layout) (t : ClauseTable) : Nat → List Nat → Bool
-  | _, []       => false
-  | w, ch :: cs =>
-      match decodeChunk L ch with
-      | none      => false
-      | some acts =>
-          match runActions L t w acts with
-          | .done    => true
-          | .more w' => runChunks L t w' cs
-          | .fail    => false
-
-/-- **The checker.** `m` is the number of the formula's own clauses, so the watermark starts just
-past them. -/
-def maskCheck (L : Layout) (t : ClauseTable) (m : Nat) (cert : List Nat) : Bool :=
-  runChunks L t m cert
+/-- **The checker.** `m` is the number of the formula's own clauses, so the watermark starts just past
+them; `fw` is the certificate's field width, which is the clause table's business only by coincidence
+and so is passed separately. -/
+def maskCheck (t : ClauseTable) (fw m : Nat) (cert : List Nat) : Bool :=
+  runStream t (decodeChunk fw) m cert
 
 /-! ### Soundness
 
 One induction per layer, all on the same invariant pair: `Justified` for the clause table, and
-`Asg.Extends` inside a single propagation chain. -/
+`LitSet.All` inside a single propagation chain. -/
 
-/-- Reaching a conflict is impossible if a satisfying assignment extends where we started. -/
-theorem rup_sound {L : Layout} {t : ClauseTable} {f : CNF Nat} {w : Nat} {α : Asg}
-    {a : Nat → Bool} {hs : List Nat} (hJ : Justified L t f w) (hf : CNF.eval a f = true)
-    (hE : α.Extends a) (h : rup L t w α hs = true) : False := by
+/-- Reaching a conflict is impossible if a satisfying assignment agrees with where we started. -/
+theorem rup_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {α : LitSet}
+    {a : Nat → Bool} {hs : List Nat} (hJ : Justified t f w) (hf : CNF.eval a f = true)
+    (hE : α.All a) (h : rup t w α hs = true) : False := by
   sorry
 
 /-- Checking a batch of actions extends the justified prefix. -/
-theorem runActions_more {L : Layout} {t : ClauseTable} {f : CNF Nat} {w w' : Nat}
-    {acts : List Action} (hJ : Justified L t f w) (h : runActions L t w acts = .more w') :
-    Justified L t f w' := by
+theorem runActions_more {t : ClauseTable} {f : CNF Nat} {w w' : Nat} {acts : List Action}
+    (hJ : Justified t f w) (h : runActions t w acts = .more w') : Justified t f w' := by
   sorry
 
 /-- Justifying the empty clause refutes any satisfying assignment. -/
-theorem runActions_done {L : Layout} {t : ClauseTable} {f : CNF Nat} {w : Nat}
-    {acts : List Action} {a : Nat → Bool} (hJ : Justified L t f w) (hf : CNF.eval a f = true)
-    (h : runActions L t w acts = .done) : False := by
+theorem runActions_done {t : ClauseTable} {f : CNF Nat} {w : Nat} {acts : List Action}
+    {a : Nat → Bool} (hJ : Justified t f w) (hf : CNF.eval a f = true)
+    (h : runActions t w acts = .done) : False := by
   sorry
 
-/-- The same, across chunks. -/
-theorem runChunks_sound {L : Layout} {t : ClauseTable} {f : CNF Nat} {w : Nat}
-    {cert : List Nat} {a : Nat → Bool} (hJ : Justified L t f w) (hf : CNF.eval a f = true)
-    (h : runChunks L t w cert = true) : False := by
+/-- The same, across chunks — **for an arbitrary decoder.** Nothing about `decode` is available to
+this proof, which is what makes the decoder untrusted as a matter of type rather than of policy. -/
+theorem runStream_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
+    {a : Nat → Bool} (decode : Nat → Option (List Action)) (hJ : Justified t f w)
+    (hf : CNF.eval a f = true) (h : runStream t decode w cert = true) : False := by
   sorry
 
 /-- **The milestone's theorem.** If the emitted table really holds the formula, and the checker
 accepts the certificate against it, the formula is unsatisfiable.
 
-Both hypotheses are closed `Bool`s the kernel decides, so a proof of unsatisfiability costs no
-axiom beyond the standard three — which is the whole point of M05, and the difference between a
-result a reader can check and one that asks them to trust a compiler and a CPU. -/
-theorem maskCheck_sound {L : Layout} {t : ClauseTable} {f : CNF Nat} {cert : List Nat}
-    (hagree : agreesWithCNF L t f = true)
-    (hcheck : maskCheck L t f.clauses.size cert = true) : f.Unsat := by
-  sorry
+Both hypotheses are closed `Bool`s the kernel decides, so a proof of unsatisfiability costs no axiom
+beyond the standard three — which is the whole point of M05, and the difference between a result a
+reader can check and one that asks them to trust a compiler and a CPU. -/
+theorem maskCheck_sound {t : ClauseTable} {f : CNF Nat} {fw : Nat} {cert : List Nat}
+    (hagree : t.agreesWithCNF f = true)
+    (hcheck : maskCheck t fw f.clauses.size cert = true) : f.Unsat := by
+  intro a
+  cases hev : CNF.eval a f
+  · rfl
+  · exact (runStream_sound (decodeChunk fw) (justified_of_agreesWithCNF hagree) hev hcheck).elim
 
 /-! ## Spec
 
@@ -190,56 +202,58 @@ routes are checking the same refutation. -/
 
 section Spec
 
-private def L2 : Layout := { field := 8, lits := 2, perChunk := 2 }
-
 /-- Field encoding of a literal: variable `v`, `s` true for a positive occurrence. -/
 private def fld (v : Nat) (s : Bool) : Nat := (if s then 2 * v else 2 * v + 1) + 1
 
 /-- Pack a list of fields into one chunk, least significant first. -/
-private def pack (L : Layout) (xs : List Nat) : Nat :=
-  xs.foldr (fun x acc => x ||| (acc <<< L.field)) 0
+private def pack (xs : List Nat) : Nat := xs.foldr (fun x acc => x ||| (acc <<< 8)) 0
 
-/-- ids 0,1 — `(x ∨ y)` and `(x ∨ ¬y)`. -/
-private def ch0 : Nat := pack L2 [fld 0 true, fld 1 true, fld 0 true, fld 1 false]
-/-- ids 2,3 — `(¬x ∨ y)` and `(¬x ∨ ¬y)`. -/
-private def ch1 : Nat := pack L2 [fld 0 false, fld 1 true, fld 0 false, fld 1 false]
-/-- ids 4,5 — the derived clauses `(x)` and `(¬x)`, zero-terminated. -/
-private def ch2 : Nat := pack L2 [fld 0 true, 0, fld 0 false, 0]
-
-private def tbl : ClauseTable := .node 2 (.node 1 (.leaf ch0) (.leaf ch1)) (.leaf ch2)
+private def tbl : ClauseTable :=
+  { field := 8, lits := 2, perChunk := 2
+    chunks :=
+      .node 2
+        (.node 1
+          -- ids 0,1 — `(x ∨ y)` and `(x ∨ ¬y)`
+          (.leaf (pack [fld 0 true, fld 1 true, fld 0 true, fld 1 false]))
+          -- ids 2,3 — `(¬x ∨ y)` and `(¬x ∨ ¬y)`
+          (.leaf (pack [fld 0 false, fld 1 true, fld 0 false, fld 1 false])))
+        -- ids 4,5 — the derived clauses `(x)` and `(¬x)`, zero-terminated
+        (.leaf (pack [fld 0 true, 0, fld 0 false, 0])) }
 
 private def f4 : CNF Nat :=
   ⟨#[[(0, true), (1, true)], [(0, true), (1, false)],
      [(0, false), (1, true)], [(0, false), (1, false)]]⟩
 
-#guard agreesWithCNF L2 tbl f4
-#guard tbl.get L2 4 == ({ pos := 1, neg := 0 } : MClause)
-#guard tbl.get L2 5 == ({ pos := 0, neg := 1 } : MClause)
+#guard tbl.agreesWithCNF f4
+#guard tbl.get 4 == ({ pos := 1, neg := 0 } : LitSet)
+#guard tbl.get 5 == ({ pos := 0, neg := 1 } : LitSet)
 
 /-- The certificate: `addRup [0,1]`, `addRup [2,3]`, `addEmpty [4,5]` — nine fields behind a header
 that says so. -/
-private def cert : List Nat := [pack L2 [9, 4, 0, 1, 4, 2, 3, 5, 4, 5]]
+private def cert : List Nat := [pack [9, 4, 0, 1, 4, 2, 3, 5, 4, 5]]
 
 /-- info: some [HadwigerNelson.Action.addRup [0, 1], HadwigerNelson.Action.addRup [2, 3], HadwigerNelson.Action.addEmpty [4, 5]] -/
-#guard_msgs in #eval decodeChunk L2 cert.head!
+#guard_msgs in #eval decodeChunk 8 cert.head!
 
-#guard maskCheck L2 tbl 4 cert
+#guard maskCheck tbl 8 4 cert
 
 -- **The negative controls.** Each breaks one thing and must go red.
 -- A hint citing a clause that is not yet justified.
-#guard !maskCheck L2 tbl 4 [pack L2 [9, 4, 0, 5, 4, 2, 3, 5, 4, 5]]
+#guard !maskCheck tbl 8 4 [pack [9, 4, 0, 5, 4, 2, 3, 5, 4, 5]]
 -- The empty-clause action removed: the certificate stops without concluding anything.
-#guard !maskCheck L2 tbl 4 [pack L2 [6, 4, 0, 1, 4, 2, 3]]
+#guard !maskCheck tbl 8 4 [pack [6, 4, 0, 1, 4, 2, 3]]
 -- A hint list that does not propagate to a conflict.
-#guard !maskCheck L2 tbl 4 [pack L2 [9, 4, 0, 2, 4, 2, 3, 5, 4, 5]]
+#guard !maskCheck tbl 8 4 [pack [9, 4, 0, 2, 4, 2, 3, 5, 4, 5]]
 -- A certificate filed against the wrong number of input clauses, so the derived ids are misread.
-#guard !maskCheck L2 tbl 5 cert
+#guard !maskCheck tbl 8 5 cert
+-- The certificate decoded at the wrong field width.
+#guard !maskCheck tbl 16 4 cert
 -- An empty certificate is a failure, not a vacuous success.
-#guard !maskCheck L2 tbl 4 []
+#guard !maskCheck tbl 8 4 []
 
 /-- **The terminal test, in miniature.** The kernel — not the compiler — runs both checks. The same
 two `decide +kernel` calls at de Grey's scale are what M05 exists to make affordable. -/
-example : agreesWithCNF L2 tbl f4 = true ∧ maskCheck L2 tbl 4 cert = true := by decide +kernel
+example : tbl.agreesWithCNF f4 = true ∧ maskCheck tbl 8 4 cert = true := by decide +kernel
 
 end Spec
 

@@ -87,8 +87,8 @@ affordable. The 0.35 ms figure should not be quoted again.
 Three modules. The whole trust surface is two kernel-checked `Bool`s and one theorem.
 
 ```
-Sat/Mask.lean        the propositional layer — clauses and assignments as bitmasks,
-                     one propagation step, and its soundness
+Sat/Mask.lean        the propositional layer — `LitSet`, one type read two ways, plus one
+                     propagation step and its soundness
 Sat/ClauseTable.lean the literal chunk table and its agreement with a `CNF Nat`
 Sat/MaskCheck.lean   the certificate decoder, the checker, `maskCheck_sound`
 ```
@@ -152,23 +152,84 @@ Three findings that shrink this relative to the spike's design:
   input clauses (sound — removing clauses only weakens the database), and the checker rejects a
   tautological derived clause loudly.
 
-### 2.3 The propositional layer stays free of masks
+### 2.3 One type, two readings — the domain-modeling pass
 
-Satisfaction and extension are stated over `testBit` against a total assignment, never over a mask
-of one — which is what lets the bridge to `Std.Sat.CNF.Unsat` (a `∀ a : Nat → Bool`) go through
-without a width argument:
+*Run 2026-07-29. Probe: `spikes/M05Model.lean`. Every claim below was checked in Lean before the
+skeleton was changed.*
+
+The skeleton carried `MClause` and `Asg` as two structures with identical fields, plus `Asg.negate`
+swapping them. **That distinction was incidental structure.** A clause and a partial assignment are
+one object — a set of literals — read two ways: a clause says *some* literal holds, an assignment says
+*every* one does.
+
+**Decision — one type `LitSet`, with `Any` (clause) and `All` (assignment).** *Alternative:* two
+structures, so that swapping `propagate`'s arguments is a type error. *Why this one:* the evidence is
+mechanical. The theorem relating the two readings,
 
 ```lean
-def MClause.Sat (a : Nat → Bool) (c : MClause) : Prop :=
-  (∃ i, c.pos.testBit i = true ∧ a i = true) ∨ (∃ i, c.neg.testBit i = true ∧ a i = false)
-
-def Asg.Extends (a : Nat → Bool) (α : Asg) : Prop :=
-  (∀ i, α.pos.testBit i = true → a i = true) ∧ (∀ i, α.neg.testBit i = true → a i = false)
+theorem all_iff_not_any (L : LitSet) (a : Nat → Bool) : L.All a ↔ ¬ L.negate.Any a
 ```
+
+comes out as **`And.comm` after normalization — a two-line proof.** Two genuinely different types
+could not do that; it is De Morgan on one datum. The type distinction would also have bought little:
+swapping the arguments is a wrong call, not an illegal state, and it can only cause a failed check.
+*Confidence: high* — the proof is in the file, and it replaced a leaf (`extends_negate`) rather than
+adding one.
+
+**Decision — the non-tautology invariant stays extrinsic (`LitSet.Ok`).** *Alternative:* a `Subtype`
+or a bundled proof field, since `propagate_prop_sound` needs it and `Justified` carries it at every
+id. *Why this one:* forced by the collapse above. The clause reading needs it; the assignment reading
+has no use for it at all, because the soundness argument always has a total assignment in hand whose
+existence rules inconsistency out for free. Bundling would tax exactly the half of the uses that do
+not need it. *Confidence: high* — this is the placement cut with a clean answer.
+
+**Decision — `testBit` is the vocabulary; no bit-set abstraction of our own.** *Alternative:* a
+`BitSet` wrapper over `Nat` with its own membership lemma API. *Why this one:* core tags
+`Nat.testBit_and`, `testBit_or` and `testBit_xor` `@[simp, grind =]`, so **`testBit` is the library's
+own normal form**, not a preference of ours. A wrapper would fight it: `simp` and `grind` unfold
+straight through, and every lemma would need restating. *Confidence: high — cited, not reasoned.*
 
 **Consequence: `CNF.numLiterals` and `Std.Sat.CNF.lt_numLiterals` are not needed.** The spike named
 them as the route for variables the formula never mentions. With no width in the design there is
 nothing to bound.
+
+**And the arithmetic core came out model-free.** The single-bit argument reduces to one `Nat` fact
+with no SAT in it, which is now **proved** rather than pending:
+
+```lean
+theorem or_eq_two_pow_cases {x y i : Nat} (hu : x ||| y = 2 ^ i) (hd : x &&& y = 0) :
+    (x = 2 ^ i ∧ y = 0) ∨ (x = 0 ∧ y = 2 ^ i)
+```
+
+Grepped against the toolchain source and Mathlib: genuinely absent, unlike the last three such
+claims. Worth offering upstream. It is also exactly where the non-tautology hypothesis is consumed —
+without `x &&& y = 0` both sets could hold the bit — so the invariant's necessity is now visible in
+one statement instead of argued in prose.
+
+### 2.4 The packing parameters live in the table, and the decoder is a variable
+
+**Decision — the clause table's field width, slot capacity and slots-per-chunk are *fields of the
+table*.** *Alternative:* a separate `Layout` structure passed alongside, as the first skeleton had.
+*Why this one:* the emitter chose them, they are untrusted exactly as the chunks are, and
+`agreesWithCNF` re-derives the formula through them — so they are part of the emitted datum. Keeping
+them out meant threading a parameter through `rup`, `runActions` and `runStream`, none of which ever
+inspect it. Cost: about three extra projections per lookup out of ~50 reduction steps.
+*Confidence: high.*
+
+**Decision — the certificate's field width is a separate number, and the decoder is a parameter of
+the checker.** *Alternative:* one shared layout for both blobs, which is what reusing 24 bits
+everywhere amounts to. *Why this one:* two blobs, two packings, and § 7 already predicts their optima
+will differ. Making the decoder a parameter then does something better than tidy the signature —
+`runStream_sound` is proved for **every** function of the decoder's type, so "nothing about the
+decoder is trusted" becomes a universally quantified variable instead of a docstring promise, and
+accidental reliance on the real decoder would be a type error. *Confidence: high* — it weakens a
+hypothesis, which makes the theorem stronger and the proof easier.
+
+**Decision — the watermark stays a `Nat`.** *Alternative:* a `Finset` of justified ids, or a deep
+embedding of derivations as an inductive relation. *Why this one:* what the checker establishes is a
+downward-closed prefix, ids are dense because our own emitter numbers them, and nothing here ever
+reasons *about* proofs — only runs them. Both alternatives are speculative generality.
+*Confidence: high.*
 
 ### 2.4 The invariant, and the induction
 
@@ -208,17 +269,19 @@ proof is **~110 MB** of compiled modules.
 ## 3. The statement
 
 ```lean
-theorem maskCheck_sound {f : CNF Nat} {L : Layout} {tbl : ClauseTable} {cert : List Nat}
-    (hagree : agreesWithCNF L tbl f = true)
-    (hcheck : maskCheck L tbl f.clauses.size cert = true) :
-    f.Unsat
+theorem maskCheck_sound {t : ClauseTable} {f : CNF Nat} {fw : Nat} {cert : List Nat}
+    (hagree : t.agreesWithCNF f = true)
+    (hcheck : maskCheck t fw f.clauses.size cert = true) : f.Unsat
 ```
 
 Both hypotheses are closed `Bool`s the kernel decides. `agreesWithCNF` compares the table's first
-`f.clauses.size` slots against masks computed *by Lean* from `f`, so the emitter stays untrusted in
-exactly the M04 sense: a wrong table cannot make a false theorem, only a failed check. Projected
-cost of `agreesWithCNF` on the real formula: 33,089 lookups ≈ **85 s**, once per formula, not per
-cube.
+`f.clauses.size` slots against literal sets computed *by Lean* from `f`, so the emitter stays untrusted
+in exactly the M04 sense: a wrong table cannot make a false theorem, only a failed check. Projected
+cost of `agreesWithCNF` on the real formula: 33,089 lookups ≈ **85 s**, once per formula, not per cube.
+
+**This theorem is already proved** — it is the composition of `justified_of_agreesWithCNF` and
+`runStream_sound`, and it went green during the modeling pass. What is open is the four inductions
+under it.
 
 **Decision — agreement is a pointwise check, not `compile f = tbl`.** *Alternative:* define a Lean
 `compile : CNF Nat → ClauseTable` and prove the emitted table equal to it. *Why this one:* a Lean-built
@@ -231,21 +294,24 @@ with like. *Confidence: high.*
 `Sat/Mask.lean`, `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean`, every signature and full theorem
 statement present, `sorry` at every leaf. The leaves, in dependency order, with what each is:
 
-Eleven leaves.
+**Nine leaves** — the modeling pass closed four (`or_eq_two_pow_cases`, `all_iff_not_any`,
+`negate_negate`, `maskCheck_sound`) and eliminated one (`extends_negate`, now a corollary of the
+duality) while adding one (the arithmetic core, immediately proved).
 
 | leaf | what it is | risk |
 |---|---|---|
-| `MClause.ok_iff` | the `Bool` tautology test means `Ok` | low |
-| `MClause.sat_ofClause_iff` | packed masks agree with `CNF.Clause.eval` | low — `testBit_or`, `testBit_two_pow` |
-| `Asg.extends_negate` | a falsifying assignment extends `α₀ = ¬C` | low |
-| `propagate_conflict_sound` | `u = 0` contradicts `Extends` plus `Sat` | low |
-| `propagate_prop_sound` | **the one genuinely new proof** — a single-bit propagation preserves `Extends` | medium |
+| `LitSet.ok_iff` | the `Bool` tautology test means `Ok` | low |
+| `LitSet.any_ofClause_iff` | packed literal sets agree with `CNF.Clause.eval` | low — `testBit_or`, `testBit_two_pow` |
+| `propagate_conflict_sound` | `u = 0` contradicts `All` plus `Any` | low |
+| `propagate_prop_sound` | **the one genuinely new proof** — a single-bit propagation preserves `All` | medium |
 | `justified_of_agreesWithCNF` | the checked table gives entailment for the formula's own ids | low |
-| `rup_sound` | induction over the hint list on `Extends` | low, once the two `propagate` leaves land |
+| `rup_sound` | induction over the hint list on `All` | low, once the two `propagate` leaves land |
 | `runActions_more` | the watermark invariant survives a batch of actions | low |
 | `runActions_done` | justifying `⊥` refutes any satisfying assignment | low |
-| `runChunks_sound` | the same across chunks | low |
-| `maskCheck_sound` | composition | low |
+| `runStream_sound` | the same across chunks, for an arbitrary decoder | low |
+
+Already proved: `or_eq_two_pow_cases` (the arithmetic core), `all_iff_not_any` (the duality),
+`negate_negate`, and `maskCheck_sound` (the composition).
 
 `propagate_prop_sound` is the only leaf whose shape is not routine, and its two ingredients are both
 in hand: `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo` gives `u = 2^i`, and disjointness of
@@ -260,7 +326,7 @@ The skeleton elaborates, and its spec sections already run the whole path on
 eleven `sorry`s still standing at the leaves above:
 
 * the packing round-trips: every table slot equals the mask independently compiled from the clause
-  list by `MClause.ofClause`;
+  list by `LitSet.ofClause`;
 * a genuine three-step refutation — derive `(x)`, derive `(¬x)`, derive `⊥` — is **accepted**;
 * the decoder's output is pinned by `#guard_msgs` on its rendered form, so a format change is caught
   by name rather than by a mysterious `false`;
