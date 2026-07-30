@@ -266,6 +266,70 @@ Projected artifact: the input-clause table is **shared across all 96 cubes** (sa
 formula), ~1.5 MB. Per-cube derived tables are ~0.5 MB each. With ~80 MB of hint payload, the whole
 proof is **~110 MB** of compiled modules.
 
+### 2.5 Obligation modeling — the statements the proofs come from
+
+*Run 2026-07-29, after the domain pass. Every restatement below was checked in Lean before being
+adopted; seven of the pending leaves closed in the process.*
+
+**Decision — every soundness statement concludes something positive, not `False`.** *Alternative:*
+the first skeleton's shape, `… = true → False`, with each layer used via `.elim`. *Why this one:* the
+positive form is what composes. `rup_sound` concluding "this clause is entailed" rather than "a
+contradiction follows" is what lets the empty-clause case be an *instance* of it, and it is why
+`maskCheck_sound` is now a single line instead of a contradiction dance. *Confidence: high — the line
+count is the evidence.*
+
+**The empty clause needs no special handling.** `(⟨0,0⟩ : LitSet).Entails f ↔ f.Unsat` — "the empty
+clause follows from `f`" *is* "`f` is unsatisfiable". So `runActions`' two branches are the same
+operation on different clauses, and both cite one lemma. Proved.
+
+**Decision — one `Outcome`-indexed statement replaces two theorems.**
+
+```lean
+def Outcome.Sound (t : ClauseTable) (f : CNF Nat) : Outcome → Prop
+  | .done   => f.Unsat
+  | .more w => Justified t f w
+  | .fail   => True
+
+theorem runActions_sound (hJ : Justified t f w) : (runActions t w acts).Sound t f
+```
+
+*Alternative:* the separate `runActions_more` and `runActions_done` the first skeleton had. *Why this
+one:* they were two inductions over the same list with the same invariant, differing only in what the
+terminal case concludes — indexing the conclusion by the outcome makes that one induction with three
+two-line cases. *Confidence: high.*
+
+**Decision — `rup_sound` is stated at an arbitrary assignment, not at the caller's `L.negate`.**
+*Alternative:* an accumulator-generalized private helper underneath a clean public statement — the
+usual two-level shape. *Why this one:* the accumulator here is already a universally quantified
+argument, so the general statement *is* the public one and the caller's form is its instance via
+`negate_negate`. One statement instead of two. `all_iff_not_any` — the duality found by the domain
+pass — is exactly what converts "no satisfying assignment agrees with `α`" into "`α.negate` is
+entailed", so the two passes' outputs meet here. *Confidence: high.*
+
+**Decision — `agreesAux`'s strengthened statement carries membership, not position.** *Alternative:*
+index-based, `∀ k < cs.length, t.get (id₀ + k) = ofClause cs[k]`. *Why this one:* membership is what
+the conclusion consumes — `CNF.eval` is an `Array.all`, and core's membership variant
+`Array.all_eq_true_iff_forall_mem` exists — so the position form would have dragged `getElem` side
+conditions through a proof that never needs an index. It also makes the base case *vacuous*
+(`id₀ ≤ id` and `id < id₀ + 0` cannot both hold) rather than a peeled special case.
+*Confidence: high.*
+
+**Decision — the undecided literal set is a named definition, and `propagate` is written over it.**
+*Alternative:* leave the three expressions inline and state the shared lemmas over them. *Why this
+one:* both propagation proofs need exactly one fact — the satisfied literal survives into the
+undecided set — and that fact cannot be *stated* without naming the set. Naming it also isolates the
+only two places bit arithmetic appears (`testBit_xor_and`, `or_eq_two_pow_cases`), so the two
+soundness proofs become case analysis with no arithmetic in them. Costs about three reduction steps
+per propagation out of roughly fifty. *Confidence: medium — if tuning shows those steps matter,
+`propagate` inlines against a stated equation lemma without touching a proof.*
+
+**Every recursion is structural over a list.** Descent measures, in full: hint list (`rup`), action
+list (`runActions`), chunk list (`runStream`), clause list (`agreesAux`, `any_foldl_insert`), and the
+slot's literal capacity (`unpackAux`, a `Nat` fuel). **Nothing in the checked path needs a termination
+argument or well-founded recursion**, which was a design goal and now holds by construction.
+`generalizing` is needed in four places: the fold accumulator, the starting id, the assignment, and
+the watermark.
+
 ## 3. The statement
 
 ```lean
@@ -294,24 +358,28 @@ with like. *Confidence: high.*
 `Sat/Mask.lean`, `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean`, every signature and full theorem
 statement present, `sorry` at every leaf. The leaves, in dependency order, with what each is:
 
-**Nine leaves** — the modeling pass closed four (`or_eq_two_pow_cases`, `all_iff_not_any`,
-`negate_negate`, `maskCheck_sound`) and eliminated one (`extends_negate`, now a corollary of the
-duality) while adding one (the arithmetic core, immediately proved).
+**Ten leaves**, after two modeling passes closed eleven proofs and decomposed the two risky ones.
+Every remaining leaf is a *single* induction or a *single* case analysis — none needs a walkthrough,
+which is the test the obligation pass was run against.
 
-| leaf | what it is | risk |
+| leaf | what it is | shape |
 |---|---|---|
-| `LitSet.ok_iff` | the `Bool` tautology test means `Ok` | low |
-| `LitSet.any_ofClause_iff` | packed literal sets agree with `CNF.Clause.eval` | low — `testBit_or`, `testBit_two_pow` |
-| `propagate_conflict_sound` | `u = 0` contradicts `All` plus `Any` | low |
-| `propagate_prop_sound` | **the one genuinely new proof** — a single-bit propagation preserves `All` | medium |
-| `justified_of_agreesWithCNF` | the checked table gives entailment for the formula's own ids | low |
-| `rup_sound` | induction over the hint list on `All` | low, once the two `propagate` leaves land |
-| `runActions_more` | the watermark invariant survives a batch of actions | low |
-| `runActions_done` | justifying `⊥` refutes any satisfying assignment | low |
-| `runStream_sound` | the same across chunks, for an arbitrary decoder | low |
+| `LitSet.ok_iff` | the `Bool` tautology test means `Ok` | `Bool`/`Prop` bridge |
+| `LitSet.any_insert` | adding one literal adds exactly its satisfaction | `testBit_or`, `Nat.one_shiftLeft`, `testBit_two_pow` |
+| `LitSet.any_foldl_insert` | the fold, accumulator quantified | induction on the clause list, `generalizing L` |
+| `any_undecided` | a satisfied literal survives into the undecided set | `testBit_xor_and`, case analysis |
+| `propagate_conflict_sound` | an empty undecided set contradicts `any_undecided` | case analysis, no arithmetic |
+| `propagate_prop_sound` | **the one genuinely new argument** | case analysis over `or_eq_two_pow_cases` |
+| `agreesAux_mem` | the table's prefix holds the formula's clauses | induction on `cs`, `generalizing id₀` |
+| `rup_sound` | propagation to a conflict entails the clause | induction on hints, `generalizing α` |
+| `runActions_sound` | one `Outcome`-indexed induction | induction on actions, `generalizing w` |
+| `runStream_sound` | the same across chunks, arbitrary decoder | induction on chunks, `generalizing w` |
 
-Already proved: `or_eq_two_pow_cases` (the arithmetic core), `all_iff_not_any` (the duality),
-`negate_negate`, and `maskCheck_sound` (the composition).
+Already proved, across both passes: `or_eq_two_pow_cases` and `testBit_xor_and` (all the bit
+arithmetic there is), `all_iff_not_any` and `negate_negate` (the duality), `not_any_zero` and
+`entails_zero_iff_unsat` (why the empty clause is not a special case), `ok_undecided` (where the
+non-tautology hypothesis is consumed), `any_ofClause_iff`, `justified_of_agreesWithCNF`, and
+`maskCheck_sound` — the last now one line.
 
 `propagate_prop_sound` is the only leaf whose shape is not routine, and its two ingredients are both
 in hand: `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo` gives `u = 2^i`, and disjointness of

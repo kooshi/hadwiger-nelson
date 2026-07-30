@@ -95,7 +95,7 @@ def runActions (t : ClauseTable) : Nat → List Action → Outcome
   | w, .addRup hs :: rest  =>
       let c := t.get w
       if c.ok && rup t w c.negate hs then runActions t (w + 1) rest else .fail
-  | w, .addEmpty hs :: _   => if rup t w ⟨0, 0⟩ hs then .done else .fail
+  | w, .addEmpty hs :: _   => if rup t w (⟨0, 0⟩ : LitSet).negate hs then .done else .fail
 
 /-- Run the certificate chunk by chunk, threading the watermark, decoding with **whatever decoder is
 handed in**. Reaching the end of the certificate without an `addEmpty` is a failure, not a success. -/
@@ -152,46 +152,70 @@ def maskCheck (t : ClauseTable) (fw m : Nat) (cert : List Nat) : Bool :=
 
 /-! ### Soundness
 
-One induction per layer, all on the same invariant pair: `Justified` for the clause table, and
-`LitSet.All` inside a single propagation chain. -/
+Every statement below concludes something **positive** — a clause is entailed, a prefix is justified,
+the formula is unsatisfiable — rather than deriving `False` from a `Bool`. That is not stylistic: it is
+what makes the layers compose, and it is what collapses two theorems into one and makes the top-level
+theorem a single line.
 
-/-- Reaching a conflict is impossible if a satisfying assignment agrees with where we started. -/
-theorem rup_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {α : LitSet}
-    {a : Nat → Bool} {hs : List Nat} (hJ : Justified t f w) (hf : CNF.eval a f = true)
-    (hE : α.All a) (h : rup t w α hs = true) : False := by
+The recursions are all structural over a list, so every descent measure is a list length and nothing
+here needs a termination argument: hint list, action list, chunk list. -/
+
+/-- **What an outcome being sound means**, indexed by the outcome itself.
+
+`runActions` can end three ways and each one means something different, so two separate theorems over
+the same induction were two copies of one argument. Indexing the conclusion by the `Outcome` makes it
+one statement, one induction, three two-line cases. -/
+def Outcome.Sound (t : ClauseTable) (f : CNF Nat) : Outcome → Prop
+  | .done   => f.Unsat
+  | .more w => Justified t f w
+  | .fail   => True
+
+/-- **Reverse unit propagation is sound.** If the check succeeds from the assignment `α`, then the
+clause `α` was built to falsify — that is, `α.negate` — follows from the formula.
+
+Stated at an arbitrary `α` rather than at `L.negate`, because `α` is what varies down the recursion;
+the caller's form is the instance at `α = L.negate`, recovered by `negate_negate`. The duality
+`all_iff_not_any` is what turns "no satisfying assignment can agree with `α`" into "`α.negate` is
+entailed", so the statement and the induction are the same object.
+
+Induction on the hint list, `generalizing α`. -/
+theorem rup_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {α : LitSet} {hs : List Nat}
+    (hJ : Justified t f w) (h : rup t w α hs = true) : α.negate.Entails f := by
   sorry
 
-/-- Checking a batch of actions extends the justified prefix. -/
-theorem runActions_more {t : ClauseTable} {f : CNF Nat} {w w' : Nat} {acts : List Action}
-    (hJ : Justified t f w) (h : runActions t w acts = .more w') : Justified t f w' := by
+/-- **One induction for the whole batch.** Both action kinds are the same operation — check that the
+clause being derived follows by reverse unit propagation — and they differ only in which clause and
+what the outcome records. For `addRup` that clause is the table's entry at the watermark, so the
+justified prefix grows by one; for `addEmpty` it is the empty literal set, and
+`LitSet.entails_zero_iff_unsat` turns "the empty clause is entailed" into "the formula is
+unsatisfiable" with no special handling at all.
+
+Induction on the action list, `generalizing w`. -/
+theorem runActions_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {acts : List Action}
+    (hJ : Justified t f w) : (runActions t w acts).Sound t f := by
   sorry
 
-/-- Justifying the empty clause refutes any satisfying assignment. -/
-theorem runActions_done {t : ClauseTable} {f : CNF Nat} {w : Nat} {acts : List Action}
-    {a : Nat → Bool} (hJ : Justified t f w) (hf : CNF.eval a f = true)
-    (h : runActions t w acts = .done) : False := by
-  sorry
+/-- The same across chunks — **for an arbitrary decoder.** Nothing about `decode` is available to this
+proof, which is what makes the decoder untrusted as a matter of type rather than of policy.
 
-/-- The same, across chunks — **for an arbitrary decoder.** Nothing about `decode` is available to
-this proof, which is what makes the decoder untrusted as a matter of type rather than of policy. -/
+Induction on the chunk list, `generalizing w`. -/
 theorem runStream_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
-    {a : Nat → Bool} (decode : Nat → Option (List Action)) (hJ : Justified t f w)
-    (hf : CNF.eval a f = true) (h : runStream t decode w cert = true) : False := by
+    (decode : Nat → Option (List Action)) (hJ : Justified t f w)
+    (h : runStream t decode w cert = true) : f.Unsat := by
   sorry
 
-/-- **The milestone's theorem.** If the emitted table really holds the formula, and the checker
-accepts the certificate against it, the formula is unsatisfiable.
+/-- **The milestone's theorem.** If the emitted table really holds the formula, and the checker accepts
+the certificate against it, the formula is unsatisfiable.
 
 Both hypotheses are closed `Bool`s the kernel decides, so a proof of unsatisfiability costs no axiom
 beyond the standard three — which is the whole point of M05, and the difference between a result a
-reader can check and one that asks them to trust a compiler and a CPU. -/
+reader can check and one that asks them to trust a compiler and a CPU.
+
+That this is one line is the readout on the statements underneath it. -/
 theorem maskCheck_sound {t : ClauseTable} {f : CNF Nat} {fw : Nat} {cert : List Nat}
     (hagree : t.agreesWithCNF f = true)
-    (hcheck : maskCheck t fw f.clauses.size cert = true) : f.Unsat := by
-  intro a
-  cases hev : CNF.eval a f
-  · rfl
-  · exact (runStream_sound (decodeChunk fw) (justified_of_agreesWithCNF hagree) hev hcheck).elim
+    (hcheck : maskCheck t fw f.clauses.size cert = true) : f.Unsat :=
+  runStream_sound (decodeChunk fw) (justified_of_agreesWithCNF hagree) hcheck
 
 /-! ## Spec
 

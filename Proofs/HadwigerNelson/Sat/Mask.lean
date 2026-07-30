@@ -62,6 +62,14 @@ The arithmetic core of the whole checker, isolated so that nothing about SAT app
 core and not in Mathlib — grepped, in the toolchain source, which is where the last three "missing"
 lemmas turned out to be. Worth offering upstream. -/
 
+/-- **Set difference, one bit at a time.** `x ^^^ (x &&& y)` is `x` minus `y`, and this is the *only*
+bit-level content in either propagation soundness proof — named once so the same `simp` chain does not
+reappear in every case. -/
+theorem testBit_xor_and (x y i : Nat) :
+    (x ^^^ (x &&& y)).testBit i = (x.testBit i && !y.testBit i) := by
+  rw [Nat.testBit_xor, Nat.testBit_and]
+  cases x.testBit i <;> cases y.testBit i <;> rfl
+
 /-- **Two disjoint bit sets whose union is a single bit: one of them is that bit, the other is
 empty.** This is what turns the checker's single-bit test into "exactly one literal was undecided",
 and it is the reason the non-tautology hypothesis is needed — without disjointness both sets could
@@ -153,22 +161,55 @@ def ok (L : LitSet) : Bool := L.pos &&& L.neg == 0
 
 theorem ok_iff (L : LitSet) : L.ok = true ↔ L.Ok := by sorry
 
+/-- The empty literal set satisfies nobody. -/
+theorem not_any_zero (a : Nat → Bool) : ¬ (⟨0, 0⟩ : LitSet).Any a := by
+  simp [Any, Nat.zero_testBit]
+
+/-- Add one literal. Named, because it is the step of the fold below and therefore the subject of the
+lemma that carries the induction — an anonymous lambda inside `ofClause` could not be spoken about. -/
+def insert (L : LitSet) (l : Literal Nat) : LitSet :=
+  if l.2 then ⟨L.pos ||| (1 <<< l.1), L.neg⟩ else ⟨L.pos, L.neg ||| (1 <<< l.1)⟩
+
 /-- A `Std.Sat` clause as a literal set. The untrusted table is checked against *this*, so this
 definition is what "the table really holds the formula" means. -/
-def ofClause (c : CNF.Clause Nat) : LitSet :=
-  c.foldl
-    (fun m (v, b) => if b then ⟨m.pos ||| (1 <<< v), m.neg⟩ else ⟨m.pos, m.neg ||| (1 <<< v)⟩)
-    ⟨0, 0⟩
+def ofClause (c : CNF.Clause Nat) : LitSet := c.foldl insert ⟨0, 0⟩
+
+/-- Adding a literal adds exactly that literal's satisfaction, and nothing else. -/
+theorem any_insert (L : LitSet) (a : Nat → Bool) (l : Literal Nat) :
+    (L.insert l).Any a ↔ L.Any a ∨ a l.1 = l.2 := by sorry
+
+/-- **The strengthened statement the induction actually needs.** `ofClause` is a fold from `⟨0,0⟩`, so
+an induction stated only at `⟨0,0⟩` has an induction hypothesis that cannot carry itself through the
+step: after one literal the accumulator is no longer empty. Quantifying the accumulator — Gries's
+fresh variable — makes every case local. -/
+theorem any_foldl_insert (a : Nat → Bool) (c : CNF.Clause Nat) (L : LitSet) :
+    (c.foldl insert L).Any a ↔ L.Any a ∨ CNF.Clause.eval a c = true := by sorry
 
 /-- **The bridge to `Std.Sat`.** The literal-set form of a clause is satisfied by exactly the
 assignments that satisfy the clause. Everything downstream reasons about bit sets; this is the only
-place the two vocabularies meet. -/
+place the two vocabularies meet.
+
+The empty accumulator contributes nothing, which is why the strengthened form specialises back. -/
 theorem any_ofClause_iff (a : Nat → Bool) (c : CNF.Clause Nat) :
-    (ofClause c).Any a ↔ CNF.Clause.eval a c = true := by sorry
+    (ofClause c).Any a ↔ CNF.Clause.eval a c = true := by
+  rw [ofClause, any_foldl_insert]
+  refine ⟨fun h => h.resolve_left (not_any_zero a), Or.inr⟩
 
 /-- **The role the checker establishes**: this literal set, read as a clause, follows from `f`. -/
 def Entails (L : LitSet) (f : CNF Nat) : Prop :=
   ∀ a, CNF.eval a f = true → L.Any a
+
+/-- **Why the empty clause needs no special handling.** "The empty clause follows from `f`" *is*
+"`f` is unsatisfiable" — so the one lemma about reverse unit propagation covers both kinds of
+certificate step, and `runActions`' two branches cite it identically. -/
+theorem entails_zero_iff_unsat {f : CNF Nat} : (⟨0, 0⟩ : LitSet).Entails f ↔ f.Unsat := by
+  constructor
+  · intro h a
+    cases hev : CNF.eval a f
+    · rfl
+    · exact absurd (h a hev) (not_any_zero a)
+  · intro h a hev
+    exact absurd hev (by rw [h a]; simp)
 
 end LitSet
 
@@ -182,18 +223,25 @@ inductive Step where
   | fail
 deriving DecidableEq, Repr, Inhabited
 
+/-- The literals of `D` that `α` has not already falsified — `D`'s sides minus what `α` has decided
+against, each a set *difference* rather than a complement, which is why no width appears.
+
+Named rather than inlined into `propagate`, because it is the subject of every lemma below: the
+definition shaped around the statement. It costs about three reduction steps per propagation out of
+roughly fifty; if that shows up in measurement, `propagate` can be inlined against a stated equation
+lemma without touching a proof. -/
+def undecided (α D : LitSet) : LitSet :=
+  ⟨D.pos ^^^ (D.pos &&& α.neg), D.neg ^^^ (D.neg &&& α.pos)⟩
+
 /-- **One propagation step.** `α` is read as an assignment, `D` as a clause. Either `D` is falsified
 (a conflict, which is what a reverse-unit-propagation derivation is looking for), or exactly one of
 its literals is undecided and therefore forced, or the certificate is wrong.
 
-* `up` is the positive literals not yet false — a set *difference*, `pos` minus `α.neg`;
-* `un` likewise for the negative literals;
-* `u` is their union, and because a non-tautological clause has `pos` and `neg` disjoint, `u`'s
-  population count is exactly the number of literals that are not false.
-
-`u = 0` is a conflict; `u` a single bit is a forced literal. "Single bit" is `u &&& (u - 1) = 0`,
-whose equivalence with `∃ i, u = 2 ^ i` is `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo`,
-shipped in core.
+Because a non-tautological clause has its two sides disjoint, the population count of
+`u = U.pos ||| U.neg` is exactly the number of literals that are not false. So `u = 0` is a conflict,
+and `u` a single bit is a forced literal — where "single bit" is `u &&& (u - 1) = 0`, whose
+equivalence with `∃ i, u = 2 ^ i` is `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo`, shipped in
+core.
 
 **There is no check that the clause is already satisfied, and that is deliberate.** A satisfied
 literal is not false, so it lies inside `u`; when `u` is a single bit the satisfied literal *is* the
@@ -204,15 +252,39 @@ Both arguments have the same type, because a clause and an assignment *are* the 
 Swapping them is a wrong call, not an illegal state — and it cannot produce a false theorem, only a
 failed check. The spec section pins the intended reading. -/
 def propagate (α D : LitSet) : Step :=
-  let up := D.pos ^^^ (D.pos &&& α.neg)
-  let un := D.neg ^^^ (D.neg &&& α.pos)
-  let u  := up ||| un
+  let U := undecided α D
+  let u := U.pos ||| U.neg
   if u == 0 then .conflict
-  else if u &&& (u - 1) == 0 then .prop ⟨α.pos ||| up, α.neg ||| un⟩
+  else if u &&& (u - 1) == 0 then .prop ⟨α.pos ||| U.pos, α.neg ||| U.neg⟩
   else .fail
 
+/-! ### The two facts both soundness proofs share
+
+Both proofs destructure the same two nested tests over the same `undecided` set, and both need
+exactly one thing from the assignment: the literal `a` satisfies has not been falsified, so it
+survives into `undecided`. Stated once here, the two proofs below become case analysis with no bit
+arithmetic left in them. -/
+
+/-- A non-tautological clause has a non-tautological undecided set — which is what carries the `Ok`
+hypothesis into `or_eq_two_pow_cases`, the one place it is consumed. -/
+theorem ok_undecided {α D : LitSet} (hok : D.Ok) : (undecided α D).Ok := by
+  have hok' : D.pos &&& D.neg = 0 := hok
+  show (undecided α D).pos &&& (undecided α D).neg = 0
+  refine Nat.eq_of_testBit_eq fun i => ?_
+  have hD : (D.pos.testBit i && D.neg.testBit i) = false := by
+    rw [← Nat.testBit_and, hok', Nat.zero_testBit]
+  simp only [undecided, Nat.testBit_and, testBit_xor_and, Nat.zero_testBit]
+  cases hp : D.pos.testBit i <;> cases hn : D.neg.testBit i <;> simp_all
+
+/-- **The shared fact.** A satisfied literal of `D` survives into `undecided α D`: `α` agrees with
+`a` everywhere it has decided, so the literal `a` satisfies cannot be one `α` falsified. -/
+theorem any_undecided {a : Nat → Bool} {α D : LitSet} (hE : α.All a) (hS : D.Any a) :
+    (undecided α D).Any a := by
+  sorry
+
 /-- A conflict is impossible against an assignment that a satisfying total assignment agrees with.
-This is what makes reaching `.conflict` evidence, and it needs no tautology hypothesis. -/
+This is what makes reaching `.conflict` evidence, and it needs no tautology hypothesis: an empty
+undecided set contradicts `any_undecided` directly. -/
 theorem propagate_conflict_sound {a : Nat → Bool} {α D : LitSet}
     (hE : α.All a) (hS : D.Any a) (h : propagate α D = .conflict) : False := by
   sorry
@@ -221,15 +293,14 @@ theorem propagate_conflict_sound {a : Nat → Bool} {α D : LitSet}
 total assignment `a` satisfies the hinted clause and agrees with everything already decided, it also
 agrees with the literal the step forces.
 
-`Ok D` is load-bearing here and nowhere else, and `or_eq_two_pow_cases` is what consumes it: without
-disjointness a single-bit `u` can carry both `v` and `¬v`, the step forces both, and the assignment
-becomes inconsistent — after which a later clause yields a conflict that justifies an arbitrary
-clause. The negative control in `plans/M05-kernel-checker.md` § 5 exhibits exactly that. -/
+The argument, with the bit arithmetic already discharged above: the single-bit test plus
+`Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo` give `u = 2 ^ i`; `ok_undecided` plus
+`or_eq_two_pow_cases` then force one side of `undecided` to be that bit and the other empty; and
+`any_undecided` says the satisfied literal is on the non-empty side. -/
 theorem propagate_prop_sound {a : Nat → Bool} {α α' D : LitSet}
     (hok : D.Ok) (hE : α.All a) (hS : D.Any a) (h : propagate α D = .prop α') :
     α'.All a := by
   sorry
-
 /-! ## Spec
 
 A model of the hypotheses, and a check that the definitions say what they are meant to. The formula

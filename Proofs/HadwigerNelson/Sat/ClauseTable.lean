@@ -154,11 +154,33 @@ is what lets the clause table be a literal. -/
 def Justified (t : ClauseTable) (f : CNF Nat) (w : Nat) : Prop :=
   ∀ id, id < w → (t.get id).Ok ∧ (t.get id).Entails f
 
-/-- **The base case of the induction.** A table that agrees with the formula justifies exactly the
-formula's own clause ids. -/
+/-- **The strengthened statement the induction needs.** `agreesAux` walks the clause list carrying an
+id counter, so a claim stated only at id 0 has an induction hypothesis that cannot carry itself through
+the step. Quantifying the starting id fixes that, and the base case becomes vacuous — `id₀ ≤ id` and
+`id < id₀ + 0` cannot both hold — which is the right anchoring rather than a peeled special case.
+
+It carries **membership**, not position, because membership is what `LitSet.Entails` consumes:
+`CNF.eval` is an `Array.all`, and `Array.all_eq_true_iff_forall_mem` speaks of members. Indexing would
+have dragged in `getElem` side conditions that nothing downstream wants.
+
+Induction on `cs`, `generalizing id₀`; descent measure is the clause list's length. -/
+theorem agreesAux_mem {t : ClauseTable} {cs : List (CNF.Clause Nat)} {id₀ : Nat}
+    (h : t.agreesAux id₀ cs = true) :
+    ∀ id, id₀ ≤ id → id < id₀ + cs.length →
+      (t.get id).Ok ∧ ∃ c ∈ cs, t.get id = LitSet.ofClause c := by
+  sorry
+
+/-- **The base case of the checker's induction.** A table that agrees with the formula justifies
+exactly the formula's own clause ids. -/
 theorem justified_of_agreesWithCNF {t : ClauseTable} {f : CNF Nat}
     (h : t.agreesWithCNF f = true) : Justified t f f.clauses.size := by
-  sorry
+  intro id hid
+  obtain ⟨hok, c, hmem, heq⟩ :=
+    agreesAux_mem h id (Nat.zero_le _) (by simpa [Array.length_toList] using hid)
+  refine ⟨hok, fun a ha => ?_⟩
+  rw [heq, LitSet.any_ofClause_iff]
+  rw [CNF.eval, Array.all_eq_true_iff_forall_mem] at ha
+  exact ha c (by simpa using hmem)
 
 /-! ## Spec
 
