@@ -205,7 +205,25 @@ theorem disagreement_eq_none_mem {t : ClauseTable} {cs : List (CNF.Clause Nat)} 
     (h : t.disagreement id₀ cs = none) :
     ∀ id, id₀ ≤ id → id < id₀ + cs.length →
       (t.get id).Ok ∧ ∃ c ∈ cs, t.get id = LitSet.ofClause c := by
-  sorry
+  induction cs generalizing id₀ with
+  | nil => intro id h1 h2; simp only [List.length_nil] at h2; omega
+  | cons c cs ih =>
+      rw [ClauseTable.disagreement] at h
+      split at h
+      · exact absurd h (by simp)
+      · rename_i hmatch
+        split at h
+        · exact absurd h (by simp)
+        · rename_i hok
+          simp only [bne_iff_ne, ne_eq, Decidable.not_not, Bool.not_eq_true'] at hmatch hok
+          intro id h1 h2
+          by_cases hid : id = id₀
+          · subst hid
+            exact ⟨hmatch ▸ (LitSet.ok_iff _).mp (by simpa using hok),
+                   c, List.mem_cons_self .., hmatch⟩
+          · obtain ⟨hok', c', hmem, heq⟩ :=
+              ih h id (by omega) (by simp only [List.length_cons] at h2; omega)
+            exact ⟨hok', c', List.mem_cons_of_mem _ hmem, heq⟩
 
 /-- **The base case of the checker's induction.** A table that agrees with the formula justifies
 exactly the formula's own clause ids. -/

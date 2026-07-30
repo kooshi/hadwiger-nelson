@@ -109,6 +109,33 @@ theorem or_eq_two_pow_cases {x y i : Nat} (hu : x ||| y = 2 ^ i) (hd : x &&& y =
       · subst hj; simp [hy]
       · simp [hj, (hoff j hj).2]
 
+/-- **Adding one bit adds exactly one witness.** The bit-level content of `any_insert`, isolated so the
+clause-building induction contains no bit arithmetic at all: a set extended by the single bit `v`
+witnesses `p` exactly when the old set did, or `p` holds at `v`. -/
+theorem exists_testBit_or_two_pow {x v : Nat} {p : Nat → Prop} :
+    (∃ i, (x ||| 1 <<< v).testBit i = true ∧ p i) ↔ (∃ i, x.testBit i = true ∧ p i) ∨ p v := by
+  constructor
+  · rintro ⟨i, hi, hp⟩
+    rw [Nat.one_shiftLeft, Nat.testBit_or, Nat.testBit_two_pow] at hi
+    rcases Bool.or_eq_true _ _ |>.mp hi with h | h
+    · exact Or.inl ⟨i, h, hp⟩
+    · exact Or.inr (of_decide_eq_true h ▸ hp)
+  · rintro (⟨i, hi, hp⟩ | hp)
+    · exact ⟨i, by rw [Nat.testBit_or, hi, Bool.true_or], hp⟩
+    · exact ⟨v, by rw [Nat.one_shiftLeft, Nat.testBit_or, Nat.testBit_two_pow]; simp, hp⟩
+
+/-- **An empty union witnesses nothing.** Both propagation soundness proofs reach for this: the
+conflict test is `pos ||| neg = 0`, and that one equation kills every witness on both sides. -/
+theorem not_any_of_or_eq_zero {x y : Nat} {p q : Nat → Prop} (h : x ||| y = 0) :
+    ¬ ((∃ i, x.testBit i = true ∧ p i) ∨ (∃ i, y.testBit i = true ∧ q i)) := by
+  have hz : ∀ i, x.testBit i = false ∧ y.testBit i = false := fun i => by
+    have : (x.testBit i || y.testBit i) = false := by
+      rw [← Nat.testBit_or, h, Nat.zero_testBit]
+    exact Bool.or_eq_false_iff.mp this
+  rintro (⟨i, hi, _⟩ | ⟨i, hi, _⟩)
+  · exact absurd hi (by rw [(hz i).1]; simp)
+  · exact absurd hi (by rw [(hz i).2]; simp)
+
 /-- **A set of literals**: `pos` the variables occurring positively, `neg` those occurring
 negatively, each as a bit set.
 
@@ -159,7 +186,9 @@ def Ok (L : LitSet) : Prop := L.pos &&& L.neg = 0
 /-- `Ok` as a `Bool` the kernel decides — two accelerated operations. -/
 def ok (L : LitSet) : Bool := L.pos &&& L.neg == 0
 
-theorem ok_iff (L : LitSet) : L.ok = true ↔ L.Ok := by sorry
+/-- The `Bool` the kernel decides and the `Prop` the proofs consume are the same fact. -/
+theorem ok_iff (L : LitSet) : L.ok = true ↔ L.Ok := by
+  simp [ok, Ok]
 
 /-- The empty literal set satisfies nobody. -/
 theorem not_any_zero (a : Nat → Bool) : ¬ (⟨0, 0⟩ : LitSet).Any a := by
@@ -176,14 +205,36 @@ def ofClause (c : CNF.Clause Nat) : LitSet := c.foldl insert ⟨0, 0⟩
 
 /-- Adding a literal adds exactly that literal's satisfaction, and nothing else. -/
 theorem any_insert (L : LitSet) (a : Nat → Bool) (l : Literal Nat) :
-    (L.insert l).Any a ↔ L.Any a ∨ a l.1 = l.2 := by sorry
+    (L.insert l).Any a ↔ L.Any a ∨ a l.1 = l.2 := by
+  obtain ⟨v, s⟩ := l
+  cases s
+  · show (LitSet.mk L.pos (L.neg ||| (1 <<< v))).Any a ↔ L.Any a ∨ a v = false
+    simp only [Any]
+    rw [exists_testBit_or_two_pow, or_assoc]
+  · show (LitSet.mk (L.pos ||| (1 <<< v)) L.neg).Any a ↔ L.Any a ∨ a v = true
+    simp only [Any]
+    rw [exists_testBit_or_two_pow]
+    constructor
+    · rintro ((h | h) | h)
+      · exact Or.inl (Or.inl h)
+      · exact Or.inr h
+      · exact Or.inl (Or.inr h)
+    · rintro ((h | h) | h)
+      · exact Or.inl (Or.inl h)
+      · exact Or.inr h
+      · exact Or.inl (Or.inr h)
 
 /-- **The strengthened statement the induction actually needs.** `ofClause` is a fold from `⟨0,0⟩`, so
 an induction stated only at `⟨0,0⟩` has an induction hypothesis that cannot carry itself through the
 step: after one literal the accumulator is no longer empty. Quantifying the accumulator — Gries's
 fresh variable — makes every case local. -/
 theorem any_foldl_insert (a : Nat → Bool) (c : CNF.Clause Nat) (L : LitSet) :
-    (c.foldl insert L).Any a ↔ L.Any a ∨ CNF.Clause.eval a c = true := by sorry
+    (c.foldl insert L).Any a ↔ L.Any a ∨ CNF.Clause.eval a c = true := by
+  induction c generalizing L with
+  | nil => simp
+  | cons l c ih =>
+      rw [List.foldl_cons, ih, any_insert, CNF.Clause.eval_cons, or_assoc]
+      simp [beq_iff_eq]
 
 /-- **The bridge to `Std.Sat`.** The literal-set form of a clause is satisfied by exactly the
 assignments that satisfy the clause. Everything downstream reasons about bit sets; this is the only
@@ -280,14 +331,65 @@ theorem ok_undecided {α D : LitSet} (hok : D.Ok) : (undecided α D).Ok := by
 `a` everywhere it has decided, so the literal `a` satisfies cannot be one `α` falsified. -/
 theorem any_undecided {a : Nat → Bool} {α D : LitSet} (hE : α.All a) (hS : D.Any a) :
     (undecided α D).Any a := by
-  sorry
+  show ((∃ i, (undecided α D).pos.testBit i = true ∧ a i = true) ∨
+        ∃ i, (undecided α D).neg.testBit i = true ∧ a i = false)
+  simp only [undecided, testBit_xor_and]
+  rcases hS with ⟨i, hi, ha⟩ | ⟨i, hi, ha⟩
+  · refine Or.inl ⟨i, ?_, ha⟩
+    have hn : α.neg.testBit i = false := by
+      cases hb : α.neg.testBit i
+      · rfl
+      · exact absurd (hE.2 i hb) (by rw [ha]; simp)
+    rw [hi, hn]; rfl
+  · refine Or.inr ⟨i, ?_, ha⟩
+    have hp : α.pos.testBit i = false := by
+      cases hb : α.pos.testBit i
+      · rfl
+      · exact absurd (hE.1 i hb) (by rw [ha]; simp)
+    rw [hi, hp]; rfl
+
+/-! The two sides of `propagate`'s forced-literal case are mirror images of each other — one side is
+the forced bit and the other is empty, and which is which depends only on the literal's polarity. The
+three facts below are stated over an arbitrary polarity `b` precisely so that the mirror is a change
+of argument rather than a second copy of the proof. -/
+
+/-- Extending a decided set by the single bit `k`, where the assignment already agrees at `k`. -/
+private theorem all_or_two_pow {a : Nat → Bool} {x k : Nat} {b : Bool}
+    (hx : ∀ i, x.testBit i = true → a i = b) (hk : a k = b) :
+    ∀ i, (x ||| 2 ^ k).testBit i = true → a i = b := by
+  intro i hi
+  rw [Nat.testBit_or, Nat.testBit_two_pow] at hi
+  rcases Bool.or_eq_true _ _ |>.mp hi with h | h
+  · exact hx i h
+  · exact of_decide_eq_true h ▸ hk
+
+/-- A witness inside a single-bit set is that bit. -/
+private theorem eq_of_exists_two_pow {a : Nat → Bool} {k : Nat} {b : Bool}
+    (h : ∃ i, (2 ^ k).testBit i = true ∧ a i = b) : a k = b := by
+  obtain ⟨i, hi, ha⟩ := h
+  rw [Nat.testBit_two_pow] at hi
+  have hik : k = i := of_decide_eq_true hi
+  subst hik
+  exact ha
+
+/-- An empty set holds no witness — what rules out the mirror side in each case. -/
+private theorem not_exists_zero_testBit {p : Nat → Prop} :
+    ¬ ∃ i, (0 : Nat).testBit i = true ∧ p i := by
+  rintro ⟨i, hi, _⟩
+  simp [Nat.zero_testBit] at hi
 
 /-- A conflict is impossible against an assignment that a satisfying total assignment agrees with.
 This is what makes reaching `.conflict` evidence, and it needs no tautology hypothesis: an empty
 undecided set contradicts `any_undecided` directly. -/
 theorem propagate_conflict_sound {a : Nat → Bool} {α D : LitSet}
     (hE : α.All a) (hS : D.Any a) (h : propagate α D = .conflict) : False := by
-  sorry
+  have hU : (undecided α D).Any a := any_undecided hE hS
+  unfold propagate at h
+  simp only at h
+  split at h
+  · rename_i hz
+    exact not_any_of_or_eq_zero (beq_iff_eq.mp hz) hU
+  · split at h <;> exact absurd h (by simp)
 
 /-- **The one genuinely new proof in this milestone.** A propagation preserves the invariant: if the
 total assignment `a` satisfies the hinted clause and agrees with everything already decided, it also
@@ -300,7 +402,33 @@ The argument, with the bit arithmetic already discharged above: the single-bit t
 theorem propagate_prop_sound {a : Nat → Bool} {α α' D : LitSet}
     (hok : D.Ok) (hE : α.All a) (hS : D.Any a) (h : propagate α D = .prop α') :
     α'.All a := by
-  sorry
+  have hU : (undecided α D).Any a := any_undecided hE hS
+  have hokU : (undecided α D).pos &&& (undecided α D).neg = 0 := ok_undecided hok
+  unfold propagate at h
+  simp only at h
+  split at h
+  · exact absurd h (by simp)
+  · rename_i hne
+    split at h
+    · rename_i hone
+      injection h with h; subst h
+      have hu0 : (undecided α D).pos ||| (undecided α D).neg ≠ 0 := fun hc =>
+        hne (by rw [hc]; rfl)
+      obtain ⟨k, hk⟩ :=
+        Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo.mp ⟨hu0, beq_iff_eq.mp hone⟩
+      -- The two sides are mirror images: exactly one of them is the forced bit.
+      rcases or_eq_two_pow_cases hk hokU with ⟨hp, hn⟩ | ⟨hp, hn⟩
+      · refine ⟨?_, ?_⟩
+        · rw [hp]
+          exact all_or_two_pow hE.1
+            (eq_of_exists_two_pow (hp ▸ hU.resolve_right (hn ▸ not_exists_zero_testBit)))
+        · rw [hn]; simpa using hE.2
+      · refine ⟨?_, ?_⟩
+        · rw [hp]; simpa using hE.1
+        · rw [hn]
+          exact all_or_two_pow hE.2
+            (eq_of_exists_two_pow (hn ▸ hU.resolve_left (hp ▸ not_exists_zero_testBit)))
+    · exact absurd h (by simp)
 /-! ## Spec
 
 A model of the hypotheses, and a check that the definitions say what they are meant to. The formula
@@ -350,6 +478,24 @@ private def taut : LitSet := ⟨0b01, 0b01⟩
 -- The arithmetic core, on the case that matters and on the case `Ok` rules out.
 example : (0b100 ||| 0 = 2 ^ 2) ∧ (0b100 &&& 0 = 0) := by decide
 #guard (0b100 ||| 0b100) == 2 ^ 2 && !((0b100 &&& 0b100) == 0)
+
+/-- **The non-tautology hypothesis is load-bearing, proved rather than asserted.** Delete `hok` from
+`propagate_prop_sound` and the statement becomes *false*, not merely unproven — and this exhibits the
+counterexample. Propagating from the tautology `x ∨ ¬x` against an empty assignment yields the single
+`u` bit for variable 0 with that bit set on *both* sides, so the forced assignment demands
+`a 0 = true` and `a 0 = false` at once.
+
+A build failure could never establish this; only a countermodel can. Its partner above is the
+`example` that exhibits a model of all the hypotheses at once — together they pin the statement from
+both sides. -/
+example : ¬ ∀ (a : Nat → Bool) (α α' D : LitSet),
+    α.All a → D.Any a → propagate α D = .prop α' → α'.All a := by
+  intro h
+  have hAll := h (fun _ => true) ⟨0, 0⟩ ⟨0b01, 0b01⟩ taut
+    ⟨fun i hi => absurd hi (by simp [Nat.zero_testBit]),
+     fun i hi => absurd hi (by simp [Nat.zero_testBit])⟩
+    (Or.inl ⟨0, by decide, rfl⟩) (by decide)
+  exact absurd (hAll.2 0 (by decide)) (by simp)
 
 end Spec
 

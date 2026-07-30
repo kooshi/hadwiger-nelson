@@ -268,7 +268,26 @@ entailed", so the statement and the induction are the same object.
 Induction on the hint list, `generalizing α`. -/
 theorem rup_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {α : LitSet} {hs : List Nat}
     (hJ : Justified t f w) (h : rupWhy t w α hs = none) : α.negate.Entails f := by
-  sorry
+  induction hs generalizing α with
+  | nil => exact absurd h (by simp [rupWhy])
+  | cons hd hs ih =>
+      rw [rupWhy] at h
+      split at h
+      · rename_i hlt
+        split at h
+        · rename_i hc
+          intro a ha
+          refine Classical.byContradiction fun hn => ?_
+          exact propagate_conflict_sound ((LitSet.all_iff_not_any α a).mpr hn)
+            ((hJ hd hlt).2 a ha) hc
+        · rename_i α' hc
+          intro a ha
+          refine Classical.byContradiction fun hn => ?_
+          have hα : α.All a := (LitSet.all_iff_not_any α a).mpr hn
+          have hα' : α'.All a := propagate_prop_sound (hJ hd hlt).1 hα ((hJ hd hlt).2 a ha) hc
+          exact (LitSet.all_iff_not_any α' a).mp hα' (ih h a ha)
+        · exact absurd h (by simp)
+      · exact absurd h (by simp)
 
 /-- **One induction for the whole batch.** Both action kinds are the same operation — check that the
 clause being derived follows by reverse unit propagation — and they differ only in which clause and
@@ -280,7 +299,29 @@ unsatisfiable" with no special handling at all.
 Induction on the action list, `generalizing w`. -/
 theorem runActions_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {acts : List Action}
     (hJ : Justified t f w) : (runActions t w acts).Sound t f := by
-  sorry
+  induction acts generalizing w with
+  | nil => exact hJ
+  | cons act rest ih =>
+      cases act with
+      | addRup hs =>
+          rw [runActions]
+          split
+          · rename_i hokc
+            split
+            · rename_i hr
+              refine ih (fun id hid => ?_)
+              by_cases hidw : id = w
+              · subst hidw
+                exact ⟨(LitSet.ok_iff _).mp hokc, by simpa using rup_sound hJ hr⟩
+              · exact hJ id (by omega)
+            · exact trivial
+          · exact trivial
+      | addEmpty hs =>
+          rw [runActions]
+          split
+          · rename_i hr
+            exact LitSet.entails_zero_iff_unsat.mp (by simpa using rup_sound hJ hr)
+          · exact trivial
 
 /-- The same across chunks — **for an arbitrary decoder.** Nothing about `decode` is available to this
 proof, which is what makes the decoder untrusted as a matter of type rather than of policy.
@@ -289,7 +330,23 @@ Induction on the chunk list, `generalizing w`. -/
 theorem runStream_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w)
     (h : runStream t decode w cert = none) : f.Unsat := by
-  sorry
+  induction cert generalizing w with
+  | nil => exact absurd h (by simp [runStream])
+  | cons ch cs ih =>
+      rw [runStream] at h
+      split at h
+      · exact absurd h (by simp)
+      · rename_i acts _
+        split at h
+        · rename_i ho
+          have hs := runActions_sound (acts := acts) hJ
+          rw [ho] at hs
+          exact hs
+        · rename_i w' ho
+          have hs := runActions_sound (acts := acts) hJ
+          rw [ho] at hs
+          exact ih hs h
+        · exact absurd h (by simp)
 
 /-- **The milestone's theorem.** If the emitted table really holds the formula, and the checker accepts
 the certificate against it, the formula is unsatisfiable.
@@ -380,6 +437,27 @@ private def cert : List Nat := [pack [9, 4, 0, 1, 4, 2, 3, 5, 4, 5]]
 /-- info: some (HadwigerNelson.CertFault.noEmptyClause 4) -/
 #guard_msgs in #eval whyNot tbl 8 4 []
 
+/-- **The control that matters most: a satisfiable formula is refused.** The first three clauses of
+`f4` alone are satisfied by `x = true, y = true`, and the very same table still *agrees* with that
+formula — the table is a prefix of itself. So the only thing standing between a satisfiable formula
+and a proof of its unsatisfiability is the certificate check, and this pins that it holds: the
+derivation reaches a hint that leaves two literals open instead of one.
+
+Soundness makes this unfalsifiable in principle; the point of running it is that a check nobody has
+watched refuse is a check nobody knows works. -/
+private def f3 : CNF Nat :=
+  ⟨#[[(0, true), (1, true)], [(0, true), (1, false)], [(0, false), (1, true)]]⟩
+
+#guard tbl.agreesWithCNF f3
+#guard CNF.eval (fun _ => true) f3
+
+/-- info: some (HadwigerNelson.CertFault.hintNoPropagate 3 0) -/
+#guard_msgs in #eval whyNot tbl 8 3 cert
+
+-- A clause citing **itself** as a hint — the bootstrap `rupWhy`'s `hint < w` test exists to stop.
+/-- info: some (HadwigerNelson.CertFault.hintUnjustified 4 4) -/
+#guard_msgs in #eval whyNot tbl 8 4 [pack [2, 2, 4]]
+
 -- A certificate filed against the wrong number of input clauses: the derived ids are misread, so the
 -- very first hint is out of range.
 #guard !maskCheck tbl 8 5 cert
@@ -396,6 +474,16 @@ example : tbl.agreesWithCNF f4 = true ∧ maskCheck tbl 8 4 cert = true := by de
 kernel-decided `Bool`s, and the unsatisfiability of a formula. If this ever needs a named argument or
 a second lemma, the surface has regressed. -/
 example : f4.Unsat := maskCheck_sound tbl 8 cert (by decide +kernel) (by decide +kernel)
+
+/-- **The same conclusion, reached without the checker at all.** Two variables, four cases, by hand —
+so the checker's answer is cross-checked against an independent oracle rather than against itself.
+This is the discipline M03 applied to the Moser spindle (`decide` beside the SAT bridge) at the one
+scale where the second route is free; above it, no second route exists, which is exactly why the
+negative controls above have to carry the weight. -/
+example : f4.Unsat := by
+  intro a
+  cases ha : a 0 <;> cases hb : a 1 <;>
+    simp [f4, CNF.eval, CNF.Clause.eval, ha, hb]
 
 end Spec
 

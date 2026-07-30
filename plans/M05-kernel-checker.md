@@ -421,6 +421,59 @@ table is an accumulator, and reducing one costs 32.6 s *and* produces a structur
 shape from the literal, so the equality cannot be stated directly. Pointwise agreement compares like
 with like. *Confidence: high.*
 
+## 3.5 What implementation actually cost, and what it corrected
+
+*Written 2026-07-29, after the gate went green. Recorded because the subplan's value is measured by how
+little it overturned.*
+
+**All ten leaves closed; nine of the ten on the first or second attempt.** The obligation pass's shape
+column below was right in every row: every leaf was one induction or one case analysis, and none needed
+a walkthrough. `propagate_prop_sound` — flagged as the only non-routine leaf — took the two ingredients
+the plan named, in the order it named them, and came out at 25 lines.
+
+**Three things the plan did not anticipate**, all small, all mechanical:
+
+| what | why the plan missed it |
+|---|---|
+| `Nat.eq_of_beq_eq_true` does not apply to `x == y` on `Nat` | `==` elaborates through `instBEqNat` to `BEq.beq`, not `Nat.beq`. `beq_iff_eq` is the right name; it took one error message to find |
+| Three helper lemmas were needed, not the two the plan listed | `exists_testBit_or_two_pow` (the bit content of `any_insert`) and `not_any_of_or_eq_zero` (the conflict case) both wanted naming; the mirror-symmetric halves of `propagate_prop_sound` wanted three more, stated over an arbitrary polarity so the two cases are a change of argument rather than a second copy |
+| `rintro`, `obtain` and `rcases` are available without Mathlib; `by_contra` and `exacts` are not | These modules import only `Std.Sat.CNF.Basic` and `Init.Data.Nat.Power2.Lemmas` by design. `Classical.byContradiction` is the core-only substitute |
+
+**One experiment of mine was worthless and is recorded so it is not repeated.** To test whether the
+non-tautology hypothesis is load-bearing I deleted it from the signature and replaced the proof step
+that consumed it with `sorry` — then observed that the file still built. That establishes nothing: I
+inserted the `sorry` myself. **A build failure cannot demonstrate that a statement is unprovable.**
+The replacement is a countermodel, now committed as an `example : ¬ ∀ …` in `Sat/Mask.lean`: propagating
+from the tautology `x ∨ ¬x` forces `a 0 = true` and `a 0 = false` at once. That is a *theorem* that the
+hypothesis is load-bearing, and it is what the mutation audit should have reached for first.
+
+**Two negative controls added beyond the six the plan listed**, both because they guard something no
+positive check can:
+
+* **A satisfiable formula is refused.** The first three clauses of the spec formula are satisfied by
+  `x = y = true`, and the very same clause table still *agrees* with that formula — a table is a prefix
+  of itself. So the certificate check is the only thing standing between a satisfiable formula and a
+  proof of its unsatisfiability, and the control pins that it holds. Soundness makes this unfalsifiable
+  in principle; the point of running it is that a check nobody has watched refuse is a check nobody
+  knows works.
+* **A clause citing itself as its own justification is refused** — the bootstrap that `rupWhy`'s
+  `hint < w` test exists to stop, which had a docstring and no test.
+
+**And two mutations of the definitions, to confirm the soundness proofs are what catches a wrong
+checker** rather than the spec `#guard`s: changing the conflict test from `u == 0` to `u == 1` breaks
+`propagate_conflict_sound`, and deleting the `hint < w` watermark guard breaks `rup_sound`. Both went
+red at the proof, which is the level that matters — a checker mutation that only broke a `#guard` would
+mean the proofs were not constraining the definition.
+
+**One gate defect found and repaired, predating M05.** `lake lint` had no driver configured and had
+errored out since M01 — it exited 1, so it was visibly red rather than failing open, but the
+environment linters had **never been run over this library**. Now wired to Batteries' `runLinter`
+(`lintDriver` in `lakefile.toml`): 14 linters over 620 declarations, passing, and its negative control
+is loud — a deliberately unused argument is reported by name at its source position, exit code 1.
+`linter.missingDocs` was switched on in the same change; the library was already at zero violations, so
+it is a ratchet and not a cleanup. It *warns* rather than failing the build — `lake lint` is the failing
+gate, and that distinction is written into the lakefile comment so nobody mistakes the warning for one.
+
 ## 4. Skeleton — the agenda
 
 `Sat/Mask.lean`, `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean`, every signature and full theorem

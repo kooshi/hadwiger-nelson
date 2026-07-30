@@ -170,7 +170,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
 | **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
 | **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
-| **M05** | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Subplanned 2026-07-29 (`plans/M05-kernel-checker.md`); skeleton green with 11 tracked leaves.* A real de Grey cube refutation checked by the **kernel**, axioms exactly `[propext, Classical.choice, Quot.sound]`. Measured projection: **5.4–9.0 hours of processor time, ~30–50 min wall clock over 96 independent cubes** — ~7× the spike's advertised cost, and still affordable. The miniature already passes through the kernel at axioms `[propext]`. Fallback if the soundness proof stalls: rung B ships through `native_decide` on the *same* packed certificates, so nothing here is wasted. |
+| **M05** ✅ | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Landed 2026-07-29 (`plans/M05-kernel-checker.md`).* `maskCheck_sound` — a refutation checker whose two hypotheses are closed `Bool`s the **kernel** decides, axioms exactly `[propext, Classical.choice, Quot.sound]`, zero `sorry`. Soundness is proved for **every** decoder, so the certificate's packing is untrusted as a matter of type. Negative controls committed and *watched to fail*: a satisfiable formula is refused, a clause citing itself is refused, and mutating the conflict test or deleting the watermark guard breaks the soundness proofs rather than the checker's answer. The remaining work is throughput at de Grey's scale, projected at **5.4–9.0 h processor time, ~30–50 min wall over 96 independent cubes**; that measurement belongs to M06, which is where a real certificate first arrives. |
 | **M06** | **χ(ℝ²) ≥ 5.** Cube split at depth 5 (1024 cubes), certificates ingested, `¬ Colorable 4`, headline theorem, trust receipt. | `chromaticNumber_plane_ge_five` green, zero `sorry`, `#print axioms` recorded, `lean4checker` re-check. **Target: zero native purchases** — that is what M05 buys. |
 | **M07** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
 | **M08** | **Structure-aware geometry.** Difference-vector certificates: verify one norm per *distinct edge difference* (67 for de Grey, against 7877 edges) and a subtraction per edge. | The same `deGrey_valid` claim at a per-edge cost that no longer carries a multiplication, and a projection showing the expensive term is flat in graph size. Sequenced here because it changes the edge list's shape and would invalidate M06's certificates. |
@@ -236,6 +236,11 @@ of `LRAT.check` on a CaDiCaL certificate.
 **M04 added no purchases.** The geometry of de Grey's 1581-vertex graph — the larger of the two
 computations the project rests on — is entirely kernel-checked: `deGrey_valid` reports `[propext,
 Quot.sound]`. Every native axiom in the project is still one of the ten below.
+
+**M05 added no purchases either, and it is the milestone that makes the remaining ten removable.**
+Nine declarations from `Sat/{Mask,ClauseTable,MaskCheck}.lean` are now in the audit's clean section,
+`maskCheck_sound` among them. Nothing above depends on them yet — M06 is where the ten purchases
+below are meant to disappear, and until that lands they are still in the ledger.
 
 **The headline bound buys nothing.** `four_le_chromaticNumber_plane` goes through route A —
 `decide +kernel` over all `3 ^ 7` colourings — and reports exactly `propext, Classical.choice,
@@ -312,10 +317,13 @@ Two `Bool`s carry the weight, and each has a kernel route and a native route:
    `native_decide` succeeds instantly. Core's own `bv_decide` uses native evaluation for the same
    step, so this is the state of the art rather than a gap in our setup.
 
-   **So χ(ℝ²) ≥ 5 will carry a native-evaluation axiom.** It is named per declaration, listed here,
-   and said out loud. The kernel-only route requires an LRAT checker written to reduce, with its own
-   soundness proof — a milestone-sized undertaking, tracked as open work and not attempted.
-   **This is the one place where the project trusts the compiler, and it says so.**
+   **Superseded at M05, 2026-07-29.** That paragraph said χ(ℝ²) ≥ 5 would carry a native-evaluation
+   axiom, because the kernel-only route needed a checker written to reduce plus its own soundness
+   proof — "a milestone-sized undertaking, tracked as open work and not attempted". It was a milestone,
+   it is M05, and it is done: `HadwigerNelson.maskCheck_sound` reports exactly `[propext,
+   Classical.choice, Quot.sound]`, and its two hypotheses are closed `Bool`s the kernel decides. The
+   shipped `LRAT.check` is still unreducible for the reason above; the project no longer routes through
+   it. **The remaining question is throughput, not trust**, and M06 is where it gets answered.
 
 `lean4checker` (independent kernel, via elan) re-checks at each milestone boundary.
 
@@ -332,7 +340,10 @@ produce a meaningless one, and the specific countermeasure for each:
 | `unitDistanceGraph` has vacuous `Adj` (e.g. `fromRel` collapsing) | `example : (unitDistanceGraph ℂ).Adj 0 1` proved; a non-adjacency proved too |
 | CNF encoding subtly wrong, making *any* graph "unsatisfiable" | ✅ M03: spindle proved non-3-colourable by `decide +kernel` **and** by LRAT **and** by nine cube certificates, all agreeing; `exists_sat_coloringCNF_four` shows the same encoder **satisfiable** at four colours, from a real colouring |
 | Encoder checked only against itself | ✅ M03: the spec `#guard`s in `Instances/SpindleBound.lean` evaluate the formula on **hand-written** assignments, not ones built by the module's own `ofColoring` |
-| Certificate checker that accepts everything | ✅ M03: committed negative controls — a certificate filed against the wrong cube fails, and no certificate refutes the satisfiable four-colour formula |
+| Certificate checker that accepts everything | ✅ M03: committed negative controls — a certificate filed against the wrong cube fails, and no certificate refutes the satisfiable four-colour formula. ✅ M05, at the checker we wrote ourselves: a **satisfiable** formula that the clause table genuinely agrees with is refused, with the fault pinned by `#guard_msgs`; so is a clause citing itself as its own justification |
+| A hypothesis of the checker's soundness theorem is decorative | ✅ M05: dropping the non-tautology hypothesis makes `propagate_prop_sound` **false**, and the countermodel is committed as an `example : ¬ …`. A build failure cannot establish this; only a countermodel can |
+| The checker's answer and its diagnosis drift apart | ✅ M05: the `Bool` is *defined* as "the diagnostic reports no fault", so they are one computation. M04's arrangement — two functions related by a proved lemma — is the weaker version of this |
+| The packed certificate format is silently trusted | ✅ M05: the decoder is a **parameter** of the checker and soundness is proved for every function of its type, so a decoding bug is a failed check by construction, not by review |
 | A cube certificate silently attached to the wrong cube | ✅ M03: the cube list is supplied literally and tied to `allCubes` by `rfl`, so a misfile is a type error naming the cube as a readable literal; `#eval badCubes …` reports every wrong *and* every missing index |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
@@ -349,16 +360,19 @@ Stated up front, per doctrine, and to be reported as-is:
 - **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
   Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
   rungs A–C are not, which is why the ratchet is built the way it is.
-- **The certificate check is not kernel-reducible *as shipped* — but a kernel-only route now looks
-  reachable.** Reopened and measured 2026-07-29; see `plans/spike-kernel-lrat.md`. The shipped
+- **The certificate check is not kernel-reducible *as shipped*, and M05 replaced it.** The shipped
   `LRAT.check` is blocked by exactly one thing — `Std.HashMap` inside `DefaultClause.ofArray`, whose
   bucket indexing computes on `USize`, whose width is an `@[extern] opaque` the kernel cannot unfold.
-  Core's *generic* `lratChecker` avoids it, kernel-reduces a real refutation, and its soundness
-  theorem is axiom-clean — so **the kernel route needs no new soundness proof, only throughput**. At
-  core's ~150 ms per propagation step de Grey costs 22.6 days; with a big-integer mask checker,
-  measured at 0.35 ms/step, **1.26 hours**. Until that is built we pay a native-evaluation axiom and
-  say so, and the geometry half — which *is* kernel-only — is the part we claim without
-  qualification.
+  `Sat/MaskCheck.lean` is the replacement: proved sound, kernel-decidable, axiom-clean. **What remains
+  is a cost risk, not a trust risk.** The projection is 5.4–9.0 hours of processor time across 96
+  independent cubes; it is a *projection*, from a per-step cost model measured on synthetic data, and
+  the two numbers it rests on that are still unmeasured are the real distribution of learned-clause
+  lengths and whether a better cube split exists. Both push the total, and only one direction is
+  bounded: if the split is worse than greedy-by-degree suggests, this grows. The abandon threshold is
+  restated in `plans/M05-kernel-checker.md` § 1 — projected processor time over ~40 hours, or a
+  re-checker on 4 cores that cannot finish overnight.
+  **An earlier version of this bullet quoted 0.35 ms/step and 1.26 hours. Both were wrong** — measured
+  without the clause-table lookup, which is where the time actually goes. Do not quote them again.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

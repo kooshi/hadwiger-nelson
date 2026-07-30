@@ -109,6 +109,23 @@ would still cost: one hypothesis, no geometry. -/
 #print axioms deGrey_unit_distances
 #print axioms deGrey_bound_of_not_colorable
 
+/-! ## M05 — the kernel-runnable refutation checker
+
+The point of the milestone is that these are in the **clean** section. `maskCheck_sound` is the only
+route from a checked certificate to unsatisfiability, and both of its hypotheses are closed `Bool`s
+the kernel decides — so a refutation costs no axiom beyond the standard three, where M03's route
+below buys one per declaration. -/
+
+#print axioms LitSet.any_ofClause_iff
+#print axioms LitSet.entails_zero_iff_unsat
+#print axioms propagate_conflict_sound
+#print axioms propagate_prop_sound
+#print axioms justified_of_agreesWithCNF
+#print axioms rup_sound
+#print axioms runActions_sound
+#print axioms runStream_sound
+#print axioms maskCheck_sound
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
