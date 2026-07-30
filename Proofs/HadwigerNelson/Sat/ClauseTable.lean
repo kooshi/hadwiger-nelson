@@ -56,50 +56,47 @@ namespace HadwigerNelson
 
 open Std.Sat
 
-/-- The chunk tree: a pivot split whose leaves are big `Nat`s.
+/-- The chunk tree: a pivot split whose leaves carry a slot capacity and a big `Nat`.
 
 `node m l r` sends indices below `m` to `l` and the rest to `r`, renumbered from zero — M04's
 `PtTable` shape, over chunks instead of points. A lookup costs the tree's *depth* in reduction steps,
-identically for every index, which is what keeps per-cube timings uniform. -/
+identically for every index, which is what keeps per-segment timings uniform.
+
+**The slot capacity is per chunk, and that is a measured decision** (`plans/M06-chi-ge-five.md`
+§ 2.2). A learned clause database has a long tail — measured on de Grey's halves: median 19
+literals, 99th percentile 86, longest 227 — so one uniform capacity pads every short clause out to
+the longest in the whole table: 145 MB against 68 MB for half A. M05 chose uniform and recorded
+medium confidence pending this distribution. -/
 inductive Chunks where
-  /-- One big `Nat` holding a block of packed clause slots. -/
-  | leaf : Nat → Chunks
+  /-- `leaf lits w` — one big `Nat` holding a block of packed clause slots, each with capacity
+  `lits` literal fields. -/
+  | leaf : Nat → Nat → Chunks
   /-- `node m l r` — chunk indices below `m` are `l`'s, the rest are `r`'s, renumbered from zero. -/
   | node : Nat → Chunks → Chunks → Chunks
 deriving Repr, Inhabited
 
-/-- Fetch chunk `i`.
+/-- Fetch chunk `i`: its slot capacity and its packed data.
 
 **Totality is denied out of range:** `Nat` subtraction truncates, so a too-large index returns *some*
 chunk rather than failing. Reaching it means the emitter and the packing parameters disagree, and the
 consequence is a failed check, never a false theorem — every clause the checker cites has already
 been justified or compared against the formula. The spec section pins the junk value. -/
-def Chunks.get : Chunks → Nat → Nat
-  | .leaf w, _ => w
+def Chunks.get : Chunks → Nat → Nat × Nat
+  | .leaf lits w, _ => (lits, w)
   | .node m l r, i => if i < m then l.get i else r.get (i - m)
 
-/-- The emitted clause table: how it is packed, and the packed data.
-
-A single uniform slot width, not one per chunk. **This is the cheapest adequate choice, not
-necessarily the final one** — a per-chunk width read from a chunk header would stop one long derived
-clause from padding every slot, at the cost of one more reduction step per lookup. Which wins depends
-on the real distribution of derived-clause lengths, which is unmeasured; see
-`plans/M05-kernel-checker.md` § 7. -/
+/-- The emitted clause table: how it is packed, and the packed data. The slot capacity lives in
+each chunk (see `Chunks`), so this holds only what is genuinely uniform. -/
 structure ClauseTable where
-  /-- Bits per packed literal field. 24 covers 8·10⁶ variables. -/
+  /-- Bits per packed literal field. 14 covers 8192 variables; 24 covers 8·10⁶. -/
   field : Nat
-  /-- Literal capacity of one slot. A slot with fewer literals is zero-terminated. -/
-  lits : Nat
-  /-- Clause slots per chunk. -/
+  /-- Clause slots per chunk. Uniform, which is what keeps the index arithmetic a division. -/
   perChunk : Nat
   /-- The packed data. -/
   chunks : Chunks
 deriving Repr, Inhabited
 
 namespace ClauseTable
-
-/-- Bits per clause slot. -/
-def slotBits (t : ClauseTable) : Nat := t.field * t.lits
 
 /-- Decode a slot's packed literal fields into a literal set.
 
@@ -124,11 +121,13 @@ def unpackAux (fw : Nat) : Nat → Nat → LitSet → LitSet
 
 /-- Clause `id`, as a literal set: descend to its chunk, shift its slot down, decode its fields.
 
-This is the checker's inner-loop lookup, and it is where the milestone's time goes — about 2.5 ms per
-call at de Grey's scale, against a propagation step's arithmetic, which is free. -/
+This is the checker's inner-loop lookup, and it is where the milestone's time goes. Measured on a
+real de Grey table through `decide +kernel`: **1.35 ms per lookup-and-propagate**, against a
+propagation step's arithmetic, which is free. -/
 def get (t : ClauseTable) (id : Nat) : LitSet :=
-  let w := (t.chunks.get (id / t.perChunk)) >>> ((id % t.perChunk) * t.slotBits)
-  unpackAux t.field t.lits (w % (2 ^ t.slotBits)) ⟨0, 0⟩
+  let c := t.chunks.get (id / t.perChunk)
+  let sb := t.field * c.1
+  unpackAux t.field c.1 ((c.2 >>> ((id % t.perChunk) * sb)) % (2 ^ sb)) ⟨0, 0⟩
 
 end ClauseTable
 
@@ -258,9 +257,7 @@ private def chunk1 : Nat :=
 
 /-- Two literals per slot, two slots per chunk, 8-bit fields: small enough to read in binary. -/
 private def tbl : ClauseTable :=
-  { field := 8, lits := 2, perChunk := 2, chunks := .node 1 (.leaf chunk0) (.leaf chunk1) }
-
-#guard tbl.slotBits == 16
+  { field := 8, perChunk := 2, chunks := .node 1 (.leaf 2 chunk0) (.leaf 2 chunk1) }
 
 -- The four clauses come back out, and they agree with the list form independently compiled.
 #guard tbl.get 0 == LitSet.ofClause [(0, true), (1, true)]
@@ -277,20 +274,34 @@ private def f4 : CNF Nat :=
 
 -- **The negative control.** One corrupted slot, and the boundary check goes red. A `#guard` that
 -- could not fail proves nothing, so this is the partner of the one above.
-#guard !({ tbl with chunks := .node 1 (.leaf (chunk0 + 1)) (.leaf chunk1) } : ClauseTable).agreesWithCNF f4
+#guard !({ tbl with chunks := .node 1 (.leaf 2 (chunk0 + 1)) (.leaf 2 chunk1) } :
+  ClauseTable).agreesWithCNF f4
 
 -- ...and a table that is right but claimed against a *different* formula.
 #guard !tbl.agreesWithCNF ⟨#[[(0, true), (1, true)], [(2, true)]]⟩
 
--- The packing parameters are part of the datum: right chunks, wrong slot width, check fails.
-#guard !({ tbl with lits := 1 } : ClauseTable).agreesWithCNF f4
+-- The packing parameters are part of the datum: right chunks, wrong slot capacity, check fails.
+#guard !({ tbl with chunks := .node 1 (.leaf 1 chunk0) (.leaf 1 chunk1) } :
+  ClauseTable).agreesWithCNF f4
+
+-- **The per-chunk capacity is read from the chunk it descends into**, not from the table: the two
+-- chunks here hold clauses of different lengths and both decode correctly. This is the whole point
+-- of M06's change, and a uniform-width table could not do it.
+#guard ({ field := 8, perChunk := 1,
+          chunks := .node 1 (.leaf 1 (fld 3 true))
+                            (.leaf 3 ((fld 0 true ||| (fld 1 false <<< 8)) ||| (fld 2 true <<< 16))) } :
+        ClauseTable).get 0 == ({ pos := 1 <<< 3, neg := 0 } : LitSet)
+#guard ({ field := 8, perChunk := 1,
+          chunks := .node 1 (.leaf 1 (fld 3 true))
+                            (.leaf 3 ((fld 0 true ||| (fld 1 false <<< 8)) ||| (fld 2 true <<< 16))) } :
+        ClauseTable).get 1 == LitSet.ofClause [(0, true), (1, false), (2, true)]
 
 -- A short clause is zero-terminated, not padded with a spurious literal.
-#guard ({ tbl with chunks := .leaf (fld 3 true) } : ClauseTable).get 0
+#guard ({ tbl with chunks := .leaf 2 (fld 3 true) } : ClauseTable).get 0
         == ({ pos := 1 <<< 3, neg := 0 } : LitSet)
 
 -- **The denied obligation, pinned.** Out of range, `Chunks.get` returns a chunk rather than failing.
-#guard tbl.chunks.get 99 == chunk1
+#guard tbl.chunks.get 99 == (2, chunk1)
 
 end Spec
 

@@ -13,6 +13,8 @@ import Proofs.HadwigerNelson.Instances.Triangle
 import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleBound
 import Proofs.HadwigerNelson.Instances.DeGrey
+import Proofs.HadwigerNelson.Instances.DeGrey.Split
+import Proofs.HadwigerNelson.Instances.DeGrey.Bound
 
 /-!
 # Proofs

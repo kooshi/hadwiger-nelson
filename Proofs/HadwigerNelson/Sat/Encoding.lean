@@ -325,6 +325,48 @@ theorem not_colorable_of_cubes {E : List (Fin n × Fin n)} (W : List (Fin n))
   obtain ⟨a, ha⟩ := exists_sat_coloringCNF_cube W C hk
   simp [CNF.Sat, h _ (hcover ▸ cubeOf_mem_allCubes W ⇑C) a] at ha
 
+/-! ## Colour symmetry, and the pinned bridge — M06's consumers
+
+Three additions, all one-liners, all serving one shape: **a colouring in hand, a cube it induces,
+and a refutation of that cube.** M06's proof of χ(ℝ²) ≥ 5 is exactly that, three times over
+(`plans/M06-chi-ge-five.md` § 2.5).
+
+Colour symmetry appears here in the only form the milestone needs — relabel the colours by a
+bijection of `Fin k`. No clique, no triangle, no permutation *group* action on the graph; the
+roadmap's M09 keeps all of that. This is what makes one certificate cover three colour cases, and
+it is worth exactly 2× on a 12.8-hour budget. -/
+
+/-- **Relabelling colours preserves properness.** Any injection will do; `Equiv.Perm` is the case
+used. This is the hypothesis that stops the symmetry argument from being a way to prove anything:
+a non-injective relabelling merges colour classes and the lemma does not apply. -/
+theorem valid_comp_of_injective {G : SimpleGraph (Fin n)} {f : Fin n → Fin k}
+    (hf : ∀ i j, G.Adj i j → f i ≠ f j) {σ : Fin k → Fin k} (hσ : Function.Injective σ) :
+    ∀ i j, G.Adj i j → σ (f i) ≠ σ (f j) :=
+  fun i j hij h => hf i j hij (hσ h)
+
+/-- **Some permutation of the colours sends `a` to `b`** — so "the shared vertex has colour 0" is
+free, and the four colour cases at a second vertex collapse to two. -/
+theorem exists_perm_apply_eq (a b : Fin k) : ∃ σ : Equiv.Perm (Fin k), σ a = b :=
+  ⟨Equiv.swap a b, Equiv.swap_apply_left a b⟩
+
+/-- **The bridge from a refuted cube to a colouring that cannot exist.** A proper colouring `f`,
+together with unsatisfiability of the formula pinned to *the cube `f` itself induces*, is a
+contradiction.
+
+Stated over a bare function with a disequality hypothesis rather than over a bundled `Coloring`,
+because that is the form a case analysis produces: M06 arrives here holding `f`, `hf`, and the value
+of `f` at two vertices, and `cubeOf W f` computes to the literal cube the certificate was filed
+against. -/
+theorem not_pinned {E : List (Fin n × Fin n)} (W : List (Fin n)) (f : Fin n → Fin k)
+    (hf : ∀ i j, (edgeGraph n E).Adj i j → f i ≠ f j)
+    (h : (coloringCNF k n E ++ cubeCNF k n (cubeOf W f)).Unsat)
+    (hk : 0 < k := by norm_num) : False := by
+  obtain ⟨a, ha⟩ :=
+    exists_sat_coloringCNF_cube W (SimpleGraph.Coloring.mk f fun {i j} hij => hf i j hij) hk
+  -- `⇑(Coloring.mk f _)` is `f` by projection, so the witness is already about the cube `f` induces.
+  have hsat : CNF.eval a (coloringCNF k n E ++ cubeCNF k n (cubeOf W f)) = true := ha
+  simp [h a] at hsat
+
 /-! ## The independent route: deciding colourability directly
 
 At calibration scale the whole question is decidable by brute force — `k ^ n` colourings — which is

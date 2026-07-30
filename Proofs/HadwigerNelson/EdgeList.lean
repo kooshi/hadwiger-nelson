@@ -53,6 +53,15 @@ so that proof never has to reconstruct the `Or`. -/
 theorem edgeGraph_adj_of_mem {E : List (Fin n × Fin n)} {i j : Fin n}
     (hne : i ≠ j) (hmem : (i, j) ∈ E) : (edgeGraph n E).Adj i j := ⟨hne, Or.inl hmem⟩
 
+/-- **A graph presented by a longer list contains one presented by a shorter.** The direction M06
+consumes: a proper colouring of the whole graph restricts to a proper colouring of each half, and
+the halves are literal segments of `deGrey.edges`, so the inclusion is `List.subset_append_left`
+with no kernel computation in it — where deciding a 3,938-against-7,877 inclusion would be
+3.1 × 10⁷ pair comparisons. -/
+theorem edgeGraph_adj_mono {E₁ E₂ : List (Fin n × Fin n)} (h : E₁ ⊆ E₂) {i j : Fin n}
+    (hij : (edgeGraph n E₁).Adj i j) : (edgeGraph n E₂).Adj i j :=
+  ⟨hij.1, hij.2.imp (fun m => h m) (fun m => h m)⟩
+
 /-- **The reduction, in the certificate's own vocabulary.** The hypothesis `hp` is exactly what
 M04's exact-arithmetic edge check produces: one unit-distance fact per listed pair, with no
 `Adj` in sight. This is the call site for the whole project's headline. -/

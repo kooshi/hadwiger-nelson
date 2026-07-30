@@ -57,7 +57,9 @@ of the data itself, and they run compiled on every build, so they cost nothing a
 regenerated file that silently changed size or order. -/
 
 #guard deGrey.edges.length = 7877
-#guard deGreyChunks.length = 158
+-- 45 chunks: 22 per half at 179 edges each (3938 = 22 × 179), plus the one joining edge. The chunk
+-- size divides the half size on purpose — see `Instances/DeGrey/Split.lean`.
+#guard deGreyChunks.length = 45
 #guard deGrey.edges.eraseDups.length = 7877
 #guard deGrey.edges.all fun e => e.1 < e.2
 #guard (deGrey.edges.map (·.1) ++ deGrey.edges.map (·.2)).eraseDups.length = 1581

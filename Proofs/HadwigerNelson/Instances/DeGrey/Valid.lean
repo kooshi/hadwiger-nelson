@@ -7,19 +7,12 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Geom05
 import Proofs.HadwigerNelson.Instances.DeGrey.Geom06
 import Proofs.HadwigerNelson.Instances.DeGrey.Geom07
 import Proofs.HadwigerNelson.Instances.DeGrey.Geom08
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom09
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom10
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom11
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom12
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom13
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom14
-import Proofs.HadwigerNelson.Instances.DeGrey.Geom15
 
 /-!
 # `deGrey` — the geometry, glued
 
 `deGrey_valid` below is the whole geometric claim in one line: all 7877 listed
-pairs are exactly one unit apart. It is assembled from the 158 per-chunk
+pairs are exactly one unit apart. It is assembled from the 45 per-chunk
 theorems, which are *cited* — deciding again here would repeat every edge.
 
 The argument is `∀ chunk, the chunk checks`, supplied as one tuple; `List.Forall` over a
@@ -29,6 +22,11 @@ bridge from that to the membership form the lemma takes.
 **This file is generated bookkeeping.** For what `deGrey` does and does not certify,
 read `Instances/DeGrey.lean`.
 -/
+
+-- `hjoin` below is `rfl` over the whole edge list. The certificate's `edges` field is the
+-- parts appended while `Chunks` is a list of chunks, so reconciling them walks every
+-- edge: deep, but linear and paid once.
+set_option maxRecDepth 400000
 
 namespace HadwigerNelson
 
@@ -82,119 +80,6 @@ theorem deGrey_valid : deGrey.Valid = true :=
        deGreyChunk041_valid,
        deGreyChunk042_valid,
        deGreyChunk043_valid,
-       deGreyChunk044_valid,
-       deGreyChunk045_valid,
-       deGreyChunk046_valid,
-       deGreyChunk047_valid,
-       deGreyChunk048_valid,
-       deGreyChunk049_valid,
-       deGreyChunk050_valid,
-       deGreyChunk051_valid,
-       deGreyChunk052_valid,
-       deGreyChunk053_valid,
-       deGreyChunk054_valid,
-       deGreyChunk055_valid,
-       deGreyChunk056_valid,
-       deGreyChunk057_valid,
-       deGreyChunk058_valid,
-       deGreyChunk059_valid,
-       deGreyChunk060_valid,
-       deGreyChunk061_valid,
-       deGreyChunk062_valid,
-       deGreyChunk063_valid,
-       deGreyChunk064_valid,
-       deGreyChunk065_valid,
-       deGreyChunk066_valid,
-       deGreyChunk067_valid,
-       deGreyChunk068_valid,
-       deGreyChunk069_valid,
-       deGreyChunk070_valid,
-       deGreyChunk071_valid,
-       deGreyChunk072_valid,
-       deGreyChunk073_valid,
-       deGreyChunk074_valid,
-       deGreyChunk075_valid,
-       deGreyChunk076_valid,
-       deGreyChunk077_valid,
-       deGreyChunk078_valid,
-       deGreyChunk079_valid,
-       deGreyChunk080_valid,
-       deGreyChunk081_valid,
-       deGreyChunk082_valid,
-       deGreyChunk083_valid,
-       deGreyChunk084_valid,
-       deGreyChunk085_valid,
-       deGreyChunk086_valid,
-       deGreyChunk087_valid,
-       deGreyChunk088_valid,
-       deGreyChunk089_valid,
-       deGreyChunk090_valid,
-       deGreyChunk091_valid,
-       deGreyChunk092_valid,
-       deGreyChunk093_valid,
-       deGreyChunk094_valid,
-       deGreyChunk095_valid,
-       deGreyChunk096_valid,
-       deGreyChunk097_valid,
-       deGreyChunk098_valid,
-       deGreyChunk099_valid,
-       deGreyChunk100_valid,
-       deGreyChunk101_valid,
-       deGreyChunk102_valid,
-       deGreyChunk103_valid,
-       deGreyChunk104_valid,
-       deGreyChunk105_valid,
-       deGreyChunk106_valid,
-       deGreyChunk107_valid,
-       deGreyChunk108_valid,
-       deGreyChunk109_valid,
-       deGreyChunk110_valid,
-       deGreyChunk111_valid,
-       deGreyChunk112_valid,
-       deGreyChunk113_valid,
-       deGreyChunk114_valid,
-       deGreyChunk115_valid,
-       deGreyChunk116_valid,
-       deGreyChunk117_valid,
-       deGreyChunk118_valid,
-       deGreyChunk119_valid,
-       deGreyChunk120_valid,
-       deGreyChunk121_valid,
-       deGreyChunk122_valid,
-       deGreyChunk123_valid,
-       deGreyChunk124_valid,
-       deGreyChunk125_valid,
-       deGreyChunk126_valid,
-       deGreyChunk127_valid,
-       deGreyChunk128_valid,
-       deGreyChunk129_valid,
-       deGreyChunk130_valid,
-       deGreyChunk131_valid,
-       deGreyChunk132_valid,
-       deGreyChunk133_valid,
-       deGreyChunk134_valid,
-       deGreyChunk135_valid,
-       deGreyChunk136_valid,
-       deGreyChunk137_valid,
-       deGreyChunk138_valid,
-       deGreyChunk139_valid,
-       deGreyChunk140_valid,
-       deGreyChunk141_valid,
-       deGreyChunk142_valid,
-       deGreyChunk143_valid,
-       deGreyChunk144_valid,
-       deGreyChunk145_valid,
-       deGreyChunk146_valid,
-       deGreyChunk147_valid,
-       deGreyChunk148_valid,
-       deGreyChunk149_valid,
-       deGreyChunk150_valid,
-       deGreyChunk151_valid,
-       deGreyChunk152_valid,
-       deGreyChunk153_valid,
-       deGreyChunk154_valid,
-       deGreyChunk155_valid,
-       deGreyChunk156_valid,
-       deGreyChunk157_valid⟩)
+       deGreyChunk044_valid⟩)
 
 end HadwigerNelson

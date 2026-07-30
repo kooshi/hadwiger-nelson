@@ -37,8 +37,8 @@ import json
 import os
 import sys
 
-CHUNK = 50          # edges per `ValidOn` theorem
-PER_MODULE = 10     # chunks per geometry module
+CHUNK = 179         # edges per `ValidOn` theorem -- divides de Grey's half size (3938 = 22 x 179)
+PER_MODULE = 5      # chunks per geometry module
 
 
 def q4lit(coeffs):
@@ -115,7 +115,16 @@ def emit_dir(data, name, mod, skeleton):
     """`mod` is the Lean module prefix of the output directory, e.g.
     `Proofs.HadwigerNelson.Instances.DeGrey`. Returns {filename: contents}."""
     n, edges = len(data["coords"]), [tuple(e) for e in data["edges"]]
-    chunks = [edges[i:i + CHUNK] for i in range(0, len(edges), CHUNK)]
+    # Chunk within each half separately, so every half is a contiguous run of whole chunks and the
+    # split identity M06 needs is a definition rather than a computation (plans/M06 s 2.1).
+    halves = data.get("halves") or [len(edges)]
+    chunks, spans, lo = [], [], 0
+    for size in halves:
+        first = len(chunks)
+        for i in range(lo, lo + size, CHUNK):
+            chunks.append(edges[i:min(i + CHUNK, lo + size)])
+        spans.append((first, len(chunks)))
+        lo += size
     groups = [range(i, min(i + PER_MODULE, len(chunks)))
               for i in range(0, len(chunks), PER_MODULE)]
     out = {}
@@ -154,11 +163,30 @@ def emit_dir(data, name, mod, skeleton):
         E.append(f"def {chunk_name(name, k)} : " + edgelist(n, ch))
     E += ["", f"/-- The {len(chunks)} chunks, in edge order. -/",
           f"def {name}Chunks : List (List (Fin {n} × Fin {n})) :=",
-          "  [" + ",\n   ".join(chunk_name(name, k) for k in range(len(chunks))) + "]", "",
-          "/-- The certificate. -/",
+          "  [" + ",\n   ".join(chunk_name(name, k) for k in range(len(chunks))) + "]", ""]
+
+    partnames = ["HalfAEdges", "HalfBEdges", "CrossEdge"][:len(spans)] \
+        if len(spans) == 3 else [f"Part{i}" for i in range(len(spans))]
+    if len(spans) > 1:
+        E += ["/-! ### The construction's own decomposition",
+              "",
+              "The point set is two rotated copies of one smaller set, so the edge list is emitted as",
+              "the copies' own edges followed by the edges between them. Each part is therefore a",
+              "**contiguous segment**, which is what makes \"every edge of a part is an edge of the",
+              "graph\" a `List` fact with no computation in it. `plans/M06-chi-ge-five.md` s 2.1 says",
+              "why that matters: the alternative is 3.1e7 kernel comparisons.", "-/", ""]
+        for (a, b), pn in zip(spans, partnames):
+            cnt = sum(len(chunks[k]) for k in range(a, b))
+            E.append(f"/-- {cnt} edges, chunks {a}-{b - 1}. -/")
+            E.append(f"def {name}{pn} : List (Fin {n} × Fin {n}) :=")
+            E.append("  " + " ++ ".join(chunk_name(name, k) for k in range(a, b)))
+            E.append("")
+    edgedef = " ++ ".join(f"{name}{pn}" for pn in partnames) if len(spans) > 1 \
+        else f"{name}Chunks.flatten"
+    E += ["/-- The certificate. -/",
           f"def {name} : UDCert {n} where",
           f"  verts := {name}Table.toVerts",
-          f"  edges := {name}Chunks.flatten",
+          f"  edges := {edgedef}",
           f"  denom := {data['denom']}", "",
           "end HadwigerNelson"]
     out["Edges.lean"] = "\n".join(E) + "\n"
@@ -209,6 +237,10 @@ def emit_dir(data, name, mod, skeleton):
           f"**This file is generated bookkeeping.** For what `{name}` does and does not certify,",
           "read `Instances/DeGrey.lean`.",
           "-/", "",
+          "-- `hjoin` below is `rfl` over the whole edge list. The certificate's `edges` field is the",
+          "-- parts appended while `Chunks` is a list of chunks, so reconciling them walks every",
+          "-- edge: deep, but linear and paid once.",
+          "set_option maxRecDepth 400000", "",
           "namespace HadwigerNelson", "",
           f"/-- **Every one of the {len(edges)} listed edges has exact squared distance",
           f"`{data['denom']}²`** — so every one of them is a real unit distance in the plane.",

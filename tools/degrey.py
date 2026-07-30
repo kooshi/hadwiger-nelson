@@ -173,6 +173,33 @@ def dedup(pts):
     return out
 
 
+def halves(G, Y, ctr, sin_):
+    """Which vertices belong to each rotated copy of Y, as index sets.
+
+    The construction's last step rotates one point set `Y` twice, so `G` is two copies of it. The
+    two copies turn out to share exactly one vertex and to be joined by exactly one edge, which is
+    de Grey's argument made visible -- and is what M06's proof is built on. Nothing here is trusted:
+    Lean re-derives the split as a `List` identity (`deGrey_edges_split`, by `rfl`).
+    """
+    ix = {p: i for i, p in enumerate(G)}
+    A = {ix[rot_about(p, ctr, h(-1, 8), sin_)] for p in Y}
+    B = {ix[rot_about(p, ctr, h(1, 8), sin_)] for p in Y}
+    return A, B
+
+
+def split_order(E, A, B):
+    """`E` reordered as (inside copy A) ++ (inside copy B) ++ (crossing), each group sorted.
+
+    M06 needs each half to be a *contiguous segment* of the edge list, so that "every edge of a half
+    is an edge of the graph" is `List.subset_append_left` rather than 3.1e7 kernel comparisons.
+    """
+    Ea = [e for e in E if e[0] in A and e[1] in A]
+    Eb = [e for e in E if e[0] in B and e[1] in B]
+    cross = [e for e in E if e not in Ea and e not in Eb]
+    assert len(Ea) + len(Eb) + len(cross) == len(E), "the halves must partition the edges"
+    return Ea + Eb + cross, [len(Ea), len(Eb), len(cross)]
+
+
 def build():
     # step 2: S_a = orbit of S under the 6 rotations by multiples of 60 deg and y-negation
     c60, s60 = h(1, 2), smul(F(1, 2), R3)
@@ -235,7 +262,16 @@ if __name__ == "__main__":
     print(f"|G| = {len(G)}  (paper: 1581)", file=sys.stderr)
     E = edges(G)
     print(f"|E(G)| = {len(E)}", file=sys.stderr)
-    json.dump({"n": len(G), "edges": E}, open("tools/degrey_graph.json", "w"))
+
+    ctr, sin_ = (h(-2), h(0)), smul(F(3, 8), R7)
+    A, B = halves(G, Y, ctr, sin_)
+    E, hsz = split_order(E, A, B)
+    shared = sorted(A & B)
+    cross = E[hsz[0] + hsz[1]:]
+    print(f"halves: {len(A)} + {len(B)} vertices sharing {shared}; "
+          f"edges {hsz[0]} + {hsz[1]} + {hsz[2]} crossing {cross}", file=sys.stderr)
+    json.dump({"n": len(G), "edges": E, "halves": hsz, "shared": shared},
+              open("tools/degrey_graph.json", "w"))
 
     # Integer-leaf export, one global denominator, same shape as tools/spindle.json.
     from math import gcd
@@ -246,5 +282,6 @@ if __name__ == "__main__":
                 L = L * f.denominator // gcd(L, f.denominator)
     coords = [[[int(f * L) for f in comp] for comp in p] for p in G]
     json.dump({"names": [str(i) for i in range(len(G))], "denom": L, "coords": coords,
-               "edges": E, "primes": PRIMES}, open("tools/degrey_cert.json", "w"))
+               "edges": E, "primes": PRIMES, "halves": hsz, "shared": shared},
+              open("tools/degrey_cert.json", "w"))
     print(f"common denominator: {L}", file=sys.stderr)

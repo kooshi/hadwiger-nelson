@@ -172,19 +172,33 @@ def runActions (t : ClauseTable) : Nat → List Action → Outcome
       | none     => .done
       | some why => .fault why
 
-/-- Run the certificate chunk by chunk, threading the watermark, decoding with **whatever decoder is
-handed in**. Reaching the end without an `addEmpty` is a fault, not a success. -/
-def runStream (t : ClauseTable) (decode : Nat → Option (List Action)) :
-    Nat → List Nat → Option CertFault
-  | w, []       => some (.noEmptyClause w)
+/-- Run a run of chunks, threading the watermark, decoding with **whatever decoder is handed in**,
+and reporting where the watermark got to.
+
+Running out of chunks is `.more`, not a fault: **a certificate may be checked in segments.** A
+segment proves an implication between watermarks, so segments elaborate independently and in
+parallel — which is the difference between 6.9 hours of wall clock for one of de Grey's halves and
+three minutes per segment over 32 cores (`plans/M06-chi-ge-five.md` § 2.4). Only `runStream` below,
+which sees the whole certificate, treats a missing `addEmpty` as the fault it is. -/
+def runChunks (t : ClauseTable) (decode : Nat → Option (List Action)) :
+    Nat → List Nat → Outcome
+  | w, []       => .more w
   | w, ch :: cs =>
       match decode ch with
-      | none      => some (.malformedChunk w)
+      | none      => .fault (.malformedChunk w)
       | some acts =>
           match runActions t w acts with
-          | .done      => none
-          | .more w'   => runStream t decode w' cs
-          | .fault why => some why
+          | .done      => .done
+          | .more w'   => runChunks t decode w' cs
+          | .fault why => .fault why
+
+/-- Run a whole certificate. Reaching the end without an `addEmpty` is a fault, not a success. -/
+def runStream (t : ClauseTable) (decode : Nat → Option (List Action))
+    (w : Nat) (cert : List Nat) : Option CertFault :=
+  match runChunks t decode w cert with
+  | .done      => none
+  | .more w'   => some (.noEmptyClause w')
+  | .fault why => some why
 
 /-! ### The concrete decoder
 
@@ -326,27 +340,63 @@ theorem runActions_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {acts : List 
 /-- The same across chunks — **for an arbitrary decoder.** Nothing about `decode` is available to this
 proof, which is what makes the decoder untrusted as a matter of type rather than of policy.
 
+Indexing the conclusion by the `Outcome` does for the chunk loop what it already did for the action
+loop: one induction covers "the empty clause was derived", "the watermark advanced this far" and "the
+certificate is wrong", so a segmented check and a whole-certificate check are the same theorem.
+
 Induction on the chunk list, `generalizing w`. -/
+theorem runChunks_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
+    (decode : Nat → Option (List Action)) (hJ : Justified t f w) :
+    (runChunks t decode w cert).Sound t f := by
+  induction cert generalizing w with
+  | nil => exact hJ
+  | cons ch cs ih =>
+      rw [runChunks]
+      split
+      · exact trivial
+      · rename_i acts _
+        have hs := runActions_sound (acts := acts) hJ
+        split
+        · rename_i ho; rw [ho] at hs; exact hs
+        · rename_i w' ho; rw [ho] at hs; exact ih hs
+        · exact trivial
+
+/-- **What a certificate segment buys: the watermark moves, and everything below it stays justified.**
+
+The table, the field width, the segment and the watermark it reaches are all **explicit**, for M05's
+reason — nothing determines them, so leaving them implicit would make every one of 256 generated
+segment modules name its arguments by hand. A generated segment is one citation:
+
+```lean
+theorem segA017 (h : Justified halfATable halfACnf 1234567) :
+    Justified halfATable halfACnf 1378901 :=
+  justified_of_segment halfATable 19 1234567 segA017Chunks 1378901 h (by decide +kernel)
+```
+-/
+theorem justified_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
+    (w' : Nat) (hJ : Justified t f w)
+    (h : runChunks t (decodeChunk fw) w seg = .more w') : Justified t f w' := by
+  have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
+  rw [h] at hs
+  exact hs
+
+/-- **And the last segment derives the empty clause.** Same shape, terminal conclusion. -/
+theorem unsat_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
+    (hJ : Justified t f w) (h : runChunks t (decodeChunk fw) w seg = .done) : f.Unsat := by
+  have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
+  rw [h] at hs
+  exact hs
+
+/-- The whole-certificate form, for a certificate small enough to check in one module. -/
 theorem runStream_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w)
     (h : runStream t decode w cert = none) : f.Unsat := by
-  induction cert generalizing w with
-  | nil => exact absurd h (by simp [runStream])
-  | cons ch cs ih =>
-      rw [runStream] at h
-      split at h
-      · exact absurd h (by simp)
-      · rename_i acts _
-        split at h
-        · rename_i ho
-          have hs := runActions_sound (acts := acts) hJ
-          rw [ho] at hs
-          exact hs
-        · rename_i w' ho
-          have hs := runActions_sound (acts := acts) hJ
-          rw [ho] at hs
-          exact ih hs h
-        · exact absurd h (by simp)
+  have hs := runChunks_sound (cert := cert) decode hJ
+  unfold runStream at h
+  split at h
+  · rename_i ho; rw [ho] at hs; exact hs
+  · exact absurd h (by simp)
+  · exact absurd h (by simp)
 
 /-- **The milestone's theorem.** If the emitted table really holds the formula, and the checker accepts
 the certificate against it, the formula is unsatisfiable.
@@ -393,16 +443,17 @@ private def fld (v : Nat) (s : Bool) : Nat := (if s then 2 * v else 2 * v + 1) +
 private def pack (xs : List Nat) : Nat := xs.foldr (fun x acc => x ||| (acc <<< 8)) 0
 
 private def tbl : ClauseTable :=
-  { field := 8, lits := 2, perChunk := 2
+  { field := 8, perChunk := 2
     chunks :=
       .node 2
         (.node 1
           -- ids 0,1 — `(x ∨ y)` and `(x ∨ ¬y)`
-          (.leaf (pack [fld 0 true, fld 1 true, fld 0 true, fld 1 false]))
+          (.leaf 2 (pack [fld 0 true, fld 1 true, fld 0 true, fld 1 false]))
           -- ids 2,3 — `(¬x ∨ y)` and `(¬x ∨ ¬y)`
-          (.leaf (pack [fld 0 false, fld 1 true, fld 0 false, fld 1 false])))
-        -- ids 4,5 — the derived clauses `(x)` and `(¬x)`, zero-terminated
-        (.leaf (pack [fld 0 true, 0, fld 0 false, 0])) }
+          (.leaf 2 (pack [fld 0 false, fld 1 true, fld 0 false, fld 1 false])))
+        -- ids 4,5 — the derived clauses `(x)` and `(¬x)`, one literal each, so this chunk needs a
+        -- capacity of only 1: the per-chunk width in action.
+        (.leaf 1 (pack [fld 0 true, fld 0 false])) }
 
 private def f4 : CNF Nat :=
   ⟨#[[(0, true), (1, true)], [(0, true), (1, false)],
