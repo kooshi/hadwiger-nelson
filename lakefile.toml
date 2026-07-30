@@ -1,11 +1,24 @@
 name = "proofs"
 defaultTargets = ["Proofs"]
 
+# `lake lint` — WORKFLOW's "linters silent" gate item, which errored with "no lint driver
+# configured" from M01 until M05. It exited 1, so it was visibly broken rather than failing
+# open, but the environment linters had never once been run over this library. Batteries
+# ships the driver and arrives transitively through Mathlib; `Proofs` is the library to lint.
+# Verified to fail loudly: an unused argument is reported by name at its source position.
+lintDriver = "batteries/runLinter"
+lintDriverArgs = ["Proofs"]
+
 # The load-bearing hardening (debruijn-init): a typo'd identifier must be an error,
 # never a silently-introduced implicit that makes a wrong statement elaborate green.
 [leanOptions]
 autoImplicit = false
 relaxedAutoImplicit = false
+
+# Every public declaration must carry a docstring. The library was already at zero
+# violations when this was switched on, so it is a ratchet rather than a cleanup.
+# Note it *warns* — it does not fail `lake build`; `lake lint` above is the failing gate.
+linter.missingDocs = true
 
 # Mathlib pinned to the release tag matching ./lean-toolchain (v4.32.0), so
 # `lake exe cache get` restores the prebuilt oleans instead of building from source.
