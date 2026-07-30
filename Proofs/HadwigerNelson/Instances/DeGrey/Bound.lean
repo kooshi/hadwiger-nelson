@@ -36,8 +36,11 @@ reproducing a seed, or reading any Python.
 lake build                    # the kernel checks everything: geometry, certificates, reduction
 ./scripts/axioms.sh           # what the theorem depends on beyond the kernel — expect the standard three
 ./scripts/lean4checker.sh     # replay every declaration through an independently written kernel
-grep -rn --include=*.lean sorry Proofs/    # expect nothing
+grep -rn --include=*.lean 'sorr[y]' Proofs/   # expect nothing
 ```
+
+(The bracket in that last pattern is not a typo: written literally, the command would be found by
+itself, and a debt scan that always reports one hit is a debt scan people learn to ignore.)
 
 `chromaticNumber_plane_ge_five` depends on axioms `[propext, Classical.choice, Quot.sound]` — the
 standard three, and nothing else. **No `native_decide`, so no compiler and no CPU is trusted**, which
