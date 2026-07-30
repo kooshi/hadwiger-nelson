@@ -162,6 +162,29 @@ memory. Cap it by naming targets in batches:
 lake build Proofs.…​.Geom00 Proofs.…​.Geom01 …   # one batch; at most this many run at once
 ```
 
+**And "several GB each" is not the ceiling — measure the peak before choosing the batch width.** M06's
+certificate segments peak at **3.4 GB + 0.81 GB per certificate chunk**, which is 49.5 GB for one
+module at the size first chosen; twelve of those is 96 GB, and twenty-four **killed the desktop**. The
+number is not guessable from the source size, so measure it:
+
+```bash
+lake build <one target> &            # then poll the total RSS of the lean processes it spawns
+ps -C lean -o rss= --no-headers | awk '{s+=$1} END {print s/1048576 " GB"}'
+```
+
+then pick the batch from `available_memory / peak`, and run the batch inside a cap so the next
+surprise is a failed build rather than a dead machine:
+
+```bash
+systemd-run --user --scope -p MemoryMax=100G -p MemorySwapMax=0 -- lake build <batch…>
+```
+
+Two corollaries worth knowing before designing a generated-module layout: for work split across
+independent modules the **wall clock depends only on the job count, not the piece size** (the total
+kernel work is fixed), so making the pieces smaller is free and buys concurrency. And **editing
+anything upstream of generated modules invalidates all of them** — settle every hand-written module
+before starting a long generated build.
+
 **`decide +kernel`, not `decide`, for anything large.** Plain `decide` reduces the `Decidable`
 instance twice — once in the elaborator, once in the kernel — so it is ~2× slower and dies on
 `maxHeartbeats` well before the kernel itself would struggle. `+kernel` needs no `set_option` knob
