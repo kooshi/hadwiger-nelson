@@ -33,7 +33,7 @@ slots, each slot a run of packed literal fields. Measured at 37,000 clauses: 2.4
 They are not a separate `Layout` passed alongside. The emitter chose them, they are untrusted exactly
 as the chunks are, and `agreesWithCNF` re-derives the formula through them — so they are part of the
 emitted datum, and a wrong one can only make the check fail. Keeping them out of the table meant
-threading them through `rup`, `runActions` and `runChunks`, none of which ever inspect them.
+threading them through `rup`, `runActions` and `runSegment`, none of which ever inspect them.
 
 The **certificate's** field width is a different number and stays elsewhere (`Sat/MaskCheck.lean`):
 one blob's packing is not the other's, and the two optima need not coincide.

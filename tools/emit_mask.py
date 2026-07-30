@@ -2,7 +2,7 @@
 """Emit a clause table and a segmented certificate for `HadwigerNelson.maskCheck`.
 
 **Untrusted generator.** Lean re-derives the whole formula from its own definitions through
-`ClauseTable.agreesWithCNF`, and re-runs every propagation step through `runChunks`. A bug here can
+`ClauseTable.agreesWithCNF`, and re-runs every propagation step through `runSegment`. A bug here can
 only make a check fail; it cannot make a theorem false. What each mistake looks like is tabulated in
 `Proofs/HadwigerNelson/Sat/MaskCheck.lean`, indexed by the fault it causes.
 

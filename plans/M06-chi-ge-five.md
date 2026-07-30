@@ -204,12 +204,12 @@ generalises rather than duplicates:
 
 ```lean
 /-- Run a certificate segment, reporting where the watermark got to. -/
-def runChunks (t : ClauseTable) (decode : Nat → Option (List Action)) :
+def runSegment (t : ClauseTable) (decode : Nat → Option (List Action)) :
     Nat → List Nat → Outcome
 ```
 
-`runStream` is then *defined* from `runChunks` and `runStream_sound` follows from
-`runChunks_sound`, so M05's surface (`maskCheck`, `whyNot`, `maskCheck_sound`) is unchanged and one
+`runStream` is then *defined* from `runSegment` and `runStream_sound` follows from
+`runSegment_sound`, so M05's surface (`maskCheck`, `whyNot`, `maskCheck_sound`) is unchanged and one
 of its two chunk-list inductions disappears.
 
 **Decision — segments are `Justified → Justified` implications, one module each.** *Alternative:*
@@ -279,22 +279,22 @@ The whole milestone is these, in dependency order. Every one is stated before an
 ### 3.1 `Sat/MaskCheck.lean` — segmented checking
 
 ```lean
-def runChunks (t : ClauseTable) (decode : Nat → Option (List Action)) :
+def runSegment (t : ClauseTable) (decode : Nat → Option (List Action)) :
     Nat → List Nat → Outcome
 
-theorem runChunks_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
+theorem runSegment_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w) :
-    (runChunks t decode w cert).Sound t f
+    (runSegment t decode w cert).Sound t f
 
 /-- A segment advances the watermark. The table, field width, segment and target watermark are all
 explicit: nothing determines them, and a generated module must not name arguments. -/
 theorem justified_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
     (w' : Nat) (hJ : Justified t f w)
-    (h : runChunks t (decodeChunk fw) w seg = .more w') : Justified t f w'
+    (h : runSegment t (decodeChunk fw) w seg = .more w') : Justified t f w'
 
 /-- The last segment derives the empty clause. -/
 theorem unsat_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
-    (hJ : Justified t f w) (h : runChunks t (decodeChunk fw) w seg = .done) : f.Unsat
+    (hJ : Justified t f w) (h : runSegment t (decodeChunk fw) w seg = .done) : f.Unsat
 ```
 
 ### 3.2 `Sat/ClauseTable.lean` — per-chunk slot width
@@ -440,7 +440,7 @@ constraint, not ceremony.
   descent shapes, not one, and neither can express the other.
 * **Experience.** A build-fault table, because M06's faults are build faults that no `CertFault` covers —
   including the one I needed myself, that a failed segment is diagnosed by `#eval` of the same
-  expression. `runChunks` renamed `runSegment` so the code and the theorems share one vocabulary.
+  expression. `runSegment` renamed `runSegment` so the code and the theorems share one vocabulary.
 
 **And a negative control falsified a claim I had made twice.** I wrote, in a docstring and in a commit
 message, that a degenerate cube makes the pinned formula trivially unsatisfiable. It does not — the

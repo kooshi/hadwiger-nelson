@@ -20,7 +20,7 @@ geometry, `deGrey_valid`), the plane needs a fifth colour.
 ## What this rests on
 
 Nothing but the kernel and the three standard axioms. The two refutations are checked by
-`HadwigerNelson.runChunks`, whose soundness is proved in `Sat/MaskCheck.lean`; the geometry is 7877
+`HadwigerNelson.runSegment`, whose soundness is proved in `Sat/MaskCheck.lean`; the geometry is 7877
 exact identities in `ℚ(√3,√5,√7,√11)` decided by kernel reduction; the reduction from a finite graph
 to the plane is M01's. **No native evaluation anywhere** — `scripts/Axioms.lean` is the receipt.
 

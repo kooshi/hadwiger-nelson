@@ -361,7 +361,7 @@ loop: one induction covers "the empty clause was derived", "the watermark advanc
 certificate is wrong", so a segmented check and a whole-certificate check are the same theorem.
 
 Induction on the chunk list, `generalizing w`. -/
-theorem runChunks_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
+theorem runSegment_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w) :
     (runSegment t decode w cert).Sound t f := by
   induction cert generalizing w with
@@ -401,14 +401,14 @@ theorem segA017 (h : Justified halfATable halfACnf 1234567) :
 theorem justified_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
     (w' : Nat) (hJ : Justified t f w)
     (h : runSegment t (decodeChunk fw) w seg = .more w') : Justified t f w' := by
-  have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
+  have hs := runSegment_sound (cert := seg) (decodeChunk fw) hJ
   rw [h] at hs
   exact hs
 
 /-- **And the last segment derives the empty clause.** Same shape, terminal conclusion. -/
 theorem unsat_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
     (hJ : Justified t f w) (h : runSegment t (decodeChunk fw) w seg = .done) : f.Unsat := by
-  have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
+  have hs := runSegment_sound (cert := seg) (decodeChunk fw) hJ
   rw [h] at hs
   exact hs
 
@@ -416,7 +416,7 @@ theorem unsat_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : Lis
 theorem runStream_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w)
     (h : runStream t decode w cert = none) : f.Unsat := by
-  have hs := runChunks_sound (cert := cert) decode hJ
+  have hs := runSegment_sound (cert := cert) decode hJ
   unfold runStream at h
   split at h
   · rename_i ho; rw [ho] at hs; exact hs
