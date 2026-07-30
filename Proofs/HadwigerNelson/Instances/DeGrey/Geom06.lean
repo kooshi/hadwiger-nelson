@@ -22,10 +22,10 @@ a valid certificate (`UDCert.badEdges_eq_nil_iff`).
 
 namespace HadwigerNelson
 
-theorem deGreyChunk030_valid : deGrey.ValidOn deGreyChunk030 = true := sorry
-theorem deGreyChunk031_valid : deGrey.ValidOn deGreyChunk031 = true := sorry
-theorem deGreyChunk032_valid : deGrey.ValidOn deGreyChunk032 = true := sorry
-theorem deGreyChunk033_valid : deGrey.ValidOn deGreyChunk033 = true := sorry
-theorem deGreyChunk034_valid : deGrey.ValidOn deGreyChunk034 = true := sorry
+theorem deGreyChunk030_valid : deGrey.ValidOn deGreyChunk030 = true := by decide +kernel
+theorem deGreyChunk031_valid : deGrey.ValidOn deGreyChunk031 = true := by decide +kernel
+theorem deGreyChunk032_valid : deGrey.ValidOn deGreyChunk032 = true := by decide +kernel
+theorem deGreyChunk033_valid : deGrey.ValidOn deGreyChunk033 = true := by decide +kernel
+theorem deGreyChunk034_valid : deGrey.ValidOn deGreyChunk034 = true := by decide +kernel
 
 end HadwigerNelson
