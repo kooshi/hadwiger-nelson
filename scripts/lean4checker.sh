@@ -33,6 +33,30 @@ for pkg in "${REPO}"/.lake/packages/*/; do
 done
 export LEAN_PATH
 
+# lean4checker walks the *compiled* tree, not the module graph, so an .olean whose source has been
+# deleted is still replayed. M06 hit this: renaming the geometry layout from 16 modules to 9 left seven
+# stale oleans referring to constants that no longer exist, and the replay failed on a file that was
+# not part of the library. Worse than the noise is the other direction — a stale olean that *passes*
+# would make this script's OK a claim about a file nobody builds.
+#
+# So: fail loudly on an orphan, and name it. `lake build` does not clean these up.
+echo "==> checking for compiled modules whose source is gone"
+ORPHANS=0
+while IFS= read -r olean; do
+  src="${olean#.lake/build/lib/lean/}"
+  src="${src%.olean}.lean"
+  if [[ ! -f "${REPO}/${src}" ]]; then
+    echo "    ORPHAN: ${olean} (no ${src})"
+    ORPHANS=$((ORPHANS + 1))
+  fi
+done < <(cd "${REPO}" && find .lake/build/lib/lean/Proofs -name '*.olean' -print)
+if [[ "${ORPHANS}" -ne 0 ]]; then
+  echo "==> lean4checker: FAIL — ${ORPHANS} stale .olean(s); the replay would cover files the library"
+  echo "    no longer contains. Remove them (and their .ilean/.trace siblings) and re-run."
+  exit 1
+fi
+echo "    none"
+
 echo "==> replaying ${TARGET} through the independent kernel"
 "${CHECKER_DIR}/.lake/build/bin/lean4checker" "${TARGET}"
 echo "==> lean4checker: OK"
