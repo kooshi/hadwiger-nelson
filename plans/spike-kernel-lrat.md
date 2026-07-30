@@ -110,11 +110,28 @@ That is the whole case. The fast checker converts a dead route into a 15-minute 
 * **Complement within the width is `W ^^^ x`, and "and-not" is `x ^^^ (x &&& y)`. Do not replace
   either with `Nat.ldiff`.** This is a trap, and it is the shape a reader will want to tidy into.
   `Nat.ldiff` *does* exist (Mathlib's, with `Nat.testBit_ldiff` ready-made) — an earlier note here
-  claiming `Nat` has no and-not was wrong. But it is **not hardware-accelerated**: it is defined by
-  recursion over bits, so at 6324 bits it costs thousands of steps where the accelerated operations
-  cost one. Measured at 6324 bits over 500 operations: `x &&& y` and `x ^^^ (x &&& y)` both ~0.8–0.9 µs
-  each; the `Nat.ldiff` version did not finish the same benchmark. Reaching for the cleaner-looking
-  primitive silently costs the entire speedup this spike rests on.
+  claiming `Nat` has no and-not was wrong. But it is **not kernel-accelerated**, and the gap is not
+  marginal.
+
+  The mechanism: `Nat.land`, `lor` and `xor` are all *defined* as `Nat.bitwise` in core, exactly like
+  `ldiff` — the difference is that the **kernel** has GMP-backed special cases for the core names and
+  cannot possibly have one for a Mathlib definition. So `ldiff` actually reduces through the
+  `bitwise` recursion: roughly **one kernel step per bit**.
+
+  Re-measured 2026-07-29 on a freshly rebooted, idle machine (the first attempt was taken while
+  another project was thrashing the disk, and is not to be trusted):
+
+  | | 50 operations at 6324 bits |
+  |---|---|
+  | `x &&& y` | free — inside baseline noise (4 s file, 4 s baseline) |
+  | `x ^^^ (x &&& y)` | free — ~0.2–0.36 µs per operation at 500 operations |
+  | `Nat.ldiff x y` | **does not complete in 240 s** |
+
+  Single-operation costs corroborate the per-bit model: `ldiff` is flat with `land` at 64 and 1000
+  bits and costs ~1 s at 6324 bits, which is ~6324 reduction steps. The checker's inner loop performs
+  ~5 bitwise operations per propagation step across 1.3 × 10⁷ steps, so `ldiff` would put the
+  milestone somewhere past geological time. **Reaching for the cleaner-looking primitive does not slow
+  this down, it ends it.**
 * **Clauses: two big `Nat`s each** (`pos`, `neg`), dense. ~35,900 clauses per cube × 2 × 790 bytes ≈
   **56 MB** — the memory worry was misplaced: each cube adds only ~3,700 clauses, not the ~250,000 a
   pigeonhole instance suggested.

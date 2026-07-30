@@ -34,8 +34,11 @@ the same packed certificates** — so a stall costs the proof, not the milestone
 * **No RAT support needed** (zero `.addRat` across three certificate families) but **deletion lines
   must be parsed** (381 in one real cube certificate), even though they may be ignored semantically.
 * **Recurse structurally over a `List`, never `Nat.fold`** — `Nat.fold` is superlinear in the kernel.
-* **Do not use `Nat.ldiff`.** It exists and looks like the right primitive; it is not accelerated and
-  loses the entire speedup. Use `x ^^^ (x &&& y)`. See the spike for the measurement.
+* **Do not use `Nat.ldiff`.** It exists, has its own `testBit` lemma, and looks exactly like the right
+  primitive. The kernel accelerates `land`/`lor`/`xor` **by name** and cannot do so for a Mathlib
+  definition, so `ldiff` reduces through the `bitwise` recursion at about one step per bit: measured
+  on an idle machine, 50 operations at 6324 bits **does not complete in 240 s**, where `x &&& y` is
+  free. Use `x ^^^ (x &&& y)`.
 
 ## Two scoped pieces of work inside this milestone
 
