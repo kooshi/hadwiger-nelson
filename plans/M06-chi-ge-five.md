@@ -214,9 +214,40 @@ of its two chunk-list inductions disappears.
 
 **Decision — segments are `Justified → Justified` implications, one module each.** *Alternative:*
 one module per half holding the whole certificate. *Why this one:* 6.9 hours of wall clock per half
-against ~3 minutes per segment over 32 cores, and a segment that fails names its own watermark
-interval instead of failing somewhere inside a six-hour reduction. *Confidence: high.*
-Segment count: **128 per half** (~144k hints, ~3.2 min each).
+against minutes per segment in parallel, and a segment that fails names its own watermark interval
+instead of failing somewhere inside a six-hour reduction. *Confidence: high.*
+
+**The segment size is set by memory, and the number was found the hard way.** Measured peak resident
+size of one segment check:
+
+| certificate chunks in the segment | peak RSS | kernel time |
+|---|---|---|
+| 57 (128 segments per half) | **49.5 GB** | 356 s |
+| 7 (1024 segments per half) | 9.07 GB | 37 s |
+
+so **peak ≈ 3.4 GB + 0.81 GB per chunk**, and time is linear in chunks. Twenty-four concurrent
+57-chunk segments took the desktop down with an out-of-memory kill. The corrected shape: **6 chunks
+per segment — 1222 segments for half A, 1043 for half B — twelve concurrent, ~8.3 GB each.** Wall
+clock depends only on the job count, not the segment size, because the total kernel work is fixed:
+13,590 chunks × 6.25 s ÷ 12 ≈ **2 hours**.
+
+Where the memory goes: `unpackAux` builds one intermediate literal set per literal decoded, and the
+kernel retains every intermediate in a segment's reduction. At ~19 literals per clause and ~2,500
+hints per chunk that is the 0.81 GB. It is not the certificate's size and not the table's.
+
+**The composition is a flat `<|` chain, and the watermarks are checked by the elaborator.** Segment
+*k* concludes at the watermark segment *k+1* assumes, so a miscounted addition anywhere in the
+emitter is a type error naming the two segments that disagree — there is no arithmetic in the
+generated composition that can be wrong quietly. Written as a right-associative chain rather than a
+1222-deep parenthesis nest so that error is readable.
+
+**And the two descent shapes in this project are genuinely different.** The geometry cites 45
+independent chunk theorems through `List.forall_iff_forall_mem.mp` on a tuple; the certificate chains
+2,265 dependent segment implications. `Sat/Encoding.lean` states a preference for one shape for "the
+big obligation is the conjunction of generated small ones" — there are **two**, and which applies is
+decided by whether the small obligations are independent. An unordered conjunction cannot express the
+chain (segment *k*'s statement mentions a watermark that depends on every earlier segment), and the
+chain cannot express the conjunction without inventing an order.
 
 ### 2.5 Colour symmetry, at last, and only the part that is needed
 

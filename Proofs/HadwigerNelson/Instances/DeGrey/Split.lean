@@ -48,8 +48,14 @@ regenerated file whose halves changed size or whose joining edge moved. -/
 #guard ((deGreyHalfAEdges.map (·.1) ++ deGreyHalfAEdges.map (·.2)).eraseDups.filter fun v =>
           (deGreyHalfBEdges.map (·.1) ++ deGreyHalfBEdges.map (·.2)).eraseDups.contains v) = [14]
 
--- **The negative control for the split itself.** The joining edge is *not* inside either half; if it
--- were, the halves would not be independent and the argument in `Bound.lean` would be circular.
+-- The joining edge is not inside either half.
+--
+-- **This is a claim about the data, not a soundness condition** — and an earlier version of this
+-- comment said otherwise ("the argument would be circular"), which was wrong. `not_colorable_of_forcing`
+-- needs only three inclusions; if the joining edge *were* also inside a half, the forcing fact would
+-- be stronger, the derivation would still be valid, and nothing would break. What these two lines
+-- guard is that the split is the one described above, so a regenerated file that mixed the copies is
+-- caught here rather than becoming a silently different theorem.
 #guard !deGreyHalfAEdges.contains (11, 802)
 #guard !deGreyHalfBEdges.contains (11, 802)
 

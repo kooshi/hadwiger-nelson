@@ -126,6 +126,33 @@ below buys one per declaration. -/
 #print axioms runStream_sound
 #print axioms maskCheck_sound
 
+/-! ## M06 — χ(ℝ²) ≥ 5
+
+**The milestone, and the project's headline.** `chromaticNumber_plane_ge_five` must appear in the
+*clean* section: the whole point of M05 was that a refutation of de Grey's graph costs no axiom beyond
+the standard three, and this is where that is either true or not.
+
+`deGrey_not_colorable_four` is the claim no human can check by inspection — it quantifies over `4^1581`
+assignments — so it is the one where a native-evaluation axiom would matter most. It is clean. -/
+
+#print axioms edgeGraph_adj_mono
+#print axioms valid_comp_of_injective
+#print axioms exists_perm_apply_eq
+#print axioms not_pinned
+#print axioms runSegment_sound
+#print axioms justified_of_segment
+#print axioms unsat_of_segment
+#print axioms exists_normalized
+#print axioms eq_of_pinned_unsat
+#print axioms not_colorable_of_forcing
+#print axioms deGrey_halfA_subset
+#print axioms deGrey_halfB_subset
+#print axioms deGrey_adj_cross
+#print axioms halfA_unsat
+#print axioms halfB_unsat
+#print axioms deGrey_not_colorable_four
+#print axioms chromaticNumber_plane_ge_five
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

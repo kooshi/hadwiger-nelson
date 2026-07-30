@@ -26,6 +26,32 @@ to the plane is M01's. **No native evaluation anywhere** — `scripts/Axioms.lea
 
 CaDiCaL proposed the two certificates and is trusted for neither: a wrong certificate fails a segment
 check, and a wrong clause table fails `agreesWithCNF`.
+
+## For a reader who trusts none of this
+
+Four commands, in the order a sceptic should run them. None of them requires re-running a solver,
+reproducing a seed, or reading any Python.
+
+```
+lake build                    # the kernel checks everything: geometry, certificates, reduction
+./scripts/axioms.sh           # what the theorem depends on beyond the kernel — expect the standard three
+./scripts/lean4checker.sh     # replay every declaration through an independently written kernel
+grep -rn --include=*.lean sorry Proofs/    # expect nothing
+```
+
+`chromaticNumber_plane_ge_five` depends on axioms `[propext, Classical.choice, Quot.sound]` — the
+standard three, and nothing else. **No `native_decide`, so no compiler and no CPU is trusted**, which
+matters here more than anywhere: "this graph has no 4-colouring" quantifies over 4^1581 assignments, a
+952-digit number, and there is no spot check a human could perform instead.
+
+The three claims to read against the informal statement, each one click away:
+
+* **the plane's own terms** — `deGrey_unit_distances`: every listed edge joins two points of the plane
+  at distance exactly 1, from exact integer arithmetic in `ℚ(√3,√5,√7,√11)`, no floating point;
+* **the combinatorics** — `deGrey_not_colorable_four`, and under it two refutations totalling 34.2
+  million propagation steps, every one re-run by the kernel;
+* **the reduction** — `deGrey_bound_of_not_colorable`: a finite unit-distance graph with no
+  4-colouring bounds the chromatic number of the whole plane.
 -/
 
 namespace HadwigerNelson

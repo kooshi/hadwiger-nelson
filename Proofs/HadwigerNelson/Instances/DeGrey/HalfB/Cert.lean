@@ -126,13 +126,935 @@ import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg124
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg125
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg126
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg127
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg128
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg129
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg130
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg131
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg132
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg133
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg134
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg135
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg136
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg137
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg138
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg139
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg140
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg141
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg142
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg143
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg144
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg145
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg146
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg147
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg148
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg149
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg150
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg151
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg152
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg153
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg154
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg155
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg156
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg157
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg158
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg159
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg160
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg161
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg162
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg163
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg164
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg165
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg166
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg167
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg168
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg169
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg170
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg171
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg172
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg173
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg174
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg175
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg176
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg177
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg178
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg179
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg180
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg181
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg182
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg183
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg184
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg185
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg186
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg187
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg188
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg189
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg190
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg191
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg192
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg193
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg194
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg195
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg196
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg197
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg198
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg199
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg200
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg201
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg202
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg203
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg204
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg205
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg206
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg207
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg208
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg209
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg210
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg211
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg212
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg213
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg214
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg215
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg216
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg217
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg218
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg219
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg220
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg221
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg222
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg223
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg224
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg225
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg226
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg227
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg228
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg229
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg230
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg231
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg232
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg233
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg234
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg235
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg236
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg237
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg238
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg239
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg240
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg241
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg242
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg243
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg244
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg245
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg246
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg247
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg248
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg249
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg250
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg251
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg252
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg253
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg254
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg255
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg256
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg257
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg258
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg259
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg260
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg261
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg262
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg263
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg264
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg265
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg266
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg267
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg268
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg269
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg270
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg271
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg272
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg273
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg274
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg275
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg276
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg277
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg278
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg279
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg280
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg281
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg282
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg283
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg284
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg285
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg286
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg287
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg288
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg289
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg290
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg291
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg292
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg293
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg294
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg295
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg296
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg297
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg298
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg299
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg300
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg301
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg302
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg303
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg304
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg305
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg306
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg307
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg308
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg309
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg310
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg311
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg312
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg313
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg314
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg315
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg316
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg317
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg318
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg319
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg320
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg321
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg322
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg323
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg324
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg325
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg326
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg327
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg328
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg329
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg330
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg331
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg332
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg333
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg334
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg335
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg336
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg337
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg338
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg339
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg340
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg341
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg342
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg343
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg344
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg345
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg346
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg347
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg348
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg349
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg350
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg351
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg352
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg353
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg354
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg355
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg356
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg357
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg358
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg359
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg360
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg361
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg362
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg363
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg364
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg365
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg366
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg367
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg368
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg369
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg370
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg371
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg372
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg373
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg374
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg375
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg376
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg377
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg378
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg379
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg380
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg381
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg382
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg383
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg384
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg385
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg386
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg387
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg388
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg389
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg390
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg391
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg392
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg393
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg394
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg395
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg396
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg397
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg398
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg399
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg400
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg401
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg402
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg403
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg404
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg405
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg406
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg407
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg408
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg409
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg410
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg411
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg412
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg413
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg414
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg415
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg416
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg417
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg418
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg419
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg420
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg421
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg422
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg423
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg424
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg425
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg426
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg427
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg428
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg429
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg430
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg431
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg432
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg433
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg434
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg435
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg436
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg437
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg438
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg439
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg440
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg441
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg442
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg443
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg444
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg445
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg446
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg447
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg448
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg449
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg450
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg451
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg452
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg453
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg454
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg455
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg456
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg457
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg458
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg459
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg460
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg461
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg462
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg463
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg464
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg465
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg466
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg467
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg468
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg469
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg470
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg471
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg472
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg473
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg474
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg475
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg476
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg477
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg478
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg479
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg480
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg481
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg482
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg483
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg484
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg485
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg486
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg487
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg488
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg489
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg490
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg491
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg492
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg493
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg494
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg495
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg496
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg497
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg498
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg499
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg500
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg501
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg502
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg503
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg504
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg505
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg506
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg507
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg508
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg509
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg510
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg511
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg512
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg513
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg514
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg515
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg516
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg517
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg518
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg519
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg520
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg521
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg522
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg523
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg524
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg525
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg526
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg527
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg528
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg529
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg530
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg531
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg532
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg533
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg534
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg535
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg536
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg537
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg538
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg539
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg540
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg541
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg542
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg543
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg544
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg545
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg546
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg547
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg548
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg549
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg550
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg551
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg552
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg553
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg554
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg555
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg556
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg557
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg558
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg559
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg560
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg561
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg562
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg563
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg564
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg565
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg566
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg567
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg568
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg569
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg570
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg571
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg572
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg573
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg574
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg575
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg576
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg577
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg578
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg579
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg580
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg581
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg582
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg583
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg584
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg585
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg586
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg587
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg588
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg589
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg590
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg591
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg592
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg593
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg594
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg595
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg596
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg597
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg598
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg599
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg600
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg601
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg602
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg603
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg604
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg605
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg606
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg607
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg608
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg609
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg610
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg611
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg612
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg613
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg614
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg615
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg616
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg617
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg618
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg619
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg620
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg621
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg622
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg623
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg624
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg625
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg626
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg627
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg628
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg629
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg630
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg631
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg632
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg633
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg634
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg635
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg636
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg637
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg638
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg639
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg640
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg641
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg642
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg643
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg644
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg645
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg646
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg647
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg648
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg649
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg650
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg651
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg652
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg653
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg654
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg655
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg656
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg657
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg658
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg659
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg660
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg661
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg662
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg663
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg664
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg665
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg666
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg667
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg668
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg669
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg670
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg671
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg672
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg673
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg674
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg675
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg676
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg677
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg678
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg679
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg680
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg681
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg682
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg683
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg684
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg685
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg686
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg687
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg688
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg689
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg690
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg691
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg692
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg693
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg694
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg695
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg696
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg697
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg698
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg699
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg700
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg701
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg702
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg703
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg704
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg705
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg706
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg707
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg708
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg709
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg710
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg711
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg712
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg713
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg714
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg715
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg716
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg717
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg718
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg719
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg720
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg721
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg722
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg723
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg724
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg725
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg726
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg727
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg728
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg729
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg730
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg731
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg732
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg733
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg734
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg735
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg736
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg737
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg738
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg739
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg740
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg741
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg742
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg743
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg744
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg745
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg746
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg747
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg748
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg749
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg750
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg751
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg752
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg753
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg754
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg755
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg756
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg757
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg758
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg759
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg760
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg761
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg762
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg763
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg764
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg765
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg766
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg767
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg768
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg769
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg770
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg771
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg772
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg773
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg774
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg775
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg776
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg777
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg778
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg779
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg780
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg781
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg782
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg783
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg784
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg785
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg786
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg787
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg788
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg789
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg790
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg791
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg792
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg793
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg794
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg795
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg796
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg797
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg798
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg799
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg800
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg801
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg802
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg803
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg804
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg805
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg806
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg807
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg808
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg809
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg810
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg811
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg812
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg813
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg814
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg815
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg816
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg817
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg818
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg819
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg820
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg821
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg822
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg823
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg824
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg825
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg826
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg827
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg828
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg829
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg830
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg831
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg832
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg833
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg834
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg835
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg836
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg837
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg838
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg839
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg840
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg841
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg842
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg843
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg844
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg845
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg846
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg847
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg848
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg849
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg850
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg851
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg852
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg853
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg854
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg855
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg856
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg857
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg858
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg859
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg860
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg861
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg862
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg863
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg864
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg865
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg866
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg867
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg868
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg869
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg870
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg871
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg872
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg873
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg874
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg875
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg876
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg877
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg878
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg879
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg880
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg881
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg882
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg883
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg884
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg885
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg886
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg887
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg888
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg889
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg890
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg891
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg892
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg893
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg894
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg895
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg896
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg897
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg898
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg899
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg900
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg901
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg902
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg903
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg904
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg905
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg906
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg907
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg908
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg909
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg910
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg911
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg912
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg913
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg914
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg915
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg916
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg917
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg918
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg919
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg920
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg921
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg922
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg923
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg924
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg925
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg926
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg927
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg928
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg929
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg930
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg931
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg932
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg933
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg934
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg935
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg936
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg937
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg938
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg939
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg940
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg941
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg942
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg943
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg944
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg945
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg946
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg947
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg948
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg949
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg950
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg951
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg952
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg953
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg954
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg955
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg956
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg957
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg958
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg959
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg960
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg961
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg962
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg963
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg964
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg965
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg966
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg967
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg968
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg969
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg970
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg971
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg972
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg973
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg974
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg975
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg976
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg977
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg978
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg979
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg980
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg981
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg982
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg983
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg984
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg985
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg986
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg987
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg988
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg989
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg990
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg991
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg992
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg993
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg994
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg995
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg996
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg997
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg998
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg999
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1000
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1001
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1002
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1003
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1004
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1005
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1006
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1007
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1008
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1009
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1010
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1011
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1012
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1013
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1014
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1015
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1016
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1017
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1018
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1019
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1020
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1021
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1022
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1023
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1024
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1025
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1026
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1027
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1028
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1029
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1030
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1031
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1032
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1033
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1034
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1035
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1036
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1037
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1038
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1039
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1040
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1041
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Seg1042
 
-/-! Generated by `tools/emit_mask.py` — **untrusted**; the kernel re-derives every claim. -/
+/-! Generated by `tools/emit_mask.py` — **untrusted**; the kernel re-derives every claim.
+If this module fails to build, the table of build faults and what to do about each is in
+`Proofs/HadwigerNelson/Sat/MaskCheck.lean`'s module docstring. -/
 
 /-!
-The 128 segments composed. Each was checked by the kernel on its own, from the
+The 1043 segments composed. Each was checked by the kernel on its own, from the
 watermark the previous one reached — which is why the check parallelises even though a
 certificate is read in order.
+
+**The watermarks are checked by the elaborator, not by the emitter.** Segment *k* concludes at
+a watermark that segment *k+1* takes as its hypothesis, so if this generator miscounted the
+additions in any chunk, the composition below is a type error naming the two segments that
+disagree. There is no arithmetic here to get wrong quietly.
 -/
 
 namespace HadwigerNelson
@@ -141,6 +1063,1049 @@ namespace HadwigerNelson
 certificate that nothing here trusts: a wrong certificate fails a segment, and a wrong
 clause table fails `halfB_agrees`. -/
 theorem halfB_unsat : halfBCnf.Unsat :=
-  halfBJust127 (halfBJust126 (halfBJust125 (halfBJust124 (halfBJust123 (halfBJust122 (halfBJust121 (halfBJust120 (halfBJust119 (halfBJust118 (halfBJust117 (halfBJust116 (halfBJust115 (halfBJust114 (halfBJust113 (halfBJust112 (halfBJust111 (halfBJust110 (halfBJust109 (halfBJust108 (halfBJust107 (halfBJust106 (halfBJust105 (halfBJust104 (halfBJust103 (halfBJust102 (halfBJust101 (halfBJust100 (halfBJust099 (halfBJust098 (halfBJust097 (halfBJust096 (halfBJust095 (halfBJust094 (halfBJust093 (halfBJust092 (halfBJust091 (halfBJust090 (halfBJust089 (halfBJust088 (halfBJust087 (halfBJust086 (halfBJust085 (halfBJust084 (halfBJust083 (halfBJust082 (halfBJust081 (halfBJust080 (halfBJust079 (halfBJust078 (halfBJust077 (halfBJust076 (halfBJust075 (halfBJust074 (halfBJust073 (halfBJust072 (halfBJust071 (halfBJust070 (halfBJust069 (halfBJust068 (halfBJust067 (halfBJust066 (halfBJust065 (halfBJust064 (halfBJust063 (halfBJust062 (halfBJust061 (halfBJust060 (halfBJust059 (halfBJust058 (halfBJust057 (halfBJust056 (halfBJust055 (halfBJust054 (halfBJust053 (halfBJust052 (halfBJust051 (halfBJust050 (halfBJust049 (halfBJust048 (halfBJust047 (halfBJust046 (halfBJust045 (halfBJust044 (halfBJust043 (halfBJust042 (halfBJust041 (halfBJust040 (halfBJust039 (halfBJust038 (halfBJust037 (halfBJust036 (halfBJust035 (halfBJust034 (halfBJust033 (halfBJust032 (halfBJust031 (halfBJust030 (halfBJust029 (halfBJust028 (halfBJust027 (halfBJust026 (halfBJust025 (halfBJust024 (halfBJust023 (halfBJust022 (halfBJust021 (halfBJust020 (halfBJust019 (halfBJust018 (halfBJust017 (halfBJust016 (halfBJust015 (halfBJust014 (halfBJust013 (halfBJust012 (halfBJust011 (halfBJust010 (halfBJust009 (halfBJust008 (halfBJust007 (halfBJust006 (halfBJust005 (halfBJust004 (halfBJust003 (halfBJust002 (halfBJust001 (halfBJust000 (halfB_base))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+  halfBJust1042 <|
+  halfBJust1041 <|
+  halfBJust1040 <|
+  halfBJust1039 <|
+  halfBJust1038 <|
+  halfBJust1037 <|
+  halfBJust1036 <|
+  halfBJust1035 <|
+  halfBJust1034 <|
+  halfBJust1033 <|
+  halfBJust1032 <|
+  halfBJust1031 <|
+  halfBJust1030 <|
+  halfBJust1029 <|
+  halfBJust1028 <|
+  halfBJust1027 <|
+  halfBJust1026 <|
+  halfBJust1025 <|
+  halfBJust1024 <|
+  halfBJust1023 <|
+  halfBJust1022 <|
+  halfBJust1021 <|
+  halfBJust1020 <|
+  halfBJust1019 <|
+  halfBJust1018 <|
+  halfBJust1017 <|
+  halfBJust1016 <|
+  halfBJust1015 <|
+  halfBJust1014 <|
+  halfBJust1013 <|
+  halfBJust1012 <|
+  halfBJust1011 <|
+  halfBJust1010 <|
+  halfBJust1009 <|
+  halfBJust1008 <|
+  halfBJust1007 <|
+  halfBJust1006 <|
+  halfBJust1005 <|
+  halfBJust1004 <|
+  halfBJust1003 <|
+  halfBJust1002 <|
+  halfBJust1001 <|
+  halfBJust1000 <|
+  halfBJust999 <|
+  halfBJust998 <|
+  halfBJust997 <|
+  halfBJust996 <|
+  halfBJust995 <|
+  halfBJust994 <|
+  halfBJust993 <|
+  halfBJust992 <|
+  halfBJust991 <|
+  halfBJust990 <|
+  halfBJust989 <|
+  halfBJust988 <|
+  halfBJust987 <|
+  halfBJust986 <|
+  halfBJust985 <|
+  halfBJust984 <|
+  halfBJust983 <|
+  halfBJust982 <|
+  halfBJust981 <|
+  halfBJust980 <|
+  halfBJust979 <|
+  halfBJust978 <|
+  halfBJust977 <|
+  halfBJust976 <|
+  halfBJust975 <|
+  halfBJust974 <|
+  halfBJust973 <|
+  halfBJust972 <|
+  halfBJust971 <|
+  halfBJust970 <|
+  halfBJust969 <|
+  halfBJust968 <|
+  halfBJust967 <|
+  halfBJust966 <|
+  halfBJust965 <|
+  halfBJust964 <|
+  halfBJust963 <|
+  halfBJust962 <|
+  halfBJust961 <|
+  halfBJust960 <|
+  halfBJust959 <|
+  halfBJust958 <|
+  halfBJust957 <|
+  halfBJust956 <|
+  halfBJust955 <|
+  halfBJust954 <|
+  halfBJust953 <|
+  halfBJust952 <|
+  halfBJust951 <|
+  halfBJust950 <|
+  halfBJust949 <|
+  halfBJust948 <|
+  halfBJust947 <|
+  halfBJust946 <|
+  halfBJust945 <|
+  halfBJust944 <|
+  halfBJust943 <|
+  halfBJust942 <|
+  halfBJust941 <|
+  halfBJust940 <|
+  halfBJust939 <|
+  halfBJust938 <|
+  halfBJust937 <|
+  halfBJust936 <|
+  halfBJust935 <|
+  halfBJust934 <|
+  halfBJust933 <|
+  halfBJust932 <|
+  halfBJust931 <|
+  halfBJust930 <|
+  halfBJust929 <|
+  halfBJust928 <|
+  halfBJust927 <|
+  halfBJust926 <|
+  halfBJust925 <|
+  halfBJust924 <|
+  halfBJust923 <|
+  halfBJust922 <|
+  halfBJust921 <|
+  halfBJust920 <|
+  halfBJust919 <|
+  halfBJust918 <|
+  halfBJust917 <|
+  halfBJust916 <|
+  halfBJust915 <|
+  halfBJust914 <|
+  halfBJust913 <|
+  halfBJust912 <|
+  halfBJust911 <|
+  halfBJust910 <|
+  halfBJust909 <|
+  halfBJust908 <|
+  halfBJust907 <|
+  halfBJust906 <|
+  halfBJust905 <|
+  halfBJust904 <|
+  halfBJust903 <|
+  halfBJust902 <|
+  halfBJust901 <|
+  halfBJust900 <|
+  halfBJust899 <|
+  halfBJust898 <|
+  halfBJust897 <|
+  halfBJust896 <|
+  halfBJust895 <|
+  halfBJust894 <|
+  halfBJust893 <|
+  halfBJust892 <|
+  halfBJust891 <|
+  halfBJust890 <|
+  halfBJust889 <|
+  halfBJust888 <|
+  halfBJust887 <|
+  halfBJust886 <|
+  halfBJust885 <|
+  halfBJust884 <|
+  halfBJust883 <|
+  halfBJust882 <|
+  halfBJust881 <|
+  halfBJust880 <|
+  halfBJust879 <|
+  halfBJust878 <|
+  halfBJust877 <|
+  halfBJust876 <|
+  halfBJust875 <|
+  halfBJust874 <|
+  halfBJust873 <|
+  halfBJust872 <|
+  halfBJust871 <|
+  halfBJust870 <|
+  halfBJust869 <|
+  halfBJust868 <|
+  halfBJust867 <|
+  halfBJust866 <|
+  halfBJust865 <|
+  halfBJust864 <|
+  halfBJust863 <|
+  halfBJust862 <|
+  halfBJust861 <|
+  halfBJust860 <|
+  halfBJust859 <|
+  halfBJust858 <|
+  halfBJust857 <|
+  halfBJust856 <|
+  halfBJust855 <|
+  halfBJust854 <|
+  halfBJust853 <|
+  halfBJust852 <|
+  halfBJust851 <|
+  halfBJust850 <|
+  halfBJust849 <|
+  halfBJust848 <|
+  halfBJust847 <|
+  halfBJust846 <|
+  halfBJust845 <|
+  halfBJust844 <|
+  halfBJust843 <|
+  halfBJust842 <|
+  halfBJust841 <|
+  halfBJust840 <|
+  halfBJust839 <|
+  halfBJust838 <|
+  halfBJust837 <|
+  halfBJust836 <|
+  halfBJust835 <|
+  halfBJust834 <|
+  halfBJust833 <|
+  halfBJust832 <|
+  halfBJust831 <|
+  halfBJust830 <|
+  halfBJust829 <|
+  halfBJust828 <|
+  halfBJust827 <|
+  halfBJust826 <|
+  halfBJust825 <|
+  halfBJust824 <|
+  halfBJust823 <|
+  halfBJust822 <|
+  halfBJust821 <|
+  halfBJust820 <|
+  halfBJust819 <|
+  halfBJust818 <|
+  halfBJust817 <|
+  halfBJust816 <|
+  halfBJust815 <|
+  halfBJust814 <|
+  halfBJust813 <|
+  halfBJust812 <|
+  halfBJust811 <|
+  halfBJust810 <|
+  halfBJust809 <|
+  halfBJust808 <|
+  halfBJust807 <|
+  halfBJust806 <|
+  halfBJust805 <|
+  halfBJust804 <|
+  halfBJust803 <|
+  halfBJust802 <|
+  halfBJust801 <|
+  halfBJust800 <|
+  halfBJust799 <|
+  halfBJust798 <|
+  halfBJust797 <|
+  halfBJust796 <|
+  halfBJust795 <|
+  halfBJust794 <|
+  halfBJust793 <|
+  halfBJust792 <|
+  halfBJust791 <|
+  halfBJust790 <|
+  halfBJust789 <|
+  halfBJust788 <|
+  halfBJust787 <|
+  halfBJust786 <|
+  halfBJust785 <|
+  halfBJust784 <|
+  halfBJust783 <|
+  halfBJust782 <|
+  halfBJust781 <|
+  halfBJust780 <|
+  halfBJust779 <|
+  halfBJust778 <|
+  halfBJust777 <|
+  halfBJust776 <|
+  halfBJust775 <|
+  halfBJust774 <|
+  halfBJust773 <|
+  halfBJust772 <|
+  halfBJust771 <|
+  halfBJust770 <|
+  halfBJust769 <|
+  halfBJust768 <|
+  halfBJust767 <|
+  halfBJust766 <|
+  halfBJust765 <|
+  halfBJust764 <|
+  halfBJust763 <|
+  halfBJust762 <|
+  halfBJust761 <|
+  halfBJust760 <|
+  halfBJust759 <|
+  halfBJust758 <|
+  halfBJust757 <|
+  halfBJust756 <|
+  halfBJust755 <|
+  halfBJust754 <|
+  halfBJust753 <|
+  halfBJust752 <|
+  halfBJust751 <|
+  halfBJust750 <|
+  halfBJust749 <|
+  halfBJust748 <|
+  halfBJust747 <|
+  halfBJust746 <|
+  halfBJust745 <|
+  halfBJust744 <|
+  halfBJust743 <|
+  halfBJust742 <|
+  halfBJust741 <|
+  halfBJust740 <|
+  halfBJust739 <|
+  halfBJust738 <|
+  halfBJust737 <|
+  halfBJust736 <|
+  halfBJust735 <|
+  halfBJust734 <|
+  halfBJust733 <|
+  halfBJust732 <|
+  halfBJust731 <|
+  halfBJust730 <|
+  halfBJust729 <|
+  halfBJust728 <|
+  halfBJust727 <|
+  halfBJust726 <|
+  halfBJust725 <|
+  halfBJust724 <|
+  halfBJust723 <|
+  halfBJust722 <|
+  halfBJust721 <|
+  halfBJust720 <|
+  halfBJust719 <|
+  halfBJust718 <|
+  halfBJust717 <|
+  halfBJust716 <|
+  halfBJust715 <|
+  halfBJust714 <|
+  halfBJust713 <|
+  halfBJust712 <|
+  halfBJust711 <|
+  halfBJust710 <|
+  halfBJust709 <|
+  halfBJust708 <|
+  halfBJust707 <|
+  halfBJust706 <|
+  halfBJust705 <|
+  halfBJust704 <|
+  halfBJust703 <|
+  halfBJust702 <|
+  halfBJust701 <|
+  halfBJust700 <|
+  halfBJust699 <|
+  halfBJust698 <|
+  halfBJust697 <|
+  halfBJust696 <|
+  halfBJust695 <|
+  halfBJust694 <|
+  halfBJust693 <|
+  halfBJust692 <|
+  halfBJust691 <|
+  halfBJust690 <|
+  halfBJust689 <|
+  halfBJust688 <|
+  halfBJust687 <|
+  halfBJust686 <|
+  halfBJust685 <|
+  halfBJust684 <|
+  halfBJust683 <|
+  halfBJust682 <|
+  halfBJust681 <|
+  halfBJust680 <|
+  halfBJust679 <|
+  halfBJust678 <|
+  halfBJust677 <|
+  halfBJust676 <|
+  halfBJust675 <|
+  halfBJust674 <|
+  halfBJust673 <|
+  halfBJust672 <|
+  halfBJust671 <|
+  halfBJust670 <|
+  halfBJust669 <|
+  halfBJust668 <|
+  halfBJust667 <|
+  halfBJust666 <|
+  halfBJust665 <|
+  halfBJust664 <|
+  halfBJust663 <|
+  halfBJust662 <|
+  halfBJust661 <|
+  halfBJust660 <|
+  halfBJust659 <|
+  halfBJust658 <|
+  halfBJust657 <|
+  halfBJust656 <|
+  halfBJust655 <|
+  halfBJust654 <|
+  halfBJust653 <|
+  halfBJust652 <|
+  halfBJust651 <|
+  halfBJust650 <|
+  halfBJust649 <|
+  halfBJust648 <|
+  halfBJust647 <|
+  halfBJust646 <|
+  halfBJust645 <|
+  halfBJust644 <|
+  halfBJust643 <|
+  halfBJust642 <|
+  halfBJust641 <|
+  halfBJust640 <|
+  halfBJust639 <|
+  halfBJust638 <|
+  halfBJust637 <|
+  halfBJust636 <|
+  halfBJust635 <|
+  halfBJust634 <|
+  halfBJust633 <|
+  halfBJust632 <|
+  halfBJust631 <|
+  halfBJust630 <|
+  halfBJust629 <|
+  halfBJust628 <|
+  halfBJust627 <|
+  halfBJust626 <|
+  halfBJust625 <|
+  halfBJust624 <|
+  halfBJust623 <|
+  halfBJust622 <|
+  halfBJust621 <|
+  halfBJust620 <|
+  halfBJust619 <|
+  halfBJust618 <|
+  halfBJust617 <|
+  halfBJust616 <|
+  halfBJust615 <|
+  halfBJust614 <|
+  halfBJust613 <|
+  halfBJust612 <|
+  halfBJust611 <|
+  halfBJust610 <|
+  halfBJust609 <|
+  halfBJust608 <|
+  halfBJust607 <|
+  halfBJust606 <|
+  halfBJust605 <|
+  halfBJust604 <|
+  halfBJust603 <|
+  halfBJust602 <|
+  halfBJust601 <|
+  halfBJust600 <|
+  halfBJust599 <|
+  halfBJust598 <|
+  halfBJust597 <|
+  halfBJust596 <|
+  halfBJust595 <|
+  halfBJust594 <|
+  halfBJust593 <|
+  halfBJust592 <|
+  halfBJust591 <|
+  halfBJust590 <|
+  halfBJust589 <|
+  halfBJust588 <|
+  halfBJust587 <|
+  halfBJust586 <|
+  halfBJust585 <|
+  halfBJust584 <|
+  halfBJust583 <|
+  halfBJust582 <|
+  halfBJust581 <|
+  halfBJust580 <|
+  halfBJust579 <|
+  halfBJust578 <|
+  halfBJust577 <|
+  halfBJust576 <|
+  halfBJust575 <|
+  halfBJust574 <|
+  halfBJust573 <|
+  halfBJust572 <|
+  halfBJust571 <|
+  halfBJust570 <|
+  halfBJust569 <|
+  halfBJust568 <|
+  halfBJust567 <|
+  halfBJust566 <|
+  halfBJust565 <|
+  halfBJust564 <|
+  halfBJust563 <|
+  halfBJust562 <|
+  halfBJust561 <|
+  halfBJust560 <|
+  halfBJust559 <|
+  halfBJust558 <|
+  halfBJust557 <|
+  halfBJust556 <|
+  halfBJust555 <|
+  halfBJust554 <|
+  halfBJust553 <|
+  halfBJust552 <|
+  halfBJust551 <|
+  halfBJust550 <|
+  halfBJust549 <|
+  halfBJust548 <|
+  halfBJust547 <|
+  halfBJust546 <|
+  halfBJust545 <|
+  halfBJust544 <|
+  halfBJust543 <|
+  halfBJust542 <|
+  halfBJust541 <|
+  halfBJust540 <|
+  halfBJust539 <|
+  halfBJust538 <|
+  halfBJust537 <|
+  halfBJust536 <|
+  halfBJust535 <|
+  halfBJust534 <|
+  halfBJust533 <|
+  halfBJust532 <|
+  halfBJust531 <|
+  halfBJust530 <|
+  halfBJust529 <|
+  halfBJust528 <|
+  halfBJust527 <|
+  halfBJust526 <|
+  halfBJust525 <|
+  halfBJust524 <|
+  halfBJust523 <|
+  halfBJust522 <|
+  halfBJust521 <|
+  halfBJust520 <|
+  halfBJust519 <|
+  halfBJust518 <|
+  halfBJust517 <|
+  halfBJust516 <|
+  halfBJust515 <|
+  halfBJust514 <|
+  halfBJust513 <|
+  halfBJust512 <|
+  halfBJust511 <|
+  halfBJust510 <|
+  halfBJust509 <|
+  halfBJust508 <|
+  halfBJust507 <|
+  halfBJust506 <|
+  halfBJust505 <|
+  halfBJust504 <|
+  halfBJust503 <|
+  halfBJust502 <|
+  halfBJust501 <|
+  halfBJust500 <|
+  halfBJust499 <|
+  halfBJust498 <|
+  halfBJust497 <|
+  halfBJust496 <|
+  halfBJust495 <|
+  halfBJust494 <|
+  halfBJust493 <|
+  halfBJust492 <|
+  halfBJust491 <|
+  halfBJust490 <|
+  halfBJust489 <|
+  halfBJust488 <|
+  halfBJust487 <|
+  halfBJust486 <|
+  halfBJust485 <|
+  halfBJust484 <|
+  halfBJust483 <|
+  halfBJust482 <|
+  halfBJust481 <|
+  halfBJust480 <|
+  halfBJust479 <|
+  halfBJust478 <|
+  halfBJust477 <|
+  halfBJust476 <|
+  halfBJust475 <|
+  halfBJust474 <|
+  halfBJust473 <|
+  halfBJust472 <|
+  halfBJust471 <|
+  halfBJust470 <|
+  halfBJust469 <|
+  halfBJust468 <|
+  halfBJust467 <|
+  halfBJust466 <|
+  halfBJust465 <|
+  halfBJust464 <|
+  halfBJust463 <|
+  halfBJust462 <|
+  halfBJust461 <|
+  halfBJust460 <|
+  halfBJust459 <|
+  halfBJust458 <|
+  halfBJust457 <|
+  halfBJust456 <|
+  halfBJust455 <|
+  halfBJust454 <|
+  halfBJust453 <|
+  halfBJust452 <|
+  halfBJust451 <|
+  halfBJust450 <|
+  halfBJust449 <|
+  halfBJust448 <|
+  halfBJust447 <|
+  halfBJust446 <|
+  halfBJust445 <|
+  halfBJust444 <|
+  halfBJust443 <|
+  halfBJust442 <|
+  halfBJust441 <|
+  halfBJust440 <|
+  halfBJust439 <|
+  halfBJust438 <|
+  halfBJust437 <|
+  halfBJust436 <|
+  halfBJust435 <|
+  halfBJust434 <|
+  halfBJust433 <|
+  halfBJust432 <|
+  halfBJust431 <|
+  halfBJust430 <|
+  halfBJust429 <|
+  halfBJust428 <|
+  halfBJust427 <|
+  halfBJust426 <|
+  halfBJust425 <|
+  halfBJust424 <|
+  halfBJust423 <|
+  halfBJust422 <|
+  halfBJust421 <|
+  halfBJust420 <|
+  halfBJust419 <|
+  halfBJust418 <|
+  halfBJust417 <|
+  halfBJust416 <|
+  halfBJust415 <|
+  halfBJust414 <|
+  halfBJust413 <|
+  halfBJust412 <|
+  halfBJust411 <|
+  halfBJust410 <|
+  halfBJust409 <|
+  halfBJust408 <|
+  halfBJust407 <|
+  halfBJust406 <|
+  halfBJust405 <|
+  halfBJust404 <|
+  halfBJust403 <|
+  halfBJust402 <|
+  halfBJust401 <|
+  halfBJust400 <|
+  halfBJust399 <|
+  halfBJust398 <|
+  halfBJust397 <|
+  halfBJust396 <|
+  halfBJust395 <|
+  halfBJust394 <|
+  halfBJust393 <|
+  halfBJust392 <|
+  halfBJust391 <|
+  halfBJust390 <|
+  halfBJust389 <|
+  halfBJust388 <|
+  halfBJust387 <|
+  halfBJust386 <|
+  halfBJust385 <|
+  halfBJust384 <|
+  halfBJust383 <|
+  halfBJust382 <|
+  halfBJust381 <|
+  halfBJust380 <|
+  halfBJust379 <|
+  halfBJust378 <|
+  halfBJust377 <|
+  halfBJust376 <|
+  halfBJust375 <|
+  halfBJust374 <|
+  halfBJust373 <|
+  halfBJust372 <|
+  halfBJust371 <|
+  halfBJust370 <|
+  halfBJust369 <|
+  halfBJust368 <|
+  halfBJust367 <|
+  halfBJust366 <|
+  halfBJust365 <|
+  halfBJust364 <|
+  halfBJust363 <|
+  halfBJust362 <|
+  halfBJust361 <|
+  halfBJust360 <|
+  halfBJust359 <|
+  halfBJust358 <|
+  halfBJust357 <|
+  halfBJust356 <|
+  halfBJust355 <|
+  halfBJust354 <|
+  halfBJust353 <|
+  halfBJust352 <|
+  halfBJust351 <|
+  halfBJust350 <|
+  halfBJust349 <|
+  halfBJust348 <|
+  halfBJust347 <|
+  halfBJust346 <|
+  halfBJust345 <|
+  halfBJust344 <|
+  halfBJust343 <|
+  halfBJust342 <|
+  halfBJust341 <|
+  halfBJust340 <|
+  halfBJust339 <|
+  halfBJust338 <|
+  halfBJust337 <|
+  halfBJust336 <|
+  halfBJust335 <|
+  halfBJust334 <|
+  halfBJust333 <|
+  halfBJust332 <|
+  halfBJust331 <|
+  halfBJust330 <|
+  halfBJust329 <|
+  halfBJust328 <|
+  halfBJust327 <|
+  halfBJust326 <|
+  halfBJust325 <|
+  halfBJust324 <|
+  halfBJust323 <|
+  halfBJust322 <|
+  halfBJust321 <|
+  halfBJust320 <|
+  halfBJust319 <|
+  halfBJust318 <|
+  halfBJust317 <|
+  halfBJust316 <|
+  halfBJust315 <|
+  halfBJust314 <|
+  halfBJust313 <|
+  halfBJust312 <|
+  halfBJust311 <|
+  halfBJust310 <|
+  halfBJust309 <|
+  halfBJust308 <|
+  halfBJust307 <|
+  halfBJust306 <|
+  halfBJust305 <|
+  halfBJust304 <|
+  halfBJust303 <|
+  halfBJust302 <|
+  halfBJust301 <|
+  halfBJust300 <|
+  halfBJust299 <|
+  halfBJust298 <|
+  halfBJust297 <|
+  halfBJust296 <|
+  halfBJust295 <|
+  halfBJust294 <|
+  halfBJust293 <|
+  halfBJust292 <|
+  halfBJust291 <|
+  halfBJust290 <|
+  halfBJust289 <|
+  halfBJust288 <|
+  halfBJust287 <|
+  halfBJust286 <|
+  halfBJust285 <|
+  halfBJust284 <|
+  halfBJust283 <|
+  halfBJust282 <|
+  halfBJust281 <|
+  halfBJust280 <|
+  halfBJust279 <|
+  halfBJust278 <|
+  halfBJust277 <|
+  halfBJust276 <|
+  halfBJust275 <|
+  halfBJust274 <|
+  halfBJust273 <|
+  halfBJust272 <|
+  halfBJust271 <|
+  halfBJust270 <|
+  halfBJust269 <|
+  halfBJust268 <|
+  halfBJust267 <|
+  halfBJust266 <|
+  halfBJust265 <|
+  halfBJust264 <|
+  halfBJust263 <|
+  halfBJust262 <|
+  halfBJust261 <|
+  halfBJust260 <|
+  halfBJust259 <|
+  halfBJust258 <|
+  halfBJust257 <|
+  halfBJust256 <|
+  halfBJust255 <|
+  halfBJust254 <|
+  halfBJust253 <|
+  halfBJust252 <|
+  halfBJust251 <|
+  halfBJust250 <|
+  halfBJust249 <|
+  halfBJust248 <|
+  halfBJust247 <|
+  halfBJust246 <|
+  halfBJust245 <|
+  halfBJust244 <|
+  halfBJust243 <|
+  halfBJust242 <|
+  halfBJust241 <|
+  halfBJust240 <|
+  halfBJust239 <|
+  halfBJust238 <|
+  halfBJust237 <|
+  halfBJust236 <|
+  halfBJust235 <|
+  halfBJust234 <|
+  halfBJust233 <|
+  halfBJust232 <|
+  halfBJust231 <|
+  halfBJust230 <|
+  halfBJust229 <|
+  halfBJust228 <|
+  halfBJust227 <|
+  halfBJust226 <|
+  halfBJust225 <|
+  halfBJust224 <|
+  halfBJust223 <|
+  halfBJust222 <|
+  halfBJust221 <|
+  halfBJust220 <|
+  halfBJust219 <|
+  halfBJust218 <|
+  halfBJust217 <|
+  halfBJust216 <|
+  halfBJust215 <|
+  halfBJust214 <|
+  halfBJust213 <|
+  halfBJust212 <|
+  halfBJust211 <|
+  halfBJust210 <|
+  halfBJust209 <|
+  halfBJust208 <|
+  halfBJust207 <|
+  halfBJust206 <|
+  halfBJust205 <|
+  halfBJust204 <|
+  halfBJust203 <|
+  halfBJust202 <|
+  halfBJust201 <|
+  halfBJust200 <|
+  halfBJust199 <|
+  halfBJust198 <|
+  halfBJust197 <|
+  halfBJust196 <|
+  halfBJust195 <|
+  halfBJust194 <|
+  halfBJust193 <|
+  halfBJust192 <|
+  halfBJust191 <|
+  halfBJust190 <|
+  halfBJust189 <|
+  halfBJust188 <|
+  halfBJust187 <|
+  halfBJust186 <|
+  halfBJust185 <|
+  halfBJust184 <|
+  halfBJust183 <|
+  halfBJust182 <|
+  halfBJust181 <|
+  halfBJust180 <|
+  halfBJust179 <|
+  halfBJust178 <|
+  halfBJust177 <|
+  halfBJust176 <|
+  halfBJust175 <|
+  halfBJust174 <|
+  halfBJust173 <|
+  halfBJust172 <|
+  halfBJust171 <|
+  halfBJust170 <|
+  halfBJust169 <|
+  halfBJust168 <|
+  halfBJust167 <|
+  halfBJust166 <|
+  halfBJust165 <|
+  halfBJust164 <|
+  halfBJust163 <|
+  halfBJust162 <|
+  halfBJust161 <|
+  halfBJust160 <|
+  halfBJust159 <|
+  halfBJust158 <|
+  halfBJust157 <|
+  halfBJust156 <|
+  halfBJust155 <|
+  halfBJust154 <|
+  halfBJust153 <|
+  halfBJust152 <|
+  halfBJust151 <|
+  halfBJust150 <|
+  halfBJust149 <|
+  halfBJust148 <|
+  halfBJust147 <|
+  halfBJust146 <|
+  halfBJust145 <|
+  halfBJust144 <|
+  halfBJust143 <|
+  halfBJust142 <|
+  halfBJust141 <|
+  halfBJust140 <|
+  halfBJust139 <|
+  halfBJust138 <|
+  halfBJust137 <|
+  halfBJust136 <|
+  halfBJust135 <|
+  halfBJust134 <|
+  halfBJust133 <|
+  halfBJust132 <|
+  halfBJust131 <|
+  halfBJust130 <|
+  halfBJust129 <|
+  halfBJust128 <|
+  halfBJust127 <|
+  halfBJust126 <|
+  halfBJust125 <|
+  halfBJust124 <|
+  halfBJust123 <|
+  halfBJust122 <|
+  halfBJust121 <|
+  halfBJust120 <|
+  halfBJust119 <|
+  halfBJust118 <|
+  halfBJust117 <|
+  halfBJust116 <|
+  halfBJust115 <|
+  halfBJust114 <|
+  halfBJust113 <|
+  halfBJust112 <|
+  halfBJust111 <|
+  halfBJust110 <|
+  halfBJust109 <|
+  halfBJust108 <|
+  halfBJust107 <|
+  halfBJust106 <|
+  halfBJust105 <|
+  halfBJust104 <|
+  halfBJust103 <|
+  halfBJust102 <|
+  halfBJust101 <|
+  halfBJust100 <|
+  halfBJust099 <|
+  halfBJust098 <|
+  halfBJust097 <|
+  halfBJust096 <|
+  halfBJust095 <|
+  halfBJust094 <|
+  halfBJust093 <|
+  halfBJust092 <|
+  halfBJust091 <|
+  halfBJust090 <|
+  halfBJust089 <|
+  halfBJust088 <|
+  halfBJust087 <|
+  halfBJust086 <|
+  halfBJust085 <|
+  halfBJust084 <|
+  halfBJust083 <|
+  halfBJust082 <|
+  halfBJust081 <|
+  halfBJust080 <|
+  halfBJust079 <|
+  halfBJust078 <|
+  halfBJust077 <|
+  halfBJust076 <|
+  halfBJust075 <|
+  halfBJust074 <|
+  halfBJust073 <|
+  halfBJust072 <|
+  halfBJust071 <|
+  halfBJust070 <|
+  halfBJust069 <|
+  halfBJust068 <|
+  halfBJust067 <|
+  halfBJust066 <|
+  halfBJust065 <|
+  halfBJust064 <|
+  halfBJust063 <|
+  halfBJust062 <|
+  halfBJust061 <|
+  halfBJust060 <|
+  halfBJust059 <|
+  halfBJust058 <|
+  halfBJust057 <|
+  halfBJust056 <|
+  halfBJust055 <|
+  halfBJust054 <|
+  halfBJust053 <|
+  halfBJust052 <|
+  halfBJust051 <|
+  halfBJust050 <|
+  halfBJust049 <|
+  halfBJust048 <|
+  halfBJust047 <|
+  halfBJust046 <|
+  halfBJust045 <|
+  halfBJust044 <|
+  halfBJust043 <|
+  halfBJust042 <|
+  halfBJust041 <|
+  halfBJust040 <|
+  halfBJust039 <|
+  halfBJust038 <|
+  halfBJust037 <|
+  halfBJust036 <|
+  halfBJust035 <|
+  halfBJust034 <|
+  halfBJust033 <|
+  halfBJust032 <|
+  halfBJust031 <|
+  halfBJust030 <|
+  halfBJust029 <|
+  halfBJust028 <|
+  halfBJust027 <|
+  halfBJust026 <|
+  halfBJust025 <|
+  halfBJust024 <|
+  halfBJust023 <|
+  halfBJust022 <|
+  halfBJust021 <|
+  halfBJust020 <|
+  halfBJust019 <|
+  halfBJust018 <|
+  halfBJust017 <|
+  halfBJust016 <|
+  halfBJust015 <|
+  halfBJust014 <|
+  halfBJust013 <|
+  halfBJust012 <|
+  halfBJust011 <|
+  halfBJust010 <|
+  halfBJust009 <|
+  halfBJust008 <|
+  halfBJust007 <|
+  halfBJust006 <|
+  halfBJust005 <|
+  halfBJust004 <|
+  halfBJust003 <|
+  halfBJust002 <|
+  halfBJust001 <|
+  halfBJust000 <|
+  halfB_base
 
 end HadwigerNelson

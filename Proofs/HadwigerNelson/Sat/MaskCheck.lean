@@ -54,9 +54,25 @@ without opening any other module.
 | use the **certificate's** field width — which is not the table's — and a header field counting the fields that follow | `CertFault.malformedChunk` |
 | drop the solver's deletion lines | *(nothing: they are simply not part of this format)* |
 | pin the solver flags so no `.addRat` step is ever produced | `CertFault.malformedChunk` |
+| backward-trim the certificate from the empty clause | *(nothing: an untrimmed certificate is 1.4–20× slower to check and no less sound)* |
+| give each `Chunks.leaf` a slot capacity at least the longest clause in that chunk | `TableFault.slotMismatch` |
 
 Nothing on that list is trusted. Every item is re-derived by one of the two kernel-decided `Bool`s, so
 a violation is a failed check, never a false theorem.
+
+## When the *build* fails, which is the other half of it
+
+At de Grey's scale the certificate is checked in thousands of segments across thousands of generated
+modules, and most of what goes wrong there is a build failure with no `CertFault` in sight. This is the
+table for that, because the person holding the error is reading a Lean message, not Python.
+
+| the build says | what it means | what to do |
+|---|---|---|
+| a type mismatch between two consecutive segment theorems | the emitter miscounted the additions in some chunk, so one segment's watermark does not meet the next one's | regenerate. Those watermarks are the emitter's only arithmetic, and this error is the elaborator checking it |
+| `maximum recursion depth has been reached` inside a segment | the decoder peels one field per reduction step and a chunk holds thousands | raise `maxRecDepth` in the generated header; the emitter sets 10⁶ |
+| the machine runs out of memory | a segment is too large. Measured peak: **≈ 3.4 GB + 0.81 GB per certificate chunk** — it is `unpackAux`'s intermediate literal sets, which the kernel retains for the whole reduction | fewer chunks per segment, and fewer segments at once. Wall clock depends only on the job count, so shrinking segments is free |
+| `decide` failed, with a proposition too large to print | the certificate really is wrong in that segment — but the kernel cannot tell you how | **`#eval runSegment t (decodeChunk fw) w seg`**: the same expression compiled prints the `Outcome`, including the fault. This is the diagnostic for a failed segment, and it is instant |
+| `agreesWithCNF` is false on a table that used to pass | the formula moved under the certificate — usually a regenerated edge list against an old certificate | `#eval t.firstFault f` names the id and both values, then regenerate |
 
 ## The reasoning surface — nothing here is ever unfolded
 
@@ -180,7 +196,7 @@ segment proves an implication between watermarks, so segments elaborate independ
 parallel — which is the difference between 6.9 hours of wall clock for one of de Grey's halves and
 three minutes per segment over 32 cores (`plans/M06-chi-ge-five.md` § 2.4). Only `runStream` below,
 which sees the whole certificate, treats a missing `addEmpty` as the fault it is. -/
-def runChunks (t : ClauseTable) (decode : Nat → Option (List Action)) :
+def runSegment (t : ClauseTable) (decode : Nat → Option (List Action)) :
     Nat → List Nat → Outcome
   | w, []       => .more w
   | w, ch :: cs =>
@@ -189,13 +205,13 @@ def runChunks (t : ClauseTable) (decode : Nat → Option (List Action)) :
       | some acts =>
           match runActions t w acts with
           | .done      => .done
-          | .more w'   => runChunks t decode w' cs
+          | .more w'   => runSegment t decode w' cs
           | .fault why => .fault why
 
 /-- Run a whole certificate. Reaching the end without an `addEmpty` is a fault, not a success. -/
 def runStream (t : ClauseTable) (decode : Nat → Option (List Action))
     (w : Nat) (cert : List Nat) : Option CertFault :=
-  match runChunks t decode w cert with
+  match runSegment t decode w cert with
   | .done      => none
   | .more w'   => some (.noEmptyClause w')
   | .fault why => some why
@@ -347,11 +363,11 @@ certificate is wrong", so a segmented check and a whole-certificate check are th
 Induction on the chunk list, `generalizing w`. -/
 theorem runChunks_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List Nat}
     (decode : Nat → Option (List Action)) (hJ : Justified t f w) :
-    (runChunks t decode w cert).Sound t f := by
+    (runSegment t decode w cert).Sound t f := by
   induction cert generalizing w with
   | nil => exact hJ
   | cons ch cs ih =>
-      rw [runChunks]
+      rw [runSegment]
       split
       · exact trivial
       · rename_i acts _
@@ -360,6 +376,15 @@ theorem runChunks_sound {t : ClauseTable} {f : CNF Nat} {w : Nat} {cert : List N
         · rename_i ho; rw [ho] at hs; exact hs
         · rename_i w' ho; rw [ho] at hs; exact ih hs
         · exact trivial
+
+/-! **Why there are exactly two of the next theorems, and not one.**
+
+`Outcome.Sound` is a `Prop`-valued *match*, so it cannot be inverted: from an expected type
+`Justified t f w'` the elaborator cannot recover which constructor produced it, and a single
+`sound_of_eq (h : runSegment … = o) : o.Sound t f` would leave `o` an unsolved metavariable — the
+`decide` that determines `o` needs its goal first. So the two theorems below are the elimination rules
+for a non-invertible motive, one per informative constructor. (`.fault` is the third and no caller
+wants it: its `Sound` is `True`.) That is a derivation, not a duplication. -/
 
 /-- **What a certificate segment buys: the watermark moves, and everything below it stays justified.**
 
@@ -375,14 +400,14 @@ theorem segA017 (h : Justified halfATable halfACnf 1234567) :
 -/
 theorem justified_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
     (w' : Nat) (hJ : Justified t f w)
-    (h : runChunks t (decodeChunk fw) w seg = .more w') : Justified t f w' := by
+    (h : runSegment t (decodeChunk fw) w seg = .more w') : Justified t f w' := by
   have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
   rw [h] at hs
   exact hs
 
 /-- **And the last segment derives the empty clause.** Same shape, terminal conclusion. -/
 theorem unsat_of_segment {f : CNF Nat} (t : ClauseTable) (fw w : Nat) (seg : List Nat)
-    (hJ : Justified t f w) (h : runChunks t (decodeChunk fw) w seg = .done) : f.Unsat := by
+    (hJ : Justified t f w) (h : runSegment t (decodeChunk fw) w seg = .done) : f.Unsat := by
   have hs := runChunks_sound (cert := seg) (decodeChunk fw) hJ
   rw [h] at hs
   exact hs
@@ -516,6 +541,17 @@ private def f3 : CNF Nat :=
 #guard !maskCheck tbl 16 4 cert
 -- And the `Bool` and the diagnosis cannot disagree, because one is defined from the other.
 #guard maskCheck tbl 8 4 cert == (whyNot tbl 8 4 cert).isNone
+
+-- **The segmented check, pinned.** A certificate may be checked in pieces, and a piece reports the
+-- watermark it reached rather than demanding the empty clause. One `addRup` deriving clause 4 moves
+-- the watermark from 4 to 5 and stops there — no fault, no `done`.
+/-- info: HadwigerNelson.Outcome.more 5 -/
+#guard_msgs in #eval runSegment tbl (decodeChunk 8) 4 [pack [3, 4, 0, 1]]
+
+-- …and a segment reports a fault in the same shape, which is what `#eval` is for when a `decide
+-- +kernel` on a real segment fails with a proposition too large to print.
+/-- info: HadwigerNelson.Outcome.fault (HadwigerNelson.CertFault.hintUnjustified 4 5) -/
+#guard_msgs in #eval runSegment tbl (decodeChunk 8) 4 [pack [3, 4, 0, 5]]
 
 /-- **The terminal test, in miniature.** The kernel — not the compiler — runs both checks. The same
 two `decide +kernel` calls at de Grey's scale are what M05 exists to make affordable. -/
