@@ -448,6 +448,67 @@ encoding has no at-most-one-colour clauses, so `[(u,0),(u,1)]` asks for two diff
 true. Now committed as a theorem that it is *satisfiable*. This is the second milestone running where
 writing the control corrected the prose it was checking.
 
+## 4.6 What landed — 2026-07-30, 06:19
+
+| gate item | result |
+|---|---|
+| `lake build` | green, **5,480 jobs** |
+| zero `sorry` | 0 across 2,334 modules |
+| `#print axioms` on the public surface | **66 clean, 5 declared purchases** — all five are M03's Moser-spindle certificate cross-checks, which prove a bound `four_le_chromaticNumber_plane` also proves without them. **`chromaticNumber_plane_ge_five` is clean** |
+| `lake lint` | passed |
+| spec examples | pass as part of elaboration, including both `#guard_msgs` on the segmented check |
+| `lean4checker` | **incomplete — see below** |
+
+**The measured cost, against the projection:**
+
+| | projected | actual |
+|---|---|---|
+| processor time | ~23 h | **27.8 h** (12.8 h for half B's 1,043 segments; half A scales to 15.0 h by hint count) |
+| per hint entry | 2.36 ms | **2.93 ms** |
+| wall clock, twelve jobs | ~2 h | **2.8 h** |
+| artifact | ~410 MB source | **396 MB source, 297 MB compiled** |
+
+Within 20% on every line. The kernel cost model this project has been building since M05 is now
+calibrated against a real proof at full scale.
+
+**Three failures on the way, all cheap, all in the build rather than the mathematics:**
+
+1. The emitter was handed the *pinned* formula and double-counted the cube, off by two clauses. Caught
+   by `halfA_size` failing, not by review.
+2. Segments at 57 chunks peak at 49.5 GB, and 24 at once killed the machine. Resized from a
+   measurement (§ 2.4).
+3. The 1,222-deep composition exceeded the default recursion budget. Four seconds to fix, and it cost
+   nothing else — `Cert.lean` is downstream of every segment, so the six hours above it stayed valid.
+   That is the segmented design doing exactly what it was for.
+
+**And the gate itself had a defect, which is the third milestone running.** `lean4checker` walks the
+*compiled* tree rather than the module graph, so the seven `.olean` files left behind when the geometry
+layout went from 16 modules to 9 were replayed — and failed on a constant from a layout that no longer
+exists. The noise was not the problem; a stale module that *passed* would have made the script's OK a
+claim about files the library does not contain. `scripts/lean4checker.sh` now refuses to run with an
+orphan present, names it by path, and exits 1 — verified without a pipe, because a pipeline swallowing
+the status is how the two earlier gates here failed open.
+
+### Why `lean4checker` does not cover the certificates, stated rather than glossed
+
+It replays every declaration through an independently written kernel, and a segment's proof term is
+`justified_of_segment … (by decide +kernel)`, whose type-checking **re-runs the reduction**. So
+replaying the two certificates costs another 27.8 hours — and unlike the original check it cannot be
+segmented across processes, because `lean4checker` is one process over one environment. Started at
+06:30 and still running at 68 GB resident.
+
+What the replay does cover, and what it does not:
+
+* **covered** — the reduction from a finite graph to the plane, the exact-arithmetic geometry (all 7,877
+  distance identities), the checker's soundness proofs, the colour-symmetry argument, and the
+  composition of the segments;
+* **not covered** — the 34.2 × 10⁶ propagation steps themselves, which have been checked once, by
+  Lean's own kernel.
+
+So "replayed through a second kernel" is a claim about everything *except* the propagation steps, and it
+must be said that way. It is a weaker statement than M04's, where the replay covered every reduction —
+and the reason is scale, not trust: the steps were checked by a kernel, just not twice.
+
 ## 5. Negative controls — every check watched to fail
 
 | control | must fail with |
