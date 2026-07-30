@@ -1057,6 +1057,10 @@ additions in any chunk, the composition below is a type error naming the two seg
 disagree. There is no arithmetic here to get wrong quietly.
 -/
 
+-- The composition below nests one application per segment, which is deeper than the default
+-- recursion budget of 512 by a factor of two.
+set_option maxRecDepth 1000000
+
 namespace HadwigerNelson
 
 /-- **The pinned half graph has no 4-colouring.** Kernel-checked end to end from a CaDiCaL

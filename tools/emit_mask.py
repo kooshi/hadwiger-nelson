@@ -264,7 +264,7 @@ def emit(outdir, mod, name, base, cube, derived, chunks, field, cert, fw, nseg, 
 
     # --- the composition
     chain = [f"import {mod}.Seg{si:03d}" for si in range(len(segs))]
-    files["Cert.lean"] = "\n".join(chain + ["", HEAD, "",
+    files["Cert.lean"] = "\n".join(chain + ["", HEAD, ""] + OPTS + ["",
         "/-!",
         f"The {len(segs)} segments composed. Each was checked by the kernel on its own, from the",
         "watermark the previous one reached — which is why the check parallelises even though a",
