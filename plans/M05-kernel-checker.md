@@ -330,6 +330,74 @@ argument or well-founded recursion**, which was a design goal and now holds by c
 `generalizing` is needed in four places: the fold accumulator, the starting id, the assignment, and
 the watermark.
 
+### 2.6 Experience modeling — the surface M06, `tools/`, and a reviewer consume
+
+*Run 2026-07-29, after the obligation pass.*
+
+**Decision — the diagnostic is the primary definition and the `Bool` is derived from it.** *Alternative:*
+M04's arrangement — a `Valid : Bool` for the kernel beside a `badEdges : List` for `#eval`, related by a
+proved lemma (`badEdges_eq_nil_iff`). *Why this one:* a `Bool` coming back `false` over 134,396 hints,
+96 times, tells whoever must fix it nothing, so a diagnostic is not optional. Defining
+`maskCheck := (whyNot …).isNone` and `agreesWithCNF := (firstFault …).isNone` means the checker and its
+explanation are **the same computation**, so drift between them is impossible rather than ruled out by
+an obligation someone maintains — and it removes a leaf instead of adding one. *Confidence: high — this
+is an improvement on M04's own pattern, and worth carrying back when M08 reworks the geometry.*
+Reduction cost is neutral: `Option CertFault` and `Bool` are one constructor either way, and faults are
+built only on the failing path.
+
+**The failure taxonomy**, each constructor carrying the clause id it happened at — which is what
+locates a fault inside a 3,657-step certificate:
+
+| fault | what it means |
+|---|---|
+| `TableFault.slotMismatch id held wanted` | the emitted table and the formula part company at `id`, with both values shown |
+| `TableFault.tautology id held` | the formula's own clause at `id` has a variable on both sides |
+| `CertFault.malformedChunk` | the certificate's field width or header is wrong |
+| `CertFault.derivedTautology` | the clause being derived has a variable on both sides |
+| `CertFault.hintUnjustified` | a hint cited a clause at or above the watermark — usually a stale certificate |
+| `CertFault.hintNoPropagate` | a hint left two or more literals undecided — usually hints out of order |
+| `CertFault.hintsExhausted` | the hints ran out before any conflict |
+| `CertFault.noEmptyClause` | the certificate ended without deriving `⊥` |
+
+**Decision — the emitter's contract lives in one table, indexed by the fault it causes.** *Alternative:*
+leave it distributed across the docstrings of the definitions that implement each piece, which is where
+it was. *Why this one:* a Python generator author has to get all of it right or the check fails, and the
+question they actually hold is "I got `hintUnjustified`, what did I break?" — so the contract is indexed
+by the fault, not by the definition. It is in `Sat/MaskCheck.lean`'s module docstring, stated as
+authoritative so nobody has to open a second module. *Confidence: high.*
+
+**Decision — `maskCheck_sound` takes the table, field width and certificate as *explicit* arguments.**
+*Alternative:* implicit, as first written. *Why this one:* found by walking the call site — nothing
+determines them, since the goal fixes only the formula, so every one of ~1000 generated cube modules
+would have written `(t := …) (fw := …) (cert := …)`. That is the "argument every caller supplies by
+hand" smell, and the binder mode was the bug rather than the caller. A generated module is now one
+citation, and there is an `example` in the spec section pinning exactly that call site so a regression
+is caught. *Confidence: high.*
+
+**Decision — no graph-level bridge lemma in M05.** *Alternative:* export
+`not_colorable_of_maskCheck`, combining this milestone's soundness theorem with M03's
+`not_colorable_of_unsat`. *Why this one:* a per-cube module only needs unsatisfiability of its own
+formula, and the graph-level step happens once in M06's assembly module, where M03's
+`not_colorable_of_cubes` already lives. Adding the bridge here would make the checker module — imported
+by every generated cube — depend on Mathlib. *Confidence: high.*
+
+**Decision — keep `LitSet.Any`/`All` rather than domain names like `Sat`/`Agrees`.** *Alternative:* the
+domain's own words, which read better to a reviewer in isolation. *Why this one:* the cold read shows
+`Any`/`All` never reach the consumer surface — consumers see `Entails`, `Ok`, `Justified`,
+`agreesWithCNF`, `maskCheck`, `whyNot` — while inside the module the logical form (`∃` versus `∀`) is
+exactly what the lemmas are about, and it is what makes the duality legible. *Confidence: medium — if a
+reviewer stumbles on them, rename; nothing depends on the choice.*
+
+**The reasoning surface is stated and sealed.** Both modules now say, in their module docstrings, that
+consumers reason through exactly `maskCheck_sound` and diagnose through `whyNot` /
+`ClauseTable.firstFault`, and that `propagate`, `rupWhy`, `runActions`, `runStream`, `ClauseTable.get`
+and `unpackAux` are shaped for reduction-step count and are never to be unfolded — a proof that wants
+to is a missing lemma.
+
+**Pinned with `#guard_msgs`:** the rendered text of four faults and of the decoder's output. The
+serialized surface, not the API behind it, is what a future reader meets, so it is what goes under
+regression control.
+
 ## 3. The statement
 
 ```lean
@@ -370,7 +438,7 @@ which is the test the obligation pass was run against.
 | `any_undecided` | a satisfied literal survives into the undecided set | `testBit_xor_and`, case analysis |
 | `propagate_conflict_sound` | an empty undecided set contradicts `any_undecided` | case analysis, no arithmetic |
 | `propagate_prop_sound` | **the one genuinely new argument** | case analysis over `or_eq_two_pow_cases` |
-| `agreesAux_mem` | the table's prefix holds the formula's clauses | induction on `cs`, `generalizing id₀` |
+| `disagreement_eq_none_mem` | the table's prefix holds the formula's clauses | induction on `cs`, `generalizing id₀` |
 | `rup_sound` | propagation to a conflict entails the clause | induction on hints, `generalizing α` |
 | `runActions_sound` | one `Outcome`-indexed induction | induction on actions, `generalizing w` |
 | `runStream_sound` | the same across chunks, arbitrary decoder | induction on chunks, `generalizing w` |
@@ -415,12 +483,14 @@ Per `CLAUDE.md` § "Make the gate fail, and watch it fail", each check gets a pa
 
 | control | must fail with |
 |---|---|
-| certificate filed against a different cube's formula | `maskCheck` false |
-| one hint id raised above the watermark | `maskCheck` false |
+| certificate filed against a different cube's formula | `maskCheck` false, `whyNot` naming a fault |
+| one hint id raised above the watermark | `CertFault.hintUnjustified`, **message pinned** |
+| a hint list that does not propagate | `CertFault.hintNoPropagate`, **message pinned** |
 | a satisfiable formula with a hand-built "certificate" | `maskCheck` false |
-| one clause slot in the table corrupted | `agreesWithCNF` false |
+| one clause slot in the table corrupted | `TableFault.slotMismatch` with both values |
 | a **tautological** derived clause admitted, tautology check removed | the doctored checker "proves" an arbitrary clause — the § 2.2 worked example, as a test that the check is load-bearing |
-| the empty-clause action removed from the certificate | `maskCheck` false (no `addEmpty`, no success) |
+| the empty-clause action removed from the certificate | `CertFault.noEmptyClause`, **message pinned** |
+| an empty certificate | `CertFault.noEmptyClause`, **message pinned** — not a vacuous success |
 
 The tautology control is the important one: it is the only place where removing a check produces a
 *wrong theorem* rather than a failed check, so it is the one that must be exhibited.

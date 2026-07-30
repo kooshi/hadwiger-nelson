@@ -38,6 +38,12 @@ threading them through `rup`, `runActions` and `runChunks`, none of which ever i
 The **certificate's** field width is a different number and stays elsewhere (`Sat/MaskCheck.lean`):
 one blob's packing is not the other's, and the two optima need not coincide.
 
+## The reasoning surface
+
+`ClauseTable.get` and `unpackAux` exist to be *fast*, not to be read: their shapes are chosen for
+reduction-step count. Reason through `justified_of_agreesWithCNF`, diagnose with `#eval t.firstFault f`,
+and never unfold either. If a proof wants to, a lemma is missing.
+
 ## The trust boundary
 
 Nothing in the table is trusted. `agreesWithCNF` compares the table's first `n` slots against literal
@@ -124,26 +130,57 @@ def get (t : ClauseTable) (id : Nat) : LitSet :=
   let w := (t.chunks.get (id / t.perChunk)) >>> ((id % t.perChunk) * t.slotBits)
   unpackAux t.field t.lits (w % (2 ^ t.slotBits)) ⟨0, 0⟩
 
-/-- The table's first slots hold exactly the formula's clauses, and none of them is a tautology.
+end ClauseTable
+
+/-! ### Diagnosis
+
+A `Bool` that comes back `false` over 33,089 clauses is useless to whoever has to fix it. So the
+diagnostic is the **primary** definition and the `Bool` is derived from it — `agreesWithCNF` *is*
+"there is no fault". M04 kept the two as separate functions related by a proved lemma
+(`badEdges_eq_nil_iff`); defining one from the other is strictly better, because drift between them
+stops being possible rather than being ruled out by an obligation someone has to maintain. -/
+
+/-- Why the emitted table does not hold the formula.
+
+Carries the observed value alongside the wanted one, so the reader is told what is wrong rather than
+being sent to compare two `#eval`s by hand. -/
+inductive TableFault where
+  /-- Slot `id` holds `held`, but the formula's clause at that position compiles to `wanted`. -/
+  | slotMismatch (id : Nat) (held wanted : LitSet)
+  /-- Slot `id` agrees with the formula, but that clause is a tautology, which the checker cannot
+  use. Neither the colouring encoding nor a cube's unit clauses can produce one. -/
+  | tautology (id : Nat) (held : LitSet)
+deriving DecidableEq, Repr, Inhabited
+
+namespace ClauseTable
+
+/-- Walk the formula's clauses against the table's slots from `id`, reporting the first fault.
 
 Recursion carries the id alongside the clause list rather than indexing by position, because
 `List.range` and `List.map` cost about 0.83 ms *per element* in the kernel — measured, and a defect in
 this project's own benchmark harness before it was a design note. -/
-def agreesAux (t : ClauseTable) : Nat → List (CNF.Clause Nat) → Bool
-  | _,  []      => true
+def disagreement (t : ClauseTable) : Nat → List (CNF.Clause Nat) → Option TableFault
+  | _,  []      => none
   | id, c :: cs =>
       let L := LitSet.ofClause c
-      L.ok && t.get id == L && t.agreesAux (id + 1) cs
+      if t.get id != L then some (.slotMismatch id (t.get id) L)
+      else if !L.ok then some (.tautology id L)
+      else t.disagreement (id + 1) cs
+
+/-- **What to run the moment `agreesWithCNF` comes back false.** The first place the emitted table and
+the formula part company, with both values.
+
+`#eval t.firstFault f` — it runs compiled, so it is instant at any size, and it names the culprit. -/
+def firstFault (t : ClauseTable) (f : CNF Nat) : Option TableFault :=
+  t.disagreement 0 f.clauses.toList
 
 /-- **The trust boundary, as one kernel-decidable `Bool`.** The emitted table really does hold the
-formula in its first `f.clauses.size` slots.
+formula in its first `f.clauses.size` slots, with no tautology among them.
 
-A tautological clause in the *formula* makes this fail rather than being silently dropped. Dropping
-would be sound — removing clauses only makes propagation harder — but silent acceptance of input the
-checker then cannot use is the failure mode this project has already been bitten by twice, so it
-fails loudly instead. Neither the colouring encoding nor a cube's unit clauses can produce one. -/
+Defined as "no fault", so the `Bool` the kernel decides and the diagnosis a human reads are the same
+computation and cannot disagree. When this is `false`, run `#eval t.firstFault f`. -/
 def agreesWithCNF (t : ClauseTable) (f : CNF Nat) : Bool :=
-  t.agreesAux 0 f.clauses.toList
+  (t.firstFault f).isNone
 
 end ClauseTable
 
@@ -154,7 +191,7 @@ is what lets the clause table be a literal. -/
 def Justified (t : ClauseTable) (f : CNF Nat) (w : Nat) : Prop :=
   ∀ id, id < w → (t.get id).Ok ∧ (t.get id).Entails f
 
-/-- **The strengthened statement the induction needs.** `agreesAux` walks the clause list carrying an
+/-- **The strengthened statement the induction needs.** `disagreement` walks the clause list carrying an
 id counter, so a claim stated only at id 0 has an induction hypothesis that cannot carry itself through
 the step. Quantifying the starting id fixes that, and the base case becomes vacuous — `id₀ ≤ id` and
 `id < id₀ + 0` cannot both hold — which is the right anchoring rather than a peeled special case.
@@ -164,8 +201,8 @@ It carries **membership**, not position, because membership is what `LitSet.Enta
 have dragged in `getElem` side conditions that nothing downstream wants.
 
 Induction on `cs`, `generalizing id₀`; descent measure is the clause list's length. -/
-theorem agreesAux_mem {t : ClauseTable} {cs : List (CNF.Clause Nat)} {id₀ : Nat}
-    (h : t.agreesAux id₀ cs = true) :
+theorem disagreement_eq_none_mem {t : ClauseTable} {cs : List (CNF.Clause Nat)} {id₀ : Nat}
+    (h : t.disagreement id₀ cs = none) :
     ∀ id, id₀ ≤ id → id < id₀ + cs.length →
       (t.get id).Ok ∧ ∃ c ∈ cs, t.get id = LitSet.ofClause c := by
   sorry
@@ -176,7 +213,7 @@ theorem justified_of_agreesWithCNF {t : ClauseTable} {f : CNF Nat}
     (h : t.agreesWithCNF f = true) : Justified t f f.clauses.size := by
   intro id hid
   obtain ⟨hok, c, hmem, heq⟩ :=
-    agreesAux_mem h id (Nat.zero_le _) (by simpa [Array.length_toList] using hid)
+    disagreement_eq_none_mem (Option.isNone_iff_eq_none.mp h) id (Nat.zero_le _) (by simpa [Array.length_toList] using hid)
   refine ⟨hok, fun a ha => ?_⟩
   rw [heq, LitSet.any_ofClause_iff]
   rw [CNF.eval, Array.all_eq_true_iff_forall_mem] at ha
