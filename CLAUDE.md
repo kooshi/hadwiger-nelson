@@ -174,9 +174,35 @@ effectively free at thousands of bits; `USize` is stuck forever (its width is an
 **Measure before believing** — my instincts here have been wrong repeatedly (dense vs sparse clause
 masks, `ldiff`, and a lemma I reported missing that was present).
 
+**The kernel's cost model, measured (M05 subplanning, laptop):** one iteration of a trivial recursive
+function costs **~33 µs**, and every big-integer operation this project needs — `&&&`, `|||`, `^^^`,
+`- 1`, `% 2^k`, `2^k` at 6324 bits — is *free* beside it. So **reduction-step count is the only thing
+that costs**, and bit width is irrelevant. Design for fewest steps, not smallest numbers. This model
+predicted core's already-measured LRAT checker cost to within 20% (it rebuilds a 6,325-slot array per
+step; 6,325 × 33 µs = 209 ms against 100–180 ms measured), which is why to trust it.
+
+**Data the kernel must *build* costs O(its whole size) per access; data that is a *literal* does not.**
+A structure grown by a chain of N function applications takes O(N) work to reach weak head normal
+form, and each sub-term costs again — so an "O(log n)" tree lookup is O(n) in practice. Measured on a
+clause database grown by `insert`: 2.14 ms per lookup at 2,381 entries, **16.7 ms at 33,089** — the
+per-lookup cost tracks the table size, not the depth. Emit big tables as literals (M04's `PtTable`
+pattern) and never accumulate one during a kernel evaluation. Two corollaries: `List.range` +
+`List.map` costs ~0.83 ms *per element* in the kernel, so never build an index list that way; and a
+`Nat` **literal** costs ~2.3 KB of olean while plain data in a literal tree costs ~145 bytes per node,
+so pack many values into few big `Nat`s rather than emitting one literal per value.
+
 **A failed `exact?` is not an absence.** It proves the *shape you asked for* was not found. Vary the
 statement — `= true` versus `decide (…)`, an `iff` versus an implication — before concluding Mathlib
 lacks something. `Nat.testBit_two_pow_sub_one` was reported missing here on exactly that error.
+
+**And Mathlib is not the whole library. Grep the toolchain source.**
+`grep -rn "<name-fragment>" $(lean --print-prefix)/src/lean/` searches *core*, which `exact?` will
+find but a search of `.lake/packages/mathlib` will not, and which a memory of "Mathlib has/lacks X"
+cannot cover at all. Three claims of absence have been wrong here — `Nat.ldiff`,
+`Nat.testBit_two_pow_sub_one`, and `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo`, the last
+budgeted at 30–40 lines plus a Mathlib contribution before a grep found it complete in
+`Init.Data.Nat.Power2.Lemmas`. **Grep the source before writing the proof, and before writing that it
+is missing.**
 
 ## The package
 The **`proofs`** package (`lakefile.toml`): library **`Proofs`** (`Proofs.lean` is the flat import

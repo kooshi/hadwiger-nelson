@@ -103,6 +103,15 @@ At depth 5, **1.30 × 10⁷ hint entries** to check:
 
 That is the whole case. The fast checker converts a dead route into a 15-minute one.
 
+> **CORRECTED 2026-07-29, during M05 subplanning.** The 0.35 ms figure was measured with **no clause
+> lookup in the loop**, and the lookup turns out to be where the time goes. With a literal clause
+> table included the per-step cost is **~1.5–2.5 ms**, so the honest projection is **5.4–9.0 hours of
+> processor time** (~30–50 min wall clock over 96 independent cubes), not 1.26 hours. The comparison
+> against core's checker survives — it is ~100× rather than ~430× — and the milestone is still
+> affordable. **Do not quote 0.35 ms or 1.26 hours again**; see `plans/M05-kernel-checker.md` § 1.
+> Kill criterion 4 below is superseded there for the same reason: it was written against a
+> single-threaded picture, and 96 cubes are embarrassingly parallel.
+
 ## 6. The design, as measured into shape
 
 * **Assignment: two big `Nat`s** (`trueMask`, `falseMask`) over 6324 variables. Invariant
@@ -140,9 +149,19 @@ That is the whole case. The fast checker converts a dead route into a 15-minute 
 * **No RAT support needed.** Zero `.addRat` in the repo's spindle certificates, zero across a
   246,779-addition pigeonhole certificate, zero here. A RUP-only checker fails loudly if that ever
   changes. **Pin the solver flags** rather than relying on the default staying RUP-only.
-* **"Exactly one bit set" has two routes; both work, and the trade is measured.**
-  `x ≠ 0 → x &&& (x-1) = 0 → ∃ i, x = 2^i` is **genuinely not in Mathlib** (checked in several
-  phrasings — and note a failed `exact?` proves nothing on its own; the shape has to be varied).
+* **"Exactly one bit set" — ~~two routes~~ CORRECTED 2026-07-29: the lemma is already in core, and
+  neither route is needed.** `Nat.ne_zero_and_sub_one_eq_zero_iff_isPowerOfTwo` in
+  `Init.Data.Nat.Power2.Lemmas` is exactly `(x ≠ 0 ∧ x &&& (x-1) = 0) ↔ x.isPowerOfTwo` with
+  `isPowerOfTwo n := ∃ k, n = 2 ^ k`, both directions, axiom-clean, with a `Decidable` instance that
+  is the two-operation test. Verified in `spikes/M05Probe.lean`. **Route B costs zero lines, the
+  artifact stays at ~80 MB, and there is no Mathlib contribution to make.** The paragraphs below are
+  kept only as the record of a wrong claim; do not plan from them.
+
+  Why the claim was wrong: the search was `exact?` and Loogle over *Mathlib*, and the lemma is in
+  **core**. Grep `$(lean --print-prefix)/src/lean/` before asserting an absence.
+
+  ~~`x ≠ 0 → x &&& (x-1) = 0 → ∃ i, x = 2^i` is **genuinely not in Mathlib** (checked in several
+  phrasings — and note a failed `exact?` proves nothing on its own; the shape has to be varied).~~
   - *Route A, no lemma:* have the untrusted emitter name the unit variable `i` and verify `un = 2^i`
     — one accelerated shift, one accelerated compare, and `Nat.testBit_two_pow` says exactly which
     bit it is. **Costs one extra field per propagation step, and there are 1.3 × 10⁷ of them**, so it
