@@ -65,9 +65,15 @@ graph 4-uncolourable, then every proper 4-colouring gives `u` and `v` the same c
 The cube `[(u, 0), (v, 1)]` is supplied as a literal, which M03's `Cube` type permits to be
 degenerate — repeated vertices, conflicting colours. **M03's reason why that is safe no longer
 applies** (it was that cubes only ever arrive from `allCubes`), so here is the reason that does: at
-`u = v` the pinned formula is trivially unsatisfiable *and* the conclusion `f u = f u` is trivially
-true, so the degenerate case proves nothing and claims nothing. A wrong-but-non-degenerate cube is
-caught earlier, by `agreesWithCNF`. -/
+`u = v` the conclusion is `f u = f u`, which is trivially true, so the degenerate case claims nothing.
+
+An earlier version of this docstring also said the degenerate formula is "trivially unsatisfiable".
+**That is false, and the negative control in `Instances/DeGrey/Controls.lean` is what caught it**:
+the encoding has no at-most-one-colour clauses, so `[(u, 0), (u, 1)]` asks for two *different
+variables* to be true and is perfectly satisfiable. The degenerate hypothesis is therefore
+unprovable rather than free — which is a stronger safety position, and not the one I had asserted.
+
+A wrong-but-non-degenerate cube is caught earlier, by `agreesWithCNF`. -/
 theorem eq_of_pinned_unsat {E : List (Fin n × Fin n)} (u v : Fin n) {f : Fin n → Fin 4}
     (hf : ∀ i j, (edgeGraph n E).Adj i j → f i ≠ f j)
     (h : (coloringCNF 4 n E ++ cubeCNF 4 n [(u, 0), (v, 1)]).Unsat) : f v = f u := by

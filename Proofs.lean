@@ -15,6 +15,7 @@ import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleBound
 import Proofs.HadwigerNelson.Instances.DeGrey
 import Proofs.HadwigerNelson.Instances.DeGrey.Split
+import Proofs.HadwigerNelson.Instances.DeGrey.Controls
 import Proofs.HadwigerNelson.Instances.DeGrey.Bound
 
 /-!
