@@ -107,6 +107,56 @@ theorem not_colorable_of_forcing {E EA EB : List (Fin n × Fin n)} {u a b : Fin 
     eq_of_pinned_unsat u b (fun i j h => hC i j (edgeGraph_adj_mono hB h)) hforceB
   exact hC a b (edgeGraph_adj_of_mem hab hcross) (ha.trans hb.symm)
 
+/-! ## Naming a triangle's colours
+
+`not_colorable_of_forcing` above needs a *decomposition* — two subgraphs and an edge between them —
+which is structure de Grey's construction happens to have and a general witness does not. For a graph
+that simply refutes on its own, the cheaper symmetry is the one below: name the three colours of one
+triangle.
+
+It is worth doing rather than refuting the unpinned formula because the saving is large and measured
+— **20× on certificate size, 50× on solve time** (`plans/M07-shrinking.md` § 0(d)) — and the solver
+otherwise re-derives the 24-fold colour symmetry inside every branch of its search.
+
+Three vertices is the most that can be named: a fourth mutually-adjacent vertex would be a `K₄`, and
+no `K₄` embeds in the plane at unit distance, so there is nothing beyond this to buy. -/
+
+/-- Three pairwise-distinct colours can be relabelled to `0, 1, 2`.
+
+Decided rather than constructed: over `Fin 4` this is 24 permutations against 64 colour triples, and
+the kernel settles it without a chain of transpositions whose side conditions someone has to check. -/
+theorem exists_perm_apply_three {a b c : Fin 4} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    ∃ σ : Equiv.Perm (Fin 4), σ a = 0 ∧ σ b = 1 ∧ σ c = 2 := by
+  sorry
+
+/-- **The relabelling step for a triangle.** A proper 4-colouring can be relabelled so that three
+mutually adjacent vertices take colours `0, 1, 2`.
+
+The adjacency hypotheses do exactly one job: they make the three colours pairwise distinct. -/
+theorem exists_normalized₃ {G : SimpleGraph (Fin n)} {f : Fin n → Fin 4} (u v w : Fin n)
+    (hf : ∀ i j, G.Adj i j → f i ≠ f j)
+    (huv : G.Adj u v) (huw : G.Adj u w) (hvw : G.Adj v w) :
+    ∃ g : Fin n → Fin 4, (∀ i j, G.Adj i j → g i ≠ g j) ∧ g u = 0 ∧ g v = 1 ∧ g w = 2 := by
+  sorry
+
+/-- **One refutation, one witness.** If pinning a triangle to colours `0, 1, 2` leaves the graph
+4-uncolourable, the graph has no 4-colouring at all.
+
+This is the entire consumer surface for a witness that refutes monolithically: a generated module
+supplies the three edges, the three distinctness facts, and one certificate. No decomposition, no
+subgraph inclusions, no watermark chaining — compare `not_colorable_of_forcing` above, which needs all
+of that because de Grey's graph does not refute on its own.
+
+The three `≠` hypotheses are implied by the three memberships (`edgeGraph` has no loops) but are taken
+explicitly: at the call site they are `by decide` on literals, and deriving them instead would put an
+`edgeGraph` unfolding between the witness and its theorem. -/
+theorem not_colorable_of_triangle_pinned {E : List (Fin n × Fin n)} {u v w : Fin n}
+    (huv : (u, v) ∈ E) (huw : (u, w) ∈ E) (hvw : (v, w) ∈ E)
+    (huv' : u ≠ v) (huw' : u ≠ w) (hvw' : v ≠ w)
+    (h : (coloringCNF 4 n E ++ cubeCNF 4 n [(u, 0), (v, 1), (w, 2)]).Unsat) :
+    ¬ (edgeGraph n E).Colorable 4 := by
+  sorry
+
 /-! ## Spec
 
 The hypotheses are not vacuous, and the theorem is not vacuous either — both need exhibiting, because
@@ -139,6 +189,31 @@ example : ∃ a, Std.Sat.CNF.Sat a
     (coloringCNF 4 2 [(0, 1)] ++ cubeCNF 4 2 (cubeOf [0, 1] (fun i => i.castLE (by norm_num)))) :=
   exists_sat_coloringCNF_cube [0, 1]
     (SimpleGraph.Coloring.mk (fun i : Fin 2 => i.castLE (by norm_num)) (by
+      intro i j h
+      simp only [edgeGraph_adj] at h
+      exact fun hg => h.1 (Fin.castLE_injective (by norm_num) hg)))
+
+-- **A model of `exists_normalized₃`'s hypotheses**: the triangle, properly 4-coloured. Without this
+-- the triangle relabelling could be quantifying over nothing.
+example : ∃ g : Fin 3 → Fin 4,
+    (∀ i j, (edgeGraph 3 [(0, 1), (1, 2), (0, 2)]).Adj i j → g i ≠ g j) ∧
+      g 0 = 0 ∧ g 1 = 1 ∧ g 2 = 2 :=
+  exists_normalized₃ (f := fun i => i.castLE (by norm_num)) 0 1 2
+    (fun i j h => by
+      simp only [edgeGraph_adj] at h
+      exact fun hg => h.1 (Fin.castLE_injective (by norm_num) hg))
+    (edgeGraph_adj_of_mem (by decide) (by decide))
+    (edgeGraph_adj_of_mem (by decide) (by decide))
+    (edgeGraph_adj_of_mem (by decide) (by decide))
+
+-- **The negative control on the triangle hypothesis.** `not_colorable_of_triangle_pinned` says
+-- nothing unless its `Unsat` hypothesis is hard to satisfy, so here is a triangle-pinned formula
+-- that *is* satisfiable: the triangle itself, coloured 0, 1, 2. No certificate for it can exist.
+example : ∃ a, Std.Sat.CNF.Sat a
+    (coloringCNF 4 3 [(0, 1), (1, 2), (0, 2)] ++
+      cubeCNF 4 3 (cubeOf [0, 1, 2] (fun i => i.castLE (by norm_num)))) :=
+  exists_sat_coloringCNF_cube [0, 1, 2]
+    (SimpleGraph.Coloring.mk (fun i : Fin 3 => i.castLE (by norm_num)) (by
       intro i j h
       simp only [edgeGraph_adj] at h
       exact fun hg => h.1 (Fin.castLE_injective (by norm_num) hg)))
