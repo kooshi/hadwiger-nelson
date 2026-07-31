@@ -1,4 +1,6 @@
 import Proofs.HadwigerNelson.Instances.DeGrey.Split
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table
+import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Table
 import Proofs.HadwigerNelson.Sat.Forcing
 
 /-!
@@ -73,5 +75,24 @@ cannot be exhibited is a *model* in which dropping it produces a false theorem.
 
 The one control this project has for that class of hypothesis remains M05's: the non-tautology
 hypothesis of `propagate_prop_sound`, where a countermodel does exist and is committed. -/
+
+/-! ## Cross-filing: a certificate attached to the wrong formula
+
+`ARCHITECTURE.md` lists "a certificate silently attached to the wrong problem" as a defence, and until
+now it was a *procedure* — regenerate against the other half and watch the build go red. A procedure
+that is expensive to run is a procedure nobody runs, and one that is never run is not a defence.
+
+Stated as an obligation instead, it costs a fraction of a second: `agreesWithCNF` is
+`(firstFault f).isNone`, and `firstFault` stops at the first clause that disagrees, which for two
+different formulas is immediate. So the control is now a theorem that fires on every build.
+
+**Read the direction carefully.** `halfA_agrees` says half A's table matches half A's formula; that is
+consistent with a table that matches *everything*, which would certify anything. This says it does
+not. The pair is what makes either one mean something. -/
+theorem halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false := by
+  decide +kernel
+
+theorem halfB_table_refuses_halfA_cnf : halfBTable.agreesWithCNF halfACnf = false := by
+  decide +kernel
 
 end HadwigerNelson

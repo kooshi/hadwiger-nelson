@@ -303,6 +303,71 @@ name at the cheap witness and rename M06's. *Why this one:* the headline name is
 `ARCHITECTURE.md`, `scripts/Axioms.lean` and M06's own docstrings, and a formalization whose flagship
 theorem changes meaning between commits is one a reader cannot cite. *Confidence: high.*
 
+### 3.4 Obligation pass, 2026-07-30 — where the obligations actually live
+
+Almost every obligation in this milestone is *generated*, which changes what the pass is for: there is
+no induction to design, so the question is which claims are **proved**, which are **tested**, and which
+are **assumed** — decided once, deliberately, rather than left to whatever closed.
+
+| claim | rung | why that rung |
+|---|---|---|
+| every listed edge is unit distance | **proved** — kernel decision per chunk, glued by `valid_of_chunks` | the whole point of exact arithmetic |
+| the chunks concatenate to the edge list | **proved** — `rfl`, because the edge list *is* the flattened chunks | free by construction |
+| the clause table matches the formula | **proved** — `agreesWithCNF`, kernel | the certificate is meaningless without it |
+| the table does *not* match the other witness's formula | **proved** — new, see below | was a procedure; is now an obligation |
+| the certificate refutes | **proved** — segments chained by type | the milestone |
+| the triangle is a triangle | **proved** — three `Adj`, `by decide` | three literals |
+| vertex count, edge count, denominator | **tested** — `#guard` | facts about data, not about the theorem |
+| the coordinates are the ones Heule published | **assumed, and irrelevant** | the theorem quantifies over the points as written |
+
+*Confirmed: `valid_of_chunks` is the right recursor, and there is nothing to strengthen.* `ValidOn` is
+a `List.all`, `&&` is an associative combine with a unit, and `validOn_flatten` is literally
+`List.all_flatten` — no proof at all. The gluing is free because the combine is a monoid homomorphism,
+which is also exactly why splitting the work across modules needs no justification. Chunk count is
+therefore a pure cost choice, not a shape one: **eight modules per witness**, ~313 edges each, chosen
+so wall clock is one job per core rather than for any property of the statement.
+
+*Confirmed: the flat implication chain is the right composition, and its depth limit is a cost fact
+rather than a shape fact.* The tempting alternative is a list of segments folded by a lemma. It is
+strictly worse, and the reason is the safety property M06 identified: each segment is
+`Justified t f wₖ → Justified t f wₖ₊₁`, so **the chain typechecks only if the watermarks chain**, and
+the elaborator does that check for free. A homogeneous list would need the watermarks existentially
+packed, converting a typing check into a proof obligation someone must state — the witnessing
+hierarchy's top rung traded for a lower one. *Confidence: high.* One change follows: M06 emitted
+`set_option maxRecDepth` into every generated header because 2,265 segments overflowed at 1,222. At
+~32 segments the knob is unnecessary, so **the emitter stops emitting it below 500 segments** — which
+makes its presence a signal rather than boilerplate.
+
+*New: cross-filing becomes a theorem instead of a procedure.* `halfA_agrees` says half A's table
+matches half A's formula — which a table matching *everything* would also satisfy, and such a table
+would certify anything. The missing half of the pair is now committed, for M06 as well as M07:
+
+```lean
+theorem halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false := by decide +kernel
+```
+
+It costs 9.5 s including loading two 45 MB table modules, because `agreesWithCNF` is
+`(firstFault f).isNone` and `firstFault` stops at the first disagreement. Watched to fail: asserting
+`halfATable.agreesWithCNF halfACnf = false` exits 1. **Its error message is unreadable** — a
+pretty-printer recursion overflow, the failure mode already tabulated in `Sat/MaskCheck.lean` — so the
+remedy stays `#eval t.firstFault f`, and that is why the table of build faults exists.
+
+*Answered: the wrong-CNF bug is an emitter *signature* problem, not a checking problem.* M06's emitter
+took a CNF and a pin list and appended the pins — so handing it an already-pinned CNF double-counted
+the cube, and the bug surfaced two stages later as a failing size theorem. The statement that catches
+it at emission is a property of the input: **a base formula for `coloringCNF` has no unit clauses**
+(every clause is an at-least-one of width 4 or an edge clause of width 2; a pin is the only width-1
+clause). So the emitter asserts it on read, and — better — only ever accepts the unpinned base, which
+makes the wrong input unrepresentable at the tool boundary rather than detected downstream. The Lean
+size theorem stays; the emitter check buys a localised failure, never trust.
+
+*Answered: the two witnesses share everything general already, and nothing specific can be shared.*
+Each obligation that is *about* a witness is a kernel reduction over a distinct literal — different
+tables, different formulas, no common subterm — so no parameterisation can discharge them once.
+Everything not about a witness (`justified_of_agreesWithCNF`, `runSegment_sound`,
+`valid_of_chunks`, `not_colorable_of_triangle_pinned`) is already proved once and cited. The
+duplication is textual, it belongs to the generator, and that is the correct place for it.
+
 ## 4. The generated data, and the emitter
 
 | tool | change |
