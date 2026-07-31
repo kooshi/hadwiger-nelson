@@ -334,4 +334,5 @@ def main():
           f"projected kernel {nh * 1.35e-3 / 3600:.2f} h")
 
 
-main()
+if __name__ == "__main__":
+    main()
