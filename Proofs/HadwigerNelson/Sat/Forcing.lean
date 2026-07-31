@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Sat.Encoding
+import Mathlib.Data.Fintype.Perm
 
 /-!
 # Forcing: two subgraphs that pin a colour, and an edge that forbids it
@@ -127,7 +128,10 @@ Decided rather than constructed: over `Fin 4` this is 24 permutations against 64
 the kernel settles it without a chain of transpositions whose side conditions someone has to check. -/
 theorem exists_perm_apply_three {a b c : Fin 4} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
     ∃ σ : Equiv.Perm (Fin 4), σ a = 0 ∧ σ b = 1 ∧ σ c = 2 := by
-  sorry
+  -- Explicit binders, because `Decidable` is not synthesised through an implicit `∀`.
+  have h : ∀ a b c : Fin 4, a ≠ b → a ≠ c → b ≠ c →
+      ∃ σ : Equiv.Perm (Fin 4), σ a = 0 ∧ σ b = 1 ∧ σ c = 2 := by decide +kernel
+  exact h a b c hab hac hbc
 
 /-- **The relabelling step for a triangle.** A proper 4-colouring can be relabelled so that three
 mutually adjacent vertices take colours `0, 1, 2`.
@@ -137,7 +141,8 @@ theorem exists_normalized₃ {G : SimpleGraph (Fin n)} {f : Fin n → Fin 4} (u 
     (hf : ∀ i j, G.Adj i j → f i ≠ f j)
     (huv : G.Adj u v) (huw : G.Adj u w) (hvw : G.Adj v w) :
     ∃ g : Fin n → Fin 4, (∀ i j, G.Adj i j → g i ≠ g j) ∧ g u = 0 ∧ g v = 1 ∧ g w = 2 := by
-  sorry
+  obtain ⟨σ, h0, h1, h2⟩ := exists_perm_apply_three (hf u v huv) (hf u w huw) (hf v w hvw)
+  exact ⟨fun i => σ (f i), valid_comp_of_injective hf σ.injective, h0, h1, h2⟩
 
 /-- **One refutation, one witness.** If pinning a triangle to colours `0, 1, 2` leaves the graph
 4-uncolourable, the graph has no 4-colouring at all.
@@ -147,15 +152,28 @@ supplies the three edges, the three distinctness facts, and one certificate. No 
 subgraph inclusions, no watermark chaining — compare `not_colorable_of_forcing` above, which needs all
 of that because de Grey's graph does not refute on its own.
 
-The three `≠` hypotheses are implied by the three memberships (`edgeGraph` has no loops) but are taken
-explicitly: at the call site they are `by decide` on literals, and deriving them instead would put an
-`edgeGraph` unfolding between the witness and its theorem. -/
+Stated over three `Adj` facts rather than three list memberships plus three `≠`. Adjacency is exactly
+what the proof consumes — it is what makes the three colours pairwise distinct — so this is six
+hypotheses reduced to three, and the call site pays the same `edgeGraph_adj_of_mem (by decide)
+(by decide)` either way.
+
+**And it moves the degenerate case out of reach.** `eq_of_pinned_unsat` above has to argue in prose
+why a degenerate cube (`u = v`) is harmless, because `Cube` is a bare list and nothing stops one. Here
+`SimpleGraph.Adj` is irreflexive, so `Adj u u` is not merely unprovable but *uninhabited*: a
+degenerate triangle cannot be written down. The illegal state is unrepresentable rather than
+guarded — which is why this shape is right and the membership-plus-`≠` shape was not. -/
 theorem not_colorable_of_triangle_pinned {E : List (Fin n × Fin n)} {u v w : Fin n}
-    (huv : (u, v) ∈ E) (huw : (u, w) ∈ E) (hvw : (v, w) ∈ E)
-    (huv' : u ≠ v) (huw' : u ≠ w) (hvw' : v ≠ w)
+    (huv : (edgeGraph n E).Adj u v) (huw : (edgeGraph n E).Adj u w)
+    (hvw : (edgeGraph n E).Adj v w)
     (h : (coloringCNF 4 n E ++ cubeCNF 4 n [(u, 0), (v, 1), (w, 2)]).Unsat) :
     ¬ (edgeGraph n E).Colorable 4 := by
-  sorry
+  rintro ⟨C⟩
+  have hC : ∀ i j, (edgeGraph n E).Adj i j → C i ≠ C j := fun _ _ h => C.valid h
+  obtain ⟨g, hg, hu, hv, hw⟩ := exists_normalized₃ u v w hC huv huw hvw
+  refine not_pinned [u, v, w] g hg ?_
+  have hcube : cubeOf [u, v, w] g = [(u, 0), (v, 1), (w, 2)] := by simp [cubeOf, hu, hv, hw]
+  rw [hcube]
+  exact h
 
 /-! ## Spec
 

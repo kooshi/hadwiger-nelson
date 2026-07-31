@@ -219,6 +219,58 @@ theorem not_colorable_of_triangle_pinned {E : List (Fin n × Fin n)} {u v w : Fi
 The last one is the whole consumer surface: a generated witness module cites it once and is done.
 Note what it does *not* assume — no decomposition, no subgraph inclusions, no watermarks.
 
+**Domain pass, 2026-07-30 — what it changed and what it refused.**
+
+*Changed: the triangle arrives as three adjacency facts, not six list facts.* The skeleton took three
+list memberships plus three `≠`; the proof consumes neither — it consumes "these three colours are
+pairwise distinct", which is three `Adj` facts. Six hypotheses became three, and the call site pays
+the same `by decide` either way. The finding that made it worth doing is the second-order one:
+`SimpleGraph.Adj` is irreflexive, so a **degenerate triangle is uninhabited rather than unprovable**.
+`eq_of_pinned_unsat`, one screen above it, has to argue in a docstring why a degenerate cube is
+harmless — and M06's negative control caught that docstring being wrong. This shape has no such
+argument to get wrong. *Confidence: high.*
+
+*Refused: unifying the two top-level theorems.* `not_colorable_of_forcing` (de Grey's) and
+`not_colorable_of_triangle_pinned` (M07's) look like one idea — "a refutation of a constrained
+formula proves the unconstrained claim" — and they are not. The first can only derive an *equality*
+(pinning `u→0, a→1` is realisable only when the colours differ, so the refutation yields
+`C a = C u` and the contradiction must come from a further edge); the second derives the
+contradiction *directly* (a triangle's colours always differ, so the relabelling exists
+unconditionally). Their shared content is `not_pinned`, which already exists and is already cited by
+both. *Alternative:* one lemma over a list of pinned vertices whose colours are pairwise distinct,
+with both as instances. *Why not:* Mathlib has no "extend a partial injection to a permutation" in
+that shape — `Equiv.Perm.extendDomain` is a different construction — so the general form costs an
+induction, while the concrete form is `decide +kernel` over 24 permutations against 64 colour
+triples, **elaborating in 1.1 s**. Generalising here would add structure to save nothing.
+*Confidence: high — both proofs are written and green.*
+
+*Refused: a bundled `Triangle E` subtype.* One construction site per witness, one elimination site,
+and the three adjacency facts are already the smart constructor's output. A type with one inhabitant
+per use is the speculative structure the standard forbids. *Confidence: high.*
+
+*Refused: a narrower field for Heule's coordinates.* They live in ℚ(√3,√5,√11), so eight of the
+tower's sixteen basis elements are identically zero and every multiplication costs 4× what it needs.
+But `Pt` is fixed to `Q4` by M04, and parameterising it would touch `Pt.distSq`, `eval_distSq`,
+`dist_toPlane_eq_one`, `UDCert` and every geometry theorem — to save about three minutes on a
+four-minute geometry. The zero components are a fact about *these two witnesses*, not about
+unit-distance graphs; de Grey's needs `√7`. Incidental structure, correctly not represented.
+*Confidence: high — and if M08 makes geometry the bottleneck, it changes the per-edge cost model, not
+this decision.*
+
+*Refused: teaching Lean the generator's JSON shape.* The JSON is untrusted input to an untrusted
+tool. What Lean should see is not the schema but the *claims* — vertex count, edge count, denominator,
+the triangle's adjacency — each pinned by `#guard` in the generated module, exactly as M04 pinned de
+Grey's. The schema gets **one** reader instead of three, though: `tools/emit_geometry.py`,
+`emit_cert.py` and `emit_mask.py` each currently hard-code a witness, and that *is* the
+N-declarations-identical-modulo-naming smell — it just lives in `tools/`, not in Lean.
+*Confidence: medium — if a fourth witness ever wants a different module layout, the parameterisation
+is where it will show.*
+
+*Confirmed: the role is already named.* What "de Grey", "Heule 510" and "Heule 553" have in common is
+`UDCert n` — a point table, a denominator, an edge list, and `Valid`. The shared theorem is
+`add_one_le_chromaticNumber_of_valid`. Both exist since M04, so M07 adds no abstraction: one
+generated directory per witness, and de Grey's halves-and-crossing structure stays his alone.
+
 ### 3.2 `Instances/Heule/G510.lean` and `G553.lean` — the witnesses
 
 Mirroring `Instances/DeGrey.lean`:
