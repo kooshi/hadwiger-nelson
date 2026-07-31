@@ -152,6 +152,25 @@ deriving DecidableEq, Repr, Inhabited
 
 namespace LitSet
 
+/-- The variables a bit set holds, low bit first. **Diagnostic only** — never reduced by the kernel.
+
+Written as an ordinary recursion on `n / 2` rather than over a bit range, because it exists to be
+`#eval`ed on a clause of twenty literals and legibility is the whole point of it. -/
+def bitsFrom : Nat → Nat → List Nat
+  | 0,     _ => []
+  | n + 1, i =>
+      (if n % 2 = 0 then [i] else []) ++ bitsFrom ((n + 1) / 2) (i + 1)
+  termination_by n => n
+  decreasing_by exact Nat.div_lt_self (by omega) (by omega)
+
+/-- **A `LitSet` in the vocabulary it is compared against.** `CNF.Clause Nat` is
+`List (Nat × Bool)` — variable and polarity — so a diagnosis that prints two thousand-digit bit sets
+is answering in the implementation's terms rather than the reader's.
+
+Diagnostic only: `#eval`, never a proof. -/
+def toClause (L : LitSet) : List (Nat × Bool) :=
+  (bitsFrom L.pos 0).map (·, true) ++ (bitsFrom L.neg 0).map (·, false)
+
 /-- **The clause reading**: `a` makes *some* literal true. -/
 def Any (L : LitSet) (a : Nat → Bool) : Prop :=
   (∃ i, L.pos.testBit i = true ∧ a i = true) ∨ (∃ i, L.neg.testBit i = true ∧ a i = false)
@@ -436,6 +455,12 @@ is `(x ∨ y) ∧ (x ∨ ¬y) ∧ (¬x ∨ y) ∧ (¬x ∨ ¬y)` over variables 
 enough that `decide` cross-checks everything. -/
 
 section Spec
+
+-- `toClause` is the diagnostic surface, so it gets the check a diagnostic owes: bit `i` of `pos` is
+-- the positive literal on variable `i`, bit `i` of `neg` the negative one, and nothing is dropped or
+-- doubled. Without this the renderer could be plausibly, silently wrong exactly when it is needed.
+#guard LitSet.toClause ⟨0b1010, 0b0101⟩ = [(1, true), (3, true), (0, false), (2, false)]
+#guard LitSet.toClause ⟨0, 0⟩ = []
 
 /-- `(x ∨ y)` — variables 0 and 1, both positive. -/
 private def cXY : LitSet := ⟨0b11, 0⟩

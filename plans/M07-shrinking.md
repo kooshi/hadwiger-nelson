@@ -378,6 +378,73 @@ duplication is textual, it belongs to the generator, and that is the correct pla
 | `tools/emit_cert.py` | same; drop the halves/cross split, which is de Grey's alone |
 | `tools/emit_mask.py` | `PER_MODULE` and `TABLE_MODULES` from the certificate size rather than fixed |
 
+## 4.5 Experience pass, 2026-07-30 — the surface for four consumers
+
+**The sceptical reader.** Three proofs of one theorem must read as corroboration, not as repetition,
+and the difference is stated rather than left to be inferred: *the same statement, from three graphs
+that share no vertex, no certificate and no author.* A bug in the encoding or the checker that
+certified all three would have to certify three unrelated graphs. That paragraph lives in **exactly
+one place** — de Grey's `Bound.lean`, which keeps the canonical name and is where the reader lands —
+rewritten to cover all three; the two new headline modules carry a two-line docstring and a pointer.
+Triplicating a prose section is the same smell as triplicating a lemma. *Alternative:* a fourth
+"overview" module owning the section. *Why not:* one more file between the reader and the theorem.
+
+Two things that section must now say that it could not before: that the independent-kernel replay
+**finishes** on the small witnesses, closing M06's one incomplete gate item; and the provenance
+sentence, which has to do three jobs at once —
+
+> The 510 points are Marijn Heule's. What is proved here is a statement about those points *as
+> written*: that 2504 named pairs are exactly one unit apart, and that no assignment of four colours
+> to the 510 points avoids giving some named pair the same colour. Neither claim depends on how the
+> points were found, which is why the artifact carries the coordinates and not the search. The graph
+> is his; the geometry check, the certificate and the formalization are ours.
+
+**Naming — the person's name on the data, the size on the theorem.**
+
+| | choice | why |
+|---|---|---|
+| the certificate | `heule510 : UDCert 510`, `heule510Edges`, `heule510_valid` | exactly `deGrey`'s precedent, which is what the reader has already been taught; and the *graph* is his, so his name belongs on it |
+| the headline | `chromaticNumber_plane_ge_five_510`, `…_553` | the base name is identical because **the statement is identical**, and the only thing that differs is the witness size. A person's name would be wrong here: the theorem is not his |
+| the modules | `Instances/Heule510/`, `Instances/Heule553/` | flat and parallel to `Instances/DeGrey/`; a nested `Heule/G510/` would invent a grouping level nothing else uses |
+| M06's headline | **unchanged** | cited in `ARCHITECTURE.md` and `scripts/Axioms.lean`; a flagship theorem that changes meaning between commits is one nobody can cite |
+
+**The generator.** One invocation per witness, and the M06 bug made unrepresentable rather than
+detected. Three tools each hard-coding a witness becomes:
+
+* `tools/coloring.py` — the clause order (`n` at-least-one clauses, then 4 per edge, then the pins)
+  stated **once**, imported by everything that needs it. It is currently written down in three
+  places, which is how two of them can drift;
+* `tools/witness.py <name>` — geometry → CNF → race → emit, in one command, with per-stage
+  subcommands for re-running;
+* **`emit_mask.py` stops accepting a `.cnf` path at all.** M06's bug was handing it a formula that
+  already contained the pins, so the cube was counted twice and surfaced two stages later as a failing
+  size theorem. Given the witness and the pins it builds the base itself, and there is no wrong file
+  to pass. *Alternative:* assert on read that the base holds no unit clause — a pin is the only
+  width-1 clause a colouring formula can have. *Why the stronger one:* the assertion detects; the
+  signature deletes. Keep the assertion too, since the emitter still reads an edge list.
+
+**The build-fault table** stays a table in a docstring — the person holding the error has a Lean
+message and a module path, and nothing in Lean can emit these errors itself. It gains a row that this
+milestone earned by reproducing the failure on purpose: **`[Error pretty printing: maximum recursion
+depth has been reached]` in brackets on a `decide +kernel` line is not the maxRecDepth row above it.**
+The `Bool` is genuinely `false`; what overflowed is the pretty-printer rendering the counterexample.
+Two unrelated causes wearing the same words, and the existing row's advice — raise the limit — is
+wrong for the new one. A second row records that the emitter now omits `maxRecDepth` below ~500
+segments, so the knob's *presence* is information.
+
+**And the diagnosis itself was unreadable, which the milestone's own control exposed.**
+`#eval t.firstFault f` on a cross-filed pair printed two thousand-digit bit sets — the whole truth,
+in the implementation's vocabulary, useless to the reader. `LitSet.toClause` and
+`ClauseTable.faultReport` render it in the vocabulary the reader is comparing against
+(`CNF.Clause Nat` is `List (Nat × Bool)`):
+
+```
+slot 1581: the table holds [(0, false), (20, false)], the formula wants [(56, false), (3196, false)]
+```
+
+Pinned with `#guard_msgs`, so the remedy the fault table advertises cannot rot, and `toClause` carries
+its own `#guard`s — a renderer that is plausibly wrong exactly when it is needed is worse than none.
+
 ## 5. Negative controls — every check watched to fail
 
 Per the standing rule, each of these is run, seen red, and put back.

@@ -95,4 +95,12 @@ theorem halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = fals
 theorem halfB_table_refuses_halfA_cnf : halfBTable.agreesWithCNF halfACnf = false := by
   decide +kernel
 
+-- And the *diagnosis* a cross-filing produces, pinned. A build-fault table that sends the reader to
+-- `#eval t.faultReport f` is only worth reading if what comes back is worth reading, so the rendered
+-- text is under regression control here rather than described in prose. Half A's first edge is
+-- (0, 5) — variables 0 and 20 at colour 0 — and half B's is (14, 799).
+/-- info: "slot 1581: the table holds [(0, false), (20, false)], the formula wants [(56, false), (3196, false)]" -/
+#guard_msgs in
+#eval halfATable.faultReport halfBCnf
+
 end HadwigerNelson

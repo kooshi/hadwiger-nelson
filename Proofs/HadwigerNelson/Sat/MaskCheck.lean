@@ -69,10 +69,11 @@ table for that, because the person holding the error is reading a Lean message, 
 | the build says | what it means | what to do |
 |---|---|---|
 | a type mismatch between two consecutive segment theorems | the emitter miscounted the additions in some chunk, so one segment's watermark does not meet the next one's | regenerate. Those watermarks are the emitter's only arithmetic, and this error is the elaborator checking it |
-| `maximum recursion depth has been reached` inside a segment | the decoder peels one field per reduction step and a chunk holds thousands | raise `maxRecDepth` in the generated header; the emitter sets 10⁶ |
+| `maximum recursion depth has been reached` inside a segment | the decoder peels one field per reduction step and a chunk holds thousands | raise `maxRecDepth` in the generated header; the emitter sets 10⁶ **when a certificate is large enough to need it** — below ~500 segments it emits no knob, so a knob appearing is itself information |
+| `[Error pretty printing: maximum recursion depth has been reached]`, **in brackets, on a `decide +kernel` line** | **not** the row above, and raising `maxRecDepth` will not help. The `Bool` is genuinely `false`; what overflowed is the *pretty-printer* trying to render the counterexample term. Two unrelated causes wearing the same words — read the brackets | `#eval` the `Bool` itself to confirm it is `false`, then the diagnostic for whichever `Bool` it was: `t.firstFault f` for agreement, `runSegment …` for a segment |
 | the machine runs out of memory | a segment is too large. Measured peak: **≈ 3.4 GB + 0.81 GB per certificate chunk** — it is `unpackAux`'s intermediate literal sets, which the kernel retains for the whole reduction | fewer chunks per segment, and fewer segments at once. Wall clock depends only on the job count, so shrinking segments is free |
 | `decide` failed, with a proposition too large to print | the certificate really is wrong in that segment — but the kernel cannot tell you how | **`#eval runSegment t (decodeChunk fw) w seg`**: the same expression compiled prints the `Outcome`, including the fault. This is the diagnostic for a failed segment, and it is instant |
-| `agreesWithCNF` is false on a table that used to pass | the formula moved under the certificate — usually a regenerated edge list against an old certificate | `#eval t.firstFault f` names the id and both values, then regenerate |
+| `agreesWithCNF` is false on a table that used to pass | the formula moved under the certificate — usually a regenerated edge list against an old certificate, or a certificate filed against the wrong witness | **`#eval t.faultReport f`** — one line naming the slot and both clauses. (`firstFault` returns the same fault as data, but `Repr` prints its two `LitSet`s as raw bit sets, which at this variable count is two thousand-digit integers.) Then regenerate |
 
 ## The reasoning surface — nothing here is ever unfolded
 
@@ -80,8 +81,9 @@ Consumers reason through exactly three names, and no proof outside this module s
 definition in it:
 
 * **`maskCheck_sound`** — the only way to turn a checked certificate into unsatisfiability;
-* **`whyNot`** and **`ClauseTable.firstFault`** — the only things to run when a check fails, both by
-  `#eval`, never in a proof.
+* **`whyNot`** and **`ClauseTable.faultReport`** — the only things to run when a check fails, both by
+  `#eval`, never in a proof. (`ClauseTable.firstFault` is the same answer as data, for a caller that
+  wants to match on it; `faultReport` is the one to read.)
 
 `propagate`, `rupWhy`, `runActions`, `runStream`, `ClauseTable.get` and `unpackAux` are implementation.
 They are reasoned about only by the lemmas in this file and `Sat/ClauseTable.lean`, and their shapes
