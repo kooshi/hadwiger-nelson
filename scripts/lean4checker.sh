@@ -57,6 +57,81 @@ if [[ "${ORPHANS}" -ne 0 ]]; then
 fi
 echo "    none"
 
-echo "==> replaying ${TARGET} through the independent kernel"
-"${CHECKER_DIR}/.lake/build/bin/lean4checker" "${TARGET}"
-echo "==> lean4checker: OK"
+# **lean4checker's own parallelism is broken on this workspace, and the failure looks like
+# corruption.** With its default `--num-workers=8` it dies, reproducibly, at ten modules or a hundred:
+#
+#   uncaught exception: failed to read '.../Mathlib/Topology/Instances/EReal/Lemmas.olean.private':
+#   'unreachable' code was reached
+#
+# That Mathlib file is fine — Lean imports it without complaint, and it predates this checkout — so
+# the fault is a race in the checker's parallel module loader, not a bad olean. Worth stating loudly
+# because on a machine with a history of bad memory, "failed to read" is exactly the message one
+# would misread as a bit flip and go hunting for.
+#
+# `--num-workers=1` is correct and slow. Parallelism therefore comes from running several *processes*,
+# each single-worker, over disjoint slices — bounded, because each one loads Mathlib.
+JOBS="${JOBS:-8}"
+CHECK="${CHECKER_DIR}/.lake/build/bin/lean4checker"
+
+mapfile -t MODULES < <(
+  cd "${REPO}" && find Proofs -name '*.lean' -printf '%P\n' 2>/dev/null |
+    sed 's#\.lean$##; s#/#.#g; s#^#Proofs.#' | sort
+)
+[[ "${TARGET}" == "Proofs" ]] && MODULES+=("Proofs")
+mapfile -t MODULES < <(printf '%s\n' "${MODULES[@]}" | grep -E "^${TARGET//./\\.}(\\.|\$)" | sort -u)
+
+if [[ "${#MODULES[@]}" -eq 0 ]]; then
+  echo "==> lean4checker: FAIL — no modules match ${TARGET}"; exit 1
+fi
+
+# **A known inefficiency, not a fix.** Every argument is treated as a *prefix*, so a module whose name
+# is a prefix of others — `…Instances.Heule510`, with `…Heule510.Cnf.*` beneath it — expands to its
+# whole subtree, and the slice holding it re-does every other slice's work sequentially. There is no
+# flag for exact matching, so the redundancy cannot be removed, only overlapped: such modules are
+# scheduled first, so they run alongside the leaf slices instead of trailing them.
+#
+# Measured: it is the difference between an 8-minute run and a 24-minute one for a 100-module witness.
+# It has not been paid at full-library scale, where it would be much worse, because the full-library
+# replay is dominated by M06's 28-hour certificate anyway. Revisit if that ever changes.
+PREFIXES=()
+LEAVES=()
+for m in "${MODULES[@]}"; do
+  if printf '%s\n' "${MODULES[@]}" | grep -qE "^${m//./\\.}\\."; then PREFIXES+=("${m}"); else LEAVES+=("${m}"); fi
+done
+
+echo "==> replaying ${#MODULES[@]} modules matching ${TARGET} through the independent kernel"
+echo "    (${#PREFIXES[@]} of them expand to a subtree and are checked first, alone)"
+echo "    ${JOBS} processes, one worker each"
+WORK="$(mktemp -d)"
+MODULES=("${PREFIXES[@]}" "${LEAVES[@]}")
+N=${#MODULES[@]}
+for ((j = 0; j < JOBS; j++)); do
+  : > "${WORK}/slice${j}"
+done
+for ((k = 0; k < N; k++)); do
+  echo "${MODULES[$k]}" >> "${WORK}/slice$((k % JOBS))"
+done
+
+PIDS=()
+for ((j = 0; j < JOBS; j++)); do
+  [[ -s "${WORK}/slice${j}" ]] || continue
+  ( mapfile -t SLICE < "${WORK}/slice${j}"
+    if ! "${CHECK}" --num-workers=1 "${SLICE[@]}" > "${WORK}/out${j}" 2>&1; then
+      echo "${j}" > "${WORK}/fail${j}"
+    fi ) &
+  PIDS+=($!)
+done
+wait "${PIDS[@]}" 2>/dev/null
+
+N_FAIL=$(find "${WORK}" -name 'fail*' | wc -l)
+if [[ "${N_FAIL}" -ne 0 ]]; then
+  echo "==> lean4checker: FAIL — ${N_FAIL} slice(s) rejected. First failure:"
+  for f in "${WORK}"/fail*; do
+    grep -Ev "^Searching|^Found" "${WORK}/out$(basename "${f}" | tr -dc 0-9)" | head -6 | sed 's/^/    /'
+    break
+  done
+  rm -rf "${WORK}"
+  exit 1
+fi
+rm -rf "${WORK}"
+echo "==> lean4checker: OK — ${#MODULES[@]} modules replayed by a separately written kernel"

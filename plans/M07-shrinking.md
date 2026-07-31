@@ -617,11 +617,40 @@ The full library rebuilt in **1 h 41 min** of wall clock at ten concurrent jobs 
 for *everything*, M06's 2,265 segments included, because the whole tree was re-checked from scratch
 after the crashes.
 
-**One thing to be honest about in the terminal test.** The subplan's headline claim was that these
-witnesses make the independent-kernel replay affordable. That is still a projection: `lean4checker`
-has not yet been run to completion on them. It is affordable — 1.4 M steps against 34.2 M — and it is
-running next. Until it returns, the claim in `ARCHITECTURE.md` § 5 stays what it was at M06: the
-replay covers the geometry, the soundness proofs and the composition, and not the propagation steps.
+### The independent-kernel replay, run to completion — 2026-07-31, 03:4x
+
+**Done, not projected.** `lean4checker` — a separately written kernel, not Lean's — replayed
+**214 modules**: 100 for the 510-vertex witness, 101 for the 553, and the 13 shared modules the
+theorem also rests on (the field tower, the certificate API, the edge-list graph, the whole `Sat/`
+checker, and M01's reduction). All OK.
+
+This is the first time in this project that a **certificate** has been replayed. M06's could not be:
+34.2 M propagation steps, single-threaded, in one process. At 1.4 M and 1.1 M these finish, and that
+was the milestone's stated reason for existing.
+
+**Scope, stated exactly.** Replayed: every module this repository contributes to
+`chromaticNumber_plane_ge_five_510` and `_553`, including all 2.5 M propagation steps and all 5,226
+exact distance identities. **Not replayed: Mathlib**, which is trusted as built — the same scope M04's
+claim had. De Grey's witness is also still unreplayed, for the reason it always was.
+
+**Two faults in the checker, neither of them a proof problem, both worth knowing:**
+
+* **`lean4checker`'s own parallelism is broken on this workspace.** At its default `--num-workers=8`
+  it dies reproducibly — at ten modules or a hundred — with `failed to read
+  '.../Mathlib/Topology/Instances/EReal/Lemmas.olean.private': 'unreachable' code was reached`. That
+  Mathlib file is fine; Lean imports it without complaint and it predates this checkout. It is a race
+  in the checker's module loader. **On a machine with a history of bad memory, that message is exactly
+  what one would misdiagnose as a bit flip**, which is why it is documented at the top of
+  `scripts/lean4checker.sh`. The gate runs single-worker processes in parallel instead.
+* **Every argument is a prefix, with no exact-match flag**, so a module whose name is a prefix of
+  others re-checks its whole subtree. Harmless, and the difference between an 8-minute run and a
+  24-minute one.
+
+And two self-inflicted stoppages, recorded because both are general: editing a shell script **while
+bash is executing it** makes the live process resume mid-token (it killed a 46-minute run with
+`line 110: ull-library: command not found`); and a `ps | grep` for a process pattern matches **this
+shell's own command line**, which contains that pattern — killing the session. Long runs are now
+launched from a snapshot copy, and processes are matched by exact executable name via `pgrep -x`.
 
 ## 6. Measured, do not re-derive
 

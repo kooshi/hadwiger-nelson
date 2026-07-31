@@ -336,10 +336,12 @@ second kernel implementation, not just the one that built them.
 step, single-threaded, in one process that cannot be split. At M06's **34.2 × 10⁶** steps that is
 another ~28 hours, and it has never been run to completion here — so for the de Grey witness, the
 independent-kernel claim covers the geometry, the soundness proofs and the composition, and *not*
-those steps. State it that way and no other way. At M07's **1.4 × 10⁶** steps the same replay is one
-to two hours, so for the 510- and 553-point witnesses the claim covers everything. That is the main
-thing the smaller witnesses buy, and the reason they are in the repository rather than being a
-footnote about a smaller number.
+those steps. State it that way and no other way. At M07's **1.4 × 10⁶** steps the same replay finishes, and
+**it has been run**: 2026-07-31, 214 modules OK — 100 for the 510-vertex witness, 101 for the 553, and
+the 13 shared modules beneath them. So for those two witnesses the independent-kernel claim covers
+**everything this repository contributes**, propagation steps included. Mathlib is trusted as built,
+which is the same scope the M04 claim had. That is the main thing the smaller witnesses buy, and the
+reason they are in the repository rather than being a footnote about a smaller number.
 
 **But the independent replay cannot see a native purchase, and the claim must not be stated as if it
 could.** `native_decide` records its result as an **axiom**, and an axiom is accepted by every kernel

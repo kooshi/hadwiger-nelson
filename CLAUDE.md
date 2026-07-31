@@ -170,6 +170,13 @@ page cache holding them. At the limit the kernel reclaims those pages and must r
 `MemorySwapMax=0` on a slow device that is an I/O stall, not a clean kill. **The cap converts an
 out-of-memory into a thrash.** Set it as a backstop; size the batch as the plan.
 
+**Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so
+rewriting the file under a live process makes it resume mid-token. It killed a 46-minute
+`lean4checker` run at M07 with `line 110: ull-library: command not found` — a message that looks like
+corruption and is nothing of the kind. Long runs here are launched from a snapshot copy
+(`cp scripts/x.sh build/x-snapshot.sh` — `build/` is gitignored) precisely so the original stays
+editable while the run is in flight.
+
 **And "several GB each" is not the ceiling — measure the peak before choosing the batch width.** M06's
 certificate segments peak at **3.4 GB + 0.81 GB per certificate chunk**, which is 49.5 GB for one
 module at the size first chosen; twelve of those is 96 GB, and twenty-four **killed the desktop**. The
