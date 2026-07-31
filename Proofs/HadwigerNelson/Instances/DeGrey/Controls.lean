@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Split
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Table
 import Proofs.HadwigerNelson.Sat.Forcing
+import Proofs.HadwigerNelson.Sat.Diagnose
 
 /-!
 # The negative controls for the split and the forcing argument

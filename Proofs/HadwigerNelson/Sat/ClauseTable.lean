@@ -151,17 +151,6 @@ inductive TableFault where
   | tautology (id : Nat) (held : LitSet)
 deriving DecidableEq, Repr, Inhabited
 
-/-- The fault as a sentence, with both clauses in `CNF.Clause` vocabulary.
-
-`Repr` on this type prints the two `LitSet`s as raw bit sets, which at de Grey's variable count is
-two thousand-digit integers — technically the whole truth and useless to the person reading it. This
-is what the build-fault table in `Sat/MaskCheck.lean` sends you to. -/
-def TableFault.report : TableFault → String
-  | .slotMismatch id held wanted =>
-      s!"slot {id}: the table holds {held.toClause}, the formula wants {wanted.toClause}"
-  | .tautology id held =>
-      s!"slot {id}: {held.toClause} is a tautology, which the checker cannot use"
-
 namespace ClauseTable
 
 /-- Walk the formula's clauses against the table's slots from `id`, reporting the first fault.
@@ -191,14 +180,6 @@ Defined as "no fault", so the `Bool` the kernel decides and the diagnosis a huma
 computation and cannot disagree. When this is `false`, run `#eval t.firstFault f`. -/
 def agreesWithCNF (t : ClauseTable) (f : CNF Nat) : Bool :=
   (t.firstFault f).isNone
-
-/-- **What to `#eval` the moment `agreesWithCNF` comes back false**, in one line and in English.
-
-Compiled, so it is instant at any table size, and it prints a clause rather than a bit set. -/
-def faultReport (t : ClauseTable) (f : CNF Nat) : String :=
-  match t.firstFault f with
-  | none => "the table agrees with the formula"
-  | some fl => fl.report
 
 end ClauseTable
 

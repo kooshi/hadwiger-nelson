@@ -3,8 +3,10 @@
 > A certified 5-chromatic unit-distance graph strictly smaller than de Grey's 1581 vertices, on the
 > same infrastructure. Terminal test: `chromaticNumber_plane_ge_five` re-proved from a witness of
 > **510** vertices and again from one of **553**, zero `sorry`, axioms exactly
-> `[propext, Classical.choice, Quot.sound]`, and — for the first time on a certificate —
-> `lean4checker` actually able to finish.
+> `[propext, Classical.choice, Quot.sound]`. And — **projected, not yet run** — an independent-kernel
+> replay that can finish: 1.4 M propagation steps against M06's 34.2 M, which is one to two hours
+> against twenty-eight. That claim stays projected until `./scripts/lean4checker.sh` has actually been
+> run to completion on these two witnesses.
 
 *Subplanned 2026-07-30 on the desktop (32 cores, 125 GB), one other project running at 1–2 cores.
 Kernel projections use M06's measured per-hint cost. Solver runs are single-threaded CaDiCaL 2.1.2
@@ -481,13 +483,145 @@ That Heule's 510 is vertex-critical is this subplan's own result, independently 
 refutations, none of which succeeded, which is why the milestone stops at 510 rather than pushing
 below it.
 
-### 5.2 The encoding, checked against someone else's
+### 5.2 The pipeline is bit-reproducible, and `scripts/regen-check.sh` is that check
+
+A machine crash mid-build made the on-disk files untrustworthy, so the whole untrusted chain was
+re-run from the committed inputs and compared byte for byte. It is now a committed script — 26
+seconds, and it is **the answer to "did a bit flip land in the artifact"** on a machine with a
+history of faulty hardware:
+
+| stage | result |
+|---|---|
+| `tools/heule/510.vtx` + `.edge` → exact field coordinates (`tools/heule.py`) | identical |
+| → DIMACS (`tools/coloring.py`) | identical |
+| → LRAT certificate (CaDiCaL `--unsat --seed=2`, single-threaded) | **identical**, all 17 MB |
+| → 197 generated Lean modules (`emit_cert.py`, `emit_mask.py`) | identical, every byte |
+
+The only difference found anywhere was the import prefix, which the emitter derives from its output
+directory — an artifact of writing the check into a scratch tree.
+
+This is worth more than the recovery it was run for. **A reviewer can regenerate every generated line
+in this milestone from six committed files and get the same bytes**, which is the difference between
+"the artifact is the certificate plus the checker" as a slogan and as a property. It also pins the
+solver: CaDiCaL at a fixed seed on one thread is deterministic here, so the *specific* certificate in
+the tree is reproducible and not merely re-derivable.
+
+### 5.3 Three negative controls that failed as controls, in one night
+
+The pattern is worth naming because it recurred three times in a few hours, always the same shape:
+**a check that cannot run reports a pass.**
+
+| the control | how it failed open | the fix |
+|---|---|---|
+| "move vertex 0 to the origin, and the geometry must break" | in both new witnesses vertex 0 *is* the origin, so the perturbation perturbed nothing | collapse vertex **1** onto vertex 0, and say in the comment why not vertex 0 |
+| `tools/shrink.py` reporting "nothing is deletable" | three graphs in a row returned nothing, which is indistinguishable from a broken search | bolt five pendant vertices onto the 510; a working search removes exactly those |
+| a flipped digit fed to `scripts/regen-check.sh`, to watch it go red | **the check passed** — because the mutation script's pattern never matched and it silently changed nothing. The *test of the test* was the thing that failed open | mutate a numbered byte, `cmp` against a backup to prove the file changed, *then* run the check |
+
+The third is the sharpest, because it happened while deliberately exercising the discipline: writing a
+negative control is not enough if the perturbation itself is unverified. **Prove the mutation landed
+before believing the red.** Once proved, `regen-check` names the file and exits 1, as it should.
+
+### 5.4 The encoding, checked against someone else's
 
 Heule's repository publishes the DIMACS file for his 553-vertex graph. Sorted and compared against
 what `coloringCNF 4 553 E` produces here, the two are **clause-for-clause identical**. Two
 independently written encoders of "this graph has no proper 4-colouring", agreeing exactly — which is
 a check on the one component that no theorem in this project can validate, because a wrong encoding
 proves a true statement about the wrong formula.
+
+## 4.6 What implementation cost, and what it corrected
+
+The measurements held. The *machine* did not, and both failures were mine rather than the plan's.
+
+| | projected in § 1 | actual |
+|---|---|---|
+| trimmed hints, 510 / 553 | 1,413,841 / 1,104,106 | identical — the emitter reproduces the race exactly |
+| geometry, both witnesses | ~4 min processor | **3.4 min** processor, 27 s wall over 15 modules |
+| clause table agreement | ~40 s each | 30 s each |
+| source artifact | ~14 + ~18 MB | 10.1 + 12.9 MB |
+| segments | ~32 each | **82 each** — resized after measuring 8.9 GB peak per segment |
+
+**What the infrastructure test found: nothing.** `emit_cert.py` generated Heule's geometry with no
+change beyond two new chunk-size flags; `Sat/MaskCheck.lean`, `Sat/ClauseTable.lean` and
+`Sat/Mask.lean` were not touched for the certificates at all. M05 and M06 claimed this machinery was
+general and M07 is the first test of that claim; it passed. Two name collisions were the whole cost:
+the geometry emitter and the certificate emitter both wanted `<name>Table`, and the certificate's is
+now `<name>ClauseTable` — which is better anyway, since a `ClauseTable` called `Table` sitting beside a
+`PtTable` called `Table` is exactly the ambiguity that bit.
+
+### The two machine failures, and what they were really about
+
+**The desktop was taken down twice.** The first time the cause was unclear and the boot device was
+also degraded; the second was watched, and the mechanism is unambiguous: **a bare `lake build` has no
+concurrency control.** Lake 5.0.0 has no `-j`, sizes its pool from the machine, and this project's
+modules peak at 8.9 GB — so it asked for roughly 285 GB.
+
+The `systemd` memory cap did not save it, and the reason is worth recording because it is
+counter-intuitive: **Lean `mmap`s its `.olean` files**, so the largest reclaimable thing in the cgroup
+is the page cache holding them. At the limit the kernel reclaims those pages and must read them back;
+with `MemorySwapMax=0` on a slow device that is an I/O stall, not a kill. The cap converts an
+out-of-memory into a thrash. `scripts/build.sh` now builds in dependency order in named batches of
+ten — **dependency order matters as much as batch size**, because naming a target whose dependencies
+are missing pulls them into the same unrestricted pool.
+
+**And the rebuild that provoked it was self-inflicted.** The experience pass added a diagnostic to
+`Sat/Mask.lean` and `Sat/ClauseTable.lean` and edited a docstring in `Sat/MaskCheck.lean` — three
+modules **upstream of all 2,265 of M06's certificate modules**. Lake's traces are content-based, so a
+comment re-checks 27.8 hours of kernel work. `CLAUDE.md` already carried the rule; I ignored it.
+
+The structural fix is in the layout, not in a resolution: `Sat/Diagnose.lean` now holds every
+`#eval`-only diagnostic, **downstream** of the checker. A diagnostic exists to be rewritten; it had no
+business in a file certificates import. The one upstream change kept is the corrected build-fault
+table, because the row it fixes gives *wrong* advice — `[Error pretty printing: maximum recursion
+depth]` in brackets on a `decide +kernel` line is a false `Bool`, not a recursion limit, and raising
+the limit does nothing.
+
+### Two negative controls that failed as controls
+
+* **The geometry perturbation perturbed nothing.** "Move vertex 0 to the origin" passed its `all`
+  clause and failed its `isEmpty` clause, because in both new witnesses vertex 0 *is* the origin.
+  Now vertex 1 is collapsed onto vertex 0. A control that does not move what it claims to move is
+  the failing-open shape this project has hit three times.
+* **The shrink search reported "nothing deletable" three times running**, which is that same shape.
+  It took bolting five pendant vertices onto the 510 — which a working search must remove, and only
+  those — to show the tool could find anything at all.
+
+## 4.7 What landed — 2026-07-31, 01:05
+
+| gate item | result |
+|---|---|
+| `./scripts/build.sh` | **green**, 261 batches, 0 retries |
+| zero `sorry` | **0** across 2,536 modules |
+| `./scripts/axioms.sh` | **81 clean, 5 declared purchases** — all five are M03's Moser-spindle cross-checks, unchanged. **M07 adds none** |
+| `lake lint` | passed |
+| spec examples | `#guard` and `#guard_msgs` run on every build |
+| `./scripts/regen-check.sh` | OK, and watched to fail on one flipped byte |
+
+**Both headlines depend on axioms exactly `[propext, Classical.choice, Quot.sound]`:**
+
+```
+'HadwigerNelson.chromaticNumber_plane_ge_five_510' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.chromaticNumber_plane_ge_five_553' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+`heule553_valid` reports `[propext, Quot.sound]` — the geometry does not even reach for choice.
+
+| | de Grey (M06) | Heule 510 | Heule 553 |
+|---|---|---|---|
+| modules | 2,313 | **99** | **100** |
+| source | 397 MB | **13 MB** | **11 MB** |
+| compiled | 297 MB | 22 MB | 21 MB |
+| propagation steps | 34,169,571 | 1,413,841 | 1,104,106 |
+
+The full library rebuilt in **1 h 41 min** of wall clock at ten concurrent jobs — and that figure is
+for *everything*, M06's 2,265 segments included, because the whole tree was re-checked from scratch
+after the crashes.
+
+**One thing to be honest about in the terminal test.** The subplan's headline claim was that these
+witnesses make the independent-kernel replay affordable. That is still a projection: `lean4checker`
+has not yet been run to completion on them. It is affordable — 1.4 M steps against 34.2 M — and it is
+running next. Until it returns, the claim in `ARCHITECTURE.md` § 5 stays what it was at M06: the
+replay covers the geometry, the soundness proofs and the composition, and not the propagation steps.
 
 ## 6. Measured, do not re-derive
 

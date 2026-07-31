@@ -154,13 +154,21 @@ parallel-job counts do not. Measure in **CPU seconds (user + sys), minimum of th
 builds on the box have inflated wall-clock readings 5× — and name the machine beside any number you
 write down.
 
-**Capping build concurrency is manual.** Lake 5.0.0 has no `-j`. It will launch `nproc` compilers,
-and this project's data modules peak at several GB each, so a default `lake build` can exhaust
-memory. Cap it by naming targets in batches:
+**Never run a bare `lake build`. Use `./scripts/build.sh`.** Lake 5.0.0 has no `-j`; it sizes its job
+pool from the machine, and this project's data modules peak at ~9 GB each, so an unrestricted build
+asks for a few hundred gigabytes. It took the desktop down twice on 2026-07-30. `scripts/build.sh`
+builds every module in **dependency order, leaves first, in explicitly-named batches of ten**, each
+inside a memory-capped scope.
 
-```bash
-lake build Proofs.…​.Geom00 Proofs.…​.Geom01 …   # one batch; at most this many run at once
-```
+Dependency order is not decoration: naming a target whose dependencies are missing makes Lake build
+those too, in the same unrestricted pool, so a batch bounds concurrency *only* if everything beneath
+it already exists. `scripts/build_order.py` computes the order from the import graph.
+
+**A memory cap alone does not save the machine, and believing it does is how the second crash
+happened.** Lean `mmap`s its `.olean` files, so the largest reclaimable thing in the cgroup is the
+page cache holding them. At the limit the kernel reclaims those pages and must read them back — with
+`MemorySwapMax=0` on a slow device that is an I/O stall, not a clean kill. **The cap converts an
+out-of-memory into a thrash.** Set it as a backstop; size the batch as the plan.
 
 **And "several GB each" is not the ceiling — measure the peak before choosing the batch width.** M06's
 certificate segments peak at **3.4 GB + 0.81 GB per certificate chunk**, which is 49.5 GB for one
@@ -184,6 +192,18 @@ independent modules the **wall clock depends only on the job count, not the piec
 kernel work is fixed), so making the pieces smaller is free and buys concurrency. And **editing
 anything upstream of generated modules invalidates all of them** — settle every hand-written module
 before starting a long generated build.
+
+That second corollary has teeth, and it was ignored at M07 for the price of 28 hours of processor
+time: Lake's traces are **content-based**, so a *comment* in a module the certificates import re-checks
+every one of them. Two consequences now built into the layout:
+
+* **Nothing written to be read by a human goes in a module a certificate imports.** Diagnostics live
+  downstream in `Sat/Diagnose.lean`, where they can be rewritten for the cost of one file. The
+  upstream modules — `Sat/Mask.lean`, `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean` — are settled, and
+  changing any byte of them is a decision about hours, not about a docstring.
+* **Deleting a generated `.c` under `.lake/build/ir/` invalidates the module**, exactly as deleting
+  its `.olean` would: `leanArts` covers both. Tidying `ir/` queues a full rebuild of everything under
+  it, which is not what it looks like it does.
 
 **`decide +kernel`, not `decide`, for anything large.** Plain `decide` reduces the `Decidable`
 instance twice — once in the elaborator, once in the kernel — so it is ~2× slower and dies on

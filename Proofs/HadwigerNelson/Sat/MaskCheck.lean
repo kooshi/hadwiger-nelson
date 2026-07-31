@@ -73,7 +73,7 @@ table for that, because the person holding the error is reading a Lean message, 
 | `[Error pretty printing: maximum recursion depth has been reached]`, **in brackets, on a `decide +kernel` line** | **not** the row above, and raising `maxRecDepth` will not help. The `Bool` is genuinely `false`; what overflowed is the *pretty-printer* trying to render the counterexample term. Two unrelated causes wearing the same words — read the brackets | `#eval` the `Bool` itself to confirm it is `false`, then the diagnostic for whichever `Bool` it was: `t.firstFault f` for agreement, `runSegment …` for a segment |
 | the machine runs out of memory | a segment is too large. Measured peak: **≈ 3.4 GB + 0.81 GB per certificate chunk** — it is `unpackAux`'s intermediate literal sets, which the kernel retains for the whole reduction | fewer chunks per segment, and fewer segments at once. Wall clock depends only on the job count, so shrinking segments is free |
 | `decide` failed, with a proposition too large to print | the certificate really is wrong in that segment — but the kernel cannot tell you how | **`#eval runSegment t (decodeChunk fw) w seg`**: the same expression compiled prints the `Outcome`, including the fault. This is the diagnostic for a failed segment, and it is instant |
-| `agreesWithCNF` is false on a table that used to pass | the formula moved under the certificate — usually a regenerated edge list against an old certificate, or a certificate filed against the wrong witness | **`#eval t.faultReport f`** — one line naming the slot and both clauses. (`firstFault` returns the same fault as data, but `Repr` prints its two `LitSet`s as raw bit sets, which at this variable count is two thousand-digit integers.) Then regenerate |
+| `agreesWithCNF` is false on a table that used to pass | the formula moved under the certificate — usually a regenerated edge list against an old certificate, or a certificate filed against the wrong witness | **`#eval t.faultReport f`** (`Sat/Diagnose.lean`) — one line naming the slot and both clauses. `firstFault` returns the same fault as data, but `Repr` prints its two `LitSet`s as raw bit sets, which at this variable count is two thousand-digit integers. Then regenerate |
 
 ## The reasoning surface — nothing here is ever unfolded
 
@@ -81,9 +81,11 @@ Consumers reason through exactly three names, and no proof outside this module s
 definition in it:
 
 * **`maskCheck_sound`** — the only way to turn a checked certificate into unsatisfiability;
-* **`whyNot`** and **`ClauseTable.faultReport`** — the only things to run when a check fails, both by
-  `#eval`, never in a proof. (`ClauseTable.firstFault` is the same answer as data, for a caller that
-  wants to match on it; `faultReport` is the one to read.)
+* **`whyNot`** and **`ClauseTable.firstFault`** — the only things to run when a check fails, both by
+  `#eval`, never in a proof. The readable rendering of a fault, and the fuller table of build faults,
+  live **downstream** in `Sat/Diagnose.lean`: this module is imported by every generated certificate
+  module, so a comment changed here re-checks 27.8 hours of kernel work, and a diagnostic is the one
+  thing that gets rewritten often.
 
 `propagate`, `rupWhy`, `runActions`, `runStream`, `ClauseTable.get` and `unpackAux` are implementation.
 They are reasoned about only by the lemmas in this file and `Sat/ClauseTable.lean`, and their shapes

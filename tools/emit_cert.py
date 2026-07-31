@@ -259,6 +259,13 @@ if __name__ == "__main__":
     src, name = sys.argv[1], sys.argv[2]
     data = json.load(open(src))
     skeleton = "--skeleton" in sys.argv
+    # Chunk width and module width are cost knobs, not shape ones: `ValidOn` is a `List.all` and
+    # `all_flatten` glues any cut for free (plans/M07-shrinking.md s 3.4). Settable so a witness a
+    # quarter of de Grey's size still gets one geometry module per core.
+    if "--chunk" in sys.argv:
+        CHUNK = int(sys.argv[sys.argv.index("--chunk") + 1])
+    if "--per-module" in sys.argv:
+        PER_MODULE = int(sys.argv[sys.argv.index("--per-module") + 1])
     if "--out" in sys.argv:
         dst = sys.argv[sys.argv.index("--out") + 1]
         open(dst, "w").write(emit_one(data, name))

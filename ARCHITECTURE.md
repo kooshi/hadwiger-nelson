@@ -211,6 +211,13 @@ Std.Sat ─┤
                                                                         └─► Instances/DeGrey/Bound.lean
                                                                                  χ(R^2) >= 5
 
+     Sat/Diagnose.lean   #eval-only fault rendering — deliberately DOWNSTREAM of the        [M07]
+                         checker, so rewriting a diagnostic does not re-check 27.8 h
+     Instances/Heule510.lean, Heule553.lean   two published witnesses, re-certified         [M07]
+              ├─► Heule5xx/{Table,Edges,Geom00..,Valid}.lean   geometry, 8 modules each
+              ├─► Heule5xx/Cnf/{Table00..03,Table,Seg000..081,Cert}.lean   one certificate
+              └─► Heule5xx/Bound.lean   chromaticNumber_plane_ge_five_510 / _553
+
 Proofs.lean          — flat public surface
 tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
 ```
@@ -227,7 +234,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
 | **M05** ✅ | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Landed 2026-07-29 (`plans/M05-kernel-checker.md`).* `maskCheck_sound` — a refutation checker whose two hypotheses are closed `Bool`s the **kernel** decides, axioms exactly `[propext, Classical.choice, Quot.sound]`, zero `sorry`. Soundness is proved for **every** decoder, so the certificate's packing is untrusted as a matter of type. Negative controls committed and *watched to fail*: a satisfiable formula is refused, a clause citing itself is refused, and mutating the conflict test or deleting the watermark guard breaks the soundness proofs rather than the checker's answer. The remaining work is throughput at de Grey's scale, projected at **5.4–9.0 h processor time, ~30–50 min wall over 96 independent cubes**; that measurement belongs to M06, which is where a real certificate first arrives. |
 | **M06** ✅ | **χ(ℝ²) ≥ 5.** ~~Cube split at depth 5 (1024 cubes)~~ — **the cube split is dead; see below.** de Grey's own decomposition instead: two forcing lemmas, one certificate each. | *Landed 2026-07-30 (`plans/M06-chi-ge-five.md`).* **`chromaticNumber_plane_ge_five` — the plane needs five colours — depends on axioms exactly `[propext, Classical.choice, Quot.sound]`.** Zero native purchases, zero `sorry`, linters clean. Two kernel-checked refutations, 34.2 × 10⁶ propagation steps across 2,265 segment modules: **27.8 hours of processor time, 2.8 hours of wall clock over twelve jobs**, 396 MB of source and 297 MB of compiled modules. The cube split the roadmap specified was measured dead (§ 2.2.1) and de Grey's own two-copy decomposition replaced it at 44× less cost. `lean4checker` covers everything the geometry and the proof structure rest on; **it does not cover the two certificates**, because replaying them repeats every kernel reduction single-threaded — see § 5. |
-| **M07** | **Shrinking.** Re-verify smaller witnesses (Heule 553, Parts 509) on the same infrastructure; automate vertex-deletion search. | A certified witness strictly smaller than 1581. |
+| **M07** ✅ | **Shrinking.** Re-verify smaller witnesses on the same infrastructure; automate vertex-deletion search. | *Landed 2026-07-30 (`plans/M07-shrinking.md`).* **`χ(ℝ²) ≥ 5` re-proved from witnesses of 510 and 553 vertices**, against de Grey's 1581 — axioms exactly `[propext, Classical.choice, Quot.sound]`, one certificate each, no decomposition. **1,413,841 and 1,104,106 propagation steps against M06's 34,169,571** — ~1 hour of processor time for both against 27.8 for one, and 23 MB of source against 396 MB. Two levers, both measured: naming one triangle's colours is worth **20×**, racing triangle × configuration × seed on *trimmed hint count* another **10.5×**. de Grey's own graph was measured **not to shrink** — its forcing halves are vertex-critical, so it goes 1581 → 1577 and stops. The smaller certificates are what finally make the independent-kernel replay affordable (§ 5). |
 | **M08** | **Structure-aware geometry.** Difference-vector certificates: verify one norm per *distinct edge difference* (67 for de Grey, against 7877 edges) and a subtraction per edge. | The same `deGrey_valid` claim at a per-edge cost that no longer carries a multiplication, and a projection showing the expensive term is flat in graph size. Sequenced here because it changes the edge list's shape and would invalidate M06's certificates. |
 | **M09** | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | A composition theorem, and de Grey's own construction re-derived through it rather than asserted as coordinates. |
 | **M10** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. **Explicitly not a route to 6** — the known upper bound on χ_f is below 5, so this rung is independently publishable and cannot reach rung D. |
@@ -321,9 +328,18 @@ Proofs/`), and each is listed under the `PURCHASED` banner in `scripts/Axioms.le
 environment-side ledger). `scripts/axioms.sh` extracts both and fails on any disagreement — a
 purchase with no docstring warning, or a docstring warning about a purchase no longer made.
 
-Independently re-checked: `scripts/lean4checker.sh` replays all 33 `Proofs` modules through
-lean4checker's separate kernel. Green at M04 — which means de Grey's 7877 exact distance identities
-have been recomputed by a second kernel implementation, not just the one that built them.
+Independently re-checked: `scripts/lean4checker.sh` replays `Proofs` through lean4checker's separate
+kernel. Green at M04 — which means de Grey's 7877 exact distance identities have been recomputed by a
+second kernel implementation, not just the one that built them.
+
+**Scale is the limit, and M07 is what moves it.** Replaying a certificate repeats every propagation
+step, single-threaded, in one process that cannot be split. At M06's **34.2 × 10⁶** steps that is
+another ~28 hours, and it has never been run to completion here — so for the de Grey witness, the
+independent-kernel claim covers the geometry, the soundness proofs and the composition, and *not*
+those steps. State it that way and no other way. At M07's **1.4 × 10⁶** steps the same replay is one
+to two hours, so for the 510- and 553-point witnesses the claim covers everything. That is the main
+thing the smaller witnesses buy, and the reason they are in the repository rather than being a
+footnote about a smaller number.
 
 **But the independent replay cannot see a native purchase, and the claim must not be stated as if it
 could.** `native_decide` records its result as an **axiom**, and an axiom is accepted by every kernel
@@ -416,6 +432,10 @@ produce a meaningless one, and the specific countermeasure for each:
 | A certificate segment attached at the wrong watermark, so the 2265-segment chain silently skips work | ✅ M06: segment *k* concludes at the watermark segment *k+1* assumes, so the composition **typechecks only if they chain** — the emitter's only arithmetic is checked by the elaborator, and a mismatch names both segments |
 | The two forcing lemmas proved about the wrong graph — e.g. a half that is not a subgraph | ✅ M06: the halves are *contiguous segments* of `deGrey.edges` by construction, so the inclusions are `List.mem_append_left`; and the shape of the split (3938 + 3938 + 1, one shared vertex, the joining edge in neither half) is asserted by `#guard` on every build |
 | The colour-symmetry step used to "prove" more than it can | ✅ M06: relabelling requires an **injection**, and that hypothesis is what the theorem consumes; a merging relabel does not apply. The SAT-satisfiable case (endpoint at the shared vertex's own colour) is recorded beside the lemma as the reason it is an equality and not something stronger |
+| The whole bound rests on one graph, so one systematic error sinks it | ✅ M07: `χ(ℝ²) ≥ 5` is proved from **three** graphs sharing no vertex, no edge and no certificate — de Grey's 1581, and Heule's 510 and 553. What they share is this project's *encoding* and its *checker*, which is precisely what no theorem here can validate; a fault in either would have to certify three unrelated graphs |
+| The CNF encoding of "no 4-colouring" is subtly wrong, so every theorem is about the wrong formula | ✅ M07: `coloringCNF 4 553 E` is **clause-for-clause identical** to Heule's independently authored `553-4.cnf`. Two encoders written without reference to each other, agreeing exactly |
+| A certificate silently attached to the wrong witness | ✅ M07: was a *procedure* (regenerate and watch it go red), now an obligation — `halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false`, kernel-decided on every build. `agreesWithCNF` alone is consistent with a table that matches everything, which would certify anything; the pair is what makes either mean something |
+| A negative control that perturbs nothing, and therefore guards nothing | ✅ M07: the geometry control moves a vertex and demands the check name its edges. Written first as "move vertex 0 to the origin", it silently *passed* — in both new witnesses vertex 0 **is** the origin. Now vertex 1 is collapsed onto vertex 0, and the failure of the first version is recorded beside it |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
@@ -431,12 +451,18 @@ Stated up front, per doctrine, and to be reported as-is:
 - **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
   Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
   rungs A–C are not, which is why the ratchet is built the way it is.
-- **The witness is de Grey's 1581-vertex graph, and a smaller one would not obviously be cheaper.**
-  M06 lands by using the construction's own two-copy structure, not by shrinking the graph. Trimming to
-  a smaller 5-chromatic unit-distance graph (M07) makes the instance *less* constrained and so plausibly
-  *harder* to refute — measured here at one level down: the forcing does not hold on the 395-vertex
-  layer, where all four pin combinations are satisfiable. So "smaller graph, smaller proof" is an
-  assumption M07 must measure rather than inherit.
+- **~~The witness is de Grey's 1581-vertex graph, and a smaller one would not obviously be cheaper.~~**
+  **Measured at M07, and the doubt was right in kind and wrong in size.** Both effects are real:
+  a smaller graph *is* less constrained and harder per vertex — Heule's 510-vertex witness costs
+  **28% more** propagation steps than his 553-vertex one — but that is swamped by the effect of
+  leaving de Grey's construction at all. His graph has **no monolithic refutation** (six solver
+  configurations with proof logging, six without, and a 64-cube split: none terminate), because two
+  loosely-coupled copies joined at one vertex is exactly the shape that defeats a CDCL solver while
+  handing a human a two-line argument. Heule's minimised graphs refute in **two seconds**. Net:
+  1,413,841 steps against 34,169,571, so **smaller was 24× cheaper**, for reasons that have little to
+  do with size. What remains true, and is the part to carry to rung D: **refutation cost is not
+  monotone in graph size**, and optimising for "a solver can chew through it" optimises a route that
+  is already dead one rung up.
 - **The certificate check is not kernel-reducible *as shipped*, and M05 replaced it.** The shipped
   `LRAT.check` is blocked by exactly one thing — `Std.HashMap` inside `DefaultClause.ofArray`, whose
   bucket indexing computes on `USize`, whose width is an `@[extern] opaque` the kernel cannot unfold.

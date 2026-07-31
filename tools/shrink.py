@@ -30,58 +30,18 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 REPO = Path(__file__).resolve().parent.parent
 CADICAL = os.environ.get("CADICAL") or str(
     Path(subprocess.run(["lean", "--print-prefix"], capture_output=True, text=True,
                         check=True).stdout.strip()) / "bin" / "cadical")
 
-K = 4  # colours
+from coloring import K, var, unvar, write_cnf, read_cnf as read_graph_cnf  # noqa: F401
 
-
-# ------------------------------------------------------------------ CNF <-> graph
-
-def var(v: int, c: int) -> int:
-    """DIMACS variable for "vertex v has colour c" -- matching `Sat/Encoding.lean`."""
-    return K * v + c + 1
-
-
-def unvar(x: int) -> tuple[int, int]:
-    return divmod(x - 1, K)
-
-
-def write_cnf(path: Path, n: int, edges: list[tuple[int, int]],
-              pins: list[tuple[int, int]]) -> None:
-    """`coloringCNF 4 n edges ++ cubeCNF 4 n pins`, in the order Lean builds it.
-
-    The order is load-bearing downstream (clause ids are positions), so it is stated here once:
-    n at-least-one clauses, then 4 clauses per edge, then one unit clause per pin.
-    """
-    with open(path, "w") as f:
-        f.write(f"p cnf {K * n} {n + K * len(edges) + len(pins)}\n")
-        for v in range(n):
-            f.write(" ".join(str(var(v, c)) for c in range(K)) + " 0\n")
-        for (a, b) in edges:
-            for c in range(K):
-                f.write(f"-{var(a, c)} -{var(b, c)} 0\n")
-        for (v, c) in pins:
-            f.write(f"{var(v, c)} 0\n")
-
-
-def read_graph_cnf(path: Path) -> tuple[int, list[tuple[int, int]], list[tuple[int, int]]]:
-    """Recover (n, edges, pins) from a CNF this tool or `scripts/Dimacs.lean` wrote."""
-    n, edges, pins = 0, [], []
-    for line in open(path):
-        if line[0] == "c":
-            continue
-        if line[0] == "p":
-            n = int(line.split()[2]) // K
-            continue
-        lits = [int(x) for x in line.split()[:-1]]
-        if len(lits) == 1:
-            pins.append(unvar(lits[0]))
-        elif len(lits) == 2:
-            edges.append((unvar(-lits[0])[0], unvar(-lits[1])[0]))
-    return n, sorted(set(edges)), pins
+# The clause order lives in `tools/coloring.py` and nowhere else: this tool, the emitter and the
+# witness driver all address clauses by position, so a second copy of that convention is a bug
+# waiting for someone to edit one of them.
 
 
 # ------------------------------------------------------------------ the core instrument

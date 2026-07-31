@@ -153,6 +153,28 @@ assignments — so it is the one where a native-evaluation axiom would matter mo
 #print axioms deGrey_not_colorable_four
 #print axioms chromaticNumber_plane_ge_five
 
+/-! ## M07 — two smaller witnesses, on the same infrastructure
+
+The same theorem from two graphs that share no vertex, no edge and no certificate with de Grey's, so
+that a fault in the encoding or the checker would have to be one that certifies three unrelated
+graphs. Both go through `not_colorable_of_triangle_pinned` — one refutation each, no decomposition. -/
+
+#print axioms exists_perm_apply_three
+#print axioms exists_normalized₃
+#print axioms not_colorable_of_triangle_pinned
+#print axioms halfA_table_refuses_halfB_cnf
+#print axioms halfB_table_refuses_halfA_cnf
+#print axioms heule510_valid
+#print axioms heule510_unit_distances
+#print axioms heule510_unsat
+#print axioms heule510_not_colorable_four
+#print axioms chromaticNumber_plane_ge_five_510
+#print axioms heule553_valid
+#print axioms heule553_unit_distances
+#print axioms heule553_unsat
+#print axioms heule553_not_colorable_four
+#print axioms chromaticNumber_plane_ge_five_553
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
