@@ -4,41 +4,55 @@ import Proofs.HadwigerNelson.Instances.Spindle
 /-!
 # Forced pairs, and the spindle that closes them
 
-Both known rungs of this problem are the same argument one colour apart.
+Both known rungs of this problem are one argument, one colour apart.
 
-* The **Moser spindle** (χ ≥ 4): a rhombus forces its two far corners to share a colour in every
+* The **Moser spindle** (χ ≥ 4): a rhombus paints its two far corners the same colour in every
   3-colouring; place two rhombi sharing a corner so the far corners land a unit apart; no
   3-colouring survives.
-* **de Grey's graph** (χ ≥ 5): a 791-point configuration forces two of its points to share a colour
+* **de Grey's graph** (χ ≥ 5): a 791-point configuration paints two of its points the same colour
   in every 4-colouring; place two copies sharing the first point so the second points land a unit
   apart; no 4-colouring survives.
 
-Same picture, same four rewrites. This module states it once, for any graph and any number of
-colours, and re-derives the Moser spindle through it. It is also the **search's win condition**: a
-candidate the search proposes is certified by exhibiting a forced pair and two placements, never by
-refuting the assembled graph — which is what makes a forcer of `m` points buy a `2m−1`-point
-witness for the price of refuting `m`.
+Same picture, same three rewrites, and it exists nowhere in this repository as a theorem — M06
+hand-composed it for one graph. This module states it once and re-derives the Moser spindle through
+it.
+
+It is also the **search's win condition**. A candidate is certified by exhibiting a forced pair and
+two placements, never by refuting the assembled graph, so a forcer of `m` points buys a `2m−1`-point
+witness for the price of refuting `m` once. That saving is why M06 refuted de Grey's halves rather
+than his graph, measured there at 44×.
+
+**The statement lives at `SimpleGraph`, not at edge lists**, because that is where it is true and
+because the general statement is the *easier* one: pull a colouring back along each placement, apply
+the forcer twice, walk the joining edge. Nothing in the argument is finite, indexed, or geometric.
+The list-side bridges below are what make it decidable at a call site.
 -/
 
 namespace HadwigerNelson
+
+variable {V W : Type*} {G : SimpleGraph V} {H : SimpleGraph W} {k : ℕ}
 
 /-! ## The property -/
 
 /-- Two vertices are **forced to agree** at `k` colours when no proper `k`-colouring separates them.
 
-Stated over bare functions rather than `SimpleGraph.Coloring` for the same reason `Proper` is:
-pulling one back along a placement is then function composition and costs nothing. -/
-def Forces (n k : ℕ) (E : List (Fin n × Fin n)) (p q : Fin n) : Prop :=
-  ∀ f : Fin n → Fin k, Proper n E f → f p = f q
+The whole target of the search, named. `Fin k` rather than an arbitrary colour type of size `k`
+because that is what `SimpleGraph.Colorable` quantifies over, so a forcer and the thing it refutes
+speak about the same colourings with no cardinality bookkeeping between them. -/
+def Forces (G : SimpleGraph V) (k : ℕ) (p q : V) : Prop :=
+  ∀ C : G.Coloring (Fin k), C p = C q
 
-/-- **A two-port gadget that rules out the ports differing is a forcer.** The bridge from the
-algebra's producers — `Gadget.ofUnsat` for a certificate, `Gadget.ofExhaustion` for a small
-configuration the kernel can enumerate — to the property the closing lemma consumes. -/
-theorem Forces.of_gadget {n k : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
-    (g : Gadget k n 2 E ![p, q])
-    (h : ∀ r : Fin 2 → Fin k, r 0 ≠ r 1 → g.admits r = false) :
-    Forces n k E p q := by
-  sorry
+/-- **A forcer speaks about every graph it maps into.** Pull the ambient colouring back along the
+placement and the forcer applies to it — one line, and it is the only step of the closing lemma
+that does any work. -/
+theorem Forces.comap {p q : V} (h : Forces G k p q) (φ : G →g H) (C : H.Coloring (Fin k)) :
+    C (φ p) = C (φ q) :=
+  h (C.comap φ)
+
+/-- **More edges only force more.** The analogue of `Gadget.mono`, and free. -/
+theorem Forces.mono {G' : SimpleGraph V} (hle : G ≤ G') {p q : V} (h : Forces G k p q) :
+    Forces G' k p q :=
+  fun C => h (C.comap (SimpleGraph.Hom.ofLE hle))
 
 /-! ## The closing lemma -/
 
@@ -46,29 +60,77 @@ theorem Forces.of_gadget {n k : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
 so that the copies share `p` and their two images of `q` are adjacent: the ambient graph has no
 `k`-colouring.
 
-The placements are arbitrary functions `Fin n → Fin N`, so nothing here knows about geometry,
-about `Assembly`'s index arithmetic, or about which graph is which — the hypotheses say only that
-each placement carries listed edges to edges. -/
-theorem not_colorable_of_spindled_forcer {n N k : ℕ}
-    {E : List (Fin n × Fin n)} {F : List (Fin N × Fin N)} (φ ψ : Fin n → Fin N)
-    (hφ : ∀ e ∈ E, e.1 ≠ e.2 → (edgeGraph N F).Adj (φ e.1) (φ e.2))
-    (hψ : ∀ e ∈ E, e.1 ≠ e.2 → (edgeGraph N F).Adj (ψ e.1) (ψ e.2))
-    {p q : Fin n} (hpiv : φ p = ψ p) (hjoin : (edgeGraph N F).Adj (φ q) (ψ q))
-    (hforce : Forces n k E p q) :
-    ¬ (edgeGraph N F).Colorable k := by
-  sorry
+    φ(q) ──── ψ(q)      adjacent, so their colours differ
+      │         │
+   forced    forced
+      │         │
+    φ(p) ═════ ψ(p)     the same vertex, so their colours agree
 
-/-! ## Spec — the rung the lemma re-derives, and the controls that must go red
+The placements are graph homomorphisms and nothing more, so this serves `Assembly`'s copies, a
+hand-written embedding, and a search's output without adaptation — and says nothing about geometry,
+which is discharged separately by `UDCert.Valid`. The two meet at exactly one place: whether the
+partners are an edge. -/
+theorem not_colorable_of_spindled_forcer {p q : V} (φ ψ : G →g H)
+    (hpiv : φ p = ψ p) (hjoin : H.Adj (φ q) (ψ q)) (h : Forces G k p q) :
+    ¬ H.Colorable k := by
+  rintro ⟨C⟩
+  exact C.valid hjoin ((h.comap φ C).symm.trans (hpiv ▸ h.comap ψ C))
 
-The Moser spindle's eleven edges are exactly two copies of `rhombus` glued at vertex `0`
-plus the joining edge `(3,6)`:
+/-! ## The bridges to edge lists, where `decide` lives
 
-    rhombus            (0,1) (0,2) (1,2) (1,3) (2,3)
-    rhombus, relabelled by 0,1,2,3 ↦ 0,4,5,6
-                       (0,4) (0,5) (4,5) (4,6) (5,6)
-    the joining edge   (3,6)
+`SimpleGraph.Adj` is not decidable here and deliberately so — `Sat/Encoding.lean` records that there
+is no `DecidableRel (edgeGraph n E).Adj` instance on purpose. So each hypothesis a caller must
+*check* is restated over the edge list, exactly as `Gadget.ofExhaustion` restates properness. -/
 
-so rung A's witness costs two `Matrix.of` literals and no new certificate. -/
+/-- **A forcer, from exhausting the colourings.** The hypothesis reads *"every colouring either
+paints some listed edge one colour, or agrees on `p` and `q`"* — the contrapositive, and the same
+shape `Gadget.ofExhaustion` uses, for the same reason: it is decidable, so a caller writes
+`by decide +kernel`.
+
+The ceiling is `k ^ n` colourings; beyond it, `Forces.of_gadget` takes a certificate instead. -/
+theorem forces_of_edges {n : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
+    (h : ∀ f : Fin n → Fin k, (∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2) ∨ f p = f q) :
+    Forces (edgeGraph n E) k p q := by
+  intro C
+  rcases h C with ⟨e, he, hne, heq⟩ | hpq
+  · exact absurd heq (C.valid (edgeGraph_adj_of_mem hne he))
+  · exact hpq
+
+/-- **A forcer, from a two-port gadget.** The route that scales: `Gadget.ofUnsat` turns one SAT
+refutation into a gadget, and a gadget that admits no pattern separating its two ports is exactly a
+forced pair. This is how de Grey's 791-point forcer would be built, where exhaustion is hopeless. -/
+theorem Forces.of_gadget {n : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
+    (g : Gadget k n 2 E ![p, q])
+    (hsep : ∀ r : Fin 2 → Fin k, r 0 ≠ r 1 → g.admits r = false) :
+    Forces (edgeGraph n E) k p q := by
+  intro C
+  by_contra hne
+  exact absurd (g.sound C fun _ _ hij => C.valid hij)
+    (by simpa using hsep (fun i => C (![p, q] i)) (by simpa using hne))
+
+/-- **A vertex map that carries every listed edge to a listed edge is a placement.** The decidable
+hypothesis the closing lemma's homomorphisms come from: for each listed non-loop, the images differ
+and are themselves listed, in one orientation or the other. -/
+def edgeHom {n N : ℕ} {E : List (Fin n × Fin n)} {F : List (Fin N × Fin N)} (φ : Fin n → Fin N)
+    (h : ∀ e ∈ E, e.1 ≠ e.2 → φ e.1 ≠ φ e.2 ∧ ((φ e.1, φ e.2) ∈ F ∨ (φ e.2, φ e.1) ∈ F)) :
+    edgeGraph n E →g edgeGraph N F where
+  toFun := φ
+  map_rel' := by
+    rintro i j ⟨hne, hij | hij⟩
+    · exact h (i, j) hij hne
+    · have hji : (edgeGraph N F).Adj (φ j) (φ i) := h (j, i) hij hne.symm
+      exact hji.symm
+
+/-! ## Spec — the rung this re-derives, and the controls that must go red
+
+The Moser spindle's eleven edges are exactly two copies of `rhombus` glued at vertex `0` plus the
+joining edge `(3,6)`:
+
+    rhombus                                (0,1) (0,2) (1,2) (1,3) (2,3)
+    rhombus under 0,1,2,3 ↦ 0,4,5,6        (0,4) (0,5) (4,5) (4,6) (5,6)
+    the joining edge                       (3,6)
+
+so rung A's witness costs two literals and no new certificate. -/
 
 /-- The first rhombus, as it sits in the Moser spindle: the identity on `0,1,2,3`. -/
 def spindleCopyA : Fin 4 → Fin 7 := ![0, 1, 2, 3]
@@ -81,9 +143,8 @@ def spindleFromRhombi : List (Fin 7 × Fin 7) :=
   (rhombus.map fun e => (spindleCopyA e.1, spindleCopyA e.2)) ++
   (rhombus.map fun e => (spindleCopyB e.1, spindleCopyB e.2)) ++ [(3, 6)]
 
--- **The decomposition is checked, not asserted.** The Moser spindle's eleven edges are exactly
--- these eleven — a placement typo that quietly built a different graph would go red here rather
--- than prove a theorem about something else.
+-- **The decomposition is checked, not asserted.** A placement typo that quietly built a different
+-- graph would go red here rather than prove a theorem about something else.
 #guard spindleFromRhombi.length = moserSpindleEdges.length
 #guard spindleFromRhombi.all (· ∈ moserSpindleEdges)
 #guard moserSpindleEdges.all (· ∈ spindleFromRhombi)
@@ -92,47 +153,69 @@ def spindleFromRhombi : List (Fin 7 × Fin 7) :=
 #guard spindleCopyA 0 == spindleCopyB 0
 #guard (spindleCopyA 3, spindleCopyB 3) == ((3 : Fin 7), (6 : Fin 7))
 
-/-- **The rhombus forces its far corners at three colours** — `rhombusGadget`, which is
-kernel-decided over all `3⁴ = 81` colourings, read as a forced pair. -/
-theorem rhombus_forces : Forces 4 3 rhombus 0 3 := by
-  sorry
+/-- **The rhombus forces its far corners at three colours**, over all `3⁴ = 81` colourings.
+
+Proved directly rather than through `rhombusGadget`, which states the same fact through the gadget
+algebra: two routes to one claim, so the algebra is cross-checked rather than trusted. -/
+theorem rhombus_forces : Forces (edgeGraph 4 rhombus) 3 0 3 :=
+  forces_of_edges (by decide +kernel)
 
 /-- **The Moser spindle has no 3-colouring, re-derived through the closing lemma.**
 
 An independent route to `Instances/SpindleBound.lean`'s `moserSpindle_not_colorable_three`, which
-decides the whole graph. This one decides a four-vertex rhombus and places it twice. -/
+decides the whole seven-vertex graph. This one decides a four-vertex rhombus and places it twice —
+and it is the same argument de Grey's graph runs one colour up, at 791 points instead of 4. -/
 theorem moserSpindle_not_colorable_three_spindled :
-    ¬ (edgeGraph 7 moserSpindleEdges).Colorable 3 := by
-  sorry
+    ¬ (edgeGraph 7 moserSpindleEdges).Colorable 3 :=
+  not_colorable_of_spindled_forcer
+    (edgeHom spindleCopyA (by decide)) (edgeHom spindleCopyB (by decide))
+    (rfl) (by refine ⟨by decide, Or.inl (by decide)⟩) rhombus_forces
 
 /-! ### The controls
 
-Every hypothesis of the closing lemma is load-bearing, and each of these is a countermodel rather
-than a build failure — a claim that is *false*, exhibited, so that deleting the hypothesis it
-guards could not be papered over. -/
+Each is a countermodel rather than a build failure: a claim that is *false*, exhibited, so that
+dropping the hypothesis it guards could not be papered over. -/
 
--- **The forcer is colour-count-specific.** At *four* colours the rhombus forces nothing: its far
--- corners may differ, so `rhombus_forces` read at four colours is false.
-example : ¬ Forces 4 4 rhombus 0 3 := by
-  sorry
+-- **The forcer is colour-count-specific.** At *four* colours the rhombus forces nothing — here is
+-- the colouring that separates its far corners.
+example : ¬ Forces (edgeGraph 4 rhombus) 4 0 3 := fun h => by
+  have := h (SimpleGraph.Coloring.mk (![0, 1, 2, 3] : Fin 4 → Fin 4)
+    (by simp only [edgeGraph_adj]; decide))
+  simp only [SimpleGraph.Coloring.mk] at this
+  exact absurd this (by decide)
 
--- **The forced pair is the far corners and not any other pair.** Vertices `0` and `1` are adjacent
--- in the rhombus, so they are forced *apart*, never together.
-example : ¬ Forces 4 3 rhombus 0 1 := by
-  sorry
+-- **The forced pair is the far corners and no other pair.** Vertices `0` and `1` are adjacent in
+-- the rhombus, so they are forced *apart* — a forcer filed at the wrong pair is false, not weaker.
+example : ¬ Forces (edgeGraph 4 rhombus) 3 0 1 := fun h => by
+  have := h (SimpleGraph.Coloring.mk (![0, 1, 2, 0] : Fin 4 → Fin 3)
+    (by simp only [edgeGraph_adj]; decide))
+  simp only [SimpleGraph.Coloring.mk] at this
+  exact absurd this (by decide)
 
--- **The joining edge is load-bearing.** Delete `(3,6)` from the spindle and the remaining ten edges
--- are 3-colourable — here is the colouring, so the closing lemma cannot be missing `hjoin`.
-example : Proper 7 (moserSpindleEdges.erase (3, 6)) ![0, 1, 2, 0, 1, 2, 0] := by
-  sorry
+-- **The joining edge is load-bearing.** Delete `(3,6)` and the remaining ten edges are 3-colourable,
+-- so `hjoin` cannot be dropped from the closing lemma.
+example : (edgeGraph 7 [(0,1), (0,2), (0,4), (0,5), (1,2), (1,3), (2,3), (4,5), (4,6), (5,6)]
+    ).Colorable 3 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 2, 0], by simp only [edgeGraph_adj]; decide⟩
 
--- **The shared pivot is load-bearing, and this is the control that is easiest to get wrong.** Place
--- the second rhombus on four *fresh* vertices instead of sharing the pivot, keep both forcers and
--- keep the joining edge — and the union is 3-colourable after all. Each copy still forces its own
--- pair; what fails is that the two forced colours are now unrelated. Here is the colouring.
-example : Proper 8 [(0,1), (0,2), (1,2), (1,3), (2,3),
-                    (4,5), (4,6), (5,6), (5,7), (6,7), (3,7)]
-    ![0, 1, 2, 0, 1, 0, 2, 1] := by
-  sorry
+-- **The shared pivot is load-bearing, and this is the control easiest to get wrong.** Place the
+-- second rhombus on four *fresh* vertices, keep both forcers and keep the joining edge `(3,7)`, and
+-- the union is 3-colourable after all. Each copy still forces its own pair; what fails is that the
+-- two forced colours are now unrelated.
+example : (edgeGraph 8 [(0,1), (0,2), (1,2), (1,3), (2,3),
+                        (4,5), (4,6), (5,6), (5,7), (6,7), (3,7)]).Colorable 3 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 0, 2, 1], by simp only [edgeGraph_adj]; decide⟩
+
+/-! ### The seams
+
+`p = q` and `φ = ψ` both make `hjoin` a self-loop, which `SimpleGraph` forbids — so the degenerate
+placements are excluded by the model rather than by a hypothesis anybody has to remember. Recorded
+because it is the reason no `p ≠ q` side condition appears above. -/
+example {p : V} (φ : G →g H) : ¬ H.Adj (φ p) (φ p) := SimpleGraph.irrefl H
+
+-- And the model of every hypothesis at once: the Moser spindle instance above inhabits them all, so
+-- nothing here is a theorem about an empty domain.
+example : (edgeGraph 7 moserSpindleEdges).Colorable 4 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 2, 3], by simp only [edgeGraph_adj]; decide⟩
 
 end HadwigerNelson

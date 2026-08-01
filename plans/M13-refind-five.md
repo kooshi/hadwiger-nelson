@@ -208,6 +208,67 @@ theorem not_colorable_of_spindled_forcer {n N k : ℕ}
     (hforce : Forces n k E p q) : ¬ (edgeGraph N F).Colorable k
 ```
 
+### 3.0 What the domain pass changed — and it closed every leaf
+
+The skeleton above stated the closing lemma over **edge lists and `Fin`**, because that is what
+everything else in this repository decides over. The domain pass moved it to **`SimpleGraph` and
+graph homomorphisms**, and that single change turned all eight sorried leaves into transcriptions.
+The module now builds green in 1.8 s with zero `sorry`.
+
+| | skeleton | after the pass |
+|---|---|---|
+| indices carried | `n`, `N`, `k` | `k` only |
+| hypotheses of the closing lemma | 6 | **3** |
+| the proof | not written | **`exact C.valid hjoin ((h.comap φ C).symm.trans (hpiv ▸ h.comap ψ C))`** |
+
+Four decisions, each with what it was weighed against.
+
+* **`Forces` lives at `SimpleGraph`, not at edge lists.** *Alternative:* state it over `Fin n` plus an
+  edge list, matching `Gadget` and everything around it. *Why this won:* the general statement is the
+  easier one — pulling a colouring back along a placement is `SimpleGraph.Coloring.comap`, which
+  Mathlib already has, so the whole argument is three rewrites and no index arithmetic. It also
+  applies to graphs on infinite vertex types, which is the form the plane's own unit-distance graph
+  has; the `Fin`-indexed statement could never reach it. *Confidence: high* — the mutation audit
+  below confirms nothing was lost.
+* **`Forces` is not a `Gadget`.** *Alternative:* reuse the two-port gadget, which already expresses
+  the same fact — `rhombusGadget` **is** the rhombus forcer. *Why this won:* `Gadget` is the
+  computable over-approximation, carrying five indices because *composition* needs them; the closing
+  lemma composes nothing and needs only the proposition. This is the same `Prop`/`Bool` split the
+  repository already runs for `SamePattern`/`samePattern`, with `Forces.of_gadget` as the bridge.
+  *Confidence: high.*
+* **No `Spindle` structure bundling the geometry with the combinatorics.** *Alternative:* one object
+  carrying (forcer, pivot, partner, the two motions, the certificate), so a search's output is a
+  single value. *Why this won:* the closing argument genuinely does not care *why* the partners are
+  an edge — bundling would tie it to `UDCert` and `Pt` and stop it serving `K₅`, Mycielski, or the
+  plane. Geometry and combinatorics meet at exactly one place, "this pair is an edge", and that is
+  intrinsic rather than a convenience of the current pipeline. *Confidence: high.*
+* **The `e.1 ≠ e.2` guard was dropped where `Adj` implies it and kept where it does not.** In the
+  abstract statement `Adj` already carries the disequality, so the guard was a hypothesis the proof
+  never touched; in the list-side `edgeHom` builder nothing implies it, so there it does real work.
+
+**And the field condition stays out of Lean.** Whether a spindle at squared distance `r²` exists is
+`4r²−1` being a square in ℚ(√3,√5,√7,√11) — a fact about *motions*, while the closing lemma needs
+only that the two partner-images are an edge. Deriving the edge from the rotation instead of
+checking it would need a trigonometric identity in the field to save **one** edge at 7.1 ms. Not
+worth it, and the two facts stay independent. *Confidence: high.*
+
+### 3.0.1 The mutation audit, run
+
+Every hypothesis deleted in turn, and the proof must stop compiling:
+
+| mutation | result |
+|---|---|
+| drop `hpiv` (the copies share the pivot) | breaks |
+| drop `hjoin` (the partners are adjacent) | breaks |
+| drop `hforce` (the pair is forced) | breaks |
+| weaken `Forces` from "every colouring agrees" to "some colouring agrees" | cannot be closed |
+
+Seams checked rather than assumed: `p = q` and `φ = ψ` both make `hjoin` a **self-loop**, which
+`SimpleGraph` forbids — so the degenerate placements are excluded by the model itself and no `p ≠ q`
+side condition is needed. `k = 0` and `k = 1` are harmless (the conclusion is true in both). The
+Moser spindle instance inhabits every hypothesis at once, so nothing here quantifies over an empty
+domain.
+
 ### 3.1 Spec — the instance, and the controls that must go red
 
 ```lean
