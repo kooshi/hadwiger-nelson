@@ -10,6 +10,7 @@ import Proofs.HadwigerNelson.Pattern
 import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.AssemblyDiagnose
+import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.Forcer
 import Proofs.HadwigerNelson.ForcerDiagnose
 import Proofs.HadwigerNelson.Fractional

@@ -1,161 +1,264 @@
-# M14 — Seed optimization (carry-forward capture)
+# M14 — Seed optimization: **the fan**
 
-*Opened 2026-08-01, immediately after M13 landed. **Not subplanned** — this is the evidence a
-subplanning session starts from, so nothing here has to be rediscovered.*
+*Subplanned 2026-08-01, immediately after M13 landed a negative result. The carry-forward evidence
+M13 left is § 1; everything from § 0 on was measured during this subplanning session and it changes
+the milestone's shape.*
 
-**The hunt is now M15.** This milestone was inserted ahead of it because M13 measured the
-bottleneck, and it is not the one the roadmap assumed.
-
-> **The search is not compute-bound. It is bound by the choice of seed points — the one part of de
-> Grey's construction he did by hand, and the one nobody has automated.**
+> **M13 searched for a pair of points forced to share a colour, and found none anywhere.
+> de Grey's own construction does not contain one either — until its very last step.
+> What it contains is a *fan*: a point `p` and a handful of points `Q` such that every proper
+> 4-colouring paints `p` the same colour as *at least one* member of `Q`.**
+>
+> **That is the seed property. It is graded, it is cheap to test, and it discriminates de Grey's
+> seed from everything M13 reached — perfectly, in under a second per candidate.**
 
 ---
 
-## 1. The measurement that put this milestone here
+## 0. Measurements — taken before anything was specified
 
-M13's search, desktop, 2026-08-01. Growth arm: build a configuration, orbit it under the hexagonal
-group, spindle it, ask whether any pair of points is forced to share a colour in every
-4-colouring.
+Desktop (32 cores, 125 GB), 2026-08-01. `cadical` from the toolchain; wall clock, single runs
+unless stated, because the discriminating results differ by three orders of magnitude and the
+ranking is not in doubt.
 
-| | |
+### (a) The seed is not the object with the property. Its orbit is.
+
+| | points | unit edges | avg degree |
+|---|---|---|---|
+| de Grey's seed `S` | 39 | **18** | 0.92 |
+| `orbit(S, hex₁₂)` | **397** | **1974** | 9.94 |
+| `spindle(orbit(S), (0,0), (2,0))` | 793 | 3954 | 9.97 |
+
+The 39 seed points are almost edgeless. Nothing is forced in them, and — measured below — they do
+not even carry a disjunctive property. **They are a fundamental domain**: 39 × 12 = 468 images
+under the order-12 hexagonal group, colliding to 397 on the symmetry axes.
+
+**Consequence for the search.** "Choose 39 seed points" is the wrong frame. de Grey chose a
+*symmetric 397-point configuration*; the 39 points are its quotient, and the compression ratio is
+10×. A search over seeds is a search over symmetric configurations, and the symmetry is the only
+reason a 400-point object can be named in 39 points.
+
+### (b) The property: a **fan** — measured at the origin of `orbit(S, hex₁₂)`
+
+Every rational distance class from the origin was tested. "Fan" means: no proper 4-colouring gives
+the origin a colour different from *all* the listed partners.
+
+| `r²` from the origin | partners | spindle-able | every 4-colouring agrees with one? |
+|---|---|---|---|
+| 1/9 | 6 | no | no |
+| 1/3 | 18 | yes | no |
+| 5/9 | 12 | yes | no |
+| 4/3 | 18 | no | no |
+| 5/3 | 24 | no | no |
+| 3 | 6 | yes | no |
+| **4** | **6** | **yes** (radicand 15 = 3·5) | **YES — this is the fan** |
+
+> **In de Grey's 397-point configuration, every proper 4-colouring paints the origin the same
+> colour as at least one of *three* points at distance 2 from it.**
+
+Exactly one distance class carries it, and it is a spindle-able one. Cost to find: 10.1 s for the
+deciding call, 0.4 s for each of the six refutations.
+
+Six partners is the distance class; **three of them suffice**, and the certifying shrink (drop one,
+re-decide, keep the drop only if it still holds) earns that number in 57 s. The same width 3 appears
+at pivot #2 — so it is the configuration's width, not one pivot's accident.
+
+### (c) The property discriminates — perfectly, and 85× cheaper than M13's oracle
+
+The narrowest single-distance-class fan, over pivots and over every spindle-able class:
+
+| configuration | points | edges | narrowest fan | time |
+|---|---|---|---|---|
+| M13 universe | 7 | 12 | **none at any pivot or class** | 0.0 s |
+| M13 universe | 13 | 24 | **none** | 0.1 s |
+| M13 universe | 19 | 42 | **none** | 0.2 s |
+| M13 universe | 43 | 108 | **none** | 0.6 s |
+| `orbit(S, hex₁₂)` | 397 | 1974 | **width 3**, pivot #2, `r² = 4` | 29 s |
+
+**Nothing M13 searched has a fan at all.** Not a narrow one — none, at any pivot, at any
+spindle-able distance. They are not "close to forcing and short of it"; they are infinitely far
+away, and the fan test says so in 0.6 s where M13's forced-pair sweep spent **51 s per universe** to
+report a bare "nothing".
+
+### (d) M13's oracle tested for fan width **one**, and could not have seen de Grey's construction
+
+`backbone(p)` returns `{q : every 4-colouring gives c(p) = c(q)}` — the width-1 case. Measured: the
+7-point hexagonal patch that opens de Grey's argument has **no width-1 fan at any of its 7 pivots**,
+and neither does `orbit(S, hex₁₂)` at the origin until after the spindle. So the instrument was not
+merely unlucky on the space it walked; **it was blind to the property de Grey's own building block
+has.** The generalisation from "one partner" to "a few partners" is the milestone.
+
+### (e) A graded objective *does* exist — M13's stub said it did not, and that was wrong
+
+M13's stub recorded "there is no graded objective … every configuration short of the answer scores
+zero". Two objectives were measured this session, and both are real-valued and monotone:
+
+* **Free hitting number** — the fewest pairs `L` (not sharing a pivot) such that every 4-colouring
+  makes one of them monochromatic. Computed exactly by implicit hitting set: an outer exact
+  minimum-hitting-set over sampled colourings, an inner SAT call per round.
+
+  | configuration | points | minimum |
+  |---|---|---|
+  | rhombus | 4 | none exists |
+  | hexagonal patch | 7 | **3** |
+  | M13 universe | 13 | 3 |
+  | M13 universe | 19 | 3 |
+  | M13 universe | 43 | 3 |
+
+  Finite, exact, 0.1–0.6 s — **and flat at 3 across the entire reachable space**, so it grades
+  without guiding. Recorded because it is cheap and because "the objective is flat here" is itself
+  the result.
+
+* **Fan width** — § (c). Discriminates. This is the one to search on.
+
+**A greedy hitting set is not the minimum and must not be reported as one.** Greedy plus a
+one-at-a-time shrink returns an *irreducible* set, and it returned 3 for the 793-point configuration
+that is *known* to force a pair — where the true minimum is 1. The implicit-hitting-set loop above
+is the exact computation; the greedy number is a bound and will be labelled as one.
+
+### (f) The field is *derived* from the fan's distance, not chosen
+
+`field.py` already records that ℚ(√3,√5,√7,√11) holds the spindle radicals of `r² = 1, 3/2, 2, 3`.
+The stronger statement the fan supplies:
+
+| where it comes from | `r²` | radicand `4r²−1` | contributes |
+|---|---|---|---|
+| the unit triangular lattice | — | — | √3 |
+| the fan's own distance | 4 | 15 = 3·5 | **√5** |
+| the distance the patch also admits | 3 | 11 | **√11** |
+| de Grey's closing spindle | 16 | 63 = 9·7 | **√7** |
+
+So all four square roots are accounted for by the lattice plus three spindle distances, two of which
+are exactly the distances the hexagonal patch can be monochromatic at. **The field is not a modelling
+choice; it is what the fan forces.** A search that changes the fan's distance changes the field, and
+`field.py`'s `missing_root` already names the cost.
+
+### (g) The fractional route is measured dead as a gradient — do not re-propose it
+
+M10 § 0(a): every 5-chromatic witness in this repository is *worse* for the fractional chromatic
+number than the 7-vertex Moser spindle, because big-and-sparse is good for χ and bad for the
+independence ratio. Independence ratio and χ are different objectives, and this was settled with
+numbers a milestone ago.
+
+### (h) The oracle agrees with the kernel — five controls, watched
+
+The fan oracle is cross-checked against the one fan this repository has already proved
+(`rhombus_forces`, by `decide +kernel`, no solver involved) and against its committed 4-colour
+countermodel.
+
+| control | wanted | got |
+|---|---|---|
+| rhombus, 3 colours, far pair | fan | fan |
+| rhombus, **4** colours, far pair | no | no |
+| rhombus, 3 colours, an adjacent partner | no | no |
+| rhombus, 3 colours, empty fan | no (it *is* 3-colourable) | no |
+| rhombus, **2** colours, empty fan | fan (not 2-colourable) | fan |
+
+Two miswritten controls were caught by this table before any of it was believed: one asked about an
+edge rather than the far pair (the tool and Lean number the rhombus differently), and one passed the
+same colour count on both rows so the 4-colour case was never actually run. **Both looked like tool
+bugs and were script bugs** — which is the argument for running the negative control rather than
+asserting it.
+
+---
+
+## 1. What M13 left (carried forward unchanged)
+
+M13's search: 33 universes, 7 to 679 points, 51 s each, **0 forced pairs, 0 pivots unsettled** —
+real negatives, not timeouts. Branching factor **378** spindle moves from one 43-point
+configuration, so depth 2 is 84 CPU-days and depth 3 about 87 CPU-years. All 39 of de Grey's seed
+points are irredundant (39/39, 46 s). **A 256-core request was considered and declined on this
+evidence**, and § 0(c) is why that was right: the missing thing was never compute.
+
+de Grey's construction is exactly four primitive moves, verified by exact point-set equality:
+`spindle(delete₂(spindle(orbit(S, hex₁₂), (0,0), (2,0))), (−2,0), (2,0))`. Note the third argument:
+**his first spindle is at `r² = 4`, which is the fan's distance measured in § 0(b).** The
+construction and the property agree, and nothing here had to assume that.
+
+---
+
+## 2. The shape — Lean
+
+`Proofs/HadwigerNelson/Forcer.lean` states `Forces G k p q := ∀ C : G.Coloring (Fin k), C p = C q`.
+The generalisation is one list:
+
+```lean
+/-- Every proper `k`-colouring makes at least one listed pair monochromatic. -/
+def ForcesSome (G : SimpleGraph V) (k : ℕ) (L : List (V × V)) : Prop :=
+  ∀ C : G.Coloring (Fin k), ∃ e ∈ L, C e.1 = C e.2
+```
+
+Two boundary readings, and both are the point:
+
+* `ForcesSome G k [(p, q)] ↔ Forces G k p q` — M13's whole module is the singleton rung.
+* `ForcesSome G k [] ↔ ¬ G.Colorable k` — the empty list *is* the theorem, with no spindle needed.
+
+So `|L|` is a descent measure from a finite start to zero, and every rung between is a statement
+this repository could not previously write down. The ladder to state:
+
+| statement | what it is |
 |---|---|
-| universes examined | **33**, from 7 to 679 points |
-| oracle cost | **51 s per universe** (one backbone per pivot) |
-| forced pairs found | **0** |
-| pivots left unsettled | **0** — so these are real negatives, not timeouts |
-| branching factor | **378 spindle moves from one 43-point configuration** |
+| `ForcesSome.of_unsat` | the producer — a SAT certificate, as `Forces.of_unsat` already is |
+| `ForcesSome.narrow` | drop a pair no colouring can make monochromatic — **the descent step** |
+| `ForcesSome.mono`, `.comap`, `.map` | more edges, placements, symmetries — as at M13 |
+| `not_colorable_of_forcesSome_nil` | `|L| = 0` closes with no spindle |
+| `Forces.of_forcesSome_singleton` | `|L| = 1` hands back to `not_colorable_of_spindled_forcer` |
 
-**Two independent reasons this does not converge, and neither is fixed by hardware.**
+The **fan** is the shape the search actually computes, and it is `ForcesSome` with a shared pivot:
 
-**(a) The target is unreachable.** de Grey's construction begins at **39 hand-chosen points**. The
-growth moves — orbit, spindle, union — only ever *add* points, so they produce orbit closures and
-never a hand-chosen subset. The one subtractive move, `delete`, belongs to the shrinker, which needs
-a forcer to start from. So his seed set is not slow to find; it is **not in the reachable set at
-all**.
+```lean
+/-- Every proper `k`-colouring paints `p` like some member of `Q`. -/
+def Fan (G : SimpleGraph V) (k : ℕ) (p : V) (Q : List V) : Prop :=
+  ForcesSome G k (Q.map (fun q => (p, q)))
+```
 
-**(b) The rate is not close either.** At branching 378, depth 2 is 142,884 nodes ≈ **84 CPU-days**
-(we sampled 33 — 0.02%), and depth 3 is 54 million nodes ≈ **87 CPU-years**.
+**Open for the domain-modeling pass:** whether `Fan` should be the primitive and `ForcesSome` the
+derived notion, given that every measurement in § 0 is a fan and the free version is flat (§ 0(e)).
+The case for `ForcesSome` as primitive is the two boundary readings above; the case for `Fan` is
+that it is what is true. Decide it there, not here.
 
-**And there is no gradient to climb toward a good seed set**: all 39 of de Grey's seed points are
-irredundant, measured — drop any one and the forcing dies, 39 of 39 in 46 s. Every proper subset of
-the answer scores exactly zero, so the objective is flat everywhere except at the answer.
+**The skeleton is `Proofs/HadwigerNelson/Fan.lean`** — every signature and full statement, `sorry`
+at 16 leaves, elaborating clean. It carries six specification examples, three of them countermodels
+(a fan over an adjacent partner, an empty fan on a graph that *is* 3-colourable, and the same fan at
+four colours) so a definition that drifted toward something vacuous would pass the positives and
+fail every negative.
 
-**A hardware request was considered and declined on this evidence.** Scaling to the 256-core server
-would buy 8× against a target the move set cannot express. Recorded because the standing instruction
-is to ask for what the work needs, and this is the measurement that says compute is not it.
+## 3. The shape — tools
 
----
+`tools/forcer.py` gains the fan, and `forces` becomes its width-1 special case:
 
-## 2. What this milestone is
+* `fan(n, edges, p, Q, k, timeout)` → `FAN` / `SEPARATED` / `UNKNOWN`, three outcomes, the third
+  never folded — the existing rule.
+* `narrowest_fan(cfg, k, pivots, timeout)` → `(pivot, r², width)` or `None`, searching one distance
+  class at a time and keeping the narrowest. This is the seed-quality score of § 0(c).
+* `shrink_fan` — certifying, one partner at a time, so "width" is earned rather than reported.
+* **The separating colouring stops being discarded.** `forces()` currently returns `separated`
+  without the colouring; the fan loop needs it, and returning it is the change the M13 stub already
+  identified as the cheapest one available.
 
-**Solve for a seed set instead of enumerating seed sets.** The win condition is already a
-statement with two quantifiers:
+## 4. Scope
 
-> ∃ a finite point set `C` and points `p, q ∈ C` such that ∀ proper `k`-colourings of `C`,
-> `C` gives `p` and `q` the same colour — and `4·|pq|² − 1` is a square in ℚ(√3,√5,√7,√11).
+**In.** The ladder in Lean (§ 2), with M13's theorem re-derived as its `|L| = 1` rung. The fan
+oracle and its controls in the tool (§ 3). de Grey's fan — § 0(b) — as a *certified* Lean statement
+if the certificate is affordable at 397 points and 4 colours; the cost model puts a 553-point
+4-colour certificate at 37.4 CPU s of solving and ≈40 min of kernel time, so this is expected to be
+affordable and will be measured before it is promised.
 
-That is a **∃∀ problem**, not a tree search, and enumerate-and-test is the worst possible algorithm
-for one. The shapes worth trying, in the order they should be measured:
+**Out.** χ ≥ 6 — that is M15. Finding a *new* seed is attempted with the fan score and reported
+honestly either way; the milestone does not depend on it succeeding.
 
-1. **CEGAR / counterexample-guided refinement.** Start from a candidate set; ask the oracle; a
-   `separated` answer returns a *witness colouring* that separates `p` from `q`. That witness is
-   information the current search throws away — it says exactly which colouring must be killed, and
-   the points that would kill it are the ones to add. This is the single cheapest change and it
-   turns a blind walk into a guided one.
-2. **QBF, or a 2-level SAT encoding** over a fixed candidate universe: choose a subset of a rich
-   point set such that every 4-colouring of the subset agrees at `p` and `q`. Bounded, complete over
-   that universe, and it answers "no such subset exists here" — which enumerate-and-test never can.
-3. **Local search over subsets of a rich universe**, with the forcing margin as an objective rather
-   than the binary answer. Needs a *graded* objective, which § 4 flags as the open problem.
+## 5. Honest risks
 
----
-
-## 3. What is already built and needs no rebuilding
-
-**Lean** — `Proofs/HadwigerNelson/Forcer.lean`, all proved, axioms exactly the standard three:
-
-* `Forces G k p q` — the win condition, over any graph and any colour count.
-* `not_colorable_of_spindled_forcer` — **a forced pair plus a spindle is a rung.** Whatever M14
-  finds is cashed through this and nothing else has to be re-argued.
-* `not_colorable_spindleEdges` — the same where the graph is *constructed*, so no placement is
-  searched for and the joining edge is free by construction.
-* `Forces.of_edges` (exhaustion, `by decide +kernel`), **`Forces.of_unsat` (a SAT certificate
-  directly — the producer at scale, and the one that works at four and five colours)**,
-  `Forces.of_gadget` (through the gadget algebra).
-* `Forces.mono` (more edges force more), `Forces.comap`, `Forces.map` (a symmetry carries a forced
-  pair to a forced pair — one pivot per orbit is enough, on a configuration that *is* symmetric).
-* `ForcerDiagnose` — which side condition refused a candidate, in the user's vocabulary.
-
-**Tools** — `construct.py` (seed, spindle, **orbit**, **delete**, `index_of`, and
-`degrey_from_primitives`, which rebuilds his 1581 points from 39 seeds and matches the committed
-table exactly) · `forcer.py` (`forces` with three outcomes, `backbone` carrying `unknown` as a set,
-`shrink` that earns the word "irredundant") · `field.py` · `profile.py` · `scan.py` · `minimise.py`
-· `shrink.py` · `emit_mask.py`.
-
----
-
-## 4. The open problems, named
-
-* **There is no graded objective.** "Is this pair forced?" is a yes/no, and every configuration
-  short of the answer scores zero. Local search needs a real-valued signal — *how close* is this set
-  to forcing? Candidates worth measuring: the number of colourings that separate the pair (model
-  counting, expensive), the size of the smallest set of separating colourings that would have to be
-  killed, or the fraction of port patterns already refuted. **Measure one before designing around
-  it.**
-* **The witness colouring is currently discarded.** `forces()` returns `separated` without the
-  colouring that separates. Returning it is a small change and it is the input CEGAR needs.
-* **The universe must contain a forcer or nothing can be found in it.** M13 measured that the tool's
-  own seeds — unit edge, triangle, rhombus — all live in the unit triangular lattice, whose
-  hexagonal orbit is a single 7-point patch, and that the `r² = 1` spindle is a 60° rotation that
-  patch is already closed under. **Spindling first is what leaves the lattice.** Any universe
-  construction has to do that deliberately.
-* **How tight must a configuration be before it forces anything?** Unmeasured at four colours from
-  below; de Grey's answer from above is 793 points. The M13 shrink of his own forcer was **killed by
-  request before it reported**, so this number is still open and it is cheap to get.
-
----
-
-## 5. The cost model
-
-Desktop (32 cores, 125 GB). Everything a subplanning session should reason from.
-
-| quantity | value |
-|---|---|
-| forcing oracle, loose configuration (≤ 400 points) | 0.1–0.5 s |
-| forcing oracle, one universe in the M13 search (≤ 679 points) | **51 s** |
-| forcing oracle, tight 791-point configuration | 32 s one pair · 112 s full backbone |
-| reject a candidate (find a 5-colouring), 553 points | 0.02 CPU s |
-| certify one at four colours, 553 points | 37.4 CPU s → **1,104,106 kernel steps ≈ 40 min** |
-| certify de Grey's 1581 points | 34,169,571 steps → **27.8 h**, 2,265 modules |
-| branching factor, 43-point configuration | 378 spindle moves |
-| kernel, per propagation step | ~1.35 ms projected; 1.4–2.9 ms with elaboration |
-| emitted literal coordinates | 7.1 ms per edge |
-| **computed** coordinates by `decide` | 0.33 CPU s per edge — 47× worse |
-| computed coordinates through `Assembly` | **free** |
-| terminal check, interface vertices at five colours | 10 (86,472 partitions, 257 s) |
-
-**Looking is nearly free; certifying is hours.** That asymmetry is not the bottleneck and never was.
-
----
-
-## 6. Explicitly *not* in this milestone
-
-**χ ≥ 6.** That is M15. M14 ends when a seed set is found by search rather than by hand — or when
-the ∃∀ formulation is measured intractable at the sizes that matter, and that is reported.
-
----
-
-## 7. Honest risks
-
-* **Seed optimization may be the hard part of the whole problem.** de Grey found his 39 points by
-  insight. If the ∃∀ search is intractable at 100+ points, this milestone reports that and rung D
-  needs a different idea rather than a bigger machine.
-* **A graded objective may not exist.** If forcing really is a cliff — nothing, nothing, nothing,
-  then everything — then local search cannot work in principle and only complete methods (QBF,
-  exhaustive subset search over a bounded universe) are left. § 4's first item decides this.
-* **Extending the field doubles every coordinate.** `field.py`'s `missing_root` names the root a
-  refused spindle would need; adjoining one doubles the tower and every coordinate with it.
+* **A fan may not narrow under any move we have.** § 0 establishes the property and the score; it
+  does not establish that the score *descends* under orbit/spindle/union. The descent is being
+  measured on de Grey's own two-step construction as this is written, and if it does not descend
+  there, the score ranks candidates without generating them — still worth having, and reported as
+  that.
+* **The fan test is one SAT call per distance class per pivot.** Cheap at 43 points (0.6 s for the
+  whole sweep), 29 s at 397, and it will not stay cheap. Orbit symmetry cuts pivots by up to 12× and
+  is not yet exploited; `Forces.map` is the theorem that licenses it.
+* **Width 3 is not width 1.** de Grey needed a further spindle *and* his hand-chosen 39 points to
+  close the gap. Nothing measured here says the last step is easy.
 * **Refutation cost is not monotone in graph size** (M07), and at five colours instances of the same
-  size varied by two orders of magnitude (M12). "Smaller" is not "cheaper".
-* **Symmetry carries no colouring information.** A rotationally symmetric unit-distance graph need
-  not be hard to colour. Symmetry can **promote** a candidate and can never **reject** one.
+  size varied by two orders of magnitude (M12). Carried forward; still true.
+* **Symmetry carries no colouring information.** A symmetric unit-distance graph need not be hard to
+  colour; symmetry can promote a candidate and can never reject one. Carried forward.
