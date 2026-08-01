@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Fan
 import Mathlib.Combinatorics.SimpleGraph.DeleteEdges
+import Mathlib.Logic.Equiv.Fin.Basic
 
 /-! # What a fan actually is: one removable vertex
 
@@ -91,7 +92,26 @@ spare one.
 No hypothesis on `k`, and none on `V` — this is the half the hunt calls, and it must stay free. -/
 theorem exists_isolating_of_colorable_delete {p : V} (h : (G.deleteIncidenceSet p).Colorable k) :
     ∃ C : G.Coloring (Fin (k + 1)), ∀ q, q ≠ p → C p ≠ C q := by
-  sorry
+  classical
+  obtain ⟨D⟩ := h
+  refine ⟨SimpleGraph.Coloring.mk (fun v => if v = p then Fin.last k else (D v).castSucc) ?_, ?_⟩
+  · intro a b hab
+    by_cases ha : a = p
+    · subst ha
+      simp only [if_neg (G.ne_of_adj hab).symm]
+      exact ((Fin.castSucc_lt_last (D b)).ne').symm ∘ Eq.symm
+    · by_cases hb : b = p
+      · subst hb
+        simp only [if_neg ha]
+        exact (Fin.castSucc_lt_last (D a)).ne
+      · simp only [if_neg ha, if_neg hb]
+        exact fun hc => D.valid (by rw [deleteIncidenceSet_adj]; exact ⟨hab, ha, hb⟩)
+          (Fin.castSucc_injective _ hc)
+  · intro q hq
+    show (if p = p then Fin.last k else (D p).castSucc)
+        ≠ (if q = p then Fin.last k else (D q).castSucc)
+    rw [if_pos rfl, if_neg hq]
+    exact (Fin.castSucc_lt_last (D q)).ne'
 
 /-- **The compression.** A `(k+1)`-colouring of `G` that gives `p` a colour nobody else has is a
 `k`-colouring of `G` minus `p`'s edges: delete that colour and renumber.
@@ -102,7 +122,22 @@ vertex type. The spare colour has to exist for there to be anything left after r
 theorem colorable_delete_of_exists_isolating {p : V} (hk : 0 < k)
     (h : ∃ C : G.Coloring (Fin (k + 1)), ∀ q, q ≠ p → C p ≠ C q) :
     (G.deleteIncidenceSet p).Colorable k := by
-  sorry
+  obtain ⟨C, hC⟩ := h
+  have key : ∀ v, v ≠ p → ∃ x : Fin k, finSuccEquiv' (C p) (C v) = some x := by
+    intro v hv
+    cases hx : finSuccEquiv' (C p) (C v) with
+    | none => exact absurd ((finSuccEquiv' (C p)).injective (hx.trans (finSuccEquiv'_at _).symm))
+                (hC v hv).symm
+    | some x => exact ⟨x, rfl⟩
+  refine ⟨SimpleGraph.Coloring.mk (fun v => ((finSuccEquiv' (C p)) (C v)).getD ⟨0, hk⟩) ?_⟩
+  intro a b hab
+  rw [deleteIncidenceSet_adj] at hab
+  obtain ⟨hadj, ha, hb⟩ := hab
+  obtain ⟨x, hx⟩ := key a ha
+  obtain ⟨y, hy⟩ := key b hb
+  simp only [hx, hy, Option.getD_some]
+  rintro rfl
+  exact C.valid hadj ((finSuccEquiv' (C p)).injective (hx.trans hy.symm))
 
 /-- **The correspondence**, as one statement: `G` minus `p`'s edges takes `k` colours exactly when
 some `(k+1)`-colouring of `G` leaves `p` alone in its colour class. -/
@@ -146,12 +181,36 @@ everything is only listable when there is finitely much of it. -/
 theorem fan_univ_of_not_colorable_delete [Fintype V] [DecidableEq V] {p : V} (hk : 0 < k)
     (h : ¬ (G.deleteIncidenceSet p).Colorable k) :
     Fan G (k + 1) p (Finset.univ.erase p).toList := by
-  sorry
+  intro C
+  by_contra hc
+  push Not at hc
+  exact h (colorable_delete_of_exists_isolating hk
+    ⟨C, fun q hq => hc q (Finset.mem_toList.mpr (Finset.mem_erase.mpr ⟨hq, Finset.mem_univ q⟩))⟩)
 
 /-- **The identity.** A fan sits at `p` exactly when `p` is removable. -/
 theorem fan_univ_iff [Fintype V] [DecidableEq V] {p : V} (hk : 0 < k) :
     Fan G (k + 1) p (Finset.univ.erase p).toList ↔ ¬ (G.deleteIncidenceSet p).Colorable k :=
   ⟨fun h hc => not_fan_of_colorable_delete (by simp) hc h, fan_univ_of_not_colorable_delete hk⟩
+
+/-- **Deleting a vertex's edges from an edge-list graph is filtering the list.**
+
+The reasoning surface `deleteIncidenceSet` needs here: without it, every negative claim about a
+deleted graph would be stranded outside the `not_colorable_edgeGraph_iff` route that `decide
++kernel` already travels. Both orientations of each edge are handled, because `edgeGraph`'s
+adjacency reads the list either way round — the seam M14 was bitten by. -/
+theorem delete_edgeGraph {n : ℕ} (E : List (Fin n × Fin n)) (p : Fin n) :
+    (edgeGraph n E).deleteIncidenceSet p
+      = edgeGraph n (E.filter fun e => e.1 != p && e.2 != p) := by
+  ext a b
+  simp only [deleteIncidenceSet_adj, edgeGraph_adj, List.mem_filter, bne_iff_ne, ne_eq,
+    Bool.and_eq_true]
+  constructor
+  · rintro ⟨⟨hne, hab | hba⟩, ha, hb⟩
+    · exact ⟨hne, Or.inl ⟨hab, ha, hb⟩⟩
+    · exact ⟨hne, Or.inr ⟨hba, hb, ha⟩⟩
+  · rintro ⟨hne, ⟨hab, ha, hb⟩ | ⟨hba, hb, ha⟩⟩
+    · exact ⟨⟨hne, Or.inl hab⟩, ha, hb⟩
+    · exact ⟨⟨hne, Or.inr hba⟩, ha, hb⟩
 
 /-! ## Certifying the negative
 
@@ -183,7 +242,27 @@ def properOffPivot {n : ℕ} (E : List (Fin n × Fin n)) (bits k c p : ℕ) : Bo
 theorem colorable_delete_of_packed {n : ℕ} {E : List (Fin n × Fin n)} {bits k c : ℕ} {p : Fin n}
     (hk : 0 < k) (h : properOffPivot E bits k c p.val = true) :
     ((edgeGraph n E).deleteIncidenceSet p).Colorable k := by
-  sorry
+  rw [properOffPivot, List.all_eq_true] at h
+  refine ⟨SimpleGraph.Coloring.mk (fun v => ⟨unpackColor bits k c v.val, Nat.mod_lt _ hk⟩) ?_⟩
+  intro a b hab
+  rw [deleteIncidenceSet_adj, edgeGraph_adj] at hab
+  obtain ⟨⟨_, hmem⟩, ha, hb⟩ := hab
+  have hav : a.val ≠ p.val := fun hc => ha (Fin.val_injective hc)
+  have hbv : b.val ≠ p.val := fun hc => hb (Fin.val_injective hc)
+  have key : ∀ {i j : Fin n}, (i, j) ∈ E → i.val ≠ p.val → j.val ≠ p.val →
+      unpackColor bits k c i.val ≠ unpackColor bits k c j.val := by
+    intro i j hij hi hj
+    have hrow := h _ hij
+    simp only [Bool.or_eq_true, beq_iff_eq, bne_iff_ne, ne_eq] at hrow
+    rcases hrow with (hc | hc) | hc
+    · exact absurd hc hi
+    · exact absurd hc hj
+    · exact hc
+  intro hc
+  have hc' : unpackColor bits k c a.val = unpackColor bits k c b.val := congrArg Fin.val hc
+  rcases hmem with hij | hji
+  · exact key hij hav hbv hc'
+  · exact key hji hbv hav hc'.symm
 
 /-- **Every vertex removable**, from one packed colouring each, in vertex order.
 
@@ -193,13 +272,31 @@ per access (M04), whereas `zipIdx` and `all` walk a literal `List` once. The len
 the `Vector` would have carried — without it a short list certifies a prefix while the theorem
 quantifies over all of `Fin n`, and the data arrives from an untrusted emitter that must be checked
 rather than believed. -/
+def criticalFrom {n : ℕ} (E : List (Fin n × Fin n)) (bits k start : ℕ) (cs : List ℕ) : Bool :=
+  (cs.zipIdx start).all fun cp => properOffPivot E bits k cp.1 cp.2
+
+/-- **The chunk law**: a run of rows splits wherever the list does, with the offset carried.
+
+Not a convenience. One `decide +kernel` over all 510 rows of Heule's witness was measured to peak
+at **41.7 GB** — with the edge list stored as a literal *and* as the committed chunked one, so the
+cost is the run length and nothing else. Rows have to be checked a chunk at a time, in separate
+modules, and this is the lemma that lets the chunks add up. -/
+theorem criticalFrom_append {n : ℕ} {E : List (Fin n × Fin n)} {bits k start : ℕ} {c d : List ℕ} :
+    criticalFrom E bits k start (c ++ d)
+      = (criticalFrom E bits k start c && criticalFrom E bits k (start + c.length) d) := by
+  simp only [criticalFrom, List.zipIdx_append, List.all_append]
+
 def everyVertexCritical {n : ℕ} (E : List (Fin n × Fin n)) (bits k : ℕ) (cs : List ℕ) : Bool :=
-  cs.length == n && cs.zipIdx.all fun cp => properOffPivot E bits k cp.1 cp.2
+  cs.length == n && criticalFrom E bits k 0 cs
 
 theorem forall_colorable_delete_of_packed {n : ℕ} {E : List (Fin n × Fin n)} {bits k : ℕ}
     {cs : List ℕ} (hk : 0 < k) (h : everyVertexCritical E bits k cs = true) (p : Fin n) :
     ((edgeGraph n E).deleteIncidenceSet p).Colorable k := by
-  sorry
+  rw [everyVertexCritical, criticalFrom, Bool.and_eq_true, beq_iff_eq, List.all_eq_true] at h
+  obtain ⟨hlen, hall⟩ := h
+  have hp : p.val < cs.length := hlen ▸ p.isLt
+  exact colorable_delete_of_packed hk (hall (cs[p.val], p.val)
+    (List.mk_mem_zipIdx_iff_getElem?.mpr (List.getElem?_eq_getElem hp)))
 
 /-- **No fan anywhere in this graph, at any pivot, at any width** — the form the hunt consumes,
 and the only statement in this module a search calls directly. -/
@@ -221,45 +318,70 @@ hypotheses, without which every theorem about removable vertices is a statement 
 def triangleAndPoint : List (Fin 4 × Fin 4) := [(0, 1), (0, 2), (1, 2)]
 
 example : ¬ ((edgeGraph 4 triangleAndPoint).deleteIncidenceSet 3).Colorable 2 := by
-  sorry
+  rw [delete_edgeGraph, not_colorable_edgeGraph_iff]; decide +kernel
 
-example : Fan (edgeGraph 4 triangleAndPoint) 3 3 [0, 1, 2] := by
-  sorry
+/-- The fan itself, by **M14's own oracle** rather than by this module — so the identity's two
+sides are established by two routes that share no lemma, which is the cheapest independent check
+available on this side of the boundary. -/
+example : Fan (edgeGraph 4 triangleAndPoint) 3 3 [0, 1, 2] := Fan.of_edges (by decide +kernel)
 
 /-- Vertex 1 of the rhombus is **not** removable: deleting its edges leaves a path, which two
 colours suffice for. So no fan sits at pivot 1, at any width — the countermodel. -/
 example : ((edgeGraph 4 rhombus).deleteIncidenceSet 1).Colorable 2 := by
-  sorry
+  rw [delete_edgeGraph]
+  exact colorable_iff_exists.mpr ⟨![0, 0, 1, 0], by simp only [edgeGraph_adj]; decide⟩
 
-example : ¬ Fan (edgeGraph 4 rhombus) 3 1 [0, 2, 3] := by
-  sorry
+example : ¬ Fan (edgeGraph 4 rhombus) 3 1 [0, 2, 3] :=
+  not_fan_of_colorable_delete (by decide) (by
+    rw [delete_edgeGraph]
+    exact colorable_iff_exists.mpr ⟨![0, 0, 1, 0], by simp only [edgeGraph_adj]; decide⟩)
 
 /-- Pivot 0 of the rhombus **is** removable, and M14 committed the width-one fan there. -/
 example : ¬ ((edgeGraph 4 rhombus).deleteIncidenceSet 0).Colorable 2 := by
-  sorry
+  rw [delete_edgeGraph, not_colorable_edgeGraph_iff]; decide +kernel
 
 /-- M14's width-two witness, read through this module: pivot 3 of `pendantTriangle` is removable. -/
 example : ¬ ((edgeGraph 4 pendantTriangle).deleteIncidenceSet 3).Colorable 2 := by
-  sorry
+  rw [delete_edgeGraph, not_colorable_edgeGraph_iff]; decide +kernel
+
+/-- **The compression's `0 < k` is not a technicality: without it the statement is false.** On the
+one-point graph with no edges, at `k = 0`, the hypothesis holds vacuously — there is no `q ≠ p` to
+clash with — and the conclusion demands a colouring into the empty colour type. Exhibited rather
+than argued, because a side condition nobody can break is a side condition nobody can check. -/
+example : ∃ C : (⊥ : SimpleGraph (Fin 1)).Coloring (Fin 1), ∀ q, q ≠ 0 → C 0 ≠ C q :=
+  ⟨SimpleGraph.Coloring.mk (fun _ => 0) (by simp), fun q hq => absurd (Subsingleton.elim q 0) hq⟩
+
+example : ¬ ((⊥ : SimpleGraph (Fin 1)).deleteIncidenceSet 0).Colorable 0 := by
+  rw [SimpleGraph.colorable_zero_iff]
+  exact fun h => h.elim 0
 
 /-! ### The packed certificate, on a graph small enough to read
 
 `rhombus` is `[(0,1), (0,2), (1,2), (1,3), (2,3)]`. Two bits per vertex, two colours. Pivot 1's
 colouring is `0 ↦ 0, 1 ↦ 0, 2 ↦ 1, 3 ↦ 0`, packed low-bits-first as `0 + 0·4 + 1·16 + 0·64 = 16`. -/
 
-example : properOffPivot rhombus 2 2 16 1 = true := by sorry
+/-- **The decode is not the bound**, and this is the check that separates them. At three colours
+vertex 0's field is `16 % 4 = 0`; a reader that only reduced modulo `k` would take the whole number
+and report `16 % 3 = 1`. The rhombus checks below cannot see that difference — at two colours the
+leaked bits happen not to change any answer — so without this line dropping `% 2 ^ bits` leaves the
+whole module green, which is a check that could not fail. -/
+example : unpackColor 2 3 16 0 = 0 := by decide
+
+example : properOffPivot rhombus 2 2 16 1 = true := by decide
 
 /-- The same colouring against the wrong pivot: edge `(1,3)` is monochromatic and is no longer
 skipped, so the check fails. A certificate filed against the wrong problem is refused. -/
-example : properOffPivot rhombus 2 2 16 0 = false := by sorry
+example : properOffPivot rhombus 2 2 16 0 = false := by decide
 
 /-- One colouring cannot serve every pivot, so the whole-graph check refuses a repeated row. The
 rhombus is not vertex-critical at two colours and no certificate for it exists. -/
-example : everyVertexCritical rhombus 2 2 [16, 16, 16, 16] = false := by sorry
+example : everyVertexCritical rhombus 2 2 [16, 16, 16, 16] = false := by decide
 
-/-- And the colouring really does refute every fan at pivot 1. -/
+/-- And the packed certificate really does refute every fan at pivot 1 — the same fact as the
+countermodel above, reached through the machinery the emitted data will travel rather than by a
+hand-built colouring. Two routes, one answer. -/
 example : ¬ Fan (edgeGraph 4 rhombus) 3 1 [0, 2, 3] :=
-  not_fan_of_colorable_delete (by sorry)
-    (colorable_delete_of_packed (bits := 2) (k := 2) (c := 16) (p := 1) (by norm_num) (by sorry))
+  not_fan_of_colorable_delete (by decide)
+    (colorable_delete_of_packed (bits := 2) (k := 2) (c := 16) (p := 1) (by norm_num) (by decide))
 
 end HadwigerNelson

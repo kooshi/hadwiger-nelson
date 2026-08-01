@@ -301,6 +301,116 @@ vertex to colour 0, so the check passes only for stars — sound. `n = 0` is vac
 trivially and its conclusion is true. No adversarial member found: `properOffPivot` passing *is*
 `k`-colourability of the deleted graph, with no gap between them.
 
+## 3.0.1 The obligation pass — what it changed
+
+Run against the skeleton at commit `2e3205f`. **The module is now proved: zero `sorry`, zero
+errors.** Six findings.
+
+### Both predicted traps were already solved in the libraries
+
+The pass opened by naming two obligations it expected to be hard, and both dissolved on a grep:
+
+* **Renumbering `Fin (k+1)` minus a point into `Fin k`** looked like `if c < C p then c else c - 1`
+  — truncated subtraction on a value known to be nonzero, the junk-value shape this project treats
+  as a modelling failure. **`Mathlib.Logic.Equiv.Fin.Basic` has `finSuccEquiv' (i : Fin (n+1)) :
+  Fin (n+1) ≃ Option (Fin n)`**, which removes a designated point and reports the removal as
+  `none`. The compression is nine lines with no arithmetic in it at all.
+* **Getting from a `zipIdx`-indexed `List.all` to `∀ p : Fin n`** was budgeted as "the one genuine
+  induction in the module". **It is not an induction.** Core has
+  `List.mk_mem_zipIdx_iff_getElem? : (x, i) ∈ zipIdx l ↔ l[i]? = some x`, and the whole theorem is
+  five lines.
+
+That is the **fifth and sixth** claims of absence this project has made and had refuted by grepping
+the toolchain source. The rule earns its place again.
+
+### One lemma minted: deleting a vertex is filtering the list
+
+Every negative claim about a deleted graph was stranded outside the `not_colorable_edgeGraph_iff`
+route that `decide +kernel` already travels. `delete_edgeGraph` bridges it:
+
+```lean
+(edgeGraph n E).deleteIncidenceSet p = edgeGraph n (E.filter fun e => e.1 != p && e.2 != p)
+```
+
+Three spec examples close by `rw [delete_edgeGraph, not_colorable_edgeGraph_iff]; decide +kernel`,
+and both edge orientations are handled — the seam M14 was bitten by.
+
+### The mutation audit found a check that could not fail
+
+Seven mutations, run rather than planned. Five went red immediately. Two came back **green**, and
+they were different problems:
+
+| mutation | first result | what it was |
+|---|---|---|
+| drop `hp : p ∉ Q` | red (10 errors) | load-bearing |
+| drop the length conjunct | red | load-bearing |
+| drop `% k` from `unpackColor` | red | load-bearing |
+| handle one edge orientation only | red | load-bearing |
+| drop the pivot guard from `properOffPivot` | red (3) | load-bearing |
+| drop `hk : 0 < k` | **green** | **the mutation was miswritten** — it left `hk` in place as an `autoParam` |
+| drop `% 2 ^ bits` | **green** | **a real gap** — nothing in the module could tell |
+
+The second is the finding. The domain pass had already argued that `% 2 ^ bits` is a decoder choice
+rather than a soundness obligation, and that is true — but it means the *spec examples* were the
+only thing that could catch a wrong decode, and at two colours on the rhombus the leaked high bits
+happen not to change any answer. **The check could not fail.** Fixed by adding the one example that
+discriminates: at three colours in two-bit fields, vertex 0 of `16` decodes to `16 % 4 = 0`, where a
+reader that only reduced modulo `k` would report `16 % 3 = 1`. Both mutations now go red.
+
+The `0 < k` side condition is likewise no longer argued but **exhibited**: the one-point graph with
+no edges satisfies the compression's hypothesis vacuously at `k = 0` and refutes its conclusion, and
+both halves are committed as examples.
+
+### The certificate must be chunked, and the width is measured
+
+One `decide +kernel` over all 510 rows **peaks at 41.7 GB**, with the edge list stored as a literal
+*and* as the committed chunked one — so the cost is the run length and nothing else. Measured
+scaling on the desktop:
+
+| rows in one `decide +kernel` | peak RSS | CPU |
+|---|---|---|
+| 32 | 5.25 GB | 22.1 s |
+| 64 | 7.77 GB | 43.7 s |
+| 128 | 12.79 GB | 87.1 s |
+| 510 | 41.7 GB | ~142 s |
+
+Time is **linear at 0.68 s per row**; memory is **linear at ≈ 79 MB per row over a 2.7 GB floor**,
+which is ≈ 31 KB per row per edge. So the chunk width follows the edge count, and it is not the same
+for the three witnesses:
+
+| witness | edges | MB per row | rows per chunk | peak | chunks |
+|---|---|---|---|---|---|
+| Heule 510 | 2504 | 79 | **64** | 7.8 GB | 8 |
+| Heule 553 | 2722 | 86 | **64** | 8.2 GB | 9 |
+| de Grey 1581 | 7877 | 249 | **24** | 8.7 GB | 66 |
+
+`criticalFrom_append` is the lemma that lets the chunks add up — a run of rows splits wherever the
+list does, with the offset carried. It exists because of that 41.7 GB, not for tidiness.
+
+### The obligations outside Lean
+
+* **The emitter refuses rather than pads**, and both refusals were **watched**. Forcing every pivot
+  unsettled (a 1 ms timeout) prints the count, names the pivots, says "nothing written", exits 1, and
+  writes no file. Bolting a pendant vertex onto Heule's 510 — which makes that vertex removable —
+  is refused the same way and names vertex 510 as the one carrying a five-colour fan.
+* **My own control was miswritten, again by a pipeline.** The removable-vertex control read `exit=0`
+  because `head -4` supplied the status, not the emitter. Re-run without the pipe: exit 1. Third
+  time this project has been bitten by a shell pipeline swallowing the status a check depends on.
+* **Agreement with Lean's edge list is by construction, not by cross-check.** Lean checks the rows
+  against *its own* committed edge list, so a wrong vertex numbering in the tool cannot pass — it
+  would leave some edge monochromatic and `properOffPivot` would refuse it. That is stronger than
+  M14's fan-tool agreement, which needed both sides to build the same joined list.
+
+### PROVE / TEST / ASSUME
+
+* **Prove** — the correspondence (2 theorems), the fan-facing corollaries (4), the delete/filter
+  bridge (1), the certificate chain (3), the chunk law (1).
+* **Test** — 13 examples, of which 6 are countermodels, plus the decode discriminator and the
+  `0 < k` countermodel. The fan in `triangleAndPoint` is established by **M14's oracle** and its
+  removability by **this module**, so the identity's two sides share no lemma.
+* **Assume** — `p ∉ Q` and `0 < k`, both discharged by the caller at every call site in the module;
+  the emitted rows are **checked, never assumed**.
+
 ## 3. The shape — tools
 
 * **`tools/forcer.py` gains `removable(n, edges, p, k)`** — the identity as a filter, three outcomes,
