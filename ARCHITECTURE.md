@@ -279,9 +279,24 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M09** ✅ | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | *Landed 2026-07-31 (`plans/M09-gadget-algebra.md`).* A gadget is a `Bool` on port colourings plus the proof every proper colouring satisfies it; gadgets **intersect**, **widen**, **transport** along vertex maps, and arrive from an edge, a refutation, or another gadget. `not_colorable_of_gadget` replaces both `not_colorable_of_forcing` and `not_colorable_of_triangle_pinned`, and all three witnesses now go through it. **de Grey's second copy is derived, not asserted**: `deGrey_rotation` checks 791 exact coordinate identities and the second half's *geometry* and *colouring property* both follow — **half B's certificate deleted, 1,043 modules, 180 MB and 12.8 hours gone**, replaced by 95 CPU s. Colour symmetry is now one lemma at any number of ports, and the plan's claim that "the 4 is load-bearing" was **measured false**: stated relationally it needs no bound on the colour count at all.|
 | **M10** ✅ | **Fractional bounds.** Fractional chromatic number machinery, and the best bound a finite dual certificate reaches at a size the kernel can check. ~~the 383/102 record~~ — **that target was measured wrong three ways** (see below). | *Landed 2026-08-01 (`plans/M10-fractional-bounds.md`).* **`χ_f(ℝ²) ≥ 65/18 ≈ 3.6111`**, axioms exactly `[propext, Classical.choice, Quot.sound]`, from a 63-point graph re-derived from Fisher and Ullman's core-and-spindle construction. Better than every *finite-graph* bound in Cranston–Rabern 2015, whose best was 1732/481 ≈ 3.6008 from a linear program with over 25,000 constraints — at a sixth the size, because the dual is separated by a SAT oracle instead of by enumerating maximal independent sets. No new certificate format: weights plus a **pruned kernel-run search**, 390,625 nodes against the graph's 10⁹-odd independent sets, 3.5 CPU min. `χ(ℝ²) ≥ 4` re-derived from the fractional bound alone — a third independent route to M03's rung. **Explicitly not a route to 6.** |
 | **M11** ✅ | **The search instrument.** Everything the hunt needs, built before the hunt starts. Inventory in `plans/M11-search-instrument.md`. | *Landed 2026-08-01.* **Eight of ten inventory items; two carried, and one of those as planned.** The gadget algebra is indexed by the colour count — `K₅` refuted at four and surviving at five, both committed — and `Proper` is stated over any colour type at all. The terminal check ranges over **one colouring per colour-partition of the interface**, measured at **53–72×**, which moves the ceiling from seven interface vertices to **ten at five colours (4.3 min)**; at eight it previously did not finish. `Motion` is now a similarity rather than a rotation-about-a-point, so translations and reflections exist at all, compositions are `Motion.trans`, and a copy whose coordinates are *defined* as the image costs **nothing** to certify — against 791 identities and 95 s for de Grey's frozen table. Three tools: `profile.py` (a subgraph's whole port property), `minimise.py`, and `scan.py`, which **recovers de Grey's 791-point split in 3.6 s from the coordinates alone** and hands back both the motion and the vertex map. Axioms exactly `[propext, Classical.choice, Quot.sound]` throughout; 112 clean. **Not built: orbit construction, and a gadget catalogue from the literature** — though the *producer* landed, and with it the first gadget here that is neither an edge nor a certificate. |
-| **M12** | **The hunt.** Composition search for a 6-chromatic witness. | Honest report — including "not found". |
+| **M12** | **Candidate construction.** The rest of what the hunt needs, and two gaps M11 did not notice: **nothing in this repository constructs a candidate graph**, and **nothing has ever asked this pipeline about five colours**. Plus M11's carry-forward — orbit construction, and a gadget catalogue built at the colour count that matters. Inventory and evidence in `plans/M12-candidate-construction.md`. | The cost of refuting a 5-colouring measured in both directions; a candidate generator that stays inside the exact field; orbits certified once per representative; a catalogue with contents. |
+| **M13** | **The hunt.** Composition search for a 6-chromatic witness. | Honest report — including "not found". |
 
-M01–M06 constitute rung B and are the publishable unit. M07–M11 is rung C, and M12 is rung D.
+M01–M06 constitute rung B and are the publishable unit. M07–M12 is rung C, and M13 is rung D.
+
+**M12 was split from the hunt on 2026-08-01**, the day M11 landed, and the reason is worth stating
+because it is a rule rather than a scheduling preference. A search that stops to build a tool is a
+search that stops — but the sharper problem is that a tool built *during* a stall is shaped by the
+stall rather than by the problem, which is how a search comes to find what a bug allowed. So
+everything we can name in advance is built in advance, and whatever gets built during the hunt is
+then genuinely novel by construction.
+
+Splitting it surfaced two gaps neither M11 nor its three modeling passes had noticed. **Nothing in
+this repository constructs a candidate graph** — four generators, four hard-coded constructions, and
+an M11 instrument that only ever *consumes* a graph. And **no theorem here has ever been about
+five-colourings**: `coloringCNF 5` and `Colorable 5` appear zero times, so the cost of the question
+rung D actually asks is unmeasured, in a project where refutation cost has already been measured
+*non-monotone* in graph size. That measurement is M12's first item.
 
 **M11's own miss, recorded.** Its terminal test read "every tool in that inventory built and
 measured"; eight of ten were. Orbit construction was deferred deliberately (§ 1 of the subplan says
@@ -590,6 +605,16 @@ Stated up front, per doctrine, and to be reported as-is:
   seven, and eight does not finish at all. Ten is enough for the compositions we can currently
   imagine and it is not obviously enough for the ones a search will propose; that gap is the honest
   statement of the risk.
+- **No theorem in this project has ever been about a five-colouring, so the cost of rung D's actual
+  question is unmeasured.** Found 2026-08-01 while splitting M12 out of the hunt: `coloringCNF 5`
+  and `Colorable 5` appear **zero** times across the repository. M11 made the question askable and
+  committed one spec witness that exercises the colour index — the complete graph on five vertices,
+  refuted at four colours and surviving at five — but nothing has been refuted at five. Every step
+  count, certificate size and processor-hour figure recorded here is a four-colour figure, and the
+  one thing already established about this cost is that it is **not monotone in graph size** (M07:
+  Heule's 510-vertex witness costs 28% more than his 553-vertex one). At five colours the regime
+  changes again in a direction nobody here has sampled, and the satisfiable direction — which is a
+  search's inner loop — is equally unmeasured. It is M12's first item for that reason.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

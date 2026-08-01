@@ -140,6 +140,9 @@ untrusted, so it is not bound by this at all.
 
 ### Carried to M12 unless the milestone comes in early
 
+*Both were carried. `plans/M12-candidate-construction.md` §§ 3–4 pick them up, with what this
+milestone left ready and the one arithmetic wrinkle it left open.*
+
 | Item | Why it can wait |
 |---|---|
 | **§ 1.5** orbit construction | Depends on § 1.4 landing first, and its saving (one certificate per orbit representative) is only collectable once a search proposes an orbit. The scale factor compounds under iteration — level `i` of an orbit needs a common denominator `M^(r-1)` and a translation scaled by `M^i` — which is real design work with no consumer yet. |
@@ -702,7 +705,8 @@ statements rather than procedures, so they run on every build.
 ## 5. Not in this milestone
 
 * **§ 1.5 orbit construction** and **§ 2.5 a transcribed gadget library** — § 1, carried, with reasons.
-* **The hunt itself.** M12.
+* **The hunt itself.** M13 — and the rest of what it needs is M12,
+  `plans/M12-candidate-construction.md`, split out on the day this milestone landed.
 * **Anything that changes a certificate.** The three witnesses' certificates are not touched;
   `Gadget`'s colour index defaults to nothing and every existing use passes `4` explicitly.
 
