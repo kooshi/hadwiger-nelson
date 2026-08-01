@@ -53,10 +53,12 @@ namespace HadwigerNelson
 the integer coordinates changes. -/
 def Pt.scaleBy (m : Q4) (p : Pt) : Pt := ⟨m * p.x, m * p.y⟩
 
-/-- Re-denomination scales every squared distance by `m²`. -/
+/-- Re-denomination scales every squared distance by `m²`. Unlike `Motion.distSq_rescale`, which
+needs `μ.sq` to turn `M * M` into `scale`, this one is a ring identity and nothing more. -/
 theorem Pt.distSq_scaleBy (m : Q4) (p p' : Pt) :
     (p.scaleBy m).distSq (p'.scaleBy m) = m * m * p.distSq p' := by
-  sorry
+  simp only [Pt.distSq, Pt.scaleBy, FastSq.sq_eq]
+  ring
 
 /-- **A base configuration and the placements that copy it.**
 
@@ -76,15 +78,29 @@ namespace Assembly
 
 variable {n : ℕ} (A : Assembly n)
 
+/-- The placements' scales.
+
+Named, rather than written out twice, because `factor` and `coFactor` are both products over *this*
+list and their relationship is Mathlib's `List.CommMonoid.mul_prod_eraseIdx` at exactly it. Taking
+the `map` first and the `eraseIdx` second is the whole reason `coFactor_mul` is two lines. -/
+def scales : List ℕ := A.places.map Motion.scale
+
 /-- The product of every placement's scale — the factor the assembled denominator carries. -/
-def factor : ℕ := (A.places.map Motion.scale).prod
+def factor : ℕ := A.scales.prod
 
 /-- The product of every placement's scale **except** copy `i`'s.
 
 Defined by deletion rather than as `factor / scale i`: natural division truncates, and a junk value
 here would silently produce a certificate at the wrong denominator that still elaborated. -/
-def coFactor (i : Fin A.places.length) : ℕ :=
-  ((A.places.eraseIdx i.val).map Motion.scale).prod
+def coFactor (i : Fin A.places.length) : ℕ := (A.scales.eraseIdx i.val).prod
+
+/-- **Copy `i`'s own scale times everyone else's is everyone's.** The arithmetic that makes every
+copy land on the same denominator, and the only thing `coFactor` is for. -/
+theorem coFactor_mul (i : Fin A.places.length) :
+    (A.places.get i).scale * A.coFactor i = A.factor := by
+  have hi : i.val < A.scales.length := by simp [scales]
+  simpa [scales, factor, coFactor, List.getElem_map, List.get_eq_getElem] using
+    List.CommMonoid.mul_prod_eraseIdx (l := A.scales) hi
 
 /-- Copy `i`'s embedding of a point: place it, re-denominate it to an integer scale, then bring it to
 the assembly's common denominator.
@@ -100,7 +116,10 @@ The hypothesis `UDCert.validOn_map_of_scaling` takes, discharged once for all co
 `coFactor` exists. -/
 theorem distSq_place (i : Fin A.places.length) (p p' : Pt) :
     ((A.place i) p).distSq ((A.place i) p') = ((A.factor * A.factor : ℕ) : Q4) * p.distSq p' := by
-  sorry
+  have hc := A.coFactor_mul i
+  simp only [place, Pt.distSq_scaleBy, Motion.distSq_rescale, Motion.distSq_image]
+  push_cast [← hc]
+  ring
 
 /-- **Vertex `v` of copy `i`, as an index of the assembled graph.**
 
@@ -143,14 +162,30 @@ theorem verts_idx (cross) (i : Fin A.places.length) (v : Fin n) :
 own* validity — no per-copy geometry, no per-vertex identity, whatever the placements were. -/
 theorem validOn_copiedEdges (cross) (hbase : A.base.Valid = true) :
     (A.cert cross).ValidOn A.copiedEdges = true := by
-  sorry
+  -- One copy at a time: the placement's scaling lemma, with nothing per edge and nothing per vertex.
+  have one : ∀ i : Fin A.places.length, (A.cert cross).ValidOn (A.copyEdges i) = true := by
+    intro i
+    refine UDCert.validOn_map_of_scaling A.base (A.cert cross) (A.place i)
+      ((A.factor * A.factor : ℕ) : Q4) (A.idx i) A.base.edges (A.distSq_place i)
+      (A.verts_idx cross i) ?_ hbase
+    simp only [UDCert.denomSq, cert]
+    push_cast
+    ring
+  -- and the copies compose, because chunking a certificate costs nothing to justify.
+  rw [copiedEdges, List.flatMap_def, UDCert.validOn_flatten, List.all_eq_true]
+  rintro ch hch
+  obtain ⟨i, -, rfl⟩ := List.mem_map.mp hch
+  exact one i
 
 /-- **The assembled certificate is valid** once the seams are checked. The only work that scales with
 the number of copies is `cross`. -/
 theorem valid_of_cross (cross) (hbase : A.base.Valid = true)
     (hcross : (A.cert cross).ValidOn cross = true) :
     (A.cert cross).Valid = true := by
-  sorry
+  rw [UDCert.valid_eq]
+  show (A.cert cross).ValidOn (A.copiedEdges ++ cross) = true
+  simp only [UDCert.ValidOn, List.all_append, Bool.and_eq_true]
+  exact ⟨A.validOn_copiedEdges cross hbase, hcross⟩
 
 /-- **The payoff for the colouring**, and the half that carried M09's 12.8 hours.
 
@@ -160,8 +195,9 @@ same map, `idx i`, and this is what lets them be. Without it a placed copy would
 geometry and full price in the refutation, which is the expensive half. -/
 theorem adj_idx (cross) (i : Fin A.places.length) {e : Fin n × Fin n}
     (hne : A.idx i e.1 ≠ A.idx i e.2) (he : e ∈ A.base.edges) :
-    (edgeGraph (A.places.length * n) ((A.cert cross).edges)).Adj (A.idx i e.1) (A.idx i e.2) := by
-  sorry
+    (edgeGraph (A.places.length * n) ((A.cert cross).edges)).Adj (A.idx i e.1) (A.idx i e.2) :=
+  edgeGraph_adj_of_mem hne <| List.mem_append_left _ <|
+    List.mem_flatMap.mpr ⟨i, List.mem_finRange i, List.mem_map.mpr ⟨e, he, rfl⟩⟩
 
 end Assembly
 
@@ -189,6 +225,12 @@ example : (demoAssembly.cert []).edges.length = 2 := by decide
 /-- The assembled certificate certifies both copies — checked here the expensive way, by reduction,
 so that `validOn_copiedEdges` has something to agree with. -/
 example : (demoAssembly.cert []).Valid = true := by decide +kernel
+
+/-- **The same fact through the theorem**, and the reason both are here: a payoff theorem that is the
+only witness to its own claim has nothing to disagree with. These two must always agree, and one of
+them does no arithmetic at all. -/
+example : (demoAssembly.cert []).Valid = true :=
+  demoAssembly.valid_of_cross [] (by decide +kernel) (by decide)
 
 /-- **The exponential denominator is not exponential in cost.** Sixteen copies is a `factor` of
 `25^16`, and it computes. -/

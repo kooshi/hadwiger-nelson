@@ -363,9 +363,13 @@ places for itself.
 
 Stated over a bare `g` and `s` rather than over a `Motion`, because that is where it is true and
 because the two instances a caller wants — the image, and the image re-denominated so that the new
-denominator is an integer for *any* scale — differ only in which pair they supply. -/
-theorem UDCert.validOn_map_of_scaling {n : ℕ} (c c' : UDCert n) (g : Pt → Pt) (s : Q4)
-    (φ : Fin n → Fin n) (es : List (Fin n × Fin n))
+denominator is an integer for *any* scale — differ only in which pair they supply.
+
+Stated over **two** index types for the same reason. Nothing in the proof relates the source's vertex
+count to the target's, and an assembly places `n` vertices into a certificate of `copies * n` — so
+`n' = n` was incidental structure, and `Assembly.validOn_copiedEdges` is the instance that found it. -/
+theorem UDCert.validOn_map_of_scaling {n n' : ℕ} (c : UDCert n) (c' : UDCert n') (g : Pt → Pt)
+    (s : Q4) (φ : Fin n → Fin n') (es : List (Fin n × Fin n))
     (hg : ∀ p p', (g p).distSq (g p') = s * p.distSq p')
     (hverts : ∀ v, c'.verts (φ v) = g (c.verts v))
     (hden : c'.denomSq = s * c.denomSq)

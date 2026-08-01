@@ -155,10 +155,11 @@ gadget and constructing a candidate are the same act, and the producer (`Gadget.
 ### 0(f) The pipeline cannot express the question yet
 
 `tools/emit_mask.py` — the emitter that turns a solver certificate into kernel-checkable Lean —
-hard-codes four colours in three places: `Cube {n} 4` at line 231, `coloringCNF 4 …` at line 365, and
-the `tools/coloring.py` calls that default to `K = 4`. Everything else is already colour-generic:
+hard-codes four colours in four places: `Cube {n} 4` (line 231), `coloringCNF 4 …` (line 365), and
+the two `tools/coloring.py` calls that take the default `K = 4` (`base_clauses` at 341,
+`pin_clauses` at 343). Everything else is already colour-generic:
 `coloringCNF k n E`, `cubeCNF k n`, `Cube n k`, `Gadget k n m E p`, and the whole of
-`Sat/MaskCheck.lean`. **The gap is three lines of untrusted Python, not a proof.**
+`Sat/MaskCheck.lean`. **The gap is four lines of untrusted Python, not a proof.**
 
 ### 0(g) The field is derived, not chosen — and the move set is decidable
 
@@ -434,6 +435,64 @@ transported, not the geometry — and `Gadget.transport` needs adjacency preserv
 graph, so the geometric copy and the combinatorial copy are the same map. Without it a placed copy
 would be free in the geometry and full price in the refutation, which is the expensive half.
 
+### 3.5 The obligation pass — nine leaves to one
+
+Run 2026-08-01. **`Assembly.lean` is now complete: zero `sorry`.** Across both modules one leaf
+survives, and it is the only one that genuinely needs a solver.
+
+**The lemma the payoff needed was one hypothesis too narrow, and it had no callers.**
+`UDCert.validOn_map_of_scaling` was stated with `φ : Fin n → Fin n` and both certificates at the same
+index `n` — but an assembly places `n` vertices into a certificate of `copies * n`. Nothing in its
+proof relates the two counts, so `n' = n` was incidental structure. Generalising it to two index
+types is a pure weakening; the proof is unchanged, and a grep found **zero call sites outside its own
+module**, so the alternative — a second lemma in `Assembly.lean` differing only in generality — would
+have been the "two declarations identical modulo naming" smell for no benefit. M11 generalised the
+*map* and the *scale* of that lemma deliberately; it left the index, and this is the instance that
+found it.
+
+**Four claimed-missing lemmas, all present.** Grepping before writing paid a fourth time in this
+project: `List.CommMonoid.mul_prod_eraseIdx` (`l[i] * (l.eraseIdx i).prod = l.prod`) is exactly the
+`coFactor × scale = factor` fact, `List.all_flatMap` and `List.all_append` are the composition, and
+`SimpleGraph.Coloring.mk` is the existence direction. Nothing had to be written.
+
+**One definition reshaped so the lemma applied directly.** `coFactor` was a product over
+`(places.eraseIdx i).map scale`; Mathlib's lemma wants `(l.eraseIdx i).prod` for one `l`. Naming
+`scales := places.map Motion.scale` and taking the `eraseIdx` *second* makes `coFactor_mul` two
+lines instead of a `map`/`eraseIdx` commutation argument. Back's rule — shape the definition around
+the statement.
+
+The resulting proof sizes, which is the convergence signal:
+
+| leaf | proof |
+|---|---|
+| `Pt.distSq_scaleBy` | `simp only [...]; ring` — a ring identity, unlike `distSq_rescale` which needs `μ.sq` |
+| `coFactor_mul` | 2 lines, Mathlib's lemma at the list it was shaped for |
+| `distSq_place` | 4 lines — the three-step chain, then `push_cast; ring` |
+| `validOn_copiedEdges` | 8 lines — one scaling lemma per copy, composed by `validOn_flatten` |
+| `valid_of_cross` | 4 lines — `List.all_append` |
+| `adj_idx` | a term, no tactics |
+| `mycielski47_colorable_six` | a term over `Coloring.mk`, with properness `decide +kernel` |
+
+**The six-colour control is derived, not emitted.** A `Colorable 6` is an *existence* claim — the
+opposite direction from everything else here — and the obvious route is to paste a colouring from the
+solver. Mycielski's construction supplies its own instead: a shadow may take its original's colour
+(it is adjacent to the original's *neighbours*, never the original), and the apex takes one fresh
+colour, so `iter k` needs exactly `k + 2`. The control is then the construction read a second way,
+and it carries its own discriminating partner — *six colours suffice* **and** *the sixth is actually
+used*, so a 6-colouring that was secretly a 5-colouring goes red.
+
+**The surviving leaf, and what it is not.** `Mycielski.pinned_unsat` — the pinned formula has no
+model — is the certificate, and implementation is where it arrives. Everything around it is already
+verified: the gadget composition `(Gadget.ofUnsat …).inter portsEdge` **has no survivors, checked by
+the kernel now**, because at two ports and five colours there are exactly two colour-partitions and
+each gadget rules out one. The edge kills "the ends agree"; the certificate kills "the ends differ".
+
+**Two ports, not three, and that is forced.** Every existing witness here pins a *triangle* — three
+mutually adjacent ports, three `Gadget.edge`s intersected. Mycielski's construction introduces no
+triangle, so the largest clique is an edge and the lever is weaker: 26× measured, against the 8.5–53×
+a triangle buys. This is a property of the calibration graph, not of five colours, and a unit-distance
+candidate would have the stronger lever.
+
 ### 3.3 The spec examples, per the gate
 
 Every definition gets a check that would fail if it drifted, and every discriminating check gets a
@@ -457,14 +516,22 @@ break that must make it go red.
 
 | the check | break it by | must say |
 |---|---|---|
-| `myc47_not_colorable_five` | file the certificate against the 4-colour formula | the checker refuses |
-| the same | delete one edge from the graph | the graph becomes 5-colourable; no certificate exists |
-| the six-colour control | ask for a 5-colouring instead | must succeed, so a "6" that was silently a "5" is caught |
+| `mycielski47_not_colorable_five` | file the certificate against the **4**-colour formula | the checker refuses — same graph, wrong colour count |
+| the same | delete one edge from `step`'s output | the graph becomes 5-colourable and no certificate exists |
+| the same | drop `portsEdge` from the composition | `survivors` is non-empty and the `fail` message fires, naming the surviving pattern |
+| `mycielski47_colorable_six` | perturb one entry of `colourAux` | `colour_proper` goes red at the offending edge |
+| the "sixth colour is used" guard | make the apex reuse colour 4 | the guard goes red, catching a 6-colouring that is secretly a 5-colouring |
+| the index-bound guard | raise `iter` to 5 without raising `size` | indices exceed `size`, the `% size` folds vertices together, and the guard fires **before** any theorem is stated |
 | the emitter's colour parameter | emit at 4 and check at 5 | size/position mismatch in Lean |
-| `Assembly.validOn_copies` | give two motions different scales without re-denominating | validity fails |
-| the same | move one base point off its unit circle | the base's own check fails first |
+| `Assembly.valid_of_cross` | move one base point off its unit circle (`demoBroken`) | the assembled certificate is `false` — committed as an `example`, red today |
+| `Assembly.validOn_copiedEdges` | claim a cross edge that is not a unit distance | the *second* hypothesis fails while the first still holds, which is the module's whole claim: only the seams can fail |
 | `construct.py` rebuild | perturb one seed coordinate | the rebuilt spindle stops matching the committed JSON |
 | `construct.py` spindle availability | ask for `r² = 4/3` | refusal naming √39, never a wrong rotation |
+
+**Two of these are committed and discriminating already.** `demoAssembly` certifies (`Valid = true`)
+and `demoBroken` refuses (`Valid = false`), both by `decide +kernel`, both in the module. And
+`demoAssembly.cert []` is checked *both* ways — by reduction and through `validOn_copiedEdges` — so
+the payoff theorem has an independent partner rather than being the only witness to its own claim.
 
 ---
 
