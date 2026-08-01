@@ -36,6 +36,20 @@ Both are load-bearing, and neither is a convention:
 The coordinate distances are deliberately *absent* from these types. Every transport lemma below
 would carry an index none of them inspects, and the constraint is already demanded where it bites:
 the closing lemma needs an adjacency, and an adjacency is where the geometry has to be true.
+
+## Which one to reach for
+
+| you have | you want | use |
+|---|---|---|
+| a graph small enough to exhaust (≲ 9 vertices) | a fan | `Fan.of_edges`, by `decide +kernel` |
+| a SAT certificate | a fan | `Fan.of_unsat` |
+| any refutation of the joined graph | a fan | `Fan.of_not_colorable` |
+| a fan, and a separation for every partner | the theorem | `not_colorable_of_fan` |
+| a fan of width one | the theorem | `fan_singleton_iff`, then M13's closing lemma |
+| a fan and two placements | the theorem | `not_colorable_of_spindled_fan` |
+
+`Separated` is the dual, and `Separated.of_adj` is the case a search meets constantly: a partner
+adjacent to the pivot can be retired without a solver.
 -/
 
 namespace HadwigerNelson
@@ -89,7 +103,13 @@ theorem not_colorable_of_fan_nil {p : V} (h : Fan G k p []) : ¬ G.Colorable k :
   sorry
 
 /-- **A width-one fan is exactly a forced pair**, so M13's module is this one's base case rather
-than a parallel development. -/
+than a parallel development.
+
+The one `@[simp]` lemma in this module, and the normal form it drives toward is **`Forces`** — the
+shorter side, the older vocabulary, and the shape `not_colorable_of_spindled_forcer` consumes, so a
+search that has narrowed to one partner lands in the form the closing move already accepts. It
+cannot loop: the left side contains a list literal the right side does not. -/
+@[simp]
 theorem fan_singleton_iff {p q : V} : Fan G k p [q] ↔ Forces G k p q := by
   sorry
 

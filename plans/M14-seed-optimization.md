@@ -396,6 +396,62 @@ and it does **not** buy guidance, because the minimum is measured flat at 3 acro
 reached. Evaluating it costs a full pivot sweep, and this plan states that there is no cheaper
 proxy rather than implying one.
 
+## 3.0.2 The experience pass — what it changed
+
+**Exactly one `@[simp]`, and its normal form is stated.** `fan_singleton_iff` rewrites
+`Fan G k p [q]` to `Forces G k p q` — the shorter side, the older vocabulary, and the shape M13's
+closing lemma already consumes, so a search that has narrowed to one partner lands where the next
+move accepts it. It cannot loop (the left side carries a list literal the right side does not).
+Nothing else in the module is tagged: the transport lemmas are implications, not equations, and an
+untagged implication costs no heartbeats forever.
+
+**A "which one to reach for" table in the module docstring.** Thirteen declarations is past the four
+a reader holds, and three of them are producers differing only by *cost* — exhaustion, certificate,
+any refutation. The table is the progressive-disclosure handle; without it a caller has to read
+three docstrings to learn which is cheap.
+
+**`Fan.of_unsat` deliberately collides with `Forces.of_unsat`.** They use different encodings — M13
+pins two ports through the gadget algebra, M14 joins edges and calls `not_colorable_of_unsat` — and
+that is exactly why the names should match: `of_<source>` is the convention, the source is the same
+(a refutation), and the encoding is the implementation detail a caller must never need. A user who
+learned one predicts the other correctly, which is what a naming convention is for.
+
+**Prose in this module is free — for now, and the expiry is worth writing down.** `Fan.lean` has
+**0 dependents** and `Forcer.lean` has 3, so a docstring costs one file's re-elaboration today. The
+moment a generated certificate imports `Fan.lean` — which is what certifying de Grey's 397-point fan
+would do — every docstring in it becomes a rebuild of everything beneath. At that point the prose
+moves downstream to `FanDiagnose.lean`, exactly as `Sat/Diagnose.lean` holds what `Sat/Mask.lean`
+cannot afford.
+
+### The four failures, and which side can say each
+
+| the user hits | who can say it | what it owes |
+|---|---|---|
+| no fan at any pivot | **only the tool** — Lean certifies positives, never a search's exhaustiveness | the pivot and class counts swept, *and* that every one was settled |
+| a fan at a distance the field cannot spindle | **only the tool** — this module holds no geometry by design | the width, the distance, and **the square root that would be needed** (`field.py`'s `missing_root`) |
+| the oracle timed out mid-sweep | **only the tool** | the unsettled count, and a refusal to print a width at all |
+| a fan of width ≥ 3 | tool immediately; the reason lives in `not_colorable_of_spindled_fan`'s docstring | that it is **not closable by any spindle** — and that the move is to *narrow*, not to abandon |
+
+The last one matters most and is the easiest to get wrong: width ≥ 3 is unclosable but it is **not
+worthless** — it is de Grey's own position. The message says "narrow it", never "no".
+
+### The report line
+
+M13's search printed forced pairs, found none, and so printed nothing. M14 prints a width, and a
+width is a lie unless it carries its provenance and its unsettled count:
+
+```
+397 pts  1974 edges  k=4   fan width 3  [irredundant, 0 unsettled]  pivot 0, r²=4 spindle-able
+                                        -> width >= 3 cannot be closed by a spindle; narrow it
+ 43 pts   108 edges  k=4   NO FAN  (43 pivots x 6 spindle-able classes, all settled, 0.6 s)
+ 43 pts   108 edges  k=4   width <= 4  ** UNSETTLED: 3 drops timed out -- this is not a width **
+```
+
+Three rules the line encodes, each because the opposite has shipped here: the provenance tag is
+mandatory (`irredundant` from a certifying sweep, `minimum` only from the implicit-hitting-set
+loop); the unsettled count is printed **whether or not it is zero**; and an unsettled sweep prints
+`width <=` and a warning rather than a number that reads as a measurement.
+
 ## 3. The shape — tools
 
 `tools/forcer.py` gains the fan, and `forces` becomes its width-1 special case:
