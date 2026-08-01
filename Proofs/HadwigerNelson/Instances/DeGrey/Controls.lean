@@ -60,14 +60,15 @@ theorem sat_degenerate_cube :
 nothing unless dropping one of them lets a colouring through — otherwise the composition would report
 "admits nothing" whatever it were handed.
 
-Drop the joining edge, and exactly the all-one-colour pattern survives. That is precisely the
-colouring the joining edge forbids, which is the argument stated backwards.
+Drop the joining edge, and exactly one pattern survives: **the shared vertex 14 and both ends of the
+joining edge, 11 and 802, all taking the same colour.** That is precisely the colouring the joining
+edge forbids, which is the argument stated backwards — and the survivor says the vertex numbers, so
+no reader has to look up which port is which.
 
-**One line, not four.** M09's version of this control listed `[0,0,0]`, `[1,1,1]`, `[2,2,2]` and
-`[3,3,3]` — the same fact under four names, because the check ranged over every colouring rather than
-over one per partition. -/
+**One line, not four.** M09's version of this control listed four relabellings of the same fact,
+because the check ranged over every colouring rather than over one per colour-partition. -/
 theorem deGrey_forcing_alone_admits :
-    (deGreyForcedA.inter deGreyForcedB).survivors = [[0, 0, 0]] := by
+    (deGreyForcedA.inter deGreyForcedB).survivors = [[(14, 0), (11, 0), (802, 0)]] := by
   decide
 
 /-! ### The rotation must land on the right vertices

@@ -270,13 +270,20 @@ renamed, so if any colouring survives, a representative of its partition survive
 measured at 53–72× at five colours, and it is the difference between a check that runs at ten
 interface vertices and one that dies at eight. -/
 
-/-- **The port colourings this gadget has not ruled out**, one per partition of the ports.
+/-- **The port colourings this gadget has not ruled out**, one per partition of the ports, each
+written as the **cube that pins the ports to it** — a list of `(vertex, colour)` pairs.
 
-Empty is the condition `not_colorable_of_gadget` consumes; non-empty is the report a reader needs,
-rendered as one list of colours per port. Run it with `#eval` on the composite when a build fails and
-the surviving colourings say which constraint is missing. -/
-def Gadget.survivors (g : Gadget k n m E p) : List (List (Fin k)) :=
-  ((canonPatterns k m).filter g.admits).map (List.ofFn ·)
+Empty is the condition `not_colorable_of_gadget` consumes. Non-empty is the report, and its shape is
+chosen for the day it is read: a search holds *vertices*, not port indices, so a bare `[0, 1, 2, 3,
+3]` would send the reader back to the port tuple to find out which vertices ports 3 and 4 are.
+`[(14, 0), (11, 1), (802, 1)]` says it outright — and it is exactly the cube the next solver call
+takes, so what the failure hands back is the input to the step after it.
+
+Run `#eval g.survivors` on the composite when a build fails. Its **length** is a
+distance-to-refutation: the number of port colourings still open, and the objective a search
+descends. -/
+def Gadget.survivors (g : Gadget k n m E p) : List (Cube n k) :=
+  ((canonPatterns k m).filter g.admits).map (pinCube p)
 
 /-- **A gadget that admits nothing.** If no colouring of the ports survives, no proper `k`-colouring
 of the graph exists — a colouring would have to colour the ports somehow.
@@ -351,22 +358,24 @@ def k5GadgetFive : Gadget 5 5 5 k5 (fun i => i) :=
      Gadget.edge 3 4 (edgeGraph_adj_of_mem (by decide) (by decide))]
 
 -- **The colour index is load-bearing**, and this is what says so: the same ten gadgets that admit
--- nothing at four colours admit exactly one pattern at five — all five ports distinct, which is the
--- 5-colouring. A file whose colour count was quietly still four would print `0` here.
-/-- info: [[0, 1, 2, 3, 4]] -/
+-- nothing at four colours admit exactly one pattern at five — every vertex its own colour, which is
+-- the 5-colouring. A file whose colour count was quietly still four would print `[]` here.
+/-- info: [[(0, 0), (1, 1), (2, 2), (3, 3), (4, 4)]] -/
 #guard_msgs in
 #eval k5GadgetFive.survivors
 
--- **The negative control**, and the report a failing search gets. Drop one edge gadget and one
--- pattern survives — `K₅` minus an edge *is* 4-colourable, and the survivor gives the two
--- now-unjoined vertices the same colour. Without this, the example above would be consistent with a
--- composition that reports "admits nothing" whatever it is handed.
+-- **The negative control**, and the report a failing search gets. Drop the edge between vertices 3
+-- and 4, and one pattern survives — `K₅` minus an edge *is* 4-colourable — and the survivor says so
+-- in the reader's own vocabulary: **`(3, 3)` and `(4, 3)`, the two now-unjoined vertices sharing
+-- colour 3.** No cross-referencing a port tuple, and the list is a solver cube as it stands.
+-- Without this, the example above would be consistent with a composition that reports "admits
+-- nothing" whatever it is handed.
 --
 -- The rendered output is pinned rather than described: it is what a reader meets on the day a search
 -- does not close, and an unreadable one would be discovered on that day rather than this one. Note
 -- what the partition enumeration bought the reader — M09 printed twenty-four relabellings of this
 -- one fact.
-/-- info: [[0, 1, 2, 3, 3]] -/
+/-- info: [[(0, 0), (1, 1), (2, 2), (3, 3), (4, 3)]] -/
 #guard_msgs in
 #eval (List.foldr Gadget.inter Gadget.trivial
   [k5Edge 0 1 (by decide) (by decide), k5Edge 0 2 (by decide) (by decide),

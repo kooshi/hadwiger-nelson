@@ -124,9 +124,11 @@ theorem deGreyRot_not_colorable_four : ¬ (edgeGraph 1581 deGreyRotEdges).Colora
   not_colorable_of_gadget deGreyGadgets (by
     first
     | decide
-    | fail "de Grey's three gadgets do not jointly refute. For the port colourings that \
-            survive, in a file with `import Proofs.HadwigerNelson.Instances.DeGrey.Forcing` \
-            and inside `namespace HadwigerNelson`:  #eval deGreyGadgets.survivors")
+    | fail "deGreyGadgets admits a port colouring, so this graph is not refuted. What survives is \
+            `deGreyGadgets.survivors` — one entry per colour-partition of the ports, each a list of \
+            (vertex, colour) pairs, and each a cube a solver will take as it stands. This module \
+            no longer builds, so read it from a fresh file: import Proofs.HadwigerNelson.Instances.DeGrey.Forcing \
+            and, inside `namespace HadwigerNelson`,  #eval deGreyGadgets.survivors")
 
 /-- **χ(ℝ²) ≥ 5.** No assignment of four colours to the points of the Euclidean plane avoids giving
 two points at distance exactly 1 the same colour.

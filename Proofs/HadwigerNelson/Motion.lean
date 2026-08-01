@@ -58,7 +58,7 @@ with* are different, and a law in the structure is what stops them drifting.
 
 Three things, and the third is new. It lets de Grey's second copy be *derived* from his first rather
 than listed (`Instances/DeGrey/Rotation.lean`). It is the operation a gadget search is made of: a
-gadget placed elsewhere in the plane by a motion keeps its geometry. And with `Motion.step`, a copy
+gadget placed elsewhere in the plane by a motion keeps its geometry. And with `Motion.image`, a copy
 whose coordinates are *defined* as the image needs **no** per-vertex check at all — one lemma,
 quantified over the point, replaces de Grey's 791 identities for any construction not frozen as data.
 -/
@@ -150,18 +150,23 @@ A motion sends a point at denominator `d` to a point at denominator `d·M`, and 
 in the tower, so the image cannot be written at `d`. The two operations below are that fact split in
 half, and every statement in this file is one of them or a consequence:
 
-* `step` is **the image**, at `M` times the source's denominator. It is a plain function, so a table
+* `image` is **the image**, at `M` times the source's denominator. It is a plain function, so a table
   can be *defined* as the image of another and no coordinate is ever checked.
-* `hold` is **re-denomination**: the same point, written at `M` times the denominator.
+* `rescale` is **re-denomination**: the same point, written at `M` times the denominator.
 
 `Maps p q` — the frozen-data case, where the image happens to be writable at the source's own
-denominator — is then exactly `hold q = step p`, and that identity is `maps_iff`. -/
+denominator — is then exactly `rescale q = image p`, and that identity is `maps_iff`. -/
 
-/-- **The image of a point**, at `M` times the source's denominator. -/
-def step (p : Pt) : Pt := ⟨μ.a * p.x + μ.c * p.y + μ.e, μ.b * p.x + μ.d * p.y + μ.f⟩
+/-- **The image of a point**, at `M` times the source's denominator.
 
-/-- **The same point, at `M` times the denominator.** -/
-def hold (q : Pt) : Pt := ⟨μ.M * q.x, μ.M * q.y⟩
+Reason about it through `distSq_image` — every squared distance scales by exactly `scale` — and
+never by unfolding these two coordinates. -/
+def image (p : Pt) : Pt := ⟨μ.a * p.x + μ.c * p.y + μ.e, μ.b * p.x + μ.d * p.y + μ.f⟩
+
+/-- **The same point, at `M` times the denominator.**
+
+Reason about it through `distSq_rescale`, which is the only thing it is for. -/
+def rescale (q : Pt) : Pt := ⟨μ.M * q.x, μ.M * q.y⟩
 
 /-- **`q` is the image of `p`, at the same denominator.** A `Bool`, because this is what the kernel
 checks against emitted coordinates — one instance per vertex of a copy that arrived as frozen data
@@ -175,13 +180,13 @@ def Maps (p q : Pt) : Bool :=
 
 /-- **What `Maps` says, in the vocabulary of the two halves.** The rows are the two coordinates of
 one equation between points. -/
-theorem maps_iff {p q : Pt} : μ.Maps p q = true ↔ μ.hold q = μ.step p := by
-  simp [Maps, hold, step, Pt.mk.injEq]
+theorem maps_iff {p q : Pt} : μ.Maps p q = true ↔ μ.rescale q = μ.image p := by
+  simp [Maps, rescale, image, Pt.mk.injEq]
 
 /-- **Re-denomination scales every squared distance by `scale`.** One of the two facts the whole
 file rests on; this one uses `Motion.sq` and nothing else. -/
-theorem distSq_hold (q q' : Pt) : (μ.hold q).distSq (μ.hold q') = (μ.scale : Q4) * q.distSq q' := by
-  simp only [Pt.distSq, hold, FastSq.sq_eq]
+theorem distSq_rescale (q q' : Pt) : (μ.rescale q).distSq (μ.rescale q') = (μ.scale : Q4) * q.distSq q' := by
+  simp only [Pt.distSq, rescale, FastSq.sq_eq]
   linear_combination ((q.x - q'.x) * (q.x - q'.x) + (q.y - q'.y) * (q.y - q'.y)) * μ.sq
 
 /-- **The image scales every squared distance by `scale`.** The other fact, and the one the three
@@ -190,9 +195,9 @@ so `e` and `f` play no part.
 
 **This is what makes a placed copy free.** A table defined as `step ∘ T` has every distance scaled by
 exactly `scale`, for a copy of any size, with no per-vertex and no per-edge check: see
-`UDCert.validOn_of_scaled`. -/
-theorem distSq_step (p p' : Pt) : (μ.step p).distSq (μ.step p') = (μ.scale : Q4) * p.distSq p' := by
-  simp only [Pt.distSq, step, FastSq.sq_eq]
+`UDCert.validOn_map_of_scaling`. -/
+theorem distSq_image (p p' : Pt) : (μ.image p).distSq (μ.image p') = (μ.scale : Q4) * p.distSq p' := by
+  simp only [Pt.distSq, image, FastSq.sq_eq]
   linear_combination sq_norm_sim μ.col₁ μ.col₂ μ.orth (u := p.x - p'.x) (v := p.y - p'.y)
 
 /-- **A motion preserves squared distance.**
@@ -203,7 +208,7 @@ is the only form in which it can be cancelled, `Q4` not being known to be a doma
 theorem distSq_eq {p p' q q' : Pt} (h : μ.Maps p q = true) (h' : μ.Maps p' q' = true) :
     q.distSq q' = p.distSq p' := by
   refine NatCancel.cancel μ.scale_ne ?_
-  rw [← μ.distSq_hold, ← μ.distSq_step, μ.maps_iff.mp h, μ.maps_iff.mp h']
+  rw [← μ.distSq_rescale, ← μ.distSq_image, μ.maps_iff.mp h, μ.maps_iff.mp h']
 
 /-! ## Producing motions
 
@@ -212,8 +217,9 @@ learns a second representation. -/
 
 /-- **A rotation about a point**, by `(cos, sin) = (a/M, b/M)`: the second column is `(−b, a)`, and
 the translation is what carries the centre to itself. -/
-def rotAbout (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0) (sq : M * M = (scale : Q4))
-    (rot : a * a + b * b = (scale : Q4)) : Motion where
+def rotAbout (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0 := by decide)
+    (sq : M * M = (scale : Q4) := by decide +kernel)
+    (rot : a * a + b * b = (scale : Q4) := by decide +kernel) : Motion where
   a := a; b := b; c := -b; d := a
   e := M * o.x - (a * o.x + -b * o.y)
   f := M * o.y - (b * o.x + a * o.y)
@@ -224,8 +230,9 @@ def rotAbout (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0) (sq : 
 
 /-- **A reflection in a line through a point**, in the direction `(a/M, b/M)`: the second column is
 `(b, −a)`, which is the sign the old shape could not express. -/
-def reflectIn (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0) (sq : M * M = (scale : Q4))
-    (rot : a * a + b * b = (scale : Q4)) : Motion where
+def reflectIn (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0 := by decide)
+    (sq : M * M = (scale : Q4) := by decide +kernel)
+    (rot : a * a + b * b = (scale : Q4) := by decide +kernel) : Motion where
   a := a; b := b; c := b; d := -a
   e := M * o.x - (a * o.x + b * o.y)
   f := M * o.y - (b * o.x + -a * o.y)
@@ -244,7 +251,7 @@ def translate (v : Pt) : Motion where
   col₂ := by norm_num
   orth := by ring
 
-/-- The identity motion — `Motion.comp`'s unit, and the placement that does nothing. -/
+/-- The identity motion — `Motion.trans`'s unit, and the placement that does nothing. -/
 def id : Motion := translate ⟨0, 0⟩
 
 /-! ## Composing motions
@@ -252,9 +259,16 @@ def id : Motion := translate ⟨0, 0⟩
 A layered construction places a copy of a copy, and de Grey's own rotation was *derived* as one
 rotation after another's inverse — by hand, in Python, outside Lean. -/
 
-/-- **One motion after another.** `μ₁.comp μ₂` is `μ₂ ∘ μ₁`: the linear parts multiply, the scales
-multiply, and the translation is the first one's carried through the second. -/
-def comp (μ₁ μ₂ : Motion) : Motion where
+/-- **One motion after another**, in reading order: `μ₁.trans μ₂` does `μ₁` *first*.
+
+Named `trans` and not `comp` deliberately. `Function.comp` runs right to left, so `μ₁.comp μ₂` would
+have meant `μ₁ after μ₂` to anyone who knows it and `μ₁ then μ₂` to anyone reading left to right —
+a name that means opposite things to two readers. `trans` is Mathlib's name for the left-to-right
+order (`Equiv.trans`, `LE.le.trans`) and carries no such ambiguity.
+
+The linear parts multiply, the scales multiply, and the translation is the first one's carried
+through the second. Read it through `maps_trans`. -/
+def trans (μ₁ μ₂ : Motion) : Motion where
   a := μ₂.a * μ₁.a + μ₂.c * μ₁.b
   b := μ₂.b * μ₁.a + μ₂.d * μ₁.b
   c := μ₂.a * μ₁.c + μ₂.c * μ₁.d
@@ -280,9 +294,9 @@ def comp (μ₁ μ₂ : Motion) : Motion where
       + μ₁.b * μ₁.d * μ₂.col₂ + (μ₂.scale : Q4) * μ₁.orth
 
 /-- **Composition does what its name says.** Two placements chained are one placement. -/
-theorem comp_maps {μ₁ μ₂ : Motion} {p q r : Pt} (h : μ₁.Maps p q = true) (h' : μ₂.Maps q r = true) :
-    (μ₁.comp μ₂).Maps p r = true := by
-  simp only [Maps, comp, Bool.and_eq_true, beq_iff_eq] at h h' ⊢
+theorem maps_trans {μ₁ μ₂ : Motion} {p q r : Pt} (h : μ₁.Maps p q = true) (h' : μ₂.Maps q r = true) :
+    (μ₁.trans μ₂).Maps p r = true := by
+  simp only [Maps, trans, Bool.and_eq_true, beq_iff_eq] at h h' ⊢
   obtain ⟨h1, h2⟩ := h
   obtain ⟨h3, h4⟩ := h'
   constructor
@@ -323,7 +337,7 @@ a certificate valid on `es` is valid on the image, and *no distance is recompute
 
 This is the statement M09 exists to make, and the one de Grey's frozen table needs: placing a copy of
 a subgraph somewhere else in the plane costs one `Maps` check per vertex, never one per edge. When
-the copy's coordinates are *defined* as the image, `validOn_of_scaled` below costs nothing at all. -/
+the copy's coordinates are *defined* as the image, `validOn_map_of_scaling` below costs nothing at all. -/
 theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ : Fin n → Fin n)
     (es : List (Fin n × Fin n))
     (hmap : ∀ e ∈ es, μ.Maps (c.verts e.1) (c.verts (φ e.1)) = true ∧
@@ -337,8 +351,8 @@ theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ 
 
 /-- **A copy defined as an image costs nothing to certify.**
 
-The role this names is *a map that multiplies every squared distance by a constant*: `Motion.step`
-is one with constant `scale`, `Motion.hold` is another, and so is their composite. Given such a map,
+The role this names is *a map that multiplies every squared distance by a constant*: `Motion.image`
+is one with constant `scale`, `Motion.rescale` is another, and so is their composite. Given such a map,
 a certificate whose table is defined as its image — at a denominator whose square is scaled to
 match — is valid wherever the original was, and **not one distance is computed**: no `Maps` check
 per vertex, no arithmetic per edge, nothing that grows with the size of the copy.
@@ -350,7 +364,7 @@ places for itself.
 Stated over a bare `g` and `s` rather than over a `Motion`, because that is where it is true and
 because the two instances a caller wants — the image, and the image re-denominated so that the new
 denominator is an integer for *any* scale — differ only in which pair they supply. -/
-theorem UDCert.validOn_of_scaled {n : ℕ} (c c' : UDCert n) (g : Pt → Pt) (s : Q4)
+theorem UDCert.validOn_map_of_scaling {n : ℕ} (c c' : UDCert n) (g : Pt → Pt) (s : Q4)
     (φ : Fin n → Fin n) (es : List (Fin n × Fin n))
     (hg : ∀ p p', (g p).distSq (g p') = s * p.distSq p')
     (hverts : ∀ v, c'.verts (φ v) = g (c.verts v))
@@ -371,7 +385,7 @@ section Spec
 /-- **A model of the hypotheses**, at the smallest interesting size: the `3–4–5` rotation about the
 origin, `(cos, sin) = (3/5, 4/5)`. Nothing above it is vacuous. -/
 def pythagorean : Motion :=
-  Motion.rotAbout 3 4 5 ⟨0, 0⟩ 25 (by decide) (by decide) (by decide)
+  Motion.rotAbout 3 4 5 ⟨0, 0⟩ 25
 
 -- …and it carries `(5, 0)` to `(3, 4)`, and the origin to itself.
 #guard pythagorean.Maps ⟨5, 0⟩ ⟨3, 4⟩
@@ -379,7 +393,7 @@ def pythagorean : Motion :=
 
 /-- **A model of a reflection** — the motion the previous shape could not express at any scale:
 reflection in the `x`-axis through the origin. -/
-def flipX : Motion := Motion.reflectIn 1 0 1 ⟨0, 0⟩ 1 (by decide) (by decide) (by decide)
+def flipX : Motion := Motion.reflectIn 1 0 1 ⟨0, 0⟩ 1
 
 #guard flipX.Maps ⟨3, 4⟩ ⟨3, -4⟩
 #guard flipX.Maps ⟨1, 0⟩ ⟨1, 0⟩
@@ -391,7 +405,7 @@ def shift : Motion := Motion.translate ⟨2, -1⟩
 #guard shift.Maps ⟨5, 5⟩ ⟨7, 4⟩
 
 -- **A model of composition**: reflect, then shift.
-#guard (flipX.comp shift).Maps ⟨3, 4⟩ ⟨5, -5⟩
+#guard (flipX.trans shift).Maps ⟨3, 4⟩ ⟨5, -5⟩
 
 -- The two images are the distance apart the two sources were: `5² = 25`, both ways.
 example : (⟨3, 4⟩ : Pt).distSq ⟨0, 0⟩ = (⟨5, 0⟩ : Pt).distSq ⟨0, 0⟩ := by decide
@@ -409,14 +423,14 @@ def demoCert : UDCert 2 := ⟨![⟨0, 0⟩, ⟨3, 4⟩], [(0, 1)], 5⟩
 
 /-- The same pair placed by `pythagorean`, its coordinates **defined** as the image and its
 denominator scaled to match — `5 · 5 = 25`, because the rotation's scale factor is `25`. -/
-def demoPlaced : UDCert 2 := ⟨fun v => pythagorean.step (demoCert.verts v), [(0, 1)], 25⟩
+def demoPlaced : UDCert 2 := ⟨fun v => pythagorean.image (demoCert.verts v), [(0, 1)], 25⟩
 
 /-- **And it is valid for free.** Every hypothesis is `rfl` or arithmetic on the denominator; the
 distance `(-7, 24)` is `25` from the origin is never checked, because `distSq_step` already said
 every distance scales by exactly `25`. -/
 example : demoPlaced.ValidOn [(0, 1)] = true :=
-  UDCert.validOn_of_scaled demoCert demoPlaced pythagorean.step 25 _root_.id [(0, 1)]
-    pythagorean.distSq_step (fun _ => rfl) (by decide) (by decide)
+  UDCert.validOn_map_of_scaling demoCert demoPlaced pythagorean.image 25 _root_.id [(0, 1)]
+    pythagorean.distSq_image (fun _ => rfl) (by decide) (by decide)
 
 /-! ### The negative controls — one per similarity law
 

@@ -213,13 +213,18 @@ Std.Sat ─┤
          ├─► HadwigerNelson/Field/Quadratic.lean   Adjoin d K, CommRing, eval : K →+* ℝ  [M02]
          │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
          │                 ├─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
-         │                 ├─► HadwigerNelson/Motion.lean   exact plane rotations; NatCancel  [M09]
+         │                 ├─► HadwigerNelson/Motion.lean   exact plane similarities      [M09/M11]
+         │                 │        rotations, reflections, translations; composition; NatCancel
          │                 └─► HadwigerNelson/Packed.lean   digit packing; DiffWitness    [M08]
          │                          └─► HadwigerNelson/PackedDiagnose.lean   #eval-only faults
          │
+         ├─► HadwigerNelson/Pattern.lean   port colourings, one per partition       [M11]
+         │        (depends on Mathlib alone — a candidate for upstreaming)
+         │
          ├─► HadwigerNelson/Sat/Encoding.lean   colouringCNF, Colorable → Sat, cubes     [M03]
          │        ├─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
-         │        └─► HadwigerNelson/Gadget.lean   proven colouring constraints; composition [M09]
+         │        └─► HadwigerNelson/Gadget.lean   colouring constraints, at any number  [M09/M11]
+         │                 of colours; composition; the terminal check over partitions
          │
          ├─► HadwigerNelson/Sat/Mask.lean   clauses/assignments as bitmasks; propagate   [M05]
          │        └─► HadwigerNelson/Sat/ClauseTable.lean   literal chunk table; agreement
@@ -513,13 +518,17 @@ produce a meaningless one, and the specific countermeasure for each:
 | The two tables are the same length but a different shape, so an index means two things | ✅ M08: `packOk` compares the split pivots node by node; a reshape is a `shape` fault, and the control that reshapes the packed table is committed |
 | The rotation is asserted rather than checked, so the "second copy" is a different graph | ✅ M09: `deGrey_rotation` decides 791 exact coordinate identities in `ℚ(√3,√5,√7,√11)` — every point of the first copy against its claimed partner. The index map is a closed form, so there is no emitted table to be wrong; and `31² + (3√7)² = 32²` is checked as a field of `Motion`, without which `Motion.distSq_eq` is *false* and the committed countermodel says so |
 | The transported gadget is attached to the wrong ports, so it constrains the wrong vertices | ✅ M09: `Gadget.transport` takes the port images as **pointwise equations** — for de Grey, `φ 14 = 14` and `φ 11 = 802`. A wrong image is a type error at the composition, not a silently different theorem |
-| The composition "refutes" whatever it is handed | ✅ M09: dropping the joining edge leaves exactly the four monochromatic patterns, and `deGrey_forcing_alone_admits` is that as a **theorem**, kernel-decided on every build. The same control at spec scale is `K₅` minus an edge, with the rendered survivor list pinned by `#guard_msgs` |
+| The composition "refutes" whatever it is handed | ✅ M09, sharpened at M11: dropping the joining edge leaves exactly one surviving pattern — *vertex 14, vertex 11 and vertex 802 all one colour* — and `deGrey_forcing_alone_admits` is that as a **theorem**, kernel-decided on every build. The same control at spec scale is `K₅` minus an edge, with the rendered survivor list pinned by `#guard_msgs` |
 | A transported gadget collapses an edge, making a colouring "proper" that is not | ✅ M09: `Gadget.transport`'s hypothesis is `Adj`, which carries distinctness, so a collapsing map cannot satisfy it. For de Grey that distinctness is `deGreyPhiNat_inj`, proved by `omega` from the closed form — no data to check |
 | The scale factor is cancelled unsoundly, since `Q4` is not known to be a domain | ✅ M09: it is cancelled as a **natural number** via `NatCancel`, true of the tower because its leaves are `ℤ` and every level is componentwise. Nothing anywhere assumes `Q4` has no zero divisors |
 | The pruned search skips a subtree it has not bounded, so a heavy independent set is never seen | ✅ M10: the prune's own hypothesis is what the PRUNE case of `noHeavy_sound` consumes. Weakening it from `wt + rem ≤ D` to `wt ≤ D` makes the soundness proof **stop compiling**, at that one step and no other; removing either remaining hypothesis also fails |
 | The weights are certified against a mask that invents edges, so genuinely independent sets are skipped | ✅ M10: `nbrMask_and_two_pow_eq_zero` proves fidelity in the one direction that matters — a set bit is a listed pair. An *under*-reporting mask is sound (the search explores sets that are not independent and answers `false` more often); an over-reporting one cannot pass |
 | The weight bound's diagnosis disagrees with the bound itself | ✅ M10: `findHeavy_isNone` is a **theorem** — the diagnostic reports nothing exactly when the check says `true`. And the set it reports is re-checked for independence and weight by `#guard`s that have never heard of the search |
 | The fractional chromatic number silently defined as the ordinary one | ✅ M10: `C5_fractional` pins `χ_f(C₅) = 5/2` — **not an integer** — proved in both directions, the upper one by an explicit 2-fold 5-colouring that is also the model showing nothing above is vacuous. Its negative control is that the independence bound `2` is attained, so a certificate at `1` would be false |
+| The terminal check ranges over one colouring per partition, so a colouring it never enumerated slips through | ✅ M11: soundness is *not* a property of the enumeration alone — it needs a proper colouring to stay proper when its colours are renamed. `not_colorable_of_gadget` relabels the colouring by `σ⁻¹` and hands *that* to `sound`; deleting the relabelling breaks the proof at exactly that step, watched |
+| The enumeration of colour-partitions silently skips one | ✅ M11: pinned in **both** directions at four ports and five colours — no two representatives are the same partition, and `∀ q, (canonPatterns 5 4).any (samePattern · q)` is decided over all 625 patterns. Making the enumeration unable to open a fresh colour breaks the proof in both branches *and* both rendered-output controls |
+| A "motion" that is not one, so a placed copy is a different graph | ✅ M11: three similarity laws, and **each has its own countermodel** — a stretch (`col₁`), a projection onto a line (`col₂`), a shear (`orth`) — each an `example : ¬ ∀ …` stating the theorem with exactly that law deleted. A build failure could not establish any of this |
+| A placed copy's geometry asserted rather than derived | ✅ M11: `UDCert.validOn_map_of_scaling` derives it from *one* hypothesis about the map — that it multiplies every squared distance by a constant — with **no per-vertex and no per-edge check**. The copy's coordinates are `rfl`-equal to the image, so there is nothing to assert |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
@@ -560,19 +569,21 @@ Stated up front, per doctrine, and to be reported as-is:
   re-checker on 4 cores that cannot finish overnight.
   **An earlier version of this bullet quoted 0.35 ms/step and 1.26 hours. Both were wrong** — measured
   without the clause-table lookup, which is where the time actually goes. Do not quote them again.
-- **The gadget algebra is written at four colours, and rung D needs five.** Found 2026-08-01, after
-  M09 shipped. `Gadget`, `Proper`, `samePattern`, `pinCube`, `allPatterns` and `survivors` all fix the
-  colour count at 4; everything beneath them is already general. The fix is mechanical and it is M11's
-  first item — but it was not noticed during M09's three modeling passes, which is worth recording as
-  a miss: every witness in this repository refutes 4-colourings, so nothing in the milestone's own
-  work pushed on the number.
+- **~~The gadget algebra is written at four colours, and rung D needs five.~~** **Fixed at M11.** The
+  colour count is now the first index of `Gadget`, `Proper` is stated over an arbitrary colour type,
+  and `K₆` at five colours is a committed spec witness. Recorded as a **miss**, because it was not
+  noticed during M09's three modeling passes: every witness in this repository refutes 4-colourings,
+  so nothing in the milestone's own work pushed on the number, and a design nobody exercises at the
+  next value is a design nobody has checked.
 - **The gadget algebra has been exercised on constructions that already existed, not on a search.**
   M09's composition theorem covers de Grey's two-copy argument and Heule's triangle argument, and it
-  deleted a certificate. That is evidence it is the right shape, not evidence it scales: the terminal
-  check is `4^m` in the number of interface vertices, measured at ~0.2 ms per (colouring × gadget), so
-  **eight ports and ten gadgets is already ~2 minutes** — and `5^m` rather than `4^m` once the item
-  above is fixed, which is 6× worse again. A search over many placements will need the
-  colour-symmetry optimisation M09 deliberately left out, and that is a projection, not a measurement.
+  deleted a certificate. That is evidence it is the right shape, not evidence it scales. **The cost is
+  now measured rather than projected** (`plans/M11-search-instrument.md` § 0): the terminal check runs
+  over one colouring per colour-partition of the interface, at ~2–3 ms each, which puts the ceiling at
+  **ten interface vertices at five colours — 4.3 minutes.** Without that restriction the ceiling is
+  seven, and eight does not finish at all. Ten is enough for the compositions we can currently
+  imagine and it is not obviously enough for the ones a search will propose; that gap is the honest
+  statement of the risk.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

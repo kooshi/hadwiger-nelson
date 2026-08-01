@@ -64,9 +64,11 @@ theorem heule510_not_colorable_four : ¬ (edgeGraph 510 heule510.edges).Colorabl
   not_colorable_of_gadget heule510Gadgets (by
     first
     | decide
-    | fail "the gadgets do not jointly refute. For the port colourings that survive, in a file \
-            with `import Proofs.HadwigerNelson.Instances.Heule510.Bound` and inside `namespace \
-            HadwigerNelson`:  #eval heule510Gadgets.survivors")
+    | fail "heule510Gadgets admits a port colouring, so this graph is not refuted. What survives is \
+            `heule510Gadgets.survivors` — one entry per colour-partition of the ports, each a list of \
+            (vertex, colour) pairs, and each a cube a solver will take as it stands. This module \
+            no longer builds, so read it from a fresh file: import Proofs.HadwigerNelson.Instances.Heule510.Bound \
+            and, inside `namespace HadwigerNelson`,  #eval heule510Gadgets.survivors")
 
 /-- **χ(ℝ²) ≥ 5**, from the 510-point witness. Identical in statement to
 `chromaticNumber_plane_ge_five`; the number in the name is the size of the graph it came from, which

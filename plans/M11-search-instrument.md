@@ -326,9 +326,10 @@ structure Gadget (k n m : ℕ) (E : List (Fin n × Fin n)) (p : Fin m → Fin n)
 def inter / trivial / mono / widen / transport / edge
 def pinCube / Gadget.ofUnsat
 
-/-- The port colourings, **one per colour-partition**, this gadget has not ruled out. -/
-def Gadget.survivors (g : Gadget k n m E p) : List (List (Fin k)) :=
-  ((canonPatterns k m).filter g.admits).map (List.ofFn ·)
+/-- The port colourings, **one per colour-partition**, this gadget has not ruled out —
+    each written as the cube pinning the ports to it. -/
+def Gadget.survivors (g : Gadget k n m E p) : List (Cube n k) :=
+  ((canonPatterns k m).filter g.admits).map (pinCube p)
 
 theorem not_colorable_of_gadget (g : Gadget k n m E p) (h : g.survivors = []) :
     ¬ (edgeGraph n E).Colorable k
@@ -342,11 +343,12 @@ def Motion.Maps (μ : Motion) (p q : Pt) : Bool
 theorem Motion.distSq_eq : μ.Maps p q → μ.Maps p' q' → q.distSq q' = p.distSq p'
 
 def Motion.rotAbout / reflectIn / translate / id   -- smart constructors
-def Motion.comp (μ₁ μ₂ : Motion) : Motion
-theorem Motion.comp_maps : μ₁.Maps p q → μ₂.Maps q r → (μ₁.comp μ₂).Maps p r
+def Motion.trans (μ₁ μ₂ : Motion) : Motion          -- `μ₁` first, reading order
+theorem Motion.maps_trans : μ₁.Maps p q → μ₂.Maps q r → (μ₁.trans μ₂).Maps p r
 
-def Motion.hold / step
-theorem Motion.maps_step (μ : Motion) (p : Pt) : μ.Maps (μ.hold p) (μ.step p) = true
+def Motion.image / rescale
+theorem Motion.maps_iff : μ.Maps p q = true ↔ μ.rescale q = μ.image p
+theorem Motion.distSq_image / distSq_rescale
 
 -- unchanged: UDCert.validOn_of_subset, validOn_congr, validOn_map_of_motion
 ```
@@ -534,6 +536,86 @@ and `Motion.distSq_eq` on exactly `[propext, Classical.choice, Quot.sound]`;
 `UDCert.validOn_of_scaled` on `[propext, Quot.sound]`. `chromaticNumber_plane_ge_five` — the
 milestone-B headline, which now reaches the plane through a rewritten `Motion` and a rewritten
 terminal check — is unchanged at `[propext, Classical.choice, Quot.sound]`.
+
+---
+
+## 3.7 The experience pass
+
+*Run 2026-08-01. The consumer whose day this milestone has to be good on is a **search**, and a
+search's normal experience is failure — so the failing surface is where the pass spent itself.*
+
+### What a search holds on the failing day, and what it was being handed
+
+A search holds **vertices**: it chose the ports, it knows them as vertex numbers, and it is about to
+ask a solver another question about them. What the terminal check handed back was
+`[[0, 1, 2, 3, 3]]` — port *indices*, in a list of colours — so the reader's next move was to open
+the port tuple and work out which vertices ports 3 and 4 are. That is the author's frame: port
+indices are an implementation detail of the composition, and they crossed the wire instead of the
+answer.
+
+`Gadget.survivors` now returns **the cube that pins the ports**, one per surviving colour-partition:
+
+```
+[[(14, 0), (11, 0), (802, 0)]]     -- de Grey's forcing without the joining edge
+[[(0, 0), (1, 1), (2, 2), (3, 3), (4, 3)]]   -- K₅ minus one edge
+```
+
+Vertex and colour, said outright. And the shape is not new vocabulary: it is `Cube n k`, the type
+`pinCube` already produced and the solver already consumes — **so what the failure prints is the
+input to the step after it**. The round-trip law, in the one place it matters here.
+
+### The failure directive: three copies, and they stay three copies
+
+`decide`'s own message is better than expected — it names the gadget and the property
+(`nine.survivors = []` is *false*) — so the directive only has to supply what `decide` cannot: that
+this module no longer builds, so the `#eval` must run from a fresh file, and which module to import.
+Both of those vary per instance, and `fail` takes a string literal, so removing the duplication
+means metaprogramming for a saving of two lines at three sites. **Not bought**; the three messages
+are now word-for-word the same sentence with the two varying names substituted, which is the
+maintainable version of duplication.
+
+### Names
+
+| was | is | why |
+|---|---|---|
+| `Motion.step` | `Motion.image` | it *is* the image of the point; `step` said nothing |
+| `Motion.hold` | `Motion.rescale` | it re-denominates; `hold` said nothing |
+| `Motion.comp` | `Motion.trans` | **`comp` meant opposite things to two readers.** `Function.comp` runs right to left, so `μ₁.comp μ₂` reads as "μ₁ after μ₂" to anyone who knows it and "μ₁ then μ₂" to anyone reading left to right. `trans` is Mathlib's name for the left-to-right order and is unambiguous |
+| `UDCert.validOn_of_scaled` | `UDCert.validOn_map_of_scaling` | parallel to its sibling `validOn_map_of_motion`, and "scaling" names the map rather than describing the certificate |
+
+`Motion.Maps` keeps its capital despite being a `Bool`, because `UDCert.Valid` and `ValidOn` already
+do: consistency inside the project beats consistency with a convention this project has already
+departed from twice.
+
+`Gadget k n m E p` keeps the colour count first. Read aloud it is coarse to fine — *four colours,
+1581 vertices, three ports, these edges, these ports* — and every index is something two gadgets
+must agree on to compose. The alternative orderings interleave the graph with the interface.
+
+### `rotAbout` and `reflectIn` stopped asking for what every caller wrote
+
+Both took three proof arguments, and **every call site in the repository wrote `(by decide)` three
+times**. That is the standing smell — an argument every user fumbles the same way is the argument's
+bug — so they are `autoParam`s now (`:= by decide`, `:= by decide +kernel`), and the spec witnesses
+read `Motion.rotAbout 3 4 5 ⟨0, 0⟩ 25`. A caller whose numbers the kernel cannot decide still
+supplies the proof explicitly; nothing was hidden, only defaulted.
+
+### Under regression control
+
+Four rendered surfaces are pinned by `#guard_msgs` rather than described: the canonical enumeration
+at three ports, the five-colour witness's survivor, the four-colour negative control's survivor, and
+the cross-filing fault report. Two of them went red when `survivors` changed shape — which is the
+point of pinning the wire rather than the API behind it.
+
+### The reviewer's entry point, rewritten
+
+`ARCHITECTURE.md` § 3 gains `Pattern.lean` and re-describes `Motion.lean` and `Gadget.lean`; § 6
+gains four defence rows and sharpens the composition row; § 7's claim that the algebra is stuck at
+four colours is struck through and recorded as a **miss** — it was not noticed during M09's three
+modeling passes, because every witness here refutes 4-colourings and nothing in that milestone's own
+work pushed on the number. § 7's cost claim (`4^m` at ~0.2 ms per colouring × gadget) is replaced by
+the measurement: the ceiling is ten interface vertices at five colours, and the honest risk is that
+ten is enough for the compositions we can imagine and not obviously enough for the ones a search
+will propose.
 
 ---
 
