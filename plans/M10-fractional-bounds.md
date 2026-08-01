@@ -440,6 +440,133 @@ witness is projected at **≈ 5 CPU minutes**, not 3.
 
 ---
 
+## 3.7 Obligation pass — the search is proved, and one statement was replaced
+
+Run 2026-08-01. The two hard obligations — the pruned search and the mask fidelity it rests on —
+were not merely decomposed but **carried to a compiling proof**, zero `sorry`, **2.72 CPU s** against
+a 2.28 s baseline. The remaining obligations are stated with their derivations.
+
+### The abstract chosen set was dead weight, and dropping it is what made the proof short
+
+The domain pass proposed generalising the induction over an abstract chosen set `C : Finset (Fin n)`
+alongside its bitmask, linked by a refinement relation. **The derivation never uses `C`.** The
+recursion touches the chosen vertices in exactly one way — "is this candidate compatible with
+everything already taken?" — and that is a statement about the *mask* alone:
+
+```lean
+(∀ v ∈ I, nbrMask E v &&& chosen = 0)
+```
+
+So the induction generalises over `chosen : ℕ`, `wt : ℕ`, `rem : ℕ` and nothing else. That is the
+core's "a hypothesis the proof never touches is dead weight", caught before it was written.
+
+### The statement the proof derives from
+
+```lean
+theorem noHeavy_sound_aux (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (D : ℕ) :
+    ∀ (order : List (Fin n)) (chosen wt rem : ℕ),
+      noHeavy D (mkSlots E w order) chosen wt rem = true →
+      (order.map w).sum ≤ rem →
+      ∀ I : Finset (Fin n),
+        (∀ v ∈ I, v ∈ order) →
+        (edgeGraph n E).IsIndepSet (I : Set (Fin n)) →
+        (∀ v ∈ I, nbrMask E v &&& chosen = 0) →
+        wt + ∑ v ∈ I, w v ≤ D
+```
+
+Structural induction on `order`, which is `noHeavy`'s own recursion — the recursor the type already
+generates. **The top-level theorem falls out in one line** (`simpa using … (fun v _ => Nat.and_zero _)`),
+which is the signal that the generalisation is right rather than merely sufficient.
+
+The case table, each case as it actually closes:
+
+| case | closes by |
+|---|---|
+| `order = []` | the run gives `wt ≤ D`; `I ⊆ []` forces `I = ∅` |
+| **PRUNE** (`wt + rem ≤ D`) | `∑_{v ∈ I} w v ≤ ((u :: rest).map w).sum ≤ rem`, then `omega` |
+| **SKIP** (`u ∉ I`) | the induction hypothesis, unchanged mask, `I` verbatim |
+| **TAKE** (`u ∈ I`) | `hcompat u` kills the `nbr &&& chosen ≠ 0` disjunct; recurse on `I.erase u` with `chosen ||| 2^u`, whose compatibility is `Nat.and_or_distrib_left` plus mask fidelity |
+
+**Duplicates in `order` were checked, not assumed:** no case uses `u ∉ rest`. The TAKE case passes
+`I.erase u` and only needs its members to lie in `rest`, which holds however often `u` recurs. The
+one price of allowing them is `sum_le_list_sum`, an 8-line list induction — worth it, because it
+keeps the certificate's obligation at "covers every vertex" rather than "is a permutation".
+
+### The mask needs fidelity in one direction only
+
+```lean
+theorem nbrMask_and_two_pow_eq_zero (E) {u v : Fin n}
+    (hne : u ≠ v) (h : ¬ (edgeGraph n E).Adj u v) : nbrMask E v &&& 2 ^ u.val = 0
+```
+
+Only `mask bit set → real edge` is ever used. **A mask that under-reports edges is sound** — the
+search merely explores sets that are not independent and answers `false` more often; a mask that
+*invents* an edge would skip a genuine independent set and is what this lemma forbids. So the
+constant-zero mask satisfies the obligation, and a generator bug in this datum cannot make a false
+answer true. Spine: `Nat.eq_of_testBit_eq`, then `Nat.testBit_two_pow` and an induction over the
+edge list (`Nat.testBit_or`, `Nat.zero_testBit`) — every citation checked in core, none recalled.
+
+The `u ≠ v` guard is load-bearing and is why: `edgeGraph` strips loops, so a self-pair `(v,v)` left
+in the list sets bit `v` in `v`'s own mask without making `v` adjacent to itself.
+
+### (c) The double count, factored so each half is short
+
+Polya's move applies: the **more general** statement is the easier one. The colour bookkeeping and
+the double counting are separated, and neither half is more than a few lines.
+
+```lean
+/-- `n` independent sets covering each vertex at least `b` times. -/
+theorem weight_le_of_indep_cover (w : V → ℕ) (b n D : ℕ) (S : Fin n → Finset V)
+    (hind : ∀ c, G.IsIndepSet (S c : Set V))
+    (hcov : ∀ v, b ≤ (univ.filter fun c => v ∈ S c).card)
+    (hD : ∀ I : Finset V, G.IsIndepSet (I : Set V) → ∑ v ∈ I, w v ≤ D) :
+    b * ∑ v, w v ≤ n * D
+```
+
+`b * ∑_v w v ≤ ∑_v #{c : v ∈ S c} * w v = ∑_c ∑_{v ∈ S c} w v ≤ n * D`, the middle equality being
+`Finset.sum_filter` then `Finset.sum_comm`. A `b`-fold `n`-colouring supplies the family by
+`S c := univ.filter (fun v => c ∈ f v)`, whose covering count is `(f v).card` via
+`Finset.filter_univ_mem`. **All four citations `#check`ed, not recalled.**
+
+### (d) `χ_f ≤ χ` is replaced by the statement the corollary actually needs
+
+**Decision: state `not_colorable_of_lt_fractionalChromaticNumber`, not `χ_f ≤ χ`.**
+
+```lean
+theorem not_colorable_of_lt_fractionalChromaticNumber {k : ℕ}
+    (h : (k : ℝ≥0∞) < G.fractionalChromaticNumber) : ¬ G.Colorable k
+```
+
+*Alternative weighed:* state `G.fractionalChromaticNumber ≤ (G.chromaticNumber : ℝ≥0∞)` as the plan
+had it. *Why this one:* that statement pushes a coercion through an infimum, which needs
+`ENat.toENNReal` to *preserve infima* — a real lemma to find or prove, for a theorem no consumer
+calls. The replacement is two lines (a colouring is a 1-fold colouring, so `χ_f ≤ k/1 = k`), it is
+the exact analogue of M01's `lt_chromaticNumber_iff_not_colorable`, and it delivers the corollary
+unchanged: `3 < 65/18 ≤ χ_f(ℝ²)` gives `¬ Colorable 3` gives `4 ≤ χ(ℝ²)`. *Confidence: high — if a
+later milestone wants the inequality between the two invariants for its own sake, it is one lemma
+away and nothing here has to move.*
+
+### The obligations, partitioned
+
+| | |
+|---|---|
+| **prove** | `noHeavy_sound_aux`, `nbrMask_and_two_pow_eq_zero`, `sum_le_list_sum` — **done, compiling**; `weight_le_of_indep_cover`, the colour-class independence, `le_fractionalChromaticNumber`, `not_colorable_of_lt_fractionalChromaticNumber` |
+| **test** | `α(spindle) = 2`; the 5-cycle at exactly `5/2`; the search's `#eval`s; every § 4 control |
+| **assume** | of the certificate: the order covers every vertex, and `(order.map w).sum ≤ rem` — both one `decide` |
+
+### The mutation audit — run, not promised
+
+| mutation | result |
+|---|---|
+| prune weakened from `wt + rem ≤ D` to `wt ≤ D` | **fails at the PRUNE case's closing `omega`** — the step a reader would point at, and the only one |
+| the `(order.map w).sum ≤ rem` hypothesis removed | fails |
+| the `u ≠ v` guard removed from mask fidelity | fails |
+| restored | 0 errors, 0 warnings |
+
+Every hypothesis is load-bearing; none of the weakenings still proves.
+
+---
+
 ## 4. Controls — each one watched to fail
 
 | control | what it breaks | must report |
