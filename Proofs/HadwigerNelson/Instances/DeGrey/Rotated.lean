@@ -6,7 +6,7 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Rotation
 `Instances/DeGrey/Rotation.lean` holds the rotation itself and the 791 coordinate identities the
 kernel checks. This module is everything that follows from them, and it is **deliberately a separate
 module**: Lake's traces are content-based, so a word changed here would otherwise re-run those 791
-identities — 86 seconds — on every edit. Same discipline as `Sat/Diagnose.lean` and
+identities — 95 CPU seconds — on every edit. Same discipline as `Sat/Diagnose.lean` and
 `PackedDiagnose.lean`, one milestone down.
 -/
 
@@ -46,20 +46,9 @@ theorem deGreyRot_cross_mem : ((11 : Fin 1581), (802 : Fin 1581)) ∈ deGreyRotE
 
 /-! ## Spec
 
-The rotation is only de Grey's construction if it lands on the vertices it is supposed to. These pin
-that, and they run compiled on every build. -/
+`Valid = true` says nothing about *which* graph was validated, so these pin that it is de Grey's. -/
 
 section Spec
-
--- The rotation centre is vertex 14, and it is its own image.
-#guard deGreyPhiNat 14 = 14
-
--- The joining edge's ends are partners: vertex 11 in the first copy, vertex 802 in the second.
-#guard deGreyPhiNat 11 = 802
-
--- The map is onto the second copy: `{14} ∪ [791, 1580]`.
-#guard ((List.range 791).map deGreyPhiNat).eraseDups.length = 791
-#guard ((List.range 791).map deGreyPhiNat).all fun j => j = 14 || (791 ≤ j && j < 1581)
 
 -- Same graph as `deGrey`, not a different one: 7877 edges, and the same set once orientations are
 -- normalised. `deGrey.edges` is emitted with `e.1 < e.2` throughout; the mapped half is not, since

@@ -16,9 +16,9 @@ half rotated** — by the difference of those two angles:
 | `sin` | `−3√7/32` |
 | the identity that makes it a rotation | `31² + (3√7)² = 961 + 63 = 1024 = 32²` |
 
-This module says exactly that, and Lean checks it: 791 exact coordinate identities in
-`ℚ(√3,√5,√7,√11)`. Everything else follows — the second half's *geometry* by
-`distSq_eq_of_rotOk`, and its *colouring property* by `Gadget.transport`.
+This module says exactly that, and the kernel checks it: 791 exact coordinate identities in
+`ℚ(√3,√5,√7,√11)`. Everything else follows — the second half's *geometry* from `Motion.distSq_eq`,
+and its *colouring property* from `Gadget.transport`.
 
 ## What that replaces
 
@@ -31,7 +31,7 @@ closed form, not a table.
 
 `tools/degrey.py` builds the point list as `dedup(Ya ++ Yb)`, so the first copy occupies **exactly
 indices 0–790** and the second occupies `{14} ∪ [791, 1580]` — the one overlap being the rotation
-centre, which is its own image. Hence:
+centre, which is its own image. Hence
 
 ```
 φ i = 14        at the centre
@@ -39,8 +39,15 @@ centre, which is its own image. Hence:
       790 + i   above it        -- one index skipped, because the centre is shared
 ```
 
-Nothing about that is trusted: `deGrey_rotation` re-derives every one of the 791 correspondences
-from the coordinates.
+Nothing about that is trusted: `deGrey_rotation` re-derives every one of the 791 correspondences from
+the coordinates themselves.
+
+## This module is settled, and separate for that reason
+
+It costs **95 CPU seconds** and will not be edited again. Lake's traces are content-based, so
+anything written beside these checks would re-run them on every rewording; what follows from them
+lives in `Rotated.lean`, which costs five. Same discipline as `Sat/Diagnose.lean` and
+`PackedDiagnose.lean`.
 -/
 
 set_option maxRecDepth 1000000
@@ -50,56 +57,59 @@ namespace HadwigerNelson
 
 /-! ## The rotation -/
 
-/-- `31` — the rotation's cosine, cleared of its denominator `32`. -/
-def deGreyRotA : Q4 := ⟨⟨⟨⟨31,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
+/-- **The motion carrying de Grey's first copy onto his second**: rotation about `(−2, 0)` by
+`(cos, sin) = (31/32, −3√7/32)`, with the denominator cleared and the rotation identity
+`31² + (3√7)² = 32²` carried as a field.
 
-/-- `−3√7` — the rotation's sine, cleared of its denominator `32`. -/
-def deGreyRotB : Q4 := ⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨-3,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
-
-/-- `32` — the denominator both were cleared by. -/
-def deGreyRotM : Q4 := ⟨⟨⟨⟨32,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
-
-/-- The rotation centre `(−2, 0)`, at the certificate's scale of 768. It is vertex 14. -/
-def deGreyRotCentre : Pt :=
-  ⟨⟨⟨⟨⟨-1536,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,
-   ⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩
-
-/-- **It really is a rotation**: `31² + (3√7)² = 32²`, which is the one hypothesis every distance
-claim below consumes. -/
-theorem deGreyRot_id :
-    deGreyRotA * deGreyRotA + deGreyRotB * deGreyRotB = deGreyRotM * deGreyRotM := by decide +kernel
-
-/-- The scale factor, as the natural number that gets cancelled. -/
-theorem deGreyRot_sq : deGreyRotM * deGreyRotM = ((1024 : ℕ) : Q4) := by decide +kernel
+The coordinates are written as nested pairs rather than as `31`, `32`, … so that the kernel meets
+tower elements rather than casts it has to unfold: this data is multiplied by twice per vertex, 791
+times over. -/
+def deGreyMotion : Motion where
+  a := ⟨⟨⟨⟨31,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
+  b := ⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨-3,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
+  M := ⟨⟨⟨⟨32,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩
+  centre :=
+    ⟨⟨⟨⟨⟨-1536,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,
+     ⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩
+  scale := 1024
+  scale_ne := by decide
+  sq := by decide +kernel
+  rot := by decide +kernel
 
 /-! ## The index map -/
 
-/-- The index map on raw indices — a closed form, not a table. Outside the first copy
-(`791 ≤ i`) it is the identity, and that value is junk: no theorem here applies it there, and the
-edge walk `deGreyHalfA_lt` is what confines every use to the range where it means something. -/
-def deGreyPhiNat (i : Nat) : Nat :=
-  if i = 14 then 14 else if i < 14 then 791 + i else if i < 791 then 790 + i else i
+/-- **The index map of the rotation**, on raw indices: the first copy's vertex `i` is carried to the
+second copy's vertex `φ i`. Arithmetic, not a table — see the module docstring for why the first copy
+is exactly `[0, 791)`. -/
+def deGreyPhiNat (i : ℕ) : ℕ := if i = 14 then 14 else if i < 14 then 791 + i else 790 + i
 
-/-- The map stays in range. -/
-theorem deGreyPhiNat_lt {i : Nat} (h : i < 1581) : deGreyPhiNat i < 1581 := sorry
+/-- The map lands in range on the first copy. -/
+theorem deGreyPhiNat_lt {i : ℕ} (h : i < 791) : deGreyPhiNat i < 1581 := sorry
 
 /-- **The map is injective on the first copy** — by arithmetic, with no data to check. This is what
-stops the transported half from collapsing two vertices onto one. -/
-theorem deGreyPhiNat_inj {i j : Nat} (hi : i < 791) (hj : j < 791)
+stops the transported half from collapsing two vertices onto one, which is the one thing that would
+make `Gadget.transport` inapplicable. -/
+theorem deGreyPhiNat_inj {i j : ℕ} (hi : i < 791) (hj : j < 791)
     (h : deGreyPhiNat i = deGreyPhiNat j) : i = j := sorry
 
-/-- The index map as a vertex map. -/
-def deGreyPhi (i : Fin 1581) : Fin 1581 := ⟨deGreyPhiNat i.val, deGreyPhiNat_lt i.isLt⟩
+/-- The index map as a vertex map.
+
+**Outside the first copy this is the identity, and that value means nothing** — no theorem here
+constrains it, and `deGreyHalfA_lt` below is what confines every use to the range where the rotation
+speaks. The guard sits at the `Fin` boundary rather than inside `deGreyPhiNat` because it is a
+*bound*, not a fact about the construction; and the map is total rather than partial because
+`List.map` cannot carry a per-element side condition. -/
+def deGreyPhi (i : Fin 1581) : Fin 1581 :=
+  if h : i.val < 791 then ⟨deGreyPhiNat i.val, deGreyPhiNat_lt h⟩ else i
 
 /-! ## What the kernel checks -/
 
 /-- **The construction, verified.** Each of the 791 points of de Grey's first copy is carried to its
-partner in the second by one rotation about `(−2, 0)` — 791 exact identities in
-`ℚ(√3,√5,√7,√11)`, decided by the kernel. Measured at ~86 CPU seconds. -/
+partner in the second by one rotation about `(−2, 0)` — 791 exact identities in `ℚ(√3,√5,√7,√11)`,
+decided by the kernel. Measured at 93.6 + 6.3 CPU seconds on the desktop. -/
 theorem deGrey_rotation :
     ((List.range 791).all fun i =>
-      RotOk deGreyRotA deGreyRotB deGreyRotM deGreyRotCentre
-        (deGreyTable.get i) (deGreyTable.get (deGreyPhiNat i))) = true := by
+      deGreyMotion.Maps (deGreyTable.get i) (deGreyTable.get (deGreyPhiNat i))) = true := by
   decide +kernel
 
 /-- Every edge of the first half has both endpoints inside the first copy — which is what confines
@@ -108,13 +118,13 @@ theorem deGreyHalfA_lt :
     (deGreyHalfAEdges.all fun e => decide (e.1.val < 791) && decide (e.2.val < 791)) = true := by
   decide +kernel
 
-/-- No listed edge of the first half is a loop. -/
+/-- No listed edge of the first half is a loop — needed for the transported edges to be edges. -/
 theorem deGreyHalfA_ne :
     (deGreyHalfAEdges.all fun e => decide (e.1.val < e.2.val)) = true := by decide +kernel
 
 /-! ## Spec
 
-The rotation is only de Grey's construction if it lands on the vertices it is supposed to. -/
+The rotation is de Grey's construction only if it lands on the vertices it is supposed to. -/
 
 section Spec
 

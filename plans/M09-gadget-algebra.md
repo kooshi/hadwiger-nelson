@@ -297,6 +297,47 @@ was spent — which is the point of writing the skeleton first.
 So the milestone's central factual claim — **de Grey's second copy is the rotation of his first** —
 is a theorem before implementation starts. What remains is proof, not discovery.
 
+### 3.6 Domain pass — 2026-07-31
+
+**What the object actually is.** Fix a graph and a tuple of its vertices. Over all proper
+4-colourings, the ports can be coloured in some set of ways. *That set is the domain object*, and a
+gadget is an **over-approximation** of it plus the proof. One direction only, and that is the safety
+argument: too permissive proves less, too strict is unsound and cannot be built because `sound` is a
+field. Same shape as `Sat/Encoding.lean`'s deliberate one-directional bridge.
+
+**Three changes the pass forced.**
+
+| Change | Why |
+|---|---|
+| `RotOk a b M o p q` (six loose arguments) → a bundled **`Motion`** carrying `a b M centre scale` and the two laws | Four names repeated at every call site is *a role unnamed* — the role is "the motion carrying one copy onto another", and naming it is what lets a search speak about placements at all. It also earns the predictable next theorem: composition of motions, which is how de Grey's rotation was derived in the first place. |
+| `widen`/`transport` take **pointwise** port equations (`∀ k, φ (p k) = pt k`) rather than an equation between functions | A function equation needs `funext` and then a cast to move a gadget across — the cast smell, on the first pass. Pointwise is `decide`-able *and it puts the mathematics in the open*: for de Grey the two equations are `φ 14 = 14` and `φ 11 = 802`, which is exactly "the rotation fixes the shared vertex and swaps the ends of the joining edge". |
+| `deGreyPhiNat` loses its junk branch; the `Fin` bound becomes a guard at the lift | The out-of-range case was a *bound*, not a fact about the construction. Separating them leaves the arithmetic clean and the guard in one place. |
+
+**Three things the pass confirmed rather than changed.**
+
+* **The `(E, p)` indices stay.** Every operation either demands agreement on both or changes one on
+  purpose — which is exactly "index only what every consumer must know". The alternative, gadgets
+  carrying their own ports, composes by *concatenation*, so the terminal check costs `4^(m₁+m₂+…)`:
+  multiplicative in the number of gadgets rather than fixed by the interface.
+* **Ports stay a tuple, not a list.** They exist for one reason — to make the terminal check
+  decidable — and `Fin m → Fin 4` is a `Fintype` where a colour list of matching length is not. One
+  conversion, `pinCube`, at the one seam where the SAT world begins.
+* **Colour symmetry stays a *relation* (`samePattern`), not a normal form.** The problem has "same
+  partition"; a canonical restricted-growth-string form would be a normal form maintained by hand,
+  with its own theorem to prove and its own chance to disagree with the relation it stands for.
+
+**Two seams validated.** At `m = 0` the algebra degenerates to `not_colorable_of_unsat` — no ports,
+an empty cube, `samePattern` vacuously true, so the gadget admits nothing. The monolithic case is the
+base case, not a separate mechanism, exactly as `allCubes k n [] = [[]]` is for the cube split. And
+the adversarial member does not exist: a gadget admitting nothing can only be *built* by proving
+`sound`, so `⊥` is inhabited precisely when the graph really is not 4-colourable — the illegal state
+is unrepresentable rather than guarded.
+
+**One thing deliberately not added, with its trigger.** Every gadget's admitted set *could* carry a
+permutation-closure field, which would let the terminal `decide` range over canonical patterns only —
+a 24× saving. Nothing in M09 needs it (the terminal check is 64 cases). **Add it if and when the
+terminal check becomes the bottleneck**, which is at roughly eight ports.
+
 ---
 
 ## 4. Negative controls — every one committed and watched to fail
