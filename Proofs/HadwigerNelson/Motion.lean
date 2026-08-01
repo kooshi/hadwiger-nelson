@@ -113,6 +113,31 @@ theorem distSq_eq {p p' q q' : Pt} (h : μ.Maps p q = true) (h' : μ.Maps p' q' 
 
 end Motion
 
+/-! ## What a motion does to a certificate
+
+Two lemmas about `UDCert`, living here rather than in `Certificate.lean` for one reason: that module
+sits upstream of 2,433 generated certificate modules, so adding a line to it costs 27.8 hours of
+kernel time. Both are about geometry under a motion, which is this module's subject anyway. -/
+
+/-- **A certificate valid on a list is valid on any sublist.** One line from `validOn_iff`, and the
+reason a graph's edge list can be re-ordered or re-segmented without re-checking its geometry. -/
+theorem UDCert.validOn_mono {n : ℕ} {c : UDCert n} {es es' : List (Fin n × Fin n)} (h : es' ⊆ es)
+    (hv : c.ValidOn es = true) : c.ValidOn es' = true := sorry
+
+/-- **Geometry transports along a motion.** If a vertex map moves both endpoints of every edge of
+`es` by the same motion `μ`, then the images of those edges are exactly as long as the originals — so
+a certificate valid on `es` is valid on the image, and *no distance is recomputed*.
+
+This is the statement the milestone exists to make, and the one a gadget search reuses verbatim:
+placing a copy of a subgraph somewhere else in the plane costs one `Maps` check per vertex, never one
+per edge. -/
+theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ : Fin n → Fin n)
+    (es : List (Fin n × Fin n))
+    (hmap : ∀ e ∈ es, μ.Maps (c.verts e.1) (c.verts (φ e.1)) = true ∧
+                      μ.Maps (c.verts e.2) (c.verts (φ e.2)) = true)
+    (hv : c.ValidOn es = true) :
+    c.ValidOn (es.map fun e => (φ e.1, φ e.2)) = true := sorry
+
 /-! ## Spec
 
 `Motion.rot` would be satisfied by nothing at all if no integer triple met it, and `distSq_eq` would

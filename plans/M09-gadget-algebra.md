@@ -338,6 +338,60 @@ permutation-closure field, which would let the terminal `decide` range over cano
 a 24× saving. Nothing in M09 needs it (the terminal check is 64 cases). **Add it if and when the
 terminal check becomes the bottleneck**, which is at roughly eight ports.
 
+### 3.7 Obligation pass — 2026-07-31
+
+Every route below was **attempted before being written down**, in a scratch file against the real
+imports. Three of the five hard obligations turned out to be citations rather than derivations.
+
+**(a) Colour symmetry was a search, not a proof.** The plan budgeted a permutation-extension argument
+— build an injection between the two images, count that the complements match, extend. Mathlib has it
+finished: **`Equiv.Perm.exists_extending_pair`** — two injections from a finite type into any type are
+related by a permutation of the target. The only work left is the bridge, and it is the right one:
+`a` and `b` having the same kernel means **both factor injectively through `Quotient (Setoid.ker a)`**.
+Six lines, and it discharges M06's two-port and M07's three-port special cases as instances (both
+checked).
+
+**And the number of colours plays no part.** The plan asserted "the `4` is load-bearing: a partition
+has at most four blocks precisely because there are four colours". **That is false for the statement
+actually needed.** It would have been true of a *canonical normal form*, which counts blocks; the
+relational form is handed both colourings and never counts. The lemma is now stated where it is true
+— any finite domain, any target type — and the general statement is the *shorter* proof.
+
+**(b) The tower cancellation is five lines per level** and does need `NatScalar K`, because
+`Adjoin.mul_re` is stated with the scalar action already rewritten to the cast. `congrArg` on each
+component, `simp only [mul_re, mul_im, natCast_re, natCast_im, …]`, then the level below.
+
+**(c) `Motion.distSq_eq` derives from two difference equations, and that is where the centre goes.**
+
+```lean
+have e1 : μ.M * (q.x - q'.x) = μ.a * (p.x - p'.x) - μ.b * (p.y - p'.y) := by
+  linear_combination h1 - h3
+```
+
+One `linear_combination` per coordinate, and **the centre cancels there and nowhere else** — the rest
+of the proof never mentions it. After that it is a five-step `calc`, whose only non-trivial step is a
+standalone four-variable `ring` lemma (`(au−bv)² + (bu+av)² = (a²+b²)(u²+v²)`). Isolating that lemma
+is what keeps the geometry proof a substitution rather than a polynomial identity in eight variables.
+
+**(d) `deGreyRot_valid` wants two general lemmas, and both live in `Motion.lean`.**
+
+| Lemma | Why it is not in `Certificate.lean` |
+|---|---|
+| `UDCert.validOn_mono` — valid on a list ⇒ valid on any sublist | that module is upstream of 2,433 generated certificate modules; a line there costs 27.8 hours |
+| `UDCert.validOn_map_of_motion` — **the statement the milestone exists to make** | same, and it is about motions anyway |
+
+The second is what M11 reuses verbatim: *placing a copy costs one check per vertex, never one per
+edge*. With those, `deGreyRot_valid` is three cases of `List.mem_append`, and
+`deGreyRot.ValidOn es = deGrey.ValidOn es` is `rfl` — same points, same denominator.
+
+**(e) The index arithmetic is `split_ifs <;> omega`,** both lemmas. Checked.
+
+**(g) The terminal `decide`, measured.** Ten gadgets over `4⁵ = 1024` port colourings, through a
+`List.foldr` of structures carrying `Prop` fields: **it reduces, and costs ~2.2 CPU s** — about
+0.2 ms per (colouring × gadget). It needs `maxRecDepth` raised, which is worth knowing before a call
+site hits it. That is the cost model for the port budget: at three ports it is free; at **eight ports
+it is ~2 minutes for ten gadgets**, which is where the permutation-closure field above earns its keep.
+
 ---
 
 ## 4. Negative controls — every one committed and watched to fail

@@ -155,17 +155,27 @@ representative. The relation is what the problem has; a normal form would be a n
 by hand, with its own theorem to prove and its own opportunity to disagree with the relation it
 stands for.
 
-The `4` is load-bearing: a partition of the ports has at most four blocks precisely because there are
-four colours, and that is exactly what makes the extension to a permutation of `Fin 4` possible. -/
+**And the number of colours turns out to play no part.** A canonical normal form would have needed
+"at most four blocks, because there are four colours"; the relational form is handed both colourings
+and never counts blocks, so the lemma below is stated where it is actually true — over any finite
+port set and any target type. That is the second thing choosing the relation bought. -/
 
 /-- Two port colourings induce the same partition of the ports: the same ports agree, and the same
 ports differ. -/
 def samePattern {m : ℕ} (a b : Fin m → Fin 4) : Bool := decide (∀ i j, a i = a j ↔ b i = b j)
 
-/-- **Colour symmetry.** Two port colourings inducing the same partition differ by a permutation of
-the four colours. -/
-theorem exists_perm_comp_eq {m : ℕ} {a b : Fin m → Fin 4} (h : ∀ i j, a i = a j ↔ b i = b j) :
-    ∃ σ : Equiv.Perm (Fin 4), ∀ k, σ (a k) = b k := sorry
+/-- **Colour symmetry.** Two colourings of a finite set that induce the same partition of it differ
+by a permutation of the colours.
+
+Stated over an arbitrary finite domain and an arbitrary target rather than over `Fin m → Fin 4`,
+because that is where it is true and because the general statement is the *easier* one: `a` and `b`
+having the same kernel means both factor injectively through one quotient, and two injections from a
+finite type are related by a permutation of the target — `Equiv.Perm.exists_extending_pair`.
+
+Subsumes M06's `exists_normalized` (two ports) and M07's `exists_normalized₃` (three ports), which
+were the same lemma written twice. -/
+theorem exists_perm_comp_eq {α β : Type*} [Finite α] {a b : α → β}
+    (h : ∀ i j, a i = a j ↔ b i = b j) : ∃ σ : Equiv.Perm β, ∀ k, σ (a k) = b k := sorry
 
 /-- The ports listed, in index order — the vertex set a cube is taken over. -/
 def portList (p : Fin m → Fin n) : List (Fin n) := (List.finRange m).map p
