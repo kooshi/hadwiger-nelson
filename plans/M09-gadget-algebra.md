@@ -537,6 +537,9 @@ the check is `rfl` and placement really is free.
 
 ## 6. Unmeasured, ranked, and carried to M11
 
+*Recorded as a subplan stub in `plans/M11-the-hunt.md` on 2026-08-01, per `WORKFLOW.md` step 3 — this
+section listed the carry-forward but the stub was owed and had not been written.*
+
 1. **Whether the terminal check survives a real search.** Measured at ~0.2 ms per (colouring ×
    gadget), so `4^m` puts **eight interface vertices and ten gadgets at ~2 minutes** and twelve at
    days. Every gadget's admitted set is permutation-closed, so restricting the enumeration to
