@@ -250,12 +250,10 @@ mask and its weight; the weight still to come is an argument, so the prune is on
 list is re-traversed. Shapes below are the domain pass's (§ 3.6) and have been run.
 
 ```lean
-/-- One vertex of the search: `(selfBit, neighbourMask, weight)`. -/
-abbrev Slot := ℕ × ℕ × ℕ
-
 /-- The slots for a vertex order: this is *computed*, so nothing about the emitted order has to be
 trusted beyond covering every vertex. -/
-def mkSlots {n : ℕ} (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (order : List (Fin n)) : List Slot :=
+def mkSlots {n : ℕ} (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (order : List (Fin n)) :
+    List (ℕ × ℕ × ℕ) :=
   order.map fun v => (2 ^ v.val, nbrMask E v, w v)
 
 /-- `noHeavy D slots chosen wt rem` — every set that extends the already-`chosen` vertices by
@@ -264,7 +262,7 @@ vertices drawn from `slots`, independent as the neighbour masks record it, weigh
 The first disjunct is the **prune**: if all the weight left cannot lift `wt` past `D`, the whole
 subtree is safe and is not entered. It is what turns ≥ 10⁹ sets into 38,128 nodes, and its
 soundness is `noHeavy_sound`'s only interesting case. -/
-def noHeavy (D : ℕ) : List Slot → ℕ → ℕ → ℕ → Bool
+def noHeavy (D : ℕ) : List (ℕ × ℕ × ℕ) → ℕ → ℕ → ℕ → Bool
   | [], _, wt, _ => wt ≤ D
   | (bit, nbr, wv) :: rest, chosen, wt, rem =>
       wt + rem ≤ D ||
@@ -276,7 +274,7 @@ hypotheses are exactly what § 3.6 derived: the order is complete, `rem` over-es
 slots transcribe the edge list and the weights. -/
 theorem noHeavy_sound {n : ℕ} (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (D rem : ℕ)
     (order : List (Fin n)) (hcover : ∀ v : Fin n, v ∈ order)
-    (hrem : sumWeights (mkSlots E w order) ≤ rem)
+    (hrem : (order.map w).sum ≤ rem)
     (h : noHeavy D (mkSlots E w order) 0 0 rem = true)
     (I : Finset (Fin n)) (hI : (edgeGraph n E).IsIndepSet (I : Set (Fin n))) :
     ∑ v ∈ I, w v ≤ D := sorry
@@ -294,19 +292,22 @@ theorem coreSpindle_valid : coreSpindle.Valid = true := sorry      -- DiffWitnes
 def coreSpindleWeights : Fin 63 → ℕ := sorry
 def coreSpindleOrder : List (Fin 63) := sorry                      -- heaviest weight first
 theorem coreSpindle_cover : ∀ v : Fin 63, v ∈ coreSpindleOrder := by decide
-theorem coreSpindle_noHeavy :
-    noHeavy 72 (mkSlots coreSpindle.edges coreSpindleWeights coreSpindleOrder) 0 0 260 = true := by
-  decide +kernel                                                    -- 390,625 nodes, ~5 CPU min
+theorem coreSpindle_slots :                                        -- the literal is the certificate
+    coreSpindleSlots = mkSlots coreSpindle.edges coreSpindleWeights coreSpindleOrder := by decide
+theorem coreSpindle_noHeavy : noHeavy 72 coreSpindleSlots 0 0 260 = true := by
+  first
+    | decide +kernel                                                -- 390,625 nodes, ~5 CPU min
+    | fail "…see § 3.8 for the directive"
 ```
 
 ### 3.4 `Proofs/HadwigerNelson/Instances/CoreSpindle/Bound.lean` — the headline
 
 ```lean
-/-- **χ_f(ℝ²) ≥ 65/18.** The plane's fractional chromatic number is at least 3.6111…, from 63
-points whose pairwise unit distances are exact identities in ℚ(√3,√5,√7,√11) and 63 integer weights
-no independent set can push past 72. -/
+/-- **χ_f(ℝ²) ≥ 65/18 ≈ 3.6111.** From 63 points whose pairwise unit distances are exact identities
+in ℚ(√3,√5,√7,√11), and 63 integer weights summing to 260 that no independent set can push past 72.
+`260/72 = 65/18`; the reduced form is stated because it is the one a reader compares. -/
 theorem fractionalChromaticNumber_plane_ge :
-    (260 : ℝ≥0∞) / 72 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).fractionalChromaticNumber := sorry
+    (65 : ℝ≥0∞) / 18 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).fractionalChromaticNumber := sorry
 
 /-- **χ(ℝ²) ≥ 4, a third time** — through the fractional bound alone, sharing no certificate with
 either of M03's two routes. Also the non-vacuity check: a fractional bound that implied nothing
@@ -564,6 +565,116 @@ away and nothing here has to move.*
 | restored | 0 errors, 0 warnings |
 
 Every hypothesis is load-bearing; none of the weakenings still proves.
+
+---
+
+## 3.8 Experience pass — the failure is the search's next input
+
+Run 2026-08-01. Three consumers were inhabited: a sceptical reviewer who reads none of the Python,
+the fractional search a later milestone will run, and Mathlib, since `Fractional.lean` depends on
+nothing in this project.
+
+### The breakdown surface is not a diagnostic — it is the separation oracle
+
+When `noHeavy 72 … = true` fails, `decide` prints a `Bool` whose evaluation is a 63-deep fold over
+triples of thousand-bit naturals. Useless to everyone. But ask what the consumer *holds* at that
+moment: a graph, a weight vector, and a bound that did not survive. What they need next is **the
+independent set that beat the bound** — which is exactly the constraint a cutting-plane search adds
+and re-solves. The failure path and the search's inner loop are the same object.
+
+```lean
+/-- An independent set the slots admit whose weight exceeds `D`, if the search finds one. -/
+def findHeavy (E) (w) (D : ℕ) (order : List (Fin n)) : Option (List (Fin n) × ℕ)
+```
+
+**Decision: `findHeavy`, not `heaviestIndep`.** *Alternative:* return the true maximum. *Why:* the
+pruned search returns the **first** set it meets over the bound, not the heaviest — a name promising
+"heaviest" would be a lie in the wire, and for a separation oracle any violated constraint is
+enough. *Confidence: high.*
+
+**Decision: the diagnostic's honesty is a theorem, `findHeavy … = none ↔ noHeavy … = true`.**
+*Alternative:* two independent recursions tied by a `#guard` on the pinned witness. *Why:*
+`ARCHITECTURE.md` § 6 already names "the checker's answer and its diagnosis drift apart" as a
+failure mode, and records M04's two-functions-and-a-lemma arrangement as *the weaker version* of
+M05's one-computation fix. One computation is not available here — the `Bool` must stay allocation-free
+for 390,625 kernel nodes, and an `Option` that builds lists is not — so the equivalence theorem is
+the strongest form left. Roughly ten lines, the same structural induction. *Confidence: high. Note
+it is about the message being trustworthy, not about soundness: a wrong `findHeavy` can waste a
+search's time and cannot make a false theorem, because `noHeavy_sound` is what the bound rests on.*
+
+The `decide` site follows M08 and M09:
+
+```lean
+theorem coreSpindle_noHeavy : noHeavy 72 coreSpindleSlots 0 0 260 = true := by
+  first
+    | decide +kernel
+    | fail "Some independent set of coreSpindle weighs more than 72, so these weights prove
+            nothing. To see one, in any file importing Proofs:
+              #eval HadwigerNelson.findHeavy coreSpindleEdges coreSpindleWeights 72 coreSpindleOrder"
+```
+
+M09's lesson applies verbatim: **the directive must be runnable from somewhere that is not the
+module printing it.** `findHeavy` therefore lives downstream, and the control in § 4 pastes the
+directive verbatim and watches it print.
+
+### Names
+
+Everything is unconstrained — nothing fractional exists in Mathlib — so the only discipline
+available is that a reader who knows `Colorable` / `chromaticNumber` can *predict* these.
+
+| name | why |
+|---|---|
+| `SimpleGraph.FractionalColorable G b n` | in the `SimpleGraph` namespace so dot notation works, as Mathlib does for its own graph predicates. **`b` before `n`** because the literature's phrase is "`b`-fold `n`-colouring" and that is the reading order; the specialisation then reads `FractionalColorable 1 n`, "1-fold `n`-colourable", which is right. *Alternative:* `n b`, matching `Colorable n`'s colour-count-first slot — rejected, nobody says "`n`-colouring `b`-fold" |
+| `SimpleGraph.fractionalChromaticNumber` | predictable from `chromaticNumber` |
+| `le_fractionalChromaticNumber_iff` | **stated as an `iff`, not the one direction the milestone uses.** An API that states one direction implicates that the other is false or hard; both are `le_iInf_iff`, so stating one would have been a lie of omission for nothing |
+| `FractionalColorable.fractionalChromaticNumber_le` | dot notation: `hc.fractionalChromaticNumber_le hb` |
+| `le_fractionalChromaticNumber_of_weights` | the name is the statement: a lower bound, from weights |
+| `weight_le_of_indepSet_cover` | spelled to match Mathlib's `IsIndepSet` |
+| `not_colorable_of_lt_fractionalChromaticNumber` | long, and exactly predictable; mirrors M01's `lt_chromaticNumber_iff_not_colorable` |
+| `noHeavy`, `noHeavy_sound`, `nbrMask`, `mkSlots`, `findHeavy` | in `HadwigerNelson`; `_sound` follows `maskCheck_sound`, `rup_sound`, `runStream_sound` |
+| ~~`sum_le_list_sum`~~ → **`sum_le_list_sum_of_mem`** | the old name omitted the hypothesis, and it must live in this project's namespace: **never extend `Finset`'s from library code** |
+| ~~`abbrev Slot := ℕ × ℕ × ℕ`~~ → **deleted** | *Alternative:* a `structure` with named fields, which would read better in a goal. *Why deleted:* an `abbrev` for a triple unfolds in goal states, so it never actually shows; the triple's only appearance is immediately destructured; and a structure literal is ~3× the source bytes across 63 emitted slots. *Confidence: medium — a fourth field flips this to a structure* |
+
+### What the docstrings must promise, so nobody unfolds
+
+| definition | contract | reasoning surface named in the docstring |
+|---|---|---|
+| `fractionalChromaticNumber` | the infimum of `n/b` over `b`-fold `n`-colourings; **`⊤` when there are none**, not `0` | `le_fractionalChromaticNumber_iff`, `FractionalColorable.fractionalChromaticNumber_le` |
+| `noHeavy` | `true` **only if** every independent set the slots describe weighs at most `D`. **The converse is not claimed** — `false` means the search met something heavy *or* the masks under-report | `noHeavy_sound`, and `findHeavy` for what `false` was about |
+| `nbrMask` | the set bits are neighbours of `v` in the listed graph — **and the fidelity runs one way only.** A mask that under-reports is sound; one that invents an edge is not, and that is the direction the lemma forbids | `nbrMask_and_two_pow_eq_zero` |
+| `mkSlots` | the search's view of the graph in a given vertex order; the triple is `(this vertex's bit, its neighbour mask, its weight)` | — |
+
+### The number the reader checks by hand
+
+**Decision: the headline states `65/18`, and the docstring carries `260/72` as the certificate's own
+numbers.** *Alternative:* state `260/72`, which is literally what the weights sum to over the bound.
+*Why:* `65/18 ≈ 3.6111` is the number that goes beside 3.6008 and 3.6190 in any comparison, and a
+reader made to reduce a fraction before they can compare has been handed the author's convenience.
+Nothing is lost: the certificate theorem is instantiated at `(65, 18)` and the cross-multiplied
+obligation `65 * b ≤ 18 * n` follows from `260 * b ≤ 72 * n` by `omega` — **so no `ℝ≥0∞` division
+algebra is needed anywhere.** *Confidence: high.*
+
+### Pinned with `#guard_msgs`
+
+1. `#eval findHeavy … (D := 71)` prints a witness weighing **72** — the certificate is tight, and a
+   slack answer would mean the wrong graph.
+2. `#eval findHeavy … (D := 72)` prints `none` — the diagnostic agrees with what the kernel decided.
+3. The failure directive itself, exercised in `Controls.lean` against a deliberately wrong bound.
+
+### The reviewer's entry point
+
+`Instances/CoreSpindle/Bound.lean`'s module docstring is where a sceptic lands, and it owes four
+things: **the construction in words** (lattice patch, spindle per diamond, every unit pair joined) so
+the witness is re-derivable rather than merely re-checkable; the two certified halves and which is
+which; the number; and **where it sits in the literature, including that it is not the record** and
+why the record is out of reach (§ 0(g)). `ARCHITECTURE.md`'s roadmap row for M10 promises "the
+383/102 record as a certified statement" and must be rewritten to what ships, with new rows in § 6
+for the two failure modes this milestone introduces:
+
+| Failure | Defence |
+|---|---|
+| The pruned search skips a subtree it has not bounded, so a heavy independent set is never seen | the prune's own hypothesis is what the PRUNE case consumes; weakening it to `wt ≤ D` makes `noHeavy_sound` **stop compiling**, and § 3.7's mutation audit is that, run |
+| The weights are certified against a mask that invents edges, so genuinely independent sets are skipped | fidelity is proved in the one direction that matters — a set bit is a listed pair — so an over-reporting mask cannot pass; an under-reporting one is sound and merely answers `false` |
 
 ---
 
