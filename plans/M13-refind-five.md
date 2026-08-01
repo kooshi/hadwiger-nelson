@@ -269,6 +269,88 @@ side condition is needed. `k = 0` and `k = 1` are harmless (the conclusion is tr
 Moser spindle instance inhabits every hypothesis at once, so nothing here quantifies over an empty
 domain.
 
+### 3.0.2 What the obligation pass added
+
+The Lean leaves were already closed, so this pass went after the obligations the *rest* of the
+milestone rests on — the ones outside Lean, which is where this project has twice had a gate fail
+open. Four findings, three of them changing the design.
+
+**(a) The placements must be *derived*, not checked — 31 million comparisons avoided.** The closing
+lemma takes the ambient graph as given and asks whether each placement lands edges on edges. Checked
+by list membership that is `|E| × |F|` comparisons: **at a 791-point forcer with 3,938 edges against
+7,877, thirty-one million**. That is precisely the wall M06 hit and escaped by ordering its edge
+list so each half was a contiguous segment.
+
+So the assembled edge list is now **defined** as the two placed copies followed by the joining edge
+(`spindleEdges`), and each placement is a homomorphism *structurally* — `List.mem_append_left` of
+`List.mem_map`, no search. The joining edge is free for the same reason: it is the list's last
+element by construction. What remains is one disequality per edge (the placement must not collapse
+an edge to a loop), which is linear rather than quadratic. `not_colorable_spindleEdges` is the
+resulting statement, and it is what a candidate the search proposes is certified through.
+*Alternative:* keep the membership check and pay it once per candidate. *Why this won:* 31 million
+kernel comparisons is hours, and M06 already paid for learning it. *Confidence: high.*
+
+**(b) The pivot-orbit collapse is sound, and an endomorphism suffices.** The search wants to try one
+pivot per symmetry orbit rather than all of them — worth up to 12× on the hexagonally-built
+universe. That needs "a symmetry carries a forced pair to a forced pair", which turns out to be
+`Forces.comap` with source and target the same graph, so `Forces.map` is one line and needs only a
+graph **endomorphism**, not an automorphism.
+
+**But the saving stops where the symmetry does.** The hypothesis is a symmetry *of the graph*, and
+shrinking destroys it — so the 12× applies to *finding* a forced pair in the symmetric universe and
+**not** to the shrink that follows. The tool must therefore read the configuration's actual
+symmetries rather than assume the hexagonal group survived a spindle; `tools/scan.py` already
+recovers the isometries a point set exhibits, and did so for de Grey's 791-point split in 3.6 s.
+
+**(c) The backbone's invariant, stated — because the timeout is the fail-open case.** The algorithm
+takes one model, then tests each surviving candidate literal. Writing `BB` for the true set of
+literals forced in every colouring, the loop maintains
+
+> `confirmed ⊆ BB ⊆ confirmed ∪ candidates ∪ unknown`
+
+and at exit `candidates` is empty, so **the answer is exact exactly when `unknown` is empty**. A
+timeout on any single test lands that literal in `unknown`, and the two ways of sweeping it away are
+both wrong in a named direction: discarding it makes the report an *under*-approximation (a forced
+pair is missed, so "searched and found nothing" becomes a lie), and confirming it makes the report
+an *over*-approximation (a non-forcer is sent to Lean, which rejects it after hours).
+
+Under-approximation is the one that matters, because "searched X, found nothing" is a result this
+project publishes. So `backbone` returns `unknown` **as a set, not a flag**, the search's negative
+claim is conditioned on it being empty, and the count is printed on every run whether it is zero or
+not — failure path louder than the success path. *Alternative:* a boolean `gave_up`. *Why this won:*
+a boolean says the answer is incomplete; the set says which pivots to re-ask with more budget.
+*Confidence: high — this is the exact shape of both earlier fail-open gates.*
+
+**(d) The shrink loop: the claim decides the loop, not the reverse.** Invariant: the forcing holds
+at every step. Measure: the point count, strictly decreasing on each accepted deletion, bounded
+below by 2. Termination is immediate; what is *not* immediate is what may be claimed at exit.
+
+| loop | what may honestly be claimed |
+|---|---|
+| batch-greedy (drop a block, halve on failure) | only "no block in the sequence tried was removable" — **not** irredundant |
+| single-point sweep, every remaining point tried since the last success | **irredundant**: no single point can be removed |
+| either, with any oracle time-out | irredundant *among the points whose deletion the oracle settled* |
+
+The claim wanted in the report is **irredundant** — it is the strong one, and it is what makes the
+39-of-39 measurement in § 0(d) mean something. So the loop is derived from it: batch-greedy for
+speed, then a **certifying final sweep** at block size one over every survivor, and the output
+carries both `irredundant` and the list of points whose deletion the oracle could not settle. A
+shrink that cannot certify says so rather than claiming the strong word.
+
+### 3.0.3 The negative controls, per tool primitive
+
+| break this | what must go red | where |
+|---|---|---|
+| `orbit` under a set of motions that is not closed | orbit is not idempotent: `orbit(orbit(C,M),M) ≠ orbit(C,M)` | tool self-test |
+| `delete` removing the pivot or the partner | the oracle reports "no pivot", never "not forced" | tool self-test |
+| the forcing oracle handed a satisfiable instance | the rhombus at **four** colours must come back `sat` | tool self-test, and the Lean countermodel `¬ Forces (edgeGraph 4 rhombus) 4 0 3` |
+| the backbone reporting a literal that is not forced | the rhombus at **three** colours must yield exactly the far corner and nothing else | tool self-test |
+| the shrink returning a set that no longer forces | one fresh oracle call on the output, asserted | tool self-test |
+| **the claim that a pair is forced at all** | **the tool cannot check this** — it is `forces_of_edges (by decide +kernel)` at spec size, `Forces.of_gadget` from a certificate at scale | **Lean only** |
+
+The last row is the division the whole project runs on: the tool's assertions are self-consistency,
+and the theorem is Lean's.
+
 ### 3.1 Spec — the instance, and the controls that must go red
 
 ```lean

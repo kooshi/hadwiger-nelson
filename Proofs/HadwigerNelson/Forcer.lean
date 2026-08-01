@@ -54,6 +54,19 @@ theorem Forces.mono {G' : SimpleGraph V} (hle : G ≤ G') {p q : V} (h : Forces 
     Forces G' k p q :=
   fun C => h (C.comap (SimpleGraph.Hom.ofLE hle))
 
+/-- **A symmetry carries a forced pair to a forced pair** — and an *endomorphism* suffices, which is
+more than the search needs and a shorter statement than the automorphism version.
+
+This is what licenses the tool to try **one pivot per symmetry orbit** rather than all of them: if
+any pair is forced, so is its image under every symmetry the configuration exhibits, so a
+representative pivot sees it. Worth stating here rather than in a Python comment, because it is the
+completeness argument for the search and nothing else would record it.
+
+The hypothesis is a symmetry **of the graph**, so it covers the orbit-built universe and *not* a
+forcer that shrinking has made asymmetric — which is exactly where the saving stops. -/
+theorem Forces.map {p q : V} (h : Forces G k p q) (σ : G →g G) : Forces G k (σ p) (σ q) :=
+  fun C => h.comap σ C
+
 /-! ## The closing lemma -/
 
 /-- **The spindle closes a forcer.** Two copies of a configuration in which `p` forces `q`, placed
@@ -121,6 +134,56 @@ def edgeHom {n N : ℕ} {E : List (Fin n × Fin n)} {F : List (Fin N × Fin N)} 
     · have hji : (edgeGraph N F).Adj (φ j) (φ i) := h (j, i) hij hne.symm
       exact hji.symm
 
+/-! ## The spindle as a construction, which is what the search's output plugs into
+
+The lemma above takes the ambient graph as given and asks whether each placement lands edges on
+edges. Checked by membership search that is `|E| × |F|` list comparisons — **31 million** at a
+791-point forcer, which is the same trap M06 hit and escaped by ordering the edge list so each half
+was a contiguous segment.
+
+So do not check it: **define** the assembled edge list as the two placed copies followed by the
+joining edge. Then each placement is a homomorphism *structurally*, and the only per-edge obligation
+left is that the placement does not collapse an edge to a loop — one disequality per edge, not one
+search per edge. -/
+
+/-- The spindle's edge list: one copy of `E` under each placement, then the joining edge. -/
+def spindleEdges {n N : ℕ} (φ ψ : Fin n → Fin N) (E : List (Fin n × Fin n))
+    (j : Fin N × Fin N) : List (Fin N × Fin N) :=
+  (E.map fun e => (φ e.1, φ e.2)) ++ (E.map fun e => (ψ e.1, ψ e.2)) ++ [j]
+
+/-- The first copy is a placement into the spindle, with no membership search. -/
+def spindleHomLeft {n N : ℕ} {E : List (Fin n × Fin n)} {j : Fin N × Fin N} (φ ψ : Fin n → Fin N)
+    (hφ : ∀ e ∈ E, e.1 ≠ e.2 → φ e.1 ≠ φ e.2) :
+    edgeGraph n E →g edgeGraph N (spindleEdges φ ψ E j) :=
+  edgeHom φ fun e he hne =>
+    ⟨hφ e he hne, Or.inl (List.mem_append_left _ (List.mem_append_left _
+      (List.mem_map_of_mem he)))⟩
+
+/-- The second copy, likewise. -/
+def spindleHomRight {n N : ℕ} {E : List (Fin n × Fin n)} {j : Fin N × Fin N} (φ ψ : Fin n → Fin N)
+    (hψ : ∀ e ∈ E, e.1 ≠ e.2 → ψ e.1 ≠ ψ e.2) :
+    edgeGraph n E →g edgeGraph N (spindleEdges φ ψ E j) :=
+  edgeHom ψ fun e he hne =>
+    ⟨hψ e he hne, Or.inl (List.mem_append_left _ (List.mem_append_right _
+      (List.mem_map_of_mem he)))⟩
+
+/-- **The search's win condition, cashed.** A forced pair plus two placements that share the pivot
+and separate the partner: the spindled graph has no `k`-colouring.
+
+Every hypothesis is decidable and linear in the forcer's edge list — no membership search, and the
+joining edge is free because it is the list's last element by construction. This is the theorem a
+candidate the search proposes is certified through. -/
+theorem not_colorable_spindleEdges {n N k : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
+    (φ ψ : Fin n → Fin N)
+    (hφ : ∀ e ∈ E, e.1 ≠ e.2 → φ e.1 ≠ φ e.2)
+    (hψ : ∀ e ∈ E, e.1 ≠ e.2 → ψ e.1 ≠ ψ e.2)
+    (hpiv : φ p = ψ p) (hjne : φ q ≠ ψ q) (hforce : Forces (edgeGraph n E) k p q) :
+    ¬ (edgeGraph N (spindleEdges φ ψ E (φ q, ψ q))).Colorable k := by
+  refine not_colorable_of_spindled_forcer (spindleHomLeft φ ψ hφ) (spindleHomRight φ ψ hψ)
+    hpiv ?_ hforce
+  show (edgeGraph N _).Adj (φ q) (ψ q)
+  exact ⟨hjne, Or.inl (List.mem_append_right _ (List.mem_singleton_self _))⟩
+
 /-! ## Spec — the rung this re-derives, and the controls that must go red
 
 The Moser spindle's eleven edges are exactly two copies of `rhombus` glued at vertex `0` plus the
@@ -138,10 +201,10 @@ def spindleCopyA : Fin 4 → Fin 7 := ![0, 1, 2, 3]
 /-- The second rhombus: the same four vertices carried to `0,4,5,6`, sharing the pivot `0`. -/
 def spindleCopyB : Fin 4 → Fin 7 := ![0, 4, 5, 6]
 
-/-- The two placed copies and the joining edge, as an edge list. -/
+/-- The two placed copies and the joining edge — built by `spindleEdges`, not written out, so the
+spec exercises the same construction the search's output will use. -/
 def spindleFromRhombi : List (Fin 7 × Fin 7) :=
-  (rhombus.map fun e => (spindleCopyA e.1, spindleCopyA e.2)) ++
-  (rhombus.map fun e => (spindleCopyB e.1, spindleCopyB e.2)) ++ [(3, 6)]
+  spindleEdges spindleCopyA spindleCopyB rhombus (spindleCopyA 3, spindleCopyB 3)
 
 -- **The decomposition is checked, not asserted.** A placement typo that quietly built a different
 -- graph would go red here rather than prove a theorem about something else.
@@ -170,6 +233,15 @@ theorem moserSpindle_not_colorable_three_spindled :
   not_colorable_of_spindled_forcer
     (edgeHom spindleCopyA (by decide)) (edgeHom spindleCopyB (by decide))
     (rfl) (by refine ⟨by decide, Or.inl (by decide)⟩) rhombus_forces
+
+/-- **The same rung through the construction route**, which is the one that scales: no edge list is
+searched, only three disequality checks linear in the forcer's edges. The graph here is
+*constructed* by `spindleEdges` rather than read from a table — which is what a candidate the search
+proposes will be. -/
+theorem spindleFromRhombi_not_colorable_three :
+    ¬ (edgeGraph 7 spindleFromRhombi).Colorable 3 :=
+  not_colorable_spindleEdges (E := rhombus) (p := 0) (q := 3)
+    spindleCopyA spindleCopyB (by decide) (by decide) rfl (by decide) rhombus_forces
 
 /-! ### The controls
 
