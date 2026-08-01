@@ -510,6 +510,7 @@ de Grey orbit    397 pts  1974 edges  k=4  width 3 at pivot 0 [irredundant, 0 un
 | `#print axioms` | **147 clean**, 5 declared purchases — up from M13's 130, every new declaration on the standard three |
 | `lake lint` | silent |
 | spec examples | 9, five of them countermodels, all passing |
+| `regen-check` | **OK** — both Heule certificates reproduced bit for bit, de Grey's 1581 points rebuilt exactly from 39 seeds, **80 tool controls** across seven tools (`forcer.py` alone went 14 → 33) |
 
 ### The negative controls, watched failing
 
