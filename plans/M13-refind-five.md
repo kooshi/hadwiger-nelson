@@ -1,196 +1,326 @@
-# M13 — Re-finding χ ≥ 5 with the search (carry-forward capture)
+# M13 — Re-finding χ ≥ 5 with the search
 
-*Opened 2026-08-01, immediately after M12 landed. **Not subplanned** — this is the evidence a
-subplanning session starts from, so nothing here has to be rediscovered.*
+*Subplanned 2026-08-01, immediately after M12 landed. § 0 is measurement taken **before** the shape
+was specified, per WORKFLOW's rule; it overturned two things the carry-forward stub asserted.*
 
-**The hunt is now M14.** This milestone was inserted ahead of it for one reason, and it is a
-measurement rather than a preference:
+**The hunt is M14.** This milestone was inserted ahead of it for one reason, and it is a measurement
+rather than a preference:
 
 > **A search instrument that cannot re-discover the witness for the rung below is not credible for
 > the rung above.**
 
-That is the same discipline the project already runs on — the Moser spindle was rung A's calibration
-instance for the entire pipeline, deliberately small enough that `decide` could cross-check the SAT
-bridge. This milestone is that discipline applied to the *search itself*.
+The same discipline the project already runs on — the Moser spindle was rung A's calibration
+instance for the whole pipeline, deliberately small enough that `decide` could cross-check the SAT
+bridge. This milestone applies it to the *search itself*.
 
 ---
 
-## 1. The measurement that put this milestone here
+## 0. Measured before specifying
 
-Blind breadth-first search from seeds, using only the moves `tools/construct.py` has, asking each
-graph its chromatic number. Desktop, 2026-08-01.
+Desktop (32 cores, 125 GB), 2026-08-01. Everything here is new to this milestone.
+
+### 0(a) de Grey's construction is **four primitive moves**, and only one of them is missing
+
+`tools/degrey.py` follows arXiv:1804.02385v3 § 5.1 verbatim and was read step by step against the
+primitives `tools/construct.py` already has. The result is an exact identity, not a resemblance:
+
+```
+G = spindle( delete₂( spindle( orbit(S, hex₁₂), (0,0), (2,0) ) ), (−2,0), (2,0) )
+```
+
+verified by **exact equality of the point sets** after the one named field rotation that relates the
+two conventions (his step rotates both copies by ±a about the centre; the spindle move holds one
+copy still).
+
+| move | points out | radicand | in the tool? |
+|---|---|---|---|
+| `orbit(S, hex₁₂)` — six 60° rotations and reflection | 397 (paper: 397) | — | **no** |
+| `spindle(·, (0,0), (2,0))` | 793 | `4·4−1 = 15` → **√15** | yes |
+| `delete {(±⅓, 0)}` | 791 (paper: 791) | — | no |
+| `spindle(·, (−2,0), (2,0))` | **1581** (paper: 1581), 7877 edges | `4·16−1 = 63 = 9·7` → **3√7** | yes |
+
+**The stub was wrong that a third primitive — "rotation about an arbitrary centre by a chosen
+angle" — is needed.** Both of de Grey's rotations are *spindles about a vertex of the configuration*:
+his step 3 rotates by `2·arcsin(1/4)`, which is the spindle at `|pq| = 2`, and his steps 5–6 rotate
+by `π/2 ± arcsin(1/8)`, whose relative angle is the spindle at `|pq| = 4`. The move already in the
+tool is exactly the general one.
+
+And the field's contents are again a consequence rather than a choice: **√15 and √7 are in
+ℚ(√3,√5,√7,√11) precisely because they are the spindle radicals of de Grey's two rotations.**
+
+### 0(b) The deletion is **not** load-bearing — it saves four vertices
+
+The stub asserted that de Grey removes `(±⅓, 0)` "because they are the ones that make the graph
+4-colourable". Measured, at four colours, on the same pair his argument uses:
+
+| set | points | edges | is the pair forced? |
+|---|---|---|---|
+| `S_a` (orbit only) | 397 | 1974 | **no** — a 4-colouring separating them exists, found in 0 s |
+| `S_a ∪ S_b` (**before** the deletion) | 793 | 3954 | **yes** — refuted in 27 s |
+| `Y` (after the deletion) | 791 | 3938 | yes — refuted in 32 s |
+
+So the deletion buys 4 vertices in the final graph (1581 rather than 1585) and nothing else.
+Skipping it yields a 1585-vertex 5-chromatic graph by the identical argument. `delete` is still
+worth building — it is the shrinker's only move — but it is not on the critical path.
+
+### 0(c) The forcing is one pair in 312,445, at the one distance the field can spindle
+
+`Y` is de Grey's half. Pin its vertex 14 — the point `(−2,0)`, which is the copies' shared vertex —
+to a colour and compute the **backbone**: every vertex whose colour is then fixed in every proper
+4-colouring.
 
 | | |
 |---|---|
-| the **Moser spindle** — rung A's witness — found at | **depth 1, under 1 s, 3 graphs examined** |
-| verified isomorphic to the committed one | **yes** |
-| anything needing **five** colours | **none** — 1,961 distinct graphs, 23 levels, 358 s |
-| how the search ended | **exhausted**, frontier empty |
+| forced to the pivot's colour | **exactly one vertex: 11**, the point `(2,0)` |
+| forced to any other colour | none |
+| its squared distance from the pivot | **16**, radicand `63 = 9·7` — spindle available |
+| candidate pairs in `Y` | 312,445 |
+| cost | 9 SAT calls, 109 s |
 
-**So the instrument would have found χ ≥ 4, and cannot reach χ ≥ 5.** The exhaustion is the sharper
-half: spindle-from-seeds is a *small closed family*, not a space that merely wants more budget.
-Adding compute to this move set buys nothing.
+Vertices 14 and 11 are exactly the ones M06's proof names. The win condition of the entire search is
+**one pair out of 312,445, and it sits at the one distance the field was extended to spindle.**
 
-**And the search found a bug eleven hand-written controls missed** — a division by zero on the
-degenerate half-turn spindle (`r² = 1/4`, radicand 0). That is a second, independent argument for
-calibrating against a running search rather than against a tool's own examples.
+### 0(d) All 39 of de Grey's seed points are load-bearing — **the needle has no gradient**
+
+Drop one seed point, rebuild orbit → spindle, re-ask the forcing question. Thirty-nine trials,
+46 s total:
+
+> **39 of 39 kept. Not one seed point can be removed.** Every proper subset of `S` yields a
+> configuration in which a 4-colouring separates the pair, found in under half a second.
+
+This is the milestone's central fact and it is what any honest expectation must be built on. A
+search that grows or perturbs seed sets has **no signal to climb**: every proper subset of the
+answer scores exactly zero, so the objective is flat everywhere except at the answer itself. This is
+not a compute shortfall — adding cores to a flat landscape buys nothing, which is the same shape
+M12 found when the blind spindle search *exhausted* at 1,961 graphs.
+
+**It also names the search that can work.** Polymath16 got from 1581 to 553 to 510 by *shrinking a
+rich set*, never by growing a seed set. Shrinking has a gradient — every successful deletion is
+progress and every failed one is information — and the same oracle answers both questions. § 5
+specifies the search accordingly, and it is a different algorithm from the one M12 measured.
+
+### 0(e) The oracle is free where it must be and expensive only where it matters
+
+The forcing oracle on nested subsets of `Y`, one pivot each:
+
+| points | edges | backbone | one pair, one SAT call | pairs at spindle-able `r²` |
+|---|---|---|---|---|
+| 50 | 16 | 0.1 s | 0.00 s | 56 of 1,225 |
+| 100 | 72 | 0.1 s | 0.00 s | 236 of 4,950 |
+| 200 | 274 | 0.1 s | 0.01 s | 946 of 19,900 |
+| 400 | 1,018 | 0.5 s | 0.01 s | 3,759 of 79,800 |
+| **791** (tight) | 3,938 | **112 s** | **32 s** | 14,615 of 312,445 |
+
+The same asymmetry M12 measured for rejection against certification: **a configuration that forces
+nothing says so almost instantly, and only a configuration that actually forces costs anything.**
+About **4.7%** of vertex pairs sit at a rational squared distance whose spindle radicand is a square
+in the field, so the distance filter alone removes 95% of candidates for free.
+
+Two corollaries the search is built on. The **backbone** asks one question per *pivot* and returns
+every partner that pivot forces, so the oracle is O(vertices) rather than O(pairs). And the orbit
+group collapses the pivots further: in a hex₁₂-symmetric configuration the pivots come in orbits of
+up to 12, so **the orbit primitive earns its keep twice — it builds the configuration and it divides
+the search over pivots by up to twelve.**
 
 ---
 
-## 2. de Grey's construction, step by step — because omitting it would be arrogant
+## 1. What this milestone is for
 
-His route is the one construction *known* to reach χ ≥ 5, and it is fully written down in
-`tools/degrey.py`, which follows arXiv:1804.02385v3 § 5.1 verbatim. Reproduced here because the
-milestone's first job is to be able to walk it:
+Three deliverables, in the order they matter.
 
-| step | move | do we have it? |
+1. **The closing step, certified and general.** "Spindle a forced pair and the colour count goes up
+   by one" is the argument behind *both* known rungs — the Moser spindle at three colours and de
+   Grey's graph at four — and it exists nowhere in this repository as a theorem. M06 hand-composed
+   it for one graph. Making it a lemma turns the search's win condition into something a found
+   candidate is certified *through*, rather than something re-argued each time.
+2. **The missing primitive and the win-condition oracle**, so the instrument can express de Grey's
+   route and recognise its target.
+3. **The search, run, and reported honestly** — including the verdict that § 0(d) makes likely.
+
+---
+
+## 2. The shape
+
+### 2.1 The win condition, in one definition
+
+> Two vertices are **forced** at `k` colours when no proper `k`-colouring separates them.
+
+That is the entire target of the search. Everything else is machinery for producing one or for
+cashing one in.
+
+### 2.2 The closing lemma
+
+Two copies of a forcer, glued at the pivot, with the two partner-images a unit apart:
+
+```
+        φ(q) ──1── ψ(q)         φ, ψ : the two placements
+          │          │          φ(p) = ψ(p)  : the copies share the pivot
+       forced     forced        C(φ q) = C(φ p) = C(ψ p) = C(ψ q)  — but φ(q) ~ ψ(q)
+          │          │
+        φ(p) ═════ ψ(p)
+```
+
+The proof is four rewrites and needs nothing about geometry, `Fin`, or which graph is which: pull a
+colouring of the big graph back along each placement, apply the forcer twice, walk the joining edge.
+The placements are arbitrary functions, so `Assembly`'s copies, a hand-written embedding and a
+search's output all satisfy it without adaptation.
+
+**Read against the informal claim, out loud:** *if every k-colouring of a configuration paints two
+of its points the same, and you can place two copies of it sharing the first point with the second
+points a unit apart, then the union has no k-colouring.* That is the Moser spindle's argument
+verbatim, and de Grey's.
+
+### 2.3 The two instances, and why the small one is not a toy
+
+* **The Moser spindle is literally two rhombi glued at a vertex.** Its 11 edges split as
+  `{(0,1),(0,2),(1,2),(1,3),(2,3)}` — which is `Gadget.rhombus` on the nose — plus the same five
+  under `0,1,2,3 ↦ 0,4,5,6`, plus the joining edge `(3,6)`. The pivot is vertex 0, the partner is
+  vertex 3, and `rhombusGadget` (already committed, already kernel-decided) is the forcer at three
+  colours. So rung A's witness is re-derived through the general lemma **for the cost of naming two
+  maps**, with no new certificate.
+* **de Grey's graph is the same picture one colour up**, with `Y` as the forcer, vertex 14 as the
+  pivot, vertex 11 as the partner and `(11, 802)` as the joining edge — which is exactly the shape
+  M06's `Instances/DeGrey/Forcing.lean` composes by hand today.
+
+---
+
+## 3. The skeleton — `Proofs/HadwigerNelson/Forcer.lean`
+
+One new module, importing `Gadget.lean`. Every signature and full statement, `sorry` at every leaf.
+
+```lean
+/-- Two vertices are **forced to agree** at `k` colours: no proper `k`-colouring separates them. -/
+def Forces (n k : ℕ) (E : List (Fin n × Fin n)) (p q : Fin n) : Prop :=
+  ∀ f : Fin n → Fin k, Proper n E f → f p = f q
+
+/-- **A two-port gadget that rules out the ports differing is a forcer.** The bridge from the
+algebra's producers (`ofUnsat`, `ofExhaustion`) to the search's win condition. -/
+theorem Forces.of_gadget (hk : 2 ≤ k) (g : Gadget k n 2 E ![p, q])
+    (h : ∀ q' : Fin 2 → Fin k, q' 0 ≠ q' 1 → g.admits q' = false) : Forces n k E p q
+
+/-- **The spindle closes a forcer.** Two copies of a forced pair, sharing the pivot, with the
+partners adjacent: the union has no `k`-colouring. -/
+theorem not_colorable_of_spindled_forcer {n N k : ℕ}
+    {E : List (Fin n × Fin n)} {F : List (Fin N × Fin N)} (φ ψ : Fin n → Fin N)
+    (hφ : ∀ e ∈ E, e.1 ≠ e.2 → (edgeGraph N F).Adj (φ e.1) (φ e.2))
+    (hψ : ∀ e ∈ E, e.1 ≠ e.2 → (edgeGraph N F).Adj (ψ e.1) (ψ e.2))
+    {p q : Fin n} (hpiv : φ p = ψ p) (hjoin : (edgeGraph N F).Adj (φ q) (ψ q))
+    (hforce : Forces n k E p q) : ¬ (edgeGraph N F).Colorable k
+```
+
+### 3.1 Spec — the instance, and the controls that must go red
+
+```lean
+/-- The rhombus forces its far corners at three colours — `rhombusGadget`, read as a forcer. -/
+theorem rhombus_forces : Forces 4 3 Gadget.rhombus 0 3
+
+/-- **The Moser spindle, re-derived.** Two rhombi sharing vertex 0, far corners joined. -/
+theorem moserSpindle_not_colorable_three_spindled :
+    ¬ (edgeGraph 7 moserSpindleEdges).Colorable 3
+```
+
+Negative controls, each an `example` that must fail to be provable or a claim that goes red:
+
+| break it here | what must happen |
+|---|---|
+| the rhombus at **four** colours | not a forcer — `example : ¬ Forces 4 4 rhombus 0 3`, by `decide` |
+| the joining edge deleted (`(3,6)` removed) | the spindle **is** 3-colourable — an exhibited colouring |
+| the pivots not shared (`ψ 0 = 4` instead of `0`) | the hypothesis is false and the instance will not build |
+| a forcer filed at the wrong pair (`0,1` instead of `0,3`) | `Forces.of_gadget`'s hypothesis fails |
+
+---
+
+## 4. The tools
+
+Untrusted throughout; Lean re-derives every claim.
+
+| what | where | why |
 |---|---|---|
-| 1 | a hand-chosen **seed set** `S` | seeds yes, *his* seed set no |
-| 2 | `S_a` = **orbit of `S` under the order-12 group**: six rotations by multiples of 60° together with reflection in the x-axis | **no** — this is the missing primitive |
-| 3 | `S_b` = `S_a` rotated by `2·arcsin(1/4)` (`cos 7/8`, `sin √15/8`) — the spindle at `r² = 4` | **yes** |
-| 4 | `Y = (S_a ∪ S_b)` **minus two points** `(±1/3, 0)` | union yes, **deletion no** |
-| 5–6 | rotate `Y` about `(−2, 0)` by `π/2 ± arcsin(1/8)`, and take the union of the two images | **partly** — we rotate only so that a *designated pair lands a unit apart*, never about an arbitrary centre by a chosen angle |
+| `orbit(cfg, motions)` — close a configuration under a finite group | `construct.py` | § 0(a): the one missing primitive |
+| `hex12()` — the order-12 group as motions | `construct.py` | de Grey's step 2, and the pivot-collapsing symmetry |
+| `delete(cfg, idxs)` | `construct.py` | the shrinker's only move |
+| `forces(cfg, p, q, k)` and `backbone(cfg, p, k)` | `tools/forcer.py` (new) | § 0(c)/0(e): the win condition, asked per pivot |
+| `spindleable(r²)` filter | reuse `field.py` | 95% of pairs removed for free |
+| de Grey rebuilt from the four primitives | `construct.py` self-test | the calibration of § 0(a), as a committed control |
 
-So the primitives this milestone needs are **named by his construction rather than guessed**:
-
-1. **Orbit under a finite group** — his step 2, and the largest gap. `Assembly` already covers the
-   *Lean* side of many placed copies (one certificate, seams only); what is missing is the tool move
-   that proposes one.
-2. **Deletion** — his step 4 removes exactly two points. A search that can only grow cannot express
-   this, and it is not a detail: those two points are removed because they are the ones that make the
-   graph 4-colourable.
-3. **Rotation about an arbitrary centre by any available angle** — his steps 5–6. Strictly more
-   general than the spindle move, which fixes the angle from a chosen pair.
-
-**Alternatives are welcome and may well be better** — his construction is one path up a mountain with
-no map, and the instrument exists partly to look for others. But a search that *cannot express* the
-one route known to work has not been shown to be searching the right space at all. Being able to walk
-his path is the calibration; finding a different one is the win.
-
-### What his argument then does with the graph
-
-Not brute force. `G` is **two rotated copies of `Y` sharing exactly one vertex and joined by exactly
-one edge** — `tools/degrey.py`'s `halves()` makes the split explicit, and M06's proof is built on it:
-one forcing lemma per half, composed. M09 later found the second copy is the first *rotated* and
-deleted 1,043 modules, 180 MB and 12.8 hours by deriving it instead of certifying it.
-
-**That is the gadget-composition route, and it is why the catalogue matters here rather than as a
-separate deliverable.** de Grey did not find a 1581-vertex graph and hand it to a solver; he
-composed properties. The instrument's leverage is the same.
+**The control that matters**: `construct.py` rebuilds de Grey's 1581 points from the 39 seed points
+and four moves, and `scripts/regen-check.sh` asserts **exact equality with the committed
+coordinates**. That converts the committed table from transcribed data into *derived* data — the
+"state the construction, not only the coordinates" standard, discharged.
 
 ---
 
-## 3. Why a gadget catalogue must be *constructed* here, not collected
+## 5. The search
 
-M12 measured this and it is the hardest constraint on the milestone:
+**Shrink a rich universe toward a minimal forcer.** Not grow from seeds — § 0(d) measured that
+landscape flat.
 
-* **Nothing this project owns forces any port property at five colours.** Zero of 48 non-adjacent
-  port sets across four graphs; of 16,657 exact distance classes the only forcing one is the unit
-  distance itself. The four-colour control fires (5 of 5 patterns refuted on a graph with no
-  4-colouring), so this is a fact and not a broken probe.
-* **The cause is structural.** A graph comfortably `k`-colourable imposes nothing on scattered
-  points, and every graph here is comfortably 5-colourable — de Grey's included, which is exactly
-  5-chromatic. Forcing needs a graph **tight at the colour count being asked about**.
-* **So the first unmeasured quantity is the tightness threshold**: how large or how constrained must
-  a configuration be before it forces *anything* at five colours? That measurement goes first, exactly
-  as M12's five-colour cost did — and it is cheap, because the profiler is free.
+1. **Universe.** `orbit(seed-rich set, hex₁₂)` then `spindle`, at a size the oracle still answers
+   (§ 0(e) puts that near a thousand points).
+2. **Recognise.** Backbone from each pivot orbit representative; a forced pair at a spindle-able
+   squared distance is a win.
+3. **Shrink.** Greedy deletion preserving the forcing — every successful deletion is progress, every
+   failure is information, and both cost one oracle call.
+4. **Close.** Spindle the minimal forcer; the result is 5-chromatic *by the closing lemma*, with no
+   whole-graph refutation needed at all.
 
----
+Step 4 is the reason the closing lemma is deliverable #1: **a forcer of `m` points certifies a
+`2m−1`-point 5-chromatic graph at the cost of refuting `m` points once.** M06 refuted de Grey's
+halves rather than the whole graph for exactly this saving, at 44× — here it is the lemma rather
+than a bespoke composition.
 
-## 4. What is already built and needs no rebuilding
-
-**Lean.** `Assembly` (many placed copies, one certificate, intra-copy edges free, seams checked;
-`adj_embed` so the colouring transports along the same map) · `AssemblyDiagnose` (which seam failed,
-by copy and base vertex) · the `Gadget` algebra at any colour count — `inter`, `mono`, `widen`,
-`transport`, `edge`, `ofUnsat`, `ofExhaustion`, `survivors`, `not_colorable_of_gadget` ·
-`Pattern` (one colouring per colour-partition) · `Motion` (similarities, composition) ·
-`Instances/Mycielski` (the five-colour calibration instance).
-
-**Tools.** `field.py` (exact arithmetic, one implementation, and the spindle-availability test) ·
-`construct.py` (seed, triangle, rhombus, spindle, union) · `profile.py` (a subgraph's whole port
-property) · `minimise.py` · `scan.py` (finds the isometries a point set already exhibits — this is
-how de Grey's own 791-point split was recovered in 3.6 s) · `shrink.py` · `emit_mask.py`
-(colour-parametric, and able to read the graph out of the DIMACS Lean printed).
+**If the search re-finds de Grey's own configuration, that is reported as a re-find and the graph is
+not re-certified** — M06 certified it already, and a second certificate of the same theorem is
+28 hours for nothing.
 
 ---
 
-## 5. The cost model, all of it
+## 6. The cost model
 
-Desktop (32 cores, 125 GB). Everything a subplanning session should reason from.
-
-### The search loop
+Carried forward from M07/M08/M11/M12 and extended by § 0. Desktop.
 
 | quantity | value |
 |---|---|
-| one search step end to end | **~17 ms** (geometry 0.8 ms, reject 1.7 ms, profile 15 ms) |
-| reject a candidate (find a 5-colouring), 553 vertices | **0.02 CPU s** |
-| certify one (refute at 4 colours), same graph | 37.4 CPU s — **~3,000× the cost** |
-| profiler, 855 port patterns at 7 ports, 5 colours | 0.19 s wall |
-
-**The asymmetry is the search's whole economics**: looking is nearly free, certifying is not.
-
-### Five colours, once something is found
-
-| quantity | value |
-|---|---|
-| 47-vertex 6-chromatic graph, refuted at 5 colours, one edge pinned | **387,065 propagation steps ≈ 9 min kernel**, 19 modules, 2.9 MB |
-| the same, unpinned | 10,224,710 |
-| colour-naming lever at 5 colours (a **triangle** — the largest clique the plane permits) | **8.5–53×, median ~25×** |
-| M07's configuration race, at gadget scale | **1.00× — does not reproduce** |
-| one more colour, at matched size and criticality | **10–30×** |
-| for scale: the 553-point witness at *four* colours (M07) | 1,104,106 steps |
-| de Grey's 1581-point witness at four colours (M06) | 34,169,571 steps, 27.8 h, 2,265 modules |
-
-### The composition ceilings
-
-| quantity | value |
-|---|---|
-| terminal check, interface vertices at 5 colours | **10** (86,472 partitions, 257 s); 12 is out of reach |
-| gadget with no certificate at all (`ofExhaustion`) | **7 vertices** at 5 colours |
-| kernel, per propagation step | ~1.35 ms projected; 1.4–2.9 ms end to end with elaboration |
-
-### Geometry and assembly
-
-| quantity | value |
-|---|---|
-| emitted literal coordinates | **7.1 ms per edge** (M08) |
-| **computed** coordinates checked by `decide` | **0.33 CPU s per edge — 47× worse** |
-| computed coordinates through `Assembly.validOn_copiedEdges` | **free** — no per-edge reduction |
-| sub-copy scan, 1581 points | 3.6 s, exact |
-
-**That middle row is why `Assembly` is mandatory rather than an optimisation**: a candidate built as
-copies must be certified symbolically or it is worse than not building it as copies at all.
-
-### The field
-
-Spindling at squared distance `r²` needs `√(4r²−1)`; √3, √5, √7, √11 are exactly the spindle radicals
-of `r² = 1, 3/2, 2, 3`. **32 of 94 sampled radii** are available. Extending is a parameter change with
-a principled trigger (`field.py`'s `missing_root` names the root a refusal would need), and it doubles
-the tower and every coordinate with it.
+| one search step, M12's blind loop | ~17 ms |
+| forcing oracle, loose configuration (≤ 400 pts) | **0.1–0.5 s** |
+| forcing oracle, tight configuration (791 pts) | 31 s one pair · 109 s full backbone |
+| reject a candidate (find a 5-colouring), 553 pts | 0.02 CPU s |
+| certify one (refute at 4 colours), 553 pts | 37.4 CPU s — ~3,000× |
+| kernel, per propagation step | ~1.35 ms projected; 1.4–2.9 ms with elaboration |
+| 553-point witness at four colours (M07) | 1,104,106 steps |
+| de Grey's 1581 points at four colours (M06) | 34,169,571 steps, 27.8 h, 2,265 modules |
+| emitted literal coordinates | 7.1 ms per edge |
+| **computed** coordinates by `decide` | 0.33 CPU s per edge — 47× worse |
+| computed coordinates through `Assembly` | **free** — no per-edge reduction |
+| terminal check, interface vertices at 5 colours | 10 (86,472 partitions, 257 s) |
 
 ---
 
-## 6. Explicitly *not* in this milestone
+## 7. Explicitly *not* in this milestone
 
-**χ ≥ 6.** That is M14. This milestone ends when the search re-finds a 5-chromatic unit-distance
-graph, or when it is measured not to and that is reported.
+* **χ ≥ 6.** That is M14. Everything at *five* colours — where M12 measured that nothing this
+  project owns forces any port property, and the tightness threshold is unmeasured — carries there.
+* **Re-certifying de Grey's graph** if the search re-finds it. Already done at M06.
+* **Deriving de Grey's coordinates inside Lean.** The orbit's dedup does not fit `Assembly`'s
+  disjoint-copy indexing, and the payoff is a table we already certify. The derivation lands in the
+  tool with an exact-equality control instead (§ 4).
 
 ---
 
-## 7. Honest risks
+## 8. Honest risks
 
-* **Re-finding χ ≥ 5 may be nearly as hard as finding χ ≥ 6.** If so this is a second wall rather
-  than a stepping stone, and the milestone should fall back to a weaker, still-useful target: *the
-  best chromatic number the search reaches, reported honestly*, plus the tightness threshold.
-* **The tightness threshold is unmeasured** and could be large enough that constructed gadgets are
-  individually unaffordable to certify.
-* **de Grey's seed set is hand-chosen.** Reproducing his route needs either his seed set (which we
-  have, in `tools/degrey.py`) or a search that finds an equally good one — and the second is a much
-  harder problem than the first. Re-finding χ ≥ 5 *given his seeds* is a weaker claim than finding it
-  from nothing, and the milestone must say which it achieved.
+* **The search will probably not re-find de Grey's seed set.** § 0(d) is decisive: 39 irredundant
+  points, no gradient. The milestone is designed to deliver the closing lemma, the primitive and the
+  oracle regardless, and to report the search verdict as a result rather than a shortfall.
+* **A universe rich enough to contain a forcer may be too tight for the oracle.** § 0(e) shows the
+  cost is driven by tightness, not size; the one tight configuration measured cost 109 s per pivot.
+  If the universe search is unaffordable the fallback is de Grey's own universe, and the claim
+  weakens honestly to "re-found *given* his seed set".
+* **Re-finding χ ≥ 5 may be a second wall rather than a stepping stone.** If so the milestone falls
+  back to the best chromatic number the search reaches, reported plainly.
 * **Symmetry carries no colouring information.** A rotationally symmetric unit-distance graph need
-  not be hard to colour — rotate any graph 180° about a distant point and take the union. Symmetry can
-  **promote** a candidate and can never **reject** one. The orbit primitive makes this mistake easier
-  to make, which is why it is written down here.
+  not be hard to colour — rotate any graph 180° about a distant point and union. Symmetry can
+  **promote** a candidate and can never **reject** one. The orbit primitive makes this mistake
+  easier to make, which is why it is written here.
 * **Refutation cost is not monotone in graph size** (M07), and at five colours instances of the same
   size varied by two orders of magnitude (M12). "Smaller" is not "cheaper".
