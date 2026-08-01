@@ -8,6 +8,7 @@ import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion
 import Proofs.HadwigerNelson.Pattern
 import Proofs.HadwigerNelson.Gadget
+import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.Fractional
 import Proofs.HadwigerNelson.FractionalSpec
 import Proofs.HadwigerNelson.IndepSearch
@@ -37,6 +38,7 @@ import Proofs.HadwigerNelson.Instances.Heule510
 import Proofs.HadwigerNelson.Instances.Heule510.Bound
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Bound
+import Proofs.HadwigerNelson.Instances.Mycielski
 
 /-!
 # Proofs

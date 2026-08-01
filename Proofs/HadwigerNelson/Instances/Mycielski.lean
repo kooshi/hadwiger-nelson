@@ -1,0 +1,112 @@
+import Proofs.HadwigerNelson.Gadget
+
+/-!
+# The first five-colour question this project has ever asked
+
+`χ(ℝ²) ≥ 5` means *no 4-colouring*. **`χ(ℝ²) ≥ 6` means no 5-colouring** — and until this module,
+nothing here had ever asked that. `coloringCNF 5` and `Colorable 5` appeared exactly zero times
+across the whole repository, so every cost recorded in `plans/` was a four-colour cost, in a project
+where refutation cost is already measured *non-monotone* in graph size.
+
+This module asks the question once, on a graph chosen to make the answer cheap and the cost
+comparable, and records what it cost. It is a **calibration instance**, exactly as the Moser spindle
+was for rung A: no geometry, no plane, nothing about unit distances — only the combinatorial half of
+the pipeline, run at the colour count rung D needs.
+
+## Why this graph, and why it is defined rather than emitted
+
+Mycielski's construction raises a graph's chromatic number by exactly one while introducing no
+triangle. Four iterations above a single edge give 47 vertices and 236 edges with chromatic number
+six, which is the smallest *hard* 6-chromatic graph available: it is exactly critical at five
+colours, so the refutation is a real one rather than a formality.
+
+**It is defined here, not emitted as a literal.** A reader re-derives 47 vertices and 236 edges from
+five lines of recursion; the alternative is trusting 236 emitted pairs. That is the standard this
+project holds itself to above rung B — *the witness must be independently re-derivable* — and here it
+is also simply cheaper. The DIMACS handed to the solver still comes out of Lean's own `coloringCNF`
+through `scripts/Dimacs.lean`, so the certificate and the theorem cannot address different formulas.
+
+Measured before this module was written (desktop, 32 cores): refuting five colours here costs
+**10,224,710 trimmed hint entries** plain, and **387,065** with one edge's colours named — against
+the 553-vertex four-colour witness's 1,104,106. Naming a triangle's colours, the lever a real
+unit-distance candidate would have, is worth 8.5–53× at five colours; this graph is triangle-free by
+construction and cannot use it. See `plans/M12-candidate-construction.md` § 0.
+-/
+
+namespace HadwigerNelson
+
+namespace Mycielski
+
+-- The list here is 236 entries built by four rounds of concatenation, and every guard below walks
+-- it. `decide +kernel` keeps the reduction out of the elaborator, where the default recursion
+-- budget is what runs out first.
+set_option maxRecDepth 8000
+
+/-- **One Mycielskian.** The original `n` vertices keep their edges; a shadow `v + n` of each vertex
+`v` joins that vertex's neighbours; an apex `2n` joins every shadow.
+
+Stated over `ℕ` pairs rather than `Fin n` pairs because the vertex count changes at every step, and
+threading the bound through the recursion would put an index in every signature that no consumer
+inspects. The bound is re-established once, at `edges`. -/
+def step (n : ℕ) (E : List (ℕ × ℕ)) : ℕ × List (ℕ × ℕ) :=
+  (2 * n + 1,
+    E ++ E.flatMap (fun e => [(e.1, e.2 + n), (e.2, e.1 + n)])
+      ++ (List.range n).map (fun v => (v + n, 2 * n)))
+
+/-- `k` Mycielskians above a single edge. Chromatic number `k + 2`. -/
+def iter : ℕ → ℕ × List (ℕ × ℕ)
+  | 0 => (2, [(0, 1)])
+  | k + 1 => step (iter k).1 (iter k).2
+
+/-- The graph this module is about: 47 vertices, 236 edges, chromatic number six. -/
+def raw : ℕ × List (ℕ × ℕ) := iter 4
+
+/-- The vertex count. -/
+def size : ℕ := 47
+
+/-- **Every step's size is what the construction says.** The ladder, pinned — a `step` that dropped
+or duplicated a family would still elaborate, and these would go red. -/
+example : (iter 0).1 = 2 ∧ (iter 0).2.length = 1 := by decide +kernel
+example : (iter 1).1 = 5 ∧ (iter 1).2.length = 5 := by decide +kernel
+example : (iter 2).1 = 11 ∧ (iter 2).2.length = 20 := by decide +kernel
+example : (iter 3).1 = 23 ∧ (iter 3).2.length = 71 := by decide +kernel
+example : raw.1 = size ∧ raw.2.length = 236 := by decide +kernel
+
+/-- **No index escapes the vertex count**, so the embedding below truncates nothing. Without this the
+`% size` would silently fold two vertices together and produce a graph nobody checked. -/
+example : raw.2.all (fun e => decide (e.1 < size) && decide (e.2 < size)) = true := by decide +kernel
+
+/-- The edge list at the index type `edgeGraph` wants. -/
+def edges : List (Fin size × Fin size) :=
+  raw.2.map fun e => (⟨e.1 % size, Nat.mod_lt _ (by decide)⟩, ⟨e.2 % size, Nat.mod_lt _ (by decide)⟩)
+
+example : edges.length = 236 := by decide +kernel
+
+/-- **No self-loops.** `edgeGraph` strips them anyway, so a loop would not make the graph wrong — it
+would mean the `% size` above had folded two distinct vertices together, which would.
+
+Triangle-freeness is a property of Mycielski's construction rather than of this list, and it is *not*
+guarded here: the check is `size³` adjacency tests, which the kernel would walk one cons cell at a
+time. It is verified tool-side instead, and what it buys is stated rather than used — this graph
+cannot name a triangle's colours, so it cannot use the lever a unit-distance candidate has. -/
+example : edges.all (fun e => decide (e.1 ≠ e.2)) = true := by decide +kernel
+
+end Mycielski
+
+/-- **The first refutation of a five-colouring in this project.**
+
+47 vertices, 236 edges, and no proper colouring with five colours. Kernel-checked through the same
+route every other witness here uses: a solver certificate, re-checked by `Sat/MaskCheck.lean`, with
+CaDiCaL trusted for nothing. -/
+theorem mycielski47_not_colorable_five :
+    ¬ (edgeGraph Mycielski.size Mycielski.edges).Colorable 5 := by
+  sorry
+
+/-- **The control that must go red.** Six colours *do* suffice. Without it, a "five" that was
+silently a "four" — or a graph that was accidentally uncolourable at every count, which a dropped
+`% size` would produce — reads exactly like a success. -/
+theorem mycielski47_colorable_six :
+    (edgeGraph Mycielski.size Mycielski.edges).Colorable 6 := by
+  sorry
+
+end HadwigerNelson
