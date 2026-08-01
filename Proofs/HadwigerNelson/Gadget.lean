@@ -286,7 +286,22 @@ already guarantees: such a gadget can be *built* only by proving `sound`, so "ad
 inhabited exactly when the graph really is not `k`-colourable. -/
 theorem not_colorable_of_gadget (g : Gadget k n m E p) (h : g.survivors = []) :
     ¬ (edgeGraph n E).Colorable k := by
-  sorry
+  rintro ⟨C⟩
+  -- The ports' colouring, and the listed representative of its partition.
+  obtain ⟨q', hmem, hpart⟩ := exists_mem_canonPatterns (fun i => C (p i))
+  -- **Where colour symmetry comes from.** `σ` renames the representative's colours to the ones `C`
+  -- uses, so `σ⁻¹ ∘ C` is a proper colouring — renaming preserves properness — whose ports take
+  -- exactly the representative. No field on `Gadget` is needed: `sound` already speaks about
+  -- every proper colouring, and this is one.
+  obtain ⟨σ, hσ⟩ := exists_perm_comp_eq hpart
+  have hprop : Proper n E (fun v => σ.symm (C v)) :=
+    Proper.comp_injective σ.symm.injective fun _ _ hij => C.valid hij
+  have hadm : g.admits q' = true := by
+    have hs := g.sound _ hprop
+    simpa only [← hσ, Equiv.symm_apply_apply] using hs
+  have hin : q' ∈ (canonPatterns k m).filter g.admits := List.mem_filter.mpr ⟨hmem, hadm⟩
+  simp only [Gadget.survivors, List.map_eq_nil_iff] at h
+  simp [h] at hin
 
 /-! ## Spec
 

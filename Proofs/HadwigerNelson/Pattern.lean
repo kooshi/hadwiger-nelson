@@ -104,7 +104,62 @@ theorem exists_canonAux {k : ℕ} : ∀ (m : ℕ) (s : List (Fin k)), s.Nodup �
     ∃ (s' : List (Fin k)) (q' : Fin m → Fin k),
       s'.Nodup ∧ s <+: s' ∧ (∀ i, q i ∈ s') ∧ q' ∈ canonAux k m s.length ∧
         ∀ i, (q' i).val = s'.idxOf (q i) := by
-  sorry
+  intro m
+  induction m with
+  | zero =>
+      -- No positions: the context is already the answer and every `∀ i : Fin 0` is vacuous.
+      intro s hs q
+      exact ⟨s, Fin.elim0, hs, List.prefix_rfl, fun i => i.elim0, by simp [canonAux],
+        fun i => i.elim0⟩
+  | succ m ih =>
+      intro s hs q
+      by_cases hc : q 0 ∈ s
+      · -- **The first position reuses a name.** The context does not grow, and the head takes the
+        -- name that colour already has.
+        obtain ⟨s', t', hnd, hpre, hcov, hmem, hlink⟩ := ih s hs (Fin.tail q)
+        obtain ⟨u, rfl⟩ := hpre
+        have hidx : (s ++ u).idxOf (q 0) = s.idxOf (q 0) := by simp [List.idxOf_append, hc]
+        have hlen : s.idxOf (q 0) < s.length := List.idxOf_lt_length_of_mem hc
+        have hlt : s.idxOf (q 0) < k :=
+          hlen.trans_le (hs.length_le_card.trans_eq (Fintype.card_fin k))
+        refine ⟨s ++ u, Fin.cons ⟨s.idxOf (q 0), hlt⟩ t', hnd, List.prefix_append s u, ?_, ?_, ?_⟩
+        · exact fun i => Fin.cases (List.mem_append_left u hc) hcov i
+        · -- The head is an existing name, so the count is unchanged: `max s.length (idx+1)` is
+          -- `s.length`, which is where the induction hypothesis put the tail.
+          refine List.mem_flatMap.mpr ⟨⟨s.idxOf (q 0), hlt⟩, List.mem_finRange _, ?_⟩
+          rw [if_pos (Nat.le_of_lt hlen), Nat.max_eq_left hlen]
+          exact List.mem_map_of_mem hmem
+        · refine Fin.cases ?_ (fun j => ?_)
+          · simpa using hidx.symm
+          · simp only [Fin.cons_succ]; exact hlink j
+      · -- **The first position opens a block.** The context grows by that colour, and the head takes
+        -- the next fresh name — which is the old count.
+        have hnd₁ : (s ++ [q 0]).Nodup := by
+          simp only [List.nodup_append]
+          refine ⟨hs, List.nodup_singleton _, fun x hx y hy => ?_⟩
+          rw [List.mem_singleton] at hy
+          subst hy
+          exact fun h => hc (h ▸ hx)
+        obtain ⟨s', t', hnd, hpre, hcov, hmem, hlink⟩ := ih (s ++ [q 0]) hnd₁ (Fin.tail q)
+        obtain ⟨u, rfl⟩ := hpre
+        have hlt : s.length < k := by
+          have h1 := hnd₁.length_le_card.trans_eq (Fintype.card_fin k)
+          simp only [List.length_append, List.length_cons, List.length_nil] at h1
+          omega
+        have hmem₁ : q 0 ∈ s ++ [q 0] := List.mem_append_right _ (by simp)
+        have hmem' : t' ∈ canonAux k m (s.length + 1) := by
+          simpa only [List.length_append, List.length_cons, List.length_nil] using hmem
+        have hidx : (s ++ [q 0] ++ u).idxOf (q 0) = s.length := by
+          simp [List.idxOf_append, hc]
+        refine ⟨s ++ [q 0] ++ u, Fin.cons ⟨s.length, hlt⟩ t', hnd,
+          (List.prefix_append s [q 0]).trans (List.prefix_append _ u), ?_, ?_, ?_⟩
+        · exact fun i => Fin.cases (List.mem_append_left u hmem₁) hcov i
+        · refine List.mem_flatMap.mpr ⟨⟨s.length, hlt⟩, List.mem_finRange _, ?_⟩
+          rw [if_pos (Nat.le_refl _), Nat.max_eq_right (Nat.le_succ _)]
+          exact List.mem_map_of_mem hmem'
+        · refine Fin.cases ?_ (fun j => ?_)
+          · simpa using hidx.symm
+          · simp only [Fin.cons_succ]; exact hlink j
 
 /-- **Every pattern matches a listed one, position for position.**
 
@@ -114,7 +169,12 @@ colourings to proper colourings, this is what lets an exhaustive check range ove
 representatives alone. -/
 theorem exists_mem_canonPatterns {k m : ℕ} (q : Fin m → Fin k) :
     ∃ q' ∈ canonPatterns k m, SamePattern q' q := by
-  sorry
+  obtain ⟨s', q', -, -, hcov, hmem, hlink⟩ := exists_canonAux m [] List.nodup_nil q
+  -- Two positions get the same *name* exactly when they had the same colour: `idxOf` is injective
+  -- on the elements a list contains, and every colour `q` uses is one of them.
+  refine ⟨q', hmem, fun i j => ?_⟩
+  rw [← Fin.val_inj, hlink, hlink]
+  exact List.idxOf_inj (hcov i)
 
 /-! ## Spec
 

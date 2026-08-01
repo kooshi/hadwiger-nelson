@@ -453,6 +453,90 @@ instance, and `samePattern_iff`. Three call sites stop spelling out the quantifi
 
 ---
 
+## 3.6 The obligation pass
+
+*Run 2026-08-01 against the twelve open leaves. All twelve are closed; the statements the domain pass
+derived turned out to be the statements the proofs come from, and nothing had to be strengthened.*
+
+### The space, written out
+
+`exists_canonAux` is one induction on the number of positions with **three** cases, and the case
+table is the whole proof:
+
+| case | what happens | closes in |
+|---|---|---|
+| no positions | the context is already the answer; every `∀ i : Fin 0` is vacuous | one term |
+| the first position **reuses** a name | context unchanged, head takes `s.idxOf (q 0)`, and `max s.length (idx+1) = s.length` puts the tail exactly where the induction hypothesis left it | ~8 lines |
+| the first position **opens a block** | context becomes `s ++ [q 0]`, head takes `s.length`, and `max s.length (s.length+1) = s.length+1` matches | ~14 lines |
+
+Both sub-cases of the step needed one fact each, and both are in core with the shape wanted:
+
+* `List.idxOf_append : (l₁ ++ l₂).idxOf a = if a ∈ l₁ then l₁.idxOf a else l₂.idxOf a + l₁.length` —
+  it does the prefix transport in the reused case (`then`) *and* computes `(s ++ [c]).idxOf c` in the
+  fresh case (`else`). One lemma, both jobs.
+* `List.Nodup.length_le_card` — the `Fin k` bound. In the reused case via
+  `idxOf_lt_length_of_mem`; in the fresh case from the *extended* list's nodup-ness, which the
+  induction hypothesis demands anyway. **The strict `<` the subplan worried about comes for free**,
+  because the proof has already built `s ++ [q 0]` before it needs the bound.
+
+The consumer lemma is four lines, and the direction that matters — "same name implies same colour" —
+is `List.idxOf_inj`, which needs only membership, not nodup-ness.
+
+### Each conjunct audited against the proof
+
+The subplan asked whether the coverage clause `∀ i, q i ∈ s'` was derivable. It is not, and it is
+load-bearing: deleting it (replacing it with `True`) breaks `exists_mem_canonPatterns` at exactly
+`List.idxOf_inj (hcov i)` — watched. `List.IsPrefix` was the right relation: transitivity is used in
+the fresh case, and `obtain ⟨u, rfl⟩` is how both `idxOf` transports start.
+
+### The terminal theorem, and where colour symmetry actually enters
+
+```lean
+obtain ⟨q', hmem, hpart⟩ := exists_mem_canonPatterns (fun i => C (p i))
+obtain ⟨σ, hσ⟩          := exists_perm_comp_eq hpart      -- σ ∘ q' = C ∘ p
+have hprop : Proper n E (fun v => σ.symm (C v)) := Proper.comp_injective σ.symm.injective …
+```
+
+Nine lines, and no `.symm` was missing: `SamePattern q' (C ∘ p)` with the representative *first* is
+exactly the orientation `exists_perm_comp_eq` consumes. The colour symmetry is `σ.symm ∘ C` — a
+different proper colouring, handed to the same `sound` field. Confirmed: replacing it with `C`
+itself breaks the proof.
+
+### The algebra, coefficients confirmed
+
+Every `Motion` obligation closed as one `linear_combination` with the coefficients derived on paper,
+first try, and `Q4`'s `ring` handles the four-level tower at this size without complaint:
+
+| obligation | combination |
+|---|---|
+| `sq_norm_sim` | `u·u·col₁ + 2·u·v·orth + v·v·col₂` |
+| `comp.col₁` | `a₁a₁·col₁² + 2a₁b₁·orth² + b₁b₁·col₂² + scale₂·col₁¹` |
+| `comp.col₂` | the same with `c₁, d₁` for `a₁, b₁` |
+| `comp.orth` | `a₁c₁·col₁² + (a₁d₁ + b₁c₁)·orth² + b₁d₁·col₂² + scale₂·orth¹` |
+| `comp.sq` | `M₂M₂·sq¹ + scale₁·sq²` |
+| `comp_maps` | `M₁·h'ᵣₒw + a₂·h_x + c₂·h_y` per row |
+| `distSq_hold` | `((qx−qx')² + (qy−qy')²)·sq` |
+| `rotAbout`/`reflectIn` `col₂` | `linear_combination rot`; their `orth` is `ring` |
+
+`distSq_eq` is now the three-line consequence the domain pass predicted, and `Motion.lean` has no
+`sorry` at all.
+
+### Adversarial validation — three mutations, all watched red
+
+| mutation | what went red, and where |
+|---|---|
+| `canonAux` opens no fresh colour (`c.val ≤ u` → `c.val < u`) | the `if_pos` step in **both** branches of `exists_canonAux`, *and* both `#guard_msgs` on the rendered enumeration — the proof and the spec catch it independently |
+| the coverage conjunct replaced by `True` | `exists_mem_canonPatterns` at `List.idxOf_inj (hcov i)` |
+| the terminal theorem uses `C` instead of `σ⁻¹ ∘ C` | `not_colorable_of_gadget` at the step that identifies the ports' colours with the representative |
+
+Axioms on the three new public statements: `exists_mem_canonPatterns`, `not_colorable_of_gadget`
+and `Motion.distSq_eq` on exactly `[propext, Classical.choice, Quot.sound]`;
+`UDCert.validOn_of_scaled` on `[propext, Quot.sound]`. `chromaticNumber_plane_ge_five` — the
+milestone-B headline, which now reaches the plane through a rewritten `Motion` and a rewritten
+terminal check — is unchanged at `[propext, Classical.choice, Quot.sound]`.
+
+---
+
 ## 4. Controls — every one to be watched go red
 
 | # | Break this | The check that must fail, and where |

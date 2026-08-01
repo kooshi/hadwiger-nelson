@@ -142,7 +142,7 @@ identities in ten. -/
 private theorem sq_norm_sim {a b c d s u v : Q4} (h₁ : a * a + b * b = s) (h₂ : c * c + d * d = s)
     (h₃ : a * c + b * d = 0) :
     (a * u + c * v) * (a * u + c * v) + (b * u + d * v) * (b * u + d * v) = s * (u * u + v * v) := by
-  sorry
+  linear_combination u * u * h₁ + 2 * u * v * h₃ + v * v * h₂
 
 /-! ### The two halves of a placement
 
@@ -176,12 +176,13 @@ def Maps (p q : Pt) : Bool :=
 /-- **What `Maps` says, in the vocabulary of the two halves.** The rows are the two coordinates of
 one equation between points. -/
 theorem maps_iff {p q : Pt} : μ.Maps p q = true ↔ μ.hold q = μ.step p := by
-  sorry
+  simp [Maps, hold, step, Pt.mk.injEq]
 
 /-- **Re-denomination scales every squared distance by `scale`.** One of the two facts the whole
 file rests on; this one uses `Motion.sq` and nothing else. -/
 theorem distSq_hold (q q' : Pt) : (μ.hold q).distSq (μ.hold q') = (μ.scale : Q4) * q.distSq q' := by
-  sorry
+  simp only [Pt.distSq, hold, FastSq.sq_eq]
+  linear_combination ((q.x - q'.x) * (q.x - q'.x) + (q.y - q'.y) * (q.y - q'.y)) * μ.sq
 
 /-- **The image scales every squared distance by `scale`.** The other fact, and the one the three
 similarity laws exist for. The translation cancels — a squared distance depends only on differences —
@@ -191,7 +192,8 @@ so `e` and `f` play no part.
 exactly `scale`, for a copy of any size, with no per-vertex and no per-edge check: see
 `UDCert.validOn_of_scaled`. -/
 theorem distSq_step (p p' : Pt) : (μ.step p).distSq (μ.step p') = (μ.scale : Q4) * p.distSq p' := by
-  sorry
+  simp only [Pt.distSq, step, FastSq.sq_eq]
+  linear_combination sq_norm_sim μ.col₁ μ.col₂ μ.orth (u := p.x - p'.x) (v := p.y - p'.y)
 
 /-- **A motion preserves squared distance.**
 
@@ -217,8 +219,8 @@ def rotAbout (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0) (sq : 
   f := M * o.y - (b * o.x + a * o.y)
   M := M; scale := scale; scale_ne := scale_ne; sq := sq
   col₁ := rot
-  col₂ := by sorry
-  orth := by sorry
+  col₂ := by linear_combination rot
+  orth := by ring
 
 /-- **A reflection in a line through a point**, in the direction `(a/M, b/M)`: the second column is
 `(b, −a)`, which is the sign the old shape could not express. -/
@@ -229,18 +231,18 @@ def reflectIn (a b M : Q4) (o : Pt) (scale : ℕ) (scale_ne : scale ≠ 0) (sq :
   f := M * o.y - (b * o.x + -a * o.y)
   M := M; scale := scale; scale_ne := scale_ne; sq := sq
   col₁ := rot
-  col₂ := by sorry
-  orth := by sorry
+  col₂ := by linear_combination rot
+  orth := by ring
 
 /-- **A translation** — the motion the old shape admitted at no scale at all, since it has no fixed
 point. -/
 def translate (v : Pt) : Motion where
   a := 1; b := 0; c := 0; d := 1; e := v.x; f := v.y; M := 1; scale := 1
   scale_ne := by decide
-  sq := by sorry
-  col₁ := by sorry
-  col₂ := by sorry
-  orth := by sorry
+  sq := by norm_num
+  col₁ := by norm_num
+  col₂ := by norm_num
+  orth := by ring
 
 /-- The identity motion — `Motion.comp`'s unit, and the placement that does nothing. -/
 def id : Motion := translate ⟨0, 0⟩
@@ -262,15 +264,30 @@ def comp (μ₁ μ₂ : Motion) : Motion where
   M := μ₁.M * μ₂.M
   scale := μ₁.scale * μ₂.scale
   scale_ne := Nat.mul_ne_zero μ₁.scale_ne μ₂.scale_ne
-  sq := by sorry
-  col₁ := by sorry
-  col₂ := by sorry
-  orth := by sorry
+  sq := by
+    push_cast
+    linear_combination (μ₂.M * μ₂.M) * μ₁.sq + (μ₁.scale : Q4) * μ₂.sq
+  col₁ := by
+    push_cast
+    linear_combination μ₁.a * μ₁.a * μ₂.col₁ + 2 * μ₁.a * μ₁.b * μ₂.orth
+      + μ₁.b * μ₁.b * μ₂.col₂ + (μ₂.scale : Q4) * μ₁.col₁
+  col₂ := by
+    push_cast
+    linear_combination μ₁.c * μ₁.c * μ₂.col₁ + 2 * μ₁.c * μ₁.d * μ₂.orth
+      + μ₁.d * μ₁.d * μ₂.col₂ + (μ₂.scale : Q4) * μ₁.col₂
+  orth := by
+    linear_combination μ₁.a * μ₁.c * μ₂.col₁ + (μ₁.a * μ₁.d + μ₁.b * μ₁.c) * μ₂.orth
+      + μ₁.b * μ₁.d * μ₂.col₂ + (μ₂.scale : Q4) * μ₁.orth
 
 /-- **Composition does what its name says.** Two placements chained are one placement. -/
 theorem comp_maps {μ₁ μ₂ : Motion} {p q r : Pt} (h : μ₁.Maps p q = true) (h' : μ₂.Maps q r = true) :
     (μ₁.comp μ₂).Maps p r = true := by
-  sorry
+  simp only [Maps, comp, Bool.and_eq_true, beq_iff_eq] at h h' ⊢
+  obtain ⟨h1, h2⟩ := h
+  obtain ⟨h3, h4⟩ := h'
+  constructor
+  · linear_combination μ₁.M * h3 + μ₂.a * h1 + μ₂.c * h2
+  · linear_combination μ₁.M * h4 + μ₂.b * h1 + μ₂.d * h2
 
 end Motion
 
