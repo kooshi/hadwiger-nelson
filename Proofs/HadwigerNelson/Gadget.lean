@@ -2,6 +2,8 @@ import Proofs.HadwigerNelson.Sat.Encoding
 import Mathlib.Data.Fintype.Perm
 import Mathlib.Logic.Equiv.Fintype
 
+set_option maxRecDepth 100000
+
 /-!
 # Gadgets: colouring constraints that compose
 
@@ -135,10 +137,14 @@ def transport (φ : Fin n → Fin n) (hφ : ∀ e ∈ E', (edgeGraph n E).Adj (�
 
 /-! ## Produce -/
 
-/-- **The base gadget: an edge.** Its two endpoints do not share a colour. No certificate, no
-computation — this is the fact every other gadget is eventually contradicted against. -/
-def edge {i j : Fin n} (h : (edgeGraph n E).Adj i j) : Gadget n 2 E ![i, j] where
-  admits q := q 0 != q 1
+/-- **The base gadget: an edge between two ports.** Ports `i` and `j` do not share a colour. No
+certificate, no computation — this is the fact every other gadget is eventually contradicted against.
+
+Stated over *port indices* rather than over vertices, so an edge gadget needs no `widen`: an edge's
+ports are always two of the shared ports, never anything else, and making the caller build a
+two-element tuple and then prove it agrees with the shared one was work the task never asked for. -/
+def edge (i j : Fin m) (h : (edgeGraph n E).Adj (p i) (p j)) : Gadget n m E p where
+  admits q := q i != q j
   sound := sorry
 
 end Gadget
@@ -199,15 +205,41 @@ def Gadget.ofUnsat (q₀ : Fin m → Fin 4)
   admits q := !samePattern q q₀
   sound := sorry
 
-/-! ## Conclude -/
+/-! ## Conclude — and the same computation reports the failure
 
-/-- **A gadget that admits nothing.** If no colouring of the ports is permitted, no proper
-4-colouring of the graph exists — a colouring would have to colour the ports somehow.
+The terminal check is an exhaustive search over the `4^m` port colourings, and during a gadget search
+it **fails far more often than it succeeds** — that is what searching is. So the check is defined as
+*"the search came back empty"* rather than as a separate `∀`, and the thing that comes back is the
+list of colourings that survived.
+
+One computation, two readings: the build consumes `survivors = []`, and a reader runs
+`#eval g.survivors` and sees exactly what is not yet ruled out. They cannot disagree, because there is
+nothing for them to disagree about — M05 replaced a checker and a fault-reporter related by a lemma
+with precisely this arrangement, and `ARCHITECTURE.md` § 6 lists the weaker version as a defect. -/
+
+/-- Every colouring of `m` ports with four colours — `4 ^ m` of them, in a fixed order. -/
+def allPatterns : (m : ℕ) → List (Fin m → Fin 4)
+  | 0 => [Fin.elim0]
+  | m + 1 => (List.finRange 4).flatMap fun c => (allPatterns m).map fun q => Fin.cons c q
+
+/-- The enumeration is complete — the local obligation that makes the exhaustive search exhaustive. -/
+theorem mem_allPatterns {m : ℕ} (q : Fin m → Fin 4) : q ∈ allPatterns m := sorry
+
+/-- **The port colourings this gadget has not ruled out.**
+
+Empty is the condition `not_colorable_of_gadget` consumes; non-empty is the report a reader needs,
+rendered as one list of colours per port. Run it with `#eval` on the composite when a build fails and
+the surviving colourings say which constraint is missing. -/
+def Gadget.survivors (g : Gadget n m E p) : List (List (Fin 4)) :=
+  ((allPatterns m).filter g.admits).map (List.ofFn ·)
+
+/-- **A gadget that admits nothing.** If no colouring of the ports survives, no proper 4-colouring of
+the graph exists — a colouring would have to colour the ports somehow.
 
 The terminal move of the algebra, and the only one that mentions `Colorable`. Note what the type
 already guarantees: such a gadget can be *built* only by proving `sound`, so "admits nothing" is
 inhabited exactly when the graph really is not 4-colourable. -/
-theorem not_colorable_of_gadget (g : Gadget n m E p) (h : ∀ q, g.admits q = false) :
+theorem not_colorable_of_gadget (g : Gadget n m E p) (h : g.survivors = []) :
     ¬ (edgeGraph n E).Colorable 4 := sorry
 
 /-! ## Spec
@@ -224,25 +256,48 @@ section Spec
 def k5 : List (Fin 5 × Fin 5) :=
   [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
 
-/-- One of `K₅`'s edges, read through all five ports. -/
+/-- One of `K₅`'s edges as a gadget on its five ports, which are its five vertices. -/
 def k5Edge (i j : Fin 5) (hij : (i, j) ∈ k5) (hne : i ≠ j) : Gadget 5 5 k5 (fun k => k) :=
-  (Gadget.edge (edgeGraph_adj_of_mem hne hij)).widen ![i, j] (fun _ => rfl)
+  Gadget.edge i j (edgeGraph_adj_of_mem hne hij)
+
+/-- All ten of them, composed. -/
+def k5Gadget : Gadget 5 5 k5 (fun k => k) :=
+  List.foldr Gadget.inter Gadget.trivial
+    [k5Edge 0 1 (by decide) (by decide), k5Edge 0 2 (by decide) (by decide),
+     k5Edge 0 3 (by decide) (by decide), k5Edge 0 4 (by decide) (by decide),
+     k5Edge 1 2 (by decide) (by decide), k5Edge 1 3 (by decide) (by decide),
+     k5Edge 1 4 (by decide) (by decide), k5Edge 2 3 (by decide) (by decide),
+     k5Edge 2 4 (by decide) (by decide), k5Edge 3 4 (by decide) (by decide)]
 
 /-- **The composition is not vacuous, and it proves something true.** Five mutually adjacent vertices
 cannot be four-coloured, and the algebra says so from ten edge gadgets and one `decide` over the `4⁵`
 port colourings — no solver, no certificate, and no graph handed to anything. -/
-example : ¬ (edgeGraph 5 k5).Colorable 4 := sorry
+example : ¬ (edgeGraph 5 k5).Colorable 4 := not_colorable_of_gadget k5Gadget (by decide)
 
-/-- **The negative control.** Drop one edge gadget and a port colouring survives — `K₅` minus an edge
-*is* 4-colourable. Without this, the example above would be consistent with a composition that
-reports "admits nothing" whatever it is given. -/
-example : ∃ q : Fin 5 → Fin 4,
-    (List.foldr Gadget.inter Gadget.trivial
-      [k5Edge 0 1 (by decide) (by decide), k5Edge 0 2 (by decide) (by decide),
-       k5Edge 0 3 (by decide) (by decide), k5Edge 0 4 (by decide) (by decide),
-       k5Edge 1 2 (by decide) (by decide), k5Edge 1 3 (by decide) (by decide),
-       k5Edge 1 4 (by decide) (by decide), k5Edge 2 3 (by decide) (by decide),
-       k5Edge 2 4 (by decide) (by decide)]).admits q = true := sorry
+-- **The negative control**, and the report a failing search gets. Drop one edge gadget and 24 port
+-- colourings survive — `K₅` minus an edge *is* 4-colourable, and the survivors all give the two
+-- now-unjoined vertices the same colour. Without this, the example above would be consistent with a
+-- composition that reports "admits nothing" whatever it is handed.
+--
+-- The rendered output is pinned rather than described: it is what a reader meets on the day a search
+-- does not close, and an unreadable one would be discovered on that day rather than this one.
+/-- info: 24 -/
+#guard_msgs in
+#eval (List.foldr Gadget.inter Gadget.trivial
+  [k5Edge 0 1 (by decide) (by decide), k5Edge 0 2 (by decide) (by decide),
+   k5Edge 0 3 (by decide) (by decide), k5Edge 0 4 (by decide) (by decide),
+   k5Edge 1 2 (by decide) (by decide), k5Edge 1 3 (by decide) (by decide),
+   k5Edge 1 4 (by decide) (by decide), k5Edge 2 3 (by decide) (by decide),
+   k5Edge 2 4 (by decide) (by decide)]).survivors.length
+
+/-- info: [[0, 1, 2, 3, 3], [0, 1, 3, 2, 2]] -/
+#guard_msgs in
+#eval (List.foldr Gadget.inter Gadget.trivial
+  [k5Edge 0 1 (by decide) (by decide), k5Edge 0 2 (by decide) (by decide),
+   k5Edge 0 3 (by decide) (by decide), k5Edge 0 4 (by decide) (by decide),
+   k5Edge 1 2 (by decide) (by decide), k5Edge 1 3 (by decide) (by decide),
+   k5Edge 1 4 (by decide) (by decide), k5Edge 2 3 (by decide) (by decide),
+   k5Edge 2 4 (by decide) (by decide)]).survivors.take 2
 
 /-- **A model of `exists_perm_comp_eq`'s hypothesis**, so colour symmetry is not quantifying over
 nothing: two port colourings with the same partition — first and third agree, second differs. -/

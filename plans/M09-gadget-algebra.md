@@ -392,6 +392,47 @@ edge*. With those, `deGreyRot_valid` is three cases of `List.mem_append`, and
 site hits it. That is the cost model for the port budget: at three ports it is free; at **eight ports
 it is ~2 minutes for ten gadgets**, which is where the permutation-closure field above earns its keep.
 
+### 3.8 Experience pass — 2026-07-31
+
+**The user this pass is for is a search that fails.** The terminal move is an exhaustive check over
+`4^m` port colourings, and during a gadget hunt it comes back *negative* far more often than
+positive — that is what searching is. So the breakdown path is not an edge case here; it is the
+common case, and it was the milestone's weakest point.
+
+**The check is now its own diagnostic.** Instead of `∀ q, g.admits q = false` with an unprintable
+failure, the check is `g.survivors = []` — where `survivors` is the list of port colourings *not yet
+ruled out*, rendered one list of colours per port:
+
+```
+#eval k5MinusOneEdge.survivors.length      -- 24
+#eval k5MinusOneEdge.survivors.take 2      -- [[0, 1, 2, 3, 3], [0, 1, 3, 2, 2]]
+```
+
+A reader meets the colourings that survive, which is exactly the information that says which
+constraint is missing — here, that vertices 3 and 4 are free to agree. **One computation, two
+readings, and nothing for them to disagree about**: M05 replaced a checker-plus-fault-reporter pair
+with this arrangement and `ARCHITECTURE.md` § 6 lists the weaker version as a defect. Both outputs are
+pinned with `#guard_msgs`, because they are what a reader meets on the day a search does not close.
+
+**Measured, so it is not a trade:** `survivors = []` kernel-reduces in ~1.7 CPU s at 1024 colourings
+× 10 gadgets, against ~2.2 for the bare `∀`. The better failure surface is also the cheaper one. (The
+first attempt used `Finset.univ.toList` and did not reduce at all — `Finset.toList` is noncomputable;
+the enumeration is built structurally instead, with `mem_allPatterns` as its completeness obligation.)
+
+**Two smaller corrections.**
+
+| Was | Now | Why |
+|---|---|---|
+| `Gadget.edge` over two *vertices*, then `widen` with a two-element tuple and a port proof | `Gadget.edge (i j : Fin m)` over two **port indices** | An edge gadget's ports are always two of the shared ports and never anything else. Building a tuple and proving it agrees was work the task never asked for — it deletes a combinator call and a `by decide` at every edge gadget. |
+| `UDCert.validOn_mono` | `UDCert.validOn_of_subset` | It is **antitone** in the edge list. A name saying "mono" misleads every reader who never opens the file. |
+
+**And the reviewer's entry point has to be rewritten, not patched.** `Instances/DeGrey/Bound.lean`
+currently says the graph is refuted "from one kernel-checked refutation per copy", and
+`ARCHITECTURE.md` quotes 34.2 million propagation steps for de Grey. After this milestone there is
+**one** refutation and a rotation, and the step count is roughly halved. Those paragraphs are the
+first thing a sceptic reads; leaving them describing the previous proof would be the worst kind of
+stale documentation, because it is stale about the thing being certified.
+
 ---
 
 ## 4. Negative controls — every one committed and watched to fail

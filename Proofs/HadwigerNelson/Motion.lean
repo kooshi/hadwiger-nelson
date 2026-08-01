@@ -120,8 +120,11 @@ sits upstream of 2,433 generated certificate modules, so adding a line to it cos
 kernel time. Both are about geometry under a motion, which is this module's subject anyway. -/
 
 /-- **A certificate valid on a list is valid on any sublist.** One line from `validOn_iff`, and the
-reason a graph's edge list can be re-ordered or re-segmented without re-checking its geometry. -/
-theorem UDCert.validOn_mono {n : ℕ} {c : UDCert n} {es es' : List (Fin n × Fin n)} (h : es' ⊆ es)
+reason a graph's edge list can be re-ordered or re-segmented without re-checking its geometry.
+
+Named `of_subset` and not `mono`: it is *antitone* in the edge list, and a name that says otherwise
+would mislead every reader who never opens the file. -/
+theorem UDCert.validOn_of_subset {n : ℕ} {c : UDCert n} {es es' : List (Fin n × Fin n)} (h : es' ⊆ es)
     (hv : c.ValidOn es = true) : c.ValidOn es' = true := sorry
 
 /-- **Geometry transports along a motion.** If a vertex map moves both endpoints of every edge of
