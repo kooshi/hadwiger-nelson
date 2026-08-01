@@ -176,10 +176,15 @@ instance instInt : Packable Int where
   width := 1
   bounded b z := decide (|z| ≤ b)
   sub a b := a - b
-  pack_sub := by sorry
-  bounded_sub := by sorry
-  pack_le := by sorry
-  pack_inj := by sorry
+  pack_sub _ _ := rfl
+  bounded_sub b x y hx hy := by
+    simp only [decide_eq_true_eq] at *
+    have := abs_sub x y
+    omega
+  pack_le b x hb hx := by
+    simp only [decide_eq_true_eq] at hx
+    simpa using by omega
+  pack_inj _ _ _ _ _ _ h := h
 
 /-- A level of the field tower: the real part in the low lanes, the `√d` coefficient in the high
 ones. `d` is never read — packing is a fact about the shape of the data, not about the field. -/
@@ -188,10 +193,24 @@ instance instAdjoin {d : ℕ} {K : Type} [Packable K] : Packable (Adjoin d K) wh
   width := 2 * width K
   bounded b x := bounded b x.re && bounded b x.im
   sub x y := ⟨sub x.re y.re, sub x.im y.im⟩
-  pack_sub := by sorry
-  bounded_sub := by sorry
-  pack_le := by sorry
-  pack_inj := by sorry
+  pack_sub x y := by simp only [pack_sub]; ring
+  bounded_sub b x y hx hy := by
+    simp only [Bool.and_eq_true] at *
+    exact ⟨bounded_sub b _ _ hx.1 hy.1, bounded_sub b _ _ hx.2 hy.2⟩
+  pack_le b x hb hx := by
+    simp only [Bool.and_eq_true] at hx
+    have hM : (0 : Int) < 2 ^ (laneBits * width K) := pow_pos (by norm_num) _
+    have hexp : (2 : Int) ^ (laneBits * (2 * width K))
+        = 2 ^ (laneBits * width K) * 2 ^ (laneBits * width K) := by
+      rw [← pow_add, two_mul, Nat.mul_add]
+    rw [hexp]
+    exact two_digit_lt hM (pack_le b _ hb hx.1) (pack_le b _ hb hx.2)
+  pack_inj b x y hb hx hy h := by
+    simp only [Bool.and_eq_true] at hx hy
+    have hM : (0 : Int) < 2 ^ (laneBits * width K) := pow_pos (by norm_num) _
+    obtain ⟨hre, him⟩ :=
+      two_digit_inj hM (pack_le b _ hb hx.1) (pack_le b _ hb hy.1) h
+    exact Adjoin.ext (pack_inj b _ _ hb hx.1 hy.1 hre) (pack_inj b _ _ hb hx.2 hy.2 him)
 
 /-- A point: the abscissa in the low lanes, the ordinate in the high ones — structurally the same
 two-lane shape as a tower level, and the four laws are the same two digit lemmas again. -/
@@ -200,10 +219,28 @@ instance instPt : Packable Pt where
   width := 2 * width Q4
   bounded b p := bounded b p.x && bounded b p.y
   sub p q := ⟨sub p.x q.x, sub p.y q.y⟩
-  pack_sub := by sorry
-  bounded_sub := by sorry
-  pack_le := by sorry
-  pack_inj := by sorry
+  pack_sub p q := by simp only [pack_sub]; ring
+  bounded_sub b p q hp hq := by
+    simp only [Bool.and_eq_true] at *
+    exact ⟨bounded_sub b _ _ hp.1 hq.1, bounded_sub b _ _ hp.2 hq.2⟩
+  pack_le b p hb hp := by
+    simp only [Bool.and_eq_true] at hp
+    have hM : (0 : Int) < 2 ^ (laneBits * width Q4) := pow_pos (by norm_num) _
+    have hexp : (2 : Int) ^ (laneBits * (2 * width Q4))
+        = 2 ^ (laneBits * width Q4) * 2 ^ (laneBits * width Q4) := by
+      rw [← pow_add, two_mul, Nat.mul_add]
+    rw [hexp]
+    exact two_digit_lt hM (pack_le b _ hb hp.1) (pack_le b _ hb hp.2)
+  pack_inj b p q hb hp hq h := by
+    simp only [Bool.and_eq_true] at hp hq
+    have hM : (0 : Int) < 2 ^ (laneBits * width Q4) := pow_pos (by norm_num) _
+    obtain ⟨hx, hy⟩ :=
+      two_digit_inj hM (pack_le b _ hb hp.1) (pack_le b _ hb hq.1) h
+    -- `Pt` carries no `ext` lemma, and adding one from here would be a global utterance about a
+    -- type this module does not own. Two `cases` cost less.
+    have hx' := pack_inj b _ _ hb hp.1 hq.1 hx
+    have hy' := pack_inj b _ _ hb hp.2 hq.2 hy
+    cases p; cases q; simp_all
 
 end Packable
 
@@ -346,11 +383,37 @@ One lemma and not two. The two facts have the same induction over the same pair 
 splitting them would mean walking the tables twice in the proof to say two things established by one
 walk in the definition. -/
 theorem packOk_get {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
-    u.get i = Packable.pack (t.get i) ∧ Packable.bounded b (t.get i) = true := by sorry
+    u.get i = Packable.pack (t.get i) ∧ Packable.bounded b (t.get i) = true := by
+  induction t generalizing u i with
+  | leaf p =>
+      cases u with
+      | leaf v =>
+          simp only [packOk, Bool.and_eq_true, beq_iff_eq] at h
+          exact ⟨h.2, h.1⟩
+      | node _ _ _ => simp [packOk] at h
+  | node m l r ihl ihr =>
+      cases u with
+      | leaf v => simp [packOk] at h
+      | node m' l' r' =>
+          simp only [packOk, Bool.and_eq_true, beq_iff_eq] at h
+          obtain ⟨⟨hm, hl⟩, hr⟩ := h
+          subst hm
+          simp only [PtTable.get, IntTable.get]
+          by_cases hi : i < m
+          · rw [if_pos hi, if_pos hi]; exact ihl hl i
+          · rw [if_neg hi, if_neg hi]; exact ihr hr (i - m)
 
 /-- `normsOk` in pointwise form — every index, by the same argument. -/
 theorem normsOk_get {target : Q4} {t : PtTable} (h : normsOk target t = true) (i : ℕ) :
-    (t.get i).normSq = target := by sorry
+    (t.get i).normSq = target := by
+  induction t generalizing i with
+  | leaf v => simpa [normsOk, PtTable.get] using h
+  | node m l r ihl ihr =>
+      simp only [normsOk, Bool.and_eq_true] at h
+      simp only [PtTable.get]
+      by_cases hi : i < m
+      · rw [if_pos hi]; exact ihl h.1 i
+      · rw [if_neg hi]; exact ihr h.2 (i - m)
 
 /-- `edgesOk` in pointwise form: every edge in the list is paired with *some* key whose packed
 difference is its endpoints'.
@@ -361,7 +424,17 @@ to know which key an edge got, and asking for it would mean threading list posit
 induction that has no use for them. -/
 theorem edgesOk_mem {w : DiffWitness n} {es : List (Fin n × Fin n)} {ks : List ℕ}
     (h : w.edgesOk es ks = true) (e : Fin n × Fin n) (he : e ∈ es) :
-    ∃ k, w.packedV.get e.1.val - w.packedV.get e.2.val = w.packedD.get k := by sorry
+    ∃ k, w.packedV.get e.1.val - w.packedV.get e.2.val = w.packedD.get k := by
+  induction es generalizing ks with
+  | nil => simp at he
+  | cons e' es' ih =>
+      cases ks with
+      | nil => simp [edgesOk] at h
+      | cons k ks' =>
+          simp only [edgesOk, Bool.and_eq_true, beq_iff_eq] at h
+          rcases List.mem_cons.mp he with rfl | he'
+          · exact ⟨k, h.1⟩
+          · exact ih h.2 he'
 
 /-- **The per-edge step, isolated** — the one joint where the packing is actually cashed in.
 
@@ -378,7 +451,18 @@ theorem distSq_eq_of_packed {b : Int} {t : PtTable} {w : DiffWitness n} {target 
     (hV : packOk b t w.packedV = true) (hD : packOk (2 * b) w.diffs w.packedD = true)
     (hN : normsOk target w.diffs = true) (i j k : ℕ)
     (hk : w.packedV.get i - w.packedV.get j = w.packedD.get k) :
-    (t.get i).distSq (t.get j) = target := by sorry
+    (t.get i).distSq (t.get j) = target := by
+  obtain ⟨hVi, hBi⟩ := packOk_get hV i
+  obtain ⟨hVj, hBj⟩ := packOk_get hV j
+  obtain ⟨hDk, hBk⟩ := packOk_get hD k
+  have hpk : Packable.pack (Packable.sub (t.get i) (t.get j)) = Packable.pack (w.diffs.get k) := by
+    rw [Packable.pack_sub, ← hVi, ← hVj, hk, hDk]
+  have heq : Packable.sub (t.get i) (t.get j) = w.diffs.get k :=
+    Packable.pack_inj (2 * b) _ _ hlane (Packable.bounded_sub b _ _ hBi hBj) hBk hpk
+  calc (t.get i).distSq (t.get j)
+      = (Packable.sub (t.get i) (t.get j)).normSq := (Pt.normSq_sub _ _).symm
+    _ = (w.diffs.get k).normSq := by rw [heq]
+    _ = target := normsOk_get hN k
 
 end DiffWitness
 
@@ -394,7 +478,14 @@ about the witness is assumed.
 The proof is four lines: unpack the four conjuncts, take an edge, get its key from `edgesOk_mem`,
 apply `distSq_eq_of_packed`. Every joint above it is a named lemma with a stated type. -/
 theorem UDCert.valid_of_diffWitness {n : ℕ} (c : UDCert n) (t : PtTable) (w : DiffWitness n)
-    (hverts : c.verts = t.toVerts) (h : w.Certifies t c = true) : c.Valid = true := by sorry
+    (hverts : c.verts = t.toVerts) (h : w.Certifies t c = true) : c.Valid = true := by
+  simp only [DiffWitness.Certifies, Bool.and_eq_true] at h
+  obtain ⟨⟨⟨hV, hD⟩, hN⟩, hE⟩ := h
+  rw [UDCert.valid_eq, UDCert.validOn_iff]
+  intro e he
+  obtain ⟨k, hk⟩ := DiffWitness.edgesOk_mem hE e he
+  rw [hverts]
+  exact DiffWitness.distSq_eq_of_packed (b := vertexBound) (by decide) hV hD hN _ _ k hk
 
 /-! ## Spec
 
@@ -421,12 +512,12 @@ private def unitPairDiffs : DiffWitness 2 where
   packedD := .leaf (Packable.pack (⟨-1, 0⟩ : Pt))
   keys := [0]
 
-example : unitPairDiffs.Certifies unitPairTable unitPair = true := by sorry
+example : unitPairDiffs.Certifies unitPairTable unitPair = true := by decide +kernel
 
 /-- **Non-vacuity, all the way through**: the cheap route really does yield the old claim, on a
 certificate whose hypotheses are all satisfied. -/
 example : unitPair.Valid = true :=
-  unitPair.valid_of_diffWitness unitPairTable unitPairDiffs rfl (by sorry)
+  unitPair.valid_of_diffWitness unitPairTable unitPairDiffs rfl (by decide +kernel)
 
 /-- **The adversarial member.** Point the single key at a difference that is not this edge's:
 `edgesOk` must go `false`. Without this, every theorem above could hold of a `Certifies` that is
@@ -436,25 +527,25 @@ example :
         diffs := .node 1 (.leaf ⟨-1, 0⟩) (.leaf ⟨-2, 0⟩)
         packedD := .node 1 (.leaf (Packable.pack (⟨-1, 0⟩ : Pt)))
                            (.leaf (Packable.pack (⟨-2, 0⟩ : Pt)))
-        keys := [1] } : DiffWitness 2).Certifies unitPairTable unitPair = false := by sorry
+        keys := [1] } : DiffWitness 2).Certifies unitPairTable unitPair = false := by decide +kernel
 
 /-- **A short key list must fail, not truncate.** The one control a `List.zip` formulation would
 have passed. -/
 example :
     ({ unitPairDiffs with keys := [] } : DiffWitness 2).Certifies unitPairTable unitPair = false := by
-  sorry
+  decide +kernel
 
 /-- **A wrong norm must fail** — the geometry moved off the unit circle. -/
 example :
     ({ unitPairDiffs with
         diffs := .leaf ⟨-2, 0⟩, packedD := .leaf (Packable.pack (⟨-2, 0⟩ : Pt)) } :
-      DiffWitness 2).Certifies unitPairTable unitPair = false := by sorry
+      DiffWitness 2).Certifies unitPairTable unitPair = false := by decide +kernel
 
 /-- **A mismatched table shape must fail**, so that a lookup by index cannot mean two different
 things in the two tables. -/
 example :
     ({ unitPairDiffs with packedV := .leaf (Packable.pack (⟨0, 0⟩ : Pt)) } :
-      DiffWitness 2).Certifies unitPairTable unitPair = false := by sorry
+      DiffWitness 2).Certifies unitPairTable unitPair = false := by decide +kernel
 
 /-! ### The emitter contract, as one number
 
