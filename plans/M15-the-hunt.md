@@ -411,6 +411,78 @@ list does, with the offset carried. It exists because of that 41.7 GB, not for t
 * **Assume** — `p ∉ Q` and `0 < k`, both discharged by the caller at every call site in the module;
   the emitted rows are **checked, never assumed**.
 
+## 3.0.2 The experience pass — what it changed
+
+Run against the proved module at commit `69b6e8d`. The consumer that matters most here is **a
+sceptical reviewer who reads none of the Python**, because M15's headline is a *negative* and the
+whole point is that the negative is kernel-checked rather than asserted.
+
+### The headline is the statement with no project vocabulary in it
+
+Cold-read of the two candidates, as the first thing a reader has ever seen of this repository:
+
+| candidate | what a cold reader gets |
+|---|---|
+| `¬ Fan (edgeGraph 510 heule510.edges) 5 p Q` | "Fan" is our word — they must go look it up, and the implicit `{p} {Q}` braces hide the quantifier, so it can read as *"we checked one `Q`"* |
+| `((edgeGraph 510 heule510.edges).deleteIncidenceSet p).Colorable 4` | "delete this vertex's edges and four colours suffice" — no vocabulary of ours at all |
+
+So **`heule510_vertex_critical` leads**, and next to the already-committed
+`heule510_not_colorable_four` the pair is the textbook definition of five-vertex-critical, written
+out. The fan reading follows as `heule510_no_five_fan`, and it takes `p` and `Q` as **explicit**
+arguments so that the `∀` is on the page rather than in the braces. Binder choice is API, and the
+two statements have different readers.
+
+### `p ∉ Q` stays, and gets its one clause where it is met
+
+The hypothesis exists because `Fan G k p Q` is *trivially true* when the pivot is among its own
+partners. A reader who does not know that reads it as bureaucracy. Considered and rejected:
+restating the headline hypothesis-free as `Fan … 5 p Q → p ∈ Q` — which is self-explaining and needs
+no side condition, but stops composing with M14's machinery, which is what M16 will call. Kept the
+hypothesis; the docstring says *why* in one clause rather than restating *what*.
+
+### The two 36-character names stay, because no caller meets them
+
+`exists_isolating_of_colorable_delete` and `colorable_delete_of_exists_isolating` differ only by
+reversal, and "isolating" is a word the module never teaches. That looked like a renaming problem.
+It is not: `exact?` was run on the three goals a caller actually holds, and returned the
+**fan-facing** lemma every time, first try.
+
+```
+a colouring of the deletion, wanting no fan   -> not_fan_of_colorable_delete hp h
+the same at width one                         -> not_forces_of_colorable_delete hpq h
+every vertex critical, wanting no fan         -> not_fan_of_colorable_delete hp (h p)
+```
+
+The correspondence's two halves are plumbing that happens to be public; the fix was the ordering of
+the "which direction to reach for" table, not the names. The word nobody is taught appears only in
+names nobody needs.
+
+### A diagnostic is warranted, and where it lives is a decision about hours
+
+`decide +kernel` on a false `Bool` rejects with **no indication of which row failed**, and there are
+510 of them. `Instances/CriticalDiagnose.lean` reports the first failing row, the offending edge and
+the colour its endpoints share, and reports a length mismatch as its own separate message. It lives
+**downstream of every chunk module** — `Critical.lean` is imported by ~83 generated modules, so a
+docstring edit there is a decision about an hour of re-checking, while a diagnostic rewritten in a
+leaf costs one file. Output pinned with `#guard_msgs`.
+
+### The tool's summary line carries the unsettled count even when it is zero
+
+`removable()` answers `REMOVABLE` / `CRITICAL` / `UNKNOWN`, and the search prints them by the
+thousand. The per-pivot answers are all printable — each is settled or says it is not. **The
+graph-level line is the dangerous one**: "0 removable vertices" is a lie by omission if any pivot
+went unsettled, so the count is printed unconditionally, exactly as M14's width line prints its
+unsettled drops. The emitter then refuses on the same condition, so the two agree.
+
+### What the write-up must not let a reader conclude
+
+The honest claim is "no five-colour fan **in these graphs**". The claim a tired reader takes away is
+"no six-chromatic unit-distance graph exists". Three places carry the limit, and the first is
+structural: **the theorem names its own graph**, so it cannot be over-read if it is read at all. The
+headline docstring says it in a sentence, and the report says it in the plain-English section. The
+module also keeps a graph that *does* have a fan (`triangleAndPoint`), so "a fan is a thing that
+exists" is on the page next to "there is not one here".
+
 ## 3. The shape — tools
 
 * **`tools/forcer.py` gains `removable(n, edges, p, k)`** — the identity as a filter, three outcomes,
