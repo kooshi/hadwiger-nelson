@@ -553,3 +553,61 @@ graph from his 39 seed points by four moves and matches the committed coordinate
 point in the exact field**, in 13 s. `scripts/regen-check.sh` asserts it. The committed table is now
 *derived* data rather than transcribed data — "state the construction, not only the coordinates",
 discharged.
+
+### 9.3 The search — the verdict, and it is negative
+
+Two arms, both stopped by request once the verdict was clear.
+
+**Growth arm** — build a configuration, orbit it under the hexagonal group, spindle it, ask whether
+any pair is forced at four colours:
+
+| | |
+|---|---|
+| universes examined | **33**, from 7 to 679 points |
+| oracle cost | **51 s per universe** (one backbone per pivot) |
+| forced pairs found | **0** |
+| pivots left unsettled | **0** — real negatives, not timeouts |
+| branching factor | **378 spindle moves from one 43-point configuration** |
+
+**The search did not re-find χ ≥ 5 and will not, for two independent reasons, neither fixed by
+hardware.**
+
+* **The target is unreachable.** de Grey's route starts at **39 hand-chosen points**, and the growth
+  moves only *add* points — orbit, spindle, union produce orbit closures, never a hand-chosen
+  subset. `delete` is the shrinker's move and the shrinker needs a forcer to start from.
+* **The rate is not close either.** Depth 2 is 142,884 nodes ≈ **84 CPU-days** and we sampled 33 of
+  them (0.02%); depth 3 is 54 million nodes ≈ **87 CPU-years**.
+
+And § 0(d) says there is no gradient to climb toward a good seed set: all 39 seed points are
+irredundant, so every proper subset scores exactly zero.
+
+**A move-order fact worth keeping**, found by the first universe collapsing to nothing: the tool's
+seeds — unit edge, triangle, rhombus — all live in the unit triangular lattice, whose hexagonal
+orbit is a single **7-point patch**, and the `r² = 1` spindle *is* a 60° rotation that patch is
+already closed under. **Spindling first is what leaves the lattice**: `orbit(moser spindle, hex₁₂)`
+is 43 points and 108 edges.
+
+**Shrink arm** — shrink de Grey's own 793-point forcer toward a minimal one. **Killed by request
+before it reported.** The tightness threshold from below is therefore still unmeasured, and it
+carries to M14 as a cheap open item.
+
+### 9.4 The gate
+
+| check | result |
+|---|---|
+| `./scripts/build.sh` | **OK**, 157 batches |
+| zero `sorry` | clean |
+| `#print axioms` | **130 clean, 5 declared purchases** — unchanged from M12; every M13 declaration is exactly `[propext, Classical.choice, Quot.sound]`, and `edgeHom` needs none |
+| `lake lint` | clean |
+| `./scripts/regen-check.sh` | **OK** — Heule's 510- and 553-point certificates reproduced **bit for bit**, 61 tool controls, de Grey's 1581 points rebuilt from 39 seeds asserted |
+| negative controls | **5 watched failing**, each naming its culprit |
+| `./scripts/lean4checker.sh` | **not completed — killed by request.** See below. |
+
+**The replay, reported exactly.** Its first run **refused**, correctly: 1,086 stale `.olean` files
+left by M09's deletion of the HalfB segments would have made the replay cover files the library no
+longer contains. That is the check working — and M12's gate never ran it, so the orphans had been
+sitting undetected. They were removed (source-file-gone only, so nothing live was invalidated) and
+the replay relaunched; it was then **killed mid-run by request**. Its output says
+`FAIL — 8 slice(s) rejected`, and **that is the kill, not a verification failure**: the slices show
+`Terminated`. So M13 claims neither a passing replay nor a failing one. The independent-kernel
+re-check is **outstanding**, and it is the one gate item this milestone did not close.
