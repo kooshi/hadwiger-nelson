@@ -137,30 +137,71 @@ namespace Motion
 variable (μ : Motion)
 
 /-- The similarity `[[a, c], [b, d]]` scales a squared norm by `scale`, given the three laws. Isolated
-as six-variable algebra so `distSq_eq` below is a substitution rather than a polynomial identity in
-ten. -/
+as six-variable algebra so the two scaling lemmas below are substitutions rather than polynomial
+identities in ten. -/
 private theorem sq_norm_sim {a b c d s u v : Q4} (h₁ : a * a + b * b = s) (h₂ : c * c + d * d = s)
     (h₃ : a * c + b * d = 0) :
     (a * u + c * v) * (a * u + c * v) + (b * u + d * v) * (b * u + d * v) = s * (u * u + v * v) := by
   sorry
 
-/-- **`q` is the image of `p`.** A `Bool`, because this is what the kernel checks against emitted
-coordinates — one instance per vertex of a copy being placed as frozen data.
+/-! ### The two halves of a placement
 
-Read it through `distSq_eq`; the two rows are an implementation detail and no consumer should unfold
-them. -/
+A motion sends a point at denominator `d` to a point at denominator `d·M`, and there is no division
+in the tower, so the image cannot be written at `d`. The two operations below are that fact split in
+half, and every statement in this file is one of them or a consequence:
+
+* `step` is **the image**, at `M` times the source's denominator. It is a plain function, so a table
+  can be *defined* as the image of another and no coordinate is ever checked.
+* `hold` is **re-denomination**: the same point, written at `M` times the denominator.
+
+`Maps p q` — the frozen-data case, where the image happens to be writable at the source's own
+denominator — is then exactly `hold q = step p`, and that identity is `maps_iff`. -/
+
+/-- **The image of a point**, at `M` times the source's denominator. -/
+def step (p : Pt) : Pt := ⟨μ.a * p.x + μ.c * p.y + μ.e, μ.b * p.x + μ.d * p.y + μ.f⟩
+
+/-- **The same point, at `M` times the denominator.** -/
+def hold (q : Pt) : Pt := ⟨μ.M * q.x, μ.M * q.y⟩
+
+/-- **`q` is the image of `p`, at the same denominator.** A `Bool`, because this is what the kernel
+checks against emitted coordinates — one instance per vertex of a copy that arrived as frozen data
+before the motion was known.
+
+Read it through `maps_iff` and `distSq_eq`; the two rows are an implementation detail and no
+consumer should unfold them. -/
 def Maps (p q : Pt) : Bool :=
   (μ.M * q.x == μ.a * p.x + μ.c * p.y + μ.e) &&
   (μ.M * q.y == μ.b * p.x + μ.d * p.y + μ.f)
 
-/-- **A motion preserves squared distance.** The translation cancels — a squared distance depends
-only on differences — so `e` and `f` play no part and the three similarity laws do all the work.
+/-- **What `Maps` says, in the vocabulary of the two halves.** The rows are the two coordinates of
+one equation between points. -/
+theorem maps_iff {p q : Pt} : μ.Maps p q = true ↔ μ.hold q = μ.step p := by
+  sorry
 
-This is the whole consumer surface of this file: two points, their images, and the conclusion that
-the distance is unchanged. It chains straight into a certificate's `Valid` check. -/
+/-- **Re-denomination scales every squared distance by `scale`.** One of the two facts the whole
+file rests on; this one uses `Motion.sq` and nothing else. -/
+theorem distSq_hold (q q' : Pt) : (μ.hold q).distSq (μ.hold q') = (μ.scale : Q4) * q.distSq q' := by
+  sorry
+
+/-- **The image scales every squared distance by `scale`.** The other fact, and the one the three
+similarity laws exist for. The translation cancels — a squared distance depends only on differences —
+so `e` and `f` play no part.
+
+**This is what makes a placed copy free.** A table defined as `step ∘ T` has every distance scaled by
+exactly `scale`, for a copy of any size, with no per-vertex and no per-edge check: see
+`UDCert.validOn_of_scaled`. -/
+theorem distSq_step (p p' : Pt) : (μ.step p).distSq (μ.step p') = (μ.scale : Q4) * p.distSq p' := by
+  sorry
+
+/-- **A motion preserves squared distance.**
+
+The whole consumer surface for frozen data: two points, their images, and the conclusion that the
+distance is unchanged. Both sides scale by `scale` and the factor cancels as a natural number — which
+is the only form in which it can be cancelled, `Q4` not being known to be a domain. -/
 theorem distSq_eq {p p' q q' : Pt} (h : μ.Maps p q = true) (h' : μ.Maps p' q' = true) :
     q.distSq q' = p.distSq p' := by
-  sorry
+  refine NatCancel.cancel μ.scale_ne ?_
+  rw [← μ.distSq_hold, ← μ.distSq_step, μ.maps_iff.mp h, μ.maps_iff.mp h']
 
 /-! ## Producing motions
 
@@ -231,28 +272,6 @@ theorem comp_maps {μ₁ μ₂ : Motion} {p q r : Pt} (h : μ₁.Maps p q = true
     (μ₁.comp μ₂).Maps p r = true := by
   sorry
 
-/-! ## Placement by definition — no per-vertex check at all
-
-de Grey's second copy costs 791 coordinate identities because his vertex table is frozen data that
-arrived before the rotation was known. A construction that knows its motion can define the copy's
-coordinates *as* the image, and then there is nothing to check: `maps_step` covers every point at
-once.
-
-`hold` is not decoration. A rotation over `ℤ[√3,√5,√7,√11]` has no representative of unit length —
-there is no division in the tower — so the source side carries the scale factor, and the
-certificate's own denominator absorbs it. -/
-
-/-- The source, scaled by the motion's denominator. -/
-def hold (p : Pt) : Pt := ⟨μ.M * p.x, μ.M * p.y⟩
-
-/-- **The image of a point under the motion**, as coordinates a table can be defined to hold. -/
-def step (p : Pt) : Pt := ⟨μ.a * p.x + μ.c * p.y + μ.e, μ.b * p.x + μ.d * p.y + μ.f⟩
-
-/-- **Placement costs nothing.** One lemma, quantified over the point, discharges what would
-otherwise be one coordinate identity per placed vertex. -/
-theorem maps_step (p : Pt) : μ.Maps (μ.hold p) (μ.step p) = true := by
-  sorry
-
 end Motion
 
 /-! ## What a motion does to a certificate
@@ -285,9 +304,9 @@ theorem UDCert.validOn_congr {n : ℕ} {c c' : UDCert n} (hv : c.verts = c'.vert
 `es` by the same motion `μ`, then the images of those edges are exactly as long as the originals — so
 a certificate valid on `es` is valid on the image, and *no distance is recomputed*.
 
-This is the statement the milestone exists to make, and the one a gadget search reuses verbatim:
-placing a copy of a subgraph somewhere else in the plane costs one `Maps` check per vertex, never one
-per edge — and none at all when the copy's coordinates are defined by `Motion.step`. -/
+This is the statement M09 exists to make, and the one de Grey's frozen table needs: placing a copy of
+a subgraph somewhere else in the plane costs one `Maps` check per vertex, never one per edge. When
+the copy's coordinates are *defined* as the image, `validOn_of_scaled` below costs nothing at all. -/
 theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ : Fin n → Fin n)
     (es : List (Fin n × Fin n))
     (hmap : ∀ e ∈ es, μ.Maps (c.verts e.1) (c.verts (φ e.1)) = true ∧
@@ -298,6 +317,32 @@ theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ 
   obtain ⟨e, he, rfl⟩ := List.mem_map.mp he'
   obtain ⟨h1, h2⟩ := hmap e he
   exact (μ.distSq_eq h1 h2).trans ((c.validOn_iff es).mp hv e he)
+
+/-- **A copy defined as an image costs nothing to certify.**
+
+The role this names is *a map that multiplies every squared distance by a constant*: `Motion.step`
+is one with constant `scale`, `Motion.hold` is another, and so is their composite. Given such a map,
+a certificate whose table is defined as its image — at a denominator whose square is scaled to
+match — is valid wherever the original was, and **not one distance is computed**: no `Maps` check
+per vertex, no arithmetic per edge, nothing that grows with the size of the copy.
+
+That is the difference between de Grey's second copy, which cost 791 coordinate identities and 95
+seconds because his table was frozen before the rotation was known, and a copy a construction
+places for itself.
+
+Stated over a bare `g` and `s` rather than over a `Motion`, because that is where it is true and
+because the two instances a caller wants — the image, and the image re-denominated so that the new
+denominator is an integer for *any* scale — differ only in which pair they supply. -/
+theorem UDCert.validOn_of_scaled {n : ℕ} (c c' : UDCert n) (g : Pt → Pt) (s : Q4)
+    (φ : Fin n → Fin n) (es : List (Fin n × Fin n))
+    (hg : ∀ p p', (g p).distSq (g p') = s * p.distSq p')
+    (hverts : ∀ v, c'.verts (φ v) = g (c.verts v))
+    (hden : c'.denomSq = s * c.denomSq)
+    (hv : c.ValidOn es = true) :
+    c'.ValidOn (es.map fun e => (φ e.1, φ e.2)) = true := by
+  refine (c'.validOn_iff _).mpr fun e' he' => ?_
+  obtain ⟨e, he, rfl⟩ := List.mem_map.mp he'
+  rw [hverts, hverts, hg, hden, (c.validOn_iff es).mp hv e he]
 
 /-! ## Spec
 
@@ -333,6 +378,28 @@ def shift : Motion := Motion.translate ⟨2, -1⟩
 
 -- The two images are the distance apart the two sources were: `5² = 25`, both ways.
 example : (⟨3, 4⟩ : Pt).distSq ⟨0, 0⟩ = (⟨5, 0⟩ : Pt).distSq ⟨0, 0⟩ := by decide
+
+/-! ### Placement, demonstrated
+
+A two-point certificate and a copy of it placed by the `3–4–5` rotation. What matters is the third
+declaration: the copy's coordinates are *defined* as the image, so `hverts` is `rfl` at every vertex
+and the placed copy's geometry follows without one distance being computed. -/
+
+/-- Two points a unit apart: stored `(0,0)` and `(3,4)` at denominator 5. -/
+def demoCert : UDCert 2 := ⟨![⟨0, 0⟩, ⟨3, 4⟩], [(0, 1)], 5⟩
+
+#guard demoCert.Valid
+
+/-- The same pair placed by `pythagorean`, its coordinates **defined** as the image and its
+denominator scaled to match — `5 · 5 = 25`, because the rotation's scale factor is `25`. -/
+def demoPlaced : UDCert 2 := ⟨fun v => pythagorean.step (demoCert.verts v), [(0, 1)], 25⟩
+
+/-- **And it is valid for free.** Every hypothesis is `rfl` or arithmetic on the denominator; the
+distance `(-7, 24)` is `25` from the origin is never checked, because `distSq_step` already said
+every distance scales by exactly `25`. -/
+example : demoPlaced.ValidOn [(0, 1)] = true :=
+  UDCert.validOn_of_scaled demoCert demoPlaced pythagorean.step 25 _root_.id [(0, 1)]
+    pythagorean.distSq_step (fun _ => rfl) (by decide) (by decide)
 
 /-! ### The negative controls — one per similarity law
 

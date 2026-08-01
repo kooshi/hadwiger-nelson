@@ -191,11 +191,11 @@ stands for.
 **And the number of colours plays no part.** A canonical normal form would have needed "at most `k`
 blocks, because there are `k` colours"; the relational form is handed both colourings and never
 counts blocks, so the lemma below is stated where it is actually true — over any finite port set and
-any target type. That is the second thing choosing the relation bought. -/
+any target type. That is the second thing choosing the relation bought.
 
-/-- Two port colourings induce the same partition of the ports: the same ports agree, and the same
-ports differ. -/
-def samePattern {m k : ℕ} (a b : Fin m → Fin k) : Bool := decide (∀ i j, a i = a j ↔ b i = b j)
+The relation itself — `SamePattern`, and its `Bool` twin `samePattern` — lives in `Pattern.lean`
+beside the enumeration of its representatives, because the two are one subject and keeping them in
+two files is how they would come to disagree. -/
 
 /-- **Colour symmetry.** Two colourings of a finite set that induce the same partition of it differ
 by a permutation of the colours.

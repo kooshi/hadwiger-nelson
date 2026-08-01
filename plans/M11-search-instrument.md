@@ -353,6 +353,106 @@ theorem Motion.maps_step (μ : Motion) (p : Pt) : μ.Maps (μ.hold p) (μ.step p
 
 ---
 
+## 3.5 The domain pass
+
+*Run 2026-08-01 against the skeleton. It found one statement that was false, one role that had no
+name, and four pieces of structure that were considered and rejected with reasons.*
+
+### It found a false lemma, which is what the pass is for
+
+The skeleton asserted, with a `sorry` under it:
+
+```lean
+theorem maps_step (p : Pt) : μ.Maps (μ.hold p) (μ.step p) = true
+```
+
+**It is false.** Substituting the definitions reduces it to `M · e = e`, so it holds only when the
+motion has no translation or no scale factor — which is why every spec witness in the skeleton
+(`pythagorean`, `flipX`, `shift`) satisfied it and de Grey's real rotation does not. Checked rather
+than argued: `#eval deGreyMotion.Maps (deGreyMotion.hold ⟨1,0⟩) (deGreyMotion.step ⟨1,0⟩)` prints
+`false`.
+
+The true statement is an identity, not an application:
+
+```lean
+theorem maps_iff : μ.Maps p q = true ↔ μ.hold q = μ.step p
+```
+
+`#eval` of the right-hand side on de Grey's first vertex and its rotated partner prints `true`, as
+does `Maps` itself.
+
+### What that fixed: a motion changes the denominator, and the type now says so
+
+A motion sends a point stored at denominator `d` to one at `d·M`, and the tower has no division, so
+**the image cannot be written at `d` at all**. That single fact, split in two, is the file's new
+primitive pair:
+
+| | |
+|---|---|
+| `step p` | the image, at `M` times the source's denominator |
+| `hold q` | the same point, re-written at `M` times the denominator |
+| `Maps p q` | the frozen-data case: the image *happens* to be writable at `d`, i.e. `hold q = step p` |
+
+Both halves scale squared distance by exactly `scale` — `distSq_hold` from `Motion.sq`,
+`distSq_step` from the three similarity laws — and `distSq_eq`, which was going to be a
+ten-variable polynomial argument, becomes **three lines**: both sides scale by `scale`, cancel it as
+a natural number. That is the convergence signal the pass looks for.
+
+### The role that had no name: a map that scales every squared distance
+
+§ 1.4 asked for placement to cost nothing. It does, and the statement is not about motions:
+
+```lean
+theorem UDCert.validOn_of_scaled (c c' : UDCert n) (g : Pt → Pt) (s : Q4) (φ) (es)
+    (hg : ∀ p p', (g p).distSq (g p') = s * p.distSq p')
+    (hverts : ∀ v, c'.verts (φ v) = g (c.verts v))
+    (hden : c'.denomSq = s * c.denomSq)
+    (hv : c.ValidOn es = true) :
+    c'.ValidOn (es.map fun e => (φ e.1, φ e.2)) = true
+```
+
+A certificate whose table is **defined** as the image is valid wherever the original was, with **no
+`Maps` check per vertex and no arithmetic per edge** — nothing that grows with the size of the copy.
+`Motion.step` is one instance, `Motion.hold` another, and their composite a third; that third is the
+one to use when `scale` is not a perfect square, since then no integer denominator matches `M` alone.
+
+The demonstration is in the file: a two-point certificate, a copy placed by the 3–4–5 rotation with
+its coordinates defined as the image, and `hverts` discharged by `fun _ => rfl`.
+
+### `Pt` is not the wrong representation
+
+The subplan asked whether the denominator problem means `Pt` should carry its own scale. It does
+not: **denomination is an operation on points (`hold`), not a property of the type.** Once that
+operation exists, the denominator bookkeeping is arithmetic inside `UDCert` and `Certificate.lean` —
+which sits upstream of 2,433 certificate modules, 27.8 hours — is untouched.
+
+### Considered and rejected, with the reason each time
+
+| Considered | Rejected because |
+|---|---|
+| A `Quotient` of patterns by "same partition" | A quotient is what you build to *reason* about classes; what is needed is a **section** — a computable list hitting every class once. Every function out of the quotient would owe a respects-proof, which is exactly the per-constructor obligation § 1 already deleted. |
+| `Matrix (Fin 2) (Fin 2) Q4` for the linear part | `Fin` indexing on every entry access and `Finset.sum` inside `Matrix.mul`, 791 times over in de Grey's check alone. Four named fields, and the vector reading named in prose. |
+| Bundling the columns and translation as three `Pt`s | The vector reading is used by the three laws and by nothing else, so it would tax every entry access to make three lines prettier. Wrong side of the placement cut. |
+| A `Bool` orientation field with `c = ∓b, d = ±a` — two laws instead of three | Narrower type, and it puts the case split back into every proof. The three-law form is *wider* than "rotation or reflection" and that is safe: everything it admits preserves distance, which is the only property claimed. |
+| `Monoid Motion`, so `comp` is `*` and an orbit is `μ ^ i` | One consumer — orbits — and orbits are M12. When it is wanted it is `Motion.ext` plus four `ring` identities, because `comp` is already field-wise. |
+| Closing `Motion` under inverse | The three laws say `AᵀA = scale·I`; `A Aᵀ = scale·I` does not follow without `Q4` being an integral domain, which this project deliberately never proves. If M12 needs inverses the fix is three more laws, satisfied by every smart constructor. |
+
+### Moved, and what it deletes
+
+`samePattern` was in `Gadget.lean` and the partition relation it decides was about to be re-stated in
+`Pattern.lean`. One concept, two files, no bridge — the standing seam failure. Both now live in
+`Pattern.lean` as `SamePattern` (the proposition), `samePattern` (the `Bool`), a `Decidable`
+instance, and `samePattern_iff`. Three call sites stop spelling out the quantifier.
+
+### Two spec checks the pass added
+
+* **Coverage, decided.** `∀ q : Fin 4 → Fin 5, (canonPatterns 5 4).any (samePattern · q)` by
+  `decide +kernel` — all 625 patterns, checked. The skeleton pinned only *uniqueness*; nothing
+  checked that no partition was skipped, which is the direction a wrong enumeration fails in.
+* **Placement, demonstrated**, as above.
+
+---
+
 ## 4. Controls — every one to be watched go red
 
 | # | Break this | The check that must fail, and where |

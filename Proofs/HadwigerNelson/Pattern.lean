@@ -1,5 +1,7 @@
 import Mathlib.Data.Fintype.Card
 import Mathlib.Data.Fin.Tuple.Basic
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Data.Fintype.Pi
 
 /-!
 # Colour patterns, one per partition
@@ -21,18 +23,52 @@ partitions of `m` positions into at most `k` blocks — 3,845 against 390,625 at
 positions. Measured in Lean's kernel, that is **8.3 seconds against a computation that does not
 finish**.
 
-## The enumeration carries a count, not a set
+## The relation, and why it is not a `Quotient`
+
+"Same partition" is an equivalence relation on patterns, and this file could have been a `Quotient`
+by it. It is not, for a reason worth stating: a quotient is what you build when you must *reason*
+about equivalence classes, and every function out of it owes a proof that it respects the relation.
+What is needed here is the opposite — a **section**: a computable list hitting every class once.
+A section of a quotient is a list, not a quotient, and going through the quotient would have added
+a respects-obligation to every gadget constructor and bought nothing.
+
+## The enumeration carries a count; the proof carries a list
 
 `canonAux k m u` lists the representatives of `m` further positions **given that `u` colours are
 already in use**. A position may take any colour already used (`< u`) or exactly one fresh colour
-(`= u`) — never a higher one, since that would skip a name. So the recursion needs one number, and
-the completeness proof needs the list of original colours those `u` names stand for, which is why
-`exists_canonAux` carries a `List` where `canonAux` carries its length.
+(`= u`) — never a higher one, since that would skip a name. The state that decides the choices is
+exactly that number, so the enumeration carries a `ℕ` and nothing else.
+
+The completeness proof carries more, and it has to: to relate a *given* pattern to the enumeration it
+must know which original colour each name stands for. That is `exists_canonAux`'s list, whose length
+is the enumeration's count. The list is the accumulator the induction is generalised over — it never
+appears in the enumeration and never appears in the statement any consumer reads.
 
 This file depends on nothing but Mathlib.
 -/
 
 namespace HadwigerNelson
+
+/-! ## Two patterns, one partition -/
+
+/-- **Two patterns induce the same partition**: the same positions agree, and the same positions
+differ. The relation everything in this file is about, named because three separate statements
+otherwise spell out the same quantifier. -/
+def SamePattern {m k : ℕ} (a b : Fin m → Fin k) : Prop := ∀ i j, a i = a j ↔ b i = b j
+
+instance {m k : ℕ} (a b : Fin m → Fin k) : Decidable (SamePattern a b) :=
+  inferInstanceAs (Decidable (∀ i j, a i = a j ↔ b i = b j))
+
+/-- `SamePattern` as a `Bool`, for the gadget algebra, which computes with it. Kept beside the
+proposition rather than in the file that uses it, so the two costumes cannot drift apart. -/
+def samePattern {m k : ℕ} (a b : Fin m → Fin k) : Bool := decide (SamePattern a b)
+
+/-- The bridge. Stated the same day as the definition, per the house rule on `Bool`/`Prop` pairs. -/
+theorem samePattern_iff {m k : ℕ} {a b : Fin m → Fin k} :
+    samePattern a b = true ↔ SamePattern a b := by
+  simp [samePattern]
+
+/-! ## The enumeration -/
 
 /-- **The representatives of `m` positions, given that `u` colours are already named.** Position `0`
 may take any of `0, …, u` — an existing name or the next fresh one — and the count advances when it
@@ -47,13 +83,23 @@ def canonPatterns (k m : ℕ) : List (Fin m → Fin k) := canonAux k m 0
 
 /-- **The completeness of the enumeration, strengthened to carry its context.**
 
-`s` is the list of original colours already named, in the order they were named, so `s.idxOf c` is
-the representative's name for `c` and `s.length` is the count `canonAux` carries. The conclusion
-extends `s` to an `s'` naming every colour `q` uses, and exhibits the representative as `q` read
-through `s'`.
+`s` names the original colours already met, in the order they were met, so `s.idxOf c` is the
+representative's name for `c` and `s.length` is the count `canonAux` carries. The conclusion extends
+`s` to an `s'` naming every colour `q` uses, and exhibits the representative as `q` read through `s'`.
 
-Everything the enumeration is for follows from the last clause: two positions get the same name
-exactly when they had the same colour. -/
+Five conjuncts, each doing one job — the accumulator generalisation written out:
+
+| conjunct | role |
+|---|---|
+| `s'.Nodup` | the accumulator's invariant; it is what bounds `s'.length` by `k` |
+| `s <+: s'` | the accumulator only grows, so a name fixed at position `0` still means the same thing at position `m` |
+| `∀ i, q i ∈ s'` | the accumulator covers `q`, so `idxOf` is a real index rather than a fallback |
+| `q' ∈ canonAux k m s.length` | the conclusion |
+| `∀ i, (q' i).val = s'.idxOf (q i)` | the link, stated on `.val` so that the `Fin k` bound stays a proposition instead of becoming a dependent existential |
+
+The representative is *constructed* here rather than characterised, and that is why there is no
+sixth conjunct saying `s'` is in first-occurrence order: it is built in that order, so nothing has to
+say so. -/
 theorem exists_canonAux {k : ℕ} : ∀ (m : ℕ) (s : List (Fin k)), s.Nodup → ∀ q : Fin m → Fin k,
     ∃ (s' : List (Fin k)) (q' : Fin m → Fin k),
       s'.Nodup ∧ s <+: s' ∧ (∀ i, q i ∈ s') ∧ q' ∈ canonAux k m s.length ∧
@@ -67,18 +113,19 @@ differs exactly where `q` differs. Combined with the fact that renaming colours 
 colourings to proper colourings, this is what lets an exhaustive check range over the
 representatives alone. -/
 theorem exists_mem_canonPatterns {k m : ℕ} (q : Fin m → Fin k) :
-    ∃ q' ∈ canonPatterns k m, ∀ i j, q' i = q' j ↔ q i = q j := by
+    ∃ q' ∈ canonPatterns k m, SamePattern q' q := by
   sorry
 
 /-! ## Spec
 
-The enumeration is worth nothing if it lists the wrong things, and `exists_mem_canonPatterns` would
-be satisfied by an enumeration that listed *everything*. Both directions are pinned. -/
+The enumeration is worth nothing if it lists the wrong things, and it can be wrong in two independent
+directions — listing too few, and listing too many. `exists_mem_canonPatterns` states only the first.
+Both are pinned below, decidably, at sizes small enough to read. -/
 
 section Spec
 
 -- Three positions, five colours: five partitions — all three alike, one of three ways for exactly
--- two alike, and all different. Read against the `#guard` below it, which is the count.
+-- two alike, and all different.
 /-- info: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [0, 1, 2]] -/
 #guard_msgs in
 #eval (canonPatterns 5 3).map (List.ofFn ·)
@@ -89,19 +136,33 @@ section Spec
 #guard_msgs in
 #eval (canonPatterns 1 2).map (List.ofFn ·)
 
--- **No two representatives are the same partition** — the property `exists_mem_canonPatterns` does
--- *not* state, and the one that makes the enumeration a saving rather than a filter.
-#guard ((canonPatterns 5 4).map fun a => (canonPatterns 5 4).countP fun b =>
-  decide (∀ i j, a i = a j ↔ b i = b j)).all (· == 1)
+-- **Nothing is listed twice** — no two representatives are the same partition. The property
+-- `exists_mem_canonPatterns` does *not* state, and the one that makes the enumeration a saving
+-- rather than a filter.
+#guard ((canonPatterns 5 4).map fun a =>
+  (canonPatterns 5 4).countP (samePattern a)).all (· == 1)
 
--- The counts, against the partition numbers computed by hand: at five colours,
--- 1 · 15 · 52 · 202 · 855 for zero through seven positions is Bell's sequence truncated at five
--- blocks, and the truncation first bites at six positions (203 partitions, 202 with at most five
--- blocks).
+-- **Nothing is left out** — every one of the `5^4` patterns matches exactly one representative.
+-- This is `exists_mem_canonPatterns` made computational at a size the kernel can check, and it is
+-- what would go red if `canonAux` ever skipped a partition.
 #guard (canonPatterns 5 4).length = 15
+
+/-- **Coverage, decided.** The theorem below is stated for all `m` and `k`; here it is *checked* at
+four positions and five colours, over every one of the 625 patterns. A proof can be wrong about
+which statement it proves; this cannot. -/
+example : ∀ q : Fin 4 → Fin 5, (canonPatterns 5 4).any (samePattern · q) := by decide +kernel
+
+-- The counts, against the partition numbers: at five colours, 15 · 52 · 202 · 855 for four through
+-- seven positions is Bell's sequence truncated at five blocks, and the truncation first bites at six
+-- positions (203 partitions, 202 with at most five blocks).
 #guard (canonPatterns 5 5).length = 52
 #guard (canonPatterns 5 6).length = 202
 #guard (canonPatterns 4 6).length = 187
+
+-- The relation is an equivalence, exhibited rather than asserted: a pattern is its own partition,
+-- and two patterns one relabelling apart are the same one.
+#guard samePattern (![2, 3, 2] : Fin 3 → Fin 5) ![0, 1, 0]
+#guard !samePattern (![2, 3, 2] : Fin 3 → Fin 5) ![0, 1, 1]
 
 end Spec
 
