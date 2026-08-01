@@ -141,6 +141,29 @@ if ! python3 tools/construct.py --self-test > "${V}/construct.log" 2>&1; then
 else
   echo "    construct.py: $(grep -c '^  ok' "${V}/construct.log") controls, including rebuilding the Moser spindle"
 fi
+if ! python3 tools/forcer.py --self-test > "${V}/forcer.log" 2>&1; then
+  sed 's/^/    /' "${V}/forcer.log"; echo "    FAIL: tools/forcer.py"; FAIL=1
+else
+  echo "    forcer.py: $(grep -c '^  ok' "${V}/forcer.log") controls, the search's win condition"
+fi
+
+# **de Grey's committed coordinates, DERIVED.** The 1581-point table is rebuilt from his 39 seed
+# points by four primitive moves -- orbit, spindle, delete, spindle -- and compared point for point
+# in the exact field. This is what makes the committed table derived data rather than transcribed
+# data: a reader who does not trust the JSON can watch it be constructed. ~14 s.
+if ! python3 -c "
+import sys; sys.path.insert(0, 'tools')
+import construct as C
+g = C.degrey_from_primitives()
+assert len(g) == 1581, f'built {len(g)} points, wanted 1581'
+assert C.degrey_matches_committed(), 'the primitive build does not match the committed table'
+print(f'  ok  de Grey rebuilt from 39 seeds by 4 moves: {len(g)} points, exact match')
+" > "${V}/degrey-primitives.log" 2>&1; then
+  sed 's/^/    /' "${V}/degrey-primitives.log"; echo "    FAIL: de Grey from primitives"; FAIL=1
+else
+  echo "    de Grey's 1581 points rebuilt from 39 seeds by orbit+spindle+delete+spindle, exact"
+fi
+
 if ! python3 tools/profile.py --self-test > "${V}/profile.log" 2>&1; then
   sed 's/^/    /' "${V}/profile.log"; echo "    FAIL: tools/profile.py"; FAIL=1
 else
