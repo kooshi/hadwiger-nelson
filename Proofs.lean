@@ -4,6 +4,7 @@ import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.Packed
+import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Sat.Encoding
 import Proofs.HadwigerNelson.Sat.Forcing
 import Proofs.HadwigerNelson.Sat.Lrat

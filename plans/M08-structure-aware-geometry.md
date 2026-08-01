@@ -583,6 +583,153 @@ byte-for-byte reproducibility check as everything else.
 
 ---
 
+## 4.5 What implementation cost, and what it corrected — 2026-07-31
+
+Measured on the **desktop**, CPU seconds = user + sys, whole modules through `lake build`.
+
+### The headline: 4.4×, not the projected 11.4×
+
+| de Grey's geometry — 1581 vertices, 7877 edges | CPU s | modules |
+|---|---|---|
+| the per-edge route (`Geom00…Geom08`) | **246.2** | 9 |
+| the difference witness — `Diffs.lean`, elaborating the data | 21.2 | 1 |
+| the difference witness — `Valid.lean`, the four kernel walks | 34.7 | 1 |
+| **new total** | **55.9** | **2** |
+
+Peak memory 8.1 GB in a single module, against a per-edge route that needed the edge list split 45
+ways because one `List.all` over 7877 edges would have wanted 35.8 GB.
+
+### Where the projection went wrong, and it is the same lesson twice
+
+**The projection counted kernel reduction and nothing else.** Two costs it therefore missed, each
+about a third of the shortfall:
+
+* **Elaborating the witness costs 21.2 s**, because a packed vertex is a ~310-digit integer literal
+  where the per-edge route's literals were small. § 0(e) had already measured this in the extreme —
+  one 487,351-digit literal costing 59 s — and drew the narrow conclusion "the flat table is dead"
+  instead of the general one: **packing moves cost out of the kernel and into the elaborator.** It is
+  still a good trade, since the elaborator pays once per module and the kernel pays per edge, but it
+  is a trade and the plan booked only one side of it.
+* **The bound check costs 10.3 s of the 28.9 s of kernel work** — 32 integer comparisons per vertex,
+  0.00655 s each against the 0.00196 the plan projected for the packing alone. The plan projected the
+  packing check by measuring a packing check; the shipped one also checks that every leaf is inside
+  `vertexBound`, which is the hypothesis `pack_inj` consumes, and nobody costed it.
+
+### The kernel walks, attributed
+
+| walk | count | CPU s | per unit |
+|---|---|---|---|
+| vertex packing and bound | 1581 | 10.35 | 0.00655 |
+| difference packing, bound, and the 133 squared lengths | 133 + 133 | 3.45 | — |
+| the per-edge check | 7877 | 15.09 | 0.00192 |
+
+The per-edge figure is 40% above § 0(c)'s 0.00137 because `deGrey.edges` is not a literal list — it
+is three parts appended, each a concatenation of chunks — so the kernel builds the list as it walks
+it. That shape is fixed by M06's decomposition and is not worth changing for 4 seconds.
+
+### The bound check is irreducible, and two guesses about it were wrong
+
+A hand-written control, on de Grey's real vertex table:
+
+| what it does | CPU s | per vertex |
+|---|---|---|
+| pack only, literal lane multipliers, no class | 3.00 | 0.0019 |
+| pack only, through the `Packable` instance chain | — | — |
+| pack **and bound-check**, hand-written | 10.33 | **0.00653** |
+| pack **and bound-check**, through the class (shipped) | 10.35 | **0.00655** |
+
+**The instance chain costs nothing** — 0.00653 against 0.00655 — so the class the domain pass argued
+for is free at reduction time, and the "pin the definitions" restructuring the plan held in reserve
+would have bought exactly zero. **The absolute value is not the problem either**: replacing
+`|z| ≤ b` with `-b ≤ z ∧ z ≤ b` bought 10%, not the order of magnitude a lattice-routed `abs` would
+have implied. What remains is 32 integer comparisons walked through a five-level structure, which is
+what a per-leaf claim costs.
+
+*Recorded because both guesses were mine, both were plausible, and both were wrong. The measurement
+took four minutes and would have taken half a day to act on unmeasured.*
+
+### One decision implementation forced
+
+**The certificate modules now import the edge list, not the instance's aggregate module.** *Choice:*
+`tools/emit_mask.py` emits `import …Instances.Heule510.Edges` plus `Sat.Encoding`, where it used to
+emit `import …Instances.Heule510`. *Alternative:* leave the coupling and re-check 201 certificate
+modules every time the geometry changes. *Why this one:* the aggregate module imports the geometry,
+so a certificate that imports it re-checks whenever the geometry does — which at de Grey's scale is
+28 hours. Paid once, here, and never again. *Confidence: high — it is the same rule M07 wrote into
+`Sat/Diagnose.lean`, applied one layer out.*
+
+### Two things that went wrong
+
+**`lake env lean` is not the gate, and it looked like it.** `PackedDiagnose.lean` elaborated clean
+under `lake env lean` and failed under `lake build` on an unknown identifier `n` — because
+`lake env lean` does not apply the lakefile's `autoImplicit := false`, so it silently auto-bound a
+variable the real build rejects. Every iteration in this milestone used `lake env lean` for speed.
+It is a faster check, not a weaker gate that looks like the gate; the rule is now in `CLAUDE.md`.
+
+**A negative control was testing the wrong thing.** The control meant to exercise "an edge whose key
+names the wrong difference" put a *non-unit* difference in the table, so the norms walk caught it
+first and the edge walk was never reached. Fixed by making the wrong difference one unit long. The
+control now goes red for the reason it claims to.
+
+---
+
+## 4.6 What landed — 2026-07-31, 21:0x
+
+**All three witnesses re-certified through the difference witness.** `deGrey_valid`,
+`heule510_valid` and `heule553_valid` are unchanged in statement; only the route beneath them moved,
+so `Bound.lean`, `Forcing.lean`, `Split.lean` and every theorem downstream were untouched.
+
+| | before | after |
+|---|---|---|
+| de Grey's geometry | 246.2 CPU s, 9 modules | **55.9 CPU s, 2 modules** |
+| memory per edge | 4.55 MB | **0.27 MB** |
+| squared lengths verified | 7,877 | **133** |
+| de Grey's 2,265 certificate modules | — | **not re-checked** |
+
+**The gate, 2026-07-31.** `./scripts/build.sh` green — 259 batches, 0 retries, 0 warnings. Zero
+`sorry` across the library. `axioms.sh` OK: 81 clean, 5 declared purchases, all of them M03's
+Moser-spindle native evaluation — **M08 adds none**. `chromaticNumber_plane_ge_five`, `_510` and
+`_553` all depend on axioms exactly `[propext, Classical.choice, Quot.sound]`, as do `deGrey_valid`
+and `UDCert.valid_of_diffWitness`. `lake lint` passed. `scripts/regen-check.sh` OK, now covering the
+difference witnesses and de Grey's geometry as well.
+
+**The invalidation constraint held.** After the whole milestone, de Grey's certificate segment
+`.olean`s still carry yesterday's timestamps: the 27.8 hours were not re-spent. Only the two Heule
+certificate sets re-checked, once, to break their geometry coupling permanently — and that took 21
+minutes of wall clock, not the hour the plan budgeted.
+
+### One decision the failure path forced
+
+**The check is a named `Bool`, and its failure carries a directive rather than a term.** *Choice:*
+the generated `Valid.lean` defines `deGreyCertified : Bool` and proves it with
+`first | decide +kernel | fail "…run #eval …faultReport…"`. *Alternative:* a plain
+`decide +kernel` on the inline proposition, as every other check in this repository is written.
+*Why this one:* measured on a deliberately broken witness, the plain form produces
+
+```
+error: [Error pretty printing: maximum recursion depth has been reached
+```
+
+and nothing else — the delaborator cannot render a proposition mentioning a 169 KB literal, so the
+one message a person meets on the one day it matters says nothing at all. Naming the `Bool` was not
+enough on its own; the `fail` branch is what replaces the wall with an instruction. *Confidence:
+high — both forms were run against the same broken witness.*
+
+The instruction was then checked the way `exact?`'s "Try this:" is checked: **what it prints must
+elaborate.** The first version did not — it named `heule510Diffs.faultReport …` without saying that
+the reader needs `import Proofs.HadwigerNelson.PackedDiagnose` and `namespace HadwigerNelson`, and
+pasted verbatim it fails on an unknown identifier. The message now carries its context, and running
+it verbatim on the broken witness prints
+
+```
+"vertex 0: the packed table does not hold this point's packing — regenerate, or check the lane
+ convention against the ruler constant in Packed.lean"
+```
+
+which names the exact vertex that was broken.
+
+---
+
 ## 5. Negative controls — every check watched to fail
 
 Each control is a deliberate break, run, and *seen* to go red, with the mutation confirmed to have
@@ -598,6 +745,8 @@ because the mutation silently changed nothing.
 | the packed table reshaped | `Certifies = false`, `firstFault = shapeMismatch` |
 | `keys` one entry short | `Certifies = false`, `firstFault = keysLength` — **not** a silently truncated pass |
 | the ruler fixture packed `y` before `x` | the `#guard` fails, in `Packed.lean`, before any data is emitted |
+| **run:** one byte of a packed vertex changed | ✅ build fails with the directive; `regen-check` reports `Diffs.lean differs in content`; the mutation was `cmp`-verified to be exactly one byte *before* either result was believed |
+| **run:** the directive followed verbatim | ✅ prints `"vertex 0: the packed table does not hold this point's packing…"` — the vertex that was broken |
 | `two_digit_lt` / `two_digit_inj` with the digit bound weakened | **already run** — the two counterexamples are committed beside the lemmas |
 | `pack_inj`'s bound hypothesis deleted | the *proof* breaks, not the checker's answer |
 | two distinct bounded points colliding under `pack` | unprovable — the adversarial member, pinned as `example : ¬ …` |

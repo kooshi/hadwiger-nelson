@@ -32,13 +32,13 @@ trusts none of this", which is the one place the corroboration argument is made.
 
 Heule's coordinates use `√3`, `√5`, `√11` and their products, which is a *subfield* of the
 `ℚ(√3,√5,√7,√11)` tower M02 built for de Grey. So the `√7` components are identically zero here and
-nothing needed changing — the whole geometry is 2504 kernel decisions at the same per-edge cost.
+nothing needed changing.
 
 ## If the geometry ever fails to check
 
 ```lean
-#eval heule510.badEdges     -- every offending pair, and the squared distance it actually has
-#eval heule510.denomSq      -- the squared distance a real unit edge must show
+#eval heule510Diffs.faultReport heule510Table heule510   -- one line, naming the culprit
+#eval heule510.badEdges     -- the per-edge route's answer: every offending pair and its distance
 ```
 -/
 
@@ -65,9 +65,10 @@ size or order. -/
 #guard heule510.edges.contains (0, 28)
 #guard heule510.edges.contains (27, 28)
 
--- **The compiled cross-check.** `heule510_valid` is 14 kernel reductions; this is the same predicate
--- evaluated by the *compiler*. Two independent evaluators agreeing on 2504 edges is worth its
--- runtime, and when they disagree this line is what says so.
+-- **The compiled cross-check.** `heule510_valid` now comes from a difference witness — 66 squared
+-- lengths and a subtraction per edge — so this line is a *structurally different* route to the same
+-- fact, evaluated by the compiler rather than the kernel. Two independent evaluators agreeing on
+-- 2504 edges is worth its runtime, and when they disagree this line is what says so.
 #guard heule510.badEdges.isEmpty
 
 -- **The negative control.** Collapse vertex 1 onto vertex 0 and the check must fail, naming exactly

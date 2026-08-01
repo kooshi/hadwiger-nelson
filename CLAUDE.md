@@ -212,6 +212,11 @@ every one of them. Two consequences now built into the layout:
   its `.olean` would: `leanArts` covers both. Tidying `ir/` queues a full rebuild of everything under
   it, which is not what it looks like it does.
 
+**`lake env lean <file>` is faster than `lake build` and it is not the same check.** It does not
+apply the lakefile's options, so `autoImplicit := false` is not in force: a stray identifier is
+silently auto-bound and the file elaborates clean, then fails under `lake build`. Use it to iterate;
+never conclude from it that a module is green.
+
 **`decide +kernel`, not `decide`, for anything large.** Plain `decide` reduces the `Decidable`
 instance twice — once in the elaborator, once in the kernel — so it is ~2× slower and dies on
 `maxHeartbeats` well before the kernel itself would struggle. `+kernel` needs no `set_option` knob

@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Instances.Heule553.Cnf.Cert
 import Proofs.HadwigerNelson.Sat.Forcing
+import Proofs.HadwigerNelson.Instances.Heule553
 
 /-!
 # χ(ℝ²) ≥ 5, from a 553-point witness

@@ -208,6 +208,11 @@ def emit(outdir, mod, name, base, cube, derived, chunks, field, cert, fw, nseg, 
     files["Table.lean"] = "\n".join(
         [f"import {mod}.Table{pi:02d}" for pi in range(len(parts))]
         + [f"import {imp}",
+           # The CNF encoding, imported here rather than reached through the instance's aggregate
+           # module. That aggregate imports the *geometry*, and a certificate that imports the
+           # geometry is a certificate that re-checks when the geometry changes -- 28 hours of it at
+           # M06's scale. `--import` therefore names the edge list, and the encoding comes from here.
+           "import Proofs.HadwigerNelson.Sat.Encoding",
            "import Proofs.HadwigerNelson.Sat.MaskCheck", "", HEAD, ""] + opts + ["",
            "/-!",
            f"The emitted clause table: **{len(base)} clauses of the formula, {len(cube)} cube unit",

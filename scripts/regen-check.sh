@@ -65,8 +65,12 @@ PY
   mkdir -p "${V}/${NAME}/Cnf"
   python3 tools/emit_cert.py "tools/${NAME}.json" "${NAME}" --dir "${V}/${NAME}" \
     --chunk "${CHUNK}" --per-module 2 > /dev/null 2>&1
+  python3 tools/emit_diffs.py "tools/${NAME}.json" "${NAME}" --dir "${V}/${NAME}" \
+    --module "${MOD}" > /dev/null 2>&1
+  # The certificate imports the *edge list*, never the geometry: that is what keeps a change to the
+  # geometry from re-checking every segment module beneath it (plans/M08 § 0(f)).
   python3 tools/emit_mask.py --edges "tools/${NAME}.json" --n "${N}" --edges-name "${EDGES}" \
-    --import "${MOD}" \
+    --import "${MOD}.Edges" \
     --pins "${PINS}" --lrat "${V}/${NAME}.lrat" --name "${NAME}" --out "${V}/${NAME}/Cnf" \
     --module "${MOD}.Cnf" \
     --segments 82 --table-modules 4 > /dev/null 2>&1
@@ -82,6 +86,22 @@ PY
   done < <(cd "${D}" && find . -name '*.lean' ! -name Bound.lean -printf '%P\n' | sort)
   echo "    ${N_OK} generated modules identical, certificate reproduced bit for bit"
 done
+
+# de Grey's geometry, which has no vendored input of its own: `tools/degrey.py` *constructs* the
+# point set, and `degrey_cert.json` is that construction's committed output. The certificate is 397 MB
+# and is not regenerated here; the geometry is, because it is the part M08 rewrote.
+echo "==> deGrey (geometry only)"
+DG="Proofs/HadwigerNelson/Instances/DeGrey"
+mkdir -p "${V}/deGrey"
+python3 tools/emit_diffs.py tools/degrey_cert.json deGrey --dir "${V}/deGrey" \
+  --module Proofs.HadwigerNelson.Instances.DeGrey > /dev/null 2>&1 \
+  || { echo "    FAIL: the difference witness did not re-derive"; FAIL=1; }
+for f in Diffs.lean Valid.lean; do
+  if ! diff -q <(grep -v '^import ' "${V}/deGrey/${f}") <(grep -v '^import ' "${DG}/${f}") > /dev/null
+  then echo "    FAIL: ${f} differs in content"; FAIL=1
+  fi
+done
+[[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical"
 
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"

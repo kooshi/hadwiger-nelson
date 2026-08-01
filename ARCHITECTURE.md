@@ -186,7 +186,9 @@ Mathlib ─┐
 Std.Sat ─┤
          ├─► HadwigerNelson/Field/Quadratic.lean   Adjoin d K, CommRing, eval : K →+* ℝ  [M02]
          │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
-         │                 └─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
+         │                 ├─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
+         │                 └─► HadwigerNelson/Packed.lean   digit packing; DiffWitness    [M08]
+         │                          └─► HadwigerNelson/PackedDiagnose.lean   #eval-only faults
          │
          ├─► HadwigerNelson/Sat/Encoding.lean   colouringCNF, Colorable → Sat, cubes     [M03]
          │        └─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
@@ -202,8 +204,8 @@ Std.Sat ─┤
                   │        └─► Instances/SpindleLrat.lean   certificates — generated     [M03]
                   └─► Instances/DeGrey/Table.lean    1581 points, its OWN module     [M04]
                            └─► Instances/DeGrey/Edges.lean   45 chunks; edges := halfA ++ halfB ++ cross
-                                    ├─► Instances/DeGrey/Geom00 … Geom08.lean   179 edges/chunk
-                                    └─► Instances/DeGrey/Valid.lean   the 45 cited, not redecided
+                                    └─► Instances/DeGrey/Diffs.lean   133 differences, packed   [M08]
+                                             └─► Instances/DeGrey/Valid.lean   one decide, one citation
                                              └─► Instances/DeGrey.lean   the claims, the hand-off
                                                       └─► Instances/DeGrey/Split.lean   the two copies  [M06]
                                                                ├─► HalfA/, HalfB/  table + 2265 segments
@@ -214,8 +216,10 @@ Std.Sat ─┤
      Sat/Diagnose.lean   #eval-only fault rendering — deliberately DOWNSTREAM of the        [M07]
                          checker, so rewriting a diagnostic does not re-check 27.8 h
      Instances/Heule510.lean, Heule553.lean   two published witnesses, re-certified         [M07]
-              ├─► Heule5xx/{Table,Edges,Geom00..,Valid}.lean   geometry, 8 modules each
+              ├─► Heule5xx/{Table,Edges,Diffs,Valid}.lean   geometry, 4 modules each      [M08]
               ├─► Heule5xx/Cnf/{Table00..03,Table,Seg000..081,Cert}.lean   one certificate
+              │        (imports Heule5xx/Edges, NOT the aggregate: geometry must never sit
+              │         upstream of a certificate, or changing it re-checks every segment)
               └─► Heule5xx/Bound.lean   chromaticNumber_plane_ge_five_510 / _553
 
 Proofs.lean          — flat public surface
@@ -235,7 +239,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M05** ✅ | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Landed 2026-07-29 (`plans/M05-kernel-checker.md`).* `maskCheck_sound` — a refutation checker whose two hypotheses are closed `Bool`s the **kernel** decides, axioms exactly `[propext, Classical.choice, Quot.sound]`, zero `sorry`. Soundness is proved for **every** decoder, so the certificate's packing is untrusted as a matter of type. Negative controls committed and *watched to fail*: a satisfiable formula is refused, a clause citing itself is refused, and mutating the conflict test or deleting the watermark guard breaks the soundness proofs rather than the checker's answer. The remaining work is throughput at de Grey's scale, projected at **5.4–9.0 h processor time, ~30–50 min wall over 96 independent cubes**; that measurement belongs to M06, which is where a real certificate first arrives. |
 | **M06** ✅ | **χ(ℝ²) ≥ 5.** ~~Cube split at depth 5 (1024 cubes)~~ — **the cube split is dead; see below.** de Grey's own decomposition instead: two forcing lemmas, one certificate each. | *Landed 2026-07-30 (`plans/M06-chi-ge-five.md`).* **`chromaticNumber_plane_ge_five` — the plane needs five colours — depends on axioms exactly `[propext, Classical.choice, Quot.sound]`.** Zero native purchases, zero `sorry`, linters clean. Two kernel-checked refutations, 34.2 × 10⁶ propagation steps across 2,265 segment modules: **27.8 hours of processor time, 2.8 hours of wall clock over twelve jobs**, 396 MB of source and 297 MB of compiled modules. The cube split the roadmap specified was measured dead (§ 2.2.1) and de Grey's own two-copy decomposition replaced it at 44× less cost. `lean4checker` covers everything the geometry and the proof structure rest on; **it does not cover the two certificates**, because replaying them repeats every kernel reduction single-threaded — see § 5. |
 | **M07** ✅ | **Shrinking.** Re-verify smaller witnesses on the same infrastructure; automate vertex-deletion search. | *Landed 2026-07-30 (`plans/M07-shrinking.md`).* **`χ(ℝ²) ≥ 5` re-proved from witnesses of 510 and 553 vertices**, against de Grey's 1581 — axioms exactly `[propext, Classical.choice, Quot.sound]`, one certificate each, no decomposition. **1,413,841 and 1,104,106 propagation steps against M06's 34,169,571** — ~1 hour of processor time for both against 27.8 for one, and 23 MB of source against 396 MB. Two levers, both measured: naming one triangle's colours is worth **20×**, racing triangle × configuration × seed on *trimmed hint count* another **10.5×**. de Grey's own graph was measured **not to shrink** — its forcing halves are vertex-critical, so it goes 1581 → 1577 and stops. The smaller certificates are what finally make the independent-kernel replay affordable (§ 5). |
-| **M08** | **Structure-aware geometry.** Difference-vector certificates: verify one norm per *distinct edge difference* (67 for de Grey, against 7877 edges) and a subtraction per edge. | The same `deGrey_valid` claim at a per-edge cost that no longer carries a multiplication, and a projection showing the expensive term is flat in graph size. Sequenced here because it changes the edge list's shape and would invalidate M06's certificates. |
+| **M08** ✅ | **Structure-aware geometry.** Difference-vector certificates: one squared length per *distinct edge difference*, and one big-integer subtraction per edge over packed coordinates. | *Landed 2026-07-31 (`plans/M08-structure-aware-geometry.md`).* All three witnesses re-certified through `DiffWitness`; `deGrey_valid`, `heule510_valid`, `heule553_valid` unchanged in statement. de Grey's geometry: **246.2 → 55.9 CPU s and 9 modules → 2**, memory per edge 4.55 → 0.27 MB. The roadmap's premise that the expensive term becomes *flat* in graph size was **measured false** — the difference count doubles when the construction doubles; what is stable is the ratio, ~118 : 1. Two instincts measured wrong and recorded: a flat giant-`Nat` table is free in the kernel and quadratic in the elaborator, and lane width is not free either. The milestone did **not** invalidate M06's certificates — de Grey's reach the vertex table without passing through his geometry — and the emitter now keeps every certificate's import closure free of geometry permanently. |
 | **M09** | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | A composition theorem, and de Grey's own construction re-derived through it rather than asserted as coordinates. |
 | **M10** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. **Explicitly not a route to 6** — the known upper bound on χ_f is below 5, so this rung is independently publishable and cannot reach rung D. |
 | **M11** | **The hunt.** Composition search for a 6-chromatic witness, on M09's algebra. | Honest report — including "not found". |
@@ -253,8 +257,12 @@ Three changes, each forced by a measurement rather than a preference:
   only to have them removed.
 * **Structure-aware geometry became its own milestone (M08)** rather than an optimisation inside the
   hunt. At 0.045 s/edge a 10⁵–10⁷-edge candidate costs hours to days of geometry *each*, which is
-  fatal for a search; 67 distinct differences against 7877 edges says the expensive term can be made
-  flat in graph size. It sits after M06 because it changes the edge list's shape.
+  fatal for a search. **The "flat in graph size" claim this bullet used to make is false** and M08
+  measured it so: the distinct-difference count doubles when the construction doubles, and what is
+  stable is the *ratio* — ~118 : 1 across de Grey's whole build. The cost stays linear in graph size
+  with a constant an order of magnitude smaller, which is the difference between days and hours per
+  candidate rather than between linear and constant. It also did not have to change the edge list's
+  shape: the difference indices ride alongside as a separate list.
 * **Gadget algebra became its own milestone (M09)** rather than a bullet inside the hunt. It is the
   actual bet on rung D: de Grey, Exoo–Ismailescu and Parts all reason over gadgets with colouring
   properties, informally. Making composition a theorem is what turns the search space from vertices
@@ -438,6 +446,10 @@ produce a meaningless one, and the specific countermeasure for each:
 | The CNF encoding of "no 4-colouring" is subtly wrong, so every theorem is about the wrong formula | ✅ M07: `coloringCNF 4 553 E` is **clause-for-clause identical** to Heule's independently authored `553-4.cnf`. Two encoders written without reference to each other, agreeing exactly |
 | A certificate silently attached to the wrong witness | ✅ M07: was a *procedure* (regenerate and watch it go red), now an obligation — `halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false`, kernel-decided on every build. `agreesWithCNF` alone is consistent with a table that matches everything, which would certify anything; the pair is what makes either mean something |
 | A negative control that perturbs nothing, and therefore guards nothing | ✅ M07: the geometry control moves a vertex and demands the check name its edges. Written first as "move vertex 0 to the origin", it silently *passed* — in both new witnesses vertex 0 **is** the origin. Now vertex 1 is collapsed onto vertex 0, and the failure of the first version is recorded beside it |
+| The difference table's *keys* are wrong, so the geometry certifies a different graph | ✅ M08: the key list is walked **against the certificate's own edge list**, in lockstep, and a length disagreement is a `false` with a named position — never a `zip` that truncates. The committed control puts a key on a unit-length difference that is not that edge's, and the check names the edge |
+| The packing collapses two distinct points, so the geometry check proves nothing | ✅ M08: `Packable.pack_inj` is proved, and its digit bound is *known load-bearing* — the two counterexamples that break it at `M = 4` are committed as `#guard`s beside the lemma. Every certificate check re-verifies the bound for every vertex |
+| The Python generator and Lean silently disagree about the packing convention | ✅ M08: both assert the same 301-digit constant — the packing of the point whose thirty-two digits are `1 … 32` in lane order. Lane width, lane order inside the tower, and `x`-before-`y` are fixed by that one number, and a generator that disagrees fails before it writes any data |
+| The two tables are the same length but a different shape, so an index means two things | ✅ M08: `packOk` compares the split pivots node by node; a reshape is a `shape` fault, and the control that reshapes the packed table is committed |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
