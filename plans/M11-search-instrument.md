@@ -705,8 +705,10 @@ statements rather than procedures, so they run on every build.
 ## 5. Not in this milestone
 
 * **§ 1.5 orbit construction** and **§ 2.5 a transcribed gadget library** — § 1, carried, with reasons.
-* **The hunt itself.** M13 — and the rest of what it needs is M12,
-  `plans/M12-candidate-construction.md`, split out on the day this milestone landed.
+* **The hunt itself.** M14 — and the rest of what it needs is M12,
+  `plans/M12-candidate-construction.md`, split out on the day this milestone landed, then M13
+  (`plans/M13-refind-five.md`), the calibration inserted when M12's search was measured re-finding
+  the Moser spindle at depth 1 and exhausting without reaching five colours.
 * **Anything that changes a certificate.** The three witnesses' certificates are not touched;
   `Gadget`'s colour index defaults to nothing and every existing use passes `4` explicitly.
 

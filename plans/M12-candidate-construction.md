@@ -4,8 +4,11 @@
 carried is preserved in § 7, and the five items it listed are re-scoped in § 2 against what § 0
 measured.*
 
-**The hunt is M13.** This milestone was split out of it so that everything we can name in advance is
-built in advance, and whatever gets built *during* the hunt is genuinely novel by construction.
+**The hunt is now M14**, with **M13 inserted after this milestone landed**: the instrument re-finds
+rung A's own witness at depth 1 and then exhausts without reaching five colours, so M13 calibrates the
+search against χ ≥ 5 before M14 hunts χ ≥ 6 (`plans/M13-refind-five.md`). This milestone was split out
+of the hunt so that everything we can name in advance is built in advance, and whatever gets built
+*during* the hunt is genuinely novel by construction.
 
 ---
 
@@ -703,7 +706,8 @@ the payoff theorem has an independent partner rather than being the only witness
   difficulty. The scoring signal is already free — `Gadget.survivors.length`.
 * **Extending the field.** § 0(g) gives the principled trigger; nothing yet pulls it. Extending is a
   parameter change with a known cost (the tower doubles per root), not new mathematics.
-* **A 6-chromatic unit-distance graph.** That is rung D and it is M13.
+* **A 6-chromatic unit-distance graph.** That is rung D and it is M14; M13 first calibrates the
+  search by re-finding χ ≥ 5.
 
 ---
 
