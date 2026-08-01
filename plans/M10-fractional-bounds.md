@@ -111,8 +111,10 @@ Branch-and-bound over independent sets, pruning a subtree as soon as the weight 
 | 63 points, `D` = 72 | **390,625** nodes | not measured |
 
 **A 27× difference from the order alone**, against ≥ 10⁹ with no prune at all. At 0.45 ms per node
-the headline is **~3 CPU minutes** and the spec instance ~17 CPU s — so the order is emitted *with*
-the weights and is part of what the generator produces, not an implementation detail.
+that projects the headline at ~3 CPU minutes; § 3.6 later *ran* the 47-point search under
+`decide +kernel` at 30 CPU s and rescaled the headline to **~5 CPU minutes**. Either way the order
+is emitted *with* the weights and is part of what the generator produces, not an implementation
+detail.
 
 ### (f) The prune is where a bug would hide
 
@@ -144,7 +146,7 @@ met for it. The current record needs measure theory and amenability — a projec
 proof, one 63-vertex certificate through machinery that already exists (M08's geometry, M02's
 tower), and a handful of spec instances. **No new CNF encoder, no new LRAT format, no new
 certificate segment layout, no generated-module explosion.** The heaviest single kernel step is
-projected at ~3 CPU minutes.
+projected at ~5 CPU minutes.
 
 **Buys.**
 
@@ -164,7 +166,7 @@ projected at ~3 CPU minutes.
 | Certifying 383/102 | § 0(g): not the record, data not public, not re-derivable |
 | Any existing witness as the vehicle | § 0(a): all three are worse than the 7-vertex spindle |
 | Unpruned enumeration | § 0(b): ≥ 10⁹ independent sets at 47 vertices |
-| A SAT/LRAT route for weighted independence | § 0(e): the pruned search is 390,625 nodes ≈ 3 CPU min, so a new CNF encoder plus a certificate format would be bought for nothing |
+| A SAT/LRAT route for weighted independence | § 0(e), § 3.6: the pruned search is 390,625 nodes ≈ 5 CPU min *measured through the kernel*, so a new CNF encoder plus a certificate format would be bought for nothing |
 | A clique-cover certificate | **derived, not measured**: a unit-distance graph in the plane has no K₄, so every clique has ≤ 3 vertices and a clique-cover dual can never prove more than 3 |
 | Cranston–Rabern's 76/21 | needs their 8-tile lemma about maximal independent sets in the triangular lattice — a substantial formalization on its own; § 6 |
 
@@ -244,40 +246,40 @@ theorem le_fractionalChromaticNumber_of_indepNum [Fintype V] [DecidableEq V] {a 
 ### 3.2 `Proofs/HadwigerNelson/IndepSearch.lean` — the kernel-run bounded search
 
 The vertices arrive **in the certificate's own order**, each carrying its own bit, its neighbour
-mask, its weight, and the total weight of everything after it — so the prune is one comparison and
-no list is re-traversed.
+mask and its weight; the weight still to come is an argument, so the prune is one comparison and no
+list is re-traversed. Shapes below are the domain pass's (§ 3.6) and have been run.
 
 ```lean
-/-- One vertex of the search: `(selfBit, neighbourMask, weight, weightOfTheRest)`. -/
-abbrev Slot := ℕ × ℕ × ℕ × ℕ
+/-- One vertex of the search: `(selfBit, neighbourMask, weight)`. -/
+abbrev Slot := ℕ × ℕ × ℕ
 
-/-- `noHeavy D rest allowed wt` — every independent set that extends the current selection by
-vertices drawn from `rest` and still `allowed` weighs at most `D`.
+/-- The slots for a vertex order: this is *computed*, so nothing about the emitted order has to be
+trusted beyond covering every vertex. -/
+def mkSlots {n : ℕ} (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (order : List (Fin n)) : List Slot :=
+  order.map fun v => (2 ^ v.val, nbrMask E v, w v)
 
-The first branch is the **prune**: if everything left cannot lift `wt` past `D`, the whole subtree
-is safe and is not entered. It is what turns ≥ 10⁹ sets into 38,128 nodes, and its soundness is
-`noHeavy_sound`'s only interesting case. -/
-def noHeavy (D : ℕ) : List Slot → ℕ → ℕ → Bool
-  | [], _, wt => wt ≤ D
-  | (bit, nb, wv, restW) :: rest, allowed, wt =>
-      if wt + wv + restW ≤ D then true
-      else noHeavy D rest allowed wt &&
-        (bit &&& allowed == 0 || noHeavy D rest (allowed &&& ~~~nb) (wt + wv))
+/-- `noHeavy D slots chosen wt rem` — every set that extends the already-`chosen` vertices by
+vertices drawn from `slots`, independent as the neighbour masks record it, weighs at most `D`.
 
-/-- **Soundness.** A `true` answer means what it says, for every independent set. -/
-theorem noHeavy_sound (D : ℕ) (slots : List Slot) (hwf : WellFormed n slots)
-    (h : noHeavy D slots (allOnes n) 0 = true)
+The first disjunct is the **prune**: if all the weight left cannot lift `wt` past `D`, the whole
+subtree is safe and is not entered. It is what turns ≥ 10⁹ sets into 38,128 nodes, and its
+soundness is `noHeavy_sound`'s only interesting case. -/
+def noHeavy (D : ℕ) : List Slot → ℕ → ℕ → ℕ → Bool
+  | [], _, wt, _ => wt ≤ D
+  | (bit, nbr, wv) :: rest, chosen, wt, rem =>
+      wt + rem ≤ D ||
+        (noHeavy D rest chosen wt (rem - wv) &&
+          (nbr &&& chosen != 0 || noHeavy D rest (chosen ||| bit) (wt + wv) (rem - wv)))
+
+/-- **Soundness.** A `true` answer means what it says, for every independent set. The three
+hypotheses are exactly what § 3.6 derived: the order is complete, `rem` over-estimates, and the
+slots transcribe the edge list and the weights. -/
+theorem noHeavy_sound {n : ℕ} (E : List (Fin n × Fin n)) (w : Fin n → ℕ) (D rem : ℕ)
+    (order : List (Fin n)) (hcover : ∀ v : Fin n, v ∈ order)
+    (hrem : sumWeights (mkSlots E w order) ≤ rem)
+    (h : noHeavy D (mkSlots E w order) 0 0 rem = true)
     (I : Finset (Fin n)) (hI : (edgeGraph n E).IsIndepSet (I : Set (Fin n))) :
     ∑ v ∈ I, w v ≤ D := sorry
-
-/-- The certificate a generator emits, and the one `Bool` the kernel decides. -/
-structure WeightCert (n : ℕ) where
-  slots : List Slot
-  bound : ℕ
-  deriving Repr
-
-def WeightCert.Check (c : WeightCert n) (E : List (Fin n × Fin n)) (w : Fin n → ℕ) : Bool := sorry
-theorem WeightCert.sound : c.Check E w = true → ∀ I, IsIndepSet I → ∑ v ∈ I, w v ≤ c.bound := sorry
 ```
 
 ### 3.3 `Proofs/HadwigerNelson/Instances/CoreSpindle.lean` — the 63 vertices
@@ -290,9 +292,11 @@ the 63 weights, the heaviest-first slot order, and `bound := 72`.
 def coreSpindle : UDCert 63 := sorry
 theorem coreSpindle_valid : coreSpindle.Valid = true := sorry      -- DiffWitness, 9 differences
 def coreSpindleWeights : Fin 63 → ℕ := sorry
-def coreSpindleCert : WeightCert 63 := sorry
-theorem coreSpindle_noHeavy : coreSpindleCert.Check coreSpindle.edges coreSpindleWeights = true := by
-  decide +kernel                                                    -- 390,625 nodes, ~3 CPU min
+def coreSpindleOrder : List (Fin 63) := sorry                      -- heaviest weight first
+theorem coreSpindle_cover : ∀ v : Fin 63, v ∈ coreSpindleOrder := by decide
+theorem coreSpindle_noHeavy :
+    noHeavy 72 (mkSlots coreSpindle.edges coreSpindleWeights coreSpindleOrder) 0 0 260 = true := by
+  decide +kernel                                                    -- 390,625 nodes, ~5 CPU min
 ```
 
 ### 3.4 `Proofs/HadwigerNelson/Instances/CoreSpindle/Bound.lean` — the headline
@@ -319,6 +323,120 @@ theorem four_le_chromaticNumber_plane_fractional :
 | the definition is **not** the ordinary chromatic number | `fractionalChromaticNumber (edgeGraph 5 C₅) = 5/2` — both directions: `≥` from `n/α = 5/2`, `≤` from an explicit 2-fold 5-colouring | **a non-integer value is the discriminating test.** If the definition had collapsed to `χ` this reads 3 |
 | the certificate theorem fires end to end | the Moser spindle: α = 2, 7/2 ≤ χ_f, 18 independent sets, `decide` | the small instance the big one is a scaled copy of |
 | the search agrees with the graph | `#eval` the maximum independent weight and read **72** | the certificate is tight; a slack answer means the wrong graph |
+
+---
+
+## 3.6 Domain pass — what the modeling changed, and what was executed
+
+Run 2026-08-01. Every claim below was checked against the environment or run, not recalled. The
+prototype is in the session scratchpad; it elaborates clean and its `#eval`s are quoted here.
+
+### The recognition search came back empty, so every choice here is permanent
+
+`grep -rn "Kneser" Mathlib/` — **nothing**. `grep -rn "fractionalChromatic\|FractionalColoring"` —
+**nothing**. There is no fractional anything in Mathlib, and no Kneser graph to be the target of the
+homomorphism definition. So the three standard presentations (a linear program over independent
+sets, a `b`-fold colouring, a homomorphism into a Kneser graph) all have to be minted, and the
+question is which one the *proofs* want.
+
+**Decision: the `b`-fold form.** *Alternative weighed:* the Kneser homomorphism, which would make
+monotonicity under a graph map free. *Why this one:* the Kneser target would have to be defined
+first, every lemma would route through it, and the milestone's central proof — the double count —
+reads each vertex's colour set directly. *Confidence: high.*
+
+**`b ≤ card` rather than `card = b`.** *Alternative:* exactly `b`. *Why:* they define the **same
+predicate** — shrinking a colour set preserves disjointness — so the value of χ_f is identical, and
+`≤` makes both `Colorable n → FractionalColorable 1 n` and downward monotonicity in `b` one-liners
+while handing consumers the inequality they already need. *Confidence: high.*
+
+### The carrier, and the junk value it avoids
+
+```lean
+noncomputable def fractionalChromaticNumber (G : SimpleGraph V) : ℝ≥0∞ :=
+  ⨅ (b : ℕ) (n : ℕ) (_ : 0 < b) (_ : G.FractionalColorable b n), (n : ℝ≥0∞) / b
+```
+
+*Alternative:* `sInf` over `ℝ`. *Why not:* `sInf ∅ = 0` in `ℝ`, so a graph admitting no fractional
+colouring would take the junk value `0` and a lower bound on it would be **false** rather than
+vacuous — the junk-value totality failure the standard names, sitting directly under the headline.
+`ℝ≥0∞` gives `⊤`, exactly as Mathlib's `chromaticNumber : ℕ∞` does. *Confidence: high.*
+
+*Sub-decision:* nested binders rather than `⨅ p ∈ S` over `ℕ × ℕ`. *Why:* which of `p.1`/`p.2` is the
+colour count is incidental structure, and it would be unreadable in every goal state. **Verified:**
+`simp only [fractionalChromaticNumber, le_iInf_iff]` closes the API lemma.
+
+**The headline keeps its division; the obligation does not.** `ENNReal.le_div_iff_mul_le` and
+`ENNReal.div_le_iff_le_mul` (both `Mathlib/Data/ENNReal/Inv.lean`) discharge their side conditions
+from `0 < b` and `0 < D`, so `(260 : ℝ≥0∞)/72 ≤ χ_f G` is provable from a hypothesis stated as
+`260 * b ≤ 72 * n` in plain arithmetic. **Verified to elaborate.** `ENat.toENNReal` and
+`ENat.toENNReal_mono` (`Mathlib/Data/Real/ENatENNReal.lean`) carry `χ_f ≤ χ` across the two
+carriers.
+
+### The certificate hypothesis
+
+`∀ I : Finset V, G.IsIndepSet (I : Set V) → ∑ v ∈ I, w v ≤ D`. *Alternative:* quantify over `Set V`
+with a finiteness side condition. *Why:* the proof applies the hypothesis to
+`univ.filter (fun v => c ∈ f v)`, which **is** a `Finset`, so `Set` would add plumbing at every use.
+`IsIndepSet` is an `abbrev` for `Set.Pairwise (¬ Adj ·)`, so it is transparent — free to use, and it
+buys the recognized name plus Mathlib's `Decidable` instance for a coerced `Finset`. Both grepped.
+
+### The search — three changes, each forced by a measurement
+
+**1. Carry `chosen`, not `allowed`.** The plan wrote the search as narrowing a set of still-allowed
+vertices, `allowed &&& ~~~nbr`. **`Nat` has no complement**, so that is `Nat.ldiff` — which M09
+measured is *not* GMP-accelerated, unlike `&&&`, `|||`. Carrying the chosen set instead makes the
+test `nbr &&& chosen == 0` and the update `chosen ||| bit`, both free, **and the test is literally
+the independence condition**. The cost model and the mathematics agree, which is the convergence
+signal.
+
+**2. The remaining weight is an argument under an *inequality*, not a field.** The plan cached
+`weightOfTheRest` in each slot. That is data the certificate would have to be trusted about,
+requiring a well-formedness structure or a `Subtype` threaded through every statement. Instead `rem`
+is a plain argument, the invariant is `sumWeights slots ≤ rem`, and the recursive call passes
+`rem - wv` — where `Nat` truncation cannot bite, because the invariant is an inequality that
+truncation preserves. One `decide` establishes it once at the top.
+
+**Executed, not argued:** `#eval` of the 47-point search with `rem` deliberately inflated from 68 to
+1000 returns the same `(true, false)` at `D = 19` and `D = 18`. An over-estimate is slower and never
+unsound.
+
+*Alternative also weighed:* recompute the remaining weight per node and carry nothing. Rejected on
+cost — 63 × 390,625 ≈ 2.5 × 10⁷ extra kernel steps, about 13 CPU minutes against 5.
+
+**3. The mask is never turned into a `Finset`.** The induction generalises over an abstract chosen
+set `C : Finset (Fin n)` **and** its mask, linked by
+`∀ v, nbrMask v &&& chosen = 0 ↔ ∀ u ∈ C, ¬ G.Adj u v` — plain data refinement. Consequence: the only
+`Nat` facts the proof needs are `Nat.and_or_distrib_left`, `Nat.and_or_distrib_right` and
+`Nat.testBit_two_pow`, **all present in core** (`Init/Data/Nat/Bitwise/Lemmas.lean`, grepped, not
+recalled).
+
+### The vertex order needs completeness, not a permutation
+
+The plan called the order "part of the certificate" without saying what must be true of it. Derived:
+a **duplicated** vertex can be chosen twice, which over-counts its weight, which makes the search
+*more* conservative — sound. A **missing** vertex is never offered, so a heavy independent set is
+never visited — unsound. So the only hypothesis is `∀ v : Fin n, v ∈ order`. No `Nodup`, no
+permutation, one `decide`.
+
+### The seam validated by execution
+
+| run | result |
+|---|---|
+| Moser spindle, uniform weights, `D = 2` / `D = 1` | `(true, false)` — α is exactly 2 |
+| 47 points, `D = 19` / `D = 18` | `(true, false)` — **the certificate is tight and the control goes red** |
+| 47 points, `rem` inflated 68 → 1000 | `(true, false)` — over-estimate stays sound |
+| 47 points, `D = 19`, `decide +kernel` | **≈ 30 CPU s**, against the 17 s projected from § 0(b) |
+
+That last number rescales the headline: 390,625 nodes against 38,128 is 10.2×, so the 63-point
+witness is projected at **≈ 5 CPU minutes**, not 3.
+
+### Module boundary
+
+| module | vocabulary | depends on this project |
+|---|---|---|
+| `Fractional.lean` | `SimpleGraph V`, `Finset`, `IsIndepSet`, `ℝ≥0∞` | **nothing** — Mathlib-shaped, and the piece worth upstreaming |
+| `IndepSearch.lean` | `Nat` masks, `edgeGraph n E`, `Fin n` | `EdgeList`, `Fractional` |
+| `Instances/CoreSpindle*` | certificate data | everything |
 
 ---
 
