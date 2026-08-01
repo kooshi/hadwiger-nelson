@@ -273,9 +273,18 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M08** ✅ | **Structure-aware geometry.** Difference-vector certificates: one squared length per *distinct edge difference*, and one big-integer subtraction per edge over packed coordinates. | *Landed 2026-07-31 (`plans/M08-structure-aware-geometry.md`).* All three witnesses re-certified through `DiffWitness`; `deGrey_valid`, `heule510_valid`, `heule553_valid` unchanged in statement. de Grey's geometry: **246.2 → 55.9 CPU s and 9 modules → 2**, memory per edge 4.55 → 0.27 MB. The roadmap's premise that the expensive term becomes *flat* in graph size was **measured false** — the difference count doubles when the construction doubles; what is stable is the ratio, ~118 : 1. Two instincts measured wrong and recorded: a flat giant-`Nat` table is free in the kernel and quadratic in the elaborator, and lane width is not free either. The milestone did **not** invalidate M06's certificates — de Grey's reach the vertex table without passing through his geometry — and the emitter now keeps every certificate's import closure free of geometry permanently. |
 | **M09** ✅ | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | *Landed 2026-07-31 (`plans/M09-gadget-algebra.md`).* A gadget is a `Bool` on port colourings plus the proof every proper colouring satisfies it; gadgets **intersect**, **widen**, **transport** along vertex maps, and arrive from an edge, a refutation, or another gadget. `not_colorable_of_gadget` replaces both `not_colorable_of_forcing` and `not_colorable_of_triangle_pinned`, and all three witnesses now go through it. **de Grey's second copy is derived, not asserted**: `deGrey_rotation` checks 791 exact coordinate identities and the second half's *geometry* and *colouring property* both follow — **half B's certificate deleted, 1,043 modules, 180 MB and 12.8 hours gone**, replaced by 95 CPU s. Colour symmetry is now one lemma at any number of ports, and the plan's claim that "the 4 is load-bearing" was **measured false**: stated relationally it needs no bound on the colour count at all.|
 | **M10** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. **Explicitly not a route to 6** — the known upper bound on χ_f is below 5, so this rung is independently publishable and cannot reach rung D. |
-| **M11** | **The hunt.** Composition search for a 6-chromatic witness, on M09's algebra. | Honest report — including "not found". |
+| **M11** | **The search instrument.** Everything the hunt needs, built before the hunt starts: the algebra generalised past four colours, colour-symmetry restriction of the terminal check, translations and reflections, motion composition, definitional placement, orbit construction, whole-property computation, gadget minimisation, the isometric sub-copy scanner, a gadget library. Inventory in `plans/M11-search-instrument.md`. | Every tool in that inventory built and measured, and the algebra proved at five colours — not four. |
+| **M12** | **The hunt.** Composition search for a 6-chromatic witness. | Honest report — including "not found". |
 
-M01–M06 constitute rung B and are the publishable unit. M07–M10 is rung C, and M11 is rung D.
+M01–M06 constitute rung B and are the publishable unit. M07–M11 is rung C, and M12 is rung D.
+
+**M11 was inserted 2026-08-01**, splitting the old M11 in two. The reason is a blocker found while
+answering a question about symmetry: **the gadget algebra is written at four colours throughout, and
+χ(ℝ²) ≥ 6 requires refuting *five*-colourings.** Everything under it — the encoder, the reduction,
+the colour-symmetry lemma — is already general in the colour count; `Gadget.lean` alone is not. A hunt
+started before that is a hunt asking the wrong question, and the cost model changes with it: the
+composition's terminal check goes from `4^m` to `5^m`, and the colour-symmetry saving that M09
+deliberately deferred goes from 24× to 120×.
 
 **Reordered 2026-07-29**, after `plans/spike-kernel-lrat.md` and `plans/spike-geometry-scaling.md`.
 Three changes, each forced by a measurement rather than a preference:
@@ -538,13 +547,19 @@ Stated up front, per doctrine, and to be reported as-is:
   re-checker on 4 cores that cannot finish overnight.
   **An earlier version of this bullet quoted 0.35 ms/step and 1.26 hours. Both were wrong** — measured
   without the clause-table lookup, which is where the time actually goes. Do not quote them again.
+- **The gadget algebra is written at four colours, and rung D needs five.** Found 2026-08-01, after
+  M09 shipped. `Gadget`, `Proper`, `samePattern`, `pinCube`, `allPatterns` and `survivors` all fix the
+  colour count at 4; everything beneath them is already general. The fix is mechanical and it is M11's
+  first item — but it was not noticed during M09's three modeling passes, which is worth recording as
+  a miss: every witness in this repository refutes 4-colourings, so nothing in the milestone's own
+  work pushed on the number.
 - **The gadget algebra has been exercised on constructions that already existed, not on a search.**
   M09's composition theorem covers de Grey's two-copy argument and Heule's triangle argument, and it
   deleted a certificate. That is evidence it is the right shape, not evidence it scales: the terminal
   check is `4^m` in the number of interface vertices, measured at ~0.2 ms per (colouring × gadget), so
-  **eight ports and ten gadgets is already ~2 minutes**. A search over many placements will need the
-  permutation-closure optimisation M09 deliberately left out, and that is a projection, not a
-  measurement.
+  **eight ports and ten gadgets is already ~2 minutes** — and `5^m` rather than `4^m` once the item
+  above is fixed, which is 6× worse again. A search over many placements will need the
+  colour-symmetry optimisation M09 deliberately left out, and that is a projection, not a measurement.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

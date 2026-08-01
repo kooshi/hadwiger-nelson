@@ -537,8 +537,9 @@ the check is `rfl` and placement really is free.
 
 ## 6. Unmeasured, ranked, and carried to M11
 
-*Recorded as a subplan stub in `plans/M11-the-hunt.md` on 2026-08-01, per `WORKFLOW.md` step 3 — this
-section listed the carry-forward but the stub was owed and had not been written.*
+*Superseded 2026-08-01 by `plans/M11-search-instrument.md`, which is the full inventory. Two things
+this section missed and that file records: **the algebra is written at four colours and rung D needs
+five**, and `Motion` can express neither a translation nor a reflection.*
 
 1. **Whether the terminal check survives a real search.** Measured at ~0.2 ms per (colouring ×
    gadget), so `4^m` puts **eight interface vertices and ten gadgets at ~2 minutes** and twelve at
