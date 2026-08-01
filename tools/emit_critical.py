@@ -2,24 +2,33 @@
 """Emit the packed vertex-criticality certificate: one four-colouring per deleted vertex.
 
 UNTRUSTED, like everything in `tools/`. Lean re-derives every claim from the emitted rows against
-**its own** edge list, so a wrong vertex numbering here cannot pass -- it would make some edge
-monochromatic and `properOffPivot` would refuse it. That is the construction-level agreement M14
-got from building the same joined edge list on both sides, in the only form available here.
+**its own** edge list, so a wrong vertex numbering here cannot pass -- it would leave some edge
+monochromatic and `properOffPivot` would refuse the row. That is construction-level agreement, and
+it is stronger than a cross-check: there is nothing to keep in step.
 
 ## The refusal
 
-A row is emitted only when the solver **settled** that pivot. If any pivot times out the whole file
-is refused: a certificate with a gap in the middle is the failure-open shape this project has
-already shipped twice, and Lean's own length check would catch a short list only if this emitter
-never pads. It never pads.
+A row is emitted only when the solver **settled** that pivot. If any pivot times out, or if any
+vertex turns out to be removable, the whole file is refused: a certificate with a gap in the middle
+is the failure-open shape this project has already shipped twice, and Lean's own length check would
+catch a short list only if this emitter never pads. It never pads.
 
-    python3 tools/emit_critical.py heule510 --colours 4 --timeout 900
+## The chunking, and why it is not a preference
+
+One `decide +kernel` over all 510 rows of Heule's witness was measured at M15 subplanning to peak at
+**41.7 GB** -- with the edge list stored as a literal *and* as the committed chunked one, so the run
+length is the whole cost. Time is linear at 0.68 CPU s per row; memory is linear at about 79 MB per
+row over a 2.7 GB floor, which is 31 KB per row per edge. The chunk width therefore follows the edge
+count, and `--rows` carries it.
+
+    python3 tools/emit_critical.py heule510 --colours 4 --rows 64
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -28,7 +37,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import forcer as F  # noqa: E402
 
-BITS = 2  # two-bit fields hold four colours; see `unpackColor`'s docstring for why k also divides
+BITS = 2  # two-bit fields hold four colours
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def load(name: str):
@@ -37,12 +47,9 @@ def load(name: str):
 
 
 def colouring_without(n: int, edges, p: int, k: int, timeout: float | None):
-    """A proper `k`-colouring of `G - p` as a list of colours, or `None` when unsettled.
-
-    `None` is returned for **both** "no such colouring" and "the solver gave up", and the caller
-    must distinguish them -- which it does, by asking for the status separately. Folding those two
-    together is exactly what would let an unsettled pivot be emitted as a settled one.
-    """
+    """`(status, colours)` for `G - p` at `k` colours. Three statuses, and the caller must not fold
+    them: `unknown` is the solver giving up, `unsat` is a *removable vertex*, and only `sat` is a
+    row. Folding either of the first two into a row is how a certificate acquires a lie."""
     keep = [q for q in range(n) if q != p]
     idx = {q: i for i, q in enumerate(keep)}
     e2 = [(idx[a], idx[b]) for a, b in edges if a != p and b != p]
@@ -62,10 +69,10 @@ def pack(col: list[int], bits: int) -> int:
     return sum(c << (bits * v) for v, c in enumerate(col))
 
 
-def emit(name: str, k: int, timeout: float | None, out: Path) -> int:
+def solve_all(name: str, k: int, timeout: float | None):
+    """Every row, or a refusal. Returns `(rows, removable, unsettled)`."""
     n, edges = load(name)
     rows, unsettled, removable = [], [], []
-    t0 = time.time()
     for p in range(n):
         st, col = colouring_without(n, edges, p, k, timeout)
         if st == "unknown":
@@ -74,13 +81,20 @@ def emit(name: str, k: int, timeout: float | None, out: Path) -> int:
             removable.append(p)
         else:
             rows.append(pack(col, BITS))
+    return n, rows, removable, unsettled
+
+
+def emit(name: str, k: int, rows_per_chunk: int, timeout: float | None) -> int:
+    t0 = time.time()
+    n, rows, removable, unsettled = solve_all(name, k, timeout)
     dt = time.time() - t0
 
-    if unsettled or removable:
+    if removable or unsettled:
         print(f"REFUSED: {name} has {len(removable)} removable vertices and {len(unsettled)} "
               f"unsettled pivots — no certificate exists for this graph as stated.", file=sys.stderr)
         if removable:
-            print(f"  removable (a {k+1}-colour fan sits here): {removable[:20]}", file=sys.stderr)
+            print(f"  removable (a {k + 1}-colour fan sits at each): {removable[:20]}",
+                  file=sys.stderr)
         if unsettled:
             print(f"  unsettled (the solver gave up; raise --timeout): {unsettled[:20]}",
                   file=sys.stderr)
@@ -89,24 +103,105 @@ def emit(name: str, k: int, timeout: float | None, out: Path) -> int:
 
     assert len(rows) == n, f"internal: {len(rows)} rows for {n} vertices"
     cap = name[0].upper() + name[1:]
-    body = ",\n   ".join(", ".join(str(r) for r in rows[i:i + 8]) for i in range(0, len(rows), 8))
-    out.write_text(f"""import Proofs.HadwigerNelson.Critical
-import Proofs.HadwigerNelson.Instances.{cap}
+    base = ROOT / "Proofs" / "HadwigerNelson" / "Instances" / cap / "Critical"
+    if base.exists():
+        shutil.rmtree(base)
+    base.mkdir(parents=True)
 
--- Generated by tools/emit_critical.py — do not edit.
--- One packed {k}-colouring per deleted vertex, {n} rows, {BITS} bits each.
--- Every pivot settled; the emitter refuses to write a file with a gap.
+    chunks = [(i, rows[i:i + rows_per_chunk]) for i in range(0, n, rows_per_chunk)]
+    for j, (start, blk) in enumerate(chunks):
+        body = ",\n   ".join(", ".join(str(r) for r in blk[i:i + 8]) for i in range(0, len(blk), 8))
+        (base / f"Rows{j:02d}.lean").write_text(f"""import Proofs.HadwigerNelson.Critical
+import Proofs.HadwigerNelson.Instances.{cap}.Edges
+
+-- Generated by tools/emit_critical.py -- do not edit.
+-- Rows {start}-{start + len(blk) - 1} of {n}: one packed {k}-colouring of the graph with that vertex's
+-- edges deleted, {BITS} bits per vertex. The chunk width is measured, not chosen -- see the module
+-- docstring of emit_critical.py.
+
+namespace HadwigerNelson
+
+/-- Rows {start}-{start + len(blk) - 1}: one packed {k}-colouring per deleted vertex. -/
+def {name}Rows{j:02d} : List Nat :=
+  [{body}]
+
+theorem {name}Chunk{j:02d} :
+    criticalFrom {name}.edges {BITS} {k} {start} {name}Rows{j:02d} = true := by decide +kernel
+
+end HadwigerNelson
+""")
+
+    imports = "\n".join(f"import Proofs.HadwigerNelson.Instances.{cap}.Critical.Rows{j:02d}"
+                        for j in range(len(chunks)))
+    concat = " ++\n  ".join(f"{name}Rows{j:02d}" for j in range(len(chunks)))
+    # Every argument explicit. Inferring `c`, `d` and `len` through the concatenation was measured
+    # to send the elaborator into `whnf` on a 510-cons chain; naming them makes it instantaneous.
+    term = f"{name}Chunk{len(chunks) - 1:02d}"
+    for j in range(len(chunks) - 2, -1, -1):
+        tail = " ++ ".join(f"{name}Rows{i:02d}" for i in range(j + 1, len(chunks)))
+        term = (f"criticalFrom_append_of (c := {name}Rows{j:02d}) (d := {tail})\n"
+                + "    " * (j + 1) + f"    (len := {len(chunks[j][1])}) (by decide) "
+                f"{name}Chunk{j:02d}\n" + "    " * (j + 1) + f"    ({term})")
+    (ROOT / "Proofs" / "HadwigerNelson" / "Instances" / cap / "Critical.lean").write_text(
+        f"""{imports}
+
+/-! # `{name}` is five-vertex-critical: no five-colour fan sits anywhere in it
+
+Every one of the {n} vertices is *needed*. Deleting any one of them leaves a graph four colours
+suffice for, and `Instances/{cap}/Bound.lean` already proves the whole graph needs five — so this
+graph is five-vertex-critical in the textbook sense, written out as two theorems.
+
+**Why that closes a route.** M14 found the property de Grey's construction has: a *fan* at a pivot
+`p` over partners `Q`, meaning every proper colouring paints `p` like at least one member of `Q`.
+M15 found what having one means — `Critical.lean`'s correspondence — namely that a fan of **any**
+width sits at `p` exactly when deleting `p` leaves the graph still needing the colour it needed. No
+removable vertex, therefore no fan, therefore nothing here for de Grey's route to start from.
+
+**And the limit, which travels with the result.** This is a statement about *this graph*. It says
+nothing about the plane, nothing about six-chromatic unit-distance graphs, and nothing about graphs
+this one is a subgraph of. Fans exist — `Critical.lean` commits one — they are simply not here.
+
+The evidence is {n} explicit four-colourings, one per deleted vertex, checked by the kernel against
+this file's own edge list. No solver is trusted and no SAT certificate is involved.
+-/
 
 namespace HadwigerNelson
 
 /-- One proper {k}-colouring of `{name}` minus each vertex's edges, packed {BITS} bits per vertex,
-row `p` for pivot `p`. -/
+row `p` for pivot `p`. Assembled from {len(chunks)} chunks because one kernel reduction over all
+{n} rows was measured at 41.7 GB. -/
 def {name}Criticality : List Nat :=
-  [{body}]
+  {concat}
+
+theorem {name}_criticality :
+    criticalFrom {name}.edges {BITS} {k} 0 {name}Criticality = true :=
+  {term}
+
+set_option maxRecDepth 4000 in
+/-- **Every vertex of `{name}` is needed**: delete any one vertex's edges and {k} colours suffice.
+
+Read with `{name}_not_colorable_{'four' if k == 4 else k}` in `Bound.lean`, which says {k} colours do *not* suffice for
+the whole graph, this is five-vertex-criticality stated in full. -/
+theorem {name}_vertex_critical (p : Fin {n}) :
+    ((edgeGraph {n} {name}.edges).deleteIncidenceSet p).Colorable {k} :=
+  forall_colorable_delete_of_packed (bits := {BITS}) (cs := {name}Criticality) (by norm_num)
+    (by rw [everyVertexCritical, {name}_criticality]; rfl) p
+
+/-- **No {k + 1}-colour fan sits anywhere in `{name}`** — at any pivot, over any partners.
+
+`p` and `Q` are explicit so the quantifier is on the page: this is not "we checked one `Q`".
+
+`p ∉ Q` is not bookkeeping. A pivot listed among its own partners satisfies `Fan` for free, since
+every colouring paints `p` like `p`; without the hypothesis the statement would be false, and with
+it the theorem covers every fan that says anything. -/
+theorem {name}_no_{'five' if k == 4 else str(k + 1)}_fan (p : Fin {n}) (Q : List (Fin {n})) (hp : p ∉ Q) :
+    ¬ Fan (edgeGraph {n} {name}.edges) {k + 1} p Q :=
+  not_fan_of_vertex_critical {name}_vertex_critical hp
 
 end HadwigerNelson
 """)
-    print(f"{name}: {n} rows, {k} colours, every pivot settled, {dt:.1f} s -> {out}")
+    print(f"{name}: {n} rows in {len(chunks)} chunks of {rows_per_chunk}, {k} colours, "
+          f"every pivot settled, 0 removable, {dt:.1f} s solving")
     return 0
 
 
@@ -114,10 +209,10 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("name")
     ap.add_argument("--colours", type=int, default=4)
+    ap.add_argument("--rows", type=int, default=64, help="rows per chunk; memory is ~31 KB/row/edge")
     ap.add_argument("--timeout", type=float, default=900.0)
-    ap.add_argument("--out", type=Path, required=True)
     a = ap.parse_args()
-    sys.exit(emit(a.name, a.colours, a.timeout, a.out))
+    sys.exit(emit(a.name, a.colours, a.rows, a.timeout))
 
 
 if __name__ == "__main__":

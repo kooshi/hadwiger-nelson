@@ -30,7 +30,7 @@ The first five-colour questions this project has asked at witness scale.
 |---|---|---|---|---|
 | Heule 510 | 510 | 2504 | **unsat, 58.7 s** | sat, 0.01 s |
 | Heule 553 | 553 | 2722 | **unsat, 71.3 s** | sat, 0.02 s |
-| de Grey 1581 | 1581 | 7877 | unsat, **> 10 min** | sat, *(pending)* |
+| de Grey 1581 | 1581 | 7877 | **unsat, 6755 s (1.88 h)** | sat, 0.05 s |
 
 Finding a five-colouring of a five-chromatic witness is instant — these graphs are nowhere near
 tight at five. **Refuting one is where the whole cost sits**, and that is the only direction the
@@ -134,11 +134,16 @@ vertices. The milestone that made the certificate affordable is the milestone th
 M07 measured that his graph shrinks 1581 → 1577 and stops, so some vertices there *are* removable —
 and by § (b) a removable vertex is exactly a five-colour fan. Sweep running.
 
-The sweep's own cost is the honest statement of what rung D asks: at a *removable* pivot the fan
-test is a four-colour refutation of a 1580-point graph, and **cadical has not refuted de Grey's
-1581 at four colours directly in an hour** — which is why M06 used his two-copy decomposition rather
-than the whole graph. So a confirmed fan in de Grey's graph costs what the χ ≥ 5 proof costs. A
-rejected pivot costs a second.
+**1,566 pivots settled in 2,331 s across 24 workers: none removable.** Fifteen did not settle at a
+300 s budget; re-run at four hours each, **eleven more came back critical** and four are still
+running as this is written. So de Grey's graph is critical at **1,577 of 1,581** vertices with four
+unknown — and *unknown* is not folded into either answer, so no certificate for it is emitted.
+
+The sweep's own cost is the honest statement of what rung D asks. At a *removable* pivot the fan
+test is a four-colour refutation of a nearly-complete de Grey graph, and **cadical refutes the whole
+1581 at four colours in 6,755 s — 1.88 hours** (measured this session; it is why M06 used his
+two-copy decomposition rather than the whole graph). So a confirmed fan in de Grey's graph costs
+what the χ ≥ 5 proof costs. A rejected pivot costs a second, and 1,577 of them did.
 
 ---
 

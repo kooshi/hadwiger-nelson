@@ -101,6 +101,75 @@ def forces(n: int, edges, p: int, q: int, k: int, timeout: float | None = None) 
     return {"unsat": FORCED, "sat": SEPARATED, "unknown": UNKNOWN}[st]
 
 
+# ------------------------------------------------------------------ the identity, as a filter
+
+REMOVABLE = "removable"
+CRITICAL = "critical"
+
+
+def removable(n: int, edges, p: int, k: int, timeout: float | None = None) -> str:
+    """Does a `k`-colour fan of ANY width sit at `p`?
+
+    M15 measured that the two questions are one: joining `p` to every other vertex asks exactly
+    whether `G - p` still needs `k` colours, and `Fan.widen` makes the widest join the easiest fan
+    there is. So one call at **`k-1` colours** settles every distance class at that pivot at once --
+    measured 7.6x cheaper than the same question asked as a fan, and against one call per class.
+
+    Returns `removable` (a fan sits here), `critical` (no fan at any width), or `unknown` --
+    **three outcomes, and the third is never folded.** Read as `critical`, a timeout would claim
+    "nothing here" on no evidence, which is the claim a certificate is later built on.
+
+    The filter is one-sided by nature: it rejects a pivot outright and never promotes one, because
+    a fan existing says nothing about its width, and width is the whole difficulty.
+    """
+    keep = [q for q in range(n) if q != p]
+    idx = {q: i for i, q in enumerate(keep)}
+    e2 = [(idx[a], idx[b]) for a, b in edges if a != p and b != p]
+    st, _ = _solve(base_clauses(len(keep), e2, k - 1), (k - 1) * len(keep), timeout)
+    return {"unsat": REMOVABLE, "sat": CRITICAL, "unknown": UNKNOWN}[st]
+
+
+@dataclass
+class Filtered:
+    """Which pivots survive the filter, and how many were never settled.
+
+    `line()` prints the unsettled count **unconditionally**. "0 pivots carry a fan" is a lie by
+    omission when some pivot timed out, and the graph-level claim is the one a certificate rests
+    on -- so the number that would make it false is never off the page.
+    """
+
+    total: int
+    survivors: list[int]
+    unsettled: list[int]
+
+    @property
+    def settled(self) -> bool:
+        return not self.unsettled
+
+    def line(self) -> str:
+        head = (f"{len(self.survivors)} of {self.total} pivots carry a fan; "
+                f"{len(self.unsettled)} unsettled")
+        if self.unsettled:
+            return (head + f" ** {self.unsettled[:8]} -- this is not a verdict about the graph, "
+                    "raise the timeout **")
+        if self.survivors:
+            return head + f" -- narrow one: {self.survivors[:8]}"
+        return head + " -- no fan anywhere in this graph, at any pivot, at any width"
+
+
+def filter_pivots(n: int, edges, k: int, timeout: float | None = None,
+                  pivots=None) -> Filtered:
+    """Run `removable` over every pivot. The cheap rejection the hunt leads with."""
+    survivors, unsettled = [], []
+    for p in (range(n) if pivots is None else pivots):
+        st = removable(n, edges, p, k, timeout)
+        if st == REMOVABLE:
+            survivors.append(p)
+        elif st == UNKNOWN:
+            unsettled.append(p)
+    return Filtered(n if pivots is None else len(list(pivots)), survivors, unsettled)
+
+
 # ------------------------------------------------------------------ one pivot, every partner
 
 @dataclass
@@ -568,6 +637,44 @@ def self_test() -> None:
     expect(starved.irredundant, False, "  ... and does not claim irredundance")
     expect("not a width" in starved.line(), True,
            "  ... and its report line says so where a reader will see it")
+
+    # ---------------------------------------------------------------- the identity, as a filter
+    # M15's finding, checked as **two formulas for one question** on the graphs Lean has committed:
+    # asking for a fan by joining the pivot to everything, and asking whether the pivot is removable.
+    # They must agree on every row, and they must agree at both colour counts, or the identity the
+    # certificate rests on is not the one this tool computes.
+    #
+    #  graph  n  pivot   k   removable?
+    ident = [
+        (rh, 4, 0, 3, REMOVABLE, "the rhombus's far corner is removable at three colours"),
+        (rh, 4, 3, 3, REMOVABLE, "  ... and so is the other one"),
+        (rh, 4, 1, 3, CRITICAL,  "a corner of the shared edge is not — delete it and two colours do"),
+        (rh, 4, 2, 3, CRITICAL,  "  ... nor the other one"),
+        (pt, 4, 3, 3, REMOVABLE, "the pendant point is removable: the triangle needs three without it"),
+        (pt, 4, 0, 3, CRITICAL,  "the corner it hangs from is not"),
+        (rh, 4, 0, 4, CRITICAL,  "at four colours nothing is removable — the graph is 3-chromatic"),
+    ]
+    for edges, n, p, k, want, what in ident:
+        expect(removable(n, edges, p, k), want, what)
+
+    # And the two formulas cross-checked directly: `removable` must answer exactly as the widest
+    # possible fan does. This is the control that would catch the identity being mis-implemented in
+    # a way every hand-written row above happened to agree with.
+    for edges, n, k in ((rh, 4, 3), (pt, 4, 3), (rh, 4, 4), (pt, 4, 4)):
+        for p in range(n):
+            widest = fan(n, edges, p, [q for q in range(n) if q != p], k)
+            expect(removable(n, edges, p, k), REMOVABLE if widest == FAN else CRITICAL,
+                   f"widest fan and removability agree at pivot {p}, k={k}, {len(edges)} edges")
+
+    # The summary line must carry the unsettled count even when the news is good, and must never
+    # read as a verdict about the graph when it is not one.
+    good = filter_pivots(4, pt, 3)
+    expect("unsettled" in good.line(), True, "the filter's line always states the unsettled count")
+    starved = Filtered(4, [], [1, 2])
+    expect("this is not a verdict about the graph" in starved.line(), True,
+           "an unsettled sweep refuses to read as a verdict")
+    expect(Filtered(4, [], []).line().endswith("at any width"), True,
+           "a settled empty sweep is allowed to say so")
 
     print("self-test: OK")
 

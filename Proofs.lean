@@ -11,6 +11,7 @@ import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Critical
+import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.Forcer
 import Proofs.HadwigerNelson.ForcerDiagnose
@@ -40,8 +41,10 @@ import Proofs.HadwigerNelson.Instances.CoreSpindle.Search
 import Proofs.HadwigerNelson.Instances.CoreSpindle.Bound
 import Proofs.HadwigerNelson.Instances.CoreSpindle.Diagnose
 import Proofs.HadwigerNelson.Instances.Heule510
+import Proofs.HadwigerNelson.Instances.Heule510.Critical
 import Proofs.HadwigerNelson.Instances.Heule510.Bound
 import Proofs.HadwigerNelson.Instances.Heule553
+import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound
 import Proofs.HadwigerNelson.Instances.Mycielski
 import Proofs.HadwigerNelson.Instances.Mycielski.Bound

@@ -323,6 +323,37 @@ before it has narrowed to a forced pair. Nothing here evaluates anything nativel
 #print axioms fan_iff_not_colorable
 #print axioms Fan.of_edges
 
+/-! ## M15 — a fan is one removable vertex, and the certified negative
+
+The correspondence, its fan-facing corollaries, the packed certificate, and the two witnesses whose
+every vertex is now proved necessary. The last two are the milestone's headline: no five-colour fan
+sits anywhere in either graph, so the route that produced χ ≥ 5 has nothing here to start from. -/
+
+#print axioms exists_isolating_of_colorable_delete
+#print axioms colorable_delete_of_exists_isolating
+#print axioms colorable_delete_iff_exists_isolating
+#print axioms not_fan_of_colorable_delete
+#print axioms not_forces_of_colorable_delete
+#print axioms not_fan_of_vertex_critical
+#print axioms fan_univ_of_not_colorable_delete
+#print axioms fan_univ_iff
+#print axioms delete_edgeGraph
+#print axioms unpackColor
+#print axioms properOffPivot
+#print axioms criticalFrom
+#print axioms criticalFrom_append
+#print axioms criticalFrom_append_of
+#print axioms everyVertexCritical
+#print axioms colorable_delete_of_packed
+#print axioms forall_colorable_delete_of_packed
+#print axioms no_fan_of_packed
+#print axioms heule510_criticality
+#print axioms heule510_vertex_critical
+#print axioms heule510_no_five_fan
+#print axioms heule553_criticality
+#print axioms heule553_vertex_critical
+#print axioms heule553_no_five_fan
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

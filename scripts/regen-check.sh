@@ -190,6 +190,29 @@ else
   echo "    FAIL: tools/minimise.py shrank a graph that has nothing to spare"; FAIL=1
 fi
 
+# The criticality certificates: one four-colouring per deleted vertex, {510, 553} rows each. These
+# are the evidence behind M15's negative -- "no five-colour fan sits anywhere in this graph" -- so
+# they get the same treatment as the refutation certificates: regenerate and compare byte for byte.
+# cadical is deterministic on a fixed input, so a satisfying assignment is reproducible even though
+# nothing about SAT requires it to be; that is checked here rather than assumed.
+#
+# The emitter also REFUSES to write anything when a pivot is unsettled or a vertex is removable, so
+# a green line here means both that the bytes match and that every one of the 1063 pivots settled.
+echo "==> criticality certificates"
+for W in heule510 heule553; do
+  CAP="$(tr '[:lower:]' '[:upper:]' <<< "${W:0:1}")${W:1}"
+  DIR="Proofs/HadwigerNelson/Instances/${CAP}/Critical"
+  cp -r "${DIR}" "${V}/${W}-crit-before"
+  if ! python3 tools/emit_critical.py "${W}" --colours 4 --rows 64 > "${V}/${W}-crit.log" 2>&1; then
+    sed 's/^/    /' "${V}/${W}-crit.log"
+    echo "    FAIL: tools/emit_critical.py refused to emit ${W}"; FAIL=1
+  elif ! diff -r -q "${V}/${W}-crit-before" "${DIR}" > /dev/null; then
+    echo "    FAIL: ${W}'s criticality certificate is not what the emitter produces"; FAIL=1
+  else
+    echo "    ${W}: $(ls "${DIR}" | wc -l) chunks identical, every pivot settled, 0 removable"
+  fi
+done
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

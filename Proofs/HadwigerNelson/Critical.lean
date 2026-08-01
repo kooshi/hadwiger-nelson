@@ -264,14 +264,15 @@ theorem colorable_delete_of_packed {n : ℕ} {E : List (Fin n × Fin n)} {bits k
   · exact key hij hav hbv hc'
   · exact key hji hbv hav hc'.symm
 
-/-- **Every vertex removable**, from one packed colouring each, in vertex order.
+/-- **A run of rows, each certifying the pivot its position names**, starting at `start`.
 
-A `List` and a length conjunct rather than a `Vector`, for a measured reason and not a stylistic
-one: an `Array` literal is built by a chain of applications, so the kernel pays O(its whole size)
-per access (M04), whereas `zipIdx` and `all` walk a literal `List` once. The length check is what
-the `Vector` would have carried — without it a short list certifies a prefix while the theorem
-quantifies over all of `Fin n`, and the data arrives from an untrusted emitter that must be checked
-rather than believed. -/
+The unit a generated module proves, and it is a run rather than the whole list because the whole
+list does not fit: one `decide +kernel` over all 510 rows of Heule's witness was measured to peak
+at 41.7 GB. `zipIdx`'s offset is what lets a chunk say which pivots it covers.
+
+A `List` and not a `Vector`, for a measured reason and not a stylistic one: an `Array` literal is
+built by a chain of applications, so the kernel pays O(its whole size) per access (M04), whereas
+`zipIdx` and `all` walk a literal `List` once. -/
 def criticalFrom {n : ℕ} (E : List (Fin n × Fin n)) (bits k start : ℕ) (cs : List ℕ) : Bool :=
   (cs.zipIdx start).all fun cp => properOffPivot E bits k cp.1 cp.2
 
@@ -286,6 +287,26 @@ theorem criticalFrom_append {n : ℕ} {E : List (Fin n × Fin n)} {bits k start 
       = (criticalFrom E bits k start c && criticalFrom E bits k (start + c.length) d) := by
   simp only [criticalFrom, List.zipIdx_append, List.all_append]
 
+/-- **Assembling chunks.** `c` certifies the rows from `start`, `d` the rows after them, and `len`
+is `c`'s length written as a literal so the next chunk's offset is one the generated module can
+state. The three arguments arrive in reading order: how long, then the first block, then the rest. -/
+theorem criticalFrom_append_of {n : ℕ} {E : List (Fin n × Fin n)} {bits k start len : ℕ}
+    {c d : List ℕ} (hlen : c.length = len)
+    (hc : criticalFrom E bits k start c = true)
+    (hd : criticalFrom E bits k (start + len) d = true) :
+    criticalFrom E bits k start (c ++ d) = true := by
+  subst hlen
+  rw [criticalFrom_append, hc, hd]
+  rfl
+
+/-- **Every vertex removable**, from one packed colouring each, in vertex order.
+
+A `List` and a length conjunct rather than a `Vector`, for a measured reason and not a stylistic
+one: an `Array` literal is built by a chain of applications, so the kernel pays O(its whole size)
+per access (M04), whereas `zipIdx` and `all` walk a literal `List` once. The length check is what
+the `Vector` would have carried — without it a short list certifies a prefix while the theorem
+quantifies over all of `Fin n`, and the data arrives from an untrusted emitter that must be checked
+rather than believed. -/
 def everyVertexCritical {n : ℕ} (E : List (Fin n × Fin n)) (bits k : ℕ) (cs : List ℕ) : Bool :=
   cs.length == n && criticalFrom E bits k 0 cs
 
