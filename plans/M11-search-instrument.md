@@ -1,133 +1,405 @@
-# M11 — The search instrument (carry-forward capture)
+# M11 — The search instrument
 
-*Opened 2026-08-01 as the pre-search tooling milestone. **Not subplanned** — this is the complete
-inventory of what the hunt needs, so that nothing is discovered mid-search. Full subplanning, with
-its own measurements and skeleton, is a separate step.*
+*Subplanned 2026-08-01, on the desktop (32 cores, 125 GB). The carry-forward inventory this replaces
+is preserved in § 6; every item there is either scheduled below, measured out, or carried to M12.*
 
 The hunt is M12. This milestone exists because a search that stops to build a tool is a search that
-stops. Everything below is either a **blocker** (the hunt cannot start without it), an
-**optimisation** (the hunt gets stuck without it), or an **instrument** (the hunt has nothing to look
-at without it).
+stops — and because the hunt's first question is *the wrong one* until the algebra can ask about five
+colours.
 
 ---
 
-## 0. The blocker nobody had noticed
+## 0. Measurements — taken before anything was specified
 
-### The entire gadget algebra is fixed at four colours, and rung D needs five
+Desktop, `lake env lean` on a one-declaration file, minus a 1.35 s import baseline; minimum of the
+runs shown. **Wall clock, single-threaded** — everything here is one kernel reduction, so wall and
+CPU coincide to within the baseline.
 
-`χ(ℝ²) ≥ 5` means *no 4-colouring*. **`χ(ℝ²) ≥ 6` means no 5-colouring** — a different question, and
-`Proofs/HadwigerNelson/Gadget.lean` cannot ask it:
+### (a) What it costs to touch the two modules this milestone rewrites
 
-```lean
-admits : (Fin m → Fin 4) → Bool
-sound  : ∀ f : Fin n → Fin 4, Proper n E f → …
+| change to `Gadget.lean` | what rebuilds | cost |
+|---|---|---|
+| a `--` line comment | **only `Gadget.lean`** | 2.7 s |
+| a `/-- docstring -/` or a `/-! module doc -/` | `Gadget.lean` + all 5 dependents | 10 s wall / 18 CPU s |
+| a declaration | `Gadget.lean` + all 5 dependents | 10 s wall / 18 CPU s |
+
+| change to `Motion.lean` | what rebuilds | cost |
+|---|---|---|
+| anything at all | `Motion` + 5 dependents, of which `DeGrey/Rotation.lean` is 95 s | 112 s wall / 118 CPU s |
+
+**This corrects a rule in `CLAUDE.md`, and the correction is worth more than this milestone.** The
+standing rule reads: Lake's traces are content-based, so *"a **comment** in a module the certificates
+import re-checks every one of them"* — the sentence that cost 28 hours at M07 and that has shaped
+every module layout since. Measured three ways on `Gadget.lean` → `DeGrey/Controls.lean`:
+
+| kind of comment | dependents rebuilt? |
+|---|---|
+| `-- line comment`, anywhere including inside a proof | **no** |
+| `/-- docstring -/` | yes |
+| `/-! module doc -/` | yes |
+
+A `--` comment produces a **byte-identical `.olean`**, and Lake's dependent trace is taken from the
+artifact, not the source. Doc comments are *stored in the environment* — they are queryable data —
+so they change it. The practical consequence: **prose written for a human is free upstream of
+anything, provided it is written as `--` rather than `/--`.** The module's own re-elaboration is not
+free (2.7 s here), but the 27.8-hour cliff is reachable only by doc comments and declarations.
+`CLAUDE.md` is corrected as part of this milestone.
+
+### (b) The terminal check today — full enumeration of `k^m` port colourings
+
+`decide +kernel` on `survivors = []`, worst realistic composite (every pair of ports constrained):
+
+| colours `k` | ports `m` | patterns | net | per pattern |
+|---|---|---|---|---|
+| 4 | 5 | 1,024 | 0.87 s | 846 µs |
+| 4 | 6 | 4,096 | 4.16 s | 1,015 µs |
+| 4 | 7 | 16,384 | 18.4 s | 1,124 µs |
+| 4 | 8 | 65,536 | 83.4 s | 1,272 µs |
+| 5 | 6 | 15,625 | 19.2 s | 1,231 µs |
+| 5 | 7 | 78,125 | 107.2 s | 1,372 µs |
+| 5 | 8 | 390,625 | **dies — `maxHeartbeats` at 189 s** | — |
+
+**Five colours and eight interface vertices does not run.** That is the milestone's premise, measured
+rather than projected.
+
+### (c) Where the time goes — and why filtering is not enough
+
+Enumerating the patterns and doing *nothing else*:
+
+| k | m | patterns | net | per pattern |
+|---|---|---|---|---|
+| 4 | 7 | 16,384 | 1.66 s | 101 µs |
+| 5 | 7 | 78,125 | 8.43 s | 108 µs |
+
+**105 µs per pattern to build it, independent of the colour count**; the remaining ~92% is the
+gadgets' own work. So the obvious cheap fix — keep `allPatterns` and filter the canonical ones out of
+it — recovers none of the enumeration cost, and at `k = 5, m = 10` the enumeration *alone* is
+9,765,625 × 105 µs = **17 minutes before a single gadget is consulted**. The canonical patterns must
+be **generated**, never filtered.
+
+### (d) The canonical enumeration, measured — the milestone's central number
+
+One representative per colour-partition of the ports, generated directly:
+
+| k | m | canonical | net | per pattern | full enumeration | **speedup** |
+|---|---|---|---|---|---|---|
+| 5 | 7 | 855 | 1.49 s | 1,739 µs | 107.2 s (measured) | **72×** |
+| 5 | 8 | 3,845 | 8.33 s | 2,166 µs | ~535 s (projected) | ~64× |
+| 5 | 9 | 18,002 | 46.5 s | 2,584 µs | ~2,700 s | ~58× |
+| 5 | 10 | 86,472 | 257 s | 2,977 µs | ~13,500 s | ~53× |
+
+The realised speedup is **53–72×**, below the 91–113× the pattern counts suggest, because a canonical
+pattern costs ~2× a plain one to generate. It does not matter: the number that decides the milestone
+is the **interface ceiling**, and it moves from
+
+> **7 ports without canonicalisation → 10 ports with it, at five colours.**
+
+Ten interface vertices at 4.3 minutes, against three and three-quarter hours. Counts, for the record:
+
+| | k=4 | | k=5 | |
+|---|---|---|---|---|
+| ports | `4^m` | canonical | `5^m` | canonical |
+| 6 | 4,096 | 187 | 15,625 | 202 |
+| 8 | 65,536 | 2,795 | 390,625 | 3,845 |
+| 10 | 1,048,576 | 43,947 | 9,765,625 | 86,472 |
+| 12 | 16,777,216 | 700,075 | 244,140,625 | 2,079,475 |
+
+### (e) The brute-force ceiling, so the gadget library's route is not guessed
+
+`decide +kernel` over every `Fin n → Fin k`: the Moser spindle's 3-colouring refutation is 2,187
+colourings in 2.6 s — **1.2 ms per colouring**, the same figure as everything else the kernel folds.
+Ceiling ≈ 10⁵–10⁶ colourings, i.e. **n ≈ 9 vertices at four colours**. A gadget worth having is
+larger than that, so a gadget's colouring property is proved through the certificate route already
+built (`Sat/MaskCheck.lean`) and never by exhaustion. The *search* over gadgets runs in Python and is
+untrusted, so it is not bound by this at all.
+
+---
+
+## 1. What the measurements decided
+
+### Bought
+
+| # | Item | Why, in one line |
+|---|---|---|
+| **§ 0** | `Gadget` indexed by the colour count | Blocker. χ(ℝ²) ≥ 6 means refuting **five**-colourings, and every gadget declaration says 4. |
+| **§ 1.1** | Canonical colour patterns, generated | (b) says 5 colours × 8 ports does not run; (d) says it runs in 8 s. |
+| **§ 1.2** | `Motion` as a similarity, not a rotation-about-a-point | The present type **cannot express a translation**: its matrix has determinant `M² > 0` and a fixed point by construction. |
+| **§ 1.3** | `Motion.comp` | Layered constructions compose motions; de Grey's own was derived by hand in Python. |
+| **§ 1.4** | Placement by definition | Turns "one coordinate identity per placed vertex" (791 of them, 95 s, for de Grey) into **one lemma, quantified over the point**. |
+| **§ 2.1** | Whole-property computation | Turns "a subgraph" into "a gadget" without a human choosing which pattern to refute. |
+| **§ 2.2** | Gadget minimisation | `tools/shrink.py` retargeted from "still not 4-colourable" to "still has this port property". |
+| **§ 2.3** | The isometric sub-copy scanner | Detects *how* a graph was built and hands back the motion `Motion` consumes. |
+
+### Abandoned, with the reason
+
+| Item | Why not |
+|---|---|
+| A closure-under-relabelling field on `Gadget` (the inventory's § 1.1 design) | **Not needed at all** — see § 2.2 below. `sound` already quantifies over every proper colouring, and relabelling a proper colouring gives a proper colouring, so the terminal theorem gets colour symmetry for free. The inventory specified a field and seven three-line obligations; the correct design has neither. |
+| Keeping `allPatterns` alongside the canonical enumeration | One enumeration, not two. Everything `allPatterns` was for, `canonPatterns` does strictly better — including the reader-facing report, which becomes one line per *class* instead of up to `k!` relabellings of one line. |
+| A kernel-run **colouring** search (the analogue of M10's weighted-independence search) | Considered and rejected on (e): it would let a gadget's property be proved without a certificate. But the certificate route exists, is proved sound, and a gadget-sized refutation is a rounding error beside M07's 1.4 M steps. Building it would be a second checker to keep honest. |
+
+### Carried to M12 unless the milestone comes in early
+
+| Item | Why it can wait |
+|---|---|
+| **§ 1.5** orbit construction | Depends on § 1.4 landing first, and its saving (one certificate per orbit representative) is only collectable once a search proposes an orbit. The scale factor compounds under iteration — level `i` of an orbit needs a common denominator `M^(r-1)` and a translation scaled by `M^i` — which is real design work with no consumer yet. |
+| **§ 2.5** a gadget library transcribed from the literature | The published gadgets we would transcribe (Exoo–Ismailescu, Parts) are in venues whose data we do not have, which is the same wall M10 hit with the 383/102 bound. What ships instead is the library **the instrument produces**: § 2.1 run over every construction already in this repository, emitted as data. |
+
+---
+
+## 2. The shape
+
+### 2.1 The colour count becomes an index, and `Proper` loses it entirely
+
+```
+Gadget n m E p          ⟹   Gadget k n m E p
+admits : (Fin m → Fin 4) → Bool  ⟹   (Fin m → Fin k) → Bool
+Proper n E (f : Fin n → Fin 4)   ⟹   Proper n E (f : Fin n → α)     -- any target
 ```
 
-Measured against the rest of the stack, this is a *local* problem, and that is the good news:
+`Proper` is `∀ i j, Adj i j → f i ≠ f j`. Nothing about that mentions how many colours exist, and
+M09 established the same thing about colour symmetry: `exists_perm_comp_eq` is stated over an
+arbitrary finite domain and an arbitrary target. So the colour count is an index on `Gadget` and on
+nothing else.
 
-| | already general in the colour count |
+### 2.2 Colour symmetry is already in `sound`, and the terminal theorem takes it
+
+This is the milestone's one genuine simplification, and it deletes the design the inventory
+specified.
+
+To check only canonical patterns, the terminal theorem needs: *if some proper colouring exists, some
+**canonical** pattern is admitted.* Given a proper colouring `C`, let `q = C ∘ p`, let `q'` be its
+canonical representative, and let `σ` be the colour permutation with `σ ∘ q' = q`
+(`exists_perm_comp_eq`, M09, unchanged). Then
+
+```
+σ⁻¹ ∘ C   is a proper colouring        -- σ⁻¹ is injective; that is all `Proper` needs
+(σ⁻¹ ∘ C) ∘ p = q'                     -- by construction
+g.admits q' = true                     -- g.sound, applied to that colouring
+```
+
+No new field, no obligation on any constructor, and every gadget in the repository keeps working
+unchanged. The inventory's "`Gadget` gains a closure field, the seven constructors supply it" was a
+design derived from the wrong end.
+
+### 2.3 Canonical patterns
+
+A pattern's content is the **partition** of the ports it induces; the colours are names. So the
+enumeration is one representative per partition into at most `k` blocks, and the representative is
+the classical one: **colours numbered in order of first occurrence** (restricted growth strings).
+
+Generated directly, carrying "how many colours are in use so far":
+
+```lean
+def canonAux (k : ℕ) : (m : ℕ) → ℕ → List (Fin m → Fin k)
+  | 0,     _ => [Fin.elim0]
+  | m + 1, u => (List.finRange k).flatMap fun c =>
+      if c.val ≤ u then (canonAux k m (max u (c.val + 1))).map (Fin.cons c) else []
+```
+
+The completeness statement — *the* obligation of this milestone — carries a **nodup list of the
+original colours in order of first occurrence** as its context, which is exactly the data the
+recursion consumes:
+
+```lean
+theorem exists_canonAux (m : ℕ) (s : List (Fin k)) (hs : s.Nodup) (q : Fin m → Fin k) :
+    ∃ (s' : List (Fin k)) (q' : Fin m → Fin k),
+      s'.Nodup ∧ s <+: s' ∧ (∀ i, q i ∈ s') ∧
+      q' ∈ canonAux k m s.length ∧ (∀ i, (q' i).val = s'.idxOf (q i))
+```
+
+Induction on `m`, `Fin.cons`-first. If `q 0 ∈ s`, the head takes `s.idxOf (q 0)` and the context is
+unchanged; if not, the head takes `s.length` and the context extends to `s ++ [q 0]`. The `Fin k`
+bound on the head is `s.Nodup → s.length ≤ k`. Same-partition then falls out of nodup-ness:
+`q' i = q' j ↔ s'.idxOf (q i) = s'.idxOf (q j) ↔ q i = q j`.
+
+### 2.4 `Motion` becomes a similarity — a matrix and a translation, both cleared
+
+The present type is `M·(image − centre) = [[a, −b], [b, a]]·(source − centre)`: determinant
+`a² + b² = M² > 0` and a fixed point built in. It admits rotations about a point and nothing else.
+The true shape of "a plane isometry, cleared of its denominator" is an **affine map whose linear part
+is orthogonal up to scale**:
+
+```lean
+structure Motion where
+  a b c d : Q4         -- the linear part  A = [[a, c], [b, d]]
+  e f     : Q4         -- the translation, cleared by M
+  M       : Q4
+  scale   : ℕ
+  scale_ne : scale ≠ 0
+  sq   : M * M = (scale : Q4)
+  col₁ : a * a + b * b = (scale : Q4)
+  col₂ : c * c + d * d = (scale : Q4)
+  orth : a * c + b * d = 0
+
+def Maps (μ : Motion) (p q : Pt) : Bool :=
+  (μ.M * q.x == μ.a * p.x + μ.c * p.y + μ.e) &&
+  (μ.M * q.y == μ.b * p.x + μ.d * p.y + μ.f)
+```
+
+Three laws instead of one, and **the distance proof gets shorter, not longer**: subtracting the two
+rows kills `e` and `f` exactly as it used to kill the centre, and
+
+```
+(a·u + c·v)² + (b·u + d·v)² = (a²+b²)u² + 2(ac+bd)uv + (c²+d²)v² = scale·(u² + v²)
+```
+
+is one `linear_combination` with **no case split between rotations and reflections** — the sign lives
+in the data, not in the proof. What the shape buys:
+
+| | how |
 |---|---|
-| `coloringCNF k n E`, `cubeCNF`, `not_colorable_of_unsat`, `not_pinned` | ✅ |
-| `exists_perm_comp_eq` — colour symmetry | ✅ any target type at all, which is what the M09 obligation pass established |
-| the reduction from a finite graph to the plane | ✅ |
-| **`Gadget`, `Proper`, `samePattern`, `pinCube`, `allPatterns`, `survivors`** | ❌ **fixed at 4** |
+| rotations | `c = −b, d = a` — smart constructor `Motion.rotAbout`, so "rotation about vertex 14" is still what a reader writes |
+| reflections | `c = b, d = −a` |
+| translations | `a = d = M, b = c = 0` — impossible in the old type at any scale |
+| composition (§ 1.3) | `A = A₂A₁`, `t = A₂t₁ + M₁t₂`, `M = M₁M₂`, `scale = scale₁·scale₂`; each law by `linear_combination` |
 
-So the generalisation is mechanical — one index threaded through one module. **It must happen first,
-because everything else here is calibrated against the wrong number until it does.**
+### 2.5 Placement stops costing one identity per vertex (§ 1.4)
 
-**And it reprices § 1.1.** The terminal check goes from `4^m` to `5^m`: at eight interface vertices,
-65,536 → 390,625 cases, and the colour-symmetry saving goes from 24× to **120×**. What is an
-optimisation at four colours is close to mandatory at five.
+de Grey's second copy costs 791 coordinate identities (95 CPU s) because his vertex table is frozen
+data. When a table is *defined* as the image, the check is a lemma instead:
 
----
+```lean
+def Motion.hold (μ : Motion) (p : Pt) : Pt := ⟨μ.M * p.x, μ.M * p.y⟩
+def Motion.step (μ : Motion) (p : Pt) : Pt :=
+  ⟨μ.a * p.x + μ.c * p.y + μ.e, μ.b * p.x + μ.d * p.y + μ.f⟩
 
-## 1. Optimisations — the hunt gets stuck without these
+theorem Motion.maps_step (μ : Motion) (p : Pt) : μ.Maps (μ.hold p) (μ.step p) = true
+```
 
-### 1.1 Restrict the terminal check to canonical colour patterns — 24× at four colours, **120× at five**
+One lemma, quantified over the point, and `UDCert.validOn_map_of_motion`'s per-edge hypothesis is
+discharged for a copy of any size at **zero** cost. The `hold` is not decoration: a rotation over
+`ℤ[√3,√5,√7,√11]` has no unit-norm representative (there is no division in the tower), so the source
+side carries the scale factor and the certificate's denominator absorbs it.
 
-The composition's last step enumerates every colouring of the `m` interface vertices, measured at
-**~0.2 ms per (colouring × gadget)**.
+### 2.6 The three instruments (`tools/`, untrusted)
 
-Every gadget's admitted set is closed under permuting colours — that is *why* one certificate covers
-up to 24 patterns — so the enumeration only ever needs one representative per colour-partition.
-`Gadget` gains a closure field, the seven constructors supply it (all are three-liners), and
-`survivors` ranges over partitions.
+| tool | in | out |
+|---|---|---|
+| `tools/profile.py` | a graph, a port tuple, a colour count | for each **canonical** pattern: SAT (a colouring achieving it) or UNSAT — the gadget's whole property |
+| `tools/scan.py` | a point set | every isometry mapping a reference unit pair onto another, with how many points land back in the set — and the `Motion` fields for the best one |
+| `tools/minimise.py` | a graph, a port tuple, a property | the smallest subgraph still having it (`shrink.py`'s delta-debugging, retargeted) |
 
-**Trigger:** immediately after § 0. At five colours it is no longer optional.
-
-### 1.2 `Motion` cannot express a translation or a reflection
-
-`Motion.Maps` is `M·(image − centre) = [[a, −b], [b, a]]·(point − centre)`. That matrix has
-determinant `a² + b² = M² > 0`, so **every motion it admits is a rotation about a point**: a pure
-translation would force the shift to zero, and a reflection would need negative determinant.
-
-Enough for de Grey — his construction is rotations about points, and M09 needed exactly one. **Not
-enough for a search:** lattice-style constructions translate constantly, and the scanner in § 2.3
-searches reflections as a matter of course.
-
-Cost: a `det : Int` field (or the `[[a, b], [b, −a]]` sibling), plus one extra case in `distSq_eq`,
-which is the same `ring` identity.
-
-### 1.3 `Motion.comp` — motions compose, and de Grey's was a composite
-
-The rotation M09 exploits was *derived* as one rotation after another's inverse — by hand, in Python,
-outside Lean. A layered construction (de Grey's own `H → J → K → L`) composes constantly. The
-structure was chosen so `comp` is a field-wise definition plus one `ring` identity.
-
-### 1.4 Placement should be definitional, not checked
-
-de Grey's copy costs 791 coordinate identities **only because his vertex table is frozen data**
-upstream of 1,222 certificate modules. A new construction can define a placed copy's coordinates *as*
-the motion applied to the original, at which point `Motion.Maps` holds by `rfl` and placing a gadget
-costs nothing at all. Never tried.
-
-### 1.5 Build graphs as orbits, so the transport saving is structural
-
-M09's saving was *discovered* — the second copy happened to be a rotation of the first, found by
-measuring the generator's output. If a candidate is **constructed** as the orbit of a seed under a
-motion group, one certificate per orbit representative is true by construction, and the `|orbit|`-fold
-saving is guaranteed rather than hoped for.
+`tools/coloring.py` hardcodes `K = 4` and is generalised with them. Nothing here is trusted: Lean
+re-derives every claim, so a bug costs a theorem and cannot buy one.
 
 ---
 
-## 2. Instruments — the hunt has nothing to look at without these
+## 3. The skeleton
 
-### 2.1 Compute a gadget's *whole* property, not one refuted pattern
+Three modules, one new. Signatures and full statements, `sorry` at every leaf.
 
-**Probably the single most valuable missing tool.** `Gadget.ofUnsat` refutes one colour pattern of the
-ports. A search wants the **full profile**: for a subgraph and a port tuple, which canonical patterns
-are achievable and which are refuted — one solver call per pattern, each far cheaper than a
-whole-graph refutation.
+```
+Proofs/HadwigerNelson/Pattern.lean    NEW — canonical colour patterns          (Mathlib only)
+Proofs/HadwigerNelson/Gadget.lean     rewritten — indexed by the colour count
+Proofs/HadwigerNelson/Motion.lean     rewritten — similarity, composition, placement
+```
 
-That is what turns "a subgraph" into "a gadget" automatically, and it is what a library is made of.
+`Pattern.lean` depends on nothing in this project, exactly as `Fractional.lean` does — a candidate
+for upstreaming, and a module whose statements must therefore read without any of this context.
 
-### 2.2 Gadget minimisation
+### 3.1 `Pattern.lean`
 
-M07 built vertex-deletion search against the target "still not 4-colourable". Retarget it to "still
-has this port property". A smaller gadget is a cheaper certificate *and* a cheaper placement.
+```lean
+def canonAux (k : ℕ) : (m : ℕ) → ℕ → List (Fin m → Fin k)
+def canonPatterns (k m : ℕ) : List (Fin m → Fin k) := canonAux k m 0
 
-### 2.3 The isometric sub-copy scanner
+theorem exists_canonAux (k m : ℕ) (s : List (Fin k)) (hs : s.Nodup) (q : Fin m → Fin k) :
+    ∃ (s' : List (Fin k)) (q' : Fin m → Fin k),
+      s'.Nodup ∧ s <+: s' ∧ (∀ i, q i ∈ s') ∧
+      q' ∈ canonAux k m s.length ∧ ∀ i, (q' i).val = s'.idxOf (q i)
 
-**Prototyped 2026-08-01 and validated.** Map a reference unit pair onto every other unit pair, both
-orientations, count how many points land back in the set. It recovers de Grey's split exactly —
-**791 of 1581 points, his two copies** — without reading his paper. Belongs in `tools/`, because it
-detects *how a graph was built* and hands back the generating motion `Motion` consumes.
+/-- **Every colouring of the ports matches a listed one, port for port.** -/
+theorem exists_mem_canonPatterns {k m : ℕ} (q : Fin m → Fin k) :
+    ∃ q' ∈ canonPatterns k m, ∀ i j, q' i = q' j ↔ q i = q j
+```
 
-### 2.4 A candidate scorer, which already exists
+### 3.2 `Gadget.lean`
 
-`Gadget.survivors` returns the port colourings a composition has not ruled out. Its **length** is a
-distance-to-refutation — exactly the objective a greedy or beam search descends. Free.
+```lean
+abbrev Proper (n : ℕ) (E : List (Fin n × Fin n)) {α : Type*} (f : Fin n → α) : Prop
+structure Gadget (k n m : ℕ) (E : List (Fin n × Fin n)) (p : Fin m → Fin n) where
+  admits : (Fin m → Fin k) → Bool
+  sound  : ∀ f : Fin n → Fin k, Proper n E f → admits (fun i => f (p i)) = true
 
-### 2.5 A gadget library
+-- unchanged in content, `k` threaded:
+def inter / trivial / mono / widen / transport / edge
+def pinCube / Gadget.ofUnsat
 
-Spindles, de Grey's own `H`/`J`/`K`/`L` layers, Exoo–Ismailescu's and Parts' gadgets. M09 built the
-algebra and demonstrated it on what was already in the repository; there is no catalogue.
+/-- The port colourings, **one per colour-partition**, this gadget has not ruled out. -/
+def Gadget.survivors (g : Gadget k n m E p) : List (List (Fin k)) :=
+  ((canonPatterns k m).filter g.admits).map (List.ofFn ·)
+
+theorem not_colorable_of_gadget (g : Gadget k n m E p) (h : g.survivors = []) :
+    ¬ (edgeGraph n E).Colorable k
+```
+
+### 3.3 `Motion.lean`
+
+```lean
+structure Motion                                  -- § 2.4
+def Motion.Maps (μ : Motion) (p q : Pt) : Bool
+theorem Motion.distSq_eq : μ.Maps p q → μ.Maps p' q' → q.distSq q' = p.distSq p'
+
+def Motion.rotAbout / reflectIn / translate / id   -- smart constructors
+def Motion.comp (μ₁ μ₂ : Motion) : Motion
+theorem Motion.comp_maps : μ₁.Maps p q → μ₂.Maps q r → (μ₁.comp μ₂).Maps p r
+
+def Motion.hold / step
+theorem Motion.maps_step (μ : Motion) (p : Pt) : μ.Maps (μ.hold p) (μ.step p) = true
+
+-- unchanged: UDCert.validOn_of_subset, validOn_congr, validOn_map_of_motion
+```
 
 ---
 
-## 3. What was measured on 2026-08-01, and what it killed
+## 4. Controls — every one to be watched go red
 
-### The near-symmetry of Heule's witnesses is real, exact, and *not* where the forcing lives
+| # | Break this | The check that must fail, and where |
+|---|---|---|
+| 1 | Drop `orth : a*c + b*d = 0` from `Motion` | `distSq_eq` stops compiling. A shear preserves no distance, and the countermodel is exhibited (`example : ¬ ∀ …`). |
+| 2 | Drop `col₂` | as above — a degenerate second column collapses the plane onto a line |
+| 3 | Enumerate `canonAux` with `c.val ≤ u` weakened to `c.val < u` | `exists_canonAux` fails — no pattern can ever open a new colour, and the fresh-colour case has nothing to take |
+| 4 | State `not_colorable_of_gadget` over `canonPatterns` **without** relabelling the colouring by `σ⁻¹` | the proof fails; and a `#eval` exhibits a gadget whose only survivor is non-canonical |
+| 5 | `Gadget.edge`'s `admits` as `q i == q j` | `K₅` "proves" 4-colourable — the existing spec example goes red |
+| 6 | A five-colour spec witness (`K₆`) stated at `k = 4` | the composition admits nothing for the wrong reason; the pinned `survivors` count changes |
+| 7 | `profile.py` asked for a pattern it has already refuted | must report UNSAT again, not a cached SAT — the tool's own negative control |
+
+Plus the spec witnesses, which must exist before anything is believed:
+
+* **`K₅` is not 4-colourable and `K₆` is not 5-colourable**, both from edge gadgets alone, no
+  certificate — the model that shows the algebra is non-vacuous **at the new colour count**.
+* **`K₅` *is* 5-colourable and `K₆` *is* 6-colourable** — so neither statement is a constant answer.
+* **A model of every `Motion` law**: the 3–4–5 rotation (already present), a reflection, a
+  translation, and a composite; each carrying a stated pair of points to a stated pair.
+* **The 5-cycle's canonical patterns**: `canonPatterns 5 3` pinned by `#guard_msgs`, read by hand.
+
+---
+
+## 5. Not in this milestone
+
+* **§ 1.5 orbit construction** and **§ 2.5 a transcribed gadget library** — § 1, carried, with reasons.
+* **The hunt itself.** M12.
+* **Anything that changes a certificate.** The three witnesses' certificates are not touched;
+  `Gadget`'s colour index defaults to nothing and every existing use passes `4` explicitly.
+
+---
+
+## 6. The inventory this replaces
+
+*Written 2026-08-01 as the carry-forward capture; kept because § 3 below is measurement, not plan.*
+
+### The blocker
+
+`Proofs/HadwigerNelson/Gadget.lean` fixes the colour count at four (`admits : (Fin m → Fin 4) → Bool`,
+`sound : ∀ f : Fin n → Fin 4, …`). Everything beneath it — `coloringCNF k n E`, `cubeCNF`,
+`not_colorable_of_unsat`, `not_pinned`, `exists_perm_comp_eq`, and the reduction from a finite graph
+to the plane — is already general in the colour count. `Gadget`, `Proper`, `samePattern`, `pinCube`,
+`allPatterns` and `survivors` are not.
+
+### What was measured on 2026-08-01, and what it killed
+
+**The near-symmetry of Heule's witnesses is real, exact, and *not* where the forcing lives.**
 
 | | best non-trivial isometry | covers | misses |
 |---|---|---|---|
@@ -135,9 +407,8 @@ algebra and demonstrated it on what was already in the repository; there is no c
 | Heule 553 | **rotation by exactly −60°** | 451 of 553 (82%) | 102 |
 | de Grey | rotation by `arccos(31/32)` | 791 of 1581 (50%) | — |
 
-Exact hexagonal-lattice angles, so this is construction structure, not numerical coincidence.
-
-**The hypothesis that the forcing lives in the points the symmetry misses is false**, and the test was
+Exact hexagonal-lattice angles, so this is construction structure, not numerical coincidence. The
+hypothesis that the forcing lives in the points the symmetry misses is **false**, and the test was
 decisive:
 
 | | Heule 510 | Heule 553 |
@@ -149,38 +420,29 @@ decisive:
 | deleting **one missed** point makes it colourable | **25 / 25** | **25 / 25** |
 
 **These graphs are vertex-critical.** Every vertex is essential, so there is no sub-region where the
-forcing lives: deleting the missed points works, but so does deleting any equally sized set, and so
-does deleting a *single* vertex from anywhere at all. The missed points do have lower degree (7.0
-against 9.8) and the pinned triangle is *not* among them — but the near-symmetry is a fossil of how
-the graph was **built and then minimised**, not a feature of why it forces. Consistent with M07's
-finding that de Grey's forcing halves are vertex-critical.
+forcing lives. The missed points do have lower degree (7.0 against 9.8) and the pinned triangle is
+*not* among them — but the near-symmetry is a fossil of how the graph was **built and then
+minimised**, not a feature of why it forces. Consistent with M07's finding that de Grey's forcing
+halves are vertex-critical. What it does buy is § 2.3: the scanner detects a construction's
+generating motions from its output alone — the tool that would have found M09's saving unaided.
 
-**What it does buy:** the scanner detects a construction's generating motions from its output alone
-(§ 2.3) — the tool that would have found M09's saving unaided.
+**Rotational symmetry carries no colouring information whatsoever.** A rotationally symmetric
+unit-distance graph need not be 4-colourable, and the counterexample is one line: take any graph `G`,
+rotate it 180° about a point far from it, take the union. The copies are disjoint, no cross pair is
+at unit distance, the union has an exact order-2 rotational automorphism, and its chromatic number is
+`χ(G)`. **Symmetrising is free**, so symmetry per se says nothing.
 
-### Rotational symmetry carries no colouring information whatsoever
-
-**A rotationally symmetric unit-distance graph need not be 4-colourable**, and the counterexample is
-one line: take any graph `G`, rotate it 180° about a point far from it, take the union. The copies are
-disjoint, no cross pair is at unit distance, the union has an exact order-2 rotational automorphism,
-and its chromatic number is `χ(G)`. **Symmetrising is free**, so symmetry per se says nothing. The
-measured data says it more directly: Heule's 510-point graph is 95% invariant under a 120° rotation
-and is not 4-colourable.
-
-**The useful residue, stated as the question actually worth asking.** If `ρ` is an automorphism of
-order `k`, a *`ρ`-invariant* colouring is a colouring of a quotient graph on `|V|/k` vertices — a
-`k`-fold cheaper question. "No invariant colouring" does **not** imply "no colouring", so it can never
+The useful residue, stated as the question actually worth asking: if `ρ` is an automorphism of order
+`k`, a *`ρ`-invariant* colouring is a colouring of a quotient graph on `|V|/k` vertices — a `k`-fold
+cheaper question. "No invariant colouring" does **not** imply "no colouring", so it can never
 *reject* a candidate. It can **promote** one: a cheap test on a `k`-times-smaller graph that says
 *look here first*. Worth building as a search filter, worthless as a proof step, and the distinction
 must stay written down, because getting it backwards would be unsound.
 
----
+### Why none of this was built during M09
 
-## 4. Why none of this was built during M09
-
-**Measured, 2026-08-01:** `Gadget.lean` and `Motion.lean` sit upstream of **5 modules and zero
-generated certificate modules**. Editing them costs seconds, not hours. The freeze pressure that
-justified front-loading work in M06–M08 — where touching a byte upstream of a certificate costs 27.8
-hours — does not exist here, so there was no reason to add anything before a use demanded it.
-
-That reasoning is now spent: this milestone *is* the demanded use.
+`Gadget.lean` and `Motion.lean` sit upstream of **five modules and zero generated certificate
+modules**. The freeze pressure that justified front-loading work in M06–M08 — where touching a byte
+upstream of a certificate costs 27.8 hours — does not exist here, so there was no reason to add
+anything before a use demanded it. That reasoning is now spent: this milestone *is* the demanded use.
+§ 0(a) puts numbers on it: 18 CPU seconds for `Gadget.lean`, 118 for `Motion.lean`.

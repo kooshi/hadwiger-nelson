@@ -201,16 +201,31 @@ anything upstream of generated modules invalidates all of them** — settle ever
 before starting a long generated build.
 
 That second corollary has teeth, and it was ignored at M07 for the price of 28 hours of processor
-time: Lake's traces are **content-based**, so a *comment* in a module the certificates import re-checks
-every one of them. Two consequences now built into the layout:
+time. **Which edits reach the dependents was measured at M11, and it is not what the rule used to
+say.** Lake takes a module's own trace from its *source*, and its dependents' traces from the
+resulting **`.olean`** — so the two questions have different answers:
 
-* **Nothing written to be read by a human goes in a module a certificate imports.** Diagnostics live
-  downstream in `Sat/Diagnose.lean`, where they can be rewritten for the cost of one file. The
-  upstream modules — `Sat/Mask.lean`, `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean` — are settled, and
-  changing any byte of them is a decision about hours, not about a docstring.
+| edit to an upstream module | that module | its dependents |
+|---|---|---|
+| a `-- line comment`, anywhere, including inside a proof | re-elaborates | **not rebuilt** — the `.olean` is byte-identical |
+| a `/-- docstring -/` or a `/-! module doc -/` | re-elaborates | **rebuilt** — doc strings are environment data |
+| a declaration, or any change to one | re-elaborates | rebuilt |
+
+Doc comments are queryable data and therefore part of the artifact; `--` comments are not. Three
+consequences, the first two now built into the layout:
+
+* **Nothing written to be read by a human goes in a module a certificate imports** — *unless it is a
+  `--` comment*, which is free downstream. Diagnostics still live downstream in `Sat/Diagnose.lean`,
+  where they can be rewritten for the cost of one file. The upstream modules — `Sat/Mask.lean`,
+  `Sat/ClauseTable.lean`, `Sat/MaskCheck.lean` — are settled, and changing a *declaration or a
+  docstring* there is a decision about hours.
 * **Deleting a generated `.c` under `.lake/build/ir/` invalidates the module**, exactly as deleting
   its `.olean` would: `leanArts` covers both. Tidying `ir/` queues a full rebuild of everything under
   it, which is not what it looks like it does.
+* **Prose in a frozen module is affordable after all**, if written as `--`. `Instances/DeGrey/
+  Split.lean`'s stale reference to a deleted theorem — recorded in `ARCHITECTURE.md` § 4 as a
+  15-hour correction not worth making — is a `/-!` block, so it really does cost that. Written as
+  `--` it would have cost the module's own re-elaboration and nothing else.
 
 **`lake env lean <file>` is faster than `lake build` and it is not the same check.** It does not
 apply the lakefile's options, so `autoImplicit := false` is not in force: a stray identifier is

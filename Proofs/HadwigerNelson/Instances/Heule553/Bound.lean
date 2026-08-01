@@ -44,17 +44,17 @@ private theorem heule553_pinCube : pinCube heule553Ports ![0, 1, 2] = heule553Cu
 /-- **The refutation**: the three triangle vertices are not all differently coloured — which for a
 triangle is impossible, and that is the contradiction. One certificate covers all `4! = 24`
 relabellings, by colour symmetry. -/
-def heule553Refuted : Gadget 553 3 heule553.edges heule553Ports :=
+def heule553Refuted : Gadget 4 553 3 heule553.edges heule553Ports :=
   Gadget.ofUnsat ![0, 1, 2] (by rw [heule553_pinCube]; exact heule553_unsat)
 
 /-- **The triangle**: its three edges, each forbidding its ends from agreeing. -/
-def heule553Triangle : Gadget 553 3 heule553.edges heule553Ports :=
+def heule553Triangle : Gadget 4 553 3 heule553.edges heule553Ports :=
   (Gadget.edge 0 1 (edgeGraph_adj_of_mem (by decide) (by decide))).inter
     ((Gadget.edge 0 2 (edgeGraph_adj_of_mem (by decide) (by decide))).inter
       (Gadget.edge 1 2 (edgeGraph_adj_of_mem (by decide) (by decide))))
 
 /-- **The four constraints, composed.** `#eval heule553Gadgets.survivors` when this stops refuting. -/
-def heule553Gadgets : Gadget 553 3 heule553.edges heule553Ports := heule553Refuted.inter heule553Triangle
+def heule553Gadgets : Gadget 4 553 3 heule553.edges heule553Ports := heule553Refuted.inter heule553Triangle
 
 -- The `fail` branch is unreachable *when the gadgets refute*, which is when the linter runs.
 set_option linter.unreachableTactic false in

@@ -6,6 +6,7 @@ import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion
+import Proofs.HadwigerNelson.Pattern
 import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.Fractional
 import Proofs.HadwigerNelson.FractionalSpec

@@ -42,11 +42,11 @@ private theorem halfA_pinCube : pinCube ![(14 : Fin 1581), 11] ![0, 1] = halfACu
 /-- The forcing fact both copies share: pinning the shared vertex and a copy's endpoint to
 *different* colours leaves that copy 4-uncolourable. One certificate, and by colour symmetry it
 covers all twenty-four relabellings. -/
-def deGreyForced : Gadget 1581 2 deGreyHalfAEdges ![14, 11] :=
+def deGreyForced : Gadget 4 1581 2 deGreyHalfAEdges ![14, 11] :=
   Gadget.ofUnsat ![0, 1] (by rw [halfA_pinCube]; exact halfA_unsat)
 
 /-- **The first copy forces its end of the joining edge to the shared vertex's colour.** -/
-def deGreyForcedA : Gadget 1581 3 deGreyRotEdges deGreyPorts :=
+def deGreyForcedA : Gadget 4 1581 3 deGreyRotEdges deGreyPorts :=
   (deGreyForced.mono deGreyRot_halfA_subset).widen ![0, 1] (by decide)
 
 /-- **The second copy forces its end to the shared vertex's colour too — from the same certificate.**
@@ -54,13 +54,13 @@ def deGreyForcedA : Gadget 1581 3 deGreyRotEdges deGreyPorts :=
 The two `by decide`s are the mathematics: the rotation **fixes vertex 14**, the copies' shared vertex,
 and **sends vertex 11 to vertex 802**, the other end of the joining edge. Nothing else about the
 second copy is asserted anywhere. -/
-def deGreyForcedB : Gadget 1581 3 deGreyRotEdges deGreyPorts :=
+def deGreyForcedB : Gadget 4 1581 3 deGreyRotEdges deGreyPorts :=
   (deGreyForced.transport deGreyPhi deGreyRot_adj_map (pt := ![14, 802]) (by decide)).widen
     ![0, 2] (by decide)
 
 /-- **The joining edge forbids its two ends from agreeing.** The base gadget: no certificate, no
 computation. -/
-def deGreyJoin : Gadget 1581 3 deGreyRotEdges deGreyPorts :=
+def deGreyJoin : Gadget 4 1581 3 deGreyRotEdges deGreyPorts :=
   Gadget.edge 1 2 (edgeGraph_adj_of_mem (by decide) deGreyRot_cross_mem)
 
 /-- **The three constraints, composed.** `Instances/DeGrey/Bound.lean` shows they admit nothing.
@@ -69,7 +69,7 @@ Named, and living in *this* module rather than beside the theorem that consumes 
 when that theorem fails this module still builds, so the directive its failure prints — `#eval
 deGreyGadgets.survivors` — can actually be run. A diagnostic that is only reachable from a module
 that does not compile is not a diagnostic. -/
-def deGreyGadgets : Gadget 1581 3 deGreyRotEdges deGreyPorts :=
+def deGreyGadgets : Gadget 4 1581 3 deGreyRotEdges deGreyPorts :=
   deGreyForcedA.inter (deGreyForcedB.inter deGreyJoin)
 
 end HadwigerNelson
