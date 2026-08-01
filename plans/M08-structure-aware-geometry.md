@@ -353,24 +353,60 @@ de Grey's size.
 
 ```
 pack x.re − pack y.re = M · (pack y.im − pack x.im)
-|LHS| ≤ M − 2 < M  ⇒  both sides are 0  ⇒  the halves agree  ⇒  recurse
+M divides the left side, and |left side| < M  ⇒  it is 0  ⇒  the halves agree  ⇒  recurse
 ```
 
-The invariant that makes both inductions close, and the one arithmetic detail worth settling in the
-plan rather than discovering in a goal state:
+The invariant that carries both inductions:
 
 ```
-2 * |pack x| + 2 ≤ 2 ^ (laneBits * width x)          under   2 * b + 2 ≤ 2 ^ laneBits
+2 * |pack x| < 2 ^ (laneBits * width x)          under   2 * b < 2 ^ laneBits
 ```
 
-*leaf* (`width = 1`, `pack = id`): `2|z| + 2 ≤ 2b + 2 ≤ 2^laneBits`. ✓
-*node* (`M = 2 ^ (laneBits * w)`): `2|pack| + 2 ≤ (M − 2) + M(M − 2) + 2 = M² − M ≤ M²`. ✓
+*leaf* (`width = 1`, `pack = id`): `2|z| ≤ 2b < 2^laneBits`. ✓
+*node* (`M = 2 ^ (laneBits * w)`): `2|pack| ≤ (M − 1) + M(M − 1) = M² − 1 < M²`. ✓
 
-The `+ 2` is load-bearing at both ends — with a bare `<` the node step fails by exactly one, and the
-injectivity step needs `|pack x.re − pack y.re| ≤ M − 2 < M` to conclude that a multiple of `M` is
-zero. This is the shape that survived; two nearby ones did not.
+**Integrality is doing the work in that second line, and the first version of this plan missed it.**
+`2|a| < M` over `ℤ` means `2|a| ≤ M − 1`; over `ℚ` the node step would fail and the statement would
+need slack. The plan carried a `+ 2` in four places to buy that slack. It is not needed, it is gone,
+and the strict form is what shipped.
 
-Budget: ~150 lines. Beyond that, § 8.
+**Both lemmas are proved** — during the pass, not deferred to implementation — together with the two
+witnesses that break them if the digit bound is weakened from `2 * |a| < M` to `|a| < M`:
+`M = 4, a = b = 3` for the first, and `3 + 4·0 = −1 + 4·1` for the second. The milestone's arithmetic
+core is closed; what remains is plumbing.
+
+### 3.2.6 Obligation pass, 2026-07-31 — the existential is right, and the `+ 2` was not
+
+**The two digit lemmas closed here rather than in implementation**, which is the pass's main result:
+§ 3.2 above is now a record of finished work, the over-hedged `+ 2` is deleted from four statements,
+and the mutation audit that certifies the digit bound load-bearing is committed beside them.
+
+**Two lemmas about one walk became one lemma.** *Choice:* `packOk_get` returns a conjunction — the
+packed value agrees *and* the point is in bounds. *Alternative:* `packOk_pack` and `packOk_bnd`
+separately, as the skeleton had them. *Why this one:* they are the same induction over the same pair
+of tables, so two lemmas means walking the tables twice in the proofs to state what one walk in the
+definition established. *Confidence: high.*
+
+**Every pointwise lemma holds at every index, in range or out, and none of them says so as a
+hypothesis.** That is a dividend of `packOk` demanding matching shapes: `PtTable.get` and
+`IntTable.get` are total and truncate out of range, and two tables of the same shape truncate
+*identically*, following the same path for any index whatever. So no range hypothesis appears
+anywhere in this milestone — which was not designed for and is worth stating, because the obvious
+alternative (`∀ i < n`) would have threaded a bound through every lemma and every use.
+
+**The existential in `edgesOk_mem` is the right strength, not a weakening.** *Choice:* "every edge is
+paired with *some* key whose packed difference is its endpoints'". *Alternative:* carry the key list
+position, so each edge is tied to its own key. *Why this one:* the key is an intermediary — it is
+used only to reach `w.diffs.get k`, and `normsOk_get` holds at *every* index, so the argument never
+needs to know which key an edge got. Threading positions would add an index to an induction with no
+use for one. *Confidence: high — the composition in § 3.2 goes through with the existential and gains
+nothing from the stronger form.*
+
+**One named joint per step.** `edge_distSq` is extracted as its own lemma, stated over raw `Nat`
+indices and a bare table with no certificate in sight, because none of its content is about
+certificates: packed difference matches checked difference → linearity → injectivity → the norm.
+Soundness above it is then four lines — unpack, take an edge, get its key, apply — and `hverts`
+enters exactly once, on the first line, to rewrite `c.verts e` into `t.get e.val`.
 
 ### 3.2.5 Domain pass, 2026-07-31 — the class wanted no algebra, and the witness wanted no vertices
 

@@ -31,7 +31,8 @@ Everything below is base-`2^laneBits` positional notation with small digits:
   coordinates — are two-lane shapes, which is why both are instances and neither is a special case.
 * `two_digit_le` and `two_digit_inj` are the *whole* arithmetic content: a two-digit numeral with
   small digits fits its width, and its digits are recoverable from it. Every `pack_le` and
-  `pack_inj` below is one of those two lemmas applied, never re-argued.
+  `pack_inj` below is one of those two lemmas applied, never re-argued — and both are proved, with
+  the witnesses that break them if their digit bound is weakened.
 * The per-edge check is *"the difference of two numerals is a third numeral"*, which is one
   subtraction precisely because positional notation is linear.
 
@@ -47,8 +48,8 @@ so nothing downstream of a certificate changes shape.
 ## The lane arithmetic, stated once
 
 A vertex leaf is bounded by `vertexBound = 2^29`, so a difference of two is within `2^30`, and the
-one condition the digit lemmas ask — `2 * b + 2 ≤ 2 ^ laneBits` — holds at `2^31 + 2 ≤ 2^32`.
-De Grey's largest leaf is **1920**, so the margin is eighteen binary orders.
+one condition the digit lemmas ask — `2 * b < 2 ^ laneBits` — holds at `2^31 < 2^32`. De Grey's
+largest leaf is **1920**, so the margin is eighteen binary orders.
 
 **Width is not free, and the instinct that it would be was measured wrong.** Big-integer arithmetic
 is indeed one reduction step at any size, but wider lanes mean wider literals, and 64-bit lanes cost
@@ -80,19 +81,43 @@ them; nothing re-argues them. -/
 
 /-- **A two-digit numeral in base `M` fits in `M²`**, when each digit fits in half of `M`.
 
-The `+ 2` is not slack. The step is `(M − 2) + M(M − 2) + 2 = M² − M ≤ M²`, and the same statement
-with a bare `<` fails by exactly one. -/
-theorem two_digit_le {M a b : Int} (hM : 0 < M)
-    (ha : 2 * |a| + 2 ≤ M) (hb : 2 * |b| + 2 ≤ M) :
-    2 * |a + M * b| + 2 ≤ M * M := by sorry
+Integrality is what makes the bound exact: `2|a| < M` over `ℤ` is `2|a| ≤ M − 1`, so
+`2|a + Mb| ≤ (M − 1) + M(M − 1) = M² − 1`. Over `ℚ` the same statement would be false, and the first
+version of this lemma carried a `+ 2` of slack to avoid noticing that. -/
+theorem two_digit_le {M a b : Int} (hM : 0 < M) (ha : 2 * |a| < M) (hb : 2 * |b| < M) :
+    2 * |a + M * b| < M * M := by
+  have h1 : |a + M * b| ≤ |a| + M * |b| := by
+    calc |a + M * b| ≤ |a| + |M * b| := abs_add_le _ _
+      _ = |a| + M * |b| := by rw [abs_mul, abs_of_pos hM]
+  nlinarith [abs_nonneg a, abs_nonneg b]
 
 /-- **A two-digit numeral in base `M` determines its digits**, when the low digits fit in half of
-`M`. The high digits need no bound of their own: once the low ones agree, `M * (b − d) = 0`.
+`M`. The high digits need no bound of their own: `M` divides `a − c`, which is smaller than `M`, so
+`a = c` — and then `M * (d − b) = 0`.
 
-This is `pack_inj` at every level of the tower and at `Pt` — one argument, three citations. -/
-theorem two_digit_inj {M a b c d : Int} (hM : 0 < M)
-    (ha : 2 * |a| + 2 ≤ M) (hc : 2 * |c| + 2 ≤ M)
-    (h : a + M * b = c + M * d) : a = c ∧ b = d := by sorry
+This is `pack_inj` at every level of the tower and at `Pt`: one argument, three citations. -/
+theorem two_digit_inj {M a b c d : Int} (hM : 0 < M) (ha : 2 * |a| < M) (hc : 2 * |c| < M)
+    (h : a + M * b = c + M * d) : a = c ∧ b = d := by
+  have key : a - c = M * (d - b) := by linarith
+  have hlt : |a - c| < M := by
+    have h1 : |a - c| ≤ |a| + |c| := abs_sub a c
+    omega
+  have hac : a = c := by
+    have h0 : a - c = 0 := Int.eq_zero_of_abs_lt_dvd ⟨d - b, key⟩ hlt
+    omega
+  refine ⟨hac, ?_⟩
+  have hz : M * (d - b) = 0 := by omega
+  rcases mul_eq_zero.mp hz with h' | h' <;> omega
+
+/-! **The mutation audit for the two lemmas above.** Each is false with its digit bound weakened from
+`2 * |a| < M` to `|a| < M`, and here is the pair of witnesses that says so — without them the bound
+could be decoration. -/
+
+-- `two_digit_le` fails at `M = 4, a = b = 3`: each digit fits in `M`, the numeral does not fit `M²`.
+#guard 2 * ((3 : Int) + 4 * 3).natAbs ≥ 4 * 4
+
+-- `two_digit_inj` fails at `M = 4`: two different digit pairs, each digit inside `M`, one numeral.
+#guard ((3 : Int) + 4 * 0) = (-1) + 4 * 1
 
 /-! ## Packable
 
@@ -135,11 +160,12 @@ class Packable (K : Type) where
   pack_sub : ∀ x y : K, pack (sub x y) = pack x - pack y
   /-- A difference of bounded values is bounded, doubled. -/
   bnd_sub : ∀ (b : Int) (x y : K), bnd b x = true → bnd b y = true → bnd (2 * b) (sub x y) = true
-  /-- **The lane bound** — `two_digit_le`, lifted. -/
-  pack_le : ∀ (b : Int) (x : K), 2 * b + 2 ≤ 2 ^ laneBits → bnd b x = true →
-    2 * |pack x| + 2 ≤ 2 ^ (laneBits * width)
+  /-- **The lane bound** — `two_digit_le`, lifted. It is exactly the strengthening `pack_inj` needs
+  to get through its own induction step, which is why the two travel together. -/
+  pack_le : ∀ (b : Int) (x : K), 2 * b < 2 ^ laneBits → bnd b x = true →
+    2 * |pack x| < 2 ^ (laneBits * width)
   /-- **Injectivity on bounded values** — `two_digit_inj`, lifted, and the load-bearing law. -/
-  pack_inj : ∀ (b : Int) (x y : K), 2 * b + 2 ≤ 2 ^ laneBits →
+  pack_inj : ∀ (b : Int) (x y : K), 2 * b < 2 ^ laneBits →
     bnd b x = true → bnd b y = true → pack x = pack y → x = y
 
 namespace Packable
@@ -294,7 +320,7 @@ def edgesOk (w : DiffWitness n) : List (Fin n × Fin n) → List ℕ → Bool
 
 `t` is the certificate's own vertex table; `UDCert.valid_of_diffWitness` is what ties it to `c`. The
 difference bound is `2 * vertexBound`, because a difference of two vertices within `vertexBound`
-lands there and `2 * (2 * vertexBound) + 2 ≤ 2 ^ laneBits`. -/
+lands there and `2 * (2 * vertexBound) < 2 ^ laneBits`. -/
 def Check (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool :=
   packOk vertexBound t w.packedV
     && packOk (2 * vertexBound) w.diffs w.packedD
@@ -304,26 +330,55 @@ def Check (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool :=
 /-! ### What the walks establish, extracted once
 
 The soundness proof needs each walk in pointwise form, and so does every diagnostic. Each is proved
-by the induction its own recursion performs. -/
+by the induction its own recursion performs — `fun_induction` on the definition, so the proof's cases
+are the definition's cases.
 
-/-- Same shape, so `get` at an index means the same entry in both tables. -/
-theorem packOk_pack {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
-    u.get i = Packable.pack (t.get i) := by sorry
+**Every one of these holds at *every* `Nat` index, in range or not**, and that is a dividend of
+demanding matching shapes rather than a coincidence. `PtTable.get` and `IntTable.get` are total: out
+of range they truncate. Two tables of the *same shape* truncate identically, following the same path
+for any index whatever — so no lemma here carries a range hypothesis, and neither does anything
+downstream of them. -/
 
-/-- …and every entry is inside the bound. -/
-theorem packOk_bnd {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
-    Packable.bnd b (t.get i) = true := by sorry
+/-- **What one walk of a point table against its packing establishes**, at every index: the packed
+value is the packing, and the point is inside the bound.
 
-/-- `normsOk` in pointwise form — at every index, including out of range, since `PtTable.get` is
-total and every leaf was checked. -/
+One lemma and not two. The two facts have the same induction over the same pair of tables, and
+splitting them would mean walking the tables twice in the proof to say two things established by one
+walk in the definition. -/
+theorem packOk_get {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
+    u.get i = Packable.pack (t.get i) ∧ Packable.bnd b (t.get i) = true := by sorry
+
+/-- `normsOk` in pointwise form — every index, by the same argument. -/
 theorem normsOk_get {target : Q4} {t : PtTable} (h : normsOk target t = true) (i : ℕ) :
     (t.get i).normSq = target := by sorry
 
-/-- `edgesOk` in pointwise form: every edge in the list is paired with some key, and its endpoints'
-packed difference is that key's packed difference. -/
+/-- `edgesOk` in pointwise form: every edge in the list is paired with *some* key whose packed
+difference is its endpoints'.
+
+**The existential is the right strength, not a weakening.** The key is an intermediary: it is used
+only to reach `w.diffs.get k`, and `normsOk_get` holds at *every* index — so the argument never needs
+to know which key an edge got, and asking for it would mean threading list positions through an
+induction that has no use for them. -/
 theorem edgesOk_mem {w : DiffWitness n} {es : List (Fin n × Fin n)} {ks : List ℕ}
     (h : w.edgesOk es ks = true) (e : Fin n × Fin n) (he : e ∈ es) :
     ∃ k, w.packedV.get e.1.val - w.packedV.get e.2.val = w.packedD.get k := by sorry
+
+/-- **The per-edge step, isolated** — the one joint where the packing is actually cashed in.
+
+Read as an argument: the two endpoints' packed values differ by a checked difference's packed value
+(`hk`); packing is linear, so that difference *is* the packing of the endpoints' difference; packing
+is injective on bounded points, so the endpoints' difference *is* that checked difference; and a
+checked difference has the right squared length. The bound travels from the vertices to their
+difference by `Packable.bnd_sub`, which is why the hypothesis is stated at `2 * b`.
+
+Stated over raw `Nat` indices and a bare table, with no certificate in sight, because none of it is
+about certificates. -/
+theorem edge_distSq {b : Int} {t : PtTable} {w : DiffWitness n} {target : Q4}
+    (hlane : 2 * (2 * b) < 2 ^ laneBits)
+    (hV : packOk b t w.packedV = true) (hD : packOk (2 * b) w.diffs w.packedD = true)
+    (hN : normsOk target w.diffs = true) (i j k : ℕ)
+    (hk : w.packedV.get i - w.packedV.get j = w.packedD.get k) :
+    (t.get i).distSq (t.get j) = target := by sorry
 
 end DiffWitness
 
@@ -331,8 +386,13 @@ end DiffWitness
 the per-edge route produces, from data that costs an order of magnitude less to verify.
 
 `hverts` says the vertex table is the certificate's own, and is `rfl` for every emitted certificate —
-the same arrangement `UDCert.valid_of_chunks` makes with its join hypothesis. `h` is a closed `Bool`
-the kernel decides. Nothing else about the witness is assumed. -/
+the same arrangement `UDCert.valid_of_chunks` makes with its join hypothesis. It enters the proof
+exactly once, at the first line, to rewrite `c.verts e` into `t.get e.val` so that everything
+`packOk_get` established about `t` applies. `h` is a closed `Bool` the kernel decides. Nothing else
+about the witness is assumed.
+
+The proof is four lines: unpack the four conjuncts, take an edge, get its key from `edgesOk_mem`,
+apply `edge_distSq`. Every joint above it is a named lemma with a stated type. -/
 theorem UDCert.valid_of_diffWitness {n : ℕ} (c : UDCert n) (t : PtTable) (w : DiffWitness n)
     (hverts : c.verts = t.toVerts) (h : w.Check t c = true) : c.Valid = true := by sorry
 
