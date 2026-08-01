@@ -309,6 +309,93 @@ countermodels (a fan over the pivot itself, an empty fan on a graph that *is* 3-
 fan at four colours, the rhombus at width one, and a non-vacuous `Separated`). A definition that
 drifted toward something vacuous would pass every positive and fail every negative.
 
+## 3.0.1 The obligation pass — what it changed
+
+**The producer needed no new encoding, and finding that saved 28 hours.** The skeleton encoded a fan
+directly: pin the pivot to colour `0`, then one *negative* unit clause per partner (`avoidCNF`). The
+assignment bridge that would justify those clauses (`ofColoring`, `colorFn`) is private to
+`Sat/Encoding.lean`, so the lemma had to live there — and **1,432 of this repository's 1,494 modules
+depend on that file**, 1,406 of them generated certificate modules. A new declaration there is
+exactly the rebuild M07 paid 28 hours for.
+
+The statement that avoids it:
+
+> **A fan is a colourability question about a bigger graph.** Join the pivot to every partner; a
+> proper colouring of the join is precisely a proper colouring of the original that separates the
+> pivot from all of them. So "no colouring separates them" *is* "the join has no colouring".
+
+`Fan.of_unsat` becomes one line over `not_colorable_of_unsat`, which M03 already shipped. `avoidCNF`
+is deleted. Proved in a probe before it was written down.
+
+**The converse is a separate statement and it is load-bearing.** `fan_iff_not_colorable` needs
+`p ∉ Q` — a pivot listed among its own partners makes the fan trivially true while adding no edge to
+the join — and without the converse a search reporting "not a fan" would be reporting on a different
+question than the theorems consume.
+
+**The colour-symmetry lemma was found and then made unnecessary.** Mathlib has
+`SimpleGraph.recolorOfEquiv` (in `Coloring/Vertex.lean` — `Coloring.lean` itself was deprecated on
+2026-04-02 and is now a re-export, which is why this was grepped rather than recalled). The
+reduction above needs no permutation argument at all, so the better outcome was not using it.
+
+**Decidability, measured on all nine spec examples.** Positives close by `Fan.of_edges` and
+`decide +kernel` at `3⁴ = 81` and `4⁴ = 256` cases. Negatives need explicit countermodels, because
+`edgeGraph` deliberately has no `DecidableRel .Adj`: validity discharges by
+`simp only [edgeGraph_adj]; decide`, and the contradiction by
+`simp only [SimpleGraph.Coloring.mk]` then `decide` — both patterns M13 already established.
+
+### The mutation audit, run rather than planned
+
+| perturbation | wanted | got |
+|---|---|---|
+| `Fan` with the quantifiers swapped (`∃ q ∈ Q, ∀ C` instead of `∀ C, ∃ q ∈ Q`) | provably **false** on an instance where the real definition holds | **false**, refuted by the two colourings that make the width honest |
+| `hpiv` dropped from the closing lemma | proof breaks | breaks — the missing step *is* `hpiv` |
+
+The first is the sharpest control in the milestone and it is now a permanent example in the module.
+The swapped version is strictly stronger — it says a specific partner is forced — **and it is what
+M13's oracle tested for.** So the negative result M13 reported is not merely a search that came up
+empty; it is a search for a property that fails on de Grey's own building block, and one line in
+this file now says so in a form the kernel checks.
+
+### PROVE / TEST / ASSUME
+
+* **Prove** — the ladder, the three producers, and `fan_iff_not_colorable`. All in Lean, all
+  kernel-checked, axioms audited.
+* **Test** — the nine specification examples (five of them countermodels), the quantifier-order
+  control, and the tool's control table.
+* **Assume** — nothing new. The geometry is `UDCert`'s as before, and `cadical` stays untrusted
+  because its certificate is re-checked.
+
+### What the tool is allowed to claim
+
+Three obligations, each written because the opposite has shipped here before:
+
+* **`shrink_fan` earns "irredundant", never "minimum".** It may claim: the kept set is a fan, and
+  for every member, dropping it is verified *not* a fan. It may **not** claim minimality — § 0(e)
+  measured a greedy-plus-single-drop result of 3 on a configuration whose true minimum is 1. Any
+  "narrowest" claim has to come from the implicit-hitting-set loop, and is labelled with which one
+  produced it.
+* **`UNKNOWN` never folds into either answer.** A timeout while testing a drop must not be read as
+  "still a fan" (the width would be reported too small, and the claim would be *false*) nor silently
+  as "not a fan" (too large, merely wrong). `shrink_fan` returns the unsettled list alongside the
+  kept set, and the printed line states the unsettled count whether or not it is zero — M13's
+  `report_universe` pattern.
+* **Controls are a data table, not repeated code, over one shared graph.** Two of this session's
+  own controls were miswritten and both read as tool bugs: one indexed the rhombus by hand and hit
+  an edge rather than the far pair (the tool and Lean number it differently), and one repeated the
+  same colour count on two rows so the four-colour case never ran. Both classes disappear when each
+  control is a `(graph, pivot, partners, colours, expected)` row consumed by one runner, and the
+  graph comes from a single source rather than a second transcription.
+
+### The measure, stated honestly
+
+There is **no monotone per-pivot quantity** — § 0(k) measured the fan at de Grey's own pivot staying
+at width 3 across the spindle that creates his forced pair elsewhere. What *is* monotone is global:
+`Fan.mono` says adding edges preserves a fan, so `min over all pivots and partner sets of the width`
+is non-increasing under every growth move. That buys safety — no growth move can destroy progress —
+and it does **not** buy guidance, because the minimum is measured flat at 3 across everything M13
+reached. Evaluating it costs a full pivot sweep, and this plan states that there is no cheaper
+proxy rather than implying one.
+
 ## 3. The shape — tools
 
 `tools/forcer.py` gains the fan, and `forces` becomes its width-1 special case:

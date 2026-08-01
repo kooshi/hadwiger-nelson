@@ -150,26 +150,46 @@ theorem not_colorable_of_spindled_fan {p : V} {Q : List V} (φ ψ : G →g H) (h
     ¬ H.Colorable k := by
   sorry
 
-/-! ## The producers -/
+/-! ## The producers
 
-open Std.Sat in
-/-- The clauses forbidding each listed vertex from taking colour `c` — one negative unit each.
+**A fan is a colourability question about a bigger graph**, and that one observation is what makes
+this module cost nothing. Join the pivot to every partner: a proper colouring of the join is exactly
+a proper colouring of the original that separates the pivot from all of them. So "no colouring
+separates them" *is* "the join has no colouring", and every existing consumer of an unsatisfiable
+certificate applies unchanged.
 
-`cubeCNF` can only say "this vertex *has* that colour"; a fan's refutation needs the negation at
-every partner, and a negative unit clause is the whole of it. -/
-def avoidCNF (k : ℕ) {n : ℕ} (Q : List (Fin n)) (c : ℕ) : Std.Sat.CNF ℕ :=
-  ⟨(Q.map fun q => [(colorVar k q.val c, false)]).toArray⟩
+Measured at M14 subplanning, because the alternative was expensive: encoding the fan directly needs
+clauses saying *no* partner takes the pivot's colour, and the assignment bridge that would justify
+them is private to `Sat/Encoding.lean` — a module **1,432 of this repository's 1,494 modules depend
+on**, 1,406 of them generated certificates. Adding a declaration there is the 28-hour rebuild M07
+paid once. The reduction below costs nothing and needs no new encoding at all. -/
+
+/-- **The pivot joined to every partner.** -/
+def fanEdges {n : ℕ} (E : List (Fin n × Fin n)) (p : Fin n) (Q : List (Fin n)) :
+    List (Fin n × Fin n) :=
+  E ++ Q.map fun q => (p, q)
+
+/-- **A fan is the join's uncolourability.** The producer everything else routes through. -/
+theorem Fan.of_not_colorable {n k : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
+    (h : ¬ (edgeGraph n (fanEdges E p Q)).Colorable k) : Fan (edgeGraph n E) k p Q := by
+  sorry
 
 /-- **A fan straight from a refutation** — the producer that scales, and the one the search emits.
-
-Colour names are arbitrary, so pinning the pivot to colour `0` refutes every colouring that
-separates it from all of `Q`, not merely those that happen to paint it `0`. The colour count is
-`k + 1` because the argument names one colour and so needs one to exist; a literal `4` or `5`
-unifies with it. -/
+One certificate, over the joined edge list, checked by the machinery M03 already ships. -/
 theorem Fan.of_unsat {n k : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
-    (h : (coloringCNF (k + 1) n E ++ cubeCNF (k + 1) n [(p, 0)] ++
-          avoidCNF (k + 1) Q 0).Unsat) :
-    Fan (edgeGraph n E) (k + 1) p Q := by
+    (h : (coloringCNF k n (fanEdges E p Q)).Unsat) (hk : 0 < k := by norm_num) :
+    Fan (edgeGraph n E) k p Q :=
+  Fan.of_not_colorable (not_colorable_of_unsat h hk)
+
+/-- **The converse, and it is what makes a negative answer mean anything.** A search reporting "not
+a fan" is reporting that the join *is* colourable, and without this direction that report would be
+about a different question than the one the theorems consume.
+
+`p ∉ Q` is genuinely needed: a pivot listed among its own partners makes the fan trivially true
+while adding no edge to the join, so the two sides come apart at exactly the adversarial member this
+module admits on purpose. -/
+theorem fan_iff_not_colorable {n k : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
+    (hp : p ∉ Q) : Fan (edgeGraph n E) k p Q ↔ ¬ (edgeGraph n (fanEdges E p Q)).Colorable k := by
   sorry
 
 /-- **A fan from exhausting the colourings** — no solver, no certificate, ceiling `k ^ n`, so it is
@@ -240,6 +260,23 @@ example : Fan (edgeGraph 4 rhombus) 3 0 [3] := by
 
 /-- **Separation is not vacuous either**: the rhombus separates two adjacent corners. -/
 example : Separated (edgeGraph 4 rhombus) 3 0 1 := by
+  sorry
+
+/-! ### The quantifier-order control
+
+The single most valuable line in this file. `Fan` says *every colouring agrees with some partner*;
+swapping the quantifiers says *some partner is agreed with by every colouring*, which is a forced
+pair wearing a list. The second is strictly stronger, it is what M13's search tested for, and it is
+**false** on the very instance the first one holds for — so the two are not variants of one idea and
+a definition that drifted from one to the other would be caught here and nowhere else. -/
+
+/-- The mutation: quantifiers the other way round. Defined only to be refuted. -/
+def FanSwapped (G : SimpleGraph V) (k : ℕ) (p : V) (Q : List V) : Prop :=
+  ∃ q ∈ Q, ∀ C : G.Coloring (Fin k), C p = C q
+
+/-- **The mutation is false where the definition is true.** The two refuting colourings are exactly
+the pair that made the width honest above. -/
+example : ¬ FanSwapped (edgeGraph 4 pendantTriangle) 3 3 [1, 2] := by
   sorry
 
 end HadwigerNelson
