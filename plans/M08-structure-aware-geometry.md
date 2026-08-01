@@ -292,11 +292,10 @@ elaborates before proof effort is spent.
 
 ```lean
 /-- **The whole arithmetic content of the milestone**, about integers, proved once. -/
-theorem two_digit_le {M a b : Int} (hM : 0 < M)
-    (ha : 2 * |a| + 2 ≤ M) (hb : 2 * |b| + 2 ≤ M) : 2 * |a + M * b| + 2 ≤ M * M
+theorem two_digit_lt {M a b : Int} (hM : 0 < M) (ha : 2 * |a| < M) (hb : 2 * |b| < M) :
+    2 * |a + M * b| < M * M
 
-theorem two_digit_inj {M a b c d : Int} (hM : 0 < M)
-    (ha : 2 * |a| + 2 ≤ M) (hc : 2 * |c| + 2 ≤ M)
+theorem two_digit_inj {M a b c d : Int} (hM : 0 < M) (ha : 2 * |a| < M) (hc : 2 * |c| < M)
     (h : a + M * b = c + M * d) : a = c ∧ b = d
 
 /-- Bits per lane. Measured, not chosen: 64 costs 28% more per edge. -/
@@ -306,14 +305,14 @@ def laneBits : ℕ := 32
 class Packable (K : Type) where
   pack  : K → Int
   width : ℕ
-  bnd   : Int → K → Bool
+  bounded : Int → K → Bool
   sub   : K → K → K                      -- a field, not an inherited `Sub`
-  pack_sub : ∀ x y, pack (sub x y) = pack x - pack y
-  bnd_sub  : ∀ b x y, bnd b x → bnd b y → bnd (2 * b) (sub x y)
-  pack_le  : ∀ b x, 2 * b + 2 ≤ 2 ^ laneBits → bnd b x →
-    2 * |pack x| + 2 ≤ 2 ^ (laneBits * width)
-  pack_inj : ∀ b x y, 2 * b + 2 ≤ 2 ^ laneBits →
-    bnd b x → bnd b y → pack x = pack y → x = y
+  pack_sub    : ∀ x y, pack (sub x y) = pack x - pack y
+  bounded_sub : ∀ b x y, bounded b x → bounded b y → bounded (2 * b) (sub x y)
+  pack_le     : ∀ b x, 2 * b < 2 ^ laneBits → bounded b x →
+    2 * |pack x| < 2 ^ (laneBits * width)
+  pack_inj    : ∀ b x y, 2 * b < 2 ^ laneBits →
+    bounded b x → bounded b y → pack x = pack y → x = y
 
 instance instInt : Packable Int                                        -- one digit
 instance instAdjoin [Packable K] : Packable (Adjoin d K)               -- two lanes
@@ -334,12 +333,12 @@ structure DiffWitness (n : ℕ) where
   packedD : IntTable        -- same shape as `diffs`
   keys    : List ℕ          -- one per edge, in the certificate's edge order
 
-def DiffWitness.Check (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool
+def DiffWitness.Certifies (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool
 
 /-- **Soundness.** The same `Valid = true` the old route produced, from data that costs an order of
 magnitude less to verify. -/
 theorem UDCert.valid_of_diffWitness (c : UDCert n) (t : PtTable) (w : DiffWitness n)
-    (hverts : c.verts = t.toVerts) (h : w.Check t c = true) : c.Valid = true
+    (hverts : c.verts = t.toVerts) (h : w.Certifies t c = true) : c.Valid = true
 ```
 
 The four checks are separate `def`s so each can be a separate `decide +kernel` in a separate module
@@ -375,40 +374,66 @@ witnesses that break them if the digit bound is weakened from `2 * |a| < M` to `
 `M = 4, a = b = 3` for the first, and `3 + 4·0 = −1 + 4·1` for the second. The milestone's arithmetic
 core is closed; what remains is plumbing.
 
-### 3.2.6 Obligation pass, 2026-07-31 — the existential is right, and the `+ 2` was not
+### 3.3 `Proofs/HadwigerNelson/PackedDiagnose.lean` — new, downstream, never imported by a certificate
 
-**The two digit lemmas closed here rather than in implementation**, which is the pass's main result:
-§ 3.2 above is now a record of finished work, the over-hedged `+ 2` is deleted from four statements,
-and the mutation audit that certifies the digit bound load-bearing is committed beside them.
+`Certifies` returns one `Bool` over four walks — 1,581 vertex/packing pairs, 133 difference/packing
+pairs, 133 norm identities, and 7,877 edge/key pairs — and the kernel can only say no. The compiled
+diagnostic says which:
 
-**Two lemmas about one walk became one lemma.** *Choice:* `packOk_get` returns a conjunction — the
-packed value agrees *and* the point is in bounds. *Alternative:* `packOk_pack` and `packOk_bnd`
-separately, as the skeleton had them. *Why this one:* they are the same induction over the same pair
-of tables, so two lemmas means walking the tables twice in the proofs to state what one walk in the
-definition established. *Confidence: high.*
+```lean
+inductive DiffFault
+  | shapeMismatch  (which : String)            -- the packed table is not the point table's shape
+  | vertexPack     (i : ℕ) (held wanted : Int)
+  | vertexTooLarge (i : ℕ) (bound : Int)
+  | diffPack       (k : ℕ) (held wanted : Int)
+  | diffTooLarge   (k : ℕ) (bound : Int)
+  | normWrong      (k : ℕ) (found wanted : Q4)
+  | edgeMismatch   (pos : ℕ) (i j k : ℕ)       -- edge at this position does not carry this difference
+  | keysLength     (edges keys : ℕ)
 
-**Every pointwise lemma holds at every index, in range or out, and none of them says so as a
-hypothesis.** That is a dividend of `packOk` demanding matching shapes: `PtTable.get` and
-`IntTable.get` are total and truncate out of range, and two tables of the same shape truncate
-*identically*, following the same path for any index whatever. So no range hypothesis appears
-anywhere in this milestone — which was not designed for and is worth stating, because the obvious
-alternative (`∀ i < n`) would have threaded a bound through every lemma and every use.
+def DiffWitness.firstFault (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Option DiffFault
+def DiffWitness.faultReport (w : DiffWitness n) (t : PtTable) (c : UDCert n) : String
+```
 
-**The existential in `edgesOk_mem` is the right strength, not a weakening.** *Choice:* "every edge is
-paired with *some* key whose packed difference is its endpoints'". *Alternative:* carry the key list
-position, so each edge is tied to its own key. *Why this one:* the key is an intermediary — it is
-used only to reach `w.diffs.get k`, and `normsOk_get` holds at *every* index, so the argument never
-needs to know which key an edge got. Threading positions would add an index to an induction with no
-use for one. *Confidence: high — the composition in § 3.2 goes through with the existential and gains
-nothing from the stronger form.*
+with **`firstFault = none ↔ Certifies = true` proved** — the tie that keeps the diagnostic from
+drifting away from the checker it explains. That theorem is what makes `#eval w.faultReport t c`
+more than suggestive, exactly as `badEdges_eq_nil_iff` does for the per-edge route.
 
-**One named joint per step.** `edge_distSq` is extracted as its own lemma, stated over raw `Nat`
-indices and a bare table with no certificate in sight, because none of its content is about
-certificates: packed difference matches checked difference → linearity → injectivity → the norm.
-Soundness above it is then four lines — unpack, take an edge, get its key, apply — and `hverts`
-enters exactly once, on the first line, to rewrite `c.verts e` into `t.get e.val`.
+**Two definitions and a theorem, not one definition.** *Alternative weighed:* make `firstFault` the
+primary definition and derive `Certifies := (firstFault …).isNone`, so there is nothing to drift by
+construction. *Measured and rejected:* a fault-returning per-edge walk costs **0.00180 CPU s/edge
+against the `Bool` walk's 0.00155 — 16% more**, which is 1.7 s on de Grey and ~40 minutes at the
+10⁷-edge scale this milestone exists for. The diagnostic runs **compiled** and is instant at any
+size; the checker runs in the **kernel** and is the whole cost. Paying 16% of the kernel's budget to
+make the compiled path authoritative is paying in the wrong currency, and the `↔` theorem buys the
+same guarantee for nothing.
 
-### 3.2.5 Domain pass, 2026-07-31 — the class wanted no algebra, and the witness wanted no vertices
+**Placement is load-bearing.** Diagnostics are written to be read and therefore rewritten; this
+module is downstream of everything and imported by nothing, so rewriting a message costs one file.
+That is M07's 28-hour lesson, obeyed in advance.
+
+### 3.4 Per-witness modules
+
+Per witness, replacing `Geom00…Geom08` and `Valid.lean` with two generated modules:
+
+```lean
+-- Instances/DeGrey/Diffs.lean   (generated: the four tables)
+def deGreyDiffs : DiffWitness 1581 := { … }
+
+-- Instances/DeGrey/Valid.lean   (generated: three lines)
+/-- The witness is checked against the certificate's *own* vertices. -/
+theorem deGrey_verts : deGrey.verts = deGreyTable.toVerts := rfl
+theorem deGrey_certifies : deGreyDiffs.Certifies deGreyTable deGrey = true := by decide +kernel
+theorem deGrey_valid : deGrey.Valid = true :=
+  deGrey.valid_of_diffWitness deGreyTable deGreyDiffs deGrey_verts deGrey_certifies
+```
+
+`deGrey_valid`'s statement is unchanged, which is the whole design. The seam is **named** rather than
+inlined as `rfl`: a reader of the generated file should not have to work out what an anonymous `rfl`
+discharged, and it costs one line. Verified `rfl` on the real 1,581-vertex certificate, at no
+measurable cost.
+
+### 3.5 Domain pass, 2026-07-31 — the class wanted no algebra, and the witness wanted no vertices
 
 Six representation questions went into the pass; four moved the model. Every claim below was checked
 in the elaborator before it was written down.
@@ -461,46 +486,64 @@ side would put two mechanisms in one file for a 0.26 s saving. One mechanism, us
 depth. The kernel does it in one step. Every check in this file is in that position, which is why
 they all say `decide +kernel` — the project's standing rule, arriving here for a second reason.
 
-### 3.3 `Proofs/HadwigerNelson/PackedDiagnose.lean` — new, downstream, never imported by a certificate
+### 3.6 Obligation pass, 2026-07-31 — the existential is right, and the `+ 2` was not
 
-`Check` returns a `Bool` and the kernel can only say no. The compiled diagnostic returns which of the
-four checks failed and at which index, in the vocabulary of the person reading it:
+**The two digit lemmas closed here rather than in implementation**, which is the pass's main result:
+§ 3.2 above is now a record of finished work, the over-hedged `+ 2` is deleted from four statements,
+and the mutation audit that certifies the digit bound load-bearing is committed beside them.
 
-```lean
-inductive DiffFault
-  | vertexPack (i : ℕ) (held wanted : Int)
-  | vertexTooLarge (i : ℕ)
-  | diffPack (k : ℕ) (held wanted : Int)
-  | normWrong (k : ℕ) (found wanted : Q4)
-  | edgeMismatch (pos : ℕ) (e : ℕ × ℕ) (k : ℕ)
-  | lengthMismatch (edges keys : ℕ)
+**Two lemmas about one walk became one lemma.** *Choice:* `packOk_get` returns a conjunction — the
+packed value agrees *and* the point is in bounds. *Alternative:* `packOk_pack` and `packOk_bnd`
+separately, as the skeleton had them. *Why this one:* they are the same induction over the same pair
+of tables, so two lemmas means walking the tables twice in the proofs to state what one walk in the
+definition established. *Confidence: high.*
 
-def DiffWitness.firstFault (c : UDCert n) (w : DiffWitness n) : Option DiffFault
-def DiffWitness.faultReport (c : UDCert n) (w : DiffWitness n) : String
-```
+**Every pointwise lemma holds at every index, in range or out, and none of them says so as a
+hypothesis.** That is a dividend of `packOk` demanding matching shapes: `PtTable.get` and
+`IntTable.get` are total and truncate out of range, and two tables of the same shape truncate
+*identically*, following the same path for any index whatever. So no range hypothesis appears
+anywhere in this milestone — which was not designed for and is worth stating, because the obvious
+alternative (`∀ i < n`) would have threaded a bound through every lemma and every use.
 
-with `firstFault = none ↔ Check = true` proved, exactly as `badEdges_eq_nil_iff` is proved — a
-diagnostic whose promise is a theorem rather than a docstring's word.
+**The existential in `edgesOk_mem` is the right strength, not a weakening.** *Choice:* "every edge is
+paired with *some* key whose packed difference is its endpoints'". *Alternative:* carry the key list
+position, so each edge is tied to its own key. *Why this one:* the key is an intermediary — it is
+used only to reach `w.diffs.get k`, and `normsOk_get` holds at *every* index, so the argument never
+needs to know which key an edge got. Threading positions would add an index to an induction with no
+use for one. *Confidence: high — the composition in § 3.2 goes through with the existential and gains
+nothing from the stronger form.*
 
-**Placement is load-bearing.** Diagnostics are written to be read and therefore rewritten; this
-module is downstream of everything and imported by nothing, so rewriting it costs one file. That is
-M07's 28-hour lesson, obeyed in advance.
+**One named joint per step.** `edge_distSq` is extracted as its own lemma, stated over raw `Nat`
+indices and a bare table with no certificate in sight, because none of its content is about
+certificates: packed difference matches checked difference → linearity → injectivity → the norm.
+Soundness above it is then four lines — unpack, take an edge, get its key, apply — and `hverts`
+enters exactly once, on the first line, to rewrite `c.verts e` into `t.get e.val`.
 
-### 3.4 Per-witness modules
+### 3.7 Experience pass, 2026-07-31 — the contract becomes a number, and one name was lying
 
-Per witness, replacing `Geom00…Geom08` and `Valid.lean`:
+**The emitter contract is pinned as a single integer.** *Choice:* `Packed.lean` carries a fixture —
+the packing of the point whose thirty-two digits are `1 … 32` in lane order — as a `#guard` against a
+301-digit constant, and `tools/emit_geometry.py` asserts the same constant before emitting anything.
+*Alternative:* the prose table of five conventions the module docstring already had. *Why this one:*
+a generator author cannot silently disagree with a number. Lane width, lane order inside the tower,
+and `x`-before-`y` are all three fixed by that one value, and a mismatch shows up before any data is
+written rather than as `Certifies = false` over 7,877 edges. *Confidence: high — the fixture already
+did its job during the pass: Lean's four-layer instance chain and an independent Python computation
+produced the same 301 digits, which is the first evidence that the lane convention in the plan is the
+one the class actually implements.*
 
-```lean
--- Instances/DeGrey/Diffs.lean   (generated: the four tables)
-def deGreyDiffs : DiffWitness 1581 := { … }
+**One name was lying, and the name is the statement.** `two_digit_le` concludes with `<`. Renamed
+`two_digit_lt`. Also renamed: `bnd` → `bounded` (an abbreviation nobody has to expand), and
+`DiffWitness.Check` → `DiffWitness.Certifies`, which says what it decides — the call site now reads
+`deGreyDiffs.Certifies deGreyTable deGrey`. `edge_distSq` → `distSq_eq_of_packed`, so the name says
+it is an equation and says what discharges it.
 
--- Instances/DeGrey/Valid.lean   (regenerated: one decide and one citation)
-theorem deGrey_diffs_check : deGreyDiffs.Check deGreyTable deGrey = true := by decide +kernel
-theorem deGrey_valid : deGrey.Valid = true :=
-  deGrey.valid_of_diffWitness deGreyTable deGreyDiffs rfl deGrey_diffs_check
-```
+**The generated file names its own seam** rather than passing an anonymous `rfl`. One extra line per
+witness, and a reader never has to reconstruct what was assumed.
 
-`deGrey_valid`'s statement is unchanged, which is the whole design.
+**Settled without changing anything:** `Packable`, `pack`, `width`, `sub`, `DiffWitness`, `IntTable`,
+`laneBits`, `vertexBound`, and `valid_of_diffWitness` all stand — the last because it is the name
+`valid_of_chunks` teaches a reader to predict.
 
 ---
 
@@ -510,15 +553,30 @@ theorem deGrey_valid : deGrey.Valid = true :=
 unchanged, because those files must not be touched) computes the difference set, assigns indices in
 first-use order, packs, and emits the four tables plus the `Valid.lean` skeleton.
 
-The contract it must honour, stated once here and once in `Packed.lean`'s docstring:
+Six conventions have to be agreed between a Python file and a Lean file that never read each other.
+Any one of them wrong makes `Certifies` **`false`** — never a wrong theorem, but also never an
+obvious diagnosis. So each is either **checked and named** or **pinned by a fixture**, and none is
+left to prose alone:
 
-| item | value |
+| convention | how it is enforced |
 |---|---|
-| lane width | 32 bits, one lane per integer leaf |
-| lane order | the tower's own order: `re` before `im`, at every level, `x` before `y` |
-| vertex bound | every leaf `|l| < 2³⁰` |
-| `keys` order | the certificate's edge order, one entry per edge, no gaps |
-| difference sign | signed, not up to sign — see § 6 |
+| lane width — 32 bits, one lane per integer leaf | the ruler fixture below |
+| lane order — `re` before `im` at every tower level, `x` before `y` in a point | the ruler fixture below |
+| difference orientation — `verts e.1 − verts e.2` | checked; `edgeMismatch` names the position |
+| vertex bound — every leaf `|l| ≤ 2²⁹` | checked; `vertexTooLarge` names the vertex |
+| `packedV` has the vertex table's tree shape | checked; `shapeMismatch` says which table |
+| `keys` in edge order, one per edge, no gaps | checked; `edgeMismatch` / `keysLength` |
+| difference sign — signed, not up to sign | § 6 |
+
+**The ruler fixture.** `Packed.lean` pins the packing of the point whose thirty-two digits are
+`1, 2, …, 32` in lane order, as a `#guard` against a 301-digit constant; `tools/emit_geometry.py`
+asserts the same constant before it emits anything. A generator that disagrees with this file about
+lane width, lane order, or coordinate order fails *there*, on one point, rather than as a `false`
+over 7,877 edges.
+
+It has already earned its place: Lean's four-layer instance chain and an independent Python
+computation produced the same 301 digits, which is the first evidence that the lane convention
+written in this plan is the one the class actually implements.
 
 `scripts/regen-check.sh` gains the new modules, so the difference tables are covered by the same
 byte-for-byte reproducibility check as everything else.
@@ -533,20 +591,30 @@ because the mutation silently changed nothing.
 
 | control | must produce |
 |---|---|
-| one `keys` entry pointing at the wrong difference | `Check = false`, `firstFault = edgeMismatch` at that position |
-| one packed vertex off by one | `Check = false`, `firstFault = vertexPack` naming the vertex |
-| one difference's norm perturbed | `Check = false`, `firstFault = normWrong` naming the difference |
-| a leaf larger than the bound | `Check = false`, `firstFault = vertexTooLarge` |
-| `keys` one entry short | `Check = false`, `firstFault = lengthMismatch` — **not** a silently truncated pass |
+| one `keys` entry pointing at the wrong difference | `Certifies = false`, `firstFault = edgeMismatch` at that position |
+| one packed vertex off by one | `Certifies = false`, `firstFault = vertexPack` naming the vertex |
+| one difference's norm perturbed | `Certifies = false`, `firstFault = normWrong` naming the difference |
+| a leaf larger than the bound | `Certifies = false`, `firstFault = vertexTooLarge` |
+| the packed table reshaped | `Certifies = false`, `firstFault = shapeMismatch` |
+| `keys` one entry short | `Certifies = false`, `firstFault = keysLength` — **not** a silently truncated pass |
+| the ruler fixture packed `y` before `x` | the `#guard` fails, in `Packed.lean`, before any data is emitted |
+| `two_digit_lt` / `two_digit_inj` with the digit bound weakened | **already run** — the two counterexamples are committed beside the lemmas |
 | `pack_inj`'s bound hypothesis deleted | the *proof* breaks, not the checker's answer |
 | two distinct bounded points colliding under `pack` | unprovable — the adversarial member, pinned as `example : ¬ …` |
 
-Two of these were already run during subplanning, against real de Grey data, and both went red with
-the mutation verified first:
+**`#guard_msgs` pins the rendered report, not just the API behind it** — one per fault constructor,
+on the two-point fixture. What a person reads when a certificate fails is the *text*; leaving it out
+of the tests means the one surface that matters at the moment of failure is the one nothing guards.
+That is M07's practice, and `Certificate.lean` already does it for `badEdges`.
+
+Three of these were already run during subplanning, against real de Grey data, and each went red with
+the mutation verified to have landed first:
 
 * one `keys` entry changed from `0` to `99` → *"Tactic `decide` proved that the proposition … is
   false"*;
-* one packed vertex incremented by 1 in its last digit → same.
+* one packed vertex incremented by 1 in its last digit → same;
+* both digit lemmas with `2 * |a| < M` weakened to `|a| < M` → concrete counterexamples at `M = 4`,
+  now committed as `#guard`s beside the lemmas they protect.
 
 ---
 
@@ -559,6 +627,9 @@ the mutation verified first:
   packed form 0.00137 s and 0.27 MB; bare list walk 0.0011 s. § 0(c).
 * **Lane width is not free** — 64-bit lanes cost 28% more per edge than 32-bit. The lanes are
   32 bits and the vertex bound 2²⁹. § 0(c′).
+* **A fault-returning checker costs 16% per edge** over a `Bool` one (0.00180 against 0.00155), so
+  the diagnostic stays a second, compiled definition tied by a proved `↔` rather than becoming the
+  checker itself. § 3.3.
 * **O(n) costs** — packing check 0.00196 s/vertex; norm identity 0.0209 s/difference. § 0(d).
 * **The flat giant-`Nat` vertex table is dead** — free in the kernel, 54–59 CPU s to *elaborate* the
   literal, quadratic in vertex count. § 0(e).
