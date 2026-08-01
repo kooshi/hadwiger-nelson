@@ -179,6 +179,154 @@ def backbone(n: int, edges, pivot: int, k: int, timeout: float | None = None,
     return out
 
 
+# ------------------------------------------------------------------ fans
+
+FAN = "fan"
+
+
+def fanEdges(edges, p: int, Q) -> list[tuple[int, int]]:
+    """The pivot joined to every partner — **`fanEdges` in `Proofs/HadwigerNelson/Fan.lean`**.
+
+    Written here rather than encoded as extra clauses so that the tool and Lean ask the *same*
+    question of the *same* object. A fan is uncolourability of this graph, which is why
+    `Fan.of_unsat` is one line over machinery M03 already shipped.
+    """
+    return list(edges) + [(p, q) for q in Q]
+
+
+def fan(n: int, edges, p: int, Q, k: int, timeout: float | None = None) -> str:
+    """Does every proper `k`-colouring paint `p` like at least one member of `Q`?
+
+    One SAT call on the joined graph: a proper colouring of `edges + {p—q : q ∈ Q}` is exactly a
+    proper colouring of `edges` that separates `p` from all of `Q`, so unsatisfiable means fan.
+
+    Returns `fan`, `separated`, or `unknown` — **three outcomes, and the third is never folded into
+    either other one.** A timeout read as `separated` would report a width that is too large; read
+    as `fan` it would report one that is too small and the claim would be *false*.
+
+    `forces` is this at `Q = [q]`.
+    """
+    if p in Q:
+        raise ValueError(f"the pivot {p} is listed among its own partners, which makes the fan "
+                         f"trivially true and says nothing — drop it from Q")
+    st, _ = _solve(base_clauses(n, fanEdges(edges, p, Q), k), k * n, timeout)
+    return {"unsat": FAN, "sat": SEPARATED, "unknown": UNKNOWN}[st]
+
+
+@dataclass
+class Fanned:
+    """A fan and the word its width earned.
+
+    `irredundant` is `True` only when **every** surviving partner was tried for removal and the
+    oracle *settled* the attempt. A width from a greedy sweep is not a minimum — measured at M14
+    subplanning, greedy reported 3 on a configuration whose true minimum is 1 — so this type
+    refuses to say "minimum" and says "irredundant" instead.
+    """
+    pivot: int
+    keep: list[int]
+    irredundant: bool
+    unsettled: list[int]
+    calls: int
+
+    @property
+    def width(self) -> int | None:
+        """The width, or `None` when the sweep did not settle — in which case there is no width."""
+        return len(self.keep) if self.irredundant and not self.unsettled else None
+
+    def line(self) -> str:
+        if self.unsettled:
+            return (f"width <= {len(self.keep)} at pivot {self.pivot}  "
+                    f"** UNSETTLED: {len(self.unsettled)} drops timed out — this is not a width ** "
+                    f"({self.calls} calls)")
+        word = "irredundant" if self.irredundant else "NOT shown irredundant"
+        tail = ("  -> width >= 3 cannot be closed by a spindle; narrow it"
+                if len(self.keep) >= 3 else
+                "  -> width 2 closes only with the partners opposite the pivot at r^2=1/2"
+                if len(self.keep) == 2 else
+                "  -> width 1 is a forced pair; spindle it" if len(self.keep) == 1 else
+                "  -> width 0: the graph has no colouring at all")
+        return (f"width {len(self.keep)} at pivot {self.pivot}  [{word}, 0 unsettled, "
+                f"{self.calls} calls]{tail}")
+
+
+def shrink_fan(n: int, edges, p: int, Q, k: int, timeout: float | None = None,
+               log=None, oracle=None) -> Fanned:
+    """Drop partners while the fan survives, then **certify** that none of the rest can go.
+
+    Invariant: the kept set is a fan at every step. Measure: `len(keep)`, strictly decreasing on
+    each accepted drop and bounded below by zero, so this terminates.
+
+    The certifying sweep is the whole point. Dropping greedily and stopping gives a set nobody has
+    shown to be irreducible; here every survivor has been tried and refused, and any attempt the
+    oracle could not settle is **carried out in `unsettled`** rather than silently treated as a
+    refusal — which would report a width that is too large and call it measured.
+
+    `oracle` replaces the solver call, and exists for one reason: with a real solver the only way
+    to reach the `unknown` branch below is a timeout, and a budget small enough to trigger it also
+    starves the guard call above, so that branch is unreachable from outside. A negative control
+    caught exactly that — deleting the branch left the self-test green. The production path is
+    unchanged; the control passes a stub.
+    """
+    ask = oracle if oracle is not None else fan
+    keep = [q for q in Q if q != p]
+    calls = 0
+    st = ask(n, edges, p, keep, k, timeout)
+    calls += 1
+    if st != FAN:
+        return Fanned(p, keep, False, [] if st == SEPARATED else list(keep), calls)
+    unsettled = []
+    for q in list(keep):
+        trial = [x for x in keep if x != q]
+        st = ask(n, edges, p, trial, k, timeout)
+        calls += 1
+        if st == FAN:
+            keep = trial
+            if log:
+                log(f"    dropped {q}, {len(keep)} left")
+        elif st == UNKNOWN:
+            unsettled.append(q)
+    return Fanned(p, keep, not unsettled, unsettled, calls)
+
+
+def best_fan(cfg, k: int, pivots=None, timeout: float | None = None,
+             spindle_only: bool = True, log=None) -> Fanned | None:
+    """The narrowest **irredundant** fan over one distance class, across the given pivots.
+
+    One distance class at a time, because that is what the closing move needs: the two partners of
+    a width-2 close have to be equidistant from the pivot, and `not_colorable_of_spindled_fan`'s
+    join is only available then.
+
+    Returns `None` when no pivot and no class carries a fan — and that is the **useful** answer, not
+    a failure: it says the configuration is not merely short of forcing but has no disjunctive
+    property to narrow at all.
+    """
+    n = len(cfg)
+    edges = cfg.edges()
+    adj = set(edges) | {(b, a) for (a, b) in edges}
+    best = None
+    for p in (range(n) if pivots is None else pivots):
+        by_dist: dict = {}
+        for q in range(n):
+            if q == p or (p, q) in adj:
+                continue
+            r2 = cfg.distsq_rational(p, q)
+            if r2 is None or (spindle_only and not spindleable(r2)):
+                continue
+            by_dist.setdefault(r2, []).append(q)
+        for r2, Q in sorted(by_dist.items(), key=lambda t: len(t[1])):
+            if best is not None and best.width is not None and len(Q) >= best.width:
+                continue
+            if fan(n, edges, p, Q, k, timeout) != FAN:
+                continue
+            got = shrink_fan(n, edges, p, Q, k, timeout, log)
+            if log:
+                log(f"  pivot {p} r^2={r2}: {got.line()}")
+            if got.width is not None and (best is None or best.width is None
+                                          or got.width < best.width):
+                best = got
+    return best
+
+
 # ------------------------------------------------------------------ the win condition
 
 def spindleable(r2: Fraction) -> bool:
@@ -356,6 +504,70 @@ def self_test() -> None:
     # the spindle filter, both directions
     expect(spindleable(Fraction(3)), True, "a pair √3 apart can be spindled — 4·3−1 = 11")
     expect(spindleable(Fraction(4, 3)), False, "a pair at r² = 4/3 cannot — it would need √39")
+
+    # ---------------------------------------------------------------- fans
+    # A **table**, not repeated code, and over the same edge lists Lean uses. Two of the controls
+    # written by hand during M14 subplanning were wrong and both read as tool bugs: one indexed a
+    # differently-numbered copy of the rhombus and asked about an edge, and one repeated the same
+    # colour count on two rows so the four-colour case never ran. A duplicated row is visible as
+    # duplicated data; a duplicated call is not.
+    #
+    # `pendantTriangle` is `Proofs/HadwigerNelson/Fan.lean`'s width-2 witness: a unit triangle with
+    # a fourth point hanging off one corner.
+    pt = [(0, 1), (0, 2), (1, 2), (0, 3)]
+
+    #  graph  n  pivot  partners   k   expected
+    table = [
+        (pt, 4, 3, [1, 2], 3, FAN,       "the pendant point matches one of the far corners at three"),
+        (pt, 4, 3, [1],    3, SEPARATED, "  ... and neither far corner alone will do"),
+        (pt, 4, 3, [2],    3, SEPARATED, "  ... nor the other one"),
+        (pt, 4, 3, [1, 2], 4, SEPARATED, "  ... and a fourth colour breaks it entirely"),
+        (pt, 4, 3, [],     3, SEPARATED, "an empty fan means uncolourable, and this graph is not"),
+        (rh, 4, 0, [3],    3, FAN,       "the rhombus is a width-one fan at three colours"),
+        (rh, 4, 0, [3],    4, SEPARATED, "  ... and not at four"),
+        (rh, 4, 0, [1],    3, SEPARATED, "a partner adjacent to the pivot is never a fan"),
+        (rh, 4, 0, [],     2, FAN,       "an empty fan at two colours: the rhombus is not 2-colourable"),
+    ]
+    for edges, n, p, Q, k, want, what in table:
+        expect(fan(n, edges, p, Q, k), want, what)
+
+    # **The two encodings agree.** `forces` pins two colours; `fan` joins an edge and asks about
+    # colourability. They are different formulas for one question, and at width one they must
+    # answer alike — the cheapest cross-check this file can carry.
+    for k in (3, 4):
+        expect(fan(4, rh, 0, [3], k) == FAN, forces(4, rh, 0, 3, k) == FORCED,
+               f"`fan` and `forces` agree at width one, {k} colours")
+
+    # The pivot listed among its own partners is trivially true and says nothing, so it is refused
+    # by name rather than answered.
+    try:
+        fan(4, rh, 0, [0, 3], 3)
+        raise SystemExit("SELF-TEST FAILED — a pivot inside its own partner list was accepted")
+    except ValueError:
+        print("  ok  a pivot listed among its own partners is refused by name")
+
+    # The certifying shrink earns its word: three partners in, two out, and nothing unsettled.
+    got = shrink_fan(4, pt, 3, [0, 1, 2], 3)
+    expect(got.width, 2, "shrink_fan drops the adjacent partner and certifies width two")
+    expect(got.irredundant, True, "  ... and says so only after trying every survivor")
+
+    # **An unsettled sweep has no width at all.** A timeout must not become a partner kept "to be
+    # safe" — that reports a number the oracle never established. Forced here with a zero budget,
+    # because a check nobody has watched fail is not known to work.
+    # ... and the same when only the *drop* tests fail to settle, which no real timeout can
+    # produce in isolation (a budget small enough to starve a drop also starves the guard). This is
+    # the branch a negative control found untested, so it is now driven directly.
+    def flaky(n_, e_, p_, Q_, k_, t_):
+        return FAN if len(Q_) == 3 else UNKNOWN
+    mid = shrink_fan(4, pt, 3, [0, 1, 2], 3, oracle=flaky)
+    expect(mid.unsettled, [0, 1, 2], "an unsettled *drop* is recorded, never read as a refusal")
+    expect(mid.width, None, "  ... so the sweep reports no width")
+
+    starved = shrink_fan(4, pt, 3, [0, 1, 2], 3, timeout=1e-9)
+    expect(starved.width, None, "a starved shrink_fan reports no width, rather than a large one")
+    expect(starved.irredundant, False, "  ... and does not claim irredundance")
+    expect("not a width" in starved.line(), True,
+           "  ... and its report line says so where a reader will see it")
 
     print("self-test: OK")
 

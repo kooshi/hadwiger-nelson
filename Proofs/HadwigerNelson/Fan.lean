@@ -25,11 +25,12 @@ That is a **fan**, and `Forces` is its width-one case. The ladder, and both ends
 
 Both are load-bearing, and neither is a convention:
 
-* **A fan's refutation is a cube.** Colour names are arbitrary, so pinning the pivot to colour `0`
-  loses nothing, and the remaining claim — no partner also takes colour `0` — is one unit clause per
-  partner. The version without a shared pivot needs `k` binary clauses per pair instead, and that is
-  a different, larger encoding for a property measured to be *flat* across everything M13 searched
-  (§ 0(e)). The shared pivot is what makes `Fan.of_unsat` reuse `cubeCNF`.
+* **A fan is one graph away from a question this repository already answers.** Because every pair
+  shares the pivot, joining the pivot to each partner turns "no colouring separates them" into "this
+  graph has no colouring" — so `Fan.of_unsat` is one line over M03's `not_colorable_of_unsat` and
+  needs no new encoding at all. Without a shared pivot there is no such graph, and the property is
+  measured *flat* across everything M13 searched (§ 0(e)), so the generality would cost a new
+  encoding to say something that does not discriminate.
 * **One distance class is what makes the closing move possible at all** — see
   `not_colorable_of_spindled_fan`, whose docstring carries the geometry.
 
@@ -95,12 +96,14 @@ whole ladder in one statement, with both ends as instances — `Q = []` makes th
 vacuous, and `Q = [q]` is M13's forced pair needing one separation. -/
 theorem not_colorable_of_fan {p : V} {Q : List V} (h : Fan G k p Q)
     (hs : ∀ q ∈ Q, Separated G k p q) : ¬ G.Colorable k := by
-  sorry
+  rintro ⟨C⟩
+  obtain ⟨q, hq, hcq⟩ := h C
+  exact hs q hq C hcq
 
 /-- **An empty fan is a refutation** — the `Q = []` instance, stated because it is the base case a
 narrowing search is aiming at and a reader should not have to derive it. -/
-theorem not_colorable_of_fan_nil {p : V} (h : Fan G k p []) : ¬ G.Colorable k := by
-  sorry
+theorem not_colorable_of_fan_nil {p : V} (h : Fan G k p []) : ¬ G.Colorable k :=
+  not_colorable_of_fan h (by simp)
 
 /-- **A width-one fan is exactly a forced pair**, so M13's module is this one's base case rather
 than a parallel development.
@@ -111,7 +114,12 @@ search that has narrowed to one partner lands in the form the closing move alrea
 cannot loop: the left side contains a list literal the right side does not. -/
 @[simp]
 theorem fan_singleton_iff {p q : V} : Fan G k p [q] ↔ Forces G k p q := by
-  sorry
+  constructor
+  · intro h C
+    obtain ⟨r, hr, hcr⟩ := h C
+    rw [List.mem_singleton] at hr
+    exact hr ▸ hcr
+  · exact fun h C => ⟨q, List.mem_singleton_self q, h C⟩
 
 /-! ## The descent
 
@@ -122,32 +130,36 @@ following that log should find each line as a theorem. -/
 /-- **Retire a separated partner.** The width falls by one. -/
 theorem Fan.narrow {p q : V} {Q : List V} (h : Fan G k p (q :: Q)) (hs : Separated G k p q) :
     Fan G k p Q := by
-  sorry
+  intro C
+  obtain ⟨r, hr, hcr⟩ := h C
+  rcases List.mem_cons.mp hr with rfl | hr'
+  · exact absurd hcr (hs C)
+  · exact ⟨r, hr', hcr⟩
 
 /-- **Widening is free**, and applied in both directions it says a fan depends on `Q`'s members
 only — the reason `List` costs nothing here. -/
-theorem Fan.widen {p : V} {Q Q' : List V} (h : Fan G k p Q) (hsub : Q ⊆ Q') : Fan G k p Q' := by
-  sorry
+theorem Fan.widen {p : V} {Q Q' : List V} (h : Fan G k p Q) (hsub : Q ⊆ Q') : Fan G k p Q' :=
+  fun C => let ⟨q, hq, hcq⟩ := h C; ⟨q, hsub hq, hcq⟩
 
 /-! ## Transport — one statement per way a fan travels -/
 
 /-- **More edges only force more.** -/
 theorem Fan.mono {G' : SimpleGraph V} (hle : G ≤ G') {p : V} {Q : List V} (h : Fan G k p Q) :
-    Fan G' k p Q := by
-  sorry
+    Fan G' k p Q :=
+  fun C => h (C.comap (SimpleGraph.Hom.ofLE hle))
 
 /-- **A fan speaks about every graph it maps into.** Pull the ambient colouring back along the
 placement; the work of the closing lemma is this one line, twice. -/
 theorem Fan.comap {p : V} {Q : List V} (h : Fan G k p Q) (φ : G →g H) (C : H.Coloring (Fin k)) :
-    ∃ q ∈ Q, C (φ p) = C (φ q) := by
-  sorry
+    ∃ q ∈ Q, C (φ p) = C (φ q) :=
+  h (C.comap φ)
 
 /-- **A symmetry carries a fan to a fan**, which licenses one pivot per symmetry orbit — the
 completeness argument for a search over a configuration built as an orbit, and the only place it is
 recorded. -/
 theorem Fan.map {p : V} {Q : List V} (h : Fan G k p Q) (σ : G →g G) :
-    Fan G k (σ p) (Q.map σ) := by
-  sorry
+    Fan G k (σ p) (Q.map σ) :=
+  fun C => let ⟨q, hq, hcq⟩ := h.comap σ C; ⟨σ q, List.mem_map_of_mem hq, hcq⟩
 
 /-! ## The closing lemma -/
 
@@ -168,7 +180,10 @@ the work. -/
 theorem not_colorable_of_spindled_fan {p : V} {Q : List V} (φ ψ : G →g H) (hpiv : φ p = ψ p)
     (h : Fan G k p Q) (hjoin : ∀ q ∈ Q, ∀ q' ∈ Q, H.Adj (φ q) (ψ q')) :
     ¬ H.Colorable k := by
-  sorry
+  rintro ⟨C⟩
+  obtain ⟨q, hq, hcq⟩ := h.comap φ C
+  obtain ⟨q', hq', hcq'⟩ := h.comap ψ C
+  exact C.valid (hjoin q hq q' hq') (hcq.symm.trans (by rw [hpiv]; exact hcq'))
 
 /-! ## The producers
 
@@ -192,7 +207,19 @@ def fanEdges {n : ℕ} (E : List (Fin n × Fin n)) (p : Fin n) (Q : List (Fin n)
 /-- **A fan is the join's uncolourability.** The producer everything else routes through. -/
 theorem Fan.of_not_colorable {n k : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
     (h : ¬ (edgeGraph n (fanEdges E p Q)).Colorable k) : Fan (edgeGraph n E) k p Q := by
-  sorry
+  intro C
+  by_contra hc
+  push Not at hc
+  refine h ⟨SimpleGraph.Coloring.mk C fun {i j} hij => ?_⟩
+  obtain ⟨hne, hmem | hmem⟩ := hij
+  · rcases List.mem_append.mp hmem with hE | hQ
+    · exact C.valid ⟨hne, Or.inl hE⟩
+    · obtain ⟨q, hq, hpq⟩ := List.mem_map.mp hQ
+      cases hpq; exact fun hcc => hc _ hq hcc
+  · rcases List.mem_append.mp hmem with hE | hQ
+    · exact C.valid ⟨hne, Or.inr hE⟩
+    · obtain ⟨q, hq, hpq⟩ := List.mem_map.mp hQ
+      cases hpq; exact fun hcc => hc _ hq hcc.symm
 
 /-- **A fan straight from a refutation** — the producer that scales, and the one the search emits.
 One certificate, over the joined edge list, checked by the machinery M03 already ships. -/
@@ -210,14 +237,27 @@ while adding no edge to the join, so the two sides come apart at exactly the adv
 module admits on purpose. -/
 theorem fan_iff_not_colorable {n k : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
     (hp : p ∉ Q) : Fan (edgeGraph n E) k p Q ↔ ¬ (edgeGraph n (fanEdges E p Q)).Colorable k := by
-  sorry
+  refine ⟨fun h => ?_, Fan.of_not_colorable⟩
+  rintro ⟨C⟩
+  have hle : edgeGraph n E ≤ edgeGraph n (fanEdges E p Q) := by
+    rintro i j ⟨hne, hij | hij⟩
+    · exact ⟨hne, Or.inl (List.mem_append_left _ hij)⟩
+    · exact ⟨hne, Or.inr (List.mem_append_left _ hij)⟩
+  obtain ⟨q, hq, hcq⟩ := h (C.comap (SimpleGraph.Hom.ofLE hle))
+  have hne : p ≠ q := fun hpq => hp (by rw [hpq]; exact hq)
+  have hadj : (edgeGraph n (fanEdges E p Q)).Adj p q :=
+    ⟨hne, Or.inl (List.mem_append_right _ (List.mem_map_of_mem hq))⟩
+  exact C.valid hadj hcq
 
 /-- **A fan from exhausting the colourings** — no solver, no certificate, ceiling `k ^ n`, so it is
 for calibration instances and the specification examples below. -/
 theorem Fan.of_edges {n : ℕ} {E : List (Fin n × Fin n)} {p : Fin n} {Q : List (Fin n)}
     (h : ∀ f : Fin n → Fin k, (∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2) ∨ ∃ q ∈ Q, f p = f q) :
     Fan (edgeGraph n E) k p Q := by
-  sorry
+  intro C
+  rcases h C with ⟨e, he, hne, heq⟩ | hq
+  · exact absurd heq (C.valid (edgeGraph_adj_of_mem hne he))
+  · exact hq
 
 /-! ## Specification
 
@@ -235,20 +275,25 @@ triangle uses all three, so the pendant point — barred only from `0`'s colour 
 
 This is the non-vacuity witness for every theorem in this module: a fan of width **two**, checked by
 exhausting all `3⁴ = 81` colourings with no solver anywhere. -/
-example : Fan (edgeGraph 4 pendantTriangle) 3 3 [1, 2] := by
-  sorry
+example : Fan (edgeGraph 4 pendantTriangle) 3 3 [1, 2] := Fan.of_edges (by decide +kernel)
 
 -- The two colourings that show the width is really two: each retires one partner and not the other,
 -- so neither singleton is a fan. Without this pair the example above would be `Forces` wearing a
 -- longer list.
 
 /-- **Neither partner alone suffices** — the control that makes the width honest. -/
-example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [1] := by
-  sorry
+example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [1] := fun h => by
+  obtain ⟨q, hq, hcq⟩ := h (SimpleGraph.Coloring.mk ![0, 1, 2, 2]
+    (by simp only [edgeGraph_adj]; decide))
+  simp only [SimpleGraph.Coloring.mk] at hcq
+  fin_cases hq; exact absurd hcq (by decide)
 
 /-- The same for the other partner. -/
-example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [2] := by
-  sorry
+example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [2] := fun h => by
+  obtain ⟨q, hq, hcq⟩ := h (SimpleGraph.Coloring.mk ![0, 1, 2, 1]
+    (by simp only [edgeGraph_adj]; decide))
+  simp only [SimpleGraph.Coloring.mk] at hcq
+  fin_cases hq; exact absurd hcq (by decide)
 
 /-! ### Negative controls
 
@@ -260,27 +305,30 @@ the definition is weaker than the intent — and it is left that way on purpose,
 `q ≠ p` into the type taxes every statement above while `not_colorable_of_fan` already demands
 `Separated G k p p`, which is false whenever a colouring exists. **The type is weaker than the
 intent; the theorem is not.** The search excludes the pivot from `Q` for the same reason. -/
-example : Fan (edgeGraph 4 pendantTriangle) 3 3 [3] := by
-  sorry
+example : Fan (edgeGraph 4 pendantTriangle) 3 3 [3] := Fan.of_edges (by decide +kernel)
 
 /-- **The empty fan is false here**, because this graph *is* 3-colourable — the control that catches
 `not_colorable_of_fan_nil` being stated backwards. -/
-example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [] := by
-  sorry
+example : ¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [] := fun h => by
+  obtain ⟨q, hq, -⟩ := h (SimpleGraph.Coloring.mk ![0, 1, 2, 1]
+    (by simp only [edgeGraph_adj]; decide))
+  simp at hq
 
 /-- **Four colours break it.** The pendant point can take a fourth colour and match neither partner,
 so the fan is genuinely about the colour count and not about the shape alone. -/
-example : ¬ Fan (edgeGraph 4 pendantTriangle) 4 3 [1, 2] := by
-  sorry
+example : ¬ Fan (edgeGraph 4 pendantTriangle) 4 3 [1, 2] := fun h => by
+  obtain ⟨q, hq, hcq⟩ := h (SimpleGraph.Coloring.mk ![0, 1, 2, 3]
+    (by simp only [edgeGraph_adj]; decide))
+  simp only [SimpleGraph.Coloring.mk] at hcq
+  fin_cases hq <;> exact absurd hcq (by decide)
 
 /-- **The rhombus, in this module's vocabulary** — the same fact as `rhombus_forces`, at width one,
 tying the new definition to the one theorem here that was already believed. -/
-example : Fan (edgeGraph 4 rhombus) 3 0 [3] := by
-  sorry
+example : Fan (edgeGraph 4 rhombus) 3 0 [3] := Fan.of_edges (by decide +kernel)
 
 /-- **Separation is not vacuous either**: the rhombus separates two adjacent corners. -/
-example : Separated (edgeGraph 4 rhombus) 3 0 1 := by
-  sorry
+example : Separated (edgeGraph 4 rhombus) 3 0 1 :=
+  fun C => C.valid (by simp only [edgeGraph_adj]; decide)
 
 /-! ### The quantifier-order control
 
@@ -297,6 +345,13 @@ def FanSwapped (G : SimpleGraph V) (k : ℕ) (p : V) (Q : List V) : Prop :=
 /-- **The mutation is false where the definition is true.** The two refuting colourings are exactly
 the pair that made the width honest above. -/
 example : ¬ FanSwapped (edgeGraph 4 pendantTriangle) 3 3 [1, 2] := by
-  sorry
+  rintro ⟨q, hq, hall⟩
+  fin_cases hq
+  · have := hall (SimpleGraph.Coloring.mk ![0, 1, 2, 2]
+      (by simp only [edgeGraph_adj]; decide))
+    simp only [SimpleGraph.Coloring.mk] at this; exact absurd this (by decide)
+  · have := hall (SimpleGraph.Coloring.mk ![0, 1, 2, 1]
+      (by simp only [edgeGraph_adj]; decide))
+    simp only [SimpleGraph.Coloring.mk] at this; exact absurd this (by decide)
 
 end HadwigerNelson

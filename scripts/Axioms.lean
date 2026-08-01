@@ -300,6 +300,29 @@ which is exactly the kind of redundancy that catches a wrong statement. -/
 #print axioms moserSpindle_not_colorable_three_spindled
 #print axioms spindleFromRhombi_not_colorable_three
 
+/-! ## M14 — fans, the disjunctive forcer
+
+`Forces` is the width-one case of `Fan`, so these are the statements a search above rung B lands on
+before it has narrowed to a forced pair. Nothing here evaluates anything natively. -/
+
+#print axioms Fan
+#print axioms Separated
+#print axioms Separated.of_adj
+#print axioms not_colorable_of_fan
+#print axioms not_colorable_of_fan_nil
+#print axioms fan_singleton_iff
+#print axioms Fan.narrow
+#print axioms Fan.widen
+#print axioms Fan.mono
+#print axioms Fan.comap
+#print axioms Fan.map
+#print axioms not_colorable_of_spindled_fan
+#print axioms fanEdges
+#print axioms Fan.of_not_colorable
+#print axioms Fan.of_unsat
+#print axioms fan_iff_not_colorable
+#print axioms Fan.of_edges
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -476,6 +476,68 @@ affordable and will be measured before it is promised.
 **Out.** χ ≥ 6 — that is M15. Finding a *new* seed is attempted with the fan score and reported
 honestly either way; the milestone does not depend on it succeeding.
 
+## 9. What landed
+
+**`Proofs/HadwigerNelson/Fan.lean`** — 19 declarations, zero `sorry`, builds in 1.4 s, axioms
+exactly the standard three. `Fan`, `Separated`, the ladder, three producers, the closing lemma, and
+**nine** specification examples of which **five are countermodels** — the width-2 witness with each
+partner alone refuted, the empty fan, the four-colour case, and the quantifier-order mutation.
+
+**`tools/forcer.py`** — `fan`, `fanEdges`, `Fanned`, `shrink_fan`, `best_fan`. The tool builds the
+**same joined edge list** Lean's `fanEdges` builds and asks the same question of it, so the two
+agree by construction rather than by a second transcription. `forces` and `fan` are cross-checked
+against each other at width one, at three and four colours — two different formulas for one
+question, which is the cheapest independent check available here.
+
+**Reproduced through the shipped tool**, not the prototype:
+
+```
+M13 universe       7 pts    12 edges  k=4  NO FAN at any pivot or spindle-able class   0.0 s
+M13 universe      13 pts    24 edges  k=4  NO FAN                                      0.1 s
+M13 universe      19 pts    42 edges  k=4  NO FAN                                      0.1 s
+M13 universe      43 pts   108 edges  k=4  NO FAN                                      0.2 s
+de Grey orbit    397 pts  1974 edges  k=4  width 3 at pivot 0 [irredundant, 0 unsettled,
+                                           7 calls] -> width >= 3 cannot be closed by a
+                                           spindle; narrow it                         72.7 s
+```
+
+### The gate
+
+| check | result |
+|---|---|
+| `lake build` | green, 4,640 jobs, under a memory cap |
+| `sorry` | none (the one grep hit is the word inside a docstring in `Packed.lean`) |
+| `#print axioms` | **147 clean**, 5 declared purchases — up from M13's 130, every new declaration on the standard three |
+| `lake lint` | silent |
+| spec examples | 9, five of them countermodels, all passing |
+
+### The negative controls, watched failing
+
+Seven, each broken on purpose and then restored:
+
+| broken | went red with |
+|---|---|
+| `fan` reports `separated` as `fan` | the width-2 witness's second row |
+| `fanEdges` forgets to join the partners | the width-2 witness itself |
+| `shrink_fan` claims irredundance without the sweep | the certified-width control |
+| an unsettled *drop* folded into a refusal | the injected-oracle control |
+| `width` printed despite an unsettled sweep | the starved-shrink control |
+| the width-2 Lean witness narrowed to width 1 | `decide` proved the proposition false |
+| `p ∉ Q` dropped from `fan_iff_not_colorable` | unknown identifier `hp` |
+| `fanEdges` (Lean) forgets the join | application type mismatch |
+
+**And the axiom audit was seen failing for real, not on purpose.** Before `Proofs.lean` was rebuilt
+with the new import, `scripts/Axioms.lean` could not resolve `Fan`, and `axioms.sh` printed
+`FAIL — scripts/Axioms.lean did not elaborate` rather than passing quietly. That is the M04 repair
+holding: the check that used to fail open now fails loud.
+
+**A fourth miswritten control, caught by its own negative control.** The sweep that records an
+unsettled *drop* was unreachable from outside — any timeout small enough to trigger it also starves
+the guard call — so deleting the branch left the self-test green. That is a check that could not
+fail, and it is now driven through an injected oracle. Three of this session's controls were
+miswritten before this one; the pattern is that **a control is only known to work once it has been
+watched failing**, and the ones that had not been were exactly the ones that were wrong.
+
 ## 5. Honest risks
 
 * **A fan may not narrow under any move we have.** § 0 establishes the property and the score; it
