@@ -172,12 +172,15 @@ def six(budget: float, timeout: float | None) -> None:
 
     t0 = time.time()
     # every spindle-able distance from vertex 0, as the seam to glue a second copy at
-    seams = []
+    # One seam per *distance class*: rotating about vertex 0 to bring some `q` onto another point
+    # at the same distance produces the same configuration, so keeping every `q` would re-examine
+    # one candidate dozens of times. (It did, before this line.)
+    byr2 = {}
     for q in range(1, len(base)):
         r2 = base.distsq_rational(0, q)
         if r2 is not None and spindleable(r2) and r2 != 0:
-            seams.append((r2, q))
-    seams.sort()
+            byr2.setdefault(r2, q)
+    seams = sorted(byr2.items())
     print(f"{len(seams)} spindle-able seams from vertex 0", flush=True)
 
     examined = 0

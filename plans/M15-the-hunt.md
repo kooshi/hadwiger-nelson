@@ -509,6 +509,120 @@ reported honestly either way.
 literature and M12 did not construct one; § 0 now says why it is the bottleneck rather than an
 accessory, and building it is a milestone, not a corner of this one.
 
+## 9. What landed
+
+### The structural finding, and it is the milestone
+
+**A fan is one removable vertex.** M14 found the property de Grey's construction has; M15 found what
+having one *means*, and the answer is an identity with a nine-line proof:
+
+> `G` minus `p`'s edges takes `k` colours **⟺** some `(k+1)`-colouring of `G` gives `p` a colour of
+> its own — and since `Fan.widen` makes the widest join the easiest fan there is, a fan of **any**
+> width sits at `p` exactly when `p` is *not* removable's opposite: exactly when deleting `p` leaves
+> the graph still needing the colour it needed.
+
+**`Proofs/HadwigerNelson/Critical.lean`** — 17 declarations, zero `sorry`, axioms exactly the
+standard three, and **13 specification examples of which 6 are countermodels**. The correspondence is
+stated over an arbitrary vertex type with no finiteness and no decidability; `0 < k` sits on the
+compression alone, so the negative the hunt calls carries no side condition at all.
+
+### The certified negative
+
+| theorem | says |
+|---|---|
+| `heule510_vertex_critical (p : Fin 510)` | delete any one vertex's edges from Heule's 510-point witness and **four colours suffice** |
+| `heule510_no_five_fan (p) (Q) (hp : p ∉ Q)` | **no five-colour fan sits anywhere in it** — any pivot, any partners |
+| `heule553_vertex_critical`, `heule553_no_five_fan` | the same for the 553-point witness |
+
+Axioms exactly `[propext, Classical.choice, Quot.sound]`. The evidence is **1,063 explicit
+four-colourings**, one per deleted vertex, packed two bits per vertex and checked by the kernel
+against each witness's own committed edge list. **No solver is trusted and no SAT certificate is
+involved** — which is the whole point: the honest negative is three orders of magnitude cheaper than
+the positive it replaces, so "we looked here and there is nothing" is a theorem rather than a claim
+about `tools/`.
+
+Read beside the already-committed `heule510_not_colorable_four`, the pair is five-vertex-criticality
+written out. And **that is why the route is closed**: a shrinking search is the search for removable
+vertices, M07 ran one on both witnesses, and a graph with no removable vertex has no fan.
+
+### The layout, which was measured rather than chosen
+
+17 chunk modules — 8 of 64 rows for the 510, 9 for the 553 — at 43–50 s each, because one
+`decide +kernel` over 510 rows peaks at **41.7 GB**. Assembling them needed **every argument named**:
+inferring `c`, `d` and `len` through the concatenation sent the elaborator into `whnf` on a 510-cons
+chain and did not return in 5½ minutes; naming them makes the assembly elaborate in 3.4 s.
+
+### The hunt
+
+Run at five colours, led by the identity's filter. Candidates are two copies of Heule's 510-point
+witness glued at a vertex — the cheapest configuration that *can* carry a fan, since every vertex of
+one copy is removable while the other copy still refutes four colours on its own.
+
+```
+6 spindle-able seams from vertex 0
+  r^2=1/3 ->  538 pts, 2696 edges; pivot removable; no fan at any of  6 spindle-able classes
+  r^2=5/9 -> 1001 pts, 5080 edges; pivot removable; no fan at any of 11 classes
+  r^2=1   ->  674 pts, 3625 edges; pivot removable; no fan at any of  9 classes
+  r^2=7/3 -> 1013 pts, 5008 edges; pivot removable; no fan at any of 13 classes
+  r^2=3   ->  953 pts, 4966 edges; pivot removable; no fan at any of 11 classes
+  r^2=4   ->  926 pts, 4682 edges; pivot removable; no fan at any of  9 classes
+
+=== 6 candidates examined in 436 s. No closable five-colour fan found. ===
+```
+
+**Not found**, and the shape of the failure is the informative part. Every candidate carries a fan —
+guaranteed by construction, and confirmed one call at a time — but in none of them is the fan
+confined to a **single distance class**, which is what the closing move needs. So the difficulty at
+five colours is exactly the difficulty M14 measured at four: not *finding* a fan, but **narrowing**
+one. The identity makes existence free and leaves narrowness untouched.
+
+### de Grey's 1581, reported as it stands
+
+1,566 pivots settled at a 300 s budget, none removable. Fifteen unsettled; re-run at four hours each,
+eleven more came back critical and **four are still running**. So his graph is critical at **1,577 of
+1,581 vertices with four unknown** — and unknown is not folded into either answer, so `emit_critical`
+refuses and **no certificate for de Grey's graph is emitted**. That is the intended behaviour, not a
+gap: the emitter is built to refuse rather than pad, and both refusals were watched.
+
+### The gate
+
+| check | result |
+|---|---|
+| `lake build` | green, 4,661 jobs, every batch under a memory cap |
+| `sorry` | none |
+| `#print axioms` | **171 clean**, 5 declared purchases — up from M14's 147, every new declaration on the standard three |
+| `lake lint` | silent |
+| spec examples | 13 in `Critical.lean`, 6 of them countermodels, plus 4 `#guard_msgs`-pinned diagnostics |
+| `regen-check` | *(running at the time of writing)* — now also regenerates both criticality certificates and compares them byte for byte |
+
+### The negative controls, watched failing
+
+Thirteen, each broken on purpose and restored:
+
+| broken | went red with |
+|---|---|
+| `hp : p ∉ Q` dropped | 10 errors — a fan with the pivot among its partners is free |
+| `0 < k` dropped from the compression | the `Fin k` the spare colour lives in stops existing |
+| the length conjunct dropped | `forall_colorable_delete_of_packed` |
+| `% k` dropped from `unpackColor` | the `Fin k` bound |
+| **`% 2 ^ bits` dropped from `unpackColor`** | **nothing — a check that could not fail; now it has a partner that discriminates** |
+| one edge orientation dropped from the certificate | `colorable_delete_of_packed` |
+| the pivot guard dropped from `properOffPivot` | 3 errors |
+| one bit flipped in a row, at a vertex its pivot constrains | that chunk's `decide +kernel` |
+| a chunk filed at the wrong pivot offset | the chunk theorem |
+| the last chunk repeated instead of the eighth | 3 errors in the assembly |
+| a chunk's stated length off by one | 2 errors |
+| the diagnostic's message reworded | `#guard_msgs` |
+| the length check removed from the diagnostic | 2 pinned messages |
+| the emitter starved (1 ms timeout) | refused, named the pivots, exit 1, **no file written** |
+| a pendant vertex bolted on (making one vertex removable) | refused, named vertex 510, exit 1, no file |
+
+**And two of those controls were miswritten before they worked**, which is the same pattern M14
+recorded. The bit-flip control first came back green: it had flipped row `p`'s value **at vertex
+`p`**, which is a don't-care — pivot `p`'s edges are all deleted, so its own colour is unconstrained.
+And the removable-vertex control read `exit=0` because `head -4` supplied the status rather than the
+emitter. Third time a shell pipeline has swallowed an exit status a check depended on here.
+
 ## 5. Honest risks
 
 * **This milestone is expected to report "not found".** No 6-chromatic unit-distance graph is known;

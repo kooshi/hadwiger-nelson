@@ -83,7 +83,10 @@ PY
       echo "    FAIL: ${f} differs in content"; FAIL=1; continue
     fi
     N_OK=$((N_OK + 1))
-  done < <(cd "${D}" && find . -name '*.lean' ! -name Bound.lean -printf '%P\n' | sort)
+    # `Critical.lean` and `Critical/` come from a different emitter and are checked below, on their
+    # own terms -- their evidence is colourings rather than a refutation.
+  done < <(cd "${D}" && find . -name '*.lean' ! -name Bound.lean ! -name Critical.lean \
+             ! -path './Critical/*' -printf '%P\n' | sort)
   echo "    ${N_OK} generated modules identical, certificate reproduced bit for bit"
 done
 
