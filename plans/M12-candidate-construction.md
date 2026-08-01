@@ -375,6 +375,65 @@ totality discipline's canonical trap, in the one place this milestone could have
 existing already implies it, so the structure stays free of a hypothesis every consumer would have
 had to discharge.
 
+### 3.4 The domain pass — what it changed
+
+Run 2026-08-01 against the committed skeleton. Four findings, three of them measured.
+
+**1. The hand-rolled index was half a Mathlib `Equiv`, written out.** `idx i v = i * n + v` with
+`cert.verts` inverting it by division and modulus is exactly `finProdFinEquiv : Fin c × Fin n ≃
+Fin (c * n)`. Head to head, on the linking lemma that every consumer needs:
+
+| | `verts_idx` |
+|---|---|
+| hand-rolled | **9 lines** — a derived `0 < n`, `Nat.mul_add_div`, `Nat.mul_add_mod_of_lt`, and a `congr` dance |
+| through the equiv | **1 line** — `simp only [cert, idx, Equiv.symm_apply_apply]` |
+
+The tell was in the skeleton and I had written a `--` comment excusing it: `cert.verts` had to
+*derive* `0 < n` from a vertex existing. **A bijection stated as a bijection needs no side
+condition**, because it has an inverse by construction. Recognition was the whole fix.
+
+**2. Assembly is not an optimisation — it is what makes computed coordinates viable.** Measured, and
+it reverses the naive reading. Checking an assembled certificate the direct way, edge by edge:
+
+| copies | direct `decide +kernel` |
+|---|---|
+| 1 | 2.54 CPU s |
+| 8 | 4.66 CPU s |
+| 24 | 10.13 CPU s |
+
+Linear in copies, **0.33 CPU s per edge** — against M08's **7.1 ms** per edge of *emitted* literal
+coordinates. So defining a copy's points as `place i (base.verts v)` is **47× worse** than emitting
+them, unless the copy's edges are certified *symbolically*. `validOn_copiedEdges` is what does that,
+and the module exists for it. M11's "a placed copy costs nothing" is true only through the theorem;
+through `decide` it is false, and expensively so.
+
+**3. The exponential denominator costs nothing** — the same measurement. `factor` is the product of
+every placement's scale, so sixteen copies of the `3–4–5` rotation is `25¹⁶`; it computes instantly
+and the direct check is linear rather than exponential in the copy count. The assembled table is a
+*function*, so no coordinate is ever a literal and the olean holds the base and the motions only.
+M08's "kernel bit width is irrelevant beside step count", holding at a new place.
+
+**4. The spindle's field condition needs nothing new, because it is already `Motion.col₁`.** A
+spindle at radius `r` needs `√(4r² − 1)` in the field; a `Motion` needs `a * a + b * b = scale`.
+These are the same condition seen from two sides: the tool can only produce `a, b` when the radical
+exists, and Lean discharges `col₁` by `decide +kernel` regardless of where they came from. **The
+constraint is enforced by the type, at the only place it matters**, so no `Subtype` of available
+radii, no `Except`, no index. The tool refuses; Lean never hears about it.
+
+Three shapes were considered and kept as they were, with reasons now on record rather than by
+default: `places : List Motion` (orbits are not all cyclic — de Grey's is one reflection, a hexagonal
+one is six distinct motions — so `Motion` plus an iteration count covers strictly less and `Motion`
+still needs no monoid instance); `cross` a parameter of `cert` rather than a field of `Assembly` (it
+is a *claim* about which pairs are asserted adjacent, exactly as `UDCert.edges` is, and a search
+proposes one placement then hunts seams); and `Q4` fixed rather than parameterised (speculative until
+a radius demands it, and § 0(g) now says which one would).
+
+**One theorem the skeleton was missing.** M09's 12.8-hour saving was the *colouring property*
+transported, not the geometry — and `Gadget.transport` needs adjacency preservation, which nothing in
+`Assembly` supplied. `adj_idx` is that lemma: copy `i`'s edges really are edges of the assembled
+graph, so the geometric copy and the combinatorial copy are the same map. Without it a placed copy
+would be free in the geometry and full price in the refutation, which is the expensive half.
+
 ### 3.3 The spec examples, per the gate
 
 Every definition gets a check that would fail if it drifted, and every discriminating check gets a
