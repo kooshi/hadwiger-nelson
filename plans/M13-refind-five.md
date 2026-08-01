@@ -351,6 +351,46 @@ shrink that cannot certify says so rather than claiming the strong word.
 The last row is the division the whole project runs on: the tool's assertions are self-consistency,
 and the theorem is Lean's.
 
+### 3.0.4 What the experience pass changed
+
+The consumer that matters is M14 — the hunt for χ ≥ 6 — which will call this in a loop at five
+colours and whose most common experience is *failure*. So the pass went at the failure path first.
+
+**The machine user was audited rather than imagined.** Handing `exact?` the three goals a caller
+actually holds returns exactly the intended lemma each time: `not_colorable_of_spindled_forcer` for
+the abstract goal, `not_colorable_spindleEdges` for the constructed one, and `Forces.map` for "one
+pivot per orbit is enough". Discoverability is not a hope here; it was run.
+
+**Three changes.**
+
+* **A general module must not depend on an instance.** `Forcer.lean` imported
+  `Instances/Spindle.lean` purely so its spec could mention the Moser spindle — so everything M14
+  stacks on top would have dragged a coordinate table with it. The instantiation moved to
+  `Instances/SpindleBound.lean`, which is a leaf, and it lands **beside the three routes to the same
+  theorem it is a fourth alternative to** — better for the reader than being a file away.
+  *Alternative:* leave it and accept a 7-point table. *Why this won:* the DAG statement "the algebra
+  depends on no instance" is worth more than the move cost, and M14 is where it gets paid.
+* **`forces_of_edges` became `Forces.of_edges`,** beside `Forces.of_gadget`. Two producers of one
+  property that were spelled differently is a name that teaches a reader a false rule.
+* **The four distinguishable failures each got a sentence, and both directions are pinned.** A new
+  `ForcerDiagnose.lean` — `#eval`-only, downstream, nothing imports it, so it is rewritable for the
+  cost of one file — reports *which* side condition refused a candidate: the copies do not share the
+  pivot (naming where each lands), the partners coincide (so there is no joining edge), or a
+  placement collapses an edge (naming the edge and the vertex it lands on). Six `#guard_msgs` pin
+  all four messages plus the passing case, because a diagnostic that renders nothing when it cannot
+  run is worse than none.
+
+**And the one thing the diagnostic deliberately does not say.** Whether the pair really *is* forced
+is settled only by `Forces.of_edges (by decide +kernel)` or by a certificate through
+`Forces.of_gadget`. A report that said "forced" would be a check reporting what it could not run,
+which is the exact shape of both gates that have failed open in this project.
+
+**The failures that belong to the tool, not to Lean:** a configuration that forces nothing, and a
+pair forced at a squared distance whose spindle radicand is not a square in the field. The second is
+the *actionable* one — `field.py`'s `missing_root` already names the root that would be needed, and
+the refusal says so rather than rounding to something Lean would later reject for unreadable
+reasons.
+
 ### 3.1 Spec — the instance, and the controls that must go red
 
 ```lean

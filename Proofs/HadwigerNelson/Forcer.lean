@@ -1,5 +1,4 @@
 import Proofs.HadwigerNelson.Gadget
-import Proofs.HadwigerNelson.Instances.Spindle
 
 /-!
 # Forced pairs, and the spindle that closes them
@@ -101,7 +100,7 @@ shape `Gadget.ofExhaustion` uses, for the same reason: it is decidable, so a cal
 `by decide +kernel`.
 
 The ceiling is `k ^ n` colourings; beyond it, `Forces.of_gadget` takes a certificate instead. -/
-theorem forces_of_edges {n : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
+theorem Forces.of_edges {n : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
     (h : ∀ f : Fin n → Fin k, (∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2) ∨ f p = f q) :
     Forces (edgeGraph n E) k p q := by
   intro C
@@ -184,64 +183,18 @@ theorem not_colorable_spindleEdges {n N k : ℕ} {E : List (Fin n × Fin n)} {p 
   show (edgeGraph N _).Adj (φ q) (ψ q)
   exact ⟨hjne, Or.inl (List.mem_append_right _ (List.mem_singleton_self _))⟩
 
-/-! ## Spec — the rung this re-derives, and the controls that must go red
+/-! ## Spec — `rhombus`, and the controls that must go red
 
-The Moser spindle's eleven edges are exactly two copies of `rhombus` glued at vertex `0` plus the
-joining edge `(3,6)`:
-
-    rhombus                                (0,1) (0,2) (1,2) (1,3) (2,3)
-    rhombus under 0,1,2,3 ↦ 0,4,5,6        (0,4) (0,5) (4,5) (4,6) (5,6)
-    the joining edge                       (3,6)
-
-so rung A's witness costs two literals and no new certificate. -/
-
-/-- The first rhombus, as it sits in the Moser spindle: the identity on `0,1,2,3`. -/
-def spindleCopyA : Fin 4 → Fin 7 := ![0, 1, 2, 3]
-
-/-- The second rhombus: the same four vertices carried to `0,4,5,6`, sharing the pivot `0`. -/
-def spindleCopyB : Fin 4 → Fin 7 := ![0, 4, 5, 6]
-
-/-- The two placed copies and the joining edge — built by `spindleEdges`, not written out, so the
-spec exercises the same construction the search's output will use. -/
-def spindleFromRhombi : List (Fin 7 × Fin 7) :=
-  spindleEdges spindleCopyA spindleCopyB rhombus (spindleCopyA 3, spindleCopyB 3)
-
--- **The decomposition is checked, not asserted.** A placement typo that quietly built a different
--- graph would go red here rather than prove a theorem about something else.
-#guard spindleFromRhombi.length = moserSpindleEdges.length
-#guard spindleFromRhombi.all (· ∈ moserSpindleEdges)
-#guard moserSpindleEdges.all (· ∈ spindleFromRhombi)
-
--- The pivot really is shared, and the partners really are the joining edge's ends.
-#guard spindleCopyA 0 == spindleCopyB 0
-#guard (spindleCopyA 3, spindleCopyB 3) == ((3 : Fin 7), (6 : Fin 7))
+The instantiations live where the instances do: `Instances/SpindleBound.lean` re-derives the Moser
+spindle through both routes, beside the certificate route it is an alternative to. What stays here
+is the forcer the whole file is about and the claims that must be *false*. -/
 
 /-- **The rhombus forces its far corners at three colours**, over all `3⁴ = 81` colourings.
 
 Proved directly rather than through `rhombusGadget`, which states the same fact through the gadget
 algebra: two routes to one claim, so the algebra is cross-checked rather than trusted. -/
 theorem rhombus_forces : Forces (edgeGraph 4 rhombus) 3 0 3 :=
-  forces_of_edges (by decide +kernel)
-
-/-- **The Moser spindle has no 3-colouring, re-derived through the closing lemma.**
-
-An independent route to `Instances/SpindleBound.lean`'s `moserSpindle_not_colorable_three`, which
-decides the whole seven-vertex graph. This one decides a four-vertex rhombus and places it twice —
-and it is the same argument de Grey's graph runs one colour up, at 791 points instead of 4. -/
-theorem moserSpindle_not_colorable_three_spindled :
-    ¬ (edgeGraph 7 moserSpindleEdges).Colorable 3 :=
-  not_colorable_of_spindled_forcer
-    (edgeHom spindleCopyA (by decide)) (edgeHom spindleCopyB (by decide))
-    (rfl) (by refine ⟨by decide, Or.inl (by decide)⟩) rhombus_forces
-
-/-- **The same rung through the construction route**, which is the one that scales: no edge list is
-searched, only three disequality checks linear in the forcer's edges. The graph here is
-*constructed* by `spindleEdges` rather than read from a table — which is what a candidate the search
-proposes will be. -/
-theorem spindleFromRhombi_not_colorable_three :
-    ¬ (edgeGraph 7 spindleFromRhombi).Colorable 3 :=
-  not_colorable_spindleEdges (E := rhombus) (p := 0) (q := 3)
-    spindleCopyA spindleCopyB (by decide) (by decide) rfl (by decide) rhombus_forces
+  Forces.of_edges (by decide +kernel)
 
 /-! ### The controls
 
@@ -285,9 +238,7 @@ placements are excluded by the model rather than by a hypothesis anybody has to 
 because it is the reason no `p ≠ q` side condition appears above. -/
 example {p : V} (φ : G →g H) : ¬ H.Adj (φ p) (φ p) := SimpleGraph.irrefl H
 
--- And the model of every hypothesis at once: the Moser spindle instance above inhabits them all, so
--- nothing here is a theorem about an empty domain.
-example : (edgeGraph 7 moserSpindleEdges).Colorable 4 :=
-  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 2, 3], by simp only [edgeGraph_adj]; decide⟩
+-- A model of every hypothesis at once lives in `Instances/SpindleBound.lean`, where the Moser
+-- spindle inhabits them all — so nothing here is a theorem about an empty domain.
 
 end HadwigerNelson

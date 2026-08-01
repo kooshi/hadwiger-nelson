@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleLrat
 import Proofs.HadwigerNelson.Reduction
 import Proofs.HadwigerNelson.Sat.Lrat
+import Proofs.HadwigerNelson.Forcer
 
 /-!
 # The Moser spindle — χ(ℝ²) ≥ 4, three ways
@@ -222,5 +223,84 @@ not a proof. -/
           (spindleCubeCerts.take 7)).map (·.1) = [7, 8]
 
 end Spec
+
+/-! ## A fourth route: the forcer and its spindle
+
+`Forcer.lean` states the argument both known rungs of this problem share — a configuration that
+paints two of its points the same colour in every `k`-colouring, placed twice so the copies share
+the first point and the second points land a unit apart. de Grey's graph is that argument at four
+colours on 791 points. **The Moser spindle is it at three colours on four**, and the decomposition
+is exact rather than approximate:
+
+    rhombus                                (0,1) (0,2) (1,2) (1,3) (2,3)
+    rhombus under 0,1,2,3 ↦ 0,4,5,6        (0,4) (0,5) (4,5) (4,6) (5,6)
+    the joining edge                       (3,6)
+
+So this route decides a **four**-vertex rhombus and places it twice, where the three routes above
+each decide the whole seven-vertex graph. It is here rather than in `Forcer.lean` so that a reader
+comparing routes finds them in one file, and so that the general module depends on no instance. -/
+
+namespace SpindleForcer
+
+/-- The first rhombus, as it sits in the Moser spindle: the identity on `0,1,2,3`. -/
+def copyA : Fin 4 → Fin 7 := ![0, 1, 2, 3]
+
+/-- The second rhombus: the same four vertices carried to `0,4,5,6`, sharing the pivot `0`. -/
+def copyB : Fin 4 → Fin 7 := ![0, 4, 5, 6]
+
+/-- The two placed copies and the joining edge, **built** by `spindleEdges` rather than written out,
+so this exercises the same construction a search's output uses. -/
+def edges : List (Fin 7 × Fin 7) := spindleEdges copyA copyB rhombus (copyA 3, copyB 3)
+
+-- **The decomposition is checked, not asserted.** A placement typo that quietly built a different
+-- graph would go red here rather than prove a theorem about something else.
+#guard edges.length = moserSpindleEdges.length
+#guard edges.all (· ∈ moserSpindleEdges)
+#guard moserSpindleEdges.all (· ∈ edges)
+
+-- The pivot really is shared, and the partners really are the joining edge's ends.
+#guard copyA 0 == copyB 0
+#guard (copyA 3, copyB 3) == ((3 : Fin 7), (6 : Fin 7))
+
+end SpindleForcer
+
+/-- **The Moser spindle has no 3-colouring, from the rhombus that forces its far corners.**
+
+The fourth independent route to `moserSpindle_not_colorable_three`, and the only one that never
+looks at all seven vertices at once. -/
+theorem moserSpindle_not_colorable_three_spindled :
+    ¬ (edgeGraph 7 moserSpindleEdges).Colorable 3 :=
+  not_colorable_of_spindled_forcer
+    (edgeHom SpindleForcer.copyA (by decide)) (edgeHom SpindleForcer.copyB (by decide))
+    rfl (by refine ⟨by decide, Or.inl (by decide)⟩) rhombus_forces
+
+/-- **The same rung through the construction route**, which is the one that scales: the graph is
+*constructed* by `spindleEdges`, so neither placement is searched for — only three disequality
+checks linear in the forcer's edge list. This is the shape a candidate the search proposes arrives
+in, exercised here at a size where the answer is known by hand. -/
+theorem spindleFromRhombi_not_colorable_three :
+    ¬ (edgeGraph 7 SpindleForcer.edges).Colorable 3 :=
+  not_colorable_spindleEdges (E := rhombus) (p := 0) (q := 3)
+    SpindleForcer.copyA SpindleForcer.copyB (by decide) (by decide) rfl (by decide) rhombus_forces
+
+-- **A model of every hypothesis the closing lemma has**, so none of it quantifies over an empty
+-- domain: the spindle is 4-colourable, the rhombus forces at three colours, and both placements
+-- exist above.
+example : (edgeGraph 7 moserSpindleEdges).Colorable 4 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 2, 3], by simp only [edgeGraph_adj]; decide⟩
+
+-- **The joining edge is load-bearing.** Delete `(3,6)` and the remaining ten edges are 3-colourable,
+-- so `hjoin` cannot be dropped from the closing lemma.
+example : (edgeGraph 7 [(0,1), (0,2), (0,4), (0,5), (1,2), (1,3), (2,3), (4,5), (4,6), (5,6)]
+    ).Colorable 3 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 2, 0], by simp only [edgeGraph_adj]; decide⟩
+
+-- **The shared pivot is load-bearing, and this is the control easiest to get wrong.** Place the
+-- second rhombus on four *fresh* vertices, keep both forcers and keep a joining edge `(3,7)`, and
+-- the union is 3-colourable after all. Each copy still forces its own pair; what fails is that the
+-- two forced colours are now unrelated.
+example : (edgeGraph 8 [(0,1), (0,2), (1,2), (1,3), (2,3),
+                        (4,5), (4,6), (5,6), (5,7), (6,7), (3,7)]).Colorable 3 :=
+  colorable_iff_exists.mpr ⟨![0, 1, 2, 0, 1, 0, 2, 1], by simp only [edgeGraph_adj]; decide⟩
 
 end HadwigerNelson

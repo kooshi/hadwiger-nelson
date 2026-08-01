@@ -11,6 +11,7 @@ import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Forcer
+import Proofs.HadwigerNelson.ForcerDiagnose
 import Proofs.HadwigerNelson.Fractional
 import Proofs.HadwigerNelson.FractionalSpec
 import Proofs.HadwigerNelson.IndepSearch
