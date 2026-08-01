@@ -114,16 +114,18 @@ Under an hour of processor time for all three, against M06's 27.8 hours for one 
 honest negative is three orders of magnitude cheaper than the positive it replaces**, which is what
 makes "searched X, found nothing" statable as a theorem rather than asserted from Python.
 
-### (f) Heule's 510-point witness has no removable vertex at all
+### (f) Neither Heule witness has a removable vertex at all
 
 Every one of its 510 vertices swept, no sampling:
 
 | witness | pts | removable vertices | unsettled | time | worst single call |
 |---|---|---|---|---|---|
 | Heule 510 | 510 | **0** | 0 | 114.1 s | 7.16 s |
+| Heule 553 | 553 | **0** | 0 | 124.0 s | 2.85 s |
 
-**Zero.** The graph is five-vertex-critical everywhere, so by § (b) **no five-colour fan sits
-anywhere in it, at any pivot, at any width** — the de Grey route has no place to start. This is not
+**Zero, both of them.** Each graph is five-vertex-critical at every vertex, so by § (b) **no
+five-colour fan sits anywhere in either, at any pivot, at any width** — the de Grey route has no
+place to start. This is not
 bad luck: M07 *produced* this graph by a shrinking search, and shrinking is the search for removable
 vertices. The milestone that made the certificate affordable is the milestone that closed the route.
 
@@ -208,6 +210,96 @@ three-bit field packed with `[5, 6, 7, 2]` clamps to `[0, 1, 2, 2]`.
 | `Instances/Heule510/Critical.lean` | 510 | ≈ 3.6 min |
 | `Instances/Heule553/Critical.lean` | 553 | ≈ 4.2 min |
 | `Instances/DeGrey/Critical.lean` | 1581, **if the graph is critical at all** | ≈ 35 min |
+
+## 3.0 The domain pass — what it changed
+
+Run against the skeleton at commit `d3b39dc`. Five findings, four of which moved a declaration, and
+two of which were settled by running the toolchain rather than by reasoning about it.
+
+### The `k + 1` offset is free, and that was measured, not assumed
+
+Every statement trades one colour for the deletion: `Fan G (k+1) p Q` against `Colorable k`. The
+worry was that a caller holding `Fan G 5 p Q` must see `5` as `4 + 1`, and that unification would
+balk. **It does not.** Three probes elaborated with no error, including the one that matters — the
+packed certificate produces `Colorable 4`, and the theorem is stated at the literal `5`:
+
+```lean
+example … (h : everyVertexCritical E 2 4 cs = true) … : ¬ Fan (edgeGraph n E) 5 p Q :=
+  no_fan_of_packed (by norm_num) h hp        -- elaborates
+```
+
+So the three alternatives are all worse and none is needed: `Colorable (k − 1)` would import
+truncated subtraction, which this project treats as a modelling failure; a linking hypothesis
+`j + 1 = k` would appear in every signature to buy nothing; inverting the primitive would put the
+offset on the *fan* side, where callers live.
+
+### The correspondence is instance-free, and the skeleton had hidden that
+
+The skeleton stated the converse as `Fan G (k+1) p (Finset.univ.erase p).toList`, dragging
+`[Fintype V]` and `[DecidableEq V]` into the identity. The content needs neither. Split into the two
+halves of one correspondence — **the spare colour and the deleted vertex are the same thing** —
+each over an arbitrary vertex type:
+
+| | |
+|---|---|
+| `exists_isolating_of_colorable_delete` | a `k`-colouring of `G − p`, plus a spare colour for `p` |
+| `colorable_delete_of_exists_isolating` | drop `p`'s private colour and the rest is a `k`-colouring |
+
+The gain is not tidiness. **`0 < k` now sits on the compression alone**, where the demand really is
+— at `k = 0` on a one-point graph the compression's hypothesis holds vacuously and its conclusion
+demands an empty vertex type — so the *workhorse*, the negative the hunt calls constantly, carries
+no side condition at all. On the skeleton's shape it inherited one it never used.
+
+`Fintype` and `DecidableEq` survive on `fan_univ_iff` and nowhere else, and there they are
+intrinsic: "the widest `Q`" is a list of everything, and everything is only listable when there is
+finitely much of it.
+
+### Every fan-facing statement is now one line
+
+Confirmed by elaborating them before adopting the shape. `not_fan_of_colorable_delete`,
+`not_forces_of_colorable_delete` and `not_fan_of_vertex_critical` are two, two and one lines over
+the correspondence — which is the evidence that the pair above is the right pair, rather than an
+opinion about it. M13's forced pair is reached as the width-one reading, not re-proved.
+
+### Two names deliberately not minted, and one lemma deliberately not written
+
+* **The vertex property.** `(G.deleteIncidenceSet p).Colorable k` appears seven times and stays
+  spelled out. Mathlib has **no** vertex-criticality notion to reuse — grepped, not recalled — so a
+  name would be minted here, and "critical" is a word graph theory applies to a *graph*, never to a
+  vertex: `Critical G k p` would read as a term of art that is not one. The composite already says
+  what it means in vocabulary every Mathlib reader holds.
+* **The isolating colouring.** `∀ q, q ≠ p → C p ≠ C q` appears three times, is six tokens, and its
+  only consumers are the two theorems that mention it. A predicate with no API is a layer.
+* **Transport down along subgraphs.** `deleteIncidenceSet` is monotone (three lines) and
+  `SimpleGraph.Colorable.mono_left` **already exists in Mathlib** — a fourth claim of absence
+  avoided by grepping. But the next-lemma test says do not write it: the hunt builds candidates by
+  *growing*, so a negative on a big graph covering its subgraphs is a lemma nothing asks for.
+
+### The clamp is a decoder, not a junk value
+
+`unpackColor`'s two moduli do different jobs, and only one is load-bearing. `% 2 ^ bits` **decodes**
+— a shift alone leaves every higher vertex's colour above the field. `% k` **bounds**, and it is the
+only one soundness rests on: whatever `bits` says, the result lands in `Fin k`. So `bits` is a
+*tuning* parameter and every theorem holds for every value of it. That is M05's rule — soundness
+proved for every decoder, the packing untrusted as a matter of type — and it is not junk-value
+totality, because nothing downstream believes the pack was faithful. It is also what makes the
+`k = 5` case work at all: five is not a power of two, and a three-bit field admits 5, 6 and 7.
+
+### The list stays a list
+
+`everyVertexCritical` keeps `cs : List ℕ` with a length conjunct rather than `Vector ℕ n`, for a
+measured reason: an `Array` literal is built by a chain of applications, so the kernel pays O(its
+whole size) per access (M04's finding), whereas `zipIdx` and `all` walk a literal `List` once. The
+length check is what the `Vector` would have carried, and it belongs in the `Bool` anyway — the data
+arrives from an untrusted emitter and must be checked rather than believed.
+
+### Seams walked
+
+`Q = []` reads as "`G` itself is `(k+1)`-colourable", true and non-vacuous. `p ∈ Q` makes the fan
+trivially true and is excluded by `hp`, which is therefore load-bearing. `bits = 0` collapses every
+vertex to colour 0, so the check passes only for stars — sound. `n = 0` is vacuous. `E = []` passes
+trivially and its conclusion is true. No adversarial member found: `properOffPivot` passing *is*
+`k`-colourability of the deleted graph, with no gap between them.
 
 ## 3. The shape — tools
 
