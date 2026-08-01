@@ -171,6 +171,35 @@ purchase there would move the construction's central fact out of the kernel's re
 #print axioms deGreyMotion_maps
 #print axioms deGreyRot_validOn_rotated
 
+/-! ## M10 — the fractional chromatic number, and `χ_f(ℝ²) ≥ 65/18`
+
+The fractional bound is a *lower* bound on an infimum, so it says something only because it
+quantifies over every fractional colouring — and `C5_fractional` is what shows the definition is not
+secretly the ordinary chromatic number, by pinning a value that is not an integer.
+
+`coreSpindle_noHeavy` is this milestone's uninspectable claim: no independent set of 63 points
+weighs more than 72, over `10⁹`-odd sets. It must be clean, and so must
+`four_le_chromaticNumber_plane_fractional`, which re-derives M03's rung from the fractional bound
+alone. -/
+
+#print axioms SimpleGraph.le_fractionalChromaticNumber_iff
+#print axioms SimpleGraph.FractionalColorable.fractionalChromaticNumber_le
+#print axioms SimpleGraph.fractionalChromaticNumber_mono_of_hom
+#print axioms SimpleGraph.le_fractionalChromaticNumber_of_weights
+#print axioms SimpleGraph.le_fractionalChromaticNumber_of_indepNum
+#print axioms SimpleGraph.not_colorable_of_lt_fractionalChromaticNumber
+#print axioms HadwigerNelson.FractionalSpec.C5_fractional
+#print axioms HadwigerNelson.nbrMask_and_two_pow_eq_zero
+#print axioms HadwigerNelson.noHeavy_sound
+#print axioms HadwigerNelson.le_fractionalChromaticNumber_unitDistance_edgeList
+#print axioms HadwigerNelson.coreSpindle_valid
+#print axioms HadwigerNelson.coreSpindle_slots
+#print axioms HadwigerNelson.coreSpindle_noHeavy
+#print axioms HadwigerNelson.coreSpindle_unit_distances
+#print axioms HadwigerNelson.findHeavy_isNone
+#print axioms HadwigerNelson.fractionalChromaticNumber_plane_ge
+#print axioms HadwigerNelson.four_le_chromaticNumber_plane_fractional
+
 /-! ## M07 — two smaller witnesses, on the same infrastructure
 
 The same theorem from two graphs that share no vertex, no edge and no certificate with de Grey's, so

@@ -692,6 +692,70 @@ for the two failure modes this milestone introduces:
 
 ---
 
+## 4.5 What landed, and what implementation cost
+
+| module | what it is | CPU s |
+|---|---|---|
+| `Fractional.lean` | `FractionalColorable`, `fractionalChromaticNumber`, the certificate theorem — no `Fin`, no lists, no data, and no dependency on anything in this project | 1.1 |
+| `FractionalSpec.lean` | the 5-cycle at exactly `5/2`, both directions, plus its negative control | 1.8 |
+| `IndepSearch.lean` | `nbrMask`, `mkSlots`, `noHeavy`, `noHeavy_sound`, and the two steps out to the plane | 1.1 |
+| `Instances/CoreSpindle/Cert.lean` | 63 points, 216 edges, geometry kernel-decided | 7.5 |
+| `Instances/CoreSpindle/Weights.lean` | the weights, the order, the search plan | 1.0 |
+| `Instances/CoreSpindle/Search.lean` | the four `decide`s, of which `coreSpindle_noHeavy` is 390,625 nodes | **215** |
+| `Instances/CoreSpindle/Bound.lean` | the headline, the shape `#guard`s, the geometry control | 2.2 |
+| `Instances/CoreSpindle/Diagnose.lean` | `findHeavy`, its equivalence theorem, two pinned messages | 117 |
+
+**The projection held.** § 0(e) projected the headline search at ~5 CPU minutes from the 47-point
+run; it came in at **3.6**.
+
+Three things implementation changed:
+
+* **`Search.lean` was split out of `Bound.lean`.** Not in the plan. The reason is the repo's own
+  rule read forward: everything a human reads should be editable for less than the time the kernel
+  spends, and the `noHeavy` decide is 3.6 CPU minutes. The docstring a sceptic lands on now costs
+  2.2 s to rewrite.
+* **`le_fractionalChromaticNumber_of_weights` needed no `DecidableRel G.Adj`.** The plan and the
+  first draft both carried it; nothing in the proof uses it. Dropping it matters beyond tidiness —
+  `edgeGraph` has no such instance and adding one would have meant editing `EdgeList.lean`, which
+  every certificate in the repository imports and which Lake's content-based traces would have
+  re-checked in full.
+* **The diagnostic's `#eval`s are the module's cost.** `findHeavy` runs interpreted and recomputes a
+  216-edge fold per node, so each run is about a minute. Naming the reported set as a literal — tied
+  to the search's actual output by the `#guard_msgs` pin — took the module from three runs to two.
+
+## 4.6 The gate
+
+| check | result |
+|---|---|
+| `./scripts/build.sh` | **OK**, 154 batches |
+| zero `sorry` | **0** across `Proofs/` and `scripts/` |
+| `#print axioms` | **OK — 103 clean, 5 declared purchases**, all five M03's. Was 86 clean before this milestone |
+| `lake lint` | **passed** |
+| `./scripts/regen-check.sh` | **OK** — and `coreSpindle` is now in it, re-deriving the geometry *and* re-solving the linear program for the weights, byte for byte |
+
+The three headline declarations, and the one nobody can check by inspection:
+
+| declaration | axioms |
+|---|---|
+| `fractionalChromaticNumber_plane_ge` | `[propext, Classical.choice, Quot.sound]` |
+| `four_le_chromaticNumber_plane_fractional` | `[propext, Classical.choice, Quot.sound]` |
+| `C5_fractional` — `χ_f(C₅) = 5/2` | `[propext, Classical.choice, Quot.sound]` |
+| **`coreSpindle_noHeavy`** — the 390,625-node search | **`[propext]` alone** |
+
+### The controls, each watched to fail
+
+| control | what happened |
+|---|---|
+| prune weakened from `wt + rem ≤ D` to `wt ≤ D` | `noHeavy_sound` fails at **line 167** — the PRUNE case's closing `omega`, and nowhere else |
+| the `u ≠ v` guard dropped from mask fidelity | fails at the lemma and again at its use in the TAKE case |
+| the bound stated at `71` | `coreSpindle_noHeavy` refuses and **prints its directive** |
+| the printed directive, pasted | it was **missing four arguments** and would not have run. Fixed, and the corrected call is the one `#guard_msgs` pins as printing `none` |
+| the diagnostic's pinned output | seen red once already, when the literal was written before the search was run |
+| vertex 1 collapsed onto vertex 0 | the geometry check reports non-empty `badEdges`, all at vertex 1 |
+| the independence bound stated at `1` for the 5-cycle | `C5_indep_not_le_one` — a theorem that the bound `2` is attained, so `2` is not slack |
+
+---
+
 ## 5. Not in this milestone
 
 * **Cranston–Rabern's 76/21.** Needs their lemma that every maximal independent set in the

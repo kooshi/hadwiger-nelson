@@ -103,6 +103,25 @@ for f in Diffs.lean Valid.lean; do
 done
 [[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical"
 
+# The core-and-spindle witness has no vendored input at all: `tools/corespindle.py` *constructs* the
+# graph from the row spec and then solves the dual linear program for the weights, so this block
+# re-derives the mathematics as well as the formatting. The linear program is seeded and HiGHS is
+# deterministic, so the weights reproduce exactly; if they ever stop doing so, the bound is still
+# whatever the kernel certified — this check is about the bytes, not the theorem.
+echo "==> coreSpindle"
+CS="Proofs/HadwigerNelson/Instances/CoreSpindle"
+python3 tools/corespindle.py --rows 6 5 4 --out "${V}/corespindle63.json" \
+  --lean "${V}/Weights.lean" > /dev/null 2>&1 \
+  || { echo "    FAIL: the generator did not re-run"; FAIL=1; }
+cmp -s "${V}/corespindle63.json" tools/corespindle63.json \
+  || { echo "    FAIL: corespindle63.json differs from what the construction produces"; FAIL=1; }
+python3 tools/emit_cert.py "${V}/corespindle63.json" coreSpindle --out "${V}/Cert.lean" \
+  > /dev/null 2>&1 || { echo "    FAIL: the certificate did not re-emit"; FAIL=1; }
+for f in Cert.lean Weights.lean; do
+  cmp -s "${V}/${f}" "${CS}/${f}" || { echo "    FAIL: ${f} differs"; FAIL=1; }
+done
+[[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical, weights re-derived from the LP"
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

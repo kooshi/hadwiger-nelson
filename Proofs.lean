@@ -7,6 +7,9 @@ import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion
 import Proofs.HadwigerNelson.Gadget
+import Proofs.HadwigerNelson.Fractional
+import Proofs.HadwigerNelson.FractionalSpec
+import Proofs.HadwigerNelson.IndepSearch
 import Proofs.HadwigerNelson.Sat.Encoding
 import Proofs.HadwigerNelson.Sat.Lrat
 import Proofs.HadwigerNelson.Sat.Mask
@@ -24,6 +27,11 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Rotation
 import Proofs.HadwigerNelson.Instances.DeGrey.Rotated
 import Proofs.HadwigerNelson.Instances.DeGrey.Controls
 import Proofs.HadwigerNelson.Instances.DeGrey.Bound
+import Proofs.HadwigerNelson.Instances.CoreSpindle.Cert
+import Proofs.HadwigerNelson.Instances.CoreSpindle.Weights
+import Proofs.HadwigerNelson.Instances.CoreSpindle.Search
+import Proofs.HadwigerNelson.Instances.CoreSpindle.Bound
+import Proofs.HadwigerNelson.Instances.CoreSpindle.Diagnose
 import Proofs.HadwigerNelson.Instances.Heule510
 import Proofs.HadwigerNelson.Instances.Heule510.Bound
 import Proofs.HadwigerNelson.Instances.Heule553
