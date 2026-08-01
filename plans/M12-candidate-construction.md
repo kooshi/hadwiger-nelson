@@ -633,6 +633,29 @@ pasted from a solver, with a guard that the sixth colour is actually used.
 
 `./scripts/axioms.sh`: **120 clean, 5 declared purchases** (all M03's; M11 left it at 112 clean).
 
+### Can the instrument *find* the rungs? Measured after landing
+
+A search instrument that cannot re-discover the witness for the rung below is not credible for the
+rung above. So: blind breadth-first search from seeds, using only the moves `construct.py` has,
+asking each graph its chromatic number.
+
+| | |
+|---|---|
+| the **Moser spindle** (rung A's witness) found at | **depth 1, < 1 s, 3 graphs examined** |
+| verified isomorphic to the committed one | **yes** |
+| anything needing **five** colours | **none** — 1,961 distinct graphs, 23 levels, 358 s |
+| how the search ended | **exhausted**, frontier empty |
+
+**So the tools would have found χ ≥ 4, and cannot reach χ ≥ 5.** The exhaustion is the sharper half:
+spindle-from-seeds is a small closed family, not a space that merely needs more time. de Grey's
+witness is 510–1581 vertices and *is* an orbit construction — M09 found his second 791-point copy is
+the first one rotated — which points at the orbit primitive as the missing move rather than at the
+search budget.
+
+**This is also where the half-turn bug surfaced** (`r² = 1/4`, radicand zero, division by zero):
+eleven hand-written controls missed it, six minutes of real search hit it. An argument for
+calibrating the instrument against a running search rather than against its own examples.
+
 ### What did **not** land, stated plainly
 
 * **The constructor is minimal.** Seed, rhombus, spindle, union — enough to rebuild the Moser spindle

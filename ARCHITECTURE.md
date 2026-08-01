@@ -570,6 +570,12 @@ geometry only.
 
 Stated up front, per doctrine, and to be reported as-is:
 
+- **The search re-finds rung A's witness and cannot reach rung B's.** Measured at M12 after landing:
+  blind breadth-first search over the constructor's moves finds the **Moser spindle at depth 1 in
+  under a second** (verified isomorphic), and in 358 s over 1,961 distinct graphs finds **nothing
+  needing five colours** — then *exhausts*, frontier empty. Spindle-from-seeds is a small closed
+  family, not a space wanting more budget. Since de Grey's witness is itself an orbit construction,
+  the missing move is plausibly the orbit primitive, which `construct.py` does not have.
 - **Nothing this project owns forces any port property at five colours — measured at M12, and it is
   the hardest thing on this list.** Zero of 48 non-adjacent port sets across four graphs, and of
   16,657 exact distance classes the only one that constrains a pair is the unit distance itself.
