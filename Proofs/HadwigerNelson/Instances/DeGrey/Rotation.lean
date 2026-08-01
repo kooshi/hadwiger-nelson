@@ -84,13 +84,15 @@ is exactly `[0, 791)`. -/
 def deGreyPhiNat (i : ℕ) : ℕ := if i = 14 then 14 else if i < 14 then 791 + i else 790 + i
 
 /-- The map lands in range on the first copy. -/
-theorem deGreyPhiNat_lt {i : ℕ} (h : i < 791) : deGreyPhiNat i < 1581 := sorry
+theorem deGreyPhiNat_lt {i : ℕ} (h : i < 791) : deGreyPhiNat i < 1581 := by
+  unfold deGreyPhiNat; split_ifs <;> omega
 
 /-- **The map is injective on the first copy** — by arithmetic, with no data to check. This is what
 stops the transported half from collapsing two vertices onto one, which is the one thing that would
 make `Gadget.transport` inapplicable. -/
 theorem deGreyPhiNat_inj {i j : ℕ} (hi : i < 791) (hj : j < 791)
-    (h : deGreyPhiNat i = deGreyPhiNat j) : i = j := sorry
+    (h : deGreyPhiNat i = deGreyPhiNat j) : i = j := by
+  unfold deGreyPhiNat at h; split_ifs at h <;> omega
 
 /-- The index map as a vertex map.
 
@@ -121,6 +123,28 @@ theorem deGreyHalfA_lt :
 /-- No listed edge of the first half is a loop — needed for the transported edges to be edges. -/
 theorem deGreyHalfA_ne :
     (deGreyHalfAEdges.all fun e => decide (e.1.val < e.2.val)) = true := by decide +kernel
+
+/-! ## The lemma API — so nothing downstream walks the `List.range`
+
+`deGrey_rotation` is a `Bool` over 791 indices. No consumer should ever destructure it; these two are
+the forms every consumer wants, and the reason `deGreyPhi`'s guard never has to be unfolded twice. -/
+
+/-- **The rotation, in the form its consumers use.** Every vertex of de Grey's first copy is carried
+by `deGreyMotion` to its partner in the second. -/
+theorem deGreyMotion_maps {i : ℕ} (h : i < 791) :
+    deGreyMotion.Maps (deGreyTable.get i) (deGreyTable.get (deGreyPhiNat i)) = true :=
+  List.all_eq_true.mp deGrey_rotation i (List.mem_range.mpr h)
+
+/-- Inside the first copy the vertex map *is* the index map — the guard discharged, once. -/
+theorem deGreyPhi_val {i : Fin 1581} (h : i.val < 791) :
+    (deGreyPhi i).val = deGreyPhiNat i.val := by simp [deGreyPhi, h]
+
+/-- **The map is injective on the first copy**, as vertices. What stops the transported half from
+collapsing an edge, which is the one thing `Gadget.transport` cannot survive. -/
+theorem deGreyPhi_inj {i j : Fin 1581} (hi : i.val < 791) (hj : j.val < 791)
+    (h : deGreyPhi i = deGreyPhi j) : i = j := by
+  refine Fin.val_inj.mp (deGreyPhiNat_inj hi hj ?_)
+  rw [← deGreyPhi_val hi, ← deGreyPhi_val hj, h]
 
 /-! ## Spec
 

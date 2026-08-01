@@ -132,7 +132,7 @@ below buys one per declaration. -/
 *clean* section: the whole point of M05 was that a refutation of de Grey's graph costs no axiom beyond
 the standard three, and this is where that is either true or not.
 
-`deGrey_not_colorable_four` is the claim no human can check by inspection — it quantifies over `4^1581`
+`deGreyRot_not_colorable_four` is the claim no human can check by inspection — it quantifies over `4^1581`
 assignments — so it is the one where a native-evaluation axiom would matter most. It is clean. -/
 
 #print axioms edgeGraph_adj_mono
@@ -142,28 +142,44 @@ assignments — so it is the one where a native-evaluation axiom would matter mo
 #print axioms runSegment_sound
 #print axioms justified_of_segment
 #print axioms unsat_of_segment
-#print axioms exists_normalized
-#print axioms eq_of_pinned_unsat
-#print axioms not_colorable_of_forcing
 #print axioms deGrey_halfA_subset
-#print axioms deGrey_halfB_subset
+#print axioms deGreyRot_valid
+#print axioms deGrey_rotation
 #print axioms deGrey_adj_cross
 #print axioms halfA_unsat
-#print axioms halfB_unsat
-#print axioms deGrey_not_colorable_four
+#print axioms deGreyRot_not_colorable_four
 #print axioms chromaticNumber_plane_ge_five
+
+/-! ## M09 — the gadget algebra, and de Grey's second copy derived
+
+The milestone's whole claim is that half B's certificate was redundant. `deGrey_rotation` above is
+what replaced it, and it must be clean: it is 791 exact identities the kernel decides, and a native
+purchase there would move the construction's central fact out of the kernel's reach.
+
+`Motion.distSq_eq` and `UDCert.validOn_map_of_motion` carry the geometry of every placed copy; the
+`Gadget` combinators carry the colouring properties. Both are the instrument M11 runs on. -/
+
+#print axioms exists_perm_comp_eq
+#print axioms not_colorable_of_gadget
+#print axioms Gadget.ofUnsat
+#print axioms Gadget.transport
+#print axioms Gadget.edge
+#print axioms Motion.distSq_eq
+#print axioms UDCert.validOn_of_subset
+#print axioms UDCert.validOn_map_of_motion
+#print axioms deGreyPhiNat_inj
+#print axioms deGreyMotion_maps
+#print axioms deGreyRot_validOn_rotated
 
 /-! ## M07 — two smaller witnesses, on the same infrastructure
 
 The same theorem from two graphs that share no vertex, no edge and no certificate with de Grey's, so
 that a fault in the encoding or the checker would have to be one that certifies three unrelated
-graphs. Both go through `not_colorable_of_triangle_pinned` — one refutation each, no decomposition. -/
+graphs. Both go through `not_colorable_of_gadget` — one refutation and the pinned triangle's own
+three edges, composed. -/
 
-#print axioms exists_perm_apply_three
-#print axioms exists_normalized₃
-#print axioms not_colorable_of_triangle_pinned
 #print axioms halfA_table_refuses_halfB_cnf
-#print axioms halfB_table_refuses_halfA_cnf
+#print axioms deGrey_forcing_alone_admits
 #print axioms heule510_valid
 #print axioms heule510_unit_distances
 #print axioms heule510_unsat

@@ -435,21 +435,89 @@ stale documentation, because it is stale about the thing being certified.
 
 ---
 
+## 3.9 What implementation cost, and what it overturned
+
+**Nothing in the shape was overturned.** Every combinator's soundness field is the three lines the
+obligation pass predicted, and the two hard lemmas landed as derived. What implementation *did* find:
+
+| Found | Cost | Fix |
+|---|---|---|
+| `deGreyRot.ValidOn deGrey.edges = true := deGrey_valid` **hangs** — the two certificates are different structures, so unification falls back to *evaluating* 7,877 edges of tower arithmetic | >5 minutes, killed twice | `UDCert.validOn_congr`: `ValidOn` reads only the points and the scale. Stated, not left to `rfl`. |
+| `deGreyRot_valid` proved by walking edge **membership** through three `List.mem_append` cases is pathologically slow | same | walk the appends **structurally** (`List.all_append`) instead: **5.5 CPU s** for the whole module |
+| `++` is left-associative, so `A ++ B ++ C` is `(A ++ B) ++ C` | three wrong membership terms | corrected; `Split.lean` had it right all along and was the check |
+| the failure directive named the module it was printed *from*, which is the failing one | would not have been runnable | the headline moved to `Bound.lean`, one module below the gadgets, so `#eval deGreyGadgets.survivors` works while the theorem is red — **verified by running it verbatim** |
+| the propagation-step figure written into two docstrings | wrong by 8% | the measured value is **18,441,901** (`plans/M06-chi-ge-five.md` § 1); half of 34,169,571 was a guess |
+
+**The build cost, measured on the desktop:**
+
+| module | CPU s |
+|---|---|
+| `Gadget.lean` | 2.7 |
+| `Motion.lean` | 2.2 |
+| `Instances/DeGrey/Rotation.lean` — the 791 identities, **settled** | **96** |
+| `Instances/DeGrey/Rotated.lean` — the derived geometry | 5.5 |
+| `Instances/DeGrey/Forcing.lean` — the three gadgets | 1.3 |
+| `Instances/DeGrey/Bound.lean` — the composition and the headline | 1.4 |
+
+---
+
 ## 4. Negative controls — every one committed and watched to fail
 
-| The check | Break it by | Expected |
+| The check | The control | Where it lives |
 |---|---|---|
-| the rotation | changing `deGreyRotA` from 31 to 30 | `deGrey_rotation` false; `31² + 63 ≠ 30² + 63` |
-| the rotation's centre | moving `deGreyRotCentre` off `(−2, 0)` | `deGrey_rotation` false |
-| the isometry hypothesis | a map with `a² + b² ≠ M²` | a *countermodel*: two points whose images are at a different distance |
-| the port images | `φ 11 = 802` replaced by 803 | the joining-edge gadget no longer contradicts |
-| composition exhaustiveness | dropping gadget C | `decide` over the 64 colourings goes false |
-| colour symmetry needs injectivity | already covered — `not_valid_comp_of_not_injective` | kept |
-| cross-filing | half A's table against half B's formula | kept; `halfBCnf` survives half B's deletion |
+| the composition really needs all three constraints | **run:** dropping the joining edge leaves exactly `[[0,0,0],[1,1,1],[2,2,2],[3,3,3]]` — the four monochromatic patterns, which is the argument backwards. Committed as a **theorem**, kernel-decided every build | `deGrey_forcing_alone_admits` |
+| the failure directive is runnable | **run verbatim:** with the joining edge dropped, the build prints its directive; pasting `#eval deGreyGadgets.survivors` into a fresh file prints those same four patterns. The headline sits one module *below* the gadgets precisely so this works while the theorem is red | `DeGrey/{Forcing,Bound}.lean` |
+| the same, at spec scale, with the rendered text pinned | `K₅` minus an edge: 24 survivors, first two `[[0,1,2,3,3],[0,1,3,2,2]]` | `#guard_msgs` in `Gadget.lean` |
+| a motion without `a² + b² = M²` preserves nothing | a **countermodel**: `(x,y) ↦ (2x,2y)` fits both rows and doubles every distance | `Motion.lean` spec |
+| relabelling colours must be injective | a **countermodel**: the constant relabelling on one edge | `not_valid_comp_of_not_injective` |
+| a degenerate pinning | **satisfiable**, so no certificate exists — and even with one the gadget would admit everything. Vacuous, never unsound | `sat_degenerate_cube` |
+| the rotation identity is real arithmetic | `31² + 63 = 32²` and `30² + 63 ≠ 32²`, both `#guard`ed, so a reader checks it by eye | `Controls.lean` |
+| the port images | `φ 14 = 14` and `φ 11 = 802`, `#guard`ed; a wrong image is a **type error** at `Gadget.transport`, not a different theorem | `Controls.lean` |
+| cross-filing | half A's table refuses half B's formula, with the rendered fault pinned | `halfA_table_refuses_halfB_cnf` |
 
-The last row matters: `deGreyHalfBEdges` lives in the **frozen** `Edges.lean`, so `halfBCnf` can be
-rebuilt without half B's 1,061 modules and the cross-filing control survives. The *reverse* control
-(`halfB_table_refuses_halfA_cnf`) dies with the table and is replaced by the rotation controls above.
+`deGreyHalfBEdges` lives in the **frozen** `Edges.lean`, so `halfBCnf` can be rebuilt without half B's
+1,061 modules and the cross-filing control survives its deletion. The *reverse* control
+(`halfB_table_refuses_halfA_cnf`) dies with the table, and the rotation controls above replace it.
+
+---
+
+## 4.5 What landed
+
+| | before M09 | after |
+|---|---|---|
+| certificates for de Grey's graph | 2 | **1** |
+| propagation steps the kernel re-runs | 34,169,571 | **18,441,901** |
+| generated modules | 2,265 | **1,222** |
+| source under `Instances/DeGrey/` | 393 MB | **213 MB** (measured) |
+| processor time to rebuild the certificates | 27.8 h | **15.0 h** + 95 CPU s |
+| top-level non-colourability theorems | 2 (`not_colorable_of_forcing`, `not_colorable_of_triangle_pinned`) | **1** (`not_colorable_of_gadget`) |
+| colour-symmetry lemmas | 2 (two ports, three ports) | **1**, at any number of ports and any number of colours |
+| modules holding the argument | `Sat/Forcing.lean` | `Gadget.lean` + `Motion.lean` |
+
+**The statements downstream did not change.** `chromaticNumber_plane_ge_five`,
+`chromaticNumber_plane_ge_five_510` and `_553` are the same theorems they were.
+
+**And the geometry cost did not change** — saying otherwise would be an overclaim, and the first
+draft of `Bound.lean` made it. `deGreyRot`'s second half *is* derived from the first plus the
+rotation, but the `deGrey_valid` it sources from still computes all 7,877 distances, because that
+edge list is frozen upstream of the surviving certificate. **What the rotation deleted is the
+certificate, not the geometry.** The derivation is worth having anyway, and it is worth having for
+M11: there a placed copy's coordinates can be *defined* by the motion rather than listed, and then
+the check is `rfl` and placement really is free.
+
+### 4.6 The gate — 2026-07-31, desktop
+
+| Check | Result |
+|---|---|
+| `./scripts/build.sh` | **OK**, 153 batches (259 at M08 — 1,061 modules are gone), zero warnings |
+| zero `sorry` | **0** |
+| `./scripts/axioms.sh` | **OK — 86 clean, 5 declared purchases**, all M03's Moser-spindle cross-checks; M09 adds none |
+| `chromaticNumber_plane_ge_five`, `_510`, `_553` | exactly `[propext, Classical.choice, Quot.sound]` |
+| `deGrey_rotation` — the milestone's central fact | `[propext]` alone |
+| `deGreyRot_valid`, `deGreyRot_not_colorable_four`, `exists_perm_comp_eq`, `Motion.distSq_eq`, `not_colorable_of_gadget` | the standard three |
+| `lake lint` | passed |
+| `./scripts/regen-check.sh` | **OK** — every generated module still reproduces bit for bit |
+| the surviving certificate re-checked? | **no** — half A's 1,222 `.olean`s still carry their 07-30 timestamps |
 
 ---
 
@@ -464,3 +532,26 @@ rebuilt without half B's 1,061 modules and the cross-filing control survives. Th
 * **de Grey's full construction** (`S → Sₐ → S_b → Y → G`, the 397-vertex layer, the H/J/K/L chain).
   Only his **last** step — the two rotated copies — is re-derived here. Stated plainly: this
   milestone derives one rotation, not the whole paper.
+
+---
+
+## 6. Unmeasured, ranked, and carried to M11
+
+1. **Whether the terminal check survives a real search.** Measured at ~0.2 ms per (colouring ×
+   gadget), so `4^m` puts **eight interface vertices and ten gadgets at ~2 minutes** and twelve at
+   days. Every gadget's admitted set is permutation-closed, so restricting the enumeration to
+   canonical patterns is worth up to 24×; that is the first thing to build when the check bites, and
+   the design note is in § 3.6. **Nothing here is measured on a search — only on constructions that
+   already existed.**
+2. **Whether `Motion` needs composition.** de Grey's rotation was *derived* as the composition of two
+   rotations, by hand in Python. A hierarchy like his H→J→K→L would compose motions constantly. The
+   structure was chosen so `Motion.comp` is a field-wise definition plus one `ring` identity, but it
+   is not written and not measured.
+3. **Whether a placed copy can be defined rather than checked.** de Grey's vertex table is frozen data
+   upstream of 1,222 certificate modules, so his copy costs 791 identities. A *new* construction could
+   define the copy's coordinates **as** the rotation, at which point the check is `rfl` and placement
+   is free. That is the version M11 wants and it has never been tried.
+4. **One stale comment, in a module that cannot be edited.** `Instances/DeGrey/Split.lean` names
+   `not_colorable_of_forcing`, which M09 deleted. Fixing the comment costs ~15 hours of kernel time
+   because that module is upstream of every remaining certificate segment. Recorded in
+   `ARCHITECTURE.md` § 4 rather than paid.

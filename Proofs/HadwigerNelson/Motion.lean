@@ -54,14 +54,23 @@ A class rather than a theorem about `Q4` because the proof is one induction step
 a class is how that induction is written. -/
 class NatCancel (K : Type*) [CommRing K] : Prop where
   /-- Cancel a nonzero natural factor from both sides. -/
-  cancel : ∀ {c : ℕ}, c ≠ 0 → ∀ {x y : K}, (c : K) * x = (c : K) * y → x = y
+  cancel : ∀ {c : ℕ} {x y : K}, c ≠ 0 → (c : K) * x = (c : K) * y → x = y
 
 /-- The leaf: `ℤ` cancels because it is an integral domain. -/
-instance : NatCancel ℤ := sorry
+instance : NatCancel ℤ where
+  cancel hc h := mul_left_cancel₀ (Int.natCast_ne_zero.mpr hc) h
 
-/-- The induction step: a level cancels componentwise. -/
+/-- The induction step: a level cancels componentwise. The `NatScalar K` hypothesis is not
+decoration — `Adjoin.mul_re` is stated with the scalar action already traded for the cast, and that
+is the form the two projections below need. -/
 instance {d : ℕ} {K : Type*} [CommRing K] [NatScalar K] [NatCancel K] :
-    NatCancel (Adjoin d K) := sorry
+    NatCancel (Adjoin d K) where
+  cancel hc h := by
+    have hre := congrArg Adjoin.re h
+    have him := congrArg Adjoin.im h
+    simp only [Adjoin.mul_re, Adjoin.mul_im, Adjoin.natCast_re, Adjoin.natCast_im,
+      zero_mul, mul_zero, add_zero] at hre him
+    exact Adjoin.ext (NatCancel.cancel hc hre) (NatCancel.cancel hc him)
 
 /-! ## Motions -/
 
@@ -94,6 +103,12 @@ namespace Motion
 
 variable (μ : Motion)
 
+/-- The rotation matrix `[[a, −b], [b, a]]` scales a squared norm by `a² + b²`. Isolated as four-
+variable algebra so `distSq_eq` below is a substitution rather than a polynomial identity in eight. -/
+private theorem sq_norm_rot (a b u v : Q4) :
+    (a * u - b * v) * (a * u - b * v) + (b * u + a * v) * (b * u + a * v)
+      = (a * a + b * b) * (u * u + v * v) := by ring
+
 /-- **`q` is the image of `p`.** A `Bool`, because this is what the kernel checks against emitted
 coordinates — one instance per vertex of the copy being placed.
 
@@ -109,7 +124,29 @@ differences — so the translation plays no part and `Motion.rot` does all the w
 This is the whole consumer surface of this file: two points, their images, and the conclusion that
 the distance is unchanged. It chains straight into a certificate's `Valid` check. -/
 theorem distSq_eq {p p' q q' : Pt} (h : μ.Maps p q = true) (h' : μ.Maps p' q' = true) :
-    q.distSq q' = p.distSq p' := sorry
+    q.distSq q' = p.distSq p' := by
+  simp only [Maps, Bool.and_eq_true, beq_iff_eq] at h h'
+  obtain ⟨h1, h2⟩ := h
+  obtain ⟨h3, h4⟩ := h'
+  -- **The centre cancels here, and nowhere else.** Subtracting the two rows leaves an equation
+  -- between differences, in which `centre` does not occur.
+  have e1 : μ.M * (q.x - q'.x) = μ.a * (p.x - p'.x) - μ.b * (p.y - p'.y) := by
+    linear_combination h1 - h3
+  have e2 : μ.M * (q.y - q'.y) = μ.b * (p.x - p'.x) + μ.a * (p.y - p'.y) := by
+    linear_combination h2 - h4
+  refine NatCancel.cancel μ.scale_ne ?_
+  calc ((μ.scale : ℕ) : Q4) * q.distSq q'
+      = μ.M * μ.M * q.distSq q' := by rw [μ.sq]
+    _ = (μ.M * (q.x - q'.x)) * (μ.M * (q.x - q'.x))
+          + (μ.M * (q.y - q'.y)) * (μ.M * (q.y - q'.y)) := by
+        simp only [Pt.distSq, FastSq.sq_eq]; ring
+    _ = (μ.a * (p.x - p'.x) - μ.b * (p.y - p'.y)) * (μ.a * (p.x - p'.x) - μ.b * (p.y - p'.y))
+          + (μ.b * (p.x - p'.x) + μ.a * (p.y - p'.y))
+            * (μ.b * (p.x - p'.x) + μ.a * (p.y - p'.y)) := by rw [e1, e2]
+    _ = (μ.a * μ.a + μ.b * μ.b)
+          * ((p.x - p'.x) * (p.x - p'.x) + (p.y - p'.y) * (p.y - p'.y)) := sq_norm_rot _ _ _ _
+    _ = ((μ.scale : ℕ) : Q4) * p.distSq p' := by
+        rw [μ.rot]; simp only [Pt.distSq, FastSq.sq_eq]
 
 end Motion
 
@@ -125,7 +162,19 @@ reason a graph's edge list can be re-ordered or re-segmented without re-checking
 Named `of_subset` and not `mono`: it is *antitone* in the edge list, and a name that says otherwise
 would mislead every reader who never opens the file. -/
 theorem UDCert.validOn_of_subset {n : ℕ} {c : UDCert n} {es es' : List (Fin n × Fin n)} (h : es' ⊆ es)
-    (hv : c.ValidOn es = true) : c.ValidOn es' = true := sorry
+    (hv : c.ValidOn es = true) : c.ValidOn es' = true :=
+  (c.validOn_iff es').mpr fun _ he => (c.validOn_iff es).mp hv _ (h he)
+
+/-- **`ValidOn` reads only the points and the scale**, never the edge list a certificate happens to
+carry. So two certificates over the same table agree on any list of edges — which is what lets a
+graph be re-presented with a differently written edge list at no cost.
+
+Stated rather than left to `rfl`, and that is not fussiness: without it, `deGreyRot.ValidOn
+deGrey.edges = true := deGrey_valid` sends the elaborator to unify two *different* certificates, and
+the fallback is to evaluate 7,877 edges of tower arithmetic. Measured by running into it. -/
+theorem UDCert.validOn_congr {n : ℕ} {c c' : UDCert n} (hv : c.verts = c'.verts)
+    (hd : c.denom = c'.denom) (es : List (Fin n × Fin n)) : c.ValidOn es = c'.ValidOn es := by
+  simp [UDCert.ValidOn, UDCert.denomSq, hv, hd]
 
 /-- **Geometry transports along a motion.** If a vertex map moves both endpoints of every edge of
 `es` by the same motion `μ`, then the images of those edges are exactly as long as the originals — so
@@ -139,7 +188,11 @@ theorem UDCert.validOn_map_of_motion {n : ℕ} (c : UDCert n) (μ : Motion) (φ 
     (hmap : ∀ e ∈ es, μ.Maps (c.verts e.1) (c.verts (φ e.1)) = true ∧
                       μ.Maps (c.verts e.2) (c.verts (φ e.2)) = true)
     (hv : c.ValidOn es = true) :
-    c.ValidOn (es.map fun e => (φ e.1, φ e.2)) = true := sorry
+    c.ValidOn (es.map fun e => (φ e.1, φ e.2)) = true := by
+  refine (c.validOn_iff _).mpr fun e' he' => ?_
+  obtain ⟨e, he, rfl⟩ := List.mem_map.mp he'
+  obtain ⟨h1, h2⟩ := hmap e he
+  exact (μ.distSq_eq h1 h2).trans ((c.validOn_iff es).mp hv e he)
 
 /-! ## Spec
 
@@ -171,7 +224,10 @@ example : ¬ ∀ (a b M : Q4) (o p p' q q' : Pt),
     (M * (q.y - o.y) == b * (p.x - o.x) + a * (p.y - o.y)) = true →
     (M * (q'.x - o.x) == a * (p'.x - o.x) - b * (p'.y - o.y)) = true →
     (M * (q'.y - o.y) == b * (p'.x - o.x) + a * (p'.y - o.y)) = true →
-    q.distSq q' = p.distSq p' := sorry
+    q.distSq q' = p.distSq p' := by
+  intro h
+  exact absurd (h 2 0 1 ⟨0, 0⟩ ⟨1, 0⟩ ⟨0, 0⟩ ⟨2, 0⟩ ⟨0, 0⟩ (by decide) (by decide)
+    (by decide) (by decide)) (by decide)
 
 end Spec
 

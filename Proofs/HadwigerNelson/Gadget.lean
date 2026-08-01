@@ -97,13 +97,13 @@ Associative and commutative, with `Gadget.trivial` as its unit, so a list of gad
 laws, so they are not stated. -/
 def inter (g h : Gadget n m E p) : Gadget n m E p where
   admits q := g.admits q && h.admits q
-  sound := sorry
+  sound f hf := by simp [g.sound f hf, h.sound f hf]
 
 /-- The gadget that constrains nothing — the unit of `inter`, and what an empty list of gadgets
 composes to. -/
 def trivial : Gadget n m E p where
   admits _ := true
-  sound := sorry
+  sound _ _ := rfl
 
 /-! ## Read elsewhere -/
 
@@ -111,7 +111,7 @@ def trivial : Gadget n m E p where
 colourings. This is where a gadget's own edge list is discharged into the ambient one. -/
 def mono (hsub : E' ⊆ E) (g : Gadget n m E' p) : Gadget n m E p where
   admits := g.admits
-  sound := sorry
+  sound f hf := g.sound f fun i j hij => hf i j (edgeGraph_adj_mono hsub hij)
 
 /-- **Read a gadget through a wider port tuple.** A gadget speaking about two of three ports becomes
 one speaking about all three and ignoring the rest — which is what lets gadgets with different port
@@ -119,7 +119,7 @@ sets be intersected. `ι` says which of the wider ports the narrower ones are. -
 def widen (ι : Fin m → Fin m') (hp : ∀ k, p k = p' (ι k)) (g : Gadget n m E p) :
     Gadget n m' E p' where
   admits q := g.admits (fun k => q (ι k))
-  sound := sorry
+  sound f hf := by simpa only [← hp] using g.sound f hf
 
 /-- **Transport along a vertex map.** If `φ` carries every edge of `E'` to an edge of `E`, a gadget
 over `E'` becomes a gadget over `E` with its ports moved by `φ`: pull the colouring back along `φ`.
@@ -133,7 +133,15 @@ This is the move that makes a copy of a subgraph free. When `φ` is the index ma
 def transport (φ : Fin n → Fin n) (hφ : ∀ e ∈ E', (edgeGraph n E).Adj (φ e.1) (φ e.2))
     {pt : Fin m → Fin n} (hp : ∀ k, φ (p k) = pt k) (g : Gadget n m E' p) : Gadget n m E pt where
   admits := g.admits
-  sound := sorry
+  sound f hf := by
+    -- Pull the colouring back along `φ`: proper on `E` gives proper on `E'`, because `φ` sends
+    -- every edge of `E'` to an edge of `E` — including the distinctness `Adj` carries.
+    have : Proper n E' (fun v => f (φ v)) := by
+      intro i j hij
+      rcases (edgeGraph_adj.mp hij).2 with hm | hm
+      · exact hf _ _ (hφ (i, j) hm)
+      · exact fun hc => hf _ _ (hφ (j, i) hm) hc.symm
+    simpa only [hp] using g.sound _ this
 
 /-! ## Produce -/
 
@@ -145,7 +153,7 @@ ports are always two of the shared ports, never anything else, and making the ca
 two-element tuple and then prove it agrees with the shared one was work the task never asked for. -/
 def edge (i j : Fin m) (h : (edgeGraph n E).Adj (p i) (p j)) : Gadget n m E p where
   admits q := q i != q j
-  sound := sorry
+  sound f hf := by simpa using hf _ _ h
 
 end Gadget
 
@@ -178,10 +186,20 @@ because that is where it is true and because the general statement is the *easie
 having the same kernel means both factor injectively through one quotient, and two injections from a
 finite type are related by a permutation of the target — `Equiv.Perm.exists_extending_pair`.
 
-Subsumes M06's `exists_normalized` (two ports) and M07's `exists_normalized₃` (three ports), which
-were the same lemma written twice. -/
+Subsumes the two-port relabelling M06 needed and the three-port one M07 needed, which were the same
+lemma written twice; `Sat/Forcing.lean`, which held both, is deleted. -/
 theorem exists_perm_comp_eq {α β : Type*} [Finite α] {a b : α → β}
-    (h : ∀ i j, a i = a j ↔ b i = b j) : ∃ σ : Equiv.Perm β, ∀ k, σ (a k) = b k := sorry
+    (h : ∀ i j, a i = a j ↔ b i = b j) : ∃ σ : Equiv.Perm β, ∀ k, σ (a k) = b k := by
+  classical
+  -- `a` and `b` have the same kernel, so both factor *injectively* through one quotient — and two
+  -- injections out of a finite type are related by a permutation of the target.
+  obtain ⟨σ, hσ⟩ := Equiv.Perm.exists_extending_pair
+    (α := Quotient (Setoid.ker a))
+    (Quotient.lift a fun _ _ hij => hij)
+    (Quotient.lift b fun i j hij => (h i j).mp hij)
+    (by rintro ⟨i⟩ ⟨j⟩ hij; exact Quotient.sound hij)
+    (by rintro ⟨i⟩ ⟨j⟩ hij; exact Quotient.sound ((h i j).mpr hij))
+  exact ⟨σ, fun k => hσ (Quotient.mk _ k)⟩
 
 /-- The ports listed, in index order — the vertex set a cube is taken over. -/
 def portList (p : Fin m → Fin n) : List (Fin n) := (List.finRange m).map p
@@ -203,7 +221,16 @@ separate mechanism — the same relationship `allCubes k n [] = [[]]` has to the
 def Gadget.ofUnsat (q₀ : Fin m → Fin 4)
     (h : (coloringCNF 4 n E ++ cubeCNF 4 n (pinCube p q₀)).Unsat) : Gadget n m E p where
   admits q := !samePattern q q₀
-  sound := sorry
+  sound f hf := by
+    simp only [Bool.not_eq_true', samePattern, decide_eq_false_iff_not]
+    intro hsame
+    -- The ports take a relabelling of the refuted pattern, so *some* relabelling of `f` pins them
+    -- to it exactly — and that colouring satisfies a formula with a refutation.
+    obtain ⟨σ, hσ⟩ := exists_perm_comp_eq hsame
+    refine not_pinned (portList p) (fun v => σ (f v)) (valid_comp_of_injective hf σ.injective) ?_
+    have hcube : cubeOf (portList p) (fun v => σ (f v)) = pinCube p q₀ := by
+      simp only [cubeOf, portList, pinCube, List.map_map, Function.comp_def, hσ]
+    rw [hcube]; exact h
 
 /-! ## Conclude — and the same computation reports the failure
 
@@ -223,7 +250,11 @@ def allPatterns : (m : ℕ) → List (Fin m → Fin 4)
   | m + 1 => (List.finRange 4).flatMap fun c => (allPatterns m).map fun q => Fin.cons c q
 
 /-- The enumeration is complete — the local obligation that makes the exhaustive search exhaustive. -/
-theorem mem_allPatterns {m : ℕ} (q : Fin m → Fin 4) : q ∈ allPatterns m := sorry
+theorem mem_allPatterns : ∀ {m : ℕ} (q : Fin m → Fin 4), q ∈ allPatterns m
+  | 0, q => by simpa [allPatterns] using (funext fun i => i.elim0 : q = Fin.elim0)
+  | _ + 1, q => by
+      simp only [allPatterns, List.mem_flatMap, List.mem_map, List.mem_finRange]
+      exact ⟨q 0, trivial, Fin.tail q, mem_allPatterns _, Fin.cons_self_tail q⟩
 
 /-- **The port colourings this gadget has not ruled out.**
 
@@ -240,7 +271,13 @@ The terminal move of the algebra, and the only one that mentions `Colorable`. No
 already guarantees: such a gadget can be *built* only by proving `sound`, so "admits nothing" is
 inhabited exactly when the graph really is not 4-colourable. -/
 theorem not_colorable_of_gadget (g : Gadget n m E p) (h : g.survivors = []) :
-    ¬ (edgeGraph n E).Colorable 4 := sorry
+    ¬ (edgeGraph n E).Colorable 4 := by
+  rintro ⟨C⟩
+  have hadm : g.admits (fun k => C (p k)) = true := g.sound _ fun _ _ hij => C.valid hij
+  have : (fun k => C (p k)) ∈ (allPatterns m).filter g.admits :=
+    List.mem_filter.mpr ⟨mem_allPatterns _, hadm⟩
+  simp only [Gadget.survivors, List.map_eq_nil_iff] at h
+  simp [h] at this
 
 /-! ## Spec
 
@@ -301,7 +338,8 @@ example : ¬ (edgeGraph 5 k5).Colorable 4 := not_colorable_of_gadget k5Gadget (b
 
 /-- **A model of `exists_perm_comp_eq`'s hypothesis**, so colour symmetry is not quantifying over
 nothing: two port colourings with the same partition — first and third agree, second differs. -/
-example : ∃ σ : Equiv.Perm (Fin 4), ∀ k, σ (![2, 3, 2] k) = ![0, 1, 0] k := sorry
+example : ∃ σ : Equiv.Perm (Fin 4), ∀ k, σ (![2, 3, 2] k) = ![0, 1, 0] k :=
+  exists_perm_comp_eq (by intro i j; fin_cases i <;> fin_cases j <;> simp)
 
 end Spec
 

@@ -147,6 +147,32 @@ The check is split into 2,265 **segments** — each an implication between water
 in parallel. The segment size is set by *memory*: peak ≈ 3.4 GB + 0.81 GB per certificate chunk, and 24
 concurrent 57-chunk segments took the machine down before that was measured.
 
+#### 2.2.3 And the second certificate was redundant — M09
+
+The two copies are not merely isomorphic, they are **congruent**: the second is the image of the first
+under one rotation about `(−2, 0)`, by `(cos, sin) = (31/32, −3√7/32)`, which fixes the shared vertex
+(it *is* the centre) and carries vertex 11 to vertex 802. So the second copy's forcing property is the
+first copy's, transported — and so is its geometry.
+
+| | M06 | M09 |
+|---|---|---|
+| certificates | 2 | **1** |
+| hint entries the kernel re-runs | 34,169,571 | **18,441,901** |
+| generated modules | 2,265 | **1,222** |
+| source | 393 MB | **213 MB** |
+| processor time | 27.8 h | **15.0 h** + 95 CPU s for the rotation |
+
+The rotation is checked, not assumed: 791 exact coordinate identities in `ℚ(√3,√5,√7,√11)`. Nothing
+is emitted for it — the index map is a closed form, because `dedup` puts the first copy at indices
+`0–790`.
+
+**The geometry cost is unchanged, and the table above must not be read as saying otherwise.**
+`deGreyRot`'s second half is derived from its first plus the rotation, but the `deGrey_valid` it
+sources from still checks all 7,877 distances — that edge list is frozen upstream of the surviving
+certificate. What the rotation deleted is the *certificate*. The derivation earns its keep at M11,
+where a placed copy's coordinates are defined by the motion rather than listed and the check becomes
+`rfl`.
+
 ## 2.3 The colour-cube split — mandatory, not an optimization *(superseded: see § 2.2.1)*
 
 **Measured, 2026-07-23, 32-core box.** A monolithic CaDiCaL run on the full 6324-variable /
@@ -187,17 +213,18 @@ Std.Sat ─┤
          ├─► HadwigerNelson/Field/Quadratic.lean   Adjoin d K, CommRing, eval : K →+* ℝ  [M02]
          │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
          │                 ├─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
+         │                 ├─► HadwigerNelson/Motion.lean   exact plane rotations; NatCancel  [M09]
          │                 └─► HadwigerNelson/Packed.lean   digit packing; DiffWitness    [M08]
          │                          └─► HadwigerNelson/PackedDiagnose.lean   #eval-only faults
          │
          ├─► HadwigerNelson/Sat/Encoding.lean   colouringCNF, Colorable → Sat, cubes     [M03]
-         │        └─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
+         │        ├─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
+         │        └─► HadwigerNelson/Gadget.lean   proven colouring constraints; composition [M09]
          │
          ├─► HadwigerNelson/Sat/Mask.lean   clauses/assignments as bitmasks; propagate   [M05]
          │        └─► HadwigerNelson/Sat/ClauseTable.lean   literal chunk table; agreement
          │                 └─► HadwigerNelson/Sat/MaskCheck.lean   decoder, checker, segments  [M05/M06]
          │
-         ├─► HadwigerNelson/Sat/Forcing.lean   colour symmetry; two forcing subgraphs   [M06]
          │
          └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
                   ├─► Instances/SpindleBound.lean       χ ≥ 4, three routes              [M03]
@@ -206,12 +233,16 @@ Std.Sat ─┤
                            └─► Instances/DeGrey/Edges.lean   45 chunks; edges := halfA ++ halfB ++ cross
                                     └─► Instances/DeGrey/Diffs.lean   133 differences, packed   [M08]
                                              └─► Instances/DeGrey/Valid.lean   one decide, one citation
-                                             └─► Instances/DeGrey.lean   the claims, the hand-off
+                                             └─► Instances/DeGrey.lean   the claims, the reduction
                                                       └─► Instances/DeGrey/Split.lean   the two copies  [M06]
-                                                               ├─► HalfA/, HalfB/  table + 2265 segments
-                                                               └─► Instances/DeGrey/Forcing.lean
-                                                                        └─► Instances/DeGrey/Bound.lean
-                                                                                 χ(R^2) >= 5
+                                                      │        └─► HalfA/  table + 1222 segments
+                                                      └─► Instances/DeGrey/Rotation.lean   791 identities [M09]
+                                                               └─► Instances/DeGrey/Rotated.lean
+                                                                        │   deGreyRot: half B derived
+                                                                        └─► Instances/DeGrey/Forcing.lean
+                                                                                 three gadgets
+                                                                                 └─► DeGrey/Bound.lean
+                                                                                         χ(R^2) >= 5
 
      Sat/Diagnose.lean   #eval-only fault rendering — deliberately DOWNSTREAM of the        [M07]
                          checker, so rewriting a diagnostic does not re-check 27.8 h
@@ -240,7 +271,7 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 | **M06** ✅ | **χ(ℝ²) ≥ 5.** ~~Cube split at depth 5 (1024 cubes)~~ — **the cube split is dead; see below.** de Grey's own decomposition instead: two forcing lemmas, one certificate each. | *Landed 2026-07-30 (`plans/M06-chi-ge-five.md`).* **`chromaticNumber_plane_ge_five` — the plane needs five colours — depends on axioms exactly `[propext, Classical.choice, Quot.sound]`.** Zero native purchases, zero `sorry`, linters clean. Two kernel-checked refutations, 34.2 × 10⁶ propagation steps across 2,265 segment modules: **27.8 hours of processor time, 2.8 hours of wall clock over twelve jobs**, 396 MB of source and 297 MB of compiled modules. The cube split the roadmap specified was measured dead (§ 2.2.1) and de Grey's own two-copy decomposition replaced it at 44× less cost. `lean4checker` covers everything the geometry and the proof structure rest on; **it does not cover the two certificates**, because replaying them repeats every kernel reduction single-threaded — see § 5. |
 | **M07** ✅ | **Shrinking.** Re-verify smaller witnesses on the same infrastructure; automate vertex-deletion search. | *Landed 2026-07-30 (`plans/M07-shrinking.md`).* **`χ(ℝ²) ≥ 5` re-proved from witnesses of 510 and 553 vertices**, against de Grey's 1581 — axioms exactly `[propext, Classical.choice, Quot.sound]`, one certificate each, no decomposition. **1,413,841 and 1,104,106 propagation steps against M06's 34,169,571** — ~1 hour of processor time for both against 27.8 for one, and 23 MB of source against 396 MB. Two levers, both measured: naming one triangle's colours is worth **20×**, racing triangle × configuration × seed on *trimmed hint count* another **10.5×**. de Grey's own graph was measured **not to shrink** — its forcing halves are vertex-critical, so it goes 1581 → 1577 and stops. The smaller certificates are what finally make the independent-kernel replay affordable (§ 5). |
 | **M08** ✅ | **Structure-aware geometry.** Difference-vector certificates: one squared length per *distinct edge difference*, and one big-integer subtraction per edge over packed coordinates. | *Landed 2026-07-31 (`plans/M08-structure-aware-geometry.md`).* All three witnesses re-certified through `DiffWitness`; `deGrey_valid`, `heule510_valid`, `heule553_valid` unchanged in statement. de Grey's geometry: **246.2 → 55.9 CPU s and 9 modules → 2**, memory per edge 4.55 → 0.27 MB. The roadmap's premise that the expensive term becomes *flat* in graph size was **measured false** — the difference count doubles when the construction doubles; what is stable is the ratio, ~118 : 1. Two instincts measured wrong and recorded: a flat giant-`Nat` table is free in the kernel and quadratic in the elaborator, and lane width is not free either. The milestone did **not** invalidate M06's certificates — de Grey's reach the vertex table without passing through his geometry — and the emitter now keeps every certificate's import closure free of geometry permanently. |
-| **M09** | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | A composition theorem, and de Grey's own construction re-derived through it rather than asserted as coordinates. |
+| **M09** ✅ | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | *Landed 2026-07-31 (`plans/M09-gadget-algebra.md`).* A gadget is a `Bool` on port colourings plus the proof every proper colouring satisfies it; gadgets **intersect**, **widen**, **transport** along vertex maps, and arrive from an edge, a refutation, or another gadget. `not_colorable_of_gadget` replaces both `not_colorable_of_forcing` and `not_colorable_of_triangle_pinned`, and all three witnesses now go through it. **de Grey's second copy is derived, not asserted**: `deGrey_rotation` checks 791 exact coordinate identities and the second half's *geometry* and *colouring property* both follow — **half B's certificate deleted, 1,043 modules, 180 MB and 12.8 hours gone**, replaced by 95 CPU s. Colour symmetry is now one lemma at any number of ports, and the plan's claim that "the 4 is load-bearing" was **measured false**: stated relationally it needs no bound on the colour count at all.|
 | **M10** | **Fractional bounds.** Fractional chromatic number machinery; the 383/102 record as a certified statement. | A certified fractional lower bound. **Explicitly not a route to 6** — the known upper bound on χ_f is below 5, so this rung is independently publishable and cannot reach rung D. |
 | **M11** | **The hunt.** Composition search for a 6-chromatic witness, on M09's algebra. | Honest report — including "not found". |
 
@@ -267,7 +298,13 @@ Three changes, each forced by a measurement rather than a preference:
   actual bet on rung D: de Grey, Exoo–Ismailescu and Parts all reason over gadgets with colouring
   properties, informally. Making composition a theorem is what turns the search space from vertices
   into properties, and it is the one advantage here that is not shared with everyone who already
-  tried and stalled.
+  tried and stalled. **It paid before the hunt started**: de Grey's second certificate — 12.8 hours
+  and 1,043 modules — turned out to be his first one transported along a rotation.
+
+**One cost of the freeze, recorded rather than paid.** `Instances/DeGrey/Split.lean` sits upstream of
+1,222 certificate modules, and its prose still names `not_colorable_of_forcing`, a theorem M09 deleted
+in favour of the general composition. Correcting a comment there costs ~15 hours of kernel time, so it
+is not corrected. The theorem it should name is `HadwigerNelson.not_colorable_of_gadget`.
 
 ## 5. Trust
 
@@ -312,6 +349,11 @@ Nine declarations from `Sat/{Mask,ClauseTable,MaskCheck}.lean` are now in the au
 `maskCheck_sound` among them. Nothing above depends on them yet — M06 is where the ten purchases
 below are meant to disappear, and until that lands they are still in the ledger.
 
+**M09 added no purchases either, and the one it most mattered for is `deGrey_rotation`** — 791 exact
+coordinate identities that are now the sole evidence for de Grey's second copy. A native purchase
+there would move the construction's central fact out of the kernel's reach; it reports exactly
+`[propext, Classical.choice, Quot.sound]`.
+
 **M06 added no purchases, and the headline has none.** `chromaticNumber_plane_ge_five` depends on
 exactly `[propext, Classical.choice, Quot.sound]`. The ten purchases below are still in the ledger
 because the Moser spindle's certificate routes still exist as cross-checks of the encoder — they buy a
@@ -341,8 +383,9 @@ kernel. Green at M04 — which means de Grey's 7877 exact distance identities ha
 second kernel implementation, not just the one that built them.
 
 **Scale is the limit, and M07 is what moves it.** Replaying a certificate repeats every propagation
-step, single-threaded, in one process that cannot be split. At M06's **34.2 × 10⁶** steps that is
-another ~28 hours, and it has never been run to completion here — so for the de Grey witness, the
+step, single-threaded, in one process that cannot be split. At M06's **34.2 × 10⁶** steps — **18.4 ×
+10⁶ after M09 deleted the second certificate** — that is another ~15 hours, and it has never been run
+to completion here — so for the de Grey witness, the
 independent-kernel claim covers the geometry, the soundness proofs and the composition, and *not*
 those steps. State it that way and no other way. At M07's **1.4 × 10⁶** steps the same replay finishes, and
 **it has been run**: 2026-07-31, 214 modules OK — 100 for the 510-vertex witness, 101 for the 553, and
@@ -450,6 +493,11 @@ produce a meaningless one, and the specific countermeasure for each:
 | The packing collapses two distinct points, so the geometry check proves nothing | ✅ M08: `Packable.pack_inj` is proved, and its digit bound is *known load-bearing* — the two counterexamples that break it at `M = 4` are committed as `#guard`s beside the lemma. Every certificate check re-verifies the bound for every vertex |
 | The Python generator and Lean silently disagree about the packing convention | ✅ M08: both assert the same 301-digit constant — the packing of the point whose thirty-two digits are `1 … 32` in lane order. Lane width, lane order inside the tower, and `x`-before-`y` are fixed by that one number, and a generator that disagrees fails before it writes any data |
 | The two tables are the same length but a different shape, so an index means two things | ✅ M08: `packOk` compares the split pivots node by node; a reshape is a `shape` fault, and the control that reshapes the packed table is committed |
+| The rotation is asserted rather than checked, so the "second copy" is a different graph | ✅ M09: `deGrey_rotation` decides 791 exact coordinate identities in `ℚ(√3,√5,√7,√11)` — every point of the first copy against its claimed partner. The index map is a closed form, so there is no emitted table to be wrong; and `31² + (3√7)² = 32²` is checked as a field of `Motion`, without which `Motion.distSq_eq` is *false* and the committed countermodel says so |
+| The transported gadget is attached to the wrong ports, so it constrains the wrong vertices | ✅ M09: `Gadget.transport` takes the port images as **pointwise equations** — for de Grey, `φ 14 = 14` and `φ 11 = 802`. A wrong image is a type error at the composition, not a silently different theorem |
+| The composition "refutes" whatever it is handed | ✅ M09: dropping the joining edge leaves exactly the four monochromatic patterns, and `deGrey_forcing_alone_admits` is that as a **theorem**, kernel-decided on every build. The same control at spec scale is `K₅` minus an edge, with the rendered survivor list pinned by `#guard_msgs` |
+| A transported gadget collapses an edge, making a colouring "proper" that is not | ✅ M09: `Gadget.transport`'s hypothesis is `Adj`, which carries distinctness, so a collapsing map cannot satisfy it. For de Grey that distinctness is `deGreyPhiNat_inj`, proved by `omega` from the closed form — no data to check |
+| The scale factor is cancelled unsoundly, since `Q4` is not known to be a domain | ✅ M09: it is cancelled as a **natural number** via `NatCancel`, true of the tower because its leaves are `ℤ` and every level is componentwise. Nothing anywhere assumes `Q4` has no zero divisors |
 | Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
 | Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
 | `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
@@ -490,6 +538,13 @@ Stated up front, per doctrine, and to be reported as-is:
   re-checker on 4 cores that cannot finish overnight.
   **An earlier version of this bullet quoted 0.35 ms/step and 1.26 hours. Both were wrong** — measured
   without the clause-table lookup, which is where the time actually goes. Do not quote them again.
+- **The gadget algebra has been exercised on constructions that already existed, not on a search.**
+  M09's composition theorem covers de Grey's two-copy argument and Heule's triangle argument, and it
+  deleted a certificate. That is evidence it is the right shape, not evidence it scales: the terminal
+  check is `4^m` in the number of interface vertices, measured at ~0.2 ms per (colouring × gadget), so
+  **eight ports and ten gadgets is already ~2 minutes**. A search over many placements will need the
+  permutation-closure optimisation M09 deliberately left out, and that is a projection, not a
+  measurement.
 - **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
   composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
   they are enough here.

@@ -88,12 +88,14 @@ theorem deGrey_unit_distances :
     ∀ e ∈ deGrey.edges, dist (deGrey.point e.1) (deGrey.point e.2) = 1 :=
   deGrey.valid_sound (by decide) deGrey_valid
 
-/-- **The hand-off to M05.** One hypothesis remains between here and `χ(ℝ²) ≥ 5`: that de Grey's
-1581-vertex graph admits no 4-colouring. Everything geometric is discharged inside this proof.
+/-- **The reduction, over this edge list.** Given that de Grey's graph admits no 4-colouring, the
+plane needs five colours. Everything geometric is discharged inside this proof.
 
-Stated with the hypothesis explicit rather than proved outright, because it is *not* proved outright
-— the colouring half is a separate milestone, and a file that read as though it were finished would
-be lying about where the ratchet stands. -/
+The bound itself is proved in `Instances/DeGrey/Bound.lean`, over the *same graph* written with its
+second copy as a rotation of its first (`deGreyRot`) — which is what lets one certificate do the work
+of two. This statement is kept because it is the one that says plainly what the geometry buys: a
+finite unit-distance graph plus non-colourability is a lower bound on χ(ℝ²), and the hypothesis is
+exactly the part no geometry can supply. -/
 theorem deGrey_bound_of_not_colorable
     (hG : ¬ (edgeGraph 1581 deGrey.edges).Colorable 4) :
     5 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber :=

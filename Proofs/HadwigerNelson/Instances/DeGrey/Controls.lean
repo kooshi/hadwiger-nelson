@@ -1,34 +1,29 @@
-import Proofs.HadwigerNelson.Instances.DeGrey.Split
 import Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table
-import Proofs.HadwigerNelson.Instances.DeGrey.HalfB.Table
-import Proofs.HadwigerNelson.Sat.Forcing
+import Proofs.HadwigerNelson.Instances.DeGrey.Forcing
 import Proofs.HadwigerNelson.Sat.Diagnose
 
 /-!
-# The negative controls for the split and the forcing argument
+# The negative controls for the rotation and the composition
 
 `CLAUDE.md`: *a check is not known to work until it has been seen to fail.* The positive claims in
-`Instances/DeGrey/{Split,Forcing,Bound}.lean` would all hold of a decomposition that was quietly
-wrong, so each gets a partner here that goes red — and the partners are **committed**, so they fire on
-every build rather than once in a session nobody can re-run.
+`Instances/DeGrey/{Rotation,Rotated,Forcing,Bound}.lean` would all hold of an argument that was
+quietly wrong, so each gets a partner here that goes red — and the partners are **committed**, so they
+fire on every build rather than once in a session nobody can re-run.
 
-Two of M06's failure modes are not exercised at full scale, because the price is not worth paying:
-corrupting a clause-table chunk or moving the joining edge invalidates 2,265 segment modules and four
-hours of kernel time. They are exercised at spec scale instead — `Sat/ClauseTable.lean` corrupts a
-chunk and watches `agreesWithCNF` refuse, `Sat/MaskCheck.lean` hands the checker a satisfiable formula
-and watches it refuse. **Stated so that nobody reads the list below as complete.**
-
-What is here is two hypotheses shown load-bearing by **countermodel** — a theorem, where a failed build
-is only an anecdote — and one where no countermodel exists and the section says so instead of
-pretending otherwise. The second countermodel found a false claim in a docstring of mine, which is the
-best argument for writing these at all.
+One failure mode is not exercised at full scale, because the price is not worth paying: corrupting a
+clause-table chunk invalidates 1,222 segment modules and hours of kernel time. It is exercised at spec
+scale instead — `Sat/ClauseTable.lean` corrupts a chunk and watches `agreesWithCNF` refuse,
+`Sat/MaskCheck.lean` hands the checker a satisfiable formula and watches it refuse. **Stated so that
+nobody reads the list below as complete.**
 -/
+
+set_option maxRecDepth 1000000
 
 namespace HadwigerNelson
 
 /-! ### Relabelling colours must be injective, and here is why
 
-`valid_comp_of_injective` is what lets one certificate cover three colour cases. Delete its
+`valid_comp_of_injective` is what lets one certificate cover twenty-four colour patterns. Delete its
 injectivity hypothesis and the statement becomes **false**: a relabelling that merges two colours
 turns a proper colouring into an improper one, so the symmetry argument would conclude anything.
 
@@ -42,58 +37,74 @@ theorem not_valid_comp_of_not_injective :
   exact h (fun i => i.castLE (by norm_num)) (fun _ => 0)
     (fun i j hij hg => hij.1 (Fin.castLE_injective (by norm_num) hg)) 0 1 hadj rfl
 
-/-! ### A degenerate cube is unprovable, not free — and that corrected a docstring
+/-! ### A degenerate pinning is vacuous, not unsound
 
-`eq_of_pinned_unsat` is handed its cube as a literal, so nothing in the type stops
-`[(u, 0), (u, 1)]`. Its docstring used to claim such a cube makes the pinned formula "trivially
-unsatisfiable". **It does not**, and this is the control that caught it: the encoding omits
-at-most-one-colour clauses on purpose, so pinning one vertex to colour 0 *and* colour 1 asks for two
-different variables to be true, which any assignment can do.
+`Gadget.ofUnsat` is handed a port tuple and a pattern, and nothing in the type stops the tuple from
+naming one vertex twice with two different colours in the pattern. That cube is **satisfiable** — the
+encoding omits at-most-one-colour clauses on purpose, so pinning one vertex to colour 0 *and* colour 1
+asks for two different variables to be true, which any assignment can do.
 
-The safety argument is therefore the other one — the conclusion `f u = f u` is trivially true — and
-the degenerate hypothesis is simply unprovable. Proved here, so the claim is a theorem rather than a
-sentence: -/
+So a degenerate pinning yields no certificate, and even if one existed the gadget it produced would
+admit everything: no proper colouring can give one vertex two colours, so `samePattern` is false at
+every real colouring and `admits` is `true` throughout. **Vacuous, never unsound** — and this is the
+theorem rather than the sentence: -/
 theorem sat_degenerate_cube :
     ∃ a, Std.Sat.CNF.Sat a (coloringCNF 4 2 [] ++ cubeCNF 4 2 [(0, 0), (0, 1)]) :=
   ⟨fun _ => true,
     show Std.Sat.CNF.eval (fun _ => true) (coloringCNF 4 2 [] ++ cubeCNF 4 2 [(0, 0), (0, 1)]) = true
       by decide +kernel⟩
 
-/-! ### The two ends of the joining edge must be distinct, and this one cannot be a countermodel
+/-! ### The composition must not refute without all three constraints
 
-`not_colorable_of_forcing` derives that both ends of the joining edge take the shared vertex's colour
-and then contradicts adjacency; at `a = b` there is nothing to contradict. The hypothesis `hab` is what
-stops that, and dropping it is caught by the elaborator rather than by a countermodel — **because no
-countermodel exists at a size anyone can write down.** A countermodel would need a small graph in which
-two non-adjacent vertices are genuinely forced to share a colour, and forcing of that kind is exactly
-what de Grey's construction is for: measured, it does not even appear in the 395-vertex layer of his own
-graph, where all four pin combinations are satisfiable.
+`deGreyRot_not_colorable_four` says the three gadgets jointly admit nothing. That claim is worth
+nothing unless dropping one of them lets a colouring through — otherwise the composition would report
+"admits nothing" whatever it were handed.
 
-**So there is no control for `hab` here, and that is the honest report rather than an oversight.** Its
-necessity is carried by the signature — `not_colorable_of_forcing` cannot be applied without it, and
-attempting `a = b` fails on the joining edge instead, since `(11, 11)` is not in the edge list. What
-cannot be exhibited is a *model* in which dropping it produces a false theorem.
+Drop the joining edge, and exactly the four all-one-colour patterns survive. Those are precisely the
+colourings the joining edge forbids, which is the argument stated backwards. -/
+theorem deGrey_forcing_alone_admits :
+    (deGreyForcedA.inter deGreyForcedB).survivors = [[0, 0, 0], [1, 1, 1], [2, 2, 2], [3, 3, 3]] := by
+  decide
 
-The one control this project has for that class of hypothesis remains M05's: the non-tautology
-hypothesis of `propagate_prop_sound`, where a countermodel does exist and is committed. -/
+/-! ### The rotation must land on the right vertices
+
+`deGreyForcedB` is the first copy's constraint moved by the rotation, and it says something about
+vertex 802 only because the rotation sends vertex 11 there. Move either port and the transport does
+not typecheck; these pin the two facts it rests on, compiled, on every build. -/
+
+#guard deGreyPhiNat 14 = 14
+#guard deGreyPhiNat 11 = 802
+
+-- …and the rotation is a rotation only because `31² + (3√7)² = 32²`. At 30 it is not, and the
+-- structure cannot be built at all — so the control here is the arithmetic itself, which a reader can
+-- check by eye: 961 + 63 = 1024, and 900 + 63 is not.
+#guard 31 * 31 + 3 * 3 * 7 = 32 * 32
+#guard 30 * 30 + 3 * 3 * 7 ≠ 32 * 32
 
 /-! ## Cross-filing: a certificate attached to the wrong formula
 
 `ARCHITECTURE.md` lists "a certificate silently attached to the wrong problem" as a defence, and until
-now it was a *procedure* — regenerate against the other half and watch the build go red. A procedure
+M07 it was a *procedure* — regenerate against the other half and watch the build go red. A procedure
 that is expensive to run is a procedure nobody runs, and one that is never run is not a defence.
 
 Stated as an obligation instead, it costs a fraction of a second: `agreesWithCNF` is
 `(firstFault f).isNone`, and `firstFault` stops at the first clause that disagrees, which for two
-different formulas is immediate. So the control is now a theorem that fires on every build.
+different formulas is immediate.
 
 **Read the direction carefully.** `halfA_agrees` says half A's table matches half A's formula; that is
 consistent with a table that matches *everything*, which would certify anything. This says it does
-not. The pair is what makes either one mean something. -/
-theorem halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false := by
-  decide +kernel
+not. The pair is what makes either one mean something.
 
-theorem halfB_table_refuses_halfA_cnf : halfBTable.agreesWithCNF halfACnf = false := by
+The formula it is checked against is de Grey's *second* half — which no longer has a certificate, but
+whose edge list is still emitted, so the control survives the deletion of 1,043 modules. -/
+
+/-- The second half's formula. Its certificate is gone — M09 derives that half from the first by a
+rotation — but the formula it would have been filed against is still a formula, and it is exactly
+what half A's table must refuse. -/
+def halfBCnf : Std.Sat.CNF Nat :=
+  coloringCNF 4 1581 deGreyHalfBEdges ++ cubeCNF 4 1581 [(14, 0), (802, 1)]
+
+theorem halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false := by
   decide +kernel
 
 -- And the *diagnosis* a cross-filing produces, pinned. A build-fault table that sends the reader to
