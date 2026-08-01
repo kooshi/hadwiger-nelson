@@ -252,6 +252,31 @@ def Gadget.ofUnsat (q₀ : Fin m → Fin k)
       simp only [cubeOf, portList, pinCube, List.map_map, Function.comp_def, hσ]
     rw [hcube]; exact h
 
+/-- **A gadget from exhaustion.** At a size the kernel can enumerate, no solver and no certificate
+are needed: check every colouring of the graph and confirm none puts the ports in this pattern.
+
+The hypothesis reads *"every colouring either paints some listed edge one colour, or misses the
+pattern"* — the contrapositive of what the gadget claims, and stated that way for one reason: it is
+**decidable**, so a caller writes `by decide +kernel`. `Proper` is not, because
+`SimpleGraph.Adj` is not; this is the same trade `not_colorable_edgeGraph_iff` makes.
+
+The ceiling is around nine vertices at four colours (`k ^ n` colourings at about 1.2 ms each in the
+kernel). That is small, and small is exactly where a **gadget library** lives: the classical forcing
+pieces are handfuls of vertices, and `tools/profile.py` finds their properties in milliseconds.
+
+The colour symmetry is already inside `samePattern`, so this producer says nothing about relabelling
+and does not have to: one exhaustion covers every renaming of the pattern, just as one certificate
+does at `Gadget.ofUnsat`. -/
+def Gadget.ofExhaustion (q₀ : Fin m → Fin k)
+    (h : ∀ f : Fin n → Fin k,
+      (∃ e ∈ E, e.1 ≠ e.2 ∧ f e.1 = f e.2) ∨ samePattern (fun i => f (p i)) q₀ = false) :
+    Gadget k n m E p where
+  admits q := !samePattern q q₀
+  sound f hf := by
+    rcases h f with ⟨e, he, hne, heq⟩ | hs
+    · exact absurd heq (hf _ _ (edgeGraph_adj_of_mem hne he))
+    · simp [hs]
+
 /-! ## Conclude — and the same computation reports the failure
 
 The terminal check is an exhaustive search over the port colourings, and during a gadget search it
@@ -383,6 +408,39 @@ def k5GadgetFive : Gadget 5 5 5 k5 (fun i => i) :=
    k5Edge 1 2 (by decide) (by decide), k5Edge 1 3 (by decide) (by decide),
    k5Edge 1 4 (by decide) (by decide), k5Edge 2 3 (by decide) (by decide),
    k5Edge 2 4 (by decide) (by decide)]).survivors
+
+/-! ### A gadget that is not an edge
+
+Everything above refutes with an edge or a certificate. This is the third kind and the one a library
+is made of: **two vertices that are not adjacent and must still share a colour.**
+
+The graph is a *rhombus* — two triangles glued along an edge — and at **three** colours its two far
+corners are forced equal, because each is adjacent to both ends of the shared edge and only one
+colour is left. Vertices 0 and 3 are not joined; nothing in the edge list says they agree.
+
+`tools/profile.py` finds this without being told: `--graph rhombus --ports 0 3 --colours 3` reports
+one refuted pattern out of two, and at four colours reports none. Both are pinned below. -/
+
+/-- Two triangles sharing the edge `(1, 2)`. Vertices `0` and `3` are the far corners. -/
+def rhombus : List (Fin 4 × Fin 4) := [(0, 1), (0, 2), (1, 2), (1, 3), (2, 3)]
+
+/-- **The rhombus forces its far corners to agree, at three colours** — proved by exhausting all
+`3⁴ = 81` colourings, with no solver and no certificate anywhere. -/
+def rhombusGadget : Gadget 3 4 2 rhombus ![0, 3] :=
+  Gadget.ofExhaustion ![0, 1] (by decide +kernel)
+
+-- The two colourings of the ports, one refuted and one not: they may agree, they may not differ.
+/-- info: [[(0, 0), (3, 0)]] -/
+#guard_msgs in
+#eval rhombusGadget.survivors
+
+-- **The negative control, and it is a countermodel rather than a build failure.** At *four* colours
+-- the same claim is false — the far corners may differ — so a gadget asserting otherwise cannot be
+-- built, and here is the colouring that stops it: `0 ↦ 0, 1 ↦ 1, 2 ↦ 2, 3 ↦ 3`.
+example : ¬ ∀ f : Fin 4 → Fin 4,
+    (∃ e ∈ rhombus, e.1 ≠ e.2 ∧ f e.1 = f e.2) ∨
+      samePattern (fun i => f (![(0 : Fin 4), 3] i)) ![0, 1] = false := by
+  decide
 
 /-- **A model of `exists_perm_comp_eq`'s hypothesis**, so colour symmetry is not quantifying over
 nothing: two port colourings with the same partition — first and third agree, second differs. -/

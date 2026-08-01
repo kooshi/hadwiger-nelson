@@ -220,6 +220,32 @@ three edges, composed. -/
 #print axioms heule553_not_colorable_four
 #print axioms chromaticNumber_plane_ge_five_553
 
+/-! ## M11 — the search instrument
+
+Two rewrites and one new module, and the audit is where their reach is stated.
+
+`exists_mem_canonPatterns` is what makes the terminal check exhaustive while enumerating a fraction
+of the colourings: every colouring of the ports matches a listed one. If it were unsound, every
+`not_colorable_of_gadget` above it would be too — which is the whole of `Gadget`'s conclusion, on
+all three witnesses.
+
+`Motion.distSq_image` and `UDCert.validOn_map_of_scaling` are the pair that make a placed copy free.
+They are checked here because a copy placed by them is asserted *nowhere else*: there is no
+per-vertex identity to inspect, which is exactly what makes them worth auditing.
+
+`Gadget.ofExhaustion` produces a gadget with no solver and no certificate anywhere, so it is the one
+producer whose trust is entirely the kernel's. -/
+
+#print axioms exists_mem_canonPatterns
+#print axioms samePattern_iff
+#print axioms Gadget.ofExhaustion
+#print axioms rhombusGadget
+#print axioms Motion.maps_iff
+#print axioms Motion.distSq_image
+#print axioms Motion.distSq_rescale
+#print axioms Motion.maps_trans
+#print axioms UDCert.validOn_map_of_scaling
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

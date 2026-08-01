@@ -642,6 +642,63 @@ Plus the spec witnesses, which must exist before anything is believed:
 
 ---
 
+## 4.5 What landed
+
+**Eight of the inventory's ten items. Two are carried, and one of those was carried as planned.**
+
+| # | Item | Shipped |
+|---|---|---|
+| § 0 | the algebra past four colours | ✅ `Gadget k n m E p`; `Proper` over *any* colour type. `K₅` refuted at four colours and surviving at five, both committed |
+| § 1.1 | canonical colour patterns | ✅ `Pattern.lean`, generated not filtered. **53–72× measured**, and the interface ceiling moves from 7 to 10 |
+| § 1.2 | translations and reflections | ✅ `Motion` is a similarity — an affine map with orthogonal equal-length columns. Three laws, no case split, and each law has its own countermodel |
+| § 1.3 | composition | ✅ `Motion.trans`, four `linear_combination` identities |
+| § 1.4 | placement by definition | ✅ `UDCert.validOn_map_of_scaling` — a copy whose coordinates *are* the image costs **nothing**: no per-vertex check, no per-edge arithmetic |
+| § 2.1 | a subgraph's whole port property | ✅ `tools/profile.py`, one solver call per colour-partition, five self-tests |
+| § 2.2 | gadget minimisation | ✅ `tools/minimise.py` — `shrink.py` retargeted to preserve a *set* of refuted patterns |
+| § 2.3 | the isometric sub-copy scanner | ✅ `tools/scan.py`. **Recovers de Grey's 791-point split in 3.6 seconds**, exactly, from the coordinates and not from his paper — and hands back the `Motion` fields *and* the vertex map |
+| § 2.4 | a candidate scorer | ✅ free, and better than expected: `survivors.length` counts colour-*partitions*, and each is a solver cube |
+| § 2.5 | a gadget library | ⚠️ **partly.** The *producer* landed — `Gadget.ofExhaustion`, a gadget with no solver and no certificate at all — and so did the first gadget that is neither an edge nor a certificate: the rhombus, whose two **non-adjacent** far corners are forced to agree at three colours. A catalogue transcribed from the literature did not, and is carried |
+| § 1.5 | orbit construction | ❌ carried to M12, as § 1 planned |
+
+### Two things the milestone found that were not on the list
+
+**A rule in `CLAUDE.md` was wrong, and it had shaped every module layout since M07.** "A comment in a
+module the certificates import re-checks every one of them" is true of *doc* comments and false of
+`--` comments, which leave the `.olean` byte-identical. Measured three ways (§ 0(a)). The
+consequence is that prose for a human is free upstream of anything, written as `--`.
+
+**A bug in the new minimiser, caught by the gate rather than by review.** `tools/shrink.py`'s
+`refutes` hard-coded four colours, so `minimise.py` shrank a three-colour gadget against a
+four-colour question. It surfaced because the tool controls run inside `scripts/regen-check.sh`, on
+a rhombus whose answer is known — which is the argument for wiring tool self-tests into the gate
+rather than running them by hand.
+
+## 4.6 The gate
+
+| check | result |
+|---|---|
+| `./scripts/build.sh` | **OK**, 154 batches, 223 s wall on the desktop |
+| `sorry` | **zero** |
+| `./scripts/axioms.sh` | **OK — 112 clean, 5 declared purchases** (all M03's, unchanged; 103 clean before) |
+| `lake lint` | passed |
+| `scripts/regen-check.sh` | **OK** — every generated module reproduced byte for byte, plus 9 tool controls |
+
+**Eight negative controls run and watched to go red:**
+
+| broken on purpose | what went red |
+|---|---|
+| `canonAux` cannot open a fresh colour | `exists_canonAux` in **both** branches, *and* both rendered-enumeration `#guard_msgs` |
+| the coverage conjunct replaced by `True` | `exists_mem_canonPatterns`, at `List.idxOf_inj` |
+| the terminal check does not relabel the colouring | `not_colorable_of_gadget`, at the step colour symmetry enters |
+| `Motion`'s orthogonality law deleted | `distSq_image` and two of `trans`'s laws |
+| `Motion`'s second-column law deleted | the same, at different lines |
+| `Gadget.edge` admits agreement instead of forbidding it | the gadget cannot be built at all, and `K₅` goes red |
+| `canon_patterns` in Python cannot open a fresh colour | `tools/profile.py --self-test`, on the rhombus |
+| the scanner's reflection has the wrong sign | `tools/scan.py --self-test`: the spindle's mirror covers 4 instead of 7 |
+
+Plus the three committed countermodels — one per similarity law — which are `example : ¬ ∀ …`
+statements rather than procedures, so they run on every build.
+
 ## 5. Not in this milestone
 
 * **§ 1.5 orbit construction** and **§ 2.5 a transcribed gadget library** — § 1, carried, with reasons.

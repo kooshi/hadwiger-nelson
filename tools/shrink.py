@@ -80,12 +80,19 @@ def core_vertices(n: int, edges: list[tuple[int, int]], used: set[int]) -> set[i
 # ------------------------------------------------------------------ the solver
 
 def refutes(n: int, edges: list[tuple[int, int]], pins: list[tuple[int, int]],
-            timeout: float | None = None, conflicts: int | None = None) -> bool | None:
-    """True if UNSAT, False if SAT, None if the solver gave up. None is never treated as UNSAT."""
+            timeout: float | None = None, conflicts: int | None = None,
+            k: int = K) -> bool | None:
+    """True if UNSAT, False if SAT, None if the solver gave up. None is never treated as UNSAT.
+
+    `k` defaults to four because every witness this file was written for refutes 4-colourings.
+    **A caller asking a different question must say so** — `tools/minimise.py` shrinks gadgets at
+    whatever colour count their profile used, and silently asking at four would have shrunk against
+    a property nobody established.
+    """
     with tempfile.NamedTemporaryFile("w", suffix=".cnf", delete=False) as t:
         cnf = Path(t.name)
     try:
-        write_cnf(cnf, n, edges, pins)
+        write_cnf(cnf, n, edges, pins, k)
         cmd = [CADICAL, "-q", str(cnf)]
         if conflicts is not None:
             cmd += [f"--conflicts={conflicts}"]

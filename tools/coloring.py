@@ -13,6 +13,11 @@ the certificate addresses clauses **by position**:
     ids n .. n + k*|E| - 1       k clauses per edge, width 2, in edge order
     the rest                     one unit clause per pin, width 1
 
+**The colour count is a parameter, defaulting to four.** Every witness in this repository refutes
+4-colourings, so `K = 4` was written into this module and nothing pushed on it; chi(R^2) >= 6 means
+refuting *five*-colourings, and M11 threaded the count through Lean's `Gadget` for the same reason.
+Callers that say nothing still get four.
+
 UNTRUSTED, like everything in `tools/`. Lean re-derives the agreement between the emitted table and
 the formula (`ClauseTable.agreesWithCNF`), so a mistake here costs a theorem and cannot buy one.
 """
@@ -24,27 +29,27 @@ from pathlib import Path
 K = 4  # colours
 
 
-def var(v: int, c: int) -> int:
+def var(v: int, c: int, k: int = K) -> int:
     """The DIMACS variable for "vertex `v` has colour `c`" — `colorVar k v c`, plus one."""
-    return K * v + c + 1
+    return k * v + c + 1
 
 
-def unvar(x: int) -> tuple[int, int]:
+def unvar(x: int, k: int = K) -> tuple[int, int]:
     """Inverse of `var`, for reading a formula back."""
-    return divmod(x - 1, K)
+    return divmod(x - 1, k)
 
 
-def base_clauses(n: int, edges: list[tuple[int, int]]) -> list[list[int]]:
-    """`coloringCNF K n edges`, in Lean's order. **Contains no unit clause** — see `is_unpinned`."""
-    out = [[var(v, c) for c in range(K)] for v in range(n)]
+def base_clauses(n: int, edges: list[tuple[int, int]], k: int = K) -> list[list[int]]:
+    """`coloringCNF k n edges`, in Lean's order. **Contains no unit clause** — see `is_unpinned`."""
+    out = [[var(v, c, k) for c in range(k)] for v in range(n)]
     for (a, b) in edges:
-        out += [[-var(a, c), -var(b, c)] for c in range(K)]
+        out += [[-var(a, c, k), -var(b, c, k)] for c in range(k)]
     return out
 
 
-def pin_clauses(pins: list[tuple[int, int]]) -> list[list[int]]:
-    """`cubeCNF K n pins` — one unit clause per pinned vertex."""
-    return [[var(v, c)] for (v, c) in pins]
+def pin_clauses(pins: list[tuple[int, int]], k: int = K) -> list[list[int]]:
+    """`cubeCNF k n pins` — one unit clause per pinned vertex."""
+    return [[var(v, c, k)] for (v, c) in pins]
 
 
 def is_unpinned(clauses: list[list[int]]) -> bool:
@@ -60,27 +65,51 @@ def is_unpinned(clauses: list[list[int]]) -> bool:
 
 
 def write_cnf(path: Path, n: int, edges: list[tuple[int, int]],
-              pins: list[tuple[int, int]]) -> None:
-    """DIMACS for `coloringCNF K n edges ++ cubeCNF K n pins`."""
-    cl = base_clauses(n, edges) + pin_clauses(pins)
+              pins: list[tuple[int, int]], k: int = K) -> None:
+    """DIMACS for `coloringCNF k n edges ++ cubeCNF k n pins`."""
+    cl = base_clauses(n, edges, k) + pin_clauses(pins, k)
     with open(path, "w") as f:
-        f.write(f"p cnf {K * n} {len(cl)}\n")
+        f.write(f"p cnf {k * n} {len(cl)}\n")
         for c in cl:
             f.write(" ".join(map(str, c)) + " 0\n")
 
 
-def read_cnf(path: Path) -> tuple[int, list[tuple[int, int]], list[tuple[int, int]]]:
+def read_cnf(path: Path, k: int = K) -> tuple[int, list[tuple[int, int]], list[tuple[int, int]]]:
     """Recover `(n, edges, pins)` from a DIMACS file this module wrote."""
     n, edges, pins = 0, [], []
     for line in open(path):
         if line[0] == "c":
             continue
         if line[0] == "p":
-            n = int(line.split()[2]) // K
+            n = int(line.split()[2]) // k
             continue
         lits = [int(x) for x in line.split()[:-1]]
         if len(lits) == 1:
-            pins.append(unvar(lits[0]))
+            pins.append(unvar(lits[0], k))
         elif len(lits) == 2:
-            edges.append((unvar(-lits[0])[0], unvar(-lits[1])[0]))
+            edges.append((unvar(-lits[0], k)[0], unvar(-lits[1], k)[0]))
     return n, sorted(set(edges)), pins
+
+
+def canon_patterns(k: int, m: int) -> list[list[int]]:
+    """**One colour pattern per partition of `m` ports into at most `k` blocks.**
+
+    Must agree with `Proofs/HadwigerNelson/Pattern.lean`'s `canonPatterns k m`, element for element
+    and in the same order, because a profile's entries are read against that list. The agreement is
+    not assumed: `--check` prints this list for comparison against `#eval canonPatterns k m`, and the
+    Lean side re-derives every claim anyway, so a disagreement costs a theorem and cannot buy one.
+
+    Colours are numbered in order of first occurrence, so position 0 is always colour 0 and no name
+    is ever skipped.
+    """
+    out: list[list[int]] = []
+
+    def go(prefix: list[int], used: int) -> None:
+        if len(prefix) == m:
+            out.append(list(prefix))
+            return
+        for c in range(min(used + 1, k)):
+            go(prefix + [c], max(used, c + 1))
+
+    go([], 0)
+    return out

@@ -122,6 +122,41 @@ for f in Cert.lean Weights.lean; do
 done
 [[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical, weights re-derived from the LP"
 
+# ---------------------------------------------------------------------------------------------
+# The search instrument's own controls (M11).
+#
+# The three tools added at M11 generate nothing committed, so nothing above touches them — and a
+# tool nobody exercises is a tool nobody has checked. Each carries `--self-test`: a pair of
+# questions with *opposite* expected answers, so a tool that always says "refuted", always says
+# "achieved", or always reports the identity fails rather than passing quietly. Both have been
+# watched to go red (`plans/M11-search-instrument.md` § 4).
+echo "==> search instrument"
+if ! python3 tools/profile.py --self-test > "${V}/profile.log" 2>&1; then
+  sed 's/^/    /' "${V}/profile.log"; echo "    FAIL: tools/profile.py"; FAIL=1
+else
+  echo "    profile.py: $(grep -c '^  ok' "${V}/profile.log") controls"
+fi
+if ! python3 tools/scan.py --self-test > "${V}/scan.log" 2>&1; then
+  sed 's/^/    /' "${V}/scan.log"; echo "    FAIL: tools/scan.py"; FAIL=1
+else
+  echo "    scan.py: $(grep -c '^  ok' "${V}/scan.log") controls, including de Grey's 791-point split"
+fi
+# minimise.py has no self-test of its own; it is exercised end to end, because a shrinker that
+# preserved nothing would return the empty graph and a shrinker that preserved everything would
+# return the input. The rhombus does neither: all four of its vertices are needed.
+echo '{"n": 4, "edges": [[0,1],[0,2],[1,2],[1,3],[2,3]]}' > "${V}/rhombus.json"
+python3 tools/profile.py --graph "${V}/rhombus.json" --ports 0 3 --colours 3 \
+  --out "${V}/rh.json" > "${V}/rh.log" 2>&1
+# Written to a file and grepped afterwards, never piped: `grep -q` exits at the first match and
+# SIGPIPEs the writer, which under `set -o pipefail` turns a *successful* check into a failed one.
+python3 tools/minimise.py --profile "${V}/rh.json" --jobs 2 --rounds 3 > "${V}/min.log" 2>&1
+if grep -q "4 vertices, 5 edges$" "${V}/min.log"; then
+  echo "    minimise.py: the rhombus does not shrink — every vertex carries the property"
+else
+  sed 's/^/    /' "${V}/min.log"
+  echo "    FAIL: tools/minimise.py shrank a graph that has nothing to spare"; FAIL=1
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1
