@@ -291,61 +291,55 @@ elaborates before proof effort is spent.
 ### 3.1 `Proofs/HadwigerNelson/Packed.lean` — new, imports `Certificate`
 
 ```lean
-/-- A table of integers indexed by `Nat`, the packed sibling of `PtTable`. -/
-inductive IntTable where
-  | leaf : Int → IntTable
-  | node : Nat → IntTable → IntTable → IntTable
+/-- **The whole arithmetic content of the milestone**, about integers, proved once. -/
+theorem two_digit_le {M a b : Int} (hM : 0 < M)
+    (ha : 2 * |a| + 2 ≤ M) (hb : 2 * |b| + 2 ≤ M) : 2 * |a + M * b| + 2 ≤ M * M
 
-def IntTable.get : IntTable → Nat → Int
+theorem two_digit_inj {M a b c d : Int} (hM : 0 < M)
+    (ha : 2 * |a| + 2 ≤ M) (hc : 2 * |c| + 2 ≤ M)
+    (h : a + M * b = c + M * d) : a = c ∧ b = d
 
-/-- The lane width, in bits. One lane per integer leaf of a point. -/
+/-- Bits per lane. Measured, not chosen: 64 costs 28% more per edge. -/
 def laneBits : ℕ := 32
 
-/-- Packing, at every level of the tower and at `Pt`. -/
+/-- A type whose values are a fixed number of integer digits in base `2 ^ laneBits`. -/
 class Packable (K : Type) where
-  pack : K → Int
-  width : ℕ                    -- lanes consumed
-  Bnd : K → Prop               -- every leaf `|l| < 2^(laneBits - 1)`
-
-instance : Packable Int
-instance [Packable K] : Packable (Adjoin d K)
-def Pt.pack (p : Pt) : Int
-def Pt.Bnd (p : Pt) : Prop
-
-/-- **Linearity** — the reason the per-edge check is a subtraction and nothing else. -/
-theorem pack_sub [Packable K] (x y : K) : Packable.pack (x - y) = ...
-
-/-- **Bounding** — a bounded value fits, with room for the `+ 2`, in its own lanes. -/
-theorem pack_le (b : Int) (x : K) : 2 * b + 2 ≤ 2 ^ laneBits → bnd b x = true →
+  pack  : K → Int
+  width : ℕ
+  bnd   : Int → K → Bool
+  sub   : K → K → K                      -- a field, not an inherited `Sub`
+  pack_sub : ∀ x y, pack (sub x y) = pack x - pack y
+  bnd_sub  : ∀ b x y, bnd b x → bnd b y → bnd (2 * b) (sub x y)
+  pack_le  : ∀ b x, 2 * b + 2 ≤ 2 ^ laneBits → bnd b x →
     2 * |pack x| + 2 ≤ 2 ^ (laneBits * width)
+  pack_inj : ∀ b x y, 2 * b + 2 ≤ 2 ^ laneBits →
+    bnd b x → bnd b y → pack x = pack y → x = y
 
-/-- **Injectivity on bounded values** — the one real obligation of this milestone. -/
-theorem pack_inj (b : Int) (x y : K) : 2 * b + 2 ≤ 2 ^ laneBits →
-    bnd b x = true → bnd b y = true → pack x = pack y → x = y
+instance instInt : Packable Int                                        -- one digit
+instance instAdjoin [Packable K] : Packable (Adjoin d K)               -- two lanes
+instance instPt : Packable Pt                                          -- two lanes
+
+def Pt.normSq (v : Pt) : Q4 := FastSq.sq v.x + FastSq.sq v.y
+
+/-- **The identity the milestone turns on**, and it is `rfl`. -/
+theorem Pt.normSq_sub (p q : Pt) : (Packable.sub p q).normSq = p.distSq q := rfl
 ```
-
-Indexed on `[CommRing K]` rather than on `[Sub K]`, following `NatScalar`'s own note in
-`Field/Quadratic.lean`: a class indexed on the pieces only synthesizes where the ambient instances
-are found by the route that declared it, which for a tower is never reliably true. Indexing on the
-single bundled structure makes the route unique. **Discovered by trying the other way** — `Packable
-Q4` failed to synthesize at every use site.
 
 and the witness and its soundness:
 
 ```lean
 structure DiffWitness (n : ℕ) where
-  diffs : PtTable
-  packedV : IntTable
-  packedD : IntTable
-  keys : List ℕ
+  packedV : IntTable        -- same shape as the certificate's vertex table
+  diffs   : PtTable
+  packedD : IntTable        -- same shape as `diffs`
+  keys    : List ℕ          -- one per edge, in the certificate's edge order
 
-/-- The four checks, as one `Bool` the kernel decides. -/
-def DiffWitness.Check (c : UDCert n) (w : DiffWitness n) : Bool
+def DiffWitness.Check (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool
 
-/-- **Soundness.** A witness that checks certifies the certificate — the same `Valid = true` the
-old route produced, from data that costs an order of magnitude less to verify. -/
-theorem UDCert.valid_of_diffWitness (c : UDCert n) (w : DiffWitness n)
-    (h : w.Check c = true) : c.Valid = true
+/-- **Soundness.** The same `Valid = true` the old route produced, from data that costs an order of
+magnitude less to verify. -/
+theorem UDCert.valid_of_diffWitness (c : UDCert n) (t : PtTable) (w : DiffWitness n)
+    (hverts : c.verts = t.toVerts) (h : w.Check t c = true) : c.Valid = true
 ```
 
 The four checks are separate `def`s so each can be a separate `decide +kernel` in a separate module
@@ -354,12 +348,12 @@ de Grey's size.
 
 ### 3.2 The obligation that is actually work
 
-`pack_inj`, by structural induction up the tower. At each level, from
-`pack x.re + 2^w · pack x.im = pack y.re + 2^w · pack y.im` and `|pack x.re|, |pack y.re| < 2^(w−1)`:
+`pack_inj`, and it is `two_digit_inj` cited three times. At each two-lane level, from
+`pack x.re + M · pack x.im = pack y.re + M · pack y.im` with the low digits inside half of `M`:
 
 ```
-pack x.re − pack y.re = 2^w · (pack y.im − pack x.im)
-|LHS| < 2^w  ⇒  both sides are 0  ⇒  re's agree and im's agree  ⇒  recurse
+pack x.re − pack y.re = M · (pack y.im − pack x.im)
+|LHS| ≤ M − 2 < M  ⇒  both sides are 0  ⇒  the halves agree  ⇒  recurse
 ```
 
 The invariant that makes both inductions close, and the one arithmetic detail worth settling in the
@@ -377,6 +371,59 @@ injectivity step needs `|pack x.re − pack y.re| ≤ M − 2 < M` to conclude t
 zero. This is the shape that survived; two nearby ones did not.
 
 Budget: ~150 lines. Beyond that, § 8.
+
+### 3.2.5 Domain pass, 2026-07-31 — the class wanted no algebra, and the witness wanted no vertices
+
+Six representation questions went into the pass; four moved the model. Every claim below was checked
+in the elaborator before it was written down.
+
+**The class carries its own subtraction.** *Choice:* `Packable` has a `sub : K → K → K` field and no
+class parameter at all. *Alternative:* index it on `[CommRing K]` — the shape the skeleton shipped
+with, arrived at because `pack_sub` seemed to need a `Sub` and `[Sub K]` had already failed to
+synthesize for `Q4`. *Why this one:* it makes `Pt` an ordinary instance instead of a special case
+handled by hand. `Pt` is two coordinates and no algebra; giving it a ring to reach its subtraction
+would be a fiction, and giving it three hand-restated theorems was the fiction's cost. With `sub` in
+the class, instance search has one candidate per head symbol and no side condition — and
+`Packable.sub a b = a - b` on a tower level is `rfl`, so nothing downstream must choose between them.
+*Confidence: high* — `rfl` verified at two levels, and `Pt.normSq_sub` is still `rfl`, which is the
+identity the milestone turns on.
+
+**The duplicated thing was the argument, not the type.** *Choice:* two integer lemmas — a two-digit
+numeral fits its width, and its digits are recoverable — cited by all three instances. *Alternative:*
+a `Packable.pair` combinator that builds a two-lane instance from a view, so the laws are written
+once as an instance rather than once as a lemma. *Why this one:* the combinator routes every
+reduction of `pack` through an instance-building `def`, in the one place the kernel actually reduces
+the packing (once per vertex), and that path would have to be measured. The lemmas cost nothing at
+reduction time and name the content honestly: this is positional notation, not a type constructor.
+*Confidence: high.*
+
+**The witness does not carry the vertex table.** *Choice:* `Check` takes the certificate's `PtTable`
+as a parameter, shared with the `hverts` hypothesis that ties it to the certificate. *Alternative:*
+a `verts : PtTable` field on `DiffWitness`, as the skeleton had it. *Why this one:* the field admits
+a witness whose vertex table is not the certificate's, and — worse — `Check c w` would then take `c`
+without its vertex clause ever looking at `c`. A reader of `Check c w = true` could not see that the
+vertices checked were the certificate's. As a shared parameter the tie is visible in the signature.
+It also avoids re-emitting the one literal that costs 28 s to elaborate. *Confidence: high.*
+
+**`IntTable` stays a second copy of `PtTable`.** *Choice:* keep the duplicate, monomorphic, with the
+reason in its docstring. *Alternative:* introduce `Table α` and use `Table Int`. *Why this one:* the
+generalisation cannot collapse anything — `PtTable` lives in `Certificate.lean`, upstream of 2,466
+certificate modules and 28.8 hours of kernel work, and is frozen for this milestone. So `Table α`
+would leave two declarations standing and add a type parameter, which is addition wearing
+subtraction's clothes. *Confidence: medium — if `Certificate.lean` is ever legitimately edited, this
+is the first thing to fold in.*
+
+**Settled without changing the model:** the bound stays a parameter of `bnd` rather than a `Subtype`
+of bounded points, because only `pack_inj` consumes it and the points come from a frozen upstream
+table — the placement rule says extrinsic, and the build constraint agrees. And the difference table
+and its packing are *not* fused into one table of pairs even though both are newly emitted and fusing
+would make their shape agreement structural: the vertex side cannot fuse, so fusing the difference
+side would put two mechanisms in one file for a 0.26 s saving. One mechanism, used twice.
+
+**One thing the pass found by elaborating rather than by thinking:** a point's packing multiplies by
+`2 ^ 512`, and the *elaborator* refuses to evaluate an exponent past 256 and then dies on recursion
+depth. The kernel does it in one step. Every check in this file is in that position, which is why
+they all say `decide +kernel` — the project's standing rule, arriving here for a second reason.
 
 ### 3.3 `Proofs/HadwigerNelson/PackedDiagnose.lean` — new, downstream, never imported by a certificate
 
@@ -411,10 +458,10 @@ Per witness, replacing `Geom00…Geom08` and `Valid.lean`:
 -- Instances/DeGrey/Diffs.lean   (generated: the four tables)
 def deGreyDiffs : DiffWitness 1581 := { … }
 
--- Instances/DeGrey/Valid.lean   (regenerated: four decides and one citation)
-theorem deGrey_diffs_check : deGreyDiffs.Check deGrey = true := by decide +kernel
+-- Instances/DeGrey/Valid.lean   (regenerated: one decide and one citation)
+theorem deGrey_diffs_check : deGreyDiffs.Check deGreyTable deGrey = true := by decide +kernel
 theorem deGrey_valid : deGrey.Valid = true :=
-  deGrey.valid_of_diffWitness deGreyDiffs deGrey_diffs_check
+  deGrey.valid_of_diffWitness deGreyTable deGreyDiffs rfl deGrey_diffs_check
 ```
 
 `deGrey_valid`'s statement is unchanged, which is the whole design.

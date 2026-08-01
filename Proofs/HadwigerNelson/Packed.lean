@@ -9,9 +9,8 @@ that work redundant.
 
 **A distance depends only on a difference, and these graphs have very few distinct differences.**
 De Grey's 7,877 edges have 133 distinct difference vectors; Heule's 510- and 553-vertex witnesses
-have 66 and 82. The ratio is stable at roughly 118 : 1 across de Grey's whole construction. So the
-expensive part — two squarings in `ℚ(√3,√5,√7,√11)` — can be paid once per *difference*, and each
-edge only has to agree that its endpoints differ by the difference it names.
+have 66 and 82. So the expensive part — two squarings in `ℚ(√3,√5,√7,√11)` — can be paid once per
+*difference*, and each edge only has to agree that its endpoints differ by the difference it names.
 
 **And that agreement need not be checked coordinate by coordinate.** A point is 32 integers. Packing
 them into a single `ℤ`, one 32-bit lane each, makes the packing a *linear* map — so a difference of
@@ -22,6 +21,19 @@ has effectively vanished.
 
 Together: de Grey's geometry falls from 194 CPU s to a projected 17, and from 35.8 GB spread across
 nine modules to 2.6 GB in one.
+
+## The one idea, in three costumes
+
+Everything below is base-`2^laneBits` positional notation with small digits:
+
+* `Packable` is *"this type is a fixed number of integer digits"*. `Int` is one digit; a two-lane
+  shape is twice its lane's digits. Both `Adjoin d K` — a level of the field tower — and `Pt` — two
+  coordinates — are two-lane shapes, which is why both are instances and neither is a special case.
+* `two_digit_le` and `two_digit_inj` are the *whole* arithmetic content: a two-digit numeral with
+  small digits fits its width, and its digits are recoverable from it. Every `pack_le` and
+  `pack_inj` below is one of those two lemmas applied, never re-argued.
+* The per-edge check is *"the difference of two numerals is a third numeral"*, which is one
+  subtraction precisely because positional notation is linear.
 
 ## What is trusted
 
@@ -35,7 +47,7 @@ so nothing downstream of a certificate changes shape.
 ## The lane arithmetic, stated once
 
 A vertex leaf is bounded by `vertexBound = 2^29`, so a difference of two is within `2^30`, and the
-injectivity argument's one requirement — `2 * b + 2 ≤ 2 ^ laneBits` — holds at `2^31 + 2 ≤ 2^32`.
+one condition the digit lemmas ask — `2 * b + 2 ≤ 2 ^ laneBits` — holds at `2^31 + 2 ≤ 2^32`.
 De Grey's largest leaf is **1920**, so the margin is eighteen binary orders.
 
 **Width is not free, and the instinct that it would be was measured wrong.** Big-integer arithmetic
@@ -61,8 +73,143 @@ them costs one module rather than every geometry module that imports this one.
 
 namespace HadwigerNelson
 
+/-! ## Digits
+
+Two facts about integers, and the milestone's entire arithmetic content. Everything below cites
+them; nothing re-argues them. -/
+
+/-- **A two-digit numeral in base `M` fits in `M²`**, when each digit fits in half of `M`.
+
+The `+ 2` is not slack. The step is `(M − 2) + M(M − 2) + 2 = M² − M ≤ M²`, and the same statement
+with a bare `<` fails by exactly one. -/
+theorem two_digit_le {M a b : Int} (hM : 0 < M)
+    (ha : 2 * |a| + 2 ≤ M) (hb : 2 * |b| + 2 ≤ M) :
+    2 * |a + M * b| + 2 ≤ M * M := by sorry
+
+/-- **A two-digit numeral in base `M` determines its digits**, when the low digits fit in half of
+`M`. The high digits need no bound of their own: once the low ones agree, `M * (b − d) = 0`.
+
+This is `pack_inj` at every level of the tower and at `Pt` — one argument, three citations. -/
+theorem two_digit_inj {M a b c d : Int} (hM : 0 < M)
+    (ha : 2 * |a| + 2 ≤ M) (hc : 2 * |c| + 2 ≤ M)
+    (h : a + M * b = c + M * d) : a = c ∧ b = d := by sorry
+
+/-! ## Packable
+
+`Packable K` says: a value of `K` is a fixed number of integer digits, laid end to end in lanes of
+`laneBits` bits.
+
+**The class carries its own subtraction rather than borrowing `Sub` or `CommRing`**, and that is the
+decision the rest of the file rests on. Two consequences, both wanted:
+
+* `Pt` becomes an ordinary instance. It is two coordinates and no algebra, and inventing one for it
+  would be a fiction — but it is a two-lane shape exactly as a tower level is, and the shape is all
+  the packing ever reads.
+* Instance search has one candidate per head symbol and no algebraic side condition to discharge.
+  Indexed on `[CommRing K]` — the first shape tried, because `pack_sub` looked like it needed a
+  `Sub` — `Packable Q4` failed to synthesize at every use site: the failure `NatScalar` records in
+  its own docstring next door, arriving on schedule.
+
+On a tower level the class's subtraction is `rfl`-equal to the ring's, so nothing downstream has to
+choose between them. -/
+
+/-- Bits per lane. One lane per integer leaf of a point.
+
+Measured, not chosen for comfort: 64-bit lanes cost 28% more per edge than these, because the
+per-edge cost is now literal width rather than arithmetic. -/
+def laneBits : ℕ := 32
+
+/-- A type whose values are a fixed number of integer digits in base `2 ^ laneBits`. -/
+class Packable (K : Type) where
+  /-- The digits of `x`, laid end to end, low lanes first. -/
+  pack : K → Int
+  /-- How many lanes `pack` consumes. -/
+  width : ℕ
+  /-- `bnd b x` — every digit of `x` has absolute value at most `b`. `Bool`-valued, because the
+  certificate check runs it. -/
+  bnd : Int → K → Bool
+  /-- Digitwise subtraction. A field rather than an inherited `Sub`, so that `Pt` — which has no
+  algebra — is an ordinary member of this class. -/
+  sub : K → K → K
+  /-- **Linearity.** The reason the per-edge check is one subtraction. -/
+  pack_sub : ∀ x y : K, pack (sub x y) = pack x - pack y
+  /-- A difference of bounded values is bounded, doubled. -/
+  bnd_sub : ∀ (b : Int) (x y : K), bnd b x = true → bnd b y = true → bnd (2 * b) (sub x y) = true
+  /-- **The lane bound** — `two_digit_le`, lifted. -/
+  pack_le : ∀ (b : Int) (x : K), 2 * b + 2 ≤ 2 ^ laneBits → bnd b x = true →
+    2 * |pack x| + 2 ≤ 2 ^ (laneBits * width)
+  /-- **Injectivity on bounded values** — `two_digit_inj`, lifted, and the load-bearing law. -/
+  pack_inj : ∀ (b : Int) (x y : K), 2 * b + 2 ≤ 2 ^ laneBits →
+    bnd b x = true → bnd b y = true → pack x = pack y → x = y
+
+namespace Packable
+
+/-- The leaf: an integer is one digit and is its own packing. -/
+instance instInt : Packable Int where
+  pack := id
+  width := 1
+  bnd b z := decide (|z| ≤ b)
+  sub a b := a - b
+  pack_sub := by sorry
+  bnd_sub := by sorry
+  pack_le := by sorry
+  pack_inj := by sorry
+
+/-- A level of the field tower: the real part in the low lanes, the `√d` coefficient in the high
+ones. `d` is never read — packing is a fact about the shape of the data, not about the field. -/
+instance instAdjoin {d : ℕ} {K : Type} [Packable K] : Packable (Adjoin d K) where
+  pack x := pack x.re + 2 ^ (laneBits * width K) * pack x.im
+  width := 2 * width K
+  bnd b x := bnd b x.re && bnd b x.im
+  sub x y := ⟨sub x.re y.re, sub x.im y.im⟩
+  pack_sub := by sorry
+  bnd_sub := by sorry
+  pack_le := by sorry
+  pack_inj := by sorry
+
+/-- A point: the abscissa in the low lanes, the ordinate in the high ones — structurally the same
+two-lane shape as a tower level, and the four laws are the same two digit lemmas again. -/
+instance instPt : Packable Pt where
+  pack p := pack p.x + 2 ^ (laneBits * width Q4) * pack p.y
+  width := 2 * width Q4
+  bnd b p := bnd b p.x && bnd b p.y
+  sub p q := ⟨sub p.x q.x, sub p.y q.y⟩
+  pack_sub := by sorry
+  bnd_sub := by sorry
+  pack_le := by sorry
+  pack_inj := by sorry
+
+end Packable
+
+/-! ### Points
+
+`Pt` is a `Packable` like any other; what it adds is the geometry — a squared length, and the one
+definitional identity the milestone turns on. -/
+
+/-- The squared length of a difference vector. -/
+def Pt.normSq (v : Pt) : Q4 := FastSq.sq v.x + FastSq.sq v.y
+
+/-- **The distance is the norm of the difference, definitionally.**
+
+This single `rfl` is why a difference table certifies edges at all: `UDCert.ValidOn` asks for
+`distSq`, the witness supplies a difference and its `normSq`, and there is nothing in between. -/
+theorem Pt.normSq_sub (p q : Pt) : (Packable.sub p q).normSq = p.distSq q := rfl
+
+/-! ### The witness
+
+Every check below is a **structural walk over the data it checks** — no index list, no range, no
+arithmetic on positions. That is not tidiness: `List.range` plus `List.map` costs ~0.83 ms *per
+element* in this kernel, which at 1581 vertices would be 1.3 s of pure bookkeeping, and an index
+built by hand needs a proof that it is in range — a `sorry` waiting to be written into a definition. -/
+
 /-- A table of integers indexed by `Nat` — the packed sibling of `PtTable`, same balanced split of
-the index range, same flat lookup cost at every index. -/
+the index range, same flat lookup cost at every index.
+
+**It is a second copy of `PtTable`, and it stays one.** The role — *a balanced index table* — is real
+and unnamed, but naming it would mean generalising `PtTable` in `Certificate.lean`, which sits
+upstream of 2,466 certificate modules holding 28.8 hours of kernel work. So the generalisation could
+not collapse two declarations into one; it would leave two and add a type parameter. The duplication
+is paid deliberately, and it goes away the next time `Certificate.lean` is legitimately edited. -/
 inductive IntTable where
   /-- A subtable covering exactly one index. -/
   | leaf : Int → IntTable
@@ -73,142 +220,32 @@ deriving Repr
 /-- Look up index `i`. Structural on the table, so a lookup costs the table's depth.
 
 **Totality is denied out of range**, exactly as `PtTable.get` denies it: `Nat` subtraction truncates
-and a too-large index returns *some* integer. Every caller here supplies an index the check itself
-compares against a table entry, so an out-of-range index makes the check false rather than a claim
-wrong. -/
+and a too-large index returns *some* integer. Every caller here compares the result against another
+table entry, so an out-of-range index makes a check false rather than a claim wrong. -/
 def IntTable.get : IntTable → Nat → Int
   | .leaf v, _ => v
   | .node m l r, i => if i < m then l.get i else r.get (i - m)
 
-/-- Bits per lane. One lane per integer leaf of a point.
-
-Measured, not chosen for comfort: 64-bit lanes cost 28% more per edge than these, because the
-per-edge cost is now literal width rather than arithmetic. -/
-def laneBits : ℕ := 32
-
 /-- The largest leaf a certificate's vertex may carry. A difference of two lands within `2 ^ 30`,
-which is exactly what `pack_inj`'s lane condition admits. De Grey's largest leaf is 1920. -/
+which is exactly what the digit lemmas admit. De Grey's largest leaf is 1920. -/
 def vertexBound : Int := 2 ^ 29
-
-/-- **Packing a level of the tower.** `pack` is a linear map into `ℤ`, `width` counts the lanes it
-consumes, and `bnd b x` says every integer leaf of `x` is within `b`.
-
-The three laws travel with the data because no consumer ever wants one without the others: linearity
-is why the per-edge check is a subtraction, the lane bound is why the packing is injective, and
-injectivity is why the check proves anything.
-
-**Indexed on `CommRing K`, not on `Sub K`.** `NatScalar` next door is indexed the same way and for
-the same reason recorded there: a class indexed on the *pieces* only synthesizes where the ambient
-instances happen to be found by the route that declared it, which for a tower is never reliably
-true. Indexing on the single bundled structure makes the route unique. -/
-class Packable (K : Type) [CommRing K] where
-  /-- The 32 leaves of `x`, laid end to end in lanes of `laneBits` bits. -/
-  pack : K → Int
-  /-- How many lanes `pack` consumes. -/
-  width : ℕ
-  /-- `bnd b x` — every integer leaf of `x` has absolute value at most `b`. Decidable, because the
-  certificate check runs it. -/
-  bnd : Int → K → Bool
-  /-- **Linearity.** The reason a difference of packed points is the packed difference. -/
-  pack_sub : ∀ x y : K, pack (x - y) = pack x - pack y
-  /-- Leaves within `b` give leaves within `b` on both sides of a subtraction, doubled. -/
-  bnd_sub : ∀ (b : Int) (x y : K), bnd b x = true → bnd b y = true → bnd (2 * b) (x - y) = true
-  /-- **The lane bound.** A value whose leaves fit in half a lane packs to a value that fits, with
-  room for the `+ 2`, in its own width. The `+ 2` is not slack: the induction's step is
-  `(M - 2) + M * (M - 2) + 2 = M² - M ≤ M²`, and it fails with a bare `<`. -/
-  pack_le : ∀ (b : Int) (x : K), 2 * b + 2 ≤ 2 ^ laneBits → bnd b x = true →
-    2 * |pack x| + 2 ≤ 2 ^ (laneBits * width)
-  /-- **Injectivity on bounded values** — the load-bearing law, and the milestone's one real
-  obligation. -/
-  pack_inj : ∀ (b : Int) (x y : K), 2 * b + 2 ≤ 2 ^ laneBits →
-    bnd b x = true → bnd b y = true → pack x = pack y → x = y
-
-namespace Packable
-
-/-- The leaf of the tower: an integer packs to itself and occupies one lane. -/
-instance instInt : Packable Int where
-  pack := id
-  width := 1
-  bnd b z := decide (|z| ≤ b)
-  pack_sub := by sorry
-  bnd_sub := by sorry
-  pack_le := by sorry
-  pack_inj := by sorry
-
-/-- One level of the tower: the real part in the low lanes, the `√d` coefficient in the high ones.
-`d` plays no part — packing is a fact about the *shape* of the data, not about the field. -/
-instance instAdjoin {d : ℕ} {K : Type} [CommRing K] [NatScalar K] [Packable K] :
-    Packable (Adjoin d K) where
-  pack x := pack x.re + 2 ^ (laneBits * width (K := K)) * pack x.im
-  width := 2 * width (K := K)
-  bnd b x := bnd b x.re && bnd b x.im
-  pack_sub := by sorry
-  bnd_sub := by sorry
-  pack_le := by sorry
-  pack_inj := by sorry
-
-end Packable
-
-/-! ### Points
-
-`Pt` is two `Q4`s and is not a ring, so it gets the three laws directly rather than through an
-instance. `Pt.sub` is a plain `def` and not a `Sub` instance: an instance is a permanent utterance
-into every future elaboration, and nothing here needs one. -/
-
-/-- The difference of two stored points, in the orientation `UDCert.ValidOn` reads: source minus
-target. -/
-def Pt.sub (p q : Pt) : Pt := ⟨p.x - q.x, p.y - q.y⟩
-
-/-- The squared length of a difference vector.
-
-`Pt.normSq (Pt.sub p q)` is `Pt.distSq p q` **by definition** — which is the whole reason the
-milestone works, and is stated as `normSq_sub` below rather than left for a reader to notice. -/
-def Pt.normSq (v : Pt) : Q4 := FastSq.sq v.x + FastSq.sq v.y
-
-/-- The two coordinates of a point, packed end to end. -/
-def Pt.pack (p : Pt) : Int :=
-  Packable.pack p.x + 2 ^ (laneBits * Packable.width (K := Q4)) * Packable.pack p.y
-
-/-- Every leaf of a point is within `b`. -/
-def Pt.bnd (b : Int) (p : Pt) : Bool := Packable.bnd b p.x && Packable.bnd b p.y
-
-/-- **The distance is the norm of the difference, definitionally.** -/
-theorem Pt.normSq_sub (p q : Pt) : (Pt.sub p q).normSq = p.distSq q := rfl
-
-/-- Linearity, at the level of points. -/
-theorem Pt.pack_sub (p q : Pt) : (Pt.sub p q).pack = p.pack - q.pack := by sorry
-
-/-- A difference of bounded points is bounded, doubled. -/
-theorem Pt.bnd_sub {b : Int} {p q : Pt} (hp : p.bnd b = true) (hq : q.bnd b = true) :
-    (Pt.sub p q).bnd (2 * b) = true := by sorry
-
-/-- **Injectivity on bounded points.** Two points whose leaves are within `b`, with `2 * b` inside a
-lane, and whose packings agree, are the same point. -/
-theorem Pt.pack_inj {b : Int} {p q : Pt} (hlane : 2 * b + 2 ≤ 2 ^ laneBits)
-    (hp : p.bnd b = true) (hq : q.bnd b = true) (h : p.pack = q.pack) : p = q := by sorry
-
-/-! ### The witness
-
-Every check below is a **structural walk over the data it checks** — no index list, no range, no
-arithmetic on positions. That is not tidiness: `List.range` plus `List.map` costs ~0.83 ms *per
-element* in this kernel, which at 1581 vertices would be 1.3 s of pure bookkeeping, and an index
-built by hand needs a proof that it is in range, which is a `sorry` waiting to be written into a
-definition. Walking the tables together has neither problem, and it makes "the two tables have the
-same shape" part of what the check establishes rather than something a reader has to assume. -/
 
 /-- **What the generator emits so the kernel can check a graph's geometry cheaply.**
 
-Nothing here is trusted and nothing needs to be. Every field is compared against the certificate by
-`Check`; a wrong entry makes the check `false`. -/
+The certificate's *vertex* table is not a field here. It already exists, compiled, in the instance's
+own module, and re-emitting it would duplicate the one literal that costs 28 s to elaborate — so it
+is a parameter of `Check`, shared with the hypothesis that ties it to the certificate. A witness
+therefore holds only what is new, and cannot hold a vertex table that disagrees with one.
+
+Nothing here is trusted and nothing needs to be: every field is compared against the certificate by
+`Check`, and a wrong entry makes the check `false`. -/
 structure DiffWitness (n : ℕ) where
-  /-- The certificate's own vertex table. Carried here so the check can walk it; tied to the
-  certificate by `hverts`, which is `rfl` for every emitted certificate. -/
-  verts : PtTable
-  /-- `Pt.pack (verts.get i)`, one per vertex, **in a table of the same shape as `verts`**. -/
+  /-- `Packable.pack` of each vertex, **in a table of the same shape as the certificate's vertex
+  table**. -/
   packedV : IntTable
   /-- The distinct edge difference vectors, exact, in first-use order. -/
   diffs : PtTable
-  /-- `Pt.pack (diffs.get k)`, one per difference, in a table of the same shape as `diffs`. -/
+  /-- `Packable.pack` of each difference, in a table of the same shape as `diffs`. -/
   packedD : IntTable
   /-- One index into `diffs` per edge, in the certificate's own edge order. -/
   keys : List ℕ
@@ -220,13 +257,13 @@ variable {n : ℕ}
 /-- **A point table and its packing, walked together**: every leaf packs to what the packed table
 holds, every leaf is within `b`, and the two tables have the same shape.
 
-Same shape is not decoration — the per-edge check looks a vertex up by index in `packedV` and the
-soundness proof has to know that index means the same point in `verts`. Requiring `m == m'` at every
-node is how that is established rather than assumed.
+Same shape is not decoration — the per-edge check looks a vertex up by index in `packedV`, and the
+soundness proof has to know the index means the same point in the vertex table. Requiring `m == m'`
+at every node is how that is established rather than assumed.
 
 Measured **0.00196 CPU s per entry**. -/
 def packOk (b : Int) : PtTable → IntTable → Bool
-  | .leaf p, .leaf v => p.bnd b && (v == p.pack)
+  | .leaf p, .leaf v => Packable.bnd b p && (v == Packable.pack p)
   | .node m l r, .node m' l' r' => (m == m') && packOk b l l' && packOk b r r'
   | _, _ => false
 
@@ -255,33 +292,35 @@ def edgesOk (w : DiffWitness n) : List (Fin n × Fin n) → List ℕ → Bool
 
 /-- The four checks, as one `Bool` the kernel decides.
 
-The difference bound is `2 * vertexBound` because a difference of two vertices within `vertexBound`
-lands there, and `2 * (2 * vertexBound) + 2 ≤ 2 ^ laneBits` is exactly what `pack_inj` asks. -/
-def Check (c : UDCert n) (w : DiffWitness n) : Bool :=
-  packOk vertexBound w.verts w.packedV
+`t` is the certificate's own vertex table; `UDCert.valid_of_diffWitness` is what ties it to `c`. The
+difference bound is `2 * vertexBound`, because a difference of two vertices within `vertexBound`
+lands there and `2 * (2 * vertexBound) + 2 ≤ 2 ^ laneBits`. -/
+def Check (w : DiffWitness n) (t : PtTable) (c : UDCert n) : Bool :=
+  packOk vertexBound t w.packedV
     && packOk (2 * vertexBound) w.diffs w.packedD
     && normsOk c.denomSq w.diffs
     && w.edgesOk c.edges w.keys
 
-/-! ### What `packOk` establishes, extracted once
+/-! ### What the walks establish, extracted once
 
-The soundness proof needs `packOk` in pointwise form, and so does every diagnostic. Proved by
-induction on the two tables together, which is the induction `packOk`'s own recursion performs. -/
+The soundness proof needs each walk in pointwise form, and so does every diagnostic. Each is proved
+by the induction its own recursion performs. -/
 
 /-- Same shape, so `get` at an index means the same entry in both tables. -/
 theorem packOk_pack {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
-    u.get i = (t.get i).pack := by sorry
+    u.get i = Packable.pack (t.get i) := by sorry
 
 /-- …and every entry is inside the bound. -/
 theorem packOk_bnd {b : Int} {t : PtTable} {u : IntTable} (h : packOk b t u = true) (i : ℕ) :
-    (t.get i).bnd b = true := by sorry
+    Packable.bnd b (t.get i) = true := by sorry
 
-/-- `normsOk` in pointwise form, for indices the table actually covers. -/
+/-- `normsOk` in pointwise form — at every index, including out of range, since `PtTable.get` is
+total and every leaf was checked. -/
 theorem normsOk_get {target : Q4} {t : PtTable} (h : normsOk target t = true) (i : ℕ) :
     (t.get i).normSq = target := by sorry
 
-/-- `edgesOk` in pointwise form: every edge is paired with a key, and its endpoints' packed
-difference is that key's packed difference. -/
+/-- `edgesOk` in pointwise form: every edge in the list is paired with some key, and its endpoints'
+packed difference is that key's packed difference. -/
 theorem edgesOk_mem {w : DiffWitness n} {es : List (Fin n × Fin n)} {ks : List ℕ}
     (h : w.edgesOk es ks = true) (e : Fin n × Fin n) (he : e ∈ es) :
     ∃ k, w.packedV.get e.1.val - w.packedV.get e.2.val = w.packedD.get k := by sorry
@@ -291,11 +330,11 @@ end DiffWitness
 /-- **Soundness.** A witness that checks certifies the certificate — the same `UDCert.Valid = true`
 the per-edge route produces, from data that costs an order of magnitude less to verify.
 
-`hverts` says the witness carries the certificate's own vertex table, and is `rfl` for every emitted
-certificate — the same arrangement `UDCert.valid_of_chunks` makes with its join hypothesis. `h` is a
-closed `Bool` the kernel decides. Nothing else about the witness is assumed. -/
-theorem UDCert.valid_of_diffWitness {n : ℕ} (c : UDCert n) (w : DiffWitness n)
-    (hverts : c.verts = w.verts.toVerts) (h : w.Check c = true) : c.Valid = true := by sorry
+`hverts` says the vertex table is the certificate's own, and is `rfl` for every emitted certificate —
+the same arrangement `UDCert.valid_of_chunks` makes with its join hypothesis. `h` is a closed `Bool`
+the kernel decides. Nothing else about the witness is assumed. -/
+theorem UDCert.valid_of_diffWitness {n : ℕ} (c : UDCert n) (t : PtTable) (w : DiffWitness n)
+    (hverts : c.verts = t.toVerts) (h : w.Check t c = true) : c.Valid = true := by sorry
 
 /-! ## Spec
 
@@ -317,18 +356,17 @@ private def unitPair : UDCert 2 where
 /-- Its difference witness. The one difference is `verts 0 - verts 1 = (-1, 0)`, in the orientation
 `ValidOn` reads, and `(-1)² + 0² = 1 = denom²`. -/
 private def unitPairDiffs : DiffWitness 2 where
-  verts := unitPairTable
-  packedV := .node 1 (.leaf (Pt.pack ⟨0, 0⟩)) (.leaf (Pt.pack ⟨1, 0⟩))
+  packedV := .node 1 (.leaf (Packable.pack (⟨0, 0⟩ : Pt))) (.leaf (Packable.pack (⟨1, 0⟩ : Pt)))
   diffs := .leaf ⟨-1, 0⟩
-  packedD := .leaf (Pt.pack ⟨-1, 0⟩)
+  packedD := .leaf (Packable.pack (⟨-1, 0⟩ : Pt))
   keys := [0]
 
-example : unitPairDiffs.Check unitPair = true := by sorry
+example : unitPairDiffs.Check unitPairTable unitPair = true := by sorry
 
 /-- **Non-vacuity, all the way through**: the cheap route really does yield the old claim, on a
 certificate whose hypotheses are all satisfied. -/
 example : unitPair.Valid = true :=
-  unitPair.valid_of_diffWitness unitPairDiffs rfl (by sorry)
+  unitPair.valid_of_diffWitness unitPairTable unitPairDiffs rfl (by sorry)
 
 /-- **The adversarial member.** Point the single key at a difference that is not this edge's:
 `edgesOk` must go `false`. Without this, every theorem above could hold of a `Check` that is
@@ -336,28 +374,42 @@ constantly `true`. -/
 example :
     ({ unitPairDiffs with
         diffs := .node 1 (.leaf ⟨-1, 0⟩) (.leaf ⟨-2, 0⟩)
-        packedD := .node 1 (.leaf (Pt.pack ⟨-1, 0⟩)) (.leaf (Pt.pack ⟨-2, 0⟩))
-        keys := [1] } : DiffWitness 2).Check unitPair = false := by sorry
+        packedD := .node 1 (.leaf (Packable.pack (⟨-1, 0⟩ : Pt)))
+                           (.leaf (Packable.pack (⟨-2, 0⟩ : Pt)))
+        keys := [1] } : DiffWitness 2).Check unitPairTable unitPair = false := by sorry
 
-/-- **A short key list must fail, not truncate.** The one control that a `List.zip` formulation
-would have passed. -/
-example : ({ unitPairDiffs with keys := [] } : DiffWitness 2).Check unitPair = false := by sorry
+/-- **A short key list must fail, not truncate.** The one control a `List.zip` formulation would
+have passed. -/
+example :
+    ({ unitPairDiffs with keys := [] } : DiffWitness 2).Check unitPairTable unitPair = false := by
+  sorry
 
 /-- **A wrong norm must fail** — the geometry moved off the unit circle. -/
 example :
     ({ unitPairDiffs with
-        diffs := .leaf ⟨-2, 0⟩, packedD := .leaf (Pt.pack ⟨-2, 0⟩) } :
-      DiffWitness 2).Check unitPair = false := by sorry
+        diffs := .leaf ⟨-2, 0⟩, packedD := .leaf (Packable.pack (⟨-2, 0⟩ : Pt)) } :
+      DiffWitness 2).Check unitPairTable unitPair = false := by sorry
 
 /-- **A mismatched table shape must fail**, so that a lookup by index cannot mean two different
 things in the two tables. -/
 example :
-    ({ unitPairDiffs with packedV := .leaf (Pt.pack ⟨0, 0⟩) } :
-      DiffWitness 2).Check unitPair = false := by sorry
+    ({ unitPairDiffs with packedV := .leaf (Packable.pack (⟨0, 0⟩ : Pt)) } :
+      DiffWitness 2).Check unitPairTable unitPair = false := by sorry
 
-/-- The packing separates the two points this certificate actually carries — the concrete instance
-of `Pt.pack_inj`, and the thing that would be false if the lanes were too narrow. -/
-example : Pt.pack ⟨0, 0⟩ ≠ Pt.pack ⟨1, 0⟩ := by sorry
+/-! `Packable` is a claim about *shape*, so the shape is pinned: `Q4` is sixteen digits, a point is
+thirty-two, the class's subtraction on a tower level is the ring's, and the packing separates the two
+points this certificate actually carries.
+
+The last one goes through the **kernel** rather than the elaborator, and that is not a style
+preference. A point's packing multiplies by `2 ^ 512`; the elaborator refuses to evaluate an
+exponent past 256 and then dies on recursion depth, while the kernel computes it in one
+GMP-accelerated step. Every check in this file is in the same position, which is why the emitted
+theorems all say `decide +kernel`. -/
+
+#guard Packable.width Q4 = 16
+#guard Packable.width Pt = 32
+example (a b : Q4) : Packable.sub a b = a - b := rfl
+example : Packable.pack (⟨0, 0⟩ : Pt) ≠ Packable.pack (⟨1, 0⟩ : Pt) := by decide +kernel
 
 end Spec
 
