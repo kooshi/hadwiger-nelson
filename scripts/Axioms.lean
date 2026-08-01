@@ -246,6 +246,29 @@ producer whose trust is entirely the kernel's. -/
 #print axioms Motion.maps_trans
 #print axioms UDCert.validOn_map_of_scaling
 
+/-! ## M12 — many placed copies, and the first five-colour question
+
+`Assembly` is the layer that makes a candidate built as an orbit cheap: every copy's coordinates are
+*derived* from the base and a motion rather than emitted, so there is no per-vertex identity to
+inspect and nothing to audit but these theorems. `validOn_copiedEdges` is the one that certifies a
+copy's whole edge list without reducing a single distance, and `adj_embed` is its combinatorial twin —
+together they are why a placed copy is free in both halves rather than only the cheap one.
+
+`mycielski47_colorable_six` is the control that keeps the five-colour claim honest: an *existence*
+statement, the opposite direction from everything else in this project, so a refutation that was
+silently about the wrong colour count cannot pass unnoticed.
+
+**Not yet listed: `mycielski47_not_colorable_five`.** It rests on `Mycielski.pinned_unsat`, the one
+certificate this milestone still owes, and until that lands it would report `sorryAx` — which is the
+gate working, not a purchase. Add it here in the same commit as the certificate. -/
+
+#print axioms Assembly.distSq_place
+#print axioms Assembly.verts_embed
+#print axioms Assembly.validOn_copiedEdges
+#print axioms Assembly.valid_of_cross
+#print axioms Assembly.adj_embed
+#print axioms mycielski47_colorable_six
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

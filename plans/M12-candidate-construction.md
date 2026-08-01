@@ -493,6 +493,66 @@ triangle, so the largest clique is an edge and the lever is weaker: 26× measure
 a triangle buys. This is a property of the calibration graph, not of five colours, and a unit-distance
 candidate would have the stronger lever.
 
+### 3.6 The experience pass — the failing day, and a name that meant something else
+
+Run 2026-08-01. The consumer that matters is the M13 search, whose **most common experience is
+failure**: a candidate that turns out 5-colourable, a proposed seam that is not a unit distance.
+
+**A name collision worth catching before anything depended on it.** `coFactor` sat one import above
+`Motion`, whose fields `a b c d` *are* a 2 × 2 matrix — and "cofactor" of a 2 × 2 matrix is the signed
+minor, a different object entirely. A reader arriving at `A.coFactor i` in a file full of matrix
+entries has every reason to guess wrong. Renamed to **`factorExcept`**, which pairs with `factor` and
+can be guessed from either direction; its lemma is `scale_mul_factorExcept`, whose name is its
+statement. Likewise `idx` → **`embed`**, because the thing it names is not "an index" but *the map
+that carries copy `i` into the assembly* — the same map the geometry and the colouring both travel
+along, which is the module's whole point. `verts_idx`/`adj_idx` follow to `verts_embed`/`adj_embed`.
+
+**The breakdown surface, built: `AssemblyDiagnose`.** `valid_of_cross` needs
+`(A.cert cross).ValidOn cross = true`, and in a search that is false far more often than true.
+`UDCert.badEdges` already answers *which* and *how far off*, but it answers in `Fin (copies × n)` —
+and **a searcher holds a copy number and a base vertex, never a flat index.** So:
+
+| what a caller asks | what they get |
+|---|---|
+| whether, before why | `seamReport` — one line, `"1 of 1 seams are NOT unit distances — …"` |
+| which seam, and how far off | `badSeams` — `(((0, 1), (1, 1)), 12500, 15625)`: copy 0's vertex 1 to copy 1's vertex 1, the squared distance found, and the one a unit edge would have had |
+| is the renderer honest | `unembed_embed` — the inverse is proved, so a diagnostic cannot mislabel the copy |
+
+Both directions are pinned with `#guard_msgs`: an empty report for a good seam, a named copy for a
+bad one. It lives **downstream** of `Assembly` on purpose — diagnostics get rewritten, and this is
+the one file that can be rewritten for the price of itself.
+
+**The demo got better by being wrong.** The first "broken" seam chosen for the negative control
+turned out to be a *genuine* unit distance — copy 1 is a rotation about the origin, so both ends
+really are a unit apart. Kept as the positive case, because it is a four-vertex three-edge
+unit-distance graph that **no generator emitted**: the first thing in this project assembled rather
+than transcribed. The real failure is the same two copies joined at the wrong end.
+
+**What `#guard_msgs` is for, decided rather than sprinkled.** The Mycielski ladder's rung sizes stay
+plain `example`s — they are guards on values, not rendered output, and pinning text would add
+nothing. The *renderer* is pinned, because the rendering **is** the product a searcher consumes and a
+regression in it would be silent. The failure directive in `mycielski47_not_colorable_five` names
+`Mycielski.gadgets.survivors`; what keeps that name honest is not pinned text but a downstream `#eval`
+of that exact declaration, which stops compiling if it is renamed — the round-trip law, enforced by
+the build rather than by a string.
+
+**One question answered by not adding anything.** `Assembly` has no `places ≠ []` field. An empty
+placement list yields a certificate on zero vertices — valid, useless, and useless *loudly*, since
+nothing about a graph with no vertices can be proved non-colourable. A field would tax every
+construction site to exclude a state that already fails where it matters. Recorded in the docstring
+so the next reader does not re-litigate it.
+
+**The transparency contracts, stated where they are read.** `place`, `embed`, `cert` and `colourAux`
+each now name the lemmas that are their whole reasoning surface, so nobody unfolds them: `place` →
+`distSq_place`; `embed` → `verts_embed` and `adj_embed`; `cert` → those plus `valid_of_cross`;
+`colourAux` → `colour_proper`.
+
+**The trust receipt, extended and watched to fail.** `scripts/Axioms.lean` gains six M12
+declarations; the audit reports **118 clean, 5 declared purchases** (M11 left it at 112 clean).
+Adding the one outstanding leaf on purpose makes it print
+`depends on axioms: [propext, sorryAx, …]` and exit `FAIL` naming the declaration — the gate seen
+failing, not assumed to work.
+
 ### 3.3 The spec examples, per the gate
 
 Every definition gets a check that would fail if it drifted, and every discriminating check gets a

@@ -99,7 +99,10 @@ Mycielski's construction supplies its own optimal colouring: a shadow may take i
 colour. So `iter k` needs `k + 2` colours, and the control below is the construction read a second
 way rather than 47 numbers handed over by a solver. -/
 
-/-- The colour of vertex `v` at iteration `k`. Shadows copy their originals; the apex is fresh. -/
+/-- The colour of vertex `v` at iteration `k`. Shadows copy their originals; the apex is fresh.
+
+Nothing needs to unfold this: `colour_proper` is the whole reasoning surface, and it is the only
+thing `mycielski47_colorable_six` uses. -/
 def colourAux : ℕ → ℕ → ℕ
   | 0, v => v
   | k + 1, v =>

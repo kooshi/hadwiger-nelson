@@ -37,7 +37,7 @@ The composite `rescale ∘ image` fixes that for **every** motion, not merely th
 lands at denominator `d · μ.scale`, and `scale` is a natural number by construction.
 
 Copies must also agree with each other, so copy `i` is additionally scaled by the product of every
-*other* placement's scale (`coFactor`). Then every copy sits at the same denominator `d · factor` and
+*other* placement's scale (`factorExcept`). Then every copy sits at the same denominator `d · factor` and
 scales squared distances by the same `factor²` — one hypothesis, discharged once, for copies placed
 by motions with nothing in common.
 
@@ -67,7 +67,12 @@ cyclic — de Grey's is a single reflection, a hexagonal one is six distinct mot
 the least representation covering both. It is also why `Motion` still needs no monoid instance.
 
 `Assembly` nests: `cert` returns a `UDCert`, which is what `base` takes, so a construction layered
-out of copies of copies is an `Assembly` whose base is an `Assembly`'s certificate. -/
+out of copies of copies is an `Assembly` whose base is an `Assembly`'s certificate.
+
+**No invariant field, deliberately.** An empty `places` yields a certificate on zero vertices, which
+is valid and useless — and useless *loudly*, because nothing about a graph with no vertices can be
+proved non-colourable. A `places ≠ []` field would tax every construction site to rule out a state
+that already fails at the only place it matters. -/
 structure Assembly (n : ℕ) where
   /-- The configuration being copied. Certified once. -/
   base : UDCert n
@@ -80,9 +85,9 @@ variable {n : ℕ} (A : Assembly n)
 
 /-- The placements' scales.
 
-Named, rather than written out twice, because `factor` and `coFactor` are both products over *this*
+Named, rather than written out twice, because `factor` and `factorExcept` are both products over *this*
 list and their relationship is Mathlib's `List.CommMonoid.mul_prod_eraseIdx` at exactly it. Taking
-the `map` first and the `eraseIdx` second is the whole reason `coFactor_mul` is two lines. -/
+the `map` first and the `eraseIdx` second is the whole reason `scale_mul_factorExcept` is two lines. -/
 def scales : List ℕ := A.places.map Motion.scale
 
 /-- The product of every placement's scale — the factor the assembled denominator carries. -/
@@ -92,14 +97,14 @@ def factor : ℕ := A.scales.prod
 
 Defined by deletion rather than as `factor / scale i`: natural division truncates, and a junk value
 here would silently produce a certificate at the wrong denominator that still elaborated. -/
-def coFactor (i : Fin A.places.length) : ℕ := (A.scales.eraseIdx i.val).prod
+def factorExcept (i : Fin A.places.length) : ℕ := (A.scales.eraseIdx i.val).prod
 
 /-- **Copy `i`'s own scale times everyone else's is everyone's.** The arithmetic that makes every
-copy land on the same denominator, and the only thing `coFactor` is for. -/
-theorem coFactor_mul (i : Fin A.places.length) :
-    (A.places.get i).scale * A.coFactor i = A.factor := by
+copy land on the same denominator, and the only thing `factorExcept` is for. -/
+theorem scale_mul_factorExcept (i : Fin A.places.length) :
+    (A.places.get i).scale * A.factorExcept i = A.factor := by
   have hi : i.val < A.scales.length := by simp [scales]
-  simpa [scales, factor, coFactor, List.getElem_map, List.get_eq_getElem] using
+  simpa [scales, factor, factorExcept, List.getElem_map, List.get_eq_getElem] using
     List.CommMonoid.mul_prod_eraseIdx (l := A.scales) hi
 
 /-- Copy `i`'s embedding of a point: place it, re-denominate it to an integer scale, then bring it to
@@ -107,16 +112,16 @@ the assembly's common denominator.
 
 Reason about it through `distSq_place`; the three steps are an implementation detail. -/
 def place (i : Fin A.places.length) (p : Pt) : Pt :=
-  Pt.scaleBy ((A.coFactor i : ℕ) : Q4)
+  Pt.scaleBy ((A.factorExcept i : ℕ) : Q4)
     ((A.places.get i).rescale ((A.places.get i).image p))
 
 /-- **Every copy scales squared distance by the same factor**, whatever motions were used.
 
 The hypothesis `UDCert.validOn_map_of_scaling` takes, discharged once for all copies — and the reason
-`coFactor` exists. -/
+`factorExcept` exists. -/
 theorem distSq_place (i : Fin A.places.length) (p p' : Pt) :
     ((A.place i) p).distSq ((A.place i) p') = ((A.factor * A.factor : ℕ) : Q4) * p.distSq p' := by
-  have hc := A.coFactor_mul i
+  have hc := A.scale_mul_factorExcept i
   simp only [place, Pt.distSq_scaleBy, Motion.distSq_rescale, Motion.distSq_image]
   push_cast [← hc]
   ring
@@ -124,16 +129,20 @@ theorem distSq_place (i : Fin A.places.length) (p p' : Pt) :
 /-- **Vertex `v` of copy `i`, as an index of the assembled graph.**
 
 This is Mathlib's `Fin c × Fin n ≃ Fin (c * n)` and not a hand-rolled `i * n + v`. The difference is
-not cosmetic: the linking lemma `verts_idx` below is `simp` through the equiv and nine lines of
+not cosmetic: the linking lemma `verts_embed` below is `simp` through the equiv and nine lines of
 division, modulus, `congr` and a derived `0 < n` without it — a bijection stated as a bijection needs
-no side condition, because it has an inverse by construction. -/
-def idx (i : Fin A.places.length) (v : Fin n) : Fin (A.places.length * n) :=
+no side condition, because it has an inverse by construction.
+
+Reason about it through `verts_embed` (the geometry) and `adj_embed` (the colouring): those two are
+the whole surface, and they are the same map, which is what lets a placed copy be free in both
+halves. `AssemblyDiagnose.unembed` inverts it when a diagnostic needs to name a copy. -/
+def embed (i : Fin A.places.length) (v : Fin n) : Fin (A.places.length * n) :=
   finProdFinEquiv (i, v)
 
 /-- The base's edge list, transported into copy `i`. -/
 def copyEdges (i : Fin A.places.length) :
     List (Fin (A.places.length * n) × Fin (A.places.length * n)) :=
-  A.base.edges.map fun e => (A.idx i e.1, A.idx i e.2)
+  A.base.edges.map fun e => (A.embed i e.1, A.embed i e.2)
 
 /-- Every copy's own edges, in copy order. The edges that cost nothing. -/
 def copiedEdges : List (Fin (A.places.length * n) × Fin (A.places.length * n)) :=
@@ -145,7 +154,10 @@ which no transport can supply and which are checked directly.
 `cross` is a parameter and not a field, because it is a *claim* about which pairs are being asserted
 adjacent, not a property of the placement — a search proposes one placement and then hunts for seams,
 and re-deriving the placement per seam list would be the tail wagging the dog. `UDCert.edges` is a
-claim in exactly the same sense. -/
+claim in exactly the same sense.
+
+Reason about it through `verts_embed`, `validOn_copiedEdges` and `valid_of_cross`; the `verts` field
+inverts an equiv and no caller should ever see that. -/
 def cert (cross : List (Fin (A.places.length * n) × Fin (A.places.length * n))) :
     UDCert (A.places.length * n) where
   verts v := A.place (finProdFinEquiv.symm v).1 (A.base.verts (finProdFinEquiv.symm v).2)
@@ -154,9 +166,9 @@ def cert (cross : List (Fin (A.places.length * n) × Fin (A.places.length * n)))
 
 /-- Reading a vertex of copy `i` back out of the assembled table gives copy `i`'s placement of the
 base point — the `hverts` hypothesis, for every copy at once. -/
-theorem verts_idx (cross) (i : Fin A.places.length) (v : Fin n) :
-    (A.cert cross).verts (A.idx i v) = A.place i (A.base.verts v) := by
-  simp only [cert, idx, Equiv.symm_apply_apply]
+theorem verts_embed (cross) (i : Fin A.places.length) (v : Fin n) :
+    (A.cert cross).verts (A.embed i v) = A.place i (A.base.verts v) := by
+  simp only [cert, embed, Equiv.symm_apply_apply]
 
 /-- **The payoff for the geometry.** Every copy of the base's edge list is certified by the *base's
 own* validity — no per-copy geometry, no per-vertex identity, whatever the placements were. -/
@@ -166,8 +178,8 @@ theorem validOn_copiedEdges (cross) (hbase : A.base.Valid = true) :
   have one : ∀ i : Fin A.places.length, (A.cert cross).ValidOn (A.copyEdges i) = true := by
     intro i
     refine UDCert.validOn_map_of_scaling A.base (A.cert cross) (A.place i)
-      ((A.factor * A.factor : ℕ) : Q4) (A.idx i) A.base.edges (A.distSq_place i)
-      (A.verts_idx cross i) ?_ hbase
+      ((A.factor * A.factor : ℕ) : Q4) (A.embed i) A.base.edges (A.distSq_place i)
+      (A.verts_embed cross i) ?_ hbase
     simp only [UDCert.denomSq, cert]
     push_cast
     ring
@@ -191,11 +203,11 @@ theorem valid_of_cross (cross) (hbase : A.base.Valid = true)
 
 A copy's edges really are edges of the assembled graph, so `Gadget.transport` carries any colouring
 property proved of the base into copy `i` — the geometric copy and the combinatorial copy are the
-same map, `idx i`, and this is what lets them be. Without it a placed copy would be free in the
+same map, `embed i`, and this is what lets them be. Without it a placed copy would be free in the
 geometry and full price in the refutation, which is the expensive half. -/
-theorem adj_idx (cross) (i : Fin A.places.length) {e : Fin n × Fin n}
-    (hne : A.idx i e.1 ≠ A.idx i e.2) (he : e ∈ A.base.edges) :
-    (edgeGraph (A.places.length * n) ((A.cert cross).edges)).Adj (A.idx i e.1) (A.idx i e.2) :=
+theorem adj_embed (cross) (i : Fin A.places.length) {e : Fin n × Fin n}
+    (hne : A.embed i e.1 ≠ A.embed i e.2) (he : e ∈ A.base.edges) :
+    (edgeGraph (A.places.length * n) ((A.cert cross).edges)).Adj (A.embed i e.1) (A.embed i e.2) :=
   edgeGraph_adj_of_mem hne <| List.mem_append_left _ <|
     List.mem_flatMap.mpr ⟨i, List.mem_finRange i, List.mem_map.mpr ⟨e, he, rfl⟩⟩
 
