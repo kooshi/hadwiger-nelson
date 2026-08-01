@@ -293,6 +293,7 @@ which is exactly the kind of redundancy that catches a wrong statement. -/
 #print axioms not_colorable_of_spindled_forcer
 #print axioms Forces.of_edges
 #print axioms Forces.of_gadget
+#print axioms Forces.of_unsat
 #print axioms edgeHom
 #print axioms not_colorable_spindleEdges
 #print axioms rhombus_forces

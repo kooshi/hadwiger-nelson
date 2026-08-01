@@ -120,6 +120,27 @@ theorem Forces.of_gadget {n : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
   exact absurd (g.sound C fun _ _ hij => C.valid hij)
     (by simpa using hsep (fun i => C (![p, q] i)) (by simpa using hne))
 
+/-- **A forcer straight from a refutation** — the producer that scales, and the one M14 will write.
+
+`Forces.of_gadget` above takes the separation condition as a hypothesis, and a caller cannot
+discharge it with `by decide` when the certificate is still abstract: the goal mentions the
+refutation, so `decide` refuses on a free variable even though `admits` does not depend on it. That
+is an argument every user would have to pass explicitly, which makes it the bug rather than their
+mistake. So the condition is discharged once, here.
+
+The colour count is written `k + 2` because the argument genuinely needs two colours to exist — a
+pattern that separates two ports has to name two of them — and carrying it in the type beats a side
+condition every caller repeats. A literal `4` or `5` unifies with it. -/
+theorem Forces.of_unsat {n k : ℕ} {E : List (Fin n × Fin n)} {p q : Fin n}
+    (h : (coloringCNF (k + 2) n E ++ cubeCNF (k + 2) n (pinCube ![p, q] ![0, 1])).Unsat) :
+    Forces (edgeGraph n E) (k + 2) p q := by
+  refine Forces.of_gadget (Gadget.ofUnsat ![0, 1] h) ?_
+  intro r hr
+  simp only [Gadget.ofUnsat, Bool.not_eq_false', samePattern_iff]
+  intro i j
+  fin_cases i <;> fin_cases j <;> simp_all
+  exact fun hc => hr hc.symm
+
 /-- **A vertex map that carries every listed edge to a listed edge is a placement.** The decidable
 hypothesis the closing lemma's homomorphisms come from: for each listed non-loop, the images differ
 and are themselves listed, in one orientation or the other. -/
