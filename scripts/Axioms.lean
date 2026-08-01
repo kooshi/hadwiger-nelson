@@ -272,6 +272,33 @@ show up in it, and none does. -/
 #print axioms mycielski47_not_colorable_five
 #print axioms mycielski47_colorable_six
 
+/-! ## M13 — a forced pair, and the spindle that closes it
+
+The argument both known rungs of this problem share, stated once for any graph and any number of
+colours. `not_colorable_of_spindled_forcer` is the whole of it: a configuration whose every
+`k`-colouring paints `p` and `q` alike, placed twice sharing `p` with the images of `q` adjacent, has
+no `k`-colouring. `not_colorable_spindleEdges` is the form a search's output arrives in, where the
+assembled graph is *constructed* rather than given, so neither placement has to be searched for.
+
+Two producers audited beside them, because a property with one producer is a property one bug wide:
+`Forces.of_edges` exhausts the colourings and `Forces.of_gadget` reads a certificate through the
+gadget algebra. `moserSpindle_not_colorable_three_spindled` is the payoff at spec scale — rung A's
+witness re-derived by deciding a four-vertex rhombus and placing it twice, rather than deciding all
+seven vertices. It is a *fourth* independent route to a theorem this project already had three of,
+which is exactly the kind of redundancy that catches a wrong statement. -/
+
+#print axioms Forces.comap
+#print axioms Forces.mono
+#print axioms Forces.map
+#print axioms not_colorable_of_spindled_forcer
+#print axioms Forces.of_edges
+#print axioms Forces.of_gadget
+#print axioms edgeHom
+#print axioms not_colorable_spindleEdges
+#print axioms rhombus_forces
+#print axioms moserSpindle_not_colorable_three_spindled
+#print axioms spindleFromRhombi_not_colorable_three
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

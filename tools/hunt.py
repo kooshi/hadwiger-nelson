@@ -87,7 +87,8 @@ def shrink_degrey(k: int, budget: float, timeout: float | None) -> None:
     if st != FORCED:
         return
     t0 = time.time()
-    out = shrink(len(cfg), edges, p, q, k, timeout=timeout, budget=budget)
+    out = shrink(len(cfg), edges, p, q, k, timeout=timeout, budget=budget,
+                 log=lambda m: print(m, flush=True))
     print(f"\nSHRUNK: {out.line()}  ({time.time()-t0:.0f}s)", flush=True)
     print(f"  spindling it would give a {2*len(out.keep)-1}-point 5-chromatic graph "
           f"(de Grey's is 1581; Polymath16's smallest is 509)", flush=True)

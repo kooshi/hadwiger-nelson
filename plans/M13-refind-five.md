@@ -507,3 +507,49 @@ Carried forward from M07/M08/M11/M12 and extended by § 0. Desktop.
   easier to make, which is why it is written here.
 * **Refutation cost is not monotone in graph size** (M07), and at five colours instances of the same
   size varied by two orders of magnitude (M12). "Smaller" is not "cheaper".
+
+---
+
+## 9. What landed
+
+*Implementation, 2026-08-01, desktop. Written after the gate, against § 0's predictions.*
+
+### 9.1 Lean — the argument both rungs share, as a theorem
+
+`Proofs/HadwigerNelson/Forcer.lean`, zero `sorry`, axioms exactly `[propext, Classical.choice,
+Quot.sound]` on every declaration (and `edgeHom` needs none at all).
+
+| declaration | what it is |
+|---|---|
+| `Forces G k p q` | no proper `k`-colouring of `G` separates `p` from `q` — the search's win condition, named |
+| `Forces.comap` | a forcer speaks about every graph it maps into; the only step that does work |
+| `Forces.mono` | more edges only force more — the analogue of `Gadget.mono` |
+| `Forces.map` | a symmetry carries a forced pair to a forced pair; **an endomorphism suffices** |
+| `not_colorable_of_spindled_forcer` | **the closing lemma**, over any graph and any colour count |
+| `Forces.of_edges` | a forcer by exhausting the colourings — `by decide +kernel` |
+| `Forces.of_gadget` | a forcer from a SAT certificate, through the gadget algebra |
+| `edgeHom`, `spindleEdges`, `spindleHomLeft/Right` | placements, and the spindle as a construction |
+| `not_colorable_spindleEdges` | the form a search's output arrives in: no membership search anywhere |
+
+**The payoff at spec scale**: `moserSpindle_not_colorable_three_spindled`, a **fourth** independent
+route to rung A's witness, and the only one that never looks at all seven vertices — it decides a
+four-vertex rhombus and places it twice.
+
+`Proofs/HadwigerNelson/ForcerDiagnose.lean` says which side condition refused a candidate, with six
+`#guard_msgs` pinning all four failure messages and the passing case.
+
+### 9.2 Tools — the missing primitive, and the committed table made derived
+
+`tools/construct.py` gained `Motion`, `motion_group`, `hex12`, `orbit`, `delete`, and `index_of`
+(so a pivot is named by its coordinates, not by an index the previous move renumbered). Eight new
+controls, each with a negative partner.
+
+`tools/forcer.py` is new: `forces` (three outcomes, and the third is never folded into the second),
+`backbone` (carrying `unknown` as a set), and `shrink` (claiming "irredundant" only after a
+certifying single-point sweep). Fourteen controls.
+
+**The result that matters for a reviewer**: `degrey_from_primitives()` rebuilds de Grey's 1581-point
+graph from his 39 seed points by four moves and matches the committed coordinate table **point for
+point in the exact field**, in 13 s. `scripts/regen-check.sh` asserts it. The committed table is now
+*derived* data rather than transcribed data — "state the construction, not only the coordinates",
+discharged.

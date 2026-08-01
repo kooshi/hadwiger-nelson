@@ -228,7 +228,7 @@ class Shrunk:
 
 
 def shrink(n: int, edges, p: int, q: int, k: int, timeout: float | None = None,
-           budget: float | None = None, rng=None) -> Shrunk:
+           budget: float | None = None, rng=None, log=None) -> Shrunk:
     """Delete points while the pair stays forced, then **certify** what is left.
 
     Invariant: the pair is forced at every step. Measure: the point count, strictly decreasing on
@@ -241,6 +241,7 @@ def shrink(n: int, edges, p: int, q: int, k: int, timeout: float | None = None,
     """
     import random
     rng = rng or random.Random(0)
+    say = log if log is not None else (lambda _: None)
     keep = set(range(n))
     calls = 0
 
@@ -267,6 +268,8 @@ def shrink(n: int, edges, p: int, q: int, k: int, timeout: float | None = None,
             if still_forced(keep - drop) == FORCED:
                 keep -= drop
                 progress = True
+                say(f"  descent: -{len(drop)} -> {len(keep)} points "
+                    f"({time.time() - t0:.0f}s, block {block})")
         if not progress:
             if block == 1:
                 break
@@ -286,6 +289,7 @@ def shrink(n: int, edges, p: int, q: int, k: int, timeout: float | None = None,
         if st == FORCED:
             keep.discard(v)
             irredundant = False          # a removal succeeded, so the sweep must be redone
+            say(f"  sweep: -1 -> {len(keep)} points ({time.time() - t0:.0f}s)")
         elif st == UNKNOWN:
             unsettled.append(v)
             irredundant = False
