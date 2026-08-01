@@ -91,6 +91,38 @@ def read_cnf(path: Path, k: int = K) -> tuple[int, list[tuple[int, int]], list[t
     return n, sorted(set(edges)), pins
 
 
+def read_cnf_positional(path: Path, k: int = K) -> tuple[int, list[tuple[int, int]],
+                                                          list[tuple[int, int]]]:
+    """`(n, edges, pins)` from a DIMACS this module wrote, **in the order the file has them**.
+
+    `read_cnf` above sorts and deduplicates, which is right for asking a solver a question and wrong
+    for anything that addresses clauses **by position** — and the certificate does exactly that. An
+    emitter handed a re-sorted edge list would build a clause table that disagrees with the formula
+    the solver refuted, at every position past the first reordering.
+
+    Each edge contributes `k` consecutive width-2 clauses, so every `k`-th one recovers the edge
+    order exactly. Reading the graph back out of the DIMACS rather than re-deriving it is the point:
+    the bytes the solver saw are the bytes the table is built from, and no Python re-implementation
+    of the construction sits between them.
+    """
+    n, wide, pins = 0, [], []
+    for line in open(path):
+        if line[0] in "c%" or not line.strip():
+            continue
+        if line[0] == "p":
+            n = int(line.split()[2]) // k
+            continue
+        lits = [int(x) for x in line.split()[:-1]]
+        if len(lits) == 1:
+            pins.append(unvar(lits[0], k))
+        elif len(lits) == 2:
+            wide.append((unvar(-lits[0], k)[0], unvar(-lits[1], k)[0]))
+    edges = wide[::k]
+    if len(wide) != k * len(edges):
+        raise ValueError(f"{len(wide)} width-2 clauses is not {k} per edge; wrong --colours?")
+    return n, edges, pins
+
+
 def canon_patterns(k: int, m: int) -> list[list[int]]:
     """**One colour pattern per partition of `m` ports into at most `k` blocks.**
 

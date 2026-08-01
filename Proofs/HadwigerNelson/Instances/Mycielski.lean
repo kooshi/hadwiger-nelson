@@ -124,54 +124,7 @@ control: the witness is not trusted, it is verified. -/
 theorem colour_proper : edges.all (fun e => decide (colour e.1 ≠ colour e.2)) = true := by
   decide +kernel
 
-/-- The two ports: the ends of the original edge, which survives every Mycielskian.
-
-Two ports and not three, because **this graph is triangle-free** — Mycielski's construction is what
-introduces no triangle — so the three-mutually-adjacent-ports gadget every other witness here uses
-(`Instances/Heule553/Bound.lean` and its two siblings) has nothing to attach to. The largest clique
-is an edge, and an edge is what gets pinned. -/
-def ports : Fin 2 → Fin size := ![0, 1]
-
-/-- **Naming one edge's colours**, which is the only colour-symmetry lever a triangle-free graph has.
-
-Measured before this was written: 387,065 trimmed hint entries with the edge pinned against
-10,224,710 without — 26×, and the difference between about ten minutes of kernel time and four
-hours. A unit-distance candidate would have a triangle here and the lever would be worth 8.5–53×. -/
-def portsEdge : Gadget 5 size 2 edges ports :=
-  Gadget.edge 0 1 (edgeGraph_adj_of_mem (by decide) (by decide +kernel))
-
-/-- **The solver's half**: with the two ports pinned to different colours, the formula is
-unsatisfiable. This is the one leaf that needs a certificate — everything else about this witness is
-derived from the construction. -/
-theorem pinned_unsat :
-    (coloringCNF 5 size edges ++ cubeCNF 5 size (pinCube ports ![0, 1])).Unsat := by
-  sorry
-
-/-- The two gadgets composed. At two ports and five colours there are exactly two colour-partitions
-to rule out, and each gadget rules out one: the edge kills "the ends agree", the certificate kills
-"the ends differ". -/
-def gadgets : Gadget 5 size 2 edges ports :=
-  (Gadget.ofUnsat ![0, 1] pinned_unsat).inter portsEdge
-
 end Mycielski
-
--- The `fail` branch is unreachable *when the gadgets refute*, which is when the linter runs.
-set_option linter.unreachableTactic false in
-set_option linter.unusedTactic false in
-/-- **The first refutation of a five-colouring in this project.**
-
-47 vertices, 236 edges, and no proper colouring with five colours. Kernel-checked through the same
-route every other witness here uses: a solver certificate, re-checked by `Sat/MaskCheck.lean`, with
-CaDiCaL trusted for nothing. -/
-theorem mycielski47_not_colorable_five :
-    ¬ (edgeGraph Mycielski.size Mycielski.edges).Colorable 5 :=
-  not_colorable_of_gadget Mycielski.gadgets (by
-    first
-      | decide +kernel
-      | fail "Mycielski.gadgets admits a port colouring, so this graph is not refuted. What \
-              survives is `Mycielski.gadgets.survivors` — one entry per colour-partition of the two \
-              ports, each a list of (vertex, colour) pins. Print it with, inside \
-              `namespace HadwigerNelson`,  #eval Mycielski.gadgets.survivors")
 
 /-- **The control that must go red.** Six colours *do* suffice. Without it, a "five" that was
 silently a "four" — or a graph that was accidentally uncolourable at every count, which a dropped
@@ -183,5 +136,6 @@ theorem mycielski47_colorable_six :
     rcases h.2 with hm | hm
     · exact of_decide_eq_true (hall _ hm)
     · exact (of_decide_eq_true (hall _ hm)).symm⟩
+
 
 end HadwigerNelson

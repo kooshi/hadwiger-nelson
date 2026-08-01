@@ -258,15 +258,18 @@ together they are why a placed copy is free in both halves rather than only the 
 statement, the opposite direction from everything else in this project, so a refutation that was
 silently about the wrong colour count cannot pass unnoticed.
 
-**Not yet listed: `mycielski47_not_colorable_five`.** It rests on `Mycielski.pinned_unsat`, the one
-certificate this milestone still owes, and until that lands it would report `sorryAx` — which is the
-gate working, not a purchase. Add it here in the same commit as the certificate. -/
+`mycielski47_not_colorable_five` is the headline: the first statement in this project about
+*five*-colourings, resting on a kernel-checked certificate of 387,065 propagation steps. It is
+audited here rather than trusted, and its axiom list is the whole claim — a native purchase would
+show up in it, and none does. -/
 
 #print axioms Assembly.distSq_place
 #print axioms Assembly.verts_embed
 #print axioms Assembly.validOn_copiedEdges
 #print axioms Assembly.valid_of_cross
 #print axioms Assembly.adj_embed
+#print axioms Mycielski.pinned_unsat
+#print axioms mycielski47_not_colorable_five
 #print axioms mycielski47_colorable_six
 
 #eval IO.println "=== PURCHASED ==="

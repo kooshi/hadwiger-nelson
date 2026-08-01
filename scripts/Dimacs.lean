@@ -44,6 +44,20 @@ def emitCnf (name : String) (note : String) (f : CNF Nat) : IO Unit := do
   IO.FS.writeFile path (s!"c {note}\n" ++ CNF.dimacs f)
   IO.println s!"  {path}  ({f.clauses.size} clauses)  {note}"
 
+/-- **The five-colour question.** `Mycielski.gadgets` is `Gadget.ofUnsat ![0,1] pinned_unsat`
+intersected with the ports' own edge, so the formula whose refutation is owed is exactly this one:
+the 47-vertex 6-chromatic graph at *five* colours, with the two ports' colours named.
+
+It is emitted from `coloringCNF` and `pinCube` themselves, so the solver and
+`Instances/Mycielski.lean` cannot be looking at different problems — which matters more here than
+anywhere else in this file, because this is the first formula in the project that is not about four
+colours and a stale `4` would produce a certificate for the wrong question that still checked. -/
+def emitMycielski : IO Unit := do
+  IO.FS.createDirAll satDir
+  emitCnf "mycielski47-5" "M12: coloringCNF 5 47 Mycielski.edges, ports 0 and 1 pinned to 0 and 1"
+    (coloringCNF 5 Mycielski.size Mycielski.edges ++
+      cubeCNF 5 Mycielski.size (pinCube Mycielski.ports (![0, 1] : Fin 2 → Fin 5)))
+
 /-- The whole emission: the monolithic instance for route B, then one file per cube for route C. -/
 def emitAll : IO Unit := do
   IO.FS.createDirAll satDir
@@ -55,3 +69,4 @@ def emitAll : IO Unit := do
       (coloringCNF 3 7 moserSpindleEdges ++ cubeCNF 3 7 cb)
 
 #eval emitAll
+#eval emitMycielski

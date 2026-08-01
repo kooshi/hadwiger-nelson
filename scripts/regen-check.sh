@@ -131,6 +131,16 @@ done
 # "achieved", or always reports the identity fails rather than passing quietly. Both have been
 # watched to go red (`plans/M11-search-instrument.md` § 4).
 echo "==> search instrument"
+if ! python3 tools/field.py > "${V}/field.log" 2>&1; then
+  sed 's/^/    /' "${V}/field.log"; echo "    FAIL: tools/field.py"; FAIL=1
+else
+  echo "    field.py: $(grep -c '^  ok' "${V}/field.log") controls, one implementation for five tools"
+fi
+if ! python3 tools/construct.py --self-test > "${V}/construct.log" 2>&1; then
+  sed 's/^/    /' "${V}/construct.log"; echo "    FAIL: tools/construct.py"; FAIL=1
+else
+  echo "    construct.py: $(grep -c '^  ok' "${V}/construct.log") controls, including rebuilding the Moser spindle"
+fi
 if ! python3 tools/profile.py --self-test > "${V}/profile.log" 2>&1; then
   sed 's/^/    /' "${V}/profile.log"; echo "    FAIL: tools/profile.py"; FAIL=1
 else

@@ -138,6 +138,12 @@ stub's four-colour observation. Two independent probes, both negative:
   The unit distance forces "the two ends differ", which is what an edge is. **Nothing else in any of
   these graphs constrains a pair of points at five colours at all.**
 
+  **de Grey's 1581-point graph is missing from that table and it is missing honestly**: its scan has
+  58,227 distance classes and the run was cut off by a 40-minute timeout before finishing. What
+  covers de Grey is the *first* probe — twelve non-adjacent port sets, none of which forced
+  anything — which is weaker evidence than the exhaustive scan the other four got. Stated rather
+  than rounded up.
+
 **The control fires.** The same probe at *four* colours on the 553-vertex graph refutes **5 of 5**
 patterns, as it must — that graph has no 4-colouring at all, so every port pattern is impossible.
 A probe that reported "nothing forced" everywhere would look identical to a broken one; this is the
@@ -568,6 +574,78 @@ partner that goes red:
   silently wrong rotation.
 
 ---
+
+## 4.5 What landed
+
+*2026-08-01.*
+
+### The headline
+
+**`mycielski47_not_colorable_five` — the first statement in this project about five-colourings —
+depends on axioms exactly `[propext, Classical.choice, Quot.sound]`.** Zero native purchases, zero
+`sorry`. A 47-vertex, 236-edge graph, defined in Lean by five lines of recursion rather than emitted,
+with no proper 5-colouring.
+
+| | |
+|---|---|
+| the solver | **0.22 s**, 38,743 LRAT actions |
+| after backward trimming | 21,240 actions, **387,065 propagation steps** |
+| **predicted during subplanning, before the module existed** | **387,065** |
+| emitted as Lean | 19 modules, 2.9 MB of source |
+| for scale: the 553-point unit-distance witness at *four* colours (M07) | 1,104,106 steps |
+
+The subplanning measurement and the artifact agree to the digit. That is the point of measuring
+before specifying, and it is the first time in this project the prediction has been exact rather than
+close.
+
+Its partner `mycielski47_colorable_six` is an **existence** claim — the opposite direction from
+everything else here — and its six-colouring is *derived from Mycielski's construction* rather than
+pasted from a solver, with a guard that the sixth colour is actually used.
+
+### The rest
+
+* **`Assembly.lean` — complete, zero `sorry`.** Many placed copies, one certificate: intra-copy edges
+  certified symbolically, only the seams checked. `AssemblyDiagnose` renders a failing seam by copy
+  and base vertex, both directions pinned.
+* **`tools/field.py`** — the exact arithmetic that was copy-pasted across five generators, now in one
+  place with 18 controls. `scan.py` folded onto it: 58 lines deleted, and it still recovers de Grey's
+  791-point split.
+* **`tools/construct.py`** — the generator. Seed, triangle, rhombus, spindle, union, all staying in
+  the field by construction. **It rebuilds the Moser spindle from primitives**, checked by *graph
+  isomorphism against the committed one* rather than against an invariant.
+* **`tools/emit_mask.py`** — colour-parametric, and it can now read the graph out of the DIMACS *Lean
+  printed* (`--cnf`) rather than from a JSON, which is the only honest route when the graph is
+  defined in Lean. The four-colour prose is frozen byte-identical, so no existing witness moved —
+  verified: both Heule certificates still regenerate bit for bit.
+* **One search step, measured end to end**: **~17 ms** — geometry 0.8 ms, "is it 5-colourable?"
+  1.7 ms, profiling four ports at five colours 15 ms. About 200,000 candidates per hour per core.
+
+### The controls, watched red
+
+| control | what happened |
+|---|---|
+| the certificate filed against the **four**-colour formula | refused **twice** — the table disagrees *and* the clause count is wrong |
+| the edge gadget dropped from the composition | the failure directive fires, and its suggested `#eval` prints `[[(0, 0), (1, 0)]]` — both ports one colour, exactly the pattern the edge rules out |
+| the outstanding leaf added to the axiom audit | `[propext, sorryAx, …]` and `FAIL`, naming the declaration |
+| a spindle at `r² = 4/3` | refused by name: it needs √39 |
+| a base point moved off its unit circle | the assembled certificate is `false` |
+| a seam that is not a unit distance | `badSeams` names copy and vertex with the distance found |
+
+`./scripts/axioms.sh`: **120 clean, 5 declared purchases** (all M03's; M11 left it at 112 clean).
+
+### What did **not** land, stated plainly
+
+* **The constructor is minimal.** Seed, rhombus, spindle, union — enough to rebuild the Moser spindle
+  and nothing more. **It does not rebuild de Grey's seed set**, which needs a Minkowski-style sum his
+  construction uses and this tool does not have. Deliverable B said "and de Grey's seed set"; that
+  half did not land.
+* **No orbit primitive in the tool.** `Assembly` covers orbits on the Lean side, so a candidate built
+  as copies is cheap to certify — but `construct.py` has no "close under this list of motions" move,
+  so nothing yet *proposes* one.
+* **No gadget catalogue.** § 0(e) established it cannot be harvested; this milestone did not construct
+  one either. How tight a configuration must be before it forces anything at five colours remains
+  **unmeasured**, and it is the first thing M13 will hit.
+
 
 ## 4. The controls, and each one watched to fail
 

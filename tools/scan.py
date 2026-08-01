@@ -45,70 +45,12 @@ import json
 import sys
 from pathlib import Path
 
-# ---------------------------------------------------------------------------------------------
-# Exact arithmetic in ℚ(√p₀, √p₁, √p₂, √p₃), cleared of denominators.
-#
-# A number is a 16-vector of integers over the basis {√(∏ of a subset)}: bit `k` of the index means
-# "this term carries √primes[k]". Multiplying basis elements `i` and `j` gives basis `i ^ j` with the
-# shared primes coming out as an integer factor — that is the whole of the multiplication rule.
-# ---------------------------------------------------------------------------------------------
+# Exact arithmetic in ℚ(√p₀, √p₁, √p₂, √p₃) lives in `tools/field.py` — one implementation, five
+# importers. It used to live here too, and in `degrey.py`, `corespindle.py`, `heule.py` and
+# `spindle.py`: five copies of one multiplication table, which is a role nobody had named. M12 named
+# it, and this file now borrows rather than repeats.
 
-DIM = 16
-
-
-def mul_table(primes: list[int]) -> list[list[tuple[int, int]]]:
-    """`tab[i][j] = (basis index, integer factor)` for the product of basis elements `i` and `j`."""
-    tab = [[(0, 0)] * DIM for _ in range(DIM)]
-    for i in range(DIM):
-        for j in range(DIM):
-            f = 1
-            for k in range(len(primes)):
-                if (i >> k) & 1 and (j >> k) & 1:
-                    f *= primes[k]
-            tab[i][j] = (i ^ j, f)
-    return tab
-
-
-def mul(x: list[int], y: list[int], tab) -> list[int]:
-    out = [0] * DIM
-    for i, xi in enumerate(x):
-        if xi:
-            row = tab[i]
-            for j, yj in enumerate(y):
-                if yj:
-                    idx, f = row[j]
-                    out[idx] += xi * yj * f
-    return out
-
-
-def add(x, y): return [a + b for a, b in zip(x, y)]
-def sub(x, y): return [a - b for a, b in zip(x, y)]
-def neg(x): return [-a for a in x]
-def scal(c: int, x): return [c * a for a in x]
-def is_zero(x): return not any(x)
-
-
-def const(c: int) -> list[int]:
-    v = [0] * DIM
-    v[0] = c
-    return v
-
-
-def render(v: list[int], primes: list[int]) -> str:
-    """The nested-pair literal `Q4` is written as, innermost prime first.
-
-    The tower is `Adjoin p₃ (Adjoin p₂ (Adjoin p₁ (Adjoin p₀ ℤ)))`, so the outermost pair splits on
-    the *last* prime. Written out rather than as `31 + 3 * …` so that the kernel meets tower elements
-    instead of casts it has to unfold — this data is multiplied by once per vertex of a copy.
-    """
-    def go(idx: list[int], level: int) -> str:
-        if level < 0:
-            return str(v[idx[0]])
-        lo = [i for i in idx if not (i >> level) & 1]
-        hi = [i for i in idx if (i >> level) & 1]
-        return f"⟨{go(lo, level - 1)},{go(hi, level - 1)}⟩"
-    return go(list(range(DIM)), len(primes) - 1)
-
+from field import (DIM, add, const, is_zero, mul, mul_table, neg, render, scal, sub)  # noqa: E402,F401
 
 # ---------------------------------------------------------------------------------------------
 

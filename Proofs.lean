@@ -40,6 +40,7 @@ import Proofs.HadwigerNelson.Instances.Heule510.Bound
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Bound
 import Proofs.HadwigerNelson.Instances.Mycielski
+import Proofs.HadwigerNelson.Instances.Mycielski.Bound
 
 /-!
 # Proofs
