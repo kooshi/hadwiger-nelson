@@ -129,6 +129,11 @@ def sqrt_elem(n: int) -> list[int]:
     Raises rather than returning something approximate: a generator that quietly produced the wrong
     surd would emit coordinates Lean refuses, with nothing in the failure naming the cause.
     """
+    if n == 0:
+        # `r² = 1/4`: the two points are half a unit apart, so the spindle is a half-turn — sin = 0,
+        # cos = −1, and the image really does land a unit away. A valid move with a zero radical,
+        # found by running a real search rather than by the self-test, which never generated it.
+        return const(0)
     m = squarefree(n)
     s0 = 1
     k = n // m
@@ -287,6 +292,14 @@ def self_test() -> None:
         expect("√39" in str(ex), True, "an unavailable radius is refused and names √39")
 
     expect(spindle_available(Fraction(3)), True, "r² = 3 is available (√11) — the positive partner")
+
+    # the degenerate half-turn: r² = 1/4 has radicand 0, which is a square, so the move is legal and
+    # must not divide by zero on the way to discovering that
+    half = spindle_rotation(Fraction(1, 4))
+    expect((half[0][0], half[1], half[2]), (-2, const(0), 2),
+           "the r² = 1/4 spindle is a half-turn: cos = −1, sin = 0")
+    expect(len(spindle(unit_triangle(), 0, 1)) > len(unit_triangle()), True,
+           "and a spindle from the unit triangle really adds points")
 
     # and a move that stays in the field really does produce unit distances
     expect(all(is_unit(s.pts[a], s.pts[b], s.denom) for a, b in s.edges()), True,
