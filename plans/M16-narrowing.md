@@ -204,6 +204,51 @@ closed `Bool` the kernel decides. This is M05/M15's arrangement, at a fraction o
   no-partners certificate is *sound and useful* — it reduces the headline to colourability, which
   is why `check` demands a nonempty colouring list (a control pins it).
 
+## 3.5 The obligations, decomposed (obligation pass, 2026-08-02)
+
+Every leaf was derived against the real imports before being written down; the citations below
+were found by grep, not recalled. Two statement changes came out of the pass:
+
+* **`IsChain` leaves the surface.** Batteries' `isChain_iff_pairwise` demands `[Trans R R R]`,
+  which a bare lambda never carries, and both consumers want `Pairwise` anyway. The public lemma
+  is `pairwise_lt_of_sepChain : l.Pairwise (eval · < eval ·)` — transitivity folded in once, via a
+  `haveI : Trans _ _ _` local instance inside the proof, never at a consumer.
+* **`eval_lt_of_hi_lt_lo` is stated as the named bridge** — the *one* place interval data touches
+  ℝ's order. Its own derivation settles the scale-0 question: at denominator 0 both membership
+  facts force both intervals to contain 0, contradicting disjointness, so the lemma carries no
+  positivity hypothesis and the case split (`Nat.eq_zero_or_pos`) is internal.
+
+The leaf table — each obligation, its derivation shape, and the citation that closes it:
+
+| leaf | shape | closes by |
+|---|---|---|
+| `mem_ofInt`, `Mem.add`, `Mem.scaleUp` | unfold + one monotonicity step | `push_cast`, `mul_le_mul_of_nonneg_right`, `add_le_add` |
+| `Mem.mul` | the corner bash, isolated in a private ℝ-lemma `A ≤ a → a ≤ B → C ≤ b → b ≤ D → min₄ ≤ ab ∧ ab ≤ max₄` | `rcases le_total 0 b` then sign of the active endpoint; each of ~6 leaves one `mul_le_mul` variant or `nlinarith`. Grepped: Mathlib has no `Icc`-product-bounds lemma to cite |
+| `mem_sqrt` | rewrite `√d·s = √(d·s²)` then square both comparisons | `Real.sqrt_mul'`, `Real.sqrt_sq`, `Real.le_sqrt`, `Real.sqrt_le_iff` (all present, checked) |
+| `Adjoin.mem_approx` | `eval ⟨a,b⟩ = eb a + eb b·r` (a `rfl`-lemma stated privately) then `Mem.add`/`Mem.scaleUp`/`Mem.mul` | 3 lines |
+| `Q4.mem_approx` | unfold both four-level nestings, apply the level lemma four times; fix the scale `1·s·s·s·s = s⁴` by `ring` on ℕ | ~8 lines |
+| `pairwise_lt_of_sepChain` | induction mirroring `sepIvals`'s own recursion, `eval_lt_of_hi_lt_lo` at each step, `isChain_iff_pairwise` (Batteries) under a local `Trans` instance | |
+| `pairwise_ne_of_sepChain` | `.imp ne_of_lt` | 1 line |
+| `index_eq_of_eval_eq` | `by_contra` + `lt_or_gt_of_ne`, `List.pairwise_iff_getElem` (core `Init/Data/List/Nat/Pairwise.lean`), `List.getElem?_eq_some_iff` | ~8 lines |
+| `exists_coloring_of_proper` | transcription of `colorable_delete_of_packed` minus the pivot cases; the colouring is `Coloring.mk` of the unpacked values with `Nat.mod_lt _ hk` | ~12 lines |
+| `eval_distSq_eq_of_dist_eq` | `key : eval (q.distSq p) = normSq (q.toPlane D − p.toPlane D) · D²` by `eval_distSq` + `field_simp` + `ring`; then `dist → normSq` by `Complex.dist_eq` + `Complex.sq_abs` | ~12 lines |
+| `NarrowCert.sound` | no induction anywhere: split `check` into its five conjuncts; `Q = []` is refuted by any committed colouring; `Q = q₀ :: _` pins `classId q = classId q₀` through `eval_distSq_eq_of_dist_eq` → `index_eq_of_eval_eq` (positions transported along `List.getElem?_map`), then the class's one colouring separates all of `Q` | ~35 lines of named `have`s; a private `checkVertex` destructuring lemma keeps the match plumbing out of the argument |
+
+The per-vertex facts arrive from `(finRange n).all` via `List.all_eq_true` + `List.mem_finRange`
+(core, checked). **No leaf needs an induction beyond the one list walk in
+`pairwise_lt_of_sepChain`**, and no recursion needs a termination argument — `sepIvals` is
+structural.
+
+Prove / test / assume, partitioned: *proved* — everything above; *tested* — the 16 spec `#guard`s
+plus the emitter-side controls of § 4 (data-shape facts a wrong emitter would break); *assumed* —
+`0 < k` (M03's standing hypothesis, discharged by `decide` at every instance) and `D ≠ 0`
+(discharged by `decide` from the committed denominator).
+
+Mutation audit to run at the gate: drop `0 ≤ I.lo` from `sqrtOk` (mem_sqrt must fail — a negative
+lower endpoint squares large for the wrong reason); drop the `!colourings.isEmpty` conjunct
+(`sound`'s nil case must fail); swap `pairwise_lt`'s `<` for `≤` (index_eq must fail); state
+`sound` without `pivot ∉ Q` (must fail on the adversarial `Fan G k p [p]`).
+
 ## 4. Negative controls (each to be watched red)
 
 | control | goes red when |

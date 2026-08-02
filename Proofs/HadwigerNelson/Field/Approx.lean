@@ -149,9 +149,16 @@ so the emitter's claim "sorted by real value, all distinct" is verified rather t
 def sepChain (B : SqrtBounds) (l : List Q4) : Bool :=
   sepIvals (l.map (Q4.approx B))
 
-/-- A separated list evaluates strictly increasingly at adjacent positions. -/
-theorem chain_lt_of_sepChain {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
-    (h : sepChain B l = true) : l.IsChain (fun a b => Q4.eval a < Q4.eval b) := sorry
+/-- **The per-pair bridge**: disjoint intervals order the evaluations. The one place the interval
+data touches `ℝ`'s order; everything below is list plumbing over it. At denominator 0 the two
+membership facts already contradict the disjointness, so no positivity hypothesis is carried. -/
+theorem eval_lt_of_hi_lt_lo {B : SqrtBounds} (hB : B.Ok = true) {a b : Q4}
+    (h : (Q4.approx B a).hi < (Q4.approx B b).lo) : Q4.eval a < Q4.eval b := sorry
+
+/-- A separated list evaluates strictly increasingly — at *all* pairs of positions, transitivity
+folded in once here rather than at every consumer. -/
+theorem pairwise_lt_of_sepChain {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
+    (h : sepChain B l = true) : l.Pairwise (fun a b => Q4.eval a < Q4.eval b) := sorry
 
 /-- A separated list has pairwise-distinct real values. -/
 theorem pairwise_ne_of_sepChain {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
