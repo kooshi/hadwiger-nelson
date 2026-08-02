@@ -14,16 +14,26 @@ WORKFLOW. Everything reduces to what the kernel checked plus what we explicitly 
 
 How many colours does the plane need so that no two points at distance exactly 1 share a colour?
 Known since 1950 to be 4, 5, 6, or 7. De Grey (2018) ruled out 4 with a 1581-vertex unit-distance
-graph that is not 4-colourable. **No formalization of that result exists.** Our ratchet:
+graph that is not 4-colourable. Our ratchet:
 
 - **A. χ(ℝ²) ≥ 4** — the Moser spindle. Small, classical, and it exercises the entire pipeline
-  end to end. Calibration instance: everything the big proof needs, at a size where `decide`
-  cross-checks the SAT bridge.
-- **B. χ(ℝ²) ≥ 5** — de Grey's graph, kernel-certified. The publishable rung.
-- **C. The search instrument** — the infrastructure from B turned outward: graph shrinking,
-  fractional bounds, spindle/gadget catalogs. Each improvement is independently real.
+  end to end. ✅ Landed.
+- **B. χ(ℝ²) ≥ 5** — de Grey's graph, kernel-certified. ✅ Landed (M06–M09), on axioms exactly
+  `[propext, Classical.choice, Quot.sound]`. **The write-up is deferred indefinitely** (Kooshi,
+  2026-08-02): a formalization of a known theorem is no longer news, and reproducing one is
+  nearly free. It exists as our foundation, not our product.
+- **C. The search instrument** — the infrastructure from B turned outward: shrinking, criticality,
+  fractional bounds, fans, the narrowing sweep, the growth-family hunt. ✅ Built through M17.
 - **D. χ(ℝ²) ≥ 6** — the hunt. May not exist; may be astronomically large. Every rung below it
   pays regardless.
+
+**The mission, restated 2026-08-02: this project is exclusively a hunt for new mathematics — no
+matter how small — ratcheting toward major findings.** Formalizing known results is over as a
+goal in itself; a formalized statement earns its place by being *structure nobody had named*
+(however elementary) or a rung toward χ ≥ 6. The current frontier: the hunt through every
+existing witness and every growth family is closed with certified/exhaustive negatives (M15–M17),
+and the live thread is the **120° class** — `r² = 1/3`, the unique distance class whose spindle
+is an order-3 rotation and whose closures force rainbow unit triangles (`plans/M18-the-120-degree-class.md`).
 
 State failure modes plainly and keep the ratchet honest: a rung that does not land is reported as
 not landed, not quietly rescoped.
@@ -107,8 +117,13 @@ the emitted data. A generator bug can only produce data Lean refuses to certify.
 
 ## Trust ledger
 
-Audited at every milestone with `#print axioms` (see `scripts/Axioms.lean`) and re-checked with
-`lean4checker` at milestone boundaries (`./scripts/lean4checker.sh`). The standing entries:
+Audited at every milestone with `#print axioms` (see `scripts/Axioms.lean`). **`lean4checker`
+replays are deferred indefinitely** (Kooshi, 2026-08-02): the Lean kernel at build time is the
+trust anchor; the independent replay is single-threaded, RAM-heavy, and re-verifies what the
+kernel already checked, so it is a *publication* gate, not a per-milestone one — **run it once,
+on hardware other than this desktop, before any external claim of new mathematics**, and never
+as routine. (The full-library replay had been open since M13; three attempts each died with the
+machine. This entry replaces that debt.) The standing entries:
 
 | Entry | Status |
 |---|---|
@@ -154,11 +169,24 @@ parallel-job counts do not. Measure in **CPU seconds (user + sys), minimum of th
 builds on the box have inflated wall-clock readings 5× — and name the machine beside any number you
 write down.
 
-**Never run a bare `lake build`. Use `./scripts/build.sh`.** Lake 5.0.0 has no `-j`; it sizes its job
-pool from the machine, and this project's data modules peak at ~9 GB each, so an unrestricted build
-asks for a few hundred gigabytes. It took the desktop down twice on 2026-07-30. `scripts/build.sh`
-builds every module in **dependency order, leaves first, in explicitly-named batches of ten**, each
-inside a memory-capped scope.
+**ALWAYS build through `./scripts/build.sh` — never `lake build`, bare *or named*. No exceptions.**
+(Rule hardened 2026-08-02 after the OOM incident below; it was previously "never run a *bare*
+`lake build`", and the loophole cost hours.) Lake 5.0.0 has no `-j`; it sizes its job pool from
+the machine, and this project's data modules peak at ~9 GB each, so an unrestricted build asks for
+a few hundred gigabytes. It took the desktop down twice on 2026-07-30. And a *named* target is not
+safe either: Lake silently queues any missing or stale dependency into the same build — on
+2026-08-02 a one-module build queued four 22 GB certificate rebuilds behind a 20 GB cap and the
+OOM killer ate them, twice, with a grep-piped invocation reading as a pass. `scripts/build.sh`
+builds every module in **dependency order, leaves first, in explicitly-named batches of ten**,
+each inside a memory-capped scope. For iteration on a single open file, `lake env lean <file>`
+remains fine (it builds nothing).
+
+**On any segfault, from any process: HALT and report to Kooshi immediately.** Do not diagnose, do
+not retry, do not work past it. It is hardware, and the machine needs a reboot he performs. The 2026-08-02 filesystem event
+(six simultaneous "segfaults", kernel ext4 oopses, ~50 compiled modules lost) is what working
+past one looks like. Related discipline: **one heavy job at a time** — the box does not have
+headroom for a replay, a hunt, and a build concurrently, and stacking them is how caps turn into
+OOM kills.
 
 Dependency order is not decoration: naming a target whose dependencies are missing makes Lake build
 those too, in the same unrestricted pool, so a batch bounds concurrency *only* if everything beneath
