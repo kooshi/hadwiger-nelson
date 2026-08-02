@@ -2,6 +2,7 @@ import Proofs.Basic
 import Proofs.HadwigerNelson.UnitDistance
 import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Field.Quadratic
+import Proofs.HadwigerNelson.Field.Approx
 import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
@@ -13,6 +14,7 @@ import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Critical
 import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.Fan
+import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.Forcer
 import Proofs.HadwigerNelson.ForcerDiagnose
 import Proofs.HadwigerNelson.Fractional
