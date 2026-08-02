@@ -129,21 +129,38 @@ place to start. This is not
 bad luck: M07 *produced* this graph by a shrinking search, and shrinking is the search for removable
 vertices. The milestone that made the certificate affordable is the milestone that closed the route.
 
-### (g) *(pending)* de Grey's own 1581-point graph
+### (g) de Grey's own 1581-point graph **does** carry a five-colour fan — at four pivots
 
-M07 measured that his graph shrinks 1581 → 1577 and stops, so some vertices there *are* removable —
-and by § (b) a removable vertex is exactly a five-colour fan. Sweep running.
+The sweep, completed. **1,566 pivots settled in 2,331 s across 24 workers, none removable. Fifteen
+did not settle at a 300 s budget; re-run at a four-hour budget, eleven came back critical and four
+came back REMOVABLE.**
 
-**1,566 pivots settled in 2,331 s across 24 workers: none removable.** Fifteen did not settle at a
-300 s budget; re-run at four hours each, **eleven more came back critical** and four are still
-running as this is written. So de Grey's graph is critical at **1,577 of 1,581** vertices with four
-unknown — and *unknown* is not folded into either answer, so no certificate for it is emitted.
+| pivot | verdict | solver time |
+|---|---|---|
+| 633 | **removable — a five-colour fan sits here** | 5,955 s |
+| 1423 | **removable** | 6,446 s |
+| 1420 | **removable** | 6,516 s |
+| 630 | **removable** | 6,763 s |
 
-The sweep's own cost is the honest statement of what rung D asks. At a *removable* pivot the fan
-test is a four-colour refutation of a nearly-complete de Grey graph, and **cadical refutes the whole
-1581 at four colours in 6,755 s — 1.88 hours** (measured this session; it is why M06 used his
-two-copy decomposition rather than the whole graph). So a confirmed fan in de Grey's graph costs
-what the χ ≥ 5 proof costs. A rejected pivot costs a second, and 1,577 of them did.
+**Two independent confirmations, so this rests on more than one solver run each:**
+
+* **M07 found the same count by a different method.** Its single-deletion sweep over half A's
+  *forcing* property — 789 independent refutations, a different question from colourability of the
+  whole graph — reported **2 vertices deletable**, and de Grey's witness is two halves, so 2 × 2 = 4.
+  The roadmap has said "1581 → 1577 and stops" since M07 landed.
+* **The four are two rotation-symmetric pairs.** `1420 − 630 = 1423 − 633 = 790`, exactly the index
+  offset between his two halves — so each removable vertex in half A has its image in half B
+  removable too, as his construction's own symmetry requires.
+
+The cost is the honest statement of what rung D asks. A *confirmed* fan at this scale is a
+four-colour refutation of a nearly-complete 1581-point graph, and **cadical refutes the whole thing
+at four colours in 6,755 s — 1.88 hours** (measured this session; it is why M06 used his two-copy
+decomposition rather than the whole graph). The four hits cost 1.7–1.9 hours each. **A rejected
+pivot costs a second, and 1,577 of them did.**
+
+**And this is the sharpest form of the milestone's thesis.** de Grey's graph, *unshrunk*, carries a
+five-colour fan. Heule's 510 and 553 — the same mathematics, shrunk — carry none at any pivot, and
+that is now proved in Lean. **The shrinking is what removed it.**
 
 ---
 
@@ -576,13 +593,15 @@ confined to a **single distance class**, which is what the closing move needs. S
 five colours is exactly the difficulty M14 measured at four: not *finding* a fan, but **narrowing**
 one. The identity makes existence free and leaves narrowness untouched.
 
-### de Grey's 1581, reported as it stands
+### de Grey's 1581: the fan is there, and no certificate for it exists
 
-1,566 pivots settled at a 300 s budget, none removable. Fifteen unsettled; re-run at four hours each,
-eleven more came back critical and **four are still running**. So his graph is critical at **1,577 of
-1,581 vertices with four unknown** — and unknown is not folded into either answer, so `emit_critical`
-refuses and **no certificate for de Grey's graph is emitted**. That is the intended behaviour, not a
-gap: the emitter is built to refuse rather than pad, and both refusals were watched.
+His graph is **not** five-vertex-critical. It is critical at 1,577 of 1,581 vertices and **removable
+at four** — 630, 633, 1420, 1423 — so a five-colour fan sits at each, and `emit_critical` refuses to
+write a certificate for it, naming those four. That is the emitter working: there is nothing to
+certify there, because the claim would be false.
+
+Which makes the contrast the result. **The one graph in this repository that was never shrunk is the
+one that still has a fan** — and it is the one graph known to sit at the χ ≥ 5 boundary.
 
 ### The gate
 
