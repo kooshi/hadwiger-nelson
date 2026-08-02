@@ -345,8 +345,14 @@ silently balloon M17.
 
 Recorded because three separate failures compounded, and each carries a lesson:
 
-1. **The tree damage.** 1,108 `.olean`s are missing (hashes and traces intact) — among them the
-   four Narrow* certificates, the Geom segments, and the Critical rows. The journal shows the
+1. **The tree damage.** *(Figure corrected after repair:)* the first count said 1,108 missing
+   `.olean`s, but that conflated real damage with ~1,061 stale `.olean.hash` residue files from
+   renamed module layouts (no source, no olean — never damage). The genuinely lost artifacts —
+   verified missing by direct listing — were the four Narrow* certificates, `NarrowFanDiagnose`,
+   the Geom segments, the Critical rows, and kin (~50 modules), plus whatever share of the
+   HalfA/HalfB data segments was real; all rebuilt by `scripts/build.sh` in **9 minutes** — the
+   lost modules were dominated by literal data tables (seconds each to re-elaborate), not by the
+   expensive kernel checks. The source-complete criterion now reports **zero missing**. The journal shows the
    pre-reboot machine in real distress: the replay's six workers segfaulted *simultaneously* at
    04:07 (consistent with files truncated/lost under their mmaps, not with six independent
    crashes), and there are **kernel oopses in ext4 lookup paths at 07:56–07:57**, immediately
@@ -365,12 +371,11 @@ Recorded because three separate failures compounded, and each carries a lesson:
    shape CLAUDE.md § *make the gate fail* documents from M04. The gate's lesson applies to
    every load-bearing shell command, not only the named checks.
 
-**Open question, decisive experiment queued (do not re-litigate from memory):** dependents of
-`Fan.lean` rebuilt after a pure `--`-comment edit, which *appears* to contradict M11's measured
-rule ("a `--` comment leaves the `.olean` byte-identical; dependents are not rebuilt"). But the
-rebuild wave is equally explained by those dependents' `.olean`s being among the already-missing.
-After the tree repair: copy `Fan.olean`, toggle a `--` comment, rebuild `Fan` alone, byte-compare.
-Until then the M11 rule is *suspect but not refuted*, and no layout decision should lean on it.
+**Open question — RESOLVED, M11 rule CONFIRMED.** The decisive experiment ran after the repair:
+`Fan.olean` saved, one `--` comment character toggled, `Fan` rebuilt alone — **byte-identical**;
+source restored, rebuilt again — still byte-identical. A `--` comment really is free downstream.
+The morning's rebuild wave was Lake *repairing the already-missing* `.olean`s of those dependents,
+not comment invalidation. Layout decisions may lean on the M11 rule again.
 
 **Repair sequence (serialized, one heavy job at a time, per Kooshi's RAM constraint):** hunt
 families finish (light) → `scripts/build.sh` restores the 1,108 (alone) → full replay relaunched
