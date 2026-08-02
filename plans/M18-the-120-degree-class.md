@@ -62,13 +62,17 @@ gradient M17's binary verdicts could not see.
 drives it is ambient — de Grey's graph is *built* from √3 rhombi — and §0 of the subplan must
 measure it rather than let the pretty 120° story absorb it.
 
-### (f) The ℤ/3 closure sweeps — in flight at stub time
+### (f) The ℤ/3 closure sweeps — run, both separated
 
 The closures at pivots 630 and 633 (4,678 points each; recipes
-`double(double(dg, p, 1/3), p, 1/3)`, second pivot key rescaled) were unswept by H1–H5 and are
-being swept as this stub is written; results land in the ledger
-(`tools/hunt_ledger.jsonl`, names `Z3-closure-dg{630,633}x1/3`). Whatever they say goes into §0
-verbatim — a hit is triaged per M17 §4; a miss gets its coverage statistic measured.
+`double(double(dg, p, 1/3), p, 1/3)`, second pivot key rescaled) were unswept by H1–H5. Swept
+2026-08-02 (ledger names `Z3-closure-dg{630,633}x1/3`): **both fully separated — 4,678 pivots
+and 20,013,206 classes each, zero confined, zero deferred** (578 and 551 calls, ~9 min each).
+Exactly what §1(c) predicts: rainbow triangles alone cannot confine — they spend 3 colours but
+nothing yet forces the pivot's unit-neighbourhood to spend the other 2. The *coverage gap* of
+these two closures — how many colours `N(p) ∪ C` actually carries across the pool's separating
+colourings — is the first number M18's §0 must produce: it is the distance-to-confinement the
+binary verdict cannot see, measured on the two most triangle-rich candidates in existence.
 
 ## 2. Candidate deliverables (to be refined at subplanning)
 
