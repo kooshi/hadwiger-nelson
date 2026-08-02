@@ -180,6 +180,44 @@ collapse of pivots (alternative: sweep one pivot per orbit via `Fan.map`'s licen
 because full sweeps measure 309 s worst-case and symmetry detection is new code in a load-bearing
 triage layer; revisit only if candidates grow past ~10k points).
 
+## 2.6 The obligation pass — what it settled
+
+**No induction anywhere.** All three theorems are compositions whose local obligations are already
+discharged upstream: `edgeGraph_mono` is `edgeGraph_adj_mono` behind the `≤`-introduction shape
+`Fan.lean:242` already uses (`intro a b hab`); `Fan.of_subset` is `(h.mono (edgeGraph_mono hE)).widen hQ`;
+`not_fan_of_subset` is its `mt`. The exhibited separation is a witness construction:
+`Coloring.mk id (fun hadj => hadj.ne)` on the triangle, then the `∃` collapses by `decide` on
+`(0 : Fin 3) = 1`.
+
+**The mutation audit, planned with countermodels named:**
+
+| perturbation | breaks? | countermodel |
+|---|---|---|
+| drop `hE` from `of_subset` | must break | fan on the path does **not** lift to the edgeless graph: new committed control `¬ Fan (edgeGraph 3 []) 2 0 [2]` (colouring `v = 0 ? 0 : 1`, valid vacuously) |
+| drop `hQ` | must break | **already committed at M15** — `Fan.lean:285`: `¬ Fan (edgeGraph 4 pendantTriangle) 3 3 [1]` though `Fan … [1, 2]` holds; cited, not restated |
+| reverse the inclusion | must not elaborate | misuse control; commit as a pinned-message `#guard_msgs` only if the elaborator's wording pins cleanly, else record here |
+
+**The control expectation is measured and pinned (m10 landed):** de Grey's 397-point
+configuration at four colours carries **exactly 25 confined fans — 13 at r² = 4 and 12 at
+r² = 4/9** (pivot 0, the origin, among them; 71 solver calls, 667 s, zero deferred). Two tiers:
+
+* **per-invocation self-test** (fast): the single-pivot origin known-hit (~10 s), an
+  injected-always-UNSAT solve that must surface as CONFINED, the never-answering oracle that must
+  surface as NO VERDICT, the category-leak audit deliberately broken and watched red, and the
+  duplicate-point guard fed a duplicated configuration and watched refuse by name.
+* **milestone-gate control** (667 s, run once and recorded): the all-pivots known-hit must report
+  exactly the 25, at exactly those two classes. A rescan that cannot re-find all of de Grey's
+  four-colour narrow fans is not credible hunting five-colour ones.
+
+**Tool-side local obligations** (each an assert at the site, aggregating to the candidate line):
+per-pivot categories partition the classes; pool admission asserts proper + separating; the bare
+graph is solved before any class (UNSAT → its own "bare-UNSAT, χ≥6-triage" verdict — a *triage*
+word, never a claim; unknown → NO VERDICT); point keys distinct; recipe serialization canonical
+(sorted-keys JSON, serialize∘parse fixpoint tested) so the ledger's resume-by-recipe and the
+regen-check re-derivation (re-interpret every ledger recipe, byte-compare point sets) are
+well-defined. The hunt driver's termination is by construction: H1–H4 are finite enumerations,
+H5 is a budget of six, every solve carries a budget.
+
 ## 3. The hunt — families, order, stopping rule
 
 Ranked by measured signal; each candidate = build + full all-pivots sweep at five colours, budget

@@ -81,4 +81,12 @@ colouring identifies them. -/
 example : ¬ Fan (edgeGraph 3 triE) 3 0 [1] :=
   sorry
 
+/-- Mutation control: the edge-inclusion hypothesis of `Fan.of_subset` is load-bearing. The
+path's fan does **not** lift to the edgeless graph — some 2-colouring of no constraints paints
+0 unlike 2 — so a version of the lemma without `hE` is false, witnessed here. (The partner
+hypothesis `hQ` has its committed countermodel upstream at `Fan.lean`'s pendant-triangle
+example: the fan over `[1, 2]` holds while the fan over `[1]` fails.) -/
+example : ¬ Fan (edgeGraph 3 ([] : List (Fin 3 × Fin 3))) 2 0 [2] :=
+  sorry
+
 end HadwigerNelson
