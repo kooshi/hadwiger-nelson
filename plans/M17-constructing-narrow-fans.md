@@ -124,25 +124,61 @@ them all for zero mathematical gain.
 
 **Already present, cited not restated**: `Fan.mono` (graph order, M15), `Fan.widen` (partner
 list), `edgeGraph_adj_mono` (edge-list order), `delete_edgeGraph` (vertex deletion = list
-filtering, M15's Critical), `fan_univ_iff` (the deletion identity). What M17 records is the
-composition in the tool's vocabulary:
+filtering, M15's Critical), `fan_univ_iff` (the deletion identity).
+
+**The domain pass sharpened the inventory.** The genuinely missing *structure* is one bridge —
+`edgeGraph_mono : E₁ ⊆ E₂ → edgeGraph n E₁ ≤ edgeGraph n E₂` (only the `Adj`-level form exists) —
+and both corollaries are one-line compositions over it. The pass also renamed them: the skeleton's
+`of_sublist` misstated its own hypothesis (`⊆` is `List.Subset`, membership; `List.Sublist` is a
+different relation, and the name is the statement):
 
 ```lean
+theorem edgeGraph_mono (hE : E₁ ⊆ E₂) : edgeGraph n E₁ ≤ edgeGraph n E₂
+
 /-- Edge-list form: more listed edges, wider partner list — still a fan. -/
-theorem Fan.of_sublist (hE : E' ⊆ E) (hQ : Q' ⊆ Q)
+theorem Fan.of_subset (hE : E' ⊆ E) (hQ : Q' ⊆ Q)
     (h : Fan (edgeGraph n E') k p Q') : Fan (edgeGraph n E) k p Q
 
 /-- **Deletion can never create a fan** — a separating colouring restricts to every
 sub-candidate; vertex deletion is the instance E' = E.filter (edges avoiding it). -/
-theorem not_fan_sublist_of_not_fan (hE : E' ⊆ E) (hQ : Q' ⊆ Q) :
+theorem not_fan_of_subset (hE : E' ⊆ E) (hQ : Q' ⊆ Q) :
     ¬ Fan (edgeGraph n E) k p Q → ¬ Fan (edgeGraph n E') k p Q'
 ```
 
 plus spec examples on the path-in-triangle instance (the fan that lifts; the separation that
 survives deletion; the separation *exhibited*, not assumed — a `∀` over an empty domain proves
-nothing). Skeleton elaborates with three tracked `sorry`s.
+nothing). Final names are the experience pass's to confirm.
 
-Names, binders, and the exact corollary surface are the modeling passes' to settle.
+## 2.5 The shape — tools (domain pass)
+
+**The recipe algebra is the tool's core datatype.** Walking H1–H5 as data collapsed them: H2's
+vertex-glue *is* H1's doubling (`spindle(cfg, seam, member)` — the rotation depends only on the
+class's r², not on which member), and H3's translation glue is `union ∘ translate`. Every
+candidate in every family is a tree over **five constructors**:
+
+    recipe ::= base(name) | double(recipe, pivot_key, r²) | translate(recipe, vec)
+             | orbit(recipe, group) | union(recipe, recipe)
+
+— exactly `construct.py`'s existing move calculus. One small interpreter maps a recipe to its
+point set; the JSONL ledger stores the *recipe* beside the result, so every candidate examined is
+independently re-derivable (the witness-independence principle landing as a datatype, not prose).
+Pivots inside recipes are named by exact coordinate key, never by index — indices do not survive
+`dedup`, a lesson `construct.index_of` already carries.
+
+**Two seams the measurement scripts sidestepped, now in the sweep's spec:**
+
+* **The bare graph is solved first.** If a candidate is already 5-UNSAT, every class would read
+  "confined" — garbage. The opening solve seeds the pool on SAT; on UNSAT the candidate is a
+  screaming χ≥6-candidate verdict of its own kind (not a fan question); on unknown, NO VERDICT.
+* **Distinct-point guard.** A duplicated plane point puts a distance-0 "partner" in a class and
+  the joined graph would force apart two names for one point. Recipe ops dedup by construction;
+  the sweep still asserts key-distinctness before believing anything.
+
+**Settled here**: `narrow.sweep_pivot` grows an optional shared-pool parameter (rescan must not
+reimplement the class walk — one source of truth for the triage discipline); no symmetry-orbit
+collapse of pivots (alternative: sweep one pivot per orbit via `Fan.map`'s licence — rejected
+because full sweeps measure 309 s worst-case and symmetry detection is new code in a load-bearing
+triage layer; revisit only if candidates grow past ~10k points).
 
 ## 3. The hunt — families, order, stopping rule
 
