@@ -249,6 +249,42 @@ lower endpoint squares large for the wrong reason); drop the `!colourings.isEmpt
 (`sound`'s nil case must fail); swap `pairwise_lt`'s `<` for `≤` (index_eq must fail); state
 `sound` without `pivot ∉ Q` (must fail on the adversarial `Fan G k p [p]`).
 
+## 3.6 The surfaces (experience pass, 2026-08-02)
+
+Walked with three consumers in the chair: the generated module that instantiates the certificate,
+the sceptic reading the headline, and the person holding a failed check at 1,581 vertices.
+
+* **The generated call site is one argument.** `sound` was taking `(hD) (hk) (hchk)` and every
+  generated module would have written the same two `(by decide)`s — the standing smell that an
+  argument every caller fumbles identically is the argument's bug (M08, M11 precedents). The
+  check hypothesis moves first and the side conditions become `autoParam`s:
+  `cert630.sound (by decide +kernel)`. The spec example now pins exactly that call shape.
+* **The failing day gets a fault walk, downstream.** A failed `decide +kernel` at 1,581 vertices
+  prints an unprintable term (M07's fault-table row). `NarrowFanDiagnose.lean` (to be written at
+  implementation, `#eval`-only, nothing imports it) walks the certificate and names the first
+  fault in the user's vocabulary — vertex number, class index, the decoded `r²` in the domain's
+  own rendering, colouring index — with the drift-guard theorem `firstFault = none ↔ check = true`
+  living in the *diagnostic* module, so the frozen checker never moves when the renderer does
+  (M04's arrangement at M07's placement; M05's checker-is-diagnostic was weighed and rejected
+  here because the checker sits upstream of generated certificates, where a rewrite costs hours).
+* **Build memory is a surface too.** One `check` reduction walks 1,580 tower `distSq`s; at M02's
+  measured ~12 MB/edge the peak is ~19 GB per pivot. Fine two-at-a-time on the desktop, marginal
+  on the laptop — the generated module's docstring must say so, and the build schedule runs the
+  four pivot modules at width 2. If implementation measures worse than ~25 GB, the fallback is
+  the `criticalFrom`-style start/length chunking M15 already ships.
+* **Names read aloud**: the headline is `deGrey_no_narrow_fan_630`, "narrow fan" defined in the
+  docstring's first line as *a fan confined to vertices at one real distance from the pivot*;
+  the docstring carries the sceptic's block (claim, re-check commands, axiom list) per M06's
+  headline precedent. `exact?` discoverability checked by shape: the conclusion is `¬ Fan …`,
+  so the search unifies it and hands back the two hypotheses.
+* **`SqrtBounds.std`** — a committed 2⁴⁰-scale default so an M17 session probing distances has
+  precise bounds without computing digits; the emitter still emits its own.
+* **`tools/narrow.py` report lines are self-auditing**: every per-pivot line carries
+  `classes = pool-rejected + separated + hits + DEFERRED` so a dropped category is visible as
+  arithmetic, the deferred count prints unconditionally, and a nonzero deferred count downgrades
+  the verdict line to `NO VERDICT` by construction (the injected never-answering oracle control
+  watches exactly this).
+
 ## 4. Negative controls (each to be watched red)
 
 | control | goes red when |

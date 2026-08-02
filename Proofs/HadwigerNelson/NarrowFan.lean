@@ -142,7 +142,7 @@ The proof's shape: an empty `Q` is refuted by any committed colouring; a nonempt
 `index_eq_of_eval_eq` force `classId q = classId q₀`, and the class's hinted colouring separates
 all of `Q` at once. -/
 theorem sound (c : NarrowCert n) {verts : Fin n → Pt} {E : List (Fin n × Fin n)} {D : ℤ}
-    (hD : D ≠ 0) (hk : 0 < c.k) (hchk : c.check verts E = true) :
+    (hchk : c.check verts E = true) (hD : D ≠ 0 := by decide) (hk : 0 < c.k := by decide) :
     ∀ (r : ℝ) (Q : List (Fin n)), c.pivot ∉ Q →
       (∀ q ∈ Q, dist ((verts q).toPlane D) ((verts c.pivot).toPlane D) = r) →
       ¬ Fan (edgeGraph n E) c.k c.pivot Q := sorry
@@ -203,12 +203,14 @@ private def specCert : NarrowCert 3 where
 #guard !((({ specCert with colourings := [0 + 1 * 4 + 0 * 16] } : NarrowCert 3)).check
   specVerts specEdges)
 
-/-- The specification's payoff, exactly as a generated module will consume it: no equidistant
+/-- The specification's payoff, exactly as a generated module will consume it — one argument, the
+kernel-decided certificate check; the denominator and colour-count side conditions discharge as
+`autoParam`s because every call site would have written the same two `by decide`s. No equidistant
 partner list is a fan at the pivot, at any real distance. -/
 example :
     ∀ (r : ℝ) (Q : List (Fin 3)), (0 : Fin 3) ∉ Q →
       (∀ q ∈ Q, dist ((specVerts q).toPlane 1) ((specVerts 0).toPlane 1) = r) →
       ¬ Fan (edgeGraph 3 specEdges) 3 0 Q :=
-  specCert.sound (by decide) (by decide) (by decide +kernel)
+  specCert.sound (by decide +kernel)
 
 end HadwigerNelson
