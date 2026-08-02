@@ -396,6 +396,16 @@ real distance; these say the only four known fans offer it nothing. -/
 #print axioms deGreyNarrow1423_check
 #print axioms deGrey_no_narrow_fan_1423
 
+/-! ## M17 — deletion never creates a fan
+
+The pruning corollaries the hunt's growth-only design rests on: list inclusion lifts to the graph
+order, a fan lifts with it, and — contrapositively — a separating colouring restricts to every
+sub-candidate. -/
+
+#print axioms edgeGraph_mono
+#print axioms Fan.of_subset
+#print axioms not_fan_of_subset
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

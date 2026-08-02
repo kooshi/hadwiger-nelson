@@ -32,7 +32,7 @@ to the `≤` that `Fan.mono` and every future monotonicity argument consume. Its
 upstream is not re-elaborated for one lemma. -/
 theorem edgeGraph_mono {n : ℕ} {E₁ E₂ : List (Fin n × Fin n)} (hE : E₁ ⊆ E₂) :
     edgeGraph n E₁ ≤ edgeGraph n E₂ :=
-  sorry
+  fun _ _ hab => edgeGraph_adj_mono hE hab
 
 /-- **Edge-list monotonicity, partner widening folded in**: more listed edges and a wider partner
 list still carry the fan. `Fan.mono` over `edgeGraph_mono`, then `Fan.widen` — composed into the
@@ -40,7 +40,7 @@ shape `tools/rescan.py` quotes. -/
 theorem Fan.of_subset {n : ℕ} {E E' : List (Fin n × Fin n)} {p : Fin n} {Q Q' : List (Fin n)}
     (hE : E' ⊆ E) (hQ : Q' ⊆ Q) (h : Fan (edgeGraph n E') k p Q') :
     Fan (edgeGraph n E) k p Q :=
-  sorry
+  (h.mono (edgeGraph_mono hE)).widen hQ
 
 /-- **Deletion can never create a fan** — the contrapositive the hunt relies on, stated in the
 direction the tool meets it: a proper colouring separating the pivot from `Q` on the larger edge
@@ -50,7 +50,7 @@ vertex is the instance `E' = E.filter (edges avoiding it)`, `Q' = Q.erase it`. -
 theorem not_fan_of_subset {n : ℕ} {E E' : List (Fin n × Fin n)} {p : Fin n}
     {Q Q' : List (Fin n)} (hE : E' ⊆ E) (hQ : Q' ⊆ Q) (h : ¬ Fan (edgeGraph n E) k p Q) :
     ¬ Fan (edgeGraph n E') k p Q' :=
-  sorry
+  fun hf => h (hf.of_subset hE hQ)
 
 /-! ## Spec examples — the statements say what they are believed to say
 
@@ -78,15 +78,33 @@ example (h : ¬ Fan (edgeGraph 3 triE) 3 0 [1]) : ¬ Fan (edgeGraph 3 pathE) 3 0
 /-- …and that hypothesis is inhabited — a `∀` over an empty domain proves nothing, so the
 separation is exhibited, not assumed: 0 and 1 are adjacent in the triangle, so no proper
 colouring identifies them. -/
-example : ¬ Fan (edgeGraph 3 triE) 3 0 [1] :=
-  sorry
+example : ¬ Fan (edgeGraph 3 triE) 3 0 [1] := fun hf => by
+  obtain ⟨q, hq, hcq⟩ := hf (SimpleGraph.Coloring.mk id fun hadj => hadj.ne)
+  rw [List.mem_singleton] at hq
+  subst hq
+  exact absurd hcq (by decide)
+
+-- Misuse control: `Fan.of_subset` must not apply downward. Asking it to carry the triangle's
+-- fan to the *smaller* path hands `decide` the false inclusion, and the refusal names it.
+/--
+error: Tactic `decide` proved that the proposition
+  triE ⊆ pathE
+is false
+-/
+#guard_msgs in
+example (h : Fan (edgeGraph 3 triE) 2 0 [2]) : Fan (edgeGraph 3 pathE) 2 0 [2] :=
+  Fan.of_subset (by decide) (by simp) h
 
 /-- Mutation control: the edge-inclusion hypothesis of `Fan.of_subset` is load-bearing. The
 path's fan does **not** lift to the edgeless graph — some 2-colouring of no constraints paints
 0 unlike 2 — so a version of the lemma without `hE` is false, witnessed here. (The partner
 hypothesis `hQ` has its committed countermodel upstream at `Fan.lean`'s pendant-triangle
 example: the fan over `[1, 2]` holds while the fan over `[1]` fails.) -/
-example : ¬ Fan (edgeGraph 3 ([] : List (Fin 3 × Fin 3))) 2 0 [2] :=
-  sorry
+example : ¬ Fan (edgeGraph 3 ([] : List (Fin 3 × Fin 3))) 2 0 [2] := fun hf => by
+  obtain ⟨q, hq, hcq⟩ := hf (SimpleGraph.Coloring.mk (fun v => if v = 0 then 0 else 1)
+    fun hadj => absurd hadj.2 (by simp))
+  rw [List.mem_singleton] at hq
+  subst hq
+  exact absurd hcq (by decide)
 
 end HadwigerNelson

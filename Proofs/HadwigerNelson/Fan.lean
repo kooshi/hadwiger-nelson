@@ -143,6 +143,10 @@ theorem Fan.widen {p : V} {Q Q' : List V} (h : Fan G k p Q) (hsub : Q ⊆ Q') : 
 
 /-! ## Transport — one statement per way a fan travels -/
 
+-- M17's pruning corollaries (edge-list form of `mono`+`widen`, and the contrapositive "deletion
+-- never creates a fan") live in `FanMono.lean`, kept out of this module so the Narrow*
+-- certificates downstream are not re-kernel-checked for two one-line compositions.
+
 /-- **More edges only force more.** -/
 theorem Fan.mono {G' : SimpleGraph V} (hle : G ≤ G') {p : V} {Q : List V} (h : Fan G k p Q) :
     Fan G' k p Q :=

@@ -318,3 +318,39 @@ silently balloon M17.
   rebooted (environment event, not kernel rejections — a two-module replay passes clean post-reboot);
   and the **full-fan UNSAT control** relaunched at idle priority through the fan encoding
   (`build/fullfan-m17.log`), still belt-and-braces (the known-hit control covers the code path).
+
+## 7.5 Incident, 2026-08-02 morning — the build tree lost 1,108 compiled modules
+
+Recorded because three separate failures compounded, and each carries a lesson:
+
+1. **The tree damage.** 1,108 `.olean`s are missing (hashes and traces intact) — among them the
+   four Narrow* certificates, the Geom segments, and the Critical rows. The journal shows the
+   pre-reboot machine in real distress: the replay's six workers segfaulted *simultaneously* at
+   04:07 (consistent with files truncated/lost under their mmaps, not with six independent
+   crashes), and there are **kernel oopses in ext4 lookup paths at 07:56–07:57**, immediately
+   before the 08:11 reboot. The damage predates the morning's builds. Machine-health note for
+   Kooshi: this box already carries a "history of bad memory" flag in the replay script; kernel
+   oopses in filesystem code are worth an fsck/hardware check when convenient.
+2. **The 20 GB cap OOM-killed the repair.** Both morning `lake build` invocations ran in a
+   20 GB scope sized for one small module — but Lake had silently queued the *missing* heavy
+   modules too (a Narrow certificate peaks ~22 GB), and the journal confirms the cgroup
+   OOM-killing `lean` at 09:19. Lesson re-learned at full price: **the moment `lake build` might
+   queue more than the named module, it must run through `scripts/build.sh`** — the batched,
+   dependency-ordered builder exists precisely because a cap alone converts surprise into
+   breakage.
+3. **A grep-piped build read as a pass.** The second build's failure was swallowed by
+   `| grep | head` plus an unconditional echo — the exact "piped invocation reads as a pass"
+   shape CLAUDE.md § *make the gate fail* documents from M04. The gate's lesson applies to
+   every load-bearing shell command, not only the named checks.
+
+**Open question, decisive experiment queued (do not re-litigate from memory):** dependents of
+`Fan.lean` rebuilt after a pure `--`-comment edit, which *appears* to contradict M11's measured
+rule ("a `--` comment leaves the `.olean` byte-identical; dependents are not rebuilt"). But the
+rebuild wave is equally explained by those dependents' `.olean`s being among the already-missing.
+After the tree repair: copy `Fan.olean`, toggle a `--` comment, rebuild `Fan` alone, byte-compare.
+Until then the M11 rule is *suspect but not refuted*, and no layout decision should lean on it.
+
+**Repair sequence (serialized, one heavy job at a time, per Kooshi's RAM constraint):** hunt
+families finish (light) → `scripts/build.sh` restores the 1,108 (alone) → full replay relaunched
+(alone, overnight). The replay that was killed had wasted no verified work — it was going to fail
+on the missing modules regardless.

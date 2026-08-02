@@ -244,6 +244,23 @@ else
   fi
 fi
 
+# --- the M17 hunt instrument -------------------------------------------------------------------
+# rescan.py sweeps every pivot of constructed candidates; its self-test drives all four verdict
+# words to their triggers and watches every guard refuse. --rederive re-interprets every recipe
+# in the committed ledger and re-checks the built size, so the "searched X" artifact stays
+# independently re-derivable.
+echo "==> hunt instrument (rescan)"
+if ! python3 tools/rescan.py --self-test > "${V}/rescan-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/rescan-selftest.log"
+  echo "    FAIL: tools/rescan.py self-test"; FAIL=1
+elif [[ -f tools/hunt_ledger.jsonl ]] && \
+    ! python3 tools/rescan.py --rederive > "${V}/rescan-rederive.log" 2>&1; then
+  sed 's/^/    /' "${V}/rescan-rederive.log"
+  echo "    FAIL: a ledger recipe no longer rebuilds to its recorded size"; FAIL=1
+else
+  echo "    self-test green, ledger recipes re-derivable"
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

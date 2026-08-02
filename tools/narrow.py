@@ -79,6 +79,9 @@ class Sweep:
     models: list[dict[int, int]]
     calls: int
     elapsed: float
+    #: the classes that resisted the pool and needed their own solver call, with the answer —
+    #: the sweep's own tightness gradient (M17: the resisting histogram feeds the hunt's H5).
+    called: list = dc_field(default_factory=list)
 
     def line(self) -> str:
         cats = self.pool_rejected + len(self.separated) + len(self.confined) + len(self.deferred)
@@ -104,13 +107,16 @@ def colour_of(model: set[int], v: int, k: int) -> int:
 
 
 def sweep_pivot(n, edges, coords, p: int, k: int, budget: float | None = 300.0,
-                solve=None) -> Sweep:
+                solve=None, pool: list | None = None) -> Sweep:
     """Test every distance class at `p`, biggest spindle-able first, pool-rejecting between
-    solver calls. `solve` is injectable for the never-answering-oracle control."""
+    solver calls. `solve` is injectable for the never-answering-oracle control. `pool` is
+    **shared and grown in place** when supplied — M17's all-pivots sweep passes one pool across
+    every pivot of a candidate, since a separating colouring separates at every pivot at once."""
     do_solve = solve if solve is not None else _solve
     cl = classes_at(coords, p)
     keys = sorted(cl.keys(), key=lambda kk: (0 if is_rational(kk) else 1, -len(cl[kk])))
-    pool: list[dict[int, int]] = []
+    if pool is None:
+        pool = []
     sw = Sweep(pivot=p, n_classes=len(cl), pool_rejected=0, separated=[], confined=[],
                deferred=[], models=pool, calls=0, elapsed=0.0)
     t0 = time.time()
@@ -122,6 +128,7 @@ def sweep_pivot(n, edges, coords, p: int, k: int, budget: float | None = 300.0,
         t1 = time.time()
         st, model = do_solve(base_clauses(n, fanEdges(edges, p, Q), k), k * n, budget)
         sw.calls += 1
+        sw.called.append((kk, st))
         if st == "sat":
             colours = {v: colour_of(model, v, k) for v in range(n)}
             assert all(colours[a] != colours[b] for a, b in edges if a != b), \

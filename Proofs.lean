@@ -14,6 +14,7 @@ import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Critical
 import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.Fan
+import Proofs.HadwigerNelson.FanMono
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
