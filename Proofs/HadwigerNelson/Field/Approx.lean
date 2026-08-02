@@ -65,20 +65,84 @@ def mul (I J : Ival) : Ival :=
    max (max (I.lo * J.lo) (I.lo * J.hi)) (max (I.hi * J.lo) (I.hi * J.hi))⟩
 
 /-- An integer is in its own exact interval at denominator 1. -/
-theorem mem_ofInt (m : ℤ) : (ofInt m).Mem 1 (m : ℝ) := sorry
+theorem mem_ofInt (m : ℤ) : (ofInt m).Mem 1 (m : ℝ) := by
+  simp [Mem, ofInt]
 
 /-- Rescaling is sound: same real, denominator multiplied by `c`. -/
 theorem Mem.scaleUp {I : Ival} {s : ℕ} {x : ℝ} (h : I.Mem s x) (c : ℕ) :
-    (I.scaleUp c).Mem (s * c) x := sorry
+    (I.scaleUp c).Mem (s * c) x := by
+  obtain ⟨h1, h2⟩ := h
+  have hc : (0 : ℝ) ≤ (c : ℕ) := Nat.cast_nonneg c
+  constructor
+  · calc ((I.lo * c : ℤ) : ℝ) = (I.lo : ℝ) * c := by push_cast; ring
+      _ ≤ x * s * c := mul_le_mul_of_nonneg_right h1 hc
+      _ = x * (s * c : ℕ) := by push_cast; ring
+  · calc x * ((s * c : ℕ) : ℝ) = x * s * c := by push_cast; ring
+      _ ≤ (I.hi : ℝ) * c := mul_le_mul_of_nonneg_right h2 hc
+      _ = ((I.hi * c : ℤ) : ℝ) := by push_cast; ring
 
 /-- Interval addition is sound at a shared denominator. -/
 theorem Mem.add {I J : Ival} {s : ℕ} {x y : ℝ} (hx : I.Mem s x) (hy : J.Mem s y) :
-    (I.add J).Mem s (x + y) := sorry
+    (I.add J).Mem s (x + y) := by
+  obtain ⟨hx1, hx2⟩ := hx
+  obtain ⟨hy1, hy2⟩ := hy
+  constructor
+  · calc ((I.lo + J.lo : ℤ) : ℝ) = (I.lo : ℝ) + J.lo := by push_cast; ring
+      _ ≤ x * s + y * s := add_le_add hx1 hy1
+      _ = (x + y) * s := by ring
+  · calc (x + y) * (s : ℝ) = x * s + y * s := by ring
+      _ ≤ (I.hi : ℝ) + J.hi := add_le_add hx2 hy2
+      _ = ((I.hi + J.hi : ℤ) : ℝ) := by push_cast; ring
+
+/-- The corner bash over ℝ, once: a product of bracketed values is bracketed by the four corner
+products. A bilinear function on a rectangle attains its extrema at the corners; Mathlib was
+grepped for an `Icc`-product lemma to cite and has none in this shape. -/
+private theorem corner_bounds {a b A B C D : ℝ} (hA : A ≤ a) (hB : a ≤ B) (hC : C ≤ b)
+    (hD : b ≤ D) :
+    min (min (A * C) (A * D)) (min (B * C) (B * D)) ≤ a * b ∧
+      a * b ≤ max (max (A * C) (A * D)) (max (B * C) (B * D)) := by
+  constructor
+  · rcases le_total 0 b with hb | hb
+    · rcases le_total 0 A with hA0 | hA0
+      · exact ((min_le_left _ _).trans (min_le_left _ _)).trans
+          ((mul_le_mul_of_nonneg_left hC hA0).trans (mul_le_mul_of_nonneg_right hA hb))
+      · exact ((min_le_left _ _).trans (min_le_right _ _)).trans
+          ((mul_le_mul_of_nonpos_left hD hA0).trans (mul_le_mul_of_nonneg_right hA hb))
+    · rcases le_total 0 B with hB0 | hB0
+      · exact ((min_le_right _ _).trans (min_le_left _ _)).trans
+          ((mul_le_mul_of_nonneg_left hC hB0).trans (mul_le_mul_of_nonpos_right hB hb))
+      · exact ((min_le_right _ _).trans (min_le_right _ _)).trans
+          ((mul_le_mul_of_nonpos_left hD hB0).trans (mul_le_mul_of_nonpos_right hB hb))
+  · rcases le_total 0 b with hb | hb
+    · rcases le_total 0 B with hB0 | hB0
+      · exact ((mul_le_mul_of_nonneg_right hB hb).trans
+          (mul_le_mul_of_nonneg_left hD hB0)).trans ((le_max_right _ _).trans (le_max_right _ _))
+      · exact ((mul_le_mul_of_nonneg_right hB hb).trans
+          (mul_le_mul_of_nonpos_left hC hB0)).trans ((le_max_left _ _).trans (le_max_right _ _))
+    · rcases le_total 0 A with hA0 | hA0
+      · exact ((mul_le_mul_of_nonpos_right hA hb).trans
+          (mul_le_mul_of_nonneg_left hD hA0)).trans ((le_max_right _ _).trans (le_max_left _ _))
+      · exact ((mul_le_mul_of_nonpos_right hA hb).trans
+          (mul_le_mul_of_nonpos_left hC hA0)).trans ((le_max_left _ _).trans (le_max_left _ _))
 
 /-- Interval multiplication is sound — a bilinear function on a rectangle attains its extrema at
 the corners — and the denominators multiply. -/
 theorem Mem.mul {I J : Ival} {s t : ℕ} {x y : ℝ} (hx : I.Mem s x) (hy : J.Mem t y) :
-    (I.mul J).Mem (s * t) (x * y) := sorry
+    (I.mul J).Mem (s * t) (x * y) := by
+  have h := corner_bounds hx.1 hx.2 hy.1 hy.2
+  have hxy : x * s * (y * t) = x * y * ((s * t : ℕ) : ℝ) := by push_cast; ring
+  constructor
+  · calc ((Ival.mul I J).lo : ℝ)
+        = min (min ((I.lo : ℝ) * J.lo) ((I.lo : ℝ) * J.hi))
+            (min ((I.hi : ℝ) * J.lo) ((I.hi : ℝ) * J.hi)) := by
+          simp only [Ival.mul]; push_cast [Int.cast_min, Int.cast_max]; rfl
+      _ ≤ x * s * (y * t) := h.1
+      _ = x * y * ((s * t : ℕ) : ℝ) := hxy
+  · calc x * y * ((s * t : ℕ) : ℝ) = x * s * (y * t) := hxy.symm
+      _ ≤ max (max ((I.lo : ℝ) * J.lo) ((I.lo : ℝ) * J.hi))
+            (max ((I.hi : ℝ) * J.lo) ((I.hi : ℝ) * J.hi)) := h.2
+      _ = ((Ival.mul I J).hi : ℝ) := by
+          simp only [Ival.mul]; push_cast [Int.cast_min, Int.cast_max]; rfl
 
 end Ival
 
@@ -90,7 +154,21 @@ def sqrtOk (d : ℕ) (I : Ival) (s : ℕ) : Bool :=
 
 /-- A checked square-root bound brackets the square root. -/
 theorem mem_sqrt {d : ℕ} {I : Ival} {s : ℕ} (h : sqrtOk d I s = true) :
-    I.Mem s (Real.sqrt d) := sorry
+    I.Mem s (Real.sqrt d) := by
+  simp only [sqrtOk, Bool.and_eq_true, decide_eq_true_eq] at h
+  obtain ⟨⟨⟨hlo, hhi⟩, hlosq⟩, hhisq⟩ := h
+  have hds : Real.sqrt d * s = Real.sqrt ((d : ℝ) * s ^ 2) := by
+    rw [Real.sqrt_mul' _ (by positivity : (0 : ℝ) ≤ ((s : ℕ) : ℝ) ^ 2),
+      Real.sqrt_sq (Nat.cast_nonneg s)]
+  have hlosq' : ((I.lo : ℝ)) * I.lo ≤ (d : ℝ) * s * s := by exact_mod_cast hlosq
+  have hhisq' : ((d : ℝ)) * s * s ≤ (I.hi : ℝ) * I.hi := by exact_mod_cast hhisq
+  constructor
+  · rw [hds]
+    refine (Real.le_sqrt (by exact_mod_cast hlo) (by positivity)).mpr ?_
+    nlinarith [hlosq']
+  · rw [hds]
+    refine Real.sqrt_le_iff.mpr ⟨by exact_mod_cast hhi, ?_⟩
+    nlinarith [hhisq']
 
 /-- One integer interval per generator of `ℚ(√3,√5,√7,√11)`, all over one `scale`. Emitter-chosen
 data; `Ok` below is the only thing believed about it, and precision is a tuning parameter the
@@ -120,12 +198,20 @@ def Adjoin.approx {K : Type*} {d : ℕ} (f : K → Ival) (Id : Ival) (s : ℕ) (
     Ival :=
   ((f x.re).scaleUp s).add ((f x.im).mul Id)
 
+/-- `Adjoin.eval` on a pair, as its definition computes it. Stated once so no proof below unfolds
+the sealed `eval` at its use sites; this module owns the interval mirror of that computation. -/
+private theorem eval_mk {K : Type*} [CommRing K] [NatScalar K] {d : ℕ} (evalBase : K →+* ℝ)
+    (r : ℝ) (hr : r ^ 2 = (d : ℝ)) (x : Adjoin d K) :
+    Adjoin.eval evalBase r hr x = evalBase x.re + evalBase x.im * r := rfl
+
 /-- One tower level is sound: if `f` brackets `evalBase` at denominator `t` and `Id` brackets `r`
 at denominator `s`, the level brackets `Adjoin.eval evalBase r hr` at denominator `t·s`. -/
 theorem Adjoin.mem_approx {K : Type*} [CommRing K] [NatScalar K] {d : ℕ} {evalBase : K →+* ℝ}
     {r : ℝ} {hr : r ^ 2 = (d : ℝ)} {f : K → Ival} {t : ℕ}
     (hf : ∀ y : K, (f y).Mem t (evalBase y)) {Id : Ival} {s : ℕ} (hd : Id.Mem s r)
-    (x : Adjoin d K) : (Adjoin.approx f Id s x).Mem (t * s) (Adjoin.eval evalBase r hr x) := sorry
+    (x : Adjoin d K) : (Adjoin.approx f Id s x).Mem (t * s) (Adjoin.eval evalBase r hr x) := by
+  rw [eval_mk]
+  exact ((hf x.re).scaleUp s).add ((hf x.im).mul hd)
 
 /-- Interval evaluation of a `Q4` literal — the four levels of `Q4.eval` mirrored, each level
 multiplying the denominator by `B.scale`, landing at `B.scale⁴`. -/
@@ -136,7 +222,20 @@ def Q4.approx (B : SqrtBounds) : Q4 → Ival :=
 /-- **The instrument's soundness**: checked bounds make `Q4.approx` bracket `Q4.eval` at
 denominator `B.scale⁴`. -/
 theorem Q4.mem_approx {B : SqrtBounds} (hB : B.Ok = true) (x : Q4) :
-    (Q4.approx B x).Mem (B.scale ^ 4) (Q4.eval x) := sorry
+    (Q4.approx B x).Mem (B.scale ^ 4) (Q4.eval x) := by
+  simp only [SqrtBounds.Ok, Bool.and_eq_true] at hB
+  obtain ⟨⟨⟨h3, h5⟩, h7⟩, h11⟩ := hB
+  have hbase : ∀ y : ℤ, (Ival.ofInt y).Mem 1 ((Int.castRingHom ℝ) y) := fun y =>
+    Ival.mem_ofInt y
+  have hs : 1 * B.scale * B.scale * B.scale * B.scale = B.scale ^ 4 := by ring
+  rw [← hs]
+  exact Adjoin.mem_approx
+    (fun y => Adjoin.mem_approx
+      (fun y => Adjoin.mem_approx
+        (fun y => Adjoin.mem_approx hbase (mem_sqrt h3) y)
+        (mem_sqrt h5) y)
+      (mem_sqrt h7) y)
+    (mem_sqrt h11) x
 
 /-- Adjacent intervals are strictly disjoint, in order. -/
 def sepIvals : List Ival → Bool
@@ -153,22 +252,53 @@ def sepChain (B : SqrtBounds) (l : List Q4) : Bool :=
 data touches `ℝ`'s order; everything below is list plumbing over it. At denominator 0 the two
 membership facts already contradict the disjointness, so no positivity hypothesis is carried. -/
 theorem eval_lt_of_hi_lt_lo {B : SqrtBounds} (hB : B.Ok = true) {a b : Q4}
-    (h : (Q4.approx B a).hi < (Q4.approx B b).lo) : Q4.eval a < Q4.eval b := sorry
+    (h : (Q4.approx B a).hi < (Q4.approx B b).lo) : Q4.eval a < Q4.eval b := by
+  have ha := Q4.mem_approx hB a
+  have hb := Q4.mem_approx hB b
+  have hcast : ((Q4.approx B a).hi : ℝ) < ((Q4.approx B b).lo : ℝ) := by exact_mod_cast h
+  rcases Nat.eq_zero_or_pos (B.scale ^ 4) with h0 | hpos
+  · rw [h0] at ha hb
+    have h1 : (0 : ℝ) ≤ ((Q4.approx B a).hi : ℝ) := by simpa using ha.2
+    have h2 : ((Q4.approx B b).lo : ℝ) ≤ 0 := by simpa using hb.1
+    linarith
+  · have hm : (0 : ℝ) ≤ ((B.scale ^ 4 : ℕ) : ℝ) := by positivity
+    exact lt_of_mul_lt_mul_right (lt_of_le_of_lt ha.2 (lt_of_lt_of_le hcast hb.1)) hm
 
 /-- A separated list evaluates strictly increasingly — at *all* pairs of positions, transitivity
 folded in once here rather than at every consumer. -/
 theorem pairwise_lt_of_sepChain {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
-    (h : sepChain B l = true) : l.Pairwise (fun a b => Q4.eval a < Q4.eval b) := sorry
+    (h : sepChain B l = true) : l.Pairwise (fun a b => Q4.eval a < Q4.eval b) := by
+  haveI : Trans (fun a b : Q4 => Q4.eval a < Q4.eval b) (fun a b : Q4 => Q4.eval a < Q4.eval b)
+      (fun a b : Q4 => Q4.eval a < Q4.eval b) := ⟨fun h1 h2 => lt_trans h1 h2⟩
+  rw [← List.isChain_iff_pairwise]
+  induction l with
+  | nil => simp
+  | cons a t ih =>
+    cases t with
+    | nil => simp
+    | cons b t' =>
+      rw [List.isChain_cons_cons]
+      simp only [sepChain, List.map, sepIvals, Bool.and_eq_true, decide_eq_true_eq] at h
+      exact ⟨eval_lt_of_hi_lt_lo hB h.1, ih h.2⟩
 
 /-- A separated list has pairwise-distinct real values. -/
 theorem pairwise_ne_of_sepChain {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
-    (h : sepChain B l = true) : l.Pairwise (fun a b => Q4.eval a ≠ Q4.eval b) := sorry
+    (h : sepChain B l = true) : l.Pairwise (fun a b => Q4.eval a ≠ Q4.eval b) :=
+  (pairwise_lt_of_sepChain hB h).imp ne_of_lt
 
 /-- **The consumer's form**: in a separated list, equal evaluations force equal positions. This is
 the exact step that merges "same real distance" into "same class" in M16's certificate. -/
 theorem index_eq_of_eval_eq {B : SqrtBounds} (hB : B.Ok = true) {l : List Q4}
     (h : sepChain B l = true) {i j : ℕ} {a b : Q4} (ha : l[i]? = some a) (hb : l[j]? = some b)
-    (he : Q4.eval a = Q4.eval b) : i = j := sorry
+    (he : Q4.eval a = Q4.eval b) : i = j := by
+  by_contra hne
+  have hp := List.pairwise_iff_getElem.mp (pairwise_lt_of_sepChain hB h)
+  obtain ⟨hi, hgi⟩ := List.getElem?_eq_some_iff.mp ha
+  obtain ⟨hj, hgj⟩ := List.getElem?_eq_some_iff.mp hb
+  rcases Nat.lt_or_ge i j with hij | hij
+  · exact absurd he (hgi ▸ hgj ▸ ne_of_lt (hp i j hi hj hij))
+  · exact absurd he.symm
+      (hgj ▸ hgi ▸ ne_of_lt (hp j i hj hi (lt_of_le_of_ne hij (Ne.symm hne))))
 
 /-! ## Specification
 

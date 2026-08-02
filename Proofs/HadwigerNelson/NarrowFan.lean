@@ -65,7 +65,27 @@ its values are readable back — the readable form is what separation arguments 
 theorem exists_coloring_of_proper {n : ℕ} {E : List (Fin n × Fin n)} {bits k col : ℕ}
     (hk : 0 < k) (h : properColouring E bits k col = true) :
     ∃ C : (edgeGraph n E).Coloring (Fin k),
-      ∀ v : Fin n, (C v).val = unpackColor bits k col v.val := sorry
+      ∀ v : Fin n, (C v).val = unpackColor bits k col v.val := by
+  rw [properColouring, List.all_eq_true] at h
+  refine ⟨SimpleGraph.Coloring.mk
+    (fun v => ⟨unpackColor bits k col v.val, Nat.mod_lt _ hk⟩) ?_, fun v => rfl⟩
+  intro a b hab
+  rw [edgeGraph_adj] at hab
+  obtain ⟨hne, hmem⟩ := hab
+  have key : ∀ {i j : Fin n}, (i, j) ∈ E → i ≠ j →
+      unpackColor bits k col i.val ≠ unpackColor bits k col j.val := by
+    intro i j hij hne'
+    have hrow := h _ hij
+    simp only [Bool.or_eq_true, beq_iff_eq, bne_iff_ne, ne_eq] at hrow
+    rcases hrow with hc | hc
+    · exact absurd hc hne'
+    · exact hc
+  intro hc
+  have hc' : unpackColor bits k col a.val = unpackColor bits k col b.val :=
+    congrArg Fin.val hc
+  rcases hmem with hij | hji
+  · exact key hij hne hc'
+  · exact key hji hne.symm hc'.symm
 
 /-- **The narrow-fan certificate**: everything the emitter claims about one pivot, as data.
 
@@ -131,7 +151,48 @@ def check (c : NarrowCert n) (verts : Fin n → Pt) (E : List (Fin n × Fin n)) 
 backward through `dist`. The only step that touches `ℝ`'s geometry, isolated here. -/
 theorem eval_distSq_eq_of_dist_eq {D : ℤ} (hD : D ≠ 0) {p q q' : Pt}
     (h : dist (q.toPlane D) (p.toPlane D) = dist (q'.toPlane D) (p.toPlane D)) :
-    Q4.eval (q.distSq p) = Q4.eval (q'.distSq p) := sorry
+    Q4.eval (q.distSq p) = Q4.eval (q'.distSq p) := by
+  have hD' : ((D : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.mpr hD
+  have key : ∀ z : Pt,
+      Q4.eval (z.distSq p) = Complex.normSq (z.toPlane D - p.toPlane D) * (D : ℝ) ^ 2 := by
+    intro z
+    rw [eval_distSq]
+    simp only [Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Pt.toPlane]
+    field_simp
+  have hnorm : Complex.normSq (q.toPlane D - p.toPlane D)
+      = Complex.normSq (q'.toPlane D - p.toPlane D) := by
+    have e : Real.sqrt (Complex.normSq (q.toPlane D - p.toPlane D))
+        = Real.sqrt (Complex.normSq (q'.toPlane D - p.toPlane D)) := by
+      rw [← Complex.norm_def, ← Complex.norm_def, ← Complex.dist_eq, ← Complex.dist_eq]
+      exact h
+    calc Complex.normSq (q.toPlane D - p.toPlane D)
+        = Real.sqrt (Complex.normSq (q.toPlane D - p.toPlane D)) ^ 2 := by
+          rw [Real.sq_sqrt (Complex.normSq_nonneg _)]
+      _ = Real.sqrt (Complex.normSq (q'.toPlane D - p.toPlane D)) ^ 2 := by rw [e]
+      _ = Complex.normSq (q'.toPlane D - p.toPlane D) := Real.sq_sqrt (Complex.normSq_nonneg _)
+  rw [key q, key q', hnorm]
+
+/-- What one passed vertex check yields, in the form the soundness proof consumes: the packed
+class value its id resolves to, the exact-distance binding, and the hinted colouring with its
+separation fact. Private because it is match plumbing, not mathematics. -/
+private theorem checkVertex_spec {c : NarrowCert n} {verts : Fin n → Pt} {v : Fin n}
+    (h : c.checkVertex verts v = true) :
+    ∃ pk col,
+      c.classVals[unpackNat c.idBits c.classIds v.val]? = some pk ∧
+      (verts v).distSq (verts c.pivot) = unpackQ4 c.valBits pk ∧
+      c.colourings[unpackNat c.hintBits c.hints (unpackNat c.idBits c.classIds v.val)]?
+        = some col ∧
+      unpackColor c.bits c.k col v.val ≠ unpackColor c.bits c.k col c.pivot.val := by
+  rw [checkVertex] at h
+  split at h
+  case _ => simp at h
+  case _ pk hpk =>
+    rw [Bool.and_eq_true] at h
+    obtain ⟨hd, h⟩ := h
+    split at h
+    case _ => simp at h
+    case _ col hcol =>
+      exact ⟨pk, col, hpk, by simpa using hd, hcol, by simpa using h⟩
 
 /-- **Soundness.** A checked certificate refutes every fan over an equidistant partner list:
 for every real `r`, no list of vertices avoiding the pivot and all at distance `r` from it is a
@@ -145,7 +206,59 @@ theorem sound (c : NarrowCert n) {verts : Fin n → Pt} {E : List (Fin n × Fin 
     (hchk : c.check verts E = true) (hD : D ≠ 0 := by decide) (hk : 0 < c.k := by decide) :
     ∀ (r : ℝ) (Q : List (Fin n)), c.pivot ∉ Q →
       (∀ q ∈ Q, dist ((verts q).toPlane D) ((verts c.pivot).toPlane D) = r) →
-      ¬ Fan (edgeGraph n E) c.k c.pivot Q := sorry
+      ¬ Fan (edgeGraph n E) c.k c.pivot Q := by
+  intro r Q hpQ hdist
+  rw [check] at hchk
+  simp only [Bool.and_eq_true] at hchk
+  obtain ⟨⟨⟨⟨hOk, hsep⟩, hnonempty⟩, hproper⟩, hall⟩ := hchk
+  rw [List.all_eq_true] at hall
+  have hCV : ∀ v : Fin n, v ≠ c.pivot → c.checkVertex verts v = true := by
+    intro v hv
+    have hrow := hall v (List.mem_finRange v)
+    simpa [Bool.or_eq_true, beq_iff_eq, hv] using hrow
+  cases Q with
+  | nil =>
+    obtain ⟨col, hcol⟩ : ∃ col, col ∈ c.colourings := by
+      cases hc : c.colourings with
+      | nil => rw [hc] at hnonempty; simp at hnonempty
+      | cons a t => exact ⟨a, List.mem_cons_self⟩
+    obtain ⟨C, -⟩ := exists_coloring_of_proper hk (List.all_eq_true.mp hproper col hcol)
+    intro hFan
+    obtain ⟨q, hq, -⟩ := hFan C
+    simp at hq
+  | cons q₀ Q' =>
+    have hq₀ : q₀ ∈ q₀ :: Q' := List.mem_cons_self
+    have hq₀p : q₀ ≠ c.pivot := fun h => hpQ (h ▸ hq₀)
+    obtain ⟨pk₀, col, hpk₀, hd₀, hcol₀, -⟩ := checkVertex_spec (hCV q₀ hq₀p)
+    -- every partner lands in q₀'s class, because its real distance is q₀'s
+    have hsame : ∀ q ∈ q₀ :: Q',
+        unpackNat c.idBits c.classIds q.val = unpackNat c.idBits c.classIds q₀.val := by
+      intro q hq
+      have hqp : q ≠ c.pivot := fun h => hpQ (h ▸ hq)
+      obtain ⟨pk, -, hpk, hd, -, -⟩ := checkVertex_spec (hCV q hqp)
+      have hev : Q4.eval ((verts q).distSq (verts c.pivot))
+          = Q4.eval ((verts q₀).distSq (verts c.pivot)) :=
+        eval_distSq_eq_of_dist_eq hD ((hdist q hq).trans (hdist q₀ hq₀).symm)
+      rw [hd, hd₀] at hev
+      exact index_eq_of_eval_eq hOk hsep
+        (by rw [List.getElem?_map, hpk]; rfl)
+        (by rw [List.getElem?_map, hpk₀]; rfl) hev
+    have hcolmem : col ∈ c.colourings := by
+      obtain ⟨hlt, hget⟩ := List.getElem?_eq_some_iff.mp hcol₀
+      exact hget ▸ List.getElem_mem hlt
+    obtain ⟨C, hCval⟩ := exists_coloring_of_proper hk (List.all_eq_true.mp hproper col hcolmem)
+    intro hFan
+    obtain ⟨q, hq, hCq⟩ := hFan C
+    have hqp : q ≠ c.pivot := fun h => hpQ (h ▸ hq)
+    obtain ⟨pk, col', -, -, hcol', hsep'⟩ := checkVertex_spec (hCV q hqp)
+    rw [hsame q hq, hcol₀] at hcol'
+    obtain rfl : col = col' := Option.some_inj.mp hcol'
+    have hvals : unpackColor c.bits c.k col c.pivot.val = unpackColor c.bits c.k col q.val := by
+      have h1 := hCval c.pivot
+      have h2 := hCval q
+      rw [← h1, ← h2]
+      exact congrArg Fin.val hCq
+    exact hsep' hvals.symm
 
 end NarrowCert
 

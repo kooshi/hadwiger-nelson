@@ -249,6 +249,26 @@ lower endpoint squares large for the wrong reason); drop the `!colourings.isEmpt
 (`sound`'s nil case must fail); swap `pairwise_lt`'s `<` for `≤` (index_eq must fail); state
 `sound` without `pivot ∉ Q` (must fail on the adversarial `Fan G k p [p]`).
 
+**Audit results (run 2026-08-02, scratch probes + committed controls):**
+
+* **`sepIvals` weakened to `≤`: the mutant is FALSE, countermodel exhibited.** The weakened chain
+  accepts `[1, 1]` (touching zero-width intervals), and the mutant `index_eq_of_eval_eq` is
+  refuted at indices 0 ≠ 1. The strict `<` is load-bearing for the union step itself.
+* **`sqrtOk` without `0 ≤ I.hi`: the mutant is FALSE, countermodel exhibited.** `⟨0, −18⟩` at
+  scale 10 passes the sign-dropped check (`324 ≥ 300`) and claims `√3·10 ≤ −18`. The audit
+  *corrected the plan's own prediction*: the load-bearing sign is on `hi`, not `lo` — a negative
+  *lower* endpoint only under-claims (`lo ≤ √d·s` holds for any negative `lo`), so `0 ≤ I.lo` is
+  a proof-shape convenience the checker is free to demand, and is kept as harmless strictness.
+* **`!colourings.isEmpty` dropped: load-bearing for the proof, not falsifiable as a statement.**
+  For `n ≥ 2` any passing per-vertex check forces a colouring to exist, and at `n = 1` the
+  conclusion (`¬ Fan p []` = the one-vertex graph is colourable) is independently true — so no
+  countermodel exists at any size, the mutant is merely unprovable *by this certificate*, and per
+  M05's rule ("only a countermodel can show unprovability… a build failure cannot") this is
+  recorded rather than staged as a fake control.
+* **`pivot ∉ Q` dropped from `sound`: the mutant is FALSE**; the committed control in
+  `NarrowFanDiagnose.lean` exhibits `Fan (edgeGraph 3 dEdges) 3 0 [0]` — the pivot fans itself —
+  which a checked certificate would then "refute".
+
 ## 3.6 The surfaces (experience pass, 2026-08-02)
 
 Walked with three consumers in the chair: the generated module that instantiates the certificate,
@@ -310,6 +330,32 @@ the sceptic reading the headline, and the person holding a failed check at 1,581
 
 Chunking: not expected to be needed (the whole certificate is ~200× smaller than M15's); if check
 (i) at 1,580 `distSq`s per module exceeds memory comfort, split per pivot — the natural seam.
+
+## 5.5 What implementation measured (2026-08-02, desktop)
+
+* **The whole proof layer closed without a fight.** Every leaf landed in the shape § 3.5
+  predicted; the interval algebra including the corner bash closed on the first attempt; the one
+  deviation was cosmetic (`field_simp` closed `key` outright, leaving a dead `ring`).
+* **Kernel cost per pivot certificate: ~127 s / 22 GB peak** against the plan's ~19 GB projection
+  from M02's 12 MB/`distSq` — within 20%. Four modules, built two at a time under a 100 GB scope.
+  No chunking needed; the `criticalFrom`-style fallback stayed on the shelf.
+* **The emitted artifact is small**: ~150 KB of source per pivot (1,340 packed class values, 5–8
+  packed colourings, three packed index maps, four generator bounds), elaborating in seconds —
+  the packed-Nat decision doing exactly what M04's rule said it would.
+* **One emitter defect caught by the build, not by review**: a docstring placed between
+  `set_option … in` and its theorem does not parse — the generated module failed loudly and the
+  emitter now orders them correctly. (A parse error is the good failure mode; it cannot pass.)
+* **The full-fan positive control (fan-encoded UNSAT over all 1,580 partners) had not returned
+  after ~5 h** when the gate closed — the fan encoding is markedly harder for CDCL than the
+  `k−1` encoding M15 used for the same fact (1.7–1.9 h). Recorded as DEFERRED per this
+  milestone's own triage rule, running on; the discriminating control for the same code path is
+  the known-hit control, which produces a genuine UNSAT (de Grey's own confined fan) through the
+  identical sweep loop.
+* **Gate:** build OK (incremental over 160 batches), zero `sorry`, axioms **201 clean, 5
+  declared purchases (all M03's — M16 adds none)**, `lake lint` clean, `regen-check` OK with the
+  new narrow section regenerating all four certificates byte-identically, spec `#guard`s and
+  `#guard_msgs` pins all green, and the six new modules replayed through the independent kernel
+  (scoped `lean4checker`, all OK).
 
 ## 6. Carry-forward (M17 stub, to be written at close)
 

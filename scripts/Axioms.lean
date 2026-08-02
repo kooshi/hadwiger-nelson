@@ -354,6 +354,48 @@ sits anywhere in either graph, so the route that produced χ ≥ 5 has nothing h
 #print axioms heule553_vertex_critical
 #print axioms heule553_no_five_fan
 
+/-! ## M16 — no fan in de Grey's graph is narrow, certified against real distances
+
+The interval instrument (exact `Q4` values compared as reals, from decidable generator bounds),
+the narrow-fan certificate checker with its soundness bridge, and the four headline negatives —
+one per pivot that carries a five-colour fan at all. The closing move needs a fan confined to one
+real distance; these say the only four known fans offer it nothing. -/
+
+#print axioms Ival.mem_ofInt
+#print axioms Ival.Mem.scaleUp
+#print axioms Ival.Mem.add
+#print axioms Ival.Mem.mul
+#print axioms mem_sqrt
+#print axioms Adjoin.approx
+#print axioms Adjoin.mem_approx
+#print axioms Q4.approx
+#print axioms Q4.mem_approx
+#print axioms sepIvals
+#print axioms sepChain
+#print axioms eval_lt_of_hi_lt_lo
+#print axioms pairwise_lt_of_sepChain
+#print axioms pairwise_ne_of_sepChain
+#print axioms index_eq_of_eval_eq
+#print axioms unpackNat
+#print axioms unpackZ
+#print axioms unpackQ4
+#print axioms properColouring
+#print axioms exists_coloring_of_proper
+#print axioms NarrowCert.checkVertex
+#print axioms NarrowCert.check
+#print axioms NarrowCert.eval_distSq_eq_of_dist_eq
+#print axioms NarrowCert.sound
+#print axioms NarrowCert.vertexFault_none_iff
+#print axioms NarrowCert.firstFault_none_iff_check
+#print axioms deGreyNarrow630_check
+#print axioms deGrey_no_narrow_fan_630
+#print axioms deGreyNarrow633_check
+#print axioms deGrey_no_narrow_fan_633
+#print axioms deGreyNarrow1420_check
+#print axioms deGrey_no_narrow_fan_1420
+#print axioms deGreyNarrow1423_check
+#print axioms deGrey_no_narrow_fan_1423
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

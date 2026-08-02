@@ -216,6 +216,34 @@ for W in heule510 heule553; do
   fi
 done
 
+# The narrow-fan certificates (M16): the sweep re-runs against cadical, the pool colourings are
+# re-derived, and the emitter's pre-flight re-checks interval separation in exact integers. The
+# emitter REFUSES on any deferred solve and on any confined class, so a green line also means the
+# sweep still settles every one of the 4 x 1340 classes as separated.
+echo "==> narrow-fan certificates"
+NARROW_BEFORE="${V}/narrow-before"
+mkdir -p "${NARROW_BEFORE}"
+cp Proofs/HadwigerNelson/Instances/DeGrey/Narrow*.lean "${NARROW_BEFORE}/"
+if ! python3 tools/narrow.py --self-test > "${V}/narrow-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/narrow-selftest.log"
+  echo "    FAIL: tools/narrow.py self-test (includes the known-hit control)"; FAIL=1
+elif ! python3 tools/emit_narrow.py degrey_cert --pivot 630 --pivot 633 --pivot 1420 \
+    --pivot 1423 --colours 5 > "${V}/narrow-emit.log" 2>&1; then
+  sed 's/^/    /' "${V}/narrow-emit.log"
+  echo "    FAIL: tools/emit_narrow.py refused to emit"; FAIL=1
+else
+  NARROW_OK=1
+  for P in 630 633 1420 1423; do
+    if ! diff -q "${NARROW_BEFORE}/Narrow${P}.lean" \
+        "Proofs/HadwigerNelson/Instances/DeGrey/Narrow${P}.lean" > /dev/null; then
+      echo "    FAIL: Narrow${P}.lean is not what the emitter produces"; FAIL=1; NARROW_OK=0
+    fi
+  done
+  if [[ "${NARROW_OK}" -eq 1 ]]; then
+    echo "    4 pivots x 1340 classes identical, sweep settled, emitter pre-flight green"
+  fi
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

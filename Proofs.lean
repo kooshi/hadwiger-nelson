@@ -15,6 +15,7 @@ import Proofs.HadwigerNelson.Critical
 import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.NarrowFan
+import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
 import Proofs.HadwigerNelson.ForcerDiagnose
 import Proofs.HadwigerNelson.Fractional
@@ -37,6 +38,10 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Rotation
 import Proofs.HadwigerNelson.Instances.DeGrey.Rotated
 import Proofs.HadwigerNelson.Instances.DeGrey.Controls
 import Proofs.HadwigerNelson.Instances.DeGrey.Bound
+import Proofs.HadwigerNelson.Instances.DeGrey.Narrow630
+import Proofs.HadwigerNelson.Instances.DeGrey.Narrow633
+import Proofs.HadwigerNelson.Instances.DeGrey.Narrow1420
+import Proofs.HadwigerNelson.Instances.DeGrey.Narrow1423
 import Proofs.HadwigerNelson.Instances.CoreSpindle.Cert
 import Proofs.HadwigerNelson.Instances.CoreSpindle.Weights
 import Proofs.HadwigerNelson.Instances.CoreSpindle.Search
