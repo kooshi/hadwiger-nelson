@@ -169,12 +169,40 @@ closed `Bool` the kernel decides. This is M05/M15's arrangement, at a fraction o
   decide with integer arithmetic. Confidence high; the one fact that would change it is Mathlib
   shipping multiquadratic independence, at which point `Approx` stays useful for rung D's geometry
   reading regardless.
-* **Interval endpoints: representation to be measured at implementation** (ℚ first, dyadic
-  `Int × 2^-s` if ℚ's `Nat.gcd` normalization shows up; M02 measured the kernel does not accelerate
-  `Rat`). The interface in the skeleton commits to neither.
+* **Interval endpoints are integers over an explicit scale, not rationals — measured, 6.3×.**
+  The ℚ carrier costs **107 s per pivot** on the real workload (1,340 approximations through
+  2⁴⁰-denominator bounds; min of three runs 107.2 s), all of it `Rat` normalization through the
+  kernel-unaccelerated `Nat.gcd` — M02's finding paid a second time. The ℤ carrier runs the same
+  workload in **16.9 s including the probe file's own elaboration**. The scale is an *argument of
+  the `Mem` relation* (`Ival.Mem I s x` reads `lo ≤ x·s ≤ hi`), never an index of the type:
+  `ofInt` speaks at denominator 1, `add` at a shared denominator, `mul` multiplies denominators,
+  and the four-level tower lands at `scale⁴` with no division, no rounding lemma, and no gcd
+  anywhere. Alternative rejected: a fixed global scale with rounding division at each `mul` —
+  it needs two rounding lemmas and buys nothing the fixed tower depth doesn't already give.
+* **Class values are zig-zag-packed `Nat`s, one per class, decoded by `unpackQ4`** — not
+  `List Q4` literals. M02 measured a module of ~3,000 sixteen-component tower literals at 28 s /
+  3.9 GB to elaborate; packed numerals make the instance module's elaboration trivial (M04's
+  rule: a `Nat` literal costs ~2.3 KB of olean, a literal tree ~145 bytes *per node*), and the
+  decoder is five lines with **no soundness obligation** — the decoded value simply *is* the value
+  every check and every proof mentions. The kernel decodes a class value in ~50 flat operations
+  against the ~670-cons average walk that a `List Q4` lookup already costs, so the packing is
+  cheaper on both sides of the elaborator/kernel line.
 * **`hint` is per-class, not per-vertex.** A per-vertex hint would let two same-class vertices cite
   different colourings, which un-proves exactly the union step the headline needs. The per-class
   shape makes the mistake unrepresentable.
+* **The per-vertex walk is `(List.finRange n).all`, kept after checking the definition.**
+  `List.finRange = List.ofFn = Fin.foldr` in core — a linear list build with no `Array` behind it,
+  so the kernel walks it once. The grouped-by-class layout (per class, a member list) was weighed
+  and rejected: it would need a "members form a permutation of the non-pivot vertices"
+  completeness check that the per-vertex walk gets by construction — a vertex cannot escape its
+  obligation when the walk visits every vertex.
+* **Degenerate members audited at the definition** (the unsampled-member sweep): extra unused
+  classes in `classVals` only strengthen `sepChain`'s obligation — sound slack; duplicate class
+  values are refused by `sepChain` itself; `k = 0` is excluded by `sound`'s `0 < k` exactly as
+  M03 does; a `scale` of 0 makes `sepIvals` unsatisfiable against `Mem` (both intervals would
+  have to contain 0), so no positivity side condition is carried anywhere; and the `n = 1`
+  no-partners certificate is *sound and useful* — it reduces the headline to colourability, which
+  is why `check` demands a nonempty colouring list (a control pins it).
 
 ## 4. Negative controls (each to be watched red)
 

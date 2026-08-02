@@ -32,6 +32,29 @@ namespace HadwigerNelson
 class ids and hints, where the range check is the consumer's lookup coming back `none`. -/
 def unpackNat (bits packed i : ℕ) : ℕ := (packed >>> (bits * i)) % 2 ^ bits
 
+/-- A signed field: the `i`-th `bits`-wide field, zig-zag decoded (`0, -1, 1, -2, 2, …`), so the
+emitter packs signed tower components into one `Nat` per class value. -/
+def unpackZ (bits packed i : ℕ) : ℤ :=
+  let u := unpackNat bits packed i
+  if u % 2 = 0 then (u / 2 : ℤ) else -((u / 2 : ℤ) + 1)
+
+/-- A `Q4` value from sixteen zig-zag fields, component order little-endian in the tower:
+field 0 is the rational part, field 1 the `√3` coefficient, field 2 the `√5` coefficient,
+field 3 the `√15` coefficient, and so on up the levels — exactly the order `Adjoin`'s nested
+pairs store them. One packed `Nat` per class value, following M04's rule that a `Nat` literal
+costs ~2.3 KB of olean while a literal tree costs ~145 bytes per node — and, measured at M02
+scale, a module of sixteen-component `Q4` literals costs seconds and gigabytes to *elaborate*
+that packed numerals do not. -/
+def unpackQ4 (bits packed : ℕ) : Q4 :=
+  ⟨⟨⟨⟨unpackZ bits packed 0, unpackZ bits packed 1⟩,
+     ⟨unpackZ bits packed 2, unpackZ bits packed 3⟩⟩,
+    ⟨⟨unpackZ bits packed 4, unpackZ bits packed 5⟩,
+     ⟨unpackZ bits packed 6, unpackZ bits packed 7⟩⟩⟩,
+   ⟨⟨⟨unpackZ bits packed 8, unpackZ bits packed 9⟩,
+     ⟨unpackZ bits packed 10, unpackZ bits packed 11⟩⟩,
+    ⟨⟨unpackZ bits packed 12, unpackZ bits packed 13⟩,
+     ⟨unpackZ bits packed 14, unpackZ bits packed 15⟩⟩⟩⟩
+
 /-- **Every listed edge is bichromatic** under the packed colouring — full properness, against the
 graph the fan lives on. Listed self-loops are skipped exactly as `edgeGraph` strips them. -/
 def properColouring {n : ℕ} (E : List (Fin n × Fin n)) (bits k col : ℕ) : Bool :=
@@ -63,11 +86,13 @@ structure NarrowCert (n : ℕ) where
   idBits : ℕ
   /-- Field width of one hint in `hints`. -/
   hintBits : ℕ
-  /-- Rational intervals for the four generators, checked by `SqrtBounds.Ok`. -/
+  /-- Integer intervals for the four generators, checked by `SqrtBounds.Ok`. -/
   bounds : SqrtBounds
-  /-- The distinct squared distances from the pivot, ascending in real value — the emitter's
-  claim, verified by `sepChain`. -/
-  classVals : List Q4
+  /-- Field width of one tower component in a packed class value. -/
+  valBits : ℕ
+  /-- The distinct squared distances from the pivot, ascending in real value — one zig-zag-packed
+  `Nat` per value (see `unpackQ4`), the emitter's claim verified by `sepChain`. -/
+  classVals : List ℕ
   /-- Packed: each vertex's index into `classVals`. -/
   classIds : ℕ
   /-- Packed: each class's index into `colourings`. -/
@@ -86,7 +111,7 @@ def checkVertex (c : NarrowCert n) (verts : Fin n → Pt) (v : Fin n) : Bool :=
   match c.classVals[i]? with
   | none => false
   | some d =>
-    decide ((verts v).distSq (verts c.pivot) = d) &&
+    decide ((verts v).distSq (verts c.pivot) = unpackQ4 c.valBits d) &&
     match c.colourings[unpackNat c.hintBits c.hints i]? with
     | none => false
     | some col =>
@@ -97,7 +122,7 @@ reals, at least one colouring exists (the empty-`Q` case needs the graph coloura
 colouring is proper, and every non-pivot vertex passes `checkVertex`. -/
 def check (c : NarrowCert n) (verts : Fin n → Pt) (E : List (Fin n × Fin n)) : Bool :=
   c.bounds.Ok &&
-  sepChain c.bounds c.classVals &&
+  sepChain c.bounds (c.classVals.map (unpackQ4 c.valBits)) &&
   !c.colourings.isEmpty &&
   c.colourings.all (properColouring E c.bits c.k) &&
   (List.finRange n).all fun v => v == c.pivot || c.checkVertex verts v
@@ -144,7 +169,9 @@ private def specCert : NarrowCert 3 where
   idBits := 1
   hintBits := 1
   bounds := .coarse
-  classVals := [1, 4]
+  valBits := 8
+  -- zig-zag packed: `2` decodes to the rational value 1, `8` to 4
+  classVals := [2, 8]
   -- vertex 0 (pivot, unread) ↦ 0, vertex 1 ↦ class 0, vertex 2 ↦ class 1
   classIds := 0 + 0 * 2 + 1 * 4
   -- both classes point at colouring 0
@@ -152,13 +179,20 @@ private def specCert : NarrowCert 3 where
   colourings := [specColouring]
 
 #guard specCert.check specVerts specEdges
+-- The decoder reads the packed values back as the tower values they claim to be.
+#guard unpackQ4 8 2 = (1 : Q4)
+#guard unpackQ4 8 8 = (4 : Q4)
+#guard unpackZ 8 3 0 = (-2 : ℤ)
 
 -- The discriminating partners, one per datum:
 -- an improper colouring (vertex 1 recoloured to the pivot's colour) is refused...
 #guard !((({ specCert with colourings := [0 + 0 * 4 + 1 * 16] } : NarrowCert 3)).check
   specVerts specEdges)
+-- ...an empty colouring list is refused — the empty-partner-list case of the headline needs the
+-- graph colourable, and nothing else in the certificate witnesses it...
+#guard !((({ specCert with colourings := [] } : NarrowCert 3)).check specVerts specEdges)
 -- ...class values out of real order are refused...
-#guard !((({ specCert with classVals := [4, 1] } : NarrowCert 3)).check specVerts specEdges)
+#guard !((({ specCert with classVals := [8, 2] } : NarrowCert 3)).check specVerts specEdges)
 -- ...a class id binding a vertex to the wrong value is refused...
 #guard !((({ specCert with classIds := 0 + 1 * 2 + 1 * 4 } : NarrowCert 3)).check
   specVerts specEdges)
