@@ -273,6 +273,28 @@ the ledger either way.
 ℚ(√3,√5,√7,√11) is recorded with its `missing_root` price; the aggregated histogram goes in the
 report (§0(e) already shows √83/√67/√91/√51/√39).
 
+## 3.5 The hunt, run — 2026-08-02
+
+**68 candidates, 171,472 pivots, 557,489,688 class-tests, 35,727 solver calls, 5.9 CPU-hours.
+Verdict on every one of the 68: `separated`. Zero deferrals, zero build errors, zero category
+leaks. No confined five-colour fan exists anywhere in the doubled, glued, translated, orbited,
+or twice-doubled families the toolkit expresses.** The ledger (`tools/hunt_ledger.jsonl`) holds
+one re-derivable recipe + result per candidate; family tallies: H1 = 28 fan-pivot doublings,
+H2 = 11 seam glueings (both Heule witnesses), H3 = 18 maximal-overlap translation glues,
+H4 = 5 orbits (including two re-centred, symmetry-broken ones at ~2,750 pts), H5 = 6
+second-generation doublings at the gradient's sharpest class (~6,275 pts, 37.7 M classes each).
+
+**The gradient survives generations and is stable**: the aggregated resisting histogram is
+dominated by `r² = 1/3` (17,259 of 35,727 calls — spindle-able, √3/3), then irrational classes
+(12,499), then `r² = 3` (4,062, spindle-able). The tight classes of the doubled graphs are the
+*same* classes at every pivot and in every family — structural, not pivot-local. Field-growth
+ledger: the recurring out-of-field resisters are `r² = 5/3` (needs √51, 611 resists), `4/3`
+(√39, 159), `1/9` (geometrically unspindleable, 158).
+
+The known-hit gate control passed in the same session: all 25 four-colour confined fans of de
+Grey's 397-point configuration re-found exactly (13 × r²=4, 12 × r²=4/9, origin included, 714 s
+under load).
+
 ## 4. The hit branch — scoped, not presumed
 
 A confined class in the ledger is **triaged, not believed**: re-solve at unbounded budget, confirm
