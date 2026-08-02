@@ -218,6 +218,37 @@ regen-check re-derivation (re-interpret every ledger recipe, byte-compare point 
 well-defined. The hunt driver's termination is by construction: H1–H4 are finite enumerations,
 H5 is a budget of six, every solve carries a budget.
 
+## 2.7 The experience pass — what it settled
+
+**The verdict vocabulary is four words**, machine-readable in the ledger, prose on the line:
+`separated` (every class at every pivot separated — the clean negative), `CONFINED` (the hit,
+loud), `NO VERDICT` (any deferral anywhere, stated with the deferred count), and `bare-UNSAT`
+(the χ≥6-triage verdict, worded as *triage never claim*: "an untrusted solver result, not a
+claim"). The per-candidate report is **one line**, self-auditing exactly like M16's:
+
+    {name}: {n} pts {e} edges | {pivots} pivots, {classes} classes = {pool} pool
+      + {sep} separated + {conf} confined + {def} DEFERRED | {calls} calls {t}s | {verdict}
+
+with the category sum checked inline (`** CATEGORY LEAK **` on mismatch). The resisting-class
+histogram is diagnostic detail and goes in the ledger record, not the line.
+
+**The ledger is the write-up's artifact, so it is committed, not scratch**: default path
+`tools/hunt_ledger.jsonl` (append-only JSONL, one record per candidate: recipe, sizes, counts,
+confined/deferred details, resisting histogram, bare-graph status, verdict). The driver resumes
+by canonical recipe key — re-running a hunt skips candidates already carrying a verdict, and
+`--retry-deferred` re-opens NO VERDICT ones at a larger budget.
+
+**CLI**: `--self-test` (fast tier), `--known-hit-full` (the 667 s / 25-fan gate control with the
+expectation pinned inside), `--hunt H1 H2…|all --jobs N`, `--candidate '<recipe-json>'` for
+one-offs, `--budget/--colours` defaulting 300 s / 5. Breakdowns refuse by name with the offending
+thing named: bad recipe key (JSON path), absent pivot key (coordinates echoed), duplicate points
+(twin indices), corrupt ledger line (line number) — never a silent skip.
+
+**Round-trip law**: `rescan.py`'s module doc quotes the Lean pruning theorem by its final name
+(`not_fan_of_subset`) — verified against the elaborated module at gate, since a tool quoting a
+theorem that does not exist is the false-authority failure. `narrow.sweep_pivot`'s new `pool`
+parameter documents its mutation (shared, grown in place) in the signature line.
+
 ## 3. The hunt — families, order, stopping rule
 
 Ranked by measured signal; each candidate = build + full all-pivots sweep at five colours, budget
