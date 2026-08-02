@@ -337,7 +337,12 @@ def family(which: str) -> list[tuple[str, dict]]:
 
 def family_h5(led: dict[str, dict]) -> list[tuple[str, dict]]:
     """Second generation, budget six: re-double the sharpest resisting spindle-able classes of
-    the H1 ledger's most-resisting candidates, at the same pivot."""
+    the H1 ledger's most-resisting candidates, at the same pivot.
+
+    A pivot key is raw integers at the denominator of the graph its `double` op builds on — so
+    the first generation's key does NOT name the same point in the doubled graph, whose
+    denominator the spindle multiplied. The key is re-located *rationally* in the built graph
+    and re-emitted at its scaling (the self-test's two-generation recipe pins this)."""
     scored = []
     for key, rec in led.items():
         if not rec["name"].startswith("H1-") or rec["verdict"] != "separated":
@@ -352,8 +357,16 @@ def family_h5(led: dict[str, dict]) -> list[tuple[str, dict]]:
     scored.sort(key=lambda t: -t[0])
     out = []
     for cnt, rec, r2s in scored[:6]:
+        base = interpret(rec["recipe"]["of"])
+        gen1 = interpret(rec["recipe"])
+        p0 = _index_of_key(base, rec["recipe"]["pivot"])
+        want = tuple(Fraction(x, base.denom) for x in base.pts[p0][0]) + \
+               tuple(Fraction(y, base.denom) for y in base.pts[p0][1])
+        p1 = next(i for i in range(len(gen1))
+                  if tuple(Fraction(x, gen1.denom) for x in gen1.pts[i][0])
+                  + tuple(Fraction(y, gen1.denom) for y in gen1.pts[i][1]) == want)
         out.append((f"H5-{rec['name']}x{r2s}",
-                    {"op": "double", "of": rec["recipe"], "pivot": rec["recipe"]["pivot"],
+                    {"op": "double", "of": rec["recipe"], "pivot": _key_of(gen1, p1),
                      "r2": r2s}))
     return out
 
@@ -447,6 +460,15 @@ def self_test() -> None:
     assert recipe_key(json.loads(recipe_key(r))) == recipe_key(r)
     a, b = interpret(r), interpret(r)
     assert [p for p in a.pts] == [p for p in b.pts] and a.denom == b.denom
+
+    # a two-generation recipe builds: the pivot key of the inner double names raw integers at
+    # the *doubled* graph's denominator (the H5 seam — this is the assert that caught it)
+    p1 = next(i for i in range(len(a))
+              if a.key(i) == tuple(tuple(x * (a.denom // _load_base("heule510").denom)
+                                         for x in v) for v in _load_base("heule510").key(0)))
+    r2gen = {"op": "double", "of": r, "pivot": _key_of(a, p1), "r2": "1/3"}
+    aa = interpret(r2gen)
+    assert len(aa) > len(a), "second-generation double did not grow the graph"
 
     # a recipe that cannot build is refused by name
     for bad, msg in [({"op": "warp"}, "unknown recipe op"),

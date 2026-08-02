@@ -277,6 +277,11 @@ Std.Sat ─┤
      Instances/DeGrey/Narrow{630,633,1420,1423}.lean   generated certificates, one per       [M16]
                          pivot that carries a five-colour fan; headline theorems
                          deGrey_no_narrow_fan_*
+     FanMono.lean        deletion never creates a fan: edgeGraph_mono lifts list inclusion   [M17]
+                         to the graph order, Fan.of_subset lifts the fan, not_fan_of_subset
+                         restricts a separating colouring to every sub-candidate — the
+                         theorems the hunt's growth-only design rests on. Kept OUT of
+                         Fan.lean so the settled certificate chain is not re-checked.
 
 Proofs.lean          — flat public surface
 tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
