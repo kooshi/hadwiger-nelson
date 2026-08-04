@@ -30,16 +30,68 @@ graph that is not 4-colourable. Our ratchet:
 **The mission, restated 2026-08-02: this project is exclusively a hunt for new mathematics — no
 matter how small — ratcheting toward major findings.** Formalizing known results is over as a
 goal in itself; a formalized statement earns its place by being *structure nobody had named*
-(however elementary) or a rung toward χ ≥ 6. The current frontier: the hunt through every
-existing witness and every growth family is closed with certified/exhaustive negatives (M15–M17),
-and the live thread is the **120° class** — `r² = 1/3`, the unique distance class whose spindle
-is an order-3 rotation and whose closures force rainbow unit triangles (`plans/M18-the-120-degree-class.md`).
+(however elementary) or a rung toward χ ≥ 6. The live state of the hunt is § Frontier below —
+**updated at every milestone closing**, without exception.
 
 State failure modes plainly and keep the ratchet honest: a rung that does not land is reported as
-not landed, not quietly rescoped.
+not landed, not quietly rescoped. **All write-ups and upstreaming are deferred until something
+lands that is worth the time and effort to publish** (Kooshi, 2026-08-04) — this covers the
+rung-B write-up, Mathlib contributions, and any exposition; the deferral is standing policy,
+revisited only when the Frontier holds a publication-worthy result.
 
 See `ARCHITECTURE.md` for the module DAG and the milestone roadmap; `plans/` for per-milestone
 subplans.
+
+## Frontier
+
+*The current state of the art, the ledger of everything novel this project has produced, and
+the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
+step 9); a milestone whose close does not update this section is not closed.*
+
+**Last updated: M19, 2026-08-04.**
+
+### Where the problem stands
+
+χ(ℝ²) ∈ {5, 6, 7} (de Grey 2018 for ≥ 5; the hexagonal 7-colouring for ≤ 7). This
+repository holds a kernel-certified χ(ℝ²) ≥ 5 on axioms exactly
+`[propext, Classical.choice, Quot.sound]` (M06–M09). Above that: every published witness
+and every growth family we built has been swept with certified or exhaustive negatives
+(M15–M17); distance-to-confinement (`minCov`) is measured pinned to the rainbow floor of 3
+at all 6,173 pivots ever examined — and M19 proved the pin is a theorem, not bad luck.
+
+### The novel-results ledger (all kernel-checked unless marked)
+
+| # | Result | Where | Milestone |
+|---|---|---|---|
+| 1 | **The two-circle theorem**: every unit-distance graph on the circles of radius 1 and 1/√3 about a common point — the full uncountable set included — is 3-colourable. The local barrier: no cover-set-internal gadget beats the rainbow floor. | `TwoCircle.lean` (`colorable_three_induce`/`_comap`) | M19 |
+| 2 | **The seam identity**: the cross-chord rotation between the two circles is `(√3 + i√33)/6`, of infinite order (its trace squares to 1/3, no algebraic integer) — the true geometric identity of the √33 "resistance" family, and the fact that makes two-circle labels a strip `ℤ/6 × ℤ`, never a torus. | `TwoCircle.seam_pow_ne_one` | M19 |
+| 3 | **The coverage ratchet**: coverage lower bounds (`CoverAtLeast`) are monotone under adding edges, widening the class, lowering the level; at level k the property *is* the fan. Gadget-union hunting climbs a certified gradient. | `CoverageMono.lean` | M19 |
+| 4 | **Fan ⟺ compulsory coverage**: a pivot is fanned iff every proper k-colouring puts all k colours on `N(p) ∪ Q` — confinement as a measurable number. | `Coverage.lean` (`fan_iff_coverage`) | M18 |
+| 5 | **No class confines alone**: two circles share ≤ 2 points ⟹ in-class degree ≤ 2 ⟹ every class-only graph is 3-colourable ⟹ a 4th colour always frees the pivot. Confinement is an interplay theorem. | `ClassGeometry.lean` (`not_fan_classOnlyGraph`) | M18 |
+| 6 | **The 120° triangle identity**: a unit triangle sits on a circle about p iff r² = 1/3, and the equidistant point is the centroid; the ℤ/3 closure partitions the class into rainbow triangles. | `ClassGeometry.lean` (`exists_unit_triangle_iff`, `rot3_unit_triangle`) | M18 |
+| 7 | **Greedy colouring** (`degree < k` everywhere ⟹ k-colourable), genuinely missing from Mathlib. | `Greedy.lean` | M18 |
+| 8 | **De Grey's graph admits a balanced 5-colouring** — class sizes [317, 316, 316, 316, 316], the pigeonhole optimum, kernel-certified from a packed witness. No density obstruction at witness scale (closure scale too, tools-only). | `DeGreyBalanced.lean` | M19 |
+| 9 | **Negative knowledge, held to the same standard**: growth-family hunt closed exhaustively (M17, 557M class-tests); "ambient near-forcing" retracted — pool statistics measure the SAT solver's tastes, not the colouring space (three pre-registered hypotheses refuted with matched controls, M19 §0); pentagon exclusion is a fact about the coordinate field, not the plane (M18). | plans + instrument docstrings | M17–M19 |
+
+### Paths forward, ranked
+
+1. **The extension problem** (M20, stubbed: `plans/M20-the-extension-problem.md`) — the
+   two-circle theorem's own boundary: coverage 4 can only be an *extension obstruction*
+   (ambient structure killing every extendable 3-pattern on the cover set). The finer
+   gradient: the **extension profile** — which locally-legal 3-patterns extend, per pivot,
+   each reading a SAT verdict (bias-free by construction). Live thread.
+2. **The strip-colouring structure theorem** — classify all proper 3-colourings of the
+   two-circle strip graph; turns profile enumeration into arithmetic and is the natural
+   Lean successor to `TwoCircle.lean`. Inside M20.
+3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
+   when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
+   before.
+4. **General-radius two-circle theorem** — same method, any class radius; deferred until a
+   milestone needs it.
+5. **Parked with reasons** (see M19 plan §4): fractional route (provably capped below 5),
+   measurable-≥6 (single-class density provably insufficient), axiom-sensitivity
+   (perspective without progress until another angle feeds it). Write-ups and upstreaming:
+   deferred per the standing policy above.
 
 ## Whose work this is
 
