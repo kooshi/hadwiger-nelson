@@ -18,6 +18,8 @@ import Proofs.HadwigerNelson.FanMono
 import Proofs.HadwigerNelson.Greedy
 import Proofs.HadwigerNelson.ClassGeometry
 import Proofs.HadwigerNelson.Coverage
+import Proofs.HadwigerNelson.CoverageMono
+import Proofs.HadwigerNelson.TwoCircle
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
@@ -42,6 +44,7 @@ import Proofs.HadwigerNelson.Instances.DeGrey.Rotation
 import Proofs.HadwigerNelson.Instances.DeGrey.Rotated
 import Proofs.HadwigerNelson.Instances.DeGrey.Controls
 import Proofs.HadwigerNelson.Instances.DeGrey.Bound
+import Proofs.HadwigerNelson.Instances.DeGreyBalanced
 import Proofs.HadwigerNelson.Instances.DeGrey.Narrow630
 import Proofs.HadwigerNelson.Instances.DeGrey.Narrow633
 import Proofs.HadwigerNelson.Instances.DeGrey.Narrow1420

@@ -33,6 +33,11 @@ which is exactly the trust the kernel route replaces if the number is ever promo
     python3 tools/coverage.py --self-test
     python3 tools/coverage.py --ledger-name Z3-closure-dg630x1/3 --r2 1/3
     python3 tools/coverage.py --ledger-name Z3-closure-dg630x1/3 --r2 1/3 --all-pivots
+
+M19 adds `--pool-out`: the run's colouring pool, dumped as a JSON artifact so the colourings can
+be studied as objects (`tools/colorstat.py`). The dump carries the graph's identity (name, sizes,
+an edge-list hash); the *reader* re-verifies every colouring proper against the graph it rebuilds
+itself — persistence adds no trust, and a stale pool against an edited graph fails by name.
 """
 
 from __future__ import annotations
@@ -186,6 +191,30 @@ def class_of(coords, denom: int, p: int, r2: Fraction) -> list[int]:
     raise ValueError(f"pivot {p} has no class at r² = {r2}")
 
 
+# ------------------------------------------------------------------ pool persistence
+
+def edges_digest(n: int, edges) -> str:
+    """A cheap identity for 'the same graph': vertex count + sorted edge list, hashed."""
+    import hashlib
+    h = hashlib.sha256()
+    h.update(str(n).encode())
+    for a, b in sorted((min(a, b), max(a, b)) for a, b in edges):
+        h.update(f"{a},{b};".encode())
+    return h.hexdigest()[:16]
+
+
+def pool_dump(path: str, name: str, n: int, edges, k: int, pool: list) -> None:
+    """Write the pool as a measurement artifact. Colourings become plain lists (index = vertex);
+    the graph identity travels with them so a reader can refuse a mismatched pool by name."""
+    out = {
+        "graph": {"name": name, "n": n, "n_edges": len(edges),
+                  "edges_sha": edges_digest(n, edges), "k": k},
+        "pool": [[m[v] for v in range(n)] for m in pool],
+    }
+    Path(path).write_text(json.dumps(out))
+    print(f"pool ({len(pool)} colourings) written to {path}")
+
+
 # ------------------------------------------------------------------ self-test
 
 def self_test() -> None:
@@ -253,6 +282,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--ledger-name", help="candidate by its hunt_ledger name")
+    ap.add_argument("--cert", help="graph by certificate JSON under tools/ (e.g. degrey_cert)")
     ap.add_argument("--r2", default="1/3", help="the class, as an exact rational r²")
     ap.add_argument("--pivot", type=int, help="pivot index; default: the recipe's doubling pivot")
     ap.add_argument("--all-pivots", action="store_true",
@@ -260,21 +290,37 @@ def main() -> None:
                          "only where the pool bound stays at k−1 or above")
     ap.add_argument("--colours", type=int, default=5)
     ap.add_argument("--budget", type=float, default=300.0)
+    ap.add_argument("--pool-out", help="write the run's colouring pool as a JSON artifact")
     args = ap.parse_args()
 
     if args.self_test:
         self_test()
         return
-    if not args.ledger_name:
-        ap.error("nothing to do — try --self-test or --ledger-name")
+    if not args.ledger_name and not args.cert:
+        ap.error("nothing to do — try --self-test, --ledger-name, or --cert")
+    if args.ledger_name and args.cert:
+        ap.error("--ledger-name and --cert both name the graph — pick one")
 
-    rec, cfg = by_ledger_name(args.ledger_name)
-    coords = [(tuple(a), tuple(b)) for a, b in cfg.pts]
-    n, E, k, r2 = len(coords), cfg.edges(), args.colours, Fraction(args.r2)
-    print(f"{args.ledger_name}: {n} pts, {len(E)} edges, k = {k}, class r² = {r2}")
+    if args.cert:
+        d = json.load(open(Path(__file__).resolve().parent / f"{args.cert}.json"))
+        coords = [(tuple(c[0]), tuple(c[1])) for c in d["coords"]]
+        E, denom = [tuple(e) for e in d["edges"]], d["denom"]
+        gname = args.cert
+        rec = None
+    else:
+        rec, cfg = by_ledger_name(args.ledger_name)
+        coords = [(tuple(a), tuple(b)) for a, b in cfg.pts]
+        E, denom = cfg.edges(), cfg.denom
+        gname = args.ledger_name
+    n, k, r2 = len(coords), args.colours, Fraction(args.r2)
+    print(f"{gname}: {n} pts, {len(E)} edges, k = {k}, class r² = {r2}")
 
     if args.pivot is not None:
         pivots = [args.pivot]
+    elif args.cert:
+        pivots = []
+        if not args.all_pivots:
+            ap.error("--pivot required with --cert (no recipe, so no doubling pivot to default to)")
     else:
         r = rec["recipe"]
         if r.get("op") != "double":
@@ -288,14 +334,14 @@ def main() -> None:
         # phase 1: exact answers at the named pivots seed the pool; phase 2: pool bounds
         # everywhere, SAT-exact only where the bound stays within one colour of total
         for p in pivots:
-            mc = min_coverage(n, E, p, class_of(coords, cfg.denom, p, r2), k,
+            mc = min_coverage(n, E, p, class_of(coords, denom, p, r2), k,
                               args.budget, pool)
             print(mc.line(), flush=True)
         covs: dict[int, list[int]] = {}
         t0 = time.time()
         for p in range(n):
             try:
-                covs[p] = cover_set(E, p, class_of(coords, cfg.denom, p, r2))
+                covs[p] = cover_set(E, p, class_of(coords, denom, p, r2))
             except ValueError:
                 continue  # a pivot with no class at this r² is out of scope, not a zero
         high = [p for p, cov in covs.items()
@@ -306,7 +352,7 @@ def main() -> None:
             cov = pcov = covs[p]
             if min((len({m[v] for v in pcov}) for m in pool), default=k) < k - 1:
                 continue  # a walk earlier in this loop grew the pool past this pivot
-            mc = min_coverage(n, E, p, class_of(coords, cfg.denom, p, r2), k,
+            mc = min_coverage(n, E, p, class_of(coords, denom, p, r2), k,
                               args.budget, pool)
             print("  " + mc.line(), flush=True)
         hist: Counter = Counter()
@@ -316,9 +362,15 @@ def main() -> None:
               f"{sum(hist.values())} pivots: {dict(sorted(hist.items()))}")
     else:
         for p in pivots:
-            mc = min_coverage(n, E, p, class_of(coords, cfg.denom, p, r2), k,
+            mc = min_coverage(n, E, p, class_of(coords, denom, p, r2), k,
                               args.budget, pool)
             print(mc.line(), flush=True)
+
+    if args.pool_out:
+        if not pool:
+            raise SystemExit("--pool-out with an empty pool — nothing was measured, refusing "
+                             "to write an artifact that looks like a measurement")
+        pool_dump(args.pool_out, gname, n, E, k, pool)
 
 
 if __name__ == "__main__":

@@ -1,86 +1,233 @@
-# M19 — Coverage-driven construction, and the colourings as objects (stub)
+# M19 — The two-circle theorem, the coverage ratchet, and the colourings as objects
 
-*Carry-forward notes, written 2026-08-03 as M18 closed. Not yet subplanned. Direction agreed
-with Kooshi 2026-08-03: the lower-bound hunt stays the spine, and the χ = 5 perspective rides
-along for nearly free — the separating colourings our instruments already produce are local
-fragments of hypothetical plane 5-colourings, and M19 §0 studies them as objects for the
-first time.*
+*Subplanned 2026-08-03/04 from the stub of the same name (the stub's carry-forward notes are
+superseded by this document; its §0 obligations were all executed and are reported below).
+Direction agreed with Kooshi 2026-08-03: the lower-bound hunt stays the spine; the χ = 5
+perspective rides in §0 for nearly free.*
 
-## 1. The inheritance from M18 — what this milestone stands on
+**The milestone in one line: the flat histogram was a theorem waiting to be stated — every
+unit-distance graph on the two circles of a 120°-class pivot is 3-colourable — and the honest
+death of mechanism (b) is what uncovered it.**
 
-* **The objective function is a theorem.** `Fan.of_coverage` / `fan_iff_coverage`
-  (`Proofs/HadwigerNelson/Coverage.lean`): a pivot is fanned by its class **iff** every
-  proper 5-colouring puts all 5 colours on `N(p) ∪ C`. Confinement = `minCov = 5`, measured
-  by `tools/coverage.py`.
-* **The starting position is known exactly.** Both ℤ/3 closures sit at `minCov = 3` — the
-  rainbow floor their triangles guarantee, with `N(p)` contributing *nothing* — and the full
-  4,615-pivot sweep of a closure finds `minCov ≤ 3` everywhere ({2: 598, 3: 4,017}). The
-  constructive problem: **force two more colours onto a pivot's unit-neighbourhood whose
-  1/3-class is closed.** Nothing about deletion or class-internal enrichment can help
-  (`FanMono.lean`, `not_fan_classOnlyGraph` — both kernel-checked).
-* **The one phenomenon measured to act at a distance: mechanism (b).** M18's resist join
-  split M17's histogram: (a) in-class colour budget (1/3's triangles, 178 calls; r²=3's
-  paths, 46) and (b) **ambient near-forcing at structureless classes** — the top irrational
-  resisters (2−⅓√33: 34 calls, 7/6−⅙√33: 22, 3/2∓⅙√33: 21+19) have *zero* in-class edges;
-  the ambient graph correlates their members' colours with the pivot's. A member fully
-  forced would BE confinement (M13's `Forces`), so these classes sit near that cliff. This
-  is the tool to point at `N(p)`.
+## 0. Measurements (all on the desktop, 32 cores; instruments named per number)
 
-## 2. §0 measurement obligations (next round, before specifying)
+### 0(a) The pools as objects — and what they turned out to measure
 
-1. **The colourings as objects — the χ = 5 lens, near-free.** The pool from one closure
-   sweep holds 3,054 proper 5-colourings of a 4,678-point graph; nothing has ever *looked*
-   at them. Measure: colour-class sizes/densities; how classes distribute over the rainbow
-   triangles (which 3-subsets of 5 colours appear on triangles, and how the leftover pair
-   is used); spatial structure (periodicity/quasi-periodicity against the known lattice
-   vectors, √33-vector correlations); and whether structure *tightens* as graphs grow
-   (compare de Grey → closure → any M19 candidate). A property forced in every 5-colouring
-   of every large candidate is simultaneously (i) the thing a 6-chromatic construction must
-   break and (ii) a brick in the χ = 5 structure theory. Literature numbers to re-derive
-   before use, not trusted from memory: the measurable unit-avoiding density record
-   (≈ 0.247?) and the fractional-χ cap (≈ 4.36?).
-2. **Characterize mechanism (b).** For the top structureless resisters at a pivot: measure
-   the *forcing margin* per member (how many of the pool's colourings give the member the
-   pivot's colour; SAT-check whether any colouring separates a chosen member — `forcer.py`'s
-   vocabulary already asks this per pair). Identify the ambient subgraphs that transmit the
-   correlation (candidate: the √3-rhombus/H-lattice seams — √33 = √3·√11 suggests the two
-   generator scales interacting). The deliverable is a *named* forcing gadget, not a
-   histogram.
-3. **Coverage-target design experiments, cheap tier.** Before any big candidate: take the
-   closure, union it with small gadgets aimed at `N(630)` (spindled copies pinning
-   neighbourhood vertices; second closures at other pivots of `N(p)`; mechanism-(b) seams
-   relocated to touch `N(p)`), and watch `minCov` per edit. The instrument answers in ~3 SAT
-   calls warm; the experiment loop is minutes per idea. §0 decides which gadget family, if
-   any, moves 3 → 4; the milestone proper industrializes whatever moves.
+Instrument: `coverage.py --pool-out` (new) + `colorstat.py` (new, self-tested, wired into
+regen-check). Pools: de Grey 1,292 colourings (`build/m19-pool-degrey.json`), Z3 closure
+3,054 colourings (`build/m19-pool-z3closure.json`); every colouring re-verified proper by
+the reader against an independently rebuilt graph (identity: n, edge count, edge-list hash).
 
-## 3. Candidate deliverables (to be refined at subplanning)
+* **Diversity**: all 1,292 de Grey pool colourings distinct up to colour permutation; 1,261
+  distinct size profiles. The pool is not one pattern resampled.
+* **Triangle treatment**: every colouring uses **all 10** colour-triples on unit triangles —
+  no specialization anywhere (label-free statistic).
+* **Translation structure**: **no periodicity.** 968,897 distinct difference vectors over
+  1.25M pairs (the point set barely repeats a vector); top-multiplicity vectors (~114 pairs)
+  show lifts of only +0.04..+0.10 over base rate 0.203, all at short 1/3- and 1/9-vectors.
+* **Densities**: max-class density over the pool: floor 0.2113, median 0.2264 — **but see
+  0(c): this floor is solver bias, not structure.**
 
-1. **A candidate with `minCov = 4` somewhere** — one colour from confinement, with the SAT
-   hunt for the last colour then a targeted (cube-split) search, not a sweep. Stretch: 5.
-2. **The colouring-structure instrument** (`tools/` + ledger discipline): pool statistics as
-   first-class, versioned measurements.
-3. **The forcing-gadget lemma** — whatever mechanism (b) turns out to be, stated and
-   kernel-checked at the level M18 set (small, exact, no purchases).
-4. **If everything pins to the floor**: the honest write-down of a coverage *ceiling*
-   conjecture for the construction algebra — the barrier-theorem thread, promoted from
-   consolation to finding if the measurements say so.
+**The methodological finding, which retroactively tempers M17/M18 language: pool statistics
+measure the solver's preferred colourings, not the colouring space.** Only SAT/UNSAT
+verdicts and matched-control contrasts survive the bias. Recorded in `colorstat.py`'s
+docstring; the sweeps' pool-rejection economics are unaffected (the pool is still a valid
+source of upper-bound witnesses — every witness is re-verified).
 
-## 4. Strategy decisions recorded 2026-08-03 (Kooshi agreed)
+### 0(b) Mechanism (b) — dissolved, with pre-registered controls
 
-* **Spine**: coverage-driven hunt; the colouring-mining rides in §0 on existing instruments.
-* **Designated perspective shift, when coverage goes flat across families**: the certified
-  6-colouring angle (Hoffman–Soifer-style parameter ranges, periodic exact geometry — our
-  toolkit's natural upper-bound purchase). Not before.
-* **Parked, with reasons**: fractional route to ≥ 6 (provably capped below 5 — instrument
-  only); measurable ≥ 6 (single-class density provably insufficient; multi-class SDP is the
-  wrong toolkit today — noted: rational SDP dual certificates are kernel-checkable data,
-  someday); axiom-sensitivity (Shelah–Soifer — native medium, but perspective without
-  progress until another angle feeds it).
-* **Rotation policy**: rotate on measurement (an angle gone flat), never on cadence;
-  perspectives must share instruments so knowledge compounds.
+The M18 finding ("ambient near-forcing at structureless √33 classes") was hunted to ground
+through three pre-registered hypothesis rounds (`predictions.md`, scratchpad, written before
+each dataset):
+
+1. **Local transmission — refuted.** The top zero-in-class-edge resisters have ≤ 2 common
+   unit-neighbours per pair (the crosswise chord bound, a consistency check) and *low*
+   3-path counts; `5/3−2/9·√33` resists 15× with zero 2-paths while `5/3` (more 3-paths)
+   resists 6×. Neither width nor radius nor path counts order the resistance. Sweep order
+   is exonerated in the strong direction: irrational classes test *last*, against a
+   maximally enriched pool.
+2. **Periodicity leakage — refuted** (0(a): no translation structure to leak).
+3. **The spindle-rotation ghost — refuted with controls.** On the closure (ℤ/3-closed, so
+   every vertex's 120°-image exists): margin(x, rot3 x) median 0.251 vs **exact-distance-
+   matched non-image controls median 0.235** — indistinguishable; and margins *rise* toward
+   the graph rim (0.285 → 0.443) instead of decaying from the pivot — the signature of
+   solver phase bias on weakly-constrained vertices, not of structural forcing.
+
+**Retraction: "near-forcing" was sampling bias.** What remains of mechanism (b): nothing —
+the √33 family's real meaning surfaced elsewhere (0(e)): √33/6 is the *sine of the
+cross-chord rotation between a pivot's two circles*. The seam was geometry, not colour.
+
+### 0(c) Balance — the χ = 5 lens's first exact answer
+
+Instrument: Sinz sequential-counter cardinality encoding over `base_clauses` (scratchpad
+`balance.py`, to be promoted into `tools/` §2). Question: does a proper 5-colouring exist
+with every colour class ≤ s?
+
+* **De Grey, s = 317 (exact pigeonhole): SAT in 132 s** (2.51M vars, 5.06M clauses).
+  Witness class sizes **[317, 316, 316, 316, 316]**, re-verified proper on all 7,877 edges.
+  **De Grey's graph admits a perfectly balanced 5-colouring** — the pool's 0.2113 density
+  floor was pure CDCL bias, and no density obstruction exists at witness scale.
+* **Closure, s = 936 (pigeonhole for n = 4,678): running at subplan commit** (21.9M vars,
+  43.9M clauses, encode 25 s; verdict folds in before the implementation commit). The
+  closure pool's own density floor is already 0.2041 vs pigeonhole 0.2001 — the pools get
+  *more* balanced with growth, so SAT is expected.
+
+### 0(d) Design experiments — minCov(630, 1/3) per gadget, fresh pool each
+
+Instrument: scratchpad `experiments.py` over `construct.py` + `min_coverage`. Control
+reproduced first; the closure regenerates deterministically (same 3,054-pool histogram).
+
+| experiment | construction | n / edges | |N(p)| | |C| | minCov |
+|---|---|---|---|---|---|
+| E0 control | Z3 closure as-is | 4,678 / 24,405 | 12 | 9 | **3** (2 calls + seed, 1.8 s) |
+| E1 | 2nd ℤ/3 closure at q_n = 726 (widest-class unit neighbour) | 13,432 / 72,525 | 14 | 9 | **3** (3 calls, 37 s) |
+| E1′ | 2nd ℤ/3 closure at q_c = 648 (member of C(630)) | 12,937 / 80,379 | 18 | 10 | **3** (3 calls, 348 s) |
+| E2 | spindle-double at 630, r² = 1 | in flight | | | predicted 3 |
+| E3 | spindle-double at 630, r² = 3 | in flight | | | predicted 3 |
+
+E0–E1′ verdict: tripling the graph at the strongest available attachment points moves
+nothing — exactly what the two-circle theorem (0(e)) *predicts*, since every one of these
+gadgets acts inside or through the cover set's two circles. E2/E3 verdicts fold in before
+the implementation commit; the theorem predicts 3 for both.
+
+### 0(e) The discovery: the two-circle theorem (draft proved, verified numerically)
+
+The flat histogram (minCov ≤ 3 at all 4,615 + 1,558 pivots, M18/§0) says: at every pivot
+ever built, the induced unit-distance graph on S = N(p) ∪ C is 3-colourable. That is not an
+accident of our constructions — **it is forced by the geometry of the two circles**:
+
+* S lives on circle A (radius 1) and circle B (radius 1/√3) about p.
+* Unit chords on A subtend exactly 60°; on B exactly 120° (the ℤ/3 triangles); cross
+  chords A↔B subtend α with **cos α = √3/6, sin α = √33/6** — both in the field, and the
+  √33 family's true geometric identity.
+* **Infinite-order lemma**: 2cos α = √3/3 is not an algebraic integer ((√3/3)² = 1/3, and a
+  rational algebraic integer is an integer), so the seam rotation is no root of unity. Hence
+  every point of a Γ-orbit (Γ = ⟨ζ₆, seam⟩, an abelian group) has a **unique** label
+  (i, j) ∈ ℤ₆ × ℤ, and the only unit edges are the four label steps:
+  A(i,j)–A(i±1,j), B(i,j)–B(i±2,j), A(i,j)–B(i,j±1).
+* **The strip 3-colouring**: colour A-points by e(i) = [1,2,0,2,1,0], B-points by
+  o(i) = [0,0,1,1,2,2] — j-independent, proper on all four step types (checked by machine
+  on the strip and on a numeric 324-point / 612-edge two-circle instance: zero clashes).
+
+**Theorem (M19's centerpiece): every unit-distance graph whose vertices lie on the two
+circles of radius 1 and 1/√3 about a common point is 3-colourable.**
+
+Consequences, stated with their honest boundaries:
+* **The local barrier**: no S-internal gadget can force a 4th colour onto a 120°-pivot's
+  cover set, ever — the rainbow floor is the local ceiling. E0–E3's flat results and the
+  4,615-pivot histogram are retro-dicted.
+* **The boundary of the barrier**: minCov = 4 is *not* excluded — external structure can
+  restrict which 3-colourings of G[S] extend. The barrier kills a gadget family, not the
+  hunt: coverage-4 construction must force from outside S. That is M20's question (the
+  multi-circle / extension problem), now sharply posed.
+
+### 0(f) Costs
+
+Pool runs: closure ~75 min, de Grey ~15 min (single-core SAT streams). Balance: de Grey
+132 s solve; closure <SLOT>. Ghost probe: ~30 s on the landed pool. Experiment battery:
+~30–40 min per gadget (edge enumeration at doubled denominators dominates; SAT trivial).
+Transmission probe: 27 s pair scan. All on the desktop, ≤ 10 GB RSS total at peak
+(closure-balance cadical). No Lean cost in §0.
+
+## 1. The milestone thesis
+
+M18 made distance-to-confinement a number and found it pinned to the floor everywhere. M19
+explains the pin (the two-circle theorem), makes the hunt's gradient a theorem (coverage
+monotone under construction), certifies the χ=5-lens negative (balance witness), and puts
+the instrument's epistemology right (pool = solver sample). The construction problem
+survives, sharpened: the 4th colour must come from outside the two circles.
+
+## 2. Deliverables
+
+1. **`Proofs/HadwigerNelson/TwoCircle.lean`** — the theorem. Shape (skeleton commits with
+   this plan):
+   * `zeta6`, `seam : ℂ` (explicit re/im); norm-1, `zeta6 ^ 6 = 1`, `seam` re/im lemmas.
+   * `seam_pow_ne_one : ∀ n : ℕ, n ≠ 0 → seam ^ n ≠ 1` via the algebraic-integer argument
+     (`IsIntegral ℤ`, rational integral ⟹ integer, (√3/3)² = 1/3 ∉ ℤ).
+   * Ratio classification on unit circles: ‖w‖ = ‖w'‖ = 1, ‖w − w'‖ = 1 → w'/w = ζ₆^{±1};
+     ‖w − w'‖ = √3 → w'/w = ζ₆^{±2}; cross at re = √3/6 → seam^{±1} (M18 engine style).
+   * The label decomposition (Γ abelian, `Subgroup.closure {ζ₆, seam}`; normal form a^i b^j;
+     uniqueness from `seam_pow_ne_one`).
+   * `colorable_three_of_mem_two_circles {n} (f : Fin n → ℂ) (p : ℂ)
+     (hf : ∀ v, dist (f v) p = 1 ∨ dist (f v) p = Real.sqrt 3 / 3) :
+     (unitGraph f).Colorable 3` — the headline, hypothesis-light, over the *full* unit
+     graph on the points (not class-only).
+2. **`Proofs/HadwigerNelson/CoverageMono.lean`** — the ratchet:
+   * `CoverAtLeast G k p Q m` (every proper k-colouring shows ≥ m colours on N(p) ∪ Q);
+   * monotone in edges (`G ≤ G'`), in `Q` (⊆), antitone in `m`;
+   * `fan_iff_coverAtLeast (hp : p ∉ Q) : Fan G k p Q ↔ CoverAtLeast G k p Q k`;
+   * rainbow-floor lift from M18's `three_le_card_of_triangle_mem`.
+   * The point, stated in the module doc: lower bounds ratchet under construction; upper
+     bounds must be re-witnessed — the asymmetry the instrument already embodies.
+3. **`Proofs/HadwigerNelson/DeGreyBalanced.lean`** — the balanced witness as kernel fact:
+   the 1,581-entry colouring literal, `decide +kernel` for properness on the committed edge
+   list and for the five class sizes `[317, 316, 316, 316, 316]`. The χ=5-lens receipt: *no
+   density obstruction at witness scale*.
+4. **Instruments promoted**: `tools/balance.py` (cardinality probe, self-tested);
+   `colorstat.py` + `coverage.py --pool-out` (already landed with §0); margins docstring
+   carries the bias caveat; all three self-tests in `regen-check.sh`.
+5. **The retraction recorded** (this §0(b)) — in the plan, the report, and memory. M17/M18's
+   "near-forcing" language is corrected wherever it would mislead a reader (ARCHITECTURE
+   roadmap row for M18 gets one clarifying clause; no Lean artifact was affected — the Lean
+   statements never mentioned forcing).
+
+## 2.5 Proof designs (obligation-level notes for the modeling passes)
+
+* **`seam_pow_ne_one`**: seam^n = 1 → `IsIntegral ℤ seam` (root of monic Xⁿ − 1) → conj seam
+  = seam⁻¹ = seam^(n−1) integral → sum √3/3 integral → square 1/3 integral & rational →
+  1/3 ∈ ℤ, absurd. Query Mathlib: `IsIntegrallyClosed`, `IsIntegral.add`, `IsIntegral.mul`,
+  rational-integral-is-integer (exists in some form — grep before writing).
+* **Ratio classification**: from ‖w‖ = ‖w'‖ = 1 and ‖w − w'‖² = c: Re(w̄w') fixed; w'/w has
+  re fixed, norm 1 → im = ±√(1 − re²) → equals the two named constants (component
+  equality, M18's `Complex.ext` + sqrt lemmas; no angles anywhere).
+* **Normal form in Γ**: `Subgroup.mem_closure` for a pair of commuting generators — query
+  for `mem_closure_pair`-shaped lemma; fall back on `Subgroup.closure_induction` building
+  `∃ i j, x = ζ₆^i * seam^j` (i j : ℤ) directly (closed under mul/inv — 6 lines).
+* **Label uniqueness**: ζ₆^i seam^j = ζ₆^{i'} seam^{j'} → seam^{j−j'} = ζ₆^{i'−i} →
+  (seam^{j−j'})^6 = 1 → j = j' (`seam_pow_ne_one`, zpow → pow bridging) → ζ₆ order-6
+  arithmetic (i ≡ i' mod 6; `orderOf zeta6 = 6` via explicit computation).
+* **The colouring**: per Γ-orbit choice of base (Classical, fine — `Colorable` is Prop);
+  colour = tables e/o at (i mod 6) with circle tag; properness = the four step cases, each
+  a `decide` over `ZMod 6` table lookups after the ratio classification names the step.
+* **CoverAtLeast.mono_edges**: a G'-colouring yields a G-colouring by properness restriction
+  (`Coloring.mk C.toFun`, valid since `G.Adj ≤ G'.Adj`); cover set of G ⊆ cover set of G'
+  (`neighborFinset` mono needs `G ≤ G'` + DecidableRel both — or state via set-image card
+  over `Finset.filter`; decide exact carrier at skeleton time); `Finset.card_le_card` +
+  `Finset.image_subset`.
+* **DeGreyBalanced**: witness emitted by `tools/emit_*`-style script from the saved cadical
+  model (re-run of `balance.py` dumps it); literal packed as `List (Fin 5)` or bit-packed
+  Nat (M04 pattern — measure olean cost before choosing; 1,581 × 3 bits is one small Nat).
+
+## 3. NOT in M19 (scope, with reasons)
+
+1. **The general-r two-circle theorem** (any class radius, not just 1/3) — the same method
+   likely covers every r with both chord angles defined; deferred until a milestone needs
+   it; the r² = 1/3 case is the live class. → outlook, possibly M20.
+2. **The multi-circle / extension problem** (can external structure force a 4th colour by
+   restricting which 3-colourings of G[S] extend? equivalently: coverage-4 via ambient
+   forcing) — **M20's question**, now precisely posed by the barrier's boundary.
+3. **Certifying the closure's balance verdict** — the closure graph has no Lean-side data
+   modules, and a side negative does not justify a data milestone. Tools-only record.
+4. **Any ghost/forcing theorem** — dead with mechanism (b); nothing to state.
+5. **Kernel-certifying a minCov reading** — unchanged M16 policy; no CONFINED reading
+   exists to certify.
+
+## 4. Gate additions (beyond build green / zero sorry / axioms clean / lint silent)
+
+* `colorstat.py --self-test`, `balance.py --self-test` in `regen-check.sh` (coverage.py's
+  self-test already wired covers `--pool-out` refusals via colorstat's round-trip);
+* negative controls in-module: a 4-clique handed to the two-circle colouring machinery must
+  be *rejected by the hypotheses* (no 4 points pairwise unit on two circles — pinned as an
+  `example` refuting the premise pattern, or a `#guard_msgs` control); `CoverAtLeast`'s
+  vacuous-domain control (empty cover set ⟹ level 1 fails);
+* `#print axioms` on all three new modules: exactly `[propext, Classical.choice,
+  Quot.sound]`; `DeGreyBalanced` may **not** buy `native_decide` (decide +kernel only);
+* the balanced witness's five class sizes asserted in Lean must match the committed JSON
+  witness byte-for-byte (emit-and-reverify, never hand-copy).
 
 ## 5. Operational rules in force (unchanged, recorded in CLAUDE.md)
 
-All builds through `scripts/build.sh`; on any segfault halt and report immediately; one heavy
-job at a time; write-up and `lean4checker` replays deferred indefinitely (publication gates);
-`tools/` untrusted; a `minCov = 5` reading becomes a claim only through M16's kernel route.
+All builds through `scripts/build.sh`; on any segfault halt and report immediately; one
+heavy job at a time; write-up and `lean4checker` replays deferred indefinitely (publication
+gates); `tools/` untrusted; a `minCov = 5` reading becomes a claim only through M16's
+kernel route.
