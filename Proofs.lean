@@ -15,6 +15,9 @@ import Proofs.HadwigerNelson.Critical
 import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.FanMono
+import Proofs.HadwigerNelson.Greedy
+import Proofs.HadwigerNelson.ClassGeometry
+import Proofs.HadwigerNelson.Coverage
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
