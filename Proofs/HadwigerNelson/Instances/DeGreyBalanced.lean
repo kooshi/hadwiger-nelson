@@ -36,19 +36,19 @@ def balancedWitnessPacked : Nat := sorry
 def wcolour (v : ℕ) : ℕ := balancedWitnessPacked >>> (v <<< 2) &&& 15
 
 /-- Every nibble is a real colour. -/
-theorem wcolour_lt_five : ∀ v ∈ List.range 1581, wcolour v < 5 := sorry
+theorem wcolour_lt_five : ∀ v : Fin 1581, wcolour v.val < 5 := sorry
 
 /-- Properness on the committed edge list, decided by the kernel. -/
 theorem wcolour_proper : ∀ e ∈ deGrey.edges, wcolour e.1.val ≠ wcolour e.2.val := sorry
 
-/-- Every colour class has at most 317 vertices — with 1,581 = 5 · 316 + 1 points this is
-the pigeonhole optimum: no 5-partition of the vertices does better. -/
-theorem wcolour_counts :
-    ∀ c ∈ List.range 5, ((List.range 1581).countP fun v => wcolour v == c) ≤ 317 := sorry
-
 /-- The witness as a typed colouring: the nibble, with its range fact. -/
-def balancedColoring (v : Fin 1581) : Fin 5 :=
-  ⟨wcolour v.val, wcolour_lt_five v.val (List.mem_range.mpr v.isLt)⟩
+def balancedColoring (v : Fin 1581) : Fin 5 := ⟨wcolour v.val, wcolour_lt_five v⟩
+
+/-- Every colour class has at most 317 vertices — with 1,581 = 5 · 316 + 1 points this is
+the pigeonhole optimum: no 5-partition of the vertices does better. Stated over the same
+`Finset` the headline consumes, so no list-to-finset bridge intervenes. -/
+theorem balancedColoring_counts :
+    ∀ c : Fin 5, (Finset.univ.filter fun v => balancedColoring v = c).card ≤ 317 := sorry
 
 /-- **De Grey's graph admits a balanced proper 5-colouring**: some proper colouring keeps
 every colour class at the pigeonhole optimum of at most 317 vertices. -/

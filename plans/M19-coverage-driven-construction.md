@@ -199,32 +199,81 @@ survives, sharpened: the 4th colour must come from outside the two circles.
   already has a prose name (`N(p) ∪ Q`). Confidence medium — if a third module ever spells
   it again, name it then.
 
-## 2.5 Proof designs (obligation-level notes for the modeling passes)
+## 2.5 Proof decompositions (obligation pass, 2026-08-04)
 
-* **`seam_pow_ne_one`**: seam^n = 1 → `IsIntegral ℤ seam` (root of monic Xⁿ − 1) → conj seam
-  = seam⁻¹ = seam^(n−1) integral → sum √3/3 integral → square 1/3 integral & rational →
-  1/3 ∈ ℤ, absurd. Query Mathlib: `IsIntegrallyClosed`, `IsIntegral.add`, `IsIntegral.mul`,
-  rational-integral-is-integer (exists in some form — grep before writing).
-* **Ratio classification**: from ‖w‖ = ‖w'‖ = 1 and ‖w − w'‖² = c: Re(w̄w') fixed; w'/w has
-  re fixed, norm 1 → im = ±√(1 − re²) → equals the two named constants (component
-  equality, M18's `Complex.ext` + sqrt lemmas; no angles anywhere).
-* **Normal form in Γ**: `Subgroup.mem_closure` for a pair of commuting generators — query
-  for `mem_closure_pair`-shaped lemma; fall back on `Subgroup.closure_induction` building
-  `∃ i j, x = ζ₆^i * seam^j` (i j : ℤ) directly (closed under mul/inv — 6 lines).
-* **Label uniqueness**: ζ₆^i seam^j = ζ₆^{i'} seam^{j'} → seam^{j−j'} = ζ₆^{i'−i} →
-  (seam^{j−j'})^6 = 1 → j = j' (`seam_pow_ne_one`, zpow → pow bridging) → ζ₆ order-6
-  arithmetic (i ≡ i' mod 6; `orderOf zeta6 = 6` via explicit computation).
-* **The colouring**: per Γ-orbit choice of base (Classical, fine — `Colorable` is Prop);
-  colour = tables e/o at (i mod 6) with circle tag; properness = the four step cases, each
-  a `decide` over `ZMod 6` table lookups after the ratio classification names the step.
-* **CoverAtLeast.mono_edges**: a G'-colouring yields a G-colouring by properness restriction
-  (`Coloring.mk C.toFun`, valid since `G.Adj ≤ G'.Adj`); cover set of G ⊆ cover set of G'
-  (`neighborFinset` mono needs `G ≤ G'` + DecidableRel both — or state via set-image card
-  over `Finset.filter`; decide exact carrier at skeleton time); `Finset.card_le_card` +
-  `Finset.image_subset`.
-* **DeGreyBalanced**: witness emitted by `tools/emit_*`-style script from the saved cadical
-  model (re-run of `balance.py` dumps it); literal packed as `List (Fin 5)` or bit-packed
-  Nat (M04 pattern — measure olean cost before choosing; 1,581 × 3 bits is one small Nat).
+**TwoCircle — constants.** `zeta6_sq = ⟨−1/2, √3/2⟩` and `zeta6_cube = −1` by component
+`linear_combination` over the private `sq_sqrt3 : √3·√3 = 3` (M18 pattern); `zeta6^6 = 1`
+by squaring the cube. `orderOf`-style iff via powers 1–5 ≠ 1 (im ≠ 0 except the cube, by
+re); the ℤ-power iff `zeta6 ^ i = 1 ↔ 6 ∣ i` by `i = 6q + r` split (`Int.emod`) if no
+`orderOf`/zpow bridge lemma answers a query first.
+
+**`seam_pow_ne_one`** (the load-bearing 8 lines): `seam ^ n = 1` →
+`IsIntegral ℤ seam` (root of monic `Xⁿ − 1`; or `IsIntegral.of_pow` on `isIntegral_one`) →
+`seam⁻¹ = seam^(n−1)` integral (`IsIntegral.pow`) → their sum `t` integral
+(`IsIntegral.add`); `t = (√3/3 : ℂ)` componentwise (inverse of a norm-1 number is its
+conjugate, `Complex.ext`); `t² = (1/3 : ℂ)` via `Real.sq_sqrt`; so `1/3` is integral over ℤ
+and rational — `IsIntegrallyClosed` descent (query `IsIntegrallyClosed.isIntegral_iff`,
+`isIntegral_algebraMap_iff` for the ℚ→ℂ leg; fallback: monic `p(1/3) = 0` cleared by
+`3^deg` gives `1 ≡ 0 (mod 3)` — the rational-root argument by hand). `seam_zpow_eq_one_iff`
+by sign split on `j` (`Int.ofNat`/`negSucc`).
+
+**Chord classifications — one helper pair, three instances.**
+`private chord_ratio (hw hv : ‖·‖ = 1) (h : ‖(s:ℝ)·v − w‖ = c) : ∃ u, ‖u‖ = 1 ∧
+‖s·u − 1‖ = c ∧ v = u * w` (u := v·w⁻¹; `(s·u − 1)·w = s·v − w`; norms multiply), then
+`private unit_of_re_im (hu : ‖u‖ = 1) (hre : u.re = a) (hb : 0 ≤ b) (hab : a² + b² = 1) :
+u = ⟨a, b⟩ ∨ u = ⟨a, −b⟩` (normSq gives `im² = b²`, `mul_self_eq_mul_self_iff`, `Complex.ext`).
+Per instance, extract `u.re` from `‖s·u − 1‖ = c` by componentwise normSq expansion
+(`Complex.mul_re/im`, `ofReal`) + `nlinarith`/`linarith`: (s,c) = (1,1) → re = 1/2;
+(1,√3) → −1/2; (√3⁻¹,1) → √3/6. The `⁻¹` spelling in the cross-chord hypothesis is kept —
+it is literally what the phase definition emits at the consumer.
+
+**Labels.** `label w : ℤ × ℤ` by two `Classical.choose` on `sameOrbit_orbitRep`, with
+`label_spec : w = ζ^i·s^j·orbitRep w`. `orbitRep_ne_zero` from norm-1 orbit membership.
+`label_unique` as in the skeleton (cancel base, 6th power, `seam_zpow_eq_one_iff`, then
+`ZMod.intCast_zmod_eq_zero_iff_dvd`-shaped cast — query exact name). The reusable core of
+the assembly: `private label_step (hb : b ≠ 0) (h : y = ζ^a·s^c·x) (hx hy : labels over b) :
+j' = j + c ∧ (i' : ZMod 6) = i + a` — every edge case becomes ratio → `label_step` → table.
+
+**Assembly (`colorable_three_two_circles`).** Phase `if dist z p = 1 then z − p else
+√3·(z − p)` (classical if; norm-1 in both branches, inner via `√3·√3 = 3` and the union
+membership's other disjunct). Colour := `eTable/oTable ((label (phase z)).1 : ZMod 6)` by
+tag. Validity: `by_cases` on the two tags (4 cases); each: dist-to-phase-norm algebra →
+the matching chord classification → `SameOrbit` (so `orbitRep` agrees, `orbitRep_eq_of_
+sameOrbit`) → `label_step` → `eTable_step`/`oTable_step`/`eTable_ne_oTable` (mixed cases
+use the cross lemma with fixed (w, v) roles, `.symm` for the inner-outer orientation).
+Estimated 120–180 lines with the helpers. **comap corollary**: hom `v ↦ ⟨f v, hf v⟩` into
+the induced graph (adjacency definitional), colouring composes along homs (query
+`SimpleGraph.Coloring.comp`/`Hom.comp`; fallback `Coloring.mk (C ∘ hom)`).
+
+**CoverageMono.** `anti` = `le_trans`. `mono_subset` = `Finset.filter_subset_filter` on the
+predicate implication + `card_le_card`. `mono_edges`: restrict `C' : G'.Coloring` to `G` by
+`Coloring.mk C' (C'.valid ∘ hG)`; then `coverColours G … C ⊆ coverColours G' … C'` (same
+underlying function — `rfl` on values) + `card_le_card`. `fan_iff_coverAtLeast`: forward
+through M18's `fan_iff_coverage` — filter = `univ` by `eq_univ_iff_forall`, card = `k` by
+`card_univ`/`Fintype.card_fin`; backward — `card ≥ k` + `⊆ univ` forces `= univ`
+(`Finset.eq_univ_of_card`), pointwise gives the coverage ∀, close with `Fan.of_coverage`.
+`of_triangle_mem`: the M18 move verbatim — `Finset.two_lt_card.mpr` with the three
+`C a/b/c`, memberships via the `∈ Q` disjunct, distinctness via `C.valid`.
+
+**DeGreyBalanced, two layers.** Layer 1 (`decide +kernel` over the packed literal):
+`wcolour_lt_five : ∀ v : Fin 1581, wcolour v.val < 5`;
+`wcolour_proper : ∀ e ∈ deGrey.edges, wcolour e.1.val ≠ wcolour e.2.val`;
+`balancedColoring_counts : ∀ c : Fin 5, (univ.filter (balancedColoring · = c)).card ≤ 317`
+— stated over the *same Finset the headline consumes* (no List↔Finset bridge). Kernel cost
+by the measured model: edges ≈ 8k cells × O(1) big-int ops ≈ trivial; the five
+`univ (Fin 1581)` constructions ≈ 0.8 ms/elem ≈ seconds. Measure at implementation; the
+`Array` layout was already refuted (§2.4). Layer 2: `deGrey_balanced` packages
+`Coloring.mk balancedColoring` (validity from `wcolour_proper`, both edge orientations,
+`Fin.ext_iff`) with the counts fact (filter-predicate bridge `C v = i ↔ balancedColoring
+v = i` is `rfl`-level through the `Coloring.mk` coe).
+
+**Witness emission**: `tools/balance.py --emit` writes the packed hex literal + re-verifies
+the model (proper, sizes) before emitting; the kernel re-checks everything anyway.
+
+**Mutation audits at the gate** (each must go red): drop `hn : n ≠ 0` from
+`seam_pow_ne_one` (seam⁰ = 1); 317 → 316 in the counts (the witness has a 317 class);
+perturb one `eTable` entry (a step lemma's `decide` fails); swap `√3/3` for `1/2` in the
+headline set (the inner-chord classification loses its target).
 
 ## 3. NOT in M19 (scope, with reasons)
 
