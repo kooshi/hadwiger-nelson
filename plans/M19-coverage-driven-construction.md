@@ -171,6 +171,34 @@ survives, sharpened: the 4th colour must come from outside the two circles.
    roadmap row for M18 gets one clarifying clause; no Lean artifact was affected — the Lean
    statements never mentioned forcing).
 
+## 2.4 Domain-pass decisions (2026-08-04)
+
+* **Sphere vocabulary**: the headline set is `Metric.sphere p 1 ∪ Metric.sphere p (√3/3)`,
+  not a raw `dist` set-builder — Mathlib's name for the structure, with its lemma API.
+  Alternative: the `{z | dist … ∨ dist …}` set-builder; rejected because every consumer
+  restates it and `mem_sphere` is where the search looks. Confidence high.
+* **Per-orbit choice is `Quotient.out`**: `orbitSetoid` (a `def`, deliberately *not* an
+  instance) + `orbitRep z := (Quotient.mk orbitSetoid z).out`, with label-existence
+  (`Quotient.mk_out`) and orbit-invariance (`Quotient.sound`) as the two rep lemmas. No
+  quotient type in any signature; no hand-rolled choice plumbing. Alternative: a `Subgroup
+  ℂˣ` + `QuotientGroup` — rejected as unit-coercion noise for zero gain at two generators.
+  Confidence high.
+* **Witness layout is one packed `Nat`, 4 bits per vertex** (M04 `PtTable` pattern) with a
+  nibble extractor `wcolour v = (W >>> 4v) &&& 15`. The `Array (Fin 5)` draft was refuted
+  by the kernel cost model: `Array.get!` reduces through the underlying list at O(index)
+  per access ≈ 12.6M steps over the edge list (minutes); GMP shift-and-mask is ~free, so
+  the packed layout checks in seconds. Two layers exactly as in M06: three decidable data
+  facts over the literal (range, properness, counts) by `decide +kernel`, then the
+  `∃ Coloring, …` headline derived by hand. Confidence high (cost model is measured, M05).
+* **`induce` is primary, `comap` is the corollary**: any `f` with range in the union
+  factors through the induced graph by a hom, and `Colorable` transfers along homs.
+  The `comap` form keeps the consumer-facing hypothesis as sphere *membership* so the two
+  forms compose definitionally. Confidence high.
+* **The cover predicate `G.Adj p v ∨ v ∈ Q` stays unnamed** in CoverageMono — naming it
+  would mint a second spelling of M18's `fan_iff_coverage` RHS (a seam), and the role
+  already has a prose name (`N(p) ∪ Q`). Confidence medium — if a third module ever spells
+  it again, name it then.
+
 ## 2.5 Proof designs (obligation-level notes for the modeling passes)
 
 * **`seam_pow_ne_one`**: seam^n = 1 → `IsIntegral ℤ seam` (root of monic Xⁿ − 1) → conj seam

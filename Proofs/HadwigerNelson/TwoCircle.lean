@@ -96,6 +96,22 @@ theorem SameOrbit.refl (x : ℂ) : SameOrbit x x := sorry
 theorem SameOrbit.symm {x y : ℂ} : SameOrbit x y → SameOrbit y x := sorry
 theorem SameOrbit.trans {x y z : ℂ} : SameOrbit x y → SameOrbit y z → SameOrbit x z := sorry
 
+/-- `SameOrbit` as a setoid — a `def`, deliberately not an `instance`: the equivalence is
+this module's construction tool, not a global fact about ℂ. -/
+def orbitSetoid : Setoid ℂ := ⟨SameOrbit, fun x => SameOrbit.refl x, SameOrbit.symm,
+  SameOrbit.trans⟩
+
+/-- The chosen base point of a phase's orbit — `Quotient.out` doing the per-orbit choice the
+strip colouring needs, packaged so that orbit-mates get the *same* base by construction. -/
+noncomputable def orbitRep (z : ℂ) : ℂ := (Quotient.mk orbitSetoid z).out
+
+/-- Every phase sits in its own base's orbit — the label-existence half. -/
+theorem sameOrbit_orbitRep (z : ℂ) : SameOrbit (orbitRep z) z := sorry
+
+/-- Orbit-mates share their base — the colouring's well-definedness half. -/
+theorem orbitRep_eq_of_sameOrbit {x y : ℂ} (h : SameOrbit x y) : orbitRep x = orbitRep y :=
+  sorry
+
 /-- **Label uniqueness**: the exponent pair of an orbit element is unique up to the order of
 `zeta6` — `j` on the nose, `i` mod 6. Rides entirely on `seam_pow_ne_one`. -/
 theorem label_unique {i i' j j' : ℤ}
@@ -123,18 +139,18 @@ theorem eTable_ne_oTable (i : ZMod 6) : eTable i ≠ oTable i := by decide +reve
 
 /-! ### The theorem -/
 
-/-- **The two-circle theorem, induced form.** The unit-distance graph on the *entire* set
-`{z | dist z p = 1 ∨ dist z p = 1/√3}` — both circles about `p`, all of them, uncountably
-many points — is 3-colourable. -/
+/-- **The two-circle theorem, induced form.** The unit-distance graph on the *entire* union
+of the two spheres about `p` — all of both circles, uncountably many points — is
+3-colourable. -/
 theorem colorable_three_two_circles (p : ℂ) :
     ((unitDistance ℂ).induce
-      {z : ℂ | dist z p = 1 ∨ dist z p = Real.sqrt 3 / 3}).Colorable 3 := sorry
+      (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3))).Colorable 3 := sorry
 
 /-- **The two-circle theorem, mapped form** — the shape a cover-set application consumes:
 any family of points on the two circles about `p`, however indexed, spans a 3-colourable
-unit-distance graph. -/
+unit-distance graph. Derived from the induced form by factoring `f` through the union. -/
 theorem colorable_three_of_two_circles {ι : Type*} (f : ι → ℂ) (p : ℂ)
-    (hf : ∀ v, dist (f v) p = 1 ∨ dist (f v) p = Real.sqrt 3 / 3) :
+    (hf : ∀ v, f v ∈ Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)) :
     ((unitDistance ℂ).comap f).Colorable 3 := sorry
 
 end TwoCircle
