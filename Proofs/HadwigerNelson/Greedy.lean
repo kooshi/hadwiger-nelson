@@ -20,7 +20,7 @@ namespace SimpleGraph
 
 /-- **Greedy colouring.** A finite graph each of whose vertices has degree strictly less than
 `k` is `k`-colourable. -/
-theorem colorable_of_degreeLT {V : Type*} [Fintype V] (G : SimpleGraph V)
+theorem colorable_of_degree_lt {V : Type*} [Fintype V] (G : SimpleGraph V)
     [DecidableRel G.Adj] {k : ℕ} (h : ∀ v, G.degree v < k) : G.Colorable k := by
   sorry
 

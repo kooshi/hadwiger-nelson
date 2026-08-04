@@ -28,9 +28,22 @@ namespace HadwigerNelson
 
 variable {V : Type*} {G : SimpleGraph V} {k : ℕ}
 
+/-- **Coverage forces the fan**, with no side condition at all: if a colouring puts every
+colour somewhere on `N(p) ∪ Q`, then in particular `p`'s own colour lands there, properness
+bars the neighbourhood, and the class is all that is left. This is the direction a
+coverage-driven construction consumes (M19), so it travels without the `p ∉ Q` hypothesis
+only the converse needs. -/
+theorem fan_of_coverage {p : V} {Q : List V}
+    (h : ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ v, (G.Adj p v ∨ v ∈ Q) ∧ C v = c) :
+    Fan G k p Q := by
+  sorry
+
 /-- **Fan ⟺ compulsory coverage.** `p` is fanned by `Q` exactly when no proper `k`-colouring
-can keep a colour off `N(p) ∪ Q` entirely. Requires only that `p` is not its own partner —
-true of every distance class, which never contains its pivot. -/
+can keep a colour off `N(p) ∪ Q` entirely. The forward direction is the recolouring move — a
+colour missing from `N(p) ∪ Q` may be handed to `p`, separating it — and is what makes
+`minCov` (`tools/coverage.py`) a *distance*: `minCov = k` is confinement, not merely evidence
+of it. Requires only that `p` is not its own partner — true of every distance class, which
+never contains its pivot. -/
 theorem fan_iff_coverage {p : V} {Q : List V} (hp : p ∉ Q) :
     Fan G k p Q ↔
       ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ v, (G.Adj p v ∨ v ∈ Q) ∧ C v = c := by

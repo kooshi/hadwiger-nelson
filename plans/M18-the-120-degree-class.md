@@ -110,7 +110,7 @@ certificates, no `decide` at scale.
 Three new modules, all leaves (nothing imports them; no certificate rebuild exposure):
 
 **`Proofs/HadwigerNelson/Greedy.lean`** — the missing Mathlib lemma:
-`SimpleGraph.colorable_of_degreeLT : (∀ v, G.degree v < k) → G.Colorable k`. Searched and not
+`SimpleGraph.colorable_of_degree_lt : (∀ v, G.degree v < k) → G.Colorable k`. Searched and not
 found (no greedy, no Δ+1, no degeneracy colouring in Mathlib at this pin); to be re-queried by
 shape with `exact?`/Loogle before the sorry burns, per the claims-of-absence rule.
 
@@ -123,17 +123,29 @@ working plane; rotation is multiplication):
 | `distSq_centroid_unit_triangle` | the centroid of a unit triangle is at squared distance 1/3 from each vertex |
 | `eq_centroid_of_equidistant_unit_triangle` | an equidistant point *is* the centroid |
 | `exists_unit_triangle_iff` | **a class carries a unit triangle ⟺ r² = 1/3** |
-| `omega3`, `rot3` + 7 lemmas | ω = e^{2πi/3} in coordinates; rot3 is an isometry fixing classes, ρ³ = id, moves the 1/3-class exactly 1, orbits are unit triangles |
-| `classOnlyGraph` | the graph of a class's own unit edges, nothing else |
-| `not_fan_of_edges_within` | abstract: edges ⊆ Q, degrees < 3, k ≥ 4 ⇒ ¬Fan |
+| `omega3`, `rot3` + 8 lemmas | ω = e^{2πi/3} in coordinates; rot3 is an isometry fixing classes, ρ³ = id, orbits are unit triangles |
+| `dist_rot3_self` | **unconditional**: the 120° rotation displaces every point by `√3 ·` its radius; the 1/3-class is the fixed point of that scaling against the unit (`dist_rot3_self_of_third`) |
+| `classOnlyGraph` | the graph of a class's own unit edges, nothing else — the *maximal* class-only graph, so `Fan.mono`'s contrapositive hands ¬Fan to every subgraph free |
+| `not_fan_of_colorable_of_edges_within` | abstract, instance-free: edges ⊆ Q, Q-part `c`-colourable, `c < k` ⇒ ¬Fan — the milestone's "4" named as 3 + 1 |
 | `degree_classOnlyGraph_le_two` | the chord bound worn by the graph |
 | `not_fan_classOnlyGraph` | **no distance class can confine a fan by itself** |
+
+*Domain-modeling pass (2026-08-03) reshaped three statements: the 120° identity is stated
+unconditionally (the hypothesis-form hid the scaling law); the abstract no-confinement lemma
+generalizes `4 ≤ k` + degree-bound to `Colorable c` + `c < k`, dropping all finiteness and
+decidability; and `fan_of_coverage` splits out of the iff because the construction-facing
+direction never needs `p ∉ Q`. Confirmed against alternatives: chord bound in 3-points-2-equal
+form (the consumable clothing of "≤ 2"); the triangle iff is total with zero side hypotheses
+(s ≤ 0 falsifies the left side by itself); ω in coordinates rather than Mathlib's cyclotomic
+vocabulary (four one-line facts don't earn the import); `rot3` is verified to be the same
+rotation `tools/field.py` computes at 1/3.*
 
 **`Proofs/HadwigerNelson/Coverage.lean`** — the reduction:
 
 | statement | content |
 |---|---|
-| `fan_iff_coverage` | **Fan ⟺ every colouring covers `N(p) ∪ Q` with all k colours** (needs only `p ∉ Q`) |
+| `fan_of_coverage` | coverage ⇒ fan, hypothesis-free — the direction M19's construction consumes |
+| `fan_iff_coverage` | **Fan ⟺ every colouring covers `N(p) ∪ Q` with all k colours** (needs only `p ∉ Q`, and only for ⇒) |
 | `three_le_card_of_triangle_mem` | the rainbow floor: a triangle in Q forces 3 colours on Q |
 
 **Instruments** (`tools/`, untrusted, self-tested with negative controls):

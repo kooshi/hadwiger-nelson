@@ -78,8 +78,10 @@ theorem exists_unit_triangle_iff {p : ℂ} {s : ℝ} :
 about it is a `linear_combination` certificate away. -/
 noncomputable def omega3 : ℂ := ⟨-(1 / 2), Real.sqrt 3 / 2⟩
 
-/-- Rotation by 120° about `p` — the spindle rotation of the `1/3`-class, and the map whose
-orbits close that class into unit triangles. -/
+/-- Rotation by 120° about `p` — the map whose orbits close the `1/3`-class into unit
+triangles. This is exactly the spindle rotation `tools/field.py` computes at `r² = 1/3`
+(`A = -1, B = √3, D = 2`, i.e. `cos = -1/2, sin = √3/2`), so the Lean statement and the
+instrument move points by the same rotation. -/
 noncomputable def rot3 (p z : ℂ) : ℂ := p + omega3 * (z - p)
 
 example : omega3.re = -(1 / 2) := rfl
@@ -110,9 +112,16 @@ theorem dist_rot3 (p z w : ℂ) : dist (rot3 p z) (rot3 p w) = dist z w := by
 theorem dist_rot3_pivot (p z : ℂ) : dist (rot3 p z) p = dist z p := by
   sorry
 
-/-- **The 120° identity**: on the `1/3`-class, rotation by 120° moves every point exactly one
-unit — `|ω − 1|² · (1/3) = 1`. -/
-theorem dist_rot3_self {p z : ℂ} (h : dist z p ^ 2 = 1 / 3) : dist (rot3 p z) z = 1 := by
+/-- **The 120° identity, unconditionally**: rotation by 120° about `p` displaces every point
+of the plane by exactly `√3` times its distance from `p` — `|ω − 1| = √3`. The class at
+squared radius `1/3` is the fixed point of this scaling against the unit: `√3 · √(1/3) = 1`. -/
+theorem dist_rot3_self (p z : ℂ) : dist (rot3 p z) z = Real.sqrt 3 * dist z p := by
+  sorry
+
+/-- The `1/3` instance of `dist_rot3_self`: on the 120° class, the rotation moves every
+point exactly one unit — the spindle identity the ℤ/3 closure is built from. -/
+theorem dist_rot3_self_of_third {p z : ℂ} (h : dist z p ^ 2 = 1 / 3) :
+    dist (rot3 p z) z = 1 := by
   sorry
 
 /-- **The closure is rainbow fuel**: the ℤ/3 orbit of any `1/3`-class point is a unit
@@ -131,14 +140,15 @@ def classOnlyGraph {n : ℕ} (f : Fin n → ℂ) (Q : List (Fin n)) : SimpleGrap
   symm := ⟨fun _ _ h => ⟨h.1.symm, by rw [dist_comm]; exact h.2.1, h.2.2.2, h.2.2.1⟩⟩
   loopless := ⟨fun _ h => h.1 rfl⟩
 
-/-- The abstract half of "no class confines alone": if a graph's edges all live inside `Q` and
-every degree is below 3, then with four or more colours some colouring separates `p` from all
-of `Q` — three colours for `Q`, a fourth for everything else. -/
-theorem not_fan_of_edges_within {V : Type*} [Fintype V] [DecidableEq V]
-    {G : SimpleGraph V} [DecidableRel G.Adj] {p : V} {Q : List V} {k : ℕ}
-    (hp : p ∉ Q) (hk : 4 ≤ k)
-    (hQ : ∀ ⦃x y⦄, G.Adj x y → x ∈ Q ∧ y ∈ Q)
-    (hdeg : ∀ v, G.degree v < 3) :
+/-- The abstract half of "no class confines alone", in its true generality: a graph whose
+edges all live inside `Q` and whose `Q`-part is `c`-colourable cannot fan a pivot `p ∉ Q`
+once even one colour more is available — `c` colours for `Q`, the spare for everything else.
+The milestone's "4 colours suffice against a class" is the instance `c = 3` handed by the
+chord bound plus greedy colouring: 3 + 1, named. No finiteness, no decidability. -/
+theorem not_fan_of_colorable_of_edges_within {V : Type*}
+    {G : SimpleGraph V} {p : V} {Q : List V} {c k : ℕ}
+    (hp : p ∉ Q) (hQ : ∀ ⦃x y⦄, G.Adj x y → x ∈ Q ∧ y ∈ Q)
+    (hc : G.Colorable c) (hck : c < k) :
     ¬ Fan G k p Q := by
   sorry
 
