@@ -261,6 +261,23 @@ else
   echo "    self-test green, ledger recipes re-derivable"
 fi
 
+# --- the M18 coverage and census instruments ---------------------------------------------------
+# coverage.py measures minCov (distance to confinement; Coverage.lean's fan_iff_coverage is the
+# statement it measures); classstat.py censuses in-class structure and checks the three
+# predictions ClassGeometry.lean proves — degree ≤ 2, triangles only at 1/3, cycles from the
+# field's roots of unity. Both self-tests drive their readings to the trigger and watch the
+# refusals; the census's violation reporter is the geometry lemmas' empirical mirror.
+echo "==> coverage and census instruments (M18)"
+if ! python3 tools/coverage.py --self-test > "${V}/coverage-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/coverage-selftest.log"
+  echo "    FAIL: tools/coverage.py self-test"; FAIL=1
+elif ! python3 tools/classstat.py --self-test > "${V}/classstat-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/classstat-selftest.log"
+  echo "    FAIL: tools/classstat.py self-test"; FAIL=1
+else
+  echo "    both self-tests green"
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

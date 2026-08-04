@@ -406,6 +406,28 @@ sub-candidate. -/
 #print axioms Fan.of_subset
 #print axioms not_fan_of_subset
 
+/-! ## M18 — the 120° class
+
+The plane-level structure behind the resisting histogram: the chord bound, the triangle
+identity, the 120° closure, "no class confines alone" (with its greedy-colouring engine), and
+the coverage⟺fan reduction that turns confinement into a measurable gradient. -/
+
+#print axioms SimpleGraph.colorable_of_degree_lt
+#print axioms eq_or_eq_or_eq_of_dist_eq
+#print axioms dist_sq_centroid_unit_triangle
+#print axioms eq_centroid_of_dist_eq
+#print axioms exists_unit_triangle_iff
+#print axioms omega3_cube
+#print axioms rot3_rot3_rot3
+#print axioms dist_rot3_self
+#print axioms rot3_unit_triangle
+#print axioms not_fan_of_colorable_of_edges_within
+#print axioms degree_classOnlyGraph_le_two
+#print axioms not_fan_classOnlyGraph
+#print axioms Fan.of_coverage
+#print axioms fan_iff_coverage
+#print axioms three_le_card_of_triangle_mem
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

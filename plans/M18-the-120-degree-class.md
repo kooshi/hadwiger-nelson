@@ -32,12 +32,14 @@ unit-neighbourhood whose 1/3-class is closed.**
 
 ### 0(b) The distribution: the whole closure sits at or below the floor
 
-All-pivots sweep of closure-630's 1/3-classes (4,615 pivots carry one; exact SAT walks at
-every pivot the growing pool could not bound below 4): every walked pivot lands at
-**`minCov ∈ {2, 3}`** — 3 where the pivot's class fragment contains a triangle, 2 where it
-does not (measured 743 vs 102 in the first 845 walks; final histogram appended below when the
-run lands). Nobody anywhere in the most triangle-rich graph in existence is even *one* colour
-from confinement. Any coverage-driven construction starts from 3, not from 4.
+All-pivots sweep of closure-630's 1/3-classes, complete (landed 2026-08-03, ~75 min): 4,615
+pivots carry a 1/3-class; the growing pool could not bound 4,448 of them below 4 at first
+sight, and the exact SAT walk at **every one of them** resolved to `minCov ∈ {2, 3}` — the
+final histogram over all 4,615 pivots is **{2: 598, 3: 4,017}, nothing above 3** (3,054
+colourings in the terminal pool). The floor tracks the triangle census exactly: 3 where the
+pivot's class fragment carries a triangle, 2 where it does not. Nobody anywhere in the most
+triangle-rich graph in existence is even *one* colour from confinement; any coverage-driven
+construction starts from 3, not from 4.
 
 ### 0(c) The census: the three predictions hold, and the resisters get names
 
@@ -276,6 +278,6 @@ time; `lean4checker` replays deferred indefinitely (publication gate, other hard
 
 ---
 
-*Appendix (§0 completions, to land before the gate): final all-pivots histogram for
-closure-630; the resist join table for de Grey; closure-633 census if the numbers above shift
-any conclusion.*
+*All §0 measurements are complete and folded in above: the closure headline (0(a)), the full
+all-pivots histogram (0(b)), both censuses and the resist join with its two-mechanism finding
+(0(c)). Raw logs under `build/m18-*.log` (gitignored, regenerable by the commands in §0).*
