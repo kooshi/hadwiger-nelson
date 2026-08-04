@@ -148,6 +148,59 @@ rotation `tools/field.py` computes at 1/3.*
 | `fan_iff_coverage` | **Fan ⟺ every colouring covers `N(p) ∪ Q` with all k colours** (needs only `p ∉ Q`, and only for ⇒) |
 | `three_le_card_of_triangle_mem` | the rainbow floor: a triangle in Q forces 3 colours on Q |
 
+### 2.5 The proof designs (obligation-modeling pass, 2026-08-03)
+
+Every `sorry` has a named decomposition; the leaves are `linear_combination`/`field_simp`
+certificates or one-line closes. The module's engine room is three `private` helpers over
+re/im components — `dot`, `cross`, and the bridges — stated once, consumed by every geometry
+lemma:
+
+* **The dot/cross engine** (private): `normSq_eq_of_dist_eq` (dist to normSq bridge);
+  `perp_perp_parallel` (two vectors orthogonal to one nonzero vector have zero cross —
+  two `linear_combination`s and a component case split); `eq_of_perp_two_independent`
+  (orthogonal to two non-parallel vectors ⟹ zero — Cramer, per component); the **Lagrange
+  identity** `cross² + dot² = normSq·normSq` is `ring` and supplies every non-parallelism.
+* **Chord bound**: equidistance at `p` and at `q` gives bisector orthogonalities; subtracting
+  pairs gives `a−b ⊥ q−p` and `b−c ⊥ q−p`, hence parallel (`e = μ·d`). The close needs no
+  circle parametrization: `dot(d, b−p) = −normSq d / 2` (from the `p`-bisector) forces
+  `(1+μ)·normSq d = 0`, so `μ = −1` and `a = c` — after `by_cases` retires `a = b`, `b = c`.
+* **Triangle identity**: centroid distSq is one certificate (`9·LHS = 3` via the polarization
+  `dot(b−a, c−a) = 1/2`); equidistant-uniqueness runs the Cramer helper with
+  `cross(a−b, b−c)² = 3/4` from Lagrange; the iff's `←` consumes the rotation section (the
+  witness triangle is the ℤ/3 orbit of `p + √(1/3)`), which fixes the module order:
+  engine → rotation → triangle identity → graph section.
+* **rot3**: `ω³ = 1` and the normSq facts are componentwise certificates with
+  `Real.sq_sqrt`; `rot3_rot3_rot3` is `linear_combination (z−p) * omega3_pow_three`;
+  the isometry and pivot lemmas factor through a private `‖omega3‖ = 1`; the orbit triangle's
+  third side rewrites `z = ρ³z` and reuses the first side at `ρ²z` (radius preserved by
+  `dist_rot3_pivot`, twice).
+* **Greedy** (the one real induction): auxiliary statement — *for every `s : Finset V` there
+  is a total `C : V → Fin (k+1)` proper on `s`* — by `Finset.strongInductionOn`
+  (`s.erase v ⊂ s` is the descent); the step colours `v` by pigeonhole
+  (`(s.erase v ∩ neighborFinset v).image C` has card `≤ degree v < k+1`), extension via
+  `Function.update` under `classical`. `k = 0` splits at the top: a vertex would have
+  `degree < 0`. The main theorem instantiates `s := univ`.
+* **`not_fan_of_colorable_of_edges_within`**: embed `Fin c ↪ Fin k` by `Fin.castLE`, send
+  everything outside `Q` (including `p`) to the spare colour `⟨c, hck⟩`; validity from
+  edges-within + `C₀.valid`; the fan hypothesis then equates `⟨c,_⟩` with a `castLE` value,
+  refuted on `val`.
+* **`degree_classOnlyGraph_le_two`**: contrapose to three distinct neighbours
+  (`Finset.two_lt_card`), read the sphere and unit hypotheses off the adjacency, feed the
+  chord bound with centres `x` and `f v` (distinct since `s ≠ 0`), and let injectivity turn
+  the point-equality disjunction into a vertex-equality contradiction.
+* **`fan_iff_coverage`**: `←` is `fan_of_coverage` (properness bars `N(p)`, 5 lines); `→` is
+  the update move — `Function.update C p c` under `classical`, validity by the three-way
+  `v = p` case split, then the fan at the updated colouring names a `q ∈ Q` wearing `c`,
+  contradiction. `three_le_card_of_triangle_mem` provides `⟨C a, C b, C c⟩` with pairwise
+  `C.valid` distinctness to `Finset.two_lt_card`.
+
+**Hypothesis audits, done in advance:** `hs : s ≠ 0` is load-bearing (at `s = 0` the pivot
+joins its own class and `Fan` is trivially true — the adversarial member is recorded as a
+planned negative example); `hf : Function.Injective f` mirrors the instrument's
+duplicate-point guard (three vertices naming one plane point inflate a degree past 2);
+strictness in greedy's `<` is pinned by the existing triangle/spindle non-colourability
+instances.
+
 **Instruments** (`tools/`, untrusted, self-tested with negative controls):
 `coverage.py` (minCov; §0(a,b)) and `classstat.py` (census + violation reporter + resist
 join; §0(c)) — both already landed and green; they are §0's instruments and deliverables at
