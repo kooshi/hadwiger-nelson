@@ -428,6 +428,31 @@ the coverage⟺fan reduction that turns confinement into a measurable gradient. 
 #print axioms fan_iff_coverage
 #print axioms three_le_card_of_triangle_mem
 
+/-! ## M19 — the two-circle theorem, the coverage ratchet, the balanced witness
+
+The local ceiling (every unit-distance graph on a 120°-pivot's two circles is 3-colourable,
+via the seam rotation's infinite order), the monotonicity that makes minCov a ratchet, and
+the kernel-checked balanced 5-colouring of de Grey's graph (the density-obstruction
+negative). The witness facts are `decide +kernel` — no native evaluation anywhere. -/
+
+#print axioms TwoCircle.seam_pow_ne_one
+#print axioms TwoCircle.zeta6_zpow_eq_one_iff
+#print axioms TwoCircle.ratio_of_unit_chord
+#print axioms TwoCircle.ratio_of_sqrt3_chord
+#print axioms TwoCircle.ratio_of_cross_chord
+#print axioms TwoCircle.label_unique
+#print axioms TwoCircle.colorable_three_induce
+#print axioms TwoCircle.colorable_three_comap
+#print axioms CoverAtLeast.anti
+#print axioms CoverAtLeast.mono_subset
+#print axioms CoverAtLeast.mono_edges
+#print axioms fan_iff_coverAtLeast
+#print axioms CoverAtLeast.of_triangle_mem
+#print axioms balancedColorRaw_lt
+#print axioms balancedColorRaw_proper
+#print axioms balancedColoring_counts
+#print axioms deGrey_balanced
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

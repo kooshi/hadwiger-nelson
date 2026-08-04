@@ -278,6 +278,22 @@ else
   echo "    both self-tests green"
 fi
 
+# --- the M19 pool and balance instruments ------------------------------------------------------
+# colorstat.py studies the colouring pools as objects (identity-checked, re-verified proper on
+# load); balance.py answers cardinality-bounded colouring questions and emits the kernel-checked
+# balanced witness (DeGreyBalanced.lean re-decides everything it claims). Both self-tests drive
+# every refusal to its trigger.
+echo "==> pool and balance instruments (M19)"
+if ! python3 tools/colorstat.py --self-test > "${V}/colorstat-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/colorstat-selftest.log"
+  echo "    FAIL: tools/colorstat.py self-test"; FAIL=1
+elif ! python3 tools/balance.py --self-test > "${V}/balance-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/balance-selftest.log"
+  echo "    FAIL: tools/balance.py self-test"; FAIL=1
+else
+  echo "    both self-tests green"
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

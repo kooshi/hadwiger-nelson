@@ -67,10 +67,13 @@ with every colour class ≤ s?
   Witness class sizes **[317, 316, 316, 316, 316]**, re-verified proper on all 7,877 edges.
   **De Grey's graph admits a perfectly balanced 5-colouring** — the pool's 0.2113 density
   floor was pure CDCL bias, and no density obstruction exists at witness scale.
-* **Closure, s = 936 (pigeonhole for n = 4,678): running at subplan commit** (21.9M vars,
-  43.9M clauses, encode 25 s; verdict folds in before the implementation commit). The
-  closure pool's own density floor is already 0.2041 vs pigeonhole 0.2001 — the pools get
-  *more* balanced with growth, so SAT is expected.
+* **Closure, s = 936 (pigeonhole for n = 4,678): SAT in 3,668 s** (21.9M vars, 43.9M
+  clauses). **The density thread is closed at both scales.** Honesty note: the scratch
+  verifier printed model-literal class counts summing to n + 1 — one vertex carried two
+  admissible colours in the model (the scratch code checked properness on the first-colour
+  reading only, which is the reading the conclusion uses; every class ≤ 936 holds for it).
+  The promoted `tools/balance.py` refuses multi-colour models by name; the closure run
+  predates the promotion and stays a tools-only observation, uncertified.
 
 ### 0(d) Design experiments — minCov(630, 1/3) per gadget, fresh pool each
 
@@ -82,13 +85,14 @@ reproduced first; the closure regenerates deterministically (same 3,054-pool his
 | E0 control | Z3 closure as-is | 4,678 / 24,405 | 12 | 9 | **3** (2 calls + seed, 1.8 s) |
 | E1 | 2nd ℤ/3 closure at q_n = 726 (widest-class unit neighbour) | 13,432 / 72,525 | 14 | 9 | **3** (3 calls, 37 s) |
 | E1′ | 2nd ℤ/3 closure at q_c = 648 (member of C(630)) | 12,937 / 80,379 | 18 | 10 | **3** (3 calls, 348 s) |
-| E2 | spindle-double at 630, r² = 1 | in flight | | | predicted 3 |
-| E3 | spindle-double at 630, r² = 3 | in flight | | | predicted 3 |
+| E2 | spindle-double at 630, r² = 1 | 9,049 / 49,158 | 24 | 18 | **3** (first run deferred at 300 s; resolved exact at a 3,600 s budget, 1,355 s) |
+| E3 | spindle-double at 630, r² = 3 | — | | | **refused by name**: pivot 630 carries no class at exactly r² = 3 in the closure |
 
-E0–E1′ verdict: tripling the graph at the strongest available attachment points moves
-nothing — exactly what the two-circle theorem (0(e)) *predicts*, since every one of these
-gadgets acts inside or through the cover set's two circles. E2/E3 verdicts fold in before
-the implementation commit; the theorem predicts 3 for both.
+Battery verdict: nothing moves the number — E0 = E1 = E1′ = E2 = 3, exactly as the
+two-circle theorem (0(e)) predicts for cover-set-internal gadgets; E2's deferral was a
+hard-but-satisfiable instance, not an obstruction (the extension mechanism did not bite at
+these gadgets either). E3's refusal is itself a datum about the doubling pivot's class
+spectrum.
 
 ### 0(e) The discovery: the two-circle theorem (draft proved, verified numerically)
 

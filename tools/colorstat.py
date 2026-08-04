@@ -23,9 +23,12 @@ theory. Nothing had ever looked at them before M19. What this measures:
 * **translation structure** — same-colour rates along the most-realized exact difference
   vectors, against each colouring's own base rate: the skeleton of periodicity, if any;
 * **margins** (`--margins-pivot`) — per class at a pivot, how often the pool paints a member
-  the pivot's colour: mechanism (b)'s forcing margin, measured. `--sat-margins T` then asks the
-  solver (forcer.forces) whether any colouring at all separates the high-margin pairs — the
-  pool says "rarely separated", the solver says "never" or shows one.
+  the pivot's colour. **Bias caveat (M19 §0(b)): a pool margin is a fact about the solver's
+  preferred colourings, not about the colouring space** — the balance probe proved the pools'
+  apparent density floor was pure CDCL bias, and the rot3-ghost probe showed rotation-image
+  margins indistinguishable from distance-matched controls. Only SAT/UNSAT verdicts and
+  matched contrasts are solver-independent; `--sat-margins T` asks the real question
+  (does any colouring separate the pair) through forcer.forces.
 
 The pool artifact carries its graph's identity (n, edge count, edge-list hash); this reader
 rebuilds the graph independently, refuses a mismatch by name, and re-verifies every pool
