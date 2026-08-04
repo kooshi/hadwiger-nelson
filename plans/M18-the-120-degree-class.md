@@ -55,14 +55,27 @@ kernel is asked to check them:
    pentagon class carries a unit edge**.
 
 Structure table (de Grey, top keys by in-class edges): r²=1 — 8,520 edges, 6-cycles, but every
-member is adjacent to the pivot, so it can never resist; **r²=1/3 — 7,392 edges, density
-0.57, all 1,592 triangles**; r²=3 — 2,304 edges, density 0.36, *pure paths*; then 7/3, 5/9,
-and the **√33 family** (√33 = √3·√11): a dozen distinct irrational keys (10/3±⅓√33, 8/9±⅑√33,
-…) totalling ≈ 9,000 in-class edges of pure path structure — more than 1/3's total, spread
-across many keys. M17's "irrationals resist second" bucket is now named: it is the √33 family,
-and its mechanism (path structure constraining pool colourings) is the same as r²=3's, just
-distributed. The resist-join run (`--resist`) lands the per-key resistance-vs-width
-normalization; appended below when done.
+member is adjacent to the pivot, so it can never resist (measured: 1 resist call in the whole
+graph); **r²=1/3 — 7,392 edges, density 0.57, all 1,592 triangles**; r²=3 — 2,304 edges,
+density 0.36, *pure paths*; then 7/3, 5/9, and the **√33 family** (√33 = √3·√11): a dozen
+distinct irrational keys totalling ≈ 9,000 in-class edges of pure path structure.
+
+**The resist join overturned the first reading of that table.** The join (same census with
+each solver call credited to its exact key) ranks: 1/3 first (178 calls — triangles, as the
+budget mechanism predicts), r²=3 second (46 — paths), and then a surprise: the resisting
+irrational keys are **not** the structured ones. The top irrational resisters —
+2−⅓√33 (34), 7/6−⅙√33 (22), 3/2∓⅙√33 (21, 19), 5/3−2/9√33 (15) — carry **zero in-class
+edges**, while the √33 keys *with* ~1,300 edges of path structure (8/9±⅑√33) resisted 3 calls
+each. Width does not explain it (5/3: 11,184 members, 0 edges, 6 calls; 4/3: 6,632 members,
+2 calls). So resistance has **two distinct mechanisms**: (a) *in-class colour budget* —
+triangles at 1/3, paths at 3; and (b) *ambient near-forcing*: structureless classes at
+specific small √33 distances whose members' colours track the pivot's through the ambient
+graph (a member fully forced would BE confinement — M13's `Forces` — so these classes sit
+near that cliff without reaching it). Mechanism (b) is exactly the kind of neighbourhood
+forcing a coverage-driven construction needs pointed AT `N(p)` — M19's opening lead. (Note
+the sweep tests irrational classes after rational ones per pivot, so the pool is warmer for
+them: irrational resist counts are biased *down*, and the mechanism-(b) signal is stronger
+than the raw numbers show.)
 
 ### 0(d) The pentagon correction — caught before formalizing the wrong theorem
 
@@ -119,9 +132,9 @@ working plane; rotation is multiplication):
 
 | statement | content |
 |---|---|
-| `eq_or_eq_or_eq_of_two_spheres` | two distinct circles share ≤ 2 points (the chord bound) |
-| `distSq_centroid_unit_triangle` | the centroid of a unit triangle is at squared distance 1/3 from each vertex |
-| `eq_centroid_of_equidistant_unit_triangle` | an equidistant point *is* the centroid |
+| `eq_or_eq_or_eq_of_dist_eq` | two distinct circles share ≤ 2 points (the chord bound) |
+| `dist_sq_centroid_unit_triangle` | the centroid of a unit triangle is at squared distance 1/3 from each vertex |
+| `eq_centroid_of_dist_eq` | an equidistant point *is* the centroid |
 | `exists_unit_triangle_iff` | **a class carries a unit triangle ⟺ r² = 1/3** |
 | `omega3`, `rot3` + 8 lemmas | ω = e^{2πi/3} in coordinates; rot3 is an isometry fixing classes, ρ³ = id, orbits are unit triangles |
 | `dist_rot3_self` | **unconditional**: the 120° rotation displaces every point by `√3 ·` its radius; the 1/3-class is the fixed point of that scaling against the unit (`dist_rot3_self_of_third`) |
@@ -144,9 +157,34 @@ rotation `tools/field.py` computes at 1/3.*
 
 | statement | content |
 |---|---|
-| `fan_of_coverage` | coverage ⇒ fan, hypothesis-free — the direction M19's construction consumes |
+| `Fan.of_coverage` | coverage ⇒ fan, hypothesis-free — the direction M19's construction consumes; dot-named to join `Fan.of_edges`/`Fan.of_unsat`/`Fan.of_subset` |
 | `fan_iff_coverage` | **Fan ⟺ every colouring covers `N(p) ∪ Q` with all k colours** (needs only `p ∉ Q`, and only for ⇒) |
 | `three_le_card_of_triangle_mem` | the rainbow floor: a triangle in Q forces 3 colours on Q |
+
+### 2.7 The consumer surface (experience-modeling pass, 2026-08-03)
+
+* **Names to precedent**: `Fan.of_coverage` joins the `Fan.of_*` family; `omega3_cube` follows
+  `Complex.I_sq` (name the LHS of a defining equation); `dist_rot3_self_eq_one`,
+  `eq_centroid_of_dist_eq`, `eq_or_eq_or_eq_of_dist_eq` use Mathlib's `of_dist_eq` hypothesis
+  suffix rather than invented vocabulary ("equidistant", "two_spheres").
+* **No `@[simp]` tags in M18.** Alternative weighed: tagging the three rewrite-safe rot3
+  lemmas (`dist_rot3`, `dist_rot3_pivot`, `rot3_rot3_rot3`). Rejected: the house set is
+  austere (one tag in all of `Fan.lean`), the only present consumers are this module's own
+  proofs, and a global tag is speech never taken back — cite `simp only [dist_rot3]`
+  explicitly and revisit when M19 exists. Confidence high.
+* **The census is the geometry lemmas' spec mirror.** ℝ-geometry cannot `#eval`, so the
+  per-definition drift examples are: component `rfl`s on `omega3`, a concrete
+  `rot3 0 1 = omega3`, concrete `classOnlyGraph` adjacency and non-adjacency examples, the
+  explicit unit triangle `(0, 1, e^{iπ/3})` as the non-vacuity model of all triangle
+  hypotheses, and `classstat.py`'s 2.6M-key census as the space-level control.
+* **Negative-control set** (make-the-gate-fail): a `#guard_msgs`-pinned `decide` failure for
+  greedy's strictness (K₃ at k=2); the `s = 0` adversarial member as an `example` of a
+  trivially-true Fan (why `hs` exists); the edgeless-graph coverage failure witnessed by a
+  constant colouring; membership-violation non-adjacency for `classOnlyGraph`.
+* **Module doc gains a "which one to reach for" table** at implementation, mirroring
+  `Fan.lean`'s.
+* **Instrument surfaces already conversational**: both tools self-test, refuse degenerate
+  input by name, and report bounds rather than verdicts when cut; no changes demanded.
 
 ### 2.5 The proof designs (obligation-modeling pass, 2026-08-03)
 
@@ -210,7 +248,9 @@ once. `scripts/regen-check.sh` gains both self-tests at the gate.
 
 1. **Coverage-driven construction** — engineering candidates that force coverage 5 (pivots
    inside many unit triangles whose 1/3-class is closed) → **M19**. M18 hands it the
-   objective function (`fan_iff_coverage`), the floor (§0(a): start at 3), and the instrument.
+   objective function (`fan_iff_coverage`), the floor (§0(a): start at 3), the instrument,
+   and one lead: mechanism (b) of §0(c) — ambient near-forcing at the structureless √33
+   classes — is the phenomenon to point at `N(p)` to buy the two missing colours.
 2. **The field-exclusion theorem** (only-triangles-in-Q4: sin 72° ∉ Q4, sin 45° ∉ Q4 via
    norm arguments in the multiquadratic tower) — real mathematics, deferred until a milestone
    needs it as more than commentary; the census watches it empirically meanwhile.

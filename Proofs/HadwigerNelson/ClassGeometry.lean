@@ -42,7 +42,7 @@ open Complex
 /-- **Two distinct circles meet in at most two points**: three points equidistant from `p` and
 simultaneously equidistant from a different point `q` cannot be pairwise distinct. This is the
 whole reason a distance class's internal unit-distance graph has maximum degree 2. -/
-theorem eq_or_eq_or_eq_of_two_spheres {p q a b c : ℂ} (hpq : p ≠ q)
+theorem eq_or_eq_or_eq_of_dist_eq {p q a b c : ℂ} (hpq : p ≠ q)
     (hab : dist a p = dist b p) (hbc : dist b p = dist c p)
     (hab' : dist a q = dist b q) (hbc' : dist b q = dist c q) :
     a = b ∨ b = c ∨ a = c := by
@@ -51,14 +51,14 @@ theorem eq_or_eq_or_eq_of_two_spheres {p q a b c : ℂ} (hpq : p ≠ q)
 /-! ## The triangle identity: unit triangles live at squared radius 1/3 only -/
 
 /-- The centroid of a unit equilateral triangle is at squared distance `1/3` from each vertex. -/
-theorem distSq_centroid_unit_triangle {a b c : ℂ}
+theorem dist_sq_centroid_unit_triangle {a b c : ℂ}
     (hab : dist a b = 1) (hbc : dist b c = 1) (hac : dist a c = 1) :
     dist ((a + b + c) / 3) a ^ 2 = 1 / 3 := by
   sorry
 
 /-- A point equidistant from the three vertices of a unit equilateral triangle is its
 centroid — the perpendicular bisectors of a nondegenerate triangle meet once. -/
-theorem eq_centroid_of_equidistant_unit_triangle {a b c p : ℂ}
+theorem eq_centroid_of_dist_eq {a b c p : ℂ}
     (hab : dist a b = 1) (hbc : dist b c = 1) (hac : dist a c = 1)
     (hpa : dist p a = dist p b) (hpb : dist p b = dist p c) :
     p = (a + b + c) / 3 := by
@@ -87,7 +87,7 @@ noncomputable def rot3 (p z : ℂ) : ℂ := p + omega3 * (z - p)
 example : omega3.re = -(1 / 2) := rfl
 example : omega3.im = Real.sqrt 3 / 2 := rfl
 
-theorem omega3_pow_three : omega3 ^ 3 = 1 := by
+theorem omega3_cube : omega3 ^ 3 = 1 := by
   sorry
 
 theorem omega3_ne_one : omega3 ≠ 1 := by
@@ -120,7 +120,7 @@ theorem dist_rot3_self (p z : ℂ) : dist (rot3 p z) z = Real.sqrt 3 * dist z p 
 
 /-- The `1/3` instance of `dist_rot3_self`: on the 120° class, the rotation moves every
 point exactly one unit — the spindle identity the ℤ/3 closure is built from. -/
-theorem dist_rot3_self_of_third {p z : ℂ} (h : dist z p ^ 2 = 1 / 3) :
+theorem dist_rot3_self_eq_one {p z : ℂ} (h : dist z p ^ 2 = 1 / 3) :
     dist (rot3 p z) z = 1 := by
   sorry
 

@@ -33,7 +33,7 @@ colour somewhere on `N(p) ∪ Q`, then in particular `p`'s own colour lands ther
 bars the neighbourhood, and the class is all that is left. This is the direction a
 coverage-driven construction consumes (M19), so it travels without the `p ∉ Q` hypothesis
 only the converse needs. -/
-theorem fan_of_coverage {p : V} {Q : List V}
+theorem Fan.of_coverage {p : V} {Q : List V}
     (h : ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ v, (G.Adj p v ∨ v ∈ Q) ∧ C v = c) :
     Fan G k p Q := by
   sorry
