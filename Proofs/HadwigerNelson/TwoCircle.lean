@@ -25,7 +25,7 @@ circle subtend exactly 120° (`zeta6^{±2}` — the ℤ/3 triangles); cross chor
 `seam` has **infinite order** (its trace `√3/3` squares to `1/3`, which is no integer, so
 `seam` is no root of unity) — hence every point of a `⟨zeta6, seam⟩`-orbit carries a unique
 label `(i, j) ∈ ℤ/6 × ℤ`, the only unit edges are four label steps, and the explicit
-colouring `e = [1,2,0,2,1,0]` / `o = [0,0,1,1,2,2]` (outer/inner circle, `j`-independent)
+colouring `outerTable = [1,2,0,2,1,0]` / `innerTable = [0,0,1,1,2,2]` (`j`-independent)
 is proper on all four. Verified numerically on a 324-point instance before formalizing
 (`plans/M19-coverage-driven-construction.md` §0(e)).
 -/
@@ -122,34 +122,34 @@ theorem label_unique {i i' j j' : ℤ}
 
 /-- Colour table for the outer (radius-1) circle. `j`-independent by design: any wrap in `j`
 that irrationality cannot forbid still respects it. -/
-def eTable : ZMod 6 → Fin 3 := ![1, 2, 0, 2, 1, 0]
+def outerTable : ZMod 6 → Fin 3 := ![1, 2, 0, 2, 1, 0]
 
 /-- Colour table for the inner (radius-`1/√3`) circle. -/
-def oTable : ZMod 6 → Fin 3 := ![0, 0, 1, 1, 2, 2]
+def innerTable : ZMod 6 → Fin 3 := ![0, 0, 1, 1, 2, 2]
 
 /-- The outer table breaks every 60° step. -/
-theorem eTable_step (i : ZMod 6) : eTable (i + 1) ≠ eTable i := by decide +revert
+theorem outerTable_step (i : ZMod 6) : outerTable (i + 1) ≠ outerTable i := by decide +revert
 
 /-- The inner table breaks every 120° step — it is exactly a proper 3-colouring of the two
 ℤ/3 triangles. -/
-theorem oTable_step (i : ZMod 6) : oTable (i + 2) ≠ oTable i := by decide +revert
+theorem innerTable_step (i : ZMod 6) : innerTable (i + 2) ≠ innerTable i := by decide +revert
 
 /-- The tables disagree at equal label — which is precisely where cross chords land. -/
-theorem eTable_ne_oTable (i : ZMod 6) : eTable i ≠ oTable i := by decide +revert
+theorem outerTable_ne_innerTable (i : ZMod 6) : outerTable i ≠ innerTable i := by decide +revert
 
 /-! ### The theorem -/
 
 /-- **The two-circle theorem, induced form.** The unit-distance graph on the *entire* union
 of the two spheres about `p` — all of both circles, uncountably many points — is
 3-colourable. -/
-theorem colorable_three_two_circles (p : ℂ) :
+theorem colorable_three_induce (p : ℂ) :
     ((unitDistance ℂ).induce
       (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3))).Colorable 3 := sorry
 
 /-- **The two-circle theorem, mapped form** — the shape a cover-set application consumes:
 any family of points on the two circles about `p`, however indexed, spans a 3-colourable
 unit-distance graph. Derived from the induced form by factoring `f` through the union. -/
-theorem colorable_three_of_two_circles {ι : Type*} (f : ι → ℂ) (p : ℂ)
+theorem colorable_three_comap {ι : Type*} (f : ι → ℂ) (p : ℂ)
     (hf : ∀ v, f v ∈ Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)) :
     ((unitDistance ℂ).comap f).Colorable 3 := sorry
 

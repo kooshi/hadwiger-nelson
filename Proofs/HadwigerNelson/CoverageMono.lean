@@ -27,30 +27,30 @@ variable {V : Type*} {G G' : SimpleGraph V} {k m m' : ℕ} {p : V} {Q Q' : List 
 open Classical in
 /-- The set of colours a colouring shows on `N(p) ∪ Q`. Classical decidability: this is a
 reasoning object (the instrument computes its own copy in Python; nothing here executes). -/
-noncomputable def coverColours (G : SimpleGraph V) (p : V) (Q : List V)
+noncomputable def coverColors (G : SimpleGraph V) (p : V) (Q : List V)
     (C : G.Coloring (Fin k)) : Finset (Fin k) :=
   Finset.univ.filter fun c => ∃ v, (G.Adj p v ∨ v ∈ Q) ∧ C v = c
 
 /-- Every proper `k`-colouring shows at least `m` colours on `N(p) ∪ Q`. At `m = k` this is
 confinement (`fan_iff_coverAtLeast`); below `k` it is the measured gradient. -/
 def CoverAtLeast (G : SimpleGraph V) (k : ℕ) (p : V) (Q : List V) (m : ℕ) : Prop :=
-  ∀ C : G.Coloring (Fin k), m ≤ (coverColours G p Q C).card
+  ∀ C : G.Coloring (Fin k), m ≤ (coverColors G p Q C).card
 
-/-- Weakening the level. -/
-theorem CoverAtLeast.anti (h : m' ≤ m) :
-    CoverAtLeast G k p Q m → CoverAtLeast G k p Q m' := sorry
+/-- Weakening the level: `h.anti hm` lowers a coverage bound. -/
+theorem CoverAtLeast.anti (h : CoverAtLeast G k p Q m) (hm : m' ≤ m) :
+    CoverAtLeast G k p Q m' := sorry
 
 /-- Widening the class only helps: `N(p) ∪ Q` grows, so every colouring shows at least as
-many colours. -/
-theorem CoverAtLeast.mono_subset (hQ : Q ⊆ Q') :
-    CoverAtLeast G k p Q m → CoverAtLeast G k p Q' m := sorry
+many colours. Dot-usable: `h.mono_subset hQ`. -/
+theorem CoverAtLeast.mono_subset (h : CoverAtLeast G k p Q m) (hQ : Q ⊆ Q') :
+    CoverAtLeast G k p Q' m := sorry
 
 /-- **The ratchet.** Adding edges anywhere in the graph can only raise coverage: every
 proper colouring of the larger graph is one of the smaller (restriction along `G ≤ G'`),
 evaluated over a larger neighbourhood. This is the theorem that makes "union a gadget and
-re-measure" a climb rather than a walk. -/
-theorem CoverAtLeast.mono_edges (hG : G ≤ G') :
-    CoverAtLeast G k p Q m → CoverAtLeast G' k p Q m := sorry
+re-measure" a climb rather than a walk. Dot-usable: `h.mono_edges hG`. -/
+theorem CoverAtLeast.mono_edges (h : CoverAtLeast G k p Q m) (hG : G ≤ G') :
+    CoverAtLeast G' k p Q m := sorry
 
 /-- **Confinement is full coverage** — the numeric face of M18's `fan_iff_coverage`. -/
 theorem fan_iff_coverAtLeast (hp : p ∉ Q) :

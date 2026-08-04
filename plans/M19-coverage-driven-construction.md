@@ -275,6 +275,35 @@ the model (proper, sizes) before emitting; the kernel re-checks everything anywa
 perturb one `eTable` entry (a step lemma's `decide` fails); swap `√3/3` for `1/2` in the
 headline set (the inner-chord classification loses its target).
 
+## 2.7 Consumer surface (experience pass, 2026-08-04)
+
+* **Names**: `TwoCircle.colorable_three_induce` / `colorable_three_comap` (the namespace
+  carries "two circles"; the form-word distinguishes the pair); `outerTable`/`innerTable`
+  (the author's even/odd-row scratch vocabulary `e`/`o` did not cross the wire);
+  `coverColors`/`balancedColorRaw` (American spelling matching Mathlib's `Coloring` — prose
+  stays British, Lean identifiers follow the library they compose with). Ratchet lemmas
+  take the `CoverAtLeast` hypothesis first so `h.anti hm`, `h.mono_subset hQ`,
+  `h.mono_edges hG` all read as dot-chains.
+* **Zero `@[simp]` tags** (as in M18): `SameOrbit`/`CoverAtLeast` unfoldings are
+  construction-internal; `orbitRep_eq_of_sameOrbit` is a conditional rewrite with a
+  relation hypothesis — a bad simp citizen. Alternative: tag the table-step lemmas;
+  rejected — nothing downstream rewrites with them, `decide` re-proves them free.
+  Confidence high.
+* **Spec examples and controls** (land with implementation, per gate §4):
+  non-vacuity `‖zeta6 − 1‖ = 1` (the unit chord realized); the **no-K4 corollary as the
+  barrier's teeth** — no 4 points on the two circles pairwise unit, derived from
+  `colorable_three_comap` against K4's chromatic number; the M18 pendant-triangle example
+  re-run through `fan_iff_coverAtLeast` (round-trip with M18's `fan_iff_coverage`); the
+  vacuity honesty example (`CoverAtLeast … 0 …` at any level over `Fin 1`, with the
+  docstring naming why); one `#guard_msgs`-pinned `decide` failure (a perturbed table
+  step or the 316-counts mutation).
+* **Instrument surfaces**: `colorstat.py`'s module and margins docstrings gain the §0(b)
+  bias caveat (pool margins measure the sampler; only matched contrasts and SAT verdicts
+  are solver-independent — the "forcing margin" phrase is retired); `balance.py` promoted
+  to `tools/` with `--cert/--ledger-name`, `--max-class`, `--emit` (writes the packed hex
+  literal after re-verifying the model), `--self-test` with counting-infeasibility and
+  K3-balance controls, wired into `regen-check.sh`.
+
 ## 3. NOT in M19 (scope, with reasons)
 
 1. **The general-r two-circle theorem** (any class radius, not just 1/3) — the same method

@@ -33,16 +33,16 @@ cardinality-constrained instance (`tools/balance.py`, M19 §0(c)). -/
 def balancedWitnessPacked : Nat := sorry
 
 /-- Vertex `v`'s colour: nibble `v` of the packed witness. -/
-def wcolour (v : ℕ) : ℕ := balancedWitnessPacked >>> (v <<< 2) &&& 15
+def balancedColorRaw (v : ℕ) : ℕ := balancedWitnessPacked >>> (v <<< 2) &&& 15
 
 /-- Every nibble is a real colour. -/
-theorem wcolour_lt_five : ∀ v : Fin 1581, wcolour v.val < 5 := sorry
+theorem balancedColorRaw_lt : ∀ v : Fin 1581, balancedColorRaw v.val < 5 := sorry
 
 /-- Properness on the committed edge list, decided by the kernel. -/
-theorem wcolour_proper : ∀ e ∈ deGrey.edges, wcolour e.1.val ≠ wcolour e.2.val := sorry
+theorem balancedColorRaw_proper : ∀ e ∈ deGrey.edges, balancedColorRaw e.1.val ≠ balancedColorRaw e.2.val := sorry
 
 /-- The witness as a typed colouring: the nibble, with its range fact. -/
-def balancedColoring (v : Fin 1581) : Fin 5 := ⟨wcolour v.val, wcolour_lt_five v⟩
+def balancedColoring (v : Fin 1581) : Fin 5 := ⟨balancedColorRaw v.val, balancedColorRaw_lt v⟩
 
 /-- Every colour class has at most 317 vertices — with 1,581 = 5 · 316 + 1 points this is
 the pigeonhole optimum: no 5-partition of the vertices does better. Stated over the same
