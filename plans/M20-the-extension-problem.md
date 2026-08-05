@@ -262,6 +262,68 @@ not chosen.
   guarding theorems) over `Classical.choose`, so the tube extension can be `#eval`-ed;
   fall back to choice only if the proofs fight (obligation pass owns the recursion).
 
+### 3.5 Obligation-modeling pass (2026-08-04) — the proof designs
+
+**Compulsion.lean.**
+* Norm lemmas: `sq_sqrt11` (`Real.mul_self_sqrt`) is the one atom; `normSq_seamRatio`
+  and `normSq_one_sub_seamRatio` are `normSq_apply` + `linear_combination` over it
+  (M19's `normSq_seam` pattern); `seamRatio_mul_sqrt3` is `Complex.ext` + the
+  `√3·√11 = √33` rewrite (`Real.sqrt_mul`).
+* Distances squared-first: `dist_seamImage_sq` is pure component algebra
+  (`normSq (σ·w) = normSq σ · normSq w`); `dist_seamImage_pivot` derives via one
+  private square-root-injectivity step (`(√3/3)² = 1/3`, both sides nonneg);
+  `dist_self_seamImage` rides the ring identity `z − (p + σ(z−p)) = (1−σ)(z−p)`.
+* The compulsion core, five steps: (1) seam-image radius² feeds M18's
+  `rot3_unit_triangle` — the witness triangle's three unit edges; (2) memberships via
+  `dist_seamImage_pivot` + `rot3_mem_sphere` (through `hD ∘ Or.inr`); (3) triangle
+  rainbow: three `C.valid` calls on `unitDistance_adj.mpr`; (4) Fin-3 pigeonhole as a
+  `decide` step (`x ≠ y → y ≠ u → u ≠ x → v = x ∨ v = y ∨ v = u`); (5) per case, the
+  partner adjacency (`dist_rot3` isometry carries `dist_self_seamImage` around the
+  orbit) contradicts the mono hypothesis.
+* Cap lower half: base point `z0 = p + 1`; five columns by `hexStep` iteration
+  (`hexStep_hexStep` twice gives the 120°-triple); the alternation is one private
+  `decide` lemma (`c0≠cp → c1≠cp → c2≠cp → c1≠c0 → c2≠c1 → c2 = c0`) applied twice;
+  the compulsion fires at `D = insert p _` via `Set.subset_insert`; subtype members
+  built from different membership routes reconcile by `Subtype.ext` on
+  `hexStep_hexStep` (one `have` per member).
+* Cap upper half: `fun v => if h : (v:ℂ) = p then 3 else (C3 ⟨v, (mem_insert_iff.mp
+  v.2).resolve_left h⟩).castSucc` — validity splits on the dite; `Fin.castSucc`
+  injective, `≠ Fin.last` for the p-branch; `open Classical in` per M19's `rawColour`.
+* `chromaticNumber_concentric` by `le_antisymm`: `Colorable.chromaticNumber_le` one
+  way; the other direction from `¬ Colorable 3` via the `chromaticNumber ≤ 3 →
+  Colorable 3` bridge (query exact Mathlib names at the site; ℕ∞ literal order by
+  `decide`). Demote to the two halves only if the ℕ∞ plumbing exceeds its worth.
+
+**Strip.lean.**
+* All finite lemmas are `decide +kernel` leaves (measured: ~2.5 s a piece, table-shaped).
+  `avoidsB_comm` is the one unbounded Bool identity: `funext`-free congruence over
+  `List.all (range 6)` with pointwise `bne`-symmetry (query `exact?`; fallback: a
+  3-line `(a != b) = (b != a)` helper via `bne_iff_ne` + `ne_comm` + `Bool` ext).
+* Prop bridges: membership routes through `hexTable_complete`/`rainTable_complete`
+  (`List.mem_filter` + `List.mem_range`); existence lemmas ride dedicated `List.any`
+  decides + the M19 `List.all_eq_true` elaborator bridge.
+* **The window recursion, collapsed**: one invariant
+  `ColState (isHex : Bool) (c : ℕ) := if isHex then c ∈ hexTable ∧ nonMonoB c else
+  c ∈ rainTable`; one step function `tubeNext` over two computable steppers
+  (`List.find?` + `getD` junk, specs via `List.find?_isSome`/`find?_some`/
+  `mem_of_find?_eq_some`); one step lemma (`ColState b c → ColState (!b) (tubeNext b c)
+  ∧ avoids`) whose hex case is purification closing the loop — the invariant is
+  self-sustaining, which is the whole theorem in one sentence. One tower
+  `towerR c b : ℕ → ℕ` (structural fuel recursion, no termination obligation); its ray
+  spec by plain ℕ-induction. **`avoidsB_comm` makes the leftward tower the rightward
+  one read backward** — no second recursion. Assembly `extendWindow` is a three-region
+  `ℤ → ℕ` case split (left ray / window / right ray); TubeProper's four fields close
+  region-by-region with two seam `have`s (j = −1/0 and L−1/L); ℤ/ℕ parity glue
+  contained in two private lemmas (`Int.even_neg/even_sub` family + the Bool
+  alternation `if k % 2 == 0 then b else !b`). Agreement conclusion is the middle
+  region's if-branch. Budget ~120 lines; the computable steppers keep the whole
+  extension `#eval`-able.
+* Prove/test partition: every finite claim is a kernel `decide`; the two structural
+  inductions are the ray spec (ℕ) and nothing else — the assembly is case analysis,
+  not induction. Mutation controls at the gate: flip one entry of `rainTable` (its
+  bridge fails), state `avoid_card = 5` (fails), claim the mono example extendable
+  (`mono_blocks` refuses).
+
 ## 4. Instrument promotion
 
 `tools/extend.py` from scratchpad `extendprofile.py`: profile + battery modes, mandatory
