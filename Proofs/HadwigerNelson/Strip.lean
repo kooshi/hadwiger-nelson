@@ -111,12 +111,23 @@ theorem rainbow_extends :
 /-- Avoidance is symmetric — the coupling reads the same in both directions. -/
 theorem avoidsB_comm (n m : ℕ) : avoidsB n m = avoidsB m n := sorry
 
-/-! ## Prop bridges (the shapes proofs consume) -/
+/-! ## Prop bridges (the shapes proofs consume)
 
-theorem properHex_mem {n : ℕ} (h : properHexB n = true) : n ∈ hexTable := sorry
+Membership in a table is the canonical currency: parse once (predicate + bound → `mem`),
+then every existence lemma trades in it. Digits only see `n % 729`, so the predicates
+alone admit junk high bits — the bound is load-bearing, never decoration. -/
 
-theorem rainbow_mem {m : ℕ} (h : m < 729) (hr : rainbowB m = true) : m ∈ rainTable :=
+theorem properHex_mem {n : ℕ} (h729 : n < 729) (h : properHexB n = true) :
+    n ∈ hexTable := sorry
+
+theorem rainbow_mem {m : ℕ} (h729 : m < 729) (hr : rainbowB m = true) : m ∈ rainTable :=
   sorry
+
+theorem mem_hexTable_props {n : ℕ} (hn : n ∈ hexTable) :
+    n < 729 ∧ properHexB n = true := sorry
+
+theorem mem_rainTable_props {m : ℕ} (hm : m ∈ rainTable) :
+    m < 729 ∧ rainbowB m = true := sorry
 
 theorem exists_rain_avoiding {n : ℕ} (hn : n ∈ hexTable) (hm : nonMonoB n = true) :
     ∃ m ∈ rainTable, avoidsB n m = true := sorry
@@ -130,14 +141,20 @@ theorem nonMono_of_avoids_rain {n m : ℕ} (hn : n ∈ hexTable) (hm : m ∈ rai
 /-! ## The tube, and the window-extension theorem -/
 
 /-- A proper colouring of the bi-infinite tube: hexagon columns at even `j`, rainbow
-columns at odd `j`, consecutive columns avoiding. -/
-def TubeProper (f : ℤ → ℕ) : Prop :=
-  (∀ j : ℤ, Even j → properHexB (f j) = true) ∧
-  (∀ j : ℤ, ¬ Even j → rainbowB (f j) = true) ∧
-  (∀ j : ℤ, avoidsB (f j) (f (j + 1)) = true)
+columns at odd `j`, consecutive columns avoiding. The bound is part of the notion —
+digits only see `n % 729`, and without it the type admits colourings differing by
+invisible junk. -/
+structure TubeProper (f : ℤ → ℕ) : Prop where
+  bound : ∀ j : ℤ, f j < 729
+  hex : ∀ j : ℤ, Even j → properHexB (f j) = true
+  rain : ∀ j : ℤ, ¬ Even j → rainbowB (f j) = true
+  avoid : ∀ j : ℤ, avoidsB (f j) (f (j + 1)) = true
 
-/-- A proper colouring of an `L`-column window (anchored with a hexagon column at 0). -/
+/-- A proper colouring of an `L`-column window (anchored with a hexagon column at 0;
+the odd-anchored variant is deferred until a consumer exists — the tube's shift and
+reflection symmetries make it a one-liner then). -/
 structure WindowProper (L : ℕ) (g : Fin L → ℕ) : Prop where
+  bound : ∀ t : Fin L, g t < 729
   hex : ∀ t : Fin L, Even (t : ℕ) → properHexB (g t) = true
   rain : ∀ t : Fin L, ¬ Even (t : ℕ) → rainbowB (g t) = true
   avoid : ∀ (t : ℕ) (h : t + 1 < L),
@@ -173,6 +190,11 @@ def monoHexExample : ℕ := 273
 -- the M19 table state is a fixed point: constant columns (142 at even j, 684 at odd)
 -- form a proper tube — the j-independent colouring, one of exactly 96
 example : TubeProper (fun j => if Even j then 142 else 684) := sorry
+
+-- adversarial member, refused: junk high bits are not a tube colouring (the bound bites)
+#guard properHexB (142 + 729)   -- the predicate alone cannot tell 871 from 142 …
+example : ¬ TubeProper (fun j => if Even j then 142 + 729 else 684) :=
+  fun h => by simpa using h.bound 0
 
 end Strip
 end HadwigerNelson

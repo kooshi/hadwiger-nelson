@@ -14,18 +14,23 @@ hence rainbow — yet each member is unit-adjacent to one point of the triple, s
 monochromatic triple would starve the rainbow of its colour. The first colour compulsion
 in this project that acts through no edge.
 
-**The one-pivot cap** (`not_colorable_three` + `colorable_four`): adjoin the centre and
-the system is *exactly* 4-chromatic. The centre eats one colour, any outer hexagon is
-then 2-coloured and alternates, its even triple goes monochromatic, and the compulsion
-kills it — ten points suffice (`p`, one hexagon, one inner triangle). Conversely M19's
-3-colouring of the circles plus a fresh colour at `p` gives 4. Corollary, and the
+**The one-pivot cap** (`not_colorable_three` + `colorable_four`, headline
+`chromaticNumber_concentric`): adjoin the centre and the system is *exactly* 4-chromatic.
+The centre eats one colour, five consecutive outer points then alternate through two
+colours, the 120°-triple among them goes monochromatic, and the compulsion kills it —
+nine points suffice (`p`, five consecutive outer points, one inner triangle). Conversely
+M19's 3-colouring of the circles plus a fresh colour at `p` gives 4. Corollary, and the
 sharpest form of the local barrier: **coverage 4 at five colours cannot arise within one
 pivot's two-circle system — a fifth colour needs structure spanning more than one
 pivot.** This theorem explains the flat `minCov = 3` histograms of M17–M19.
 
 Found in M20 §0 (the compulsion, via the strip automaton's mono-column obstruction) and
 independently in composed 16-point form by a reviewer instance whose note Kooshi relayed;
-the compression to ten points is the compulsion lemma doing its work.
+the compression to nine points is the compulsion lemma doing its work.
+
+The compulsion is stated over an arbitrary vertex set `D` containing the two circles:
+a colouring of a larger induced graph restricts to any subset, so quantifying over the
+superset bakes the monotonicity in and no restriction machinery exists in this module.
 -/
 
 namespace HadwigerNelson
@@ -69,31 +74,20 @@ theorem dist_self_seamImage {p z : ℂ} (hz : dist z p = 1) :
 theorem rot3_mem_sphere {p z : ℂ} {r : ℝ} (h : z ∈ Metric.sphere p r) :
     rot3 p z ∈ Metric.sphere p r := sorry
 
-/-! ## Restriction along a subset -/
-
-/-- A colouring of a larger induced subgraph restricts to any subset — the bridge that
-lets the compulsion (stated on the two circles) fire inside the `insert p` system. -/
-noncomputable def restrictColoring {V : Type*} [MetricSpace V] {T D : Set V} (h : D ⊆ T)
-    {κ : Type*} (C : ((unitDistance V).induce T).Coloring κ) :
-    ((unitDistance V).induce D).Coloring κ := sorry
-
-theorem restrictColoring_apply {V : Type*} [MetricSpace V] {T D : Set V} (h : D ⊆ T)
-    {κ : Type*} (C : ((unitDistance V).induce T).Coloring κ) (a : D) :
-    restrictColoring h C a = C ⟨a.1, h a.2⟩ := sorry
-
 /-! ## The compulsion -/
 
-/-- **The 120° compulsion.** In any proper 3-colouring of the two circles about `p`, the
-outer 120°-triple of `z` — pairwise at chord √3, an independent set — never wears one
-colour. The seam-image unit triangle is rainbow and each member refuses its partner's
-colour. -/
-theorem no_mono_outer_triple (p : ℂ)
-    (C : ((unitDistance ℂ).induce
-      (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3))).Coloring (Fin 3))
+/-- **The 120° compulsion.** In any proper 3-colouring of any point set containing the
+two circles about `p`, the outer 120°-triple of `z` — pairwise at chord √3, an
+independent set — never wears one colour. The seam-image unit triangle is rainbow and
+each member refuses its partner's colour. Stated over a superset `D` so it applies
+directly inside larger systems (`insert p _` below) with no restriction machinery. -/
+theorem no_mono_outer_triple {D : Set ℂ} (p : ℂ)
+    (hD : Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3) ⊆ D)
+    (C : ((unitDistance ℂ).induce D).Coloring (Fin 3))
     {z : ℂ} (hz : z ∈ Metric.sphere p 1) :
-    ¬ (C ⟨rot3 p z, Or.inl (rot3_mem_sphere hz)⟩ = C ⟨z, Or.inl hz⟩ ∧
-       C ⟨rot3 p (rot3 p z), Or.inl (rot3_mem_sphere (rot3_mem_sphere hz))⟩
-         = C ⟨z, Or.inl hz⟩) := sorry
+    ¬ (C ⟨rot3 p z, hD (Or.inl (rot3_mem_sphere hz))⟩ = C ⟨z, hD (Or.inl hz)⟩ ∧
+       C ⟨rot3 p (rot3 p z), hD (Or.inl (rot3_mem_sphere (rot3_mem_sphere hz)))⟩
+         = C ⟨z, hD (Or.inl hz)⟩) := sorry
 
 /-! ## The one-pivot cap -/
 
@@ -111,8 +105,9 @@ theorem dist_self_hexStep {p z : ℂ} (hz : dist z p = 1) :
 theorem hexStep_hexStep (p z : ℂ) : hexStep p (hexStep p z) = rot3 p z := sorry
 
 /-- **The cap, lower half.** Adjoin the centre and three colours no longer suffice: the
-centre pigeonholes the outer circle to two colours, any hexagon then alternates, its even
-triple goes monochromatic, and the compulsion kills it. Ten points carry the argument. -/
+centre pigeonholes the outer circle to two colours, five consecutive outer points then
+alternate, the 120°-triple among them goes monochromatic, and the compulsion kills it.
+Nine points carry the argument. -/
 theorem not_colorable_three (p : ℂ) :
     ¬ ((unitDistance ℂ).induce
         (insert p (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)))).Colorable 3 :=
@@ -124,6 +119,14 @@ theorem colorable_four (p : ℂ) :
     ((unitDistance ℂ).induce
         (insert p (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)))).Colorable 4 :=
   sorry
+
+/-- **The one-pivot cap, headline form**: the centre plus its two circles — the whole
+uncountable system — has chromatic number exactly four. Read against Mathlib's
+`chromaticNumber`; the two `Colorable` halves above carry the content. -/
+theorem chromaticNumber_concentric (p : ℂ) :
+    ((unitDistance ℂ).induce
+        (insert p (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)))).chromaticNumber
+      = 4 := sorry
 
 end Compulsion
 end HadwigerNelson

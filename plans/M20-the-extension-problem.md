@@ -230,6 +230,38 @@ companion negative control: perturbing `outerTable` to the alternating `[0,1,0,1
 must fail `outerTable_ne_innerTable` — pinning that three outer colours are *forced*,
 not chosen.
 
+### 3.4 Domain-modeling pass (2026-08-04) — decisions
+
+* **`seamRatio` = explicit components** `⟨1/6, √11/6⟩`, not `seam/√3`: M19's own
+  precedent (`zeta6`, `seam` are component literals), and folding `√33/√3 = √11` into
+  the definition kills every rationalization step in the norm lemmas. The provenance is
+  a *theorem* (`seamRatio_mul_sqrt3`), not a definition.
+* **No restriction machinery**: the compulsion is stated over any superset
+  `D ⊇` (the two circles). Monotonicity — more vertices only constrain more — is
+  intrinsic to the statement, so `restrictColoring`/`_apply` were deleted before birth;
+  the cap proof applies the compulsion at `insert p _` via `subset_insert` directly.
+* **Compulsion statement shape**: inline subtype members with `hD (Or.inl …)` proofs,
+  negated two-conjunct form — exactly what the cap proof holds when it fires; no named
+  triple predicate (no second consumer asked for one).
+* **The cap needs nine points**, not ten (the hexagon needn't close: p, five
+  consecutive outer points, one inner triangle) — prose corrected; the uncountable
+  statement is the one landed, the finite witness stays deferred.
+* **Headline added**: `chromaticNumber_concentric … = 4`, read against Mathlib's
+  `chromaticNumber`; demoted to the two `Colorable` halves only if the API fights.
+* **Bounds are load-bearing**: digits see only `n % 729`, so every predicate admits
+  junk high bits. `properHex_mem`/`rainbow_mem` take `n < 729`; `TubeProper` and
+  `WindowProper` gained `bound` fields (both are now structures with named fields);
+  an adversarial-member example (`142 + 729`) pins the refusal.
+* **Membership is the canonical currency** of the Prop layer: parse once
+  (predicate + bound → `mem` table), then all existence lemmas trade in membership;
+  `mem_hexTable_props`/`mem_rainTable_props` are the return direction.
+* **Hex-anchored windows only**: the odd-anchored variant and the tube's
+  shift-by-2/reflection symmetries have no M20 consumer — noted as M21 one-liners,
+  not minted (`avoidsB_comm` already carries the reflection's only real content).
+* **Prefer computable extension steppers** (`List.find?`-based with `getD` junk +
+  guarding theorems) over `Classical.choose`, so the tube extension can be `#eval`-ed;
+  fall back to choice only if the proofs fight (obligation pass owns the recursion).
+
 ## 4. Instrument promotion
 
 `tools/extend.py` from scratchpad `extendprofile.py`: profile + battery modes, mandatory
