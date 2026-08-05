@@ -14,9 +14,13 @@ This is the local ceiling that explains M18's flat measurement: at a 120°-class
 the whole cover set `N(p) ∪ C` lives on these two circles, so no gadget placed inside the
 cover set can ever force a fourth colour there — the rainbow floor (`minCov = 3`, measured
 at all 4,615 + 1,558 pivots) is not an accident of our constructions but a theorem of the
-geometry. The boundary of the barrier is stated with the same care: a fourth colour is *not*
-excluded — it must be forced from outside the two circles, by structure that restricts which
-3-colourings extend. That question is M20's.
+geometry. The boundary of the barrier, sharpened at M20 (`Compulsion.lean`): a fourth
+colour is *not* excluded, and the pivot itself already forces it — `{p} ∪` (both circles)
+is **exactly 4-chromatic** (the centre pigeonholes the outer circle to two colours, and an
+outer 120°-triple can never be monochromatic even though it is an independent set — the
+seam-image unit triangle refuses). What stays impossible inside one pivot's system is a
+*fifth* colour: coverage 4 at five colours requires structure spanning more than one
+pivot. Multi-pivot coupling is the open question this pair of modules leaves.
 
 ## The shape of the proof
 
@@ -694,6 +698,15 @@ is false
 -/
 #guard_msgs in
 example : ∀ i : ZMod 6, innerTable (i + 2) ≠ ![0, 1, 1, 1, 2, 2] i := by decide +revert
+
+-- Companion control (M20, suggested by a reviewer instance): the outer table is rainbow,
+-- not alternating, because three outer colours are *forced* — a 2-coloured outer table
+-- dies at the seam. The alternating candidate satisfies the 60° steps yet clashes with
+-- the inner table at equal label, exactly where cross chords land.
+private def altTable : ZMod 6 → Fin 3 := ![0, 1, 0, 1, 0, 1]
+
+example : ∀ i : ZMod 6, altTable (i + 1) ≠ altTable i := by decide +revert
+example : ¬ ∀ i : ZMod 6, altTable i ≠ innerTable i := by decide
 
 end TwoCircle
 end HadwigerNelson
