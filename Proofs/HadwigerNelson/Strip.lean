@@ -291,18 +291,26 @@ columns at odd `j`, consecutive columns avoiding. The bound is part of the notio
 digits only see `n % 729`, and without it the type admits colourings differing by
 invisible junk. -/
 structure TubeProper (f : ℤ → ℕ) : Prop where
+  /-- Every column is a genuine packed column — digits only see `n % 729`. -/
   bound : ∀ j : ℤ, f j < 729
+  /-- Even positions carry proper hexagon columns. -/
   hex : ∀ j : ℤ, Even j → properHexB (f j) = true
+  /-- Odd positions carry rainbow columns. -/
   rain : ∀ j : ℤ, ¬ Even j → rainbowB (f j) = true
+  /-- Consecutive columns avoid pointwise — the cross-seam coupling. -/
   avoid : ∀ j : ℤ, avoidsB (f j) (f (j + 1)) = true
 
 /-- A proper colouring of an `L`-column window (anchored with a hexagon column at 0;
 the odd-anchored variant is deferred until a consumer exists — the tube's shift and
 reflection symmetries make it a one-liner then). -/
 structure WindowProper (L : ℕ) (g : Fin L → ℕ) : Prop where
+  /-- Every column is a genuine packed column. -/
   bound : ∀ t : Fin L, g t < 729
+  /-- Even window positions carry proper hexagon columns. -/
   hex : ∀ t : Fin L, Even (t : ℕ) → properHexB (g t) = true
+  /-- Odd window positions carry rainbow columns. -/
   rain : ∀ t : Fin L, ¬ Even (t : ℕ) → rainbowB (g t) = true
+  /-- Consecutive window columns avoid pointwise. -/
   avoid : ∀ (t : ℕ) (h : t + 1 < L),
     avoidsB (g ⟨t, Nat.lt_of_succ_lt h⟩) (g ⟨t + 1, h⟩) = true
 

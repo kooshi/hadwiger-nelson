@@ -453,6 +453,27 @@ negative). The witness facts are `decide +kernel` — no native evaluation anywh
 #print axioms balancedColoring_counts
 #print axioms deGrey_balanced
 
+/-! ## M20 — the 120° compulsion, the one-pivot cap, the strip automaton
+
+The first independent-set compulsion (an outer 120°-triple is never monochromatic under
+three colours — the seam-image unit triangle refuses), the exact chromatic number of one
+pivot's whole system ({p} ∪ both circles = 4), and the tube's colouring theory with the
+window-extension theorem. All finite parts are `decide +kernel` against literal tables —
+no native evaluation anywhere. -/
+
+#print axioms Compulsion.no_mono_outer_triple
+#print axioms Compulsion.concentric_not_colorable_three
+#print axioms Compulsion.concentric_colorable_four
+#print axioms Compulsion.chromaticNumber_concentric
+#print axioms Compulsion.seamRatio_mul_sqrt3
+#print axioms Strip.hexTable_complete
+#print axioms Strip.rainTable_complete
+#print axioms Strip.nonMonoB_of_avoids_rain
+#print axioms Strip.mono_avoids_no_rainbow
+#print axioms Strip.avoid_card
+#print axioms Strip.twostep_card
+#print axioms Strip.window_extends
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

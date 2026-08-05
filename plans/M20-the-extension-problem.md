@@ -39,10 +39,10 @@ reconstructed verbatim after the /tmp wipe — see §2.7).
 |---|---|---|
 | P1 | pattern count at 630 in 10²–10⁴ | **CONFIRMED**: 6,144 |
 | P2 | ≥ 90% of patterns extend (E0) | **CONFIRMED beyond its bound: 6,144/6,144 — the profile is FULL** |
-| P3 | each gadget kills < 10%, likely zero | <SLOT: battery> |
+| P3 | each gadget kills < 10%, likely zero | **NO KILL FOUND, honestly bounded**: 0 unsat anywhere; every resolved pattern extends (E1 1,441 / E1′ 47 / E2 71 sat at 60 s), but the gadget graphs are hard-SAT territory and the majority returned *unknown* at that budget — never folded into either side. A 56-per-gadget sample re-ran at 1,800 s (§2.3). |
 | P4 | strip space exponential; no clean structure theorem | **SPLIT**: growth exponential and *exact* (×12/column); "no structure theorem" refuted in the best direction (§2.4) |
-| P5 | clamps small (≤ 6), few multi-component, none majority | <SLOT: census> |
-| P5b | gadget-added vertices have \|N(v) ∩ S₀\| ≤ 3 | <SLOT: census> |
+| P5 | clamps small (≤ 6), few multi-component, none majority | **CONFIRMED, stronger**: max \|N(v) ∩ S\| = 3 (204 clamps: 144×1, 48×2, 12×3); 12 of 204 couple both components |
+| P5b | gadget-added vertices have \|N(v) ∩ S₀\| ≤ 3 | **CONFIRMED exactly**: E1 +8,754 points → 39 clamps ≤ 3; E1′ +8,259 → 67 ≤ 3; E2 +4,371 → 75 ≤ **2**, zero coupling — thousands of added points that barely touch the cover set |
 
 ### 2.1 The instrument: the extension profile
 
@@ -78,6 +78,20 @@ component 1 numerically undecidable: the seam orbit is dense). Note: the full he
 j=−1 with the adjacent triangle at j=0 is exactly the 10-point forcing configuration of
 §2.5 — **the forcing pattern is present at the doubling pivot.**
 
+### 2.2b Baseline profiles at the representative pivots
+
+From the census's size table (4,615 pivots with 1/3 classes, |S| ∈ 7..96, median 18):
+
+| pivot | |S| | patterns | profile |
+|---|---|---|---|
+| 233 (min) | 7 | 108 | **108/108 extend** |
+| 630 (doubling) | 21 | 6,144 | **6,144/6,144 extend** |
+| 490 (median) | 18 | 60,480 | **60,480/60,480 extend** |
+| 3888 (max) | 96 | ≥ 200,000 | cap-refused by name — beyond enumeration range, honestly no profile |
+
+**66,732 patterns profiled across three pivots; every one extends.** The zero-pressure
+reading is not a fact about one lucky pivot.
+
 ### 2.3 The E-battery, re-scored by pattern-killing
 
 Same gadgets as M19 §0(d) (E1: 2nd ℤ/3 closure at q_n=726; E1′: at q_c=648; E2:
@@ -85,7 +99,21 @@ spindle-double at 630, r²=1), now scored by profile shrinkage on E0's 6,144 pat
 (relocated by exact rational coordinates; `G[S]` verified unchanged under each gadget —
 supergraphs only kill, never legalize).
 
-<SLOT: battery table + verdict>
+| gadget | resolved sat | killed | unknown (60 s) | resample (1,800 s, 56 sampled) |
+|---|---|---|---|---|
+| E1 (2nd ℤ/3 closure at q_n) | 1,441 | **0** | 4,703 | **56/56 sat** (1,327 s total) |
+| E1′ (2nd ℤ/3 closure at q_c) | 47 | **0** | 6,097 | 47 sat, 9 no-verdict (4,007 s) |
+| E2 (spindle-double at 630) | 71 | **0** | 6,073 | 22 sat, 34 no-verdict (7,201 s) |
+
+**Verdict, honestly bounded**: **zero unsat verdicts anywhere across battery and
+resample — every one of 1,684 resolved verdicts says "extends"**; no gadget shows any
+extension pressure. E1's entire boosted sample resolved; E1′/E2 retain a no-verdict
+residue even at 1,800 s (hard instances, the M19 E2 precedent), counted as no-verdict. The unknowns are budget cuts on hard-but-large instances (the
+M19 precedent: E2's coverage walk needed 1,355 s for one *satisfiable* answer), not
+evidence of obstruction — but they are counted as no-verdict, not as sat. The census
+(P5b) supplies the mechanism: the gadgets' added thousands of points contact the cover
+set at ≤ 3 vertices each and almost never couple its components — and the cap theorem
+says one-pivot moves fight on terrain where the battle is provably unwinnable.
 
 ### 2.4 The strip automaton — the two-circle colouring space, exactly
 
@@ -168,6 +196,15 @@ hereby folded in with its boundary corrected (§2.6).
   instrument — no call path may bypass it; the confined-pivot control samples (1,000
   patterns) instead of enumerating. The three-job stacking was real indiscipline but not
   the killer.
+* **The set-order pin misread** (caught at pivot 490, after ~20,000 clean calls): the
+  base encoding has no at-most-one clause, so a model may set several colour variables
+  true at one vertex; the verification's "first-colour" reading iterated a Python *set*
+  (arbitrary order) and could read a non-pinned true colour at a pinned vertex — a
+  spurious "off-pattern" assert. No verdict was ever wrong (SAT/UNSAT is the solver's
+  exit code; the pinned literal is guaranteed true by its unit clause) — the checker,
+  not the checked, was buggy. Fix: deterministic min-colour reading, and the pin check
+  asserts the pinned *literal*. The M19 balance.py multi-colour-model lesson, relearned
+  in a second instrument.
 * **Python 3.14 forkserver**: pool workers re-import modules, so a mutated module global
   (k = 4 for the control) never reaches them — pins landed at the wrong variable stride
   and the model-verification assert killed the pool (loudly, as designed). Fix: k travels

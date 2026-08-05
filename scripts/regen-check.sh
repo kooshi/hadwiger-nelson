@@ -294,6 +294,18 @@ else
   echo "    both self-tests green"
 fi
 
+# --- the M20 extension-profile instrument -------------------------------------------------------
+# extend.py measures which locally-legal 3-patterns of a pivot's cover set extend (one SAT
+# verdict per pattern, bias-free by construction); its --tables output is the literal data
+# Strip.lean's kernel bridges re-derive.
+echo "==> extension-profile instrument (M20)"
+if ! python3 tools/extend.py --self-test > "${V}/extend-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/extend-selftest.log"
+  echo "    FAIL: tools/extend.py self-test"; FAIL=1
+else
+  echo "    self-test green"
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1

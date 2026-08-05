@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M19, 2026-08-04.**
+**Last updated: M20, 2026-08-04.**
 
 ### Where the problem stands
 
@@ -56,8 +56,14 @@ step 9); a milestone whose close does not update this section is not closed.*
 repository holds a kernel-certified χ(ℝ²) ≥ 5 on axioms exactly
 `[propext, Classical.choice, Quot.sound]` (M06–M09). Above that: every published witness
 and every growth family we built has been swept with certified or exhaustive negatives
-(M15–M17); distance-to-confinement (`minCov`) is measured pinned to the rainbow floor of 3
-at all 6,173 pivots ever examined — and M19 proved the pin is a theorem, not bad luck.
+(M15–M17); distance-to-confinement (`minCov`) is pinned to the rainbow floor of 3 at all
+6,173 pivots ever examined, and M19–M20 turned the pin into theorems: the cover set alone
+is always 3-colourable (M19), one pivot's *whole* system — centre plus both circles — is
+exactly 4-chromatic (M20), and the finest-grained measurement agrees (the extension
+profile at the doubling pivot is FULL: every one of 6,144 locally-legal 3-patterns is
+realized by an ambient 5-colouring — extension pressure in the plain closure is exactly
+zero). **The 5th colour provably requires structure spanning more than one pivot** —
+which names the next hunt: coupled circle systems (M21).
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -71,27 +77,36 @@ at all 6,173 pivots ever examined — and M19 proved the pin is a theorem, not b
 | 6 | **The 120° triangle identity**: a unit triangle sits on a circle about p iff r² = 1/3, and the equidistant point is the centroid; the ℤ/3 closure partitions the class into rainbow triangles. | `ClassGeometry.lean` (`exists_unit_triangle_iff`, `rot3_unit_triangle`) | M18 |
 | 7 | **Greedy colouring** (`degree < k` everywhere ⟹ k-colourable), genuinely missing from Mathlib. | `Greedy.lean` | M18 |
 | 8 | **De Grey's graph admits a balanced 5-colouring** — class sizes [317, 316, 316, 316, 316], the pigeonhole optimum, kernel-certified from a packed witness. No density obstruction at witness scale (closure scale too, tools-only). | `DeGreyBalanced.lean` | M19 |
-| 9 | **Negative knowledge, held to the same standard**: growth-family hunt closed exhaustively (M17, 557M class-tests); "ambient near-forcing" retracted — pool statistics measure the SAT solver's tastes, not the colouring space (three pre-registered hypotheses refuted with matched controls, M19 §0); pentagon exclusion is a fact about the coordinate field, not the plane (M18). | plans + instrument docstrings | M17–M19 |
+| 9 | **The 120° compulsion** (M20): in every proper 3-colouring of the two circles, an outer 120°-triple — three pairwise *non-adjacent* points — is never monochromatic: its seam-image unit triangle is rainbow and refuses. The first colour compulsion here that acts through no edge. | `Compulsion.lean` (`no_mono_outer_triple`) | M20 |
+| 10 | **The one-pivot cap**: {p} ∪ both circles has chromatic number exactly 4 — nine points force the 4th colour (centre + five consecutive outer + the witness triangle); M19's colouring plus a fresh colour at p gives ≤ 4. Coverage 4 at five colours cannot arise inside one pivot's system. | `Compulsion.lean` (`chromaticNumber_concentric`) | M20 |
+| 11 | **The strip automaton**: the two-circle graph splits into two tubes (parity invariant); per tube the colouring theory is exact — the recurrent core is (non-mono hexagon columns) × (all rainbow pairs) = 864 states, one SCC; every non-mono hexagon admits exactly 4 avoiding rainbow columns whose continuations count {2,2,4,4} — the space grows by exactly ×12 per column; and the **window-extension theorem**: every proper colouring of a ≥2-column window extends to the whole bi-infinite tube (the lone mono-parity column is the only finite obstruction). Finite parts by kernel `decide` against literal tables; the extension is computable. | `Strip.lean` (`window_extends`, `twostep_card`, …) | M20 |
+| 12 | **The extension profile** (instrument + measurement): per pivot, every locally-legal 3-pattern of the cover set SAT-tested for ambient realizability — bias-free by construction; controls both ways (a certified-confined pivot shows an empty profile, 1,000/1,000 sampled patterns killed). At the closure's doubling pivot the profile is FULL (6,144/6,144). | `tools/extend.py` + `build/m20-profile-630.json` (tools-side) | M20 |
+| 13 | **Negative knowledge, held to the same standard**: growth-family hunt closed exhaustively (M17, 557M class-tests); "ambient near-forcing" retracted — pool statistics measure the SAT solver's tastes, not the colouring space (three pre-registered hypotheses refuted with matched controls, M19 §0); pentagon exclusion is a fact about the coordinate field, not the plane (M18). | plans + instrument docstrings | M17–M19 |
 
 ### Paths forward, ranked
 
-1. **The extension problem** (M20, stubbed: `plans/M20-the-extension-problem.md`) — the
-   two-circle theorem's own boundary: coverage 4 can only be an *extension obstruction*
-   (ambient structure killing every extendable 3-pattern on the cover set). The finer
-   gradient: the **extension profile** — which locally-legal 3-patterns extend, per pivot,
-   each reading a SAT verdict (bias-free by construction). Live thread.
-2. **The strip-colouring structure theorem** — classify all proper 3-colourings of the
-   two-circle strip graph; turns profile enumeration into arithmetic and is the natural
-   Lean successor to `TwoCircle.lean`. Inside M20.
+1. **Coupled circle systems** (M21, stubbed: `plans/M21-coupled-circle-systems.md`) —
+   the cap theorem's own corollary: the 5th colour needs ≥ 2 pivots, so study two
+   pivots' systems joined by cross chords. The coupling-strength census is exact
+   arithmetic; the coupled automaton extends M20's transfer structure; the 2-pivot
+   extension profile reads the pressure directly. Live thread.
+2. **Pattern-killing gadget design, clamp-directed** — M20's battery re-scored the
+   closure-flavoured gadgets by profile shrinkage: zero kills; every resolved verdict
+   (1,684 across three gadgets, two budgets) says "extends", with an honest no-verdict
+   residue on hard instances. The census names why: gadget-added vertices touch ≤ 3
+   cover-set members each and almost never couple its components. Any gadget that
+   measurably kills patterns is the gradient the hunt climbs — the census says it
+   must clamp wider than anything the closure algebra produces.
 3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
    when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
    before.
-4. **General-radius two-circle theorem** — same method, any class radius; deferred until a
-   milestone needs it.
+4. **General-radius two-circle theorem** — same method, any class radius; deferred until
+   a milestone needs it (M21's cross-chord classification may be the trigger).
 5. **Parked with reasons** (see M19 plan §4): fractional route (provably capped below 5),
    measurable-≥6 (single-class density provably insufficient), axiom-sensitivity
    (perspective without progress until another angle feeds it). Write-ups and upstreaming:
-   deferred per the standing policy above.
+   deferred per the standing policy above; the two-circle/cap/priority literature pass is
+   a publication-gate task (no named prior found in a first search, M20 §2.6).
 
 ## Whose work this is
 
