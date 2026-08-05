@@ -14,7 +14,7 @@ hence rainbow — yet each member is unit-adjacent to one point of the triple, s
 monochromatic triple would starve the rainbow of its colour. The first colour compulsion
 in this project that acts through no edge.
 
-**The one-pivot cap** (`not_colorable_three` + `colorable_four`, headline
+**The one-pivot cap** (`concentric_not_colorable_three` + `concentric_colorable_four`, headline
 `chromaticNumber_concentric`): adjoin the centre and the system is *exactly* 4-chromatic.
 The centre eats one colour, five consecutive outer points then alternate through two
 colours, the 120°-triple among them goes monochromatic, and the compulsion kills it —
@@ -108,14 +108,14 @@ theorem hexStep_hexStep (p z : ℂ) : hexStep p (hexStep p z) = rot3 p z := sorr
 centre pigeonholes the outer circle to two colours, five consecutive outer points then
 alternate, the 120°-triple among them goes monochromatic, and the compulsion kills it.
 Nine points carry the argument. -/
-theorem not_colorable_three (p : ℂ) :
+theorem concentric_not_colorable_three (p : ℂ) :
     ¬ ((unitDistance ℂ).induce
         (insert p (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)))).Colorable 3 :=
   sorry
 
 /-- **The cap, upper half.** Four colours always suffice: M19's 3-colouring of the
 circles, plus a fresh colour on the centre alone. -/
-theorem colorable_four (p : ℂ) :
+theorem concentric_colorable_four (p : ℂ) :
     ((unitDistance ℂ).induce
         (insert p (Metric.sphere p 1 ∪ Metric.sphere p (Real.sqrt 3 / 3)))).Colorable 4 :=
   sorry

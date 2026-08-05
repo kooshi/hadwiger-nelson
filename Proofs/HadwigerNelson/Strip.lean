@@ -80,35 +80,28 @@ theorem rainTable_complete : (List.range 729).filter rainbowB = rainTable := sor
 
 /-! ## The finite theorems (each one quantifier at most, tables on the other side) -/
 
-/-- **Purification**: a hexagon column avoiding any rainbow column is non-mono. -/
-theorem purification :
+private theorem purification_all :
     (hexTable.all fun n => rainTable.all fun m => !avoidsB n m || nonMonoB n) = true :=
   sorry
 
-/-- **The mono obstruction**: a mono-parity hexagon column avoids *no* rainbow column —
-the tube's only finite obstruction, and the compulsion's engine. -/
-theorem mono_blocks :
+private theorem mono_blocks_all :
     (hexTable.all fun n => nonMonoB n || rainTable.all fun m => !avoidsB n m) = true :=
   sorry
 
-/-- Every non-mono hexagon column admits exactly 4 avoiding rainbow columns. -/
-theorem avoid_card :
+private theorem avoid_card_all :
     (hexTable.all fun n =>
       !nonMonoB n || (rainTable.filter (avoidsB n)).length == 4) = true := sorry
 
-/-- **The ×12 identity**: each non-mono hexagon column's avoiding rainbow columns carry
-12 hexagon-continuations in all (the split is 2,2,4,4) — the tube's colouring space
-grows by exactly twelve per column. -/
-theorem twostep_card :
+private theorem twostep_card_all :
     (hexTable.all fun n => !nonMonoB n ||
       ((rainTable.filter (avoidsB n)).map fun m =>
         (hexTable.filter fun n' => avoidsB n' m).length).sum == 12) = true := sorry
 
-/-- Every rainbow column admits a continuing hexagon column. -/
-theorem rainbow_extends :
+private theorem rainbow_extends_all :
     (rainTable.all fun m => hexTable.any fun n => avoidsB n m) = true := sorry
 
-/-- Avoidance is symmetric — the coupling reads the same in both directions. -/
+/-- Avoidance is symmetric — the coupling reads the same in both directions. This is
+what makes the leftward tube extension the rightward one read backward. -/
 theorem avoidsB_comm (n m : ℕ) : avoidsB n m = avoidsB m n := sorry
 
 /-! ## Prop bridges (the shapes proofs consume)
@@ -117,26 +110,47 @@ Membership in a table is the canonical currency: parse once (predicate + bound �
 then every existence lemma trades in it. Digits only see `n % 729`, so the predicates
 alone admit junk high bits — the bound is load-bearing, never decoration. -/
 
-theorem properHex_mem {n : ℕ} (h729 : n < 729) (h : properHexB n = true) :
+theorem mem_hexTable_of_properHex {n : ℕ} (h729 : n < 729) (h : properHexB n = true) :
     n ∈ hexTable := sorry
 
-theorem rainbow_mem {m : ℕ} (h729 : m < 729) (hr : rainbowB m = true) : m ∈ rainTable :=
+theorem mem_rainTable_of_rainbow {m : ℕ} (h729 : m < 729) (hr : rainbowB m = true) :
+    m ∈ rainTable := sorry
+
+theorem mem_hexTable_lt {n : ℕ} (hn : n ∈ hexTable) : n < 729 := sorry
+
+theorem mem_hexTable_properHex {n : ℕ} (hn : n ∈ hexTable) : properHexB n = true :=
   sorry
 
-theorem mem_hexTable_props {n : ℕ} (hn : n ∈ hexTable) :
-    n < 729 ∧ properHexB n = true := sorry
+theorem mem_rainTable_lt {m : ℕ} (hm : m ∈ rainTable) : m < 729 := sorry
 
-theorem mem_rainTable_props {m : ℕ} (hm : m ∈ rainTable) :
-    m < 729 ∧ rainbowB m = true := sorry
+theorem mem_rainTable_rainbow {m : ℕ} (hm : m ∈ rainTable) : rainbowB m = true := sorry
+
+/-- **Purification**, consumer form: a hexagon column avoiding any rainbow column is
+automatically non-mono — rainbow neighbours purify. -/
+theorem nonMonoB_of_avoids_rain {n m : ℕ} (hn : n ∈ hexTable) (hm : m ∈ rainTable)
+    (h : avoidsB n m = true) : nonMonoB n = true := sorry
+
+/-- **The mono obstruction**, consumer form: a mono-parity hexagon column avoids *no*
+rainbow column — the tube's only finite obstruction, and the compulsion's engine. -/
+theorem mono_avoids_no_rainbow {n : ℕ} (hn : n ∈ hexTable) (hnm : nonMonoB n = false)
+    {m : ℕ} (hm : m ∈ rainTable) : avoidsB n m = false := sorry
+
+/-- Every non-mono hexagon column admits exactly 4 avoiding rainbow columns. -/
+theorem avoid_card {n : ℕ} (hn : n ∈ hexTable) (hnm : nonMonoB n = true) :
+    (rainTable.filter (avoidsB n)).length = 4 := sorry
+
+/-- **The ×12 identity**: each non-mono hexagon column's avoiding rainbow columns carry
+12 hexagon-continuations in all (the split is 2,2,4,4) — the tube's colouring space
+grows by exactly twelve per column. -/
+theorem twostep_card {n : ℕ} (hn : n ∈ hexTable) (hnm : nonMonoB n = true) :
+    ((rainTable.filter (avoidsB n)).map fun m =>
+      (hexTable.filter fun n' => avoidsB n' m).length).sum = 12 := sorry
 
 theorem exists_rain_avoiding {n : ℕ} (hn : n ∈ hexTable) (hm : nonMonoB n = true) :
     ∃ m ∈ rainTable, avoidsB n m = true := sorry
 
 theorem exists_hex_avoiding {m : ℕ} (hm : m ∈ rainTable) :
     ∃ n ∈ hexTable, avoidsB n m = true := sorry
-
-theorem nonMono_of_avoids_rain {n m : ℕ} (hn : n ∈ hexTable) (hm : m ∈ rainTable)
-    (h : avoidsB n m = true) : nonMonoB n = true := sorry
 
 /-! ## The tube, and the window-extension theorem -/
 

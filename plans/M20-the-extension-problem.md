@@ -324,6 +324,44 @@ not chosen.
   bridge fails), state `avoid_card = 5` (fails), claim the mono example extendable
   (`mono_blocks` refuses).
 
+### 3.6 Experience-modeling pass (2026-08-04) — the consumer surface
+
+* **The Bool `List.all` decides went private** (`purification_all`, `mono_blocks_all`,
+  `avoid_card_all`, `twostep_card_all`, `rainbow_extends_all`): their only consumer is
+  the Prop bridge above each; two public names for one fact breeds a split mental
+  model. The public surface is the Prop layer.
+* **Names predict statements**: `mem_hexTable_of_properHex` / `mem_rainTable_of_rainbow`
+  (of-chains); the conjunction bridge split into four single-fact lemmas
+  (`mem_hexTable_lt`, `mem_hexTable_properHex`, `mem_rainTable_lt`,
+  `mem_rainTable_rainbow`) — the tower invariant consumes them at different moments;
+  `nonMonoB_of_avoids_rain` (purification, consumer form) and
+  `mono_avoids_no_rainbow` (the obstruction, consumer form); the cap theorems carry
+  their subject (`concentric_not_colorable_three`, `concentric_colorable_four`;
+  `chromaticNumber_concentric` names the function first, per Mathlib).
+* **Zero `@[simp]` tags, deliberately**: the module establishes no rewrite normal form;
+  its equations are computation-facing (`decide`/Bool), and tagging table facts would
+  put 66-entry list literals into every downstream simp search — attention-budget
+  vandalism with no paying consumer.
+* **Controls committed as green negatives**, not message pins: TwoCircle gains
+  `example : ¬ ∀ i, alternating i ≠ innerTable i := by decide` (the reviewer's
+  companion control — a 2-coloured outer table dies at the seam, pinning that three
+  outer colours are forced); Strip already carries the mono-example boundary `#guard`s
+  and the junk-bits refusal. Transient gate mutations (flip a table entry, claim
+  `avoid_card = 5`) run at gate time and are recorded in §6, not committed.
+* **`#eval` gates for the steppers**: `#guard`s on `stepHexToRain 142` /
+  `stepRainToHex 684` membership + avoidance, and 3–4 `#guard`s on the extended M19
+  window (`extendWindow` at columns −2..3) — the computability payoff made visible.
+* **`extend.py` surface**: subcommands `--self-test` (synthetic only, fast: the
+  K2-clamp discriminating pair at k=3 — pattern [0,1] killed, [0,0] survives — which
+  also exercises the k-plumbing; empty-ambient full profile; improper-pattern refusal;
+  enumeration count checks; cap refusal by name), `--profile --pivot N`, `--battery
+  --reuse`, `--clamps`, `--tables` (prints the Lean literals for Strip.lean — the
+  kernel's filter bridges are the real guard against drift, so regen-check does not
+  text-compare). Refusals follow the three-clause contract, e.g. the cap: name the
+  count, the space, and the two ways forward (`--cap`, smaller pivot). The sampled
+  confined-pivot control stays a documented separate invocation (needs the 397-point
+  build).
+
 ## 4. Instrument promotion
 
 `tools/extend.py` from scratchpad `extendprofile.py`: profile + battery modes, mandatory
