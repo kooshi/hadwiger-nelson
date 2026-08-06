@@ -277,10 +277,43 @@ The fork did not resolve to a cheap branch; the honest state, with each branch's
   `reflAcross_pivot_right` (must break), add a third point to a gluing RHS (must break
   ⊆), swap `seamImage q p` for `seamImage p q` in `outer_inter_inner` (must break).
 
-### 3.3 Remaining pass slots
+### 3.3 Experience-modeling pass (2026-08-05)
 
-* Names, binders, simp decisions, docstring surface, whether the spine lemmas stay
-  `private`: experience pass (last).
+* **`pivot_mem_outer` deleted**: it was `Metric.mem_sphere'.mpr h` wearing a fresh name —
+  an alias `exact?` users must wade past, teaching less than the Mathlib lemma the
+  search already finds. The module doc points at `mem_sphere'` instead. (Alternative:
+  keep for narrative — rejected; one unrequested byte.)
+* **Zero simp tags**, the M19/M20 house precedent upheld: `reflAcross_pivot_left` was
+  the only safe candidate (hypothesis-free, normalizing) but the repo's domain simp-set
+  is deliberately empty and automation here closes with cited leaves; the
+  hypothesis-carrying involution/isometry lemmas as conditional simp lemmas would
+  silently never fire (side condition not simp-normal) — a tag that implies usability
+  it doesn't have.
+* **Names kept**: `reflAcross` (Mathlib's `EuclideanGeometry.reflection` weighed —
+  affine machinery for a module that computes in ℂ norms; the doc names the deliberate
+  avoidance), `reflAcross_reflAcross` (the `conj_conj` involution convention),
+  `dist_reflAcross`/`_mem_sphere_left/right` (house `dist_seamImage`/`hexStep_mem_sphere`
+  precedent), the four gluing names (domain vocabulary, namespace-disambiguated;
+  `rw?`/`exact?` find by shape, not name), `four_le_chromaticNumber_of_system_subset`
+  (conclusion-first + `of_`-hypothesis, the Mathlib shape).
+* **Spine lemmas stay `private`** (`unit_frame`, `re_of_norms`, `im_sq_of_norm`,
+  premise converters): one consumer today; promotion with proper names waits for M22's
+  second use.
+* **Spec set as the cold consumer reads it**: 4 examples — premise inhabited
+  (`dist 0 1 = 1`), gluing set inhabited (`hexStep 0 1 ∈` both spheres), interlock
+  inhabited (`seamImage 0 1`), and the adversarial member (`1 ∉` the oo set, with the
+  *why* in the docstring). Positive + negative on the same object.
+* **`tools/couple.py` CLI**: subcommands `--census`, `--phase`, `--joint` (verification
+  of kills runs inside it, never separable), `--pair`, `--mesh`, `--floor`,
+  `--self-test`. Refusals by name (enumeration cap, foreign pool digest, non-far pair,
+  sampler dead-end). Self-test: Hall-violation control, σ/ζ₆ phantom-relation control,
+  the list-vs-tuple and double-reindex regressions on tiny fixtures, sampler
+  properness/canonicity, mesh-curve residual sanity (each sampled (α,β) satisfies the
+  chord equation to 1e-9); the closure-dependent pin-only k=3 control stays a
+  documented invocation (M20 precedent). `scripts/regen-check.sh` gains the FAIL-loud
+  `--self-test` line at implementation.
+* Skeleton after the pass: 22 sorries (19 proofs + 3 added/1 deleted spec examples),
+  elaborates clean.
 
 ## 4. Instrument promotion
 

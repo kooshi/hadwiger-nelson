@@ -98,11 +98,11 @@ theorem reflAcross_mem_sphere_right {p q z : ℂ} (h : dist p q = 1) {r : ℝ}
     (hz : z ∈ Metric.sphere q r) : reflAcross p q z ∈ Metric.sphere q r := by
   sorry
 
-/-! ## The interlock: each system's operators land on the partner -/
+/-! ## The interlock: each system's operators land on the partner
 
-/-- The pair premise as membership: at distance 1 the partner pivot is an outer point. -/
-theorem pivot_mem_outer {p q : ℂ} (h : dist p q = 1) : q ∈ Metric.sphere p 1 := by
-  sorry
+The pair premise as membership is Mathlib's own `Metric.mem_sphere'.mpr h : q ∈ sphere p 1`
+— no alias is minted (the experience pass deleted one: an alias a search must wade past
+teaches less than the lemma the search already finds). -/
 
 /-- The seam of one system lands on the other: `seamImage p q` sits on `p`'s inner
 circle AND on `q`'s outer circle. The interlock that makes the pair rigid. -/
@@ -184,9 +184,19 @@ examples consume the lemmas above). -/
 example : dist (0 : ℂ) 1 = 1 := by
   sorry
 
+/-- The gluing sets are inhabited: the hex step of the partner really does sit on both
+outer circles (the `⊇` direction of `outer_inter_outer`, at the concrete pair). -/
+example : hexStep 0 1 ∈ Metric.sphere (0 : ℂ) 1 ∩ Metric.sphere (1 : ℂ) 1 := by
+  sorry
+
+/-- The interlock is inhabited at the concrete pair: the seam image of `1` about `0`
+lies on `0`'s inner circle and one unit from `1`. -/
+example : seamImage 0 1 ∈ Metric.sphere (0 : ℂ) (Real.sqrt 3 / 3) ∩ Metric.sphere 1 1 := by
+  sorry
+
 /-- The classification's teeth (adversarial member): the second pivot itself lies on
-`p`'s outer circle but NOT in the outer∩outer gluing set — the two named points are
-really the only ones. -/
+`p`'s outer circle, yet NOT in the outer∩outer gluing set (its distance to itself is 0,
+not 1) — the two named points really are the only ones. -/
 example : (1 : ℂ) ∉ Metric.sphere (0 : ℂ) 1 ∩ Metric.sphere (1 : ℂ) 1 := by
   sorry
 
