@@ -53,12 +53,28 @@ noncomputable def innerGlueRatio : ℂ := ⟨1 / 2, Real.sqrt 3 / 6⟩
 
 /-! ## The reflection package: the ± branches for the price of one -/
 
-/-- The reflection fixes the first pivot. -/
-theorem reflAcross_pivot_left {p q : ℂ} (h : dist p q = 1) : reflAcross p q p = p := by
+/-- The pair premise in multiplicative form: the axis direction is a unit. -/
+private theorem norm_q_sub_p {p q : ℂ} (h : dist p q = 1) : ‖q - p‖ = 1 := by
+  sorry
+
+/-- The pair premise in `normSq` form — the engine for every cancellation below. -/
+private theorem normSq_q_sub_p {p q : ℂ} (h : dist p q = 1) : normSq (q - p) = 1 := by
+  sorry
+
+/-- The reflection fixes the first pivot — no distance hypothesis needed
+(`conj 0 = 0`; the obligation pass deleted the dead premise). -/
+theorem reflAcross_pivot_left (p q : ℂ) : reflAcross p q p = p := by
   sorry
 
 /-- The reflection fixes the second pivot. -/
 theorem reflAcross_pivot_right {p q : ℂ} (h : dist p q = 1) : reflAcross p q q = q := by
+  sorry
+
+/-- The reflection does not care which pivot anchors it: `reflAcross q p = reflAcross p q`
+(their difference telescopes to `(p − q) + (q − p)·normSq (q − p)`). Makes the swap
+corollary below a rewrite. -/
+theorem reflAcross_swap {p q : ℂ} (h : dist p q = 1) :
+    reflAcross q p = reflAcross p q := by
   sorry
 
 /-- The reflection is an involution. -/
@@ -94,7 +110,30 @@ theorem seamImage_interlock {p q : ℂ} (h : dist p q = 1) :
     seamImage p q ∈ Metric.sphere p (Real.sqrt 3 / 3) ∩ Metric.sphere q 1 := by
   sorry
 
-/-! ## The gluing classification: the four circle-pair intersections, explicitly -/
+/-! ## The gluing classification: the four circle-pair intersections, explicitly
+
+The `⊆` direction of all three classifications shares one spine, minted once: pass to
+the unit frame `v = (x − p)·conj(q − p)` (norms preserved since the axis is a unit),
+where the two sphere memberships pin `v.re` and `v.im²` — two roots, the named point
+and its mirror. The `⊇` direction is four distance computations per lemma, all M20
+norm lemmas plus the reflection package. -/
+
+/-- The unit-frame move: a point on both spheres, rewritten as `p + v·(q − p)` with both
+norms of `v` pinned. One lemma carries the `⊆` spine of all three classifications. -/
+private theorem unit_frame {p q x : ℂ} (h : dist p q = 1) {r₁ r₂ : ℝ}
+    (hx : x ∈ Metric.sphere p r₁ ∩ Metric.sphere q r₂) :
+    ∃ v : ℂ, x = p + v * (q - p) ∧ ‖v‖ = r₁ ∧ ‖v - 1‖ = r₂ := by
+  sorry
+
+/-- Two pinned norms fix the real part: `v.re = (1 + r₁² − r₂²)/2`. -/
+private theorem re_of_norms {v : ℂ} {r₁ r₂ : ℝ} (h₁ : ‖v‖ = r₁) (h₂ : ‖v - 1‖ = r₂) :
+    v.re = (1 + r₁ ^ 2 - r₂ ^ 2) / 2 := by
+  sorry
+
+/-- Two pinned norms fix the imaginary part up to sign: `v.im² = r₁² − v.re²`. -/
+private theorem im_sq_of_norm {v : ℂ} {r₁ : ℝ} (h₁ : ‖v‖ = r₁) :
+    v.im ^ 2 = r₁ ^ 2 - v.re ^ 2 := by
+  sorry
 
 /-- Outer meets outer in exactly the partner's hex step and its mirror. -/
 theorem outer_inter_outer {p q : ℂ} (h : dist p q = 1) :
@@ -134,6 +173,22 @@ theorem four_le_chromaticNumber_of_system_subset {p : ℂ} {D : Set ℂ}
 theorem four_le_chromaticNumber_pairSystem (p q : ℂ) :
     4 ≤ ((unitDistance ℂ).induce (pairSystem p q)).chromaticNumber :=
   four_le_chromaticNumber_of_system_subset Set.subset_union_left
+
+/-! ## Specification
+
+Non-vacuity of the module premise, and the classification's teeth: the gluing sets are
+exactly two points, so a third candidate is refuted. Filled at implementation (the
+examples consume the lemmas above). -/
+
+/-- The module premise is inhabited: `0` and `1` are at distance one. -/
+example : dist (0 : ℂ) 1 = 1 := by
+  sorry
+
+/-- The classification's teeth (adversarial member): the second pivot itself lies on
+`p`'s outer circle but NOT in the outer∩outer gluing set — the two named points are
+really the only ones. -/
+example : (1 : ℂ) ∉ Metric.sphere (0 : ℂ) 1 ∩ Metric.sphere (1 : ℂ) 1 := by
+  sorry
 
 end Coupled
 end HadwigerNelson

@@ -239,14 +239,48 @@ The fork did not resolve to a cheap branch; the honest state, with each branch's
 * Skeleton after the pass: 13 sorries (reflection package 6, interlock 2, gluing 4,
   superset lower bound 1); elaborates clean.
 
-### 3.2 Remaining pass slots
+### 3.2 Obligation-modeling pass (2026-08-05)
 
-* Names, binders, simp decisions, docstring surface: experience pass (last).
-* Proof decompositions, the frame-change lemma (`·conj(q−p)` as the unit-frame move),
-  χ-monotonicity route (comap of inclusion vs Mathlib hom lemma): obligation pass.
-* The spec-validation set: membership examples for every named point (each gluing
-  witness is exactly one `dist` computation), the compulsion-witness inclusion — shaped
-  in the obligation/experience passes.
+* **The χ-monotonicity route is a citation, not a derivation**: Mathlib's
+  `SimpleGraph.Colorable.of_hom` (Coloring/Vertex.lean:297) composed with `induceHom
+  Hom.id` (Maps.lean:577, `MapsTo` from the subset premise) transports 3-colourability
+  from `induce D` down to `induce (system p)`; then M20's headline route (by_contra +
+  `chromaticNumber_le_iff_colorable` + `Order.le_of_lt_add_one`) closes against
+  `concentric_not_colorable_three` — `system p` unfolds definitionally onto the cap's
+  inline set, so no bridge lemma is needed.
+* **The ⊆ spine of all three gluing lemmas is minted once** (the repeated-simp-chain
+  smell, prevented): `unit_frame` (a point on both spheres = `p + v·(q−p)` with both
+  norms of `v` pinned — the frame move is `·conj(q−p)`, norms preserved because the
+  axis is a unit), `re_of_norms` (`v.re = (1 + r₁² − r₂²)/2`), `im_sq_of_norm`
+  (`v.im² = r₁² − v.re²`). Each classification instantiates radii — oo: re 1/2,
+  im² 3/4 (= ζ₆); oi: re 5/6, im² 11/36 (= seam ratios); ii: re 1/2, im² 1/12
+  (= innerGlueRatio) — then `Complex.ext` on the two sign roots, mirror branch via the
+  verified identity `u·conj(ratio) = reflAcross`-image. The ⊇ directions are M20 dist
+  lemmas (`hexStep_mem_sphere`, `dist_self_hexStep`, `dist_seamImage_pivot`,
+  `dist_self_seamImage`) plus the reflection package.
+* **The reflection package computes in norms, never components**: isometry =
+  `‖(q−p)²·conj(z−w)‖ = ‖q−p‖²·‖z−w‖`; fixes/involution = `mul_conj` +
+  `normSq (q−p) = 1`. Two private premise-conversion lemmas (`norm_q_sub_p`,
+  `normSq_q_sub_p`) are the engines.
+* **A dead hypothesis was deleted** (the mutation audit run at design time):
+  `reflAcross_pivot_left` needs no distance premise (`conj 0 = 0`).
+* **A missing child was forced by the swap corollary**: `reflAcross_swap`
+  (`reflAcross q p = reflAcross p q` under the premise — their difference telescopes to
+  `(p−q) + (q−p)·normSq(q−p) = 0`); with it, `inner_inter_outer` is
+  `Set.inter_comm` + `outer_inter_inner q p` + one rewrite.
+* **Prove/test/assume partition**: 19 proof obligations (13 statements + 6 spine/premise
+  children); 2 spec examples (premise non-vacuity `dist 0 1 = 1`; the adversarial
+  member `1 ∉ oo-gluing set` — pins that the classification really is two points);
+  the assumption `dist p q = 1` stays per-statement (no section variable — the
+  experience pass may revisit). Skeleton: 21 sorries, elaborates clean.
+* **Mutation audits scheduled for implementation**: drop `h` from
+  `reflAcross_pivot_right` (must break), add a third point to a gluing RHS (must break
+  ⊆), swap `seamImage q p` for `seamImage p q` in `outer_inter_inner` (must break).
+
+### 3.3 Remaining pass slots
+
+* Names, binders, simp decisions, docstring surface, whether the spine lemmas stay
+  `private`: experience pass (last).
 
 ## 4. Instrument promotion
 
