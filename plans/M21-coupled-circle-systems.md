@@ -199,17 +199,54 @@ The fork did not resolve to a cheap branch; the honest state, with each branch's
 * **General-d classification** — parked (Frontier path 4 unchanged): the d = 1 case
   carries the milestone; the ℚ(√33) family census names which d matter next.
 
-## 3. Module and shape decisions (pre-modeling)
+## 3. Module and shape decisions
 
-* One new module `Proofs/HadwigerNelson/Coupled.lean`, importing `Compulsion` (hexStep,
-  seamImage, the cap) and `TwoCircle` (zeta6, seam, the colouring). M20 modules are
-  settled; nothing upstream is edited — `system`/`pairSystem` are fresh defs downstream
-  even though `system p` restates the cap's inline set.
-* Names, binders, simp decisions: to the modeling passes (domain → obligation →
-  experience, in that order — the consumer surface is not this milestone's centre).
-* The spec-validation set: membership examples for every named point (each gluing witness
-  is exactly one `dist` computation), the compulsion-witness inclusion, and the fork
-  headline's sanity example — shaped in the passes.
+### 3.1 Domain-modeling pass (2026-08-05)
+
+* **The reflection is the model.** The skeleton's three conjugate-companion constants
+  (`zeta6Conj`, `seamRatioConj`, `iiRatioConj` + their step versions) were one role
+  unnamed: reflection across the pivot axis. Replaced by ONE operator
+  `reflAcross p q z = p + (q−p)²·conj(z−p)` — an involutive isometry fixing both pivots
+  (exactly at `dist p q = 1`, the module premise; verified numerically on 200 random
+  configurations before committing). Every gluing pair is now `{X, reflAcross p q X}`,
+  and every ±-branch fact is the +-branch fact plus one isometry application.
+  Alternative weighed: componentwise conj constants (M20 house style for single
+  constants) — rejected because six defs collapse to one and the isometry buys the
+  mirror memberships wholesale. Confidence high.
+* **Gluing statements: three set equalities + one swap corollary**, heterogeneous
+  witnesses (`hexStep p q`, `seamImage q p`, `seamImage p q`, `p + innerGlueRatio·(q−p)`)
+  — a uniform "crossImage" family was weighed and rejected: the finding IS that the glue
+  points are the strip's existing operators, and a fresh 3-case def would obscure it.
+  `inner_inter_outer` is stated (consumer surface) but derived from `outer_inter_inner`
+  by the p↔q swap + `Set.inter_comm`.
+* **`innerGlueRatio` stays an explicit-component constant** `⟨1/2, √3/6⟩` (M20's
+  seamRatio precedent: components make every norm fact arithmetic); its `ζ₁₂/√3`
+  identity is a comment, not a def.
+* **The lower bound is superset-quantified** (the M20 lesson):
+  `four_le_chromaticNumber_of_system_subset : system p ⊆ D → 4 ≤ χ(induce D)`, with the
+  pairSystem form a term-mode corollary (it already closes off `Set.subset_union_left`
+  in the skeleton — zero sorries spent).
+* **`system`/`pairSystem` are named set defs downstream of M20** (M20 modules settled,
+  nothing upstream edited; the cap is re-stated in Coupled's vocabulary as a one-line
+  bridge when needed). `pairSystem` stays a binary union — an indexed ⋃ over pivot sets
+  was weighed for M22's three-pivot future and rejected as speculative structure before
+  a second use.
+* **The mesh-barrier theorem does NOT shape well**: its honest statement quantifies over
+  a continuous offset ψ, and the finite sector-table core only connects to the geometry
+  through curve-coverage intervals (arccos monotonicity, interval images) — analytic
+  machinery, high cost, negative-knowledge payoff. It stays tools-side triage; the plan's
+  §2.4 third bullet resolves to "no clean shape".
+* Skeleton after the pass: 13 sorries (reflection package 6, interlock 2, gluing 4,
+  superset lower bound 1); elaborates clean.
+
+### 3.2 Remaining pass slots
+
+* Names, binders, simp decisions, docstring surface: experience pass (last).
+* Proof decompositions, the frame-change lemma (`·conj(q−p)` as the unit-frame move),
+  χ-monotonicity route (comap of inclusion vs Mathlib hom lemma): obligation pass.
+* The spec-validation set: membership examples for every named point (each gluing
+  witness is exactly one `dist` computation), the compulsion-witness inclusion — shaped
+  in the obligation/experience passes.
 
 ## 4. Instrument promotion
 
