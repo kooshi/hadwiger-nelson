@@ -186,6 +186,50 @@ its place or stays a tools-side table entry.
 * Skeleton after the pass: 15 obligations (reflection package 7, classification 3,
   spec examples 3, near-cycle 2); elaborates clean.
 
+### 3.2 Obligation-modeling pass (2026-08-08)
+
+* **The ratio form retires the norm engine.** Every reflection-package proof is
+  div-cancellation off `q − p ≠ 0` (`div_self`, `mul_div_cancel`-family,
+  `conj_conj`) — M21's `mul_conj` engine is not needed at general axis; the one place
+  conjugation meets multiplication is the bridge lemma, closed by
+  `field_simp` + one `linear_combination` of `(q−p)·conj(q−p) = normSq`.
+* **The classification's ⊆ spine, division-free.** Frame `v = (x−p)·conj(q−p)`: the
+  two memberships pin `‖v‖ = r₁·d` and `‖v − d²‖ = r₂·d`; the normSq expansions give
+  `d²·(2v.re) = d²·(d² + r₁² − r₂²)`, so `v.re = A` by `mul_left_cancel₀` (no
+  division), `v.im² = disc`, two roots via `mul_self_eq_mul_self_iff`, frame inverse
+  `x = p + v/conj(q−p)` by `eq_div_iff`. The ⊇ direction: `‖⟨A,B⟩‖ = r₁·d` (since
+  `B² = disc` by `Real.sq_sqrt` on `disc_nonneg`) and `⟨A,B⟩ − d² = ⟨A − d², B⟩` with
+  `normSq = r₂²·d²` — pure `linear_combination`. Mirror branches: one private engine
+  `reflAxis_apply_frame` (the mirror conjugates the frame — M21's `reflAcross_ratio`
+  at general axis), plus re-minted `conj_mk`.
+* **Five private children added to the skeleton** (each a named, strictly smaller
+  obligation): `conj_mk`, `normSq_eq_dist_sq` (the axis engine), `nonneg_of_annulus`
+  (real two-liner), `disc_nonneg` (Heron factorization
+  `4·disc = (r₁+r₂−D)(r₂+D−r₁)(D+r₁−r₂)(D+r₁+r₂)`, four nonneg factors),
+  `reflAxis_apply_frame`. Six √-product identities (√a·√b for a,b ∈ {3,11,33}) stay
+  inline `Real.sqrt_mul`-cites, not lemmas — single consumers each.
+* **Empty cases are triangle inequalities**: far = `dist_triangle` + `linarith`;
+  near = `abs_dist_sub_le` + `linarith`. Two-liners, no children.
+* **The near-cycle route**: three power steps σ³ = ⟨−4√3/9, −√33/9⟩,
+  σ⁶ = ⟨5/27, 8√11/27⟩, σ⁹ = ⟨68√3/243, −37√33/243⟩ — each `Complex.ext` +
+  `linear_combination` over the √-products, each carrying the `normSq = 1`
+  stepping-stone check (the domain pass's hand-computation hazard, now structural);
+  then `normSq(w−1) = 2 − 2·w.re` for unit `w`, and the bound closes from 7-digit
+  rational √-bounds via `Real.lt_sqrt` + `linarith` (true margin ≈ 4×10⁻⁵ — verified
+  numerically before committing to 1/2500). Nonvanishing: `(ζ₆σ⁹)⁶ = σ⁵⁴` via
+  `zeta6_pow_six` + `ring`, against `seam_pow_ne_one 54`. Estimated ~45 lines total —
+  accepted (the interval-automation alternative is not cheaper).
+* **Prove/test/assume**: 20 proof obligations (15 statements + 5 children); the three
+  spec examples are the tests, each consuming a public theorem; no new assumptions
+  (all hypotheses per-statement).
+* **Mutation audits scheduled for implementation**: (1) drop `hpq` — must break
+  (concentric-equal); (2) third point on the classification RHS — must break;
+  (3) negate `gluePoint`'s √ — the classification SURVIVES (the set is
+  mirror-symmetric) but the `hexStep` example must break: the discriminating pair
+  that pins the branch choice; (4) tighten the near-cycle bound to 1/3500 — must
+  break (actual ≈ 3.10×10⁻⁴ > 1/3500); (5) drop `hhi` — must break.
+* Skeleton after the pass: 20 obligations; elaborates clean.
+
 ## 4. Instrument promotion
 
 At implementation, the scratch instruments consolidate into `tools/couple.py` as new

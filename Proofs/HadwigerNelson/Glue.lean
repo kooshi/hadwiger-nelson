@@ -59,6 +59,37 @@ noncomputable def gluePoint (p q : ℂ) (r₁ r₂ : ℝ) : ℂ :=
           - ((normSq (q - p) + r₁ ^ 2 - r₂ ^ 2) / 2) ^ 2)⟩ : ℂ)
       / (starRingEnd ℂ) (q - p)
 
+/-! ## Private children (the obligation pass's decomposition) -/
+
+/-- Conjugation on explicit components (Coupled's private `conj_mk`, re-minted). -/
+private theorem conj_mk (a b : ℝ) : (starRingEnd ℂ) (⟨a, b⟩ : ℂ) = ⟨a, -b⟩ := by
+  sorry
+
+/-- The axis engine: `normSq (q − p) = (dist p q)²` — converts every annulus
+hypothesis (about `dist`) into frame arithmetic (about `normSq`). -/
+private theorem normSq_eq_dist_sq (p q : ℂ) : normSq (q - p) = dist p q ^ 2 := by
+  sorry
+
+/-- The annulus pair forces both radii nonnegative (with `0 ≤ D`): the reason the
+classification does not assume them. -/
+private theorem nonneg_of_annulus {r₁ r₂ D : ℝ} (hD : 0 ≤ D)
+    (hlo : |r₁ - r₂| ≤ D) (hhi : D ≤ r₁ + r₂) : 0 ≤ r₁ ∧ 0 ≤ r₂ := by
+  sorry
+
+/-- The gluing discriminant is nonnegative on the annulus: Heron's factorization
+`4·disc = (r₁+r₂−D)(r₂+D−r₁)(D+r₁−r₂)(D+r₁+r₂)`, all four factors nonnegative. -/
+private theorem disc_nonneg {r₁ r₂ D : ℝ} (hD : 0 ≤ D)
+    (hlo : |r₁ - r₂| ≤ D) (hhi : D ≤ r₁ + r₂) :
+    0 ≤ r₁ ^ 2 * D ^ 2 - ((D ^ 2 + r₁ ^ 2 - r₂ ^ 2) / 2) ^ 2 := by
+  sorry
+
+/-- The mirror conjugates the frame: `reflAxis` on `p + w/conj(q−p)` conjugates `w`.
+The general-axis face of M21's `reflAcross_ratio`; every mirror branch is this line. -/
+private theorem reflAxis_apply_frame {p q : ℂ} (h : p ≠ q) (w : ℂ) :
+    reflAxis p q (p + w / (starRingEnd ℂ) (q - p))
+      = p + (starRingEnd ℂ) w / (starRingEnd ℂ) (q - p) := by
+  sorry
+
 /-! ## The reflection package, general axis -/
 
 /-- The reflection fixes the first pivot. -/
