@@ -101,10 +101,19 @@ therefore become:
   which core sizes carry the 52%/32% pressure; the output is the clamp specification
   for gadget design (the deliverable M20's battery lacked).
 * **The exactness thread** (was: partner closure) — the value of partner adjunction is
-  not depth but *aim*: near-relations name almost-cycles; adjoining exactly the
-  discrepancy-closing partners builds the tightest finite configurations the pair
-  admits. The Lean face is the general gluing classification (`Glue.lean`), which
-  states the adjunction move itself.
+  not depth but *aim*. Precision forced by review (Kooshi, 2026-08-08): the rotation
+  loops NEVER close geometrically — θσ is incommensurate with the hex lattice, which
+  is theorem-grade here (`seam_pow_ne_one`; the skeleton's `≠ 1` lemma certifies it
+  for the l = 9 loop) — so "closing" a near-cycle can only mean COLOUR closure: the
+  loop's two loose ends are exact lattice points at an exact, tiny, named distance
+  (|ζ₆σ⁹ − 1| ≈ 0.0176), and the target is an equality-transmitting gadget at that
+  exact distance — the √3-rhombus/Moser-spindle technology, aimed. The kill census's
+  6-pin cores say transmission at gadget scale is real in this system. If no 4-colour
+  gadget exists at the gap distance, that is a reportable negative. The genuinely
+  exact cycles live elsewhere: in the partner-collision web (67% — algebraic
+  coincidences, not rotation loops) and in M23's hex-commensurate inter-system
+  directions. The Lean face is the general gluing classification (`Glue.lean`),
+  which states the adjunction move itself.
 * **The certified near-cycle** (new, from B1) — `σ⁹` vs `ζ₆`-lattice at chord 0.0176
   is an exact field inequality; candidate for the first certified near-relation
   (§2.3, domain pass rules).
