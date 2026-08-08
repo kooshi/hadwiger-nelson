@@ -331,6 +331,57 @@ discriminated nothing; the strong witness is the down-centroid → top of Q-inne
 (⟨1/2,−√3/6⟩, 1+(√3/3)i), verified off-matching, plus an explicit ≠-matching
 example. 38 obligations after the pass.
 
+**Obligation pass (2026-08-08).** The proof map — three shared engines carry the
+module:
+
+* Private `zeta6_minpoly : ζ₆² − ζ₆ + 1 = 0` — the single algebraic root of the
+  hex layer: the three cycle identities, `hexStep_matching`,
+  `hexStep_hexStep_eq_rot3_centroid` (with children `zeta6_sq = omega3`,
+  `centroid_mul_one_sub_omega3 = 1`), `hexStep_triple_flip`, and
+  `hex_parallelogram` (conj ζ₆ eliminated via `one_sub_zeta6`) are each one
+  `linear_combination` over it.
+* Private `pair_eq_of_mem : x ∈ {a,b} → y ∈ {a,b} → x ≠ y → {a,b} = {x,y}` —
+  the spine of all three metapivot couplings: `Glue.sphere_inter_sphere` pins
+  the intersection to a listed pair, two known members + distinctness force the
+  equality, and the gluePoint's √-formula is NEVER touched. Annulus hypotheses
+  resolve by `nlinarith [sq_sqrt3]` (exact squares — no decimal bounds).
+  Membership children: pivot memberships (G1 dist facts), `rot3_mem_sphere` +
+  `rot3_unit_triangle` (partners), and two literal-image children
+  `reflAcross 0 1 centroid = ⟨1/2,−√3/6⟩`, `reflAcross 0 zeta6 centroid =
+  ⟨0,√3/3⟩` (mirror centroids).
+* Two chord keys: private `unit_chord_units (normSq u = normSq v = 1) :
+  normSq (u+v−1) = 1 ↔ (u+v)(u−1)(v−1) = 0` (sympy-verified identity;
+  `field_simp` + `linear_combination`), consumed by `unit_chord_outer_outer`
+  through the frame `x − y = (q−p)·(u + v − 1)` with `u = (x−p)conj(q−p)`,
+  `v = (q−y)conj(q−p)`, branches translated by `mul_right_cancel₀`; and the
+  ii anchor key `3x(1−y)·(normSq(x−y) − 1) = −(x(3y−2) − y)(y − x − 1)` — a
+  RATIONAL-coefficient conj-polynomial identity (the radius irrationality
+  cancels at the anchor — the reason the anchored statement is right);
+  multipliers nonvanish from the memberships (x ≠ 0, y ≠ 1), `mul_eq_zero`
+  splits the branches.
+
+The rest: ten-point theorem = 6-case partition (x = p, x = q short-circuit,
+then 2×2 classification cites), ⊇ by ten memberships (classifications' right
+branches + `reflAcross_mem_sphere_*`). ncard = insert-chain with the rational
+fingerprint collapse: re ∈ {0, 1, 1/2, 1/6, 5/6} separates groups by
+`norm_num`, im separates within groups (√3/2 vs √3/6 vs signs). Translation
+lemmas: `dist_add_right` / `dist_self_add_right` cites. `outer_partner_pair`
+consumes oo-rigidity (⊆, hxq eliminates the hub branch) + both translation
+lemmas (⊇). zpow backbone: children `seam_zpow_ne_one` (ℤ-lift by sign cases)
+and `zeta6_zpow_eq_one_iff : ζ₆^a = 1 ↔ 6 ∣ a` (emod case bash); assembly via
+σ^{6b} = 1. Seam hexagon: expand + `linear_combination` over
+`seam * conj seam = 1` and the minpoly; its negative control (perturbed final
+letter, evaluated at 0) ADDED to the skeleton as a spec example — 39
+obligations after the pass.
+
+Mutation audits scheduled for implementation close: (1) matching-branch sign
+flip in oo-rigidity must break; (2) Möbius coefficient 3→2 must break (the
+witness example discriminates); (3) delete `hxq` in `outer_partner_pair` —
+proof must fail at the hub branch; (4) radius swap in each metapivot coupling
+must break its memberships; (5) drop one point from the ten-point RHS — ⊇
+fails; (6) weaken `6 ∣ a` to `3 ∣ a` in the backbone — must break (ζ₆³ = −1);
+(7) the seam-hexagon perturbed word (in the skeleton as a spec example).
+
 ## 5. Instruments (implementation phase)
 
 * `--loops`: the loop census promoted (exact affine-word enumeration, closure

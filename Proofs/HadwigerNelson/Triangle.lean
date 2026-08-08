@@ -275,5 +275,13 @@ example :
 closure. -/
 example : zeta6 * seam ≠ 1 := by sorry
 
+/-- The hexagon's negative control (the census's perturbed word, kernel side):
+flip the final inverse step to a forward step and the loop no longer closes —
+evaluated at the origin. -/
+example :
+    rotAbout seam zeta6 (rotAbout seam 1
+      (rotAbout ((starRingEnd ℂ) seam) 0 (rotAbout seam zeta6
+        (rotAbout ((starRingEnd ℂ) seam) 1 (rotAbout seam 0 0))))) ≠ 0 := by sorry
+
 end Triangle
 end HadwigerNelson
