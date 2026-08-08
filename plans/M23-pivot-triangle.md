@@ -70,6 +70,37 @@ and 3 free rotational phase moduli — the spindle-tunable witness factory.
   seam-multiple separations outperforms one at random lattice separations, measured
   by profile shrinkage (M20's battery metric).
 
+## Mined from the `opus-larp` branch (Opus 5's parallel M21/M22, evaluated 2026-08-08)
+
+* **Adopted into main** (verified, negative-controlled): the `inter_eq_pair`
+  factoring of `Coupled.lean` — the four unit-axis gluing classifications as four
+  instances of one ratio-parametrized lemma. M23's three unit-separated pivot pairs
+  will instantiate it directly (no discriminant work — two norm facts per gluing).
+* **sympy 1.14 is installed** and does exact arithmetic in nested-radical fields
+  (~35 µs/op at degree 8) — it lifts `tools/field.py`'s multiquadratic-only ceiling.
+  Use it as the arbiter for field-membership questions (the branch caught its own
+  checker bug that way, with five planted controls).
+* **Field-growth numbers, superseding M22's C3 triage**: branch-side sympy-exact
+  measurement — 76% of (point, circle) adjunction instances are FREE (radicand
+  already square in ℚ(√3,√11)); 51.4% of distinct radicand classes; 92→162→249
+  non-free radicands by depth 12→30 (no global tower). M22's 37.5% PSLQ figure
+  sampled only non-collided partners — narrower population, weaker method.
+* **Branch-side triage worth re-validating if the ≤ 5 thread opens** (its parallel
+  instrument, NOT validated by ours): free-partner closure to 10,548 all-exact points
+  stays k = 4 SAT with edge density FALLING (2.52 vs 2.98 edges/point — "boundary
+  faster than interlock"); the bi-sector cell family (cells = circle × sector-p ×
+  sector-q) is 4-colour UNSAT / 5-colour SAT on the continuum at every width 60°→5°.
+  Its `PairColouring.lean`/`SphereInter.lean` skeletons (all-`sorry`, honest banners)
+  hold a reusable DESIGN: sign-test sectors on `ZMod 6` (no `arg`), the two-reals
+  `signSeq` reduction via ζ₆² = ζ₆ − 1, and a `Locus` inductive naming the
+  double-membership points as constructors. Its claim that the ten double-membership
+  points *explain* the mesh failure is unsupported by our curve-level data — treat as
+  hypothesis, not finding.
+* **Naming hazard**: Mathlib's root-namespace `discrim a b c` is the quadratic
+  discriminant, same arity as a circle-pair discriminant — an unqualified `discrim`
+  def would shadow silently. If M23 mints the discriminant as a def, name it
+  distinctly.
+
 ## Standing constraints
 
 Writeups/upstreaming deferred (2026-08-04). Builds via `scripts/build.sh` only.

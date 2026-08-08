@@ -23,6 +23,12 @@ The mirror operator is ratio conjugation — M21's mirror identity elevated to t
 definition; at unit axis it collapses to `Coupled.reflAcross` (the bridge lemma). The
 module also hosts the nine-step near-cycle (§2.3): the first certified near-relation,
 kept by the domain pass because both its halves are exact field arithmetic.
+
+Relation to Mathlib: the *uniqueness* half exists there —
+`EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two` (two spheres in a
+plane meet in at most two points) — but not the constructive half: where the points
+are, and when there are two rather than one or none. This module is the constructive
+complement. (Citation surfaced by the `opus-larp` branch's parallel M22 pass.)
 -/
 
 namespace HadwigerNelson
