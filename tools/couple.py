@@ -566,6 +566,80 @@ def joint_instance(n, E, base, pins_a, classes_b, cross, k, budget,
     return "unknown", None
 
 
+def find_pivot_triangles(coords, denom, E, want, null_mode, rng):
+    """Unit triangles (3-cliques of E) with pairwise-DISJOINT cover sets — the
+    §0.2.1 population; `null_mode` instead scans vertex triples that are pairwise
+    non-adjacent with disjoint cover sets and ZERO pairwise cross chords (the
+    mutually-far control). Refuses by name when none exist."""
+    nbr = {}
+    for u, v in E:
+        nbr.setdefault(u, set()).add(v)
+        nbr.setdefault(v, set()).add(u)
+    Scache = {}
+
+    def S_of(v):
+        if v not in Scache:
+            Scache[v] = set(pivot_S(coords, denom, E, v)[0])
+        return Scache[v]
+
+    found = []
+    if null_mode:
+        verts = sorted(nbr)
+        tries = 0
+        while len(found) < want and tries < 20000:
+            tries += 1
+            a, b, c = rng.sample(verts, 3)
+            if b in nbr[a] or c in nbr[a] or c in nbr[b]:
+                continue
+            Sa, Sb, Sc = S_of(a), S_of(b), S_of(c)
+            if Sa & Sb or Sa & Sc or Sb & Sc:
+                continue
+            cross = sum(1 for u, v in E
+                        if (u in Sa and v in Sb) or (u in Sb and v in Sa)
+                        or (u in Sa and v in Sc) or (u in Sc and v in Sa)
+                        or (u in Sb and v in Sc) or (u in Sc and v in Sb))
+            if cross:
+                continue
+            found.append((a, b, c, 0))
+        if not found:
+            raise SystemExit("no mutually-far null triple found in 20000 draws")
+        return found
+    for u, v in E:
+        for w in sorted(nbr[u] & nbr[v]):
+            if w <= v:
+                continue
+            Sa, Sb, Sc = S_of(u), S_of(v), S_of(w)
+            if Sa & Sb or Sa & Sc or Sb & Sc:
+                continue
+            cross = sum(1 for x, y in E
+                        if (x in Sa and y in Sb) or (x in Sb and y in Sa)
+                        or (x in Sa and y in Sc) or (x in Sc and y in Sa)
+                        or (x in Sb and y in Sc) or (x in Sc and y in Sb))
+            found.append((u, v, w, cross))
+            if len(found) >= want:
+                return found
+    if not found:
+        raise SystemExit("no unit triangle with pairwise-disjoint cover sets "
+                         "exists in the closure — §0.2.1 falls to the synthetic "
+                         "fallback (the 8-circle lattice)")
+    return found
+
+
+def verify_triple_kill(n, E, base, pins_a, classes_b, classes_c, k, budget):
+    """Independent re-verification of a triple kill: enumerate every palette
+    injection for π_b's classes as EXPLICIT pins (a different encoding of the same
+    freedom) and require every branch unsat with π_c kept as a partition."""
+    from itertools import permutations as perms
+    for inj in perms(range(k), len(classes_b)):
+        pins_b = [(v, inj[i]) for i, cls in enumerate(classes_b) for v in cls]
+        clauses = base + [[var(v, c, k)] for v, c in pins_a + pins_b] \
+            + partition_clauses(classes_c, k)
+        st, _ = _solve(clauses, k * n, budget)
+        if st != "unsat":
+            return False
+    return True
+
+
 def run_joint(args):
     cfg, coords, E = closure()
     from coverage import edges_digest
@@ -573,6 +647,20 @@ def run_joint(args):
     rng = random.Random(args.seed)
     k = args.k
     runs = []
+
+    if args.find_triangles:
+        rows = find_pivot_triangles(coords, denom, E, args.find_triangles,
+                                    False, rng)
+        for a, b, c, cross in rows:
+            print(f"[triangles] ({a},{b},{c}) cross chords: {cross}", flush=True)
+        rows_null = find_pivot_triangles(coords, denom, E, 3, True, rng)
+        for a, b, c, _ in rows_null:
+            print(f"[null-triples] ({a},{b},{c})", flush=True)
+        return
+
+    if len(args.joint) == 3:
+        run_joint_triple(args, cfg, coords, E, rng)
+        return
 
     def one_pair(a, b, tag, count, force_sat=False):
         S_a, _, _ = pivot_S(coords, denom, E, a)
@@ -625,6 +713,129 @@ def run_joint(args):
     path = args.out or str(BUILD / f"m21-joint-{args.joint[0]}-{args.joint[1]}.json")
     Path(path).write_text(json.dumps(out))
     print(f"joint profile written to {path}", flush=True)
+
+
+def run_joint_triple(args, cfg, coords, E, rng):
+    """§0.2.1, registered: pattern TRIPLES with cyclic cross-chord structure.
+    Per sample: the three pair sub-instances (the independence baseline, M21's
+    exact encodings) and the triple instance (pins_a + partitions b, c). The
+    registered effect is the EXCESS of the triple-kill rate over the independence
+    composition 1 − Π(1 − k_xy); prediction ≥ +10 pts at a unit triangle, flat at
+    the mutually-far null. Every triple kill is re-verified through the explicit
+    palette-injection encoding (a different encoding of π_b's freedom)."""
+    from coverage import edges_digest
+    n, denom, k = len(coords), cfg.denom, args.k
+    runs = []
+
+    def one_triple(a, b, c, tag, count):
+        Sa, _, _ = pivot_S(coords, denom, E, a)
+        Sb, _, _ = pivot_S(coords, denom, E, b)
+        Sc, _, _ = pivot_S(coords, denom, E, c)
+        for nm, X, Y in (("ab", Sa, Sb), ("ac", Sa, Sc), ("bc", Sb, Sc)):
+            if set(X) & set(Y):
+                raise SystemExit(f"triple ({a},{b},{c}): cover sets {nm} share "
+                                 f"vertices — the triple profile needs pairwise-"
+                                 f"disjoint cover sets")
+        sub_a, sub_b, sub_c = induced(E, Sa), induced(E, Sb), induced(E, Sc)
+
+        def cross_of(X, Y):
+            sX, sY = set(X), set(Y)
+            return [(u, v) for u, v in E
+                    if (u in sX and v in sY) or (u in sY and v in sX)]
+        cross_ab, cross_ac, cross_bc = \
+            cross_of(Sa, Sb), cross_of(Sa, Sc), cross_of(Sb, Sc)
+        print(f"[{tag}] |S|=({len(Sa)},{len(Sb)},{len(Sc)}) cross=("
+              f"{len(cross_ab)},{len(cross_ac)},{len(cross_bc)})", flush=True)
+        base = base_clauses(n, E, k)
+        seen, samples, misses = set(), [], 0
+        while len(samples) < count:
+            pa = sample_pattern(sub_a, len(Sa), rng)
+            pb = sample_pattern(sub_b, len(Sb), rng)
+            pc = sample_pattern(sub_c, len(Sc), rng)
+            if pa is None or pb is None or pc is None or (pa, pb, pc) in seen:
+                misses += 1
+                if misses > 50 * count + 200:
+                    raise SystemExit("sampler dead-end on pattern triples — "
+                                     "lower --samples")
+                continue
+            seen.add((pa, pb, pc))
+            samples.append((pa, pb, pc))
+        pairk = Counter()
+        trik = Counter()
+        unverified = 0
+        t0 = time.time()
+        for i, (pa, pb, pc) in enumerate(samples):
+            pins_a = [(Sa[t], pa[t]) for t in range(len(Sa))]
+            pins_b = [(Sb[t], pb[t]) for t in range(len(Sb))]
+            classes_b = [[Sb[t] for t in range(len(Sb)) if pb[t] == col]
+                         for col in range(max(pb) + 1)]
+            classes_c = [[Sc[t] for t in range(len(Sc)) if pc[t] == col]
+                         for col in range(max(pc) + 1)]
+            st_ab, _ = joint_instance(n, E, base, pins_a, classes_b, cross_ab,
+                                      k, args.budget)
+            st_ac, _ = joint_instance(n, E, base, pins_a, classes_c, cross_ac,
+                                      k, args.budget)
+            st_bc, _ = joint_instance(n, E, base, pins_b, classes_c, cross_bc,
+                                      k, args.budget)
+            for nm, st in (("ab", st_ab), ("ac", st_ac), ("bc", st_bc)):
+                pairk[nm + ":" + ("kill" if st != "sat" else "sat")] += 1
+            clauses = base + [[var(v, col, k)] for v, col in pins_a] \
+                + partition_clauses(classes_b, k) + partition_clauses(classes_c, k)
+            st, model = _solve(clauses, k * n, args.budget)
+            if st == "sat":
+                pos = {x for x in model if x > 0}
+                colour = {}
+                for x in sorted(pos):
+                    v, col = divmod(x - 1, k)
+                    colour.setdefault(v, col)
+                assert all(colour[u] != colour[v] for u, v in E if u != v), \
+                    "triple model improper — encoding bug"
+                for cls in classes_b + classes_c:
+                    assert len({colour[v] for v in cls}) == 1, \
+                        "class split in triple model — partition bug"
+                trik["sat"] += 1
+            elif st == "unsat":
+                trik["kill"] += 1
+                if not verify_triple_kill(n, E, base, pins_a, classes_b,
+                                          classes_c, k, args.budget):
+                    unverified += 1
+            else:
+                trik["unknown"] += 1
+            if (i + 1) % 50 == 0:
+                print(f"[{tag}]   {i + 1}/{count} triple={dict(trik)} "
+                      f"({time.time() - t0:.0f}s)", flush=True)
+        total = trik["sat"] + trik["kill"]
+        rates = {nm: pairk[nm + ":kill"] / max(1, count) for nm in ("ab", "ac", "bc")}
+        indep = 1 - (1 - rates["ab"]) * (1 - rates["ac"]) * (1 - rates["bc"])
+        tri_rate = trik["kill"] / max(1, total)
+        excess = tri_rate - indep
+        assert unverified == 0, \
+            f"{unverified} triple kills failed injection re-verification — " \
+            "encoding bug, results not reportable"
+        print(f"[{tag}] pair kill rates {rates} → independence {indep:.3f}; "
+              f"triple kill {tri_rate:.3f}; EXCESS {excess:+.3f} "
+              f"({time.time() - t0:.0f}s)", flush=True)
+        runs.append({"tag": f"{tag}@{a},{b},{c}", "k": k, "sampled": count,
+                     "pair_rates": rates, "independence": indep,
+                     "triple_kill": tri_rate, "excess": excess,
+                     "triple_verdicts": dict(trik),
+                     "cross": [len(cross_ab), len(cross_ac), len(cross_bc)],
+                     "secs": int(time.time() - t0)})
+
+    one_triple(args.joint[0], args.joint[1], args.joint[2], "triangle",
+               args.samples)
+    if args.null:
+        if len(args.null) != 3:
+            raise SystemExit("--null needs three ids in triple mode")
+        one_triple(args.null[0], args.null[1], args.null[2], "null", args.samples)
+    out = {"graph": {"name": "Z3-closure-dg630x1/3", "n": n, "n_edges": len(E),
+                     "edges_sha": edges_digest(n, E)},
+           "triple": list(args.joint), "null": list(args.null or []),
+           "seed": args.seed, "runs": runs}
+    path = args.out or str(BUILD / ("m23-joint3-" +
+                                    "-".join(map(str, args.joint)) + ".json"))
+    Path(path).write_text(json.dumps(out))
+    print(f"triple profile written to {path}", flush=True)
 
 
 # ------------------------------------------------------------------ the d = 1 pair system
@@ -890,6 +1101,140 @@ def run_mesh(args):
 
 
 # ------------------------------------------------------------------ the union floor
+
+def build_lattice4(depth, cap):
+    """The triangle + metapivot lattice: centres 0, 1, ζ₆, m, membership-directed
+    moves (as `build_lattice`), seeded by the 4 centres + the 34 glue points."""
+    pivots = [(nm, c) for nm, c in TRIANGLE_CENTRES]
+    pts: dict = {}
+    frontier = []
+    seeds = [c for _, c in TRIANGLE_CENTRES]
+    R_OUT, R_IN = Fraction(1), Fraction(1, 3)
+    circles = []
+    for nm, c in TRIANGLE_CENTRES:
+        circles.append((c, R_OUT))
+        circles.append((c, R_IN))
+    for i in range(len(circles)):
+        for j in range(i + 1, len(circles)):
+            c1, r1s = circles[i]
+            c2, r2s = circles[j]
+            if ckey(c1) == ckey(c2):
+                continue
+            d2 = to_frac_const(distsq((c1[0], c1[1]), (c2[0], c2[1])))
+            A = (d2 + r1s - r2s) / 2
+            disc = r1s * d2 - A * A
+            if disc <= 0:
+                continue
+            sd = _sqrt_rat_vec(disc)
+            d = _csub(c2, c1)
+            inv_ = frac_c({B1: Fraction(1) / d2}, {})
+            for sign in (1, -1):
+                api = ([Fraction(0)] * DIM, [s_ * sign for s_ in sd])
+                api[0][B1] = A
+                seeds.append(_cadd(c1, cmul(cmul(api, d), inv_)))
+    for s in seeds:
+        key = ckey(s)
+        if key not in pts:
+            pts[key] = (s, on_circles(s, pivots))
+            frontier.append(s)
+    cap_cut = False
+    for _ in range(depth):
+        nxt = []
+        for z in frontier:
+            labels = pts[ckey(z)][1]
+            for name, c in pivots:
+                dz = (sub(z[0], c[0]), sub(z[1], c[1]))
+                moves = (list(OUTER_MOVES.values()) if name + "o" in labels else []) \
+                    + (list(INNER_MOVES.values()) if name + "i" in labels else [])
+                for rho in moves:
+                    w = cmul(rho, dz)
+                    cand = (add(c[0], w[0]), add(c[1], w[1]))
+                    key = ckey(cand)
+                    if key in pts:
+                        continue
+                    lab = on_circles(cand, pivots)
+                    if not lab:
+                        continue
+                    if len(pts) >= cap:
+                        cap_cut = True
+                        break
+                    pts[key] = (cand, lab)
+                    nxt.append(cand)
+                if cap_cut:
+                    break
+            if cap_cut:
+                break
+        frontier = nxt
+        if cap_cut or not frontier:
+            break
+    order = list(pts.values())
+    return order, pivots, cap_cut
+
+
+def run_floor_systems(args):
+    """§0.2.2, registered — with the protocol flaw found at implementation stated
+    rather than rescoped: in the synthetic 8-circle object the union of ALL FOUR
+    cover sets is the whole vertex set (self-gluing), so its floor is the object's
+    chromatic-forced count by construction (4 — degenerate, not a finding). The
+    informative levels are the sub-unions, reported as a ladder."""
+    t0 = time.time()
+    order, pivots, cap_cut = build_lattice4(args.depth, args.cap)
+    n = len(order)
+    print(f"[floor:{args.systems}] lattice: {n} points (cap_cut={cap_cut}, "
+          f"{time.time() - t0:.0f}s)", flush=True)
+    fx = [(to_float(z[0]), to_float(z[1])) for z, _ in order]
+    E = []
+    for i in range(n):
+        xi, yi = fx[i]
+        for j in range(i + 1, n):
+            xj, yj = fx[j]
+            if abs((xi - xj) ** 2 + (yi - yj) ** 2 - 1.0) > 1e-9:
+                continue
+            zi, zj = order[i][0], order[j][0]
+            if distsq((zi[0], zi[1]), (zj[0], zj[1])) == const(1):
+                E.append((i, j))
+    print(f"[floor:{args.systems}] {len(E)} exact unit edges", flush=True)
+    k = args.k
+    st3, _ = _solve(base_clauses(n, E, 3), 3 * n, args.budget)
+    st4, _ = _solve(base_clauses(n, E, k), k * n, args.budget)
+    print(f"[floor:{args.systems}] control: k=3 {st3} (expect unsat), "
+          f"k={k} {st4} (expect sat)", flush=True)
+    assert st3 == "unsat" and st4 == "sat", "lattice controls failed"
+    cover = {nm: [i for i, (_, lab) in enumerate(order)
+                  if nm + "o" in lab or nm + "i" in lab]
+             for nm, _ in pivots}
+    levels = [("m", cover["m"]),
+              ("0∪m", sorted(set(cover["0"]) | set(cover["m"]))),
+              ("0∪1∪2", sorted(set(cover["0"]) | set(cover["1"])
+                               | set(cover["2"]))),
+              ("all4", sorted(set().union(*cover.values())))]
+    results = {}
+    for nm, Su in levels:
+        floor, tstar = k, None
+        for t in range(1, k):
+            clauses = base_clauses(n, E, k) + \
+                [[-var(v, c, k)] for v in Su for c in range(k - t, k)]
+            st, _ = _solve(clauses, k * n, args.budget)
+            if st == "sat":
+                floor, tstar = k - t, t
+            else:
+                break
+        results[nm] = floor
+        print(f"[floor:{args.systems}] union '{nm}' (|Su|={len(Su)}): "
+              f"floor {floor}", flush=True)
+    degenerate = len(levels[-1][1]) == n
+    print(f"[floor:{args.systems}] all-four union covers "
+          f"{len(levels[-1][1])}/{n} vertices"
+          + (" — DEGENERATE as registered (floor = χ-forced count by "
+             "construction); the ladder above is the informative measurement"
+             if degenerate else ""), flush=True)
+    path = args.out or str(BUILD / "m23-floor-systems.json")
+    Path(path).write_text(json.dumps({
+        "systems": args.systems, "n": n, "edges": len(E), "cap_cut": cap_cut,
+        "controls": {"k3": st3, "k4": st4}, "floors": results,
+        "all4_degenerate": degenerate, "depth": args.depth}))
+    print(f"[floor:{args.systems}] written to {path}", flush=True)
+
 
 def run_floor(args):
     cfg, coords, E = closure()
@@ -1377,6 +1722,225 @@ def _kills_probe(job):
     return out
 
 
+def _angle_lattice_frac(seps, phase, tol):
+    """Fraction of separations within `tol` degrees of the lattice
+    {j·phase mod 60}."""
+    if not seps:
+        return 0.0
+    pts = set()
+    x = 0.0
+    for _ in range(200):
+        pts.add(round(x, 6))
+        x = (x + phase) % 60.0
+    hits = 0
+    for s in seps:
+        if any(min(abs(s - p), 60.0 - abs(s - p)) <= tol for p in pts):
+            hits += 1
+    return hits / len(seps)
+
+
+def _core_separations(core, a, coords, nbr_a, Cls_a):
+    """Same-circle core-pin angular separations about pivot `a`, mod 60° (the M22
+    §6.4 statistic, verbatim protocol)."""
+    import math
+    ax, ay = to_float(coords[a][0]), to_float(coords[a][1])
+    seps = []
+    pins = [v for v, _ in core]
+    ang = {}
+    for v in pins:
+        vx, vy = to_float(coords[v][0]), to_float(coords[v][1])
+        ang[v] = math.degrees(math.atan2(vy - ay, vx - ax))
+    inner = set(Cls_a)
+    for i in range(len(pins)):
+        for j in range(i + 1, len(pins)):
+            u, v = pins[i], pins[j]
+            if (u in inner) != (v in inner):
+                continue
+            seps.append(abs(ang[u] - ang[v]) % 60.0)
+    return seps
+
+
+def run_kills_replicate(args):
+    """§0.2.3 + §0.2.4, registered: the M22 §6.4 seam-alignment decomposition
+    replicated at FRESH far pairs (never-examined), protocol verbatim — same-circle
+    core-pin separations mod 60°, 0.5° tolerance, composition-matched random
+    controls, ≥20 decoy phases, half-offset depletion — plus the ladder-coset
+    census of the same cores (exact `ladder_address` co-coset test vs matched
+    controls). Registered thresholds: lattice excess ≥ +8 pts at ≥ 3 of 4 pairs,
+    depletion ≤ −8 pts at ≥ 3 of 4, decoy rank ≤ 3/21 at each replicating pair;
+    coset overrepresentation ≥ 2×."""
+    import math
+    cfg, coords, E = closure()
+    n, denom = len(coords), cfg.denom
+    k = args.k
+    rng = random.Random(args.seed)
+    KNOWN = {(695, 2044), (30, 426), (678, 3554), (414, 715)}
+    THETA = math.degrees(math.atan(math.sqrt(11.0)))
+    TOL = 0.5
+
+    # fresh far pairs: unit-distance (edges), disjoint covers, coupled, unexamined
+    fresh = []
+    Scache = {}
+
+    def S_of(v):
+        if v not in Scache:
+            Scache[v] = pivot_S(coords, denom, E, v)
+        return Scache[v]
+
+    for u, v in E:
+        if len(fresh) >= args.replicate:
+            break
+        if (u, v) in KNOWN or (v, u) in KNOWN:
+            continue
+        Sa = S_of(u)
+        Sb = S_of(v)
+        if set(Sa[0]) & set(Sb[0]):
+            continue
+        sA, sB = set(Sa[0]), set(Sb[0])
+        cross = [(x, y) for x, y in E
+                 if (x in sA and y in sB) or (x in sB and y in sA)]
+        if len(cross) < 20:
+            continue
+        fresh.append((u, v, len(cross)))
+    if len(fresh) < args.replicate:
+        raise SystemExit(f"only {len(fresh)} fresh far pairs found — cannot "
+                         f"replicate at {args.replicate}")
+    print(f"[replicate] fresh pairs: {fresh}", flush=True)
+
+    per_pair = []
+    for (a, b, ncross) in fresh:
+        S_a, nbr_a, Cls_a = S_of(a)
+        S_b, nbr_b, Cls_b = S_of(b)
+        cross = [(x, y) for x, y in E
+                 if (x in set(S_a) and y in set(S_b))
+                 or (x in set(S_b) and y in set(S_a))]
+        _kills_init(n, E, S_a, S_b, cross, Cls_b, nbr_b, k, args.budget)
+        sub_a, sub_b = induced(E, S_a), induced(E, S_b)
+        base = base_clauses(n, E, k)
+        prng = random.Random(args.seed * 1009 + a)
+        cores, seen, tried = [], set(), 0
+        t0 = time.time()
+        while len(cores) < args.kill_target and tried < args.samples:
+            pa = sample_pattern(sub_a, len(S_a), prng)
+            pb = sample_pattern(sub_b, len(S_b), prng)
+            if pa is None or pb is None or (pa, pb) in seen:
+                continue
+            seen.add((pa, pb))
+            tried += 1
+            pins_a = [(S_a[t], pa[t]) for t in range(len(S_a))]
+            classes_b = [[S_b[t] for t in range(len(S_b)) if pb[t] == c]
+                         for c in range(max(pb) + 1)]
+            st, _ = joint_instance(n, E, base, pins_a, classes_b, cross, k,
+                                   args.budget)
+            if st == "unsat":
+                cores.append(greedy_core(pins_a, classes_b, 1000 + tried))
+        print(f"[replicate] ({a},{b}) cross={ncross}: {len(cores)} kill cores "
+              f"from {tried} draws ({time.time() - t0:.0f}s)", flush=True)
+        if len(cores) < 10:
+            per_pair.append({"pair": [a, b], "cores": len(cores),
+                             "verdict": "too-few-kills"})
+            continue
+
+        core_seps = []
+        for core in cores:
+            core_seps += _core_separations(core, a, coords, nbr_a, Cls_a)
+        core_sizes = [len(c) for c in cores]
+        core_frac = _angle_lattice_frac(core_seps, THETA % 60.0, TOL)
+        ctrl_fracs = []
+        for _ in range(1000):
+            fake_pins = [(v, 0) for v in
+                         prng.sample(S_a, prng.choice(core_sizes))]
+            ctrl_fracs.append(_angle_lattice_frac(
+                _core_separations(fake_pins, a, coords, nbr_a, Cls_a),
+                THETA % 60.0, TOL))
+        ctrl_frac = sum(ctrl_fracs) / len(ctrl_fracs)
+        excess = core_frac - ctrl_frac
+
+        drng = random.Random(9000 + a)
+        decoy_excesses = []
+        for _ in range(20):
+            phi = drng.uniform(3.0, 57.0)
+            cf = _angle_lattice_frac(core_seps, phi, TOL)
+            ctf = []
+            for _ in range(120):
+                fake_pins = [(v, 0) for v in
+                             prng.sample(S_a, prng.choice(core_sizes))]
+                ctf.append(_angle_lattice_frac(
+                    _core_separations(fake_pins, a, coords, nbr_a, Cls_a),
+                    phi, TOL))
+            decoy_excesses.append(cf - sum(ctf) / len(ctf))
+        rank = 1 + sum(1 for d in decoy_excesses if d >= excess)
+
+        half_core = _angle_lattice_frac([(s - 30.0) % 60.0 for s in core_seps],
+                                        THETA % 60.0, TOL)
+        half_ctrl = []
+        for _ in range(300):
+            fake_pins = [(v, 0) for v in
+                         prng.sample(S_a, prng.choice(core_sizes))]
+            ss = _core_separations(fake_pins, a, coords, nbr_a, Cls_a)
+            half_ctrl.append(_angle_lattice_frac([(s - 30.0) % 60.0 for s in ss],
+                                                 THETA % 60.0, TOL))
+        depletion = half_core - (sum(half_ctrl) / len(half_ctrl))
+
+        # §0.2.4: exact co-ladder census of core pin pairs (same-circle, about a)
+        A = ([Fraction(x, denom) for x in coords[a][0]],
+             [Fraction(y, denom) for y in coords[a][1]])
+        inner = set(Cls_a)
+
+        def coladder_frac(pin_sets):
+            hit = tot = 0
+            for core in pin_sets:
+                pins = [v for v, _ in core]
+                for i in range(len(pins)):
+                    for j in range(i + 1, len(pins)):
+                        u, v = pins[i], pins[j]
+                        if (u in inner) != (v in inner):
+                            continue
+                        wu = (sub([Fraction(x, denom) for x in coords[u][0]], A[0]),
+                              sub([Fraction(y, denom) for y in coords[u][1]], A[1]))
+                        wv = (sub([Fraction(x, denom) for x in coords[v][0]], A[0]),
+                              sub([Fraction(y, denom) for y in coords[v][1]], A[1]))
+                        tot += 1
+                        if ladder_address(wu, wv, bbound=12) is not None:
+                            hit += 1
+            return (hit / tot) if tot else 0.0, tot
+
+        core_col, ncore_pairs = coladder_frac(cores)
+        ctrl_sets = [[(v, 0) for v in prng.sample(S_a, prng.choice(core_sizes))]
+                     for _ in range(len(cores))]
+        ctrl_col, _ = coladder_frac(ctrl_sets)
+        ratio = (core_col / ctrl_col) if ctrl_col > 0 else float("inf")
+
+        row = {"pair": [a, b], "cross": ncross, "cores": len(cores),
+               "n_seps": len(core_seps),
+               "lattice": {"core": round(core_frac, 4), "ctrl": round(ctrl_frac, 4),
+                           "excess_pts": round(100 * excess, 1)},
+               "decoy_rank": f"{rank}/21",
+               "half_offset_depletion_pts": round(100 * depletion, 1),
+               "coladder": {"core": round(core_col, 4), "ctrl": round(ctrl_col, 4),
+                            "ratio": round(ratio, 2), "pairs": ncore_pairs}}
+        per_pair.append(row)
+        print(f"[replicate] ({a},{b}): lattice excess {100 * excess:+.1f} pts "
+              f"(rank {rank}/21), half-offset {100 * depletion:+.1f} pts, "
+              f"co-ladder ×{ratio:.2f}", flush=True)
+
+    good = [r for r in per_pair if "lattice" in r]
+    rep = sum(1 for r in good if r["lattice"]["excess_pts"] >= 8.0
+              and int(r["decoy_rank"].split("/")[0]) <= 3)
+    dep = sum(1 for r in good if r["half_offset_depletion_pts"] <= -8.0)
+    print(f"[replicate] VERDICT: {rep}/{len(good)} pairs replicate the lattice "
+          f"excess (registered: ≥3/4 at ≥+8 pts, rank ≤3); {dep}/{len(good)} "
+          f"replicate the depletion (registered: ≥3/4 at ≤−8 pts)", flush=True)
+    path = args.out or str(BUILD / "m23-replicate.json")
+    Path(path).write_text(json.dumps({
+        "protocol": "M22 §6.4 verbatim: same-circle core-pin separations mod 60, "
+                    "0.5° tol, matched controls, 20 decoys, half-offset; "
+                    "+ exact co-ladder census (bbound 12)",
+        "theta_sigma_mod60": THETA % 60.0, "pairs": per_pair,
+        "replicated_lattice": rep, "replicated_depletion": dep}))
+    print(f"[replicate] written to {path}", flush=True)
+
+
 def run_kills(args):
     """The kill-structure census at a far pair: a fresh frame (A1 rigidity, A4
     conflict anatomy) + relaxation/core probes of the COMMITTED kill corpus (A2, A4).
@@ -1595,6 +2159,234 @@ def run_ladder(args):
 
 # ------------------------------------------------------------------ self-test
 
+# ------------------------------------------------------------------ M23: the loop census
+
+CENTROID = frac_c({B1: Fraction(1, 2)}, {B3: Fraction(1, 6)})
+LZETA6 = frac_c({B1: Fraction(1, 2)}, {B3: Fraction(1, 2)})
+
+
+def _inv_name(g):
+    return g[:-1] if g.endswith("'") else g + "'"
+
+
+def _cneg(z):
+    return ([-c for c in z[0]], [-c for c in z[1]])
+
+
+def _cadd(z, w):
+    return (add(z[0], w[0]), add(z[1], w[1]))
+
+
+def _csub(z, w):
+    return _cadd(z, _cneg(w))
+
+
+def loop_generators(centres):
+    """R (ζ₆) and S (σ) rotation generators about each named centre, with inverses:
+    name -> (Δa, Δb, U, t) for the affine map z ↦ Uz + t, t = p(1 − U)."""
+    Z6 = frac_c({B1: Fraction(1, 2)}, {B3: Fraction(1, 2)})
+    Z6I = frac_c({B1: Fraction(1, 2)}, {B3: Fraction(-1, 2)})
+    S = frac_c({B3: Fraction(1, 6)}, {B33: Fraction(1, 6)})
+    SI = frac_c({B3: Fraction(1, 6)}, {B33: Fraction(-1, 6)})
+    gens = {}
+    for nm, p in centres:
+        for sym, da, db, U, Ui in (("R", 1, 0, Z6, Z6I), ("S", 0, 1, S, SI)):
+            gens[f"{sym}{nm}"] = (da, db, U, _csub(p, cmul(p, U)))
+            gens[f"{sym}{nm}'"] = (-da, -db, Ui, _csub(p, cmul(p, Ui)))
+    return gens
+
+
+def loop_census(gens, gen_names, maxlen, want_states=None, stop_on_first=True):
+    """Minimal-relation BFS over reduced words. Dedup is on (state, LAST LETTER)
+    pairs — state-only dedup silently blocks closing steps whose shorter
+    representative ends in the inverse letter (the v1 bug, kept as a self-test
+    control). Returns (minimal_length, relations_at_minimal, reached)."""
+    ZERO = frac_c({}, {})
+    start_key = (0, 0, ckey(ZERO))
+    seen = set()
+    state_seen = {start_key}
+    frontier = [((0, 0, ZERO), "", None)]
+    found_want = {}
+    minimal, min_rel = None, []
+    for L in range(1, maxlen + 1):
+        nxt, relations = [], []
+        for (a, b, t), word, last in frontier:
+            for g in gen_names:
+                if last is not None and g == _inv_name(last):
+                    continue
+                da, db, U, tg = gens[g]
+                a2, b2 = (a + da) % 6, b + db
+                t2 = _cadd(cmul(U, t), tg)
+                key = (a2, b2, ckey(t2))
+                w2 = word + ("," if word else "") + g
+                if key == start_key:
+                    relations.append(w2)
+                    continue
+                pk = (a2, b2, key[2], g)
+                if pk in seen:
+                    continue
+                seen.add(pk)
+                if key not in state_seen:
+                    state_seen.add(key)
+                    if want_states:
+                        for wn, wk in want_states.items():
+                            if wn not in found_want and key == wk:
+                                found_want[wn] = (w2, L)
+                nxt.append(((a2, b2, t2), w2, g))
+        if relations and minimal is None:
+            minimal, min_rel = L, relations
+            if stop_on_first:
+                break
+        frontier = nxt
+    return minimal, min_rel, found_want
+
+
+def word_closes(gens, word):
+    """Exact closure test for a comma-separated generator word (applied left first)."""
+    ZERO = frac_c({}, {})
+    a = b = 0
+    t = ZERO
+    for g in word.split(","):
+        da, db, U, tg = gens[g]
+        a, b = (a + da) % 6, b + db
+        t = _cadd(cmul(U, t), tg)
+    return (a % 6, b) == (0, 0) and ckey(t) == ckey(ZERO)
+
+
+TRIANGLE_CENTRES = [("0", frac_c({}, {})), ("1", frac_c({B1: Fraction(1)}, {})),
+                    ("2", LZETA6), ("m", CENTROID)]
+
+
+def run_loops(args):
+    """The M23 loop census: minimal exact relations of the rotation generators.
+    Certified anchors (Lean side): the seam hexagon closes (`Triangle.rot_hexagon`)
+    and no word with nonzero σ-content closes
+    (`Triangle.zeta6_zpow_mul_seam_zpow_eq_one_iff`)."""
+    gens = loop_generators(TRIANGLE_CENTRES)
+    hexm, hexr, _ = loop_census(
+        gens, [f"R{n}{i}" for n in "012" for i in ("", "'")], 8)
+    print(f"[loops] pure-hex minimal relation length: {hexm} "
+          f"({len(hexr)} words; e.g. {hexr[:2]})", flush=True)
+    seamm, seamr, _ = loop_census(
+        gens, [f"S{n}{i}" for n in "012" for i in ("", "'")], 6)
+    print(f"[loops] pure-seam minimal relation length: {seamm} "
+          f"({len(seamr)} words; e.g. {seamr[:2]})", flush=True)
+    tm = _csub(CENTROID, cmul(CENTROID, LZETA6))
+    _, _, reached = loop_census(
+        gens, [f"{s}{n}{i}" for s in "RS" for n in "012" for i in ("", "'")],
+        args.loop_len, want_states={"R_m": (1, 0, ckey(tm))}, stop_on_first=False)
+    print(f"[loops] R_m from pivot generators at length ≤ {args.loop_len}: "
+          f"{reached.get('R_m', 'NOT reached')}", flush=True)
+    hexagon = "S0,S1',S2,S0',S1,S2'"
+    print(f"[loops] seam hexagon {hexagon} closes: {word_closes(gens, hexagon)} "
+          f"(certified: Triangle.seam_hexagon)", flush=True)
+    if args.out:
+        Path(args.out).write_text(json.dumps({
+            "hex_minimal": hexm, "hex_relations": hexr,
+            "seam_minimal": seamm, "seam_relations": seamr,
+            "seam_hexagon": hexagon, "R_m_reached": reached.get("R_m") is not None,
+            "status": "exact-tools; hexagon closure and sigma-noclosure kernel-checked"}))
+        print(f"[loops] written to {args.out}", flush=True)
+
+
+# ------------------------------------------------------------------ M23: the viz exporter
+
+def _sqrt_rat_vec(r):
+    """√ of a positive rational as a real field vector over {1, √3, √11, √33}."""
+    for kk, slot in ((1, B1), (3, B3), (11, B11), (33, B33)):
+        q = r / kk
+        nd = q.numerator * q.denominator
+        s = int(nd ** 0.5)
+        for cand in (s - 1, s, s + 1):
+            if cand >= 0 and cand * cand == nd:
+                vec = [Fraction(0)] * DIM
+                vec[slot] = Fraction(cand, q.denominator)
+                return vec
+    raise SystemExit(f"--export-viz: √{r} outside ℚ(√3,√11) — inventory corrupt")
+
+
+def triangle_inventory():
+    """Census A, exact: the 34 pairwise-intersection points of the 8-circle
+    triangle+metapivot object, with circle incidences. Returns (points, tangencies)
+    where points is a list of {x, y (floats), circles, mult}."""
+    R_OUT, R_IN = Fraction(1), Fraction(1, 3)
+    circles = []
+    for nm, c in TRIANGLE_CENTRES:
+        circles.append((nm + "o", c, R_OUT))
+        circles.append((nm + "i", c, R_IN))
+    pts = {}
+    tangency = 0
+    for i in range(len(circles)):
+        for j in range(i + 1, len(circles)):
+            n1, c1, r1s = circles[i]
+            n2, c2, r2s = circles[j]
+            if ckey(c1) == ckey(c2):
+                continue
+            d2 = to_frac_const(distsq((c1[0], c1[1]), (c2[0], c2[1])))
+            A = (d2 + r1s - r2s) / 2
+            disc = r1s * d2 - A * A
+            if disc <= 0:
+                tangency += 1
+                continue
+            sd = _sqrt_rat_vec(disc)
+            d = _csub(c2, c1)
+            inv = frac_c({B1: Fraction(1) / d2}, {})
+            for sign in (1, -1):
+                api = ([Fraction(0)] * DIM, [s_ * sign for s_ in sd])
+                api[0][B1] = A
+                zpt = _cadd(c1, cmul(cmul(api, d), inv))
+                key = ckey(zpt)
+                if key in pts:
+                    if n1 not in pts[key][1]:
+                        pts[key][1].append(n1)
+                    if n2 not in pts[key][1]:
+                        pts[key][1].append(n2)
+                else:
+                    pts[key] = (zpt, [n1, n2])
+    out = []
+    for z, circs in pts.values():
+        out.append({"x": to_float(z[0]), "y": to_float(z[1]),
+                    "circles": sorted(circs), "mult": len(circs)})
+    return out, tangency
+
+
+def run_export_viz(args):
+    """JSON exporter for the visualization: the exact 34-point inventory, the loop
+    census's minimal words, and per-datum status stamps. The page reads this file,
+    never hand-copied constants."""
+    inv, tang = triangle_inventory()
+    if len(inv) != 34 or tang != 0:
+        raise SystemExit(f"--export-viz: inventory drifted ({len(inv)} points, "
+                         f"{tang} tangencies; expected 34, 0) — re-run census A")
+    gens = loop_generators(TRIANGLE_CENTRES)
+    hexm, hexr, _ = loop_census(
+        gens, [f"R{n}{i}" for n in "012" for i in ("", "'")], 6)
+    seamm, seamr, _ = loop_census(
+        gens, [f"S{n}{i}" for n in "012" for i in ("", "'")], 6)
+    out = {
+        "centres": [{"name": nm, "x": to_float(c[0]), "y": to_float(c[1])}
+                    for nm, c in TRIANGLE_CENTRES],
+        "radii": {"outer": 1.0, "inner": 3 ** -0.5},
+        "inventory": {"points": inv, "status": "exact-tools (census A; "
+                      "the three no-new-points couplings are kernel-checked: "
+                      "Triangle.outer_inter_metaInner / inner_inter_metaOuter / "
+                      "inner_inter_metaInner)"},
+        "loops": {"hex_minimal": hexm, "hex_examples": hexr[:4],
+                  "seam_minimal": seamm, "seam_examples": seamr[:4],
+                  "status": "exact-tools; seam-hexagon closure kernel-checked "
+                            "(Triangle.rot_hexagon/seam_hexagon)"},
+        "chords": {"oo": "matching-or-hub (kernel: Triangle.unit_chord_outer_outer)",
+                   "ii": "matching-or-Moebius x(3y-2)=y (kernel: "
+                         "Triangle.unit_chord_inner_inner)",
+                   "oi_io": "iterated gluing, sqrt-disc family "
+                            "(kernel: Glue.sphere_inter_sphere instances)"},
+    }
+    path = args.out or str(BUILD / "m23-viz-data.json")
+    Path(path).write_text(json.dumps(out, indent=1))
+    print(f"[export-viz] {len(inv)} points, loop census, chord statuses -> {path}",
+          flush=True)
+
+
 def self_test():
     failures = []
 
@@ -1628,6 +2420,29 @@ def self_test():
             f"phantom seam relation reported: {found2} — seam_pow_ne_one violated"
         assert (0, 0, 0) not in found2, "trivial relation reported"
     check("σ/ζ₆ phantom-relation control (exact)", phantom)
+
+    # M23: loop-census controls
+    def loops_controls():
+        gens = loop_generators(TRIANGLE_CENTRES)
+        assert word_closes(gens, "S0,S1',S2,S0',S1,S2'"), \
+            "the seam hexagon does NOT close — census/kernel disagreement"
+        assert not word_closes(gens, "S0,S1',S2,S0',S1,S2"), \
+            "the perturbed hexagon closes — closure test broken"
+        hexm, hexr, _ = loop_census(
+            gens, [f"R{n}{i}" for n in "012" for i in ("", "'")], 4)
+        assert hexm == 4 and len(hexr) == 18, \
+            f"pure-hex minimal ({hexm}, {len(hexr)}) ≠ (4, 18) — the " \
+            "(state,last-letter) dedup regressed to state-only (the v1 bug)"
+    check("M23 loop census (hexagon + dedup regression)", loops_controls)
+
+    # M23: inventory control
+    def inventory_controls():
+        inv, tang = triangle_inventory()
+        assert len(inv) == 34 and tang == 0, \
+            f"inventory ({len(inv)} pts, {tang} tangencies) ≠ (34, 0)"
+        assert sum(1 for p in inv if p["mult"] >= 3) == 7, \
+            "triple-point count ≠ 7 — incidence spine drifted"
+    check("M23 triangle inventory (34 points, 7 triples)", inventory_controls)
 
     # 3. the list-vs-tuple census regression (distsq returns a list)
     def listtuple():
@@ -1880,8 +2695,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--census", action="store_true")
     ap.add_argument("--phase", action="store_true")
-    ap.add_argument("--joint", nargs=2, type=int, metavar=("A", "B"))
-    ap.add_argument("--null", nargs=2, type=int, metavar=("A", "B"))
+    ap.add_argument("--joint", nargs="+", type=int, metavar="ID")
+    ap.add_argument("--null", nargs="+", type=int, metavar="ID")
     ap.add_argument("--pair", action="store_true")
     ap.add_argument("--mesh", action="store_true")
     ap.add_argument("--floor", nargs=2, type=int, metavar=("A", "B"))
@@ -1889,6 +2704,14 @@ def main():
     ap.add_argument("--partner", action="store_true")
     ap.add_argument("--kills", nargs=2, type=int, metavar=("A", "B"))
     ap.add_argument("--ladder", action="store_true")
+    ap.add_argument("--find-triangles", type=int, default=0, dest="find_triangles")
+    ap.add_argument("--systems", type=str, default=None,
+                    help="named system-set floor: triangle+meta")
+    ap.add_argument("--replicate", type=int, default=0)
+    ap.add_argument("--kill-target", type=int, default=40, dest="kill_target")
+    ap.add_argument("--loops", action="store_true")
+    ap.add_argument("--loop-len", type=int, default=6, dest="loop_len")
+    ap.add_argument("--export-viz", action="store_true", dest="export_viz")
     ap.add_argument("--bbound", type=int, default=40)
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     ap.add_argument("--samples", type=int, default=1500)
@@ -1933,7 +2756,7 @@ def main():
     if args.phase:
         run_phase(args)
         ran = True
-    if args.joint:
+    if args.joint or args.find_triangles:
         run_joint(args)
         ran = True
     if args.pair:
@@ -1941,6 +2764,12 @@ def main():
         ran = True
     if args.mesh:
         run_mesh(args)
+        ran = True
+    if args.systems:
+        if args.systems != "triangle+meta":
+            raise SystemExit(f"unknown --systems set '{args.systems}' — "
+                             f"known: triangle+meta")
+        run_floor_systems(args)
         ran = True
     if args.floor:
         run_floor(args)
@@ -1951,15 +2780,25 @@ def main():
     if args.partner:
         run_partner(args)
         ran = True
+    if args.replicate:
+        run_kills_replicate(args)
+        ran = True
     if args.kills:
         run_kills(args)
         ran = True
     if args.ladder:
         run_ladder(args)
         ran = True
+    if args.loops:
+        run_loops(args)
+        ran = True
+    if args.export_viz:
+        run_export_viz(args)
+        ran = True
     if not ran:
         ap.error("nothing to do — try --self-test, --census, --phase, --joint, "
-                 "--pair, --mesh, --floor, --near, --partner, --kills, or --ladder")
+                 "--pair, --mesh, --floor, --near, --partner, --kills, --ladder, "
+                 "--loops, or --export-viz")
 
 
 if __name__ == "__main__":
