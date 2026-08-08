@@ -474,6 +474,29 @@ no native evaluation anywhere. -/
 #print axioms Strip.twostep_card
 #print axioms Strip.window_extends
 
+/-! ## M21 — coupled circle systems: the unit-distance pivot pair
+
+The reflection package (`reflAcross`, the pair's one symmetry — an involutive isometry
+fixing both pivots), the interlock, the four gluing classifications (each circle-pair
+intersection is exactly {a point, its mirror}, witnessed by the strip's own operators),
+and the superset-quantified lower bound (any set containing one pivot's system needs
+four colours). Pure geometry over ℂ — no tables, no native evaluation. -/
+
+#print axioms Coupled.reflAcross_pivot_left
+#print axioms Coupled.reflAcross_pivot_right
+#print axioms Coupled.reflAcross_swap
+#print axioms Coupled.reflAcross_reflAcross
+#print axioms Coupled.dist_reflAcross
+#print axioms Coupled.reflAcross_mem_sphere_left
+#print axioms Coupled.reflAcross_mem_sphere_right
+#print axioms Coupled.seamImage_interlock
+#print axioms Coupled.outer_inter_outer
+#print axioms Coupled.outer_inter_inner
+#print axioms Coupled.inner_inter_outer
+#print axioms Coupled.inner_inter_inner
+#print axioms Coupled.four_le_chromaticNumber_of_system_subset
+#print axioms Coupled.four_le_chromaticNumber_pairSystem
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

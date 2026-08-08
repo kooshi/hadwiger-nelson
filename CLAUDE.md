@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M20, 2026-08-04.**
+**Last updated: M21, 2026-08-08.**
 
 ### Where the problem stands
 
@@ -59,11 +59,18 @@ and every growth family we built has been swept with certified or exhaustive neg
 (M15–M17); distance-to-confinement (`minCov`) is pinned to the rainbow floor of 3 at all
 6,173 pivots ever examined, and M19–M20 turned the pin into theorems: the cover set alone
 is always 3-colourable (M19), one pivot's *whole* system — centre plus both circles — is
-exactly 4-chromatic (M20), and the finest-grained measurement agrees (the extension
-profile at the doubling pivot is FULL: every one of 6,144 locally-legal 3-patterns is
-realized by an ambient 5-colouring — extension pressure in the plain closure is exactly
-zero). **The 5th colour provably requires structure spanning more than one pivot** —
-which names the next hunt: coupled circle systems (M21).
+exactly 4-chromatic (M20), and extension pressure in the plain closure is exactly zero.
+**The 5th colour provably requires structure spanning more than one pivot** — so M21
+went to two. The coupled-pair measurements found the hunt's first nonzero gradient: at
+the strongest-coupled pivot pair of the closure (unit separation, 40 cross chords), 52%
+of pattern pairs die on the cross chords alone and 32% of the survivors are killed by
+the ambient graph — verified through an independent encoding, with a perfectly flat
+null control. The canonical coupled object — two pivots at distance exactly 1, four
+circles — now has its geometry certified in Lean (`Coupled.lean`): one reflection is
+the whole symmetry, every circle-pair intersection is exactly {a point, its mirror}
+under the strip's own operators, and any set containing one pivot's system needs four
+colours. χ of the pair system is **open in both directions**, each with a named
+reopening gate; the pressure's *shape* is the next hunt (M22).
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -82,31 +89,37 @@ which names the next hunt: coupled circle systems (M21).
 | 11 | **The strip automaton**: the two-circle graph splits into two tubes (parity invariant); per tube the colouring theory is exact — the recurrent core is (non-mono hexagon columns) × (all rainbow pairs) = 864 states, one SCC; every non-mono hexagon admits exactly 4 avoiding rainbow columns whose continuations count {2,2,4,4} — the space grows by exactly ×12 per column; and the **window-extension theorem**: every proper colouring of a ≥2-column window extends to the whole bi-infinite tube (the lone mono-parity column is the only finite obstruction). Finite parts by kernel `decide` against literal tables; the extension is computable. | `Strip.lean` (`window_extends`, `twostep_card`, …) | M20 |
 | 12 | **The extension profile** (instrument + measurement): per pivot, every locally-legal 3-pattern of the cover set SAT-tested for ambient realizability — bias-free by construction; controls both ways (a certified-confined pivot shows an empty profile, 1,000/1,000 sampled patterns killed). At the closure's doubling pivot the profile is FULL (6,144/6,144). | `tools/extend.py` + `build/m20-profile-630.json` (tools-side) | M20 |
 | 13 | **Negative knowledge, held to the same standard**: growth-family hunt closed exhaustively (M17, 557M class-tests); "ambient near-forcing" retracted — pool statistics measure the SAT solver's tastes, not the colouring space (three pre-registered hypotheses refuted with matched controls, M19 §0); pentagon exclusion is a fact about the coordinate field, not the plane (M18). | plans + instrument docstrings | M17–M19 |
+| 14 | **The pair-gluing classification**: for two pivots at distance 1, every one of the four circle-pair intersections is *exactly* {a point, its mirror} — outer∩outer = the hex step, outer∩inner = the seam image (each way), inner∩inner = the new half-sector direction `⟨1/2, √3/6⟩` = ζ₁₂/√3 — all under ONE involutive isometry `reflAcross` (the configuration's whole symmetry), with the interlock `seamImage p q ∈ inner_p ∩ outer_q`. The 5th-colour lower bound holds superset-quantified: any vertex set containing one pivot's system needs 4 colours. | `Coupled.lean` (`outer_inter_outer` …, `four_le_chromaticNumber_of_system_subset`) | M21 |
+| 15 | **The first nonzero extension pressure** (tools-side, verified): at the closure's strongest-coupled far pair (d = 1, 40 cross chords), 785/1500 sampled pattern pairs die on the cross chords alone and 229/715 of the locally-feasible are killed by the ambient graph — every sampled kill re-confirmed through an independent pin-only injection encoding; the null pair is 1500/1500 flat. The pressure is *selective*: the union's coverage floor stays 3 and the pair lattice stays 4-colourable at every affordable depth. Each kill is already in `Fan.of_unsat` pin-cube form. | `tools/couple.py` + `build/m21-joint-695-2044.json` | M21 |
+| 16 | **The coupled automaton is dead, exactly**: no relation `u^{2m}σ^lζ₆^k = 1` at any probed pivot pair (\|m\|,\|l\| ≤ 6) — the coupling phase is incommensurate with the strip lattice everywhere, so two coupled strips never form a finite-state product; and **no pair of rotated/reflected/re-paletted 60°-sector colourings is proper on the d = 1 pair** (full continuous-offset sweep, killed by the outer–outer curve family alone) — any χ ≤ 4 proof for the pair needs a construction shape nobody has named. | `tools/couple.py` (`--phase`, `--mesh`) + `build/m21-phase.json` | M21 |
 
 ### Paths forward, ranked
 
-1. **Coupled circle systems** (M21, stubbed: `plans/M21-coupled-circle-systems.md`) —
-   the cap theorem's own corollary: the 5th colour needs ≥ 2 pivots, so study two
-   pivots' systems joined by cross chords. The coupling-strength census is exact
-   arithmetic; the coupled automaton extends M20's transfer structure; the 2-pivot
-   extension profile reads the pressure directly. Live thread.
+1. **Partner closure and the shape of the pressure** (M22, stubbed:
+   `plans/M22-partner-closure.md`) — the two live gradients M21 exposed: (a) the
+   partner-closed pair sample (adjoin cross-chord partners, one √-extension per
+   generation) to force the χ(pairSystem) fork — UNSAT at k = 4 would be a two-point
+   continuum χ ≥ 5 candidate; (b) the kill-structure census — WHICH pattern pairs die,
+   the mechanism behind the 52%/32% pressure, feeding gadget design with the clamp
+   shape M20's battery said the closure algebra lacks.
 2. **Pattern-killing gadget design, clamp-directed** — M20's battery re-scored the
-   closure-flavoured gadgets by profile shrinkage: zero kills; every resolved verdict
-   (1,684 across three gadgets, two budgets) says "extends", with an honest no-verdict
-   residue on hard instances. The census names why: gadget-added vertices touch ≤ 3
-   cover-set members each and almost never couple its components. Any gadget that
-   measurably kills patterns is the gradient the hunt climbs — the census says it
-   must clamp wider than anything the closure algebra produces.
+   closure-flavoured gadgets by profile shrinkage: zero kills. The M21 kill corpus is
+   the first positive signal for what a killing clamp looks like; design follows the
+   kill census (path 1b), not the closure algebra.
 3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
    when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
-   before.
+   before. Note: M21's mesh scan killed the sector family for pairs, so any explicit
+   pair colouring is already a research object for this angle too.
 4. **General-radius two-circle theorem** — same method, any class radius; deferred until
-   a milestone needs it (M21's cross-chord classification may be the trigger).
+   a milestone needs it (M21's d = 1 gluings needed only the strip operators, so the
+   trigger did not fire).
 5. **Parked with reasons** (see M19 plan §4): fractional route (provably capped below 5),
    measurable-≥6 (single-class density provably insufficient), axiom-sensitivity
-   (perspective without progress until another angle feeds it). Write-ups and upstreaming:
-   deferred per the standing policy above; the two-circle/cap/priority literature pass is
-   a publication-gate task (no named prior found in a first search, M20 §2.6).
+   (perspective without progress until another angle feeds it). The χ(pairSystem) fork's
+   two branches stay parked behind their gates (M21 subplan §2.4). Write-ups and
+   upstreaming: deferred per the standing policy above; the two-circle/cap/priority
+   literature pass is a publication-gate task (no named prior found in a first search,
+   M20 §2.6).
 
 ## Whose work this is
 

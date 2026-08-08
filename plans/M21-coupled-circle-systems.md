@@ -345,3 +345,44 @@ anything §5's scope keeps live must survive in `tools/` with its controls.
 * Gate additions at close: `#print axioms` rows for every public `Coupled` declaration;
   the promoted tool's `--self-test` wired into `scripts/regen-check.sh` FAIL-loud; the
   negative-control sweep (break each new check, watch it fail, restore).
+
+## 6. Implementation record (2026-08-08, desktop)
+
+* **The skeleton burned down in one pass**: all 22 obligations closed on the first
+  elaboration but for a single `linear_combination` coefficient (computed against the
+  pre-rationalized hypothesis; one-line fix). The obligation pass's designs held
+  exactly: everything in the reflection package is a `linear_combination` of the one
+  engine identity `(q−p)·conj(q−p) = 1`; the three-lemma ⊆-spine carried all three
+  classifications; the mirror branches came free through `reflAcross_ratio`
+  (`reflAcross` conjugates the axis ratio — the pass's "verified identity", minted as
+  a private lemma alongside `mul_conj_q_sub_p` and `conj_mk`).
+* **Mutation audits 3/3 red, culprit named each time**: the dropped premise broke at
+  its consumption site (and the premise-free statement is false: `reflAcross p q q =
+  p + (q−p)·|q−p|²`); the third RHS point left the two-root case split open; the
+  swapped seam orientation failed the frame pin (`⟨1/6,√11/6⟩` has norm 1/√3, not 1).
+* **Axioms**: all 14 public `Coupled` declarations on exactly
+  `[propext, Classical.choice, Quot.sound]` (261 clean total); zero purchases; the
+  audit's fail-loud path re-verified against a nonexistent constant.
+* **The promoted instrument, validated against the §0 artifacts**:
+  - `--census` reproduces the committed artifact *exactly*: 4,615 pivots, 1,108,572
+    coupled pairs, 3,585 d² classes, 39.0% top-10 weight share, d²=1 weight 1,235,562
+    with far-max 40 at (695,2044), d²=1/3 far-max 34 at (30,426). (Two far pairs tie
+    at 40 chords; the ordering of the tie differs, nothing else.)
+  - `--phase` reproduces *exactly*: 0 relations at all seven probes, d² spectrum
+    1, 1/3, 5/3 ± (2/9)√33, field flags and annulus tables identical.
+  - `--pair`: the session-mortal original's exact move/seed list died with its
+    session. Reconstruction recovered the growth engine exactly (48 points/step at
+    every depth, all 8 glue points, k=3 UNSAT, k=4 SAT) with a documented constant
+    offset: seeds = the pivots + the eight gluing points (the Lean module's cast)
+    give 984 points at depth 20 vs the original's 964 — a +20 seed-detail constant,
+    honesty-noted in the tool. Membership-directed moves: outers {ζ₆, seam, seam⁻¹,
+    seamImage}, inners {ω}.
+  - `--joint`/`--floor`/`--mesh`: the phenomenon reproduces (small-frame joint run:
+    local kills + verified ambient kills at the coupled pair, flat null; floor 3 at
+    t\* = 2; mesh: zero survivors, oo-dominant first violations) — sample frames are
+    seeded fresh, so §0's exact tallies are not re-claimed. Self-test: 10 controls
+    green; the sabotage negative control turns 2 red and exits 1.
+* **One deviation from the pass designs**: the spec example `dist (0:ℂ) 1 = 1` was
+  factored into a private lemma (`dist_zero_one`) so the other three spec examples
+  could consume it — the skeleton had each example self-contained. No public surface
+  change.

@@ -306,6 +306,19 @@ else
   echo "    self-test green"
 fi
 
+# --- the M21 coupled-systems instrument ---------------------------------------------------------
+# couple.py is the coupled-circle-systems suite (census, phase probe, joint profile with the
+# kill verifier built in, the d=1 pair lattice, mesh scan, union floor). Its self-test drives
+# the Hall-violation control, the σ/ζ₆ phantom-relation control (both directions), the §0.4
+# list-vs-tuple and double-reindex regressions, sampler and mesh sanity, and every refusal path.
+echo "==> coupled-systems instrument (M21)"
+if ! python3 tools/couple.py --self-test > "${V}/couple-selftest.log" 2>&1; then
+  sed 's/^/    /' "${V}/couple-selftest.log"
+  echo "    FAIL: tools/couple.py self-test"; FAIL=1
+else
+  echo "    self-test green"
+fi
+
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
   exit 1
