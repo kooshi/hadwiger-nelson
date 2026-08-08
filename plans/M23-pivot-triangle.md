@@ -97,7 +97,32 @@ recursion behind it (8·3 + 2 = 26 circles, three-layer role-overlapping inciden
   — the ladder choice is; "ladders never interact" is true within a system, false
   across; and one of every probe's partners is NEVER foreign.)
 
-### 3.2 The broadcast framing (the working metaphor for M23's design)
+### 3.2 The matched pair is 4-exact (tools-side, decided; Kooshi's question 2026-08-08)
+
+χ of the FULL infinite matched ladder pair — both natural ladders, the translation
+matching, the 12 sporadics, the 6 fusions, both pivots with their entire hub reach —
+is **exactly 4**, decided constructively (scratch `m23ladderpair.py`, UNTRUSTED
+triage; verdicts are SAT facts + an independent properness check):
+
+* ≥ 4: it contains M20's nine-point forcing (k = 3 UNSAT at every tested depth —
+  the control).
+* ≤ 4, constructively: the b-invariant bulk (two strips + matching, pivot colours
+  factored into palette restrictions) admits a **period-1** colouring — ONE column
+  pattern tiles the infinite bulk: P-outer [2,1,2,1,2,1], P-inner [3,3,1,2,0,0],
+  Q-outer [3,1,3,1,3,1], Q-inner [1,3,2,2,0,0], pivots 3 and 2 — verified proper
+  independently of the solver (hex, triangles, seam, matching, palettes; saved to
+  `build/m23-ladderpair-pattern.json`); the defect window (|b| ≤ 2: fusions,
+  sporadics) splices with 144 pinned boundary vertices (SAT). Both outer hexagons
+  simply ALTERNATE; colour 0 lives only on the inners.
+* Reading: even the maximally-linked exact two-ladder core cannot force a 5th
+  colour. The pressure measured at M21/M22 genuinely lives in the FOREIGN web
+  (cross chords into other ladders) or needs the third pivot — the sharpest form
+  yet of "new structure, not more iteration".
+* Uniform-edge control: the exact pairwise edge test independently re-derived the
+  census decomposition (intra + matching + hub + 28 glue-incident + exactly 12
+  sporadic) at both depths.
+
+### 3.3 The broadcast framing (the working metaphor for M23's design)
 
 A pivot is adjacent to its ENTIRE outer circle — all uncountably many ladders at
 once. The 4th colour is forced locally (nine points), but the pivot's global effect
@@ -132,7 +157,13 @@ finite witness; the loops tell us where to look for it.)
    `dist p q = 1`, `z ∈ sphere p r ↔ z + (q − p) ∈ sphere q r` and
    `dist z (z + (q − p)) = 1` — the perfect matching as kernel objects; optionally
    the 12-sporadic-chord census as `example`s (each is one field identity).
-6. GATED: ladder/component formalization in Lean (needs graph-component machinery;
+6. **The matched-pair colouring theorem** (the pair analogue of `Strip.lean`,
+   now with its construction data in hand): the period-1 bulk pattern + defect
+   splice of §3.2 as literal tables, kernel-checked proper — χ(matched pair) = 4
+   exactly. The M20 method (finite parts by `decide` against literal tables,
+   extension computable) transfers; the statement is the first decided χ of an
+   infinite COUPLED object.
+7. GATED: ladder/component formalization in Lean (needs graph-component machinery;
    `TwoCircle.SameOrbit` is a seed) — tools-side first, formalize only if a theorem
    needs it.
 

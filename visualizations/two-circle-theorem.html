@@ -393,6 +393,7 @@ footer p{max-width:64ch}
     <div class="controls">
       <button class="toggle" id="pGlue" aria-pressed="true">shared points</button>
       <button class="toggle" id="pXc" aria-pressed="false">cross chords</button>
+      <button class="toggle" id="pC4" aria-pressed="false">4-colouring</button>
       <button class="toggle" id="pLadP" aria-pressed="true">P's ladder through Q</button>
       <button class="toggle" id="pLadQ" aria-pressed="true">Q's ladder through P</button>
       <label class="ctl">ladder depth |b| ≤ <input id="pB" type="range" min="0" max="8" value="3" step="1"><output id="pBO">3</output></label>
@@ -446,6 +447,14 @@ footer p{max-width:64ch}
   one of the four glue-unit vectors (the hexagon unit and the seam-image unit) anchored at a
   non-glue mark. These skew chords are what break the matching's parallel structure — the tight
   loops through them mix the two ladders' coordinates instead of running alongside them.</p>
+  <p>And the colouring question this object poses is now answered, exactly: the whole infinite
+  matched pair — matching, sporadics, fusions, both pivots with their full broadcast reach —
+  <b>needs exactly four colours</b>. At least four because it contains step 7's forcing
+  configuration; at most four constructively: a single column pattern, repeated identically at
+  every seam column, colours the entire bulk (switch on <span class="kbd">4-colouring</span> to
+  see it — both outer hexagons simply alternate), and a re-solved window of five columns carries
+  it through the defect region. So even the maximally-linked pair of ladders cannot force a
+  fifth colour; whatever forces one lives in the wider foreign web, or needs the third pivot.</p>
   <p>The probe tells the rest of the story: a point at a generic angle ψ on P's outer circle has
   up to four unit-distance partners on Q's circles, and exactly <em>one</em> of them is always
   its slid copy — the matching chord, staying in the corresponding ladder. The other three
@@ -914,7 +923,7 @@ renderForcing();
 /* ---------- step 8: the two-pivot pair ---------- */
 const pv=document.getElementById("pairviz");
 const PXC=0, QXC=S;                       // pivot x-positions in px (P at 0, Q one unit right)
-const pst={glue:true,ladP:true,ladQ:true,B:3,probe:false,psi:107,xc:false};
+const pst={glue:true,ladP:true,ladQ:true,B:3,probe:false,psi:107,xc:false,c4:false};
 const SQ3=Math.sqrt(3), SQ11=Math.sqrt(11);
 // the ten shared points, exact (unit coordinates, P at origin, Q at (1,0))
 const GLUE=[
@@ -987,21 +996,28 @@ function renderPair(){
     }
     pst._xcCounts=[nT,nS];
   }
-  // ladders: marks on both circles at the lattice angles a·60° + b·θ
+  // ladders: marks on both circles at the lattice angles a·60° + b·θ.
+  // The period-1 bulk 4-colouring (verified proper; splice re-solves |b| ≤ 2):
+  // colour depends only on (system, circle, a).
+  const PEN4=["#E0A340","#48A9BE","#CE6C93","#7FBF6A"];
+  const C4={Po:[2,1,2,1,2,1],Pi:[3,3,1,2,0,0],Qo:[3,1,3,1,3,1],Qi:[1,3,2,2,0,0]};
   if(pst.ladP||pst.ladQ){
-    const angs=ladderAngles(pst.B);
-    for(const ang of angs){
+    for(let a=0;a<6;a++) for(let b=-pst.B;b<=pst.B;b++){
+      const ang=a*Math.PI/3+b*TH;
+      const bulk=Math.abs(b)>=3;
       if(pst.ladP){
-        for(const r of [1,RIN]){
+        for(const [r,tag] of [[1,"Po"],[RIN,"Pi"]]){
           const x=PXC+S*r*Math.cos(ang), y=-S*r*Math.sin(ang);
-          el("circle",{cx:x,cy:y,r:1.9,fill:"#48A9BE",opacity:0.75},g);
+          const fill=pst.c4?(bulk?PEN4[C4[tag][a]]:"#59667A"):"#48A9BE";
+          el("circle",{cx:x,cy:y,r:pst.c4?2.6:1.9,fill,opacity:pst.c4?0.95:0.75},g);
         }
       }
       if(pst.ladQ){
-        const b=Math.PI+ang;   // Q's ladder anchored at P (angle 180° about Q)
-        for(const r of [1,RIN]){
-          const x=QXC+S*r*Math.cos(b), y=-S*r*Math.sin(b);
-          el("circle",{cx:x,cy:y,r:1.9,fill:"#CE6C93",opacity:0.75},g);
+        const bb=Math.PI+ang;   // Q's ladder anchored at P (angle 180° about Q)
+        for(const [r,tag] of [[1,"Qo"],[RIN,"Qi"]]){
+          const x=QXC+S*r*Math.cos(bb), y=-S*r*Math.sin(bb);
+          const fill=pst.c4?(bulk?PEN4[C4[tag][a]]:"#59667A"):"#CE6C93";
+          el("circle",{cx:x,cy:y,r:pst.c4?2.6:1.9,fill,opacity:pst.c4?0.95:0.75},g);
         }
       }
     }
@@ -1030,6 +1046,15 @@ function renderPair(){
       "corresponding ladder; the others involve √(discriminant) and sit in ladders of Q that "+
       "neither drawn ladder contains. Sweep ψ: the special angles where a partner meets a "+
       "highlighted point are exactly the glue angles.";
+  } else if(pst.c4&&(pst.ladP||pst.ladQ)){
+    document.getElementById("pairRead").innerHTML=
+      "The infinite matched pair is <span class='tag'>4-colourable, constructively</span>: "+
+      "one column pattern, repeated at every seam column — P-outer [2,1,2,1,2,1], "+
+      "P-inner [3,3,1,2,0,0], Q-outer [3,1,3,1,3,1], Q-inner [1,3,2,2,0,0], pivots 3 and 2 — "+
+      "verified proper independently of the solver (hexagons, triangles, seam, matching, "+
+      "pivot palettes). Grey marks the defect window |b| ≤ 2 (fusions, sporadics), re-solved "+
+      "by a verified splice with 144 pinned boundary vertices. Both outer hexagons simply "+
+      "alternate; colour 0 lives only on the inner circles.";
   } else if(pst.xc&&pst.ladP&&pst.ladQ){
     const [nT,nS]=pst._xcCounts||[0,0];
     document.getElementById("pairRead").innerHTML=
@@ -1079,6 +1104,7 @@ function bindPairToggle(id,fn){
 }
 bindPairToggle("pGlue",v=>pst.glue=v);
 bindPairToggle("pXc",v=>pst.xc=v);
+bindPairToggle("pC4",v=>pst.c4=v);
 bindPairToggle("pLadP",v=>pst.ladP=v);
 bindPairToggle("pLadQ",v=>pst.ladQ=v);
 bindPairToggle("pProbe",v=>pst.probe=v);
