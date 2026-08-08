@@ -382,15 +382,33 @@ must break its memberships; (5) drop one point from the ten-point RHS — ⊇
 fails; (6) weaken `6 ∣ a` to `3 ∣ a` in the backbone — must break (ζ₆³ = −1);
 (7) the seam-hexagon perturbed word (in the skeleton as a spec example).
 
-## 5. Instruments (implementation phase)
+## 5. Instruments (implementation phase; CLI surface fixed by the experience pass)
 
-* `--loops`: the loop census promoted (exact affine-word enumeration, closure
-  tests, minimal-loop reporting; self-test: the B2/B3 loops close, a perturbed
-  word does not).
-* `--joint` triples (§0.2.1), metapivot floor mode (§0.2.2), the replication
-  harness for §0.2.3/4 (reuses `--kills` machinery), branch re-validation (§0.2.5).
-* JSON exporter for the visualization (§6) — the page reads exported data, never
-  hand-copied constants.
+* `--loops`: the loop census promoted (exact affine-word enumeration with
+  (state, last-letter) BFS — v1's dedup bug is the self-test's negative control;
+  minimal-relation reporting + target reachability). Self-test: B3 witness
+  closes, the perturbed word does not, R_m unreached at short length.
+* `--joint --arity 3` (NOT a new subcommand — the M21/M22 pattern-kill machinery
+  is shared; arity is a parameter): the triple census §0.2.1.
+* `--floor --systems triangle+meta`: named system-set configurations, refusal by
+  name on unknown sets (§0.2.2).
+* `--kills --replicate N`: the §0.2.3/4 replication harness with the ≥20-decoy
+  sweep built into the protocol, not bolted on after.
+* `--export-viz <path>`: JSON exporter for §6 — the 34-point inventory, loop
+  witnesses, census verdicts, each datum stamped kernel-checked / exact-tools /
+  sampled-triage. The page reads exported data, never hand-copied constants.
+* Branch re-validation (§0.2.5) through the existing `--pair`/`--partner` paths.
+
+**Experience pass (2026-08-08).** Lean surface: the three `rotAbout` instance
+pins promoted from anonymous examples to named `rfl` theorems (`rotAbout_zeta6`,
+`rotAbout_seamRatio`, `rotAbout_omega3`) — an example guards drift but hands a
+consumer no handle to rewrite across the operator bridge. Confirmed: zero simp
+tags (house precedent; no normal form wanted here), public/private cut as the
+obligation pass drew it (engines private, re-mint cost ~3 lines), digit-suffix
+anchored-fact names (`dist_pivot_01` family), the ii glue point open-coded in
+the ten-point RHS (syntactically rewrite-compatible with
+`Coupled.inner_inter_inner`), oi/io absence stated in the chord section
+docstring rather than implied by silence.
 
 ## 6. The visualization deliverable (standing, per Kooshi 2026-08-08)
 

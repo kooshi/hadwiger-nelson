@@ -236,12 +236,17 @@ example : centroid = innerGlueRatio := rfl
 /-- The name means what it says: the centroid is the vertex average. -/
 example : centroid = (0 + 1 + zeta6) / 3 := by sorry
 
-/-- The three operators are `rotAbout` instances. -/
-example (p z : ℂ) : rotAbout TwoCircle.zeta6 p z = hexStep p z := rfl
+/-- The hex step is a `rotAbout` instance — the named bridge (experience pass:
+an anonymous pin guards drift but hands the consumer no handle to rewrite
+across; these three are `rfl`, so the guard is identical). -/
+theorem rotAbout_zeta6 (p z : ℂ) : rotAbout TwoCircle.zeta6 p z = hexStep p z := rfl
 
-example (p z : ℂ) : rotAbout seamRatio p z = seamImage p z := rfl
+/-- The seam image is a `rotAbout` instance (non-unit ratio: the outer→inner
+contraction). -/
+theorem rotAbout_seamRatio (p z : ℂ) : rotAbout seamRatio p z = seamImage p z := rfl
 
-example (p z : ℂ) : rotAbout omega3 p z = rot3 p z := rfl
+/-- The ℤ/3 closure rotation is a `rotAbout` instance. -/
+theorem rotAbout_omega3 (p z : ℂ) : rotAbout omega3 p z = rot3 p z := rfl
 
 /-- The oo mirror at the anchor is plain conjugation (the axis is real). -/
 example : reflAcross 0 1 zeta6 = (starRingEnd ℂ) zeta6 := by sorry
