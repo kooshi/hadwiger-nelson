@@ -317,6 +317,20 @@ NOT in the skeleton: pivot–meta oo gluing coordinates (√33 points — the ge
 oi/io chord family (it IS `sphere_inter_sphere`, nothing to mint); ladder
 formalization (gated, §7); the matched-pair colouring theorem (gated, §7).
 
+**Domain pass (2026-08-08).** Confirmed: `rotAbout (u p z)` binder order (partial
+application IS the census generator family), centroid as component literal (house
+normal form), representatives-at-pivot-0 with no D₃-transport machinery (no
+consumer yet — revisit if M24's recursion wants all 12 instances), polynomial
+Möbius relation over a minted map (total; 3y−2 = 0 never meets the circle),
+upstream operator names untouched (rfl pins are the bridges — no frozen-module
+edits). Changed: (1) the translation-coupling lemmas restored (accidental
+omission) and the sphere-translate lemma GENERALIZED to hypothesis-free (pure
+translation invariance); (2) the ii spec witness replaced — the branches overlap
+exactly at 3x² = 1 (the collinear pairs), so the planned collinear witness
+discriminated nothing; the strong witness is the down-centroid → top of Q-inner
+(⟨1/2,−√3/6⟩, 1+(√3/3)i), verified off-matching, plus an explicit ≠-matching
+example. 38 obligations after the pass.
+
 ## 5. Instruments (implementation phase)
 
 * `--loops`: the loop census promoted (exact affine-word enumeration, closure

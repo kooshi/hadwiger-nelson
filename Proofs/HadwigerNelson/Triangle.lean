@@ -166,6 +166,19 @@ theorem outer_partner_pair {p q x : ℂ} (h : dist p q = 1)
     (hx : x ∈ Metric.sphere p 1) (hxq : x ≠ q) :
     Metric.sphere q 1 ∩ Metric.sphere x 1 = {x + (q - p), p} := by sorry
 
+/-! ## The translation coupling: the perfect matching as a kernel object -/
+
+/-- Translation carries every circle of one centre onto the partner's — with NO
+distance hypothesis (pure translation invariance; the domain pass generalized the
+planned unit-pair version). -/
+theorem mem_sphere_translate {p q z : ℂ} {r : ℝ} :
+    z ∈ Metric.sphere p r ↔ z + (q - p) ∈ Metric.sphere q r := by sorry
+
+/-- At a unit pair, every point is unit-distance from its own translate: the
+perfect matching, per vertex. -/
+theorem dist_translate {p q : ℂ} (h : dist p q = 1) (z : ℂ) :
+    dist z (z + (q - p)) = 1 := by sorry
+
 /-! ## The loop identities
 
 The census (subplan §0.3-B): minimal hex relations at length 4 (parallelograms),
@@ -245,12 +258,18 @@ example : (-1 : ℂ) ∉ system (0 : ℂ) ∩ system 1 := by sorry
 translate is a unit chord. -/
 example : dist zeta6 (zeta6 + 1) = 1 := by sorry
 
-/-- The Möbius branch of the ii classification is inhabited off the matching:
-the collinear pair `(√3/3, 1 + √3/3)` satisfies `x(3y−2) = y` and is a unit
-chord. -/
+/-- The Möbius branch of the ii classification is inhabited OFF the matching
+(the branches overlap exactly at the two collinear pairs `3x² = 1`, so a
+collinear witness would discriminate nothing — domain-pass audit): the
+down-centroid to the top of the partner's inner circle is a genuine
+Möbius-only unit chord. -/
 example :
-    (⟨Real.sqrt 3 / 3, 0⟩ : ℂ) * (3 * ⟨1 + Real.sqrt 3 / 3, 0⟩ - 2)
-      = (⟨1 + Real.sqrt 3 / 3, 0⟩ : ℂ) := by sorry
+    (⟨1 / 2, -(Real.sqrt 3 / 6)⟩ : ℂ) * (3 * ⟨1, Real.sqrt 3 / 3⟩ - 2)
+      = (⟨1, Real.sqrt 3 / 3⟩ : ℂ) := by sorry
+
+/-- …and it is NOT a matching chord. -/
+example :
+    (⟨1 / 2, -(Real.sqrt 3 / 6)⟩ : ℂ) + 1 ≠ (⟨1, Real.sqrt 3 / 3⟩ : ℂ) := by sorry
 
 /-- The backbone's teeth: one seam step composed with one hex step is NOT
 closure. -/
