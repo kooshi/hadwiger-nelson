@@ -51,6 +51,20 @@ the triangle's `reflAcross`. `Coupled.lean` transfers wholesale: the gluing
 classification instantiates on each side, and the superset-quantified lower bound
 already proves χ ≥ 4 for the triangle system with zero new Lean.
 
+Sharpened (Kooshi + de Bruijn, 2026-08-08): the full object is an **8-circle,
+4-centre system** — the triangle's six circles plus the centroid-metapivot's two, both
+of which already thread named points: its inner circle passes through the three pivots
+(M18 identity), its outer circle through the six 120°-partners `rot3^±1 · c` about
+each pivot (the 120° chord of a 1/√3-circle is exactly 1). The pivot/metapivot
+relation is a duality — the metapivot of {c, rot3 p c, rot3² p c} is p itself — so
+the cascade is closed along same-circle triangles and generates new pivots only
+through cross-system unit triangles. The metapivot couples at axis 1/√3, which FIRES
+the general-radius classification trigger (Frontier path 4): `re_of_norms` /
+`im_sq_of_norm` are already radius-general; only `unit_frame` and the reflection
+package assume a unit axis. The centroid is the hunt's first simultaneous
+centre-and-point: one vertex on three inner circles, unit-adjacent to its six
+120°-partners, and the centre of its own 4-chromatic system.
+
 ## What M21 hands over
 
 * `Proofs/HadwigerNelson/Coupled.lean` — the pair's certified geometry: `reflAcross`
