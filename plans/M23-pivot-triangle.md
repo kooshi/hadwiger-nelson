@@ -74,14 +74,28 @@ recursion behind it (8·3 + 2 = 26 circles, three-layer role-overlapping inciden
   milestone's fourth system sits exactly where the pair's own ladders cannot see.
   The second ladder (through +30°) contains both ii points at once (they differ
   by 60°).
-* **Ladders DO interact across systems**, beyond the ten points: each point of a
-  P-ladder has up to four unit-partners on Q's circles (the `gluePoint` formula),
-  whose angles adjoin √disc and land in OTHER Q-ladders — generically a different
-  one per point. Each P-ladder touches countably many Q-ladders, one point at a
-  time. The measured kill pressure (M21/M22) lives in this web; the glue points are
-  merely where the web touches the natural ladder pair. (Correction recorded:
-  density is not the mechanism for sharing — the ladder CHOICE is; and "ladders
-  never interact" is true within a system, false across.)
+* **The natural ladder pair is linked by the unit-translation PERFECT MATCHING**
+  (found answering Kooshi's cross-link question, exact census 2026-08-08): since
+  dist(P,Q) = 1, the translation z ↦ z + (Q−P) carries P's circles onto Q's circles,
+  preserves the address lattice, and every vertex is unit-distance from its own
+  image — one cross chord PER VERTEX between the two natural ladders (address map
+  (a,b) ↦ (a+3,b), same circle). Colour reading: a proper colouring of the pair
+  restricted to the natural ladders must be proper on each ladder, differ POINTWISE
+  across the matching, and agree at the six fused glue vertices — the two ladders
+  are entangled as whole functions, not through a bottleneck.
+* **Plus exactly 12 sporadic cross chords** — census exact to |b| ≤ 10, all twelve
+  within |b| ≤ 2 of the seam, at addresses {(1,±1)i, (2,±2)o, (4,±2)o, (5,±1)i}
+  cross-matched; their chord vectors are the four glue units re-anchored ((−5/6,
+  ±√11/6) ×2 each, (−1/2, ±√3/2) ×4 each) — NO new unit direction exists between
+  the natural ladders. The sporadics are the skew chords whose loops mix the two
+  ladders' coordinates; candidates for the kill-transmission skeleton.
+* **The wider web** (beyond the natural pair): each point of a P-ladder has up to
+  four unit-partners on Q's circles; exactly ONE is always its translate (in the
+  corresponding coset), the others adjoin √disc and land in foreign Q-ladders,
+  generically a different one per point. The measured ambient kill pressure lives
+  in that foreign web. (Corrections recorded: density is not the sharing mechanism
+  — the ladder choice is; "ladders never interact" is true within a system, false
+  across; and one of every probe's partners is NEVER foreign.)
 
 ### 3.2 The broadcast framing (the working metaphor for M23's design)
 
@@ -114,7 +128,11 @@ finite witness; the loops tell us where to look for it.)
    about the three pivots that equal the identity (classical rotation-composition;
    the concrete triangle makes them two-line `Complex.ext` facts). The subplan pass
    decides which loops earn statements — driven by §5's loop census.
-5. GATED: ladder/component formalization in Lean (needs graph-component machinery;
+5. **The translation coupling, named** (cheap — three short lemmas): at
+   `dist p q = 1`, `z ∈ sphere p r ↔ z + (q − p) ∈ sphere q r` and
+   `dist z (z + (q − p)) = 1` — the perfect matching as kernel objects; optionally
+   the 12-sporadic-chord census as `example`s (each is one field identity).
+6. GATED: ladder/component formalization in Lean (needs graph-component machinery;
    `TwoCircle.SameOrbit` is a seed) — tools-side first, formalize only if a theorem
    needs it.
 

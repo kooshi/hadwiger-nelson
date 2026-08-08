@@ -48,9 +48,9 @@ UNSAT — exactly `Fan.of_unsat`'s cube form). A bug here can cost a theorem, ne
   the move `Glue.gluePoint`/`reflAxis` states exactly (the Lean classification is the
   definition; the tool is its float shadow). Edges are float-triage (float64
   prefilter, 30-digit confirm): SAT verdicts are facts about the TRIAGE graph;
-  `--confirm N` runs the sympy-exact check on N sampled generation-≤1 edges (cap 500
-  — the registered C2 decision: exact everywhere is 6,021× float), and only
-  exact-confirmed edges are claims. M22 §0-C finding: 67–70% of raw partners collide
+  `--confirm N` decides N sampled generation-≤1 edges EXACTLY (sympy number-field
+  arithmetic — a decision procedure, no simplifier limit; cap raised after the
+  rewrite is re-measured), and only exact-confirmed edges are claims. M22 §0-C finding: 67–70% of raw partners collide
   with the lattice (gen 1), 37.5% of sampled discriminants stay in ℚ(√3,√11), and
   k = 4 stays SAT through two generations (9,412 points, 946,941 edges) — the fork
   does not move by depth.
@@ -1060,6 +1060,25 @@ def partner_points(mp, x, circles, eps):
     return out
 
 
+def _field_zero(sp, expr):
+    """EXACT zero-decision for an algebraic expression: its √-atoms become the
+    generators of a sympy number field and `from_sympy` converts — field arithmetic
+    is a DECISION procedure, so there is no 'inconclusive' (the C2 rewrite: generic
+    `simplify` was ~35 s/edge and could fail to recognise zero; field ops are
+    ~µs–ms). Falls back to None (undecided) only if the field conversion itself
+    refuses — the caller keeps the honest tri-state for that path."""
+    gens = sorted({t for t in expr.atoms(sp.Pow) if t.exp == sp.S.Half},
+                  key=sp.default_sort_key)
+    if not gens:
+        return sp.nsimplify(expr) == 0
+    try:
+        K = sp.QQ.algebraic_field(*gens)
+        return K.from_sympy(expr) == K.zero
+    except (sp.polys.polyerrors.CoercionFailed, sp.polys.polyerrors.NotAlgebraic,
+            NotImplementedError):
+        return None
+
+
 def _vec_sympy(sp, vec):
     tot = sp.Integer(0)
     for i, c in enumerate(vec):
@@ -1193,9 +1212,10 @@ def run_partner(args):
     if args.confirm:
         if args.confirm > 100:
             raise SystemExit(f"--confirm {args.confirm} exceeds the affordable cap "
-                             f"(100): sympy-exact is ~35 s per REAL gen-1 edge "
-                             f"(measured at promotion — 500× the synthetic C2 race; "
-                             f"nested radicals dominate) — lower it")
+                             f"(100): the field-arithmetic decision is ~9 s per "
+                             f"REAL gen-1 edge (measured — per-edge number-field "
+                             f"construction at degree 16 dominates; free partners "
+                             f"sharing one degree-4 field would be ~ms) — lower it")
         try:
             import sympy as sp
         except ImportError:
@@ -1221,23 +1241,32 @@ def run_partner(args):
             xa, ya = exact_xy(pts[a])
             xb, yb = exact_xy(pts[b])
             expr = sp.expand((xa - xb) ** 2 + (ya - yb) ** 2 - 1)
-            res = sp.simplify(expr)
-            if res == 0:
+            verdict = _field_zero(sp, expr)
+            if verdict is None:
+                res = sp.simplify(expr)          # the old path, kept as fallback
+                verdict = (res == 0)
+                if not verdict:
+                    num = abs(complex(res.evalf(40)))
+                    if num > 1e-30:
+                        raise SystemExit(f"FALSE TRIAGE EDGE ({a},{b}): exact "
+                                         f"check nonzero ({num:.2e}) — the "
+                                         f"30-digit triage lied; every verdict "
+                                         f"above is suspect")
+                    inconclusive += 1
+                    continue
+            if verdict:
                 confirmed += 1
             else:
-                num = abs(complex(res.evalf(40)))
-                if num > 1e-30:
-                    raise SystemExit(f"FALSE TRIAGE EDGE ({a},{b}): exact check "
-                                     f"nonzero ({num:.2e}) — the 30-digit triage "
-                                     f"lied; every verdict above is suspect")
-                inconclusive += 1
+                raise SystemExit(f"FALSE TRIAGE EDGE ({a},{b}): field arithmetic "
+                                 f"says the distance is not 1 — the 30-digit "
+                                 f"triage lied; every verdict above is suspect")
         confirm_out = {"requested": args.confirm, "sampled": len(sample),
                        "confirmed": confirmed, "inconclusive": inconclusive,
                        "population_gen_le1": len(confirmable),
                        "beyond_exact_path_gen2": beyond,
                        "secs": round(time.time() - t0, 1)}
         print(f"exact confirm: {confirmed}/{len(sample)} confirmed, "
-              f"{inconclusive} inconclusive (kept, simplifier limit), "
+              f"{inconclusive} inconclusive (field conversion refused — fallback), "
               f"{beyond} edges beyond the gen-1 exact path "
               f"({confirm_out['secs']}s)", flush=True)
 
@@ -1810,6 +1839,28 @@ def self_test():
         w = cmul(cmul(cpow(CZETA6, 2), cpow(CSEAM, 3)), w0P)
         assert ladder_address(w, w0P) == (2, 3), "planted (2,3) direction missed"
     check("ladder addresses (tangent table + planted + blind spot)", ladder_addresses)
+
+    # 18. the exact edge decision (sympy number field): planted zeros — one needing
+    # genuine field arithmetic (a fraction over a nested radical) — and planted
+    # nonzeros on both the rational and the radical branch
+    def exact_edge():
+        try:
+            import sympy as sp
+        except ImportError:
+            raise SystemExit("sympy missing — the --confirm exact path and this "
+                             "control need it")
+        s3, s11 = sp.sqrt(3), sp.sqrt(11)
+        e1 = sp.expand((sp.Rational(1, 2) - 1) ** 2 + (s3 / 2) ** 2 - 1)
+        assert _field_zero(sp, e1) is True, "hexStep-to-pivot unit not confirmed"
+        r = sp.sqrt(3 + s11)
+        e2 = (4 + s11 + 2 * r) / (1 + r) ** 2 - 1
+        assert _field_zero(sp, e2) is True, \
+            "nested-radical zero not recognised by field arithmetic"
+        e3 = sp.expand((sp.Rational(1, 2) - 1) ** 2 + (s3 / 6) ** 2 - 1)
+        assert _field_zero(sp, e3) is False, "planted non-unit wrongly confirmed"
+        e4 = s3 / 6 - sp.Rational(1, 4)
+        assert _field_zero(sp, e4) is False, "radical nonzero wrongly confirmed"
+    check("exact edge decision (sympy number field)", exact_edge)
 
     if failures:
         raise SystemExit(f"SELF-TEST FAILED: {len(failures)} control(s) red: "

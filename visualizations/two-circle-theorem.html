@@ -392,6 +392,7 @@ footer p{max-width:64ch}
     </div>
     <div class="controls">
       <button class="toggle" id="pGlue" aria-pressed="true">shared points</button>
+      <button class="toggle" id="pXc" aria-pressed="false">cross chords</button>
       <button class="toggle" id="pLadP" aria-pressed="true">P's ladder through Q</button>
       <button class="toggle" id="pLadQ" aria-pressed="true">Q's ladder through P</button>
       <label class="ctl">ladder depth |b| ≤ <input id="pB" type="range" min="0" max="8" value="3" step="1"><output id="pBO">3</output></label>
@@ -427,15 +428,30 @@ footer p{max-width:64ch}
   point becomes the <em>metapivot</em>: the centre of a fourth two-circle system whose inner
   circle passes through all three pivots. The next stage of the construction lives precisely at
   the one shared point the pair's own ladders cannot see.</div>
-  <p>One warning the picture makes honest: ladders of <em>one</em> system never touch each other
-  (that is what being separate components means), but ladders of the <em>two</em> systems
-  interact far beyond the ten shared points. Switch on the probe: a point at a generic angle ψ on
-  P's outer circle has up to four unit-distance partners on Q's circles — real edges of the pair
-  graph — and their angles involve a new square root, so they land in <em>other</em> ladders of
-  Q, different ones for every ψ. Each ladder of P touches countably many ladders of Q, one point
-  at a time. That dense cross-web, not the ten glue points, is where the measured colour pressure
-  between the two systems lives; the glue points are just the places the web touches the chosen
-  ladder pair.</p>
+  <p>Now the question the picture was built to answer: restricted to one ladder per system, how
+  strongly are the two ladders linked? Far more strongly than the shared points suggest. Because
+  the pivots are exactly one unit apart, <b>sliding the whole plane by that unit carries P's
+  circles onto Q's circles</b> — and every point is exactly one unit from its own slid copy. The
+  slide does not rotate, so it preserves the address lattice: every mark of P's ladder has a
+  unit-distance cross chord to the mark of Q's ladder three rows down at the same column. Switch
+  on the cross chords and watch: this is a <b>perfect matching</b> — one chord per vertex,
+  infinitely many — so for <em>any two</em> marks of P's ladder there is a loop out along one
+  chord, through Q's ladder, and back along another. The colouring consequence is pointwise:
+  a colouring of Q's ladder must differ from the slid copy of P's colouring <em>everywhere</em>,
+  while agreeing with it at the six fused points. The two ladders are entangled as whole
+  functions, not through a bottleneck.</p>
+  <p>On top of the matching there are exactly <b>twelve sporadic chords</b> — verified by exact
+  field arithmetic out to column |b| ≤ 10, all twelve sitting within two seam steps of the
+  anchor, highlighted in amber. Their chord vectors are not new directions: each one realises
+  one of the four glue-unit vectors (the hexagon unit and the seam-image unit) anchored at a
+  non-glue mark. These skew chords are what break the matching's parallel structure — the tight
+  loops through them mix the two ladders' coordinates instead of running alongside them.</p>
+  <p>The probe tells the rest of the story: a point at a generic angle ψ on P's outer circle has
+  up to four unit-distance partners on Q's circles, and exactly <em>one</em> of them is always
+  its slid copy — the matching chord, staying in the corresponding ladder. The other three
+  involve a new square root and land in <em>other</em> ladders of Q, different ones for every ψ.
+  Each ladder of P touches countably many foreign ladders of Q one point at a time; that wider
+  web is where the measured ambient colour pressure lives.</p>
 </section>
 
 <footer>
@@ -898,7 +914,7 @@ renderForcing();
 /* ---------- step 8: the two-pivot pair ---------- */
 const pv=document.getElementById("pairviz");
 const PXC=0, QXC=S;                       // pivot x-positions in px (P at 0, Q one unit right)
-const pst={glue:true,ladP:true,ladQ:true,B:3,probe:false,psi:107};
+const pst={glue:true,ladP:true,ladQ:true,B:3,probe:false,psi:107,xc:false};
 const SQ3=Math.sqrt(3), SQ11=Math.sqrt(11);
 // the ten shared points, exact (unit coordinates, P at origin, Q at (1,0))
 const GLUE=[
@@ -941,6 +957,36 @@ function renderPair(){
     el("circle",{cx,cy:0,r:S*RIN,fill:"none",stroke:RULE,"stroke-width":1,
       "stroke-dasharray":"3 5"},g);
   }
+  // cross chords between the drawn ladders: the unit-translation matching (thin)
+  // and the sporadic family (amber). Float test at 1e-9 for display; the family was
+  // exactly confirmed tools-side to |b| ≤ 10 (12 sporadics, none past |b| = 2).
+  if(pst.xc&&pst.ladP&&pst.ladQ){
+    const angs=ladderAngles(pst.B);
+    const Ppts=[],Qpts=[];
+    for(const ang of angs) for(const r of [1,RIN]){
+      Ppts.push({x:r*Math.cos(ang),y:r*Math.sin(ang),r});
+      const b=Math.PI+ang;
+      Qpts.push({x:1+r*Math.cos(b),y:r*Math.sin(b),r});
+    }
+    const isSpecial=(u)=>{ // pivot or glue point (skip hub/glue-incident chords)
+      if(Math.hypot(u.x,u.y)<1e-9||Math.hypot(u.x-1,u.y)<1e-9) return true;
+      return GLUE.some(gp=>Math.hypot(gp.x-u.x,gp.y-u.y)<1e-9);
+    };
+    let nT=0,nS=0;
+    for(const a of Ppts) for(const b of Qpts){
+      const d2=(a.x-b.x)**2+(a.y-b.y)**2;
+      if(Math.abs(d2-1)>1e-9||d2<1e-12) continue;
+      const isTrans=Math.abs(b.x-a.x-1)<1e-9&&Math.abs(b.y-a.y)<1e-9&&a.r===b.r;
+      if(isTrans){nT++;
+        el("line",{x1:a.x*S,y1:-a.y*S,x2:b.x*S,y2:-b.y*S,stroke:"#39424F",
+          "stroke-width":0.8},g);
+      } else if(!isSpecial(a)&&!isSpecial(b)){nS++;
+        el("line",{x1:a.x*S,y1:-a.y*S,x2:b.x*S,y2:-b.y*S,stroke:"#E0A340",
+          "stroke-width":1.6,"stroke-linecap":"round"},g);
+      }
+    }
+    pst._xcCounts=[nT,nS];
+  }
   // ladders: marks on both circles at the lattice angles a·60° + b·θ
   if(pst.ladP||pst.ladQ){
     const angs=ladderAngles(pst.B);
@@ -980,9 +1026,18 @@ function renderPair(){
     document.getElementById("pairRead").innerHTML=
       "probe at ψ = "+pst.psi.toFixed(1)+"° on P's outer circle · <span class='tag'>"+n+
       " unit-partner"+(n===1?"":"s")+"</span> on Q's circles — real edges of the pair graph. "+
-      "Their angles about Q involve √(discriminant), so for generic ψ they sit in ladders of Q "+
-      "that neither drawn ladder contains. Sweep ψ and watch the partners trace the circles: "+
-      "the special ψ where a partner meets a highlighted point are exactly the glue angles.";
+      "One of them is always the slid copy ψ itself — the matching chord, staying in the "+
+      "corresponding ladder; the others involve √(discriminant) and sit in ladders of Q that "+
+      "neither drawn ladder contains. Sweep ψ: the special angles where a partner meets a "+
+      "highlighted point are exactly the glue angles.";
+  } else if(pst.xc&&pst.ladP&&pst.ladQ){
+    const [nT,nS]=pst._xcCounts||[0,0];
+    document.getElementById("pairRead").innerHTML=
+      "Cross chords between the drawn ladders at depth |b| ≤ "+pst.B+": "+
+      "<span class='tag'>"+nT+" matching chords</span> (thin — every mark to its slid copy, "+
+      "one per vertex) and <span class='tag'>"+nS+" sporadic chords</span> (amber — the "+
+      "finite seam-local family; 12 in total, none past |b| = 2, exactly confirmed). "+
+      "Pivot-hub and glue-incident chords are not drawn.";
   } else {
     document.getElementById("pairRead").innerHTML=
       "Ten shared points: the two pivots and the eight glue points, every one a mirror pair "+
@@ -1023,6 +1078,7 @@ function bindPairToggle(id,fn){
   });
 }
 bindPairToggle("pGlue",v=>pst.glue=v);
+bindPairToggle("pXc",v=>pst.xc=v);
 bindPairToggle("pLadP",v=>pst.ladP=v);
 bindPairToggle("pLadQ",v=>pst.ladQ=v);
 bindPairToggle("pProbe",v=>pst.probe=v);
