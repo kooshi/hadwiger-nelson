@@ -145,7 +145,46 @@ its place or stays a tools-side table entry.
 
 ## 3. Module and shape decisions
 
-*(Filled by the modeling passes, committed per pass.)*
+### 3.1 Domain-modeling pass (2026-08-08)
+
+* **The mirror is ratio conjugation.** `reflAxis p q z = p + (q−p)·conj((z−p)/(q−p))`
+  — M21's obligation-pass identity (`reflAcross_ratio`: the mirror conjugates the
+  axis ratio) elevated to the definition. The skeleton's first draft normalized by
+  `(q−p)²/normSq(q−p)`; the ratio form is the intrinsic statement and the division
+  appears once. Alternative weighed: keep the M21 shape with an explicit normalizer —
+  rejected; the normalizer WAS the incidental structure the unit premise had hidden.
+  Confidence high.
+* **`gluePoint` is division-once, components division-free.** In the frame
+  `v = (x−p)·conj(q−p)` the two pinned norms fix `v.re = A = (d² + r₁² − r₂²)/2` and
+  `v.im² = r₁²d² − A²` with NO denominators (the first draft divided both components
+  by `d²` — x-frame thinking); the one division is the frame inverse `/conj(q−p)`,
+  legitimate because `(q−p)·conj(q−p) = d²`. The √ argument is named: the **gluing
+  discriminant**, the exact object the partner construction adjoins. Confidence high.
+* **Hypotheses minimized to the three that bind.** Radius nonnegativity is derivable
+  from the annulus pair (`|r₁−r₂| ≤ d ≤ r₁+r₂` forces both ≥ 0); dropped from the
+  classification. `p ≠ q` stays (excludes concentric-equal, where the intersection is
+  a full circle). The degenerate seams VALIDATE rather than break: tangency collapses
+  the pair to a singleton, zero radius collapses both points onto the centre — no
+  special cases anywhere. Confidence high.
+* **The near-cycle candidate is KEPT, in `Glue.lean`, as two lemmas.** The chord
+  bound reduces through `|ζ₆σ⁹| = 1` to `re(ζ₆σ⁹) > 1 − 1/5000` — rational bounds on
+  √3, √11 (exact: `re = 68√3·(1/2)/243 + …`, numerically 0.99984); the nonvanishing
+  reduces through sixth powers to `σ⁵⁴ ≠ 1` = M19's `seam_pow_ne_one 54`. Housed in
+  Glue (leaf module) not TwoCircle (settled; adding declarations there rebuilds five
+  downstream modules). Alternative weighed: tools-side table only — rejected; the
+  l = 9 relation is the exactness thread's aiming lemma and costs two short proofs.
+  Confidence medium-high — if the √-bound arithmetic through nlinarith exceeds ~40
+  lines the obligation pass may re-route through `Real.sqrt` interval lemmas.
+* **Hand-computation hazard, recorded for the obligation pass**: deriving σ⁹'s
+  components by hand produced one sign error caught only by the per-power invariant
+  `normSq(σ^k) = 1`. The obligation design must carry that invariant as a checked
+  stepping stone (`normSq σ³ = 1`, `normSq σ⁶ = 1`, …), not trust component algebra.
+* **Mathlib grep**: no two-circle classification with explicit intersection points
+  exists (Euclidean sphere library has tangency, line-sphere `SecondInter`, power of
+  a point); the statement is ours. `exact?` re-checks per obligation at
+  implementation.
+* Skeleton after the pass: 15 obligations (reflection package 7, classification 3,
+  spec examples 3, near-cycle 2); elaborates clean.
 
 ## 4. Instrument promotion
 
