@@ -35,6 +35,32 @@ UNSAT — exactly `Fan.of_unsat`'s cube form). A bug here can cost a theorem, ne
 * `--floor A B` — the coupled coverage floor: forbid-last-t on S_a ∪ S_b. §0 finding:
   floor 3 at the coupled AND the null pair — coupling is pattern-selective, never
   floor-raising.
+* `--near` (M22) — the near-relation spectrum, 60-digit: the ladder records of
+  `l·θσ mod 60°` (θσ = arctan √11, the seam angle) and the best `(m, l)` almost-cycles
+  at the closure's far pairs. HONESTY: the table is float TRIAGE; the certified
+  near-relation is the Lean pair `Glue.zeta6_mul_seam_pow_nine_ne_one` /
+  `normSq_zeta6_mul_seam_pow_nine_sub_one_lt`, and the loops provably NEVER close
+  (`seam_pow_ne_one` — θσ is incommensurate with 60°ℤ), so every row is an aiming
+  point for COLOUR closure, never a relation. M22 §0-B finding: records at the CF
+  denominators l = 1, 4, 5, 9, 59; every probed pair almost-cycles under 0.3°.
+* `--partner` (M22) — generational unit-partner closure of the exact d = 1 pair
+  lattice: adjoin `sphere(x,1) ∩ sphere(c,r)` for every lattice point and circle —
+  the move `Glue.gluePoint`/`reflAxis` states exactly (the Lean classification is the
+  definition; the tool is its float shadow). Edges are float-triage (float64
+  prefilter, 30-digit confirm): SAT verdicts are facts about the TRIAGE graph;
+  `--confirm N` runs the sympy-exact check on N sampled generation-≤1 edges (cap 500
+  — the registered C2 decision: exact everywhere is 6,021× float), and only
+  exact-confirmed edges are claims. M22 §0-C finding: 67–70% of raw partners collide
+  with the lattice (gen 1), 37.5% of sampled discriminants stay in ℚ(√3,√11), and
+  k = 4 stays SAT through two generations (9,412 points, 946,941 edges) — the fork
+  does not move by depth.
+* `--kills A B` (M22) — the kill-structure census at a far pair: a fresh sampled
+  frame (A1 injection-count rigidity, A4 local-conflict anatomy) plus relaxation and
+  greedy-core probes of the COMMITTED kill corpus (A2 inner/outer 2×2, A3 π_a pin
+  cores). Corpus identity by edges digest, with the pre-sha fallback by
+  (name, n, n_edges) printed (§0.4 incident, promoted). M22 §0-A finding: outer
+  relaxation revives 60/60 kills, inner 45/60, cores are 4–8 pins (median 6) leaning
+  inner-a — the clamp specification for gadget design.
 
 ## Honesty notes
 
@@ -65,6 +91,12 @@ UNSAT — exactly `Fan.of_unsat`'s cube form). A bug here can cost a theorem, ne
 * The pin-only k=3 SAT-layer path: a fully-pinned monochrome triangle is unsat through
   the solver (the closure-scale pin-only control stays a documented invocation:
   `--joint A B --k 3 --force-sat` on the closure, M20 precedent).
+* M22 additions: the near ladder's planted 60° angle closes exactly while the seam
+  ladder never does (the `seam_pow_ne_one` shadow); a doctored partner is refused by
+  name (off-circle); the partner construction reproduces the outer∩outer glue point;
+  corpus identity refuses foreign artifacts on BOTH the sha and the pre-sha path; the
+  kill census's free-relaxation revival on a fixture whose partition is the killer;
+  greedy cores are seed-deterministic and still kill.
 
     python3 tools/couple.py --self-test
     python3 tools/couple.py --census
@@ -73,6 +105,9 @@ UNSAT — exactly `Fan.of_unsat`'s cube form). A bug here can cost a theorem, ne
     python3 tools/couple.py --pair --depth 20
     python3 tools/couple.py --mesh
     python3 tools/couple.py --floor 695 2044
+    python3 tools/couple.py --near            # add --ladder-only to skip the closure
+    python3 tools/couple.py --partner --depth 20 --gens 2 --confirm 40
+    python3 tools/couple.py --kills 695 2044 --samples 1500 --subsample 60
 """
 from __future__ import annotations
 
@@ -658,8 +693,11 @@ def to_frac_const(vec):
     return Fraction(vec[0])
 
 
-def run_pair(args):
-    t0 = time.time()
+def build_lattice(depth, cap):
+    """The exact d = 1 pair lattice at (0, 1): seeds = the pivots + the eight gluing
+    points, membership-directed moves, exact circle membership re-derived at every
+    insertion. Returns (points, pivots, cap_cut). Shared by `--pair` (which SAT-tests
+    it) and `--partner` (which closes it under the unit-partner construction)."""
     P = frac_c({}, {})
     Q = frac_c({B1: Fraction(1)}, {})
     pivots = [("p", P), ("q", Q)]
@@ -671,7 +709,7 @@ def run_pair(args):
             pts[key] = (s, on_circles(s, pivots))
             frontier.append(s)
     cap_cut = False
-    for depth in range(args.depth):
+    for _ in range(depth):
         nxt = []
         for z in frontier:
             labels = pts[ckey(z)][1]
@@ -688,7 +726,7 @@ def run_pair(args):
                     lab = on_circles(cand, pivots)
                     if not lab:
                         continue
-                    if len(pts) >= args.cap:
+                    if len(pts) >= cap:
                         cap_cut = True
                         break
                     pts[key] = (cand, lab)
@@ -700,7 +738,12 @@ def run_pair(args):
         frontier = nxt
         if cap_cut or not frontier:
             break
-    order = [v[0] for v in pts.values()]
+    return [v[0] for v in pts.values()], pivots, cap_cut
+
+
+def run_pair(args):
+    t0 = time.time()
+    order, pivots, cap_cut = build_lattice(args.depth, args.cap)
     n = len(order)
     print(f"pair lattice: {n} points at depth {args.depth} "
           f"(cap_cut={cap_cut}, {time.time() - t0:.0f}s)", flush=True)
@@ -873,6 +916,554 @@ def run_floor(args):
     print(f"coverage floor of the union: {floor} (t* = {tstar})", flush=True)
 
 
+
+# ------------------------------------------------------------------ M22: the near-relation spectrum
+
+def _mp():
+    """mpmath, or a refusal by name: --near/--partner are high-precision float TRIAGE
+    and refuse to run degraded rather than silently drop digits."""
+    try:
+        import mpmath
+    except ImportError:
+        raise SystemExit("mpmath is not installed — --near/--partner refuse to run "
+                         "without 60/40-digit arithmetic (pip install mpmath)")
+    return mpmath
+
+
+def lattice_dist_mp(mp, x, mod):
+    """Distance from x to the lattice mod·ℤ (mpmath)."""
+    r = x % mod
+    return min(r, mod - r)
+
+
+def theta_sigma(mp):
+    """The seam angle θσ = arctan √11 in degrees, 60 digits, self-checked two ways
+    (arctan √11 vs arg(1 + i√11) must agree to 50 digits)."""
+    th = mp.degrees(mp.atan(mp.sqrt(mp.mpf(11))))
+    th2 = mp.degrees(mp.atan2(mp.sqrt(mp.mpf(11)), mp.mpf(1)))
+    if abs(th - th2) > mp.mpf(10) ** -50:
+        raise SystemExit("seam-angle self-check failed: atan vs atan2 disagree — "
+                         "mpmath precision misconfigured")
+    return th
+
+
+NEAR_PROBES = [(695, 2044), (30, 426), (678, 3554), (414, 715)]
+
+
+def run_near(args):
+    """The near-relation spectrum. HONESTY: this table is 60-digit float triage; the
+    certified near-relation is the Lean lemma
+    (`Glue.normSq_zeta6_mul_seam_pow_nine_sub_one_lt` + `zeta6_mul_seam_pow_nine_ne_one`),
+    never this table. The geometric loops NEVER close (θσ is irrational — Lean:
+    `seam_pow_ne_one`); every row is an almost-cycle, an aiming point for colour
+    closure, not a relation."""
+    mp = _mp()
+    mp.mp.dps = 60
+    th = theta_sigma(mp)
+    # control: a planted rational angle (60°) closes exactly at every multiple
+    if lattice_dist_mp(mp, mp.mpf(60) * 7, mp.mpf(60)) > mp.mpf(10) ** -50:
+        raise SystemExit("planted-relation control failed — lattice_dist is broken")
+    best = mp.mpf(10) ** 9
+    records = []
+    for l in range(1, args.lmax + 1):
+        d = lattice_dist_mp(mp, th * l, mp.mpf(60))
+        if d < best:
+            best = d
+            chord = 2 * mp.sin(d * mp.pi / 360)
+            records.append({"l": l, "delta_deg": float(d), "chord": float(chord)})
+    print(f"theta_sigma = {mp.nstr(th, 20)} deg; {len(records)} ladder records:",
+          flush=True)
+    for r in records:
+        print(f"  l={r['l']:4d}  delta={r['delta_deg']:.9f} deg  "
+              f"chord={r['chord']:.6f}", flush=True)
+    out = {"theta_sigma_deg": mp.nstr(th, 50), "lmax": args.lmax,
+           "records": records, "dps": 60,
+           "note": "60-digit float TRIAGE; the certified near-relation is the Lean "
+                   "lemma (Glue), not this table; loops never close (seam_pow_ne_one)"}
+    if not args.ladder_only:
+        cfg, coords, E = closure()
+        from coverage import edges_digest
+        pairs = [tuple(pr) for pr in (args.pairs or NEAR_PROBES)]
+
+        def to_mp(vec):
+            tot = mp.mpf(0)
+            for i, c in enumerate(vec):
+                if c:
+                    tot += c * mp.sqrt(mp.mpf(squarefree_prod(i)))
+            return tot
+
+        probes = []
+        for a, b in pairs:
+            wx = to_mp(sub(coords[b][0], coords[a][0]))
+            wy = to_mp(sub(coords[b][1], coords[a][1]))
+            theta_u2 = mp.degrees(mp.atan2(wy, wx)) * 2
+            bests = []
+            for m in range(-args.probe_mbound, args.probe_mbound + 1):
+                for l in range(-args.probe_lbound, args.probe_lbound + 1):
+                    if m == 0 and l == 0:
+                        continue
+                    d = lattice_dist_mp(mp, m * theta_u2 + l * th, mp.mpf(60))
+                    bests.append((float(d), m, l))
+            bests.sort()
+            probes.append({"pair": [a, b],
+                           "arg_u2_deg": mp.nstr(theta_u2 % 360, 12),
+                           "best": [[round(d, 6), m, l] for d, m, l in bests[:5]]})
+            print(f"pair ({a},{b}): arg u² = {probes[-1]['arg_u2_deg']} deg; "
+                  f"best (delta°, m, l): {probes[-1]['best']}", flush=True)
+        out["graph"] = {"name": "Z3-closure-dg630x1/3", "n": len(coords),
+                        "n_edges": len(E),
+                        "edges_sha": edges_digest(len(coords), E)}
+        out["probe_bound"] = {"m": args.probe_mbound, "l": args.probe_lbound}
+        out["probes"] = probes
+    path = args.out or str(BUILD / "m22-near.json")
+    Path(path).write_text(json.dumps(out))
+    print(f"near-relation spectrum written to {path}", flush=True)
+
+
+# ------------------------------------------------------------------ M22: partner closure
+
+def check_partner(mp, y, x, c, r, eps):
+    """Every computed partner must lie ON both defining circles; a violation is an
+    arithmetic bug and refuses by name (the §0-C off-circle control, always on)."""
+    if abs(abs(y - c) - r) > eps or abs(abs(y - x) - 1) > eps:
+        raise SystemExit("partner off its defining circles — the adjunction "
+                         "arithmetic is buggy; refusing to continue")
+
+
+def partner_points(mp, x, circles, eps):
+    """The unit-partners of `x` on each circle `(c, r)`: the (+/−)-branch points of
+    `sphere(x, 1) ∩ sphere(c, r)` — `Glue.gluePoint`/`reflAxis` with p := c, q := x,
+    r₁ := r, r₂ := 1, evaluated in mpmath. The Lean classification is the definition
+    of this move; this function is its float shadow. Returns (y, disc, ci, sign)."""
+    out = []
+    for ci, (c, r) in enumerate(circles):
+        w = x - c
+        d2 = w.real ** 2 + w.imag ** 2
+        if d2 < eps:
+            continue
+        A = (d2 + r * r - 1) / 2
+        disc = r * r * d2 - A * A
+        if disc < 0:
+            continue
+        B = mp.sqrt(disc)
+        for sgn in (1, -1):
+            y = c + (A + sgn * 1j * B) * w / d2
+            check_partner(mp, y, x, c, r, eps)
+            out.append((y, disc, ci, sgn))
+    return out
+
+
+def _vec_sympy(sp, vec):
+    tot = sp.Integer(0)
+    for i, c in enumerate(vec):
+        if c:
+            fr = Fraction(c)
+            tot += sp.Rational(fr.numerator, fr.denominator) \
+                * sp.sqrt(squarefree_prod(i))
+    return tot
+
+
+def _partner_sympy(sp, base_vec, ci, sgn):
+    """Exact symbolic coordinates of a generation-1 partner: base point exact in the
+    field, one adjoined `sqrt(disc)`. The exact face of `partner_points`."""
+    cx = sp.Integer(ci // 2)          # circle centres: 0, 0, 1, 1
+    r2 = sp.Integer(1) if ci % 2 == 0 else sp.Rational(1, 3)
+    wx = _vec_sympy(sp, base_vec[0]) - cx
+    wy = _vec_sympy(sp, base_vec[1])
+    d2 = wx ** 2 + wy ** 2
+    A = (d2 + r2 - 1) / 2
+    disc = r2 * d2 - A ** 2
+    B = sp.sqrt(disc)
+    yre = cx + (A * wx - sgn * B * wy) / d2
+    yim = (A * wy + sgn * B * wx) / d2
+    return yre, yim
+
+
+def run_partner(args):
+    """Generational partner closure of the exact d = 1 pair lattice. HONESTY: edges
+    are float triage (float64 prefilter, 30-digit mpmath confirm) — SAT verdicts are
+    facts about the TRIAGE graph; only exact-confirmed edges are claims (--confirm N
+    runs the sympy-exact check on N sampled generation-≤1 edges; the registered C2
+    decision — exact everywhere is 6,021× the float cost). Refusals by name: point
+    cap, missing mpmath/numpy/sympy, exact confirmation beyond generation 1."""
+    mp = _mp()
+    mp.mp.dps = 40
+    eps = mp.mpf(10) ** -30
+    try:
+        import numpy as np
+    except ImportError:
+        raise SystemExit("numpy is not installed — the --partner edge prefilter "
+                         "needs it (pip install numpy)")
+    t0 = time.time()
+    base, pivots, cap_cut = build_lattice(args.depth, args.cap)
+    if cap_cut:
+        raise SystemExit(f"point cap {args.cap} hit while building the BASE lattice "
+                         f"— raise --cap or lower --depth; refusing a truncated base")
+
+    def cnum_mp(z):
+        def to_mp(vec):
+            tot = mp.mpf(0)
+            for i, c in enumerate(vec):
+                if c:
+                    fr = Fraction(c)
+                    tot += mp.mpf(fr.numerator) / fr.denominator \
+                        * mp.sqrt(mp.mpf(squarefree_prod(i)))
+            return tot
+        return mp.mpc(to_mp(z[0]), to_mp(z[1]))
+
+    circles = [(mp.mpc(0, 0), mp.mpf(1)), (mp.mpc(0, 0), 1 / mp.sqrt(3)),
+               (mp.mpc(1, 0), mp.mpf(1)), (mp.mpc(1, 0), 1 / mp.sqrt(3))]
+
+    def key_of(y):
+        return (mp.nstr(y.real, 25), mp.nstr(y.imag, 25))
+
+    # planted glue-point control: the partners of q = 1 about circle (0,1) must
+    # contain the outer∩outer glue point ⟨1/2, √3/2⟩ (Coupled.outer_inter_outer)
+    oo = mp.mpc(mp.mpf(1) / 2, mp.sqrt(3) / 2)
+    if not any(abs(y - oo) < eps
+               for y, _, _, _ in partner_points(mp, mp.mpc(1, 0), circles, eps)):
+        raise SystemExit("planted glue-point control failed — the partner "
+                         "construction no longer reproduces outer∩outer")
+
+    pts = []            # records: {mp, gen, src (index), ci, sign}
+    index = {}
+    for i, z in enumerate(base):
+        y = cnum_mp(z)
+        index[key_of(y)] = len(pts)
+        pts.append({"mp": y, "gen": 0, "src": i, "ci": None, "sign": None})
+    print(f"base lattice: {len(pts)} points (depth {args.depth}, "
+          f"{time.time() - t0:.0f}s)", flush=True)
+
+    gens_out = []
+    for gen in range(1, args.gens + 1):
+        t0 = time.time()
+        cur = list(range(len(pts)))
+        raw = coll = 0
+        for i in cur:
+            for y, disc, ci, sgn in partner_points(mp, pts[i]["mp"], circles, eps):
+                raw += 1
+                k = key_of(y)
+                if k in index:
+                    coll += 1
+                    continue
+                if len(pts) >= args.cap:
+                    raise SystemExit(f"point cap {args.cap} hit at generation {gen} "
+                                     f"({len(pts)} points) — raise --cap to go on; "
+                                     f"refusing a silently-truncated closure")
+                index[k] = len(pts)
+                pts.append({"mp": y, "gen": gen, "src": i, "ci": ci, "sign": sgn})
+        gens_out.append({"gen": gen, "raw": raw, "collisions": coll,
+                         "collision_pct": round(100 * coll / raw, 1),
+                         "new": len(pts) - len(cur), "total": len(pts)})
+        print(f"gen {gen}: raw {raw}, collisions {coll} ({100 * coll / raw:.0f}%), "
+              f"new {len(pts) - len(cur)}, total {len(pts)} "
+              f"({time.time() - t0:.0f}s)", flush=True)
+
+    t0 = time.time()
+    n = len(pts)
+    xs = np.array([float(r["mp"].real) for r in pts])
+    ys = np.array([float(r["mp"].imag) for r in pts])
+    E = []
+    for i in range(n):
+        d2 = (xs[i] - xs[i + 1:]) ** 2 + (ys[i] - ys[i + 1:]) ** 2
+        for j in np.nonzero(np.abs(d2 - 1.0) < 1e-9)[0]:
+            jj = i + 1 + int(j)
+            if abs(abs(pts[i]["mp"] - pts[jj]["mp"]) - 1) < eps:
+                E.append((i, jj))
+    print(f"triage edges: {len(E)} on {n} points ({time.time() - t0:.0f}s)",
+          flush=True)
+
+    st3, _ = _solve(base_clauses(n, E, 3), 3 * n, args.budget)
+    if st3 != "unsat":
+        raise SystemExit(f"k=3 control FAILED ({st3}): the closed graph contains the "
+                         f"M21 lattice, which holds the cap's witness — tool bug")
+    t0 = time.time()
+    st4, _ = _solve(base_clauses(n, E, 4), 4 * n, max(args.budget, 600.0))
+    k4secs = time.time() - t0
+    print(f"k=3 unsat (control ok); k=4 {st4} ({k4secs:.0f}s)", flush=True)
+
+    confirm_out = None
+    if args.confirm:
+        if args.confirm > 100:
+            raise SystemExit(f"--confirm {args.confirm} exceeds the affordable cap "
+                             f"(100): sympy-exact is ~35 s per REAL gen-1 edge "
+                             f"(measured at promotion — 500× the synthetic C2 race; "
+                             f"nested radicals dominate) — lower it")
+        try:
+            import sympy as sp
+        except ImportError:
+            raise SystemExit("sympy is not installed — --confirm needs the exact "
+                             "path (pip install sympy)")
+        def exact_xy(rec):
+            if rec["gen"] == 0:
+                z = base[rec["src"]]
+                return _vec_sympy(sp, z[0]), _vec_sympy(sp, z[1])
+            if rec["gen"] == 1:
+                srcrec = pts[rec["src"]]
+                return _partner_sympy(sp, base[srcrec["src"]], rec["ci"],
+                                      rec["sign"])
+            return None
+        confirmable = [(a, b) for a, b in E
+                       if pts[a]["gen"] <= 1 and pts[b]["gen"] <= 1]
+        beyond = len(E) - len(confirmable)
+        rng = random.Random(args.seed)
+        sample = rng.sample(confirmable, min(args.confirm, len(confirmable)))
+        t0 = time.time()
+        confirmed = inconclusive = 0
+        for a, b in sample:
+            xa, ya = exact_xy(pts[a])
+            xb, yb = exact_xy(pts[b])
+            expr = sp.expand((xa - xb) ** 2 + (ya - yb) ** 2 - 1)
+            res = sp.simplify(expr)
+            if res == 0:
+                confirmed += 1
+            else:
+                num = abs(complex(res.evalf(40)))
+                if num > 1e-30:
+                    raise SystemExit(f"FALSE TRIAGE EDGE ({a},{b}): exact check "
+                                     f"nonzero ({num:.2e}) — the 30-digit triage "
+                                     f"lied; every verdict above is suspect")
+                inconclusive += 1
+        confirm_out = {"requested": args.confirm, "sampled": len(sample),
+                       "confirmed": confirmed, "inconclusive": inconclusive,
+                       "population_gen_le1": len(confirmable),
+                       "beyond_exact_path_gen2": beyond,
+                       "secs": round(time.time() - t0, 1)}
+        print(f"exact confirm: {confirmed}/{len(sample)} confirmed, "
+              f"{inconclusive} inconclusive (kept, simplifier limit), "
+              f"{beyond} edges beyond the gen-1 exact path "
+              f"({confirm_out['secs']}s)", flush=True)
+
+    out = {"base": {"depth": args.depth, "points": len(base)},
+           "dps": 40, "collision_key_digits": 25, "gens": gens_out,
+           "edges_triage": len(E), "k3": st3, "k4": st4,
+           "k4_secs": round(k4secs, 1), "confirm": confirm_out,
+           "note": "float-triage graph (30-digit confirm): SAT verdicts are facts "
+                   "about the triage graph; only exact-confirmed edges are claims "
+                   "(the registered C2 decision)"}
+    path = args.out or str(BUILD / "m22-partner-d1.json")
+    Path(path).write_text(json.dumps(out))
+    print(f"partner closure written to {path}", flush=True)
+
+
+# ------------------------------------------------------------------ M22: the kill census
+
+def require_corpus(doc, name, n, n_edges, edges_sha, path):
+    """Kill-corpus identity: the edges digest when present; for pre-sha artifacts
+    (the committed M21 joint profile predates the digest field — the §0.4 incident)
+    the fallback identity is (name, n, n_edges), and the downgrade is PRINTED. A
+    mismatch on either path refuses by name."""
+    g = doc.get("graph", {})
+    if "edges_sha" in g:
+        if g["edges_sha"] != edges_sha:
+            raise SystemExit(f"kill corpus {path} is foreign to this graph "
+                             f"(edges digest mismatch) — refusing to probe it")
+    else:
+        if (g.get("name"), g.get("n"), g.get("n_edges")) != (name, n, n_edges):
+            raise SystemExit(f"kill corpus {path} is foreign to this graph "
+                             f"(pre-sha identity (name, n, n_edges) mismatch) — "
+                             f"refusing to probe it")
+        print(f"corpus {path}: identity checked by (name, n, n_edges) only — "
+              f"pre-sha artifact", flush=True)
+
+
+_KG: dict = {}
+
+
+def _kills_init(n, E, S_a, S_b, cross, Cls_b, Nbr_b, k, budget):
+    _KG.update(n=n, E=E, S_a=S_a, S_b=S_b, cross=cross, k=k, budget=budget,
+               base=base_clauses(n, E, k), Cls_b=set(Cls_b), Nbr_b=set(Nbr_b))
+
+
+def classes_of(S, pat):
+    return [[S[t] for t in range(len(S)) if pat[t] == c]
+            for c in range(max(pat) + 1)]
+
+
+def _kills_solve(pins_a, classes_b):
+    clauses = _KG["base"] + [[var(v, c, _KG["k"])] for v, c in pins_a] \
+        + partition_clauses([c for c in classes_b if c], _KG["k"])
+    st, _ = _solve(clauses, _KG["k"] * _KG["n"], _KG["budget"])
+    return st
+
+
+def _kills_fresh(job):
+    """One fresh pattern pair: local injection count (A1), starvation anatomy (A4),
+    SAT verdict."""
+    i, pa, pb = job
+    k = _KG["k"]
+    pins_a = [(_KG["S_a"][t], pa[t]) for t in range(len(_KG["S_a"]))]
+    classes_b = classes_of(_KG["S_b"], pb)
+    colour_a = dict(pins_a)
+    cls_of = {v: j for j, cls in enumerate(classes_b) for v in cls}
+    allowed = [set(range(k)) for _ in classes_b]
+    for u, v in _KG["cross"]:
+        if u in cls_of and v in colour_a:
+            u, v = v, u
+        if u in colour_a and v in cls_of:
+            allowed[cls_of[v]].discard(colour_a[u])
+    ninj = sum(1 for inj in permutations(range(k), len(allowed))
+               if all(c in allowed[j] for j, c in enumerate(inj)))
+    if ninj == 0:
+        starved = sum(1 for a in allowed if not a)
+        return i, "local-conflict", ninj, starved
+    return i, _kills_solve(pins_a, classes_b), ninj, 0
+
+
+def greedy_core(pins_a, classes_b, seed):
+    """Greedy π_a pin core: unpin in seeded-random order while UNSAT survives.
+    Deterministic for a fixed seed (the A3 instrument; self-tested)."""
+    rng = random.Random(seed)
+    core = list(pins_a)
+    order = rng.sample(range(len(core)), len(core))
+    for idx in sorted(order, reverse=True):
+        trial = core[:idx] + core[idx + 1:]
+        if _kills_solve(trial, classes_b) == "unsat":
+            core = trial
+    return core
+
+
+def _kills_probe(job):
+    """One committed kill: corpus re-solve control, inner/outer relaxations (A2),
+    greedy pin core (A3)."""
+    i, pa, pb = job
+    pins_a = [(_KG["S_a"][t], pa[t]) for t in range(len(_KG["S_a"]))]
+    classes_b = classes_of(_KG["S_b"], pb)
+    out = {"i": i, "control_unsat": _kills_solve(pins_a, classes_b)}
+    if out["control_unsat"] != "unsat":
+        return out          # corpus drift — reported per instance, counted loudly
+    out["control_free_sat"] = _kills_solve(pins_a, [])
+    inner_cl = [[v for v in cls if v not in _KG["Cls_b"]] for cls in classes_b]
+    out["inner_relax"] = _kills_solve(pins_a, inner_cl)
+    outer_cl = [[v for v in cls if v not in _KG["Nbr_b"]] for cls in classes_b]
+    out["outer_relax"] = _kills_solve(pins_a, outer_cl)
+    out["core"] = greedy_core(pins_a, classes_b, 1000 + i)
+    return out
+
+
+def run_kills(args):
+    """The kill-structure census at a far pair: a fresh frame (A1 rigidity, A4
+    conflict anatomy) + relaxation/core probes of the COMMITTED kill corpus (A2, A4).
+    Controls: every probed kill re-solves UNSAT un-relaxed (corpus drift = loud);
+    every kill revives under full relaxation (free SAT); the fresh frame must show
+    all three verdict classes. Corpus identity via `require_corpus` (pre-sha
+    fallback printed). Sampled instruments reproduce the PHENOMENON, not the frame:
+    a different seed redraws the sample."""
+    from concurrent.futures import ProcessPoolExecutor
+    cfg, coords, E = closure()
+    from coverage import edges_digest
+    n, denom = len(coords), cfg.denom
+    a, b = args.kills
+    k = args.k
+    S_a, nbr_a, Cls_a = pivot_S(coords, denom, E, a)
+    S_b, nbr_b, Cls_b = pivot_S(coords, denom, E, b)
+    if set(S_a) & set(S_b):
+        raise SystemExit(f"non-far pair ({a},{b}): cover sets overlap — the census "
+                         f"is defined for far pairs only")
+    cross = [(u, v) for u, v in E
+             if (u in set(S_a) and v in set(S_b)) or (u in set(S_b) and v in set(S_a))]
+    print(f"pair ({a},{b}): |S_a|={len(S_a)} |S_b|={len(S_b)} cross={len(cross)}",
+          flush=True)
+
+    corpus_path = args.corpus or str(BUILD / f"m21-joint-{a}-{b}.json")
+    doc = json.loads(Path(corpus_path).read_text())
+    require_corpus(doc, "Z3-closure-dg630x1/3", n, len(E),
+                   edges_digest(n, E), corpus_path)
+    kills = next((r["kills"] for r in doc["runs"]
+                  if str(r.get("tag", "")).startswith("coupled") and r.get("kills")),
+                 None) or next((r["kills"] for r in doc["runs"] if r.get("kills")),
+                               None)
+    if not kills:
+        raise SystemExit(f"corpus {corpus_path} holds no kills — nothing to census")
+
+    initargs = (n, E, S_a, S_b, cross, Cls_b, nbr_b, k, args.budget)
+    workers = args.workers
+
+    # ---- fresh frame (A1, A4)
+    rng = random.Random(args.seed)
+    sub_a, sub_b = induced(E, S_a), induced(E, S_b)
+    pairs = draw_pairs(sub_a, sub_b, len(S_a), len(S_b), args.samples, rng)
+    t0 = time.time()
+    results = []
+    with ProcessPoolExecutor(max_workers=workers, initializer=_kills_init,
+                             initargs=initargs) as ex:
+        for r in ex.map(_kills_fresh,
+                        [(i, pa, pb) for i, (pa, pb) in enumerate(pairs)],
+                        chunksize=8):
+            results.append(r)
+            if len(results) % 300 == 0:
+                print(f"  frame {len(results)}/{args.samples} "
+                      f"({time.time() - t0:.0f}s)", flush=True)
+    verdicts = Counter(r[1] for r in results)
+    print(f"fresh frame: {dict(verdicts)} ({time.time() - t0:.0f}s)", flush=True)
+    if not all(verdicts[v] > 0 for v in ("local-conflict", "sat", "unsat")):
+        raise SystemExit(f"fresh-frame mix control failed ({dict(verdicts)}): a "
+                         f"verdict class vanished — instrument or pair drifted")
+    med = lambda xs: xs[len(xs) // 2] if xs else None
+    inj_killed = sorted(r[2] for r in results if r[1] == "unsat")
+    inj_sat = sorted(r[2] for r in results if r[1] == "sat")
+    lc = [r for r in results if r[1] == "local-conflict"]
+    starved = sum(1 for r in lc if r[3] >= 1)
+    print(f"A1: injections median killed={med(inj_killed)} sat={med(inj_sat)}; "
+          f"A4: {starved}/{len(lc)} local-conflicts fully starve a class", flush=True)
+
+    # ---- committed-kill probes (A2, A3)
+    rngk = random.Random(args.seed + 1)
+    idx = rngk.sample(range(len(kills)), min(args.subsample, len(kills)))
+    jobs = [(i, kills[i]["pa"] if isinstance(kills[i], dict) else kills[i][0],
+             kills[i]["pb"] if isinstance(kills[i], dict) else kills[i][1])
+            for i in idx]
+    t0 = time.time()
+    probes = []
+    with ProcessPoolExecutor(max_workers=workers, initializer=_kills_init,
+                             initargs=initargs) as ex:
+        for r in ex.map(_kills_probe, jobs, chunksize=1):
+            probes.append(r)
+            if len(probes) % 10 == 0:
+                print(f"  probes {len(probes)}/{len(jobs)} "
+                      f"({time.time() - t0:.0f}s)", flush=True)
+    drift = [pr for pr in probes if pr["control_unsat"] != "unsat"]
+    ok = [pr for pr in probes if pr["control_unsat"] == "unsat"]
+    free_sat = sum(1 for pr in ok if pr.get("control_free_sat") == "sat")
+    print(f"controls: {len(drift)} corpus-drift, {free_sat}/{len(ok)} "
+          f"free-relaxation sat", flush=True)
+    if drift:
+        raise SystemExit(f"{len(drift)} corpus kills no longer re-solve UNSAT — "
+                         f"corpus or encoding drifted; census refused")
+    if free_sat != len(ok):
+        raise SystemExit("free-relaxation control failed: a kill without any "
+                         "partition constraint stayed UNSAT — encoding bug")
+    twoxtwo = Counter((pr["inner_relax"], pr["outer_relax"]) for pr in ok)
+    core_sizes = sorted(len(pr["core"]) for pr in ok)
+    ca, na = set(Cls_a), set(nbr_a)
+    loc = Counter()
+    for pr in ok:
+        for v, _ in pr["core"]:
+            loc["inner_a" if v in ca else "outer_a" if v in na else "other"] += 1
+    print(f"A2 2x2 (inner, outer): {dict(twoxtwo)}; A3 cores min={core_sizes[0]} "
+          f"med={core_sizes[len(core_sizes) // 2]} max={core_sizes[-1]}, "
+          f"membership {dict(loc)}", flush=True)
+
+    out = {"graph": {"name": "Z3-closure-dg630x1/3", "n": n, "n_edges": len(E),
+                     "edges_sha": edges_digest(n, E)},
+           "pair": [a, b], "k": k, "seed": args.seed,
+           "corpus": corpus_path, "corpus_kills": len(kills),
+           "frame": {"sampled": args.samples, "verdicts": dict(verdicts),
+                     "a1_median_injections": {"killed": med(inj_killed),
+                                              "sat": med(inj_sat)},
+                     "a4_starved": [starved, len(lc)]},
+           "probes": {"subsampled": len(jobs),
+                      "a2_2x2": {f"{i},{o}": c for (i, o), c in twoxtwo.items()},
+                      "a3_core_sizes": core_sizes,
+                      "a3_core_membership": dict(loc),
+                      "cores": [{"i": pr["i"], "core": pr["core"]} for pr in ok]},
+           "controls": {"corpus_drift": 0, "free_relaxation_sat":
+                        [free_sat, len(ok)]}}
+    path = args.out or str(BUILD / f"m22-kills-{a}-{b}.json")
+    Path(path).write_text(json.dumps(out))
+    print(f"kill census written to {path}", flush=True)
+
+
 # ------------------------------------------------------------------ self-test
 
 def self_test():
@@ -1018,6 +1609,85 @@ def self_test():
         assert st2 == "sat", f"free single-class instance reported {st2}"
     check("partition/injection cross-check fixture", partition)
 
+    # 11. near-ladder controls: planted rational angle closes; the seam angle never
+    def near_ladder():
+        mp = _mp()
+        mp.mp.dps = 60
+        th = theta_sigma(mp)          # raises on two-way disagreement
+        assert lattice_dist_mp(mp, mp.mpf(60) * 7, mp.mpf(60)) < mp.mpf(10) ** -50, \
+            "planted 60-degree relation does not close"
+        for l in range(1, 101):
+            assert lattice_dist_mp(mp, th * l, mp.mpf(60)) > mp.mpf(10) ** -40, \
+                f"seam ladder closed at l={l} — seam_pow_ne_one's shadow violated"
+    check("near-ladder planted/never-closes controls", near_ladder)
+
+    # 12. partner off-circle refusal, by name
+    def partner_refusal():
+        mp = _mp()
+        mp.mp.dps = 40
+        eps = mp.mpf(10) ** -30
+        try:
+            check_partner(mp, mp.mpc(2, 2), mp.mpc(0, 0), mp.mpc(0, 0), mp.mpf(1),
+                          eps)
+            raise AssertionError("doctored partner NOT refused")
+        except SystemExit as e:
+            assert "off its defining circles" in str(e), f"refusal not by name: {e}"
+    check("partner off-circle refusal", partner_refusal)
+
+    # 13. planted glue-point control: partners of q=1 reproduce outer∩outer
+    def planted_glue():
+        mp = _mp()
+        mp.mp.dps = 40
+        eps = mp.mpf(10) ** -30
+        circles = [(mp.mpc(0, 0), mp.mpf(1)), (mp.mpc(0, 0), 1 / mp.sqrt(3))]
+        got = partner_points(mp, mp.mpc(1, 0), circles, eps)
+        oo = mp.mpc(mp.mpf(1) / 2, mp.sqrt(3) / 2)
+        assert any(abs(y - oo) < eps for y, _, _, _ in got), \
+            "outer∩outer glue point not among the partners of q"
+    check("planted glue-point control (partner construction)", planted_glue)
+
+    # 14. corpus identity: sha and pre-sha paths, each refusing by name
+    def corpus_identity():
+        sha_ok = {"graph": {"edges_sha": "abc"}}
+        require_corpus(sha_ok, "g", 5, 7, "abc", "fixture")
+        try:
+            require_corpus(sha_ok, "g", 5, 7, "OTHER", "fixture")
+            raise AssertionError("sha mismatch not refused")
+        except SystemExit as e:
+            assert "digest mismatch" in str(e), f"refusal not by name: {e}"
+        pre = {"graph": {"name": "g", "n": 5, "n_edges": 7}}
+        require_corpus(pre, "g", 5, 7, "abc", "fixture")     # notice printed
+        try:
+            require_corpus(pre, "g", 5, 8, "abc", "fixture")
+            raise AssertionError("pre-sha mismatch not refused")
+        except SystemExit as e:
+            assert "pre-sha" in str(e), f"refusal not by name: {e}"
+    check("corpus identity: sha + pre-sha fallback (§0.4 regression)", corpus_identity)
+
+    # 15. free-relaxation control on a tiny fixture: the partition is the killer
+    def free_relax():
+        _kills_init(3, [(0, 1), (0, 2)], [0], [1, 2], [(0, 1), (0, 2)], [], [],
+                    2, 30)
+        assert _kills_solve([(0, 0)], [[1], [2]]) == "unsat", \
+            "two-distinct-classes fixture not killed"
+        assert _kills_solve([(0, 0)], []) == "sat", \
+            "free relaxation did not revive the kill"
+    check("free-relaxation fixture (kills census control)", free_relax)
+
+    # 16. seeded-core determinism, on a PIN-dependent kill (vertex 1 sees both
+    # palette colours through its pinned neighbours; the isolated pin is droppable)
+    def core_determinism():
+        _kills_init(4, [(0, 1), (3, 1)], [0, 2, 3], [1], [(0, 1), (3, 1)], [], [],
+                    2, 30)
+        pins = [(0, 0), (2, 0), (3, 1)]
+        classes = [[1]]
+        c1 = greedy_core(pins, classes, 5)
+        c2 = greedy_core(pins, classes, 5)
+        assert c1 == c2, f"greedy core nondeterministic at fixed seed: {c1} vs {c2}"
+        assert c1 == [(0, 0), (3, 1)], f"irrelevant pin not dropped: {c1}"
+        assert _kills_solve(c1, classes) == "unsat", "core no longer kills"
+    check("seeded-core determinism (A3 instrument)", core_determinism)
+
     if failures:
         raise SystemExit(f"SELF-TEST FAILED: {len(failures)} control(s) red: "
                          f"{[n for n, _ in failures]}")
@@ -1041,6 +1711,9 @@ def main():
     ap.add_argument("--pair", action="store_true")
     ap.add_argument("--mesh", action="store_true")
     ap.add_argument("--floor", nargs=2, type=int, metavar=("A", "B"))
+    ap.add_argument("--near", action="store_true")
+    ap.add_argument("--partner", action="store_true")
+    ap.add_argument("--kills", nargs=2, type=int, metavar=("A", "B"))
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     ap.add_argument("--samples", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=21)
@@ -1054,6 +1727,24 @@ def main():
     ap.add_argument("--alpha-steps", type=int, default=4000)
     ap.add_argument("--force-sat", action="store_true",
                     help="skip the local checker (the pin-only SAT-layer control)")
+    ap.add_argument("--ladder-only", action="store_true",
+                    help="--near without the closure probes (skips the 155 s load)")
+    ap.add_argument("--lmax", type=int, default=100)
+    ap.add_argument("--pairs", nargs=2, type=int, action="append", metavar=("A", "B"),
+                    help="closure pairs to probe with --near (default: the four "
+                         "M21 far probes)")
+    ap.add_argument("--probe-mbound", type=int, default=12)
+    ap.add_argument("--probe-lbound", type=int, default=12)
+    ap.add_argument("--gens", type=int, default=2)
+    ap.add_argument("--confirm", type=int, default=0,
+                    help="exact-confirm N sampled gen-≤1 triage edges (sympy; "
+                         "cap 100 — ~35 s/edge measured on real partners)")
+    ap.add_argument("--corpus", type=str, default=None,
+                    help="kill-corpus artifact for --kills (default "
+                         "build/m21-joint-A-B.json)")
+    ap.add_argument("--subsample", type=int, default=60)
+    ap.add_argument("--workers", type=int,
+                    default=min(16, __import__("os").cpu_count() or 4))
     ap.add_argument("--out", type=str, default=None)
     args = ap.parse_args()
     ran = False
@@ -1078,9 +1769,18 @@ def main():
     if args.floor:
         run_floor(args)
         ran = True
+    if args.near:
+        run_near(args)
+        ran = True
+    if args.partner:
+        run_partner(args)
+        ran = True
+    if args.kills:
+        run_kills(args)
+        ran = True
     if not ran:
         ap.error("nothing to do — try --self-test, --census, --phase, --joint, "
-                 "--pair, --mesh, or --floor")
+                 "--pair, --mesh, --floor, --near, --partner, or --kills")
 
 
 if __name__ == "__main__":

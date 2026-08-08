@@ -304,7 +304,116 @@ exact-confirmation requests beyond the affordable count.
   the new subcommands' self-tests wired into `scripts/regen-check.sh`; the
   negative-control sweep on every new check.
 
----
+## 6. Implementation record (2026-08-08, desktop)
+
+### 6.1 The Lean burn-down
+
+All 21 obligations closed in three elaboration passes (first pass: the whole
+classification spine, the near-cycle with every `linear_combination` coefficient, and
+three of four examples came up clean; the fixes were four local joints). Zero errors,
+zero warnings; 12 public declarations, all on axioms exactly
+`[propext, Classical.choice, Quot.sound]` (audit total now 273 clean / 5 declared
+purchases, unchanged set).
+
+What implementation forced or found:
+
+* **A dead hypothesis, deleted** (the M21 pattern repeating): `nonneg_of_annulus`
+  never used `0 ≤ D` — the annulus pair alone forces both radii nonnegative, and
+  `0 ≤ D` is itself `abs_nonneg.trans hlo`. Deleted from both annulus children;
+  `disc_nonneg` derives it internally. The linter caught it; the statement is smaller
+  than the obligation pass predicted.
+* **Five extra private engines beyond the planned five children**: the six √-product
+  lines (`sq_sqrt3/11/33`, `sqrt3_mul_sqrt11`, `sqrt3_mul_sqrt33`,
+  `sqrt11_mul_sqrt33`), three decimal bounds (`sqrt3_gt/lt`, `sqrt11_gt` — shared by
+  the annulus checks of example 4 and the near-cycle's final `linarith`), and
+  `mem_sphere_iff_normSq` (the metric↔frame door, used by both classification
+  directions and two examples). All private, all one-to-three lines.
+* **The near-cycle route ran exactly as designed**: power steps σ² → σ³ → σ⁶ → σ⁹ → w
+  as mk-literals, each component a `linear_combination` over the √-product engines
+  (every coefficient computed in the subplan survived contact); `hre_id` (unit modulus
+  in components) is the checked stepping stone; the bound closes by `linarith` from
+  the two 7-digit lower bounds with margin ≈ 9×10⁻⁵. One toolchain surprise: rewriting
+  the literal `(6 : ℕ) = 3 * 2` inside `seam ^ 6` trips an OfNat-instance motive
+  error at this Mathlib pin (TwoCircle's identical M19 rewrite predates the instance
+  chain); power splits phrased as `show seam ^ 6 = (seam ^ 3) ^ 2 by ring` are the
+  robust form.
+* **Example 4 went through the classification's RHS as the experience pass demanded**:
+  rewrite by `sphere_inter_sphere` (annulus hypotheses from the decimal bounds), then
+  the glue point evaluates to `⟨0, −√3/3⟩` (refutes the antipode in `re`) and the
+  mirror to `⟨−1/2, √3/6⟩` (refutes in `im`). The mirror shares its real part with
+  the antipode — the two-coordinate refutation is forced, not stylistic.
+
+### 6.2 The mutation audits (all red, then restored)
+
+| # | Mutation | Expected | Observed |
+|---|---|---|---|
+| 1 | drop `hpq` | proof breaks | 6 errors, first at the `q − p ≠ 0` derivation |
+| 2 | third point on the RHS | ⊇ breaks | 3 errors (`rcases`/membership) |
+| 3 | negate `gluePoint`'s √ | hexStep example red (statement survives) | red at exactly the example's `im` goal (+ 2 proof-side reds) |
+| 4 | bound → 1/3500 | final `linarith` fails | exactly 1 error, the `linarith` |
+| 5 | drop `hhi` | proof breaks | 4 errors |
+
+Axioms-gate negative control: a misnamed `#print axioms` row fails loud with the M04
+wording and exit status 1; restored, 273 clean.
+
+### 6.3 Instrument promotion (`tools/couple.py`)
+
+`--near`, `--partner`, `--kills` promoted per §4; `build_lattice` extracted from
+`--pair` (shared, behavior identical). Self-test grew from 10 to 16 controls; the new
+six: near-ladder planted/never-closes, partner off-circle refusal, planted glue
+point, corpus identity on both sha and pre-sha paths (§0.4 regression), the
+free-relaxation revival fixture, seeded-core determinism. One fixture bug caught by
+its own control during authoring: the first determinism fixture's partition was
+UNSAT with no pins at all, so the core correctly shrank to empty — replaced with a
+genuinely pin-dependent kill.
+
+Validation runs (desktop, promoted artifacts in `build/m22-*.json`):
+
+* `--near`: reproduces the §0 spectrum digit-for-digit — ladder records at
+  l = 1, 4, 5, 9, 59 (δ(9) = 1.00789°, chord 0.017591; δ(59) = 0.05936°), all four
+  pair bests identical to the scratch output.
+* `--partner --depth 20 --gens 2 --confirm 40`: base 984 (= the M21 `--pair`
+  lattice), gen-1 collisions **70%** (§0: 67–70%), gen-2 **48%** (§0: 49%), and the
+  headline STRENGTHENED — k = 4 stays SAT at **15,619 points / 2,414,469 triage
+  edges** (11 s), 2.5× the §0 scale (the scratch's gen-2 ran from a depth-12 base;
+  the promoted run closes the full depth-20 lattice). k = 3 control unsat. Exact
+  confirm: 33/40 confirmed, 7 inconclusive (simplifier limit, kept as non-claims),
+  **0 refuted** — no false triage edge. Cost correction recorded in the tool: a real
+  gen-1 edge costs ~35 s in sympy (500× the synthetic C2 race — nested radicals
+  dominate); the `--confirm` cap is 100, message carries the measured number.
+* `--kills 695 2044 --seed 22`: reproduces the §0-A census exactly — frame
+  {804 local, 468 sat, 228 killed}, A1 medians 2/2 (no gradient), A4 0/804
+  starvation, A2 2×2 {both-necessary: 45, outer-only: 15, inner-only: 0}, A3 cores
+  4–8 (median 6), membership 212 inner-a / 149 outer-a; 0 corpus drift, 60/60
+  free-relaxation revival. The committed pre-sha corpus exercises the named
+  fallback path for real.
+
+### 6.4 The §0.3 post-hoc hypothesis: refuted at specificity, replaced by a sharper one
+
+The flagged unregistered hypothesis — "the ambient kills at (695,2044) are the colour
+shadow of its (4,3)-near-cycle" — was tested (scratch `m22shadow.py`, UNTRUSTED,
+post-hoc, single pair). Statistic: same-circle core-pin angular separations about the
+pinned pivot, mod 60°, scored against a target lattice at 0.5° tolerance; calibration
+by matched random subsets of the same cover set (composition-matched, 1000 draws).
+
+* First pass looked confirmatory: 72.3% of separations on the (4,3)-word lattice vs
+  55.1% for matched controls, p < 0.001.
+* The **specificity sweep killed the reading** (the M19 §0 lesson, applied): 20 decoy
+  phases in place of arg(u²) all produce the IDENTICAL excess and the real phase
+  ranks 9/21 — the word set is dense enough to be phase-blind; nothing in the signal
+  knows about the near-cycle. **Refuted.**
+* The decomposition names the true carrier: the **pure seam-angle lattice**. Against
+  {j·θσ mod 60°} alone the cores score +15.0 points over matched controls (61.2% vs
+  46.2%, p < 0.005, above all 20 random-target decoys, max +9.8); against the
+  half-offset {j·θσ + 30°} they are *depleted* by 18.8 points (p = 1.000). The kill
+  mechanism is **seam-aligned**: transmission chains live on seam-multiple angular
+  separations — consistent with, and sharper than, the §0.3 "seam triangle → cross
+  chord → hexagon" sketch, and a direct refinement of the clamp specification
+  (candidate gadget pins sit at seam-multiple separations on both circles).
+* Status: triage, one pair, post-hoc. Promotion to a claim requires the registered
+  test at fresh pairs — queued as an M23 §0 prediction candidate, alongside the
+  clamp-design consequence.
+
 
 # Preserved M23+ horizon (from the M21-close stub, verbatim claims)
 

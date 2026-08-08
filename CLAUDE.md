@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M21, 2026-08-08.**
+**Last updated: M22, 2026-08-08.**
 
 ### Where the problem stands
 
@@ -58,19 +58,26 @@ repository holds a kernel-certified χ(ℝ²) ≥ 5 on axioms exactly
 and every growth family we built has been swept with certified or exhaustive negatives
 (M15–M17); distance-to-confinement (`minCov`) is pinned to the rainbow floor of 3 at all
 6,173 pivots ever examined, and M19–M20 turned the pin into theorems: the cover set alone
-is always 3-colourable (M19), one pivot's *whole* system — centre plus both circles — is
-exactly 4-chromatic (M20), and extension pressure in the plain closure is exactly zero.
-**The 5th colour provably requires structure spanning more than one pivot** — so M21
-went to two. The coupled-pair measurements found the hunt's first nonzero gradient: at
-the strongest-coupled pivot pair of the closure (unit separation, 40 cross chords), 52%
-of pattern pairs die on the cross chords alone and 32% of the survivors are killed by
-the ambient graph — verified through an independent encoding, with a perfectly flat
-null control. The canonical coupled object — two pivots at distance exactly 1, four
-circles — now has its geometry certified in Lean (`Coupled.lean`): one reflection is
-the whole symmetry, every circle-pair intersection is exactly {a point, its mirror}
-under the strip's own operators, and any set containing one pivot's system needs four
-colours. χ of the pair system is **open in both directions**, each with a named
-reopening gate; the pressure's *shape* is the next hunt (M22).
+is always 3-colourable (M19), one pivot's *whole* system is exactly 4-chromatic (M20),
+and extension pressure in the plain closure is exactly zero. **The 5th colour provably
+requires structure spanning more than one pivot** — so M21 went to two and found the
+hunt's first nonzero gradient: at the closure's strongest-coupled pair, 52% of pattern
+pairs die on the cross chords alone and 32% of the survivors are killed by the ambient
+graph (verified, null flat). M22 named the pressure's shape and made the geometry
+fully general. The **gluing classification is now certified for any two circles in
+the plane** (`Glue.lean`): distinct centres plus the annulus condition give exactly
+{an explicit glue point, its mirror under ratio-conjugation reflection}, empty outside
+— the statement every partner adjunction and every metapivot coupling instantiates.
+The **first certified near-relation** landed: nine seam steps miss one hex step by
+chord < 1/50 and provably never close (θσ is incommensurate — the loops are
+almost-cycles forever, so only *colour* closure is live). The kill census named the
+mechanism: outer-circle constraints are necessary in every ambient kill, inner in
+75%, and greedy cores are 4–8 pins (median 6) leaning inner — a clamp specification
+for gadget design. And the partner web is nearly closed already: two thirds of all
+unit-partners collide back into the lattice, k = 4 stays SAT through two closure
+generations (~10⁶ triage edges) — **depth will not force the χ fork; new structure
+will**. The next structure is three pivots (M23): hex-commensurate coupling
+directions, where exact loops finally exist.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -92,34 +99,42 @@ reopening gate; the pressure's *shape* is the next hunt (M22).
 | 14 | **The pair-gluing classification**: for two pivots at distance 1, every one of the four circle-pair intersections is *exactly* {a point, its mirror} — outer∩outer = the hex step, outer∩inner = the seam image (each way), inner∩inner = the new half-sector direction `⟨1/2, √3/6⟩` = ζ₁₂/√3 — all under ONE involutive isometry `reflAcross` (the configuration's whole symmetry), with the interlock `seamImage p q ∈ inner_p ∩ outer_q`. The 5th-colour lower bound holds superset-quantified: any vertex set containing one pivot's system needs 4 colours. | `Coupled.lean` (`outer_inter_outer` …, `four_le_chromaticNumber_of_system_subset`) | M21 |
 | 15 | **The first nonzero extension pressure** (tools-side, verified): at the closure's strongest-coupled far pair (d = 1, 40 cross chords), 785/1500 sampled pattern pairs die on the cross chords alone and 229/715 of the locally-feasible are killed by the ambient graph — every sampled kill re-confirmed through an independent pin-only injection encoding; the null pair is 1500/1500 flat. The pressure is *selective*: the union's coverage floor stays 3 and the pair lattice stays 4-colourable at every affordable depth. Each kill is already in `Fan.of_unsat` pin-cube form. | `tools/couple.py` + `build/m21-joint-695-2044.json` | M21 |
 | 16 | **The coupled automaton is dead, exactly**: no relation `u^{2m}σ^lζ₆^k = 1` at any probed pivot pair (\|m\|,\|l\| ≤ 6) — the coupling phase is incommensurate with the strip lattice everywhere, so two coupled strips never form a finite-state product; and **no pair of rotated/reflected/re-paletted 60°-sector colourings is proper on the d = 1 pair** (full continuous-offset sweep, killed by the outer–outer curve family alone) — any χ ≤ 4 proof for the pair needs a construction shape nobody has named. | `tools/couple.py` (`--phase`, `--mesh`) + `build/m21-phase.json` | M21 |
+| 17 | **The general gluing classification**: for ANY two distinct centres and any radii under the annulus condition, the circle intersection is exactly {an explicit glue point, its mirror} — the glue point division-once with the **gluing discriminant** under its √ (the exact object partner adjunction adjoins), the mirror by ratio conjugation (`reflAxis`, an involutive isometry at every axis, collapsing to M21's `reflAcross` at unit axis); empty cases certified both ways; radius nonnegativity *derived*, not assumed. Subsumes M21's four gluings; the metapivot instance (axis 1/√3) is a spec example. | `Glue.lean` (`sphere_inter_sphere`, `reflAxis_*`) | M22 |
+| 18 | **The first certified near-relation**: `ζ₆·σ⁹` misses 1 by chord < 1/50 (`normSq (ζ₆σ⁹ − 1) < 1/2500`; numerically 1.008°, chord ≈ 0.0176) AND `ζ₆·σ⁹ ≠ 1` (via σ⁵⁴ ≠ 1, the seam's infinite order) — nine seam steps almost close one hex step, and provably never do. Both halves exact field arithmetic in ℚ(√3,√11,√33). The aiming lemma of the colour-closure thread. | `Glue.lean` (`zeta6_mul_seam_pow_nine_ne_one`, `normSq_zeta6_mul_seam_pow_nine_sub_one_lt`) | M22 |
+| 19 | **The kill mechanism named + the partner web measured** (tools-side, controlled): ambient kills need the partner's OUTER circle in 100% of probed cases and the inner in 75%; greedy pin cores are 4–8 pins (median 6), leaning inner on the pinned side; local kills are multi-class Hall failures (0/804 starvation); local slack does not predict ambient death — the clamp specification for gadget design. Post-hoc decomposition (single pair, unregistered — M23 §0 re-tests it): core-pin separations concentrate on the pure seam-angle lattice {j·θσ mod 60°} (+15 pts over matched controls, above all decoys) and are depleted at the half-offset (−19 pts) — the kill mechanism is **seam-aligned**; the near-cycle-shadow reading was refuted by a 20-decoy specificity sweep. Partner closure: 67–70% of unit-partners collide back into the lattice, 37.5% of sampled discriminants stay in ℚ(√3,√11), and k = 4 stays SAT through two generations (15,619 points, ~2.4M triage edges at the full depth-20 base) — the fork does not move by depth. Near-cycles are dense and CF-structured (records at l = 1, 4, 5, 9, 59; every probed pair < 0.3° at word length ≤ 12). | `tools/couple.py` (`--kills`, `--partner`, `--near`) + `build/m22-*.json` | M22 |
 
 ### Paths forward, ranked
 
-1. **Partner closure and the shape of the pressure** (M22, stubbed:
-   `plans/M22-partner-closure.md`) — the two live gradients M21 exposed: (a) the
-   partner-closed pair sample (adjoin cross-chord partners, one √-extension per
-   generation) to force the χ(pairSystem) fork — UNSAT at k = 4 would be a two-point
-   continuum χ ≥ 5 candidate; (b) the kill-structure census — WHICH pattern pairs die,
-   the mechanism behind the 52%/32% pressure, feeding gadget design with the clamp
-   shape M20's battery said the closure algebra lacks.
-2. **Pattern-killing gadget design, clamp-directed** — M20's battery re-scored the
-   closure-flavoured gadgets by profile shrinkage: zero kills. The M21 kill corpus is
-   the first positive signal for what a killing clamp looks like; design follows the
-   kill census (path 1b), not the closure algebra.
+1. **The pivot triangle and the metapivot system** (M23, stubbed:
+   `plans/M23-pivot-triangle.md`) — three pivots pairwise at distance 1: coupling
+   directions 1, ζ₆, ζ₃ are hex-commensurate, so **exact closed loops exist** where
+   the pair's incommensurability allowed only near-cycles (M21 phase scan, M22
+   spectrum); cyclic constraint flow A→B→C→A; the centroid is a triple glue point and
+   a self-seeding fourth system (8 circles, 4 centres; the 26-circle recursion with 3
+   phase moduli behind it). `Glue.lean` supplies every intersection the object needs
+   — the axis-1/√3 instance is already a proven example.
+2. **Colour closure at the gap distance, clamp-directed** — the exactness thread's
+   open question: does a 4-colour equality-transmitting gadget exist at
+   d = \|ζ₆σ⁹ − 1\| (exact in the field, chord ≈ 0.0176)? The kill census supplies
+   the clamp shape (bind the partner's outer hexagon jointly with the anchor's inner
+   triangle; ~6 pins suffice); M20's battery showed the closure algebra alone kills
+   nothing. A negative is reportable.
 3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
    when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
-   before. Note: M21's mesh scan killed the sector family for pairs, so any explicit
-   pair colouring is already a research object for this angle too.
-4. **General-radius two-circle theorem** — same method, any class radius; deferred until
-   a milestone needs it (M21's d = 1 gluings needed only the strip operators, so the
-   trigger did not fire).
+   before. M21's mesh scan killed the sector family for pairs, so any explicit pair
+   colouring is already a research object for this angle too.
+4. **General-radius two-circle theorem** — same method, any class radius; deferred
+   until a milestone needs it. (M22's `Glue.lean` paid the general-radius *geometry*;
+   the general-radius *colouring* theorem still waits for its consumer.)
 5. **Parked with reasons** (see M19 plan §4): fractional route (provably capped below 5),
    measurable-≥6 (single-class density provably insufficient), axiom-sensitivity
-   (perspective without progress until another angle feeds it). The χ(pairSystem) fork's
-   two branches stay parked behind their gates (M21 subplan §2.4). Write-ups and
-   upstreaming: deferred per the standing policy above; the two-circle/cap/priority
-   literature pass is a publication-gate task (no named prior found in a first search,
-   M20 §2.6).
+   (perspective without progress until another angle feeds it). The χ(pairSystem)
+   fork's two branches stay parked behind their gates (M21 subplan §2.4) — and M22
+   measured that closure DEPTH cannot move the fork (k = 4 SAT through two partner
+   generations), so the ≥ 5 branch now waits on structure (path 1), not iteration.
+   Write-ups and upstreaming: deferred per the standing policy above; the
+   two-circle/cap/priority literature pass is a publication-gate task (no named prior
+   found in a first search, M20 §2.6).
 
 ## Whose work this is
 

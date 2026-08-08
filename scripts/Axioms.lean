@@ -497,6 +497,28 @@ four colours). Pure geometry over ℂ — no tables, no native evaluation. -/
 #print axioms Coupled.four_le_chromaticNumber_of_system_subset
 #print axioms Coupled.four_le_chromaticNumber_pairSystem
 
+/-! ## M22 — the general gluing classification
+
+`reflAxis` (the mirror across an arbitrary axis — ratio conjugation, collapsing to
+M21's `reflAcross` at unit axis), the general classification (two distinct centres
+under the annulus condition meet in exactly the glue point and its mirror; empty
+outside), and the nine-step near-cycle (`ζ₆·σ⁹` is within chord 1/50 of 1 and is
+not 1 — the first certified near-relation). Pure geometry over ℂ — no tables, no
+native evaluation. -/
+
+#print axioms Glue.reflAxis_pivot_left
+#print axioms Glue.reflAxis_pivot_right
+#print axioms Glue.reflAxis_reflAxis
+#print axioms Glue.dist_reflAxis
+#print axioms Glue.reflAxis_mem_sphere_left
+#print axioms Glue.reflAxis_mem_sphere_right
+#print axioms Glue.reflAxis_eq_reflAcross
+#print axioms Glue.sphere_inter_sphere
+#print axioms Glue.sphere_inter_sphere_eq_empty_of_far
+#print axioms Glue.sphere_inter_sphere_eq_empty_of_nested
+#print axioms Glue.zeta6_mul_seam_pow_nine_ne_one
+#print axioms Glue.normSq_zeta6_mul_seam_pow_nine_sub_one_lt
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -23,6 +23,7 @@ import Proofs.HadwigerNelson.TwoCircle
 import Proofs.HadwigerNelson.Compulsion
 import Proofs.HadwigerNelson.Strip
 import Proofs.HadwigerNelson.Coupled
+import Proofs.HadwigerNelson.Glue
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
