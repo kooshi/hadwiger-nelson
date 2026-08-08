@@ -36,6 +36,21 @@ collects the carry-forward, ranked.*
    M21's cross-chord classification did not force it (the d = 1 gluings needed only the
    strip operators). Trigger stays: a milestone that needs an off-{1, 1/√3} class.
 
+## Horizon beyond M22: the pivot triangle (Kooshi, 2026-08-08)
+
+Three pivots pairwise at distance 1 — a unit triangle of systems. Not an M22 thread
+(M22's kill mechanism and near-relation spectrum should aim it first), but the named
+successor candidate, because it adds exactly what the pair lacks: (a) *cyclic*
+constraint flow A→B→C→A; (b) placed at 0, 1, ζ₆ the three coupling directions are
+1, ζ₆, ζ₃ — hex-commensurate, so exact closed loops exist that the pair's
+incommensurability forbade; (c) the circumcentre sits at distance 1/√3 from all three
+pivots — ON all three inner circles, the first triple glue point, and by M18's identity
+the pivots are a rainbow unit triangle in its 1/3-class — a self-seeding fourth system;
+(d) the configuration's symmetry is dihedral (rot3 about the centroid + reflections),
+the triangle's `reflAcross`. `Coupled.lean` transfers wholesale: the gluing
+classification instantiates on each side, and the superset-quantified lower bound
+already proves χ ≥ 4 for the triangle system with zero new Lean.
+
 ## What M21 hands over
 
 * `Proofs/HadwigerNelson/Coupled.lean` — the pair's certified geometry: `reflAcross`
