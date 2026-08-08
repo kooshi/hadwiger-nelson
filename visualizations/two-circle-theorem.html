@@ -1,0 +1,1039 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The two-circle theorem</title>
+<style>
+:root{
+  --ground:#0E1116;
+  --plate:#151A21;
+  --rule:#242C37;
+  --graphite:#6E7A8A;
+  --chalk:#DCE3EC;
+  --penA:#E0A340;
+  --penB:#48A9BE;
+  --penC:#CE6C93;
+  --display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",ui-serif,Georgia,serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --data:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground);
+  color:var(--chalk);
+  font-family:var(--body);
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px 96px}
+a{color:var(--penB)}
+
+/* ---------- masthead ---------- */
+.masthead{padding:64px 0 8px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:var(--data);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--graphite);margin:0 0 18px;
+}
+h1{
+  font-family:var(--display);font-weight:400;font-size:clamp(34px,6.2vw,58px);
+  line-height:1.06;letter-spacing:-.015em;margin:0 0 22px;
+}
+h1 em{font-style:italic;color:var(--penA)}
+.claim{
+  font-family:var(--display);font-size:clamp(17px,2.4vw,21px);line-height:1.5;
+  max-width:62ch;color:var(--chalk);margin:0 0 8px;
+}
+.claim b{font-weight:400;color:var(--penA);font-style:italic}
+.subclaim{max-width:62ch;color:var(--graphite);font-size:15px;margin:14px 0 40px}
+
+/* ---------- sections ---------- */
+section{padding:64px 0 8px;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+.step{
+  display:flex;align-items:baseline;gap:14px;margin:0 0 10px;
+  font-family:var(--data);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);
+}
+.step .n{color:var(--penA)}
+h2{
+  font-family:var(--display);font-weight:400;font-size:clamp(25px,4vw,36px);
+  line-height:1.15;letter-spacing:-.01em;margin:0 0 20px;max-width:22ch;
+}
+p{max-width:64ch;margin:0 0 18px}
+p.lede{font-size:18px}
+.muted{color:var(--graphite)}
+code,.mono{font-family:var(--data);font-size:.9em}
+.kbd{font-family:var(--data);font-size:.86em;color:var(--penA)}
+
+/* ---------- figures ---------- */
+figure{margin:34px 0;padding:0}
+figcaption{
+  font-family:var(--data);font-size:12px;line-height:1.6;color:var(--graphite);
+  margin-top:14px;max-width:70ch;
+}
+.plate{background:var(--plate);border:1px solid var(--rule);border-radius:2px}
+svg{display:block;width:100%;height:auto}
+.hero-plate{position:relative;overflow:hidden}
+
+/* ---------- controls ---------- */
+.controls{
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+  padding:14px 16px;border:1px solid var(--rule);border-top:none;background:#11151B;
+}
+.ctl{display:flex;align-items:center;gap:9px;font-family:var(--data);font-size:11.5px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.ctl input[type=range]{width:118px;accent-color:var(--penA)}
+.ctl output{color:var(--chalk);min-width:5.4ch;display:inline-block}
+button.toggle{
+  font-family:var(--data);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--graphite);border:1px solid var(--rule);
+  padding:5px 11px;border-radius:2px;cursor:pointer;transition:.14s;
+}
+button.toggle[aria-pressed=true]{color:var(--ground);background:var(--chalk);border-color:var(--chalk)}
+button.toggle:hover{border-color:var(--graphite)}
+button.toggle:focus-visible,input:focus-visible{outline:2px solid var(--penA);outline-offset:2px}
+
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;
+  border:1px solid var(--rule);background:var(--plate)}
+.duo>div{min-width:0;padding:10px}
+.duo>div+div{border-left:1px solid var(--rule)}
+.panel-label{font-family:var(--data);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--graphite);padding:2px 4px 8px}
+.scrollx{overflow-x:auto}
+@media(max-width:760px){
+  .duo{grid-template-columns:1fr}
+  .duo>div+div{border-left:none;border-top:1px solid var(--rule)}
+}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.trio{grid-template-columns:1fr}}
+.trio .card{border:1px solid var(--rule);background:var(--plate);padding:10px}
+.trio h3{font-family:var(--data);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--graphite);margin:6px 4px 2px;font-weight:400}
+.trio .val{font-family:var(--display);font-size:19px;color:var(--chalk);margin:0 4px 8px}
+
+/* ---------- colour table ---------- */
+table.tbl{border-collapse:collapse;font-family:var(--data);font-size:13px;margin:0 0 6px}
+table.tbl th,table.tbl td{border:1px solid var(--rule);padding:7px 0;width:52px;text-align:center}
+table.tbl th{color:var(--graphite);font-weight:400;font-size:11px;letter-spacing:.1em}
+table.tbl td.rowlab,table.tbl th.rowlab{width:auto;padding:7px 12px;text-align:left;
+  color:var(--graphite);letter-spacing:.06em;white-space:nowrap}
+.swatch{display:inline-block;width:22px;height:22px;border-radius:50%;line-height:22px;
+  color:#0E1116;font-weight:700;font-size:12px}
+.checkrow td{color:var(--graphite)}
+.ok{color:#7FBF6A}
+
+.note{border-left:2px solid var(--penA);padding:2px 0 2px 18px;margin:26px 0;max-width:64ch;
+  color:var(--graphite);font-size:15px}
+.note b{color:var(--chalk);font-weight:600}
+
+.stepnav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.readout{font-family:var(--data);font-size:13px;color:var(--chalk);min-height:3.2em;
+  max-width:64ch;margin:16px 0 0}
+.readout .tag{color:var(--penA)}
+
+footer{padding:56px 0 0;color:var(--graphite);font-size:14.5px}
+footer p{max-width:64ch}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Hadwiger–Nelson · a local ceiling</p>
+  <h1>Two circles, and why they can<br>never need a <em>fourth colour</em></h1>
+  <p class="claim">Pick a point. Draw the circle of radius <b>1</b> around it, and the circle of radius
+  <b>1/√3</b>. Mark as many points as you like on those two circles — a hundred, a million, all of
+  them. Join two marks whenever they are exactly <b>one unit apart</b>. However you do this, the
+  result can always be coloured with <b>three</b> colours so that no join has both ends the same
+  colour.</p>
+  <p class="subclaim">The plane as a whole is harder: colouring every point of ℝ² so that no two
+  points exactly 1 apart share a colour is known to need at least 5 colours and at most 7, and
+  nobody knows the truth. This page is about a region where the answer is pinned down — and about
+  the one loophole that pinning leaves open.</p>
+</header>
+
+<figure style="margin-top:0">
+  <div class="plate hero-plate">
+  <svg id="hero" viewBox="-215 -215 430 430" role="img"
+       aria-label="Points on two concentric circles, joined when one unit apart, coloured with three colours."></svg>
+  </div>
+  <figcaption style="margin-bottom:44px">Thirty-six points on the two circles and every unit-length
+  join between them. Three colours suffice; the picture is turning, and the colouring never has to
+  be redrawn.</figcaption>
+</figure>
+
+<!-- 1 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 1</span> <span>the two radii</span></p>
+  <h2>Why these two circles and no others</h2>
+  <p class="lede">The radius 1 circle is obvious: it is the set of points one unit from the centre.
+  The second radius is the one that keeps turning up.</p>
+  <p>1/√3 ≈ 0.5774 is the circumradius of an equilateral triangle of side 1 — the distance from the
+  triangle's centre to each of its corners. So a unit equilateral triangle inscribes exactly in that
+  circle, and a circle of that size is the smallest one that can carry a pair of points a full unit
+  apart at all. Any smaller and no two of its points reach that far; any point strictly between the
+  two radii lives on neither circle and is outside this theorem.</p>
+  <p>Together they are the natural neighbourhood of a centre point <span class="mono">p</span>: the
+  points at distance 1 from <span class="mono">p</span>, and the points that can be forced into
+  triangles with them.</p>
+</section>
+
+<!-- 2 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 2</span> <span>the edge census</span></p>
+  <h2>A unit-long join can happen in only three ways</h2>
+  <p class="lede">This is the whole reason the problem is tractable. Two marks a unit apart are
+  either both outside, both inside, or one of each — and in each case the angle they subtend at the
+  centre is forced to a single value.</p>
+
+  <div class="trio">
+    <div class="card"><svg viewBox="-100 -100 200 200" id="chord-oo"></svg>
+      <h3>outer to outer</h3><p class="val">exactly 60°</p></div>
+    <div class="card"><svg viewBox="-100 -100 200 200" id="chord-ii"></svg>
+      <h3>inner to inner</h3><p class="val">exactly 120°</p></div>
+    <div class="card"><svg viewBox="-100 -100 200 200" id="chord-oi"></svg>
+      <h3>outer to inner</h3><p class="val">exactly θ ≈ 73.221°</p></div>
+  </div>
+
+  <p style="margin-top:26px">The first two are the equilateral triangle read twice. Two radius-1
+  points a unit apart form a unit equilateral triangle with the centre, so the angle at the centre is
+  60°. Two points on the small circle a unit apart form a unit segment whose endpoints sit on the
+  circumcircle of a unit triangle, so they subtend 120°.</p>
+  <p>The third comes from the law of cosines and is the only number here that is not a round one.
+  With sides 1 and 1/√3 and the opposite side equal to 1:</p>
+  <p class="mono" style="color:var(--penA);font-size:15px;margin-left:2px">
+  1 = 1 + 1/3 − 2·(1/√3)·cos θ &nbsp;⟹&nbsp; cos θ = √3/6 = 0.288675… &nbsp;⟹&nbsp; θ = 73.2213…°</p>
+  <p>Notice what did <em>not</em> happen: no fourth case. There is no unit-length join that changes
+  the angle by anything other than ±60°, ±120°, or ±θ.</p>
+</section>
+
+<!-- 3 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 3</span> <span>coordinates</span></p>
+  <h2>Every mark gets a two-number address</h2>
+  <p class="lede">Since a point on either circle is determined by its angle, and every join moves
+  the angle by one of three fixed amounts, we can stop drawing circles and start counting steps.</p>
+  <p>Fix any starting mark and call its angle the origin. Every mark you can reach from it by
+  following joins sits at an angle of the form</p>
+  <p class="mono" style="color:var(--penA);font-size:16px;margin-left:2px">
+  angle = origin + <b>i</b>·60° + <b>j</b>·θ</p>
+  <p>for some whole numbers <span class="kbd">i</span> and <span class="kbd">j</span>. Write the
+  address as <span class="kbd">(i, j)</span>. Because six 60° steps come back to where they started,
+  <span class="kbd">i</span> only matters modulo 6 — it is a number on a six-hour clock. But
+  <span class="kbd">j</span> is a genuine integer that never wraps, for a reason we come to in
+  step 6.</p>
+  <p>In this coordinate system the three kinds of join become three arithmetic rules, and the
+  geometry is gone:</p>
+  <p class="mono" style="color:var(--chalk);font-size:14.5px;line-height:2.1;margin-left:2px">
+  outer(i, j) — outer(i±1, j)<br>
+  inner(i, j) — inner(i±2, j)<br>
+  outer(i, j) — inner(i, j±1)</p>
+  <p class="muted">Each address carries two marks, one on each circle, at the same angle: the outer
+  one and the inner one. That is why the rules mention both. The last rule is the only one that
+  changes <span class="kbd">j</span>, so <span class="kbd">j</span> counts how many times you have
+  crossed between the circles.</p>
+</section>
+
+<!-- 4 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 4</span> <span>the shape</span></p>
+  <h2>What those rules draw is an infinite ladder</h2>
+  <p class="lede">Left: the marks where they actually live. Right: the same marks laid out by
+  address, <span class="kbd">i</span> down, <span class="kbd">j</span> across. Point at either
+  picture and the matching marks light up in both.</p>
+
+  <figure>
+    <div class="duo">
+      <div>
+        <div class="panel-label">the plane · drag to rotate</div>
+        <svg id="linkPlane" viewBox="-215 -215 430 430" tabindex="0"
+             aria-label="Marks on two concentric circles with their unit-distance joins."></svg>
+      </div>
+      <div>
+        <div class="panel-label">the ladder · address (i, j)</div>
+        <div class="scrollx"><svg id="linkStrip" viewBox="0 0 760 500"
+             aria-label="The same marks arranged by address on a six-row ladder."></svg></div>
+      </div>
+    </div>
+    <div class="controls">
+      <label class="ctl">rotate <input id="alphaR" type="range" min="0" max="360" value="90" step="0.5"><output id="alphaO">90°</output></label>
+      <label class="ctl">layers j <input id="jR" type="range" min="0" max="3" value="1" step="1"><output id="jO">±1</output></label>
+      <button class="toggle" id="tOuter" aria-pressed="true">60° joins</button>
+      <button class="toggle" id="tInner" aria-pressed="true">120° joins</button>
+      <button class="toggle" id="tCross" aria-pressed="true">θ joins</button>
+      <button class="toggle" id="tLabel" aria-pressed="false">addresses</button>
+    </div>
+    <figcaption>Turning the plane picture changes every coordinate on the left and nothing at all on
+    the right. The ladder is the invariant; the circles are one of infinitely many ways to place it.
+    Adding layers extends the ladder sideways — it never closes into a loop.</figcaption>
+  </figure>
+
+  <p>The ladder has six rows (the six values of <span class="kbd">i</span>, joined top to bottom in a
+  cycle) and runs forever left and right. Every mark has exactly four joins: two along its row-cycle
+  and two crossing to the neighbouring columns. Nothing else is ever adjacent to anything else.</p>
+  <div class="note"><b>An aside worth having.</b> The two circles hold uncountably many marks, but
+  they do not all sit on one ladder. Starting from a different mark generally lands you in a
+  different family that shares no joins with the first. The two circles are a heap of disjoint copies
+  of the same ladder — so colouring one ladder correctly colours all of them.</div>
+</section>
+
+<!-- 5 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 5</span> <span>the colouring</span></p>
+  <h2>Two short lookup tables finish the proof</h2>
+  <p class="lede">Colour a mark by looking up its <span class="kbd">i</span> — ignoring
+  <span class="kbd">j</span> entirely — in one of two tables, depending on which circle it is on.</p>
+
+  <figure>
+    <div style="overflow-x:auto">
+    <table class="tbl" id="tables">
+      <tr><th class="rowlab">address i</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr id="rowOuter"><td class="rowlab">outer mark</td></tr>
+      <tr id="rowInner"><td class="rowlab">inner mark</td></tr>
+    </table>
+    </div>
+    <div class="stepnav" style="margin-top:16px">
+      <button class="toggle" data-check="0" aria-pressed="true">check the 60° joins</button>
+      <button class="toggle" data-check="1" aria-pressed="false">check the 120° joins</button>
+      <button class="toggle" data-check="2" aria-pressed="false">check the θ joins</button>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="tbl" id="checkTbl"></table>
+    </div>
+    <figcaption id="checkCap"></figcaption>
+  </figure>
+
+  <p>Three rules, eighteen comparisons, all of them unequal. That is the entire proof. It works
+  for every layer at once because neither table ever consults <span class="kbd">j</span>, so a join
+  that crosses between columns compares <span class="mono">outer(i)</span> against
+  <span class="mono">inner(i)</span> with the same <span class="kbd">i</span> on both sides.</p>
+  <p class="muted">One design note that is easy to miss: the outer table uses all three colours even
+  though the six-row cycle is even and could be alternated with two. It has to. The inner triangles
+  need three colours among themselves, and each inner mark can only see outer marks of matching
+  <span class="kbd">i</span> — a two-colour outer table would starve them.</p>
+</section>
+
+<!-- 6 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 6</span> <span>the load-bearing fact</span></p>
+  <h2>The address has to be unique, and that needs a theorem</h2>
+  <p class="lede">The tables assume each mark has one address. If one mark could be reached by two
+  different routes with different <span class="kbd">i</span> values, the tables would demand two
+  colours for one point and the whole thing collapses.</p>
+  <p>That is exactly what happens if θ is a rational multiple of 60°. Here are the values of
+  <span class="mono">j·θ</span> reduced modulo 60°, which is where the addresses could collide:</p>
+
+  <figure>
+    <div class="plate" style="padding:22px 20px 8px">
+      <svg id="wrapviz" viewBox="0 0 760 150"></svg>
+    </div>
+    <div class="controls">
+      <label class="ctl">steps j <input id="wrapN" type="range" min="1" max="120" value="14" step="1"><output id="wrapNO">14</output></label>
+      <button class="toggle" id="wrapReal" aria-pressed="true">true θ = 73.221°</button>
+      <button class="toggle" id="wrapFake" aria-pressed="false">pretend θ = 70°</button>
+    </div>
+    <figcaption id="wrapCap"></figcaption>
+  </figure>
+
+  <p>With the true θ the ticks never land on each other, no matter how far you go. The proof is a
+  short piece of algebra: if some whole number of θ steps closed the loop, then
+  <span class="mono">2·cos θ = √3/3</span> would be an algebraic integer — a root of a monic
+  polynomial with integer coefficients. Squaring it gives <span class="mono">1/3</span>, which would
+  then be an algebraic integer too. But a rational algebraic integer is an ordinary integer, and
+  <span class="mono">1/3</span> is not. So no whole number of θ steps ever closes the loop, the
+  ladder never becomes a cylinder, and <span class="kbd">j</span> is a real integer coordinate.</p>
+  <p class="muted">This is the one place where the specific value <span class="mono">√3/6</span>
+  matters rather than just being some angle. Change the radii and the argument has to be rerun.</p>
+</section>
+
+<!-- 7 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 7</span> <span>the loophole</span></p>
+  <h2>Put the centre back in and three colours die</h2>
+  <p class="lede">The theorem is about marks <em>on</em> the two circles. The centre
+  <span class="mono">p</span> is not on either. Add it, and sixteen points are enough to force a
+  fourth colour.</p>
+
+  <figure>
+    <div class="plate" style="padding:8px">
+      <svg id="forcing" viewBox="-215 -230 430 445"></svg>
+    </div>
+    <div class="controls" id="forceNav"></div>
+    <p class="readout" id="forceRead"></p>
+  </figure>
+
+  <p>Nothing here contradicts step 5. The sixteen points minus <span class="mono">p</span> are still
+  three-colourable — the tables still work on them. What fails is the extension: no proper
+  three-colouring of the cover set survives adding the centre. So the honest statement of the barrier
+  is narrower than "this region cannot force anything". It is: <b>the two circles cannot force a
+  fourth colour among themselves</b>, while the centre together with them can.</p>
+  <div class="note"><b>Why this matters for the hunt.</b> If you are searching for a 6-chromatic
+  unit-distance graph by bolting gadgets onto a pivot point, this says a gadget living entirely
+  inside a pivot's neighbourhood is wasted effort — its chromatic number is capped at 3 before you
+  start. The leverage is in which of the three-colourings <em>extend</em>, and since the ladder
+  couples only neighbouring columns, that question is a finite-state one: build the transfer matrix
+  on column colourings and every extension question becomes reachability in a small automaton.</div>
+</section>
+
+<!-- 8 ------------------------------------------------------------------ -->
+<section>
+  <p class="step"><span class="n">step 8</span> <span>two systems</span></p>
+  <h2>Bring in a second pivot, and count what the two systems share</h2>
+  <p class="lede">Place a second pivot <span class="mono">Q</span> exactly one unit from
+  <span class="mono">P</span> and give it the same two circles. Each pivot now sits on the
+  other's <em>outer</em> circle, and the four circles cut each other in eight points. With the
+  two pivots themselves, the systems share exactly <b>ten</b> points — no more, no fewer; the
+  classification of all four circle-pair intersections is a kernel-checked theorem.</p>
+
+  <figure>
+    <div class="plate" style="padding:8px">
+      <svg id="pairviz" viewBox="-195 -175 540 350" role="img"
+        aria-label="Two pivots one unit apart, four circles, their ten shared points, one ladder of each system, and the cross-chord partners of a probe point."></svg>
+    </div>
+    <div class="controls">
+      <button class="toggle" id="pGlue" aria-pressed="true">shared points</button>
+      <button class="toggle" id="pLadP" aria-pressed="true">P's ladder through Q</button>
+      <button class="toggle" id="pLadQ" aria-pressed="true">Q's ladder through P</button>
+      <label class="ctl">ladder depth |b| ≤ <input id="pB" type="range" min="0" max="8" value="3" step="1"><output id="pBO">3</output></label>
+      <button class="toggle" id="pProbe" aria-pressed="false">probe + its partners</button>
+      <label class="ctl">probe ψ <input id="pPsi" type="range" min="0" max="360" value="107" step="0.5"><output id="pPsiO">107°</output></label>
+    </div>
+    <p class="readout" id="pairRead"></p>
+    <figcaption>The two pivots (large marks), the eight circle-intersection points, and the mirror
+    line through both pivots: every shared point comes as a point and its reflection, because the
+    configuration's whole symmetry is that one reflection. Small dots are one ladder of each
+    system — the ladder through the partner pivot — drawn to the chosen depth.</figcaption>
+  </figure>
+
+  <p>Now ask the ladder question. Each glue point lies in exactly one ladder of each system, so
+  choosing one ladder per system decides which shared points you actually catch. Take the natural
+  choice — <b>P's ladder through Q</b>, and <b>Q's ladder through P</b> — and check each glue
+  point's angle against the ladder's angle set <span class="mono">a·60° + b·θ</span>:</p>
+  <p class="mono" style="color:var(--chalk);font-size:14.5px;line-height:2.1;margin-left:2px">
+  outer∩outer&nbsp; at ±60°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= a·60°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ in the ladder<br>
+  seam images&nbsp;&nbsp; at ±θ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= b·θ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ in the ladder<br>
+  their mirrors at ±(180°−2θ) = 3·60° − 2θ&nbsp;&nbsp;→ in the ladder<br>
+  inner∩inner&nbsp;&nbsp; at ±30°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 30 = a·60 + b·θ has no whole-number solution</p>
+  <p><b>Eight of the ten shared points come with the single ladder pair for free</b> — the two
+  pivots, both hexagon points, and all four seam images land in it by coset arithmetic, nothing
+  needs to be forced. The two inner∩inner points are the exception: 30° needs
+  <span class="mono">b = 0</span> (θ is irrational) and then <span class="mono">a = ½</span>,
+  which is not a whole number. They are invisible to every pivot ladder, and catching them costs a
+  <em>second</em> ladder on each side — which then contains both of them at once, since they sit
+  60° apart.</p>
+  <div class="note"><b>The blind spot is an address worth knowing.</b> That unreachable
+  inner∩inner point (½, √3/6) is the centroid of the unit triangle on P, Q — the point one unit
+  from neither pivot but 1/√3 from both. Add a third pivot to make the triangle and this exact
+  point becomes the <em>metapivot</em>: the centre of a fourth two-circle system whose inner
+  circle passes through all three pivots. The next stage of the construction lives precisely at
+  the one shared point the pair's own ladders cannot see.</div>
+  <p>One warning the picture makes honest: ladders of <em>one</em> system never touch each other
+  (that is what being separate components means), but ladders of the <em>two</em> systems
+  interact far beyond the ten shared points. Switch on the probe: a point at a generic angle ψ on
+  P's outer circle has up to four unit-distance partners on Q's circles — real edges of the pair
+  graph — and their angles involve a new square root, so they land in <em>other</em> ladders of
+  Q, different ones for every ψ. Each ladder of P touches countably many ladders of Q, one point
+  at a time. That dense cross-web, not the ten glue points, is where the measured colour pressure
+  between the two systems lives; the glue points are just the places the web touches the chosen
+  ladder pair.</p>
+</section>
+
+<footer>
+  <p>The statement and proof sketched here are formalised in Lean 4; the interactive pictures are
+  drawn from the same three chord classifications and the same two tables
+  <span class="mono">[1,2,0,2,1,0]</span> and <span class="mono">[0,0,1,1,2,2]</span>. The forcing
+  configuration in step 7 is an extension of the theorem rather than part of it. The ten-point
+  classification and the reflection symmetry in step 8 are kernel-checked theorems of the pair
+  system; the general two-circle intersection formula behind the probe's partners is one as
+  well.</p>
+</footer>
+</div>
+
+<script>
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const TAU=Math.PI*2, D2R=Math.PI/180;
+const TH=Math.acos(Math.sqrt(3)/6);        // cross-chord angle, radians
+const THDEG=TH/D2R;                        // 73.2213...
+const RIN=1/Math.sqrt(3);
+const OUTER=[1,2,0,2,1,0];
+const INNER=[0,0,1,1,2,2];
+const PEN=["#E0A340","#48A9BE","#CE6C93"];
+const RULE="#242C37", GRAPH="#6E7A8A", CHALK="#DCE3EC";
+const S=150; // px per unit length
+const REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function el(t,a,p){const n=document.createElementNS(NS,t);
+  for(const k in a) n.setAttribute(k,a[k]);
+  if(p) p.appendChild(n); return n;}
+function clear(n){while(n.firstChild) n.removeChild(n.firstChild);}
+function pt(ang,r){return [S*r*Math.cos(ang), -S*r*Math.sin(ang)];}
+
+/* ---------- shared plane renderer ---------- */
+function planeNodes(alpha,J){
+  const out=[];
+  for(let j=-J;j<=J;j++) for(let i=0;i<6;i++){
+    const a=alpha+i*Math.PI/3+j*TH;
+    out.push({k:"O",i,j,a,r:1,c:OUTER[i]});
+    out.push({k:"I",i,j,a,r:RIN,c:INNER[i]});
+  }
+  return out;
+}
+function planeEdges(J){
+  const E=[];
+  for(let j=-J;j<=J;j++) for(let i=0;i<6;i++){
+    E.push({t:"outer",a:["O",i,j],b:["O",(i+1)%6,j]});
+    E.push({t:"inner",a:["I",i,j],b:["I",(i+2)%6,j]});
+    if(j+1<=J) E.push({t:"cross",a:["O",i,j],b:["I",i,j+1]});
+    if(j-1>=-J) E.push({t:"cross",a:["O",i,j],b:["I",i,j-1]});
+  }
+  return E;
+}
+const key=(k,i,j)=>k+i+","+j;
+
+function drawPlane(svg,opt){
+  clear(svg);
+  const {alpha,J,show,colour,labels,hi}=opt;
+  const g=el("g",{},svg);
+  // circles + centre
+  el("circle",{cx:0,cy:0,r:S,fill:"none",stroke:RULE,"stroke-width":1},g);
+  el("circle",{cx:0,cy:0,r:S*RIN,fill:"none",stroke:RULE,"stroke-width":1,
+    "stroke-dasharray":"3 5"},g);
+  el("circle",{cx:0,cy:0,r:2.2,fill:GRAPH},g);
+  const N=planeNodes(alpha,J), map={};
+  N.forEach(n=>map[key(n.k,n.i,n.j)]=n);
+  const hiSet=new Set(hi||[]);
+  // edges
+  planeEdges(J).forEach(e=>{
+    if(!show[e.t]) return;
+    const A=map[key(...e.a)], B=map[key(...e.b)];
+    const [x1,y1]=pt(A.a,A.r), [x2,y2]=pt(B.a,B.r);
+    const lit=hiSet.has(key(...e.a))||hiSet.has(key(...e.b));
+    el("line",{x1,y1,x2,y2,stroke:lit?CHALK:"#39424F",
+      "stroke-width":lit?1.6:0.9,"stroke-linecap":"round"},g);
+  });
+  // nodes
+  N.forEach(n=>{
+    const [x,y]=pt(n.a,n.r);
+    const lit=hiSet.has(key(n.k,n.i,n.j));
+    const col=colour?PEN[n.c]:GRAPH;
+    const r=n.k==="O"?4.8:3.9;
+    if(lit) el("circle",{cx:x,cy:y,r:r+4.5,fill:"none",stroke:CHALK,"stroke-width":1},g);
+    el("circle",{cx:x,cy:y,r,fill:n.k==="O"?col:"#151A21",
+      stroke:col,"stroke-width":n.k==="O"?0:2},g);
+    if(labels) el("text",{x:x+8,y:y-6,fill:GRAPH,"font-size":9,
+      "font-family":"ui-monospace,monospace"},g).textContent=n.i+","+n.j;
+  });
+  return map;
+}
+
+/* ---------- hero ---------- */
+const hero=document.getElementById("hero");
+let heroA=90*D2R;
+function heroFrame(){
+  drawPlane(hero,{alpha:heroA,J:1,show:{outer:1,inner:1,cross:1},colour:true,labels:false,hi:[]});
+}
+heroFrame();
+if(!REDUCED){
+  let last=performance.now();
+  (function loop(t){heroA+=(t-last)*0.000055; last=t; heroFrame(); requestAnimationFrame(loop);} )(last);
+}
+
+/* ---------- step 2 chord cards ---------- */
+function chordCard(id,type){
+  const svg=document.getElementById(id); clear(svg);
+  const s=78; const P=(ang,r)=>[s*r*Math.cos(ang),-s*r*Math.sin(ang)];
+  el("circle",{cx:0,cy:0,r:s,fill:"none",stroke:RULE,"stroke-width":1},svg);
+  el("circle",{cx:0,cy:0,r:s*RIN,fill:"none",stroke:RULE,"stroke-width":1,"stroke-dasharray":"3 5"},svg);
+  el("circle",{cx:0,cy:0,r:2,fill:GRAPH},svg);
+  let A,B,ra,rb,sweep,tag;
+  if(type==="oo"){ra=rb=1;A=110*D2R;B=50*D2R;sweep=60;tag="60°";}
+  if(type==="ii"){ra=rb=RIN;A=140*D2R;B=20*D2R;sweep=120;tag="120°";}
+  if(type==="oi"){ra=1;rb=RIN;A=118*D2R;B=118*D2R-TH;sweep=THDEG;tag="θ";}
+  const [ax,ay]=P(A,ra), [bx,by]=P(B,rb);
+  // radii
+  el("line",{x1:0,y1:0,x2:ax,y2:ay,stroke:"#39424F","stroke-width":0.9,"stroke-dasharray":"2 4"},svg);
+  el("line",{x1:0,y1:0,x2:bx,y2:by,stroke:"#39424F","stroke-width":0.9,"stroke-dasharray":"2 4"},svg);
+  // angle arc
+  const ar=26;
+  const [px,py]=P(A,ar/s), [qx,qy]=P(B,ar/s);
+  el("path",{d:`M ${px} ${py} A ${ar} ${ar} 0 0 1 ${qx} ${qy}`,fill:"none",
+    stroke:"#E0A340","stroke-width":1.1},svg);
+  const mid=(A+B)/2;
+  const [tx,ty]=P(mid,(ar+15)/s);
+  el("text",{x:tx,y:ty+4,fill:"#E0A340","font-size":12,"text-anchor":"middle",
+    "font-family":"ui-monospace,monospace"},svg).textContent=tag;
+  // the unit chord
+  el("line",{x1:ax,y1:ay,x2:bx,y2:by,stroke:CHALK,"stroke-width":1.8,"stroke-linecap":"round"},svg);
+  const mx=(ax+bx)/2, my=(ay+by)/2, len=Math.hypot(bx-ax,by-ay);
+  const nx=-(by-ay)/len, ny=(bx-ax)/len;
+  el("text",{x:mx+nx*13,y:my+ny*13+4,fill:CHALK,"font-size":11,"text-anchor":"middle",
+    "font-family":"ui-monospace,monospace"},svg).textContent="1";
+  [[ax,ay,ra],[bx,by,rb]].forEach(([x,y,r])=>{
+    el("circle",{cx:x,cy:y,r:4.4,fill:r===1?CHALK:"#151A21",stroke:CHALK,"stroke-width":r===1?0:2},svg);
+  });
+}
+chordCard("chord-oo","oo"); chordCard("chord-ii","ii"); chordCard("chord-oi","oi");
+
+/* ---------- step 4: linked plane + ladder ---------- */
+const lp=document.getElementById("linkPlane"), ls=document.getElementById("linkStrip");
+const st={alpha:90*D2R,J:1,show:{outer:true,inner:true,cross:true},labels:false,hi:[]};
+const ROWH=52, COLW=118, OX=118, OY=44, DY=9, DX=13;
+function stripXY(k,r,j,J){
+  return [OX+(j+J)*COLW+(k==="O"?-DX:DX), OY+r*ROWH+(k==="O"?-DY:DY)];
+}
+function renderLinked(){
+  const J=st.J, cols=2*J+1;
+  ls.setAttribute("viewBox",`0 0 ${OX+cols*COLW+40} ${OY+8*ROWH+30}`);
+  ls.style.minWidth=Math.max(340,Math.min(760,OX+cols*COLW+40))+"px";
+  drawPlane(lp,{alpha:st.alpha,J,show:st.show,colour:true,labels:st.labels,hi:st.hi});
+  clear(ls);
+  const g=el("g",{},ls);
+  const hiSet=new Set(st.hi);
+  // row guides + labels
+  for(let r=0;r<8;r++){
+    const y=OY+r*ROWH, ghost=r>=6;
+    el("line",{x1:OX-24,y1:y,x2:OX+(cols-1)*COLW+24,y2:y,stroke:"#1C222B","stroke-width":1},g);
+    el("text",{x:OX-40,y:y+4,fill:ghost?"#454F5C":GRAPH,"font-size":11,"text-anchor":"end",
+      "font-family":"ui-monospace,monospace"},g).textContent="i = "+(r%6)+(ghost?"′":"");
+  }
+  for(let j=-J;j<=J;j++){
+    el("text",{x:OX+(j+J)*COLW,y:OY+8*ROWH+18,fill:GRAPH,"font-size":11,"text-anchor":"middle",
+      "font-family":"ui-monospace,monospace"},g).textContent="j = "+j;
+  }
+  const edge=(k1,r1,j1,k2,r2,j2,type,bow)=>{
+    if(!st.show[type]) return;
+    const [x1,y1]=stripXY(k1,r1,j1,J), [x2,y2]=stripXY(k2,r2,j2,J);
+    const lit=hiSet.has(key(k1,r1%6,j1))||hiSet.has(key(k2,r2%6,j2));
+    const ghost=r1>=6||r2>=6;
+    const col=lit?CHALK:(ghost?"#2B333E":"#39424F");
+    if(bow){
+      const cx=(x1+x2)/2+bow, cy=(y1+y2)/2;
+      el("path",{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,fill:"none",stroke:col,
+        "stroke-width":lit?1.7:1},g);
+    } else {
+      el("line",{x1,y1,x2,y2,stroke:col,"stroke-width":lit?1.7:1,"stroke-linecap":"round"},g);
+    }
+  };
+  for(let j=-J;j<=J;j++){
+    for(let r=0;r<7;r++) edge("O",r,j,"O",r+1,j,"outer",0);
+    for(let r=0;r<6;r++) edge("I",r,j,"I",r+2,j,"inner",26);
+    for(let r=0;r<8;r++){
+      if(j+1<=J) edge("O",r,j,"I",r,j+1,"cross",0);
+      if(j-1>=-J) edge("O",r,j,"I",r,j-1,"cross",0);
+    }
+  }
+  for(let j=-J;j<=J;j++) for(let r=0;r<8;r++) for(const k of ["O","I"]){
+    const i=r%6, ghost=r>=6;
+    const [x,y]=stripXY(k,r,j,J);
+    const c=PEN[(k==="O"?OUTER:INNER)[i]];
+    const lit=hiSet.has(key(k,i,j));
+    if(lit) el("circle",{cx:x,cy:y,r:11,fill:"none",stroke:CHALK,"stroke-width":1},g);
+    const node=el("circle",{cx:x,cy:y,r:k==="O"?6.2:5.2,
+      fill:k==="O"?c:"#151A21",stroke:c,"stroke-width":k==="O"?0:2,
+      opacity:ghost?0.45:1,cursor:"pointer"},g);
+    node.addEventListener("mouseenter",()=>setHi(k,i,j));
+    node.addEventListener("mouseleave",()=>{st.hi=[];renderLinked();});
+    if(st.labels && !ghost)
+      el("text",{x:x+(k==="O"?-12:12),y:y+3.5,fill:GRAPH,"font-size":9,
+        "text-anchor":k==="O"?"end":"start","font-family":"ui-monospace,monospace"},g)
+        .textContent=k+i+","+j;
+  }
+  // legend
+  const lg=el("g",{},g);
+  el("text",{x:OX-40,y:OY-22,fill:GRAPH,"font-size":10,
+    "font-family":"ui-monospace,monospace"},lg).textContent="● outer   ○ inner   ′ = repeat of row above";
+}
+function setHi(k,i,j){
+  const nb=[key(k,i,j)];
+  if(k==="O"){
+    nb.push(key("O",(i+1)%6,j),key("O",(i+5)%6,j),key("I",i,j+1),key("I",i,j-1));
+  } else {
+    nb.push(key("I",(i+2)%6,j),key("I",(i+4)%6,j),key("O",i,j+1),key("O",i,j-1));
+  }
+  st.hi=nb; renderLinked();
+}
+// plane hover targets
+lp.addEventListener("mousemove",e=>{
+  if(drag) return;
+  const r=lp.getBoundingClientRect();
+  const vb=lp.viewBox.baseVal;
+  const x=vb.x+(e.clientX-r.left)/r.width*vb.width;
+  const y=vb.y+(e.clientY-r.top)/r.height*vb.height;
+  let best=null,bd=1e9;
+  planeNodes(st.alpha,st.J).forEach(n=>{
+    const [px,py]=pt(n.a,n.r); const d=Math.hypot(px-x,py-y);
+    if(d<bd){bd=d;best=n;}
+  });
+  if(best&&bd<16) setHi(best.k,best.i,best.j);
+  else if(st.hi.length){st.hi=[];renderLinked();}
+});
+lp.addEventListener("mouseleave",()=>{if(st.hi.length){st.hi=[];renderLinked();}});
+// drag to rotate
+let drag=false, dragA=0, dragStart=0;
+const angAt=e=>{const r=lp.getBoundingClientRect();
+  return Math.atan2(-(e.clientY-r.top-r.height/2), e.clientX-r.left-r.width/2);};
+lp.addEventListener("pointerdown",e=>{drag=true;dragStart=angAt(e);dragA=st.alpha;
+  lp.setPointerCapture(e.pointerId);});
+lp.addEventListener("pointermove",e=>{if(!drag)return;
+  st.alpha=dragA+(angAt(e)-dragStart); syncAlpha(); renderLinked();});
+addEventListener("pointerup",()=>drag=false);
+
+const alphaR=document.getElementById("alphaR"), alphaO=document.getElementById("alphaO");
+function syncAlpha(){
+  let d=((st.alpha/D2R)%360+360)%360;
+  alphaR.value=d; alphaO.textContent=d.toFixed(0)+"°";
+}
+alphaR.addEventListener("input",()=>{st.alpha=+alphaR.value*D2R;
+  alphaO.textContent=(+alphaR.value).toFixed(0)+"°"; renderLinked();});
+const jR=document.getElementById("jR"), jO=document.getElementById("jO");
+jR.addEventListener("input",()=>{st.J=+jR.value; jO.textContent="±"+st.J; renderLinked();});
+function bindToggle(id,fn){
+  const b=document.getElementById(id);
+  b.addEventListener("click",()=>{
+    const v=b.getAttribute("aria-pressed")!=="true";
+    b.setAttribute("aria-pressed",v); fn(v); renderLinked();
+  });
+}
+bindToggle("tOuter",v=>st.show.outer=v);
+bindToggle("tInner",v=>st.show.inner=v);
+bindToggle("tCross",v=>st.show.cross=v);
+bindToggle("tLabel",v=>st.labels=v);
+syncAlpha(); renderLinked();
+
+/* ---------- step 5: tables + checks ---------- */
+function fillTable(){
+  const ro=document.getElementById("rowOuter"), ri=document.getElementById("rowInner");
+  for(let i=0;i<6;i++){
+    for(const [row,tab] of [[ro,OUTER],[ri,INNER]]){
+      const td=document.createElement("td");
+      const sw=document.createElement("span");
+      sw.className="swatch"; sw.style.background=PEN[tab[i]]; sw.textContent=tab[i];
+      td.appendChild(sw); row.appendChild(td);
+    }
+  }
+}
+fillTable();
+const CHECKS=[
+  {lab:"outer(i) vs outer(i+1)",a:i=>["O",i],b:i=>["O",(i+1)%6],
+   cap:"Six comparisons along the outer six-cycle. Every neighbouring pair differs, so no 60° join is monochromatic."},
+  {lab:"inner(i) vs inner(i+2)",a:i=>["I",i],b:i=>["I",(i+2)%6],
+   cap:"Six comparisons across the two inner triangles {0,2,4} and {1,3,5}. Each triangle receives all three colours."},
+  {lab:"outer(i) vs inner(i)",a:i=>["O",i],b:i=>["I",i],
+   cap:"Six comparisons at matching i — the only place a θ join can land, since crossing between circles changes j and leaves i alone."}
+];
+function renderCheck(n){
+  const t=document.getElementById("checkTbl"); t.innerHTML="";
+  const c=CHECKS[n];
+  const head=t.insertRow();
+  const h0=document.createElement("th"); h0.className="rowlab"; h0.textContent=c.lab;
+  head.appendChild(h0);
+  for(let i=0;i<6;i++){const th=document.createElement("th");th.textContent="i="+i;head.appendChild(th);}
+  const row=t.insertRow(); row.className="checkrow";
+  const l=row.insertCell(); l.className="rowlab"; l.textContent="colours compared";
+  for(let i=0;i<6;i++){
+    const [ka,ia]=c.a(i), [kb,ib]=c.b(i);
+    const ca=(ka==="O"?OUTER:INNER)[ia], cb=(kb==="O"?OUTER:INNER)[ib];
+    const td=row.insertCell();
+    td.innerHTML=`<span style="color:${PEN[ca]}">${ca}</span>` +
+      `<span style="color:var(--graphite)"> ≠ </span>` +
+      `<span style="color:${PEN[cb]}">${cb}</span>`;
+  }
+  const row2=t.insertRow(); row2.className="checkrow";
+  const l2=row2.insertCell(); l2.className="rowlab"; l2.textContent="verdict";
+  for(let i=0;i<6;i++){const td=row2.insertCell();td.className="ok";td.textContent="ok";}
+  document.getElementById("checkCap").textContent=c.cap;
+}
+document.querySelectorAll("[data-check]").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("[data-check]").forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    renderCheck(+b.dataset.check);
+  });
+});
+renderCheck(0);
+
+/* ---------- step 6: wrapping ---------- */
+const wv=document.getElementById("wrapviz");
+const wrapState={n:14,real:true};
+function renderWrap(){
+  clear(wv);
+  const W=700, X0=34, Y=76;
+  const th=wrapState.real?THDEG:70;
+  el("line",{x1:X0,y1:Y,x2:X0+W,y2:Y,stroke:RULE,"stroke-width":1},wv);
+  for(let d=0;d<=60;d+=10){
+    const x=X0+W*d/60;
+    el("line",{x1:x,y1:Y-5,x2:x,y2:Y+5,stroke:"#2E3742","stroke-width":1},wv);
+    el("text",{x,y:Y+22,fill:GRAPH,"font-size":10,"text-anchor":"middle",
+      "font-family":"ui-monospace,monospace"},wv).textContent=d+"°";
+  }
+  el("text",{x:X0,y:Y-46,fill:GRAPH,"font-size":11,
+    "font-family":"ui-monospace,monospace"},wv).textContent="j·θ  reduced mod 60°";
+  let collision=null;
+  const seen=[];
+  for(let j=0;j<=wrapState.n;j++){
+    const v=((j*th)%60+60)%60;
+    const x=X0+W*v/60;
+    const hit=seen.find(s=>Math.abs(s.v-v)<1e-9||Math.abs(s.v-v)>59.999999);
+    if(hit&&collision===null&&j>0) collision={j,j0:hit.j,v};
+    seen.push({j,v});
+    const isC=collision&&collision.j===j;
+    el("line",{x1:x,y1:Y-(j===0?30:22),x2:x,y2:Y,stroke:isC?"#CE6C93":(j===0?"#E0A340":"#59667A"),
+      "stroke-width":isC?2:1},wv);
+    if(j<=12||isC||j===0)
+      el("text",{x,y:Y-(j===0?36:28),fill:isC?"#CE6C93":(j===0?"#E0A340":GRAPH),"font-size":9,
+        "text-anchor":"middle","font-family":"ui-monospace,monospace"},wv).textContent=j;
+  }
+  const cap=document.getElementById("wrapCap");
+  if(wrapState.real){
+    cap.innerHTML="Ticks are labelled by j. They crowd together but never coincide — the set is "+
+      "dense in the interval and no two values ever meet, so no two routes reach the same mark. "+
+      "Push the slider to 120 and the crowding is visible; the collision never arrives.";
+  } else if(collision){
+    cap.innerHTML="Collision at <span style='color:#CE6C93'>j = "+collision.j+"</span>: six steps "+
+      "of 70° is 420°, which is one full turn plus 60°. So the address (0, 0) and the address "+
+      "(1, 6) name the <em>same mark</em> — and the outer table assigns them colour "+
+      OUTER[0]+" and colour "+OUTER[1]+". The colouring is not even well defined.";
+  } else cap.textContent="";
+}
+document.getElementById("wrapN").addEventListener("input",e=>{
+  wrapState.n=+e.target.value; document.getElementById("wrapNO").textContent=e.target.value;
+  renderWrap();});
+const wR=document.getElementById("wrapReal"), wF=document.getElementById("wrapFake");
+wR.addEventListener("click",()=>{wrapState.real=true;wR.setAttribute("aria-pressed","true");
+  wF.setAttribute("aria-pressed","false");renderWrap();});
+wF.addEventListener("click",()=>{wrapState.real=false;wF.setAttribute("aria-pressed","true");
+  wR.setAttribute("aria-pressed","false");renderWrap();});
+renderWrap();
+
+/* ---------- step 7: forcing ---------- */
+const fsvg=document.getElementById("forcing");
+const FA=90*D2R;
+const FSTEPS=[
+ {t:"the configuration",
+  r:"Sixteen points: the centre <span class='tag'>p</span>, two full hexagons on the outer circle at layers j−1 and j+1, and three marks on the inner circle at layer j with even i. The two hexagons are rotated relative to each other by 2θ, which is 26.44° once you reduce modulo 60° — nonzero exactly because θ never closes the loop."},
+ {t:"p eats a colour",
+  r:"Every one of the twelve outer marks is one unit from <span class='tag'>p</span>, so all twelve avoid p's colour. Twelve points, two colours left."},
+ {t:"each hexagon must alternate",
+  r:"A hexagon of unit-joins is a six-cycle. With only two colours available it has to alternate, so its colour depends purely on whether i is even or odd. Each layer picks one of two possible alternations."},
+ {t:"the inner triangle starves",
+  r:"The three inner marks are pairwise one unit apart, so they need three distinct colours. But each one sees only the <em>even</em>-index outer marks of layers j−1 and j+1. If the two layers alternate the same way, all three inner marks are barred from the same single colour and share two — a triangle cannot fit in two. If the layers alternate oppositely, all three are barred from both, so all three must take the last colour — a triangle cannot fit in one. Three colours are impossible either way."}
+];
+let fstep=0;
+function renderForcing(){
+  clear(fsvg);
+  const g=el("g",{},fsvg);
+  el("circle",{cx:0,cy:0,r:S,fill:"none",stroke:RULE,"stroke-width":1},g);
+  el("circle",{cx:0,cy:0,r:S*RIN,fill:"none",stroke:RULE,"stroke-width":1,"stroke-dasharray":"3 5"},g);
+  const L=[-1,1];
+  const outerPts={}, innerPts={};
+  L.forEach(s=>{for(let i=0;i<6;i++){
+    outerPts[s+"_"+i]={p:pt(FA+i*Math.PI/3+s*TH,1),i,s};
+  }});
+  [0,2,4].forEach(i=>{innerPts[i]={p:pt(FA+i*Math.PI/3,RIN),i};});
+
+  const dim="#2B333E", norm="#39424F";
+  const showP   = fstep>=1;
+  const showHex = fstep>=2;
+  const showTri = fstep>=3;
+
+  // joins from p
+  L.forEach(s=>{for(let i=0;i<6;i++){
+    const [x,y]=outerPts[s+"_"+i].p;
+    el("line",{x1:0,y1:0,x2:x,y2:y,stroke:showP?"#5C6675":dim,
+      "stroke-width":showP?1.1:0.7},g);
+  }});
+  // hexagon cycles
+  L.forEach(s=>{for(let i=0;i<6;i++){
+    const [x1,y1]=outerPts[s+"_"+i].p, [x2,y2]=outerPts[s+"_"+((i+1)%6)].p;
+    el("line",{x1,y1,x2,y2,stroke:showHex?CHALK:norm,"stroke-width":showHex?1.7:1},g);
+  }});
+  // inner triangle
+  [[0,2],[2,4],[4,0]].forEach(([a,b])=>{
+    const [x1,y1]=innerPts[a].p, [x2,y2]=innerPts[b].p;
+    el("line",{x1,y1,x2,y2,stroke:showTri?"#CE6C93":norm,"stroke-width":showTri?2:1},g);
+  });
+  // cross joins inner(i,j) - outer(i, j±1)
+  [0,2,4].forEach(i=>{L.forEach(s=>{
+    const [x1,y1]=innerPts[i].p, [x2,y2]=outerPts[s+"_"+i].p;
+    el("line",{x1,y1,x2,y2,stroke:showTri?"#8C7BB0":norm,"stroke-width":showTri?1.5:1,
+      "stroke-dasharray":showTri?"":"2 4"},g);
+  })});
+  // nodes
+  L.forEach(s=>{for(let i=0;i<6;i++){
+    const [x,y]=outerPts[s+"_"+i].p;
+    const even=i%2===0;
+    const fill=showHex?(even?"#DCE3EC":"#59667A"):GRAPH;
+    el("circle",{cx:x,cy:y,r:5.4,fill,stroke:"#0E1116","stroke-width":1},g);
+    if(fstep>=1)
+      el("text",{x:x*1.135,y:y*1.135+3.5,fill:GRAPH,"font-size":9,"text-anchor":"middle",
+        "font-family":"ui-monospace,monospace"},g).textContent=i+","+(s>0?"j+1":"j−1");
+  }});
+  [0,2,4].forEach(i=>{
+    const [x,y]=innerPts[i].p;
+    el("circle",{cx:x,cy:y,r:5.4,fill:"#151A21",stroke:showTri?"#CE6C93":GRAPH,"stroke-width":2.4},g);
+  });
+  el("circle",{cx:0,cy:0,r:showP?6:3.4,fill:showP?"#E0A340":GRAPH},g);
+  el("text",{x:13,y:-9,fill:showP?"#E0A340":GRAPH,"font-size":12,
+    "font-family":"ui-monospace,monospace"},g).textContent="p";
+  if(showHex)
+    el("text",{x:-205,y:205,fill:GRAPH,"font-size":10,
+      "font-family":"ui-monospace,monospace"},g).textContent="filled = even i   ·   hollow = odd i";
+  document.getElementById("forceRead").innerHTML=FSTEPS[fstep].r;
+}
+const fnav=document.getElementById("forceNav");
+FSTEPS.forEach((s,n)=>{
+  const b=document.createElement("button");
+  b.className="toggle"; b.textContent=(n+1)+" · "+s.t;
+  b.setAttribute("aria-pressed",n===0?"true":"false");
+  b.addEventListener("click",()=>{
+    fstep=n;
+    fnav.querySelectorAll("button").forEach((x,k)=>x.setAttribute("aria-pressed",k===n));
+    renderForcing();
+  });
+  fnav.appendChild(b);
+});
+renderForcing();
+
+/* ---------- step 8: the two-pivot pair ---------- */
+const pv=document.getElementById("pairviz");
+const PXC=0, QXC=S;                       // pivot x-positions in px (P at 0, Q one unit right)
+const pst={glue:true,ladP:true,ladQ:true,B:3,probe:false,psi:107};
+const SQ3=Math.sqrt(3), SQ11=Math.sqrt(11);
+// the ten shared points, exact (unit coordinates, P at origin, Q at (1,0))
+const GLUE=[
+  {x:0.5,y: SQ3/2, fam:"oo",lad:1},{x:0.5,y:-SQ3/2, fam:"oo",lad:1},
+  {x:1/6,y: SQ11/6,fam:"oi",lad:1},{x:1/6,y:-SQ11/6,fam:"oi",lad:1},
+  {x:5/6,y: SQ11/6,fam:"io",lad:1},{x:5/6,y:-SQ11/6,fam:"io",lad:1},
+  {x:0.5,y: SQ3/6, fam:"ii",lad:2},{x:0.5,y:-SQ3/6, fam:"ii",lad:2},
+];
+const FAMTAG={oo:"outer∩outer · ±60°",oi:"P-inner∩Q-outer · ±θ",
+  io:"P-outer∩Q-inner · ±(180°−2θ)",ii:"inner∩inner · ±30° — second ladder"};
+function px(u){return [u.x*S,-u.y*S];}
+// unit-partners of point x0 (unit coords) on the circle (centre c, radius r): the
+// gluePoint formula — A=(d²+r²−1)/2, disc=r²d²−A², y=c+(A±i·√disc)(x−c)/d²
+function partnersOf(x0,y0,cx,cy,r){
+  const wx=x0-cx, wy=y0-cy, d2=wx*wx+wy*wy;
+  if(d2<1e-12) return [];
+  const A=(d2+r*r-1)/2, disc=r*r*d2-A*A;
+  if(disc<0) return [];
+  const B_=Math.sqrt(disc), out=[];
+  for(const s of [1,-1]){
+    // (A + s·i·B)·(wx + i·wy)/d2
+    out.push([cx+(A*wx-s*B_*wy)/d2, cy+(A*wy+s*B_*wx)/d2]);
+  }
+  return out;
+}
+function ladderAngles(B){
+  const out=[];
+  for(let a=0;a<6;a++) for(let b=-B;b<=B;b++) out.push(a*Math.PI/3+b*TH);
+  return out;
+}
+function renderPair(){
+  clear(pv);
+  const g=el("g",{},pv);
+  // mirror line through the pivots
+  el("line",{x1:-185,y1:0,x2:335,y2:0,stroke:"#1C222B","stroke-width":1,
+    "stroke-dasharray":"5 6"},g);
+  // the four circles
+  for(const [cx,tag] of [[PXC,"P"],[QXC,"Q"]]){
+    el("circle",{cx,cy:0,r:S,fill:"none",stroke:RULE,"stroke-width":1},g);
+    el("circle",{cx,cy:0,r:S*RIN,fill:"none",stroke:RULE,"stroke-width":1,
+      "stroke-dasharray":"3 5"},g);
+  }
+  // ladders: marks on both circles at the lattice angles a·60° + b·θ
+  if(pst.ladP||pst.ladQ){
+    const angs=ladderAngles(pst.B);
+    for(const ang of angs){
+      if(pst.ladP){
+        for(const r of [1,RIN]){
+          const x=PXC+S*r*Math.cos(ang), y=-S*r*Math.sin(ang);
+          el("circle",{cx:x,cy:y,r:1.9,fill:"#48A9BE",opacity:0.75},g);
+        }
+      }
+      if(pst.ladQ){
+        const b=Math.PI+ang;   // Q's ladder anchored at P (angle 180° about Q)
+        for(const r of [1,RIN]){
+          const x=QXC+S*r*Math.cos(b), y=-S*r*Math.sin(b);
+          el("circle",{cx:x,cy:y,r:1.9,fill:"#CE6C93",opacity:0.75},g);
+        }
+      }
+    }
+  }
+  // probe + partners
+  if(pst.probe){
+    const psi=pst.psi*D2R;
+    const x0=Math.cos(psi), y0=Math.sin(psi);
+    const [ppx,ppy]=px({x:x0,y:y0});
+    let hits=[];
+    for(const r of [1,RIN]) hits=hits.concat(partnersOf(x0,y0,1,0,r));
+    hits.forEach(([hx,hy])=>{
+      const [qx,qy]=px({x:hx,y:hy});
+      el("line",{x1:ppx,y1:ppy,x2:qx,y2:qy,stroke:"#8C7BB0","stroke-width":1.2,
+        "stroke-dasharray":"3 4"},g);
+      el("circle",{cx:qx,cy:qy,r:4.4,fill:"none",stroke:"#8C7BB0","stroke-width":1.8},g);
+    });
+    el("circle",{cx:ppx,cy:ppy,r:5,fill:"#8C7BB0"},g);
+    el("text",{x:ppx+9,y:ppy-7,fill:"#8C7BB0","font-size":10,
+      "font-family":"ui-monospace,monospace"},g).textContent="ψ";
+    const n=hits.length;
+    document.getElementById("pairRead").innerHTML=
+      "probe at ψ = "+pst.psi.toFixed(1)+"° on P's outer circle · <span class='tag'>"+n+
+      " unit-partner"+(n===1?"":"s")+"</span> on Q's circles — real edges of the pair graph. "+
+      "Their angles about Q involve √(discriminant), so for generic ψ they sit in ladders of Q "+
+      "that neither drawn ladder contains. Sweep ψ and watch the partners trace the circles: "+
+      "the special ψ where a partner meets a highlighted point are exactly the glue angles.";
+  } else {
+    document.getElementById("pairRead").innerHTML=
+      "Ten shared points: the two pivots and the eight glue points, every one a mirror pair "+
+      "across the axis. <span class='tag'>Ringed</span> points lie in the drawn ladder pair — "+
+      "eight of ten, for free. The <span class='tag'>dashed-ringed</span> inner∩inner pair at "+
+      "±30° needs a second ladder of each system.";
+  }
+  // shared points
+  if(pst.glue){
+    GLUE.forEach(gp=>{
+      const [x,y]=px(gp);
+      const inLad=gp.lad===1;
+      el("circle",{cx:x,cy:y,r:8.5,fill:"none",stroke:inLad?CHALK:"#E0A340",
+        "stroke-width":1.2,"stroke-dasharray":inLad?"":"3 3"},g);
+      el("circle",{cx:x,cy:y,r:3.6,fill:inLad?CHALK:"#E0A340"},g);
+    });
+  }
+  // pivots (each is also a point of the partner's outer circle)
+  for(const [cx,tag,anchor] of [[PXC,"P",-14],[QXC,"Q",14]]){
+    el("circle",{cx,cy:0,r:11,fill:"none",stroke:CHALK,"stroke-width":1},g);
+    el("circle",{cx,cy:0,r:5.4,fill:"#E0A340"},g);
+    el("text",{x:cx+anchor,y:-10,fill:"#E0A340","font-size":13,
+      "text-anchor":anchor<0?"end":"start","font-family":"ui-monospace,monospace"},g)
+      .textContent=tag;
+  }
+  // family legend
+  const leg=["oo","oi","io","ii"];
+  leg.forEach((f,k)=>{
+    el("text",{x:-185,y:-150+k*15,fill:f==="ii"?"#E0A340":GRAPH,"font-size":10,
+      "font-family":"ui-monospace,monospace"},g).textContent=FAMTAG[f];
+  });
+}
+function bindPairToggle(id,fn){
+  const b=document.getElementById(id);
+  b.addEventListener("click",()=>{
+    const v=b.getAttribute("aria-pressed")!=="true";
+    b.setAttribute("aria-pressed",v); fn(v); renderPair();
+  });
+}
+bindPairToggle("pGlue",v=>pst.glue=v);
+bindPairToggle("pLadP",v=>pst.ladP=v);
+bindPairToggle("pLadQ",v=>pst.ladQ=v);
+bindPairToggle("pProbe",v=>pst.probe=v);
+document.getElementById("pB").addEventListener("input",e=>{
+  pst.B=+e.target.value; document.getElementById("pBO").textContent=e.target.value;
+  renderPair();});
+document.getElementById("pPsi").addEventListener("input",e=>{
+  pst.psi=+e.target.value;
+  document.getElementById("pPsiO").textContent=(+e.target.value).toFixed(0)+"°";
+  if(!pst.probe){pst.probe=true;
+    document.getElementById("pProbe").setAttribute("aria-pressed","true");}
+  renderPair();});
+renderPair();
+</script>
