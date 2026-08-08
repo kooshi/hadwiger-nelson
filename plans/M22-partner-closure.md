@@ -65,6 +65,16 @@ package assume a unit axis. The centroid is the hunt's first simultaneous
 centre-and-point: one vertex on three inner circles, unit-adjacent to its six
 120°-partners, and the centre of its own 4-chromatic system.
 
+Recursive (Kooshi, 2026-08-08): three 8-circle systems on a unit metapivot triangle +
+the new centroid = 26 circles generically (8·3 + 2), but the six metapivot circles +
+the new two form ANOTHER 8-circle system — a three-layer role-overlapping incidence
+structure (9 + 3 + 1 centres), duality running through every rung. Each pivot triangle
+carries a free rotational phase about its metapivot: the recursion is a 3-moduli
+family, and tuning a phase until a cross-copy pair lands exactly unit apart is the
+spindle move (`construct.spindle`, field criterion in `field.py`) — a structured
+witness factory, same two radii at every level (unit-distance rigidity densifies,
+never shrinks).
+
 ## What M21 hands over
 
 * `Proofs/HadwigerNelson/Coupled.lean` — the pair's certified geometry: `reflAcross`
