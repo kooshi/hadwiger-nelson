@@ -150,8 +150,8 @@ theorem sphere_inter_sphere_eq_empty_of_far {p q : ℂ} {r₁ r₂ : ℝ}
     Metric.sphere p r₁ ∩ Metric.sphere q r₂ = ∅ := by
   sorry
 
-/-- Empty outside the annulus, near side: one circle strictly inside the other. -/
-theorem sphere_inter_sphere_eq_empty_of_near {p q : ℂ} {r₁ r₂ : ℝ}
+/-- Empty outside the annulus, nested side: one circle strictly inside the other. -/
+theorem sphere_inter_sphere_eq_empty_of_nested {p q : ℂ} {r₁ r₂ : ℝ}
     (hlo : dist p q < |r₁ - r₂|) :
     Metric.sphere p r₁ ∩ Metric.sphere q r₂ = ∅ := by
   sorry
@@ -178,6 +178,15 @@ example : rot3 0 (⟨1 / 2, Real.sqrt 3 / 6⟩ : ℂ)
 
 /-- The far empty case is inhabited: unit circles about `0` and `3` miss. -/
 example : Metric.sphere (0 : ℂ) 1 ∩ Metric.sphere (3 : ℂ) 1 = ∅ := by
+  sorry
+
+/-- The classification's teeth (adversarial member): the centroid's antipode
+`−⟨1/2, √3/6⟩` lies ON `0`'s inner circle, yet NOT in the metapivot intersection —
+its distance to the centroid is `2/√3`, not `1`. Refuted through the classification's
+right-hand side: the two named points really are the only ones. -/
+example : (⟨-(1 / 2), -(Real.sqrt 3 / 6)⟩ : ℂ)
+    ∉ Metric.sphere (⟨1 / 2, Real.sqrt 3 / 6⟩ : ℂ) 1
+      ∩ Metric.sphere (0 : ℂ) (Real.sqrt 3 / 3) := by
   sorry
 
 /-! ## The nine-step near-cycle (§2.3, kept by the domain pass)

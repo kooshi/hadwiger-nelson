@@ -230,15 +230,56 @@ its place or stays a tools-side table entry.
   break (actual ≈ 3.10×10⁻⁴ > 1/3500); (5) drop `hhi` — must break.
 * Skeleton after the pass: 20 obligations; elaborates clean.
 
+### 3.3 Experience-modeling pass (2026-08-08)
+
+* **Names keep the M21 contract.** A consumer who learned `reflAcross_pivot_left`,
+  `dist_reflAcross`, `reflAcross_mem_sphere_left` predicts every `reflAxis` name
+  sight unseen — the naming convention as contract. One rename: the nested-circles
+  empty case was `_of_near`, which lies on a cold read (nested circles are not
+  "near"); now `sphere_inter_sphere_eq_empty_of_nested`. Near-cycle lemmas keep their
+  long statement-style names (name-is-statement, the house/Mathlib rule); the domain
+  name "the nine-step near-cycle" lives in the docstring for search-by-meaning.
+* **The spec set gains its adversarial member** (the house gate): the centroid's
+  antipode lies on `0`'s inner circle yet outside the metapivot intersection —
+  refuted through the classification's RHS, pinning exactly-two-points at a non-unit
+  axis. Four examples now: unit instance, non-unit membership, far-empty,
+  adversarial.
+* **Zero simp tags**, M19–M21 precedent upheld: `reflAxis_pivot_left` is the only
+  hypothesis-free candidate and was ruled out for the same reason `reflAcross`'s was;
+  conditional lemmas with `p ≠ q` side conditions would never fire.
+* **All five children stay private** (single consumers; promotion on second use —
+  M23's metapivot work is the candidate second consumer for `disc_nonneg` and
+  `normSq_eq_dist_sq`). No standalone `gluePoint_mem_*` lemmas: the set equality
+  carries the memberships, M21 precedent, zero unrequested bytes.
+* **Implicature managed in the docstrings**: `sphere_inter_sphere` states WHY radius
+  nonnegativity is absent (derivable), so a convention-trained reader does not infer
+  a forgotten hypothesis; `gluePoint` states the totality contract (√ clamps, point
+  fails membership, empty lemmas take over).
+
 ## 4. Instrument promotion
 
 At implementation, the scratch instruments consolidate into `tools/couple.py` as new
-subcommands (the M21 promotion precedent): `--near` (the spectrum, canonical +
-closure), `--partner` (closure generations with collision census, float-triage +
-exact-on-demand per C2's registered decision), `--kills` (the census: fresh frame,
-relaxations, cores). Self-tests to carry: the planted glue-point control, the CF
-record-l control (a planted rational angle must close exactly), the partner
-off-circle assert, the kill-corpus digest check, the free-relaxation SAT control.
+subcommands (the M21 promotion precedent), each writing a digest-carrying artifact
+(stdout-triage was §0's shape; the promoted instruments persist, since M23's aiming
+consumes them):
+
+* `--near [--pairs …]` → `build/m22-near.json`: the canonical ladder record table
+  (l, δ, chord) + per-pair (m, l) bests. Honesty note in the docstring: the table is
+  60-digit float TRIAGE; the certified near-relation is the Lean lemma, not the
+  table.
+* `--partner [--gens G]` → `build/m22-partner-d1.json`: closure generations with the
+  collision census; float-triage edges with exact confirmation ON DEMAND only (the
+  registered C2 decision) — SAT verdicts are facts about the triage graph; only
+  exact-confirmed edges are claims.
+* `--kills A B` → the census (fresh frame, relaxation 2×2, greedy cores), with the
+  pre-sha corpus fallback and its regression fixture.
+
+Self-tests to carry: the planted glue-point control, the CF control (a planted
+rational angle must close exactly at every multiple), the partner off-circle assert
+fixture, the corpus-digest fallback regression (a doctored pre-sha dict must refuse
+by name), the free-relaxation SAT control on a tiny fixture, seeded-core determinism.
+Refusals by name throughout: enumeration/point caps, foreign corpus, non-far pair,
+exact-confirmation requests beyond the affordable count.
 
 ## 5. Scope and standing
 
