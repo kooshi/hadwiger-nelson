@@ -54,6 +54,13 @@ UNSAT — exactly `Fan.of_unsat`'s cube form). A bug here can cost a theorem, ne
   with the lattice (gen 1), 37.5% of sampled discriminants stay in ℚ(√3,√11), and
   k = 4 stays SAT through two generations (9,412 points, 946,941 edges) — the fork
   does not move by depth.
+* `--ladder` (M22 tangent) — exact ladder addresses: for the canonical pair's ten
+  shared points, the (a, b) with the point at lattice angle a·60° + b·θσ from the
+  partner-pivot anchor — the two-circle ladder's address grid, formalized. The
+  verdict is field-exact (the im-part must vanish identically); eight of ten land in
+  the single natural ladder pair, and the inner∩inner pair (±30° — the M23
+  metapivot) is refused at every depth: the pair's blind spot. Closure-vertex mode
+  (kill cores vs cosets) deferred behind the M23 prediction registration.
 * `--kills A B` (M22) — the kill-structure census at a far pair: a fresh sampled
   frame (A1 injection-count rigidity, A4 local-conflict anatomy) plus relaxation and
   greedy-core probes of the COMMITTED kill corpus (A2 inner/outer 2×2, A3 π_a pin
@@ -1464,6 +1471,99 @@ def run_kills(args):
     print(f"kill census written to {path}", flush=True)
 
 
+
+# ------------------------------------------------------------------ M22 tangent: ladder addresses
+
+# The ten shared points of the canonical d = 1 pair (P = 0, Q = 1), exact — the two
+# pivots and the eight glue points, `Coupled.lean`'s classification as data.
+def shared_points():
+    F = Fraction
+    return [
+        ("P",   frac_c({}, {})),
+        ("Q",   frac_c({B1: F(1)}, {})),
+        ("oo+", frac_c({B1: F(1, 2)}, {B3: F(1, 2)})),
+        ("oo-", frac_c({B1: F(1, 2)}, {B3: F(-1, 2)})),
+        ("oi+", frac_c({B1: F(1, 6)}, {B11: F(1, 6)})),
+        ("oi-", frac_c({B1: F(1, 6)}, {B11: F(-1, 6)})),
+        ("io+", frac_c({B1: F(5, 6)}, {B11: F(1, 6)})),
+        ("io-", frac_c({B1: F(5, 6)}, {B11: F(-1, 6)})),
+        ("ii+", frac_c({B1: F(1, 2)}, {B3: F(1, 6)})),
+        ("ii-", frac_c({B1: F(1, 2)}, {B3: F(-1, 6)})),
+    ]
+
+
+def ladder_address(w, w0, bbound=40):
+    """The EXACT ladder address of direction `w` relative to anchor direction `w0`
+    about a common pivot: the (a, b), a ∈ 0..5, |b| ≤ bbound, with
+    `w ∥ ζ₆^a·σ^b·w0` as a positive-real multiple — i.e. the point sits at lattice
+    angle a·60° + b·θσ from the anchor, the address grid of the two-circle ladder
+    (`visualizations/two-circle-theorem.html` step 3, formalized).
+
+    Exactness: the imaginary part of `w·conj(ζ₆^a σ^b w₀)` must vanish IDENTICALLY
+    in the field (16-vector zero — no floats in the verdict); the positive-real half
+    is a float SIGN of a provably nonzero field element, guarded by a named refusal
+    at |re| < 1e-9 of the scale-free magnitude. Returns (a, b) or None (not in this
+    ladder's lattice within the bound — a different ladder, or deeper than bbound)."""
+    for b in range(-bbound, bbound + 1):
+        sb = cpow(CSEAM if b >= 0 else cconj(CSEAM), abs(b))
+        for a in range(6):
+            t = cmul(w, cconj(cmul(cmul(cpow(CZETA6, a), sb), w0)))
+            if any(t[1]):
+                continue
+            re = to_float(t[0])
+            mag = math.sqrt(abs(to_float(distsq((w[0], w[1]),
+                                                (const(0), const(0)))))) or 1.0
+            mag *= math.sqrt(abs(to_float(distsq((w0[0], w0[1]),
+                                                 (const(0), const(0)))))) or 1.0
+            if abs(re) < 1e-9 * mag * 6 ** abs(b) * 2 ** a:
+                raise SystemExit("ladder address sign test ambiguous — the "
+                                 "positive-real guard tripped; refusing a guess")
+            if re > 0:
+                return (a % 6, b)
+    return None
+
+
+def run_ladder(args):
+    """Ladder addresses of the canonical pair's ten shared points, about each pivot
+    (anchor = the partner pivot). The tangent computation of 2026-08-08, exact: eight
+    of the ten lie in the single natural ladder pair — the pivots at (0,0), the
+    outer∩outer points at (±1, 0), the seam images at (0, ±1) and (3, ∓2) — and the
+    inner∩inner pair at ±30° is in NO pivot ladder (refused at every |b| ≤ bound):
+    the pair's blind spot, which is exactly the M23 metapivot. `tube` is the parity
+    invariant (b + [inner]) mod 2 — M20's two-tubes fact in address form.
+
+    Closure-vertex mode (kill cores vs ladder cosets) is DEFERRED to M23: it is the
+    registered-prediction territory of the seam-alignment test, and the instrument
+    ships only after the prediction is registered (the M22 discipline)."""
+    P = frac_c({}, {})
+    Q = frac_c({B1: Fraction(1)}, {})
+    pivots = [("P", P), ("Q", Q)]
+    print("ladder addresses at the canonical pair (anchor: the partner pivot);")
+    print("address (a, b) = lattice angle a*60 + b*theta_sigma; '--' = not in the "
+          "pivot ladder (|b| <= %d)" % args.bbound)
+    print(f"{'point':6s} {'circles':14s} {'about P':>10s} {'tube':>5s} "
+          f"{'about Q':>10s} {'tube':>5s}")
+    for name, z in shared_points():
+        labels = on_circles(z, pivots)
+        rows = []
+        for piv, anchor in [(P, sub(Q[0], P[0])), (Q, sub(P[0], Q[0]))]:
+            w = (sub(z[0], piv[0]), sub(z[1], piv[1]))
+            if not any(w[0]) and not any(w[1]):
+                rows.append(("self", ""))
+                continue
+            w0 = (anchor, [0] * DIM) if piv is P else (anchor, [0] * DIM)
+            addr = ladder_address(w, w0, args.bbound)
+            if addr is None:
+                rows.append(("--", ""))
+            else:
+                a, b = addr
+                inner = any(lab.endswith("i") for lab in labels
+                            if lab.startswith("P" if piv is P else "Q"))
+                rows.append((f"({a},{b:+d})", str((b + (1 if inner else 0)) % 2)))
+        print(f"{name:6s} {'/'.join(labels) or 'pivot':14s} "
+              f"{rows[0][0]:>10s} {rows[0][1]:>5s} {rows[1][0]:>10s} {rows[1][1]:>5s}")
+
+
 # ------------------------------------------------------------------ self-test
 
 def self_test():
@@ -1688,6 +1788,29 @@ def self_test():
         assert _kills_solve(c1, classes) == "unsat", "core no longer kills"
     check("seeded-core determinism (A3 instrument)", core_determinism)
 
+    # 17. ladder addresses: the tangent's hand table, exact — and the blind spot
+    def ladder_addresses():
+        P = frac_c({}, {})
+        Q = frac_c({B1: Fraction(1)}, {})
+        w0P = (sub(Q[0], P[0]), [0] * DIM)
+        pts = dict((n, z) for n, z in shared_points())
+        def addrP(name):
+            z = pts[name]
+            return ladder_address((sub(z[0], P[0]), sub(z[1], P[1])), w0P)
+        assert addrP("oo+") == (1, 0), f"oo+ address {addrP('oo+')}, expected (1,0)"
+        assert addrP("oo-") == (5, 0), f"oo- address {addrP('oo-')}, expected (5,0)"
+        assert addrP("oi+") == (0, 1), f"oi+ address {addrP('oi+')}, expected (0,1)"
+        assert addrP("oi-") == (0, -1), f"oi- address {addrP('oi-')}, expected (0,-1)"
+        assert addrP("io+") == (3, -2), f"io+ address {addrP('io+')}, expected (3,-2)"
+        assert addrP("io-") == (3, 2), f"io- address {addrP('io-')}, expected (3,2)"
+        assert addrP("ii+") is None and addrP("ii-") is None, \
+            "inner∩inner wrongly claimed by the pivot ladder — the blind spot vanished"
+        assert addrP("Q") == (0, 0), "anchor not at the origin address"
+        # planted composite: the direction ζ₆²σ³·anchor must be found at (2, 3)
+        w = cmul(cmul(cpow(CZETA6, 2), cpow(CSEAM, 3)), w0P)
+        assert ladder_address(w, w0P) == (2, 3), "planted (2,3) direction missed"
+    check("ladder addresses (tangent table + planted + blind spot)", ladder_addresses)
+
     if failures:
         raise SystemExit(f"SELF-TEST FAILED: {len(failures)} control(s) red: "
                          f"{[n for n, _ in failures]}")
@@ -1714,6 +1837,8 @@ def main():
     ap.add_argument("--near", action="store_true")
     ap.add_argument("--partner", action="store_true")
     ap.add_argument("--kills", nargs=2, type=int, metavar=("A", "B"))
+    ap.add_argument("--ladder", action="store_true")
+    ap.add_argument("--bbound", type=int, default=40)
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     ap.add_argument("--samples", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=21)
@@ -1778,9 +1903,12 @@ def main():
     if args.kills:
         run_kills(args)
         ran = True
+    if args.ladder:
+        run_ladder(args)
+        ran = True
     if not ran:
         ap.error("nothing to do — try --self-test, --census, --phase, --joint, "
-                 "--pair, --mesh, --floor, --near, --partner, or --kills")
+                 "--pair, --mesh, --floor, --near, --partner, --kills, or --ladder")
 
 
 if __name__ == "__main__":
