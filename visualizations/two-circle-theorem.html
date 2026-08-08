@@ -463,6 +463,71 @@ footer p{max-width:64ch}
   web is where the measured ambient colour pressure lives.</p>
 </section>
 
+
+<section>
+  <p class="step"><span class="n">step 9</span> <span>the triangle and the metapivot</span></p>
+  <h2>Three pivots close the loop the pair could never close</h2>
+  <p>Put <em>three</em> pivots pairwise one unit apart — at 0, 1 and the hexagon corner ζ₆ —
+  and the picture stops being a pair of interfering broadcasts and becomes a closed circuit.
+  The triangle is <b>self-glued</b>: rotating one pivot 60° about another lands exactly on the
+  third, so each pivot IS one of the two crossing points of the other two outer circles. The
+  centre of the triangle sits at distance 1/√3 from all three pivots at once — the first
+  <b>triple glue point</b> — and it is itself the centre of a fourth two-circle system, the
+  <b>metapivot</b>, drawn dashed below.</p>
+  <div class="panel">
+    <div class="canvas"><svg id="triSvg" viewBox="-260 -300 780 560" role="img"
+      aria-label="The 8-circle triangle and metapivot object with its 34 glue points"></svg></div>
+    <div class="side">
+      <label class="ctl"><input id="triMeta" type="checkbox" checked> metapivot circles</label>
+      <label class="ctl"><input id="triGlue" type="checkbox" checked> all 34 glue points</label>
+      <label class="ctl"><input id="triTriple" type="checkbox" checked> the seven ≥3-circle points</label>
+      <p class="note">The whole 8-circle object crosses itself in only <b>34 points</b> (exact
+      census). Seven of them lie on three circles at once: the three pivots, the centroid, and
+      the three adjacent triangles' centroids. The metapivot's circles add <em>no new points</em>
+      except where its outer circle meets the pivots' outers — every other crossing lands on a
+      point the triangle already owns. All 34 live in the same number field the seam has used
+      since the strip theorem: nothing new is adjoined.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="canvas"><svg id="hexSvg" viewBox="-260 -300 780 560" role="img"
+      aria-label="The seam hexagon: a six-step loop of seam rotations about the three pivots that closes exactly"></svg></div>
+    <div class="side">
+      <label class="ctl">start ψ <input id="hexPsi" type="range" min="0" max="360" value="40"
+        step="0.5"><output id="hexPsiO">40°</output></label>
+      <label class="ctl"><input id="hexPerturb" type="checkbox"> perturb the last step</label>
+      <p class="note">The <b>seam hexagon</b>: rotate by the seam angle about pivot 0, back
+      about pivot 1, forward about ζ₆, back about 0, forward about 1, back about ζ₆ — and you
+      are exactly where you started, for <em>every</em> starting point. This is the shortest
+      closed word in the seam rotations, and every shortest one visits all three pivots: with
+      only two pivots no such loop exists at this length. Flip <span class="kbd">perturb</span>
+      and the loop misses — by the exact amount the kernel-checked negative control computes.</p>
+    </div>
+  </div>
+  <p>The loop identity itself turned out to be more general than the triangle: the alternating
+  six-step pattern closes for <em>any</em> rotation angle about <em>any</em> three points (a
+  kernel-checked theorem). What is special to the seam and the triangle is what the exact loop
+  census adds: at the seam this loop is <em>minimal</em>, its twelve shortest realisations all
+  use all three pivots, and a 60°-about-the-centroid rotation is <em>not</em> reachable from
+  pivot rotations at all — the metapivot genuinely extends the symmetry rather than repeating
+  it. The census also found the hexagon-lattice loops close earlier (at four steps) precisely
+  because the triangle's directions are hexagon-compatible — the algebraic form of the reason
+  three pivots were worth building.</p>
+  <p>Colour is the open question this object was built for: each pivot's colour is forbidden on
+  its entire outer circle, the metapivot's outer circle reaches all three pivots' inner circles
+  (the region their own pivots cannot touch), and the seam hexagon is the algebraic skeleton of
+  a constraint that travels A→B→C and returns. Whether that closed circuit can be made too
+  expensive for five colours somewhere finite is the hunt's next measurement.</p>
+  <p class="note">Status: the 34-point inventory and the loop census are exact tool-side
+  computations; the self-gluing cycle, the ten-point sharing count, the three no-new-points
+  couplings, the chord classifications, the hexagon identity and its non-closure control are
+  kernel-checked theorems (<span class="mono">Triangle.lean</span>). Data below is machine-
+  injected from <span class="mono">tools/couple.py --export-viz</span> — refresh with
+  <span class="mono">python3 tools/viz_refresh.py</span>.</p>
+</section>
+
+<script id="m23data" type="application/json">{"centres": [{"name": "0", "x": 0, "y": 0}, {"name": "1", "x": 1.0, "y": 0}, {"name": "2", "x": 0.5, "y": 0.8660254037844386}, {"name": "m", "x": 0.5, "y": 0.28867513459481287}], "radii": {"outer": 1.0, "inner": 0.5773502691896257}, "inventory": {"points": [{"x": 0.5, "y": 0.8660254037844386, "circles": ["0o", "1o", "mi"], "mult": 3}, {"x": 0.5, "y": -0.8660254037844386, "circles": ["0o", "1o"], "mult": 2}, {"x": 0.8333333333333334, "y": 0.5527707983925666, "circles": ["0o", "1i"], "mult": 2}, {"x": 0.8333333333333334, "y": -0.5527707983925666, "circles": ["0o", "1i"], "mult": 2}, {"x": -0.5, "y": 0.8660254037844386, "circles": ["0o", "2o"], "mult": 2}, {"x": 1.0, "y": 0, "circles": ["0o", "2o", "mi"], "mult": 3}, {"x": -0.062046887211502366, "y": 0.9980732356833155, "circles": ["0o", "2i"], "mult": 2}, {"x": 0.8953802205448358, "y": 0.44530243729074886, "circles": ["0o", "2i"], "mult": 2}, {"x": -0.22871355387816905, "y": 0.9734937648862564, "circles": ["0o", "mo"], "mult": 2}, {"x": 0.728713553878169, "y": -0.6848186302914435, "circles": ["0o", "mo"], "mult": 2}, {"x": 0.16666666666666666, "y": 0.5527707983925666, "circles": ["0i", "1o"], "mult": 2}, {"x": 0.16666666666666666, "y": -0.5527707983925666, "circles": ["0i", "1o"], "mult": 2}, {"x": 0.5, "y": 0.28867513459481287, "circles": ["0i", "1i", "2i"], "mult": 3}, {"x": 0.5, "y": -0.28867513459481287, "circles": ["0i", "1i", "mi"], "mult": 3}, {"x": -0.39538022054483574, "y": 0.42072296649368973, "circles": ["0i", "2o"], "mult": 2}, {"x": 0.5620468872115024, "y": -0.13204783189887687, "circles": ["0i", "2o"], "mult": 2}, {"x": 0, "y": 0.5773502691896257, "circles": ["0i", "2i", "mi"], "mult": 3}, {"x": -0.5, "y": 0.28867513459481287, "circles": ["0i", "mo"], "mult": 2}, {"x": 0, "y": -0.5773502691896257, "circles": ["0i", "mo"], "mult": 2}, {"x": 0, "y": 0, "circles": ["1o", "2o", "mi"], "mult": 3}, {"x": 1.5, "y": 0.8660254037844386, "circles": ["1o", "2o"], "mult": 2}, {"x": 0.10461977945516432, "y": 0.44530243729074886, "circles": ["1o", "2i"], "mult": 2}, {"x": 1.0620468872115025, "y": 0.9980732356833155, "circles": ["1o", "2i"], "mult": 2}, {"x": 0.27128644612183095, "y": -0.6848186302914435, "circles": ["1o", "mo"], "mult": 2}, {"x": 1.228713553878169, "y": 0.9734937648862564, "circles": ["1o", "mo"], "mult": 2}, {"x": 0.4379531127884976, "y": -0.13204783189887687, "circles": ["1i", "2o"], "mult": 2}, {"x": 1.3953802205448356, "y": 0.42072296649368973, "circles": ["1i", "2o"], "mult": 2}, {"x": 1.0, "y": 0.5773502691896257, "circles": ["1i", "2i", "mi"], "mult": 3}, {"x": 1.0, "y": -0.5773502691896257, "circles": ["1i", "mo"], "mult": 2}, {"x": 1.5, "y": 0.28867513459481287, "circles": ["1i", "mo"], "mult": 2}, {"x": 1.457427107756338, "y": 0.5773502691896257, "circles": ["2o", "mo"], "mult": 2}, {"x": -0.4574271077563381, "y": 0.5773502691896257, "circles": ["2o", "mo"], "mult": 2}, {"x": 1.0, "y": 1.1547005383792515, "circles": ["2i", "mo"], "mult": 2}, {"x": 0, "y": 1.1547005383792515, "circles": ["2i", "mo"], "mult": 2}], "status": "exact-tools (census A; the three no-new-points couplings are kernel-checked: Triangle.outer_inter_metaInner / inner_inter_metaOuter / inner_inter_metaInner)"}, "loops": {"hex_minimal": 4, "hex_examples": ["R0,R1',R2',R1", "R0,R2,R0',R1'", "R0,R2,R1',R2'", "R0,R2',R0',R1"], "seam_minimal": 6, "seam_examples": ["S0,S1',S2,S0',S1,S2'", "S0,S2',S1,S0',S2,S1'", "S0',S1,S2',S0,S1',S2", "S0',S2,S1',S0,S2',S1"], "status": "exact-tools; seam-hexagon closure kernel-checked (Triangle.rot_hexagon/seam_hexagon)"}, "chords": {"oo": "matching-or-hub (kernel: Triangle.unit_chord_outer_outer)", "ii": "matching-or-Moebius x(3y-2)=y (kernel: Triangle.unit_chord_inner_inner)", "oi_io": "iterated gluing, sqrt-disc family (kernel: Glue.sphere_inter_sphere instances)"}}</script>
+
 <footer>
   <p>The statement and proof sketched here are formalised in Lean 4; the interactive pictures are
   drawn from the same three chord classifications and the same two tables
@@ -1118,4 +1183,92 @@ document.getElementById("pPsi").addEventListener("input",e=>{
     document.getElementById("pProbe").setAttribute("aria-pressed","true");}
   renderPair();});
 renderPair();
+
+/* ---------- step 9: the triangle + metapivot ---------- */
+(function(){
+  const D=JSON.parse(document.getElementById("m23data").textContent);
+  const S9=170;
+  const CX=[[0,0],[1,0],[0.5,Math.sqrt(3)/2],[0.5,Math.sqrt(3)/6]];
+  const XY=p=>[S9*p[0], -S9*p[1]];
+  function circle(svg,c,r,cls,dash){
+    el("circle",{cx:XY(c)[0],cy:XY(c)[1],r:S9*r,fill:"none",
+      stroke:cls,"stroke-width":1.2,
+      ...(dash?{"stroke-dasharray":"5 5"}:{})},svg);
+  }
+  const triSvg=document.getElementById("triSvg");
+  const hexSvg=document.getElementById("hexSvg");
+  if(!triSvg) return;
+  function drawTri(){
+    clear(triSvg);
+    const meta=document.getElementById("triMeta").checked;
+    const glue=document.getElementById("triGlue").checked;
+    const trip=document.getElementById("triTriple").checked;
+    for(let i=0;i<3;i++){
+      circle(triSvg,CX[i],1,GRAPH,false);
+      circle(triSvg,CX[i],RIN,GRAPH,false);
+    }
+    if(meta){
+      circle(triSvg,CX[3],1,"#7FBF6A",true);
+      circle(triSvg,CX[3],RIN,"#7FBF6A",true);
+    }
+    if(glue) for(const p of D.inventory.points){
+      if(!meta && p.circles.some(c=>c[0]==="m")
+         && !p.circles.some(c=>c[0]!=="m")) continue;
+      el("circle",{cx:S9*p.x,cy:-S9*p.y,r:2.5,fill:"#48A9BE"},triSvg);
+    }
+    if(trip) for(const p of D.inventory.points){
+      if(p.mult<3) continue;
+      el("circle",{cx:S9*p.x,cy:-S9*p.y,r:5,fill:"none",stroke:"#E0A340",
+        "stroke-width":2},triSvg);
+    }
+    for(let i=0;i<3;i++){
+      const [x,y]=XY(CX[i]);
+      el("circle",{cx:x,cy:y,r:3.5,fill:CHALK},triSvg);
+    }
+    const [mx,my]=XY(CX[3]);
+    el("circle",{cx:mx,cy:my,r:3.5,fill:"#7FBF6A"},triSvg);
+  }
+  function rotP(p,ang,z){
+    const dx=z[0]-p[0],dy=z[1]-p[1],c=Math.cos(ang),s=Math.sin(ang);
+    return [p[0]+c*dx-s*dy, p[1]+s*dx+c*dy];
+  }
+  function drawHex(){
+    clear(hexSvg);
+    const psi=+document.getElementById("hexPsi").value*D2R;
+    document.getElementById("hexPsiO").textContent=
+      document.getElementById("hexPsi").value+"°";
+    const pert=document.getElementById("hexPerturb").checked;
+    for(let i=0;i<3;i++) circle(hexSvg,CX[i],1,RULE,false);
+    const THR=TH;
+    let z=[Math.cos(psi),Math.sin(psi)];
+    const steps=[[0,THR],[1,-THR],[2,THR],[0,-THR],[1,THR],[2,pert?THR:-THR]];
+    const path=[z];
+    for(const [pi,a] of steps){ z=rotP(CX[pi],a,z); path.push(z); }
+    for(let i=0;i<path.length-1;i++){
+      const [x1,y1]=XY(path[i]), [x2,y2]=XY(path[i+1]);
+      el("line",{x1,y1,x2,y2,stroke:i===5?(pert?"#CE6C93":"#E0A340"):"#E0A340",
+        "stroke-width":1.6,"stroke-dasharray":i===5&&pert?"4 4":"none"},hexSvg);
+    }
+    path.forEach((p,i)=>{
+      const [x,y]=XY(p);
+      el("circle",{cx:x,cy:y,r:i===0?4:2.6,
+        fill:i===path.length-1?(pert?"#CE6C93":"#E0A340"):CHALK},hexSvg);
+    });
+    for(let i=0;i<3;i++){
+      const [x,y]=XY(CX[i]);
+      el("circle",{cx:x,cy:y,r:3.5,fill:GRAPH},hexSvg);
+    }
+    const closes=Math.hypot(path[6][0]-path[0][0],path[6][1]-path[0][1])<1e-9;
+    el("text",{x:-240,y:-270,fill:closes?"#7FBF6A":"#CE6C93",
+      "font-size":"13px"},hexSvg).textContent=
+      closes?"closes exactly — Triangle.seam_hexagon":
+             "misses — the kernel-checked negative control";
+  }
+  for(const id of ["triMeta","triGlue","triTriple"])
+    document.getElementById(id).addEventListener("input",drawTri);
+  for(const id of ["hexPsi","hexPerturb"])
+    document.getElementById(id).addEventListener("input",drawHex);
+  drawTri(); drawHex();
+})();
+
 </script>
