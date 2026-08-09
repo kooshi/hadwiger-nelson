@@ -804,6 +804,64 @@ private theorem kill_adjacent {C C₃ κ : ℤ} {X Y Z : ZMod 6} {m k p r s : �
   obtain ⟨W₂, hW₂⟩ := pow_dvd_of_not_dvd hC hd2
   exact adjacent_kill X Y hm (le_refl 2) hW₁ hW₂
 
+/-! ### §E.7 The parity separation
+
+Each family's cleared equation has four `√3`-exponents; in three of the four parity
+classes they split, isolating one trace against a rational constant, and in the fourth
+they agree and the equation stays in the ring. -/
+
+private theorem inRing_three_pow' (k : ℕ) : InRing ((3 : ℂ) ^ k) := by
+  rw [show ((3 : ℂ) ^ k) = (((3 ^ k : ℤ)) : ℂ) by push_cast; ring]
+  exact InRing.intCast _
+
+private theorem inRing_pow_trace' (e : ℕ) (t₁ t₂ : ℤ) (h : ℕ) :
+    InRing ((3 : ℂ) ^ e * hexTrace t₁ t₂ h) :=
+  (inRing_three_pow' e).mul (inRing_hexTrace t₁ t₂ h)
+
+private theorem inRing_kappa (κ : ℤ) (k : ℕ) : InRing ((κ : ℂ) * 3 ^ k) := by
+  rw [show ((κ : ℂ) * 3 ^ k) = (((κ * 3 ^ k : ℤ)) : ℂ) by push_cast; ring]
+  exact InRing.intCast _
+
+/-- A scaled `g`-trace equal to a rational integer forces height zero, and then reads
+off its value.  (At positive height the pin kills it: `gF` never vanishes.) -/
+private theorem g_rational {C : ℤ} (hC : C ≠ 0) {X : ZMod 6} {N : ℤ} {m : ℕ}
+    (h : hexTrace (C * gE X) (C * gF X) m = ((N : ℤ) : ℂ)) :
+    m = 0 ∧ C * (2 * gE X + gF X) = N := by
+  rcases Nat.eq_zero_or_pos m with rfl | hm
+  · refine ⟨rfl, ?_⟩
+    rw [hexTrace_zero_height] at h
+    have hv : 2 * (C * gE X) + C * gF X = N := by exact_mod_cast h
+    linarith
+  · exfalso
+    have hz := (hexTrace_pin hm h).1
+    have hgf : gF X = 0 := by
+      rcases mul_eq_zero.mp hz with h1 | h1
+      · exact absurd h1 hC
+      · exact h1
+    exact (by decide : ∀ z : ZMod 6, gF z ≠ 0) X hgf
+
+/-- A scaled unit trace equal to a rational integer forces `hexF = 0` and reads off the
+value; at height zero the value is `2·hexE + hexF`. -/
+private theorem u_rational {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) {Z : ZMod 6} {N : ℤ} {k : ℕ}
+    (h : hexTrace (C * hexE Z.val) (C * hexF Z.val) k = ((N : ℤ) : ℂ))
+    (hN : (3 : ℤ) ∣ N) : k = 0 ∧ C * (2 * hexE Z.val + hexF Z.val) = N := by
+  rcases Nat.eq_zero_or_pos k with rfl | hk
+  · refine ⟨rfl, ?_⟩
+    rw [hexTrace_zero_height] at h
+    have hv : 2 * (C * hexE Z.val) + C * hexF Z.val = N := by exact_mod_cast h
+    linarith
+  · exfalso
+    obtain ⟨hF, hval⟩ := hexTrace_pin hk h
+    obtain ⟨N', rfl⟩ := hN
+    have h3 : (3 : ℤ) ∣ C * hexE Z.val * (2 * (piCoeff k).1 + (piCoeff k).2) := ⟨N', hval⟩
+    have h3E := (Int.prime_three.dvd_mul.mp h3).resolve_right (not_three_dvd_pin k hk)
+    have hE : (3 : ℤ) ∣ hexE Z.val := (Int.prime_three.dvd_mul.mp h3E).resolve_left hC
+    have hF3 : (3 : ℤ) ∣ hexF Z.val := by
+      rcases mul_eq_zero.mp hF with h1 | h1
+      · exact absurd ⟨0, by omega⟩ hC
+      · exact h1 ▸ dvd_zero 3
+    exact hexE_hexF_not_both_dvd Z.val (ZMod.val_lt Z) ⟨hE, hF3⟩
+
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
 Master frame `(hexPivot 3, hexPivot 4) = (0, 2m−ζ₆)`; every web `(a, a+1)` is its
