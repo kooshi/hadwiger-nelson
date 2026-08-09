@@ -647,6 +647,10 @@ private theorem normSq_one_sub {v : ℂ} (hv : normSq v = 1) (t : ℝ) :
     normSq (1 - (t : ℂ) * v) = 1 + t ^ 2 - 2 * t * v.re := by
   simpa using normSq_sub_smul (u := 1) (v := v) (by simp) hv t
 
+private theorem sqrt3_mul_sqrt11 : Real.sqrt 3 * Real.sqrt 11 = Real.sqrt 33 := by
+  rw [← Real.sqrt_mul (by norm_num)]
+  norm_num
+
 private theorem sqrt3_mul_sqrt33 : Real.sqrt 3 * Real.sqrt 33 = 3 * Real.sqrt 11 := by
   rw [show (33 : ℝ) = 3 * 11 by norm_num, Real.sqrt_mul (by norm_num), ← mul_assoc, sq_sqrt3]
 
@@ -982,6 +986,136 @@ theorem sqrt3_pow_mul_word (a : ZMod 6) (b : ℕ) :
     ((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ) = zeta6 ^ (a.val : ℤ) * piC ^ b := by
   rw [word, zpow_natCast seam b, piC_eq_sqrt3_mul_seam, mul_pow]
   ring
+
+/-! ### The ring the cleared equation lives in
+
+`ℤ[ζ₆, π]` sits inside `ℚ(√−3, √−11)`, and `√3` does not: that is the whole content of
+the parity split. `InRing` names membership by coordinates in the basis
+`{1, ζ₆, π, ζ₆π}`, and `eq_zero_of_add_sqrt3_mul` is the separation. -/
+
+/-- Membership in `ℚ(ζ₆, π)`, by coordinates in the basis `{1, ζ₆, π, ζ₆·π}`. -/
+def InRing (z : ℂ) : Prop :=
+  ∃ q₁ q₂ q₃ q₄ : ℚ, z = (q₁ : ℂ) + (q₂ : ℂ) * zeta6 + (q₃ : ℂ) * piC
+    + (q₄ : ℂ) * (zeta6 * piC)
+
+theorem InRing.add {z w : ℂ} (hz : InRing z) (hw : InRing w) : InRing (z + w) := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
+  obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hw
+  exact ⟨a₁ + b₁, a₂ + b₂, a₃ + b₃, a₄ + b₄, by push_cast; ring⟩
+
+theorem InRing.neg {z : ℂ} (hz : InRing z) : InRing (-z) := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
+  exact ⟨-a₁, -a₂, -a₃, -a₄, by push_cast; ring⟩
+
+theorem InRing.ratCast (q : ℚ) : InRing (q : ℂ) := ⟨q, 0, 0, 0, by push_cast; ring⟩
+
+theorem InRing.intCast (n : ℤ) : InRing (n : ℂ) := ⟨(n : ℚ), 0, 0, 0, by push_cast; ring⟩
+
+theorem InRing.zeta6_mul {z : ℂ} (hz : InRing z) : InRing (zeta6 * z) := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
+  refine ⟨-a₂, a₁ + a₂, -a₄, a₃ + a₄, ?_⟩
+  push_cast
+  linear_combination ((a₂ : ℂ) + (a₄ : ℂ) * piC) * zeta6_minpoly
+
+theorem InRing.piC_mul {z : ℂ} (hz : InRing z) : InRing (piC * z) := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
+  refine ⟨-3 * a₃, -3 * a₄, a₁ + a₃, a₂ + a₄, ?_⟩
+  push_cast
+  linear_combination ((a₃ : ℂ) + (a₄ : ℂ) * zeta6) * piC_sq
+
+theorem InRing.zeta6_zpow (n : ℤ) : InRing (zeta6 ^ n) := by
+  have hnat : ∀ m : ℕ, InRing (zeta6 ^ m) := by
+    intro m
+    induction m with
+    | zero => simpa using InRing.intCast 1
+    | succ k ih =>
+      rw [pow_succ, mul_comm]
+      exact ih.zeta6_mul
+  have hz6 : zeta6 ^ (6 : ℕ) = 1 := zeta6_pow_six
+  obtain ⟨m, hm⟩ : ∃ m : ℕ, zeta6 ^ n = zeta6 ^ m := by
+    refine ⟨((n : ZMod 6)).val, ?_⟩
+    rw [← zpow_natCast, zeta6_zpow_val]
+  rw [hm]
+  exact hnat m
+
+theorem InRing.piC_pow (m : ℕ) : InRing (piC ^ m) := by
+  induction m with
+  | zero => simpa using InRing.intCast 1
+  | succ k ih =>
+    rw [pow_succ, mul_comm]
+    exact ih.piC_mul
+
+theorem InRing.ratSmul (q : ℚ) {w : ℂ} (hw : InRing w) : InRing ((q : ℂ) * w) := by
+  obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hw
+  exact ⟨q * b₁, q * b₂, q * b₃, q * b₄, by push_cast; ring⟩
+
+theorem InRing.mul {z w : ℂ} (hz : InRing z) (hw : InRing w) : InRing (z * w) := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
+  have h1 : InRing ((a₁ : ℂ) * w) := InRing.ratSmul a₁ hw
+  have h2 : InRing ((a₂ : ℂ) * zeta6 * w) := by
+    have := (InRing.ratSmul a₂ hw).zeta6_mul
+    rw [show zeta6 * ((a₂ : ℂ) * w) = (a₂ : ℂ) * zeta6 * w by ring] at this
+    exact this
+  have h3 : InRing ((a₃ : ℂ) * piC * w) := by
+    have := (InRing.ratSmul a₃ hw).piC_mul
+    rw [show piC * ((a₃ : ℂ) * w) = (a₃ : ℂ) * piC * w by ring] at this
+    exact this
+  have h4 : InRing ((a₄ : ℂ) * (zeta6 * piC) * w) := by
+    have := ((InRing.ratSmul a₄ hw).piC_mul).zeta6_mul
+    rw [show zeta6 * (piC * ((a₄ : ℂ) * w)) = (a₄ : ℂ) * (zeta6 * piC) * w by ring] at this
+    exact this
+  rw [show ((a₁ : ℂ) + (a₂ : ℂ) * zeta6 + (a₃ : ℂ) * piC + (a₄ : ℂ) * (zeta6 * piC)) * w
+      = (a₁ : ℂ) * w + (a₂ : ℂ) * zeta6 * w + (a₃ : ℂ) * piC * w
+        + (a₄ : ℂ) * (zeta6 * piC) * w by ring]
+  exact ((h1.add h2).add h3).add h4
+
+/-- **The separation.** `√3` does not lie in `ℚ(ζ₆, π)`, so a sum of a ring element and
+`√3` times a ring element vanishes only if both halves do. Every parity case of the
+completeness argument is one application of this. -/
+theorem eq_zero_of_add_sqrt3_mul {X Y : ℂ} (hX : InRing X) (hY : InRing Y)
+    (h : X + ((Real.sqrt 3 : ℝ) : ℂ) * Y = 0) : X = 0 ∧ Y = 0 := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hX
+  obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hY
+  -- the eight rational coordinates, read off `re` and `im`
+  have hre : ((a₁ + a₂ / 2 + a₃ / 2 + a₄ / 4 : ℚ) : ℝ)
+      + ((b₁ + b₂ / 2 + b₃ / 2 + b₄ / 4 : ℚ) : ℝ) * Real.sqrt 3
+      + ((-3 * b₄ / 4 : ℚ) : ℝ) * Real.sqrt 11
+      + ((-a₄ / 4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
+    have := congrArg Complex.re h
+    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im,
+      Complex.zero_re, zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+    push_cast
+    linear_combination this + ((a₄ : ℝ) / 4) * sqrt3_mul_sqrt11
+      + ((b₄ : ℝ) * Real.sqrt 11 / 4) * sq_sqrt3
+  have him : ((3 * b₂ / 2 + 3 * b₄ / 4 : ℚ) : ℝ)
+      + ((a₂ / 2 + a₄ / 4 : ℚ) : ℝ) * Real.sqrt 3
+      + ((a₃ / 2 + a₄ / 4 : ℚ) : ℝ) * Real.sqrt 11
+      + ((b₃ / 2 + b₄ / 4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
+    have := congrArg Complex.im h
+    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im,
+      Complex.zero_im, zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+    push_cast
+    linear_combination this - ((b₃ : ℝ) / 2 + (b₄ : ℝ) / 4) * sqrt3_mul_sqrt11
+      - ((b₂ : ℝ) / 2 + (b₄ : ℝ) / 4) * sq_sqrt3
+  obtain ⟨e1, e2, e3, e4⟩ := sqrt_indep hre
+  obtain ⟨f1, f2, f3, f4⟩ := sqrt_indep him
+  have hb4 : b₄ = 0 := by linarith
+  have ha4 : a₄ = 0 := by linarith
+  have hb2 : b₂ = 0 := by rw [hb4] at f1; linarith
+  have ha2 : a₂ = 0 := by rw [ha4] at f2; linarith
+  have ha3 : a₃ = 0 := by rw [ha4] at f3; linarith
+  have hb3 : b₃ = 0 := by rw [hb4] at f4; linarith
+  have ha1 : a₁ = 0 := by rw [ha2, ha3, ha4] at e1; linarith
+  have hb1 : b₁ = 0 := by rw [hb2, hb3, hb4] at e2; linarith
+  refine ⟨?_, ?_⟩
+  · rw [ha1, ha2, ha3, ha4]
+    push_cast
+    ring
+  · rw [hb1, hb2, hb3, hb4]
+    push_cast
+    ring
 
 /-! ### The two symmetries of the norm branch
 
