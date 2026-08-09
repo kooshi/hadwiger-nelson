@@ -209,3 +209,30 @@ the M23 loop census (seam relations need all three pivots); the matched-pair
 period-1 pattern (`build/m23-ladderpair-pattern.json`); M23 §0.2.1 finding
 (unit triangles never "far" — cover sets interlock through the shared glue
 points, so the pattern machinery must be overlap-aware from the start).
+
+## Modeling pass 1 — domain (2026-08-09, fresh invocation)
+
+Four changes, all applied to the skeleton (elaborates, 26 obligations):
+
+1. **Anchor-independence named once**: `outerPt_hexRot`/`innerPt_hexRot` — rotating
+   the anchor partner by a hex power re-addresses the ladder (`a ↦ a + k`),
+   quantified over the rotation. The pivot-pair re-addressing, the M24-subset
+   inclusion (which needs the `a+3` instance: M24's q-side ladder points back
+   along `−1`), and the web transports are all instances — the "N statements
+   modulo naming" smell collapsed into one lemma.
+2. **All-web completeness with multiplicity**: the four per-family theorems now
+   quantify over the pivot `j : Fin 3` with membership shifted by
+   `webShift j = 2j` — the census-verified isomorphy as one statement per
+   family instead of three copies; the master web is the `j = 0` instance.
+3. **Coordinate tables in the house currency**: `z12Coords : ℕ → ℤ×ℤ×ℤ×ℤ`
+   (projection soup at every certificate) replaced by four `ℕ → ℤ` tables
+   `z12c0..z12c3` (the `hexE`/`hexF` pattern), and `zeta12_pow_coords` restated
+   over `ZMod 12` with no side hypothesis (the `.val` carries the bound).
+4. **`pivot : Fin 3 → ℂ` named**; the anchor list routes through it.
+
+Seam validation done during the pass: the colour table's consistency on fused
+points re-checked by hand at the worst point (pivot 1 = `P0o[0]` = `PZo[5]` =
+`Mi[5]`, all colour 1 — the probe's union-find had enforced it); the rotation
+`0 ↦ 1` about the metapivot computed exactly (`m + ζ₆²(0−m) = 1`). Deliberately
+NOT added: the trace-pair-over-`ZMod 12` object and the clearing identities —
+proof machinery, recorded for the obligation pass, not spec.

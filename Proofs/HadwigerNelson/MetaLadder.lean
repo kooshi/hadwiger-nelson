@@ -66,11 +66,15 @@ theorem meta_axis_dirs :
 
 /-! ## §L The four ladders — all M24 `outerPt`/`innerPt` families -/
 
-/-- The four anchor pairs: pivots at direction 1, the metapivot at direction ζ₁₂. -/
+/-- The three pivots of the triangle. -/
+noncomputable def pivot : Fin 3 → ℂ := ![0, 1, zeta6]
+
+/-- The four anchor pairs: each pivot with the direction-1 partner beside it, the
+metapivot with its own ζ₁₂-directed partner. -/
 noncomputable def anchor : Fin 4 → ℂ × ℂ
-  | 0 => (0, 1)
-  | 1 => (1, 2)
-  | 2 => (zeta6, zeta6 + 1)
+  | 0 => (pivot 0, pivot 0 + 1)
+  | 1 => (pivot 1, pivot 1 + 1)
+  | 2 => (pivot 2, pivot 2 + 1)
   | 3 => (metaPivot, metaAnchor)
 
 theorem anchor_dist (k : Fin 4) : dist (anchor k).1 (anchor k).2 = 1 := by sorry
@@ -109,58 +113,83 @@ def metaIOTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
 def metaIITable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
   [(0, -1, 5, 0), (0, 1, 5, 0), (1, -1, 1, 0), (1, 1, 1, 0)]
 
-/-- **oo completeness at the metaPivot axis**: exactly the four table chords — the θσ
-resistance leaves no infinite family, and the finite remainder is the table. -/
-theorem meta_oo_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
-    dist (outerPt 0 1 a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
-      (a, b, c, d) ∈ metaOOTable := by sorry
+/-- The web shift: pivot `j`'s web is the master web re-addressed by `2j` on both
+sides (the census-verified isomorphy under the 120° rotation about the metapivot). -/
+def webShift (j : Fin 3) : ZMod 6 := ((2 * j.val : ℕ) : ZMod 6)
 
-/-- **oi completeness at the metaPivot axis**: the hub pencil `(c,d) = (3,0)` or the table. -/
-theorem meta_oi_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
-    dist (outerPt 0 1 a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
-      ((c, d) = (3, 0) ∨ (a, b, c, d) ∈ metaOITable) := by sorry
+/-- **oo completeness at the metaPivot axis, all three webs**: exactly the four table
+chords per web — the θσ resistance leaves no infinite family. -/
+theorem meta_oo_complete (j : Fin 3) (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (outerPt (pivot j) (pivot j + 1) a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
+      (a - webShift j, b, c - webShift j, d) ∈ metaOOTable := by sorry
 
-/-- **io completeness at the metaPivot axis**: exactly the four table chords (the hub point
-`u = 1` is `ζ₁₂/√3`-directed — never a lattice word, M24's empty fibre). -/
-theorem meta_io_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
-    dist (innerPt 0 1 a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
-      (a, b, c, d) ∈ metaIOTable := by sorry
+/-- **oi completeness, all three webs**: the hub pencil — the meta-inner point AT pivot
+`j` — or the four hex-layer table chords. -/
+theorem meta_oi_complete (j : Fin 3) (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (outerPt (pivot j) (pivot j + 1) a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
+      ((c - webShift j, d) = (3, 0)
+        ∨ (a - webShift j, b, c - webShift j, d) ∈ metaOITable) := by sorry
 
-/-- **ii completeness at the metaPivot axis**: exactly the four table chords. -/
-theorem meta_ii_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
-    dist (innerPt 0 1 a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
-      (a, b, c, d) ∈ metaIITable := by sorry
+/-- **io completeness, all three webs**: exactly the four table chords per web (the io
+hub direction is `ζ₁₂/√3` — never a lattice word, M24's empty fibre). -/
+theorem meta_io_complete (j : Fin 3) (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (innerPt (pivot j) (pivot j + 1) a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
+      (a - webShift j, b, c - webShift j, d) ∈ metaIOTable := by sorry
 
-/-! ## §T Transport: the other two webs and the other two pivot pairs -/
+/-- **ii completeness, all three webs**: exactly the four table chords per web. -/
+theorem meta_ii_complete (j : Fin 3) (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (innerPt (pivot j) (pivot j + 1) a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
+      (a - webShift j, b, c - webShift j, d) ∈ metaIITable := by sorry
 
-/-- The 120° rotation about the metapivot permutes the pivots and shifts every ladder
-address by two: the (1,m) and (ζ₆,m) webs are re-indexings of the (0,m) web. -/
+/-! ## §T Transport: anchor-independence and the web rotation -/
+
+/-- **Anchor-independence, the general fact**: rotating the anchor partner by a hex
+power re-addresses the ladder — every pivot-pair re-addressing, the M24-subset
+inclusion, and the web transports are instances. -/
+theorem outerPt_hexRot (p q q' : ℂ) (k : ZMod 6) (a : ZMod 6) (b : ℤ)
+    (h : q' - p = zeta6 ^ (k.val : ℤ) * (q - p)) :
+    outerPt p q' a b = outerPt p q (a + k) b := by sorry
+
+theorem innerPt_hexRot (p q q' : ℂ) (k : ZMod 6) (a : ZMod 6) (b : ℤ)
+    (h : q' - p = zeta6 ^ (k.val : ℤ) * (q - p)) :
+    innerPt p q' a b = innerPt p q (a + k) b := by sorry
+
+/-- The 120° rotation about the metapivot carries the master web to pivot `1`'s web
+with the `+2` shift — the geometry behind the `webShift` re-indexing. -/
 theorem web_transport_rot (a : ZMod 6) (b : ℤ) :
-    (fun z => metaPivot + zeta6 ^ 2 * (z - metaPivot)) (outerPt 0 1 a b)
-      = outerPt 1 2 (a + 2) b := by sorry
+    metaPivot + zeta6 ^ 2 * (outerPt (pivot 0) (pivot 0 + 1) a b - metaPivot)
+      = outerPt (pivot 1) (pivot 1 + 1) (a + 2) b := by sorry
 
+/-- The same rotation fixes the metapivot's ladder up to the `+2` shift. -/
 theorem web_transport_rot_meta (a : ZMod 6) (b : ℤ) :
-    (fun z => metaPivot + zeta6 ^ 2 * (z - metaPivot)) (outerPt metaPivot metaAnchor a b)
+    metaPivot + zeta6 ^ 2 * (outerPt metaPivot metaAnchor a b - metaPivot)
       = outerPt metaPivot metaAnchor (a + 2) b := by sorry
-
-/-- The pivot pairs `(0,ζ₆)` and `(1,ζ₆)` carry M24's theorems under `a ↦ a ± 1`:
-re-addressing, no new arithmetic. -/
-theorem pivot_pair_readdress (a : ZMod 6) (b : ℤ) :
-    outerPt 0 1 a b = outerPt 0 zeta6 (a - 1) b := by sorry
 
 /-! ## §R The ζ₁₂ ring — the engine's replacement for the M24 separation -/
 
-/-- The integer coordinates of `ζ₁₂^n` in the basis `{1, ζ₁₂, ζ₁₂², ζ₁₂³}` (n < 12). -/
-def z12Coords : ℕ → ℤ × ℤ × ℤ × ℤ
-  | 0 => (1, 0, 0, 0) | 1 => (0, 1, 0, 0) | 2 => (0, 0, 1, 0) | 3 => (0, 0, 0, 1)
-  | 4 => (-1, 0, 1, 0) | 5 => (0, -1, 0, 1) | 6 => (-1, 0, 0, 0) | 7 => (0, -1, 0, 0)
-  | 8 => (0, 0, -1, 0) | 9 => (0, 0, 0, -1) | 10 => (1, 0, -1, 0) | 11 => (0, 1, 0, -1)
-  | _ => (0, 0, 0, 0)
+/-- The `1`-coordinate of `ζ₁₂^n` in the basis `{1, ζ₁₂, ζ₁₂², ζ₁₂³}` (n < 12) —
+the `hexE`/`hexF` pattern, four tables for four coordinates. -/
+def z12c0 : ℕ → ℤ
+  | 0 => 1 | 4 => -1 | 6 => -1 | 10 => 1 | _ => 0
 
-theorem zeta12_pow_coords (n : ℕ) (h : n < 12) :
-    zeta12 ^ n = ((z12Coords n).1 : ℂ) + ((z12Coords n).2.1 : ℂ) * zeta12
-      + ((z12Coords n).2.2.1 : ℂ) * zeta12 ^ 2
-      + ((z12Coords n).2.2.2 : ℂ) * zeta12 ^ 3 := by sorry
+/-- The `ζ₁₂`-coordinate. -/
+def z12c1 : ℕ → ℤ
+  | 1 => 1 | 5 => -1 | 7 => -1 | 11 => 1 | _ => 0
+
+/-- The `ζ₁₂²`-coordinate. -/
+def z12c2 : ℕ → ℤ
+  | 2 => 1 | 4 => 1 | 8 => -1 | 10 => -1 | _ => 0
+
+/-- The `ζ₁₂³`-coordinate. -/
+def z12c3 : ℕ → ℤ
+  | 3 => 1 | 5 => 1 | 9 => -1 | 11 => -1 | _ => 0
+
+/-- The unit tables, addressed by `ZMod 12` — no side condition, the `.val` carries
+the bound (M24's `zeta6_zpow_hex` shape). -/
+theorem zeta12_pow_coords (x : ZMod 12) :
+    zeta12 ^ (x.val : ℤ) = ((z12c0 x.val : ℤ) : ℂ) + ((z12c1 x.val : ℤ) : ℂ) * zeta12
+      + ((z12c2 x.val : ℤ) : ℂ) * zeta12 ^ 2
+      + ((z12c3 x.val : ℤ) : ℂ) * zeta12 ^ 3 := by sorry
 
 /-- Membership in `ℤ[ζ₁₂, π]` by the eight integer coordinates. -/
 def InRing12 (z : ℂ) : Prop :=
