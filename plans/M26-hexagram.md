@@ -405,6 +405,43 @@ mutation.  The five registered:
 5. delete the hub disjunct `(y = a ∧ d = 0)` from `hexMeta_oi_complete` →
    its derivation from M25's theorem breaks.
 
+### Experience-modeling pass (2026-08-09, fresh invocation) — the consumer surface
+
+Consumers walked: M27 (the tiled plane — the primary downstream), this
+milestone's own properness layer, the census-tool users.
+
+* **The MetaLadder promotion, resolved by need enumeration** (first
+  implementation step, one commit, cost = MetaLadder + `Proofs.lean`
+  re-elaboration only): promote `hexTrace_rows_const`, `adjacent_kill`,
+  `adjacent_mod9`, `g_pin_kill`, `u_pin_kill_dvd`, `u_pin_one`,
+  `g_zero_ne_kappa`, `gTr_zero`, `uTr_zero`, `bridge_gen` (with its normSq
+  helpers if the new bridges want them).  NOT promoted: `web_master`/
+  `web_master_eq`/`web_master_rev` (M25-frame-specific coefficient pattern —
+  M26 writes its own script-verified masters), `metaRot_inj` (superseded by
+  `rot6_inj`), the `outer1_swap`-family re-addressings (M26 derives its own
+  from the public `outerPt_hexRot`).
+* **Names**: `adj_`/`opp_` web prefixes KEPT — spelling out `adjacent_` would
+  collide in connotation with `adjacent_kill`, where "adjacent" means
+  HEIGHTS.  `tau` stays (namespaced, and the plan's own vocabulary).  The
+  module doc gains one address-convention line ("pivots indexed by meta-inner
+  address; the origin pivot is a = 3; classifications read at shift a − 3") —
+  the `a − 3` placement itself re-examined and kept: moving the constant into
+  the definition would desync every M25 citation (its hub lives at address 3)
+  and the self-seeding definition is the mathematical content.
+* **Visibility**: the iterated-transport lemmas PRIVATE (the per-step
+  transports are the API; the iteration rebuilds in five lines if M27 wants
+  it); the four uniform read lemmas (`hexColor_outer` etc.) PUBLIC — "the
+  decode returns the table on every family" is consumer-grade, and their
+  docstrings state the fusion-agreement guarantee.  Zero `@[simp]` tags,
+  house precedent.
+* **Census promotion sharpened — a cross-tool finding**: the 0°/360°
+  bin-wrap bug lives in the shared angle-bin core `tools/couple.py`'s
+  `--meta-census` was promoted FROM, so implementation must (1) patch the
+  existing tool path, (2) re-run its planted-disagreement self-test (check
+  10b), and only then (3) add `--hexagram-census` with planted chord AND
+  fusion disagreements, hub pencils reported as pencils plus expanded edge
+  counts (matching the Lean hub disjuncts).
+
 ## M25 carry-forward (recorded at the M25 close, 2026-08-09)
 
 What the M26 subplan can take as settled, and where the tooling lives:
