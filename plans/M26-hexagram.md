@@ -366,6 +366,53 @@ one master shape, one case tree, eight instances.
 * Cross-checks: the integer-row solver reproduces the exact-field ground truth
   for all 16 (family, κ) pairs over |b|,|d| ≤ 7, and finds nothing new out to 24.
 
+## Implementation status — 2026-08-09, IN PROGRESS (not closed)
+
+Reported at face value. `Proofs/HadwigerNelson/Hexagram.lean` is ~1,290 lines,
+elaborates clean (zero errors, zero warnings), **32 of the original 50
+obligations remain** — every one a statement from the skeleton, none a
+regression. Committed green at every step (`d71d22d` … `4ecb48e`).
+
+**Landed and proven (18 obligations closed plus the whole engine):**
+* **§0/§H the object** — `hexPivot a = m·(1 + ζ₆^a)` (the self-seeding identity
+  as arithmetic), all six pivot coordinates, `hexPivot_sub`, and all five
+  distance families from one lemma (`dist_hexPivot`).
+* **§T the transport spine** — `rot6`, isometry, injectivity, `rot6² = metaRot`,
+  the pivot 6-cycle, the four family transports at address `+1`, and the four
+  ITERATED transports (`rot6^[k]`) plus iterated isometry/injectivity, which are
+  what make every a-quantified wrapper one uniform proof instead of six cases.
+* **§E the engine, complete and generic**:
+  `hex_master` (the M26 master identity — verified first try), the four
+  radius-parameterized bridges (`bridge_adj`, `fusion_adj`, `bridge_opp`,
+  `fusion_opp` — 4 lemmas covering all 16 family/direction combinations),
+  `hex_cleared` (the uniform clearing), `hexTrace_intMul` (linearity), the
+  `+3` negation shift on the g-tables, the scaled coefficient facts, the three
+  bottom kills (`kill_alone_one`, `kill_alone_two`, `kill_phi`) on the integer
+  rows, the two tie kills (`kill_equal` — the equal-heights collapse;
+  `kill_adjacent` — M25's mod-9 refutation with the unit coefficient stripped
+  via `pow_dvd_of_not_dvd`), the rational-value readers (`g_rational`,
+  `u_rational`, `u_pin_two`), and **`live_tie`** — the live-class trichotomy
+  that collapses the alone/φ case bash to a single lemma for all eight families.
+* **`oo_shape`** — the first family classification, COMPLETE: all four parity
+  classes closed, parameterized over `C ∈ {1, 2}` so it serves BOTH the
+  adjacent and opposite oo families.
+
+**Remaining (the 32 obligations), in dependency order:**
+1. Three more shape lemmas on the `oo_shape` template — `ii_shape` (live parity
+   odd/odd, equal-height tie, final check `κ = W`), `oi_shape` and `io_shape`
+   (live parity mixed, ADJACENT-height tie closed by `kill_adjacent` for
+   `n ≥ 3` plus the `n = 1` boundary decide that carries the four sporadic
+   chords).
+2. The eight completeness theorems and eight fusion theorems at the master
+   frames, from the bridges plus the shape lemmas.
+3. The a-quantified wrappers (§A/§O/§W) via the iterated transports, the
+   `hexMeta_*` extensions of M25's `Fin 3` theorems to `ZMod 6`, `unit_oo`,
+   and `fourLadder_subset_hexagram`.
+4. The colouring layer (§C) — the equivariance decides, the four uniform read
+   lemmas, properness, and `chromaticNumber_hexagram`.
+5. Gate (build, axioms, lint, the five registered mutation audits), the census
+   promotion into `tools/couple.py` (with the wrap-bug fix), and the close.
+
 ### Obligation-modeling pass (2026-08-09, fresh invocation) — the proof spines
 
 **Partition.** Prove: everything below.  Test: the table/equivariance/properness
