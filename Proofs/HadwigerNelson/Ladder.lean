@@ -2124,13 +2124,450 @@ def oiTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
    (2, 2, 0, 1), (2, -2, 0, -1), (4, 2, 0, 1), (4, -2, 0, -1),
    (3, 2, 2, 1), (3, -2, 2, -1), (3, 2, 4, 1), (3, -2, 4, -1)]
 
+/-! ### The trace-pair machinery
+
+The oi equation is a sum of three conjugate pairs of words plus a constant. Each pair
+clears by `√3^{|height|}` into a **trace pair** `T(x,h) = ζ₆^x·π^h + ζ₆^{−x}·π̄^h` — one
+object regardless of the height's sign, whose four integer coordinates carry the whole
+analysis: modulo three the π-rows pin the hex address onto the real axis, and the
+`piCoeff` recurrence kills the surviving telescopes. -/
+
+/-- `T(x,h) = ζ₆^x·π^h + ζ₆^{−x}·π̄^h`. -/
+private noncomputable def tracePair (x : ZMod 6) (h : ℕ) : ℂ :=
+  zeta6 ^ (x.val : ℤ) * piC ^ h + zeta6 ^ ((-x).val : ℤ) * (1 - piC) ^ h
+
+private theorem tracePair_clear (x : ZMod 6) (h : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ h * (word x (h : ℤ) + word (-x) (-(h : ℤ)))
+      = tracePair x h := by
+  rw [mul_add, sqrt3_pow_mul_word, sqrt3_pow_mul_word_neg, tracePair]
+
+private theorem tracePair_coords (x : ZMod 6) (h : ℕ) :
+    tracePair x h
+      = ((hexE x.val : ℂ) * ((piCoeff h).1 : ℂ)
+            + (hexE (-x).val : ℂ) * (((piCoeff h).1 : ℂ) + ((piCoeff h).2 : ℂ)))
+        + ((hexF x.val : ℂ) * ((piCoeff h).1 : ℂ)
+            + (hexF (-x).val : ℂ) * (((piCoeff h).1 : ℂ) + ((piCoeff h).2 : ℂ))) * zeta6
+        + (((piCoeff h).2 : ℂ) * ((hexE x.val : ℂ) - (hexE (-x).val : ℂ))) * piC
+        + (((piCoeff h).2 : ℂ) * ((hexF x.val : ℂ) - (hexF (-x).val : ℂ)))
+          * (zeta6 * piC) := by
+  rw [tracePair, piC_pow_coeff, one_sub_piC_pow_coeff, zeta6_zpow_hex x, zeta6_zpow_hex (-x)]
+  ring
+
+private theorem inRing_tracePair (x : ZMod 6) (h : ℕ) : InRing (tracePair x h) :=
+  (inRing_elt x h).add (inRing_elt_neg (-x) h)
+
+private theorem tracePair_zero (h : ℕ) :
+    tracePair 0 h = ((2 * (piCoeff h).1 + (piCoeff h).2 : ℤ) : ℂ) := by
+  have h0 : (((0 : ZMod 6)).val : ℤ) = 0 := rfl
+  have hn0 : ((-(0 : ZMod 6)).val : ℤ) = 0 := rfl
+  rw [tracePair, h0, hn0]
+  simp only [zpow_zero, one_mul]
+  rw [piC_pow_coeff, one_sub_piC_pow_coeff]
+  push_cast
+  ring
+
+private theorem tracePair_zero_zero : tracePair 0 0 = 2 := by
+  rw [tracePair_zero, show piCoeff 0 = (1, 0) from rfl]
+  norm_num
+
+private theorem tracePair_zero_one : tracePair 0 1 = 1 := by
+  rw [tracePair_zero, show piCoeff 1 = (0, 1) from rfl]
+  norm_num
+
+/-- `ζ₆³ = −1` acts on trace pairs: shifting the address by three flips the sign. -/
+private theorem tracePair_add_three (x : ZMod 6) (h : ℕ) :
+    tracePair (x + 3) h = -tracePair x h := by
+  have hEF : ∀ y : ZMod 6,
+      hexE ((y + 3).val) = -hexE y.val ∧ hexF ((y + 3).val) = -hexF y.val := by decide
+  have key : ∀ y : ZMod 6, zeta6 ^ (((y + 3) : ZMod 6).val : ℤ) = -zeta6 ^ (y.val : ℤ) := by
+    intro y
+    obtain ⟨hE, hF⟩ := hEF y
+    rw [zeta6_zpow_hex (y + 3), zeta6_zpow_hex y, hE, hF]
+    push_cast
+    ring
+  have hneg : -(x + 3) = (-x) + 3 := by
+    rw [neg_add, show (-3 : ZMod 6) = 3 from by decide]
+  rw [tracePair, tracePair, key x, hneg, key (-x)]
+  ring
+
+private theorem tracePair_three_one : tracePair 3 1 = -1 := by
+  have h := tracePair_add_three 0 1
+  rw [zero_add] at h
+  rw [h, tracePair_zero_one]
+
+/-- The six hex units are distinct modulo three: matching coordinate congruences pin
+the address. -/
+private theorem hex_mod_inj : ∀ y z : ZMod 6,
+    (hexE y.val - hexE z.val) % 3 = 0 → (hexF y.val - hexF z.val) % 3 = 0 → y = z := by
+  decide
+
+/-- **The trace pin**: a trace pair equal to a rational integer forces the hex address
+onto the real axis (`x ∈ {0, 3}`), and the value is then `±(2·px + py)`. -/
+private theorem tracePair_pin {x : ZMod 6} {h : ℕ} {m : ℤ} (h1 : 1 ≤ h)
+    (heq : tracePair x h = (m : ℂ)) :
+    ((hexE x.val = 1 ∧ hexF x.val = 0) ∨ (hexE x.val = -1 ∧ hexF x.val = 0))
+      ∧ hexE x.val * (2 * (piCoeff h).1 + (piCoeff h).2) = m := by
+  have hco := tracePair_coords x h
+  rw [heq] at hco
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := hexE x.val * (piCoeff h).1
+      + hexE (-x).val * ((piCoeff h).1 + (piCoeff h).2) - m)
+    (n₂ := hexF x.val * (piCoeff h).1
+      + hexF (-x).val * ((piCoeff h).1 + (piCoeff h).2))
+    (n₃ := (piCoeff h).2 * (hexE x.val - hexE (-x).val))
+    (n₄ := (piCoeff h).2 * (hexF x.val - hexF (-x).val))
+    (by push_cast; linear_combination -hco)
+  have hZ1 : (piCoeff h).2 % 3 = 1 := by
+    obtain ⟨h', rfl⟩ : ∃ h', h = h' + 1 := ⟨h - 1, by omega⟩
+    exact piCoeff_snd_emod h'
+  have hZ0 : (piCoeff h).2 ≠ 0 := by omega
+  have hE : hexE x.val = hexE (-x).val := by
+    rcases mul_eq_zero.mp k₃ with h0 | h0
+    · exact absurd h0 hZ0
+    · omega
+  have hF : hexF x.val = hexF (-x).val := by
+    rcases mul_eq_zero.mp k₄ with h0 | h0
+    · exact absurd h0 hZ0
+    · omega
+  have hpin : ∀ y : ZMod 6, hexE y.val = hexE (-y).val → hexF y.val = hexF (-y).val →
+      (hexE y.val = 1 ∧ hexF y.val = 0) ∨ (hexE y.val = -1 ∧ hexF y.val = 0) := by decide
+  refine ⟨hpin x hE hF, ?_⟩
+  rw [← hE] at k₁
+  linear_combination k₁
+
+/-- **The telescope kill**: `T(x,h+1) − T(x,h)` is never `3^w` for `w ≥ 2` once `h ≥ 2` —
+the `piCoeff` recurrence turns the difference into `±3·(py(h−1) − 2·py(h))`, a number
+that is exactly one nonzero step away from divisibility by nine. -/
+private theorem tracePair_succ_kill {x : ZMod 6} {h w : ℕ} (hh : 2 ≤ h) (hw : 2 ≤ w)
+    (heq : tracePair x (h + 1) - tracePair x h = (3 : ℂ) ^ w) : False := by
+  obtain ⟨j, rfl⟩ : ∃ j, h = j + 2 := ⟨h - 2, by omega⟩
+  have hc1 := tracePair_coords x (j + 2 + 1)
+  have hc2 := tracePair_coords x (j + 2)
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := (hexE x.val * (piCoeff (j + 2 + 1)).1
+        + hexE (-x).val * ((piCoeff (j + 2 + 1)).1 + (piCoeff (j + 2 + 1)).2))
+      - (hexE x.val * (piCoeff (j + 2)).1
+        + hexE (-x).val * ((piCoeff (j + 2)).1 + (piCoeff (j + 2)).2)) - 3 ^ w)
+    (n₂ := (hexF x.val * (piCoeff (j + 2 + 1)).1
+        + hexF (-x).val * ((piCoeff (j + 2 + 1)).1 + (piCoeff (j + 2 + 1)).2))
+      - (hexF x.val * (piCoeff (j + 2)).1
+        + hexF (-x).val * ((piCoeff (j + 2)).1 + (piCoeff (j + 2)).2)))
+    (n₃ := (piCoeff (j + 2 + 1)).2 * (hexE x.val - hexE (-x).val)
+      - (piCoeff (j + 2)).2 * (hexE x.val - hexE (-x).val))
+    (n₄ := (piCoeff (j + 2 + 1)).2 * (hexF x.val - hexF (-x).val)
+      - (piCoeff (j + 2)).2 * (hexF x.val - hexF (-x).val))
+    (by push_cast; linear_combination heq - hc1 + hc2)
+  have hZs : (piCoeff (j + 2 + 1)).2 = (piCoeff (j + 2)).1 + (piCoeff (j + 2)).2 := rfl
+  have hPs1 : (piCoeff (j + 2 + 1)).1 = -3 * (piCoeff (j + 2)).2 := rfl
+  have hPs : (piCoeff (j + 2)).1 = -3 * (piCoeff (j + 1)).2 := rfl
+  have hZ2 : (piCoeff (j + 2)).2 % 3 = 1 := piCoeff_snd_emod (j + 1)
+  have hZ1 : (piCoeff (j + 1)).2 % 3 = 1 := piCoeff_snd_emod j
+  have hPne : (piCoeff (j + 2)).1 ≠ 0 := by
+    rw [hPs]
+    intro h0
+    omega
+  have hE : hexE x.val = hexE (-x).val := by
+    have hfac : (piCoeff (j + 2)).1 * (hexE x.val - hexE (-x).val) = 0 := by
+      linear_combination k₃ - (hexE x.val - hexE (-x).val) * hZs
+    rcases mul_eq_zero.mp hfac with h0 | h0
+    · exact absurd h0 hPne
+    · omega
+  have hF : hexF x.val = hexF (-x).val := by
+    have hfac : (piCoeff (j + 2)).1 * (hexF x.val - hexF (-x).val) = 0 := by
+      linear_combination k₄ - (hexF x.val - hexF (-x).val) * hZs
+    rcases mul_eq_zero.mp hfac with h0 | h0
+    · exact absurd h0 hPne
+    · omega
+  have hpin : ∀ y : ZMod 6, hexE y.val = hexE (-y).val → hexF y.val = hexF (-y).val →
+      hexE y.val = 1 ∨ hexE y.val = -1 := by decide
+  obtain ⟨v, hv⟩ : ∃ v : ℤ, (3 : ℤ) ^ w = 9 * v :=
+    ⟨3 ^ (w - 2), by rw [show (9 : ℤ) = 3 ^ 2 by norm_num, ← pow_add,
+      show 2 + (w - 2) = w by omega]⟩
+  rw [← hE] at k₁
+  rw [hZs, hPs1, hPs, hv] at k₁
+  rcases hpin x hE hF with hE1 | hE1 <;> rw [hE1] at k₁ <;> omega
+
+/-- The oi chord equation as a word identity: three conjugate pairs and a constant. -/
+private theorem oi_master {a c : ZMod 6} {b d : ℤ}
+    (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
+    (4 : ℂ) - 3 * (word a b + word (-a) (-b))
+        - ((Real.sqrt 3 : ℝ) : ℂ) * (word c d + word (-c) (-d))
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (word (a - c) (b - d) + word (c - a) (d - b)) = 0 := by
+  have hexp := Complex.mul_conj (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d)
+  rw [h] at hexp
+  rw [map_sub, map_mul, Complex.conj_ofReal, map_sub, map_one, word_conj, word_conj] at hexp
+  push_cast at hexp
+  have hu : word a b * word (-a) (-b) = 1 := by
+    rw [← word_conj]
+    exact word_mul_conj a b
+  have hw : word c d * word (-c) (-d) = 1 := by
+    rw [← word_conj]
+    exact word_mul_conj c d
+  have hX : word a b * word (-c) (-d) = word (a - c) (b - d) := by
+    rw [← word_conj]
+    exact word_mul_conj_word a c b d
+  have hY : word c d * word (-a) (-b) = word (c - a) (d - b) := by
+    rw [← word_conj]
+    exact word_mul_conj_word c a d b
+  linear_combination hexp - 3 * hu - hw - ((Real.sqrt 3 : ℝ) : ℂ) * hX
+    - ((Real.sqrt 3 : ℝ) : ℂ) * hY
+    - (1 - word a b - word (-a) (-b) + word a b * word (-a) (-b)) * sqrt3_cast_sq
+
+/-! ### The clearing per shape, and the parity kills
+
+Multiplying the master identity by `√3^(m+n+k)` — the three absolute heights — gives a
+four-term trace-pair equation whose `√3`-exponent parities depend only on the heights'
+parities. Three parity classes die on one separation component each; (outer even, inner
+odd) is the live class. -/
+
+private theorem oi_clear₁ {a c : ZMod 6} {m n k : ℕ} (hmk : (m : ℤ) - (n : ℤ) = (k : ℤ))
+    (hM : (4 : ℂ) - 3 * (word a (m : ℤ) + word (-a) (-(m : ℤ)))
+        - ((Real.sqrt 3 : ℝ) : ℂ) * (word c (n : ℤ) + word (-c) (-(n : ℤ)))
+        + ((Real.sqrt 3 : ℝ) : ℂ)
+          * (word (a - c) ((m : ℤ) - (n : ℤ)) + word (c - a) ((n : ℤ) - (m : ℤ))) = 0) :
+    4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair a m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair c n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair (a - c) k = 0 := by
+  have hdb : (n : ℤ) - (m : ℤ) = -(k : ℤ) := by omega
+  rw [hmk, hdb] at hM
+  have h1 := tracePair_clear a m
+  have h2 := tracePair_clear c n
+  have h3 := tracePair_clear (a - c) k
+  rw [neg_sub] at h3
+  linear_combination ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k) * hM
+    + 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * h1
+    + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * h2
+    - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * h3
+
+private theorem oi_clear₂ {a c : ZMod 6} {m n k : ℕ} (hmk : (n : ℤ) - (m : ℤ) = (k : ℤ))
+    (hM : (4 : ℂ) - 3 * (word a (m : ℤ) + word (-a) (-(m : ℤ)))
+        - ((Real.sqrt 3 : ℝ) : ℂ) * (word c (n : ℤ) + word (-c) (-(n : ℤ)))
+        + ((Real.sqrt 3 : ℝ) : ℂ)
+          * (word (a - c) ((m : ℤ) - (n : ℤ)) + word (c - a) ((n : ℤ) - (m : ℤ))) = 0) :
+    4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair a m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair c n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair (c - a) k = 0 := by
+  have hbd : (m : ℤ) - (n : ℤ) = -(k : ℤ) := by omega
+  rw [hbd, hmk] at hM
+  have h1 := tracePair_clear a m
+  have h2 := tracePair_clear c n
+  have h3 := tracePair_clear (c - a) k
+  rw [neg_sub] at h3
+  linear_combination ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k) * hM
+    + 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * h1
+    + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * h2
+    - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * h3
+
+private theorem oi_clear₃ {a c : ZMod 6} {m n k : ℕ} (hmk : (m : ℤ) + (n : ℤ) = (k : ℤ))
+    (hM : (4 : ℂ) - 3 * (word a (m : ℤ) + word (-a) (-(m : ℤ)))
+        - ((Real.sqrt 3 : ℝ) : ℂ) * (word c (-(n : ℤ)) + word (-c) (-(-(n : ℤ))))
+        + ((Real.sqrt 3 : ℝ) : ℂ)
+          * (word (a - c) ((m : ℤ) - -(n : ℤ))
+            + word (c - a) (-(n : ℤ) - (m : ℤ))) = 0) :
+    4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair a m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair (-c) n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair (a - c) k = 0 := by
+  rw [neg_neg, show (m : ℤ) - -(n : ℤ) = (k : ℤ) by omega,
+    show -(n : ℤ) - (m : ℤ) = -(k : ℤ) by omega] at hM
+  have h1 := tracePair_clear a m
+  have h2 := tracePair_clear (-c) n
+  rw [neg_neg] at h2
+  have h3 := tracePair_clear (a - c) k
+  rw [neg_sub] at h3
+  linear_combination ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k) * hM
+    + 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * h1
+    + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * h2
+    - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * h3
+
+private theorem inRing_four_mul (t : ℕ) : InRing ((4 : ℂ) * 3 ^ t) := by
+  rw [show ((4 : ℂ) * 3 ^ t) = (((4 * 3 ^ t : ℤ)) : ℂ) by push_cast; ring]
+  exact InRing.intCast _
+
+/-- The shared endgame: `±(2·px + py) = M` with `3 ∣ px`, `py ≡ 1` and `3 ∣ M` is
+impossible. -/
+private theorem trace_val_kill {E P Z M : ℤ} (hE : E = 1 ∨ E = -1) (hP : (3 : ℤ) ∣ P)
+    (hZ : Z % 3 = 1) (hM : M % 3 = 0) (hval : E * (2 * P + Z) = M) : False := by
+  obtain ⟨p, hp⟩ := hP
+  subst hp
+  rcases hE with h | h <;> subst h <;> omega
+
+/-- Both heights even: the rational separation component forces `3·T(x,m) = 4·3^{m/2}`,
+which the coordinates refuse modulo three (and exactly at `m = 2`). -/
+private theorem oi_kill_ee {x y z : ZMod 6} {m n k : ℕ}
+    (hm2 : m % 2 = 0) (hn2 : n % 2 = 0) (hk2 : k % 2 = 0)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair x m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair y n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair z k = 0) : False := by
+  obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := ⟨m / 2, by omega⟩
+  obtain ⟨ν, rfl⟩ : ∃ ν, n = 2 * ν := ⟨n / 2, by omega⟩
+  obtain ⟨κ, rfl⟩ : ∃ κ, k = 2 * κ := ⟨k / 2, by omega⟩
+  rw [show 2 * β + 2 * ν + 2 * κ = 2 * (β + ν + κ) by ring, sqrt3_pow_two_mul,
+    show 2 * ν + 2 * κ = 2 * (ν + κ) by ring, sqrt3_pow_two_mul,
+    show 2 * β + 2 * κ + 1 = 2 * (β + κ) + 1 by ring, pow_succ, sqrt3_pow_two_mul,
+    show 2 * β + 2 * ν + 1 = 2 * (β + ν) + 1 by ring, pow_succ, sqrt3_pow_two_mul] at hE
+  obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+    ((inRing_four_mul (β + ν + κ)).add
+      (((inRing_three_pow (ν + κ + 1)).mul (inRing_tracePair x (2 * β))).neg))
+    ((((inRing_three_pow (β + κ)).mul (inRing_tracePair y (2 * ν))).neg).add
+      ((inRing_three_pow (β + ν)).mul (inRing_tracePair z (2 * κ))))
+    (show ((4 : ℂ) * 3 ^ (β + ν + κ) + -((3 : ℂ) ^ (ν + κ + 1) * tracePair x (2 * β)))
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (-((3 : ℂ) ^ (β + κ) * tracePair y (2 * ν))
+          + (3 : ℂ) ^ (β + ν) * tracePair z (2 * κ)) = 0 by linear_combination hE)
+  rcases Nat.eq_zero_or_pos β with hβ0 | hβpos
+  · subst hβ0
+    have h3T : (3 : ℂ) * tracePair x (2 * 0) = 4 := by
+      refine mul_left_cancel₀ (pow_ne_zero (ν + κ) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+      linear_combination -hX
+    have hco := tracePair_coords x (2 * 0)
+    obtain ⟨k₁, -, -, -⟩ := inRing_coords_zero
+      (n₁ := 3 * (hexE x.val * (piCoeff (2 * 0)).1
+        + hexE (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2)) - 4)
+      (n₂ := 3 * (hexF x.val * (piCoeff (2 * 0)).1
+        + hexF (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2)))
+      (n₃ := 3 * ((piCoeff (2 * 0)).2 * (hexE x.val - hexE (-x).val)))
+      (n₄ := 3 * ((piCoeff (2 * 0)).2 * (hexF x.val - hexF (-x).val)))
+      (by push_cast; linear_combination h3T - 3 * hco)
+    omega
+  · obtain ⟨β', rfl⟩ : ∃ β', β = β' + 1 := ⟨β - 1, by omega⟩
+    have hT : tracePair x (2 * (β' + 1)) = ((4 * 3 ^ β' : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero (ν + κ + 1) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+      push_cast
+      linear_combination -hX
+    obtain ⟨hpin, hval⟩ := tracePair_pin (by omega) hT
+    rcases Nat.eq_zero_or_pos β' with hβ'0 | hβ'pos
+    · subst hβ'0
+      rw [show (2 * (0 + 1) : ℕ) = 2 by norm_num, show piCoeff 2 = (-3, 1) from rfl] at hval
+      simp only [pow_zero, mul_one] at hval
+      rcases hpin with ⟨hE1, -⟩ | ⟨hE1, -⟩ <;> rw [hE1] at hval <;> omega
+    · have hP3 : (3 : ℤ) ∣ (piCoeff (2 * (β' + 1))).1 := by
+        rw [show 2 * (β' + 1) = 2 * β' + 1 + 1 by ring]
+        exact three_dvd_piCoeff_fst _
+      have hZ3 : (piCoeff (2 * (β' + 1))).2 % 3 = 1 := by
+        rw [show 2 * (β' + 1) = 2 * β' + 1 + 1 by ring]
+        exact piCoeff_snd_emod _
+      have hM3 : (4 * 3 ^ β' : ℤ) % 3 = 0 := by
+        obtain ⟨u, hu⟩ : ∃ u : ℤ, (3 : ℤ) ^ β' = 3 * u := ⟨3 ^ (β' - 1), by
+          conv_lhs => rw [show β' = β' - 1 + 1 by omega]
+          rw [pow_succ]
+          ring⟩
+        omega
+      exact trace_val_kill (hpin.imp And.left And.left) hP3 hZ3 hM3 hval
+
+/-- Both heights odd: the rational separation component forces `T(y,n) = 4·3^{(n−1)/2}`,
+which the coordinates refuse. -/
+private theorem oi_kill_oo {x y z : ZMod 6} {m n k : ℕ}
+    (hm2 : m % 2 = 1) (hn2 : n % 2 = 1) (hk2 : k % 2 = 0)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair x m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair y n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair z k = 0) : False := by
+  obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β + 1 := ⟨m / 2, by omega⟩
+  obtain ⟨ν, rfl⟩ : ∃ ν, n = 2 * ν + 1 := ⟨n / 2, by omega⟩
+  obtain ⟨κ, rfl⟩ : ∃ κ, k = 2 * κ := ⟨k / 2, by omega⟩
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + (2 * ν + 1) + 2 * κ)
+      = 3 ^ (β + ν + κ + 1) by
+      rw [show 2 * β + 1 + (2 * ν + 1) + 2 * κ = 2 * (β + ν + κ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * ν + 1 + 2 * κ)
+      = 3 ^ (ν + κ) * ((Real.sqrt 3 : ℝ) : ℂ) by
+      rw [show 2 * ν + 1 + 2 * κ = 2 * (ν + κ) + 1 by ring, pow_succ, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + 2 * κ + 1) = 3 ^ (β + κ + 1) by
+      rw [show 2 * β + 1 + 2 * κ + 1 = 2 * (β + κ + 1) by ring, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + (2 * ν + 1) + 1)
+      = 3 ^ (β + ν + 1) * ((Real.sqrt 3 : ℝ) : ℂ) by
+      rw [show 2 * β + 1 + (2 * ν + 1) + 1 = 2 * (β + ν + 1) + 1 by ring, pow_succ,
+        sqrt3_pow_two_mul]] at hE
+  obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+    ((inRing_four_mul (β + ν + κ + 1)).add
+      (((inRing_three_pow (β + κ + 1)).mul (inRing_tracePair y (2 * ν + 1))).neg))
+    ((((inRing_three_pow (ν + κ + 1)).mul (inRing_tracePair x (2 * β + 1))).neg).add
+      ((inRing_three_pow (β + ν + 1)).mul (inRing_tracePair z (2 * κ))))
+    (show ((4 : ℂ) * 3 ^ (β + ν + κ + 1)
+          + -((3 : ℂ) ^ (β + κ + 1) * tracePair y (2 * ν + 1)))
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (-((3 : ℂ) ^ (ν + κ + 1) * tracePair x (2 * β + 1))
+          + (3 : ℂ) ^ (β + ν + 1) * tracePair z (2 * κ)) = 0 by linear_combination hE)
+  have hT : tracePair y (2 * ν + 1) = ((4 * 3 ^ ν : ℤ) : ℂ) := by
+    refine mul_left_cancel₀ (pow_ne_zero (β + κ + 1) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    push_cast
+    linear_combination -hX
+  obtain ⟨hpin, hval⟩ := tracePair_pin (by omega) hT
+  rcases Nat.eq_zero_or_pos ν with hν0 | hνpos
+  · subst hν0
+    rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num, show piCoeff 1 = (0, 1) from rfl] at hval
+    simp only [pow_zero, mul_one] at hval
+    rcases hpin with ⟨hE1, -⟩ | ⟨hE1, -⟩ <;> rw [hE1] at hval <;> omega
+  · have hP3 : (3 : ℤ) ∣ (piCoeff (2 * ν + 1)).1 := three_dvd_piCoeff_fst _
+    have hZ3 : (piCoeff (2 * ν + 1)).2 % 3 = 1 := piCoeff_snd_emod _
+    have hM3 : (4 * 3 ^ ν : ℤ) % 3 = 0 := by
+      obtain ⟨u, hu⟩ : ∃ u : ℤ, (3 : ℤ) ^ ν = 3 * u := ⟨3 ^ (ν - 1), by
+        conv_lhs => rw [show ν = ν - 1 + 1 by omega]
+        rw [pow_succ]
+        ring⟩
+      omega
+    exact trace_val_kill (hpin.imp And.left And.left) hP3 hZ3 hM3 hval
+
+/-- Outer odd, inner even: the rational separation component forces
+`T(z,k) = −4·3^{(k−1)/2}`, which the coordinates refuse. -/
+private theorem oi_kill_oe {x y z : ZMod 6} {m n k : ℕ}
+    (hm2 : m % 2 = 1) (hn2 : n % 2 = 0) (hk2 : k % 2 = 1)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + k)
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (n + k) * tracePair x m
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + k + 1) * tracePair y n
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (m + n + 1) * tracePair z k = 0) : False := by
+  obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β + 1 := ⟨m / 2, by omega⟩
+  obtain ⟨ν, rfl⟩ : ∃ ν, n = 2 * ν := ⟨n / 2, by omega⟩
+  obtain ⟨κ, rfl⟩ : ∃ κ, k = 2 * κ + 1 := ⟨k / 2, by omega⟩
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + 2 * ν + (2 * κ + 1))
+      = 3 ^ (β + ν + κ + 1) by
+      rw [show 2 * β + 1 + 2 * ν + (2 * κ + 1) = 2 * (β + ν + κ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * ν + (2 * κ + 1))
+      = 3 ^ (ν + κ) * ((Real.sqrt 3 : ℝ) : ℂ) by
+      rw [show 2 * ν + (2 * κ + 1) = 2 * (ν + κ) + 1 by ring, pow_succ, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + (2 * κ + 1) + 1)
+      = 3 ^ (β + κ + 1) * ((Real.sqrt 3 : ℝ) : ℂ) by
+      rw [show 2 * β + 1 + (2 * κ + 1) + 1 = 2 * (β + κ + 1) + 1 by ring, pow_succ,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1 + 2 * ν + 1) = 3 ^ (β + ν + 1) by
+      rw [show 2 * β + 1 + 2 * ν + 1 = 2 * (β + ν + 1) by ring, sqrt3_pow_two_mul]] at hE
+  obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+    ((inRing_four_mul (β + ν + κ + 1)).add
+      ((inRing_three_pow (β + ν + 1)).mul (inRing_tracePair z (2 * κ + 1))))
+    ((((inRing_three_pow (ν + κ + 1)).mul (inRing_tracePair x (2 * β + 1))).neg).add
+      (((inRing_three_pow (β + κ + 1)).mul (inRing_tracePair y (2 * ν))).neg))
+    (show ((4 : ℂ) * 3 ^ (β + ν + κ + 1)
+          + (3 : ℂ) ^ (β + ν + 1) * tracePair z (2 * κ + 1))
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (-((3 : ℂ) ^ (ν + κ + 1) * tracePair x (2 * β + 1))
+          + -((3 : ℂ) ^ (β + κ + 1) * tracePair y (2 * ν))) = 0 by linear_combination hE)
+  have hT : tracePair z (2 * κ + 1) = ((-(4 * 3 ^ κ) : ℤ) : ℂ) := by
+    refine mul_left_cancel₀ (pow_ne_zero (β + ν + 1) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    push_cast
+    linear_combination hX
+  obtain ⟨hpin, hval⟩ := tracePair_pin (by omega) hT
+  rcases Nat.eq_zero_or_pos κ with hκ0 | hκpos
+  · subst hκ0
+    rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num, show piCoeff 1 = (0, 1) from rfl] at hval
+    simp only [pow_zero, mul_one] at hval
+    rcases hpin with ⟨hE1, -⟩ | ⟨hE1, -⟩ <;> rw [hE1] at hval <;> omega
+  · have hP3 : (3 : ℤ) ∣ (piCoeff (2 * κ + 1)).1 := three_dvd_piCoeff_fst _
+    have hZ3 : (piCoeff (2 * κ + 1)).2 % 3 = 1 := piCoeff_snd_emod _
+    have hM3 : (-(4 * 3 ^ κ) : ℤ) % 3 = 0 := by
+      obtain ⟨u, hu⟩ : ∃ u : ℤ, (3 : ℤ) ^ κ = 3 * u := ⟨3 ^ (κ - 1), by
+        conv_lhs => rw [show κ = κ - 1 + 1 by omega]
+        rw [pow_succ]
+        ring⟩
+      omega
+    exact trace_val_kill (hpin.imp And.left And.left) hP3 hZ3 hM3 hval
+
 /-- **oi completeness**: every lattice solution of the outer–inner chord equation is in
 the table.
 
-NOT YET PROVEN. Its real form is `Re(u·conj w) − √3·Re u − Re w + 2√3/3 = 0` and its
-parity signature is `b` even, `d` odd (both measured exactly); the machinery above —
-the clearing identity, the separation and the coordinate congruences — carries over
-family-for-family. See `plans/M24-completeness.md` § "The completeness core". -/
+NOT YET PROVEN — the trace-pair machinery above is in place; what remains is the
+per-shape clearing, the three parity kills, and the live-parity analysis. -/
 theorem oi_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
     (a, b, c, d) ∈ oiTable := by
