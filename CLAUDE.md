@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M23, 2026-08-08.**
+**Last updated: M24, 2026-08-09.**
 
 ### Where the problem stands
 
@@ -94,8 +94,20 @@ never "far" — their systems always interlock through the shared glue points, t
 ten-point theorem operating on the instrument). What survived everything:
 ambient kills are **gated by coupling strength** (0/3,200 draws at 22 cross
 chords; 12–15% at 40), and the constraint-flow skeleton the triangle uniquely
-owns is now exact mathematics awaiting its colour question (M24: the
-overlap-aware triple census, and the metapivot's broadcast reach).
+owns is now exact mathematics awaiting its colour question. M24 (re-planned on
+Kooshi's go into the completeness milestone, roadmap M24–M29) answered at the
+pair: the **matched ladder pair** — the countable ⟨ζ₆,σ⟩-lattice on both
+pivots' four circles, closed under every unit chord — has **chromatic number
+exactly 4, unconditionally**. Every chord family is now a theorem rather than
+a census window: outer–outer is matching-or-hub, inner–inner is matching plus
+exactly ten explicit solutions, outer–inner is exactly sixteen chords ever (no
+infinite family), the intra families are exactly the hex/rot3/seam steps, and
+the eight fusion points are pinned — so M23's conditional verdict is now
+closed, and the 5th colour provably needs MORE than the full two-pivot
+countable lattice. The engine is new and elementary — clearing by √3-powers
+into ℤ[ζ₆,π] (π = √3σ, π² = π − 3), separation on √3 ∉ ℚ(ζ₆,π), coordinate
+congruences mod 3, and a trace-pair telescope from the π-power recurrence; the
+registered π-adic valuation sketch was superseded by less machinery, not more.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -123,44 +135,52 @@ overlap-aware triple census, and the metapivot's broadcast reach).
 
 | 20 | **The pivot-triangle layer** (all kernel-checked): the triangle is self-glued — `hexStep` permutes the pivots cyclically, so outer∩outer of any two pivots = {the third pivot, its mirror}; the centroid is the (+)-branch ii glue of ALL THREE pairs; the metapivot couplings create no new points — outer(pᵢ)∩inner(m) = the other two pivots, inner(pᵢ)∩outer(m) = the two 120°-partners, inner(pᵢ)∩inner(m) = the two mirror centroids; **the ten-point sharing theorem** (two unit-separated systems share exactly {pivots} ∪ {eight glue points}, with `ncard = 10`); **the chord classifications** — outer–outer unit chords are RIGID (translate ∨ hub: the perfect matching is complete, for the full uncountable circles) and inner–inner chords are matching ∨ the rational Möbius graph x(3y−2) = y, so √disc field growth is localized to mixed-radius chords; the translation coupling; and the loop layer — the **rotation hexagon** (S₂⁻¹S₁S₀⁻¹S₂S₁⁻¹S₀ = id for ANY unit rotation about ANY three points — found generic at implementation) with the seam instance, the hex parallelogram (hex-specific, minimal at 4), and the zpow closure backbone. Census (exact, tools): 34-point inventory in the seam field, 7 triple points; seam relations minimal at 6, all 3-pivot, none 2-pivot; R_m unreachable from pivot words. | `Triangle.lean` + `tools/couple.py --loops/--export-viz` | M23 |
 | 21 | **The registered statistics, reported at face value** (tools-side): ambient kills are **coupling-strength gated** — 0 kills in 3,200 draws at four 22-chord fresh pairs vs 12–15% kill rate at every 40-chord fresh pair (all kills injection-verified); M22's seam-alignment reading **failed registered replication** (0/4 pairs; demoted per its pre-committed failure clause); the coset census under threshold (×0.83–1.51 vs registered ≥2×); the metapivot's cover floor stays 3 (registered null confirmed; higher unions read 4 for reasons the self-gluing theorems explain); and the triple census's registered population is **provably empty** — unit triangles are never "far", their cover sets always interlock through the shared ten points. | `tools/couple.py --replicate/--floor --systems` + `build/m23-*.json` | M23 |
+| 22 | **The matched ladder pair is exactly 4-chromatic, unconditionally** — the countable two-pivot ⟨ζ₆,σ⟩-lattice closed under ALL unit chords. Every chord family is a theorem: oo = matching ∨ hub (`oo_complete`); ii = matching ∨ ten table rows, via the parity split in ℤ[ζ₆,π] — mixed parity impossible, even collapses on the backbone, odd closes by mod-3 coordinate congruences, mixed SIGNS die through the collapse π^b·π̄^e = 3^e·π^{b−e} (`ii_norm_complete`); oi = **sixteen chords ever, no infinite family** — the trace pair T(x,h) = ζ₆^x π^h + ζ₆^{−x} π̄^h, uniform √3^(m+n+k) clearing, three parity kills, address pins feeding a telescope kill, three 36-pair boundary checks (`oi_complete`); intra = hex/rot3/seam exactly; eight fusions pinned; plus the 24-entry b-independent colouring proper on every family and the nine-point witness forcing 4 (`chromaticNumber_ladderPair`). First exact chromatic number of an infinite genuinely-coupled object; the first Frontier χ-equality with no census window and no conditional clause. Supporting cast now reusable: `sqrt_indep` (ℚ-independence of {1,√3,√11,√33}), the axis-general master identities, the Re = √3/2 fibre proven EMPTY (ζ₁₂ never lattice). | `Ladder.lean` (`chromaticNumber_ladderPair`, `ii_norm_complete`, `oi_complete`, `iiNormTable`/`oiTable`) | M24 |
 
 ### Paths forward, ranked
 
-1. **The colour question on the certified triangle** (M24): the geometry layer is
-   done (`Triangle.lean`); what remains is exactly the measurement M23's protocol
-   discoveries specified — an **overlap-aware triple census** (the far-style
-   encoding is provably inapplicable: pattern triples must be consistent on the
-   shared ten-point structure; register the encoding FIRST), run at the
-   strongest-coupled configurations the gating result now identifies (40-chord
-   class, 12–15% kill rates); plus the metapivot's broadcast reach (its outer
-   circle touches all three inner circles — the region the pivots cannot see).
-   The 26-circle recursion (3 phase moduli, spindle-tunable) stays behind it.
-2. **Colour closure at the gap distance, clamp-directed** — the exactness thread's
-   open question: does a 4-colour equality-transmitting gadget exist at
-   d = \|ζ₆σ⁹ − 1\| (exact in the field, chord ≈ 0.0176)? The clamp spec is now
-   the M22 relaxation census WITHOUT the demoted alignment sharpening: outer
-   constraints necessary in every kill, cores 4–8 pins median 6 — and the M23
-   gating result adds: build the gadget where coupling is strong. A negative is
-   reportable.
-3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
-   when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
-   before. M21's mesh scan killed the sector family for pairs, so any explicit pair
-   colouring is already a research object for this angle too.
-4. **General-radius two-circle theorem** — same method, any class radius; deferred
-   until a milestone needs it. (M22's `Glue.lean` paid the general-radius *geometry*;
-   the general-radius *colouring* theorem still waits for its consumer.)
-5. **Parked with reasons** (see M19 plan §4): fractional route (provably capped below 5),
-   measurable-≥6 (single-class density provably insufficient), axiom-sensitivity
-   (perspective without progress until another angle feeds it). The χ(pairSystem)
-   fork's two branches stay parked behind their gates (M21 subplan §2.4) — and M22
-   measured that closure DEPTH cannot move the fork (k = 4 SAT through two partner
-   generations), so the ≥ 5 branch now waits on structure (path 1), not iteration.
-   The branch re-validation (M23 §0.2.5) was registered but NOT run — the
-   `opus-larp` constructions were not reimplemented — so the branch's cell-graph
-   and density numbers remain unvalidated, unused, and their gates closed.
-   Write-ups and upstreaming: deferred per the standing policy above; the
-   two-circle/cap/priority literature pass is a publication-gate task (no named prior
-   found in a first search, M20 §2.6).
+*The construction ladder M24–M28 (roadmap stubbed in `plans/`, agreed 2026-08-08):
+grow the certified object — pair → triangle-of-ladders → hexagram → tiled plane →
+recursion — proving χ exact at each rung; the first rung where 4 colours FAIL is
+new mathematics of the first order, and every rung where they succeed is a new
+certified infinite 4-chromatic object and a sharper clamp on where the 5th colour
+cannot live.*
+
+1. **M25 — the four-ladder object** (`plans/M25-triangle-ladders.md`): the
+   ladders of the three pivots 0, 1, ζ₆ AND of the metapivot (its own ladder —
+   Kooshi, 2026-08-08), closed under all unit chords. M24's theorems apply
+   verbatim on the three unit axes; the genuinely new work is the 1/√3-axis
+   chord classification, whose geometry M24's §0.4 already measured exactly
+   (30°/60°/120° torsion + the same θσ resistance, ζ₁₂ anchor offsets, hub
+   factors). The ℤ[ζ₆,π] engine — clearing, separation, mod-3 rows, the
+   trace-pair telescope — is expected to carry with ζ₁₂-twists; where it
+   doesn't is exactly where new structure lives.
+2. **M26 — the hexagram (6+1 pivots)** behind it: the mirror centroids promoted
+   to pivots (already certified as glue points), seven ladders, all cross-webs.
+   Then **M27 — the tiled plane** (Kooshi's target statement: the whole plane's
+   hexagonal closure with all sporadic chords), gated on M24–M26 landing with
+   χ still 4; **M28 — the recursion** behind M27.
+3. **M29 — the uncountable pair** (flexible slot): χ(`Coupled.pairSystem`
+   proper, all uncountably many circle points) — the M21 fork. The hypothesis
+   χ = 4 ⟺ the countable ladder's χ = 4 now has its countable side EXACT, so
+   the compactness/transfer question is live whenever it earns its slot.
+4. **Colour closure at the gap distance, clamp-directed** — unchanged: does a
+   4-colour equality-transmitting gadget exist at d = \|ζ₆σ⁹ − 1\| (exact,
+   chord ≈ 0.0176)? Clamp spec: outer constraints necessary in every kill,
+   cores 4–8 pins median 6, build where coupling is strong (M23's gating). A
+   negative is reportable.
+5. **Parked with reasons**: the triangle's colour census (M23's path 1 —
+   overlap-aware triple census, metapivot broadcast reach) is superseded as a
+   *measurement* by the construction ladder, which proves rather than samples
+   the same objects; revive only if M25 stalls. The certified-6-colouring angle
+   stays the designated perspective shift when the thread goes flat (agreed
+   2026-08-03). General-radius two-circle colouring waits for its consumer.
+   Fractional route (capped below 5), measurable-≥6 (single-class density
+   insufficient), axiom-sensitivity: parked as before (M19 plan §4). The
+   `opus-larp` branch re-validation stays registered-but-not-run; its gates
+   stay closed. Write-ups and upstreaming: deferred per standing policy; the
+   two-circle/cap/ladder-pair priority literature pass is a publication-gate
+   task (no named prior found in a first search, M20 §2.6).
 
 ## Whose work this is
 

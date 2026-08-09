@@ -468,14 +468,54 @@ list tables, no Möbius `def` (the division-free equation is the normal
 form), the classical dite decode with the four decode lemmas as the honest
 well-definedness joints. 38 obligations after the pass; elaborates clean.
 
-## §3.5 Implementation record (2026-08-09) — **M24 IS NOT CLOSED**
+## §3.5 Implementation record (2026-08-09) — **M24 IS CLOSED**
 
-**37 of 40 obligations proven; the three completeness-core theorems are NOT
-landed.** Stated plainly: `ii_norm_bound`, `ii_norm_complete` and `oi_complete`
-remain `sorry`, so the headline `chromaticNumber_ladderPair = 4` is *not*
-proven — it is proven *from* those three. Nothing else in the module depends on
-anything unproven, and every other layer is kernel-checked on the standard
-axioms.
+**All obligations proven; zero `sorry` in `Ladder.lean`.** The three
+completeness-core theorems (`ii_norm_complete`, `ii_norm_bound`, `oi_complete`)
+that this record earlier reported NOT landed are now kernel-checked, so the
+headline `chromaticNumber_ladderPair = 4` is **unconditional** on the standard
+axioms. The closing pieces, in order:
+
+* **The mixed-sign ii heights** — the conjugate root `π̄ = 1 − π` carries
+  negative seam heights (`conj_piC`, `one_sub_piC_pow_coeff`,
+  `sqrt3_pow_mul_word_neg`, `normBranch_cleared_neg`); mixed parity dies on the
+  same modulus obstruction (`normBranch_parity_neg`); both-even mixed-sign
+  forces a word to square to 1 off the backbone (`normBranch_even_neg`); and
+  both-odd mixed-sign dies through the **collapse `π^b·π̄^e = 3^e·π^{b−e}`**
+  (from `π·π̄ = 3`), which concentrates the cleared words' product into one
+  π-power and lets a single coordinate row modulo three kill both the
+  equal-height and larger-height cases (`normBranch_odd_neg`). ~230 lines,
+  exactly the estimated shape.
+* **The ii assembly** — `normBranch_nat_complete` (six-disjunct classification
+  at non-negative heights from the five parity cases) plus the swap/conjugation
+  closure over sign quadrants: `ii_norm_complete` (all ten table rows),
+  `ii_norm_bound` read off it.
+* **The oi family** — the register-time risk item, closed by a new object: the
+  **trace pair** `T(x,h) = ζ₆^x·π^h + ζ₆^{−x}·π̄^h`, the cleared form of a
+  word-conjugate pair regardless of height sign. Machinery: coordinates,
+  `InRing`, the ζ₆³ flip `T(x+3,h) = −T(x,h)`, the **trace pin** (a trace pair
+  equal to a rational integer forces `x ∈ {0,3}` with value `±(2px+py)`), and
+  the **telescope kill** (`T(x,h+1) − T(x,h) = 3^w` impossible for `h, w ≥ 2`
+  via the `piCoeff` recurrence `py(h+1) = px(h) + py(h)`, `px(h+1) = −3py(h)`).
+  `oi_master` turns the chord equation into three conjugate pairs plus 4;
+  clearing by `√3^(m+n+k)` (m, n, k the three absolute heights — the sum of
+  clearing powers makes every exponent parity depend only on the two heights)
+  gives one four-term trace-pair equation per height-sign shape (`oi_clear₁/₂/₃`);
+  the three wrong parities die on one separation component each
+  (`oi_kill_ee/oo/oe`); and the live parity (outer even, inner odd) closes per
+  shape (`oi_shape₁/₂/₃`): above the boundary every case dies on a mod-3
+  coordinate row, an address pin feeding the telescope, or the collapse
+  `−2·3^t = 0`; at the three boundary points `(2,1)`, `(0,1)`, `(0,−1)` the
+  thirty-six hex pairs decide to exactly the sixteen `oiTable` rows.
+  `oi_nonneg` assembles the shapes; `oi_complete` closes under conjugation.
+* **One toolchain surprise**: `Decidable`-instance synthesis for a four-arrow
+  chain into a six-fold disjunction over these hex-table equations exceeds
+  `synthInstance.maxSize` (default) — raised locally to 1024 for exactly one
+  `decide`; heartbeats were never the issue.
+
+The earlier text of this section (the open-state record and the remaining-work
+derivation) is preserved below as written, for the honest history of the
+milestone; everything it lists as "left" is now done.
 
 ### What landed (all kernel-checked)
 
@@ -600,7 +640,10 @@ Left to do, precisely:
 | colour-table entry flipped (`colTab false false 0 : 0 → 1`) | RED, 6 errors ✓ |
 | ii bridge's matching branch perturbed (`c = a+3 → a+2`) | RED, 4 errors ✓ |
 | witness negative control (the nine points ARE 4-colourable) | **added permanently** as a spec example — the `decide` is discriminating ✓ |
-| the four audits that test the core (tables, bound, sporadic deletion) | NOT RUN — they test unproven statements |
+| the four audits that test the core (tables, bound, sporadic deletion) | NOT RUN at the open-state record — they tested then-unproven statements; run at close, below |
+| ii glue row `(0,1,3,3)` deleted from `iiNormTable` | RED — `ii_norm_complete`'s membership step and `ii_norm_bound`'s case split fail, culprits named ✓ |
+| shape-1 finite check weakened to 35 of 36 conclusions (the `(3,4)` pair dropped) | RED — `decide` refutes the weakened proposition: the dropped pair really is a solution ✓ |
+| oi sporadic row `(2,2,5,1)` deleted from `oiTable` | RED — `oi_complete`'s membership step and the colouring layer's `colors_ne_of_mem_oiTable` consumers fail ✓ |
 
 ### Instruments
 
