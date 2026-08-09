@@ -327,6 +327,45 @@ Two deltas applied:
 | The `sphere_inter_sphere` tangency degeneracy dropped from scope | proving the circle-level tangency statement | the lattice-level fusion is EMPTY (P2.4 verified), so the headline never consumes it | high |
 | Census standalone in `build/` at subplan; promotion at implementation | extend `tools/couple.py` now | M25 precedent: the subplan needed tables, not surface; promotion belongs with the gate's control discipline | high |
 
+### Implementation §I.0 — the verified design (2026-08-09, `build/m26-design2.py`,
+`m26-branch.py`, `m26-tree.py`, `m26-kill.py`; all exact, all green)
+
+The design came out **simpler and more uniform than the obligation pass assumed** —
+one master shape, one case tree, eight instances.
+
+* **The master, hand-derived and exactly verified.** With `3·hexPivot a = g·(1+ζ₆^a)`
+  (so `hexPivot a = m(1+ζ₆^a)`, the self-seeding identity as arithmetic), scaling the
+  difference by `√3·ζ₆/ζ₁₂` (adjacent) or `√3/ζ₁₂` (opposite) puts EVERY new-web
+  chord/fusion equation in the single shape
+  `normSq(α·g·u − β·g·v − γ) = R` with α, β, γ real, whose expansion is
+  `3α² + 3β² + γ² − αγ·gTr(u) + βγ·gTr(v) − 3αβ·uTr(u v̄)` — **one master lemma,
+  simpler than M25's** (M25 had one g-trace and one unit word; here both singles
+  are g-traces, and the cross term is the unit trace).  The opposite web's
+  address shift is `−1` (its `Tr(g·w̄)` form is `gTr` at the shifted address by
+  `g_shift`), the adjacent web's is `0`.  Constants exactly as registered.
+* **Parity: exactly one live class per family** (verified against ground truth).
+  The three dead classes each isolate ONE trace against a rational constant —
+  killed by `g_pin_kill`/`g_zero_ne_kappa` (g-traces), `u_pin_kill_dvd`/
+  `hex_zero_height_ne` (unit trace).  Live classes: oo (b,d both even), oi
+  (even, odd), io (odd, even), ii (both odd) — for both axes.
+* **The live class splits on the SIGN of (b, d)**, which fixes the height
+  bookkeeping: same sign ⟹ `K = |m−n|`, `t = min(m,n)`; opposite ⟹ `K = m+n`,
+  `t = 0`.  Four kills cover everything:
+  | branch | kill |
+  |---|---|
+  | opposite signs (unit trace at the 3-adic bottom) | **φ**: `phi_g_dvd` twice + `phi_dvd` ⟹ `3 ∣ hexE − hexF`, false |
+  | one g-trace strictly lowest | **alone**: `alone_dvd` ⟹ `3 ∣ gE ∧ 3 ∣ gF`, false |
+  | same sign, EQUAL heights (oo, ii) | **equal**: linearity + `gE(x+3) = −gE(x)` collapses the two g-traces to ONE at coefficients `(ΔE, ΔF)`; `hexTrace_pin` ⟹ `ΔF = 0` and `ΔE·(2P+Q) = N`; `3^v ∣ ΔE` with `|ΔE| ≤ 4` forces `ΔE = 0` for `v ≥ 2`, and then `κ = 3W` (oo) / `κ = W` (ii) fails on the height-0 unit table |
+  | same sign, ADJACENT heights (oi, io) | **adjacent**: M25's `adjacent_kill` verbatim, after the `+3` address shift that turns the difference into a sum (`e = (n+1)/2 ≥ 2` and `h = n ≥ 3`) |
+  The residual boundaries are exactly four per axis-family, at the minimal
+  heights (oo: h = 0, 2; ii: h = 1, 3; oi: n = 1; io: m = 1).
+* **The boundary decides reproduce ground truth EXACTLY under the realizability
+  relation** `y₃ = ±(x₁ − x₂)` (sign by `b`'s sign) — unconstrained they admit
+  10 spurious triples at adj-ii and 4 at opp-ii where the truth is 4 and 0.  The
+  M25 lesson, re-earned before Lean saw it.
+* Cross-checks: the integer-row solver reproduces the exact-field ground truth
+  for all 16 (family, κ) pairs over |b|,|d| ≤ 7, and finds nothing new out to 24.
+
 ### Obligation-modeling pass (2026-08-09, fresh invocation) — the proof spines
 
 **Partition.** Prove: everything below.  Test: the table/equivariance/properness
