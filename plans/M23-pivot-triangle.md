@@ -319,17 +319,35 @@ dihedral symmetry. The 26-circle recursion stays M24+ (§7).
   translate — and (§2b.7) a second is always the far pivot on oo; the √disc
   adjunction lives in oi/io only.
 
-### 3.2 The matched pair is 4-exact (tools-side, decided 2026-08-08)
+### 3.2 The matched pair is 4-exact — CLAIM CORRECTED (Kooshi, post-M23 close)
 
-χ of the FULL infinite matched ladder pair (both natural ladders + matching + 12
-sporadics + 6 fusions + both pivots with entire hub reach) = **4 exactly**:
-k = 3 UNSAT (contains M20's nine-point forcing, control fired); period-1 bulk
-colouring verified independent of the solver (P-outer [2,1,2,1,2,1], P-inner
-[3,3,1,2,0,0], Q-outer [3,1,3,1,3,1], Q-inner [1,3,2,2,0,0], pivots 3/2; saved
-`build/m23-ladderpair-pattern.json`); defect splice SAT with 144 pinned boundary
-vertices. Reading: the maximally-linked exact two-ladder core cannot force a 5th
-colour — the M21/M22 pressure lives in the foreign (mixed-radius, §2b.7) web or
-needs the third pivot.
+**As originally recorded this section overclaimed, and Kooshi caught it**: the
+χ = 4 verdict for the INFINITE object rested on the sporadic census being
+complete, and the census was verified only to |b| ≤ 10. The sound statement:
+χ = 4 exactly for the matched-pair graph **on the edge families listed and
+census-verified in the window** — k = 3 UNSAT (contains M20's nine-point
+forcing, control fired); period-1 bulk colouring verified independent of the
+solver (P-outer [2,1,2,1,2,1], P-inner [3,3,1,2,0,0], Q-outer [3,1,3,1,3,1],
+Q-inner [1,3,2,2,0,0], pivots 3/2; `build/m23-ladderpair-pattern.json`); defect
+splice SAT with 144 pinned boundary vertices. **The infinite claim is
+CONDITIONAL on census completeness**, whose status per family (post-M23
+analysis): intra-ladder and outer–outer are completeness THEOREMS
+(`unit_chord_outer_outer`; intra reduces to the zpow backbone — kernel-cheap,
+not yet written); inner–inner Möbius on the lattice reduces EXACTLY to the
+norm-form equation **(√3u − 1)(√3v − 1) = −2** over ⟨ζ₆, σ⟩ (derived and
+verified post-close — the completeness conjecture in its sharpest form); the
+mixed oi/io family reduces to √3(x−1)(x−v²) = v(3x²−4x+3) (harder, 3-term).
+Deep one-parameter census (exact verdicts, candidates by float, every hit
+field-verified; `build/m24-deepcensus.py`): NO new sporadics through
+**|b| ≤ 30** — every extra solution of either branch equation in that window
+has a fused endpoint (a glue point on both systems), i.e. is an already-listed
+glue-incident or intra edge re-derived from the other system's coordinates;
+planted-sporadic controls fired. A |b| ≤ 500 run was killed (Kooshi): the
+candidate net made it O(B²) in exact field ops, and M24's completeness PROOF
+supersedes any window.
+Reading (unchanged in direction, now honestly bounded): the maximally-linked
+two-ladder core shows no 5th-colour force at any verified depth; the pressure
+lives in the foreign (mixed-radius, §2b.7) web or needs the third pivot.
 
 ### 3.3 The broadcast framing (working metaphor)
 
