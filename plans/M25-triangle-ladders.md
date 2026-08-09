@@ -95,10 +95,86 @@ Registered predictions:
   object (the pivots 0, 1 ladders), so the nine-point witness embeds and the
   lower bound is an induced-subgraph monotonicity, one lemma.
 
-### §0 results
+### §0 results — recorded 2026-08-09 (`build/m25-derive.py`, `build/m25-census.py`,
+`build/m25-color.py`; all chord verdicts exact; census parallel over the 36
+family pairs per Kooshi's mid-run instruction)
 
-*(recorded after the §0 batch runs; the registrations above are committed
-first)*
+**E1 — all confirmed.** P1.1 exact (`m = ζ₁₂/√3`; axes `ζ₁₂, ζ₁₂⁵, ζ₁₂⁹`).
+P1.2: all four norm forms derive in the trace-pair genus (constant + three
+conjugate pairs); the oi instance factors with hub factor `(v + 1)` — the hub
+is `v = −1`, the meta-inner point AT the pivot (E4-M24's `(v−1)` was the same
+factor in the opposite frame sign); io factors with `(u − 1)` (the pivot-inner
+point at the metapivot); oo and ii irreducible. The ii form has NO constant
+term and no √3: pure trace pairs. P1.3, P1.4 confirmed at address level by the
+census (the three webs are exact `a ↦ a+2` shifts; pivot-pivot counts match
+M24's proven tables).
+
+**E2 — confirmed, with one registered miss that sharpens the engine.**
+P2.1 ✓ (`√3 = 2ζ₁₂ − ζ₁₂³`, minpoly `x⁴ − x² + 1`). P2.2 ✓ and now EXPLICIT:
+`√3 ∣ x` in `ℤ[ζ₁₂]` ⟺ **`c₂ ≡ c₀` and `c₃ ≡ c₁` (mod 3)** (index 9, det
+computed); (√3) prime, residue `𝔽₉`, `π(π−1) ≡ 0` mod (√3). P2.3 ✓ (degree 8,
+`= ℚ(i,√3,√11)`; `sqrt_indep` twice through re/im). **P2.4's second half is
+WRONG as registered**: the twelve units have only FOUR distinct 𝔽₉-signatures
+(`ζ₁₂ ↦ i`, period 4) — mod-√3 pins give the address mod 4 only. The full pin
+lives one level up: mod 3 (= mod (√3)²) all twelve coordinate vectors are
+pairwise distinct. The M25 pin ladder is therefore two-stage: mod √3 for
+coarse kills, mod 3 for address pins — exactly the P2.5 named risk, landing
+where predicted.
+
+**E3 — the measured structure is SIMPLER than registered.** Census exact at
+B = 30 and B = 60, growth-tested. Controls: the pivot–pivot families reproduce
+M24's PROVEN tables exactly (matching 726 + the 8 non-crossing ii rows; the 16
+oi rows verbatim; intra hex/rot3/seam counts). The new webs, per pivot–meta
+pair: **oo, io, ii are FINITE — four sporadic chords each, all at |b| ≤ 1**;
+**oi = the hub pencil** (every outer(p) point to the fused meta-inner point at
+the pivot, exact address `(3,0)` in the 0-web) **plus four hex-layer
+sporadics (b = 0 both sides)**. P3.2's finiteness-beyond-named-branches and
+oo-carries-nothing: ✓. P3.2's torsion-periodic branches for ii and io: **WRONG
+— those gluings' orbit points are off-lattice** (mirror centroids and the
+`ζ₁₂/√3`-directed io hub are never lattice words — M24's empty `Re = √3/2`
+fibre doing the work), so both families are finite outright. The measured
+tables (0-web): oo `{(0,0,5,±1), (1,0,1,±1)}`; oi sporadics
+`{(0,0,1,0), (1,0,5,0), (2,0,1,0), (5,0,5,0)}`; io
+`{(2,∓1... (2,-1,5,1), (2,1,5,-1), (5,-1,1,1), (5,1,1,-1)}`; ii
+`{(0,±1,5,0), (1,±1,1,0)}`. Artifact: `build/m25-census.json`.
+
+**E4 — both registrations confirmed; the fork does NOT fire.** Exact graph at
+B = 30: 2,928 labelled points, 2,907 after fusion-dedup, 9,048 exact unit
+edges. k = 3 UNSAT (control ✓, the M24 witness inside); **k = 4 SAT** ✓; and
+the **b-independent table EXISTS** (33 collapsed classes after fusion merges,
+90 collapsed edges, no self-loop) — recorded verbatim in the skeleton's
+`metaColTab`. The milestone stays a χ = 4 construction; the pre-committed
+5-forcing pivot is not taken.
+
+## §1 Scope (post-§0 shape)
+
+1. **The ζ₁₂ layer** (`MetaLadder.lean` §Z/§R): `zeta12`, `metaPivot`, the
+   ring facts, the eight-coordinate uniqueness, the √3-divisibility
+   congruence pair, the unit tables. The M24 engine's replacement parts.
+2. **The object** (§L): four anchor pairs — `(0,1)`, `(1,2)`, `(ζ₆,ζ₆+1)`,
+   `(m, m+ζ₁₂)` — every sub-ladder an M24 `outerPt`/`innerPt` family, so M24's
+   intra/fusion/injectivity theory applies verbatim; `fourLadder` the 8-set
+   union; M24's `ladderSet` a subset (the χ ≥ 4 transport).
+3. **The master web** (§W): the four completeness theorems at the (0,m) axis
+   with the census tables (hub pencil + 4+4+4+4 sporadics), by the two-stage
+   ζ₁₂-engine.
+4. **Transport** (§T): the 120°-rotation web transport (`a ↦ a+2`) and the
+   pivot-pair re-addressing (`a ↦ a±1`) — geometry-only lemmas.
+5. **The colouring** (§C): `metaColTab` (measured), properness over all
+   families, χ = 4 headline (`chromaticNumber_fourLadder`).
+
+Skeleton: `Proofs/HadwigerNelson/MetaLadder.lean`, 25 obligations, elaborates
+clean with `sorry` at every leaf. NOT yet imported by `Proofs.lean` (added at
+implementation).
+
+### Already settled at subplan (four-part rows)
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| Sub-ladders as M24 `outerPt`/`innerPt` at four anchor pairs | fresh point defs with a ζ₁₂-direction parameter | the whole M24 intra/fusion theory transfers with zero new statements; the ζ₁₂ enters once, in `metaAnchor` | high |
+| One master web + rotation transport | three webs proven independently | census confirms exact `a ↦ a+2` isomorphy; transport is one geometry lemma vs ~3× the core analysis | high |
+| Census standalone in `build/` at subplan; promotion into `tools/couple.py` with planted-control self-test at implementation | extend `tools/couple.py` now | the subplan needed tables, not surface; the tool change deserves the control discipline as part of the gate | medium — if implementation finds the standalone and tool censuses disagree, the tool wins and the tables re-derive |
+| The colour table from the collapsed-probe solution as a literal | re-search in Lean | measured object, kernel re-verifies properness anyway (M24 pattern) | high |
 
 ## Scope
 
