@@ -166,34 +166,143 @@ Hand-derived at subplan opening; the instruments confirm or kill each line.
 | D6 | `build/m26-color.py` | P4.1 probe (symmetric-first), P4.2 controls (k=3 UNSAT, injection-verified if the fork fires) |
 | D7 | `build/m26-loops.py` (or `couple.py --loops` if it parameterizes) | P3.3 length-4 witness + new minimum |
 
-### §0 results — PENDING (recorded after the instruments run; nothing above
-this line changes once committed)
+### §0 results — recorded 2026-08-09 (`build/m26-design.py --self-test`,
+`build/m26-census.py --self-test`, `build/m26-color.py`, `build/m26-loops.py`;
+all verdicts exact; every instrument carries a planted-failure self-test)
 
-## §1 Scope (post-§0 shape) — PENDING instruments
+**E1 — geometry all confirmed; the master-form registration had one
+orientation slip, caught by the instrument.** P1.1 exact (the meta-inner hex
+layer IS the pivot hexagon, addresses as registered). P1.2 exact (rot6 cycles
+pivots at address +1, `rot6² = metaRot`, ladders transport with shift +1).
+P1.3 exact (four orbits: 6 unit / 6 adjacent / 6 meta at 1/√3 / 3 opposite).
+P1.4: the four ADJACENT masters verified exactly as registered; the four
+OPPOSITE masters as registered FAILED — the opposite separation `2m = (2/3)g`
+is unconjugated (the adjacent `m̄ = ḡ/3` is what makes `Tr(g·w)` come out
+right), so the opposite singles are **`Tr(g·w̄)` — g-traces at the reflected
+address** (M25's `gTrace_clear_neg` currency). With that correction all eight
+identities verify exactly, constants exactly as registered (κ-echo confirmed:
+adjacent {4,7}/{2√3,5√3}/{0,3√3}; opposite {7,10}/{5√3,8√3}/{3√3,6√3}).
+P1.5 confirmed: no matching branch, no hub pencil, no growth in the
+8 < |b| ≤ 12 shell.
 
-Preliminary, refined after D1–D7:
+**E3 — the ground truth is SPARSER than every prior: sixteen new chords
+total.** Per-family (frame (0,q₂) adjacent, (0,q₀) opposite):
+* adj oo: **EMPTY**. adj oi: `{(2,±2,4,±1), (3,±2,1,±1)}`. adj io:
+  `{(1,±1,5,±2), (4,±1,0,±2)}`. adj ii: `{(0,±1,2,±1), (5,±1,3,±1)}`.
+* opp oo: `{(3,±2,1,±2), (4,±2,0,±2)}`. opp oi, io, ii: **EMPTY**.
+* All eight fusion families EMPTY (P3.2 ✓ — the tangency at m is invisible,
+  P2.4 ✓: m is never a lattice point of any of the 14 families).
+* **P2.3 REFUTED at face value**: the sporadics live at |b| ≤ 2, not ≤ 1
+  (six of the eight nonempty rows have a height-2 side).
+* Parity signatures: adj oi (b,d) ≡ (0,1), io (1,0), ii (1,1), opp oo (0,0)
+  mod 2 — one live parity class per family, as the clearing predicts.
+
+**E3 census (B = 30, growth-checked by C2).** 5,124 labelled points, 5,082
+distinct, 21,546 labelled chords with hub pencils expanded, 16,698 edges on
+distinct points. Controls: the M25 8-family restriction reproduces its
+points exactly; **the rot6 relabelling is verified to be an automorphism of
+the ENTIRE exact edge set and of the fusion partition** — the transport
+claim at census scale in one check. The fusion inventory is EXACTLY P3.2's
+registration: six triple points (each pivot = its meta-inner address ∩ the
+outer ladders of its two second-neighbours), the M24 pair-fusion pattern on
+every unit pair (2 oi + 2 io + 1 oo beyond the triples), nothing else — and
+**nine hub pencils** (the three T₁ unit hubs, the three T₂ unit hubs
+transported, and the three NEW meta-inner→T₂-outer hubs `Mi(0,0)=q₀` etc.).
+Two instrument bugs found and fixed by the controls, recorded honestly:
+(1) the M25-inherited census finder had a **0°/360° bin-wrap bug** — a
+candidate at exactly 0° from the second centre could round to bin 3600000
+and miss bin 0; M25's recorded 9,048-edge count was undercounted by 3 such
+seam chords (Lean theorems unaffected — the census was cross-check, not
+authority; the corrected hub-unexpanded restriction count is 9,051);
+(2) hub pencils were represented as markers and silently skipped by the
+edge builders (M25's colour probe inherited this too — benign there, since
+Lean's properness carried the hub disjunct explicitly). Both caught by the
+rot6-automorphism control refusing to pass — the check working exactly as
+designed.
+
+**E4 — the fork does not fire; the symmetric branch lands.** k = 3 UNSAT
+(control ✓), k = 4 SAT, b-collapsed classes: 84 → 54 after fusion merges,
+186 collapsed edges, no self-loop, free 4-table SAT. **The rot6-equivariant
+probe: SAT for exactly the eight 3-cycles of S₄** (all order-1/2 τ UNSAT).
+The extracted table at τ = (0→1→2→0, 3 fixed) re-verifies proper against
+the full labelled edge set independently of the solver (0 bad edges);
+recorded in `build/m26-color-equivariant.json` and destined for the
+skeleton's literal. Properness in Lean therefore runs on ORBIT
+REPRESENTATIVES + the equivariance decide, not on all 21 webs.
+
+**D7 — the length-4 prediction lands, corrected in orientation.** The
+registered witness word had the inverse pair swapped (its two translations
+add instead of cancel); the corrected witness
+`S₀ ∘ S₁⁻¹ ∘ S_{q₀} ∘ S_{q₁}⁻¹ = id` verifies exactly (edge-vector
+cancellation `(0−1) + (q₀−q₁) = 0`), length ≤ 3 is impossible (σ, σ², σ³ ≠ 1
+exact, mixed length-2 words are nonzero translations), and the hexagram owns
+**12 length-4 pure-seam relations** — one per pair of parallel pivot
+differences, a class that is empty at the triangle (M23 minimum 6, now 4).
+
+## §1 Scope (post-§0 shape)
 
 1. **The object** (`Proofs/HadwigerNelson/Hexagram.lean`, imports
-   `MetaLadder`): `hexAnchor : Fin 7 → ℂ × ℂ` — indices 0–3 = M25's four
-   anchors verbatim (so `fourLadder` is the restriction and the χ ≥ 4
-   subset lemma is one line), 4–6 = the T₂ pivots with direction-1 partners.
-   `hexagram : Set ℂ` the 14-family union.
-2. **Transport** (§T): `rot6`, its pivot 6-cycle, `rot6² = metaRot`, the
-   family transports with shift +1 — the M25 transport kit's square root.
-3. **The adjacent master web** (§A): four completeness + four (empty) fusion
-   theorems at (0, q₂), tables from D3.
-4. **The opposite master web** (§O): same at (0, q₀).
-5. **The extended quantifiers** (§U/§M): unit webs at all six pairs, meta
-   webs at `j : Fin 6` — transports of M24/M25 masters.
-6. **The colouring** (§C): the table from D6 (symmetric if SAT), decode over
-   `Fin 7`, fusion agreement from P3.2, properness per orbit-representative
-   web, `chromaticNumber_hexagram`.
+   `MetaLadder`, namespace `Hexagram`): the self-seeding fact P1.1 is the
+   DEFINITION — `hexPivot (a : ZMod 6) : ℂ := innerPt metaPivot metaAnchor a 0`,
+   so the six pivots carry their rot6-cyclic addressing intrinsically
+   (a = 3 is pivot 0, a = 5 is pivot 1, a = 1 is ζ₆; even addresses are T₂).
+   Anchors are direction-1: `(hexPivot a, hexPivot a + 1)`. `hexagram : Set ℂ`
+   = the six pivot ladders (outer+inner) ∪ the M25 meta ladder. Value lemmas
+   pin the six coordinates; `fourLadder ⊆ hexagram` gives χ ≥ 4 by M25's
+   witness through subset monotonicity.
+2. **Transport** (§T): `rot6 z = m + ζ₆(z − m)`, the pivot 6-cycle
+   `rot6 (hexPivot a) = hexPivot (a+1)`, `rot6 ∘ rot6 = metaRot`
+   (tying into M25's kit), isometry + injectivity, and the four family
+   transports (pivot outer/inner, meta outer/inner) at address shift +1.
+3. **The adjacent master web** (§A, frame `(hexPivot 3, hexPivot 4)` =
+   (0, q₂), 3s = ḡ): oo EMPTY; oi/io/ii = the three 4-row tables (D3);
+   all four fusions EMPTY. Masters per P1.4 as corrected — singles
+   `Tr(g·w)`, cross `3·Tr(w₂w̄₁)` (√3-weighted per family).
+4. **The opposite master web** (§O, frame `(hexPivot 3, hexPivot 0)` =
+   (0, q₀), 3s = 2g): oo = the 4-row table; oi/io/ii EMPTY; all four
+   fusions EMPTY. Masters carry doubled g-coefficients at REFLECTED
+   addresses (`Tr(g·w̄)` — the §0 correction).
+5. **The webs, a-quantified** (§W): every completeness/fusion theorem stated
+   over `a : ZMod 6` and proven master + rot6-transport (M25's j-quantifier
+   pattern at period 6): pivot–meta (extends M25's `Fin 3` statements to all
+   six, hub pencil included; oi fusion = the two second-neighbour pivots
+   `hexPivot (a±2)`), unit pairs `(a, a+2)` (M24's pair theorems
+   re-addressed — M25's §C.1 kit), adjacent `(a, a+1)`, opposite `(a, a+3)`.
+6. **The colouring** (§C): `hexColTab` — the τ-equivariant literal from
+   `build/m26-color-equivariant.json` (τ = the 3-cycle fixing colour 3);
+   the equivariance decide `colTab(rot6-image) = τ(colTab)`; decode over the
+   14 families with fusion agreement (the six triple points + the unit-pair
+   octets + nine hub pencils); properness per ORBIT-REPRESENTATIVE web,
+   transported by equivariance; `chromaticNumber_hexagram = 4`.
+7. **Census promotion** (implementation gate, M25 discipline):
+   `tools/couple.py --hexagram-census` with planted chord AND fusion
+   disagreements in the self-test; the wrap-bug fix and hub expansion ported
+   to the promoted instrument (they live only in `build/m26-census.py` today).
 
-MetaLadder's private engine (`web_master`/`web_master_rev`,
+MetaLadder's private engine (`web_master`/`web_master_eq`/`web_master_rev`,
 `hexTrace_rows_const`, `adjacent_kill`/`adjacent_mod9`, the pin-kill trio,
-`metaRot_inj`) gets **promoted to public** in `MetaLadder.lean` at the
-experience pass (the carry-forward's recommendation) — the cost is one
-re-elaboration of `MetaLadder` and `Proofs.lean`, no generated dependents.
+`metaRot_inj`, the re-addressing lemmas) gets **promoted to public** in
+`MetaLadder.lean` at the experience pass (the carry-forward's
+recommendation) — the cost is one re-elaboration of `MetaLadder` and
+`Proofs.lean`, no generated dependents.
+
+Skeleton: `Proofs/HadwigerNelson/Hexagram.lean`, 64 declarations, **48
+obligations** (`sorry` leaves), elaborates clean with zero errors; the spec
+examples (table reads, adjacency-table membership decides) pass at
+elaboration.  Three value facts already proven at skeleton time
+(`hexPivot_three` = M25's hub fact verbatim; the four membership intros).
+NOT yet imported by `Proofs.lean` (added at implementation).
+
+### Already settled at subplan (four-part rows)
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| Pivots indexed by the meta-inner address (`hexPivot : ZMod 6`, definition = the hex layer) | `Fin 7` anchor list extending M25's `Fin 4` verbatim | the rot6 transport becomes `a ↦ a+1` with no case split, and P1.1 turns from a theorem into a definition; M25-compat needs only three value lemmas | high |
+| Two new master webs + rot6 transport for all 21 | per-web proofs | the census automorphism check confirms exact transport; 2 masters vs 8 new webs of arithmetic | high |
+| τ-equivariant colour table (3-cycle), properness on orbit reps | free table + full 21-web case bash | equivariant SAT verified + table re-verified proper on the full exact edge set; cuts the properness decides ~6× | high |
+| Opposite-web masters in `Tr(g·w̄)` (reflected-address) currency | conjugating the OBJECT's addresses to make them `Tr(g·w)` | the reflected form is what the instrument verified and `gTrace_clear_neg` already speaks it | high |
+| The `sphere_inter_sphere` tangency degeneracy dropped from scope | proving the circle-level tangency statement | the lattice-level fusion is EMPTY (P2.4 verified), so the headline never consumes it | high |
+| Census standalone in `build/` at subplan; promotion at implementation | extend `tools/couple.py` now | M25 precedent: the subplan needed tables, not surface; promotion belongs with the gate's control discipline | high |
 
 ## M25 carry-forward (recorded at the M25 close, 2026-08-09)
 
