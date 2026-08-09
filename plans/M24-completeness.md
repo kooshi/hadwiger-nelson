@@ -349,6 +349,83 @@ does the 4×4 case split inline, citing §D–§F per case); the axis-1/√3 Lea
 instances (M25 — the derivations are §0.4's exact record); ladder/tube
 decomposition machinery (the full-lattice object needs none).
 
+**Obligation pass (2026-08-08).** The proof map — three shared engines carry
+the module:
+
+* **`sqrt_indep`** (new foundational child, Ladder-private): ∀ e₁ e₃ e₁₁ e₃₃ : ℚ,
+  e₁ + e₃√3 + e₁₁√11 + e₃₃√33 = 0 → all four vanish. Elementary descent
+  (√11 ∉ ℚ(√3), ~80 lines, children: two irrationality facts). Applied to Re
+  and Im parts it turns any cleared ℂ-equation into rational coordinate
+  equations — the whole completeness core stands on it, and M25–M27 reuse it.
+* **The π-sequence layer**: `piC : ℂ = (1+i√11)/2` with `piC_sq : π² = π − 3`
+  and `√3·seam = π`; integer sequences `px py : ℕ → ℤ`
+  (`px (n+1) = −3·py n`, `py (n+1) = px n + py n`) with the bridge
+  `π^n = px n + py n·π` (one induction) and congruences `3 ∣ px (n+1)`
+  (definitional), `py n ≡ 1 [3]` for n ≥ 1 (induction + omega),
+  `px n ≡ −3 [9]` for n ≥ 2. These transcribe every valuation contest as an
+  omega-closable integer congruence — NO Dedekind/valuation machinery, no
+  auxiliary ring type.
+* **The symmetry pair**: `ii_norm_symm` (the norm equation is (u,v)-symmetric
+  — one `linear_combination`) and conj-transport (`word_conj`); WLOG order:
+  swap to |b| ≥ |d|, conj to b ≥ 0. The measured solution orbits close under
+  exactly these (e.g. (3,−3,0,−1) →conj (3,3,0,1) since −3 = 3 in ZMod 6).
+
+**`ii_norm_complete` spine** (regions after WLOG): (i) b ≥ 2 → `ii_norm_bound`
+forces |d| = 1 → the d-line's six c-cases: three close onto table entries by
+Möbius determinism + `word_inj` ((5,1,1,1)-type contradicts b ≥ 2 except the
+glue (3,3,0,1)); three (c = 2,3,4) die by the **13-fingerprint** — μ(ζ₆^cσ)
+has 13 in its rationalized denominators, lattice words never do (extraction
++ omega, uniform in b). (ii) The finite cells (b,d) ∈ {(0,0),(1,0),(1,1),
+(1,−1)}: (1,0) dies by the **√33-fingerprint** (σ-coordinate present vs
+absent — one argument kills all 36 (a,c)); (0,0) and (1,1) extract to
+ZMod-6² statements closed by `decide` (measured zeros: (0,3),(3,0) and
+(1,5),(5,1)); (1,−1) is the mixed-sign kill (congruence). `ii_norm_bound`
+itself: per sign-region of d, clear, extract the minimal-level coordinate,
+contradict px/py congruences by omega (E2 verified every cell).
+
+**`oi_complete` spine**: conj-WLOG only (no swap — oi is asymmetric); two
+region bounds (|b| ≥ 3 → False, |d| ≥ 2 → False; sequence congruences at the
+levels the E3 staircase measured, the Nm-resolver table {81,36,108,225,108,36}
+guiding the c-dependent second-order kills), then ~15 finite (b,d) cells ×
+extraction + decide. Measured: all 16 solutions have |b| ≤ 2, |d| ≤ 1.
+
+**Bridges/intra/fusion spines** (uniform toolkit): `cross_dist`/`intra_dist`
+are `Complex.dist_eq` + ring-in-norm + `norm_mul`. One parametric fibre child
+`unit_eq_of_re (hw : normSq w = 1) (hc : normSq c = 1) (hre : w.re = c.re) :
+w = c ∨ w = conj c` serves ALL pins (ζ₆ for hex/oo-fusion, ω for rot3, σ for
+seam/oi-fusion, ζ₁₂ for ii-fusion) with `normSq_one_sub (hw) :
+normSq (1−w) = 2 − 2·w.re`-style Re-computations. `fusion_ii` needs no
+valuation: word a b = ζ₁₂ squares to word 2a 2b = ζ₆ = word 1 0, and
+2a = 1 has no solution in ZMod 6 — `decide`. `fusion_io` = `fusion_oi` at
+the swapped pair (dist_comm), pure citation. oo factorization: publicize
+Triangle's `unit_chord_units` (Triangle is not a certificate module; its
+re-elaboration is minutes) rather than clone. ii key: private
+`ii_key : normSq(1 − (√3/3)(u+v)) = 1 ↔ (u+v)·((u+v) − √3(1+uv)) = 0` on
+the torus (E1-verified; cofactors at implementation, m23_cofactors style).
+oi bridge is a pure scaling (normSq(√3w) = 3·normSq w) — no torus needed.
+
+**Colouring spines**: decode lemmas = dif-branch analysis + `outerPt_inj`
+(+ 3-way fused-cell splits in the Q-side lemmas, table agreement by decide —
+exactly the six E6 fusion equalities). `ladderColour_valid` = ten side/circle
+case arms; each rewrites by decode lemmas, extracts addresses by the family's
+completeness iff, closes by one ZMod-6 decide. The nine-point witness's 15
+edge facts are certified by the completeness iffs' `.mpr` directions — zero
+new norm_num; non-3-colourability of the abstract 9-vertex graph by `decide`
+(3⁹ cases); assembly = M20's two-half chromaticNumber pattern verbatim.
+
+**Mutation audits** (supersedes the §4 list where they differ): (1) ii_key
+constant perturbed → sporadic spec example breaks; (2) matching disjunct
+dropped → matching example breaks; (3) colour-table entry flipped → fused-cell
+decide + properness decide break; (4) (3,3,0,1) deleted from iiNormTable →
+the b ≥ 2 assembly breaks AND the glue-chord spec example (added) breaks;
+(5) ii_norm_bound conclusion weakened to |d| = 2 → the d-line kill breaks;
+(6) one oiTable glue entry deleted → oi assembly + oi-glue spec example
+(added) break; (7) one witness outer point removed → the 9-point decide flips
+(E6-verified 3-colourable); (8) py base case flipped → congruence induction
+breaks. Partition: all public statements prove; spec examples test; no
+standing assumptions beyond `dist p q = 1` (discharged at the anchor by a
+`dist_zero_one` clone).
+
 **Domain pass (2026-08-08).** One substantive convergence: **the address type
 is `ZMod 6 × ℤ`** (was ℤ × ℤ with `6 ∣` conditions and ZMod casts at the
 tables — two currencies for one fact). Torsion × free IS the backbone

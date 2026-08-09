@@ -324,5 +324,15 @@ example : dist (innerPt 0 1 2 1) (innerPt 1 0 4 1) ≠ 1 := by
 example : dist (innerPt 0 1 0 1) (innerPt 1 0 3 1) = 1 := by
   sorry
 
+-- the glue-incident norm-branch chord (σ, −σ³): audit partner for iiNormTable entry
+-- (0,1,3,3) — deleting that entry must break this example's route through
+-- ii_norm_complete's assembly
+example : dist (innerPt 0 1 0 1) (innerPt 1 0 3 3) = 1 := by
+  sorry
+
+-- an oi glue-incident chord: audit partner for oiTable entry (1,0,5,1)
+example : dist (outerPt 0 1 1 0) (innerPt 1 0 5 1) = 1 := by
+  sorry
+
 end Ladder
 end HadwigerNelson
