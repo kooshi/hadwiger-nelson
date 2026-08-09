@@ -442,3 +442,47 @@ cross term's denominator factors through the other two. Exponents
 **Confidence**: high for steps 1 and 3 (both exhaustively machine-checked over
 their finite content); medium-high for step 2's Lean cost (the exponent
 comparisons are a case tree of ~6 branches per family).
+
+## Implementation status — 2026-08-09 (session end, milestone NOT closed)
+
+**Landed, kernel-checked, zero `sorry` in these parts** (`MetaLadder.lean`, 1229 lines,
+not yet imported by `Proofs.lean`):
+
+| part | status |
+|---|---|
+| §Z the ζ₁₂ layer, the metapivot, the axis directions, **`sqrt3_mul_zeta12`** | ✅ |
+| §L the four-ladder object, membership API, `metaInner_hub`, M24-subset | ✅ |
+| §T anchor-independence, affine equivariance, the 120° transports (pivot + meta, outer + inner), the rotation isometry | ✅ |
+| §W.1 the four **bridges** — each family's chord condition as a `ℤ[ζ₆,π]` norm equation | ✅ |
+| §W.2–7 the **engine**: `hexTrace` + coordinate row + clearing at arbitrary integer height + the two-row extractor | ✅ |
+| §W.8–10 the kill toolkit: `hexTrace_eq_zero`, `hexTrace_pin`, `alone_dvd`, `phi_dvd`, `phi_g_dvd`, the table facts | ✅ |
+| §W.11 **the ii family, complete** (`ii_web`, `ii_cleared`, `ii_classify`) | ✅ |
+| χ ≥ 4 (`not_colorable_three_fourLadder`) | ✅ |
+
+**NOT landed (5 `sorry`s)**: `meta_oo_complete`, `meta_oi_complete`, `meta_io_complete`,
+`meta_ii_complete` (the j-quantified statements — the ii *classification* is proven, the
+j-transport wrapper is not), and `colorable_four_fourLadder`.
+
+**The recipe for the rest, in the order it should be done** (the ii family is the
+template; each step below is an adaptation of a proven block):
+
+1. **The 4-term row extractor.** oo/oi/io carry a constant `κ` (4, 2, 2√3) that ii does
+   not, so their cleared equation has a fourth, purely rational term `κ·√3^(m+n+τ₀)`.
+   Extend `hexTrace_rows` to `κ·3^e + 3^i·H₁ + 3^j·H₃ = 3^l·H₂` — the constant hits row 1
+   only, so row 2 is unchanged and `alone_dvd`/`phi_dvd` apply verbatim.  ~40 lines.
+2. **oo** (`κ=4, μ=√3, λ=√3`, exponents `(S, n, m+k+1→m+1, m+n+1→…)` per §I.0): live class
+   `(m,n) = (even, odd)`; surviving branch `|d| = 1`; endgame at `d = ±1` where the meta
+   word is one of twelve fixed values.  Same shape as ii with the endgame's `Ψ` carrying
+   a `π`-factor.
+3. **io** (`κ=2√3, μ=√3, λ=3`): live class `(odd, odd)`, surviving branch `|d| = 1`.
+4. **oi** (`κ=2, μ=1, λ=1`): live class `(even, even)`, surviving branch `d = 0` — plus
+   the **hub**: split `word c d = −1` off FIRST (`metaInner_hub` gives the ⟸ direction
+   free), then classify the cofactor.
+5. **The j-transport wrappers**: `fin_cases j`, then `dist_metaRot` + `web_transport_rot`
+   + `web_transport_rot_meta` reduce `j = 1, 2` to `j = 0` with the `+2` address shift.
+6. **The colouring**: the fusion inventory (enumerate tools-side, then state), the
+   `metaColTab` decode, properness family-by-family, `colorable_four_fourLadder`.
+
+**Cost note, honest**: the ii family took ~250 lines and the engine ~350; the remaining
+four families + colouring are ~800–1000 lines of the same kind of work.  The mathematics
+is settled (§I.0 is exhaustively machine-checked); what remains is transcription.
