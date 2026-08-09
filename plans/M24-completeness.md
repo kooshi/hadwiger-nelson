@@ -21,6 +21,10 @@ their configurations, with complete chord lists.
   metapivot's included), all cross-webs, proven sporadic counts, colouring.
 * **M26**: the same for the 6+1 hexagram system (second triangle = the mirror
   centroids, promoted; adds the 2/√3 axis with the triple tangency at m).
+* Stubs with full scope/ask/evidence: `plans/M25-triangle-ladders.md`,
+  `M26-hexagram.md`, `M27-tiled-plane.md`, `M28-recursion.md`,
+  `M29-uncountable-pair.md` (numbers tentative; order shiftable — recorded so
+  the context survives any session).
 * **Horizon after M26, if χ is still 4 (Kooshi, recorded verbatim in intent)**:
   (a) colourability of the INFINITE PLANE tiled with the hexagonal
   construction, including all sporadic chords between all possible points;
