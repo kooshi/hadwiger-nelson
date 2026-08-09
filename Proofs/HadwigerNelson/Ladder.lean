@@ -1522,6 +1522,136 @@ theorem normBranch_odd_one {a c : ZMod 6}
       (x = 1 ∧ y = 5) ∨ (x = 5 ∧ y = 1) := by decide
   exact hfin a c k₁ k₂ k₃ k₄
 
+/-- **One height one, the other at least three**: the glue-incident solution, and only
+it. The congruence pins the hex address to zero; the seam coefficient's indivisibility
+by three then pins the height to three. -/
+theorem normBranch_odd_mixed {a c : ZMod 6} {δ : ℕ} (hδ : 1 ≤ δ)
+    (h : NormBranch a ((1 : ℕ) : ℤ) c ((2 * δ + 1 : ℕ) : ℤ)) :
+    a = 0 ∧ c = 3 ∧ δ = 1 := by
+  set d := 2 * δ + 1 with hddef
+  have hc := normBranch_cleared (b := 1) (d := d) h
+  set eA := zeta6 ^ (a.val : ℤ) with heA
+  set eC := zeta6 ^ (c.val : ℤ) with heC
+  obtain ⟨m, hm⟩ := three_dvd_piCoeff_fst (2 * δ)
+  set Z := (piCoeff d).2 with hZ
+  have hZ3 : Z % 3 = 1 := piCoeff_snd_emod (2 * δ)
+  have hring : (3 : ℂ) ^ δ * (eA * piC) + eC * piC ^ d
+      = eA * piC * (eC * piC ^ d) + 3 * (3 : ℂ) ^ δ := by
+    refine mul_left_cancel₀ sqrt3_cast_ne_zero ?_
+    rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ d = 3 ^ δ * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [hddef, pow_succ, sqrt3_pow_two_mul],
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ (1 + d + 1) = 3 * (3 : ℂ) ^ δ * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [hddef, show 1 + (2 * δ + 1) + 1 = 2 * (δ + 1) + 1 by ring, pow_succ,
+          sqrt3_pow_two_mul, pow_succ]
+        ring,
+      pow_one] at hc
+    linear_combination hc
+  have hpd : piC ^ d = 3 * (m : ℂ) + (Z : ℂ) * piC := by
+    rw [piC_pow_coeff, hZ, hddef,
+      show ((piCoeff (2 * δ + 1)).1 : ℂ) = ((3 * m : ℤ) : ℂ) by rw [← hm]]
+    push_cast
+    ring
+  have hA := zeta6_zpow_hex a
+  have hC := zeta6_zpow_hex c
+  have hprod : eA * eC
+      = ((hexE ((a + c).val) : ℤ) : ℂ) + ((hexF ((a + c).val) : ℤ) : ℂ) * zeta6 := by
+    rw [heA, heC, ← zpow_add₀ zeta6_ne_zero, ← zeta6_zpow_val ((a.val : ℤ) + (c.val : ℤ)),
+      ← zeta6_zpow_hex]
+    congr 2
+  rw [← heA] at hA
+  rw [← heC] at hC
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := 3 * m * hexE c.val + 3 * Z * hexE ((a + c).val) - 3 * 3 ^ δ)
+    (n₂ := 3 * m * hexF c.val + 3 * Z * hexF ((a + c).val))
+    (n₃ := 3 ^ δ * hexE a.val + Z * hexE c.val - 3 * m * hexE ((a + c).val)
+      - Z * hexE ((a + c).val))
+    (n₄ := 3 ^ δ * hexF a.val + Z * hexF c.val - 3 * m * hexF ((a + c).val)
+      - Z * hexF ((a + c).val))
+    (by
+      push_cast
+      linear_combination hring - (eC - eA * eC * piC) * hpd + (Z : ℂ) * (eA * eC) * piC_sq
+        - (3 : ℂ) ^ δ * piC * hA - (3 * (m : ℂ) + (Z : ℂ) * piC) * hC
+        + (3 * (m : ℂ) * piC + (Z : ℂ) * piC - 3 * (Z : ℂ)) * hprod)
+  obtain ⟨δ', rfl⟩ : ∃ δ', δ = δ' + 1 := ⟨δ - 1, by omega⟩
+  -- modulo three the product's hex address must equal `c`'s, which forces `a = 0`
+  have ha0 : a = 0 := by
+    obtain ⟨k, hk⟩ : ∃ k, Z = 3 * k + 1 := ⟨Z / 3, by omega⟩
+    have hpow : (3 : ℤ) ^ (δ' + 1) = 3 * 3 ^ δ' := by ring
+    rw [hpow, hk] at k₃ k₄
+    have h1 : (3 : ℤ) ∣ hexE c.val - hexE ((a + c).val) :=
+      ⟨m * hexE ((a + c).val) - 3 ^ δ' * hexE a.val
+        - k * (hexE c.val - hexE ((a + c).val)), by linear_combination k₃⟩
+    have h2 : (3 : ℤ) ∣ hexF c.val - hexF ((a + c).val) :=
+      ⟨m * hexF ((a + c).val) - 3 ^ δ' * hexF a.val
+        - k * (hexF c.val - hexF ((a + c).val)), by linear_combination k₄⟩
+    have hfin : ∀ x y : ZMod 6, (3 : ℤ) ∣ hexE y.val - hexE ((x + y).val) →
+        (3 : ℤ) ∣ hexF y.val - hexF ((x + y).val) → x = 0 := by decide
+    exact hfin a c h1 h2
+  subst ha0
+  have hEA : hexE (0 : ZMod 6).val = 1 := by decide
+  have hFA : hexF (0 : ZMod 6).val = 0 := by decide
+  simp only [zero_add] at k₁ k₂ k₃ k₄
+  rw [hEA] at k₃
+  rw [hFA] at k₄
+  -- the four integer equations now pin `c` and the height
+  have hmEC : m * hexE c.val = 3 ^ δ' := by
+    have hpow : (3 : ℤ) ^ (δ' + 1) = 3 * 3 ^ δ' := by ring
+    rw [hpow] at k₃
+    linarith
+  have hmFC : m * hexF c.val = 0 := by
+    have hpow : (3 : ℤ) ^ (δ' + 1) = 3 * 3 ^ δ' := by ring
+    rw [hpow] at k₄
+    linarith
+  have hsum : (m + Z) * hexE c.val = 3 * 3 ^ δ' := by
+    have hpow : (3 : ℤ) ^ (δ' + 1) = 3 * 3 ^ δ' := by ring
+    rw [hpow] at k₁
+    linarith
+  have hpos : (0 : ℤ) < 3 ^ δ' := by positivity
+  have hmne : m ≠ 0 := by
+    intro h0
+    rw [h0, zero_mul] at hmEC
+    omega
+  have hFC0 : hexF c.val = 0 := by
+    rcases mul_eq_zero.mp hmFC with h0 | h0
+    · exact absurd h0 hmne
+    · exact h0
+  have hECne : hexE c.val ≠ 0 := by
+    intro h0
+    rw [h0, mul_zero] at hmEC
+    omega
+  have hZ2m : Z = 2 * m := by
+    have h2 : (Z - 2 * m) * hexE c.val = 0 := by
+      have : (m + Z) * hexE c.val = 3 * (m * hexE c.val) := by rw [hsum, hmEC]
+      linarith [this]
+    rcases mul_eq_zero.mp h2 with h0 | h0
+    · linarith
+    · exact absurd h0 hECne
+  -- `3 ∤ Z` forces `δ' = 0`, and then the concrete height-three data pins `c = 3`
+  have hδ0 : δ' = 0 := by
+    by_contra hne
+    obtain ⟨e, rfl⟩ : ∃ e, δ' = e + 1 := ⟨δ' - 1, by omega⟩
+    have hEC1 : hexE c.val = 1 ∨ hexE c.val = -1 := by
+      have hfin : ∀ y : ZMod 6, hexF y.val = 0 → hexE y.val = 1 ∨ hexE y.val = -1 := by decide
+      exact hfin c hFC0
+    have h3m : (3 : ℤ) ∣ m := by
+      have hpow : (3 : ℤ) ^ (e + 1) = 3 * 3 ^ e := by ring
+      rw [hpow] at hmEC
+      rcases hEC1 with h1 | h1 <;> rw [h1] at hmEC
+      · exact ⟨3 ^ e, by linarith⟩
+      · exact ⟨-(3 ^ e), by linarith⟩
+    omega
+  subst hδ0
+  have hZval : Z = -2 := by
+    rw [hZ, hddef]
+    decide
+  have hm1 : m = -1 := by omega
+  have hEC1 : hexE c.val = -1 := by
+    rw [hm1] at hmEC
+    simp only [pow_zero, neg_mul, one_mul, neg_eq_iff_eq_neg] at hmEC
+    linarith
+  have hfin : ∀ y : ZMod 6, hexE y.val = -1 → hexF y.val = 0 → y = 3 := by decide
+  exact ⟨rfl, hfin c hEC1 hFC0, rfl⟩
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
