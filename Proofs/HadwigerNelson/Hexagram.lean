@@ -906,6 +906,118 @@ private theorem live_tie {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r
     · exact absurd (kill_alone_two hC₂ hn (by omega) hrq hqs heq) not_false
     · exact absurd (kill_phi hC₃ hk hrp hrq (by omega) heq) not_false
 
+/-! ### §E.9 The oo-shape tree
+
+`adj_oo` (C = 1) and `opp_oo` (C = 2) share one tree: live parity (even, even), the
+tie at EQUAL heights, and a final `κ = 3·W` check the height-zero unit table refuses. -/
+
+set_option maxHeartbeats 1000000 in
+private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hC0 : C ≠ 0) {x y : ZMod 6} {b d : ℤ}
+    {κ : ℤ} (hκ3 : ¬ (3 : ℤ) ∣ κ) (hκv : κ = 4 ∨ κ = 7 ∨ κ = 10)
+    (hzero : ∀ X Y : ZMod 6, C * (2 * gE X + gF X) + (-C) * (2 * gE Y + gF Y)
+      + 3 * (2 * hexE (X - Y).val + hexF (X - Y).val) ≠ κ)
+    (hbnd : ∀ X Y Z : ZMod 6, C * gF X + (-C) * gF Y = 0 →
+      (C * gE X + (-C) * gE Y) * (2 * (piCoeff 2).1 + (piCoeff 2).2)
+        = κ * 3 ^ 1 + 3 ^ 2 * (2 * ((-1) * hexE Z.val) + (-1) * hexF Z.val) → False)
+    (h : (C : ℂ) * s3 ^ 0 * gTr x b + ((-C : ℤ) : ℂ) * s3 ^ 0 * gTr y d
+      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (x - y) (b - d) = (κ : ℂ) * s3 ^ 0) : False := by
+  have hnegC : ¬ (3 : ℤ) ∣ (-C) := fun hh => hC ((dvd_neg).mp hh)
+  obtain ⟨t, ht⟩ : ∃ t, b.natAbs + d.natAbs = (b - d).natAbs + 2 * t :=
+    ⟨(b.natAbs + d.natAbs - (b - d).natAbs) / 2, by omega⟩
+  have hcl := hex_cleared ht h
+  obtain ⟨μ, hμ⟩ : ∃ μ, b.natAbs = 2 * μ ∨ b.natAbs = 2 * μ + 1 := ⟨b.natAbs / 2, by omega⟩
+  obtain ⟨ν, hν⟩ : ∃ ν, d.natAbs = 2 * ν ∨ d.natAbs = 2 * ν + 1 := ⟨d.natAbs / 2, by omega⟩
+  simp only [zero_add] at hcl
+  rcases hμ with hμ | hμ <;> rcases hν with hν | hν
+  · -- LIVE: both heights even
+    rw [hμ, hν, show 2 * μ + 2 * ν = 2 * (μ + ν) by ring] at hcl
+    simp only [sqrt3_pow_two_mul', pow_zero, one_mul] at hcl
+    have hkill : (3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+        + (3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν)
+        = (κ : ℂ) * 3 ^ (μ + ν)
+          + (3 : ℂ) ^ (t + 1)
+            * hexTrace ((-1) * hexE (uAddr (x - y) (b - d)).val)
+              ((-1) * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs := by
+      rw [← hexTrace_intMul C, ← hexTrace_intMul (-C), ← hexTrace_intMul (-1)]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    rcases Nat.eq_zero_or_pos μ with rfl | hμ0
+    · rcases Nat.eq_zero_or_pos ν with rfl | hν0
+      · -- all heights zero
+        have hb0 : b = 0 := by omega
+        have hd0 : d = 0 := by omega
+        subst hb0; subst hd0
+        have ht0 : t = 0 := by omega
+        subst ht0
+        rw [show (2 * 0 : ℕ) = 0 from rfl, show ((0 : ℤ) - 0) = 0 by ring,
+          show gAddr x 0 = x from by rw [gAddr, if_pos le_rfl],
+          show gAddr y 0 = y from by rw [gAddr, if_pos le_rfl],
+          show uAddr (x - y) 0 = x - y from by rw [uAddr, if_pos le_rfl],
+          show (0 : ℤ).natAbs = 0 from rfl, hexTrace_zero_height, hexTrace_zero_height,
+          hexTrace_zero_height] at hkill
+        refine hzero x y ?_
+        have hc : ((C * (2 * gE x + gF x) + (-C) * (2 * gE y + gF y)
+            + 3 * (2 * hexE (x - y).val + hexF (x - y).val) : ℤ) : ℂ) = ((κ : ℤ) : ℂ) := by
+          push_cast
+          push_cast at hkill
+          linear_combination hkill
+        exact_mod_cast hc
+      · -- m = 0 < n: the second g-trace is alone
+        exact kill_alone_two (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+          (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+          (m := 2 * 0) (n := 2 * ν) (k := (b - d).natAbs) (p := ν) (q := 0)
+          (r := t + 1) (s := 0 + ν) hnegC (by omega) (by omega) (by omega) (by omega) hkill
+    · rcases Nat.eq_zero_or_pos ν with rfl | hν0
+      · exact kill_alone_one (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+          (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+          (m := 2 * μ) (n := 2 * 0) (k := (b - d).natAbs) (p := 0) (q := μ)
+          (r := t + 1) (s := μ + 0) hC (by omega) (by omega) (by omega) (by omega) hkill
+      · -- both heights positive
+        rcases Nat.eq_zero_or_pos (b - d).natAbs with hk0 | hk0
+        · -- k = 0: equal heights, the collapse
+          have hmn : μ = ν := by omega
+          subst hmn
+          have hts : t = 2 * μ := by omega
+          subst hts
+          rw [hk0, show 2 * μ + 1 = μ + (μ + 1) by ring] at hkill
+          obtain ⟨hF, hval⟩ := kill_equal (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+            (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+            (m := 2 * μ) (p := μ) (s' := μ) (r' := μ + 1) (by omega) hkill
+          -- 3^μ divides the g-coefficient difference
+          have hnd := not_three_dvd_pin (2 * μ) (by omega)
+          have hdvd : (3 : ℤ) ^ μ ∣ (C * gE (gAddr x b) + (-C) * gE (gAddr y d)) := by
+            refine pow_dvd_of_not_dvd (C := 2 * (piCoeff (2 * μ)).1 + (piCoeff (2 * μ)).2)
+              (fun hh => hnd hh) ?_
+            rw [mul_comm]
+            exact ⟨κ * 3 ^ 0 + 3 ^ 1 * (2 * ((-1) * hexE (uAddr (x - y) (b - d)).val)
+                + (-1) * hexF (uAddr (x - y) (b - d)).val), by
+              rw [hval]; ring⟩
+          rcases Nat.lt_or_ge μ 2 with hμ2 | hμ2
+          · -- μ = 1: the boundary decide
+            have hμ1 : μ = 1 := by omega
+            subst hμ1
+            exact hbnd (gAddr x b) (gAddr y d) (uAddr (x - y) (b - d)) hF
+              (by rw [show 2 * 1 = 2 from rfl] at hval; exact hval)
+          · -- μ ≥ 2: the difference must vanish, and then 3 ∣ κ
+            have hsmall := gE_diff_small (gAddr x b) (gAddr y d)
+            have h9 : (9 : ℤ) ∣ (C * gE (gAddr x b) + (-C) * gE (gAddr y d)) := by
+              refine dvd_trans ⟨3 ^ (μ - 2), ?_⟩ hdvd
+              rw [show (9 : ℤ) = 3 ^ 2 from by norm_num, ← pow_add,
+                show 2 + (μ - 2) = μ by omega]
+            sorry
+        · -- k ≥ 1: the tie is impossible here
+          obtain ⟨hpq, hpr⟩ := live_tie (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+            (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+            (m := 2 * μ) (n := 2 * ν) (k := (b - d).natAbs) (p := ν) (q := μ)
+            (r := t + 1) (s := μ + ν) hC hnegC (by norm_num)
+            (by omega) (by omega) hk0 (by omega) (by omega) hkill
+          have hkr : (b - d).natAbs = 0 ∨ (b - d).natAbs = 2 * b.natAbs := by omega
+          omega
+  · sorry
+  · sorry
+  · sorry
+
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
 Master frame `(hexPivot 3, hexPivot 4) = (0, 2m−ζ₆)`; every web `(a, a+1)` is its
