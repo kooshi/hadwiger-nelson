@@ -221,6 +221,11 @@ theorem opp_oi_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) 
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
       (innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := sorry
 
+/-- **Opposite io is empty** — the oi statement at `a + 3`, roles flipped. -/
+theorem opp_io_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
+      (outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := sorry
+
 /-- **Opposite ii is empty**: the tangent inner circles' lattices carry no unit
 chord (and, by `opp_fusion_ii`, no coincidence — the tangency is invisible). -/
 theorem opp_ii_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
@@ -236,6 +241,11 @@ theorem opp_fusion_oo (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ)
 theorem opp_fusion_oi (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     outerPt (hexPivot a) (hexPivot a + 1) x b
       ≠ innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
+
+/-- The opposite io fusion is empty — the oi statement at `a + 3`, flipped. -/
+theorem opp_fusion_io (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    innerPt (hexPivot a) (hexPivot a + 1) x b
+      ≠ outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
 
 /-- The opposite ii fusion is empty: the tangency point `m` is never a lattice
 word (M24's empty `Re = √3/2` fibre, at the κ = 6√3 spine). -/

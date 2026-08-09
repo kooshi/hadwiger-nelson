@@ -286,12 +286,35 @@ MetaLadder's private engine (`web_master`/`web_master_eq`/`web_master_rev`,
 recommendation) — the cost is one re-elaboration of `MetaLadder` and
 `Proofs.lean`, no generated dependents.
 
-Skeleton: `Proofs/HadwigerNelson/Hexagram.lean`, 64 declarations, **48
-obligations** (`sorry` leaves), elaborates clean with zero errors; the spec
+Skeleton: `Proofs/HadwigerNelson/Hexagram.lean`, **50 obligations** (`sorry`
+leaves) after the domain pass, elaborates clean with zero errors; the spec
 examples (table reads, adjacency-table membership decides) pass at
 elaboration.  Three value facts already proven at skeleton time
 (`hexPivot_three` = M25's hub fact verbatim; the four membership intros).
 NOT yet imported by `Proofs.lean` (added at implementation).
+
+### Domain-modeling pass (2026-08-09, fresh invocation)
+
+Confirmed after deliberate stress: `hexPivot`-as-the-hex-layer (the definition
+IS registered prediction P1.1, and every transport proof becomes uniform in
+`a` where an explicit-coordinates definition would cost six `fin_cases`
+computations each); the asymmetric `6 + meta` union (the meta ladder's
+difference — its ζ₁₂ anchor, its being FIXED by rot6 — is intrinsic, and a
+uniform `Fin 7` index would thread an anchor-direction function through every
+consumer); the `(a − 3)` shift; the joint-existential 4-branch decode, whose
+payoff is ONE read lemma uniform in `a` per branch vs M25's eight.
+
+Two deltas applied:
+* **Hole**: `opp_io_empty` and `opp_fusion_io` were missing from §O (census
+  says both empty; both derive from their oi mirrors at `a + 3` by
+  `dist_comm`/`.symm`, one line each, but the statements belong in the API).
+* **Routing correction to §1.6**: properness does NOT route through a
+  pointwise `hexColor (rot6 z) = τ(hexColor z)` transport — the a-quantified
+  completeness theorems already cover all six webs each, so properness is
+  M25's per-family-pair decide pattern with a `∀ a` added (6× bigger decides,
+  still trivial).  The two τ-equivariance decides stay as named structural
+  facts (they are why the table exists, and M27's tiling extension seeds from
+  them) but carry no downstream weight in this milestone.
 
 ### Already settled at subplan (four-part rows)
 
