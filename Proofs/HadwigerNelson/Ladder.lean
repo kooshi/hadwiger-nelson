@@ -1652,6 +1652,364 @@ theorem normBranch_odd_mixed {a c : ZMod 6} {δ : ℕ} (hδ : 1 ≤ δ)
   have hfin : ∀ y : ZMod 6, hexE y.val = -1 → hexF y.val = 0 → y = 3 := by decide
   exact ⟨rfl, hfin c hEC1 hFC0, rfl⟩
 
+/-! ### The mixed-sign heights
+
+A negative second height clears through the conjugate root `π̄ = 1 − π` — still inside
+`ℤ[ζ₆, π]`, so the separation and the congruences carry over. What is genuinely new is
+the collapse `π^b·π̄^e = 3^e·π^{b−e}` (from `π·π̄ = 3`): it concentrates the two cleared
+words' product into a single `π`-power, and one coordinate row modulo three then kills
+every mixed-sign case. -/
+
+private theorem conj_piC : (starRingEnd ℂ) piC = 1 - piC := by
+  apply Complex.ext <;>
+    simp [piC, Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im]
+  all_goals norm_num
+
+/-- The two roots of `x² − x + 3` multiply to the constant term: `π·π̄ = 3`. -/
+private theorem piC_mul_one_sub : piC * (1 - piC) = 3 := by
+  linear_combination -piC_sq
+
+/-- The conjugate root's powers in the same integer coordinates:
+`π̄^n = (px + py) − py·π`. -/
+private theorem one_sub_piC_pow_coeff (n : ℕ) :
+    (1 - piC) ^ n
+      = ((piCoeff n).1 : ℂ) + ((piCoeff n).2 : ℂ) - ((piCoeff n).2 : ℂ) * piC := by
+  have h := congrArg (starRingEnd ℂ) (piC_pow_coeff n)
+  rw [map_pow, conj_piC, map_add, map_mul, map_intCast, map_intCast, conj_piC] at h
+  rw [h]
+  ring
+
+/-- The clearing identity at negative seam height: `√3^e · word c (−e) = ζ₆^c · π̄^e`. -/
+private theorem sqrt3_pow_mul_word_neg (c : ZMod 6) (e : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ e * word c (-(e : ℤ))
+      = zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e := by
+  have hs : seam ^ (-(e : ℤ)) = ((starRingEnd ℂ) seam) ^ e := by
+    rw [zpow_neg, zpow_natCast, ← inv_pow]
+    congr 1
+    exact (eq_inv_of_mul_eq_one_right seam_mul_conj).symm
+  have hp : ((Real.sqrt 3 : ℝ) : ℂ) * (starRingEnd ℂ) seam = 1 - piC := by
+    rw [← conj_piC, piC_eq_sqrt3_mul_seam, map_mul, Complex.conj_ofReal]
+  calc ((Real.sqrt 3 : ℝ) : ℂ) ^ e * word c (-(e : ℤ))
+      = zeta6 ^ (c.val : ℤ) * (((Real.sqrt 3 : ℝ) : ℂ) * (starRingEnd ℂ) seam) ^ e := by
+        rw [word, hs, mul_pow]
+        ring
+    _ = zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e := by rw [hp]
+
+private theorem normSq_ringElt_neg (c : ZMod 6) (e : ℕ) :
+    normSq (zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e) = 3 ^ e := by
+  rw [map_mul, map_pow, ← conj_piC, Complex.normSq_conj, normSq_piC]
+  have : normSq (zeta6 ^ (c.val : ℤ)) = 1 := by
+    rw [← Complex.sq_norm, norm_zpow, norm_zeta6, one_zpow]
+    norm_num
+  rw [this, one_mul]
+
+private theorem inRing_elt_neg (c : ZMod 6) (e : ℕ) :
+    InRing (zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e) := by
+  refine (InRing.zeta6_zpow _).mul ?_
+  rw [one_sub_piC_pow_coeff]
+  exact ⟨(piCoeff e).1 + (piCoeff e).2, 0, -(piCoeff e).2, 0, by push_cast; ring⟩
+
+/-- The norm branch cleared at a negative second height — `normBranch_cleared`'s mirror,
+with `π̄^e` carrying the second word. -/
+theorem normBranch_cleared_neg {a c : ZMod 6} {b e : ℕ}
+    (h : NormBranch a (b : ℤ) c (-(e : ℤ))) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ e * (zeta6 ^ (a.val : ℤ) * piC ^ b)
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ b * (zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e)
+      = ((Real.sqrt 3 : ℝ) : ℂ) * ((zeta6 ^ (a.val : ℤ) * piC ^ b)
+          * (zeta6 ^ (c.val : ℤ) * (1 - piC) ^ e))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e + 1) := by
+  have hA := sqrt3_pow_mul_word a b
+  have hB := sqrt3_pow_mul_word_neg c e
+  rw [NormBranch] at h
+  have key : ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e) * (word a (b : ℤ) + word c (-(e : ℤ)))
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e)
+        * (((Real.sqrt 3 : ℝ) : ℂ) * (word a (b : ℤ) * word c (-(e : ℤ)) + 1)) := by
+    rw [h]
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e) * (word a (b : ℤ) + word c (-(e : ℤ)))
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ e * (((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ b
+          * (((Real.sqrt 3 : ℝ) : ℂ) ^ e * word c (-(e : ℤ))) by
+      rw [pow_add]; ring] at key
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e)
+        * (((Real.sqrt 3 : ℝ) : ℂ) * (word a (b : ℤ) * word c (-(e : ℤ)) + 1))
+      = ((Real.sqrt 3 : ℝ) : ℂ) * ((((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ))
+          * (((Real.sqrt 3 : ℝ) : ℂ) ^ e * word c (-(e : ℤ))))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + e + 1) by
+      rw [pow_add, pow_add, pow_one]; ring] at key
+  rw [hA, hB] at key
+  exact key
+
+/-- **Mixed parity is impossible at mixed signs too**: the same modulus obstruction as
+`normBranch_parity`, with the conjugate root carrying the negative height. -/
+theorem normBranch_parity_neg {a c : ZMod 6} {b e : ℕ}
+    (h : NormBranch a (b : ℤ) c (-(e : ℤ))) : b % 2 = e % 2 := by
+  by_contra hpar
+  have hcase : (b % 2 = 0 ∧ e % 2 = 1) ∨ (b % 2 = 1 ∧ e % 2 = 0) := by omega
+  rcases hcase with ⟨hb2, he2⟩ | ⟨hb2, he2⟩
+  · obtain ⟨β, rfl⟩ : ∃ β, b = 2 * β := ⟨b / 2, by omega⟩
+    obtain ⟨ε, rfl⟩ : ∃ ε, e = 2 * ε + 1 := ⟨e / 2, by omega⟩
+    have hc := normBranch_cleared_neg h
+    set A := zeta6 ^ (a.val : ℤ) * piC ^ (2 * β) with hAdef
+    set B := zeta6 ^ (c.val : ℤ) * (1 - piC) ^ (2 * ε + 1) with hBdef
+    rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * ε + 1)
+        = ((Real.sqrt 3 : ℝ) : ℂ) * 3 ^ ε by rw [pow_succ, sqrt3_pow_two_mul]; ring,
+      sqrt3_pow_two_mul,
+      show 2 * β + (2 * ε + 1) + 1 = 2 * (β + ε + 1) by ring, sqrt3_pow_two_mul] at hc
+    obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+      (((inRing_three_pow β).mul (inRing_elt_neg c (2 * ε + 1))).add
+        (inRing_three_pow (β + ε + 1)).neg)
+      (((inRing_three_pow ε).mul (inRing_elt a (2 * β))).add
+        (((inRing_elt a (2 * β)).mul (inRing_elt_neg c (2 * ε + 1))).neg))
+      (show ((3 : ℂ) ^ β * B + -(3 : ℂ) ^ (β + ε + 1))
+          + ((Real.sqrt 3 : ℝ) : ℂ) * ((3 : ℂ) ^ ε * A + -(A * B)) = 0 by
+        linear_combination hc)
+    have hB3 : B = (3 : ℂ) ^ (ε + 1) := by
+      refine mul_left_cancel₀ (a := ((3 : ℂ) ^ β)) (pow_ne_zero _ (by norm_num)) ?_
+      rw [show ((3 : ℂ) ^ β * (3 : ℂ) ^ (ε + 1)) = (3 : ℂ) ^ (β + ε + 1) by
+        rw [← pow_add]; ring_nf]
+      linear_combination hX
+    have hnorm := normSq_ringElt_neg c (2 * ε + 1)
+    rw [← hBdef, hB3, map_pow, show normSq (3 : ℂ) = 9 by norm_num [normSq_apply]] at hnorm
+    have hgrow : (9 : ℝ) ^ (ε + 1) = 3 * 3 ^ (2 * ε + 1) := by
+      rw [show (9 : ℝ) = 3 ^ 2 by norm_num, ← pow_mul]
+      ring
+    nlinarith [hnorm, hgrow, pow_pos (show (0 : ℝ) < 3 by norm_num) (2 * ε + 1)]
+  · obtain ⟨β, rfl⟩ : ∃ β, b = 2 * β + 1 := ⟨b / 2, by omega⟩
+    obtain ⟨ε, rfl⟩ : ∃ ε, e = 2 * ε := ⟨e / 2, by omega⟩
+    have hc := normBranch_cleared_neg h
+    set A := zeta6 ^ (a.val : ℤ) * piC ^ (2 * β + 1) with hAdef
+    set B := zeta6 ^ (c.val : ℤ) * (1 - piC) ^ (2 * ε) with hBdef
+    rw [sqrt3_pow_two_mul,
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + 1)
+        = ((Real.sqrt 3 : ℝ) : ℂ) * 3 ^ β by rw [pow_succ, sqrt3_pow_two_mul]; ring,
+      show 2 * β + 1 + 2 * ε + 1 = 2 * (β + ε + 1) by ring, sqrt3_pow_two_mul] at hc
+    obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+      (((inRing_three_pow ε).mul (inRing_elt a (2 * β + 1))).add
+        (inRing_three_pow (β + ε + 1)).neg)
+      (((inRing_three_pow β).mul (inRing_elt_neg c (2 * ε))).add
+        (((inRing_elt a (2 * β + 1)).mul (inRing_elt_neg c (2 * ε))).neg))
+      (show ((3 : ℂ) ^ ε * A + -(3 : ℂ) ^ (β + ε + 1))
+          + ((Real.sqrt 3 : ℝ) : ℂ) * ((3 : ℂ) ^ β * B + -(A * B)) = 0 by
+        linear_combination hc)
+    have hA3 : A = (3 : ℂ) ^ (β + 1) := by
+      refine mul_left_cancel₀ (a := ((3 : ℂ) ^ ε)) (pow_ne_zero _ (by norm_num)) ?_
+      rw [show ((3 : ℂ) ^ ε * (3 : ℂ) ^ (β + 1)) = (3 : ℂ) ^ (β + ε + 1) by
+        rw [← pow_add]; ring_nf]
+      linear_combination hX
+    have hnorm := normSq_ringElt a (2 * β + 1)
+    rw [← hAdef, hA3, map_pow, show normSq (3 : ℂ) = 9 by norm_num [normSq_apply]] at hnorm
+    have hgrow : (9 : ℝ) ^ (β + 1) = 3 * 3 ^ (2 * β + 1) := by
+      rw [show (9 : ℝ) = 3 ^ 2 by norm_num, ← pow_mul]
+      ring
+    nlinarith [hnorm, hgrow, pow_pos (show (0 : ℝ) < 3 by norm_num) (2 * β + 1)]
+
+/-- **Both heights even at mixed signs**: impossible beyond height zero. The separation
+forces the two words to be opposite AND multiply to `−1`, so one word squares to `1` —
+a relation the backbone reserves for height zero. -/
+theorem normBranch_even_neg {a c : ZMod 6} {β ε : ℕ} (hε : 1 ≤ ε)
+    (h : NormBranch a ((2 * β : ℕ) : ℤ) c (-((2 * ε : ℕ) : ℤ))) : False := by
+  have hc := normBranch_cleared_neg h
+  set A := zeta6 ^ (a.val : ℤ) * piC ^ (2 * β) with hAdef
+  set B := zeta6 ^ (c.val : ℤ) * (1 - piC) ^ (2 * ε) with hBdef
+  rw [sqrt3_pow_two_mul, sqrt3_pow_two_mul,
+    show 2 * β + 2 * ε + 1 = 2 * (β + ε) + 1 by ring, pow_succ, sqrt3_pow_two_mul] at hc
+  obtain ⟨hX, hY⟩ := eq_zero_of_add_sqrt3_mul
+    (((inRing_three_pow ε).mul (inRing_elt a (2 * β))).add
+      ((inRing_three_pow β).mul (inRing_elt_neg c (2 * ε))))
+    ((((inRing_elt a (2 * β)).mul (inRing_elt_neg c (2 * ε))).add
+      (inRing_three_pow (β + ε))).neg)
+    (show ((3 : ℂ) ^ ε * A + (3 : ℂ) ^ β * B)
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (-(A * B + (3 : ℂ) ^ (β + ε))) = 0 by
+      linear_combination hc)
+  have hAw : A = (3 : ℂ) ^ β * word a ((2 * β : ℕ) : ℤ) := by
+    rw [hAdef, ← sqrt3_pow_mul_word, sqrt3_pow_two_mul]
+  have hBw : B = (3 : ℂ) ^ ε * word c (-((2 * ε : ℕ) : ℤ)) := by
+    rw [hBdef, ← sqrt3_pow_mul_word_neg, sqrt3_pow_two_mul]
+  rw [← hAdef, ← hBdef, hAw, hBw] at hX hY
+  have h3 : ((3 : ℂ) ^ (β + ε)) ≠ 0 := pow_ne_zero _ (by norm_num)
+  have hsum : word a ((2 * β : ℕ) : ℤ) + word c (-((2 * ε : ℕ) : ℤ)) = 0 := by
+    refine mul_left_cancel₀ h3 ?_
+    rw [mul_zero]
+    linear_combination hX
+  have hprod : word a ((2 * β : ℕ) : ℤ) * word c (-((2 * ε : ℕ) : ℤ)) = -1 := by
+    refine mul_left_cancel₀ h3 ?_
+    linear_combination -hY
+  have hw2 : word c (-((2 * ε : ℕ) : ℤ)) * word c (-((2 * ε : ℕ) : ℤ)) = 1 := by
+    have hopp : word a ((2 * β : ℕ) : ℤ) = -word c (-((2 * ε : ℕ) : ℤ)) := by
+      linear_combination hsum
+    rw [hopp] at hprod
+    linear_combination -hprod
+  rw [← word_add] at hw2
+  obtain ⟨-, hb0⟩ := (word_eq_one_iff _ _).mp hw2
+  omega
+
+/-- **Both heights odd at mixed signs, larger height on the `π` side**: impossible. The
+product of the two cleared words collapses through `π·π̄ = 3` to a single `π`-power, and
+one coordinate row of the resulting identity equates a unit times a non-multiple of
+three with a multiple of three. -/
+private theorem normBranch_odd_neg_aux {a c : ZMod 6} {β ε : ℕ} (hle : ε ≤ β)
+    (h : NormBranch a ((2 * β + 1 : ℕ) : ℤ) c (-((2 * ε + 1 : ℕ) : ℤ))) : False := by
+  obtain ⟨g, rfl⟩ : ∃ g, β = ε + g := ⟨β - ε, by omega⟩
+  have hc := normBranch_cleared_neg h
+  set eA := zeta6 ^ (a.val : ℤ) with heA
+  set eC := zeta6 ^ (c.val : ℤ) with heC
+  -- cancel the single √3 carried by every term
+  have hring : (3 : ℂ) ^ ε * (eA * piC ^ (2 * (ε + g) + 1))
+        + (3 : ℂ) ^ (ε + g) * (eC * (1 - piC) ^ (2 * ε + 1))
+      = (eA * piC ^ (2 * (ε + g) + 1)) * (eC * (1 - piC) ^ (2 * ε + 1))
+        + (3 : ℂ) ^ (2 * ε + g + 1) := by
+    refine mul_left_cancel₀ sqrt3_cast_ne_zero ?_
+    rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * ε + 1)
+        = 3 ^ ε * ((Real.sqrt 3 : ℝ) : ℂ) by rw [pow_succ, sqrt3_pow_two_mul],
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (ε + g) + 1)
+        = 3 ^ (ε + g) * ((Real.sqrt 3 : ℝ) : ℂ) by rw [pow_succ, sqrt3_pow_two_mul],
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (ε + g) + 1 + (2 * ε + 1) + 1)
+          = 3 ^ (2 * ε + g + 1) * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [show 2 * (ε + g) + 1 + (2 * ε + 1) + 1 = 2 * (2 * ε + g + 1) + 1 by ring,
+          pow_succ, sqrt3_pow_two_mul]] at hc
+    linear_combination hc
+  -- the collapse: π^b·π̄^e = 3^e·π^{b−e}
+  have hcollapse : piC ^ (2 * (ε + g) + 1) * (1 - piC) ^ (2 * ε + 1)
+      = (3 : ℂ) ^ (2 * ε + 1) * piC ^ (2 * g) := by
+    rw [show 2 * (ε + g) + 1 = (2 * ε + 1) + 2 * g by ring, pow_add,
+      show piC ^ (2 * ε + 1) * piC ^ (2 * g) * (1 - piC) ^ (2 * ε + 1)
+        = (piC * (1 - piC)) ^ (2 * ε + 1) * piC ^ (2 * g) by rw [mul_pow]; ring,
+      piC_mul_one_sub]
+  -- divide by 3^ε
+  have hM : eA * piC ^ (2 * (ε + g) + 1) + (3 : ℂ) ^ g * (eC * (1 - piC) ^ (2 * ε + 1))
+      = (3 : ℂ) ^ (ε + 1) * ((eA * eC) * piC ^ (2 * g)) + (3 : ℂ) ^ (ε + g + 1) := by
+    refine mul_left_cancel₀ (pow_ne_zero ε (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    linear_combination hring + (eA * eC) * hcollapse
+  -- read the four integer coordinates
+  have hpb := piC_pow_coeff (2 * (ε + g) + 1)
+  have hpe := one_sub_piC_pow_coeff (2 * ε + 1)
+  have hpg := piC_pow_coeff (2 * g)
+  have hA := zeta6_zpow_hex a
+  have hC := zeta6_zpow_hex c
+  have hprod : eA * eC
+      = ((hexE ((a + c).val) : ℤ) : ℂ) + ((hexF ((a + c).val) : ℤ) : ℂ) * zeta6 := by
+    rw [heA, heC, ← zpow_add₀ zeta6_ne_zero, ← zeta6_zpow_val ((a.val : ℤ) + (c.val : ℤ)),
+      ← zeta6_zpow_hex]
+    congr 2
+  rw [← heA] at hA
+  rw [← heC] at hC
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := hexE a.val * (piCoeff (2 * (ε + g) + 1)).1
+      + 3 ^ g * (hexE c.val * ((piCoeff (2 * ε + 1)).1 + (piCoeff (2 * ε + 1)).2))
+      - 3 ^ (ε + 1) * (hexE ((a + c).val) * (piCoeff (2 * g)).1) - 3 ^ (ε + g + 1))
+    (n₂ := hexF a.val * (piCoeff (2 * (ε + g) + 1)).1
+      + 3 ^ g * (hexF c.val * ((piCoeff (2 * ε + 1)).1 + (piCoeff (2 * ε + 1)).2))
+      - 3 ^ (ε + 1) * (hexF ((a + c).val) * (piCoeff (2 * g)).1))
+    (n₃ := hexE a.val * (piCoeff (2 * (ε + g) + 1)).2
+      - 3 ^ g * (hexE c.val * (piCoeff (2 * ε + 1)).2)
+      - 3 ^ (ε + 1) * (hexE ((a + c).val) * (piCoeff (2 * g)).2))
+    (n₄ := hexF a.val * (piCoeff (2 * (ε + g) + 1)).2
+      - 3 ^ g * (hexF c.val * (piCoeff (2 * ε + 1)).2)
+      - 3 ^ (ε + 1) * (hexF ((a + c).val) * (piCoeff (2 * g)).2))
+    (by
+      push_cast
+      linear_combination hM - eA * hpb - ((3 : ℂ) ^ g * eC) * hpe
+        + ((3 : ℂ) ^ (ε + 1) * (eA * eC)) * hpg
+        - (((piCoeff (2 * (ε + g) + 1)).1 : ℂ)
+            + ((piCoeff (2 * (ε + g) + 1)).2 : ℂ) * piC) * hA
+        - ((3 : ℂ) ^ g * ((((piCoeff (2 * ε + 1)).1 : ℂ) + ((piCoeff (2 * ε + 1)).2 : ℂ))
+            - ((piCoeff (2 * ε + 1)).2 : ℂ) * piC)) * hC
+        + ((3 : ℂ) ^ (ε + 1) * (((piCoeff (2 * g)).1 : ℂ)
+            + ((piCoeff (2 * g)).2 : ℂ) * piC)) * hprod)
+  have hZb : (piCoeff (2 * (ε + g) + 1)).2 % 3 = 1 := piCoeff_snd_emod _
+  have hSe : (piCoeff (2 * ε + 1)).2 % 3 = 1 := piCoeff_snd_emod _
+  have hRe : (3 : ℤ) ∣ (piCoeff (2 * ε + 1)).1 := three_dvd_piCoeff_fst _
+  have hPb : (3 : ℤ) ∣ (piCoeff (2 * (ε + g) + 1)).1 := three_dvd_piCoeff_fst _
+  rcases Nat.eq_zero_or_pos g with hg0 | hgpos
+  · -- equal heights: the constant rows read `eC` modulo three
+    subst hg0
+    obtain ⟨p, hp⟩ := hPb
+    obtain ⟨r, hr⟩ := hRe
+    have hRS : ((piCoeff (2 * ε + 1)).1 + (piCoeff (2 * ε + 1)).2) % 3 = 1 := by omega
+    rw [hp] at k₁ k₂
+    have hEC3 : (3 : ℤ) ∣ hexE c.val := by
+      refine dvd_of_dvd_mul_units hRS (show (1 : ℤ) % 3 = 1 by decide) ?_
+      exact ⟨3 ^ ε * (hexE ((a + c).val) * (piCoeff (2 * 0)).1) + 3 ^ ε
+        - hexE a.val * p, by linear_combination k₁⟩
+    have hFC3 : (3 : ℤ) ∣ hexF c.val := by
+      refine dvd_of_dvd_mul_units hRS (show (1 : ℤ) % 3 = 1 by decide) ?_
+      exact ⟨3 ^ ε * (hexF ((a + c).val) * (piCoeff (2 * 0)).1)
+        - hexF a.val * p, by linear_combination k₂⟩
+    exact hexE_hexF_not_both_dvd c.val (ZMod.val_lt c) ⟨hEC3, hFC3⟩
+  · -- strictly larger height: the π rows read `eA` modulo three
+    obtain ⟨g', rfl⟩ : ∃ g', g = g' + 1 := ⟨g - 1, by omega⟩
+    have hEA3 : (3 : ℤ) ∣ hexE a.val := by
+      refine dvd_of_dvd_mul_units hZb (show (1 : ℤ) % 3 = 1 by decide) ?_
+      exact ⟨3 ^ g' * (hexE c.val * (piCoeff (2 * ε + 1)).2)
+        + 3 ^ ε * (hexE ((a + c).val) * (piCoeff (2 * (g' + 1))).2),
+        by linear_combination k₃⟩
+    have hFA3 : (3 : ℤ) ∣ hexF a.val := by
+      refine dvd_of_dvd_mul_units hZb (show (1 : ℤ) % 3 = 1 by decide) ?_
+      exact ⟨3 ^ g' * (hexF c.val * (piCoeff (2 * ε + 1)).2)
+        + 3 ^ ε * (hexF ((a + c).val) * (piCoeff (2 * (g' + 1))).2),
+        by linear_combination k₄⟩
+    exact hexE_hexF_not_both_dvd a.val (ZMod.val_lt a) ⟨hEA3, hFA3⟩
+
+/-- **Odd heights of mixed sign never solve the norm branch**: the sporadics and both
+glue families all live at same-sign heights. -/
+theorem normBranch_odd_neg {a c : ZMod 6} {β ε : ℕ}
+    (h : NormBranch a ((2 * β + 1 : ℕ) : ℤ) c (-((2 * ε + 1 : ℕ) : ℤ))) : False := by
+  rcases le_total ε β with hle | hle
+  · exact normBranch_odd_neg_aux hle h
+  · have h' := normBranch_conj (normBranch_swap h)
+    rw [neg_neg] at h'
+    exact normBranch_odd_neg_aux hle h'
+
+/-- The classification at non-negative heights: a crossing, a sporadic, or the glue
+pair — the assembly of the five parity cases. -/
+private theorem normBranch_nat_complete {a c : ZMod 6} {m n : ℕ}
+    (h : NormBranch a (m : ℤ) c (n : ℤ)) :
+    (a = 0 ∧ m = 0 ∧ c = 3 ∧ n = 0) ∨ (a = 3 ∧ m = 0 ∧ c = 0 ∧ n = 0) ∨
+      (a = 1 ∧ m = 1 ∧ c = 5 ∧ n = 1) ∨ (a = 5 ∧ m = 1 ∧ c = 1 ∧ n = 1) ∨
+      (a = 0 ∧ m = 1 ∧ c = 3 ∧ n = 3) ∨ (a = 3 ∧ m = 3 ∧ c = 0 ∧ n = 1) := by
+  have hpar := normBranch_parity h
+  rcases Nat.even_or_odd m with hme | hmo
+  · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := by
+      rcases hme with ⟨t, ht⟩
+      exact ⟨t, by omega⟩
+    obtain ⟨δ, rfl⟩ : ∃ δ, n = 2 * δ := ⟨n / 2, by omega⟩
+    obtain ⟨hβ0, hδ0, hcr⟩ := normBranch_even h
+    subst hβ0
+    subst hδ0
+    rcases hcr with ⟨ha, hc'⟩ | ⟨ha, hc'⟩
+    · exact Or.inl ⟨ha, by norm_num, hc', by norm_num⟩
+    · exact Or.inr (Or.inl ⟨ha, by norm_num, hc', by norm_num⟩)
+  · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β + 1 := by
+      rcases hmo with ⟨t, ht⟩
+      exact ⟨t, by omega⟩
+    obtain ⟨δ, rfl⟩ : ∃ δ, n = 2 * δ + 1 := ⟨n / 2, by omega⟩
+    rcases Nat.eq_zero_or_pos β with hβ0 | hβpos <;>
+      rcases Nat.eq_zero_or_pos δ with hδ0 | hδpos
+    · subst hβ0
+      subst hδ0
+      have h1 : NormBranch a ((1 : ℕ) : ℤ) c ((1 : ℕ) : ℤ) := by
+        rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num] at h
+        exact h
+      rcases normBranch_odd_one h1 with ⟨ha, hc'⟩ | ⟨ha, hc'⟩
+      · exact Or.inr (Or.inr (Or.inl ⟨ha, by norm_num, hc', by norm_num⟩))
+      · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨ha, by norm_num, hc', by norm_num⟩)))
+    · subst hβ0
+      have h1 : NormBranch a ((1 : ℕ) : ℤ) c ((2 * δ + 1 : ℕ) : ℤ) := by
+        rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num] at h
+        exact h
+      obtain ⟨ha, hc', hδ1⟩ := normBranch_odd_mixed hδpos h1
+      subst hδ1
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨ha, by norm_num, hc', by norm_num⟩))))
+    · subst hδ0
+      have h1 : NormBranch c ((1 : ℕ) : ℤ) a ((2 * β + 1 : ℕ) : ℤ) := by
+        have hs := normBranch_swap h
+        rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num] at hs
+        exact hs
+      obtain ⟨hc', ha, hβ1⟩ := normBranch_odd_mixed hβpos h1
+      subst hβ1
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨ha, by norm_num, hc', by norm_num⟩))))
+    · exact (normBranch_odd_large hβpos hδpos h).elim
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
@@ -1662,27 +2020,100 @@ def iiNormTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
    (1, 1, 5, 1), (5, 1, 1, 1), (1, -1, 5, -1), (5, -1, 1, -1),
    (0, 1, 3, 3), (3, 3, 0, 1), (0, -1, 3, -3), (3, -3, 0, -1)]
 
-/-- **The ii bound**: away from the boundary rows, a norm-branch partner exists only at
-seam height one.
-
-NOT YET PROVEN. The parity cases it assembles from are: `normBranch_parity` (mixed
-parity impossible), `normBranch_even` (both even ⟹ both zero), `normBranch_odd_large`
-(both odd and ≥ 3 ⟹ impossible) and `normBranch_odd_one` (both one ⟹ the sporadic hex
-pair) — all proven above. What is missing is the one-height-one case and the reduction
-of signed heights to those through `normBranch_conj` and `normBranch_swap`. See
-`plans/M24-completeness.md` § "The completeness core". -/
-theorem ii_norm_bound (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
-    (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1))
-    (hb : 2 ≤ |b|) : |d| = 1 := by
-  sorry
-
-/-- **ii completeness**: every lattice solution of the norm form is in the table.
-
-NOT YET PROVEN — see `ii_norm_bound` for what it assembles from. -/
+/-- **ii completeness**: every lattice solution of the norm form is in the table. The
+parity split (`normBranch_parity` / `normBranch_parity_neg`) reduces the signed heights
+to the five proven non-negative cases plus the two mixed-sign kills
+(`normBranch_even_neg`, `normBranch_odd_neg`), closed under swap and conjugation. -/
 theorem ii_norm_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1)) :
     (a, b, c, d) ∈ iiNormTable := by
-  sorry
+  have h : NormBranch a b c d := hm
+  rcases (by omega : 0 ≤ b ∨ b < 0) with hb | hb <;>
+    rcases (by omega : 0 ≤ d ∨ d < 0) with hd | hd
+  · -- both heights non-negative: the classification, verbatim
+    obtain ⟨m, rfl⟩ : ∃ m : ℕ, b = (m : ℤ) := ⟨b.toNat, by omega⟩
+    obtain ⟨n, rfl⟩ : ∃ n : ℕ, d = (n : ℤ) := ⟨d.toNat, by omega⟩
+    rcases normBranch_nat_complete h with ⟨ha, hm', hc', hn⟩ | ⟨ha, hm', hc', hn⟩ |
+      ⟨ha, hm', hc', hn⟩ | ⟨ha, hm', hc', hn⟩ | ⟨ha, hm', hc', hn⟩ | ⟨ha, hm', hc', hn⟩ <;>
+        subst ha <;> subst hm' <;> subst hc' <;> subst hn <;> decide
+  · -- second height negative: impossible
+    obtain ⟨m, rfl⟩ : ∃ m : ℕ, b = (m : ℤ) := ⟨b.toNat, by omega⟩
+    obtain ⟨n, hn⟩ : ∃ n : ℕ, d = -(n : ℤ) := ⟨d.natAbs, by omega⟩
+    subst hn
+    have hn1 : 1 ≤ n := by omega
+    have hpar := normBranch_parity_neg h
+    rcases Nat.even_or_odd m with hme | hmo
+    · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := by
+        rcases hme with ⟨t, ht⟩
+        exact ⟨t, by omega⟩
+      obtain ⟨ε, rfl⟩ : ∃ ε, n = 2 * ε := ⟨n / 2, by omega⟩
+      exact (normBranch_even_neg (by omega) h).elim
+    · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β + 1 := by
+        rcases hmo with ⟨t, ht⟩
+        exact ⟨t, by omega⟩
+      obtain ⟨ε, rfl⟩ : ∃ ε, n = 2 * ε + 1 := ⟨n / 2, by omega⟩
+      exact (normBranch_odd_neg h).elim
+  · -- first height negative: the swap of the previous case
+    have h' := normBranch_swap h
+    obtain ⟨m, rfl⟩ : ∃ m : ℕ, d = (m : ℤ) := ⟨d.toNat, by omega⟩
+    obtain ⟨n, hn⟩ : ∃ n : ℕ, b = -(n : ℤ) := ⟨b.natAbs, by omega⟩
+    subst hn
+    have hn1 : 1 ≤ n := by omega
+    have hpar := normBranch_parity_neg h'
+    rcases Nat.even_or_odd m with hme | hmo
+    · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := by
+        rcases hme with ⟨t, ht⟩
+        exact ⟨t, by omega⟩
+      obtain ⟨ε, rfl⟩ : ∃ ε, n = 2 * ε := ⟨n / 2, by omega⟩
+      exact (normBranch_even_neg (by omega) h').elim
+    · obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β + 1 := by
+        rcases hmo with ⟨t, ht⟩
+        exact ⟨t, by omega⟩
+      obtain ⟨ε, rfl⟩ : ∃ ε, n = 2 * ε + 1 := ⟨n / 2, by omega⟩
+      exact (normBranch_odd_neg h').elim
+  · -- both heights negative: conjugate into the non-negative classification
+    have h' := normBranch_conj h
+    obtain ⟨m, hm'⟩ : ∃ m : ℕ, b = -(m : ℤ) := ⟨b.natAbs, by omega⟩
+    obtain ⟨n, hn'⟩ : ∃ n : ℕ, d = -(n : ℤ) := ⟨d.natAbs, by omega⟩
+    subst hm'
+    subst hn'
+    rw [neg_neg, neg_neg] at h'
+    have hm1 : 1 ≤ m := by omega
+    have hfixa : ∀ x y : ZMod 6, -x = y → x = -y := by decide
+    rcases normBranch_nat_complete h' with ⟨ha, hmm, hc', hnn⟩ | ⟨ha, hmm, hc', hnn⟩ |
+      ⟨ha, hmm, hc', hnn⟩ | ⟨ha, hmm, hc', hnn⟩ | ⟨ha, hmm, hc', hnn⟩ | ⟨ha, hmm, hc', hnn⟩
+    · omega
+    · omega
+    · rw [hfixa a 1 ha, hfixa c 5 hc']
+      subst hmm
+      subst hnn
+      decide
+    · rw [hfixa a 5 ha, hfixa c 1 hc']
+      subst hmm
+      subst hnn
+      decide
+    · rw [hfixa a 0 ha, hfixa c 3 hc']
+      subst hmm
+      subst hnn
+      decide
+    · rw [hfixa a 3 ha, hfixa c 0 hc']
+      subst hmm
+      subst hnn
+      decide
+
+/-- **The ii bound**: away from the boundary rows, a norm-branch partner exists only at
+seam height one — read off `ii_norm_complete`, where every table row with `|b| ≥ 2` has
+`|d| = 1`. -/
+theorem ii_norm_bound (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
+    (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1))
+    (hb : 2 ≤ |b|) : |d| = 1 := by
+  have hmem := ii_norm_complete a b c d hm
+  simp only [iiNormTable, List.mem_cons, List.not_mem_nil, or_false,
+    Prod.mk.injEq] at hmem
+  rcases hmem with ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ |
+      ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ |
+      ⟨-, h1, -, h2⟩ | ⟨-, h1, -, h2⟩ <;>
+    subst h1 <;> subst h2 <;> revert hb <;> decide
 
 /-- The complete solution set of the oi chord equation: four sporadics and twelve
 glue-incident chords — sixteen chords EVER, no infinite family (E3/E5: no growth from
