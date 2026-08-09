@@ -1164,35 +1164,101 @@ example : iiNormTable.length = 10 := rfl
 example : oiTable.length = 16 := rfl
 example : colTab false false 0 = 0 ∧ colTab true false 0 = 2 := ⟨rfl, rfl⟩
 
--- the pivots are lattice members with no special casing
-example : (0 : ℂ) ∈ ladderSet := by
-  sorry
+/-- Splitting a word into its hex and seam halves — the shape the concrete checks use. -/
+private theorem word_split (a : ZMod 6) (b : ℤ) : word a b = word a 0 * word 0 b := by
+  rw [← word_add]
+  norm_num
 
-example : (1 : ℂ) ∈ ladderSet := by
-  sorry
+private theorem word_seam_zpow (b : ℤ) : word 0 b = seam ^ b := by
+  rw [word, show (((0 : ZMod 6)).val : ℤ) = 0 from rfl, zpow_zero, one_mul]
+
+private theorem zeta6_add_conj : zeta6 + (starRingEnd ℂ) zeta6 = 1 := by
+  rw [← Triangle.one_sub_zeta6]
+  ring
+
+private theorem sqrt3_mul_one_add_seam_sq :
+    ((Real.sqrt 3 : ℝ) : ℂ) * (1 + seam ^ 2) = seam := by
+  rw [← seam_rel, inner_ratio_cast]
+  field_simp
+  linear_combination seam * sqrt3_cast_sq
+
+private theorem word_00 : word 0 0 = 1 := by simp [word]
+
+private theorem outerPt_zero (p q : ℂ) : outerPt p q 0 0 = q := by
+  show p + word 0 0 * (q - p) = q
+  rw [word_00]
+  ring
+
+-- the pivots are lattice members with no special casing
+example : (0 : ℂ) ∈ ladderSet := Or.inr (Or.inl ⟨(0, 0), outerPt_zero 1 0⟩)
+
+example : (1 : ℂ) ∈ ladderSet := Or.inl (Or.inl ⟨(0, 0), outerPt_zero 0 1⟩)
 
 -- a sporadic chord, concretely: the ii sporadic (1,1) → (5,1)
 example : dist (innerPt 0 1 1 1) (innerPt 1 0 5 1) = 1 := by
-  sorry
+  refine (ii_chord_iff dist_01 1 1 5 1).mpr (Or.inr ?_)
+  rw [word_split 1 1, word_split 5 1, word_10, word_conj_10, word_seam_zpow,
+    show ((1 : ℤ)) = ((1 : ℕ) : ℤ) from rfl, zpow_natCast, pow_one]
+  have hz := zeta6_add_conj
+  have hs := sqrt3_mul_one_add_seam_sq
+  linear_combination seam * hz - ((Real.sqrt 3 : ℝ) : ℂ) * seam ^ 2 * zeta6_mul_conj - hs
 
 -- the adversarial member: the neighbouring ii pair is NOT a chord (the table's
 -- discriminating example — colour equality here must not matter)
 example : dist (innerPt 0 1 2 1) (innerPt 1 0 4 1) ≠ 1 := by
-  sorry
+  intro hd
+  rcases (ii_chord_iff dist_01 2 1 4 1).mp hd with ⟨hc, -⟩ | hnorm
+  · exact absurd hc (by decide)
+  · -- the norm branch would force `−σ = σ`
+    rw [word_split 2 1, word_split 4 1, word_20, word_conj_20, word_seam_zpow,
+      show ((1 : ℤ)) = ((1 : ℕ) : ℤ) from rfl, zpow_natCast, pow_one] at hnorm
+    have hz : zeta6 ^ 2 + (starRingEnd ℂ) (zeta6 ^ 2) = -1 := by
+      rw [map_pow, ← Triangle.one_sub_zeta6]
+      linear_combination (2 : ℂ) * zeta6_minpoly
+    have hzz : zeta6 ^ 2 * (starRingEnd ℂ) (zeta6 ^ 2) = 1 := by
+      rw [map_pow, ← mul_pow, zeta6_mul_conj, one_pow]
+    have hs := sqrt3_mul_one_add_seam_sq
+    have hzero : (2 : ℂ) * seam = 0 := by
+      linear_combination -hnorm + seam * hz - ((Real.sqrt 3 : ℝ) : ℂ) * seam ^ 2 * hzz - hs
+    rcases mul_eq_zero.mp hzero with h2 | h2
+    · norm_num at h2
+    · exact seam_ne_zero h2
 
 -- the matching translate at inner height 1 is a chord
-example : dist (innerPt 0 1 0 1) (innerPt 1 0 3 1) = 1 := by
-  sorry
+example : dist (innerPt 0 1 0 1) (innerPt 1 0 3 1) = 1 :=
+  (ii_chord_iff dist_01 0 1 3 1).mpr (Or.inl ⟨by decide, rfl⟩)
 
 -- the glue-incident norm-branch chord (σ, −σ³): audit partner for iiNormTable entry
 -- (0,1,3,3) — deleting that entry must break this example's route through
 -- ii_norm_complete's assembly
 example : dist (innerPt 0 1 0 1) (innerPt 1 0 3 3) = 1 := by
-  sorry
+  refine (ii_chord_iff dist_01 0 1 3 3).mpr (Or.inr ?_)
+  have h30 : word 3 0 = -1 := by
+    rw [word, show (((3 : ZMod 6)).val : ℤ) = ((3 : ℕ) : ℤ) from rfl, zpow_natCast, zpow_zero,
+      mul_one]
+    exact zeta6_cube
+  rw [word_split 3 3, h30, word_seam_zpow, word_seam_zpow,
+    show ((1 : ℤ)) = ((1 : ℕ) : ℤ) from rfl, show ((3 : ℤ)) = ((3 : ℕ) : ℤ) from rfl,
+    zpow_natCast, zpow_natCast, pow_one]
+  have hs := sqrt3_mul_one_add_seam_sq
+  linear_combination (seam ^ 2 - 1) * hs
 
 -- an oi glue-incident chord: audit partner for oiTable entry (1,0,5,1)
 example : dist (outerPt 0 1 1 0) (innerPt 1 0 5 1) = 1 := by
-  sorry
+  refine (oi_chord_iff dist_01 1 0 5 1).mpr ?_
+  rw [word_10, word_split 5 1, word_conj_10, word_seam_zpow,
+    show ((1 : ℤ)) = ((1 : ℕ) : ℤ) from rfl, zpow_natCast, pow_one,
+    show ((Real.sqrt 3 : ℝ) : ℂ) * (1 - zeta6) - (starRingEnd ℂ) zeta6 * seam
+      = (starRingEnd ℂ) zeta6 * (((Real.sqrt 3 : ℝ) : ℂ) - seam) by
+        rw [Triangle.one_sub_zeta6]; ring,
+    map_mul]
+  have hc : normSq ((starRingEnd ℂ) zeta6) = 1 := by
+    rw [Complex.normSq_conj, ← Complex.sq_norm, norm_zeta6]
+    norm_num
+  rw [hc, one_mul]
+  simp only [normSq_apply, Complex.sub_re, Complex.sub_im, Complex.ofReal_re, Complex.ofReal_im,
+    seam]
+  nlinarith [sq_sqrt3, sq_sqrt33, sqrt3_mul_sqrt33]
 
 end Ladder
 end HadwigerNelson
