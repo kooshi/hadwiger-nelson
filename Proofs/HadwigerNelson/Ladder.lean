@@ -377,6 +377,11 @@ private theorem word_32 : word 3 2 = -seam ^ 2 := by
     show ((2 : ℤ)) = ((2 : ℕ) : ℤ) from rfl, zpow_natCast]
   ring
 
+private theorem word_30 : word 3 0 = -1 := by
+  rw [show ((3 : ZMod 6)) = ((3 : ℤ) : ZMod 6) by decide, word_intCast,
+    show ((3 : ℤ)) = ((3 : ℕ) : ℤ) from rfl, zpow_natCast, zpow_zero, mul_one]
+  exact zeta6_cube
+
 private theorem word_conj_10 : word 5 0 = (starRingEnd ℂ) zeta6 := by
   rw [← word_10, word_conj]
   rfl
@@ -1237,6 +1242,59 @@ theorem normBranch_parity {a c : ZMod 6} {b d : ℕ} (h : NormBranch a b c d) :
     rw [show (9 : ℝ) = 3 ^ 2 by norm_num, ← pow_mul]
     ring
   nlinarith [hnorm, hgrow, pow_pos (show (0 : ℝ) < 3 by norm_num) (2 * δ + 1)]
+
+private theorem zmod_pair_pin : ∀ a c : ZMod 6, a + c = 3 → c = a + 3 →
+    (a = 0 ∧ c = 3) ∨ (a = 3 ∧ c = 0) := by decide
+
+/-- **Both heights even**: the product of the two words is forced to `−1`, and the seam's
+infinite order pins both heights to zero — the two matching-crossings, and nothing else. -/
+theorem normBranch_even {a c : ZMod 6} {β δ : ℕ}
+    (h : NormBranch a ((2 * β : ℕ) : ℤ) c ((2 * δ : ℕ) : ℤ)) :
+    β = 0 ∧ δ = 0 ∧ ((a = 0 ∧ c = 3) ∨ (a = 3 ∧ c = 0)) := by
+  have hc := normBranch_cleared h
+  set A := zeta6 ^ (a.val : ℤ) * piC ^ (2 * β) with hAdef
+  set B := zeta6 ^ (c.val : ℤ) * piC ^ (2 * δ) with hBdef
+  rw [sqrt3_pow_two_mul, sqrt3_pow_two_mul,
+    show 2 * β + 2 * δ + 1 = 2 * (β + δ) + 1 by ring, pow_succ, sqrt3_pow_two_mul] at hc
+  obtain ⟨hX, hY⟩ := eq_zero_of_add_sqrt3_mul
+    (((inRing_three_pow δ).mul (inRing_elt a (2 * β))).add
+      ((inRing_three_pow β).mul (inRing_elt c (2 * δ))))
+    ((((inRing_elt a (2 * β)).mul (inRing_elt c (2 * δ))).add
+      (inRing_three_pow (β + δ))).neg)
+    (show ((3 : ℂ) ^ δ * A + (3 : ℂ) ^ β * B)
+        + ((Real.sqrt 3 : ℝ) : ℂ) * (-(A * B + (3 : ℂ) ^ (β + δ))) = 0 by
+      linear_combination hc)
+  -- the product of the two words is `−1`, so its address is `(3, 0)`
+  have hAB : A * B = -(3 : ℂ) ^ (β + δ) := by linear_combination -hY
+  have hz : zeta6 ^ (((a + c).val : ℕ) : ℤ) = zeta6 ^ (a.val : ℤ) * zeta6 ^ (c.val : ℤ) := by
+    rw [← zpow_add₀ zeta6_ne_zero, ← zeta6_zpow_val ((a.val : ℤ) + (c.val : ℤ))]
+    congr 2
+  have hcl := sqrt3_pow_mul_word (a + c) (2 * β + 2 * δ)
+  rw [hz, show (2 * β + 2 * δ) = 2 * (β + δ) by ring, sqrt3_pow_two_mul, pow_mul,
+    show ((piC ^ 2) ^ (β + δ)) = piC ^ (2 * β) * piC ^ (2 * δ) by
+      rw [← pow_mul, ← pow_add]; ring_nf] at hcl
+  have hprod : word (a + c) ((2 * (β + δ) : ℕ) : ℤ) = -1 := by
+    refine mul_left_cancel₀ (a := ((3 : ℂ) ^ (β + δ))) (pow_ne_zero _ (by norm_num)) ?_
+    rw [hcl]
+    have : zeta6 ^ (a.val : ℤ) * zeta6 ^ (c.val : ℤ) * (piC ^ (2 * β) * piC ^ (2 * δ))
+        = A * B := by rw [hAdef, hBdef]; ring
+    rw [this, hAB]
+    ring
+  obtain ⟨hac, hbd⟩ := (word_inj (a + c) 3 ((2 * (β + δ) : ℕ) : ℤ) 0).mp
+    (by rw [hprod, word_30])
+  have hβ : β = 0 := by omega
+  have hδ : δ = 0 := by omega
+  subst hβ
+  subst hδ
+  refine ⟨rfl, rfl, ?_⟩
+  -- the surviving equation `A + B = 0` says the two hex words are opposite
+  have hw : word c 0 = -word a 0 := by
+    have hA0 : word a 0 = zeta6 ^ (a.val : ℤ) * piC ^ (2 * 0) := by rw [word]; norm_num
+    have hB0 : word c 0 = zeta6 ^ (c.val : ℤ) * piC ^ (2 * 0) := by rw [word]; norm_num
+    rw [hA0, hB0]
+    linear_combination hX
+  obtain ⟨hca, -⟩ := (word_neg_iff a c 0 0).mp hw
+  exact zmod_pair_pin a c hac hca
 
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
