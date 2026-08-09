@@ -251,6 +251,54 @@ private theorem word_eq_of_re {A : ZMod 6} {B : ℤ} {c : ℂ} (hc : normSq c = 
 
 /-! ## §D The cross-chord bridges (general unit pair) -/
 
+private theorem word_mul_conj (a : ZMod 6) (b : ℤ) :
+    word a b * (starRingEnd ℂ) (word a b) = 1 := by
+  rw [Complex.mul_conj, word_normSq]
+  norm_num
+
+private theorem sqrt3_cast_sq : ((Real.sqrt 3 : ℝ) : ℂ) * ((Real.sqrt 3 : ℝ) : ℂ) = 3 := by
+  rw [← Complex.ofReal_mul, sq_sqrt3]
+  norm_num
+
+private theorem inner_ratio_cast : ((Real.sqrt 3 / 3 : ℝ) : ℂ) = ((Real.sqrt 3 : ℝ) : ℂ) / 3 := by
+  push_cast
+  ring
+
+/-- **The inner–inner chord key**: on units, the inner-circle chord condition factors as
+the matching branch times the **norm branch** `u + v = √3(uv + 1)` — the symmetric,
+division-free form of `(√3u−1)(√3v−1) = −2`. Sympy-derived cofactors. -/
+private theorem ii_key {u v : ℂ} (hu : u * (starRingEnd ℂ) u = 1)
+    (hv : v * (starRingEnd ℂ) v = 1) :
+    normSq (1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * (u + v)) = 1 ↔
+      (u + v) * ((u + v) - ((Real.sqrt 3 : ℝ) : ℂ) * (u * v + 1)) = 0 := by
+  have hu0 : u ≠ 0 := fun hz => by simp [hz] at hu
+  have hv0 : v ≠ 0 := fun hz => by simp [hz] at hv
+  have hT := sqrt3_cast_sq
+  have hconj : (starRingEnd ℂ) (1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * (u + v))
+      = 1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * ((starRingEnd ℂ) u + (starRingEnd ℂ) v) := by
+    rw [map_sub, map_one, map_mul, Complex.conj_ofReal, map_add]
+  have hbridge : normSq (1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * (u + v)) = 1 ↔
+      (1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * (u + v))
+        * (1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * ((starRingEnd ℂ) u + (starRingEnd ℂ) v)) = 1 := by
+    rw [← hconj, Complex.mul_conj]
+    constructor
+    · intro hz; rw [hz]; norm_num
+    · intro hz; exact_mod_cast hz
+  rw [hbridge, inner_ratio_cast]
+  set T := ((Real.sqrt 3 : ℝ) : ℂ) with hTdef
+  constructor
+  · intro hK
+    linear_combination (3 * (u * v)) * hK + (-T * v * (T * u + T * v - 3) / 3) * hu
+      + (-T * u * (T * u + T * v - 3) / 3) * hv + (-(u + v) ^ 2 / 3) * hT
+  · intro hfac
+    have hmul : (3 * (u * v)) * ((1 - T / 3 * (u + v))
+        * (1 - T / 3 * ((starRingEnd ℂ) u + (starRingEnd ℂ) v)) - 1) = 0 := by
+      linear_combination hfac - (-T * v * (T * u + T * v - 3) / 3) * hu
+        - (-T * u * (T * u + T * v - 3) / 3) * hv - (-(u + v) ^ 2 / 3) * hT
+    rcases mul_eq_zero.mp hmul with hz | hz
+    · exact absurd hz (by simpa using mul_ne_zero hu0 hv0)
+    · exact sub_eq_zero.mp hz
+
 /-- **Outer–outer completeness**: matching translate, or one endpoint is the other
 pivot (the hub branches). The factorization `(x+v)(x−1)(v−1) = 0` in address form —
 no sporadics exist on this family. -/
@@ -258,18 +306,31 @@ theorem oo_complete {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : Z
     (d : ℤ) :
     dist (outerPt p q a b) (outerPt q p c d) = 1 ↔
       ((c = a + 3 ∧ d = b) ∨ (a = 0 ∧ b = 0) ∨ (c = 0 ∧ d = 0)) := by
-  sorry
+  rw [outerPt, outerPt, cross_dist, norm_axis h, one_mul, norm_eq_one_iff,
+    show (1 : ℂ) - word a b - word c d = -(word a b + word c d - 1) by ring, normSq_neg,
+    Triangle.unit_chord_units (word_mul_conj a b) (word_mul_conj c d),
+    mul_eq_zero, mul_eq_zero, sub_eq_zero, sub_eq_zero,
+    show (word a b + word c d = 0) ↔ word c d = -word a b from
+      ⟨fun hz => by linear_combination hz, fun hz => by rw [hz]; ring⟩,
+    word_neg_iff, word_eq_one_iff, word_eq_one_iff]
+  tauto
 
 /-- **The inner–inner bridge**: the matching translate (in address form, like
-`oo_complete`), or the Möbius norm form `v·(√3u − 1) = u − √3` (division-free form of
-`(√3u−1)(√3v−1) = −2`, i.e. `v = μ(u)`) — whose complete lattice solution set is
-`ii_norm_complete`. -/
+`oo_complete`), or the **norm branch** `u + v = √3(uv + 1)` — whose complete lattice
+solution set is `ii_norm_complete`. -/
 theorem ii_chord_iff {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : ZMod 6)
     (d : ℤ) :
     dist (innerPt p q a b) (innerPt q p c d) = 1 ↔
       ((c = a + 3 ∧ d = b) ∨
-        word c d * ((Real.sqrt 3 : ℂ) * word a b - 1) = word a b - (Real.sqrt 3 : ℂ)) := by
-  sorry
+        word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1)) := by
+  rw [innerPt, innerPt, cross_dist, norm_axis h, one_mul, norm_eq_one_iff,
+    show (1 : ℂ) - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * word a b
+        - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * word c d
+      = 1 - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * (word a b + word c d) by ring,
+    ii_key (word_mul_conj a b) (word_mul_conj c d), mul_eq_zero,
+    show (word a b + word c d = 0) ↔ word c d = -word a b from
+      ⟨fun hz => by linear_combination hz, fun hz => by rw [hz]; ring⟩,
+    word_neg_iff, sub_eq_zero]
 
 /-- **The outer–inner bridge**: the unfactorable branch, as the norm equation of
 `A = √3(1−x) − v` (E1: identical to M23's three-term identity). The io family is this
@@ -277,8 +338,19 @@ bridge read at the swapped anchor — no separate theorem. -/
 theorem oi_chord_iff {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : ZMod 6)
     (d : ℤ) :
     dist (outerPt p q a b) (innerPt q p c d) = 1 ↔
-      normSq ((Real.sqrt 3 : ℂ) * (1 - word a b) - word c d) = 3 := by
-  sorry
+      normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3 := by
+  have hscale : ((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d
+      = ((Real.sqrt 3 : ℝ) : ℂ)
+        * (1 - word a b - ((Real.sqrt 3 / 3 : ℝ) : ℂ) * word c d) := by
+    rw [inner_ratio_cast]
+    linear_combination (word c d / 3) * sqrt3_cast_sq
+  have hns : normSq ((Real.sqrt 3 : ℝ) : ℂ) = 3 := by
+    simp only [normSq_apply, Complex.ofReal_re, Complex.ofReal_im]
+    nlinarith [sq_sqrt3]
+  rw [outerPt, innerPt, cross_dist, norm_axis h, one_mul, norm_eq_one_iff, hscale, map_mul, hns]
+  constructor
+  · intro hz; rw [hz]; norm_num
+  · intro hz; linarith
 
 /-! ### The real-part fibres
 
@@ -748,13 +820,13 @@ def iiNormTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
 image of a lattice word can only be lattice at seam height one. Two-prime π/π̄
 bookkeeping in `ℤ[ζ₆, π]`, `π = √3σ = (1+i√11)/2`, `π² = π − 3`. -/
 theorem ii_norm_bound (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
-    (hm : word c d * ((Real.sqrt 3 : ℂ) * word a b - 1) = word a b - (Real.sqrt 3 : ℂ))
+    (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1))
     (hb : 2 ≤ |b|) : |d| = 1 := by
   sorry
 
 /-- **ii completeness**: every lattice solution of the norm form is in the table. -/
 theorem ii_norm_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
-    (hm : word c d * ((Real.sqrt 3 : ℂ) * word a b - 1) = word a b - (Real.sqrt 3 : ℂ)) :
+    (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1)) :
     (a, b, c, d) ∈ iiNormTable := by
   sorry
 
@@ -770,7 +842,7 @@ def oiTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
 /-- **oi completeness**: every lattice solution of the outer–inner chord equation is in
 the table. -/
 theorem oi_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
-    (h : normSq ((Real.sqrt 3 : ℂ) * (1 - word a b) - word c d) = 3) :
+    (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
     (a, b, c, d) ∈ oiTable := by
   sorry
 

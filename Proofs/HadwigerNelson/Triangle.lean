@@ -165,9 +165,14 @@ private theorem pair_eq_of_mem {α : Type*} {a b x y : α} (hx : x ∈ ({a, b} :
   · exact Set.pair_comm y x
   · exact absurd rfl hxy
 
-/-- Engine 3a (the oo chord key): on units, the chord condition factors —
-`|u + v − 1| = 1 ⟺ (u+v)(u−1)(v−1) = 0`. Pure algebra; sympy-verified identity. -/
-private theorem unit_chord_units {u v : ℂ} (hu : u * (starRingEnd ℂ) u = 1)
+/-- **The outer–outer chord key**: on units, the chord condition factors —
+`|u + v − 1| = 1 ⟺ (u+v)(u−1)(v−1) = 0`, the matching branch times the two hub branches.
+Pure algebra; sympy-verified identity.
+
+Public because it is the outer–outer classification's whole content and M24's `Ladder`
+consumes it directly (`oo_complete`) — the same factorization at every axis, so M25–M27
+instantiate it too. `unit_chord_outer_outer` below is its geometric reading. -/
+theorem unit_chord_units {u v : ℂ} (hu : u * (starRingEnd ℂ) u = 1)
     (hv : v * (starRingEnd ℂ) v = 1) :
     normSq (u + v - 1) = 1 ↔ (u + v) * (u - 1) * (v - 1) = 0 := by
   have hu0 : u ≠ 0 := fun h => by simp [h] at hu
