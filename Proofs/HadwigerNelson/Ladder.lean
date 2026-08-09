@@ -1531,15 +1531,23 @@ def iiNormTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
    (1, 1, 5, 1), (5, 1, 1, 1), (1, -1, 5, -1), (5, -1, 1, -1),
    (0, 1, 3, 3), (3, 3, 0, 1), (0, -1, 3, -3), (3, -3, 0, -1)]
 
-/-- **The ii bound** (the valuation core): away from the boundary rows, the Möbius
-image of a lattice word can only be lattice at seam height one. Two-prime π/π̄
-bookkeeping in `ℤ[ζ₆, π]`, `π = √3σ = (1+i√11)/2`, `π² = π − 3`. -/
+/-- **The ii bound**: away from the boundary rows, a norm-branch partner exists only at
+seam height one.
+
+NOT YET PROVEN. The parity cases it assembles from are: `normBranch_parity` (mixed
+parity impossible), `normBranch_even` (both even ⟹ both zero), `normBranch_odd_large`
+(both odd and ≥ 3 ⟹ impossible) and `normBranch_odd_one` (both one ⟹ the sporadic hex
+pair) — all proven above. What is missing is the one-height-one case and the reduction
+of signed heights to those through `normBranch_conj` and `normBranch_swap`. See
+`plans/M24-completeness.md` § "The completeness core". -/
 theorem ii_norm_bound (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1))
     (hb : 2 ≤ |b|) : |d| = 1 := by
   sorry
 
-/-- **ii completeness**: every lattice solution of the norm form is in the table. -/
+/-- **ii completeness**: every lattice solution of the norm form is in the table.
+
+NOT YET PROVEN — see `ii_norm_bound` for what it assembles from. -/
 theorem ii_norm_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (hm : word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1)) :
     (a, b, c, d) ∈ iiNormTable := by
@@ -1555,7 +1563,12 @@ def oiTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
    (3, 2, 2, 1), (3, -2, 2, -1), (3, 2, 4, 1), (3, -2, 4, -1)]
 
 /-- **oi completeness**: every lattice solution of the outer–inner chord equation is in
-the table. -/
+the table.
+
+NOT YET PROVEN. Its real form is `Re(u·conj w) − √3·Re u − Re w + 2√3/3 = 0` and its
+parity signature is `b` even, `d` odd (both measured exactly); the machinery above —
+the clearing identity, the separation and the coordinate congruences — carries over
+family-for-family. See `plans/M24-completeness.md` § "The completeness core". -/
 theorem oi_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
     (a, b, c, d) ∈ oiTable := by
