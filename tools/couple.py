@@ -2707,10 +2707,137 @@ def self_test():
         assert _field_zero(sp, e4) is False, "radical nonzero wrongly confirmed"
     check("exact edge decision (sympy number field)", exact_edge)
 
+    # 21. the ladder census agrees with the Lean tables, and would notice if it did not
+    def ladder_census_control():
+        res = _ladder_chord_census(6)
+        for name in ("oo", "ii", "oi", "io"):
+            assert res[name]["sporadic"] == LEAN_SPORADICS[name], \
+                f"census/Lean disagreement on {name}: {res[name]['sporadic']}"
+        # planted control: a corrupted expectation must be caught
+        planted = dict(LEAN_SPORADICS)
+        planted["ii"] = LEAN_SPORADICS["ii"][:-1]
+        assert res["ii"]["sporadic"] != planted["ii"], \
+            "corrupted expectation not distinguished — the check is vacuous"
+    check("ladder census vs the Lean tables (+ planted disagreement)",
+          ladder_census_control)
+
     if failures:
         raise SystemExit(f"SELF-TEST FAILED: {len(failures)} control(s) red: "
                          f"{[n for n, _ in failures]}")
     print("self-test: all controls green", flush=True)
+
+
+def _ladder_chord_census(B=200):
+    """Every unit chord between the two pivots' lattices, out to seam height B.
+
+    The candidate net is O(1) per address (angle bins), so the whole census is O(B) —
+    the M23-era net was O(B) *per address* and died at B = 500.  Floats only propose;
+    every reported chord is decided by exact field arithmetic.  Returns
+    {family: {"matching": n, "glue": n, "sporadic": [addresses]}}.
+    """
+    import math
+    theta = math.degrees(math.atan(math.sqrt(11.0)))
+    bins = {}
+    for c in range(6):
+        for d in range(-B, B + 1):
+            k = round(((60.0 * c + theta * d) % 360.0) * 1e6)
+            for kk in (k - 1, k, k + 1):
+                bins.setdefault(kk, []).append((c, d))
+
+    one = frac_c({B1: 1}, {})
+    inv3 = frac_c({B3: Fraction(1, 3)}, {})
+    z6 = frac_c({B1: Fraction(1, 2)}, {B3: Fraction(1, 2)})
+    sig = frac_c({B3: Fraction(1, 6)}, {B33: Fraction(1, 6)})
+
+    def word(a, b):
+        out = one
+        for _ in range(a % 6):
+            out = cmul(out, z6)
+        step = sig if b >= 0 else cconj(sig)
+        for _ in range(abs(b)):
+            out = cmul(out, step)
+        return out
+
+    FUSED_O = {(0, 0), (1, 0), (5, 0), (3, 2), (3, -2)}
+    FUSED_I = {(0, 1), (0, -1)}
+    out = {}
+    for name, i1, i2, f1, f2 in (("oo", False, False, FUSED_O, FUSED_O),
+                                 ("ii", True, True, FUSED_I, FUSED_I),
+                                 ("oi", False, True, FUSED_O, FUSED_I),
+                                 ("io", True, False, FUSED_I, FUSED_O)):
+        r1f = 1.0 / math.sqrt(3.0) if i1 else 1.0
+        r2f = 1.0 / math.sqrt(3.0) if i2 else 1.0
+        r1v, r2v = (inv3 if i1 else one), (inv3 if i2 else one)
+        seen, match, glue, spor = set(), 0, 0, []
+        for a in range(6):
+            for b in range(-B, B + 1):
+                x = word(a, b)
+                xf = (to_float(x[0]), to_float(x[1]))
+                cx, cy = (1.0 - r1f * xf[0]) / r2f, (-r1f * xf[1]) / r2f
+                d2 = cx * cx + cy * cy
+                if d2 < 1e-14:
+                    continue
+                ac = (d2 + 1.0 - 1.0 / (r2f * r2f)) / 2.0
+                disc = d2 - ac * ac
+                if disc < -1e-12:
+                    continue
+                sq = math.sqrt(max(disc, 0.0))
+                for sgn in (1.0, -1.0):
+                    vx = (ac * cx - sgn * sq * cy) / d2
+                    vy = (ac * cy + sgn * sq * cx) / d2
+                    th = math.degrees(math.atan2(vy, vx))
+                    for (c, d) in bins.get(round((th % 360.0) * 1e6), []):
+                        h = ((a, b), (c, d))
+                        if h in seen:
+                            continue
+                        E = _csub(one, _cadd(cmul(r1v, x), cmul(r2v, word(c, d))))
+                        if any(sub(cmul(E, cconj(E))[0], const(1))):
+                            continue
+                        seen.add(h)
+                        if i1 == i2 and (c - a) % 6 == 3 and d == b:
+                            match += 1
+                        elif (a % 6, b) in f1 or (c % 6, d) in f2:
+                            glue += 1
+                        else:
+                            spor.append(h)
+        out[name] = {"matching": match, "glue": glue, "sporadic": sorted(spor)}
+    return out
+
+
+# The tables `Proofs/HadwigerNelson/Ladder.lean` states (iiNormTable's sporadic rows
+# and oiTable's), transcribed by hand from the Lean source.  The census below is an
+# independent derivation — float-proposed, exact-field-decided — so agreement is a
+# genuine cross-check of two routes to one list, not a restatement of one.
+LEAN_SPORADICS = {
+    "ii": [((1, -1), (5, -1)), ((1, 1), (5, 1)), ((5, -1), (1, -1)), ((5, 1), (1, 1))],
+    "oi": [((2, -2), (5, -1)), ((2, 2), (5, 1)), ((4, -2), (1, -1)), ((4, 2), (1, 1))],
+    "io": [((1, -1), (4, -2)), ((1, 1), (4, 2)), ((5, -1), (2, -2)), ((5, 1), (2, 2))],
+    "oo": [],
+}
+
+
+def run_ladder_census(args):
+    B = args.census_depth
+    res = _ladder_chord_census(B)
+    total = sum(len(v["sporadic"]) for v in res.values())
+    print(f"[census] matched ladder pair, seam height |b| ≤ {B}")
+    for name in ("oo", "ii", "oi", "io"):
+        v = res[name]
+        print(f"   {name}: {v['matching']} matching, {v['glue']} glue-incident, "
+              f"{len(v['sporadic'])} sporadic {v['sporadic']}")
+    print(f"[census] TOTAL sporadic chords: {total}")
+    for name, v in res.items():
+        if v["sporadic"] != LEAN_SPORADICS[name]:
+            raise SystemExit(f"CENSUS DISAGREES WITH THE LEAN TABLE on {name}: "
+                             f"census {v['sporadic']} vs Lean {LEAN_SPORADICS[name]}")
+    print("[census] cross-check: the Lean tables and this census agree exactly")
+    if args.out:
+        with open(args.out, "w") as fh:
+            json.dump({"depth": B, "families": {k: {"matching": v["matching"],
+                                                    "glue": v["glue"],
+                                                    "sporadic": v["sporadic"]}
+                                                for k, v in res.items()}}, fh, indent=1)
+        print(f"[census] wrote {args.out}")
 
 
 def require_artifact_graph(doc, edges_sha, path):
@@ -2734,6 +2861,12 @@ def main():
     ap.add_argument("--partner", action="store_true")
     ap.add_argument("--kills", nargs=2, type=int, metavar=("A", "B"))
     ap.add_argument("--ladder", action="store_true")
+    ap.add_argument("--ladder-census", action="store_true",
+                    dest="ladder_census",
+                    help="M24: every unit chord of the matched ladder pair, "
+                         "exact, cross-checked against the Lean tables")
+    ap.add_argument("--census-depth", type=int, default=200,
+                    dest="census_depth")
     ap.add_argument("--find-triangles", type=int, default=0, dest="find_triangles")
     ap.add_argument("--systems", type=str, default=None,
                     help="named system-set floor: triangle+meta")
@@ -2819,6 +2952,9 @@ def main():
     if args.ladder:
         run_ladder(args)
         ran = True
+    if args.ladder_census:
+        run_ladder_census(args)
+        ran = True
     if args.loops:
         run_loops(args)
         ran = True
@@ -2828,6 +2964,7 @@ def main():
     if not ran:
         ap.error("nothing to do — try --self-test, --census, --phase, --joint, "
                  "--pair, --mesh, --floor, --near, --partner, --kills, --ladder, "
+                 "--ladder-census, "
                  "--loops, or --export-viz")
 
 

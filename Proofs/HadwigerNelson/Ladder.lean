@@ -1241,6 +1241,13 @@ theorem witness_not_colorable_three : ¬ (edgeGraph 9 witnessEdges).Colorable 3 
   rw [not_colorable_edgeGraph_iff]
   decide +kernel
 
+/-- The negative control the `decide` above needs: the same nine points DO admit four
+colours, so non-3-colourability is a fact about three, not an artifact of the encoding. -/
+example : (edgeGraph 9 witnessEdges).Colorable 4 :=
+  colorable_iff_exists.mpr ⟨![3, 0, 1, 0, 1, 0, 1, 2, 3], by
+    simp only [edgeGraph_adj]
+    decide⟩
+
 /-- The witness, drawn in the ladder pair. -/
 noncomputable def witnessHom :
     edgeGraph 9 witnessEdges →g (unitDistance ℂ).induce ladderSet where

@@ -468,6 +468,100 @@ list tables, no Möbius `def` (the division-free equation is the normal
 form), the classical dite decode with the four decode lemmas as the honest
 well-definedness joints. 38 obligations after the pass; elaborates clean.
 
+## §3.5 Implementation record (2026-08-09) — **M24 IS NOT CLOSED**
+
+**37 of 40 obligations proven; the three completeness-core theorems are NOT
+landed.** Stated plainly: `ii_norm_bound`, `ii_norm_complete` and `oi_complete`
+remain `sorry`, so the headline `chromaticNumber_ladderPair = 4` is *not*
+proven — it is proven *from* those three. Nothing else in the module depends on
+anything unproven, and every other layer is kernel-checked on the standard
+axioms.
+
+### What landed (all kernel-checked)
+
+* **§A the word algebra** — `word`, `word_add`, `word_conj`, `word_inj`,
+  `word_neg_iff`: the lattice is free over `ZMod 6 × ℤ` (backbone re-addressed).
+* **§C the master identities** — `cross_dist`, `intra_dist`: axis- and
+  radius-general, the spine M25–M27 instantiate.
+* **the five real-part fibres** — `Re = 1/2`, `−1/2`, `√3/6`, `5/6` classified,
+  and `Re = √3/2` proven EMPTY (ζ₁₂ is not a lattice word: the metapivot blind
+  spot as an arithmetic fact).
+* **§E intra completeness** — hex, rot3 and seam steps, exactly.
+* **§F fusion completeness** — `outerPt_inj`, `innerPt_inj`, `outer_ne_inner`,
+  `fusion_oo/oi/io` (the six glue points, addresses pinned) and `fusion_ii`
+  (impossible).
+* **§D the three cross bridges** — `oo_complete` (no sporadics on that family,
+  via Triangle's now-public `unit_chord_units`), `ii_chord_iff` (matching ∨ the
+  norm branch, through the new sympy-derived key `ii_key`), `oi_chord_iff`.
+* **§H the colouring layer** — the four decode lemmas (where all six fusions are
+  consumed), `ladderColor_valid` (sixteen-case properness), `colorable_four_ladder`,
+  the nine-point witness at explicit ladder addresses with its
+  `edgeGraph`/`decide +kernel` non-3-colourability, `not_colorable_three_ladder`,
+  and `chromaticNumber_ladderPair` — **all conditional on the three core
+  theorems only**.
+* **`sqrt_indep`** — `{1, √3, √11, √33}` is `ℚ`-independent, elementary and
+  reusable; the extraction lemma the core (and M25–M27) needs.
+* **§I spec** — 7 examples including the sporadic chord, the adversarial
+  non-chord, and the two audit partners.
+
+### Implementation discoveries (they changed the shape; recorded as decisions)
+
+1. **The chord conditions are REAL equations.** Verified exactly
+   (`build/m24-real.py`): the ii chord condition is *equivalent* to
+   `matching ∨ u+v = √3(uv+1)`, and the oi condition to
+   `Re(u·conj w) − √3·Re u − Re w + 2√3/3 = 0`. The subplan's Möbius form was
+   correct but asymmetric; **the norm branch is now stated symmetrically**
+   (`u + v = √3(uv+1)`), which makes the swap symmetry syntactic and removed a
+   `word_neg_iff` step from every consumer. Alternative: keep the Möbius form
+   (subplan's). Why: symmetry is free and the key's cofactors are simpler.
+   Confidence: high (both forms verified equivalent, exact, at |b|,|d| ≤ 8).
+2. **The registered valuation sketch is superseded.** §0.2 planned π-adic
+   valuations in `K = ℚ(i,√3,√11)`. The implementation route is strictly
+   more elementary and needs no ideal theory:
+   * clearing by `√3^b·√3^d` and applying `sqrt_indep` splits the norm branch
+     by the parities of the seam heights;
+   * **mixed parity is impossible outright** (a modulus comparison), and
+     **both-even collapses through the seam's infinite order** — no arithmetic;
+   * both-odd becomes `(A − 3^β)(B − 3^δ) = −2·3^{β+δ}` in `ℤ[ζ₆,π]`, and
+     taking `normSq` of both sides (multiplicative, available) plus `sqrt_indep`
+     over `{1,√33}` gives **two integer equations**, whence
+     `N₁·N₂ = 16·3^{4(β+δ)}` by `ring`, with
+     `N(a,b) = 3^{b−1}·M(a,b)`, `3 ∤ M` for `b ≥ 3`.
+   * The 3-adic bookkeeping then closes it: `b,d ≥ 3` contradicts
+     `v₃` (measured: `v₃(N) = b−1`, so `(b−1)+(d−1) = 2(b−1)+2(d−1)` forces
+     `b+d = 2`); `b = 1, d ≥ 3` forces `a = 0, d = 3` (the glue solution); and
+     `b = d = 1` leaves `M₁M₂ = 16` with `M ∈ {4,25,4}` at `a ∈ {1,3,5}`,
+     i.e. `a,c ∈ {1,5}` — the four sporadics plus two wrong-sign candidates a
+     finite check removes. All arithmetic verified numerically
+     (`v₃`/`M` table computed for `b ≤ 11`).
+   Why this matters: the remaining work is now *bounded and elementary* —
+   a coordinate theorem for `ζ₆^a π^b` (one induction), the parity split, and
+   integer 3-adic bookkeeping. Confidence: high on the mathematics (checked
+   exactly), medium on the Lean cost (estimated ~600 lines for ii, similar for
+   oi — that is why it is not in this milestone).
+3. **The tube-parity fact falls out free**: `b ≡ d (mod 2)` for every ii chord
+   beyond matching, and `b` even / `d` odd for every oi chord — measured across
+   |b|,|d| ≤ 24 and *explained* by the parity split above.
+
+### Audits run (fire-and-restore)
+
+| audit | result |
+|---|---|
+| colour-table entry flipped (`colTab false false 0 : 0 → 1`) | RED, 6 errors ✓ |
+| ii bridge's matching branch perturbed (`c = a+3 → a+2`) | RED, 4 errors ✓ |
+| witness negative control (the nine points ARE 4-colourable) | **added permanently** as a spec example — the `decide` is discriminating ✓ |
+| the four audits that test the core (tables, bound, sporadic deletion) | NOT RUN — they test unproven statements |
+
+### Instruments
+
+`tools/couple.py --ladder-census [--census-depth N]`: the whole chord census of
+the matched pair with an O(B) candidate net (the M23-era net was O(B) *per
+address*; the killed B = 500 run is superseded — B = 200 now runs in ~2 s), every
+chord decided by exact field arithmetic. It **cross-checks the census against the
+tables stated in `Ladder.lean`** and exits non-zero on any disagreement; the
+self-test carries the same control with a planted disagreement (21 controls
+green). Artifact: `build/m24-census.json`.
+
 ## §4 Gate
 
 The full house gate (build green via scripts/build.sh, zero sorry, axioms
