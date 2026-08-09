@@ -327,6 +327,84 @@ Two deltas applied:
 | The `sphere_inter_sphere` tangency degeneracy dropped from scope | proving the circle-level tangency statement | the lattice-level fusion is EMPTY (P2.4 verified), so the headline never consumes it | high |
 | Census standalone in `build/` at subplan; promotion at implementation | extend `tools/couple.py` now | M25 precedent: the subplan needed tables, not surface; promotion belongs with the gate's control discipline | high |
 
+### Obligation-modeling pass (2026-08-09, fresh invocation) — the proof spines
+
+**Partition.** Prove: everything below.  Test: the table/equivariance/properness
+/agreement decides, every one pre-verified by the `m26-design2` replay (exact
+Lean-shaped tree vs ground truth) BEFORE Lean states it — the first
+implementation step, per M25 precedent.  Assume: nothing (all statements
+closed).
+
+**Layer 1 — values and distances (11 obligations, LOW risk).**
+`dist_hexPivot_anchor` is generic (`dist z (z+1) = 1`, no coordinates).  The
+six value lemmas: unfold `innerPt`, `word_k0`, then one `linear_combination`
+each through `sqrt3_mul_zeta12` (e.g. a = 5: `3m = 1+ζ₆`, `√3ζ₆⁵ζ₁₂ = 2−ζ₆`,
+sum 3).  The four distance families share one spine: factor
+`hexPivot (a+k) − hexPivot a = (√3/3)·ζ₆^a·(ζ₆^k − 1)·ζ₁₂`, `norm_mul`, one
+normSq computation per k (‖ζ₆²−1‖ = √3, ‖ζ₆−1‖ = 1, ‖ζ₆³−1‖ = 2).
+
+**Layer 2 — the rot6 spine (8, LOW).**  `dist_metaRot`'s pattern verbatim;
+the family transports are `word_succ` + ring (the anchor partner is `+1`, so
+`outerPt` is `hexPivot a + word x b` — no direction factor anywhere).
+
+**Layer 3 — the two new master webs (19, the core).**  Per family, M25's
+five-step spine: bridge (scale by 3 or 3√3 → `normSq (…) = 9` — `bridge_gen`
+genus, re-derived locally or promoted), master κ-identity
+(`linear_combination` certificates, shapes script-verified at D2), clearing
+into `hexTrace` heights {b, d, d−b} (uniform √3-power, parity split — one
+live parity class per family, measured), case analysis (alone/φ/pin kills,
+`adjacent_mod9` rescans — verified for BOTH coefficient scales, 2 being
+invertible mod 9 — boundary decides at REALIZABLE addresses only), and the
+← direction as 16 per-row norm certificates (rows at |b| ≤ 2 use `σ^{±2}`
+word values).  The opposite web's reflected addresses reduce by
+`word_conj` to address negation (`Tr(g·w̄₂) = gTr (−y) (−d)`) — M25's
+negative-height clearing speaks it natively; the doubled coefficients pass
+through every kill (φ(2g) = 0, 3 ∤ 2gE, mod-9 scans re-verified).  The
+**failure clause stays registered**: a family whose endgame does not close
+under the toolkit is reported NOT LANDED, χ stated conditional, open rescope.
+
+**The wrapper spine (a-quantification) — improved over M25.**  NOT
+`fin_cases a` (6 cases × ~19 wrappers ≈ 650 boilerplate lines).  Instead:
+four private ITERATED transport lemmas
+(`rot6^[k] (outerPt (hexPivot a) … x b) = outerPt (hexPivot (a+k)) … (x+k) b`,
+induction on k over the step lemmas) plus iterated isometry; each wrapper is
+then ONE uniform proof: lift `k := (a − 3).val`, substitute `a = 3 + k`,
+rewrite by the iter lemmas, apply the master, ~15 lines.  `hexMeta_*` masters
+are M25's PUBLIC `meta_*_complete`/`meta_fusion_*` at `j = 0` — no promotion
+needed for those.  `unit_oo_complete` = M24's axis-general `oo_complete` +
+two re-addressings (`q' − q = ζ₆^{a+3}`, `q − q' = ζ₆^a` — the skeleton RHS
+verified to match exactly under them).  `fourLadder_subset_hexagram`: anchor
+0/1/2/3 ↦ pivot families a = 3, 5, 1 and the meta family, via the value
+lemmas.
+
+**Layer 4 — the colouring (11, MEDIUM).**  The two equivariance decides are
+Bool×36 table reads.  FOUR uniform read lemmas (the joint decode's payoff):
+each proof cases on which earlier dite branch fires; the witness
+classification is exactly the fusion inventory (within-branch: `word_inj`,
+the empty adj/opp fusions, M24's unit-pair `fusion_oo`/`fusion_ii`
+re-addressed; cross-branch: `hexMeta_fusion_oi` for the six triple points,
+M24's `fusion_oi`/`fusion_io` for the seam octets) + table-agreement decides
+(a-quantified, ~12 checks each, pre-verified — the probe's union-find
+enforced them by construction).  `hexColor_valid`: `mem_hexagram_cases` on
+both ends → 4×4 branch matrix → pivot×pivot splits on `a' − a` (`fin_cases`
+on the DIFFERENCE, 6 values, routing intra/adj/unit/opp) → per-family
+a-quantified table decides.  χ-assembly is M25's verbatim (`Colorable.mk`,
+`of_hom` through `fourLadder_subset_hexagram`).
+
+**Mutation audits (registered now, run at the gate).**  Trap caught at
+design: `a − 3 = a + 3` in `ZMod 6`, so "flip the shift sign" is NOT a
+mutation.  The five registered:
+1. delete row `(0, 1, 2, 1)` from `adjIITable` → the ← certificate or the
+   properness decide must go red;
+2. `hexMeta_oo_complete`'s shift `a − 3` → `a − 2` → the wrapper transport
+   breaks;
+3. flip `hexColTab false 3 0` from 0 to 1 → a properness or agreement decide
+   goes red;
+4. `tau` → the inverse 3-cycle `![2, 0, 1, 3]` → `hexColTab_equivariant`
+   goes red;
+5. delete the hub disjunct `(y = a ∧ d = 0)` from `hexMeta_oi_complete` →
+   its derivation from M25's theorem breaks.
+
 ## M25 carry-forward (recorded at the M25 close, 2026-08-09)
 
 What the M26 subplan can take as settled, and where the tooling lives:
