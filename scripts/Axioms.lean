@@ -563,6 +563,55 @@ closure backbone. Pure geometry over ℂ. -/
 #print axioms Triangle.rotAbout_seamRatio
 #print axioms Triangle.rotAbout_omega3
 
+/-! ## M24 — the matched ladder pair: completeness theorems and the unconditional χ = 4
+
+The countable two-pivot ladder with every chord family fixed by theorems rather than a
+census window. The completeness core runs in `ℤ[ζ₆, π]`, `π = √3·σ`: parity separation
+on `√3 ∉ ℚ(ζ₆, π)`, coordinate congruences modulo three, and the `piCoeff` recurrence.
+The headline is `Ladder.chromaticNumber_ladderPair`. -/
+
+#print axioms Ladder.word_eq_one_iff
+#print axioms Ladder.word_inj
+#print axioms Ladder.cross_dist
+#print axioms Ladder.intra_dist
+#print axioms Ladder.oo_complete
+#print axioms Ladder.ii_chord_iff
+#print axioms Ladder.oi_chord_iff
+#print axioms Ladder.intra_outer_complete
+#print axioms Ladder.intra_inner_complete
+#print axioms Ladder.intra_seam_complete
+#print axioms Ladder.outerPt_inj
+#print axioms Ladder.innerPt_inj
+#print axioms Ladder.outer_ne_inner
+#print axioms Ladder.fusion_oo
+#print axioms Ladder.fusion_oi
+#print axioms Ladder.fusion_io
+#print axioms Ladder.fusion_ii
+#print axioms Ladder.sqrt_indep
+#print axioms Ladder.piC_pow_coeff
+#print axioms Ladder.piCoeff_norm
+#print axioms Ladder.sqrt3_pow_mul_word
+#print axioms Ladder.eq_zero_of_add_sqrt3_mul
+#print axioms Ladder.inRing_coords_zero
+#print axioms Ladder.normBranch_cleared
+#print axioms Ladder.normBranch_parity
+#print axioms Ladder.normBranch_even
+#print axioms Ladder.normBranch_odd_large
+#print axioms Ladder.normBranch_odd_one
+#print axioms Ladder.normBranch_odd_mixed
+#print axioms Ladder.normBranch_cleared_neg
+#print axioms Ladder.normBranch_parity_neg
+#print axioms Ladder.normBranch_even_neg
+#print axioms Ladder.normBranch_odd_neg
+#print axioms Ladder.ii_norm_complete
+#print axioms Ladder.ii_norm_bound
+#print axioms Ladder.oi_complete
+#print axioms Ladder.ladderColor_valid
+#print axioms Ladder.colorable_four_ladder
+#print axioms Ladder.witness_not_colorable_three
+#print axioms Ladder.not_colorable_three_ladder
+#print axioms Ladder.chromaticNumber_ladderPair
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -2563,15 +2563,630 @@ private theorem oi_kill_oe {x y z : ZMod 6} {m n k : ℕ}
       omega
     exact trace_val_kill (hpin.imp And.left And.left) hP3 hZ3 hM3 hval
 
-/-- **oi completeness**: every lattice solution of the outer–inner chord equation is in
-the table.
+/-! ### The live parity, per shape
 
-NOT YET PROVEN — the trace-pair machinery above is in place; what remains is the
-per-shape clearing, the three parity kills, and the live-parity analysis. -/
+In the class (outer even, inner odd) every `√3`-exponent is even, so no separation is
+available: the whole equation lands in the ring, and the analysis runs on its four
+coordinate rows. Modulo three the rows pin the addresses; the `piCoeff` recurrence kills
+the surviving telescopes; and the boundary points decide over the thirty-six hex pairs. -/
+
+/-- Matching opposite signatures modulo three pin the second address to the first plus
+three. -/
+private theorem hex_pin_opp : ∀ u v : ZMod 6,
+    (3 : ℤ) ∣ (hexE (-u).val + hexE (-v).val) →
+    (3 : ℤ) ∣ (hexF (-u).val + hexF (-v).val) →
+    (3 : ℤ) ∣ ((hexE u.val - hexE (-u).val) + (hexE v.val - hexE (-v).val)) →
+    (3 : ℤ) ∣ ((hexF u.val - hexF (-u).val) + (hexF v.val - hexF (-v).val)) →
+    v = u + 3 := by decide
+
+private theorem zmod_sub_add_three : ∀ t : ZMod 6, t - (t + 3) = 3 := by decide
+
+/-- Shape `b > d > 0` of the live parity: everything above the boundary dies, and at the
+boundary `(b, d) = (2, 1)` the thirty-six hex pairs decide to exactly six. -/
+private theorem oi_shape₁ {x y z : ZMod 6} {δ γ : ℕ} (hz : z = x - y)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * δ + 1) + (2 * γ + 1))
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * δ + 1 + (2 * γ + 1))
+          * tracePair x (2 * (δ + γ + 1))
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * γ + 1) + 1)
+          * tracePair y (2 * δ + 1)
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * δ + 1) + 1)
+          * tracePair z (2 * γ + 1) = 0) :
+    δ = 0 ∧ γ = 0 ∧ ((x = 2 ∧ y = 5) ∨ (x = 4 ∧ y = 1) ∨ (x = 2 ∧ y = 0) ∨
+      (x = 4 ∧ y = 0) ∨ (x = 3 ∧ y = 2) ∨ (x = 3 ∧ y = 4)) := by
+  subst hz
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * δ + 1) + (2 * γ + 1))
+      = 3 ^ (2 * δ + 2 * γ + 2) by
+      rw [show 2 * (δ + γ + 1) + (2 * δ + 1) + (2 * γ + 1) = 2 * (2 * δ + 2 * γ + 2)
+        by ring, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * δ + 1 + (2 * γ + 1)) = 3 ^ (δ + γ + 1) by
+      rw [show 2 * δ + 1 + (2 * γ + 1) = 2 * (δ + γ + 1) by ring, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * γ + 1) + 1)
+      = 3 ^ (δ + 2 * γ + 2) by
+      rw [show 2 * (δ + γ + 1) + (2 * γ + 1) + 1 = 2 * (δ + 2 * γ + 2) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (δ + γ + 1) + (2 * δ + 1) + 1)
+      = 3 ^ (2 * δ + γ + 2) by
+      rw [show 2 * (δ + γ + 1) + (2 * δ + 1) + 1 = 2 * (2 * δ + γ + 2) by ring,
+        sqrt3_pow_two_mul]] at hE
+  have hD : 4 * (3 : ℂ) ^ (δ + γ) - tracePair x (2 * (δ + γ + 1))
+      - (3 : ℂ) ^ γ * tracePair y (2 * δ + 1)
+      + (3 : ℂ) ^ δ * tracePair (x - y) (2 * γ + 1) = 0 := by
+    refine mul_left_cancel₀ (pow_ne_zero (δ + γ + 2) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    rw [mul_zero]
+    linear_combination hE
+  have hcx := tracePair_coords x (2 * (δ + γ + 1))
+  have hcy := tracePair_coords y (2 * δ + 1)
+  have hcz := tracePair_coords (x - y) (2 * γ + 1)
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := 4 * 3 ^ (δ + γ)
+      - (hexE x.val * (piCoeff (2 * (δ + γ + 1))).1
+        + hexE (-x).val * ((piCoeff (2 * (δ + γ + 1))).1 + (piCoeff (2 * (δ + γ + 1))).2))
+      - 3 ^ γ * (hexE y.val * (piCoeff (2 * δ + 1)).1
+        + hexE (-y).val * ((piCoeff (2 * δ + 1)).1 + (piCoeff (2 * δ + 1)).2))
+      + 3 ^ δ * (hexE (x - y).val * (piCoeff (2 * γ + 1)).1
+        + hexE (-(x - y)).val * ((piCoeff (2 * γ + 1)).1 + (piCoeff (2 * γ + 1)).2)))
+    (n₂ := -(hexF x.val * (piCoeff (2 * (δ + γ + 1))).1
+        + hexF (-x).val * ((piCoeff (2 * (δ + γ + 1))).1 + (piCoeff (2 * (δ + γ + 1))).2))
+      - 3 ^ γ * (hexF y.val * (piCoeff (2 * δ + 1)).1
+        + hexF (-y).val * ((piCoeff (2 * δ + 1)).1 + (piCoeff (2 * δ + 1)).2))
+      + 3 ^ δ * (hexF (x - y).val * (piCoeff (2 * γ + 1)).1
+        + hexF (-(x - y)).val * ((piCoeff (2 * γ + 1)).1 + (piCoeff (2 * γ + 1)).2)))
+    (n₃ := -((piCoeff (2 * (δ + γ + 1))).2 * (hexE x.val - hexE (-x).val))
+      - 3 ^ γ * ((piCoeff (2 * δ + 1)).2 * (hexE y.val - hexE (-y).val))
+      + 3 ^ δ * ((piCoeff (2 * γ + 1)).2 * (hexE (x - y).val - hexE (-(x - y)).val)))
+    (n₄ := -((piCoeff (2 * (δ + γ + 1))).2 * (hexF x.val - hexF (-x).val))
+      - 3 ^ γ * ((piCoeff (2 * δ + 1)).2 * (hexF y.val - hexF (-y).val))
+      + 3 ^ δ * ((piCoeff (2 * γ + 1)).2 * (hexF (x - y).val - hexF (-(x - y)).val)))
+    (by push_cast
+        linear_combination hD + hcx + (3 : ℂ) ^ γ * hcy - (3 : ℂ) ^ δ * hcz)
+  obtain ⟨px, hpx⟩ : ∃ p, (piCoeff (2 * (δ + γ + 1))).1 = 3 * p := by
+    have h := three_dvd_piCoeff_fst (2 * (δ + γ) + 1)
+    rw [show 2 * (δ + γ) + 1 + 1 = 2 * (δ + γ + 1) by ring] at h
+    exact h
+  obtain ⟨wx, hwx⟩ : ∃ w, (piCoeff (2 * (δ + γ + 1))).2 = 3 * w + 1 := by
+    have h := piCoeff_snd_emod (2 * (δ + γ) + 1)
+    rw [show 2 * (δ + γ) + 1 + 1 = 2 * (δ + γ + 1) by ring] at h
+    exact ⟨(piCoeff (2 * (δ + γ + 1))).2 / 3, by omega⟩
+  obtain ⟨py, hpy⟩ := three_dvd_piCoeff_fst (2 * δ)
+  obtain ⟨wy, hwy⟩ : ∃ w, (piCoeff (2 * δ + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * δ + 1)).2 / 3, by have := piCoeff_snd_emod (2 * δ); omega⟩
+  obtain ⟨pz, hpz⟩ := three_dvd_piCoeff_fst (2 * γ)
+  obtain ⟨wz, hwz⟩ : ∃ w, (piCoeff (2 * γ + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * γ + 1)).2 / 3, by have := piCoeff_snd_emod (2 * γ); omega⟩
+  rw [hpx, hwx, hpy, hwy, hpz, hwz] at k₁ k₂
+  rw [hwx, hwy, hwz] at k₃ k₄
+  rcases Nat.eq_zero_or_pos δ with hδ0 | hδpos <;>
+    rcases Nat.eq_zero_or_pos γ with hγ0 | hγpos
+  · -- the boundary (b, d) = (2, 1): the finite check
+    subst hδ0
+    subst hγ0
+    refine ⟨rfl, rfl, ?_⟩
+    have hex1 : (piCoeff (2 * (0 + 0 + 1))).1 = -3 := rfl
+    have hex2 : (piCoeff (2 * (0 + 0 + 1))).2 = 1 := rfl
+    have hex3 : (piCoeff (2 * 0 + 1)).1 = 0 := rfl
+    have hex4 : (piCoeff (2 * 0 + 1)).2 = 1 := rfl
+    have hpx' : px = -1 := by omega
+    have hwx' : wx = 0 := by omega
+    have hpy' : py = 0 := by omega
+    have hwy' : wy = 0 := by omega
+    have hpz' : pz = 0 := by omega
+    have hwz' : wz = 0 := by omega
+    subst hpx'
+    subst hwx'
+    subst hpy'
+    subst hwy'
+    subst hpz'
+    subst hwz'
+    have e₁ : 4 + 3 * hexE x.val + 2 * hexE (-x).val - hexE (-y).val
+        + hexE (-(x - y)).val = 0 := by linear_combination k₁
+    have e₂ : 3 * hexF x.val + 2 * hexF (-x).val - hexF (-y).val
+        + hexF (-(x - y)).val = 0 := by linear_combination k₂
+    have e₃ : -(hexE x.val - hexE (-x).val) - (hexE y.val - hexE (-y).val)
+        + (hexE (x - y).val - hexE (-(x - y)).val) = 0 := by linear_combination k₃
+    have e₄ : -(hexF x.val - hexF (-x).val) - (hexF y.val - hexF (-y).val)
+        + (hexF (x - y).val - hexF (-(x - y)).val) = 0 := by linear_combination k₄
+    have hfin : ∀ u v : ZMod 6,
+        4 + 3 * hexE u.val + 2 * hexE (-u).val - hexE (-v).val
+          + hexE (-(u - v)).val = 0 →
+        3 * hexF u.val + 2 * hexF (-u).val - hexF (-v).val + hexF (-(u - v)).val = 0 →
+        -(hexE u.val - hexE (-u).val) - (hexE v.val - hexE (-v).val)
+          + (hexE (u - v).val - hexE (-(u - v)).val) = 0 →
+        -(hexF u.val - hexF (-u).val) - (hexF v.val - hexF (-v).val)
+          + (hexF (u - v).val - hexF (-(u - v)).val) = 0 →
+        (u = 2 ∧ v = 5) ∨ (u = 4 ∧ v = 1) ∨ (u = 2 ∧ v = 0) ∨ (u = 4 ∧ v = 0) ∨
+          (u = 3 ∧ v = 2) ∨ (u = 3 ∧ v = 4) := by
+      set_option synthInstance.maxSize 1024 in decide
+    exact hfin x y e₁ e₂ e₃ e₄
+  · -- δ = 0, γ ≥ 1: the pin `y = 0` and the telescope
+    exfalso
+    subst hδ0
+    obtain ⟨γ', rfl⟩ : ∃ γ', γ = γ' + 1 := ⟨γ - 1, by omega⟩
+    have d₁ : (3 : ℤ) ∣ (hexE (-(x - y)).val - hexE (-x).val) :=
+      ⟨(hexE x.val * px + hexE (-x).val * (px + wx))
+        - (hexE (x - y).val * pz + hexE (-(x - y)).val * (pz + wz))
+        + 3 ^ γ' * (hexE y.val * (3 * py) + hexE (-y).val * (3 * py + (3 * wy + 1)))
+        - 4 * 3 ^ γ', by linear_combination k₁⟩
+    have d₂ : (3 : ℤ) ∣ (hexF (-(x - y)).val - hexF (-x).val) :=
+      ⟨(hexF x.val * px + hexF (-x).val * (px + wx))
+        - (hexF (x - y).val * pz + hexF (-(x - y)).val * (pz + wz))
+        + 3 ^ γ' * (hexF y.val * (3 * py) + hexF (-y).val * (3 * py + (3 * wy + 1))),
+        by linear_combination k₂⟩
+    have hpin : -(x - y) = -x := hex_mod_inj (-(x - y)) (-x) (by omega) (by omega)
+    have hy0 : y = 0 := by
+      have hxy : x - y = x := neg_inj.mp hpin
+      exact sub_eq_self.mp hxy
+    subst hy0
+    rw [show (2 * 0 + 1 : ℕ) = 1 by norm_num, sub_zero, tracePair_zero_one,
+      show 2 * (0 + (γ' + 1) + 1) = 2 * (γ' + 1) + 1 + 1 by ring] at hD
+    have heq : tracePair x (2 * (γ' + 1) + 1 + 1) - tracePair x (2 * (γ' + 1) + 1)
+        = (3 : ℂ) ^ (γ' + 2) := by linear_combination -hD
+    exact tracePair_succ_kill (by omega) (by omega) heq
+  · -- δ ≥ 1, γ = 0: the pin `y = x + 3` and the telescope
+    exfalso
+    subst hγ0
+    obtain ⟨δ', rfl⟩ : ∃ δ', δ = δ' + 1 := ⟨δ - 1, by omega⟩
+    have d₁ : (3 : ℤ) ∣ (hexE (-x).val + hexE (-y).val) :=
+      ⟨4 * 3 ^ δ' - (hexE x.val * px + hexE (-x).val * (px + wx))
+        - (hexE y.val * py + hexE (-y).val * (py + wy))
+        + 3 ^ δ' * (hexE (x - y).val * (3 * pz)
+          + hexE (-(x - y)).val * (3 * pz + (3 * wz + 1))), by linear_combination -k₁⟩
+    have d₂ : (3 : ℤ) ∣ (hexF (-x).val + hexF (-y).val) :=
+      ⟨-(hexF x.val * px + hexF (-x).val * (px + wx))
+        - (hexF y.val * py + hexF (-y).val * (py + wy))
+        + 3 ^ δ' * (hexF (x - y).val * (3 * pz)
+          + hexF (-(x - y)).val * (3 * pz + (3 * wz + 1))), by linear_combination -k₂⟩
+    have d₃ : (3 : ℤ) ∣ ((hexE x.val - hexE (-x).val) + (hexE y.val - hexE (-y).val)) :=
+      ⟨-(wx * (hexE x.val - hexE (-x).val)) - wy * (hexE y.val - hexE (-y).val)
+        + 3 ^ δ' * ((3 * wz + 1) * (hexE (x - y).val - hexE (-(x - y)).val)),
+        by linear_combination -k₃⟩
+    have d₄ : (3 : ℤ) ∣ ((hexF x.val - hexF (-x).val) + (hexF y.val - hexF (-y).val)) :=
+      ⟨-(wx * (hexF x.val - hexF (-x).val)) - wy * (hexF y.val - hexF (-y).val)
+        + 3 ^ δ' * ((3 * wz + 1) * (hexF (x - y).val - hexF (-(x - y)).val)),
+        by linear_combination -k₄⟩
+    have hy3 : y = x + 3 := hex_pin_opp x y d₁ d₂ d₃ d₄
+    subst hy3
+    rw [zmod_sub_add_three x, show (2 * 0 + 1 : ℕ) = 1 by norm_num, tracePair_three_one,
+      tracePair_add_three x (2 * (δ' + 1) + 1),
+      show 2 * (δ' + 1 + 0 + 1) = 2 * (δ' + 1) + 1 + 1 by ring] at hD
+    have heq : tracePair x (2 * (δ' + 1) + 1 + 1) - tracePair x (2 * (δ' + 1) + 1)
+        = (3 : ℂ) ^ (δ' + 2) := by linear_combination -hD
+    exact tracePair_succ_kill (by omega) (by omega) heq
+  · -- δ ≥ 1, γ ≥ 1: dead on the outer pair's rows
+    exfalso
+    obtain ⟨δ', rfl⟩ : ∃ δ', δ = δ' + 1 := ⟨δ - 1, by omega⟩
+    obtain ⟨γ', rfl⟩ : ∃ γ', γ = γ' + 1 := ⟨γ - 1, by omega⟩
+    have d₁ : (3 : ℤ) ∣ hexE (-x).val :=
+      ⟨4 * 3 ^ (δ' + γ' + 1) - (hexE x.val * px + hexE (-x).val * (px + wx))
+        - 3 ^ γ' * (hexE y.val * (3 * py) + hexE (-y).val * (3 * py + (3 * wy + 1)))
+        + 3 ^ δ' * (hexE (x - y).val * (3 * pz)
+          + hexE (-(x - y)).val * (3 * pz + (3 * wz + 1))), by linear_combination -k₁⟩
+    have d₂ : (3 : ℤ) ∣ hexF (-x).val :=
+      ⟨-(hexF x.val * px + hexF (-x).val * (px + wx))
+        - 3 ^ γ' * (hexF y.val * (3 * py) + hexF (-y).val * (3 * py + (3 * wy + 1)))
+        + 3 ^ δ' * (hexF (x - y).val * (3 * pz)
+          + hexF (-(x - y)).val * (3 * pz + (3 * wz + 1))), by linear_combination -k₂⟩
+    exact hexE_hexF_not_both_dvd (-x).val (ZMod.val_lt _) ⟨d₁, d₂⟩
+
+/-- Shape `d > b ≥ 0` of the live parity: only the boundary `(b, d) = (0, 1)` survives,
+with two hex pairs. -/
+private theorem oi_shape₂ {x y z : ZMod 6} {β γ : ℕ} (hz : z = y - x)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + γ) + 1) + (2 * γ + 1))
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (β + γ) + 1 + (2 * γ + 1))
+          * tracePair x (2 * β)
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * γ + 1) + 1)
+          * tracePair y (2 * (β + γ) + 1)
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + γ) + 1) + 1)
+          * tracePair z (2 * γ + 1) = 0) :
+    β = 0 ∧ γ = 0 ∧ ((x = 1 ∧ y = 5) ∨ (x = 5 ∧ y = 1)) := by
+  subst hz
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + γ) + 1) + (2 * γ + 1))
+      = 3 ^ (2 * β + 2 * γ + 1) by
+      rw [show 2 * β + (2 * (β + γ) + 1) + (2 * γ + 1) = 2 * (2 * β + 2 * γ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * (β + γ) + 1 + (2 * γ + 1)) = 3 ^ (β + 2 * γ + 1) by
+      rw [show 2 * (β + γ) + 1 + (2 * γ + 1) = 2 * (β + 2 * γ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * γ + 1) + 1) = 3 ^ (β + γ + 1) by
+      rw [show 2 * β + (2 * γ + 1) + 1 = 2 * (β + γ + 1) by ring, sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + γ) + 1) + 1) = 3 ^ (2 * β + γ + 1) by
+      rw [show 2 * β + (2 * (β + γ) + 1) + 1 = 2 * (2 * β + γ + 1) by ring,
+        sqrt3_pow_two_mul]] at hE
+  have hD : 4 * (3 : ℂ) ^ (β + γ) - (3 : ℂ) ^ (γ + 1) * tracePair x (2 * β)
+      - tracePair y (2 * (β + γ) + 1)
+      + (3 : ℂ) ^ β * tracePair (y - x) (2 * γ + 1) = 0 := by
+    refine mul_left_cancel₀ (pow_ne_zero (β + γ + 1) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    rw [mul_zero]
+    linear_combination hE
+  have hcx := tracePair_coords x (2 * β)
+  have hcy := tracePair_coords y (2 * (β + γ) + 1)
+  have hcz := tracePair_coords (y - x) (2 * γ + 1)
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := 4 * 3 ^ (β + γ)
+      - 3 ^ (γ + 1) * (hexE x.val * (piCoeff (2 * β)).1
+        + hexE (-x).val * ((piCoeff (2 * β)).1 + (piCoeff (2 * β)).2))
+      - (hexE y.val * (piCoeff (2 * (β + γ) + 1)).1
+        + hexE (-y).val * ((piCoeff (2 * (β + γ) + 1)).1 + (piCoeff (2 * (β + γ) + 1)).2))
+      + 3 ^ β * (hexE (y - x).val * (piCoeff (2 * γ + 1)).1
+        + hexE (-(y - x)).val * ((piCoeff (2 * γ + 1)).1 + (piCoeff (2 * γ + 1)).2)))
+    (n₂ := -(3 ^ (γ + 1) * (hexF x.val * (piCoeff (2 * β)).1
+        + hexF (-x).val * ((piCoeff (2 * β)).1 + (piCoeff (2 * β)).2)))
+      - (hexF y.val * (piCoeff (2 * (β + γ) + 1)).1
+        + hexF (-y).val * ((piCoeff (2 * (β + γ) + 1)).1 + (piCoeff (2 * (β + γ) + 1)).2))
+      + 3 ^ β * (hexF (y - x).val * (piCoeff (2 * γ + 1)).1
+        + hexF (-(y - x)).val * ((piCoeff (2 * γ + 1)).1 + (piCoeff (2 * γ + 1)).2)))
+    (n₃ := -(3 ^ (γ + 1) * ((piCoeff (2 * β)).2 * (hexE x.val - hexE (-x).val)))
+      - (piCoeff (2 * (β + γ) + 1)).2 * (hexE y.val - hexE (-y).val)
+      + 3 ^ β * ((piCoeff (2 * γ + 1)).2 * (hexE (y - x).val - hexE (-(y - x)).val)))
+    (n₄ := -(3 ^ (γ + 1) * ((piCoeff (2 * β)).2 * (hexF x.val - hexF (-x).val)))
+      - (piCoeff (2 * (β + γ) + 1)).2 * (hexF y.val - hexF (-y).val)
+      + 3 ^ β * ((piCoeff (2 * γ + 1)).2 * (hexF (y - x).val - hexF (-(y - x)).val)))
+    (by push_cast
+        linear_combination hD + (3 : ℂ) ^ (γ + 1) * hcx + hcy - (3 : ℂ) ^ β * hcz)
+  obtain ⟨py, hpy⟩ := three_dvd_piCoeff_fst (2 * (β + γ))
+  obtain ⟨wy, hwy⟩ : ∃ w, (piCoeff (2 * (β + γ) + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * (β + γ) + 1)).2 / 3, by have := piCoeff_snd_emod (2 * (β + γ)); omega⟩
+  obtain ⟨pz, hpz⟩ := three_dvd_piCoeff_fst (2 * γ)
+  obtain ⟨wz, hwz⟩ : ∃ w, (piCoeff (2 * γ + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * γ + 1)).2 / 3, by have := piCoeff_snd_emod (2 * γ); omega⟩
+  rw [hpy, hwy, hpz, hwz] at k₁ k₂
+  rw [hwy, hwz] at k₃ k₄
+  rcases Nat.eq_zero_or_pos β with hβ0 | hβpos
+  · subst hβ0
+    rcases Nat.eq_zero_or_pos γ with hγ0 | hγpos
+    · -- the boundary (b, d) = (0, 1)
+      subst hγ0
+      refine ⟨rfl, rfl, ?_⟩
+      have hex1 : (piCoeff (2 * 0)).1 = 1 := rfl
+      have hex2 : (piCoeff (2 * 0)).2 = 0 := rfl
+      have hex3 : (piCoeff (2 * (0 + 0) + 1)).1 = 0 := rfl
+      have hex4 : (piCoeff (2 * (0 + 0) + 1)).2 = 1 := rfl
+      have hex5 : (piCoeff (2 * 0 + 1)).1 = 0 := rfl
+      have hex6 : (piCoeff (2 * 0 + 1)).2 = 1 := rfl
+      have hpy' : py = 0 := by omega
+      have hwy' : wy = 0 := by omega
+      have hpz' : pz = 0 := by omega
+      have hwz' : wz = 0 := by omega
+      subst hpy'
+      subst hwy'
+      subst hpz'
+      subst hwz'
+      rw [hex1, hex2] at k₁ k₂
+      rw [hex2] at k₃ k₄
+      have e₁ : 4 - 3 * (hexE x.val + hexE (-x).val) - hexE (-y).val
+          + hexE (-(y - x)).val = 0 := by linear_combination k₁
+      have e₂ : -(3 * (hexF x.val + hexF (-x).val)) - hexF (-y).val
+          + hexF (-(y - x)).val = 0 := by linear_combination k₂
+      have e₃ : -(hexE y.val - hexE (-y).val)
+          + (hexE (y - x).val - hexE (-(y - x)).val) = 0 := by linear_combination k₃
+      have e₄ : -(hexF y.val - hexF (-y).val)
+          + (hexF (y - x).val - hexF (-(y - x)).val) = 0 := by linear_combination k₄
+      have hfin : ∀ u v : ZMod 6,
+          4 - 3 * (hexE u.val + hexE (-u).val) - hexE (-v).val
+            + hexE (-(v - u)).val = 0 →
+          -(3 * (hexF u.val + hexF (-u).val)) - hexF (-v).val + hexF (-(v - u)).val = 0 →
+          -(hexE v.val - hexE (-v).val) + (hexE (v - u).val - hexE (-(v - u)).val) = 0 →
+          -(hexF v.val - hexF (-v).val) + (hexF (v - u).val - hexF (-(v - u)).val) = 0 →
+          (u = 1 ∧ v = 5) ∨ (u = 5 ∧ v = 1) := by decide
+      exact hfin x y e₁ e₂ e₃ e₄
+    · -- interior d ≥ 3: the pin `x = 0` and the collapse
+      exfalso
+      obtain ⟨γ', rfl⟩ : ∃ γ', γ = γ' + 1 := ⟨γ - 1, by omega⟩
+      have d₁ : (3 : ℤ) ∣ (hexE (-(y - x)).val - hexE (-y).val) :=
+        ⟨-(4 * 3 ^ γ') + 3 ^ (γ' + 1) * (hexE x.val * (piCoeff (2 * 0)).1
+            + hexE (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2))
+          + (hexE y.val * py + hexE (-y).val * (py + wy))
+          - (hexE (y - x).val * pz + hexE (-(y - x)).val * (pz + wz)),
+          by linear_combination k₁⟩
+      have d₂ : (3 : ℤ) ∣ (hexF (-(y - x)).val - hexF (-y).val) :=
+        ⟨3 ^ (γ' + 1) * (hexF x.val * (piCoeff (2 * 0)).1
+            + hexF (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2))
+          + (hexF y.val * py + hexF (-y).val * (py + wy))
+          - (hexF (y - x).val * pz + hexF (-(y - x)).val * (pz + wz)),
+          by linear_combination k₂⟩
+      have hpin : -(y - x) = -y := hex_mod_inj (-(y - x)) (-y) (by omega) (by omega)
+      have hx0 : x = 0 := sub_eq_self.mp (neg_inj.mp hpin)
+      subst hx0
+      rw [show (2 * 0 : ℕ) = 0 by norm_num, tracePair_zero_zero, sub_zero,
+        show 2 * (0 + (γ' + 1)) + 1 = 2 * (γ' + 1) + 1 by ring] at hD
+      have hcon : (2 : ℂ) * 3 ^ (γ' + 1) = 0 := by linear_combination -hD
+      exact absurd hcon (mul_ne_zero two_ne_zero (pow_ne_zero _ (by norm_num)))
+  · -- b > 0 with d > b: dead on the inner pair's rows
+    exfalso
+    obtain ⟨β', rfl⟩ : ∃ β', β = β' + 1 := ⟨β - 1, by omega⟩
+    have d₁ : (3 : ℤ) ∣ hexE (-y).val :=
+      ⟨4 * 3 ^ (β' + γ) - 3 ^ γ * (hexE x.val * (piCoeff (2 * (β' + 1))).1
+          + hexE (-x).val * ((piCoeff (2 * (β' + 1))).1 + (piCoeff (2 * (β' + 1))).2))
+        - (hexE y.val * py + hexE (-y).val * (py + wy))
+        + 3 ^ β' * (hexE (y - x).val * (3 * pz)
+          + hexE (-(y - x)).val * (3 * pz + (3 * wz + 1))),
+        by linear_combination -k₁⟩
+    have d₂ : (3 : ℤ) ∣ hexF (-y).val :=
+      ⟨-(3 ^ γ * (hexF x.val * (piCoeff (2 * (β' + 1))).1
+          + hexF (-x).val * ((piCoeff (2 * (β' + 1))).1 + (piCoeff (2 * (β' + 1))).2)))
+        - (hexF y.val * py + hexF (-y).val * (py + wy))
+        + 3 ^ β' * (hexF (y - x).val * (3 * pz)
+          + hexF (-(y - x)).val * (3 * pz + (3 * wz + 1))),
+        by linear_combination -k₂⟩
+    exact hexE_hexF_not_both_dvd (-y).val (ZMod.val_lt _) ⟨d₁, d₂⟩
+
+/-- Shape `b ≥ 0 > d` of the live parity: only the boundary `(b, d) = (0, −1)` survives,
+with two hex pairs. -/
+private theorem oi_shape₃ {x y z : ZMod 6} {β δ : ℕ} (hz : z = x + y)
+    (hE : 4 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * δ + 1) + (2 * (β + δ) + 1))
+        - 3 * ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * δ + 1 + (2 * (β + δ) + 1))
+          * tracePair x (2 * β)
+        - ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + δ) + 1) + 1)
+          * tracePair y (2 * δ + 1)
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * δ + 1) + 1)
+          * tracePair z (2 * (β + δ) + 1) = 0) :
+    β = 0 ∧ δ = 0 ∧ ((x = 1 ∧ y = 1) ∨ (x = 5 ∧ y = 5)) := by
+  subst hz
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * δ + 1) + (2 * (β + δ) + 1))
+      = 3 ^ (2 * β + 2 * δ + 1) by
+      rw [show 2 * β + (2 * δ + 1) + (2 * (β + δ) + 1) = 2 * (2 * β + 2 * δ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * δ + 1 + (2 * (β + δ) + 1)) = 3 ^ (β + 2 * δ + 1) by
+      rw [show 2 * δ + 1 + (2 * (β + δ) + 1) = 2 * (β + 2 * δ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * (β + δ) + 1) + 1) = 3 ^ (2 * β + δ + 1) by
+      rw [show 2 * β + (2 * (β + δ) + 1) + 1 = 2 * (2 * β + δ + 1) by ring,
+        sqrt3_pow_two_mul],
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * β + (2 * δ + 1) + 1) = 3 ^ (β + δ + 1) by
+      rw [show 2 * β + (2 * δ + 1) + 1 = 2 * (β + δ + 1) by ring, sqrt3_pow_two_mul]] at hE
+  have hD : 4 * (3 : ℂ) ^ (β + δ) - (3 : ℂ) ^ (δ + 1) * tracePair x (2 * β)
+      - (3 : ℂ) ^ β * tracePair y (2 * δ + 1)
+      + tracePair (x + y) (2 * (β + δ) + 1) = 0 := by
+    refine mul_left_cancel₀ (pow_ne_zero (β + δ + 1) (show (3 : ℂ) ≠ 0 by norm_num)) ?_
+    rw [mul_zero]
+    linear_combination hE
+  have hcx := tracePair_coords x (2 * β)
+  have hcy := tracePair_coords y (2 * δ + 1)
+  have hcz := tracePair_coords (x + y) (2 * (β + δ) + 1)
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := 4 * 3 ^ (β + δ)
+      - 3 ^ (δ + 1) * (hexE x.val * (piCoeff (2 * β)).1
+        + hexE (-x).val * ((piCoeff (2 * β)).1 + (piCoeff (2 * β)).2))
+      - 3 ^ β * (hexE y.val * (piCoeff (2 * δ + 1)).1
+        + hexE (-y).val * ((piCoeff (2 * δ + 1)).1 + (piCoeff (2 * δ + 1)).2))
+      + (hexE (x + y).val * (piCoeff (2 * (β + δ) + 1)).1
+        + hexE (-(x + y)).val * ((piCoeff (2 * (β + δ) + 1)).1
+          + (piCoeff (2 * (β + δ) + 1)).2)))
+    (n₂ := -(3 ^ (δ + 1) * (hexF x.val * (piCoeff (2 * β)).1
+        + hexF (-x).val * ((piCoeff (2 * β)).1 + (piCoeff (2 * β)).2)))
+      - 3 ^ β * (hexF y.val * (piCoeff (2 * δ + 1)).1
+        + hexF (-y).val * ((piCoeff (2 * δ + 1)).1 + (piCoeff (2 * δ + 1)).2))
+      + (hexF (x + y).val * (piCoeff (2 * (β + δ) + 1)).1
+        + hexF (-(x + y)).val * ((piCoeff (2 * (β + δ) + 1)).1
+          + (piCoeff (2 * (β + δ) + 1)).2)))
+    (n₃ := -(3 ^ (δ + 1) * ((piCoeff (2 * β)).2 * (hexE x.val - hexE (-x).val)))
+      - 3 ^ β * ((piCoeff (2 * δ + 1)).2 * (hexE y.val - hexE (-y).val))
+      + (piCoeff (2 * (β + δ) + 1)).2 * (hexE (x + y).val - hexE (-(x + y)).val))
+    (n₄ := -(3 ^ (δ + 1) * ((piCoeff (2 * β)).2 * (hexF x.val - hexF (-x).val)))
+      - 3 ^ β * ((piCoeff (2 * δ + 1)).2 * (hexF y.val - hexF (-y).val))
+      + (piCoeff (2 * (β + δ) + 1)).2 * (hexF (x + y).val - hexF (-(x + y)).val))
+    (by push_cast
+        linear_combination hD + (3 : ℂ) ^ (δ + 1) * hcx + (3 : ℂ) ^ β * hcy - hcz)
+  obtain ⟨py, hpy⟩ := three_dvd_piCoeff_fst (2 * δ)
+  obtain ⟨wy, hwy⟩ : ∃ w, (piCoeff (2 * δ + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * δ + 1)).2 / 3, by have := piCoeff_snd_emod (2 * δ); omega⟩
+  obtain ⟨pz, hpz⟩ := three_dvd_piCoeff_fst (2 * (β + δ))
+  obtain ⟨wz, hwz⟩ : ∃ w, (piCoeff (2 * (β + δ) + 1)).2 = 3 * w + 1 :=
+    ⟨(piCoeff (2 * (β + δ) + 1)).2 / 3, by have := piCoeff_snd_emod (2 * (β + δ)); omega⟩
+  rw [hpy, hwy, hpz, hwz] at k₁ k₂
+  rw [hwy, hwz] at k₃ k₄
+  rcases Nat.eq_zero_or_pos β with hβ0 | hβpos
+  · subst hβ0
+    rcases Nat.eq_zero_or_pos δ with hδ0 | hδpos
+    · -- the boundary (b, d) = (0, −1)
+      subst hδ0
+      refine ⟨rfl, rfl, ?_⟩
+      have hex1 : (piCoeff (2 * 0)).1 = 1 := rfl
+      have hex2 : (piCoeff (2 * 0)).2 = 0 := rfl
+      have hex3 : (piCoeff (2 * 0 + 1)).1 = 0 := rfl
+      have hex4 : (piCoeff (2 * 0 + 1)).2 = 1 := rfl
+      have hex5 : (piCoeff (2 * (0 + 0) + 1)).1 = 0 := rfl
+      have hex6 : (piCoeff (2 * (0 + 0) + 1)).2 = 1 := rfl
+      have hpy' : py = 0 := by omega
+      have hwy' : wy = 0 := by omega
+      have hpz' : pz = 0 := by omega
+      have hwz' : wz = 0 := by omega
+      subst hpy'
+      subst hwy'
+      subst hpz'
+      subst hwz'
+      rw [hex1, hex2] at k₁ k₂
+      rw [hex2] at k₃ k₄
+      have e₁ : 4 - 3 * (hexE x.val + hexE (-x).val) - hexE (-y).val
+          + hexE (-(x + y)).val = 0 := by linear_combination k₁
+      have e₂ : -(3 * (hexF x.val + hexF (-x).val)) - hexF (-y).val
+          + hexF (-(x + y)).val = 0 := by linear_combination k₂
+      have e₃ : -(hexE y.val - hexE (-y).val)
+          + (hexE (x + y).val - hexE (-(x + y)).val) = 0 := by linear_combination k₃
+      have e₄ : -(hexF y.val - hexF (-y).val)
+          + (hexF (x + y).val - hexF (-(x + y)).val) = 0 := by linear_combination k₄
+      have hfin : ∀ u v : ZMod 6,
+          4 - 3 * (hexE u.val + hexE (-u).val) - hexE (-v).val
+            + hexE (-(u + v)).val = 0 →
+          -(3 * (hexF u.val + hexF (-u).val)) - hexF (-v).val + hexF (-(u + v)).val = 0 →
+          -(hexE v.val - hexE (-v).val) + (hexE (u + v).val - hexE (-(u + v)).val) = 0 →
+          -(hexF v.val - hexF (-v).val) + (hexF (u + v).val - hexF (-(u + v)).val) = 0 →
+          (u = 1 ∧ v = 1) ∨ (u = 5 ∧ v = 5) := by decide
+      exact hfin x y e₁ e₂ e₃ e₄
+    · -- interior d ≤ −3: the pin `x = 0` and the collapse
+      exfalso
+      obtain ⟨δ', rfl⟩ : ∃ δ', δ = δ' + 1 := ⟨δ - 1, by omega⟩
+      have d₁ : (3 : ℤ) ∣ (hexE (-(x + y)).val - hexE (-y).val) :=
+        ⟨-(4 * 3 ^ δ') + 3 ^ (δ' + 1) * (hexE x.val * (piCoeff (2 * 0)).1
+            + hexE (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2))
+          + (hexE y.val * py + hexE (-y).val * (py + wy))
+          - (hexE (x + y).val * pz + hexE (-(x + y)).val * (pz + wz)),
+          by linear_combination k₁⟩
+      have d₂ : (3 : ℤ) ∣ (hexF (-(x + y)).val - hexF (-y).val) :=
+        ⟨3 ^ (δ' + 1) * (hexF x.val * (piCoeff (2 * 0)).1
+            + hexF (-x).val * ((piCoeff (2 * 0)).1 + (piCoeff (2 * 0)).2))
+          + (hexF y.val * py + hexF (-y).val * (py + wy))
+          - (hexF (x + y).val * pz + hexF (-(x + y)).val * (pz + wz)),
+          by linear_combination k₂⟩
+      have hpin : -(x + y) = -y := hex_mod_inj (-(x + y)) (-y) (by omega) (by omega)
+      have hx0 : x = 0 := by
+        have hadd : ∀ u v : ZMod 6, u + v = v → u = 0 := by decide
+        exact hadd x y (neg_inj.mp hpin)
+      subst hx0
+      rw [show (2 * 0 : ℕ) = 0 by norm_num, tracePair_zero_zero,
+        show (0 : ZMod 6) + y = y from zero_add y,
+        show 2 * (0 + (δ' + 1)) + 1 = 2 * (δ' + 1) + 1 by ring] at hD
+      have hcon : (2 : ℂ) * 3 ^ (δ' + 1) = 0 := by linear_combination -hD
+      exact absurd hcon (mul_ne_zero two_ne_zero (pow_ne_zero _ (by norm_num)))
+  · -- b > 0 with d < 0: dead on the cross pair's rows
+    exfalso
+    obtain ⟨β', rfl⟩ : ∃ β', β = β' + 1 := ⟨β - 1, by omega⟩
+    have d₁ : (3 : ℤ) ∣ hexE (-(x + y)).val :=
+      ⟨-(4 * 3 ^ (β' + δ)) + 3 ^ δ * (hexE x.val * (piCoeff (2 * (β' + 1))).1
+          + hexE (-x).val * ((piCoeff (2 * (β' + 1))).1 + (piCoeff (2 * (β' + 1))).2))
+        + 3 ^ β' * (hexE y.val * (3 * py) + hexE (-y).val * (3 * py + (3 * wy + 1)))
+        - (hexE (x + y).val * pz + hexE (-(x + y)).val * (pz + wz)),
+        by linear_combination k₁⟩
+    have d₂ : (3 : ℤ) ∣ hexF (-(x + y)).val :=
+      ⟨3 ^ δ * (hexF x.val * (piCoeff (2 * (β' + 1))).1
+          + hexF (-x).val * ((piCoeff (2 * (β' + 1))).1 + (piCoeff (2 * (β' + 1))).2))
+        + 3 ^ β' * (hexF y.val * (3 * py) + hexF (-y).val * (3 * py + (3 * wy + 1)))
+        - (hexF (x + y).val * pz + hexF (-(x + y)).val * (pz + wz)),
+        by linear_combination k₂⟩
+    exact hexE_hexF_not_both_dvd (-(x + y)).val (ZMod.val_lt _) ⟨d₁, d₂⟩
+
+/-- The classification at non-negative outer height: the six sporadic-and-glue rows at
+`(b, d) = (2, 1)` and the four hub-glue rows at `b = 0`. -/
+private theorem oi_nonneg {a c : ZMod 6} {b d : ℤ} (hb : 0 ≤ b)
+    (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
+    (a = 2 ∧ b = 2 ∧ c = 5 ∧ d = 1) ∨ (a = 4 ∧ b = 2 ∧ c = 1 ∧ d = 1) ∨
+      (a = 2 ∧ b = 2 ∧ c = 0 ∧ d = 1) ∨ (a = 4 ∧ b = 2 ∧ c = 0 ∧ d = 1) ∨
+      (a = 3 ∧ b = 2 ∧ c = 2 ∧ d = 1) ∨ (a = 3 ∧ b = 2 ∧ c = 4 ∧ d = 1) ∨
+      (a = 1 ∧ b = 0 ∧ c = 5 ∧ d = 1) ∨ (a = 5 ∧ b = 0 ∧ c = 1 ∧ d = 1) ∨
+      (a = 1 ∧ b = 0 ∧ c = 5 ∧ d = -1) ∨ (a = 5 ∧ b = 0 ∧ c = 1 ∧ d = -1) := by
+  have hM := oi_master h
+  obtain ⟨m, rfl⟩ : ∃ m : ℕ, b = (m : ℤ) := ⟨b.toNat, by omega⟩
+  rcases (by omega : 0 ≤ d ∨ d < 0) with hd | hd
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, d = (n : ℤ) := ⟨d.toNat, by omega⟩
+    rcases (by omega : n ≤ m ∨ m < n) with hnm | hnm
+    · -- shape 1: the outer height dominates
+      rcases (by omega : m % 2 = 0 ∨ m % 2 = 1) with hm2 | hm2 <;>
+        rcases (by omega : n % 2 = 0 ∨ n % 2 = 1) with hn2 | hn2
+      · exact ((oi_kill_ee hm2 hn2 (by omega : (m - n) % 2 = 0)
+          (oi_clear₁ (k := m - n) (by omega) hM)).elim)
+      · -- the live parity
+        obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := ⟨m / 2, by omega⟩
+        obtain ⟨δ, rfl⟩ : ∃ δ, n = 2 * δ + 1 := ⟨n / 2, by omega⟩
+        obtain ⟨γ, rfl⟩ : ∃ γ, β = δ + γ + 1 := ⟨β - δ - 1, by omega⟩
+        have hE := oi_clear₁ (m := 2 * (δ + γ + 1)) (n := 2 * δ + 1) (k := 2 * γ + 1)
+          (by push_cast; ring) hM
+        obtain ⟨hδ0, hγ0, hsix⟩ := oi_shape₁ rfl hE
+        subst hδ0
+        subst hγ0
+        rcases hsix with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;>
+          subst hx <;> subst hy
+        · exact Or.inl ⟨rfl, by norm_num, rfl, by norm_num⟩
+        · exact Or.inr (Or.inl ⟨rfl, by norm_num, rfl, by norm_num⟩)
+        · exact Or.inr (Or.inr (Or.inl ⟨rfl, by norm_num, rfl, by norm_num⟩))
+        · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, by norm_num, rfl, by norm_num⟩)))
+        · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
+            ⟨rfl, by norm_num, rfl, by norm_num⟩))))
+        · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
+            ⟨rfl, by norm_num, rfl, by norm_num⟩)))))
+      · exact ((oi_kill_oe hm2 hn2 (by omega : (m - n) % 2 = 1)
+          (oi_clear₁ (k := m - n) (by omega) hM)).elim)
+      · exact ((oi_kill_oo hm2 hn2 (by omega : (m - n) % 2 = 0)
+          (oi_clear₁ (k := m - n) (by omega) hM)).elim)
+    · -- shape 2: the inner height dominates
+      rcases (by omega : m % 2 = 0 ∨ m % 2 = 1) with hm2 | hm2 <;>
+        rcases (by omega : n % 2 = 0 ∨ n % 2 = 1) with hn2 | hn2
+      · exact ((oi_kill_ee hm2 hn2 (by omega : (n - m) % 2 = 0)
+          (oi_clear₂ (k := n - m) (by omega) hM)).elim)
+      · -- the live parity
+        obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := ⟨m / 2, by omega⟩
+        obtain ⟨δ, rfl⟩ : ∃ δ, n = 2 * δ + 1 := ⟨n / 2, by omega⟩
+        obtain ⟨γ, rfl⟩ : ∃ γ, δ = β + γ := ⟨δ - β, by omega⟩
+        have hE := oi_clear₂ (m := 2 * β) (n := 2 * (β + γ) + 1) (k := 2 * γ + 1)
+          (by push_cast; ring) hM
+        obtain ⟨hβ0, hγ0, hpair⟩ := oi_shape₂ rfl hE
+        subst hβ0
+        subst hγ0
+        rcases hpair with ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> subst hx <;> subst hy
+        · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
+            ⟨rfl, by norm_num, rfl, by norm_num⟩))))))
+        · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
+            ⟨rfl, by norm_num, rfl, by norm_num⟩)))))))
+      · exact ((oi_kill_oe hm2 hn2 (by omega : (n - m) % 2 = 1)
+          (oi_clear₂ (k := n - m) (by omega) hM)).elim)
+      · exact ((oi_kill_oo hm2 hn2 (by omega : (n - m) % 2 = 0)
+          (oi_clear₂ (k := n - m) (by omega) hM)).elim)
+  · -- shape 3: negative inner height
+    obtain ⟨n, rfl⟩ : ∃ n : ℕ, d = -(n : ℤ) := ⟨d.natAbs, by omega⟩
+    rcases (by omega : m % 2 = 0 ∨ m % 2 = 1) with hm2 | hm2 <;>
+      rcases (by omega : n % 2 = 0 ∨ n % 2 = 1) with hn2 | hn2
+    · exact ((oi_kill_ee hm2 hn2 (by omega : (m + n) % 2 = 0)
+        (oi_clear₃ (k := m + n) (by push_cast; ring) hM)).elim)
+    · -- the live parity
+      obtain ⟨β, rfl⟩ : ∃ β, m = 2 * β := ⟨m / 2, by omega⟩
+      obtain ⟨δ, rfl⟩ : ∃ δ, n = 2 * δ + 1 := ⟨n / 2, by omega⟩
+      have hE := oi_clear₃ (m := 2 * β) (n := 2 * δ + 1) (k := 2 * (β + δ) + 1)
+        (by push_cast; ring) hM
+      obtain ⟨hβ0, hδ0, hpair⟩ := oi_shape₃ (sub_eq_add_neg a c) hE
+      subst hβ0
+      subst hδ0
+      have hneg1 : ∀ u : ZMod 6, -u = 1 → u = 5 := by decide
+      have hneg5 : ∀ u : ZMod 6, -u = 5 → u = 1 := by decide
+      rcases hpair with ⟨hx, hy⟩ | ⟨hx, hy⟩
+      · have hc' : c = 5 := hneg1 c hy
+        subst hx
+        subst hc'
+        exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl
+          ⟨rfl, by norm_num, rfl, by norm_num⟩))))))))
+      · have hc' : c = 1 := hneg5 c hy
+        subst hx
+        subst hc'
+        exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+          ⟨rfl, by norm_num, rfl, by norm_num⟩))))))))
+    · exact ((oi_kill_oe hm2 hn2 (by omega : (m + n) % 2 = 1)
+        (oi_clear₃ (k := m + n) (by push_cast; ring) hM)).elim)
+    · exact ((oi_kill_oo hm2 hn2 (by omega : (m + n) % 2 = 0)
+        (oi_clear₃ (k := m + n) (by push_cast; ring) hM)).elim)
+
+/-- **oi completeness**: every lattice solution of the outer–inner chord equation is in
+the table — sixteen chords ever, no infinite family. The proof separates the heights'
+parities (`oi_kill_ee`/`_oo`/`_oe`), analyses the live parity per height-order shape
+(`oi_shape₁`/`₂`/`₃`), and closes under conjugation. -/
 theorem oi_complete (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ)
     (h : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d) = 3) :
     (a, b, c, d) ∈ oiTable := by
-  sorry
+  have hswap : ∀ u v : ZMod 6, -u = v → u = -v := by decide
+  rcases (by omega : 0 ≤ b ∨ b < 0) with hb | hb
+  · rcases oi_nonneg hb h with ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ <;>
+    subst ha <;> subst hb' <;> subst hc' <;> subst hd' <;> decide
+  · have hexp : (starRingEnd ℂ) (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word a b) - word c d)
+        = ((Real.sqrt 3 : ℝ) : ℂ) * (1 - word (-a) (-b)) - word (-c) (-d) := by
+      rw [map_sub, map_mul, Complex.conj_ofReal, map_sub, map_one, word_conj, word_conj]
+    have h' : normSq (((Real.sqrt 3 : ℝ) : ℂ) * (1 - word (-a) (-b)) - word (-c) (-d))
+        = 3 := by
+      rw [← hexp, Complex.normSq_conj]
+      exact h
+    rcases oi_nonneg (by omega : (0 : ℤ) ≤ -b) h' with ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ |
+      ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ | ⟨ha, hb', hc', hd'⟩ <;>
+    first
+      | omega
+      | (have ha' := hswap a _ ha
+         have hc'' := hswap c _ hc'
+         have hb'' : b = -2 := by omega
+         have hd'' : d = -1 := by omega
+         subst ha'
+         subst hc''
+         subst hb''
+         subst hd''
+         decide)
 
 /-! ## §H The colouring (E6: one b-independent table, no splice) -/
 
