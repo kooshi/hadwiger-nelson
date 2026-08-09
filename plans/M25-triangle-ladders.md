@@ -236,3 +236,90 @@ points re-checked by hand at the worst point (pivot 1 = `P0o[0]` = `PZo[5]` =
 `0 ↦ 1` about the metapivot computed exactly (`m + ζ₆²(0−m) = 1`). Deliberately
 NOT added: the trace-pair-over-`ZMod 12` object and the clearing identities —
 proof machinery, recorded for the obligation pass, not spec.
+
+## Modeling pass 2 — obligation (2026-08-09, fresh invocation)
+
+Skeleton grew to 28 obligations (naturality lemmas added: `outerPt_map_rot` /
+`innerPt_map_rot` — the web transports are two-line instances of them).
+
+### The proof spines, by tier (prove / test / assume partition: everything below
+is "prove"; the census artifacts are "test"; no assumed hypotheses anywhere)
+
+1. **ζ₁₂ layer** (~10 easy): `zeta12_sq/pow_three/minpoly/sqrt3_eq_zeta12` by
+   `Complex.ext` + `nlinarith [sq_sqrt3]` (the M24 §0 pattern);
+   `zeta12_pow_coords` by the power ladder + `interval_cases` on `val < 12`
+   (the `zeta6_zpow_hex` spine verbatim). `meta_axis_dirs` by ext-arithmetic.
+2. **Ring layer** (~15): `inRing12_coords_zero` — separate re/im, each an
+   instance of M24's public `sqrt_indep` (`ℚ(ζ₁₂,π) = ℚ(i,√3,√11)`: re-parts
+   over `{1,√3,√11,√33}`... exact routing derived at implementation from the
+   component expansion; the spine is TWO `sqrt_indep` applications).
+   `sqrt3_dvd_iff`: mpr constructs the quotient coordinates explicitly —
+   `d₀ = (c₁−c₃)/3, d₁ = (2c₀+c₂)/3, d₂ = (c₁+2c₃)/3, d₃ = (c₂−c₀)/3`
+   (E2's inverse matrix), divisibility by omega from the congruences; mp reads
+   `c = M√3·d` off coordinate uniqueness and closes by omega. Plus the closure
+   API (`InRing12.add/neg/mul/zeta12_mul/piC_mul/...` — the M24 `InRing` list
+   with one more generator) and the unit-table helpers (twelve units pairwise
+   distinct mod 3; none ≡ 0 — both `decide`).
+3. **The engine adaptation** (~20, the research core): the M25 clearing turns a
+   web equation into ONE `ℤ[ζ₁₂,π]` identity (no separation component — √3 is
+   in the ring). The kill instrument is the two-stage congruence read:
+   * stage 1 (mod √3): a term `√3^e·ζ₁₂^x·π^h` with `e ≥ 1` drops; the
+     surviving minimal-exponent terms give a `𝔽₉`-relation among units ×
+     π-images (π ≡ 0 or π̄ ≡ ... via `π(π−1) ≡ 0`); the address-mod-4
+     signatures kill or pin coarsely.
+   * stage 2 (mod 3 = mod √3², after dividing the identity by √3 once): the
+     twelve-unit tables are pairwise distinct — full address pins, the M24
+     mod-3 rows reborn.
+   The parity split reappears as: which terms carry ODD √3-exponent — same
+   bookkeeping, now internal. The collapse `π^h·π̄^k = 3^min·π^{h−k}` and the
+   conjugate-root development (`π̄ = 1−π`) carry verbatim from M24. The
+   trace-pair analogue: `T₁₂(x : ZMod 12, h) = ζ₁₂^x π^h + ζ₁₂^{−x} π̄^h`,
+   with the invariant that pivot-side addresses are ODD and meta-side EVEN
+   (the index-2 coset split doing arithmetic work). Pin/telescope lemmas port
+   with the ZMod-12 tables.
+4. **The four families** (the bulk, est. 600–900 lines): per family, the
+   census says every solution sits at |b|,|d| ≤ 1 (oi additionally the hub
+   pencil, whose factor `(v+1)` splits off FIRST — the hub branch is
+   `word c d = −ζ₁₂⁻¹`-free... `innerPt m · (3+2j,0) = pivot j` handles it
+   at the geometry level, then the cofactor is the finite part). Spine per
+   family: clear → one ring identity → stage-1 kills for heights ≥ 2 (the
+   √3-exponent gaps grow with height, so large heights die on the FIRST
+   congruence pair; expected far shallower than M24-oi's shape tree) →
+   boundary decides over (a, c) at |b|,|d| ≤ 1 (≤ 324 cases; the M24
+   36-pair-decide pattern with the mod-3 twelve-unit tables; watch
+   `synthInstance.maxSize` — M24's six-fold-Or lesson). Signed heights via
+   the M24 conj/swap reductions (conjugation maps the web to itself with
+   `a ↦ −a`; no swap symmetry across the axis — the two sides differ — so
+   sign quadrants reduce by conjugation only: 2 cases per family, not 4).
+5. **Transport + assembly**: `outerPt_map_rot` by `ring` after unfolding (pure
+   algebra); `web_transport_rot(_meta)` = naturality + `outerPt_hexRot` +
+   the exact rotation facts (`m + ζ₆²(0−m) = 1` etc); the all-web iffs reduce
+   `j` to 0 through `dist`-invariance under the rotation isometry
+   (`Complex.dist_eq` + `|ζ₆²| = 1` — or `Isometry` API if Mathlib's rotation
+   isometries state it directly; query at implementation).
+6. **Colouring layer**: the decode + properness, M24's §H pattern. **The named
+   hidden obligation this pass surfaced: the fusion inventory.** The census
+   dedup found 21 coincidences at B = 30 (pivots-on-ladders, the M24 fusion
+   octet at each pivot axis, hub identities). Well-definedness of the decode
+   over `fourLadder` needs the COMPLETE coincidence list as a theorem
+   (M24 §F extended to all anchor pairs). Implementation starts by
+   enumerating it tools-side (exact), then states it; the Triangle.lean
+   couplings (certified circle intersections) supply the glue-point
+   candidates. This is the likely cost overrun; the carve line if it overruns
+   is stated in §1 (χ-theorem conditional, openly).
+
+### Mutation audits (fixed now, run at gate)
+
+1. Delete one row from each meta table → the family's completeness (and the
+   properness decide) must break, naming it.
+2. `webShift j := 2j → j` → the `j = 1` instances must break.
+3. One `metaColTab` entry flipped → properness fails naming the family.
+4. `sqrt3_dvd_iff` weakened (drop `c₃ ≡ c₁`) → the iff's proof must break.
+5. Hub disjunct removed from `meta_oi_complete` → the pencil's ⟸ breaks.
+
+### Statement adjustments this pass made
+
+* Added the two naturality lemmas (transports demoted to instances).
+* No completeness statement needed strengthening: the j-quantified forms carry
+  their own reduction (isometry + re-addressing), and the hub disjunct's
+  address arithmetic (`c − 2j = 3`) was re-checked against the census.

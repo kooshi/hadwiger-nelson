@@ -154,6 +154,16 @@ theorem innerPt_hexRot (p q q' : ℂ) (k : ZMod 6) (a : ZMod 6) (b : ℤ)
     (h : q' - p = zeta6 ^ (k.val : ℤ) * (q - p)) :
     innerPt p q' a b = innerPt p q (a + k) b := by sorry
 
+/-- **Naturality**: a rotation about any center carries ladder points to ladder points
+of the rotated anchors — the web transports are instances. -/
+theorem outerPt_map_rot (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
+    w + r * (outerPt p q a b - w)
+      = outerPt (w + r * (p - w)) (w + r * (q - w)) a b := by sorry
+
+theorem innerPt_map_rot (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
+    w + r * (innerPt p q a b - w)
+      = innerPt (w + r * (p - w)) (w + r * (q - w)) a b := by sorry
+
 /-- The 120° rotation about the metapivot carries the master web to pivot `1`'s web
 with the `+2` shift — the geometry behind the `webShift` re-indexing. -/
 theorem web_transport_rot (a : ZMod 6) (b : ℤ) :
