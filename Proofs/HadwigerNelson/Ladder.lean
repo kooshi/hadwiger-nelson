@@ -79,7 +79,7 @@ noncomputable def innerPt (p q : ℂ) (a : ZMod 6) (b : ℤ) : ℂ :=
 /-- The matched ladder pair at the `(0, 1)` anchor: both pivots' outer and inner
 lattices. The pivots are members automatically — each is the other side's
 `outerPt _ _ 0 0` — so no vertex is special-cased. -/
-noncomputable def LadderSet : Set ℂ :=
+noncomputable def ladderSet : Set ℂ :=
   (Set.range fun n : ZMod 6 × ℤ => outerPt 0 1 n.1 n.2) ∪
     (Set.range fun n : ZMod 6 × ℤ => innerPt 0 1 n.1 n.2) ∪
     ((Set.range fun n : ZMod 6 × ℤ => outerPt 1 0 n.1 n.2) ∪
@@ -110,12 +110,14 @@ theorem oo_complete {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : Z
       ((c = a + 3 ∧ d = b) ∨ (a = 0 ∧ b = 0) ∨ (c = 0 ∧ d = 0)) := by
   sorry
 
-/-- **The inner–inner bridge**: matching, or the Möbius norm form
-`v·(√3u − 1) = u − √3` (division-free form of `(√3u−1)(√3v−1) = −2`, i.e. `v = μ(u)`). -/
+/-- **The inner–inner bridge**: the matching translate (in address form, like
+`oo_complete`), or the Möbius norm form `v·(√3u − 1) = u − √3` (division-free form of
+`(√3u−1)(√3v−1) = −2`, i.e. `v = μ(u)`) — whose complete lattice solution set is
+`ii_norm_complete`. -/
 theorem ii_chord_iff {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : ZMod 6)
     (d : ℤ) :
     dist (innerPt p q a b) (innerPt q p c d) = 1 ↔
-      (word c d = -word a b ∨
+      ((c = a + 3 ∧ d = b) ∨
         word c d * ((Real.sqrt 3 : ℂ) * word a b - 1) = word a b - (Real.sqrt 3 : ℂ)) := by
   sorry
 
@@ -198,9 +200,11 @@ theorem fusion_ii {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : ZMo
 
 /-! ## §G The completeness core (E2/E3/E5) -/
 
-/-- The complete solution set of the ii norm form on the lattice, as address tuples:
-the two matching-crossing points, the four sporadics, and the four glue-incident
-solutions `(σ, −σ³)` (conjugates and swaps included). -/
+/-- The complete solution set of the ii **norm-branch** equation on the lattice, as
+address tuples: the two matching-crossing points, the four sporadics, and the four
+glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
+branch — the infinite family `c = a + 3, d = b` — is deliberately NOT here: it is
+`ii_chord_iff`'s first disjunct. -/
 def iiNormTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
   [(0, 0, 3, 0), (3, 0, 0, 0),
    (1, 1, 5, 1), (5, 1, 1, 1), (1, -1, 5, -1), (5, -1, 1, -1),
@@ -251,50 +255,53 @@ def colTab : Bool → Bool → ZMod 6 → Fin 4
 open Classical in
 /-- The colouring of the plane restricted to the ladder pair: decode any address, read
 the table (`b` never enters — the colouring is b-independent). Well-defined on fused
-points because the table equalizes every fusion (`ladderColour_outerP` and siblings).
+points because the table equalizes every fusion (`ladderColor_outerP` and siblings).
 Junk value `0` off the ladder. -/
-noncomputable def ladderColour (z : ℂ) : Fin 4 :=
+noncomputable def ladderColor (z : ℂ) : Fin 4 :=
   if h : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = z then colTab false false h.choose.1
   else if h : ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = z then colTab false true h.choose.1
   else if h : ∃ n : ZMod 6 × ℤ, outerPt 1 0 n.1 n.2 = z then colTab true false h.choose.1
   else if h : ∃ n : ZMod 6 × ℤ, innerPt 1 0 n.1 n.2 = z then colTab true true h.choose.1
   else 0
 
-theorem ladderColour_outerP (a : ZMod 6) (b : ℤ) :
-    ladderColour (outerPt 0 1 a b) = colTab false false a := by
+theorem ladderColor_outerP (a : ZMod 6) (b : ℤ) :
+    ladderColor (outerPt 0 1 a b) = colTab false false a := by
   sorry
 
-theorem ladderColour_innerP (a : ZMod 6) (b : ℤ) :
-    ladderColour (innerPt 0 1 a b) = colTab false true a := by
+theorem ladderColor_innerP (a : ZMod 6) (b : ℤ) :
+    ladderColor (innerPt 0 1 a b) = colTab false true a := by
   sorry
 
-theorem ladderColour_outerQ (a : ZMod 6) (b : ℤ) :
-    ladderColour (outerPt 1 0 a b) = colTab true false a := by
+theorem ladderColor_outerQ (a : ZMod 6) (b : ℤ) :
+    ladderColor (outerPt 1 0 a b) = colTab true false a := by
   sorry
 
-theorem ladderColour_innerQ (a : ZMod 6) (b : ℤ) :
-    ladderColour (innerPt 1 0 a b) = colTab true true a := by
+theorem ladderColor_innerQ (a : ZMod 6) (b : ℤ) :
+    ladderColor (innerPt 1 0 a b) = colTab true true a := by
   sorry
 
 /-- **Properness**: the table separates every chord family the completeness theorems
 allow. -/
-theorem ladderColour_valid {z w : ℂ} (hz : z ∈ LadderSet) (hw : w ∈ LadderSet)
-    (h : dist z w = 1) : ladderColour z ≠ ladderColour w := by
+theorem ladderColor_valid {z w : ℂ} (hz : z ∈ ladderSet) (hw : w ∈ ladderSet)
+    (h : dist z w = 1) : ladderColor z ≠ ladderColor w := by
   sorry
 
-theorem colorable_four_ladder : ((unitDistance ℂ).induce LadderSet).Colorable 4 := by
+theorem colorable_four_ladder : ((unitDistance ℂ).induce ladderSet).Colorable 4 := by
   sorry
 
 /-- The nine-point witness (pivot, five consecutive outer hex points, the seam-image
 rot3 triangle — all ladder addresses) refuses three colours. -/
 theorem not_colorable_three_ladder :
-    ¬ ((unitDistance ℂ).induce LadderSet).Colorable 3 := by
+    ¬ ((unitDistance ℂ).induce ladderSet).Colorable 3 := by
   sorry
 
-/-- **The headline: the matched ladder pair is exactly 4-chromatic** — the countable
-two-pivot object, all chord families exact, no census window, no conditional clause. -/
+/-- **The headline: the matched ladder pair is exactly 4-chromatic.** The object is the
+countable two-pivot ladder pair — all four circle-lattices, both parity tubes, the
+pivots as lattice members — with every chord family made exact by the completeness
+theorems: no census window, no conditional clause. (NOT the uncountable
+`Coupled.pairSystem`: that object's χ is the M21 fork, parked as M29's question.) -/
 theorem chromaticNumber_ladderPair :
-    ((unitDistance ℂ).induce LadderSet).chromaticNumber = 4 := by
+    ((unitDistance ℂ).induce ladderSet).chromaticNumber = 4 := by
   sorry
 
 /-! ## §I Specification -/
@@ -305,10 +312,10 @@ example : oiTable.length = 16 := rfl
 example : colTab false false 0 = 0 ∧ colTab true false 0 = 2 := ⟨rfl, rfl⟩
 
 -- the pivots are lattice members with no special casing
-example : (0 : ℂ) ∈ LadderSet := by
+example : (0 : ℂ) ∈ ladderSet := by
   sorry
 
-example : (1 : ℂ) ∈ LadderSet := by
+example : (1 : ℂ) ∈ ladderSet := by
   sorry
 
 -- a sporadic chord, concretely: the ii sporadic (1,1) → (5,1)

@@ -349,6 +349,30 @@ does the 4×4 case split inline, citing §D–§F per case); the axis-1/√3 Lea
 instances (M25 — the derivations are §0.4's exact record); ladder/tube
 decomposition machinery (the full-lattice object needs none).
 
+**Experience pass (2026-08-08).** Changed: (1) `LadderSet` → `ladderSet`,
+`ladderColour` → `ladderColor` + decode-lemma names — the repo's stated
+identifier convention is `color` (Sat/Encoding.lean) and defs are
+lowerCamelCase (`Coupled.system` precedent); (2) `ii_chord_iff`'s matching
+disjunct moved to address form (`c = a + 3 ∧ d = b`) — same currency as
+`oo_complete`, so the properness consumer never pays a `word_neg_iff` step;
+(3) implicature fixes: `iiNormTable`'s docstring now states the infinite
+matching branch is deliberately absent; the headline docstring names the
+object with the post-M23 precision (countable ladder pair, both tubes, NOT
+`Coupled.pairSystem` — the read-aloud surface). Confirmed: publicize
+`Triangle.unit_chord_units` with a consumer-naming docstring (over cloning —
+the N-identical-privates smell; Triangle re-elaboration is minutes);
+`sqrt_indep` stays Ladder-private (M25 lifts it when a second consumer
+exists — recorded here as the named handle); zero simp tags (house
+precedent); the two-letter family codes (oo/oi/io/ii) are standing house
+vocabulary and stay. Instrument surface for implementation: promote the O(B)
+census net into `tools/couple.py --census` with the planted-sporadic
+negative control AND a new decorrelation self-test — the census's sporadic
+output asserted equal to the Lean tables' contents (two independent
+derivations of one list must agree). Deferred, recorded: the tables'
+soundness direction (every entry IS a chord) has no consumer beyond the spec
+examples — not stated as a theorem until M25 asks. 40 obligations;
+elaborates clean.
+
 **Obligation pass (2026-08-08).** The proof map — three shared engines carry
 the module:
 
