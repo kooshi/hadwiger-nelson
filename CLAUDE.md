@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M22, 2026-08-08.**
+**Last updated: M23, 2026-08-08.**
 
 ### Where the problem stands
 
@@ -76,8 +76,26 @@ mechanism: outer-circle constraints are necessary in every ambient kill, inner i
 for gadget design. And the partner web is nearly closed already: two thirds of all
 unit-partners collide back into the lattice, k = 4 stays SAT through two closure
 generations (~10⁶ triage edges) — **depth will not force the χ fork; new structure
-will**. The next structure is three pivots (M23): hex-commensurate coupling
-directions, where exact loops finally exist.
+will**. M23 built the structure: the pivot triangle (0, 1, ζ₆) with its metapivot
+(the centroid) is now a certified layer — the triangle is **self-glued** (each
+pivot is the outer∩outer glue point of the other two), the whole 8-circle object
+crosses itself in exactly 34 points inside the seam field, the cross-web between
+unit-separated systems is **classified** (outer–outer chords are rigid: the
+translation matching is complete; inner–inner chords are a rational Möbius
+graph; the √disc field growth lives ONLY in mixed-radius chords), and the
+**seam hexagon** — the minimal closed loop of seam rotations, which provably
+needs all three pivots — is kernel-checked, as an instance of a rotation-hexagon
+identity that turned out generic. The registered statistics cut the other way,
+and are reported at face value: M22's post-hoc "seam-aligned kill mechanism"
+**failed its registered replication at four fresh pairs (0/4)** and is demoted
+to single-pair anecdote; the coset census came in under threshold; and the
+triple-kill census's registered population is provably EMPTY (unit triangles are
+never "far" — their systems always interlock through the shared glue points, the
+ten-point theorem operating on the instrument). What survived everything:
+ambient kills are **gated by coupling strength** (0/3,200 draws at 22 cross
+chords; 12–15% at 40), and the constraint-flow skeleton the triangle uniquely
+owns is now exact mathematics awaiting its colour question (M24: the
+overlap-aware triple census, and the metapivot's broadcast reach).
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -101,24 +119,29 @@ directions, where exact loops finally exist.
 | 16 | **The coupled automaton is dead, exactly**: no relation `u^{2m}σ^lζ₆^k = 1` at any probed pivot pair (\|m\|,\|l\| ≤ 6) — the coupling phase is incommensurate with the strip lattice everywhere, so two coupled strips never form a finite-state product; and **no pair of rotated/reflected/re-paletted 60°-sector colourings is proper on the d = 1 pair** (full continuous-offset sweep, killed by the outer–outer curve family alone) — any χ ≤ 4 proof for the pair needs a construction shape nobody has named. | `tools/couple.py` (`--phase`, `--mesh`) + `build/m21-phase.json` | M21 |
 | 17 | **The general gluing classification**: for ANY two distinct centres and any radii under the annulus condition, the circle intersection is exactly {an explicit glue point, its mirror} — the glue point division-once with the **gluing discriminant** under its √ (the exact object partner adjunction adjoins), the mirror by ratio conjugation (`reflAxis`, an involutive isometry at every axis, collapsing to M21's `reflAcross` at unit axis); empty cases certified both ways; radius nonnegativity *derived*, not assumed. Subsumes M21's four gluings; the metapivot instance (axis 1/√3) is a spec example. | `Glue.lean` (`sphere_inter_sphere`, `reflAxis_*`) | M22 |
 | 18 | **The first certified near-relation**: `ζ₆·σ⁹` misses 1 by chord < 1/50 (`normSq (ζ₆σ⁹ − 1) < 1/2500`; numerically 1.008°, chord ≈ 0.0176) AND `ζ₆·σ⁹ ≠ 1` (via σ⁵⁴ ≠ 1, the seam's infinite order) — nine seam steps almost close one hex step, and provably never do. Both halves exact field arithmetic in ℚ(√3,√11,√33). The aiming lemma of the colour-closure thread. | `Glue.lean` (`zeta6_mul_seam_pow_nine_ne_one`, `normSq_zeta6_mul_seam_pow_nine_sub_one_lt`) | M22 |
-| 19 | **The kill mechanism named + the partner web measured** (tools-side, controlled): ambient kills need the partner's OUTER circle in 100% of probed cases and the inner in 75%; greedy pin cores are 4–8 pins (median 6), leaning inner on the pinned side; local kills are multi-class Hall failures (0/804 starvation); local slack does not predict ambient death — the clamp specification for gadget design. Post-hoc decomposition (single pair, unregistered — M23 §0 re-tests it): core-pin separations concentrate on the pure seam-angle lattice {j·θσ mod 60°} (+15 pts over matched controls, above all decoys) and are depleted at the half-offset (−19 pts) — the kill mechanism is **seam-aligned**; the near-cycle-shadow reading was refuted by a 20-decoy specificity sweep. Partner closure: 67–70% of unit-partners collide back into the lattice; the field grows far less than feared — 76% of adjunction instances are FREE, radicand already square in ℚ(√3,√11) (sympy-exact, five planted controls, from the `opus-larp` branch's parallel pass — superseding M22's 37.5% PSLQ triage, which sampled only non-collided partners); and k = 4 stays SAT through two generations (15,619 points, ~2.4M triage edges at the full depth-20 base) — the fork does not move by depth. Near-cycles are dense and CF-structured (records at l = 1, 4, 5, 9, 59; every probed pair < 0.3° at word length ≤ 12). | `tools/couple.py` (`--kills`, `--partner`, `--near`) + `build/m22-*.json` | M22 |
+| 19 | **The kill mechanism named + the partner web measured** (tools-side, controlled): ambient kills need the partner's OUTER circle in 100% of probed cases and the inner in 75%; greedy pin cores are 4–8 pins (median 6), leaning inner on the pinned side; local kills are multi-class Hall failures (0/804 starvation); local slack does not predict ambient death — the clamp specification for gadget design. Post-hoc decomposition (single pair, unregistered — M23 §0 re-tests it): core-pin separations concentrate on the pure seam-angle lattice {j·θσ mod 60°} (+15 pts over matched controls, above all decoys) and are depleted at the half-offset (−19 pts); the near-cycle-shadow reading was refuted by a 20-decoy specificity sweep. **DEMOTED at M23**: the seam-alignment reading failed its registered replication at four fresh 40-chord pairs (0/4; excesses +7.4/−7.3/+12.1/−13.4) — single-pair anecdote, not a mechanism. Partner closure: 67–70% of unit-partners collide back into the lattice; the field grows far less than feared — 76% of adjunction instances are FREE, radicand already square in ℚ(√3,√11) (sympy-exact, five planted controls, from the `opus-larp` branch's parallel pass — superseding M22's 37.5% PSLQ triage, which sampled only non-collided partners); and k = 4 stays SAT through two generations (15,619 points, ~2.4M triage edges at the full depth-20 base) — the fork does not move by depth. Near-cycles are dense and CF-structured (records at l = 1, 4, 5, 9, 59; every probed pair < 0.3° at word length ≤ 12). | `tools/couple.py` (`--kills`, `--partner`, `--near`) + `build/m22-*.json` | M22 |
+
+| 20 | **The pivot-triangle layer** (all kernel-checked): the triangle is self-glued — `hexStep` permutes the pivots cyclically, so outer∩outer of any two pivots = {the third pivot, its mirror}; the centroid is the (+)-branch ii glue of ALL THREE pairs; the metapivot couplings create no new points — outer(pᵢ)∩inner(m) = the other two pivots, inner(pᵢ)∩outer(m) = the two 120°-partners, inner(pᵢ)∩inner(m) = the two mirror centroids; **the ten-point sharing theorem** (two unit-separated systems share exactly {pivots} ∪ {eight glue points}, with `ncard = 10`); **the chord classifications** — outer–outer unit chords are RIGID (translate ∨ hub: the perfect matching is complete, for the full uncountable circles) and inner–inner chords are matching ∨ the rational Möbius graph x(3y−2) = y, so √disc field growth is localized to mixed-radius chords; the translation coupling; and the loop layer — the **rotation hexagon** (S₂⁻¹S₁S₀⁻¹S₂S₁⁻¹S₀ = id for ANY unit rotation about ANY three points — found generic at implementation) with the seam instance, the hex parallelogram (hex-specific, minimal at 4), and the zpow closure backbone. Census (exact, tools): 34-point inventory in the seam field, 7 triple points; seam relations minimal at 6, all 3-pivot, none 2-pivot; R_m unreachable from pivot words. | `Triangle.lean` + `tools/couple.py --loops/--export-viz` | M23 |
+| 21 | **The registered statistics, reported at face value** (tools-side): ambient kills are **coupling-strength gated** — 0 kills in 3,200 draws at four 22-chord fresh pairs vs 12–15% kill rate at every 40-chord fresh pair (all kills injection-verified); M22's seam-alignment reading **failed registered replication** (0/4 pairs; demoted per its pre-committed failure clause); the coset census under threshold (×0.83–1.51 vs registered ≥2×); the metapivot's cover floor stays 3 (registered null confirmed; higher unions read 4 for reasons the self-gluing theorems explain); and the triple census's registered population is **provably empty** — unit triangles are never "far", their cover sets always interlock through the shared ten points. | `tools/couple.py --replicate/--floor --systems` + `build/m23-*.json` | M23 |
 
 ### Paths forward, ranked
 
-1. **The pivot triangle and the metapivot system** (M23, stubbed:
-   `plans/M23-pivot-triangle.md`) — three pivots pairwise at distance 1: coupling
-   directions 1, ζ₆, ζ₃ are hex-commensurate, so **exact closed loops exist** where
-   the pair's incommensurability allowed only near-cycles (M21 phase scan, M22
-   spectrum); cyclic constraint flow A→B→C→A; the centroid is a triple glue point and
-   a self-seeding fourth system (8 circles, 4 centres; the 26-circle recursion with 3
-   phase moduli behind it). `Glue.lean` supplies every intersection the object needs
-   — the axis-1/√3 instance is already a proven example.
+1. **The colour question on the certified triangle** (M24): the geometry layer is
+   done (`Triangle.lean`); what remains is exactly the measurement M23's protocol
+   discoveries specified — an **overlap-aware triple census** (the far-style
+   encoding is provably inapplicable: pattern triples must be consistent on the
+   shared ten-point structure; register the encoding FIRST), run at the
+   strongest-coupled configurations the gating result now identifies (40-chord
+   class, 12–15% kill rates); plus the metapivot's broadcast reach (its outer
+   circle touches all three inner circles — the region the pivots cannot see).
+   The 26-circle recursion (3 phase moduli, spindle-tunable) stays behind it.
 2. **Colour closure at the gap distance, clamp-directed** — the exactness thread's
    open question: does a 4-colour equality-transmitting gadget exist at
-   d = \|ζ₆σ⁹ − 1\| (exact in the field, chord ≈ 0.0176)? The kill census supplies
-   the clamp shape (bind the partner's outer hexagon jointly with the anchor's inner
-   triangle; ~6 pins suffice); M20's battery showed the closure algebra alone kills
-   nothing. A negative is reportable.
+   d = \|ζ₆σ⁹ − 1\| (exact in the field, chord ≈ 0.0176)? The clamp spec is now
+   the M22 relaxation census WITHOUT the demoted alignment sharpening: outer
+   constraints necessary in every kill, cores 4–8 pins median 6 — and the M23
+   gating result adds: build the gadget where coupling is strong. A negative is
+   reportable.
 3. **The certified-6-colouring angle** (upper bound) — the designated perspective shift
    when the coverage/extension thread goes flat across families (agreed 2026-08-03), not
    before. M21's mesh scan killed the sector family for pairs, so any explicit pair
@@ -132,6 +155,9 @@ directions, where exact loops finally exist.
    fork's two branches stay parked behind their gates (M21 subplan §2.4) — and M22
    measured that closure DEPTH cannot move the fork (k = 4 SAT through two partner
    generations), so the ≥ 5 branch now waits on structure (path 1), not iteration.
+   The branch re-validation (M23 §0.2.5) was registered but NOT run — the
+   `opus-larp` constructions were not reimplemented — so the branch's cell-graph
+   and density numbers remain unvalidated, unused, and their gates closed.
    Write-ups and upstreaming: deferred per the standing policy above; the
    two-circle/cap/priority literature pass is a publication-gate task (no named prior
    found in a first search, M20 §2.6).

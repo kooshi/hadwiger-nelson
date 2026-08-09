@@ -519,6 +519,50 @@ native evaluation. -/
 #print axioms Glue.zeta6_mul_seam_pow_nine_ne_one
 #print axioms Glue.normSq_zeta6_mul_seam_pow_nine_sub_one_lt
 
+/-! ## M23 — the pivot triangle and the metapivot system
+
+The self-gluing cycle, the centroid as triple glue point, the three no-new-points
+metapivot couplings, the ten-point sharing theorem with its count, the chord
+classifications (outer–outer rigidity, inner–inner Möbius), the translation
+coupling, the loop identities (hex parallelogram; the rotation hexagon — generic
+in the rotation AND the three points — with its seam instance), and the zpow
+closure backbone. Pure geometry over ℂ. -/
+
+#print axioms Triangle.dist_pivot_01
+#print axioms Triangle.dist_pivot_02
+#print axioms Triangle.dist_pivot_12
+#print axioms Triangle.dist_centroid_0
+#print axioms Triangle.dist_centroid_1
+#print axioms Triangle.dist_centroid_2
+#print axioms Triangle.hexStep_cycle_01
+#print axioms Triangle.hexStep_cycle_12
+#print axioms Triangle.hexStep_cycle_20
+#print axioms Triangle.outer_inter_outer_eq_third
+#print axioms Triangle.centroid_glue_01
+#print axioms Triangle.centroid_glue_12
+#print axioms Triangle.centroid_glue_20
+#print axioms Triangle.outer_inter_metaInner
+#print axioms Triangle.inner_inter_metaOuter
+#print axioms Triangle.inner_inter_metaInner
+#print axioms Triangle.system_inter_system
+#print axioms Triangle.ncard_system_inter_system
+#print axioms Triangle.unit_chord_outer_outer
+#print axioms Triangle.unit_chord_inner_inner
+#print axioms Triangle.outer_partner_pair
+#print axioms Triangle.mem_sphere_translate
+#print axioms Triangle.dist_translate
+#print axioms Triangle.one_sub_zeta6
+#print axioms Triangle.hexStep_matching
+#print axioms Triangle.hexStep_hexStep_eq_rot3_centroid
+#print axioms Triangle.hexStep_triple_flip
+#print axioms Triangle.hex_parallelogram
+#print axioms Triangle.rot_hexagon
+#print axioms Triangle.seam_hexagon
+#print axioms Triangle.zeta6_zpow_mul_seam_zpow_eq_one_iff
+#print axioms Triangle.rotAbout_zeta6
+#print axioms Triangle.rotAbout_seamRatio
+#print axioms Triangle.rotAbout_omega3
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

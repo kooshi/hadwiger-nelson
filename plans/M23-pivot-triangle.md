@@ -147,6 +147,81 @@ anchor form symbolically (exact zero / unit ratio).
 seam-hexagon loop as a Lean statement, the hex parallelogram as the minimal hex
 relation, and the one-operator `rotAbout` unification (group 7).*
 
+### 0.4 Implementation-phase results (2026-08-08, the registered tests + audits)
+
+**The Lean layer**: all 39 obligations closed, zero warnings; public surface on
+axioms exactly [propext, Classical.choice, Quot.sound] (scripts/Axioms.lean M23
+block, 34 receipts). Implementation discoveries: (i) `rot_hexagon` — the seam
+hexagon's closure is generic in BOTH the rotation and the three points (sympy
+cofactor reduction left zero remainder with everything symbolic; only
+`s·conj s = 1` is used) — the theorem is stated at that generality with the seam
+instance as corollary; what stays seam/triangle-specific is the census content
+(minimality at 6; every minimal word 3-pivot; no 2-pivot relation ≤ 6; R_m
+unreachable). (ii) The ii anchor key has RATIONAL coefficients (the radius
+irrationality cancels), cofactors −3(x−y)(y−1) and 3x(x−y). (iii) The hex
+parallelogram needs BOTH `conj ζ₆ = 1 − ζ₆` and the minimal polynomial — the
+hexagon needs neither: the parallelogram is hex-specific, the hexagon universal.
+All 7 mutation audits fired and localized correctly (batch perturb → 15 errors
+at exactly the 6 mutated declarations + downstream consumers → restore green).
+
+**§0.2.1 (triple census): the registered population is EMPTY, for a reason the
+milestone's own theorems explain.** No unit triangle in the closure has pairwise-
+disjoint cover sets — not even after excluding the pivot triple (first protocol
+adaptation, recorded above the finder): the third pivot is a common neighbour by
+definition (self-gluing), and beyond that the pairs' cover sets always interlock
+through shared glue points (the ten-point sharing theorem, populated in the
+closure). Unit triangles are NEVER "far" in the M21 sense; the far-style
+encoding is inapplicable in principle. Improvising an overlap-aware encoding
+post-hoc and reporting its numbers as the registered test would be the fishing
+the discipline forbids — the sharpened overlap-consistent triple protocol is an
+M24 §0 registration candidate. VERDICT: not-run-as-registered; the interlock
+finding stands in its place.
+
+**§0.2.2 (metapivot floor): the registered null CONFIRMED at the informative
+level.** Synthetic lattice (build_lattice4: 1117 points, 3432 exact unit edges;
+controls k=3 unsat / k=5 sat): the metapivot's own cover floor is **3** (the
+rainbow floor holds at the 4th system). The union ladder reads 4 from `0∪m`
+upward — each 4 EXPLAINED by self-gluing (m's inner circle passes through the
+pivots and the pivots sit on each other's outers, so those unions contain a full
+M20 4-forcing cap; incidence artifacts, not new pressure). The registered
+"union of all four" is degenerate exactly as flagged at registration (it equals
+the whole vertex set). `build/m23-floor-systems.json`.
+
+**§0.2.3/4 (seam-alignment replication + coset census): the kill phenomenon
+itself failed to appear at the first four fresh pairs.** The four
+strongest-first eligible fresh pairs at 22 cross chords each produced **0
+ambient kills in 3,200 draws** — ambient kills are a strong-coupling phenomenon
+(the M22 probe pair had 40 chords); at weak coupling there is nothing to align.
+Re-run at the four strongest-coupled fresh pairs (40 cross chords each — the
+M22 probe's strength, from 149 eligible; kill rates 12–15%, all kills
+injection-verified; lattice statistic calibrated to the M22 control measure
+after the first pass saturated — nj = 28 reproduces the recorded 46.2% control
+rate): (2252,3597) +7.4 pts, rank 6/21, depletion −5.4; (2037,3794) −7.3,
+rank 15/21, +2.8; (697,3590) +12.1, rank 4/21, depletion −10.9; (469,3792)
+−13.4, rank 20/21, +4.3. **VERDICT: 0/4 replicate the lattice excess, 1/4 the
+depletion — the M22 §6.4 seam-alignment reading FAILS the registered
+replication and is demoted to single-pair anecdote**, per the registration's
+own failure clause. §0.2.4 coset census on the same cores: ×1.43, ×0.83,
+×1.51, ×0.91 vs matched controls — heterogeneous, mean ≈ ×1.2, below the
+registered ≥2×: NOT confirmed. The clean finding the harness produced on the
+way, held to its own controls: **ambient kills are gated by coupling
+strength** — 0 kills in 3,200 draws across four 22-chord fresh pairs vs
+40 kills per ≤330 draws at every 40-chord pair. `build/m23-replicate.json`.
+
+**§0.2.5 (branch re-validation): registered, NOT run** — (a) the bi-sector
+cell-graph family and (b) the free-partner density metric are both properties of
+the branch's own constructions, not re-derivable from our artifacts (our
+`--partner` triage graph measures a different object, ~155 edges/point vs the
+branch's 2.5). Reimplementing the branch's constructions was out of this
+milestone's budget. Consequence, honestly drawn: the branch numbers remain
+unvalidated and UNUSED; every gate they guard stays closed.
+
+**Gate**: `scripts/build.sh` OK (160/160), zero `sorry`, axioms clean (all M23
+receipts standard-three; purchased section unchanged), `lake lint` passed,
+`regen-check.sh` OK (self-tests 20 controls green, including the two new M23
+controls: loop census with the v1-dedup regression, and the 34-point/7-triple
+inventory pin).
+
 ## 1. What M22 handed this milestone
 
 * **The general gluing classification is certified** (`Glue.sphere_inter_sphere`):

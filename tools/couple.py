@@ -579,7 +579,10 @@ def find_pivot_triangles(coords, denom, E, want, null_mode, rng):
 
     def S_of(v):
         if v not in Scache:
-            Scache[v] = set(pivot_S(coords, denom, E, v)[0])
+            try:
+                Scache[v] = set(pivot_S(coords, denom, E, v)[0])
+            except ValueError:
+                Scache[v] = None    # no 1/3-class: not a pivot in the census sense
         return Scache[v]
 
     found = []
@@ -590,6 +593,8 @@ def find_pivot_triangles(coords, denom, E, want, null_mode, rng):
             tries += 1
             a, b, c = rng.sample(verts, 3)
             if b in nbr[a] or c in nbr[a] or c in nbr[b]:
+                continue
+            if S_of(a) is None or S_of(b) is None or S_of(c) is None:
                 continue
             Sa, Sb, Sc = S_of(a), S_of(b), S_of(c)
             if Sa & Sb or Sa & Sc or Sb & Sc:
@@ -608,7 +613,10 @@ def find_pivot_triangles(coords, denom, E, want, null_mode, rng):
         for w in sorted(nbr[u] & nbr[v]):
             if w <= v:
                 continue
-            Sa, Sb, Sc = S_of(u), S_of(v), S_of(w)
+            piv = {u, v, w}
+            if S_of(u) is None or S_of(v) is None or S_of(w) is None:
+                continue
+            Sa, Sb, Sc = S_of(u) - piv, S_of(v) - piv, S_of(w) - piv
             if Sa & Sb or Sa & Sc or Sb & Sc:
                 continue
             cross = sum(1 for x, y in E
@@ -728,14 +736,23 @@ def run_joint_triple(args, cfg, coords, E, rng):
     runs = []
 
     def one_triple(a, b, c, tag, count):
-        Sa, _, _ = pivot_S(coords, denom, E, a)
-        Sb, _, _ = pivot_S(coords, denom, E, b)
-        Sc, _, _ = pivot_S(coords, denom, E, c)
+        piv = {a, b, c}
+        Sa0, _, _ = pivot_S(coords, denom, E, a)
+        Sb0, _, _ = pivot_S(coords, denom, E, b)
+        Sc0, _, _ = pivot_S(coords, denom, E, c)
+        # Protocol adaptation, found at implementation and recorded (plan §0.3):
+        # at a UNIT triangle the third pivot is a common neighbour of the other
+        # two by definition (the self-gluing theorem), so raw cover sets can
+        # never be pairwise disjoint. The pivot triple is excluded from all
+        # three cover sets; the far pivots stay FREE ambient vertices.
+        Sa = [x for x in Sa0 if x not in piv]
+        Sb = [x for x in Sb0 if x not in piv]
+        Sc = [x for x in Sc0 if x not in piv]
         for nm, X, Y in (("ab", Sa, Sb), ("ac", Sa, Sc), ("bc", Sb, Sc)):
             if set(X) & set(Y):
                 raise SystemExit(f"triple ({a},{b},{c}): cover sets {nm} share "
-                                 f"vertices — the triple profile needs pairwise-"
-                                 f"disjoint cover sets")
+                                 f"non-pivot vertices — the triple profile needs "
+                                 f"pairwise disjointness outside the pivot triple")
         sub_a, sub_b, sub_c = induced(E, Sa), induced(E, Sb), induced(E, Sc)
 
         def cross_of(X, Y):
@@ -1722,14 +1739,17 @@ def _kills_probe(job):
     return out
 
 
-def _angle_lattice_frac(seps, phase, tol):
+def _angle_lattice_frac(seps, phase, tol, nj=28):
     """Fraction of separations within `tol` degrees of the lattice
-    {j·phase mod 60}."""
+    {j·phase mod 60 : j < nj}. nj = 28 reconstructs the M22 §6.4 lattice measure:
+    at 0.5° tolerance it covers ≈46% of the circle, matching the recorded M22
+    control rate (46.2%) — an unbounded j-range saturates coverage and
+    degenerates the statistic to 0 excess (caught at the first strong pair)."""
     if not seps:
         return 0.0
     pts = set()
     x = 0.0
-    for _ in range(200):
+    for _ in range(nj):
         pts.add(round(x, 6))
         x = (x + phase) % 60.0
     hits = 0
@@ -1784,16 +1804,23 @@ def run_kills_replicate(args):
 
     def S_of(v):
         if v not in Scache:
-            Scache[v] = pivot_S(coords, denom, E, v)
+            try:
+                Scache[v] = pivot_S(coords, denom, E, v)
+            except ValueError:
+                Scache[v] = None    # no 1/3-class: not a pivot
         return Scache[v]
 
+    # STRONGEST-coupled fresh pairs: 22-chord pairs produced 0 kills in 800
+    # draws (first run) — the ambient-kill phenomenon needs strong coupling
+    # (the M22 probe had 40 chords), so selection is by descending cross count.
+    candidates = []
     for u, v in E:
-        if len(fresh) >= args.replicate:
-            break
         if (u, v) in KNOWN or (v, u) in KNOWN:
             continue
         Sa = S_of(u)
         Sb = S_of(v)
+        if Sa is None or Sb is None:
+            continue
         if set(Sa[0]) & set(Sb[0]):
             continue
         sA, sB = set(Sa[0]), set(Sb[0])
@@ -1801,11 +1828,14 @@ def run_kills_replicate(args):
                  if (x in sA and y in sB) or (x in sB and y in sA)]
         if len(cross) < 20:
             continue
-        fresh.append((u, v, len(cross)))
+        candidates.append((len(cross), u, v))
+    candidates.sort(reverse=True)
+    fresh = [(u, v, c) for c, u, v in candidates[:args.replicate]]
     if len(fresh) < args.replicate:
         raise SystemExit(f"only {len(fresh)} fresh far pairs found — cannot "
                          f"replicate at {args.replicate}")
-    print(f"[replicate] fresh pairs: {fresh}", flush=True)
+    print(f"[replicate] fresh pairs (strongest-coupled of "
+          f"{len(candidates)} eligible): {fresh}", flush=True)
 
     per_pair = []
     for (a, b, ncross) in fresh:
