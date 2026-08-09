@@ -347,3 +347,32 @@ Skeleton now 30 obligations; changes:
 5. Census promotion contract re-affirmed (P3.1): the tools/couple.py extension
    at implementation must cross-check ALL the MetaLadder tables including the
    shifted webs, and its self-test must carry a planted disagreement.
+
+## Pre-implementation context save (2026-08-09, before compaction)
+
+**The four cleared norm forms, exact** (E1.2, frame: pivot at 0, axis real,
+D = 1/√3; multiply |z₁−z₂|²−1 by 3; `u` = pivot-side unit, `v` = meta-side
+unit, bars = conjugates). In the LATTICE addressing of the j = 0 web:
+`u = word a b · ζ₁₂⁻¹` (pivot side — trace addresses ODD: 2a−1),
+`v = word c d` (meta side — EVEN: 2c); webs j = 1, 2 via the 120° rotation.
+
+* oo: `4 − √3(u+ū) + √3(v+v̄) − 3(uv̄+ūv) = 0` — irreducible.
+* oi: `2 − √3(u+ū) + (v+v̄) − √3(uv̄+ūv) = 0` — hub factor `(v+1)`:
+  u·v-cleared it is `−√3(v+1)(u² − (√3/3)uv − (√3/3)u + v)`; the hub `v = −1`
+  is `word c d = −1`, address `(3,0)` (`metaInner_hub`).
+* io: `2 − (u+ū) + √3(v+v̄) − √3(uv̄+ūv) = 0` — hub factor `(u−1)`; the hub
+  `u = 1` needs `word a b = ζ₁₂` — off-lattice (M24's empty `Re = √3/2`
+  fibre), hence io stays finite.
+* ii: `−(u+ū) + (v+v̄) − (uv̄+ūv) = 0` — no constant, no √3: pure trace pairs.
+
+**√3-quotient coordinates** (for `sqrt3_dvd_iff`.mpr): given `c₂ ≡ c₀`,
+`c₃ ≡ c₁` (mod 3), the witness is `d₀ = (c₁−c₃)/3, d₁ = (2c₀+c₂)/3,
+d₂ = (c₁+2c₃)/3, d₃ = (c₂−c₀)/3`; mp direction reads `c = M·d` with
+`M = [[0,1,0,-1],[2,0,1,0],[0,1,0,2],[-1,0,1,0]]` (mult-by-√3 in the basis,
+det 9).
+
+**Instrument note**: `build/m25-derive.py`, `build/m25-census.py` (parallel
+across the 36 family pairs — Kooshi's instruction), `build/m25-color.py` are
+in gitignored `build/`; everything they measured is recorded above, and they
+regenerate from this plan's specifications. Census artifact
+`build/m25-census.json` likewise regenerable (B = 30/60, ~2 min parallel).
