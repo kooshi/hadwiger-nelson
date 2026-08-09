@@ -1278,6 +1278,7 @@ theorem normBranch_parity {a c : ZMod 6} {b d : ℕ} (h : NormBranch a b c d) :
 def hexE : ℕ → ℤ
   | 0 => 1 | 1 => 0 | 2 => -1 | 3 => -1 | 4 => 0 | 5 => 1 | _ => 0
 
+/-- The `ζ₆`-coordinate of the hex unit: `ζ₆^n = hexE n + hexF n·ζ₆` for `n < 6`. -/
 def hexF : ℕ → ℤ
   | 0 => 0 | 1 => 1 | 2 => 1 | 3 => 0 | 4 => -1 | 5 => -1 | _ => 0
 
