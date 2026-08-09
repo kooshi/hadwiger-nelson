@@ -376,3 +376,69 @@ across the 36 family pairs — Kooshi's instruction), `build/m25-color.py` are
 in gitignored `build/`; everything they measured is recorded above, and they
 regenerate from this plan's specifications. Census artifact
 `build/m25-census.json` likewise regenerable (B = 30/60, ~2 min parallel).
+
+## Implementation §I.0 — the engine, re-derived (2026-08-09, before any Lean)
+
+**The registered ζ₁₂-ring engine is superseded by LESS machinery, exactly as M24's
+registered π-adic valuation sketch was.** One identity does it:
+
+  **√3 · ζ₁₂ = 1 + ζ₆**   (equivalently ζ₁₂ = (1+ζ₆)/√3, the metapivot relation
+  m = (1+ζ₆)/3 = ζ₁₂/√3 read one radius out).
+
+Write `g := 1 + ζ₆` (so `g·ḡ = 3`, `g² = 3ζ₆`, `ḡ = ζ₆⁻¹g`). Then every meta-axis
+web equation is a ℤ[√3]-combination of **M24 trace pairs over ℤ[ζ₆,π]** — the
+ζ₁₂ never appears. With `w₁ = word (a−1) b` (pivot side), `V = word c d` (meta
+side), `W = w₁·V̄ = word (a−1−c) (b−d)`, and `Tr z := z + z̄`:
+
+| family | master trace form (⟺ dist = 1) |
+|---|---|
+| oo | `4 − Tr(g·w₁) + √3·Tr(V) − √3·Tr(g·W) = 0` |
+| oi | `2 − Tr(g·w₁) + Tr(V) − Tr(g·W) = 0` |
+| io | `2√3 − Tr(g·w₁) + 3·Tr(V) − √3·Tr(g·W) = 0` |
+| ii | `0 − Tr(g·w₁) + √3·Tr(V) − Tr(g·W) = 0` |
+
+(uniformly `κ = (3 + s²t² − 2s²)/s, λ = st, μ = t` for `s,t ∈ {1,√3}` the two
+circle radii; verified exhaustively against the geometry, `build/m25-trace.py`,
+0 mismatches over 6·6·7·7 addresses per family, census tables re-derived.)
+
+**Consequences, all in the direction of less work:**
+* M24's separation `√3 ∉ ℚ(ζ₆,π)` (`eq_zero_of_add_sqrt3_mul`) IS available —
+  P2.1's "the separation is UNAVAILABLE" was measuring the wrong ring. `ℤ[ζ₁₂,π]`
+  is where the *equation was expected to live*; it never goes there.
+* `InRing12`, `inRing12_coords_zero`, `sqrt3_dvd_iff`, `z12c0..3`,
+  `zeta12_pow_coords` are **deleted** from the skeleton — machinery for a proof
+  that is not the proof. The ζ₁₂ layer keeps only what the object needs.
+* The M24 engine (`piCoeff` rows, `hexE`/`hexF`, `InRing`, `sqrt_indep`) carries
+  M25 verbatim, and it generalizes once: `hexTrace t₁ t₂ h := (t₁+t₂ζ₆)π^h +
+  (t₁+t₂ζ̄₆)π̄^h` has coordinates `(t₁P + (t₁+t₂)(P+Q), −t₂Q, −t₂Q, 2t₂Q)` in
+  `{1,ζ₆,π,ζ₆π}` — M24's `tracePair x h` is the `ζ₆^x` instance.
+
+**The case tree (measured, `build/m25-tree.py`, `m25-kill.py`, `m25-roots.py`):**
+clear by `√3^(m+n)` where `m = |b|, n = |d|` — **no shape split needed**, the
+cross term's denominator factors through the other two. Exponents
+`(κ: m+n+τ₀, w₁: n, V: m+τ₂, W: τ₃)`; `τ = (0,1,1)/(0,0,0)/(1,2,1)/(—,1,0)`.
+
+1. **Parity separation** on `(m,n) mod 2`: three of four classes leave a single
+   trace object alone on one side of `√3`, killed by two finite facts —
+   `(F1)` `G(x,h) ≢ 0 (mod 3)` for `h ≥ 1` (`G := TP(x,h)+TP(x+1,h)`, the
+   `g`-trace) and `(F2)` `TP(y,n) ≢ 0 (mod 3)` ever. Live class per family:
+   oo `(m,n) = (e,o)`, oi `(e,e)`, io `(o,o)`, ii `(o,e)`.
+2. **The live class, mod 3**: the minimal-exponent terms must cancel mod 3.
+   `φ(z) := n₁ − n₂ mod 3` (reduction at the prime 𝔭 over 3) satisfies
+   `φ(G) = 0` always and `φ(TP) ≠ 0` always — this is what mod-3 on all four
+   coordinates cannot see term-by-term but does see in combination. Verified
+   exhaustively (`m25-kill.py`, |b| ≤ 24, |d| ≤ 10): **every family collapses to
+   |d| ≤ 1** — oo, io need `|d| = 1`; oi, ii need `d = 0`.
+3. **The endgame at fixed d**: the equation is `Tr(Ψ·w₁) = C` with
+   `Ψ = g(1 + μV̄)`, `C = κ + λ·Tr(V)` explicit in the ≤ 12 remaining `(c,d)`.
+   Clearing gives `hexTrace t₁ t₂ m = 3^e·(integer)` with `(t₁+t₂ζ₆) = √3^n Ψ ζ₆^A`;
+   coordinate 4 forces `t₂ = 0` (since `Q_m ≠ 0`), coordinate 1 gives
+   `t₁(2P_m+Q_m) = 3^e·τ`, and `3 ∤ (2P+Q)` forces `3^e ∣ t₁` — **which bounds m
+   outright**, since `t₁` runs over an explicit finite set. Finite check closes.
+   Root-level cross-check (`m25-roots.py`): the quadratic `Ψw² − Cw + Ψ̄ = 0`
+   has exactly the census words as lattice roots in every one of the 36 cases,
+   every other root a non-word — all four tables reproduced exactly.
+
+**Confidence**: high for steps 1 and 3 (both exhaustively machine-checked over
+their finite content); medium-high for step 2's Lean cost (the exponent
+comparisons are a case tree of ~6 branches per family).
