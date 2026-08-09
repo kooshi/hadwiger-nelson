@@ -413,6 +413,83 @@ regression. Committed green at every step (`d71d22d` … `4ecb48e`).
 5. Gate (build, axioms, lint, the five registered mutation audits), the census
    promotion into `tools/couple.py` (with the wrap-bug fix), and the close.
 
+### The continuation recipe (written at the checkpoint, 2026-08-09)
+
+Everything below is derived and script-verified; it is what the next session
+needs and is NOT recoverable from the Lean file alone.
+
+**1. The eight families in `hex_cleared` currency.**  Each family's master reads
+`C₁·√3^{e₁}·gTr X b + C₂·√3^{e₂}·gTr Y d + C₃·√3^{e₃}·uTr (X−Y) (b−d) = κ·√3^{e₄}`:
+
+| family | C₁ | e₁ | C₂ | e₂ | C₃ | e₃ | e₄ | κ chord | κ fusion | X, Y |
+|---|---|---|---|---|---|---|---|---|---|---|
+| adj oo | 1 | 0 | −1 | 0 | 3 | 0 | 0 | 4 | 7 | x, y |
+| adj oi | 1 | 1 | −1 | 0 | 3 | 0 | 1 | 2 | 5 | x, y |
+| adj io | 1 | 0 | −1 | 1 | 3 | 0 | 1 | 2 | 5 | x, y |
+| adj ii | 1 | 0 | −1 | 0 | 1 | 1 | 1 | 0 | 3 | x, y |
+| opp oo | 2 | 0 | −2 | 0 | 3 | 0 | 0 | 7 | 10 | x−1, y−1 |
+| opp oi | 2 | 1 | −2 | 0 | 3 | 0 | 1 | 5 | 8 | x−1, y−1 |
+| opp io | 2 | 0 | −2 | 1 | 3 | 0 | 1 | 5 | 8 | x−1, y−1 |
+| opp ii | 2 | 0 | −2 | 0 | 1 | 1 | 1 | 3 | 6 | x−1, y−1 |
+
+**2. How each master is derived** (the step from the bridge to the table above).
+`bridge_adj r₁ r₂` gives `normSq(r₁·g·w₁ − r₂·g·w₂ − 1) = R` with `R = 3` (chord)
+or `0` (fusion), and `bridge_opp` the same with the constant `2` and the `−1`
+address shift.  Feeding that to `hex_master` (α = r₁, β = r₂, γ = 1 or 2) yields
+`(3r₁² + 3r₂² + γ² − R) − r₁γ·gTr₁ + r₂γ·gTr₂ − 3r₁r₂·uTr = 0`, and the radii
+`r ∈ {1, √3/3}` give `r² ∈ {1, 1/3}`.  Multiplying through by `√3` where a radius
+appears an odd number of times produces exactly the table.  The κ values follow
+as `7−R`, `5−R`, `5−R`, `3−R` (adjacent oo/oi/io/ii) and `10−R`, `8−R`, `8−R`,
+`6−R` (opposite).
+
+**3. The three remaining shape lemmas, as deltas from the proven `oo_shape`.**
+* **`ii_shape`** — nearly a copy.  Live parity (odd, odd) instead of (even, even);
+  `C₃ = 1, e₃ = 1, e₄ = 1` so the unit term clears as `3^t` (not `3^{t+1}`) and
+  the whole equation is divided by `√3` once; the tie is again at EQUAL heights
+  so `kill_equal` applies verbatim; the final check becomes **`κ = W`** (the
+  height-zero unit value) rather than `κ = 3W`, and it holds because
+  `W ∈ {±1, ±2}` never equals `κ ∈ {0, 3, 6}`.  The dead classes swap roles:
+  (even,even) pins the UNIT trace, (even,odd) and (odd,even) pin a `g`-trace.
+* **`oi_shape` / `io_shape`** — the genuinely different ones.  Live parity
+  (even, odd) resp. (odd, even); the tie is at **ADJACENT** heights (`m = n+1`
+  resp. `n = m+1`), so `kill_equal` does NOT apply.  Instead: `kill_adjacent`
+  closes every case with `n ≥ 3` (its `e = (n+1)/2 ≥ 2` and `h = n ≥ 3`
+  hypotheses are exactly met), and `n = 1` is the boundary that CARRIES THE FOUR
+  SPORADIC CHORDS.  So these two lemmas must NOT conclude `False`: they conclude
+  the boundary data (`|b| = 2, |d| = 1` and the surviving address pairs), and the
+  family wrapper finishes with a `decide` over the realizable addresses.  Use the
+  `+3` address shift (`gE_shift_three`) to turn the coefficient difference into
+  the sum `kill_adjacent` expects.
+* All four `opp_*` families are the `adj_*` proofs with `C = 2` and the addresses
+  read at `x−1, y−1`; `oo_shape` already takes `C` as a parameter, and the other
+  three should be written the same way from the start.
+
+**4. The boundary decides must use the realizability relation.**  For the
+equal-height tie (`b = d`): the unit address is `Z = X − Y` when `b > 0` and
+`Z = Y − X` when `b < 0`.  Free quantification over `(X, Y, Z)` admits 10 spurious
+triples at adj-ii and 4 at opp-ii where the truth is 4 and 0 — verified.  The
+same discipline applies at the oi/io boundary.
+
+**5. The colour data is already in the Lean file and is the VERIFIED table.**
+`hexColTab`, `hexMetaColTab` and `tau` in `Hexagram.lean` were transcribed from
+the equivariant probe's solution and re-verified proper against all 16,698 exact
+edges (0 bad edges).  Row `a` is the pivot's meta-inner address, column `x` the
+hex address.  `build/m26-color-equivariant.json` is gitignored — the Lean file is
+now the durable copy.
+
+**6. The design scripts (gitignored, regenerable from this plan).**
+`m26-design.py` (D1–D4: coordinates, rot6, orbits, the eight masters, ground
+truth, the mod-9 rescans), `m26-census.py` (D5: the 14-family exact census with
+the rot6-automorphism control — carries the bin-wrap and hub-expansion FIXES that
+`tools/couple.py` still lacks), `m26-color.py` (D6), `m26-loops.py` (D7),
+`m26-design2.py` / `m26-branch.py` / `m26-tree.py` / `m26-kill.py` (the case-tree
+verification: masters in Lean currency, parity classes, the branch map, the four
+kills, and the boundary decides against ground truth).  All were green with
+planted-failure self-tests.
+
+**7. Immediate next action.**  Write `ii_shape` by copying `oo_shape` and applying
+the deltas in (3); it closes `adj_ii` (κ ∈ {0,3}) and `opp_ii` (κ ∈ {3,6}).
+
 ### Obligation-modeling pass (2026-08-09, fresh invocation) — the proof spines
 
 **Partition.** Prove: everything below.  Test: the table/equivariance/properness
