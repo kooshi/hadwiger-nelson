@@ -2583,6 +2583,21 @@ def self_test():
         assert st2 == "sat", f"free single-class instance reported {st2}"
     check("partition/injection cross-check fixture", partition)
 
+    # 10b. M25 meta-census: agreement at a small depth, and a planted table
+    # disagreement is refused by name
+    def meta_census_controls():
+        assert meta_census_check(2) == [], "meta-census disagrees at depth 2"
+        bad = {k: list(v) for k, v in META_TABLES.items()}
+        bad["oo"] = bad["oo"][:-1] + [(1, 0, 1, 2)]
+        errs = meta_census_check(2, tables=bad)
+        assert errs, "planted oo-table disagreement NOT caught"
+        badf = [(1, 0, 1, 0), (2, 0, 5, 0)]
+        errs2 = meta_census_check(2, fusion_oi=badf)
+        assert any("fusions" in e for e in errs2), \
+            "planted fusion disagreement NOT caught"
+    check("M25 meta-census agreement + planted-disagreement refusals",
+          meta_census_controls)
+
     # 11. near-ladder controls: planted rational angle closes; the seam angle never
     def near_ladder():
         mp = _mp()
@@ -2840,6 +2855,123 @@ def run_ladder_census(args):
         print(f"[census] wrote {args.out}")
 
 
+
+
+# ------------------------------------------------------------------ M25: the four-ladder census
+
+# The MetaLadder.lean tables, master web (j = 0), in (a, b, c, d) address form.
+META_TABLES = {
+    "oo": [(0, 0, 5, -1), (0, 0, 5, 1), (1, 0, 1, -1), (1, 0, 1, 1)],
+    "oi": [(0, 0, 1, 0), (1, 0, 5, 0), (2, 0, 1, 0), (5, 0, 5, 0)],
+    "io": [(2, -1, 5, 1), (2, 1, 5, -1), (5, -1, 1, 1), (5, 1, 1, -1)],
+    "ii": [(0, -1, 5, 0), (0, 1, 5, 0), (1, -1, 1, 0), (1, 1, 1, 0)],
+}
+# The oi fusion rows (outer(pivot j) ∩ inner(meta) = the other two pivots), j = 0 form.
+META_FUSION_OI = [(1, 0, 1, 0), (0, 0, 5, 0)]
+
+
+def meta_census_check(B, tables=None, fusion_oi=None):
+    """Exhaustive four-ladder census at |b|, |d| ≤ B against the MetaLadder tables
+    (all three webs via the 2j shift, the oi hub column, and the fusion inventory).
+    Exact arithmetic in ℚ(√3, √11, √33); returns a list of mismatch strings."""
+    tables = tables or META_TABLES
+    fusion_oi = fusion_oi or META_FUSION_OI
+    F = Fraction
+    z6 = frac_c({B1: F(1, 2)}, {B3: F(1, 2)})
+    z12 = frac_c({B3: F(1, 2)}, {B1: F(1, 2)})
+    seam = frac_c({B3: F(1, 6)}, {B33: F(1, 6)})
+    seaminv = frac_c({B3: F(1, 6)}, {B33: F(-1, 6)})
+    mpiv = frac_c({B1: F(1, 2)}, {B3: F(1, 6)})
+    inner_r = [F(0)] * DIM
+    inner_r[B3] = F(1, 3)
+    one_v = [F(0)] * DIM
+    one_v[B1] = F(1)
+
+    def csub2(a, b):
+        return (sub(a[0], b[0]), sub(a[1], b[1]))
+
+    def cadd2(a, b):
+        return (add(a[0], b[0]), add(a[1], b[1]))
+
+    def word(a, b):
+        w = cpow(z6, a % 6)
+        s = seam if b >= 0 else seaminv
+        for _ in range(abs(b)):
+            w = cmul(w, s)
+        return w
+
+    def is_one(v):
+        re, im = v
+        return all(c == 0 for c in im) and re[B1] == 1 \
+            and all(c == 0 for i, c in enumerate(re) if i != B1)
+
+    def is_zero(v):
+        return all(c == 0 for c in v[0]) and all(c == 0 for c in v[1])
+
+    pivots = [(([F(0)] * DIM), ([F(0)] * DIM)), (one_v, [F(0)] * DIM),
+              (z6[0], z6[1])]
+    errors = []
+    for j in range(3):
+        piv = pivots[j]
+        shift = (2 * j) % 6
+
+        def outer_p(a, b):
+            return cadd2(piv, word(a, b))
+
+        def inner_p(a, b):
+            return cadd2(piv, cscale(inner_r, word(a, b)))
+
+        def outer_m(c, d):
+            return cadd2(mpiv, cmul(word(c, d), z12))
+
+        def inner_m(c, d):
+            return cadd2(mpiv, cscale(inner_r, cmul(word(c, d), z12)))
+
+        fams = {"oo": (outer_p, outer_m), "oi": (outer_p, inner_m),
+                "io": (inner_p, outer_m), "ii": (inner_p, inner_m)}
+        for fam, (mk1, mk2) in fams.items():
+            found_chords, found_fusions = set(), set()
+            for a in range(6):
+                for b in range(-B, B + 1):
+                    p1 = mk1(a, b)
+                    for c in range(6):
+                        for d in range(-B, B + 1):
+                            diff = csub2(p1, mk2(c, d))
+                            n2 = cmul(diff, cconj(diff))
+                            if is_one(n2):
+                                found_chords.add((a, b, c, d))
+                            elif is_zero(diff):
+                                found_fusions.add((a, b, c, d))
+            want_chords = {((x + shift) % 6, y, (z + shift) % 6, w)
+                           for (x, y, z, w) in tables[fam]}
+            if fam == "oi":
+                want_chords |= {(a, b, (3 + shift) % 6, 0)
+                                for a in range(6) for b in range(-B, B + 1)}
+                want_fus = {((x + shift) % 6, y, (z + shift) % 6, w)
+                            for (x, y, z, w) in fusion_oi}
+            else:
+                want_fus = set()
+            if found_chords != want_chords:
+                errors.append(f"web {j} {fam} chords: census {sorted(found_chords - want_chords)} "
+                              f"extra, {sorted(want_chords - found_chords)} missing")
+            if found_fusions != want_fus:
+                errors.append(f"web {j} {fam} fusions: census {sorted(found_fusions)} "
+                              f"vs tables {sorted(want_fus)}")
+    return errors
+
+
+def run_meta_census(args):
+    B = min(args.bbound, 8) if args.bbound == 40 else args.bbound
+    errors = meta_census_check(B)
+    print(f"[meta-census] four-ladder object, all three webs, |b|,|d| ≤ {B}")
+    if errors:
+        for e in errors:
+            print("   MISMATCH:", e)
+        raise SystemExit("META-CENSUS DISAGREES WITH THE LEAN TABLES")
+    print("[meta-census] cross-check: the MetaLadder tables (chords, hub pencil, and "
+          "fusion inventory) and this census agree exactly on all three webs")
+
+
 def require_artifact_graph(doc, edges_sha, path):
     if doc.get("graph", {}).get("edges_sha") != edges_sha:
         raise SystemExit(f"artifact {path} is foreign to this graph "
@@ -2876,6 +3008,8 @@ def main():
     ap.add_argument("--loop-len", type=int, default=6, dest="loop_len")
     ap.add_argument("--export-viz", action="store_true", dest="export_viz")
     ap.add_argument("--bbound", type=int, default=40)
+    ap.add_argument("--meta-census", action="store_true", dest="meta_census",
+                    help="M25: exact four-ladder census vs the MetaLadder tables")
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     ap.add_argument("--samples", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=21)
@@ -2954,6 +3088,9 @@ def main():
         ran = True
     if args.ladder_census:
         run_ladder_census(args)
+        ran = True
+    if args.meta_census:
+        run_meta_census(args)
         ran = True
     if args.loops:
         run_loops(args)

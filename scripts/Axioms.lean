@@ -612,6 +612,40 @@ The headline is `Ladder.chromaticNumber_ladderPair`. -/
 #print axioms Ladder.not_colorable_three_ladder
 #print axioms Ladder.chromaticNumber_ladderPair
 
+/-! ## M25 — the four-ladder object (the pivot triangle's ladders plus the metapivot's own)
+
+The headline is `MetaLadder.chromaticNumber_fourLadder`. -/
+
+#print axioms MetaLadder.sqrt3_mul_zeta12
+#print axioms MetaLadder.meta_axis_dirs
+#print axioms MetaLadder.metaInner_hub
+#print axioms MetaLadder.outerPt_hexRot
+#print axioms MetaLadder.outerPt_affine
+#print axioms MetaLadder.web_transport_rot
+#print axioms MetaLadder.web_transport_rot_meta
+#print axioms MetaLadder.ladderSet_subset_fourLadder
+#print axioms MetaLadder.bridge_oo
+#print axioms MetaLadder.bridge_oi
+#print axioms MetaLadder.bridge_io
+#print axioms MetaLadder.bridge_ii
+#print axioms MetaLadder.fusion_bridge_oo
+#print axioms MetaLadder.fusion_bridge_oi
+#print axioms MetaLadder.fusion_bridge_io
+#print axioms MetaLadder.fusion_bridge_ii
+#print axioms MetaLadder.hexTrace_coords
+#print axioms MetaLadder.meta_oo_complete
+#print axioms MetaLadder.meta_oi_complete
+#print axioms MetaLadder.meta_io_complete
+#print axioms MetaLadder.meta_ii_complete
+#print axioms MetaLadder.meta_fusion_oo
+#print axioms MetaLadder.meta_fusion_oi
+#print axioms MetaLadder.meta_fusion_io
+#print axioms MetaLadder.meta_fusion_ii
+#print axioms MetaLadder.metaColor_valid
+#print axioms MetaLadder.colorable_four_fourLadder
+#print axioms MetaLadder.not_colorable_three_fourLadder
+#print axioms MetaLadder.chromaticNumber_fourLadder
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

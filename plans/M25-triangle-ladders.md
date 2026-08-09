@@ -443,46 +443,51 @@ cross term's denominator factors through the other two. Exponents
 their finite content); medium-high for step 2's Lean cost (the exponent
 comparisons are a case tree of ~6 branches per family).
 
-## Implementation status — 2026-08-09 (session end, milestone NOT closed)
+## Implementation status — 2026-08-09, second session: MILESTONE CLOSED
 
-**Landed, kernel-checked, zero `sorry` in these parts** (`MetaLadder.lean`, 1229 lines,
-not yet imported by `Proofs.lean`):
+`MetaLadder.lean` (~4,700 lines, zero `sorry`, imported by `Proofs.lean`): the
+four-ladder object is exactly 4-chromatic, unconditionally
+(`chromaticNumber_fourLadder`). Everything §I.0 specified landed, plus two engine
+discoveries the first session's recipe did not anticipate:
 
-| part | status |
-|---|---|
-| §Z the ζ₁₂ layer, the metapivot, the axis directions, **`sqrt3_mul_zeta12`** | ✅ |
-| §L the four-ladder object, membership API, `metaInner_hub`, M24-subset | ✅ |
-| §T anchor-independence, affine equivariance, the 120° transports (pivot + meta, outer + inner), the rotation isometry | ✅ |
-| §W.1 the four **bridges** — each family's chord condition as a `ℤ[ζ₆,π]` norm equation | ✅ |
-| §W.2–7 the **engine**: `hexTrace` + coordinate row + clearing at arbitrary integer height + the two-row extractor | ✅ |
-| §W.8–10 the kill toolkit: `hexTrace_eq_zero`, `hexTrace_pin`, `alone_dvd`, `phi_dvd`, `phi_g_dvd`, the table facts | ✅ |
-| §W.11 **the ii family, complete** (`ii_web`, `ii_cleared`, `ii_classify`) | ✅ |
-| χ ≥ 4 (`not_colorable_three_fourLadder`) | ✅ |
+* **The fusion-κ trick.** The colour decode needs the complete coincidence
+  inventory (which addresses name the same point). A point coincidence is the
+  same cleared master equation at norm **0** instead of norm 1, so every fusion
+  classification is the chord classification re-run at a shifted constant —
+  oo: κ = 4 → 7, oi/io: 2 → 5, ii: 0 → 3√3. One κ-parameterized spine per
+  family proves both; the planned separate "fusion inventory enumeration"
+  collapsed into four already-proven case trees. Result: oo/io/ii fusions
+  EMPTY, oi fusion = exactly the other two pivots (M23's ten-point sharing at
+  the lattice level).
+* **The adjacent-heights mod-9 kill** (`adjacent_kill`). The endgames of oo and
+  io leave one unbounded branch: two g-traces at heights h and h+1 summing to
+  3^e·(unit trace + κ) with e ≥ 2. Two levels of the `piCoeff` recurrence
+  confine the two deep Q-residues to {1, 4, 7} mod 9, and a 36×9 decide
+  (`adjacent_mod9`) refutes every address pair. This replaces the M24-style
+  telescope sketched in the recipe — again less machinery.
 
-**NOT landed (5 `sorry`s)**: `meta_oo_complete`, `meta_oi_complete`, `meta_io_complete`,
-`meta_ii_complete` (the j-quantified statements — the ii *classification* is proven, the
-j-transport wrapper is not), and `colorable_four_fourLadder`.
+The census is promoted: `tools/couple.py --meta-census` re-derives all twelve
+families on all three webs (chords, hub pencil, fusion inventory) by exact
+arithmetic and cross-checks the Lean tables; its `--self-test` carries TWO
+planted disagreements (a wrong chord row and a wrong fusion row), both refused
+by name.
 
-**The recipe for the rest, in the order it should be done** (the ii family is the
-template; each step below is an adaptation of a proven block):
-
-1. **The 4-term row extractor.** oo/oi/io carry a constant `κ` (4, 2, 2√3) that ii does
-   not, so their cleared equation has a fourth, purely rational term `κ·√3^(m+n+τ₀)`.
-   Extend `hexTrace_rows` to `κ·3^e + 3^i·H₁ + 3^j·H₃ = 3^l·H₂` — the constant hits row 1
-   only, so row 2 is unchanged and `alone_dvd`/`phi_dvd` apply verbatim.  ~40 lines.
-2. **oo** (`κ=4, μ=√3, λ=√3`, exponents `(S, n, m+k+1→m+1, m+n+1→…)` per §I.0): live class
-   `(m,n) = (even, odd)`; surviving branch `|d| = 1`; endgame at `d = ±1` where the meta
-   word is one of twelve fixed values.  Same shape as ii with the endgame's `Ψ` carrying
-   a `π`-factor.
-3. **io** (`κ=2√3, μ=√3, λ=3`): live class `(odd, odd)`, surviving branch `|d| = 1`.
-4. **oi** (`κ=2, μ=1, λ=1`): live class `(even, even)`, surviving branch `d = 0` — plus
-   the **hub**: split `word c d = −1` off FIRST (`metaInner_hub` gives the ⟸ direction
-   free), then classify the cofactor.
-5. **The j-transport wrappers**: `fin_cases j`, then `dist_metaRot` + `web_transport_rot`
-   + `web_transport_rot_meta` reduce `j = 1, 2` to `j = 0` with the `+2` address shift.
-6. **The colouring**: the fusion inventory (enumerate tools-side, then state), the
-   `metaColTab` decode, properness family-by-family, `colorable_four_fourLadder`.
-
-**Cost note, honest**: the ii family took ~250 lines and the engine ~350; the remaining
-four families + colouring are ~800–1000 lines of the same kind of work.  The mathematics
-is settled (§I.0 is exhaustively machine-checked); what remains is transcription.
+Mutation audits (registered at the obligation pass; audit 4's original subject
+`sqrt3_dvd_iff` was deleted with the ζ₁₂ ring, so its slot runs the
+engine-equivalent φ-licence flip): all five applied simultaneously, elaboration
+observed red at the right sites, reverted:
+1. row deleted from `metaOOTable` — RED: `meta_oo_zero` fails in both
+   directions (the membership decide and the mpr `fin_cases`), 2026-08-09.
+2. `webShift 2j → j` — RED: every j-transport wrapper fails
+   (`meta_oo/oi/io/ii_complete`, `meta_fusion_oi`, and all twelve
+   `valid_*_{o3,i3}` helpers), naming the shift.
+3. `metaColTab` entry flipped — RED: `tabm_hex`/`tabm_hex'` decides prove the
+   proposition false; `valid_o0_o1` and the fusion-agreement reads
+   (`metaColor_o1`, `metaColor_i3`) fail — the family is named.
+4. `gE_sub_gF_dvd` flipped to `gE + gF` — RED: its own decide refuses and
+   `phi_g_dvd` (the φ-kill licence) fails downstream.
+5. hub disjunct removed from `meta_oi_complete` — RED: the statement's three
+   web instances fail at their `show`s and the hub mpr dies.
+All five applied simultaneously (one red elaboration, 37 errors, every failure
+at a mutated site or its direct consumer), then reverted; the reverted file
+re-elaborates with zero errors.

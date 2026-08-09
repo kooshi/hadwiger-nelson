@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M24, 2026-08-09.**
+**Last updated: M25, 2026-08-09.**
 
 ### Where the problem stands
 
@@ -108,6 +108,21 @@ countable lattice. The engine is new and elementary — clearing by √3-powers
 into ℤ[ζ₆,π] (π = √3σ, π² = π − 3), separation on √3 ∉ ℚ(ζ₆,π), coordinate
 congruences mod 3, and a trace-pair telescope from the π-power recurrence; the
 registered π-adic valuation sketch was superseded by less machinery, not more.
+M25 climbed the first rung of the construction ladder: the **four-ladder
+object** — the ⟨ζ₆,σ⟩-ladders of all three pivots 0, 1, ζ₆ PLUS the
+metapivot's own ladder (anchored along ζ₁₂), closed under all unit chords —
+has **chromatic number exactly 4, unconditionally**. The registered ζ₁₂-ring
+engine was superseded by LESS machinery, exactly as M24's valuation sketch
+was: one identity, **√3·ζ₁₂ = 1 + ζ₆**, collapses every meta-axis web
+equation into M24's ℤ[ζ₆,π] trace pairs — the twelfth root never enters the
+arithmetic. All twelve pivot–meta chord families are theorems (oo/io/ii: four
+sporadic chords per web, all at |b| ≤ 1; oi: the hub pencil through the fused
+pivot plus four sporadics; the three webs one theorem via the 120° transport).
+And the **fusion inventory came free**: a point coincidence is the same
+cleared equation at norm 0, so each fusion classification is the chord run at
+a shifted constant (oo 4→7, oi/io 2→5, ii 0→3√3) — oo/io/ii fusions are
+EMPTY and the oi fusion is exactly the other two pivots, certifying M23's
+"the metapivot couplings create no new points" at the lattice level.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -136,40 +151,36 @@ registered π-adic valuation sketch was superseded by less machinery, not more.
 | 20 | **The pivot-triangle layer** (all kernel-checked): the triangle is self-glued — `hexStep` permutes the pivots cyclically, so outer∩outer of any two pivots = {the third pivot, its mirror}; the centroid is the (+)-branch ii glue of ALL THREE pairs; the metapivot couplings create no new points — outer(pᵢ)∩inner(m) = the other two pivots, inner(pᵢ)∩outer(m) = the two 120°-partners, inner(pᵢ)∩inner(m) = the two mirror centroids; **the ten-point sharing theorem** (two unit-separated systems share exactly {pivots} ∪ {eight glue points}, with `ncard = 10`); **the chord classifications** — outer–outer unit chords are RIGID (translate ∨ hub: the perfect matching is complete, for the full uncountable circles) and inner–inner chords are matching ∨ the rational Möbius graph x(3y−2) = y, so √disc field growth is localized to mixed-radius chords; the translation coupling; and the loop layer — the **rotation hexagon** (S₂⁻¹S₁S₀⁻¹S₂S₁⁻¹S₀ = id for ANY unit rotation about ANY three points — found generic at implementation) with the seam instance, the hex parallelogram (hex-specific, minimal at 4), and the zpow closure backbone. Census (exact, tools): 34-point inventory in the seam field, 7 triple points; seam relations minimal at 6, all 3-pivot, none 2-pivot; R_m unreachable from pivot words. | `Triangle.lean` + `tools/couple.py --loops/--export-viz` | M23 |
 | 21 | **The registered statistics, reported at face value** (tools-side): ambient kills are **coupling-strength gated** — 0 kills in 3,200 draws at four 22-chord fresh pairs vs 12–15% kill rate at every 40-chord fresh pair (all kills injection-verified); M22's seam-alignment reading **failed registered replication** (0/4 pairs; demoted per its pre-committed failure clause); the coset census under threshold (×0.83–1.51 vs registered ≥2×); the metapivot's cover floor stays 3 (registered null confirmed; higher unions read 4 for reasons the self-gluing theorems explain); and the triple census's registered population is **provably empty** — unit triangles are never "far", their cover sets always interlock through the shared ten points. | `tools/couple.py --replicate/--floor --systems` + `build/m23-*.json` | M23 |
 | 22 | **The matched ladder pair is exactly 4-chromatic, unconditionally** — the countable two-pivot ⟨ζ₆,σ⟩-lattice closed under ALL unit chords. Every chord family is a theorem: oo = matching ∨ hub (`oo_complete`); ii = matching ∨ ten table rows, via the parity split in ℤ[ζ₆,π] — mixed parity impossible, even collapses on the backbone, odd closes by mod-3 coordinate congruences, mixed SIGNS die through the collapse π^b·π̄^e = 3^e·π^{b−e} (`ii_norm_complete`); oi = **sixteen chords ever, no infinite family** — the trace pair T(x,h) = ζ₆^x π^h + ζ₆^{−x} π̄^h, uniform √3^(m+n+k) clearing, three parity kills, address pins feeding a telescope kill, three 36-pair boundary checks (`oi_complete`); intra = hex/rot3/seam exactly; eight fusions pinned; plus the 24-entry b-independent colouring proper on every family and the nine-point witness forcing 4 (`chromaticNumber_ladderPair`). First exact chromatic number of an infinite genuinely-coupled object; the first Frontier χ-equality with no census window and no conditional clause. Supporting cast now reusable: `sqrt_indep` (ℚ-independence of {1,√3,√11,√33}), the axis-general master identities, the Re = √3/2 fibre proven EMPTY (ζ₁₂ never lattice). | `Ladder.lean` (`chromaticNumber_ladderPair`, `ii_norm_complete`, `oi_complete`, `iiNormTable`/`oiTable`) | M24 |
+| 23 | **The four-ladder object is exactly 4-chromatic, unconditionally** — the pivot triangle's three ladders plus the metapivot's own (anchored along ζ₁₂), closed under ALL unit chords. The engine: `√3·ζ₁₂ = 1+ζ₆` (`sqrt3_mul_zeta12`) eliminates the twelfth root, so M24's ℤ[ζ₆,π] machinery carries verbatim through `hexTrace` (trace pairs with arbitrary ℤ[ζ₆] coefficients). All twelve pivot–meta families are theorems (`meta_oo/oi/io/ii_complete`, j-quantified over the three webs by the 120° rotation transport); the **fusion inventory is certified by the same engine at norm-0 constants** (`meta_fusion_*`: oi = the two shared pivots, oo/io/ii EMPTY); the kills beyond M24: `alone_dvd` and `phi_dvd` (the generic 3-adic pair) and the mod-9 `adjacent_kill` — two g-traces at heights h, h+1 never sum to 9·(anything), the piCoeff recurrence confining the two deep residues to {1,4,7} — which closes the height-unbounded branches a census can only sample. Colouring: the 48-entry b-independent `metaColTab`, decode well-defined by the fusion inventory, properness per family; χ ≥ 4 transports M24's witness. Census promoted: `tools/couple.py --meta-census` (planted-disagreement self-test). | `MetaLadder.lean` (`chromaticNumber_fourLadder`, `meta_*_complete`, `meta_fusion_*`, `adjacent_kill`) | M25 |
 
 ### Paths forward, ranked
 
-*The construction ladder M24–M28 (roadmap stubbed in `plans/`, agreed 2026-08-08):
+*The construction ladder M24–M28 (roadmap agreed 2026-08-08; M24 and M25 landed):
 grow the certified object — pair → triangle-of-ladders → hexagram → tiled plane →
 recursion — proving χ exact at each rung; the first rung where 4 colours FAIL is
 new mathematics of the first order, and every rung where they succeed is a new
 certified infinite 4-chromatic object and a sharper clamp on where the 5th colour
 cannot live.*
 
-1. **M25 — the four-ladder object** (`plans/M25-triangle-ladders.md`): the
-   ladders of the three pivots 0, 1, ζ₆ AND of the metapivot (its own ladder —
-   Kooshi, 2026-08-08), closed under all unit chords. M24's theorems apply
-   verbatim on the three unit axes; the genuinely new work is the 1/√3-axis
-   chord classification, whose geometry M24's §0.4 already measured exactly
-   (30°/60°/120° torsion + the same θσ resistance, ζ₁₂ anchor offsets, hub
-   factors). The ℤ[ζ₆,π] engine — clearing, separation, mod-3 rows, the
-   trace-pair telescope — is expected to carry with ζ₁₂-twists; where it
-   doesn't is exactly where new structure lives.
-2. **M26 — the hexagram (6+1 pivots)** behind it: the mirror centroids promoted
-   to pivots (already certified as glue points), seven ladders, all cross-webs.
-   Then **M27 — the tiled plane** (Kooshi's target statement: the whole plane's
-   hexagonal closure with all sporadic chords), gated on M24–M26 landing with
+1. **M26 — the hexagram (6+1 pivots)** (`plans/` stub next): the mirror
+   centroids promoted to pivots (already certified as glue points), seven
+   ladders, all cross-webs. M25's engine is expected to carry whole: the
+   fusion-κ trick (a coincidence classification is the chord run at a norm-0
+   constant) and the mod-9 adjacent-heights kill are anchor-generic, and the
+   mirror-centroid axes are again 1/√3-length ζ₁₂-coset directions. Then
+   **M27 — the tiled plane** (Kooshi's target statement: the whole plane's
+   hexagonal closure with all sporadic chords), gated on M26 landing with
    χ still 4; **M28 — the recursion** behind M27.
-3. **M29 — the uncountable pair** (flexible slot): χ(`Coupled.pairSystem`
+2. **M29 — the uncountable pair** (flexible slot): χ(`Coupled.pairSystem`
    proper, all uncountably many circle points) — the M21 fork. The hypothesis
-   χ = 4 ⟺ the countable ladder's χ = 4 now has its countable side EXACT, so
+   χ = 4 ⟺ the countable ladder's χ = 4 now has its countable side EXACT (M24 at the pair, M25 at the four-ladder object), so
    the compactness/transfer question is live whenever it earns its slot.
-4. **Colour closure at the gap distance, clamp-directed** — unchanged: does a
+3. **Colour closure at the gap distance, clamp-directed** — unchanged: does a
    4-colour equality-transmitting gadget exist at d = \|ζ₆σ⁹ − 1\| (exact,
    chord ≈ 0.0176)? Clamp spec: outer constraints necessary in every kill,
    cores 4–8 pins median 6, build where coupling is strong (M23's gating). A
    negative is reportable.
-5. **Parked with reasons**: the triangle's colour census (M23's path 1 —
+4. **Parked with reasons**: the triangle's colour census (M23's path 1 —
    overlap-aware triple census, metapivot broadcast reach) is superseded as a
    *measurement* by the construction ladder, which proves rather than samples
    the same objects; revive only if M25 stalls. The certified-6-colouring angle

@@ -1295,7 +1295,7 @@ private theorem io_master {a c : ZMod 6} {b d : ℤ} {R : ℝ} {κ : ℤ}
   have hc : ((3 + Real.sqrt 3 ^ 2 + (3 : ℝ) ^ 2 - R : ℝ) : ℂ) = 3 * (κ : ℂ) := by
     have h3 : Real.sqrt 3 ^ 2 = 3 := by nlinarith [sq_sqrt3]
     rw [h3]
-    have : (3 + (3 : ℝ) + (3 : ℝ) ^ 2 - R : ℝ) = 3 * (κ : ℝ) := by push_cast; linarith
+    have : (3 + (3 : ℝ) + (3 : ℝ) ^ 2 - R : ℝ) = 3 * (κ : ℝ) := by linarith
     rw [this]
     norm_cast
   rw [hc] at hm
@@ -2202,7 +2202,6 @@ private theorem io_classify {A c : ZMod 6} {b d : ℤ} {κ : ℤ} (hκ : κ = 2 
             + (3 : ℂ) ^ (μ + 1)
               * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν + 1) := by
         refine mul_left_cancel₀ sqrt3_ne ?_
-        push_cast
         linear_combination hcl
       rcases Nat.eq_zero_or_pos t with ht0 | htp
       · subst ht0
@@ -3314,7 +3313,7 @@ private theorem ii_fusion_classify {A c : ZMod 6} {b d : ℤ}
         rw [show (2 * 0 : ℕ) = 0 from rfl, hexTrace_zero_height,
           show (-3 * 3 ^ 0 : ℤ) = -3 by ring] at hH2
         have hv := Int.cast_injective (α := ℂ) hH2
-        have hvals := u_zero_vals (uAddr c 0)
+        have hvals := u_zero_vals (uAddr c d)
         omega
       · obtain ⟨ν', rfl⟩ : ∃ ν', ν = ν' + 1 := ⟨ν - 1, by omega⟩
         rw [show (-3 * 3 ^ (ν' + 1) : ℤ) = 3 * (-3 * 3 ^ ν') by ring] at hH2
@@ -3433,7 +3432,7 @@ private theorem ii_fusion_classify {A c : ZMod 6} {b d : ℤ}
           · -- n ≤ m: the pivot trace alone after dividing by `3^ν`
             obtain ⟨t', rfl⟩ : ∃ t', t = ν + 1 + t' := ⟨t - ν - 1, by omega⟩
             obtain ⟨μ', hμ'⟩ : ∃ μ', μ + 1 = ν + 1 + μ' := ⟨μ - ν, by omega⟩
-            rw [hμ', show μ + (ν + 1) = ν + (μ + 1) by omega] at hcl
+            rw [hμ', show μ + ν + 1 = ν + (μ + 1) by omega] at hcl
             have hdiv' : (3 : ℂ) ^ 0
                 * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1)
                 + (3 : ℂ) ^ (1 + t')
@@ -3707,14 +3706,12 @@ private theorem outer0_to02 (a : ZMod 6) (b : ℤ) :
     outerPt 0 1 a b = outerPt 0 zeta6 (a + 5) b := by
   refine outerPt_hexRot 0 zeta6 1 5 a b ?_
   rw [show (((5 : ZMod 6)).val : ℤ) = ((5 : ℕ) : ℤ) from rfl, zpow_natCast, zeta6_pow5]
-  ring_nf
   linear_combination zeta6_minpoly
 
 private theorem inner0_to02 (a : ZMod 6) (b : ℤ) :
     innerPt 0 1 a b = innerPt 0 zeta6 (a + 5) b := by
   refine innerPt_hexRot 0 zeta6 1 5 a b ?_
   rw [show (((5 : ZMod 6)).val : ℤ) = ((5 : ℕ) : ℤ) from rfl, zpow_natCast, zeta6_pow5]
-  ring_nf
   linear_combination zeta6_minpoly
 
 /-- Anchor 2's ladder, re-addressed onto the pair `(ζ₆, 0)`. -/
@@ -3722,13 +3719,13 @@ private theorem outer2_swap0 (c : ZMod 6) (d : ℤ) :
     outerPt zeta6 (zeta6 + 1) c d = outerPt zeta6 0 (c + 2) d := by
   refine outerPt_hexRot zeta6 0 (zeta6 + 1) 2 c d ?_
   rw [show (((2 : ZMod 6)).val : ℤ) = ((2 : ℕ) : ℤ) from rfl, zpow_natCast]
-  linear_combination -zeta6_cube
+  linear_combination zeta6_cube
 
 private theorem inner2_swap0 (c : ZMod 6) (d : ℤ) :
     innerPt zeta6 (zeta6 + 1) c d = innerPt zeta6 0 (c + 2) d := by
   refine innerPt_hexRot zeta6 0 (zeta6 + 1) 2 c d ?_
   rw [show (((2 : ZMod 6)).val : ℤ) = ((2 : ℕ) : ℤ) from rfl, zpow_natCast]
-  linear_combination -zeta6_cube
+  linear_combination zeta6_cube
 
 /-- Anchor 1's ladder, re-addressed onto the pair `(1, ζ₆)`. -/
 private theorem outer1_to12 (a : ZMod 6) (b : ℤ) :
@@ -3820,9 +3817,8 @@ private theorem metaColor_o1 (a : ZMod 6) (b : ℤ) :
   by_cases hP : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = outerPt 1 2 a b
   · obtain ⟨n, hn⟩ := hP
     rw [metaColor, dif_pos ⟨n, hn⟩]
-    have hspec := Exists.choose_spec
-      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = outerPt 1 2 a b)
-    rw [outer1_swap] at hspec
+    have hspec := (Exists.choose_spec
+      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = outerPt 1 2 a b)).trans (outer1_swap a b)
     rcases (fusion_oo dist_01 _ _ (a + 3) b).mp hspec with ⟨h1, -, h3, -⟩ | ⟨h1, -, h3, -⟩
     · rw [h1, show a = 2 from by rw [eq_sub_of_add_eq h3]; decide]
       rfl
@@ -3831,9 +3827,8 @@ private theorem metaColor_o1 (a : ZMod 6) (b : ℤ) :
   · by_cases hPi : ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = outerPt 1 2 a b
     · obtain ⟨n, hn⟩ := hPi
       rw [metaColor, dif_neg hP, dif_pos ⟨n, hn⟩]
-      have hspec := Exists.choose_spec
-        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, innerPt 0 1 m.1 m.2 = outerPt 1 2 a b)
-      rw [outer1_swap] at hspec
+      have hspec := (Exists.choose_spec
+        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, innerPt 0 1 m.1 m.2 = outerPt 1 2 a b)).trans (outer1_swap a b)
       rcases (fusion_oi dist_01 _ _ (a + 3) b).mp hspec with ⟨h1, -, h3, -⟩ |
         ⟨h1, -, h3, -⟩
       · rw [h1, show a = 0 from by rw [eq_sub_of_add_eq h3]; decide]
@@ -3850,9 +3845,8 @@ private theorem metaColor_i1 (a : ZMod 6) (b : ℤ) :
   by_cases hP : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = innerPt 1 2 a b
   · obtain ⟨n, hn⟩ := hP
     rw [metaColor, dif_pos ⟨n, hn⟩]
-    have hspec := Exists.choose_spec
-      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = innerPt 1 2 a b)
-    rw [inner1_swap] at hspec
+    have hspec := (Exists.choose_spec
+      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = innerPt 1 2 a b)).trans (inner1_swap a b)
     rcases (fusion_io dist_01 _ _ (a + 3) b).mp hspec with ⟨h1, -, h3, -⟩ | ⟨h1, -, h3, -⟩
     · rw [h1, show a = 3 from by rw [eq_sub_of_add_eq h3]; decide]
       rfl
@@ -3875,9 +3869,9 @@ private theorem metaColor_o2 (a : ZMod 6) (b : ℤ) :
   by_cases h1 : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = outerPt zeta6 (zeta6 + 1) a b
   · obtain ⟨n, hn⟩ := h1
     rw [metaColor, dif_pos ⟨n, hn⟩]
-    have hspec := Exists.choose_spec
-      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b)
-    rw [outer0_to02, outer2_swap0] at hspec
+    have hspec := ((outer0_to02 _ _).symm.trans (Exists.choose_spec
+      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
+        outerPt 0 1 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b))).trans (outer2_swap0 a b)
     rcases (fusion_oo Triangle.dist_pivot_02 _ _ (a + 2) b).mp hspec with
       ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
     · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -3893,9 +3887,9 @@ private theorem metaColor_o2 (a : ZMod 6) (b : ℤ) :
   · by_cases h2 : ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = outerPt zeta6 (zeta6 + 1) a b
     · obtain ⟨n, hn⟩ := h2
       rw [metaColor, dif_neg h1, dif_pos ⟨n, hn⟩]
-      have hspec := Exists.choose_spec
-        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, innerPt 0 1 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b)
-      rw [inner0_to02, outer2_swap0] at hspec
+      have hspec := ((inner0_to02 _ _).symm.trans (Exists.choose_spec
+        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
+          innerPt 0 1 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b))).trans (outer2_swap0 a b)
       rcases (fusion_oi Triangle.dist_pivot_02 _ _ (a + 2) b).mp hspec with
         ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
       · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -3911,9 +3905,9 @@ private theorem metaColor_o2 (a : ZMod 6) (b : ℤ) :
     · by_cases h3 : ∃ n : ZMod 6 × ℤ, outerPt 1 2 n.1 n.2 = outerPt zeta6 (zeta6 + 1) a b
       · obtain ⟨n, hn⟩ := h3
         rw [metaColor, dif_neg h1, dif_neg h2, dif_pos ⟨n, hn⟩]
-        have hspec := Exists.choose_spec
-          (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 1 2 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b)
-        rw [outer1_to12, outer2_swap1] at hspec
+        have hspec := ((outer1_to12 _ _).symm.trans (Exists.choose_spec
+          (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
+            outerPt 1 2 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b))).trans (outer2_swap1 a b)
         rcases (fusion_oo Triangle.dist_pivot_12 _ _ (a + 1) b).mp hspec with
           ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
         · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -3929,10 +3923,9 @@ private theorem metaColor_o2 (a : ZMod 6) (b : ℤ) :
       · by_cases h4 : ∃ n : ZMod 6 × ℤ, innerPt 1 2 n.1 n.2 = outerPt zeta6 (zeta6 + 1) a b
         · obtain ⟨n, hn⟩ := h4
           rw [metaColor, dif_neg h1, dif_neg h2, dif_neg h3, dif_pos ⟨n, hn⟩]
-          have hspec := Exists.choose_spec
+          have hspec := ((inner1_to12 _ _).symm.trans (Exists.choose_spec
             (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
-              innerPt 1 2 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b)
-          rw [inner1_to12, outer2_swap1] at hspec
+              innerPt 1 2 m.1 m.2 = outerPt zeta6 (zeta6 + 1) a b))).trans (outer2_swap1 a b)
           rcases (fusion_oi Triangle.dist_pivot_12 _ _ (a + 1) b).mp hspec with
             ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
           · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -3957,9 +3950,9 @@ private theorem metaColor_i2 (a : ZMod 6) (b : ℤ) :
   by_cases h1 : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = innerPt zeta6 (zeta6 + 1) a b
   · obtain ⟨n, hn⟩ := h1
     rw [metaColor, dif_pos ⟨n, hn⟩]
-    have hspec := Exists.choose_spec
-      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = innerPt zeta6 (zeta6 + 1) a b)
-    rw [outer0_to02, inner2_swap0] at hspec
+    have hspec := ((outer0_to02 _ _).symm.trans (Exists.choose_spec
+      (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
+        outerPt 0 1 m.1 m.2 = innerPt zeta6 (zeta6 + 1) a b))).trans (inner2_swap0 a b)
     rcases (fusion_io Triangle.dist_pivot_02 _ _ (a + 2) b).mp hspec with
       ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
     · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -3979,9 +3972,9 @@ private theorem metaColor_i2 (a : ZMod 6) (b : ℤ) :
     by_cases h3 : ∃ n : ZMod 6 × ℤ, outerPt 1 2 n.1 n.2 = innerPt zeta6 (zeta6 + 1) a b
     · obtain ⟨n, hn⟩ := h3
       rw [metaColor, dif_neg h1, dif_neg h2, dif_pos ⟨n, hn⟩]
-      have hspec := Exists.choose_spec
-        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 1 2 m.1 m.2 = innerPt zeta6 (zeta6 + 1) a b)
-      rw [outer1_to12, inner2_swap1] at hspec
+      have hspec := ((outer1_to12 _ _).symm.trans (Exists.choose_spec
+        (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
+          outerPt 1 2 m.1 m.2 = innerPt zeta6 (zeta6 + 1) a b))).trans (inner2_swap1 a b)
       rcases (fusion_io Triangle.dist_pivot_12 _ _ (a + 1) b).mp hspec with
         ⟨hx, -, hy, -⟩ | ⟨hx, -, hy, -⟩
       · rw [show (Exists.choose (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ,
@@ -4004,7 +3997,8 @@ private theorem metaColor_i2 (a : ZMod 6) (b : ℤ) :
         exact outer_ne_inner dist_2A n.1 n.2 a b hn
       have hex : ∃ n : ZMod 6 × ℤ,
           innerPt zeta6 (zeta6 + 1) n.1 n.2 = innerPt zeta6 (zeta6 + 1) a b := ⟨(a, b), rfl⟩
-      rw [metaColor, dif_neg h1, dif_neg h2, dif_neg h3, dif_neg h4, dif_pos hex]
+      rw [metaColor, dif_neg h1, dif_neg h2, dif_neg h3, dif_neg h4, dif_neg h5,
+        dif_pos hex]
       congr 1
       exact ((innerPt_inj dist_2A _ _ _ _).mp hex.choose_spec).1
 
