@@ -998,10 +998,11 @@ theorem sqrt3_pow_mul_word (a : ZMod 6) (b : ℕ) :
 the parity split. `InRing` names membership by coordinates in the basis
 `{1, ζ₆, π, ζ₆π}`, and `eq_zero_of_add_sqrt3_mul` is the separation. -/
 
-/-- Membership in `ℚ(ζ₆, π)`, by coordinates in the basis `{1, ζ₆, π, ζ₆·π}`. -/
+/-- Membership in `ℤ[ζ₆, π]`, by integer coordinates in the basis `{1, ζ₆, π, ζ₆·π}`.
+Integrality is what lets a congruence modulo three be read off a ring identity. -/
 def InRing (z : ℂ) : Prop :=
-  ∃ q₁ q₂ q₃ q₄ : ℚ, z = (q₁ : ℂ) + (q₂ : ℂ) * zeta6 + (q₃ : ℂ) * piC
-    + (q₄ : ℂ) * (zeta6 * piC)
+  ∃ n₁ n₂ n₃ n₄ : ℤ, z = (n₁ : ℂ) + (n₂ : ℂ) * zeta6 + (n₃ : ℂ) * piC
+    + (n₄ : ℂ) * (zeta6 * piC)
 
 theorem InRing.add {z w : ℂ} (hz : InRing z) (hw : InRing w) : InRing (z + w) := by
   obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
@@ -1012,9 +1013,7 @@ theorem InRing.neg {z : ℂ} (hz : InRing z) : InRing (-z) := by
   obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
   exact ⟨-a₁, -a₂, -a₃, -a₄, by push_cast; ring⟩
 
-theorem InRing.ratCast (q : ℚ) : InRing (q : ℂ) := ⟨q, 0, 0, 0, by push_cast; ring⟩
-
-theorem InRing.intCast (n : ℤ) : InRing (n : ℂ) := ⟨(n : ℚ), 0, 0, 0, by push_cast; ring⟩
+theorem InRing.intCast (n : ℤ) : InRing (n : ℂ) := ⟨n, 0, 0, 0, by push_cast; ring⟩
 
 theorem InRing.zeta6_mul {z : ℂ} (hz : InRing z) : InRing (zeta6 * z) := by
   obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
@@ -1050,23 +1049,23 @@ theorem InRing.piC_pow (m : ℕ) : InRing (piC ^ m) := by
     rw [pow_succ, mul_comm]
     exact ih.piC_mul
 
-theorem InRing.ratSmul (q : ℚ) {w : ℂ} (hw : InRing w) : InRing ((q : ℂ) * w) := by
+theorem InRing.intSmul (q : ℤ) {w : ℂ} (hw : InRing w) : InRing ((q : ℂ) * w) := by
   obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hw
   exact ⟨q * b₁, q * b₂, q * b₃, q * b₄, by push_cast; ring⟩
 
 theorem InRing.mul {z w : ℂ} (hz : InRing z) (hw : InRing w) : InRing (z * w) := by
   obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hz
-  have h1 : InRing ((a₁ : ℂ) * w) := InRing.ratSmul a₁ hw
+  have h1 : InRing ((a₁ : ℂ) * w) := InRing.intSmul a₁ hw
   have h2 : InRing ((a₂ : ℂ) * zeta6 * w) := by
-    have := (InRing.ratSmul a₂ hw).zeta6_mul
+    have := (InRing.intSmul a₂ hw).zeta6_mul
     rw [show zeta6 * ((a₂ : ℂ) * w) = (a₂ : ℂ) * zeta6 * w by ring] at this
     exact this
   have h3 : InRing ((a₃ : ℂ) * piC * w) := by
-    have := (InRing.ratSmul a₃ hw).piC_mul
+    have := (InRing.intSmul a₃ hw).piC_mul
     rw [show piC * ((a₃ : ℂ) * w) = (a₃ : ℂ) * piC * w by ring] at this
     exact this
   have h4 : InRing ((a₄ : ℂ) * (zeta6 * piC) * w) := by
-    have := ((InRing.ratSmul a₄ hw).piC_mul).zeta6_mul
+    have := ((InRing.intSmul a₄ hw).piC_mul).zeta6_mul
     rw [show zeta6 * (piC * ((a₄ : ℂ) * w)) = (a₄ : ℂ) * (zeta6 * piC) * w by ring] at this
     exact this
   rw [show ((a₁ : ℂ) + (a₂ : ℂ) * zeta6 + (a₃ : ℂ) * piC + (a₄ : ℂ) * (zeta6 * piC)) * w
@@ -1074,22 +1073,21 @@ theorem InRing.mul {z w : ℂ} (hz : InRing z) (hw : InRing w) : InRing (z * w) 
         + (a₄ : ℂ) * (zeta6 * piC) * w by ring]
   exact ((h1.add h2).add h3).add h4
 
-/-- **The separation.** `√3` does not lie in `ℚ(ζ₆, π)`, so a sum of a ring element and
-`√3` times a ring element vanishes only if both halves do. Every parity case of the
-completeness argument is one application of this. -/
-theorem eq_zero_of_add_sqrt3_mul {X Y : ℂ} (hX : InRing X) (hY : InRing Y)
-    (h : X + ((Real.sqrt 3 : ℝ) : ℂ) * Y = 0) : X = 0 ∧ Y = 0 := by
-  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hX
-  obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hY
-  -- the eight rational coordinates, read off `re` and `im`
+/-- The separation, in rational coordinates: the eight-dimensional independence that
+`√3 ∉ ℚ(ζ₆, π)` amounts to. -/
+private theorem sep_rat {a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : ℚ}
+    (h : ((a₁ : ℂ) + (a₂ : ℂ) * zeta6 + (a₃ : ℂ) * piC + (a₄ : ℂ) * (zeta6 * piC))
+      + ((Real.sqrt 3 : ℝ) : ℂ) * ((b₁ : ℂ) + (b₂ : ℂ) * zeta6 + (b₃ : ℂ) * piC
+        + (b₄ : ℂ) * (zeta6 * piC)) = 0) :
+    a₁ = 0 ∧ a₂ = 0 ∧ a₃ = 0 ∧ a₄ = 0 ∧ b₁ = 0 ∧ b₂ = 0 ∧ b₃ = 0 ∧ b₄ = 0 := by
   have hre : ((a₁ + a₂ / 2 + a₃ / 2 + a₄ / 4 : ℚ) : ℝ)
       + ((b₁ + b₂ / 2 + b₃ / 2 + b₄ / 4 : ℚ) : ℝ) * Real.sqrt 3
       + ((-3 * b₄ / 4 : ℚ) : ℝ) * Real.sqrt 11
       + ((-a₄ / 4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
     have := congrArg Complex.re h
-    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
-      Complex.ofReal_re, Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im,
-      Complex.zero_re, zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+    simp only [Complex.add_re, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im, Complex.zero_re,
+      zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
     push_cast
     linear_combination this + ((a₄ : ℝ) / 4) * sqrt3_mul_sqrt11
       + ((b₄ : ℝ) * Real.sqrt 11 / 4) * sq_sqrt3
@@ -1098,9 +1096,9 @@ theorem eq_zero_of_add_sqrt3_mul {X Y : ℂ} (hX : InRing X) (hY : InRing Y)
       + ((a₃ / 2 + a₄ / 4 : ℚ) : ℝ) * Real.sqrt 11
       + ((b₃ / 2 + b₄ / 4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
     have := congrArg Complex.im h
-    simp only [Complex.add_re, Complex.add_im, Complex.mul_re, Complex.mul_im,
-      Complex.ofReal_re, Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im,
-      Complex.zero_im, zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+    simp only [Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im, Complex.zero_im,
+      zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
     push_cast
     linear_combination this - ((b₃ : ℝ) / 2 + (b₄ : ℝ) / 4) * sqrt3_mul_sqrt11
       - ((b₂ : ℝ) / 2 + (b₄ : ℝ) / 4) * sq_sqrt3
@@ -1114,13 +1112,46 @@ theorem eq_zero_of_add_sqrt3_mul {X Y : ℂ} (hX : InRing X) (hY : InRing Y)
   have hb3 : b₃ = 0 := by rw [hb4] at f4; linarith
   have ha1 : a₁ = 0 := by rw [ha2, ha3, ha4] at e1; linarith
   have hb1 : b₁ = 0 := by rw [hb2, hb3, hb4] at e2; linarith
-  refine ⟨?_, ?_⟩
-  · rw [ha1, ha2, ha3, ha4]
+  exact ⟨ha1, ha2, ha3, ha4, hb1, hb2, hb3, hb4⟩
+
+/-- **The separation.** `√3` does not lie in `ℚ(ζ₆, π)`, so a sum of a ring element and
+`√3` times a ring element vanishes only if both halves do. Every parity case of the
+completeness argument is one application of this. -/
+theorem eq_zero_of_add_sqrt3_mul {X Y : ℂ} (hX : InRing X) (hY : InRing Y)
+    (h : X + ((Real.sqrt 3 : ℝ) : ℂ) * Y = 0) : X = 0 ∧ Y = 0 := by
+  obtain ⟨a₁, a₂, a₃, a₄, rfl⟩ := hX
+  obtain ⟨b₁, b₂, b₃, b₄, rfl⟩ := hY
+  obtain ⟨e1, e2, e3, e4, f1, f2, f3, f4⟩ :=
+    sep_rat (a₁ := (a₁ : ℚ)) (a₂ := (a₂ : ℚ)) (a₃ := (a₃ : ℚ)) (a₄ := (a₄ : ℚ))
+      (b₁ := (b₁ : ℚ)) (b₂ := (b₂ : ℚ)) (b₃ := (b₃ : ℚ)) (b₄ := (b₄ : ℚ))
+      (by push_cast at h ⊢; linear_combination h)
+  constructor
+  · have h1 : a₁ = 0 := by exact_mod_cast e1
+    have h2 : a₂ = 0 := by exact_mod_cast e2
+    have h3 : a₃ = 0 := by exact_mod_cast e3
+    have h4 : a₄ = 0 := by exact_mod_cast e4
+    rw [h1, h2, h3, h4]
     push_cast
     ring
-  · rw [hb1, hb2, hb3, hb4]
+  · have h1 : b₁ = 0 := by exact_mod_cast f1
+    have h2 : b₂ = 0 := by exact_mod_cast f2
+    have h3 : b₃ = 0 := by exact_mod_cast f3
+    have h4 : b₄ = 0 := by exact_mod_cast f4
+    rw [h1, h2, h3, h4]
     push_cast
     ring
+
+/-- Integer coordinates in the basis `{1, ζ₆, π, ζ₆π}` are unique — what lets a
+congruence modulo three be read off a ring identity. -/
+theorem inRing_coords_zero {n₁ n₂ n₃ n₄ : ℤ}
+    (h : (n₁ : ℂ) + (n₂ : ℂ) * zeta6 + (n₃ : ℂ) * piC + (n₄ : ℂ) * (zeta6 * piC) = 0) :
+    n₁ = 0 ∧ n₂ = 0 ∧ n₃ = 0 ∧ n₄ = 0 := by
+  obtain ⟨e1, e2, e3, e4, -, -, -, -⟩ :=
+    sep_rat (a₁ := (n₁ : ℚ)) (a₂ := (n₂ : ℚ)) (a₃ := (n₃ : ℚ)) (a₄ := (n₄ : ℚ))
+      (b₁ := 0) (b₂ := 0) (b₃ := 0) (b₄ := 0)
+      (by push_cast at h ⊢; linear_combination h)
+  exact ⟨by exact_mod_cast e1, by exact_mod_cast e2, by exact_mod_cast e3,
+    by exact_mod_cast e4⟩
 
 /-! ### The two symmetries of the norm branch
 
@@ -1202,9 +1233,9 @@ private theorem inRing_elt (a : ZMod 6) (b : ℕ) : InRing (zeta6 ^ (a.val : ℤ
   (InRing.zeta6_zpow _).mul (InRing.piC_pow _)
 
 private theorem inRing_three_pow (k : ℕ) : InRing ((3 : ℂ) ^ k) := by
-  have : ((3 : ℂ) ^ k) = (((3 ^ k : ℤ) : ℚ) : ℂ) := by push_cast; ring
+  have : ((3 : ℂ) ^ k) = (((3 ^ k : ℤ)) : ℂ) := by push_cast; ring
   rw [this]
-  exact InRing.ratCast _
+  exact InRing.intCast _
 
 /-- **Mixed parity is impossible**: one seam height even and the other odd forces a word
 to equal a power of three, which its modulus forbids. -/
@@ -1242,6 +1273,48 @@ theorem normBranch_parity {a c : ZMod 6} {b d : ℕ} (h : NormBranch a b c d) :
     rw [show (9 : ℝ) = 3 ^ 2 by norm_num, ← pow_mul]
     ring
   nlinarith [hnorm, hgrow, pow_pos (show (0 : ℝ) < 3 by norm_num) (2 * δ + 1)]
+
+/-- The hex unit in coordinates: `ζ₆^n = hexE n + hexF n·ζ₆` for `n < 6`. -/
+def hexE : ℕ → ℤ
+  | 0 => 1 | 1 => 0 | 2 => -1 | 3 => -1 | 4 => 0 | 5 => 1 | _ => 0
+
+def hexF : ℕ → ℤ
+  | 0 => 0 | 1 => 1 | 2 => 1 | 3 => 0 | 4 => -1 | 5 => -1 | _ => 0
+
+theorem zeta6_zpow_hex (a : ZMod 6) :
+    zeta6 ^ (a.val : ℤ) = ((hexE a.val : ℤ) : ℂ) + ((hexF a.val : ℤ) : ℂ) * zeta6 := by
+  have hz2 : zeta6 ^ (2 : ℤ) = zeta6 - 1 := by
+    rw [show ((2 : ℤ)) = ((2 : ℕ) : ℤ) from rfl, zpow_natCast]
+    linear_combination zeta6_minpoly
+  have hz3 : zeta6 ^ (3 : ℤ) = -1 := by
+    rw [show ((3 : ℤ)) = ((3 : ℕ) : ℤ) from rfl, zpow_natCast]
+    exact zeta6_cube
+  have hz4 : zeta6 ^ (4 : ℤ) = -zeta6 := by
+    rw [show ((4 : ℤ)) = 3 + 1 by ring, zpow_add₀ zeta6_ne_zero, hz3, zpow_one]
+    ring
+  have hz5 : zeta6 ^ (5 : ℤ) = 1 - zeta6 := by
+    rw [show ((5 : ℤ)) = 3 + 2 by ring, zpow_add₀ zeta6_ne_zero, hz3, hz2]
+    ring
+  obtain ⟨n, hn, hna⟩ : ∃ n, n < 6 ∧ a.val = n := ⟨a.val, ZMod.val_lt a, rfl⟩
+  rw [hna]
+  interval_cases n
+  · norm_num [hexE, hexF]
+  · norm_num [hexE, hexF]
+  · rw [show ((2 : ℕ) : ℤ) = (2 : ℤ) from rfl, hz2]
+    norm_num [hexE, hexF]
+    ring
+  · rw [show ((3 : ℕ) : ℤ) = (3 : ℤ) from rfl, hz3]
+    norm_num [hexE, hexF]
+  · rw [show ((4 : ℕ) : ℤ) = (4 : ℤ) from rfl, hz4]
+    norm_num [hexE, hexF]
+  · rw [show ((5 : ℕ) : ℤ) = (5 : ℤ) from rfl, hz5]
+    norm_num [hexE, hexF]
+    ring
+
+/-- The hex coordinates are never both divisible by three — the unit stays a unit modulo
+three, which is what every congruence kill turns on. -/
+theorem hexE_hexF_not_both_dvd : ∀ n : ℕ, n < 6 → ¬ ((3 : ℤ) ∣ hexE n ∧ (3 : ℤ) ∣ hexF n) := by
+  decide
 
 private theorem zmod_pair_pin : ∀ a c : ZMod 6, a + c = 3 → c = a + 3 →
     (a = 0 ∧ c = 3) ∨ (a = 3 ∧ c = 0) := by decide
