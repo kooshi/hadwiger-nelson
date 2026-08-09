@@ -1479,6 +1479,48 @@ theorem normBranch_odd_large {a c : ZMod 6} {β δ : ℕ} (hβ : 1 ≤ β) (hδ 
   · exact dvd_of_dvd_mul_units (piCoeff_snd_emod (2 * (β' + 1))) (piCoeff_snd_emod (2 * (δ' + 1)))
       ⟨v₄, by linarith⟩
 
+/-- **Both heights one**: the finite case, where the four sporadic chords live. The
+cleared identity's four integer coordinates decide the thirty-six hex pairs. -/
+theorem normBranch_odd_one {a c : ZMod 6}
+    (h : NormBranch a ((1 : ℕ) : ℤ) c ((1 : ℕ) : ℤ)) : (a = 1 ∧ c = 5) ∨ (a = 5 ∧ c = 1) := by
+  have hc := normBranch_cleared (b := 1) (d := 1) h
+  set eA := zeta6 ^ (a.val : ℤ) with heA
+  set eC := zeta6 ^ (c.val : ℤ) with heC
+  have hpi1 : piC ^ (1 : ℕ) = piC := pow_one _
+  -- cancel the common `√3` and substitute `π² = π − 3`
+  have hring : eA * piC + eC * piC = eA * piC * (eC * piC) + 3 := by
+    refine mul_left_cancel₀ sqrt3_cast_ne_zero ?_
+    have h3 : ((Real.sqrt 3 : ℝ) : ℂ) ^ (1 + 1 + 1) = 3 * ((Real.sqrt 3 : ℝ) : ℂ) := by
+      rw [show (1 + 1 + 1) = 2 * 1 + 1 from rfl, pow_succ, sqrt3_pow_two_mul]
+      norm_num
+    rw [h3] at hc
+    simp only [pow_one] at hc
+    linear_combination hc
+  have hprod : eA * eC = ((hexE ((a + c).val) : ℤ) : ℂ) + ((hexF ((a + c).val) : ℤ) : ℂ) * zeta6 := by
+    rw [heA, heC, ← zpow_add₀ zeta6_ne_zero, ← zeta6_zpow_val ((a.val : ℤ) + (c.val : ℤ)),
+      ← zeta6_zpow_hex]
+    congr 2
+  have hA := zeta6_zpow_hex a
+  have hC := zeta6_zpow_hex c
+  -- the identity's four integer coordinates
+  obtain ⟨k₁, k₂, k₃, k₄⟩ := inRing_coords_zero
+    (n₁ := 3 * (hexE ((a + c).val) - 1)) (n₂ := 3 * hexF ((a + c).val))
+    (n₃ := hexE a.val + hexE c.val - hexE ((a + c).val))
+    (n₄ := hexF a.val + hexF c.val - hexF ((a + c).val))
+    (by
+      rw [← heA] at hA
+      rw [← heC] at hC
+      push_cast
+      linear_combination hring + (eA * eC) * piC_sq - piC * hA - piC * hC
+        + (piC - 3) * hprod)
+  -- and the finite check over the thirty-six hex pairs
+  have hfin : ∀ x y : ZMod 6,
+      3 * (hexE ((x + y).val) - 1) = 0 → 3 * hexF ((x + y).val) = 0 →
+      hexE x.val + hexE y.val - hexE ((x + y).val) = 0 →
+      hexF x.val + hexF y.val - hexF ((x + y).val) = 0 →
+      (x = 1 ∧ y = 5) ∨ (x = 5 ∧ y = 1) := by decide
+  exact hfin a c k₁ k₂ k₃ k₄
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
