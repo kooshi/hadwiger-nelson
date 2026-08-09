@@ -1087,7 +1087,7 @@ private theorem sep_rat {a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : ℚ}
     have := congrArg Complex.re h
     simp only [Complex.add_re, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
       Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im, Complex.zero_re,
-      zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+      zeta6, piC, zero_mul, sub_zero] at this
     push_cast
     linear_combination this + ((a₄ : ℝ) / 4) * sqrt3_mul_sqrt11
       + ((b₄ : ℝ) * Real.sqrt 11 / 4) * sq_sqrt3
@@ -1098,7 +1098,7 @@ private theorem sep_rat {a₁ a₂ a₃ a₄ b₁ b₂ b₃ b₄ : ℚ}
     have := congrArg Complex.im h
     simp only [Complex.add_im, Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
       Complex.ofReal_im, Complex.ratCast_re, Complex.ratCast_im, Complex.zero_im,
-      zeta6, piC, zero_mul, sub_zero, add_zero, zero_add] at this
+      zeta6, piC, zero_mul, add_zero, zero_add] at this
     push_cast
     linear_combination this - ((b₃ : ℝ) / 2 + (b₄ : ℝ) / 4) * sqrt3_mul_sqrt11
       - ((b₂ : ℝ) / 2 + (b₄ : ℝ) / 4) * sq_sqrt3

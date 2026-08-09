@@ -504,6 +504,50 @@ axioms.
 * **§I spec** — 7 examples including the sporadic chord, the adversarial
   non-chord, and the two audit partners.
 
+### The completeness core: what is proven, and what is left (2026-08-09)
+
+The core's **machinery is complete and its case analysis is four-fifths proven**.
+Everything below is kernel-checked; the three `sorry`s are the assembly plus one
+remaining case plus the whole outer–inner family.
+
+Proven, in dependency order:
+
+| Piece | Statement |
+|---|---|
+| `sqrt_indep` | `{1, √3, √11, √33}` is `ℚ`-independent |
+| `piC`, `piC_sq` | `π = √3·σ`, `π² = π − 3` |
+| `piCoeff`, `piC_pow_coeff` | `π^n = px n + py n·π` over `ℤ` |
+| `three_dvd_piCoeff_fst`, `piCoeff_snd_emod` | `3 ∣ px n` and `py n ≡ 1 (mod 3)` for `n ≥ 1` |
+| `piCoeff_norm` | `px² + px·py + 3py² = 3^n` |
+| `sqrt3_pow_mul_word` | the clearing identity `√3^b·word = ζ₆^a·π^b` |
+| `InRing` + closure | membership in `ℤ[ζ₆, π]` by integer coordinates |
+| `sep_rat`, `eq_zero_of_add_sqrt3_mul` | the separation `√3 ∉ ℚ(ζ₆, π)` |
+| `inRing_coords_zero` | integer coordinates are unique |
+| `hexE`/`hexF`, `zeta6_zpow_hex` | the hex unit in coordinates, never `≡ 0 (mod 3)` |
+| `normBranch_swap`, `normBranch_conj` | the two symmetries |
+| `normBranch_cleared` | the cleared identity |
+| **`normBranch_parity`** | **mixed parity is impossible** |
+| **`normBranch_even`** | **both heights even ⟹ both zero and the hex pair is `(0,3)` or `(3,0)`** — the two matching-crossings |
+| **`normBranch_odd_large`** | **both heights odd and ≥ 3 ⟹ impossible** |
+| **`normBranch_odd_one`** | **both heights one ⟹ the hex pair is `(1,5)` or `(5,1)`** — the four sporadics, proven rather than censused |
+
+Left to do, precisely:
+
+1. **`normBranch_odd_mixed`** (one height one, the other ≥ 3): the same coordinate
+   extraction, then `Z(EC − EAC) ≡ 0 (mod 3)` forces `a = 0` (a 36-case `decide`
+   on the hex table, whose six coordinate pairs are distinct mod 3), and the four
+   integer equations then give `Z = 2m`, `m·EC = 3^{δ−1}`, `m·FC = 0`; since
+   `3 ∤ Z` this forces `δ = 1`, `Z = −2`, `m = −1`, `EC = −1`, i.e. `c = 3` — the
+   glue-incident solution `(0,1,3,3)`, and only it. Derived and checked
+   numerically; one attempt written and reverted for not compiling (the
+   `linear_combination` cofactors for the four-coordinate extraction need to be
+   derived by computer algebra rather than by hand, as `ii_key`'s were).
+2. **The ℤ-assembly**: `ii_norm_bound` and `ii_norm_complete` over signed heights,
+   by `normBranch_conj`/`normBranch_swap` down to the four proven cases.
+3. **`oi_complete`**: the same programme for the outer–inner family, whose real
+   form is `Re(u·conj w) − √3·Re u − Re w + 2√3/3 = 0` (verified) and whose
+   parity signature is `b` even, `d` odd (measured).
+
 ### Implementation discoveries (they changed the shape; recorded as decisions)
 
 1. **The chord conditions are REAL equations.** Verified exactly
