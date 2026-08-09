@@ -1140,6 +1140,104 @@ theorem normBranch_conj {a c : ZMod 6} {b d : ℤ} (h : NormBranch a b c d) :
     word_conj] at this
   exact this
 
+/-! ### The parity split
+
+Clearing the norm branch by `√3^(b+d)` and separating along `√3 ∉ ℚ(ζ₆,π)` decides the
+case by the parities of the two seam heights: mixed parity is impossible, both-even
+collapses through the seam's infinite order to the two matching-crossings, and both-odd
+leaves the norm equation `(A − 3^β)(B − 3^δ) = −2·3^{β+δ}` in `ℤ[ζ₆, π]`. -/
+
+private theorem sqrt3_cast_ne_zero : ((Real.sqrt 3 : ℝ) : ℂ) ≠ 0 := by
+  simp only [ne_eq, Complex.ofReal_eq_zero]
+  positivity
+
+private theorem sqrt3_pow_two_mul (k : ℕ) : ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * k) = 3 ^ k := by
+  rw [pow_mul, show ((Real.sqrt 3 : ℝ) : ℂ) ^ 2 = 3 from by
+    rw [pow_two]; exact sqrt3_cast_sq]
+
+private theorem normSq_piC : normSq piC = 3 := by
+  simp only [normSq_apply, piC]
+  nlinarith [sq_sqrt11]
+
+private theorem normSq_ringElt (a : ZMod 6) (b : ℕ) :
+    normSq (zeta6 ^ (a.val : ℤ) * piC ^ b) = 3 ^ b := by
+  rw [map_mul, map_pow, normSq_piC]
+  have : normSq (zeta6 ^ (a.val : ℤ)) = 1 := by
+    rw [← Complex.sq_norm, norm_zpow, norm_zeta6, one_zpow]
+    norm_num
+  rw [this, one_mul]
+
+/-- The norm branch, cleared of seam denominators. -/
+theorem normBranch_cleared {a c : ZMod 6} {b d : ℕ} (h : NormBranch a b c d) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ d * (zeta6 ^ (a.val : ℤ) * piC ^ b)
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ b * (zeta6 ^ (c.val : ℤ) * piC ^ d)
+      = ((Real.sqrt 3 : ℝ) : ℂ) * ((zeta6 ^ (a.val : ℤ) * piC ^ b)
+          * (zeta6 ^ (c.val : ℤ) * piC ^ d))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d + 1) := by
+  have hA := sqrt3_pow_mul_word a b
+  have hB := sqrt3_pow_mul_word c d
+  rw [NormBranch] at h
+  have key : ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d) * (word a (b : ℤ) + word c (d : ℤ))
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d)
+        * (((Real.sqrt 3 : ℝ) : ℂ) * (word a (b : ℤ) * word c (d : ℤ) + 1)) := by rw [h]
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d) * (word a (b : ℤ) + word c (d : ℤ))
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ d * (((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ b * (((Real.sqrt 3 : ℝ) : ℂ) ^ d * word c (d : ℤ)) by
+      rw [pow_add]; ring] at key
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d)
+        * (((Real.sqrt 3 : ℝ) : ℂ) * (word a (b : ℤ) * word c (d : ℤ) + 1))
+      = ((Real.sqrt 3 : ℝ) : ℂ) * ((((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ))
+          * ((((Real.sqrt 3 : ℝ) : ℂ) ^ d * word c (d : ℤ))))
+        + ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d + 1) by
+      rw [pow_add, pow_add, pow_one]; ring] at key
+  rw [hA, hB] at key
+  exact key
+
+private theorem inRing_elt (a : ZMod 6) (b : ℕ) : InRing (zeta6 ^ (a.val : ℤ) * piC ^ b) :=
+  (InRing.zeta6_zpow _).mul (InRing.piC_pow _)
+
+private theorem inRing_three_pow (k : ℕ) : InRing ((3 : ℂ) ^ k) := by
+  have : ((3 : ℂ) ^ k) = (((3 ^ k : ℤ) : ℚ) : ℂ) := by push_cast; ring
+  rw [this]
+  exact InRing.ratCast _
+
+/-- **Mixed parity is impossible**: one seam height even and the other odd forces a word
+to equal a power of three, which its modulus forbids. -/
+theorem normBranch_parity {a c : ZMod 6} {b d : ℕ} (h : NormBranch a b c d) :
+    b % 2 = d % 2 := by
+  by_contra hpar
+  wlog hb : b % 2 = 0 generalizing a b c d
+  · exact this (normBranch_swap h) (by omega) (by omega)
+  obtain ⟨β, rfl⟩ : ∃ β, b = 2 * β := ⟨b / 2, by omega⟩
+  obtain ⟨δ, rfl⟩ : ∃ δ, d = 2 * δ + 1 := ⟨d / 2, by omega⟩
+  have hc := normBranch_cleared h
+  set A := zeta6 ^ (a.val : ℤ) * piC ^ (2 * β) with hAdef
+  set B := zeta6 ^ (c.val : ℤ) * piC ^ (2 * δ + 1) with hBdef
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * δ + 1)
+      = ((Real.sqrt 3 : ℝ) : ℂ) * 3 ^ δ by rw [pow_succ, sqrt3_pow_two_mul]; ring,
+    sqrt3_pow_two_mul,
+    show 2 * β + (2 * δ + 1) + 1 = 2 * (β + δ + 1) by ring, sqrt3_pow_two_mul] at hc
+  obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+    ((((inRing_three_pow β).mul (inRing_elt c (2 * δ + 1)))).add
+      (inRing_three_pow (β + δ + 1)).neg)
+    (((inRing_three_pow δ).mul (inRing_elt a (2 * β))).add
+      (((inRing_elt a (2 * β)).mul (inRing_elt c (2 * δ + 1))).neg))
+    (show ((3 : ℂ) ^ β * B + -(3 : ℂ) ^ (β + δ + 1))
+        + ((Real.sqrt 3 : ℝ) : ℂ) * ((3 : ℂ) ^ δ * A + -(A * B)) = 0 by
+      linear_combination hc)
+  -- `B = 3^{δ+1}` contradicts `|B|² = 3^{2δ+1}`
+  have hB3 : B = (3 : ℂ) ^ (δ + 1) := by
+    refine mul_left_cancel₀ (a := ((3 : ℂ) ^ β)) (pow_ne_zero _ (by norm_num)) ?_
+    rw [show ((3 : ℂ) ^ β * (3 : ℂ) ^ (δ + 1)) = (3 : ℂ) ^ (β + δ + 1) by
+      rw [← pow_add]; ring_nf]
+    linear_combination hX
+  have hnorm := normSq_ringElt c (2 * δ + 1)
+  rw [← hBdef, hB3, map_pow, show normSq (3 : ℂ) = 9 by norm_num [normSq_apply]] at hnorm
+  have hgrow : (9 : ℝ) ^ (δ + 1) = 3 * 3 ^ (2 * δ + 1) := by
+    rw [show (9 : ℝ) = 3 ^ 2 by norm_num, ← pow_mul]
+    ring
+  nlinarith [hnorm, hgrow, pow_pos (show (0 : ℝ) < 3 by norm_num) (2 * δ + 1)]
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
