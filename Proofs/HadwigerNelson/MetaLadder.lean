@@ -393,6 +393,129 @@ def metaIITable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
 sides (the census-verified isomorphy under the 120° rotation about the metapivot). -/
 def webShift (j : Fin 3) : ZMod 6 := ((2 * j.val : ℕ) : ZMod 6)
 
+/-! ### §W.1 The bridges: every meta-axis chord is a `ℤ[ζ₆,π]` norm equation
+
+`g := 1 + ζ₆ = √3·ζ₁₂` is the whole engine: multiplying a meta-axis difference by `√3`
+(oo, oi) or by `3` (io, ii) turns it into `ζ₁₂` times an expression in which the twelfth
+root has disappeared.  Since `‖ζ₁₂‖ = 1` the norm equation transfers exactly. -/
+
+/-- `g = 1 + ζ₆`, the hex element of norm 3 that replaces `√3·ζ₁₂`. -/
+noncomputable def gC : ℂ := 1 + zeta6
+
+/-- Its conjugate `ḡ = 2 − ζ₆ = ζ₆⁻¹g`. -/
+noncomputable def gB : ℂ := 2 - zeta6
+
+theorem gC_conj : (starRingEnd ℂ) gC = gB := by
+  rw [gC, gB, map_add, map_one, ← Triangle.one_sub_zeta6]
+  ring
+
+theorem gC_mul_gB : gC * gB = 3 := by
+  rw [gC, gB]
+  linear_combination -zeta6_minpoly
+
+theorem sqrt3_mul_zeta12' : gC = ((Real.sqrt 3 : ℝ) : ℂ) * zeta12 := sqrt3_mul_zeta12.symm
+
+private theorem word_succ (a : ZMod 6) (b : ℤ) : word a b = zeta6 * word (a - 1) b := by
+  have h := word_add (a - 1) 1 b 0
+  rw [add_zero, word_k0, show (((1 : ZMod 6)).val : ℤ) = ((1 : ℕ) : ℤ) from rfl,
+    zpow_natCast, pow_one, sub_add_cancel] at h
+  rw [h]
+  ring
+
+private theorem inner_cast : ((Real.sqrt 3 / 3 : ℝ) : ℂ) = ((Real.sqrt 3 : ℝ) : ℂ) / 3 := by
+  push_cast; ring
+
+private theorem sqrt3_ne : ((Real.sqrt 3 : ℝ) : ℂ) ≠ 0 := by
+  simp only [ne_eq, Complex.ofReal_eq_zero]
+  positivity
+
+/-- The scaling step behind all four bridges: a nonzero real multiple of the difference
+equals `ζ₁₂` times the cleared expression, and `‖ζ₁₂‖ = 1` transfers the norm equation
+exactly. -/
+private theorem bridge_gen {P Q k Z : ℂ} {R : ℝ} (hk : k ≠ 0) (hR : normSq k = R)
+    (h : k * (P - Q) = zeta12 * Z) : dist P Q = 1 ↔ normSq Z = R := by
+  have hn := congrArg normSq h
+  rw [map_mul, map_mul, normSq_zeta12, one_mul] at hn
+  have hk0 : normSq k ≠ 0 := fun h0 => hk (by simpa [Complex.normSq_eq_zero] using h0)
+  subst hR
+  rw [dist_eq_norm, norm_eq_one_iff]
+  constructor
+  · intro hP
+    rw [← hn, hP, mul_one]
+  · intro hZ
+    exact mul_left_cancel₀ hk0 (hn.trans (hZ.trans (mul_one _).symm))
+
+private theorem normSq_sqrt3 : normSq ((Real.sqrt 3 : ℝ) : ℂ) = 3 := by
+  simp only [normSq_apply, Complex.ofReal_re, Complex.ofReal_im]
+  nlinarith [sq_sqrt3]
+
+private theorem normSq_three : normSq (3 : ℂ) = 9 := by
+  simp only [normSq_apply]
+  norm_num
+
+/-- `√3·ζ₁₂ = 1 + ζ₁₂²`: the engine identity with the hex root eliminated, the form the
+scaling certificates cite. -/
+private theorem sqrt3_zeta12_id : ((Real.sqrt 3 : ℝ) : ℂ) * zeta12 = 1 + zeta12 ^ 2 := by
+  rw [zeta12_sq]; exact sqrt3_mul_zeta12
+
+private theorem scale_oo (u v : ℂ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) * (zeta6 * u - (metaPivot + v * zeta12))
+      = zeta12 * (gC * u - 1 - ((Real.sqrt 3 : ℝ) : ℂ) * v) := by
+  simp only [gC, meta_eq, inner_cast, ← zeta12_sq]
+  linear_combination (u * zeta12) * sqrt3_zeta12_id - (zeta12 / 3) * sqrt3_cast_sq
+
+private theorem scale_oi (u v : ℂ) :
+    ((Real.sqrt 3 : ℝ) : ℂ)
+        * (zeta6 * u - (metaPivot + ((Real.sqrt 3 / 3 : ℝ) : ℂ) * v * zeta12))
+      = zeta12 * (gC * u - 1 - v) := by
+  simp only [gC, meta_eq, inner_cast, ← zeta12_sq]
+  linear_combination (u * zeta12) * sqrt3_zeta12_id
+    - (zeta12 * (1 + v) / 3) * sqrt3_cast_sq
+
+private theorem scale_io (u v : ℂ) :
+    (3 : ℂ) * (((Real.sqrt 3 / 3 : ℝ) : ℂ) * (zeta6 * u) - (metaPivot + v * zeta12))
+      = zeta12 * (gC * u - ((Real.sqrt 3 : ℝ) : ℂ) - 3 * v) := by
+  simp only [gC, meta_eq, inner_cast, ← zeta12_sq]
+  linear_combination (u * zeta12) * sqrt3_zeta12_id
+
+private theorem scale_ii (u v : ℂ) :
+    (3 : ℂ) * (((Real.sqrt 3 / 3 : ℝ) : ℂ) * (zeta6 * u)
+        - (metaPivot + ((Real.sqrt 3 / 3 : ℝ) : ℂ) * v * zeta12))
+      = zeta12 * (gC * u - ((Real.sqrt 3 : ℝ) : ℂ) - ((Real.sqrt 3 : ℝ) : ℂ) * v) := by
+  simp only [gC, meta_eq, inner_cast, ← zeta12_sq]
+  linear_combination (u * zeta12) * sqrt3_zeta12_id
+
+theorem bridge_oo (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (outerPt 0 1 a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
+      normSq (gC * word (a - 1) b - 1 - ((Real.sqrt 3 : ℝ) : ℂ) * word c d) = 3 := by
+  refine bridge_gen sqrt3_ne normSq_sqrt3 ?_
+  rw [outerPt, outerPt, metaAnchor_sub, word_succ a b]
+  linear_combination scale_oo (word (a - 1) b) (word c d)
+
+theorem bridge_oi (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (outerPt 0 1 a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
+      normSq (gC * word (a - 1) b - 1 - word c d) = 3 := by
+  refine bridge_gen sqrt3_ne normSq_sqrt3 ?_
+  rw [outerPt, innerPt, metaAnchor_sub, word_succ a b]
+  linear_combination scale_oi (word (a - 1) b) (word c d)
+
+theorem bridge_io (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (innerPt 0 1 a b) (outerPt metaPivot metaAnchor c d) = 1 ↔
+      normSq (gC * word (a - 1) b - ((Real.sqrt 3 : ℝ) : ℂ) - 3 * word c d) = 9 := by
+  refine bridge_gen (by norm_num : (3 : ℂ) ≠ 0) normSq_three ?_
+  rw [innerPt, outerPt, metaAnchor_sub, word_succ a b]
+  linear_combination scale_io (word (a - 1) b) (word c d)
+
+theorem bridge_ii (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
+    dist (innerPt 0 1 a b) (innerPt metaPivot metaAnchor c d) = 1 ↔
+      normSq (gC * word (a - 1) b - ((Real.sqrt 3 : ℝ) : ℂ)
+        - ((Real.sqrt 3 : ℝ) : ℂ) * word c d) = 9 := by
+  refine bridge_gen (by norm_num : (3 : ℂ) ≠ 0) normSq_three ?_
+  rw [innerPt, innerPt, metaAnchor_sub, word_succ a b]
+  linear_combination scale_ii (word (a - 1) b) (word c d)
+
+/-! ### §W.2 The completeness theorems -/
+
 /-- **oo completeness at the metaPivot axis, all three webs**: exactly the four table
 chords per web — the θσ resistance leaves no infinite family. -/
 theorem meta_oo_complete (j : Fin 3) (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
