@@ -916,6 +916,96 @@ theorem sqrt_indep {e₁ e₃ e₁₁ e₃₃ : ℚ}
   obtain ⟨hx, hy⟩ := indep_sqrt3 hrest
   exact ⟨hx, hy, h11z, h33z⟩
 
+/-! ### The algebraic integer behind the seam
+
+`π = √3·σ` clears the seam's denominator: `√3^b · word a b = ζ₆^a · π^b`, and `π` is an
+algebraic integer with `π² = π − 3` and `π·π̄ = 3`, so its powers have integer coordinates
+in the basis `{1, π}`. Those integers carry the whole completeness argument. -/
+
+/-- `π = √3·σ = (1 + i√11)/2`. -/
+noncomputable def piC : ℂ := ⟨1 / 2, Real.sqrt 11 / 2⟩
+
+theorem piC_eq_sqrt3_mul_seam : piC = ((Real.sqrt 3 : ℝ) : ℂ) * seam := by
+  apply Complex.ext <;>
+    simp [piC, seam, Complex.mul_re, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im] <;>
+    nlinarith [sq_sqrt3, sq_sqrt33, sqrt3_mul_sqrt33]
+
+/-- The seam's minimal polynomial, cleared: `π² = π − 3`. -/
+theorem piC_sq : piC ^ 2 = piC - 3 := by
+  apply Complex.ext <;>
+    simp [piC, pow_two, Complex.mul_re, Complex.mul_im] <;>
+    nlinarith [sq_sqrt11]
+
+/-- The integer coordinates of `π^n` in the basis `{1, π}`: `π^n = (piCoeff n).1 +
+(piCoeff n).2·π`. -/
+def piCoeff : ℕ → ℤ × ℤ
+  | 0 => (1, 0)
+  | n + 1 => (-3 * (piCoeff n).2, (piCoeff n).1 + (piCoeff n).2)
+
+theorem piC_pow_coeff (n : ℕ) :
+    piC ^ n = ((piCoeff n).1 : ℂ) + ((piCoeff n).2 : ℂ) * piC := by
+  induction n with
+  | zero => simp [piCoeff]
+  | succ k ih =>
+    rw [pow_succ, ih, piCoeff]
+    push_cast
+    linear_combination ((piCoeff k).2 : ℂ) * piC_sq
+
+/-- The first coordinate is divisible by three from the first step on. -/
+theorem three_dvd_piCoeff_fst (n : ℕ) : (3 : ℤ) ∣ (piCoeff (n + 1)).1 :=
+  ⟨-(piCoeff n).2, by rw [piCoeff]; ring⟩
+
+/-- The second coordinate is never divisible by three (from the first step on) — the fact
+that every kill in the completeness argument turns on. -/
+theorem piCoeff_snd_emod (n : ℕ) : (piCoeff (n + 1)).2 % 3 = 1 := by
+  induction n with
+  | zero => decide
+  | succ k ih =>
+    obtain ⟨m, hm⟩ := three_dvd_piCoeff_fst k
+    rw [piCoeff, hm]
+    omega
+
+/-- The norm identity `|π^n|² = 3^n`, in coordinates. -/
+theorem piCoeff_norm (n : ℕ) :
+    (piCoeff n).1 ^ 2 + (piCoeff n).1 * (piCoeff n).2 + 3 * (piCoeff n).2 ^ 2 = 3 ^ n := by
+  induction n with
+  | zero => decide
+  | succ k ih =>
+    rw [piCoeff, pow_succ]
+    ring_nf
+    ring_nf at ih
+    linarith [ih]
+
+/-- **The clearing identity**: multiplying a ladder word by `√3^b` turns it into an
+algebraic integer of `ℤ[ζ₆, π]`. -/
+theorem sqrt3_pow_mul_word (a : ZMod 6) (b : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ b * word a (b : ℤ) = zeta6 ^ (a.val : ℤ) * piC ^ b := by
+  rw [word, zpow_natCast seam b, piC_eq_sqrt3_mul_seam, mul_pow]
+  ring
+
+/-! ### The two symmetries of the norm branch
+
+The equation is symmetric in its two words and stable under conjugation, so its solution
+set is closed under `(a,b,c,d) ↦ (c,d,a,b)` and `(a,b,c,d) ↦ (−a,−b,−c,−d)`. Every
+seam-height sign case reduces along these. -/
+
+/-- The norm branch, named: the second disjunct of `ii_chord_iff`. -/
+def NormBranch (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) : Prop :=
+  word a b + word c d = ((Real.sqrt 3 : ℝ) : ℂ) * (word a b * word c d + 1)
+
+theorem normBranch_swap {a c : ZMod 6} {b d : ℤ} (h : NormBranch a b c d) :
+    NormBranch c d a b := by
+  rw [NormBranch] at h ⊢
+  linear_combination h
+
+theorem normBranch_conj {a c : ZMod 6} {b d : ℤ} (h : NormBranch a b c d) :
+    NormBranch (-a) (-b) (-c) (-d) := by
+  rw [NormBranch] at h ⊢
+  have := congrArg (starRingEnd ℂ) h
+  rw [map_add, map_mul, map_add, map_mul, map_one, Complex.conj_ofReal, word_conj,
+    word_conj] at this
+  exact this
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
