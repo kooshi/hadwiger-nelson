@@ -640,6 +640,102 @@ theorem g_coeff_phi (c : ℤ) (A : ZMod 6) (p : ℕ) :
     = c * ((gE A * (piCoeff p).1 + (gE A + gF A) * ((piCoeff p).1 + (piCoeff p).2))
       + gF A * (piCoeff p).2) by ring, hw]; ring⟩
 
+/-! ### §E.6 The bottom kills, on the integer rows
+
+After separation every family's live equation is
+`3^p·H₁ + 3^q·H₂ = κ·3^s + 3^r·H₃` with `H₁, H₂` `g`-traces and `H₃` a unit trace
+(coefficients scaled by units).  Three kills cover every bottom pattern except the
+two-`g`-trace tie, and they are family-independent. -/
+
+private theorem row_pair {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r s : ℕ}
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ q * hexTrace (C₂ * gE Y) (C₂ * gF Y) n
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) :
+    (3 ^ p * (C₁ * gE X * (piCoeff m).1
+          + (C₁ * gE X + C₁ * gF X) * ((piCoeff m).1 + (piCoeff m).2))
+        + 3 ^ q * (C₂ * gE Y * (piCoeff n).1
+          + (C₂ * gE Y + C₂ * gF Y) * ((piCoeff n).1 + (piCoeff n).2))
+        - κ * 3 ^ s
+        - 3 ^ r * (C₃ * hexE Z.val * (piCoeff k).1
+          + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2)) = 0)
+      ∧ (3 ^ p * (C₁ * gF X * (piCoeff m).2) + 3 ^ q * (C₂ * gF Y * (piCoeff n).2)
+        - 3 ^ r * (C₃ * hexF Z.val * (piCoeff k).2) = 0) :=
+  hexTrace_rows_const heq
+
+/-- **Alone, first `g`-trace**: `H₁` strictly lowest is impossible. -/
+private theorem kill_alone_one {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r s : ℕ}
+    (hC₁ : ¬ (3 : ℤ) ∣ C₁) (hm : 1 ≤ m) (hq : p < q) (hr : p < r) (hs : p < s)
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ q * hexTrace (C₂ * gE Y) (C₂ * gF Y) n
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) : False := by
+  obtain ⟨R1, R2⟩ := row_pair heq
+  obtain ⟨q', rfl⟩ : ∃ q', q = p + 1 + q' := ⟨q - p - 1, by omega⟩
+  obtain ⟨r', rfl⟩ : ∃ r', r = p + 1 + r' := ⟨r - p - 1, by omega⟩
+  obtain ⟨s', rfl⟩ : ∃ s', s = p + 1 + s' := ⟨s - p - 1, by omega⟩
+  have hp3 : ((3 : ℤ) ^ p) ≠ 0 := pow_ne_zero p (by norm_num)
+  refine g_coeff_ne hC₁ X (alone_dvd hm (R₁ := κ * 3 ^ s'
+      + 3 ^ r' * (C₃ * hexE Z.val * (piCoeff k).1
+        + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2))
+      - 3 ^ q' * (C₂ * gE Y * (piCoeff n).1
+        + (C₂ * gE Y + C₂ * gF Y) * ((piCoeff n).1 + (piCoeff n).2)))
+    (R₂ := 3 ^ r' * (C₃ * hexF Z.val * (piCoeff k).2)
+      - 3 ^ q' * (C₂ * gF Y * (piCoeff n).2)) ?_ ?_)
+  · have hz : (3 : ℤ) ^ p * ((C₁ * gE X * (piCoeff m).1
+        + (C₁ * gE X + C₁ * gF X) * ((piCoeff m).1 + (piCoeff m).2))
+        - 3 * (κ * 3 ^ s'
+          + 3 ^ r' * (C₃ * hexE Z.val * (piCoeff k).1
+            + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2))
+          - 3 ^ q' * (C₂ * gE Y * (piCoeff n).1
+            + (C₂ * gE Y + C₂ * gF Y) * ((piCoeff n).1 + (piCoeff n).2)))) = 0 := by
+      linear_combination R1
+    rcases mul_eq_zero.mp hz with h | h
+    · exact absurd h hp3
+    · linarith
+  · have hz : (3 : ℤ) ^ p * ((C₁ * gF X * (piCoeff m).2)
+        - 3 * (3 ^ r' * (C₃ * hexF Z.val * (piCoeff k).2)
+          - 3 ^ q' * (C₂ * gF Y * (piCoeff n).2))) = 0 := by
+      linear_combination R2
+    rcases mul_eq_zero.mp hz with h | h
+    · exact absurd h hp3
+    · linarith
+
+/-- **Alone, second `g`-trace**: `H₂` strictly lowest is impossible. -/
+private theorem kill_alone_two {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r s : ℕ}
+    (hC₂ : ¬ (3 : ℤ) ∣ C₂) (hn : 1 ≤ n) (hp : q < p) (hr : q < r) (hs : q < s)
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ q * hexTrace (C₂ * gE Y) (C₂ * gF Y) n
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) : False := by
+  refine kill_alone_one (C₁ := C₂) (C₂ := C₁) (C₃ := C₃) (κ := κ) (X := Y) (Y := X)
+    (Z := Z) (m := n) (n := m) (k := k) hC₂ hn hp hr hs ?_
+  linear_combination heq
+
+/-- **The `φ` kill**: the unit trace at (or below) the bottom is impossible. -/
+private theorem kill_phi {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r s : ℕ}
+    (hC₃ : ¬ (3 : ℤ) ∣ C₃) (hk : 1 ≤ k) (hp : r ≤ p) (hq : r ≤ q) (hs : r < s)
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ q * hexTrace (C₂ * gE Y) (C₂ * gF Y) n
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) : False := by
+  obtain ⟨R1, R2⟩ := row_pair heq
+  obtain ⟨p', rfl⟩ : ∃ p', p = r + p' := ⟨p - r, by omega⟩
+  obtain ⟨q', rfl⟩ : ∃ q', q = r + q' := ⟨q - r, by omega⟩
+  obtain ⟨s', rfl⟩ : ∃ s', s = r + 1 + s' := ⟨s - r - 1, by omega⟩
+  obtain ⟨w₁, hw₁⟩ := g_coeff_phi C₁ X m
+  obtain ⟨w₂, hw₂⟩ := g_coeff_phi C₂ Y n
+  have hr3 : ((3 : ℤ) ^ r) ≠ 0 := pow_ne_zero r (by norm_num)
+  refine u_coeff_phi hC₃ Z (phi_dvd hk (S := 3 ^ p' * w₁ + 3 ^ q' * w₂ - κ * 3 ^ s') ?_)
+  have hz : (3 : ℤ) ^ r * ((C₃ * hexE Z.val * (piCoeff k).1
+      + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2)
+      + C₃ * hexF Z.val * (piCoeff k).2)
+      - 3 * (3 ^ p' * w₁ + 3 ^ q' * w₂ - κ * 3 ^ s')) = 0 := by
+    linear_combination -R1 - R2 + (3 : ℤ) ^ (r + p') * hw₁ + (3 : ℤ) ^ (r + q') * hw₂
+  rcases mul_eq_zero.mp hz with h | h
+  · exact absurd h hr3
+  · linarith
+
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
 Master frame `(hexPivot 3, hexPivot 4) = (0, 2m−ζ₆)`; every web `(a, a+1)` is its
