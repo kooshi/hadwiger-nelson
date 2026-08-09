@@ -1011,8 +1011,135 @@ theorem ii_classify {A c : ZMod 6} {b d : ℤ}
         exact (mul_eq_zero.mp hX).resolve_left h3
       exact gE_gF_zero_ne _ (hexTrace_eq_zero (by omega) hH3)
   · rcases hν with hν | hν
-    · -- **the live class**: pivot height odd, meta height even
-      sorry
+    · -- **the live class**: pivot height odd, meta height even — no separation, the
+      -- 3-adic minimum decides
+      rw [hν, hμ, show 2 * μ + 1 + 1 = 2 * (μ + 1) by ring] at hcl
+      simp only [sqrt3_pow_two_mul] at hcl
+      rcases eq_or_ne d 0 with hd0 | hd0
+      · -- the endgame: `d = 0` pins the height to one and the address pair to two rows
+        subst hd0
+        have hn0 : ν = 0 := by omega
+        have ht0 : t = 0 := by omega
+        subst hn0
+        subst ht0
+        rw [uAddr, if_pos le_rfl, sub_zero, pow_zero, one_mul, one_mul, hμ,
+          show 2 * 0 = 0 from rfl, hexTrace_add, hexTrace_zero_height] at hcl
+        have hcl2 : hexTrace (gE (gAddr A b) + gE (gAddr (A - c) b))
+            (gF (gAddr A b) + gF (gAddr (A - c) b)) (2 * μ + 1)
+            = ((3 ^ (μ + 1) * (2 * hexE c.val + hexF c.val) : ℤ) : ℂ) := by
+          linear_combination (norm := (push_cast; ring)) hcl
+        obtain ⟨hF, hval⟩ := hexTrace_pin (by omega) hcl2
+        have hne : gE (gAddr A b) + gE (gAddr (A - c) b) ≠ 0 := by
+          intro h0
+          rw [h0, zero_mul] at hval
+          have hτ := hex_zero_height_ne c
+          have h3 : (3 : ℤ) ^ (μ + 1) ≠ 0 := pow_ne_zero _ (by norm_num)
+          rcases mul_eq_zero.mp hval.symm with h | h
+          · exact h3 h
+          · exact hτ h
+        have hdvd : (3 : ℤ) ^ (μ + 1) ∣ (gE (gAddr A b) + gE (gAddr (A - c) b)) :=
+          Int.prime_three.pow_dvd_of_dvd_mul_right (μ + 1)
+            (not_three_dvd_pin (2 * μ + 1) (by omega)) ⟨_, hval⟩
+        have hbnd := gE_abs_le (gAddr A b) (gAddr (A - c) b)
+        have hle : (3 : ℤ) ^ (μ + 1) ≤ 4 := by
+          rcases lt_or_gt_of_ne hne with hlt | hgt
+          · have := Int.le_of_dvd (by omega) ((dvd_neg).mpr hdvd)
+            omega
+          · have := Int.le_of_dvd (by omega) hdvd
+            omega
+        have hμ0 : μ = 0 := by
+          by_contra hc
+          obtain ⟨μ', rfl⟩ : ∃ μ', μ = μ' + 1 := ⟨μ - 1, by omega⟩
+          have h9 : (3 : ℤ) ^ 2 ≤ 3 ^ (μ' + 1 + 1) := pow_le_pow_right₀ (by norm_num) (by omega)
+          norm_num at h9
+          omega
+        subst hμ0
+        have hb1 : b = 1 ∨ b = -1 := by omega
+        have hpin : (2 * (piCoeff (2 * 0 + 1)).1 + (piCoeff (2 * 0 + 1)).2) = 1 := by
+          rw [show (2 * 0 + 1 : ℕ) = 1 from rfl, show piCoeff 1 = (0, 1) from rfl]
+          norm_num
+        rw [hpin, mul_one, pow_one] at hval
+        refine ⟨?_, hb1, rfl⟩
+        rcases hb1 with rfl | rfl
+        · rw [gAddr, if_pos (by norm_num), gAddr, if_pos (by norm_num)] at hF hval
+          exact ii_endgame_pos A c hF hval
+        · rw [gAddr, if_neg (by norm_num), gAddr, if_neg (by norm_num)] at hF hval
+          exact ii_endgame_neg A c hF hval
+      · -- `d ≠ 0`: every configuration dies
+        exfalso
+        have hνp : 1 ≤ ν := by omega
+        rcases Nat.eq_zero_or_pos t with ht0 | htp
+        · -- opposite seam signs: the cross trace stands alone at the bottom
+          subst ht0
+          obtain ⟨ν', rfl⟩ : ∃ ν', ν = ν' + 1 := ⟨ν - 1, by omega⟩
+          obtain ⟨R1, R2⟩ := hexTrace_rows
+            (show (3 : ℂ) ^ 0 * hexTrace (gE (gAddr (A - c) (b - d)))
+                  (gF (gAddr (A - c) (b - d))) (b - d).natAbs
+                + (3 : ℂ) ^ (1 + ν')
+                  * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1)
+                = (3 : ℂ) ^ (μ + 1)
+                  * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * (ν' + 1)) by
+              rw [pow_zero, one_mul]
+              linear_combination hcl)
+          refine gE_gF_ne (gAddr (A - c) (b - d)) (alone_dvd (p := (b - d).natAbs) (by omega)
+            (R₁ := 3 ^ μ * (hexE (uAddr c d).val * (piCoeff (2 * (ν' + 1))).1
+                + (hexE (uAddr c d).val + hexF (uAddr c d).val)
+                  * ((piCoeff (2 * (ν' + 1))).1 + (piCoeff (2 * (ν' + 1))).2))
+              - 3 ^ ν' * (gE (gAddr A b) * (piCoeff (2 * μ + 1)).1
+                + (gE (gAddr A b) + gF (gAddr A b))
+                  * ((piCoeff (2 * μ + 1)).1 + (piCoeff (2 * μ + 1)).2)))
+            (R₂ := 3 ^ μ * (hexF (uAddr c d).val * (piCoeff (2 * (ν' + 1))).2)
+              - 3 ^ ν' * (gF (gAddr A b) * (piCoeff (2 * μ + 1)).2))
+            ?_ ?_)
+          · linear_combination R1
+          · linear_combination R2
+        · rcases lt_trichotomy d.natAbs b.natAbs with hlt | heq | hgt
+          · -- the pivot trace stands alone
+            obtain ⟨t', ht'⟩ : ∃ t', t = ν + 1 + t' := ⟨t - ν - 1, by omega⟩
+            obtain ⟨μ', hμ'⟩ : ∃ μ', μ + 1 = ν + 1 + μ' := ⟨μ - ν, by omega⟩
+            rw [ht', hμ'] at hcl
+            have hcl' : (3 : ℂ) ^ 0 * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1)
+                + (3 : ℂ) ^ (1 + t')
+                  * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+                    (b - d).natAbs
+                = (3 : ℂ) ^ (1 + μ')
+                  * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν) :=
+              mul_left_cancel₀ (pow_ne_zero ν (by norm_num : (3 : ℂ) ≠ 0))
+                (by rw [pow_zero]; linear_combination hcl)
+            obtain ⟨R1, R2⟩ := hexTrace_rows hcl'
+            refine gE_gF_ne (gAddr A b) (alone_dvd (p := 2 * μ + 1) (by omega)
+              (R₁ := 3 ^ μ' * (hexE (uAddr c d).val * (piCoeff (2 * ν)).1
+                  + (hexE (uAddr c d).val + hexF (uAddr c d).val)
+                    * ((piCoeff (2 * ν)).1 + (piCoeff (2 * ν)).2))
+                - 3 ^ t' * (gE (gAddr (A - c) (b - d)) * (piCoeff (b - d).natAbs).1
+                  + (gE (gAddr (A - c) (b - d)) + gF (gAddr (A - c) (b - d)))
+                    * ((piCoeff (b - d).natAbs).1 + (piCoeff (b - d).natAbs).2)))
+              (R₂ := 3 ^ μ' * (hexF (uAddr c d).val * (piCoeff (2 * ν)).2)
+                - 3 ^ t' * (gF (gAddr (A - c) (b - d)) * (piCoeff (b - d).natAbs).2))
+              ?_ ?_)
+            · linear_combination R1
+            · linear_combination R2
+          · omega
+          · -- the unit trace sits at the minimum: the `φ` functional kills
+            obtain ⟨i, hi⟩ : ∃ i, ν = μ + 1 + i := ⟨ν - μ - 1, by omega⟩
+            obtain ⟨j, hj⟩ : ∃ j, t = μ + 1 + j := ⟨t - μ - 1, by omega⟩
+            rw [hi, hj] at hcl
+            have hcl' : (3 : ℂ) ^ i * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1)
+                + (3 : ℂ) ^ j
+                  * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+                    (b - d).natAbs
+                = (3 : ℂ) ^ 0
+                  * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val)
+                    (2 * (μ + 1 + i)) :=
+              mul_left_cancel₀ (pow_ne_zero (μ + 1) (by norm_num : (3 : ℂ) ≠ 0))
+                (by rw [pow_zero]; linear_combination hcl)
+            obtain ⟨R1, R2⟩ := hexTrace_rows hcl'
+            obtain ⟨w₁, hw₁⟩ := phi_g_dvd (gAddr A b) (2 * μ + 1)
+            obtain ⟨w₃, hw₃⟩ := phi_g_dvd (gAddr (A - c) (b - d)) (b - d).natAbs
+            refine hex_diff_ne (uAddr c d) (phi_dvd (r := 2 * (μ + 1 + i)) (by omega)
+              (S := 3 ^ i * w₁ + 3 ^ j * w₃) ?_)
+            rw [pow_zero, one_mul] at R1 R2
+            linear_combination -R1 - R2 + (3 : ℤ) ^ i * hw₁ + (3 : ℤ) ^ j * hw₃
     · -- pivot odd, meta odd: the pivot trace alone
       exfalso
       rw [hν, hμ] at hcl
