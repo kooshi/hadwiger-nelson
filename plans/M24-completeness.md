@@ -531,19 +531,25 @@ Proven, in dependency order:
 | **`normBranch_odd_large`** | **both heights odd and ≥ 3 ⟹ impossible** |
 | **`normBranch_odd_one`** | **both heights one ⟹ the hex pair is `(1,5)` or `(5,1)`** — the four sporadics, proven rather than censused |
 
+| **`normBranch_odd_mixed`** | **one height one, the other ≥ 3 ⟹ exactly the glue-incident solution `(0,1,3,3)`** (cofactors derived by computer algebra) |
+
+**So the inner–inner classification is COMPLETE for non-negative seam heights**: every
+solution is a matching-crossing, a sporadic, or the glue-incident pair — the ten table
+rows with `b, d ≥ 0`.
+
 Left to do, precisely:
 
-1. **`normBranch_odd_mixed`** (one height one, the other ≥ 3): the same coordinate
-   extraction, then `Z(EC − EAC) ≡ 0 (mod 3)` forces `a = 0` (a 36-case `decide`
-   on the hex table, whose six coordinate pairs are distinct mod 3), and the four
-   integer equations then give `Z = 2m`, `m·EC = 3^{δ−1}`, `m·FC = 0`; since
-   `3 ∤ Z` this forces `δ = 1`, `Z = −2`, `m = −1`, `EC = −1`, i.e. `c = 3` — the
-   glue-incident solution `(0,1,3,3)`, and only it. Derived and checked
-   numerically; one attempt written and reverted for not compiling (the
-   `linear_combination` cofactors for the four-coordinate extraction need to be
-   derived by computer algebra rather than by hand, as `ii_key`'s were).
-2. **The ℤ-assembly**: `ii_norm_bound` and `ii_norm_complete` over signed heights,
-   by `normBranch_conj`/`normBranch_swap` down to the four proven cases.
+1. **Mixed-sign heights** (`b > 0 > d` and its mirror). The symmetry group
+   (`normBranch_swap`, `normBranch_conj`) has orbits `{(b,d),(d,b),(−b,−d),(−d,−b)}`,
+   so mixed signs form their own orbits and cannot be reduced away. They need the
+   same development with `π̄ = 1 − π` in place of `π` (still in `ℤ[ζ₆,π]`, so all the
+   machinery applies): clearing gives `√3^e·A + √3^b·B̄ = √3·A·B̄ + √3^{b+e+1}` with
+   `B̄ = ζ₆^{c'}·π̄^e`. Both-even collapses because `π/π̄ = σ²` and the backbone forces
+   `b = 0`; both-odd runs the same mod-3 congruence (`π̄`'s second coordinate is
+   `−py`, and the sign is irrelevant to divisibility); mixed parity dies on the same
+   modulus comparison. Estimated ~200 lines.
+2. **The assembly**: `ii_norm_bound` and `ii_norm_complete` over signed heights, by
+   `normBranch_conj` (both-negative → both-non-negative) plus item 1.
 3. **`oi_complete`**: the same programme for the outer–inner family, whose real
    form is `Re(u·conj w) − √3·Re u − Re w + 2√3/3 = 0` (verified) and whose
    parity signature is `b` even, `d` odd (measured).
