@@ -514,7 +514,285 @@ theorem bridge_ii (a : ZMod 6) (b : ℤ) (c : ZMod 6) (d : ℤ) :
   rw [innerPt, innerPt, metaAnchor_sub, word_succ a b]
   linear_combination scale_ii (word (a - 1) b) (word c d)
 
-/-! ### §W.2 The completeness theorems -/
+/-! ### §W.2 The `ℤ[ζ₆,π]` engine, generalized once
+
+M24 clears a conjugate word pair `ζ₆^x σ^h + ζ₆^{−x}σ^{−h}` by `√3^h` into its trace
+pair.  M25 needs the same with an arbitrary `ℤ[ζ₆]` coefficient in front — `g·ζ₆^A` on
+the two `g`-traces — so the object is `hexTrace t₁ t₂ h = θ·π^h + θ̄·π̄^h` for
+`θ = t₁ + t₂ζ₆`, and its four coordinates are linear in `(t₁, t₂)` and the `piCoeff`
+row.  M24's trace pair is the `θ = ζ₆^x` instance. -/
+
+private theorem conj_zeta6 : (starRingEnd ℂ) zeta6 = 1 - zeta6 := Triangle.one_sub_zeta6.symm
+
+private theorem conj_piC : (starRingEnd ℂ) piC = 1 - piC := by
+  apply Complex.ext
+  · simp [piC]
+    norm_num
+  · simp [piC]
+
+/-- The `ℤ[ζ₆]`-coordinates of `g·ζ₆^A = ζ₆^A + ζ₆^{A+1}`. -/
+def gE (A : ZMod 6) : ℤ := hexE A.val + hexE (A + 1).val
+
+/-- The `ζ₆`-coordinate of `g·ζ₆^A`. -/
+def gF (A : ZMod 6) : ℤ := hexF A.val + hexF (A + 1).val
+
+private theorem zeta6_succ (A : ZMod 6) :
+    zeta6 ^ ((A + 1).val : ℤ) = zeta6 * zeta6 ^ (A.val : ℤ) := by
+  have h := word_succ (A + 1) 0
+  rw [word_k0, add_sub_cancel_right, word_k0] at h
+  exact h
+
+private theorem gC_zeta6_pow (A : ZMod 6) :
+    gC * zeta6 ^ (A.val : ℤ) = ((gE A : ℤ) : ℂ) + ((gF A : ℤ) : ℂ) * zeta6 := by
+  rw [gC, gE, gF]
+  push_cast
+  linear_combination zeta6_zpow_hex A + zeta6_zpow_hex (A + 1) - zeta6_succ A
+
+/-- `θ·π^h + θ̄·π̄^h` for `θ = t₁ + t₂·ζ₆` — the M25 trace object. -/
+noncomputable def hexTrace (t₁ t₂ : ℤ) (h : ℕ) : ℂ :=
+  ((t₁ : ℂ) + (t₂ : ℂ) * zeta6) * piC ^ h
+    + ((t₁ : ℂ) + (t₂ : ℂ) * (1 - zeta6)) * (1 - piC) ^ h
+
+private theorem one_sub_piC_pow_coeff (n : ℕ) :
+    (1 - piC) ^ n = ((piCoeff n).1 : ℂ) + ((piCoeff n).2 : ℂ) - ((piCoeff n).2 : ℂ) * piC := by
+  induction n with
+  | zero => simp [piCoeff]
+  | succ k ih =>
+    rw [pow_succ, ih, piCoeff]
+    push_cast
+    linear_combination ((piCoeff k).2 : ℂ) * piC_sq
+
+/-- **The coordinate row of the trace object**, in `{1, ζ₆, π, ζ₆π}`: the whole M25 case
+analysis is read off these four integers. -/
+theorem hexTrace_coords (t₁ t₂ : ℤ) (h : ℕ) :
+    hexTrace t₁ t₂ h
+      = ((t₁ * (piCoeff h).1 + (t₁ + t₂) * ((piCoeff h).1 + (piCoeff h).2) : ℤ) : ℂ)
+        + ((-(t₂ * (piCoeff h).2) : ℤ) : ℂ) * zeta6
+        + ((-(t₂ * (piCoeff h).2) : ℤ) : ℂ) * piC
+        + ((2 * (t₂ * (piCoeff h).2) : ℤ) : ℂ) * (zeta6 * piC) := by
+  rw [hexTrace, piC_pow_coeff, one_sub_piC_pow_coeff]
+  push_cast
+  ring
+
+theorem inRing_hexTrace (t₁ t₂ : ℤ) (h : ℕ) : InRing (hexTrace t₁ t₂ h) :=
+  ⟨_, _, _, _, hexTrace_coords t₁ t₂ h⟩
+
+/-! ### §W.3 The clearing lemmas -/
+
+private theorem conj_zeta6_pow (c : ZMod 6) :
+    (starRingEnd ℂ) (zeta6 ^ (c.val : ℤ)) = zeta6 ^ ((-c).val : ℤ) := by
+  have h := word_conj c 0
+  rw [word_k0, neg_zero, word_k0] at h
+  exact h
+
+private theorem sqrt3_pow_mul_word_neg (c : ZMod 6) (e : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ e * word (-c) (-(e : ℤ))
+      = zeta6 ^ ((-c).val : ℤ) * (1 - piC) ^ e := by
+  have h := congrArg (starRingEnd ℂ) (sqrt3_pow_mul_word c e)
+  rw [map_mul, map_pow, Complex.conj_ofReal, word_conj, map_mul, map_pow, conj_piC,
+    conj_zeta6_pow] at h
+  exact h
+
+/-- The `g`-trace at a non-negative height clears to `hexTrace` at the address `A`. -/
+theorem gTrace_clear_nonneg (A : ZMod 6) (h : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ h * (gC * word A (h : ℤ) + gB * word (-A) (-(h : ℤ)))
+      = hexTrace (gE A) (gF A) h := by
+  have h1 := sqrt3_pow_mul_word A h
+  have h2 := sqrt3_pow_mul_word_neg A h
+  have hg := gC_zeta6_pow A
+  have hgb : gB * zeta6 ^ ((-A).val : ℤ) = ((gE A : ℤ) : ℂ) + ((gF A : ℤ) : ℂ) * (1 - zeta6) := by
+    have h := congrArg (starRingEnd ℂ) hg
+    rw [map_mul, gC_conj, conj_zeta6_pow, map_add, map_mul, map_intCast, map_intCast,
+      conj_zeta6] at h
+    exact h
+  rw [hexTrace, mul_add, ← mul_assoc, ← mul_assoc]
+  rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ h * gC * word A (h : ℤ)
+      = gC * (((Real.sqrt 3 : ℝ) : ℂ) ^ h * word A (h : ℤ)) by ring, h1,
+    show ((Real.sqrt 3 : ℝ) : ℂ) ^ h * gB * word (-A) (-(h : ℤ))
+      = gB * (((Real.sqrt 3 : ℝ) : ℂ) ^ h * word (-A) (-(h : ℤ))) by ring, h2,
+    ← mul_assoc, ← mul_assoc, hg, hgb]
+
+private theorem gC_eq_zeta6_gB : gC = zeta6 * gB := by
+  rw [gC, gB]
+  linear_combination zeta6_minpoly
+
+/-- Shifting the hex address by one trades `g` for `ḡ`: `g·ζ₆^{A−1} = ḡ·ζ₆^A`. -/
+private theorem g_shift (A : ZMod 6) (b : ℤ) : gC * word (A - 1) b = gB * word A b := by
+  rw [gC_eq_zeta6_gB, word_succ A b]
+  ring
+
+/-- The `g`-trace at a negative height clears at the reflected address `−A−1`. -/
+theorem gTrace_clear_neg (A : ZMod 6) (h : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ h * (gC * word A (-(h : ℤ)) + gB * word (-A) (h : ℤ))
+      = hexTrace (gE (-A - 1)) (gF (-A - 1)) h := by
+  have e1 : gC * word (-A - 1) (h : ℤ) = gB * word (-A) (h : ℤ) := g_shift (-A) (h : ℤ)
+  have e2 : gC * word A (-(h : ℤ)) = gB * word (A + 1) (-(h : ℤ)) := by
+    have h2 := g_shift (A + 1) (-(h : ℤ))
+    rwa [add_sub_cancel_right] at h2
+  rw [← gTrace_clear_nonneg (-A - 1) h, show (-(-A - 1) : ZMod 6) = A + 1 by ring, e1, e2]
+  ring
+
+/-- The unit trace at a non-negative height. -/
+theorem uTrace_clear_nonneg (c : ZMod 6) (h : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ h * (word c (h : ℤ) + word (-c) (-(h : ℤ)))
+      = hexTrace (hexE c.val) (hexF c.val) h := by
+  have h1 := sqrt3_pow_mul_word c h
+  have h2 := sqrt3_pow_mul_word_neg c h
+  have hg := zeta6_zpow_hex c
+  have hgb : zeta6 ^ ((-c).val : ℤ)
+      = ((hexE c.val : ℤ) : ℂ) + ((hexF c.val : ℤ) : ℂ) * (1 - zeta6) := by
+    have h := congrArg (starRingEnd ℂ) hg
+    rw [conj_zeta6_pow, map_add, map_mul, map_intCast, map_intCast, conj_zeta6] at h
+    exact h
+  rw [hexTrace, mul_add, h1, h2, hg, hgb]
+
+/-- The unit trace at a negative height, at the reflected address. -/
+theorem uTrace_clear_neg (c : ZMod 6) (h : ℕ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ h * (word c (-(h : ℤ)) + word (-c) (h : ℤ))
+      = hexTrace (hexE (-c).val) (hexF (-c).val) h := by
+  have := uTrace_clear_nonneg (-c) h
+  rw [neg_neg] at this
+  rw [← this]
+  ring
+
+/-! ### §W.4 The two finite facts that do the killing -/
+
+/-- A trace object at positive height vanishes only when its coefficient does — the
+`piCoeff` rows (`3 ∣ P`, `Q ≡ 1 mod 3`) forbid everything else. -/
+theorem hexTrace_eq_zero {t₁ t₂ : ℤ} {h : ℕ} (hh : 1 ≤ h) (h0 : hexTrace t₁ t₂ h = 0) :
+    t₁ = 0 ∧ t₂ = 0 := by
+  obtain ⟨h', rfl⟩ : ∃ h', h = h' + 1 := ⟨h - 1, by omega⟩
+  obtain ⟨k₁, k₂, -, -⟩ := inRing_coords_zero
+    (n₁ := t₁ * (piCoeff (h' + 1)).1 + (t₁ + t₂) * ((piCoeff (h' + 1)).1 + (piCoeff (h' + 1)).2))
+    (n₂ := -(t₂ * (piCoeff (h' + 1)).2))
+    (n₃ := -(t₂ * (piCoeff (h' + 1)).2))
+    (n₄ := 2 * (t₂ * (piCoeff (h' + 1)).2))
+    ((hexTrace_coords t₁ t₂ (h' + 1)).symm.trans h0)
+  have hQ : (piCoeff (h' + 1)).2 % 3 = 1 := piCoeff_snd_emod h'
+  obtain ⟨p, hp⟩ := three_dvd_piCoeff_fst h'
+  have hQ0 : (piCoeff (h' + 1)).2 ≠ 0 := by omega
+  have ht2 : t₂ = 0 := by
+    have hz : t₂ * (piCoeff (h' + 1)).2 = 0 := by omega
+    rcases mul_eq_zero.mp hz with h | h
+    · exact h
+    · exact absurd h hQ0
+  refine ⟨?_, ht2⟩
+  have hval : t₁ * (2 * (piCoeff (h' + 1)).1 + (piCoeff (h' + 1)).2) = 0 := by
+    rw [ht2] at k₁
+    linear_combination k₁
+  rcases mul_eq_zero.mp hval with h | h
+  · exact h
+  · omega
+
+/-- The `g`-coefficients are never both zero, and never both `≡ 0 mod 3`: the
+`g`-traces cannot vanish or be divisible by three at positive height. -/
+theorem gE_gF_ne : ∀ A : ZMod 6, ¬ ((3 : ℤ) ∣ gE A ∧ (3 : ℤ) ∣ gF A) := by decide
+
+/-- The unit coefficients are never both `≡ 0 mod 3` (M24's `hexE_hexF_not_both_dvd`),
+and their difference is never `≡ 0 mod 3` — the second is the `𝔭`-adic functional
+`φ(z) = n₁ − n₂` that separates a unit trace from a `g`-trace. -/
+theorem hex_diff_ne : ∀ c : ZMod 6, ¬ ((3 : ℤ) ∣ (hexE c.val - hexF c.val)) := by decide
+
+/-- …while every `g`-trace has `φ ≡ 0`: `φ(g) = 1 + (−1) = 0`. -/
+theorem gE_sub_gF_dvd : ∀ A : ZMod 6, (3 : ℤ) ∣ (gE A - gF A) := by decide
+
+/-! ### §W.5 The master trace equation
+
+Expanding `normSq (g·u − y − z·v) = R` on units gives a constant plus three conjugate
+pairs: the `g`-trace of `u`, the `g`-trace of `u·v̄`, and the plain trace of `v`.  One
+lemma covers all four families; the family only fixes `(y, z, R)`. -/
+
+/-- The `g`-trace of a lattice word: `g·w + ḡ·w̄`. -/
+noncomputable def gTr (A : ZMod 6) (b : ℤ) : ℂ := gC * word A b + gB * word (-A) (-b)
+
+/-- The plain trace of a lattice word. -/
+noncomputable def uTr (c : ZMod 6) (d : ℤ) : ℂ := word c d + word (-c) (-d)
+
+private theorem word_mul_inv (a : ZMod 6) (b : ℤ) : word a b * word (-a) (-b) = 1 := by
+  rw [← word_add, add_neg_cancel, add_neg_cancel, word]
+  simp
+
+private theorem word_mul_neg (a c : ZMod 6) (b d : ℤ) :
+    word a b * word (-c) (-d) = word (a - c) (b - d) := by
+  rw [← word_add, sub_eq_add_neg, sub_eq_add_neg]
+
+/-- **The master identity**: the norm equation of the meta axis, expanded. -/
+theorem web_master {A c : ZMod 6} {b d : ℤ} {y z R : ℝ}
+    (h : normSq (gC * word A b - (y : ℂ) - (z : ℂ) * word c d) = R) :
+    ((3 + y ^ 2 + z ^ 2 - R : ℝ) : ℂ) - (y : ℂ) * gTr A b - (z : ℂ) * gTr (A - c) (b - d)
+      + ((y : ℂ) * (z : ℂ)) * uTr c d = 0 := by
+  have hu := word_mul_inv A b
+  have hv := word_mul_inv c d
+  have hX1 := word_mul_neg A c b d
+  have hX2 := word_mul_neg c A d b
+  have hX := Complex.mul_conj (gC * word A b - (y : ℂ) - (z : ℂ) * word c d)
+  rw [h, map_sub, map_sub, map_mul, map_mul, gC_conj, Complex.conj_ofReal,
+    Complex.conj_ofReal, word_conj, word_conj] at hX
+  rw [gTr, gTr, uTr, show (-(A - c) : ZMod 6) = c - A by ring, show -(b - d) = d - b by ring]
+  push_cast
+  linear_combination hX - (word A b * word (-A) (-b)) * gC_mul_gB - 3 * hu
+    - (z : ℂ) ^ 2 * hv + (z : ℂ) * gC * hX1 + (z : ℂ) * gB * hX2
+
+/-! ### §W.6 Clearing at an arbitrary integer height -/
+
+/-- The cleared address of a `g`-trace: reflected when the seam height is negative. -/
+def gAddr (A : ZMod 6) (b : ℤ) : ZMod 6 := if 0 ≤ b then A else -A - 1
+
+/-- The cleared address of a plain trace. -/
+def uAddr (c : ZMod 6) (d : ℤ) : ZMod 6 := if 0 ≤ d then c else -c
+
+theorem gTrace_clear (A : ZMod 6) (b : ℤ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ b.natAbs * gTr A b
+      = hexTrace (gE (gAddr A b)) (gF (gAddr A b)) b.natAbs := by
+  rcases le_or_gt 0 b with hb | hb
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = (n : ℤ) := ⟨b.natAbs, by omega⟩
+    rw [gAddr, if_pos hb, gTr, show ((n : ℤ)).natAbs = n by simp]
+    exact gTrace_clear_nonneg A n
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = -(n : ℤ) := ⟨b.natAbs, by omega⟩
+    rw [gAddr, if_neg (by omega), gTr, neg_neg, show (-(n : ℤ)).natAbs = n by simp]
+    exact gTrace_clear_neg A n
+
+theorem uTrace_clear (c : ZMod 6) (d : ℤ) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ d.natAbs * uTr c d
+      = hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) d.natAbs := by
+  rcases le_or_gt 0 d with hd | hd
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, d = (n : ℤ) := ⟨d.natAbs, by omega⟩
+    rw [uAddr, if_pos hd, uTr, show ((n : ℤ)).natAbs = n by simp]
+    exact uTrace_clear_nonneg c n
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ, d = -(n : ℤ) := ⟨d.natAbs, by omega⟩
+    rw [uAddr, if_neg (by omega), uTr, neg_neg, show (-(n : ℤ)).natAbs = n by simp]
+    exact uTrace_clear_neg c n
+
+/-! ### §W.7 The two coordinate rows
+
+Only two of the four coordinates are independent: `n₃ = n₂` and `n₄ = −2n₂`.  Every kill
+below reads these two rows, mostly modulo three. -/
+
+/-- The two independent integer rows of a three-term trace identity. -/
+theorem hexTrace_rows {t₁ t₂ u₁ u₂ v₁ v₂ : ℤ} {p q r i j l : ℕ}
+    (heq : (3 : ℂ) ^ i * hexTrace t₁ t₂ p + (3 : ℂ) ^ j * hexTrace u₁ u₂ q
+      = (3 : ℂ) ^ l * hexTrace v₁ v₂ r) :
+    (3 ^ i * (t₁ * (piCoeff p).1 + (t₁ + t₂) * ((piCoeff p).1 + (piCoeff p).2))
+        + 3 ^ j * (u₁ * (piCoeff q).1 + (u₁ + u₂) * ((piCoeff q).1 + (piCoeff q).2))
+        - 3 ^ l * (v₁ * (piCoeff r).1 + (v₁ + v₂) * ((piCoeff r).1 + (piCoeff r).2)) = 0)
+      ∧ (3 ^ i * (t₂ * (piCoeff p).2) + 3 ^ j * (u₂ * (piCoeff q).2)
+        - 3 ^ l * (v₂ * (piCoeff r).2) = 0) := by
+  obtain ⟨k₁, k₂, -, -⟩ := inRing_coords_zero
+    (n₁ := 3 ^ i * (t₁ * (piCoeff p).1 + (t₁ + t₂) * ((piCoeff p).1 + (piCoeff p).2))
+        + 3 ^ j * (u₁ * (piCoeff q).1 + (u₁ + u₂) * ((piCoeff q).1 + (piCoeff q).2))
+        - 3 ^ l * (v₁ * (piCoeff r).1 + (v₁ + v₂) * ((piCoeff r).1 + (piCoeff r).2)))
+    (n₂ := -(3 ^ i * (t₂ * (piCoeff p).2) + 3 ^ j * (u₂ * (piCoeff q).2)
+        - 3 ^ l * (v₂ * (piCoeff r).2)))
+    (n₃ := -(3 ^ i * (t₂ * (piCoeff p).2) + 3 ^ j * (u₂ * (piCoeff q).2)
+        - 3 ^ l * (v₂ * (piCoeff r).2)))
+    (n₄ := 2 * (3 ^ i * (t₂ * (piCoeff p).2) + 3 ^ j * (u₂ * (piCoeff q).2)
+        - 3 ^ l * (v₂ * (piCoeff r).2)))
+    (by linear_combination (norm := (push_cast; ring)) heq
+          - (3 : ℂ) ^ i * hexTrace_coords t₁ t₂ p
+          - (3 : ℂ) ^ j * hexTrace_coords u₁ u₂ q + (3 : ℂ) ^ l * hexTrace_coords v₁ v₂ r)
+  exact ⟨k₁, by omega⟩
+
+/-! ### §W.5 The completeness theorems -/
 
 /-- **oo completeness at the metaPivot axis, all three webs**: exactly the four table
 chords per web — the θσ resistance leaves no infinite family. -/
