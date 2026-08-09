@@ -84,6 +84,14 @@ noncomputable def fourLadder : Set ℂ :=
   ⋃ k : Fin 4, ({z | ∃ a b, z = outerPt (anchor k).1 (anchor k).2 a b}
     ∪ {z | ∃ a b, z = innerPt (anchor k).1 (anchor k).2 a b})
 
+/-- Membership intro: every outer lattice point of an anchor is in the object. -/
+theorem outer_mem_fourLadder (k : Fin 4) (a : ZMod 6) (b : ℤ) :
+    outerPt (anchor k).1 (anchor k).2 a b ∈ fourLadder := by sorry
+
+/-- Membership intro: every inner lattice point of an anchor is in the object. -/
+theorem inner_mem_fourLadder (k : Fin 4) (a : ZMod 6) (b : ℤ) :
+    innerPt (anchor k).1 (anchor k).2 a b ∈ fourLadder := by sorry
+
 /-- M24's matched pair is the first two ladders: the lower bound transports. -/
 theorem ladderSet_subset_fourLadder : ladderSet ⊆ fourLadder := by sorry
 
@@ -154,13 +162,14 @@ theorem innerPt_hexRot (p q q' : ℂ) (k : ZMod 6) (a : ZMod 6) (b : ℤ)
     (h : q' - p = zeta6 ^ (k.val : ℤ) * (q - p)) :
     innerPt p q' a b = innerPt p q (a + k) b := by sorry
 
-/-- **Naturality**: a rotation about any center carries ladder points to ladder points
-of the rotated anchors — the web transports are instances. -/
-theorem outerPt_map_rot (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
+/-- **Affine equivariance**: any map `z ↦ w + r·(z − w)` carries ladder points to
+ladder points of the mapped anchors (no unit-modulus needed) — the web transports are
+the `r = ζ₆²` instances. -/
+theorem outerPt_affine (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
     w + r * (outerPt p q a b - w)
       = outerPt (w + r * (p - w)) (w + r * (q - w)) a b := by sorry
 
-theorem innerPt_map_rot (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
+theorem innerPt_affine (w r p q : ℂ) (a : ZMod 6) (b : ℤ) :
     w + r * (innerPt p q a b - w)
       = innerPt (w + r * (p - w)) (w + r * (q - w)) a b := by sorry
 
@@ -232,7 +241,9 @@ theorem sqrt3_dvd_iff (c₀ c₁ c₂ c₃ : ℤ) :
 The b-independent table measured by the E4 probe (33 collapsed classes, no self-loop):
 outer/inner × 6 addresses per anchor, fused points consistent by construction. -/
 
-/-- The colour table per (anchor, circle, hex address) — the E4 probe's table. -/
+/-- The colour table per (anchor, circle, hex address); circle `false` = outer,
+`true` = inner (the M24 `colTab` convention). The E4 probe's measured table, consistent
+on every fused point by construction. -/
 def metaColTab : Fin 4 → Bool → ZMod 6 → Fin 4
   | 0, false => ![1, 0, 3, 1, 0, 3]
   | 0, true => ![2, 2, 0, 0, 1, 1]

@@ -323,3 +323,27 @@ is "prove"; the census artifacts are "test"; no assumed hypotheses anywhere)
 * No completeness statement needed strengthening: the j-quantified forms carry
   their own reduction (isometry + re-addressing), and the hub disjunct's
   address arithmetic (`c − 2j = 3`) was re-checked against the census.
+
+## Modeling pass 3 — experience (2026-08-09, fresh invocation)
+
+Consumers walked: M26's implementation (seven ladders — the heaviest future
+reader), the automation inside M25's own proofs, and the census operator.
+Skeleton now 30 obligations; changes:
+
+1. **`outerPt_map_rot` → `outerPt_affine`** (and inner): the statement has no
+   unit-modulus hypothesis — it is affine equivariance, and a name claiming
+   rotation would plant a false belief in every future guess. Docstring names
+   the transports as the `r = ζ₆²` instances.
+2. **`metaColTab` docstring** now states the Bool convention (`false` = outer,
+   M24's `colTab` convention) — the cold read could not recover it.
+3. **Membership intro API added** (`outer_mem_fourLadder`/`inner_mem_...`):
+   the χ-theorem consumers and M26's subset arguments need them; without them
+   every use site re-unfolds the union.
+4. Checked and kept: the all-web iff shape is exactly what `exact?` finds from
+   a `dist … = 1` goal and unifies at any `j` (the domain pass's collapse
+   validated from the consumer side); zero simp tags (house precedent); table
+   names in the M24 currency; the engine surface (`InRing12`, `sqrt3_dvd_iff`,
+   `z12c*`, `piCoeff` reuse) is public for M26–M27.
+5. Census promotion contract re-affirmed (P3.1): the tools/couple.py extension
+   at implementation must cross-check ALL the MetaLadder tables including the
+   shifted webs, and its self-test must carry a planted disagreement.
