@@ -862,6 +862,50 @@ private theorem u_rational {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) {Z : ZMod 6} {N :
       · exact h1 ▸ dvd_zero 3
     exact hexE_hexF_not_both_dvd Z.val (ZMod.val_lt Z) ⟨hE, hF3⟩
 
+/-! ### §E.8 The height-two pin values and the boundary tables -/
+
+private theorem piCoeff_two : piCoeff 2 = (-3, 1) := rfl
+
+private theorem hexF_zero_hexE' : ∀ y : ZMod 6, hexF y.val = 0 → hexE y.val = 1 ∨ hexE y.val = -1 := by
+  decide
+
+/-- A unit trace at height two equal to a rational integer pins that integer to `∓5`. -/
+private theorem u_pin_two {Z : ZMod 6} {N : ℤ}
+    (h : hexTrace (1 * hexE Z.val) (1 * hexF Z.val) 2 = ((N : ℤ) : ℂ)) :
+    N = -5 ∨ N = 5 := by
+  obtain ⟨hF, hval⟩ := hexTrace_pin (by norm_num) h
+  rw [piCoeff_two] at hval
+  have hF0 : hexF Z.val = 0 := by linarith
+  rcases hexF_zero_hexE' Z hF0 with h1 | h1 <;> rw [h1] at hval <;> omega
+
+/-- `3^v ∣ (gE X − gE Y)` with `|gE X − gE Y| ≤ 4` forces equality once `v ≥ 2`. -/
+private theorem gE_diff_small : ∀ X Y : ZMod 6, -4 ≤ gE X - gE Y ∧ gE X - gE Y ≤ 4 := by
+  decide
+
+private theorem gE_gF_inj : ∀ X Y : ZMod 6, gE X = gE Y → gF X = gF Y → X = Y := by decide
+
+/-- **The live-class trichotomy**: with all three heights positive and both `g`-traces
+below the constant, the only surviving bottom is the two-`g`-trace tie.  One lemma
+replaces the alone/φ case bash in all eight families. -/
+private theorem live_tie {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r s : ℕ}
+    (hC₁ : ¬ (3 : ℤ) ∣ C₁) (hC₂ : ¬ (3 : ℤ) ∣ C₂) (hC₃ : ¬ (3 : ℤ) ∣ C₃)
+    (hm : 1 ≤ m) (hn : 1 ≤ n) (hk : 1 ≤ k) (hps : p < s) (hqs : q < s)
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ q * hexTrace (C₂ * gE Y) (C₂ * gF Y) n
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) :
+    p = q ∧ p < r := by
+  rcases Nat.lt_or_ge p r with hrp | hrp
+  · rcases lt_trichotomy p q with h1 | h1 | h1
+    · exact absurd (kill_alone_one hC₁ hm h1 hrp hps heq) not_false
+    · exact ⟨h1, hrp⟩
+    · rcases Nat.lt_or_ge q r with hrq | hrq
+      · exact absurd (kill_alone_two hC₂ hn h1 hrq hqs heq) not_false
+      · exact absurd (kill_phi hC₃ hk (by omega) hrq (by omega) heq) not_false
+  · rcases Nat.lt_or_ge q r with hrq | hrq
+    · exact absurd (kill_alone_two hC₂ hn (by omega) hrq hqs heq) not_false
+    · exact absurd (kill_phi hC₃ hk hrp hrq (by omega) heq) not_false
+
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
 Master frame `(hexPivot 3, hexPivot 4) = (0, 2m−ζ₆)`; every web `(a, a+1)` is its
