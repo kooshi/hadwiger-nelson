@@ -736,6 +736,74 @@ private theorem kill_phi {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r
   · exact absurd h hr3
   · linarith
 
+private theorem pow_dvd_of_not_dvd {C A : ℤ} {e : ℕ} (hC : ¬ (3 : ℤ) ∣ C)
+    (h : (3 : ℤ) ^ e ∣ C * A) : (3 : ℤ) ^ e ∣ A :=
+  ((Int.prime_three.coprime_iff_not_dvd.mpr hC).pow_left).dvd_of_dvd_mul_left h
+
+/-- **The equal-heights collapse**: two `g`-traces at the SAME height tie at the bottom
+with the unit trace at height zero, so linearity merges them into one trace equal to a
+rational integer — and the pin reads off both coordinates. -/
+private theorem kill_equal {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m p r' s' : ℕ} (hm : 1 ≤ m)
+    (heq : (3 : ℂ) ^ p * hexTrace (C₁ * gE X) (C₁ * gF X) m
+        + (3 : ℂ) ^ p * hexTrace (C₂ * gE Y) (C₂ * gF Y) m
+      = (κ : ℂ) * 3 ^ (p + s')
+        + (3 : ℂ) ^ (p + r') * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) 0) :
+    C₁ * gF X + C₂ * gF Y = 0
+      ∧ (C₁ * gE X + C₂ * gE Y) * (2 * (piCoeff m).1 + (piCoeff m).2)
+        = κ * 3 ^ s' + 3 ^ r' * (2 * (C₃ * hexE Z.val) + C₃ * hexF Z.val) := by
+  have hadd := hexTrace_add (C₁ * gE X) (C₁ * gF X) (C₂ * gE Y) (C₂ * gF Y) m
+  have h0 := hexTrace_zero_height (C₃ * hexE Z.val) (C₃ * hexF Z.val)
+  refine hexTrace_pin hm (r := κ * 3 ^ s'
+    + 3 ^ r' * (2 * (C₃ * hexE Z.val) + C₃ * hexF Z.val)) ?_
+  refine mul_left_cancel₀ (pow_ne_zero p (by norm_num : (3 : ℂ) ≠ 0)) ?_
+  rw [← hadd]
+  rw [h0] at heq
+  push_cast
+  push_cast at heq
+  linear_combination heq
+
+/-- **The adjacent-heights kill**: two `g`-traces at heights `m`, `m+1` tie at the
+bottom with two clear levels above — M25's mod-9 refutation, with the unit coefficient
+stripped. -/
+private theorem kill_adjacent {C C₃ κ : ℤ} {X Y Z : ZMod 6} {m k p r s : ℕ}
+    (hC : ¬ (3 : ℤ) ∣ C) (hm : 3 ≤ m) (hr : p + 2 ≤ r) (hs : p + 2 ≤ s)
+    (heq : (3 : ℂ) ^ p * hexTrace (C * gE X) (C * gF X) m
+        + (3 : ℂ) ^ p * hexTrace (C * gE Y) (C * gF Y) (m + 1)
+      = (κ : ℂ) * 3 ^ s
+        + (3 : ℂ) ^ r * hexTrace (C₃ * hexE Z.val) (C₃ * hexF Z.val) k) : False := by
+  obtain ⟨R1, R2⟩ := row_pair heq
+  obtain ⟨r', rfl⟩ : ∃ r', r = p + 2 + r' := ⟨r - p - 2, by omega⟩
+  obtain ⟨s', rfl⟩ : ∃ s', s = p + 2 + s' := ⟨s - p - 2, by omega⟩
+  have hp3 : ((3 : ℤ) ^ p) ≠ 0 := pow_ne_zero p (by norm_num)
+  -- both rows are 9-divisible after the common factor is cancelled
+  have hd1 : (3 : ℤ) ^ 2 ∣ C * (gE X * (piCoeff m).1
+      + (gE X + gF X) * ((piCoeff m).1 + (piCoeff m).2)
+      + (gE Y * (piCoeff (m + 1)).1
+        + (gE Y + gF Y) * ((piCoeff (m + 1)).1 + (piCoeff (m + 1)).2))) := by
+    refine ⟨κ * 3 ^ s' + 3 ^ r' * (C₃ * hexE Z.val * (piCoeff k).1
+      + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2)), ?_⟩
+    have hz : (3 : ℤ) ^ p * (C * (gE X * (piCoeff m).1
+        + (gE X + gF X) * ((piCoeff m).1 + (piCoeff m).2)
+        + (gE Y * (piCoeff (m + 1)).1
+          + (gE Y + gF Y) * ((piCoeff (m + 1)).1 + (piCoeff (m + 1)).2)))
+        - 3 ^ 2 * (κ * 3 ^ s' + 3 ^ r' * (C₃ * hexE Z.val * (piCoeff k).1
+          + (C₃ * hexE Z.val + C₃ * hexF Z.val) * ((piCoeff k).1 + (piCoeff k).2)))) = 0 := by
+      linear_combination R1
+    rcases mul_eq_zero.mp hz with h | h
+    · exact absurd h hp3
+    · linarith
+  have hd2 : (3 : ℤ) ^ 2 ∣ C * (gF X * (piCoeff m).2 + gF Y * (piCoeff (m + 1)).2) := by
+    refine ⟨3 ^ r' * (C₃ * hexF Z.val * (piCoeff k).2), ?_⟩
+    have hz : (3 : ℤ) ^ p * (C * (gF X * (piCoeff m).2 + gF Y * (piCoeff (m + 1)).2)
+        - 3 ^ 2 * (3 ^ r' * (C₃ * hexF Z.val * (piCoeff k).2))) = 0 := by
+      linear_combination R2
+    rcases mul_eq_zero.mp hz with h | h
+    · exact absurd h hp3
+    · linarith
+  obtain ⟨W₁, hW₁⟩ := pow_dvd_of_not_dvd hC hd1
+  obtain ⟨W₂, hW₂⟩ := pow_dvd_of_not_dvd hC hd2
+  exact adjacent_kill X Y hm (le_refl 2) hW₁ hW₂
+
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
 Master frame `(hexPivot 3, hexPivot 4) = (0, 2m−ζ₆)`; every web `(a, a+1)` is its
