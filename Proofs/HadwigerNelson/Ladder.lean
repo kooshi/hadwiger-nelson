@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Triangle
+import Mathlib.NumberTheory.Real.Irrational
 
 /-!
 # M24 — The matched ladder pair: chord completeness and χ = 4 (skeleton)
@@ -804,7 +805,116 @@ theorem fusion_ii {p q : ℂ} (h : dist p q = 1) (a : ZMod 6) (b : ℤ) (c : ZMo
     (eq_of_lin (s := 2 * (Real.sqrt 3 / 3)) (t := 1) (by positivity) (by linarith)
       (by nlinarith [sq_sqrt3]))
 
-/-! ## §G The completeness core (E2/E3/E5) -/
+/-! ## §G The completeness core (E2/E3/E5)
+
+The core rests on one arithmetic fact — that `{1, √3, √11, √33}` is `ℚ`-independent — plus
+the seam's infinite order. Together they split the cleared chord equation by the seam
+heights' parities: mixed parities are impossible outright, both-even collapses through the
+seam's infinite order, and both-odd becomes a single equation in `ℤ[ζ₆, π]`,
+`π = √3·σ = (1+i√11)/2`, where a congruence modulo three closes it. -/
+
+private theorem not_isSquare_of {n : ℕ} (hn : ∀ r : ℕ, r ≤ n → r * r ≠ n) : ¬ IsSquare n := by
+  rintro ⟨r, hr⟩
+  refine hn r ?_ hr.symm
+  nlinarith [hr, Nat.zero_le r]
+
+private theorem irr_sqrt3 : Irrational (Real.sqrt 3) := by
+  rw [show (3 : ℝ) = ((3 : ℕ) : ℝ) by norm_num]
+  exact irrational_sqrt_natCast_iff.mpr (not_isSquare_of (by decide))
+
+private theorem irr_sqrt11 : Irrational (Real.sqrt 11) := by
+  rw [show (11 : ℝ) = ((11 : ℕ) : ℝ) by norm_num]
+  exact irrational_sqrt_natCast_iff.mpr (not_isSquare_of (by decide))
+
+private theorem irr_sqrt33 : Irrational (Real.sqrt 33) := by
+  rw [show (33 : ℝ) = ((33 : ℕ) : ℝ) by norm_num]
+  exact irrational_sqrt_natCast_iff.mpr (not_isSquare_of (by decide))
+
+/-- No rational squares to a non-square natural: the only arithmetic input the
+independence proof needs. -/
+private theorem no_rat_sq {n : ℕ} (hn : Irrational (Real.sqrt n)) (r : ℚ) :
+    r ^ 2 ≠ (n : ℚ) := by
+  intro he
+  refine hn ⟨|r|, ?_⟩
+  have hcast : ((r : ℝ)) ^ 2 = (n : ℝ) := by exact_mod_cast congrArg (fun x : ℚ => (x : ℝ)) he
+  rw [← hcast, Real.sqrt_sq_eq_abs]
+  push_cast
+  rfl
+
+/-- `1` and `√3` are `ℚ`-independent. -/
+private theorem indep_sqrt3 {r s : ℚ} (h : (r : ℝ) + s * Real.sqrt 3 = 0) : r = 0 ∧ s = 0 := by
+  by_cases hs : s = 0
+  · subst hs
+    refine ⟨?_, rfl⟩
+    simpa using h
+  · exfalso
+    have hval : Real.sqrt 3 = ((-r / s : ℚ) : ℝ) := by
+      push_cast
+      field_simp at h ⊢
+      linarith [h]
+    have : ((-r / s : ℚ) : ℝ) ^ 2 = (3 : ℝ) := by
+      rw [← hval]
+      nlinarith [sq_sqrt3]
+    refine no_rat_sq (n := 3) irr_sqrt3 (-r / s) ?_
+    exact_mod_cast this
+
+/-- **The independence of the radical basis.** Every cleared equation of this milestone is
+read through it: matching coefficients over `{1, √3, √11, √33}` turns a complex identity
+into integer identities. (M25–M27 reuse it verbatim; it is stated over `ℚ` so integer
+coefficients arrive by `push_cast`.) -/
+theorem sqrt_indep {e₁ e₃ e₁₁ e₃₃ : ℚ}
+    (h : (e₁ : ℝ) + e₃ * Real.sqrt 3 + e₁₁ * Real.sqrt 11 + e₃₃ * Real.sqrt 33 = 0) :
+    e₁ = 0 ∧ e₃ = 0 ∧ e₁₁ = 0 ∧ e₃₃ = 0 := by
+  have h33 : Real.sqrt 33 = Real.sqrt 3 * Real.sqrt 11 := by
+    rw [show (33 : ℝ) = 3 * 11 by norm_num, Real.sqrt_mul (by norm_num)]
+  rw [h33] at h
+  set N : ℚ := e₁₁ ^ 2 - 3 * e₃₃ ^ 2 with hN
+  set P : ℚ := e₁ * e₁₁ - 3 * e₃ * e₃₃ with hP
+  set Q : ℚ := e₃ * e₁₁ - e₁ * e₃₃ with hQ
+  -- multiply by the `√3`-conjugate of the `√11`-part: the `√3·√11` terms cancel
+  have hmul : (P : ℝ) + Q * Real.sqrt 3 + N * Real.sqrt 11 = 0 := by
+    have hc := congrArg (fun x : ℝ => x * ((e₁₁ : ℝ) - (e₃₃ : ℝ) * Real.sqrt 3)) h
+    simp only [zero_mul] at hc
+    rw [hP, hQ, hN]
+    push_cast
+    linear_combination hc + ((e₃ : ℝ) * e₃₃ + (e₃₃ : ℝ) ^ 2 * Real.sqrt 11) * sq_sqrt3
+  -- squaring removes the `√11`
+  have hsq : ((P ^ 2 + 3 * Q ^ 2 - 11 * N ^ 2 : ℚ) : ℝ) + ((2 * P * Q : ℚ) : ℝ) * Real.sqrt 3
+      = 0 := by
+    have h2 : ((P : ℝ) + Q * Real.sqrt 3) ^ 2 = ((N : ℝ) * Real.sqrt 11) ^ 2 := by
+      rw [show (P : ℝ) + Q * Real.sqrt 3 = -((N : ℝ) * Real.sqrt 11) by linarith]
+      ring
+    push_cast
+    linear_combination h2 - (Q : ℝ) ^ 2 * sq_sqrt3 + (N : ℝ) ^ 2 * sq_sqrt11
+  obtain ⟨hz1, hz2⟩ := indep_sqrt3 hsq
+  have hPQ : P * Q = 0 := by linarith
+  have hN0 : N = 0 := by
+    by_contra hNz
+    rcases mul_eq_zero.mp hPQ with hPz | hQz
+    · refine no_rat_sq (n := 33) irr_sqrt33 (3 * Q / N) ?_
+      have h3 : 3 * Q ^ 2 = 11 * N ^ 2 := by rw [hPz] at hz1; linarith
+      field_simp
+      linear_combination 3 * h3
+    · refine no_rat_sq (n := 11) irr_sqrt11 (P / N) ?_
+      have h3 : P ^ 2 = 11 * N ^ 2 := by rw [hQz] at hz1; linarith
+      field_simp
+      linear_combination h3
+  have h33z : e₃₃ = 0 := by
+    by_contra hz
+    refine no_rat_sq (n := 3) irr_sqrt3 (e₁₁ / e₃₃) ?_
+    have h3 : e₁₁ ^ 2 = 3 * e₃₃ ^ 2 := by rw [hN] at hN0; linarith
+    field_simp
+    linear_combination h3
+  have h11z : e₁₁ = 0 := by
+    rw [hN, h33z] at hN0
+    have : e₁₁ ^ 2 = 0 := by linarith
+    exact pow_eq_zero_iff (n := 2) (by norm_num) |>.mp this
+  have hrest : (e₁ : ℝ) + (e₃ : ℝ) * Real.sqrt 3 = 0 := by
+    rw [h11z, h33z] at h
+    push_cast at h ⊢
+    linarith
+  obtain ⟨hx, hy⟩ := indep_sqrt3 hrest
+  exact ⟨hx, hy, h11z, h33z⟩
 
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
