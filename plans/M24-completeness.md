@@ -349,6 +349,24 @@ does the 4×4 case split inline, citing §D–§F per case); the axis-1/√3 Lea
 instances (M25 — the derivations are §0.4's exact record); ladder/tube
 decomposition machinery (the full-lattice object needs none).
 
+**Domain pass (2026-08-08).** One substantive convergence: **the address type
+is `ZMod 6 × ℤ`** (was ℤ × ℤ with `6 ∣` conditions and ZMod casts at the
+tables — two currencies for one fact). Torsion × free IS the backbone
+theorem, so addresses become canonical names: every completeness RHS is now
+plain ZMod-6 equalities (`c = a + 3`, not `6 ∣ c − a − 3`), table membership
+has no casts, injectivity is genuine injectivity (`word_inj` added), and the
+colouring properness will close by 6-element decides. Cost: one periodicity
+child inside `word_add` (ζ₆^val arithmetic), paid once. Also added
+`word_neg_iff` (the matching branch's address bridge, −1 = ζ₆³ — a missing
+joint every cross-family proof needs). Confirmed after stress: two point
+defs (families are genuinely distinct master instances — a parametrized
+collapse would trade six readable theorems for one unreadable one), anchored
+`LadderSet`, ℂ-carrier statements with NO auxiliary ring type in the public
+surface (the ℤ[ζ₆,π] coordinate work is proof machinery — obligation pass),
+list tables, no Möbius `def` (the division-free equation is the normal
+form), the classical dite decode with the four decode lemmas as the honest
+well-definedness joints. 38 obligations after the pass; elaborates clean.
+
 ## §4 Gate
 
 The full house gate (build green via scripts/build.sh, zero sorry, axioms
