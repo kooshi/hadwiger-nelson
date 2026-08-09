@@ -792,6 +792,250 @@ theorem hexTrace_rows {t₁ t₂ u₁ u₂ v₁ v₂ : ℤ} {p q r i j l : ℕ}
           - (3 : ℂ) ^ j * hexTrace_coords u₁ u₂ q + (3 : ℂ) ^ l * hexTrace_coords v₁ v₂ r)
   exact ⟨k₁, by omega⟩
 
+/-! ### §W.8 The kill toolkit -/
+
+private theorem sqrt3_pow_two_mul (k : ℕ) : ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * k) = 3 ^ k := by
+  rw [pow_mul, show ((Real.sqrt 3 : ℝ) : ℂ) ^ 2 = 3 from by rw [pow_two]; exact sqrt3_cast_sq]
+
+private theorem inRing_three_pow (k : ℕ) : InRing ((3 : ℂ) ^ k) := by
+  rw [show ((3 : ℂ) ^ k) = (((3 ^ k : ℤ)) : ℂ) by push_cast; ring]
+  exact InRing.intCast _
+
+private theorem inRing_pow_trace (e : ℕ) (t₁ t₂ : ℤ) (h : ℕ) :
+    InRing ((3 : ℂ) ^ e * hexTrace t₁ t₂ h) :=
+  (inRing_three_pow e).mul (inRing_hexTrace t₁ t₂ h)
+
+theorem hexTrace_add (t₁ t₂ u₁ u₂ : ℤ) (h : ℕ) :
+    hexTrace t₁ t₂ h + hexTrace u₁ u₂ h = hexTrace (t₁ + u₁) (t₂ + u₂) h := by
+  rw [hexTrace, hexTrace, hexTrace]
+  push_cast
+  ring
+
+theorem hexTrace_zero_height (t₁ t₂ : ℤ) : hexTrace t₁ t₂ 0 = ((2 * t₁ + t₂ : ℤ) : ℂ) := by
+  rw [hexTrace]
+  push_cast
+  ring
+
+/-- **The pin**: a trace object equal to a rational integer has no `ζ₆`-part, and its
+value is `t₁·(2P+Q)` — a number never divisible by three unless `t₁` is. -/
+theorem hexTrace_pin {t₁ t₂ r : ℤ} {h : ℕ} (hh : 1 ≤ h) (heq : hexTrace t₁ t₂ h = (r : ℂ)) :
+    t₂ = 0 ∧ t₁ * (2 * (piCoeff h).1 + (piCoeff h).2) = r := by
+  obtain ⟨h', rfl⟩ : ∃ h', h = h' + 1 := ⟨h - 1, by omega⟩
+  obtain ⟨k₁, k₂, -, -⟩ := inRing_coords_zero
+    (n₁ := t₁ * (piCoeff (h' + 1)).1
+        + (t₁ + t₂) * ((piCoeff (h' + 1)).1 + (piCoeff (h' + 1)).2) - r)
+    (n₂ := -(t₂ * (piCoeff (h' + 1)).2))
+    (n₃ := -(t₂ * (piCoeff (h' + 1)).2))
+    (n₄ := 2 * (t₂ * (piCoeff (h' + 1)).2))
+    (by linear_combination (norm := (push_cast; ring)) heq - hexTrace_coords t₁ t₂ (h' + 1))
+  have hQ : (piCoeff (h' + 1)).2 % 3 = 1 := piCoeff_snd_emod h'
+  have hQ0 : (piCoeff (h' + 1)).2 ≠ 0 := by omega
+  have ht2 : t₂ = 0 := by
+    have hz : t₂ * (piCoeff (h' + 1)).2 = 0 := by omega
+    rcases mul_eq_zero.mp hz with h | h
+    · exact h
+    · exact absurd h hQ0
+  refine ⟨ht2, ?_⟩
+  rw [ht2] at k₁
+  linear_combination k₁
+
+/-- `2P+Q` is never divisible by three — the fact every value kill turns on. -/
+theorem not_three_dvd_pin (h : ℕ) (hh : 1 ≤ h) :
+    ¬ ((3 : ℤ) ∣ (2 * (piCoeff h).1 + (piCoeff h).2)) := by
+  obtain ⟨h', rfl⟩ : ∃ h', h = h' + 1 := ⟨h - 1, by omega⟩
+  obtain ⟨p, hp⟩ := three_dvd_piCoeff_fst h'
+  have hQ : (piCoeff (h' + 1)).2 % 3 = 1 := piCoeff_snd_emod h'
+  rintro ⟨v, hv⟩
+  omega
+
+/-- The unit coefficients never both vanish. -/
+theorem hexE_hexF_ne (c : ZMod 6) : ¬ (hexE c.val = 0 ∧ hexF c.val = 0) := by
+  intro h
+  exact hexE_hexF_not_both_dvd c.val (ZMod.val_lt c) ⟨h.1 ▸ dvd_zero 3, h.2 ▸ dvd_zero 3⟩
+
+/-- …nor does the height-zero value `2·hexE + hexF`. -/
+theorem hex_zero_height_ne : ∀ c : ZMod 6, 2 * hexE c.val + hexF c.val ≠ 0 := by decide
+
+/-- The `g`-coefficients never both vanish. -/
+theorem gE_gF_zero_ne (A : ZMod 6) : ¬ (gE A = 0 ∧ gF A = 0) := fun h =>
+  gE_gF_ne A ⟨h.1 ▸ dvd_zero 3, h.2 ▸ dvd_zero 3⟩
+
+/-! ### §W.9 The ii family: `inner(pivot) ↔ inner(meta)` -/
+
+/-- The ii master equation: `Tr(g·w₁) + Tr(g·W) = √3·Tr(V)`. -/
+theorem ii_web {a c : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt 0 1 a b) (innerPt metaPivot metaAnchor c d) = 1) :
+    gTr (a - 1) b + gTr (a - 1 - c) (b - d) = ((Real.sqrt 3 : ℝ) : ℂ) * uTr c d := by
+  have hm := web_master ((bridge_ii a b c d).mp h)
+  have hc : ((3 + Real.sqrt 3 ^ 2 + Real.sqrt 3 ^ 2 - 9 : ℝ) : ℂ) = 0 := by
+    norm_cast
+    nlinarith [sq_sqrt3]
+  rw [hc] at hm
+  refine mul_left_cancel₀ sqrt3_ne ?_
+  linear_combination -hm
+
+/-- The cleared form of the ii equation: three trace objects with `√3`-powers whose
+parities decide the case. -/
+theorem ii_cleared {A c : ZMod 6} {b d : ℤ} {t : ℕ}
+    (ht : b.natAbs + d.natAbs = (b - d).natAbs + 2 * t)
+    (h : gTr A b + gTr (A - c) (b - d) = ((Real.sqrt 3 : ℝ) : ℂ) * uTr c d) :
+    ((Real.sqrt 3 : ℝ) : ℂ) ^ d.natAbs * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) b.natAbs
+        + (3 : ℂ) ^ t
+          * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d))) (b - d).natAbs
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ (b.natAbs + 1)
+        * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) d.natAbs := by
+  have hA := gTrace_clear A b
+  have hB := gTrace_clear (A - c) (b - d)
+  have hC := uTrace_clear c d
+  have hsum : ((Real.sqrt 3 : ℝ) : ℂ) ^ (b.natAbs + d.natAbs)
+      * (gTr A b + gTr (A - c) (b - d))
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ (b.natAbs + d.natAbs)
+        * (((Real.sqrt 3 : ℝ) : ℂ) * uTr c d) := by rw [h]
+  have hpow2 : ((Real.sqrt 3 : ℝ) : ℂ) ^ (2 * t) * ((Real.sqrt 3 : ℝ) : ℂ) ^ (b - d).natAbs
+      = ((Real.sqrt 3 : ℝ) : ℂ) ^ (b.natAbs + d.natAbs) := by
+    rw [← pow_add, show 2 * t + (b - d).natAbs = b.natAbs + d.natAbs by omega]
+  rw [← hA, ← hB, ← hC, ← sqrt3_pow_two_mul t]
+  linear_combination hsum + gTr (A - c) (b - d) * hpow2
+
+/-! ### §W.10 The two generic kills
+
+Every branch of every family ends in one of two ways.  **Alone**: one trace object sits
+strictly below the others 3-adically, so its coefficient pair is divisible by three —
+which neither table allows.  **`φ`**: the unit trace sits at the minimum together with
+`g`-traces, and the functional `φ(z) = n₁ − n₂ mod 3` (reduction at the prime over 3)
+vanishes on every `g`-trace but never on a unit trace. -/
+
+/-- **The alone kill**, in coordinates: `3 ∣ P` and `Q ≡ 1 (mod 3)` turn the two rows
+into `t₂ ≡ 0` and `t₁ + t₂ ≡ 0`. -/
+theorem alone_dvd {t₁ t₂ : ℤ} {p : ℕ} (hp : 1 ≤ p) {R₁ R₂ : ℤ}
+    (h₁ : t₁ * (piCoeff p).1 + (t₁ + t₂) * ((piCoeff p).1 + (piCoeff p).2) = 3 * R₁)
+    (h₂ : t₂ * (piCoeff p).2 = 3 * R₂) :
+    (3 : ℤ) ∣ t₁ ∧ (3 : ℤ) ∣ t₂ := by
+  obtain ⟨p', rfl⟩ : ∃ p', p = p' + 1 := ⟨p - 1, by omega⟩
+  obtain ⟨P, hP⟩ := three_dvd_piCoeff_fst p'
+  obtain ⟨Q, hQ⟩ : ∃ Q, (piCoeff (p' + 1)).2 = 3 * Q + 1 :=
+    ⟨(piCoeff (p' + 1)).2 / 3, by have := piCoeff_snd_emod p'; omega⟩
+  rw [hP, hQ] at h₁
+  rw [hQ] at h₂
+  refine ⟨⟨(R₁ - t₁ * P - (t₁ + t₂) * P - (t₁ + t₂) * Q) - (R₂ - t₂ * Q), by linarith⟩,
+    ⟨R₂ - t₂ * Q, by linarith⟩⟩
+
+/-- **The `φ` kill**, in coordinates: a unit trace at the minimum forces `3 ∣ v₁ − v₂`. -/
+theorem phi_dvd {v₁ v₂ : ℤ} {r : ℕ} (hr : 1 ≤ r) {S : ℤ}
+    (h : (v₁ * (piCoeff r).1 + (v₁ + v₂) * ((piCoeff r).1 + (piCoeff r).2))
+        + v₂ * (piCoeff r).2 = 3 * S) :
+    (3 : ℤ) ∣ (v₁ - v₂) := by
+  obtain ⟨r', rfl⟩ : ∃ r', r = r' + 1 := ⟨r - 1, by omega⟩
+  obtain ⟨P, hP⟩ := three_dvd_piCoeff_fst r'
+  obtain ⟨Q, hQ⟩ : ∃ Q, (piCoeff (r' + 1)).2 = 3 * Q + 1 :=
+    ⟨(piCoeff (r' + 1)).2 / 3, by have := piCoeff_snd_emod r'; omega⟩
+  rw [hP, hQ] at h
+  exact ⟨S - v₁ * P - (v₁ + v₂) * P - (v₁ + v₂) * Q - v₂ * Q - v₂, by linarith⟩
+
+/-- `φ` vanishes on every `g`-trace: `φ(g) = 1 + (−1) = 0`. -/
+theorem phi_g_dvd (A : ZMod 6) (p : ℕ) :
+    (3 : ℤ) ∣ ((gE A * (piCoeff p).1 + (gE A + gF A) * ((piCoeff p).1 + (piCoeff p).2))
+      + gF A * (piCoeff p).2) := by
+  obtain ⟨w, hw⟩ := gE_sub_gF_dvd A
+  refine ⟨2 * w * (piCoeff p).1 + w * (piCoeff p).2 + gF A * (piCoeff p).1
+    + gF A * (piCoeff p).2, ?_⟩
+  have hgE : gE A = 3 * w + gF A := by omega
+  rw [hgE]
+  ring
+
+/-! ### §W.11 The ii family: the classification -/
+
+private theorem ii_endgame_pos : ∀ A c : ZMod 6,
+    gF A + gF (A - c) = 0 → gE A + gE (A - c) = 3 * (2 * hexE c.val + hexF c.val) →
+    (A = 0 ∧ c = 1) ∨ (A = 5 ∧ c = 5) := by decide
+
+private theorem ii_endgame_neg : ∀ A c : ZMod 6,
+    gF (-A - 1) + gF (-(A - c) - 1) = 0 →
+    gE (-A - 1) + gE (-(A - c) - 1) = 3 * (2 * hexE c.val + hexF c.val) →
+    (A = 0 ∧ c = 1) ∨ (A = 5 ∧ c = 5) := by decide
+
+private theorem gE_abs_le : ∀ A B : ZMod 6, gE A + gE B ≤ 4 ∧ -4 ≤ gE A + gE B := by decide
+
+/-- **ii completeness at the master web**: the cleared equation admits exactly the four
+census chords. -/
+theorem ii_classify {A c : ZMod 6} {b d : ℤ}
+    (h : gTr A b + gTr (A - c) (b - d) = ((Real.sqrt 3 : ℝ) : ℂ) * uTr c d) :
+    ((A = 0 ∧ c = 1) ∨ (A = 5 ∧ c = 5)) ∧ (b = 1 ∨ b = -1) ∧ d = 0 := by
+  obtain ⟨t, ht⟩ : ∃ t, b.natAbs + d.natAbs = (b - d).natAbs + 2 * t :=
+    ⟨(b.natAbs + d.natAbs - (b - d).natAbs) / 2, by omega⟩
+  have hcl := ii_cleared ht h
+  obtain ⟨ν, hν⟩ : ∃ ν, d.natAbs = 2 * ν ∨ d.natAbs = 2 * ν + 1 := ⟨d.natAbs / 2, by omega⟩
+  obtain ⟨μ, hμ⟩ : ∃ μ, b.natAbs = 2 * μ ∨ b.natAbs = 2 * μ + 1 := ⟨b.natAbs / 2, by omega⟩
+  rcases hμ with hμ | hμ
+  · -- pivot height even: one term stands alone across the `√3`-separation
+    exfalso
+    rcases hν with hν | hν
+    · -- both even: the unit trace alone
+      rw [hν, hμ] at hcl
+      simp only [sqrt3_pow_two_mul, pow_succ] at hcl
+      obtain ⟨-, hY⟩ := eq_zero_of_add_sqrt3_mul
+        ((inRing_pow_trace ν _ _ _).add (inRing_pow_trace t _ _ _))
+        ((inRing_pow_trace μ _ _ _).neg)
+        (show ((3 : ℂ) ^ ν * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ)
+              + (3 : ℂ) ^ t * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+                  (b - d).natAbs)
+            + ((Real.sqrt 3 : ℝ) : ℂ)
+              * (-((3 : ℂ) ^ μ
+                * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν))) = 0 by
+          linear_combination hcl)
+      have hH2 : hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν) = 0 := by
+        have h3 : ((3 : ℂ) ^ μ) ≠ 0 := pow_ne_zero _ (by norm_num)
+        exact (mul_eq_zero.mp (neg_eq_zero.mp hY)).resolve_left h3
+      rcases Nat.eq_zero_or_pos ν with hν0 | hνp
+      · subst hν0
+        rw [show 2 * 0 = 0 from rfl, hexTrace_zero_height] at hH2
+        exact hex_zero_height_ne (uAddr c d) (by exact_mod_cast hH2)
+      · exact hexE_hexF_ne (uAddr c d) (hexTrace_eq_zero (by omega) hH2)
+    · -- pivot even, meta odd: the cross trace alone
+      rw [hν, hμ] at hcl
+      simp only [sqrt3_pow_two_mul, pow_succ] at hcl
+      obtain ⟨hX, -⟩ := eq_zero_of_add_sqrt3_mul
+        (inRing_pow_trace t _ _ _)
+        (((inRing_pow_trace ν _ _ _)).add ((inRing_pow_trace μ _ _ _).neg))
+        (show ((3 : ℂ) ^ t
+              * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+                (b - d).natAbs)
+            + ((Real.sqrt 3 : ℝ) : ℂ)
+              * ((3 : ℂ) ^ ν * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ)
+                + -((3 : ℂ) ^ μ
+                  * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν + 1))) = 0 by
+          linear_combination hcl)
+      have hH3 : hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+          (b - d).natAbs = 0 := by
+        have h3 : ((3 : ℂ) ^ t) ≠ 0 := pow_ne_zero _ (by norm_num)
+        exact (mul_eq_zero.mp hX).resolve_left h3
+      exact gE_gF_zero_ne _ (hexTrace_eq_zero (by omega) hH3)
+  · rcases hν with hν | hν
+    · -- **the live class**: pivot height odd, meta height even
+      sorry
+    · -- pivot odd, meta odd: the pivot trace alone
+      exfalso
+      rw [hν, hμ] at hcl
+      simp only [sqrt3_pow_two_mul, pow_succ] at hcl
+      obtain ⟨-, hY⟩ := eq_zero_of_add_sqrt3_mul
+        ((inRing_pow_trace t _ _ _).add ((inRing_pow_trace (μ + 1) _ _ _).neg))
+        (inRing_pow_trace ν _ _ _)
+        (show ((3 : ℂ) ^ t
+              * hexTrace (gE (gAddr (A - c) (b - d))) (gF (gAddr (A - c) (b - d)))
+                (b - d).natAbs
+              + -((3 : ℂ) ^ (μ + 1)
+                * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν + 1)))
+            + ((Real.sqrt 3 : ℝ) : ℂ)
+              * ((3 : ℂ) ^ ν * hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1)) = 0 by
+          linear_combination hcl
+            + (3 : ℂ) ^ μ
+              * hexTrace (hexE (uAddr c d).val) (hexF (uAddr c d).val) (2 * ν + 1)
+              * sqrt3_cast_sq)
+      have hH1 : hexTrace (gE (gAddr A b)) (gF (gAddr A b)) (2 * μ + 1) = 0 := by
+        have h3 : ((3 : ℂ) ^ ν) ≠ 0 := pow_ne_zero _ (by norm_num)
+        exact (mul_eq_zero.mp hY).resolve_left h3
+      exact gE_gF_zero_ne _ (hexTrace_eq_zero (by omega) hH1)
+
 /-! ### §W.5 The completeness theorems -/
 
 /-- **oo completeness at the metaPivot axis, all three webs**: exactly the four table
