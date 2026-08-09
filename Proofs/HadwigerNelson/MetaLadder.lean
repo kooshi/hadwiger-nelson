@@ -432,7 +432,7 @@ private theorem sqrt3_ne : ((Real.sqrt 3 : ℝ) : ℂ) ≠ 0 := by
 /-- The scaling step behind all four bridges: a nonzero real multiple of the difference
 equals `ζ₁₂` times the cleared expression, and `‖ζ₁₂‖ = 1` transfers the norm equation
 exactly. -/
-private theorem bridge_gen {P Q k Z : ℂ} {R : ℝ} (hk : k ≠ 0) (hR : normSq k = R)
+theorem bridge_gen {P Q k Z : ℂ} {R : ℝ} (hk : k ≠ 0) (hR : normSq k = R)
     (h : k * (P - Q) = zeta12 * Z) : dist P Q = 1 ↔ normSq Z = R := by
   have hn := congrArg normSq h
   rw [map_mul, map_mul, normSq_zeta12, one_mul] at hn
@@ -1323,7 +1323,7 @@ private theorem ii_fusion_master {a c : ZMod 6} {b d : ℤ}
 
 /-- The two integer rows of a three-trace identity with a rational constant `κ·3^s`:
 the constant hits row 1 only — the 4-term extractor the oo/oi/io families need. -/
-private theorem hexTrace_rows_const {κ t₁ t₂ u₁ u₂ v₁ v₂ : ℤ} {p q r i j l s : ℕ}
+theorem hexTrace_rows_const {κ t₁ t₂ u₁ u₂ v₁ v₂ : ℤ} {p q r i j l s : ℕ}
     (heq : (3 : ℂ) ^ i * hexTrace t₁ t₂ p + (3 : ℂ) ^ j * hexTrace u₁ u₂ q
       = (κ : ℂ) * 3 ^ s + (3 : ℂ) ^ l * hexTrace v₁ v₂ r) :
     (3 ^ i * (t₁ * (piCoeff p).1 + (t₁ + t₂) * ((piCoeff p).1 + (piCoeff p).2))
@@ -1352,7 +1352,7 @@ private theorem gF_ne_zero : ∀ x : ZMod 6, gF x ≠ 0 := by decide
 
 /-- A `g`-trace at positive height is never a rational integer: the pin forces its
 `ζ₆`-coefficient to vanish and `gF` never does. -/
-private theorem g_pin_kill {x : ZMod 6} {h : ℕ} {r : ℤ} (hh : 1 ≤ h)
+theorem g_pin_kill {x : ZMod 6} {h : ℕ} {r : ℤ} (hh : 1 ≤ h)
     (heq : hexTrace (gE x) (gF x) h = (r : ℂ)) : False :=
   gF_ne_zero x (hexTrace_pin hh heq).1
 
@@ -1360,7 +1360,7 @@ private theorem hexF_zero_hexE : ∀ y : ZMod 6,
     hexF y.val = 0 → hexE y.val = 1 ∨ hexE y.val = -1 := by decide
 
 /-- A unit trace at positive height never equals `3·(integer)`: pin + the mod-3 tables. -/
-private theorem u_pin_kill_dvd {y : ZMod 6} {n : ℕ} {r : ℤ} (hn : 1 ≤ n)
+theorem u_pin_kill_dvd {y : ZMod 6} {n : ℕ} {r : ℤ} (hn : 1 ≤ n)
     (heq : hexTrace (hexE y.val) (hexF y.val) n = ((3 * r : ℤ) : ℂ)) : False := by
   obtain ⟨hF, hval⟩ := hexTrace_pin hn heq
   have h3 : (3 : ℤ) ∣ hexE y.val * (2 * (piCoeff n).1 + (piCoeff n).2) := ⟨r, hval⟩
@@ -1368,7 +1368,7 @@ private theorem u_pin_kill_dvd {y : ZMod 6} {n : ℕ} {r : ℤ} (hn : 1 ≤ n)
   exact hexE_hexF_not_both_dvd y.val (ZMod.val_lt y) ⟨h3E, hF ▸ dvd_zero 3⟩
 
 /-- A unit trace at height 1 equals a rational integer only at `±1` (pin + tables). -/
-private theorem u_pin_one {y : ZMod 6} {r : ℤ}
+theorem u_pin_one {y : ZMod 6} {r : ℤ}
     (heq : hexTrace (hexE y.val) (hexF y.val) 1 = (r : ℂ)) : r = 1 ∨ r = -1 := by
   obtain ⟨hF, hval⟩ := hexTrace_pin le_rfl heq
   rw [show piCoeff 1 = (0, 1) from rfl] at hval
@@ -1383,7 +1383,7 @@ private theorem cast_mod3_one {q : ℤ} (h : q % 3 = 1) :
 
 /-- The mod-9 refutation table behind the adjacent-heights kill: with the two deep
 `piCoeff` residues confined to `{1, 4, 7}`, no `g`-address pair satisfies both rows. -/
-private theorem adjacent_mod9 : ∀ (x₁ x₃ : ZMod 6) (r0 r1 : ZMod 9),
+theorem adjacent_mod9 : ∀ (x₁ x₃ : ZMod 6) (r0 r1 : ZMod 9),
     (r0 = 1 ∨ r0 = 4 ∨ r0 = 7) → (r1 = 1 ∨ r1 = 4 ∨ r1 = 7) →
     ¬ (((gE x₁ : ZMod 9) * (-3 * r1)
           + ((gE x₁ : ZMod 9) + (gF x₁ : ZMod 9)) * (-3 * r1 + (-3 * r0 + r1))
@@ -1398,7 +1398,7 @@ private theorem adjacent_mod9 : ∀ (x₁ x₃ : ZMod 6) (r0 r1 : ZMod 9),
 never sum, row by row, to `3^e`-multiples for `e ≥ 2` — mod 9 the `piCoeff` recurrence
 leaves only the residues `{1, 4, 7}` for the two deep `Q`s, and no address pair
 survives.  The kill that bounds the pivot height in the oo and io endgames. -/
-private theorem adjacent_kill (x₁ x₃ : ZMod 6) {h e : ℕ} (hh : 3 ≤ h) (he : 2 ≤ e)
+theorem adjacent_kill (x₁ x₃ : ZMod 6) {h e : ℕ} (hh : 3 ≤ h) (he : 2 ≤ e)
     {W₁ W₂ : ℤ}
     (hR1 : gE x₁ * (piCoeff h).1 + (gE x₁ + gF x₁) * ((piCoeff h).1 + (piCoeff h).2)
         + (gE x₃ * (piCoeff (h + 1)).1
@@ -1430,20 +1430,20 @@ private theorem adjacent_kill (x₁ x₃ : ZMod 6) {h e : ℕ} (hh : 3 ≤ h) (h
 private theorem g_zero_val : ∀ x : ZMod 6,
     2 * gE x + gF x = 3 ∨ 2 * gE x + gF x = 0 ∨ 2 * gE x + gF x = -3 := by decide
 
-private theorem g_zero_ne_kappa : ∀ x : ZMod 6, ∀ κ : ℤ,
+theorem g_zero_ne_kappa : ∀ x : ZMod 6, ∀ κ : ℤ,
     κ = 4 ∨ κ = 7 ∨ κ = 2 ∨ κ = 5 → 2 * gE x + gF x ≠ κ := by
   intro x κ hκ
   have h := g_zero_val x
   omega
 
 /-- A `g`-trace at height zero is the rational integer `2·gE + gF`. -/
-private theorem gTr_zero (A : ZMod 6) : gTr A 0 = ((2 * gE A + gF A : ℤ) : ℂ) := by
+theorem gTr_zero (A : ZMod 6) : gTr A 0 = ((2 * gE A + gF A : ℤ) : ℂ) := by
   have h := gTrace_clear_nonneg A 0
   rw [pow_zero, one_mul, Nat.cast_zero, neg_zero, hexTrace_zero_height] at h
   rw [gTr, show (-(0 : ℤ)) = (0 : ℤ) from neg_zero, h]
 
 /-- A unit trace at height zero is the rational integer `2·hexE + hexF`. -/
-private theorem uTr_zero (c : ZMod 6) : uTr c 0 = ((2 * hexE c.val + hexF c.val : ℤ) : ℂ) := by
+theorem uTr_zero (c : ZMod 6) : uTr c 0 = ((2 * hexE c.val + hexF c.val : ℤ) : ℂ) := by
   have h := uTrace_clear_nonneg c 0
   rw [pow_zero, one_mul, Nat.cast_zero, neg_zero, hexTrace_zero_height] at h
   rw [uTr, show (-(0 : ℤ)) = (0 : ℤ) from neg_zero, h]
