@@ -870,36 +870,282 @@ noncomputable def ladderColor (z : ℂ) : Fin 4 :=
   else if h : ∃ n : ZMod 6 × ℤ, innerPt 1 0 n.1 n.2 = z then colTab true true h.choose.1
   else 0
 
+/-- The anchor's axis fact, in the form every classification citation needs. -/
+private theorem dist_01 : dist (0 : ℂ) 1 = 1 := Triangle.dist_pivot_01
+
+private theorem dist_10 : dist (1 : ℂ) 0 = 1 := by
+  rw [dist_comm]
+  exact dist_01
+
 theorem ladderColor_outerP (a : ZMod 6) (b : ℤ) :
     ladderColor (outerPt 0 1 a b) = colTab false false a := by
-  sorry
+  have hex : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = outerPt 0 1 a b := ⟨(a, b), rfl⟩
+  rw [ladderColor, dif_pos hex]
+  congr 1
+  exact ((outerPt_inj dist_01 _ _ _ _).mp hex.choose_spec).1
 
 theorem ladderColor_innerP (a : ZMod 6) (b : ℤ) :
     ladderColor (innerPt 0 1 a b) = colTab false true a := by
-  sorry
+  have hno : ¬ ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = innerPt 0 1 a b := by
+    rintro ⟨n, hn⟩
+    exact outer_ne_inner dist_01 n.1 n.2 a b hn
+  have hex : ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = innerPt 0 1 a b := ⟨(a, b), rfl⟩
+  rw [ladderColor, dif_neg hno, dif_pos hex]
+  congr 1
+  exact ((innerPt_inj dist_01 _ _ _ _).mp hex.choose_spec).1
 
 theorem ladderColor_outerQ (a : ZMod 6) (b : ℤ) :
     ladderColor (outerPt 1 0 a b) = colTab true false a := by
-  sorry
+  by_cases hP : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = outerPt 1 0 a b
+  · -- fused with a P-outer point: the two hex glue addresses, where the tables agree
+    obtain ⟨n, hn⟩ := hP
+    rw [ladderColor, dif_pos ⟨n, hn⟩]
+    have hfuse := (fusion_oo dist_01 n.1 n.2 a b).mp hn
+    have hchoice := (fusion_oo dist_01 _ _ a b).mp
+      (Exists.choose_spec (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = outerPt 1 0 a b))
+    rcases hchoice with ⟨h1, _, h3, _⟩ | ⟨h1, _, h3, _⟩ <;> rw [h1, h3] <;> rfl
+  · by_cases hPi : ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = outerPt 1 0 a b
+    · obtain ⟨n, hn⟩ := hPi
+      rw [ladderColor, dif_neg hP, dif_pos ⟨n, hn⟩]
+      have hchoice := (fusion_oi dist_01 _ _ a b).mp
+        (Exists.choose_spec (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, innerPt 0 1 m.1 m.2 = outerPt 1 0 a b))
+      rcases hchoice with ⟨h1, _, h3, _⟩ | ⟨h1, _, h3, _⟩ <;> rw [h1, h3] <;> rfl
+    · have hex : ∃ n : ZMod 6 × ℤ, outerPt 1 0 n.1 n.2 = outerPt 1 0 a b := ⟨(a, b), rfl⟩
+      rw [ladderColor, dif_neg hP, dif_neg hPi, dif_pos hex]
+      congr 1
+      exact ((outerPt_inj dist_10 _ _ _ _).mp hex.choose_spec).1
 
 theorem ladderColor_innerQ (a : ZMod 6) (b : ℤ) :
     ladderColor (innerPt 1 0 a b) = colTab true true a := by
-  sorry
+  by_cases hP : ∃ n : ZMod 6 × ℤ, outerPt 0 1 n.1 n.2 = innerPt 1 0 a b
+  · obtain ⟨n, hn⟩ := hP
+    rw [ladderColor, dif_pos ⟨n, hn⟩]
+    have hchoice := (fusion_io dist_01 _ _ a b).mp
+      (Exists.choose_spec (⟨n, hn⟩ : ∃ m : ZMod 6 × ℤ, outerPt 0 1 m.1 m.2 = innerPt 1 0 a b))
+    rcases hchoice with ⟨h1, _, h3, _⟩ | ⟨h1, _, h3, _⟩ <;> rw [h1, h3] <;> rfl
+  · have hPi : ¬ ∃ n : ZMod 6 × ℤ, innerPt 0 1 n.1 n.2 = innerPt 1 0 a b := by
+      rintro ⟨n, hn⟩
+      exact fusion_ii dist_01 n.1 n.2 a b hn
+    have hQo : ¬ ∃ n : ZMod 6 × ℤ, outerPt 1 0 n.1 n.2 = innerPt 1 0 a b := by
+      rintro ⟨n, hn⟩
+      exact outer_ne_inner dist_10 n.1 n.2 a b hn
+    have hex : ∃ n : ZMod 6 × ℤ, innerPt 1 0 n.1 n.2 = innerPt 1 0 a b := ⟨(a, b), rfl⟩
+    rw [ladderColor, dif_neg hP, dif_neg hPi, dif_neg hQo, dif_pos hex]
+    congr 1
+    exact ((innerPt_inj dist_10 _ _ _ _).mp hex.choose_spec).1
+
+/-! ### Properness, family by family
+
+Each cross-family lemma reads the chord's addresses off the completeness theorem and
+closes on the table — a six-element decision for the parametric families, a
+list-membership decision for the two finite ones. -/
+
+/-- The table's separations, decided once each: the six-element checks the parametric
+families reduce to. -/
+private theorem tab_hex : ∀ (s : Bool) (a : ZMod 6), colTab s false a ≠ colTab s false (a + 1) := by decide
+
+private theorem tab_hex' : ∀ (s : Bool) (a : ZMod 6), colTab s false a ≠ colTab s false (a - 1) := by decide
+
+private theorem tab_rot3 : ∀ (s : Bool) (a : ZMod 6), colTab s true a ≠ colTab s true (a + 2) := by decide
+
+private theorem tab_rot3' : ∀ (s : Bool) (a : ZMod 6), colTab s true a ≠ colTab s true (a - 2) := by decide
+
+private theorem tab_seam : ∀ (s : Bool) (a : ZMod 6), colTab s false a ≠ colTab s true a := by decide
+
+private theorem tab_match_oo : ∀ a : ZMod 6, colTab false false a ≠ colTab true false (a + 3) := by
+  decide
+
+private theorem tab_match_ii : ∀ a : ZMod 6, colTab false true a ≠ colTab true true (a + 3) := by
+  decide
+
+private theorem tab_hub_q : ∀ c : ZMod 6, colTab false false 0 ≠ colTab true false c := by decide
+
+private theorem tab_hub_p : ∀ a : ZMod 6, colTab false false a ≠ colTab true false 0 := by decide
+
+private theorem colors_ne_of_mem_iiTable {a c : ZMod 6} {b d : ℤ}
+    (hm : (a, b, c, d) ∈ iiNormTable) : colTab false true a ≠ colTab true true c := by
+  fin_cases hm <;> decide
+
+private theorem colors_ne_of_mem_oiTable {a c : ZMod 6} {b d : ℤ}
+    (hm : (a, b, c, d) ∈ oiTable) : colTab false false a ≠ colTab true true c := by
+  fin_cases hm <;> decide
+
+private theorem colors_ne_of_mem_oiTable' {a c : ZMod 6} {b d : ℤ}
+    (hm : (a, b, c, d) ∈ oiTable) : colTab true false a ≠ colTab false true c := by
+  fin_cases hm <;> decide
+
+private theorem valid_PoQo {a c : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt 0 1 a b) (outerPt 1 0 c d) = 1) :
+    colTab false false a ≠ colTab true false c := by
+  rcases (oo_complete dist_01 a b c d).mp h with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · exact tab_match_oo a
+  · exact tab_hub_q c
+  · exact tab_hub_p a
+
+private theorem valid_PoQi {a c : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt 0 1 a b) (innerPt 1 0 c d) = 1) :
+    colTab false false a ≠ colTab true true c :=
+  colors_ne_of_mem_oiTable (oi_complete a b c d ((oi_chord_iff dist_01 a b c d).mp h))
+
+private theorem valid_PiQo {a c : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt 0 1 a b) (outerPt 1 0 c d) = 1) :
+    colTab false true a ≠ colTab true false c :=
+  (colors_ne_of_mem_oiTable' (oi_complete c d a b
+    ((oi_chord_iff dist_10 c d a b).mp (by rwa [dist_comm] at h)))).symm
+
+private theorem valid_PiQi {a c : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt 0 1 a b) (innerPt 1 0 c d) = 1) :
+    colTab false true a ≠ colTab true true c := by
+  rcases (ii_chord_iff dist_01 a b c d).mp h with ⟨rfl, rfl⟩ | hnorm
+  · exact tab_match_ii a
+  · exact colors_ne_of_mem_iiTable (ii_norm_complete a b c d hnorm)
 
 /-- **Properness**: the table separates every chord family the completeness theorems
 allow. -/
 theorem ladderColor_valid {z w : ℂ} (hz : z ∈ ladderSet) (hw : w ∈ ladderSet)
     (h : dist z w = 1) : ladderColor z ≠ ladderColor w := by
-  sorry
+  simp only [ladderSet, Set.mem_union, Set.mem_range] at hz hw
+  obtain (⟨⟨a, b⟩, rfl⟩ | ⟨⟨a, b⟩, rfl⟩) | (⟨⟨a, b⟩, rfl⟩ | ⟨⟨a, b⟩, rfl⟩) := hz <;>
+    obtain (⟨⟨c, d⟩, rfl⟩ | ⟨⟨c, d⟩, rfl⟩) | (⟨⟨c, d⟩, rfl⟩ | ⟨⟨c, d⟩, rfl⟩) := hw
+  -- P-outer against each of the four
+  · rw [ladderColor_outerP, ladderColor_outerP]
+    obtain ⟨hc | hc, -⟩ := (intra_outer_complete dist_01 a b c d).mp h <;> subst hc
+    · exact tab_hex false a
+    · exact tab_hex' false a
+  · rw [ladderColor_outerP, ladderColor_innerP]
+    obtain ⟨rfl, -⟩ := (intra_seam_complete dist_01 a b c d).mp h
+    exact tab_seam false _
+  · rw [ladderColor_outerP, ladderColor_outerQ]
+    exact valid_PoQo h
+  · rw [ladderColor_outerP, ladderColor_innerQ]
+    exact valid_PoQi h
+  -- P-inner
+  · rw [ladderColor_innerP, ladderColor_outerP]
+    obtain ⟨rfl, -⟩ := (intra_seam_complete dist_01 c d a b).mp (by rwa [dist_comm] at h)
+    exact (tab_seam false _).symm
+  · rw [ladderColor_innerP, ladderColor_innerP]
+    obtain ⟨hc | hc, -⟩ := (intra_inner_complete dist_01 a b c d).mp h <;> subst hc
+    · exact tab_rot3 false a
+    · exact tab_rot3' false a
+  · rw [ladderColor_innerP, ladderColor_outerQ]
+    exact valid_PiQo h
+  · rw [ladderColor_innerP, ladderColor_innerQ]
+    exact valid_PiQi h
+  -- Q-outer
+  · rw [ladderColor_outerQ, ladderColor_outerP]
+    exact (valid_PoQo (by rwa [dist_comm] at h)).symm
+  · rw [ladderColor_outerQ, ladderColor_innerP]
+    exact (valid_PiQo (by rwa [dist_comm] at h)).symm
+  · rw [ladderColor_outerQ, ladderColor_outerQ]
+    obtain ⟨hc | hc, -⟩ := (intra_outer_complete dist_10 a b c d).mp h <;> subst hc
+    · exact tab_hex true a
+    · exact tab_hex' true a
+  · rw [ladderColor_outerQ, ladderColor_innerQ]
+    obtain ⟨rfl, -⟩ := (intra_seam_complete dist_10 a b c d).mp h
+    exact tab_seam true _
+  -- Q-inner
+  · rw [ladderColor_innerQ, ladderColor_outerP]
+    exact (valid_PoQi (by rwa [dist_comm] at h)).symm
+  · rw [ladderColor_innerQ, ladderColor_innerP]
+    exact (valid_PiQi (by rwa [dist_comm] at h)).symm
+  · rw [ladderColor_innerQ, ladderColor_outerQ]
+    obtain ⟨rfl, -⟩ := (intra_seam_complete dist_10 c d a b).mp (by rwa [dist_comm] at h)
+    exact (tab_seam true _).symm
+  · rw [ladderColor_innerQ, ladderColor_innerQ]
+    obtain ⟨hc | hc, -⟩ := (intra_inner_complete dist_10 a b c d).mp h <;> subst hc
+    · exact tab_rot3 true a
+    · exact tab_rot3' true a
 
-theorem colorable_four_ladder : ((unitDistance ℂ).induce ladderSet).Colorable 4 := by
-  sorry
+theorem colorable_four_ladder : ((unitDistance ℂ).induce ladderSet).Colorable 4 :=
+  ⟨SimpleGraph.Coloring.mk (fun v => ladderColor (v : ℂ))
+    (fun {v w} hvw => ladderColor_valid v.2 w.2 (unitDistance_adj.mp hvw))⟩
+
+/-! ### The lower bound: the nine-point witness, at explicit ladder addresses -/
+
+/-- The witness's vertices: the pivot `0` (which is the partner system's `outer 0 0`), five
+consecutive outer hex points of the pivot at `0`, and the rot3 triangle one seam step in. -/
+noncomputable def witnessPt : Fin 9 → ℂ
+  | 0 => outerPt 1 0 0 0
+  | 1 => outerPt 0 1 0 0
+  | 2 => outerPt 0 1 1 0
+  | 3 => outerPt 0 1 2 0
+  | 4 => outerPt 0 1 3 0
+  | 5 => outerPt 0 1 4 0
+  | 6 => innerPt 0 1 0 1
+  | 7 => innerPt 0 1 2 1
+  | 8 => innerPt 0 1 4 1
+
+/-- The witness's fifteen unit chords: five hub spokes, four hex steps, three seam steps and
+the rot3 triangle. -/
+def witnessEdges : List (Fin 9 × Fin 9) :=
+  [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5),
+   (1, 2), (2, 3), (3, 4), (4, 5),
+   (1, 6), (3, 7), (5, 8),
+   (6, 7), (6, 8), (7, 8)]
+
+theorem witnessPt_mem (i : Fin 9) : witnessPt i ∈ ladderSet := by
+  fin_cases i <;>
+    simp only [witnessPt, ladderSet, Set.mem_union, Set.mem_range]
+  · exact Or.inr (Or.inl ⟨(0, 0), rfl⟩)
+  · exact Or.inl (Or.inl ⟨(0, 0), rfl⟩)
+  · exact Or.inl (Or.inl ⟨(1, 0), rfl⟩)
+  · exact Or.inl (Or.inl ⟨(2, 0), rfl⟩)
+  · exact Or.inl (Or.inl ⟨(3, 0), rfl⟩)
+  · exact Or.inl (Or.inl ⟨(4, 0), rfl⟩)
+  · exact Or.inl (Or.inr ⟨(0, 1), rfl⟩)
+  · exact Or.inl (Or.inr ⟨(2, 1), rfl⟩)
+  · exact Or.inl (Or.inr ⟨(4, 1), rfl⟩)
+
+/-- Every listed pair really is a unit chord — each one read off a completeness theorem's
+constructive direction, so the witness needs no new geometry. -/
+theorem witnessPt_dist {e : Fin 9 × Fin 9} (he : e ∈ witnessEdges) :
+    dist (witnessPt e.1) (witnessPt e.2) = 1 := by
+  have hub : ∀ a : ZMod 6, dist (outerPt 1 0 0 0) (outerPt 0 1 a 0) = 1 := fun a =>
+    (oo_complete dist_10 0 0 a 0).mpr (Or.inr (Or.inl ⟨rfl, rfl⟩))
+  have hex : ∀ a : ZMod 6, dist (outerPt 0 1 a 0) (outerPt 0 1 (a + 1) 0) = 1 := fun a =>
+    (intra_outer_complete dist_01 a 0 (a + 1) 0).mpr ⟨Or.inl rfl, rfl⟩
+  have seam : ∀ a : ZMod 6, dist (outerPt 0 1 a 0) (innerPt 0 1 a 1) = 1 := fun a =>
+    (intra_seam_complete dist_01 a 0 a 1).mpr ⟨rfl, Or.inl rfl⟩
+  have rot : ∀ a : ZMod 6, dist (innerPt 0 1 a 1) (innerPt 0 1 (a + 2) 1) = 1 := fun a =>
+    (intra_inner_complete dist_01 a 1 (a + 2) 1).mpr ⟨Or.inl rfl, rfl⟩
+  fin_cases he <;> simp only [witnessPt]
+  · exact hub 0
+  · exact hub 1
+  · exact hub 2
+  · exact hub 3
+  · exact hub 4
+  · exact hex 0
+  · exact hex 1
+  · exact hex 2
+  · exact hex 3
+  · exact seam 0
+  · exact seam 2
+  · exact seam 4
+  · exact rot 0
+  · exact (intra_inner_complete dist_01 0 1 4 1).mpr ⟨Or.inr (by decide), rfl⟩
+  · exact rot 2
+
+/-- The abstract nine-vertex graph is not 3-colourable — `decide` against the literal edge
+list (3⁹ colourings, fifteen edges). -/
+theorem witness_not_colorable_three : ¬ (edgeGraph 9 witnessEdges).Colorable 3 := by
+  rw [not_colorable_edgeGraph_iff]
+  decide +kernel
+
+/-- The witness, drawn in the ladder pair. -/
+noncomputable def witnessHom :
+    edgeGraph 9 witnessEdges →g (unitDistance ℂ).induce ladderSet where
+  toFun i := ⟨witnessPt i, witnessPt_mem i⟩
+  map_rel' {i j} hij := by
+    have hne : i ≠ j := hij.1
+    rcases hij.2 with hm | hm
+    · exact unitDistance_adj.mpr (witnessPt_dist (e := (i, j)) hm)
+    · exact unitDistance_adj.mpr (by rw [dist_comm]; exact witnessPt_dist (e := (j, i)) hm)
 
 /-- The nine-point witness (pivot, five consecutive outer hex points, the seam-image
 rot3 triangle — all ladder addresses) refuses three colours. -/
 theorem not_colorable_three_ladder :
-    ¬ ((unitDistance ℂ).induce ladderSet).Colorable 3 := by
-  sorry
+    ¬ ((unitDistance ℂ).induce ladderSet).Colorable 3 := fun hc =>
+  witness_not_colorable_three (SimpleGraph.Colorable.of_hom witnessHom hc)
 
 /-- **The headline: the matched ladder pair is exactly 4-chromatic.** The object is the
 countable two-pivot ladder pair — all four circle-lattices, both parity tubes, the
@@ -908,7 +1154,8 @@ theorems: no census window, no conditional clause. (NOT the uncountable
 `Coupled.pairSystem`: that object's χ is the M21 fork, parked as M29's question.) -/
 theorem chromaticNumber_ladderPair :
     ((unitDistance ℂ).induce ladderSet).chromaticNumber = 4 := by
-  sorry
+  refine le_antisymm colorable_four_ladder.chromaticNumber_le ?_
+  exact_mod_cast add_one_le_chromaticNumber_iff_not_colorable.mpr not_colorable_three_ladder
 
 /-! ## §I Specification -/
 
