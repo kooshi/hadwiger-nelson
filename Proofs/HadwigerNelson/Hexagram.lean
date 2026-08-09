@@ -909,19 +909,26 @@ private theorem live_tie {C₁ C₂ C₃ κ : ℤ} {X Y Z : ZMod 6} {m n k p q r
 /-! ### §E.9 The oo-shape tree
 
 `adj_oo` (C = 1) and `opp_oo` (C = 2) share one tree: live parity (even, even), the
-tie at EQUAL heights, and a final `κ = 3·W` check the height-zero unit table refuses. -/
+tie at EQUAL heights, and a final `κ = 3·W` check the height-zero unit table refuses.
+The lemma CLASSIFIES: the two surviving branches (heights zero; the `μ = 1` tie at
+heights two) are returned as data, and the caller decides each against its table —
+the shape that lets one lemma serve the empty families AND `opp_oo`'s four sporadics. -/
 
 set_option maxHeartbeats 1000000 in
 private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C = 2)
     {x y : ZMod 6} {b d : ℤ}
     {κ : ℤ} (hκ3 : ¬ (3 : ℤ) ∣ κ) (hκv : κ = 4 ∨ κ = 7 ∨ κ = 10)
-    (hzero : ∀ X Y : ZMod 6, C * (2 * gE X + gF X) + (-C) * (2 * gE Y + gF Y)
-      + 3 * (2 * hexE (X - Y).val + hexF (X - Y).val) ≠ κ)
-    (hbnd : ∀ X Y Z : ZMod 6, C * gF X + (-C) * gF Y = 0 →
-      (C * gE X + (-C) * gE Y) * (2 * (piCoeff 2).1 + (piCoeff 2).2)
-        = κ * 3 ^ 1 + 3 ^ 2 * (2 * ((-1) * hexE Z.val) + (-1) * hexF Z.val) → False)
     (h : (C : ℂ) * s3 ^ 0 * gTr x b + ((-C : ℤ) : ℂ) * s3 ^ 0 * gTr y d
-      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (x - y) (b - d) = (κ : ℂ) * s3 ^ 0) : False := by
+      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (x - y) (b - d) = (κ : ℂ) * s3 ^ 0) :
+    (b = 0 ∧ d = 0
+      ∧ C * (2 * gE x + gF x) + (-C) * (2 * gE y + gF y)
+        + 3 * (2 * hexE (x - y).val + hexF (x - y).val) = κ)
+    ∨ (b = d ∧ b.natAbs = 2
+      ∧ C * gF (gAddr x b) + (-C) * gF (gAddr y d) = 0
+      ∧ (C * gE (gAddr x b) + (-C) * gE (gAddr y d))
+          * (2 * (piCoeff 2).1 + (piCoeff 2).2)
+        = κ * 3 ^ 1 + 3 ^ 2 * (2 * ((-1) * hexE (uAddr (x - y) (b - d)).val)
+          + (-1) * hexF (uAddr (x - y) (b - d)).val)) := by
   have hC0 : C ≠ 0 := by rcases hCv with rfl | rfl <;> norm_num
   have hnegC : ¬ (3 : ℤ) ∣ (-C) := fun hh => hC ((dvd_neg).mp hh)
   obtain ⟨t, ht⟩ : ∃ t, b.natAbs + d.natAbs = (b - d).natAbs + 2 * t :=
@@ -958,23 +965,24 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
           show uAddr (x - y) 0 = x - y from by rw [uAddr, if_pos le_rfl],
           show (0 : ℤ).natAbs = 0 from rfl, hexTrace_zero_height, hexTrace_zero_height,
           hexTrace_zero_height] at hkill
-        refine hzero x y ?_
         have hc : ((C * (2 * gE x + gF x) + (-C) * (2 * gE y + gF y)
             + 3 * (2 * hexE (x - y).val + hexF (x - y).val) : ℤ) : ℂ) = ((κ : ℤ) : ℂ) := by
           push_cast
           push_cast at hkill
           linear_combination hkill
-        exact_mod_cast hc
+        exact Or.inl ⟨rfl, rfl, by exact_mod_cast hc⟩
       · -- m = 0 < n: the second g-trace is alone
-        exact kill_alone_two (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+        exact (kill_alone_two (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
           (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
           (m := 2 * 0) (n := 2 * ν) (k := (b - d).natAbs) (p := ν) (q := 0)
-          (r := t + 1) (s := 0 + ν) hnegC (by omega) (by omega) (by omega) (by omega) hkill
+          (r := t + 1) (s := 0 + ν) hnegC (by omega) (by omega) (by omega) (by omega)
+          hkill).elim
     · rcases Nat.eq_zero_or_pos ν with rfl | hν0
-      · exact kill_alone_one (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+      · exact (kill_alone_one (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
           (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
           (m := 2 * μ) (n := 2 * 0) (k := (b - d).natAbs) (p := 0) (q := μ)
-          (r := t + 1) (s := μ + 0) hC (by omega) (by omega) (by omega) (by omega) hkill
+          (r := t + 1) (s := μ + 0) hC (by omega) (by omega) (by omega) (by omega)
+          hkill).elim
       · -- both heights positive
         rcases Nat.eq_zero_or_pos (b - d).natAbs with hk0 | hk0
         · -- k = 0: equal heights, the collapse
@@ -996,11 +1004,12 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
                 + (-1) * hexF (uAddr (x - y) (b - d)).val), by
               rw [hval]; ring⟩
           rcases Nat.lt_or_ge μ 2 with hμ2 | hμ2
-          · -- μ = 1: the boundary decide
+          · -- μ = 1: the boundary, returned as data
             have hμ1 : μ = 1 := by omega
             subst hμ1
-            exact hbnd (gAddr x b) (gAddr y d) (uAddr (x - y) (b - d)) hF
-              (by rw [show 2 * 1 = 2 from rfl] at hval; exact hval)
+            refine Or.inr ⟨by omega, by omega, hF, ?_⟩
+            rw [show 2 * 1 = 2 from rfl] at hval
+            exact hval
           · -- μ ≥ 2: the difference must vanish, and then 3 ∣ κ
             have hsmall := gE_diff_small (gAddr x b) (gAddr y d)
             have h9 : (9 : ℤ) ∣ (C * gE (gAddr x b) + (-C) * gE (gAddr y d)) := by
@@ -1011,8 +1020,8 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
               obtain ⟨w, hw⟩ := h9
               rcases hCv with rfl | rfl <;> omega
             rw [hz0, zero_mul] at hval
-            refine hκ3 ⟨2 * hexE (uAddr (x - y) (b - d)).val
-              + hexF (uAddr (x - y) (b - d)).val, ?_⟩
+            refine absurd ⟨2 * hexE (uAddr (x - y) (b - d)).val
+              + hexF (uAddr (x - y) (b - d)).val, ?_⟩ hκ3
             have h3p : (0 : ℤ) < 3 ^ μ := pow_pos (by norm_num) μ
             have he : (3 : ℤ) ^ (μ + 1) = 3 ^ μ * 3 := by ring
             rw [he] at hval
@@ -1022,6 +1031,7 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
             · omega
             · linarith
         · -- k ≥ 1: the tie is impossible here
+          exfalso
           obtain ⟨hpq, hpr⟩ := live_tie (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
             (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
             (m := 2 * μ) (n := 2 * ν) (k := (b - d).natAbs) (p := ν) (q := μ)
@@ -1030,6 +1040,7 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
           have hkr : (b - d).natAbs = 0 ∨ (b - d).natAbs = 2 * b.natAbs := by omega
           omega
   · -- (even, odd): the first g-trace is pinned against the constant
+    exfalso
     rw [hμ, hν, show 2 * μ + (2 * ν + 1) = 2 * (μ + ν) + 1 by ring] at hcl
     simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
     have hsep : ((3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d))
@@ -1064,6 +1075,7 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
     · rw [hv] at hvv; exact ⟨0, by omega⟩
     · rw [hv] at hvv; exact ⟨-C, by omega⟩
   · -- (odd, even): the second g-trace is pinned
+    exfalso
     rw [hμ, hν, show 2 * μ + 1 + 2 * ν = 2 * (μ + ν) + 1 by ring] at hcl
     simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
     have hsep : ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ + 1)
@@ -1097,6 +1109,7 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
     · rw [hv] at hvv; exact ⟨0, by omega⟩
     · rw [hv] at hvv; exact ⟨C, by omega⟩
   · -- (odd, odd): the unit trace is pinned
+    exfalso
     rw [hμ, hν, show 2 * μ + 1 + (2 * ν + 1) = 2 * (μ + ν + 1) by ring] at hcl
     simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
     have hsep : ((3 : ℂ) ^ t * 3 * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
@@ -1159,6 +1172,412 @@ private theorem oo_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C 
           exact ⟨κ * 3 ^ j, by ring⟩
         obtain ⟨hk0, -⟩ := u_rational (by norm_num) hpin hdiv
         omega
+
+/-! ### §E.10 The ii-shape tree
+
+`adj_ii` (C = 1, κ ∈ {0, 3}) and `opp_ii` (C = 2, κ ∈ {3, 6}) share one tree: live
+parity (odd, odd), the tie at EQUAL heights, and every κ divisible by 3 — so the
+dead-class pins and the `κ = W` endgame all fall to `3 ∤ 2·hexE + hexF`.  The only
+survivor is the height-one tie, returned as data for the caller's decide. -/
+
+private theorem piCoeff_one : piCoeff 1 = (0, 1) := rfl
+
+private theorem hexW_not_dvd : ∀ z : ZMod 6, ¬ (3 : ℤ) ∣ (2 * hexE z.val + hexF z.val) := by
+  decide
+
+set_option maxHeartbeats 1000000 in
+private theorem ii_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hCv : C = 1 ∨ C = 2)
+    {x y : ZMod 6} {b d : ℤ} {κ : ℤ} (hκ3 : (3 : ℤ) ∣ κ)
+    (h : (C : ℂ) * s3 ^ 0 * gTr x b + ((-C : ℤ) : ℂ) * s3 ^ 0 * gTr y d
+      + ((1 : ℤ) : ℂ) * s3 ^ 1 * uTr (x - y) (b - d) = (κ : ℂ) * s3 ^ 1) :
+    b = d ∧ b.natAbs = 1
+      ∧ C * gF (gAddr x b) + (-C) * gF (gAddr y d) = 0
+      ∧ (C * gE (gAddr x b) + (-C) * gE (gAddr y d))
+          * (2 * (piCoeff 1).1 + (piCoeff 1).2)
+        = κ * 3 ^ 1 + 3 ^ 1 * (2 * ((-1) * hexE (uAddr (x - y) (b - d)).val)
+          + (-1) * hexF (uAddr (x - y) (b - d)).val) := by
+  have hC0 : C ≠ 0 := by rcases hCv with rfl | rfl <;> norm_num
+  have hnegC : ¬ (3 : ℤ) ∣ (-C) := fun hh => hC ((dvd_neg).mp hh)
+  obtain ⟨t, ht⟩ : ∃ t, b.natAbs + d.natAbs = (b - d).natAbs + 2 * t :=
+    ⟨(b.natAbs + d.natAbs - (b - d).natAbs) / 2, by omega⟩
+  have hcl := hex_cleared ht h
+  obtain ⟨μ, hμ⟩ : ∃ μ, b.natAbs = 2 * μ ∨ b.natAbs = 2 * μ + 1 := ⟨b.natAbs / 2, by omega⟩
+  obtain ⟨ν, hν⟩ : ∃ ν, d.natAbs = 2 * ν ∨ d.natAbs = 2 * ν + 1 := ⟨d.natAbs / 2, by omega⟩
+  simp only [zero_add] at hcl
+  rcases hμ with hμ | hμ <;> rcases hν with hν | hν
+  · -- (even, even): the odd side pins the unit trace against κ; 3 ∣ κ kills it
+    exfalso
+    rw [hμ, hν, show 1 + 2 * μ + 2 * ν = 2 * (μ + ν) + 1 by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
+    have hsep : ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+        + (3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν))
+        + s3 * ((3 : ℂ) ^ t * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+            (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs
+          + ((-(κ * 3 ^ (μ + ν)) : ℤ) : ℂ)) = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨-, hB⟩ := eq_zero_of_add_sqrt3_mul
+      ((inRing_pow_trace' ν _ _ _).add (inRing_pow_trace' μ _ _ _))
+      (((inRing_three_pow' t).mul (inRing_hexTrace _ _ _)).add (InRing.intCast _)) hsep
+    have hpin : hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+        (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs
+        = ((κ * 3 ^ (μ + ν - t) : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero t (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hB
+      rw [show ((3 : ℂ) ^ t) * ((κ : ℂ) * 3 ^ (μ + ν - t)) = (κ : ℂ) * 3 ^ (μ + ν) by
+        rw [← mul_assoc, mul_comm ((3 : ℂ) ^ t) (κ : ℂ), mul_assoc, ← pow_add,
+          show t + (μ + ν - t) = μ + ν by omega]]
+      linear_combination hB
+    obtain ⟨-, hval⟩ := u_rational (by norm_num) hpin (Dvd.dvd.mul_right hκ3 _)
+    refine hexW_not_dvd (uAddr (x - y) (b - d)) ?_
+    have h1 : 1 * (2 * hexE (uAddr (x - y) (b - d)).val
+        + hexF (uAddr (x - y) (b - d)).val) = κ * 3 ^ (μ + ν - t) := hval
+    rw [one_mul] at h1
+    rw [h1]
+    exact Dvd.dvd.mul_right hκ3 _
+  · -- (even, odd): the second trace, at ODD height, is pinned against κ — dead
+    exfalso
+    rw [hμ, hν, show 1 + 2 * μ + (2 * ν + 1) = 2 * (μ + ν + 1) by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
+    have hsep : ((3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d))
+          (2 * ν + 1) + ((-(κ * 3 ^ (μ + ν + 1)) : ℤ) : ℂ))
+        + s3 * ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+          + (3 : ℂ) ^ t * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+            (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs) = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨hA, -⟩ := eq_zero_of_add_sqrt3_mul
+      ((inRing_pow_trace' μ _ _ _).add (InRing.intCast _))
+      ((inRing_pow_trace' ν _ _ _).add
+        ((inRing_three_pow' t).mul (inRing_hexTrace _ _ _))) hsep
+    have hpin : hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν + 1)
+        = ((κ * 3 ^ (ν + 1) : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero μ (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hA
+      rw [show ((3 : ℂ) ^ μ) * ((κ : ℂ) * 3 ^ (ν + 1)) = (κ : ℂ) * 3 ^ (μ + ν + 1) by
+        rw [← mul_assoc, mul_comm ((3 : ℂ) ^ μ) (κ : ℂ), mul_assoc, ← pow_add,
+          show μ + (ν + 1) = μ + ν + 1 by omega]]
+      linear_combination hA
+    obtain ⟨hm0, -⟩ := g_rational (neg_ne_zero.mpr hC0) hpin
+    omega
+  · -- (odd, even): the first trace, at ODD height, is pinned against κ — dead
+    exfalso
+    rw [hμ, hν, show 1 + (2 * μ + 1) + 2 * ν = 2 * (μ + ν + 1) by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
+    have hsep : ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b))
+          (2 * μ + 1) + ((-(κ * 3 ^ (μ + ν + 1)) : ℤ) : ℂ))
+        + s3 * ((3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν)
+          + (3 : ℂ) ^ t * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+            (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs) = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨hA, -⟩ := eq_zero_of_add_sqrt3_mul
+      ((inRing_pow_trace' ν _ _ _).add (InRing.intCast _))
+      ((inRing_pow_trace' μ _ _ _).add
+        ((inRing_three_pow' t).mul (inRing_hexTrace _ _ _))) hsep
+    have hpin : hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ + 1)
+        = ((κ * 3 ^ (μ + 1) : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero ν (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hA
+      rw [show ((3 : ℂ) ^ ν) * ((κ : ℂ) * 3 ^ (μ + 1)) = (κ : ℂ) * 3 ^ (μ + ν + 1) by
+        rw [← mul_assoc, mul_comm ((3 : ℂ) ^ ν) (κ : ℂ), mul_assoc, ← pow_add,
+          show ν + (μ + 1) = μ + ν + 1 by omega]]
+      linear_combination hA
+    obtain ⟨hm0, -⟩ := g_rational hC0 hpin
+    omega
+  · -- LIVE: both heights odd
+    rw [hμ, hν, show 1 + (2 * μ + 1) + (2 * ν + 1) = 2 * (μ + ν + 1) + 1 by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul', pow_zero] at hcl
+    have hkill : (3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ + 1)
+        + (3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν + 1)
+        = (κ : ℂ) * 3 ^ (μ + ν + 1)
+          + (3 : ℂ) ^ t * hexTrace ((-1) * hexE (uAddr (x - y) (b - d)).val)
+            ((-1) * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs := by
+      refine mul_right_cancel₀ sqrt3_ne ?_
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    rcases Nat.eq_zero_or_pos (b - d).natAbs with hk0 | hk0
+    · -- k = 0: equal heights, the collapse
+      have hmn : μ = ν := by omega
+      subst hmn
+      have hts : t = 2 * μ + 1 := by omega
+      subst hts
+      rw [hk0, show (2 * μ + 1 : ℕ) = μ + (μ + 1) by ring] at hkill
+      obtain ⟨hF, hval⟩ := kill_equal (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+        (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+        (m := μ + (μ + 1)) (p := μ) (s' := μ + 1) (r' := μ + 1) (by omega) hkill
+      have hnd := not_three_dvd_pin (μ + (μ + 1)) (by omega)
+      have hdvd : (3 : ℤ) ^ (μ + 1) ∣ (C * gE (gAddr x b) + (-C) * gE (gAddr y d)) := by
+        refine pow_dvd_of_not_dvd
+          (C := 2 * (piCoeff (μ + (μ + 1))).1 + (piCoeff (μ + (μ + 1))).2)
+          (fun hh => hnd hh) ?_
+        rw [mul_comm]
+        exact ⟨κ + (2 * ((-1) * hexE (uAddr (x - y) (b - d)).val)
+            + (-1) * hexF (uAddr (x - y) (b - d)).val), by rw [hval]; ring⟩
+      rcases Nat.eq_zero_or_pos μ with hμ0 | hμ0
+      · -- μ = 0: the boundary, returned as data
+        subst hμ0
+        exact ⟨by omega, by omega, hF, hval⟩
+      · -- μ ≥ 1: 9 ∣ ΔE forces ΔE = 0, then κ = W refuses 3 ∣ κ
+        exfalso
+        have hsmall := gE_diff_small (gAddr x b) (gAddr y d)
+        have h9 : (9 : ℤ) ∣ (C * gE (gAddr x b) + (-C) * gE (gAddr y d)) := by
+          refine dvd_trans ⟨3 ^ (μ - 1), ?_⟩ hdvd
+          rw [show (9 : ℤ) = 3 ^ 2 from by norm_num, ← pow_add,
+            show 2 + (μ - 1) = μ + 1 by omega]
+        have hz0 : C * gE (gAddr x b) + (-C) * gE (gAddr y d) = 0 := by
+          obtain ⟨w, hw⟩ := h9
+          rcases hCv with rfl | rfl <;> omega
+        rw [hz0, zero_mul] at hval
+        have hzz : (3 : ℤ) ^ (μ + 1) * (κ - (2 * hexE (uAddr (x - y) (b - d)).val
+            + hexF (uAddr (x - y) (b - d)).val)) = 0 := by linear_combination -hval
+        rcases mul_eq_zero.mp hzz with hh | hh
+        · exact absurd hh (pow_ne_zero _ (by norm_num))
+        · refine hexW_not_dvd (uAddr (x - y) (b - d)) ?_
+          have hkW : κ = 2 * hexE (uAddr (x - y) (b - d)).val
+              + hexF (uAddr (x - y) (b - d)).val := by omega
+          exact hkW ▸ hκ3
+    · -- k ≥ 1: the tie is impossible (equal |b| = |d| forces b = −d, then t = 0)
+      exfalso
+      obtain ⟨hpq, hpr⟩ := live_tie (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+        (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+        (m := 2 * μ + 1) (n := 2 * ν + 1) (k := (b - d).natAbs) (p := ν) (q := μ)
+        (r := t) (s := μ + ν + 1) hC hnegC (by norm_num)
+        (by omega) (by omega) hk0 (by omega) (by omega) hkill
+      have hkr : (b - d).natAbs = 0 ∨ (b - d).natAbs = 2 * b.natAbs := by omega
+      omega
+
+/-! ### §E.11 The oi-shape tree
+
+`adj_oi` (C = 1, κ ∈ {2, 5}) and `opp_oi` (C = 2, κ ∈ {5, 8}) — and, at negated `C`
+with the roles swapped, the two io families.  Live parity (even, odd); the tie is at
+ADJACENT heights, `kill_adjacent` closes every rung `μ ≥ 2`, and the `μ = 1`
+boundary — heights (2, 1) — is returned as the two integer rows for the caller's
+decide.  The io mirror: negate `C`, swap `(x,b) ↔ (y,d)` (`uTr_neg`). -/
+
+private theorem uTr_neg (c : ZMod 6) (d : ℤ) : uTr (-c) (-d) = uTr c d := by
+  rw [uTr, uTr, neg_neg, neg_neg, add_comm]
+
+set_option maxHeartbeats 1000000 in
+private theorem oi_shape {C : ℤ} (hC : ¬ (3 : ℤ) ∣ C) (hC0 : C ≠ 0)
+    {x y : ZMod 6} {b d : ℤ}
+    {κ : ℤ} (hκ3 : ¬ (3 : ℤ) ∣ κ) (hκv : κ = 2 ∨ κ = 5 ∨ κ = 8)
+    (h : (C : ℂ) * s3 ^ 1 * gTr x b + ((-C : ℤ) : ℂ) * s3 ^ 0 * gTr y d
+      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (x - y) (b - d) = (κ : ℂ) * s3 ^ 1) :
+    ((b = 2 ∧ d = 1) ∨ (b = -2 ∧ d = -1))
+    ∧ C * gF (gAddr x b) + (-C) * gF (gAddr y d)
+        + 3 * hexF (uAddr (x - y) (b - d)).val = 0
+    ∧ -3 * (C * gE (gAddr x b)) - 2 * (C * gE (gAddr x b) + C * gF (gAddr x b))
+        + ((-C) * gE (gAddr y d) + (-C) * gF (gAddr y d))
+        + 3 * (hexE (uAddr (x - y) (b - d)).val + hexF (uAddr (x - y) (b - d)).val)
+      = 3 * κ := by
+  have hnegC : ¬ (3 : ℤ) ∣ (-C) := fun hh => hC ((dvd_neg).mp hh)
+  obtain ⟨t, ht⟩ : ∃ t, b.natAbs + d.natAbs = (b - d).natAbs + 2 * t :=
+    ⟨(b.natAbs + d.natAbs - (b - d).natAbs) / 2, by omega⟩
+  have hcl := hex_cleared ht h
+  obtain ⟨μ, hμ⟩ : ∃ μ, b.natAbs = 2 * μ ∨ b.natAbs = 2 * μ + 1 := ⟨b.natAbs / 2, by omega⟩
+  obtain ⟨ν, hν⟩ : ∃ ν, d.natAbs = 2 * ν ∨ d.natAbs = 2 * ν + 1 := ⟨d.natAbs / 2, by omega⟩
+  simp only [zero_add, pow_zero] at hcl
+  rcases hμ with hμ | hμ <;> rcases hν with hν | hν
+  · -- (even, even): the odd side pins the FIRST trace (even height) at value κ·3^μ,
+    -- and every candidate value is divisible by 3 while κ is not — dead
+    exfalso
+    rw [hμ, hν, show 1 + 2 * μ + 2 * ν = 2 * (μ + ν) + 1 by ring,
+      show (1 : ℕ) + 2 * ν = 2 * ν + 1 by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul'] at hcl
+    have hsep : ((3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν)
+        + (3 : ℂ) ^ t * 3 * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+          (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs)
+        + s3 * ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+          + ((-(κ * 3 ^ (μ + ν)) : ℤ) : ℂ)) = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨-, hB⟩ := eq_zero_of_add_sqrt3_mul
+      ((inRing_pow_trace' μ _ _ _).add
+        (((inRing_three_pow' t).mul (InRing.intCast 3)).mul (inRing_hexTrace _ _ _)))
+      ((inRing_pow_trace' ν _ _ _).add (InRing.intCast _)) hsep
+    have hpin : hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+        = ((κ * 3 ^ μ : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero ν (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hB
+      linear_combination hB
+    obtain ⟨hm0, hvv⟩ := g_rational hC0 hpin
+    have hμ0 : μ = 0 := by omega
+    subst hμ0
+    have hg : ∀ z : ZMod 6, 2 * gE z + gF z = 3 ∨ 2 * gE z + gF z = 0
+        ∨ 2 * gE z + gF z = -3 := by decide
+    rw [pow_zero, mul_one] at hvv
+    refine hκ3 ?_
+    rcases hg (gAddr x b) with hv | hv | hv
+    · rw [hv] at hvv; exact ⟨C, by omega⟩
+    · rw [hv] at hvv; exact ⟨0, by omega⟩
+    · rw [hv] at hvv; exact ⟨-C, by omega⟩
+  · -- LIVE: (even, odd)
+    rw [hμ, hν, show 1 + 2 * μ + (2 * ν + 1) = 2 * (μ + ν + 1) by ring,
+      show (1 : ℕ) + (2 * ν + 1) = 2 * (ν + 1) by ring] at hcl
+    simp only [sqrt3_pow_two_mul'] at hcl
+    have hkill : (3 : ℂ) ^ (ν + 1) * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ)
+        + (3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν + 1)
+        = (κ : ℂ) * 3 ^ (μ + ν + 1)
+          + (3 : ℂ) ^ (t + 1) * hexTrace ((-1) * hexE (uAddr (x - y) (b - d)).val)
+            ((-1) * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    rcases Nat.eq_zero_or_pos μ with hμ0 | hμ0
+    · -- b = 0: the second trace is alone at the bottom — dead
+      exfalso
+      subst hμ0
+      exact kill_alone_two (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+        (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+        (m := 2 * 0) (n := 2 * ν + 1) (k := (b - d).natAbs) (p := ν + 1) (q := 0)
+        (r := t + 1) (s := 0 + ν + 1) hnegC (by omega) (by omega) (by omega) (by omega) hkill
+    · -- μ ≥ 1: the tie at ADJACENT heights
+      obtain ⟨hpq, hpr⟩ := live_tie (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+        (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+        (m := 2 * μ) (n := 2 * ν + 1) (k := (b - d).natAbs) (p := ν + 1) (q := μ)
+        (r := t + 1) (s := μ + ν + 1) hC hnegC (by norm_num)
+        (by omega) (by omega) (by omega) (by omega) (by omega) hkill
+      -- ν + 1 = μ and t > ν: same sign, k = 1, t = 2ν + 1
+      have hk1 : (b - d).natAbs = 1 := by omega
+      have htv : t = 2 * ν + 1 := by omega
+      subst htv
+      have hμv : μ = ν + 1 := by omega
+      subst hμv
+      -- rewrite the y-trace through the +3 address shift so both coefficients are C
+      have hshift : hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν + 1)
+          = hexTrace (C * gE (gAddr y d + 3)) (C * gF (gAddr y d + 3)) (2 * ν + 1) := by
+        rw [gE_shift_three, gF_shift_three]
+        ring_nf
+      rcases Nat.eq_zero_or_pos ν with hν0 | hν0
+      · -- ν = 0: THE BOUNDARY, heights (2, 1) — extract the two rows
+        subst hν0
+        obtain ⟨R1, R2⟩ := row_pair (C₁ := C) (C₂ := -C) (C₃ := -1) (κ := κ)
+          (X := gAddr x b) (Y := gAddr y d) (Z := uAddr (x - y) (b - d))
+          (m := 2 * 1) (n := 2 * 0 + 1) (k := (b - d).natAbs)
+          (p := 0 + 1) (q := 1) (r := 2 * 0 + 1 + 1) (s := 1 + 0 + 1) hkill
+        rw [hk1] at R1 R2
+        rw [show (2 * 1 : ℕ) = 2 from rfl, show (2 * 0 + 1 : ℕ) = 1 from rfl,
+          piCoeff_two, piCoeff_one] at R1 R2
+        refine ⟨by omega, ?_, ?_⟩
+        · have h3F : 3 * (C * gF (gAddr x b) + (-C) * gF (gAddr y d)
+              + 3 * hexF (uAddr (x - y) (b - d)).val) = 0 := by linear_combination R2
+          linarith
+        · have h3E : 3 * (-3 * (C * gE (gAddr x b))
+              - 2 * (C * gE (gAddr x b) + C * gF (gAddr x b))
+              + ((-C) * gE (gAddr y d) + (-C) * gF (gAddr y d))
+              + 3 * (hexE (uAddr (x - y) (b - d)).val + hexF (uAddr (x - y) (b - d)).val)
+              - 3 * κ) = 0 := by linear_combination R1
+          linarith
+      · -- ν ≥ 1: adjacent heights (2ν+1, 2ν+2) with two clear levels — dead
+        exfalso
+        rw [hshift] at hkill
+        refine kill_adjacent (C := C) (C₃ := -1) (κ := κ)
+          (X := gAddr y d + 3) (Y := gAddr x b) (Z := uAddr (x - y) (b - d))
+          (m := 2 * ν + 1) (k := (b - d).natAbs)
+          (p := ν + 1) (r := 2 * ν + 1 + 1) (s := ν + 1 + ν + 1)
+          hC (by omega) (by omega) (by omega) ?_
+        rw [show (2 * ν + 1 + 1 : ℕ) = 2 * (ν + 1) from by ring]
+        linear_combination hkill
+  · -- (odd, even): the even side pins the unit trace; k is odd, so k = 1 pins
+    -- `hexE = κ` (refused by κ ∈ {2,5,8}) and k ≥ 3 forces height zero — dead
+    exfalso
+    rw [hμ, hν, show 1 + (2 * μ + 1) + 2 * ν = 2 * (μ + ν + 1) by ring,
+      show (1 : ℕ) + 2 * ν = 2 * ν + 1 by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul'] at hcl
+    have hsep : ((3 : ℂ) ^ t * 3 * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+          (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs
+        + ((-(κ * 3 ^ (μ + ν + 1)) : ℤ) : ℂ))
+        + s3 * ((3 : ℂ) ^ ν * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b)) (2 * μ + 1)
+          + (3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν))
+        = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨hA, -⟩ := eq_zero_of_add_sqrt3_mul
+      ((((inRing_three_pow' t).mul (InRing.intCast 3)).mul (inRing_hexTrace _ _ _)).add
+        (InRing.intCast _))
+      ((inRing_pow_trace' ν _ _ _).add (inRing_pow_trace' μ _ _ _)) hsep
+    simp only [one_mul] at hA
+    -- k = |b − d| is odd here; t + 1 ≤ μ + ν + 1
+    have hko : (b - d).natAbs = 2 * (μ + ν - t) + 1 := by omega
+    have hpin : hexTrace (hexE (uAddr (x - y) (b - d)).val)
+        (hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs
+        = ((κ * 3 ^ (μ + ν - t) : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero (t + 1) (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hA
+      rw [show ((3 : ℂ) ^ (t + 1)) * ((κ : ℂ) * 3 ^ (μ + ν - t)) = (κ : ℂ) * 3 ^ (μ + ν + 1) by
+        rw [← mul_assoc, mul_comm ((3 : ℂ) ^ (t + 1)) (κ : ℂ), mul_assoc, ← pow_add,
+          show t + 1 + (μ + ν - t) = μ + ν + 1 by omega]]
+      linear_combination hA
+    rcases Nat.eq_zero_or_pos (μ + ν - t) with hj0 | hj1
+    · -- k = 1: the height-one pin reads hexE = κ
+      rw [hj0, pow_zero, mul_one] at hpin
+      rw [hko, hj0] at hpin
+      obtain ⟨hF1, hval⟩ := hexTrace_pin (h := 2 * 0 + 1) (by norm_num) hpin
+      rw [show (2 * 0 + 1 : ℕ) = 1 from rfl, piCoeff_one] at hval
+      have hE : ∀ z : ZMod 6, hexE z.val = 0 ∨ hexE z.val = 1 ∨ hexE z.val = -1 := by decide
+      rcases hE (uAddr (x - y) (b - d)) with hv | hv | hv <;> rw [hv] at hval <;> omega
+    · -- k ≥ 3: three divides the value, the pin forces height zero — contradiction
+      have hdiv : (3 : ℤ) ∣ κ * 3 ^ (μ + ν - t) := by
+        obtain ⟨j, hj'⟩ : ∃ j, μ + ν - t = j + 1 := ⟨μ + ν - t - 1, by omega⟩
+        rw [hj', pow_succ]
+        exact ⟨κ * 3 ^ j, by ring⟩
+      have hpin' : hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+          (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs
+          = ((κ * 3 ^ (μ + ν - t) : ℤ) : ℂ) := by
+        rw [one_mul, one_mul]
+        exact hpin
+      obtain ⟨hk0, -⟩ := u_rational (by norm_num) hpin' hdiv
+      omega
+  · -- (odd, odd): the second trace, at ODD height, is pinned — dead
+    exfalso
+    rw [hμ, hν, show 1 + (2 * μ + 1) + (2 * ν + 1) = 2 * (μ + ν + 1) + 1 by ring,
+      show (1 : ℕ) + (2 * ν + 1) = 2 * (ν + 1) by ring] at hcl
+    simp only [pow_succ, sqrt3_pow_two_mul'] at hcl
+    have hsep : ((3 : ℂ) ^ (ν + 1) * hexTrace (C * gE (gAddr x b)) (C * gF (gAddr x b))
+          (2 * μ + 1)
+        + (3 : ℂ) ^ t * 3 * hexTrace (1 * hexE (uAddr (x - y) (b - d)).val)
+            (1 * hexF (uAddr (x - y) (b - d)).val) (b - d).natAbs)
+        + s3 * ((3 : ℂ) ^ μ * hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d))
+            (2 * ν + 1)
+          + ((-(κ * 3 ^ (μ + ν + 1)) : ℤ) : ℂ)) = 0 := by
+      rw [← hexTrace_intMul, ← hexTrace_intMul, ← hexTrace_intMul]
+      push_cast
+      push_cast at hcl
+      linear_combination hcl
+    obtain ⟨-, hB⟩ := eq_zero_of_add_sqrt3_mul
+      ((inRing_pow_trace' (ν + 1) _ _ _).add
+        (((inRing_three_pow' t).mul (InRing.intCast 3)).mul (inRing_hexTrace _ _ _)))
+      ((inRing_pow_trace' μ _ _ _).add (InRing.intCast _)) hsep
+    have hpin : hexTrace ((-C) * gE (gAddr y d)) ((-C) * gF (gAddr y d)) (2 * ν + 1)
+        = ((κ * 3 ^ (ν + 1) : ℤ) : ℂ) := by
+      refine mul_left_cancel₀ (pow_ne_zero μ (by norm_num : (3 : ℂ) ≠ 0)) ?_
+      push_cast
+      push_cast at hB
+      rw [show ((3 : ℂ) ^ μ) * ((κ : ℂ) * 3 ^ (ν + 1)) = (κ : ℂ) * 3 ^ (μ + ν + 1) by
+        rw [← mul_assoc, mul_comm ((3 : ℂ) ^ μ) (κ : ℂ), mul_assoc, ← pow_add,
+          show μ + (ν + 1) = μ + ν + 1 by omega]]
+      linear_combination hB
+    obtain ⟨hm0, -⟩ := g_rational (neg_ne_zero.mpr hC0) hpin
+    omega
 
 /-! ## §A The adjacent master web — hexagon neighbours, separation `ḡ/3`
 
