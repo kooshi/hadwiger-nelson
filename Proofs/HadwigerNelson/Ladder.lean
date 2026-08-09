@@ -1369,6 +1369,116 @@ theorem normBranch_even {a c : ZMod 6} {β δ : ℕ}
   obtain ⟨hca, -⟩ := (word_neg_iff a c 0 0).mp hw
   exact zmod_pair_pin a c hac hca
 
+/-- Three divides a product with two units modulo three only through the third factor. -/
+private theorem dvd_of_dvd_mul_units {x y z : ℤ} (hx : x % 3 = 1) (hy : y % 3 = 1)
+    (h : (3 : ℤ) ∣ x * y * z) : (3 : ℤ) ∣ z := by
+  obtain ⟨k, hk⟩ : ∃ k, x = 3 * k + 1 := ⟨x / 3, by omega⟩
+  obtain ⟨l, hl⟩ : ∃ l, y = 3 * l + 1 := ⟨y / 3, by omega⟩
+  obtain ⟨m, hm⟩ := h
+  refine ⟨m - (3 * k * l + k + l) * z, ?_⟩
+  have : x * y = 3 * (3 * k * l + k + l) + 1 := by rw [hk, hl]; ring
+  rw [this] at hm
+  linarith [hm]
+
+/-- **Both heights odd and both at least three**: impossible. Clearing leaves an identity
+in `ℤ[ζ₆, π]` whose `π`-coordinates are divisible by three on one side and a unit times
+a non-multiple of three on the other. -/
+theorem normBranch_odd_large {a c : ZMod 6} {β δ : ℕ} (hβ : 1 ≤ β) (hδ : 1 ≤ δ)
+    (h : NormBranch a ((2 * β + 1 : ℕ) : ℤ) c ((2 * δ + 1 : ℕ) : ℤ)) : False := by
+  obtain ⟨β', rfl⟩ : ∃ β', β = β' + 1 := ⟨β - 1, by omega⟩
+  obtain ⟨δ', rfl⟩ : ∃ δ', δ = δ' + 1 := ⟨δ - 1, by omega⟩
+  set b := 2 * (β' + 1) + 1 with hbdef
+  set d := 2 * (δ' + 1) + 1 with hddef
+  have hc := normBranch_cleared h
+  set eA := zeta6 ^ (a.val : ℤ) with heA
+  set eC := zeta6 ^ (c.val : ℤ) with heC
+  -- cancel the single `√3` common to both sides
+  have hring : (3 : ℂ) ^ (δ' + 1) * (eA * piC ^ b) + (3 : ℂ) ^ (β' + 1) * (eC * piC ^ d)
+      = (eA * piC ^ b) * (eC * piC ^ d) + (3 : ℂ) ^ (β' + δ' + 3) := by
+    refine mul_left_cancel₀ sqrt3_cast_ne_zero ?_
+    rw [show ((Real.sqrt 3 : ℝ) : ℂ) ^ d = 3 ^ (δ' + 1) * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [hddef, pow_succ, sqrt3_pow_two_mul],
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ b = 3 ^ (β' + 1) * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [hbdef, pow_succ, sqrt3_pow_two_mul],
+      show ((Real.sqrt 3 : ℝ) : ℂ) ^ (b + d + 1)
+          = 3 ^ (β' + δ' + 3) * ((Real.sqrt 3 : ℝ) : ℂ) by
+        rw [hbdef, hddef, show 2 * (β' + 1) + 1 + (2 * (δ' + 1) + 1) + 1
+            = 2 * (β' + δ' + 3) + 1 by ring, pow_succ, sqrt3_pow_two_mul]] at hc
+    linear_combination hc
+  -- the norm form, and the two coordinates modulo three
+  obtain ⟨mA, hmA⟩ := three_dvd_piCoeff_fst (2 * (β' + 1))
+  obtain ⟨mB, hmB⟩ := three_dvd_piCoeff_fst (2 * (δ' + 1))
+  set ZA := (piCoeff b).2 with hZA
+  set ZB := (piCoeff d).2 with hZB
+  have hA : eA * piC ^ b = eA * (3 * (mA : ℂ)) + eA * (ZA : ℂ) * piC := by
+    rw [piC_pow_coeff, hbdef]
+    rw [show ((piCoeff (2 * (β' + 1) + 1)).1 : ℂ) = ((3 * mA : ℤ) : ℂ) by rw [← hmA]]
+    push_cast
+    ring
+  have hB : eC * piC ^ d = eC * (3 * (mB : ℂ)) + eC * (ZB : ℂ) * piC := by
+    rw [piC_pow_coeff, hddef]
+    rw [show ((piCoeff (2 * (δ' + 1) + 1)).1 : ℂ) = ((3 * mB : ℤ) : ℂ) by rw [← hmB]]
+    push_cast
+    ring
+  set P := eA * (mA : ℂ) - (3 : ℂ) ^ β' with hP
+  set Q := eC * (mB : ℂ) - (3 : ℂ) ^ δ' with hQ
+  -- the π-part survives the reduction; everything else carries a factor three
+  set V : ℂ := -2 * (3 : ℂ) ^ (β' + δ' + 1) - 3 * (P * Q) - P * (eC * (ZB : ℂ)) * piC
+      - Q * (eA * (ZA : ℂ)) * piC + eA * eC * (ZA : ℂ) * (ZB : ℂ) with hV
+  have hkey : eA * eC * (ZA : ℂ) * (ZB : ℂ) * piC = 3 * V := by
+    have hnorm : (eA * piC ^ b - (3 : ℂ) ^ (β' + 1)) * (eC * piC ^ d - (3 : ℂ) ^ (δ' + 1))
+        = -2 * (3 : ℂ) ^ (β' + δ' + 2) := by
+      linear_combination -hring
+    have hfac1 : eA * piC ^ b - (3 : ℂ) ^ (β' + 1) = 3 * P + eA * (ZA : ℂ) * piC := by
+      rw [hA, hP]; ring
+    have hfac2 : eC * piC ^ d - (3 : ℂ) ^ (δ' + 1) = 3 * Q + eC * (ZB : ℂ) * piC := by
+      rw [hB, hQ]; ring
+    rw [hfac1, hfac2] at hnorm
+    rw [hV]
+    linear_combination hnorm - (eA * eC * (ZA : ℂ) * (ZB : ℂ)) * piC_sq
+  -- read the coordinates
+  have hVring : InRing V := by
+    have hEA : InRing eA := InRing.zeta6_zpow _
+    have hEC : InRing eC := InRing.zeta6_zpow _
+    have hPr : InRing P := (hEA.mul (InRing.intCast mA)).add (inRing_three_pow β').neg
+    have hQr : InRing Q := (hEC.mul (InRing.intCast mB)).add (inRing_three_pow δ').neg
+    have hpi : InRing piC := ⟨0, 0, 1, 0, by push_cast; ring⟩
+    have t1 : InRing ((-2 : ℂ) * (3 : ℂ) ^ (β' + δ' + 1)) := by
+      rw [show ((-2 : ℂ) * (3 : ℂ) ^ (β' + δ' + 1))
+        = (((-2 * 3 ^ (β' + δ' + 1) : ℤ)) : ℂ) by push_cast; ring]
+      exact InRing.intCast _
+    have t2 : InRing ((3 : ℂ) * (P * Q)) := by
+      have := InRing.intSmul 3 (hPr.mul hQr)
+      rw [show (((3 : ℤ)) : ℂ) = (3 : ℂ) by push_cast; ring] at this
+      exact this
+    have t3 : InRing (P * (eC * (ZB : ℂ)) * piC) :=
+      (hPr.mul (hEC.mul (InRing.intCast ZB))).mul hpi
+    have t4 : InRing (Q * (eA * (ZA : ℂ)) * piC) :=
+      (hQr.mul (hEA.mul (InRing.intCast ZA))).mul hpi
+    have t5 : InRing (eA * eC * (ZA : ℂ) * (ZB : ℂ)) :=
+      ((hEA.mul hEC).mul (InRing.intCast ZA)).mul (InRing.intCast ZB)
+    have := ((((t1.add t2.neg).add t3.neg).add t4.neg).add t5)
+    rw [hV]
+    convert this using 1
+    ring
+  obtain ⟨v₁, v₂, v₃, v₄, hVc⟩ := hVring
+  have hz : eA * eC = ((hexE ((a + c).val) : ℤ) : ℂ) + ((hexF ((a + c).val) : ℤ) : ℂ) * zeta6 := by
+    rw [heA, heC, ← zpow_add₀ zeta6_ne_zero, ← zeta6_zpow_val ((a.val : ℤ) + (c.val : ℤ)),
+      ← zeta6_zpow_hex]
+    congr 2
+  rw [hz, hVc] at hkey
+  obtain ⟨c₁, c₂, c₃, c₄⟩ := inRing_coords_zero
+    (n₁ := -(3 * v₁)) (n₂ := -(3 * v₂))
+    (n₃ := ZA * ZB * hexE ((a + c).val) - 3 * v₃)
+    (n₄ := ZA * ZB * hexF ((a + c).val) - 3 * v₄)
+    (by push_cast; linear_combination hkey)
+  -- three divides both hex coordinates: impossible
+  refine hexE_hexF_not_both_dvd ((a + c).val) (ZMod.val_lt _) ⟨?_, ?_⟩
+  · exact dvd_of_dvd_mul_units (piCoeff_snd_emod (2 * (β' + 1))) (piCoeff_snd_emod (2 * (δ' + 1)))
+      ⟨v₃, by linarith⟩
+  · exact dvd_of_dvd_mul_units (piCoeff_snd_emod (2 * (β' + 1))) (piCoeff_snd_emod (2 * (δ' + 1)))
+      ⟨v₄, by linarith⟩
+
 /-- The complete solution set of the ii **norm-branch** equation on the lattice, as
 address tuples: the two matching-crossing points, the four sporadics, and the four
 glue-incident solutions `(σ, −σ³)` (conjugates and swaps included). The matching
