@@ -3210,10 +3210,100 @@ def hexMetaColTab (circ : Bool) : ZMod 6 → Fin 4 :=
 /-- The table is rot6-equivariant: the transported entry is the τ-image.  The fact
 that collapses properness to one web per orbit. -/
 theorem hexColTab_equivariant (circ : Bool) (a x : ZMod 6) :
-    hexColTab circ (a + 1) (x + 1) = tau (hexColTab circ a x) := sorry
+    hexColTab circ (a + 1) (x + 1) = tau (hexColTab circ a x) := by
+  revert circ a x
+  decide
 
 theorem hexMetaColTab_equivariant (circ : Bool) (x : ZMod 6) :
-    hexMetaColTab circ (x + 1) = tau (hexMetaColTab circ x) := sorry
+    hexMetaColTab circ (x + 1) = tau (hexMetaColTab circ x) := by
+  revert circ x
+  decide
+
+/-! ### §C.1 The case split, the shift congruences, and the table row lemmas -/
+
+private theorem hexdiff_cases : ∀ c : ZMod 6,
+    c = 0 ∨ c = 1 ∨ c = 2 ∨ c = 3 ∨ c = 4 ∨ c = 5 := by decide
+
+private theorem hplus42 : ∀ A : ZMod 6, A + 4 + 2 = A := by decide
+private theorem hplus51 : ∀ A : ZMod 6, A + 5 + 1 = A := by decide
+
+/-- Every point of the hexagram is a labelled point of one of the four kinds. -/
+private theorem mem_hexagram_cases {z : ℂ} (hz : z ∈ hexagram) :
+    (∃ a x b, z = outerPt (hexPivot a) (hexPivot a + 1) x b)
+    ∨ (∃ a x b, z = innerPt (hexPivot a) (hexPivot a + 1) x b)
+    ∨ (∃ x b, z = outerPt metaPivot metaAnchor x b)
+    ∨ (∃ x b, z = innerPt metaPivot metaAnchor x b) := by
+  rcases hz with h | h
+  · rw [Set.mem_iUnion] at h
+    obtain ⟨a, h⟩ := h
+    rcases h with ⟨x, b, hx⟩ | ⟨x, b, hx⟩
+    · exact Or.inl ⟨a, x, b, hx⟩
+    · exact Or.inr (Or.inl ⟨a, x, b, hx⟩)
+  · rcases h with ⟨x, b, hx⟩ | ⟨x, b, hx⟩
+    · exact Or.inr (Or.inr (Or.inl ⟨x, b, hx⟩))
+    · exact Or.inr (Or.inr (Or.inr ⟨x, b, hx⟩))
+
+/-- The per-family sporadic-row properness facts, each a `fin_cases` over the table
+and a 6-case decide over the web index. -/
+private theorem tab_adj_oi (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ adjOITable) :
+    hexColTab false a (X + (a - 3)) ≠ hexColTab true (a + 1) (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_adj_io (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ adjIOTable) :
+    hexColTab true a (X + (a - 3)) ≠ hexColTab false (a + 1) (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_adj_ii (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ adjIITable) :
+    hexColTab true a (X + (a - 3)) ≠ hexColTab true (a + 1) (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_opp_oo (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ oppOOTable) :
+    hexColTab false a (X + (a - 3)) ≠ hexColTab false (a + 3) (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_unit_oi (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ oiTable) :
+    hexColTab false a (X + (a - 3)) ≠ hexColTab true (a + 2) (Y + a) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_unit_io (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ oiTable) :
+    hexColTab false a (X + (a + 4)) ≠ hexColTab true (a + 4) (Y + (a + 1)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_unit_ii (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ iiNormTable) :
+    hexColTab true a (X + (a - 3)) ≠ hexColTab true (a + 2) (Y + a) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_unit_ii' (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ iiNormTable) :
+    hexColTab true a (X + (a + 4)) ≠ hexColTab true (a + 4) (Y + (a + 1)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_meta_oo (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ metaOOTable) :
+    hexColTab false a (X + (a - 3)) ≠ hexMetaColTab false (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_meta_oi (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ metaOITable) :
+    hexColTab false a (X + (a - 3)) ≠ hexMetaColTab true (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_meta_io (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ metaIOTable) :
+    hexColTab true a (X + (a - 3)) ≠ hexMetaColTab false (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
+
+private theorem tab_meta_ii (a : ZMod 6) {X Y : ZMod 6} {B D : ℤ}
+    (hm : (X, B, Y, D) ∈ metaIITable) :
+    hexColTab true a (X + (a - 3)) ≠ hexMetaColTab true (Y + (a - 3)) := by
+  fin_cases hm <;> revert a <;> decide
 
 open Classical in
 /-- The hexagram colouring: decode any address in priority order (pivot outer,
@@ -3233,21 +3323,483 @@ noncomputable def hexColor (z : ℂ) : Fin 4 :=
     hexMetaColTab true h.choose.1
   else 0
 
+/-! ### §C.3 The read lemmas: the decode returns the table on every family, because
+every earlier-priority coincidence lands on a table agreement (the fusion inventory,
+paid once per glue class). -/
+
+/-- The decode on a pivot-outer point. -/
+private theorem hexColor_outer (a x : ZMod 6) (b : ℤ) :
+    hexColor (outerPt (hexPivot a) (hexPivot a + 1) x b) = hexColTab false a x := by
+  have hex : ∃ n : ZMod 6 × ZMod 6 × ℤ,
+      outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = outerPt (hexPivot a) (hexPivot a + 1) x b := ⟨(a, x, b), rfl⟩
+  rw [hexColor, dif_pos hex]
+  have hgen : ∀ n : ZMod 6 × ZMod 6 × ℤ,
+      outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = outerPt (hexPivot a) (hexPivot a + 1) x b →
+      hexColTab false n.1 n.2.1 = hexColTab false a x := by
+    rintro ⟨a', x', b'⟩ he
+    obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+    rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+    · rw [add_zero] at he ⊢
+      obtain ⟨rfl, -⟩ := (outerPt_inj (dist_hexPivot_anchor a) x' b' x b).mp he
+      rfl
+    · exact absurd he.symm (adj_fusion_oo a x b x' b')
+    · rw [unit_reanchor_outer' a x' b', unit_reanchor_outer a x b] at he
+      rcases (fusion_oo (dist_unit_pair a) (x + (3 - a)) b (x' + (-a)) b').mp he.symm with
+        ⟨hx, -, hx', -⟩ | ⟨hx, -, hx', -⟩
+      · rw [show x' = a + 5 from by linear_combination hx',
+          show x = a - 2 from by linear_combination hx]
+        exact (by decide : ∀ A : ZMod 6,
+          hexColTab false (A + 2) (A + 5) = hexColTab false A (A - 2)) a
+      · rw [show x' = a + 1 from by linear_combination hx',
+          show x = a + 2 from by linear_combination hx]
+        exact (by decide : ∀ A : ZMod 6,
+          hexColTab false (A + 2) (A + 1) = hexColTab false A (A + 2)) a
+    · exact absurd he.symm (opp_fusion_oo a x b x' b')
+    · have h4 := hplus42 a
+      have hro := unit_reanchor_outer (a + 4) x' b'
+      rw [h4] at hro
+      have hro2 := unit_reanchor_outer' (a + 4) x b
+      rw [h4] at hro2
+      rw [hro, hro2] at he
+      have hd : dist (hexPivot (a + 4)) (hexPivot a) = 1 := by
+        have := dist_unit_pair (a + 4)
+        rwa [h4] at this
+      rcases (fusion_oo hd (x' + (3 - (a + 4))) b' (x + (-(a + 4))) b).mp he with
+        ⟨hx', -, hx, -⟩ | ⟨hx', -, hx, -⟩
+      · rw [show x' = a + 2 from by linear_combination hx',
+          show x = a + 3 from (by decide : ∀ A X : ZMod 6,
+            X + -(A + 4) = 5 → X = A + 3) a x hx]
+        exact (by decide : ∀ A : ZMod 6,
+          hexColTab false (A + 4) (A + 2) = hexColTab false A (A + 3)) a
+      · rw [show x' = a from (by decide : ∀ A X : ZMod 6,
+            X + (3 - (A + 4)) = 5 → X = A) a x' hx',
+          show x = a + 5 from by linear_combination hx]
+        exact (by decide : ∀ A : ZMod 6,
+          hexColTab false (A + 4) A = hexColTab false A (A + 5)) a
+    · have h5 := hplus51 a
+      have := adj_fusion_oo (a + 5) x' b' x b
+      rw [h5] at this
+      exact absurd he this
+  exact hgen _ hex.choose_spec
+
+/-- The decode on a pivot-inner point. -/
+private theorem hexColor_inner (a x : ZMod 6) (b : ℤ) :
+    hexColor (innerPt (hexPivot a) (hexPivot a + 1) x b) = hexColTab true a x := by
+  by_cases h1 : ∃ n : ZMod 6 × ZMod 6 × ℤ,
+      outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = innerPt (hexPivot a) (hexPivot a + 1) x b
+  · rw [hexColor, dif_pos h1]
+    have hgen : ∀ n : ZMod 6 × ZMod 6 × ℤ,
+        outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+          = innerPt (hexPivot a) (hexPivot a + 1) x b →
+        hexColTab false n.1 n.2.1 = hexColTab true a x := by
+      rintro ⟨a', x', b'⟩ he
+      obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+      rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+      · rw [add_zero] at he
+        exact absurd he (outer_ne_inner (dist_hexPivot_anchor a) x' b' x b)
+      · exact absurd he.symm (adj_fusion_io a x b x' b')
+      · rw [unit_reanchor_outer' a x' b', unit_reanchor_inner a x b] at he
+        rcases (fusion_oi (dist_unit_pair a) (x + (3 - a)) b (x' + (-a)) b').mp he.symm
+          with ⟨hx, -, hx', -⟩ | ⟨hx, -, hx', -⟩
+        · rw [show x' = a + 3 from by linear_combination hx',
+            show x = a - 3 from by linear_combination hx]
+          exact (by decide : ∀ A : ZMod 6,
+            hexColTab false (A + 2) (A + 3) = hexColTab true A (A - 3)) a
+        · rw [show x' = a + 3 from by linear_combination hx',
+            show x = a - 3 from by linear_combination hx]
+          exact (by decide : ∀ A : ZMod 6,
+            hexColTab false (A + 2) (A + 3) = hexColTab true A (A - 3)) a
+      · exact absurd he.symm (opp_fusion_io a x b x' b')
+      · have h4 := hplus42 a
+        have hro := unit_reanchor_outer (a + 4) x' b'
+        rw [h4] at hro
+        have hri := unit_reanchor_inner' (a + 4) x b
+        rw [h4] at hri
+        rw [hro, hri] at he
+        have hd : dist (hexPivot (a + 4)) (hexPivot a) = 1 := by
+          have := dist_unit_pair (a + 4)
+          rwa [h4] at this
+        rcases (fusion_io hd (x' + (3 - (a + 4))) b' (x + (-(a + 4))) b).mp he with
+          ⟨hx', -, hx, -⟩ | ⟨hx', -, hx, -⟩
+        · rw [show x' = a + 4 from by linear_combination hx',
+            show x = a + 4 from by linear_combination hx]
+          exact (by decide : ∀ A : ZMod 6,
+            hexColTab false (A + 4) (A + 4) = hexColTab true A (A + 4)) a
+        · rw [show x' = a + 4 from by linear_combination hx',
+            show x = a + 4 from by linear_combination hx]
+          exact (by decide : ∀ A : ZMod 6,
+            hexColTab false (A + 4) (A + 4) = hexColTab true A (A + 4)) a
+      · have h5 := hplus51 a
+        have := adj_fusion_oi (a + 5) x' b' x b
+        rw [h5] at this
+        exact absurd he this
+    exact hgen _ h1.choose_spec
+  · have hex : ∃ n : ZMod 6 × ZMod 6 × ℤ,
+        innerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+          = innerPt (hexPivot a) (hexPivot a + 1) x b := ⟨(a, x, b), rfl⟩
+    rw [hexColor, dif_neg h1, dif_pos hex]
+    have hgen : ∀ n : ZMod 6 × ZMod 6 × ℤ,
+        innerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+          = innerPt (hexPivot a) (hexPivot a + 1) x b →
+        hexColTab true n.1 n.2.1 = hexColTab true a x := by
+      rintro ⟨a', x', b'⟩ he
+      obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+      rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+      · rw [add_zero] at he ⊢
+        obtain ⟨rfl, -⟩ := (innerPt_inj (dist_hexPivot_anchor a) x' b' x b).mp he
+        rfl
+      · exact absurd he.symm (adj_fusion_ii a x b x' b')
+      · rw [unit_reanchor_inner' a x' b', unit_reanchor_inner a x b] at he
+        exact absurd he.symm
+          (fusion_ii (dist_unit_pair a) (x + (3 - a)) b (x' + (-a)) b')
+      · exact absurd he.symm (opp_fusion_ii a x b x' b')
+      · have h4 := hplus42 a
+        have hri := unit_reanchor_inner (a + 4) x' b'
+        rw [h4] at hri
+        have hri2 := unit_reanchor_inner' (a + 4) x b
+        rw [h4] at hri2
+        rw [hri, hri2] at he
+        have hd : dist (hexPivot (a + 4)) (hexPivot a) = 1 := by
+          have := dist_unit_pair (a + 4)
+          rwa [h4] at this
+        exact absurd he (fusion_ii hd (x' + (3 - (a + 4))) b' (x + (-(a + 4))) b)
+      · have h5 := hplus51 a
+        have := adj_fusion_ii (a + 5) x' b' x b
+        rw [h5] at this
+        exact absurd he this
+    exact hgen _ hex.choose_spec
+
+/-- The decode on a meta-outer point. -/
+private theorem hexColor_metaOuter (x : ZMod 6) (b : ℤ) :
+    hexColor (outerPt metaPivot metaAnchor x b) = hexMetaColTab false x := by
+  have h1 : ¬ ∃ n : ZMod 6 × ZMod 6 × ℤ,
+      outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = outerPt metaPivot metaAnchor x b := by
+    rintro ⟨n, hn⟩
+    exact hexMeta_fusion_oo n.1 n.2.1 n.2.2 x b hn
+  have h2 : ¬ ∃ n : ZMod 6 × ZMod 6 × ℤ,
+      innerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = outerPt metaPivot metaAnchor x b := by
+    rintro ⟨n, hn⟩
+    exact hexMeta_fusion_io n.1 n.2.1 n.2.2 x b hn
+  have hex : ∃ n : ZMod 6 × ℤ,
+      outerPt metaPivot metaAnchor n.1 n.2 = outerPt metaPivot metaAnchor x b :=
+    ⟨(x, b), rfl⟩
+  rw [hexColor, dif_neg h1, dif_neg h2, dif_pos hex]
+  congr 1
+  exact ((outerPt_inj dist_meta_metaAnchor _ _ _ _).mp hex.choose_spec).1
+
+/-- The decode on a meta-inner point: the two per-web pivot fusions land on the
+table agreements. -/
+private theorem hexColor_metaInner (x : ZMod 6) (b : ℤ) :
+    hexColor (innerPt metaPivot metaAnchor x b) = hexMetaColTab true x := by
+  by_cases h1 : ∃ n : ZMod 6 × ZMod 6 × ℤ,
+      outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+        = innerPt metaPivot metaAnchor x b
+  · rw [hexColor, dif_pos h1]
+    have hgen : ∀ n : ZMod 6 × ZMod 6 × ℤ,
+        outerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+          = innerPt metaPivot metaAnchor x b →
+        hexColTab false n.1 n.2.1 = hexMetaColTab true x := by
+      rintro ⟨a', x', b'⟩ he
+      rcases (hexMeta_fusion_oi a' x' b' x b).mp he with
+        ⟨rfl, -, rfl, -⟩ | ⟨rfl, -, rfl, -⟩
+      · exact (by decide : ∀ A : ZMod 6,
+          hexColTab false A (A - 2) = hexMetaColTab true (A - 2)) a'
+      · exact (by decide : ∀ A : ZMod 6,
+          hexColTab false A (A - 3) = hexMetaColTab true (A + 2)) a'
+    exact hgen _ h1.choose_spec
+  · have h2 : ¬ ∃ n : ZMod 6 × ZMod 6 × ℤ,
+        innerPt (hexPivot n.1) (hexPivot n.1 + 1) n.2.1 n.2.2
+          = innerPt metaPivot metaAnchor x b := by
+      rintro ⟨n, hn⟩
+      exact hexMeta_fusion_ii n.1 n.2.1 n.2.2 x b hn
+    have h3 : ¬ ∃ n : ZMod 6 × ℤ,
+        outerPt metaPivot metaAnchor n.1 n.2 = innerPt metaPivot metaAnchor x b := by
+      rintro ⟨n, hn⟩
+      exact outer_ne_inner dist_meta_metaAnchor n.1 n.2 x b hn
+    have hex : ∃ n : ZMod 6 × ℤ,
+        innerPt metaPivot metaAnchor n.1 n.2 = innerPt metaPivot metaAnchor x b :=
+      ⟨(x, b), rfl⟩
+    rw [hexColor, dif_neg h1, dif_neg h2, dif_neg h3, dif_pos hex]
+    congr 1
+    exact ((innerPt_inj dist_meta_metaAnchor _ _ _ _).mp hex.choose_spec).1
+
+/-! ### §C.4 Properness per family pair, the difference split routing each chord
+to its classification -/
+
+private theorem valid_pp_oo {a a' x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
+      (outerPt (hexPivot a') (hexPivot a' + 1) y d) = 1) :
+    hexColTab false a x ≠ hexColTab false a' y := by
+  obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+  rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+  · rw [add_zero] at h ⊢
+    rcases (intra_outer_complete (dist_hexPivot_anchor a) x b y d).mp h with ⟨hy | hy, -⟩
+    · subst hy
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab false A X ≠ hexColTab false A (X + 1)) a x
+    · subst hy
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab false A X ≠ hexColTab false A (X - 1)) a x
+  · exact absurd h (adj_oo_empty a x b y d)
+  · rcases (unit_oo_complete a x b y d).mp h with ⟨hy, -⟩ | ⟨hx, -⟩ | ⟨hy, -⟩
+    · rw [hy]
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab false A X ≠ hexColTab false (A + 2) X) a x
+    · rw [hx]
+      exact (by decide : ∀ A Y : ZMod 6,
+        hexColTab false A (A - 3) ≠ hexColTab false (A + 2) Y) a y
+    · rw [hy]
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab false A X ≠ hexColTab false (A + 2) A) a x
+  · have hm := (opp_oo_complete a x b y d).mp h
+    have ht := tab_opp_oo a hm
+    rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+      show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+  · have h4 := hplus42 a
+    have hu := unit_oo_complete (a + 4) y d x b
+    rw [h4] at hu
+    rcases hu.mp (by rwa [dist_comm] at h) with ⟨hx, -⟩ | ⟨hy, -⟩ | ⟨hx, -⟩
+    · rw [hx]
+      exact (by decide : ∀ A Y : ZMod 6,
+        hexColTab false A Y ≠ hexColTab false (A + 4) Y) a y
+    · rw [hy]
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab false A X ≠ hexColTab false (A + 4) (A + 4 - 3)) a x
+    · rw [hx]
+      exact (by decide : ∀ A Y : ZMod 6,
+        hexColTab false A (A + 4) ≠ hexColTab false (A + 4) Y) a y
+  · have h5 := hplus51 a
+    have he := adj_oo_empty (a + 5) y d x b
+    rw [h5] at he
+    exact absurd (by rwa [dist_comm] at h) he
+
+private theorem valid_pp_oi {a a' x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
+      (innerPt (hexPivot a') (hexPivot a' + 1) y d) = 1) :
+    hexColTab false a x ≠ hexColTab true a' y := by
+  obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+  rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+  · rw [add_zero] at h ⊢
+    obtain ⟨rfl, -⟩ := (intra_seam_complete (dist_hexPivot_anchor a) x b y d).mp h
+    exact (by decide : ∀ A X : ZMod 6, hexColTab false A X ≠ hexColTab true A X) a y
+  · have hm := (adj_oi_complete a x b y d).mp h
+    have ht := tab_adj_oi a hm
+    rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+      show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+  · rw [unit_reanchor_outer, unit_reanchor_inner'] at h
+    have hm := oi_complete (x + (3 - a)) b (y + (-a)) d
+      ((oi_chord_iff (dist_unit_pair a) (x + (3 - a)) b (y + (-a)) d).mp h)
+    have ht := tab_unit_oi a hm
+    rwa [show (x + (3 - a) + (a - 3) : ZMod 6) = x by ring,
+      show (y + -a + a : ZMod 6) = y by ring] at ht
+  · exact absurd h (opp_oi_empty a x b y d)
+  · have h4 := hplus42 a
+    have hro := unit_reanchor_outer' (a + 4) x b
+    rw [h4] at hro
+    have hri := unit_reanchor_inner (a + 4) y d
+    rw [h4] at hri
+    rw [hro, hri] at h
+    have hd : dist (hexPivot a) (hexPivot (a + 4)) = 1 := by
+      have := dist_unit_pair (a + 4)
+      rw [h4] at this
+      rwa [dist_comm] at this
+    have hm := oi_complete (x + -(a + 4)) b (y + (3 - (a + 4))) d
+      ((oi_chord_iff hd (x + -(a + 4)) b (y + (3 - (a + 4))) d).mp h)
+    have ht := tab_unit_io a hm
+    rwa [show (x + -(a + 4) + (a + 4) : ZMod 6) = x by ring,
+      show (y + (3 - (a + 4)) + (a + 1) : ZMod 6) = y by ring] at ht
+  · have h5 := hplus51 a
+    have hio := adj_io_complete (a + 5) y d x b
+    rw [h5] at hio
+    have hm := hio.mp (by rwa [dist_comm] at h)
+    have ht := tab_adj_io (a + 5) hm
+    rw [show (y - (a + 5 - 3) + (a + 5 - 3) : ZMod 6) = y by ring,
+      show (x - (a + 5 - 3) + (a + 5 - 3) : ZMod 6) = x by ring, h5] at ht
+    exact ht.symm
+
+private theorem valid_pp_ii {a a' x y : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
+      (innerPt (hexPivot a') (hexPivot a' + 1) y d) = 1) :
+    hexColTab true a x ≠ hexColTab true a' y := by
+  obtain ⟨c, rfl⟩ : ∃ c, a' = a + c := ⟨a' - a, by ring⟩
+  rcases hexdiff_cases c with rfl | rfl | rfl | rfl | rfl | rfl
+  · rw [add_zero] at h ⊢
+    rcases (intra_inner_complete (dist_hexPivot_anchor a) x b y d).mp h with ⟨hy | hy, -⟩
+    · subst hy
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab true A X ≠ hexColTab true A (X + 2)) a x
+    · subst hy
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab true A X ≠ hexColTab true A (X - 2)) a x
+  · have hm := (adj_ii_complete a x b y d).mp h
+    have ht := tab_adj_ii a hm
+    rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+      show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+  · rw [unit_reanchor_inner, unit_reanchor_inner'] at h
+    rcases (ii_chord_iff (dist_unit_pair a) (x + (3 - a)) b (y + (-a)) d).mp h with
+      ⟨hy, -⟩ | hnorm
+    · rw [show y = x from (by decide : ∀ A X Y : ZMod 6,
+        Y + -A = X + (3 - A) + 3 → Y = X) a x y hy]
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab true A X ≠ hexColTab true (A + 2) X) a x
+    · have hm := ii_norm_complete (x + (3 - a)) b (y + (-a)) d hnorm
+      have ht := tab_unit_ii a hm
+      rwa [show (x + (3 - a) + (a - 3) : ZMod 6) = x by ring,
+        show (y + -a + a : ZMod 6) = y by ring] at ht
+  · exact absurd h (opp_ii_empty a x b y d)
+  · have h4 := hplus42 a
+    have hri := unit_reanchor_inner' (a + 4) x b
+    rw [h4] at hri
+    have hri2 := unit_reanchor_inner (a + 4) y d
+    rw [h4] at hri2
+    rw [hri, hri2] at h
+    have hd : dist (hexPivot a) (hexPivot (a + 4)) = 1 := by
+      have := dist_unit_pair (a + 4)
+      rw [h4] at this
+      rwa [dist_comm] at this
+    rcases (ii_chord_iff hd (x + -(a + 4)) b (y + (3 - (a + 4))) d).mp h with
+      ⟨hy, -⟩ | hnorm
+    · rw [show y = x from (by decide : ∀ A X Y : ZMod 6,
+        Y + (3 - (A + 4)) = X + -(A + 4) + 3 → Y = X) a x y hy]
+      exact (by decide : ∀ A X : ZMod 6,
+        hexColTab true A X ≠ hexColTab true (A + 4) X) a x
+    · have hm := ii_norm_complete (x + -(a + 4)) b (y + (3 - (a + 4))) d hnorm
+      have ht := tab_unit_ii' a hm
+      rwa [show (x + -(a + 4) + (a + 4) : ZMod 6) = x by ring,
+        show (y + (3 - (a + 4)) + (a + 1) : ZMod 6) = y by ring] at ht
+  · have h5 := hplus51 a
+    have hii := adj_ii_complete (a + 5) y d x b
+    rw [h5] at hii
+    have hm := hii.mp (by rwa [dist_comm] at h)
+    have ht := tab_adj_ii (a + 5) hm
+    rw [show (y - (a + 5 - 3) + (a + 5 - 3) : ZMod 6) = y by ring,
+      show (x - (a + 5 - 3) + (a + 5 - 3) : ZMod 6) = x by ring, h5] at ht
+    exact ht.symm
+
+private theorem valid_pm_oo {a x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
+      (outerPt metaPivot metaAnchor y d) = 1) :
+    hexColTab false a x ≠ hexMetaColTab false y := by
+  have hm := (hexMeta_oo_complete a x b y d).mp h
+  have ht := tab_meta_oo a hm
+  rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+
+private theorem valid_pm_oi {a x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
+      (innerPt metaPivot metaAnchor y d) = 1) :
+    hexColTab false a x ≠ hexMetaColTab true y := by
+  rcases (hexMeta_oi_complete a x b y d).mp h with ⟨hy, -⟩ | hm
+  · rw [hy]
+    exact (by decide : ∀ A X : ZMod 6,
+      hexColTab false A X ≠ hexMetaColTab true A) a x
+  · have ht := tab_meta_oi a hm
+    rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+      show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+
+private theorem valid_pm_io {a x y : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
+      (outerPt metaPivot metaAnchor y d) = 1) :
+    hexColTab true a x ≠ hexMetaColTab false y := by
+  have hm := (hexMeta_io_complete a x b y d).mp h
+  have ht := tab_meta_io a hm
+  rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+
+private theorem valid_pm_ii {a x y : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
+      (innerPt metaPivot metaAnchor y d) = 1) :
+    hexColTab true a x ≠ hexMetaColTab true y := by
+  have hm := (hexMeta_ii_complete a x b y d).mp h
+  have ht := tab_meta_ii a hm
+  rwa [show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at ht
+
+private theorem valid_mm_oo {x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt metaPivot metaAnchor x b)
+      (outerPt metaPivot metaAnchor y d) = 1) :
+    hexMetaColTab false x ≠ hexMetaColTab false y := by
+  rcases (intra_outer_complete dist_meta_metaAnchor x b y d).mp h with ⟨hy | hy, -⟩
+  · subst hy
+    exact (by decide : ∀ X : ZMod 6,
+      hexMetaColTab false X ≠ hexMetaColTab false (X + 1)) x
+  · subst hy
+    exact (by decide : ∀ X : ZMod 6,
+      hexMetaColTab false X ≠ hexMetaColTab false (X - 1)) x
+
+private theorem valid_mm_oi {x y : ZMod 6} {b d : ℤ}
+    (h : dist (outerPt metaPivot metaAnchor x b)
+      (innerPt metaPivot metaAnchor y d) = 1) :
+    hexMetaColTab false x ≠ hexMetaColTab true y := by
+  obtain ⟨rfl, -⟩ := (intra_seam_complete dist_meta_metaAnchor x b y d).mp h
+  exact (by decide : ∀ X : ZMod 6, hexMetaColTab false X ≠ hexMetaColTab true X) y
+
+private theorem valid_mm_ii {x y : ZMod 6} {b d : ℤ}
+    (h : dist (innerPt metaPivot metaAnchor x b)
+      (innerPt metaPivot metaAnchor y d) = 1) :
+    hexMetaColTab true x ≠ hexMetaColTab true y := by
+  rcases (intra_inner_complete dist_meta_metaAnchor x b y d).mp h with ⟨hy | hy, -⟩
+  · subst hy
+    exact (by decide : ∀ X : ZMod 6,
+      hexMetaColTab true X ≠ hexMetaColTab true (X + 2)) x
+  · subst hy
+    exact (by decide : ∀ X : ZMod 6,
+      hexMetaColTab true X ≠ hexMetaColTab true (X - 2)) x
+
 /-- **Properness**: the table separates every unit chord of the hexagram. -/
 theorem hexColor_valid {z w : ℂ} (hz : z ∈ hexagram) (hw : w ∈ hexagram)
-    (h : dist z w = 1) : hexColor z ≠ hexColor w := sorry
+    (h : dist z w = 1) : hexColor z ≠ hexColor w := by
+  rcases mem_hexagram_cases hz with ⟨a, x, b, rfl⟩ | ⟨a, x, b, rfl⟩ | ⟨x, b, rfl⟩ |
+    ⟨x, b, rfl⟩ <;>
+    rcases mem_hexagram_cases hw with ⟨a', y, d, rfl⟩ | ⟨a', y, d, rfl⟩ | ⟨y, d, rfl⟩ |
+      ⟨y, d, rfl⟩
+  · rw [hexColor_outer, hexColor_outer]; exact valid_pp_oo h
+  · rw [hexColor_outer, hexColor_inner]; exact valid_pp_oi h
+  · rw [hexColor_outer, hexColor_metaOuter]; exact valid_pm_oo h
+  · rw [hexColor_outer, hexColor_metaInner]; exact valid_pm_oi h
+  · rw [hexColor_inner, hexColor_outer]
+    exact (valid_pp_oi (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_inner, hexColor_inner]; exact valid_pp_ii h
+  · rw [hexColor_inner, hexColor_metaOuter]; exact valid_pm_io h
+  · rw [hexColor_inner, hexColor_metaInner]; exact valid_pm_ii h
+  · rw [hexColor_metaOuter, hexColor_outer]
+    exact (valid_pm_oo (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_metaOuter, hexColor_inner]
+    exact (valid_pm_io (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_metaOuter, hexColor_metaOuter]; exact valid_mm_oo h
+  · rw [hexColor_metaOuter, hexColor_metaInner]; exact valid_mm_oi h
+  · rw [hexColor_metaInner, hexColor_outer]
+    exact (valid_pm_oi (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_metaInner, hexColor_inner]
+    exact (valid_pm_ii (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_metaInner, hexColor_metaOuter]
+    exact (valid_mm_oi (by rwa [dist_comm] at h)).symm
+  · rw [hexColor_metaInner, hexColor_metaInner]; exact valid_mm_ii h
 
 theorem colorable_four_hexagram :
-    ((unitDistance ℂ).induce hexagram).Colorable 4 := sorry
+    ((unitDistance ℂ).induce hexagram).Colorable 4 :=
+  ⟨SimpleGraph.Coloring.mk (fun v => hexColor (v : ℂ))
+    (fun {v w} hvw => hexColor_valid v.2 w.2 (unitDistance_adj.mp hvw))⟩
 
 /-- The lower bound: M25's four-ladder object (hence M24's nine-point witness)
 sits inside the hexagram. -/
 theorem not_colorable_three_hexagram :
-    ¬ ((unitDistance ℂ).induce hexagram).Colorable 3 := sorry
+    ¬ ((unitDistance ℂ).induce hexagram).Colorable 3 := fun hc =>
+  not_colorable_three_fourLadder
+    (hc.of_hom { toFun := fun v => ⟨(v : ℂ), fourLadder_subset_hexagram v.2⟩
+                 map_rel' := fun {_ _} h => h })
 
 /-- **The M26 headline**: the hexagram is exactly 4-chromatic. -/
 theorem chromaticNumber_hexagram :
-    ((unitDistance ℂ).induce hexagram).chromaticNumber = 4 := sorry
+    ((unitDistance ℂ).induce hexagram).chromaticNumber = 4 := by
+  refine le_antisymm colorable_four_hexagram.chromaticNumber_le ?_
+  exact_mod_cast
+    add_one_le_chromaticNumber_iff_not_colorable.mpr not_colorable_three_hexagram
 
 /-! ## Spec examples — the statement-level gate at skeleton time -/
 
