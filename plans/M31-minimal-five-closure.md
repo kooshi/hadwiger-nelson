@@ -200,6 +200,43 @@ size is a possible insertion, Kooshi's call).
 * Does the rigid part of the 510's colour space (rigidity instrument, M30) live
   INSIDE the candidate closure or use points outside it?
 
+## Subplan seeds — implementation notes saved from the M30 sessions (2026-08-10)
+
+*Working knowledge that would otherwise die with the conversation; the subplanning
+session should read these before designing instruments.*
+
+* **One field basis everywhere.** `field.py`, `degrey.py`, `couple.py`,
+  `anatomy.py`, `hexchunk.py` all use the SAME 16-dim basis (PRIMES [3,5,7,11],
+  bit k ⟺ √primes[k]; B1,B3,B11,B33 = 0,1,8,9). Consequence: hexagram chunk
+  points (couple/hexchunk representation) can be **exactly** rotated by the new
+  field's generators (ρ₁₅, √ρ₁₅ = (√15+i)/4, etc. from `anatomy.py`) with no
+  conversion — the mitotic-hexagram object is buildable today: rotate
+  `hexchunk.gen_points(B)` about a shared centre/pivot, union, dedup by exact
+  key, `unit_edges` sweep, feed `rigidity.py`. Mixed-radical cross-chords are
+  just 16-vector arithmetic.
+* **The probe order that respects registration**: write §0 (predicted χ of the
+  mitotic hexagram at each B; predicted cross-chord counts; the detune-band
+  guess), COMMIT, then run. SAT χ first at k = 3, 4, 5 with the vacuity-guard
+  discipline; remember chunk-χ is noisy near criticality (audit boundaries
+  before believing any 4).
+* **Instrument facts**: `rigidity.py --graph X.json --k K [--sym S.json]
+  [--census CAP]` takes any n/edges JSON; its violation-query loop settles
+  sides completely or reports honest unknowns; the census soundness lives in
+  the Python canonical set, blocking clauses only accelerate. The TRIPLE-query
+  extension (needed for the compulsion-cascade thread, M32 stub): same
+  selector pattern — s_i → (pattern constraint over a triple), one clause
+  ⋁s_i; a SAT model teaches, UNSAT mass-confirms. Costs measured on the
+  desktop: 791-forcer full pair sweep ≈ 45 min; hexagram B=1 census to cap
+  10⁴ ≈ 35 min; 1581 k=5 full pair sweep ≈ 30 s; single 1581 k=4 SAT ≈ 1–30 s,
+  monolithic k=4 UNSAT > 80 min (use the kernel fact instead, or cubes).
+* **Background-job hygiene**: `python3 -u` (block buffering hides all progress
+  otherwise); pipe task output through nothing (a `| tail` truncates the
+  record); per-call SAT timeouts always; one heavy job at a time still binds.
+* **Viz**: new objects go into `tools/degrey-viz.html` via
+  `tools/degreyviz_refresh.py` ONLY (never hand-edit the data block); the
+  ownership overlay (colour by owning centre) and defect-map overlay are
+  wanted and unbuilt; artifact updates re-publish the same file path.
+
 ## Deliverables
 
 * The closed radius set + centre lattice, derived and census-checked.
