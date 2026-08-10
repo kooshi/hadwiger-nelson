@@ -1,4 +1,8 @@
-# M32 — The first certified infinite 5-chromatic object (PRE-SUBPLAN STUB)
+# M32 — The first certified infinite 5-chromatic object
+# (SUBPLANNED 2026-08-10 — committed scope: the designed-forcer probe phase +
+# the 2-adic engine's first Lean ascent; certification-at-scale is gated by the
+# §0c checkpoint and scopes to M33 if the probes come up flat. §0 below is the
+# registered block; the stub sections are kept verbatim as context.)
 
 *Written 2026-08-09 at the field-jump decision; consumes M31's object. Read
 `plans/M30-degrey-anatomy.md` and `plans/M31-minimal-five-closure.md` first —
@@ -223,3 +227,320 @@ blind to the compulsion level where the 5-forcing actually operates.
   report at face value, keep the SAT-measured χ as registered-but-uncertified
   knowledge, and rescope — the anatomy and closure results (M30–M31) stand on
   their own regardless.
+
+---
+
+# §0 — The M32 subplan (registered 2026-08-10, committed BEFORE any instrument runs)
+
+*Discipline as at M31: everything below is written and committed before any new
+instrument executes. §0a is pure a-priori derivation (paper arithmetic — no code
+was run to produce it); its consequences are predictions the census then tests.
+Where a §0a claim fails in the census, the derivation is wrong and the failure
+is reported at face value.*
+
+## Scope, refined at subplan time (WORKFLOW step 3 authority)
+
+**The committed scope of M32 is two blocks**: (1) the Route-B probe phase — the
+designed-forcer hunt inside our own fabric, with the compulsion meters built
+first; (2) the 2-adic engine's first Lean ascent — the three-prime independence
+lemma, the quadrature kill lemma, and the distance-2 seam pair web, which serve
+Route A and Route B identically. **Certification of a witness-scale object is
+NOT committed inside M32**: the §0c checkpoint decides M33's object. If a probe
+lands a small designed forcer, its certification becomes M32's continuation
+with the engine warm; if the probes come up flat, M33 = Route A on the
+1581-witness closure and its stub receives the complete handoff. Reason: Route
+A at ~50× M26 scale is multi-milestone work under any outcome; committing it
+inside M32 would guarantee a rescope, and the workflow prefers the honest split
+now. (Alternative weighed: keep the stub's full target inside one milestone —
+rejected because every measured number says the upper-bound work at 24k points
+/ 123k chords dwarfs M24+M25+M26 combined.)
+
+**The one-generator trade, registered as the stub demanded**: probes and engine
+work in the SINGLE new family — words in √ρ₁₅ with seam decorations, i.e. the
+group ⟨ζ₆, ζ₁₂, σ, √ρ₁₅⟩ — and ρ₆₃ enters only if a design needs the
+distance-4 spindle. Reasons: (a) M31 measured ρ₆₃/√ρ₆₃ STERILE at chunk scale
+(their conic diagonals (4,4) and 32+12√7 sit beyond the chunk's radial reach
+≈ 2.16); (b) the Lean first ascent then adjoins only √5 (the 8-dim basis
+{1,√3,√5,√11,√15,√33,√55,√165}) rather than √5 and √7 (16-dim); (c) the
+question "can ρ₁₅-family words alone force?" is itself structural — de Grey
+needed both families; one-family forcing would be the cleanness win, and
+one-family saturation below forcing would be evidence both families are
+necessary. Either outcome is a finding.
+
+## §0a — The stacking law (a-priori derivation; the copy↔copy analogue of M31's law)
+
+Setting as M31 §0a: seam material has both components in K = ℚ(√3,√11); a
+detune is R = s·W (s a seam decoration, |s| = 1, components in K; W a word in
+√ρ₁₅ = (√15+i)/4 this milestone — even exponent = full spindle, Re(W) ∈ ℚ,
+Im(W) ∈ √15·ℚ; odd = half spindle, reversed). A **stack** is
+H ∪ R₁·H ∪ R₂·H ∪ … with R_i acting about anchors a_i. M31's law governs every
+copy↔base pair. The new object is the **copy↔copy** coupling, and the anchors
+decide its width:
+
+**1. Same anchor (a₁ = a₂).** Both rotations fix the anchor, so the pair
+(R₁H, R₂H) is isometric to (H, R₁⁻¹R₂·H): copy↔copy is the SINGLE-WORD law at
+the relative word — same-anchor stacks never escape thinness, however many
+copies. Registered instances:
+  * **Chirality pair** (R = ρ₁₅, R′ = ρ₁₅⁻¹): relative word ρ₁₅⁻², even,
+    2·Re(ρ₁₅²) = 17/16 (ρ₁₅² = (17+7i√15)/32). Conic t² + r² − (17/16)(±tr)
+    = 1. Diagonal t = r → t² = 16/15: denominator 15, outside the {2,3}-smooth
+    seam vocabulary — EMPTY. The (t²=1, r=17/16) solution needs a ring at
+    289/256, not in the chunk inventory as far as we know. **Registered: the
+    chirality pair's copy↔copy channel carries ZERO chords at B ≤ 2**
+    (confidence 70%; a hit names its ring and is a find, not a bug).
+  * (ρ₁₅, √ρ₁₅) same anchor: relative word √ρ₁₅⁻¹ (odd) — the same
+    perpendicular conic t² + r² ± tr/2 = 1 as base↔half-copy; expect counts
+    of the measured order (≤ 12).
+
+**2. Different anchors, same word, same decoration (a₁ ≠ a₂, R₁ = R₂ = sW).**
+The channel WIDENS — this is the milestone's registered mechanism claim. With
+u = x − a₁, v = y − a₂ (seam offsets) and A = a₁ − a₂ (a K-vector), the two
+copy points differ by p₁ − p₂ = A + sW·(u − v): the word factors onto the
+DIFFERENCE w = u − v. Writing ζ = s·w·Ā = ξ + iη (ξ, η ∈ K) and splitting
+|A + sWw|² = 1 over the radical blocks, an even word W = q + i√15·q′ gives:
+  * √15-block: **η = Im(s·w·Ā) = 0** — the difference vector w is collinear
+    with the s̄-twisted anchor axis (a pin on PAIRS, not on points);
+  * K-block: |w|² ± 2q|A|·|w| + (|A|² − 1) = 0 — a quadratic fixing |w| to at
+    most two admissible lengths per ray sign.
+  Consequences, each falsifiable at the census:
+  * **The translation matching at unit anchor separation**: w = 0 is a root
+    iff |A| = 1, and then EVERY pair with u = v gives a unit chord — the two
+    copies are unit translates of one rotated lattice, coupled by a perfect
+    matching of size |H ∩ (H + A)| = O(n). Our fabric provides unit anchor
+    pairs natively: the M23 triangle's pivots (0, 1, ζ₆ — second neighbours
+    in the hexagram hexagon) are pairwise at distance 1. **This is the
+    arithmetic reason de Grey's construction has two spindle centres: one
+    anchor is thin by law; two anchors at a tuned separation buy O(n)
+    coupling.** Registered: the (pivot 0, pivot 1) ρ₁₅ stack's copy↔copy
+    census reads 100–800 chords at B ≤ 2 (vs ≤ 12 for every same-anchor
+    variant), dominated by the exact translation matching.
+  * **The second root at |A| = 1**: |w| = 2q = 7/4 for W = ρ₁₅ (|w|² = 49/16,
+    2-smooth) — a second, thinner family beyond the matching, present only if
+    the lattice realizes collinear differences at length 7/4. Registered as
+    present-or-absent-honestly (no confidence assigned; the census answers).
+  * **The sterile separation 1/√3**: for anchors pivot↔metapivot
+    (|A|² = 1/3) and W = ρ₁₅, the quadratic's roots have |w|² ∉ K (the
+    discriminant carries √59: |w| = ∓7/(8√3) + √59/8 → |w|² picks up
+    √177-content). **Registered: the pivot↔meta ρ₁₅ same-word stack couples
+    copy↔copy NOWHERE** — an a-priori emptiness the census must reproduce
+    (confidence 85%; a violation falsifies the §0a block arithmetic itself).
+  * **The conjugate channel at 2/√3**: for opposite-pivot anchors
+    (|A|² = 4/3), the admissible lengths are |w|² = (41 ± 7√33)/24 — a
+    ℚ(√33)-CONJUGATE PAIR, echoing M31's conjugate-ring channel. Whether the
+    lattice realizes them is open: registered band 0–200 chords.
+
+**3. Different anchors, different words.** The general pair
+p₁ − p₂ = A + s₁W₁u − s₂W₂v carries THREE word-bearing terms (words W₁, W₂,
+W₁W̄₂ on the K-vectors s₁uĀ, s₂vĀ, s₁s̄₂uv̄), and the block split yields a
+2-equation system in the 4 lattice parameters (u, v) that does NOT factor
+through per-point pins — a codim-2 pair-variety, generically far richer than
+the same-anchor conic. Special structure: for W₁ = W₂ (case 2) the system
+degenerates to the matching analysis above; for W₁, W₂ of opposite parity the
+blocks mix Re- and Im-parts of all three terms. No point predictions are
+registered for the general case beyond: every found chord must satisfy the
+exact per-block vanishing of its own decomposition (the instrument recomputes
+it at find time — the P1-style tripwire, generalized), and mixed-FAMILY words
+remain sterile in the z₃ term exactly as in M31's law.
+
+*Verification protocol: every copy↔copy chord found by any census is checked
+at find time against its class's necessary condition — case 1 via the
+single-word law at the relative word; case 2 via the difference-pin
+(collinearity + admissible length, both exact); case 3 via the general
+block-split recompute. A violation aborts loudly naming this section. The
+self-test plants a translation-matching chord (must be found) and a
+pin-violating fake (must be caught).*
+
+## §0b — Numbered predictions (falsifiable, with confidence)
+
+* **Q1 (instrument validation)**: the coverage meter reproduces the verified
+  510−v0 fan (UNSAT at the 36-point circle, k = 4) and the v139 fan; its
+  vacuity guard fires when the base graph is not k-colourable at all; the
+  triple meter reproduces M20's compulsion on a finite two-circle chunk
+  containing a witness triangle (mono-query UNSAT at k = 3) and goes SAT when
+  the witness triangle is removed. Confidence: very high (mostly re-runs of
+  verified queries through the new path).
+* **Q2 (base rates — the bare fabric's compulsion floor at k = 4)**: on the
+  hexagram chunk (B ≤ 2): (a) no pivot is fanned and full-cover-set min-cover
+  is exactly 3 — LOGICAL consequences of M26's kernel χ = 4 plus the rainbow
+  floor (the inner circle's rot3 partition into unit triangles forces ≥ 3);
+  recorded as sanity checks, not findings. The genuine measurements: (b) the
+  OUTER-circle-only min-cover per pivot — registered prediction 3 (the
+  ambient seam web forces a third colour on the outer circle alone;
+  confidence 55%, genuinely open — a reading of 2 means the outer circles
+  retain 2-colour slack in full ambient, a real discovery about where
+  coverage pressure does NOT live); (c) NO outer 120°-triple is compelled
+  non-mono at k = 4 in the bare chunk (confidence 65% — the > 10⁴-colouring
+  floppiness argues slack; a compulsion found in the BARE fabric would be
+  M20's genre surviving one colour higher and would reshape the design
+  thread immediately).
+* **Q3 (same-anchor stacks stay thin)**: every same-anchor copy↔copy census
+  obeys the relative-word single law (very high); the chirality pair reads 0
+  copy↔copy chords at B ≤ 2 (70%); ALL same-anchor stacks probed (≤ 3
+  copies) read χ = 4 (85%).
+* **Q4 (the wide channel)**: the unit-separation same-word ρ₁₅ stack (anchors
+  = two triangle pivots) carries 100–800 copy↔copy chords at B ≤ 2,
+  dominated by the exact translation matching (85% — the matching is
+  arithmetic; the band is the uncertainty); the pivot↔meta ρ₁₅ stack carries
+  ZERO copy↔copy chords (85% — §0a's √59 emptiness); the opposite-pivot
+  stack's conjugate-pair lengths (41±7√33)/24 carry 0–200 (band, no point
+  estimate). χ of every wide stack: 4 (75%). Falsifier of the χ claims = the
+  jackpot; escalation protocol below.
+* **Q5 (the design meters on stacks — the milestone's live question)**: does
+  any probed stack show (a) a forced pair — predict NO (70%); (b) a compelled
+  120°-triple (mono-query UNSAT at k = 4) — genuinely open, registered 40%
+  that SOME stack compels one; (c) a coverage rise — some target circle's
+  min-cover strictly above its bare-fabric base rate — registered 35%; a
+  full fan (min-cover 4) — predict NO (85%). ANY positive is the design
+  gradient: the checkpoint's movement branch fires.
+* **Q6 (the Lean ascent lands)**: `sqrt_indep₈` — ℚ-independence of
+  {1,√3,√5,√11,√15,√33,√55,√165} — lands by the M24 descent plus a
+  √5 ∉ ℚ(√3,√11) bridging lemma (90%); the quadrature kill lemma
+  `quadrature_rho15` — for K-coordinate u, v: |ρ₁₅·u − v|² = 1 →
+  Im(u·v̄) = 0 ∧ |u|² + |v|² − (7/4)·Re(u·v̄) = 1 — lands on the block
+  lemma K ∩ √15·K = 0 (85%); the distance-2 seam pair web — the M31-measured
+  6 chords + midpoint fusion as a completeness theorem via the axis-general
+  M24 engine at constant 2 (75%; the risk is sporadic-table size, not
+  method). Every statement script-verified in `build/m32-design.py` BEFORE
+  Lean states it (the M26 discipline, mandatory).
+* **Q7 (the verdict)**: the probe phase does NOT produce a sub-1,000-vertex
+  designed 5-forcer (85%); M33's default object is the 1581-witness closure
+  (Route A) with the engine warm. Falsifiers: the jackpot, or a compulsion
+  gradient that iterating design inside M32 climbs to forcing.
+* **Q8 (cost honesty)**: the probe phase completes in ≤ 2 desktop-days of
+  background compute; χ probes capped 300 s, meter queries 600 s, pairwise
+  sweeps ≤ 30 min per stack (run complete only on the three most-coupled
+  stacks); one heavy job at a time; `unknown ≥ cap` is never a χ bound.
+
+**Escalation protocol (registered, fires only on a k = 4 refusal)**: (1)
+independent re-encode (the M21 pin-injection style or a second seed) must
+reproduce UNSAT; (2) cube-split certified UNSAT; (3) only then is the object
+called 5-chromatic, and the finite core goes to the M05/M06 kernel-certificate
+pipeline. Everything else stops while this runs.
+
+## §0c — Scope ladder (committed order; a timeout leaves a coherent prefix)
+
+1. **Instruments**: the coverage + triple meters into `tools/rigidity.py`
+   (palette-WLOG single SAT calls; vacuity guards; three-outcome honesty);
+   stack support into `tools/closure.py` (n-copy unions, per-pair
+   relative-class routing, the §0a certificate checks). Controls red/green
+   before any verdict (Q1).
+2. **Probe A — base rates**: the bare hexagram chunk's meters (Q2).
+3. **Probe B — same-anchor stacks**: thin controls + the chirality pair (Q3).
+4. **Probe C — different-anchor stacks**: the wide channel — the de Grey
+   mimic at unit anchor pairs, the sterile 1/√3 control, the conjugate
+   channel at 2/√3 — with all meters on the coupled results (Q4, Q5).
+5. **CHECKPOINT (registered decision rule)**: **jackpot** (a stack refuses
+   k = 4 and survives escalation) → M32's object is that stack, everything
+   else yields; **movement** (any Q5 meter positive) → at most TWO registered
+   iteration rounds of ≤ 12 design variants each, chosen by the gradient,
+   same caps, then re-checkpoint; **flat** → the probe phase closes honestly,
+   M33 = Route A, and the finding "designed one-family stacks at ≤ 2,400
+   vertices carry no compulsion" joins the irreducibly-global ledger line.
+6. **The Lean ascent** (runs regardless of the checkpoint — it serves both
+   routes): `build/m32-design.py` script-verifies every statement → skeleton
+   `Proofs/HadwigerNelson/Quadrature.lean` → `sqrt_indep₈` → the block lemma
+   → `quadrature_rho15` → the distance-2 pair web (working module name
+   `PairWeb.lean`; may fold into Quadrature.lean at the domain pass's
+   discretion). Design-script iteration may interleave with probe background
+   waits; full builds only via `./scripts/build.sh` and only when no probe
+   is running.
+7. **Visualizer**: the stack view + meters into the closure explorer (same
+   URL, never re-mint).
+8. **Close**: quality gate, Frontier + Grokkings, the M33 stub (object per
+   checkpoint), the report.
+
+**Modeling passes** (fresh Skill invocations, each committed): domain →
+obligation → experience — the centre of gravity is the engine and the probes,
+not the consumer surface. Obligation-modeling is IN scope this milestone
+(unlike M30/M31): the ascent's three theorems are real proof obligations.
+
+## §1 — Instruments (the shapes, before implementation)
+
+**`tools/rigidity.py` extensions** (the meters; every query palette-WLOG'd to
+one SAT call, three-outcome honest):
+
+* `--coverage`: for graph G, target set S (a vertex's neighbourhood, or an
+  explicit circle-point list), level j at colours k: SAT("proper k-colouring
+  with S restricted to colours {0..j−1}") — palette symmetry makes the
+  restriction WLOG. min-cover(S) = least SAT j; fan ⟺ min-cover = k ⟺ the
+  j = k−1 query is UNSAT. Vacuity guard: G must be k-colourable first, else
+  the banner says so and no fan claim is emitted.
+* `--triple x y z --mode mono|rainbow`: mono pins all three to colour 0
+  (WLOG); rainbow pins them to 0,1,2 (WLOG). UNSAT at mono = compelled
+  non-mono (M20's genre); UNSAT at rainbow = compelled non-rainbow.
+* Both meters emit `{query, outcome ∈ sat|unsat|unknown, seconds, cap}` rows
+  into the JSON artifact; `unknown` is never worded as a bound.
+
+**`tools/closure.py` extensions**:
+
+* `stack(base, [(anchor_i, det_i), …])` → union with per-copy provenance
+  (0 = base), exact dedup, fusion record, per-copy isometry control
+  (intra-copy edge count = intra-base).
+* Per-PAIR census with relative-class routing: same-anchor pairs → the
+  single-word law at the relative word (M31 `law_check`); same-word
+  different-anchor pairs → the difference-pin certificate (collinearity of
+  u − v with the twisted axis + admissible |w|², both exact); general pairs →
+  the block-split recompute. Violation aborts naming §0a. Anchor-incident
+  readings stay a separate class (the M31 lesson).
+* Self-test additions: planted translation-matching chord found; planted
+  difference-pin violation caught; the chirality-empty and 1/√3-empty
+  controls run as censuses whose ZERO is asserted (absence as a checked
+  result, not an omission).
+
+**Probe grids** (sizes: B ≤ 2 chunk ≈ 700–800 points; stacks of 2–3 copies ≈
+1,500–2,400 points — squarely the Haugland-G₁ band):
+
+* A: bare chunk, meters on all 7 pivot outer circles + ~20 sampled outer
+  120°-triples.
+* B: same-anchor at metapivot and at pivot 0: {(ρ₁₅, ρ₁₅⁻¹), (ρ₁₅, √ρ₁₅),
+  (ρ₁₅, ζ₁₂ρ₁₅)} — census + χ + meters on the most-coupled.
+* C: different-anchor same-word: (pivot 0, pivot 1)·ρ₁₅ [unit separation —
+  the wide channel], (pivot 0, meta)·ρ₁₅ [the sterile control], opposite
+  pivots·ρ₁₅ [the conjugate channel], plus one half-spindle variant
+  (pivot 0, pivot 1)·√ρ₁₅ and one three-copy de Grey mimic
+  (base + ρ₁₅ about pivot 0 + ρ₁₅ about pivot 1). Census + χ + all meters.
+
+**The Lean skeleton statements** (the .lean file lands immediately after the
+domain pass settles the coordinate representation — the one open shape
+question; every statement is script-verified first):
+
+```
+theorem sqrt_indep₈ {e₁ e₃ e₅ e₁₁ e₁₅ e₃₃ e₅₅ e₁₆₅ : ℚ}
+    (h : (e₁:ℝ) + e₃*√3 + e₅*√5 + e₁₁*√11 + e₁₅*√15 + e₃₃*√33
+         + e₅₅*√55 + e₁₆₅*√165 = 0) :
+    e₁ = 0 ∧ e₃ = 0 ∧ e₅ = 0 ∧ e₁₁ = 0 ∧ e₁₅ = 0 ∧ e₃₃ = 0 ∧ e₅₅ = 0 ∧ e₁₆₅ = 0
+-- proof shape: regroup as (A) + (B)·√5 with A, B ∈ span{1,√3,√11,√33};
+-- bridging lemma √5 ∉ ℚ(√3,√11) by the M24 sqrt_indep + squaring casework;
+-- then the 4-dim sqrt_indep twice.
+
+theorem quadrature_rho15 (u v : K-complex, coordinates as ℚ-4-vectors) :
+    normSq (ρ₁₅ * u - v) = 1 →
+    Im (u * conj v) = 0 ∧ normSq u + normSq v - (7/4) * Re (u * conj v) = 1
+-- the kill lemma: the √15-block of the chord equation vanishes alone
+-- (K ∩ √15·K = 0, a corollary of sqrt_indep₈); the K-block is the conic.
+-- Seam decorations fold in as z = s·u·v̄ without changing the statement's shape.
+
+-- The distance-2 pair web (M31-measured: 6 chords + the midpoint fusion):
+-- pair2_oo_complete / pair2_oi_complete / pair2_ii_complete / pair2_fusion,
+-- the M24 axis-general engine at constant 2 — exact statements fixed by
+-- build/m32-design.py before Lean states them.
+```
+
+**JSON contract** (M33 reads these names): `object`, `stack [{anchor, detune
+{s,a,b,class}}]`, `counts`, `pairwise [{i, j, relative_class, cross_chords
+[{pin, certificate}], law}]`, `chi [{k, outcome, seconds, cap}]`, `meters
+{forced_pairs, triples [...], coverage [{target, min_cover, rows [...]}]}`,
+`controls` — controls travel IN the artifact.
+
+## Failure clauses (registered)
+
+* **Probes flat + ascent lands**: M32 closes as "the stacking law + the
+  compulsion map + the 2-adic engine's first theorems; no designed forcer at
+  probe scale" — a complete, honest milestone; M33 = Route A.
+* **The ascent stalls** (sqrt_indep₈'s casework explodes or the pair web's
+  sporadic tables defeat the axis-general engine at affordable cost): report
+  at face value with the measured cost, land what stands, and the M33 stub
+  records the wall's exact shape.
+* **Jackpot**: the escalation protocol above; nothing is claimed without the
+  independent re-encode and the cube-split certificate.
+* **Any segfault, any process**: HALT and report to Kooshi (standing rule).
