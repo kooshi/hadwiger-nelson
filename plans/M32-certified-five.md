@@ -34,6 +34,17 @@ context accumulates through the three stubs and is not repeated here.*
   tangency fusion — the hex family and four seam-height-±1 chords through
   (1/√3)·σ̄ — is the smallest complete two-centre web one field up; its Lean
   classification is the M24-engine warm-up before the witness closure's webs.
+* **The lower bound has a named shape now (G13, verified 2026-08-10)**: the
+  5-transition at Heule-510's centre is a FAN — every proper 4-colouring of
+  510 − v0 covers the centre's 36-point unit circle with all four colours
+  (SAT-verified, UNSAT 10.1 s), while the centre's own system provably cannot
+  self-confine (M18/M20 kernel theorems). So the geometric χ ≥ 5 argument's
+  final step is exactly M18's `fan_iff_coverage` vocabulary one field up:
+  prove the ambient detuned web forces coverage 4 on a centre's outer circle.
+  The compulsion cascade should target THAT statement, and the coverage-order
+  SAT query (restrict N(v) to k−1 colours — one call by palette symmetry) is
+  the cheap instrument the pairwise rigidity sweep was structurally blind to:
+  build it into `tools/rigidity.py` alongside the triple-query extension.
 
 ## The target theorem
 

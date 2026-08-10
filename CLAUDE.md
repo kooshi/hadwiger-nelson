@@ -428,6 +428,40 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   vertices, 67,568 edges at the 1200-committed radius) leaves them
   4-colourable in seconds — the 5-mechanism is irreducibly global at this
   order; no closure shortcut below the whole witness exists at gen-1.*
+* **G13 — The centre transition (the fan ladder)** (Kooshi's observation,
+  2026-08-10, verified exactly the same night): the recurring mechanism of
+  the colour steps is CONFINEMENT AT A CENTRE — the fan/coverage condition
+  M18 formalized (`fan_iff_coverage`). The ladder: **3→4** — the two circles
+  alone are 3-colourable **[kernel: M19]** and adding the centre forces the
+  4th (the rainbow floor) **[kernel: M20]**; **4 without a centre** — the
+  certified hexagram's meta-centre is BLIND (not a vertex; χ = 4 anyway):
+  the 4-forcing routes through the PIVOT centres, which the self-seeding
+  identity makes vertices for free — the crystal provides its own centres
+  **[kernel: M26]**; **4→5** — Heule-510's centre is confined at four BY THE
+  AMBIENT WEB: every proper 4-colouring of 510 − v0 covers v0's unit circle
+  (36 points) with all 4 colours (one symmetric SAT ask, UNSAT 10.1 s,
+  controls green), so v0 transitions to the 5th **[measured, 2026-08-10]**.
+  Its own two-circle system provably CANNOT deliver that confinement
+  (class-only graphs are 3-colourable, a 4th colour frees the pivot —
+  **[kernel: M18]**; centre + circles caps at exactly 4 — **[kernel: M20]**)
+  — so the centre's 5-transition is 100% ambient-delivered, and the inner
+  circle participates through NO edge to the centre (1/√3 is not a unit) —
+  M20's "compulsion acting through no edge" genre, one field up. Caveat
+  measured honestly: fan-ness alone does not single out the centre — the
+  degree-4 peripheral vertex 139 is ALSO fanned (its four neighbours forced
+  rainbow in every 4-colouring, UNSAT 29.5 s, and no 4 plane points are
+  pairwise unit-distant, so that rainbow is ambient-forced too) —
+  vertex-criticality worn locally; the 5-forcing is a TAPESTRY of coverage
+  compulsions (G10 again). What distinguishes the centre: its fan is the
+  certified two-circle object in its coverage-4 state — the one compulsion
+  whose isolated theory we own end-to-end. *Consequence for the instrument
+  gap: coverage compulsion is a k-set property, structurally invisible to
+  the pairwise rigidity sweep — P7's zero forced pairs and today's
+  fanned-everywhere are the same fact seen from two orders. The
+  coverage-order query (restrict N(v) to k−1 colours, one SAT call by
+  palette symmetry) is the missing instrument, and it is CHEAP. Falsifier
+  for the ladder reading: a 5-forcer whose centres are all UN-fanned after
+  deletion — then the 5-compulsion lives entirely off-centre.*
 * **G12 — The quadrature law** (M31, derived a priori in the registered
   subplan, then verified at 26 exact censuses, zero violations): a detuned
   copy R·X of seam-field material X couples to X **only** along
