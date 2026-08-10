@@ -432,6 +432,99 @@ is these rows plus per-class onset summaries (`onset_mark` /
 `never-below-vacuous` / honest interval when unknown rows intervene).
 S ∩ ball is the target below r = 1 (partial circle), n_target says so.
 
+## §0g — Obligation modeling pass (2026-08-10, fresh invocation)
+
+**G-1 — The claim taxonomy, with its trust asymmetry.** Every SAT reading
+is *self-certifying*: the model is held, re-validated in-process
+(properness + genuine avoidance + no banned colour), and an invalid model
+aborts the run — trustless. Every UNSAT reading is *solver-trusted* until
+promoted. The ladder of promotion, cheapest adequate first: (a) mid-sweep
+binary-search interior rows — solver's word, provisional; (b) every
+ONSET (the claim-bearing fired row) — confirmed by the decorrelated
+re-encode before being reported; (c) the final cores — full 1-minimality
+witnesses (G-3) + re-encode; (d) the P12 gate object — LRAT via the M05
+pipeline (A5). Partition: *prove* (in-process model validation, the
+enumerator's no-internal-edge and triple⊃pairs checks), *test* (the §0g
+self-test ledger, controls P8–P10), *assume* (CaDiCaL's UNSAT below
+promotion rung (b), named as such in every artifact).
+
+**G-2 — Invariants as executable assertions, honest under `unknown`.**
+Monotone-curve check: assert the interval sequence admits a nondecreasing
+selection — running_lo := max(running_lo, lo_i); abort iff running_lo >
+hi_i at any decided row; `unknown` rows widen intervals and are skipped,
+never compared. Class-firedness check: for decided rows at m₁ < m₂,
+abort iff fired(m₁) ∧ clean(m₂). A2 containment: per region, abort iff
+triple-fired ∧ pair-clean. Geometry-level containment: the enumerator
+asserts each √3-triple's three pairs appear in the pair inventory (exact
+set inclusion) and that NO instance tuple contains a graph edge (all
+class distances ≠ 1 — catches d² spec typos for free). Abort contract:
+SystemExit naming both offending rows + the artifact written with
+status "aborted-invariant" — loud, preserved, diagnosable. Each checker
+has a self-test that feeds it a synthetic violation and watches it abort
+(check the checker, M26 lesson).
+
+**G-3 — The shrink loop, upgraded from spot-checks to a fixpoint
+certificate.** Deleting a vertex relaxes the graph, so the base-SAT guard
+survives every deletion for free. Greedy passes over a deterministic
+recorded order (outermost-first heuristic), deleting while avoid stays
+UNSAT; measure: |R| strictly decreases per accepted deletion, a
+zero-acceptance pass terminates. Run to the 1-MINIMAL FIXPOINT: the final
+pass tests every surviving vertex, so **every core member carries its own
+necessity witness** — a validated clean model of core − v — replacing
+§0b's "spot-check the last 10 deletions" with a complete, self-certifying
+necessity census (the SAT side of the core is then trustless; only the
+core's own UNSAT remains solver-trusted, discharged per G-1's ladder).
+**The decorrelated re-encode is the BINARY encoding** at k = 4 (2 bits
+per vertex, 4 clauses per edge, 16 per triple, no AMO, ~half the
+variables): structurally different clause generation catches one-hot
+bugs, not just permutation artifacts; a vertex-order shuffle is layered
+on top. A disagreement between encodings is a red alert: halt everything,
+report, extend the self-tests with the found bug class before any rerun.
+
+**G-4 — The self-test ledger (every check seen red AND green).**
+1. Planted forced-equal: u,v both adjacent to a shared K3 at k = 4 →
+   avoid-equal {(u,v)} UNSAT; one spoke removed → SAT. Realizability
+   (direction B): mono SAT.
+2. Planted mono-triple: u,v,w each adjacent to one shared K3 → avoid-mono
+   UNSAT; one spoke removed → SAT.
+3. Direction-B impossibility red: a tuple containing two ADJACENT
+   vertices → require-mono UNSAT for the trivial reason; green: a free
+   tuple → SAT. (The real enumerator excludes internal edges by
+   geometry; this control documents the trap.)
+4. Id-mapping shuffle: gadgets 1–2 embedded at scrambled indices in a
+   larger random graph — identical verdicts.
+5. Empty-class → `empty`; K5 base-UNSAT → `vacuous`; both never `fired`.
+6. Checker-checks: synthetic non-monotone curve and synthetic
+   triple-fired/pair-clean records each abort by name.
+7. **P8**: the 791's six forced pairs, per-pair avoid-equal UNSAT ×6 +
+   one matched non-forced pair SAT.
+8. **P9, the M20 skeleton**: 6 vertices — an outer 120°-triple abstracted
+   + its seam-image unit triangle (3 mutual edges) + one spoke per outer
+   point to its own image; at k = 3 require-mono(outer triple) → UNSAT
+   (colour count: images exclude their own outer's colour yet must be
+   rainbow), reproducing `no_mono_outer_triple`'s finite skeleton; one
+   spoke dropped → SAT. The control needs no coordinates — it is the
+   kernel theorem's combinatorial core, stated as a graph.
+9. **P10**: the certified hexagram chunk (B ≤ 2, 378 vertices, real
+   enumerator on seam coordinates) — every probed class SAT.
+10. Calibration first: the known 510 fan ladder re-run (verdict known
+    fanned; the laptop/desktop ratio is the only new number).
+
+**G-5 — Budget arithmetic (laptop bands, sequential, one SAT call
+live).** Phase 1: 510 ladders at 44 marks ≈ 130 queries, nearly all
+seconds (≤ 1 h); 1581 at ~24 quantile marks × 2 centres ≈ 200 queries —
+the near-full rows are EXPECTED to read `unknown` at the 300 s cap (M31:
+the full 1581 at k = 4 read unknown/300 s on the DESKTOP); the curve
+reports honest intervals there and no cap is raised on the laptop —
+P7's bands were written to not depend on the top rows. Phase 2: 3
+classes × 3 objects × ~6 binary-search steps ≈ 54 + onset confirms +
+controls ≈ 90 queries; the shrink loops dominate at up to ~2–3k small
+queries across 1–3 cores — background, resumable (artifacts written
+per-row, a crash loses ≤ 1 query), ≈ 1.5 laptop-days. Total within
+P11's band. The fabric stage's size (A4) is read from construct.py at
+implementation before its sweep is scheduled — an implementation
+checkpoint, not a prediction.
+
 ## Costs and benchmarks (desktop)
 
 Fan queries: 510-scale 10–30 s; B=2-chunk-scale seconds; enriched balls
