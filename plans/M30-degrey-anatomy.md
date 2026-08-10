@@ -192,6 +192,51 @@ The pass ran before implementation; its conclusions bind the instrument shapes:
   visualizer build step and the M31 ranking — the hexagram-viz pattern (generated
   data block embedded at build time), never two exports that can disagree.
 
+## §0c — Consumer-surface contracts (experience-modeling pass, 2026-08-09)
+
+Five consumers; what each surface shows, withholds, and says on failure:
+
+* **The visualizer (Kooshi, playing).** Absences are first-class: the class legend
+  enumerates the FULL copy-pair × radius-family grid including zero-count rows
+  (the hexagram-viz lesson — the "missing spokes" question arose exactly where an
+  absence went unlabeled). Copies named in plain terms ("base", "first-spindle
+  copy", "second-spindle copy", "both-spindles copy"), never bit tags. The
+  forced-pair overlay always names its regime in the legend — "791-point forcer
+  at 4 colours" vs "full graph at 5 colours" — because forced pairs at k = 4
+  exist only on the forcer subset and an unlabeled overlay lies by implicature.
+  Load-bearing classes (R7) carry a visible badge in the legend, not a hover.
+  The witness switcher says "no construction provenance — direction classes
+  only" for 510/553. A footer carries the replica audit ("7877/7877 classified,
+  0 non-unit").
+* **The anatomy JSON (M31's fresh session).** One file, self-describing:
+  a `frame` field records which frame the coordinates are in and the exact
+  rotation relating construction and committed frames; the coarse-class centre
+  is an explicit `centre` field (the construction origin's image), never an
+  assumption; every exact value ships as (16-vector, denom) PLUS a float labeled
+  approx; field names in product terms (`copies`, `seeds`, `direction_class`,
+  `exponents:{a,b,c,d}`, `coarse_class`, `load_bearing`). The candidate ranking
+  is ALSO written into the M31 stub as a table (the stub is the wire; the JSON
+  is the handle).
+* **The CLIs (future sessions).** `--self-test` on both tools runs the whole §0
+  control table, one line per control, nonzero exit on any failure. Output
+  vocabulary keeps the three outcomes apart: `confirmed` / `unsettled (models
+  agree; no UNSAT check)` / `unknown (timeout)` — never merged. Failure wording
+  fixed now: the vacuity banner (`VACUOUS: no proper k-colouring exists —
+  forced-pair analysis NOT run`, distinct exit code), the address gap (`ADDRESS
+  GAP: vertex i at (x, y) matches no construction word — halting; if the
+  committed table changed, re-run regen-check`), the unreached direction
+  (`UNREACHED at |b|+|c|+|d| ≤ 8: E1 refuted at this box OR the box is small —
+  raise --box to distinguish`, naming which judgment space failed). The
+  zero-flag invocation runs the full standard 1581 pipeline and writes
+  `build/m30-anatomy.json`.
+* **The closing report.** The verdict table is (prediction · registered
+  statement in one line · verdict · the measured number), one row per
+  E1–E4/R2/R3/R5/R7, refutations styled identically to confirmations.
+* **The optional lemma.** A named `def` for the Moser twist plus one equation
+  theorem with a docstring carrying the field-wall citation; placed where ζ₆ and
+  `seam` are already both in scope (settled at implementation; no new imports
+  into certificate-upstream modules).
+
 ## §1 — The instruments (the work items, in build order)
 
 ### 1. `tools/rigidity.py` — the colour-space instrument (new equipment)
