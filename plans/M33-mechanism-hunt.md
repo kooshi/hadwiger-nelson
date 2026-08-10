@@ -249,6 +249,9 @@ addresses; G14 explains why two.
   (restore → the query must go SAT or the deletion order was arbitrary
   there, reported as such). Cores are solver-measured knowledge until a
   certificate lands (A5) — never called theorems.
+  *[Refined at §0g G-3, which supersedes the spot-check clause: the loop
+  runs to the 1-minimal fixpoint, so EVERY member carries a validated
+  necessity witness — implement G-3, not this paragraph's sketch.]*
 * **Class instance inventories (free geometry, already computed)**:
   510 full scale — √3-pairs 1204, √3-triples 262, d=2 pairs 596, d=4
   pairs 12, d=4/√3 pairs 99. The 1581 — 3216 / 568 / 1092 / 12 / 156.
@@ -524,6 +527,68 @@ per-row, a crash loses ≤ 1 query), ≈ 1.5 laptop-days. Total within
 P11's band. The fabric stage's size (A4) is read from construct.py at
 implementation before its sweep is scheduled — an implementation
 checkpoint, not a prediction.
+
+## §0h — Experience modeling pass (2026-08-10, fresh invocation)
+
+**H1 — Kooshi's picture: one chart carries the whole verdict.** The money
+plot is a single radius axis per (object, centre): the min-cover step
+curve (levels 1→2→3→4) with the class-firing onsets overlaid as vertical
+markers — the ORDERING of compulsions readable at a glance, which is the
+milestone's finding whatever it turns out to be. Axis in radius r (humans
+read distances; r² exact in tooltips). Visual grammar, fixed now:
+fired = solid marker; clean = hollow; `empty` = grey dot labeled "no
+instances yet"; `unknown` = hatched band labeled "capped — not a claim";
+the region past base-SAT = shaded, labeled "not 4-colourable — every
+question moot here". The criticality echo gets ONE explanatory line on
+the page: "the top step can only arrive at the last ring if the witness
+is vertex-critical — the curve validates criticality; the mechanism
+lives in the lower steps." The core renders on the witness scatter in
+the standing anatomy explorer (new tab, SAME URL, update never re-mint):
+members highlighted, ring histogram beside, necessity summarized as one
+badge ("1-minimal: every member's deletion un-fires, witnesses held"),
+never per-vertex noise. Withheld from the picture: seconds, encodings,
+deletion order — plumbing lives in the JSON only.
+
+**H2 — The JSON contract (the M34 handoff IS these fields).**
+`build/m33-spectrum-<object>-<centre>.json`: `{schema: "m33-spectrum v1
+(plans/M33-mechanism-hunt.md §0h)", object, centre: {id, xy}, k,
+S: {ids, n}, marks: [{r2_exact, r2, n, n_edges, n_target,
+cover: {rows: [{j, outcome, seconds}], lo, hi, verdict},
+classes: {name: {n_instances, avoid_outcome, verdict, seconds,
+promotion}}}], onsets: {cover: {level: mark|null},
+classes: {name: {onset_r2, promotion}}}, invariants_checked, status}`.
+`build/m33-core-<object>-<class>.json`: `{schema: "m33-core v1 (…§0h)",
+object, centre, class: {name, arity, d2}, k, vertices (OBJECT ids,
+sorted), n, deletion_order, necessity: {complete, witnesses_validated},
+reencode: {encoding: "binary-2bit", outcome}, anatomy: {rings,
+direction_classes}, status: "solver-measured"}`. Conventions, binding:
+object ids ONLY in every emitted list; every r² as exact string AND
+float; every UNSAT carries its `promotion` rung (`provisional` |
+`reencode-confirmed` | `lrat`) — G-1's ladder as a field; `status` ∈
+{done, partial, aborted-invariant}. Artifacts are self-describing: a
+fresh session reconstructs meaning from field names + the schema line's
+plan pointer, reading no source.
+
+**H3 — The CLI (tools/mechanism.py).** Verbs: `--self-test` (the G-4
+ledger — the first-run habit), `--calibrate` (G-4 item 10), `--controls`
+(P8/P9/P10), `--sweep`, `--spectrum`, `--shrink`, `--status`. The
+no-argument default RUNS NOTHING: it prints the standing state (which
+artifacts exist, their status, what would run next) — the zero-annotation
+path teaches instead of surprising. Resumability stated in `--help`:
+"artifacts are written per-row; re-running resumes after the last written
+row; delete the artifact to restart". Abort banners name the registered
+item they falsify: "MONOTONICITY VIOLATION (§0f F4) between marks … —
+instrument bug; run aborted; artifact status=aborted-invariant";
+"CONTAINMENT VIOLATION (§0a A2) at mark …". Honest-verdict wording fixed:
+`empty` → "0 instances in region — no claim; nothing to avoid here yet";
+`unknown` → "capped at N s — UNKNOWN: not a bound, not a claim".
+
+**H4 — The plan as a surface.** §0 reads front-to-back with backward
+references only; the one forward hazard (§0b's spot-check sketch vs
+§0g G-3's fixpoint protocol) is now annotated at §0b so a linear reader
+implements the refined protocol. The registered PREDICTIONS (§0c bands)
+are untouched by every refinement — protocol refinement is the modeling
+passes' job; bands move never.
 
 ## Costs and benchmarks (desktop)
 
