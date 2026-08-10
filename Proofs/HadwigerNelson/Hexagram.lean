@@ -2405,48 +2405,425 @@ fusion is EMPTY — the triple tangency at `m` never touches the lattice. -/
 def oppOOTable : List (ZMod 6 × ℤ × ZMod 6 × ℤ) :=
   [(3, -2, 1, -2), (3, 2, 1, 2), (4, -2, 0, -2), (4, 2, 0, 2)]
 
+/-- The opposite wrapper's pivot congruence, decided once. -/
+private theorem opp_shift : ∀ a : ZMod 6, (0 : ZMod 6) + (a - 3) = a + 3 := by decide
+
+/-- **Opposite oo at the master frame**: exactly the four table chords. -/
+private theorem opp_oo_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (outerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (outerPt (hexPivot 0) (hexPivot 0 + 1) y d) = 1 ↔ (x, b, y, d) ∈ oppOOTable := by
+  rw [outerPt_anchor', outerPt_anchor', bridge_opp,
+    opp_oo_clear x y b d (R := 3) (κ := 7) (by norm_num)]
+  constructor
+  · intro h
+    rcases oo_shape (C := 2) (by norm_num) (Or.inr rfl) (by norm_num)
+        (Or.inr (Or.inl rfl)) h with ⟨-, -, hzero⟩ | ⟨hbd, hb2, hF, hE⟩
+    · exact (oo_zero_empty (Or.inr rfl) (Or.inr (Or.inl rfl)) hzero).elim
+    · subst hbd
+      have hb : b = 2 ∨ b = -2 := by omega
+      rcases hb with rfl | rfl
+      · rw [gAddr_two, gAddr_two] at hF hE
+        rw [show (2 : ℤ) - 2 = 0 from rfl, uAddr_zero] at hE
+        exact (by decide : ∀ X Y : ZMod 6,
+          2 * gF (X - 1) + (-2) * gF (Y - 1) = 0 →
+          (2 * gE (X - 1) + (-2) * gE (Y - 1)) * (2 * (piCoeff 2).1 + (piCoeff 2).2)
+            = 7 * 3 ^ 1 + 3 ^ 2 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+              + (-1) * hexF (X - 1 - (Y - 1)).val) →
+          (X, (2 : ℤ), Y, (2 : ℤ)) ∈ oppOOTable) x y hF hE
+      · rw [gAddr_neg_two, gAddr_neg_two] at hF hE
+        rw [show (-2 : ℤ) - -2 = 0 from rfl, uAddr_zero] at hE
+        exact (by decide : ∀ X Y : ZMod 6,
+          2 * gF (-(X - 1) - 1) + (-2) * gF (-(Y - 1) - 1) = 0 →
+          (2 * gE (-(X - 1) - 1) + (-2) * gE (-(Y - 1) - 1))
+              * (2 * (piCoeff 2).1 + (piCoeff 2).2)
+            = 7 * 3 ^ 1 + 3 ^ 2 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+              + (-1) * hexF (X - 1 - (Y - 1)).val) →
+          (X, (-2 : ℤ), Y, (-2 : ℤ)) ∈ oppOOTable) x y hF hE
+  · intro hm
+    fin_cases hm
+    · -- (3, -2, 1, -2)
+      have h1 := gTrace_clear (3 - 1) (-2)
+      rw [show ((-2 : ℤ)).natAbs = 2 from rfl, gAddr_neg_two,
+        show (-(3 - 1 : ZMod 6) - 1 : ZMod 6) = 3 by decide,
+        show gE 3 = -1 by decide, show gF 3 = -1 by decide] at h1
+      have h2 := gTrace_clear (1 - 1) (-2)
+      rw [show ((-2 : ℤ)).natAbs = 2 from rfl, gAddr_neg_two,
+        show (-(1 - 1 : ZMod 6) - 1 : ZMod 6) = 5 by decide,
+        show gE 5 = 2 by decide, show gF 5 = -1 by decide] at h2
+      rw [show ((-2 : ℤ) - -2) = 0 from rfl, uTr_zero,
+        show (2 * hexE (3 - 1 - (1 - 1) : ZMod 6).val
+          + hexF (3 - 1 - (1 - 1) : ZMod 6).val : ℤ) = -1 by decide]
+      have c1 := hexTrace_coords (-1) (-1) 2
+      have c2 := hexTrace_coords 2 (-1) 2
+      rw [show (piCoeff 2).1 = -3 from rfl, show (piCoeff 2).2 = 1 from rfl] at c1 c2
+      push_cast
+      push_cast at h1 h2 c1 c2
+      linear_combination (2 / 3 : ℂ) * h1 - (2 / 3 : ℂ) * h2 + (2 / 3 : ℂ) * c1
+        - (2 / 3 : ℂ) * c2
+        + ((2 / 3 : ℂ) * (gTr (1 - 1) (-2) - gTr (3 - 1) (-2))) * sqrt3_cast_sq
+    · -- (3, 2, 1, 2)
+      have h1 := gTrace_clear (3 - 1) 2
+      rw [show ((2 : ℤ)).natAbs = 2 from rfl, gAddr_two,
+        show gE (3 - 1 : ZMod 6) = -2 by decide,
+        show gF (3 - 1 : ZMod 6) = 1 by decide] at h1
+      have h2 := gTrace_clear (1 - 1) 2
+      rw [show ((2 : ℤ)).natAbs = 2 from rfl, gAddr_two,
+        show gE (1 - 1 : ZMod 6) = 1 by decide,
+        show gF (1 - 1 : ZMod 6) = 1 by decide] at h2
+      rw [show ((2 : ℤ) - 2) = 0 from rfl, uTr_zero,
+        show (2 * hexE (3 - 1 - (1 - 1) : ZMod 6).val
+          + hexF (3 - 1 - (1 - 1) : ZMod 6).val : ℤ) = -1 by decide]
+      have c1 := hexTrace_coords (-2) 1 2
+      have c2 := hexTrace_coords 1 1 2
+      rw [show (piCoeff 2).1 = -3 from rfl, show (piCoeff 2).2 = 1 from rfl] at c1 c2
+      push_cast
+      push_cast at h1 h2 c1 c2
+      linear_combination (2 / 3 : ℂ) * h1 - (2 / 3 : ℂ) * h2 + (2 / 3 : ℂ) * c1
+        - (2 / 3 : ℂ) * c2
+        + ((2 / 3 : ℂ) * (gTr (1 - 1) 2 - gTr (3 - 1) 2)) * sqrt3_cast_sq
+    · -- (4, -2, 0, -2)
+      have h1 := gTrace_clear (4 - 1) (-2)
+      rw [show ((-2 : ℤ)).natAbs = 2 from rfl, gAddr_neg_two,
+        show (-(4 - 1 : ZMod 6) - 1 : ZMod 6) = 2 by decide,
+        show gE 2 = -2 by decide, show gF 2 = 1 by decide] at h1
+      have h2 := gTrace_clear (0 - 1) (-2)
+      rw [show ((-2 : ℤ)).natAbs = 2 from rfl, gAddr_neg_two,
+        show (-(0 - 1 : ZMod 6) - 1 : ZMod 6) = 0 by decide,
+        show gE 0 = 1 by decide, show gF 0 = 1 by decide] at h2
+      rw [show ((-2 : ℤ) - -2) = 0 from rfl, uTr_zero,
+        show (2 * hexE (4 - 1 - (0 - 1) : ZMod 6).val
+          + hexF (4 - 1 - (0 - 1) : ZMod 6).val : ℤ) = -1 by decide]
+      have c1 := hexTrace_coords (-2) 1 2
+      have c2 := hexTrace_coords 1 1 2
+      rw [show (piCoeff 2).1 = -3 from rfl, show (piCoeff 2).2 = 1 from rfl] at c1 c2
+      push_cast
+      push_cast at h1 h2 c1 c2
+      linear_combination (2 / 3 : ℂ) * h1 - (2 / 3 : ℂ) * h2 + (2 / 3 : ℂ) * c1
+        - (2 / 3 : ℂ) * c2
+        + ((2 / 3 : ℂ) * (gTr (0 - 1) (-2) - gTr (4 - 1) (-2))) * sqrt3_cast_sq
+    · -- (4, 2, 0, 2)
+      have h1 := gTrace_clear (4 - 1) 2
+      rw [show ((2 : ℤ)).natAbs = 2 from rfl, gAddr_two,
+        show gE (4 - 1 : ZMod 6) = -1 by decide,
+        show gF (4 - 1 : ZMod 6) = -1 by decide] at h1
+      have h2 := gTrace_clear (0 - 1) 2
+      rw [show ((2 : ℤ)).natAbs = 2 from rfl, gAddr_two,
+        show gE (0 - 1 : ZMod 6) = 2 by decide,
+        show gF (0 - 1 : ZMod 6) = -1 by decide] at h2
+      rw [show ((2 : ℤ) - 2) = 0 from rfl, uTr_zero,
+        show (2 * hexE (4 - 1 - (0 - 1) : ZMod 6).val
+          + hexF (4 - 1 - (0 - 1) : ZMod 6).val : ℤ) = -1 by decide]
+      have c1 := hexTrace_coords (-1) (-1) 2
+      have c2 := hexTrace_coords 2 (-1) 2
+      rw [show (piCoeff 2).1 = -3 from rfl, show (piCoeff 2).2 = 1 from rfl] at c1 c2
+      push_cast
+      push_cast at h1 h2 c1 c2
+      linear_combination (2 / 3 : ℂ) * h1 - (2 / 3 : ℂ) * h2 + (2 / 3 : ℂ) * c1
+        - (2 / 3 : ℂ) * c2
+        + ((2 / 3 : ℂ) * (gTr (0 - 1) 2 - gTr (4 - 1) 2)) * sqrt3_cast_sq
+
+/-- Opposite oi is empty at the master frame (κ = 5 refuses at C = 2). -/
+private theorem opp_oi_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (outerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (innerPt (hexPivot 0) (hexPivot 0 + 1) y d) ≠ 1 := by
+  intro h
+  rw [outerPt_anchor', innerPt_anchor, bridge_opp,
+    opp_oi_clear x y b d (R := 3) (κ := 5) (by norm_num)] at h
+  obtain ⟨hsign, hF, hE⟩ := oi_shape (C := 2) (by norm_num) (by norm_num)
+    (by norm_num) (Or.inr (Or.inl rfl)) h
+  rcases hsign with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · rw [gAddr_two, gAddr_one, show (2 : ℤ) - 1 = 1 from rfl, uAddr_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (X - 1) + (-2) * gF (Y - 1) + 3 * hexF (X - 1 - (Y - 1)).val = 0
+        ∧ -3 * (2 * gE (X - 1)) - 2 * (2 * gE (X - 1) + 2 * gF (X - 1))
+          + ((-2) * gE (Y - 1) + (-2) * gF (Y - 1))
+          + 3 * (hexE (X - 1 - (Y - 1)).val + hexF (X - 1 - (Y - 1)).val)
+          = 3 * 5)) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_two, gAddr_neg_one, show (-2 : ℤ) - -1 = -1 from rfl,
+      uAddr_neg_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (-(X - 1) - 1) + (-2) * gF (-(Y - 1) - 1)
+          + 3 * hexF (-(X - 1 - (Y - 1))).val = 0
+        ∧ -3 * (2 * gE (-(X - 1) - 1)) - 2 * (2 * gE (-(X - 1) - 1) + 2 * gF (-(X - 1) - 1))
+          + ((-2) * gE (-(Y - 1) - 1) + (-2) * gF (-(Y - 1) - 1))
+          + 3 * (hexE (-(X - 1 - (Y - 1))).val + hexF (-(X - 1 - (Y - 1))).val)
+          = 3 * 5)) x y ⟨hF, hE⟩
+
+/-- Opposite io is empty at the master frame — the oi tree at `C = −2`, swapped. -/
+private theorem opp_io_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (innerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (outerPt (hexPivot 0) (hexPivot 0 + 1) y d) ≠ 1 := by
+  intro h
+  rw [innerPt_anchor, outerPt_anchor', bridge_opp,
+    opp_io_clear x y b d (R := 3) (κ := 5) (by norm_num)] at h
+  have h' : ((-2 : ℤ) : ℂ) * s3 ^ 1 * gTr (y - 1) d
+      + ((-(-2) : ℤ) : ℂ) * s3 ^ 0 * gTr (x - 1) b
+      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (y - 1 - (x - 1)) (d - b) = ((5 : ℤ) : ℂ) * s3 ^ 1 := by
+    rw [show (y - 1 - (x - 1) : ZMod 6) = -(x - 1 - (y - 1)) by ring,
+      show (d - b : ℤ) = -(b - d) by ring, uTr_neg]
+    push_cast
+    push_cast at h
+    linear_combination h
+  obtain ⟨hsign, hF, hE⟩ := oi_shape (C := -2) (by norm_num) (by norm_num)
+    (by norm_num) (Or.inr (Or.inl rfl)) h'
+  rcases hsign with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · rw [gAddr_two, gAddr_one, show (2 : ℤ) - 1 = 1 from rfl, uAddr_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ ((-2) * gF (Y - 1) + (-(-2)) * gF (X - 1) + 3 * hexF (Y - 1 - (X - 1)).val = 0
+        ∧ -3 * ((-2) * gE (Y - 1)) - 2 * ((-2) * gE (Y - 1) + (-2) * gF (Y - 1))
+          + ((-(-2)) * gE (X - 1) + (-(-2)) * gF (X - 1))
+          + 3 * (hexE (Y - 1 - (X - 1)).val + hexF (Y - 1 - (X - 1)).val)
+          = 3 * 5)) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_two, gAddr_neg_one, show (-2 : ℤ) - -1 = -1 from rfl,
+      uAddr_neg_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ ((-2) * gF (-(Y - 1) - 1) + (-(-2)) * gF (-(X - 1) - 1)
+          + 3 * hexF (-(Y - 1 - (X - 1))).val = 0
+        ∧ -3 * ((-2) * gE (-(Y - 1) - 1))
+          - 2 * ((-2) * gE (-(Y - 1) - 1) + (-2) * gF (-(Y - 1) - 1))
+          + ((-(-2)) * gE (-(X - 1) - 1) + (-(-2)) * gF (-(X - 1) - 1))
+          + 3 * (hexE (-(Y - 1 - (X - 1))).val + hexF (-(Y - 1 - (X - 1))).val)
+          = 3 * 5)) x y ⟨hF, hE⟩
+
+/-- Opposite ii is empty at the master frame (κ = 3 at C = 2 refuses). -/
+private theorem opp_ii_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (innerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (innerPt (hexPivot 0) (hexPivot 0 + 1) y d) ≠ 1 := by
+  intro h
+  rw [innerPt_anchor, innerPt_anchor, bridge_opp,
+    opp_ii_clear x y b d (R := 3) (κ := 3) (by norm_num)] at h
+  obtain ⟨hbd, hb1, hF, hE⟩ := ii_shape (C := 2) (by norm_num) (Or.inr rfl) ⟨1, rfl⟩ h
+  subst hbd
+  have hb : b = 1 ∨ b = -1 := by omega
+  rcases hb with rfl | rfl
+  · rw [gAddr_one, gAddr_one] at hF hE
+    rw [show (1 : ℤ) - 1 = 0 from rfl, uAddr_zero] at hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (X - 1) + (-2) * gF (Y - 1) = 0
+        ∧ (2 * gE (X - 1) + (-2) * gE (Y - 1)) * (2 * (piCoeff 1).1 + (piCoeff 1).2)
+          = 3 * 3 ^ 1 + 3 ^ 1 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+            + (-1) * hexF (X - 1 - (Y - 1)).val))) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_one, gAddr_neg_one] at hF hE
+    rw [show (-1 : ℤ) - -1 = 0 from rfl, uAddr_zero] at hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (-(X - 1) - 1) + (-2) * gF (-(Y - 1) - 1) = 0
+        ∧ (2 * gE (-(X - 1) - 1) + (-2) * gE (-(Y - 1) - 1))
+            * (2 * (piCoeff 1).1 + (piCoeff 1).2)
+          = 3 * 3 ^ 1 + 3 ^ 1 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+            + (-1) * hexF (X - 1 - (Y - 1)).val))) x y ⟨hF, hE⟩
+
+/-- The opposite oo fusion is empty at the master frame (κ = 10 refuses). -/
+private theorem opp_fusion_oo_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    outerPt (hexPivot 3) (hexPivot 3 + 1) x b
+      ≠ outerPt (hexPivot 0) (hexPivot 0 + 1) y d := by
+  intro h
+  rw [outerPt_anchor', outerPt_anchor', fusion_opp,
+    opp_oo_clear x y b d (R := 0) (κ := 10) (by norm_num)] at h
+  rcases oo_shape (C := 2) (by norm_num) (Or.inr rfl) (by norm_num)
+      (Or.inr (Or.inr rfl)) h with ⟨-, -, hzero⟩ | ⟨hbd, hb2, hF, hE⟩
+  · exact oo_zero_empty (Or.inr rfl) (Or.inr (Or.inr rfl)) hzero
+  · exact oo_bnd_empty (Or.inr rfl) (Or.inr (Or.inr rfl)) (by norm_num) hbd hb2 hF hE
+
+/-- The opposite oi fusion is empty at the master frame (κ = 8 refuses). -/
+private theorem opp_fusion_oi_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    outerPt (hexPivot 3) (hexPivot 3 + 1) x b
+      ≠ innerPt (hexPivot 0) (hexPivot 0 + 1) y d := by
+  intro h
+  rw [outerPt_anchor', innerPt_anchor, fusion_opp,
+    opp_oi_clear x y b d (R := 0) (κ := 8) (by norm_num)] at h
+  obtain ⟨hsign, hF, hE⟩ := oi_shape (C := 2) (by norm_num) (by norm_num)
+    (by norm_num) (Or.inr (Or.inr rfl)) h
+  rcases hsign with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · rw [gAddr_two, gAddr_one, show (2 : ℤ) - 1 = 1 from rfl, uAddr_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (X - 1) + (-2) * gF (Y - 1) + 3 * hexF (X - 1 - (Y - 1)).val = 0
+        ∧ -3 * (2 * gE (X - 1)) - 2 * (2 * gE (X - 1) + 2 * gF (X - 1))
+          + ((-2) * gE (Y - 1) + (-2) * gF (Y - 1))
+          + 3 * (hexE (X - 1 - (Y - 1)).val + hexF (X - 1 - (Y - 1)).val)
+          = 3 * 8)) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_two, gAddr_neg_one, show (-2 : ℤ) - -1 = -1 from rfl,
+      uAddr_neg_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (-(X - 1) - 1) + (-2) * gF (-(Y - 1) - 1)
+          + 3 * hexF (-(X - 1 - (Y - 1))).val = 0
+        ∧ -3 * (2 * gE (-(X - 1) - 1)) - 2 * (2 * gE (-(X - 1) - 1) + 2 * gF (-(X - 1) - 1))
+          + ((-2) * gE (-(Y - 1) - 1) + (-2) * gF (-(Y - 1) - 1))
+          + 3 * (hexE (-(X - 1 - (Y - 1))).val + hexF (-(X - 1 - (Y - 1))).val)
+          = 3 * 8)) x y ⟨hF, hE⟩
+
+/-- The opposite io fusion is empty at the master frame. -/
+private theorem opp_fusion_io_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    innerPt (hexPivot 3) (hexPivot 3 + 1) x b
+      ≠ outerPt (hexPivot 0) (hexPivot 0 + 1) y d := by
+  intro h
+  rw [innerPt_anchor, outerPt_anchor', fusion_opp,
+    opp_io_clear x y b d (R := 0) (κ := 8) (by norm_num)] at h
+  have h' : ((-2 : ℤ) : ℂ) * s3 ^ 1 * gTr (y - 1) d
+      + ((-(-2) : ℤ) : ℂ) * s3 ^ 0 * gTr (x - 1) b
+      + ((3 : ℤ) : ℂ) * s3 ^ 0 * uTr (y - 1 - (x - 1)) (d - b) = ((8 : ℤ) : ℂ) * s3 ^ 1 := by
+    rw [show (y - 1 - (x - 1) : ZMod 6) = -(x - 1 - (y - 1)) by ring,
+      show (d - b : ℤ) = -(b - d) by ring, uTr_neg]
+    push_cast
+    push_cast at h
+    linear_combination h
+  obtain ⟨hsign, hF, hE⟩ := oi_shape (C := -2) (by norm_num) (by norm_num)
+    (by norm_num) (Or.inr (Or.inr rfl)) h'
+  rcases hsign with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  · rw [gAddr_two, gAddr_one, show (2 : ℤ) - 1 = 1 from rfl, uAddr_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ ((-2) * gF (Y - 1) + (-(-2)) * gF (X - 1) + 3 * hexF (Y - 1 - (X - 1)).val = 0
+        ∧ -3 * ((-2) * gE (Y - 1)) - 2 * ((-2) * gE (Y - 1) + (-2) * gF (Y - 1))
+          + ((-(-2)) * gE (X - 1) + (-(-2)) * gF (X - 1))
+          + 3 * (hexE (Y - 1 - (X - 1)).val + hexF (Y - 1 - (X - 1)).val)
+          = 3 * 8)) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_two, gAddr_neg_one, show (-2 : ℤ) - -1 = -1 from rfl,
+      uAddr_neg_one] at hF hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ ((-2) * gF (-(Y - 1) - 1) + (-(-2)) * gF (-(X - 1) - 1)
+          + 3 * hexF (-(Y - 1 - (X - 1))).val = 0
+        ∧ -3 * ((-2) * gE (-(Y - 1) - 1))
+          - 2 * ((-2) * gE (-(Y - 1) - 1) + (-2) * gF (-(Y - 1) - 1))
+          + ((-(-2)) * gE (-(X - 1) - 1) + (-(-2)) * gF (-(X - 1) - 1))
+          + 3 * (hexE (-(Y - 1 - (X - 1))).val + hexF (-(Y - 1 - (X - 1))).val)
+          = 3 * 8)) x y ⟨hF, hE⟩
+
+/-- The opposite ii fusion is empty at the master frame (κ = 6 refuses). -/
+private theorem opp_fusion_ii_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    innerPt (hexPivot 3) (hexPivot 3 + 1) x b
+      ≠ innerPt (hexPivot 0) (hexPivot 0 + 1) y d := by
+  intro h
+  rw [innerPt_anchor, innerPt_anchor, fusion_opp,
+    opp_ii_clear x y b d (R := 0) (κ := 6) (by norm_num)] at h
+  obtain ⟨hbd, hb1, hF, hE⟩ := ii_shape (C := 2) (by norm_num) (Or.inr rfl) ⟨2, rfl⟩ h
+  subst hbd
+  have hb : b = 1 ∨ b = -1 := by omega
+  rcases hb with rfl | rfl
+  · rw [gAddr_one, gAddr_one] at hF hE
+    rw [show (1 : ℤ) - 1 = 0 from rfl, uAddr_zero] at hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (X - 1) + (-2) * gF (Y - 1) = 0
+        ∧ (2 * gE (X - 1) + (-2) * gE (Y - 1)) * (2 * (piCoeff 1).1 + (piCoeff 1).2)
+          = 6 * 3 ^ 1 + 3 ^ 1 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+            + (-1) * hexF (X - 1 - (Y - 1)).val))) x y ⟨hF, hE⟩
+  · rw [gAddr_neg_one, gAddr_neg_one] at hF hE
+    rw [show (-1 : ℤ) - -1 = 0 from rfl, uAddr_zero] at hE
+    exact (by decide : ∀ X Y : ZMod 6,
+      ¬ (2 * gF (-(X - 1) - 1) + (-2) * gF (-(Y - 1) - 1) = 0
+        ∧ (2 * gE (-(X - 1) - 1) + (-2) * gE (-(Y - 1) - 1))
+            * (2 * (piCoeff 1).1 + (piCoeff 1).2)
+          = 6 * 3 ^ 1 + 3 ^ 1 * (2 * ((-1) * hexE (X - 1 - (Y - 1)).val)
+            + (-1) * hexF (X - 1 - (Y - 1)).val))) x y ⟨hF, hE⟩
+
 /-- **Opposite oo completeness, all webs**: exactly the four table chords. -/
 theorem opp_oo_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
       (outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) = 1 ↔
-      (x - (a - 3), b, y - (a - 3), d) ∈ oppOOTable := sorry
+      (x - (a - 3), b, y - (a - 3), d) ∈ oppOOTable := by
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_outer (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact opp_oo_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **Opposite oi is empty.** -/
 theorem opp_oi_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
-      (innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := sorry
+      (innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := by
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_inner (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact opp_oi_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **Opposite io is empty** — the oi statement at `a + 3`, roles flipped. -/
 theorem opp_io_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
-      (outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := sorry
+      (outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := by
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_outer (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact opp_io_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **Opposite ii is empty**: the tangent inner circles' lattices carry no unit
 chord (and, by `opp_fusion_ii`, no coincidence — the tangency is invisible). -/
 theorem opp_ii_empty (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
-      (innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := sorry
+      (innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d) ≠ 1 := by
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_inner (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact opp_ii_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- The opposite oo fusion is empty. -/
 theorem opp_fusion_oo (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     outerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
+      ≠ outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := by
+  intro he
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_outer (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  exact opp_fusion_oo_zero _ _ _ _ (rot6_iter_inj he)
 
 /-- The opposite oi fusion is empty. -/
 theorem opp_fusion_oi (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     outerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
+      ≠ innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := by
+  intro he
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_inner (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  exact opp_fusion_oi_zero _ _ _ _ (rot6_iter_inj he)
 
 /-- The opposite io fusion is empty — the oi statement at `a + 3`, flipped. -/
 theorem opp_fusion_io (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     innerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
+      ≠ outerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := by
+  intro he
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_outer (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  exact opp_fusion_io_zero _ _ _ _ (rot6_iter_inj he)
 
 /-- The opposite ii fusion is empty: the tangency point `m` is never a lattice
 word (M24's empty `Re = √3/2` fibre, at the κ = 6√3 spine). -/
 theorem opp_fusion_ii (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     innerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := sorry
+      ≠ innerPt (hexPivot (a + 3)) (hexPivot (a + 3) + 1) y d := by
+  intro he
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_inner (a - 3).val 0 (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, opp_shift,
+    show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  exact opp_fusion_ii_zero _ _ _ _ (rot6_iter_inj he)
 
 /-! ## §W The transported webs: pivot–meta at all six pivots, unit pairs
 
