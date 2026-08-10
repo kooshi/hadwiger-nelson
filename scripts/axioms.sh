@@ -40,7 +40,11 @@ NORM="$(echo "${RAW}" | awk '
   END { if (buf != "") print buf }
 ' | sed 's/[[:space:]]\+/ /g')"
 
-if ! echo "${NORM}" | grep -q '^=== CLEAN ===$' || ! echo "${NORM}" | grep -q '^=== PURCHASED ===$'; then
+# Here-strings, not pipes: under `pipefail` a `grep -q` that exits on its first match
+# SIGPIPEs the `echo` once the text outgrows the 64 KB pipe buffer, and the check
+# reports "banners missing" on output that carries both banners. Found the hard way
+# when the M26 audit lines pushed the receipt past 64 KB.
+if ! grep -q '^=== CLEAN ===$' <<< "${NORM}" || ! grep -q '^=== PURCHASED ===$' <<< "${NORM}"; then
   echo "==> axioms: FAIL — banners missing; scripts/Axioms.lean did not run to completion"
   exit 1
 fi

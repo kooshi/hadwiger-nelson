@@ -2598,6 +2598,23 @@ def self_test():
     check("M25 meta-census agreement + planted-disagreement refusals",
           meta_census_controls)
 
+    # 10c. M26 hexagram census: agreement at depth 3 (the deepest sporadic row),
+    # and planted chord AND fusion disagreements are refused by name
+    def hexagram_census_controls():
+        found = _hexagram_sweep(3)
+        assert hexagram_census_check(3, found=found) == [], \
+            "hexagram-census disagrees at depth 3"
+        bad = {k: list(v) for k, v in HEX_ADJ_TABLES.items()}
+        bad["ii"] = bad["ii"][:-1]
+        errs = hexagram_census_check(3, found=found, adj_tables=bad)
+        assert any("adj" in e and "chords" in e for e in errs), \
+            "planted adjacent-table chord disagreement NOT caught"
+        errs2 = hexagram_census_check(3, found=found, plant_unit_ii_fusion=True)
+        assert any("fusions" in e for e in errs2), \
+            "planted unit-ii fusion disagreement NOT caught"
+    check("M26 hexagram-census agreement + planted chord/fusion refusals",
+          hexagram_census_controls)
+
     # 11. near-ladder controls: planted rational angle closes; the seam angle never
     def near_ladder():
         mp = _mp()
@@ -2755,9 +2772,9 @@ def _ladder_chord_census(B=200):
     bins = {}
     for c in range(6):
         for d in range(-B, B + 1):
-            k = round(((60.0 * c + theta * d) % 360.0) * 1e6)
+            k = round(((60.0 * c + theta * d) % 360.0) * 1e6) % 360_000_000
             for kk in (k - 1, k, k + 1):
-                bins.setdefault(kk, []).append((c, d))
+                bins.setdefault(kk % 360_000_000, []).append((c, d))
 
     one = frac_c({B1: 1}, {})
     inv3 = frac_c({B3: Fraction(1, 3)}, {})
@@ -2801,7 +2818,7 @@ def _ladder_chord_census(B=200):
                     vx = (ac * cx - sgn * sq * cy) / d2
                     vy = (ac * cy + sgn * sq * cx) / d2
                     th = math.degrees(math.atan2(vy, vx))
-                    for (c, d) in bins.get(round((th % 360.0) * 1e6), []):
+                    for (c, d) in bins.get(round((th % 360.0) * 1e6) % 360_000_000, []):
                         h = ((a, b), (c, d))
                         if h in seen:
                             continue
@@ -2972,6 +2989,188 @@ def run_meta_census(args):
           "fusion inventory) and this census agree exactly on all three webs")
 
 
+# ------------------------------------------------------------------ M26: the hexagram census
+
+# The Hexagram.lean tables, master frames (adjacent (3,4), opposite (3,0)).
+HEX_ADJ_TABLES = {
+    "oo": [],
+    "oi": [(2, -2, 4, -1), (2, 2, 4, 1), (3, -2, 1, -1), (3, 2, 1, 1)],
+    "io": [(1, -1, 5, -2), (1, 1, 5, 2), (4, -1, 0, -2), (4, 1, 0, 2)],
+    "ii": [(0, -1, 2, -1), (0, 1, 2, 1), (5, -1, 3, -1), (5, 1, 3, 1)],
+}
+HEX_OPP_OO = [(3, -2, 1, -2), (3, 2, 1, 2), (4, -2, 0, -2), (4, 2, 0, 2)]
+# The Ladder.lean pair tables (oiTable, iiNormTable's rows), for the unit pairs.
+LADDER_OI_TABLE = [(2, 2, 5, 1), (2, -2, 5, -1), (4, 2, 1, 1), (4, -2, 1, -1),
+                   (1, 0, 5, 1), (1, 0, 5, -1), (5, 0, 1, 1), (5, 0, 1, -1),
+                   (2, 2, 0, 1), (2, -2, 0, -1), (4, 2, 0, 1), (4, -2, 0, -1),
+                   (3, 2, 2, 1), (3, -2, 2, -1), (3, 2, 4, 1), (3, -2, 4, -1)]
+LADDER_II_NORM = [(0, 0, 3, 0), (3, 0, 0, 0),
+                  (1, 1, 5, 1), (5, 1, 1, 1), (1, -1, 5, -1), (5, -1, 1, -1),
+                  (0, 1, 3, 3), (3, 3, 0, 1), (0, -1, 3, -3), (3, -3, 0, -1)]
+
+
+def _hexagram_sweep(B):
+    """Exact chord/fusion sweep of the hexagram at |b|, |d| ≤ B: every pivot pair
+    (adjacent, unit, opposite) and every pivot–meta web, all four circle families.
+    Returns {(kind, a, fam): (chords, fusions)} with kind ∈ {adj, unit, opp, meta}."""
+    F = Fraction
+    z6 = frac_c({B1: F(1, 2)}, {B3: F(1, 2)})
+    z12 = frac_c({B3: F(1, 2)}, {B1: F(1, 2)})
+    seam = frac_c({B3: F(1, 6)}, {B33: F(1, 6)})
+    seaminv = frac_c({B3: F(1, 6)}, {B33: F(-1, 6)})
+    mpiv = frac_c({B1: F(1, 2)}, {B3: F(1, 6)})
+    inner_r = [F(0)] * DIM
+    inner_r[B3] = F(1, 3)
+    one_v = [F(0)] * DIM
+    one_v[B1] = F(1)
+
+    def csub2(a, b):
+        return (sub(a[0], b[0]), sub(a[1], b[1]))
+
+    def cadd2(a, b):
+        return (add(a[0], b[0]), add(a[1], b[1]))
+
+    def word(a, b):
+        w = cpow(z6, a % 6)
+        s = seam if b >= 0 else seaminv
+        for _ in range(abs(b)):
+            w = cmul(w, s)
+        return w
+
+    def is_one(v):
+        re, im = v
+        return all(c == 0 for c in im) and re[B1] == 1 \
+            and all(c == 0 for i, c in enumerate(re) if i != B1)
+
+    def is_zero(v):
+        return all(c == 0 for c in v[0]) and all(c == 0 for c in v[1])
+
+    # hexPivot a = m·(1 + ζ₆^a)
+    hexpiv = [cmul(mpiv, cadd2((one_v, [F(0)] * DIM), cpow(z6, a))) for a in range(6)]
+
+    def outer_p(a):
+        piv = hexpiv[a % 6]
+        return lambda x, b: cadd2(piv, word(x, b))
+
+    def inner_p(a):
+        piv = hexpiv[a % 6]
+        return lambda x, b: cadd2(piv, cscale(inner_r, word(x, b)))
+
+    def outer_m(y, d):
+        return cadd2(mpiv, cmul(word(y, d), z12))
+
+    def inner_m(y, d):
+        return cadd2(mpiv, cscale(inner_r, cmul(word(y, d), z12)))
+
+    out = {}
+    pairs = [("adj", a, outer_p(a), inner_p(a), outer_p(a + 1), inner_p(a + 1))
+             for a in range(6)]
+    pairs += [("unit", a, outer_p(a), inner_p(a), outer_p(a + 2), inner_p(a + 2))
+              for a in range(6)]
+    pairs += [("opp", a, outer_p(a), inner_p(a), outer_p(a + 3), inner_p(a + 3))
+              for a in range(3)]
+    pairs += [("meta", a, outer_p(a), inner_p(a), outer_m, inner_m) for a in range(6)]
+    for kind, a, o1, i1, o2, i2 in pairs:
+        fams = {"oo": (o1, o2), "oi": (o1, i2), "io": (i1, o2), "ii": (i1, i2)}
+        for fam, (mk1, mk2) in fams.items():
+            chords, fusions = set(), set()
+            pts2 = [((y, d), mk2(y, d)) for y in range(6) for d in range(-B, B + 1)]
+            for x in range(6):
+                for b in range(-B, B + 1):
+                    p1 = mk1(x, b)
+                    for (y, d), p2 in pts2:
+                        diff = csub2(p1, p2)
+                        n2 = cmul(diff, cconj(diff))
+                        if is_one(n2):
+                            chords.add((x, b, y, d))
+                        elif is_zero(diff):
+                            fusions.add((x, b, y, d))
+            out[(kind, a, fam)] = (chords, fusions)
+    return out
+
+
+def hexagram_census_check(B, found=None, adj_tables=None, opp_oo=None,
+                          plant_unit_ii_fusion=False):
+    """Compare the exact sweep against the Hexagram.lean classification: adjacent
+    (empty oo + three sporadic tables), unit (matching ∨ hubs ∨ the M24 pair rows),
+    opposite (oo table, rest empty), pivot–meta (the M25 tables at shift a−3 with
+    the hub pencil), and the FULL fusion inventory (hub pencils expanded, glue
+    points listed).  Returns mismatch strings."""
+    adj_tables = adj_tables or HEX_ADJ_TABLES
+    opp_oo = opp_oo or HEX_OPP_OO
+    found = found if found is not None else _hexagram_sweep(B)
+    errors = []
+    rng = range(-B, B + 1)
+
+    def shifted(rows, s):
+        return {((x + s) % 6, b, (y + s) % 6, d) for (x, b, y, d) in rows}
+
+    for (kind, a, fam), (chords, fusions) in sorted(found.items(), key=str):
+        s = (a - 3) % 6
+        if kind == "adj":
+            want_c = shifted(adj_tables[fam], s)
+            want_f = set()
+        elif kind == "opp":
+            want_c = shifted(opp_oo, s) if fam == "oo" else set()
+            want_f = set()
+        elif kind == "unit":
+            if fam == "oo":
+                want_c = {(x, b, x, b) for x in range(6) for b in rng}
+                want_c |= {((a - 3) % 6, 0, y, d) for y in range(6) for d in rng}
+                want_c |= {(x, b, a % 6, 0) for x in range(6) for b in rng}
+                want_f = {((a - 2) % 6, 0, (a - 1) % 6, 0),
+                          ((a + 2) % 6, 0, (a + 1) % 6, 0)}
+            elif fam == "oi":
+                want_c = {((X - 3 + a) % 6, Bb, (Y + a) % 6, D)
+                          for (X, Bb, Y, D) in LADDER_OI_TABLE if abs(Bb) <= B and abs(D) <= B}
+                want_f = {(a % 6, 2, a % 6, 1), (a % 6, -2, a % 6, -1)}
+            elif fam == "io":
+                want_c = {((I + a - 3) % 6, D, (O + a) % 6, Bb)
+                          for (O, Bb, I, D) in LADDER_OI_TABLE if abs(Bb) <= B and abs(D) <= B}
+                want_f = {((a - 3) % 6, 1, (a + 3) % 6, 2),
+                          ((a - 3) % 6, -1, (a + 3) % 6, -2)}
+            else:
+                want_c = {(x, b, x, b) for x in range(6) for b in rng}
+                want_c |= {((X - 3 + a) % 6, Bb, (Y + a) % 6, D)
+                           for (X, Bb, Y, D) in LADDER_II_NORM if abs(Bb) <= B and abs(D) <= B}
+                want_f = {(0, 0, 0, 0)} if plant_unit_ii_fusion else set()
+        else:  # meta
+            want_c = shifted(META_TABLES[fam], s)
+            if fam == "oi":
+                want_c |= {(x, b, a % 6, 0) for x in range(6) for b in rng}
+                want_f = {((a - 2) % 6, 0, (a - 2) % 6, 0),
+                          ((a - 3) % 6, 0, (a + 2) % 6, 0)}
+            else:
+                want_f = set()
+        if chords != want_c:
+            errors.append(f"{kind} web {a} {fam} chords: "
+                          f"{sorted(chords - want_c)} extra, "
+                          f"{sorted(want_c - chords)} missing")
+        if fusions != want_f:
+            errors.append(f"{kind} web {a} {fam} fusions: census {sorted(fusions)} "
+                          f"vs tables {sorted(want_f)}")
+    return errors
+
+
+def run_hexagram_census(args):
+    B = min(args.bbound, 4) if args.bbound == 40 else args.bbound
+    found = _hexagram_sweep(B)
+    errors = hexagram_census_check(B, found=found)
+    n_pairs = len(found)
+    print(f"[hexagram-census] six pivots + metapivot, |b|,|d| ≤ {B}, "
+          f"{n_pairs} (pair, family) sweeps")
+    if errors:
+        for e in errors:
+            print("   MISMATCH:", e)
+        raise SystemExit("HEXAGRAM-CENSUS DISAGREES WITH THE LEAN TABLES")
+    tot_c = sum(len(c) for c, _ in found.values())
+    tot_f = sum(len(f) for _, f in found.values())
+    print(f"[hexagram-census] {tot_c} chords, {tot_f} coincidences — the "
+          f"Hexagram.lean classification (adjacent/unit/opposite webs, all six "
+          f"pivot–meta webs, hub pencils expanded, glue inventory) and this "
+          f"census agree exactly")
+
+
 def require_artifact_graph(doc, edges_sha, path):
     if doc.get("graph", {}).get("edges_sha") != edges_sha:
         raise SystemExit(f"artifact {path} is foreign to this graph "
@@ -3010,6 +3209,8 @@ def main():
     ap.add_argument("--bbound", type=int, default=40)
     ap.add_argument("--meta-census", action="store_true", dest="meta_census",
                     help="M25: exact four-ladder census vs the MetaLadder tables")
+    ap.add_argument("--hexagram-census", action="store_true", dest="hexagram_census",
+                    help="M26: exact hexagram census vs the Hexagram tables")
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     ap.add_argument("--samples", type=int, default=1500)
     ap.add_argument("--seed", type=int, default=21)
@@ -3091,6 +3292,9 @@ def main():
         ran = True
     if args.meta_census:
         run_meta_census(args)
+        ran = True
+    if args.hexagram_census:
+        run_hexagram_census(args)
         ran = True
     if args.loops:
         run_loops(args)

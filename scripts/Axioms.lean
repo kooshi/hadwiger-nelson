@@ -646,6 +646,49 @@ The headline is `MetaLadder.chromaticNumber_fourLadder`. -/
 #print axioms MetaLadder.not_colorable_three_fourLadder
 #print axioms MetaLadder.chromaticNumber_fourLadder
 
+/-! ## M26 — the hexagram (six pivots about the metapivot, every ladder, all unit chords)
+
+The headline is `Hexagram.chromaticNumber_hexagram`. -/
+
+#print axioms Hexagram.hexPivot_eq
+#print axioms Hexagram.dist_hexPivot
+#print axioms Hexagram.fourLadder_subset_hexagram
+#print axioms Hexagram.rot6_hexPivot
+#print axioms Hexagram.hex_master
+#print axioms Hexagram.bridge_adj
+#print axioms Hexagram.bridge_opp
+#print axioms Hexagram.adj_oo_empty
+#print axioms Hexagram.adj_oi_complete
+#print axioms Hexagram.adj_io_complete
+#print axioms Hexagram.adj_ii_complete
+#print axioms Hexagram.adj_fusion_oo
+#print axioms Hexagram.adj_fusion_oi
+#print axioms Hexagram.adj_fusion_io
+#print axioms Hexagram.adj_fusion_ii
+#print axioms Hexagram.opp_oo_complete
+#print axioms Hexagram.opp_oi_empty
+#print axioms Hexagram.opp_io_empty
+#print axioms Hexagram.opp_ii_empty
+#print axioms Hexagram.opp_fusion_oo
+#print axioms Hexagram.opp_fusion_oi
+#print axioms Hexagram.opp_fusion_io
+#print axioms Hexagram.opp_fusion_ii
+#print axioms Hexagram.hexMeta_oo_complete
+#print axioms Hexagram.hexMeta_oi_complete
+#print axioms Hexagram.hexMeta_io_complete
+#print axioms Hexagram.hexMeta_ii_complete
+#print axioms Hexagram.hexMeta_fusion_oo
+#print axioms Hexagram.hexMeta_fusion_oi
+#print axioms Hexagram.hexMeta_fusion_io
+#print axioms Hexagram.hexMeta_fusion_ii
+#print axioms Hexagram.unit_oo_complete
+#print axioms Hexagram.hexColTab_equivariant
+#print axioms Hexagram.hexMetaColTab_equivariant
+#print axioms Hexagram.hexColor_valid
+#print axioms Hexagram.colorable_four_hexagram
+#print axioms Hexagram.not_colorable_three_hexagram
+#print axioms Hexagram.chromaticNumber_hexagram
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

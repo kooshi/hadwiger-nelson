@@ -27,6 +27,7 @@ import Proofs.HadwigerNelson.Glue
 import Proofs.HadwigerNelson.Triangle
 import Proofs.HadwigerNelson.Ladder
 import Proofs.HadwigerNelson.MetaLadder
+import Proofs.HadwigerNelson.Hexagram
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
