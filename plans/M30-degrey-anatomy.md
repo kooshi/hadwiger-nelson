@@ -342,6 +342,63 @@ refutations — fine anywhere; re-time one refutation before batching, and name 
 machine beside the number). No Lean builds beyond the optional lemma. One heavy
 job at a time as always; no builds may run concurrently with SAT batches.
 
+## §R — Results (2026-08-09, the instruments' verdicts at face value)
+
+Machine: the desktop (32 cores, 128 GB). Instruments: `tools/anatomy.py`,
+`tools/rigidity.py`, `tools/hexchunk.py`, all with self-tests green and the §0
+controls seen red/green on cue before any verdict was believed.
+
+* **R2 — CONFIRMED, decisively.** The 1581 has **67 distinct edge directions**
+  (registered ≤ 200) among 7,877 edges; Heule 510 has 36, 553 has 42.
+* **E1 — refuted as literally registered; confirmed one refinement deeper, with
+  a sharper group.** 36 of 67 directions are whole words in ⟨ζ₆, σ, ρ₁₅, ρ₆₃⟩
+  (4,600 edges, 58.4%); the other 31 (3,277 edges, 41.6%) are NOT — and every
+  single one **squares** into the group, with squares exactly the σ-exponent-±2
+  words. The true direction group is the **half-spindle group
+  ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩** (√ρ₁₅ = (√15+i)/4, √ρ₆₃ = (3√7+i)/8): it closes ALL
+  67 directions at combined exponent |b|+|c|+|d| ≤ 6, zero unreached. De Grey's
+  own paper works at the half-angles (π/2 ± arcsin(1/8)) — the anatomy
+  re-derived that from pure edge data. σ appears only at exponents {0, ±1, ±2}.
+  R3's registered ≤ 6 holds in the half-word currency exactly.
+* **The Heule residue (unregistered finding).** 510 and 553 each carry **6
+  direction classes outside even the half-spindle group** (9–10 edges each, two
+  120°-orbits, not squaring in at box 7): Heule's SAT-shrunk witnesses are NOT
+  pure de Grey-group objects. The only pure-group witness is the 1581 itself.
+* **E2 — CONFIRMED exactly**: (1+i√15)/2 has x² = x−4 (norm 4 = 2²),
+  (1+i√63)/2 has x² = x−16 (norm 16 = 2⁴), both verified in the 16-vector
+  arithmetic. The M32 clearing is 2-adic.
+* **E3 — REFUTED at the registered currency.** 819 distinct circles about the
+  construction centre (the second spindle, about (−2,0), scatters the
+  one-centre radius spectrum); 4,140 coarse classes; top-6 carry **3.7%**
+  (registered ≥ 70%). At direction currency (post hoc): top-6 carry 11.7%, and
+  the head is flat (154 edges per top class). **The 5-forcing does not
+  concentrate** — in any currency we measured.
+* **R7 — technically confirmed, then DEFLATED by its matched control.** Every
+  top-6 coarse class and every top-6 direction class is "load-bearing"
+  (deletion → 4-colourable in 1–19 s). But the control: deleting 48 RANDOM
+  edges → 4-colourable, 5/5 draws (~1–3 s); deleting ONE random edge →
+  4-colourable in 4 of 5 probes (8–33 s; one unknown at 300 s). **De Grey's
+  1581 is at or near edge-critical** — the load-bearing property belongs to
+  (almost) every edge, not to any family. R7's registered reading is
+  count-free and therefore uninformative; the criticality itself is the
+  finding. [Full-graph UNSAT positive control: see below.]
+* **The fusion record.** Words per vertex: {1: 1344, 2: 234, 4: 1, 24: 2} —
+  the two 24-fold vertices are the spindle pivots' full hex₁₂ × copy stabilizer
+  orbits; 234 double points are the copy-overlap fusions.
+* **E4 / R6 — the calibration.** B=0 chunk (66 vertices, 126 edges) is
+  3-colourable; B=1 (234 vertices, 750 edges, rot6 verified as an edge-set
+  automorphism) refuses 3 colours, so with the kernel's 4-colouring above it,
+  the chunk is exactly 4-chromatic → E4 attaches to B=1. Census verdict:
+  recorded when the run lands.
+* **The rigidity instrument** validated on: rhombus (exactly the far pair, 1
+  colouring up to palette), rhombus-minus-edge (forcing vanishes), Moser at 3
+  (VACUOUS banner), P3/C4/C5 arithmetic, and the 791-forcer M13 control (in
+  flight at close — see the report).
+* **The field-wall lemma LANDED (beyond optional):**
+  `Proofs/HadwigerNelson/FieldWall.lean` — `moserTwist_mul_seam_sq : ρ·σ² = −1`
+  and `moserTwist_eq_zeta6_cube_mul_seam_inv_sq : ρ = ζ₆³·σ⁻²`, kernel-checked;
+  script-verified first in `anatomy.py --self-test`.
+
 ## Failure clauses (registered, carried from the stub)
 
 * **E1 false** (units do not factor in ⟨ζ₆, σ, ρ₁₅, ρ₆₃⟩): the group is bigger

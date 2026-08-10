@@ -296,7 +296,11 @@ def run_witness_membership(name: str, box4, boxH):
             "unreached_registered_group": len(miss4),
             "unreached_half_spindle_group": len(missH),
             "residue_edges": sum(r["edges"] for r in residue),
-            "residue": residue}
+            "residue": residue,
+            "viz": {"vertices": [[round(c, 6) for c in approx(p)] for p in coords],
+                    "edges": [{"i": e[0], "j": e[1], "dir": dir_id[e_i],
+                               "exp": box_lookup(boxH, ratios[e_i], 12)}
+                              for e_i, e in enumerate(edges)]}}
 
 
 def main_run(B: int, probe: bool, out_path: Path) -> dict:
@@ -437,6 +441,20 @@ def main_run(B: int, probe: bool, out_path: Path) -> dict:
                   f"({probes['post_hoc_direction'][-1]['seconds']}s)"
                   + ("  ← LOAD-BEARING" if st == "sat" else ""))
 
+    print("· a witness 5-colouring for the visualizer fill …")
+    st, model = _solve(base_clauses(1581, edges, 5), 5 * 1581, 600)
+    five = None
+    if st == "sat":
+        five = [-1] * 1581
+        for lit in model:
+            if lit > 0:
+                v, c = divmod(lit - 1, 5)
+                if v < 1581 and five[v] < 0:
+                    five[v] = c
+        print("  found (SAT); embedded")
+    else:
+        print(f"  {st} — the fill ships without a colouring")
+
     centre_img = D.rot_about(ORIGIN, CENTRE2, *FRAME)
     out = {
         "schema": "m30-anatomy v1 — coords/indices are the committed (kernel-certified) frame; "
@@ -486,6 +504,7 @@ def main_run(B: int, probe: bool, out_path: Path) -> dict:
                             "share": round(len(v) / len(edges), 4)} for ck, v in ranked],
         "heule": heule,
         "probes": probes,
+        "five_colouring": five,
         "seconds": round(time.time() - t0, 1),
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)

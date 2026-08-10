@@ -689,6 +689,16 @@ The headline is `Hexagram.chromaticNumber_hexagram`. -/
 #print axioms Hexagram.not_colorable_three_hexagram
 #print axioms Hexagram.chromaticNumber_hexagram
 
+/-! ## M30 — the field wall
+
+The kernel-checked citation for the field-jump thesis: the Moser spindle's twist rotation is a
+word in the seam group (`ρ·σ² = −1`, i.e. `ρ = ζ₆³σ⁻²`), so the classical 4-forcers are native
+to ⟨ζ₆, σ⟩ while the 5-forcers need √5 and √7. -/
+
+#print axioms FieldWall.normSq_moserTwist
+#print axioms FieldWall.moserTwist_mul_seam_sq
+#print axioms FieldWall.moserTwist_eq_zeta6_cube_mul_seam_inv_sq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
