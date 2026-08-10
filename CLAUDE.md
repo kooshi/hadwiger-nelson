@@ -276,9 +276,11 @@ falsifiable, its killing test named). A reading is never silently promoted; a
 grokking that dies is demoted with its refutation recorded, never deleted.
 Updated whenever understanding moves — the same closing rule as the Frontier.
 "All known 5-forcers" below means the three witnesses certified in this
-repository (de Grey 1581, Heule 553/510); Parts' 509 (2020, the smallest
-published) is unimported and untested — a cheap check whenever its coordinates
-are brought in.*
+repository (de Grey 1581, Heule 553/510). Unimported and untested: Parts' 509
+(arXiv:2010.12665, the vertex-count record), Heule's 529 (arXiv:1907.00929),
+Voronov et al.'s 64,513 (2021, Moser-spindle-free), and Haugland's 2,131
+(arXiv:2608.04542, 2026-08 — Moser-spindle-free, HEPTAGON-fabric, float+SAT
+verified only). The scope clauses below matter because of the last one.*
 
 **The theory in one paragraph.** A 5-forcer, as far as anyone has built one, is
 seam-field geometry pushed over a wall by angular detuning: a small vocabulary
@@ -306,7 +308,14 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   lies in ℚ(√33) — zero √5/√7 content in ANY ring, all three witnesses
   **[measured: M31 stub, commits `dc97389`, `e721fb2`]**. Rotations preserve
   radii, so fabric ⊗ rotated-copies puts all new-field content in the angles.
-  *Falsifier: a 5-forcer with a non-seam shell (test Parts 509 on import).*
+  *Falsifier: a 5-forcer with a non-seam shell (test Parts 509 on import).
+  SCOPE CORRECTION (2026-08-10): the falsifier has likely part-fired —
+  Haugland's 2,131 (arXiv:2608.04542) builds a 5-chromatic graph on a
+  HEPTAGONAL fabric (1/sin(2kπ/7) radii — a cubic field, not our tower), so
+  the seam vocabulary is the hexagonal fabric's instantiation, not a law of
+  5-forcers. The mechanism-level grokking survives strengthened: radially
+  crystal, angularly detuned — per fabric. Pending: his verification is
+  floats + uncertified SAT; the claim is unconfirmed by our standards.*
 * **G4 — One shell vocabulary.** 25 of de Grey's 29 per-centre rings are
   Heule-510 rings; 12 rings are exactly the certified hexagram's; the named
   members are old friends — 1/3, 1, 4/3 (the forced-pair radius), 5/3 =
@@ -334,7 +343,26 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   base's pattern); the detune forces the clash while preserving interlock — a
   spindle is a forcer mid-division. Falsifier: a 5-forcer whose overlay is
   exactly symmetric, or detunes far outside the band; the "forcing band"
-  question is registered at M31.*
+  question is registered at M31. INDEPENDENT SUPPORT (2026-08-10): Haugland
+  (arXiv:2608.04542) builds his Moser-free 5-forcer with an explicit detuning
+  parameter θ ≈ 0.4236 breaking his 7-fold symmetry "just enough", and his
+  pipeline is literally our instrument currency — a virtual edge at √3
+  (G₁, 740 vertices, forced-distinct pair), assembled into a forced-EQUAL
+  pair at distance 2 (G₂), closed by the spindle at distance 2 — whose
+  rotation matrix is OUR ρ₁₅ = (7+i√15)/8, appearing in a heptagon paper
+  because the spindle radicand depends only on the forced pair's distance.*
+* **G11 — The Moser subgraph is not necessary for 5** (external landscape,
+  2026-08-10): Voronov et al. (2021, 64,513 vertices) and now Haugland
+  (2,131) give Moser-spindle-free 5-chromatic graphs. No tension with G1 —
+  G1 places the Moser TWIST inside the seam group; it never claimed the
+  subgraph necessary — and Haugland's route (engineer a forced pair at a
+  spindle-able distance, then spindle) is the general form our G9 antipodal
+  pairs are the first exotic instance of: the design question is not "embed
+  the classical gadget" but "land a forced pair at a friendly distance"
+  (4d² − 1 square in the fabric's field). *His 2,131 is verified by floats +
+  uncertified SAT only — kernel-certifying it would need cubic-field
+  machinery (cos 2π/7) beyond our multiquadratic tower; noted as a possible
+  future insertion, Kooshi's call.*
 * **G8 — The true group is the half-spindle group** ⟨ζ₁₂, σ, √ρ₁₅ = (√15+i)/4,
   √ρ₆₃ = (3√7+i)/8⟩: it closes all 67 of the 1581's directions at exponent
   ≤ 6; the whole-word subgroup covers 58% and every miss squares in;
