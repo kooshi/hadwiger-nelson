@@ -699,6 +699,20 @@ to ⟨ζ₆, σ⟩ while the 5-forcers need √5 and √7. -/
 #print axioms FieldWall.moserTwist_mul_seam_sq
 #print axioms FieldWall.moserTwist_eq_zeta6_cube_mul_seam_inv_sq
 
+/-! ## M32 — the quadrature kill (the 2-adic engine's first theorems)
+
+The block-split arithmetic one field up: `sqrt5_indep` by mod-5 descent (one ZMod-5 kernel
+decide + strong induction), the `sqrt15_split` workhorse, the flat eight-term independence,
+the geometric quadrature law (M31's G12, ρ₁₅ instance), and the distance-2 pair's tangency
+anchor. -/
+
+#print axioms Quadrature.sqrt5_indep
+#print axioms Quadrature.sqrt15_split
+#print axioms Quadrature.sqrt_indep₈
+#print axioms Quadrature.normSq_rho15
+#print axioms Quadrature.quadrature_rho15
+#print axioms Quadrature.pair_tangency
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
