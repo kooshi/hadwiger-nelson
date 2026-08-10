@@ -625,10 +625,11 @@ the M32 contract: `object`, `anchor`, `detune`, `cross_chords` (each with
 
 ## What was NOT done, honestly
 
-* The ownership + defect-map overlays for the ANATOMY explorer (stub note):
-  deferred within the session — the closure explorer took the viz budget
-  first; promoted next if the run's remaining time allows, else first item
-  of the next session.
+* ~~The ownership + defect-map overlays for the ANATOMY explorer~~ — DONE in
+  the same session after the core close: both overlays computed in-page from
+  the already-spliced tags/coordinates, and both replicate the M30-verified
+  facts (790/790/1 ownership split, 792 mirror defects); the explorer
+  republished to its standing URL.
 * The triple-query rigidity extension: M32-stub work, untouched as planned.
 * Stacked mitosis (two+ detunes; the forced-pair pipeline in our fabric):
   NOT probed — it was not registered. It is the natural M32 design question
