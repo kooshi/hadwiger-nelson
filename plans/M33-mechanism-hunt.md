@@ -353,7 +353,14 @@ Laptop (12 cores, 31 GB): SAT calls are single-threaded CaDiCaL, a few
 hundred MB each — RAM is a non-issue IF one job runs at a time and no Lean
 build runs concurrently (none is planned this milestone; phase 3 is gated
 to M34). All sweeps run sequential in background with `python3 -u`,
-unpiped, logging to `build/`. Caps: 300 s per query default; a capped row
+unpiped, logging to `build/`.
+*[Superseded 2026-08-10 before any sweep ran — Kooshi moved the campaign
+to the DESKTOP (32 cores, 128 GB) and set the standing parallelism rule:
+within a tool run, use as many threads as RAM allows. The driver runs a
+cores−2 thread pool over the subprocess SAT calls (sweep marks, control
+batches, shrink candidates speculatively — sound by monotonicity:
+rejections stay rejections downstream — and the necessity census).
+Predictions and caps unchanged; P11's budget band now has ~30× headroom.]* Caps: 300 s per query default; a capped row
 is `unknown` and NEVER a claim (`unknown ≥ cap` is not a bound). If any
 single load-bearing query wants > 600 s repeatedly, STOP and ask Kooshi
 for the desktop rather than raising caps on the laptop. Segfault, any

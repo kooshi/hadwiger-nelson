@@ -178,6 +178,135 @@ def triple_query(n: int, edges, k: int, triple, mode: str, cap: float | None = N
     return row
 
 
+# ------------------------------------------------------------------ the avoidance instrument (M33)
+#
+# Class-level compulsion queries — the disjunctive asks the instance meters are structurally
+# blind to (G15). ONE semantics: avoid a monochromatic m-tuple; arity is data (an "equal pair"
+# IS a mono 2-tuple, and at arity 2 the avoidance clause is literally an edge clause).
+# Direction B ("can this instance EVER be realized") is `mono_realizable`, the arity-generic
+# sibling of `triple_query(mode=mono)`. The caller (tools/mechanism.py) owns the base-SAT
+# guard and computes verdicts through `avoid_verdict` ONLY; these functions own the encodings
+# and re-validate every SAT model in-process. Instances are dense index tuples — no geometry.
+
+def _check_instances(instances) -> None:
+    for inst in instances:
+        if len(inst) < 2 or len(set(inst)) != len(inst):
+            raise SystemExit(f"AVOID QUERY REJECTED: malformed instance {tuple(inst)!r} "
+                             "(arity ≥ 2, members distinct)")
+
+
+def _validate_avoiding(colours, edges, instances) -> None:
+    for (a, b) in edges:
+        if colours[a] == colours[b]:
+            raise SystemExit("AVOID MODEL INVALID: monochromatic edge — solver or decode is wrong")
+    for inst in instances:
+        if len({colours[v] for v in inst}) == 1:
+            raise SystemExit("AVOID MODEL INVALID: a class instance is monochromatic — the "
+                             "avoidance clauses are wrong")
+
+
+def class_avoid(n: int, edges, k: int, instances, cap: float | None = None,
+                want_model: bool = False) -> dict:
+    """Can a proper k-colouring avoid EVERY monochromatic class instance? One clause per
+    instance per colour: ¬(every member wears c). `unsat` — WITH the caller's base row sat and
+    the class inhabited — is FIRED: every proper k-colouring makes some instance mono; the
+    pigeonhole, localized. `sat` models are re-validated (proper AND genuinely avoiding);
+    `want_model` returns the validated colouring (the shrink loop's necessity witnesses)."""
+    _check_instances(instances)
+    clauses = base_clauses(n, edges, k) + amo_clauses(n, k)
+    for inst in instances:
+        for c in range(k):
+            clauses.append([-var(v, c, k) for v in inst])
+    t0 = time.time()
+    status, model = _solve(clauses, n * k, cap)
+    row = {"encoding": "onehot", "n_instances": len(instances), "outcome": status,
+           "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = decode(model, n, k)
+        _validate_avoiding(colours, edges, instances)
+        if want_model:
+            row["colours"] = colours
+    return row
+
+
+def class_avoid_binary(n: int, edges, k: int, instances, cap: float | None = None) -> dict:
+    """The decorrelated re-encode (M33 §0g G-3): 2-bit binary colours, k = 4 only — half the
+    variables, no at-most-one, different clause shapes, ONE mono-ban generator serving edges
+    and instances alike (properness IS mono-banning the edge). Exists so a `fired` verdict
+    never rests on a single clause generator; agreement with `class_avoid` is asserted by the
+    self-test gadgets and by every onset confirmation."""
+    if k != 4:
+        raise SystemExit("BINARY RE-ENCODE REJECTED: k = 4 only (2 bits per vertex)")
+    _check_instances(instances)
+
+    def bit(v: int, i: int) -> int:
+        return v * 2 + i + 1
+
+    clauses: list[list[int]] = []
+
+    def mono_ban(tup) -> None:
+        for c in range(4):
+            cl = []
+            for v in tup:
+                cl.append(bit(v, 0) if (c & 1) == 0 else -bit(v, 0))
+                cl.append(bit(v, 1) if (c >> 1) == 0 else -bit(v, 1))
+            clauses.append(cl)
+
+    for e in edges:
+        mono_ban(e)
+    for inst in instances:
+        mono_ban(inst)
+    t0 = time.time()
+    status, model = _solve(clauses, n * 2, cap)
+    row = {"encoding": "binary-2bit", "n_instances": len(instances), "outcome": status,
+           "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = [(1 if bit(v, 0) in model else 0) + 2 * (1 if bit(v, 1) in model else 0)
+                   for v in range(n)]
+        _validate_avoiding(colours, edges, instances)
+    return row
+
+
+def mono_realizable(n: int, edges, k: int, instance, cap: float | None = None) -> dict:
+    """Direction B, arity-generic: pin THIS instance monochromatic (palette-WLOG colour 0) in
+    a proper k-colouring. `sat` = realizable, model validated (proper AND the pin holds);
+    `unsat` = the instance can NEVER be mono — the class-level impossibility genre (M20's
+    `no_mono_outer_triple`). The caller must have seen the graph k-colourable first — an
+    unsat on an uncolourable graph would be vacuous."""
+    _check_instances([instance])
+    clauses = base_clauses(n, edges, k) + amo_clauses(n, k)
+    for v in instance:
+        clauses.append([var(v, 0, k)])
+    t0 = time.time()
+    status, model = _solve(clauses, n * k, cap)
+    row = {"instance": list(instance), "outcome": status,
+           "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = decode(model, n, k)
+        for (a, b) in edges:
+            if colours[a] == colours[b]:
+                raise SystemExit("REALIZE MODEL INVALID: monochromatic edge — solver or decode "
+                                 "is wrong")
+        if any(colours[v] != 0 for v in instance):
+            raise SystemExit("REALIZE MODEL INVALID: the mono pin does not hold — the pin "
+                             "clauses are wrong")
+    return row
+
+
+def avoid_verdict(base_outcome: str, avoid_outcome: str | None, n_instances: int) -> str:
+    """The ONE place a class verdict is computed (M33 §0f F3): `fired` structurally requires
+    the region colourable AND the class inhabited AND the avoidance refused. `empty` is a
+    zero-instance region ("nothing to avoid here yet" — never clean); `vacuous` is a region
+    that refuses k colours outright (every question moot)."""
+    if base_outcome == "unsat":
+        return "vacuous"
+    if base_outcome == "unknown":
+        return "unknown-at-base"
+    if n_instances == 0:
+        return "empty"
+    return {"unsat": "fired", "sat": "clean", "unknown": "unknown"}[avoid_outcome]
+
+
 # ------------------------------------------------------------------ the pair lattice
 
 class Rigidity:
@@ -464,6 +593,63 @@ def self_test() -> None:
         expect("no-error", "SystemExit", "rainbow at k=2 rejected")
     except SystemExit as e:
         expect("REJECTED" in str(e) or "rainbow" in str(e), True, "rainbow at k=2 rejected")
+
+    # ---- the M33 avoidance instrument, each control red/green on cue (§0g G-4) ----
+
+    # planted forced-equal: u=3, v=4 both adjacent to the shared K3 {0,1,2} — at k=4 both are
+    # forced to the 4th colour, so the mono 2-tuple (3,4) cannot be avoided
+    k3 = [(0, 1), (0, 2), (1, 2)]
+    forced_eq = k3 + [(3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2)]
+    ca = class_avoid(5, forced_eq, 4, [(3, 4)])
+    expect(ca["outcome"], "unsat", "planted forced-equal gadget: avoid-mono (3,4) FIRES")
+    ca = class_avoid(5, forced_eq[:-1], 4, [(3, 4)])  # one spoke removed
+    expect(ca["outcome"], "sat", "one spoke removed: avoid-mono (3,4) goes clean")
+    mr = mono_realizable(5, forced_eq, 4, (3, 4))
+    expect(mr["outcome"], "sat", "direction B: the forced pair is (of course) realizable mono")
+
+    # planted mono-triple: u,v,w = 3,4,5 each adjacent to ALL of the shared K3 — all three
+    # forced to the 4th colour, a compelled mono triple
+    mono_tri = k3 + [(u, w) for u in (3, 4, 5) for w in (0, 1, 2)]
+    ca = class_avoid(6, mono_tri, 4, [(3, 4, 5)])
+    expect(ca["outcome"], "unsat", "planted mono-triple gadget: avoid-mono (3,4,5) FIRES")
+    ca = class_avoid(6, mono_tri[:-1], 4, [(3, 4, 5)])
+    expect(ca["outcome"], "sat", "one spoke removed: avoid-mono (3,4,5) goes clean")
+
+    # the binary re-encode must AGREE on all four gadget readings (the decorrelation control)
+    for eds, inst, want, what in [(forced_eq, (3, 4), "unsat", "pair fired"),
+                                  (forced_eq[:-1], (3, 4), "sat", "pair clean"),
+                                  (mono_tri, (3, 4, 5), "unsat", "triple fired"),
+                                  (mono_tri[:-1], (3, 4, 5), "sat", "triple clean")]:
+        cb = class_avoid_binary(6, eds, 4, [inst])
+        expect(cb["outcome"], want, f"binary re-encode agrees: {what}")
+
+    # direction-B trivial-impossibility red: an ADJACENT tuple can never be mono — UNSAT for a
+    # reason that is not a compulsion (the enumerator excludes internal edges by geometry;
+    # this control documents the trap)
+    mr = mono_realizable(5, forced_eq, 4, (0, 1))
+    expect(mr["outcome"], "unsat", "direction B on an adjacent pair: UNSAT for the trivial reason")
+
+    # id-mapping shuffle: the forced-equal gadget embedded at scrambled indices among decoys —
+    # verdicts must survive the relabeling
+    perm = {0: 7, 1: 2, 2: 9, 3: 0, 4: 5}
+    shuf = [(perm[a], perm[b]) for (a, b) in forced_eq] + [(1, 3), (3, 8), (1, 8)]
+    ca = class_avoid(10, shuf, 4, [(perm[3], perm[4])])
+    expect(ca["outcome"], "unsat", "shuffled embedding: the fired verdict survives relabeling")
+
+    # the verdict function: fired needs colourable + inhabited + refused; nothing else may
+    expect(avoid_verdict("sat", "unsat", 1), "fired", "verdict: sat base + unsat avoid = FIRED")
+    expect(avoid_verdict("sat", "sat", 1), "clean", "verdict: sat/sat = clean")
+    expect(avoid_verdict("sat", "sat", 0), "empty", "verdict: zero instances = EMPTY, never clean")
+    expect(avoid_verdict("unsat", "unsat", 9), "vacuous", "verdict: base unsat = VACUOUS, never fired")
+    expect(avoid_verdict("unknown", "unsat", 9), "unknown-at-base", "verdict: capped base = no claim")
+    expect(avoid_verdict("sat", "unknown", 9), "unknown", "verdict: capped avoid = no claim")
+
+    # rejection path: a malformed instance refuses loudly
+    try:
+        class_avoid(5, forced_eq, 4, [(3, 3)])
+        expect("no-error", "SystemExit", "duplicate-member instance rejected")
+    except SystemExit as e:
+        expect("REJECTED" in str(e), True, "duplicate-member instance rejected")
 
     print("SELF-TEST:", "ok" if not failures else f"{len(failures)} FAILURES: {failures}")
     if failures:
