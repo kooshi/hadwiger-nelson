@@ -47,7 +47,9 @@ context accumulates through the three stubs and is not repeated here.*
   build it into `tools/rigidity.py` alongside the triple-query extension.
 
 ## The design fork (opened by Kooshi, 2026-08-10, the morning after M31's close —
-## UNDECIDED; his call at M32 subplanning, with de Bruijn's recommendation recorded)
+## DECIDED same day: Kooshi approved the B-first hybrid ("Sounds good to me")
+## and authorized the M32 run. M32's subplan takes Route B's probe phase as its
+## opening block, Route A as the standing fallback whose engine work overlaps.)
 
 Two routes to "the first certified infinite 5-chromatic object", and they differ
 by an order of magnitude in certification surface:
