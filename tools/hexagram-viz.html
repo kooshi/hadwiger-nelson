@@ -1,0 +1,588 @@
+<meta charset="utf-8">
+<title>Hexagram — M26 instrument</title>
+<style>
+  :root {
+    --bg: #0b0e13; --panel: #11151d; --panel2: #171c26; --line: #262e3d;
+    --ink: #d7dee8; --ink-dim: #8b96a8; --ink-faint: #59637a;
+    --accent: #e8b84b; --ok: #4cb944; --bad: #f25c54;
+    --mono: "JetBrains Mono", "SF Mono", "Cascadia Code", ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--mono);
+    font-size: 12px; overflow: hidden;
+  }
+  #app { display: flex; height: 100%; }
+  #panel {
+    width: 302px; min-width: 302px; background: var(--panel);
+    border-right: 1px solid var(--line); overflow-y: auto; padding: 14px 14px 40px;
+  }
+  #panel h1 {
+    font-size: 14px; letter-spacing: .18em; font-weight: 700; color: var(--ink);
+  }
+  #panel .sub { color: var(--ink-faint); margin: 4px 0 14px; font-size: 10.5px; line-height: 1.5; }
+  .grp { margin-bottom: 14px; border-top: 1px solid var(--line); padding-top: 9px; }
+  .grp > .gt {
+    font-size: 10px; letter-spacing: .16em; color: var(--ink-dim); margin-bottom: 6px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .gt .all { color: var(--ink-faint); cursor: pointer; letter-spacing: 0; }
+  .gt .all:hover { color: var(--accent); }
+  .row {
+    display: flex; align-items: center; gap: 7px; padding: 2.5px 0; cursor: pointer;
+    color: var(--ink); user-select: none;
+  }
+  .row:hover { color: #fff; }
+  .row input { accent-color: var(--accent); width: 12px; height: 12px; cursor: pointer; }
+  .sw { width: 14px; height: 4px; border-radius: 2px; flex: none; }
+  .sw.dot { width: 7px; height: 7px; border-radius: 50%; }
+  .row .n { margin-left: auto; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .none { color: var(--ink-faint); padding: 2.5px 0 2.5px 19px; }
+  .none b { color: var(--ink-dim); font-weight: 400; }
+  .ctl { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+  .ctl label { color: var(--ink-dim); }
+  .ctl input[type=range] { flex: 1; accent-color: var(--accent); }
+  .ctl output { color: var(--accent); min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
+  button {
+    font: inherit; background: var(--panel2); color: var(--ink); border: 1px solid var(--line);
+    padding: 6px 10px; border-radius: 3px; cursor: pointer; width: 100%;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button:focus-visible, input:focus-visible { outline: 1px solid var(--accent); outline-offset: 1px; }
+  #sweepOut { margin-top: 7px; line-height: 1.55; color: var(--ink-dim); }
+  #sweepOut .ok { color: var(--ok); } #sweepOut .bad { color: var(--bad); }
+  #selInfo { line-height: 1.6; color: var(--ink-dim); word-break: break-all; }
+  #selInfo .k { color: var(--ink-faint); }
+  #selInfo .v { color: var(--ink); }
+  #selInfo .fuse { color: var(--accent); }
+  #stage { position: relative; flex: 1; }
+  canvas { position: absolute; inset: 0; cursor: crosshair; }
+  #tip {
+    position: absolute; pointer-events: none; background: #171c26ee; color: var(--ink);
+    border: 1px solid var(--line); padding: 5px 8px; border-radius: 3px; display: none;
+    line-height: 1.5; max-width: 340px; z-index: 3; font-size: 11px;
+  }
+  #tip .fuse { color: var(--accent); }
+  #status {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 5px 12px;
+    background: #0b0e13cc; border-top: 1px solid var(--line); color: var(--ink-dim);
+    display: flex; gap: 18px; z-index: 2; font-variant-numeric: tabular-nums;
+  }
+  #status .hl { color: var(--accent); }
+  kbd { color: var(--ink); background: var(--panel2); border: 1px solid var(--line);
+        border-radius: 3px; padding: 0 4px; }
+</style>
+<div id="app">
+  <aside id="panel">
+    <h1>HEXAGRAM</h1>
+    <div class="sub">M26 instrument — every point and chord below is <i>generated from the
+      certified classification</i> (Hexagram.lean tables), not searched. The sweep
+      re-derives unit pairs numerically and diffs them against the drawn classes.</div>
+
+    <div class="ctl">
+      <label for="depth">seam depth |b| ≤</label>
+      <input type="range" id="depth" min="0" max="8" step="1" value="3">
+      <output id="depthOut">3</output>
+    </div>
+
+    <div class="grp"><div class="gt">GEOMETRY <span class="all" data-g="geo">all/none</span></div>
+      <div id="g-geo"></div></div>
+    <div class="grp"><div class="gt">LATTICE POINTS <span class="all" data-g="pts">all/none</span></div>
+      <div id="g-pts"></div></div>
+    <div class="grp"><div class="gt">INTRA-SYSTEM CHORDS <span class="all" data-g="intra">all/none</span></div>
+      <div id="g-intra"></div></div>
+    <div class="grp"><div class="gt">ADJACENT WEBS (a, a+1) <span class="all" data-g="adj">all/none</span></div>
+      <div id="g-adj"></div>
+      <div class="none">oo — <b>none (theorem: adj_oo_empty)</b></div>
+      <div class="none">fusions — <b>none (theorem)</b></div></div>
+    <div class="grp"><div class="gt">UNIT WEBS (a, a+2) <span class="all" data-g="unit">all/none</span></div>
+      <div id="g-unit"></div></div>
+    <div class="grp"><div class="gt">OPPOSITE WEBS (a, a+3) <span class="all" data-g="opp">all/none</span></div>
+      <div id="g-opp"></div>
+      <div class="none">oi io ii — <b>none (theorem)</b></div>
+      <div class="none">fusions — <b>none: the tangency is invisible</b></div></div>
+    <div class="grp"><div class="gt">PIVOT–META WEBS <span class="all" data-g="meta">all/none</span></div>
+      <div id="g-meta"></div></div>
+
+    <div class="grp"><div class="gt">SWEEP</div>
+      <button id="sweep">re-derive unit pairs numerically</button>
+      <div id="sweepOut">Brute-forces every point pair at the current depth and
+        compares against all generated chords (toggles ignored).</div></div>
+
+    <div class="grp"><div class="gt">SELECTION</div>
+      <div id="selInfo">click a point — its addresses, colour, rot6 orbit.<br>
+        <span class="k">shift-click</span> a second point → exact-ish distance.<br>
+        drag pans · wheel zooms · <kbd>u</kbd> unit circle at selection</div></div>
+  </aside>
+  <main id="stage">
+    <canvas id="cv"></canvas>
+    <div id="tip"></div>
+    <div id="status"><span id="stPts"></span><span id="stChords"></span><span id="stMouse"></span></div>
+  </main>
+</div>
+<script>
+"use strict";
+/* ================= exact-formula layer (floats mirror the Lean definitions) ==== */
+const S3 = Math.sqrt(3), S33 = Math.sqrt(33);
+const Z6 = { re: 0.5, im: S3 / 2 };
+const Z12 = { re: S3 / 2, im: 0.5 };
+const SIG = { re: S3 / 6, im: S33 / 6 };            // the seam σ, |σ| = 1
+const MP  = { re: 0.5, im: S3 / 6 };                // metaPivot m = (1+ζ₆)/3
+const IR  = 1 / S3;                                  // inner radius
+const cmul = (a, b) => ({ re: a.re * b.re - a.im * b.im, im: a.re * b.im + a.im * b.re });
+const cadd = (a, b) => ({ re: a.re + b.re, im: a.im + b.im });
+const conj = a => ({ re: a.re, im: -a.im });
+const csc  = (s, a) => ({ re: s * a.re, im: s * a.im });
+const Z6P = [{ re: 1, im: 0 }]; for (let i = 1; i < 6; i++) Z6P.push(cmul(Z6P[i - 1], Z6));
+function word(x, b) {                                // ζ₆^x σ^b
+  let w = Z6P[((x % 6) + 6) % 6];
+  const s = b >= 0 ? SIG : conj(SIG);
+  for (let i = 0; i < Math.abs(b); i++) w = cmul(w, s);
+  return w;
+}
+const PIV = []; for (let a = 0; a < 6; a++) PIV.push(cmul(MP, cadd({ re: 1, im: 0 }, Z6P[a])));
+const MA  = cadd(MP, Z12);                           // metaAnchor (drawn only as direction)
+const m6  = v => ((v % 6) + 6) % 6;
+// point constructors — fam: 0 pivot-outer, 1 pivot-inner, 2 meta-outer, 3 meta-inner
+function pt(fam, a, x, b) {
+  if (fam === 0) return cadd(PIV[a], word(x, b));
+  if (fam === 1) return cadd(PIV[a], csc(IR, word(x, b)));
+  const w = cmul(word(x, b), Z12);
+  return fam === 2 ? cadd(MP, w) : cadd(MP, csc(IR, w));
+}
+/* ================= the certified tables (Hexagram.lean / Ladder.lean) ========== */
+const ADJ_OI = [[2,-2,4,-1],[2,2,4,1],[3,-2,1,-1],[3,2,1,1]];
+const ADJ_IO = [[1,-1,5,-2],[1,1,5,2],[4,-1,0,-2],[4,1,0,2]];
+const ADJ_II = [[0,-1,2,-1],[0,1,2,1],[5,-1,3,-1],[5,1,3,1]];
+const OPP_OO = [[3,-2,1,-2],[3,2,1,2],[4,-2,0,-2],[4,2,0,2]];
+const META_OO = [[0,0,5,-1],[0,0,5,1],[1,0,1,-1],[1,0,1,1]];
+const META_OI = [[0,0,1,0],[1,0,5,0],[2,0,1,0],[5,0,5,0]];
+const META_IO = [[2,-1,5,1],[2,1,5,-1],[5,-1,1,1],[5,1,1,-1]];
+const META_II = [[0,-1,5,0],[0,1,5,0],[1,-1,1,0],[1,1,1,0]];
+const OI_T = [[2,2,5,1],[2,-2,5,-1],[4,2,1,1],[4,-2,1,-1],[1,0,5,1],[1,0,5,-1],
+              [5,0,1,1],[5,0,1,-1],[2,2,0,1],[2,-2,0,-1],[4,2,0,1],[4,-2,0,-1],
+              [3,2,2,1],[3,-2,2,-1],[3,2,4,1],[3,-2,4,-1]];
+const II_N = [[0,0,3,0],[3,0,0,0],[1,1,5,1],[5,1,1,1],[1,-1,5,-1],[5,-1,1,-1],
+              [0,1,3,3],[3,3,0,1],[0,-1,3,-3],[3,-3,0,-1]];
+const COL_OUT = [[2,3,2,0,2,0],[1,0,3,0,1,0],[1,2,1,3,1,2],
+                 [0,2,0,2,3,2],[0,1,0,1,0,3],[3,1,2,1,2,1]];
+const COL_INN = [[1,2,3,3,0,1],[2,2,0,3,3,1],[2,0,0,1,3,3],
+                 [3,0,1,1,2,3],[3,3,1,2,2,0],[1,3,3,2,0,0]];
+const MCOL_OUT = [0,1,2,0,1,2], MCOL_INN = [1,2,0,1,2,0], TAU = [1,2,0,3];
+const COLOR4 = ["#f25c54", "#4cb944", "#4e9de0", "#f2c14e"];
+/* ================= class registry ============================================== */
+const CLASSES = [
+  // id, group, label, colour, dense?
+  ["intra_hex",  "intra", "hex steps (outer, x→x±1)",   "#4a6fb5", 1],
+  ["intra_rot3", "intra", "rot3 steps (inner, x→x±2)",  "#2f8f83", 1],
+  ["intra_seam", "intra", "seam steps (out↔in, b→b±1)", "#7a6fa8", 1],
+  ["adj_oi", "adj", "oi sporadics", "#ff9a3c", 0],
+  ["adj_io", "adj", "io sporadics", "#ff5ca8", 0],
+  ["adj_ii", "adj", "ii sporadics", "#f25c54", 0],
+  ["unit_oo_m", "unit", "oo matching (translates)", "#5a7d99", 1],
+  ["unit_oo_h", "unit", "oo hub pencils (the centres)", "#8c6d3f", 1],
+  ["unit_oi", "unit", "oi rows (oiTable, 16/pair)", "#35c9dd", 0],
+  ["unit_io", "unit", "io rows (mirror)", "#59e08f", 0],
+  ["unit_ii_m", "unit", "ii matching", "#6d9979", 1],
+  ["unit_ii_n", "unit", "ii norm rows (10/pair)", "#d05ce8", 0],
+  ["opp_oo", "opp", "oo sporadics", "#ffe14c", 0],
+  ["meta_oo", "meta", "oo rows", "#9db8ff", 0],
+  ["meta_oi", "meta", "oi sporadic rows", "#c79bff", 0],
+  ["meta_oi_h", "meta", "oi hub pencil (own centre)", "#7d6a55", 1],
+  ["meta_io", "meta", "io rows", "#5cd6c0", 0],
+  ["meta_ii", "meta", "ii rows", "#ff8fa8", 0],
+];
+const GEO = [
+  ["c_pout", "pivot outer circles", "#3a4354"], ["c_pinn", "pivot inner circles", "#3a4354"],
+  ["c_mout", "meta outer circle", "#4a4234"],   ["c_minn", "meta inner circle", "#4a4234"],
+  ["labels", "centre labels", "#8b96a8"],
+];
+const PTS = [
+  ["p_pout", "pivot outer lattice"], ["p_pinn", "pivot inner lattice"],
+  ["p_mout", "meta outer lattice"],  ["p_minn", "meta inner lattice"],
+  ["colour4", "fill by the 4-colouring"], ["fusion", "ring the fused points"],
+];
+const state = {};
+const DEFAULT_ON = new Set(["c_pout","c_pinn","c_mout","c_minn","labels",
+  "p_pout","p_pinn","p_mout","p_minn","colour4","fusion",
+  "adj_oi","adj_io","adj_ii","unit_oi","unit_io","unit_ii_n","opp_oo",
+  "meta_oo","meta_oi","meta_io","meta_ii"]);
+/* ================= model build ================================================= */
+let B = 3;
+let registry = new Map();   // key -> {p:{re,im}, reps:[...], color, fused}
+let chords = {};            // classId -> [ [k1,k2], ... ]
+const key = p => (Math.round(p.re * 1e7) / 1e7) + "," + (Math.round(p.im * 1e7) / 1e7);
+function addPt(fam, a, x, b) {
+  const p = pt(fam, a, m6(x), b), k = key(p);
+  let e = registry.get(k);
+  if (!e) { e = { p, reps: [] }; registry.set(k, e); }
+  e.reps.push({ fam, a, x: m6(x), b });
+  return k;
+}
+function repColor(r) {
+  if (r.fam === 0) return COL_OUT[r.a][r.x];
+  if (r.fam === 1) return COL_INN[r.a][r.x];
+  return r.fam === 2 ? MCOL_OUT[r.x] : MCOL_INN[r.x];
+}
+function ch(cls, k1, k2) { chords[cls].push([k1, k2]); }
+function build() {
+  registry = new Map(); chords = {}; CLASSES.forEach(c => chords[c[0]] = []);
+  const R = [];
+  for (let b = -B; b <= B; b++) R.push(b);
+  // points
+  for (let a = 0; a < 6; a++) for (const b of R) for (let x = 0; x < 6; x++) {
+    addPt(0, a, x, b); addPt(1, a, x, b);
+  }
+  for (const b of R) for (let x = 0; x < 6; x++) { addPt(2, 0, x, b); addPt(3, 0, x, b); }
+  // intra (7 systems: fam pair (0,1) per pivot, (2,3) for meta)
+  const SYS = []; for (let a = 0; a < 6; a++) SYS.push([0, 1, a]); SYS.push([2, 3, 0]);
+  for (const [fo, fi, a] of SYS) for (const b of R) for (let x = 0; x < 6; x++) {
+    ch("intra_hex",  addPt(fo, a, x, b), addPt(fo, a, x + 1, b));
+    ch("intra_rot3", addPt(fi, a, x, b), addPt(fi, a, x + 2, b));
+    for (const d of [b + 1, b - 1]) if (Math.abs(d) <= B)
+      ch("intra_seam", addPt(fo, a, x, b), addPt(fi, a, x, d));
+  }
+  // adjacent webs (a, a+1), tables at shift a−3
+  for (let a = 0; a < 6; a++) {
+    const s = a - 3;
+    for (const [X, Bb, Y, D] of ADJ_OI) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("adj_oi", addPt(0, a, X + s, Bb), addPt(1, m6(a + 1), Y + s, D));
+    for (const [X, Bb, Y, D] of ADJ_IO) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("adj_io", addPt(1, a, X + s, Bb), addPt(0, m6(a + 1), Y + s, D));
+    for (const [X, Bb, Y, D] of ADJ_II) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("adj_ii", addPt(1, a, X + s, Bb), addPt(1, m6(a + 1), Y + s, D));
+  }
+  // unit webs (a, a+2)
+  for (let a = 0; a < 6; a++) {
+    const a2 = m6(a + 2);
+    for (const b of R) for (let x = 0; x < 6; x++) {
+      ch("unit_oo_m", addPt(0, a, x, b), addPt(0, a2, x, b));
+      ch("unit_ii_m", addPt(1, a, x, b), addPt(1, a2, x, b));
+      ch("unit_oo_h", addPt(0, a, a - 3, 0), addPt(0, a2, x, b));   // far-centre pencil
+      ch("unit_oo_h", addPt(0, a, x, b), addPt(0, a2, a, 0));       // near-centre pencil
+    }
+    for (const [O, Bb, I, D] of OI_T) if (Math.abs(Bb) <= B && Math.abs(D) <= B) {
+      ch("unit_oi", addPt(0, a, O + a - 3, Bb), addPt(1, a2, I + a, D));
+      ch("unit_io", addPt(1, a, I + a - 3, D), addPt(0, a2, O + a, Bb));
+    }
+    for (const [X, Bb, Y, D] of II_N) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("unit_ii_n", addPt(1, a, X + a - 3, Bb), addPt(1, a2, Y + a, D));
+  }
+  // opposite webs (a, a+3), three distinct pairs
+  for (let a = 0; a < 3; a++) {
+    const s = a - 3;
+    for (const [X, Bb, Y, D] of OPP_OO) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("opp_oo", addPt(0, a, X + s, Bb), addPt(0, m6(a + 3), Y + s, D));
+  }
+  // pivot–meta webs, tables at shift a−3, oi hub pencil to the own centre
+  for (let a = 0; a < 6; a++) {
+    const s = a - 3;
+    for (const [X, Bb, Y, D] of META_OO) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("meta_oo", addPt(0, a, X + s, Bb), addPt(2, 0, Y + s, D));
+    for (const [X, Bb, Y, D] of META_OI) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("meta_oi", addPt(0, a, X + s, Bb), addPt(3, 0, Y + s, D));
+    for (const [X, Bb, Y, D] of META_IO) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("meta_io", addPt(1, a, X + s, Bb), addPt(2, 0, Y + s, D));
+    for (const [X, Bb, Y, D] of META_II) if (Math.abs(Bb) <= B && Math.abs(D) <= B)
+      ch("meta_ii", addPt(1, a, X + s, Bb), addPt(3, 0, Y + s, D));
+    for (const b of R) for (let x = 0; x < 6; x++)
+      ch("meta_oi_h", addPt(0, a, x, b), addPt(3, 0, a, 0));
+  }
+  // finalize points: colour by decode priority, fusion flag
+  for (const e of registry.values()) {
+    e.reps.sort((r, q) => r.fam - q.fam);
+    e.color = repColor(e.reps[0]);
+    e.fused = e.reps.length > 1;
+  }
+  refreshCounts();
+}
+/* ================= view / interaction ========================================== */
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const tip = document.getElementById("tip");
+let view = { cx: 0.75, cy: 0.28, scale: 170 };   // world→screen
+let sel = null, sel2 = null, showUnitCircle = false, hoverKey = null;
+function resize() {
+  const r = cv.parentElement.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+  cv.width = r.width * dpr; cv.height = r.height * dpr;
+  cv.style.width = r.width + "px"; cv.style.height = r.height + "px";
+  draw();
+}
+addEventListener("resize", resize);
+const W2S = p => {
+  const dpr = devicePixelRatio || 1;
+  return [(p.re - view.cx) * view.scale * dpr + cv.width / 2,
+          -(p.im - view.cy) * view.scale * dpr + cv.height / 2];
+};
+const S2W = (sx, sy) => {
+  const dpr = devicePixelRatio || 1;
+  return { re: (sx * dpr - cv.width / 2) / (view.scale * dpr) + view.cx,
+           im: -(sy * dpr - cv.height / 2) / (view.scale * dpr) + view.cy };
+};
+function draw() {
+  ctx.fillStyle = "#0b0e13"; ctx.fillRect(0, 0, cv.width, cv.height);
+  const dpr = devicePixelRatio || 1, S = view.scale * dpr;
+  // circles
+  ctx.lineWidth = 1;
+  const circle = (c, r, col) => {
+    const [x, y] = W2S(c); ctx.strokeStyle = col; ctx.beginPath();
+    ctx.arc(x, y, r * S, 0, 7); ctx.stroke();
+  };
+  for (let a = 0; a < 6; a++) {
+    if (state.c_pout) circle(PIV[a], 1, "#262e3d");
+    if (state.c_pinn) circle(PIV[a], IR, "#20293a");
+  }
+  if (state.c_mout) circle(MP, 1, "#3d3524");
+  if (state.c_minn) circle(MP, IR, "#332c1e");
+  // chords
+  for (const [id, , , col, dense] of CLASSES) {
+    if (!state[id]) continue;
+    ctx.strokeStyle = col; ctx.globalAlpha = dense ? 0.32 : 0.85;
+    ctx.lineWidth = dense ? 0.7 : 1.3;
+    ctx.beginPath();
+    for (const [k1, k2] of chords[id]) {
+      const [x1, y1] = W2S(registry.get(k1).p), [x2, y2] = W2S(registry.get(k2).p);
+      ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  // selection: incident chords
+  if (sel) {
+    ctx.lineWidth = 2.2; ctx.strokeStyle = "#e8b84b"; ctx.globalAlpha = 0.9;
+    ctx.beginPath();
+    for (const [id] of CLASSES) {
+      if (!state[id]) continue;
+      for (const [k1, k2] of chords[id]) if (k1 === sel || k2 === sel) {
+        const [x1, y1] = W2S(registry.get(k1).p), [x2, y2] = W2S(registry.get(k2).p);
+        ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+      }
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  // points
+  const famShow = { 0: state.p_pout, 1: state.p_pinn, 2: state.p_mout, 3: state.p_minn };
+  const rad = Math.max(1.6, Math.min(4.5, view.scale / 90)) * dpr;
+  for (const [k, e] of registry) {
+    if (!e.reps.some(r => famShow[r.fam])) continue;
+    const [x, y] = W2S(e.p);
+    if (x < -20 || y < -20 || x > cv.width + 20 || y > cv.height + 20) continue;
+    ctx.fillStyle = state.colour4 ? COLOR4[e.color] : "#aab4c4";
+    ctx.beginPath(); ctx.arc(x, y, rad, 0, 7); ctx.fill();
+    if (state.fusion && e.fused) {
+      ctx.strokeStyle = "#e8b84b"; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.arc(x, y, rad + 2.6 * dpr, 0, 7); ctx.stroke();
+    }
+  }
+  // selection markers, orbit, unit circle
+  if (sel && registry.has(sel)) {
+    const e = registry.get(sel), [x, y] = W2S(e.p);
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(x, y, rad + 5 * dpr, 0, 7); ctx.stroke();
+    // rot6 orbit: rotate the coordinate about m by 60° repeatedly
+    let z = e.p;
+    ctx.strokeStyle = "#e8b84b"; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    for (let i = 0; i < 5; i++) {
+      z = cadd(MP, cmul(Z6, { re: z.re - MP.re, im: z.im - MP.im }));
+      const [ox, oy] = W2S(z);
+      ctx.beginPath(); ctx.arc(ox, oy, rad + 3 * dpr, 0, 7); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    if (showUnitCircle) {
+      ctx.strokeStyle = "#e8b84b66"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(x, y, 1 * S, 0, 7); ctx.stroke();
+    }
+  }
+  if (sel2 && registry.has(sel2)) {
+    const [x, y] = W2S(registry.get(sel2).p);
+    ctx.strokeStyle = "#f25c54"; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(x, y, rad + 5 * dpr, 0, 7); ctx.stroke();
+    if (sel && registry.has(sel)) {
+      const [x1, y1] = W2S(registry.get(sel).p);
+      ctx.strokeStyle = "#f25c5488"; ctx.setLineDash([5, 4]);
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x, y); ctx.stroke(); ctx.setLineDash([]);
+    }
+  }
+  // labels
+  if (state.labels) {
+    ctx.fillStyle = "#8b96a8"; ctx.font = `${11 * dpr}px ${getComputedStyle(document.body).fontFamily}`;
+    for (let a = 0; a < 6; a++) {
+      const [x, y] = W2S(PIV[a]); ctx.fillText("p" + a, x + 6 * dpr, y - 6 * dpr);
+    }
+    const [mx, my] = W2S(MP); ctx.fillStyle = "#e8b84b";
+    ctx.fillText("m", mx + 6 * dpr, my - 6 * dpr);
+  }
+}
+/* -------- hit testing, tooltips, selection ------------------------------------ */
+function nearest(sx, sy) {
+  const dpr = devicePixelRatio || 1;
+  let best = null, bd = 12 * dpr;
+  const famShow = { 0: state.p_pout, 1: state.p_pinn, 2: state.p_mout, 3: state.p_minn };
+  for (const [k, e] of registry) {
+    if (!e.reps.some(r => famShow[r.fam])) continue;
+    const [x, y] = W2S(e.p);
+    const d = Math.hypot(x - sx * dpr, y - sy * dpr);
+    if (d < bd) { bd = d; best = k; }
+  }
+  return best;
+}
+const FAM_N = ["outer", "inner", "meta-outer", "meta-inner"];
+function repStr(r) {
+  return r.fam < 2 ? `${FAM_N[r.fam]}(p${r.a}) x=${r.x} b=${r.b}`
+                   : `${FAM_N[r.fam]} x=${r.x} b=${r.b}`;
+}
+function describe(k) {
+  const e = registry.get(k);
+  const reps = e.reps.map(repStr).join("<br>");
+  const head = e.fused ? `<span class="fuse">FUSED ×${e.reps.length}</span><br>` : "";
+  return `${head}${reps}<br>colour ${e.color} · (${e.p.re.toFixed(6)}, ${e.p.im.toFixed(6)})`;
+}
+let dragging = false, moved = false, last = null;
+cv.addEventListener("mousedown", ev => { dragging = true; moved = false; last = [ev.clientX, ev.clientY]; });
+addEventListener("mouseup", () => { dragging = false; });
+cv.addEventListener("mousemove", ev => {
+  const r = cv.getBoundingClientRect(), sx = ev.clientX - r.left, sy = ev.clientY - r.top;
+  if (dragging) {
+    const dx = ev.clientX - last[0], dy = ev.clientY - last[1];
+    if (Math.abs(dx) + Math.abs(dy) > 2) moved = true;
+    view.cx -= dx / view.scale; view.cy += dy / view.scale;
+    last = [ev.clientX, ev.clientY]; draw();
+  }
+  const k = nearest(sx, sy);
+  hoverKey = k;
+  if (k) {
+    tip.style.display = "block";
+    tip.style.left = (sx + 14) + "px"; tip.style.top = (sy + 14) + "px";
+    tip.innerHTML = describe(k);
+  } else tip.style.display = "none";
+  const w = S2W(sx, sy);
+  document.getElementById("stMouse").textContent =
+    `(${w.re.toFixed(4)}, ${w.im.toFixed(4)})`;
+});
+cv.addEventListener("click", ev => {
+  if (moved) return;
+  const r = cv.getBoundingClientRect();
+  const k = nearest(ev.clientX - r.left, ev.clientY - r.top);
+  if (ev.shiftKey && sel && k && k !== sel) { sel2 = k; }
+  else { sel = k; sel2 = null; }
+  updateSel(); draw();
+});
+cv.addEventListener("wheel", ev => {
+  ev.preventDefault();
+  const r = cv.getBoundingClientRect();
+  const before = S2W(ev.clientX - r.left, ev.clientY - r.top);
+  view.scale *= Math.exp(-ev.deltaY * 0.0012);
+  view.scale = Math.max(30, Math.min(6000, view.scale));
+  const after = S2W(ev.clientX - r.left, ev.clientY - r.top);
+  view.cx += before.re - after.re; view.cy += before.im - after.im;
+  draw();
+}, { passive: false });
+addEventListener("keydown", ev => {
+  if (ev.key === "u") { showUnitCircle = !showUnitCircle; draw(); }
+});
+function updateSel() {
+  const el = document.getElementById("selInfo");
+  if (!sel || !registry.has(sel)) {
+    el.innerHTML = `click a point — its addresses, colour, rot6 orbit.<br>
+      <span class="k">shift-click</span> a second point → exact-ish distance.<br>
+      drag pans · wheel zooms · <kbd>u</kbd> unit circle at selection`;
+    return;
+  }
+  const e = registry.get(sel);
+  let inc = 0;
+  for (const [id] of CLASSES) for (const [k1, k2] of chords[id])
+    if (k1 === sel || k2 === sel) inc++;
+  let html = describe(sel) + `<br><span class="k">incident chords (all classes):</span> <span class="v">${inc}</span>`;
+  html += `<br><span class="k">rot6 orbit colours:</span> <span class="v">${orbitColors(e).join(" → ")}</span> (τ)`;
+  if (sel2 && registry.has(sel2)) {
+    const q = registry.get(sel2).p;
+    const d = Math.hypot(e.p.re - q.re, e.p.im - q.im);
+    const tag = Math.abs(d - 1) < 1e-9 ? ' <span class="fuse">= 1 (unit!)</span>'
+             : d < 1e-9 ? ' <span class="fuse">= 0 (same point)</span>' : "";
+    html += `<br><span class="k">distance to 2nd:</span> <span class="v">${d.toFixed(12)}</span>${tag}`;
+  }
+  el.innerHTML = html;
+}
+function orbitColors(e) {
+  const out = [e.color];
+  let c = e.color;
+  for (let i = 0; i < 5; i++) { c = TAU[c]; out.push(c); }
+  return out;
+}
+/* -------- sweep: the completeness theorem, live ------------------------------- */
+document.getElementById("sweep").addEventListener("click", () => {
+  const t0 = performance.now();
+  const pts = [...registry.entries()];
+  const known = new Set();
+  for (const [id] of CLASSES) for (const [k1, k2] of chords[id]) {
+    known.add(k1 + "|" + k2); known.add(k2 + "|" + k1);
+  }
+  let unit = 0; const unclass = [];
+  for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+    const p = pts[i][1].p, q = pts[j][1].p;
+    const dx = p.re - q.re, dy = p.im - q.im, d2 = dx * dx + dy * dy;
+    if (Math.abs(d2 - 1) < 1e-9) {
+      unit++;
+      if (!known.has(pts[i][0] + "|" + pts[j][0]))
+        unclass.push([pts[i][0], pts[j][0]]);
+    }
+  }
+  const ms = (performance.now() - t0).toFixed(0);
+  const out = document.getElementById("sweepOut");
+  if (unclass.length === 0)
+    out.innerHTML = `${pts.length} points, <b>${unit}</b> unit pairs — ` +
+      `<span class="ok">every one in a certified class</span> (${ms} ms). ` +
+      `The completeness theorem, checked numerically at depth ${B}.`;
+  else
+    out.innerHTML = `<span class="bad">${unclass.length} UNCLASSIFIED unit pairs ` +
+      `of ${unit}</span> — this would contradict the theorem; suspect the viewer. ` +
+      `First: ${describe(unclass[0][0])} ↔ ${describe(unclass[0][1])}`;
+});
+/* -------- panel construction --------------------------------------------------- */
+function mkRow(parent, id, label, col, isDot, count) {
+  const r = document.createElement("label"); r.className = "row";
+  r.innerHTML = `<input type="checkbox" id="t-${id}" ${DEFAULT_ON.has(id) ? "checked" : ""}>` +
+    (col ? `<span class="sw${isDot ? " dot" : ""}" style="background:${col}"></span>` : "") +
+    `<span>${label}</span>` + (count ? `<span class="n" id="n-${id}"></span>` : "");
+  parent.appendChild(r);
+  state[id] = DEFAULT_ON.has(id);
+  r.querySelector("input").addEventListener("change", ev => {
+    state[id] = ev.target.checked;
+    draw();
+  });
+}
+const gGeo = document.getElementById("g-geo");
+for (const [id, label, col] of GEO) mkRow(gGeo, id, label, null, false, false);
+const gPts = document.getElementById("g-pts");
+for (const [id, label] of PTS) mkRow(gPts, id, label, null, false, false);
+for (const [id, group, label, col] of CLASSES)
+  mkRow(document.getElementById("g-" + group), id, label, col, false, true);
+document.querySelectorAll(".all").forEach(el => el.addEventListener("click", () => {
+  const g = el.dataset.g;
+  const ids = g === "geo" ? GEO.map(x => x[0]) : g === "pts" ? PTS.map(x => x[0])
+    : CLASSES.filter(c => c[1] === g).map(c => c[0]);
+  const anyOff = ids.some(id => !state[id]);
+  ids.forEach(id => { state[id] = anyOff; document.getElementById("t-" + id).checked = anyOff; });
+  draw();
+}));
+function refreshCounts() {
+  let tot = 0;
+  for (const [id] of CLASSES) {
+    const n = chords[id].length; tot += n;
+    const el = document.getElementById("n-" + id);
+    if (el) el.textContent = n;
+  }
+  document.getElementById("stPts").textContent =
+    `${registry.size} points (${[...registry.values()].filter(e => e.fused).length} fused)`;
+  document.getElementById("stChords").textContent = `${tot} chords generated`;
+}
+document.getElementById("depth").addEventListener("input", ev => {
+  B = +ev.target.value;
+  document.getElementById("depthOut").textContent = B;
+  sel = sel2 = null; build(); updateSel(); draw();
+  document.getElementById("sweepOut").textContent =
+    "Brute-forces every point pair at the current depth and compares against " +
+    "all generated chords (toggles ignored).";
+});
+/* -------- go ------------------------------------------------------------------- */
+build(); resize(); updateSel();
+</script>
