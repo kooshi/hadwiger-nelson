@@ -597,6 +597,42 @@ implements the refined protocol. The registered PREDICTIONS (§0c bands)
 are untouched by every refinement — protocol refinement is the modeling
 passes' job; bands move never.
 
+## §0i — Mid-milestone addendum (2026-08-10, desktop, registered BEFORE the reruns)
+
+**What the first control run found (face value).** P9 green both ways; P8's
+six pairs all read `unknown` at 300 s; P10 read the two √3 classes clean as
+predicted AND `eq-pair-2` FIRED on the certified hexagram chunk (378 pts,
+135 instances) — **confirmed instantly through the binary re-encode**, so
+it is a genuine pigeonhole, and registered P10 is *partially refuted*: its
+rationale ("a fired class would contradict a kernel theorem") was wrong —
+a fired class is a disjunctive compulsion, fully compatible with χ = 4.
+Reading: the seam fabric cannot 4-colour without a monochromatic
+distance-2 pair somewhere in the B = 2 chunk — a pigeonhole at EXACTLY the
+ρ₁₅ spindle distance (4·2² − 1 = 15), whose kill lives one field up. G15's
+Act One, materialized in our own certified object.
+
+**Instrument changes (sound, self-tests re-green).** (1) `class_avoid`
+gains first-occurrence palette symmetry breaking (sound for
+palette-invariant properties; NEVER added to coverage queries, whose
+restrictions name colours; truncated emission stays sound as a prefix of
+the full scheme) — measured necessity: the 791 pair UNSAT is 59 s in the
+two-pin currency vs 300 s+ unbroken. (2) The binary re-encode pins vertex
+0's bits (transitivity). (3) Control cap rises to 900 s on the desktop for
+the 791 pairs.
+
+**The registered chunk-ladder probe (bands before running).** New object
+rows: the hexagram chunk at B = 0 and B = 1, plus classes `eq-pair-4` and
+`eq-pair-4rt3` at B = 2. Predictions: **Q-i1 [medium]** — `eq-pair-2`
+fires already at B = 1 and is clean-or-empty at B = 0; **Q-i2 [low]** —
+`eq-pair-4` fires at B = 2 (the (2,2)-diagonal's double, 4·4² − 1 = 63,
+the ρ₆₃ channel), `eq-pair-4rt3` does not; **Q-i3 [medium]** — the
+mono-√3-triple class stays clean at every B (G1: the certified colouring's
+rot3 rainbow structure protects √3); **Q-i4 [high]** — the certified
+colouring itself, restricted to the chunk, realizes mono d = 2 pairs (the
+pigeonhole's easy half, checked from the standing colour tables). A
+fired-class shrink core on the chunk (the d = 2 pigeonhole core) is
+in-scope as phase-2 work if Q-i1 lands.
+
 ## Costs and benchmarks (desktop)
 
 Fan queries: 510-scale 10–30 s; B=2-chunk-scale seconds; enriched balls

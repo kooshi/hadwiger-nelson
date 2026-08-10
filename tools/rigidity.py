@@ -213,7 +213,7 @@ def class_avoid(n: int, edges, k: int, instances, cap: float | None = None,
     pigeonhole, localized. `sat` models are re-validated (proper AND genuinely avoiding);
     `want_model` returns the validated colouring (the shrink loop's necessity witnesses)."""
     _check_instances(instances)
-    clauses = base_clauses(n, edges, k) + amo_clauses(n, k)
+    clauses = base_clauses(n, edges, k) + amo_clauses(n, k) + _palette_breaking(n, k)
     for inst in instances:
         for c in range(k):
             clauses.append([-var(v, c, k) for v in inst])
@@ -227,6 +227,18 @@ def class_avoid(n: int, edges, k: int, instances, cap: float | None = None,
         if want_model:
             row["colours"] = colours
     return row
+
+
+def _palette_breaking(n: int, k: int, limit: int = 400) -> list[list[int]]:
+    """First-occurrence palette symmetry breaking: vertex v may wear colour c ≥ 1 only if some
+    earlier vertex wears c−1. SOUND for palette-invariant properties only (properness and
+    mono-avoidance are; colour-NAMED restrictions like coverage_query's are NOT — never add
+    this there). Any prefix of the full scheme is still sound (the canonical first-occurrence
+    relabeling satisfies every clause), so the emission is truncated at `limit` vertices to
+    bound the formula at enriched scales. Without this, an avoidance UNSAT pays the full 4!
+    palette factor — measured 300 s+ vs 59 s on the 791 forcer's pairs (M33 controls)."""
+    return [[-var(v, c, k)] + [var(u, c - 1, k) for u in range(v)]
+            for v in range(1, min(n, limit)) for c in range(1, k)]
 
 
 def class_avoid_binary(n: int, edges, k: int, instances, cap: float | None = None) -> dict:
@@ -256,6 +268,9 @@ def class_avoid_binary(n: int, edges, k: int, instances, cap: float | None = Non
         mono_ban(e)
     for inst in instances:
         mono_ban(inst)
+    if n > 0:  # palette pin, sound by transitivity: relabel so vertex 0 wears colour 00
+        clauses.append([-bit(0, 0)])
+        clauses.append([-bit(0, 1)])
     t0 = time.time()
     status, model = _solve(clauses, n * 2, cap)
     row = {"encoding": "binary-2bit", "n_instances": len(instances), "outcome": status,
