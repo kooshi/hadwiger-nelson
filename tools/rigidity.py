@@ -83,6 +83,101 @@ def decode(model: set[int], n: int, k: int) -> list[int]:
     return out
 
 
+# ------------------------------------------------------------------ the meters (M32)
+#
+# Coverage and triple compulsions — the k-set instruments the pairwise sweep is structurally
+# blind to (G9/G13). Each query is ONE SAT call made palette-WLOG sound by ownership: this
+# module builds the whole clause set from (n, edges, k); no API accepts foreign clauses, so
+# the palette symmetry the WLOG needs can never be silently broken by a caller.
+
+def coverage_query(n: int, edges, k: int, S, j: int, cap: float | None = None) -> dict:
+    """Is there a proper k-colouring with the target set S restricted to colours {0..j−1}?
+
+    Palette-WLOG: "S uses ≤ j colours" ⟺ some global palette permutation puts S inside
+    {0..j−1}, so banning colours {j..k−1} on S loses nothing. `sat` ⟹ the target can be
+    j-covered; `unsat` at j = k−1 (with j = k sat) ⟹ FANNED: every proper k-colouring puts
+    all k colours on S. `unknown` is a cap reading, never a claim."""
+    clauses = base_clauses(n, edges, k) + amo_clauses(n, k)
+    for v in S:
+        for c in range(j, k):
+            clauses.append([-var(v, c, k)])
+    t0 = time.time()
+    status, model = _solve(clauses, n * k, cap)
+    row = {"j": j, "outcome": status, "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = decode(model, n, k)
+        for (a, b) in edges:
+            if colours[a] == colours[b]:
+                raise SystemExit("COVERAGE MODEL INVALID: monochromatic edge — solver or "
+                                 "decode is wrong")
+        used = sorted({colours[v] for v in S})
+        if any(c >= j for c in used):
+            raise SystemExit("COVERAGE MODEL INVALID: the target wears a banned colour — "
+                             "the restriction clauses are wrong")
+        row["used_on_target"] = used
+    return row
+
+
+def min_cover(n: int, edges, k: int, S, cap: float | None = None) -> dict:
+    """The coverage ladder j = k, k−1, …, 1. The top row j = k IS the vacuity guard (it is the
+    unrestricted colourability question), so no fan claim can outrun colourability. min-cover
+    is monotone in j; `unknown` rows widen the answer to an honest interval [lo, hi].
+
+    Verdicts: `vacuous` (graph refuses k — no coverage claim follows), `unknown` (the guard
+    row capped), `fanned` (lo = hi = k: every k-colouring covers S with all k colours — a
+    fresh centre vertex on this circle transitions to colour k+1), `settled` (lo = hi < k),
+    `interval` (unknown rows in between)."""
+    rows = [coverage_query(n, edges, k, S, k, cap)]
+    if rows[0]["outcome"] == "unsat":
+        return {"rows": rows, "verdict": "vacuous"}
+    if rows[0]["outcome"] == "unknown":
+        return {"rows": rows, "verdict": "unknown"}
+    for j in range(k - 1, 0, -1):
+        rows.append(coverage_query(n, edges, k, S, j, cap))
+        if rows[-1]["outcome"] == "unsat":
+            break               # monotone: every lower j is unsat too
+    sats = [r["j"] for r in rows if r["outcome"] == "sat"]
+    unsats = [r["j"] for r in rows if r["outcome"] == "unsat"]
+    hi = min(sats)
+    lo = (max(unsats) + 1) if unsats else 1
+    verdict = "fanned" if lo == hi == k else ("settled" if lo == hi else "interval")
+    return {"rows": rows, "lo": lo, "hi": hi, "verdict": verdict}
+
+
+def triple_query(n: int, edges, k: int, triple, mode: str, cap: float | None = None) -> dict:
+    """Can this triple be monochromatic (mode `mono`) / rainbow (mode `rainbow`) in a proper
+    k-colouring? Palette-WLOG pins: mono → all three to colour 0; rainbow → colours 0,1,2
+    (needs k ≥ 3). `unsat` at mono = COMPELLED non-mono (M20's genre — a compulsion that may
+    act through no edge); `sat` = moot (a colouring realizes it). The caller must have seen
+    the graph k-colourable first (the χ row or a min_cover guard row) — an unsat here on an
+    uncolourable graph would be vacuous."""
+    x, y, z = triple
+    if mode == "mono":
+        pins = [[var(x, 0, k)], [var(y, 0, k)], [var(z, 0, k)]]
+    elif mode == "rainbow":
+        if k < 3:
+            raise SystemExit("TRIPLE QUERY REJECTED: rainbow needs k ≥ 3")
+        pins = [[var(x, 0, k)], [var(y, 1, k)], [var(z, 2, k)]]
+    else:
+        raise SystemExit(f"TRIPLE QUERY REJECTED: unknown mode {mode!r} (mono|rainbow)")
+    clauses = base_clauses(n, edges, k) + amo_clauses(n, k) + pins
+    t0 = time.time()
+    status, model = _solve(clauses, n * k, cap)
+    row = {"triple": [x, y, z], "mode": mode, "outcome": status,
+           "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = decode(model, n, k)
+        for (a, b) in edges:
+            if colours[a] == colours[b]:
+                raise SystemExit("TRIPLE MODEL INVALID: monochromatic edge — solver or decode "
+                                 "is wrong")
+        want = [0, 0, 0] if mode == "mono" else [0, 1, 2]
+        if [colours[x], colours[y], colours[z]] != want:
+            raise SystemExit("TRIPLE MODEL INVALID: the pin does not hold in the model — the "
+                             "pin clauses are wrong")
+    return row
+
+
 # ------------------------------------------------------------------ the pair lattice
 
 class Rigidity:
@@ -331,6 +426,45 @@ def self_test() -> None:
     expect((r.status, r.eq_confirmed, r.ne_confirmed), ("done", [], []),
            "C5 k=3: free — no forced pair, no virtual edge")
 
+    # ---- the M32 meters, each control red/green on cue ----
+
+    # fanned positive: C5 at k=3 needs all 3 colours (χ(C5)=3) — the wheel-hub semantics: a hub
+    # adjacent to all of C5 would transition to colour 4 (and W5 is indeed 4-chromatic).
+    c5 = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 0)]
+    mc = min_cover(5, c5, 3, [0, 1, 2, 3, 4])
+    expect(mc["verdict"], "fanned", "C5 k=3 whole-set coverage reads FANNED (χ(C5)=3)")
+
+    # fanned negative (the red partner): C4 is bipartite — 2 colours cover it inside k=3
+    mc = min_cover(4, c4, 3, [0, 1, 2, 3])
+    expect((mc["verdict"], mc["lo"], mc["hi"]), ("settled", 2, 2),
+           "C4 k=3 min-cover settles at 2 — not fanned")
+
+    # the free vacuity guard: K4 refuses 3 colours; the ladder must say VACUOUS, never fanned
+    k4 = [(a, b) for a in range(4) for b in range(a + 1, 4)]
+    mc = min_cover(4, k4, 3, [0, 1, 2, 3])
+    expect(mc["verdict"], "vacuous", "K4 k=3 coverage ladder reads VACUOUS (guard row unsat)")
+
+    # ladder arithmetic: P3 at k=2 — the endpoints always share, so {0,2} is 1-coverable
+    mc = min_cover(3, [(0, 1), (1, 2)], 2, [0, 2])
+    expect((mc["lo"], mc["hi"]), (1, 1), "P3 k=2: endpoint pair min-cover = 1")
+
+    # triple compulsion positive: C4 at k=2, triple (0,2,1) — 0,2 non-adjacent yet the triple
+    # can never be mono (1 is adjacent to both): COMPELLED non-mono through a non-edge pair
+    tq = triple_query(4, c4, 2, (0, 2, 1), "mono")
+    expect(tq["outcome"], "unsat", "C4 k=2 triple (0,2,1) mono is COMPELLED non-mono")
+
+    # triple moot (the red partner): the triangle at k=3 is realized rainbow
+    tri = [(0, 1), (0, 2), (1, 2)]
+    tq = triple_query(3, tri, 3, (0, 1, 2), "rainbow")
+    expect(tq["outcome"], "sat", "triangle k=3 rainbow triple is moot (realized)")
+
+    # rejection path: rainbow at k=2 must refuse loudly, not silently accept
+    try:
+        triple_query(4, c4, 2, (0, 1, 2), "rainbow")
+        expect("no-error", "SystemExit", "rainbow at k=2 rejected")
+    except SystemExit as e:
+        expect("REJECTED" in str(e) or "rainbow" in str(e), True, "rainbow at k=2 rejected")
+
     print("SELF-TEST:", "ok" if not failures else f"{len(failures)} FAILURES: {failures}")
     if failures:
         sys.exit(1)
@@ -347,6 +481,10 @@ def main() -> None:
                     help="also enumerate the colour space up to symmetry × palette, capped")
     ap.add_argument("--timeout", type=float, default=600.0, help="per-SAT-call timeout, seconds")
     ap.add_argument("--out", type=Path, help="write the JSON report here")
+    ap.add_argument("--coverage", metavar="IDS",
+                    help="M32 meter: min-cover ladder for the comma-separated target vertex set")
+    ap.add_argument("--triple", metavar="X,Y,Z", help="M32 meter: triple compulsion query")
+    ap.add_argument("--mode", default="mono", choices=["mono", "rainbow"])
     ap.add_argument("--self-test", action="store_true", dest="selftest")
     args = ap.parse_args()
 
@@ -355,6 +493,37 @@ def main() -> None:
         return
     if not args.graph:
         ap.error("--graph or --self-test")
+
+    if args.coverage or args.triple:
+        n, edges = load_graph(args.graph)
+        if args.coverage:
+            S = [int(x) for x in args.coverage.split(",")]
+            mc = min_cover(n, edges, args.k, S, args.timeout)
+            v = mc["verdict"]
+            if v == "vacuous":
+                print(f"VACUOUS: the graph itself refuses {args.k} colours — no coverage "
+                      f"claim follows")
+            elif v == "fanned":
+                print(f"FANNED at k={args.k}: every proper colouring covers the target with "
+                      f"all {args.k} colours — a centre vertex on this circle transitions to "
+                      f"colour {args.k + 1}")
+            elif v == "unknown":
+                print(f"unknown at cap — NOT a bound, NOT a fan claim")
+            else:
+                print(f"not fanned: min-cover ∈ [{mc['lo']}, {mc['hi']}] of {args.k}")
+            print(json.dumps(mc, indent=1))
+        if args.triple:
+            t = tuple(int(x) for x in args.triple.split(","))
+            tq = triple_query(n, edges, args.k, t, args.mode, args.timeout)
+            if tq["outcome"] == "unsat":
+                print(f"COMPELLED non-{args.mode} at k={args.k} (M20's genre) — guard: confirm "
+                      f"the graph is {args.k}-colourable or this is vacuous")
+            elif tq["outcome"] == "sat":
+                print("moot: a colouring realizes it")
+            else:
+                print("unknown at cap — no claim")
+            print(json.dumps(tq, indent=1))
+        return
 
     n, edges = load_graph(args.graph)
     syms = [list(p) for p in json.load(open(args.sym))] if args.sym else []

@@ -301,6 +301,173 @@ def census(m: dict, label: str) -> dict:
             "anchor_incident": anchor_incident}
 
 
+# ------------------------------------------------------------------ stacks (M32)
+#
+# A stack is a LIST of copies — copy = (anchor, detune spec) — with the base as copy 0 under
+# the identity spec. Detune specs form a group, so a copy-pair's coupling class is a total
+# function of the SPEC QUOTIENT (§0d): `same_anchor` routes to the M31 single-word law at the
+# relative spec; `translation` (identical R, different anchors) routes to the §0a case-2
+# difference-pin law; `general` is RECORDED-ONLY — for an exactly-confirmed unit chord,
+# per-block vanishing of the 16-basis decomposition is trivially true, so no structured claim
+# exists there and the census must not wear a law badge it did not earn.
+
+def stack(base_pts, copies: list[tuple[object, dict]]) -> dict:
+    """base ∪ (aᵢ + Rᵢ·(p − aᵢ)) for each copy i ≥ 1, exact dedup, provenance (tag, src)."""
+    table: dict[tuple, int] = {}
+    pts, prov = [], []
+
+    def put(p, tag, src):
+        kk = key(p)
+        if kk not in table:
+            table[kk] = len(pts)
+            pts.append(p)
+            prov.append([])
+        prov[table[kk]].append((tag, src))
+
+    for i, p in enumerate(base_pts):
+        put(p, 0, i)
+    for ci, (anchor, det) in enumerate(copies, start=1):
+        R = det["R"]
+        for i, p in enumerate(base_pts):
+            put(cadd(anchor, C.cmul(R, csub(p, anchor))), ci, i)
+    fused = [i for i, pr in enumerate(prov) if len({t for (t, _) in pr}) > 1]
+    return {"pts": pts, "table": table, "prov": prov, "copies": copies,
+            "base_pts": base_pts, "fused": fused}
+
+
+def pair_relative(copies, ta: int, tb: int) -> dict:
+    """The coupling route of tag pair (ta < tb). Tag 0 = base = the identity about every
+    anchor, so base↔copy is the same-anchor case at the copy's own anchor."""
+    assert ta < tb
+    ab, db = copies[tb - 1]
+    if ta == 0:
+        aa, da = ab, make_detune()          # identity, about the copy's anchor
+    else:
+        aa, da = copies[ta - 1]
+    same_anchor = (ta == 0) or (key(aa) == key(ab))
+    if same_anchor:
+        rel = make_detune(s=C.cmul(C.cconj(da["s"]), db["s"]),
+                          a=db["a"] - da["a"], b=db["b"] - da["b"],
+                          name=f"rel({ta},{tb})")
+        return {"route": "same_anchor", "rel": rel, "anchor": ab}
+    if da["a"] == db["a"] and da["b"] == db["b"] and key(da["s"]) == key(db["s"]):
+        return {"route": "translation", "det": db, "A": csub(ab, aa),
+                "anchors": (aa, ab)}
+    return {"route": "general",
+            "rel": {"ds": exact_str(C.cmul(C.cconj(da["s"]), db["s"])[0]),
+                    "da": db["a"] - da["a"], "db": db["b"] - da["b"]},
+            "anchors": (aa, ab)}
+
+
+def translation_check(det: dict, A, w, where: str) -> dict:
+    """§0a case 2: a chord between two copies of the SAME detune R = s·W about anchors at
+    separation A ≠ 0 satisfies |A + R·w|² = 1 with w = u_b − u_a the preimage-offset
+    difference. The block split pins: even word → Im(s·w·Ā) = 0 (w collinear with the
+    twisted anchor axis); odd word → Re(s·w·Ā) = 0; mixed word → both (only w = 0
+    survives); w = 0 is the TRANSLATION MATCHING, legal exactly when |A|² = 1."""
+    cls = det["cls"]
+    if not any(w[0]) and not any(w[1]):
+        if nsq(A) != C.const(1):
+            raise SystemExit(
+                f"STACKING-LAW VIOLATION at {where} — §0a case 2 is FALSIFIED.\n"
+                f"  a w = 0 matching chord at anchor separation |A|² ≠ 1\n"
+                f"  Halting; report at face value.")
+        return {"pin": "matching", "w2_exact": {}}
+    zeta = C.cmul(C.cmul(det["s"], w), C.cconj(A))     # s·w·Ā, both components in K
+    violation = None
+    if cls in ("even15", "even63"):
+        if any(zeta[1]):
+            violation = f"Im(s·w·Ā) = {exact_str(zeta[1])} ≠ 0 (difference-collinear pin)"
+        pin = "diff-collinear"
+    elif cls in ("odd15", "odd63"):
+        if any(zeta[0]):
+            violation = f"Re(s·w·Ā) = {exact_str(zeta[0])} ≠ 0 (difference-perpendicular pin)"
+        pin = "diff-perpendicular"
+    elif cls == "mixed":
+        if any(zeta[0]) or any(zeta[1]):
+            violation = f"s·w·Ā ≠ 0 (mixed word: only the w = 0 matching survives)"
+        pin = "sterile"
+    else:                                   # pure seam relative word: no quadrature pin
+        pin = "seam"
+    if violation is not None:
+        raise SystemExit(
+            f"STACKING-LAW VIOLATION at {where} — registered §0a case 2 (prediction Q4 family) "
+            f"is FALSIFIED.\n  shared detune {det['name']} (class {cls}): {violation}\n"
+            f"  Halting; report at face value.")
+    # the K-block identity, recomputed independently of the sweep:
+    g = C.cmul(C.cmul(det["R"], w), C.cconj(A))        # R·w·Ā  (R = s·W whole)
+    lhs = C.sub(C.add(C.add(nsq(A), nsq(w)), FLD.scal(2, g[0])), C.const(1))
+    if any(lhs):
+        raise SystemExit(f"STACK IDENTITY FAILED at {where}: |A|² + |w|² + 2·Re(R·w·Ā) ≠ 1 — "
+                         f"the census and the checker disagree; instrument bug")
+    w2 = nsq(w)
+    return {"pin": pin, "w2": fnum(w2), "w2_exact": exact_str(w2)}
+
+
+def stack_census(st: dict, label: str) -> dict:
+    """Edge classes over all provenance pairs, isometry control per copy, class-routed
+    certificates: same-anchor → the M31 law; translation → the difference pin; general →
+    recorded-only (the relative spec, no badge)."""
+    pts, prov, copies, base_pts = st["pts"], st["prov"], st["copies"], st["base_pts"]
+    ncop = len(copies)
+    edges = unit_edges(pts)
+    tags = [{t for (t, _) in pr} for pr in prov]
+    srcs = [{t: s for (t, s) in pr} for pr in prov]
+    routes = {(ta, tb): pair_relative(copies, ta, tb)
+              for ta in range(ncop + 1) for tb in range(ta + 1, ncop + 1)}
+    intra = {t: 0 for t in range(ncop + 1)}
+    pairs = {(ta, tb): {"chords": [], "anchor_incident": 0, "matching": 0}
+             for (ta, tb) in routes}
+
+    def offset(tag, idx, anchor):
+        """Preimage offset from `anchor`: base points are their own preimages."""
+        src = srcs[idx][tag]
+        return csub(base_pts[src], anchor) if tag > 0 else csub(pts[idx], anchor)
+
+    for (i, j) in edges:
+        for t in tags[i] & tags[j]:
+            intra[t] += 1
+        for ta in sorted(tags[i] | tags[j]):
+            for tb in sorted(tags[i] | tags[j]):
+                if not (ta < tb):
+                    continue
+                # orient: pa carries ta, pb carries tb (skip if this edge lacks the pair)
+                if ta in tags[i] and tb in tags[j]:
+                    pa, pb = i, j
+                elif ta in tags[j] and tb in tags[i]:
+                    pa, pb = j, i
+                else:
+                    continue
+                rt = routes[(ta, tb)]
+                rec = pairs[(ta, tb)]
+                where = f"{label} pair({ta},{tb}) edge ({i},{j})"
+                if rt["route"] == "same_anchor":
+                    anchor = rt["anchor"]
+                    u = offset(tb, pb, anchor)          # moving side (higher tag)
+                    v = offset(ta, pa, anchor)
+                    if (not any(u[0]) and not any(u[1])) or (not any(v[0]) and not any(v[1])):
+                        rec["anchor_incident"] += 1
+                        continue
+                    cert = law_check(rt["rel"], u, v, where)
+                    rec["chords"].append({"i": i, "j": j, "kind": "relative-law", **cert})
+                elif rt["route"] == "translation":
+                    aa, ab = rt["anchors"]
+                    w = csub(offset(tb, pb, ab), offset(ta, pa, aa))
+                    cert = translation_check(rt["det"], rt["A"], w, where)
+                    if cert["pin"] == "matching":
+                        rec["matching"] += 1
+                    rec["chords"].append({"i": i, "j": j, "kind": "difference-pin", **cert})
+                else:
+                    rec["chords"].append({"i": i, "j": j, "kind": "recorded",
+                                          "rel": rt["rel"]})
+    for t in range(1, ncop + 1):
+        if intra[t] != intra[0]:
+            raise SystemExit(f"ISOMETRY CONTROL FAILED at {label}: intra-base {intra[0]} vs "
+                             f"intra-copy{t} {intra[t]} — the sweep or the dedup is wrong")
+    return {"edges": edges, "intra": intra, "pairs": pairs, "routes": routes,
+            "n_fused": len(st["fused"])}
+
+
 # ------------------------------------------------------------------ χ probe
 
 def chi_probe(n: int, edges, k: int, cap: float) -> dict:
@@ -584,7 +751,248 @@ def self_test():
                          "either the law is wrong (P1!) or the census mislabels")
     ok("mixed detune sterile on the planted base")
 
+    # ---- M32: the stack machinery ----
+
+    # 7. pair-class routing is the spec quotient
+    a1, a2 = ZERO_C, ONE_C
+    d_full = make_detune(a=2, name="rho15")
+    d_anti = make_detune(a=-2, name="rho15inv")
+    d_half = make_detune(a=1, name="half15")
+    cps = [(a1, d_full), (a1, d_anti), (a2, d_full), (a2, d_half)]
+    r01 = pair_relative(cps, 0, 1)
+    r12 = pair_relative(cps, 1, 2)
+    r13 = pair_relative(cps, 1, 3)
+    r14 = pair_relative(cps, 1, 4)
+    if not (r01["route"] == "same_anchor" and r01["rel"]["cls"] == "even15"
+            and r12["route"] == "same_anchor" and r12["rel"]["a"] == -4
+            and r13["route"] == "translation"
+            and r14["route"] == "general"):
+        raise SystemExit(f"SELF-TEST FAILED: pair-class routing wrong — got "
+                         f"{[r01['route'], r12['route'], r13['route'], r14['route']]}")
+    ok("pair-class routing: base↔copy same-anchor, chirality relative a=−4, "
+       "same-word cross-anchor translation, mixed-spec general")
+
+    # 8. planted translation matching: base holds x and x+(a2−a1), so the two ρ₁₅ copies
+    #    about a1 and a2 carry the w = 0 matching chord — found and pinned as `matching`
+    x = Z6
+    tb = [x, cadd(x, csub(a2, a1))]
+    st = stack(tb, [(a1, d_full), (a2, d_full)])
+    cen = stack_census(st, "self-test/matching")
+    m12 = cen["pairs"][(1, 2)]
+    if m12["matching"] < 1 or not any(c["kind"] == "difference-pin" and c["pin"] == "matching"
+                                      for c in m12["chords"]):
+        raise SystemExit("SELF-TEST FAILED: the planted translation matching was not found")
+    ok("planted translation matching found at |A| = 1, pinned `matching`")
+
+    # 9. the difference-pin checker goes red on cue (a perpendicular w handed to an even word)
+    try:
+        translation_check(d_full, ONE_C, C.frac_c(None, {B1: F(1)}), "self-test/stack-violation")
+        raise SystemExit("SELF-TEST FAILED: the difference-pin checker accepted a violation")
+    except SystemExit as e:
+        if "§0a case 2" not in str(e):
+            raise
+    ok("planted difference-pin violation caught, named as a §0a case-2 falsification")
+
+    # 10. the stack identity check goes red on a pinned-but-non-unit chord
+    try:
+        translation_check(d_full, ONE_C, C.frac_c({B1: F(2)}), "self-test/stack-identity")
+        raise SystemExit("SELF-TEST FAILED: the identity check accepted a non-unit chord")
+    except SystemExit as e:
+        if "IDENTITY FAILED" not in str(e):
+            raise
+    ok("stack identity check refuses a pinned but non-unit chord")
+
+    # 11. w = 0 at |A| ≠ 1 is a violation, not a matching
+    try:
+        translation_check(d_full, C.frac_c({B1: F(2)}), ZERO_C, "self-test/badA")
+        raise SystemExit("SELF-TEST FAILED: a w = 0 chord at |A| ≠ 1 was accepted")
+    except SystemExit as e:
+        if "matching chord at anchor separation" not in str(e):
+            raise
+    ok("w = 0 matching rejected at anchor separation ≠ 1")
+
     print("self-test: OK")
+
+
+# ------------------------------------------------------------------ M32 probes
+
+Z3 = C.cpow(Z6, 2)
+
+
+def circle_target(pts, centre):
+    """Indices at exact radius² = 1 about the centre — where a fresh centre vertex would attach."""
+    one = C.const(1)
+    return [i for i, p in enumerate(pts) if nsq(csub(p, centre)) == one]
+
+
+def present_triples(pts, centre, limit: int = 21):
+    """Outer 120°-triples about a centre: x on its unit circle whose ζ₃-orbit is present.
+    Deterministic stride sampling when more than `limit` exist (no randomness — resumable)."""
+    table = {key(p): i for i, p in enumerate(pts)}
+    seen, triples = set(), []
+    for i in circle_target(pts, centre):
+        u = csub(pts[i], centre)
+        j = table.get(key(cadd(centre, C.cmul(Z3, u))))
+        l = table.get(key(cadd(centre, C.cmul(C.cpow(Z3, 2), u))))
+        if j is None or l is None:
+            continue
+        tri = tuple(sorted((i, j, l)))
+        if tri not in seen:
+            seen.add(tri)
+            triples.append(tri)
+    if len(triples) > limit:
+        stride = len(triples) // limit
+        triples = triples[::stride][:limit]
+    return triples
+
+
+def run_meters(n, edges, pts, targets_named, k, cap, base_cov=None):
+    """Coverage ladders + triple queries. `base_cov` (target name → min_cover result) is the
+    bare-fabric baseline reported BESIDE each stack reading, so the delta is the product term."""
+    import rigidity as RG
+    coverage, triples = [], []
+    for name, c in targets_named:
+        S = circle_target(pts, c)
+        if not S:
+            coverage.append({"target": name, "note": "empty target — no circle points present"})
+            continue
+        mc = RG.min_cover(n, edges, k, S, cap)
+        row = {"target": name, "n_target": len(S), **{kk: vv for kk, vv in mc.items()}}
+        if base_cov and name in base_cov:
+            row["base_verdict"] = base_cov[name].get("verdict")
+            row["base_lo_hi"] = [base_cov[name].get("lo"), base_cov[name].get("hi")]
+        coverage.append(row)
+        print(f"    coverage {name}: {mc['verdict']}"
+              + (f" [{mc.get('lo')},{mc.get('hi')}]" if "lo" in mc else ""))
+        for tri in present_triples(pts, c):
+            for mode in ("mono", "rainbow"):
+                tq = RG.triple_query(n, edges, k, tri, mode, cap)
+                tq["about"] = name
+                triples.append(tq)
+                if tq["outcome"] == "unsat":
+                    print(f"    COMPELLED non-{mode} triple {tri} about {name} — the M20 genre "
+                          f"one field up; a Q5 meter positive")
+    return coverage, triples
+
+
+def pair_summary(cen):
+    out = {}
+    for (ta, tb), rec in cen["pairs"].items():
+        out[f"{ta}-{tb}"] = {"cross": len(rec["chords"]),
+                             "anchor_incident": rec["anchor_incident"],
+                             "matching": rec["matching"],
+                             "route": cen["routes"][(ta, tb)]["route"]}
+    return out
+
+
+def probe_base(B, cap, out_path: Path):
+    """M32 probe A: the bare fabric's compulsion floor (Q2)."""
+    pts, mpiv, hexpiv = hexagram_points(B)
+    n = len(pts)
+    edges = unit_edges(pts)
+    print(f"probe-base: hexagram B={B}: {n} points, {len(edges)} unit edges")
+    chi = [chi_probe(n, edges, k, cap) for k in (3, 4)]
+    for r in chi:
+        print(f"  chi k={r['k']}: {r['outcome']} ({r['seconds']}s)")
+    out = {"object": f"hexagram-B{B}", "n": n, "n_edges": len(edges), "chi":
+           [{k: v for k, v in r.items() if k != "colours"} for r in chi]}
+    if not any(r["k"] == 4 and r["outcome"] == "sat" for r in chi):
+        out["note"] = "k=4 not sat — meters withheld (vacuity guard at the driver level)"
+    else:
+        targets = [("meta", mpiv)] + [(f"hexpiv{a}", hexpiv[a]) for a in range(6)]
+        coverage, triples = run_meters(n, edges, pts, targets, 4, cap)
+        out["coverage"], out["triples"] = coverage, triples
+        n_comp = sum(1 for t in triples if t["outcome"] == "unsat")
+        out["compelled_triples"] = n_comp
+        print(f"  base rates: {n_comp} compelled triple readings "
+              f"/ {len(triples)} queries (Q2c registers ~0 expected)")
+    json.dump(out, open(out_path, "w"), indent=1)
+    print(f"wrote {out_path}")
+    return out
+
+
+def _stack_variant(tag, pts, copies, cap, meters_targets=None, base_cov=None,
+                   chi_ks=(3, 4, 5)):
+    st = stack(pts, copies)
+    n = len(st["pts"])
+    cen = stack_census(st, tag)
+    edges = cen["edges"]
+    psum = pair_summary(cen)
+    print(f"  {tag}: {n} pts, {len(edges)} edges; pairs: "
+          + "; ".join(f"{k} {v['route']}: {v['cross']} cross"
+                      + (f" ({v['matching']} matching)" if v["matching"] else "")
+                      for k, v in sorted(psum.items())))
+    chi = [chi_probe(n, edges, k, cap) for k in chi_ks]
+    for r in chi:
+        print(f"    chi k={r['k']}: {r['outcome']} ({r['seconds']}s)")
+    entry = {"object": tag,
+             "stack": [{"anchor": exact_str(a[0]) | {"im": exact_str(a[1])},
+                        "detune": {"s": exact_str(d["s"][0]) | {"im": exact_str(d["s"][1])},
+                                   "a": d["a"], "b": d["b"], "class": d["cls"],
+                                   "name": d["name"]}}
+                       for (a, d) in copies],
+             "n": n, "n_edges": len(edges), "n_fused": cen["n_fused"],
+             "pairwise": [{"pair": k, **v,
+                           "chords": [c for c in cen["pairs"][tuple(map(int, k.split('-')))]
+                                      ["chords"]][:200]}
+                          for k, v in sorted(psum.items())],
+             "chi": [{k: v for k, v in r.items() if k != "colours"} for r in chi]}
+    refusal = next((r for r in chi if r["k"] == 4 and r["outcome"] == "unsat"), None)
+    if refusal is not None:
+        print(f"  !!! {tag} REFUSES k=4 — the JACKPOT branch: nothing is claimed; the "
+              f"registered escalation protocol (independent re-encode, cube split) fires now")
+        entry["jackpot_candidate"] = True
+    elif meters_targets and any(r["k"] == 4 and r["outcome"] == "sat" for r in chi):
+        coverage, triples = run_meters(n, edges, st["pts"], meters_targets, 4, cap, base_cov)
+        entry["coverage"], entry["triples"] = coverage, triples
+        entry["compelled_triples"] = sum(1 for t in triples if t["outcome"] == "unsat")
+    return entry
+
+
+def probe_same(B, cap, out_path: Path):
+    """M32 probe B: same-anchor stacks — thin by §0a case 1 (Q3)."""
+    pts, mpiv, hexpiv = hexagram_points(B)
+    d_full = make_detune(a=2, name="rho15")
+    d_anti = make_detune(a=-2, name="rho15inv")
+    d_half = make_detune(a=1, name="half15")
+    d_twist = make_detune(s=Z12, a=2, name="z12·rho15")
+    print(f"probe-same: hexagram B={B}, {len(pts)} base points")
+    entries = []
+    for aname, anchor in (("meta", mpiv), ("hexpiv3", hexpiv[3])):
+        for sname, copies in (
+                ("chirality", [(anchor, d_full), (anchor, d_anti)]),
+                ("full+half", [(anchor, d_full), (anchor, d_half)]),
+                ("full+twisted", [(anchor, d_full), (anchor, d_twist)])):
+            entries.append(_stack_variant(f"same/{aname}/{sname}", pts, copies, cap))
+    json.dump({"object": f"same-anchor-stacks-B{B}", "variants": entries},
+              open(out_path, "w"), indent=1)
+    print(f"wrote {out_path}")
+    return entries
+
+
+def probe_wide(B, cap, out_path: Path, base_out: Path):
+    """M32 probe C: different-anchor stacks — the wide channel (Q4) with all meters (Q5)."""
+    pts, mpiv, hexpiv = hexagram_points(B)
+    d_full = make_detune(a=2, name="rho15")
+    d_half = make_detune(a=1, name="half15")
+    targets = [("meta", mpiv)] + [(f"hexpiv{a}", hexpiv[a]) for a in range(6)]
+    base_cov = {}
+    if base_out.exists():
+        for row in json.load(open(base_out)).get("coverage", []):
+            base_cov[row["target"]] = row
+    print(f"probe-wide: hexagram B={B}, {len(pts)} base points")
+    entries = []
+    for tag, copies in (
+            ("wide-unit", [(hexpiv[3], d_full), (hexpiv[5], d_full)]),
+            ("sterile-third", [(hexpiv[3], d_full), (mpiv, d_full)]),
+            ("conjugate-opp", [(hexpiv[3], d_full), (hexpiv[0], d_full)]),
+            ("half-unit", [(hexpiv[3], d_half), (hexpiv[5], d_half)])):
+        entries.append(_stack_variant(f"wide/{tag}", pts, copies, cap,
+                                      meters_targets=targets, base_cov=base_cov))
+    json.dump({"object": f"different-anchor-stacks-B{B}", "variants": entries},
+              open(out_path, "w"), indent=1)
+    print(f"wrote {out_path}")
+    return entries
 
 
 # ------------------------------------------------------------------ CLI
@@ -596,6 +1004,12 @@ def main():
     ap.add_argument("--probe-b", action="store_true")
     ap.add_argument("--gen1", action="store_true")
     ap.add_argument("--frontier", action="store_true")
+    ap.add_argument("--probe-base", action="store_true", dest="probebase",
+                    help="M32 probe A: bare-fabric compulsion floor (Q2)")
+    ap.add_argument("--probe-same", action="store_true", dest="probesame",
+                    help="M32 probe B: same-anchor stacks (Q3)")
+    ap.add_argument("--probe-wide", action="store_true", dest="probewide",
+                    help="M32 probe C: different-anchor stacks + meters (Q4, Q5)")
     ap.add_argument("--B", type=int, default=1)
     ap.add_argument("--cap", type=float, default=300.0, help="per-SAT-call timeout, seconds")
     args = ap.parse_args()
@@ -611,6 +1025,13 @@ def main():
     if args.frontier:
         frontier(Path("build/m31-closure-gen1.pts.json"), args.cap,
                  Path("build/m31-frontier.json"))
+    if args.probebase:
+        probe_base(args.B, args.cap, Path(f"build/m32-base-B{args.B}.json"))
+    if args.probesame:
+        probe_same(args.B, args.cap, Path(f"build/m32-same-B{args.B}.json"))
+    if args.probewide:
+        probe_wide(args.B, args.cap, Path(f"build/m32-wide-B{args.B}.json"),
+                   Path(f"build/m32-base-B{args.B}.json"))
 
 
 if __name__ == "__main__":
