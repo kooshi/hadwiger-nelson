@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M25, 2026-08-09.**
+**Last updated: M26, 2026-08-09.**
 
 ### Where the problem stands
 
@@ -122,7 +122,28 @@ And the **fusion inventory came free**: a point coincidence is the same
 cleared equation at norm 0, so each fusion classification is the chord run at
 a shifted constant (oo 4→7, oi/io 2→5, ii 0→3√3) — oo/io/ii fusions are
 EMPTY and the oi fusion is exactly the other two pivots, certifying M23's
-"the metapivot couplings create no new points" at the lattice level.
+"the metapivot couplings create no new points" at the lattice level. M26
+climbed the second rung: the **hexagram** — the six pivots of the hexagon of
+circumradius 1/√3 about the metapivot (the M23 triangle PLUS its mirror
+image, i.e. the mirror centroids promoted to pivots), each with its full
+⟨ζ₆,σ⟩-ladder, plus the metapivot's own, closed under ALL unit chords — has
+**chromatic number exactly 4, unconditionally**. The finds that made it
+land: the object is **self-seeding** (the six pivots ARE the metapivot's
+inner hex layer at seam height zero, `hexPivot a = m(1+ζ₆^a)`, so M23's
+glue-point certification became address bookkeeping); the 60° rotation
+about the metapivot is an automorphism cutting the 21 centre pairs to FOUR
+orbits, so only TWO master webs were ever new (adjacent and opposite); and
+both clear through `g = 1+ζ₆` into ONE master identity whose two singles
+are both g-traces — M24's engine, again with LESS machinery. The new webs
+carry exactly sixteen sporadic chords (adjacent oi/io/ii and opposite oo,
+four each, |b| ≤ 2) and NOT ONE new coincidence — every fusion family is
+empty, the triple tangency at the metapivot invisible, so the mirror
+triangle glues to the original exclusively through the points M23 named.
+The colouring is rot6-**equivariant** (colour ∘ rot6 = τ ∘ colour for a
+3-cycle τ fixing colour 3 — the first colour symmetry of the hunt), and
+the census instrument that checked it caught two real bugs in the standing
+tool by its own automorphism control. The 5th colour now provably needs
+more than the full seven-ladder, six-fold-symmetric countable hexagram.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -151,26 +172,28 @@ EMPTY and the oi fusion is exactly the other two pivots, certifying M23's
 | 20 | **The pivot-triangle layer** (all kernel-checked): the triangle is self-glued — `hexStep` permutes the pivots cyclically, so outer∩outer of any two pivots = {the third pivot, its mirror}; the centroid is the (+)-branch ii glue of ALL THREE pairs; the metapivot couplings create no new points — outer(pᵢ)∩inner(m) = the other two pivots, inner(pᵢ)∩outer(m) = the two 120°-partners, inner(pᵢ)∩inner(m) = the two mirror centroids; **the ten-point sharing theorem** (two unit-separated systems share exactly {pivots} ∪ {eight glue points}, with `ncard = 10`); **the chord classifications** — outer–outer unit chords are RIGID (translate ∨ hub: the perfect matching is complete, for the full uncountable circles) and inner–inner chords are matching ∨ the rational Möbius graph x(3y−2) = y, so √disc field growth is localized to mixed-radius chords; the translation coupling; and the loop layer — the **rotation hexagon** (S₂⁻¹S₁S₀⁻¹S₂S₁⁻¹S₀ = id for ANY unit rotation about ANY three points — found generic at implementation) with the seam instance, the hex parallelogram (hex-specific, minimal at 4), and the zpow closure backbone. Census (exact, tools): 34-point inventory in the seam field, 7 triple points; seam relations minimal at 6, all 3-pivot, none 2-pivot; R_m unreachable from pivot words. | `Triangle.lean` + `tools/couple.py --loops/--export-viz` | M23 |
 | 21 | **The registered statistics, reported at face value** (tools-side): ambient kills are **coupling-strength gated** — 0 kills in 3,200 draws at four 22-chord fresh pairs vs 12–15% kill rate at every 40-chord fresh pair (all kills injection-verified); M22's seam-alignment reading **failed registered replication** (0/4 pairs; demoted per its pre-committed failure clause); the coset census under threshold (×0.83–1.51 vs registered ≥2×); the metapivot's cover floor stays 3 (registered null confirmed; higher unions read 4 for reasons the self-gluing theorems explain); and the triple census's registered population is **provably empty** — unit triangles are never "far", their cover sets always interlock through the shared ten points. | `tools/couple.py --replicate/--floor --systems` + `build/m23-*.json` | M23 |
 | 22 | **The matched ladder pair is exactly 4-chromatic, unconditionally** — the countable two-pivot ⟨ζ₆,σ⟩-lattice closed under ALL unit chords. Every chord family is a theorem: oo = matching ∨ hub (`oo_complete`); ii = matching ∨ ten table rows, via the parity split in ℤ[ζ₆,π] — mixed parity impossible, even collapses on the backbone, odd closes by mod-3 coordinate congruences, mixed SIGNS die through the collapse π^b·π̄^e = 3^e·π^{b−e} (`ii_norm_complete`); oi = **sixteen chords ever, no infinite family** — the trace pair T(x,h) = ζ₆^x π^h + ζ₆^{−x} π̄^h, uniform √3^(m+n+k) clearing, three parity kills, address pins feeding a telescope kill, three 36-pair boundary checks (`oi_complete`); intra = hex/rot3/seam exactly; eight fusions pinned; plus the 24-entry b-independent colouring proper on every family and the nine-point witness forcing 4 (`chromaticNumber_ladderPair`). First exact chromatic number of an infinite genuinely-coupled object; the first Frontier χ-equality with no census window and no conditional clause. Supporting cast now reusable: `sqrt_indep` (ℚ-independence of {1,√3,√11,√33}), the axis-general master identities, the Re = √3/2 fibre proven EMPTY (ζ₁₂ never lattice). | `Ladder.lean` (`chromaticNumber_ladderPair`, `ii_norm_complete`, `oi_complete`, `iiNormTable`/`oiTable`) | M24 |
+| 24 | **The hexagram is exactly 4-chromatic, unconditionally** — the six pivots of the 1/√3-hexagon about the metapivot (M23's triangle plus the mirror centroids), all seven ⟨ζ₆,σ⟩-ladders, closed under ALL unit chords. The engine: the **self-seeding identity** `hexPivot a = m·(1+ζ₆^a)` (the pivots are the meta-inner hex layer, so every hexagram coordinate is one metapivot multiplication from a hex root); the **rot6 orbit collapse** (60° about m is an automorphism ⟹ 21 centre pairs, FOUR orbits, only adjacent + opposite webs new); ONE master identity `normSq(αgu−βgv−γ)` with BOTH singles g-traces, cleared by `hex_cleared` into M24 trace pairs; one live parity class per family, four kills (alone/φ/equal-height collapse/M25's mod-9 adjacent-height), and the two surviving boundaries returned as data for per-table decides. All eight new-web families are theorems (`adj_oo_empty`, `adj_oi/io/ii_complete` — four sporadics each; `opp_oo_complete` — four sporadics; `opp_oi/io/ii_empty`), all eight fusions EMPTY (the mirror triangle touches the original ONLY at M23's glue points; the tangency at m invisible), the pivot–meta webs extended to all six addresses free by transport, unit pairs in hexagram currency, and the rot6-equivariant 4-colouring (`colour∘rot6 = τ∘colour`, τ a 3-cycle) proper on every family. On axioms exactly `[propext, Classical.choice, Quot.sound]`. Census promoted: `tools/couple.py --hexagram-census` (exact 84-sweep, planted chord+fusion refusals); two real instrument bugs (0°/360° bin wrap, hub-marker skip) found by the rot6-automorphism control and fixed; plus a gate bug in `axioms.sh` (pipefail vs `grep -q` SIGPIPE past 64 KB) that failed CLOSED, repaired. | `Hexagram.lean` (`chromaticNumber_hexagram`, `adj_*`/`opp_*`/`hexMeta_*`/`unit_oo_complete`, `hexColTab_equivariant`) | M26 |
 | 23 | **The four-ladder object is exactly 4-chromatic, unconditionally** — the pivot triangle's three ladders plus the metapivot's own (anchored along ζ₁₂), closed under ALL unit chords. The engine: `√3·ζ₁₂ = 1+ζ₆` (`sqrt3_mul_zeta12`) eliminates the twelfth root, so M24's ℤ[ζ₆,π] machinery carries verbatim through `hexTrace` (trace pairs with arbitrary ℤ[ζ₆] coefficients). All twelve pivot–meta families are theorems (`meta_oo/oi/io/ii_complete`, j-quantified over the three webs by the 120° rotation transport); the **fusion inventory is certified by the same engine at norm-0 constants** (`meta_fusion_*`: oi = the two shared pivots, oo/io/ii EMPTY); the kills beyond M24: `alone_dvd` and `phi_dvd` (the generic 3-adic pair) and the mod-9 `adjacent_kill` — two g-traces at heights h, h+1 never sum to 9·(anything), the piCoeff recurrence confining the two deep residues to {1,4,7} — which closes the height-unbounded branches a census can only sample. Colouring: the 48-entry b-independent `metaColTab`, decode well-defined by the fusion inventory, properness per family; χ ≥ 4 transports M24's witness. Census promoted: `tools/couple.py --meta-census` (planted-disagreement self-test). | `MetaLadder.lean` (`chromaticNumber_fourLadder`, `meta_*_complete`, `meta_fusion_*`, `adjacent_kill`) | M25 |
 
 ### Paths forward, ranked
 
-*The construction ladder M24–M28 (roadmap agreed 2026-08-08; M24 and M25 landed):
+*The construction ladder M24–M28 (roadmap agreed 2026-08-08; M24, M25 and M26 landed):
 grow the certified object — pair → triangle-of-ladders → hexagram → tiled plane →
 recursion — proving χ exact at each rung; the first rung where 4 colours FAIL is
 new mathematics of the first order, and every rung where they succeed is a new
 certified infinite 4-chromatic object and a sharper clamp on where the 5th colour
 cannot live.*
 
-1. **M26 — the hexagram (6+1 pivots)** (`plans/` stub next): the mirror
-   centroids promoted to pivots (already certified as glue points), seven
-   ladders, all cross-webs. M25's engine is expected to carry whole: the
-   fusion-κ trick (a coincidence classification is the chord run at a norm-0
-   constant) and the mod-9 adjacent-heights kill are anchor-generic, and the
-   mirror-centroid axes are again 1/√3-length ζ₁₂-coset directions. Then
-   **M27 — the tiled plane** (Kooshi's target statement: the whole plane's
-   hexagonal closure with all sporadic chords), gated on M26 landing with
-   χ still 4; **M28 — the recursion** behind M27.
+1. **M27 — the tiled plane** (`plans/` stub next; the gate is OPEN: M26
+   landed with χ still 4): Kooshi's target statement — the whole plane's
+   hexagonal closure with all sporadic chords. M26 hands it the exact
+   tools it needs: the self-seeding identity iterates (every new hexagon's
+   pivots are some metapivot's inner layer at height 0, so the tiling IS
+   nested self-seeding), rot6-equivariance is the germ of the full
+   translation-plus-rotation symmetry a plane colouring wants, and the
+   four-orbit collapse says each new centre pair lands in an already-solved
+   web class or the (solved) adjacent/opposite masters at a translated
+   frame. **M28 — the recursion** behind M27.
 2. **M29 — the uncountable pair** (flexible slot): χ(`Coupled.pairSystem`
    proper, all uncountably many circle points) — the M21 fork. The hypothesis
    χ = 4 ⟺ the countable ladder's χ = 4 now has its countable side EXACT (M24 at the pair, M25 at the four-ladder object), so

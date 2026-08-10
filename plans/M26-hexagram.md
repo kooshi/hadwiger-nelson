@@ -366,12 +366,35 @@ one master shape, one case tree, eight instances.
 * Cross-checks: the integer-row solver reproduces the exact-field ground truth
   for all 16 (family, κ) pairs over |b|,|d| ≤ 7, and finds nothing new out to 24.
 
-## Implementation status — 2026-08-09, IN PROGRESS (not closed)
+## Implementation status — 2026-08-09, CLOSED
 
-Reported at face value. `Proofs/HadwigerNelson/Hexagram.lean` is ~1,290 lines,
-elaborates clean (zero errors, zero warnings), **32 of the original 50
-obligations remain** — every one a statement from the skeleton, none a
-regression. Committed green at every step (`d71d22d` … `4ecb48e`).
+**M26 is closed: `Hexagram.chromaticNumber_hexagram = 4`, zero sorry, on axioms
+exactly `[propext, Classical.choice, Quot.sound]`.** The full gate ran green:
+`./scripts/build.sh` OK (162/162), zero-sorry scan clean, `./scripts/axioms.sh`
+OK (415 clean declarations incl. all 38 M26 public theorems, 5 declared
+purchases unchanged), `lake lint` passed, all five registered mutation audits
+red-on-cue (dropped adjIITable row → forward decide + reverse certificates;
+shift a−3→a−2 → transport type-mismatch; flipped colour entry → equivariance +
+properness decides; inverse τ → the equivariance decide names the false
+proposition; dropped hub disjunct → the M25 derivation breaks), and the census
+was promoted (`tools/couple.py --hexagram-census`, exact 84-sweep agreement,
+planted chord AND fusion refusals in `--self-test`; the 0°/360° bin-wrap fix
+applied to the shared angle-bin core). One extra gate find, reported at face
+value: `scripts/axioms.sh`'s banner check raced `pipefail` against `grep -q`'s
+SIGPIPE once the receipt outgrew the 64 KB pipe buffer — it failed CLOSED on a
+clean audit (a false alarm, not a false pass) and is fixed with here-strings.
+
+Two structural decisions made at completion (2nd sweep), beyond the recipe:
+`oo_shape` was restructured from "False given refutation hypotheses" to a
+CLASSIFICATION returning the two surviving boundaries as data (the committed
+form could not serve `opp_oo`'s four sporadics, which live in the `hbnd`
+boundary); and the io families take `oi_shape` at negated `C` with the roles
+swapped (`uTr_neg`), so no fourth shape lemma exists. Every decide, boundary
+row, reverse certificate and colour agreement was verified by
+`build/m26-shapes.py` (planted-failure self-test) BEFORE Lean stated it — and
+every one passed in Lean on the first or second try.
+
+The status below is the mid-implementation record, kept for the history.
 
 **Landed and proven (18 obligations closed plus the whole engine):**
 * **§0/§H the object** — `hexPivot a = m·(1 + ζ₆^a)` (the self-seeding identity
