@@ -457,3 +457,31 @@ via `degreyviz_refresh.py`; artifacts re-published to the SAME urls.
 the M32 contract: `object`, `anchor`, `detune`, `cross_chords` (each with
 `pin`, `conic`, `radii`), `chi` (`{k, status, seconds}` per k), `growth`,
 `rings`.
+
+## §0d — Domain pass (2026-08-10, decisions before implementation)
+
+* **Detune = spec + value.** The quadrature class is NOT computable from R's raw
+  16-vectors (seam decoration mixes radical blocks); the detune enters factored:
+  `(s, a, b)` — seam part, √ρ₁₅-exponent, √ρ₆₃-exponent. Class = total function
+  of (a mod 2, b mod 2, a=0, b=0) ∈ {seam, even15, odd15, even63, odd63, mixed};
+  `mixed` is representable on purpose (its census is the sterility control).
+  Value computed once, |R| = 1 asserted exactly, spec and value travel together.
+* **Mitotic union** = hexchunk's table/labels dedup idiom; provenance tag =
+  transform index (0 = base); fusions = multi-provenance points, controlled
+  against the independently computed R-fixed-point set. Intra-copy edge count
+  must equal intra-base (isometry) — a free automorphism control every census
+  asserts.
+* **Cross-chord = certificate-carrying record** built at find time: {pair, pin
+  kind + exact-zero check on the quadrature component of s·u·v̄, conic
+  (t², r², t·r, side)}. Pin failure aborts loudly (the P1 falsifier channel).
+* **Closure = BFS tree over the group action** (per-point generation/move/parent;
+  words recoverable by parent-chasing, never stored whole). Chunks: exact
+  complete induced edges; the SAMPLED thing is the vertex set, and the record
+  says so.
+* **One boundary conversion** couple ⇄ degrey currency (same 16-basis, lists vs
+  tuples), two named functions, round-trip self-test; closure.py is internally
+  couple-currency.
+* **Float triage soundness**: real chords err ~1e-13 in float64; nearest known
+  near-miss |d²−1| ≈ 0.035 (M22's near-relation) — window 1e-6 is five orders
+  safe both ways; every candidate exactly confirmed, and the planted-chord
+  self-test exercises the triage path.
