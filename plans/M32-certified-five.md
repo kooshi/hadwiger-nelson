@@ -590,6 +590,74 @@ theorem quadrature_rho15 (u v : K-complex, coordinates as ℚ-4-vectors) :
   target circle is {i : nsq(pts[i] − c) = 1} computed exactly; a 120°-triple
   is an exact rot3-orbit membership test about its pivot.
 
+## §0e — Obligation pass (2026-08-10, proof spines before implementation)
+
+* **The registered bridging route hides a division wall, and the better spine
+  dodges it.** Expressing √5 = −C/D in explicit coefficients needs field
+  inversion in ℚ(√3,√11) (a conjugate-product norm block, ~70 lines the
+  registration did not see). Superseded by LESS machinery: the primitive is
+  **`sqrt5_split`** — (a₀+a₁√3+a₂√11+a₃√33) + √5·(b₀+b₁√3+b₂√11+b₃√33) = 0 →
+  all eight coefficients zero — proven division-free: square to A² = 5B²
+  (real arithmetic), expand through M24's existing `sqrt_indep` (the ONLY
+  4-dim oracle needed — splitting √5 off with inner field ℚ(√3,√11) reuses
+  it verbatim, which is why √5 and not √11 is the split prime), yielding four
+  quadratic equations E0–E3 in eight rationals; kill by **mod-5 descent**:
+  the system mod 5 has only the trivial solution — ONE `decide` over
+  (ZMod 5)⁴, 625 tuples, the house mod-p congruence style — so an integer
+  solution is divisible by 5 componentwise (a,b,c,d first, then p,q,r,s via
+  the shifted system), and strong induction on the ℓ¹-norm closes; the
+  ℚ-statement clears denominators once (E0–E3 are homogeneous of equal
+  degree on both sides, so scaling is free). This spine generalizes to
+  M33's √7 by a numeral change (mod-7 decide, 2401 tuples); the casework
+  route would explode there. `sqrt15_block` (the citable kill: √15·K-part =
+  √5·(√3-recombined K-part), rational recombination √15√3 = 3√5 etc.) and
+  `sqrt_indep₈` (the Frontier-stated completeness) are corollaries.
+  **Fallback registered**: if the design script finds the mod-5 system
+  NON-trivial (625-loop check runs before Lean), the norm-inversion +
+  5-case-bridging route stands (kills at rational squares {5,11,15,55,165},
+  all no_rat_sq-style).
+* **quadrature_rho15 is a have-chain, never a swamp.** Named intermediates:
+  ξ = Re(u·v̄), η = Im(u·v̄) as real expressions; h1: normSq u + normSq v −
+  (7/4)ξ + (√15/4)η = 1 by linear_combination from the chord hypothesis
+  (ring-level, no coefficients yet); then the coefficient expansions of
+  ξ, η, normSq u, normSq v as explicit 4-tuples (quadratic ℚ-polynomials in
+  the 16 inputs, each closed by ring after the product identities); then ONE
+  `sqrt5_split` application kills η's four coefficients and hands the K-block
+  as the conic conjunct. No nlinarith anywhere. Non-vacuity example
+  u = v = 2 (the (2,2) spindle chord: 4 + 4 − 7 = 1) as an `example`;
+  wrong-constant refusal (7/8 in place of 7/4 → 12.5 ≠ 1 by norm_num) as a
+  negative example.
+* **The pair web owes the script everything first.** M31's 6-chord census
+  was at TRUNCATION |b| ≤ 2; the Lean theorems quantify over all heights, so
+  the completeness needs the M24 engine's infinite-part kills, and
+  `build/m32-design.py` must deliver, per family (oo/oi/ii at axis
+  constant 2): the master identity, the full symbolic clearing (sympy), the
+  parity classes, the mod-3 kill residues — note 4 ≡ 1 (mod 3), so the
+  axis-2 cleared constants may land on M24's residue landscape verbatim (the
+  script confirms or refutes) — the telescope's survival, the sporadic
+  inventory (must reproduce the 6 measured chords and the empty families),
+  the fusion inventory at norm-0 constant (must be exactly the midpoint
+  tangency), and decide-ready boundary tables. **Scope pinned: the pair web
+  is CLASSIFICATION ONLY** — no χ theorem for the distance-2 pair is
+  committed (it is the engine warm-up, not a chromatic object).
+* **Prove/test/assume partition**: PROVE sqrt5_split (descent core + ZMod-5
+  decide), sqrt15_block, sqrt_indep₈, quadrature_rho15, pair2_*_complete +
+  pair2_fusion. TEST the (2,2) example, the recombination identities on
+  numerals, each of the six pair chords as a positive `example`, one
+  non-chord refusal. ASSUME nothing beyond ℚ/ℝ arithmetic.
+* **Mutation audits (registered)**: plant 4 in place of 5 in the descent —
+  the mod-2 analogue system HAS the nontrivial solution (A,B) = (2,1), so
+  the script must show the discriminating check failing on the square;
+  perturb the conic constant — the example breaks; drop the chord
+  hypothesis — the conclusion is unprovable; every decide table row
+  script-verified with a planted wrong row first (M26 discipline).
+* **Axiom expectations**: plain `decide` (kernel) throughout — every public
+  theorem lands on exactly [propext, Classical.choice, Quot.sound].
+* **Burn-down order** (strictly descending): skeleton with sorries → irr
+  leaf lemmas (decide) → the ZMod-5 decide lemma → the ℤ-descent → the
+  ℚ-clearing → sqrt5_split → corollaries → quadrature_rho15 → PairWeb
+  skeleton → masters → kills → tables → completeness assembly.
+
 ## Failure clauses (registered)
 
 * **Probes flat + ascent lands**: M32 closes as "the stacking law + the
