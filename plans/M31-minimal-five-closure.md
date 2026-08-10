@@ -485,3 +485,25 @@ the M32 contract: `object`, `anchor`, `detune`, `cross_chords` (each with
   near-miss |d²−1| ≈ 0.035 (M22's near-relation) — window 1e-6 is five orders
   safe both ways; every candidate exactly confirmed, and the planted-chord
   self-test exercises the triage path.
+
+## §0e — Experience pass (2026-08-10, surfaces before implementation)
+
+* **Closure explorer**: per-variant selector (anchor × detune × B); point
+  classes base/copy/fusion with the anchor marked; cross chords a distinct
+  togglable class whose hover draws the pin geometry in product terms
+  ("collinear through the anchor, radii 2 and 3/2"); STERILE variants listed
+  with their zero and the law's reason — absences visible, never omitted;
+  frontier curve as a badged chart (SAT green / unknown-at-cap amber /
+  certified-UNSAT red; plain vs enriched series). Data injected only by the
+  refresh script; artifacts re-published to the same URLs.
+* **JSON contract** (M32 reads these names): `object`, `detune {s,a,b,class}`,
+  `anchor`, `counts {base,copy,fused,union}`, `edges {intra_base, intra_copy,
+  cross}`, `cross_chords [{i,j,pin,conic{t2,r2,tr,side}}]`, `chi [{k, outcome
+  ∈ sat|unsat|unknown, seconds, cap}]`, `controls {isometry_edge_match,
+  fixed_points, law_violations}` — controls travel IN the artifact.
+* **CLI failure paths**: law violation → banner naming the chord, the nonzero
+  quadrature component, and "registered prediction P1 is FALSIFIED — §0a's
+  block-independence argument is wrong", exit 3; empty census → "0 cross
+  chords — a RESULT: class X is sterile/thin by law" (bad-goal vs bad-set
+  distinguished); `unknown-at-cap` never worded as a χ bound; self-test shows
+  every control red on cue then green.
