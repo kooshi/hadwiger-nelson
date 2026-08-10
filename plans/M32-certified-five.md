@@ -658,6 +658,50 @@ theorem quadrature_rho15 (u v : K-complex, coordinates as ℚ-4-vectors) :
   ℚ-clearing → sqrt5_split → corollaries → quadrature_rho15 → PairWeb
   skeleton → masters → kills → tables → completeness assembly.
 
+## §0f — Experience pass (2026-08-10, surfaces before implementation)
+
+* **The Lean lemma API is named for its consumers, not its construction**:
+  `sqrt5_indep` (the primitive, hypothesis-last with implicit ℚ-coefficients
+  — the exact shape of M24's `sqrt_indep`, so M33's reflexes carry),
+  `sqrt15_split` (the workhorse the 2-adic clearings cite: (A) + √15·(B) = 0
+  → both coefficient blocks vanish), `sqrt_indep₈` (the flat 8-term
+  completeness, greps beside `sqrt_indep`). Conclusion conjunctions mirror
+  term order; NO simp tagging (surgical kills, not rewrites); docstrings
+  carry the block picture in one line each plus the pointer "the √7 analogue
+  is a numeral change". PairWeb family lemmas are `pair2_oo_complete` etc. —
+  M24's genre names with the axis constant visible, iff-shaped completeness.
+* **Explorer (same URL)**: stacks selected by product-term names ("ρ₁₅ about
+  pivot 0 + ρ₁₅ about pivot 1 — unit anchors, the wide channel"); copy-pair
+  chords coloured by class with class-true hovers; the translation matching
+  rendered AS a matching (parallel bundle) with an honest cap — "showing 60
+  of N", the badge carrying the true count; the meter panel as dials
+  (min-cover j of 4; 4 = fan = the design goal highlighted), compulsions
+  flagged on their triples and listed even when the list is empty; sterile
+  controls listed with their §0a reason ("would need √59"); the checkpoint
+  verdict as a banner.
+* **CLI wording (the M31 rules carried, extended)**: `--coverage` banners —
+  FANNED only when j = k−1 reads unsat AND j = k reads sat; "VACUOUS: the
+  graph itself refuses k colours — no coverage claim follows" when the free
+  guard fires; `unknown` never worded as a bound or a fan. `--triple` —
+  "COMPELLED non-mono at k (M20's genre)" on unsat, "moot: a colouring
+  realizes it" on sat. `--stack` failure paths — a difference-pin violation
+  names §0a case 2 and the Q-prediction and halts; recorded-only chords
+  print `[recorded]` and never wear a law badge; every empty census prints
+  its class's reason. Self-test shows every control red on cue, then green.
+* **JSON contract (M33 reads these names)**: top-level `checkpoint {verdict ∈
+  jackpot|movement|flat, reason, follow_ups}`; `pairwise [{i, j, anchors,
+  relative {s,a,b,class}, census {cross, anchor_incident, matching},
+  chords [{pi, pj, certificate {kind ∈ relative-law|difference-pin|recorded,
+  …}}]}]`; meters with base-and-stack side by side per target
+  (`{target, base_min_cover, stack_min_cover, rows}`) so the delta is the
+  product term; controls in-artifact. Baseline meters also standalone in
+  `build/m32-base.json`.
+* **Instrument layering**: the meters are plain importable functions in
+  `rigidity.py` (`coverage_query`, `triple_query`); `closure.py`'s stack
+  driver imports them — no shelling out, one clause-construction owner.
+* **The closing report** follows the house format with every P/Q verdict at
+  face value and the checkpoint decision in four parts.
+
 ## Failure clauses (registered)
 
 * **Probes flat + ascent lands**: M32 closes as "the stacking law + the
