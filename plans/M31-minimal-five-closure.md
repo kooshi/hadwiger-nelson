@@ -169,6 +169,23 @@ mitotic-hexagram SAT run is the causal test. Instruments to promote first:
 the defect map and the pivot-signature scan into `tools/anatomy.py` + the
 visualizer as overlays.
 
+**The literature check (2026-08-10, Kooshi's find — see the `five-chromatic-papers`
+memory and CLAUDE.md Grokkings G7/G11/G3-amendment):** Haugland
+(arXiv:2608.04542, five days old) independently builds a Moser-spindle-free
+5-chromatic graph (2,131 vertices) by exactly the candidate-#0 design shape:
+a fabric (heptagonal, his crystal) with an explicit detune parameter, driven
+through the rigidity currency — a virtual edge at √3 (740-vertex gadget) →
+a forced-equal pair at distance 2 → the closing spindle, whose rotation is
+OUR ρ₁₅. Two consequences for this milestone: (a) the mitotic-assembly route
+is independently validated at the mechanism level — and our version starts
+from a CERTIFIED fabric with exact-arithmetic instruments where his uses
+floats and uncertified SAT; (b) the fabric is a free parameter — if the
+hexagonal mitotic hexagram stalls, the design space includes other crystals.
+Import targets when convenient: Parts' 509 (arXiv:2010.12665 — the G3/G4
+shell test) and Haugland's 2,131 (needs cubic-field machinery, cos 2π/7 —
+milestone-scale; kernel-certifying the first Moser-free 5-forcer at sane
+size is a possible insertion, Kooshi's call).
+
 ## Registered questions for the subplan (predictions before instruments)
 
 * Smallest χ ≥ 5 closure size: how many centres? (The 510-witness spans a bounded
