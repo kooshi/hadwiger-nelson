@@ -46,6 +46,80 @@ context accumulates through the three stubs and is not repeated here.*
   the cheap instrument the pairwise rigidity sweep was structurally blind to:
   build it into `tools/rigidity.py` alongside the triple-query extension.
 
+## The design fork (opened by Kooshi, 2026-08-10, the morning after M31's close —
+## UNDECIDED; his call at M32 subplanning, with de Bruijn's recommendation recorded)
+
+Two routes to "the first certified infinite 5-chromatic object", and they differ
+by an order of magnitude in certification surface:
+
+* **Route A — certify the found object**: the 1581-witness closure. χ ≥ 5 is
+  free (kernel-inherited). The cost is the upper bound: a colour table proper
+  on EVERY chord family of a two-centre closure with 11,016+ rings, 67
+  direction classes, and no global symmetry — the M24–M26 engine at ~50×
+  its proven scale. The object is found, messy, and SAT-shrunk (scars).
+* **Route B — design our own 5-forcer from the certified vocabulary**
+  (Kooshi's gut: "something smaller and cleaner built from our own
+  vocabulary — how small can we get by detuning something built on our
+  hexagram?"): run the forced-pair pipeline INSIDE the hexagram fabric —
+  build a gadget from hexagram material whose 4-colourings force a pair
+  (equal at 2 or 4, the conic-friendly spindle distances), then close with
+  ρ₁₅. Then certify THAT object, whose theory we own end-to-end: rot6
+  symmetry, self-seeding, the quadrature law giving the complete cross-web,
+  a small shell inventory. "Small" here means LEAST GEOMETRY (G10): fewest
+  shells × smallest word set — NOT fewest vertices.
+* **The measured constraints on Route B** (all from M30/M31, nothing new run):
+  single detunes are thin by law (one conic of chords — can never force);
+  the hexagram chunk is pairwise-floppy at 4 (M30 E4) so no spindle can
+  start from it bare; every 5-forcer measured is a tapestry of coverage
+  compulsions (G13) — the gadget's job is to CREATE a fan (coverage 4 on a
+  circle) or a forced pair, from stacked/multi-anchor detunes. Benchmarks
+  for scale expectations: Haugland's designed route on a heptagon fabric
+  cost 740 vertices for ONE virtual edge at √3, 1066 for the forced-equal
+  pair at 2, 2131 total; de Grey's forcer is 791 for six pairs; nothing
+  measured suggests our fabric lands radically below ~10³ vertices — the
+  win is CLEANNESS (description length, symmetry, certifiability), not
+  vertex count.
+* **Route B's opening probes, sketched for registration at subplan time
+  (NOT run — the registration discipline binds)**: (1) the coverage-query
+  instrument into `tools/rigidity.py` (one SAT call per vertex per k; the
+  510 fan test cost 10–30 s at 509 vertices); (2) stacked mitosis — H ∪
+  R·H ∪ R'·H for R, R' at the same/different anchors (incl. the chirality
+  question: de Grey's graph contains ρ₁₅ but NOT ρ₁₅⁻¹ — mirror-stacking
+  is unexplored); sweep cross-chord growth AND rigidity/coverage onset;
+  cost ~minutes per variant at B ≤ 2 via `tools/closure.py`; (3) the
+  virtual-edge hunt: which small fabric assemblies force a DISTINCT pair
+  at any distance at k = 4 (Haugland's G₁ analogue — his was at √3);
+  (4) register the fan-design question: what ambient material forces
+  coverage 4 on one pivot's outer circle — G13's target, hunted forward.
+* **Recommendation (de Bruijn, 2026-08-10): hybrid, B-first.** Open M32
+  with Route B's probe phase (cheap, uses standing instruments, and its
+  FAILURE is informative — if no small assembly forces anything, the
+  irreducibly-global finding extends to designed objects and Route A is
+  the only road). Fall back to Route A — whose engine work (the quadrature
+  lemma, the pair web, the coverage instrument) is IDENTICAL through the
+  first weeks, so nothing is lost by opening with B. Confidence: medium —
+  the one fact that would flip it is a measured probe showing forced
+  structure needs witness-scale assemblies even in our fabric, in which
+  case go straight at Route A and treat B as closed.
+
+## Fresh-session pointers (2026-08-10)
+
+* Read order: this stub whole → `plans/M31-minimal-five-closure.md` §0a/§R
+  (the law and every measured number) → `plans/M30-degrey-anatomy.md` §R.
+* Instruments: `tools/closure.py` (mitosis/census/law-check/closure/χ —
+  `--self-test` first, six controls), `tools/rigidity.py` (pairwise
+  forced/virtual; the coverage query is DESIGNED, § above, unbuilt),
+  `tools/anatomy.py`, `tools/hexchunk.py`. SAT costs (desktop): 509-vertex
+  full pairwise sweep 6 s when floppy; single k=4 SAT at 1581-scale
+  seconds; monolithic k=4 UNSAT > 80 min (kernel fact or cubes); 24k-vertex
+  k=5 SAT ~1 s; fan query 10–30 s at 510-scale.
+* Artifacts (UPDATE, never re-mint): closure explorer
+  https://claude.ai/code/artifact/43da2efc-d00e-4e29-a786-64cee5a1b2d8,
+  anatomy explorer
+  https://claude.ai/code/artifact/b0333b53-c301-4873-824e-d04f69048be3,
+  hexagram explorer
+  https://claude.ai/code/artifact/6edcfda5-8b26-4e7e-b69e-5102a5e1056c.
+
 ## The target theorem
 
 For the closure X chosen at M31 (countable, closed under the de Grey group,
