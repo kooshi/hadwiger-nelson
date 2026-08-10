@@ -94,14 +94,17 @@ a census is an anecdote; only a registered granularity can fail honestly).
     1581 up to ratio-by-u₀ and sign is **≤ 200**. (From the construction: seed-edge
     directions × hex₁₂ × four copy words, heavily collided. Confidence medium; the
     count itself is a deliverable either way.)
-  * **R3 (word length).** Every edge-direction ratio is reached by a word of length
-    **≤ 6** over {ζ₁₂-frame elements, σ±, ρ₁₅±, ρ₆₃±} in the BFS closure. (The
-    construction uses each spindle once, so long words would mean the anatomy sees
-    structure the construction didn't put there — worth knowing either way.)
+  * **R3 (word length — sharpened by the domain pass, before any run).** Rotations
+    about one centre **commute**, so the group of direction ratios is the abelian
+    group {ζ₆^a·σ^b·ρ₁₅^c·ρ₆₃^d : a ∈ ℤ/6; b,c,d ∈ ℤ} and "factorization" is
+    exponent-solving, not word search. Registered reading: every edge-direction
+    ratio is reached with **|b| + |c| + |d| ≤ 6** (the ζ₆-part free). The
+    instrument enumerates the exponent box |b|,|c|,|d| ≤ 8 (6·17³ ≈ 29k exact
+    Motions) and matches the inventory.
   * E1 is **confirmed** when every direction ratio of all three witnesses lands in
-    the BFS closure at the achieved depth; **refuted** if any ratio provably needs
-    a root outside ℚ(√3,√5,√7,√11) or stays unreached at depth ≥ R3+2 (reported as
-    "unreached at depth d", never as absence).
+    the exponent box at the achieved bound; **refuted** if any ratio provably needs
+    a root outside ℚ(√3,√5,√7,√11) or stays unreached at box ≥ 8 (reported as
+    "unreached at |exponents| ≤ 8", never as absence).
 * **E2 — the seam algebra one field up.** The analogues of π = (1+i√11)/2
   (π² = π − 3, norm 3): **(1+i√15)/2 with x² = x − 4 (norm 4 = 2²)** and
   **(1+i√63)/2 with x² = x − 16 (norm 16 = 2⁴)**. Prediction: the new webs clear
@@ -151,6 +154,44 @@ is believed — the make-the-gate-fail rule):
 | Shuffled-coordinate graph (1581 coords permuted against edges) | anatomy classifier | non-unit edges refused; the run aborts naming the first offender |
 | Visualizer replica sweep | visualizer | 0 non-unit rendered chords; 0 unclassified edges; class counts equal the anatomy table's |
 
+## §0b — Settled representations (domain-modeling pass, 2026-08-09)
+
+The pass ran before implementation; its conclusions bind the instrument shapes:
+
+* **Addresses are computed post hoc, never threaded.** The 1,872 candidate words
+  (e₂, e₁, h, s) ∈ {1, ρ₆₃@(−2,0)} × {1, ρ₁₅@(0,0)} × hex₁₂ × 39 seeds are each
+  applied exactly and looked up in the final table. `Config` is not instrumented;
+  the address map is a relation `vertex → list of words` recovered by lookup; the
+  fusion record is its multiplicity histogram; a vertex with zero words aborts the
+  run by name (it would mean the construction model is wrong). Words through the
+  two deleted points are excluded on both copies by construction order.
+* **A direction IS a `Motion`.** A unit edge difference is exactly a rotation
+  about the origin, so directions, frame elements, generators σ/ρ₁₅/ρ₆₃, and
+  relative-motion data all live in `construct.py`'s existing exact `Motion` type
+  (key/hash/compose already present; the inverse of a rotation is its transpose,
+  built without adding general inversion). Ratios of unit directions are products
+  with conjugates — no division ever. No second complex-arithmetic module exists.
+* **The factorization space is abelian** (R3 above): exponent-box enumeration
+  replaces BFS; the deliverable histogram is over |b|+|c|+|d| at minimal
+  representation.
+* **The fine class is a derived projection**, not new machinery: (copy-pair tag,
+  seed-pair orbit under hex₁₂, direction class up to sign and frame) — assembled
+  from the address and direction tables. No affine-motion canonicalization.
+* **The rigidity state is one lattice serving both questions.** Per unordered
+  pair: two seen-bits (equal-seen, distinct-seen) plus an optional confirmed
+  side. Every model updates ALL pairs in bulk via colour-class bitsets (pairs
+  inside a class see "equal", across see "distinct"); a pair with both bits is
+  free forever; candidates are pairs with exactly one bit; each UNSAT
+  confirmation either settles the pair or returns a counterexample model that
+  feeds back into every pair. Invariant (forcer.py's, generalized):
+  `confirmed ⊆ truth ⊆ confirmed ∪ candidates ∪ unknown`, per side. The χ-check
+  is the first model draw, so the vacuity guard (UNSAT chunk ⟹ halt, banner) is
+  structural, not bolted on. Adjacent pairs are excluded from the virtual-edge
+  question (trivially distinct), reported as a count only.
+* **One anatomy JSON** is the single source of truth consumed by both the
+  visualizer build step and the M31 ranking — the hexagram-viz pattern (generated
+  data block embedded at build time), never two exports that can disagree.
+
 ## §1 — The instruments (the work items, in build order)
 
 ### 1. `tools/rigidity.py` — the colour-space instrument (new equipment)
@@ -189,10 +230,11 @@ the instrument. Calibration per R6/E4, controls per the table above.
   Assert the regen-check still matches the committed table (existing code).
 * **Direction inventory**: the 7877 edge differences as exact field elements;
   ratio-normalize per R1; dedup; report the count (R2's verdict).
-* **Word factorization**: BFS closure of ⟨ζ₆ (and the hex₁₂ frame), σ, ρ₁₅, ρ₆₃⟩
-  as exact `Motion`s to depth 8 (R3 + 2), matched against the inventory. Report
-  per-direction word length or "unreached at depth 8" (E1's verdict). Same
-  membership run for 510/553 inventories (no addressing pass — no provenance).
+* **Exponent factorization**: enumerate the abelian box
+  {ζ₆^a·σ^b·ρ₁₅^c·ρ₆₃^d, |b|,|c|,|d| ≤ 8} as exact `Motion`s (~29k), match the
+  inventory. Report per-direction minimal |b|+|c|+|d| or "unreached at box 8"
+  (E1's verdict, R3's histogram). Same membership run for 510/553 inventories
+  (no addressing pass — no provenance).
 * **Output**: the generator list with exact values, the word-length histogram, the
   per-witness membership table.
 
