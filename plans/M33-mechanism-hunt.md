@@ -358,6 +358,80 @@ process: HALT, report, wait for his reboot. Predictions above are
 committed before the first colour query; any mid-milestone additional
 sweep registers its §0-addendum first (the M32 §0g pattern).
 
+## §0f — Domain modeling pass (2026-08-10, fresh invocation)
+
+**F1 — The mode collapse (the pass's one real find).** "Pairs-equal" and
+"triples-mono" are ONE semantics: *avoid a monochromatic m-tuple*. A pair
+being equal IS the pair being mono; the clause family is arity-generic —
+for each instance and each colour c, one clause ¬(every member wears c);
+at arity 2 that clause is literally an edge clause. So the class datum is
+`{name, arity, exact d² spec (+ mutual flag at arity 3)}`, the clause
+generator is one function over m-tuples, and "mode" disappears from the
+model. Direction B (require-one) is NOT a new query shape either: "some
+instance realizable" = the existing per-instance mono realizability
+(`triple_query(mode=mono)`, plus its trivial arity-2 sibling) mapped over
+the instance list with early exit — and the per-instance answers are the
+realizability census, more informative than one disjunctive call. The new
+primitive is exactly ONE function: `class_avoid(n, edges, k, instances,
+cap)` — instances as dense index tuples, geometry-free.
+
+**F2 — The geometry/SAT cut.** `rigidity.py` never sees a coordinate;
+`mechanism.py` (the new sweep driver) never builds a clause. The
+enumerator (float-prefilter + exact confirm, the `build/m33-design.py`
+routine promoted) lives with the geometry; `class_avoid` and the existing
+meters live with the SAT encoding. Regions are id-mapped at the boundary
+once: a region record carries the sorted OBJECT ids and the dense SAT
+reindexing; every emitted reading speaks OBJECT ids only (cores, instance
+lists, restore checks) — the dense ids never escape. A planted control
+runs a known verdict through a shuffled sub-region to prove the mapping
+honest.
+
+**F3 — Where the guard lives.** The base-SAT guard is control flow, not
+convention: the driver runs the min-cover ladder ONCE per region (its top
+row j = k IS the base row), and class queries on that region reuse that
+row — if base ≠ sat, class queries are NOT RUN and the row is recorded
+`vacuous` (or `unknown-at-base`). The verdict is computed by one function
+from (base, avoid, n_instances), so `fired` structurally requires
+base = sat ∧ avoid = unsat ∧ n_instances > 0. Fifth verdict minted:
+`empty` (zero instances in the region — vacuously avoidable, rendered as
+"no instances yet", never as clean). One base call per region, shared
+across every class — the economy and the honesty are the same mechanism.
+
+**F4 — Monotonicity is structure, and the driver exploits it.** Both
+curves are provably monotone in the radius: a proper colouring of a
+bigger ball restricts to a smaller one (so min-cover is nondecreasing,
+and class-firedness is upward closed — SAT at big r implies SAT at small
+r). Two consequences: (a) every emitted curve is ASSERTED monotone, and a
+violation aborts loudly naming the two rows (instrument-bug tripwire,
+same genre as A2's containment ordering between the √3 pair and triple
+classes); (b) class onsets are found by BINARY SEARCH over the ring marks
+(≈ 6 queries per class instead of 44), with the full sweep reserved for
+the cheap min-cover curve. The A2 check runs at every measured mark pair.
+
+**F5 — The core record carries its epistemics in-band.** A core is
+`{object, centre, query spec, vertices (object ids, sorted), deletion
+sequence, controls: {reencode verdict, restore checks [(vertex, sat)]},
+anatomy: {ring histogram, direction classes}, status:
+"solver-measured"}` — the status literal travels with the data (M30's
+three-outcome honesty), and nothing downstream may promote it; the only
+promotion path is A5's certificate.
+
+**F6 — The A1 factorization in Lean: deferred with its shape named.** The
+two-line general lemma (χ(G) ≥ k+1 at a vertex whose deleted graph is
+k-chromatic ⟺ the fan on N(v) — the M18 `fan_iff_coverage` vocabulary
+meeting M20's `chromaticNumber_concentric` genre) is the phase-3
+assembly's opening statement, not a phase-1–2 deliverable. This milestone
+is instruments-first; the derivation stands informally in §0a and the
+Lean statement is the FIRST item behind the P12 gate.
+
+**F7 — Sweep-point record (the spectrum's row type).** Per (object,
+centre, mark): `{mark r² (exact + float), n, n_edges, n_target (|S ∩
+ball|), cover: {rows, lo, hi, verdict}, classes: {name: {base (shared),
+n_instances, avoid outcome, verdict, seconds}}}`. The spectrum artifact
+is these rows plus per-class onset summaries (`onset_mark` /
+`never-below-vacuous` / honest interval when unknown rows intervene).
+S ∩ ball is the target below r = 1 (partial circle), n_target says so.
+
 ## Costs and benchmarks (desktop)
 
 Fan queries: 510-scale 10–30 s; B=2-chunk-scale seconds; enriched balls
