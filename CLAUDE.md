@@ -339,7 +339,12 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   exactly; 553 carries the unit-pivot triangle (M23's configuration) plus the
   ring. **[measured]** *Containment is NOT causation (the 1581 is
   near-edge-critical, so deletion cannot localize); the causal test is the
-  mitotic-hexagram closure's SAT χ — M31's opening move.*
+  mitotic-hexagram closure's SAT χ — M31's opening move. CAUSAL TEST RUN
+  (M31, 2026-08-10): the mitotic hexagram — the certified chunk plus ONE
+  new-field detuned copy, every anchor × generator variant at B ≤ 2 — is
+  χ = 4 throughout, with coupling counts ≤ 12, all law-pinned (G12). The
+  organ reading survives only as anatomy: the hexagram is the fabric the
+  witnesses stand on, not a seed that one detune promotes to a 5-forcer.*
 * **G7 — Detuning is the mechanism ("mitosis").** Every forcing rotation ever
   used is a small detune off an exact crystal angle: ρ₁₅ 1.045° off 30°, ρ₆₃
   0.638° off 15°, Moser 3.557° off 30°, σ 1.779° off 75° **[measured, exact]**.
@@ -392,7 +397,30 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   exhaustive 7,877-edge sweep is ~a day of CPU, unrun]** *Consequence:
   "minimal" must mean least GEOMETRY (fewest shells × smallest angular word
   set whose compulsion cascade closes), not fewest vertices — fewest-vertices
-  is a SAT-shrinking artifact wearing scars.*
+  is a SAT-shrinking artifact wearing scars. THIRD MEASUREMENT (M31): even
+  ENRICHING sub-witness chunks with the full gen-1 closure material (16,365
+  vertices, 67,568 edges at the 1200-committed radius) leaves them
+  4-colourable in seconds — the 5-mechanism is irreducibly global at this
+  order; no closure shortcut below the whole witness exists at gen-1.*
+* **G12 — The quadrature law** (M31, derived a priori in the registered
+  subplan, then verified at 26 exact censuses, zero violations): a detuned
+  copy R·X of seam-field material X couples to X **only** along
+  anchor-collinear pairs (R = s·W with W an even half-spindle word — a full
+  spindle: Re(W) ∈ ℚ) or anchor-perpendicular pairs (W odd: Im(W) ∈ ℚ), with
+  the radii on one explicit conic (t² + r² − 2·Re(W)(±tr) = 1, resp.
+  + 2·Im(W)); words mixing √ρ₁₅- and √ρ₆₃-content couple NOWHERE. Proof
+  shape: the 16-basis splits into four radical blocks K, √15·K, √7·K, √105·K
+  and the chord equation must vanish per block. **[measured + derivation;
+  the Lean certification is M32's first kill lemma]** Measured instances:
+  the (2,2) spindle diagonal, the (2/3, 2/3) perpendicular diagonal, and the
+  **conjugate-ring channel** — rings at (17∓√33)/6 and (17±√33)/6 coupling
+  through ρ₁₅ with t·r = 8/3: the first mechanism connecting the witnesses'
+  ℚ(√33)-conjugate ring spectra (G4) to the coupling web. *Consequence,
+  sharpening G7: a single detune's colour pressure is ONE CONIC of chords —
+  thin by law — so 5-forcers cannot be built from chord soup; the forced-pair
+  pipeline (de Grey's 791-forcer, Haugland's G₁/G₂) is not a design choice
+  but the only channel wide enough. Falsifier: any census chord violating its
+  pin — the instrument (tools/closure.py) aborts on one, naming P1.*
 
 ## Whose work this is
 

@@ -4,6 +4,37 @@
 `plans/M30-degrey-anatomy.md` and `plans/M31-minimal-five-closure.md` first —
 context accumulates through the three stubs and is not repeated here.*
 
+## The M31 handoff (2026-08-10, written at M31's close)
+
+* **The object is the 1581-witness closure** — M31's registered failure clause
+  fired exactly as written: every smaller closure's SAT χ stayed 4, the gen-1
+  enrichment did NOT enable a 5-chromatic chunk below the witness scale
+  (enriched balls at 1200-committed radius, 16,365 vertices with all closure
+  material, 4-colour in seconds), and the 5-mechanism is **irreducibly global
+  at this order** — the structural finding, now measured three ways
+  (near-edge-criticality M30, class-deletion SAT M30, enrichment frontier M31).
+* **The quadrature law is the first kill lemma, and it is DERIVED and
+  script-verified** (M31 §0a/§R): a detune R = s·W (s seam, W in the
+  half-spindle generators) couples seam material only along s-twisted
+  anchor-collinear pairs (W an even power: Re(W) ∈ ℚ) or anchor-perpendicular
+  pairs (odd: Re(W) ∈ √d·ℚ) on the conic t² + r² − 2·Re(W)(±tr) = 1 resp.
+  t² + r² + 2·Im(W)(±tr) = 1; words mixing √ρ₁₅- and √ρ₆₃-content couple
+  NOWHERE. Kernel-certifying the ρ₁₅ instance is the natural first Lean
+  theorem of this milestone (the M31 §0a deferral): the proof is the 16-basis
+  block split — K = ℚ(√3,√11) vs √15·K vs √7·K vs √105·K — an
+  ℚ-independence argument in the M24 `sqrt_indep` genre.
+* **The measured coupling inventory to certify** (all law-pinned, all exact):
+  the (2,2) spindle diagonal (the classical distance-2 chord), the (2/3, 2/3)
+  perpendicular half-spindle diagonal, and the **conjugate-ring channel**
+  t² = (17∓√33)/6, r² = (17±√33)/6, t·r = 8/3 — the clearing must handle
+  ℚ(√33)-CONJUGATE radius pairs, not just rational radii. Conic constants
+  7/4, 1/2, 31/16: denominators 4, 2, 16 — the 2-adic clearing measured at
+  M30 (norms 4 and 16) shows up here as the conic's arithmetic.
+* **The de Grey pair's exact seam coupling** (M31 probe B): 6 chords + the
+  tangency fusion — the hex family and four seam-height-±1 chords through
+  (1/√3)·σ̄ — is the smallest complete two-centre web one field up; its Lean
+  classification is the M24-engine warm-up before the witness closure's webs.
+
 ## The target theorem
 
 For the closure X chosen at M31 (countable, closed under the de Grey group,

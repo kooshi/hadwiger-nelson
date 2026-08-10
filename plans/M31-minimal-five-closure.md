@@ -507,3 +507,129 @@ the M32 contract: `object`, `anchor`, `detune`, `cross_chords` (each with
   chords — a RESULT: class X is sterile/thin by law" (bad-goal vs bad-set
   distinguished); `unknown-at-cap` never worded as a χ bound; self-test shows
   every control red on cue then green.
+
+---
+
+# §R — Results (2026-08-10, written as they landed; verdicts at face value)
+
+## The quadrature law and the mitotic censuses (P1, P2, P3)
+
+* **P1 HOLDS.** Zero law violations across all 26 census variants (12 hexagram
+  variants at B = 1, 12 at B = 2, 2 pair variants). Mixed detunes: exactly zero
+  non-anchor cross chords everywhere probed. The instrument's planted-failure
+  self-test (a perpendicular pair handed to an even detune) goes red on cue,
+  naming P1.
+* **The census learned one honest lesson at first contact**: when the anchor is
+  itself a chunk point, every unit-neighbour of the anchor produces a degenerate
+  "cross reading" through u = 0 which the law passes vacuously (z = 0). The
+  mixed-detune row — sterile by law, yet showing 48 chords — was the tripwire
+  that caught it. Anchor-incident chords are now a separate class; the law
+  speaks only about genuine coupling.
+* **P2 HOLDS**: every mitotic hexagram variant reads χ = 4 (k = 3 unsat,
+  k = 4 sat — full three-outcome runs, cap never hit). Cross-chord counts,
+  B = 2: metapivot anchor — ρ₁₅: 0, ρ₆₃: 0, √ρ₁₅: **12**, √ρ₆₃: 0, mixed: 0,
+  ζ₁₂·ρ₁₅: 0; pivot anchor — ρ₁₅: **6**, √ρ₁₅: **2**, others 0. All ≤ 40 as
+  registered. **G6's causal candidacy at single-detune order is dead**: marrying
+  the certified hexagram to one new-field detune produces thin, law-pinned
+  coupling and no 5th-colour pressure.
+* **The couplings land EXACTLY on the a-priori conic**, and the census found a
+  channel the derivation admits but the subplan did not anticipate:
+  - pivot-anchored ρ₁₅: 2 chords on the **(2, 2) spindle diagonal** (t² = r² =
+    4 — the hexagram holds material at exact distance 2 from its pivots), plus
+    at B = 2 **four conjugate-ring chords** at t² = (17∓√33)/6, r² = (17±√33)/6,
+    t·r = 8/3 — the ℚ(√33) conjugate-pair rings couple to EACH OTHER through
+    the full spindle, collinearly. The witnesses' conjugate-ring spectra are an
+    ACTIVE coupling channel, not inventory.
+  - metapivot/pivot-anchored √ρ₁₅: all chords at the perpendicular diagonal
+    t² = r² = 2/3, t·r = −2/3 (2/3 + 2/3 − 1/3 = 1). The half-spindle couples
+    the hexagram's inner-scale rings perpendicular-wise.
+  - ρ₆₃ and √ρ₆₃: sterile at chunk scale, as predicted (their conic diagonals
+    (4,4) and out-of-field sit beyond the chunk's radial reach ≈ 2.16).
+* **P3 HOLDS**: the de Grey pair (121 points, ladders at distance 2 + both
+  centres). Base coupling: **6 cross-system seam chords + the tangency fusion**
+  at the midpoint — 2 hex-family outer–outer chords (pure ℚ(√3)) and 4
+  mixed-radius chords at seam heights ±1 whose inner endpoints are exactly
+  (1/√3)·σ̄ = (1/6, −√11/6) — **the seam-conjugate point Kooshi spotted in
+  Heule's published coordinates, appearing as the distance-2 pair's native
+  coupling**. The ρ₁₅ mitosis adds EXACTLY ONE cross chord: the centre-level
+  (2,2) spindle chord c₂ → ρ₁₅·c₂ (predicted by name in §0b). χ = 4
+  throughout. The M32 clearing handoff: every observed cross equation is
+  K-block-split with the §0a pin structure; the conic constants are 7/4 (ρ₁₅),
+  1/2 (√ρ₁₅) — denominators 2², 2: the 2-adic engine will clear by powers of 2
+  where M24 cleared by √3-powers, and the conjugate-ring channel says the
+  clearing must handle ℚ(√33)-conjugate radius pairs, not just rational radii.
+
+## The witness closure (P4, P5, P6)
+
+* **P4 HOLDS**: gen-1 half-spindle closure of the 1581 (8 generator moves × 2
+  centres): 1581 → **24,065 points** (+22,484 new, 2,796 collisions) — inside
+  the registered 12k–40k. Unit chords: **123,134**; the 1581's own 7,877
+  reproduced exactly inside the sweep (the triage path's positive control).
+* **P5 HOLDS (no jackpot)**: k = 5 on the whole 24,065-point gen-1 object:
+  **SAT in 1.14 s**. The closure stays 5-colourable at gen-1.
+* **P6 MISSED LOW, reported at face value**: rings about the origin centre:
+  **11,016** exact radii (registered 2,000–6,000; the witness alone had 819).
+  Ring growth under the two-centre closure is faster than registered —
+  the object is even more lattice-like than the 819-circle reading suggested.
+
+## The frontier curve and the milestone verdict (P8, P9, P10, P7)
+
+* **P8 HOLDS**: the k = 4 SAT-findability frontier over balls about the spindle
+  axis midpoint — plain (committed vertices only) and enriched (+ every gen-1
+  closure point in the same ball):
+
+  | base ≤ | plain n / outcome | enriched n / outcome |
+  |---|---|---|
+  | 300 | 300 sat 0.01s | 5,132 sat 0.2s |
+  | 600 | 600 sat 0.01s | 8,569 sat 0.4s |
+  | 900 | 900 sat 0.02s | 12,120 sat 0.8s |
+  | 1200 | 1,200 sat 0.05s | 16,365 sat 17.6s |
+  | 1581 | 1,581 **unknown @300s** (UNSAT by the kernel fact) | 23,771 **unknown @300s** |
+
+  No 5-chromatic chunk below 800 vertices (trivially — everything through
+  1,200 colours in seconds); the transition sits between 1,200 and 1,581
+  committed-scale, inside the registered band. `unknown` rows are cap
+  readings, not bounds; the full 1581's refusal is the kernel-certified fact.
+* **P9 RESOLVES NO**: gen-1 enrichment does NOT enable a 5-chromatic subgraph
+  below the witness scale — the enriched 1200-ball (16,365 vertices, 67,568
+  edges, all closure material) 4-colours in 17.6 s. The registered failure
+  clause fires AS A FINDING: **the 5-mechanism is irreducibly global at this
+  order** — measured now three independent ways (near-edge-criticality M30,
+  class-deletion SAT M30, enrichment frontier M31). No cube-split UNSAT was
+  spent: no candidate smaller 5-chunk appeared to confirm.
+* **P10 HOLDS**: the smallest χ ≥ 5 closure this milestone can certify-by-SAT
+  is the 1581-witness closure itself; nothing smaller reached 5.
+* **P7 SPLIT, at face value**: Heule-510 minus its centre vertex IS
+  4-colourable (registered 80% — confirmed), and the complete pairwise
+  rigidity sweep SETTLED in 63 SAT calls / 6 seconds: **zero forced pairs,
+  zero virtual edges**. The registered "forced pairs concentrate at
+  spindle-able distances" is REFUTED — there are none of ANY kind. One vertex
+  below criticality, the 510's colour space has no pairwise rigidity shadow;
+  its forcing is even more distributed than de Grey's (whose 791-forcer holds
+  six forced pairs). G9 sharpened: rigidity lives at the forcing level and
+  NOWHERE below it, not even one vertex below.
+
+## Deliverables shipped
+
+* `tools/closure.py` (self-test: six controls, every one seen red on cue —
+  planted conic triple found, planted pin violation caught naming P1, ζ₆
+  fusion control, SAT wrapper red/green, mixed sterility, boundary round-trip).
+* `build/m31-mitosis-B1.json`, `-B2.json`, `m31-pair.json`,
+  `m31-closure-gen1.json` (+ `.pts.json`), `m31-frontier.json`,
+  `m31-p7-510-minus-v0.json` — the JSON contract of §0e.
+* `tools/closure-viz.html` + `tools/closureviz_refresh.py` — the closure
+  explorer (26 variants with pin geometry on hover, gen-1 scatter, the
+  badged frontier chart).
+* CLAUDE.md § Frontier + § Grokkings updated (G12 minted, G6 causal test
+  recorded, G10 third measurement); M32 stub § "The M31 handoff".
+
+## What was NOT done, honestly
+
+* The ownership + defect-map overlays for the ANATOMY explorer (stub note):
+  deferred within the session — the closure explorer took the viz budget
+  first; promoted next if the run's remaining time allows, else first item
+  of the next session.
+* The triple-query rigidity extension: M32-stub work, untouched as planned.
+* Stacked mitosis (two+ detunes; the forced-pair pipeline in our fabric):
+  NOT probed — it was not registered. It is the natural M32 design question
+  the quadrature law points at.
