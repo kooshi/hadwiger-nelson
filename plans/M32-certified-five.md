@@ -51,6 +51,33 @@ which requires the complete chord classification one field up.
   6-fold symmetric about one centre — expect less symmetry, bigger tables, more
   decides; measure before believing).
 
+## The geometric-forcing route (Kooshi's direction, 2026-08-09: "formalize and
+minimize the geometry behind the colourings rather than brute forcing them")
+
+The lower bound χ ≥ 5 currently rests on the LRAT certificate — kernel-checked
+but mechanism-free. The target worth the milestone: replace it with a
+**compulsion cascade** in the M20 genre. The M30 measurements say where that
+argument must live: pairwise rigidity is provably ZERO on the relevant objects
+(the hexagram chunk at 4 colours: no forced pairs, settled exactly; the 1581
+at 5: none either) — while de Grey's own informal argument is TRIPLE-shaped
+(every 4-colouring of his hexagonal fabric H puts a monochromatic triple
+somewhere; the twisted overlay kills each placement). So the geometric
+lower bound lives at triple order or higher, exactly like M20's
+`no_mono_outer_triple` (a compulsion acting through no edge) — the genre we
+have already formalized once. Sketch: (1) compulsion theorems for the
+seam-field fabric at 4 colours (what patterns are forced — triples, not
+pairs); (2) the detuned overlay's interlock chords (the 2-adic web theorems)
+contradicting every compelled pattern; (3) χ ≥ 5 with no SAT anywhere in the
+artifact. SAT's role reduces to scouting (the M24–M26 division of labour:
+census verifies design, kernel checks structure). "Minimize" then changes
+meaning: not fewest vertices (Heule's 510 is a SAT-shrinking artifact with
+out-of-group scars) but LEAST GEOMETRY — fewest rings × smallest angular word
+set whose cascade closes. A minimal mechanism may have more vertices than 510
+and be worth far more, and its countable closure is this milestone's object.
+Instrument prerequisite (build at M31): extend `tools/rigidity.py` from pair
+queries to triple/pattern queries — the pairwise instrument is structurally
+blind to the compulsion level where the 5-forcing actually operates.
+
 ## Deliverables
 
 * The Lean module (working name `Proofs/HadwigerNelson/FiveClosure.lean`), zero
