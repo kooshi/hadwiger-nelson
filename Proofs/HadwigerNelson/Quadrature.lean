@@ -518,5 +518,24 @@ example : normSq (rho15 * 2 - 2) = 1 := by
 /-- Mutation audit (the wrong constant refuses): `(2,2)` is NOT on the `7/8`-conic. -/
 example : ¬ ((4 : ℝ) + 4 - 7 / 8 * 4 = 1) := by norm_num
 
+/-! ## §4 The pair tangency (the distance-2 web's anchor) -/
+
+/-- **The tangency theorem**: the unit circles about `0` and `2` meet exactly at the midpoint
+`1` — the distance-2 pair's single fusion, through which all but six of its measured window
+chords pass (`build/m32-pairweb.json`). The height-unbounded chord completeness is M33's
+first engine target; this anchor is its kernel-checked seed. -/
+theorem pair_tangency {x : ℂ} (h0 : normSq x = 1) (h2 : normSq (x - 2) = 1) : x = 1 := by
+  have e0 : x.re * x.re + x.im * x.im = 1 := by
+    rw [← Complex.normSq_apply]; exact h0
+  have e2 : (x - 2).re * (x - 2).re + (x - 2).im * (x - 2).im = 1 := by
+    rw [← Complex.normSq_apply]; exact h2
+  simp only [Complex.sub_re, Complex.sub_im] at e2
+  norm_num at e2
+  have hre : x.re = 1 := by nlinarith [e0, e2]
+  have him : x.im = 0 := by
+    have h2' : x.im * x.im = 0 := by nlinarith [e0, hre]
+    exact mul_self_eq_zero.mp h2'
+  apply Complex.ext <;> simp [hre, him]
+
 end Quadrature
 end HadwigerNelson
