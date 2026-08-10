@@ -87,6 +87,44 @@ of growing chunks will be NOISY at the boundary (one missing closure edge can
 read χ = 4) — chunk truncation must keep whole neighbourhoods, and every χ = 4
 reading needs the chunk's boundary audited before it is believed.
 
+**The post-close observations (Kooshi, 2026-08-09, reading the visualizer —
+each verified exactly before recording):**
+
+* **De Grey's near-mirror is exact on half the graph and its defect is a
+  chirality classifier.** The vertical mirror through x = −2 (the committed
+  frame's axis through the two 24-word spindle centres, at (−2.25, 1.98) and
+  (−1.75, 1.98)) matches the base and ρ₆₃ copies point-for-point (786 + 3
+  fusions) and matches NONE of the 792 ρ₁₅-twisted points — the "asymmetric
+  pockets" are exactly the first spindle's chirality (mirroring sends ρ₁₅ to
+  ρ₁₅⁻¹, which the graph does not contain). The defect map is an instrument:
+  one reflection splits the construction.
+* **Every forcing rotation is a small detune off an exact crystal angle**:
+  ρ₁₅ is 1.045° off 30°, ρ₆₃ is 0.638° off 15°, the Moser twist 3.557° off
+  30°, the seam 1.779° off 75°. Exact symmetry adds no colour constraint (the
+  copy reuses the base's pattern); the detune forces the clash — "mitosis" is
+  the right image, and the spindle is a forcer mid-division.
+* **Heule's 510 contains the certified hexagram as its central organ, with
+  the seam appearing by name.** Pivot-signature scan (points on radius-1 and
+  radius-1/√3 circles about each vertex, exact arithmetic): the centre v0
+  (24 inner + 36 outer) plus EXACTLY SIX pivots at EXACTLY distance 1/√3 in
+  a hexagon (18 inner + 24 outer each) — M26's hexagram skeleton — plus
+  further ring pivots at exactly (1/√3)·σ̄ = (1/6, −√11/6): **the seam
+  rotation σ, appearing explicitly in Heule's published coordinates.**
+  Heule 553: centre (36 + 38) plus THREE unit-distance pivots (the M21/M23
+  pivot-pair/triangle configurations) plus the 1/√3 ring. The seam-field
+  certified objects are the skeleton of the smallest known 5-forcers.
+
+**Candidate #0, added on these findings — the mitotic hexagram**: the certified
+hexagram (or its Heule variant with seam-conjugate ring pivots) UNION one
+detuned copy (a half-spindle rotation sharing the centre or a pivot). The
+smallest object that marries a certified 4-chromatic seam organ to the new
+field's forcing mechanism. Test order: does its closure's SAT χ reach 5 at
+any affordable chunk? The containment fact above is NOT a causal claim (the
+1581 is near-edge-critical — deletion cannot localize the forcing); the
+mitotic-hexagram SAT run is the causal test. Instruments to promote first:
+the defect map and the pivot-signature scan into `tools/anatomy.py` + the
+visualizer as overlays.
+
 ## Registered questions for the subplan (predictions before instruments)
 
 * Smallest χ ≥ 5 closure size: how many centres? (The 510-witness spans a bounded
