@@ -287,37 +287,43 @@ Every future milestone is maintained as a detailed pre-subplan stub in
 `plans/` (the stub rule, WORKFLOW § Plan) — read the stubs, they carry the
 full context.*
 
-*(M30 CLOSED 2026-08-09; M31 CLOSED 2026-08-10; M32 — the designed-forcer
-probe + the 2-adic engine's first ascent — CLOSED 2026-08-10: the probe
-phase fired its FLAT clause exactly as registered (the stacking law confirmed
-everywhere, no compulsion in any one-family stack at ≤ ~1,500 vertices, the
-matching 1-regular — width without degree does not force), and the Lean
-ascent landed the kill engine kernel-checked. The M33 handoff is
-`plans/M33-witness-closure.md`.)*
+*(M30 CLOSED 2026-08-09; M31 CLOSED 2026-08-10; M32 CLOSED 2026-08-10 —
+the probe phase fired its FLAT clause exactly as registered and the Lean
+ascent landed the kill engine kernel-checked. RE-RANKED the same day, on
+Kooshi's direction at the close: "I want to be able to confidently point to
+the reason why 5 colorings are forced." M33 is the MECHANISM HUNT; the
+certification programme is the standing fallback.)*
 
-1. **M33 — Route A: certify the 1581-witness closure**
-   (`plans/M33-witness-closure.md` carries the full handoff): the exactness
-   programme on the found object, now with the engine's first theorems
-   kernel-checked (`Quadrature.lean`) and the proof-term generation
-   discipline (sympy-derived linear_combination witnesses, zero-residual
-   verified before statement) proven to land first-try. The ascent ladder:
-   the distance-2 pair web's height-unbounded completeness (its window is
-   measured complete: 6 genuine chords + 8 through the single tangency, no
-   growth to |b| ≤ 5, master residue ≡ M24's) → the multi-generator trace
-   core (the largest item) → the closure's 67 direction-class families →
-   Fin 5 tables → χ = 5 with the lower bound kernel-inherited. Scale
-   honesty: ~50× M26's surface; ladder it and push excess to numbered
-   milestones rather than rescope silently.
-2. **The designed-forcer thread — CLOSED at M32's flat checkpoint** for
-   one-family stacks at probe scale. Reopen only with a mechanism that
-   creates degree-≥ 2 colour pressure across copies (the matching is
-   1-regular and free; the 26-triangle web was absorbed): mixed-family
-   stacks at tuned anchors, or fan-design on ENRICHED assemblies via the
-   coverage meter. Any reopening registers predictions first.
-3. **The forced-symmetry thread (from the 791's antipodal pairs)**: five
-   forced pairs at distance 4/√3 say every 4-colouring of the forcer is
-   centrally symmetric on the radius-2/√3 circle — a compulsion (M20's genre)
-   in the new field. Escalate if a non-spindle closure shape appears.
+1. **M33 — the mechanism hunt** (`plans/M33-mechanism-hunt.md` carries the
+   full brief). **The golden question, the short-term target: WHAT AMBIENT
+   STRUCTURE DELIVERS THE 4TH COLOUR ONTO A CIRCLE?** We own 3→4 completely
+   (the rainbow floor — a nameable local mechanism, kernel-checked); 4→5 is
+   measured as 100% ambient-delivered coverage (G13's fan at Heule-510's
+   centre) with no owned mechanism — that gap is the leap. The phases:
+   (1) the FAN-ONSET sweep (growing witness balls, the M32 coverage meter,
+   find the radius where min-cover on a circle flips 3 → 4) and the
+   FAN-CRITICAL CORE (shrink to the minimal ambient web that fans one
+   circle — conditional compulsions evade G10's no-small-5-chromatic-part,
+   so the core CAN be small); (2) the AVOIDANCE LADDER (the new instrument:
+   one SAT call per (region, pattern-class) asking "can the whole class be
+   avoided simultaneously" — the disjunctive query the instance meters
+   were provably blind to; the 791's six forced pairs are the built-in
+   positive control) → the COMPULSION SPECTRUM: which order fires first,
+   at what radius; (3) the cascade formalized in the M20 compulsion genre —
+   pigeonhole theorem + the kernel-checked kill law — χ ≥ 5 as mechanism,
+   and the core's closure becomes the certification object.
+2. **The certification programme (formerly M33 Route A)** — parked as the
+   standing fallback and eventual product, banner in
+   `plans/M33-witness-closure.md`, every handoff current (the pair-web
+   completeness stays the Lean engine's warm-up whenever engine work
+   resumes; the mechanism hunt's phase 3 feeds its object back into this
+   programme).
+3. **The designed-forcer thread — CLOSED at M32's flat checkpoint**; reopen
+   only with a degree-≥ 2 cross-pressure mechanism and fresh registered
+   predictions. G15 now says what was missing: kills without a pigeonhole.
+4. **The forced-symmetry thread** — folded into the mechanism hunt's phase 2
+   as its positive control (the 791's forced central symmetry is an
+   already-measured class-level compulsion), no longer a separate item.
 4. **Parked, with reasons** (banners in each stub): the tiled plane (M27 —
    expected another 4; its periodic-table SAT probe stays registered-but-not-run
    and reopens the milestone only if it REFUSES), the recursion (M28 — gated
@@ -501,7 +507,9 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   the pairwise rigidity sweep — P7's zero forced pairs and today's
   fanned-everywhere are the same fact seen from two orders. The
   coverage-order query (restrict N(v) to k−1 colours, one SAT call by
-  palette symmetry) is the missing instrument, and it is CHEAP. Falsifier
+  palette symmetry) is the missing instrument, and it is CHEAP — built at
+  M32 (`min_cover`/`coverage_query`, tools/rigidity.py); the hunt it
+  enables is M33's golden question (G15). Falsifier
   for the ladder reading: a 5-forcer whose centres are all UN-fanned after
   deletion — then the 5-compulsion lives entirely off-centre.*
 * **G12 — The quadrature law** (M31, derived a priori in the registered
@@ -546,6 +554,31 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   one-family stacks at probe scale provably do not create. Falsifier for
   the reading: a stack shape whose meters move — any reopening of the
   design thread registers its predictions first (M33 stub, parked list).*
+* **G15 — The two-act anatomy, and the golden question** (2026-08-10, the
+  M32 close discussion; Kooshi's re-aim: "I want to be able to confidently
+  point to the reason why 5 colorings are forced"): every known 5-forcing
+  argument factors as **pigeonhole × kill** — a DISJUNCTIVE class-level
+  compulsion ("every 4-colouring of this fabric puts some forbidden pattern
+  SOMEWHERE"; de Grey's informal mono-triple argument is the exemplar)
+  composed with a thin, law-governed kill web refuting each placement (the
+  half that is now kernel-checked: G12/G14). The disjunction explains the
+  globality readings — a some-placement-somewhere compulsion has no small
+  carrier and is INVISIBLE to instance meters, which is why every pairwise
+  and single-triple sweep read zero while the object still forces 5 — and
+  it explains M32's flat stacks: they built the kill act over a fabric
+  never shown unable to stay clean; kills without a pigeonhole force
+  nothing. The 3→4 template is owned end-to-end (the rainbow floor); the
+  4→5 gap is exactly **the golden question: what ambient structure
+  delivers the 4th colour onto a circle?** (G13's fan, hunted at minimal
+  scale — onset radius, fan-critical core, the compulsion spectrum.)
+  **[reading]**, with measured anchors: the 510 fan (UNSAT 10.1 s) against
+  its kernel-proven self-insufficiency; the flat stacks; the 791's forced
+  central symmetry as an already-found class-level compulsion (the phase-2
+  positive control). *Falsifiers, registered in the M33 stub: a fan-core
+  both large and patternless (coverage compulsion itself irreducibly
+  global — the fifth measurement, and this reading demotes to "the
+  pigeonhole has no finite-order name"); or the avoidance ladder all-SAT
+  at every probed class through witness scale.*
 
 ## Whose work this is
 

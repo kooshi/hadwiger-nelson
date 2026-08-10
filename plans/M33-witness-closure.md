@@ -1,5 +1,16 @@
 # M33 — Route A: certifying the 1581-witness closure (PRE-SUBPLAN STUB)
 
+> **RE-RANKED 2026-08-10, hours after writing (deprecate, never delete):
+> M33 is now THE MECHANISM HUNT — `plans/M33-mechanism-hunt.md` — on
+> Kooshi's direction at the M32 close: "I want to be able to confidently
+> point to the reason why 5 colorings are forced." The golden question:
+> what ambient structure delivers the 4th colour onto a circle?
+> This certification programme stands UNCHANGED as the standing fallback
+> and the eventual product (its number effectively moves to M34+); every
+> handoff below remains current, and the mechanism hunt's phase 3 feeds
+> back into it — the object to certify becomes the fan-critical core's
+> closure if the hunt lands, this whole-witness closure if it does not.**
+
 *Written 2026-08-10 at M32's close. Read order for a fresh session:
 `plans/M32-certified-five.md` WHOLE (it carries the M31 handoff, the stacking
 law, the flat probe verdict, and §R), then `plans/M31-minimal-five-closure.md`
