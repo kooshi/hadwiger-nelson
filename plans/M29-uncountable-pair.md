@@ -1,5 +1,12 @@
 # M29 — The uncountable two-pivot system (HORIZON STUB)
 
+> **DEMOTED 2026-08-09** (Kooshi's direction, the field-jump session). Not
+> deleted — demoted. Reason: the de Bruijn-Erdos compactness theorem (our axiom base includes choice) reduces it to: does the CONTINUUM pair contain a FINITE 5-chromatic subgraph? The finite hunt is subsumed by the de Grey-field programme (M30+), which hunts where finite 5-forcers provably exist. The residual question (a phase-uniform 4-colouring of the full continuum pair) is another 4-result in the 4-field.
+>
+> The live roadmap is `CLAUDE.md` § Frontier / paths forward and the
+> `plans/M30`+ stubs (the de Grey field programme).
+
+
 *Recorded 2026-08-08. Kooshi's hypothesis: χ(uncountable pair system) =
 χ(countable matched ladder pair) — "worth proving rather than dismissing on a
 whim." The path below is the current best sketch; slot flexible (could run

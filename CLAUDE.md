@@ -177,44 +177,49 @@ more than the full seven-ladder, six-fold-symmetric countable hexagram.
 
 ### Paths forward, ranked
 
-*The construction ladder M24–M28 (roadmap agreed 2026-08-08; M24, M25 and M26 landed):
-grow the certified object — pair → triangle-of-ladders → hexagram → tiled plane →
-recursion — proving χ exact at each rung; the first rung where 4 colours FAIL is
-new mathematics of the first order, and every rung where they succeed is a new
-certified infinite 4-chromatic object and a sharper clamp on where the 5th colour
-cannot live.*
+*Rewritten 2026-08-09 at the field-jump decision. The construction ladder
+(M24 pair → M25 four-ladder → M26 hexagram, all χ = 4 exactly) closed the
+seam-field arc, and the closing observation reframed the hunt: the Moser
+spindle's twist rotation is ρ = ζ₆³·σ⁻² — INSIDE the seam group — so the
+classical 4-forcers are native to ⟨ζ₆, σ⟩, while the only known 5-forcers
+(de Grey 1581, Heule 553/510, all kernel-certified in this repository) live in
+ℚ(√3, √5, √7, √11), a field the seam lattice cannot reach. **The 5-wall is a
+field wall, and the programme jumps fields**, carrying the proven method
+(script-verified design → master-identity engine → kernel-checked exactness).
+Every future milestone is maintained as a detailed pre-subplan stub in
+`plans/` (the stub rule, WORKFLOW § Plan) — read the stubs, they carry the
+full context.*
 
-1. **M27 — the tiled plane** (`plans/` stub next; the gate is OPEN: M26
-   landed with χ still 4): Kooshi's target statement — the whole plane's
-   hexagonal closure with all sporadic chords. M26 hands it the exact
-   tools it needs: the self-seeding identity iterates (every new hexagon's
-   pivots are some metapivot's inner layer at height 0, so the tiling IS
-   nested self-seeding), rot6-equivariance is the germ of the full
-   translation-plus-rotation symmetry a plane colouring wants, and the
-   four-orbit collapse says each new centre pair lands in an already-solved
-   web class or the (solved) adjacent/opposite masters at a translated
-   frame. **M28 — the recursion** behind M27.
-2. **M29 — the uncountable pair** (flexible slot): χ(`Coupled.pairSystem`
-   proper, all uncountably many circle points) — the M21 fork. The hypothesis
-   χ = 4 ⟺ the countable ladder's χ = 4 now has its countable side EXACT (M24 at the pair, M25 at the four-ladder object), so
-   the compactness/transfer question is live whenever it earns its slot.
-3. **Colour closure at the gap distance, clamp-directed** — unchanged: does a
-   4-colour equality-transmitting gadget exist at d = \|ζ₆σ⁹ − 1\| (exact,
-   chord ≈ 0.0176)? Clamp spec: outer constraints necessary in every kill,
-   cores 4–8 pins median 6, build where coupling is strong (M23's gating). A
-   negative is reportable.
-4. **Parked with reasons**: the triangle's colour census (M23's path 1 —
-   overlap-aware triple census, metapivot broadcast reach) is superseded as a
-   *measurement* by the construction ladder, which proves rather than samples
-   the same objects; revive only if M25 stalls. The certified-6-colouring angle
-   stays the designated perspective shift when the thread goes flat (agreed
-   2026-08-03). General-radius two-circle colouring waits for its consumer.
-   Fractional route (capped below 5), measurable-≥6 (single-class density
-   insufficient), axiom-sensitivity: parked as before (M19 plan §4). The
-   `opus-larp` branch re-validation stays registered-but-not-run; its gates
-   stay closed. Write-ups and upstreaming: deferred per standing policy; the
-   two-circle/cap/ladder-pair priority literature pass is a publication-gate
-   task (no named prior found in a first search, M20 §2.6).
+1. **M30 — the de Grey anatomy** (`plans/M30-degrey-anatomy.md`): the rigidity
+   instrument (colour-space enumeration + forced-equality extraction, validated
+   on the hexagram); the rotation-group extraction from our own certified
+   coordinates (registered expectation: ⟨ζ₆, σ, ρ₁₅, ρ₆₃⟩ with
+   ρ₁₅ = (7+i√15)/8, ρ₆₃ = (31+i√63)/32 — M13's radicand-15/63 spindles);
+   every edge of the 5-chromatic witnesses classified by web and family — the
+   anatomy of the 5th colour; the anatomy visualizer. Instruments only.
+2. **M31 — the minimal 5-closure** (`plans/M31-minimal-five-closure.md`): the
+   smallest de Grey-group closure with χ ≥ 5, SAT-measured over growing chunks
+   (de Bruijn–Erdős makes finite chunks an honest estimator); the closed radius
+   set; the closure-explorer visualizer. Jackpot branch registered: a closure
+   SAT refuses at k = 5 is a candidate χ(ℝ²) ≥ 6 generator and escalates
+   straight to the kernel certificate pipeline.
+3. **M32 — the first certified infinite 5-chromatic object**
+   (`plans/M32-certified-five.md`): the exactness programme one field up — the
+   engine's known break: the new seams have norm-4/norm-16 algebraic integers
+   ((1+i√15)/2 with x² = x−4; (1+i√63)/2 with x² = x−16), so clearing goes
+   2-adic where M24 was 3-adic. The certified-object visualizer with the
+   5-colouring rendered.
+4. **Parked, with reasons** (banners in each stub): the tiled plane (M27 —
+   expected another 4; its periodic-table SAT probe stays registered-but-not-run
+   and reopens the milestone only if it REFUSES), the recursion (M28 — gated
+   behind M27), the uncountable pair (M29 — compactness reduces it to the finite
+   hunt M30+ pursues in the right field; the residual phase-uniform-colouring
+   theorem is another 4-result). Also parked as before: the gap-distance gadget
+   hunt (clamp-directed), general-radius two-circle colouring, fractional route,
+   measurable-≥6, axiom sensitivity, the `opus-larp` re-validation. Write-ups
+   and upstreaming: deferred per standing policy — noting the ledger now holds
+   a completed trilogy plus the field-wall thesis, which is the strongest
+   write-up candidate so far; the trigger stays Kooshi's.
 
 ## Whose work this is
 

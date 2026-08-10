@@ -350,6 +350,13 @@ Leaf-first, one milestone at a time, green manifold at every step. Subplans in `
 
 M01–M06 constitute rung B and are the publishable unit. M07–M14 is rung C, and M15 onward is rung D.
 
+**From M21 onward the live roadmap moved to `CLAUDE.md` § Frontier (paths forward), with every
+future milestone maintained as a detailed pre-subplan stub in `plans/` — the stub rule in
+`WORKFLOW.md` § Plan.** The construction-ladder trilogy (M24 pair, M25 four-ladder, M26 hexagram,
+all χ = 4 exactly on the standard three axioms) closed the seam-field arc; M27–M29 were demoted
+2026-08-09 (banners in their stubs say why), and the programme jumped fields: M30–M32 carry the
+same exactness method into the rotation group where de Grey's 5-chromatic graph lives.
+
 **M14 was inserted 2026-08-01**, after M13 landed, and the hunt moved to M15. The reason is a *measurement*, not a
 preference: M13's search examined 33 universes up to 679 points, found **no forced pair and left no pivot
 unsettled**, and the branching factor is **378 spindle moves from a 43-point configuration** — so depth 3 is 54

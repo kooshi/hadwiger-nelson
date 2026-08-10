@@ -5,7 +5,15 @@ leaves.
 
 1. **Architect** — the major modules and the overall shape → `ARCHITECTURE.md`.
 2. **Plan** — master roadmap: milestones, the module/lemma DAG, leaf-first order → `ARCHITECTURE.md`
-   § Roadmap.
+   § Roadmap (from M21 onward: `CLAUDE.md` § Frontier / paths forward). **The stub rule (set
+   2026-08-09, Kooshi):** every future milestone on the roadmap is maintained as a *detailed*
+   pre-subplan stub in `plans/` — full mission context in plain language, everything the deciding
+   session knew (the observations, the registered expectations, the failure clauses, the named
+   deliverables including visualizers where the milestone produces an explorable object) — written
+   so a fresh session with zero conversation memory can subplan it with all meaning intact.
+   Sessions die and compaction loses nuance; the stubs are the roadmap's memory. A direction
+   change that does not rewrite the affected stubs is not recorded; a demoted milestone keeps its
+   stub with a banner saying why (deprecate, never delete).
 3. **Subplan** — one milestone at a time, working up the DAG. Deep-dive its requirements and
    *strictly specify its shape*: write the **skeleton** — every signature and full theorem statement,
    `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent.

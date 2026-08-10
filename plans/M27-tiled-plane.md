@@ -1,5 +1,12 @@
 # M27 — The plane tiled with the hexagonal construction (HORIZON STUB)
 
+> **DEMOTED 2026-08-09** (Kooshi's direction, the field-jump session). Not
+> deleted — demoted. Reason: the seam field is finished country: three rungs (M24-M26) landed chi = 4 with no shift, the colour tables show slack everywhere, and the expected outcome here is another 4. The periodic-table SAT probe stays REGISTERED BUT NOT RUN; if anyone ever runs it and SAT refuses a periodic 4-table at all small periods, this milestone reopens hot.
+>
+> The live roadmap is `CLAUDE.md` § Frontier / paths forward and the
+> `plans/M30`+ stubs (the de Grey field programme).
+
+
 *Recorded 2026-08-08 (Kooshi, verbatim intent: "colorability of the infinite
 plane tiled with this hexagonal construction, including all sporadic chords
 between all possible points"). Gated on M24–M26 landing with χ still 4.*
