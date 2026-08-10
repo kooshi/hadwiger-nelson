@@ -143,6 +143,21 @@ Caution: the inventory is a property of these two witnesses, not of all
 point that is NOT a global rotation centre of its two-spindle construction —
 single-centred objects like Heule's are the clean currency.
 
+**The ownership factorization (Kooshi's third observation, 2026-08-09,
+verified exact).** Splitting the 1581 by copy tag — base/spindle15 points
+owned by the origin-copy centre (committed vertex 791), spindle63/both
+points by its ρ₆₃-image (vertex 0), exactly one shared point (the spindle
+pivot (−2,0)) — the 819-circle single-centre mess factors COMPLETELY:
+**each half has exactly 29 distinct radii about its own centre, all in
+ℚ(√33), and the two spectra are identical ring-for-ring** (the halves are
+congruent under ρ₆₃). And the radial vocabulary is SHARED ACROSS WITNESSES:
+25 of de Grey's 29 rings are rings of Heule 510's inventory (22 of 553's);
+730/791 of a half's points sit on 510-ring radii. **Every known 5-chromatic
+witness stands on one ~30–44-value seam-field shell inventory** — measured
+three ways, consistently. The closed radius set for closure design is this
+inventory. (Instrument note: an ownership overlay — colour by owning
+centre — belongs in the visualizer with the defect map.)
+
 **Candidate #0, added on these findings — the mitotic hexagram**: the certified
 hexagram (or its Heule variant with seam-conjugate ring pivots) UNION one
 detuned copy (a half-spindle rotation sharing the centre or a pivot). The
