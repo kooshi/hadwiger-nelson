@@ -46,7 +46,9 @@ subplans.
 
 *The current state of the art, the ledger of everything novel this project has produced, and
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
-step 9); a milestone whose close does not update this section is not closed.*
+step 9); a milestone whose close does not update this section is not closed. The
+UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
+sibling section § Grokkings below, under the same maintenance rule.*
 
 **Last updated: M30, 2026-08-09.**
 
@@ -260,6 +262,105 @@ its stub.)*
    and upstreaming: deferred per standing policy — noting the ledger now holds
    a completed trilogy plus the field-wall thesis, which is the strongest
    write-up candidate so far; the trigger stays Kooshi's.
+
+## Grokkings — the working theory of the 5th colour
+
+*The Frontier records what is proven and what to try next; this section records
+what we UNDERSTAND — the mechanistic picture the results add up to, which is
+what we actually build on. Born 2026-08-09 (Kooshi's naming), the night the M30
+anatomy and three of his visualizer observations assembled into one picture.
+Discipline: every entry carries an epistemic status — **[kernel]** (the kernel
+checked it), **[measured]** (tools-side, exact arithmetic or a controlled
+instrument, with its address), **[reading]** (an interpretation — believed,
+falsifiable, its killing test named). A reading is never silently promoted; a
+grokking that dies is demoted with its refutation recorded, never deleted.
+Updated whenever understanding moves — the same closing rule as the Frontier.
+"All known 5-forcers" below means the three witnesses certified in this
+repository (de Grey 1581, Heule 553/510); Parts' 509 (2020, the smallest
+published) is unimported and untested — a cheap check whenever its coordinates
+are brought in.*
+
+**The theory in one paragraph.** A 5-forcer, as far as anyone has built one, is
+seam-field geometry pushed over a wall by angular detuning: a small vocabulary
+of seam shells (~30–44 exact radii, every one in ℚ(√33)) about one or two
+rotation centres, angularly organized by words in the half-spindle group
+⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩, with the 5th colour forced by copies detuned 0.6°–3.6°
+off exact crystal symmetry — near enough to interlock, far enough to clash.
+Its colour rigidity is invisible at the pair level and lives in compelled
+patterns of triple order and above. None of this is visible in the brute-force
+artifacts; it took exact anatomy plus a human eye on the rendered picture.
+
+* **G1 — The field wall.** The Moser twist is a seam-group word — ρ·σ² = −1,
+  ρ = ζ₆³σ⁻² **[kernel: `FieldWall.lean`]** — and the seam group's countable
+  closures are exactly 4-chromatic **[kernel: M24–M26]**; the 5-forcers need
+  √5 and √7. The 4/5 boundary is a field boundary. *Reading on top: 4 is what
+  ⟨ζ₆,σ⟩ can force, and it forces it everywhere; 5 begins one field up.*
+* **G2 — The construction grammar of the picture.** Rings about a point ⟺ that
+  point was a rotation centre of the construction (orbits about a centre lie on
+  circles about it — invariance, not coincidence). De Grey's two ring-hearts
+  are his two spindle centres (the two 24-word fused vertices); Heule's is his
+  one. **[measured]** Corollary grammar: mirror-defects = chirality of a
+  rotated copy; "mitosis" = a system and its detuned twin.
+* **G3 — Radially seam, angularly detuned.** Every exact radius of Heule
+  510/553 about the centre, and of each de Grey half about its own centre,
+  lies in ℚ(√33) — zero √5/√7 content in ANY ring, all three witnesses
+  **[measured: M31 stub, commits `dc97389`, `e721fb2`]**. Rotations preserve
+  radii, so fabric ⊗ rotated-copies puts all new-field content in the angles.
+  *Falsifier: a 5-forcer with a non-seam shell (test Parts 509 on import).*
+* **G4 — One shell vocabulary.** 25 of de Grey's 29 per-centre rings are
+  Heule-510 rings; 12 rings are exactly the certified hexagram's; the named
+  members are old friends — 1/3, 1, 4/3 (the forced-pair radius), 5/3 =
+  |1 + σ/√3|² (the glue radius, whose conjugate lands ON the unit ring: the
+  M21/M22 seam interlock, visible in published coordinates), 3, 4, and ±√33
+  conjugate pairs. Every known 5-forcer stands on one ~30–44-value seam shell
+  inventory. **[measured]**
+* **G5 — The ownership factorization.** De Grey's 819-circle one-centre mess
+  factors completely: two congruent 29-ring single-centre systems sharing
+  exactly one point (the second spindle's pivot), spectra identical
+  ring-for-ring; copy tags, mirror defect, and ring ownership are three views
+  of one decomposition. **[measured]** *Reading: de Grey = two Heule-style
+  systems glued by one twist.*
+* **G6 — The hexagram is the 5-forcers' central organ.** Heule 510's centre
+  carries exactly six two-circle pivot systems at exactly 1/√3 in a hexagon —
+  M26's certified skeleton — plus seam-conjugate ring pivots at (1/√3)·σ̄
+  exactly; 553 carries the unit-pivot triangle (M23's configuration) plus the
+  ring. **[measured]** *Containment is NOT causation (the 1581 is
+  near-edge-critical, so deletion cannot localize); the causal test is the
+  mitotic-hexagram closure's SAT χ — M31's opening move.*
+* **G7 — Detuning is the mechanism ("mitosis").** Every forcing rotation ever
+  used is a small detune off an exact crystal angle: ρ₁₅ 1.045° off 30°, ρ₆₃
+  0.638° off 15°, Moser 3.557° off 30°, σ 1.779° off 75° **[measured, exact]**.
+  *Reading: exact symmetry adds no colour constraint (the copy reuses the
+  base's pattern); the detune forces the clash while preserving interlock — a
+  spindle is a forcer mid-division. Falsifier: a 5-forcer whose overlay is
+  exactly symmetric, or detunes far outside the band; the "forcing band"
+  question is registered at M31.*
+* **G8 — The true group is the half-spindle group** ⟨ζ₁₂, σ, √ρ₁₅ = (√15+i)/4,
+  √ρ₆₃ = (3√7+i)/8⟩: it closes all 67 of the 1581's directions at exponent
+  ≤ 6; the whole-word subgroup covers 58% and every miss squares in;
+  σ-exponents stay in {0,±1,±2} **[measured]**. Heule's witnesses carry a
+  6-class, ~10-edge residue outside even this group — SAT-shrinking scars; the
+  1581 is the only pure-group witness. **[measured]**
+* **G9 — Rigidity lives only at the forcing level.** The 791 forcer at 4
+  colours: exactly six forced pairs — the axis pair at distance 4 and five
+  ANTIPODAL pairs at 4/√3, i.e. forced central symmetry on that circle, and a
+  compulsion the classical spindle cannot exploit (closing it needs √183,
+  outside the field). The hexagram chunk at 4 and the 1581 at 5: pairwise
+  FLOPPY — zero forced pairs, zero virtual edges, settled exactly.
+  **[measured: `build/m30-rigidity-*.json`]** *Deduction: a geometric χ ≥ 5
+  argument must live at triple order or higher — de Grey's own informal
+  argument is triple-shaped, and M20's `no_mono_outer_triple` is the formal
+  genre. Falsifier: a triple-level scan of the fabric finding nothing
+  compelled either.*
+* **G10 — The forcing is distributed, not organ-like.** Single random edge
+  deletions make the 1581 4-colourable (two edges PROVEN critical end-to-end:
+  Python-verified colourings after deletion + the kernel-certified refusal of
+  the whole); no small family carries the forcing (E3 refuted in every
+  currency tried). **[measured; "at or near edge-critical" is sampled — the
+  exhaustive 7,877-edge sweep is ~a day of CPU, unrun]** *Consequence:
+  "minimal" must mean least GEOMETRY (fewest shells × smallest angular word
+  set whose compulsion cascade closes), not fewest vertices — fewest-vertices
+  is a SAT-shrinking artifact wearing scars.*
 
 ## Whose work this is
 
