@@ -114,6 +114,35 @@ each verified exactly before recording):**
   pivot-pair/triangle configurations) plus the 1/√3 ring. The seam-field
   certified objects are the skeleton of the smallest known 5-forcers.
 
+**The ring inventory (Kooshi's second observation, 2026-08-09, verified exact):**
+grouping every Heule vertex by its EXACT squared distance from the centre:
+510 has just **44 distinct radii** (509 points), 553 has **36** (552 points) —
+and **every single one lies in ℚ(√33)**: rational + rational·√33, not one
+carrying √5, √7, or √15. The radial structure of the smallest known
+5-chromatic graphs is 100% seam-field; the new field's content is purely
+ANGULAR. (The invariance argument says why: rotations about the centre
+preserve radii, so a graph assembled as half-spindle words applied to
+seam-field material keeps seam radii — the measured spectra confirm the
+fabric ⊗ detune decomposition at the strongest level.) Identified rings:
+r² = 1, 1/3 (pivot ring), 4/3 (the forced-pair radius), 3, 4, **5/3 =
+|1 + σ/√3|²** (a unit-distance pivot's inner circle seen from the centre —
+and its conjugate |1 − σ/√3|² = 1 lands exactly ON the unit ring: M21/M22's
+seam interlock, visible in Heule's published data); the ±√33 conjugate-pair
+rings include 12 rings exactly matching the certified hexagram chunk's
+spectrum (187/509 and 212/552 points), saturating at height B = 2 — the
+remaining conjugate pairs (3/2 ± √33/6, 7/6 ± √33/6, 2 ± √33/3, …) are
+other-anchor pivot-web rings, not deeper heights. No near-degenerate ring
+pairs exist (Δr < 0.002: zero) — the visual "noise" past the fourth ring is
+thin, closely spaced rings, not ring-splitting. 553 is measurably tidier
+than 510 (36 rings vs 44, top ring 49 points vs 36). **Consequence for this
+milestone**: the closed-radius-set derivation — this stub's biggest warned
+unknown — now has an empirical target: build candidate closures on the
+measured ℚ(√33) ring inventory with angular words in the half-spindle group.
+Caution: the inventory is a property of these two witnesses, not of all
+5-forcers; and the 1581's 819-circle mess (E3) came from measuring about a
+point that is NOT a global rotation centre of its two-spindle construction —
+single-centred objects like Heule's are the clean currency.
+
 **Candidate #0, added on these findings — the mitotic hexagram**: the certified
 hexagram (or its Heule variant with seam-conjugate ring pivots) UNION one
 detuned copy (a half-spindle rotation sharing the centre or a pivot). The
