@@ -385,11 +385,28 @@ controls seen red/green on cue before any verdict was believed.
 * **The fusion record.** Words per vertex: {1: 1344, 2: 234, 4: 1, 24: 2} —
   the two 24-fold vertices are the spindle pivots' full hex₁₂ × copy stabilizer
   orbits; 234 double points are the copy-overlap fusions.
-* **E4 / R6 — the calibration.** B=0 chunk (66 vertices, 126 edges) is
-  3-colourable; B=1 (234 vertices, 750 edges, rot6 verified as an edge-set
-  automorphism) refuses 3 colours, so with the kernel's 4-colouring above it,
-  the chunk is exactly 4-chromatic → E4 attaches to B=1. Census verdict:
-  recorded when the run lands.
+* **E4 / R6 — REFUTED, both halves, at face value.** B=0 chunk (66 vertices,
+  126 edges) is 3-colourable; B=1 (234 vertices, 750 edges, rot6 verified as
+  an edge-set automorphism) refuses 3 colours, so with the kernel's
+  4-colouring above it the chunk is exactly 4-chromatic → E4 attaches to B=1.
+  The census hit the cap: **> 10,000 colourings up to rot6 × palette**
+  (registered: order tens) — reported as "> cap" per R6's clause, never
+  trimmed. And the forced-pair sweep settled COMPLETELY at zero: **no pair of
+  the chunk is forced-equal or forced-distinct at 4 colours** (0 unsettled) —
+  the fused triples included. Caveat recorded: a truncation can only lose
+  constraints (forcing chords may pass beyond the cut), so this bounds the
+  infinite hexagram's rigidity from below only; but at the chunk level the
+  certified 4-colouring is one of a vast floppy space. Cost: 2,117 s, 10,002
+  SAT calls (the enumeration dominated), desktop. The instrument's
+  calibration stands on the CONTROLS (rhombus / deleted-edge / vacuity / M13
+  forced pair), not on E4 — which is exactly why E4 could fail honestly.
+* **The tool-path monolithic refutation of the full 1581 was stopped, not
+  awaited** — redundant: the full graph's refusal of 4 colours is already a
+  kernel theorem, and the criticality argument used Python-verified
+  colourings of the deleted-edge graphs instead of trusting any solver
+  UNSAT. (For the record: the monolithic instance ran > 80 minutes without
+  finishing on the desktop under concurrent load — M06's cube-and-conquer
+  split exists for a reason.)
 * **The rigidity instrument** validated on: rhombus (exactly the far pair, 1
   colouring up to palette), rhombus-minus-edge (forcing vanishes), Moser at 3
   (VACUOUS banner), P3/C4/C5 arithmetic, and the 791-forcer M13 control (in
