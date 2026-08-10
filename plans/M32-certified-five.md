@@ -532,6 +532,64 @@ theorem quadrature_rho15 (u v : K-complex, coordinates as ℚ-4-vectors) :
 {forced_pairs, triples [...], coverage [{target, min_cover, rows [...]}]}`,
 `controls` — controls travel IN the artifact.
 
+## §0d — Domain pass (2026-08-10, decisions before implementation)
+
+* **Detunes form a group; the pair class is the spec quotient.** A stack is a
+  LIST of copies, copy = (anchor, detune spec); the base is copy 0 with the
+  identity spec (M31's `make_detune()` already produces it). The copy-pair
+  class is a total function computed by quotienting specs —
+  `make_detune(s̄ᵢ·sⱼ, aⱼ−aᵢ, bⱼ−bᵢ)` — exactly as M31 made the quadrature
+  class total in (a, b) parities. Three intrinsic classes: `same_anchor`
+  (→ M31's single-word law at the relative spec; base↔copy is this case),
+  `translation` (identical R, different anchors — the §0a difference-pin
+  law; the relative isometry is a translation), `general` (different words
+  or different decorations at different anchors — the composed rotation
+  centre picks up new-field or divided coordinates, so no K-offset law
+  applies). `mitosis` stays as the 2-copy wrapper.
+* **The general class is recorded-only, and saying so is the rigor.** For a
+  chord already confirmed exactly unit, "each 16-basis block of the exact
+  equation vanishes" is TRIVIALLY true (independence of the basis) — a
+  per-block recheck would be fake rigor. The structured, falsifiable claims
+  live exactly in the two lawful classes (specific geometric quantities
+  vanish: Im(s·u·v̄) = 0, resp. the difference pin); the general class
+  records its relative spec and block decomposition as M33 design data,
+  checked only for exact unitness. Census paths: `law-checked` /
+  `difference-checked` / `recorded`.
+* **Certificates compute on PREIMAGE offsets** (u = x_src − aᵢ, always in K
+  by construction — the premise guard never fires on stack-internal pairs),
+  and a fused point contributes one reading per provenance pair: the census
+  iterates (tag, src)-pairs, not point pairs. Anchor-incident readings stay
+  a separate class (the M31 lesson, carried).
+* **The meter's vacuity guard is structural and free**: the min-cover
+  ladder's top row j = k IS the unrestricted colourability check — no fan or
+  compulsion claim is emitted unless that row reads `sat`. min-cover is
+  monotone in j, and unknown rows widen it to an honest interval [lo, hi].
+  Palette-WLOG soundness lives in ownership: the meter builds its clause set
+  itself from (n, edges, k) — no API accepts foreign (possibly
+  symmetry-broken) clauses.
+* **Lean representation: explicit ℚ-coefficients, the M24 interface.** The
+  consumers of the kill lemma hold cleared explicit coefficients, never
+  membership proofs — so no Subfield/IntermediateField machinery. Three
+  statements in `Proofs/HadwigerNelson/Quadrature.lean`: `sqrt_indep₈`
+  (8 explicit ℚ-coefficients — the primitive; proof = regroup as
+  (A) + √5·(B) over the 4-basis + a bridging lemma √5 ∉ ℚ(√3,√11) + M24's
+  `sqrt_indep` twice), `sqrt15_block` (the (A) + √15·(B) = 0 regrouping with
+  2×4 coefficients — the workhorse M33 cites), `quadrature_rho15` (the
+  geometric instance over 16-coordinate points — the Frontier-citable spec
+  witness, proven from the block lemma; non-vacuity example u = v = 2, the
+  (2,2) spindle chord: 4 + 4 − 7 = 1). **Documentation-first gate: Loogle/
+  LeanSearch for a Mathlib linear-independence-of-√squarefree lemma BEFORE
+  hand-rolling sqrt_indep₈** — three claims of absence have been wrong here.
+* **PairWeb.lean never edits Ladder.lean** (the rebuild cascade reaches
+  MetaLadder and Hexagram): it imports Ladder for `sqrt_indep` and any
+  genuinely general trace machinery, and states its own masters at axis
+  constant 2. The address space (x : ZMod 6, b : ℤ) and the ℤ[ζ₆,π]
+  clearing carry unchanged; only master constants and tables change, and
+  `build/m32-design.py` re-derives every table before Lean states it.
+* **Probe targets are exact-membership sets, no new address machinery**: a
+  target circle is {i : nsq(pts[i] − c) = 1} computed exactly; a 120°-triple
+  is an exact rot3-orbit membership test about its pivot.
+
 ## Failure clauses (registered)
 
 * **Probes flat + ascent lands**: M32 closes as "the stacking law + the
