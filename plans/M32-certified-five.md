@@ -702,6 +702,45 @@ theorem quadrature_rho15 (u v : K-complex, coordinates as ℚ-4-vectors) :
 * **The closing report** follows the house format with every P/Q verdict at
   face value and the checkpoint decision in four parts.
 
+## §0g — Checkpoint verdict on the registered grid + ONE registered addendum
+## (2026-08-10, written after probes A/B/C and the Q5a sweep, committed BEFORE the addendum runs)
+
+**The registered grid's verdict: FLAT, with the law fully confirmed.** Scores at
+face value: Q1 ✓ (all instrument controls red/green); Q2 ✓ at the registered
+scale (pivot circles min-cover EXACTLY 3 at B = 2 — the B = 1 reading of 2 was
+truncation slack, so ambient coverage pressure measurably builds with depth;
+the METAPIVOT's circle stays at 2 — pressure lives at pivot circles, not the
+meta circle; 0 compelled triples in 140 queries); Q3 ✓ (chirality copy↔copy
+= 0 at both anchors; full+half relative = 12; the twisted variant's 312–384
+chords are the pure-seam relative word, §0a case 1's known families); Q4 ✓
+structurally (the translation matching EXISTS: 132 chords at unit anchors, ALL
+matching, for the full and half words alike; the 1/√3 √59-sterile control = 0
+as derived; conjugate-opp = 0 honest within its band; the 7/4 second-root
+family absent at B = 2); Q5 flat — (a) ZERO forced pairs and ZERO virtual
+edges on the wide-unit stack, settled completely (46 calls, 9.7 s); (b) no
+compelled triples anywhere; (c) no coverage movement (every stack dial equals
+its base rate). All stacks χ = 4. **The mechanism reading: the wide channel is
+wide but 1-regular — a perfect matching is degree-1 cross structure and
+carries no colour pressure. Width without degree does not force.**
+
+**The addendum (registered here, run after this commit): the TRIANGLE STACK.**
+Three ρ₁₅ copies at the three pairwise-unit anchors 0, 1, ζ₆ (hexPivots 3, 5,
+1 — the M23 triangle). The three pairwise translation matchings COMPOSE: for
+every offset u present in all three preimages, the three copy points are an
+exact unit triangle (a translate of the anchor triangle), pairwise unit chords
+— a web of forced-RAINBOW triangles spanning the copies, the first degree-2
+cross structure of the hunt. One variant, plus its √ρ₁₅ twin. Predictions:
+(g1) each pairwise channel carries the ~132 matching; the spanning-triangle
+count ≈ the triple offset overlap, order 100 (confidence 80%); (g2) χ = 4
+still (70% — falsifier = jackpot, escalation protocol as registered); (g3)
+the meters: 45% that SOME meter moves (higher than the pair stacks' 40%:
+rainbow compulsion is by construction, but the fabric natively absorbs unit
+triangles); full pairwise sweep + coverage + triples, same caps. **If the
+addendum is also flat, the probe phase closes with the strengthened negative:
+even the first designed triple-order cross-web carries no compulsion at this
+scale — the irreducibly-global finding extends to designed objects, and the
+checkpoint's flat branch fires exactly as written.**
+
 ## Failure clauses (registered)
 
 * **Probes flat + ascent lands**: M32 closes as "the stacking law + the
