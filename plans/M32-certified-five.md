@@ -753,3 +753,111 @@ checkpoint's flat branch fires exactly as written.**
 * **Jackpot**: the escalation protocol above; nothing is claimed without the
   independent re-encode and the cube-split certificate.
 * **Any segfault, any process**: HALT and report to Kooshi (standing rule).
+
+---
+
+# §R — Results (2026-08-10, written as they landed; verdicts at face value)
+
+## The probe phase (Q1–Q5, §0g) — CLOSED at the FLAT branch
+
+* **Q1 ✓** — every meter control red/green on cue (C5-fanned / C4-not /
+  K4-vacuous / P3-arithmetic / C4-compelled-triple / rejection paths; eleven
+  closure.py controls including the planted matching found and the planted
+  difference-pin violation caught naming §0a).
+* **Q2 ✓ at the registered scale, with a depth finding** — pivot-circle
+  min-cover reads **2 at B = 1 but exactly 3 at B = 2**: ambient coverage
+  pressure measurably BUILDS with truncation depth. The metapivot's unit
+  circle stays at 2 at both depths — coverage pressure lives at pivot
+  circles, not the meta circle. 0 compelled triples in 140 base queries.
+* **Q3 ✓** — same-anchor stacks thin everywhere: the chirality pair's
+  copy↔copy channel is EXACTLY ZERO at both anchors (the 289/256-ring
+  emptiness); full+half relative reads 12 (the measured order); the
+  ζ₁₂-twisted variant's 312–384 chords are the pure-seam relative word —
+  §0a case 1's known families, correctly unpinned. All χ = 4.
+* **Q4 ✓ structurally, every §0a point prediction confirmed** — the
+  translation matching EXISTS: **132 copy↔copy chords at unit anchor
+  separation, all 132 exact matching**, for the full and half words alike
+  (w = 0 is word-independent, as derived); the **1/√3 anchor pair couples
+  copy↔copy NOWHERE** (the √59 emptiness, census-confirmed); conjugate-opp
+  reads honest 0 in its band; the 7/4 second-root family absent at B = 2.
+* **Q5 FLAT** — zero forced pairs and zero virtual edges on the wide-unit
+  stack (settled completely: 46 calls, 9.7 s); zero compelled triples on any
+  stack; zero coverage movement (every dial equals its base rate).
+* **§0g addendum (the triangle stack)** — g1 ✓ structurally: three pairwise
+  132-matchings composing into **26 forced-rainbow unit triangles spanning
+  the three copies** (below the order-100 estimate, at face value); g2 ✓
+  χ = 4 both words; **g3 FLAT** — complete sweeps at zero forced/virtual
+  (100 and 94 calls), no coverage movement, no compelled triples. The
+  registered 45% movement bet loses.
+* **The mechanism, named**: the wide channel is wide but **1-regular — a
+  perfect matching is degree-1 cross structure and carries no colour
+  pressure; width without degree does not force.** Even the first designed
+  triple-order cross-web (the 26 spanning rainbow triangles) is absorbed by
+  the fabric's floppiness. The irreducibly-global finding now extends to
+  DESIGNED one-family objects at ~1,500 vertices — the fourth independent
+  measurement of G10. **Checkpoint verdict: FLAT; M33 = Route A.**
+
+## The Lean ascent (Q6) — LANDED beyond its registration
+
+`Proofs/HadwigerNelson/Quadrature.lean`, zero sorry, elaborates clean:
+
+* **`sqrt5_indep`** — the primitive, by the §0e mod-5 descent: ONE
+  kernel-checked `decide` over (ZMod 5)⁴ (625 tuples) + strong induction on
+  the ℓ¹-norm + a 12-line denominator-clearing helper. Division-free as
+  designed; the registered fallback (norm-inversion casework) was never
+  needed.
+* **`sqrt15_split`**, **`sqrt_indep₈`** — the workhorse and the flat
+  completeness, both short corollaries via rational recombination.
+* **`quadrature_rho15`** — M31's law G12, ρ₁₅ instance, kernel-checked: a
+  unit chord against a ρ₁₅-detune forces `Im(u·v̄) = 0` AND the conic
+  `|u|²+|v|²−(7/4)Re(u·v̄) = 1`, over explicit 16-coordinate points. Every
+  `linear_combination` witness was sympy-derived and verified to zero
+  residual BEFORE statement (the M26 discipline applied to proof terms) —
+  and every one landed first try.
+* **`pair_tangency`** — the distance-2 pair's anchor: the unit circles about
+  0 and 2 meet exactly at the midpoint.
+* Mutation audits in-file: the (2,2) example closes; the wrong constant 7/8
+  refuses; the planted square 4 shown discriminated script-side.
+
+## The pair web (Q6's third item) — MEASURED handoff; completeness scoped to M33
+
+`build/m32-pairweb.json`: the deep window (|b|,|c| ≤ 5) holds exactly **14
+address-level chords — no growth beyond |b| ≤ 2** — which reconcile exactly
+with M31's census: **6 genuine cross chords** (2 oo hex + 2 oi + 2 io, ii
+EMPTY) plus **8 chords through the single tangency fusion** (shared-vertex
+readings, the M31 census's anchor-incident lesson operating one level up).
+The whole distance-2 coupling web is anchored on one point. Master constant
+5 ≡ 2 (mod 3) — the SAME residue class as M24's axis-1 constant, so the
+3-adic kill landscape carries. The height-unbounded Lean completeness is
+M33's first engine target (the registered scope clause fired as written: the
+engine core landed; the warm-up's full classification moves one milestone
+with all its measured inputs).
+
+## Deliverables shipped
+
+* `tools/rigidity.py` — the coverage and triple meters (palette-WLOG single
+  calls, the free vacuity guard, CLI banners per the experience pass).
+* `tools/closure.py` — stacks, spec-quotient pair routing, the
+  difference-pin law checker, the probe drivers; eleven self-test controls.
+* `build/m32-base-B2.json`, `-same-B2.json`, `-wide-B2.json`,
+  `-tristack.json`, `-sweep-wide-unit.json`, `-pairweb.json` — the §0f
+  contract with the checkpoint in-artifact.
+* `Proofs/HadwigerNelson/Quadrature.lean` (zero sorry) + Proofs.lean +
+  scripts/Axioms.lean wiring.
+* The closure explorer's **stacks tab** (five representative stacks,
+  class-coloured channels, the matching capped honestly, base→stack meter
+  dials, the FLAT banner), republished to the standing URL.
+* `build/m32-design.py` — part 1 (descent core, ten checks) + part 2 (the
+  pair-web window, exact arithmetic).
+
+## What was NOT done, honestly
+
+* The pair web's height-unbounded Lean completeness — scoped to M33 by the
+  registered clause, with the measured window, masters, and residue notes as
+  the handoff (not a stall: a scope boundary, decided when the engine core
+  landed and the probe phase consumed the design budget).
+* The ρ₆₃/√ρ₆₃ (√7) family — untouched by the one-generator trade; its Lean
+  kill is a numeral change (mod-7, 2401 tuples) when M33 needs it.
+* No new Grokking-level claim about WHY degree-2 cross structure fails to
+  compel (the 26 rainbow triangles are absorbed — the fabric's native
+  triangle supply is a plausible reading, unregistered and unmeasured).

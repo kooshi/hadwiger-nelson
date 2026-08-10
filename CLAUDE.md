@@ -54,7 +54,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M31, 2026-08-10.**
+**Last updated: M32, 2026-08-10.**
 
 ### Where the problem stands
 
@@ -204,6 +204,38 @@ a finding, the third independent measurement of G10). And the rigidity
 postscript: Heule-510 minus its centre is 4-colourable with ZERO forced
 pairs and ZERO virtual edges, settled completely in 6 seconds — one vertex
 below criticality there is NO pairwise rigidity shadow at all.
+M32 ran the designed-forcer probe and took the kill engine to the kernel.
+The **stacking law** was derived a priori and confirmed at every census
+point: same-anchor stacks never escape the single-word law's thinness;
+same-word stacks at DIFFERENT anchors open a translation channel that is
+O(n)-wide exactly at unit anchor separation (the arithmetic reason de
+Grey's construction has two centres) — and our triangle pivots provide
+unit anchor pairs natively; the pivot↔metapivot separation 1/√3 is
+provably sterile (the admissible-length discriminant picks up √59). The
+census hit every prediction: 132-chord exact translation matchings at unit
+anchors, zero at 1/√3, chirality-pair channel exactly empty. And then the
+FLAT verdict, all the way down: the matching is 1-regular — **width
+without degree carries no colour pressure** — and even the triangle stack
+(three copies at the three unit-separated pivots, whose three matchings
+compose into 26 forced-rainbow unit triangles spanning the copies — the
+hunt's first designed triple-order cross structure) reads zero forced
+pairs, zero virtual edges, zero coverage movement, zero compelled
+triples, χ = 4 everywhere. The irreducibly-global finding now extends to
+designed one-family objects (fourth independent measurement); the design
+thread closed honestly and M33 is Route A. The Lean ascent landed beyond
+its registration: `Quadrature.lean` (zero sorry) holds the 2-adic
+engine's first theorems — `sqrt5_indep` by a division-free mod-5 descent
+(one 625-tuple ZMod-5 kernel decide + strong induction on the ℓ¹-norm),
+the `sqrt15_split` workhorse, `sqrt_indep₈`, the geometric
+`quadrature_rho15` (M31's law G12, ρ₁₅ instance: a unit chord against a
+detuned copy forces the collinear pin AND the conic), and the distance-2
+pair's tangency anchor — with every linear_combination witness
+sympy-derived and verified to zero residual before Lean stated it, all
+landing first try. The distance-2 pair web is measured complete in a deep
+window (14 address chords, no height growth, = M31's 6 genuine + 8
+through the single fusion), its completeness the first M33 engine target.
+The coverage/triple meters and the stack machinery joined the standing
+instrument suite; the closure explorer gained the stacks tab.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -236,6 +268,8 @@ below criticality there is NO pairwise rigidity shadow at all.
 | 23 | **The four-ladder object is exactly 4-chromatic, unconditionally** — the pivot triangle's three ladders plus the metapivot's own (anchored along ζ₁₂), closed under ALL unit chords. The engine: `√3·ζ₁₂ = 1+ζ₆` (`sqrt3_mul_zeta12`) eliminates the twelfth root, so M24's ℤ[ζ₆,π] machinery carries verbatim through `hexTrace` (trace pairs with arbitrary ℤ[ζ₆] coefficients). All twelve pivot–meta families are theorems (`meta_oo/oi/io/ii_complete`, j-quantified over the three webs by the 120° rotation transport); the **fusion inventory is certified by the same engine at norm-0 constants** (`meta_fusion_*`: oi = the two shared pivots, oo/io/ii EMPTY); the kills beyond M24: `alone_dvd` and `phi_dvd` (the generic 3-adic pair) and the mod-9 `adjacent_kill` — two g-traces at heights h, h+1 never sum to 9·(anything), the piCoeff recurrence confining the two deep residues to {1,4,7} — which closes the height-unbounded branches a census can only sample. Colouring: the 48-entry b-independent `metaColTab`, decode well-defined by the fusion inventory, properness per family; χ ≥ 4 transports M24's witness. Census promoted: `tools/couple.py --meta-census` (planted-disagreement self-test). | `MetaLadder.lean` (`chromaticNumber_fourLadder`, `meta_*_complete`, `meta_fusion_*`, `adjacent_kill`) | M25 |
 | 25 | **The field-wall identity, kernel-checked**: the Moser spindle's twist rotation ρ (cos 5/6, sin √11/6) satisfies ρ·σ² = −1, i.e. ρ = ζ₆³·σ⁻² — the twist that forces the 4th colour is a word in the seam group, while the 5-forcers need √5 and √7. The thesis that moved the programme off the seam field, as a theorem. | `FieldWall.lean` (`moserTwist_mul_seam_sq`, `moserTwist_eq_zeta6_cube_mul_seam_inv_sq`) | M30 |
 | 27 | **The quadrature law + the closure measurements** (tools-side; the law derived a priori in the registered subplan, then verified at 26 exact censuses, zero violations): a detuned copy R·X of seam material couples to X only along anchor-collinear pairs (R = s·W, W an even half-spindle word) or anchor-perpendicular pairs (W odd) on the conic t²+r²∓2·{Re,Im}(W)(±tr) = 1; mixed-family detunes couple NOWHERE. Measured instances: the (2,2) spindle diagonal (the hexagram holds hex-ray material at exact distance 2 from its pivots), the (2/3,2/3) perpendicular diagonal, the **conjugate-ring channel** (17∓√33)/6 ↔ (17±√33)/6 at t·r = 8/3. Verdicts: mitotic hexagram χ = 4 everywhere (G6's single-detune causal bet dead); de Grey pair = 6 seam chords + the predicted centre spindle chord, χ = 4; 1581 gen-1 closure (24,065 pts, 123,134 chords, 11,016 rings) k = 5 SAT in 1.14 s; the k = 4 frontier with full gen-1 enrichment 4-colours everything below the witness scale — **the 5-mechanism is irreducibly global at this order** (third independent measurement); Heule-510 minus its centre: zero forced pairs, zero virtual edges, settled — no rigidity shadow one vertex below criticality. Instruments: `tools/closure.py` (the law enforced at find time, planted-failure self-tests), the closure explorer `tools/closure-viz.html` + refresh. | `build/m31-*.json`, `plans/M31-minimal-five-closure.md` §R | M31 |
+| 28 | **The 2-adic kill engine, kernel-checked** — the first Lean theorems one field up: `sqrt5_indep` (a vanishing A + √5·B over the {1,√3,√11,√33} basis has all eight ℚ-coefficients zero) proven DIVISION-FREE by squaring to A² = 5B², reading four equations through M24's `sqrt_indep`, and killing the integer system by **mod-5 descent** — one kernel `decide` over (ZMod 5)⁴ (625 tuples, the house mod-p congruence style) plus strong induction on the ℓ¹-norm; the √7 analogue is a numeral change. On top: `sqrt15_split` (the workhorse every 2-adic clearing cites), `sqrt_indep₈` (the flat eight-term independence), **`quadrature_rho15`** — M31's quadrature law (G12), ρ₁₅ instance, as a theorem: a unit chord between seam-coordinate points and a ρ₁₅-detune forces Im(u·v̄) = 0 AND |u|²+|v|²−(7/4)·Re(u·v̄) = 1 — and `pair_tangency` (the unit circles about 0 and 2 meet exactly at the midpoint). Method note: every linear_combination witness was sympy-derived by polynomial reduction over the radical ideal and verified to zero residual BEFORE being stated — the M26 script-first discipline applied to proof terms; all landed first try. | `Quadrature.lean` (`sqrt5_indep`, `sqrt15_split`, `sqrt_indep₈`, `quadrature_rho15`, `pair_tangency`) | M32 |
+| 29 | **The stacking law + the flat designed-forcer verdict** (tools-side; the law derived a priori in §0a, then confirmed at every census point): same-anchor stacks reduce to the single-word law forever (the relative detune is the spec quotient — detunes form a group); same-word different-anchor stacks couple through a difference pin (w = u−v collinear with the twisted anchor axis, |w| on a quadratic) whose w = 0 root at UNIT anchor separation is an O(n) **translation matching** — measured: 132 exact matching chords at the triangle's unit pivots, ZERO at the √59-sterile 1/√3 separation, chirality channel exactly empty. The verdict: matchings are 1-regular, **width without degree does not force** — the triangle stack's 26 spanning forced-rainbow unit triangles (the first designed triple-order cross structure) still read zero forced pairs, zero virtual edges, zero coverage movement, zero compelled triples, χ = 4 everywhere; the 5-mechanism's irreducible globality extends to designed one-family objects (fourth measurement). Base-rate finding: pivot-circle min-cover rises 2 → 3 from B = 1 to B = 2 (ambient coverage pressure builds with depth) while the metapivot circle stays at 2. New instruments: the coverage/triple meters (palette-WLOG single SAT calls, free vacuity guard), the stack census with class-routed certificates. | `tools/rigidity.py` (meters), `tools/closure.py` (stacks), `build/m32-*.json`, `plans/M32-certified-five.md` §R | M32 |
 | 26 | **The de Grey anatomy** (tools-side, every instrument control seen red/green on cue): the 1581 has exactly **67 edge-direction classes**, ALL words in the half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩ at exponent ≤ 6 (the registered whole-word group covers 58%; every miss squares in; σ-exponents only {0,±1,±2}); Heule 510/553 carry 6 out-of-group residue classes each — the 1581 is the only pure-group witness; E3 refuted (819 circles, 4,140 coarse classes, top-6 = 3.7%, flat head) and the load-bearing census deflated by its matched control — **the 1581 is at or near edge-critical**, the 5-forcing distributed; the complete forced-pair inventory of the 791 forcer: **six pairs** — M13's axis pair plus five ANTIPODAL pairs at distance 4/√3 (√183-spindle, outside the field): every proper 4-colouring is centrally symmetric on the radius-2/√3 circle; E2 exact (norms 4 and 16 — the M32 clearing is 2-adic); fusion record {1:1344, 2:234, 4:1, 24:2}; E4 refuted both halves — the 4-chromatic hexagram chunk's colour space is > 10⁴ up to rot6 × palette with ZERO forced pairs (settled exactly), and the 1581's 5-colouring space is likewise pairwise-floppy (0 forced, 0 virtual, settled) — rigidity in both fields lives only at the forcing level k−1, never above. Instruments promoted: `tools/anatomy.py`, `tools/rigidity.py` (complete pairwise forced-equal/virtual-edge oracle, batch violation queries, vacuity guard), `tools/hexchunk.py`, the anatomy visualizer `tools/degrey-viz.html` + `tools/degreyviz_refresh.py`. | `build/m30-anatomy.json`, `build/m30-rigidity-forcer791.json`, `plans/M30-degrey-anatomy.md` §R | M30 |
 
 ### Paths forward, ranked
@@ -253,30 +287,33 @@ Every future milestone is maintained as a detailed pre-subplan stub in
 `plans/` (the stub rule, WORKFLOW § Plan) — read the stubs, they carry the
 full context.*
 
-*(M30 — the de Grey anatomy — CLOSED 2026-08-09; M31 — the minimal 5-closure —
-CLOSED 2026-08-10: verdicts in the ledger above and the plans' §R sections.
-M31's registered failure clause fired as a finding: no closure below the whole
-witness reaches 5, with or without gen-1 enrichment — and the quadrature law
-says why: one detune carries one conic of chords, too thin to force. The M32
-handoff is written into its stub.)*
+*(M30 CLOSED 2026-08-09; M31 CLOSED 2026-08-10; M32 — the designed-forcer
+probe + the 2-adic engine's first ascent — CLOSED 2026-08-10: the probe
+phase fired its FLAT clause exactly as registered (the stacking law confirmed
+everywhere, no compulsion in any one-family stack at ≤ ~1,500 vertices, the
+matching 1-regular — width without degree does not force), and the Lean
+ascent landed the kill engine kernel-checked. The M33 handoff is
+`plans/M33-witness-closure.md`.)*
 
-1. **M32 — the first certified infinite 5-chromatic object**
-   (`plans/M32-certified-five.md`, § "The M31 handoff" carries the measured
-   engine inputs): the exactness programme one field up, on the 1581-witness
-   closure. The engine's inputs are now measured, not guessed: the quadrature
-   law (its ρ₁₅ instance is the first Lean kill lemma — a 16-basis block-split
-   in the `sqrt_indep` genre), conic constants with 2-power denominators
-   (the M30 2-adic norms surfacing as arithmetic), the conjugate-ring channel
-   demanding ℚ(√33)-conjugate radius handling, and the de Grey pair's
-   6-chord web as the M24-engine warm-up. The certified-object visualizer
-   with the 5-colouring rendered.
-2. **The forced-pair design thread (sharpened by the law)**: the quadrature
-   law makes G11's design question quantitative — a 5-forcer needs colour
-   pressure, not chords, crossing between copies, so the design space is
-   "which gadget forces an equal pair at a conic-friendly distance" (2 and
-   4 in-field; the 791's antipodal 4/√3 pairs need √183 — out). Stacked
-   mitosis (two+ detunes) in the certified fabric is the unprobed shape;
-   fold into M32's design space.
+1. **M33 — Route A: certify the 1581-witness closure**
+   (`plans/M33-witness-closure.md` carries the full handoff): the exactness
+   programme on the found object, now with the engine's first theorems
+   kernel-checked (`Quadrature.lean`) and the proof-term generation
+   discipline (sympy-derived linear_combination witnesses, zero-residual
+   verified before statement) proven to land first-try. The ascent ladder:
+   the distance-2 pair web's height-unbounded completeness (its window is
+   measured complete: 6 genuine chords + 8 through the single tangency, no
+   growth to |b| ≤ 5, master residue ≡ M24's) → the multi-generator trace
+   core (the largest item) → the closure's 67 direction-class families →
+   Fin 5 tables → χ = 5 with the lower bound kernel-inherited. Scale
+   honesty: ~50× M26's surface; ladder it and push excess to numbered
+   milestones rather than rescope silently.
+2. **The designed-forcer thread — CLOSED at M32's flat checkpoint** for
+   one-family stacks at probe scale. Reopen only with a mechanism that
+   creates degree-≥ 2 colour pressure across copies (the matching is
+   1-regular and free; the 26-triangle web was absorbed): mixed-family
+   stacks at tuned anchors, or fan-design on ENRICHED assemblies via the
+   coverage meter. Any reopening registers predictions first.
 3. **The forced-symmetry thread (from the 791's antipodal pairs)**: five
    forced pairs at distance 4/√3 say every 4-colouring of the forcer is
    centrally symmetric on the radius-2/√3 circle — a compulsion (M20's genre)
@@ -427,7 +464,12 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   ENRICHING sub-witness chunks with the full gen-1 closure material (16,365
   vertices, 67,568 edges at the 1200-committed radius) leaves them
   4-colourable in seconds — the 5-mechanism is irreducibly global at this
-  order; no closure shortcut below the whole witness exists at gen-1.*
+  order; no closure shortcut below the whole witness exists at gen-1.
+  FOURTH MEASUREMENT (M32): DESIGNED one-family stacks — including the
+  triangle stack whose three translation matchings compose into 26
+  forced-rainbow unit triangles spanning three detuned copies — carry zero
+  compulsion of any order probed (pair, triple, coverage) at ~1,500
+  vertices; the globality holds for designed objects too.*
 * **G13 — The centre transition (the fan ladder)** (Kooshi's observation,
   2026-08-10, verified exactly the same night): the recurring mechanism of
   the colour steps is CONFINEMENT AT A CENTRE — the fan/coverage condition
@@ -470,8 +512,11 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   the radii on one explicit conic (t² + r² − 2·Re(W)(±tr) = 1, resp.
   + 2·Im(W)); words mixing √ρ₁₅- and √ρ₆₃-content couple NOWHERE. Proof
   shape: the 16-basis splits into four radical blocks K, √15·K, √7·K, √105·K
-  and the chord equation must vanish per block. **[measured + derivation;
-  the Lean certification is M32's first kill lemma]** Measured instances:
+  and the chord equation must vanish per block. **[the ρ₁₅ instance is now
+  KERNEL-CHECKED: `Quadrature.quadrature_rho15` (M32) — the pin and the
+  conic as a theorem over explicit seam coordinates, resting on
+  `sqrt5_indep`'s mod-5 descent; the ρ₆₃ instance remains measured-only, a
+  numeral change away]** Measured instances:
   the (2,2) spindle diagonal, the (2/3, 2/3) perpendicular diagonal, and the
   **conjugate-ring channel** — rings at (17∓√33)/6 and (17±√33)/6 coupling
   through ρ₁₅ with t·r = 8/3: the first mechanism connecting the witnesses'
@@ -481,6 +526,26 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   pipeline (de Grey's 791-forcer, Haugland's G₁/G₂) is not a design choice
   but the only channel wide enough. Falsifier: any census chord violating its
   pin — the instrument (tools/closure.py) aborts on one, naming P1.*
+* **G14 — The stacking law, and width without degree** (M32, derived a
+  priori in §0a, confirmed at every census point): a STACK's copy↔copy
+  coupling is decided by the anchors — same anchor reduces to the
+  single-word law at the relative detune forever (detunes form a group;
+  the class is the spec quotient), while same-word copies at different
+  anchors couple through a pin on the DIFFERENCE w = u − v, whose w = 0
+  root at unit anchor separation is an O(n) **translation matching** — the
+  arithmetic reason de Grey's construction has two spindle centres, and
+  our triangle pivots supply unit anchor pairs natively. Confirmed exact:
+  132-chord matchings at unit anchors (full and half words alike), ZERO at
+  the √59-sterile 1/√3 separation, the chirality channel empty.
+  **[measured + derivation; the census-confirmed §0a instances]** *The
+  verdict on top, at face value: a matching is 1-regular — width without
+  degree carries no colour pressure — and even composed matchings (the
+  triangle stack's 26 spanning forced-rainbow triangles, genuine
+  triple-order cross structure) are absorbed by the fabric's floppiness.
+  Colour pressure needs degree-≥ 2 cross structure per point, which
+  one-family stacks at probe scale provably do not create. Falsifier for
+  the reading: a stack shape whose meters move — any reopening of the
+  design thread registers its predictions first (M33 stub, parked list).*
 
 ## Whose work this is
 
