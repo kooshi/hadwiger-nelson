@@ -48,7 +48,7 @@ subplans.
 the live paths forward. Maintained as part of every milestone's closing commit (WORKFLOW
 step 9); a milestone whose close does not update this section is not closed.*
 
-**Last updated: M26, 2026-08-09.**
+**Last updated: M30, 2026-08-09.**
 
 ### Where the problem stands
 
@@ -144,6 +144,32 @@ The colouring is rot6-**equivariant** (colour ∘ rot6 = τ ∘ colour for a
 the census instrument that checked it caught two real bugs in the standing
 tool by its own automorphism control. The 5th colour now provably needs
 more than the full seven-ladder, six-fold-symmetric countable hexagram.
+M30 opened the new field with the anatomy of the 5-forcers, and the
+measurements redrew the map. The **field-wall thesis is now kernel-checked**
+(`FieldWall.lean`: ρ·σ² = −1, so the Moser twist is ζ₆³σ⁻² — inside the seam
+group). The 1581's complete direction inventory is just **67 classes**, and
+the registered group ⟨ζ₆,σ,ρ₁₅,ρ₆₃⟩ holds only 58% of the edges as whole
+words — but every missing direction SQUARES into it, and the true group is
+the **half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩** (√ρ₁₅ = (√15+i)/4,
+√ρ₆₃ = (3√7+i)/8), which closes all 67 at exponent ≤ 6 — de Grey's own
+half-angle frame, re-derived from pure edge data. Heule's 510/553 are NOT
+pure de Grey-group objects (6 residue direction classes each, ~10 edges);
+the only pure-group witness is the 1581. The concentration bet died at face
+value: 819 circles about one centre, 4,140 coarse classes, top-6 = 3.7%
+(registered ≥ 70%), flat direction head — and the matched control deflated
+the load-bearing census entirely: **de Grey's graph is at or near
+edge-critical** (single random edge deletions flip it 4-colourable), so the
+5-forcing is distributed, not organ-like. The new rigidity instrument
+(complete forced-pair + virtual-edge sweeps with three-outcome honesty,
+validated red/green on every control) reproduced M13's forced pair and found
+what M13 never looked for: de Grey's 791-point forcer forces **six** pairs —
+the known axis pair at distance 4 plus **five antipodal pairs at distance
+4/√3** (not spindle-able in the field; needs √183): every proper 4-colouring
+of the forcer is centrally symmetric on the radius-2/√3 circle. A forced
+colour symmetry, where M26's equivariance was chosen. The 2-adic risk is
+confirmed exact ((1+i√15)/2: x² = x−4; (1+i√63)/2: x² = x−16), and the
+anatomy visualizer (`tools/degrey-viz.html`) renders all three witnesses
+with per-class toggles and the forced-pair overlay.
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -174,6 +200,8 @@ more than the full seven-ladder, six-fold-symmetric countable hexagram.
 | 22 | **The matched ladder pair is exactly 4-chromatic, unconditionally** — the countable two-pivot ⟨ζ₆,σ⟩-lattice closed under ALL unit chords. Every chord family is a theorem: oo = matching ∨ hub (`oo_complete`); ii = matching ∨ ten table rows, via the parity split in ℤ[ζ₆,π] — mixed parity impossible, even collapses on the backbone, odd closes by mod-3 coordinate congruences, mixed SIGNS die through the collapse π^b·π̄^e = 3^e·π^{b−e} (`ii_norm_complete`); oi = **sixteen chords ever, no infinite family** — the trace pair T(x,h) = ζ₆^x π^h + ζ₆^{−x} π̄^h, uniform √3^(m+n+k) clearing, three parity kills, address pins feeding a telescope kill, three 36-pair boundary checks (`oi_complete`); intra = hex/rot3/seam exactly; eight fusions pinned; plus the 24-entry b-independent colouring proper on every family and the nine-point witness forcing 4 (`chromaticNumber_ladderPair`). First exact chromatic number of an infinite genuinely-coupled object; the first Frontier χ-equality with no census window and no conditional clause. Supporting cast now reusable: `sqrt_indep` (ℚ-independence of {1,√3,√11,√33}), the axis-general master identities, the Re = √3/2 fibre proven EMPTY (ζ₁₂ never lattice). | `Ladder.lean` (`chromaticNumber_ladderPair`, `ii_norm_complete`, `oi_complete`, `iiNormTable`/`oiTable`) | M24 |
 | 24 | **The hexagram is exactly 4-chromatic, unconditionally** — the six pivots of the 1/√3-hexagon about the metapivot (M23's triangle plus the mirror centroids), all seven ⟨ζ₆,σ⟩-ladders, closed under ALL unit chords. The engine: the **self-seeding identity** `hexPivot a = m·(1+ζ₆^a)` (the pivots are the meta-inner hex layer, so every hexagram coordinate is one metapivot multiplication from a hex root); the **rot6 orbit collapse** (60° about m is an automorphism ⟹ 21 centre pairs, FOUR orbits, only adjacent + opposite webs new); ONE master identity `normSq(αgu−βgv−γ)` with BOTH singles g-traces, cleared by `hex_cleared` into M24 trace pairs; one live parity class per family, four kills (alone/φ/equal-height collapse/M25's mod-9 adjacent-height), and the two surviving boundaries returned as data for per-table decides. All eight new-web families are theorems (`adj_oo_empty`, `adj_oi/io/ii_complete` — four sporadics each; `opp_oo_complete` — four sporadics; `opp_oi/io/ii_empty`), all eight fusions EMPTY (the mirror triangle touches the original ONLY at M23's glue points; the tangency at m invisible), the pivot–meta webs extended to all six addresses free by transport, unit pairs in hexagram currency, and the rot6-equivariant 4-colouring (`colour∘rot6 = τ∘colour`, τ a 3-cycle) proper on every family. On axioms exactly `[propext, Classical.choice, Quot.sound]`. Census promoted: `tools/couple.py --hexagram-census` (exact 84-sweep, planted chord+fusion refusals); two real instrument bugs (0°/360° bin wrap, hub-marker skip) found by the rot6-automorphism control and fixed; plus a gate bug in `axioms.sh` (pipefail vs `grep -q` SIGPIPE past 64 KB) that failed CLOSED, repaired. | `Hexagram.lean` (`chromaticNumber_hexagram`, `adj_*`/`opp_*`/`hexMeta_*`/`unit_oo_complete`, `hexColTab_equivariant`) | M26 |
 | 23 | **The four-ladder object is exactly 4-chromatic, unconditionally** — the pivot triangle's three ladders plus the metapivot's own (anchored along ζ₁₂), closed under ALL unit chords. The engine: `√3·ζ₁₂ = 1+ζ₆` (`sqrt3_mul_zeta12`) eliminates the twelfth root, so M24's ℤ[ζ₆,π] machinery carries verbatim through `hexTrace` (trace pairs with arbitrary ℤ[ζ₆] coefficients). All twelve pivot–meta families are theorems (`meta_oo/oi/io/ii_complete`, j-quantified over the three webs by the 120° rotation transport); the **fusion inventory is certified by the same engine at norm-0 constants** (`meta_fusion_*`: oi = the two shared pivots, oo/io/ii EMPTY); the kills beyond M24: `alone_dvd` and `phi_dvd` (the generic 3-adic pair) and the mod-9 `adjacent_kill` — two g-traces at heights h, h+1 never sum to 9·(anything), the piCoeff recurrence confining the two deep residues to {1,4,7} — which closes the height-unbounded branches a census can only sample. Colouring: the 48-entry b-independent `metaColTab`, decode well-defined by the fusion inventory, properness per family; χ ≥ 4 transports M24's witness. Census promoted: `tools/couple.py --meta-census` (planted-disagreement self-test). | `MetaLadder.lean` (`chromaticNumber_fourLadder`, `meta_*_complete`, `meta_fusion_*`, `adjacent_kill`) | M25 |
+| 25 | **The field-wall identity, kernel-checked**: the Moser spindle's twist rotation ρ (cos 5/6, sin √11/6) satisfies ρ·σ² = −1, i.e. ρ = ζ₆³·σ⁻² — the twist that forces the 4th colour is a word in the seam group, while the 5-forcers need √5 and √7. The thesis that moved the programme off the seam field, as a theorem. | `FieldWall.lean` (`moserTwist_mul_seam_sq`, `moserTwist_eq_zeta6_cube_mul_seam_inv_sq`) | M30 |
+| 26 | **The de Grey anatomy** (tools-side, every instrument control seen red/green on cue): the 1581 has exactly **67 edge-direction classes**, ALL words in the half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩ at exponent ≤ 6 (the registered whole-word group covers 58%; every miss squares in; σ-exponents only {0,±1,±2}); Heule 510/553 carry 6 out-of-group residue classes each — the 1581 is the only pure-group witness; E3 refuted (819 circles, 4,140 coarse classes, top-6 = 3.7%, flat head) and the load-bearing census deflated by its matched control — **the 1581 is at or near edge-critical**, the 5-forcing distributed; the complete forced-pair inventory of the 791 forcer: **six pairs** — M13's axis pair plus five ANTIPODAL pairs at distance 4/√3 (√183-spindle, outside the field): every proper 4-colouring is centrally symmetric on the radius-2/√3 circle; E2 exact (norms 4 and 16 — the M32 clearing is 2-adic); fusion record {1:1344, 2:234, 4:1, 24:2}. Instruments promoted: `tools/anatomy.py`, `tools/rigidity.py` (complete pairwise forced-equal/virtual-edge oracle, batch violation queries, vacuity guard), `tools/hexchunk.py`, the anatomy visualizer `tools/degrey-viz.html` + `tools/degreyviz_refresh.py`. | `build/m30-anatomy.json`, `build/m30-rigidity-forcer791.json`, `plans/M30-degrey-anatomy.md` §R | M30 |
 
 ### Paths forward, ranked
 
@@ -190,25 +218,37 @@ Every future milestone is maintained as a detailed pre-subplan stub in
 `plans/` (the stub rule, WORKFLOW § Plan) — read the stubs, they carry the
 full context.*
 
-1. **M30 — the de Grey anatomy** (`plans/M30-degrey-anatomy.md`): the rigidity
-   instrument (colour-space enumeration + forced-equality extraction, validated
-   on the hexagram); the rotation-group extraction from our own certified
-   coordinates (registered expectation: ⟨ζ₆, σ, ρ₁₅, ρ₆₃⟩ with
-   ρ₁₅ = (7+i√15)/8, ρ₆₃ = (31+i√63)/32 — M13's radicand-15/63 spindles);
-   every edge of the 5-chromatic witnesses classified by web and family — the
-   anatomy of the 5th colour; the anatomy visualizer. Instruments only.
-2. **M31 — the minimal 5-closure** (`plans/M31-minimal-five-closure.md`): the
-   smallest de Grey-group closure with χ ≥ 5, SAT-measured over growing chunks
+*(M30 — the de Grey anatomy — CLOSED 2026-08-09: verdicts in the ledger above
+and `plans/M30-degrey-anatomy.md` §R. The half-spindle group, the
+edge-criticality, and the six forced pairs rewrote M31's handoff, recorded in
+its stub.)*
+
+1. **M31 — the minimal 5-closure** (`plans/M31-minimal-five-closure.md`, § "The
+   M30 handoff" carries the measured candidate ranking): the smallest
+   half-spindle-group closure with χ ≥ 5, SAT-measured over growing chunks
    (de Bruijn–Erdős makes finite chunks an honest estimator); the closed radius
-   set; the closure-explorer visualizer. Jackpot branch registered: a closure
-   SAT refuses at k = 5 is a candidate χ(ℝ²) ≥ 6 generator and escalates
-   straight to the kernel certificate pipeline.
-3. **M32 — the first certified infinite 5-chromatic object**
+   set (819 circles about one centre says lattice-like, not few-shell); the
+   closure-explorer visualizer. The family-bundle bet is DEAD (E3 refuted,
+   near-edge-criticality) — the ranked candidates are the de Grey pair (the
+   two spindle centres' ladders under the ρ₁₅ coupling — the 2-adic engine's
+   build site), the 1581-witness closure (the M32 target), and the Heule-510
+   closure as fallback. Near-criticality caution: chunk χ readings are noisy
+   at boundaries; audit before believing any 4. Jackpot branch registered
+   unchanged: a closure SAT refuses at k = 5 escalates straight to the kernel
+   certificate pipeline.
+2. **M32 — the first certified infinite 5-chromatic object**
    (`plans/M32-certified-five.md`): the exactness programme one field up — the
-   engine's known break: the new seams have norm-4/norm-16 algebraic integers
-   ((1+i√15)/2 with x² = x−4; (1+i√63)/2 with x² = x−16), so clearing goes
-   2-adic where M24 was 3-adic. The certified-object visualizer with the
-   5-colouring rendered.
+   engine's known break is now MEASURED, not guessed: clearing goes 2-adic
+   (norms 4 = 2² and 16 = 2⁴, verified exactly), the group is the half-spindle
+   group, and σ-exponents in the witness stay within {0,±1,±2}. The
+   certified-object visualizer with the 5-colouring rendered.
+3. **The forced-symmetry thread (new, from the 791's antipodal pairs)**: five
+   forced pairs at distance 4/√3 say every 4-colouring of the forcer is
+   centrally symmetric on the radius-2/√3 circle — a compulsion (M20's genre)
+   in the new field, and a possible route to forcers the classical spindle
+   cannot reach (the √183 spindle is out-of-field; what closes an antipodal
+   forced pair instead?). Fold into M31's design space; escalate if a
+   non-spindle closure shape appears.
 4. **Parked, with reasons** (banners in each stub): the tiled plane (M27 —
    expected another 4; its periodic-table SAT probe stays registered-but-not-run
    and reopens the milestone only if it REFUSES), the recursion (M28 — gated
