@@ -79,6 +79,10 @@
   <div class="row"><input type="checkbox" id="virtual"><label for="virtual">virtual edges
     (forced-distinct, non-adjacent) <span class="cnt" id="vcnt"></span></label></div>
   <div class="note" id="overlaynote"></div>
+  <div class="row"><input type="checkbox" id="owner"><label for="owner">ownership (colour by
+    owning spindle system; gold = shared)</label></div>
+  <div class="row"><input type="checkbox" id="mirror"><label for="mirror">mirror defect
+    (ring = no partner under the spindle-axis mirror) <span class="cnt" id="mcnt"></span></label></div>
   <div class="row"><input type="checkbox" id="fused"><label for="fused">ring fused vertices
     (multiple construction words)</label></div>
   <div class="row"><input type="checkbox" id="verts" checked><label for="verts">vertices</label></div>
@@ -106,9 +110,29 @@ function buildModel(name) {
   if (!w) return null;
   const dirs = {};
   for (const e of w.edges) dirs[e.dir] = (dirs[e.dir] || 0) + 1;
-  return {name, ...w, dirCounts: dirs,
+  const model = {name, ...w, dirCounts: dirs,
           dirOn: new Set(Object.keys(dirs).map(Number)),
           lenOn: new Set([0,1,2,3,4,5,6,7,8])};
+  if (w.meta) {
+    // ownership: base/spindle15 words belong to the origin system, spindle63/both to its
+    // rho63-image; a vertex reached by words of both groups is genuinely shared
+    model.owner = w.meta.map(m => {
+      const a = m.tags.some(t => t === 'base' || t === 'spindle15');
+      const b = m.tags.some(t => t === 'spindle63' || t === 'both');
+      return a && b ? 2 : (b ? 1 : 0);
+    });
+    // mirror defect: the axis is the vertical through the two 24-word spindle centres;
+    // a vertex is a DEFECT if its reflection is not a vertex (float match, 1e-6)
+    const centres = [];
+    w.meta.forEach((m, i) => { if (m.words === 24) centres.push(i); });
+    if (centres.length === 2) {
+      const x0 = (w.vertices[centres[0]][0] + w.vertices[centres[1]][0]) / 2;
+      const seen = new Set(w.vertices.map(v => `${v[0].toFixed(6)},${v[1].toFixed(6)}`));
+      model.defect = w.vertices.map(v =>
+        !seen.has(`${(2 * x0 - v[0]).toFixed(6)},${v[1].toFixed(6)}`));
+    }
+  }
+  return model;
 }
 
 function fitView() {
@@ -154,11 +178,22 @@ function render() {
   }
   if (chk('verts')) {
     const five = chk('fill') && cur.five;
+    const own = chk('owner') && cur.owner;
+    const OWNC = ['#5a8dd6', '#e0813f', '#e8c36a'];
     for (let i = 0; i < cur.vertices.length; i++) {
       const [x, y] = px(cur.vertices[i]);
-      ctx.fillStyle = five ? FILLC[cur.five[i]] : '#aeb8c6';
-      ctx.beginPath(); ctx.arc(x, y, five ? 3.2 : 2.1, 0, 7); ctx.fill();
+      ctx.fillStyle = own ? OWNC[cur.owner[i]] : five ? FILLC[cur.five[i]] : '#aeb8c6';
+      ctx.beginPath(); ctx.arc(x, y, (own || five) ? 3.2 : 2.1, 0, 7); ctx.fill();
     }
+  }
+  if (chk('mirror') && cur.defect) {
+    ctx.strokeStyle = '#f25c54'; ctx.lineWidth = 1.2;
+    for (let i = 0; i < cur.vertices.length; i++)
+      if (cur.defect[i]) {
+        const [x, y] = px(cur.vertices[i]);
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.stroke();
+      }
+    ctx.lineWidth = 1;
   }
   if (chk('fused') && cur.meta) {
     ctx.strokeStyle = '#e86a6a';
@@ -247,6 +282,11 @@ function rebuildSide() {
   document.getElementById('overlaynote').textContent = ov.regime || '';
   document.getElementById('regime').textContent = ov.regime || '';
   document.getElementById('fill').disabled = !cur.five;
+  document.getElementById('owner').disabled = !cur.owner;
+  document.getElementById('mirror').disabled = !cur.defect;
+  document.getElementById('mcnt').textContent = cur.defect ?
+    `(${cur.defect.filter(Boolean).length} defects — M30 verified: the 792 ρ₁₅-twisted points)` :
+    '(needs construction words)';
 }
 
 function switchWitness(name) {
@@ -288,7 +328,7 @@ cv.onwheel = e => {
   view.s *= e.deltaY < 0 ? 1.15 : 1 / 1.15;
   render();
 };
-for (const id of ['fill', 'forced', 'virtual', 'fused', 'verts'])
+for (const id of ['fill', 'forced', 'virtual', 'fused', 'verts', 'owner', 'mirror'])
   document.getElementById(id).onchange = render;
 document.getElementById('witness').onchange = e => switchWitness(e.target.value);
 
