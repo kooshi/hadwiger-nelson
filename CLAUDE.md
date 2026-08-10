@@ -36,8 +36,12 @@ goal in itself; a formalized statement earns its place by being *structure nobod
 State failure modes plainly and keep the ratchet honest: a rung that does not land is reported as
 not landed, not quietly rescoped. **All write-ups and upstreaming are deferred until something
 lands that is worth the time and effort to publish** (Kooshi, 2026-08-04) — this covers the
-rung-B write-up, Mathlib contributions, and any exposition; the deferral is standing policy,
-revisited only when the Frontier holds a publication-worthy result.
+rung-B write-up, Mathlib contributions, and any exposition; the deferral is standing policy.
+**The trigger, sharpened (Kooshi, 2026-08-10, on the literature check that found the field
+converging):** mathematics everywhere is accelerating and nothing minor will get read — so the
+publication bar is exactly two events: *maybe* our own certified 5-chromatic object, if what it
+reveals is interesting enough (his call at that point); *definitely* χ(ℝ²) ≥ 6 or its
+refutation. Nothing below that bar is written up, however novel the rung.
 
 See `ARCHITECTURE.md` for the module DAG and the milestone roadmap; `plans/` for per-milestone
 subplans.
