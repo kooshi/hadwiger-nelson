@@ -275,7 +275,7 @@ def census(m: dict, label: str) -> dict:
     edges = unit_edges(pts)
     tags = [{t for (t, _) in pr} for pr in prov]
     srcs = [{t: s for (t, s) in pr} for pr in prov]
-    n_base = n_copy = 0
+    n_base = n_copy = anchor_incident = 0
     cross = []
     for (i, j) in edges:
         if 0 in tags[i] and 0 in tags[j]:
@@ -286,13 +286,19 @@ def census(m: dict, label: str) -> dict:
             if 1 in tags[ci] and 0 in tags[bj]:
                 u = csub(m["base_pts"][srcs[ci][1]], anchor)   # preimage offset of the copy side
                 v = csub(pts[bj], anchor)
+                if (not any(u[0]) and not any(u[1])) or (not any(v[0]) and not any(v[1])):
+                    # a chord THROUGH the anchor point itself — shared-vertex triviality,
+                    # not coupling; the law is vacuous there (z = 0) by design
+                    anchor_incident += 1
+                    break
                 cert = law_check(det, u, v, f"{label} edge ({i},{j})")
                 cross.append({"i": i, "j": j, **cert})
                 break   # one cross reading certifies the chord; a second is its mirror
     if n_base != n_copy:
         raise SystemExit(f"ISOMETRY CONTROL FAILED at {label}: {n_base} intra-base vs "
                          f"{n_copy} intra-copy edges — the sweep or the dedup is wrong")
-    return {"edges": edges, "n_base": n_base, "n_copy": n_copy, "cross": cross}
+    return {"edges": edges, "n_base": n_base, "n_copy": n_copy, "cross": cross,
+            "anchor_incident": anchor_incident}
 
 
 # ------------------------------------------------------------------ χ probe
@@ -395,15 +401,17 @@ def report_variant(tag: str, m: dict, cen: dict, chi_rows, out: dict):
         "counts": {"base": len(m["base_pts"]), "union": len(m["pts"]),
                    "fused": len(m["fused"]), "fixed_points": m["fixed_points"]},
         "edges": {"intra_base": cen["n_base"], "intra_copy": cen["n_copy"],
-                  "cross": len(cen["cross"]), "total": len(cen["edges"])},
+                  "cross": len(cen["cross"]), "anchor_incident": cen["anchor_incident"],
+                  "total": len(cen["edges"])},
         "cross_chords": cen["cross"],
         "chi": chi_rows,
         "controls": {"isometry_edge_match": True, "law_violations": 0},
     }
     out[tag] = entry
     cr = len(cen["cross"])
-    verdict = (f"{cr} cross chords" if cr else
-               f"0 cross chords — a RESULT: class '{det['cls']}' is "
+    ai = cen["anchor_incident"]
+    verdict = (f"{cr} cross chords (+{ai} through the anchor)" if cr else
+               f"0 cross chords (+{ai} through the anchor) — a RESULT: class '{det['cls']}' is "
                + ("sterile by law" if det["cls"] == "mixed" else "thin here"))
     chis = ", ".join(f"k={r['k']}:{r['outcome']}" for r in chi_rows)
     print(f"  {tag:34s} {verdict:44s} [{chis}]")
