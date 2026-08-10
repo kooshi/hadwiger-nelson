@@ -1,8 +1,11 @@
-# M31 — The minimal 5-closure: the first rung above the field wall (PRE-SUBPLAN STUB)
+# M31 — The minimal 5-closure: the first rung above the field wall (SUBPLAN)
 
-*Written 2026-08-09 at the field-jump decision; consumes M30's outputs. A fresh
+*Stub written 2026-08-09 at the field-jump decision; subplanned 2026-08-10 on
+Kooshi's go ("You are go for M31 subplanning AND implementation"). A fresh
 session should read `plans/M30-degrey-anatomy.md` first — the mission context and
-the registered expectations live there — then this stub.*
+the registered expectations live there — then this file whole. The stub sections
+(down to "Failure clauses") are the inherited context; the subplan proper starts
+at §0.*
 
 ## The object being hunted
 
@@ -260,3 +263,197 @@ session should read these before designing instruments.*
 * If the census explodes (the extended group's webs too numerous to classify):
   report the measured growth, cut to the smallest honest sub-object, and record
   what was NOT swept — no silent truncation.
+
+---
+
+# SUBPLAN (2026-08-10, committed before any instrument runs)
+
+## §0 — Registered predictions
+
+*Discipline: everything in this section is written and committed BEFORE any new
+instrument executes. §0a is pure a-priori derivation (paper arithmetic, no code
+run); it is registered as reasoning, and its consequences are predictions the
+instruments then test. Where a §0a claim fails in the census, the derivation is
+wrong and the failure is reported at face value.*
+
+### §0a — The quadrature law (a-priori derivation, to be script-verified)
+
+Setting: seam-field material (all M24–M26 objects, all de Grey seeds) has both
+coordinates in K := ℚ(√3, √11) (4-dim: 1, √3, √11, √33). A **detune word** is a
+unit rotation R = s·W with s in the seam-decoration part (any complex number
+with both components in K and |s| = 1 — includes ζ₆, ζ₁₂, σ and all their
+words) and W a word in the new-field generators √ρ₁₅ = (√15+i)/4,
+√ρ₆₃ = (3√7+i)/8. Powers close as follows (checked by hand):
+
+* even powers of √ρ₁₅ (i.e. powers of ρ₁₅ = (7+i√15)/8): Re ∈ ℚ, Im ∈ √15·ℚ;
+* odd powers of √ρ₁₅: Re ∈ √15·ℚ, Im ∈ ℚ;
+* likewise for √ρ₆₃ with √7 in place of √15;
+* any word with BOTH families' content non-trivially: Re/Im spread over
+  {ℚ+√105·ℚ} × {√15·ℚ+√7·ℚ}-shaped spans (four independent radical blocks).
+
+For chunk points x = anchor + u, y = anchor + v (u, v seam-field offsets from
+the rotation anchor), a unit cross-chord between the detuned copy and the base
+means |R·u − v|² = 1, i.e. |u|² + |v|² − 2·Re(W·(s·u·v̄)) = 1. Writing
+z = s·u·v̄ = xᵣ + i·yᵣ with xᵣ, yᵣ ∈ K, and expanding Re(W·z) per radical
+block, the 16-dim basis splits K, √15·K, √7·K, √105·K into DISJOINT spans, so
+the single equation splits into one equation per block. Consequences:
+
+1. **Even (full-spindle) words pin collinearity**: W = ρ₁₅ᵏ (k ≠ 0) forces the
+   √15-block to vanish ⟹ Im(s·u·v̄) = 0 — u and s·-twisted v are collinear
+   through the anchor — and the K-block gives the **conic**
+   t² + r² − 2·Re(W)·(±t·r) = 1 in the radii t = |u|, r = |v| (sign = same/
+   opposite ray). For W = ρ₁₅: t² + r² − (7/4)·t·r = 1 with rational solutions
+   (2,2) — the classical distance-2 spindle — and (2, 3/2); the opposite-ray
+   branch needs r² with denominator 15, impossible for {2,3}-smooth-denominator
+   seam lattices (registered: the opposite-ray branch is EMPTY for ladder
+   material). For W = ρ₆₃: t² + r² − (31/16)·t·r = 1, rational diagonal (4,4)
+   — the distance-4 spindle.
+2. **Odd (half-spindle) words pin perpendicularity**: W = √ρ₁₅^(2k+1) forces
+   Re(s·u·v̄) = 0 — perpendicular through the anchor — with conic
+   t² + r² ± 2·Im(W)·t·r = 1 (for √ρ₁₅: t² + r² ± t·r/2 = 1). The
+   half-spindle DIAGONAL (t = r, the naive spindle shell) sits at
+   radius² = 8 + 2√15 (i.e. √3+√5) for √ρ₁₅ and 32 + 12√7 for √ρ₆₃ — both
+   OUTSIDE the ℚ(√33) ring vocabulary, so half-spindle detunes never couple
+   diagonally to seam material; only perpendicular conic pairs can carry.
+3. **Mixed words are sterile**: any W with both √ρ₁₅- and √ρ₆₃-content forces
+   all four blocks to vanish ⟹ u·v̄ = 0 ⟹ no cross chord at all.
+4. **Pure seam words (W = 1)** reduce to the M24–M26 chord theory (the known
+   families).
+
+The law in one line: **a detuned union couples to its base only along
+anchor-collinear pairs (full spindles) or anchor-perpendicular pairs (half
+spindles) whose radii sit on an explicit conic; mixed detunes couple not at
+all.** This is the geometric skeleton of the "2-adic web" and the reason
+5-forcers must run the forced-pair pipeline (de Grey, Haugland) instead of
+relying on chord soup: single detunes are THIN by law.
+
+*Verification protocol: every cross chord found by any census this milestone
+is checked against the law at find time (violation = loud abort naming the
+chord); the self-test plants both a true spindle chord (must be found) and a
+law-violating fake (must be caught). Kernel certification of the ρ₁₅ instance
+is DEFERRED to M32 by decision here — it is the first kill lemma of the
+2-adic engine and belongs with that engine's Lean work; M31 stays
+instruments-only.*
+
+### §0b — Numbered predictions (falsifiable, with confidence)
+
+* **P1 (the law holds)**: zero law-violating chords in every census this
+  milestone. Confidence: very high (it is arithmetic). Falsifier: any chord
+  whose pin fails — which would mean §0a's block-independence argument is
+  wrong, reported at face value.
+* **P2 (mitotic hexagram is 4-chromatic)**: for every single-detune union
+  H(B) ∪ R·H(B) probed (anchors: metapivot, a hex pivot; R ∈ {ρ₁₅, ρ₆₃,
+  √ρ₁₅, √ρ₆₃}; B ≤ 1): cross-chord count ≤ 40 per variant (point estimates:
+  0 for ρ₆₃ at any anchor — the (4,4) diagonal is outside the chunk's radial
+  reach ≈ 2.16; 0–20 for ρ₁₅; small-unknown for the halves), and SAT
+  χ = 4 for every variant. Confidence: 85%. This is the CAUSAL test of G6
+  (hexagram-as-central-organ): if χ = 4 everywhere, containment-in-witnesses
+  loses causal candidacy at single-detune order and the Grokking is annotated.
+* **P3 (de Grey pair is 4-chromatic, and is the engine's build site)**: the
+  two-ladder object at centre distance 2 has a nonempty seam chord family
+  census (register 10–100 chords at B = 2), the ρ₁₅ mitosis adds the
+  pivot-level spindle chord (centre₂ → ρ₁₅·centre₂ — both centres, echoing
+  M23's self-gluing) plus ≤ 30 conic chords, and SAT χ = 4. Confidence: 85%.
+  Deliverable regardless of χ: the cleared-equation shapes (which primes,
+  which parities) — the M32 handoff.
+* **P4 (witness-closure growth)**: gen-1 half-spindle closure of the 1581
+  (each generator ±1 about both spindle centres, once) lands at 12k–40k
+  points after exact dedup. Confidence: medium.
+* **P5 (no jackpot)**: no k = 5 refusal at any affordable chunk (P < 5% that
+  one fires). If one fires: independent-seed verification, then the finite
+  core straight to the kernel certificate pipeline (registered escalation).
+* **P6 (ring law)**: single-centre orbits FREEZE the ring inventory
+  (invariance — rotations about c preserve radii about c; theorem-shaped,
+  trivial); the two-centre gen-1 closure's about-centre ring count grows from
+  819 to 2,000–6,000. Confidence: medium.
+* **P7 (stub question 3, ranked last, optional)**: Heule-510 minus one vertex
+  is 4-colourable (vertex-criticality of SAT-shrunk witnesses; P 80%), and
+  its k = 4 forced pairs concentrate at spindle-able distances. Run only if
+  the main blocks land early.
+* **P8 (the frontier curve)**: growing chunks of the witness closure about
+  the spindle axis: no 5-chromatic chunk below 800 vertices (P 70%); the
+  SAT-findability transition (k = 4 colouring stops being findable at 300 s)
+  sits at 1,200–1,600 committed-scale vertices. Honesty rule: "unknown ≥ cap"
+  is never reported as χ = 5; only a cube-split-certified UNSAT (or the
+  kernel fact for the full 1581) counts as a 5-chromatic chunk.
+* **P9 (the enrichment question — genuinely open, 50/50)**: adding gen-1
+  closure points to a sub-1581 chunk enables a 5-chromatic subgraph SMALLER
+  than 1581 vertices (the witness was SAT-shrunk under a subgraph constraint;
+  the closure offers a denser edge soup). If yes: "least geometry" pays
+  immediately and M32's object shrinks. If no: near-edge-criticality binds
+  even with enrichment — evidence the 5-mechanism is irreducibly global at
+  this scale (the registered failure clause's finding).
+* **P10 (the milestone verdict)**: the smallest χ ≥ 5 closure this milestone
+  certifies-by-SAT is the 1581-witness closure itself (2 centres, half-spindle
+  generators); no smaller-generator or fewer-centre closure reaches 5 at
+  affordable chunks. Confidence: 65% — P9 is the branch that would beat it.
+
+### §0c — Scope ladder (committed order; a timeout leaves a coherent prefix)
+
+1. `tools/closure.py` + self-tests (planted spindle chord found; planted law
+   violation caught; ζ₆-rotation dedup control; SAT wrapper red/green on
+   K₅/K₄ at k = 4).
+2. Probe A: mitotic hexagram sweep (cheap; P1/P2).
+3. Probe B: de Grey pair (P3 + the clearing-shape handoff).
+4. Probe C: witness closure gen-1 (P4/P5/P6), then the frontier curve
+   (P8/P9) — the heavy block, background, one job at a time, per-call caps.
+5. The closure-explorer visualizer + the ownership/defect overlays promoted
+   into the anatomy explorer.
+6. Optional if early: P7 rigidity run on 510−v; the triple-query rigidity
+   extension remains M32-stub work unless time is abundant.
+7. Close: Frontier + Grokkings + M32 stub rewrite + report.
+
+Modeling passes for this milestone: **domain** (always) and **experience**
+(the visualizer, the CLI surfaces, the M32 handoff contract are consumer
+surfaces) — obligation-modeling is SKIPPED with reason stated: no Lean
+obligations this milestone (the quadrature lemma is deferred to M32 by the
+§0a decision), matching the M30 instruments-only precedent.
+
+## §1 — Instruments (the shapes, before implementation)
+
+**`tools/closure.py`** (new; imports `couple.py` arithmetic + `hexchunk.py`
+points; generators re-declared in couple currency with |g| = 1 asserted
+exactly at import):
+
+* `mitosis(points, anchor, R)` → union of base and R-about-anchor copy,
+  exact dedup, provenance tags (copy 0/1), fusion record.
+* `cross_chords(A, B)` → float triage (numpy) then exact confirm; every
+  found chord immediately checked against the §0a law (pin + conic named
+  per chord); violation aborts loudly.
+* `close_gen(points, centres, gens)` → one word-length generation, growth
+  and collision (fusion) reporting; graded, never "the whole orbit".
+* `chunk(points, edges, centre, r2max)` → induced ball with whole
+  neighbourhoods; rigidity-JSON export (n/edges).
+* `chi_probe(graph, k, cap)` → one SAT call via `coloring.base_clauses` +
+  `forcer._solve`, three-outcome honest (SAT/UNSAT/unknown-at-cap).
+* `--self-test` with the four §0c-item-1 controls.
+
+**Probe A details**: variants = {metapivot, hexPivot 0} × {ρ₁₅, ρ₆₃, √ρ₁₅,
+√ρ₆₃} at B = 1 (234-pt chunk → ~468-pt unions). Census + SAT k = 3, 4, 5
+each. Cost estimate: < 2 min/variant.
+
+**Probe B details**: the pair object = ⟨ζ₆,σ⟩-ladders (outer+inner circles,
+|b| ≤ 2) at centres 0 and 2 (the de Grey spindle distance, on the real
+axis), plus the two centre points; census its internal seam chords (the
+distance-2 analogue of M24's families — the cleared-equation shapes recorded
+per family: constant, parity class, prime content); then mitosis by ρ₁₅
+about centre 0; census + SAT as in A.
+
+**Probe C details**: load the committed 1581 (anatomy's tables); gen-1 =
+all ±1 applications of {ζ₁₂, σ, √ρ₁₅, √ρ₆₃} about both spindle centres;
+growth/fusion/ring numbers (P4/P6); one k = 5 SAT probe on the full gen-1
+object (background, cap 3,600 s — P5); the frontier curve: balls about the
+axis midpoint at growing radius, plain and gen-1-enriched, k = 4 with 300 s
+caps (P8/P9); at most ONE confirmatory cube-split UNSAT at the most
+interesting radius (systemd-capped, one job at a time).
+
+**Visualizer**: the closure explorer renders probe objects (base/copy
+colour-split, cross chords as a togglable class, the law's pin lines on
+hover); the ownership + defect-map overlays go into `tools/degrey-viz.html`
+via `degreyviz_refresh.py`; artifacts re-published to the SAME urls.
+
+**Reporting artifacts**: `build/m31-mitosis-*.json`, `build/m31-pair.json`,
+`build/m31-closure-gen1.json`, `build/m31-frontier.json` — field names are
+the M32 contract: `object`, `anchor`, `detune`, `cross_chords` (each with
+`pin`, `conic`, `radii`), `chi` (`{k, status, seconds}` per k), `growth`,
+`rings`.
