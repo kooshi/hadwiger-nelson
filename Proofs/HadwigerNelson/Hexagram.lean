@@ -234,7 +234,59 @@ theorem metaInner_mem_hexagram (x : ZMod 6) (b : ℤ) :
 
 /-- M25's four-ladder object is the sub-object at pivot addresses `{3, 5, 1}` plus
 the meta ladder: the χ ≥ 4 witness transports. -/
-theorem fourLadder_subset_hexagram : fourLadder ⊆ hexagram := sorry
+theorem fourLadder_subset_hexagram : fourLadder ⊆ hexagram := by
+  intro z hz
+  simp only [fourLadder, Set.mem_iUnion, Set.mem_union, Set.mem_setOf_eq] at hz
+  obtain ⟨k, hz⟩ := hz
+  fin_cases k
+  · rcases hz with ⟨u, v, rfl⟩ | ⟨u, v, rfl⟩
+    · have he : outerPt (anchor 0).1 (anchor 0).2 u v
+          = outerPt (hexPivot 3) (hexPivot 3 + 1) u v := by
+        rw [anchor_zero, hexPivot_three]
+        norm_num
+      show outerPt (anchor 0).1 (anchor 0).2 u v ∈ hexagram
+      rw [he]; exact outer_mem_hexagram 3 u v
+    · have he : innerPt (anchor 0).1 (anchor 0).2 u v
+          = innerPt (hexPivot 3) (hexPivot 3 + 1) u v := by
+        rw [anchor_zero, hexPivot_three]
+        norm_num
+      show innerPt (anchor 0).1 (anchor 0).2 u v ∈ hexagram
+      rw [he]; exact inner_mem_hexagram 3 u v
+  · rcases hz with ⟨u, v, rfl⟩ | ⟨u, v, rfl⟩
+    · have he : outerPt (anchor 1).1 (anchor 1).2 u v
+          = outerPt (hexPivot 5) (hexPivot 5 + 1) u v := by
+        rw [anchor_one, hexPivot_five]
+        norm_num
+      show outerPt (anchor 1).1 (anchor 1).2 u v ∈ hexagram
+      rw [he]; exact outer_mem_hexagram 5 u v
+    · have he : innerPt (anchor 1).1 (anchor 1).2 u v
+          = innerPt (hexPivot 5) (hexPivot 5 + 1) u v := by
+        rw [anchor_one, hexPivot_five]
+        norm_num
+      show innerPt (anchor 1).1 (anchor 1).2 u v ∈ hexagram
+      rw [he]; exact inner_mem_hexagram 5 u v
+  · rcases hz with ⟨u, v, rfl⟩ | ⟨u, v, rfl⟩
+    · have he : outerPt (anchor 2).1 (anchor 2).2 u v
+          = outerPt (hexPivot 1) (hexPivot 1 + 1) u v := by
+        rw [anchor_two, hexPivot_one]
+      show outerPt (anchor 2).1 (anchor 2).2 u v ∈ hexagram
+      rw [he]; exact outer_mem_hexagram 1 u v
+    · have he : innerPt (anchor 2).1 (anchor 2).2 u v
+          = innerPt (hexPivot 1) (hexPivot 1 + 1) u v := by
+        rw [anchor_two, hexPivot_one]
+      show innerPt (anchor 2).1 (anchor 2).2 u v ∈ hexagram
+      rw [he]; exact inner_mem_hexagram 1 u v
+  · rcases hz with ⟨u, v, rfl⟩ | ⟨u, v, rfl⟩
+    · have he : outerPt (anchor 3).1 (anchor 3).2 u v
+          = outerPt metaPivot metaAnchor u v := by
+        rw [anchor_three]
+      show outerPt (anchor 3).1 (anchor 3).2 u v ∈ hexagram
+      rw [he]; exact metaOuter_mem_hexagram u v
+    · have he : innerPt (anchor 3).1 (anchor 3).2 u v
+          = innerPt metaPivot metaAnchor u v := by
+        rw [anchor_three]
+      show innerPt (anchor 3).1 (anchor 3).2 u v ∈ hexagram
+      rw [he]; exact metaInner_mem_hexagram u v
 
 /-! ## §T Transport: the 60° rotation about the metapivot -/
 
@@ -2832,53 +2884,275 @@ The pivot–meta statements extend M25's `Fin 3` quantifier to the full hexagon
 addresses); the unit-pair oo statement is M24's matching-∨-hub in hexagram
 currency. -/
 
+/-- The address-shift translations used by the fusion and hub readings. -/
+private theorem shift_eq_one : ∀ A X : ZMod 6, X - (A - 3) = 1 ↔ X = A - 2 := by decide
+private theorem shift_eq_zero : ∀ A X : ZMod 6, X - (A - 3) = 0 ↔ X = A - 3 := by decide
+private theorem shift_eq_five : ∀ A X : ZMod 6, X - (A - 3) = 5 ↔ X = A + 2 := by decide
+private theorem shift_eq_three : ∀ A X : ZMod 6, X - (A - 3) = 3 ↔ X = A := by decide
+
+private theorem hexMeta_oo_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (outerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (outerPt metaPivot metaAnchor y d) = 1 ↔ (x, b, y, d) ∈ metaOOTable := by
+  have h := meta_oo_complete 0 x b y d
+  rw [show webShift 0 = 0 from rfl, sub_zero, sub_zero, pivot_zero] at h
+  rw [hexPivot_three]
+  exact h
+
+private theorem hexMeta_oi_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (outerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (innerPt metaPivot metaAnchor y d) = 1 ↔
+      ((y, d) = ((3 : ZMod 6), (0 : ℤ)) ∨ (x, b, y, d) ∈ metaOITable) := by
+  have h := meta_oi_complete 0 x b y d
+  rw [show webShift 0 = 0 from rfl, sub_zero, sub_zero, pivot_zero] at h
+  rw [hexPivot_three]
+  exact h
+
+private theorem hexMeta_io_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (innerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (outerPt metaPivot metaAnchor y d) = 1 ↔ (x, b, y, d) ∈ metaIOTable := by
+  have h := meta_io_complete 0 x b y d
+  rw [show webShift 0 = 0 from rfl, sub_zero, sub_zero, pivot_zero] at h
+  rw [hexPivot_three]
+  exact h
+
+private theorem hexMeta_ii_zero (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    dist (innerPt (hexPivot 3) (hexPivot 3 + 1) x b)
+      (innerPt metaPivot metaAnchor y d) = 1 ↔ (x, b, y, d) ∈ metaIITable := by
+  have h := meta_ii_complete 0 x b y d
+  rw [show webShift 0 = 0 from rfl, sub_zero, sub_zero, pivot_zero] at h
+  rw [hexPivot_three]
+  exact h
+
+private theorem hexMeta_fusion_oi_zero' (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
+    outerPt (hexPivot 3) (hexPivot 3 + 1) x b = innerPt metaPivot metaAnchor y d ↔
+      ((x = 1 ∧ b = 0 ∧ y = 1 ∧ d = 0) ∨ (x = 0 ∧ b = 0 ∧ y = 5 ∧ d = 0)) := by
+  have h := meta_fusion_oi 0 x b y d
+  rw [show webShift 0 = 0 from rfl, sub_zero, sub_zero, pivot_zero] at h
+  rw [hexPivot_three]
+  exact h
+
 /-- **oo completeness at the metapivot axis, all SIX webs** (extends M25's
 `meta_oo_complete`). -/
 theorem hexMeta_oo_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
       (outerPt metaPivot metaAnchor y d) = 1 ↔
-      (x - (a - 3), b, y - (a - 3), d) ∈ metaOOTable := sorry
+      (x - (a - 3), b, y - (a - 3), d) ∈ metaOOTable := by
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaOuter (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact hexMeta_oo_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **oi completeness at the metapivot axis, all six webs**: the hub pencil
 through the fused pivot plus the four sporadics. -/
 theorem hexMeta_oi_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
       (innerPt metaPivot metaAnchor y d) = 1 ↔
-      ((y = a ∧ d = 0) ∨ (x - (a - 3), b, y - (a - 3), d) ∈ metaOITable) := sorry
+      ((y = a ∧ d = 0) ∨ (x - (a - 3), b, y - (a - 3), d) ∈ metaOITable) := by
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaInner (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter, hexMeta_oi_zero]
+  constructor
+  · rintro (hp | hm)
+    · simp only [Prod.mk.injEq] at hp
+      exact Or.inl ⟨(shift_eq_three a y).mp hp.1, hp.2⟩
+    · exact Or.inr hm
+  · rintro (⟨hy, hd⟩ | hm)
+    · exact Or.inl (by
+        simp only [Prod.mk.injEq]
+        exact ⟨(shift_eq_three a y).mpr hy, hd⟩)
+    · exact Or.inr hm
 
 /-- **io completeness at the metapivot axis, all six webs.** -/
 theorem hexMeta_io_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
       (outerPt metaPivot metaAnchor y d) = 1 ↔
-      (x - (a - 3), b, y - (a - 3), d) ∈ metaIOTable := sorry
+      (x - (a - 3), b, y - (a - 3), d) ∈ metaIOTable := by
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaOuter (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact hexMeta_io_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **ii completeness at the metapivot axis, all six webs.** -/
 theorem hexMeta_ii_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (innerPt (hexPivot a) (hexPivot a + 1) x b)
       (innerPt metaPivot metaAnchor y d) = 1 ↔
-      (x - (a - 3), b, y - (a - 3), d) ∈ metaIITable := sorry
+      (x - (a - 3), b, y - (a - 3), d) ∈ metaIITable := by
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaInner (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2, dist_rot6_iter]
+  exact hexMeta_ii_zero (x - (a - 3)) b (y - (a - 3)) d
 
 /-- **The oi fusion at all six webs**: pivot `a`'s outer lattice meets the
 meta-inner lattice at exactly the two second-neighbour pivots. -/
 theorem hexMeta_fusion_oi (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     outerPt (hexPivot a) (hexPivot a + 1) x b = innerPt metaPivot metaAnchor y d ↔
       ((x = a - 2 ∧ b = 0 ∧ y = a - 2 ∧ d = 0)
-        ∨ (x = a - 3 ∧ b = 0 ∧ y = a + 2 ∧ d = 0)) := sorry
+        ∨ (x = a - 3 ∧ b = 0 ∧ y = a + 2 ∧ d = 0)) := by
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaInner (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2]
+  constructor
+  · intro he
+    rcases (hexMeta_fusion_oi_zero' (x - (a - 3)) b (y - (a - 3)) d).mp
+        (rot6_iter_inj he) with ⟨hx, hb, hy, hd⟩ | ⟨hx, hb, hy, hd⟩
+    · exact Or.inl ⟨(shift_eq_one a x).mp hx, hb, (shift_eq_one a y).mp hy, hd⟩
+    · exact Or.inr ⟨(shift_eq_zero a x).mp hx, hb, (shift_eq_five a y).mp hy, hd⟩
+  · intro he
+    refine congrArg (rot6^[(a - 3).val]) ?_
+    refine (hexMeta_fusion_oi_zero' (x - (a - 3)) b (y - (a - 3)) d).mpr ?_
+    rcases he with ⟨hx, hb, hy, hd⟩ | ⟨hx, hb, hy, hd⟩
+    · exact Or.inl ⟨(shift_eq_one a x).mpr hx, hb, (shift_eq_one a y).mpr hy, hd⟩
+    · exact Or.inr ⟨(shift_eq_zero a x).mpr hx, hb, (shift_eq_five a y).mpr hy, hd⟩
 
 /-- The oo fusion at the metapivot axis is empty at every pivot. -/
 theorem hexMeta_fusion_oo (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     outerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ outerPt metaPivot metaAnchor y d := sorry
+      ≠ outerPt metaPivot metaAnchor y d := by
+  intro he
+  have h1 := rot6_iter_outer (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaOuter (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  have hz := rot6_iter_inj he
+  rw [show outerPt (hexPivot 3) (hexPivot 3 + 1) (x - (a - 3)) b
+      = outerPt (pivot 0) (pivot 0 + 1) (x - (a - 3)) b from by
+    rw [hexPivot_three, pivot_zero]] at hz
+  exact meta_fusion_oo 0 (x - (a - 3)) b (y - (a - 3)) d hz
 
 /-- The io fusion at the metapivot axis is empty at every pivot. -/
 theorem hexMeta_fusion_io (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     innerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ outerPt metaPivot metaAnchor y d := sorry
+      ≠ outerPt metaPivot metaAnchor y d := by
+  intro he
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaOuter (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  have hz := rot6_iter_inj he
+  rw [show innerPt (hexPivot 3) (hexPivot 3 + 1) (x - (a - 3)) b
+      = innerPt (pivot 0) (pivot 0 + 1) (x - (a - 3)) b from by
+    rw [hexPivot_three, pivot_zero]] at hz
+  exact meta_fusion_io 0 (x - (a - 3)) b (y - (a - 3)) d hz
 
 /-- The ii fusion at the metapivot axis is empty at every pivot. -/
 theorem hexMeta_fusion_ii (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     innerPt (hexPivot a) (hexPivot a + 1) x b
-      ≠ innerPt metaPivot metaAnchor y d := sorry
+      ≠ innerPt metaPivot metaAnchor y d := by
+  intro he
+  have h1 := rot6_iter_inner (a - 3).val 3 (x - (a - 3)) b
+  have h2 := rot6_iter_metaInner (a - 3).val (y - (a - 3)) d
+  rw [zmod_cast_val, show (3 : ZMod 6) + (a - 3) = a by ring,
+    show (x - (a - 3) + (a - 3) : ZMod 6) = x by ring] at h1
+  rw [zmod_cast_val, show (y - (a - 3) + (a - 3) : ZMod 6) = y by ring] at h2
+  rw [← h1, ← h2] at he
+  have hz := rot6_iter_inj he
+  rw [show innerPt (hexPivot 3) (hexPivot 3 + 1) (x - (a - 3)) b
+      = innerPt (pivot 0) (pivot 0 + 1) (x - (a - 3)) b from by
+    rw [hexPivot_three, pivot_zero]] at hz
+  exact meta_fusion_ii 0 (x - (a - 3)) b (y - (a - 3)) d hz
+
+/-! ### §W.1 The unit pairs: M24's pair theorems, re-anchored -/
+
+/-- Second-neighbour pivots differ by a hex root: the re-anchoring fact. -/
+private theorem hexPivot_unit_diff (a : ZMod 6) :
+    hexPivot (a + 2) - hexPivot a = word (a + 3) 0 := by
+  rw [hexPivot_sub, show word (a + 3) 0 = word a 0 * word 3 0 from by
+    rw [← word_add, add_zero],
+    show word (3 : ZMod 6) 0 = zeta6 ^ 3 from by
+      rw [show (3 : ZMod 6) = ((3 : ℕ) : ZMod 6) from rfl, word_pow 3 (by norm_num)],
+    zeta6_cube', show word (2 : ZMod 6) 0 = zeta6 ^ 2 from by
+      rw [show (2 : ZMod 6) = ((2 : ℕ) : ZMod 6) from rfl, word_pow 2 (by norm_num)]]
+  have hm := three_metaPivot
+  have h3 : (3 : ℂ) * (metaPivot * word a 0 * (zeta6 ^ 2 - 1))
+      = 3 * (word a 0 * -1) := by
+    linear_combination word a 0 * (zeta6 ^ 2 - 1) * hm
+      + (word a 0 * (zeta6 + 2)) * zeta6_minpoly
+  have := mul_left_cancel₀ (by norm_num : (3 : ℂ) ≠ 0) h3
+  linear_combination this
+
+/-- Pivot `a`'s ladder re-anchored onto the unit pair `(hexPivot a, hexPivot (a+2))`:
+the address shifts by `3 − a`. -/
+private theorem unit_reanchor_outer (a x : ZMod 6) (b : ℤ) :
+    outerPt (hexPivot a) (hexPivot a + 1) x b
+      = outerPt (hexPivot a) (hexPivot (a + 2)) (x + (3 - a)) b := by
+  refine outerPt_hexRot (hexPivot a) (hexPivot (a + 2)) (hexPivot a + 1) (3 - a) x b ?_
+  rw [add_sub_cancel_left, show zeta6 ^ (((3 - a : ZMod 6)).val : ℤ) = word (3 - a) 0 from
+    (word_k0 _).symm, hexPivot_unit_diff, ← word_add,
+    (by decide : ∀ A : ZMod 6, (3 - A + (A + 3) : ZMod 6) = 0) a, add_zero]
+  exact ((word_eq_one_iff 0 0).mpr ⟨rfl, rfl⟩).symm
+
+private theorem unit_reanchor_inner (a x : ZMod 6) (b : ℤ) :
+    innerPt (hexPivot a) (hexPivot a + 1) x b
+      = innerPt (hexPivot a) (hexPivot (a + 2)) (x + (3 - a)) b := by
+  refine innerPt_hexRot (hexPivot a) (hexPivot (a + 2)) (hexPivot a + 1) (3 - a) x b ?_
+  rw [add_sub_cancel_left, show zeta6 ^ (((3 - a : ZMod 6)).val : ℤ) = word (3 - a) 0 from
+    (word_k0 _).symm, hexPivot_unit_diff, ← word_add,
+    (by decide : ∀ A : ZMod 6, (3 - A + (A + 3) : ZMod 6) = 0) a, add_zero]
+  exact ((word_eq_one_iff 0 0).mpr ⟨rfl, rfl⟩).symm
+
+/-- The reverse diff: pivot `a` from pivot `a+2` is the hex root `ζ₆^a`. -/
+private theorem hexPivot_unit_diff' (a : ZMod 6) :
+    hexPivot a - hexPivot (a + 2) = word a 0 := by
+  have h := hexPivot_sub (a + 2) 4
+  rw [(by decide : ∀ A : ZMod 6, A + 2 + 4 = A) a,
+    show word (4 : ZMod 6) 0 = zeta6 ^ 4 from by
+      rw [show (4 : ZMod 6) = ((4 : ℕ) : ZMod 6) from rfl, word_pow 4 (by norm_num)]] at h
+  rw [h]
+  have hm := three_metaPivot
+  have hw : word (a + 2) 0 = word a 0 * zeta6 ^ 2 := by
+    rw [show word (a + 2) 0 = word a 0 * word 2 0 from by rw [← word_add, add_zero],
+      show word (2 : ZMod 6) 0 = zeta6 ^ 2 from by
+        rw [show (2 : ZMod 6) = ((2 : ℕ) : ZMod 6) from rfl, word_pow 2 (by norm_num)]]
+  have h3 : (3 : ℂ) * (metaPivot * word (a + 2) 0 * (zeta6 ^ 4 - 1))
+      = 3 * word a 0 := by
+    rw [hw]
+    linear_combination (word a 0 * zeta6 ^ 2 * (zeta6 ^ 4 - 1)) * hm
+      + (word a 0 * (zeta6 ^ 5 + 2 * zeta6 ^ 4 + zeta6 ^ 3 - zeta6 ^ 2 - 3 * zeta6 - 3))
+        * zeta6_minpoly
+  exact mul_left_cancel₀ (by norm_num : (3 : ℂ) ≠ 0) h3
+
+/-- Pivot `a+2`'s ladder re-anchored back onto pivot `a`: the shift is `−a`. -/
+private theorem unit_reanchor_outer' (a y : ZMod 6) (d : ℤ) :
+    outerPt (hexPivot (a + 2)) (hexPivot (a + 2) + 1) y d
+      = outerPt (hexPivot (a + 2)) (hexPivot a) (y + (-a)) d := by
+  refine outerPt_hexRot (hexPivot (a + 2)) (hexPivot a) (hexPivot (a + 2) + 1) (-a) y d ?_
+  rw [add_sub_cancel_left, show zeta6 ^ (((-a : ZMod 6)).val : ℤ) = word (-a) 0 from
+    (word_k0 _).symm, hexPivot_unit_diff', ← word_add,
+    show (-a + a : ZMod 6) = 0 by ring, add_zero]
+  exact ((word_eq_one_iff 0 0).mpr ⟨rfl, rfl⟩).symm
+
+private theorem unit_reanchor_inner' (a y : ZMod 6) (d : ℤ) :
+    innerPt (hexPivot (a + 2)) (hexPivot (a + 2) + 1) y d
+      = innerPt (hexPivot (a + 2)) (hexPivot a) (y + (-a)) d := by
+  refine innerPt_hexRot (hexPivot (a + 2)) (hexPivot a) (hexPivot (a + 2) + 1) (-a) y d ?_
+  rw [add_sub_cancel_left, show zeta6 ^ (((-a : ZMod 6)).val : ℤ) = word (-a) 0 from
+    (word_k0 _).symm, hexPivot_unit_diff', ← word_add,
+    show (-a + a : ZMod 6) = 0 by ring, add_zero]
+  exact ((word_eq_one_iff 0 0).mpr ⟨rfl, rfl⟩).symm
+
+/-- The unit-pair axis fact in the orientation the pair theorems take. -/
+private theorem dist_unit_pair (a : ZMod 6) : dist (hexPivot a) (hexPivot (a + 2)) = 1 := by
+  rw [dist_comm]
+  exact dist_hexPivot_unit a
 
 /-- **Unit-pair oo, all six pairs, in hexagram currency**: the translation
 matching or one of the two hub pencils (M24's `oo_complete` re-addressed —
@@ -2887,7 +3161,27 @@ near one). -/
 theorem unit_oo_complete (a : ZMod 6) (x : ZMod 6) (b : ℤ) (y : ZMod 6) (d : ℤ) :
     dist (outerPt (hexPivot a) (hexPivot a + 1) x b)
       (outerPt (hexPivot (a + 2)) (hexPivot (a + 2) + 1) y d) = 1 ↔
-      ((y = x ∧ d = b) ∨ (x = a - 3 ∧ b = 0) ∨ (y = a ∧ d = 0)) := sorry
+      ((y = x ∧ d = b) ∨ (x = a - 3 ∧ b = 0) ∨ (y = a ∧ d = 0)) := by
+  rw [unit_reanchor_outer, unit_reanchor_outer',
+    oo_complete (dist_unit_pair a) (x + (3 - a)) b (y + (-a)) d]
+  constructor
+  · rintro (⟨h1, rfl⟩ | ⟨h1, rfl⟩ | ⟨h1, rfl⟩)
+    · exact Or.inl ⟨(by decide : ∀ A X Y : ZMod 6,
+        Y + -A = X + (3 - A) + 3 → Y = X) a x y h1, rfl⟩
+    · exact Or.inr (Or.inl ⟨(by decide : ∀ A X : ZMod 6,
+        X + (3 - A) = 0 → X = A - 3) a x h1, rfl⟩)
+    · exact Or.inr (Or.inr ⟨(by decide : ∀ A Y : ZMod 6,
+        Y + -A = 0 → Y = A) a y h1, rfl⟩)
+  · rintro (⟨hy, hd⟩ | ⟨hx, hb⟩ | ⟨hy, hd⟩)
+    · exact Or.inl ⟨by
+        rw [hy]
+        exact (by decide : ∀ A X : ZMod 6, X + -A = X + (3 - A) + 3) a x, hd⟩
+    · exact Or.inr (Or.inl ⟨by
+        rw [hx]
+        exact (by decide : ∀ A : ZMod 6, A - 3 + (3 - A) = 0) a, hb⟩)
+    · exact Or.inr (Or.inr ⟨by
+        rw [hy]
+        exact (by decide : ∀ A : ZMod 6, A + -A = 0) a, hd⟩)
 
 /-! ## §C The colouring: χ(hexagram) = 4
 
