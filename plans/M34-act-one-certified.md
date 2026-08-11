@@ -385,3 +385,56 @@ of the milestone; any mid-milestone additional experiment registers a
 (read the final statement aloud against the informal claim) runs at
 close on all four headline statements (two cores, two plane
 corollaries) — B4's attribution wording is part of that gate.
+
+## §0f — Domain modeling pass (2026-08-11, fresh invocation)
+
+**D1 — The bridge is honestly two graphs.** The augmented graph (E ++ P) is
+the CERTIFICATE's subject — the SAT vehicle — while the base-graph statement
+(∀ proper colourings of E, some P-pair mono) is the PRODUCT the plane
+consumes. The bridge is the seam, proven once. Proof-run refinement: the
+forward lemma (`mono_pair_of_not_colorable_append`) needs NO `p.1 ≠ p.2`
+hypothesis — building the augmented colouring from an avoiding one never
+meets a loop; the iff's other direction genuinely needs it (a loop pair is
+stripped by `edgeGraph` and cannot be avoided). `hP` moves to the iff only.
+Unsampled members checked: P = [] (vacuous-consistent), duplicates and
+swapped pairs (harmless).
+
+**D2 — Completeness is extrinsic.** "P is ALL pairs at exact distance d
+among these points" is consumed by the INTERPRETATION (the M33 class
+semantics), never by a downstream proof. Side check per core: kernel
+`decide` over all C(n,2) pairs if affordable (measure first), else the
+compiled `#guard` in the DeGrey pattern — the fallback NAMED in the file as
+a compiled cross-check, not a kernel fact.
+
+**D3 — The transmuter stays k = 4, pure colour.** The general-k form has no
+second consumer and trades an instant `decide` for Finset machinery. All 9
+inequality hypotheses believed load-bearing (mutation audit at the
+obligation pass). The graph content (which hypothesis is an edge, which is
+class avoidance) wires in at the instance. A concrete non-vacuity example
+(z,a,b,c,h) = (0,1,2,3,1) joins the spec block.
+
+**D4 — The pair check gets its own small module.** `PairDist.lean` (imports
+Certificate.lean; nothing frozen is edited — Certificate.lean is imported
+by every certificate table and a declaration edit there rebuilds hours):
+`pairsAt (c : UDCert n) (ps) (r : ℤ) : Bool` + ONE soundness lemma
+`… → dist (eval i) (eval j) = Real.sqrt r`, nonnegativity of r DERIVED
+inside the proof from the real geometry (the Glue.lean precedent), never
+assumed. Instances specialize (√3 stays as `Real.sqrt 3`; √4 rewrites to 2
+by a one-line instance step).
+
+**D5 — A1's RHS stays raw.** No existing predicate names the mixed-graph
+form (colouring on `deleteIncidenceSet v`, adjacency from G), and a mint
+for one consumer is speculative structure. Found and recorded: since v is
+ISOLATED in the deleted graph, the raw coverage RHS is exactly
+`Fan (G.deleteIncidenceSet v) k v N(v)` read through v's colour freedom —
+the instrument's `fan(G − v, N(v))` query shape, literally. Docstring
+remark now; the Fan-form corollary is minted only when a consumer (the
+510-fan promotion) actually arrives.
+
+**D6 — Q4 reuse and bare existentials confirmed.** The fixed 16-basis
+tower is pipeline-intrinsic (all trusted machinery is Q4-fixed); dead
+coordinates at denom 12 are cheap and buy the whole certificate chain.
+Plane corollaries: bare ∃ over `unitDistance ℂ` (house model, M20's
+genre); the finite core theorems ARE the constructive strong forms
+carrying addresses; no EuclideanSpace transfer (a ∀-colourings statement
+has no consumer there).
