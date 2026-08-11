@@ -633,6 +633,129 @@ pigeonhole's easy half, checked from the standing colour tables). A
 fired-class shrink core on the chunk (the d = 2 pigeonhole core) is
 in-scope as phase-2 work if Q-i1 lands.
 
+---
+
+# §R — Results (2026-08-10, desktop; every verdict at face value)
+
+*All instrument output; nothing here is a theorem unless it cites a kernel
+address. Artifacts: `build/m33-spectrum-*.json`, `build/m33-core-*.json`,
+`build/m33-covercore-*.json`, `build/m33-chunk-ladder.json`,
+`build/m33-controls.json`; the one-chart verdict lives in the standing
+anatomy explorer (M33 pane).*
+
+## The scorecard (registered → measured)
+
+* **P1 CONFIRMED** — 510 about v0: min-cover < 4 at every r² < 5.9149;
+  fanned exactly at the last ring (9.13 s). The criticality echo measured;
+  A1 validated by instrument.
+* **P2 CONFIRMED (extreme low end)** — the 2-onset AND 3-onset both arrive
+  at r² = 1.0 exactly: the 209-vertex ball already forces three colours on
+  S₃₆ the moment the circle completes. The 3-delivery is nearly local; only
+  the 4th colour is global.
+* **P3 CONFIRMED, band missed LOW** — the 3-cover core is **49 vertices =
+  the 36-point circle + 13 ambient** (registered band 60–250), 1-minimal
+  with all 13 necessity witnesses held. The 13 sit on THREE shells, all
+  strictly INSIDE the circle: r² = (7−√33)/6 (4 pts), **1/3 — the inner
+  circle (5 pts)**, (9−√33)/6 (4 pts). The inner-lean confirmed (M22's
+  clamp, one field up); the 4th colour's precondition is delivered from
+  within, by a 13-point web on the (·−√33)/6 conjugate family ± the inner
+  circle. **This is the golden question's 3-cover answer, with addresses.**
+* **P4 REFUTED (pair half), A2-consistent (triple half)** — on 510 the
+  equal-√3-pair class is CLEAN at every sub-full radius (registered: fires
+  below r² ≤ 4), and mono-√3-triples clean likewise.
+* **P5 CONFIRMED** — the equal-pair-at-2 class fires on 510 at onset
+  **r² = 5/3 — the GLUE SHELL |1 + σ/√3|²** (re-encode-confirmed): the d=2
+  pigeonhole switches on exactly when the ball reaches the seam-interlock
+  radius.
+* **P6 REFUTED as registered, and transformed** — de Grey's fabric stage
+  (orbit(S, hex₁₂): 397 pts, 1,974 edges, 142 √3-triples) does NOT carry
+  the mono-√3-triple pigeonhole (clean at every radius), nor the √3-pair
+  one. It carries the **d=2 pigeonhole at onset r² = 2 − √33/9** — and the
+  full 1581's d=2 onset is **IDENTICAL to nine decimals**: the d=2
+  pigeonhole is purely a fabric property; the spindle assembly neither
+  creates nor moves it.
+* **P7 CONFIRMED (both centres, sharper than the bands)** — origin: 3-onset
+  at r² ≈ 1.05, curve flat at exactly [3,3] through n = 1,539; the full-
+  scale fan row honestly `interval [3,4]` (j=3 capped at 300 s) — and
+  CLOSED BY MATHEMATICS: A1 + the kernel-certified χ(1581) ≥ 5 + the
+  validated 4-colouring of 1581−centre (0.59 s) force the fan without any
+  further SAT. Centre2: its 12-point circle stays at min-cover 2 until the
+  LAST ring (r² = 16), then jumps straight to fanned (direct UNSAT) —
+  coverage delivery tracks the ring-heart; the fan arrives only with the
+  whole witness, at both centres.
+* **P8/P9 CONFIRMED (after one instrument fix)** — the six 791 forced
+  pairs each fire (187–262 s) and the matched pair is clean; the M20
+  skeleton reproduces `no_mono_outer_triple` red/green. The fix, §0i:
+  first-occurrence palette breaking in `class_avoid` (measured 300 s+ →
+  ~200 s per 791 pair; sound for palette-invariant properties only, never
+  in coverage).
+* **P10 PARTIALLY REFUTED — and the refutation is the milestone's
+  discovery**: the √3 classes are clean on the certified hexagram chunk as
+  predicted, but **eq-pair-2 FIRES** (135 instances, both encodings,
+  instant). The registered rationale ("a fired class would contradict a
+  kernel theorem") was simply wrong: a fired class is a disjunctive
+  pigeonhole, fully compatible with χ = 4.
+* **P11 CONFIRMED with ~30× headroom** — the whole campaign (controls,
+  4 sweeps, 10 spectra, 3+ cores) fits in ~3 desktop-hours under the
+  standing parallelism rule (cores−2 thread pool).
+* **P12 — GATE OPEN** (see the gate call below).
+* **Q-i1 MISSED BY ONE RUNG** — the chunk pigeonhole is clean at B = 1
+  (234 pts), fires at B = 2 (378 pts): seam DEPTH switches it on, not
+  radius. **Q-i2 half-missed honestly**: eq-pair-4 is EMPTY at B = 2 (no
+  d = 4 pairs exist in the chunk); eq-pair-4rt3 clean as predicted.
+  **Q-i3 CONFIRMED** (√3 protected by the rot3 rainbow structure).
+  **Q-i4 discharged a fortiori** (fired ⟹ every colouring realizes one;
+  a validated model carries 34/135 mono d2 pairs; at B = 0 a model
+  avoids all 27 — 0/27).
+
+## The finding, in one paragraph
+
+**The seam fabric cannot stay clean at distance 2.** Every proper
+4-colouring of the certified hexagram chunk at seam depth 2 — and of de
+Grey's own fabric stage, and of Heule-510's ball past the glue shell, and
+of the 1581's ball past the same fabric radius — makes some distance-2
+pair monochromatic. Distance 2 is exactly the ρ₁₅ spindle distance
+(4·2² − 1 = 15): **the pigeonhole lives in the seam field; its kill needs
+√15 — one field up. G15's two-act anatomy is real, measured, and its Act
+One is now a named, shrunken object**: the chunk core is **122 vertices**
+(de Grey's L was 121) in 12 rot6-near-symmetric shells about the
+metapivot, 1-minimal with every necessity witness held, confirmed in two
+encodings. The √3-pair pigeonhole exists too — but ONLY in the full 1581
+(onset at the √21-shell r² = (33−3√21)/8, where the second spindle
+system's material enters), not in the bare fabric and not in SAT-shrunk
+510: the assembly creates it, and Heule's shrinking discarded it while
+keeping d=2. The coverage ladder tells the same story from below: the
+3rd colour is delivered onto a centre's circle almost immediately by a
+tiny interior web (13 points on named shells), and the 4th arrives only
+with the entire witness — the criticality echo, now measured at three
+centres and closed by A1 + the kernel χ ≥ 5 where the solver capped out.
+
+## The P12 gate call
+
+The gate criterion (core ≤ ~300 vertices, ≥ 90% of members in ≤ 12
+anatomy classes) is MET by the chunk d2 core: 122 vertices, 100% in 12
+shells, on our OWN certified object whose every chord family is already a
+kernel theorem (M26). **The gate opens toward: kernel-certify "every
+proper 4-colouring of [the 122-vertex core] has a monochromatic
+distance-2 pair" via the M05 LRAT pipeline** — a CNF a fraction of the
+1581's size, over an object whose geometry is already certified. That is
+Act One as a theorem. Act Two (the ρ₁₅ kill per placement + transport) is
+the existing Quadrature/M26 genre. The assembly (χ ≥ 5 of a
+fabric ∪ gadgets union) remains the research: the honest gap is that the
+chunk's pigeonhole forces mono-d2-pairs SOMEWHERE, and a union
+construction must kill every placement — the placement census of the core
+(135 instances at B = 2) is the width budget A3 prices.
+
+## Cores landed (all 1-minimal, witnesses held, solver-measured)
+
+| Core | Object | Size | Shape |
+|---|---|---|---|
+| d2 pigeonhole | hexchunk B2 | **122** | 12 shells about the metapivot, near-rot6 counts (ten of 12/6, defects 11+9) |
+| 3-cover | Heule-510 | **49 = 36 + 13** | ambient wholly interior: (7−√33)/6 ×4, inner circle ×5, (9−√33)/6 ×4 |
+| d2 pigeonhole | fabric | (§R-pending: campaign2) | |
+| d2 pigeonhole | Heule-510 | (§R-pending: campaign2) | |
+| √3-pair pigeonhole | 1581 | (§R-pending: campaign2) | |
+
 ## Costs and benchmarks (desktop)
 
 Fan queries: 510-scale 10–30 s; B=2-chunk-scale seconds; enriched balls
