@@ -754,7 +754,7 @@ construction must kill every placement — the placement census of the core
 | 3-cover | Heule-510 | **49 = 36 + 13** | ambient wholly interior: (7−√33)/6 ×4, inner circle ×5, (9−√33)/6 ×4 |
 | d2 pigeonhole | fabric | **276** | 22 irregular shells — 84% of its onset ball |
 | d2 pigeonhole | Heule-510 | **201** | 22 irregular shells, glue shell outermost — 72% of its onset ball |
-| √3-pair pigeonhole | 1581 | (running overnight — annex; ~1,400-vertex start region) | |
+| √3-pair pigeonhole | 1581 | **9** | two √3-triangles + their unit circumcentres + a hub + one rim–rim edge (annex below) |
 
 **The onset-floppiness lesson** (unregistered observation, consistent
 across all three d2 cores): a core shrunk from the ONSET radius keeps most
@@ -763,6 +763,38 @@ just assembled — near-critical, wide, floppy — while the chunk's
 DEPTH-switched firing at B = 2 carries slack and shrinks to a tight,
 near-rot6-symmetric 32% (122/378). For M34: shrink from slack, not from
 onset; the 122-core is the certification target.
+
+## Annex (2026-08-11, 01:32) — the nine-vertex pigeonhole
+
+The 1581's √3-pair core shrank from ~1,400 vertices to **NINE** (ids 791,
+793, 794, 868, 995, 1186, 1187, 1262, 1390; one per shell, outermost on
+the √21 onset shell; UNSAT re-checked standalone in both encodings). The
+structure, read by hand: the six instances form **two √3-triangles**
+{794, 868, 995} and {1187, 1262, 1390}; a √3-side equilateral triangle
+has circumradius exactly 1, and **793 / 1186 are the unit circumcentres**
+(each adjacent to its whole triangle — M18's `exists_unit_triangle_iff`
+object, live in de Grey's witness); **791 is a hub** adjacent to both
+centres and to two rim members of each triangle; one **rim–rim unit edge
+794–1187** joins the remaining members. The hand proof (two cases on
+whether the centres share a colour): avoiding mono √3-pairs forces each
+triangle RAINBOW in the three colours its centre avoids; the hub's
+forbidden set then leaves it exactly one candidate colour, pinned equal
+to BOTH c(794) and c(1187) — and the 794–1187 edge forbids that. Nine
+vertices, contradiction, done. **De Grey's mono-triple story, resurrected
+in pair form as a hand-checkable gadget.** At 9 vertices the statement is
+`decide`-scale (4⁹ colourings) — a kernel theorem nearly for free at M34,
+with the √3-triangle/circumcentre geometry already certified at M18.
+
+No shortcut hides in the smallness: exploiting the pigeonhole requires
+killing each of six placements with a forced-DISTINCT (virtual-edge)
+gadget at √3 — the expensive currency (Haugland's G₁: ~740 vertices per
+virtual edge) — so the two-act arithmetic lands back at witness scale.
+The grammar is now explicit and priced: **the pigeonhole costs 9
+vertices; the construction's entire cost is the kills.** (Why this core
+is tiny while the d2 cores are 122+: the √3 class's instances organize
+into triangles whose rainbow-forcing is CONJUNCTIVE through shared
+centres — the compulsion concentrates; the d2 class has no such local
+organizing gadget in these objects, so its carrier stays spread.)
 
 ## What was NOT done (honesty ledger)
 

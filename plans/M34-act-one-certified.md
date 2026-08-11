@@ -30,7 +30,11 @@ carries every measured verdict), then CLAUDE.md § Grokkings G15–G17.*
 
 ## The three rungs (expected order)
 
-1. **The pigeonhole certificate.** "Every proper 4-colouring of the
+1. **The pigeonhole certificates.** FIRST the free one: the 1581's
+   9-vertex √3-pair core (M33 §R annex) as a kernel theorem by plain
+   `decide` (4⁹ colourings) over M18's certified √3-triangle geometry —
+   likely a same-day landing that exercises the whole statement shape.
+   THEN the main one: "Every proper 4-colouring of the
    122-core has a mono d2 pair among its instances" is ONE finite CNF
    UNSAT — route it through the M05/M06 kernel-LRAT pipeline (emit CNF via
    the M33 encoding, CaDiCaL proposes LRAT, the kernel checks). The CNF is
