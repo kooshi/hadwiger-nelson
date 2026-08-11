@@ -427,6 +427,95 @@ def class_onset(obj_name: str, centre: str, cls_name: str, cap: float, machine: 
 
 # ------------------------------------------------------------------ the shrink (1-minimal cores)
 
+def greedy_1min(ids: list[int], order: list[int], fired_on) -> tuple[list[int], list[int], int]:
+    """The shared greedy engine: speculative parallel batches, sound by monotonicity — a
+    REJECTED deletion (the property un-fired) stays rejected after further deletions (the
+    witnessing colouring restricts), so within a pass rejections are skipped for good; on an
+    acceptance, later batch results were tested against a stale set and are simply requeued.
+    Runs to the zero-acceptance fixpoint; the caller performs the necessity census."""
+    deletions: list[int] = []
+    changed = True
+    passes = 0
+    while changed:
+        changed = False
+        passes += 1
+        queue = [w for w in order if w in ids]
+        qi = 0
+        while qi < len(queue):
+            batch = [w for w in queue[qi:qi + WORKERS] if w in ids]
+            if not batch:
+                qi += WORKERS
+                continue
+            base_ids = list(ids)
+            oks = pmap(lambda v: fired_on([w for w in base_ids if w != v])[0], batch)
+            acc = next((bi for bi, ok in enumerate(oks) if ok), None)
+            if acc is None:
+                qi += len(batch)
+            else:
+                ids = [w for w in base_ids if w != batch[acc]]
+                deletions.append(batch[acc])
+                changed = True
+                qi += acc + 1
+        print(f"  pass {passes}: |core| = {len(ids)}", flush=True)
+    return ids, deletions, passes
+
+
+def shrink_cover(obj_name: str, centre: str, level: int, start_mark: float, cap: float,
+                 machine: str) -> None:
+    """The coverage-core shrink (P3): the minimal ambient web forcing ≥ `level` colours onto
+    the target circle S in every proper 4-colouring. S is HELD FIXED — it is the claim's
+    subject, so only ambient (non-S) vertices are deletable. fired ⟺ the base row (j = k) is
+    SAT and coverage_query at j = level−1 is UNSAT. Coverage queries carry NO palette
+    breaking (their restrictions name colours). Solver-measured, never a theorem."""
+    from rigidity import coverage_query
+    obj = load_object(obj_name)
+    ct = obj["centres"][centre]
+    reg = region_at(obj, ct, start_mark)
+    S_set = set(reg["S_obj"])
+    ids = list(reg["ids"])
+    spec_f = {i: f for f, _, i in spectrum_of(obj, ct)}
+
+    def fired_on(sub: list[int]) -> tuple[bool, dict]:
+        pos = {i: a for a, i in enumerate(sub)}
+        eds = [(pos[a], pos[b]) for a, b in obj["edges"] if a in pos and b in pos]
+        S = [pos[i] for i in reg["S_obj"]]
+        base = coverage_query(len(sub), eds, 4, S, 4, cap)
+        if base["outcome"] != "sat":
+            return False, base
+        row = coverage_query(len(sub), eds, 4, S, level - 1, cap)
+        return row["outcome"] == "unsat", row
+
+    ok, _ = fired_on(ids)
+    if not ok:
+        raise SystemExit(f"SHRINK-COVER REJECTED: min-cover ≥ {level} does not hold at mark "
+                         f"{start_mark} — shrink starts from a fired region only")
+    order = sorted([i for i in ids if i not in S_set], key=lambda i: -spec_f[i])
+    ids, deletions, passes = greedy_1min(ids, order, fired_on)
+    res = pmap(lambda v: (v, *fired_on([w for w in ids if w != v])),
+               [v for v in ids if v not in S_set])
+    witnesses = {}
+    for v, ok, row in res:
+        if ok:
+            abort_invariant("FIXPOINT (§0g G-3)",
+                            f"ambient vertex {v} still fires after the zero-acceptance pass")
+        witnesses[str(v)] = row.get("used_on_target")
+    rings: dict[str, int] = {}
+    for i in ids:
+        key = f"{spec_f[i]:.6f}"
+        rings[key] = rings.get(key, 0) + 1
+    core = {"schema": "m33-core v1 (plans/M33-mechanism-hunt.md §0h)", "object": obj_name,
+            "centre": centre, "query": {"type": "coverage", "level": level}, "k": 4,
+            "machine": machine, "start_mark": start_mark, "vertices": sorted(ids),
+            "n": len(ids), "n_target": len(S_set), "deletion_order": deletions,
+            "passes": passes,
+            "necessity": {"complete": True, "witnesses_validated": len(witnesses),
+                          "note": "ambient members only — S is the claim's subject"},
+            "anatomy": {"rings": rings}, "status": "solver-measured"}
+    out = BUILD / f"m33-covercore-{obj_name}-{centre}-L{level}.json"
+    out.write_text(json.dumps(core, indent=1))
+    print(f"COVER CORE (level {level}): {len(ids)} vertices ({len(S_set)} target + "
+          f"{len(ids) - len(S_set)} ambient), {passes} passes  → {out.name}")
+
 def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: float,
            machine: str) -> None:
     """Greedy deletion to the 1-MINIMAL FIXPOINT (§0g G-3): every surviving vertex's deletion
@@ -454,35 +543,7 @@ def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: fl
     if not ok:
         raise SystemExit(f"SHRINK REJECTED: the class does not fire at mark {start_mark} — "
                          "shrink starts from a FIRED region only")
-    # Speculative parallel batches, sound by monotonicity: a REJECTED deletion (trial went
-    # SAT) stays rejected after further deletions (the avoiding colouring restricts), so
-    # within a pass rejections are skipped for good; on an acceptance, later batch results
-    # were tested against a stale set and are simply requeued.
-    order = sorted(ids, key=lambda i: -spec_f[i])  # outermost first
-    deletions = []
-    changed = True
-    passes = 0
-    while changed:
-        changed = False
-        passes += 1
-        queue = [w for w in order if w in ids]
-        qi = 0
-        while qi < len(queue):
-            batch = [w for w in queue[qi:qi + WORKERS] if w in ids]
-            if not batch:
-                qi += WORKERS
-                continue
-            base_ids = list(ids)
-            oks = pmap(lambda v: fired_on([w for w in base_ids if w != v])[0], batch)
-            acc = next((bi for bi, ok in enumerate(oks) if ok), None)
-            if acc is None:
-                qi += len(batch)
-            else:
-                ids = [w for w in base_ids if w != batch[acc]]
-                deletions.append(batch[acc])
-                changed = True
-                qi += acc + 1
-        print(f"  pass {passes}: |core| = {len(ids)}", flush=True)
+    ids, deletions, passes = greedy_1min(ids, sorted(ids, key=lambda i: -spec_f[i]), fired_on)
     # The necessity census (§0g G-3), fully parallel: every member's deletion must un-fire,
     # each witnessed by a validated clean model held in the artifact.
     res = pmap(lambda v: (v, *fired_on([w for w in ids if w != v])), list(ids))
@@ -696,6 +757,7 @@ def main() -> None:
     ap.add_argument("--sweep", nargs=2, metavar=("OBJ", "CENTRE"))
     ap.add_argument("--spectrum", nargs=3, metavar=("OBJ", "CENTRE", "CLASS"))
     ap.add_argument("--shrink", nargs=4, metavar=("OBJ", "CENTRE", "CLASS", "R2"))
+    ap.add_argument("--shrink-cover", nargs=4, metavar=("OBJ", "CENTRE", "LEVEL", "R2"))
     ap.add_argument("--cap", type=float, default=300.0)
     ap.add_argument("--machine", default="laptop", help="named beside every number (§0e)")
     ap.add_argument("--quantiles", type=int, default=None,
@@ -723,6 +785,9 @@ def main() -> None:
     elif args.shrink:
         shrink(args.shrink[0], args.shrink[1], args.shrink[2], float(args.shrink[3]),
                args.cap, args.machine)
+    elif args.shrink_cover:
+        shrink_cover(args.shrink_cover[0], args.shrink_cover[1], int(args.shrink_cover[2]),
+                     float(args.shrink_cover[3]), args.cap, args.machine)
     else:
         status()
 
