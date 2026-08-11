@@ -573,3 +573,32 @@ gains the four headline theorems (the trust receipt names them). The
 close report leads with the two-act price table (pigeonhole 9 / 122
 vertices ≈ free; kills ≈ 792 vertices per placement) and the rung-3
 verdicts at face value.
+
+---
+
+# §R — Results (2026-08-11, desktop; filled as verdicts land, every one at face value)
+
+## Measured so far (mid-milestone; the scorecard completes at close)
+
+* **The 122 CNF matched its band exactly**: 488 vars, 1,966 clauses. Unpinned
+  refutation 3.5 s / 34 MB ASCII LRAT (above the ≤ 3 MB band — the full 4!
+  palette symmetry); the PINNED route (triangle 0–1–84 to colours 0,1,2, the
+  Heule-510 pattern) refutes in 0.10 s at 1.76 MB / 12,578 lines — inside the
+  band, and the route taken. Registered controls before believing it: the
+  binary re-encode UNSAT and the id-shuffle UNSAT, both green.
+* **emit_mask on the augmented list, unchanged**: 9,861 clauses
+  (1,966 + 3 + 7,892 derived), 173,075 hints, 16 segments, 1.4 MB of source,
+  projected kernel replay 0.06 h.
+* **P5 CONFIRMED, sharper than the band**: the forty d2 instances fall into
+  **FIVE congruence classes** (11 + 11 + 6 + 6 + 6; band was ≤ 8) under the
+  full order-12 dihedral group about the metapivot — which preserves the
+  CHUNK exactly (all twelve isometries; the 122-core itself is preserved
+  only by the identity, consistent with M33's near-rot6 defects). Every
+  class endpoint lands on named shells: 1/2 + √33/18 ↔ 13/6 − √33/18,
+  5/6 − √33/18 ↔ 13/6 − √33/18, 4/3 ↔ 4/3, the ±√33/9 conjugate pair, and
+  1 ↔ 1 (the unit ring about the metapivot). The width budget: five kill
+  theorems cover forty placements. `build/m34-census.json`.
+* **P7 checkpoint read**: the 791-forcer's virtual-edge sweep holds ZERO
+  confirmed forced-distinct pairs (970 unsettled at cap, status unknown) —
+  no free chain shortcut; the forced-equal + unit-edge chain stands as
+  registered, √23 growth and all.

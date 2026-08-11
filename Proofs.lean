@@ -22,6 +22,7 @@ import Proofs.HadwigerNelson.CoverageMono
 import Proofs.HadwigerNelson.Pigeonhole
 import Proofs.HadwigerNelson.PairDist
 import Proofs.HadwigerNelson.Instances.Core9
+import Proofs.HadwigerNelson.Instances.Core122
 import Proofs.HadwigerNelson.TwoCircle
 import Proofs.HadwigerNelson.Compulsion
 import Proofs.HadwigerNelson.Strip
