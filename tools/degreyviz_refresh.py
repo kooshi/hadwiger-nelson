@@ -126,5 +126,66 @@ def main() -> None:
           f"(overlays: {degrey['overlays']['regime']})")
 
 
+def m33_block() -> None:
+    """Splice ONLY the m33data block (the mechanism-hunt onset curves, class spectra, chunk
+    ladder, and cores) from build/m33-*.json — fast, no anatomy rebuild. Artifacts are taken
+    as found; a missing artifact simply leaves its section out (the page labels absence)."""
+    curves = []
+    for obj, centre, label in [("heule510", "v0", "Heule-510 about v0 (36-pt circle)"),
+                               ("degrey1581", "origin", "de Grey 1581 about the origin (60-pt)"),
+                               ("degrey1581", "centre2", "de Grey 1581 about (−2,0) (12-pt)"),
+                               ("fabric", "origin", "the bare fabric orbit(S, hex₁₂) (30-pt)")]:
+        p = BUILD / f"m33-spectrum-{obj}-{centre}.json"
+        if not p.exists():
+            continue
+        d = json.loads(p.read_text())
+        curves.append({
+            "object": obj, "centre": centre, "label": label,
+            "marks": [{"r2": r["r2"], "n": r["n"], "nT": r["n_target"],
+                       "lo": r["cover"]["lo"], "hi": r["cover"]["hi"],
+                       "verdict": r["cover"]["verdict"]} for r in d.get("marks", [])],
+            "coverOnsets": d.get("onsets", {}).get("cover", {}),
+            "classes": {cn: {"onset": c.get("onset_r2"), "top": c.get("top_verdict"),
+                             "promotion": c.get("promotion")}
+                        for cn, c in d.get("onsets", {}).get("classes", {}).items()},
+        })
+    cores = []
+    for p in sorted(BUILD.glob("m33-core-*.json")) + sorted(BUILD.glob("m33-covercore-*.json")):
+        d = json.loads(p.read_text())
+        kind = (f"coverage ≥ {d['query']['level']}" if "query" in d and
+                d.get("query", {}).get("type") == "coverage"
+                else f"class {d['class']['name']}")
+        cores.append({"object": d["object"], "centre": d["centre"], "kind": kind,
+                      "n": d["n"], "nT": d.get("n_target"),
+                      "vertices": d["vertices"], "rings": d["anatomy"]["rings"],
+                      "necessity": d["necessity"]["complete"],
+                      "reencode": d.get("reencode", {}).get("outcome"),
+                      "status": d["status"]})
+    ladder = None
+    lp = BUILD / "m33-chunk-ladder.json"
+    if lp.exists():
+        ladder = json.loads(lp.read_text())["rows"]
+    shells = {"heule510-eq-pair-2": "r² = 5/3 — the glue shell |1+σ/√3|²",
+              "fabric-eq-pair-2": "r² = 2 − √33/9 (pure ℚ(√33))",
+              "degrey1581-eq-pair-2": "r² = 2 − √33/9 — IDENTICAL to the bare fabric's",
+              "degrey1581-eq-pair-sqrt3": "r² = (33 − 3√21)/8 — √21 = √3·√7: cross-system "
+                                          "material entering"}
+    data = json.dumps({"curves": curves, "cores": cores, "ladder": ladder, "shells": shells},
+                      separators=(",", ":"))
+    html = PAGE.read_text()
+    new, count = re.subn(
+        r'(<script id="m33data" type="application/json">).*?(</script>)',
+        lambda m: m.group(1) + data + m.group(2), html, flags=re.S)
+    if count != 1:
+        raise SystemExit(f"expected exactly one m33data block, found {count} — page structure "
+                         f"drifted; refusing to write")
+    PAGE.write_text(new)
+    print(f"spliced {len(data) // 1024} KB of m33data into {PAGE.name} "
+          f"({len(curves)} curves, {len(cores)} cores)")
+
+
 if __name__ == "__main__":
-    main()
+    if "--m33" in sys.argv:
+        m33_block()
+    else:
+        main()
