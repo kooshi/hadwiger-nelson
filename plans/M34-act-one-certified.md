@@ -1,4 +1,4 @@
-# M34 — Act One as a kernel theorem, and the union question (PRE-SUBPLAN STUB)
+# M34 — Act One as a kernel theorem, and the union question (RUN 2026-08-11 — §0 registered below, §R holds every verdict; CLOSED)
 
 *Written 2026-08-10 at M33's close, minutes after the P12 gate fired OPEN.
 Read order for a fresh session: `plans/M33-mechanism-hunt.md` WHOLE (§0a
@@ -628,3 +628,77 @@ cover — the A5 architecture run as an experiment: the monolithic solve
 capped, the composed one is expected in minutes. Any cube SAT (validated
 model) = a genuine assembly failure, reported as P6's failure clause.
 Runs 6-wide parallel (the standing within-tool rule).
+
+## The scorecard (registered → measured, at close)
+
+* **P1 CONFIRMED** — the transmuter and its nine-way mutation audit decide
+  instantly; `Core9.lean` (13 + 6 + 81 kernel decides at denom 512) lands
+  same-day; `core9_pigeonhole` is two transmuter instances composed through
+  the rim–rim edge, no search anywhere; `core9_plane` follows.
+* **P2 CONFIRMED (route), band edges honest** — the augmented CNF hit its
+  band exactly (488 vars / 1,966 clauses); the UNPINNED refutation ran
+  3.5 s / 34 MB (band said < 1 s / ≤ 3 MB — the full palette factor); the
+  PINNED route (triangle 0–1–84) came in at 0.10 s / 1.76 MB / 12,578
+  lines, inside every band, and is the route taken. Kernel replay:
+  16 segments, projected 0.06 h, built in minutes.
+* **P3 CONFIRMED** — the Core122 geometry (421 + 40 + 14,884 checks at
+  denom 12) elaborates well inside budget; the completeness sweep took
+  90 s kernel and was PROMOTED to a theorem (`core122_pairs_complete`)
+  instead of demoted to the compiled floor — both faces kept.
+* **P4 CONFIRMED, statement STRONGER** — A1 landed UNCONDITIONAL (the
+  obligation pass found the deleted-graph-colourability hypothesis was
+  interpretation, not mathematics); ≤ 40 lines, spec examples and the
+  refusal control green.
+* **P5 CONFIRMED, sharper** — FIVE congruence classes (band ≤ 8) for the
+  forty instances under the exact order-12 dihedral group about the
+  metapivot; endpoints all on named shells; five kill theorems price the
+  width budget.
+* **P6 MISSED as registered, landed through §0i** — the monolithic union
+  solve read `unknown` at 3600 s (the registered minutes-band was wrong:
+  CDCL does not decompose a composition). The §0i cube run: the six
+  "which pair goes mono" cubes — cover soundness carried by the KERNEL
+  theorem `core9_pigeonhole` — each read UNSAT (scoped to one copy +
+  first-occurrence palette breaking, both standing sound moves;
+  714–843 s each, 6-wide parallel). **The 4,749-vertex union is
+  5-chromatic by composition**: one kernel-checked pigeonhole cover +
+  six solver-trusted cube refutations (promotable per-cube by LRAT).
+  The palette lesson re-measured: unpinned/pinned ≈ 6.5× here, 35× on
+  the 122 CNF.
+* **P7 READ** — the 791 forcer holds zero confirmed virtual edges (970
+  unsettled at cap); the forced-equal + chain route stood. The numbering
+  lesson: `degrey_graph.json` (M06 era) and the standing loader are
+  DIFFERENT vertex orders — the first union attempt failed its own
+  forced-equal control by mixing them, and the control caught it (the
+  union's SAT verdict was explained, not believed). The M30 graph
+  artifact (`build/m30-forcer791.json`) is the currency.
+* **P8 CONFIRMED** — every control seen red/green: the bridge negative
+  (star colourable), the K₃ bridge-fires chain, the transmuter's 9
+  dropped-hypothesis countermodels, both certs' badEdges + adversarial
+  perturbations (the Core122 pair-check control initially aimed at a
+  non-pair vertex FAILED CLOSED and was re-aimed — the control-of-the-
+  control working), binary re-encode + id-shuffle on the 122 CNF, the
+  forcer forced-equal re-measured (133.7 s) + base-SAT.
+* **P9 CONFIRMED** — the whole milestone fit in ~one desktop-day
+  including builds; the certificate build ≈ minutes; the only > 900 s
+  calls were the registered union caps, reported as caps.
+* **P10 — the rung-3 gate**: the census held (5 ≤ 8) and the union is
+  UNSAT through the kernel-covered cubes — the gate's condition is met
+  in its composed form; the geometry (√23 chain rotations) remains the
+  priced deferral, so the certified-union milestone is RECOMMENDED but
+  its Lean cost now has a measured shape: 1 forcer LRAT (pinned, 133.7 s
+  solve) + transport + the field-tower extension.
+
+## What was NOT done (honesty ledger)
+
+* The union's chain geometry — deferred as registered §0a B5, MORE than
+  planned: the artifact holds the combinatorics only (fusions, chain ids);
+  no placements were computed even as floats. The union is realizable in
+  ℚ(√3,√5,√7,√11,√23) by the B5 triangle solution, but nothing verified
+  it yet — the explorer pane waits on this too. First M35 work item if
+  the certified union is chosen.
+* Per-cube LRAT certificates — not emitted (the cubes are promotable;
+  ~6 × 850 s solves with proof logging when wanted).
+* The d2-core union (122 × five kill classes) — not attempted; needs a
+  d2-kill gadget (forced-equal at a distance reaching 2), the same chain
+  currency one field up.
+* `lean4checker` replay — deferred per standing policy (publication gate).

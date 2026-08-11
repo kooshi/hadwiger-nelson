@@ -54,7 +54,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M33, 2026-08-10.**
+**Last updated: M34, 2026-08-11.**
 
 ### Where the problem stands
 
@@ -274,6 +274,47 @@ next is Act One as a kernel theorem (LRAT on the 122-core, a CNF a
 fraction of the 1581's size over an object whose geometry M26 already
 certified).
 
+M34 took Act One to the kernel, and the two-act theory produced its
+first designed 5-chromatic object. The general layer
+(`Pigeonhole.lean`): the **bridge** — a class-avoidance refutation IS
+ordinary non-colourability of the pair-augmented edge list, so the
+entire certified SAT chain applies verbatim, zero new trusted code; the
+**transmuter** — the five-vertex forcing inside the nine-core (centre's
+rainbow triangle + hub ⟹ hub forced to the transfer rim's colour,
+decided at 4⁵ with all nine hypotheses certified load-bearing by one
+mutation-audit decide), whose forced transfer crosses plane distance
+exactly 2, the ρ₁₅ spindle distance — the √3 pigeonhole manufactures
+d = 2 forced pairs inside its own gadget; and **A1 unconditional**
+(`not_colorable_iff_covers`: χ(G) > k ⟺ every k-colouring of G − v
+covers N(v) — the modeling pass found the colourability hypothesis was
+interpretation, not mathematics). The carriers are kernel theorems:
+`core9_pigeonhole` (two transmuters composed through one rim–rim edge,
+no search; geometry at denom 512; the six pairs kernel-certified as ALL
+√3-pairs among the nine) and `core122_pigeonhole` (a 12,578-line pinned
+LRAT on the augmented list, replayed across 16 segments in minutes;
+geometry at denom 12 in the seam sub-basis; the forty pairs
+kernel-complete over 14,884 checks) — with the plane corollaries: **no
+proper 4-colouring of the plane avoids monochromatic pairs at distance
+√3, nor at distance 2** — the compulsions classical/Haugland-adjacent,
+the 1-minimal carriers and the kernel formalizations ours. All on
+axioms exactly `[propext, Classical.choice, Quot.sound]`. The census:
+the forty d2 instances fall into **FIVE congruence classes** under the
+exact order-12 dihedral group about the metapivot (which preserves the
+chunk exactly), every endpoint on named shells — five kill theorems
+price the width budget. And the union: the 9-core plus six 791-forcer
+kill chains (forced-equal at 4/√3 + one unit edge each) —
+**4,749 vertices, χ ≥ 5 by composition**: monolithic CDCL capped at
+3600 s (a composition is invisible to clause learning), while the six
+"which pair goes mono" cubes — cover soundness carried by the KERNEL
+pigeonhole — each refuted in ~800 s. The two-act assembly reading (G15's
+last [reading] half) is measured TRUE at the pair level; the union's
+exact geometry (the chain rotations pick up √23) is the priced deferral,
+and the certified-union milestone now has a measured shape. Lessons
+banked: the M06-era `degrey_graph.json` and the standing loader are
+different vertex orders (the forced-equal control caught the mix — a
+union SAT verdict explained, not believed); palette symmetry costs
+6.5–35× solver time, re-measured twice.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -309,6 +350,7 @@ certified).
 | 29 | **The stacking law + the flat designed-forcer verdict** (tools-side; the law derived a priori in §0a, then confirmed at every census point): same-anchor stacks reduce to the single-word law forever (the relative detune is the spec quotient — detunes form a group); same-word different-anchor stacks couple through a difference pin (w = u−v collinear with the twisted anchor axis, |w| on a quadratic) whose w = 0 root at UNIT anchor separation is an O(n) **translation matching** — measured: 132 exact matching chords at the triangle's unit pivots, ZERO at the √59-sterile 1/√3 separation, chirality channel exactly empty. The verdict: matchings are 1-regular, **width without degree does not force** — the triangle stack's 26 spanning forced-rainbow unit triangles (the first designed triple-order cross structure) still read zero forced pairs, zero virtual edges, zero coverage movement, zero compelled triples, χ = 4 everywhere; the 5-mechanism's irreducible globality extends to designed one-family objects (fourth measurement). Base-rate finding: pivot-circle min-cover rises 2 → 3 from B = 1 to B = 2 (ambient coverage pressure builds with depth) while the metapivot circle stays at 2. New instruments: the coverage/triple meters (palette-WLOG single SAT calls, free vacuity guard), the stack census with class-routed certificates. | `tools/rigidity.py` (meters), `tools/closure.py` (stacks), `build/m32-*.json`, `plans/M32-certified-five.md` §R | M32 |
 | 26 | **The de Grey anatomy** (tools-side, every instrument control seen red/green on cue): the 1581 has exactly **67 edge-direction classes**, ALL words in the half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩ at exponent ≤ 6 (the registered whole-word group covers 58%; every miss squares in; σ-exponents only {0,±1,±2}); Heule 510/553 carry 6 out-of-group residue classes each — the 1581 is the only pure-group witness; E3 refuted (819 circles, 4,140 coarse classes, top-6 = 3.7%, flat head) and the load-bearing census deflated by its matched control — **the 1581 is at or near edge-critical**, the 5-forcing distributed; the complete forced-pair inventory of the 791 forcer: **six pairs** — M13's axis pair plus five ANTIPODAL pairs at distance 4/√3 (√183-spindle, outside the field): every proper 4-colouring is centrally symmetric on the radius-2/√3 circle; E2 exact (norms 4 and 16 — the M32 clearing is 2-adic); fusion record {1:1344, 2:234, 4:1, 24:2}; E4 refuted both halves — the 4-chromatic hexagram chunk's colour space is > 10⁴ up to rot6 × palette with ZERO forced pairs (settled exactly), and the 1581's 5-colouring space is likewise pairwise-floppy (0 forced, 0 virtual, settled) — rigidity in both fields lives only at the forcing level k−1, never above. Instruments promoted: `tools/anatomy.py`, `tools/rigidity.py` (complete pairwise forced-equal/virtual-edge oracle, batch violation queries, vacuity guard), `tools/hexchunk.py`, the anatomy visualizer `tools/degrey-viz.html` + `tools/degreyviz_refresh.py`. | `build/m30-anatomy.json`, `build/m30-rigidity-forcer791.json`, `plans/M30-degrey-anatomy.md` §R | M30 |
 
+| 31 | **Act One as kernel theorems + the composed 5-forcer** (M34): the **pigeonhole bridge** (`mono_pair_of_not_colorable_append` / the iff — class avoidance IS colourability of the pair-augmented edge list, so the certified SAT chain applies verbatim); the **transmuter** (five-vertex forcing, 4⁵ decide, nine-way mutation audit; its forced transfer crosses distance exactly 2 = the ρ₁₅ spindle distance); **A1 unconditional** (`not_colorable_iff_covers`: χ(G) > k ⟺ every k-colouring of G − v covers N(v) — the fan query as a theorem, no side condition); **`core9_pigeonhole`** + **`core9_plane`** (every proper 4-colouring of the plane has a mono √3-pair — nine-point 1-minimal carrier, two transmuters + one edge, geometry denom 512, pair list kernel-complete); **`core122_pigeonhole`** + **`core122_plane`** (every proper 4-colouring of the plane has a mono distance-2 pair — 122-point carrier on the certified hexagram's seam lattice, pinned LRAT of 7,892 derived clauses replayed by the kernel, geometry denom 12, forty pairs kernel-complete over 14,884 checks); `UDCert.PairsAt` + `pairsAt_sound` (class-distance certification at any √r). All on axioms exactly `[propext, Classical.choice, Quot.sound]`. Tools-side, controls red/green throughout: the census (forty d2 instances = FIVE dihedral classes, endpoints on named shells) and the **composed union** — 9-core + six 791-forcer chains, 4,749 vertices, χ ≥ 5 by kernel-covered cubes (six UNSATs at ~800 s) where the monolithic solve capped at 3600 s. | `Pigeonhole.lean`, `PairDist.lean`, `Instances/Core9.lean`, `Instances/Core122{,/}`, `build/m34-*.json` | M34 |
 | 30 | **The mechanism hunt's first harvest** (tools-side, every claim double-encoded or theorem-closed): (a) the criticality factorization A1 (χ(G) ≥ k+1 at a vertex ⟺ the fan on its circle, when G−v is k-colourable) — derived a priori, validated at three centres, and used to CLOSE a capped solver row by mathematics; (b) **the d = 2 pigeonhole**: avoid-all-mono-d2-pairs is UNSAT on the certified hexagram chunk at B = 2, on the bare de Grey fabric and the 1581 at the IDENTICAL onset 2 − √33/9, and on Heule-510 at the glue shell 5/3 — fabric-borne, depth-switched (clean at B ≤ 1), at exactly the ρ₁₅ spindle distance; Act One's 1-minimal carrier = **122 vertices / 12 shells** with per-member necessity witnesses; (c) **the 3-cover core**: 36-circle + **13 interior points** on (7−√33)/6 ∪ {1/3} ∪ (9−√33)/6 delivers min-cover 3 at Heule-510's centre; (d) the √3-pair pigeonhole exists ONLY in the assembled 1581 (onset at the √21 shell — cross-system material), not in the fabric, not in shrunk 510 — and its 1-minimal core is **NINE vertices**: two √3-triangles with their unit circumcentres (M18's `exists_unit_triangle_iff` object), a hub, and one rim–rim edge — hand-proved in two cases, `decide`-scale for M34; (e) the class-avoidance instrument (arity-generic mono-avoidance, base-SAT guard as control flow, five honest verdicts, first-occurrence breaking, binary re-encode promotion ladder, 1-minimal shrink engine) with the 791/M20-skeleton/planted controls all red/green. | `tools/mechanism.py`, `tools/rigidity.py` (class_avoid), `build/m33-*.json`, the explorer's M33 pane, `plans/M33-mechanism-hunt.md` §R | M33 |
 
 ### Paths forward, ranked
@@ -333,30 +375,36 @@ Kooshi's direction at the close: "I want to be able to confidently point to
 the reason why 5 colorings are forced." M33 is the MECHANISM HUNT; the
 certification programme is the standing fallback.)*
 
-1. **M34 — Act One as a kernel theorem, and the union question**
-   (M33's P12 gate fired OPEN; stub to be written at M34 subplanning).
-   The three rungs, in order: (a) **kernel-certify the 122-core's
-   pigeonhole** — "every proper 4-colouring of this 122-vertex subset of
-   the certified hexagram has a monochromatic distance-2 pair" via the
-   M05 LRAT pipeline (a CNF ~1/50th the 1581's, over geometry M26
-   already certified) — the first kernel-certified DISJUNCTIVE
-   compulsion, M20's genre at class level; (b) the kill-per-placement
-   theory: a ρ₁₅ spindle on each of the core's d2 placements (the A3
-   width budget — 135 instances at B = 2; transport collapses congruent
-   placements, the M26 genre); (c) the union question — the research:
-   does fabric ∪ kills force 5, and what is the least such union? The
-   pair-web completeness (build/m32-pairweb.json) stays the Lean warm-up.
-2. **The certification programme** — standing fallback unchanged
-   (`plans/M33-witness-closure.md`), now with a SECOND candidate object:
-   if the union lands, its closure is a far smaller certification target
-   than the 1581's.
-3. **The designed-forcer thread — CLOSED at M32's flat checkpoint**; reopen
-   only with a degree-≥ 2 cross-pressure mechanism and fresh registered
-   predictions. G15 now says what was missing: kills without a pigeonhole.
-4. **The forced-symmetry thread** — folded into the mechanism hunt's phase 2
+1. **M35 — the k = 5 transfer: the first Act-One sweep of the 6-hunt**
+   (stub: the section in `plans/M34-act-one-certified.md` § Beyond; a
+   full stub to be written at subplanning). The class-avoidance
+   instrument at five colours asks a question nobody has asked: does any
+   region force a pattern class on EVERY 5-colouring? The natural first
+   class is the fan itself (the 6-transition in coverage vocabulary);
+   sweep objects: the witnesses, gen-1 closures, enriched assemblies,
+   the M34 union. Any firing is the first concrete piece of a χ ≥ 6
+   argument anyone has held. This is the hunt move; M34's machinery
+   (bridge + LRAT on augmented lists) certifies any find at k = 5 the
+   same way it did at k = 4.
+2. **The certified union** — the consolidation move, now with a measured
+   shape: `core9_pigeonhole` (kernel, done) + ONE pinned forcer LRAT
+   (133.7 s solve, the Gadget layer covers the palette exactly as
+   Core122's did) + six placement geometries in ℚ(√3,√5,√7,√11,√23)
+   (the field-tower extension — the real work) ⟹ a NEW 4,749-vertex
+   5-chromatic witness with a fully MODULAR kernel proof, no monolithic
+   SAT anywhere. Touches the write-up trigger's *maybe* clause ("our own
+   certified 5-chromatic object") — Kooshi's call whether that promotes
+   it above the hunt.
+3. **The certification programme** — standing fallback unchanged
+   (`plans/M33-witness-closure.md`); the union is now its second,
+   far smaller candidate object.
+4. **The designed-forcer thread — reopened in spirit by the union** (M34
+   built the first designed 5-chromatic object — by composition, not by
+   stacking; M32's flat verdict on width-without-degree stands).
+5. **The forced-symmetry thread** — folded into the mechanism hunt's phase 2
    as its positive control (the 791's forced central symmetry is an
    already-measured class-level compulsion), no longer a separate item.
-4. **Parked, with reasons** (banners in each stub): the tiled plane (M27 —
+6. **Parked, with reasons** (banners in each stub): the tiled plane (M27 —
    expected another 4; its periodic-table SAT probe stays registered-but-not-run
    and reopens the milestone only if it REFUSES), the recursion (M28 — gated
    behind M27), the uncountable pair (M29 — compactness reduces it to the finite
@@ -611,7 +659,13 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   falsifier branches registered in the stub did not fire; what remains
   [reading] is the ASSEMBLY claim — that pigeonhole × kill is not merely
   how known forcers are built but how χ ≥ 5 must be argued — tested by
-  M34's union question.*
+  M34's union question. **TESTED at M34, and the constructive half is
+  [measured]**: the 9-core pigeonhole (kernel) × six 791-forcer kill
+  chains composed to a 4,749-vertex χ ≥ 5 union, confirmed through
+  kernel-covered cubes — pigeonhole × kill DOES assemble to a 5-forcer,
+  by design, from measured parts. What remains [reading] is only the
+  universality direction (that every χ ≥ 5 argument must factor this
+  way).*
 
 * **G16 — The distance-2 pigeonhole law** (M33, 2026-08-10; the
   instrument's discovery, found by a CONTROL and confirmed everywhere):
@@ -641,7 +695,17 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   at once = instrument catastrophe); a fabric-depth-2 seam region of
   comparable extent that stays clean; external — whether Haugland's
   heptagon fabric pigeonholes at ITS spindle distance (2, via the same
-  ρ₁₅) is the cross-fabric test, unrun.*
+  ρ₁₅) is the cross-fabric test, unrun. AMENDED at M34: both carriers
+  are now **[kernel]** (`core9_pigeonhole`, `core122_pigeonhole`, with
+  plane corollaries and kernel-complete pair lists), and the gadget
+  anatomy sharpened twice — the **organizing-distance law** (a mono-d
+  class concentrates iff its equilateral d-triangle has UNIT
+  circumradius, i.e. d/√3 = 1 ⟺ d = √3: the unique pair class whose
+  triangles buy a common unit neighbour — why the √3 core is 9 and the
+  d2 core is 122), and the **transmuter link** (inside the 9-core, the
+  forced colour transfer hub = rim crosses plane distance exactly 2 —
+  the √3 pigeonhole MANUFACTURES forced-equal d = 2 pairs; the two
+  pigeonholes are one mechanism seen at two arities).*
 * **G17 — Globality lives only at the top rung** (M33's resolution of
   the G10/G15 tension): the 4-onset (the fan = χ ≥ 5 itself, by the A1
   factorization) arrives exactly at the last vertex — measured at three
@@ -655,6 +719,21 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   far: the 3rd colour is delivered by a 13-point interior web; the leap
   to the 4th is the witness-wide composition of class pigeonholes with
   field-crossing kills — the object M34 tries to build minimally.*
+* **G18 — Composition sees what search cannot** (M34, the union
+  measurement): the 4,749-vertex union (9-core pigeonhole × six
+  791-forcer kill chains) is χ ≥ 5 by a one-page composition — and
+  monolithic CDCL, handed the whole formula, CAPPED at 3600 s, while
+  the six cubes covered by the KERNEL pigeonhole each refuted in
+  ~800 s. Clause learning does not discover a disjunctive factoring;
+  handing the solver the factoring (cubes = the pigeonhole's cases) is
+  the difference between unknown and done. **[measured]** *Consequences:
+  A5's no-monolithic-SAT architecture is not a preference but a
+  necessity at composed scale — certify components, compose in the
+  kernel; and the palette factor (6.5× on the union cubes, 35× on the
+  122 CNF, re-measured) says pinned formulas + kernel-side symmetry
+  closure (the Gadget layer) are the standing shape for every future
+  certificate. Falsifier: a solver config that cracks the monolithic
+  union in minutes — then this is a tuning anecdote, not a law.*
 
 ## Whose work this is
 
