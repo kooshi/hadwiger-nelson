@@ -72,6 +72,36 @@ carries every measured verdict), then CLAUDE.md § Grokkings G15–G17.*
   standing; the m33-core schema is the handoff contract; the parallelism
   rule (threads bounded by RAM) is standing.
 
+## Beyond this milestone — the k = 5 transfer (recorded 2026-08-11, the
+## close discussion with Kooshi; NOT M34 scope, the first stone of the 6-hunt)
+
+The class-avoidance instrument transfers to five colours with one flag,
+and the question it asks there has never been asked: a 6-forcer needs an
+Act One over 5-COLOURINGS ("no 5-colouring of this region avoids pattern
+P everywhere"), and all prior k = 5 measurements were instance meters —
+structurally blind to it (that blindness is exactly what M33 broke at
+k = 4). The natural first class is the fan itself: "every 5-colouring
+puts 5 colours on some circle-plus-centre" is the 6-transition in our own
+coverage vocabulary. Sweep objects: the witnesses, their gen-1 closures,
+enriched assemblies. If ANY class fires at k = 5, it is the first
+concrete piece of a χ ≥ 6 argument anyone has held. Minimality note from
+the same discussion: "smallest 5-witness" is now an explicit optimization
+— minimize |pigeonhole| + #placement-classes × |kill gadget| — with the
+pigeonhole term measured to be a rounding error (9 vertices); the game is
+placement symmetry and kill-gadget size.
+
+**Hunting heuristics (the M33 patterns, stated once for reuse):**
+(1) compulsion onsets land on NAMED shells — predict from the shell
+vocabulary (glue shell, √33 family, cross-system √21) before running
+solvers; (2) seam DEPTH switches compulsions on where radius does not —
+probe deep, not wide; (3) cores concentrate where class instances
+organize into secondary structure (√3-pairs → triangles with shared unit
+circumcentres) — hunt the organizing gadget, not the bare class;
+(4) the field ladder — each colour step's pigeonhole is native to the
+current field, its kills one field up (4: seam group; 5: seam pigeonhole,
+√15 kills) — if it echoes, it names the 6-forcer's kill arithmetic in
+advance.
+
 ## Failure clauses (sharpen at subplan registration)
 
 * The LRAT certificate for the 122-core exceeds kernel budget: measure the
