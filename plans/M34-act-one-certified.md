@@ -514,3 +514,62 @@ tools-side identification of dense ids with m33-core object ids (the
 DeGrey provenance-note genre: the theorem is about the points as written;
 that they are M33's points is a generator property, controlled tools-side
 by an exact re-derivation check, never claimed as a theorem).
+
+## §0h — Experience modeling pass (2026-08-11, fresh invocation)
+
+**H1 — The headline docstrings' wording anchors (the read-aloud gate's
+fixed targets).** Each of the four carries, in this order: the claim in
+plane English; what the kernel checked (the distance identities, the
+forcing — "two transmuter instances composed through one edge, no search"
+for the 9 / "an LRAT certificate replayed step by step — CaDiCaL proposed
+it and is trusted for nothing" for the 122); what is NOT claimed (the
+provenance clause, DeGrey pattern: "that these points are M33's core is a
+generator property, controlled tools-side; the theorem is about the
+points as written"). The plane corollaries add the §0 B4 attribution with
+the fixed clause: "**what is new is the carrier, not the compulsion**" —
+√3 classical folklore; d = 2 the pigeonhole shadow of Haugland's
+fixed-pair form, plus the G16 sentence (distance 2 is the ρ₁₅ spindle
+distance; killing this pigeonhole is what needs √15).
+
+**H2 — Pigeonhole.lean's API surface.** The advertised entry is
+`mono_pair_of_not_colorable_append` (module header says so); the iff is
+its two-way form for controls. Minted: `not_monoPair_iff :
+¬ MonoPair P C ↔ ∀ p ∈ P, C p.1 ≠ C p.2` — the one lemma the bridge
+proof and every instance would otherwise re-derive by the same
+push/simp preamble. No `@[simp]` anywhere in the module (nothing here is
+a rewrite target; the global speech act is not spent). The transmuter's
+docstring names the reuse contract (gadget vocabulary for union
+assemblies: properness facts in, forced transfer out). A1's docstring
+carries three sentences: the instrument mapping (`fan(G − v, N(v))` — the
+min-cover top row IS this statement), the Fan-isolated-vertex reading
+(§0f D5), and the 510-factorization remark (its fan reading + this lemma
++ the validated 4-colouring of 510 − v0 re-derive χ(510) ≥ 5; not
+re-certified — the LRAT bound already exists).
+
+**H3 — Instance-module control surfaces, fixed.** Per instance file, in
+the DeGrey pattern: shape `#guard`s (vertex/edge/pair counts, dedup,
+i < j, the denom literal); the compiled `badEdges.isEmpty` cross-check;
+the adversarial guard (vertex 0 perturbed → the check names it); the
+dense-id ↔ object-id table as `--` comments (free downstream, M11). The
+completeness demotion wording is written NOW so a budget failure has its
+honest sentence ready: "the kernel decide at C(122,2) pairs exceeded the
+measured budget (N min) and was demoted per §0g G-7 to the compiled
+check below; the pigeonhole theorem does not depend on completeness."
+
+**H4 — Artifact vocabulary.** `build/m34-census.json`: {schema:
+"m34-census v1 (plans/M34-act-one-certified.md §0b)", object, core
+{n, class}, instances (object-id pairs), group: "rot6 × mirror about
+meta", classes: [{rep, members, frame}], n_classes, status}.
+`build/m34-union-*.json`: {schema: "m34-union v1 (…)", pigeonhole
+{core, n, instances}, kills: [{placement, forcer_pair, chain_vertex,
+field_growth, n_vertices}], union {n, n_edges}, verdict {k, outcome,
+seconds, promotion}, model_validated, status}. All M33 conventions bind
+(exact string + float radii, promotion rungs, object ids only, verdicts
+never claim past caps).
+
+**H5 — The close's gate additions.** `Proofs.lean` gains the new modules
+(the flat import surface is the gate's domain); `scripts/Axioms.lean`
+gains the four headline theorems (the trust receipt names them). The
+close report leads with the two-act price table (pigeonhole 9 / 122
+vertices ≈ free; kills ≈ 792 vertices per placement) and the rung-3
+verdicts at face value.
