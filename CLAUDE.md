@@ -54,7 +54,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M32, 2026-08-10.**
+**Last updated: M33, 2026-08-10.**
 
 ### Where the problem stands
 
@@ -237,6 +237,43 @@ through the single fusion), its completeness the first M33 engine target.
 The coverage/triple meters and the stack machinery joined the standing
 instrument suite; the closure explorer gained the stacks tab.
 
+M33 ran the mechanism hunt and the golden question got its first real
+answers. The a priori criticality factorization (fan(G−v, N(v)) ⟺
+χ(G) ≥ 5 at any vertex — two sentences, derived before any query)
+re-aimed the sweep: the 4-onset is a criticality echo, measured exactly
+so at all three centres probed (510's fan at the last ring in 9 s; the
+1581's second centre by direct UNSAT; its origin capped honestly and
+closed by the factorization + the kernel χ ≥ 5). The live structure is
+below the top rung, and it is SMALL: the 3-cover core — the minimal
+ambient web forcing three colours onto Heule-510's 36-point circle — is
+**49 vertices = the circle + 13 interior points** on three named shells
+((7−√33)/6, the inner circle 1/3, (9−√33)/6), 1-minimal with every
+necessity witness held. And the class-avoidance instrument (one SAT call
+per (region, pattern class), the disjunctive query the instance meters
+were provably blind to) found the pigeonhole: **the seam fabric cannot
+stay clean at distance 2** — every proper 4-colouring of the certified
+hexagram chunk at seam depth B = 2 (378 pts), of de Grey's bare fabric
+stage past r² = 2 − √33/9, of Heule-510 past the GLUE SHELL r² = 5/3,
+and of the 1581 past the same fabric radius (identical onset to nine
+decimals — the spindles neither create nor move it) makes some
+distance-2 pair monochromatic. Distance 2 is the ρ₁₅ spindle distance
+(4·2² − 1 = 15): the pigeonhole lives in the seam field, its kill lives
+one field up — G15's two-act anatomy measured, with Act One shrunk to a
+**122-vertex 1-minimal core** (de Grey's L was 121) in 12 near-rot6
+shells about the metapivot, confirmed in two independent encodings. The
+√3 story inverted honestly: mono-√3-triples (de Grey's paper class) and
+√3-pairs are CLEAN on every object at every sub-full radius — except
+√3-pairs on the FULL 1581, onset at the √21-shell (33−3√21)/8 where the
+second spindle system's material arrives: the assembly creates that
+pigeonhole and Heule's SAT-shrinking discarded it while keeping d = 2.
+Controls: the 791's six forced pairs, the M20 skeleton (the kernel
+theorem reproduced by instrument), the id-shuffle, the planted gadgets —
+all red/green; one instrument fix mid-milestone (first-occurrence
+palette breaking, registered §0i before reruns). The P12 gate is OPEN:
+next is Act One as a kernel theorem (LRAT on the 122-core, a CNF a
+fraction of the 1581's size over an object whose geometry M26 already
+certified).
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -272,6 +309,8 @@ instrument suite; the closure explorer gained the stacks tab.
 | 29 | **The stacking law + the flat designed-forcer verdict** (tools-side; the law derived a priori in §0a, then confirmed at every census point): same-anchor stacks reduce to the single-word law forever (the relative detune is the spec quotient — detunes form a group); same-word different-anchor stacks couple through a difference pin (w = u−v collinear with the twisted anchor axis, |w| on a quadratic) whose w = 0 root at UNIT anchor separation is an O(n) **translation matching** — measured: 132 exact matching chords at the triangle's unit pivots, ZERO at the √59-sterile 1/√3 separation, chirality channel exactly empty. The verdict: matchings are 1-regular, **width without degree does not force** — the triangle stack's 26 spanning forced-rainbow unit triangles (the first designed triple-order cross structure) still read zero forced pairs, zero virtual edges, zero coverage movement, zero compelled triples, χ = 4 everywhere; the 5-mechanism's irreducible globality extends to designed one-family objects (fourth measurement). Base-rate finding: pivot-circle min-cover rises 2 → 3 from B = 1 to B = 2 (ambient coverage pressure builds with depth) while the metapivot circle stays at 2. New instruments: the coverage/triple meters (palette-WLOG single SAT calls, free vacuity guard), the stack census with class-routed certificates. | `tools/rigidity.py` (meters), `tools/closure.py` (stacks), `build/m32-*.json`, `plans/M32-certified-five.md` §R | M32 |
 | 26 | **The de Grey anatomy** (tools-side, every instrument control seen red/green on cue): the 1581 has exactly **67 edge-direction classes**, ALL words in the half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩ at exponent ≤ 6 (the registered whole-word group covers 58%; every miss squares in; σ-exponents only {0,±1,±2}); Heule 510/553 carry 6 out-of-group residue classes each — the 1581 is the only pure-group witness; E3 refuted (819 circles, 4,140 coarse classes, top-6 = 3.7%, flat head) and the load-bearing census deflated by its matched control — **the 1581 is at or near edge-critical**, the 5-forcing distributed; the complete forced-pair inventory of the 791 forcer: **six pairs** — M13's axis pair plus five ANTIPODAL pairs at distance 4/√3 (√183-spindle, outside the field): every proper 4-colouring is centrally symmetric on the radius-2/√3 circle; E2 exact (norms 4 and 16 — the M32 clearing is 2-adic); fusion record {1:1344, 2:234, 4:1, 24:2}; E4 refuted both halves — the 4-chromatic hexagram chunk's colour space is > 10⁴ up to rot6 × palette with ZERO forced pairs (settled exactly), and the 1581's 5-colouring space is likewise pairwise-floppy (0 forced, 0 virtual, settled) — rigidity in both fields lives only at the forcing level k−1, never above. Instruments promoted: `tools/anatomy.py`, `tools/rigidity.py` (complete pairwise forced-equal/virtual-edge oracle, batch violation queries, vacuity guard), `tools/hexchunk.py`, the anatomy visualizer `tools/degrey-viz.html` + `tools/degreyviz_refresh.py`. | `build/m30-anatomy.json`, `build/m30-rigidity-forcer791.json`, `plans/M30-degrey-anatomy.md` §R | M30 |
 
+| 30 | **The mechanism hunt's first harvest** (tools-side, every claim double-encoded or theorem-closed): (a) the criticality factorization A1 (χ(G) ≥ k+1 at a vertex ⟺ the fan on its circle, when G−v is k-colourable) — derived a priori, validated at three centres, and used to CLOSE a capped solver row by mathematics; (b) **the d = 2 pigeonhole**: avoid-all-mono-d2-pairs is UNSAT on the certified hexagram chunk at B = 2, on the bare de Grey fabric and the 1581 at the IDENTICAL onset 2 − √33/9, and on Heule-510 at the glue shell 5/3 — fabric-borne, depth-switched (clean at B ≤ 1), at exactly the ρ₁₅ spindle distance; Act One's 1-minimal carrier = **122 vertices / 12 shells** with per-member necessity witnesses; (c) **the 3-cover core**: 36-circle + **13 interior points** on (7−√33)/6 ∪ {1/3} ∪ (9−√33)/6 delivers min-cover 3 at Heule-510's centre; (d) the √3-pair pigeonhole exists ONLY in the assembled 1581 (onset at the √21 shell — cross-system material), not in the fabric, not in shrunk 510; (e) the class-avoidance instrument (arity-generic mono-avoidance, base-SAT guard as control flow, five honest verdicts, first-occurrence breaking, binary re-encode promotion ladder, 1-minimal shrink engine) with the 791/M20-skeleton/planted controls all red/green. | `tools/mechanism.py`, `tools/rigidity.py` (class_avoid), `build/m33-*.json`, the explorer's M33 pane, `plans/M33-mechanism-hunt.md` §R | M33 |
+
 ### Paths forward, ranked
 
 *Rewritten 2026-08-09 at the field-jump decision. The construction ladder
@@ -294,30 +333,23 @@ Kooshi's direction at the close: "I want to be able to confidently point to
 the reason why 5 colorings are forced." M33 is the MECHANISM HUNT; the
 certification programme is the standing fallback.)*
 
-1. **M33 — the mechanism hunt** (`plans/M33-mechanism-hunt.md` carries the
-   full brief). **The golden question, the short-term target: WHAT AMBIENT
-   STRUCTURE DELIVERS THE 4TH COLOUR ONTO A CIRCLE?** We own 3→4 completely
-   (the rainbow floor — a nameable local mechanism, kernel-checked); 4→5 is
-   measured as 100% ambient-delivered coverage (G13's fan at Heule-510's
-   centre) with no owned mechanism — that gap is the leap. The phases:
-   (1) the FAN-ONSET sweep (growing witness balls, the M32 coverage meter,
-   find the radius where min-cover on a circle flips 3 → 4) and the
-   FAN-CRITICAL CORE (shrink to the minimal ambient web that fans one
-   circle — conditional compulsions evade G10's no-small-5-chromatic-part,
-   so the core CAN be small); (2) the AVOIDANCE LADDER (the new instrument:
-   one SAT call per (region, pattern-class) asking "can the whole class be
-   avoided simultaneously" — the disjunctive query the instance meters
-   were provably blind to; the 791's six forced pairs are the built-in
-   positive control) → the COMPULSION SPECTRUM: which order fires first,
-   at what radius; (3) the cascade formalized in the M20 compulsion genre —
-   pigeonhole theorem + the kernel-checked kill law — χ ≥ 5 as mechanism,
-   and the core's closure becomes the certification object.
-2. **The certification programme (formerly M33 Route A)** — parked as the
-   standing fallback and eventual product, banner in
-   `plans/M33-witness-closure.md`, every handoff current (the pair-web
-   completeness stays the Lean engine's warm-up whenever engine work
-   resumes; the mechanism hunt's phase 3 feeds its object back into this
-   programme).
+1. **M34 — Act One as a kernel theorem, and the union question**
+   (M33's P12 gate fired OPEN; stub to be written at M34 subplanning).
+   The three rungs, in order: (a) **kernel-certify the 122-core's
+   pigeonhole** — "every proper 4-colouring of this 122-vertex subset of
+   the certified hexagram has a monochromatic distance-2 pair" via the
+   M05 LRAT pipeline (a CNF ~1/50th the 1581's, over geometry M26
+   already certified) — the first kernel-certified DISJUNCTIVE
+   compulsion, M20's genre at class level; (b) the kill-per-placement
+   theory: a ρ₁₅ spindle on each of the core's d2 placements (the A3
+   width budget — 135 instances at B = 2; transport collapses congruent
+   placements, the M26 genre); (c) the union question — the research:
+   does fabric ∪ kills force 5, and what is the least such union? The
+   pair-web completeness (build/m32-pairweb.json) stays the Lean warm-up.
+2. **The certification programme** — standing fallback unchanged
+   (`plans/M33-witness-closure.md`), now with a SECOND candidate object:
+   if the union lands, its closure is a far smaller certification target
+   than the 1581's.
 3. **The designed-forcer thread — CLOSED at M32's flat checkpoint**; reopen
    only with a degree-≥ 2 cross-pressure mechanism and fresh registered
    predictions. G15 now says what was missing: kills without a pigeonhole.
@@ -562,23 +594,57 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   SOMEWHERE"; de Grey's informal mono-triple argument is the exemplar)
   composed with a thin, law-governed kill web refuting each placement (the
   half that is now kernel-checked: G12/G14). The disjunction explains the
-  globality readings — a some-placement-somewhere compulsion has no small
-  carrier and is INVISIBLE to instance meters, which is why every pairwise
-  and single-triple sweep read zero while the object still forces 5 — and
-  it explains M32's flat stacks: they built the kill act over a fabric
-  never shown unable to stay clean; kills without a pigeonhole force
-  nothing. The 3→4 template is owned end-to-end (the rainbow floor); the
-  4→5 gap is exactly **the golden question: what ambient structure
-  delivers the 4th colour onto a circle?** (G13's fan, hunted at minimal
-  scale — onset radius, fan-critical core, the compulsion spectrum.)
-  **[reading]**, with measured anchors: the 510 fan (UNSAT 10.1 s) against
-  its kernel-proven self-insufficiency; the flat stacks; the 791's forced
-  central symmetry as an already-found class-level compulsion (the phase-2
-  positive control). *Falsifiers, registered in the M33 stub: a fan-core
-  both large and patternless (coverage compulsion itself irreducibly
-  global — the fifth measurement, and this reading demotes to "the
-  pigeonhole has no finite-order name"); or the avoidance ladder all-SAT
-  at every probed class through witness scale.*
+  globality readings and M32's flat stacks: kills without a pigeonhole
+  force nothing — and instance meters are structurally blind to the class
+  (M32's stacks SAT on a fabric that M33 later showed FIRES the d2 class:
+  the compulsion was there; the meters could not see it and the 1-regular
+  matchings could not exploit a disjunction). **PROMOTED at M33 from
+  [reading] to [measured] in its pigeonhole half**: the avoidance
+  instrument found the class compulsion on four objects, and its Act-One
+  carrier is SMALL — the 122-vertex 1-minimal core (G16). The neither-act
+  falsifier branches registered in the stub did not fire; what remains
+  [reading] is the ASSEMBLY claim — that pigeonhole × kill is not merely
+  how known forcers are built but how χ ≥ 5 must be argued — tested by
+  M34's union question.*
+
+* **G16 — The distance-2 pigeonhole law** (M33, 2026-08-10; the
+  instrument's discovery, found by a CONTROL and confirmed everywhere):
+  **the hexagonal seam fabric cannot 4-colour without a monochromatic
+  distance-2 pair** once it has (i) seam DEPTH ≥ 2 (the certified chunk:
+  clean at B ≤ 1, fired at B = 2 — depth switches it, not radius) or
+  (ii) radial extent past a fabric shell (bare de Grey fabric and the
+  full 1581: onset r² = 2 − √33/9, IDENTICAL to nine decimals — the
+  spindles neither create nor move it; Heule-510: onset at the glue
+  shell 5/3). Distance 2 is exactly the ρ₁₅ spindle distance
+  (4·2² − 1 = 15): **the pigeonhole is seam-native; every kill of it
+  needs √15 — the field wall (G1) is exactly the wall between the two
+  acts.** Act One's 1-minimal carrier: 122 vertices (de Grey's L: 121),
+  12 near-rot6 shells about the metapivot, every member's necessity
+  witnessed, both encodings agree. **[measured: build/m33-*.json, the
+  explorer's M33 pane]** *Consequences: the design grammar for 5-forcers
+  is "kill every d2 placement over a deep-enough seam region" — de
+  Grey's and Haugland's pipelines are both instances; and the √3-pair
+  pigeonhole is an ASSEMBLY product (only the full 1581 carries it,
+  onset at the √21 shell where cross-system material enters — Heule's
+  shrinking discarded it). Falsifiers: any validated 4-colouring of a
+  named fired region avoiding all d2 pairs (would break both encodings
+  at once = instrument catastrophe); a fabric-depth-2 seam region of
+  comparable extent that stays clean; external — whether Haugland's
+  heptagon fabric pigeonholes at ITS spindle distance (2, via the same
+  ρ₁₅) is the cross-fabric test, unrun.*
+* **G17 — Globality lives only at the top rung** (M33's resolution of
+  the G10/G15 tension): the 4-onset (the fan = χ ≥ 5 itself, by the A1
+  factorization) arrives exactly at the last vertex — measured at three
+  centres, and provable from vertex-criticality in two lines — while
+  EVERY sub-rung compulsion measured has a small carrier: min-cover 3
+  at 49 = 36 + 13 (the interior web on (7−√33)/6 ∪ {1/3} ∪ (9−√33)/6),
+  the d2 pigeonhole at 122. G10's four globality measurements were all
+  measurements OF THE TOP RUNG; the mechanism was never global — it was
+  disjunctive, and the ladder below the top is made of small, nameable,
+  certifiable objects. **[measured]** *The golden question's answer so
+  far: the 3rd colour is delivered by a 13-point interior web; the leap
+  to the 4th is the witness-wide composition of class pigeonholes with
+  field-crossing kills — the object M34 tries to build minimally.*
 
 ## Whose work this is
 
