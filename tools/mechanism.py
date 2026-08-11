@@ -142,14 +142,14 @@ def load_object(name: str) -> dict:
         fxy = xy(pts)
         return {"name": name, "pts": pts, "xy": fxy, "edges": unit_edges_of(pts, fxy),
                 "centres": {"origin": (H.rat(0), H.rat(0))}}
-    if name == "hexchunkB2":
+    if name.startswith("hexchunkB") and name[9:].isdigit():
         import closure as CL
-        cpts, mpiv, _hexpiv = CL.hexagram_points(2)
+        cpts, mpiv, _hexpiv = CL.hexagram_points(int(name[9:]))
         pts = [(tuple(p[0]), tuple(p[1])) for p in cpts]
         fxy = xy(pts)
         return {"name": name, "pts": pts, "xy": fxy, "edges": unit_edges_of(pts, fxy),
                 "centres": {"meta": (tuple(mpiv[0]), tuple(mpiv[1]))}}
-    raise SystemExit(f"UNKNOWN OBJECT {name!r} (heule510 | degrey1581 | fabric | hexchunkB2)")
+    raise SystemExit(f"UNKNOWN OBJECT {name!r} (heule510 | degrey1581 | fabric | hexchunkB<n>)")
 
 
 # ------------------------------------------------------------------ classes and instances
@@ -567,7 +567,12 @@ def controls(cap: float, machine: str) -> None:
     base = class_avoid(n_hx, obj["edges"], 4, [], cap)
     expect(base["outcome"], "sat", f"base guard: the chunk ({n_hx} pts, "
            f"{len(obj['edges'])} edges) is 4-colourable")
-    probe_classes = ("eq-pair-sqrt3", "mono-triple-sqrt3", "eq-pair-2")
+    # Expectations per §0i: the √3 classes stay clean (G1's rot3 protection), and eq-pair-2
+    # FIRES — the d = 2 pigeonhole found by the first control run, binary-confirmed; the
+    # control now pins that discovered truth so a regression (either way) goes red.
+    probe_classes = {"eq-pair-sqrt3": ("clean", "empty"),
+                     "mono-triple-sqrt3": ("clean", "empty"),
+                     "eq-pair-2": ("fired",)}
     insts = {cn: instances_of(obj, ids, CLASSES[cn]) for cn in probe_classes}
 
     def hx_row(cn):
@@ -578,9 +583,10 @@ def controls(cap: float, machine: str) -> None:
             return avoid_verdict(base["outcome"], row["outcome"], len(inst))
         return avoid_verdict(base["outcome"], None, len(inst))
 
-    for cn, v in zip(probe_classes, pmap(hx_row, list(probe_classes))):
-        expect(v in ("clean", "empty"), True,
-               f"{cn}: {len(insts[cn])} instances → {v} (the seam fabric stays clean)")
+    names = list(probe_classes)
+    for cn, v in zip(names, pmap(hx_row, names)):
+        expect(v in probe_classes[cn], True,
+               f"{cn}: {len(insts[cn])} instances → {v} (want {'/'.join(probe_classes[cn])})")
 
     out["ok"] = not failures
     (BUILD / "m33-controls.json").write_text(json.dumps(out, indent=1))
