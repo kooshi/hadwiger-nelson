@@ -713,6 +713,26 @@ anchor. -/
 #print axioms Quadrature.quadrature_rho15
 #print axioms Quadrature.pair_tangency
 
+/-! ## M34 — Act One as kernel theorems
+
+The pigeonhole bridge (class avoidance = colourability of the augmented graph), the
+criticality factorization A1 (unconditional), and the two pigeonhole carriers: the
+nine-point √3-pair core (two transmuter forcings composed, no search) and the 122-point
+distance-2 core (an LRAT certificate on the augmented list, replayed by the kernel), each
+with its plane-level corollary — no proper 4-colouring of the plane avoids monochromatic
+pairs at distance √3, nor at distance 2. -/
+
+#print axioms mono_pair_of_not_colorable_append
+#print axioms not_colorable_iff_covers
+#print axioms UDCert.pairsAt_sound
+#print axioms core9_pigeonhole
+#print axioms core9_plane
+#print axioms core9_pairs_complete
+#print axioms core122_unsat
+#print axioms core122_pigeonhole
+#print axioms core122_plane
+#print axioms core122_pairs_complete
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

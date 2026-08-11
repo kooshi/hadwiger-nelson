@@ -41,6 +41,8 @@ No such colouring exists; some pair goes monochromatic.
 
 namespace HadwigerNelson
 
+open SimpleGraph
+
 /-- The triangle whose colours are named: three mutually unit-adjacent vertices. -/
 def core122Ports : Fin 3 → Fin 122 := ![0, 1, 84]
 
@@ -101,17 +103,23 @@ theorem core122_pairs_dist : core122.PairsAt core122Pairs 4 = true := by decide 
   UDCert 122)).badEdges.isEmpty
 #guard (({ core122 with verts := fun i => if i = 0 then ⟨1000, 0⟩ else core122.verts i } :
   UDCert 122)).badEdges.all fun be => be.1.1 = 0 ∨ be.1.2 = 0
-#guard ({ core122 with verts := fun i => if i = 2 then ⟨1000, 0⟩ else core122.verts i } :
+#guard ({ core122 with verts := fun i => if i = 3 then ⟨1000, 0⟩ else core122.verts i } :
   UDCert 122).PairsAt core122Pairs 4 = false
 
--- **Completeness of the pair list, compiled floor** (M34 §0g G-7): every ordered pair of the
--- 122 points at exact squared distance `4` is listed — `core122Pairs` is the whole distance-2
--- class on these points, not a curated sublist. The pigeonhole theorem does not depend on
--- this; it pins the interpretation. (The kernel-decided form is `core122_pairs_complete`
--- below if the measured budget allowed it; this compiled check is the standing floor.)
+-- The compiled face of the completeness check below — two independent evaluators on one fact.
 #guard (List.finRange 122).all fun i => (List.finRange 122).all fun j =>
   !(decide ((core122.verts i).distSq (core122.verts j) = ((4 * (12 * 12) : ℤ) : Q4))) ||
     decide ((i, j) ∈ core122Pairs) || decide ((j, i) ∈ core122Pairs)
+
+/-- **Completeness of the pair list**: any two of the 122 points at exact squared distance
+`4` are a listed pair — `core122Pairs` is the whole distance-2 class on these points, not a
+curated sublist. The pigeonhole theorem does not depend on this; it pins the interpretation
+(the M33 class semantics). Kernel-checked over all 14,884 ordered pairs — 90 s, measured
+within the §0g G-7 budget. -/
+theorem core122_pairs_complete :
+    ∀ i j : Fin 122, (core122.verts i).distSq (core122.verts j) = ((4 * (12 * 12) : ℤ) : Q4) →
+      (i, j) ∈ core122Pairs ∨ (j, i) ∈ core122Pairs := by
+  decide +kernel
 
 /-! ### The pigeonhole -/
 
