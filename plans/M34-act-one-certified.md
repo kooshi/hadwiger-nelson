@@ -438,3 +438,79 @@ Plane corollaries: bare ∃ over `unitDistance ℂ` (house model, M20's
 genre); the finite core theorems ARE the constructive strong forms
 carrying addresses; no EuclideanSpace transfer (a ∀-colourings statement
 has no consumer there).
+
+## §0g — Obligation modeling pass (2026-08-11, fresh invocation)
+
+**G-1 — A1 is UNCONDITIONAL (the pass's find).** Neither direction of
+`not_colorable_iff_covers` touches the `(G.deleteIncidenceSet v).Colorable k`
+hypothesis: if the deleted graph refuses k colours the RHS is vacuously true
+over an empty domain AND the LHS holds (a G-colouring would restrict), so
+the iff survives; when it is colourable both directions are the M18
+recolouring move (→ contrapositive: a deleted-colouring missing colour c on
+N(v) extends by φ = if · = v then c else C ·, properness split at-v /
+off-v through `deleteIncidenceSet_adj`; ← : restrict along
+`deleteIncidenceSet_le`, coverage at colour D v hands a neighbour wearing
+D v, refused by D.valid). The hypothesis was the fan INTERPRETATION, not
+the mathematics — it moves to the docstring. Stronger statement, same
+proof.
+
+**G-2 — The bridge proves iff-first.** `colorable_append_iff_exists_avoiding`
+carries the one four-case properness construction (mpr — the
+`fan_iff_coverage` house pattern over `List.mem_append`: E-edge /
+P-pair × orientation, each one line) and the restriction (mp — needs `hP`,
+via `edgeGraph_adj_mono` + `List.subset_append_left`);
+`mono_pair_of_not_colorable_append` becomes a three-line corollary
+(by_contra + mpr). One construction, stated once.
+
+**G-3 — The transmuter's mutation audit is ONE decide**: nine existential
+conjuncts (each hypothesis dropped admits a countermodel with h ≠ a),
+4⁵ each — the audit that certifies every hypothesis load-bearing, in one
+named example.
+
+**G-4 — Core9 wiring checked against the measured edges.** Dense relabel
+[791,793,794,868,995,1186,1187,1262,1390] → 0..8; the six ¬MonoPair facts
+apply pointwise (membership by decide); transmuter instance 1 consumes
+C.valid at dense edges (1,2),(1,3),(1,4),(0,1),(0,3),(0,4) — all present,
+orientations match the hypothesis order as stated; instance 2 at
+(5,6),(5,7),(5,8),(0,5),(0,7),(0,8); the refusal at edge (2,6) = 794–1187.
+A have-chain of ~15 named lines; no 4⁹ anywhere.
+
+**G-5 — pairsAt soundness needs NO nonnegativity anywhere** (simpler than
+§0f D4 thought): the route mirrors `dist_toPlane_eq_one` — eval the exact
+identity into ℝ, `normSq (diff) = (r : ℝ)` by field_simp +
+linear_combination, then `dist = Real.sqrt (r : ℝ)` is `Complex.dist_eq` +
+`norm_def` + the rewrite. A negative r merely makes the hypothesis
+unsatisfiable. The instance step: `Real.sqrt 4 = 2` via `4 = 2^2` +
+`Real.sqrt_sq`.
+
+**G-6 — The Core122 chain, every intermediate named**: `core122 : UDCert
+122` → `core122_valid` (chunked ValidOn decides) → `core122_pairs_dist`
+(pairsAt … 4 = true, decide) → `core122Aug := core122.edges ++
+core122Pairs` (the CNF's subject; the emitted `agreesWithCNF` cites this
+name) → `core122_unsat : (coloringCNF 4 122 core122Aug).Unsat` (segments;
+emit_mask.py's no-pins path is an implementation checkpoint — if the
+emitter hardcodes a cube, pass the empty cube and discharge `cubeCNF … []
+= []` by rfl, or make the minimal emitter change and report it) →
+`core122_not_colorable` (not_colorable_of_unsat, 0 < 4 by norm_num) →
+`core122_pigeonhole` (the bridge) → `core122_plane` (embed by
+`core122.point`, properness from valid_sound, witnesses from the
+pigeonhole pair, distance from pairsAt soundness + √4 = 2). Core9: same
+chain with decide in place of the LRAT and √3 left as `Real.sqrt 3`.
+
+**G-7 — Completeness checks sized.** Core9: C(9,2) = 36 distSq decides —
+kernel, unconditional. Core122: C(122,2) = 7,381 — ONE measured kernel
+attempt (band ≤ 10 min; the deGrey marginal was 0.16 s/edge at denom 768,
+ours is denom 12), with the compiled `#guard` as the standing floor and
+the demotion NAMED in the file if the kernel attempt exceeds budget.
+
+**G-8 — The partition.** PROVE (kernel): both bridge lemmas, transmuter +
+audit, core9 pigeonhole + plane, A1 + both controls, pairsAt soundness,
+core122 valid/pairs/unsat/pigeonhole/plane, core9 completeness. TEST
+(compiled #guard + spec examples): cert shape pins (counts, dedup, i < j,
+denom), badEdges cross-check + adversarial member per cert, completeness-
+122 floor, per-def non-vacuity examples. ASSUME (named in artifacts, not
+in Lean): CaDiCaL's UNSAT until the kernel replays it (then nothing); the
+tools-side identification of dense ids with m33-core object ids (the
+DeGrey provenance-note genre: the theorem is about the points as written;
+that they are M33's points is a generator property, controlled tools-side
+by an exact re-derivation check, never claimed as a theorem).
