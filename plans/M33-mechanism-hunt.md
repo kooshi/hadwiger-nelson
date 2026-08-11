@@ -752,9 +752,35 @@ construction must kill every placement — the placement census of the core
 |---|---|---|---|
 | d2 pigeonhole | hexchunk B2 | **122** | 12 shells about the metapivot, near-rot6 counts (ten of 12/6, defects 11+9) |
 | 3-cover | Heule-510 | **49 = 36 + 13** | ambient wholly interior: (7−√33)/6 ×4, inner circle ×5, (9−√33)/6 ×4 |
-| d2 pigeonhole | fabric | (§R-pending: campaign2) | |
-| d2 pigeonhole | Heule-510 | (§R-pending: campaign2) | |
-| √3-pair pigeonhole | 1581 | (§R-pending: campaign2) | |
+| d2 pigeonhole | fabric | **276** | 22 irregular shells — 84% of its onset ball |
+| d2 pigeonhole | Heule-510 | **201** | 22 irregular shells, glue shell outermost — 72% of its onset ball |
+| √3-pair pigeonhole | 1581 | (running overnight — annex; ~1,400-vertex start region) | |
+
+**The onset-floppiness lesson** (unregistered observation, consistent
+across all three d2 cores): a core shrunk from the ONSET radius keeps most
+of its ball (fabric 84%, 510 72%) because the compulsion there has only
+just assembled — near-critical, wide, floppy — while the chunk's
+DEPTH-switched firing at B = 2 carries slack and shrinks to a tight,
+near-rot6-symmetric 32% (122/378). For M34: shrink from slack, not from
+onset; the 122-core is the certification target.
+
+## What was NOT done (honesty ledger)
+
+* The direction-class census of the cores (§0d promised `anatomy.py`
+  re-aimed): only the RING census shipped; the chunk core's 12 clean
+  shells carried the P12 gate call. Direction classes remain to run if
+  M34 wants them.
+* The enriched-ball sweeps (registered as "after the plain curves"): the
+  plain curves answered every registered question; the enrichment-shift
+  measurement is unrun.
+* The 1581 d2 core: skipped as redundant — the fabric core at the
+  IDENTICAL onset radius answers the shape question more cheaply; noted,
+  not measured.
+* Coverage-j sub-arc classes (registered exploratory): unrun.
+* The 1581 √3-pair core: still shrinking at close (annex; recorded when
+  it lands).
+* Phase 3 (the cascade formalized): GATED to M34 per P12, as registered —
+  no Lean was written this milestone, by design.
 
 ## Costs and benchmarks (desktop)
 
