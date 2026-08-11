@@ -602,3 +602,29 @@ verdicts at face value.
   confirmed forced-distinct pairs (970 unsettled at cap, status unknown) —
   no free chain shortcut; the forced-equal + unit-edge chain stands as
   registered, √23 growth and all.
+
+## §0i — Mid-milestone addendum (2026-08-11, registered BEFORE the cube run)
+
+**What the union run found (face value).** Controls green on the true M30
+forcer graph (`build/m30-forcer791.json` — the numbering lesson: the M06-era
+`degrey_graph.json` half-A and the standing loader are DIFFERENT vertex
+orders; the first union attempt failed its own forced-equal control by
+mixing them, and the control caught it exactly as designed). The monolithic
+union at k = 4: **`unknown` at the 3600 s cap** — P6's verdict band MISSED
+(registered: UNSAT in minutes). `unknown ≥ cap` is not a claim; the union's
+non-4-colourability remains DERIVED (kernel pigeonhole + solver-measured
+forcing + combinatorial chains), not measured.
+
+**The registered cube run (predictions before running).** The kernel
+theorem `core9_pigeonhole` says every proper 4-colouring of the union
+makes one of the SIX √3-pairs mono — so the six cubes "pair i is mono"
+(4 equality clauses each) COVER all colourings, with the cover's
+soundness carried by the kernel, not the solver. Each cube scopes the
+refutation to one forcer copy's forced-equal plus one chain edge.
+**Q-j1 [medium-high]**: every cube reads UNSAT at ≤ 900 s (band anchored
+on the 133.7 s forced-equal control + composition slack); all six green
+⟹ the union's χ ≥ 5 is solver-confirmed THROUGH the kernel-checked cube
+cover — the A5 architecture run as an experiment: the monolithic solve
+capped, the composed one is expected in minutes. Any cube SAT (validated
+model) = a genuine assembly failure, reported as P6's failure clause.
+Runs 6-wide parallel (the standing within-tool rule).
