@@ -366,7 +366,13 @@ certification programme is the standing fallback.)*
    measurable-≥6, axiom sensitivity, the `opus-larp` re-validation. Write-ups
    and upstreaming: deferred per standing policy — noting the ledger now holds
    a completed trilogy plus the field-wall thesis, which is the strongest
-   write-up candidate so far; the trigger stays Kooshi's.
+   write-up candidate so far; the trigger stays Kooshi's. **At that trigger,
+   adopt the zeta-23 artifact shape (Kooshi, 2026-08-10): a tiny trusted
+   `comparator/` surface (ChallengeDeps + Challenge statements with sorry)
+   over the whole edifice as untrusted Solution, verified by
+   `leanprover/comparator` (statement AST-equivalence + axiom whitelist +
+   kernel replay; its optional nanoda run can serve as the deferred
+   independent-kernel publication gate).**
 
 ## Grokkings — the working theory of the 5th colour
 
