@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M38, 2026-08-12.**
+**Last updated: M39, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -460,6 +460,29 @@ is the plane's own open question — so *any six-colouring of the plane has
 colour classes finer than half the unit distance in every lattice's cells*,
 which is precisely the regime M36's pixel probes were capped undecided in.
 
+M39 turned M38's viewpoint on the open half of the problem. For every scale
+`p` the constraint graph `G(p)` has the property that **a proper colouring of
+it IS a proper colouring of the plane**, so `χ(ℝ²) ≤ χ(G(p))` — and M38's
+theorem says `χ(G(p)) = 7` on the classical window, which is the hexagonal
+seven-colouring recovered as a graph-colouring fact. Below that window nobody
+had looked, because the family was invisible until the constraint reading. The
+census, on an EXACT criterion (necessary as well as sufficient — G21 applied
+before the fact rather than after), found the requirement is **not monotone in
+the scale**: seven in the classical window, **eight just below it**, seven
+again near `p ≈ 0.46`, then the clique collapsing as the cells shrink. The rise
+is a theorem, not a census row —
+`Coset.eight_le_card_of_cell_constant`: for `1/2 < p < 3/5` any cell-constant
+colouring needs at least EIGHT colours, via the `3 × 3` address block with one
+corner dropped, whose pairwise differences all have norm in `{1,3,4,7}`. **So
+the classical scale is a local optimum and refining the cells costs a colour**
+— "make the cells smaller" is not a route to six. The campaign found no
+six-colouring at any of twelve scales on tori to 24 × 24 (reported as
+period-bounded, never as `χ(G) > 6`), a seven-colouring at `p = 6/13` below the
+classical window (so the good scales are not one interval), and — the control
+that changed a reading — the fine-scale seven-refusals are torus-bounded, the
+24 × 24 row coming back UNKNOWN at cap, so the fine regime is honestly
+unprobed rather than closed.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -504,6 +527,8 @@ which is precisely the regime M36's pixel probes were capped undecided in.
 | 34 | **The coset bound: the coset chromatic number of the plane is exactly seven** (M37): `Coset.seven_le_card` — every proper nearest-point coset colouring of the plane (triangular lattice, ANY scale, ANY sublattice, ANY tie-breaking) uses at least seven colours, via `Coset.seven_values` (the seven lattice points of the closed first shell get seven distinct colours); and `Coset.exists_proper_coset_colouring` — the norm-7 ideal `(−3+ζ₆)` at scale `6/7` is such a colouring with exactly seven, so the bound is attained (`Coset.coset_chromatic_eq_seven`). The engine, entirely on the integral form `a²+ab+b²`: the inscribed disc + Gram identity, the deep hole (`4p² ≤ 3` from its own diameter), the collinear sweep with a gap lemma (kills kernel norms 1 and 3), the corner sweep (closes the norm-4 seams at `1/p` odd, where the collinear windows only touch), the Loeschian gap (2, 5, 6 are not norms ⟹ kernel norm ≥ 7), and the shell's difference table `{1,3,4}`. Sharpness adds the covering radius (`p/√3`) and the ideal's minimum (`√7 p`), with all properness arithmetic rational. **A six-colouring of the plane, if one exists, is not a lattice colouring.** Attribution: the optimality statement is folklore-adjacent and no novelty is claimed for the construction; ours is the proof shape, the formalization, and the packaging as a limitation theorem for the upper-bound hunt. | `Coset.lean`, `build/m37-design.py`, `plans/M37-coset-bound.md` §R | M37 |
 
 | 35 | **The coarse-cell bound: the homomorphism removed** (M38): `Coset.seven_labels_of_cell_constant` — for `1/2 < p < 1`, ANY colouring constant on the nearest-point cells of the triangular lattice at scale `p`, with **no algebraic relation between the labels**, gives the seven closed-shell addresses seven pairwise distinct labels; `seven_le_card_of_cell_constant` counts them; `cell_chromatic_eq_seven` pairs that with M37's witness at `p = 6/7`. The mechanism is a change of viewpoint rather than a new computation: the constraint graph's edge set on that window is exactly `Q ∈ {1,3,4}` (each condition `(1−p)² < p²Q < (1+p)²`, radical-free), so the closed first shell is a 7-clique and M37's Loeschian gap is replaced by the clique. The sweep was refactored into its honest form — `exists_unit_pair`, which PRODUCES the unit pair from two addresses and a direction with no mention of colour, and of which M37's is an instance. Window confirmed exactly `(1/2, 1)` with the planted red firing at and below `1/2` (`build/m38-design.py`, 5,997 rows agreeing between the radical and radical-free forms). | `Coset.lean`, `build/m38-design.py`, `plans/M38-cell-bound.md` §R | M38 |
+
+| 36 | **The scale is not monotone, and the classical one is a local optimum** (M39): `Coset.eight_le_card_of_cell_constant` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`). Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
 
@@ -994,6 +1019,22 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   address than G22 first gave, and it coincides with where M36's pixel-brick
   probes ran out of solver: the open region is the same one from two
   independent directions.*
+* **G23 — The good scales are isolated, and refining is not a route down.**
+  A colouring constant on a lattice's cells is exactly a colouring of that
+  lattice's constraint graph, so the whole cell family is one parametrized
+  family of graph-colouring problems, indexed by the scale. Measured across
+  that parameter, the requirement is **not monotone**: seven in the classical
+  window, **eight just below it** (kernel: the 8-clique theorem), seven again
+  near `p ≈ 0.46`, with the clique number then collapsing while the graph
+  itself grows denser. **[kernel + measured: M39]** *Consequence: the intuition
+  "smaller cells approximate the plane better, so they should do at least as
+  well" is FALSE — the classical scale is a local optimum and its neighbours
+  are strictly worse. Any hunt for a six-colouring in this family must jump to
+  isolated good scales rather than refine, and the fine regime (where the tori
+  needed to express a colouring outrun the solver) is the only part still
+  open. Falsifier: a six-colouring of any `G(p)`, which would be `χ(ℝ²) ≤ 6`;
+  short of that, a patch-based refutation would upgrade the period-bounded
+  refusals into statements about `χ(G(p))` itself.*
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this
