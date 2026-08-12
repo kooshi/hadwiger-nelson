@@ -51,6 +51,34 @@ possibly with the two-act decomposition as a named intermediate).
   elaborator is its checker); builds through `scripts/build.sh` ONLY; laptop RAM is
   the ceiling; any segfault: HALT.
 
+## §0e — Domain-modeling pass (2026-08-12, applied before the skeleton)
+
+* **The band enters as two rational inequalities on p².** The file's earlier windows
+  used p-inequalities because their endpoints were rational in p; M42's endpoints are
+  rational in T² = 1/p² (D1's thresholds), so the intrinsic radical-free form is
+  `3/28 < p^2 → p^2 < 1/9 → …` (shell-4), `3/13 < p^2 → p^2 < 1/4` (12-clique),
+  `3/16 < p^2 → p^2 < 3/13` (G\*). Same convention one level down; no radicals.
+* **The coset-impossibility quantifies over `φ : (ℤ×ℤ) →+ ZMod 7`, `φ ≠ 0`.** Seven
+  is prime, so every index-7 quotient IS ℤ/7 — the abstract subgroup quantifier
+  collapses to nonzero homs (φ ≠ 0 ⟹ surjective, ZMod 7 simple). The proof is a
+  48-case witness table ((φ(1,0), φ(0,1)) = (a,b) ≠ 0; per case a kernel vector d with
+  `a·d.1 + b·d.2 ≡ 0 [ZMOD 7]` and `hexQi d ∈ {3,4,7,9}`) — checkable by `decide` —
+  feeding the sweep refutation through the existing `φ d = 0` hypothesis shape.
+* **The 23-core is two-layer, house style**: a `Fin 23` graph refusal certificate
+  (edges = the band's constraint pairs, each justified by an `exists_unit_pair`
+  instance; the 6-colour refusal by pinned-clique `decide` — the ω = 4 clique closes
+  the palette, M34 Gadget pattern — with the M05 LRAT pipeline as registered fallback)
+  plus the plane corollary in cell-constant vocabulary (a cell-constant colouring
+  restricted to the 23 addresses is a proper colouring of the certificate graph).
+* **Non-vacuity models**: a rational p per band pinned in the skeleton (e.g.
+  `p² = 21/100` for G\*), the `rnd` model reused from M37's sharpness half.
+* Obligation-modeling note (compact, run as part of this pass given the overlap): the
+  decompositions ARE §0a's σ-table — each window theorem = per-norm sweep instances ×
+  the counting wrapper; the risky obligations are (i) the `hsmall` guards at the
+  extreme σ (norm-9 at the 12-clique band: 4σ² = 0.846 — nlinarith-friendly margins),
+  (ii) the 23-core decide budget (P4's fallback stands). Experience pass skipped: the
+  surface follows the file's existing conventions exactly.
+
 # THE ORIGINAL STUB (pricing superseded by §0a above)
 
 *Written 2026-08-12 at M40's close. Read order for a fresh session:
