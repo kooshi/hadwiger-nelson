@@ -107,6 +107,14 @@ and is instrument catastrophe).
   `p ≈ 0.43–0.35`, then collapsing to 4, 3, 2 as the cells shrink. The rise to
   eight was NOT registered and is the milestone's headline: **the family gets
   strictly worse just below the classical scale.**
+* **The oscillation is kernel-checked at three points, not just measured.**
+  Besides the eight-clique band, the fine-window seven returns as a theorem
+  too: the clique the census finds at `p ≈ 0.375–0.43` is the **`√3`-scaled
+  copy of the same shell** (pairwise norms `3·{1,3,4} = {3,9,12}` — the
+  index-3 sublattice), and `Coset.seven_le_card_fine` proves `≥ 7` colours for
+  `3/8 < p < 2/5`. So the shell reappears at every scaled copy of the lattice,
+  and the requirement's oscillation — seven, eight, seven — is kernel-checked
+  at three separate windows rather than inferred from a census.
 * **A theorem, not just a census**: `Coset.eight_le_card_of_cell_constant` —
   for `1/2 < p < 3/5`, any cell-constant colouring needs at least EIGHT
   colours, via the `3 × 3` address block with one corner dropped, whose 28
@@ -139,6 +147,10 @@ and is instrument catastrophe).
 
 ## What was NOT done (honesty ledger)
 
+* More fine-scale finds, recorded: `k = 7` SATs at `p = 1/6` and `p = 1/7` on
+  24 × 24 tori while `k = 6` refuses there at 24 × 24, 30 × 30 and 36 × 36 — so
+  the good scales continue downward and six stays out of reach at every period
+  probed.
 * Every SAT refusal here is period-bounded. Turning any of them into a
   statement about `χ(G(p))` needs a finite PATCH refutation (a ball, not a
   torus), which is not built.

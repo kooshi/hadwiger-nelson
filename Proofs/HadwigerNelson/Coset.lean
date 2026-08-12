@@ -679,6 +679,7 @@ theorem exists_nearest (w : ℝ × ℝ) :
 
 
 
+
 /-! ### The witness: the norm-7 ideal at scale 6/7 -/
 
 /-- The classical seven-colouring's colour map: `(a, b) ↦ a + 3b` in `ℤ/7`. Its kernel is
@@ -957,6 +958,69 @@ theorem seven_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 1 / 2 < p) 
   simpa using Fintype.card_le_of_injective _ hinj
 
 end CellConstant
+
+/-! ### A second window, deep in the fine regime
+
+The seven-point shell reappears at every scaled copy of the lattice. At the `√3`-scaled
+copy — the index-3 sublattice — its pairwise norms are `3·{1,3,4} = {3,9,12}`, and those
+are all constrained on a window far below the classical one. So the requirement returns to
+seven there, which is the kernel's half of the oscillation M39 measured: seven, then eight,
+then seven again. -/
+
+/-- The `√3`-scaled shell: seven addresses with pairwise norms in `{3, 9, 12}`. -/
+def shell3 : Fin 7 → ℤ × ℤ
+  | 0 => (0, 0)
+  | 1 => (1, -2)
+  | 2 => (1, 1)
+  | 3 => (2, -1)
+  | 4 => (3, -3)
+  | 5 => (3, 0)
+  | 6 => (4, -2)
+
+theorem shell3_diff {i j : Fin 7} (h : i ≠ j) :
+    shell3 i - shell3 j ≠ 0 ∧
+      (hexQi (shell3 i - shell3 j) = 3 ∨ hexQi (shell3 i - shell3 j) = 9 ∨
+        hexQi (shell3 i - shell3 j) = 12) := by
+  revert h; fin_cases i <;> fin_cases j <;> decide
+
+section FineWindow
+
+variable {p : ℝ} {rnd : ℂ → ℤ × ℤ}
+
+/-- **Seven colours again, at a third of the classical scale.** For `3/8 < p < 2/5` any
+cell-constant colouring gives the `√3`-scaled shell seven distinct labels. Together with
+the coarse window (`1/2 < p < 1`, seven) and the band between them (`1/2 < p < 3/5`,
+eight), this is the oscillation of the scale, kernel-checked at three points: **the
+requirement is not monotone, and refining the cells is not a route downward.** -/
+theorem seven_labels_fine {A : Type*} (hp : 3 / 8 < p) (hp1 : p < 2 / 5)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
+    {i j : Fin 7} (hij : i ≠ j) : col (shell3 i) ≠ col (shell3 j) := by
+  intro hc
+  have hp0 : (0 : ℝ) < p := by linarith
+  have hp1' : p < 1 := by linarith
+  obtain ⟨hne, hQ⟩ := shell3_diff (Ne.symm hij)
+  have huv : shell3 i ≠ shell3 j := by
+    intro h; exact hne (by rw [h, sub_self])
+  have hlo : (1 - p) ^ 2 < p ^ 2 * (hexQi (shell3 j - shell3 i) : ℝ) := by
+    rcases hQ with h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  have hhi : p ^ 2 * (hexQi (shell3 j - shell3 i) : ℝ) < (1 + p) ^ 2 := by
+    rcases hQ with h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window hp0 hp1' hrnd huv hlo hhi
+  exact hproper x y hxy (by rw [hx, hy]; exact hc)
+
+theorem seven_le_card_fine {A : Type*} [Fintype A] (hp : 3 / 8 < p) (hp1 : p < 2 / 5)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) : 7 ≤ Fintype.card A := by
+  have hinj : Function.Injective (fun i : Fin 7 => col (shell3 i)) := by
+    intro i j hij
+    by_contra hne
+    exact seven_labels_fine hp hp1 hrnd col hproper hne hij
+  simpa using Fintype.card_le_of_injective _ hinj
+
+end FineWindow
 
 /-! ### The bad band: eight colours just below the classical window
 
