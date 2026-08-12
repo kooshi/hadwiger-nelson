@@ -426,3 +426,77 @@ of that gate. Controls before belief, red and green, on every new checker —
 the prober's k = 4 mass control is the exemplar. The sweep-halt rule (P2) on
 any genuine firing is a REPORT trigger, not a pause for permission: Kooshi is
 told immediately while certification (L2) proceeds.
+
+## §0f — Domain modeling pass (2026-08-11, fresh invocation)
+
+**D1 — The hex-shell statement is the CLIQUE, not a big decide.** The colour
+count enters the mathematics only through 7 > k, so the true general lemma is
+the clique face of the bridge: if a vertex set S of the augmented graph
+`edgeGraph n (E ++ P)` is pairwise adjacent and k < |S|, then any proper
+colouring of `edgeGraph n E` with Fin k has a mono P-pair — proof by the
+Finset pigeonhole (`Finset.exists_ne_map_eq_of_card_lt_of_maps_to` genre):
+two S-members share a colour, properness excludes the E-explanation, append
+membership hands the P-pair (either orientation; equality is symmetric). NO
+5⁷/6⁷ decide exists anywhere — the per-instance obligation is the 21-pair
+clique hypothesis, a trivial decide. The statement is k-generic for free:
+`hexShell_pigeonhole (hk : k < 7) (C : Coloring … (Fin k)) : MonoPair … C`,
+and both plane corollaries (k = 5, 6) instantiate one theorem. Home: the
+clique lemma is the bridge's sibling and belongs in `Pigeonhole.lean` — IF
+the measured rebuild cost of its dependents (Core9/Core122 assemblies, not
+the segments) is minutes; else it lands in HexShell.lean with a note. The
+pair lists stay SEPARATE (P3, P4) for the distance certificates and
+concatenate only in the graph and the MonoPair — the M34 shape verbatim;
+the disjunctive plane conclusion destructures `mem_append`.
+
+**D2 — The Brick carrier is dist² over ℚ, no square roots anywhere.** The
+avoidance predicate is `∀ z z', dist z z' ^ 2 = (q : ℝ) → color z ≠ color z'`
+with q : ℚ the SQUARED guard — properness is the q = 1 instance, the class
+guards are the d2 currency unchanged, and `Real.sqrt` appears only in the
+final read-aloud corollaries (dist = √q ⟺ dist² = q on nonnegatives). The
+structure: `Brick k` with m n intrinsic (the table is `Fin m → Fin n → Fin k`
+— every consumer indexes), w h s : ℚ plain fields, positivity as bundled
+proof fields (every consumer needs them; one decide per instance). The
+colouring `Brick.color : ℂ → Fin k` is noncomputable (Int.floor on ℝ) and
+that is correct — only existence travels; the CERTIFICATE `Brick.check :
+List ℚ → Bool` is pure ℚ/ℤ arithmetic, decidable, and — the seam decision —
+**computes its own offset window** from (w, h, s, max guard) rather than
+taking it as data, so window-completeness is internal and the soundness
+theorem carries no window hypothesis. Half-open cells live IN the definition
+(Int.floor is [n, n+1) — nothing to state); the one analytic workhorse is a
+floor-difference bound (|a − b| ≤ c → |⌊a⌋ − ⌊b⌋| ≤ a ceiling bound), stated
+once, used for rows and (after the shear adjustment) columns.
+
+**D3 — The prober's honest decorrelation is two formulas plus the kernel.**
+The clause generator computes box intervals componentwise
+(max(0, |centre| − width)² per axis); the Python validator re-derives them by
+an independently written axis-interval-overlap formula AND runs a
+corner/random-point refutation sampler (sampling can refute an exclusion,
+never prove one — its role is bug-catching); and any find that matters is
+promoted through `Brick.check` in Lean, where the kernel is the true second
+encoding. The k = 4 mass refusal control (C6) stays the strongest empirical
+check. Rows are plain dicts in the artifact (the M33 convention); the
+parameter tuple (k, D, m, n, w, h, s) is the row's identity key.
+
+**D4 — The compound class never enters CLASSES.** `class_avoid` already
+speaks bare instance lists; a compound query is the caller concatenating two
+single-class lists. CLASSES stays {arity, d2} single-distance; the sweep
+driver owns composition. The clique-triviality guard is a mechanism.py
+function over (region edges + component instance lists): bounded max-clique
+search at k + 1, promoted from the design script's branch-and-bound, with
+the hex shell as its green self-test (must find the K7) and a sparse decoy
+as red.
+
+**D5 — The trilattice loader carries (a, b) tags.** Cheap, inert for other
+objects, and it lets every m35 artifact name lattice points by hex
+coordinates (the C4 cross-checks themselves are pure HNF arithmetic in the
+design script — no loader involvement). The origin is a VERTEX of this
+object; region fan semantics (centre exclusion) apply unchanged.
+
+**D6 — Non-vacuity and mutation seams fixed now.** HexShell's spec block:
+an explicit proper 3-colouring of the unit graph (ring alternation + centre)
+exhibits the Coloring domain non-vacuous AND shows the compulsion live (the
+alternation's repeated colour sits on a √3 ring pair); the k = 7 rainbow
+example refuses the pigeonhole (`¬` form), certifying `k < 7` load-bearing.
+Brick's spec block: a 2-cell toy torus whose check passes at one guard and
+fails at another, both `#guard`ed, plus the planted boundary-adversary from
+§0b (closed-hull conservatism seen refusing).
