@@ -264,9 +264,63 @@ instrument growth — and says so plainly.
 6. **Exoo pricing** (P7, one WebSearch pass) — before any interval claim.
 7. **Close**: artifact, explorer + Gap Atlas update, §R, Frontier.
 
-## §0f — Modeling passes (to be run fresh after §0 commits; amendments land here)
+## §0f — Domain-modeling pass (2026-08-12, applied BEFORE any instrument; amendments
+## only sharpen §0a–e — two of them are soundness catches)
 
-*(reserved)*
+* **A1 — Measurements and inferences never share a row.** The unit of claim stays
+  the band (a verdict is a fact about one fixed graph), and the transfer poset is a
+  DERIVED layer: artifact rows record measurements only; propagated verdicts live in
+  a separate `transfers` section, each entry (from_band, to_band, reason: subset),
+  recomputed from the band table — never stored as if measured. Otherwise a later
+  instrument correction leaves orphaned copies of a retracted verdict, silently.
+  Caveat sharpened while checking D3: consecutive bands are comparable only across a
+  SINGLE-event threshold; at a double event (133/3: one arrival AND one departure)
+  the neighbours are incomparable. The flank pair crosses the pure arrival at 49, so
+  B_lo ⊂ B_hi stands.
+* **A2 — The probe scale is a coordinate, not a claim.** Any interior rational gives
+  the same graph, so rows key on the band id (exact T² interval + canonical class
+  reps, per M40 A3) with the probe T recorded as provenance. The registered flank
+  scales (48/7, 351/50) stand; for the bulk census phases the driver derives the
+  scale canonically (smallest-denominator rational T with T² interior), so two
+  sessions probing one band produce comparable rows by construction.
+* **A3a — SOUNDNESS CATCH: the pin and first-occurrence breaking do not compose
+  freely.** The standing `break_sym` clauses force colours to open in index order;
+  a triangle pinned to (0,1,2) at arbitrary positions can contradict that order and
+  turn a SAT instance UNSAT. Sound composition: the pinned triangle must be
+  pts[0..2] IN pin-colour order — then any proper colouring palette-permutes onto
+  the pin and the remaining colours first-occurrence-relabel over later vertices.
+  I3 therefore reorders pts to put the triangle at the head. Self-test planted red:
+  K3 pinned to colours (1,2,0) in position order under break_sym must come back
+  UNSAT (the unsound composition seen failing on a 3-colourable graph), and the
+  head-ordered pin must stay SAT.
+* **A3b — SOUNDNESS CATCH: the A1-form encoding cannot carry the triangle pin or
+  full first-occurrence.** "N(v) omits SOME colour" is WLOG-reduced to "omits
+  colour 5" by a transposition — which the pin and a full precedence chain both
+  break. Exact form: delete v, forbid colour 5 on N(v), first-occurrence breaking
+  over colours 0..4 only (colour 5 outside the chain), NO pin. Its UNSAT ⟺ the
+  direct ask's UNSAT is A1 unconditional (M34 `not_colorable_iff_covers` — no
+  colourability side condition; vacuous case agrees). Control: agreement with the
+  direct encoding on one decided SAT and one decided UNSAT instance.
+* **A4 — Degeneracy hazard: a torus can swallow an edge offset.** If any edge
+  offset lies IN the period lattice Λ', the quotient has a self-loop and every
+  UNSAT from it is a triviality, not evidence (rectangular is not immune: 6×36 at
+  the flanks contains the edge offset (6,0)). `--colour-hnf` and the rectangular
+  driver check `offset ∈ Λ'` exactly for every edge offset and REFUSE degenerate
+  tori, recording them as skipped-degenerate. Planted control: ⟨(37,0),(0,1)⟩ at
+  the flanks must be refused (it contains (0,6)).
+* **A5 — Row self-sufficiency.** Each row carries: band id (exact T² endpoints as
+  strings + canonical classes), object (kind + params), ask (k, encoding
+  direct/a1-form, pin spec or none, break spec), verdict ∈ {sat, unsat, unknown}
+  with **claim_scope explicit** (`outright` for balls, `period-bounded` for tori,
+  `none` for unknown), cap, seconds, solver, probe T, date. A future session
+  re-derives everything from the row: band bounds from the classes via D1, the
+  edge set from the probe T. The illegal reading (torus UNSAT quoted as χ) is made
+  unrepresentable by the claim_scope vocabulary rather than guarded by prose.
+* **A6 — The other two passes, decided with reasons**: obligation-modeling SKIPPED
+  (nothing is proven in Lean this milestone unless a find fires, and the promotion
+  path's obligations are the already-modeled M42 template); experience-modeling
+  SKIPPED (no lemma API, notation, or diagnostic surface is minted; artifact and
+  explorer follow standing schemas).
 
 ---
 
