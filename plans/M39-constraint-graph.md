@@ -181,7 +181,21 @@ LRAT replay, the M06–M09 chain).
   24 × 24 tori while `k = 6` refuses there at 24 × 24, 30 × 30 and 36 × 36 — so
   the good scales continue downward and six stays out of reach at every period
   probed.
-* Every SAT refusal here is period-bounded. Turning any of them into a
+* **P6 CONFIRMED, and it upgrades a row from period-bounded to outright.** A
+  BALL of radius 4 — 61 lattice addresses, no periodicity assumed — refuses
+  seven colours at `p = 1/3`, and radius 5 and 6 refuse too. So
+  **`χ(G(1/3)) ≥ 8` outright**: at that scale the cell family provably needs
+  eight, and the statement is exactly the shape this repository certifies in
+  the kernel (edge list + LRAT replay).
+* **P7 CONFIRMED at one scale, and it DETERMINES the value there.** At
+  `p = 6/13` a ball of radius 4 (and 5, and 6) refuses SIX colours, so
+  `χ(G(6/13)) ≥ 7` outright; the torus at 12 × 12, 14 × 14 and 21 × 21 achieves
+  seven. **`χ(G(6/13)) = 7` exactly** — a complete determination at a scale
+  well below the classical window. At `p = 1/6` and `p = 1/7` the balls up to
+  radius 8 (225 vertices) still six-colour, so those rows stay
+  period-bounded — a ball too small to refuse is not evidence, exactly as the
+  addendum registered.
+* Every SAT refusal here is period-bounded unless a BALL refutation is quoted. Turning any of them into a
   statement about `χ(G(p))` needs a finite PATCH refutation (a ball, not a
   torus), which is not built.
 * The fine regime (`p ≲ 0.35`) is effectively unprobed: the tori that could
