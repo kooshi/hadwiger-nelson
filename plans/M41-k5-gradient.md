@@ -413,3 +413,50 @@ here — same frame machinery).
 * Solver walls: report the frontier + machine; heavy solves move to the desktop by
   name, never silently.
 * Any segfault, any process: HALT and report to Kooshi (standing).
+
+---
+
+# §R — Results (IN PROGRESS; laptop session 2026-08-12; artifact `build/m41-gradient.json`)
+
+* **P9 CONFIRMED, exactly**: `V ∩ −V` about the construction origin **= de Grey's
+  791-point forcer, identically** — 791 = 791, zero discrepancy either direction, every
+  forcer vertex key-matching into the 1581. The forcer is the centrosymmetric core of
+  the witness; M30's forced central symmetry (the five antipodal pairs) is substrate
+  symmetry surfacing at the colouring level — Shape C's first structural anchor.
+* **The Galois screen (phase 4), and it found a hidden symmetry**: the field
+  automorphism negating √3, √5, √11 together (fixing √7) maps the 1581 to ITSELF as an
+  exact point set — a **non-geometric involutive automorphism of de Grey's graph**
+  (wildly discontinuous on the plane; preserves all unit distances; permutes the
+  vertices). The spectrum-match rows form exactly the index-2 subgroup
+  ⟨[5], [7], [3,5,11]⟩ of the Galois group (the coset structure a genuine congruence
+  relation must exhibit — internal consistency); the eight [3]-coset conjugates have
+  provably different centroid spectra: **at least one genuinely new 5-chromatic
+  witness, free** (explicit-isometry confirmation for the in-subgroup candidates
+  pending). Control finding: **Heule-510 has NO √7 content** (the √7-flip is the
+  pointwise identity — it lives in ℚ(√3,√5,√11), a smaller tower than anyone recorded);
+  its [3]-coset flips break as predicted, so the canonicalizer discriminates.
+* **The autopsy, 23-core (phase 0): verdict FACTORED — G15's universality holds in
+  the finite lab, and the mechanism is the hex-shell pigeonhole.** Every 6-colouring
+  of the closed first shell (7 cells) inside G\* forces a mono pair at norm 1 —
+  exactly the class that STOPPED being an edge below p = 0.4804 — because the norm-3/4
+  pairs are still edges and 7 > 6 (the K7 counting argument transplanted below the
+  norm-1 dropout); at radius ≤ 4 the norm-13 class fires too; the {3,4,7,9}-web kills
+  every placement. **χ_f(23-core) = 130/23 ≈ 5.652 EXACTLY** (scaled primal and dual
+  certificates coincide — P2 confirmed; the step to 7 is an integrality gap of 31/23).
+  Stabilizer: one mirror, NO rotational symmetry. Census: ≥ 2,000 canonical
+  7-colourings (capped — floppy at χ, per G9). Symmetrization: every g-symmetrized
+  union still refuses six, every g-intersection colours — the defects are
+  load-bearing. **The plane-side reduction this sharpens: a 6-forcer needs exactly
+  one k = 5 forced-distinct gadget at √3 or 2 — the kernel `hexShell_pigeonhole`
+  already supplies Act One at k = 5 (7 shell points, pairwise {1, √3, 2}) — so nine
+  gadget copies on the shell close χ(ℝ²) ≥ 6.** The union probes' virtual-edge
+  meters measure precisely that gadget's existence.
+* **m0 ladder (phase 2 entry): all five unions are k = 5 SAT in under a second**
+  (rot60 2373/11832, rot180 2371/12605, mirror 2767/13796, translate1 3008/16695,
+  hexclosure 5533/29955 — vertices/edges, models validated independently). P3's
+  expected branch; the discriminating rung is m1.
+* Running at session end (results append to the artifact): the 53- and 117-core
+  autopsies; the m1 forced-pair/virtual-edge sweep on the rot60 union at k = 5.
+* **Deferred to the desktop by name**: m1 sweeps at scale (all five unions), any
+  refusal-side caps, gen-2 closure size-first, the explicit-isometry confirmations
+  for the Galois congruence candidates.

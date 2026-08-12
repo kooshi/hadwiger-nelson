@@ -142,6 +142,25 @@ EVERY SHAPE, which is why the certified-union work is strategic even while parke
 the pigeonhole × kill factorization entirely. G15's universality half is [reading];
 Shape D's autopsy is the cheapest place a counterexample could surface.
 
+## 3½. Running re-rank log (updated at every close or major finding; deprecate, never delete)
+
+* **2026-08-12 (M41 laptop session).** Shape D's autopsy VERDICT: the 23-core is
+  **FACTORED** — the hex-shell pigeonhole (7 cells, k = 6, mono pair forced onto the
+  norm-1 class exactly where it stopped being an edge) × web kills; χ_f = 130/23
+  exact. G15's universality holds in the finite lab, and Shape D's dictionary entry is
+  written: *shell counting survives the clique's death; the kills are integrality.*
+  Consequence for ALL shapes: the from-below reduction is now sharp — Act One at k = 5
+  exists and is already kernel-checked (`hexShell_pigeonhole`: every 5-colouring of
+  the closed hex shell has a mono pair at √3 or 2), so **the 6-forcer reduces to ONE
+  k = 5 forced-distinct gadget at √3 or at 2** (nine copies on the shell close
+  χ ≥ 6). Shape A/B/E are now different bets about where that gadget lives (interface
+  matter / deep closure / 5-forcer-grade recursion); Shape C gained a structural
+  anchor (P9: the 791-forcer IS the witness's centrosymmetric core — substrate
+  symmetry surfaces as forced colouring symmetry at criticality) plus a brand-new
+  compulsion class candidate: the 1581 admits a **non-geometric Galois automorphism**
+  (the [3,5,11] flip fixes it identically), and forced equivariance under a
+  NON-geometric automorphism was in nobody's vocabulary until today.
+
 ## 4. What the two directions now do for each other (the alternation, sharpened)
 
 The from-above family is the hunt's **model organism**: finite, decidable,
