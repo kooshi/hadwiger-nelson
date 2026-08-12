@@ -765,6 +765,11 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms Coset.seven_le_card
 #print axioms Coset.exists_proper_coset_colouring
 #print axioms Coset.coset_chromatic_eq_seven
+-- M38: the coarse-cell bound, with no homomorphism hypothesis
+#print axioms Coset.exists_unit_pair
+#print axioms Coset.seven_labels_of_cell_constant
+#print axioms Coset.seven_le_card_of_cell_constant
+#print axioms Coset.cell_chromatic_eq_seven
 
 #eval IO.println "=== PURCHASED ==="
 

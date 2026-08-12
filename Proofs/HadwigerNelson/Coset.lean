@@ -44,6 +44,17 @@ And the bound is TIGHT: the classical hexagonal seven-colouring — the norm-7 i
 seven** (`coset_chromatic_eq_seven`), and no lattice colouring can ever witness
 `χ(ℝ²) ≤ 6`.
 
+**And the homomorphism can go, in the coarse regime** (M38). With no algebra on the
+labels the object is the *constraint graph* on the lattice — join two addresses when their
+cells hold a unit-distance pair — and for `p ∈ (1/2, 1)` its constraint set is exactly the
+first three shells `Q ∈ {1, 3, 4}`, so the closed first shell is a **7-clique** and seven
+colours are forced with no arithmetic at all (`seven_le_card_of_cell_constant`,
+`cell_chromatic_eq_seven`). Below `p = 1/2` the nearest-neighbour constraint lapses and the
+argument stops — at fine scales the constraint graph is a thin annulus graph whose
+chromatic number is the plane's own open question. That boundary is the content: **any
+six-colouring of the plane has colour classes finer than half the unit distance, in every
+lattice's cells.**
+
 **Attribution.** That the hexagonal colouring is optimal among lattice colourings is
 folklore-adjacent; no novelty is claimed for the construction it bounds. Ours is the proof
 shape, the formalization, and the packaging as a limitation theorem for the upper-bound
@@ -312,6 +323,27 @@ theorem continuous_hexQ : Continuous hexQ := by unfold hexQ; fun_prop
 section Colouring
 
 variable {A : Type*} [AddCommGroup A] {p : ℝ} {φ : (ℤ × ℤ) →+ A} {rnd : ℂ → ℤ × ℤ}
+
+/-- **The sweep, in its honest form**: two lattice addresses and a direction produce an
+actual pair of points at distance exactly 1, one in each address's cell. Nothing about
+colour enters — this is pure geometry, and every use of it in this file is an instance. -/
+theorem exists_unit_pair (hp : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    {u v : ℤ × ℤ} {e : ℝ × ℝ} {s : ℝ}
+    (h₀ : NearestUnique ((-s) • e) 0) (h₁ : NearestUnique (s • e) 0)
+    (hd : p ^ 2 * hexQ (addr v - addr u + (2 * s) • e) = 1) :
+    ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
+  refine ⟨emb p (addr u + (-s) • e), emb p (addr v + s • e), ?_, ?_, ?_⟩
+  · have hgeo : (addr u + (-s) • e) - (addr v + s • e)
+        = -(addr v - addr u + (2 * s) • e) := by
+      simp only [Prod.ext_iff, Prod.smul_fst, Prod.smul_snd, Prod.fst_add, Prod.snd_add,
+        Prod.fst_sub, Prod.snd_sub, Prod.fst_neg, Prod.snd_neg, smul_eq_mul]
+      constructor <;> ring
+    have hsq : dist (emb p (addr u + (-s) • e)) (emb p (addr v + s • e)) ^ 2 = 1 := by
+      rw [dist_emb_sq, hgeo, hexQ_neg]; exact hd
+    nlinarith [dist_nonneg (x := emb p (addr u + (-s) • e)) (y := emb p (addr v + s • e))]
+  · have h := rnd_eq hp hrnd (nearestUnique_add u h₀); simpa using h
+  · have h := rnd_eq hp hrnd (nearestUnique_add v h₁); simpa using h
 
 /-- **The sweep.** Two same-coloured lattice addresses, two points pushed off them along a
 common direction, landing at distance exactly 1: properness cannot hold. -/
@@ -645,6 +677,7 @@ theorem exists_nearest (w : ℝ × ℝ) :
     linarith
 
 
+
 /-! ### The witness: the norm-7 ideal at scale 6/7 -/
 
 /-- The classical seven-colouring's colour map: `(a, b) ↦ a + 3b` in `ℤ/7`. Its kernel is
@@ -767,7 +800,9 @@ def shell : Fin 7 → ℤ × ℤ
 /-- Distinct shell addresses differ by a nonzero vector of norm at most four — a unit, a
 `√3`-vector, or a diameter. All are below the kernel gap of seven. -/
 theorem shell_diff {i j : Fin 7} (h : i ≠ j) :
-    shell i - shell j ≠ 0 ∧ hexQi (shell i - shell j) ≤ 4 := by
+    shell i - shell j ≠ 0 ∧
+      (hexQi (shell i - shell j) = 1 ∨ hexQi (shell i - shell j) = 3 ∨
+        hexQi (shell i - shell j) = 4) := by
   revert h; fin_cases i <;> fin_cases j <;> decide
 
 theorem nearestUnique_self (v : ℤ × ℤ) : NearestUnique (addr v) v := by
@@ -788,7 +823,7 @@ theorem shell_rainbow (hp : 0 < p)
   obtain ⟨hne, hle⟩ := shell_diff hij
   have h0 : φ (shell i - shell j) = 0 := by rw [map_sub, hc, sub_self]
   have := seven_le_hexQi hp hrnd hproper hne h0
-  omega
+  rcases hle with h | h | h <;> omega
 
 /-- **The coset bound, on the plane.** The colouring takes seven distinct values on seven
 explicit points — the lattice points of the closed first shell. So a nearest-point coset
@@ -814,6 +849,129 @@ theorem seven_le_card [Fintype A] (hp : 0 < p)
   simpa using Fintype.card_le_of_injective _ hinj
 
 end Colouring
+
+/-! ## The coarse-cell bound: dropping the homomorphism (M38)
+
+M37's theorem needs the colour map to be a homomorphism. That hypothesis can be removed
+entirely — in the coarse regime — and the reason is a change of viewpoint. With no algebra
+on the colours, the object is the **constraint graph on the lattice**: join two addresses
+when their cells contain a pair of points one unit apart. For `p ∈ (1/2, 1)` the first
+three shells `Q ∈ {1, 3, 4}` are all constrained, so the closed first shell is a
+**7-clique** of that graph and seven colours are forced with no arithmetic at all — the
+Loeschian gap of M37 is replaced by the clique.
+
+Below `p = 1/2` the nearest-neighbour constraint lapses and the argument stops: at fine
+scales the constraint graph is a thin annulus graph whose chromatic number is the plane's
+own open question. **That boundary is the content** — any six-colouring of the plane must
+have colour classes finer than half the unit distance in every lattice's cells. -/
+
+section CellConstant
+
+variable {p : ℝ} {rnd : ℂ → ℤ × ℤ}
+
+/-- **The constraint condition.** Two distinct addresses whose offset norm `N` satisfies
+`(1−p)² < p²N < (1+p)²` have cells containing a pair of points at distance exactly 1. The
+condition is exactly `|√N − 1/p| < 1`, radical-free. -/
+theorem exists_unit_pair_of_window (hp : 0 < p) (hp1 : p < 1)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    {u v : ℤ × ℤ} (huv : u ≠ v)
+    (hlo : (1 - p) ^ 2 < p ^ 2 * (hexQi (v - u) : ℝ))
+    (hhi : p ^ 2 * (hexQi (v - u) : ℝ) < (1 + p) ^ 2) :
+    ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
+  set d : ℤ × ℤ := v - u with hd
+  have hd0 : d ≠ 0 := sub_ne_zero_of_ne (Ne.symm huv)
+  have hN1 : (1 : ℝ) ≤ (hexQi d : ℝ) := by exact_mod_cast one_le_hexQi hd0
+  set g : ℝ := Real.sqrt (hexQi d : ℝ) with hgdef
+  have hg2 : g ^ 2 = (hexQi d : ℝ) := Real.sq_sqrt (by linarith)
+  have hg0 : 0 < g := Real.sqrt_pos.mpr (by linarith)
+  -- the window condition says the sweep parameter stays inside the inscribed disc
+  have hpgpos : 0 < p * g := mul_pos hp hg0
+  have hpg2 : (p * g) ^ 2 = p ^ 2 * (hexQi d : ℝ) := by rw [mul_pow, hg2]
+  have hpg : |p * g - 1| < p := by
+    rw [abs_lt]
+    refine ⟨?_, ?_⟩
+    · nlinarith [hpg2, hlo, hpgpos]
+    · nlinarith [hpg2, hhi, hpgpos]
+  set σ : ℝ := (1 / (p * g) - 1) / 2 with hσ
+  have hpgne : p * g ≠ 0 := ne_of_gt (mul_pos hp hg0)
+  have hsmall : 4 * σ ^ 2 * (hexQi d : ℝ) < 1 := by
+    rw [← hg2]
+    have h1 : 4 * σ ^ 2 * g ^ 2 = (1 - p * g) ^ 2 / p ^ 2 := by
+      rw [hσ]
+      field_simp
+      ring
+    rw [h1, div_lt_one (by positivity)]
+    have := abs_lt.mp hpg
+    nlinarith [this.1, this.2]
+  have hray : ∀ t : ℝ, 4 * t ^ 2 * (hexQi d : ℝ) < 1 → NearestUnique (t • addr d) 0 := by
+    intro t ht
+    refine nearestUnique_zero ?_
+    rw [hexQ_smul, hexQ_addr]
+    linarith
+  refine exists_unit_pair hp hrnd (e := addr d) (s := σ)
+    (hray (-σ) (by rw [neg_pow]; simpa using hsmall)) (hray σ hsmall) ?_
+  have hgeo : addr v - addr u + (2 * σ) • addr d = (1 + 2 * σ) • addr d := by
+    rw [← addr_sub, ← hd, ← one_smul ℝ (addr d), add_smul]
+    simp
+  rw [hgeo, hexQ_smul, hexQ_addr, ← hg2]
+  have h1 : (1 + 2 * σ) = 1 / (p * g) := by rw [hσ]; ring
+  rw [h1]
+  field_simp
+
+/-- **The coarse-cell bound.** For `1/2 < p < 1`, ANY colouring of the plane that is
+constant on the nearest-point cells of the triangular lattice at scale `p` — with no
+algebraic relation between the cells' labels — gives the seven closed-shell addresses seven
+pairwise distinct labels. So it uses at least seven colours.
+
+This is M37's theorem with the homomorphism hypothesis removed, at the price of a scale
+window; the window's lower end `1/2` is exactly where the nearest-neighbour shell stops
+being constrained. -/
+theorem seven_labels_of_cell_constant {A : Type*} (hp : 1 / 2 < p) (hp1 : p < 1)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
+    {i j : Fin 7} (hij : i ≠ j) : col (shell i) ≠ col (shell j) := by
+  intro hc
+  have hp0 : (0 : ℝ) < p := by linarith
+  obtain ⟨hne, hQ⟩ := shell_diff (Ne.symm hij)
+  have hswap : shell j - shell i ≠ 0 := hne
+  have huv : shell i ≠ shell j := by
+    intro h; exact hne (by rw [h, sub_self])
+  have hlo : (1 - p) ^ 2 < p ^ 2 * (hexQi (shell j - shell i) : ℝ) := by
+    rcases hQ with h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  have hhi : p ^ 2 * (hexQi (shell j - shell i) : ℝ) < (1 + p) ^ 2 := by
+    rcases hQ with h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window hp0 hp1 hrnd huv hlo hhi
+  exact hproper x y hxy (by rw [hx, hy]; exact hc)
+
+/-- The count: a cell-constant colouring in the coarse regime has at least seven colours. -/
+theorem seven_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 1 / 2 < p) (hp1 : p < 1)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) : 7 ≤ Fintype.card A := by
+  have hinj : Function.Injective (fun i : Fin 7 => col (shell i)) := by
+    intro i j hij
+    by_contra hne
+    exact seven_labels_of_cell_constant hp hp1 hrnd col hproper hne hij
+  simpa using Fintype.card_le_of_injective _ hinj
+
+end CellConstant
+
+/-- **The coarse-cell chromatic number of the plane is exactly seven.** At `p = 6/7` —
+inside the window `(1/2, 1)` — every colouring constant on the lattice's cells needs at
+least seven colours, with NO algebraic hypothesis on the labels, and one with exactly
+seven exists. So above half the unit distance the cell-constant family is closed: **any
+six-colouring of the plane has colour classes finer than that, in every lattice.** -/
+theorem cell_chromatic_eq_seven :
+    (∀ {A : Type} [Fintype A] {rnd : ℂ → ℤ × ℤ} (col : (ℤ × ℤ) → A),
+        (∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt (6 / 7) (rnd x)) ≤ dist x (latt (6 / 7) v)) →
+        (∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) → 7 ≤ Fintype.card A) ∧
+      (∃ rnd : ℂ → ℤ × ℤ,
+        (∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt (6 / 7) (rnd x)) ≤ dist x (latt (6 / 7) v)) ∧
+        (∀ x y : ℂ, dist x y = 1 → ideal7 (rnd x) ≠ ideal7 (rnd y))) :=
+  ⟨fun col hrnd hproper =>
+    seven_le_card_of_cell_constant (by norm_num) (by norm_num) hrnd col hproper,
+   exists_proper_coset_colouring⟩
 
 /-- **The coset chromatic number of the plane is exactly seven.** Every proper
 nearest-point coset colouring has at least seven colours, and one with exactly seven

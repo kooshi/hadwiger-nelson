@@ -103,3 +103,46 @@ is attained on the window and the coarse-cell chromatic number is exactly seven.
   conditions in squared form (`(1−p)² < p²·Q < (1+p)²`) — radical-free, as M37's
   gap lemma already is.
 * Any segfault: HALT and report to Kooshi (standing).
+
+
+---
+
+# §R — Results (2026-08-12; every verdict at face value)
+
+* **P1 CONFIRMED exactly** (`build/m38-design.py`, exact rationals): the three
+  shell-difference windows are `Q = 1 → p > 1/2`, `Q = 3 → (0.366, 1.366)`,
+  `Q = 4 → (1/3, 1)`, intersecting in **exactly `(1/2, 1)`**, binding at the
+  nearest-neighbour shell; the radical-free form `(1−p)² < p²Q < (1+p)²` agrees
+  with the radical form on all 5,997 probed rows; the shell's 21 difference
+  norms are `{1, 3, 4}`; and the planted red fires — at `p = 1/2` and below, the
+  `Q = 1` offset is NOT constrained, which is exactly why the window closes
+  there.
+* **P2 CONFIRMED** — `exists_unit_pair` (two addresses and a direction produce an
+  actual unit-distance pair, one point in each cell, with no mention of colour)
+  subsumes M37's `sweep_exact` with no loss; the M37 theorems re-derive from it
+  unchanged.
+* **P3 CONFIRMED** — the milestone is ~140 new lines; axioms exactly
+  `[propext, Classical.choice, Quot.sound]`; build green, lint silent, zero
+  `sorry`, 463 clean.
+* **P4 CONFIRMED** — the 21 pairs are handled by ONE lemma
+  (`exists_unit_pair_of_window`) plus the three-case norm table, not 21 cases.
+* **P5 — not pursued** (it was the low-priority bonus); the constraint-side
+  reading of the M37 sharpness window is recorded in the plan and not
+  formalized.
+
+**What landed**: `seven_labels_of_cell_constant` and
+`seven_le_card_of_cell_constant` — for `1/2 < p < 1`, ANY colouring constant on
+the lattice's nearest-point cells, with no algebraic relation between the
+labels, gives the seven closed-shell addresses seven distinct labels — and
+`cell_chromatic_eq_seven`, which pairs that with M37's witness at `p = 6/7`.
+
+## What was NOT done (honesty ledger)
+
+* **The fine regime is untouched, and that is the point.** Below `p = 1/2` the
+  argument stops because the nearest-neighbour offset stops being constrained;
+  the constraint graph there is a thin annulus graph on a fine lattice, whose
+  chromatic number is the plane's own open question. Nothing here bounds it.
+* Only the triangular lattice, as in M37. The general-lattice case is priced in
+  M37's ledger and unchanged.
+* The window's endpoints are not claimed sharp as a statement about colourings —
+  `p ≤ 1/2` means *this argument* stops, not that a cheaper colouring exists.
