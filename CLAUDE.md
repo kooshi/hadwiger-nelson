@@ -1142,6 +1142,53 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   starves; gen-2/3 clean at depth ⟹ Shape B demoted; no equivariance compulsion at
   k = 5 anywhere ⟹ Shape C demoted; the 23-core autopsy finding a known genre ⟹
   Shape D deflates; any of them firing ⟹ the 6-hunt has its Act One.]***
+* **G26 — The autopsy dictionary: pigeonhole × kill is 5-for-5 universal in the
+  finite lab, and the 6-forcer reduces to one gadget.** (M41 phase 0, 2026-08-12.)
+  Every 1-minimal clique-free forcer core of the cell family (23, 28, 53, 66, 117
+  vertices — gap-3 and gap-4, coarse and fine, with and without centres) FACTORS:
+  Act One is always a mono pair forced onto a small **non-edge class** (norm 1
+  first — the closed hex shell's 7-cells-vs-6-colours counting argument surviving
+  the clique's death: the norm-3/4 pairs stay edges, so the forced repeat lands on
+  exactly the class that stopped being an edge), and the ambient web kills every
+  placement. The fractional relaxation always sits far below the truth:
+  χ_f = 130/23 at the 23-core (χ = 7), 501/74 at the 53-core (χ = 8), ≈ 4.83796
+  bracket-tight at the 117-core (χ = 7 — **gap 2.16, ratio 1.45, the programme's
+  extreme, on the object with the plane's own clique number**). **[measured: exact
+  LP certificates verified in rational arithmetic; class-avoidance sweeps with the
+  M33 deleted-vertex fan classes in the vocabulary]** *The plane-side consequence,
+  sharp: the kernel already holds Act One at five colours
+  (`hexShell_pigeonhole` — every 5-colouring of the closed hex shell has a mono
+  pair at √3 or 2), so* ***a 6-forcer needs exactly one thing: a finite
+  unit-distance graph forcing two points at distance √3 or 2 to receive different
+  colours in every proper 5-colouring*** *— nine copies on the shell then close
+  χ(ℝ²) ≥ 6 by the M34 composition genre. The from-below hunt is a hunt for that
+  single gadget; the m1 virtual-edge meters are its exact detector. Falsifier for
+  the reduction: none needed (it is a theorem-shaped composition); falsifier for
+  the universality reading: a core that refuses to factor — none found in five.*
+* **G27 — The witnesses have hidden arithmetic symmetry, and the Galois orbit mints
+  free witnesses.** (M41 phases 4/5, 2026-08-12; every claim an exact computation
+  with planted controls.) The half-spindle field tower's Galois group acts on
+  witnesses; on de Grey's 1581: **the flip √3,√5,√11 ↦ −√3,−√5,−√11 fixes the
+  vertex set identically**, giving a **non-geometric involutive automorphism** τ
+  (29 fixed points, 776 two-cycles, maps the 7,877 edges to themselves exactly)
+  while the graph has NO nontrivial plane self-isometry; with mirror∘flip[5,7] and
+  mirror∘flip[3,7,11] the hidden automorphism group is a **Klein four-group**. The
+  orbit has exactly **4 isometry classes: the 1581 + three genuinely new
+  5-chromatic witnesses** (W^[3], W^[5], W^[3,5]; W^[5] an isospectral twin —
+  centroid spectrum equal, congruence excluded by the exhaustive ring-heart
+  argument). **P9: the 791-point forcer IS V ∩ −V** — the centrosymmetric core of
+  the witness, exactly — so M30's forced central symmetry is substrate symmetry
+  surfacing at criticality; and the witness is **half-crystal** (787 of 1581
+  vertices fully rot6-invariant about the origin pivot — the detuned-oligomer
+  signature inside one object). Heule-510 has **no √7 content** (it lives in
+  ℚ(√3,√5,√11)). Hetero-dimers V ∪ W^σ share up to 1,101 vertices — new composed
+  matter. **[measured]** *Readings on top: forced equivariance under NON-geometric
+  automorphisms is a compulsion vocabulary nobody had (built, controlled, not
+  forced on today's floppy objects — re-ask wherever m1 structure ever appears);
+  and the only nonzero k = 5 reading of the whole campaign is the dimers' 10×
+  solver-effort excess (single-sample, signal not claim). Falsifiers: an explicit
+  isometry between W and any [3]-coset conjugate (would collapse the free-witness
+  count); a second-sample effort measurement reading flat.*
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this
