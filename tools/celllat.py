@@ -358,6 +358,39 @@ def sweep(cap: float = 300.0) -> None:
     print(f"campaign complete -> {ART.name}")
 
 
+def patch(T, k, radius, cap=600.0):
+    """Refute k colours on a finite BALL of addresses. Unlike a torus refusal this is a
+    statement about the graph itself: no periodicity is assumed, so an unsat here means
+    chi(G(1/T)) > k outright."""
+    es = set(edge_set(T))
+    pts = [(a, b) for a in range(-radius, radius + 1) for b in range(-radius, radius + 1)
+           if Q((a, b)) <= radius * radius]
+    idx = {c: t for t, c in enumerate(pts)}
+    clauses = []
+    for c in pts:
+        clauses.append([idx[c] * k + col + 1 for col in range(k)])
+        for c1 in range(k):
+            for c2 in range(c1 + 1, k):
+                clauses.append([-(idx[c] * k + c1 + 1), -(idx[c] * k + c2 + 1)])
+    npairs = 0
+    for u in pts:
+        for (da, db) in es:
+            v = (u[0] + da, u[1] + db)
+            if v in idx and idx[v] > idx[u]:
+                npairs += 1
+                for col in range(k):
+                    clauses.append([-(idx[u] * k + col + 1), -(idx[v] * k + col + 1)])
+    for t in range(1, min(len(pts), 40)):
+        for col in range(1, k):
+            clauses.append([-(idx[pts[t]] * k + col + 1)] +
+                           [idx[pts[e]] * k + col for e in range(t)])
+    import time
+    t0 = time.time()
+    status, _ = _solve(clauses, len(pts) * k, cap)
+    return {"kind": "patch", "T": str(T), "k": k, "radius": radius, "n_vertices": len(pts),
+            "n_pairs": npairs, "outcome": status, "seconds": round(time.time() - t0, 2)}
+
+
 # ---------------------------------------------------------------- census / CLI
 
 
@@ -389,6 +422,7 @@ def main():
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--census", action="store_true")
     ap.add_argument("--sweep", action="store_true")
+    ap.add_argument("--patch", nargs=3, metavar=("T", "K", "R"))
     ap.add_argument("--colour", nargs=4, metavar=("T", "K", "M", "N"))
     ap.add_argument("--cap", type=float, default=300.0)
     args = ap.parse_args()
@@ -399,6 +433,10 @@ def main():
         census(Ts)
     elif args.sweep:
         sweep(args.cap)
+    elif args.patch:
+        r = patch(F(args.patch[0]), int(args.patch[1]), int(args.patch[2]), args.cap)
+        record(r)
+        print(json.dumps(r, indent=1, default=str))
     elif args.colour:
         T = F(args.colour[0])
         r = colour(T, int(args.colour[1]), int(args.colour[2]), int(args.colour[3]),
@@ -412,5 +450,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

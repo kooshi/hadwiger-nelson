@@ -93,6 +93,36 @@ and is instrument catastrophe).
 * Any segfault: HALT and report to Kooshi (standing).
 
 
+## §0e — Mid-milestone addendum (2026-08-12, registered before the run)
+
+Two things the campaign has made worth doing, registered before either runs.
+
+**The scaled-shell route is exhausted, and that is provable rather than
+observed.** The `M`-scaled shell has pairwise norms `M·{1,3,4}`, a distance
+ratio of 2, and it is a clique exactly when all three are constrained — which
+needs `1/(√M + 1) < p < 1/(2√M − 1)`, a NON-EMPTY window iff `2√M − 1 < √M + 1`,
+i.e. `M < 4`. Loeschian `M < 4` is `{1, 3}`. **So the two windows already
+landed are all the scaled shell can ever give**; kernel coverage of the fine
+regime needs a different argument, and cliques cannot supply it (the census
+reads `ω = 4, 3, 2` there).
+
+**The patch refutation.** Every SAT refusal so far is period-bounded. Refuting
+`k` on a finite PATCH — a ball of lattice addresses, not a torus — is a
+statement about the graph itself: if no `k`-colouring of the ball exists then
+`χ(G(p)) > k` outright, with no periodicity assumption, and it is exactly the
+shape this repository already certifies in the kernel (an edge list plus an
+LRAT replay, the M06–M09 chain).
+
+* **P6 [medium]** — at `p = 1/3`, where the torus refusals for `k = 7` reached
+  period 30, a ball of radius 4–6 already refuses `k = 7`, upgrading that row
+  to `χ(G(1/3)) ≥ 8` with no periodicity caveat.
+* **P7 [low]** — at the good scales (`p = 6/13`, `1/6`, `1/7`) a ball refuses
+  `k = 6` at some radius, upgrading those rows too. Any ball that refuses
+  `k = 6` at a scale where `k = 7` SATs is the sharpest statement this
+  milestone can make.
+* Failure clause: a ball too small to refuse is not evidence of anything —
+  report the radius reached and treat larger radii as unprobed.
+
 ---
 
 # §R — Results (2026-08-12; every verdict at face value)
