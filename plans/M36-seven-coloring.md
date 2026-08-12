@@ -499,6 +499,53 @@ negatives of any registered sweep are only as sharp as the acceptance criterion
 they were run against. That becomes its own Grokking at the close, not a footnote
 to the demoted one.
 
+## §0j — Mid-milestone addendum (2026-08-11, registered before the campaign runs)
+
+The prober now mirrors the boundary-tight check and the `diag² < 1` filter is
+gone, so M35's phase-2 questions are re-asked. The campaign needs a grid that
+REACHES the corrected region, and neither M35 grid does — an a priori derivation
+worth stating before the runs, because it is a second, independent reason those
+sweeps refused:
+
+* **A rational SQUARE cell can never be boundary-tight.** `w = h` with
+  `w² + h² = 1` forces `w = 1/√2`, irrational — so no member of M35's square
+  resolution grid `{2/3, 1/2, 2/5, 1/3}` can ever sit at the tight boundary,
+  filter or no filter.
+* **M35's rectangle grid misses it too**: `{3/5, 3/4, 4/5, 9/10} × {1/5, 1/4,
+  1/3, 2/5}` contains no pair with `w² + h² = 1` (the nearest is `9/10 × 2/5` at
+  `97/100`). The seven-colouring's own shape `4/5 × 3/5` is one grid row away —
+  `3/5` is in the width list and not in the height list.
+
+**The registered tight grid**: cell shapes the ten rational points of
+`w² + h² = 1` at denominators ≤ 29 (`4/5·3/5`, `3/5·4/5`, `12/13·5/13`,
+`5/13·12/13`, `20/29·21/29`, `21/29·20/29`, `8/17·15/17`, `15/17·8/17`,
+`24/25·7/25`, `7/25·24/25`) × shears `{0, w/2, w/3, w/4}` × per-`k` tori
+(`k=7`: 7×7, 14×7, 7×14; `k=6`: 6×6, 12×6, 6×12, 12×12; `k=5`: 5×5, 10×5, 5×10,
+10×10; `k=4`: 4×4, 8×4, 4×8, 8×8) × the standing class guards; cap 120 s.
+
+* **P9 [high]** — the positive control passes: the row the kernel already
+  certifies (`k = 7`, 7×7 @ `4/5 × 3/5`, `s = 2/5`) reads SAT, the prober's first
+  `k = 7` SAT ever. *Already green in the instrument self-test, before the
+  campaign; recorded here so the campaign's own run is a re-confirmation and not
+  a first result.* Failure would indict the prober, never the theorem — the
+  kernel has settled that row.
+* **P10 [high — the soundness guard]** — every `k = 4` row refuses. A SAT now
+  implicates the boundary-tight relaxation itself, and with it
+  `Instances/Seven.lean`; the banner says so, and the response is halt-and-report,
+  not debugging.
+* **P11 [medium-high]** — `k = 7` SATs across the tight family, certainly at
+  `s = w/2` (the coset shear) on the `4/5 × 3/5` and `3/5 × 4/5` shapes; the
+  other shears and the larger-denominator shapes are genuinely unknown and are
+  the campaign's actual information.
+* **P12 [medium]** — the re-asked square and rectangle campaigns STILL refuse at
+  `k ≤ 8`, for the reason derived above: their grids contain no boundary-tight
+  shape. If either now SATs, the derivation is wrong and the grid analysis needs
+  redoing before anything else is believed.
+* **P13 [low — the long shot, stated so a find cannot be over-read]** — `k = 6`
+  and `k = 5` refuse at every tight shape. A SAT at `k = 6` is `χ(ℝ²) ≤ 6` and at
+  `k = 5` is `χ(ℝ²) ≤ 5`; either halts the campaign and is a CANDIDATE until the
+  design script re-derives it and `Brick.check` accepts it in the kernel.
+
 ---
 
 # §R — Results (opened at the skeleton; every verdict at face value)

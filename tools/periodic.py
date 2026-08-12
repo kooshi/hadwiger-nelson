@@ -1,9 +1,26 @@
 #!/usr/bin/env python3
-"""The periodic prober (M35 phase 2): brick colourings of the plane, hunted by SAT.
+"""The periodic prober (M35 phase 2; SHARPENED at M36): brick colourings of the plane, by SAT.
 
 UNTRUSTED, like everything in `tools/`. A found colouring becomes mathematics only when its
-table replays through `Brick.check` in Lean; a refusal here is RESOLUTION-BOUNDED — "no brick
+table replays through `Brick.check` in Lean; a refusal here is SHAPE-BOUNDED — "no brick
 colouring at this cell size and period", never "no periodic colouring".
+
+## What M36 changed, and why every M35 phase-2 negative was re-asked
+
+The cells are HALF-OPEN, so the realizable difference vectors at an offset form an OPEN box:
+a realized squared distance is strictly below the interval's upper end, and strictly above
+its lower end whenever that end is positive. An offset therefore CONFLICTS with a guard only
+when the guard lies STRICTLY inside its interval — M35 tested `lo <= q <= hi`, one comparison
+stronger than soundness needs. That was sound and it was not free: the classical brick
+seven-colouring has cell diagonal exactly 1 (`Instances/Seven.lean`), so it conflicts with
+itself under the old rule and was refused; and the §0j rect grid additionally filtered to
+`diag² < 1`, deleting it from the search space a second time. Both are corrected here. A
+search run against a sufficient-but-not-necessary check measures the check.
+
+One consequence for how refusals read: the condition is now the EXACT miss condition, so an
+`unsat` row says "no k-colouring of the plane has THIS brick shape" rather than "none passes
+our sufficient test at this shape". The caveat that remains is the shape grid, not the
+certificate.
 
 ## The object (M35 §0a C6)
 
@@ -26,9 +43,12 @@ two-distance upper bounds.
 
     python3 tools/periodic.py                  # status: what exists; runs nothing
     python3 tools/periodic.py --self-test
+    python3 tools/periodic.py --control                     # the kernel-certified row must SAT
     python3 tools/periodic.py --probe 7 - 8 8 1/2 1/2 0     # one row: k D m n w h s
     python3 tools/periodic.py --ladder 7 -                  # the registered ladder, one (k, D)
-    python3 tools/periodic.py --hunt                        # the full registered campaign
+    python3 tools/periodic.py --hunt                        # M35's square campaign, re-asked
+    python3 tools/periodic.py --hunt-rect                   # M35's rect campaign, re-asked
+    python3 tools/periodic.py --hunt-tight                  # M36: the boundary-tight family
 """
 
 from __future__ import annotations
@@ -50,10 +70,12 @@ from forcer import _solve  # noqa: E402
 
 CATASTROPHE_EXIT = 5
 
-ART = BUILD / "m35-periodic.json"
-SCHEMA = ("m35-periodic v1 (plans/M35-k5-transfer.md §0b; brick refusals are "
-          "RESOLUTION-bounded — a refusal at cell w×h is not a period claim; promotion tops "
-          "at prober-validated until Brick.check replays in Lean)")
+ART = BUILD / "m36-periodic.json"
+SCHEMA = ("m36-periodic v1 (plans/M36-seven-coloring.md §0b; the BOUNDARY-TIGHT check — a "
+          "guard conflicts only when STRICTLY inside an offset's interval, which is the exact "
+          "miss condition for half-open cells, so an `unsat` row is a statement about that "
+          "brick SHAPE and not about our test; the standing caveat is the shape grid. Rows "
+          "produced under M35's strict check live in m35-periodic.json and are superseded)")
 
 
 # ---------------------------------------------------------------- exact interval arithmetic
@@ -113,7 +135,8 @@ def offsets_conflicting(guards: list[F], m: int, n: int, w: F, h: F, s: F):
             A = s * dr + w * dc
             B = h * dr
             lo, hi = interval_gen(A, B, w, h)
-            hit = [q for q in guards if lo <= q <= hi]
+            # STRICTLY inside: half-open cells never realize either endpoint (M36 §0a C1)
+            hit = [q for q in guards if lo < q < hi]
             if hit:
                 out.append({"dc": dc, "dr": dr, "wrap": (dc % m, dr % n),
                             "lo": lo, "hi": hi, "hit": hit})
@@ -129,7 +152,7 @@ def probe(k: int, guards: list[F], m: int, n: int, w: F, h: F, s: F,
     row = {"k": k, "D": [str(q) for q in guards if q != 1], "m": m, "n": n,
            "w": str(w), "h": str(h), "s": str(s)}
     diag = w * w + h * h
-    if any(q <= diag for q in guards):
+    if any(q < diag for q in guards):
         row.update(outcome="cell-too-big", seconds=0.0)
         return row
     confl = offsets_conflicting(guards, m, n, w, h, s)
@@ -198,7 +221,7 @@ def validate(table, k: int, guards: list[F], m: int, n: int, w: F, h: F, s: F) -
             if dr == 0 and dc < 0:
                 continue
             lo, hi = interval_val(s * dr + w * dc, h * dr, w, h)
-            hit = [q for q in guards if lo <= q <= hi]
+            hit = [q for q in guards if lo < q < hi]
             if not hit:
                 continue
             for i in range(m):
@@ -217,9 +240,13 @@ def catastrophe(row: dict) -> None:
     art["status"] = "CATASTROPHE"
     art["catastrophe_row"] = row
     ART.write_text(json.dumps(art, indent=1))
-    print("BRICK ENCODING CATASTROPHE: a k = 4 row read SAT with a validated model — this "
-          "contradicts the kernel theorem χ(ℝ²) ≥ 5. The encoding or the validator is "
-          "wrong. ALL m35-periodic verdicts are void until resolved.")
+    print("=" * 78 + "\nBRICK CATASTROPHE: a k = 4 row read SAT with a validated model.\n"
+          "This contradicts the kernel theorem χ(ℝ²) ≥ 5, so something here is wrong — and\n"
+          "since M36 the FIRST suspect is the boundary-tight relaxation itself (the strict\n"
+          "`lo < q < hi` rule and Brick.check's `q ≤ loAt ∨ hiAt ≤ q`), not merely this\n"
+          "encoding: if the relaxation is unsound then Instances/Seven.lean's theorem is too.\n"
+          "HALT. Report to Kooshi. Every m36-periodic verdict is void until resolved.\n"
+          + "=" * 78)
     raise SystemExit(CATASTROPHE_EXIT)
 
 
@@ -316,8 +343,9 @@ def ladder_rect(k: int, cls: str, cap: float, machine: str) -> None:
     done = done_keys()
     for w in RECT_W:
         for h in RECT_H:
-            if w * w + h * h >= 1:
-                continue
+            # M35 §0j filtered `diag² < 1` here — the exact condition the strict check
+            # needed, and exactly what deletes the boundary-tight solutions. The probe's own
+            # short-circuit handles cells that genuinely realize a guard.
             n = 1
             while n * h < 3:
                 n += 1
@@ -357,6 +385,87 @@ def hunt_rect(cap: float, machine: str) -> None:
     print(f"rect campaign complete → {ART.name}")
 
 
+# ------------------------------------------------- M36: the boundary-tight family
+
+# Cell shapes with diagonal EXACTLY 1 — the region M35's `diag² < 1` filter deleted and its
+# strict check could not have accepted anyway. Rational points of w² + h² = 1.
+PYTH = [(F(4, 5), F(3, 5)), (F(3, 5), F(4, 5)), (F(12, 13), F(5, 13)), (F(5, 13), F(12, 13)),
+        (F(20, 29), F(21, 29)), (F(21, 29), F(20, 29)), (F(8, 17), F(15, 17)),
+        (F(15, 17), F(8, 17)), (F(24, 25), F(7, 25)), (F(7, 25), F(24, 25))]
+TIGHT_SHEARS = [F(0), F(1, 2), F(1, 3), F(1, 4)]
+TIGHT_TORUS = {4: [(4, 4), (8, 4), (4, 8), (8, 8)], 5: [(5, 5), (10, 5), (5, 10), (10, 10)],
+               6: [(6, 6), (12, 6), (6, 12), (12, 12)], 7: [(7, 7), (14, 7), (7, 14)]}
+
+# The row the Lean kernel has already settled: Instances/Seven.lean's certificate.
+CERTIFIED = (7, [F(1)], 7, 7, F(4, 5), F(3, 5), F(2, 5))
+
+
+def control(cap: float, machine: str) -> None:
+    """The positive control the prober never had: the kernel-certified seven-colouring must
+    read SAT. If it does not, the PROBER is wrong — this row is not an open question."""
+    k, guards, m, n, w, h, sh = CERTIFIED
+    print("positive control — the row Instances/Seven.lean already certifies in the kernel:",
+          flush=True)
+    r = probe(k, guards, m, n, w, h, sh, cap)
+    print(f"  k={k} {m}x{n}@{w}x{h} s={sh} → {r['outcome']} ({r['seconds']}s)", flush=True)
+    if r["outcome"] != "sat":
+        print("=" * 78 + "\nPROBER MIRROR BROKEN: the kernel-certified brick seven-colouring\n"
+              "reads " + str(r["outcome"]) + " here. The kernel has settled this row; the\n"
+              "disagreement is the prober's. Every verdict below is void until the mirror is\n"
+              "fixed — diff it against build/m36-design.py offset by offset.\n" + "=" * 78)
+        raise SystemExit(CATASTROPHE_EXIT)
+    record(r, machine)
+    print("  control GREEN — the mirror agrees with the kernel on the settled row", flush=True)
+
+
+def ladder_tight(k: int, cls: str, cap: float, machine: str) -> None:
+    """M36: cells of diagonal exactly 1, the region the M35 grids could not reach."""
+    guards_extra = CLASS_GUARDS[cls]
+    done = done_keys()
+    for (w, h) in PYTH:
+        for (m, n) in TIGHT_TORUS[k]:
+            for sh in TIGHT_SHEARS:
+                guards = [F(1)] + guards_extra
+                row = {"k": k, "D": [str(q) for q in guards_extra], "m": m, "n": n,
+                       "w": str(w), "h": str(h), "s": str(sh * w)}
+                if row_key(row) in done:
+                    continue
+                r = probe(k, guards, m, n, w, h, sh * w, cap)
+                record(r, machine)
+                print(f"  k={k} D={cls:>5} {m}x{n}@{w}x{h} s={sh}w → {r['outcome']}"
+                      f" ({r['seconds']}s)", flush=True)
+                if r["outcome"] == "sat":
+                    print("=" * 78, flush=True)
+                    print(f"  BRICK {k}-COLOURING FOUND at a boundary-tight shape, model "
+                          f"validated by the independent formula.", flush=True)
+                    if k <= 6:
+                        print(f"  READ THIS BEFORE INTERPRETING: at k = {k} this is a claim "
+                              f"that χ(ℝ²) ≤ {k} — an open problem since 1950. It is a "
+                              f"CANDIDATE, not a result, until (a) build/m36-design.py "
+                              f"re-derives it independently and (b) Brick.check accepts the "
+                              f"table in the kernel. Halt the campaign and report.", flush=True)
+                    print("=" * 78, flush=True)
+                    return
+    print(f"  tight ladder (k={k}, D={cls}): every boundary-tight shape refused "
+          f"(shape-bounded, not a family claim)", flush=True)
+
+
+def hunt_tight(cap: float, machine: str) -> None:
+    """The M36 campaign: the control, the mass red, then the re-asked questions."""
+    control(cap, machine)
+    print("mass red — k = 4 must refuse EVERYWHERE (a SAT here indicts the relaxation "
+          "itself, and with it Instances/Seven.lean):", flush=True)
+    ladder_tight(4, "-", cap, machine)
+    for k in (7, 6, 5):
+        for cls in CLASS_GUARDS:
+            print(f"tight ladder k={k} class={cls}:", flush=True)
+            ladder_tight(k, cls, cap, machine)
+    art = load_art()
+    art["status"] = "done"
+    ART.write_text(json.dumps(art, indent=1))
+    print(f"tight campaign complete → {ART.name}")
+
+
 # ---------------------------------------------------------------- self-test
 
 def self_test() -> None:
@@ -380,11 +489,12 @@ def self_test() -> None:
             agree = False
     expect(agree, True, "200 random offsets: generator and validator intervals agree")
 
-    # the boundary adversary (§0b): offset (3,0) at w = 1/2 has closed lo = 1 exactly —
-    # the conservative check must CONFLICT on guard 1 even though the open truth misses it
+    # the boundary case (M35 §0b, re-read at M36): offset (3,0) at w = 1/2 has lo = 1
+    # exactly. M35's rule conflicted here; the open box says the endpoint is approached and
+    # never attained, so it does NOT conflict — this row IS the semantic change, pinned.
     lo, hi = interval_gen(F(3, 2), F(0), F(1, 2), F(1, 2))
-    expect((lo, F(1) >= lo and F(1) <= hi), (F(1), True),
-           "boundary adversary: closed hull [1, …] catches guard 1 (conservatism refuses)")
+    expect((lo, lo < F(1) < hi, F(1) <= hi), (F(1), False, True),
+           "boundary offset: lo = 1 exactly, so guard 1 is admissible (was a conflict at M35)")
     lo2, hi2 = interval_val(F(3, 2), F(0), F(1, 2), F(1, 2))
     expect((lo2, hi2), (lo, hi), "…and the validator formula agrees at the boundary")
 
@@ -395,9 +505,14 @@ def self_test() -> None:
            "planted green: the 3×3 rainbow validates as a proper 9-colouring")
     expect(validate(rainbow, 9, [F(1), F(3, 2)], 3, 3, F(2, 3), F(2, 3), F(0)), None,
            "planted green: …and it avoids squared distance 3/2")
-    bad = validate(rainbow, 9, [F(1), F(16, 9)], 3, 3, F(2, 3), F(2, 3), F(0))
+    # M36: a guard sitting exactly ON an interval end is ADMISSIBLE — half-open cells never
+    # realize either endpoint. Under M35's strict rule this same row read as a refusal.
+    expect(validate(rainbow, 9, [F(1), F(16, 9)], 3, 3, F(2, 3), F(2, 3), F(0)), None,
+           "boundary guard 16/9 admissible (the offset (3,0) touches, never reaches)")
+    bad = validate(rainbow, 9, [F(1), F(2)], 3, 3, F(2, 3), F(2, 3), F(0))
     expect(bad is not None, True,
-           "planted red: guard 16/9 sits ON the closed bound — conservatism refuses")
+           "planted red: guard 2 sits STRICTLY inside (16/9, 64/9) — refused, as no "
+           "relaxation may accept")
 
     # a corrupted model must be rejected: repeat a colour within unit reach
     broken = [row[:] for row in rainbow]
@@ -420,6 +535,20 @@ def self_test() -> None:
     # k = 2 avoiding nothing but distance-1 still refuses (χ ≥ 5 with margin)
     r = probe(2, [F(1)], 6, 6, F(1, 2), F(1, 2), F(0), cap=30.0)
     expect(r["outcome"], "unsat", "k = 2 refuses at any resolution")
+
+    # M36 boundary-tight controls. The cell of diagonal EXACTLY 1 is admissible (it was
+    # short-circuited away under the old rule), and the kernel-certified table validates.
+    r = probe(7, [F(1)], 7, 7, F(4, 5), F(3, 5), F(2, 5), cap=60.0)
+    expect(r["outcome"], "sat", "the certified shape (7×7 @ 4/5×3/5, s=2/5) reads SAT")
+    coset = [[(i + 3 * j) % 7 for j in range(7)] for i in range(7)]
+    expect(validate(coset, 7, [F(1)], 7, 7, F(4, 5), F(3, 5), F(2, 5)), None,
+           "the kernel-certified coset table validates independently")
+    broken7 = [row[:] for row in coset]
+    broken7[1][0] = broken7[0][0]
+    expect(validate(broken7, 7, [F(1)], 7, 7, F(4, 5), F(3, 5), F(2, 5)) is not None, True,
+           "planted red: adjacent cells given one colour — refused")
+    expect(validate(coset, 7, [F(1)], 7, 7, F(4, 5), F(1, 2), F(2, 5)) is not None, True,
+           "planted red: the same table at h = 1/2 (diag² < 1) — refused")
 
     print("SELF-TEST:", "ok" if not failures else f"{len(failures)} FAILURES: {failures}")
     if failures:
@@ -455,6 +584,8 @@ def main() -> None:
     ap.add_argument("--ladder", nargs=2, metavar=("K", "CLASS"))
     ap.add_argument("--hunt", action="store_true")
     ap.add_argument("--hunt-rect", action="store_true", dest="huntrect")
+    ap.add_argument("--hunt-tight", action="store_true", dest="hunttight")
+    ap.add_argument("--control", action="store_true")
     ap.add_argument("--cap", type=float, default=120.0)
     ap.add_argument("--machine", default="desktop")
     args = ap.parse_args()
@@ -476,6 +607,10 @@ def main() -> None:
         hunt(args.cap, args.machine)
     elif args.huntrect:
         hunt_rect(args.cap, args.machine)
+    elif args.hunttight:
+        hunt_tight(args.cap, args.machine)
+    elif args.control:
+        control(args.cap, args.machine)
     else:
         status()
 
