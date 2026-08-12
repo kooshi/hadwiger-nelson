@@ -348,6 +348,62 @@ by phase; every SAT row carries machine + cap + outcome, `unknown` never a verdi
   experience-modeling SKIPPED (no consumer surface; artifact follows standing
   schemas). Reasons recorded per the workflow rule.
 
+## §0g — The measured shape (overlap census run at subplanning, 2026-08-12, laptop — the workflow's measure-before-specifying clause; `tools/gradient.py --overlap`, self-tests green, artifact `build/m41-gradient.json`)
+
+**The census verdict: the wholesale-overlap transforms are the hex rotations about the
+witness's own origin pivot, and the witness is HALF-CRYSTAL.** Exactly **787** of the
+1581 points are fully rot6-invariant about the origin (their whole hexagonal orbit
+stays in the witness); the other ~794 break the symmetry — G5's "two systems" measured
+a new way, and the detuned-oligomer signature (G25/Shape A) visible inside the single
+witness. The rot180-stable core has **791** points — *exactly the vertex count of de
+Grey's 791-point forcer*, whose six forced pairs are M30's forced central symmetry.
+
+* **P9 [medium], registered on the spot**: the centrosymmetric core `V ∩ −V` about the
+  origin IS the M13/M30 791-forcer (up to the construction↔committed frame map — the
+  M34 numbering lesson applies to the check). If true, the forcer's forced central
+  symmetry acquires a structural explanation: it is exactly the 180°-stable half of
+  the witness, and the rot180 union probe below gets a theory reading. If false, the
+  791 = 791 is numerology and gets said out loud.
+* **P10 [reading, registered]**: the 787-point rot6-invariant core is (mostly) the
+  origin spindle system's own fabric; the symmetry-breaking half is the second
+  system's material. Checkable against the M30 ownership factorization (copy tags).
+
+**The probe ladder, priced exactly** (union vertex counts; every one below the M34
+union's 4,749, which solved at ~800 s/cube on the desktop):
+
+| union | vertices | interface | note |
+|---|---|---|---|
+| V ∪ rot60°(V) | 2,373 | 789 | premier 2-copy probe |
+| V ∪ rot180°(V) | 2,371 | 791 | the P9 object |
+| V ∪ mirror(V) | 2,767 | 395 | chirality probe |
+| V ∪ (V + 1) | 3,008 | 154 | translation probe (all six unit directions tie at 154 — measured isotropy) |
+| ⋃ₖ rot6ᵏ(V) | 5,533 | 787-core shared six ways | the six-copy quaternary object — the hex closure of the witness about its own pivot |
+
+Dropped by the < 5% rule (recorded, not probed): √3-translations (52 shared),
+2-translations (31 — the spindle-centre separation shares almost nothing),
+3-translations (4), rotations about the second centre (≤ 61).
+
+**Why exact-crystal unions are NOT killed by G7** ("exact symmetry adds no colour
+constraint"): G7's measured instance was a detuned DISJOINT copy reusing the base's
+colouring. Here the copies SHARE the 787-core wholesale, so a colouring of V induces
+nothing on rot6(V) unless it is already rot6-equivariant on the core — consistency
+across shared vertices is exactly the constraint content. (M26's certified hexagram
+colouring was rot6-equivariant BY CHOICE; whether 5-colourings of the witness can be
+chosen equivariant on the core is precisely the D6/Shape-C question, and the six-copy
+union is where it binds.)
+
+**Menu feasibility (D2 ladder, decided by the interface sizes)**: full partition
+enumeration (m3) is out at the 789/791-point interfaces and borderline at the
+154-point one (cap 20,000 realized partitions, attempt on the translation union only);
+the m1/m2 moments are the instruments of record for the rotational unions — exactly
+what the ladder was designed for.
+
+**Phase order, finalized**: 0 the autopsy (laptop-class) → 1 the union k = 5 anatomy
+(M34 union, desktop) → 2 the ladder above, m0 then moments, cheapest union first
+(desktop for refusal-side caps) → 3 gen-2 size-first (desktop) → 4 Galois
+(laptop-class) → 5 equivariance (with the 791 control first; the P9 check folds in
+here — same frame machinery).
+
 ## §0d — Failure clauses
 
 * Any probe's flat verdict is banked at face value; the milestone lands on the
