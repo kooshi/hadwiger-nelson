@@ -716,3 +716,22 @@ kernel-checked, honestly labelled a machinery demonstration and the repo's
 first certified upper bound — and the hex-cell certificate (convex polygon
 cells + slab witnesses, the same architecture one shape richer) is priced as
 the χ ≤ 7 route in the close.
+
+## §0l — Mid-milestone addendum (2026-08-11, registered before the run)
+
+§0k's fine slabs refused k = 7 quickly (four shapes, ≤ 2 s UNSATs — structural,
+not capped). The one untested family: FINE SQUARES — at w = h = 1/8 (and 1/10)
+the free table can draw pixel-art interlocking hexagons, which neither coarse
+rows nor slabs could express, and the closed-hull conservatism shrinks to one
+cell diagonal (≈ 0.18 at 1/8, ≈ 0.14 at 1/10) against the hexagonal
+7-colouring's ≈ 0.13–0.15 margins — borderline at 1/8, plausible at 1/10.
+Registered rows: k = 7, D = ∅, (m, n, w, h, s) ∈ {32×32 @ 1/8, s ∈ {0, 1/16};
+40×40 @ 1/10, s ∈ {0, 1/20}}, cap 900 s each (the campaign's heaviest rows,
+run one at a time). Prediction **P5‴ [medium-low]**: some row SATs; any find
+promotes to `Instances/Seven.lean` — the promotion price, named now: at
+32×32+ the Lean table must be a BIT-PACKED Nat literal (3 bits per cell,
+`>>> / &&&` are GMP-backed — the M04/M05 cost model; a match-table or List
+lookup would be kernel-dead at ~5G steps), an instance-side pattern needing
+no Brick.lean change. Failure: the row-brick probed threshold stands at 9;
+`Instances/Nine.lean` is L3's instance per §0j/§0k and χ ≤ 7's route (true
+polygon cells) is priced at close.
