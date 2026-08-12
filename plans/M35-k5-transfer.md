@@ -735,3 +735,93 @@ lookup would be kernel-dead at ~5G steps), an instance-side pattern needing
 no Brick.lean change. Failure: the row-brick probed threshold stands at 9;
 `Instances/Nine.lean` is L3's instance per §0j/§0k and χ ≤ 7's route (true
 polygon cells) is priced at close.
+
+---
+
+# §R — Results (2026-08-11, desktop; every verdict at face value)
+
+## The scorecard (registered → measured)
+
+* **P1 CONFIRMED** — every instrument extension landed same-day with all
+  self-tests green: the 3-bit re-encode agrees with one-hot on the planted
+  k = 5 gadgets, the hex-shell control (which caught a WRONG CONTROL first —
+  dropping one ring point's pairs leaves the K6; the registered §0f D6
+  geometry said two, the test said one, the instrument was right), and the
+  10-random-graph loop; the k-threading passed the full m33 `--controls`
+  regression (all six 791 forced pairs re-fired, the chunk's eq-pair-2
+  firing reproduced); the clique guard saw its K7 green and both reds.
+* **P2 CONFIRMED (the expected branch)** — the k = 5 class sweep read
+  **51 clean / 4 empty / 1 unknown** over 7 objects × 8 classes: NO class
+  fires at five colours on any witness, closure chunk, fabric, or lattice
+  ball at any radius (top-radius probes; onset searches never triggered —
+  nothing fired). The sweep-halt rule never armed. The single unknown:
+  heule553 · eq-pair-2 capped at 600 s while its heule510 sibling took
+  102 s and every other cell took under a second — **the d = 2 class is
+  measurably the tightest k = 5 avoidance on the SAT-shrunk witnesses**
+  (a solver-effort curiosity, not a compulsion claim). §0i retry: **CLEAN in
+  25.65 s** — the cap was solver variance; the sweep closes at
+  **52 clean / 4 empty / 0 unknown**, no unknowns anywhere.
+* **P3 CONFIRMED, below band** — the fan rows read min-cover **2** (band
+  said ≤ 3) at every named centre at k = 5: the 6-transition is nowhere in
+  sight on today's objects.
+* **P4 CONFIRMED** — the bare triangular lattice at k = 4 avoids mono
+  distance-2 pairs at both probed radii (r² ≤ 27 and 75): the C4 coset
+  obstruction does NOT bind free colourings, and G16's d = 2 pigeonhole is
+  confirmed fabric-borne (the non-lattice seam points carry it).
+* **P5 MISSED as registered, and the miss was the finding** — the square
+  grid held no k = 7 brick colouring, §0j found the honest gap (squares
+  cannot express long-brick patterns), the rectangular ladders refused
+  through k = 8 (2,796 rows), §0k's fine slabs refused k = 7 in seconds
+  (structural, not capped; k = 8: three unsats + one cap), and §0l's
+  fine-square pixel probes (32 × 32 @ 1/8, both shears) read **unknown at
+  the 900 s cap** — the pixel-resolution question is genuinely hard for the
+  solver, not structurally refused; it stands as the named open probe. The measured shape so far: **the
+  row-brick family cannot 7- or 8-colour the plane at any probed shape** —
+  row-aligned cells cannot interlock the way the hexagonal 7-colouring's
+  tiles do — and its probed threshold is exactly the 9 of the 3 × 3 square
+  rainbow.
+* **P6 CONFIRMED, in force everywhere** — every k = 4 row across all
+  campaigns (square, rectangular, slab: hundreds of rows) refused; the
+  catastrophe banner never fired. The strongest empirical control the
+  prober has.
+* **P7 CONFIRMED** — every k = 5 row refused, including D = ∅ (the χ ≤ 5
+  hunt itself); reported as resolution-bounded ceilings, never as
+  impossibility.
+* **P8 FAILURE BRANCH, banked honestly** — no k = 6 avoider exists in the
+  brick family at any probed shape for any swept class; the first certified
+  two-distance upper bound waits for richer tile families.
+* **P9 CONFIRMED** — L1 landed same-day: `mono_pair_of_clique` (the
+  counting face of the bridge, decide-free) + `HexShell.lean` (the closed
+  first shell as a K7 of {1, √3, 2}; the pigeonhole k-generic below seven;
+  plane corollaries at 5 and 6 colours — **χ(ℝ²; {1,√3,2}) ≥ 7
+  kernel-checked**); axioms exactly the standard three.
+* **P10 ADJUSTED per the registered failure clauses, machinery in full** —
+  `Brick.lean` landed COMPLETE and zero-sorry: `Brick.sound` (the closed-hull
+  offset-window soundness over the whole plane, window computed inside the
+  check), `Brick.colorable` (properness demanded structurally via
+  `1 ∈ guards`), `Brick.avoids` (the future avoider consumer, its C1
+  semantics in its docstring), `colorQ_eq` (the computable twin). The
+  instance is **`Instances/Nine.lean`: χ(ℝ²) ≤ 9 kernel-checked** — the
+  repository's FIRST certified upper bound (interval now [5, 9] kernel-side,
+  both ends) — honestly labelled the machinery demonstration, with the
+  bonus avoidance witness (a 9-colouring avoiding √(3/2), `Brick.avoids`
+  live). χ ≤ 7 needs polygonal cells; priced at close.
+* **P11 CONFIRMED** — the whole milestone fit in ~one desktop-day; the only
+  capped calls are named above and reported as caps.
+* **P12 — the ELSE branch fired**: nothing fired at k = 5, no avoider at
+  k ≤ 6; the close banks L1 + L3 + the ceilings and hands M36 the ranked
+  options (see the Frontier).
+
+## What was NOT done (honesty ledger)
+
+* The fine-square (pixel-hexagon) row-brick question at 1/8 and finer:
+  undecided at the 900 s cap — neither a find nor a refusal; the χ ≤ 7 or
+  ≤ 8 brick question at pixel resolution is open, and the polygon-cell
+  route is the priced alternative.
+* χ(ℝ²) ≤ 7 in the kernel — needs convex polygon cells (hexagons); the
+  Brick architecture extends (slab witnesses for min-distance, vertex
+  decides for max), priced as an M36 candidate, ~one module + one instance.
+* The k = 5 sweep covers the NAMED objects and classes only; k = 5 class
+  compulsions on objects nobody has built (5-tight fabric at scale) are
+  exactly what the sweep says do not yet exist to be probed.
+* `lean4checker` replay — deferred per standing policy (publication gate).

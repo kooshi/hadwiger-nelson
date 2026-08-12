@@ -54,7 +54,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M34, 2026-08-11.**
+**Last updated: M35, 2026-08-11.**
 
 ### Where the problem stands
 
@@ -315,6 +315,44 @@ different vertex orders (the forced-equal control caught the mix — a
 union SAT verdict explained, not believed); palette symmetry costs
 6.5–35× solver time, re-measured twice.
 
+M35 ran the two-sided 6-programme, and both sides returned their honest
+verdicts. Phase 1 — the k = 5 class-avoidance sweep, the question no one
+had asked: **NO pattern class fires at five colours on any object we
+hold** — 52 clean over 7 objects (both Heule witnesses, the 1581 at both
+centres, the fabric, the certified chunk, the bare lattice) × 8 classes
+(every vocabulary pair distance + the √3 triple), fan rows at min-cover 2
+everywhere, the bare triangular lattice clean at k = 4 for distance-2
+pairs (G16's pigeonhole confirmed fabric-borne — the coset obstruction,
+proved by HNF enumeration in §0a, does not bind free colourings). The
+6-hunt's Act One does not exist on today's objects: nothing we hold is
+5-tight anywhere below its whole-witness top rung. Phase 2 — the
+registered subplan corrected the stub's semantics before running (any
+k = 5 avoider for ANY class subsumes χ(ℝ²) ≤ 5, so the avoider hunt at
+k = 5 IS the open upper-bound hunt; a k = 6 avoider bounds only
+SEVEN-forcers): the brick prober (rectangular torus tables, exact
+closed-hull interval arithmetic, the SAT probe and the Lean certificate
+checking the same finite object) ran ~2,800 registered rows with the
+k = 4 mass-red control green throughout, and found that **the row-brick
+family cannot 7- or 8-colour the plane at any probed shape** — squares,
+long bricks, fine slabs alike; row-aligned cells cannot interlock the way
+the hexagonal 7-colouring's tiles do; the family's probed threshold is
+exactly 9, and the pixel-resolution question (32×32 at 1/8) capped
+undecided. The kernel harvest: **`mono_pair_of_clique`** (the counting
+face of the M34 bridge — no refutation anywhere); **the hex-shell
+pigeonhole** (the closed first shell of the triangular lattice is a K7 of
+the {1, √3, 2}-distance graph: every proper ≤ 6-colouring of the plane
+has a mono pair at √3 or 2 — **χ(ℝ²; {1,√3,2}) ≥ 7**, elementary and
+presumably folklore, ours the formalization and the 6-programme seed
+framing); and **`Brick.lean` + `Instances/Nine.lean`: χ(ℝ²) ≤ 9,
+kernel-checked** — the repository's FIRST certified upper bound, the
+classical interval now bounded kernel-side at BOTH ends ([5, 9]; the
+classical ≤ 7 needs polygonal cells, priced), with the avoidance surface
+live (a certified 9-colouring avoiding √(3/2) — the exact consumer any
+future k ≤ 6 avoider find instantiates same-day). All on axioms exactly
+`[propext, Classical.choice, Quot.sound]`; instruments banked: the 3-bit
+k = 5 re-encode, the clique-triviality guard, the k-threaded sweep
+machinery, the prober with its catastrophe banner.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -351,6 +389,7 @@ union SAT verdict explained, not believed); palette symmetry costs
 | 26 | **The de Grey anatomy** (tools-side, every instrument control seen red/green on cue): the 1581 has exactly **67 edge-direction classes**, ALL words in the half-spindle group ⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩ at exponent ≤ 6 (the registered whole-word group covers 58%; every miss squares in; σ-exponents only {0,±1,±2}); Heule 510/553 carry 6 out-of-group residue classes each — the 1581 is the only pure-group witness; E3 refuted (819 circles, 4,140 coarse classes, top-6 = 3.7%, flat head) and the load-bearing census deflated by its matched control — **the 1581 is at or near edge-critical**, the 5-forcing distributed; the complete forced-pair inventory of the 791 forcer: **six pairs** — M13's axis pair plus five ANTIPODAL pairs at distance 4/√3 (√183-spindle, outside the field): every proper 4-colouring is centrally symmetric on the radius-2/√3 circle; E2 exact (norms 4 and 16 — the M32 clearing is 2-adic); fusion record {1:1344, 2:234, 4:1, 24:2}; E4 refuted both halves — the 4-chromatic hexagram chunk's colour space is > 10⁴ up to rot6 × palette with ZERO forced pairs (settled exactly), and the 1581's 5-colouring space is likewise pairwise-floppy (0 forced, 0 virtual, settled) — rigidity in both fields lives only at the forcing level k−1, never above. Instruments promoted: `tools/anatomy.py`, `tools/rigidity.py` (complete pairwise forced-equal/virtual-edge oracle, batch violation queries, vacuity guard), `tools/hexchunk.py`, the anatomy visualizer `tools/degrey-viz.html` + `tools/degreyviz_refresh.py`. | `build/m30-anatomy.json`, `build/m30-rigidity-forcer791.json`, `plans/M30-degrey-anatomy.md` §R | M30 |
 
 | 31 | **Act One as kernel theorems + the composed 5-forcer** (M34): the **pigeonhole bridge** (`mono_pair_of_not_colorable_append` / the iff — class avoidance IS colourability of the pair-augmented edge list, so the certified SAT chain applies verbatim); the **transmuter** (five-vertex forcing, 4⁵ decide, nine-way mutation audit; its forced transfer crosses distance exactly 2 = the ρ₁₅ spindle distance); **A1 unconditional** (`not_colorable_iff_covers`: χ(G) > k ⟺ every k-colouring of G − v covers N(v) — the fan query as a theorem, no side condition); **`core9_pigeonhole`** + **`core9_plane`** (every proper 4-colouring of the plane has a mono √3-pair — nine-point 1-minimal carrier, two transmuters + one edge, geometry denom 512, pair list kernel-complete); **`core122_pigeonhole`** + **`core122_plane`** (every proper 4-colouring of the plane has a mono distance-2 pair — 122-point carrier on the certified hexagram's seam lattice, pinned LRAT of 7,892 derived clauses replayed by the kernel, geometry denom 12, forty pairs kernel-complete over 14,884 checks); `UDCert.PairsAt` + `pairsAt_sound` (class-distance certification at any √r). All on axioms exactly `[propext, Classical.choice, Quot.sound]`. Tools-side, controls red/green throughout: the census (forty d2 instances = FIVE dihedral classes, endpoints on named shells) and the **composed union** — 9-core + six 791-forcer chains, 4,749 vertices, χ ≥ 5 by kernel-covered cubes (six UNSATs at ~800 s) where the monolithic solve capped at 3600 s. | `Pigeonhole.lean`, `PairDist.lean`, `Instances/Core9.lean`, `Instances/Core122{,/}`, `build/m34-*.json` | M34 |
+| 32 | **The two-sided 6-programme's first pass** (M35): kernel side — `mono_pair_of_clique` (the counting face of the M34 bridge: a (k+1)-clique of the augmented graph forces a mono class pair with NO refutation certificate anywhere); the **hex-shell pigeonhole** (`HexShell.lean`: the closed first shell of the triangular lattice — a point and its six unit neighbours — is a K7 of the {1,√3,2}-distance graph; `hexShell_pigeonhole` k-generic below seven; plane corollaries at five and six colours: **every proper ≤ 6-colouring of the plane has a mono pair at √3 or 2, i.e. χ(ℝ²;{1,√3,2}) ≥ 7** — compulsion folklore, formalization ours); the **brick certificate machinery** (`Brick.lean`, zero sorry: `Brick.sound` — closed-hull offset-window soundness over the whole plane, window computed inside the check; `colorable` demanding properness structurally; `avoids` with the corrected avoider semantics; `colorQ` the computable twin) and **`plane_colorable_nine`: χ(ℝ²) ≤ 9 kernel-checked** — the first certified upper bound, the interval [5, 9] now kernel-side at both ends, plus a certified 9-colouring avoiding √(3/2) (`Brick.avoids` live). Tools-side, controls red/green throughout: the **k = 5 class sweep, all-clean** (52/4/0 over 7 objects × 8 classes — the first class-level k = 5 measurement anywhere; fans at min-cover 2; the sweep-halt rule never armed); the bare lattice clean at k = 4 d2 (the §0a HNF coset obstruction — no index-4 coset colouring avoids {1,2}, three of five index-5 sublattices avoid {1,2} while none avoids {1,√3} — does not bind free colourings); the **row-brick interlock finding** (~2,800 rows: no 7- or 8-colouring at any probed shape — squares, long bricks, fine slabs; threshold exactly 9; pixel squares capped undecided); instruments banked (3-bit re-encode, clique-triviality guard, k-threading, the prober + catastrophe banner). | `Pigeonhole.lean` (`mono_pair_of_clique`), `Instances/HexShell.lean`, `Brick.lean`, `Instances/Nine.lean`, `build/m35-*.json`, `plans/M35-k5-transfer.md` §R | M35 |
 | 30 | **The mechanism hunt's first harvest** (tools-side, every claim double-encoded or theorem-closed): (a) the criticality factorization A1 (χ(G) ≥ k+1 at a vertex ⟺ the fan on its circle, when G−v is k-colourable) — derived a priori, validated at three centres, and used to CLOSE a capped solver row by mathematics; (b) **the d = 2 pigeonhole**: avoid-all-mono-d2-pairs is UNSAT on the certified hexagram chunk at B = 2, on the bare de Grey fabric and the 1581 at the IDENTICAL onset 2 − √33/9, and on Heule-510 at the glue shell 5/3 — fabric-borne, depth-switched (clean at B ≤ 1), at exactly the ρ₁₅ spindle distance; Act One's 1-minimal carrier = **122 vertices / 12 shells** with per-member necessity witnesses; (c) **the 3-cover core**: 36-circle + **13 interior points** on (7−√33)/6 ∪ {1/3} ∪ (9−√33)/6 delivers min-cover 3 at Heule-510's centre; (d) the √3-pair pigeonhole exists ONLY in the assembled 1581 (onset at the √21 shell — cross-system material), not in the fabric, not in shrunk 510 — and its 1-minimal core is **NINE vertices**: two √3-triangles with their unit circumcentres (M18's `exists_unit_triangle_iff` object), a hub, and one rim–rim edge — hand-proved in two cases, `decide`-scale for M34; (e) the class-avoidance instrument (arity-generic mono-avoidance, base-SAT guard as control flow, five honest verdicts, first-occurrence breaking, binary re-encode promotion ladder, 1-minimal shrink engine) with the 791/M20-skeleton/planted controls all red/green. | `tools/mechanism.py`, `tools/rigidity.py` (class_avoid), `build/m33-*.json`, the explorer's M33 pane, `plans/M33-mechanism-hunt.md` §R | M33 |
 
 ### Paths forward, ranked
@@ -375,26 +414,26 @@ Kooshi's direction at the close: "I want to be able to confidently point to
 the reason why 5 colorings are forced." M33 is the MECHANISM HUNT; the
 certification programme is the standing fallback.)*
 
-1. **M35 — the two-sided 6-programme: the k = 5 sweep + the avoidance
-   certificates** (CHOSEN by Kooshi 2026-08-11;
-   `plans/M35-k5-transfer.md` carries the full shape). Phase 1, the
-   sweep: class avoidance at five colours — does any region force a
-   pattern class on EVERY 5-colouring? Nobody has asked; any firing is
-   the first concrete piece of a χ ≥ 6 argument anyone has held, and
-   M34's bridge + LRAT machinery certifies it same-day. Phase 2, the
-   certificates: by compactness through the bridge, "class P never
-   fires" ⟺ "the plane 5-colours avoiding P" (for pair classes: the
-   two-distance graph {1, d} is 5-chromatic) — and THAT has a finite
-   kernel-checkable certificate: a periodic avoiding colouring (the
-   parked M27 machinery, un-parked and re-aimed). Every class ends
-   fired (6-fuel), periodically avoided (a certified "no 6-forcer can
-   use this mechanism"), or honestly unresolved — progress accrues
-   whichever way χ(ℝ²) points.
-2. **The certified union — DEMOTED** (Kooshi, 2026-08-11; banner in
-   `plans/M35-certified-union.md`): the 4,749-vertex composed 5-forcer
-   stays measured (kernel-covered cubes) with its modular proof shape
-   priced; reopens on his call, especially if the write-up trigger's
-   *maybe* clause wants our own certified 5-chromatic object.
+*(M35 CLOSED 2026-08-11 — both phases returned honest verdicts: no k = 5
+class compulsion exists on today's objects, and the upper-bound machine is
+built with χ ≤ 9 as its first certified instance. The ranking below is the
+close's recommendation; Kooshi picks.)*
+
+1. **M36 candidate A — the polygon-cell certificate: χ(ℝ²) ≤ 7 in the
+   kernel.** Extend `Brick.lean`'s architecture from rectangles to convex
+   polygon cells (hexagons): max-distance by vertex-pair decides,
+   min-distance by rational separating-slab witnesses — the same
+   closed-hull conservatism, one shape richer. Lands the classical
+   interval **5 ≤ χ(ℝ²) ≤ 7 kernel-checked end to end** (M35 measured
+   that row-bricks genuinely cannot do it — the hexagon's interlock is
+   load-bearing), and every future avoider candidate inherits the richer
+   family. Guaranteed landing, self-contained, ~one module + one instance.
+2. **M36 candidate B — the certified union, un-demoted**
+   (`plans/M35-certified-union.md`): now doubly motivated — it is the only
+   designed 5-chromatic object we hold, and M35's sweep says any future
+   k = 5 Act One needs 5-TIGHT fabric that does not exist yet; growing
+   and composing 5-chromatic objects is the only known route to it. The
+   √23 field-tower price is measured and stands.
 3. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`); the union is its second, far
    smaller candidate object.
@@ -754,6 +793,38 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   closure (the Gadget layer) are the standing shape for every future
   certificate. Falsifier: a solver config that cracks the monolithic
   union in minutes — then this is a tuning anecdote, not a law.*
+
+* **G19 — The 6-hunt's missing ingredient is 5-tight fabric.** M35's
+  sweep — the first class-level k = 5 measurement anywhere — read CLEAN at
+  every (object, class, radius): no pattern class is compelled at five
+  colours on any witness, closure chunk, fabric stage, or lattice ball we
+  hold; fan rows sit at min-cover 2 of 5. The k = 4 story had tight fabric
+  everywhere because the seam fabric IS exactly-4-chromatic material
+  (M33's pigeonholes fired on it); the k = 5 analogue — regions whose
+  5-colour space is tight enough to carry a class compulsion — does not
+  exist in today's inventory: **the 6-hunt's Act One has no stage until
+  someone builds 5-tight fabric**, and composition of 5-forcers (the M34
+  union genre) is the only known constructive route. The corrected
+  two-sided semantics stand with it (M35 §0a C1): an avoider at k rules a
+  mechanism out AT k only — the k = 5 avoider hunt IS the open
+  upper-bound hunt (any find proves χ(ℝ²) ≤ 5), and k = 6 avoiders bound
+  seven-forcers, not six. **[measured: build/m35-sweep.json; the
+  instrument is standing and k-generic]** *Falsifier: any object whose
+  k = 5 class sweep fires — the sweep-halt rule is armed in the campaign
+  driver.*
+* **G20 — Interlock is load-bearing for χ ≤ 7.** Row-aligned brick
+  colourings (any table, any shear, cells from coarse squares through
+  long bricks to fine slabs) cannot 7- or 8-colour the plane at any
+  probed shape — ~2,800 registered rows, mass red control green
+  throughout — while 9 is achieved trivially (the 3 × 3 rainbow, now
+  kernel-checked). The hexagonal 7-colouring's tiles overlap in y;
+  strict rows cannot express that, and the measurement says the
+  interlock is not a convenience but the mechanism. **[measured:
+  build/m35-periodic.json; the pixel-resolution rows (32 × 32 at 1/8)
+  capped undecided — the one open cell of the family]** *Falsifier: a
+  fine-pixel row-brick 7- or 8-colouring found at higher cap — the probe
+  is one CLI call; any find kernel-certifies same-day through
+  `Brick.check`.*
 
 ## Whose work this is
 
