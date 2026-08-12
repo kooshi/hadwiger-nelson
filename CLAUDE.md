@@ -375,29 +375,49 @@ Kooshi's direction at the close: "I want to be able to confidently point to
 the reason why 5 colorings are forced." M33 is the MECHANISM HUNT; the
 certification programme is the standing fallback.)*
 
-1. **M35 — the k = 5 transfer: the first Act-One sweep of the 6-hunt**
-   (stub: the section in `plans/M34-act-one-certified.md` § Beyond; a
-   full stub to be written at subplanning). The class-avoidance
-   instrument at five colours asks a question nobody has asked: does any
-   region force a pattern class on EVERY 5-colouring? The natural first
-   class is the fan itself (the 6-transition in coverage vocabulary);
-   sweep objects: the witnesses, gen-1 closures, enriched assemblies,
-   the M34 union. Any firing is the first concrete piece of a χ ≥ 6
-   argument anyone has held. This is the hunt move; M34's machinery
-   (bridge + LRAT on augmented lists) certifies any find at k = 5 the
-   same way it did at k = 4.
-2. **The certified union** — the consolidation move, now with a measured
-   shape: `core9_pigeonhole` (kernel, done) + ONE pinned forcer LRAT
-   (133.7 s solve, the Gadget layer covers the palette exactly as
-   Core122's did) + six placement geometries in ℚ(√3,√5,√7,√11,√23)
-   (the field-tower extension — the real work) ⟹ a NEW 4,749-vertex
-   5-chromatic witness with a fully MODULAR kernel proof, no monolithic
-   SAT anywhere. Touches the write-up trigger's *maybe* clause ("our own
-   certified 5-chromatic object") — Kooshi's call whether that promotes
-   it above the hunt.
+1. **M35 — the two-sided 6-programme: the k = 5 sweep + the avoidance
+   certificates** (CHOSEN by Kooshi 2026-08-11;
+   `plans/M35-k5-transfer.md` carries the full shape). Phase 1, the
+   sweep: class avoidance at five colours — does any region force a
+   pattern class on EVERY 5-colouring? Nobody has asked; any firing is
+   the first concrete piece of a χ ≥ 6 argument anyone has held, and
+   M34's bridge + LRAT machinery certifies it same-day. Phase 2, the
+   certificates: by compactness through the bridge, "class P never
+   fires" ⟺ "the plane 5-colours avoiding P" (for pair classes: the
+   two-distance graph {1, d} is 5-chromatic) — and THAT has a finite
+   kernel-checkable certificate: a periodic avoiding colouring (the
+   parked M27 machinery, un-parked and re-aimed). Every class ends
+   fired (6-fuel), periodically avoided (a certified "no 6-forcer can
+   use this mechanism"), or honestly unresolved — progress accrues
+   whichever way χ(ℝ²) points.
+2. **The certified union — DEMOTED** (Kooshi, 2026-08-11; banner in
+   `plans/M35-certified-union.md`): the 4,749-vertex composed 5-forcer
+   stays measured (kernel-covered cubes) with its modular proof shape
+   priced; reopens on his call, especially if the write-up trigger's
+   *maybe* clause wants our own certified 5-chromatic object.
 3. **The certification programme** — standing fallback unchanged
-   (`plans/M33-witness-closure.md`); the union is now its second,
-   far smaller candidate object.
+   (`plans/M33-witness-closure.md`); the union is its second, far
+   smaller candidate object.
+
+### The open structural question (minted 2026-08-11, the M34 close discussion)
+
+> **Is a pigeonhole necessary?** Every known χ ≥ 5 argument factors as
+> pigeonhole × kill (G15, constructive half now measured) — but must
+> EVERY 6-forcer carry a class pigeonhole from an ENUMERABLE family?
+> Today's only necessity theorem is A1 (a vertex-critical 6-forcer fires
+> the fan class at k = 5 at every vertex — kernel, colour-generic), and
+> there the statement is vacuous at the top rung: "no fan-pigeonhole
+> anywhere" merely restates the upper bound. The useful form — a SMALL,
+> EARLY compulsion from a family a sweep can enumerate, forced on every
+> 6-forcer — is open, is exactly G15's universality half, and is the
+> missing piece that would turn M35's classification map into a proof
+> route for χ(ℝ²) ≤ 5 (which may of course be false — nothing known
+> excludes χ = 6 or 7). What would move it: a necessity proof for ANY
+> enumerable family below the fan; or a 6-forcer-candidate anatomy
+> violating the factorization. The M33 enumeration subtlety stands as a
+> warning: the fan compulsion A1 guarantees lives on a circle about a
+> DELETED vertex — a class family enumerated over present vertices
+> misses it.
 4. **The designed-forcer thread — reopened in spirit by the union** (M34
    built the first designed 5-chromatic object — by composition, not by
    stacking; M32's flat verdict on width-without-degree stands).

@@ -1,11 +1,44 @@
-# M35 — The k = 5 transfer: the first Act-One sweep of the 6-hunt (PRE-SUBPLAN STUB)
+# M35 — The k = 5 transfer and the avoidance certificates: the two-sided 6-programme (PRE-SUBPLAN STUB)
 
-*Written 2026-08-11 at M34's close. Read order for a fresh session:
-`plans/M34-act-one-certified.md` WHOLE (§0 carries the bridge/transmuter/A1
-derivations and the priced union arithmetic; §R carries every verdict), then
-CLAUDE.md § Grokkings G15–G18. This is path #1 of M34's close ranking — the
-HUNT move; the certified union (`plans/M35-certified-union.md`) is path #2,
-the consolidation move. Kooshi picks.*
+*Written 2026-08-11 at M34's close; CHOSEN and EXTENDED by Kooshi the same
+day ("I agree" to the two-sided framing below — this is THE M35; the
+certified union is demoted, `plans/M35-certified-union.md` keeps its banner).
+Read order for a fresh session: `plans/M34-act-one-certified.md` WHOLE (§0
+carries the bridge/transmuter/A1 derivations; §R every verdict), then
+CLAUDE.md § Grokkings G15–G18 and § Frontier's open structural question.*
+
+## The two-sided shape (the close discussion, 2026-08-11)
+
+By de Bruijn–Erdős compactness applied to the P-augmented graph (the M34
+bridge at plane scale): **"class P never fires at 5 colours on any finite
+region" ⟺ "the plane has a 5-colouring avoiding P everywhere."** For a
+mono-d-pair class that right-hand side is a named object — a proper
+5-colouring of the TWO-DISTANCE graph {1, d} — so M34's 122-point theorem
+already reads: χ(ℝ²; {1, 2}) ≥ 5, and this milestone asks about 6. The
+consequence that makes the programme two-sided: proving "P never fires"
+has a FINITE certificate — **one periodic 5-colouring avoiding P** (a
+fundamental domain + boundary conditions, kernel-checkable — the parked
+M27 periodic-table machinery, un-parked here as phase 2). So every class
+terminates in one of three honest states:
+
+* **FIRED** — the first concrete piece of a χ ≥ 6 argument anyone has
+  held; certified same-day by the M34 route (bridge + LRAT at k = 5).
+* **PERIODICALLY AVOIDED** — a kernel-checked "no 6-forcer can use this
+  mechanism": a certified two-distance upper bound nobody has, shrinking
+  the 6-forcer's possible anatomy the way the field wall shrank the
+  5-forcer's.
+* **UNRESOLVED** — no firing found, no avoider found; reported as the
+  probed ceiling, never as a claim.
+
+Progress accrues REGARDLESS of which way χ(ℝ²) points — the first
+programme of the hunt with that property. The honest limit, named: even a
+complete classification of every enumerable class closes nothing by
+itself — the missing piece is the NECESSITY theorem ("every 6-forcer
+carries a pigeonhole from an enumerable family"), now standing as the
+Frontier's open structural question; today's only necessity theorem is A1,
+and there it is vacuous at the top rung (the fan arrives with the whole
+witness). The classification is the map; necessity would make it the
+proof.
 
 ## The question nobody has asked
 
@@ -63,11 +96,32 @@ anyone has held.
   queries with breaking should stay minutes; the sweep is desktop-days at
   worst. Register per-query caps and the campaign budget at §0.
 
+## Phase 2 — the avoidance certificates (the periodic hunt)
+
+For each class the sweep leaves clean: hunt the periodic 5-colouring that
+avoids it. The instrument is the M27 stub's registered-but-never-run
+periodic-table SAT probe, re-aimed: a candidate lattice/fundamental domain,
+colour variables on the domain, properness + avoidance clauses with
+periodic boundary identification, SAT = a certificate. A found avoider is
+a FINITE object: promote it exactly as M34 promoted refutations — a
+kernel-checked colouring table + the wrap-around distance identities (the
+DeGreyBalanced packed-witness genre for the colouring, the Certificate
+genre for the geometry). Design questions for subplanning: which lattices
+to enumerate (the hexagonal 7-colouring's own lattice first — its scaling
+family is where every known plane colouring lives), domain size ladders,
+and the honest three-outcome bookkeeping per (class, lattice, size). The
+fan class's avoider is a strange and interesting object ("every unit
+circle-plus-centre misses a colour" — local 4-colourability); whether it
+exists at any period is itself a fresh question.
+
 ## Failure clauses (sharpen at registration)
 
-* All-clean everywhere: reported as the ceiling; the milestone still banks
-  the k = 5 instrument (3-bit re-encode, fan-class query) and re-ranks —
-  the certified union becomes the default next.
+* All-clean everywhere at phase 1: EXPECTED; phase 2 is the milestone's
+  second half precisely so that all-clean still produces theorems.
+* Phase 2 finds no avoiders either (classes unresolved across the probed
+  lattice ladder): the probed ceilings are reported per class; the
+  instruments (3-bit re-encode, fan-class query, the periodic prober) are
+  banked; re-rank at close.
 * A fired class that fails its re-encode: instrument catastrophe protocol
   (halt, extend self-tests, rerun).
 * Any segfault: HALT and report (standing).

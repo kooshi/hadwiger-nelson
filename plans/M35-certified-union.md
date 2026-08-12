@@ -1,11 +1,17 @@
-# M35 — The certified union: a modular 5-chromatic witness (PRE-SUBPLAN STUB)
+# M35 — The certified union: a modular 5-chromatic witness (DEMOTED STUB — not the next milestone)
+
+> **DEMOTED 2026-08-11 (Kooshi, at the M34 close discussion): the two-sided
+> k = 5 programme (`plans/M35-k5-transfer.md`) is THE M35** — the sweep plus
+> the periodic avoidance certificates makes progress whichever way χ(ℝ²)
+> points, while this object is consolidation with bounded novelty. Nothing
+> below decays: the union is measured 5-chromatic (kernel-covered cubes,
+> `build/m34-union-core9.json`), the proof pieces all have precedents, and
+> this stub reopens on Kooshi's call — in particular if the write-up
+> trigger's "maybe" clause (our own certified 5-chromatic object) makes it
+> worth the field-tower work.*
 
 *Written 2026-08-11 at M34's close. Read order: `plans/M34-act-one-certified.md`
-WHOLE, then CLAUDE.md G15/G18. This is path #2 of M34's close ranking — the
-CONSOLIDATION move; the k = 5 transfer (`plans/M35-k5-transfer.md`) is path #1,
-the hunt move. Kooshi picks. Note: this object touches the write-up trigger's
-"maybe" clause — our own certified 5-chromatic object — so landing it forces
-that conversation.*
+WHOLE, then CLAUDE.md G15/G18.*
 
 ## The object, measured at M34
 
