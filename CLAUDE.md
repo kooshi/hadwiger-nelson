@@ -419,16 +419,19 @@ class compulsion exists on today's objects, and the upper-bound machine is
 built with χ ≤ 9 as its first certified instance. The ranking below is the
 close's recommendation; Kooshi picks.)*
 
-1. **M36 candidate A — the polygon-cell certificate: χ(ℝ²) ≤ 7 in the
-   kernel.** Extend `Brick.lean`'s architecture from rectangles to convex
-   polygon cells (hexagons): max-distance by vertex-pair decides,
-   min-distance by rational separating-slab witnesses — the same
-   closed-hull conservatism, one shape richer. Lands the classical
-   interval **5 ≤ χ(ℝ²) ≤ 7 kernel-checked end to end** (M35 measured
-   that row-bricks genuinely cannot do it — the hexagon's interlock is
-   load-bearing), and every future avoider candidate inherits the richer
-   family. Guaranteed landing, self-contained, ~one module + one instance.
-2. **M36 candidate B — the certified union, un-demoted**
+1. **M36 — the hexagonal certificate: χ(ℝ²) ≤ 7 in the kernel** (CHOSEN
+   by Kooshi 2026-08-11; `plans/M36-seven-coloring.md` carries the full
+   shape, including the close-day derivation that shrinks it: hexagon
+   cells make the box-interval machinery unnecessary — the norm-7 coset
+   kernel is an IDEAL, so norm multiplicativity gives same-colour centre
+   separation in two lines, the crude triangle-inequality bound clears
+   with margin ≈ 0.13 at D = 7/8, and the only geometric obligation left
+   is the hex rounding's circumradius bound. Lands the classical interval
+   **5 ≤ χ(ℝ²) ≤ 7 kernel-checked end to end**; every future avoider
+   candidate inherits the richer cell family. Cheap first move recorded:
+   one high-cap pixel-brick retry that would collapse the milestone to a
+   Brick instance if it ever SATs.)
+2. **The certified union, un-demoted to second**
    (`plans/M35-certified-union.md`): now doubly motivated — it is the only
    designed 5-chromatic object we hold, and M35's sweep says any future
    k = 5 Act One needs 5-TIGHT fabric that does not exist yet; growing
