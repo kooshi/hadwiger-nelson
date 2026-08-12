@@ -585,3 +585,79 @@ Lean; the k = 4 mass control and the kernel are the real arbiters. min_cover
 at k = 5 is standing code with k already a parameter — no new obligation,
 and NO palette breaking there (standing rule, restated because the sweep
 driver composes both instruments).
+
+## §0h — Experience modeling pass (2026-08-11, fresh invocation)
+
+**H1 — The headline docstring anchors (the read-aloud gate's fixed targets).**
+`hexShell_pigeonhole`: the claim in plain English (a point and its six unit
+neighbours; fewer than seven colours; some √3-or-2 pair monochromatic); the
+mechanism in one sentence (the seven points are PAIRWISE at 1, √3, or 2 — the
+first shell of the triangular lattice is a clique of the three-distance
+graph — so two share by counting and a shared pair is never unit); what the
+kernel checked (21 distance identities at denom 2, the clique property of
+the augmented list, the pigeonhole composition — no search anywhere); what
+is NOT claimed ("the clique is elementary and presumably folklore; **what is
+new is the formalization, not the compulsion**" — the M34 B4 clause reused
+verbatim) plus the seed framing (kill radicands 11 and 15, both inside the
+5-forcers' field) and the weakness clause (compound = disjunctive, weaker
+than any single-class firing, §0a C3). The plane corollaries carry
+χ(ℝ²; {1,√3,2}) ≥ 7 stated at k = 6. `Brick.sound`/`colorable`: what the
+kernel checked (the finite offset-window certificate, exact rational
+arithmetic; the table is explicit; the SAT prober that found it is trusted
+for nothing). `Seven`: classical attribution (the hexagonal-7 genre;
+this instance a rectangular-cell variant) and the interval sentence: "with
+M06–M09 the repository holds **5 ≤ χ(ℝ²) ≤ 7 end to end** on axioms exactly
+[propext, Classical.choice, Quot.sound]." The C1-corrected semantics anchor,
+in `Brick.avoids`' docstring AND the close report: "an avoider at k colours
+rules the class out as a pigeonhole AT k — for the 6-hunt only a k = 5
+avoider closes a mechanism (and any such avoider proves χ(ℝ²) ≤ 5
+outright); a k = 6 avoider bounds what SEVEN-forcers can use."
+
+**H2 — API surfaces.** The clique lemma is `mono_pair_of_clique` (conclusion
+first, beside its sibling `mono_pair_of_not_colorable_append`; the module
+header advertises both entries: the bridge for refutation-carried
+pigeonholes, the clique for counting-carried ones). No guard-list wrapper:
+`Brick.sound` takes `check guards = true` + `q ∈ guards`, and `colorable`
+demands `(1 : ℚ) ∈ guards` structurally — a caller who forgets properness
+finds `colorable` unprovable, loudly, rather than silently certifying an
+improper table. The guard convention (squared distances, 1 for properness)
+lives in the structure docstring. No `@[simp]` anywhere new (nothing here is
+a rewrite target).
+
+**H3 — Artifact schemas, fixed now.** `m35-sweep.json`: schema line
+"m35-sweep v1 (plans/M35-k5-transfer.md §0b; clean rows are probed ceilings
+at the stated caps, never impossibility claims)"; row = {object, centre,
+class, k, n_instances_top, top_verdict, onset_r2, clique_trivial (null
+unless fired), promotion, probes}. `m35-periodic.json`: schema line
+"m35-periodic v1 (…; brick refusals are RESOLUTION-bounded — a refusal at
+cell w×h is not a period claim; promotion tops at prober-validated until
+Brick.check replays in Lean)"; row identity = (k, D, m, n, w, h, s).
+Campaign driver: per-row keyed writes, resume-after-last-row (M33), abort
+banners with named invariants and distinct exit codes.
+
+**H4 — Control surfaces and the catastrophe wording, written before any row
+runs.** `rigidity.self_test` grows the 3-bit block (planted k = 5 gadgets
+agreeing with one-hot, the 10-random-graph agreement loop, malformed
+rejection); `mechanism.self_test` grows the clique-guard block (hex shell
+green at t = 7, shell-minus-a-ring-point red, sparse decoy) and the
+trilattice loader guards ((a,b) tag round-trip, edge count against the
+design script); `mechanism --controls` (the M33 suite) must pass UNCHANGED
+before any m35 row — the k-threading regression gate. `periodic.py`
+self-test: the planted toy round-trip, the boundary adversary (closed-hull
+conservatism seen refusing), and the mass-control sample. The catastrophe
+banner, verbatim: "BRICK ENCODING CATASTROPHE: a k = 4 row read SAT with a
+validated model — this contradicts the kernel theorem χ(ℝ²) ≥ 5. The
+encoding or the validator is wrong. ALL m35-periodic verdicts are void
+until resolved." (distinct exit code, artifact status field).
+
+**H5 — CLI and close surfaces.** `tools/periodic.py` runs NOTHING by
+default (status listing); verbs `--self-test`, `--probe` (one row),
+`--ladder K CLASS` (the registered resolution/period ladder for one class),
+`--hunt` (the full registered campaign), `--emit-brick ROW` (the Lean
+instance JSON for a promotable find). The close report leads with the
+corrected two-sided semantics in plain words, the sweep verdict table, the
+sandwich statements that actually landed, and the honest weak-negative
+paragraph for phase 2. `Proofs.lean` and `scripts/Axioms.lean` gain the new
+modules/headliners (the gate's domain). No new explorer pane unless an
+avoider lands (then a brick-pattern tab on the standing closure explorer —
+UPDATE, never re-mint).
