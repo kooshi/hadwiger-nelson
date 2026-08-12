@@ -661,3 +661,16 @@ paragraph for phase 2. `Proofs.lean` and `scripts/Axioms.lean` gain the new
 modules/headliners (the gate's domain). No new explorer pane unless an
 avoider lands (then a brick-pattern tab on the standing closure explorer —
 UPDATE, never re-mint).
+
+## §0i — Mid-milestone addendum (2026-08-11, registered before the run)
+
+Phase 1 closed with 51 clean / 4 empty (trilattice at non-lattice distances) /
+ONE unknown: heule553 · v0 · eq-pair-2 at k = 5 capped at 600 s — while its
+sibling on heule510 took 102 s and every other (object, class) cell took
+under a second. The d = 2 class is measurably the tightest k = 5 avoidance
+on the SAT-shrunk witnesses (a curiosity consistent with G16's d = 2 story
+one rung down, NOT a compulsion claim). Registered: ONE retry of that single
+cell at cap 3600 s. Expected [medium]: clean (an avoiding 5-colouring
+exists). If it caps again: reported as the probed ceiling, no claim. If it
+FIRES: the P2 sweep-halt rule applies in full (re-encode, clique guard,
+HALT and report).
