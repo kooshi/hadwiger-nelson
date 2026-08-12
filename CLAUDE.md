@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M37, 2026-08-12.**
+**Last updated: M38, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -442,6 +442,24 @@ Hermite-plus-covering chain gives `k ≥ 6` for every planar lattice and `k ≥ 
 for the square one, and closing `k = 6` needs a near-equality rigidity
 argument from reduction theory.
 
+M38 removed the hypothesis M37's own grokking had flagged. With the coset
+map gone the object is the **constraint graph on the lattice** — join two
+addresses when their cells hold a pair of points one unit apart — and the
+theorem becomes a statement about that graph's clique: for scales
+`p ∈ (1/2, 1)` its constraint set is exactly the first three shells
+`Q ∈ {1, 3, 4}`, so the closed first shell is a **7-clique** and seven colours
+are forced with no algebra whatsoever. **Any colouring of the plane that is
+constant on the nearest-point cells of a triangular lattice at scale above
+half the unit distance needs at least seven colours** — arbitrary labels, no
+homomorphism (`seven_le_card_of_cell_constant`), and exactly seven at
+`p = 6/7` (`cell_chromatic_eq_seven`). The window is binding at the
+nearest-neighbour shell, confirmed exactly, with the planted red firing at
+`p = 1/2` and below. **The boundary is the finding**: below it the constraint
+graph becomes a thin annulus graph on a fine lattice, whose chromatic number
+is the plane's own open question — so *any six-colouring of the plane has
+colour classes finer than half the unit distance in every lattice's cells*,
+which is precisely the regime M36's pixel probes were capped undecided in.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -484,6 +502,8 @@ argument from reduction theory.
 | 33 | **The classical interval, kernel-checked at both ends** (M36): the **boundary-tight sharpening** — half-open cells make the realizable difference set an OPEN box, so a realized squared distance is strictly below `hiAt` and strictly above a positive `loAt`; `Brick.check` accepts `q ≤ loAt ∨ hiAt ≤ q` (the exact miss condition, not a sufficient one) and PARSES guard positivity in (`check_pos`), without which `guards = [0]` would be accepted and `sound` would deny a point its own colour. Consumers got simpler, not harder: `sound` keeps its signature and `avoids` LOSES its nonnegativity argument. **`plane_colorable_seven` / `chromaticNumber_plane_le_seven`: χ(ℝ²) ≤ 7** on a 7 × 7 torus of `4/5 × 3/5` half-open cells, shear `2/5` — the 3–4–5 triangle, cell diagonal exactly 1 — coloured `(i + 3j) mod 7`, the norm-7 ideal `(−3 + ζ₆)` of ℤ[ζ₆] (ζ₆-stable kernel ⟹ ideal ⟹ same-colour centres separated by norm multiplicativity, no lattice census); and **`chromaticNumber_plane_interval`: 5 ≤ χ(ℝ²) ≤ 7**, the classical statement of Hadwiger–Nelson, both ends kernel-side on axioms exactly the standard three. The colouring is classical (Isbell; half-open brick variants folklore) and no novelty is claimed for it — ours is the certificate, the sharpening, and the correction. Controls: two boundary-tightness pins (`hiAt 0 0 = 1`, `loAt 1 2 = 1`), six mutations refusing (two shapes, shear 0, two non-ideal coefficients, the flat table), the degenerate guard refused, seven `colorQ` samples. Tools-side, every claim on a third code path: the design script's census (0 straddles, tight rows exactly as predicted, 3.8M exact unit pairs with no mono pair), the prober's **first k = 7 SAT** (control + a searched second solution at shear `w/3`, promoted through the kernel), the `k = 4` mass red held in 298 rows, `k = 6` and `k = 5` refused in 1,394 rows each, and the certificate passing **exactly at the two ideal coefficients** `c ∈ {3, 5}` across a 7 × 5 census. | `Brick.lean` (`check_pos`, `sq_lt_of_abs_lt`/`lt_sq_of_abs_lt`/`le_sq_of_abs_lt`, `sound`), `Instances/Seven.lean`, `Instances/Interval.lean`, `build/m36-*.json`, `plans/M36-seven-coloring.md` §R | M36 |
 
 | 34 | **The coset bound: the coset chromatic number of the plane is exactly seven** (M37): `Coset.seven_le_card` — every proper nearest-point coset colouring of the plane (triangular lattice, ANY scale, ANY sublattice, ANY tie-breaking) uses at least seven colours, via `Coset.seven_values` (the seven lattice points of the closed first shell get seven distinct colours); and `Coset.exists_proper_coset_colouring` — the norm-7 ideal `(−3+ζ₆)` at scale `6/7` is such a colouring with exactly seven, so the bound is attained (`Coset.coset_chromatic_eq_seven`). The engine, entirely on the integral form `a²+ab+b²`: the inscribed disc + Gram identity, the deep hole (`4p² ≤ 3` from its own diameter), the collinear sweep with a gap lemma (kills kernel norms 1 and 3), the corner sweep (closes the norm-4 seams at `1/p` odd, where the collinear windows only touch), the Loeschian gap (2, 5, 6 are not norms ⟹ kernel norm ≥ 7), and the shell's difference table `{1,3,4}`. Sharpness adds the covering radius (`p/√3`) and the ideal's minimum (`√7 p`), with all properness arithmetic rational. **A six-colouring of the plane, if one exists, is not a lattice colouring.** Attribution: the optimality statement is folklore-adjacent and no novelty is claimed for the construction; ours is the proof shape, the formalization, and the packaging as a limitation theorem for the upper-bound hunt. | `Coset.lean`, `build/m37-design.py`, `plans/M37-coset-bound.md` §R | M37 |
+
+| 35 | **The coarse-cell bound: the homomorphism removed** (M38): `Coset.seven_labels_of_cell_constant` — for `1/2 < p < 1`, ANY colouring constant on the nearest-point cells of the triangular lattice at scale `p`, with **no algebraic relation between the labels**, gives the seven closed-shell addresses seven pairwise distinct labels; `seven_le_card_of_cell_constant` counts them; `cell_chromatic_eq_seven` pairs that with M37's witness at `p = 6/7`. The mechanism is a change of viewpoint rather than a new computation: the constraint graph's edge set on that window is exactly `Q ∈ {1,3,4}` (each condition `(1−p)² < p²Q < (1+p)²`, radical-free), so the closed first shell is a 7-clique and M37's Loeschian gap is replaced by the clique. The sweep was refactored into its honest form — `exists_unit_pair`, which PRODUCES the unit pair from two addresses and a direction with no mention of colour, and of which M37's is an instance. Window confirmed exactly `(1/2, 1)` with the planted red firing at and below `1/2` (`build/m38-design.py`, 5,997 rows agreeing between the radical and radical-free forms). | `Coset.lean`, `build/m38-design.py`, `plans/M38-cell-bound.md` §R | M38 |
 
 ### Paths forward, ranked
 
@@ -964,7 +984,16 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   Falsifier: any six-colouring of the plane whatsoever; short of that, a
   general-lattice proof would extend the blacked-out region from the triangular
   lattice to all of them — the crude chain already gives `k ≥ 6` everywhere and
-  the missing piece is the `k = 6` rigidity case.*
+  the missing piece is the `k = 6` rigidity case.* **SHARPENED at M38**: the
+  coset hypothesis is not needed above `p = 1/2`. There the constraint graph's
+  first shell is a 7-clique, so *any* cell-constant colouring — arbitrary
+  labels — needs seven **[kernel: M38]**. The blacked-out region is therefore
+  not "lattice colourings" but "cell-constant colourings at coarse scale", and
+  what remains is the FINE regime: a six-colouring must have classes finer than
+  half the unit distance in every lattice's cells. *That is a much sharper
+  address than G22 first gave, and it coincides with where M36's pixel-brick
+  probes ran out of solver: the open region is the same one from two
+  independent directions.*
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this
