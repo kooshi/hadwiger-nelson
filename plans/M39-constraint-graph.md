@@ -195,6 +195,14 @@ LRAT replay, the M06–M09 chain).
   radius 8 (225 vertices) still six-colour, so those rows stay
   period-bounded — a ball too small to refuse is not evidence, exactly as the
   addendum registered.
+* **The ball census, all period-free.** Radius-4 and radius-5 balls settle a
+  whole spectrum outright: `≥ 7` in the classical window (`p = 6/7`, `2/3`),
+  **`≥ 9` in the bad band** (`p = 0.6` and `p = 0.5` both refuse EIGHT — two
+  colours worse than the classical scale, and stronger than the 8-clique
+  theorem), `≥ 8` at `p = 1/3`, `≥ 7` at `p = 0.4` and `p = 1/4`, and
+  `= 7` exactly at `p = 6/13`. Only `p = 1/6` and `p = 1/7` resist, their balls
+  still six-colouring at 225 vertices while their tori refuse six to period 36
+  — the two scales where the question is genuinely open.
 * Every SAT refusal here is period-bounded unless a BALL refutation is quoted. Turning any of them into a
   statement about `χ(G(p))` needs a finite PATCH refutation (a ball, not a
   torus), which is not built.

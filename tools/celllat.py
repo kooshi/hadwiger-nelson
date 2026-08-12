@@ -265,8 +265,11 @@ def load_art():
 
 def record(row):
     art = load_art()
-    key = (row.get("T"), row.get("k"), row.get("m"), row.get("n"))
-    if not any((r.get("T"), r.get("k"), r.get("m"), r.get("n")) == key for r in art["rows"]):
+    def _key(r):
+        return (r.get("kind", "torus"), r.get("T"), r.get("k"), r.get("m"), r.get("n"),
+                r.get("radius"))
+    key = _key(row)
+    if not any(_key(r) == key for r in art["rows"]):
         art["rows"].append(row)
         ART.write_text(json.dumps(art, indent=1, default=str))
 

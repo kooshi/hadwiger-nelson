@@ -476,8 +476,12 @@ norms `{3,9,12}`), so the shell reappears at every scaled copy of the lattice;
 and the rise is
 `Coset.eight_le_card_of_cell_constant`: for `1/2 < p < 3/5` any cell-constant
 colouring needs at least EIGHT colours, via the `3 × 3` address block with one
-corner dropped, whose pairwise differences all have norm in `{1,3,4,7}`. **So
-the classical scale is a local optimum and refining the cells costs a colour**
+corner dropped, whose pairwise differences all have norm in `{1,3,4,7}`. And the ball refutations — finite patches, no
+periodicity assumed — settle the spectrum outright: `≥ 7` in the classical
+window, **`≥ 9` in the band just below it** (two colours worse, stronger than
+the 8-clique theorem), `≥ 8` at `p = 1/3`, `≥ 7` at `p = 0.4` and `1/4`, and
+**exactly 7 at `p = 6/13`**. **So the classical scale is a local optimum and
+refining the cells costs colours**
 — "make the cells smaller" is not a route to six. The campaign found no
 six-colouring at any of twelve scales on tori to 24 × 24 (reported as
 period-bounded, never as `χ(G) > 6`), a seven-colouring at `p = 6/13` below the
