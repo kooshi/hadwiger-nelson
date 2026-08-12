@@ -28,6 +28,7 @@ import Proofs.HadwigerNelson.Brick
 import Proofs.HadwigerNelson.Instances.Nine
 import Proofs.HadwigerNelson.Instances.Seven
 import Proofs.HadwigerNelson.Instances.Interval
+import Proofs.HadwigerNelson.Coset
 import Proofs.HadwigerNelson.TwoCircle
 import Proofs.HadwigerNelson.Compulsion
 import Proofs.HadwigerNelson.Strip

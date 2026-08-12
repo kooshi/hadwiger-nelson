@@ -758,6 +758,12 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms chromaticNumber_plane_le_seven
 #print axioms chromaticNumber_plane_interval
 
+-- M37: the coset bound
+#print axioms Coset.seven_le_hexQi
+#print axioms Coset.shell_rainbow
+#print axioms Coset.seven_values
+#print axioms Coset.seven_le_card
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
