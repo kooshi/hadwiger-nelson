@@ -324,6 +324,101 @@ instrument growth — and says so plainly.
 
 ---
 
+# §R — Results (2026-08-12, laptop, 12 cores; every verdict at face value;
+# artifact `build/m43-finetail.json`)
+
+**The headline: the sharpest open scale is CLOSED — χ = 7 exactly on both 1/7 flank
+bands, the refutation double-encoded, and the entire fine tail probed this campaign
+reads ≥ 7 outright wherever a verdict landed.** And the from-above six-door is closed
+twice over: the campaign's own refutation at 1/7, and an external theorem (found by
+the registered P7 literature check) that conditionally forces ≥ 7 on the WHOLE cell
+family at every scale.
+
+## The 1/7 flanks (phases 2–3)
+
+* **The coarse flank B_lo (T² ∈ (139/3, 49), probe T = 48/7) refuses six colours
+  OUTRIGHT**: pinned balls at R = 9, 10, 11, 12, 13, 14, 15, 18, 21 ALL UNSAT
+  (57–105 s each); minimal refuting radius **R\* = 9 — 301 vertices** (R = 8 is SAT
+  by transfer from the fine flank's R = 8 SAT). Double-encoding: the **A1
+  centre-deletion form refutes the R = 9 ball independently** (no pin, different
+  symmetry breaking, 2,028 s) — the M33 "double-encoded" standard met at the ball
+  level before any kernel step.
+* **The fine flank B_hi follows by inclusion** (same vertex set, superset edges), and
+  M39's 24×24 torus seven-colouring at closed T = 7 (= B_hi's class set) restricts
+  down to B_lo: **χ = 7 exactly on both flanks.** ω = 3 on both (P2 ✓).
+* **No periodic six-colouring with period-lattice index ≤ 96 exists on either
+  flank**: the exhaustive HNF sweep — ALL 7,624 sublattices per flank, k = 6 —
+  returned degenerate-or-UNSAT with ZERO unknown, mass-red k = 4 control green
+  (P3 ✓). Below det 24 every lattice is degenerate (swallows an edge offset).
+* Pin economics (P9 ✓): the D4 triangle pin decides the R = 15 ball in 57 s where
+  break-only, raw, and clipped variants ALL cap out at 2,400 s — worth ≥ 42× here;
+  0.13 s vs 1.49 s on the small decided control.
+
+## The controls story (G21 hygiene, both directions)
+
+* My five unpinned control encodings on the big balls returned UNKNOWN at cap —
+  not one confirmed and not one refuted the pinned verdicts; the pin composition's
+  soundness rests on the A3a derivation (re-verified during the campaign: relabel
+  onto the pinned triangle, then first-occurrence over the remaining colours) plus
+  the two-sided agreement controls, and the second-encoding confirmation was moved
+  to where instances decide: the a1-form at R = 9 (green, above) and the kernel
+  chain (below).
+* **The registered evidence-for-six was an artifact of my own misreading**: M39/M40's
+  "balls to 225 six-colour" at T = 7 means 225 VERTICES (radius parameter 8, |v| ≤ 8
+  ≈ 1.14·T, SAT in 0.08 s) — not Q-radius 225. Nobody had ever asked R ≥ 9 at 1/7.
+  P3's registered prior reasoning ("if the forcing mirrored the siblings, R = 15
+  would have caught it") was built on that misreading — and the siblings' scale law
+  (refuting cores at 1.2–1.9·T) is exactly where the refutation landed (1.31·T).
+* Two instrument catches by the new self-test before any campaign row: the K3
+  planted red I registered was itself wrong ((1,2,0) satisfies the staircase; the
+  true conflict is (0,2,1)); and my first ball builder CLIPPED the hex Q-ball with a
+  square box — the same G21 shape as M39's reach clipping, caught in-house. The
+  M39-era `patch`/`shrink` ball builders had the same clip (their UNSATs remain
+  sound — a subset refuting suffices — their SAT frontiers described the clipped
+  object); both fixed.
+
+## The censuses (phases 4–5)
+
+* **Between-region (T² ∈ (20, 103/3)), ten bands, ALL ≥ 7 outright** (ball
+  UNSATs at R ≈ 1.9·T, k = 7 balls SAT): ω = 4, 4 then 3 on the eight finer bands —
+  the ω-collapse arrives by T² ≈ 67/3, far earlier than D5's uniform bound. P5 ✓.
+* **Deep tail (T² ∈ (148/3, 84), p down to ≈ 0.109), twenty-one bands**: ω = 3 on
+  every one, k = 7 balls SAT on every one (no ≥ 8 pocket down there), and k = 6:
+  three more bands ≥ 7 OUTRIGHT; eighteen returned honest unknowns at cap 600
+  (recorded as unknowns, per §0d) — escalation round at cap 2,400 run (results in
+  the artifact; whatever remains unknown is the recorded stopping point).
+
+## P7: the literature check fired, and it rewrites the campaign's meaning
+
+* **Voronov, arXiv:2304.10163 (2023, rev. 2025-04): the Exoo conjecture is proven —
+  every closed interval [1−ε, 1+ε] of forbidden distances needs ≥ 7 colours, for
+  ARBITRARY ε > 0, in the Euclidean and any Minkowski plane.** (External preprint;
+  unverified by our standards; method not stated in the abstract.)
+* **Derived consequence (this campaign's §R, checked twice):** any proper
+  six-colouring of ANY G(p) with p < √3/2 would be a plane colouring whose
+  same-colour distance set misses a whole closed interval around 1 — intra-cell
+  distances stay ≤ 2p/√3 < 1, and the finitely many cross-cell offset windows near 1
+  are closed sets not containing 1, so a positive gap δ exists — properly
+  6-colouring Voronov's G_{δ/2}. Contradiction. **Conditional on [Vor2023]:
+  χ(G(p)) ≥ 7 for the ENTIRE cell family, every band, all the way down** — G23/G24's
+  "why is every band ≥ 7" has a conditional explanation, and by de Bruijn–Erdős
+  compactness every band owns a finite refuting ball. Our refutations are the
+  finite, exact, kernel-checkable certificates of that fact — the currency the
+  continuum proof does not produce.
+* **Parts, arXiv:2303.14722: "islands of certainty" with exact interval-χ values
+  {7, 8, 9, 12, 13} and 10/11 unknown** — matching our band atlas's measured values
+  {7, 8-pocket, 9, 12} with no 10/11 band found. The two atlases are cousin
+  coordinatizations of the same phenomenon; his exact-value islands are a standing
+  cross-reference for our open pocket upper bound (χ ∈ [8, 16]).
+* The D8 interval-distance bridge is fully subsumed (χ_ε ≥ 7 ∀ε beats every bridge
+  corollary we could mint); no novelty claim is made for it, as registered.
+
+## The core and the kernel (P8)
+
+*(appended when the shrink lands and the promotion completes)*
+
+---
+
 # THE ORIGINAL STUB (2026-08-12, M42 close — kept per deprecate-never-delete;
 # its scaled-shell parenthetical is corrected by §0a D5 above)
 
