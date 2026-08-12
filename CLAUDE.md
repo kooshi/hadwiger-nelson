@@ -480,7 +480,8 @@ corner dropped, whose pairwise differences all have norm in `{1,3,4,7}`. And the
 periodicity assumed — settle the spectrum outright: `≥ 7` in the classical
 window, **`≥ 9` in the band just below it** (two colours worse, stronger than
 the 8-clique theorem), `≥ 8` at `p = 1/3`, `≥ 7` at `p = 0.4` and `1/4`, and
-**exactly 7 at `p = 6/13`**. **So the classical scale is a local optimum and
+**exactly 7 at both `p = 6/13` and `p = 1/6`** — the latter seven times finer
+than the classical scale, so good scales recur all the way down. **So the classical scale is a local optimum and
 refining the cells costs colours**
 — "make the cells smaller" is not a route to six. The campaign found no
 six-colouring at any of twelve scales on tori to 24 × 24 (reported as

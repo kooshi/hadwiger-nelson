@@ -203,6 +203,10 @@ LRAT replay, the M06–M09 chain).
   `= 7` exactly at `p = 6/13`. Only `p = 1/6` and `p = 1/7` resist, their balls
   still six-colouring at 225 vertices while their tori refuse six to period 36
   — the two scales where the question is genuinely open.
+* **The explorer**: `build/m39-spectrum.html`, published as an artifact — the
+  scale on one axis, the proved floor and the found colourings on the other,
+  with the three kernel windows drawn as bars. The non-monotonicity is the
+  thing you see first, which is the point.
 * Every SAT refusal here is period-bounded unless a BALL refutation is quoted. Turning any of them into a
   statement about `χ(G(p))` needs a finite PATCH refutation (a ball, not a
   torus), which is not built.
