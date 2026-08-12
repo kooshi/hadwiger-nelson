@@ -302,6 +302,61 @@ def hunt(cap: float, machine: str) -> None:
     print(f"campaign complete → {ART.name}")
 
 
+# ---------------------------------------------------------------- §0j: the rectangular ladder
+
+RECT_W = [F(3, 5), F(3, 4), F(4, 5), F(9, 10)]
+RECT_H = [F(1, 5), F(1, 4), F(1, 3), F(2, 5)]
+RECT_M = [7, 12]
+RECT_SHEARS = [F(0), F(1, 2), F(1, 4)]
+
+
+def ladder_rect(k: int, cls: str, cap: float, machine: str) -> None:
+    """§0j: long flat bricks — the classical brick-wall family the square grid missed."""
+    guards_extra = CLASS_GUARDS[cls]
+    done = done_keys()
+    for w in RECT_W:
+        for h in RECT_H:
+            if w * w + h * h >= 1:
+                continue
+            n = 1
+            while n * h < 3:
+                n += 1
+            for m in RECT_M:
+                for sh in RECT_SHEARS:
+                    guards = [F(1)] + guards_extra
+                    row = {"k": k, "D": [str(q) for q in guards_extra], "m": m, "n": n,
+                           "w": str(w), "h": str(h), "s": str(sh * w)}
+                    if row_key(row) in done:
+                        continue
+                    r = probe(k, guards, m, n, w, h, sh * w, cap)
+                    record(r, machine)
+                    print(f"  k={k} D={cls:>5} {m}x{n}@{w}x{h} s={sh}w → {r['outcome']}"
+                          f" ({r['seconds']}s)", flush=True)
+                    if r["outcome"] == "sat":
+                        print("  AVOIDER FOUND — validated table recorded; Brick.check "
+                              "promotion is the next step", flush=True)
+                        return
+    print(f"  rect ladder (k={k}, D={cls}): all rows refused at the probed shapes "
+          f"(resolution-bounded)", flush=True)
+
+
+def hunt_rect(cap: float, machine: str) -> None:
+    print("rect mass red: k = 4, D = ∅ (every row must refuse):", flush=True)
+    ladder_rect(4, "-", cap, machine)
+    print("the L3 gate first: k = 7, D = ∅ on rectangles:", flush=True)
+    ladder_rect(7, "-", cap, machine)
+    print("the family wedge: k = 8, D = ∅:", flush=True)
+    ladder_rect(8, "-", cap, machine)
+    for k in (7, 6, 5):
+        for cls in ("sqrt3", "2", "4rt3", "sqrt7"):
+            print(f"rect ladder k={k} class={cls}:", flush=True)
+            ladder_rect(k, cls, cap, machine)
+    art = load_art()
+    art["status"] = "done"
+    ART.write_text(json.dumps(art, indent=1))
+    print(f"rect campaign complete → {ART.name}")
+
+
 # ---------------------------------------------------------------- self-test
 
 def self_test() -> None:
@@ -399,6 +454,7 @@ def main() -> None:
                     help="one row; D is a class name from the table or '-'")
     ap.add_argument("--ladder", nargs=2, metavar=("K", "CLASS"))
     ap.add_argument("--hunt", action="store_true")
+    ap.add_argument("--hunt-rect", action="store_true", dest="huntrect")
     ap.add_argument("--cap", type=float, default=120.0)
     ap.add_argument("--machine", default="desktop")
     args = ap.parse_args()
@@ -418,6 +474,8 @@ def main() -> None:
         ladder(int(args.ladder[0]), args.ladder[1], args.cap, args.machine)
     elif args.hunt:
         hunt(args.cap, args.machine)
+    elif args.huntrect:
+        hunt_rect(args.cap, args.machine)
     else:
         status()
 

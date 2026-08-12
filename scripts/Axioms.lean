@@ -741,6 +741,14 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms hexShell_p3_complete
 #print axioms hexShell_p4_complete
 
+-- M35: the brick certificate machinery and the first certified upper bound
+#print axioms Brick.sound
+#print axioms Brick.colorable
+#print axioms Brick.avoids
+#print axioms Brick.colorQ_eq
+#print axioms plane_colorable_nine
+#print axioms nine_avoids_sqrt_three_halves
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
