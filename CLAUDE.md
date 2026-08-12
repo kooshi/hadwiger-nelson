@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M39, 2026-08-12.**
+**Last updated: M40, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -495,6 +495,40 @@ worse" reading was not merely unsupported but wrong; the oscillation runs all
 the way down, good scales (`0.67–0.86`, `6/13`, `1/7`) interleaved with bad
 ones (`0.5–0.6`, `1/3`).
 
+M40 was the structure hunt Kooshi asked for ("anything that looks suspiciously
+organized"), and the anomalies were already sitting in M39's own data, unread. The
+family is piecewise-constant in the scale — one fixed graph per BAND between rational
+`T²` thresholds, keyed by point-group class (distinct classes share a norm with
+different thresholds, first at 49) — and the corrected census rewrites the spectrum:
+M39's clique search was box- and cap-clipped, and the true story is **χ = 9 exactly on
+the bad band** (a sheared 3×3 block is a 9-clique — the "≥ 9, stronger than the
+8-clique" mystery was a bigger clique), **χ = 12 exactly on `p ∈ (0.4804, 0.5)`** (a
+12-point trapezoid clique + the index-12 coset colouring; the local pessimum just below
+the classical scale is TWELVE), and §0e's "scaled-shell route exhausted at M ∈ {1,3}"
+was FALSE under the exact criterion (the M = 4 shell owns the band `(0.3273, 1/3)` — a
+G21 instance inside a G21-aware milestone). Then the finding: **below the classical
+window the family forces ≥ 7 everywhere probed, outright (balls, no periodicity), down
+to `p = 0.2236`, while the clique number collapses to 3–5.** The gap objects are
+canonical, vertex-transitive, and finitely checkable: **G\*** (the band
+`(0.4330, 0.4804)`, norms {3,4,7,9}) has **ω = 4 and χ = 7**, its seven-forcing
+shrinking to a **23-vertex 1-minimal core** (centre + full norm-1 and norm-4 hexagons +
+partial norm-3/norm-7 shells, near-rot6 symmetry broken — the same motif as de Grey's
+122-core); the **deep pocket** `(1/3, 0.3464)` has **ω = 4 and χ ≥ 8 outright** (a
+91-vertex ball refuses seven; 53-vertex core); and the bands flanking `p = 1/6` have
+**ω = 3 — the plane's own clique number — with χ = 7 exactly**, a gap of FOUR. The
+mechanism is invisible to every standard relaxation: certified Hoffman brackets collapse
+to ≈ 4.1 exactly where the cliques collapse, and the fractional relaxation reaches only
+χ_f ≤ 48/7 at G\* (α(12×12) = 21) — the step to seven is integrality. And the classical
+mechanism is provably unavailable: **all eight index-7 sublattices contain an edge of
+G\*** (same at the 1/6 and 1/7 bands), so no coset seven-colouring exists below the
+window — the SAT witnesses there have non-uniform classes and trivial stabilizers. The
+family is a finite-per-band mirror of Hadwiger–Nelson's own pathology (ω = 3, every
+relaxation low, χ high), and **the sharpest open scale is `p = 1/7`** (ω = 3, balls to
+225 six-colour, tori refuse six to period 36): the six-hunt's from-above target list is
+now concrete. Explorer published (`build/m40-spectrum.html`); kernel promotion of the
+12-clique window, the M = 4 shell window, the coset-impossibility, and χ(G\*) = 7 is
+priced and stubbed as M42.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -540,7 +574,9 @@ ones (`0.5–0.6`, `1/3`).
 
 | 35 | **The coarse-cell bound: the homomorphism removed** (M38): `Coset.seven_labels_of_cell_constant` — for `1/2 < p < 1`, ANY colouring constant on the nearest-point cells of the triangular lattice at scale `p`, with **no algebraic relation between the labels**, gives the seven closed-shell addresses seven pairwise distinct labels; `seven_le_card_of_cell_constant` counts them; `cell_chromatic_eq_seven` pairs that with M37's witness at `p = 6/7`. The mechanism is a change of viewpoint rather than a new computation: the constraint graph's edge set on that window is exactly `Q ∈ {1,3,4}` (each condition `(1−p)² < p²Q < (1+p)²`, radical-free), so the closed first shell is a 7-clique and M37's Loeschian gap is replaced by the clique. The sweep was refactored into its honest form — `exists_unit_pair`, which PRODUCES the unit pair from two addresses and a direction with no mention of colour, and of which M37's is an instance. Window confirmed exactly `(1/2, 1)` with the planted red firing at and below `1/2` (`build/m38-design.py`, 5,997 rows agreeing between the radical and radical-free forms). | `Coset.lean`, `build/m38-design.py`, `plans/M38-cell-bound.md` §R | M38 |
 
-| 36 | **The scale is not monotone, and the classical one is a local optimum** (M39): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
+| 37 | **The gap atlas: below the classical window the cell family forces seven-plus without cliques** (M40, tools-side on exact arithmetic; kernel promotion stubbed as M42): the family `G(p)` is **one fixed graph per band** between rational `T²` thresholds keyed by point-group offset class (distinct classes share a norm with different thresholds, first at norm 49 — planted check green); the corrected exhaustive census — M39's was box- and cap-clipped — gives **χ = 9 exactly** on `p ∈ (1/2, 0.6547)` (the sheared 3×3 block 9-clique + k = 9 SAT), **χ = 12 exactly** on `p ∈ (0.4804, 1/2)` (the 12-point trapezoid clique + the index-12 coset colouring), and the **M = 4 scaled shell** as a real 7-clique band on `(0.3273, 1/3)` (M39 §0e's exhaustion claim was derived with the inscribed-disc sufficient window — a G21 instance); **every band down to `p = 0.2236` is ≥ 7 outright** (ball refutations, no periodicity) while ω collapses to 3–5: **G\*** (`(0.4330, 0.4804)`, norms {3,4,7,9}) has ω = 4, χ = 7, and a **23-vertex 1-minimal core** with every necessity witness held; the **deep pocket** (`(1/3, 0.3464)`) has ω = 4, **χ ≥ 8 outright** (91-vertex k = 7 refusal; 53-vertex core); the `p = 1/6` flank bands have **ω = 3 with χ = 7** (gap FOUR, re-proven without the boundary class — every integer T is a threshold scale, so M39's integer rows were closed-criterion graphs); **no coset seven-colouring exists on G\* or the 1/6/1/7 bands** (all eight index-7 sublattices contain an edge, explicit witnesses) — the witnesses found are non-uniform with trivial stabilizers; certified Hoffman brackets collapse to ≈ 4.1 at the gap bands (truth 7–8) and α(G\*, 12×12) = 21 gives χ_f ≤ 48/7 — the seven-forcing is integrality-carried; **the sharpest open scale is `p = 1/7`**. Instruments banked: class-keyed band decomposition, exhaustive clique search, batched 1-minimal shrink with necessity certificates, colouring-anatomy (stabilizer/coset tests), exact torus α (Sinz counter), certified spectral brackets. Explorer `build/m40-spectrum.html`. | `tools/celllat.py` (M40 suite), `build/m40-chiomega.json`, `plans/M40-chi-omega-hunt.md` §R | M40 |
+
+| 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
 
@@ -580,27 +616,36 @@ close's recommendation; Kooshi picks.)*
 chromatic number of the plane is exactly seven, so no lattice colouring can
 witness χ ≤ 6; G22 minted.)*
 
-1. **The certified union** (`plans/M35-certified-union.md`) — first now, and
-   doubly motivated: it is the only designed 5-chromatic object we hold, and
-   M35's sweep (G19) says any future k = 5 Act One needs 5-TIGHT fabric that
-   does not exist yet, so growing and composing 5-chromatic objects is the
-   only known route to it. The √23 field-tower price is measured and stands.
-2. **The avoider hunt with a corrected instrument** — M36 re-asked M35's
-   phase-2 questions under the exact check and got 1,394 refusals at k = 6 and
-   1,394 at k = 5, so nothing changed at the top of the ladder; but G21 says
-   every other registered sweep in this repository should be re-read for the
-   same defect. The cheap concrete item: the class-avoidance instrument's
-   acceptance tests (`tools/rigidity.py`, `tools/mechanism.py`) are SAT
-   queries, exact by construction — audit and confirm, or find the second
-   instance of the M35 pattern. Small, and it either banks a clean bill or
-   pays for itself immediately.
-3. **The certification programme** — standing fallback unchanged
-   (`plans/M33-witness-closure.md`); the union is its second, far
-   smaller candidate object.
-4. **Richer cell families, if an avoider ever needs them** — the hexagon
-   module `plans/M36-seven-coloring.md` §H is written, priced, and now
-   UNNEEDED for the 7. It stays as the fallback for any future find whose
-   colouring is not expressible on bricks; nothing else motivates it.
+*(M40 CLOSED 2026-08-12, on Kooshi's "look for anything suspiciously organized" and
+his go for subplanning + implementation. The re-rank below reflects his stated aim —
+back into the push to 6, from either direction — with M41 stubbed at his direction.)*
+
+1. **M41 — the k = 5 gradient hunt** (`plans/M41-k5-gradient.md`, stubbed in
+   detail) — the from-below 6-push: the M34 union's k = 5 anatomy, crystal
+   tilings of the 1581 by its own fabric vectors (wholesale vertex sharing —
+   the designed-forcer thread's registered reopening condition is MET),
+   gen-2 closure at k = 5, the Galois orbit of the 1581 (the half-spindle
+   group is Galois-stable; 15 conjugate witnesses, self-congruent or free),
+   and the forced-equivariance sweep. Jackpot clause registered: any k = 5
+   UNSAT on a union is χ(ℝ²) ≥ 6.
+2. **M42 — kernel promotion of the gap atlas** (`plans/M42-gap-kernel.md`,
+   stubbed) — small, high-certainty Lean: the 12-clique window theorem
+   (χ ≥ 12 for cell-constant colourings just below p = 1/2), the M = 4
+   shell window, the coset-impossibility decide (no index-7 coset
+   seven-colouring on G\*), and χ(G\*) = 7 / the 23-core via the M06-chain
+   certificate shape.
+3. **The fine-tail campaign** — the from-above 6-push at the named open
+   scales: p = 1/7 first (bigger balls/tori; any six-colouring IS
+   χ(ℝ²) ≤ 6), then the unprobed tail below p = 0.2236; the interval-
+   distance bridge (χ_[1−ε,1+ε] ≥ χ(G(p)) at ε = 2p/√3) priced against
+   the Exoo literature before any novelty claim.
+4. **The certified union** (`plans/M35-certified-union.md`) — parked again:
+   consolidation with bounded novelty; reopens on an M41 find or the
+   write-up trigger's "maybe" clause.
+5. **The certification programme** — standing fallback unchanged
+   (`plans/M33-witness-closure.md`).
+6. **Richer cell families / the instrument audit** — unchanged, parked; the
+   hexagon module stays priced and unneeded.
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)
 
@@ -1049,6 +1094,29 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   open. Falsifier: a six-colouring of any `G(p)`, which would be `χ(ℝ²) ≤ 6`;
   short of that, a patch-based refutation would upgrade the period-bounded
   refusals into statements about `χ(G(p))` itself.*
+* **G24 — The gap law: below the classical window, seven is forced without cliques,
+  and the family is a finite mirror of the plane's own pathology.** (M40.) On every
+  band from the classical window down to `p = 0.2236`, plus the `1/6` flanks, the cell
+  family needs ≥ 7 colours OUTRIGHT (ball refutations, no periodicity) — while ω
+  collapses to 3–5, the certified Hoffman/spectral bound collapses to ≈ 4.1, and the
+  fractional relaxation stalls at 48/7 on G\*. The forcing is **integrality, carried by
+  small near-symmetric cores** (23 vertices at G\*; 53 at the deep pocket; broken-rot6
+  orbit structure — the de Grey 122-core motif reappearing in a different universe).
+  And the classical mechanism is provably absent: **no index-7 sublattice coset
+  colouring exists below the window** — the sevens there are non-homomorphic, with
+  non-uniform classes and trivial stabilizers. So `ω = 3, all relaxations low, χ = 7`
+  is not a peculiarity of the continuum plane: the discrete cell family reproduces it
+  at every fine scale, in objects the kernel can check whole. **[measured: exact
+  arithmetic + exhaustive cliques + SAT; kernel promotion stubbed as M42]**
+  *Consequences: the from-above six-hunt now has a concrete, ranked target list — the
+  open scales start at `p = 1/7` (ω = 3, six undecided to period 36, balls to 225
+  six-colour) and everything below `p = 0.2236` except the 1/6 flanks; and the
+  23-vertex G\* core is the smallest known carrier of a "χ > ω + 2" forcing in this
+  family — the right first object for a mechanism theory of clique-free forcing, the
+  same question the plane's χ ≥ 5 poses at k = 4. Falsifiers: a six-colouring of any
+  band (χ(ℝ²) ≤ 6, the standing jackpot clause); or a relaxation that DOES see the
+  gap — any polynomial certificate matching the ball refutations would be a new
+  lower-bound instrument for the whole programme.*
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this
