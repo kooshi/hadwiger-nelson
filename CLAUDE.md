@@ -24,6 +24,12 @@ graph that is not 4-colourable. Our ratchet:
   nearly free. It exists as our foundation, not our product.
 - **C. The search instrument** — the infrastructure from B turned outward: shrinking, criticality,
   fractional bounds, fans, the narrowing sweep, the growth-family hunt. ✅ Built through M17.
+- **The upper end, for completeness** — χ(ℝ²) ≤ 7, the classical hexagonal/brick
+  colouring, kernel-certified at M36; with rung B the repository holds the whole
+  classical interval **5 ≤ χ(ℝ²) ≤ 7** on the standard three axioms. Not new
+  mathematics — it exists because the certificate machinery is the promotion path
+  for any future periodic avoider, and an avoider at five colours IS the open
+  upper-bound problem.
 - **D. χ(ℝ²) ≥ 6** — the hunt. May not exist; may be astronomically large. Every rung below it
   pays regardless.
 
@@ -54,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M35, 2026-08-11.**
+**Last updated: M36, 2026-08-11.**
 
 ### Where the problem stands
 
@@ -353,6 +359,51 @@ future k ≤ 6 avoider find instantiates same-day). All on axioms exactly
 k = 5 re-encode, the clique-triviality guard, the k-threaded sweep
 machinery, the prober with its catastrophe banner.
 
+M36 closed the classical interval, and the shape of the milestone was decided
+before any instrument ran. The registered stub had planned a hexagon module —
+a new cell family, a rounding function, a ℚ(√3) ordered layer, ~300 lines —
+because M35 had measured that no BRICK colouring passes the certificate at
+seven colours. Working the arithmetic by hand for §0a found the real
+obstruction, and it was not the tile family: it was **one comparison inside
+M35's own certificate**. Cells are half-open, so the realizable difference
+vectors at an offset form an OPEN box; a realized squared distance is
+therefore strictly below the interval's upper end and strictly above its lower
+end whenever that end is positive, and a sound certificate may accept an
+offset whose interval merely TOUCHES a guard. M35's check demanded strict
+separation — sound, but one comparison stronger than the truth. And the
+classical brick seven-colouring is **boundary-tight by force**: the
+self-offset demands `w² + h² ≤ 1` and the coset offset (1,2) — translation
+exactly (2w, 2h), closed gap exactly (w, h) — demands `w² + h² ≥ 1`, so the
+cell diagonal is EXACTLY the unit distance and no strictly-separating
+certificate can accept any member. M35 §0j had additionally filtered its grid
+by `diag² < 1`, deleting the solutions a second time. Relaxing one `≤` (and
+parsing guard positivity into the certificate, without which `guards = [0]`
+would make the relaxation unsound) landed **`χ(ℝ²) ≤ 7` kernel-checked** on a
+`7 × 7` table of `4/5 × 3/5` half-open cells sheared `2/5` — the 3–4–5
+triangle — coloured by the norm-7 coset map `(i + 3j) mod 7`, whose kernel is
+ζ₆-stable hence the ideal `(−3 + ζ₆)`, so norm multiplicativity separates the
+colour classes in two lines. **The classical interval `5 ≤ χ(ℝ²) ≤ 7` is now
+kernel-checked at both ends** (`Instances/Interval.lean`), on axioms exactly
+`[propext, Classical.choice, Quot.sound]`; neither end is new mathematics and
+the module says so — ours is the certificate, the boundary-tight soundness
+that makes any zero-margin colouring certifiable at all, and the correction of
+a measurement's reading. The instruments agreed at every point: the design
+script's offset census found 0 straddles with the tight rows exactly where
+predicted, 3.8M exact unit-distance pairs found no monochromatic pair, the
+prober produced its **first `k = 7` SAT ever** (the certified row as a positive
+control, plus a second solution at shear `w/3` that the search found and the
+kernel then accepted — the promotion pipe exercised end to end), and the
+`k = 4` mass red held in all 298 rows, which is now the empirical guard on the
+relaxation itself. The re-asked questions: `k = 6` refused in 1,394 rows and
+`k = 5` in 1,394 — no brick colouring of the plane below seven at any probed
+shape. Two findings beyond the registration: the certificate passes **exactly
+at the two ideal coefficients** `c = 3` and `c = 5` (the roots of `x² − x + 1`
+in `𝔽₇`) and never at the other five, so a SAT search knowing nothing about
+`ℤ[ζ₆]` reproduced the algebra; and boundary-tightness is **not** a property of
+the cell — a `k = 8` rectangle find sits tight at interior offsets `(0, ±1)`
+and `(±2, ±3)` while its own diagonal is slack, which refuted half of the
+registered §0j prediction and widened where the correction reaches.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -392,6 +443,8 @@ machinery, the prober with its catastrophe banner.
 | 32 | **The two-sided 6-programme's first pass** (M35): kernel side — `mono_pair_of_clique` (the counting face of the M34 bridge: a (k+1)-clique of the augmented graph forces a mono class pair with NO refutation certificate anywhere); the **hex-shell pigeonhole** (`HexShell.lean`: the closed first shell of the triangular lattice — a point and its six unit neighbours — is a K7 of the {1,√3,2}-distance graph; `hexShell_pigeonhole` k-generic below seven; plane corollaries at five and six colours: **every proper ≤ 6-colouring of the plane has a mono pair at √3 or 2, i.e. χ(ℝ²;{1,√3,2}) ≥ 7** — compulsion folklore, formalization ours); the **brick certificate machinery** (`Brick.lean`, zero sorry: `Brick.sound` — closed-hull offset-window soundness over the whole plane, window computed inside the check; `colorable` demanding properness structurally; `avoids` with the corrected avoider semantics; `colorQ` the computable twin) and **`plane_colorable_nine`: χ(ℝ²) ≤ 9 kernel-checked** — the first certified upper bound, the interval [5, 9] now kernel-side at both ends, plus a certified 9-colouring avoiding √(3/2) (`Brick.avoids` live). Tools-side, controls red/green throughout: the **k = 5 class sweep, all-clean** (52/4/0 over 7 objects × 8 classes — the first class-level k = 5 measurement anywhere; fans at min-cover 2; the sweep-halt rule never armed); the bare lattice clean at k = 4 d2 (the §0a HNF coset obstruction — no index-4 coset colouring avoids {1,2}, three of five index-5 sublattices avoid {1,2} while none avoids {1,√3} — does not bind free colourings); the **row-brick interlock finding** (~2,800 rows: no 7- or 8-colouring at any probed shape — squares, long bricks, fine slabs; threshold exactly 9; pixel squares capped undecided); instruments banked (3-bit re-encode, clique-triviality guard, k-threading, the prober + catastrophe banner). | `Pigeonhole.lean` (`mono_pair_of_clique`), `Instances/HexShell.lean`, `Brick.lean`, `Instances/Nine.lean`, `build/m35-*.json`, `plans/M35-k5-transfer.md` §R | M35 |
 | 30 | **The mechanism hunt's first harvest** (tools-side, every claim double-encoded or theorem-closed): (a) the criticality factorization A1 (χ(G) ≥ k+1 at a vertex ⟺ the fan on its circle, when G−v is k-colourable) — derived a priori, validated at three centres, and used to CLOSE a capped solver row by mathematics; (b) **the d = 2 pigeonhole**: avoid-all-mono-d2-pairs is UNSAT on the certified hexagram chunk at B = 2, on the bare de Grey fabric and the 1581 at the IDENTICAL onset 2 − √33/9, and on Heule-510 at the glue shell 5/3 — fabric-borne, depth-switched (clean at B ≤ 1), at exactly the ρ₁₅ spindle distance; Act One's 1-minimal carrier = **122 vertices / 12 shells** with per-member necessity witnesses; (c) **the 3-cover core**: 36-circle + **13 interior points** on (7−√33)/6 ∪ {1/3} ∪ (9−√33)/6 delivers min-cover 3 at Heule-510's centre; (d) the √3-pair pigeonhole exists ONLY in the assembled 1581 (onset at the √21 shell — cross-system material), not in the fabric, not in shrunk 510 — and its 1-minimal core is **NINE vertices**: two √3-triangles with their unit circumcentres (M18's `exists_unit_triangle_iff` object), a hub, and one rim–rim edge — hand-proved in two cases, `decide`-scale for M34; (e) the class-avoidance instrument (arity-generic mono-avoidance, base-SAT guard as control flow, five honest verdicts, first-occurrence breaking, binary re-encode promotion ladder, 1-minimal shrink engine) with the 791/M20-skeleton/planted controls all red/green. | `tools/mechanism.py`, `tools/rigidity.py` (class_avoid), `build/m33-*.json`, the explorer's M33 pane, `plans/M33-mechanism-hunt.md` §R | M33 |
 
+| 33 | **The classical interval, kernel-checked at both ends** (M36): the **boundary-tight sharpening** — half-open cells make the realizable difference set an OPEN box, so a realized squared distance is strictly below `hiAt` and strictly above a positive `loAt`; `Brick.check` accepts `q ≤ loAt ∨ hiAt ≤ q` (the exact miss condition, not a sufficient one) and PARSES guard positivity in (`check_pos`), without which `guards = [0]` would be accepted and `sound` would deny a point its own colour. Consumers got simpler, not harder: `sound` keeps its signature and `avoids` LOSES its nonnegativity argument. **`plane_colorable_seven` / `chromaticNumber_plane_le_seven`: χ(ℝ²) ≤ 7** on a 7 × 7 torus of `4/5 × 3/5` half-open cells, shear `2/5` — the 3–4–5 triangle, cell diagonal exactly 1 — coloured `(i + 3j) mod 7`, the norm-7 ideal `(−3 + ζ₆)` of ℤ[ζ₆] (ζ₆-stable kernel ⟹ ideal ⟹ same-colour centres separated by norm multiplicativity, no lattice census); and **`chromaticNumber_plane_interval`: 5 ≤ χ(ℝ²) ≤ 7**, the classical statement of Hadwiger–Nelson, both ends kernel-side on axioms exactly the standard three. The colouring is classical (Isbell; half-open brick variants folklore) and no novelty is claimed for it — ours is the certificate, the sharpening, and the correction. Controls: two boundary-tightness pins (`hiAt 0 0 = 1`, `loAt 1 2 = 1`), six mutations refusing (two shapes, shear 0, two non-ideal coefficients, the flat table), the degenerate guard refused, seven `colorQ` samples. Tools-side, every claim on a third code path: the design script's census (0 straddles, tight rows exactly as predicted, 3.8M exact unit pairs with no mono pair), the prober's **first k = 7 SAT** (control + a searched second solution at shear `w/3`, promoted through the kernel), the `k = 4` mass red held in 298 rows, `k = 6` and `k = 5` refused in 1,394 rows each, and the certificate passing **exactly at the two ideal coefficients** `c ∈ {3, 5}` across a 7 × 5 census. | `Brick.lean` (`check_pos`, `sq_lt_of_abs_lt`/`lt_sq_of_abs_lt`/`le_sq_of_abs_lt`, `sound`), `Instances/Seven.lean`, `Instances/Interval.lean`, `build/m36-*.json`, `plans/M36-seven-coloring.md` §R | M36 |
+
 ### Paths forward, ranked
 
 *Rewritten 2026-08-09 at the field-jump decision. The construction ladder
@@ -419,27 +472,34 @@ class compulsion exists on today's objects, and the upper-bound machine is
 built with χ ≤ 9 as its first certified instance. The ranking below is the
 close's recommendation; Kooshi picks.)*
 
-1. **M36 — the hexagonal certificate: χ(ℝ²) ≤ 7 in the kernel** (CHOSEN
-   by Kooshi 2026-08-11; `plans/M36-seven-coloring.md` carries the full
-   shape, including the close-day derivation that shrinks it: hexagon
-   cells make the box-interval machinery unnecessary — the norm-7 coset
-   kernel is an IDEAL, so norm multiplicativity gives same-colour centre
-   separation in two lines, the crude triangle-inequality bound clears
-   with margin ≈ 0.13 at D = 7/8, and the only geometric obligation left
-   is the hex rounding's circumradius bound. Lands the classical interval
-   **5 ≤ χ(ℝ²) ≤ 7 kernel-checked end to end**; every future avoider
-   candidate inherits the richer cell family. Cheap first move recorded:
-   one high-cap pixel-brick retry that would collapse the milestone to a
-   Brick instance if it ever SATs.)
-2. **The certified union, un-demoted to second**
-   (`plans/M35-certified-union.md`): now doubly motivated — it is the only
-   designed 5-chromatic object we hold, and M35's sweep says any future
-   k = 5 Act One needs 5-TIGHT fabric that does not exist yet; growing
-   and composing 5-chromatic objects is the only known route to it. The
-   √23 field-tower price is measured and stands.
+*(M36 CLOSED 2026-08-11 — χ(ℝ²) ≤ 7 landed in the kernel, and NOT by the
+route the stub registered: the hexagon module was superseded before it was
+written by a one-comparison sharpening of M35's own brick certificate. The
+classical interval 5 ≤ χ(ℝ²) ≤ 7 is now kernel-checked at both ends. G20 is
+demoted with its refutation recorded; G21 is minted. The ranking below is the
+close's recommendation; Kooshi picks.)*
+
+1. **The certified union** (`plans/M35-certified-union.md`) — first now, and
+   doubly motivated: it is the only designed 5-chromatic object we hold, and
+   M35's sweep (G19) says any future k = 5 Act One needs 5-TIGHT fabric that
+   does not exist yet, so growing and composing 5-chromatic objects is the
+   only known route to it. The √23 field-tower price is measured and stands.
+2. **The avoider hunt with a corrected instrument** — M36 re-asked M35's
+   phase-2 questions under the exact check and got 1,394 refusals at k = 6 and
+   1,394 at k = 5, so nothing changed at the top of the ladder; but G21 says
+   every other registered sweep in this repository should be re-read for the
+   same defect. The cheap concrete item: the class-avoidance instrument's
+   acceptance tests (`tools/rigidity.py`, `tools/mechanism.py`) are SAT
+   queries, exact by construction — audit and confirm, or find the second
+   instance of the M35 pattern. Small, and it either banks a clean bill or
+   pays for itself immediately.
 3. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`); the union is its second, far
    smaller candidate object.
+4. **Richer cell families, if an avoider ever needs them** — the hexagon
+   module `plans/M36-seven-coloring.md` §H is written, priced, and now
+   UNNEEDED for the 7. It stays as the fallback for any future find whose
+   colouring is not expressible on bricks; nothing else motivates it.
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)
 
@@ -815,19 +875,49 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   instrument is standing and k-generic]** *Falsifier: any object whose
   k = 5 class sweep fires — the sweep-halt rule is armed in the campaign
   driver.*
-* **G20 — Interlock is load-bearing for χ ≤ 7.** Row-aligned brick
-  colourings (any table, any shear, cells from coarse squares through
-  long bricks to fine slabs) cannot 7- or 8-colour the plane at any
-  probed shape — ~2,800 registered rows, mass red control green
-  throughout — while 9 is achieved trivially (the 3 × 3 rainbow, now
-  kernel-checked). The hexagonal 7-colouring's tiles overlap in y;
-  strict rows cannot express that, and the measurement says the
-  interlock is not a convenience but the mechanism. **[measured:
-  build/m35-periodic.json; the pixel-resolution rows (32 × 32 at 1/8)
-  capped undecided — the one open cell of the family]** *Falsifier: a
-  fine-pixel row-brick 7- or 8-colouring found at higher cap — the probe
-  is one CLI call; any find kernel-certifies same-day through
-  `Brick.check`.*
+* **G20 — DEMOTED at M36; what it measured survives, what it read was
+  false.** As minted (M35): row-aligned brick colourings cannot 7- or
+  8-colour the plane at any probed shape — ~2,800 registered rows, mass
+  red green throughout — so interlock is load-bearing and the hexagonal
+  tiles' overlap in y is the mechanism. **The rows stand exactly as
+  measured. The reading is refuted**: `Instances/Seven.lean` is a
+  row-aligned brick 7-colouring of the plane, kernel-checked (M36). The
+  refusals were produced by two coupled choices, each registered in
+  advance and each reasonable at the time — a certificate demanding
+  STRICT separation (`q < lo ∨ hi < q`), which is one comparison stronger
+  than soundness needs for half-open cells, and a grid filtered to
+  `diag² < 1`, which is exactly the condition that strict rule needed.
+  The brick seven-colouring is boundary-tight by force (cell diagonal
+  exactly 1), so it was excluded twice over. Neither choice was a bug and
+  the arithmetic was never wrong; the inference from "our test refused"
+  to "the family cannot" was the error. **[measured, reading refuted:
+  build/m36-periodic.json — the same family, corrected check, k = 7 SAT
+  including the kernel-certified row]** *What survives as fact: no brick
+  colouring passes a POSITIVE-MARGIN certificate at seven, because none
+  exists — every member of the family is boundary-tight. And the family
+  still cannot reach six: k = 6 refused in 1,394 rows under the corrected
+  check.*
+* **G21 — A search run against a sufficient-but-not-necessary check
+  measures the check, not the world.** The general form of G20's death,
+  and the reason it is minted rather than left as a footnote: this
+  project runs registered searches constantly, and every one of them
+  inherits the sharpness of its acceptance criterion. When a sweep
+  refuses, the first question is not "what does this say about the
+  objects" but "is my acceptance test the exact condition, or a
+  sufficient one?" — because a conservative test converts a *finding*
+  into a *measurement of my own instrument*, silently and with the
+  registered-prediction discipline fully satisfied. M35's phase 2 was
+  registered, controlled, mass-red-guarded, honestly reported, and its
+  negative measured a comparison operator. **[measured: the M35 → M36
+  pair, where the identical grid returns different verdicts under a
+  criterion changed from sufficient to exact]** *Consequences already
+  applied: `tools/periodic.py`'s schema line now states which caveat
+  survives (the shape grid) and which is gone (the certificate); the
+  standing rule for every future sweep is to state, at registration,
+  whether its acceptance test is necessary as well as sufficient — and
+  if it is only sufficient, to say what a refusal therefore cannot mean.
+  Falsifier: none needed — this is a methodological invariant, and it
+  fails only by being ignored.*
 
 ## Whose work this is
 

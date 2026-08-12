@@ -768,7 +768,11 @@ polygon cells) is priced at close.
   distance-2 pairs at both probed radii (r² ≤ 27 and 75): the C4 coset
   obstruction does NOT bind free colourings, and G16's d = 2 pigeonhole is
   confirmed fabric-borne (the non-lattice seam points carry it).
-* **P5 MISSED as registered, and the miss was the finding** — the square
+* **P5 MISSED as registered — and at M36 the miss turned out to be the
+  INSTRUMENT, not the family** (the paragraph below is left exactly as
+  written for the record; its numbers stand, its conclusion does not — the
+  refusals were produced by a strict acceptance test plus a `diag² < 1`
+  filter, and the seven-colouring lives in this very family) — the square
   grid held no k = 7 brick colouring, §0j found the honest gap (squares
   cannot express long-brick patterns), the rectangular ladders refused
   through k = 8 (2,796 rows), §0k's fine slabs refused k = 7 in seconds
@@ -818,9 +822,13 @@ polygon cells) is priced at close.
   undecided at the 900 s cap — neither a find nor a refusal; the χ ≤ 7 or
   ≤ 8 brick question at pixel resolution is open, and the polygon-cell
   route is the priced alternative.
-* χ(ℝ²) ≤ 7 in the kernel — needs convex polygon cells (hexagons); the
-  Brick architecture extends (slab witnesses for min-distance, vertex
-  decides for max), priced as an M36 candidate, ~one module + one instance.
+* χ(ℝ²) ≤ 7 in the kernel — **SUPERSEDED at M36, and this entry was wrong
+  about the reason.** It needs no polygon cells at all: the brick family
+  contains a seven-colouring (`4/5 × 3/5` cells, shear `2/5`, cell diagonal
+  exactly 1), and phase 2 could not see it because the certificate demanded
+  STRICT separation and the §0j grid was filtered to `diag² < 1`. Landed at
+  M36 by relaxing one comparison. See `plans/M36-seven-coloring.md` §0a C1–C3
+  and CLAUDE.md § Grokkings G20 (demoted) / G21.
 * The k = 5 sweep covers the NAMED objects and classes only; k = 5 class
   compulsions on objects nobody has built (5-tight fabric at scale) are
   exactly what the sweep says do not yet exist to be probed.

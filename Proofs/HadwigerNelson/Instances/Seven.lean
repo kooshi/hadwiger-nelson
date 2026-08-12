@@ -125,6 +125,18 @@ mutated and seen to refuse. -/
 -- the shear is load-bearing: unstaggered rows are not the hexagonal lattice
 #guard (cosetBrick 3 (4/5) (3/5) 0 (by norm_num) (by norm_num)).check [1] = false
 
+-- the CONJUGATE coset map certifies too, at this shear and at `w/3` — the second root of
+-- `x² − x + 1` in `𝔽₇`, so the docstring's algebra is pinned and not merely asserted. The
+-- `w/3` row is also the pipeline end to end: `tools/periodic.py` FOUND that table by SAT,
+-- `build/m36-design.py` re-derived it, and the kernel accepts it here.
+#guard (cosetBrick 5 (4/5) (3/5) (2/5) (by norm_num) (by norm_num)).check [1] = true
+#guard (cosetBrick 5 (4/5) (3/5) (4/15) (by norm_num) (by norm_num)).check [1] = true
+
+-- and the coefficients that are NOT ideal fail at every shear tried (build/m36-design.py
+-- reports the full 7 × 5 census; c = 3 and c = 5 are the only ones that ever pass)
+#guard (cosetBrick 4 (4/5) (3/5) (2/5) (by norm_num) (by norm_num)).check [1] = false
+#guard (cosetBrick 6 (4/5) (3/5) (2/5) (by norm_num) (by norm_num)).check [1] = false
+
 -- the adversarial member: one colour everywhere must fail
 #guard ({ sevenBrick with table := fun _ _ => 0 } : Brick 7).check [1] = false
 

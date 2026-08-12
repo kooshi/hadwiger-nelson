@@ -573,3 +573,68 @@ sweeps refused:
 * **The M35 artifact reproduced, in the same script**: the same object fails
   M35's strict check. The refusal that produced G20 is now a controlled
   observation rather than an inference.
+* **P4 CONFIRMED** — the gate is green end to end: build OK, zero `sorry`,
+  `lake lint` silent, and the axiom audit reads **453 clean with the 5 standing
+  M03 purchases unchanged**. `plane_colorable_seven`,
+  `chromaticNumber_plane_le_seven` and `chromaticNumber_plane_interval` all
+  depend on axioms exactly `[propext, Classical.choice, Quot.sound]`.
+* **P5, P9, P11 CONFIRMED** — the prober mirrored the boundary-tight rule and
+  produced **its first `k = 7` SAT ever**: the positive control (the row the
+  kernel already certifies) reads SAT, and the tight ladder found a second
+  solution at shear `w/3`. Both models were validated by the prober's
+  independent formula AND re-derived through the design script's third code
+  path, each with a fresh 1,500-point refutation hunt finding no monochromatic
+  unit pair.
+* **P6, P10 CONFIRMED — the soundness guard held everywhere.** Every `k = 4`
+  row of every campaign refused (298 rows); the catastrophe banner never fired.
+  This is the empirical guard on the relaxation itself: a single `k = 4` SAT
+  would have indicted `Instances/Seven.lean`.
+* **P7, P13 CONFIRMED (the expected branch)** — `k = 6` refused in 1,394 rows
+  and `k = 5` in 1,394 rows, across all three campaigns and every class guard.
+  No brick colouring of the plane at six or five colours at any probed shape;
+  reported as shape-bounded ceilings, never as impossibility.
+* **P12 SPLIT — half confirmed, half REFUTED, and the refutation is the
+  finding.** The re-asked SQUARE campaign refused in all 672 rows, exactly as
+  derived (no rational square cell can be boundary-tight: `w = h` on
+  `w² + h² = 1` forces `1/√2`). The re-asked RECTANGLE campaign did NOT: it
+  found a `k = 8` colouring at `12 × 8 @ 3/5 × 2/5`, shear `0` — a shape whose
+  cell diagonal is a slack `√(13/25)`. Its tight offsets are `(0, ±1)` at their
+  upper end and `(±2, ±3)` at their lower end: **boundary-tightness is not a
+  property of the cell, it can sit at any interior offset the rational geometry
+  lands on**, and freeing those offsets flips verdicts at shapes my §0j
+  derivation had written off. The derivation was too narrow, not wrong; the
+  campaign caught it.
+* **An unregistered find, and the sharpest cross-validation of the milestone's
+  algebra.** The certificate was run over every coset coefficient × five shears
+  at the `4/5 × 3/5` cell: it **passes exactly at `c = 3` and `c = 5` and never
+  at the other five**, matching the ideal test (`ζ₆`-stability, minimum norm 7)
+  coefficient for coefficient. The SAT search, which knows nothing about
+  `ℤ[ζ₆]`, independently rediscovered the conjugate map at shear `w/3`. Both
+  conjugates are now pinned in the kernel (`Instances/Seven.lean`'s controls),
+  so the docstring's algebra is checked rather than asserted — and the `w/3` row
+  is the search → design script → kernel pipeline exercised end to end on a
+  table nobody wrote by hand.
+* **Also measured**: `k = 7` with ANY second avoidance guard (`√3`, `2`,
+  `4/√3`, `√7`) refuses at every boundary-tight shape — there is no
+  two-distance avoider in the brick family at seven colours, which is the
+  consumer surface `Brick.avoids` exists for and which `Instances/Nine.lean`
+  still demonstrates at nine.
+* **P8 CONFIRMED** — subplanning through close inside one desktop day, with no
+  SAT anywhere on the headline's path. Artifact: `build/m36-periodic.json`,
+  4,281 rows.
+
+## What was NOT done (honesty ledger)
+
+* **The boundary-tight forcing is derived only in the design regime.** `§0a C2`
+  proves `w² + h² = 1` is forced when the `|Δb| = 1` offsets are separated
+  (`w ≥ 2/3`). The small-cell branch — many offsets excluded from above rather
+  than below — is unclassified; the 4,281 refusals are the empirical statement,
+  not a theorem.
+* **The exactness claim is reasoning, not a theorem.** That the relaxed
+  condition is precisely the miss condition rests on the open box's image being
+  the whole interval; the kernel checks the soundness direction only, and the
+  docstring says so.
+* The `k = 8` rectangle find is weaker than the `7` and was not promoted.
+* The coefficient × shear census covers five shears at ONE cell shape — a sharp
+  cross-check, not a classification of the family.
+* `lean4checker` replay — deferred per standing policy (publication gate).
