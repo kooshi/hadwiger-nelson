@@ -94,12 +94,45 @@ possibly with the two-act decomposition as a named intermediate).
   `3 ≤ Q ≤ 9` (uniform nlinarith) — do not case per norm; `first | …` does NOT
   backtrack failures inside nested term-mode `by` blocks — give rcases branches the
   SAME hypothesis name instead (`rcases hQ with h1 | h | h | h | h`).
-* **REMAINING for the M42 close**: item 4 — χ(G\*) ≥ 7 via the 23-vertex core
-  (M40 artifact `build/m40-chiomega.json` cores[0]; edges = pairs at norms {3,4,7,9};
-  refusal at k = 6 by pinned-clique decide, M05 LRAT fallback registered; plane
-  corollary in cell-constant vocabulary) — then the FULL `scripts/build.sh` gate
-  (Coset.lean's dependents rebuild — Instances/ imports it), linters, the Frontier
-  close with ledger row + shapes re-rank, and the explorer/artifact update if wanted.
+* **Item 4 LANDED (same day, laptop): χ(G\*) ≥ 7 via the 23-core, kernel-checked.**
+  P4's decide half died honestly and its fallback fired exactly as registered: the
+  staged-decide prototype (DFS-shaped nested ∀, only 5,391 search nodes with the clique
+  pinned) failed on Lean's instance synthesis — a unification failure inside the
+  Decidable resolvers at ≥ 4 quantifier depth, structure-dependent and not budget-fixable
+  (maxSynthPendingDepth/maxSize/maxRecDepth all tried) — so the refusal went through the
+  M05 LRAT pipeline, which cost MINUTES: pinned CNF 885 clauses (the pin worth 160× in
+  LRAT lines: 240 vs 38,528 unpinned — the M34 palette measurement, re-measured), 219
+  derived clauses after backward trim, 2 segments, `emit_mask.py --colours 6` verbatim
+  (the k-generic chain's second non-4 instance after Mycielski's k = 5).
+* The shape that shipped (`Instances/Core23/`): **`Edges.lean` DERIVES the graph** — 23
+  addresses as data, edges computed by the norm-{3,4,7,9} filter (143, pinned), so the
+  refuted formula, the checked table, and the corollary's geometry all reduce to the
+  same 23 addresses and one definition; transcription of 143 pairs is not a failure mode.
+  `Core23.lean` assembles: `core23_not_colorable_six` (Gadget palette closure over the
+  4-clique ports — ofUnsat kills the rainbow pattern, six edge gadgets kill the rest),
+  **`core23_colorable_seven`** (the red control: a solver-found 7-colouring verified edge
+  by edge, seventh colour used — so χ(core) = 7 exactly, kernel side, ω = 4), and
+  **`Coset.seven_le_card_gap`** — the plane corollary, fourth member of the window
+  family: any cell-constant colouring on `3/16 < p² < 3/13` needs ≥ 7 colours, the count
+  routed through the core's refusal (no 7-rainbow exists — ω = 4) via
+  `Fintype.equivFin` + `Fin.castLE` into a 6-colouring the certificate refuses.
+* Bootstrap detail for reproduction: core Lean cannot close a `Fin 23` numeral match
+  (Mathlib's match support absent in the import-free Edges module) — the address table
+  lives over `ℕ` with the bound re-established at the `Fin` wrapper, the Mycielski
+  pattern. Emission is `scripts/Dimacs.lean::emitCore23` (permanent; a build/-local
+  bootstrap emitter with identical formula expression was used before the Proofs root
+  imported the new modules, then deleted).
+* Coset.lean's two pre-existing linter warnings (unused simp arg at `ideal7_min`,
+  `<;>` chain at `emb_surjective`) cleaned in passing — the gate demands silence.
+* **GATE (laptop, 2026-08-12): GREEN across the board.** `scripts/build.sh` OK
+  (MEMMAX=24G); zero `sorry`; `./scripts/axioms.sh` → 473 clean / 5 declared
+  purchases (historic Moser native rows), all eight M42 entries exactly
+  `[propext, Classical.choice, Quot.sound]`; `lake lint` silent;
+  `scripts/Dimacs.lean` re-emits `core23-6.cnf` byte-identical to the certificate's
+  source. Negative controls seen red: corrupted colour table refused by decide, wrong
+  pin pattern refuses the `simp only; rfl` bridge, clique gadgets alone leave exactly
+  1 survivor. **M42 CLOSED** — Frontier row 39, G24 promoted (forcing half), paths
+  re-ranked, `plans/M43-fine-tail.md` stubbed.
 
 # THE ORIGINAL STUB (pricing superseded by §0a above)
 

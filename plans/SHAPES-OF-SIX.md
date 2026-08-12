@@ -175,6 +175,22 @@ Shape D's autopsy is the cheapest place a counterexample could surface.
   anything that ever shows m1 structure). New matter minted: THREE non-congruent
   Galois witnesses and their dimers.
 
+* **2026-08-12, evening (M42 close).** The model organism is now KERNEL-GRADE: the
+  23-core is χ = 7 exactly at ω = 4 on the standard three axioms (ledger row 39) —
+  the first certified `χ ≥ ω + 3` object anywhere in the programme — and the coset
+  impossibility is a theorem, so "the sevens below the window are non-homomorphic" is
+  no longer a census claim. Consequences for the shapes: **Shape D hardens** — its
+  dictionary entry (shell counting survives the clique's death; the kills are
+  integrality) now has a kernel-checked exemplar, and any transplant of the
+  integrality mechanism to the plane's k = 5 rung starts from a certified object
+  rather than a measured one. The certificate TEMPLATE (derive edges from data + LRAT
+  at any k + Gadget palette closure, minutes end to end at core scale) is what the
+  fine-tail campaign (M43, stubbed) consumes on a refutation find, and what ANY shape's
+  finite witness would promote through. Ranking unchanged otherwise; the decisive asks
+  stand (Shape A: menus at interfaces; Shape B: gen-2/3 k = 5 at depth — desktop;
+  Shape C: equivariance wherever m1 structure ever appears; Shape D: the transplant
+  question — name the plane analogue of the cell family's integrality carrier).
+
 ## 4. What the two directions now do for each other (the alternation, sharpened)
 
 The from-above family is the hunt's **model organism**: finite, decidable,
@@ -185,7 +201,9 @@ the substrate question (what is 5-tight fabric?) that the model organism's mecha
 dictionary must eventually answer. Alternation is therefore not just risk-hedging:
 each side's next milestone consumes the other's last product. The schedule this
 implies: M41 (below: probes for Shapes A/B/C + the Shape-D autopsy as its phase 0)
-→ M42 (above: kernel promotion, hardening the lab) → the fine-tail campaign (above:
-p = 1/7, plus the mechanism dictionary aimed at it) → M43 (below: whichever shape
-survived M41, escalated) — strict alternation, shapes re-ranked at every close in
-THIS file.
+→ M42 (above: kernel promotion, hardening the lab) → M43 (above: the fine-tail
+campaign at p = 1/7, plus the mechanism dictionary aimed at it — numbered at the
+M42 close, `plans/M43-fine-tail.md`) → M44 (below: whichever shape survived M41,
+escalated) — the two above-turns run back-to-back because M42's certificate template
+is exactly what M43's refutation branch consumes; strict alternation resumes after.
+Shapes re-ranked at every close in THIS file.

@@ -772,6 +772,15 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms Coset.cell_chromatic_eq_seven
 #print axioms Coset.eight_le_card_of_cell_constant
 #print axioms Coset.seven_le_card_fine
+-- M42: the gap atlas, kernel side — the windows, the coset impossibility, the 23-core
+#print axioms Coset.seven_le_card_shell4
+#print axioms Coset.twelve_le_card_of_cell_constant
+#print axioms Coset.exists_kernel_vector
+#print axioms Coset.no_coset_seven_on_gap
+#print axioms core23_unsat
+#print axioms core23_not_colorable_six
+#print axioms core23_colorable_seven
+#print axioms Coset.seven_le_card_gap
 
 #eval IO.println "=== PURCHASED ==="
 

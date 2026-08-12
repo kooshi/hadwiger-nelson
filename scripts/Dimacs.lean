@@ -58,6 +58,18 @@ def emitMycielski : IO Unit := do
     (coloringCNF 5 Mycielski.size Mycielski.edges ++
       cubeCNF 5 Mycielski.size (pinCube Mycielski.ports (![0, 1] : Fin 2 → Fin 5)))
 
+/-- **The gap-core question** (M42): the G\* band's 23-address constraint core at **six** colours,
+with the 4-clique ports' colours named. The graph is *derived* in
+`Instances/Core23/Edges.lean` — 23 lattice addresses filtered by the band's norm set
+`{3, 4, 7, 9}` — so this formula, the clause table the kernel checks, and the plane corollary's
+geometry all reduce to the same 23 addresses and one definition. Refuting it is the kernel half
+of M40's headline: seven forced where the largest clique is four. -/
+def emitCore23 : IO Unit := do
+  IO.FS.createDirAll satDir
+  emitCnf "core23-6" "M42: coloringCNF 6 23 Core23.edges, ports 0 1 7 9 pinned to 0 1 2 3"
+    (coloringCNF 6 23 Core23.edges ++
+      cubeCNF 6 23 (pinCube Core23.ports (![0, 1, 2, 3] : Fin 4 → Fin 6)))
+
 /-- The whole emission: the monolithic instance for route B, then one file per cube for route C. -/
 def emitAll : IO Unit := do
   IO.FS.createDirAll satDir
@@ -70,3 +82,4 @@ def emitAll : IO Unit := do
 
 #eval emitAll
 #eval emitMycielski
+#eval emitCore23

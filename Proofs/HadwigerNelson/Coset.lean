@@ -701,7 +701,7 @@ theorem ideal7_min {d : ℤ × ℤ} (hd : d ≠ 0) (h : ideal7 d = 0) : 7 ≤ he
   have ha1 : -2 ≤ a := by nlinarith [sq_nonneg (a + 2 * b)]
   have ha2 : a ≤ 2 := by nlinarith [sq_nonneg (a + 2 * b)]
   revert h hd hq
-  simp only [ideal7, AddMonoidHom.coe_mk, ZeroHom.coe_mk, hexQi]
+  simp only [ideal7, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
   interval_cases a <;> interval_cases b <;> decide
 
 /-- The embedding is onto: every point of the plane has an address. -/
@@ -709,7 +709,8 @@ theorem emb_surjective {p : ℝ} (hp : 0 < p) (x : ℂ) : ∃ w : ℝ × ℝ, em
   have h3 : (0 : ℝ) < Real.sqrt 3 := Real.sqrt_pos.mpr (by norm_num)
   refine ⟨(x.re / p - x.im / (p * Real.sqrt 3), 2 * x.im / (p * Real.sqrt 3)), ?_⟩
   have hs : Real.sqrt 3 * Real.sqrt 3 = 3 := Real.mul_self_sqrt (by norm_num)
-  apply Complex.ext <;> simp only [emb] <;> field_simp <;> ring
+  apply Complex.ext <;> (simp only [emb]; field_simp)
+  ring
 
 /-- **Sharpness: seven is attained.** The norm-7 coset colouring at scale `6/7` is a proper
 nearest-point coset colouring of the plane using seven colours — so the bound of
