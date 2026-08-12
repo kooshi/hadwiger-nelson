@@ -8,14 +8,22 @@ cells — cell diagonal `√(8/9) < 1`, nearest same-coloured cells a full `2` c
 box distance `4/3 > 1`. The certificate `Brick.check` verifies exactly that, over every
 offset in its computed window, by kernel `decide`.
 
-**Attribution and honest label** (M35 §0j/§0l): `χ(ℝ²) ≤ 7` is classical (the hexagonal
-colouring); this NINE is deliberately weaker and exists as the machinery's demonstration
-instance — the first certified upper bound in this repository, landing the interval
-`5 ≤ χ(ℝ²) ≤ 9` kernel-side end to end. The registered brick sweeps (m35-periodic, 2,796
-rows) found NO row-brick colouring at k ≤ 8 at any probed shape — row-aligned bricks cannot
-interlock the way hexagons do — so the 9 is also the measured threshold of this tile family
-at the probed resolutions. The `χ ≤ 7` instance needs genuinely polygonal cells and is
-priced as future work.
+**What this module is for, now that it is not the best bound.** `Instances/Seven.lean`
+carries `χ(ℝ²) ≤ 7` — in the SAME tile family, by the same certificate. This NINE stays
+because it is the certificate's most legible instance (every margin is slack: the cell
+diagonal is `√(8/9)`, comfortably under 1, and the nearest same-coloured cells are a clear
+`4/3` apart, so nothing here depends on the boundary-tight reasoning `Seven` needs), and
+because it carries the avoidance surface at distances the seven-colouring does not avoid.
+Its controls are the check's regression tests at a shape unlike `Seven`'s.
+
+**A retraction, recorded rather than quietly edited.** This docstring previously reported
+that the registered brick sweeps found no row-brick colouring at `k ≤ 8` at any probed
+shape, and concluded that row-aligned bricks cannot interlock the way hexagons do and that
+`χ ≤ 7` would need genuinely polygonal cells. The sweep numbers stand; **both conclusions
+are false**. The sweeps were run against a certificate that demanded STRICT separation, and
+against a grid filtered to cells of diagonal below 1 — and the seven-colouring in this
+family has cell diagonal exactly 1, so it was excluded twice over. A search run against a
+sufficient-but-not-necessary check measures the check. See M36 §0a C2.
 
 The same table also witnesses the AVOIDANCE surface: it avoids the squared distance `3/2`
 (no two same-coloured points at distance `√(3/2)`), certifying `Brick.avoids` live — the
@@ -46,8 +54,8 @@ theorem nineBrick_check : nineBrick.check [1] = true := by decide +kernel
 theorem nineBrick_check_avoid : nineBrick.check [1, 3/2] = true := by decide +kernel
 
 /-- **`χ(ℝ²) ≤ 9`.** The plane's unit-distance graph is 9-colourable — the repository's
-first kernel-checked upper bound; with M06–M09's `χ(ℝ²) ≥ 5` the classical interval is now
-bounded kernel-side from both ends (at `[5, 9]`; the classical `≤ 7` is future work). -/
+first kernel-checked upper bound (M35), superseded as a bound by `plane_colorable_seven`
+(M36) and kept as this certificate's slack-margin instance. -/
 theorem plane_colorable_nine : (unitDistance ℂ).Colorable 9 :=
   nineBrick.colorable (List.mem_singleton.mpr rfl) nineBrick_check
 

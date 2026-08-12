@@ -34,11 +34,16 @@ never attained.
 
 **Attribution.** The seven-colouring of the plane is classical (Isbell's hexagonal argument;
 half-open brick variants are folklore). Nothing about the construction is claimed as new.
-What is ours: the kernel certificate, and the boundary-tight soundness that makes any such
-colouring certifiable at all — under strict separation, which is what this repository's
-certificate demanded before M36, NO brick seven-colouring is certifiable, and a search run
-against a strict check reports the whole family as refusing (M35's phase 2 did exactly
-that; see M36 §0a C2).
+What is ours: the kernel certificate, and the boundary-tight soundness that makes any
+zero-margin colouring certifiable at all. Under strict separation — which is what this
+repository's certificate demanded before M36, soundly, it simply refused more than it had
+to — NO brick seven-colouring is certifiable, and a search run against such a check reports
+the whole family as refusing. M35's phase 2 did exactly that (see M36 §0a C2); the numbers
+were right and the conclusion drawn from them was not.
+
+Nothing in this module rests on a search. The colouring is written down, not found, and the
+certificate is decided by the kernel — `tools/` and `build/` are used to cross-check it and
+are trusted for nothing.
 
 With `chromaticNumber_plane_ge_five` (M06–M09, de Grey's graph) this closes the classical
 interval **`5 ≤ χ(ℝ²) ≤ 7`** kernel-side at both ends; the read-aloud statement is

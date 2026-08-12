@@ -440,6 +440,65 @@ the certificate, the offset window is computed inside the check, and the geometr
 is decided. The milestone's headline has an empty assumption column, which is the
 strongest form the standard of evidence above rung B asks for.
 
+## §0i — Experience modeling pass (2026-08-11, fresh invocation)
+
+**E-1 — The surface this milestone FALSIFIED, found and repaired.** The pass's
+job is to catch a surface that lies to its next reader, and there was one:
+`Instances/Nine.lean`'s module docstring told that reader that no row-brick
+colouring exists at `k ≤ 8` at any probed shape, that row-aligned bricks cannot
+interlock the way hexagons do, and that `χ ≤ 7` needs genuinely polygonal cells.
+The sweep numbers stand; both conclusions are false. It now carries the
+retraction explicitly — recorded rather than quietly edited, because the
+repository's plans and Grokkings still cite it — and states what the module is
+FOR now that it is not the best bound: the certificate's most legible instance
+(every margin slack, so nothing there depends on the boundary-tight reasoning),
+the live avoidance demonstration at distances the seven-colouring does not avoid,
+and the check's regression controls at a shape unlike `Seven`'s. Keeping it beats
+deleting it, and beats leaving it silently wrong by a wide margin.
+
+**E-2 — The exactness claim was over-asserted, and is now marked as reasoning.**
+`Brick.lean` had grown a paragraph saying the relaxed condition "is the truth".
+It is — by an argument (the open box is connected, so its image under `|·|²` is
+the whole interval, so a positive guard strictly inside is realized) that this
+file does not prove. A docstring's informal gloss the formal statement does not
+back is a certainty claimed and never established, so the paragraph now names
+itself as reasoning rather than as a checked claim, and the sentence that matters
+most for honesty is stated plainly: **the strict version it replaced was SOUND —
+it simply refused more than it had to.** A reader must not come away thinking a
+bug was fixed.
+
+**E-3 — The silent `false`.** `check` is a `Bool` with no error channel, so a
+rejected certificate teaches nothing by itself — the "failure mode is silence"
+smell. No diagnostic definition was added (the design script already prints the
+per-offset census, and duplicating it in a module that instances import would be
+paid by every rebuild); instead the docstring names the three causes in the order
+to suspect them and points at the instrument that shows which offset objected.
+Progressive disclosure with the handle named, rather than a new knob.
+
+**E-4 — The attribution contract, written as a refusal.** Three things the
+headline docstrings must refuse to imply: that the interval is a new result (the
+value inside it is what is open — and that is what this repository is for); that
+the seven-colouring is ours (it is classical, and the module says so before it
+says anything about what we did); and that "kernel-checked" covers more than it
+does. `Instances/Interval.lean` now states the scope exactly — the upper end
+rests on nothing but the kernel (the colouring is written down, not searched for,
+and its certificate is decided), the lower end on the kernel plus its LRAT
+replay, and neither end on anything in `tools/`.
+
+**E-5 — How to present the G20 correction (the close's delicate item).** Lead
+with what survives, then what fails, then the mechanism — never with the
+apology, which buries the information. The measured content survives verbatim
+(no brick colouring passes a positive-margin certificate at seven, across ~2,800
+registered rows); the reading fails (row-aligned cells CAN seven-colour the
+plane); the mechanism is two coupled choices, each registered in advance and each
+reasonable at the time — a certificate demanding strict separation, and a grid
+filtered to `diag² < 1`. Neither was a bug. The transferable lesson is the part
+worth keeping, and it generalizes past this milestone: **a search run against a
+sufficient-but-not-necessary check measures the check, not the world** — so the
+negatives of any registered sweep are only as sharp as the acceptance criterion
+they were run against. That becomes its own Grokking at the close, not a footnote
+to the demoted one.
+
 ---
 
 # §R — Results (opened at the skeleton; every verdict at face value)

@@ -31,10 +31,18 @@ in this family has cell diagonal exactly `1` (`Instances/Seven.lean`), so under 
 separation NO brick seven-colouring is certifiable at all, and a sweep run against a strict
 check reports the whole family as refusing — which is exactly what M35's did.
 
-The relaxed condition is not merely *permitted*, it is *exact*: the open box's image under
-`|·|²` is the interval from `loAt` to `hiAt`, so a positive guard strictly inside is
-realized by an actual pair of points and no sound certificate could accept it. The strict
-version was weaker than the truth; this one is the truth.
+Why that is the RIGHT condition and not merely a permitted one — reasoning, not a theorem
+this file proves: the open box is connected, so its image under `|·|²` is the whole
+interval between `loAt` and `hiAt`, and a positive guard strictly inside is therefore
+realized by an actual pair of points. No sound certificate could accept such an offset, so
+the condition above is the exact miss condition. The strict version this replaced was
+SOUND — it simply refused more than it had to.
+
+**When `check` returns `false`**, in the order to suspect: a guard that is not positive; a
+same-coloured offset whose interval strictly contains a guard (the usual case — the
+colouring really does realize that distance); or a window wide enough that a distant
+offset straddles. `build/m36-design.py` prints the per-offset census with the verdict for
+each, which is the fastest way to see which offset objected.
 
 The colouring itself is noncomputable (`Int.floor` on `ℝ`); its computable twin
 `Brick.colorQ` (same formula over `ℚ`) exists exactly so instances can be `#eval`-tested

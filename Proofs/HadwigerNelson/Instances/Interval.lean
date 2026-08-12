@@ -18,7 +18,13 @@ Neither end is new mathematics: `χ(ℝ²) ≥ 5` is de Grey (2018) and `χ(ℝ�
 What this file states is that the interval every account of the Hadwiger–Nelson problem
 opens with is now, in this repository, a theorem on axioms exactly
 `[propext, Classical.choice, Quot.sound]` at both ends — and the exact value inside it
-remains open.
+remains open, which is the whole point of the hunt this repository is for.
+
+**What "kernel-checked" covers here**, exactly. The upper end rests on nothing but the
+kernel: the colouring is written down rather than searched for, and its certificate is
+`decide`d. The lower end rests on the kernel plus the standing reading of an LRAT
+certificate: the SAT solver that produced that certificate is an untrusted oracle whose
+output the kernel re-checks line by line. Neither end trusts anything in `tools/`.
 -/
 
 namespace HadwigerNelson
