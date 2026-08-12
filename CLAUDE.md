@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M36, 2026-08-11.**
+**Last updated: M37, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -404,6 +404,44 @@ the cell — a `k = 8` rectangle find sits tight at interior offsets `(0, ±1)`
 and `(±2, ±3)` while its own diagonal is slack, which refuted half of the
 registered §0j prediction and widened where the correction reaches.
 
+M37 asked the next question a limitation theorem should ask — can any natural
+FAMILY of colourings beat seven? — and closed the most natural family there
+is. Colour each point of the plane by which class its **nearest lattice
+point** falls into: that is exactly what the classical hexagonal
+seven-colouring is, and what every "Voronoi + coset" scheme ever proposed is.
+**No such colouring uses six colours or fewer — at any scale, for any
+sublattice, under any tie-breaking — and seven is attained, so the coset
+chromatic number of the plane is exactly seven** (`Coset.lean`, both halves
+kernel-checked). The proof is four sweeps and two arithmetic facts, all on the
+integral form `Q(a,b) = a²+ab+b²`, with no radical outside the embedding's own
+definition: the **inscribed disc** (a point within `p/2` of a lattice point
+rounds to it whatever the tie-breaking — one Cauchy–Schwarz off the Gram
+identity, whose leftover square is what makes the form definite); the **deep
+hole** `p(1+ζ₆)/3`, whose ray rounds to the origin because `a + b ≤ Q` is the
+identity `2(Q−a−b) = (a+b)² + (a−1)² + (b−1)² − 2`, giving a same-coloured pair
+of diameter `2p/√3` and hence `4p² ≤ 3`; the **collinear sweep**, which kills
+kernel norms 1 and 3 through a gap lemma (a step shorter than the window hits
+every window of width `2p`); and the **corner sweep**, which closes the seams
+the collinear sweep leaves at norm exactly 4, where its windows only TOUCH and
+the unit distance hides at `1/p = 3, 5, 7, …`. Then the arithmetic: 2, 5 and 6
+are not of the form `a²+ab+b²`, so every nonzero kernel vector has norm ≥ 7;
+and the closed first shell's 21 pairwise differences have norms in `{1,3,4}`,
+all below that gap — the SAME seven-point object as M35's hex-shell K₇, met
+from the other side. Sharpness is the classical colouring itself: the norm-7
+ideal `(−3+ζ₆)` at scale `6/7`, with the covering radius (`p/√3`, so cells
+have diameter under 1) and the ideal's minimum (`√7·p`, so same-coloured cells
+stay clear of 1) — and the properness arithmetic stays rational throughout
+(`(p/√3)² = 12/49 < 1/4` and `2 < √(36/7)`). **Consequence for the hunt: a
+six-colouring of the plane, if one exists, is not a lattice colouring** — the
+gap between coset and arbitrary colourings is exactly where it would have to
+live, and the homomorphism hypothesis is load-bearing (drop it and an
+arbitrary nearest-point colouring is a colouring of an annulus graph on the
+lattice, whose chromatic number at fine scales is the plane's own open
+question). The general-lattice case is open and priced: the crude
+Hermite-plus-covering chain gives `k ≥ 6` for every planar lattice and `k ≥ 9`
+for the square one, and closing `k = 6` needs a near-equality rigidity
+argument from reduction theory.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -445,6 +483,8 @@ registered §0j prediction and widened where the correction reaches.
 
 | 33 | **The classical interval, kernel-checked at both ends** (M36): the **boundary-tight sharpening** — half-open cells make the realizable difference set an OPEN box, so a realized squared distance is strictly below `hiAt` and strictly above a positive `loAt`; `Brick.check` accepts `q ≤ loAt ∨ hiAt ≤ q` (the exact miss condition, not a sufficient one) and PARSES guard positivity in (`check_pos`), without which `guards = [0]` would be accepted and `sound` would deny a point its own colour. Consumers got simpler, not harder: `sound` keeps its signature and `avoids` LOSES its nonnegativity argument. **`plane_colorable_seven` / `chromaticNumber_plane_le_seven`: χ(ℝ²) ≤ 7** on a 7 × 7 torus of `4/5 × 3/5` half-open cells, shear `2/5` — the 3–4–5 triangle, cell diagonal exactly 1 — coloured `(i + 3j) mod 7`, the norm-7 ideal `(−3 + ζ₆)` of ℤ[ζ₆] (ζ₆-stable kernel ⟹ ideal ⟹ same-colour centres separated by norm multiplicativity, no lattice census); and **`chromaticNumber_plane_interval`: 5 ≤ χ(ℝ²) ≤ 7**, the classical statement of Hadwiger–Nelson, both ends kernel-side on axioms exactly the standard three. The colouring is classical (Isbell; half-open brick variants folklore) and no novelty is claimed for it — ours is the certificate, the sharpening, and the correction. Controls: two boundary-tightness pins (`hiAt 0 0 = 1`, `loAt 1 2 = 1`), six mutations refusing (two shapes, shear 0, two non-ideal coefficients, the flat table), the degenerate guard refused, seven `colorQ` samples. Tools-side, every claim on a third code path: the design script's census (0 straddles, tight rows exactly as predicted, 3.8M exact unit pairs with no mono pair), the prober's **first k = 7 SAT** (control + a searched second solution at shear `w/3`, promoted through the kernel), the `k = 4` mass red held in 298 rows, `k = 6` and `k = 5` refused in 1,394 rows each, and the certificate passing **exactly at the two ideal coefficients** `c ∈ {3, 5}` across a 7 × 5 census. | `Brick.lean` (`check_pos`, `sq_lt_of_abs_lt`/`lt_sq_of_abs_lt`/`le_sq_of_abs_lt`, `sound`), `Instances/Seven.lean`, `Instances/Interval.lean`, `build/m36-*.json`, `plans/M36-seven-coloring.md` §R | M36 |
 
+| 34 | **The coset bound: the coset chromatic number of the plane is exactly seven** (M37): `Coset.seven_le_card` — every proper nearest-point coset colouring of the plane (triangular lattice, ANY scale, ANY sublattice, ANY tie-breaking) uses at least seven colours, via `Coset.seven_values` (the seven lattice points of the closed first shell get seven distinct colours); and `Coset.exists_proper_coset_colouring` — the norm-7 ideal `(−3+ζ₆)` at scale `6/7` is such a colouring with exactly seven, so the bound is attained (`Coset.coset_chromatic_eq_seven`). The engine, entirely on the integral form `a²+ab+b²`: the inscribed disc + Gram identity, the deep hole (`4p² ≤ 3` from its own diameter), the collinear sweep with a gap lemma (kills kernel norms 1 and 3), the corner sweep (closes the norm-4 seams at `1/p` odd, where the collinear windows only touch), the Loeschian gap (2, 5, 6 are not norms ⟹ kernel norm ≥ 7), and the shell's difference table `{1,3,4}`. Sharpness adds the covering radius (`p/√3`) and the ideal's minimum (`√7 p`), with all properness arithmetic rational. **A six-colouring of the plane, if one exists, is not a lattice colouring.** Attribution: the optimality statement is folklore-adjacent and no novelty is claimed for the construction; ours is the proof shape, the formalization, and the packaging as a limitation theorem for the upper-bound hunt. | `Coset.lean`, `build/m37-design.py`, `plans/M37-coset-bound.md` §R | M37 |
+
 ### Paths forward, ranked
 
 *Rewritten 2026-08-09 at the field-jump decision. The construction ladder
@@ -478,6 +518,10 @@ written by a one-comparison sharpening of M35's own brick certificate. The
 classical interval 5 ≤ χ(ℝ²) ≤ 7 is now kernel-checked at both ends. G20 is
 demoted with its refutation recorded; G21 is minted. The ranking below is the
 close's recommendation; Kooshi picks.)*
+
+*(M37 CLOSED 2026-08-12, under the autonomy authorization — the coset
+chromatic number of the plane is exactly seven, so no lattice colouring can
+witness χ ≤ 6; G22 minted.)*
 
 1. **The certified union** (`plans/M35-certified-union.md`) — first now, and
    doubly motivated: it is the only designed 5-chromatic object we hold, and
@@ -897,6 +941,30 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   exists — every member of the family is boundary-tight. And the family
   still cannot reach six: k = 6 refused in 1,394 rows under the corrected
   check.*
+* **G22 — Where a six-colouring cannot live.** The upper-bound side of the
+  interval now has a map with one region blacked out. Every *lattice*
+  colouring — colour by the class of the nearest lattice point, which is what
+  the classical seven-colouring is and what every proposed construction has
+  been — needs exactly seven colours, no more and no fewer **[kernel: M37]**.
+  So the search for `χ(ℝ²) ≤ 6` cannot be a search over lattices, scales, or
+  sublattices: it must leave the coset family entirely. What the proof says is
+  *why*: the cells cannot be big (their own deep holes make a same-coloured
+  pair of diameter `2p/√3`, forcing `4p² ≤ 3`) and the colour classes cannot be
+  close (a kernel vector shorter than twice the cell reach is caught by its own
+  multiples), and between those two walls the lattice's arithmetic admits
+  nothing below norm 7 — because 5 and 6 are not of the form `a²+ab+b²`. **The
+  bound is number-theoretic, not geometric**: the same two walls over a
+  different lattice give a different threshold (the square lattice needs nine,
+  by the same argument with sums of two squares in place of the Loeschian
+  numbers). *Reading on top, believed and falsifiable: a six-colouring, if one
+  exists, must have colour classes that are not unions of cells of any lattice
+  — which is consistent with G20's correction (the brick seven-colouring is
+  boundary-tight, and every known witness sits on some crystal), and suggests
+  the upper-bound hunt should look at aperiodic or non-cell constructions.
+  Falsifier: any six-colouring of the plane whatsoever; short of that, a
+  general-lattice proof would extend the blacked-out region from the triangular
+  lattice to all of them — the crude chain already gives `k ≥ 6` everywhere and
+  the missing piece is the `k = 6` rigidity case.*
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this
