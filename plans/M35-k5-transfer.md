@@ -697,3 +697,22 @@ classical pattern's zero-margin boundaries — report the measured shape,
 land L3's machinery on the k = 9 square green (χ ≤ 9 as the demonstration
 instance, honestly labelled), and defer the χ ≤ 7 instance with its price
 named. The k = 4 rectangular rows stay the mass red.
+
+## §0k — Mid-milestone addendum (2026-08-11, registered before the run)
+
+§0j's failure clause FIRED: the rectangular ladders refused through k = 8
+(2,112 rows total, mass red green throughout). The geometric reading, derived
+before the next run: row-aligned bricks at the probed cell sizes cannot
+INTERLOCK vertically — the hexagonal 7-colouring's tiles overlap in y, which
+coarse rows cannot express — but a FINE-SLAB table (h ≤ 1/8) can build
+staircase tiles that approximate hexagons inside the same Brick model.
+Registered: the fine-slab ladder — h = 1/8, w ∈ {2/5, 1/2}, m = 12, n = 32,
+s ∈ {0, w/2}, k ∈ {7, 8}, D = ∅, cap 600 s (8 rows; the SAT instances are
+~3k vars with wide windows — the slowest rows of the campaign). Predictions:
+**P5″ [low-medium]** — a fine-slab k = 7 or k = 8 find; either lands L3's
+real instance. Failure: the row-brick family's probed threshold stands at 9
+(the square green), L3 lands on the NINE instance per §0j — χ(ℝ²) ≤ 9
+kernel-checked, honestly labelled a machinery demonstration and the repo's
+first certified upper bound — and the hex-cell certificate (convex polygon
+cells + slab witnesses, the same architecture one shape richer) is priced as
+the χ ≤ 7 route in the close.
