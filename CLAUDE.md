@@ -621,13 +621,17 @@ his go for subplanning + implementation. The re-rank below reflects his stated a
 back into the push to 6, from either direction — with M41 stubbed at his direction.)*
 
 1. **M41 — the k = 5 gradient hunt** (`plans/M41-k5-gradient.md`, stubbed in
-   detail) — the from-below 6-push: the M34 union's k = 5 anatomy, crystal
-   tilings of the 1581 by its own fabric vectors (wholesale vertex sharing —
-   the designed-forcer thread's registered reopening condition is MET),
-   gen-2 closure at k = 5, the Galois orbit of the 1581 (the half-spindle
-   group is Galois-stable; 15 conjugate witnesses, self-congruent or free),
-   and the forced-equivariance sweep. Jackpot clause registered: any k = 5
-   UNSAT on a union is χ(ℝ²) ≥ 6.
+   detail; AMENDED by the shapes pass — read `plans/SHAPES-OF-SIX.md` first,
+   the standing 6-forcer shape inventory with kill tests) — the from-below
+   6-push: phase 0 = the 23-core mechanism autopsy (Shape D; G15's
+   universality tested in a decidable universe), the M34 union's k = 5
+   anatomy, crystal tilings of the 1581 through the interface-menu lens
+   (Shape A; the M20 strip automaton one level up), gen-2 closure at k = 5
+   with the depth-switch rationale (Shape B), the Galois orbit of the 1581,
+   and the forced-equivariance sweep (Shape C). Jackpot clause registered:
+   any k = 5 UNSAT on a union is χ(ℝ²) ≥ 6. The alternation discipline:
+   after M41, back above (M42, then the fine tail), shapes re-ranked in
+   SHAPES-OF-SIX at every close.
 2. **M42 — kernel promotion of the gap atlas** (`plans/M42-gap-kernel.md`,
    stubbed) — small, high-certainty Lean: the 12-clique window theorem
    (χ ≥ 12 for cell-constant colourings just below p = 1/2), the M = 4
@@ -1117,6 +1121,27 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   band (χ(ℝ²) ≤ 6, the standing jackpot clause); or a relaxation that DOES see the
   gap — any polynomial certificate matching the ball refutations would be a new
   lower-bound instrument for the whole programme.*
+* **G25 — The forcing ladder is recursive, and the levels read like protein
+  structure.** (2026-08-12; seeded by Kooshi's peer's analogy; the full pass is
+  `plans/SHAPES-OF-SIX.md`, the standing shape-space both directions cite.) The
+  measured mechanism at each jump: χ ≥ 4 is HOLONOMY of deterministic rainbow-clique
+  propagation (at k = ω every triangle is rainbow — zero local entropy — and the
+  Moser twist returns the information shifted); χ ≥ 5 is a disjunctive regional
+  PIGEONHOLE over exactly-4-with-depth fabric, whose kills are the previous level's
+  forcer applied to the forced pair one field up. **Each level's kill is the previous
+  level's forcer** — so the default 6-forcer has 5-forcer-grade kills (~10⁵–10⁶
+  vertices, certified-composition-only, G18), UNLESS a shortcut shape fires
+  (forced-equivariance kills with no new field; or the from-above lab's un-named
+  integrality mechanism transplanted). Protein mapping where it is exact: secondary =
+  k-rigid motifs (rhombus chains as α-helices), tertiary = one folded witness
+  (edge-criticality IS marginal stability, G10), quaternary = the conjectured
+  6-forcer as a DETUNED OLIGOMER of 5-chromatic domains whose compulsion lives in
+  interface conformation algebra (the M20 strip automaton is the method precedent);
+  where it lies: proteins have one energy scale, we have a field ladder (G1).
+  **[reading — falsifiers per shape in SHAPES-OF-SIX §3: menus total ⟹ Shape A
+  starves; gen-2/3 clean at depth ⟹ Shape B demoted; no equivariance compulsion at
+  k = 5 anywhere ⟹ Shape C demoted; the 23-core autopsy finding a known genre ⟹
+  Shape D deflates; any of them firing ⟹ the 6-hunt has its Act One.]***
 * **G21 — A search run against a sufficient-but-not-necessary check
   measures the check, not the world.** The general form of G20's death,
   and the reason it is minted rather than left as a footnote: this

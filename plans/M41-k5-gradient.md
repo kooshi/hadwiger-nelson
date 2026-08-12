@@ -38,6 +38,24 @@ than merely avoid a matching. This is also de Grey's own construction shape one 
 his 1581 is two congruent systems fused at one point (G5); the probe fuses whole witnesses
 along whole fabric chunks.
 
+> **AMENDED 2026-08-12, after the shapes pass (`plans/SHAPES-OF-SIX.md` — read it
+> FIRST; it re-derives this milestone's probes as kill tests for the 6-forcer shape
+> inventory).** Three sharpenings, none removing anything: (0) a NEW phase 0 — the
+> Shape-D autopsy: complete mechanism analysis of M40's 23-vertex G\* core (its full
+> colouring space, its fractional certificate, and whether the smallest known
+> clique-free forcer factors as pigeonhole × kill — G15's universality clause tested
+> in a decidable universe; hours, and it calibrates what to look for in every other
+> probe). (1) The tiling probe is upgraded from per-union SAT asks to the
+> **interface-menu lens** (Shape A): measure the interface algebra — menu moments
+> first (forced pairs / forced-equal pairs / coverage ACROSS the interface, the
+> standing k-generic meters), full conformation relations only if affordable — then
+> AIM a frustrated loop rather than hoping one shows up. The M20 strip automaton is
+> the exact method precedent. (2) The gen-2 closure probe now carries a registered
+> theory reason (Shape B): the k = 4 pigeonhole was depth-switched (invisible at
+> B ≤ 1, fired at B = 2), so the k = 5 analogue predicts generation-depth switching —
+> and M35's one solver-effort anomaly (the d = 2 class as the uniformly hardest k = 5
+> avoidance) points the same way.
+
 ## The probes, in cost order
 
 ### 1. The union's k = 5 anatomy (cheap; instruments standing and k-generic)
