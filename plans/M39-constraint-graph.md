@@ -91,3 +91,53 @@ and is instrument catastrophe).
   and treat the rest as unprobed — never as refused (`unknown ≥ cap` is not a
   claim).
 * Any segfault: HALT and report to Kooshi (standing).
+
+
+---
+
+# §R — Results (2026-08-12; every verdict at face value)
+
+* **P1 CONFIRMED** — the instrument reproduces M38 exactly: edge norms `{1,3,4}`
+  at `T = 7/6` and `T = 3/2`, the closed shell a 7-clique, and a 300 × 200
+  sampling of the difference body never escaping the computed `[min, max]`
+  (sampling can only refute, which is its job).
+* **P2 CONFIRMED, and the shape is the finding.** The clique number across
+  scales is **not monotone**: `ω = 7` in the classical window
+  (`p ∈ (0.67, 0.86]`), **`ω = 8` on `p ∈ (0.5, 0.6)`**, `ω = 7` again around
+  `p ≈ 0.43–0.35`, then collapsing to 4, 3, 2 as the cells shrink. The rise to
+  eight was NOT registered and is the milestone's headline: **the family gets
+  strictly worse just below the classical scale.**
+* **A theorem, not just a census**: `Coset.eight_le_card_of_cell_constant` —
+  for `1/2 < p < 3/5`, any cell-constant colouring needs at least EIGHT
+  colours, via the `3 × 3` address block with one corner dropped, whose 28
+  pairwise differences all have norm in `{1,3,4,7}`. Kernel-checked, axioms
+  exactly the standard three. So the classical scale is a **local optimum**:
+  shrinking the cells past it costs a colour.
+* **P3 CONFIRMED** — every `k = 4` row refused; the catastrophe banner never
+  fired.
+* **P4, expected branch** — **no six-colouring anywhere**: 27 rows across 12
+  scales and tori up to 24 × 24 all refused. Reported as PERIOD-BOUNDED: a
+  torus UNSAT says no colouring with that period, not `χ(G(p)) > 6`.
+* **Two finds worth naming.** (i) `k = 7` SATs at `p = 6/13 ≈ 0.4615`, on
+  12 × 12, 14 × 14 and 21 × 21 — a seven-colouring of the constraint graph at a
+  scale BELOW the classical window, so the good scales are not a single
+  interval. (ii) In the bad band, `k = 8` refuses at 12 × 12 and 16 × 16, so
+  there the requirement is at least NINE at those periods — worse than the
+  clique bound shows.
+* **The control that changed a reading, run because G21 demanded it.** The
+  fine-scale `k = 7` refusals at 12 × 12 and 18 × 18 looked like "the family
+  gets worse as cells shrink". The torus-size control at 24 × 24 came back
+  **unknown at the 600 s cap**, not unsat — so that reading is NOT supported,
+  and the honest statement is that fine scales are unprobed at adequate
+  periods. A small torus is a sufficient-not-necessary acceptance test in
+  exactly G21's sense, and it would have measured the instrument again.
+
+## What was NOT done (honesty ledger)
+
+* Every SAT refusal here is period-bounded. Turning any of them into a
+  statement about `χ(G(p))` needs a finite PATCH refutation (a ball, not a
+  torus), which is not built.
+* The fine regime (`p ≲ 0.35`) is effectively unprobed: the tori that could
+  express a good colouring there are beyond the solver at the caps used.
+* P5 (whether the found seven-colourings are coset colourings up to
+  relabelling) was not examined.

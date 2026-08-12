@@ -678,6 +678,7 @@ theorem exists_nearest (w : ℝ × ℝ) :
 
 
 
+
 /-! ### The witness: the norm-7 ideal at scale 6/7 -/
 
 /-- The classical seven-colouring's colour map: `(a, b) ↦ a + 3b` in `ℤ/7`. Its kernel is
@@ -956,6 +957,73 @@ theorem seven_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 1 / 2 < p) 
   simpa using Fintype.card_le_of_injective _ hinj
 
 end CellConstant
+
+/-! ### The bad band: eight colours just below the classical window
+
+The cell-constant requirement is not monotone in the scale. Just below the window where
+the classical seven-colouring lives, a FOURTH shell (`Q = 7`) becomes constrained while the
+first three still are — and then the lattice carries an **8-clique**, so eight colours are
+needed. Shrinking the cells slightly past the classical scale makes the family strictly
+worse. -/
+
+/-- Eight addresses forming a clique of the `{1,3,4,7}` constraint graph: the `3 × 3`
+address block with one corner dropped. -/
+def block : Fin 8 → ℤ × ℤ
+  | 0 => (0, 0)
+  | 1 => (0, 1)
+  | 2 => (0, 2)
+  | 3 => (1, 0)
+  | 4 => (1, 1)
+  | 5 => (1, 2)
+  | 6 => (2, 0)
+  | 7 => (2, 1)
+
+theorem block_diff {i j : Fin 8} (h : i ≠ j) :
+    block i - block j ≠ 0 ∧
+      (hexQi (block i - block j) = 1 ∨ hexQi (block i - block j) = 3 ∨
+        hexQi (block i - block j) = 4 ∨ hexQi (block i - block j) = 7) := by
+  revert h; fin_cases i <;> fin_cases j <;> decide
+
+section BadBand
+
+variable {p : ℝ} {rnd : ℂ → ℤ × ℤ}
+
+/-- **Eight colours, just below the classical window.** For `1/2 < p < 3/5`, any colouring
+constant on the lattice's cells gives the eight block addresses eight pairwise distinct
+labels. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, the family's
+requirement RISES from seven to eight as the cells shrink past that window — the classical
+scale is a local optimum, not a starting point to refine. -/
+theorem eight_labels_of_cell_constant {A : Type*} (hp : 1 / 2 < p) (hp1 : p < 3 / 5)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
+    {i j : Fin 8} (hij : i ≠ j) : col (block i) ≠ col (block j) := by
+  intro hc
+  have hp0 : (0 : ℝ) < p := by linarith
+  have hp1' : p < 1 := by linarith
+  obtain ⟨hne, hQ⟩ := block_diff (Ne.symm hij)
+  have huv : block i ≠ block j := by
+    intro h; exact hne (by rw [h, sub_self])
+  have hlo : (1 - p) ^ 2 < p ^ 2 * (hexQi (block j - block i) : ℝ) := by
+    rcases hQ with h | h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  have hhi : p ^ 2 * (hexQi (block j - block i) : ℝ) < (1 + p) ^ 2 := by
+    rcases hQ with h | h | h | h <;> rw [h] <;> push_cast <;> nlinarith
+  obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window hp0 hp1' hrnd huv hlo hhi
+  exact hproper x y hxy (by rw [hx, hy]; exact hc)
+
+/-- The count: eight colours are needed on that band. -/
+theorem eight_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 1 / 2 < p)
+    (hp1 : p < 3 / 5)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) : 8 ≤ Fintype.card A := by
+  have hinj : Function.Injective (fun i : Fin 8 => col (block i)) := by
+    intro i j hij
+    by_contra hne
+    exact eight_labels_of_cell_constant hp hp1 hrnd col hproper hne hij
+  simpa using Fintype.card_le_of_injective _ hinj
+
+end BadBand
 
 /-- **The coarse-cell chromatic number of the plane is exactly seven.** At `p = 6/7` —
 inside the window `(1/2, 1)` — every colouring constant on the lattice's cells needs at

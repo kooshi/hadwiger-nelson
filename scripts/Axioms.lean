@@ -770,6 +770,7 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms Coset.seven_labels_of_cell_constant
 #print axioms Coset.seven_le_card_of_cell_constant
 #print axioms Coset.cell_chromatic_eq_seven
+#print axioms Coset.eight_le_card_of_cell_constant
 
 #eval IO.println "=== PURCHASED ==="
 
