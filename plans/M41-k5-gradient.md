@@ -435,8 +435,21 @@ here — same frame machinery).
   pending). Control finding: **Heule-510 has NO √7 content** (the √7-flip is the
   pointwise identity — it lives in ℚ(√3,√5,√11), a smaller tower than anyone recorded);
   its [3]-coset flips break as predicted, so the canonicalizer discriminates.
-* **The autopsy, 23-core (phase 0): verdict FACTORED — G15's universality holds in
-  the finite lab, and the mechanism is the hex-shell pigeonhole.** Every 6-colouring
+* **The autopsy, COMPLETE — ALL FIVE cores FACTORED** (23, 28, 53, 66, and the
+  117-vertex ω = 3 core): every clique-free forcer in the finite lab decomposes as
+  pigeonhole × kill; five independent confirmations of G15's universality in a
+  decidable universe, spanning gap-3 and gap-4 objects, coarse and fine scales, with
+  and without centres. The uniform dictionary entry: **Act One is always a mono pair
+  forced onto a small NON-EDGE class** (norm 1 first — "adjacent cells somewhere
+  agree" — the hex-shell counting argument surviving the clique's death), and the
+  fractional relaxation always sits far below: χ_f(53-core) = **501/74 ≈ 6.770**
+  exactly (χ = 8); χ_f(117-core) ≈ **4.83796** (certified bracket tight to 12
+  decimals, LP over 235,154 maximal independent sets; χ = 7) — **an integrality gap
+  of 2.16, ratio 1.45, the most extreme measured anywhere in this programme**, on
+  the object whose clique number is the plane's own 3. The 117's Act One fires at a
+  43-cell ball; its edges live at norms 25–49.
+* **The 23-core detail (the first autopsy): verdict FACTORED — the mechanism is the
+  hex-shell pigeonhole.** Every 6-colouring
   of the closed first shell (7 cells) inside G\* forces a mono pair at norm 1 —
   exactly the class that STOPPED being an edge below p = 0.4804 — because the norm-3/4
   pairs are still edges and 7 > 6 (the K7 counting argument transplanted below the
@@ -475,9 +488,33 @@ here — same frame machinery).
   at k = 5 nor on the forcer at k = 4 — the expected floppy branch; the vocabulary
   exists now, and the right place to re-ask is any future object that shows m1
   structure.
-* Running at session end (results append to the artifact): the 117-core autopsy
-  (53-core landed: **FACTORED**, same two-act shape); the m1 sweeps on all seven
-  remaining unions (parallel, laptop); gen-2 size (parallel fork-pool; the gen-1
-  control reproduced M31's 24,065 exactly, 5 s).
+* **The m1 moment table, COMPLETE and exactly settled — the crystal-composition
+  gradient at k = 5 is ZERO through six copies.** All eight unions (rot60, rot180,
+  mirror, translate1, rotx3/4/5, hexclosure — 2,371 to 5,533 vertices): 0 forced-equal
+  pairs, 0 virtual edges, no unsettled candidates (38–77 models each, parallel
+  sweeps). P3's flat branch in full; P4 refuted at ≤ 6 copies. Wholesale-overlap
+  crystal unions of ONE witness carry no pairwise k = 5 compulsion — the fifth
+  globality measurement, extended to composed matter.
+* **Gen-2 size (P6 first half confirmed)**: 24,065 → **284,873 points**, with
+  **124,232 fusions — a 32% collision rate against gen-1's ~10%: the closure is
+  beginning to fold into itself**; 116,651 distinct rings about the origin. Within
+  the registered band. The k = 5 frontier at this scale is the desktop's job.
+* **The hetero-dimers — matter that did not exist this morning**: V ∪ W^σ for the
+  three new Galois witnesses. Overlaps BEAT the whole crystal ladder:
+  **V ∩ W^[3,5] = 1,101 of 1,581 (69.6%)** — a 2,061-vertex union of two provably
+  non-congruent 5-chromatic witnesses; W^[5] 789 (49.9%); W^[3] 549 (34.7%). All
+  three m0 SAT — but at **2.0–2.6 s where every homo-union solved in 0.1–0.4 s**:
+  an order of magnitude more solver effort at similar size (a solver-effort signal
+  in the M35 §R sense, single-sample, NOT a compulsion claim). **m1 verdicts: all
+  three dimers 0 forced-equal / 0 virtual edges, settled exactly (38–58 models)** —
+  the pairwise gradient is flat on hetero-matter too; the effort signal stands
+  recorded as the only nonzero reading of the day.
+* **W^[3] independently verified as far as the laptop reaches**: 7,877 unit edges
+  re-derived from scratch (matches the committed count); its k = 4 CDCL ask capped
+  UNKNOWN at 520 s (the 1581's k = 4 refusal is heavy for plain CDCL — historically
+  so). The χ = 5 claim rests on the stronger ground anyway: the flip is a
+  unit-distance-preserving bijection, so W^[3] ≅ the committed 1581 as a graph, and
+  χ ≥ 5 transports from the KERNEL theorem — the solver ask was belt-and-braces.
 * **Deferred to the desktop by name**: refusal-side caps if any m1 candidate needs a
-  long UNSAT, the gen-2 k = 5 frontier (edges + SAT at ~10⁵ points).
+  long UNSAT, the gen-2 k = 5 frontier (edges via spatial grid + SAT at ~285k
+  points), gen-2-enriched union probes, detuned (non-crystal) tilings.

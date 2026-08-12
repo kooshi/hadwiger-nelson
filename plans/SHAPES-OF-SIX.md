@@ -161,6 +161,20 @@ Shape D's autopsy is the cheapest place a counterexample could surface.
   (the [3,5,11] flip fixes it identically), and forced equivariance under a
   NON-geometric automorphism was in nobody's vocabulary until today.
 
+* **2026-08-12, later (M41 full-parallel session).** The autopsy COMPLETED: all five
+  cores factor — G15-universality is now 5/5 in the finite lab, with the uniform
+  dictionary entry (Act One = mono pair on a small NON-EDGE class; χ_f far below χ,
+  down to 4.84 against 7 on the ω = 3 core). Shape A's crystal branch WEAKENED
+  measurably: the m1 gradient is exactly zero across eleven composed objects — eight
+  crystal unions through six copies AND the three witness–conjugate hetero-dimers
+  (the only nonzero reading anywhere: a 10× solver-effort signal on the dimers,
+  single-sample). Shape B advanced to its desktop test (gen-2 = 284,873 points, 32%
+  fusion — the closure is folding; the k = 5 frontier is the decisive ask). Shape C's
+  vocabulary now includes NON-GEOMETRIC equivariance (the 1581's hidden Klein
+  four-group of Galois automorphisms; not forced on today's objects — re-ask on
+  anything that ever shows m1 structure). New matter minted: THREE non-congruent
+  Galois witnesses and their dimers.
+
 ## 4. What the two directions now do for each other (the alternation, sharpened)
 
 The from-above family is the hunt's **model organism**: finite, decidable,
