@@ -455,8 +455,29 @@ here — same frame machinery).
   (rot60 2373/11832, rot180 2371/12605, mirror 2767/13796, translate1 3008/16695,
   hexclosure 5533/29955 — vertices/edges, models validated independently). P3's
   expected branch; the discriminating rung is m1.
-* Running at session end (results append to the artifact): the 53- and 117-core
-  autopsies; the m1 forced-pair/virtual-edge sweep on the rot60 union at k = 5.
-* **Deferred to the desktop by name**: m1 sweeps at scale (all five unions), any
-  refusal-side caps, gen-2 closure size-first, the explicit-isometry confirmations
-  for the Galois congruence candidates.
+* **The Galois orbit SETTLED (explicit isometries, exhaustive)**: any congruence must
+  map the two canonical ring-hearts (both rational, Galois-fixed) to themselves, so
+  only four isometries are candidates — and the verdict is: **the 1581's hidden
+  automorphism group is a Klein four-group, entirely non-geometric** —
+  τ = flip[3,5,11] (pure field, set-fixing), mirror∘flip[5,7], mirror∘flip[3,7,11] —
+  while the graph has NO nontrivial plane self-isometry at all. The Galois orbit has
+  exactly **4 isometry classes: the 1581 plus THREE genuinely new 5-chromatic
+  witnesses** (representatives W^[3], W^[5], W^[3,5]); W^[5]'s class matches the
+  original's centroid spectrum while being provably non-congruent — an isospectral
+  twin. (`build/m41-galois-isometry.json`)
+* **τ anatomy, second-path verified** (`build/m41-tau-anatomy.json`): τ is an
+  involution with exactly **29 fixed points** and 776 two-cycles; it maps the 7,877
+  unit edges to themselves EXACTLY (the independent check of automorphism-hood); the
+  791-forcer is τ-stable (τ commutes with −1). Fixed spine includes the origin, four
+  points on the unit ring, four at r² = 4.
+* **The first non-geometric equivariance queries** (D6 encoding, planted control
+  green; `build/m41-tau-equivariance.json`): τ-equivariance is NOT forced on the 1581
+  at k = 5 nor on the forcer at k = 4 — the expected floppy branch; the vocabulary
+  exists now, and the right place to re-ask is any future object that shows m1
+  structure.
+* Running at session end (results append to the artifact): the 117-core autopsy
+  (53-core landed: **FACTORED**, same two-act shape); the m1 sweeps on all seven
+  remaining unions (parallel, laptop); gen-2 size (parallel fork-pool; the gen-1
+  control reproduced M31's 24,065 exactly, 5 s).
+* **Deferred to the desktop by name**: refusal-side caps if any m1 candidate needs a
+  long UNSAT, the gen-2 k = 5 frontier (edges + SAT at ~10⁵ points).

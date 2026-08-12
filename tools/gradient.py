@@ -426,13 +426,20 @@ def galois(pts):
 
 # ================================================================== phase 2 entry: unions
 
-UNION_LADDER = ["rot60", "rot180", "mirror", "translate1", "hexclosure"]
+UNION_LADDER = ["rot60", "rot180", "mirror", "translate1", "hexclosure",
+                "rotx3", "rotx4", "rotx5"]
 
 
 def build_union(name, pts):
     ident = {key(p): p for p in pts}
     imgs = []
-    if name == "rot60":
+    if name.startswith("rotx") and name[4:].isdigit():
+        # rotxN = union of N copies: V, rot60(V), ..., rot60^{N-1}(V)
+        r = ZETA6
+        for _ in range(int(name[4:]) - 1):
+            imgs.append([rot_about(p, ORIGIN, r) for p in pts])
+            r = cmul(r, ZETA6)
+    elif name == "rot60":
         imgs = [[rot_about(p, ORIGIN, ZETA6) for p in pts]]
     elif name == "rot180":
         r = cmul(cmul(ZETA6, ZETA6), ZETA6)
