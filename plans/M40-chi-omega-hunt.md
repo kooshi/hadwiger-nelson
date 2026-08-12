@@ -184,6 +184,34 @@ coset-merge structure over finer ideals — is the measurement.
   Hoffman (< 6) both leave a six-colouring open — the six-hunt target list becomes
   concrete, scale by scale.
 
+## §0f — Domain-modeling pass (2026-08-12, applied BEFORE any instrument; amendments only sharpen §0a–c, none weaken)
+
+* **A1 — Bands are keyed by point-group class, not by norm.** The min/max thresholds
+  depend on the offset's direction relative to H's vertices, and distinct dihedral
+  classes eventually share a norm with DIFFERENT thresholds — first at norm 49:
+  `(7,0)` (angle 0°, min = 36) vs `(3,5)` (angle ≈ 21.8°, min ≈ 34.3). So `--bands`
+  enumerates breakpoints per dihedral orbit; `edge_norms` is demoted to display; and the
+  norm-49 pair is a PLANTED CHECK (the tool must report their thresholds unequal). D1's
+  coarse table is unaffected (all its norms are single-class — verified per row).
+* **A2 — D5 simplified and strengthened.** `(1−ζ₆)` is a unit, so for any edge offset
+  `u` the equilateral triangle `{0, u, ζ₆·u}` has all three sides associates of `u` —
+  same class, hence all edges. **Every band with any edge at all contains a triangle**;
+  no Loeschian-density argument needed. With the √2 four-point bound: ω(G(p)) = 3
+  exactly, for every p ≤ 1/7.
+* **A3 — The artifact's unit of claim is the band.** `build/m40-chiomega.json` rows carry
+  `(band_id, T)` with band_id = (exact T²-interval, canonical class reps); the writer
+  checks T ∈ band at record time (parse, don't validate). Boundary T² values belong to
+  no band and are refused.
+* **A4 — Derivation soundness notes for D6/D7** (so implementation does not rediscover):
+  `x ↦ x/(d+x)` is monotone, so the CONTINUOUS λ_min bracket upper-bounds every torus's
+  ratio bound (torus spectra ⊆ λ's range); quotient tori need m ≥ 3·max|s| so the wrapped
+  connection set stays simple; the wrap argument deletes O(m) boundary points against
+  Θ(m²) area.
+* **A5 — The other two passes, decided with reasons**: obligation-modeling SKIPPED (the
+  milestone proves nothing in Lean — kernel promotion is explicitly deferred in §0e);
+  experience-modeling SKIPPED (no lemma API, notation, or diagnostic surface is minted;
+  the artifact and explorer follow standing schemas).
+
 ## §0d — Failure clauses
 
 * A shrink that exceeds its per-call cap reports "≤ size, NOT 1-minimal" honestly and
