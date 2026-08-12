@@ -310,6 +310,44 @@ by phase; every SAT row carries machine + cap + outcome, `unknown` never a verdi
 * **P8 [high]** — the 791 equivariance control fires at k = 4; [medium] nothing is
   forced-equivariant at k = 5 on today's objects (any firing = Shape C's Act One).
 
+## §0f — Domain-modeling pass (2026-08-12, laptop, applied before any instrument; amendments sharpen, none weaken)
+
+* **A1 — The menu's true carrier is PARTITIONS, and the union theorem is exact.** A
+  palette class of interface labellings is a partition of I into ≤ 5 blocks, and the
+  block-matching permutation always extends to S₅, so: *the 2-copy union is
+  5-colourable iff the partition menus intersect* — exact, both directions. Instrument
+  consequence: menu enumeration must canonicalize the palette BY FIRST OCCURRENCE ON
+  THE INTERFACE (not on the copy's global vertex order), else each partition is
+  enumerated up to 120 times.
+* **A2 — The relation carrier is the JOINT partition, not a pair of partitions.** For
+  a copy with interfaces I and J, cross-interface blocks (a 5-colouring forcing an
+  I-point and a J-point equal) are exactly what loop frustration is made of, so the
+  transfer object is Menu(X, I ∪ J) — partitions of the union — composed by
+  amalgamation over the shared middle (the partition-monoid transfer, which is what
+  M20's strip automaton was implicitly). Coherence note that falls out: the m1
+  forced-equal/virtual-edge meters ARE the cross-block detectors — the moments ladder
+  measures the relation's off-diagonal structure before any enumeration is paid for.
+* **A3 — The autopsy verdict is a PARAMETRIC record, never an absolute.** Verdict =
+  `Factored(R₀, P, placements, kill-certs)` with R₀ a PROPER, (χ−1)-colourable
+  subregion (else the decomposition is the trivial one — the full core "fires"
+  vacuously), or `Holistic(V, R)` — always RELATIVE to the stated vocabulary V and
+  region lattice R. The M33 enumeration warning binds verbatim: fan compulsions live
+  on circles about DELETED vertices, so V must include the A1-style fan classes
+  (per core vertex v: is N(v) forced to cover k−1 colours in the core minus v?) or
+  the `Holistic` verdict has a known blind spot.
+* **A4 — The union boundary, parsed not validated.** Union vertices are canonical
+  exact-coordinate keys minted once at construction; **edges are re-derived on the
+  union's full vertex set from scratch** (all pairs at exact distance 1) — a union of
+  the two copies' edge LISTS is an adversarial member: it satisfies "union" while
+  missing every cross chord, which is the entire constraint content. Near-miss pairs
+  (floats would merge, exact arithmetic distinguishes) are reported, never merged.
+* **A5 — Equivariance wellposedness**: the query needs only {x, gx} ⊆ V per probed
+  point (the 791's antipodal pairs are the model) — g need not be a symmetry of the
+  object; state the domain as the orbit-pair list, not a set R with g(R) = R.
+* **A6 — The other passes**: obligation-modeling SKIPPED (no Lean this milestone);
+  experience-modeling SKIPPED (no consumer surface; artifact follows standing
+  schemas). Reasons recorded per the workflow rule.
+
 ## §0d — Failure clauses
 
 * Any probe's flat verdict is banked at face value; the milestone lands on the
