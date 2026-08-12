@@ -479,9 +479,13 @@ the classical scale is a local optimum and refining the cells costs a colour**
 six-colouring at any of twelve scales on tori to 24 × 24 (reported as
 period-bounded, never as `χ(G) > 6`), a seven-colouring at `p = 6/13` below the
 classical window (so the good scales are not one interval), and — the control
-that changed a reading — the fine-scale seven-refusals are torus-bounded, the
-24 × 24 row coming back UNKNOWN at cap, so the fine regime is honestly
-unprobed rather than closed.
+that changed a reading, and went further than retracting it — the fine-scale
+seven-refusals are period-bounded: at `p = 1/4` the bigger tori return UNKNOWN
+at cap, at `p = 1/3` they return a genuine UNSAT to period 30, and **at
+`p = 1/7` a seven-colouring SATs on a 24 × 24 torus**. The tentative "finer is
+worse" reading was not merely unsupported but wrong; the oscillation runs all
+the way down, good scales (`0.67–0.86`, `6/13`, `1/7`) interleaved with bad
+ones (`0.5–0.6`, `1/3`).
 
 ### The novel-results ledger (all kernel-checked unless marked)
 
@@ -1026,7 +1030,9 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   that parameter, the requirement is **not monotone**: seven in the classical
   window, **eight just below it** (kernel: the 8-clique theorem), seven again
   near `p ≈ 0.46`, with the clique number then collapsing while the graph
-  itself grows denser. **[kernel + measured: M39]** *Consequence: the intuition
+  itself grows denser — and the oscillation persists into the fine regime,
+  where `p = 1/3` genuinely refuses seven to period 30 while `p = 1/7` admits
+  it on a 24 × 24 torus. **[kernel + measured: M39]** *Consequence: the intuition
   "smaller cells approximate the plane better, so they should do at least as
   well" is FALSE — the classical scale is a local optimum and its neighbours
   are strictly worse. Any hunt for a six-colouring in this family must jump to

@@ -124,13 +124,18 @@ and is instrument catastrophe).
   interval. (ii) In the bad band, `k = 8` refuses at 12 × 12 and 16 × 16, so
   there the requirement is at least NINE at those periods — worse than the
   clique bound shows.
-* **The control that changed a reading, run because G21 demanded it.** The
-  fine-scale `k = 7` refusals at 12 × 12 and 18 × 18 looked like "the family
-  gets worse as cells shrink". The torus-size control at 24 × 24 came back
-  **unknown at the 600 s cap**, not unsat — so that reading is NOT supported,
-  and the honest statement is that fine scales are unprobed at adequate
-  periods. A small torus is a sufficient-not-necessary acceptance test in
-  exactly G21's sense, and it would have measured the instrument again.
+* **The control that changed a reading, run because G21 demanded it — and it
+  went further than retracting.** The fine-scale `k = 7` refusals at 12 × 12
+  and 18 × 18 looked like "the family gets worse as cells shrink". The
+  torus-size control at 24 × 24 and 30 × 30 returned:
+  `p = 1/4` **unknown** at cap (so no claim);
+  `p = 1/3` **unsat** at both (a genuine bad scale, now at period 30); and
+  **`p = 1/7` SAT at 24 × 24** — a seven-colouring at a scale seven times
+  finer than the classical one. So the tentative reading was not merely
+  unsupported, it was **wrong**: the fine regime is not worse, it needs bigger
+  periods to express its colourings. The oscillation of G23 therefore persists
+  all the way down: good scales (`0.67–0.86`, `6/13`, `1/7`) interleaved with
+  bad ones (`0.5–0.6`, `1/3`).
 
 ## What was NOT done (honesty ledger)
 
