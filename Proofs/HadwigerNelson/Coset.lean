@@ -1143,6 +1143,135 @@ example : (0 : (ℤ × ℤ) →+ ZMod 7) (shell 0) = (0 : (ℤ × ℤ) →+ ZMod
 #guard (((List.finRange 7).flatMap fun i => (List.finRange 7).map fun j =>
   hexQi (shell i - shell j)).filter (· != 0)).eraseDups.mergeSort (· ≤ ·) = [1, 3, 4]
 
+/-! ### M42 — the gap atlas, kernel side (skeleton)
+
+Three window theorems from M40's exact band decomposition (`plans/M42-gap-kernel.md`):
+the M = 4 scaled shell forces seven on `3/28 < p² < 1/9`; the 12-point trapezoid forces
+TWELVE on `3/13 < p² < 1/4`; and on the G\* band `3/16 < p² < 3/13` no index-7 coset
+colouring exists at all (every nonzero hom to `ZMod 7` has a kernel vector at a
+constrained norm). Bands enter as rational inequalities on `p²` — D1's thresholds are
+rational in `T² = 1/p²`. The engine additions: the IVT-existence form of the sweep and
+its corner instance (the exact-hexagon reach), for the two small-norm cases the
+inscribed-disc window provably cannot cover (norm 1 below `p = 1/2`, norm 4 below
+`p = 1/3`). -/
+
+section GapBands
+
+variable {p : ℝ} {rnd : ℂ → ℤ × ℤ}
+
+/-- The sweep's IVT-existence form: like `sweep_ivt` but PRODUCING the unit pair for an
+arbitrary consumer instead of refuting a homomorphism colouring. -/
+theorem exists_unit_pair_ivt (hp : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    {u v : ℤ × ℤ} {e : ℝ × ℝ} {s₀ s₁ : ℝ} (hs : s₀ ≤ s₁)
+    (hray : ∀ s ∈ Set.Ioo s₀ s₁, NearestUnique ((-s) • e) 0 ∧ NearestUnique (s • e) 0)
+    (h0 : p ^ 2 * hexQ (addr v - addr u + (2 * s₀) • e) < 1)
+    (h1 : 1 < p ^ 2 * hexQ (addr v - addr u + (2 * s₁) • e)) :
+    ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
+  sorry
+
+/-- The corner reach, existence form: pushing along a deep hole with functional value
+`c` on the offset sweeps the realizable norm from `Q` up to `Q + 2c + 4/3` — the exact
+hexagon window, beyond the inscribed disc. -/
+theorem exists_unit_pair_corner (hp : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    {u v : ℤ × ℤ} {i : Fin 6} (huv : v - u ≠ 0)
+    (h0 : p ^ 2 * (hexQi (v - u) : ℝ) < 1)
+    (h1 : 1 < p ^ 2 * ((hexQi (v - u) : ℝ) + 2 * (holeF i (v - u) : ℝ) + 4 / 3)) :
+    ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
+  sorry
+
+/-- The M = 4 scaled shell: the doubled closed first shell, pairwise norms `{4, 12, 16}`. -/
+def shell4 (i : Fin 7) : ℤ × ℤ := 2 • shell i
+
+theorem shell4_diff {i j : Fin 7} (h : i ≠ j) :
+    shell4 i - shell4 j ≠ 0 ∧
+      (hexQi (shell4 i - shell4 j) = 4 ∨ hexQi (shell4 i - shell4 j) = 12 ∨
+        hexQi (shell4 i - shell4 j) = 16) := by
+  sorry
+
+/-- **The M = 4 shell window** (`3/28 < p² < 1/9`): the doubled shell's seven addresses
+get seven distinct labels — the scaled-shell mechanism M39 §0e wrongly priced as
+exhausted (a G21 instance: the inscribed-disc window was sufficient-only). -/
+theorem seven_labels_shell4 {A : Type*} (hp : 3 / 28 < p ^ 2) (hp1 : p ^ 2 < 1 / 9)
+    (hppos : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
+    {i j : Fin 7} (hij : i ≠ j) : col (shell4 i) ≠ col (shell4 j) := by
+  sorry
+
+theorem seven_le_card_shell4 {A : Type*} [Fintype A] (hp : 3 / 28 < p ^ 2)
+    (hp1 : p ^ 2 < 1 / 9) (hppos : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) :
+    7 ≤ Fintype.card A := by
+  sorry
+
+/-- The 12-point trapezoid: rows of length 4, 3, 3, 2 sheared so every pairwise
+difference has norm in `{1, 3, 4, 7, 9}` (M40's corrected census — ω = 12 there). -/
+def trapez : Fin 12 → ℤ × ℤ
+  | 0 => (0, 0) | 1 => (0, 1) | 2 => (0, 2)
+  | 3 => (1, -1) | 4 => (1, 0) | 5 => (1, 1) | 6 => (1, 2)
+  | 7 => (2, -1) | 8 => (2, 0) | 9 => (2, 1)
+  | 10 => (3, -1) | 11 => (3, 0)
+
+theorem trapez_diff {i j : Fin 12} (h : i ≠ j) :
+    trapez i - trapez j ≠ 0 ∧
+      (hexQi (trapez i - trapez j) = 1 ∨ hexQi (trapez i - trapez j) = 3 ∨
+        hexQi (trapez i - trapez j) = 4 ∨ hexQi (trapez i - trapez j) = 7 ∨
+        hexQi (trapez i - trapez j) = 9) := by
+  sorry
+
+/-- **Twelve colours just below `p = 1/2`** (`3/13 < p² < 1/4`): the local pessimum
+below the classical window is TWELVE, not eight — M40's headline, kernel side. -/
+theorem twelve_labels_of_cell_constant {A : Type*} (hp : 3 / 13 < p ^ 2)
+    (hp1 : p ^ 2 < 1 / 4) (hppos : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
+    {i j : Fin 12} (hij : i ≠ j) : col (trapez i) ≠ col (trapez j) := by
+  sorry
+
+theorem twelve_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 3 / 13 < p ^ 2)
+    (hp1 : p ^ 2 < 1 / 4) (hppos : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (col : (ℤ × ℤ) → A)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) :
+    12 ≤ Fintype.card A := by
+  sorry
+
+/-- Every nonzero hom `ℤ × ℤ →+ ZMod 7` kills a vector of norm 3, 4, 7, or 9 (seven is
+prime, so index-7 quotients ARE `ℤ/7`; the witness table is finite). -/
+theorem exists_kernel_vector (φ : (ℤ × ℤ) →+ ZMod 7) (hφ : φ ≠ 0) :
+    ∃ d : ℤ × ℤ, d ≠ 0 ∧ φ d = 0 ∧
+      (hexQi d = 3 ∨ hexQi d = 4 ∨ hexQi d = 7 ∨ hexQi d = 9) := by
+  sorry
+
+/-- **No coset seven-colouring exists on the G\* band** (`3/16 < p² < 3/13`): the
+classical mechanism is structurally unavailable below the window — the sevens there
+are non-homomorphic (M40's measured dichotomy, kernel side). -/
+theorem no_coset_seven_on_gap (hp : 3 / 16 < p ^ 2) (hp1 : p ^ 2 < 3 / 13)
+    (hppos : 0 < p)
+    (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
+    (φ : (ℤ × ℤ) →+ ZMod 7) (hφ : φ ≠ 0)
+    (hproper : ∀ x y : ℂ, dist x y = 1 → φ (rnd x) ≠ φ (rnd y)) : False := by
+  sorry
+
+end GapBands
+
+-- the trapezoid really is a 12-clique of the {1,3,4,7,9} constraint set
+#guard (((List.finRange 12).flatMap fun i => (List.finRange 12).map fun j =>
+  hexQi (trapez i - trapez j)).filter (· != 0)).eraseDups.mergeSort (· ≤ ·) = [1, 3, 4, 7, 9]
+
+-- the doubled shell's difference norms are exactly {4, 12, 16}
+#guard (((List.finRange 7).flatMap fun i => (List.finRange 7).map fun j =>
+  hexQi (shell4 i - shell4 j)).filter (· != 0)).eraseDups.mergeSort (· ≤ ·) = [4, 12, 16]
+
+-- non-vacuity: p² = 21/100 sits inside the G* band, 3/16 < 21/100 < 3/13
+#guard decide ((3 : ℚ) / 16 < 21 / 100 ∧ (21 : ℚ) / 100 < 3 / 13)
+
 end Coset
 
 
