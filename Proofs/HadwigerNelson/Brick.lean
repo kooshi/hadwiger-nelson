@@ -24,12 +24,17 @@ silently certified.
 half-open, so the realizable difference vectors at an offset form the OPEN box around
 `(s·dr + w·dc, h·dr)` of half-widths `(w, h)`: a realized squared distance is therefore
 *strictly* below `hi`, and *strictly* above `lo` whenever `lo > 0`. So the check may accept
-an offset whose interval merely TOUCHES a guard — `q ≤ lo ∨ hi ≤ q`, not the strict
-separation an earlier version demanded — provided the guard is positive, which `sound`
-requires. This is not a convenience: the classical seven-colouring in this family has cell
-diagonal exactly `1` (`Instances/Seven.lean`), so under strict separation NO brick
-seven-colouring is certifiable at all, and a sweep run against a strict check reports the
-whole family as refusing.
+an offset whose interval merely TOUCHES a guard — `q ≤ loAt ∨ hiAt ≤ q`, not the strict
+separation an earlier version demanded — provided the guard is positive, which `check`
+itself now demands (`check_pos`). This is not a convenience: the classical seven-colouring
+in this family has cell diagonal exactly `1` (`Instances/Seven.lean`), so under strict
+separation NO brick seven-colouring is certifiable at all, and a sweep run against a strict
+check reports the whole family as refusing — which is exactly what M35's did.
+
+The relaxed condition is not merely *permitted*, it is *exact*: the open box's image under
+`|·|²` is the interval from `loAt` to `hiAt`, so a positive guard strictly inside is
+realized by an actual pair of points and no sound certificate could accept it. The strict
+version was weaker than the truth; this one is the truth.
 
 The colouring itself is noncomputable (`Int.floor` on `ℝ`); its computable twin
 `Brick.colorQ` (same formula over `ℚ`) exists exactly so instances can be `#eval`-tested
@@ -159,6 +164,13 @@ def lo (A Bc w h : ℚ) : ℚ := max 0 (|A| - w) ^ 2 + max 0 (|Bc| - h) ^ 2
 /-- Its upper end. -/
 def hi (A Bc w h : ℚ) : ℚ := (|A| + w) ^ 2 + (|Bc| + h) ^ 2
 
+/-- The shortest squared distance between the cells at index offset `(dc, dr)` —
+approached along their facing boundaries and, by half-openness, never attained. -/
+def loAt (dc dr : ℤ) : ℚ := lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h
+
+/-- The longest — likewise approached and never attained. -/
+def hiAt (dc dr : ℤ) : ℚ := hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h
+
 /-- Do two cells at (unwrapped) offset `(dc, dr)` ever share a colour? Decidable table
 scan; the same-cell offset `(0, 0)` always clashes, which is what forces the cell diagonal
 below every guard. -/
@@ -167,30 +179,42 @@ def clash (dc dr : ℤ) : Bool :=
     B.table i j = B.table (zmodIdx B.m B.m_pos ((i.1 : ℤ) + dc))
                           (zmodIdx B.n B.n_pos ((j.1 : ℤ) + dr)))
 
-/-- **The finite certificate.** Every offset in the window either never shares a colour or
-keeps every guard outside its closed box interval — *outside* in the boundary-tight sense
-the half-open cells license (`q ≤ lo ∨ hi ≤ q`; see the module docstring, and `sound` for
-the positivity the endpoints need). Pure rational arithmetic; the window is computed here,
-never supplied. -/
+/-- **The finite certificate.** Every guard is positive, and every offset in the window
+either never shares a colour or keeps every guard outside its box interval — *outside* in
+the boundary-tight sense the half-open cells license (`q ≤ loAt ∨ hiAt ≤ q`; see the module
+docstring). Pure rational arithmetic; the window is computed here, never supplied.
+
+The positivity conjunct is not decoration. A guard of `0` would otherwise be accepted —
+`0 ≤ loAt 0 0` holds — and `sound` would then "prove" that a point differs in colour from
+itself. Demanding it here rather than at every use makes the degenerate guard
+unrepresentable by a passing certificate, and leaves the consumer surface with nothing
+extra to discharge. -/
 def check (guards : List ℚ) : Bool :=
+  guards.all (fun q => decide (0 < q)) &&
   (List.range (2 * B.rowBound guards + 1)).all fun ir =>
     (List.range (2 * B.colBound guards + 1)).all fun ic =>
-      !B.clash ((ic : ℤ) - (B.colBound guards : ℤ)) ((ir : ℤ) - (B.rowBound guards : ℤ)) ||
-        guards.all fun q =>
-          decide (q ≤ lo (B.s * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ) +
-                          B.w * (((ic : ℤ) - (B.colBound guards : ℤ) : ℤ) : ℚ))
-                     (B.h * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ)) B.w B.h) ||
-          decide (hi (B.s * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ) +
-                      B.w * (((ic : ℤ) - (B.colBound guards : ℤ) : ℤ) : ℚ))
-                     (B.h * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ)) B.w B.h ≤ q)
+      let dr : ℤ := (ir : ℤ) - (B.rowBound guards : ℤ)
+      let dc : ℤ := (ic : ℤ) - (B.colBound guards : ℤ)
+      !B.clash dc dr ||
+        guards.all fun q => decide (q ≤ B.loAt dc dr) || decide (B.hiAt dc dr ≤ q)
+
+/-- A certified guard is positive — the invariant `check` parses in, so no consumer
+carries it. -/
+theorem check_pos {guards : List ℚ} (hchk : B.check guards = true) {q : ℚ}
+    (hq : q ∈ guards) : 0 < q := by
+  unfold check at hchk
+  rw [Bool.and_eq_true] at hchk
+  simp only [List.all_eq_true, decide_eq_true_eq] at hchk
+  exact hchk.1 q hq
 
 /-- The check unfolded at one in-window offset — the sole `Bool → Prop` bridge. -/
 theorem check_spec {guards : List ℚ} (hchk : B.check guards = true)
     {dc dr : ℤ} (hdr : dr.natAbs ≤ B.rowBound guards) (hdc : dc.natAbs ≤ B.colBound guards)
     (hcl : B.clash dc dr = true) {q : ℚ} (hq : q ∈ guards) :
-    q ≤ lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ∨
-    hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ≤ q := by
+    q ≤ B.loAt dc dr ∨ B.hiAt dc dr ≤ q := by
   unfold check at hchk
+  rw [Bool.and_eq_true] at hchk
+  replace hchk := hchk.2
   simp only [List.all_eq_true, List.mem_range, Bool.or_eq_true, Bool.not_eq_true',
     decide_eq_true_eq] at hchk
   have hir : ((dr + B.rowBound guards).toNat) < 2 * B.rowBound guards + 1 := by omega
@@ -240,18 +264,20 @@ are the whole content of that strictness: the square lands strictly below the bo
 end, and strictly above its lower end whenever that end is positive. -/
 
 /-- Strictly below the upper end. -/
-theorem sq_lt_hi {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
+theorem sq_lt_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
     t ^ 2 < (|X| + width) ^ 2 := by
   sorry
 
-/-- Strictly above the lower end, when the lower end is positive. -/
-theorem lo_lt_sq {X width t e : ℝ} (ht : t = X + e) (he : |e| < width)
-    (hX : width < |X|) : (|X| - width) ^ 2 < t ^ 2 := by
+/-- Weakly above the lower end, always — including the branch where the box straddles its
+axis and the lower end is `0`. -/
+theorem le_sq_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
+    max 0 (|X| - width) ^ 2 ≤ t ^ 2 := by
   sorry
 
-/-- Weakly above the lower end, always — the branch where the box straddles its axis. -/
-theorem lo_le_sq {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
-    max 0 (|X| - width) ^ 2 ≤ t ^ 2 := by
+/-- Strictly above the lower end, when that end is positive. Stated through the same `max`
+the interval is built from, so the assembly needs no rewriting between the two forms. -/
+theorem lt_sq_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width)
+    (hX : 0 < max 0 (|X| - width)) : max 0 (|X| - width) ^ 2 < t ^ 2 := by
   sorry
 
 /-! ## Soundness -/
@@ -259,13 +285,14 @@ theorem lo_le_sq {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
 /-- **The soundness theorem.** A passing certificate excludes every guarded squared
 distance between same-coloured points — over the whole plane.
 
-The guard must be POSITIVE: the check's lower branch (`q ≤ lo`) is sound because a
-realized squared distance strictly exceeds a positive `lo`, and `q > 0` is exactly what
-forces `lo > 0` there. A `q = 0` guard would only ever say `z ≠ z'`. -/
+The check's lower branch (`q ≤ loAt`) is sound because a realized squared distance strictly
+exceeds a positive `loAt`, and the guard's positivity — carried by the certificate itself,
+`check_pos` — is exactly what forces `loAt > 0` in that branch. -/
 theorem sound {guards : List ℚ} (hchk : B.check guards = true)
-    {q : ℚ} (hq : q ∈ guards) (hq0 : 0 < q) {z z' : ℂ}
+    {q : ℚ} (hq : q ∈ guards) {z z' : ℂ}
     (hd : dist z z' ^ 2 = (q : ℝ)) : B.color z ≠ B.color z' := by
   intro hcol
+  have hq0 : 0 < q := B.check_pos hchk hq
   have hw : (0 : ℝ) < (B.w : ℝ) := by exact_mod_cast B.w_pos
   have hh : (0 : ℝ) < (B.h : ℝ) := by exact_mod_cast B.h_pos
   have hd2 : (z.re - z'.re) ^ 2 + (z.im - z'.im) ^ 2 = (q : ℝ) := by
@@ -346,10 +373,9 @@ theorem sound {guards : List ℚ} (hchk : B.check guards = true)
   have hu' : 0 ≤ (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' ∧
       (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' < (B.w : ℝ) := box_mem hw
   -- the offset decomposition and the STRICT componentwise bounds (the OPEN box)
-  have hqlt : q < hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h := by
+  have hqlt : q < B.hiAt dc dr := by
     sorry
-  have hqgt : 0 < lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h →
-      lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h < q := by
+  have hqgt : 0 < B.loAt dc dr → B.loAt dc dr < q := by
     sorry
   -- the colour equality instantiates the clash at (dc, dr)
   have hclash : B.clash dc dr = true := by
@@ -372,19 +398,20 @@ is unprovable. -/
 theorem colorable {guards : List ℚ} (h1 : (1 : ℚ) ∈ guards)
     (hchk : B.check guards = true) : (unitDistance ℂ).Colorable k :=
   ⟨Coloring.mk B.color fun hadj =>
-    B.sound hchk h1 one_pos (by rw [unitDistance_adj.mp hadj]; norm_num)⟩
+    B.sound hchk h1 (by rw [unitDistance_adj.mp hadj]; norm_num)⟩
 
 /-- **A passing certificate avoids every guarded distance**: same-coloured points are never
 at distance `√q` for any listed guard. An avoider at `k` colours rules its class out as a
 pigeonhole AT `k`; for the 6-hunt only `k = 5` closes a mechanism, and any `k = 5` avoider
 would prove `χ(ℝ²) ≤ 5` outright — a `k = 6` avoider bounds SEVEN-forcers (M35 §0a C1).
 
-The guard is POSITIVE, not merely nonnegative: `sound`'s boundary-tight lower branch needs
-it, and a `q = 0` avoidance claim says only that distinct points are distinct. -/
-theorem avoids {guards : List ℚ} {q : ℚ} (hq : q ∈ guards) (hq0 : 0 < q)
+The guard's nonnegativity is not a hypothesis: a certified guard is positive by
+`check_pos`, so a caller supplies only membership. -/
+theorem avoids {guards : List ℚ} {q : ℚ} (hq : q ∈ guards)
     (hchk : B.check guards = true) {z z' : ℂ}
     (hd : dist z z' = Real.sqrt (q : ℝ)) : B.color z ≠ B.color z' :=
-  B.sound hchk hq hq0 (by rw [hd, Real.sq_sqrt (by exact_mod_cast hq0.le)])
+  B.sound hchk hq
+    (by rw [hd, Real.sq_sqrt (by exact_mod_cast (B.check_pos hchk hq).le)])
 
 /-! ## The computable twin — the definition's test instrument -/
 

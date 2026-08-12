@@ -317,6 +317,74 @@ the boundary-tightness `#guard` that `hi` at the self-offset is exactly 1).
 `Instances/Interval.lean`: the interval theorem. The specification elaborates
 before any proof effort is spent; the proof bodies are the implementation pass.
 
+## §0g — Domain modeling pass (2026-08-11, fresh invocation)
+
+**D1 — Guard positivity belongs INSIDE `check`, and finding that was the pass's
+whole earning.** The skeleton put `(hq0 : 0 < q)` on `sound`. Hunting the
+adversarial member — an instance satisfying the letter of every definition while
+violating the intent — turned one up immediately: **`guards = [0]`**. The
+self-offset has `loAt 0 0 = 0`, so `0 ≤ loAt` holds and the relaxed check
+ACCEPTS it; a `sound` without the positivity hypothesis would then conclude that
+a point differs in colour from itself, i.e. prove `False`. The hypothesis is
+therefore not hygiene, it is the difference between sound and unsound — which is
+precisely the argument for parsing it rather than validating it at each use.
+`check` now carries `guards.all (0 < ·)`, `check_pos` extracts it, and the
+consumer surface ends up SIMPLER than M35's: `sound` recovers its original
+signature and `avoids` LOSES its nonnegativity argument (a certified guard is
+positive by construction). The degenerate list is unrepresentable by a passing
+certificate, and both instances carry `check [0] = false` as the negative test.
+
+**D2 — `loAt`/`hiAt`: name the offset's interval, delete six copies of its
+centre.** The centre expression `B.s * dr + B.w * dc` / `B.h * dr` appeared four
+times inside `check` and twice in `check_spec`'s statement; with the relaxation
+it would have appeared eight times. Naming the offset-indexed ends collapses all
+of it, and the window indices get `let`-bound so `check` reads as the sentence it
+is. The gain lands where it matters most: the boundary-tightness `#guard`s now
+read `sevenBrick.hiAt 0 0 = 1` and `sevenBrick.loAt 1 2 = 1` — the offsets the
+mathematics names — instead of the precomputed translations `8/5, 6/5`. A
+`Tight` predicate was considered and REJECTED as speculative: two uses, both
+`#guard`s in one file.
+
+**D3 — Three open-box lemmas, not one conjunction, and the strict lower one in
+`max` form.** The assembly consumes three different facts per coordinate (strict
+upper always; weak lower always; strict lower under a side condition), and the
+weak one is what the straddling branch needs while the strict one is what the
+separated branch needs — a conjunction would be a tuple destructured twice with
+projection numbers standing in for names. The one change from the skeleton:
+`lt_sq_of_abs_lt`'s side condition is stated as `0 < max 0 (|X| - width)` rather
+than `width < |X|`, because `0 < loAt` is what the assembly actually has and the
+`max` form needs no rewriting between the two. Names follow Mathlib's
+conclusion-then-hypothesis shape (`sq_lt_of_abs_lt`, `le_sq_of_abs_lt`,
+`lt_sq_of_abs_lt`).
+
+**D4 — The coefficient stays `ℕ`, and the ℤ[ζ₆] arithmetic stays out of Lean —
+but gets an executable witness.** `ZMod 7` would state the colouring's ring
+structure natively and is definitionally `Fin 7`, but the certificate consumes a
+table, not a ring, and routing a 99 × 49 kernel `decide` through `ZMod`'s
+instance path buys risk for aesthetics. The ideal argument EXPLAINS the table
+and is what makes the construction independently re-derivable, so it stays in
+the docstring, and `build/m36-design.py` now witnesses it: for each coefficient
+it reports whether the kernel is ζ₆-stable and its minimum norm. Result, exactly
+as claimed and sharper: **`c = 3` and `c = 5` are the ideal coefficients, both of
+minimum norm 7; every other coefficient has minimum norm 1 or 3** — and 3 and 5
+are precisely the roots of `x² − x + 1` mod 7, i.e. the images of `ζ₆` under a
+ring map to `𝔽₇`. The mutation audit tests the claim exactly where it bites.
+
+**D5 — The interval stays a conjunction in its own module.** `Set.Icc`
+membership asks the reader to know which order `ℕ∞` carries; `5 ≤ χ ∧ χ ≤ 7`
+reads as the informal sentence, which is the only thing a read-aloud gate is
+for. It stays in `Instances/Interval.lean` rather than `Seven.lean` so that the
+seven-colouring module remains a leaf over `Brick` and does not drag de Grey's
+whole certificate chain into its import graph.
+
+**A derived fact, recorded because it changes what the sharpening IS.** The open
+box's image under `|·|²` is the interval between `loAt` and `hiAt`, so a positive
+guard strictly inside is realized by an actual pair of points. The relaxed
+condition is therefore not merely *permitted* but *exact*: `check` now accepts
+precisely the offsets that genuinely avoid the guard. M35's strict version was
+weaker than the truth rather than differently calibrated — which is why its sweep
+verdict was an artifact and not a measurement.
+
 ---
 
 # §R — Results (opened at the skeleton; every verdict at face value)

@@ -58,10 +58,10 @@ theorem nine_avoids_sqrt_three_halves :
     ∃ C : (unitDistance ℂ).Coloring (Fin 9), ∀ z z' : ℂ,
       dist z z' = Real.sqrt ((3/2 : ℚ) : ℝ) → C z ≠ C z' := by
   refine ⟨Coloring.mk nineBrick.color fun hadj =>
-    nineBrick.sound nineBrick_check_avoid List.mem_cons_self one_pos
+    nineBrick.sound nineBrick_check_avoid List.mem_cons_self
       (by rw [unitDistance_adj.mp hadj]; norm_num), fun z z' hd => ?_⟩
   exact nineBrick.avoids (List.mem_cons_of_mem _ (List.mem_singleton.mpr rfl))
-    (by norm_num) nineBrick_check_avoid hd
+    nineBrick_check_avoid hd
 
 /-! ### Controls — compiled, every build -/
 
@@ -80,6 +80,11 @@ theorem nine_avoids_sqrt_three_halves :
 -- the guard-list discipline: a guard STRICTLY inside the same-cell offset's interval is
 -- refused, and no relaxation of the certificate can ever accept one
 #guard nineBrick.check [1, 1/2] = false
+
+-- the degenerate guard is unrepresentable by a passing certificate: `0 ≤ loAt 0 0` would
+-- otherwise be accepted and `sound` would then deny a point its own colour
+#guard nineBrick.check [0] = false
+#guard nineBrick.check [1, 0] = false
 
 -- the boundary itself is admissible, and the mathematics agrees: the cell diagonal is
 -- exactly `√(8/9)`, approached and never attained (half-open cells), so this colouring

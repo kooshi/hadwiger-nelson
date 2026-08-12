@@ -14,7 +14,12 @@ is stable under multiplication by `ζ₆` — `(a, b) ↦ (−b, a + b)` sends t
 `3a + 2b ≡ 3·(a + 3b)` — hence an IDEAL, and it contains `τ = −3 + ζ₆` of norm
 `9 − 3 + 1 = 7`, so by index it *is* `(τ)`. Two same-coloured cells therefore differ by
 `τ·μ`, of norm `7·|μ|² ≥ 7`: **norm multiplicativity, not a lattice census, is what
-separates the colour classes.**
+separates the colour classes.** The coefficient `3` is not a choice with alternatives — it
+and its conjugate `5` are exactly the roots of `x² − x + 1` in `𝔽₇`, i.e. the only images
+`ζ₆` can have under a ring map to `𝔽₇`; at every other coefficient the kernel is a
+subgroup and not an ideal, with a vector of norm 1 or 3 inside the unit distance
+(`build/m36-design.py` reports the census, and the mutation control below is its Lean
+half).
 
 **Why exactly this shape.** Two offsets pin the geometry and leave no freedom. A cell shares
 its own colour, so the cell diagonal must be at most 1: `w² + h² ≤ 1`. The coset offset
@@ -99,8 +104,8 @@ mutated and seen to refuse. -/
 -- BOUNDARY-TIGHT, both ends, exactly at the guard: the cell's own diagonal reaches `1`,
 -- and the nearest same-coloured cell (offset `(1, 2)`, translation `(8/5, 6/5)`) closes to
 -- exactly `1`. A strictly-separating certificate accepts neither.
-#guard Brick.hi 0 0 (4/5) (3/5) = 1
-#guard Brick.lo (8/5) (6/5) (4/5) (3/5) = 1
+#guard sevenBrick.hiAt 0 0 = 1
+#guard sevenBrick.loAt 1 2 = 1
 
 -- the geometry is load-bearing in BOTH directions: a shorter cell (diagonal² = 89/100 < 1)
 -- lets the `(1, 2)` offset straddle the guard, a wider one (34/25 > 1) lets the cell's own
@@ -117,5 +122,9 @@ mutated and seen to refuse. -/
 
 -- the adversarial member: one colour everywhere must fail
 #guard ({ sevenBrick with table := fun _ _ => 0 } : Brick 7).check [1] = false
+
+-- and the degenerate guard, which the boundary-tight certificate would otherwise accept
+-- at the self-offset: refused, so `sound` can never be handed it
+#guard sevenBrick.check [0] = false
 
 end HadwigerNelson
