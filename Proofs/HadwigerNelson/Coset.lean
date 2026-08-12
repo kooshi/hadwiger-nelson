@@ -1168,18 +1168,61 @@ theorem exists_unit_pair_ivt (hp : 0 < p)
     (h0 : p ^ 2 * hexQ (addr v - addr u + (2 * s₀) • e) < 1)
     (h1 : 1 < p ^ 2 * hexQ (addr v - addr u + (2 * s₁) • e)) :
     ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
-  sorry
+  have hcont : ContinuousOn (fun s : ℝ => p ^ 2 * hexQ (addr v - addr u + (2 * s) • e))
+      (Set.Icc s₀ s₁) := by
+    apply Continuous.continuousOn
+    exact continuous_const.mul (continuous_hexQ.comp (by fun_prop))
+  obtain ⟨s, hsmem, hFs⟩ := intermediate_value_Ioo hs hcont ⟨h0, h1⟩
+  exact exists_unit_pair hp hrnd (hray s hsmem).1 (hray s hsmem).2 hFs
 
 /-- The corner reach, existence form: pushing along a deep hole with functional value
 `c` on the offset sweeps the realizable norm from `Q` up to `Q + 2c + 4/3` — the exact
 hexagon window, beyond the inscribed disc. -/
 theorem exists_unit_pair_corner (hp : 0 < p)
     (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
-    {u v : ℤ × ℤ} {i : Fin 6} (huv : v - u ≠ 0)
+    {u v : ℤ × ℤ} {i : Fin 6}
     (h0 : p ^ 2 * (hexQi (v - u) : ℝ) < 1)
     (h1 : 1 < p ^ 2 * ((hexQi (v - u) : ℝ) + 2 * (holeF i (v - u) : ℝ) + 4 / 3)) :
     ∃ x y : ℂ, dist x y = 1 ∧ rnd x = u ∧ rnd y = v := by
-  sorry
+  have key : ∀ s : ℝ, hexQ (addr v - addr u + (2 * s) • hole i)
+      = (hexQi (v - u) : ℝ) + 2 * s * (holeF i (v - u) : ℝ) + 4 * s ^ 2 / 3 := by
+    intro s
+    rw [← addr_sub, hexQ_add, hexIP_smul_right, hexIP_comm, hexIP_hole, hexQ_smul,
+      hexQ_hole, hexQ_addr]
+    ring
+  refine exists_unit_pair_ivt hp hrnd (e := hole i) (s₀ := 0) (s₁ := 1) zero_le_one
+    (fun s hs => ?_) ?_ ?_
+  · have h : |s| < 1 := abs_lt.mpr ⟨by linarith [hs.1], hs.2⟩
+    exact ⟨nearestUnique_hole (by rwa [abs_neg]), nearestUnique_hole h⟩
+  · rw [key]
+    calc p ^ 2 * ((hexQi (v - u) : ℝ) + 2 * 0 * (holeF i (v - u) : ℝ) + 4 * 0 ^ 2 / 3)
+        = p ^ 2 * (hexQi (v - u) : ℝ) := by ring
+      _ < 1 := h0
+  · rw [key]
+    calc (1 : ℝ)
+        < p ^ 2 * ((hexQi (v - u) : ℝ) + 2 * (holeF i (v - u) : ℝ) + 4 / 3) := h1
+      _ = p ^ 2 * ((hexQi (v - u) : ℝ) + 2 * 1 * (holeF i (v - u) : ℝ) + 4 * 1 ^ 2 / 3) := by
+          ring
+
+/-- Every norm-1 vector carries a hole functional of value 1. -/
+theorem norm_one_hole {d : ℤ × ℤ} (h : hexQi d = 1) : ∃ i : Fin 6, holeF i d = 1 := by
+  obtain ⟨a, b⟩ := d
+  simp only [hexQi] at h
+  have hb1 : -1 ≤ b := by nlinarith [sq_nonneg (2 * a + b)]
+  have hb2 : b ≤ 1 := by nlinarith [sq_nonneg (2 * a + b)]
+  have ha1 : -1 ≤ a := by nlinarith [sq_nonneg (a + 2 * b)]
+  have ha2 : a ≤ 1 := by nlinarith [sq_nonneg (a + 2 * b)]
+  revert h; interval_cases a <;> interval_cases b <;> decide
+
+/-- Every norm-4 vector carries a hole functional of value 2 (it is twice a unit). -/
+theorem norm_four_hole {d : ℤ × ℤ} (h : hexQi d = 4) : ∃ i : Fin 6, holeF i d = 2 := by
+  obtain ⟨a, b⟩ := d
+  simp only [hexQi] at h
+  have hb1 : -2 ≤ b := by nlinarith [sq_nonneg (2 * a + b)]
+  have hb2 : b ≤ 2 := by nlinarith [sq_nonneg (2 * a + b)]
+  have ha1 : -2 ≤ a := by nlinarith [sq_nonneg (a + 2 * b)]
+  have ha2 : a ≤ 2 := by nlinarith [sq_nonneg (a + 2 * b)]
+  revert h; interval_cases a <;> interval_cases b <;> decide
 
 /-- The M = 4 scaled shell: the doubled closed first shell, pairwise norms `{4, 12, 16}`. -/
 def shell4 (i : Fin 7) : ℤ × ℤ := 2 • shell i
@@ -1188,7 +1231,7 @@ theorem shell4_diff {i j : Fin 7} (h : i ≠ j) :
     shell4 i - shell4 j ≠ 0 ∧
       (hexQi (shell4 i - shell4 j) = 4 ∨ hexQi (shell4 i - shell4 j) = 12 ∨
         hexQi (shell4 i - shell4 j) = 16) := by
-  sorry
+  revert h; fin_cases i <;> fin_cases j <;> decide
 
 /-- **The M = 4 shell window** (`3/28 < p² < 1/9`): the doubled shell's seven addresses
 get seven distinct labels — the scaled-shell mechanism M39 §0e wrongly priced as
@@ -1199,7 +1242,29 @@ theorem seven_labels_shell4 {A : Type*} (hp : 3 / 28 < p ^ 2) (hp1 : p ^ 2 < 1 /
     (col : (ℤ × ℤ) → A)
     (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
     {i j : Fin 7} (hij : i ≠ j) : col (shell4 i) ≠ col (shell4 j) := by
-  sorry
+  intro hc
+  have hplt : p < 1 / 3 := by nlinarith
+  have hp1' : p < 1 := by linarith
+  obtain ⟨hne, hQ⟩ := shell4_diff (Ne.symm hij)
+  have huv : shell4 i ≠ shell4 j := fun h => hne (by rw [h, sub_self])
+  rcases hQ with h4 | h12 | h16
+  · -- norm 4: past the inscribed disc below p = 1/3 — the corner sweep reaches 28/3
+    obtain ⟨k, hk⟩ := norm_four_hole h4
+    obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_corner (u := shell4 i) (v := shell4 j)
+      (i := k) hppos hrnd
+      (by rw [h4]; push_cast; nlinarith)
+      (by rw [h4, hk]; push_cast; nlinarith)
+    exact hproper x y hxy (by rw [hx, hy]; exact hc)
+  · obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window (u := shell4 i)
+      (v := shell4 j) hppos hp1' hrnd huv
+      (by rw [h12]; push_cast; nlinarith)
+      (by rw [h12]; push_cast; nlinarith)
+    exact hproper x y hxy (by rw [hx, hy]; exact hc)
+  · obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window (u := shell4 i)
+      (v := shell4 j) hppos hp1' hrnd huv
+      (by rw [h16]; push_cast; nlinarith)
+      (by rw [h16]; push_cast; nlinarith)
+    exact hproper x y hxy (by rw [hx, hy]; exact hc)
 
 theorem seven_le_card_shell4 {A : Type*} [Fintype A] (hp : 3 / 28 < p ^ 2)
     (hp1 : p ^ 2 < 1 / 9) (hppos : 0 < p)
@@ -1207,7 +1272,11 @@ theorem seven_le_card_shell4 {A : Type*} [Fintype A] (hp : 3 / 28 < p ^ 2)
     (col : (ℤ × ℤ) → A)
     (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) :
     7 ≤ Fintype.card A := by
-  sorry
+  have hinj : Function.Injective (fun i : Fin 7 => col (shell4 i)) := by
+    intro i j hij
+    by_contra hne
+    exact seven_labels_shell4 hp hp1 hppos hrnd col hproper hne hij
+  simpa using Fintype.card_le_of_injective _ hinj
 
 /-- The 12-point trapezoid: rows of length 4, 3, 3, 2 sheared so every pairwise
 difference has norm in `{1, 3, 4, 7, 9}` (M40's corrected census — ω = 12 there). -/
@@ -1222,7 +1291,7 @@ theorem trapez_diff {i j : Fin 12} (h : i ≠ j) :
       (hexQi (trapez i - trapez j) = 1 ∨ hexQi (trapez i - trapez j) = 3 ∨
         hexQi (trapez i - trapez j) = 4 ∨ hexQi (trapez i - trapez j) = 7 ∨
         hexQi (trapez i - trapez j) = 9) := by
-  sorry
+  revert h; fin_cases i <;> fin_cases j <;> decide
 
 /-- **Twelve colours just below `p = 1/2`** (`3/13 < p² < 1/4`): the local pessimum
 below the classical window is TWELVE, not eight — M40's headline, kernel side. -/
@@ -1232,7 +1301,27 @@ theorem twelve_labels_of_cell_constant {A : Type*} (hp : 3 / 13 < p ^ 2)
     (col : (ℤ × ℤ) → A)
     (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y))
     {i j : Fin 12} (hij : i ≠ j) : col (trapez i) ≠ col (trapez j) := by
-  sorry
+  intro hc
+  have hplt : p < 1 / 2 := by nlinarith
+  have hp1' : p < 1 := by linarith
+  obtain ⟨hne, hQ⟩ := trapez_diff (Ne.symm hij)
+  have huv : trapez i ≠ trapez j := fun h => hne (by rw [h, sub_self])
+  rcases hQ with h1 | h | h | h | h
+  · -- norm 1: the class that stopped being an edge at p = 1/2 — the corner reaches 13/3
+    obtain ⟨k, hk⟩ := norm_one_hole h1
+    obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_corner (u := trapez i) (v := trapez j)
+      (i := k) hppos hrnd
+      (by rw [h1]; push_cast; nlinarith)
+      (by rw [h1, hk]; push_cast; nlinarith)
+    exact hproper x y hxy (by rw [hx, hy]; exact hc)
+  all_goals {
+    have hlo : (3 : ℝ) ≤ (hexQi (trapez j - trapez i) : ℝ) := by rw [h]; norm_num
+    have hhi : (hexQi (trapez j - trapez i) : ℝ) ≤ 9 := by rw [h]; norm_num
+    obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window (u := trapez i)
+      (v := trapez j) hppos hp1' hrnd huv
+      (by nlinarith) (by nlinarith)
+    exact hproper x y hxy (by rw [hx, hy]; exact hc)
+  }
 
 theorem twelve_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 3 / 13 < p ^ 2)
     (hp1 : p ^ 2 < 1 / 4) (hppos : 0 < p)
@@ -1240,14 +1329,40 @@ theorem twelve_le_card_of_cell_constant {A : Type*} [Fintype A] (hp : 3 / 13 < p
     (col : (ℤ × ℤ) → A)
     (hproper : ∀ x y : ℂ, dist x y = 1 → col (rnd x) ≠ col (rnd y)) :
     12 ≤ Fintype.card A := by
-  sorry
+  have hinj : Function.Injective (fun i : Fin 12 => col (trapez i)) := by
+    intro i j hij
+    by_contra hne
+    exact twelve_labels_of_cell_constant hp hp1 hppos hrnd col hproper hne hij
+  simpa using Fintype.card_le_of_injective _ hinj
 
 /-- Every nonzero hom `ℤ × ℤ →+ ZMod 7` kills a vector of norm 3, 4, 7, or 9 (seven is
 prime, so index-7 quotients ARE `ℤ/7`; the witness table is finite). -/
 theorem exists_kernel_vector (φ : (ℤ × ℤ) →+ ZMod 7) (hφ : φ ≠ 0) :
     ∃ d : ℤ × ℤ, d ≠ 0 ∧ φ d = 0 ∧
       (hexQi d = 3 ∨ hexQi d = 4 ∨ hexQi d = 7 ∨ hexQi d = 9) := by
-  sorry
+  have hval : ∀ m n : ℤ, φ (m, n) = (m : ZMod 7) * φ (1, 0) + (n : ZMod 7) * φ (0, 1) := by
+    intro m n
+    have hmn : ((m, n) : ℤ × ℤ) = m • ((1 : ℤ), (0 : ℤ)) + n • ((0 : ℤ), (1 : ℤ)) := by
+      simp
+    rw [hmn, map_add, map_zsmul, map_zsmul]
+    simp [zsmul_eq_mul]
+  have hab : ¬(φ (1, 0) = 0 ∧ φ (0, 1) = 0) := by
+    rintro ⟨ha, hb⟩
+    apply hφ
+    ext v
+    · simpa [ha, hb] using hval v.1 v.2 ▸ (by rw [hval v.1 v.2, ha, hb]; ring :
+        φ (v.1, v.2) = 0)
+  -- the finite witness table: for every nonzero (a, b) some vector on the candidate
+  -- list lies in the kernel, and every candidate has norm in {3, 4, 7, 9}
+  have key : ∀ a b : ZMod 7, ¬(a = 0 ∧ b = 0) →
+      ∃ d ∈ ([(1, 1), (2, -1), (-1, 2), (2, 0), (0, 2), (1, 2), (2, 1), (3, -1),
+        (1, -3), (2, -3), (3, -2), (3, 0), (0, 3), (3, -3)] : List (ℤ × ℤ)),
+        (d.1 : ZMod 7) * a + (d.2 : ZMod 7) * b = 0 := by decide
+  obtain ⟨d, hdmem, hdker⟩ := key (φ (1, 0)) (φ (0, 1)) hab
+  refine ⟨d, ?_, ?_, ?_⟩
+  · fin_cases hdmem <;> decide
+  · rw [show d = (d.1, d.2) from rfl, hval]; exact hdker
+  · fin_cases hdmem <;> decide
 
 /-- **No coset seven-colouring exists on the G\* band** (`3/16 < p² < 3/13`): the
 classical mechanism is structurally unavailable below the window — the sevens there
@@ -1257,7 +1372,15 @@ theorem no_coset_seven_on_gap (hp : 3 / 16 < p ^ 2) (hp1 : p ^ 2 < 3 / 13)
     (hrnd : ∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v))
     (φ : (ℤ × ℤ) →+ ZMod 7) (hφ : φ ≠ 0)
     (hproper : ∀ x y : ℂ, dist x y = 1 → φ (rnd x) ≠ φ (rnd y)) : False := by
-  sorry
+  obtain ⟨d, hd0, hdker, hQ⟩ := exists_kernel_vector φ hφ
+  have hp1' : p < 1 := by nlinarith
+  have huv : (0 : ℤ × ℤ) ≠ d := fun h => hd0 h.symm
+  have hsub : d - 0 = d := by simp
+  obtain ⟨x, y, hxy, hx, hy⟩ := exists_unit_pair_of_window (u := (0 : ℤ × ℤ)) (v := d)
+    hppos hp1' hrnd huv
+    (by rw [hsub]; rcases hQ with h | h | h | h <;> rw [h] <;> push_cast <;> nlinarith)
+    (by rw [hsub]; rcases hQ with h | h | h | h <;> rw [h] <;> push_cast <;> nlinarith)
+  exact hproper x y hxy (by rw [hx, hy, map_zero, hdker])
 
 end GapBands
 
