@@ -579,7 +579,8 @@ def shrink(T, k, radius, cap=300.0):
     """1-minimal core of the ball refutation of k colours at scale 1/T. Sound because
     first-occurrence breaking is colour-invariant. The final core is re-certified: the
     core itself must be unsat, and every single-vertex deletion must be SAT."""
-    pts = [(a, b) for a in range(-radius, radius + 1) for b in range(-radius, radius + 1)
+    bx = int(1.1548 * radius) + 2  # M43: the [-R,R]^2 box CLIPS the hex Q-ball
+    pts = [(a, b) for a in range(-bx, bx + 1) for b in range(-bx, bx + 1)
            if Q((a, b)) <= radius * radius]
     pts.sort(key=lambda v: (Q(v), v))
     st = _ball_status(T, k, pts, cap)
@@ -884,9 +885,13 @@ def load_art43():
 
 
 def record43(section, row):
-    art = load_art43()
-    art.setdefault(section, []).append(row)
-    ART43.write_text(json.dumps(art, indent=1, default=str))
+    import fcntl
+    lock = ART43.with_suffix(".lock")
+    with open(lock, "w") as lf:
+        fcntl.flock(lf, fcntl.LOCK_EX)  # concurrent campaigns must not lose rows
+        art = load_art43()
+        art.setdefault(section, []).append(row)
+        ART43.write_text(json.dumps(art, indent=1, default=str))
 
 
 _BAND_CACHE = {}
