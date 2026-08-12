@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M40, 2026-08-12.**
+**Last updated: M41, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -529,6 +529,35 @@ now concrete. Explorer published (`build/m40-spectrum.html`); kernel promotion o
 12-clique window, the M = 4 shell window, the coset-impossibility, and χ(G\*) = 7 is
 priced and stubbed as M42.
 
+M41 ran the k = 5 gradient hunt in one day — subplanned and executed on the laptop,
+every phase parallel — and the theory moved on three fronts while every gradient meter
+read zero. **The autopsy (G26)**: all five of M40's clique-free forcer cores FACTOR as
+pigeonhole × kill — Act One is always a mono pair forced onto a small NON-EDGE class
+(the hex-shell counting argument surviving the clique's death), the fractional
+relaxation always collapses (130/23, 501/74, ≈ 4.838 against χ = 7/8/7 — gap 2.16 at
+the ω = 3 core, the programme's extreme) — so **the 6-forcer reduces to ONE k = 5
+forced-distinct gadget at √3 or 2** (`hexShell_pigeonhole` is Act One in the kernel
+already; nine gadget copies on the shell close χ ≥ 6 by the M34 composition genre).
+**The Galois orbit (G27)**: the 1581 is fixed identically by the field flip
+√3,√5,√11 ↦ −·− — a hidden **Klein four-group of non-geometric automorphisms** on a
+graph with NO plane self-isometry — and the orbit's four isometry classes mint **three
+new 5-chromatic witnesses** (one isospectral twin; W^[3] solver-verified end to end:
+7,877 edges re-derived, k = 4 UNSAT 3,005 s); **P9 exact: de Grey's 791-forcer IS the
+witness's centrosymmetric core**, so M30's forced central symmetry is substrate
+symmetry at criticality; the witness is **half-crystal** (787/1581 rot6-invariant);
+Heule-510 has no √7 content. **The flat verdicts, all settled exactly**: m1 (forced
+pairs + virtual edges at k = 5) is ZERO on twelve composed objects — eight crystal
+unions through six copies, three witness–conjugate hetero-dimers (interfaces to 1,101
+shared vertices), the four-witness family union; gen-2 closure = **284,873 points,
+1,477,824 edges** (32% fusion — the group is folding), whole object k = 5 SAT in
+343 s; and **the reduction's gadget question, asked directly for the first time: 0
+virtual edges in 40 targeted asks** at exact √3/2 pairs on gen-2. The only nonzero
+readings anywhere: two solver-effort signals (hetero-dimers 10×; gen-2 ×300 at ×12
+size). Instruments banked: `tools/gradient.py` (overlap census, union builder with
+from-scratch edge derivation, autopsy driver, Galois conjugator, non-geometric
+equivariance queries). The jackpot clause never fired; the flat clause is banked as
+the k = 5 extension of G10/G17 to composed matter.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -573,6 +602,8 @@ priced and stubbed as M42.
 | 34 | **The coset bound: the coset chromatic number of the plane is exactly seven** (M37): `Coset.seven_le_card` — every proper nearest-point coset colouring of the plane (triangular lattice, ANY scale, ANY sublattice, ANY tie-breaking) uses at least seven colours, via `Coset.seven_values` (the seven lattice points of the closed first shell get seven distinct colours); and `Coset.exists_proper_coset_colouring` — the norm-7 ideal `(−3+ζ₆)` at scale `6/7` is such a colouring with exactly seven, so the bound is attained (`Coset.coset_chromatic_eq_seven`). The engine, entirely on the integral form `a²+ab+b²`: the inscribed disc + Gram identity, the deep hole (`4p² ≤ 3` from its own diameter), the collinear sweep with a gap lemma (kills kernel norms 1 and 3), the corner sweep (closes the norm-4 seams at `1/p` odd, where the collinear windows only touch), the Loeschian gap (2, 5, 6 are not norms ⟹ kernel norm ≥ 7), and the shell's difference table `{1,3,4}`. Sharpness adds the covering radius (`p/√3`) and the ideal's minimum (`√7 p`), with all properness arithmetic rational. **A six-colouring of the plane, if one exists, is not a lattice colouring.** Attribution: the optimality statement is folklore-adjacent and no novelty is claimed for the construction; ours is the proof shape, the formalization, and the packaging as a limitation theorem for the upper-bound hunt. | `Coset.lean`, `build/m37-design.py`, `plans/M37-coset-bound.md` §R | M37 |
 
 | 35 | **The coarse-cell bound: the homomorphism removed** (M38): `Coset.seven_labels_of_cell_constant` — for `1/2 < p < 1`, ANY colouring constant on the nearest-point cells of the triangular lattice at scale `p`, with **no algebraic relation between the labels**, gives the seven closed-shell addresses seven pairwise distinct labels; `seven_le_card_of_cell_constant` counts them; `cell_chromatic_eq_seven` pairs that with M37's witness at `p = 6/7`. The mechanism is a change of viewpoint rather than a new computation: the constraint graph's edge set on that window is exactly `Q ∈ {1,3,4}` (each condition `(1−p)² < p²Q < (1+p)²`, radical-free), so the closed first shell is a 7-clique and M37's Loeschian gap is replaced by the clique. The sweep was refactored into its honest form — `exists_unit_pair`, which PRODUCES the unit pair from two addresses and a direction with no mention of colour, and of which M37's is an instance. Window confirmed exactly `(1/2, 1)` with the planted red firing at and below `1/2` (`build/m38-design.py`, 5,997 rows agreeing between the radical and radical-free forms). | `Coset.lean`, `build/m38-design.py`, `plans/M38-cell-bound.md` §R | M38 |
+
+| 38 | **The gradient hunt's harvest: the reduction, the hidden symmetry, and the flat table** (M41, tools-side on exact arithmetic; laptop, one day): (a) **the autopsy dictionary** — all five clique-free cores factor as pigeonhole × kill with Act One a mono pair on a small non-edge class and χ_f certified exactly (130/23, 501/74, ≈ 4.83796 bracket-tight over 235,154 maximal independent sets) — G15-universality 5/5 in the finite lab, and **the 6-forcer reduction**: one k = 5 forced-distinct gadget at √3 or 2 + nine shell copies = χ(ℝ²) ≥ 6; (b) **the hidden Klein four-group** — the 1581 fixed identically by flip[3,5,11] (involution, 29 fixed points, edges preserved exactly), no plane self-isometry, orbit = 4 isometry classes ⟹ **three new 5-chromatic witnesses** (W^[5] isospectral; W^[3] verified by direct k = 4 UNSAT), **P9: the 791-forcer = V ∩ −V exactly**, the witness half-crystal (787 rot6-core), Heule-510 √7-free; (c) **the flat table** — m1 zero and settled on twelve composed objects; gen-2 = 284,873 pts / 1,477,824 edges, k = 5 SAT 343 s; **0/40 virtual edges at exact √3/2 pairs** (the reduction's first direct measurement); only nonzero: two solver-effort signals. | `tools/gradient.py`, `build/m41-*.json`, `plans/M41-k5-gradient.md` §R | M41 |
 
 | 37 | **The gap atlas: below the classical window the cell family forces seven-plus without cliques** (M40, tools-side on exact arithmetic; kernel promotion stubbed as M42): the family `G(p)` is **one fixed graph per band** between rational `T²` thresholds keyed by point-group offset class (distinct classes share a norm with different thresholds, first at norm 49 — planted check green); the corrected exhaustive census — M39's was box- and cap-clipped — gives **χ = 9 exactly** on `p ∈ (1/2, 0.6547)` (the sheared 3×3 block 9-clique + k = 9 SAT), **χ = 12 exactly** on `p ∈ (0.4804, 1/2)` (the 12-point trapezoid clique + the index-12 coset colouring), and the **M = 4 scaled shell** as a real 7-clique band on `(0.3273, 1/3)` (M39 §0e's exhaustion claim was derived with the inscribed-disc sufficient window — a G21 instance); **every band down to `p = 0.2236` is ≥ 7 outright** (ball refutations, no periodicity) while ω collapses to 3–5: **G\*** (`(0.4330, 0.4804)`, norms {3,4,7,9}) has ω = 4, χ = 7, and a **23-vertex 1-minimal core** with every necessity witness held; the **deep pocket** (`(1/3, 0.3464)`) has ω = 4, **χ ≥ 8 outright** (91-vertex k = 7 refusal; 53-vertex core); the `p = 1/6` flank bands have **ω = 3 with χ = 7** (gap FOUR, re-proven without the boundary class — every integer T is a threshold scale, so M39's integer rows were closed-criterion graphs); **no coset seven-colouring exists on G\* or the 1/6/1/7 bands** (all eight index-7 sublattices contain an edge, explicit witnesses) — the witnesses found are non-uniform with trivial stabilizers; certified Hoffman brackets collapse to ≈ 4.1 at the gap bands (truth 7–8) and α(G\*, 12×12) = 21 gives χ_f ≤ 48/7 — the seven-forcing is integrality-carried; **the sharpest open scale is `p = 1/7`**. Instruments banked: class-keyed band decomposition, exhaustive clique search, batched 1-minimal shrink with necessity certificates, colouring-anatomy (stabilizer/coset tests), exact torus α (Sinz counter), certified spectral brackets. Explorer `build/m40-spectrum.html`. | `tools/celllat.py` (M40 suite), `build/m40-chiomega.json`, `plans/M40-chi-omega-hunt.md` §R | M40 |
 
@@ -620,35 +651,28 @@ witness χ ≤ 6; G22 minted.)*
 his go for subplanning + implementation. The re-rank below reflects his stated aim —
 back into the push to 6, from either direction — with M41 stubbed at his direction.)*
 
-1. **M41 — the k = 5 gradient hunt** (`plans/M41-k5-gradient.md`, stubbed in
-   detail; AMENDED by the shapes pass — read `plans/SHAPES-OF-SIX.md` first,
-   the standing 6-forcer shape inventory with kill tests) — the from-below
-   6-push: phase 0 = the 23-core mechanism autopsy (Shape D; G15's
-   universality tested in a decidable universe), the M34 union's k = 5
-   anatomy, crystal tilings of the 1581 through the interface-menu lens
-   (Shape A; the M20 strip automaton one level up), gen-2 closure at k = 5
-   with the depth-switch rationale (Shape B), the Galois orbit of the 1581,
-   and the forced-equivariance sweep (Shape C). Jackpot clause registered:
-   any k = 5 UNSAT on a union is χ(ℝ²) ≥ 6. The alternation discipline:
-   after M41, back above (M42, then the fine tail), shapes re-ranked in
-   SHAPES-OF-SIX at every close.
-2. **M42 — kernel promotion of the gap atlas** (`plans/M42-gap-kernel.md`,
-   stubbed) — small, high-certainty Lean: the 12-clique window theorem
-   (χ ≥ 12 for cell-constant colourings just below p = 1/2), the M = 4
-   shell window, the coset-impossibility decide (no index-7 coset
-   seven-colouring on G\*), and χ(G\*) = 7 / the 23-core via the M06-chain
-   certificate shape.
-3. **The fine-tail campaign** — the from-above 6-push at the named open
+*(M41 CLOSED 2026-08-12, same day it was subplanned — laptop, all cores. The
+harvest is ledger row 38 / G26 / G27; every registered probe answered, jackpot
+never fired, flat clause banked. The alternation now points above.)*
+
+1. **M42 — kernel promotion of the gap atlas** (`plans/M42-gap-kernel.md`,
+   stubbed) — the from-above turn of the alternation: the 12-clique window
+   theorem, the M = 4 shell window, the coset-impossibility decide, and
+   χ(G\*) = 7 via the 23-core — now enriched by M41's autopsy: the 23-core's
+   two-act decomposition (shell pigeonhole at the norm-1 non-edge class ×
+   web kills) is itself a kernel-statement candidate, the finite lab's
+   two-act theorem.
+2. **The fine-tail campaign** — the from-above 6-push at the named open
    scales: p = 1/7 first (bigger balls/tori; any six-colouring IS
    χ(ℝ²) ≤ 6), then the unprobed tail below p = 0.2236; the interval-
    distance bridge (χ_[1−ε,1+ε] ≥ χ(G(p)) at ε = 2p/√3) priced against
    the Exoo literature before any novelty claim.
-4. **The certified union** (`plans/M35-certified-union.md`) — parked again:
+3. **The certified union** (`plans/M35-certified-union.md`) — parked again:
    consolidation with bounded novelty; reopens on an M41 find or the
    write-up trigger's "maybe" clause.
-5. **The certification programme** — standing fallback unchanged
+4. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`).
-6. **Richer cell families / the instrument audit** — unchanged, parked; the
+5. **Richer cell families / the instrument audit** — unchanged, parked; the
    hexagon module stays priced and unneeded.
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)

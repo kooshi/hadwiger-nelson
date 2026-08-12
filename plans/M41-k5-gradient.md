@@ -515,6 +515,29 @@ here — same frame machinery).
   so). The χ = 5 claim rests on the stronger ground anyway: the flip is a
   unit-distance-preserving bijection, so W^[3] ≅ the committed 1581 as a graph, and
   χ ≥ 5 transports from the KERNEL theorem — the solver ask was belt-and-braces.
-* **Deferred to the desktop by name**: refusal-side caps if any m1 candidate needs a
-  long UNSAT, the gen-2 k = 5 frontier (edges via spatial grid + SAT at ~285k
-  points), gen-2-enriched union probes, detuned (non-crystal) tilings.
+* **The gen-2 frontier ran on the LAPTOP after all** (Kooshi's go; fork-pool, grid
+  edges): **1,477,824 unit edges** on the 284,873 points (the 1581's 7,877
+  reproduced exactly inside — control green), and the **whole object is k = 5 SAT
+  in 343 s** (gen-1: 1.14 s at 24k points — ×12 points, ×300 effort; a second
+  depth-effort signal, single-sample). Shape B's whole-object colourability test
+  reads negative at gen-2.
+* **The G26 reduction asked directly — the first gadget measurement ever taken**:
+  forty targeted virtual-edge asks on gen-2 (20 exact √3-pairs + 20 exact d = 2
+  pairs, anchors in the dense heart, partners grid-found anywhere; each ask = "can
+  this pair share a colour in ANY proper 5-colouring of all 284,873 points?").
+  **Verdict: 0 virtual edges / 40 asked — every sampled pair can share a colour**
+  (all SAT; artifact `build/m41-gadget-asks.json`). The gadget
+  does not live in gen-2 at sampled pairs; the honest note: 40 pairs is a sample,
+  not a census, and heart-anchored — outer-shell anchors unprobed. Selection
+  lesson banked: the first selector drew both endpoints from a 4,000-point ball
+  too small to contain ANY pair at distance 2 — geometric vacuity caught because
+  zero-pairs-found is a visible verdict (anchor + annulus grid is the fix).
+* **W^[3] solver-verified end to end**: k = 4 **UNSAT in 3,005 s** on the laptop —
+  the new Galois witness's 5-chromaticity now confirmed by direct refusal on its
+  from-scratch edge list, independent of the isomorphism transport.
+* Twelfth composed object settled flat: the Galois-family union (all four
+  witnesses, 3,093 vertices, 17,129 edges) — m0 SAT 0.2 s, m1 zero/zero at 110
+  models.
+* **Remaining before close (any machine)**: outer-shell-anchored gadget asks if
+  wanted; the explorer/visual deliverable; Frontier close + ledger row + shapes
+  re-rank; detuned tilings stay a named follow-up.
