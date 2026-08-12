@@ -1,4 +1,57 @@
-# M42 — Kernel promotion of the gap atlas (PRE-SUBPLAN STUB)
+# M42 — Kernel promotion of the gap atlas
+# (SUBPLAN — §0 registered 2026-08-12 laptop, at the M41 close; the stub below stands;
+#  §0a supersedes its pricing: the exact-hexagon constructor ALREADY EXISTS.)
+
+## §0a — The repricing derivation (hand-verified against Coset.lean's actual lemmas)
+
+M40 §0e priced item 1 around a NEW exact-hexagon witness constructor. Reading
+`Coset.lean` at subplan time: **`corner_sweep` already sweeps to the hexagon corner**
+(`hexQ(addr (j•d) + (2s)•hole i) = Qi + 2j·(holeF i d)·s·… reaching Qi + 2j·holeF + 4/3
+at s → 1`), and `collinear_sweep` handles every interior window. The per-norm witness
+table for the three bands (each row = the sweep instance whose IVT window CONTAINS the
+band; all hand-checked including the `hsmall` guards):
+
+**Band T² ∈ (4, 13/3) — the 12-clique window, pairs at norms {1,3,4,7,9}:**
+norm 1: corner sweep at `holeF = 1` (reach 1 + 2 + 4/3 = 13/3 — needs the ONE new
+lemma: `corner_sweep` generalized from its `holeF i d = 2` hypothesis to a parameter);
+norm 3: collinear, d norm 3, j = 1, σ ≈ +0.29-window ✓; norm 4: collinear, j = 1 on
+d = (2,0), small σ ✓; norm 7: collinear, j = 1, σ ≈ −0.11 (pulling TOGETHER — the
+lemma is sign-agnostic) ✓; norm 9: collinear, d = (1,0), j = 3, σ ∈ (−0.5, −0.46),
+`hsmall` = 4σ² < 1 holds at 0.846 ✓.
+
+**Band T² ∈ (13/3, 16/3) — G\*, pairs at norms {3,4,7,9}** (for the coset-impossibility):
+norms 3, 4, 7 collinear as above with shifted σ; norm 9: σ ∈ (−0.46, −0.345) ✓.
+
+**Band T² ∈ (9, 28/3) — the M = 4 shell window, pairs at norms {4,12,16}:**
+norm 4: **the EXISTING `corner_sweep` verbatim** (holeF = 2 at d = (2,0), j = 1: reach
+4 + 4 + 4/3 = 28/3 — the collinear sweep tops at exactly 9 and misses; this is why the
+corner lemma exists) ✓; norm 12: collinear, j = 1 on norm-12, σ ≈ −0.065 ✓; norm 16:
+collinear, d = (1,0), j = 4, σ ≈ −0.475 (hsmall 0.9 < 1) ✓.
+
+So the Lean surface is: ONE generalized lemma (`corner_sweep` with `holeF i d = c` a
+parameter — or simply a second instance at c = 1), per-norm refutation instances in
+the existing `sweep_ivt` shape, the three window theorems in the `seven_values` /
+`eight_le_card_of_cell_constant` counting shape, and the coset-impossibility (the φ
+homomorphism framing takes `φ d = 0` natively — one short vector per HNF sublattice,
+norms in the band's edge set, from M40's witness table). Items in leaf order:
+shell-4 window (existing lemmas only) → G\* coset-impossibility → 12-clique window
+(the one new lemma) → χ(G\*) ≥ 7 via the 23-core (the M06-chain certificate shape,
+possibly with the two-act decomposition as a named intermediate).
+
+## §0b–d — Predictions and clauses (compact)
+
+* P1 [high]: the shell-4 window theorem lands with NO new sweep machinery.
+* P2 [high]: the coset-impossibility lands as a finite case bundle over 8 sublattices.
+* P3 [medium-high]: the generalized corner lemma is ≤ 30 lines (it is `corner_sweep`
+  with `2` renamed); the 12-clique window follows.
+* P4 [medium]: the 23-core refusal by `decide` at 138 vars is affordable; else the
+  M05 LRAT pipeline (fallback registered).
+* Failure clauses: any sweep window that misses its band on exact arithmetic HALTS the
+  item and reports the arithmetic (the σ-table above is hand-derived — the Lean
+  elaborator is its checker); builds through `scripts/build.sh` ONLY; laptop RAM is
+  the ceiling; any segfault: HALT.
+
+# THE ORIGINAL STUB (pricing superseded by §0a above)
 
 *Written 2026-08-12 at M40's close. Read order for a fresh session:
 `plans/M40-chi-omega-hunt.md` WHOLE (the band decomposition, the corrected census, §R),
