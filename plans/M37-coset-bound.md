@@ -173,6 +173,76 @@ is a stretch goal, not a requirement.)
 * Any segfault: HALT and report to Kooshi (standing, hardware).
 
 
+## §0e — Domain modeling pass (2026-08-11, fresh invocation)
+
+**D1 — The plane is the ADDRESS SPACE, and ℂ enters through exactly one
+lemma.** Every point the proof constructs — the deep holes, the collinear sweep
+points, the corner sweep points — is the embedding of a *rational* address:
+`h = emb p (1/3, 1/3)`, and `s·u` for `u = d/‖d‖` is `emb p` of a real multiple
+of `d`. So the whole argument lives in `ℝ × ℝ` under the form
+`hexQ (x,y) = x² + xy + y²`, with `dist (emb p u) (emb p v) ^ 2 = p² · hexQ (u − v)`
+as the single bridge. **No `Real.sqrt 3` appears anywhere**, which is the
+difference between this module and the existing ℤ[ζ₆] machinery
+(`Ladder`/`Hexagram`/`MetaLadder` all carry radicals because they work in ℂ
+coordinates). The lattice is `latt p v = emb p (v : ℝ × ℝ)` for integer
+addresses; Mathlib's `ZLattice`/`Zspan` were considered and rejected — they
+would buy covolume and fundamental-domain theory this proof never uses, and
+would hide the form, which is the whole content.
+
+**D2 — One form, used at integer and real addresses alike.** `hexQ` over `ℝ`
+serves the geometry; the arithmetic facts (Loeschian, the shell table) are
+stated as ℤ-polynomial claims and cross the boundary by `push_cast`. A parallel
+`ℤ`-valued copy was considered and rejected as the Bool/Prop-drift smell in
+another costume. The polarization `hexIP u v = 2u₁v₁ + u₁v₂ + u₂v₁ + 2u₂v₂`
+(twice the inner product, so it stays integral on the lattice) with
+`hexQ (u − v) = hexQ u − hexIP u v + hexQ v` is the only identity the geometry
+needs.
+
+**D3 — The colour map is a homomorphism, and that hypothesis is LOAD-BEARING in
+a way worth stating in the docstring.** `φ : (ℤ × ℤ) →+ A` with `A` an additive
+group: the proof needs exactly `φ d = 0 → φ (j • d) = 0` (C3/C4) and
+`φ u = φ v → φ (u − v) = 0` (C6), which is precisely what a hom into a group
+gives and nothing more. Drop homomorphy and the theorem is FALSE as stated —
+an arbitrary colouring of the lattice addresses by nearest-point rounding is a
+colouring of an annulus graph on the lattice, whose chromatic number at fine
+scales is the plane's own open question. So the milestone bounds *coset*
+colourings and says so; the gap between coset and arbitrary is exactly where a
+six-colouring would have to live.
+
+**D4 — The conclusion is the rainbow, not the cardinal.** Primary statement:
+the seven closed-shell addresses receive pairwise distinct colours — a concrete
+seven-point object, and the same one M35's hex shell already names. The
+cardinality reading (`7 ≤ Fintype.card A`) is a corollary for readers who want
+the number. This keeps `Fintype` out of the main theorem's hypotheses.
+
+**D5 — One interface to the rounding hypothesis.** `rnd` is used only through
+`rnd_eq_of_lt`: *if the address `w` is strictly closer to `v` than to every
+other lattice address, then `rnd (emb p w) = v`* — which is where "any
+tie-breaking" is discharged once and for all. Both sweep families instantiate
+it; naming it is a collapse, not speculation.
+
+**D6 — C4's six cases are DATA, not a transport.** The six norm-4 vectors each
+need a deep hole whose functional takes the value 2 there. Transporting one case
+by the lattice's ζ₆-automorphism would require the automorphism as an object
+plus its compatibility with `rnd`, `φ` and distance — three lemmas to save six
+instantiations of one. Instead: `hole : Fin 6 → ℝ × ℝ` explicitly, the two
+master facts (`hexIP (hole i) v ≤ hexQ v` for every `i` and integer `v`; every
+`Q = 4` vector has an `i` with `hexIP (hole i) d = 2`) proven by `Fin`-case
+analysis and finite arithmetic, and the C4 argument stated ONCE, parametrized
+by `(d, i)`.
+
+**D7 — Non-vacuity, honestly.** The hypothesis set includes properness, which
+is the expensive half of C7, so the Lean module does NOT exhibit a proper coset
+colouring — and a theorem whose hypotheses might be unsatisfiable proves
+nothing. Two mitigations, both stated in the docstring rather than implied:
+(i) the CONCLUSION is exhibited — the norm-7 coset map does give the seven
+shell addresses seven distinct colours (one `decide`), so the theorem's
+consequent is achievable; (ii) satisfiability of the full hypothesis set is
+C7, confirmed tools-side (the admissible window `p ∈ (0.671, 0.866]`), with the
+Lean instance named as priced future work. The honest reading is the
+contrapositive, which is manifestly non-vacuous: *a coset colouring with six or
+fewer colours always has two points one unit apart sharing a colour.*
+
 ---
 
 # §R — Results (opened at the design check; every verdict at face value)
