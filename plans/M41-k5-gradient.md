@@ -1,4 +1,5 @@
-# M41 — The k = 5 gradient hunt: composed 5-forcers, the first probe for 6-tightness, and the Galois orbit (PRE-SUBPLAN STUB)
+# M41 — The k = 5 gradient hunt: composed 5-forcers, the first probe for 6-tightness, and the Galois orbit
+# (SUBPLAN — §0 registered 2026-08-12, LAPTOP, before any instrument runs; the stub below is the mission context, the §0 sections at the end are the registration)
 
 *Written 2026-08-12, at the direction discussion after M39's close, when Kooshi re-aimed
 the programme at the push to 6 from either direction. M40 (the χ > ω hunt in the
@@ -183,3 +184,138 @@ promoted to a registered follow-up; explorer pane for the tilings if any union c
 structure worth seeing (`tools/closure-viz.html` genre). Lean surface: none registered —
 this is a measurement milestone; any find prices its own certification (the M35-certified-
 union stub is the template and reopens on a find).
+
+---
+
+# SUBPLAN §0 — registered 2026-08-12 (laptop), before any instrument
+
+*Shapes context: `plans/SHAPES-OF-SIX.md` §3 — each phase below is a named shape's kill
+test. Machine note, registered up front: subplanning, phase 0 (the autopsy), and phase 4
+(Galois) are laptop-class; the tiling unions' refusal-side SAT and the gen-2 closure
+belong on the DESKTOP (M34's union cubes ran ~800 s each there; laptop timings are not
+comparable and are never written next to desktop numbers — per-machine rule).*
+
+## §0a — Derivations and protocols, committed before any instrument
+
+**D1 — The autopsy protocol (phase 0, Shape D; the golden question in a decidable
+universe).** Objects: M40's cores — the 23-vertex G\* core (refuses 6; ω = 4), the
+53-vertex deep-pocket core (refuses 7), the 117-vertex ω = 3 core (refuses 6;
+centre-free). All re-derivable locally in seconds (`celllat.py --shrink`); coordinates
+in `build/m40-chiomega.json`. Per core, in order:
+
+* (a) **Colouring-space census at k = χ**: SAT enumeration with first-occurrence
+  palette canonicalization and blocking clauses; count capped at 20,000 models
+  (reported as `≥ cap` if hit). The census's shape (orbit structure under the core's
+  own stabilizer) is the "conformational repertoire" of the finite lab.
+* (b) **Exact fractional χ**: LP over the core's independent sets (floats propose via
+  scipy if present, else a hand simplex; the certificate — a primal fractional
+  colouring and a dual fractional clique — is re-verified in `Fraction` arithmetic
+  before any number is quoted; only the verified bracket is reported). Note
+  χ_f(core) ≤ 48/7 is inherited from G\* by subgraph monotonicity — the question is
+  how far BELOW it sits (registered P2).
+* (c) **Symmetry/defect anatomy**: the core's setwise stabilizer in the dihedral-12
+  point group; for each group element g, does C ∪ gC still refuse, and does C ∩ gC
+  colour? — locating the forcing relative to the broken symmetry (the cores are
+  near-symmetric with defects; WHERE the refusal lives when symmetrized is the
+  mechanism's first coordinate).
+* (d) **The factorization sweep** (G15's universality clause, decided): vocabulary =
+  mono-pair and forced-equal-pair classes at each of the core's difference norms,
+  plus shell-coverage patterns; regions = the core's norm-balls and its symmetric
+  bulk; one class-avoidance SAT ask per (region, class) at k = χ−1 — the M33
+  instrument genre on a ≤ 117-vertex object, instant per ask. Output: the fires/clean
+  table, read as either a two-act decomposition (some class fires on a subregion and
+  its placements are killed by the remainder) or a certified "no class in this
+  vocabulary factors it" — either is a first-of-its-kind data point on whether
+  pigeonhole × kill is necessary.
+
+**D2 — The interface-menu formalism (phase 2, Shape A).** For copies X₁, X₂ with
+interface I = V(X₁) ∩ V(X₂) (exact coordinates): the menu M(Xᵢ, I) = proper-5-colouring
+restrictions to I, modulo palette (legitimate: all constraints are colour-symmetric);
+the union is 5-colourable iff restrictions can agree, ONE SAT ask. The moments ladder,
+cheapest first, each sound on its own: (m0) union SAT; (m1) forced-pair / forced-equal
+/ virtual-edge meters ACROSS the interface (the standing k-generic rigidity engine —
+these are the menu's pairwise moments); (m2) coverage moments on interface shells;
+(m3) interface-colouring enumeration only if |I| and the count are small (blocking-
+clause projection, cap 20,000); (m4) transfer RELATIONS (two-interface copies) only if
+(m3) was affordable. A frustrated loop hunt runs only on relations that (m4) actually
+delivered — no speculative automaton.
+
+**D3 — Overlap arithmetic (phase 2 entry).** The 1581's exact coordinates (the
+committed tables, `couple.py` 16-vector currency). Candidate transforms: translations
+by 1, ζ₆-orbit, 1+ζ₆, 2, the spindle-centre separation and its ζ₆-orbit; rotations by
+ζ₆ powers about each spindle centre. For each: |V ∩ T(V)| by exact key match —
+zero-float identification; any near-miss that floats would merge is REPORTED, never
+merged. Proceed with the top transforms by shared-vertex count; a transform sharing
+< 5% of vertices is recorded and not SAT-probed (near-disjoint unions teach nothing).
+
+**D4 — Gen-2 closure (phase 3, Shape B).** `closure.py`'s graded closure semantics
+(one word-length generation at a time about the centre set) iterated once more from
+the gen-1 state. SIZE FIRST with a hard point cap (2M points / 20 GB RSS — the laptop
+has 31 GB; if the measurement itself wants more, it moves to the desktop and says so);
+only then the k = 5 frontier in M31's committed-radius style, desktop. The registered
+theory reason (depth-switch): the k = 4 pigeonhole fired only at seam depth 2; gen-2
+is the first depth rung anyone will have probed at k = 5.
+
+**D5 — Galois protocol (phase 4).** Flip maps applied coordinatewise (the generator
+table in the stub above); per conjugate: (i) invariant screen — ring-spectra multisets
+about the two conjugated spindle centres; a mismatch certifies non-congruence,
+cheapest exit; (ii) if spectra match, attempt the explicit isometry: solve the rigid
+motion from two anchor pairs, verify EVERY vertex maps into the set exactly (field
+arithmetic); (iii) verdict per flip, 15 rows. Controls: the identity flip must
+canonicalize to congruent; Heule-510's flips are predicted non-self-congruent (its 6
+out-of-group residue classes are SAT scars with no arithmetic reason to survive
+conjugation) — if the control comes back congruent, the canonicalizer is suspect and
+the phase halts.
+
+**D6 — The forced-equivariance query (phase 5, Shape C).** For isometry g with
+g(R) = R setwise: assert `⋁_{x∈R} d_x` with clauses `d_x ∧ colour(x)=i → colour(gx)≠i`;
+UNSAT ⟺ every proper k-colouring satisfies colour∘g = colour on R. Exactness: this is
+necessary-and-sufficient for forced equivariance (G21 statement: the acceptance test
+is exact). Control: the 791 forcer's antipodal map on the 2/√3 circle at k = 4 MUST
+fire (M30's six forced pairs). Candidates at k = 5: antipodal maps about spindle
+centres and rot6/reflections on named shells, on the M34 union and the best tiling.
+
+## §0b — Instruments
+
+New thin drivers over standing engines, all in `tools/` (UNTRUSTED, second-encoding
+checks where a verdict is load-bearing): the autopsy driver (celllat cores + class-
+avoidance at k = χ−1 + the LP verifier), the union builder (exact identification, the
+M34 vertex-order lesson: certificates from the union's OWN numbering), the menu/moment
+driver (rigidity meters pointed across interfaces), the equivariance query, the Galois
+conjugator (couple.py currency). Artifact: `build/m41-gradient.json`, sections keyed
+by phase; every SAT row carries machine + cap + outcome, `unknown` never a verdict.
+
+## §0c — Registered predictions
+
+* **P1 [high]** — the autopsy completes on all three cores within laptop budgets;
+  [medium] the 23-core does NOT factor over the pair-class vocabulary (the forcing is
+  holistic at 23 vertices). Either branch is the deliverable; a firing class names
+  the finite lab's Act One and G15-universality gains its first out-of-plane support.
+* **P2 [medium]** — χ_f(23-core) ≤ 6 (an integrality gap ≥ 1 carried by 23 vertices).
+* **P3 [high]** — 2-copy tilings at max-overlap transforms are k = 5 SAT (m0);
+  [medium] all m1 moments read zero (floppy interfaces — the flat branch, banked as
+  the fifth globality measurement if it holds everywhere).
+* **P4 [low-medium]** — some ≥ 3-copy arrangement shows a nonzero moment; ANY nonzero
+  reading is the milestone's headline (the k = 5 first-gradient).
+* **P5 [very low — the jackpot, verbatim from the stub]** — any k = 5 UNSAT on a
+  union: halt; re-derive the edge list independently; verify every identification in
+  field arithmetic; second encoding; report to Kooshi before interpretation. It would
+  be χ(ℝ²) ≥ 6.
+* **P6 [medium]** — gen-2 size lands in [100k, 2M] points; [medium-high] k = 5 stays
+  SAT at every affordable frontier (a refusal is P5's clause).
+* **P7 [split on purpose]** — Galois: the 1581's √11-flip conjugate is plane-congruent
+  to the original [low-medium — the conjugate-paired ring spectra (G4) hint at it];
+  the √5/√7 flips produce non-congruent free witnesses [medium]; the Heule-510
+  control breaks [high — a congruent control halts the phase].
+* **P8 [high]** — the 791 equivariance control fires at k = 4; [medium] nothing is
+  forced-equivariant at k = 5 on today's objects (any firing = Shape C's Act One).
+
+## §0d — Failure clauses
+
+* Any probe's flat verdict is banked at face value; the milestone lands on the
+  autopsy + the moment table + the Galois verdict even if every gradient reads zero.
+* Identification near-misses, canonicalizer surprises, catastrophe-class SATs
+  (k ≤ 4 anywhere): HALT and report, per the standing rules.
+* Solver walls: report the frontier + machine; heavy solves move to the desktop by
+  name, never silently.
+* Any segfault, any process: HALT and report to Kooshi (standing).

@@ -320,9 +320,14 @@ the boundary class.
 * The deep pocket's upper is open: k = 8 unknown at 12×12 (cap); χ ∈ [8, 16].
 * Pocket k = 7 refusals at 12×12 (47/15 unknown; 101/30, 73/20, 467/120 unsat) are
   PERIOD-BOUNDED; the M39 1/7-lesson applies and larger tori were not pushed.
-* The ω = 3 seven-forcer core (band below T² = 36, 225-vertex ball) and α(G\*, 18×18)
-  were still shrinking/solving at close; results recorded in the artifact when they
-  land. <!-- UPDATE-AT-CLOSE -->
+* The ω = 3 seven-forcer core LANDED overnight (recorded in the artifact,
+  2026-08-12 07:35): **117 vertices, 1-minimal, every necessity witness held,
+  19 point-group orbits — and CENTRE-FREE** (no norm-0 member: the triangle-only
+  seven-forcing lives in an annulus, norms 1–52, unlike the 23-core which keeps its
+  centre). The orbit profile separates the two norm-49 classes ([49,4] and [49,12]) —
+  the §0f A1 class-keying visible in a measured object. α(G\*, 18×18) capped at
+  bracket [46, 54] (inconclusive; the 12×12 value χ_f ≤ 48/7 stands as the binding
+  claim).
 * Bands with T² ∈ (20, 35.76) and everything below p = 1/7 are unprobed.
 * The interval-distance bridge (D8) consequences were not priced against literature
   (the registered WebSearch check was not run this session); no novelty claim is made
