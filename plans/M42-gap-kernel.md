@@ -79,6 +79,28 @@ possibly with the two-act decomposition as a named intermediate).
   (ii) the 23-core decide budget (P4's fallback stands). Experience pass skipped: the
   surface follows the file's existing conventions exactly.
 
+## §R — progress (2026-08-12, laptop; items 1–3 LANDED, zero sorry, axioms exactly the standard three)
+
+* **`seven_le_card_shell4`**, **`twelve_le_card_of_cell_constant`**, and
+  **`no_coset_seven_on_gap`** are in `Coset.lean` §GapBands, committed (7ba5087),
+  standalone elaboration green, `#print axioms` = `[propext, Classical.choice,
+  Quot.sound]` on all three (receipt run 2026-08-12, then stripped).
+* Engine landed: `exists_unit_pair_ivt`, `exists_unit_pair_corner` (reach
+  `Qi + 2·holeF + 4/3`; the D1 band boundaries ARE the corner reaches — norm-4 h1 is
+  `p² > 3/28` exactly, norm-1 h1 is `p² > 3/13` exactly), `norm_one_hole` /
+  `norm_four_hole` (interval_cases + decide), `shell4`/`trapez` cliques by decide,
+  three `#guard`s as spec pins.
+* Proof-shape lessons: the four disc-window norms close in ONE case via bounds
+  `3 ≤ Q ≤ 9` (uniform nlinarith) — do not case per norm; `first | …` does NOT
+  backtrack failures inside nested term-mode `by` blocks — give rcases branches the
+  SAME hypothesis name instead (`rcases hQ with h1 | h | h | h | h`).
+* **REMAINING for the M42 close**: item 4 — χ(G\*) ≥ 7 via the 23-vertex core
+  (M40 artifact `build/m40-chiomega.json` cores[0]; edges = pairs at norms {3,4,7,9};
+  refusal at k = 6 by pinned-clique decide, M05 LRAT fallback registered; plane
+  corollary in cell-constant vocabulary) — then the FULL `scripts/build.sh` gate
+  (Coset.lean's dependents rebuild — Instances/ imports it), linters, the Frontier
+  close with ledger row + shapes re-rank, and the explorer/artifact update if wanted.
+
 # THE ORIGINAL STUB (pricing superseded by §0a above)
 
 *Written 2026-08-12 at M40's close. Read order for a fresh session:
