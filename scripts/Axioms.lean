@@ -733,6 +733,14 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms core122_plane
 #print axioms core122_pairs_complete
 
+-- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
+#print axioms mono_pair_of_clique
+#print axioms hexShell_pigeonhole
+#print axioms hexShell_plane5
+#print axioms hexShell_plane6
+#print axioms hexShell_p3_complete
+#print axioms hexShell_p4_complete
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

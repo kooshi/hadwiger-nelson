@@ -45,7 +45,7 @@ sys.path.insert(0, str(TOOLS))
 
 import heule as H  # noqa: E402  — the shared 16-basis field ops
 from rigidity import (amo_clauses, avoid_verdict, class_avoid, class_avoid_binary,  # noqa: E402
-                      min_cover, mono_realizable)
+                      min_cover, mono_realizable, reencode_confirm)
 
 INVARIANT_EXIT = 4
 
@@ -149,7 +149,30 @@ def load_object(name: str) -> dict:
         fxy = xy(pts)
         return {"name": name, "pts": pts, "xy": fxy, "edges": unit_edges_of(pts, fxy),
                 "centres": {"meta": (tuple(mpiv[0]), tuple(mpiv[1]))}}
-    raise SystemExit(f"UNKNOWN OBJECT {name!r} (heule510 | degrey1581 | fabric | hexchunkB<n>)")
+    if name == "heule553":
+        d = json.load(open(TOOLS / "heule553.json"))
+        pts = _tuples(d["coords"], d["denom"])
+        edges = [tuple(e) for e in d["edges"]]
+        return {"name": name, "pts": pts, "xy": xy(pts), "edges": edges,
+                "centres": {"v0": pts[0]}}
+    if name.startswith("trilattice") and name[10:].isdigit():
+        # The bare triangular lattice ball a + b·ζ₆ with a² + ab + b² ≤ N (M35 §0b): the
+        # cleanest fabric — hex-coordinate tags carried so artifacts can name points (a, b).
+        nmax = int(name[10:])
+        pts, tags = [], []
+        bound = int(nmax ** 0.5) + 2
+        for a in range(-bound, bound + 1):
+            for b in range(-bound, bound + 1):
+                if a * a + a * b + b * b <= nmax:
+                    x = tuple([F(a) + F(b, 2)] + [F(0)] * 15)
+                    y = tuple([F(0), F(b, 2)] + [F(0)] * 14)
+                    pts.append((x, y))
+                    tags.append((a, b))
+        fxy = xy(pts)
+        return {"name": name, "pts": pts, "xy": fxy, "edges": unit_edges_of(pts, fxy),
+                "centres": {"origin": (H.rat(0), H.rat(0))}, "tags": tags}
+    raise SystemExit(f"UNKNOWN OBJECT {name!r} "
+                     "(heule510 | heule553 | degrey1581 | fabric | hexchunkB<n> | trilattice<N>)")
 
 
 # ------------------------------------------------------------------ classes and instances
@@ -160,7 +183,55 @@ CLASSES = {
     "eq-pair-2": {"arity": 2, "d2": F(4)},
     "eq-pair-4": {"arity": 2, "d2": F(16)},
     "eq-pair-4rt3": {"arity": 2, "d2": F(16, 3)},
+    # the M35 §0b roster additions (vocabulary distances, instance-counted by m35-design.py)
+    "eq-pair-sqrt7": {"arity": 2, "d2": F(7)},
+    "eq-pair-2rt1_3": {"arity": 2, "d2": F(4, 3)},
+    "eq-pair-glue": {"arity": 2, "d2": F(5, 3)},
+    "eq-pair-inner": {"arity": 2, "d2": F(1, 3)},
 }
+
+
+def has_clique(adj: dict[int, set], verts: list[int], t: int) -> list[int] | None:
+    """Existence search for a t-clique (M35 §0g G-5): prune on len + |cands| < t, return the
+    witness or None. Exhaustive by construction — the prune only discards branches that cannot
+    reach size t. Used by the clique-triviality guard; NEVER a verdict by itself."""
+    best: list[int] | None = None
+
+    def extend(clique: list[int], cands: set) -> bool:
+        nonlocal best
+        if len(clique) >= t:
+            best = list(clique)
+            return True
+        if len(clique) + len(cands) < t:
+            return False
+        for v in sorted(cands):
+            if extend(clique + [v], cands & adj.get(v, set())):
+                return True
+        return False
+
+    extend([], set(verts))
+    return best
+
+
+def clique_trivial(reg_edges, instance_lists: list[list[tuple]], n: int, k: int) -> dict:
+    """The clique-triviality guard (M35 §0a C3): a FIRED verdict whose region holds a
+    (k+1)-clique of the {unit} ∪ D graph is counting, not discovery. Returns the verdict and
+    the witness clique (dense region indices) if one exists."""
+    adj: dict[int, set] = {}
+
+    def link(a, b):
+        adj.setdefault(a, set()).add(b)
+        adj.setdefault(b, set()).add(a)
+
+    for a, b in reg_edges:
+        link(a, b)
+    for insts in instance_lists:
+        for tup in insts:
+            for i in range(len(tup)):
+                for j in range(i + 1, len(tup)):
+                    link(tup[i], tup[j])
+    wit = has_clique(adj, list(range(n)), k + 1)
+    return {"clique_trivial": wit is not None, "witness": wit}
 
 
 def instances_of(obj: dict, ids: list[int], cls: dict) -> list[tuple]:
@@ -303,20 +374,26 @@ def base_and_classes(obj, reg, k, cap, class_names, want_witness=False):
     return out
 
 
-def art_path(obj_name: str, centre: str) -> Path:
-    return BUILD / f"m33-spectrum-{obj_name}-{centre}.json"
+def art_path(obj_name: str, centre: str, k: int = 4) -> Path:
+    if k == 4:
+        return BUILD / f"m33-spectrum-{obj_name}-{centre}.json"
+    return BUILD / f"m35-spectrum-{obj_name}-{centre}-k{k}.json"
 
 
 def load_art(path: Path, obj_name: str, centre: str, k: int) -> dict:
     if path.exists():
         return json.loads(path.read_text())
-    return {"schema": "m33-spectrum v1 (plans/M33-mechanism-hunt.md §0h)",
+    schema = ("m33-spectrum v1 (plans/M33-mechanism-hunt.md §0h)" if k == 4 else
+              "m35-sweep v1 (plans/M35-k5-transfer.md §0b; clean rows are probed ceilings "
+              "at the stated caps, never impossibility claims)")
+    return {"schema": schema,
             "object": obj_name, "centre": centre, "k": k, "machine": None,
             "marks": [], "onsets": {"cover": {}, "classes": {}},
             "invariants_checked": ["F4-monotone", "A2-containment"], "status": "partial"}
 
 
-def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int | None) -> None:
+def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int | None,
+          k: int = 4) -> None:
     obj = load_object(obj_name)
     if centre not in obj["centres"]:
         raise SystemExit(f"UNKNOWN CENTRE {centre!r} ({' | '.join(obj['centres'])})")
@@ -327,8 +404,8 @@ def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int |
         step = len(marks) / quantiles
         marks = sorted({marks[min(len(marks) - 1, int(step * (q + 1)) - 1)]
                         for q in range(quantiles)})
-    path = art_path(obj_name, centre)
-    art = load_art(path, obj_name, centre, 4)
+    path = art_path(obj_name, centre, k)
+    art = load_art(path, obj_name, centre, k)
     art["machine"] = machine
     done = {r["r2"] for r in art["marks"]}
     exact_by_mark = {round(f, 9): r2v for f, r2v, _ in spec}
@@ -339,7 +416,7 @@ def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int |
         t0 = time.time()
         row = {"r2": m, "r2_exact": r2_str(exact_by_mark[m]), "n": reg["n"],
                "n_edges": len(reg["edges"]), "n_target": len(reg["S"])}
-        row.update(base_and_classes(obj, reg, 4, cap, [], False))
+        row.update(base_and_classes(obj, reg, k, cap, [], False))
         row["seconds"] = round(time.time() - t0, 2)
         return row
 
@@ -357,7 +434,7 @@ def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int |
             print(f"  r²≤{row['r2']:<10.4f} n={row['n']:<5d} |S∩ball|={row['n_target']:<3d} "
                   f"cover=[{cov['lo']},{cov['hi']}] {cov['verdict']} ({row['seconds']}s)",
                   flush=True)
-    for level in (2, 3, 4):
+    for level in range(2, k + 1):
         onset = next((r["r2"] for r in art["marks"]
                       if r["cover"]["verdict"] in ("settled", "fanned", "interval")
                       and r["cover"]["lo"] >= level), None)
@@ -369,23 +446,26 @@ def sweep(obj_name: str, centre: str, cap: float, machine: str, quantiles: int |
 
 # ------------------------------------------------------------------ the spectrum (class onsets)
 
-def class_onset(obj_name: str, centre: str, cls_name: str, cap: float, machine: str) -> None:
+def class_onset(obj_name: str, centre: str, cls_name: str, cap: float, machine: str,
+                k: int = 4) -> None:
     """Binary search over the ring marks (§0f F4 exploits monotonicity); the fired onset is
-    confirmed through the decorrelated binary re-encode before being reported."""
+    confirmed through the decorrelated re-encode (2-bit at k = 4, 3-bit at k = 5) before being
+    reported, and — at k ≠ 4 — annotated by the clique-triviality guard (M35 §0a C3): a firing
+    whose region holds a (k+1)-clique of the {unit} ∪ class graph is counting, not discovery."""
     if cls_name not in CLASSES:
         raise SystemExit(f"UNKNOWN CLASS {cls_name!r} ({' | '.join(CLASSES)})")
     obj = load_object(obj_name)
     ct = obj["centres"][centre]
     spec = spectrum_of(obj, ct)
     marks = sorted({round(f, 9) for f, _, _ in spec if f > 1e-9})
-    path = art_path(obj_name, centre)
-    art = load_art(path, obj_name, centre, 4)
+    path = art_path(obj_name, centre, k)
+    art = load_art(path, obj_name, centre, k)
     art["machine"] = machine
     rows = []
 
     def probe(m: float) -> str:
         reg = region_at(obj, ct, m)
-        r = base_and_classes(obj, reg, 4, cap, [cls_name], False)["classes"][cls_name]
+        r = base_and_classes(obj, reg, k, cap, [cls_name], False)["classes"][cls_name]
         r["r2"] = m
         r["n"] = reg["n"]
         rows.append(r)
@@ -396,6 +476,7 @@ def class_onset(obj_name: str, centre: str, cls_name: str, cap: float, machine: 
     lo, hi = 0, len(marks) - 1
     top = probe(marks[hi])
     onset = None
+    triv = None
     if top == "fired":
         while lo < hi:
             mid = (lo + hi) // 2
@@ -410,17 +491,22 @@ def class_onset(obj_name: str, centre: str, cls_name: str, cap: float, machine: 
         reg = region_at(obj, ct, onset)
         inst_obj = instances_of(obj, reg["ids"], CLASSES[cls_name])
         inst = [tuple(reg["pos"][v] for v in t) for t in inst_obj]
-        rb = class_avoid_binary(reg["n"], reg["edges"], 4, inst, cap)
+        rb = reencode_confirm(reg["n"], reg["edges"], k, inst, cap)
         promotion = "reencode-confirmed" if rb["outcome"] == "unsat" else "DISAGREEMENT"
         if promotion == "DISAGREEMENT":
             abort_invariant("RE-ENCODE (§0g G-3)",
                             f"one-hot fired at mark {onset} but binary read {rb['outcome']} — "
                             "one clause generator is wrong; halt everything", art, path)
+        triv = clique_trivial(reg["edges"], [inst], reg["n"], k)
+        if triv["clique_trivial"]:
+            print(f"  NOTE: firing is CLIQUE-TRIVIAL — ({k + 1})-clique witness "
+                  f"{triv['witness']} (counting, not discovery)", flush=True)
     else:
         promotion = None
     check_class_monotone(rows, cls_name, art, path)
     art["onsets"]["classes"][cls_name] = {"onset_r2": onset, "promotion": promotion,
-                                          "rows": rows, "top_verdict": top}
+                                          "clique_trivial": triv, "rows": rows,
+                                          "top_verdict": top}
     path.write_text(json.dumps(art, indent=1))
     print(f"class {cls_name}: onset {onset} ({promotion or top})  → {path.name}")
 
@@ -517,11 +603,11 @@ def shrink_cover(obj_name: str, centre: str, level: int, start_mark: float, cap:
           f"{len(ids) - len(S_set)} ambient), {passes} passes  → {out.name}")
 
 def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: float,
-           machine: str) -> None:
+           machine: str, k: int = 4) -> None:
     """Greedy deletion to the 1-MINIMAL FIXPOINT (§0g G-3): every surviving vertex's deletion
     un-fires the class, witnessed by a validated clean model held in the artifact. The core's
-    own UNSAT is then re-confirmed through the binary re-encode. Solver-measured, never a
-    theorem — promotion is A5's certificate."""
+    own UNSAT is then re-confirmed through the decorrelated re-encode. Solver-measured, never
+    a theorem — promotion is A5's certificate."""
     obj = load_object(obj_name)
     ct = obj["centres"][centre]
     cls = CLASSES[cls_name]
@@ -536,7 +622,7 @@ def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: fl
         if not inst_obj:
             return False, {"outcome": "no-instances"}
         inst = [tuple(pos[v] for v in t) for t in inst_obj]
-        row = class_avoid(len(sub), eds, 4, inst, cap, want_model=True)
+        row = class_avoid(len(sub), eds, k, inst, cap, want_model=True)
         return row["outcome"] == "unsat", row
 
     ok, _ = fired_on(ids)
@@ -557,7 +643,7 @@ def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: fl
     pos = {i: a for a, i in enumerate(ids)}
     eds = [(pos[a], pos[b]) for a, b in obj["edges"] if a in pos and b in pos]
     inst = [tuple(pos[v] for v in t) for t in instances_of(obj, ids, cls)]
-    rb = class_avoid_binary(len(ids), eds, 4, inst, cap)
+    rb = reencode_confirm(len(ids), eds, k, inst, cap)
     if rb["outcome"] != "unsat":
         abort_invariant("RE-ENCODE (§0g G-3)",
                         f"the final core fires one-hot but binary read {rb['outcome']}")
@@ -565,16 +651,19 @@ def shrink(obj_name: str, centre: str, cls_name: str, start_mark: float, cap: fl
     for i in ids:
         key = f"{spec_f[i]:.6f}"
         rings[key] = rings.get(key, 0) + 1
-    core = {"schema": "m33-core v1 (plans/M33-mechanism-hunt.md §0h)", "object": obj_name,
+    schema = ("m33-core v1 (plans/M33-mechanism-hunt.md §0h)" if k == 4 else
+              "m35-core v1 (plans/M35-k5-transfer.md §0b)")
+    core = {"schema": schema, "object": obj_name,
             "centre": centre, "class": {"name": cls_name, "arity": cls["arity"],
-                                        "d2": str(cls["d2"])}, "k": 4, "machine": machine,
+                                        "d2": str(cls["d2"])}, "k": k, "machine": machine,
             "start_mark": start_mark, "vertices": sorted(ids), "n": len(ids),
             "deletion_order": deletions, "passes": passes,
             "necessity": {"complete": True, "witnesses_validated": len(witnesses)},
             "necessity_witnesses": witnesses,
-            "reencode": {"encoding": "binary-2bit", "outcome": rb["outcome"]},
+            "reencode": {"encoding": rb["encoding"], "outcome": rb["outcome"]},
             "anatomy": {"rings": rings}, "status": "solver-measured"}
-    out = BUILD / f"m33-core-{obj_name}-{cls_name}.json"
+    out = BUILD / (f"m33-core-{obj_name}-{cls_name}.json" if k == 4 else
+                   f"m35-core-{obj_name}-{cls_name}-k{k}.json")
     out.write_text(json.dumps(core, indent=1))
     print(f"CORE: {len(ids)} vertices, {passes} passes, 1-minimal with witnesses, "
           f"re-encode confirmed  → {out.name}")
@@ -725,6 +814,33 @@ def self_test() -> None:
     expect(reg["ids"], [1, 2, 3], "region excludes the centre vertex, keeps object ids")
     expect(reg["S_obj"], [1], "the S target is reported in object ids")
 
+    # ---- the M35 additions (§0g G-5) ----
+
+    # the trilattice loader: ball |·|² ≤ 3 = origin + 6 units + 6 √3 points = 13 points;
+    # tags round-trip; the K7 lives in the {1,√3,2} union graph of the |·|² ≤ 4 ball
+    tri = load_object("trilattice3")
+    expect(len(tri["pts"]), 13, "trilattice3: 13 points (origin + 6 units + 6 √3)")
+    expect(len(tri["edges"]), 24, "trilattice3: 24 unit edges (6 spokes + 6 ring + 12 outer)")
+    expect(tri["tags"][tri["pts"].index((tuple([F(1)] + [F(0)] * 15),
+                                         tuple([F(0)] * 16)))], (1, 0),
+           "trilattice tags: the point 1 + 0·ζ₆ carries tag (1, 0)")
+
+    # the clique-triviality guard: the hex shell (centre + 6 ring) with its √3 + d2 pairs IS
+    # a K7 → clique_trivial at k = 6 (t = 7); dropping one ring point's pairs still leaves
+    # the K6 (t = 7 refuses, t = 6 finds); a sparse decoy refuses
+    shell_edges = [(0, r) for r in range(1, 7)] + [(r, r % 6 + 1) for r in range(1, 7)]
+    shell_pairs = [(1, 3), (2, 4), (3, 5), (4, 6), (5, 1), (6, 2), (1, 4), (2, 5), (3, 6)]
+    ct7 = clique_trivial(shell_edges, [shell_pairs], 7, 6)
+    expect(ct7["clique_trivial"], True, "clique guard: hex shell IS a K7 (t = 7 found)")
+    red = [p for p in shell_pairs if 6 not in p]
+    red_edges = [e for e in shell_edges if 6 not in e]
+    ct6 = clique_trivial(red_edges, [red], 7, 6)
+    expect(ct6["clique_trivial"], False, "clique guard: shell minus a ring point has no K7")
+    ct5 = clique_trivial(red_edges, [red], 7, 5)
+    expect(ct5["clique_trivial"], True, "clique guard: …but the K6 remains (t = 6 found)")
+    ctd = clique_trivial([(0, 1), (2, 3)], [[(1, 2)]], 4, 3)
+    expect(ctd["clique_trivial"], False, "clique guard: sparse decoy refuses at t = 4")
+
     print("SELF-TEST:", "ok" if not failures else f"{len(failures)} FAILURES: {failures}")
     if failures:
         sys.exit(1)
@@ -762,6 +878,9 @@ def main() -> None:
     ap.add_argument("--machine", default="laptop", help="named beside every number (§0e)")
     ap.add_argument("--quantiles", type=int, default=None,
                     help="thin the mark list (the 1581 sweeps use ~28)")
+    ap.add_argument("--k", type=int, default=4,
+                    help="colour count (M35: 5 routes artifacts to m35-* prefixes; the m33 "
+                    "artifacts are never touched)")
     args = ap.parse_args()
     if args.self_test:
         self_test()
@@ -779,12 +898,13 @@ def main() -> None:
             inst = instances_of(obj, list(range(len(obj["pts"]))), CLASSES[cn])
             print(f"  {cn}: {len(inst)} instances")
     elif args.sweep:
-        sweep(args.sweep[0], args.sweep[1], args.cap, args.machine, args.quantiles)
+        sweep(args.sweep[0], args.sweep[1], args.cap, args.machine, args.quantiles, args.k)
     elif args.spectrum:
-        class_onset(args.spectrum[0], args.spectrum[1], args.spectrum[2], args.cap, args.machine)
+        class_onset(args.spectrum[0], args.spectrum[1], args.spectrum[2], args.cap,
+                    args.machine, args.k)
     elif args.shrink:
         shrink(args.shrink[0], args.shrink[1], args.shrink[2], float(args.shrink[3]),
-               args.cap, args.machine)
+               args.cap, args.machine, args.k)
     elif args.shrink_cover:
         shrink_cover(args.shrink_cover[0], args.shrink_cover[1], int(args.shrink_cover[2]),
                      float(args.shrink_cover[3]), args.cap, args.machine)

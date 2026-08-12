@@ -1,0 +1,197 @@
+import Proofs.HadwigerNelson.PairDist
+import Proofs.HadwigerNelson.Pigeonhole
+
+/-!
+# The hexagonal-shell pigeonhole at up to six colours (M35 L1)
+
+**Every proper colouring of the plane with at most six colours makes some pair at distance
+`√3` or at distance `2` monochromatic** — equivalently, the three-distance graph of the plane
+at `{1, √3, 2}` needs at least seven colours.
+
+The carrier is the closed first shell of the triangular lattice: a point and its six unit
+neighbours. All 21 pairwise distances lie in `{1, √3, 2}` (12 unit, 6 at `√3` across the 120°
+ring gaps, 3 diameters), so the seven points are a clique of the three-distance graph — with
+fewer than seven colours two of them share, and a shared pair is never a unit pair. No search
+and no refutation certificate appear anywhere: the pigeonhole is carried by counting
+(`mono_pair_of_clique`), and the kernel checks only the 21 distance identities, the two
+completeness sweeps, and the clique membership decide.
+
+**Attribution** (M35 §0a C3): the clique is elementary and presumably folklore — the first
+shell of the triangular lattice. **What is new is the formalization, not the compulsion.**
+The compulsion is COMPOUND — disjunctive over two distances — and strictly weaker than a
+single-distance firing at five colours would be. Its seed value for the 6-programme: a
+6-forcer built over this pigeonhole needs kill webs for BOTH distances, and the spindle
+radicands `4·3 − 1 = 11` and `4·4 − 1 = 15` both lie inside the 5-forcers' field
+`ℚ(√3,√5,√7,√11)`.
+
+**Not checked, and not claimed**: novelty of the plane statements, and any single-distance
+compulsion at five colours — the M35 sweep measures those separately, tools-side.
+-/
+
+namespace HadwigerNelson
+
+open SimpleGraph
+
+-- id 0 = the centre; ids 1..6 = the ring ζ₆^(a−1), a = id − 1 (tools-side reading, not a
+-- theorem). Emitted by `build/m35-design.py --emit-hexshell` (untrusted); the kernel
+-- re-decides every distance below.
+
+/-- The seven vertices — the origin and the six sixth-roots of unity — exact in the
+`ℚ(√3,√5,√7,√11)` basis and scaled by `2` so every leaf is an integer. -/
+def hexShellTable : PtTable :=
+  (PtTable.node 3 (PtTable.node 1 (PtTable.leaf ⟨⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩) (PtTable.node 1 (PtTable.leaf ⟨⟨⟨⟨⟨2,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩) (PtTable.leaf ⟨⟨⟨⟨⟨1,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,1⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩))) (PtTable.node 2 (PtTable.node 1 (PtTable.leaf ⟨⟨⟨⟨⟨(-1),0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,1⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩) (PtTable.leaf ⟨⟨⟨⟨⟨(-2),0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩)) (PtTable.node 1 (PtTable.leaf ⟨⟨⟨⟨⟨(-1),0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,(-1)⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩) (PtTable.leaf ⟨⟨⟨⟨⟨1,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩,⟨⟨⟨⟨0,(-1)⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩,⟨⟨⟨0,0⟩,⟨0,0⟩⟩,⟨⟨0,0⟩,⟨0,0⟩⟩⟩⟩⟩))))
+
+/-- The twelve claimed unit-distance pairs: six spokes and the six ring steps. -/
+def hexShellEdges : List (Fin 7 × Fin 7) :=
+  [(0,1), (0,2), (0,3), (0,4), (0,5), (0,6), (1,2), (1,6), (2,3), (3,4), (4,5), (5,6)]
+
+/-- The six claimed `√3`-pairs: the 120° ring gaps. -/
+def hexShellP3 : List (Fin 7 × Fin 7) :=
+  [(1,3), (1,5), (2,4), (2,6), (3,5), (4,6)]
+
+/-- The three claimed distance-2 pairs: the ring diameters. -/
+def hexShellP4 : List (Fin 7 × Fin 7) :=
+  [(1,4), (2,5), (3,6)]
+
+/-- The compound class the pigeonhole names: some `√3`-pair or some diameter goes mono. -/
+def hexShellPairs : List (Fin 7 × Fin 7) := hexShellP3 ++ hexShellP4
+
+/-- The certificate. -/
+def hexShell : UDCert 7 where
+  verts := hexShellTable.toVerts
+  edges := hexShellEdges
+  denom := 2
+
+/-- Every listed edge has exact squared distance `2²`. Kernel-checked. -/
+theorem hexShell_valid : hexShell.Valid = true := by decide +kernel
+
+/-- Every listed `√3`-pair has exact squared distance `3 · 2²`. Kernel-checked. -/
+theorem hexShell_p3_dist : hexShell.PairsAt hexShellP3 3 = true := by decide +kernel
+
+/-- Every listed diameter has exact squared distance `4 · 2²` — real distance `2`.
+Kernel-checked. -/
+theorem hexShell_p4_dist : hexShell.PairsAt hexShellP4 4 = true := by decide +kernel
+
+/-- **Completeness of the `√3` list**: any two of the seven points at squared distance `3`
+are a listed pair — `hexShellP3` is the whole class, not a curated sublist. Kernel-checked
+over all 49 ordered pairs. -/
+theorem hexShell_p3_complete :
+    ∀ i j : Fin 7, (hexShell.verts i).distSq (hexShell.verts j) = ((3 * (2 * 2) : ℤ) : Q4) →
+      (i, j) ∈ hexShellP3 ∨ (j, i) ∈ hexShellP3 := by
+  decide +kernel
+
+/-- **Completeness of the diameter list**, same contract. -/
+theorem hexShell_p4_complete :
+    ∀ i j : Fin 7, (hexShell.verts i).distSq (hexShell.verts j) = ((4 * (2 * 2) : ℤ) : Q4) →
+      (i, j) ∈ hexShellP4 ∨ (j, i) ∈ hexShellP4 := by
+  decide +kernel
+
+/-- **The clique fact**: every two distinct vertices are adjacent in the augmented graph —
+the seven points are pairwise at distance `1`, `√3`, or `2`. One decide over 42 ordered
+membership checks; this is the entire combinatorial content of the pigeonhole. -/
+theorem hexShell_clique :
+    ∀ i j : Fin 7, i ≠ j →
+      ((i, j) ∈ (hexShellEdges ++ hexShellPairs) ∨
+       (j, i) ∈ (hexShellEdges ++ hexShellPairs)) := by
+  decide
+
+/-! ### Shape pins and controls — compiled, every build -/
+
+#guard hexShellEdges.length = 12
+#guard hexShellP3.length = 6
+#guard hexShellP4.length = 3
+#guard hexShellEdges.eraseDups.length = 12
+#guard hexShellPairs.eraseDups.length = 9
+#guard hexShellEdges.all fun e => e.1 < e.2
+#guard hexShellPairs.all fun p => p.1 < p.2
+#guard hexShell.denom = 2
+
+-- The compiled cross-check: `badEdges` is the compiler's independent evaluation of the same
+-- predicate `hexShell_valid` settles by kernel reduction.
+#guard hexShell.badEdges.isEmpty
+
+-- The adversarial member: move ring vertex 1 (a member of edges, √3-pairs, AND diameters) to
+-- the far point ⟨9, 9⟩ and every check must fail, the edge check naming only vertex-1 edges.
+#guard !(({ hexShell with verts := fun i => if i = 1 then ⟨9, 9⟩ else hexShell.verts i } :
+  UDCert 7)).badEdges.isEmpty
+#guard (({ hexShell with verts := fun i => if i = 1 then ⟨9, 9⟩ else hexShell.verts i } :
+  UDCert 7)).badEdges.all fun be => be.1.1 = 1 ∨ be.1.2 = 1
+#guard ({ hexShell with verts := fun i => if i = 1 then ⟨9, 9⟩ else hexShell.verts i } :
+  UDCert 7).PairsAt hexShellP3 3 = false
+#guard ({ hexShell with verts := fun i => if i = 1 then ⟨9, 9⟩ else hexShell.verts i } :
+  UDCert 7).PairsAt hexShellP4 4 = false
+
+/-! ### The pigeonhole -/
+
+/-- **The hexagonal-shell pigeonhole.** With fewer than seven colours, every proper colouring
+of the shell (properness over the twelve listed unit edges) makes some listed `√3`-pair or
+diameter monochromatic. Counting, not search: the seven vertices are pairwise adjacent in the
+augmented graph, so two share a colour, and a shared pair is never a unit edge. -/
+theorem hexShell_pigeonhole {k : ℕ} (hk : k < 7)
+    (C : (edgeGraph 7 hexShellEdges).Coloring (Fin k)) : MonoPair hexShellPairs C :=
+  mono_pair_of_clique Finset.univ (by simpa using hk)
+    (fun i _ j _ hne => ⟨hne, hexShell_clique i j hne⟩) C
+
+/-! ### Specification — the compulsion is live, and its hypothesis is load-bearing -/
+
+/-- The ring-alternation colouring (centre `2`, ring `0,1,0,1,0,1`) is proper on the shell —
+the colouring domain is non-vacuous even at three colours — and the pigeonhole's conclusion
+is visibly live on it: ring vertices 1 and 3 share colour `0` across a `√3` gap. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 3), MonoPair hexShellPairs C := by
+  refine ⟨Coloring.mk ![2, 0, 1, 0, 1, 0, 1] ?_, ⟨(1, 3), by decide, rfl⟩⟩
+  rintro i j ⟨hne, hm⟩
+  fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+
+/-- The mutation partner: at seven colours the counting fails and the rainbow colouring
+avoids every listed pair — `k < 7` is load-bearing. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 7),
+    ¬ MonoPair hexShellPairs C := by
+  refine ⟨Coloring.mk ![0, 1, 2, 3, 4, 5, 6] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]
+    intro p hp
+    fin_cases hp <;> decide
+
+/-! ### The plane corollaries -/
+
+/-- **The plane pigeonhole, colour-generic.** Every proper colouring of the plane's
+unit-distance graph with fewer than seven colours has a monochromatic pair at distance `√3`
+or at distance `2`. The witnesses are two of the seven certified shell points. -/
+theorem hexShell_plane {k : ℕ} (hk : k < 7) (C : (unitDistance ℂ).Coloring (Fin k)) :
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y := by
+  have hunit := hexShell.valid_sound (by decide) hexShell_valid
+  have hvalid : ∀ {i j : Fin 7}, (edgeGraph 7 hexShellEdges).Adj i j →
+      C (hexShell.point i) ≠ C (hexShell.point j) := by
+    rintro i j ⟨hne, hm | hm⟩
+    · exact C.valid (unitDistance_adj.mpr (hunit (i, j) hm))
+    · exact C.valid (unitDistance_adj.mpr (by rw [dist_comm]; exact hunit (j, i) hm))
+  obtain ⟨p, hp, heq⟩ :=
+    hexShell_pigeonhole hk (Coloring.mk (fun i => C (hexShell.point i)) hvalid)
+  refine ⟨hexShell.point p.1, hexShell.point p.2, ?_, heq⟩
+  rcases List.mem_append.mp hp with h3 | h4
+  · left
+    have h := hexShell.pairsAt_sound (by decide) hexShell_p3_dist p h3
+    rwa [show ((3 : ℤ) : ℝ) = 3 by norm_num] at h
+  · right
+    have h := hexShell.pairsAt_sound (by decide) hexShell_p4_dist p h4
+    rwa [show Real.sqrt ((4 : ℤ) : ℝ) = 2 by
+      rw [show ((4 : ℤ) : ℝ) = (2 : ℝ) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]] at h
+
+/-- **The five-colour reading** — the 6-programme's Act-One seed: every proper 5-colouring of
+the plane has a mono pair at distance `√3` or `2`. A 6-forcer built over this compound
+pigeonhole needs kill webs for both distances (radicands 11 and 15, inside the 5-forcers'
+field). Compound = disjunctive: strictly weaker than a single-distance firing. -/
+theorem hexShell_plane5 (C : (unitDistance ℂ).Coloring (Fin 5)) :
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  hexShell_plane (by norm_num) C
+
+/-- **The six-colour reading**: every proper 6-colouring of the plane has a mono pair at
+distance `√3` or `2` — equivalently, the `{1, √3, 2}` three-distance graph of the plane is
+not 6-colourable: **χ(ℝ²; {1, √3, 2}) ≥ 7**. Elementary and presumably folklore; what is new
+is the formalization, not the compulsion. -/
+theorem hexShell_plane6 (C : (unitDistance ℂ).Coloring (Fin 6)) :
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  hexShell_plane (by norm_num) C
+
+end HadwigerNelson

@@ -282,6 +282,65 @@ def class_avoid_binary(n: int, edges, k: int, instances, cap: float | None = Non
     return row
 
 
+def class_avoid_binary3(n: int, edges, instances, cap: float | None = None) -> dict:
+    """The k = 5 decorrelated re-encode (M35 §0g G-5): 3-bit binary colours, the three unused
+    codes 5–7 banned per vertex, and ONE uniform mono-ban generator over all eight codes serving
+    edges and instances alike (properness IS mono-banning the edge; banning a tuple at an
+    already-banned code is sound redundancy, and uniformity keeps the generator honest). The
+    palette pin (vertex 0 wears code 0) is sound by relabelling, exactly as the 2-bit pin.
+    Exists so a k = 5 `fired` verdict never rests on a single clause generator; agreement with
+    `class_avoid` at k = 5 is asserted by the self-test gadgets and a random-graph loop."""
+    _check_instances(instances)
+
+    def bit(v: int, i: int) -> int:
+        return v * 3 + i + 1
+
+    def lits_ne(v: int, c: int) -> list[int]:
+        # literals asserting "v does not wear code c": some bit differs from c's pattern
+        return [bit(v, i) if ((c >> i) & 1) == 0 else -bit(v, i) for i in range(3)]
+
+    clauses: list[list[int]] = []
+    for v in range(n):
+        for c in (5, 6, 7):
+            clauses.append(lits_ne(v, c))
+
+    def mono_ban(tup) -> None:
+        for c in range(8):
+            cl: list[int] = []
+            for v in tup:
+                cl.extend(lits_ne(v, c))
+            clauses.append(cl)
+
+    for e in edges:
+        mono_ban(e)
+    for inst in instances:
+        mono_ban(inst)
+    if n > 0:
+        for i in range(3):
+            clauses.append([-bit(0, i)])
+    t0 = time.time()
+    status, model = _solve(clauses, n * 3, cap)
+    row = {"encoding": "binary-3bit", "n_instances": len(instances), "outcome": status,
+           "seconds": round(time.time() - t0, 2), "cap": cap}
+    if status == "sat":
+        colours = [sum((1 << i) for i in range(3) if bit(v, i) in model) for v in range(n)]
+        if any(c > 4 for c in colours):
+            raise SystemExit("BINARY3 MODEL INVALID: a banned code (5–7) appears — the "
+                             "per-vertex ban clauses are wrong")
+        _validate_avoiding(colours, edges, instances)
+    return row
+
+
+def reencode_confirm(n: int, edges, k: int, instances, cap: float | None = None) -> dict:
+    """The decorrelation dispatch: the 2-bit re-encode at k = 4, the 3-bit at k = 5. Any other
+    k has no second encoding yet and must not silently pass — reject loudly."""
+    if k == 4:
+        return class_avoid_binary(n, edges, 4, instances, cap)
+    if k == 5:
+        return class_avoid_binary3(n, edges, instances, cap)
+    raise SystemExit(f"RE-ENCODE REJECTED: no decorrelated encoding at k = {k} (4 | 5 only)")
+
+
 def mono_realizable(n: int, edges, k: int, instance, cap: float | None = None) -> dict:
     """Direction B, arity-generic: pin THIS instance monochromatic (palette-WLOG colour 0) in
     a proper k-colouring. `sat` = realizable, model validated (proper AND the pin holds);
@@ -637,6 +696,66 @@ def self_test() -> None:
                                   (mono_tri[:-1], (3, 4, 5), "sat", "triple clean")]:
         cb = class_avoid_binary(6, eds, 4, [inst])
         expect(cb["outcome"], want, f"binary re-encode agrees: {what}")
+
+    # ---- the M35 3-bit re-encode, each control red/green on cue (§0g G-5) ----
+
+    # planted forced-equal at k=5: u=5, v=6 both adjacent to the shared K4 {0,1,2,3} — both
+    # forced to the 5th colour, so the mono 2-tuple (5,6) cannot be avoided at k=5
+    k4c = [(a, b) for a in range(4) for b in range(a + 1, 4)]
+    forced5 = k4c + [(u, w) for u in (5, 6) for w in (0, 1, 2, 3)]
+    ca = class_avoid(7, forced5, 5, [(5, 6)])
+    expect(ca["outcome"], "unsat", "k=5 planted forced-equal: one-hot avoid-mono (5,6) FIRES")
+    cb = class_avoid_binary3(7, forced5, [(5, 6)])
+    expect(cb["outcome"], "unsat", "k=5 planted forced-equal: 3-bit re-encode agrees (fired)")
+    ca = class_avoid(7, forced5[:-1], 5, [(5, 6)])
+    expect(ca["outcome"], "sat", "one spoke removed: one-hot goes clean at k=5")
+    cb = class_avoid_binary3(7, forced5[:-1], [(5, 6)])
+    expect(cb["outcome"], "sat", "one spoke removed: 3-bit agrees (clean)")
+
+    # the hex-shell control (M35 §0a C3): centre 0, ring 1..6; unit edges = spokes + ring
+    # steps; √3 pairs = the 120° ring gaps; d=2 pairs = the antipodal ring gaps. At k=5 the
+    # compound class fires on SEVEN points by counting; dropping the two pair families that
+    # touch ring point 6 goes clean.
+    shell_edges = [(0, r) for r in range(1, 7)] + [(r, r % 6 + 1) for r in range(1, 7)]
+    shell_p3 = [(1, 3), (2, 4), (3, 5), (4, 6), (5, 1), (6, 2)]
+    shell_p4 = [(1, 4), (2, 5), (3, 6)]
+    compound = shell_p3 + shell_p4
+    ca = class_avoid(7, shell_edges, 5, compound)
+    expect(ca["outcome"], "unsat", "hex shell k=5: compound {√3,2} avoidance FIRES (the K7)")
+    cb = class_avoid_binary3(7, shell_edges, compound)
+    expect(cb["outcome"], "unsat", "hex shell k=5: 3-bit agrees (fired)")
+    # dropping ONE ring point's pairs still leaves the K6 on the other six points (the §0f D6
+    # geometry); clean needs TWO ring points' pairs gone — both controls pinned
+    reduced1 = [p for p in compound if 6 not in p]
+    ca = class_avoid(7, shell_edges, 5, reduced1)
+    expect(ca["outcome"], "unsat", "shell minus vertex-6 pairs: still FIRES (the K6 remains)")
+    reduced2 = [p for p in compound if 6 not in p and 5 not in p]
+    ca = class_avoid(7, shell_edges, 5, reduced2)
+    expect(ca["outcome"], "sat", "shell minus vertices-5,6 pairs: goes clean at k=5 (K6 broken)")
+
+    # the random agreement loop: one-hot and 3-bit must agree on arbitrary small instances
+    import random as _rnd
+    _rnd.seed(35)
+    agree = True
+    for _ in range(10):
+        nv = _rnd.randint(5, 9)
+        eds = [(a, b) for a in range(nv) for b in range(a + 1, nv) if _rnd.random() < 0.5]
+        insts = [tuple(_rnd.sample(range(nv), 2)) for _ in range(3)]
+        insts = [t for t in insts if tuple(sorted(t)) not in {tuple(sorted(e)) for e in eds}]
+        if not insts:
+            continue
+        r1 = class_avoid(nv, eds, 5, insts)
+        r2 = class_avoid_binary3(nv, eds, insts)
+        if r1["outcome"] != r2["outcome"]:
+            agree = False
+    expect(agree, True, "10 random graphs: one-hot and 3-bit verdicts agree at k=5")
+
+    # the dispatch rejects colour counts with no second encoding
+    try:
+        reencode_confirm(5, forced_eq, 6, [(3, 4)])
+        expect("no-error", "SystemExit", "re-encode dispatch rejects k=6")
+    except SystemExit as e:
+        expect("REJECTED" in str(e), True, "re-encode dispatch rejects k=6")
 
     # direction-B trivial-impossibility red: an ADJACENT tuple can never be mono — UNSAT for a
     # reason that is not a compulsion (the enumerator excludes internal edges by geometry;

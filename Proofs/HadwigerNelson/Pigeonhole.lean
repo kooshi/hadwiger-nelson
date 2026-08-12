@@ -13,6 +13,8 @@ Act One of the two-act anatomy (G15/G16), as kernel vocabulary. Three pieces:
   certified SAT chain (encoding, mask checker, emitters) applies to it verbatim. The entry
   point instances consume is `mono_pair_of_not_colorable_append`;
   `colorable_append_iff_exists_avoiding` is its two-way form, kept for the negative controls.
+  Its counting sibling `mono_pair_of_clique` (M35) carries the pigeonhole when the augmented
+  graph holds a clique bigger than the colour count — no refutation certificate at all.
 
 * **The transmuter** (`transmuter`): the five-vertex forcing at the heart of the nine-vertex
   √3-pair core — a centre `z`, its rainbow triangle `a b c`, and a hub `h` seeing `z, b, c`:
@@ -100,6 +102,27 @@ theorem colorable_append_iff_exists_avoiding {n : ℕ} {E P : List (Fin n × Fin
     exact D.valid ⟨hP p hp, Or.inl (List.mem_append_right E hp)⟩
   · rintro ⟨C, hC⟩
     exact colorable_append_of_avoiding C (not_monoPair_iff.mp hC)
+
+/-- **The clique face of the bridge** (M35 §0f D1). If a vertex set `S` is pairwise adjacent
+in the augmented graph `(V, E ++ P)` and the colour count is below `|S|`, then every proper
+`k`-colouring of the base graph makes some listed pair monochromatic — the pigeonhole carried
+by counting, with no refutation certificate anywhere: two `S`-members share a colour, the
+shared pair cannot be a base edge (properness), so it is a listed pair. The per-instance
+obligations are one cardinality `decide` and one pairwise-adjacency `decide`. -/
+theorem mono_pair_of_clique {n : ℕ} {E P : List (Fin n × Fin n)}
+    (S : Finset (Fin n)) (hk : k < S.card)
+    (hadj : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → (edgeGraph n (E ++ P)).Adj i j)
+    (C : (edgeGraph n E).Coloring (Fin k)) : MonoPair P C := by
+  obtain ⟨i, hi, j, hj, hne, heq⟩ :=
+    Finset.exists_ne_map_eq_of_card_lt_of_maps_to
+      (by simpa using hk) (fun a (_ : a ∈ S) => Finset.mem_univ (C a))
+  obtain ⟨-, hm | hm⟩ := hadj i hi j hj hne
+  · rcases List.mem_append.mp hm with hE | hP
+    · exact absurd heq (C.valid (edgeGraph_adj_of_mem hne hE))
+    · exact ⟨(i, j), hP, heq⟩
+  · rcases List.mem_append.mp hm with hE | hP
+    · exact absurd heq.symm (C.valid (edgeGraph_adj_of_mem (Ne.symm hne) hE))
+    · exact ⟨(j, i), hP, heq.symm⟩
 
 /-! ## The transmuter: the five-vertex forcing of the nine-vertex core -/
 
@@ -207,6 +230,30 @@ example (C : (edgeGraph 3 [(0, 2), (1, 2)]).Coloring (Fin 2)) :
     fin_cases i <;> fin_cases j <;> decide
   rw [heq] at hcol
   exact not_colorable_two_top_fin_three hcol
+
+/-- The clique face fires on the same `K₃` by counting alone: `{0, 1, 2}` is pairwise
+adjacent in the augmented graph and `2 < 3` — no refutation anywhere. The membership fact is
+decided as a bare list statement (`Adj` itself carries no `Decidable` instance), then wrapped;
+the instance modules reuse this exact pattern. -/
+example (C : (edgeGraph 3 [(0, 2), (1, 2)]).Coloring (Fin 2)) :
+    MonoPair [((0 : Fin 3), (1 : Fin 3))] C := by
+  have hall : ∀ i j : Fin 3, i ≠ j →
+      ((i, j) ∈ ([(0, 2), (1, 2)] ++ [(0, 1)] : List (Fin 3 × Fin 3)) ∨
+       (j, i) ∈ ([(0, 2), (1, 2)] ++ [(0, 1)] : List (Fin 3 × Fin 3))) := by decide
+  exact mono_pair_of_clique Finset.univ (by decide)
+    (fun i _ j _ hne => ⟨hne, hall i j hne⟩) C
+
+/-- The clique face's mutation partner: at `k = |S|` the counting fails and the conclusion is
+refutable — the rainbow colouring avoids the pair. Certifies `k < S.card` load-bearing. -/
+example : ∃ C : (edgeGraph 3 [(0, 2), (1, 2)]).Coloring (Fin 3),
+    ¬ MonoPair [((0 : Fin 3), (1 : Fin 3))] C := by
+  refine ⟨Coloring.mk ![0, 1, 2] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]
+    intro p hp
+    fin_cases hp
+    decide
 
 /-- The transmuter is not vacuous: a concrete model of all nine hypotheses. -/
 example : (1 : Fin 4) = 1 :=
