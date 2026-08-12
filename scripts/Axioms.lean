@@ -763,6 +763,8 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms Coset.shell_rainbow
 #print axioms Coset.seven_values
 #print axioms Coset.seven_le_card
+#print axioms Coset.exists_proper_coset_colouring
+#print axioms Coset.coset_chromatic_eq_seven
 
 #eval IO.println "=== PURCHASED ==="
 

@@ -276,3 +276,42 @@ fewer colours always has two points one unit apart sharing a colour.*
   **The planted red fires**: with the WRONG vertex (functional value 0 instead
   of 2) the seams survive uncovered — the corner argument is load-bearing and
   is seen to be.
+
+* **P6 CONFIRMED, and P8's stretch goal landed too** — `Proofs/HadwigerNelson/Coset.lean`,
+  zero `sorry`, axioms exactly `[propext, Classical.choice, Quot.sound]`, build green,
+  lint silent, 459 clean at the audit. Both halves:
+  - **the bound** — `Coset.seven_values` (in a proper coset colouring the seven lattice
+    points of the closed first shell take seven pairwise distinct colours) and
+    `Coset.seven_le_card` (hence at least seven colours);
+  - **sharpness** — `Coset.exists_proper_coset_colouring`: the norm-7 ideal at scale
+    `6/7` IS a proper nearest-point coset colouring with seven colours, so the bound is
+    attained; and `Coset.coset_chromatic_eq_seven` states the two together.
+  **The coset chromatic number of the plane is exactly seven.**
+* **The four sweeps landed as designed** and the obligation pass's reframing held: the
+  covering argument became explicit WITNESSES (a gap lemma for kernel norms below four,
+  `j = ⌊(T+1)/2⌋` with a seam case at norm exactly four), so no induction over `j` was ever
+  needed. Every rounding claim goes through one `NearestUnique` interface, which is where
+  "ties broken arbitrarily" is discharged once and for all.
+* **One instrument event, diagnosed not worked around**: Lean panicked
+  (`Lean.Expr.appArg!`) on a `fin_cases i <;> [tac; tac; …]` list combinator. It is
+  deterministic and input-caused — not the hardware fault the standing halt rule is about
+  — and the fix was to define `hole`/`holeF` by pattern matching and use named cases, which
+  is the shape the obligation skill asks for anyway.
+* **Citation drift, again as M35 warned**: `le_or_lt` → `le_or_gt`, `lt_or_le` → `lt_or_ge`
+  at this pin; `zsmul_eq_mul` rewrites `j • d` on `ℤ × ℤ` through the RING structure and
+  must be avoided in favour of `Prod.smul_fst`/`smul_eq_mul`.
+
+## What was NOT done (honesty ledger)
+
+* **The general-lattice case is open and priced.** The theorem is about the TRIANGULAR
+  lattice. For a general planar lattice the same four sweeps give the shape of the
+  argument, but the endgame changes: the Loeschian arithmetic is replaced by the values of
+  an arbitrary binary quadratic form, and the bound `k ≥ 7` needs Hermite's constant plus
+  the covering-radius optimum — both attained only by the hexagonal lattice — so the case
+  `k = 6` requires a near-equality rigidity argument (reduction theory). Worked by hand at
+  subplanning: the crude chain gives `k > 16/3`, i.e. `k ≥ 6`, for every lattice, and the
+  square lattice needs `≥ 9`; the missing piece is the shape-space case analysis. Not
+  attempted tonight.
+* The theorem bounds COSET colourings. Dropping homomorphy makes it false (the module says
+  so), and that gap is exactly where a six-colouring would have to live.
+* `lean4checker` replay — deferred per standing policy (publication gate).

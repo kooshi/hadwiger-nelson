@@ -38,12 +38,16 @@ on the lattice, whose chromatic number at fine scales is the plane's own open qu
 this module bounds *coset* colourings, and the gap between coset and arbitrary is exactly
 where a six-colouring would have to live.
 
+And the bound is TIGHT: the classical hexagonal seven-colouring — the norm-7 ideal
+`(−3 + ζ₆)` at scale `6/7` — is a proper coset colouring with seven colours
+(`exists_proper_coset_colouring`). So **the coset chromatic number of the plane is exactly
+seven** (`coset_chromatic_eq_seven`), and no lattice colouring can ever witness
+`χ(ℝ²) ≤ 6`.
+
 **Attribution.** That the hexagonal colouring is optimal among lattice colourings is
 folklore-adjacent; no novelty is claimed for the construction it bounds. Ours is the proof
 shape, the formalization, and the packaging as a limitation theorem for the upper-bound
-hunt. Sharpness — that seven IS attained in this family, by the norm-7 ideal at any scale
-`p ∈ (0.671, 0.866]` — is confirmed in `build/m37-design.py` and is not formalized here;
-see the module's final section for what that means for reading the theorem.
+hunt.
 -/
 
 namespace HadwigerNelson
@@ -524,6 +528,228 @@ theorem seven_le_hexQi (hp : 0 < p)
 end Colouring
 
 
+
+/-! ## Sharpness: seven is attained
+
+The bound is tight inside its own family. The witness is the classical hexagonal
+seven-colouring: the norm-7 ideal `(−3 + ζ₆)` of `ℤ[ζ₆]`, read as the kernel of
+`(a, b) ↦ a + 3b` in `ℤ/7`, with the cells the Voronoi cells of the lattice at scale
+`p = 6/7`. Two ingredients: the lattice's covering radius (`p/√3`, so cells have diameter
+under 1) and the ideal's minimum (`√7·p`, so same-coloured cells stay clear of 1). -/
+
+theorem hexQ_ge_sq_fst (w : ℝ × ℝ) : 3 / 4 * w.1 ^ 2 ≤ hexQ w := by
+  simp only [hexQ]; nlinarith [sq_nonneg (w.1 + 2 * w.2)]
+
+theorem hexQ_ge_sq_snd (w : ℝ × ℝ) : 3 / 4 * w.2 ^ 2 ≤ hexQ w := by
+  simp only [hexQ]; nlinarith [sq_nonneg (2 * w.1 + w.2)]
+
+/-- **The covering radius.** Every point of the plane is within `p/√3` of a lattice point:
+in address coordinates, some address is at form-distance at most `1/3`. -/
+theorem exists_close (w : ℝ × ℝ) : ∃ v : ℤ × ℤ, hexQ (w - addr v) ≤ 1 / 3 := by
+  obtain ⟨x, y⟩ := w
+  set a : ℤ := ⌊x⌋ with ha
+  set b : ℤ := ⌊y⌋ with hb
+  have hx0 : 0 ≤ x - (a : ℝ) := by rw [ha]; linarith [Int.floor_le x]
+  have hx1 : x - (a : ℝ) < 1 := by rw [ha]; linarith [Int.lt_floor_add_one x]
+  have hy0 : 0 ≤ y - (b : ℝ) := by rw [hb]; linarith [Int.floor_le y]
+  have hy1 : y - (b : ℝ) < 1 := by rw [hb]; linarith [Int.lt_floor_add_one y]
+  set α : ℝ := x - (a : ℝ)
+  set β : ℝ := y - (b : ℝ)
+  have key : hexQ (α, β) ≤ 1 / 3 ∨ hexQ (α - 1, β) ≤ 1 / 3 ∨ hexQ (α, β - 1) ≤ 1 / 3 ∨
+      hexQ (α - 1, β - 1) ≤ 1 / 3 := by
+    rcases le_or_gt (α + β) 1 with hab | hab
+    · rcases (by
+        by_contra h
+        push Not at h
+        obtain ⟨h1, h2, h3⟩ := h
+        simp only [hexQ] at h1 h2 h3
+        nlinarith [sq_nonneg (α - β), sq_nonneg (α + β - 2/3), sq_nonneg (α - 1/3),
+          sq_nonneg (β - 1/3)] :
+        hexQ (α, β) ≤ 1/3 ∨ hexQ (α - 1, β) ≤ 1/3 ∨ hexQ (α, β - 1) ≤ 1/3) with h | h | h
+      · exact Or.inl h
+      · exact Or.inr (Or.inl h)
+      · exact Or.inr (Or.inr (Or.inl h))
+    · rcases (by
+        by_contra h
+        push Not at h
+        obtain ⟨h1, h2, h3⟩ := h
+        simp only [hexQ] at h1 h2 h3
+        nlinarith [sq_nonneg (α - β), sq_nonneg (α + β - 4/3), sq_nonneg (α - 2/3),
+          sq_nonneg (β - 2/3)] :
+        hexQ (α - 1, β - 1) ≤ 1/3 ∨ hexQ (α - 1, β) ≤ 1/3 ∨ hexQ (α, β - 1) ≤ 1/3) with h | h | h
+      · exact Or.inr (Or.inr (Or.inr h))
+      · exact Or.inr (Or.inl h)
+      · exact Or.inr (Or.inr (Or.inl h))
+  have hsub : ∀ da db : ℤ, ((x, y) : ℝ × ℝ) - addr (a + da, b + db)
+      = (α - (da : ℝ), β - (db : ℝ)) := by
+    intro da db
+    simp only [addr, Prod.ext_iff, Prod.fst_sub, Prod.snd_sub]
+    push_cast
+    constructor <;> ring
+  rcases key with h | h | h | h
+  · refine ⟨(a + 0, b + 0), ?_⟩; rw [hsub]; simpa using h
+  · refine ⟨(a + 1, b + 0), ?_⟩; rw [hsub]; simpa using h
+  · refine ⟨(a + 0, b + 1), ?_⟩; rw [hsub]; simpa using h
+  · refine ⟨(a + 1, b + 1), ?_⟩; rw [hsub]; simpa using h
+
+/-- Outside the four corners of its own cell an address is far — the form is at least `3/4`,
+beyond the covering radius — so a nearest address always exists, and a nearest-point
+rounding of the plane can be chosen. -/
+theorem exists_nearest (w : ℝ × ℝ) :
+    ∃ v : ℤ × ℤ, ∀ u : ℤ × ℤ, hexQ (w - addr v) ≤ hexQ (w - addr u) := by
+  classical
+  obtain ⟨v₀, hv₀⟩ := exists_close w
+  set S : Finset (ℤ × ℤ) :=
+    {v₀, (⌊w.1⌋, ⌊w.2⌋), (⌊w.1⌋ + 1, ⌊w.2⌋), (⌊w.1⌋, ⌊w.2⌋ + 1), (⌊w.1⌋ + 1, ⌊w.2⌋ + 1)} with hS
+  have hne : S.Nonempty := ⟨v₀, by simp [hS]⟩
+  obtain ⟨v, hvS, hvmin⟩ := S.exists_min_image (fun u => hexQ (w - addr u)) hne
+  have hvle : hexQ (w - addr v) ≤ 1 / 3 := le_trans (hvmin v₀ (by simp [hS])) hv₀
+  refine ⟨v, fun u => ?_⟩
+  by_cases hu : u ∈ S
+  · exact hvmin u hu
+  · -- outside the window: one coordinate is at least a full step away
+    have hco : 1 ≤ |w.1 - (u.1 : ℝ)| ∨ 1 ≤ |w.2 - (u.2 : ℝ)| := by
+      by_contra hc
+      push Not at hc
+      obtain ⟨hc1, hc2⟩ := hc
+      rw [abs_lt] at hc1 hc2
+      have h1 : u.1 = ⌊w.1⌋ ∨ u.1 = ⌊w.1⌋ + 1 := by
+        have hlo : (⌊w.1⌋ : ℝ) < (u.1 : ℝ) + 1 := by
+          have := Int.floor_le w.1; linarith [hc1.2]
+        have hhi : (u.1 : ℝ) < (⌊w.1⌋ : ℝ) + 2 := by
+          have := Int.lt_floor_add_one w.1; linarith [hc1.1]
+        have h1' : ⌊w.1⌋ < u.1 + 1 := by exact_mod_cast hlo
+        have h2' : u.1 < ⌊w.1⌋ + 2 := by exact_mod_cast hhi
+        omega
+      have h2 : u.2 = ⌊w.2⌋ ∨ u.2 = ⌊w.2⌋ + 1 := by
+        have hlo : (⌊w.2⌋ : ℝ) < (u.2 : ℝ) + 1 := by
+          have := Int.floor_le w.2; linarith [hc2.2]
+        have hhi : (u.2 : ℝ) < (⌊w.2⌋ : ℝ) + 2 := by
+          have := Int.lt_floor_add_one w.2; linarith [hc2.1]
+        have h1' : ⌊w.2⌋ < u.2 + 1 := by exact_mod_cast hlo
+        have h2' : u.2 < ⌊w.2⌋ + 2 := by exact_mod_cast hhi
+        omega
+      obtain ⟨u1, u2⟩ := u
+      rcases h1 with h1 | h1 <;> rcases h2 with h2 | h2 <;> subst h1 <;> subst h2 <;>
+        simp [hS] at hu
+    have hfar : (3 : ℝ) / 4 ≤ hexQ (w - addr u) := by
+      rcases hco with h | h
+      · have hq := hexQ_ge_sq_fst (w - addr u)
+        have : (w - addr u).1 = w.1 - (u.1 : ℝ) := rfl
+        rw [this] at hq
+        nlinarith [sq_abs (w.1 - (u.1 : ℝ)), abs_nonneg (w.1 - (u.1 : ℝ))]
+      · have hq := hexQ_ge_sq_snd (w - addr u)
+        have : (w - addr u).2 = w.2 - (u.2 : ℝ) := rfl
+        rw [this] at hq
+        nlinarith [sq_abs (w.2 - (u.2 : ℝ)), abs_nonneg (w.2 - (u.2 : ℝ))]
+    linarith
+
+
+/-! ### The witness: the norm-7 ideal at scale 6/7 -/
+
+/-- The classical seven-colouring's colour map: `(a, b) ↦ a + 3b` in `ℤ/7`. Its kernel is
+the ideal generated by `−3 + ζ₆`, of norm 7 — which is why it separates colour classes by
+`√7` rather than merely by index. -/
+def ideal7 : (ℤ × ℤ) →+ ZMod 7 where
+  toFun v := (v.1 : ZMod 7) + 3 * (v.2 : ZMod 7)
+  map_zero' := by simp
+  map_add' u v := by simp only [Prod.fst_add, Prod.snd_add]; push_cast; ring
+
+/-- The ideal's minimum: every nonzero same-coloured offset has norm at least seven. -/
+theorem ideal7_min {d : ℤ × ℤ} (hd : d ≠ 0) (h : ideal7 d = 0) : 7 ≤ hexQi d := by
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨a, b⟩ := d
+  have hq : a ^ 2 + a * b + b ^ 2 ≤ 6 := by simpa [hexQi] using Int.lt_add_one_iff.mp hcon
+  have hb1 : -2 ≤ b := by nlinarith [sq_nonneg (2 * a + b)]
+  have hb2 : b ≤ 2 := by nlinarith [sq_nonneg (2 * a + b)]
+  have ha1 : -2 ≤ a := by nlinarith [sq_nonneg (a + 2 * b)]
+  have ha2 : a ≤ 2 := by nlinarith [sq_nonneg (a + 2 * b)]
+  revert h hd hq
+  simp only [ideal7, AddMonoidHom.coe_mk, ZeroHom.coe_mk, hexQi]
+  interval_cases a <;> interval_cases b <;> decide
+
+/-- The embedding is onto: every point of the plane has an address. -/
+theorem emb_surjective {p : ℝ} (hp : 0 < p) (x : ℂ) : ∃ w : ℝ × ℝ, emb p w = x := by
+  have h3 : (0 : ℝ) < Real.sqrt 3 := Real.sqrt_pos.mpr (by norm_num)
+  refine ⟨(x.re / p - x.im / (p * Real.sqrt 3), 2 * x.im / (p * Real.sqrt 3)), ?_⟩
+  have hs : Real.sqrt 3 * Real.sqrt 3 = 3 := Real.mul_self_sqrt (by norm_num)
+  apply Complex.ext <;> simp only [emb] <;> field_simp <;> ring
+
+/-- **Sharpness: seven is attained.** The norm-7 coset colouring at scale `6/7` is a proper
+nearest-point coset colouring of the plane using seven colours — so the bound of
+`seven_le_card` is tight, and the coset chromatic number of the plane is exactly seven. -/
+theorem exists_proper_coset_colouring :
+    ∃ rnd : ℂ → ℤ × ℤ,
+      (∀ (x : ℂ) (v : ℤ × ℤ),
+        dist x (latt (6 / 7) (rnd x)) ≤ dist x (latt (6 / 7) v)) ∧
+      (∀ x y : ℂ, dist x y = 1 → ideal7 (rnd x) ≠ ideal7 (rnd y)) := by
+  classical
+  set p : ℝ := 6 / 7 with hpdef
+  have hp : (0 : ℝ) < p := by rw [hpdef]; norm_num
+  -- an address for every point, and a nearest lattice address for every address
+  choose adr hadr using emb_surjective hp
+  choose nr hnr using exists_nearest
+  refine ⟨fun x => nr (adr x), fun x v => ?_, fun x y hxy hc => ?_⟩
+  · have h1 : dist x (latt p (nr (adr x))) ^ 2 = p ^ 2 * hexQ (adr x - addr (nr (adr x))) := by
+      have h := dist_emb_sq p (adr x) (addr (nr (adr x)))
+      rwa [hadr x] at h
+    have h2 : dist x (latt p v) ^ 2 = p ^ 2 * hexQ (adr x - addr v) := by
+      have h := dist_emb_sq p (adr x) (addr v)
+      rwa [hadr x] at h
+    have hle := hnr (adr x) v
+    have hp2 : (0 : ℝ) < p ^ 2 := by positivity
+    nlinarith [dist_nonneg (x := x) (y := latt p (nr (adr x))),
+      dist_nonneg (x := x) (y := latt p v)]
+  · -- the two cells are the same colour: either the same cell, or at least `√7 p` apart
+    set u := nr (adr x) with hu
+    set v := nr (adr y) with hv
+    -- each point is within `p/√3` of its own lattice point, and `(p/√3)² < 1/4`
+    have hclose : ∀ z : ℂ, dist z (latt p (nr (adr z))) < 1 / 2 := by
+      intro z
+      obtain ⟨c, hcle⟩ := exists_close (adr z)
+      have h1 : dist z (latt p (nr (adr z))) ^ 2 = p ^ 2 * hexQ (adr z - addr (nr (adr z))) := by
+        have h := dist_emb_sq p (adr z) (addr (nr (adr z)))
+        rwa [hadr z] at h
+      have h2 : hexQ (adr z - addr (nr (adr z))) ≤ 1 / 3 := le_trans (hnr (adr z) c) hcle
+      have h3 : dist z (latt p (nr (adr z))) ^ 2 ≤ p ^ 2 / 3 := by
+        rw [h1]; nlinarith [hexQ_nonneg (adr z - addr (nr (adr z)))]
+      have h4 : p ^ 2 / 3 < 1 / 4 := by rw [hpdef]; norm_num
+      nlinarith [dist_nonneg (x := z) (y := latt p (nr (adr z)))]
+    by_cases huv : u = v
+    · -- same cell: the two points are less than `1` apart
+      have htri := dist_triangle x (latt p u) y
+      rw [dist_comm (latt p u) y] at htri
+      have h1 := hclose x
+      have h2 := hclose y
+      rw [← hu] at h1
+      rw [← hv, ← huv] at h2
+      rw [hxy] at htri
+      linarith
+    · -- different cells of one colour: their centres are at least `√7 p` apart
+      have hne : u - v ≠ 0 := sub_ne_zero_of_ne huv
+      have h0 : ideal7 (u - v) = 0 := by rw [map_sub, hc, sub_self]
+      have hQ : 7 ≤ hexQi (u - v) := ideal7_min hne h0
+      have hcent : dist (latt p u) (latt p v) ^ 2 = p ^ 2 * (hexQi (u - v) : ℝ) := by
+        have h := dist_emb_sq p (addr u) (addr v)
+        rw [← addr_sub, hexQ_addr] at h
+        exact h
+      have hbig : (36 : ℝ) / 7 ≤ dist (latt p u) (latt p v) ^ 2 := by
+        rw [hcent, hpdef]
+        have : (7 : ℝ) ≤ (hexQi (u - v) : ℝ) := by exact_mod_cast hQ
+        nlinarith
+      have htri := dist_triangle (latt p u) x (latt p v)
+      rw [dist_comm (latt p u) x] at htri
+      have h1 := hclose x
+      have h2 := hclose y
+      rw [← hu] at h1
+      rw [← hv] at h2
+      have hxy' : dist x (latt p v) ≤ 1 + dist y (latt p v) := by
+        have := dist_triangle x y (latt p v)
+        rw [hxy] at this; linarith
+      have : dist (latt p u) (latt p v) ≤ 2 := by linarith
+      nlinarith [dist_nonneg (x := latt p u) (y := latt p v)]
+
 /-! ## The closed first shell, and the theorem -/
 
 /-- The seven addresses of the closed first shell: the origin and the six units. This is the
@@ -589,14 +815,24 @@ theorem seven_le_card [Fintype A] (hp : 0 < p)
 
 end Colouring
 
+/-- **The coset chromatic number of the plane is exactly seven.** Every proper
+nearest-point coset colouring has at least seven colours, and one with exactly seven
+exists. In particular no colouring of this kind can ever witness `χ(ℝ²) ≤ 6`: a
+six-colouring of the plane, if one exists at all, is not a lattice colouring. -/
+theorem coset_chromatic_eq_seven :
+    (∀ {A : Type} [AddCommGroup A] [Fintype A] {p : ℝ} {φ : (ℤ × ℤ) →+ A} {rnd : ℂ → ℤ × ℤ},
+        0 < p →
+        (∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt p (rnd x)) ≤ dist x (latt p v)) →
+        (∀ x y : ℂ, dist x y = 1 → φ (rnd x) ≠ φ (rnd y)) → 7 ≤ Fintype.card A) ∧
+      (∃ rnd : ℂ → ℤ × ℤ,
+        (∀ (x : ℂ) (v : ℤ × ℤ), dist x (latt (6 / 7) (rnd x)) ≤ dist x (latt (6 / 7) v)) ∧
+        (∀ x y : ℂ, dist x y = 1 → ideal7 (rnd x) ≠ ideal7 (rnd y))) :=
+  ⟨fun hp hrnd hproper => seven_le_card hp hrnd hproper, exists_proper_coset_colouring⟩
+
 /-! ### Controls — compiled, every build
 
-The theorem's CONSEQUENT is achievable: the norm-7 coset map `(a, b) ↦ (a + 3b) mod 7`
-really does give the seven shell addresses seven distinct colours. Its hypotheses' full
-satisfiability — that a proper coset colouring exists at all — is the sharpness half,
-confirmed in `build/m37-design.py` (the admissible scale window is `p ∈ (0.671, 0.866]`)
-and not formalized here; the contrapositive reading, *a coset colouring with six or fewer
-colours always has two points one unit apart sharing a colour*, is manifestly non-vacuous. -/
+Both halves are theorems, so the statement is non-vacuous in both directions; these pin
+the arithmetic the proofs run on. -/
 
 -- the seven shell addresses are distinct, and the norm-7 coset map separates them
 #guard (List.finRange 7).map (fun i => ((shell i).1 + 3 * (shell i).2) % 7)
