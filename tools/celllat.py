@@ -365,7 +365,7 @@ def patch(T, k, radius, cap=600.0):
     """Refute k colours on a finite BALL of addresses. Unlike a torus refusal this is a
     statement about the graph itself: no periodicity is assumed, so an unsat here means
     chi(G(1/T)) > k outright."""
-    es = set(edge_set(T))
+    es = set(edge_set40(T))  # I1 (M43): reach-correct; the fixed reach 14 clips at T >= 11
     pts = [(a, b) for a in range(-radius, radius + 1) for b in range(-radius, radius + 1)
            if Q((a, b)) <= radius * radius]
     idx = {c: t for t, c in enumerate(pts)}
@@ -861,6 +861,450 @@ def self_test40():
     return not fails
 
 
+# ================================================================ M43: the fine-tail campaign
+# (plans/M43-fine-tail.md — the from-above six-hunt at the 1/7 flanks and the unprobed
+#  tail. Rows are MEASUREMENTS keyed by band (A5: explicit claim_scope — balls are
+#  outright, tori are period-bounded); the transfer poset is a DERIVED section (A1).
+#  Any k <= 6 torus SAT is a chi(R^2) <= 6 candidate: HALT AND VERIFY, never celebrate.)
+
+ART43 = BUILD / "m43-finetail.json"
+SCHEMA43 = ("m43-finetail v1 (plans/M43-fine-tail.md §0). Unit of claim: the BAND (open "
+            "T^2 interval, canonical class reps). Rows are measurements only; `transfers` "
+            "is derived (subset containments). claim_scope: `outright` = ball UNSAT, a "
+            "statement about G(band) itself; `period-bounded` = torus verdicts, bounded "
+            "by the swept period lattices; `none` = unknown/sat-patch. Any k <= 6 SAT on "
+            "any torus IS a chi(R^2) <= 6 candidate — the halt-and-verify clause (P6) "
+            "applies verbatim, before any interpretation.")
+
+
+def load_art43():
+    if ART43.exists():
+        return json.loads(ART43.read_text())
+    return {"schema": SCHEMA43, "rows": [], "transfers": [], "census": [], "sweeps": []}
+
+
+def record43(section, row):
+    art = load_art43()
+    art.setdefault(section, []).append(row)
+    ART43.write_text(json.dumps(art, indent=1, default=str))
+
+
+_BAND_CACHE = {}
+
+
+def band_of(T):
+    """The open band containing T^2 (id: exact interval + canonical classes). Boundary
+    scales belong to NO band and are refused (§0d)."""
+    T = F(T)
+    if T in _BAND_CACHE:
+        return _BAND_CACHE[T]
+    T2 = T * T
+    for b in bands(T2max=T2 * 2 + 10):
+        if F(b["t2_lo"]) < T2 < F(b["t2_hi"]):
+            _BAND_CACHE[T] = b
+            return b
+    raise SystemExit(f"T = {T}: boundary scale or out of range — belongs to no band")
+
+
+def canonical_T(b):
+    """The smallest-denominator rational T with T^2 interior to the band (A2: the probe
+    scale is a coordinate, not a claim; this makes it a function of the band)."""
+    lo2, hi2 = F(b["t2_lo"]), F(b["t2_hi"])
+    a, b_, c, d = 0, 1, 1, 0  # Stern-Brocot: lo = a/b_, hi = c/d
+    while True:
+        m = F(a + c, b_ + d)
+        if m * m <= lo2:
+            a, b_ = m.numerator, m.denominator
+        elif m * m >= hi2:
+            c, d = m.numerator, m.denominator
+        else:
+            return m
+
+
+def sector_rep(v):
+    """The orbit member with 0 <= a <= b (unique per class; the registered-table
+    convention — `canon` uses lex-min, which lands in a different sector)."""
+    return next(o for o in sorted(orbit(v)) if 0 <= o[0] <= o[1])
+
+
+def triangle_for(b):
+    """The D4/A2 pin triangle {0, u, zeta6 u} for a band, u its least edge class (all
+    three sides are associates of u, hence the same class, hence edges)."""
+    u = min((sector_rep(tuple(v)) for v in b["classes"]), key=lambda v: (Q(v), v))
+    return [(0, 0), u, rot6(u)]
+
+
+def ball43(T, k, R, cap=600.0, pin=True, enc="direct"):
+    """Ball probe at scale 1/T, reach-correct edge set (I1). UNSAT = chi(G(band)) > k
+    OUTRIGHT (no periodicity). enc `direct`: optional triangle pin at the HEAD of the
+    vertex order (A3a) + first-occurrence breaking. enc `a1`: the centre-deletion form
+    (A3b) — delete (0,0), forbid colour k-1 on its neighbourhood, first-occurrence over
+    colours 0..k-2 only, NO pin; exact by A1 unconditional + the omit-transposition."""
+    T = F(T)
+    b = band_of(T)
+    es = set(edge_set40(T))
+    # the Q-ball needs a WIDER coordinate box: Q >= (3/4) max(x,y)^2, so |x| <= 2R/sqrt3
+    # (a [-R,R]^2 box CLIPS the hex ball — caught by this file's own self-test)
+    bx = int(1.1548 * R) + 2
+    pts = [(x, y) for x in range(-bx, bx + 1) for y in range(-bx, bx + 1)
+           if Q((x, y)) <= R * R]
+    pts.sort(key=lambda v: (Q(v), v))
+    row = {"kind": "ball", "band": {"t2_lo": b["t2_lo"], "t2_hi": b["t2_hi"],
+           "classes": b["classes"]}, "T": str(T), "k": k, "R": R, "enc": enc,
+           "pin": bool(pin and enc == "direct"), "cap": cap}
+    if enc == "a1":
+        centre = (0, 0)
+        nbrs = [e for e in es if Q(e) <= R * R]
+        pts = [p for p in pts if p != centre]
+        idx = {c: t for t, c in enumerate(pts)}
+        clauses = []
+        for c in pts:
+            clauses.append([idx[c] * k + col + 1 for col in range(k)])
+            for c1 in range(k):
+                for c2 in range(c1 + 1, k):
+                    clauses.append([-(idx[c] * k + c1 + 1), -(idx[c] * k + c2 + 1)])
+        for u in pts:
+            for (da, db) in es:
+                v = (u[0] + da, u[1] + db)
+                if v in idx and idx[v] > idx[u]:
+                    for col in range(k):
+                        clauses.append([-(idx[u] * k + col + 1),
+                                        -(idx[v] * k + col + 1)])
+        for e in nbrs:  # N(centre) confined to colours 0..k-2
+            clauses.append([-(idx[e] * k + (k - 1) + 1)])
+        for t in range(1, min(len(pts), 40)):  # chain over colours 0..k-2 only
+            for col in range(1, k - 1):
+                clauses.append([-(idx[pts[t]] * k + col + 1)] +
+                               [idx[pts[e]] * k + col for e in range(t)])
+        nvars = len(pts) * k
+    else:
+        if pin:
+            head = triangle_for(b)
+            if any(Q(v) > R * R for v in head):
+                raise SystemExit(f"pin triangle {head} outside ball R={R}")
+            rest = [p for p in pts if p not in set(head)]
+            pts = head + rest
+        idx = {c: t for t, c in enumerate(pts)}
+        clauses = _ball_clauses(T, k, pts, idx)
+        if pin:
+            for i in range(3):
+                clauses.append([idx[pts[i]] * k + i + 1])
+        nvars = len(pts) * k
+    import time
+    t0 = time.time()
+    status, _ = _solve(clauses, nvars, cap)
+    row.update({"n_vertices": len(pts), "outcome": status,
+                "claim_scope": "outright" if status == "unsat" else "none",
+                "seconds": round(time.time() - t0, 2)})
+    return row
+
+
+def _hnf_reduce(x, y, d1, s, d2):
+    q = y // d2
+    return ((x - q * s) % d1, y - q * d2)
+
+
+def hnf_colour(T, k, d1, s, d2, cap=60.0):
+    """Colour the quotient Z^2/L, L = <(d1,0),(s,d2)> in HNF (0 <= s < d1, det = d1*d2).
+    A proper colouring lifts L-periodically to the lattice, hence colours the plane.
+    Degenerate quotients (an edge offset INSIDE L — a self-loop) are REFUSED (A4).
+    Any k <= 6 SAT is validated against a freshly recomputed edge criterion and
+    flagged JACKPOT (P6: halt and verify)."""
+    T = F(T)
+    b = band_of(T)
+    es = edge_set40(T)
+    for (da, db) in es:
+        if db % d2 == 0 and (da - (db // d2) * s) % d1 == 0:
+            return {"kind": "hnf", "T": str(T), "k": k, "L": [d1, s, d2],
+                    "det": d1 * d2, "outcome": "degenerate", "offset": [da, db],
+                    "claim_scope": "none"}
+    cells = [(i, j) for i in range(d1) for j in range(d2)]
+    idx = {c: t for t, c in enumerate(cells)}
+    pairs = set()
+    for u in cells:
+        for (da, db) in es:
+            v = _hnf_reduce(u[0] + da, u[1] + db, d1, s, d2)
+            if v != u:
+                pairs.add((min(idx[u], idx[v]), max(idx[u], idx[v])))
+    clauses = []
+    for c in cells:
+        clauses.append([idx[c] * k + col + 1 for col in range(k)])
+        for c1 in range(k):
+            for c2 in range(c1 + 1, k):
+                clauses.append([-(idx[c] * k + c1 + 1), -(idx[c] * k + c2 + 1)])
+    for (i, j) in pairs:
+        for col in range(k):
+            clauses.append([-(i * k + col + 1), -(j * k + col + 1)])
+    for t in range(1, min(len(cells), 60)):
+        for col in range(1, k):
+            clauses.append([-(idx[cells[t]] * k + col + 1)] +
+                           [idx[cells[e]] * k + col for e in range(t)])
+    import time
+    t0 = time.time()
+    status, model = _solve(clauses, len(cells) * k, cap)
+    row = {"kind": "hnf", "band": {"t2_lo": b["t2_lo"], "t2_hi": b["t2_hi"],
+           "classes": b["classes"]}, "T": str(T), "k": k, "L": [d1, s, d2],
+           "det": d1 * d2, "outcome": status, "cap": cap,
+           "claim_scope": "period-bounded" if status == "unsat" else "none",
+           "seconds": round(time.time() - t0, 2)}
+    if status == "sat":
+        tab = {c: col for c in cells for col in range(k)
+               if (idx[c] * k + col + 1) in model}
+        # fresh-path validation: recompute the criterion per offset, no cache
+        T2 = T * T
+        reach = edge_reach(T)
+        for a in range(-reach, reach + 1):
+            for bb in range(-reach, reach + 1):
+                if (a, bb) == (0, 0):
+                    continue
+                mn, mx = interval((F(a), F(bb)))
+                if mn <= T2 <= mx:
+                    for c in cells:
+                        v = _hnf_reduce(c[0] + a, c[1] + bb, d1, s, d2)
+                        if tab[c] == tab[v]:
+                            raise SystemExit(
+                                f"MODEL INVALID at offset ({a},{bb}) cell {c} — "
+                                "generator and fresh validator disagree")
+        row["table"] = [[tab[(i, j)] for j in range(d2)] for i in range(d1)]
+        if k <= 6:
+            row["JACKPOT"] = ("k <= 6 torus SAT: chi(R^2) <= 6 CANDIDATE. HALT AND "
+                              "VERIFY (P6) — independent re-derivation before any "
+                              "interpretation.")
+    return row
+
+
+def _ask43(spec):
+    kind = spec[0]
+    try:
+        if kind == "hnf":
+            return hnf_colour(*spec[1:])
+        if kind == "ball":
+            T, k, R, cap, pin, enc = spec[1:]
+            return ball43(T, k, R, cap=cap, pin=pin, enc=enc)
+    except SystemExit as e:  # a worker must not kill the pool silently
+        return {"kind": kind, "outcome": "ERROR", "error": str(e), "spec": repr(spec)}
+    raise ValueError(kind)
+
+
+def _divisors(n):
+    return [d for d in range(1, n + 1) if n % d == 0]
+
+
+def skew_sweep(T, k, det_lo, det_hi, cap=60.0, workers=10):
+    """ALL HNF sublattices with det in [det_lo, det_hi] at scale 1/T, colours k —
+    exhaustive over periodic colourings of index <= det_hi when det_lo covers the
+    floor. Aggregated per det; ANY sat halts the sweep (P6). Mass-red control: the
+    first non-degenerate lattice of each sweep is also asked at k = 4 (must refuse)."""
+    from concurrent.futures import ProcessPoolExecutor
+    T = F(T)
+    b = band_of(T)
+    summary = {"kind": "skew-sweep", "band": {"t2_lo": b["t2_lo"], "t2_hi": b["t2_hi"]},
+               "T": str(T), "k": k, "det_range": [det_lo, det_hi], "cap": cap,
+               "per_det": [], "halted_sat": None, "massred": None}
+    control_done = False
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        for det in range(det_lo, det_hi + 1):
+            specs = [("hnf", T, k, det // d2, s, d2, cap)
+                     for d2 in _divisors(det) for s in range(det // d2)]
+            rows = list(ex.map(_ask43, specs))
+            agg = {"det": det, "n": len(rows),
+                   "degenerate": sum(r["outcome"] == "degenerate" for r in rows),
+                   "unsat": sum(r["outcome"] == "unsat" for r in rows),
+                   "unknown": sum(r["outcome"] == "unknown" for r in rows),
+                   "error": sum(r["outcome"] == "ERROR" for r in rows)}
+            sats = [r for r in rows if r["outcome"] == "sat"]
+            if not control_done:
+                nd = next((r for r in rows if r["outcome"] != "degenerate"), None)
+                if nd is not None:
+                    c = hnf_colour(T, 4, *nd["L"], cap=max(cap, 120.0))
+                    summary["massred"] = {"L": nd["L"], "outcome": c["outcome"]}
+                    if c["outcome"] == "sat":
+                        raise SystemExit("MASS-RED VIOLATED: k=4 sat on a torus — "
+                                         "instrument bug, halting")
+                    control_done = True
+            unk = [r["L"] for r in rows if r["outcome"] == "unknown"]
+            if unk:
+                agg["unknown_L"] = unk
+            summary["per_det"].append(agg)
+            print(f"  det {det:>3}: {agg['n']:>3} lattices, {agg['degenerate']:>3} degen, "
+                  f"{agg['unsat']:>3} unsat, {agg['unknown']} unknown", flush=True)
+            if sats:
+                summary["halted_sat"] = sats[0]
+                print("\n" + "=" * 72)
+                print(sats[0].get("JACKPOT", "SAT — verify before interpretation"))
+                print(f"  L = {sats[0]['L']}, k = {k}, T = {T}")
+                print("=" * 72)
+                break
+    record43("sweeps", summary)
+    return summary
+
+
+def m43_census(t2lo, t2hi, k_asks=(6, 7), cap=300.0, workers=10):
+    """Per-band quick census over (t2lo, t2hi): canonical scale, exhaustive omega,
+    one ball ask per k in k_asks at R ~ 1.9 T (the sibling-refutation scale)."""
+    from concurrent.futures import ProcessPoolExecutor
+    bs = [b for b in bands(F(t2hi)) if F(b["t2_lo"]) >= F(t2lo) - F(1, 1000)
+          and F(b["t2_hi"]) <= F(t2hi) + F(1, 1000)]
+    print(f"m43 census: {len(bs)} bands in ({t2lo}, {t2hi})")
+    out = []
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        omegas = list(ex.map(_omega_one, bs))
+        specs = []
+        for b in bs:
+            Tc = canonical_T(b)
+            R = int(1.9 * float(Tc)) + 1
+            for k in k_asks:
+                specs.append(("ball", Tc, k, R, cap, True, "direct"))
+        balls = list(ex.map(_ask43, specs))
+    i = 0
+    for b, om in zip(bs, omegas):
+        Tc = canonical_T(b)
+        row = {"kind": "census-band", "band": {"t2_lo": b["t2_lo"], "t2_hi": b["t2_hi"],
+               "classes": b["classes"], "norms": b["norms"]}, "T": str(Tc),
+               "omega": om, "balls": []}
+        for k in k_asks:
+            r = balls[i]
+            i += 1
+            row["balls"].append({"k": r.get("k"), "R": r.get("R"),
+                                 "outcome": r.get("outcome"),
+                                 "claim_scope": r.get("claim_scope"),
+                                 "seconds": r.get("seconds")})
+        out.append(row)
+        record43("census", row)
+        print(f"  T^2 in ({b['t2_lo']}, {b['t2_hi']}): omega {om}, "
+              + ", ".join(f"k={x['k']}:{x['outcome']}" for x in row["balls"]),
+              flush=True)
+    return out
+
+
+def _omega_one(b):
+    return len(max_clique40(canonical_T(b)))
+
+
+def transfers43(t2max):
+    """The derived transfer section (A1): containments between consecutive bands
+    (comparable only across single-event thresholds)."""
+    bs = bands(F(t2max))
+    out = []
+    for x, y in zip(bs, bs[1:]):
+        cx = {tuple(c) for c in x["classes"]}
+        cy = {tuple(c) for c in y["classes"]}
+        if cx < cy:
+            out.append({"from": "upper", "sub": x["t2_lo"], "sup": y["t2_lo"],
+                        "note": "lower band subset of upper: sats transfer down, "
+                                "unsats up", "diff": sorted(map(list, cy - cx))})
+        elif cy < cx:
+            out.append({"from": "lower", "sub": y["t2_lo"], "sup": x["t2_lo"],
+                        "note": "upper band subset of lower", "diff":
+                        sorted(map(list, cx - cy))})
+    art = load_art43()
+    art["transfers"] = out
+    ART43.write_text(json.dumps(art, indent=1, default=str))
+    return out
+
+
+# ---------------------------------------------------------------- M43 self-test
+
+
+def self_test43():
+    fails = []
+
+    def expect(name, got, want):
+        ok = got == want
+        print(f"  [{'ok ' if ok else 'FAIL'}] {name}: {got!r}" +
+              ("" if ok else f"  (want {want!r})"))
+        if not ok:
+            fails.append(name)
+
+    print("M43 self-test:")
+    # D2 green control: the hand table around T^2 in (44, 54), exactly
+    cuts = sorted({v for c, (mn, mx) in class_reps(F(54)).items()
+                   for v in (mn, mx) if F(44) < v < F(54)})
+    expect("D2: thresholds in (44,54)",
+           cuts, [F(133, 3), F(139, 3), F(49), F(148, 3), F(151, 3), F(157, 3)])
+    expect("D2: 133/3 is a double event (arrive (4,5), depart (1,5))",
+           (interval((F(4), F(5)))[0], interval((F(1), F(5)))[1]),
+           (F(133, 3), F(133, 3)))
+    blo = band_of(F(48, 7))
+    bhi = band_of(F(351, 50))
+    expect("D2: B_lo interval", (blo["t2_lo"], blo["t2_hi"]), ("139/3", "49"))
+    expect("D2: B_hi interval", (bhi["t2_lo"], bhi["t2_hi"]), ("49", "148/3"))
+    lo_cls = {sector_rep(tuple(c)) for c in blo["classes"]}
+    hi_cls = {sector_rep(tuple(c)) for c in bhi["classes"]}
+    expect("D2: B_lo has the registered 11 classes",
+           sorted(lo_cls), [(0, 6), (0, 7), (1, 6), (1, 7), (2, 5), (2, 6),
+                            (3, 4), (3, 5), (3, 6), (4, 4), (4, 5)])
+    expect("D2: B_hi = B_lo + (0,8)", sorted(hi_cls - lo_cls), [(0, 8)])
+    expect("D2: B_lo norms", blo["norms"], [36, 37, 39, 43, 48, 49, 52, 57, 61, 63])
+    # boundary refusal
+    try:
+        band_of(F(7))
+        expect("A3: T = 7 refused as boundary", "accepted", "refused")
+    except SystemExit:
+        expect("A3: T = 7 refused as boundary", "refused", "refused")
+    # I1: reach-14 clips at T = 13, agrees at T = 7
+    expect("I1: edge_set(7,14) == edge_set40(7)",
+           set(edge_set(F(7), 14)) == set(edge_set40(F(7))), True)
+    expect("I1: edge_set(13,14) CLIPS (planted)",
+           set(edge_set(F(13), 14)) < set(edge_set40(F(13))), True)
+    # D4/A2: the registered pin triangle
+    expect("D4: pin triangle for B_lo", triangle_for(blo), [(0, 0), (0, 6), (-6, 6)])
+    # A3a planted red: K3 pinned OUT of head order under first-occurrence => unsat,
+    # head order => sat (k = 3)
+    def k3(pin_cols):
+        cl = []
+        for v in range(3):
+            cl.append([v * 3 + c + 1 for c in range(3)])
+            for c1 in range(3):
+                for c2 in range(c1 + 1, 3):
+                    cl.append([-(v * 3 + c1 + 1), -(v * 3 + c2 + 1)])
+        for u in range(3):
+            for v in range(u + 1, 3):
+                for c in range(3):
+                    cl.append([-(u * 3 + c + 1), -(v * 3 + c + 1)])
+        for t in range(1, 3):
+            for c in range(1, 3):
+                cl.append([-(t * 3 + c + 1)] + [e * 3 + c for e in range(t)])
+        for v, c in enumerate(pin_cols):
+            cl.append([v * 3 + c + 1])
+        return _solve(cl, 9, 60)[0]
+    # (1,2,0) satisfies the staircase chain — the true conflicting pin is (0,2,1):
+    # position 1 takes colour 2 while colour 1 first appears LATER, at position 2
+    expect("A3a: K3 pin (0,2,1) + first-occurrence is UNSAT (seen red)",
+           k3([0, 2, 1]), "unsat")
+    expect("A3a: K3 pin (0,1,2) at head is SAT", k3([0, 1, 2]), "sat")
+    # A4 planted red: <(37,0),(0,1)> swallows (0,6)
+    r = hnf_colour(F(48, 7), 6, 37, 0, 1)
+    expect("A4: degenerate lattice refused", r["outcome"], "degenerate")
+    # I5 planted red + encoding agreement on a DECIDED refutation:
+    # the (52/3, 20) band (M40: >= 7 outright, ball at 259/60)
+    Td = F(259, 60)
+    st_d = None
+    for R in (5, 6, 7, 8):
+        st_d = ball43(Td, 6, R, cap=300, pin=True, enc="direct")
+        if st_d["outcome"] == "unsat":
+            break
+    expect("I5: known refutation reproduced (pinned direct)", st_d["outcome"], "unsat")
+    st_a = ball43(Td, 6, st_d["R"], cap=300, enc="a1")
+    expect("A3b: a1-form agrees on the refutation", st_a["outcome"], "unsat")
+    st_u = ball43(Td, 6, st_d["R"], cap=300, pin=False, enc="direct")
+    expect("I3: unpinned agrees on the refutation", st_u["outcome"], "unsat")
+    print(f"       (pin timing on the decided row: pinned {st_d['seconds']}s, "
+          f"unpinned {st_u['seconds']}s, a1 {st_a['seconds']}s)")
+    # SAT-side agreement at the fine flank, R = 8 (small, known-colourable regime)
+    sb = ball43(F(351, 50), 6, 8, cap=300, pin=True, enc="direct")
+    sa = ball43(F(351, 50), 6, 8, cap=300, enc="a1")
+    expect("I3: B_hi R=8 ball SAT (pinned)", sb["outcome"], "sat")
+    expect("A3b: a1-form agrees on the SAT side", sa["outcome"], "sat")
+    # canonical_T: interior and small-denominator
+    for b in (blo, bhi):
+        Tc = canonical_T(b)
+        expect(f"A2: canonical T for ({b['t2_lo']},{b['t2_hi']}) is interior",
+               F(b["t2_lo"]) < Tc * Tc < F(b["t2_hi"]), True)
+    print("M43 SELF-TEST:", "ok" if not fails else f"{len(fails)} FAILURES: {fails}")
+    return not fails
+
+
 # ---------------------------------------------------------------- census / CLI
 
 
@@ -911,11 +1355,40 @@ def main():
                     help="exact torus independence number")
     ap.add_argument("--spectral", type=str, metavar="T",
                     help="certified Hoffman bracket at scale 1/T")
+    # ---- M43 ----
+    ap.add_argument("--self-test43", action="store_true")
+    ap.add_argument("--m43-ball", nargs=3, metavar=("T", "K", "R"),
+                    help="ball probe, reach-correct, pinned (unsat = outright)")
+    ap.add_argument("--m43-skew", nargs=4, metavar=("T", "K", "DETLO", "DETHI"),
+                    help="ALL HNF period lattices, det in range (sat = JACKPOT halt)")
+    ap.add_argument("--m43-census", nargs=2, metavar=("T2LO", "T2HI"),
+                    help="per-band quick census: omega + ball asks")
+    ap.add_argument("--m43-transfers", type=str, metavar="T2MAX",
+                    help="derived containment transfers between consecutive bands")
+    ap.add_argument("--enc", type=str, default="direct", choices=["direct", "a1"])
+    ap.add_argument("--no-pin", action="store_true")
+    ap.add_argument("--workers", type=int, default=10)
     args = ap.parse_args()
     if args.self_test:
         sys.exit(0 if self_test() else 1)
     elif args.self_test40:
         sys.exit(0 if self_test40() else 1)
+    elif args.self_test43:
+        sys.exit(0 if self_test43() else 1)
+    elif args.m43_ball:
+        r = ball43(F(args.m43_ball[0]), int(args.m43_ball[1]), int(args.m43_ball[2]),
+                   cap=args.cap, pin=not args.no_pin, enc=args.enc)
+        record43("rows", r)
+        print(json.dumps(r, indent=1, default=str))
+    elif args.m43_skew:
+        skew_sweep(F(args.m43_skew[0]), int(args.m43_skew[1]), int(args.m43_skew[2]),
+                   int(args.m43_skew[3]), cap=args.cap, workers=args.workers)
+    elif args.m43_census:
+        m43_census(F(args.m43_census[0]), F(args.m43_census[1]), cap=args.cap,
+                   workers=args.workers)
+    elif args.m43_transfers:
+        ts = transfers43(F(args.m43_transfers))
+        print(f"{len(ts)} containment transfers recorded")
     elif args.census:
         Ts = [F(n, 6) for n in range(7, 61)]
         census(Ts)
