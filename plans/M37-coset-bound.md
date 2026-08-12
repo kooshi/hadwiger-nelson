@@ -108,7 +108,9 @@ below seven colours; here it forces seven distinct colours in any coset scheme.
 
 **C7 — Sharpness.** Seven is attained inside the family: the classical
 hexagonal colouring is the coset colouring of the norm-7 ideal `(−3 + ζ₆)` at
-any `p ∈ (2/(√7 − 2/√3), √3/2]` — e.g. `p = 0.86`, cell diameter `0.993 < 1`,
+any `p ∈ (1/(√7 − 2/√3), √3/2] = (0.671, 0.866]`  *[the registered text first
+wrote the left end as `2/(√7 − 2/√3)`, a slip carried over from M36's
+diameter parametrization; the design script caught it — see §R]* — e.g. `p = 0.86`, cell diameter `0.993 < 1`,
 nearest same-colour separation `√7·p = 2.275`, realized distances from `1.28`
 up. So **the coset chromatic number of the plane is exactly 7** and the
 milestone's bound is tight. (M36's `χ(ℝ²) ≤ 7` already holds the upper half
@@ -169,3 +171,38 @@ is a stretch goal, not a requirement.)
 * If any design-script check refutes C1–C6, halt and re-derive; the whole §0a
   is suspect and nothing goes into Lean until it is repaired.
 * Any segfault: HALT and report to Kooshi (standing, hardware).
+
+
+---
+
+# §R — Results (opened at the design check; every verdict at face value)
+
+* **P1–P5 CONFIRMED, but the first run of the design script read REFUTED on
+  three rows, and all three were the CHECKER.** Recorded in full because a
+  self-test that fails for its own reasons is exactly what G21 warns about, and
+  the only defence is to diagnose rather than patch:
+  1. *"the corner covers every seam" failed at `p = 1`* — the seam grid ran
+     over `p = 1/m` for all odd `m` including `m = 1`, but C2 already bounds
+     `p ≤ √3/2 < 1`. Scope bug in the check; the script now enforces the C2
+     bound and says so on the excluded row.
+  2. *"Q = 1: C3 covers 1" failed at `p = 1/200`* — C3's union for `Q = 1` is
+     `(0, ∞)`, but reaching `1` needs `j ≈ 1/p = 200` and the loop stopped at
+     199. Loop-bound artifact; the bound is now adaptive.
+  3. *"the C7 window is non-empty" failed* — and this one was a genuine error
+     **in the registered §0a text**, not just the script: the left end of the
+     admissible window is `1/(√7 − 2/√3) = 0.671`, and I had written
+     `2/(√7 − 2/√3) = 1.341`, a factor carried over from M36's
+     diameter-based parametrization. With the correct constant the window is
+     `(0.671, 0.866]` — non-empty, so C7 stands and seven is attained. The
+     registered text is corrected in place with the slip named.
+* After the three fixes, every check is green: the C2 identity and its exact
+  equality set `{(0,0), (1,0), (0,1)}`, the deep hole's `‖h‖² = 1/3` and
+  `2⟨h,v⟩ = a+b`, the six `Q = 4` vectors being exactly `2 ×` units with a
+  vertex functional of value exactly 2 on each, the seam census (C3 alone
+  leaves every `p = 1/odd` uncovered; the corner covers all of them), the
+  full-grid sweeps at `Q ∈ {1,3,4}` over 173 values of `p`, the Loeschian list
+  `{0,1,3,4,7,9,12,13,16,19}` with 2, 5, 6 absent, the 21-pair shell
+  difference table `{1,3,4}`, and the norm-7 ideal's ζ₆-stability and minimum.
+  **The planted red fires**: with the WRONG vertex (functional value 0 instead
+  of 2) the seams survive uncovered — the corner argument is load-bearing and
+  is seen to be.
