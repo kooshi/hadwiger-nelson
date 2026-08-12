@@ -316,3 +316,31 @@ already deliver — which is precisely why it is the fallback and not the plan.
 the boundary-tightness `#guard` that `hi` at the self-offset is exactly 1).
 `Instances/Interval.lean`: the interval theorem. The specification elaborates
 before any proof effort is spent; the proof bodies are the implementation pass.
+
+---
+
+# §R — Results (opened at the skeleton; every verdict at face value)
+
+* **P1 CONFIRMED, including the sharp part** (`build/m36-design.py`, exact
+  rationals, self-tests green both ways): at `(w, h, s) = (4/5, 3/5, 2/5)` the
+  offset census over a window padded 6 rings beyond the certificate's own found
+  **69 clashing offsets, 0 straddling**, and the tight offsets are **exactly**
+  the three predicted rows — `(0,0)` tight at its upper end, `(±1, ±2)` tight at
+  their lower end — which is the *which-rows* prediction, not merely the
+  existence of tightness. The refutation hunt ran **3,803,904 exact
+  unit-distance pairs** (624 Pythagorean directions × 6,096 points, including
+  points within `10⁻¹²` of every tight corner) and found **no monochromatic
+  pair**. The planted red partner (`h := 1/2`) was caught by both the census and
+  the hunt.
+* **P3 CONFIRMED, one control beyond the registration**: the two shape
+  mutations and the coset-coefficient mutation all refuse, and so does a fourth
+  added at implementation (shear `0` — unstaggered rows are not the hexagonal
+  lattice).
+* **P2 CONFIRMED at the skeleton, far inside its band**:
+  `sevenBrick.check [1] = true` by `decide +kernel`, with the whole module —
+  certificate, twelve `#guard`s, both boundary-tightness pins, all four
+  mutations — elaborating in **2.53 CPU-seconds** (desktop, min of three;
+  band was 60 s). The bit-packed fallback is not needed.
+* **The M35 artifact reproduced, in the same script**: the same object fails
+  M35's strict check. The refusal that produced G20 is now a controlled
+  observation rather than an inference.

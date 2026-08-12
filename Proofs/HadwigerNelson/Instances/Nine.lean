@@ -58,7 +58,7 @@ theorem nine_avoids_sqrt_three_halves :
     ∃ C : (unitDistance ℂ).Coloring (Fin 9), ∀ z z' : ℂ,
       dist z z' = Real.sqrt ((3/2 : ℚ) : ℝ) → C z ≠ C z' := by
   refine ⟨Coloring.mk nineBrick.color fun hadj =>
-    nineBrick.sound nineBrick_check_avoid List.mem_cons_self
+    nineBrick.sound nineBrick_check_avoid List.mem_cons_self one_pos
       (by rw [unitDistance_adj.mp hadj]; norm_num), fun z z' hd => ?_⟩
   exact nineBrick.avoids (List.mem_cons_of_mem _ (List.mem_singleton.mpr rfl))
     (by norm_num) nineBrick_check_avoid hd
@@ -77,8 +77,14 @@ theorem nine_avoids_sqrt_three_halves :
 -- the adversarial member: repeat a colour on adjacent cells and the check must fail
 #guard ({ nineBrick with table := fun _ _ => 0 } : Brick 9).check [1] = false
 
--- the guard-list discipline: a too-close avoidance guard is refused (the same-cell offset
--- forces every guard above the cell diagonal 8/9)
-#guard nineBrick.check [1, 8/9] = false
+-- the guard-list discipline: a guard STRICTLY inside the same-cell offset's interval is
+-- refused, and no relaxation of the certificate can ever accept one
+#guard nineBrick.check [1, 1/2] = false
+
+-- the boundary itself is admissible, and the mathematics agrees: the cell diagonal is
+-- exactly `√(8/9)`, approached and never attained (half-open cells), so this colouring
+-- avoids that distance too — M35's control asserted the opposite because the certificate
+-- then demanded strict separation (M36 §0a C1)
+#guard nineBrick.check [1, 8/9] = true
 
 end HadwigerNelson

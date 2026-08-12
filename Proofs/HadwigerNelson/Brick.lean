@@ -20,6 +20,17 @@ the largest guard — soundness carries no window hypothesis. Guards are SQUARED
 `(1 : ℚ) ∈ guards` structurally, so a forgotten properness guard is unprovable rather than
 silently certified.
 
+**The certificate is boundary-tight, and that is load-bearing** (M36 §0a C1). Cells are
+half-open, so the realizable difference vectors at an offset form the OPEN box around
+`(s·dr + w·dc, h·dr)` of half-widths `(w, h)`: a realized squared distance is therefore
+*strictly* below `hi`, and *strictly* above `lo` whenever `lo > 0`. So the check may accept
+an offset whose interval merely TOUCHES a guard — `q ≤ lo ∨ hi ≤ q`, not the strict
+separation an earlier version demanded — provided the guard is positive, which `sound`
+requires. This is not a convenience: the classical seven-colouring in this family has cell
+diagonal exactly `1` (`Instances/Seven.lean`), so under strict separation NO brick
+seven-colouring is certifiable at all, and a sweep run against a strict check reports the
+whole family as refusing.
+
 The colouring itself is noncomputable (`Int.floor` on `ℝ`); its computable twin
 `Brick.colorQ` (same formula over `ℚ`) exists exactly so instances can be `#eval`-tested
 against the search that proposed them — the search (`tools/periodic.py`) is trusted for
@@ -157,26 +168,28 @@ def clash (dc dr : ℤ) : Bool :=
                           (zmodIdx B.n B.n_pos ((j.1 : ℤ) + dr)))
 
 /-- **The finite certificate.** Every offset in the window either never shares a colour or
-keeps every guard outside its closed box interval. Pure rational arithmetic; the window is
-computed here, never supplied. -/
+keeps every guard outside its closed box interval — *outside* in the boundary-tight sense
+the half-open cells license (`q ≤ lo ∨ hi ≤ q`; see the module docstring, and `sound` for
+the positivity the endpoints need). Pure rational arithmetic; the window is computed here,
+never supplied. -/
 def check (guards : List ℚ) : Bool :=
   (List.range (2 * B.rowBound guards + 1)).all fun ir =>
     (List.range (2 * B.colBound guards + 1)).all fun ic =>
       !B.clash ((ic : ℤ) - (B.colBound guards : ℤ)) ((ir : ℤ) - (B.rowBound guards : ℤ)) ||
         guards.all fun q =>
-          decide (q < lo (B.s * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ) +
+          decide (q ≤ lo (B.s * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ) +
                           B.w * (((ic : ℤ) - (B.colBound guards : ℤ) : ℤ) : ℚ))
                      (B.h * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ)) B.w B.h) ||
           decide (hi (B.s * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ) +
                       B.w * (((ic : ℤ) - (B.colBound guards : ℤ) : ℤ) : ℚ))
-                     (B.h * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ)) B.w B.h < q)
+                     (B.h * (((ir : ℤ) - (B.rowBound guards : ℤ) : ℤ) : ℚ)) B.w B.h ≤ q)
 
 /-- The check unfolded at one in-window offset — the sole `Bool → Prop` bridge. -/
 theorem check_spec {guards : List ℚ} (hchk : B.check guards = true)
     {dc dr : ℤ} (hdr : dr.natAbs ≤ B.rowBound guards) (hdc : dc.natAbs ≤ B.colBound guards)
     (hcl : B.clash dc dr = true) {q : ℚ} (hq : q ∈ guards) :
-    q < lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ∨
-    hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h < q := by
+    q ≤ lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ∨
+    hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ≤ q := by
   unfold check at hchk
   simp only [List.all_eq_true, List.mem_range, Bool.or_eq_true, Bool.not_eq_true',
     decide_eq_true_eq] at hchk
@@ -219,12 +232,38 @@ theorem box_mem {x w : ℝ} (hw : 0 < w) : 0 ≤ x - w * ⌊x / w⌋ ∧ x - w *
   have h3 : w * (x / w) = x := by field_simp
   constructor <;> nlinarith
 
+/-! ### The open box — where boundary-tightness comes from
+
+A coordinate offset is `X + e` with `|e| < width` STRICTLY (the cell is half-open, so the
+two internal offsets differ by strictly less than the cell's extent). These three lemmas
+are the whole content of that strictness: the square lands strictly below the box's upper
+end, and strictly above its lower end whenever that end is positive. -/
+
+/-- Strictly below the upper end. -/
+theorem sq_lt_hi {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
+    t ^ 2 < (|X| + width) ^ 2 := by
+  sorry
+
+/-- Strictly above the lower end, when the lower end is positive. -/
+theorem lo_lt_sq {X width t e : ℝ} (ht : t = X + e) (he : |e| < width)
+    (hX : width < |X|) : (|X| - width) ^ 2 < t ^ 2 := by
+  sorry
+
+/-- Weakly above the lower end, always — the branch where the box straddles its axis. -/
+theorem lo_le_sq {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
+    max 0 (|X| - width) ^ 2 ≤ t ^ 2 := by
+  sorry
+
 /-! ## Soundness -/
 
 /-- **The soundness theorem.** A passing certificate excludes every guarded squared
-distance between same-coloured points — over the whole plane. -/
+distance between same-coloured points — over the whole plane.
+
+The guard must be POSITIVE: the check's lower branch (`q ≤ lo`) is sound because a
+realized squared distance strictly exceeds a positive `lo`, and `q > 0` is exactly what
+forces `lo > 0` there. A `q = 0` guard would only ever say `z ≠ z'`. -/
 theorem sound {guards : List ℚ} (hchk : B.check guards = true)
-    {q : ℚ} (hq : q ∈ guards) {z z' : ℂ}
+    {q : ℚ} (hq : q ∈ guards) (hq0 : 0 < q) {z z' : ℂ}
     (hd : dist z z' ^ 2 = (q : ℝ)) : B.color z ≠ B.color z' := by
   intro hcol
   have hw : (0 : ℝ) < (B.w : ℝ) := by exact_mod_cast B.w_pos
@@ -306,74 +345,12 @@ theorem sound {guards : List ℚ} (hchk : B.check guards = true)
       (z.re - (B.s : ℝ) * B.row z) - (B.w : ℝ) * B.col z < (B.w : ℝ) := box_mem hw
   have hu' : 0 ≤ (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' ∧
       (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' < (B.w : ℝ) := box_mem hw
-  -- the offset decomposition and the componentwise interval bounds
-  have hbound : ∀ (X : ℚ) (t e : ℝ) (width : ℚ), 0 < width → t = ((X : ℚ) : ℝ) + e →
-      |e| ≤ ((width : ℚ) : ℝ) →
-      ((max 0 (|X| - width) ^ 2 : ℚ) : ℝ) ≤ t ^ 2 ∧
-      t ^ 2 ≤ (((|X| + width) ^ 2 : ℚ) : ℝ) := by
-    intro X t e width hwpos ht he
-    have hXabs : |((X : ℚ) : ℝ)| = ((|X| : ℚ) : ℝ) := by push_cast; ring
-    have habs : |t| ≤ ((|X| : ℚ) : ℝ) + ((width : ℚ) : ℝ) := by
-      rw [ht]
-      calc |((X : ℚ) : ℝ) + e| ≤ |((X : ℚ) : ℝ)| + |e| := abs_add_le _ _
-        _ ≤ _ := by rw [hXabs]; exact add_le_add (le_refl _) he
-    constructor
-    · rcases le_or_gt (|X|) width with hle | hgt
-      · rw [max_eq_left (by linarith : |X| - width ≤ 0)]
-        simpa using sq_nonneg t
-      · rw [max_eq_right (by linarith : (0 : ℚ) ≤ |X| - width)]
-        have hlow : ((|X| : ℚ) : ℝ) - ((width : ℚ) : ℝ) ≤ |t| := by
-          rw [ht]
-          have h1 : |((X : ℚ) : ℝ)| - |e| ≤ |((X : ℚ) : ℝ) + e| := by
-            have h2 := abs_add_le (((X : ℚ) : ℝ) + e) (-e)
-            simp only [add_neg_cancel_right, abs_neg] at h2
-            linarith
-          rw [hXabs] at h1
-          linarith
-        have hnn : (0 : ℝ) ≤ ((|X| : ℚ) : ℝ) - ((width : ℚ) : ℝ) := by
-          have : ((width : ℚ) : ℝ) < ((|X| : ℚ) : ℝ) := by exact_mod_cast hgt
-          linarith
-        calc (((|X| - width) ^ 2 : ℚ) : ℝ)
-            = (((|X| : ℚ) : ℝ) - ((width : ℚ) : ℝ)) ^ 2 := by push_cast; ring
-          _ ≤ |t| ^ 2 := pow_le_pow_left₀ hnn hlow 2
-          _ = t ^ 2 := sq_abs t
-    · calc t ^ 2 = |t| ^ 2 := (sq_abs t).symm
-        _ ≤ (((|X| : ℚ) : ℝ) + ((width : ℚ) : ℝ)) ^ 2 :=
-            pow_le_pow_left₀ (abs_nonneg t) habs 2
-        _ = (((|X| + width) ^ 2 : ℚ) : ℝ) := by push_cast; ring
-  have hdre : z'.re - z.re = (((B.s * (dr : ℚ) + B.w * (dc : ℚ)) : ℚ) : ℝ) +
-      (((z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z') -
-       ((z.re - (B.s : ℝ) * B.row z) - (B.w : ℝ) * B.col z)) := by
-    rw [hdrdef, hdcdef]; push_cast; ring
-  have hdim : z'.im - z.im = (((B.h * (dr : ℚ)) : ℚ) : ℝ) +
-      ((z'.im - (B.h : ℝ) * B.row z') - (z.im - (B.h : ℝ) * B.row z)) := by
-    rw [hdrdef]; push_cast; ring
-  have hre_bounds := hbound (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (z'.re - z.re) _ B.w B.w_pos
-    hdre (by rw [abs_le]; constructor <;> [linarith [hu.1, hu'.2]; linarith [hu'.1, hu.2]])
-  have him_bounds := hbound (B.h * (dr : ℚ)) (z'.im - z.im) _ B.h B.h_pos
-    hdim (by rw [abs_le]; constructor <;> [linarith [hv.1, hv'.2]; linarith [hv'.1, hv.2]])
-  have hq2 : (z'.re - z.re) ^ 2 + (z'.im - z.im) ^ 2 = (q : ℝ) := by rw [← hd2]; ring
-  have hloq : lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h ≤ q := by
-    have hsum := add_le_add hre_bounds.1 him_bounds.1
-    rw [hq2] at hsum
-    have hcast : ((lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h : ℚ) : ℝ) =
-        ((max 0 (|B.s * (dr : ℚ) + B.w * (dc : ℚ)| - B.w) ^ 2 : ℚ) : ℝ) +
-        ((max 0 (|B.h * (dr : ℚ)| - B.h) ^ 2 : ℚ) : ℝ) := by
-      unfold lo; push_cast; ring
-    have : ((lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h : ℚ) : ℝ) ≤
-        ((q : ℚ) : ℝ) := by rw [hcast]; linarith
-    exact_mod_cast this
-  have hhiq : q ≤ hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h := by
-    have hsum := add_le_add hre_bounds.2 him_bounds.2
-    rw [hq2] at hsum
-    have hcast : ((hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h : ℚ) : ℝ) =
-        (((|B.s * (dr : ℚ) + B.w * (dc : ℚ)| + B.w) ^ 2 : ℚ) : ℝ) +
-        (((|B.h * (dr : ℚ)| + B.h) ^ 2 : ℚ) : ℝ) := by
-      unfold hi; push_cast; ring
-    have : ((q : ℚ) : ℝ) ≤
-        ((hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h : ℚ) : ℝ) := by
-      rw [hcast]; linarith
-    exact_mod_cast this
+  -- the offset decomposition and the STRICT componentwise bounds (the OPEN box)
+  have hqlt : q < hi (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h := by
+    sorry
+  have hqgt : 0 < lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h →
+      lo (B.s * (dr : ℚ) + B.w * (dc : ℚ)) (B.h * (dr : ℚ)) B.w B.h < q := by
+    sorry
   -- the colour equality instantiates the clash at (dc, dr)
   have hclash : B.clash dc dr = true := by
     apply decide_eq_true
@@ -383,9 +360,9 @@ theorem sound {guards : List ℚ} (hchk : B.check guards = true)
         show B.row z + dr = B.row z' from by rw [hdrdef]; ring]
     exact hcol
   -- and the check refuses
-  rcases B.check_spec hchk hdrb hdcb hclash hq with hlt | hgt
-  · exact absurd hloq (not_le.mpr hlt)
-  · exact absurd hhiq (not_le.mpr hgt)
+  rcases B.check_spec hchk hdrb hdcb hclash hq with hle | hge
+  · exact absurd (hqgt (lt_of_lt_of_le hq0 hle)) (not_lt.mpr hle)
+  · exact absurd hqlt (not_lt.mpr hge)
 
 /-! ## The consumer surface -/
 
@@ -395,16 +372,19 @@ is unprovable. -/
 theorem colorable {guards : List ℚ} (h1 : (1 : ℚ) ∈ guards)
     (hchk : B.check guards = true) : (unitDistance ℂ).Colorable k :=
   ⟨Coloring.mk B.color fun hadj =>
-    B.sound hchk h1 (by rw [unitDistance_adj.mp hadj]; norm_num)⟩
+    B.sound hchk h1 one_pos (by rw [unitDistance_adj.mp hadj]; norm_num)⟩
 
 /-- **A passing certificate avoids every guarded distance**: same-coloured points are never
 at distance `√q` for any listed guard. An avoider at `k` colours rules its class out as a
 pigeonhole AT `k`; for the 6-hunt only `k = 5` closes a mechanism, and any `k = 5` avoider
-would prove `χ(ℝ²) ≤ 5` outright — a `k = 6` avoider bounds SEVEN-forcers (M35 §0a C1). -/
-theorem avoids {guards : List ℚ} {q : ℚ} (hq : q ∈ guards) (hq0 : 0 ≤ q)
+would prove `χ(ℝ²) ≤ 5` outright — a `k = 6` avoider bounds SEVEN-forcers (M35 §0a C1).
+
+The guard is POSITIVE, not merely nonnegative: `sound`'s boundary-tight lower branch needs
+it, and a `q = 0` avoidance claim says only that distinct points are distinct. -/
+theorem avoids {guards : List ℚ} {q : ℚ} (hq : q ∈ guards) (hq0 : 0 < q)
     (hchk : B.check guards = true) {z z' : ℂ}
     (hd : dist z z' = Real.sqrt (q : ℝ)) : B.color z ≠ B.color z' :=
-  B.sound hchk hq (by rw [hd, Real.sq_sqrt (by exact_mod_cast hq0)])
+  B.sound hchk hq hq0 (by rw [hd, Real.sq_sqrt (by exact_mod_cast hq0.le)])
 
 /-! ## The computable twin — the definition's test instrument -/
 
