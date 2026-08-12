@@ -225,6 +225,112 @@ coset-merge structure over finer ideals — is the measurement.
 * Torus UNSAT stays period-bounded unless a BALL refutation is quoted (M39 standing rule).
 * Any segfault, any process: HALT and report to Kooshi (standing).
 
+---
+
+# §R — Results (2026-08-12; every verdict at face value; artifact `build/m40-chiomega.json`)
+
+**The headline: below the classical window, the constraint family forces seven-or-more
+colours EVERYWHERE probed, and the cliques explain almost none of it.** Every band from
+the classical window down to `p ≈ 0.2236` now carries an outright (ball-certified, no
+periodicity) floor of ≥ 7, while the clique number sits at 3–5 on most of them. The
+family reproduces the plane's own pathology — every standard lower-bound instrument
+falls off a cliff while the chromatic number stays high — finitely, at every scale, in
+objects small enough to shrink and name.
+
+## The corrected spectrum (bands in T² = 1/p²; ω exhaustive; χ claims cited)
+
+| band | p range | ω | χ | how |
+|---|---|---|---|---|
+| (1, 7/3) | (0.6547, 1) | 7 | **= 7** | shell clique; classical colouring |
+| (7/3, 4) | (0.5, 0.6547) | **9** | **= 9** | sheared 3×3 block clique; k = 9 SAT 12×12 |
+| (4, 13/3) | (0.4804, 0.5) | **12** | **= 12** | the 12-point trapezoid; k = 12 SAT 12×12 |
+| (13/3, 16/3) = **G\*** | (0.4330, 0.4804) | **4** | **= 7** | M39 ball + torus; **gap 3** |
+| (16/3, 19/3) | (0.3974, 0.4330) | 7 | ≥ 7 outright | √3-shell; M39 T = 5/2 ball |
+| (19/3, 25/3) | (0.3464, 0.3974) | 7 | ≥ 7 outright | ball at 65/24 |
+| (25/3, 9) **deep pocket** | (1/3, 0.3464) | **4** | **≥ 8 outright**, ≤ 16 | 91-vertex k = 7 ball refusal; **gap ≥ 4** |
+| (9, 28/3) | (0.3273, 1/3) | 7 | ≥ 7 | **the M = 4 scaled shell** {4,12,16} |
+| (28/3, 31/3) | (0.3111, 0.3273) | 4 | ≥ 7 outright | ball at 47/15; gap 3 |
+| (31/3, 37/3) | (0.2847, 0.3111) | 4 | ≥ 7 outright | ball at 101/30; gap 3 |
+| (37/3, 43/3) | (0.2641, 0.2847) | 5 | ≥ 7 outright | ball at 73/20 |
+| (43/3, 16) | (0.25, 0.2641) | 4 | ≥ 7 outright | ball at 467/120; 66-vertex core |
+| (16, 49/3) | (0.2474, 0.25) | 4 | ≥ 7 outright | M39 T = 4 ball = this band |
+| (49/3, 52/3) | (0.2402, 0.2474) | 4 | ≥ 7 outright | ball at 41/10, r = 6 |
+| (52/3, 20) | (0.2236, 0.2402) | 4 | ≥ 7 outright | ball at 259/60 |
+| flank below T² = 36 | p just above 1/6 | **3** | **= 7** | ball at 299/50 (WITHOUT the boundary class); colouring transfers down |
+| closed T = 6 band | p ≤ 1/6 side | **3** | **= 7** | M39 radius-8 ball + 24×24 torus |
+| closed T = 7 | p = 1/7 | **3** | ∈ {5,6,7}, **6 OPEN** | balls to 225 six-colour; tori refuse 6 to period 36 |
+
+Boundary honesty: every INTEGER T is a threshold scale (the (n+1,0) class arrives exactly
+at T² = n²), so M39's rows at T = 2..7 describe closed-criterion graphs; all claims above
+are re-keyed to open bands, and the 1/6 result was re-proven on the flank band without
+the boundary class.
+
+## The predictions, scored
+
+* **P1 partial**: coarse census reproduced; fine ω revised to 3; but ω(12-band) = **12**,
+  not the predicted 10 — my registered derivation was itself an undercount (the ≥ 10
+  held; the "= 10" guess was wrong).
+* **P2 CONFIRMED**: the band table reproduces D1 exactly; the norm-49 class split (A1)
+  verified: (7,0) min 36 ≠ (3,5) min 52/3-adjacent — the planted check green.
+* **P3 REFUTED**: the bad band's ω is 9 (a sheared 3×3 block — the shear dodges the
+  norm-12 corner), so M39's "≥ 9, stronger than the 8-clique" was clique-explained. The
+  registered "first coarse non-clique excess" instead materialized one band down: the
+  deep pocket refuses SEVEN at 91 vertices with ω = 4.
+* **P4 subsumed**: ω = 12 makes k ≤ 11 refusals automatic; k = 12 SAT lands χ = 12
+  exactly; the registered index-12 coset upper is the tight value.
+* **P5 CONFIRMED**: the G\* core is **23 vertices** — centre + full norm-1 hexagon + 4/6
+  of norm-3 + full norm-4 hexagon + 6/12 of norm-7 (three per chirality orbit) —
+  1-minimal with every necessity witness held; near-rot6 symmetry, broken, the same
+  motif as de Grey's 122-core. Siblings: deep-pocket k = 7 core **53**, k = 6 core
+  **28**, (43/3,16) k = 6 core **66**.
+* **P6 REFUTED at its threshold**: α(G\*, 12×12) = 21, so χ_f ≤ 48/7 ≈ 6.857 — not ≤ 6.
+  The fractional relaxation comes within 1/7 of the truth and still cannot reach it: the
+  step to seven is integrality-carried, by a thin margin, not a fat one.
+* **P7 CONFIRMED emphatically**: certified Hoffman brackets — classical 5.04, bad band
+  5.96, 12-band 6.10, **G\* 4.09**, deep pocket 4.18. The spectral bound collapses
+  exactly where the clique collapses; it explains nothing below the 12-band.
+* **P8 CONFIRMED and strengthened to a theorem-shaped fact**: the extracted G\*
+  seven-colouring has class sizes [20,20,20,21,21,21,21] and TRIVIAL stabilizer (no
+  torus translation even permutes its classes); and **all eight index-7 sublattices of
+  the Eisenstein lattice contain an edge of G\*** (each with explicit witness), so NO
+  coset seven-colouring exists on the band — same verdict at the closed T = 6 and T = 7
+  bands. The classical mechanism is structurally unavailable below the window; the
+  family achieves seven there only non-homomorphically. Fine-scale 24×24 witnesses:
+  class sizes 76–90 / 73–89, trivial stabilizers.
+* **P9 never fired** (no k ≤ 6 SAT anywhere; mass-red k = 4 green throughout).
+* **P10 DELIVERED**: the target list for the six-hunt is now concrete — everything down
+  to p = 0.2236 is floored ≥ 7 outright; **the sharpest open scale is p = 1/7** (ω = 3,
+  balls to 225 six-colourable, tori refuse six only to period 36), and below it the tail
+  is unprobed.
+
+## Instrument notes (G21 ledger)
+
+* M39's census ω values were BOTH box-clipped (reach 4) and cap-clipped (8): the
+  norm-27 triangle at T = 6 sat outside the box; the 12-clique sat above the cap.
+* M39 §0e's "scaled-shell route exhausted at M ∈ {1,3}" was derived with the
+  inscribed-disc (sufficient-only) window; the exact criterion gives the **M = 4 shell
+  a real band**, (9, 28/3). A G21 instance inside a G21-aware milestone.
+* `edge_set`'s default reach 14 was two coordinates from clipping at M39's largest
+  probed scale (T = 10); `edge_reach` now scales with T.
+* Every integer T is a threshold scale — the closed criterion silently includes
+  boundary classes there. Band re-keying is now the standing discipline (A3).
+
+## What was NOT done (honesty ledger)
+
+* The deep pocket's upper is open: k = 8 unknown at 12×12 (cap); χ ∈ [8, 16].
+* Pocket k = 7 refusals at 12×12 (47/15 unknown; 101/30, 73/20, 467/120 unsat) are
+  PERIOD-BOUNDED; the M39 1/7-lesson applies and larger tori were not pushed.
+* The ω = 3 seven-forcer core (band below T² = 36, 225-vertex ball) and α(G\*, 18×18)
+  were still shrinking/solving at close; results recorded in the artifact when they
+  land. <!-- UPDATE-AT-CLOSE -->
+* Bands with T² ∈ (20, 35.76) and everything below p = 1/7 are unprobed.
+* The interval-distance bridge (D8) consequences were not priced against literature
+  (the registered WebSearch check was not run this session); no novelty claim is made
+  for them.
+* Kernel promotion (the 12-clique window, the M = 4 shell window, the coset-
+  impossibility decide, χ(G\*) = 7 via the 23-core) is priced and deferred to a named
+  follow-up milestone.
+
 ## §0e — Deliverables and the kernel line
 
 Corrected census + band table; the 10-clique band verdicts (k = 9..11); the cores with

@@ -127,6 +127,17 @@ LRAT replay, the M06–M09 chain).
 
 # §R — Results (2026-08-12; every verdict at face value)
 
+> **CORRECTED at M40 (2026-08-12, `plans/M40-chi-omega-hunt.md`), deprecate-never-delete:**
+> the census's ω values below were BOX- and CAP-clipped (`max_clique(reach=4, cap=8)`):
+> the true spectrum has ω = 9 on the bad band (a sheared 3×3 block — so the "≥ 9,
+> stronger than the 8-clique" reading is clique-explained), **ω = 12 with χ = 12 exactly
+> on p ∈ (0.4804, 0.5)**, and ω = 3 with χ = 7 at the 1/6-flank bands. §0e's
+> "scaled-shell route exhausted at M ∈ {1,3}" was derived with the inscribed-disc
+> sufficient window and is FALSE under the exact criterion: the M = 4 shell owns the
+> band (9, 28/3). Every integer T is a threshold scale (the (n+1,0) class arrives at
+> T² = n² exactly), so the T = 2..7 rows below describe closed-criterion graphs; M40
+> re-keys all claims to open bands.
+
 * **P1 CONFIRMED** — the instrument reproduces M38 exactly: edge norms `{1,3,4}`
   at `T = 7/6` and `T = 3/2`, the closed shell a 7-clique, and a 300 × 200
   sampling of the difference body never escaping the computed `[min, max]`
