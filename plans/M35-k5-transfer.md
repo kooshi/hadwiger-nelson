@@ -674,3 +674,26 @@ cell at cap 3600 s. Expected [medium]: clean (an avoiding 5-colouring
 exists). If it caps again: reported as the probed ceiling, no claim. If it
 FIRES: the P2 sweep-halt rule applies in full (re-encode, clique guard,
 HALT and report).
+
+## §0j — Mid-milestone addendum (2026-08-11, registered before the run)
+
+The phase-2 campaign's 672 rows ALL refused — including k = 7, D = ∅ — and
+the k = 4 mass red held everywhere (P6 confirmed). Before reading P5's miss
+as a family verdict: the registered resolution grid probed SQUARE cells
+only (w = h), while the classical brick-wall 7-colourings live at LONG FLAT
+bricks (w near 1, h small — rows of long bricks, shear w/2, colour period
+~7 along the row). The refusals are honest for squares; the family was
+under-sampled. Registered extension, run next: rectangular cells
+w ∈ {3/5, 3/4, 4/5, 9/10} × h ∈ {1/5, 1/4, 1/3, 2/5} (diag² < 1 filtered),
+m ∈ {7, 12} columns, n = the least row count with n·h ≥ 3, shears
+{0, w/2, w/4}; k = 7 D = ∅ FIRST (the L3 gate), k = 8 D = ∅ as the
+family-sanity wedge (between the square 3×3-rainbow at 9 and the classical
+7), then the k ∈ {7, 6, 5} × class ladders on the rectangular grid.
+Predictions: **P5′ [medium]** — the rectangular family exhibits a k = 7
+D = ∅ brick colouring (any find validates through the independent formula
+and promotes through Brick.check); failure clause: if even k = 8 refuses on
+rectangles, the conservative closed-hull margin is suspected of eating the
+classical pattern's zero-margin boundaries — report the measured shape,
+land L3's machinery on the k = 9 square green (χ ≤ 9 as the demonstration
+instance, honestly labelled), and defer the χ ≤ 7 instance with its price
+named. The k = 4 rectangular rows stay the mass red.
