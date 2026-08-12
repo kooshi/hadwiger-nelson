@@ -385,6 +385,61 @@ precisely the offsets that genuinely avoid the guard. M35's strict version was
 weaker than the truth rather than differently calibrated — which is why its sweep
 verdict was an artifact and not a measurement.
 
+## §0h — Obligation modeling pass (2026-08-11, fresh invocation)
+
+**G-1 — The space has no induction, and saying so is the design.** `sound` is a
+straight-line derivation with exactly ONE case split. The descending measure is
+not a size but a *distance from arithmetic*: each `have` removes one definitional
+layer between the goal and a pure real inequality — `color` → the table clash,
+`dist` → the two coordinates, `Int.floor` → the half-open box containment, the
+box → the interval ends — and the last layer is discharged by `linarith`/`calc`
+over ℝ. A proof shaped this way cannot loop, because no step reintroduces a layer
+it removed. Nothing here wants a recursor; the earlier instinct to look for one
+would have been the wrong recursion imposed on a chain.
+
+**G-2 — The three open-box lemmas have a dependency, and the skeleton had them in
+the wrong order.** `le_sq_of_abs_lt` (weak, always) is not independent of
+`lt_sq_of_abs_lt` (strict, under positivity): it IS that lemma plus the
+degenerate case, via `(le_max_left 0 _).lt_or_eq`. Stating the strict one first
+and deriving the weak one from it costs three lines and removes a duplicated
+argument. All three closed first try; the citations were re-queried rather than
+recalled, and one had drifted exactly as M35 warned — the strict square
+monotonicity is `pow_lt_pow_left₀ h ha two_ne_zero` (three explicit arguments),
+which `exact?` does not find from the goal shape.
+
+**G-3 — The ℚ→ℝ cast boundary is ONE equation per obligation, and it is crossed
+before any inequality reasoning.** `Rat.cast_max` and `Rat.cast_abs` are
+`norm_cast` lemmas at this pin (checked, not recalled), so
+`rw [hiAt, hi, …]; push_cast; ring` turns the certificate's rational interval end
+into its real-valued twin in one step. Every inequality then lives entirely in ℝ,
+and the result returns by a single `exact_mod_cast`. The alternative — carrying
+casts through the argument — is what breeds the `Eq.mpr` chains the domain
+sibling reads as representation smell.
+
+**G-4 — The case split is on the coordinate, and the positivity hypothesis is
+load-bearing in exactly one branch.** `hqgt`'s split is
+`(le_max_left 0 (|A| - w)).lt_or_eq`: if the horizontal end is positive, the
+strict horizontal bound plus the weak vertical one already gives the strict sum
+(`add_lt_add_of_lt_of_le`) and `0 < loAt` is never used; if it is zero, then
+`0 < loAt` is exactly what forces the vertical end positive, and the roles swap
+(`add_lt_add_of_le_of_lt`). A hypothesis used in one branch of two is neither
+dead weight nor over-hedging — it is the branch's whole content.
+
+**G-5 — The partition, with an empty third column.** **PROVEN** (kernel):
+`check_pos`, the three open-box lemmas, `sound`, `colorable`, `avoids`,
+`colorQ_eq`, `sevenBrick_check` (by `decide +kernel` — the argument *is* "check
+them all", and the kernel checks them all), `plane_colorable_seven`,
+`chromaticNumber_plane_le_seven`, `chromaticNumber_plane_interval`. **TESTED**
+(elaboration-time, every build): twelve `#guard`s in `Instances/Seven.lean`
+(seven `colorQ` samples against the design script, two boundary-tightness pins,
+four mutations, the flat table, the degenerate guard) and Nine's controls; plus,
+tools-side, the design script's offset census, its 3,803,904-pair refutation
+hunt, and the kernel census of the coset coefficients. **ASSUMED**: *nothing*.
+There is no hypothesis a consumer must discharge — guard positivity comes from
+the certificate, the offset window is computed inside the check, and the geometry
+is decided. The milestone's headline has an empty assumption column, which is the
+strongest form the standard of evidence above rung B asks for.
+
 ---
 
 # §R — Results (opened at the skeleton; every verdict at face value)

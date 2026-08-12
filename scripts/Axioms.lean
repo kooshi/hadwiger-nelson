@@ -749,6 +749,15 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms plane_colorable_nine
 #print axioms nine_avoids_sqrt_three_halves
 
+-- M36: the boundary-tight sharpening and the classical upper bound
+#print axioms Brick.check_pos
+#print axioms Brick.sq_lt_of_abs_lt
+#print axioms Brick.lt_sq_of_abs_lt
+#print axioms Brick.le_sq_of_abs_lt
+#print axioms plane_colorable_seven
+#print axioms chromaticNumber_plane_le_seven
+#print axioms chromaticNumber_plane_interval
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -266,19 +266,37 @@ end, and strictly above its lower end whenever that end is positive. -/
 /-- Strictly below the upper end. -/
 theorem sq_lt_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
     t ^ 2 < (|X| + width) ^ 2 := by
-  sorry
-
-/-- Weakly above the lower end, always — including the branch where the box straddles its
-axis and the lower end is `0`. -/
-theorem le_sq_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
-    max 0 (|X| - width) ^ 2 ≤ t ^ 2 := by
-  sorry
+  have h1 : |t| < |X| + width := by
+    rw [ht]
+    calc |X + e| ≤ |X| + |e| := abs_add_le _ _
+      _ < |X| + width := by linarith
+  calc t ^ 2 = |t| ^ 2 := (sq_abs t).symm
+    _ < (|X| + width) ^ 2 := pow_lt_pow_left₀ h1 (abs_nonneg t) two_ne_zero
 
 /-- Strictly above the lower end, when that end is positive. Stated through the same `max`
 the interval is built from, so the assembly needs no rewriting between the two forms. -/
 theorem lt_sq_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width)
     (hX : 0 < max 0 (|X| - width)) : max 0 (|X| - width) ^ 2 < t ^ 2 := by
-  sorry
+  have hpos : 0 < |X| - width := by
+    rcases lt_max_iff.mp hX with h | h
+    · exact absurd h (lt_irrefl 0)
+    · exact h
+  rw [max_eq_right hpos.le]
+  have h2 : |X| ≤ |t| + |e| := by
+    calc |X| = |t + -e| := by rw [ht]; ring_nf
+      _ ≤ |t| + |-e| := abs_add_le _ _
+      _ = |t| + |e| := by rw [abs_neg]
+  calc (|X| - width) ^ 2 < |t| ^ 2 :=
+        pow_lt_pow_left₀ (by linarith) hpos.le two_ne_zero
+    _ = t ^ 2 := sq_abs t
+
+/-- Weakly above the lower end, always — including the branch where the box straddles its
+axis and the lower end is `0`. -/
+theorem le_sq_of_abs_lt {X width t e : ℝ} (ht : t = X + e) (he : |e| < width) :
+    max 0 (|X| - width) ^ 2 ≤ t ^ 2 := by
+  rcases (le_max_left 0 (|X| - width)).lt_or_eq with h | h
+  · exact (lt_sq_of_abs_lt ht he h).le
+  · rw [← h]; simpa using sq_nonneg t
 
 /-! ## Soundness -/
 
@@ -372,11 +390,54 @@ theorem sound {guards : List ℚ} (hchk : B.check guards = true)
       (z.re - (B.s : ℝ) * B.row z) - (B.w : ℝ) * B.col z < (B.w : ℝ) := box_mem hw
   have hu' : 0 ≤ (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' ∧
       (z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z' < (B.w : ℝ) := box_mem hw
-  -- the offset decomposition and the STRICT componentwise bounds (the OPEN box)
+  -- the offset decomposition, and the internal offsets bounded STRICTLY: this is the
+  -- half-open cell speaking, and it is the whole of the milestone's mathematics
+  set ere : ℝ := ((z'.re - (B.s : ℝ) * B.row z') - (B.w : ℝ) * B.col z') -
+      ((z.re - (B.s : ℝ) * B.row z) - (B.w : ℝ) * B.col z) with hereDef
+  set eim : ℝ := (z'.im - (B.h : ℝ) * B.row z') - (z.im - (B.h : ℝ) * B.row z) with heimDef
+  set A : ℚ := B.s * (dr : ℚ) + B.w * (dc : ℚ) with hADef
+  set Bc : ℚ := B.h * (dr : ℚ) with hBcDef
+  have hdre : z'.re - z.re = ((A : ℚ) : ℝ) + ere := by
+    rw [hereDef, hADef, hdrdef, hdcdef]; push_cast; ring
+  have hdim : z'.im - z.im = ((Bc : ℚ) : ℝ) + eim := by
+    rw [heimDef, hBcDef, hdrdef]; push_cast; ring
+  have hbre : |ere| < (B.w : ℝ) := by
+    rw [hereDef, abs_lt]
+    constructor <;> [linarith [hu.1, hu'.2]; linarith [hu'.1, hu.2]]
+  have hbim : |eim| < (B.h : ℝ) := by
+    rw [heimDef, abs_lt]
+    constructor <;> [linarith [hv.1, hv'.2]; linarith [hv'.1, hv.2]]
+  have hq2 : (z'.re - z.re) ^ 2 + (z'.im - z.im) ^ 2 = (q : ℝ) := by rw [← hd2]; ring
+  -- strictly inside the box interval, both ends
   have hqlt : q < B.hiAt dc dr := by
-    sorry
+    have hcast : ((B.hiAt dc dr : ℚ) : ℝ) =
+        (|((A : ℚ) : ℝ)| + (B.w : ℝ)) ^ 2 + (|((Bc : ℚ) : ℝ)| + (B.h : ℝ)) ^ 2 := by
+      rw [hiAt, hi, hADef, hBcDef]; push_cast; ring
+    have h : ((q : ℚ) : ℝ) < ((B.hiAt dc dr : ℚ) : ℝ) := by
+      rw [hcast, ← hq2]
+      exact add_lt_add (sq_lt_of_abs_lt hdre hbre) (sq_lt_of_abs_lt hdim hbim)
+    exact_mod_cast h
   have hqgt : 0 < B.loAt dc dr → B.loAt dc dr < q := by
-    sorry
+    intro hlopos
+    have hcast : ((B.loAt dc dr : ℚ) : ℝ) =
+        max 0 (|((A : ℚ) : ℝ)| - (B.w : ℝ)) ^ 2 +
+        max 0 (|((Bc : ℚ) : ℝ)| - (B.h : ℝ)) ^ 2 := by
+      rw [loAt, lo, hADef, hBcDef]; push_cast; ring
+    have hposR : (0 : ℝ) < max 0 (|((A : ℚ) : ℝ)| - (B.w : ℝ)) ^ 2 +
+        max 0 (|((Bc : ℚ) : ℝ)| - (B.h : ℝ)) ^ 2 := by
+      rw [← hcast]; exact_mod_cast hlopos
+    have h : ((B.loAt dc dr : ℚ) : ℝ) < ((q : ℚ) : ℝ) := by
+      rw [hcast, ← hq2]
+      rcases (le_max_left (0 : ℝ) (|((A : ℚ) : ℝ)| - (B.w : ℝ))).lt_or_eq with hx | hx
+      · exact add_lt_add_of_lt_of_le (lt_sq_of_abs_lt hdre hbre hx)
+          (le_sq_of_abs_lt hdim hbim)
+      · have hy : 0 < max 0 (|((Bc : ℚ) : ℝ)| - (B.h : ℝ)) := by
+          rcases (le_max_left (0 : ℝ) (|((Bc : ℚ) : ℝ)| - (B.h : ℝ))).lt_or_eq with hy | hy
+          · exact hy
+          · rw [← hx, ← hy] at hposR; simp at hposR
+        exact add_lt_add_of_le_of_lt (le_sq_of_abs_lt hdre hbre)
+          (lt_sq_of_abs_lt hdim hbim hy)
+    exact_mod_cast h
   -- the colour equality instantiates the clash at (dc, dr)
   have hclash : B.clash dc dr = true := by
     apply decide_eq_true
