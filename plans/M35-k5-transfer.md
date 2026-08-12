@@ -500,3 +500,88 @@ example refuses the pigeonhole (`¬` form), certifying `k < 7` load-bearing.
 Brick's spec block: a 2-cell toy torus whose check passes at one guard and
 fails at another, both `#guard`ed, plus the planted boundary-adversary from
 §0b (closed-hull conservatism seen refusing).
+
+## §0g — Obligation modeling pass (2026-08-11, fresh invocation)
+
+**G-1 — The clique lemma's proof is three citations.** The Finset pigeonhole
+(`Finset.exists_ne_map_eq_of_card_lt_of_maps_to` over `univ : Finset (Fin k)`;
+exact name re-queried at the call site) hands x ≠ y in S with C x = C y; the
+adjacency hypothesis (kept in raw ∀-form — `∀ i ∈ S, ∀ j ∈ S, i ≠ j →
+(edgeGraph n (E ++ P)).Adj i j` — because it is BOTH directly usable and
+directly decidable at the instance; no List.Pairwise detour) gives augmented
+adjacency; one append-split lemma (`Adj (E ++ P) → Adj E ∨ (x,y) ∈ P ∨
+(y,x) ∈ P`, minted beside the M34 bridge if not already derivable from its
+parts) routes the three cases: E-adjacency refuses by C.valid, either P
+orientation builds the MonoPair (equality symmetric). The per-instance
+obligations: `hk` by `decide` (card univ), `hadj` by ONE decide over 42
+ordered membership checks. Nothing bigger than 21 pairs is ever decided.
+
+**G-2 — The Brick soundness chain, every intermediate named.** From
+`hcheck : B.check guards = true`, `hq : dist z z' ^ 2 = (q : ℝ)`,
+`hg : q ∈ guards`, `hcol : B.color z = B.color z'` to False:
+(a) `sqrtUB (q : ℚ) : ℚ := Nat.sqrt ⌈q⌉.toNat + 1` with
+`le_sq_sqrtUB : (q:ℝ) ≤ (sqrtUB q)^2` — coarse is fine; it only widens the
+window. (b) componentwise bounds: Δim² ≤ q (drop the other square), then
+`|Δim| ≤ sqrtUB qmax` via the square-comparison lemma (Mathlib's
+`abs_le_of_sq_le_sq'` genre — re-queried); qmax over the list by a fold with
+its membership lemma. (c) the workhorse
+`abs_floor_sub_floor_le : |a − b| ≤ c → |⌊a⌋ − ⌊b⌋| ≤ ⌈c⌉` (integer t < c+1
+⟹ t ≤ ⌈c⌉; grep Mathlib first, ≤ 10 lines if absent) — applied once for
+rows, once (after the shear adjustment |Δre − s·dr| ≤ sqrtUB + |s|·a) for
+columns: the offsets land INSIDE the window the check computed — window
+completeness is a lemma inside the proof, never a hypothesis. (d) box
+containment `0 ≤ x − w·⌊x/w⌋ < w` (Mathlib `Int.sub_floor_div_mul_nonneg` /
+`_lt` genre — re-queried). (e) the algebra Δre = (s·dr + w·dc) + (u' − u)
+and the closed-interval bounds lo ≤ q ≤ hi by an `rcases le_or_lt |A| w`
+max-split — lo := max 0 (|A|−w)² + max 0 (|B|−h)², hi := (|A|+w)² +
+(|B|+h)². (f) `idx_add` (one `Int.emod` shift lemma) turns `hcol` into the
+check's table existential at (dc, dr). (g) `check_spec` — the ONE Bool→Prop
+bridge, a simp chain over `List.all_eq_true`/`decide_eq_true_iff`, giving:
+window offsets with a satisfied table existential exclude every guard —
+q < lo ∨ hi < q against (e): False. Assembly: `Brick.colorable` (Coloring.mk
+B.color, q = 1) and `Brick.avoids` (per guard); `Real.sqrt` enters only in
+the read-aloud corollaries.
+
+**G-3 — colorQ, the computable twin, is the definition's test instrument.**
+`B.color` is noncomputable (Int.floor on ℝ) — correct but untestable; mint
+`B.colorQ (x y : ℚ) : Fin k` (same formula, `Rat.floor`) with the agreement
+lemma (floor commutes with the cast) and `#guard` it against Python-sampled
+points of every promoted instance. This is what catches a shear-sign or
+mod-convention drift (`Int.emod` and Python `%` agree on positive moduli —
+tested anyway, never assumed). Check's decidability: pure ℚ/ℤ `List.all`
+over a computed window × table scans — kernel `decide` at instance scale
+(~10³–10⁴ Rat ops); the ℤ-rescale fallback (clear denominators once) is
+named and priced if Rat normalization chokes.
+
+**G-4 — The partition.** PROVE (kernel): the clique lemma + HexShell
+instance (cert valid, two PairsAt runs, clique decide, pigeonhole, two plane
+corollaries); Brick: sqrtUB bound, floor workhorse, box containment,
+idx_add, check_spec, soundness, colorable/avoids, colorQ agreement; the
+Seven instance's check by decide. TEST (compiled/#guard): HexShell shape
+guards + adversarial perturbation AIMED AT A PAIR VERTEX (the M34 lesson);
+the ring-alternation witness with its visible mono √3 pair; the k = 7
+rainbow refusal example; Brick toy-torus check true/false pair; the planted
+boundary-adversary; colorQ sample agreement; window-size #eval (cost
+sanity). ASSUME: nothing — the milestone's guaranteed rungs carry NO
+solver-trusted step (no LRAT anywhere in L1/L3; the prober's SAT proposes,
+the kernel disposes). Mutation audits: drop `hk` → the rainbow example is
+the countermodel; delete a clique pair → decide fails; perturb the Brick
+table / double w → check reads false by #guard.
+
+**G-5 — The tools-side obligations, each with its failure-catcher.** The
+3-bit re-encode: uniform mono-ban generator over ALL 8 codes for edges and
+instances alike + per-vertex bans of codes 5–7 — soundness is the bijection
+with proper avoiding 5-colourings; the catchers are (i) in-process decode +
+`_validate_avoiding` on every SAT model (an off-by-one dies loudly), (ii)
+the planted k = 5 gadget suite agreeing with one-hot, (iii) a 10-random-graph
+one-hot/3-bit agreement loop in the self-test. The clique guard: rewritten
+as an EXISTENCE search at target t = k + 1 (prune on len + |cands| < t) —
+exhaustiveness is then structural, not an optimization property; self-tests:
+hex shell finds its K7 (green), shell minus a ring point refuses at t = 7
+(red), sparse decoy refuses. The prober validator: the independent
+interval formula plus corner/random sampling — REFUTES only; the artifact's
+promotion ladder tops at "prober-validated" until `Brick.check` runs in
+Lean; the k = 4 mass control and the kernel are the real arbiters. min_cover
+at k = 5 is standing code with k already a parameter — no new obligation,
+and NO palette breaking there (standing rule, restated because the sweep
+driver composes both instruments).
