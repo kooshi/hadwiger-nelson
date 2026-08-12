@@ -1,4 +1,4 @@
-# M35 — The k = 5 transfer and the avoidance certificates: the two-sided 6-programme (PRE-SUBPLAN STUB)
+# M35 — The k = 5 transfer and the avoidance certificates: the two-sided 6-programme (RUN 2026-08-11 — §0 registered below)
 
 *Written 2026-08-11 at M34's close; CHOSEN and EXTENDED by Kooshi the same
 day ("I agree" to the two-sided framing below — this is THE M35; the
@@ -125,3 +125,304 @@ exists at any period is itself a fresh question.
 * A fired class that fails its re-encode: instrument catastrophe protocol
   (halt, extend self-tests, rerun).
 * Any segfault: HALT and report (standing).
+
+---
+
+# §0 — The registered subplan (2026-08-11, desktop; committed before any solver or Lean run)
+
+*Machine: the desktop (32 cores, 128 GB). The free geometry below was computed by
+`build/m35-design.py` (gitignored) — exact 16-basis arithmetic through
+`tools/mechanism.py`'s own loaders, ZERO colour queries, zero Lean. Everything
+below cites those numbers (`build/m35-design.json`).*
+
+## §0a — A priori derivations (before any instrument, before any proof)
+
+**C1 — The k-ladder semantics, and the honest stakes of phase 2.** Through the
+M34 bridge and de Bruijn–Erdős compactness: a class D (a finite set of pair
+distances) FIRING at k colours on some finite region ⟺ χ(ℝ²; {1} ∪ D) ≥ k+1;
+a plane k-colouring avoiding D ⟺ χ(ℝ²; {1} ∪ D) ≤ k. Two consequences the stub
+under-stated, now explicit. (i) **Any k = 5 avoider for ANY class subsumes
+χ(ℝ²) ≤ 5** — a proper 5-colouring of the plane before the avoidance clause is
+read — so phase 2 at k = 5 is literally the upper-bound hunt for the
+Hadwiger–Nelson problem; the expected outcome is refusal everywhere probed, any
+find is the jackpot of jackpots, and refusals are WEAK negatives (a brick
+refusal at resolution m is not a period refusal — finer tiles could still
+succeed). (ii) The ladder therefore descends k = 7, 6, 5 per class: every rung
+with a certified avoider is a **two-distance chromatic upper bound**, pairing
+with M34's kernel lower bounds into certified sandwiches (e.g. a k = 6 avoider
+for d = 2 would pin χ(ℝ²; {1,2}) ∈ [5,6] with both ends kernel-checked — to our
+knowledge no certified two-distance upper bound exists anywhere). The k ≥ 6
+rungs are the milestone's guaranteed-landable novelty; the k = 5 rung is the
+honest moonshot; the k = 4 rung is the mass red control (C6).
+
+**C2 — The organizing bound at k = 5: no single pair class transmutes.** On a
+unit circle, points pairwise at ONE fixed distance d subtend a fixed angular
+gap, so cliques have size ≤ 3, with 3 iff d = √3 (the 120° triple — M18's
+`exists_unit_triangle_iff` geometry, B6's law). Hence single-class avoidance
+can force at most THREE pairwise-distinct points onto any unit circle — never
+the four that would force a unit-adjacent centre to the 5th colour. The k = 5
+transmuter analogue is necessarily COMPOUND: avoiding {√3, 2} jointly, the
+120°-triple plus an antipode are forced rainbow-4 (the antipode is unit-adjacent
+to the two near ring points, distance-2 from the far one), and the centre —
+unit-adjacent to all four — wears the 5th colour. The minimal compound
+organizing gadget is the hex-shell wheel, and its two distances are exactly
+M34's two kernel pigeonhole distances.
+
+**C3 — The hex-shell clique, and the clique-triviality guard.** Measured exact
+(`m35-design.py`): the closed first shell of the triangular lattice — the
+origin plus its six unit neighbours, `hexPivot`'s own configuration — is a
+**K7 in the {1, √3, 2}-distance graph** (12 unit pairs, 3 √3 pairs at the 120°
+ring gaps... counted on the 7 points: 12 unit (6 spokes + 6 ring edges), 6 √3
+(120° ring pairs), 3 distance-2 (antipodal ring pairs), total 21 = C(7,2)).
+Consequences, all elementary: every proper k-colouring with k ≤ 6 of these
+SEVEN points has a monochromatic pair at distance √3 or 2 (pigeonhole on a
+clique: two points share a colour; sharing is not unit by properness); the
+plane corollaries at k = 5 and k = 6; χ(ℝ²; {1, √3, 2}) ≥ 7. This is
+counting, not discovery — presumably folklore (the first shell of the
+triangular lattice); what is ours is the kernel formalization (rung L1, the
+milestone's guaranteed same-day landing) and the seed framing for the
+6-programme (a 6-forcer over this pigeonhole needs kills for BOTH classes;
+radicands 4d²−1 = 11 and 15, both inside the 5-forcers' field — the field
+ladder's prediction pattern would be broken by this route, worth naming).
+The guard it forces on the instrument: **a firing whose region contains a
+(k+1)-clique of the {1} ∪ D graph is clique-trivial** — classified as such,
+never reported as discovery. Measured lattice clique ceilings for the single
+classes: {1,√3} → 4, {1,2} → 3, {1,√7} → 3, {1,4/√3} → 3 — so single-class
+k = 5 firings are NEVER clique-trivial (6-cliques do not exist even in the
+compound-free graphs on the lattice; ceilings on the witnesses are re-checked
+by the guard at any firing).
+
+**C4 — The coset ladder on the lattice (Hermite-normal-form enumeration, exact
+and complete).** Sublattices of ℤ[ζ₆] of index N are exactly the HNF bases
+{(a,0), (b,d)} with ad = N, 0 ≤ b < a (hex coordinates a+bζ₆, norm
+a²+ab+b²). Index 4 (the seven sublattices): every one contains a vector of
+norm 1 or 4 — **no coset 4-colouring of the triangular lattice avoids
+{1, 2}**. Index 5 (the five sublattices): every one contains norm 1 or 3 —
+**no coset 5-colouring avoids {1, √3}**, hence none avoids the compound — but
+THREE of the five (b = 1, 2, 3 of the (5,1)-type, e.g. ⟨(5,0), (1,1)⟩) avoid
+norms {1, 4} with minimum norm 3: **coset 5-colourings of the LATTICE avoiding
+{1, 2} exist**. The naive plane thickening fails by arithmetic: fine cells of
+diameter 2s/√3 with nearest same-colour centres at s√3 leave an empty avoided
+band (2s/√3 > s/√3). Consequences registered: d = 2 is the most PROMISING
+class for the phase-2 k = 5 hunt (the lattice already 5-avoids it; the
+question is whether any brick pattern closes the thickening gap — this is
+where a χ ≤ 5 attempt would live); √3 is coset-blocked at k = 5; and the bare
+lattice's eq-pair-2 status at k = 4 is coset-blocked but SAT-open — a
+registered calibration probe (C7 §0c P4) with either outcome informative
+against G16's fabric-borne reading.
+
+**C5 — The fan class at k = 5.** A1 is already kernel and colour-generic
+(χ(G) > k ⟺ every k-colouring of G−v covers N(v)); `min_cover` at k = 5 with
+S = the unit circle about a named geometric centre is the query (coverage
+restrictions name colours — NO palette breaking there, standing rule). On any
+5-colourable-with-slack object the expectation is min-cover well below 5; a
+FANNED verdict at k = 5 would be the 6-transition itself. The M33 enumeration
+warning stands: fan compulsions live on circles about deleted/geometric
+centres — this sweep enumerates the NAMED centres only and claims nothing
+beyond them.
+
+**C6 — The brick architecture (phase 2's engine and its certificate, one
+design).** Periodic candidates are brick colourings: axis-aligned w × h
+rectangles in rows, row-shear s, torus period (m·w, n·h) with shear wrap —
+table : Fin m × Fin n → Fin k, colour of z = table at (⌊(x − s·⌊y/h⌋)/w⌋
+mod m, ⌊y/h⌋ mod n). Rectangles make the distance interval between two cells
+EXACT componentwise (closed boxes: min/max of Δx², Δy² from index offsets —
+rational interval arithmetic, no convexity machinery), half-open cells
+partition the plane exactly, and the conservative closed-hull check covers
+every boundary assignment. The SAT probe and the Lean certificate CHECK THE
+SAME FINITE OBJECT: for every ordered cell pair within the (1 ∪ D)-reach
+window (offsets bounded by the largest avoided distance plus cell diagonal),
+same table colour ⟹ each guarded distance δ has δ² ∉ [lo, hi] of the pair's
+box interval. So a SAT model is already the certificate's content, and the
+Lean side (rung L3, the `Brick.lean` genre: floor-arithmetic reduction to the
+finite offset window + one decide over the table) promotes any find at any k.
+The mass red control comes free and is mandatory: **every k = 4 row must
+refuse** — a validated k = 4 brick colouring would contradict the kernel
+χ(ℝ²) ≥ 5; any such SAT is instrument catastrophe (halt everything, the
+encoding is wrong). The green control: k = 7, D = ∅ must eventually SAT (a
+brick 7-colouring of the plane exists classically — if the RATIONAL-parameter
+brick family somehow refuses at every probed resolution, that is a reportable
+finding about the family, and L3's χ(ℝ²) ≤ 7 instance waits).
+
+**C7 — What phase 1 is actually hunting (the honest prior, sharpened).** Every
+k = 5 instance meter ever run was flat, and G17 says sub-top-rung compulsions
+have small carriers — but no one anywhere has asked the CLASS question at
+k = 5. The interesting firings are single-class and non-clique-trivial; the
+natural fabric for them is the 5-chromatic objects (the witnesses) and
+regions near their forcing radii, since 4-colourable regions with slack
+should avoid everything (more colours than the k = 4 sweep that already read
+mostly clean below onset radii). All-clean is the expected outcome and is
+reported as probed ceilings, exactly as M33's failure clauses were.
+
+## §0b — Definitions and contracts
+
+* **Instrument extensions** (both standing tools, self-tests first):
+  - `rigidity.class_avoid_binary3(n, edges, instances, cap)` — the k = 5
+    decorrelation re-encode: 3 bits per vertex, the three codes 5, 6, 7
+    banned per vertex, ONE mono-ban generator for edges and instances, the
+    vertex-0 palette pin replaced by first-occurrence-compatible pinning of
+    vertex 0 to code 0 (sound by relabelling). Self-tests: agreement with
+    one-hot `class_avoid` at k = 5 on planted gadgets (fired and clean), the
+    malformed-instance rejection, and a K6-gadget control (the hex-shell
+    minus a ring point fires the compound class at k = 5 — the C3 fact as a
+    red/green pair: full shell fires, shell minus TWO ring points goes
+    clean).
+  - `mechanism.py` grows `--k` (threaded through `base_and_classes`, `sweep`,
+    `class_onset`, `shrink`; artifact prefix becomes `m35-…-k{k}` for k ≠ 4 —
+    the m33 artifacts are never touched), the class-roster additions
+    (`eq-pair-sqrt7` d² = 7; `eq-pair-2rt1_3` d² = 4/3; `eq-pair-glue`
+    d² = 5/3; `eq-pair-inner` d² = 1/3), the object loaders `heule553` and
+    `trilattice<N>` (bare ℤ[ζ₆] ball, |·|² ≤ N), the clique-triviality guard
+    (on any FIRED verdict: search the fired region for a (k+1)-clique of
+    {1} ∪ D; annotate `clique_trivial: true/false` before any celebration),
+    and the binary re-encode dispatch (2-bit at k = 4, 3-bit at k = 5,
+    reject otherwise).
+* **The prober** `tools/periodic.py` (new, UNTRUSTED like everything in
+  tools/): brick torus SAT over parameters (k, D, m, n, w, h, s) with w, h, s
+  rational; one clause set = properness (δ = 1) + avoidance (δ ∈ D) over the
+  offset window; CaDiCaL backend through the standing `_solve`; every SAT
+  model re-validated IN PYTHON by the same closed-box interval check that
+  generated the clauses (generator/validator decorrelated as separate code
+  paths); artifacts `build/m35-periodic.json` with three-outcome honesty per
+  row and the WEAK-negative caveat in the schema line. Self-tests: the C6
+  red mass control (k = 4 refusals across the whole probed grid), the k = 7
+  D = ∅ green, a planted-avoider round-trip (a hand-built 2-colour
+  1-distance toy on a coarse torus), and a boundary-adversarial control (a
+  pair whose open-cell distance interval excludes δ but whose closed hull
+  includes it must be REJECTED by the conservative check).
+* **Lean rung L1** `Proofs/HadwigerNelson/Instances/HexShell.lean`: a
+  `UDCert 7` at denom 2 (coordinates 0, 1, ζ₆, 1+ζ₆, 2, 2ζ₆ and the sixth
+  ring point 2+... — the closed shell {0} ∪ {ζ₆^a + ζ₆^{a+1}}? fixed at the
+  modeling pass; the six ring points are the sixth roots scaled — exact
+  coordinates from the design script), edges = the 12 unit pairs, P3 = the 6
+  √3 pairs, P4 = the 3 distance-2 pairs; `hexShell_pigeonhole` (k ≤ 6
+  colourings of the augmented graph refuse — `decide` at 5⁷ and 6⁷, or the
+  generic ≤ 6 form the modeling pass prefers), the two plane corollaries
+  (every proper 5-colouring of the plane has a mono pair at distance √3 or
+  distance 2; every proper 6-colouring likewise — hence χ(ℝ²;{1,√3,2}) ≥ 7),
+  through the M34 bridge + `PairsAt` at r = 3 and r = 4, attribution clause
+  fixed NOW: *the clique is elementary and presumably folklore; what is new
+  is the kernel formalization and the two-act seed framing; this compulsion
+  is compound (disjunctive over two distances) and C3 records why that is
+  weaker than any single-class firing.*
+* **Lean rung L3** `Proofs/HadwigerNelson/Brick.lean` + first instance —
+  gated on P5 (the prober exhibits a rational brick 7-colouring) and on a
+  measured elaboration cost: the brick colouring as a plane function, the
+  floor-arithmetic offset-window reduction, the per-offset interval decide,
+  and `Instances/Seven.lean`: **χ(ℝ²) ≤ 7 kernel-checked** — the classical
+  upper half, making the repository hold 5 ≤ χ(ℝ²) ≤ 7 end to end on the
+  standard three axioms. Conditional rungs: L2 (any phase-1 firing → bridge +
+  LRAT at `--colours 5`, the M34 route verbatim), L4 (any k = 6 avoider →
+  a Brick instance = the first certified two-distance upper bound).
+* **Statement-shape anchors (the read-aloud gate's targets)**: the L1 plane
+  corollaries quantify over `(unitDistance ℂ).Coloring (Fin 5)` (and Fin 6)
+  with conclusion `∃ x y, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y`;
+  the L3 statement is `Colorable (unitDistance ℂ) 7` (house model; transfer
+  remark only). No claim ever says "no 6-forcer can use D" from a k = 6
+  avoider — the correct reading is χ(ℝ²;{1}∪D) ≤ 6, which constrains
+  SEVEN-forcers; the stub's phase-2 framing overstated this and §0 corrects
+  it: what rules a mechanism out FOR SIX is only a k = 5 avoider, which is
+  the moonshot rung.
+* **Artifacts**: `build/m35-sweep.json` (phase 1: per (object, centre, class,
+  k) onset rows, `m33-spectrum` schema extended with `k` and
+  `clique_trivial`), `build/m35-periodic.json` (phase 2: per (k, D, lattice
+  params) rows, schema
+  "m35-periodic v1 (plans/M35-k5-transfer.md §0b; brick refusals are
+  resolution-bounded, never period claims"), both with promotion ladders and
+  object-id/exact-string conventions per M33.
+
+## §0c — Registered predictions (bands committed before any solver or Lean run)
+
+* **P1 [high]** — the instrument extensions land with every self-test green
+  same-day; the 3-bit re-encode agrees with one-hot on all planted k = 5
+  gadgets; the k-threading changes no m33 artifact and reproduces the M33
+  hexchunkB2 eq-pair-2 firing at k = 4 unchanged (the regression control).
+* **P2 [medium-high]** — phase 1 all-clean: every single-class onset search at
+  k = 5 on every object–centre pair reads clean-or-empty at full radius
+  within the 600 s cap. Failure branch = any fired verdict: re-encode
+  confirm, clique-triviality guard, shrink to a 1-minimal core, HALT the
+  sweep and report to Kooshi before any further campaign step (a genuine
+  k = 5 class compulsion is the 6-hunt's first concrete object; it must not
+  be buried mid-campaign). Bands: ≤ 12 probes per onset search; single SAT
+  calls at witness scale ≤ 60 s typical.
+* **P3 [high]** — the fan sweep at k = 5 (min_cover, named centres: 510 v0,
+  1581 origin + centre2, fabric origin, hexchunkB2 meta, 553's triangle
+  pivots if cheap) reads min-cover ≤ 3 everywhere; nothing fans.
+* **P4 [medium]** — the calibration probe: bare-lattice trilattice balls at
+  k = 4, eq-pair-2 (C4's SAT-open question). Band: CLEAN at every probed
+  radius (the fabric's non-lattice points carry G16's pigeonhole). A firing
+  would SHARPEN G16 (lattice-borne, not fabric-borne) and is reported as a
+  finding either way.
+* **P5 [medium]** — the prober finds a rational brick 7-colouring (k = 7,
+  D = ∅) at cell scale ≥ 1/4 and period ≤ 8 × 8 cells; L3's instance
+  follows. Failure: reportable finding about the brick family; L3's
+  machinery still lands on a synthetic torus example, the χ ≤ 7 instance
+  waits.
+* **P6 [high, the mass red control]** — every prober row at k = 4 (all D,
+  all parameters) refuses. ONE validated SAT = instrument catastrophe: halt
+  everything, the brick encoding is wrong (it would contradict the kernel).
+* **P7 [medium]** — every prober row at k = 5 (including D = ∅, the χ ≤ 5
+  hunt itself) refuses at every probed resolution; reported as probed
+  ceilings with the weak-negative caveat, never as "no periodic 5-colouring
+  exists".
+* **P8 [low-medium, genuinely open]** — at k = 6, at least one single class
+  in {√3, 2, 4/√3, √7} admits a brick avoider. A find promotes through L4 to
+  the first certified two-distance upper bound and a certified sandwich with
+  M34's lower bounds; none found = the family's probed ceiling, banked
+  honestly. No band on which class; C4 weakly favours d = 2's neighbours
+  ({1,2} has the loosest lattice obstructions) and disfavours √3.
+* **P9 [medium]** — L1 lands same-day (decide at 5⁷ and 6⁷ under
+  `decide +kernel`; the UDCert at denom 2 is trivial next to M34's);
+  axioms exactly the standard three.
+* **P10 [medium]** — L3 (Brick.lean + Seven.lean) lands within the
+  milestone at ≤ 600 lines total with the offset-window table ≤ ~200
+  entries and kernel decides in minutes; failure clause: the floor
+  reduction fights (report the measured shape, land the machinery on the
+  torus example, defer the plane instance to a stub).
+* **P11 [cost]** — whole milestone ≤ 4 desktop-days wall; phase 1 ≤ 1 day
+  (49 onset searches × ≤ 12 probes, thread-pooled); phase 2's SAT rows are
+  seconds each; no single call over the 600 s cap (`unknown ≥ cap` never a
+  claim).
+* **P12 [decision rule]** — IF phase 1 fires anything genuine
+  (non-clique-trivial, re-encode-confirmed): the milestone re-plans around
+  certifying it (L2) and the close hands M36 the 6-programme's first
+  carrier. ELSE IF phase 2 lands any k ≤ 6 avoider: L4 is the headline and
+  the close recommends extending the prober family (finer bricks, hex
+  cells) as M36. ELSE: the close banks L1 + L3 + the ceilings, and
+  recommends either the certified union (demoted stub) or the necessity
+  question (the Frontier's open structural question) as M36 — Kooshi's
+  call, per the standing pattern.
+
+## §0d — Instruments to build or touch
+
+* `tools/rigidity.py`: `class_avoid_binary3` + self-tests (the ONLY edit to
+  the standing encodings; `class_avoid`/`_palette_breaking` are already
+  k-generic and are not touched).
+* `tools/mechanism.py`: `--k` threading, roster additions, loaders
+  (heule553, trilattice), clique guard, re-encode dispatch, m35 artifact
+  prefixes. The m33 controls must still pass unchanged (`--controls` is the
+  regression gate before any m35 run).
+* `tools/periodic.py`: new (C6). Self-tests before any hunt row.
+* `build/m35-design.py` (exists): grows `--emit-hexshell` (the L1 cert JSON
+  in `emit_cert.py`'s format + the two pair lists).
+* `build/m35-campaign.py` (gitignored driver): the phase-1 matrix
+  (object × centre × class × k) thread-pooled at the standing width, caps
+  600 s, resumable per-row artifacts; the phase-2 ladder loops.
+* Lean: `Instances/HexShell.lean` (L1); `Brick.lean` + `Instances/Seven.lean`
+  (L3, gated); `scripts/Axioms.lean` gains the headliners; `Proofs.lean`
+  gains the modules.
+
+## §0e — Costs, machine, discipline
+
+Desktop (32 cores, 128 GB). Builds ONLY through `./scripts/build.sh`; Lean
+iteration via `lake env lean` never concludes green. One heavy JOB at a time;
+the standing WITHIN-tool parallelism rule (threads ≤ cores − 2, RAM-bounded).
+`python3 -u` for background runs, no pipes on task output. Any segfault: HALT
+and report to Kooshi. Every mid-milestone experiment beyond this list
+registers a §0-addendum BEFORE running (the M32/M33/M34 pattern). The
+statement-reading gate runs at close on every headline statement; C1's
+corrected semantics (what a k = 6 avoider does and does not rule out) is part
+of that gate. Controls before belief, red and green, on every new checker —
+the prober's k = 4 mass control is the exemplar. The sweep-halt rule (P2) on
+any genuine firing is a REPORT trigger, not a pause for permission: Kooshi is
+told immediately while certification (L2) proceeds.
