@@ -575,15 +575,39 @@ def _ball_status(T, k, pts, cap):
     return status
 
 
-def shrink(T, k, radius, cap=300.0):
+def _ball_status_pinned(T, k, pts, cap, pin_tri):
+    """Pinned ask (A3a): pin_tri must be the first three of pts, colours 0,1,2 —
+    sound iff the three are pairwise adjacent AND present, which the caller protects."""
+    idx = {c: t for t, c in enumerate(pts)}
+    cl = _ball_clauses(T, k, pts, idx, break_sym=True)
+    for i in range(3):
+        cl.append([idx[pin_tri[i]] * k + i + 1])
+    status, _ = _solve(cl, len(pts) * k, cap)
+    return status
+
+
+def shrink(T, k, radius, cap=300.0, pin=False):
     """1-minimal core of the ball refutation of k colours at scale 1/T. Sound because
-    first-occurrence breaking is colour-invariant. The final core is re-certified: the
-    core itself must be unsat, and every single-vertex deletion must be SAT."""
+    first-occurrence breaking is colour-invariant. With pin=True (M43) the D4 triangle
+    is pinned for solver speed and PROTECTED from deletion; the pinned ask is
+    equivalent to the plain one while the triangle is intact (A3a), so the core is
+    1-minimal relative to the protected three, and the final certification re-asks
+    every verdict. The final core is re-certified: the core itself must be unsat, and
+    every single-vertex deletion must be SAT."""
+    T = F(T)
     bx = int(1.1548 * radius) + 2  # M43: the [-R,R]^2 box CLIPS the hex Q-ball
     pts = [(a, b) for a in range(-bx, bx + 1) for b in range(-bx, bx + 1)
            if Q((a, b)) <= radius * radius]
     pts.sort(key=lambda v: (Q(v), v))
-    st = _ball_status(T, k, pts, cap)
+    protected = set()
+    if pin:
+        tri = triangle_for(band_of(T))
+        protected = set(tri)
+        pts = tri + [p for p in pts if p not in protected]
+        ask = lambda ps: _ball_status_pinned(T, k, ps, cap, tri)
+    else:
+        ask = lambda ps: _ball_status(T, k, ps, cap)
+    st = ask(pts)
     if st != "unsat":
         return {"kind": "core", "T": str(T), "k": k, "radius": radius,
                 "outcome": f"base-{st}", "note": "ball does not refute; nothing to shrink"}
@@ -595,26 +619,47 @@ def shrink(T, k, radius, cap=300.0):
         progress = True
         while progress:
             progress = False
-            order = sorted(cur, key=lambda w: (-Q(w), w))
+            order = sorted((w for w in cur if w not in protected),
+                           key=lambda w: (-Q(w), w))
             i = 0
             while i < len(order):
                 chunk = [v for v in order[i:i + batch] if v in cur]
                 if chunk and len(cur) - len(chunk) >= 1:
                     trial = [w for w in cur if w not in set(chunk)]
-                    if _ball_status(T, k, trial, cap) == "unsat":
+                    if ask(trial) == "unsat":
                         cur = trial
                         progress = progress or batch > 1
                 i += batch
         batch //= 2
-    # certification: core unsat, every deletion sat (per-vertex necessity witnesses)
-    assert _ball_status(T, k, cur, cap) == "unsat"
-    necessity = all(_ball_status(T, k, [w for w in cur if w != v], cap) == "sat"
-                    for v in cur)
+    # protected pin vertices: attempt their deletion UNPINNED (a pin vertex cannot be
+    # deleted under its own pin) — small cores usually decide plain
+    for v in list(protected):
+        if len(cur) > 1:
+            trial = [w for w in cur if w != v]
+            if _ball_status(T, k, trial, cap) == "unsat":
+                cur = trial
+                protected.discard(v)
+    # certification: core unsat, every deletion sat (per-vertex necessity witnesses);
+    # protected members are certified with the UNPINNED ask
+    assert ask(cur) == "unsat"
+
+    def _necessary(v):
+        trial = [w for w in cur if w != v]
+        if v in protected:  # cannot ask under the pin it belongs to
+            return _ball_status(T, k, trial, cap) == "sat"
+        return ask(trial) == "sat"
+
+    necessity = all(_necessary(v) for v in cur)
+    # raw second-encoding attempt on the final core (no break, no pin) — honest verdict
+    idxr = {c: t for t, c in enumerate(cur)}
+    raw, _ = _solve(_ball_clauses(T, k, cur, idxr, break_sym=False),
+                    len(cur) * k, cap * 4)
     orbs = {}
     for v in cur:
         orbs.setdefault(canon(v), []).append(v)
     return {"kind": "core", "T": str(T), "k": k, "radius": radius, "outcome": "core",
-            "n_core": len(cur), "one_minimal": necessity,
+            "n_core": len(cur), "one_minimal": necessity, "pinned_shrink": pin,
+            "raw_unsat_confirmed": raw,
             "core": [list(v) for v in sorted(cur)],
             "orbit_profile": sorted((int(Q(c)), len(vs)) for c, vs in orbs.items()),
             "n_orbits": len(orbs)}
@@ -1372,6 +1417,8 @@ def main():
                     help="derived containment transfers between consecutive bands")
     ap.add_argument("--enc", type=str, default="direct", choices=["direct", "a1"])
     ap.add_argument("--no-pin", action="store_true")
+    ap.add_argument("--pin", action="store_true",
+                    help="pin the D4 triangle in --shrink (M43; protected from deletion)")
     ap.add_argument("--workers", type=int, default=10)
     args = ap.parse_args()
     if args.self_test:
@@ -1424,7 +1471,8 @@ def main():
         cl = max_clique40(F(args.clique))
         print(f"omega(G(1/{args.clique})) = {len(cl)}: {sorted(cl)}")
     elif args.shrink:
-        r = shrink(F(args.shrink[0]), int(args.shrink[1]), int(args.shrink[2]), args.cap)
+        r = shrink(F(args.shrink[0]), int(args.shrink[1]), int(args.shrink[2]), args.cap,
+                   pin=args.pin)
         record40("cores", r)
         print(json.dumps(r, indent=1, default=str))
     elif args.extract:

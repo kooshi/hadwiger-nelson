@@ -413,9 +413,88 @@ family at every scale.
 * The D8 interval-distance bridge is fully subsumed (χ_ε ≥ 7 ∀ε beats every bridge
   corollary we could mint); no novelty claim is made for it, as registered.
 
-## The core and the kernel (P8)
+## The core, the autopsy, and the kernel (P8 — reported UNMET, with the measurement)
 
-*(appended when the shrink lands and the promotion completes)*
+* **The 1-minimal core: 160 vertices, 2,978 edges, 24 point-group orbits, centre-ful**
+  (the 1/6 flank's ω = 3 core was centre-free — the annulus motif does NOT recur),
+  every vertex necessity-witnessed, most orbits partial (11-of-12, 5-of-6: the same
+  broken near-symmetry as the 23-core and de Grey's 122-core). Its edges were
+  **re-derived two independent ways** — the exact interval criterion computed fresh per
+  pair, and the ten-norm filter {36,37,39,43,48,49,52,57,61,63} — 2,978 both, identical
+  pair lists, and the norm filter is exactly sound on this band (every offset of an edge
+  norm is an edge; 114 offsets).
+* **P8's shape prediction was WRONG in both halves it could be scored on** (registered:
+  30–150 vertices, centre-free): the core is 160 and it keeps its centre.
+* **THE AUTOPSY: the 1/7 seven-forcing does NOT factor as pigeonhole × kill.** Act One is
+  free by counting (the closed shell's 7 addresses have all 21 mutual offsets at norms
+  {1,3,4}, none of them edges here, so six colours force a repeat) — but **Act Two does
+  not exist**: on the LARGEST 6-colourable stage (the R = 8 ball, 241 vertices — more
+  material than the whole core), forcing a pair to share a colour is satisfiable at
+  EVERY small non-edge class (norms 1, 3, 4, 7, 9, 12; all decided in under a second),
+  and likewise at R = 5 and R = 7. Equivalently: **zero virtual edges at k = 6 on the
+  largest colourable stage** — the from-above echo of M41's 0/40 flat verdict from below.
+  **This is the falsifier G26 registered and never found in five cores**: the first
+  clique-free forcer in the family that refuses the factorization. The compulsion here is
+  not pair-mediated; it is genuinely global over ~160 vertices — which is what "carried by
+  integrality" had been asserting, now measured as an absence rather than inferred from a
+  relaxation gap. Scope stated honestly: balls centred on the pair up to 241 vertices, the
+  six smallest non-edge classes.
+* **The relaxation collapse extends and deepens**: the certified Hoffman bracket at the
+  coarse flank is **χ ≥ 3.56** (degree 114, λ_min ∈ [−44.4937, −44.4737], converged
+  246,635 boxes) against the truth 7 — below even G\*'s 4.09. Every standard bound is now
+  measured low at the fine tail too.
+* **Kernel promotion: PRICED AND DEFERRED — the registered same-day clause is UNMET, and
+  this is the honest report.** The pinned formula (960 vars, 18,031 clauses) refutes
+  monolithically in **462 s**, so the search is cheap; the *certificate* is not — proof
+  logging passed **196 MB in 90 s** and was killed. Cube-and-conquer works and the kernel
+  side needs no new machinery (the M34 Gadget algebra composes one `ofUnsat` per surviving
+  port pattern): one extra pinned vertex splits 462 s into 249.5 + 31.3 + 0.1 + 0.0 s, and
+  a second splits the 31.3 s branch into 19.5 + 3.9 + 1.3 + 0.0 + 0.0 s. But the budget
+  comparison is decisive, and it is now exact rather than extrapolated: **one MEDIUM cube
+  (the 31 s branch) logs 798,002 LRAT lines / 62 MB** — sixty-three times the ENTIRE
+  122-core certificate (12,578 lines, 7,892 derived clauses) and 3,600× the 23-core's 219.
+  The full depth-1 tree is ~10⁷ lines / ~600 MB. This is an M06-scale certificate build
+  (GB of module data, tens of hours of elaboration), not a same-day step.
+  **Recommendation: do not spend it.** The statement it would certify is (i) conditionally
+  implied by a published theorem [Vor2023], (ii) not a rung toward χ ≥ 6, and (iii) below
+  the standing publication bar. The template stays proven and ready (M42) for a target
+  that earns it.
+
+## The predictions, scored
+
+* **P1 CONFIRMED** — `--bands` reproduced the hand-derived D2 table exactly, including the
+  133/3 double event and both flank class sets.
+* **P2 CONFIRMED** — ω = 3 exhaustively on both flanks, and on every band probed below
+  T² ≈ 67/3 (the collapse arrives EARLIER than D5's uniform bound predicted: ω = 4 persists
+  only to T² ≈ 64/3).
+* **P3 CONFIRMED, and then some** — no six-colouring on any of 7,624 period lattices per
+  flank (index ≤ 96, zero unknown); and the band refuses six OUTRIGHT, which the prediction
+  did not dare. The registered prior (0.2 on six) was built on my own misreading of M39's
+  "balls to 225" (that is 225 VERTICES, radius 8 ≈ 1.14·T — nobody had asked R ≥ 9); the
+  sibling scale law in the same paragraph called it correctly at 1.31·T.
+* **P4 not scored** — the refutation landed before the determinant-difficulty trend
+  mattered.
+* **P5 CONFIRMED** — all ten between-region bands ≥ 7 outright, ω ∈ {3,4}.
+* **P6 never fired** — no k ≤ 6 SAT anywhere; the mass-red k = 4 control green on every
+  sweep.
+* **P7 DELIVERED, and it reframes the milestone** — the literature check found the Exoo
+  conjecture PROVEN (Voronov), which conditionally forces ≥ 7 on the entire family.
+* **P8 WRONG on shape, UNMET on the same-day promotion** — reported above with the numbers.
+* **P9 CONFIRMED emphatically** — the pin is worth ≥ 42× on the flank balls (57 s vs
+  2,400 s cap) and 11.5× on the small decided control; the a1-form agreed with the direct
+  ask wherever both decided (one SAT row, two UNSAT rows).
+
+## What was NOT done (honesty ledger)
+
+* **Twelve deep-tail bands remain honestly unknown at cap** (k = 6, cap 2,400 s, R ≈ 1.9·T):
+  T² ∈ (163/3, 169/3), (175/3, 181/3), and ten bands above 199/3. They are unknown, not
+  refuted, and the transfer closure adds nothing (deep-tail bands are not nested — each
+  threshold both adds and drops classes, so the free-lift lever only worked at the flank
+  pair's pure arrival).
+* The k = 8 question at the deep pocket is untouched (M40's χ ∈ [8,16] stands).
+* No kernel work landed this milestone; nothing is claimed kernel-side.
+* [Vor2023] and [Parts2023] are external preprints, unverified by this project's standards;
+  every consequence drawn from them is labelled conditional.
 
 ---
 
