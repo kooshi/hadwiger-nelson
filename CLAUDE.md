@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M42, 2026-08-12.**
+**Last updated: M43, 2026-08-12.**
 
 ### Where the problem stands
 
@@ -585,6 +585,46 @@ gap law (G24) is now kernel-checked in its forcing half at four windows; what re
 measured-only is the deep pocket's χ ≥ 8 and the fine-tail ω story. Palette pin
 re-measured at k = 6: 240 vs 38,528 LRAT lines, 160×.
 
+M43 went to the sharpest open scale and closed it — and the campaign's most important
+finding is not the closure but what the autopsy could not find. **χ(G(p)) = 7 exactly on
+both bands flanking `p = 1/7`**, the last scale in the family where six colours were
+undecided in either direction. The coarse flank (`T² ∈ (139/3, 49)`, never probed by any
+earlier milestone — M39/M40's "p = 1/7" rows all attach to the FINE flank's graph) refuses
+six **outright**: nine independent ball radii, minimum `R* = 9` at 301 vertices, the
+refusal re-confirmed by the deleted-centre encoding with different symmetry breaking and no
+pin; the fine flank follows by edge-set inclusion, and M39's 24 × 24 seven-colouring
+descends to both, so seven is exact on both. Neither flank admits a periodic six-colouring
+of index ≤ 96 (**7,624 period lattices each**, exhaustive over Hermite normal forms, zero
+unknown, mass-red control green). The censuses extended the ≥ 7 floor over ten more bands
+between `p = 0.2236` and `1/7` and nine in the deep tail down to `p ≈ 0.109`, with ω = 3
+everywhere below `T² ≈ 64/3` — twelve deep-tail bands are recorded as honest unknowns at
+cap, not as refusals. **The autopsy is the finding: the 1/7 seven-forcing does NOT factor
+as pigeonhole × kill.** Act One is free by counting (the closed shell's seven addresses
+have all 21 mutual offsets at norms {1,3,4}, none of them edges at this scale, so six
+colours force a repeat) — but Act Two does not exist: forcing such a pair to share a colour
+stays satisfiable on the R = 8 stage's 241 vertices, *more material than the 160-vertex
+core that refutes outright*, and the same at every small non-edge class (norms 1,3,4,7,9,12,
+all decided in under a second). **Zero virtual edges at k = 6** — the from-above echo of
+M41's flat table from below, and the falsifier G26 registered and never found in five
+cores. The compulsion is not pair-mediated; it is global over 160 vertices, which is what
+"integrality-carried" had asserted and is now measured as an absence rather than inferred
+from a relaxation gap (the certified Hoffman bracket at the flank reads **3.56 against the
+truth 7** — below even G\*'s 4.09). The registered literature check delivered the
+milestone's reframing: **Voronov (arXiv:2304.10163) has PROVEN Exoo's conjecture** — every
+closed interval `[1−ε, 1+ε]` of forbidden distances needs ≥ 7 colours at arbitrary ε > 0 —
+and a two-line gap argument over the finitely many offset windows near 1 turns that into
+**χ(G(p)) ≥ 7 for the entire cell family, every band, all the way down** (conditional on an
+external preprint we have not verified). So the from-above door is closed twice over, G24's
+"why is every band ≥ 7" has a conditional answer, and by compactness every band owns a
+finite refuting ball — ours are the exact, finite, kernel-promotable certificates of a fact
+the continuum proof does not produce. Kernel promotion is **priced and deliberately
+declined**: the search is cheap (462 s monolithic; cube-and-conquer works and needs no new
+Lean machinery) but the certificate is M06-scale — one medium cube logs **798,002 LRAT
+lines, sixty-three times the entire 122-core certificate** — for a statement that is
+conditionally implied by published work, is not a rung toward six, and sits below the
+publication bar. The registered same-day promotion clause is reported UNMET with its
+measurement.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -635,6 +675,8 @@ re-measured at k = 6: 240 vs 38,528 LRAT lines, 160×.
 | 39 | **The gap atlas, kernel side: χ = 7 with ω = 4, and the coset mechanism dead below the window** (M42, same day as M41; all on axioms exactly the standard three): the sweep engine's existence forms — `Coset.exists_unit_pair_ivt` and **`exists_unit_pair_corner`** (pushing along a deep hole sweeps the realizable norm from `Q` to `Q + 2·holeF + 4/3` — the exact-hexagon window beyond M38's inscribed disc, whose corner reaches ARE the D1 band boundaries: norm 4 needs `p² > 3/28` exactly, norm 1 `p² > 3/13` exactly), with `norm_one_hole`/`norm_four_hole` classifiers; **`seven_le_card_shell4`** (the doubled shell forces seven on `3/28 < p² < 1/9` — the M = 4 window M39 §0e priced as exhausted, a G21 instance corrected in the kernel); **`twelve_le_card_of_cell_constant`** (TWELVE on `3/13 < p² < 1/4` via the sheared trapezoid, the local pessimum below the classical scale); **`no_coset_seven_on_gap`** + `exists_kernel_vector` (every nonzero hom `ℤ×ℤ →+ ℤ/7` kills a vector of norm {3,4,7,9} — a 14-candidate decide — so no coset seven-colouring exists on the G\* band); and the crown, **`core23_not_colorable_six`** (`Instances/Core23/`): the 23-address G\* core — graph DERIVED from the addresses by the norm filter, 143 edges, never transcribed — refuses six colours through the M05 LRAT chain (219 derived clauses, 2 segments; the Gadget palette closure over the 4-clique ports; the emitter chain's second non-4 instance), with red control **`core23_colorable_seven`** (verified 7-colouring, seventh colour used) pinning **χ(core) = 7 exactly at ω = 4 — the first kernel-checked `χ ≥ ω + 3` of the programme** — and plane corollary **`Coset.seven_le_card_gap`**: any cell-constant colouring at `3/16 < p² < 3/13` uses at least seven colours, the count routed through the refutation because no clique can carry it. Registered decide route (P4) died on a Lean instance-synthesis wall (staged DFS-shaped ∀, 5,391 nodes, unification failure in the Decidable resolvers at depth ≥ 4) and the fallback fired as registered. Controls: three planted mutations seen red (corrupted colouring refused, wrong pin pattern refuses to bridge, clique gadgets alone leave exactly the one survivor the certificate kills); palette pin at k = 6 re-measured 160× (240 vs 38,528 LRAT lines). | `Coset.lean` §GapBands, `Instances/Core23/{Edges,Cnf/*}.lean`, `Instances/Core23.lean`, `plans/M42-gap-kernel.md` §R | M42 |
 
 | 37 | **The gap atlas: below the classical window the cell family forces seven-plus without cliques** (M40, tools-side on exact arithmetic; kernel promotion stubbed as M42): the family `G(p)` is **one fixed graph per band** between rational `T²` thresholds keyed by point-group offset class (distinct classes share a norm with different thresholds, first at norm 49 — planted check green); the corrected exhaustive census — M39's was box- and cap-clipped — gives **χ = 9 exactly** on `p ∈ (1/2, 0.6547)` (the sheared 3×3 block 9-clique + k = 9 SAT), **χ = 12 exactly** on `p ∈ (0.4804, 1/2)` (the 12-point trapezoid clique + the index-12 coset colouring), and the **M = 4 scaled shell** as a real 7-clique band on `(0.3273, 1/3)` (M39 §0e's exhaustion claim was derived with the inscribed-disc sufficient window — a G21 instance); **every band down to `p = 0.2236` is ≥ 7 outright** (ball refutations, no periodicity) while ω collapses to 3–5: **G\*** (`(0.4330, 0.4804)`, norms {3,4,7,9}) has ω = 4, χ = 7, and a **23-vertex 1-minimal core** with every necessity witness held; the **deep pocket** (`(1/3, 0.3464)`) has ω = 4, **χ ≥ 8 outright** (91-vertex k = 7 refusal; 53-vertex core); the `p = 1/6` flank bands have **ω = 3 with χ = 7** (gap FOUR, re-proven without the boundary class — every integer T is a threshold scale, so M39's integer rows were closed-criterion graphs); **no coset seven-colouring exists on G\* or the 1/6/1/7 bands** (all eight index-7 sublattices contain an edge, explicit witnesses) — the witnesses found are non-uniform with trivial stabilizers; certified Hoffman brackets collapse to ≈ 4.1 at the gap bands (truth 7–8) and α(G\*, 12×12) = 21 gives χ_f ≤ 48/7 — the seven-forcing is integrality-carried; **the sharpest open scale is `p = 1/7`**. Instruments banked: class-keyed band decomposition, exhaustive clique search, batched 1-minimal shrink with necessity certificates, colouring-anatomy (stabilizer/coset tests), exact torus α (Sinz counter), certified spectral brackets. Explorer `build/m40-spectrum.html`. | `tools/celllat.py` (M40 suite), `build/m40-chiomega.json`, `plans/M40-chi-omega-hunt.md` §R | M40 |
+
+| 40 | **The fine tail closed, and a forcing that does not factor** (M43, tools-side on exact arithmetic; laptop, one day): **χ(G(p)) = 7 exactly on both bands flanking `p = 1/7`** — the coarse flank `T² ∈ (139/3, 49)` (11 edge classes, degree 114, **never probed before**: every earlier "p = 1/7" row keys to the FINE flank) refuses six OUTRIGHT at nine radii, minimum `R* = 9` / 301 vertices, double-encoded (the deleted-centre A1 form, unpinned, agrees), with the fine flank following by inclusion and M39's 24 × 24 seven descending to both; **no periodic six-colouring of index ≤ 96 on either flank** (7,624 Hermite-normal-form period lattices each, zero unknown, mass-red green). Nineteen further bands floored ≥ 7 outright (ten between `p = 0.2236` and `1/7`, nine in the deep tail to `p ≈ 0.109`), ω = 3 throughout below `T² ≈ 64/3`, twelve deep-tail bands honestly unknown at cap. **The autopsy: the forcing does NOT factor as pigeonhole × kill** — Act One free by counting (7 shell cells, mutual norms {1,3,4}, all non-edges), Act Two absent (every forced-equality at every small non-edge class SAT on 241 vertices, more material than the 160-vertex 1-minimal core; **zero virtual edges at k = 6**) — G26's registered falsifier, found; the certified Hoffman bracket reads 3.56 against truth 7. The **160-vertex core** (2,978 edges, 24 orbits, centre-ful, edges re-derived two independent ways, every necessity witness held) is the family's largest named carrier. Promotion priced and declined with numbers (one medium cube = 798,002 LRAT lines = 63× the whole 122-core certificate). Conditional on **Voronov's proof of the Exoo conjecture** (arXiv:2304.10163, external, unverified here): **χ(G(p)) ≥ 7 for the whole family at every scale**, by a gap argument over the offset windows near 1 — so the from-above six-door is shut on both our own certificate and the literature's. | `tools/celllat.py` (M43 suite: `ball43`, `hnf_colour`, `skew_sweep`, `m43_census`, `transfers43`, `band_of`/`canonical_T`), `build/m43-finetail.json`, `plans/M43-fine-tail.md` §R | M43 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -690,28 +732,43 @@ forcing half. The certificate template for any fine-tail refutation is now
 built and measured — an LRAT chain at any k, minutes end to end — which is
 exactly what path 1 consumes.)*
 
-1. **M43 — the fine-tail campaign** (`plans/M43-fine-tail.md`, stubbed at
-   this close) — the from-above 6-push at the named open scales: p = 1/7
-   first (ω = 3; balls to 225 stay six-colourable, tori refuse six only to
-   period 36 — undecided BOTH ways, and any six-colouring of any band IS
-   χ(ℝ²) ≤ 6), then the unprobed tail below p = 0.2236; a k = 6 ball
-   refutation at 1/7 would close the band outright and promote same-day
-   through the M42 template. The interval-distance bridge
-   (χ_[1−ε,1+ε] ≥ χ(G(p)) at ε = 2p/√3) priced against the Exoo
-   literature before any novelty claim.
-2. **The from-below gadget hunt, continued** — M41's reduction stands (ONE
-   k = 5 forced-distinct gadget at √3 or 2 closes χ ≥ 6): the deferred
-   probes are outer-shell-anchored gadget asks, detuned (non-crystal)
-   tilings, and the gen-2 k = 5 class sweep at depth (`plans/M41-k5-gradient.md`
-   §R carries them); reopens whenever a from-above find or a new composition
-   idea supplies structure.
+*(M43 CLOSED 2026-08-12, the same day again — laptop, 12 cores. The 1/7 flanks are
+χ = 7 exactly, the fine tail is floored ≥ 7 wherever a verdict landed, the forcing is
+measured NOT to factor (G28 minted, G26 demoted to its objects), and the literature
+check found the from-above direction closed by a proven theorem. **The from-above route
+is finished as a source of new mathematics** — that is the ranking's headline, and the
+alternation now points, without a counterweight, below.)*
+
+1. **M44 — the from-below gadget hunt, promoted to the front** — M41's reduction is
+   the only live route to new mathematics in this repository: **ONE finite
+   unit-distance graph forcing two points at distance √3 or 2 to differ in every
+   proper 5-colouring closes χ(ℝ²) ≥ 6** (nine shell copies + the kernel's own
+   `hexShell_pigeonhole` do the rest, M34 composition genre). The deferred probes are
+   named in `plans/M41-k5-gradient.md` §R: outer-shell-anchored gadget asks, detuned
+   (non-crystal) tilings, the gen-2 k = 5 class sweep at depth. **What M43 adds to the
+   design brief, and it is not encouraging news to ignore**: G28 says a clique-free
+   forcer need not carry any pair-level compulsion at all, so a virtual-edge meter
+   reading zero does NOT imply the object is far from forcing — the meters that have
+   read flat everywhere (G10, G17, G27, and now k = 6 from above) may be measuring an
+   arity the mechanism does not live at. A gadget hunt should therefore ask class- and
+   coverage-order questions, not only pair questions.
+2. **The fine tail's residue, if anyone wants it** — twelve deep-tail bands are honest
+   unknowns at cap (`plans/M43-fine-tail.md` §R lists them); each is a day of desktop
+   solver time for a verdict that is conditionally known already. Low value, priced,
+   and explicitly NOT recommended.
 3. **The certified union** (`plans/M35-certified-union.md`) — parked:
    consolidation with bounded novelty; reopens on a find or the write-up
    trigger's "maybe" clause.
 4. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`).
 5. **Richer cell families / the instrument audit** — unchanged, parked; the
-   hexagon module stays priced and unneeded.
+   hexagon module stays priced and unneeded. The cell family itself is now
+   **closed as a research direction** (M43 + G24's conditional explanation):
+   further scales cost solver time and cannot produce a six.
+6. **The 1/7 core's kernel certificate** — priced and DECLINED at M43 (M06-scale,
+   ~10⁷ LRAT lines for a statement conditionally implied by published work). The
+   M42 template stays proven and ready for a target that earns it; this is not
+   one. Reopens only if the certificate machinery itself becomes the product.
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)
 
@@ -1186,6 +1243,45 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   band (χ(ℝ²) ≤ 6, the standing jackpot clause); or a relaxation that DOES see the
   gap — any polynomial certificate matching the ball refutations would be a new
   lower-bound instrument for the whole programme.*
+  **EXTENDED and CONDITIONALLY EXPLAINED at M43**: the ≥ 7 floor now runs unbroken from
+  the classical window to `p ≈ 0.109` wherever a verdict landed (19 further bands
+  outright; **χ = 7 exactly at both 1/7 flanks**, the last undecided scale), the Hoffman
+  collapse deepens to 3.56 at 1/7 — and the mechanism has an external explanation:
+  **conditional on Voronov's proof of the Exoo conjecture (arXiv:2304.10163 — ≥ 7 colours
+  for every forbidden-distance interval `[1−ε, 1+ε]`, any ε > 0), χ(G(p)) ≥ 7 for the
+  ENTIRE family at every scale.** The derivation is two lines: a six-colouring of `G(p)`
+  with `p < √3/2` would be a plane colouring avoiding a whole closed interval around 1
+  (intra-cell distances stay below 1; the finitely many cross-cell offset windows near 1
+  are closed sets missing 1, so a positive gap exists), which that theorem forbids. So the
+  band-by-band sevens are not a coincidence of scales but a shadow of an interval theorem —
+  and by de Bruijn–Erdős compactness EVERY band owns a finite refuting ball, making our
+  refutations certificates of a guaranteed fact rather than discoveries of a contingent one.
+  *The conditionality is real and stays flagged: [Vor2023] is an external preprint this
+  project has not verified. The unconditional content remains ours, band by band.*
+* **G28 — The fine-tail forcing does not factor: pigeonhole × kill is NOT universal.**
+  (M43, the 1/7 autopsy; the falsifier G26 registered and never found in five cores.) At
+  the coarse 1/7 flank Act One is *free* — the closed shell's seven addresses have all 21
+  mutual offsets at norms {1,3,4}, none of them edges at that scale, so six colours force
+  a repeat with no argument at all — and **Act Two does not exist**: forcing any such pair
+  to share a colour remains satisfiable on 241 vertices, *more material than the
+  160-vertex core that refutes six outright*, and the same holds at every small non-edge
+  class (norms 1, 3, 4, 7, 9, 12, each decided in under a second). Equivalently there are
+  **zero virtual edges at k = 6** on the largest colourable stage — the from-above mirror
+  of M41's 0/40 flat verdict from below. **[measured: `build/m43-finetail.json`,
+  `kind: factorization-autopsy`; scope — balls centred on the pair up to 241 vertices, the
+  six smallest non-edge classes]** *Consequences. (a) G26's universality reading is
+  demoted to a statement about the objects it was measured on: five cores factored, the
+  sixth does not, and the sixth is the one with the plane's own clique number at the
+  finest scale examined. (b) "Integrality-carried" (G24) now has a positive measurement
+  behind it rather than an inference from a relaxation gap: the compulsion is not
+  pair-mediated at any arity a pair meter can see, so it is global over ~160 vertices by
+  exclusion, not by default. (c) The certification consequence is direct and was the
+  milestone's practical verdict — no small gadget exists to certify, so the certificate
+  cost tracks the whole object (one cube of the split proof logs 63× the entire 122-core
+  certificate). Falsifiers: a kill gadget at a class or region not swept — a non-ball
+  region, a larger class, or a forced-equality between cells at an EDGE-adjacent
+  configuration; or a factorization at a different fine band, which would make 1/7 the
+  exception rather than the fine tail's rule.*
 * **G25 — The forcing ladder is recursive, and the levels read like protein
   structure.** (2026-08-12; seeded by Kooshi's peer's analogy; the full pass is
   `plans/SHAPES-OF-SIX.md`, the standing shape-space both directions cite.) The
