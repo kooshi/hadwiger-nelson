@@ -500,6 +500,53 @@ theorem arityFloor_le_of_degree {v : V} (S : Fin k → V)
 theorem fan_iff_forall_compels {v : V} {Q : List V} : Fan G k v Q ↔ sorry := sorry
 ```
 
+### §11b. What the obligation-modeling pass settled
+
+**The `ite` in `compels_two` was incidental structure — the case belongs in the hypothesis.** An
+`if p 0 = p 1 then … else …` must be split by every prover and every consumer alike; the caller
+always already knows which case they are in. Two theorems, each directly usable:
+
+```lean
+theorem compels_two_eq (hS : Function.Injective S) (h : p 0 = p 1) :
+    Compels G k S p ↔ ¬ G.Adj (S 0) (S 1) ∧ Separated G k (S 0) (S 1)
+theorem compels_two_ne (hS : Function.Injective S) (h : p 0 ≠ p 1) :
+    Compels G k S p ↔ Forces G k (S 0) (S 1)
+```
+
+At `m = 2`, `SamePattern` has content only at the index pair `(0,1)` (`Fin.forall_fin_two`), so both
+reduce to one quantifier over colourings. In the `≠` case `PartialColoring`'s second conjunct is
+*vacuous* — `p i = p j` only at `i = j`, where it is looplessness — which is why that side is a bare
+`Forces` with no adjacency condition.
+
+**`realizes_iff_extends` — the route, and it is real work but bounded (~35 lines).** Build
+`e : {c // ∃ i, C (S i) = c} ≃ {c // ∃ i, p i = c}` by `Equiv.ofBijective` on
+`fun c => ⟨p c.2.choose, _⟩`; injectivity and surjectivity are each two lines from `SamePattern`,
+and there is **no well-definedness obligation** because `Exists.choose` is a function of the proof
+term. Then `Equiv.extendSubtype` (`Mathlib/Logic/Equiv/Fintype.lean`, `noncomputable abbrev`, which
+is fine inside a proof) extends it to `σ : Equiv.Perm (Fin k)`, with
+`extendSubtype_apply_of_mem` the rewrite; `σ ∘ C` is proper because `σ` is injective. The
+decidability side-conditions come free from `Fintype.decidableExistsFintype` over `Fin m`.
+*Bonus discovered while designing it:* the `decide` bridge is cheaper stated through the
+`extends` form than through `SamePattern`, since it drops the `∀ i j` double loop.
+
+**`arityFloor` plumbing mirrors `chromaticNumber`'s own lemma block** (`le_chromaticNumber_iff_colorable`
+is the model): `arityFloor_le_of_compels` is `iInf₂_le`, and the two "not below" facts are `le_iInf₂`.
+The `m = 0` and `m = 1` cases are the whole content: at both, `SamePattern` is vacuous, so `Realizes`
+collapses to `G.Colorable k`. That single observation gives `arityFloor_eq_zero_iff` **and**
+`two_le_arityFloor` together.
+
+**D4 is six lines** and its crux is one citation: `i ↦ C (S i)` is injective `Fin k → Fin k`, so
+`Finite.injective_iff_surjective` makes it surjective, so some neighbour wears `v`'s own colour.
+
+**The kernel-cost risk, named with its fallback.** The planted control's flatness statement
+quantifies over `S : Fin 2 → Fin 5`, and deciding that needs `Pi.fintype`, whose `Finset.pi` the
+kernel must *build* — M04's measured trap ("data the kernel must build costs O(its whole size) per
+access"). The inner `∃ f : Fin 5 → Fin 3` is only 243 elements and is fine; the outer one is
+avoidable. **Design:** state the workhorse over `Fin 5 × Fin 5` (a cheap product `Fintype`), then
+derive the `S`-quantified form with `Fin.forall_fin_two`, which destructures `S` into its two values
+with no function enumeration at all. If even that is slow, fall back to routing through
+`compels_two_eq`/`compels_two_ne`, which reduces each side to 25 × 243 kernel steps.
+
 ```lean
 -- Proofs/HadwigerNelson/Instances/AritySpec.lean — the models, because a ∀ over an empty domain
 -- proves everything.  All through `realizes_iff_exists`, then `simp only [edgeGraph_adj]; decide`.
