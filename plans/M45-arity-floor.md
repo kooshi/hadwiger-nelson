@@ -1,10 +1,15 @@
 # M45 — The arity floor: what order does the colour compulsion actually live at?
 #
-# STUB, rewritten 2026-08-13 at the M44 close to be SELF-CONTAINED. A fresh session with zero
-# conversation memory should be able to subplan and run this milestone from this file alone.
-# Everything needed — the mission, the evidence both ways, the objects with their addresses on
-# disk, the instruments, the discipline, the failure clauses — is written out here rather than
-# cited. Cross-references are given as *addresses to verify*, never as the carrier of meaning.
+# SUBPLAN, written 2026-08-13 (desktop, 32 cores, 125 GB) over the self-contained stub of
+# the same date. §§1–5 are the stub's motivation, kept because they are the zero-context frame a
+# fresh session needs. §§6 onward are the registered subplan.
+#
+# READING RULE FOR THIS FILE. Three kinds of statement, never mixed:
+#   [derived]    worked out on paper before any instrument ran; true or false independent of us.
+#   [measured]   an instrument produced it. Cost measurements taken DURING subplanning are marked
+#                `[measured @subplan]` and are explicitly NOT registered predictions — you cannot
+#                predict what you have already seen.
+#   [registered] a prediction with a prior, committed before the campaign runs.
 
 ---
 
@@ -45,10 +50,7 @@ Two directions have been worked, and one of them just closed completely.
 `G(p)`, one per grid scale `p`, whose colourings are exactly the plane colourings constant on the
 cells of a triangular grid at that scale. Milestones M37–M44 established: every scale needs at
 least 7 colours; no lattice-based colouring can ever beat 7; and — at M44 — the family cannot even
-supply *witnesses* for a 7-forcing argument, because its objects' "distance from being a genuine
-unit-distance graph" is locked to the same parameter as their size, and the two pull opposite
-ways. **The from-above family is closed in both directions.** It is not a route to anything
-further.
+supply *witnesses* for a 7-forcing argument. **The from-above family is closed in both directions.**
 
 **From below** (can we *prove* 6 is needed?). Four separate campaigns (M31, M32, M35, M41) asked
 "is anything forced?" on every object this project holds, and every meter read **exactly zero**.
@@ -58,8 +60,7 @@ any composed object, at four colours or five.
 **M45 asks whether that zero was ever a fact about the world.** Every one of those meters asks a
 question about a **pair** of points. If the mechanism lives among three or more points at once, a
 pair meter reads zero on an object that provably forces — and would look exactly like the four
-campaigns we ran. That is not speculation: at M43 we *found* such an object, and we have it on
-disk.
+campaigns we ran.
 
 ---
 
@@ -70,270 +71,447 @@ disk.
 
 An *arity-2* question: "can these two vertices take the same colour in some proper colouring?" If
 no, they are compelled to differ (a "virtual edge"); if they cannot differ, they are compelled to
-agree (a "forced pair"). An *arity-3* question: "can these three vertices all take the same
-colour? can they be rainbow?" And so on. Each is one satisfiability call with the pattern pinned.
-
-The answer we are hunting is a number: the smallest arity at which *anything* is compelled. Today
-we know it is **> 2** on at least one certified object. We do not know whether it is 3, 4, or only
-the whole object.
+agree (a "forced pair"). An *arity-3* question asks the same of the five ways three vertices can
+share colours. Each is one satisfiability call with the pattern pinned.
 
 ---
 
 ## §4. The four independent strands that point above pair order
 
-Stated in full, because they are the entire motivation and each was reached by a different route.
-
-1. **Rigidity is empty above the forcing level (from de Grey's graph, M30).** The 1581-point
-   5-chromatic witness, examined at five colours, has **zero** forced pairs and **zero** virtual
-   edges, settled exactly — not capped, not sampled. The same for a certified 4-chromatic object
-   at four colours. Yet one rung *below* the top, at four colours, a 791-point sub-object has
-   exactly six forced pairs. Conclusion drawn at the time: a geometric argument for χ ≥ 5 "must
-   live at triple order or higher".
+1. **Rigidity is empty above the forcing level (M30).** De Grey's 1581-point 5-chromatic witness,
+   examined at five colours, has **zero** forced pairs and **zero** virtual edges, settled exactly.
+   Yet one rung below, at four colours, a 791-point sub-object has exactly six forced pairs.
 
 2. **Coverage compulsion is a k-set property, structurally invisible to pair sweeps (M32/M33).**
-   The mechanism that delivers each new colour is *confinement at a centre*: every proper
-   colouring of the surrounding web puts all `k` colours on a vertex's neighbourhood, so that
-   vertex needs the `(k+1)`-th. That is a statement about a whole `k`-element set of colours at
-   once. It was measured true at the centre of a 510-point witness. A pair meter cannot see it —
-   the two facts (zero forced pairs, confinement at every centre) are the same situation viewed at
-   two different arities.
+   The mechanism that delivers each new colour is *confinement at a centre*: every proper colouring
+   of the surrounding web puts all `k` colours on a vertex's neighbourhood. That is a statement
+   about a whole `k`-element set at once, and a pair meter cannot see it.
 
-3. **The ladder below the top rung is made of small, nameable objects (M33).** Where the pair
-   meters read zero globally, the *sub-rung* compulsions all have small carriers: a 49-vertex web
-   forcing three colours onto a circle, a 122-vertex carrier for a distance-2 compulsion. The
-   mechanism was never global; it was disjunctive, and living at an arity nobody was asking.
+3. **The ladder below the top rung is made of small, nameable objects (M33).** A 49-vertex web
+   forcing three colours onto a circle; a 122-vertex carrier for a distance-2 compulsion.
 
-4. **The decisive one (M43, "G28").** At the finest scale examined, the graph `G(p)` for
-   `p ≈ 1/7` **provably needs seven colours** — refuted outright at six on a 301-vertex ball, with
-   a 160-vertex minimal core. Its compulsion was then hunted at pair order and **does not exist**:
-   forcing any two vertices to share a colour remains satisfiable on 241 vertices — *more material
-   than the 160-vertex core that refutes outright* — and the same at every small non-edge class
-   (norms 1, 3, 4, 7, 9, 12, each decided in under a second). Equivalently: **zero virtual edges
-   at six colours on the largest colourable stage.** The compulsion is not pair-mediated, on an
-   object that certainly forces.
+4. **The decisive one (M43, "G28").** The graph `G(p)` for `p ≈ 1/7` **provably needs seven
+   colours** — refuted outright at six on a 301-vertex ball, with a 160-vertex minimal core. Its
+   compulsion was hunted at pair order and **does not exist**: forcing any two vertices to share a
+   colour remains satisfiable on 241 vertices, and the same at every small non-edge class.
 
-**The synthesis, and the reason this milestone exists:** finding #4 was written up as a fact about
-the object ("the forcing does not factor; it is global over 160 vertices"). It may instead be a
-fact about the instrument, because **only arity-2 questions were asked**. The distinction is the
-whole content of M45.
+**The synthesis:** finding #4 was written up as a fact about the object ("the forcing does not
+factor; it is global over 160 vertices"). It may instead be a fact about the instrument, because
+**only arity-2 questions were asked**.
 
 ---
 
-## §5. The calibrated test bed — the property no previous campaign had
+## §5. The calibrated test bed
 
-Every prior "is anything forced?" campaign ran on objects whose forcing status was unknown, or
-whose forcing was the thing being hunted. A zero reading there is uninterpretable: no mechanism,
-or no instrument? Here both objects have **certified** answers, so a zero is informative:
+Both objects have **certified** answers, so a zero reading is informative rather than ambiguous.
 
 **Object A — the fine-tail core.** 160 vertices, 2,978 edges, 24 point-group orbits, centre
-included, 1-minimal with every vertex's necessity witnessed, edges re-derived two independent
-ways. It **refuses six colours**, and its pair meters are known to read exactly zero.
-* On disk: `build/m43-finetail.json`, key `cores`, the entry with `"T": "48/7"` and `"k": 6`.
-  The field `core` is the list of lattice addresses; `orbit_profile` and `n_orbits` are recorded.
-* Band: `T² ∈ (139/3, 49)`. Edge norms `{36,37,39,43,48,49,52,57,61,63}`. Degree 114 in the
-  ambient graph. Minimal refuting ball radius `R* = 9`, at 301 vertices (M44, measured by
-  exhaustive scan, not chosen). Symmetry-breaking pin triangle `[(0,0), (0,6), (-6,6)]`.
+included, 1-minimal. It **refuses six colours**, and its pair meters are known to read zero.
+On disk: `build/m43-finetail.json`, key `cores`, entry `"T": "48/7"`, `"k": 6`. Band
+`T² ∈ (139/3, 49)`; edge norms `{36,37,39,43,48,49,52,57,61,63}`; ambient degree 114;
+`R* = 9` at 301 vertices; pin triangle `[(0,0), (0,6), (-6,6)]`.
 
 **Object B — the gap-band core, kernel-certified.** 23 vertices, 143 edges, edge norms `{3,4,7,9}`,
-clique number 4, **chromatic number exactly 7 — kernel-checked** (`Proofs/HadwigerNelson/
-Instances/Core23/`, refutation by a replayed proof certificate; the red control is a verified
-7-colouring). It is small enough that *every* question can be answered exhaustively, and it is the
-programme's first certified object with chromatic number three above its clique number.
-* On disk: `build/m40-chiomega.json`, `cores`, entry `"T": "13/6"`, `"k": 6`. `R* = 3` at 37
-  vertices. It is known (M41) to **factor** as pigeonhole × kill, unlike Object A — so the two
-  objects differ in exactly the property under study, which makes B the positive control.
+clique number 4, **chromatic number exactly 7 — kernel-checked** (`Instances/Core23/`). Small
+enough that *every* question can be answered exhaustively. On disk: `build/m40-chiomega.json`,
+entry `"T": "13/6"`, `"k": 6`. `R* = 3` at 37 vertices. It is known (M41) to **factor** as
+pigeonhole × kill, unlike Object A.
 
-**Three more cores are on disk and belong in the sweep if affordable:** `T = 353/120` (28
-vertices), `T = 467/120` (66), `T = 299/50` (117), all `k = 6`, all in `build/m40-chiomega.json`.
+**Three more cores on disk**, all `k = 6`, in `build/m40-chiomega.json`: `T = 353/120` (28
+vertices), `T = 467/120` (66), `T = 299/50` (117).
 
 ---
 
-## §6. The instruments that already exist (verify each before use)
+## §6. §0a — The object, derived before any instrument
 
-* **`tools/rigidity.py`** — the meters.
-  * `triple_query(n, edges, k, triple, mode)` with `mode ∈ {"mono", "rainbow"}`: pins three
-    vertices to one colour, or to three distinct colours, and asks satisfiability. **`unsat` at
-    `mono` = a compelled non-monochromatic triple** — a compulsion that may act through no edge.
-    It exists and was exercised at M32 on **140 targeted triples at four colours**; it has never
-    been run as a *systematic* sweep, and never on a known-forcing object.
-  * The class-avoidance layer is **already arity-generic**: its input validator accepts tuples of
-    any size ≥ 2. This is the piece that makes an arity-3 or arity-4 sweep a driver change rather
-    than an instrument build.
-  * `coverage_query` / `min_cover` — the k-set question of strand #2. Built at M32, never aimed at
-    these objects.
-* **`tools/mechanism.py`** — the class-avoidance campaign driver (the instrument that found the
-  distance-2 compulsion nobody predicted).
-* **`tools/celllat.py`** — the cell-family engine. `edge_set40(T)` (the exact edge offsets at a
-  scale), `ball43(T, k, R, cap, pin, enc)` (a refutation probe; `enc="a1"` is a second, independent
-  encoding), `shrink(...)` (1-minimal cores with necessity witnesses), `Q(v)` (the norm form),
-  `rot6`/`refl`/`orbit`/`canon` (the point group), `bands`/`band_of`/`canonical_T`.
-* **`tools/m44.py`** — `load_cores()` (every recorded `k = 6` core, deduplicated) and
-  `core_edges(T, pts)` (edges re-derived **two independent ways** — exact interval criterion and
-  norm filter — which must agree, and the function reports it if they do not). Reuse both.
-* **`tools/embed.py` / `tools/verify_defect.py`** (new at M44) — not needed for arity, but they
-  are the worked example of the pattern §10 recommends.
+The milestone needs one definition, and the repository already owns half of it.
 
----
+`Pattern.lean` defines **`SamePattern a b := ∀ i j, a i = a j ↔ b i = b j`** — two colour
+assignments to `m` positions agree exactly when they induce the same partition — and
+**`canonPatterns k m`**, a kernel-verified list containing exactly one representative of every
+partition of `m` positions into at most `k` blocks (`exists_mem_canonPatterns`). That is precisely
+the vocabulary this milestone needs, so the new notion is phrased *through* it and no parallel
+development is created.
 
-## §7. The phases
+```
+Realizes  G k S p  :=  ∃ C : G.Coloring (Fin k), SamePattern (C ∘ S) p
+Admissible  G S p  :=  ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
+Compels   G k S p  :=  Admissible G S p ∧ ¬ Realizes G k S p
+```
 
-* **§0 — registration, committed before any instrument runs.** The exact objects; a prior per
-  probe with the evidence *both ways*; acceptance criteria that are necessary as well as
-  sufficient; and an explicit statement of what a zero at each arity does and does not license.
-* **§1 — arity 3, systematically, on Object A.** Both directions per triple (compelled pattern,
-  and impossible pattern). The point group cuts the triple space by roughly the group order before
-  any solver runs — use `orbit`/`canon` to enumerate orbit representatives, not raw triples. Every
-  query needs the base-satisfiability guard: an `unsat` on an object that is *already*
-  uncolourable is vacuous, so the stage must be a colourable ball (for Object A the R = 8 ball,
-  241 vertices, is known colourable and is *larger* than the refuting core).
-* **§2 — arity 4, and coverage order.** If arity 3 is flat, push one further, and run the
-  min-cover meter at six colours around the core's vertices — the k-set question of strand #2,
-  which is a different shape of question rather than a bigger one.
-* **§3 — the same ladder on Object B, exhaustively.** It is small enough for "every question,
-  answered", and it is kernel-certified, so its answers are ground truth for what a forcing
-  object's arity profile even looks like. Compare against Object A: B factors, A does not.
-* **§4 — the verdict, written either way.** Either "the compulsion has arity ≥ N, measured, with N
-  named", or "pair meters read zero and so do arity-3 meters, and the honest statement is that we
-  have not found the order it lives at". **Both are results.** That property — that no outcome is
-  uninformative — is why this milestone is at the front of the queue.
+**The arity floor `a*(G, k)`** := the least `m` such that some injective `S : Fin m → V` and some
+pattern `p` satisfy `Compels G k S p`. It is defined only when `G` is `k`-colourable — otherwise
+every pattern is unrealizable and the number is a vacuity artifact, which is the standing base-SAT
+guard promoted into the definition's hypotheses.
 
----
+Five facts, all **[derived]**, all worked before any instrument ran:
 
-## §8. The second question, free on the same material
+* **D1 — arity 2 is exactly the existing API, both cases.** For `S : Fin 2 → V`,
+  `Compels G k S p` is `¬ G.Adj (S 0) (S 1) ∧ Separated G k (S 0) (S 1)` when `p 0 = p 1`, and
+  `Forces G k (S 0) (S 1)` otherwise. So the four flat campaigns measured `a* = 2` and nothing else,
+  and the new notion **subsumes** `Forces`/`Separated` rather than sitting beside them.
+* **D2 — compulsions extend, so "floor" is the right word.** A compulsion on `S` transports to any
+  tuple containing it whose pattern restricts to it (restrict the realizing colouring). Hence the
+  set of arities carrying a compulsion is upward closed under extension, and the least one is the
+  invariant.
+* **D3 — the fan bracket.** If every proper `k`-colouring puts all `k` colours on the image of `S`
+  (`S` is *fanned* — `Coverage.fan_iff_coverage`'s right-hand side) and `p` is admissible and **not
+  surjective**, then `Compels G k S p`. So a fanned set of size `m` whose induced subgraph is
+  `(k−1)`-colourable carries a compulsion, and `a* ≤ m`.
+* **D4 — and therefore the arity floor is at most `k`, with no hypotheses at all.** If `v` has `k`
+  distinct neighbours `S : Fin k → V`, the rainbow pattern `p = id` is admissible and unrealizable:
+  a realizing colouring makes `i ↦ C (S i)` injective, hence surjective, so `v`'s own colour is
+  taken by a neighbour. **`a*(G, k) ≤ k` whenever `G` has a vertex of degree ≥ k.**
+* **D5 — vacuity.** Every claim above needs `G.Colorable k`.
 
-**The observation.** Every 1-minimal carrier this project has ever produced is *nearly* symmetric
-with the symmetry deliberately incomplete: de Grey's 122-vertex carrier (12 *near*-six-fold
-shells), the 23-vertex core (near-six-fold, broken), the 160-vertex core ("most orbits partial —
-11-of-12, 5-of-6"). These live in **unrelated arithmetic** — the first in a field of nested square
-roots with rotations detuned by fractions of a degree, the last in plain integer arithmetic with
-no radical anywhere and no detuning parameter at all. Different fields, different colour counts,
-different construction lineage, identical signature.
+**D4 reframes the milestone before it runs, and corrects the stub's own premise.** The stub asked
+whether the floor is "3, 4, or only the whole object". *The last branch is impossible.* Object A's
+stage has minimum degree 23 against `k = 6`, so its floor is in `{3, 4, 5, 6}` **by theorem**, and
+the campaign's job is to pin it, not to discover whether one exists. The same applies to every
+plane witness with minimum degree ≥ `k`: **the four flat campaigns were asking an arity-2 question
+on objects whose arity floor is provably at most `k`.** That sentence is the milestone's
+transferable content and it is derived, not measured.
 
-**The suspected cause, which is nearly an argument already.** A measured grokking of this project
-("G7") says exact symmetry adds no colour constraint: a symmetric copy can reuse the base's
-pattern. If that is right, a symmetric object is never *minimal* — whatever full orbit it contains
-can be thinned — and **broken near-symmetry is not a design choice or a coincidence but what
-minimality does to any forcer inside a symmetric ambient, in any field.**
-
-**The check, on data already on disk, an afternoon.** `orbit_profile` and `n_orbits` are recorded
-for every core in `build/m40-chiomega.json` and `build/m43-finetail.json`. Registered prediction:
-*every* 1-minimal core has at least one incomplete orbit under the ambient point group, and
-re-adding a missing orbit member never restores colourability. The first half is a read of the
-files; the second is a direct solver ask. If it holds across all seven recorded cores in two
-unrelated families it is a stateable law with a proof sketch attached. If a fully orbit-complete
-1-minimal core exists, the reading dies on the spot.
+**What D4 does *not* say.** It gives a compulsion of arity `k` for free; it says nothing about
+whether a *smaller* one exists, and nothing about whether a compulsion at any arity is *useful*
+(the from-below reduction consumes a forced-distinct pair — see §12). Beating `k` from below is the
+whole measurement.
 
 ---
 
-## §9. The discipline — non-negotiable, and the reason it exists
+## §7. §0b — The stage, derived, and a correction to how it was chosen before
 
-**Registered predictions.** §0 is written and committed *before* any instrument runs, with priors
-and the evidence both ways. This is not ceremony: sorted by how they were reached, this project's
-a-priori derivations have survived without exception and its post-hoc inductive readings have died
-without exception — roughly 7-for-7 against 0-for-10, several of the latter refuted by our own
-later work.
+A compulsion is a property of a **colourable** graph. So the arity question about an object that
+*forces* must be asked on a colourable relative of it, and which relative is a real choice:
 
-**"Measurement generates; induction kills."** The rule is *not* "measure less" — every derivation
-that survived began as a pattern someone noticed in a measurement. The rule is about what a
-measurement **buys**: a candidate pattern, never a conclusion. The conclusion is bought separately,
-by a derivation or by a pre-registered replication on fresh objects. Two design consequences,
-both of which this milestone is built on:
-* prefer measurements that turn a **dial** (a parameter whose behaviour is informative in both
-  directions) over searches that hunt for a **positive** (whose null result is uninterpretable —
-  and which has now come back flat four times);
-* prefer **calibrated test beds**: ask the new question where the answer is already certified, so
-  a zero bounds the *instrument* instead of being mistaken for a fact about the world. §5 is that
-  principle made into a milestone.
+| stage | size | property |
+|---|---|---|
+| the largest colourable ball (`R = 8`) | 241 vertices | M43's choice. Bigger, but not critical. |
+| **`C − v` for the 1-minimal core `C`** | 159 vertices | One vertex from refuting. **Guaranteed** by D3+A1 to carry a compulsion. |
+
+**M43's stage was larger and less critical, and "more material than the core that refutes" reads
+as strength when for this question it is weakness.** `C − v` is the stage where a compulsion is
+guaranteed to exist; the ball is not. This is a methodological correction registered before the
+campaign, and phase §10.3 tests it directly by running the identical sweep on both stages.
+
+`C − v` is 6-colourable for **every** `v`, because `C` is 1-minimal with per-vertex necessity
+witnesses recorded — so the base-SAT guard is met by construction and by re-measurement.
+
+---
+
+## §8. §0c — The encoding, measured before specifying
+
+Two choices, both settled with numbers rather than plausibility.
+
+**Colour-free pattern clauses.** A pattern is pinned without naming a colour: equality inside a
+block as `¬x_{u,c} ∨ x_{w,c}` for every `c` (both ways), disequality between blocks as
+`¬x_{u,c} ∨ ¬x_{w,c}`. The resulting property is palette-invariant, which is exactly what makes
+first-occurrence palette-symmetry breaking sound on top of it. The colour-*pinned* alternative
+(block `j` → colour `j`) is only a partial break.
+
+**The measurement that decided it [measured @subplan, the machine]:** the 23-vertex kernel-certified
+core, six colours, refutation —
+
+| encoding | time |
+|---|---|
+| no symmetry breaking | **> 162 s** (killed) |
+| colour-free + first-occurrence breaking | **0.02 s** |
+
+A factor above 8,000. Every UNSAT-expected query in this campaign carries the break; the
+colour-pinned form is kept **as the decorrelated second encoding**, never as the primary.
+
+**Costs, all [measured @subplan, the machine, 28 workers]:**
+
+| object | fact | time |
+|---|---|---|
+| Object B core (23 v) | `k = 6` refutation, broken | 0.02 s |
+| Object B stage `C − v` (22 v) | `k = 6` colourable | 0.00 s |
+| Object B stage | one pattern query | **0.005 s** |
+| Object A core (160 v) | `k = 6` refutation, broken | **unknown at 600 s cap** |
+| Object A stage `C − v` (159 v) | `k = 6` colourable | 0.04 s |
+| Object A stage | one pattern query, median | **0.07 s** |
+| Object A stage | one pattern query, observed UNSAT | 7 s – 118 s |
+
+**The asymmetry is the budget.** On Object A misses are milliseconds and hits are minutes, so a
+flat sweep is cheap and a rich one is not. Caps must be generous (≥ 900 s) and every `unknown` is
+recorded as undecided, never folded into "clean".
+
+---
+
+## §9. §0d — The sweep design: observe, then confirm
+
+Enumerating patterns tuple-by-tuple through the solver is the obvious design and it is wasteful:
+Object A's stage has 657,359 triples. The `Rigidity` class already solves this at arity 2 and the
+generalization is direct:
+
+1. **Observe.** Harvest a few hundred genuinely proper colourings (validated in process — every
+   edge checked bichromatic). Each colouring exhibits one realized pattern for *every* tuple at
+   once, so one solver call teaches about all of them.
+2. **Confirm.** Only patterns never observed are candidates. Each gets one solver call.
+   `sat` teaches (and shrinks the candidate set); `unsat` **confirms a compulsion**; `unknown`
+   is recorded as undecided with its cap.
+
+Soundness is one line: a compulsion is only ever claimed on a solver `unsat`, never on an absence
+in the sample. **[measured @subplan]** on Object A's stage: 400 colourings harvested in 2.4 s
+reduced 9,636 non-adjacent pairs to 811 candidates on one side and **0** on the other.
+
+Enumeration uses `canonPatterns k m` — one representative per partition, `Bell(3) = 5`,
+`Bell(4) = 15`, `Bell(5) = 52` — and the point group (`celllat.orbit`/`canon`, order 12) to cut
+tuple classes before any solver runs.
+
+---
+
+## §10. The phases
+
+### §10.1 — the instrument, `tools/arity.py`, with its controls
+
+`pattern_clauses` · `realize` (two encodings) · `profile` (a tuple's whole realizable-pattern set —
+the *graded* meter M44 §10 asks for, a set rather than a bit) · `harvest` · `sweep` ·
+`fan_shrink` · a self-test that must pass before any campaign row is written.
+
+**The controls, and one of them is new and load-bearing.** A sweep that reads flat measures the
+instrument unless the instrument has been *seen to fire*. Found during subplanning
+**[measured @subplan]**, exhaustively over small graphs:
+
+> **The planted arity-3 positive: 5 vertices, 5 edges, 3 colours.** Edges
+> `(0,1), (0,4), (1,2), (2,3), (2,4)` — a 4-cycle `0–1–2–4–0` with a pendant `3` on `2`. Every pair
+> is free (both patterns realized among its 36 proper 3-colourings), and the triple `(1,3,4)`
+> **cannot be rainbow**: vertex `2` is adjacent to all three and would have no colour left. Arity
+> floor exactly 3, verified by exhaustion over all `3⁵` assignments.
+
+It is the smallest such graph found, it is `decide`-able in Lean, and it is D4's mechanism at its
+minimum — which is itself a small structural point: *the first compulsion of a graph is a fan.*
+Controls in full: this planted positive; a planted negative (`K₃` at `k = 3`, no compulsion at any
+arity); the base-SAT guard on every stage; in-process validation of every `sat` model (proper
+**and** realizing the claimed pattern); and the second encoding on every `unsat`.
+
+### §10.2 — Object B, exhaustively (the calibration)
+
+22-vertex stage, 0.005 s per query: **every** pair (231 × 2), **every** triple (1,540 × 5), and
+every 4-tuple (7,315 × 15) if the timings hold — roughly 120,000 queries, minutes on 28 workers.
+Produces the first complete arity profile of a **kernel-certified** forcing object, and therefore
+the answer to "what does a forcing object's arity profile even look like".
+
+**[measured @subplan]** on a 20-pair sample: 11 of 20 non-adjacent pairs are already compelled
+(9 virtual edges, 2 forced pairs), and the centre's 16 neighbours are **fanned** (`min_cover`
+`lo = hi = 6`). So `a*(B) = 2` and Object B is a strong positive control — the contrast with
+Object A's zero at arity 2 is the milestone's whole axis.
+
+### §10.3 — Object A, the subject
+
+* **Complete arity 2** on the `C − v` stage — 9,636 non-adjacent pairs, both directions,
+  observe-then-confirm. This decides whether the arity-3 readings below are genuinely arity 3 or
+  consequences of a pair fact M43's stage could not see. **Running at subplan time.**
+* **The same complete arity-2 sweep on M43's own stage** (the `R = 8`, 241-vertex ball), to
+  separate "the object has no pair compulsion" from "that stage has none" — §7's correction, tested
+  rather than asserted.
+* **Arity 3**, by point-group orbit classes, observe-then-confirm, caps ≥ 900 s.
+* **Arity 4** on the surviving structure if arity 3 is flat.
+* All five recorded cores if the timings allow, so the answer is a profile across the family rather
+  than one object.
+
+### §10.4 — the fan bracket, measured on both objects
+
+D3/D4 guarantee a compulsion on any fanned set. Shrinking a fanned set to a **1-minimal** one turns
+the guarantee into a **number**: an upper bound on the arity floor, measured rather than assumed.
+`min_cover` is the meter; the shrink is the same delta-debugging loop `celllat.shrink` already uses,
+with necessity witnesses per member. Object B's fan starts at 16, Object A's at 53.
+
+Deliverable: the bracket `[lower from §10.3, upper from §10.4]` on both objects. **No outcome is
+uninformative**, which is why this milestone is at the front of the queue.
+
+### §10.5 — orbit concentration, and the control that already inverted its reading
+
+The stub predicted that 1-minimal cores are *near*-symmetric with the symmetry **broken**, and
+proposed reading `orbit_profile` off disk to confirm it. Doing that during subplanning
+**[measured @subplan]** confirmed the letter of it — all five cores have incomplete orbits — and
+then the **matched control inverted the reading**:
+
+| core | complete orbits | same-size random subset of the same ball (200 draws) |
+|---|---|---|
+| `T = 48/7` (160 v) | 7 / 24 = 29.2 % | 0.81 / 32.3 = **2.5 %** |
+| `T = 299/50` (117 v) | 6 / 19 = 31.6 % | 0.67 / 26.3 = **2.5 %** |
+| `T = 467/120` (66 v) | 5 / 10 = 50.0 % | 1.84 / 11.7 = **15.7 %** |
+| `T = 353/120` (28 v) | 4 / 5 = 80.0 % | 0.28 / 10.5 = **2.7 %** |
+| `T = 13/6` (23 v) | 3 / 5 = 60.0 % | 0.40 / 8.1 = **4.9 %** |
+
+Cores are **3× to 30× more orbit-complete than chance**, and touch far fewer orbits. The honest
+statement is the opposite of the stub's: minimality **concentrates** symmetry, it does not destroy
+it — "broken near-symmetry" was reading the glass half empty against no base rate at all.
+
+**And that reading is itself not yet safe, for a reason that is pure G21.** `celllat.shrink`
+deletes **outside-in by norm, in batches** (`key=lambda w: (-Q(w), w)`), so a batch is essentially a
+shell. The procedure may be manufacturing shell-completeness. The decisive control, and the phase's
+actual deliverable: **re-shrink two cores with a randomized deletion order and batch size 1, and
+compare.** If the enrichment survives a random order it is about the objects; if it collapses to the
+base rate it is about the traversal, and that is a finding about every core this project has
+recorded. **[registered]** prior: 60/40 that a substantial part of the enrichment is procedural.
+
+### §10.6 — the kernel layer
+
+`Proofs/HadwigerNelson/Arity.lean` and `Proofs/HadwigerNelson/Instances/AritySpec.lean`. Skeleton
+in §11. Small and deliberately bounded: the definition plus D1–D4. It earns its place by naming
+structure (the arity floor of a colour compulsion) and by making D4 — the statement that reframes
+four campaigns — a theorem rather than an observation. It is elementary and the module will say so.
+
+### §10.7 — verdict, Frontier, report
+
+Written either way, per §13.
+
+---
+
+## §11. The Lean skeleton (WORKFLOW step 3: statements before proofs)
+
+```lean
+-- Proofs/HadwigerNelson/Arity.lean
+import Proofs.HadwigerNelson.Coverage
+import Proofs.HadwigerNelson.Pattern
+
+namespace HadwigerNelson
+variable {V : Type*} {G : SimpleGraph V} {k m : ℕ}
+
+def Realizes (G : SimpleGraph V) (k : ℕ) {m : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
+  ∃ C : G.Coloring (Fin k), SamePattern (fun i => C (S i)) p
+
+def Admissible (G : SimpleGraph V) {m k : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
+  ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
+
+def Compels (G : SimpleGraph V) (k : ℕ) {m : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
+  Admissible G S p ∧ ¬ Realizes G k S p
+
+-- the reasoning surface
+theorem Realizes.admissible : Realizes G k S p → Admissible G S p := sorry
+theorem exists_realizes (C : G.Coloring (Fin k)) (S : Fin m → V) :
+    ∃ p, Realizes G k S p := sorry                      -- non-vacuity: a colouring realizes its own
+theorem realizes_iff_exists {n : ℕ} {G : SimpleGraph (Fin n)} {S : Fin m → Fin n}
+    {p : Fin m → Fin k} : Realizes G k S p ↔
+      ∃ f : Fin n → Fin k, (∀ i j, G.Adj i j → f i ≠ f j) ∧ SamePattern (fun i => f (S i)) p := sorry
+
+-- D1: arity two IS Forces/Separated, both cases, in one statement
+theorem compels_two {S : Fin 2 → V} {p : Fin 2 → Fin k} : Compels G k S p ↔
+    (if p 0 = p 1 then ¬ G.Adj (S 0) (S 1) ∧ Separated G k (S 0) (S 1)
+     else Forces G k (S 0) (S 1)) := sorry
+
+-- D2: compulsions extend, so the floor is well defined
+theorem Compels.extend {m' : ℕ} {S : Fin m → V} {S' : Fin m' → V}
+    {p : Fin m → Fin k} {p' : Fin m' → Fin k} (ι : Fin m → Fin m')
+    (hS : S' ∘ ι = S) (hp : p' ∘ ι = p) (h : ¬ Realizes G k S p)
+    (hadm : Admissible G S' p') : Compels G k S' p' := sorry
+
+-- D3: the fan bracket
+theorem compels_of_fan {S : Fin m → V} {p : Fin m → Fin k}
+    (hfan : ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ i, C (S i) = c)
+    (hadm : Admissible G S p) (hp : ¬ Function.Surjective p) : Compels G k S p := sorry
+
+-- D4: the arity floor is at most k, unconditionally
+theorem compels_rainbow_of_neighbors {v : V} (S : Fin k → V)
+    (hN : ∀ i, G.Adj v (S i)) (hinj : Function.Injective S) :
+    Compels G k S id := sorry
+```
+
+```lean
+-- Proofs/HadwigerNelson/Instances/AritySpec.lean — the models, because ∀ over an empty domain
+-- proves everything.  All by `decide +kernel` through `realizes_iff_exists`.
+def p5 : List (Fin 5 × Fin 5) := [(0,1), (0,4), (1,2), (2,3), (2,4)]
+
+theorem p5_colorable_three : (edgeGraph 5 p5).Colorable 3 := sorry           -- non-vacuity
+theorem p5_no_pair_compulsion :                                             -- arity 2 is FLAT …
+    ∀ (S : Fin 2 → Fin 5) (p : Fin 2 → Fin 3), Function.Injective S → ¬ Compels _ 3 S p := sorry
+theorem p5_compels_rainbow :                                                -- … and arity 3 fires
+    Compels (edgeGraph 5 p5) 3 ![1, 3, 4] ![0, 1, 2] := sorry
+theorem k3_no_compulsion :                                                  -- the planted negative
+    ∀ m (S : Fin m → Fin 3) (p : Fin m → Fin 3), ¬ Compels (edgeGraph 3 tri) 3 S p := sorry
+```
+
+Spec obligations before any proof effort: `#eval` the pattern enumeration against `Bell(m)`;
+exhibit the explicit 3-colouring of the planted graph; and read `compels_two` aloud against
+"a virtual edge is exactly an arity-2 compulsion".
+
+---
+
+## §12. Does an arity-3 find even help the plane? — stated now, not after
+
+**[derived]** The from-below reduction (G26) consumes a *forced-distinct pair* at √3 or 2 at five
+colours; an arity-3 compulsion is not that, so it does **not** drop into the existing composition.
+What it would do:
+
+* **Retire or validate an instrument class.** Four campaigns concluded "nothing is forced" from
+  arity-2 meters on objects whose floor is provably ≤ `k` (D4). If the floor is 3 on a certified
+  forcer, those campaigns measured their instrument, and the from-below hunt has been using the
+  wrong detector — that is the single most consequential sentence this milestone can produce.
+* **Generalize Act One.** The kernel already holds `hexShell_pigeonhole` (7 shell cells, 6 colours
+  ⟹ a mono pair at √3 or 2). The arity-3 analogue needs a configuration where any 5-colouring
+  forces a mono *triple* in one distance class. Whether one exists in the triangular lattice is an
+  open sub-question and is **registered as a derivation to attempt, not a phase to measure** —
+  its answer decides whether an arity-3 gadget is usable at all.
+
+This is written before the campaign so that a hit is not oversold and a miss is not undersold.
+
+---
+
+## §13. The discipline, and the failure clauses
+
+**Registered predictions.** Sorted by how they were reached, this project's a-priori derivations
+have survived without exception and its post-hoc inductive readings have died without exception —
+roughly 7-for-7 against 0-for-10, several of the latter refuted by our own later work.
+
+**"Measurement generates; induction kills."** A measurement buys a candidate pattern, never a
+conclusion; the conclusion is bought separately by a derivation or a pre-registered replication.
+Prefer **dials** over hunts for a positive; prefer **calibrated beds**, so a zero bounds the
+instrument instead of being mistaken for a fact about the world. §10.5 above is a worked example
+inside this very subplan: an observation, a matched control that inverted it, and a procedural
+confound that may yet invert it again.
 
 **"A search run against a sufficient-but-not-necessary check measures the check, not the world."**
-When a sweep refuses, the first question is never "what does this say about the objects" but "is
-my acceptance test the exact condition, or merely a sufficient one?" A conservative test converts
-a finding into a measurement of your own instrument, silently, with the registered-prediction
-discipline fully satisfied. This has happened here: a whole milestone's negative result turned out
-to be a measurement of one comparison operator. **M45 is the same suspicion applied to arity.**
+M45 is that suspicion applied to arity.
+
+**Registered predictions, with priors, committed before the campaign:**
+
+| # | prediction | prior |
+|---|---|---|
+| P1 | Object B's arity floor is 2, and abundantly so | 0.9 — sampled, not exhausted |
+| P2 | Object A's arity floor is > 2 on **both** stages (complete sweeps) | 0.6 |
+| P3 | Object A's arity floor is exactly 3 | 0.5 — subplanning saw candidate arity-3 hits, unverified |
+| P4 | Object A's minimal fanned set is strictly smaller than `\|N(v)\| = 53` | 0.85 |
+| P5 | The orbit-completeness enrichment is at least half procedural | 0.6 |
+| P6 | Every core in the family has arity floor < `k = 6` | 0.5 |
+
+P3 is deliberately not stated as a discovery: subplanning's cost sample produced three candidate
+arity-3 compulsions and one undecided row on Object A's stage, and **candidates seen during
+subplanning are not predictions**. They are being verified under the halt clause below; whatever
+they turn out to be is reported as a subplan-time measurement, with its verification, and never as
+a fulfilled prediction.
 
 **Failure clauses.**
-* `unknown at cap` is **never** a verdict. Record it as undecided with its cap; exclude it from
-  every summary; say so in the summary.
-* Every claim is double-encoded or theorem-closed. `ball43` carries a second encoding (`enc="a1"`,
-  the deleted-centre form) for exactly this.
-* Every meter is run on a **planted positive and a planted negative** before its results are
-  believed. A control that has not been seen to fail is not a control.
-* **HALT AND VERIFY:** any compelled pattern found at any arity on any object is the first nonzero
-  structural reading of the entire hunt. Re-derive the object independently, re-run in a second
-  encoding, and report *before* interpreting. If it is ever a forced-*distinct* pair at √3 or 2 at
-  five colours in a unit-distance graph, that is **χ(ℝ²) ≥ 6** — the result this project exists
-  for — and everything stops until it is verified three ways.
+* `unknown at cap` is **never** a verdict. Record it as undecided with its cap, exclude it from
+  every summary, and say so in the summary.
+* Every claim double-encoded or theorem-closed.
+* Every meter run on a planted positive and a planted negative before its results are believed.
+* **HALT AND VERIFY:** any compelled pattern found at any arity is the first nonzero structural
+  reading of the hunt. Re-derive the object independently, re-run in a second encoding, confirm all
+  lower-arity sub-tuples are free (or the reading is not what it looks like), and report *before*
+  interpreting. If it is ever a forced-*distinct* pair at √3 or 2 at five colours in a
+  unit-distance graph, that is **χ(ℝ²) ≥ 6** and everything stops until it is verified three ways.
 
 ---
 
-## §10. What M44 just added, and it transfers
+## §14. Practical notes
 
-M44 built the project's **first continuous meter**. Every previous instrument answered yes/no, and
-they all read flat. The new one measures a graph's *unit-distance defect* — the least, over
-drawings in the plane, of the largest deviation of an edge from length 1 — which is zero exactly
-when the graph is a unit-distance graph, and is otherwise a **number** saying how close it comes.
-
-Four lessons, all of which apply here:
-1. **A continuous meter can often be built where only a binary one existed.** Ask whether the
-   arity question has a graded form (how *many* colourings realize a pattern; how much solver
-   effort a pin costs; the fraction of the colouring space a constraint removes) rather than only
-   the satisfiable/unsatisfiable bit. The one nonzero reading in four flat campaigns was a
-   solver-**effort** signal, not a satisfiability bit.
-2. **Seed the search with what you already hold.** M44's optimizer, from random starts alone,
-   returned a *worse* answer than a drawing already in hand — and under the tool's own reading
-   rule that row licensed nothing. The analogue here: warm-start every solver call from a known
-   colouring rather than cold.
-3. **Write the checker as independent code, and expect it to find something.** M44's independent
-   verifier failed a *valid* row, and the diagnosis (comparing two upper bounds cannot decide
-   whether either is valid) produced a better, exact test. Decorrelation pays.
-4. **Use the whole machine.** The desktop has 32 cores and the campaigns are embarrassingly
-   parallel — one independent solver call per query. M44's first scan was written as a sequential
-   bisection and ran on **one** core of thirty-two; rewritten as a full parallel scan it finished
-   in under a minute. Fan out at ~28–30 workers. The hazard here is wall-clock, not memory.
+* **Machines.** Desktop (32 cores, 125 GB) and laptop (12 cores, 31 GB). This milestone
+  wants the desktop. Record CPU seconds with the machine named.
+* **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare or named.
+  `lake env lean <file>` is fine for iterating (builds nothing) but does not apply the project's
+  options, so never conclude a module is green from it.
+* **On any segfault, from any process: HALT and report to the user immediately.** It is hardware.
+* **`pkill -f <pattern>` kills your own shell** — the wrapper's command line contains the pattern.
+  Use a bracketed regex (`pgrep -f "m4[5]\.py"`) or resolve the PID. The same trap silently
+  disables any monitor whose command contains its own search pattern.
+* **Artifacts.** One JSON per axis, schema-tagged, reading rule *in the schema string*, bound
+  direction *in the field name*. Arity rows and fan-bracket rows are the same axis and share a file;
+  the orbit-concentration rows are a different axis and get their own.
 
 ---
 
-## §11. The honest prior
+## §R. Results
 
-Low expectation of a hit at arity 3. Four campaigns of flatness is real evidence even if it is
-evidence about instruments, and the objects in §5 are *finite lab specimens* from the from-above
-family rather than plane witnesses — a compulsion found there does not transfer to the plane by
-itself. What is high-confidence is that the **answer is worth having either way**, because it
-converts the strongest negative in the record from an unexamined absence into a measured bound,
-and because it either validates or retires the instrument class that four campaigns depended on.
-
-This is the cheapest milestone on the board and the only one whose negative result is itself a
-publication-grade sentence about mechanism: *the compulsion is not visible at arity ≤ N on an
-object we can certify forces.*
-
-If M45 also reads flat at every affordable arity, the honest next question — and it should be
-asked out loud rather than absorbed — is whether the pair/triple/coverage vocabulary is the wrong
-vocabulary entirely, which would point at `plans/M46-colouring-automaton.md` (compute a colouring
-space and describe it, rather than interrogating it with yes/no questions).
-
----
-
-## §12. Practical notes
-
-* **Machines.** A desktop (32 cores, 125 GB) and a laptop (12 cores, 31 GB).
-  Ask which one you are on; `nproc` disagreeing with a number in a plan is the hardware moving.
-  Record timings in CPU seconds, minimum of three runs, with the machine named. This milestone
-  wants the desktop.
-* **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare **or named**. Lake
-  sizes its job pool from the machine and this project's data modules peak at ~9 GB each; an
-  unrestricted build has taken the desktop down twice. `lake env lean <file>` is fine for
-  iterating on one file (it builds nothing) but does **not** apply the project's options, so never
-  conclude a module is green from it.
-* **On any segfault, from any process: HALT and report to the user immediately.** Do not diagnose,
-  do not retry. It is hardware and needs a reboot the user performs.
-* **`pkill -f <pattern>` kills your own shell** when the pattern appears in your own command line
-  — which it does, because the shell wrapper contains the command text. This bit three times in
-  one session. Use a bracketed regex so the literal differs from the match (`pgrep -f "m4[5]\.py"`),
-  or resolve the PID first. The same trap applies to any monitor whose command contains its own
-  search pattern: it will never see the process exit.
-* **Artifacts.** Write one JSON per axis, schema-tagged, with the reading rule *in the schema
-  string* and the bound direction *in the field name* — a reader cannot misread `defect_upper` as
-  a minimum without typing a name that contradicts them. If two quantities sit on different axes,
-  put them in **different files**: a field can be ignored, a second file must be opened
-  deliberately.
+*(written at the close)*
