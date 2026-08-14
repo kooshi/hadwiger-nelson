@@ -568,6 +568,66 @@ and `canonPatterns 6 4` against `15`; exhibit the explicit 3-colouring of the pl
 `Compulsion.no_mono_outer_triple` really is an instance of `Compels`; and read `compels_two` aloud
 against "a virtual edge is exactly an arity-2 compulsion".
 
+### §11c. What the experience-modeling pass added
+
+**The caller travels *up*, not down, so the constructors are the primary surface.** The repository's
+existing machinery *produces* `Separated` and `Forces` (from `Fan.of_unsat`, from certificates); what
+a caller then wants is "…therefore the arity floor is 2". Stated as an `iff` only, that direction is
+`(compels_two_eq h₁ h₂).mpr`, which `exact?` will not offer from a `Separated` in context. So the
+constructors are named and carry dot notation — **which is also how the module reads as the
+neighbours' genus rather than as a fifth notion**:
+
+```lean
+theorem Separated.compels (hS : Function.Injective S) (hne : ¬ G.Adj (S 0) (S 1))
+    (h : Separated G k (S 0) (S 1)) (c : Fin k) : Compels G k S (Function.const _ c)
+theorem Forces.compels (hS : Function.Injective S) (h : Forces G k (S 0) (S 1))
+    {c d : Fin k} (hcd : c ≠ d) : Compels G k S ![c, d]
+```
+
+`hsep.compels …` reads as the sentence it is. Both dodge the `Fin k` numeral problem — the "same"
+pattern is `Function.const _ c` and the "distinct" one takes two given distinct colours — so no
+`NeZero k` instance is dragged through the API.
+
+**The API-only proof test earned a missing lemma.** Proving `arityFloor (edgeGraph 5 p5) 3 = 3`
+with `unfold` forbidden needs the lower bound, and nothing in the draft supplied it. Add, mirroring
+`le_chromaticNumber_iff_colorable` exactly so the name is predictable:
+
+```lean
+theorem le_arityFloor_iff {n : ℕ∞} :
+    n ≤ arityFloor G k ↔ ∀ m, (∃ (S : Fin m → V) (p : Fin m → Fin k), Compels G k S p) → n ≤ m
+```
+
+**Nothing is tagged `@[simp]`, and the module says why.** `Realizes` is the abstraction; the two
+bridges rewrite it *toward* an implementation (colourings-as-functions), which is right for `decide`
+and wrong for reading. A simp set is a destination, and this one would drive every goal away from
+the vocabulary the milestone exists to name. The bridges are cited by name — the same discipline
+`Sat/Encoding.lean` already applies when it deliberately ships no `DecidableRel (edgeGraph n E).Adj`
+instance.
+
+**The instrument's three hazards get structural defenses, not warnings.** All three are real; the
+first one *bit during subplanning*.
+
+| hazard | defense |
+|---|---|
+| an arity-3 `unsat` that is really an arity-2 compulsion in disguise | `minimal_arity` is **absent** from a row until every 2-subset has been swept on the same stage; `explained_by_subtuple` names the culprit when it fails. One function `arity_verdict` computes it and returns `undetermined-subtuples` when the evidence is missing — a verdict cannot be reached by reading `outcome` alone. |
+| `unknown at cap` read as `clean` | the verdict enum has no "clean": it is `compelled \| realizable \| undecided`, and `undecided` always carries `cap_seconds`. The summary refuses to print unless undecided rows are either absent or explicitly included **with their count in the headline**. |
+| rows from different stages compared as one object | `stage` is a structured field carrying a **fingerprint of the sorted edge list**, so "same object?" is a comparison and not a judgement; the aggregator keys on it and refuses to merge across fingerprints. This is precisely how a conclusion became stage-dependent once already. |
+
+`encodings` is a **list of (name, outcome, seconds)**, never a boolean — "double-encoded" is then
+data a reader can check rather than a claim the writer makes.
+
+**A third planted control, drawn from the near-miss.** Alongside the planted positive and the planted
+negative: a planted **explained** case — a triple containing a known virtual edge, which
+`arity_verdict` must classify as `explained_by_subtuple` and must *not* report as a hit. A control
+that has not been seen to fail is not a control, and this is the failure mode that actually occurred.
+
+**The schema string records the near-miss by name**, because the error path documented by its own
+occurrence is the strongest teaching available:
+
+> *An `unsat` at arity 3 is not an arity-3 finding until every 2-subset of the tuple has been swept
+> on the same stage and found realizable both ways. This confusion occurred during subplanning:
+> triple (56,102,134) presented as an arity-3 compulsion and was a virtual edge at offset norm 13.*
+
 ---
 
 ## §12. Does an arity-3 find even help the plane? — stated now, not after
