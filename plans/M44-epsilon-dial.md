@@ -247,6 +247,38 @@ on `ν`, and the measurement of those bounds — none of which exists anywhere i
 
 ---
 
+## §B — The Lean skeleton (spec ELABORATES; obligation pass run 2026-08-13)
+
+### §B′ — what the obligation-modeling pass changed and confirmed
+
+**Statement change: `IsCompact K` replaces "closed ball + `ProperSpace`".** Compactness is the
+whole of what the argument uses; taking it as the hypothesis drops the `[ProperSpace V]`
+instance from every statement in the file and lets the plane instance recover the bounded form
+in one step via `isCompact_closedBall`. Strictly more general, strictly simpler to prove.
+
+**There is no induction in this milestone, and saying so is the pass's main structural finding.**
+The space is the *finite edge set*; the local obligation is per-edge (`dist (q i) (q j) = 1`),
+discharged uniformly by uniqueness of limits. No recursor, no measure, no `generalizing`. The
+pass's work was therefore routing — finding the four library steps and *proving they fire* rather
+than recalling that they should.
+
+**All four resistance points were probed in a scratch file and cleared first try**, so the proof
+is routing rather than invention:
+
+| # | step | route, confirmed by elaboration |
+|---|---|---|
+| R1 | squeeze: `\|a n − 1\| ≤ b n`, `b n → 0` ⟹ `a n → 1` | `tendsto_iff_dist_tendsto_zero` + `squeeze_zero` + `Real.dist_eq` |
+| R2 | componentwise limit out of the product | `((continuous_apply i).tendsto q).comp h` |
+| R3 | pigeonhole: one graph recurring arbitrarily late | `Finite.exists_infinite_fiber` (`SimpleGraph.instFinite` supplies `Finite`), then `Set.infinite_coe_iff` + `Set.Infinite.exists_gt` |
+| R4 | product of compacts, and enough first-countability for a subsequence | `isCompact_univ_pi` + `IsCompact.tendsto_subseq`; the instance chain `Fintype ι → Countable ι → FirstCountableTopology (ι → V)` is found automatically |
+
+**Method note, and it is the house rule paying out twice in one hour:** `squeeze_zero` did not
+appear in the first grep and does exist — *a failed search is not an absence*. Both it and the
+compactness route were settled by making the elaborator answer, not by recalling.
+
+**The skeleton elaborates.** All four signatures type-check with every instance resolved, four
+`sorry`s and no other diagnostic, before a single line of proof was written.
+
 ## §B — The Lean skeleton (spec elaborates before any proof effort)
 
 New module `Proofs/HadwigerNelson/Limit.lean`, importing `UnitDistance` and Mathlib's topology.
@@ -255,13 +287,13 @@ content is one existence lemma**; the plane corollary is a two-line composition 
 `add_one_le_chromaticNumber_unitDistance`.
 
 ```lean
-variable {V : Type*} [MetricSpace V] [ProperSpace V] {ι : Type*} [Fintype ι]
+variable {V ι : Type*} [MetricSpace V] [Fintype ι]
 
 /-- **The limit of approximate drawings.** If a finite graph can be drawn inside one fixed ball
 with every edge's length within `ε` of 1, for *every* `ε > 0`, then it can be drawn there with
 every edge's length exactly 1. -/
-theorem exists_unitDist_drawing_of_approx {G : SimpleGraph ι} (c : V) (D : ℝ)
-    (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ Metric.closedBall c D) ∧
+theorem exists_unitDist_drawing_of_approx {G : SimpleGraph ι} {K : Set V} (hK : IsCompact K)
+    (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
     ∃ q : ι → V, ∀ i j, G.Adj i j → dist (q i) (q j) = 1 := sorry
 
