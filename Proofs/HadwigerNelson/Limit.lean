@@ -16,7 +16,7 @@ whose colourings are the plane colourings constant on the cells of a triangular 
 `p`. Constancy on cells at scale `p` forbids a whole interval of distances around `1`, and that
 interval shrinks with `p`, so the family is a *deformation* whose limit at `p → 0` is the
 unit-distance problem itself. The theorems here are what make that limit statement mean
-something: `add_one_le_chromaticNumber_of_bounded_family` says that if the *size* of the forcing
+something: `add_one_le_chromaticNumber_unitDistance_of_bounded_family` says that if the *size* of the forcing
 configurations stays bounded as the tolerance shrinks, the bound transfers to the space. Its
 contrapositive is the milestone's headline — the growth of that size is a necessary condition for
 the plane needing fewer than seven colours.
@@ -29,11 +29,34 @@ obstruction that the measurement campaign is measuring.
 
 ## Using this file
 
-* `exists_unitDist_drawing_of_approx` — the geometric content, with no mention of colouring.
-* `add_one_le_chromaticNumber_of_approx` — one fixed graph, drawable ever more accurately.
-* `add_one_le_chromaticNumber_of_bounded_family` — the graph may *differ* at each tolerance, and
-  only its vertex count is fixed. This is the one the measurement consumes.
+* `exists_unitDistance_drawing_of_approx` — the geometric content, with no mention of colouring.
+* `add_one_le_chromaticNumber_unitDistance_of_approx` — one fixed graph, drawable ever more
+  accurately. Reach for this when you have a single graph.
+* `add_one_le_chromaticNumber_unitDistance_of_bounded_family` — the graph may *differ* at each
+  tolerance, and only its vertex count is fixed. Reach for this when you have a family; it is
+  what a measurement campaign produces, and it is the one the ε-dial consumes.
 * `seven_le_chromaticNumber_plane_of_bounded_family` — the plane instance at six colours.
+
+The names continue the family in `UnitDistance.lean`
+(`lt_chromaticNumber_unitDistance`, `add_one_le_chromaticNumber_unitDistance`,
+`..._edgeList`): same head, one suffix naming what is supplied.
+
+## Supplying the hypothesis
+
+Three things a caller repeatedly needs, recorded here so they are not rediscovered:
+
+* The error bound is stated as `|dist … - 1| ≤ ε`. If what you hold is the two-sided form
+  `1 - ε ≤ dist … ∧ dist … ≤ 1 + ε`, `abs_le.mpr` converts it.
+* In the bounded-family form the vertex count `N` is a **bound**, not an exact size: a graph on
+  fewer vertices is padded with isolated ones, which cannot make a non-`k`-colourable graph
+  `k`-colourable.
+* The converse of the bounded-family theorem is true and trivial — a genuine unit-distance graph
+  with no `k`-colouring satisfies the hypothesis at every `ε` — and is deliberately **not**
+  formalized here, because nothing consumes it. Its absence is not a claim that it is hard.
+
+The `example`s at the foot of the file are written to double as **templates**: the second one
+supplies the full hypothesis with a genuinely different drawing at each tolerance, which is the
+shape a real caller must produce.
 -/
 
 namespace HadwigerNelson
@@ -55,7 +78,7 @@ sequence and a `Tendsto` proof. The sequence appears inside the proof, where it 
 Compactness is taken as a hypothesis rather than derived from a bound and `ProperSpace`, because
 compactness is the whole of what the argument uses; `isCompact_closedBall` recovers the bounded
 form in one step at the call site. -/
-theorem exists_unitDist_drawing_of_approx {G : SimpleGraph ι} {K : Set V} (hK : IsCompact K)
+theorem exists_unitDistance_drawing_of_approx {G : SimpleGraph ι} {K : Set V} (hK : IsCompact K)
     (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
     ∃ q : ι → V, ∀ i j, G.Adj i j → dist (q i) (q j) = 1 := by
@@ -65,7 +88,7 @@ theorem exists_unitDist_drawing_of_approx {G : SimpleGraph ι} {K : Set V} (hK :
 
 /-- **The limit lemma.** A fixed finite graph with no `k`-colouring, drawable in a fixed compact
 region with edge lengths approaching `1`, forces the space past `k` colours. -/
-theorem add_one_le_chromaticNumber_of_approx {G : SimpleGraph ι} {k : ℕ} {K : Set V}
+theorem add_one_le_chromaticNumber_unitDistance_of_approx {G : SimpleGraph ι} {k : ℕ} {K : Set V}
     (hK : IsCompact K)
     (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε)
@@ -80,7 +103,7 @@ each its own graph, of bounded size and shrinking edge-length error.
 The proof is the pigeonhole the extra generality costs: there are only finitely many graphs on a
 fixed finite vertex type, so one of them recurs at arbitrarily small tolerance, and that one
 satisfies the fixed-graph hypothesis. -/
-theorem add_one_le_chromaticNumber_of_bounded_family {k N : ℕ} {K : Set V} (hK : IsCompact K)
+theorem add_one_le_chromaticNumber_unitDistance_of_bounded_family {k N : ℕ} {K : Set V} (hK : IsCompact K)
     (h : ∀ ε > 0, ∃ (G : SimpleGraph (Fin N)) (z : Fin N → V),
           ¬ G.Colorable k ∧ (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :

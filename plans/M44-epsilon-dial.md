@@ -34,17 +34,17 @@ produced that speaks to *which* of 5, 6, 7 is true.
 
 ## §0′ — What the domain-modeling pass changed (2026-08-13, run on the subplan above)
 
-The pass found the milestone was carrying **four co-equal objects** (`δ`, `η`, `ν`, `emb`) where
+The pass found the milestone was carrying **four co-equal objects** (`δ`, `η`, `ν`, `defect`) where
 the problem has **one primitive and one derived summary**, and that the Lean statement had
 serialized a quantifier that should have stayed a quantifier. Five changes, each with the smell
 that produced it:
 
-1. **`emb` is the primitive; everything else is derived or orthogonal.** For a finite graph `H`,
-   `emb(H)` = the least, over drawings of `H` in the plane, of the largest deviation of an edge
-   length from 1. Then `ν(ε) = min { |H| : χ(H) ≥ 7, emb(H) ≤ ε }` — **`ν` is not a second
-   measurement, it is the lower envelope of the points `(|H|, emb(H))`** over every certified
+1. **`defect` is the primitive; everything else is derived or orthogonal.** For a finite graph `H`,
+   `defect(H)` = the least, over drawings of `H` in the plane, of the largest deviation of an edge
+   length from 1. Then `ν(ε) = min { |H| : χ(H) ≥ 7, defect(H) ≤ ε }` — **`ν` is not a second
+   measurement, it is the lower envelope of the points `(|H|, defect(H))`** over every certified
    non-6-colourable graph we hold. And `η(p) = 2p/√3` is not a co-equal object either: it is the
-   **free initial upper bound** on `emb` of a cell core, the one the cell-centre drawing hands
+   **free initial upper bound** on `defect` of a cell core, the one the cell-centre drawing hands
    you before any optimization. The campaign therefore measures exactly one number per object.
 2. **`δ` leaves the main line.** It belongs to the *interval* story (the conditional bridge to
    Voronov's theorem) and plays no part in producing witnesses. Keeping it beside `η` is what
@@ -61,8 +61,8 @@ that produced it:
    matches the house `unitDistance` API, itself stated for an arbitrary metric space. `ℂ` is
    where our *construction* lives; making it the theorem's home would be incidental structure.
    The headline instantiates at `ℂ` and rides `chromaticNumber_plane_eq_complex` to the plane.
-5. **Neither `emb` nor `ν` is defined in Lean.** Each would owe a lemma API for a single use —
-   speculative structure. The Lean theorem *is* the statement "`emb = 0` with bounded drawings
+5. **Neither `defect` nor `ν` is defined in Lean.** Each would owe a lemma API for a single use —
+   speculative structure. The Lean theorem *is* the statement "`defect = 0` with bounded drawings
    forces the plane bound", written without naming it; the names live on the measurement side
    where the numbers are.
 
@@ -74,10 +74,10 @@ Two consequences worth stating because they were not visible before the pass:
   at most its vertex count. So bounding the vertex count bounds the region automatically, and
   `ν` needs no diameter clause. The Lean theorem still takes the bound explicitly (our caller
   measures it anyway, and deriving it would cost a walk induction that buys us nothing).
-* **The `emb` model generalizes and the `η` model did not.** Test applied: does the
+* **The `defect` model generalizes and the `η` model did not.** Test applied: does the
   representation earn the next theorem for free? Any certified non-6-colourable graph from any
   source — including the kernel-checked 23-vertex core — drops onto the same curve, because
-  `emb` is defined for graphs and not for scales. The old organization could only speak about
+  `defect` is defined for graphs and not for scales. The old organization could only speak about
   cell cores.
 
 ## §0 — Registration (committed BEFORE any instrument runs; the standing discipline)
@@ -105,26 +105,26 @@ exactly when that interval contains 1.
   configuration.
 
 `δ` is used for exactly one claim in this milestone (the conditional literature bridge, §D) and
-appears nowhere in the `emb`/`ν` line. `η` is the free initial upper bound on `emb`, superseded
+appears nowhere in the `defect`/`ν` line. `η` is the free initial upper bound on `defect`, superseded
 per-object by phase 4's optimization.
 
 ### 0b. The primitive, and the summary derived from it
 
-> **`emb(H)` := the least, over drawings of the finite graph `H` in the plane, of the largest
+> **`defect(H)` := the least, over drawings of the finite graph `H` in the plane, of the largest
 > deviation of an edge's length from 1.**
 
-`emb(H) = 0` exactly when `H` is a unit-distance graph. It is **attained** for connected `H`
+`defect(H) = 0` exactly when `H` is a unit-distance graph. It is **attained** for connected `H`
 (the sublevel sets are compact once one vertex is pinned — the same compactness that proves §A's
 D2), so "least" is a minimum, not an infimum. This is the milestone's single measured quantity:
 one real number per certified non-6-colourable graph, and the first *continuous* meter this
 project has had.
 
-> **`ν(ε)` := min { |V(H)| : `H` not 6-colourable, `emb(H) ≤ ε` }** — the **lower envelope** of
-> the points `(emb(H), |V(H)|)` over our whole inventory, not a separate measurement.
+> **`ν(ε)` := min { |V(H)| : `H` not 6-colourable, `defect(H) ≤ ε` }** — the **lower envelope** of
+> the points `(defect(H), |V(H)|)` over our whole inventory, not a separate measurement.
 
 `ν` is non-increasing in `ε`, and — this is §A's D2 — **`χ(ℝ²) ≥ 7` if and only if `ν` stays
 bounded as `ε ↓ 0`.** Everything this milestone produces is an **upper** bound: a drawing found
-by local optimization bounds `emb(H)` above and never below, and each such bound with its vertex
+by local optimization bounds `defect(H)` above and never below, and each such bound with its vertex
 count bounds `ν` above at that tolerance. No row may state otherwise, and the driver records
 `bound_direction: "upper"` on every one.
 
@@ -354,15 +354,15 @@ milestone is wall-clock, not RAM.
   witnesses. Record `(T, p, R*, N*, physical diameter, ω, orbit profile)`. Green control 2 must
   fire here. **Gate: if the re-measured five do not reproduce the qualitative shape of §0d, the
   headline observation is retracted in §R and the ladder is re-scoped to a plain `N(p)` census.**
-* **§D / phase 2 — the embedding gradient (the milestone's spine, per §0′.1).** Measure `emb(H)`
+* **§D / phase 2 — the embedding gradient (the milestone's spine, per §0′.1).** Measure `defect(H)`
   for every certified non-6-colourable graph in the inventory — the re-derived cell cores, and
   also the **kernel-checked 23-vertex core**, which belongs on the curve for free and which the
   pre-pass organization could not have spoken about. Optimize a smooth surrogate (sum of squared
   edge errors, then a softmax sharpening) from many random restarts — embarrassingly parallel,
   30 workers — and then **report the exact ℓ∞ error of the drawing actually found**, never the
   surrogate's value: the reported number must be a true "all edges within this of 1" figure, and
-  it is an **upper** bound on `emb`, since local optimization cannot certify a minimum. Controls
-  per §0g.3 both ways. Each object contributes one point `(emb upper bound, |V|)`; the lower
+  it is an **upper** bound on `defect`, since local optimization cannot certify a minimum. Controls
+  per §0g.3 both ways. Each object contributes one point `(defect upper bound, |V|)`; the lower
   envelope of those points is the `ν` curve, and it is the milestone's headline object.
 * **§E / phase 3 — the ladder.** New rungs below `p ≈ 0.109`, as far as the solver reaches,
   same procedure, each new core feeding phase 2. The twelve deep-tail bands M43 left undecided at
@@ -373,11 +373,48 @@ milestone is wall-clock, not RAM.
   smallest denominator and therefore nothing, and the subplanning measurement already found a 7×
   miss. This section states one claim only: the widest explicit interval around 1 for which we
   hold a finite certificate that cell-constant colourings need seven. **It is not part of the
-  `emb`/`ν` line and shares no axis with it** (§0′.2); it exists because it sharpens the
+  `defect`/`ν` line and shares no axis with it** (§0′.2); it exists because it sharpens the
   conditional bridge to the literature, and it is reported under its own heading with its own
   scope clause.
 
 ---
+
+## §0″ — What the experience-modeling pass changed (2026-08-13)
+
+Four changes, each from a consumer whose seat I sat in rather than from taste.
+
+1. **The Lean names broke the family they belong to, and now continue it.** `UnitDistance.lean`
+   already owns `lt_chromaticNumber_unitDistance`, `add_one_le_chromaticNumber_unitDistance`,
+   `..._edgeList` — head, then one suffix naming what is supplied. My first names dropped
+   `unitDistance` from the head, so a user who knows the family could not predict them. Fixed:
+   `add_one_le_chromaticNumber_unitDistance_of_approx` and `..._of_bounded_family`.
+2. **`emb` is renamed `defect` — the unit-distance defect of a graph.** `emb` reads as
+   "embedding", and the number is not an embedding: it is the *error of the best one*. Someone
+   would read "emb = 0.15" as a property of a drawing rather than as a distance-from-perfect, and
+   the misreading is silent. `defect(H) = 0` iff `H` is a unit-distance graph says exactly what it
+   means. Since the name is entering the project's permanent vocabulary, it is worth the edit now.
+3. **The bound direction moves into the identifier, and the two axes move into two files.** The
+   JSON field is `defect_upper`, never `defect` — a reader cannot treat it as a minimum without
+   typing a name that contradicts them, which is stronger than any comment. And the `δ` rows go to
+   a **separate artifact** (`build/m44-interval.json`) rather than sharing a file with a
+   `tolerance_kind` discriminator: a field can be ignored, a second file must be opened
+   deliberately. The `bound_direction` field the earlier pass added is consequently **deleted** —
+   it is now redundant with the field name, and one unrequested byte is the author's frame
+   creeping back.
+4. **The asymmetry gets stated in the schema, because it is the misreading that will actually
+   happen.** A *small* `defect_upper` is a hard fact — an exhibited drawing achieves it. A *large*
+   one says nothing at all; it may only mean the optimizer did not find the good drawing. So a row
+   licenses "this graph is close to being a unit-distance graph" and never licenses "this graph is
+   far from one". The schema line says so in those words, and the row carries **the drawing
+   itself**, so the number is re-checkable without re-running the search (the house rule: the
+   artifact is the certificate, never the search).
+
+Also settled here: the three `example`s in the Lean file double as **templates** — the second one
+supplies the full hypothesis with a genuinely different drawing at each tolerance, which is the
+shape a real caller must produce — and the module docstring records the three frictions a caller
+hits (the `abs_le` conversion, that the vertex count is a bound so padding with isolated vertices
+is free, and that the converse is true, trivial, and deliberately not formalized so its absence
+is not mistaken for difficulty).
 
 ## Deliverables
 
@@ -386,10 +423,12 @@ milestone is wall-clock, not RAM.
    `[propext, Classical.choice, Quot.sound]`, with the three spec examples and the planted red.
 2. `tools/celllat.py` — `minimal_radius` (bisection for `R*`), `delta_of`, `best_scale_in_band`,
    and the M44 campaign driver, each with a planted self-test in `self_test44`.
-3. `tools/embed.py` — the embedding-gradient instrument (the milestone's spine) with its red and
-   green controls, reporting exact ℓ∞ error of found drawings as upper bounds on `emb`.
-4. `build/m44-dial.json` — every row schema-tagged, carrying `bound_direction` (always `upper`
-   on the `emb`/`ν` line) and, on the separate `δ` rows, their own scope clause.
+3. `tools/embed.py` — the defect-gradient instrument (the milestone's spine) with its red and
+   green controls, reporting exact ℓ∞ error of found drawings as upper bounds on `defect`.
+4. `build/m44-dial.json` — the `defect`/`ν` line only: every row schema-tagged, the measured
+   field named `defect_upper`, each row carrying the drawing that achieves it.
+   `build/m44-interval.json` — the `δ` line only, physically separate so the two axes cannot be
+   plotted together by accident.
 5. `plans/M44-epsilon-dial.md` §R — the results, the predictions scored, the retractions if any.
 6. CLAUDE.md § Frontier + § Grokkings updated in the closing commit (WORKFLOW step 9).
 
