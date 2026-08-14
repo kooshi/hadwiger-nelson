@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M43, 2026-08-12.**
+**Last updated: M44, 2026-08-13.**
 
 ### Where the problem stands
 
@@ -678,6 +678,8 @@ measurement.
 
 | 40 | **The fine tail closed, and a forcing that does not factor** (M43, tools-side on exact arithmetic; laptop, one day): **χ(G(p)) = 7 exactly on both bands flanking `p = 1/7`** — the coarse flank `T² ∈ (139/3, 49)` (11 edge classes, degree 114, **never probed before**: every earlier "p = 1/7" row keys to the FINE flank) refuses six OUTRIGHT at nine radii, minimum `R* = 9` / 301 vertices, double-encoded (the deleted-centre A1 form, unpinned, agrees), with the fine flank following by inclusion and M39's 24 × 24 seven descending to both; **no periodic six-colouring of index ≤ 96 on either flank** (7,624 Hermite-normal-form period lattices each, zero unknown, mass-red green). Nineteen further bands floored ≥ 7 outright (ten between `p = 0.2236` and `1/7`, nine in the deep tail to `p ≈ 0.109`), ω = 3 throughout below `T² ≈ 64/3`, twelve deep-tail bands honestly unknown at cap. **The autopsy: the forcing does NOT factor as pigeonhole × kill** — Act One free by counting (7 shell cells, mutual norms {1,3,4}, all non-edges), Act Two absent (every forced-equality at every small non-edge class SAT on 241 vertices, more material than the 160-vertex 1-minimal core; **zero virtual edges at k = 6**) — G26's registered falsifier, found; the certified Hoffman bracket reads 3.56 against truth 7. The **160-vertex core** (2,978 edges, 24 orbits, centre-ful, edges re-derived two independent ways, every necessity witness held) is the family's largest named carrier. Promotion priced and declined with numbers (one medium cube = 798,002 LRAT lines = 63× the whole 122-core certificate). Conditional on **Voronov's proof of the Exoo conjecture** (arXiv:2304.10163, external, unverified here): **χ(G(p)) ≥ 7 for the whole family at every scale**, by a gap argument over the offset windows near 1 — so the from-above six-door is shut on both our own certificate and the literature's. | `tools/celllat.py` (M43 suite: `ball43`, `hnf_colour`, `skew_sweep`, `m43_census`, `transfers43`, `band_of`/`canonical_T`), `build/m43-finetail.json`, `plans/M43-fine-tail.md` §R | M43 |
 
+| 41 | **The limit lemma, and the first explicit points on the ν curve** (M44). **Kernel** (`Limit.lean`, `Instances/LimitSpec.lean`, axioms exactly the standard three): a finite graph drawable inside one fixed **compact** region with every edge's length within `ε` of 1, **for every `ε > 0`**, can be drawn there with edges of length exactly 1 (`exists_unitDistance_drawing_of_approx`), so it forces the space's unit-distance chromatic number — and in the form the measurement consumes, **the graph may DIFFER at each tolerance** and only its vertex count is fixed (`add_one_le_chromaticNumber_unitDistance_of_bounded_family`, by pigeonhole over the finitely many graphs on `Fin N`), with the plane instance `seven_le_chromaticNumber_plane_of_bounded_family`. Stated for `[MetricSpace V]`, not ℂ, because compactness is all the argument uses. Attribution: the compactness argument is one any specialist would produce and no novelty is claimed for it; ours is the formalization and the programme it licenses. Three models ship with it because the statement is a `∀ ε` — an exact one, a genuinely approximate one, and a **red that is a proven theorem** (`collapsed_drawing_satisfies_one_tolerance`: at a single tolerance the hypothesis is free for ANY graph — collapse every vertex to one point — so a single-`ε` version would prove `χ(ℝ²) ≥ k+1` for every `k`). **Tools**: the **unit-distance defect** meter (`tools/embed.py` — least over drawings of the max edge-length deviation from 1; zero iff the graph is a unit-distance graph; the programme's first CONTINUOUS distance-to-target gauge, every previous meter being binary and flat), reporting bounds **certified in exact rational arithmetic** on a stored rational drawing and re-checked by independent code (`tools/verify_defect.py`, sharing no code, deciding `|√q − 1| ≤ c ⟺ (1−c)² ≤ q ≤ (1+c)²` with no square root at all; planted corruption caught on 21 edges). **The curve**: `ν(0.2792) ≤ 23`, `ν(0.2291) ≤ 66`, `ν(0.1706) ≤ 117`, `ν(0.1494) ≤ 160` — the first explicit points anywhere, upper bounds only, growing as `ε^(−2.9)`. **The minimal refuting ball is physically scale-invariant**: `R*` derived by exhaustive parallel scan (not chosen), physical radius **1.02–1.38 unit distances** across a 3.16× span of scale, all five bands decided minimal. | `Proofs/HadwigerNelson/Limit.lean`, `Instances/LimitSpec.lean`, `tools/{embed,verify_defect,m44}.py`, `build/m44-{dial,interval}.json`, `plans/M44-epsilon-dial.md` §R | M44 |
+
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
@@ -755,66 +757,43 @@ derivable bridge and a measurable quantity — G29, minted below. Kooshi's stand
 to the methodological entry is folded into G30: measurement is where the patterns come from;
 the failure mode is promoting an inductive reading, not making the measurement.)*
 
-1. **M44 — the ε-dial** (`plans/M44-epsilon-dial.md`) — **RECOMMENDED NEXT.** Derive first,
-   measure second. The derivation (§A, before any instrument): the exact interval half-width
-   δ(p) per band, and **the limit lemma — if the minimal 1-minimal core size N(p) stays
-   bounded along any sequence p → 0, then χ(ℝ²) ≥ 7**, by Bolzano–Weierstrass on cell
-   centres plus the observation that identifying non-adjacent vertices cannot lower a
-   chromatic number. Equivalently: **the divergence of N(p) is a NECESSARY CONDITION for
-   χ(ℝ²) ≤ 6**, and its rate is the first quantity this project has produced that speaks to
-   *which* of 5/6/7 is true rather than to whether one more object we built happens to force.
-   Then the measurement, on the instrument M40–M43 already built and controlled: the ladder
-   of (p, δ, N*, physical radius) down past M43's p ≈ 0.109 floor. The preliminary read of
-   data already on disk — flagged in the stub as an anthology, not a measurement, with
-   comparability as its phase 1 — is that **N grows like p^(−5/3) while the core's PHYSICAL
-   radius stays pinned near 1.3–1.7 unit distances at every scale**, i.e. the seven-forcing
-   occupies a fixed-size region sampled ever more finely. If that survives a comparable
-   re-measurement it is the sharpest design constraint the hunt has ever had, and it says the
-   from-below search has been looking at objects of the wrong shape.
-2. **M45 — the arity floor** (`plans/M45-arity-floor.md`) — cheapest item on the board, and
-   the one whose negative result is itself a sentence about mechanism. Four grokkings
-   (G9, G13, G17, G28) independently say the compulsion lives above pair order; every meter
-   we own is arity 2; and **we have never once asked an arity-3 question on an object whose
-   forcing we can certify.** The 160-vertex fine-tail core and the kernel-checked 23-vertex
-   core are a calibrated test bed: a hit is real signal, a zero raises the arity floor. G28 —
-   currently the strongest negative in the record — is cited as a fact about objects while
-   resting on evidence that may be a fact about instruments, which is G21 verbatim. Carries a
-   second question on the same material at no extra cost: **why is every 1-minimal core in
-   two unrelated arithmetics near-symmetric with the symmetry broken?** (Suspected cause,
-   nearly an argument: G7 says exact symmetry adds no colour constraint, so a symmetric
-   object is never minimal — broken near-symmetry is what minimality DOES to a forcer inside
-   a symmetric ambient. Checkable in an afternoon against orbit profiles already on disk.)
-3. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`, re-ranked not demoted) —
-   the target is still exactly right and still the only route to χ(ℝ²) ≥ 6. Two corrections
-   were made to the stub at the re-rank and both matter before it runs: **(a) the registered
-   target is strictly stronger than the theorem needs** — the composition needs the UNION
-   uncolourable, not each copy universally forcing, so the search space is strictly larger
-   than the one every meter we own measures; **(b) the probe to run first is the
-   hetero-dimer effort curve against overlap size**, because across four campaigns exactly
-   two numbers ever moved and that is the only one with a monotone knob (up to 1,101 shared
-   vertices), recorded once and dropped. It sits behind M45 because it currently contradicts
-   its own G28 advice by ranking a pair ask first.
-4. **M46 — the description instrument** (`plans/M46-colouring-automaton.md`) — every tool
-   built since M20 answers yes/no; M20's strip automaton is the only one that ever
-   *described* a colouring space, and it is the source of the only structural theorem about
-   one that we own. The shape-space document's own kill test for the from-above route says
-   "autopsy the core totally — **its full colouring space**"; the factorization test ran at
-   M41 and the colouring space was never computed. Transfer matrix over strips of a gap band:
-   exact chromatic numbers with no period bound and no cap (replacing a dozen honest
-   "unknown at cap" rows), plus the structure of the near-miss colourings, which is where a
-   mechanism for clique-free forcing would be visible if anywhere. Gated by a hard
-   feasibility stop in phase 0 — cost is exponential in width × interaction range, so it is
-   affordable at the coarse and gap bands and **dead at the 1/7 flanks**.
-5. **M47 — the three-distance plane** (`plans/M47-multidistance.md`) — `χ(ℝ²; {1,√3,2}) ≥ 7`
-   is already kernel-checked (`hexShell_pigeonhole`), the upper-bound machinery is the cell
-   instrument with a few lines changed (union the edge sets at 1, √3 and 2), and {1,√3,2} is
-   not an arbitrary variant: it is exactly the distance set the six-hunt's reduction lives
-   in. If any scale gives seven, the value is determined exactly at both ends in the kernel.
-   Blocking literature gate first — this set is the closed hex shell's difference set and may
-   well be settled; below the publication bar either way.
-6. **The fine tail's residue** — twelve deep-tail bands are honest unknowns at cap
-   (`plans/M43-fine-tail.md` §R lists them). No longer a standalone item: they sit ON M44's
-   ladder and get a second, better-aimed attempt there as a by-product.
+*(M44 CLOSED 2026-08-13 — desktop. The limit lemma is kernel-checked (ledger row 41), G29 is
+promoted in its lemma half, and the dial's first turn produced a NEGATIVE that the framing made
+askable: the cell family cannot supply a bounded-size family either, because its witnesses'
+defect and size are locked to one parameter and pull opposite ways. **The family is closed in
+both directions now** — no six-colouring (M43) and no seven-forcing witness (M44). Four of six
+registered predictions met, two missed and reported as missed. The ranking below is re-ordered
+on that close; M45 goes to the front.)*
+
+1. **M45 — the arity floor** (`plans/M45-arity-floor.md`) — **RECOMMENDED NEXT**, promoted on
+   M44's close. Cheapest item on the board and the only one whose negative result is itself a
+   sentence about mechanism. Four grokkings (G9, G13, G17, G28) say the compulsion lives above
+   pair order; every meter we own is arity 2; and **we have never once asked an arity-3 question
+   on an object whose forcing we can certify.** The 160-vertex fine-tail core and the
+   kernel-checked 23-vertex core are a calibrated bed. Carries the broken-near-symmetry check
+   free on the same material. M44 strengthens the case twice over: it exhausted the from-above
+   family as a source of witnesses, and it demonstrated (in the defect instrument) that a
+   *continuous* meter can be built where only binary ones existed — the same move may be
+   available at arity 3.
+2. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — unchanged in substance;
+   still the only route to χ(ℝ²) ≥ 6, still carrying M44's two corrections (the registered target
+   is stronger than the theorem needs; the hetero-dimer effort curve is the probe with a dial).
+   **M44 adds a scoring instrument it did not have**: any candidate object now gets a defect
+   number, so "how close is this to being a unit-distance graph" is a measurement rather than a
+   question — and `tools/verify_defect.py` makes the answer independently checkable.
+3. **M46 — the description instrument** (`plans/M46-colouring-automaton.md`) — unchanged.
+4. **M47 — the three-distance plane** (`plans/M47-multidistance.md`) — unchanged; blocking
+   literature gate first.
+5. **The ε-dial's unrun tail** (`plans/M44-epsilon-dial.md` §R8) — the ladder below `p ≈ 0.109`
+   was NOT run and is reported as not run. Given M44's own finding it cannot change the verdict
+   on the family: it would add points to a curve whose slope is established and whose source is
+   closed. Low value, explicitly not recommended.
+6. **~~M44 — the ε-dial~~ — CLOSED 2026-08-13** (`plans/M44-epsilon-dial.md` §R). Ledger row
+   41; G29 promoted in its lemma half. Kept here, not deleted, because the *stub's* prediction
+   is worth remembering against the outcome: it read the recorded cores as showing a physical
+   radius pinned near 1.3–1.7 and flagged that as an anthology needing a comparability phase.
+   The comparability phase ran, with the ball radius derived rather than chosen, and the
+   invariance **survived** at 1.02–1.38 across a 3.16× span of scale.
 7. **The certified union** (`plans/M35-certified-union.md`) — parked: consolidation with
    bounded novelty; reopens on a find or the write-up trigger's "maybe" clause.
 8. **The certification programme** — standing fallback unchanged
@@ -824,13 +803,13 @@ the failure mode is promoting an inductive reading, not making the measurement.)
    proven and ready for a target that earns it; this is not one. Reopens only if the
    certificate machinery itself becomes the product, or if M46 §4 finds that an automaton
    emptiness certificate is a different and cheaper price.
-10. **Carried forward unchanged from the previous ranking** — the hexagon cell module stays
-    priced and unneeded (M36 superseded it before it was written); the instrument audit stays
-    parked. The line the previous ranking carried here — *"the cell family is closed as a
-    research direction: further scales cost solver time and cannot produce a six"* — is
-    **retracted in its second half and kept in its first**: further scales indeed cannot
-    produce a six (that is proven for the family, conditionally for every band), and that is
-    exactly why the scale parameter is now worth measuring rather than abandoning (G29).
+10. **Carried forward unchanged** — the hexagon cell module stays priced and unneeded (M36
+    superseded it before it was written); the instrument audit stays parked. The line an older
+    ranking carried — *"the cell family is closed as a research direction: further scales cost
+    solver time and cannot produce a six"* — is now **fully vindicated in substance and was
+    still wrong in its reasoning**: the family is closed, but M44 showed the second half of the
+    closure (no bounded-size family, hence no seven-forcing witness either) was a question
+    nobody had asked, and asking it needed the dial framing rather than the door framing.
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)
 
@@ -1455,10 +1434,25 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   collide in the limit were non-adjacent so the limit is a contraction, which cannot LOWER
   the chromatic number. Contrapositive: **the divergence of `N(p)` is a necessary condition
   for `χ(ℝ²) ≤ 6`** — the exact quantitative obstruction between the proven interval theorem
-  and the open point theorem. **[reading — the deformation and the pinning are measured
-  (M39–M43); the limit lemma is a derivation sketched here and written out properly in
-  `plans/M44-epsilon-dial.md` §A, and the milestone STOPS if it does not survive careful
-  writing]** *Why it was missed: M43 evaluated the family on one criterion — can a
+  and the open point theorem. **[PROMOTED at M44: the limit lemma is now **[kernel]** —
+  `add_one_le_chromaticNumber_unitDistance_of_bounded_family`, on axioms exactly the standard
+  three — and the dial has been turned. The deformation and the pinning stay **[measured]**
+  (M39–M43).]** **AND THE DIAL'S FIRST TURN CLOSED THE FAMILY IN ITS SECOND DIRECTION.** The
+  measurement: each certified core's unit-distance defect, against its size. The gain over the
+  free cell-centre drawing SHRINKS as the cores get finer (1.91× at 23 vertices, 1.13× at 117 and
+  160) — the dense fine cores are so over-constrained that the cell-centre drawing is already
+  nearly optimal — so within this family the defect is pinned at `≈ 2p/√3 ∝ p` while the size
+  grows like `p^(−1.75)`. The two are locked to one parameter and pull opposite ways, so **the
+  cell family cannot supply a bounded-size family as `ε → 0` either**, and by the limit lemma it
+  cannot yield `χ(ℝ²) ≥ 7` any more than it could yield a six-colouring. *The family is now closed
+  in both directions, and the honest epistemic content of the measurement is narrow: `ν` upper
+  bounds that grow are consistent with `ν` bounded and with `ν` divergent alike, so the numbers do
+  not bear on which of 5, 6, 7 is true. What they give is the first explicit points on `ν`, a
+  baseline any future construction must beat, and a sharpened target — a source of
+  non-6-colourable graphs whose DEFECT falls faster than their SIZE grows.* One positive
+  structural find survived the confound check: with the ball radius DERIVED rather than chosen,
+  the minimal refuting configuration is **physically scale-invariant at 1.02–1.38 unit
+  distances** across a 3.16× span of scale. *Why it was missed: M43 evaluated the family on one criterion — can a
   six-colouring live here? — got a clean and correct no, and retired the instrument without
   asking what the PARAMETER was doing. The Voronov connection, treated at that close as the
   direction's tombstone, is what makes the dial meaningful: it is the statement that the

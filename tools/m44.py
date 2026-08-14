@@ -180,9 +180,21 @@ def delta_rows(t2max=F(50)):
 # ---------------------------------------------------------------- phase 1: the minimal ball
 
 def _probe(args):
+    """One (band, radius) refutation probe.
+
+    The pinned encoding breaks symmetry with a triangle of the band's least edge class, and that
+    triangle does not fit inside a small ball — `ball43` refuses rather than probing. For those
+    radii we fall back to the UNPINNED encoding, which is the more conservative of the two (it
+    assumes no symmetry at all); the row records which encoding produced it, because a verdict
+    whose encoding is invisible is a verdict that cannot be audited."""
     T, k, R, cap = args
-    row = C.ball43(F(T), k, R, cap=cap, pin=True, enc="direct")
-    return R, row["outcome"], row["n_vertices"], row["seconds"]
+    try:
+        row = C.ball43(F(T), k, R, cap=cap, pin=True, enc="direct")
+        pinned = True
+    except SystemExit:
+        row = C.ball43(F(T), k, R, cap=cap, pin=False, enc="direct")
+        pinned = False
+    return R, row["outcome"], row["n_vertices"], row["seconds"], pinned
 
 
 def min_radius(Ts, k=6, rlo=2, rhi=12, cap=900.0, workers=28):
@@ -202,10 +214,11 @@ def min_radius(Ts, k=6, rlo=2, rhi=12, cap=900.0, workers=28):
     results = {}
     with ProcessPoolExecutor(max_workers=workers) as ex:
         for job, res in zip(jobs, ex.map(_probe, jobs)):
-            R, st, nv, sec = res
+            R, st, nv, sec, pinned = res
             results.setdefault(job[0], []).append({"R": R, "outcome": st, "n": nv,
-                                                   "seconds": sec})
-            print(f"    T={job[0]} R={R} -> {st} ({nv} vtx, {sec}s)", flush=True)
+                                                   "seconds": sec, "pinned": pinned})
+            print(f"    T={job[0]} R={R} -> {st} ({nv} vtx, {sec}s, "
+                  f"{'pinned' if pinned else 'unpinned'})", flush=True)
     out = []
     for T in Ts:
         probes = sorted(results[str(T)], key=lambda p: p["R"])
@@ -222,6 +235,7 @@ def min_radius(Ts, k=6, rlo=2, rhi=12, cap=900.0, workers=28):
                     "outcome": "minimal" if decided_below else "upper-bound-only",
                     "R_star": best,
                     "n_at_R_star": next(p["n"] for p in unsats if p["R"] == best),
+                    "pinned_at_R_star": next(p["pinned"] for p in unsats if p["R"] == best),
                     "phys_radius_at_R_star": best / float(F(T)),
                     "n_unknown": len(unknown), "probes": probes, "cap": cap})
     return out

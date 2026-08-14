@@ -560,3 +560,57 @@ coarsest band.
   3 × 10⁻²⁵ above it. The fix removes square roots entirely: `|√q − 1| ≤ c ⟺ (1−c)² ≤ q ≤ (1+c)²`,
   a pair of rational comparisons. All five certificates now verify exactly, and a planted
   corruption (one point moved by 1/3) is caught on 21 edges.
+
+## R6. Phase 1 (§C) — the confound removed, and the scale-invariance is REAL
+
+The recorded cores came from balls whose radius a person chose, so their apparent physical
+scale-invariance could have been an artifact of taste (§0d). Re-measured under one procedure, one
+cap (420 s), one encoding, with the radius **derived** rather than chosen — a full parallel scan
+of every (band, radius) pair, which also reports the whole profile instead of only the crossing
+point, so a non-monotone surprise would be visible rather than assumed away:
+
+| band `T` | `p` | **`R*`** | vertices at `R*` | **physical radius** | radius as recorded before |
+|---|---|---|---|---|---|
+| 48/7 | 0.1458 | 9 | 301 | **1.3125** | 9 |
+| 299/50 | 0.1672 | 7 | 187 | **1.1706** | 8 |
+| 467/120 | 0.2570 | 5 | 91 | **1.2848** | 5 |
+| 353/120 | 0.3399 | 3 | 37 | **1.0198** | 5 |
+| 13/6 | 0.4615 | 3 | 37 | **1.3846** | 4 |
+
+All five bands returned `minimal` — every radius below `R*` gave a *decided* sat, so these are
+true minima and not upper bounds. Three of the five previously-recorded radii were larger than
+necessary (4 → 3, 5 → 3, 8 → 7); M43's `R* = 9` at the 1/7 flank is confirmed exactly.
+
+> **P2 MET** (registered 60%): the physical radius of the *minimal* refuting ball spans
+> **1.0198 – 1.3846**, a factor of **1.358**, while the scale `p` varies by 3.16×.
+> **The seven-forcing configuration in this family is about one and a quarter unit distances
+> across, at every scale**, and that is now measured with the box derived rather than chosen.
+
+> **P3 MET** (registered exponent in [1.4, 2.2]): the ball vertex count at `R*` grows as
+> `p^(−1.91)` and the 1-minimal core size as `p^(−1.75)` — both consistent with a fixed physical
+> region sampled ever more finely, which is the mechanism the invariance implies.
+
+Instrument note: the first version of this scan was written as a bisection and ran **on one core**
+— five bands × four probes, sequentially, on a 32-core machine. Rewritten as a full parallel scan
+it finishes in under a minute. Separately, `ball43`'s symmetry-breaking pin triangle does not fit
+inside small balls and aborts rather than probing; those radii now fall back to the **unpinned**
+encoding, which assumes no symmetry at all, and every row records which encoding produced it.
+
+## R7. Predictions, scored
+
+| # | registered | outcome |
+|---|---|---|
+| P1 | the limit lemma formalizes in ≤ 300 lines | **MET** — ~120 lines |
+| P2 | `R*·p` within 1.5× across the ladder | **MET** — 1.358× |
+| P3 | `N(p) ∼ p^(−a)`, `a ∈ [1.4, 2.2]` | **MET** — 1.75 (cores), 1.91 (balls) |
+| P4 | δ-maximizing scale beats `canonical_T` ≥ 2× on ≥ half the bands | **MISSED** — 13/35 = 37% |
+| P5 | some core beats its free bound by ≥ 2× | **MISSED** — best 1.91× |
+| P6 | no core embeds with defect 0 | **HELD** — halt clause never armed |
+
+## R8. What M44 leaves
+
+Not run, and reported as not run: **§E, the ladder below `p ≈ 0.109`.** The five bands re-measured
+here are the ones with recorded cores; extending the ladder is more of the same and, given R3's
+finding, cannot change the verdict on this family — it would only add points to a curve whose
+slope is already established and whose source is now closed. The twelve deep-tail bands M43 left
+undecided at cap remain undecided; they were to be a by-product of §E and are not claimed.
