@@ -48,7 +48,8 @@ by hand is, here, the number `0` — and `two_le_arityFloor` falls out of the sa
 **The floor is at most `k`, with no hypotheses at all** (`arityFloor_le_of_degree`). A vertex with
 `k` distinct neighbours makes the rainbow pattern on them unrealizable, because a realizing
 colouring would use all `k` colours on the neighbourhood and leave the vertex none. So on any object
-with minimum degree at least `k` the interesting question is never *whether* a compulsion exists but
+having any vertex of degree at least `k` — which is every object here — the interesting question is
+never *whether* a compulsion exists but
 *how far below `k`* it starts — which is what the measurement campaign of `plans/M45-arity-floor.md`
 exists to pin down.
 

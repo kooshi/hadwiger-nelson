@@ -189,7 +189,8 @@ Five facts, all **[derived]**, all worked before any instrument ran:
 whether the floor is "3, 4, or only the whole object". *The last branch is impossible.* Object A's
 stage has minimum degree 23 against `k = 6`, so its floor is in `{3, 4, 5, 6}` **by theorem**, and
 the campaign's job is to pin it, not to discover whether one exists. The same applies to every
-plane witness with minimum degree ≥ `k`: **the four flat campaigns were asking an arity-2 question
+plane witness with a vertex of degree ≥ `k` (max degree 60 on de Grey's 1581, against `k = 5`):
+**the four flat campaigns were asking an arity-2 question
 on objects whose arity floor is provably at most `k`.** That sentence is the milestone's
 transferable content and it is derived, not measured.
 
@@ -726,7 +727,7 @@ them unrealizable, so `arityFloor G k ≤ k` **unconditionally**. Consequences, 
 measurement:
 
 * the stub's own framing had an impossible branch — the floor is never "only the whole object";
-* and every object this repository holds has minimum degree far above its colour count, so
+* and every object this repository holds has some vertex of degree far above its colour count, so
   **the four flat pair campaigns were asking an arity-2 question on objects where a compulsion of
   arity ≤ k was guaranteed to exist.**
 
