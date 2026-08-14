@@ -436,6 +436,100 @@ counterexample: no map sends one point to two). Weakening `Compels.map`'s embedd
 homomorphism leaves exactly the two obligations the domain pass predicted — injectivity of `f ∘ S`
 and the lifting of non-adjacency — neither available from a hom. Every hypothesis is used.
 
+### §5e. The experience-modeling pass (2026-08-14) — one lemma added, from the caller's seat
+
+**The four-link chain fails the API-only test, and the fix is not the twelve-argument theorem.**
+Written out as a stranger would have to write it, the bare chain costs four names in the right order
+*plus* an inner `fun C' =>` lambda *plus* a `hxy.trans hd.symm` distance massage, **per distance
+class** — and every caller writes the identical composition. That is the "every use site opens with
+the same preamble" smell, whose remedy is neither a bigger theorem nor a longer chain but **naming
+the repetition once**:
+
+```lean
+/-- **A gadget's virtual edge, transported to the whole plane.** -/
+theorem Separated.plane {ι : Type*} {G : SimpleGraph ι} (q : ι → ℂ)
+    (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} {d : ℝ}
+    (hd : dist (q u) (q v) = d) (hs : Separated G k u v)
+    (C : (unitDistance ℂ).Coloring (Fin k)) {x y : ℂ} (hxy : dist x y = d) : C x ≠ C y
+```
+
+Both versions were elaborated and compared. The caller's whole proof becomes **two names, two
+lines**:
+
+```lean
+example : 6 ≤ (unitDistance ℂ).chromaticNumber :=
+  six_le_chromaticNumber_plane_of_forced_pairs
+    (fun C _ _ h => Separated.plane q₃ hq₃ hd₃ hs₃ C h)
+    (fun C _ _ h => Separated.plane q₂ hq₂ hd₂ hs₂ C h)
+```
+
+This does **not** re-raise the twelve-argument design the domain pass rejected: it takes six
+arguments, handles *one* distance class, is called twice, and it *uses* `Separated.comap` rather
+than duplicating it — which stays the general dual of `Forces.comap`. The `_plane` suffix is the
+file's own established convention for "the plane corollary of" (`hexShell_pigeonhole` →
+`hexShell_plane`), so the name is predicted rather than learned.
+
+**Automation probe, run:** `exact?` reaches `Separated.comap` from the goal `C (φ u) ≠ C (φ v)` and
+returns `exact Separated.comap h φ C`, exactly as it reaches the established `Forces.comap` from its
+own goal. The naming convention holds and the search finds it; the calibration control (the existing
+twin) was run in the same file so a miss would have been attributable.
+
+**The direction of `arityFloor_le_of_embedding` is a real hazard and gets three defences**, because
+`arityFloor G' k ≤ arityFloor G k` for `f : G ↪g G'` puts the *bigger* graph on the *left* and a
+reader will write it backwards: (i) the docstring leads with the direction in words — *growing a
+graph can only lower its floor* — before any symbols; (ii) a spec example where the inequality is
+**strict**, so the reader sees it do work rather than suspecting a disguised equality; (iii) a
+cross-reference to `Realizes.comap`, whose direction is the intuitive one (*realizable on the bigger
+object implies realizable on the smaller*) and which anchors the other.
+
+**Free pointers, costing no rebuild:** a `--` comment beside `Separated` in `Fan.lean` and beside
+`Forces.comap` in `Forcer.lean` naming where the dual lives. `--` comments leave the `.olean`
+byte-identical, so a reader standing at either notion learns of the other for zero build cost —
+which is the only reason the 45-dependent module can be annotated at all.
+
+---
+
+## §5f. The instrument surface
+
+**The screen introduces a state this repository has never had, and it must not be able to reach an
+artifact.** Every earlier meter *solved* every question it asked, so every row had an outcome. The
+mask screen does not: it produces *"never observed in `H` colourings, not yet given to a solver"*.
+That is neither a finding nor a negative, and left unnamed it is exactly the kind of thing a summary
+sentence turns into a grokking. Four structural defences:
+
+1. **It is a distinct Python type, not a dict.** `Candidate` is a `NamedTuple` — rows are dicts, and
+   a `Candidate` cannot be serialized into a rows list without an explicit `confirm()` call.
+2. **It has no `verdict` and no `outcome` field**, and `arity_verdict` is never called on one.
+3. **It carries its own denominator**, `harvest`: a candidate surviving 64 colourings is noise and
+   one surviving 8,192 is interesting, so "never observed" is *never* readable without the number
+   that qualifies it. This is the G21 rule applied at row level rather than at summary level.
+4. **`record()` raises on one** — *"a screen candidate is not a result; call confirm() first"* — and
+   the artifact's screen section is keyed **`unsolved_candidates`**, a name with no reading in which
+   it is a finding.
+
+**The fourth misreading — an arity-3 hit read as a rung toward χ(ℝ²) ≥ 6 — is blocked by inverting
+the marking.** Rather than warning on the many rows that are *not* rungs, exactly one computed
+boolean marks the few that could be: `jackpot_eligible`, `True` only when arity = 2 **and** the
+pattern is the same-colour pattern **and** the class is √3 or distance 2 **and** `k = 5` **and** the
+stage is a genuine unit-distance graph. It is computed in one place beside `arity_verdict`. A reader
+asking "is this the big one?" then has a single field to read, true only where it can be true — and
+the halt-and-verify clause of §8 becomes mechanically checkable rather than a matter of judgement.
+
+**The negative headline is generated, not written**, and `record()` refuses a summary lacking one:
+
+> `arity-3, all patterns: 0 compulsions in 657,385,070 questions on stage degrey-1581`
+> `(1,581 vertices, 7,877 edges, fingerprint 76b8163b27fe6f96); N undecided at cap 60 s and`
+> `EXCLUDED from that count; screened against 8,192 harvested colourings.`
+
+**What the artifacts must carry so a reader who trusts nothing can recompute every denominator:**
+the stage's `n`, `m_edges`, `fingerprint` **and how its edge list was derived** (the construction,
+not only the totals); the enumeration rule in prose *and* as a formula *and* as the computed count,
+so `C(1581,3) = 657,385,070` is checkable rather than quoted; the harvest's size, seed range and pin
+count, so the pool is reproducible; each class population beside the control that validates it (the
+7,877); the cap and the undecided count; and the machine name. `build/m48-arity.json` carries the
+sweep axis and `build/m48-ladder.json` the object axis — never merged, because they have different
+denominators.
+
 ---
 
 ## §6. The phases, in order
