@@ -395,6 +395,47 @@ theorem six_le_chromaticNumber_of_forced (h3 …) (h2 …) :
 * **The degenerate member for homogeneity**: `x₀ = y₀`, where the hypothesis is self-refuting —
   checked as an `example` so the no-side-condition design is exercised rather than assumed.
 
+### §5d. The obligation-modeling pass (2026-08-14) — the layer is proved, and where it homes
+
+**Every statement in §5b elaborates, and each proof is one to four lines.** They were written
+against the goal state, not guessed: the whole layer landed on the first attempt bar two mechanical
+slips in the isometry construction. That is the convergence signal — the proofs are transcriptions,
+so the statements are right — and it means §6.1 is implementation rather than research.
+
+**The citations, taken from the tool rather than from memory:**
+
+| need | citation | note |
+|---|---|---|
+| pull a colouring back along a hom | `SimpleGraph.Coloring.comap : G'.Coloring α → (G →g G') → G.Coloring α` | **already generic in the colour type `α`** — so the arbitrary-`α` statement of `forced_pair_of_forced` is *free* and specializes at the composition site with no cast |
+| an embedding reflects adjacency | `SimpleGraph.Embedding.map_adj_iff : G'.Adj (f v) (f w) ↔ G.Adj v w` | |
+| an embedding is injective | `RelEmbedding.injective` | `↪g` is a `RelEmbedding`, so it is inherited |
+| lower-bound a bounded infimum | `le_iInf₂` | **no trap** — M45's wrong-shape `iInf₂_le` has no dual problem here; confirmed by `exact?` |
+| build / use an isometry | `Isometry.of_dist_eq`, `Isometry.dist_eq` | both are aliases of `isometry_iff_dist_eq`; a *bare* map, no equivalence needed |
+| the last algebraic step | `div_mul_cancel₀` then `linear_combination` | see below |
+
+**The two slips, and what they teach.** `sub_ne_zero.mpr (Ne.symm hne).symm` symmetrises twice back
+to where it started — read the goal, not the name. And `field_simp; ring` could **not** close
+`a * (y₀ − x₀) + x = y`; the honest move is to *name the key equation*
+(`have hkey : a * (y₀ − x₀) = y − x := div_mul_cancel₀ _ hsub`) and finish with
+`linear_combination hkey`. That is the "tactic block in place of a localized obligation" smell in
+miniature, and naming the step fixed it immediately.
+
+**The homing decision, decided by measurement rather than taste.** `Separated.comap` belongs by
+*content* next to `Separated` in `Fan.lean`. But `Fan.lean` has **45 transitive dependents**,
+including the heavy certificate modules, and a new *declaration* there rebuilds every one of them —
+the M07 lesson that cost 28 hours of processor time. `Arity.lean` has **1**, and it already houses
+`Separated.compels` and `Forces.compels` under a docstring saying that dot-notation lemmas on those
+notions live here. **Content and cost agree: `Separated.comap` goes in `Arity.lean`,** with a `--`
+comment in `Fan.lean` pointing at it — a `--` comment leaves the `.olean` byte-identical and so
+costs no rebuild at all.
+
+**The mutation audit, run and green.** Dropping `h2` leaves the diameter branch of
+`hexShell_plane5` genuinely unreachable — so the D1 correction is load-bearing and not decoration.
+Dropping `hne` from the isometry construction leaves no route, as it must (`x₀ = y₀ ≠ x = y` is a
+counterexample: no map sends one point to two). Weakening `Compels.map`'s embedding to a bare
+homomorphism leaves exactly the two obligations the domain pass predicted — injectivity of `f ∘ S`
+and the lifting of non-adjacency — neither available from a hom. Every hypothesis is used.
+
 ---
 
 ## §6. The phases, in order
