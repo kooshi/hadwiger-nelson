@@ -60,6 +60,32 @@ open HadwigerNelson
 #print axioms collapsed_drawing_fails_below_one
 #print axioms add_one_le_chromaticNumber_unitDistance_edgeList
 
+-- M45, the arity of a colour compulsion: a partial colouring that does not extend, and how few
+-- vertices one needs. `compels_two_eq`/`compels_two_ne` are the statement that arity two IS the
+-- repository's existing `Separated`/`Forces`; `arityFloor_le_of_degree` is the theorem that four
+-- flat pair campaigns were asking below a bound that was always available.
+#print axioms samePattern_two
+#print axioms Realizes.congr
+#print axioms realizes_iff_extends
+#print axioms realizes_iff_exists
+#print axioms compels_two_eq
+#print axioms compels_two_ne
+#print axioms Separated.compels
+#print axioms Forces.compels
+#print axioms arityFloor_le_of_compels
+#print axioms le_arityFloor_iff
+#print axioms arityFloor_eq_zero_iff
+#print axioms two_le_arityFloor
+#print axioms compels_of_fan
+#print axioms compels_rainbow_of_neighbors
+#print axioms arityFloor_le_of_degree
+#print axioms AritySpec.p5cols_proper
+#print axioms AritySpec.p5_no_pair_compulsion
+#print axioms AritySpec.p5_compels_rainbow
+#print axioms AritySpec.p5_arityFloor
+#print axioms AritySpec.tri_arityFloor
+#print axioms AritySpec.k4_arityFloor_zero
+
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
 
 #print axioms trianglePoints_dist

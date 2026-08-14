@@ -58,6 +58,8 @@ import Proofs.HadwigerNelson.Reduction
 import Proofs.HadwigerNelson.Instances.Triangle
 import Proofs.HadwigerNelson.Limit
 import Proofs.HadwigerNelson.Instances.LimitSpec
+import Proofs.HadwigerNelson.Arity
+import Proofs.HadwigerNelson.Instances.AritySpec
 import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleBound
 import Proofs.HadwigerNelson.Instances.DeGrey
