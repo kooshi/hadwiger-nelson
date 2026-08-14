@@ -44,6 +44,7 @@ from fractions import Fraction as F
 
 import numpy as np
 from scipy.optimize import least_squares
+from scipy.sparse import csr_matrix
 
 SCHEMA = ("m44-defect v1 (plans/M44-epsilon-dial.md). Unit of claim: one GRAPH. "
           "`defect_upper` is an UPPER bound on min-over-drawings of max-over-edges "
@@ -103,29 +104,77 @@ def _residuals(flat, ei, ej, power):
     return r * w
 
 
-def _one_restart(seed, n, ei, ej, powers):
-    rng = np.random.default_rng(seed)
-    z = rng.normal(scale=0.5 * math.sqrt(n), size=2 * n)
-    for p in powers:
-        out = least_squares(_residuals, z, args=(ei, ej, p), method="trf",
-                            max_nfev=200 * n)
-        z = out.x
+def _jac(flat, ei, ej, power):
+    """Analytic sparse Jacobian. Each residual touches only its two endpoints, so the matrix has
+    four nonzeros per row; scipy's finite-difference default costs one function evaluation per
+    COORDINATE, which at 320 coordinates was the whole running time."""
+    z = flat.reshape(-1, 2)
+    d = z[ei] - z[ej]
+    nrm = np.maximum(np.linalg.norm(d, axis=1), 1e-12)
+    u = d / nrm[:, None]
+    r = nrm - 1.0
+    if power == 2:
+        scale = np.ones_like(r)
+    else:
+        k = (power - 2) / 2.0
+        scale = (k + 1.0) * np.abs(r) ** k
+    m = len(ei)
+    su = scale[:, None] * u
+    data = np.concatenate([su.ravel(), (-su).ravel()])
+    rows = np.tile(np.repeat(np.arange(m), 2), 2)
+    cols = np.concatenate([np.stack([2 * ei, 2 * ei + 1], axis=1).ravel(),
+                           np.stack([2 * ej, 2 * ej + 1], axis=1).ravel()])
+    return csr_matrix((data, (rows, cols)), shape=(m, flat.size))
+
+
+def _linf(z, ei, ej):
     zz = z.reshape(-1, 2)
     d = np.linalg.norm(zz[ei] - zz[ej], axis=1)
-    return float(np.max(np.abs(d - 1.0))), z
+    return float(np.max(np.abs(d - 1.0)))
+
+
+def _one_restart(seed, n, ei, ej, powers, z0=None):
+    """One descent. `z0` seeds it with a drawing already known to be decent (for a cell core,
+    the cell centres, whose error is the free bound eta) — so the search can only improve on
+    what we already had. The best iterate is kept in the MAX norm, which is the quantity being
+    reported; the least-squares surrogate can lower the l2 while raising the max."""
+    if z0 is None:
+        rng = np.random.default_rng(seed)
+        z = rng.normal(scale=0.5 * math.sqrt(n), size=2 * n)
+    else:
+        z = np.array(z0, dtype=float).ravel()
+    best_v, best_z = _linf(z, ei, ej), z.copy()
+    for p in powers:
+        out = least_squares(_residuals, z, jac=_jac, args=(ei, ej, p), method="trf",
+                            tr_solver="lsmr", max_nfev=400)
+        z = out.x
+        v = _linf(z, ei, ej)
+        if v < best_v:
+            best_v, best_z = v, z.copy()
+    return best_v, best_z
 
 
 def defect_upper(n: int, edges, restarts: int = 64, workers: int = 30,
-                 powers=(2, 4, 8, 16), seed0: int = 0):
-    """Search for a low-defect drawing, then certify the best one exactly."""
+                 powers=(2, 4, 8, 16), seed0: int = 0, seed_drawing=None):
+    """Search for a low-defect drawing, then certify the best one exactly.
+
+    When `seed_drawing` is supplied it is BOTH a candidate in its own right and a starting
+    point, so the returned bound is never worse than the seed's own error. That matters: at
+    320 coordinates random restarts do not reach the quality of a drawing we already hold, and
+    a row reporting worse than the free bound would be a measurement of the optimizer."""
     if not edges:
         return F(0), [(F(0), F(0))] * n, 0
     ei = np.array([e[0] for e in edges])
     ej = np.array([e[1] for e in edges])
     from concurrent.futures import ProcessPoolExecutor
     best = (float("inf"), None)
+    if seed_drawing is not None:
+        z0 = np.array(seed_drawing, dtype=float).ravel()
+        best = (_linf(z0, ei, ej), z0)
     with ProcessPoolExecutor(max_workers=workers) as ex:
         futs = [ex.submit(_one_restart, seed0 + s, n, ei, ej, powers) for s in range(restarts)]
+        if seed_drawing is not None:
+            futs.append(ex.submit(_one_restart, -1, n, ei, ej, powers, seed_drawing))
         for f in futs:
             v, z = f.result()
             if v < best[0]:
@@ -148,9 +197,10 @@ def record(row):
         json.dump(art, fh, indent=1, default=str)
 
 
-def measure(name, n, edges, restarts, workers, note=""):
+def measure(name, n, edges, restarts, workers, note="", seed_drawing=None):
     t0 = time.time()
-    ub, pts, flt = defect_upper(n, edges, restarts=restarts, workers=workers)
+    ub, pts, flt = defect_upper(n, edges, restarts=restarts, workers=workers,
+                                seed_drawing=seed_drawing)
     row = {"kind": "defect", "object": name, "n": n, "m": len(edges),
            "defect_upper": str(ub), "defect_upper_float": float(ub),
            "search_float": flt, "restarts": restarts,

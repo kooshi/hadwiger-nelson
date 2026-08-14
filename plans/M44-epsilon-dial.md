@@ -440,3 +440,123 @@ unexamined background fact, that the rate is data nobody has, and that phase 4 t
 we from a 7-forcing unit-distance graph" from a rhetorical question into a number. The one
 outcome that would change the milestone's character is P6 firing, which is why it has a halt
 clause even at 3% prior.
+
+---
+
+# §R — Results (2026-08-13, desktop, 32 cores)
+
+## R0. What landed, in one paragraph
+
+The derivation survived careful writing and is **kernel-checked**: a finite graph drawable in a
+fixed compact region with edge lengths within `ε` of 1, **for every `ε > 0`**, forces the space's
+unit-distance chromatic number — and the bounded-family form, where the graph may differ at each
+tolerance, is the statement the measurement consumes. The instrument was built, controlled both
+ways, and its outputs are certificates re-checkable by independent code. The measurement produced
+**the first explicit points on the `ν` curve** anywhere. And it produced a clean negative that the
+dial framing made askable for the first time: **the cell family cannot supply a bounded-size
+family either**, so it is closed as a route to `χ(ℝ²) ≥ 7` exactly as M43 closed it as a route to
+`χ(ℝ²) ≤ 6`.
+
+## R1. The kernel half (§A, §B) — LANDED
+
+`Proofs/HadwigerNelson/Limit.lean` + `Proofs/HadwigerNelson/Instances/LimitSpec.lean`, zero
+`sorry`, on axioms exactly `[propext, Classical.choice, Quot.sound]`.
+
+* `exists_unitDistance_drawing_of_approx` — the geometric content, no colouring mentioned.
+* `add_one_le_chromaticNumber_unitDistance_of_approx` — one fixed graph.
+* `add_one_le_chromaticNumber_unitDistance_of_bounded_family` — **the headline**: the graph may
+  differ at each tolerance; only the vertex count and the region are fixed.
+* `seven_le_chromaticNumber_plane_of_bounded_family` — the plane instance at six colours.
+
+D2 survived §A's careful writing with the collision case dissolving rather than needing work (the
+proof pulls a colouring *back* along the limit drawing and never asks it to be injective).
+**P1 MET**, and by a wide margin: the whole file is ~120 lines against a registered ≤ 300, because
+the existing `UnitDistance` API already carried everything downstream of a drawing.
+
+Three models of the hypotheses ship with it, because the statements are `∀ ε` and a universal over
+an empty domain proves anything: an exact one, a genuinely approximate one (different drawing at
+each tolerance, none exact), and a **red that is a proven theorem** —
+`collapsed_drawing_satisfies_one_tolerance`: at a *single* tolerance the hypothesis is free (put
+every vertex in one place; each edge reads `|0−1| = 1 ≤ 1`) **for any graph whatsoever**, so a
+single-`ε` version of the lemma would prove `χ(ℝ²) ≥ k+1` for every `k`. The universal quantifier
+is exactly what rules that witness out.
+
+## R2. The defect curve (§D) — the first explicit points on `ν`
+
+Every certified non-6-colourable core we hold, measured (`tools/embed.py`, seeded by the
+cell-centre drawing, 90 random restarts besides, best kept in the max norm):
+
+| band `T` | `p` | `N` | edges | `defect_upper` | free bound `η` | gain | phys. diameter |
+|---|---|---|---|---|---|---|---|
+| 13/6 | 0.4615 | 23 | 143 | **0.279192** | 0.5329 | 1.91× | 2.398 |
+| 353/120 | 0.3399 | 28 | 206 | **0.299362** | 0.3925 | 1.31× | 1.799 |
+| 467/120 | 0.2570 | 66 | 736 | **0.229123** | 0.2967 | 1.29× | 2.355 |
+| 299/50 | 0.1672 | 117 | 1807 | **0.170569** | 0.1931 | 1.13× | 2.412 |
+| 48/7 | 0.1458 | 160 | 2978 | **0.149382** | 0.1684 | 1.13× | 2.492 |
+
+Lower envelope — **the `ν` upper-bound curve**, each point an explicit certified configuration:
+
+> `ν(0.2792) ≤ 23`  ·  `ν(0.2291) ≤ 66`  ·  `ν(0.1706) ≤ 117`  ·  `ν(0.1494) ≤ 160`
+
+(The 28-vertex core is dominated — larger defect *and* larger size than the 23 — and contributes
+nothing, which is the envelope structure doing its job.) Fitted growth of the **upper bound**:
+`ν_ub ∼ ε^(−2.9)`.
+
+**The limitation, stated before the reading, because it is the whole epistemic content:** these
+are *upper* bounds, and **a growing upper bound is consistent with `ν` bounded and with `ν`
+divergent alike.** This measurement therefore does *not* bear on which of 5, 6, 7 is true. What it
+does is give the first explicit points, and a baseline any future construction must beat.
+
+**P6 HELD** (registered 97%): no core embeds with defect 0; the halt-and-verify clause never armed.
+
+## R3. The finding the dial framing made askable — and it is a negative
+
+Read down the `gain` column: the improvement over the free cell-centre drawing **shrinks as the
+cores get finer** — 1.91× at 23 vertices, 1.13× at 117 and 160. The dense fine cores are so
+over-constrained that the cell-centre drawing is already nearly optimal for them, so within this
+family the defect is pinned at `≈ η(p) = 2p/√3 ∝ p` while the size grows like `p^(−1.76)`.
+
+> **Consequence: the cell family cannot produce a bounded-size family as `ε → 0`.** Its defect and
+> its size are locked to the same parameter and pull in opposite directions. So by the limit lemma
+> the family cannot yield `χ(ℝ²) ≥ 7` either — it is now closed in *both* directions, having been
+> closed as a route to a six-colouring at M43 and as a route to a seven-forcing witness here.
+
+That is a real negative, obtained cheaply, and it sharpens the target for anyone continuing:
+**what is wanted is a source of non-6-colourable graphs whose defect falls faster than their size
+grows** — and the instrument to score any candidate now exists and is calibrated.
+
+**P5 MISSED** (registered: some core beats its free bound by ≥ 2×; prior 55%). Best gain measured
+1.91×, on the smallest core. The registered "evidence against" was the right one: the dense cores
+are over-constrained.
+
+## R4. The interval axis (§F), kept separate — P4 MISSED
+
+Exact `δ` per band, and the `δ`-maximizing scale within each band, in `build/m44-interval.json`
+(a *separate artifact* from the defect rows, by §0″.3, so the two axes cannot share a plot).
+
+**P4 MISSED**: registered ≥ 2× improvement over `canonical_T` on at least half the bands; measured
+**13 of 35 bands (37%)**, median improvement 1.47×. What survives is narrower and still worth
+having: our recorded certificates used a scale chosen for smallest denominator, which optimizes
+nothing, and on a third of bands that costs an order of magnitude — up to **32.7×** — in the width
+of the interval the certificate speaks about. Largest `δ` anywhere probed: **0.268**, at the
+coarsest band.
+
+## R5. Instrument notes (all three worth banking)
+
+* **The analytic Jacobian is a 400× speedup, and it decided feasibility.** With scipy's default
+  finite differences the 160-vertex core took **1623 s**; with the sparse analytic Jacobian
+  (four nonzeros per row — each residual touches only its two endpoints) it takes **4 s**. The
+  finite-difference cost is one function evaluation per *coordinate*, i.e. 320 per Jacobian.
+* **Seeding was not an optimization but a correctness requirement, and the unseeded run proves
+  it.** From random starts alone the 160-core returned `defect_upper = 0.445` — **worse than the
+  free bound 0.168**, i.e. worse than a drawing we already held. Under this tool's own reading
+  rule that row licenses nothing, and it is recorded as a measurement of the optimizer. Seeding
+  with the cell centres makes the reported bound *provably* no worse than `η`.
+* **The independent checker found a fault — in itself — and the diagnosis improved the design.**
+  `tools/verify_defect.py` shares no code with the instrument. Its first draft bracketed `√q` by
+  bisection and compared the bracket to the claim; it FAILED a valid row, because **comparing two
+  upper bounds cannot decide whether either is valid**. The row it flagged had an axis-aligned
+  edge of rational length, so the instrument's value was exact while the checker's bracket sat
+  3 × 10⁻²⁵ above it. The fix removes square roots entirely: `|√q − 1| ≤ c ⟺ (1−c)² ≤ q ≤ (1+c)²`,
+  a pair of rational comparisons. All five certificates now verify exactly, and a planted
+  corruption (one point moved by 1/3) is caught on 21 edges.
