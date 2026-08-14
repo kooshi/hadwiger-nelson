@@ -191,6 +191,46 @@ Shape D's autopsy is the cheapest place a counterexample could surface.
   Shape C: equivariance wherever m1 structure ever appears; Shape D: the transplant
   question — name the plane analogue of the cell family's integrality carrier).
 
+* **2026-08-13 (the re-reading; no milestone closed, no measurement run).** Two entries,
+  both about instruments rather than shapes, and both of which change how the surviving
+  shapes should be tested.
+
+  **(i) The from-above lab is not spent — it was retired on the wrong criterion.** M43 closed
+  the cell family as a DOOR (no six-colouring can live there — correct, and conditionally
+  provable at every scale). It is also a DIAL: cell-constancy at scale `p` forbids an
+  INTERVAL around 1 of half-width `δ(p) → 0`, so the family deforms continuously from the
+  classical seven-colouring to the unit-distance problem itself, with the answer pinned at
+  seven the whole way and every relaxation collapsing underneath it. The derived consequence
+  (CLAUDE.md G29, `plans/M44-epsilon-dial.md` §A): **if the minimal critical core size `N(p)`
+  stays bounded along any `p → 0` then `χ(ℝ²) ≥ 7`**, so the divergence of `N(p)` is a
+  necessary condition for `χ(ℝ²) ≤ 6`. A preliminary and explicitly uncomparable read of the
+  cores already on disk suggests `N ∼ p^(−5/3)` with the core's **physical radius pinned near
+  1.3–1.7 unit distances at every scale** — which, if it survives a comparable
+  re-measurement, is a direct size-and-shape constraint on EVERY shape in §3: the forcing
+  region is about one and a half unit distances across, and the from-below hunt has been
+  probing objects (witness closures spanning far more) of the wrong extent.
+
+  **(ii) Shape D's own kill test is half-done, and the unfinished half is the one that names
+  a mechanism.** §3 Shape D reads "autopsy the 23-core totally — **its full colouring
+  space**, its fractional certificate, whether it factors". The factorization test ran (M41,
+  factored) and the fractional certificate is exact (130/23). **The colouring space was never
+  computed.** Every instrument built since M20 answers yes/no; M20's strip automaton is the
+  only DESCRIPTION instrument this project ever built and it is the source of the only
+  structural theorem about a colouring space we own (the window-extension theorem). Stubbed
+  as `plans/M46-colouring-automaton.md`, gated by a hard feasibility stop (cost is exponential
+  in strip width × interaction range: affordable at the gap bands, dead at the 1/7 flanks).
+
+  **Consequence for the shape rankings.** No shape is promoted or demoted on this entry —
+  nothing was measured. But **Shape A's kill test (ii)** ("menus too large to enumerate ⟹
+  retreat to menu MOMENTS — forced pairs, forced-equal pairs, coverage") is now known to be
+  partly blind: G28 says pair moments read zero on objects that provably force, and the arity
+  of the compulsion has never been bounded from below on any object whose forcing we can
+  certify (`plans/M45-arity-floor.md`). Until that floor is measured, a flat moment reading
+  demotes nothing. And **Shape A/B's target statement is over-strong**: the composition needs
+  the UNION uncolourable, not each copy universally forcing — the weak form is a strictly
+  larger search space with the same payoff, and no meter we own measures it
+  (`plans/M44-from-below-gadget.md`, correction of 2026-08-13).
+
 ## 4. What the two directions now do for each other (the alternation, sharpened)
 
 The from-above family is the hunt's **model organism**: finite, decidable,

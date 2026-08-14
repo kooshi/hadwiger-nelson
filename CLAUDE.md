@@ -739,36 +739,98 @@ check found the from-above direction closed by a proven theorem. **The from-abov
 is finished as a source of new mathematics** — that is the ranking's headline, and the
 alternation now points, without a counterweight, below.)*
 
-1. **M44 — the from-below gadget hunt, promoted to the front** — M41's reduction is
-   the only live route to new mathematics in this repository: **ONE finite
-   unit-distance graph forcing two points at distance √3 or 2 to differ in every
-   proper 5-colouring closes χ(ℝ²) ≥ 6** (nine shell copies + the kernel's own
-   `hexShell_pigeonhole` do the rest, M34 composition genre). The deferred probes are
-   named in `plans/M41-k5-gradient.md` §R: outer-shell-anchored gadget asks, detuned
-   (non-crystal) tilings, the gen-2 k = 5 class sweep at depth. **What M43 adds to the
-   design brief, and it is not encouraging news to ignore**: G28 says a clique-free
-   forcer need not carry any pair-level compulsion at all, so a virtual-edge meter
-   reading zero does NOT imply the object is far from forcing — the meters that have
-   read flat everywhere (G10, G17, G27, and now k = 6 from above) may be measuring an
-   arity the mechanism does not live at. A gadget hunt should therefore ask class- and
-   coverage-order questions, not only pair questions.
-2. **The fine tail's residue, if anyone wants it** — twelve deep-tail bands are honest
-   unknowns at cap (`plans/M43-fine-tail.md` §R lists them); each is a day of desktop
-   solver time for a verdict that is conditionally known already. Low value, priced,
-   and explicitly NOT recommended.
-3. **The certified union** (`plans/M35-certified-union.md`) — parked:
-   consolidation with bounded novelty; reopens on a find or the write-up
-   trigger's "maybe" clause.
-4. **The certification programme** — standing fallback unchanged
+*(RE-RANKED 2026-08-13, on Kooshi's "go over everything; what pattern caused it; what path
+haven't we considered" — no milestone closed, no result landed, and the Frontier's
+state-of-the-art narrative and ledger above are UNCHANGED. What changed is the reading of
+what we already hold. **M43 retired the cell family after evaluating it as a DOOR (can a
+six-colouring walk through? no, provably not). It is also a DIAL, and nobody turned it.**
+A colouring constant on cells of scale p forbids not the single distance 1 but a closed
+INTERVAL around 1 whose width shrinks with p — M43's own bridge to Voronov — so the family
+is a one-parameter deformation whose far end is the classical seven-colouring and whose
+LIMIT, as the cells shrink to points and the constancy constraint evaporates, is the
+unit-distance problem itself. The answer is seven at every setting of the dial; it may be
+five or six only exactly at the limit. That reframes the open problem as a discontinuity at
+the endpoint of a function known constant on the whole open ray, and it comes with a
+derivable bridge and a measurable quantity — G29, minted below. Kooshi's standing correction
+to the methodological entry is folded into G30: measurement is where the patterns come from;
+the failure mode is promoting an inductive reading, not making the measurement.)*
+
+1. **M44 — the ε-dial** (`plans/M44-epsilon-dial.md`) — **RECOMMENDED NEXT.** Derive first,
+   measure second. The derivation (§A, before any instrument): the exact interval half-width
+   δ(p) per band, and **the limit lemma — if the minimal 1-minimal core size N(p) stays
+   bounded along any sequence p → 0, then χ(ℝ²) ≥ 7**, by Bolzano–Weierstrass on cell
+   centres plus the observation that identifying non-adjacent vertices cannot lower a
+   chromatic number. Equivalently: **the divergence of N(p) is a NECESSARY CONDITION for
+   χ(ℝ²) ≤ 6**, and its rate is the first quantity this project has produced that speaks to
+   *which* of 5/6/7 is true rather than to whether one more object we built happens to force.
+   Then the measurement, on the instrument M40–M43 already built and controlled: the ladder
+   of (p, δ, N*, physical radius) down past M43's p ≈ 0.109 floor. The preliminary read of
+   data already on disk — flagged in the stub as an anthology, not a measurement, with
+   comparability as its phase 1 — is that **N grows like p^(−5/3) while the core's PHYSICAL
+   radius stays pinned near 1.3–1.7 unit distances at every scale**, i.e. the seven-forcing
+   occupies a fixed-size region sampled ever more finely. If that survives a comparable
+   re-measurement it is the sharpest design constraint the hunt has ever had, and it says the
+   from-below search has been looking at objects of the wrong shape.
+2. **M45 — the arity floor** (`plans/M45-arity-floor.md`) — cheapest item on the board, and
+   the one whose negative result is itself a sentence about mechanism. Four grokkings
+   (G9, G13, G17, G28) independently say the compulsion lives above pair order; every meter
+   we own is arity 2; and **we have never once asked an arity-3 question on an object whose
+   forcing we can certify.** The 160-vertex fine-tail core and the kernel-checked 23-vertex
+   core are a calibrated test bed: a hit is real signal, a zero raises the arity floor. G28 —
+   currently the strongest negative in the record — is cited as a fact about objects while
+   resting on evidence that may be a fact about instruments, which is G21 verbatim. Carries a
+   second question on the same material at no extra cost: **why is every 1-minimal core in
+   two unrelated arithmetics near-symmetric with the symmetry broken?** (Suspected cause,
+   nearly an argument: G7 says exact symmetry adds no colour constraint, so a symmetric
+   object is never minimal — broken near-symmetry is what minimality DOES to a forcer inside
+   a symmetric ambient. Checkable in an afternoon against orbit profiles already on disk.)
+3. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`, re-ranked not demoted) —
+   the target is still exactly right and still the only route to χ(ℝ²) ≥ 6. Two corrections
+   were made to the stub at the re-rank and both matter before it runs: **(a) the registered
+   target is strictly stronger than the theorem needs** — the composition needs the UNION
+   uncolourable, not each copy universally forcing, so the search space is strictly larger
+   than the one every meter we own measures; **(b) the probe to run first is the
+   hetero-dimer effort curve against overlap size**, because across four campaigns exactly
+   two numbers ever moved and that is the only one with a monotone knob (up to 1,101 shared
+   vertices), recorded once and dropped. It sits behind M45 because it currently contradicts
+   its own G28 advice by ranking a pair ask first.
+4. **M46 — the description instrument** (`plans/M46-colouring-automaton.md`) — every tool
+   built since M20 answers yes/no; M20's strip automaton is the only one that ever
+   *described* a colouring space, and it is the source of the only structural theorem about
+   one that we own. The shape-space document's own kill test for the from-above route says
+   "autopsy the core totally — **its full colouring space**"; the factorization test ran at
+   M41 and the colouring space was never computed. Transfer matrix over strips of a gap band:
+   exact chromatic numbers with no period bound and no cap (replacing a dozen honest
+   "unknown at cap" rows), plus the structure of the near-miss colourings, which is where a
+   mechanism for clique-free forcing would be visible if anywhere. Gated by a hard
+   feasibility stop in phase 0 — cost is exponential in width × interaction range, so it is
+   affordable at the coarse and gap bands and **dead at the 1/7 flanks**.
+5. **M47 — the three-distance plane** (`plans/M47-multidistance.md`) — `χ(ℝ²; {1,√3,2}) ≥ 7`
+   is already kernel-checked (`hexShell_pigeonhole`), the upper-bound machinery is the cell
+   instrument with a few lines changed (union the edge sets at 1, √3 and 2), and {1,√3,2} is
+   not an arbitrary variant: it is exactly the distance set the six-hunt's reduction lives
+   in. If any scale gives seven, the value is determined exactly at both ends in the kernel.
+   Blocking literature gate first — this set is the closed hex shell's difference set and may
+   well be settled; below the publication bar either way.
+6. **The fine tail's residue** — twelve deep-tail bands are honest unknowns at cap
+   (`plans/M43-fine-tail.md` §R lists them). No longer a standalone item: they sit ON M44's
+   ladder and get a second, better-aimed attempt there as a by-product.
+7. **The certified union** (`plans/M35-certified-union.md`) — parked: consolidation with
+   bounded novelty; reopens on a find or the write-up trigger's "maybe" clause.
+8. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`).
-5. **Richer cell families / the instrument audit** — unchanged, parked; the
-   hexagon module stays priced and unneeded. The cell family itself is now
-   **closed as a research direction** (M43 + G24's conditional explanation):
-   further scales cost solver time and cannot produce a six.
-6. **The 1/7 core's kernel certificate** — priced and DECLINED at M43 (M06-scale,
-   ~10⁷ LRAT lines for a statement conditionally implied by published work). The
-   M42 template stays proven and ready for a target that earns it; this is not
-   one. Reopens only if the certificate machinery itself becomes the product.
+9. **The 1/7 core's kernel certificate** — priced and DECLINED at M43 (M06-scale, ~10⁷ LRAT
+   lines for a statement conditionally implied by published work). The M42 template stays
+   proven and ready for a target that earns it; this is not one. Reopens only if the
+   certificate machinery itself becomes the product, or if M46 §4 finds that an automaton
+   emptiness certificate is a different and cheaper price.
+10. **Carried forward unchanged from the previous ranking** — the hexagon cell module stays
+    priced and unneeded (M36 superseded it before it was written); the instrument audit stays
+    parked. The line the previous ranking carried here — *"the cell family is closed as a
+    research direction: further scales cost solver time and cannot produce a six"* — is
+    **retracted in its second half and kept in its first**: further scales indeed cannot
+    produce a six (that is proven for the family, conditionally for every band), and that is
+    exactly why the scale parameter is now worth measuring rather than abandoning (G29).
 
 ### The open structural question (minted 2026-08-11, the M34 close discussion)
 
@@ -1371,6 +1433,70 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   if it is only sufficient, to say what a refusal therefore cannot mean.
   Falsifier: none needed — this is a methodological invariant, and it
   fails only by being ignored.*
+* **G29 — The cell family is not a door, it is a dial, and the open problem is the
+  discontinuity at its endpoint.** (Minted 2026-08-13, on a re-reading of M39–M43 with no
+  new measurement.) A colouring constant on the cells of a triangular grid at scale `p`
+  forbids not the single distance 1 but a closed INTERVAL around 1, of half-width `δ(p) > 0`
+  that shrinks with `p` — this is exactly M43's own bridge to Voronov, with the width made
+  explicit and computable (`δ(p) = min dist(1, I_v)` over the offset windows `I_v` that miss
+  1). So `G(p)` is a **one-parameter deformation**: at the coarse end the classical
+  seven-colouring, and as `p → 0` the cells shrink to points, the constancy constraint
+  evaporates, and **the limit is the unit-distance problem itself.** Along that whole
+  deformation the answer is pinned at SEVEN — proven band by band by us, and (conditional on
+  [Vor2023]) at every scale — while every structural invariant collapses underneath it
+  (ω 7 → 3, the certified spectral bracket to 3.56, the fractional bound stalling below 5).
+  Therefore `χ(ℝ²) < 7` is the claim that a function known constant on an entire open ray is
+  **discontinuous exactly at the endpoint**, and all the information about the plane's own
+  answer lives in the approach. The quantitative handle, derived and not yet measured: let
+  `N(p)` be the size of a vertex-critical non-6-colourable subgraph of `G(p)`. **If `N(p)`
+  stays bounded along any sequence `p → 0` then `χ(ℝ²) ≥ 7`** — take cell centres, pass to a
+  subsequence (a critical graph is connected with min degree ≥ 6, so bounded count gives
+  bounded diameter for free), every edge's length is `1 ± O(p) → 1`, and any two indices that
+  collide in the limit were non-adjacent so the limit is a contraction, which cannot LOWER
+  the chromatic number. Contrapositive: **the divergence of `N(p)` is a necessary condition
+  for `χ(ℝ²) ≤ 6`** — the exact quantitative obstruction between the proven interval theorem
+  and the open point theorem. **[reading — the deformation and the pinning are measured
+  (M39–M43); the limit lemma is a derivation sketched here and written out properly in
+  `plans/M44-epsilon-dial.md` §A, and the milestone STOPS if it does not survive careful
+  writing]** *Why it was missed: M43 evaluated the family on one criterion — can a
+  six-colouring live here? — got a clean and correct no, and retired the instrument without
+  asking what the PARAMETER was doing. The Voronov connection, treated at that close as the
+  direction's tombstone, is what makes the dial meaningful: it is the statement that the
+  function is constant on the ray. Falsifiers: the limit lemma failing on careful writing
+  (most likely at the collision/contraction step); or `N(p)` proving to be dominated by
+  shrink quality rather than by mathematics, which is G21 and which is why the milestone's
+  comparability phase runs before its ladder.*
+* **G30 — Measurement generates; induction kills. The failure is never the measuring — it
+  is promoting an inductive reading without a derivation or a registered replication behind
+  it.** (Minted 2026-08-13, from sorting the whole record by how each claim was reached;
+  stated in this form on Kooshi's correction, which is the load-bearing half: *"the
+  interesting patterns that become intuited and derived show up first from measurement, so
+  it's a catch-22."*) Sorted by provenance, the record is close to a clean dichotomy.
+  **Derived from structure first, then measured — survived, every one**, several becoming
+  kernel theorems: the quadrature law (26 exact censuses, zero violations), the stacking law,
+  the criticality factorization A1, M36's boundary-tight sharpening (worked by hand in §0a
+  before any code), M42's exact-hexagon reach whose corner values ARE the band boundaries,
+  M25's `√3·ζ₁₂ = 1+ζ₆`, G26's reduction. **Measured first, then interpreted — died, every
+  one**, mostly refuted by our own later work: the seam-alignment kill mechanism (0/4 on
+  registered replication), the concentration bet, the coset census, the triple-kill
+  population (provably empty), G20's brick-interlock reading (refuted by our own M36
+  theorem), G26's universality (refuted by G28), M39's "finer is worse", M39 §0e's
+  shell-exhaustion claim, M43's P8 core-shape prediction, M31's P6 band prediction.
+  Roughly 7-for-7 against 0-for-10. **[measured: the project's own record]** *The rule this
+  yields is NOT "measure less" — every derivation above began life as a pattern somebody
+  noticed in a measurement, and the quadrature and stacking laws were derived precisely
+  because earlier censuses had shown where to look. The rule is about what a measurement
+  BUYS: it buys a candidate pattern, never a conclusion, and the conclusion is bought
+  separately by a derivation or by a pre-registered replication on fresh objects. Two design
+  consequences already applied: prefer measurements that turn a DIAL (a parameter whose
+  behaviour is informative in both directions — G29's ladder, the hetero-dimer effort curve
+  against overlap) over searches that hunt for a POSITIVE (whose null result is
+  uninterpretable and has now come back flat four times); and prefer CALIBRATED test beds —
+  ask the new question on an object whose answer is already certified, so a zero reading
+  bounds the instrument instead of being mistaken for a fact about the world
+  (`plans/M45-arity-floor.md` is that pattern made into a milestone). Falsifier: none needed;
+  like G21 this is a methodological invariant and it fails only by being ignored — but the
+  tally is falsifiable and should be re-sorted at every tenth milestone.*
 
 ## Whose work this is
 

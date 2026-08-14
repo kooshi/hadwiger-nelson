@@ -1,4 +1,27 @@
 # M44 — The from-below gadget hunt: the one object that closes χ(ℝ²) ≥ 6
+#
+# ┌─ RE-RANKED 2026-08-13, NOT demoted, NOT deleted (deprecate-never-delete). ──────────────┐
+# │ This stub stayed at the front for one day. It moves down the ranking — behind           │
+# │ `plans/M44-epsilon-dial.md` and `plans/M45-arity-floor.md` — for two reasons stated at   │
+# │ the re-rank, both of which are about THIS document rather than about the target:        │
+# │                                                                                          │
+# │  (1) It tells its own author to "ask class- and coverage-order questions, not only pair  │
+# │      questions" (the G28 lesson) and then ranks a PAIR ask first. The advice and the     │
+# │      probe list contradict each other, and M45 is the milestone that settles which is    │
+# │      right — by bounding the arity of a compulsion on an object we can certify forces.   │
+# │      Running this hunt before that answer spends four campaigns' worth of solver time    │
+# │      on instruments whose blindness is the open question.                                │
+# │  (2) It is a probe list, not a derivation. Sorted by how they were reached, this         │
+# │      project's a-priori derivations have survived without exception and its post-hoc     │
+# │      inductive readings have died without exception (G30). Four campaigns of this exact  │
+# │      shape have already returned flat. The target is right; the method of approach is    │
+# │      the one with the measured zero success rate.                                        │
+# │                                                                                          │
+# │ It keeps its number until it is scheduled, per the M33/M35 precedent (a parked stub      │
+# │ keeps the number it was stubbed at). Two CORRECTIONS to its content were made at the     │
+# │ re-rank and are marked [2026-08-13] below — read them before subplanning.                │
+# └──────────────────────────────────────────────────────────────────────────────────────────┘
+#
 # (STUB — written 2026-08-12 at the M43 close. Read order for a fresh session:
 #  `plans/M41-k5-gradient.md` WHOLE (the reduction, the autopsy dictionary, the flat
 #  table, the deferred probes in §R), `plans/SHAPES-OF-SIX.md` (the shape space),
@@ -18,6 +41,23 @@ route to new mathematics in this repository runs through the from-below reductio
 > Find a finite unit-distance graph `H` with two distinguished vertices `u, v` at plane
 > distance **√3 or 2**, such that **every proper 5-colouring of `H` gives `u` and `v`
 > different colours.**
+
+**[CORRECTION 2026-08-13 — the registered target above is STRICTLY STRONGER than the theorem
+needs, and searching the strong form searches a strictly smaller space for the same payoff.]**
+The composition does not need each copy of `H` to force distinctness on its own. It needs the
+UNION — the seven shell points together with the copies placed on them — to admit no proper
+5-colouring. In the union the copies share the shell and constrain one another, so a gadget that
+fails in isolation can succeed in company. "Every proper 5-colouring of `H` separates `u` and
+`v`" is *sufficient* for the composition and is not *necessary*. Every meter this project owns
+(the forced-distinct query, the virtual-edge sweep) measures the sufficient form only. The hunt
+should therefore be over PAIRS — (substrate, gadget) with a joint constraint — or directly over
+candidate unions, and the acceptance criterion registered accordingly (this is G21 applied to our
+own target statement, not to an instrument). Restating the weak form as the target:
+
+> Find a finite unit-distance graph `U` containing the closed first shell of the unit triangular
+> lattice such that `U` has no proper 5-colouring — knowing, from `hexShell_pigeonhole`, that
+> every 5-colouring of the shell already places a mono pair at √3 or 2 somewhere among its 21
+> pairs, so the material only has to kill those placements *jointly*, not one at a time.
 
 That is the whole thing. The kernel already holds Act One — `HexShell.hexShell_pigeonhole`
 (M35): every proper ≤ 6-colouring of the plane has a monochromatic pair at √3 or 2, on the
@@ -58,6 +98,20 @@ its own refuting core. So:
    The dimers exist (M41: interfaces to 1,101 shared vertices) and their solver-effort
    excess (10×, single-sample) is the only nonzero signal the whole gradient campaign
    produced.
+
+   **[CORRECTION 2026-08-13 — the effort signal is the probe, and the pair ask is not.]**
+   Re-reading the whole gradient campaign: across four milestones and twelve-plus composed
+   objects, **exactly two numbers ever moved, and one of them has a monotone knob.** The
+   hetero-dimer solver-effort excess (10× at comparable size) comes with a dial — the
+   overlap between the two witnesses, which runs from small up to 1,101 shared vertices —
+   and it was recorded as "single-sample, signal not claim" and then dropped. Nothing else
+   in the record has a dial at all. So the first thing to run here is **not** another
+   forced-distinct pair ask (arity 2, the blind instrument by G28) but the effort curve
+   against overlap size: three or four dimers at increasing interface size, three runs each
+   for a minimum, on one machine, CPU seconds not wall clock. Monotone growth is the first
+   gradient this hunt has ever had and tells us which direction to build in; a flat curve
+   retires the only non-zero reading in the campaign, honestly and cheaply. Either way it
+   costs an afternoon and it is *derived from the record* rather than from a hope.
 2. **Coverage-order asks on the same material** — min-cover at k = 5 around a candidate
    pair, which is what would fire if the compulsion sits at class order (the G28 lesson
    applied).
