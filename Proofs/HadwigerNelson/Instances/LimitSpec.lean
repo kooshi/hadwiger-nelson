@@ -87,9 +87,11 @@ single point and each edge reads `|0 - 1| = 1 ≤ 1`, whatever the graph. A limi
 single `ε` would therefore accept any non-`k`-colourable graph and conclude `χ(ℝ²) ≥ k + 1` for
 every `k`, which is false. The `∀ ε > 0` is what rules this witness out — at any `ε < 1` it dies.
 
-Stated for an arbitrary graph on an arbitrary finite vertex type, because the point is that the
-degenerate witness is always available. -/
-theorem collapsed_drawing_satisfies_one_tolerance {ι : Type*} [Fintype ι] (G : SimpleGraph ι) :
+Stated for an arbitrary graph on an arbitrary vertex type — not even finiteness — because the point
+is that the degenerate witness is *always* available. (The `[Fintype ι]` this once carried, to
+parallel the real lemma's hypotheses, was unused; the linter caught it at M45 and dropping it makes
+the red stronger, which is the direction a control should move.) -/
+theorem collapsed_drawing_satisfies_one_tolerance {ι : Type*} (G : SimpleGraph ι) :
     ∃ z : ι → ℂ, (∀ i, z i ∈ closedBall (0 : ℂ) 1) ∧
       ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ 1 :=
   ⟨fun _ => 0, fun _ => by simp, fun _ _ _ => by simp⟩

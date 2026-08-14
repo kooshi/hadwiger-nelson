@@ -715,4 +715,138 @@ a fulfilled prediction.
 
 ## §R. Results
 
-*(written at the close)*
+*Desktop, 32 cores, 2026-08-13. Every number below is measured on this machine.*
+
+### R0 — the a-priori layer, and what it did to the question before any instrument ran
+
+D1–D5 of §6 were derived on paper and are now **kernel theorems on axioms exactly
+`[propext, Classical.choice, Quot.sound]`** (`Proofs/HadwigerNelson/Arity.lean`, zero `sorry`).
+The one that mattered was **D4**: a vertex with `k` distinct neighbours makes the rainbow pattern on
+them unrealizable, so `arityFloor G k ≤ k` **unconditionally**. Consequences, stated before any
+measurement:
+
+* the stub's own framing had an impossible branch — the floor is never "only the whole object";
+* and every object this repository holds has minimum degree far above its colour count, so
+  **the four flat pair campaigns were asking an arity-2 question on objects where a compulsion of
+  arity ≤ k was guaranteed to exist.**
+
+`realizes_iff_extends` paid for itself twice: it makes the colour-pinned encoding provably the same
+query as the colour-free one (so the campaign's decorrelation rests on a theorem), and
+`compels_of_fan` reduces to two lines through it.
+
+### R1 — the headline: G28's "zero virtual edges at k = 6" does not survive its own stage
+
+M43 examined the 160-vertex fine-tail core, found no pair-level kill, and recorded
+*"ZERO virtual edges at k=6 … the 1/7 seven-forcing does NOT factor as pigeonhole × kill."*
+Its recorded ask was **six questions**: *force colour(0,0) = colour(d) for the six smallest non-edge
+classes*, on the R = 8 ball (241 vertices).
+
+Re-run on **the identical stage** (fingerprint `9d9599be0db64677`, 241 vertices, 6,486 edges):
+
+| ask | result |
+|---|---|
+| **M43's own six anchored asks, verbatim** — the reproduction control | **6 realizable, 0 compelled** — reproduces M43 exactly |
+| the 51 pairs found compelled on the critical stage, **same addresses, same stage** | **7 COMPELLED**, 44 realizable, 0 undecided |
+
+The seven sit at offset norms **27, 28, 31** — classes M43 never swept (it swept 1, 3, 4, 7, 9, 12).
+Each decided in **7.5–15 s**. So this was never a question of solver budget; the questions were not
+asked.
+
+**All seven are confirmed in three independent encodings**, and every control is green:
+
+| pair (addresses) | norm | forward break | reversed break | colour-pinned, no break |
+|---|---|---|---|---|
+| `(-1,0) ~ (2,3)` | 27 | unsat 12.2 s | unsat 44.0 s | unsat 15.1 s |
+| `(0,-1) ~ (3,2)` | 27 | unsat 11.0 s | unsat 39.4 s | unsat 19.4 s |
+| `(-1,0) ~ (3,2)` | 28 | unsat 11.7 s | unsat 59.1 s | unsat 37.2 s |
+| `(-1,0) ~ (5,-2)` | 28 | unsat 11.8 s | unsat 62.9 s | unsat 30.0 s |
+| `(0,-1) ~ (4,1)` | 28 | unsat 13.3 s | unsat 56.0 s | unsat 29.0 s |
+| `(-3,-2) ~ (2,-1)` | 31 | unsat 16.7 s | unsat 53.5 s | unsat 24.8 s |
+| `(-3,5) ~ (2,-1)` | 31 | unsat 18.3 s | unsat 54.0 s | unsat 29.0 s |
+
+Controls: each of three sampled pairs is realizable as a **distinct** pair (0.67–1.31 s), so none of
+the seven is a degenerate or vacuous reading; and the stage's vacuity guard is `sat` in 0.51 s.
+
+**Therefore: the reading was a COVERAGE artifact, not a stage artifact, and not a fact about the
+object.** The object has pair-level kills on the very stage that was used to conclude it has none.
+G28's "the forcing does not factor" is refuted in its pair-mediated half: **Act Two exists.**
+
+This is G21 in its purest form — a search run against a narrow acceptance set measures the set — and
+it is exactly the failure mode M45 was designed to test for, found in the place it predicted.
+
+### R2 — the critical stage is richer, which is the secondary effect
+
+On `core-minus` (the 1-minimal core less its highest-degree vertex, 159 vertices — one vertex short
+of refusing), the **complete** sweep of all 9,636 non-adjacent pairs returned **51 virtual edges, 0
+forced pairs, 11 undecided at cap** (excluded, recorded). Against 7 for the same pairs on the ball.
+So both effects are real and now separated: **coverage is primary** (six asks against thousands),
+**criticality is secondary** (51 against 7 on identical pairs).
+
+Norm distribution of the 51: 7×1, 9×2, 12×1, 13×7, 16×3, 19×9, 21×6, 25×4, 27×5, 28×8, 31×5 —
+**four at classes M43 did sweep**, 47 at classes it did not.
+
+The witness pair `(-2,1) ~ (2,0)` (offset norm 13) is confirmed in **three encodings** — forward
+first-occurrence breaking (151.9 s), reversed-order breaking (115.2 s), colour-pinned with no
+breaking (2561.2 s) — with both controls green (the same pair is realizable as *distinct* in 0.03 s;
+a planted innocent pair is realizable in 0.02 s).
+
+### R3 — genuine arity-3 compulsions exist, and one near-miss is recorded as such
+
+On `core-minus`, three triples are compelled with **every one of their three sub-pairs verified
+free**, each confirmed in two encodings:
+
+| triple (addresses) | compelled pattern | free / pinned |
+|---|---|---|
+| `(-5,3), (-2,-7), (0,-3)` | monochromatic | 17.8 s / 31.0 s |
+| `(-3,5), (-2,1), (2,-5)` | monochromatic | 7.0 s / 20.4 s |
+| `(-2,-5), (-1,4), (0,-1)` | **two together, one apart** | 240.6 s / 46.1 s |
+
+A fourth candidate — `(-2,1), (2,0), (5,-1)` — presented as an arity-3 compulsion and **was a
+virtual edge in disguise** (its sub-pair at norm 13 is itself compelled). It is recorded as
+`explained_by_subtuple`, and it is why `tools/arity.py` withholds `minimal_arity` until the 2-subset
+sweep has run. That near-miss is now a planted control in the instrument's self-test.
+
+### R4 — the orbit observation inverted under its control, and the control is itself suspect
+
+The stub's "1-minimal cores are near-symmetric with the symmetry broken" is confirmed in the letter
+(all five recorded cores have incomplete orbits) and **inverted in substance**: against same-size
+random subsets of the same ball, cores are **3× to 30× MORE orbit-complete** (29.2 % vs 2.5 %;
+31.6 % vs 2.5 %; 50.0 % vs 15.7 %; 80.0 % vs 2.7 %; 60.0 % vs 4.9 %). Minimality *concentrates*
+symmetry. **Not adopted**: `celllat.shrink` deletes outside-in by shell in batches and may be
+manufacturing the effect; the randomized-order re-shrink is the registered test and is **not run**.
+
+### R5 — instruments and gate
+
+`tools/arity.py` (self-test green on three planted controls: the arity-3 positive, the
+no-compulsion negative, and the explained-by-subtuple case), `tools/m45.py`.
+Gate: `./scripts/build.sh` OK · zero `sorry` (with its negative control seen red) · axioms
+**502 clean, 5 pre-existing declared purchases** · `lake lint` **passed**.
+
+**A gate debt from M44 was found and repaid**: the linter was red on
+`collapsed_drawing_satisfies_one_tolerance` (an unused `[Fintype ι]`), which means M44's close
+reported "linters silent" without that being true. Dropping the argument makes the red control
+strictly stronger, which is the direction a control should move.
+
+### R6 — registered predictions, scored
+
+| # | prediction | outcome |
+|---|---|---|
+| P1 | Object B's arity floor is 2, abundantly | **MET** on a 20-pair sample (9 virtual edges, 2 forced pairs); the exhaustive run is not done |
+| P2 | Object A's floor is > 2 on both stages | **MISSED, and this is the finding** — it is 2 on both |
+| P3 | Object A's floor is exactly 3 | **MISSED** — it is 2 |
+| P4 | minimal fanned set < 53 | **NOT RUN** |
+| P5 | orbit enrichment at least half procedural | **NOT RUN** (the measurement it was about inverted first) |
+| P6 | every core in the family has floor < 6 | **NOT RUN** |
+
+Two of the three predictions that ran were missed, and reported as missed. The milestone's value did
+not come from a prediction being met; it came from the calibrated bed making a zero interpretable.
+
+### R7 — what is NOT done, reported as not done
+
+* the exhaustive arity ladder on Object B (the kernel-certified 23-vertex core) — designed, not run;
+* the fan-shrink upper bracket on either object — designed, not run, so the bracket is
+  `[2, 6]` from R0 and R1 rather than the tighter interval the milestone aimed at;
+* double-encoding of 44 of the 51 `core-minus` virtual edges (7 of them, on M43's stage, are
+  double-encoded; one is triple-encoded);
+* the randomized-order re-shrink of R4;
+* the arity-3 sweep on any plane witness.
