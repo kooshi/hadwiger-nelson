@@ -211,7 +211,7 @@ ENCODINGS = ("free-fwd", "free-rev", "pinned")
 
 
 def realize(stage: dict, k: int, tup, blocks, cap: float | None = None,
-            enc: str = "free-fwd") -> dict:
+            enc: str = "free-fwd", return_model: bool = False) -> dict:
     """Can a proper `k`-colouring wear this pattern on this tuple?
 
     `unsat` = the pattern is COMPELLED against (given the stage is colourable, and given the
@@ -232,7 +232,12 @@ def realize(stage: dict, k: int, tup, blocks, cap: float | None = None,
     row = {"tuple": list(tup), "blocks": [list(b) for b in blocks], "enc": enc,
            "outcome": st, "seconds": round(time.time() - t0, 2), "cap_seconds": cap}
     if st == "sat":
-        _validate(decode(model, n, k), es, tup, blocks)
+        col = decode(model, n, k)
+        _validate(col, es, tup, blocks)
+        if return_model:
+            # the validated colouring, so an observe-then-confirm caller can feed it back into the
+            # pool without re-solving or re-encoding -- ONE code path for the query, not two
+            row["_model"] = col
     return row
 
 
@@ -382,7 +387,7 @@ def screen3(M, stage: dict, us=None, adj_rows=None):
     return out
 
 
-def screen_neighbourhoods(M, stage: dict, k: int, m: int = 4):
+def screen_neighbourhoods(M, stage: dict, k: int, m: int = 4, vs=None):
     """The complete arity-`m` screen restricted to vertex NEIGHBOURHOODS — the home of the one
     compulsion `Arity.arityFloor_le_of_degree` guarantees exists.
 
@@ -391,20 +396,35 @@ def screen_neighbourhoods(M, stage: dict, k: int, m: int = 4):
     Grey's 1581 that is 1,718,839 rather than 259,338,410,115."""
     n, H = stage["n"], M.shape[2] * 64
     nbr = [[] for _ in range(n)]
+    adj = set()
     for a, b in stage["edges"]:
         nbr[a].append(b)
         nbr[b].append(a)
+        adj.add((a, b))
+        adj.add((b, a))
+    # The adjacency set is built ONCE. `locally_proper` rebuilds it from the edge list on every
+    # call, which is invisible at pair scale and fatal here: 25.8 million pattern checks against a
+    # 7,877-edge list is the whole runtime.
     pats = [tuple(tuple(b) for b in bl) for bl in partitions(m, k)]
+    # per pattern, the position pairs inside a block (must be non-adjacent) and the full pair list
+    pat_meta = [(bl, [(x, y) for b in bl for x, y in itertools.combinations(b, 2)],
+                 [(x, y, any(x in b and y in b for b in bl))
+                  for x, y in itertools.combinations(range(m), 2)]) for bl in pats]
     out, seen = [], set()
-    for v in range(n):
+    for v in (range(n) if vs is None else vs):
         for tup in itertools.combinations(sorted(nbr[v]), m):
             if tup in seen:
                 continue
             seen.add(tup)
-            for blocks in pats:
-                if not locally_proper(stage, tup, [list(b) for b in blocks]):
+            for blocks, inblock, allpairs in pat_meta:
+                if any((tup[x], tup[y]) in adj for x, y in inblock):
                     continue
-                if not observed_by_mask(M, tup, [list(b) for b in blocks]):
+                acc = None
+                for x, y, same in allpairs:
+                    w = M[tup[x], tup[y]]
+                    w = w if same else ~w
+                    acc = w if acc is None else (acc & w)
+                if not acc.any():
                     out.append(Candidate(tup, blocks, stage["fingerprint"], H))
     return out
 
@@ -462,12 +482,20 @@ def _harvest_one(spec):
     n, es = stage["n"], stage["edges"]
     rnd = random.Random(seed)
     base = base_clauses(n, es, k) + amo_clauses(n, k) + _brk(n, k, list(range(n)))
-    extra = [[var(rnd.randrange(n), rnd.randrange(k), k)] for _ in range(6)]
-    st, model = _solve(base + extra, n * k, cap)
+    # Diversity, not count, is what a screen needs, and it was MEASURED rather than assumed: with
+    # six random unit clauses the pool is so correlated that 1,024 colourings are worth about 74
+    # independent ones; pinning ~200 vertices roughly triples the effective independence, and past
+    # ~800 the formula starts coming back UNSAT and the ladder falls back rather than losing the
+    # sample. (M48 subplanning, desktop, on de Grey's 1581 at five colours.)
+    st, model = "unsat", None
+    for pins in (200, 100, 50, 6, 0):
+        extra = [[var(v, rnd.randrange(k), k)]
+                 for v in rnd.sample(range(n), min(pins, n))] if pins else []
+        st, model = _solve(base + extra, n * k, cap)
+        if st == "sat":
+            break
     if st != "sat":
-        st, model = _solve(base, n * k, cap)
-        if st != "sat":
-            return None
+        return None
     col = decode(model, n, k)
     for a, b in es:
         if col[a] == col[b]:
@@ -476,12 +504,18 @@ def _harvest_one(spec):
 
 
 def harvest(stage: dict, k: int, count: int, workers: int = 28,
-            cap: float = 60.0) -> list[list[int]]:
+            cap: float = 60.0, seed0: int = 0) -> list[list[int]]:
     """Proper colourings, validated. Each one exhibits a realized pattern for EVERY tuple at once,
-    which is what makes the confirm pass small: only never-observed patterns need a solver."""
+    which is what makes the confirm pass small: only never-observed patterns need a solver.
+
+    `seed0` exists because of a measured near-miss: seeds run over `range(seed0, seed0 + count)`,
+    and without the offset a SECOND call returns the IDENTICAL pool. A caller that screens against
+    one harvest and then "filters against fresh colourings" would be re-testing the same ones and
+    reading the resulting zero as "nothing more to find" -- a false negative produced entirely by
+    the instrument. Every caller that harvests twice must advance `seed0`."""
     with ProcessPoolExecutor(max_workers=workers) as ex:
         return [c for c in ex.map(_harvest_one,
-                                  [(stage, k, s, cap) for s in range(count)]) if c]
+                                  [(stage, k, s, cap) for s in range(seed0, seed0 + count)]) if c]
 
 
 def observed(cols, tup, blocks) -> bool:

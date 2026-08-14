@@ -74,8 +74,15 @@ def _classify(pts, nsq, psub, one, approx, tag: str):
     arithmetic disposes. The `assert` is not decoration — `closure.nsq` returns a *list*, so norm
     constants built as tuples compare unequal to every norm forever, which would leave the √3 and
     distance-2 classes EMPTY while the unit-count control still passed."""
-    three, four = [3 * x for x in one], [4 * x for x in one]
-    assert type(three) is type(one), f"NORM CONSTANT TYPE MISMATCH in {tag}"
+    ctor = type(one)
+    three, four = ctor([3 * x for x in one]), ctor([4 * x for x in one])
+    probe = nsq(psub(pts[0], pts[1]))
+    if not (type(probe) is ctor and three != one and four != one):
+        raise SystemExit(
+            f"NORM CONSTANT MISMATCH in {tag}: constants are {ctor.__name__} and a computed norm "
+            f"is {type(probe).__name__}. The two field modules disagree — `degrey` returns tuples "
+            f"and `closure` lists — and a mismatch here leaves the sqrt3 and distance-2 classes "
+            f"EMPTY while the unit-count control still passes.")
     ap = [approx(p) for p in pts]
     grid: dict = {}
     for i, (x, y) in enumerate(ap):
@@ -218,11 +225,390 @@ def _nbhd_count(stage: dict, m: int) -> int:
     return sum(math.comb(d, m) for d in deg)
 
 
+# ------------------------------------------------------------------ the sweep
+
+def _screen_chunk(spec):
+    us, stage = spec
+    import numpy as np
+    M = np.load(_MASK_PATH, mmap_mode="r")
+    return AR.screen3(M, stage, us=us)
+
+
+_MASK_PATH = str(BUILD / "m48-masks.npy")
+
+
+def _filter_candidates(cands, cols):
+    """Second-stage filter: drop candidates any FRESH colouring wears. Cheap and memory-light —
+    no masks, just the explicit list — which is what lets the harvest keep growing after the mask
+    stage has hit its memory ceiling."""
+    import itertools as it
+
+    import numpy as np
+    if not cands or not cols:
+        return cands
+    A = np.asarray(cols, dtype=np.int8)
+    keep: list = []
+    for m, group in it.groupby(sorted(range(len(cands)), key=lambda i: len(cands[i].tup)),
+                               key=lambda i: len(cands[i].tup)):
+        gi = list(group)
+        T = np.asarray([cands[i].tup for i in gi])
+        L = np.asarray([[next(j for j, b in enumerate(cands[i].blocks) if q in b)
+                         for q in range(m)] for i in gi])
+        alive = np.ones(len(gi), dtype=bool)
+        for h in range(A.shape[0]):
+            idx = np.flatnonzero(alive)
+            if idx.size == 0:
+                break
+            wear = np.ones(idx.size, dtype=bool)
+            for x, y in it.combinations(range(m), 2):
+                wear &= ((A[h, T[idx, x]] == A[h, T[idx, y]]) == (L[idx, x] == L[idx, y]))
+            alive[idx[wear]] = False
+        keep.extend(cands[i] for i, a in zip(gi, alive) if a)
+    return keep
+
+
+def _confirm_one(spec):
+    stage, k, tup, blocks, cap = spec
+    return AR.realize(stage, k, tup, [list(b) for b in blocks], cap, return_model=True)
+
+
+def confirm_loop(stage: dict, k: int, cands, cap: float, workers: int, pool: list) -> dict:
+    """Observe-then-confirm: solve candidates, feed every satisfying colouring back into the pool,
+    re-filter. Each solved candidate kills many others, which is why the real cost is far below
+    `len(cands) x seconds`."""
+    from concurrent.futures import ProcessPoolExecutor
+    compelled, undecided, asked = [], 0, 0
+    remaining = list(cands)
+    t0 = time.time()
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        while remaining:
+            batch, remaining = remaining[:workers * 2], remaining[workers * 2:]
+            rows = list(ex.map(_confirm_one,
+                               [(stage, k, c.tup, c.blocks, cap) for c in batch]))
+            asked += len(batch)
+            fresh = []
+            for c, row in zip(batch, rows):
+                if row["outcome"] == "unsat":
+                    compelled.append((c, row))
+                elif row["outcome"] == "unknown":
+                    undecided += 1
+                else:
+                    fresh.append(row.get("_model"))
+            pool.extend(x for x in fresh if x)
+            if fresh and remaining:
+                before = len(remaining)
+                remaining = _filter_candidates(remaining, [x for x in fresh if x])
+                if before != len(remaining):
+                    print(f"    ..{before - len(remaining)} candidates killed by fresh "
+                          f"colourings; {len(remaining)} left", flush=True)
+    return {"asked": asked, "compelled": compelled, "undecided": undecided,
+            "seconds": round(time.time() - t0, 1)}
+
+
+def _pairs_from_masks(M, stage: dict, H: int):
+    """The arity-2 REPRODUCTION CONTROL (P1). Every pair, both patterns, from the same masks the
+    triple screen uses — so if this disagrees with `build/m30-rigidity-1581-k5.json` the instrument
+    is wrong and the campaign halts, rather than the world being interesting."""
+    import numpy as np
+    n, fp = stage["n"], stage["fingerprint"]
+    adj = np.zeros((n, n), dtype=bool)
+    for a, b in stage["edges"]:
+        adj[a, b] = adj[b, a] = True
+    out = []
+    for u in range(n):
+        a = M[u, u + 1:]
+        never_same = ~a.any(1)                      # candidate VIRTUAL EDGE
+        never_diff = ~(~a).any(1)                   # candidate FORCED PAIR
+        free = ~adj[u, u + 1:]
+        for off in np.flatnonzero(never_same & free):
+            out.append(AR.Candidate((u, u + 1 + int(off)), ((0, 1),), fp, H))
+        for off in np.flatnonzero(never_diff):
+            out.append(AR.Candidate((u, u + 1 + int(off)), ((0,), (1,)), fp, H))
+    return out
+
+
+def phase_arity3(harvest: int = 2048, extra: int = 8192, cap: float = 120.0,
+                 workers: int = 28) -> dict:
+    """**The complete arity-3 sweep**: every one of `C(1581,3)` triples, every one of the five
+    patterns, at five colours. Screen by bit operations, then solve only what no colouring wore."""
+    import multiprocessing
+    import numpy as np
+    from concurrent.futures import ProcessPoolExecutor
+    t_all = time.time()
+    st, cls = stage_degrey()
+    print(f"stage {st['fingerprint']}: {st['n']} vertices, {st['m_edges']} edges", flush=True)
+
+    base = AR.base_row(st, 5, 600.0)
+    print(f"vacuity guard: {base['outcome']} ({base['seconds']}s)", flush=True)
+    if base["outcome"] != "sat":
+        raise SystemExit("STAGE NOT 5-COLOURABLE — every reading below would be vacuous")
+
+    t0 = time.time()
+    cols = AR.harvest(st, 5, harvest, workers=workers, cap=cap)
+    cols = cols[:len(cols) - len(cols) % 64]
+    print(f"harvest: {len(cols)} colourings in {time.time() - t0:.0f}s", flush=True)
+    M = AR.agreement_masks(cols, st["n"])
+    np.save(_MASK_PATH, M)
+    print(f"masks: {M.nbytes / 2**20:.0f} MB", flush=True)
+
+    # --- P1, the reproduction control -----------------------------------------------------
+    pcands = _pairs_from_masks(M, st, len(cols))
+    print(f"arity-2 control: {len(pcands)} candidates over {math.comb(st['n'], 2):,} pairs",
+          flush=True)
+    pool: list = []
+    pres = confirm_loop(st, 5, pcands, cap, workers, pool)
+    print(f"arity-2 control: {len(pres['compelled'])} compelled, {pres['undecided']} undecided "
+          f"({pres['seconds']}s)", flush=True)
+
+    # --- the screen -----------------------------------------------------------------------
+    t0 = time.time()
+    multiprocessing.set_start_method("fork", force=True)
+    chunks = [(list(range(i, st["n"], workers)), {kk: st[kk] for kk in
+                                                  ("kind", "n", "m_edges", "fingerprint", "edges")})
+              for i in range(workers)]
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        cands = [c for part in ex.map(_screen_chunk, chunks) for c in part]
+    print(f"screen: {len(cands):,} candidates over {math.comb(st['n'], 3):,} triples x 5 patterns "
+          f"in {time.time() - t0:.0f}s", flush=True)
+
+    # --- second-stage filter: more colourings, no masks ------------------------------------
+    seed0 = harvest
+    while extra > 0 and cands:
+        t0 = time.time()
+        take = min(extra, 4096)
+        more = AR.harvest(st, 5, take, workers=workers, cap=cap, seed0=seed0)
+        seed0 += take                      # FRESH seeds -- see arity.harvest's docstring
+        before = len(cands)
+        cands = _filter_candidates(cands, more + pool)
+        pool = []
+        extra -= take
+        print(f"filter: {before:,} -> {len(cands):,} on {len(more)} fresh colourings "
+              f"({time.time() - t0:.0f}s)", flush=True)
+        if before == len(cands):
+            break
+
+    res = confirm_loop(st, 5, cands, cap, workers, [])
+    asked3 = res["asked"]
+    hl = AR.negative_headline("arity 3, all five patterns, k=5", math.comb(st["n"], 3) * 5,
+                              res["undecided"], st, len(cols), len(res["compelled"]))
+    rows = [dict(row, stage=AR._stage_ref(st), arity=3,
+                 verdict=AR.arity_verdict(base["outcome"], row["outcome"], True, None)[0],
+                 jackpot_eligible=AR.jackpot_eligible(st, 5, 3, c.blocks, None))
+            for c, row in res["compelled"]]
+    return {"kind": "summary", "phase": "arity3-complete", "headline": hl,
+            "stage": {kk: st[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "derivation")},
+            "harvest": {"masks": len(cols), "seed_range": [0, harvest], "pins": "<=200 random"},
+            "populations": {kk: len(v) for kk, v in cls.items()},
+            "enumeration": {
+                "prose": "every triple of distinct vertices, every one of the five partitions of "
+                         "three positions into at most five blocks, locally-proper ones only",
+                "formula": "C(n,3) * 5 with the locally-proper filter applied per pattern",
+                "count_triples": math.comb(st["n"], 3),
+                "count_questions": math.comb(st["n"], 3) * 5},
+            "screen_survivors_solved": asked3,
+            "arity2_control": {"candidates": len(pcands), "compelled": len(pres["compelled"]),
+                               "undecided": pres["undecided"],
+                               "expected": "0 and 0 — build/m30-rigidity-1581-k5.json is settled"},
+            "compelled": len(res["compelled"]), "undecided_at_cap": res["undecided"],
+            "cap_seconds": cap, "seconds": round(time.time() - t_all, 1), "rows": rows}
+
+
+def _nbhd_chunk(spec):
+    vs, stage, k, m = spec
+    import numpy as np
+    M = np.load(_MASK_PATH, mmap_mode="r")
+    return AR.screen_neighbourhoods(M, stage, k, m, vs=vs)
+
+
+def phase_nbhd4(harvest: int = 4096, extra: int = 16384, cap: float = 120.0,
+                workers: int = 28, m: int = 4) -> dict:
+    """**The complete arity-4 sweep restricted to vertex NEIGHBOURHOODS** — the home of the one
+    compulsion `arityFloor_le_of_degree` guarantees exists.
+
+    The general arity-4 sweep is out of reach and stays out: `C(1581,4) = 259,338,410,115`, about
+    twenty hours of screen alone before any solver. `Σ_v C(deg v, 4) = 1,718,839` is affordable, and
+    it is where the mechanism lives rather than an arbitrary restriction — but a negative here is a
+    statement about NEIGHBOURHOODS and the headline says so."""
+    import multiprocessing
+    import numpy as np
+    from concurrent.futures import ProcessPoolExecutor
+    t_all = time.time()
+    st, cls = stage_degrey()
+    base = AR.base_row(st, 5, 600.0)
+    if base["outcome"] != "sat":
+        raise SystemExit("STAGE NOT 5-COLOURABLE — every reading below would be vacuous")
+    cols = AR.harvest(st, 5, harvest, workers=workers, cap=cap)
+    cols = cols[:len(cols) - len(cols) % 64]
+    print(f"harvest: {len(cols)} colourings", flush=True)
+    np.save(_MASK_PATH, AR.agreement_masks(cols, st["n"]))
+    t0 = time.time()
+    multiprocessing.set_start_method("fork", force=True)
+    ref = {kk: st[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "edges")}
+    chunks = [(list(range(i, st["n"], workers)), ref, 5, m) for i in range(workers)]
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        seen, cands = set(), []
+        for part in ex.map(_nbhd_chunk, chunks):
+            for c in part:
+                if (c.tup, c.blocks) not in seen:
+                    seen.add((c.tup, c.blocks))
+                    cands.append(c)
+    total = _nbhd_count(st, m)
+    print(f"screen: {len(cands):,} candidates over {total:,} neighbourhood {m}-subsets x "
+          f"{len(AR.partitions(m, 5))} patterns in {time.time() - t0:.0f}s", flush=True)
+    seed0 = harvest
+    while extra > 0 and cands:
+        take = min(extra, 4096)
+        more = AR.harvest(st, 5, take, workers=workers, cap=cap, seed0=seed0)
+        seed0 += take
+        before = len(cands)
+        cands = _filter_candidates(cands, more)
+        extra -= take
+        print(f"filter: {before:,} -> {len(cands):,}", flush=True)
+        if before == len(cands):
+            break
+    res = confirm_loop(st, 5, cands, cap, workers, [])
+    hl = AR.negative_headline(f"arity {m}, NEIGHBOURHOODS only, all "
+                              f"{len(AR.partitions(m, 5))} patterns, k=5",
+                              total * len(AR.partitions(m, 5)), res["undecided"], st, len(cols),
+                              len(res["compelled"]))
+    rows = [dict(row, stage=AR._stage_ref(st), arity=m,
+                 verdict=AR.arity_verdict(base["outcome"], row["outcome"], True, None)[0],
+                 jackpot_eligible=AR.jackpot_eligible(st, 5, m, c.blocks, None))
+            for c, row in res["compelled"]]
+    return {"kind": "summary", "phase": f"arity{m}-neighbourhoods", "headline": hl,
+            "stage": {kk: st[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "derivation")},
+            "harvest": {"masks": len(cols), "extra_seeds_to": seed0},
+            "enumeration": {
+                "prose": f"every {m}-subset of every vertex neighbourhood (deduplicated), every "
+                         f"partition of {m} positions into at most five blocks, locally proper only",
+                "formula": f"sum_v C(deg v, {m}) distinct subsets x "
+                           f"{len(AR.partitions(m, 5))} patterns",
+                "count_subsets": total,
+                "count_questions": total * len(AR.partitions(m, 5)),
+                "NOT_covered": f"general {m}-subsets: C(1581,{m}) = {math.comb(1581, m):,}, "
+                               f"out of scope and not run"},
+            "screen_survivors_solved": res["asked"],
+            "compelled": len(res["compelled"]), "undecided_at_cap": res["undecided"],
+            "cap_seconds": cap, "seconds": round(time.time() - t_all, 1), "rows": rows}
+
+
+def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
+                 workers: int = 28) -> dict:
+    """**The ladder**: the SAME questions, on more material.
+
+    `Arity.arityFloor_le_of_embedding` (kernel) says an embedding can only LOWER the floor, and the
+    1581 is an induced subgraph of its gen-1 closure (the 7,877-edge control in `stage_gen1` is
+    exactly that hypothesis checked). So this is a dial with a theorem behind it: a compulsion found
+    below is automatically one above, and what is measured here is whether the inequality is TIGHT.
+
+    Two asks, and their denominators differ:
+      * the 1581's own pairs and triples, re-asked on the 24,065-vertex stage;
+      * gen-1's OWN target-class pairs — 52,616 at sqrt3 and 20,640 at distance 2 — which is the
+        only place in this milestone where the halt-and-verify clause can fire.
+    """
+    import multiprocessing
+    import numpy as np
+    from concurrent.futures import ProcessPoolExecutor
+    t_all = time.time()
+    small, _ = stage_degrey()
+    st, cls = stage_gen1()
+    print(f"gen-1 stage {st['fingerprint']}: {st['n']} vertices, {st['m_edges']} edges, "
+          f"{len(cls['sqrt3'])} sqrt3 pairs, {len(cls['two'])} distance-2 pairs", flush=True)
+    base = AR.base_row(st, 5, 900.0)
+    print(f"vacuity guard: {base['outcome']} ({base['seconds']}s)", flush=True)
+    if base["outcome"] != "sat":
+        raise SystemExit("GEN-1 NOT 5-COLOURABLE — every reading below would be vacuous")
+
+    t0 = time.time()
+    cols = AR.harvest(st, 5, harvest, workers=workers, cap=cap)
+    cols = cols[:len(cols) - len(cols) % 64]
+    print(f"harvest: {len(cols)} colourings in {time.time() - t0:.0f}s "
+          f"({(time.time() - t0) * workers / max(1, len(cols)):.2f} CPU-s each)", flush=True)
+
+    # --- the target classes on gen-1's OWN vertices: the only jackpot-eligible ask here ---------
+    tgt = [(AR.Candidate(e, ((0, 1),), st["fingerprint"], len(cols)), cl)
+           for cl in ("sqrt3", "two") for e in cls[cl]]
+    alive = _filter_candidates([c for c, _ in tgt], cols)
+    klass = {c.tup: cl for c, cl in tgt}
+    print(f"target classes: {len(alive):,} candidates over {len(tgt):,} pairs "
+          f"({len(cls['sqrt3']):,} at sqrt3, {len(cls['two']):,} at distance 2)", flush=True)
+    tres = confirm_loop(st, 5, alive, cap, workers, [])
+    print(f"target classes: {len(tres['compelled'])} compelled, {tres['undecided']} undecided",
+          flush=True)
+
+    # --- the ladder proper: the 1581's own triples, asked on gen-1 -----------------------------
+    sub = [c[:small["n"]] for c in cols]
+    np.save(_MASK_PATH, AR.agreement_masks(sub, small["n"]))
+    t0 = time.time()
+    multiprocessing.set_start_method("fork", force=True)
+    ref = {kk: small[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "edges")}
+    with ProcessPoolExecutor(max_workers=workers) as ex:
+        lcands = [c for part in ex.map(_screen_chunk,
+                                       [(list(range(i, small["n"], workers)), ref)
+                                        for i in range(workers)]) for c in part]
+    print(f"ladder screen: {len(lcands):,} candidates over {math.comb(small['n'], 3):,} triples "
+          f"x 5 patterns in {time.time() - t0:.0f}s", flush=True)
+    seed0 = harvest
+    while extra > 0 and lcands:
+        take = min(extra, 2048)
+        more = AR.harvest(st, 5, take, workers=workers, cap=cap, seed0=seed0)
+        seed0 += take
+        before = len(lcands)
+        lcands = _filter_candidates(lcands, [c[:small["n"]] for c in more])
+        extra -= take
+        print(f"ladder filter: {before:,} -> {len(lcands):,}", flush=True)
+        if before == len(lcands):
+            break
+    lres = confirm_loop(st, 5, lcands, cap, workers, [])
+
+    hl = AR.negative_headline(
+        "LADDER: the 1581's own triples (all 5 patterns) re-asked on its gen-1 closure, k=5",
+        math.comb(small["n"], 3) * 5, lres["undecided"], st, len(cols), len(lres["compelled"]))
+    rows = ([dict(row, stage=AR._stage_ref(st), arity=2, dist_class=klass.get(tuple(c.tup)),
+                  verdict=AR.arity_verdict(base["outcome"], row["outcome"], True, [])[0],
+                  jackpot_eligible=AR.jackpot_eligible(st, 5, 2, c.blocks,
+                                                       klass.get(tuple(c.tup))))
+             for c, row in tres["compelled"]] +
+            [dict(row, stage=AR._stage_ref(st), arity=3,
+                  verdict=AR.arity_verdict(base["outcome"], row["outcome"], True, None)[0],
+                  jackpot_eligible=AR.jackpot_eligible(st, 5, 3, c.blocks, None))
+             for c, row in lres["compelled"]])
+    return {"kind": "summary", "phase": "ladder-gen1", "headline": hl,
+            "stage": {kk: st[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "derivation")},
+            "embedded_stage": {kk: small[kk] for kk in ("kind", "n", "m_edges", "fingerprint")},
+            "harvest": {"count": len(cols), "extra_seeds_to": seed0},
+            "populations": {kk: len(v) for kk, v in cls.items()},
+            "target_class_ask": {
+                "enumeration": {"prose": "every gen-1 pair at exactly sqrt3 or exactly 2, exact "
+                                         "field arithmetic, same-colour pattern (a virtual edge)",
+                                "formula": "|sqrt3 pairs| + |distance-2 pairs|",
+                                "count": len(tgt)},
+                "candidates": len(alive), "solved": tres["asked"],
+                "compelled": len(tres["compelled"]), "undecided_at_cap": tres["undecided"]},
+            "ladder_ask": {
+                "enumeration": {"prose": "the embedded witness's own triples, all five patterns, "
+                                         "asked on the larger stage",
+                                "formula": "C(1581,3) * 5",
+                                "count": math.comb(small["n"], 3) * 5},
+                "candidates_after_screen": len(lcands), "solved": lres["asked"],
+                "compelled": len(lres["compelled"]), "undecided_at_cap": lres["undecided"]},
+            "theorem": "Arity.arityFloor_le_of_embedding: the floor can only DROP along this "
+                       "embedding, so a flat reading is an inequality measured tight",
+            "cap_seconds": cap, "seconds": round(time.time() - t_all, 1), "rows": rows}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--census", action="store_true")
+    ap.add_argument("--arity3", action="store_true")
+    ap.add_argument("--nbhd4", action="store_true")
+    ap.add_argument("--ladder", action="store_true")
+    ap.add_argument("--harvest", type=int, default=2048)
+    ap.add_argument("--extra", type=int, default=8192)
+    ap.add_argument("--cap", type=float, default=120.0)
+    ap.add_argument("--workers", type=int, default=28)
     a = ap.parse_args()
     if a.self_test:
         AR.self_test()
@@ -232,6 +618,21 @@ def main() -> None:
     elif a.census:
         ph = phase_census()
         record(ART_ARITY, ph)
+        print(json.dumps(ph, indent=1, default=str))
+    elif a.ladder:
+        ph = phase_ladder(a.harvest, a.extra, a.cap, a.workers)
+        rows = ph.pop("rows")
+        record(ART_LADDER, ph, rows=rows)
+        print(json.dumps(ph, indent=1, default=str))
+    elif a.nbhd4:
+        ph = phase_nbhd4(a.harvest, a.extra, a.cap, a.workers)
+        rows = ph.pop("rows")
+        record(ART_ARITY, ph, rows=rows)
+        print(json.dumps(ph, indent=1, default=str))
+    elif a.arity3:
+        ph = phase_arity3(a.harvest, a.extra, a.cap, a.workers)
+        rows = ph.pop("rows")
+        record(ART_ARITY, ph, rows=rows)
         print(json.dumps(ph, indent=1, default=str))
     else:
         ap.print_help()
