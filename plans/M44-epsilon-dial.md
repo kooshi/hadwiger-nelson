@@ -32,9 +32,57 @@ produced that speaks to *which* of 5, 6, 7 is true.
 
 ---
 
+## §0′ — What the domain-modeling pass changed (2026-08-13, run on the subplan above)
+
+The pass found the milestone was carrying **four co-equal objects** (`δ`, `η`, `ν`, `emb`) where
+the problem has **one primitive and one derived summary**, and that the Lean statement had
+serialized a quantifier that should have stayed a quantifier. Five changes, each with the smell
+that produced it:
+
+1. **`emb` is the primitive; everything else is derived or orthogonal.** For a finite graph `H`,
+   `emb(H)` = the least, over drawings of `H` in the plane, of the largest deviation of an edge
+   length from 1. Then `ν(ε) = min { |H| : χ(H) ≥ 7, emb(H) ≤ ε }` — **`ν` is not a second
+   measurement, it is the lower envelope of the points `(|H|, emb(H))`** over every certified
+   non-6-colourable graph we hold. And `η(p) = 2p/√3` is not a co-equal object either: it is the
+   **free initial upper bound** on `emb` of a cell core, the one the cell-centre drawing hands
+   you before any optimization. The campaign therefore measures exactly one number per object.
+2. **`δ` leaves the main line.** It belongs to the *interval* story (the conditional bridge to
+   Voronov's theorem) and plays no part in producing witnesses. Keeping it beside `η` is what
+   created the conflation hazard that §0a below tried to police with a driver-level guard — an
+   apologetic comment standing in for a model. With `δ` demoted to its own short section the
+   guard is unnecessary, and it is removed.
+3. **The Lean statement takes `∀ ε > 0`, not a sequence.** `ε : ℕ → ℝ` with `Tendsto … 0` plus a
+   matching `z : ℕ → ι → ℂ` is a *serialization* of "for every tolerance there is a drawing" —
+   incidental structure, and structure the caller would have to manufacture, since our family is
+   indexed by bands rather than by ℕ. The sequence belongs inside the proof, where a subsequence
+   is extracted; it does not belong in the statement.
+4. **The theorem is not about `ℂ`.** Its proof uses only that closed balls are compact, so it is
+   stated for `[MetricSpace V] [ProperSpace V]` — which is the argument's actual generality, and
+   matches the house `unitDistance` API, itself stated for an arbitrary metric space. `ℂ` is
+   where our *construction* lives; making it the theorem's home would be incidental structure.
+   The headline instantiates at `ℂ` and rides `chromaticNumber_plane_eq_complex` to the plane.
+5. **Neither `emb` nor `ν` is defined in Lean.** Each would owe a lemma API for a single use —
+   speculative structure. The Lean theorem *is* the statement "`emb = 0` with bounded drawings
+   forces the plane bound", written without naming it; the names live on the measurement side
+   where the numbers are.
+
+Two consequences worth stating because they were not visible before the pass:
+
+* **The boundedness hypothesis is free, and the note belongs on paper rather than in the type.**
+  A graph that is not `k`-colourable has a connected component that is not `k`-colourable, so the
+  minimizer in `ν` is WLOG connected; a connected graph with edges of length `≈ 1` has diameter
+  at most its vertex count. So bounding the vertex count bounds the region automatically, and
+  `ν` needs no diameter clause. The Lean theorem still takes the bound explicitly (our caller
+  measures it anyway, and deriving it would cost a walk induction that buys us nothing).
+* **The `emb` model generalizes and the `η` model did not.** Test applied: does the
+  representation earn the next theorem for free? Any certified non-6-colourable graph from any
+  source — including the kernel-checked 23-vertex core — drops onto the same curve, because
+  `emb` is defined for graphs and not for scales. The old organization could only speak about
+  cell cores.
+
 ## §0 — Registration (committed BEFORE any instrument runs; the standing discipline)
 
-### 0a. The two tolerances, which are NOT the same number (fixed here so nothing conflates them)
+### 0a. The tolerances (rewritten by §0′; `δ` retained here only for its own separate claim)
 
 Working in lattice units where the grid's minimal vector has length 1 and `T = 1/p`, the exact
 criterion (`celllat.interval`, already validated) gives for every address offset `d` the closed
@@ -56,19 +104,29 @@ exactly when that interval contains 1.
   `η(p) = 2p/√3` of 1.** This is monotone in `p` and it is what makes a core into a point
   configuration.
 
-**Registered confusion-guard:** any row, plot, or sentence produced by this milestone states
-which of `δ` and `η` it uses. A claim about the interval problem that cites `η`, or a claim
-about our own witnesses that cites `δ`, is a bug and the campaign driver refuses to record it.
+`δ` is used for exactly one claim in this milestone (the conditional literature bridge, §D) and
+appears nowhere in the `emb`/`ν` line. `η` is the free initial upper bound on `emb`, superseded
+per-object by phase 4's optimization.
 
-### 0b. The definition the milestone is organized around
+### 0b. The primitive, and the summary derived from it
 
-> **`ν(ε)` := the least number of points in a finite planar configuration carrying a graph whose
-> every edge has length within `ε` of 1, and which is not 6-colourable.**
+> **`emb(H)` := the least, over drawings of the finite graph `H` in the plane, of the largest
+> deviation of an edge's length from 1.**
 
-`ν` is non-increasing in `ε` (a larger tolerance is a weaker constraint), and — this is §A's D2 —
-**`χ(ℝ²) ≥ 7` if and only if `ν` stays bounded as `ε ↓ 0`.** Our refutations produce explicit
-*upper* bounds `ν(η(p)) ≤ N(p)`. Everything measured below is an upper bound on `ν` at an
-explicit rational tolerance; nothing here lower-bounds `ν`, and no row may say otherwise.
+`emb(H) = 0` exactly when `H` is a unit-distance graph. It is **attained** for connected `H`
+(the sublevel sets are compact once one vertex is pinned — the same compactness that proves §A's
+D2), so "least" is a minimum, not an infimum. This is the milestone's single measured quantity:
+one real number per certified non-6-colourable graph, and the first *continuous* meter this
+project has had.
+
+> **`ν(ε)` := min { |V(H)| : `H` not 6-colourable, `emb(H) ≤ ε` }** — the **lower envelope** of
+> the points `(emb(H), |V(H)|)` over our whole inventory, not a separate measurement.
+
+`ν` is non-increasing in `ε`, and — this is §A's D2 — **`χ(ℝ²) ≥ 7` if and only if `ν` stays
+bounded as `ε ↓ 0`.** Everything this milestone produces is an **upper** bound: a drawing found
+by local optimization bounds `emb(H)` above and never below, and each such bound with its vertex
+count bounds `ν` above at that tolerance. No row may state otherwise, and the driver records
+`bound_direction: "upper"` on every one.
 
 ### 0c. The objects
 
@@ -148,29 +206,39 @@ point `q_a` in each cell. Then the graph on `{q_a}` with the same edge set is no
 in the drawing. Extra edges only raise the chromatic number, so they cannot hurt — which is why
 this lemma is free.*
 
-### D2 — the limit lemma (the new content)
+### D2 — the limit lemma (the new content; statement per §0′.3–4)
 
-> Let `G` be a fixed finite graph that is not `k`-colourable. Suppose for each `n` there is a
-> drawing `z_n : V → ℂ` with all points in a bounded region and every edge's length within `ε_n`
-> of 1, where `ε_n → 0`. **Then the plane's unit-distance graph is not `k`-colourable**, i.e.
-> `χ(ℝ²) ≥ k + 1`.
+> Let `G` be a fixed finite graph that is not `k`-colourable, drawn in a proper metric space.
+> Suppose **for every tolerance `ε > 0`** there is a drawing of `G` inside one fixed closed ball
+> with every edge's length within `ε` of 1. **Then the space's unit-distance graph is not
+> `k`-colourable** — at the plane, `χ(ℝ²) ≥ k + 1`.
 
-Proof. The drawings live in a product of closed balls, which is compact because `V` is finite, so
-some subsequence converges pointwise to a drawing `q`. For an edge `uv`, the distance
-`dist(z_n u, z_n v)` converges to `dist(q u, q v)` by continuity, and is within `ε_n → 0` of 1, so
-`dist(q u, q v) = 1` exactly. Now `q` is a map sending every edge to a unit-distance pair, so it
-is a homomorphism into the plane's unit-distance graph, and a `k`-colouring of the plane would
-pull back to a `k`-colouring of `G`. ∎
+Proof. Instantiate the hypothesis at `ε = 1/(n+1)` to get drawings `z_n`, all inside the ball.
+Drawings of a finite vertex set into a fixed closed ball form a compact set (a finite product of
+compacts, the balls compact because the space is proper), so some subsequence converges pointwise
+to a drawing `q`. For an edge `uv`, `dist(z_n u, z_n v)` converges to `dist(q u, q v)` by
+continuity of the distance, and lies within `1/(n+1) → 0` of 1, so by uniqueness of limits
+`dist(q u, q v) = 1` exactly. Then `q` sends every edge to a unit-distance pair, so it is a
+homomorphism into the unit-distance graph, and a `k`-colouring of the space would pull back to a
+`k`-colouring of `G`. ∎
 
 **The collision subtlety, handled by not needing to handle it:** two vertices may converge to the
 same point. The proof never asks `q` to be injective — it pulls a colouring *back* along `q` —
 and adjacent vertices cannot collide anyway, since their limiting distance is 1.
 
-**Corollary (the milestone's headline statement).** `ν` is bounded as `ε ↓ 0` **iff**
-`χ(ℝ²) ≥ 7`. Equivalently: **the divergence of `ν(ε)` as `ε → 0` is a necessary condition for
-`χ(ℝ²) ≤ 6`.** (⇐ is D2 applied along a bounded subsequence, using that there are finitely many
-graphs on a bounded vertex count so one recurs infinitely often; ⇒ is D1 applied to a
-7-forcing unit-distance graph, which has `ε = 0`.)
+### D3 — the headline corollary (bounded family ⟹ the plane bound)
+
+> If there is a fixed vertex bound `N` and a fixed region such that **for every `ε > 0`** some
+> graph on at most `N` vertices, not 6-colourable, is drawable in that region with all edge
+> lengths within `ε` of 1, then `χ(ℝ²) ≥ 7`.
+
+Proof. There are only finitely many graphs on a fixed `N`-element vertex set, so as `ε` runs
+through `1/(n+1)` one graph `G` recurs for infinitely many `n`; that `G` satisfies D2's
+hypothesis at every `ε > 0` (given `ε`, pick a recurrence with `1/(n+1) ≤ ε`). ∎
+
+**Equivalently: `ν` bounded as `ε ↓ 0` ⟺ `χ(ℝ²) ≥ 7`**, so **the divergence of `ν(ε)` is a
+necessary condition for `χ(ℝ²) ≤ 6`.** (⇒ is D1 applied to a 7-forcing unit-distance graph,
+which has `ε = 0`; the region clause is free by §0′'s connectivity note.)
 
 **Attribution, stated plainly and up front:** D2 is a compactness argument that any specialist
 would produce on request, and no novelty is claimed for it. What this milestone contributes is
@@ -187,31 +255,54 @@ content is one existence lemma**; the plane corollary is a two-line composition 
 `add_one_le_chromaticNumber_unitDistance`.
 
 ```lean
-/-- The limit of approximate drawings. -/
-theorem exists_unitDist_drawing_of_approx
-    {ι : Type*} [Fintype ι] {G : SimpleGraph ι} (D : ℝ)
-    (ε : ℕ → ℝ) (hε : Filter.Tendsto ε Filter.atTop (nhds 0))
-    (z : ℕ → ι → ℂ) (hbd : ∀ n i, ‖z n i‖ ≤ D)
-    (hlen : ∀ n i j, G.Adj i j → |dist (z n i) (z n j) - 1| ≤ ε n) :
-    ∃ q : ι → ℂ, ∀ i j, G.Adj i j → dist (q i) (q j) = 1 := sorry
+variable {V : Type*} [MetricSpace V] [ProperSpace V] {ι : Type*} [Fintype ι]
+
+/-- **The limit of approximate drawings.** If a finite graph can be drawn inside one fixed ball
+with every edge's length within `ε` of 1, for *every* `ε > 0`, then it can be drawn there with
+every edge's length exactly 1. -/
+theorem exists_unitDist_drawing_of_approx {G : SimpleGraph ι} (c : V) (D : ℝ)
+    (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ Metric.closedBall c D) ∧
+          ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
+    ∃ q : ι → V, ∀ i j, G.Adj i j → dist (q i) (q j) = 1 := sorry
 
 /-- **The limit lemma.** A fixed finite non-`k`-colourable graph, drawable in a bounded region
-with edge lengths tending to 1, forces the plane past `k` colours. -/
-theorem add_one_le_chromaticNumber_plane_of_approx
-    {ι : Type*} [Fintype ι] {G : SimpleGraph ι} {k : ℕ} (D : ℝ)
-    (ε : ℕ → ℝ) (hε : Filter.Tendsto ε Filter.atTop (nhds 0))
-    (z : ℕ → ι → ℂ) (hbd : ∀ n i, ‖z n i‖ ≤ D)
-    (hlen : ∀ n i j, G.Adj i j → |dist (z n i) (z n j) - 1| ≤ ε n)
+with edge lengths approaching 1, forces the whole space past `k` colours. -/
+theorem add_one_le_chromaticNumber_of_approx {G : SimpleGraph ι} {k : ℕ} (c : V) (D : ℝ)
+    (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ Metric.closedBall c D) ∧
+          ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε)
     (hG : ¬ G.Colorable k) :
-    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber := sorry
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := sorry
+
+/-- **The headline (D3).** A family of non-`k`-colourable graphs on a *bounded vertex count*,
+drawable in a fixed region at every tolerance, forces the bound — the graph may differ per
+tolerance, which is what makes this a statement about `ν` rather than about one witness. -/
+theorem add_one_le_chromaticNumber_of_bounded_family {k N : ℕ} (c : V) (D : ℝ)
+    (h : ∀ ε > 0, ∃ (G : SimpleGraph (Fin N)) (z : Fin N → V),
+          ¬ G.Colorable k ∧ (∀ i, z i ∈ Metric.closedBall c D) ∧
+          ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := sorry
+
+/-- The plane instance: `ν` bounded as the tolerance shrinks forces seven colours. -/
+theorem seven_le_chromaticNumber_plane_of_bounded_family {N : ℕ} (c : ℂ) (D : ℝ)
+    (h : ∀ ε > 0, ∃ (G : SimpleGraph (Fin N)) (z : Fin N → ℂ),
+          ¬ G.Colorable 6 ∧ (∀ i, z i ∈ Metric.closedBall c D) ∧
+          ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
+    (7 : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := sorry
 ```
 
-**Spec validation, per the standing rule that a `∀` over an empty domain proves everything:**
-two `example`s exhibiting models of the hypotheses — an exact equilateral triangle (`ε ≡ 0`,
-recovering `χ(ℝ²) ≥ 3`), and a genuinely approximate sequence (a triangle of side `1 + 1/(n+1)`,
-so the tolerance is doing work and the theorem is not silently the exact case). A third
-`example` planting a **red**: the same statement with `ε ≡ 1/2` constant must NOT be provable by
-this route, confirmed by the absence of a `Tendsto` hypothesis discharge.
+**Spec validation, per the standing rule that a `∀` over an empty domain proves everything.**
+Three `example`s, each a model of the hypotheses, because the whole statement is a `∀ ε` and a
+vacuous one would elaborate and prove nothing:
+
+1. **Exact** — an equilateral triangle of side 1, the same drawing for every `ε`, recovering
+   `χ(ℝ²) ≥ 3`. Confirms the hypotheses are inhabitable at all.
+2. **Genuinely approximate** — a triangle of side `1 + ε/2`, a *different* drawing per `ε` and
+   never an exact one, so the tolerance is doing real work and the theorem is not silently the
+   exact case. This is the `example` that would fail if the statement had accidentally demanded
+   one fixed drawing.
+3. **Red** — a drawing family whose edges sit at length `2` for every `ε`: the hypothesis is
+   unsatisfiable for `ε < 1`, so no bound follows. Stated as `¬ (∀ ε > 0, …)` and proven, so the
+   red is a theorem rather than an absence of a proof.
 
 ---
 
@@ -231,34 +322,42 @@ milestone is wall-clock, not RAM.
   witnesses. Record `(T, p, R*, N*, physical diameter, ω, orbit profile)`. Green control 2 must
   fire here. **Gate: if the re-measured five do not reproduce the qualitative shape of §0d, the
   headline observation is retracted in §R and the ladder is re-scoped to a plain `N(p)` census.**
-* **§D / phase 2 — the exact tolerances.** `δ(p)` and `η(p)` per band, exactly, in rational
-  arithmetic, with the δ-maximizing scale found per band (P4). Cheap, pure arithmetic, no solver.
-  Deliverable: every band's certificate re-stated at its **best** scale rather than at
-  `canonical_T`, which optimizes smallest denominator and therefore nothing.
+* **§D / phase 2 — the embedding gradient (the milestone's spine, per §0′.1).** Measure `emb(H)`
+  for every certified non-6-colourable graph in the inventory — the re-derived cell cores, and
+  also the **kernel-checked 23-vertex core**, which belongs on the curve for free and which the
+  pre-pass organization could not have spoken about. Optimize a smooth surrogate (sum of squared
+  edge errors, then a softmax sharpening) from many random restarts — embarrassingly parallel,
+  30 workers — and then **report the exact ℓ∞ error of the drawing actually found**, never the
+  surrogate's value: the reported number must be a true "all edges within this of 1" figure, and
+  it is an **upper** bound on `emb`, since local optimization cannot certify a minimum. Controls
+  per §0g.3 both ways. Each object contributes one point `(emb upper bound, |V|)`; the lower
+  envelope of those points is the `ν` curve, and it is the milestone's headline object.
 * **§E / phase 3 — the ladder.** New rungs below `p ≈ 0.109`, as far as the solver reaches,
-  same procedure. The twelve deep-tail bands M43 left undecided at cap sit on this ladder and get
-  a second, better-aimed attempt as a by-product — reported as such, never as the point.
-* **§F / phase 4 — the embedding gradient (the new instrument).** For a finite graph `H`, define
-  `emb(H)` = the least, over drawings of `H` in the plane, of the largest deviation of an edge
-  length from 1. Then `emb(H) = 0` exactly when `H` is a unit-distance graph, our cores satisfy
-  `emb ≤ η(p)` by D1, and **`emb` is a continuous measure of how close a certified
-  non-6-colourable graph is to settling the top of the problem.** Minimize by
-  Levenberg–Marquardt on the soft-max of edge errors with many random restarts (embarrassingly
-  parallel across restarts), controls per §0g.3, and report the best value found as an **upper**
-  bound on `emb` — never as the minimum, which local optimization cannot certify. This is the
-  first continuous distance-to-target meter this project has had; every previous meter was binary
-  and read flat.
+  same procedure, each new core feeding phase 2. The twelve deep-tail bands M43 left undecided at
+  cap sit on this ladder and get a second, better-aimed attempt as a by-product — reported as
+  such, never as the point.
+* **§F / phase 4 — the interval side, kept separate (the `δ` line).** `δ(p)` per band exactly, in
+  rational arithmetic, with the δ-maximizing scale found per band (P4) — `canonical_T` optimizes
+  smallest denominator and therefore nothing, and the subplanning measurement already found a 7×
+  miss. This section states one claim only: the widest explicit interval around 1 for which we
+  hold a finite certificate that cell-constant colourings need seven. **It is not part of the
+  `emb`/`ν` line and shares no axis with it** (§0′.2); it exists because it sharpens the
+  conditional bridge to the literature, and it is reported under its own heading with its own
+  scope clause.
 
 ---
 
 ## Deliverables
 
-1. `Proofs/HadwigerNelson/Limit.lean` — the limit lemma, kernel-checked, on axioms exactly
-   `[propext, Classical.choice, Quot.sound]`, with its spec examples and its planted red.
-2. `tools/celllat.py` — `delta_of`, `eta_of`, `best_scale_in_band`, `minimal_radius` (bisection),
+1. `Proofs/HadwigerNelson/Limit.lean` — the limit lemma (D2), the bounded-family headline (D3)
+   and its plane instance, kernel-checked on axioms exactly
+   `[propext, Classical.choice, Quot.sound]`, with the three spec examples and the planted red.
+2. `tools/celllat.py` — `minimal_radius` (bisection for `R*`), `delta_of`, `best_scale_in_band`,
    and the M44 campaign driver, each with a planted self-test in `self_test44`.
-3. `tools/embed.py` — the embedding-gradient instrument with its red/green controls.
-4. `build/m44-dial.json` — every row, schema-tagged, with `tolerance_kind` on every row per §0a.
+3. `tools/embed.py` — the embedding-gradient instrument (the milestone's spine) with its red and
+   green controls, reporting exact ℓ∞ error of found drawings as upper bounds on `emb`.
+4. `build/m44-dial.json` — every row schema-tagged, carrying `bound_direction` (always `upper`
+   on the `emb`/`ν` line) and, on the separate `δ` rows, their own scope clause.
 5. `plans/M44-epsilon-dial.md` §R — the results, the predictions scored, the retractions if any.
 6. CLAUDE.md § Frontier + § Grokkings updated in the closing commit (WORKFLOW step 9).
 
