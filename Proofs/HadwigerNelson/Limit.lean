@@ -54,7 +54,9 @@ Three things a caller repeatedly needs, recorded here so they are not rediscover
   with no `k`-colouring satisfies the hypothesis at every `ε` — and is deliberately **not**
   formalized here, because nothing consumes it. Its absence is not a claim that it is hard.
 
-The `example`s at the foot of the file are written to double as **templates**: the second one
+Models of these hypotheses live in `Instances/LimitSpec.lean` — this file states the reduction
+and imports no geometry, exactly as `UnitDistance.lean` keeps its own model in
+`Instances/Triangle.lean`. The second model there is written to double as a **template**: it
 supplies the full hypothesis with a genuinely different drawing at each tolerance, which is the
 shape a real caller must produce.
 -/
@@ -82,7 +84,18 @@ theorem exists_unitDistance_drawing_of_approx {G : SimpleGraph ι} {K : Set V} (
     (h : ∀ ε > 0, ∃ z : ι → V, (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
     ∃ q : ι → V, ∀ i j, G.Adj i j → dist (q i) (q j) = 1 := by
-  sorry
+  choose z hzK hzlen using fun n : ℕ => h (1 / (n + 1)) (by positivity)
+  have hKpi : IsCompact (Set.pi Set.univ fun _ : ι => K) := isCompact_univ_pi fun _ => hK
+  obtain ⟨q, -, φ, hφ, hlim⟩ := hKpi.tendsto_subseq (fun n => fun i _ => hzK n i)
+  refine ⟨q, fun i j hij => ?_⟩
+  have hto : Tendsto (fun n => dist (z (φ n) i) (z (φ n) j)) atTop (𝓝 (dist (q i) (q j))) :=
+    (((continuous_apply i).tendsto q).comp hlim).dist (((continuous_apply j).tendsto q).comp hlim)
+  refine tendsto_nhds_unique hto ?_
+  rw [tendsto_iff_dist_tendsto_zero]
+  refine squeeze_zero (fun _ => dist_nonneg) (fun n => ?_)
+    (tendsto_one_div_add_atTop_nhds_zero_nat.comp hφ.tendsto_atTop)
+  rw [Real.dist_eq]
+  exact hzlen (φ n) i j hij
 
 /-! ## The chromatic bounds -/
 
@@ -94,7 +107,8 @@ theorem add_one_le_chromaticNumber_unitDistance_of_approx {G : SimpleGraph ι} {
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε)
     (hG : ¬ G.Colorable k) :
     ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
-  sorry
+  obtain ⟨q, hq⟩ := exists_unitDistance_drawing_of_approx hK h
+  exact add_one_le_chromaticNumber_unitDistance q hq hG
 
 /-- **The headline.** The graph is allowed to *differ* at each tolerance — only its vertex count
 and the region are fixed. This is what a measurement campaign produces: a sequence of witnesses,
@@ -108,7 +122,21 @@ theorem add_one_le_chromaticNumber_unitDistance_of_bounded_family {k N : ℕ} {K
           ¬ G.Colorable k ∧ (∀ i, z i ∈ K) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
     ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance V).chromaticNumber := by
-  sorry
+  classical
+  choose F z hFcol hzK hzlen using fun n : ℕ => h (1 / (n + 1)) (by positivity)
+  obtain ⟨G, hGfib⟩ := Finite.exists_infinite_fiber F
+  have hrec : ∀ m : ℕ, ∃ n > m, F n = G := fun m => by
+    obtain ⟨n, hn, hnm⟩ := (Set.infinite_coe_iff.mp hGfib).exists_gt m
+    exact ⟨n, hnm, hn⟩
+  obtain ⟨n₀, -, hn₀⟩ := hrec 0
+  refine add_one_le_chromaticNumber_unitDistance_of_approx (G := G) hK ?_ (hn₀ ▸ hFcol n₀)
+  intro ε hε
+  obtain ⟨m, hm⟩ := exists_nat_gt (1 / ε)
+  obtain ⟨n, hnm, hFn⟩ := hrec m
+  refine ⟨z n, hzK n, fun i j hij => (hzlen n i j (hFn ▸ hij)).trans ?_⟩
+  rw [div_le_iff₀ (by positivity)]
+  rw [div_lt_iff₀ hε] at hm
+  nlinarith [hm, (Nat.cast_le (α := ℝ)).mpr hnm.le, hε.le]
 
 /-- **The plane instance.** If configurations of at most `N` points, inside one fixed disc, refuse
 six colours at every edge-length tolerance, then the plane needs seven. -/
@@ -117,6 +145,8 @@ theorem seven_le_chromaticNumber_plane_of_bounded_family {N : ℕ} {c : ℂ} {D 
           ¬ G.Colorable 6 ∧ (∀ i, z i ∈ closedBall c D) ∧
           ∀ i j, G.Adj i j → |dist (z i) (z j) - 1| ≤ ε) :
     (7 : ℕ∞) ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber := by
-  sorry
+  rw [chromaticNumber_plane_eq_complex]
+  simpa using
+    add_one_le_chromaticNumber_unitDistance_of_bounded_family (k := 6) (isCompact_closedBall c D) h
 
 end HadwigerNelson

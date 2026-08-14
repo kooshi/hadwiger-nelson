@@ -56,6 +56,8 @@ import Proofs.HadwigerNelson.Sat.MaskCheck
 import Proofs.HadwigerNelson.Sat.Diagnose
 import Proofs.HadwigerNelson.Reduction
 import Proofs.HadwigerNelson.Instances.Triangle
+import Proofs.HadwigerNelson.Limit
+import Proofs.HadwigerNelson.Instances.LimitSpec
 import Proofs.HadwigerNelson.Instances.Spindle
 import Proofs.HadwigerNelson.Instances.SpindleBound
 import Proofs.HadwigerNelson.Instances.DeGrey

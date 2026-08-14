@@ -48,6 +48,16 @@ open HadwigerNelson
 #print axioms lt_chromaticNumber_unitDistance
 #print axioms add_one_le_chromaticNumber_unitDistance
 #print axioms chromaticNumber_unitDistance_congr
+
+-- M44, the limit lemma: approximate drawings in a compact region force the exact bound.
+#print axioms exists_unitDistance_drawing_of_approx
+#print axioms add_one_le_chromaticNumber_unitDistance_of_approx
+#print axioms add_one_le_chromaticNumber_unitDistance_of_bounded_family
+#print axioms seven_le_chromaticNumber_plane_of_bounded_family
+#print axioms three_le_chromaticNumber_complex_of_exact_triangle
+#print axioms three_le_chromaticNumber_complex_of_shrinking_triangles
+#print axioms collapsed_drawing_satisfies_one_tolerance
+#print axioms collapsed_drawing_fails_below_one
 #print axioms add_one_le_chromaticNumber_unitDistance_edgeList
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
