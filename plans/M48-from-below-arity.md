@@ -1,16 +1,107 @@
-# M48 — The from-below arity question: what is compelled among THREE points at five colours?
+# M48 — The from-below arity question: at what order is de Grey's witness compelled?
 #
-# STUB, written 2026-08-13, CORRECTED and rewritten 2026-08-14 before any work began.
-# SELF-CONTAINED: a fresh session with zero conversation memory should be able to subplan and run
-# this from this file alone. Everything needed — the mission, the evidence both ways, the objects
-# with their addresses, the instruments, the discipline, the failure clauses — is written out here
-# rather than cited. Cross-references are given as *addresses to verify*, never as the carrier of
-# meaning.
+# SUBPLAN, 2026-08-14. Grown from the self-contained stub of 2026-08-13/14 (§1–§3 below are the
+# stub's, lightly edited); §0 and §4–§9 are the subplan proper. The stub's own reading rule stands:
 #
-# READING RULE FOR THIS FILE. Three kinds of statement, never mixed:
 #   [derived]     worked out on paper; true or false independent of us.
-#   [measured]    an instrument produced it, with its address on disk.
-#   [registered]  a prediction with a prior, to be committed before the campaign runs.
+#   [measured]    an instrument produced it, with its address on disk and its machine named.
+#   [registered]  a prediction with a prior, committed before the campaign runs.
+#
+# WORKFLOW step 3 says "where cost decides the shape, measure before specifying, not after."
+# §4 is that measurement. Every phase below was priced on the desktop before it was written down,
+# and two phases exist in the shape they do *because* the price came back affordable — the complete
+# arity-3 sweep in particular was not obviously reachable and is.
+
+---
+
+## §0. REGISTRATION — committed before any campaign instrument runs
+
+### §0a. Derivations, worked on paper first
+
+**D1 — the target needs TWO distances, not one.** The project's grokking G26 states the reduction as
+"a 6-forcer needs one gadget at √3 **or** 2". Read against the kernel object it names,
+`hexShellPairs` in `Instances/HexShell.lean`, that is too weak: the list is `hexShellP3 ++
+hexShellP4` — **six** pairs at √3 (the ring's 120° gaps) and **three** at distance 2 (its diameters)
+— and `hexShell_plane5` is *disjunctive over both classes*. Killing all six √3 placements leaves the
+three diameters standing. **χ(ℝ²) ≥ 6 needs a virtual edge at √3 AND one at distance 2.** Either
+alone is a major result that halves the problem. *This is promoted to a kernel theorem in §5.*
+
+**D2 — an arity-3 compulsion cannot be a generalized Act One, and this must be said BEFORE any hit
+is interpreted.** Act One is a pigeonhole: `n` points, `k` colours, some colour class of size
+`⌈n/k⌉`. To force a monochromatic *pair* at five colours needs `n ≥ 6`; the shell uses 7. To force a
+monochromatic **triple** needs `⌈n/5⌉ ≥ 3`, i.e. **`n ≥ 11`**. But a point set whose mutual distances
+all lie in `{1, √3, 2}` has diameter ≤ 2 and minimum distance ≥ 1, so:
+
+* by Jung's theorem it lies in a closed disc of radius ≤ `2/√3`;
+* the open discs of radius `1/2` about its points are pairwise disjoint and all lie inside a disc of
+  radius `2/√3 + 1/2`;
+* comparing areas, `n · (1/2)² ≤ (2/√3 + 1/2)²`, so `n ≤ 4(2/√3 + 1/2)² = 10.95…`, i.e. **`n ≤ 10`.**
+
+Ten is less than eleven, so **no configuration in the shell's own distance vocabulary can force a
+monochromatic triple at five colours.** Widening the vocabulary to diameter 3 admits up to 19 points
+(same computation, `4(√3 + 1/2)² = 19.9…`) but the classes it admits — `√7` and `3` — are not
+spindle-able: a spindle at distance `d` needs `4d² − 1` to be a square in the fabric's field, and
+`4·7 − 1 = 27` and `4·9 − 1 = 35` are not squares. **The kill burden grows faster than the
+pigeonhole.** *Registered consequence: a compulsion found at arity 3 from below is a statement about
+mechanism — the order the object's rigidity lives at — and NOT a rung toward χ(ℝ²) ≥ 6. Any hit is
+reported that way.*
+
+**D3 — the ladder theorem: the arity floor is monotone under graph embeddings.** If `f : H ↪g G` is
+a graph embedding (injective, preserving *and reflecting* adjacency) then every compulsion of `H`
+transports to one of `G`:
+
+* `f ∘ S` is injective, and `f` reflects adjacency, so local properness carries over;
+* if some `C : G.Coloring (Fin k)` wore the pattern on `f ∘ S`, then `C ∘ f` is a proper colouring of
+  `H` wearing it on `S` — contradiction.
+
+Hence **`arityFloor G k ≤ arityFloor H k`**: growing the object can only lower the floor. This is
+the arity analogue of M19's coverage ratchet, and it is what licenses the whole closure-ladder
+reading in §6 — "the floor did not drop from the 1581 to its gen-1 closure" is then the statement
+that an inequality is *tight*, not a coincidence of two independent measurements. *Kernel-checked in
+§5.*
+
+**D4 — the plane is homogeneous, so ONE forced pair is ALL of them.** If a finite unit-distance graph
+drawn in the plane forces two of its points at distance `d > 0` to differ in every proper
+5-colouring of the plane, then *every* pair at distance `d` differs. Given `x₀ ≠ y₀` with
+`dist x₀ y₀ = d` and any `x, y` with `dist x y = d`, set `a = (y − x)/(y₀ − x₀)` — which has
+`|a| = 1` — and `b = x − a·x₀`. Then `z ↦ a·z + b` is a distance-preserving bijection of ℂ carrying
+`(x₀, y₀)` to `(x, y)`, so it is an automorphism of the unit-distance graph and the colouring pulls
+back along it. *Kernel-checked in §5; it is the step that turns any future finite gadget into the
+plane-wide hypothesis D1 consumes, and it is the reason the §5 layer is worth building now rather
+than on the day a gadget appears.*
+
+### §0b. The registered predictions
+
+Sorted by provenance, this project's a-priori derivations have survived without exception and its
+post-hoc inductive readings have died without exception — roughly 7-for-7 against 0-for-10, several
+of the latter refuted by our own later work (grokking G30). So the predictions below are written
+down *now*, with the evidence on both sides, and scored at the close whatever they do.
+
+| # | prediction | prior | evidence FOR | evidence AGAINST |
+|---|---|---|---|---|
+| **P1** | The arity-2 control on the 1581 at `k = 5` reproduces zero — 0 forced pairs and 0 virtual edges over all **1,248,990** pairs, including all 3,216 at √3 and 1,092 at distance 2. | **95 %** | It is a reproduction of `build/m30-rigidity-1581-k5.json`, which is `status: done`, `unsettled: []`. | If it fails, the *instrument* is wrong and the campaign halts — this row is the calibration, not a discovery. |
+| **P2** | The **complete** arity-3 sweep on the 1581 at `k = 5` — all **657,385,070** triples × all 5 patterns — returns **zero** compulsions with every sub-pair free. | **70 % zero** | The object is loose at five colours (χ = 5, so `k = 5` is its top rung); M35 measured fan rows at min-cover **2 of 5**; M30/M41 measured pairwise floppiness settled at `k = 5`; M45's arity-3 hits were on a stage **one vertex** from refusing. | The enumeration is five orders of magnitude larger than any from-below sweep ever run, and M45's lesson is that **coverage is the primary effect**; `arityFloor ≤ 5` guarantees *something* exists at arity ≤ 5. |
+| **P3** | The **complete** neighbourhood arity-4 sweep — all **1,718,839** 4-subsets of vertex neighbourhoods × all 15 patterns — returns zero compulsions whose 3-subsets are free. | **60 % zero** | Same looseness argument; and the D4 mechanism at arity 5 needs *all five* colours pinned. | The neighbourhood is exactly where the guaranteed compulsion lives, so if arity 4 fires anywhere it fires here. |
+| **P4** | Phase B: gen-1's own **73,256** target-class questions (52,616 at √3, 20,640 at distance 2) contain **no** virtual edge at `k = 5`. | **85 % zero** | Four campaigns flat; M31's "enrichment does not shrink the forcing" measured three times. | It is a genuinely new object with 15× the material, and it has **never been swept at all**. |
+| **P5** | **The ladder is flat**: every question answered *realizable* on the 1581 is answered *realizable* on gen-1 for the same vertices. By D3 the floor can only drop; the prediction is that it does not. | **80 % flat** | G10, measured four times at `k = 4` and once at `k = 5`. | Nobody has asked it at `k = 5` *at arity 3*, and D3 says the inequality is real — a drop is possible, not merely conceivable. |
+| **P6** | **The effort dial**: gen-1's per-colouring harvest cost exceeds the 1581's (0.31 CPU-s) by ≥ 10×, and at equal `H` its never-observed candidate fraction is *higher*. | **70 %** | More constraints per colouring; M41's only nonzero `k = 5` readings were both effort signals (dimers 10×, gen-2 ×300). | If the fraction comes back *lower*, the extra material is decorrelating the colouring pool rather than constraining it — which would be the first sign the closure does something structural, and is worth more than the prediction. |
+
+### §0c. What a flat result would and would not license — written now, not at the close
+
+This is the sentence M43 omitted and whose omission cost a grokking (G21, second instance).
+
+**A zero at arity 3 licenses exactly:** `arityFloor(1581, k = 5) ∈ {4, 5}`, since arity 0 and 1 are
+excluded by `two_le_arityFloor`, arity 2 is a settled complete zero, arity 3 is now a complete zero,
+and `arityFloor_le_of_degree` caps it at 5. That is a *complete* determination up to one step, on an
+object where nobody had asked at all.
+
+**It licenses nothing about:** the plane; any other object; arity 4 outside vertex neighbourhoods
+(`C(1581,4) = 259,338,410,115` — priced in §4d and explicitly OUT of scope); or whether a virtual
+edge at √3 or 2 exists anywhere.
+
+**Every negative in this milestone carries its enumeration in the headline sentence, not in a scope
+line.** That is the standing rule minted at M45 and it is why `tools/arity.py` has no verdict called
+"clean".
 
 ---
 
@@ -36,9 +127,9 @@ rescoped.
 
 ---
 
-## §2. The target, stated exactly, and what is already built toward it
+## §2. The target, stated exactly
 
-**Act One is kernel-checked.** `Instances/HexShell.lean` holds `hexShell_plane5` (verify it):
+**Act One is kernel-checked.** `Instances/HexShell.lean` holds `hexShell_plane5`:
 
 > Every proper 5-colouring of the plane has two points of the same colour at distance **√3 or 2**.
 
@@ -46,232 +137,283 @@ Its carrier is the closed first shell of the triangular lattice — a point and 
 neighbours, seven points. Six colours cannot be spread over seven points without a repeat, and the
 repeated pair is never a unit edge, so it lies at √3 or at 2. **Counting, not search.**
 
-**The pigeonhole names exactly nine pairs** — verify `hexShellPairs` in the same file:
-`hexShellP3` = **six** pairs at √3 (the 120° ring gaps) and `hexShellP4` = **three** pairs at
-distance 2 (the ring diameters). Nine, not one.
-
-**Act Two is what is missing.** To turn Act One into `χ(ℝ²) ≥ 6` you must *refute every one of those
-nine placements*: a finite unit-distance graph in which two points at that distance are forced to
+**Act Two is what is missing.** To turn Act One into `χ(ℝ²) ≥ 6` you must refute every one of the
+nine placements: a finite unit-distance graph in which two points at that distance are forced to
 receive **different** colours in every proper 5-colouring. Such a forced-different pair is called a
 **virtual edge** — an edge the colouring theory already believes in, though no unit distance joins
-the two points.
-
-**[derived] — a correction to a loosely stated reduction, and it matters for scoping.** The
-project's grokking G26 says a 6-forcer needs "one gadget at √3 **or** 2". Read against
-`hexShellPairs` that is too weak: the pigeonhole is *disjunctive over both classes*, so killing all
-six √3-pairs still leaves the three diameters, and vice versa. **You need a virtual edge at √3 AND
-one at distance 2.** Both radicands are inside the 5-forcers' own field (a spindle at distance `d`
-needs `4d² − 1` square: `11` at √3, `15` at 2 — verify against `FieldWall.lean` and the M31
-quadrature law), so neither is out of reach in principle. *Finding one of the two would be a major
-result and would halve the remaining problem; finding both closes it.*
+the two points. Per **D1** you need one at √3 **and** one at 2; per **D4** one of each suffices for
+the whole plane. Both radicands sit inside the 5-forcers' own field (`4d² − 1` is `11` at √3 and
+`15` at 2), so neither is out of reach in principle.
 
 ---
 
-## §3. What has actually been measured — and this section is the whole reason the milestone changed
+## §3. What has already been measured, and why this milestone is not a re-sweep
 
-A previous version of this stub asserted that the from-below pair question had only ever been asked
-forty times. **That was wrong, and checking it before running anything is why this file was
-rewritten.** The true state, verified on disk:
+An earlier draft of this file asserted the from-below pair question had only ever been asked forty
+times. **That was wrong, and checking it before running anything is why the milestone changed.** The
+true state, verified on disk:
 
 | object | size | arity-2 sweep at `k = 5` | result | address |
 |---|---|---|---|---|
 | de Grey's 1581 witness | 1,581 pts / 7,877 edges | **COMPLETE and SETTLED** — 37 models, `unsettled: []` both sides, 30.2 s | 0 forced pairs, 0 virtual edges | `build/m30-rigidity-1581-k5.json` |
-| twelve composed objects (crystal unions, hetero-dimers, the four-witness family union) | up to 5,533 pts | **COMPLETE and SETTLED** — 38–110 models each | 0 and 0, every one | `build/m41-rigidity-*.json` |
+| twelve composed objects | up to 5,533 pts | **COMPLETE and SETTLED** — 38–110 models each | 0 and 0, every one | `build/m41-rigidity-*.json` |
 | gen-1 closure | 24,065 pts / 123,134 chords | **never run** | — | — |
-| gen-2 closure | 284,873 pts / 1,477,824 edges | **40 targeted asks only** — 20 at √3, 20 at distance 2, *all satisfiable* | no virtual edge among those 40 | `build/m41-gadget-asks.json` |
+| gen-2 closure | 284,873 pts / 1,477,824 edges | **40 targeted asks only**, all satisfiable | no virtual edge among those 40 | `build/m41-gadget-asks.json` |
 
-**How to read the word "settled".** The instrument (`tools/rigidity.py`, class `Rigidity`) does not
-sample. It draws proper colourings until every pair has been *seen* both ways, and confirms the
-survivors with a batch query whose UNSAT settles all of them at once; `unsettled: []` means the
-candidate set emptied. So on the witnesses and the unions, **zero really means zero over every
-pair** — 1,248,990 pairs on the 1581 alone. That is a strong, complete negative and it should be
-respected as one.
+**How to read "settled".** `tools/rigidity.py` does not sample: it draws proper colourings until
+every pair has been *seen* both ways, then confirms the survivors in one batch query whose UNSAT
+settles all of them at once. `unsettled: []` means the candidate set emptied. On the witnesses,
+**zero means zero over every pair**. That is a strong, complete negative and it is respected as one.
 
-**[measured, this stub, 2026-08-14, desktop]** The relevant populations on the 1581, from exact
-addresses via `tools/gradient.py:build_addresses` (float census; the unit count reproduces the known
-**7,877** exactly, which is the census's own control):
+**So what is genuinely unasked is the ARITY.** `arityFloor_le_of_degree` (kernel, M45) says a vertex
+with `k` distinct neighbours makes the all-different pattern on them unrealizable, so the floor is
+at most `k` **with no hypotheses at all**. De Grey's graph has 1,557 vertices of degree ≥ 5 and two
+of degree 60. *(Read the hypothesis carefully: it needs SOME vertex with `k` distinct neighbours,
+not every vertex. The 1581's minimum degree is 4 and is irrelevant.)* So **a compulsion of arity ≤ 5
+is guaranteed to exist, while arity 2 is settled EMPTY** — the floor is in `{3, 4, 5}` by theorem,
+and nobody has ever asked which.
 
-* pairs at **√3**: **3,216**
-* pairs at **distance 2**: **1,092**
-* all pairs: 1,248,990
-
-All 4,308 of those were inside the settled sweep. **There is no unasked arity-2 question on the
-witnesses.**
-
----
-
-## §4. So what IS unasked — the two live phases
-
-### Phase A (the informative one): **arity three, at five colours, from below**
-
-Every from-below meter this project owns asks about a **pair**. In milestone M45 the same
-observation, one field down, produced a correction — but the correction there was that the *sweep*
-had been too narrow, and §3 shows that is **not** the situation here. What transfers instead is the
-other half of M45, and it transfers exactly:
-
-**[derived, kernel-checked at M45 — `Arity.lean`, verify]** A *compulsion* is a **partial colouring
-that does not extend**: `m` distinct vertices, properly coloured among themselves, wearing a pattern
-that no proper `k`-colouring induces. The **arity floor** is the least such `m`. And
-`arityFloor_le_of_degree`: **a vertex with `k` distinct neighbours makes the all-different pattern
-on them unrealizable, so the arity floor is at most `k` with no hypotheses at all.** De Grey's 1581
-has vertices of degree up to **60**, far more than the five distinct neighbours the theorem asks
-for. *(Read the hypothesis carefully: it needs SOME vertex with `k` distinct neighbours, not every
-vertex. The 1581's minimum degree is 4 and is irrelevant — an earlier draft of this stub said
-"minimum degree well above 5" and was wrong on the reason while right on the conclusion. Verify with
-`tools/gradient.py:build_addresses` before repeating either.)* So **a compulsion of arity ≤ 5 is
-guaranteed to exist on de Grey's graph, while its arity-2 floor is settled EMPTY.** The floor is
-therefore in `{3, 4, 5}` **by theorem**, and nobody has ever asked which.
-
-That is the calibrated-bed condition M45 required, and here it is met better than it was there: the
-arity-2 answer is not merely certified, it is *complete*. **A zero at arity 3 on this object would
-be a real statement about the mechanism; a hit would be the first nonzero structural reading the
-from-below direction has ever produced.**
-
-**[derived] Does an arity-3 hit help the target?** Not directly — the composition of §2 consumes a
-forced-*distinct* pair, and an arity-3 compulsion is not one. What it would do: (a) tell us the
-order the mechanism lives at, which four campaigns have assumed without testing; and (b) open the
-generalized Act One question — *is there a configuration in which every 5-colouring forces a
-monochromatic **triple** in one distance class?* That is a counting question about the triangular
-lattice, registered as **a derivation to attempt, not a phase to measure**, and its answer decides
-whether an arity-3 gadget is usable at all. State the honest answer either way before interpreting a
-hit.
-
-### Phase B: the closures, where the arity-2 question really is unswept
-
-gen-1 (24,065 points) has **never** been swept, and gen-2 (284,873 points) received **40 targeted
-asks**. These are the only places an arity-2 virtual edge could still be hiding. Restricted to the
-two distances that matter the populations are large but finite; observe-then-confirm makes them
-affordable (measured at M45: 400 harvested colourings cut 9,636 candidate pairs to 811 in 2.4 s).
-Report the population size **in the headline of any negative**, which is the standing lesson below.
+That is a calibrated bed of the kind grokking G30 asks for, met better here than at M45: the arity-2
+answer is not merely certified, it is complete. **A zero at arity 3 is a real statement about the
+mechanism; a hit is the first nonzero structural reading the from-below direction has produced.**
 
 ---
 
-## §5. Instruments — verify each before use
+## §4. The measurements that decided this subplan's shape
 
-* **`tools/arity.py`** (built at M45) — the arity meter. `realize(stage, k, tup, blocks, cap, enc)`
-  is one pattern query; `enc ∈ {free-fwd, free-rev, pinned}` are three *sound* encodings, and
-  `Arity.realizes_iff_extends` (kernel-checked) is the theorem that they ask the same question.
-  `partitions(m, k)` enumerates one pattern per partition (2 at m=2, 5 at m=3, 15 at m=4).
-  `harvest` is the observe pass. `arity_verdict` is the **one** place a verdict is computed and it
-  structurally refuses to produce one without the evidence that would qualify it.
-  **`python3 tools/arity.py --self-test` must be green before anything runs** — it carries three
-  planted controls, including the explained-by-subtuple case (see §7).
-* **`tools/rigidity.py`** — the arity-2 lattice whose observe-then-confirm design `arity.py`
-  generalizes, plus `coverage_query`/`min_cover` (the k-set meter).
-* **`tools/gradient.py`** — `build_addresses()` returns the committed 1581; also the union builder,
-  the Galois conjugator, and the code that produced the 40 gen-2 asks. **Read how it chose them
-  before repeating the choice.**
-* **`tools/closure.py`** — the closure generations, with the M31 quadrature law enforced at find
-  time (it aborts on a violating chord rather than recording one).
-* **The symmetry-breaking fact that makes any of this affordable [measured, M45, desktop]:** pin a
-  pattern *without naming colours* and the query stays palette-invariant, which makes
-  first-occurrence palette-symmetry breaking sound on top of it — worth a factor above **8,000** at
-  six colours (>162 s → 0.02 s on a 23-vertex refutation). Re-measure the factor at five colours;
-  do not assume it.
-* **A trap that cost a run at M45:** every function handed to a `ProcessPoolExecutor` must be
-  defined at module level, or the workers cannot unpickle it.
+*Desktop, 32 cores, 125 GB, 2026-08-14. Scratch scripts under the session scratchpad;
+everything below is re-derived by the campaign driver at run time, never read from these notes.*
+
+### §4a. The objects, with their controls
+
+| object | n | unit edges | √3 pairs | distance-2 pairs | control |
+|---|---|---|---|---|---|
+| de Grey 1581 (`76b8163b27fe6f96`) | 1,581 | **7,877** | **3,216** | **1,092** | the 7,877 is the committed count, reproduced from exact field arithmetic |
+| gen-1 half-spindle closure | **24,065** | **123,134** | **52,616** | **20,640** | 123,134 is M31's number; the 1581's own 7,877 edges reproduce exactly inside the sweep |
+
+Built in 3 s; the exact three-class pair enumeration takes 93 s. Degree profile of the 1581: min 4,
+median 10, **max 60 at exactly two vertices** — the two spindle centres, which is grokking G2's
+ring-heart reading appearing in the degree sequence.
+
+### §4b. The arity-3 screen is affordable, and that is the milestone's central fact
+
+`C(1581, 3) = 657,385,070`. Asking each triple with a solver is impossible. The screen that makes it
+possible is a **pair colour-agreement mask**: for `H` harvested proper colourings, `mask[u][v]` is
+the `H`-bit set of colourings in which `u` and `v` share a colour. Every arity-3 pattern's
+observed-set is then a boolean combination of three such masks, so *all* triples × *all* 5 patterns
+are screened with bit operations alone.
+
+| step | measurement |
+|---|---|
+| vacuity guard, `k = 5` | `sat` in **0.11 s** |
+| harvest | **8,062** proper colourings in **88 s** on 28 workers (≈ 0.31 CPU-s each) |
+| mask build, `H = 1024` | 31 s, **305 MB** (`H = 4096` ⇒ ≈ 1.3 GB, fits) |
+| full `C(1581,3)` screen | **2.3 min single-core, ~8 s on 28 cores** |
+| screen correctness | mask vs. direct recomputation on 200 random triples: **200/200 agree**, at two values of `H` |
+| one confirm call | median **0.11 s**; 12 sampled candidates all `sat` |
+
+**Diversity, not count, is the binding constraint** — and it was measured rather than assumed. The
+harvest's 6 random unit-clause seeds give colourings too alike; raising the seed count to ~200 (with
+fallback on UNSAT) roughly triples the effective independence. Never-mono fraction against `H`:
+
+| `H` | 64 | 256 | 1024 | 2048 | 4096 |
+|---|---|---|---|---|---|
+| fraction never seen monochromatic | 0.4201 | 0.1585 | 0.02944 | 0.009569 | **0.001513** |
+| candidates over `C(1581,3)` | 276 M | 104 M | 19.3 M | 6.3 M | **994,104** |
+
+The decay is **accelerating, not flattening** (×0.16–0.33 per 4× `H`), so there is no visible hard
+core of never-realizable triples and the screen terminates. Even at the pessimistic `H = 4096` stop,
+994,104 candidates × 0.11 s ÷ 28 cores ≈ **65 minutes** — and the observe-then-confirm loop feeds
+each solved candidate's colouring back into the pool, which kills survivors in bulk, so the real
+cost is far below that.
+
+### §4c. Traps found while pricing, all now planted as assertions
+
+* **Python 3.14 defaults to `forkserver`, not `fork`.** Every `ProcessPoolExecutor` entry point needs
+  a module-level function *and* an `if __name__ == "__main__":` guard, or the workers die with a
+  `ConnectionResetError` that looks like a machine fault. (M45's trap in a new form.)
+* **`closure.nsq` returns a `list`, not a `tuple`.** Norm constants built with `tuple(...)` compare
+  unequal to every norm forever, so the √3 and distance-2 classes come back **empty and the unit
+  class comes back right** — a silent half-failure that the unit-count control alone would pass. The
+  campaign asserts `nsq(1+1) == FOUR` before classifying anything.
+* Pattern masks must use `H` a multiple of 64, or the padding bits above `H` read as 1 under
+  negation and manufacture false *observed* readings on every pattern with a disequality.
+
+### §4d. What is out of scope, priced
+
+`C(1581, 4) = 259,338,410,115`. Screening it needs ~60 numpy operations per triple over all fourth
+vertices — about **20 hours on 28 cores for the screen alone**, before any confirm, and the
+mono-4 candidate density is far higher than at arity 3. **The general arity-4 sweep is not run and
+is not planned.** What *is* complete at arity 4 is the neighbourhood sweep: `Σ_v C(deg v, 4) =
+1,718,839` tuples, which is the D4 mechanism's own home and is affordable. gen-2 (284,873 points,
+343 s per colouring at `k = 5`) is priced for Phase B and taken only if gen-1 finishes early.
 
 ---
 
-## §6. Phases, in order
+## §5. The kernel layer
 
-* **§0 — registration, committed before any instrument runs.** The exact objects with their
-  fingerprints; the exact population per object, **counted and stated**; a prior per probe with the
-  evidence both ways; and the sentence M43 omitted and M41 did not need: *what a flat result would
-  and would not license*.
-* **§1 — the census.** Per object, the number of √3 pairs, distance-2 pairs, and (Phase A) triples
-  worth asking about. Exact arithmetic. This number is the denominator every negative must be
-  reported against.
-* **§2 — Phase A on the 1581**, then on the composed objects. Triples restricted by geometry (the
-  vocabulary distances) and by the point group, observe-then-confirm, both directions per pattern,
-  generous caps. Every `unknown` recorded as undecided with its cap and excluded from every summary.
-* **§3 — Phase B on gen-1**, then gen-2 within a stated bounded radius. Say what was bounded.
-* **§4 — controls.** A planted virtual edge (add an edge, confirm the meter fires); a planted
-  innocent pair; the base-satisfiability guard on every object *before* any compulsion claim; and
-  the M45 near-miss control — an arity-3 reading whose sub-pair explains it is **not** a find.
-* **§5 — the verdict, written either way**, with the enumeration in the headline.
+Small, and each theorem exists because a specific reading in §6 needs it. Nothing here is deep
+mathematics and the module says so; what earns their place is (a) D1 is a **correction to this
+project's own record** and belongs in the kernel rather than in prose, (b) D3 is the statement that
+makes the ladder measurement mean anything, and (c) D4 is the consumer surface any future gadget
+instantiates the same day it is found — the pattern M35 used for the avoidance surface and M44 for
+the limit lemma.
+
+**In `Proofs/HadwigerNelson/Arity.lean`** (extending M45's module):
+
+```lean
+/-- A compulsion transports along a graph embedding: more material, same compulsion. -/
+theorem Compels.map (f : H ↪g G) (h : Compels H k S p) : Compels G k (f ∘ S) p := sorry
+
+/-- **The ladder theorem.** Growing a graph can only lower its arity floor. -/
+theorem arityFloor_le_of_embedding (f : H ↪g G) : arityFloor G k ≤ arityFloor H k := sorry
+```
+
+**In a new `Proofs/HadwigerNelson/Homogeneous.lean`:**
+
+```lean
+/-- The plane's unit-distance graph is homogeneous on each distance class: for any two pairs at
+the same nonzero distance there is a distance-preserving bijection of `ℂ` carrying one to the
+other, so a compulsion at one pair is a compulsion at every pair of that distance. -/
+theorem forced_pair_of_forced (d : ℝ) (x₀ y₀ : ℂ) (hne : x₀ ≠ y₀) (hd₀ : dist x₀ y₀ = d)
+    (h : ∀ C : (unitDistance ℂ).Coloring (Fin k), C x₀ ≠ C y₀)
+    (x y : ℂ) (hd : dist x y = d) (C : (unitDistance ℂ).Coloring (Fin k)) :
+    C x ≠ C y := sorry
+```
+
+**In `Proofs/HadwigerNelson/Instances/HexShell.lean`** (the target's exact shape, D1 kernel-side):
+
+```lean
+/-- **The 6-forcer's exact requirement.** Virtual edges at BOTH √3 and 2 close the problem;
+`hexShell_plane5` is disjunctive, so one of the two classes alone does not. -/
+theorem six_le_of_virtual_edges
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (unitDistance ℂ).Colorable 5 := sorry
+```
+
+**The spec obligations** (`Instances/AritySpec.lean`, extending M45's):
+
+* a **positive** instance of `arityFloor_le_of_embedding` on the existing 5-vertex model — embed it
+  in a graph with one extra isolated vertex and check the floor is still 3, and embed it in a graph
+  with an added edge that *lowers* the floor, so the inequality is seen to be strict somewhere;
+* a **planted red** for D1: the hypothesis with only `h3` must NOT prove the conclusion — recorded as
+  an `example` exhibiting a 5-colouring of the `{1, √3}` graph that the full statement rules out, or,
+  if that is out of reach cheaply, as an explicit `#guard` that `hexShellP4` is nonempty, which is
+  the exact fact making the disjunction irreducible;
+* a **model of the hypotheses** for `forced_pair_of_forced` at `k = 1`, where the hypothesis is
+  vacuous, confirming the statement is not accidentally provable for the wrong reason.
 
 ---
 
-## §7. The discipline — non-negotiable, and why
+## §6. The phases, in order
 
-**Registered predictions.** §0 is written and committed *before* any instrument runs. Sorted by how
-they were reached, this project's a-priori derivations have survived without exception and its
-post-hoc inductive readings have died without exception — roughly 7-for-7 against 0-for-10, several
-of the latter refuted by our own later work.
+**§6.0 — registration.** This file, committed before any campaign instrument runs.
 
-**"Measurement generates; induction kills."** A measurement buys a candidate pattern, never a
-conclusion; the conclusion is bought separately, by a derivation or by a pre-registered replication
-on fresh objects. Two design consequences: prefer measurements that turn a **dial** (informative in
-both directions) over hunts for a **positive** (whose null is uninterpretable — and which has come
-back flat four times); and prefer **calibrated beds**, so a zero bounds the *instrument* rather than
-being mistaken for a fact about the world. §4 Phase A is that principle applied: arity 2 there is
-settled *complete*, so an arity-3 zero is interpretable.
+**§6.1 — the kernel layer of §5**, with its spec examples and the gate. Lands first: D3 is what the
+ladder phase's reading rests on, and a measurement whose interpretation is not yet a theorem is how
+G28 happened.
 
-**"A search run against a sufficient-but-not-necessary check measures the check, not the world" —
-and its sharper second form: a sweep's negative is a statement about its ENUMERATION, and the
-enumeration belongs in the same breath as the verdict.** At M43 a six-question sweep was written up
-as "zero virtual edges at k = 6"; re-asked completely **on the identical stage** at M45, that object
-had seven, at classes the six never reached, each decided in 7.5–15 seconds and each confirmed in
-three independent encodings. The artifact's scope line had been honest; the summary sentence was
-not, and the summary is what became a grokking. **This file's own first draft repeated the mistake
-in the opposite direction** — it claimed M41 had asked only forty questions, when M41's sweeps were
-complete and settled. Checking before asserting is the entire lesson, and it applies to the writer
-of the stub as much as to the runner of the campaign.
+**§6.2 — the census.** Per object, exact populations of every class the campaign asks about, with
+the unit-edge control on each. These are the denominators every negative is reported against.
 
-**Failure clauses.**
-* `unknown at cap` is **never** a verdict. Record it as undecided with its cap, exclude it from
-  every summary, and *say so in the summary*.
+**§6.3 — Phase A: the COMPLETE arity-3 sweep on the 1581 at `k = 5`.**
+1. vacuity guard;
+2. arity-2 reproduction control over all 1,248,990 pairs (P1);
+3. harvest to `H` a multiple of 64, growing until the candidate set is affordable, recording the
+   decay curve — the curve is itself reportable and is the evidence that the screen terminated;
+4. mask screen over all 657,385,070 triples × 5 patterns, with the local-properness filter applied
+   per pattern;
+5. observe-then-confirm on the survivors, feeding each solved colouring back into the pool;
+6. for every compulsion: the complete 2-subset sweep on the **same stage** before any `minimal_arity`
+   claim, then a second and third encoding.
+
+**§6.4 — Phase A2: the COMPLETE neighbourhood arity-4 sweep** — all 1,718,839 4-subsets of vertex
+neighbourhoods × 15 patterns, same pipeline. This is the D4 mechanism's own home and it brackets the
+floor from the side the general sweep cannot reach.
+
+**§6.5 — Phase B: the ladder.**
+1. build gen-1, with the 7,877-edge control;
+2. re-ask the 1581's **own** questions on the enriched stage — the same vertex pairs and triples,
+   more material. By D3 the floor can only drop, so this is a dial with a theorem behind it (P5);
+3. sweep gen-1's own target classes: 52,616 pairs at √3 and 20,640 at distance 2 (P4);
+4. gen-2 only if 1–3 finish early, and reported with its bound stated.
+
+**§6.6 — controls, every one seen to fail before its results are believed.**
+* the vacuity guard on every stage before any compulsion claim;
+* a **planted virtual edge** (add an edge between a free pair, confirm the meter fires) and a
+  **planted innocent pair**;
+* the M45 near-miss control: an arity-3 reading whose sub-pair explains it is **not** a find;
+* the mask screen cross-checked against direct recomputation on a random sample at every `H` used;
+* the arity-2 reproduction of `build/m30-rigidity-1581-k5.json` (P1) — if this disagrees, halt.
+
+**§6.7 — the verdict, written either way, with the enumeration in the headline.**
+
+---
+
+## §7. Instruments
+
+* **`tools/arity.py`** (M45) — the arity meter. `realize(stage, k, tup, blocks, cap, enc)` with
+  `enc ∈ {free-fwd, free-rev, pinned}` three *sound* encodings that `Arity.realizes_iff_extends`
+  proves ask the same question; `partitions(m, k)`; `arity_verdict`, the **one** place a verdict is
+  computed, which structurally refuses to produce one without the evidence that would qualify it.
+  **`python3 tools/arity.py --self-test` must be green before anything runs.**
+  *M48 adds:* the mask screen (`agreement_masks`, `screen3`, `screen_neighbourhoods`) and the
+  observe-then-confirm loop, each with its own planted control.
+* **`tools/m48.py`** — the campaign driver, writing **`build/m48-arity.json`** (the sweep axis) and
+  **`build/m48-ladder.json`** (the object axis). *M45 ran its campaign from scratch scripts and left
+  no artifact under `build/`; that is not repeated.*
+* **`tools/rigidity.py`** — the arity-2 lattice whose observe-then-confirm design this generalizes.
+* **`tools/closure.py`** — the closure generations, quadrature law enforced at find time.
+* **`tools/anatomy.py`** — `build_addresses()`, the committed 1581 with its 7,877-edge control.
+* **The symmetry-breaking fact that makes any of this affordable:** pinning a pattern *without naming
+  colours* keeps the query palette-invariant, which makes first-occurrence palette-symmetry breaking
+  sound on top of it — worth >8,000× at six colours. **Re-measure at five; do not assume it.**
+
+---
+
+## §8. Discipline and failure clauses
+
+* `unknown at cap` is **never** a verdict. Record it as undecided with its cap, exclude it from every
+  summary, and *say so in the summary*.
 * Every claim double-encoded or theorem-closed.
 * Every meter run on a planted positive **and** a planted negative before its results are believed.
-  A control that has not been seen to fail is not a control.
 * An arity-`m` reading is **not** an arity-`m` finding until every lower-arity sub-tuple has been
-  swept on the *same stage* and found free. `arity.py` withholds `minimal_arity` until then.
+  swept on the *same stage* and found free.
+* Rows from different stages are about different graphs; `stage.fingerprint` makes "same object?" a
+  comparison rather than a judgement.
+* **Every negative carries its enumeration in the headline sentence.**
 
-**HALT AND VERIFY.** If any pair at √3 or 2 comes back compelled at five colours on a genuine
-unit-distance graph, **that is χ(ℝ²) ≥ 6 — the thing this project exists for.** Stop. Then, in
-order: (1) confirm the stage is 5-colourable, or the reading is vacuous; (2) re-derive the object's
-vertices and edges independently, from the construction rather than from a stored file — noting that
-the M06-era `degrey_graph.json` and the standing loader use **different vertex orders**, which once
-explained a wrong verdict; (3) confirm the two points are at distance exactly √3 or exactly 2 in
-**exact field arithmetic**, never floating point; (4) re-run in all three encodings with generous
-caps; (5) confirm the pair is realizable as *distinct*, or the reading is degenerate; (6) report to
-Kooshi **before** attempting kernel promotion. Only then the composition, priced as an M06-scale
-certificate effort before anything is promised.
-
----
-
-## §8. The honest prior
-
-**Lower than the first draft of this stub implied, and stated plainly.** The witnesses and the
-composed unions are swept *complete* at arity 2 and are genuinely empty; that is a strong negative
-built by a sound instrument, and M45's correction does not reach it. What remains is (a) an arity
-nobody has asked at, on an object where the answer is guaranteed to be at most 5 and is known not to
-be 2 — informative in both directions, which is why it is Phase A; and (b) two closure generations
-that were never swept, which is ordinary unfinished work rather than a suspected error.
-
-The one concrete reason for optimism is not an analogy but a theorem: **`arityFloor ≤ k` says a
-compulsion of arity at most 5 exists on de Grey's graph, and the complete arity-2 sweep says it is
-not at arity 2.** Something is there. Nobody has looked at the arity it lives at.
+**HALT AND VERIFY.** Per **D2** an arity-3 or arity-4 compulsion is *not* a jackpot and does not fire
+this clause. The clause fires on one thing: **a pair at √3 or 2 compelled apart at five colours on a
+genuine unit-distance graph — that is χ(ℝ²) ≥ 6.** Stop. Then, in order: (1) confirm the stage is
+5-colourable, or the reading is vacuous; (2) re-derive the object's vertices and edges independently,
+from the construction rather than from a stored file — the M06-era `degrey_graph.json` and the
+standing loader use **different vertex orders**, which once explained a wrong verdict; (3) confirm
+the two points are at distance exactly √3 or exactly 2 in **exact field arithmetic**, never floating
+point; (4) re-run in all three encodings with generous caps; (5) confirm the pair is realizable as
+*distinct*, or the reading is degenerate; (6) report to Kooshi **before** attempting kernel
+promotion. Only then the composition, priced as an M06-scale certificate effort before anything is
+promised.
 
 ---
 
 ## §9. Practical notes
 
 * **Machines.** Desktop (32 cores, 125 GB) and laptop (12 cores, 31 GB). This
-  wants the desktop. `nproc` disagreeing with a number in a plan is the hardware moving, not an
-  error. Record CPU seconds, minimum of three runs, with the machine named.
-* **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare **or named**. Lake
-  sizes its job pool from the machine and this project's data modules peak at ~9 GB each; an
-  unrestricted build has taken the desktop down twice. `lake env lean <file>` is fine for iterating
-  on one file (it builds nothing) but does **not** apply the project's options, so never conclude a
-  module is green from it.
-* **On any segfault, from any process: HALT and report to the user immediately.** Do not diagnose,
-  do not retry. It is hardware and needs a reboot the user performs.
-* **`pkill -f <pattern>` kills your own shell** — the wrapper's command line contains the pattern.
-  Use a bracketed regex (`pgrep -f "m4[8]\.py"`) or resolve the PID first. The same trap silently
-  disables any monitor whose command contains its own search pattern.
+  wants the desktop. Record CPU seconds, minimum of three runs, with the machine named.
+* **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare **or named**.
+  `lake env lean <file>` is fine for iterating on one file but does **not** apply the project's
+  options, so never conclude a module is green from it.
+* **On any segfault, from any process: HALT and report to the user immediately.** It is hardware.
+* **`pkill -f <pattern>` kills your own shell.** Use a bracketed regex (`pgrep -f "m4[8]\.py"`).
+* **One heavy job at a time.**
 * **Artifacts.** One JSON per axis, schema-tagged, with the reading rule *in the schema string* and
-  the bound direction *in the field name*. Different stages are different graphs: carry a
-  **fingerprint** of the sorted edge list so "same object?" is a comparison rather than a judgement.
-  And — the standing lesson — **put the enumeration size in the headline of every negative result.**
+  the bound direction *in the field name*.
+
+---
+
+## §R. Results
+
+*(filled at the close)*
