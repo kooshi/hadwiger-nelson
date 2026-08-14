@@ -124,6 +124,9 @@ vertices), `T = 467/120` (66), `T = 299/50` (117).
 
 ## §6. §0a — The object, derived before any instrument
 
+*(Rewritten after the `debruijn-domain-modeling` pass; the pass's decisions and the two it
+overturned are in §6b.)*
+
 The milestone needs one definition, and the repository already owns half of it.
 
 `Pattern.lean` defines **`SamePattern a b := ∀ i j, a i = a j ↔ b i = b j`** — two colour
@@ -134,15 +137,33 @@ the vocabulary this milestone needs, so the new notion is phrased *through* it a
 development is created.
 
 ```
-Realizes  G k S p  :=  ∃ C : G.Coloring (Fin k), SamePattern (C ∘ S) p
-Admissible  G S p  :=  ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
-Compels   G k S p  :=  Admissible G S p ∧ ¬ Realizes G k S p
+PartialColoring G   S p  :=  Function.Injective S ∧ ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
+Realizes        G k S p  :=  ∃ C : G.Coloring (Fin k), SamePattern (fun i => C (S i)) p
+Compels         G k S p  :=  PartialColoring G S p ∧ ¬ Realizes G k S p
+arityFloor      G k      :=  ⨅ m ∈ {m | ∃ S p, Compels G k S p}, (m : ℕ∞)
 ```
 
-**The arity floor `a*(G, k)`** := the least `m` such that some injective `S : Fin m → V` and some
-pattern `p` satisfy `Compels G k S p`. It is defined only when `G` is `k`-colourable — otherwise
-every pattern is unrealizable and the number is a vacuity artifact, which is the standing base-SAT
-guard promoted into the definition's hypotheses.
+**The reading that makes the notion inevitable rather than invented.** `PartialColoring` says
+exactly *`S` lists `m` distinct vertices and `p` is a proper colouring of the subgraph they induce*.
+So
+
+> **a compulsion is a partial colouring that does not extend, and the arity floor is the least
+> number of vertices you must look at before local properness stops implying global
+> extendability.**
+
+That is the standard extendability question of constraint satisfaction, asked about colourings, and
+it is the honest name for what four campaigns were measuring at `m = 2`.
+
+**Why `ℕ∞` and not `ℕ`.** Mirrors Mathlib's own `chromaticNumber : ℕ∞ := ⨅ n ∈ setOf G.Colorable,
+(n : ℕ∞)` — the same shape, least-such-that with `⊤` for "never". `Nat.sInf ∅ = 0` would have
+collided with a genuine `m = 0`, which is the next entry.
+
+**The vacuity guard becomes a theorem instead of a side condition.** At `m = 0` the empty tuple is
+injective and admissible vacuously, and `Realizes` reduces to `G.Colorable k`. So
+**`arityFloor G k = 0 ↔ ¬ G.Colorable k`** — the definition *self-reports* vacuity in its own value,
+and for a colourable graph `arityFloor ≥ 2` follows at once (`m = 1` is realizable whenever any
+colouring exists). The base-SAT guard every instrument in this repository carries by hand is, here,
+the number 0.
 
 Five facts, all **[derived]**, all worked before any instrument ran:
 
@@ -176,6 +197,56 @@ transferable content and it is derived, not measured.
 whether a *smaller* one exists, and nothing about whether a compulsion at any arity is *useful*
 (the from-below reduction consumes a forced-distinct pair — see §12). Beating `k` from below is the
 whole measurement.
+
+---
+
+## §6b. What the domain-modeling pass changed
+
+Five questions were put to the draft; three answers overturned it.
+
+**(1) The tuple: `Fin m ↪ V` was tried and rejected, on decidability.** Repeated vertices are an
+*adversarial member* — `S = (v, v)` with `p = (0, 1)` is admissible and unrealizable, so without
+distinctness **every graph would have arity floor 2** and the definition would be destroyed. An
+embedding makes that unrepresentable, which is the better instinct — but
+`Function.Embedding.fintype` is **`noncomputable`**, so `decide +kernel` cannot pass through it and
+the planted control could not be checked. Distinctness therefore lives as a conjunct of
+`PartialColoring`, where it also reads correctly ("`m` distinct vertices"). A `Finset` was never in
+contention: D4's proof is "`i ↦ C (S i)` is injective on `Fin k`, hence surjective", which wants
+`Fin k → Fin k` and nothing else.
+
+**(2) The pattern stays `Fin m → Fin k`, and `SamePattern` does the quotient's work.** The honest
+object is the partition, but what this milestone needs is a *section* — a list hitting every class
+once, for the sweep and for `decide` — not a quotient with a respects-obligation on every
+constructor. `Pattern.lean` already made that argument and already built the section. The content
+of "a pattern is really a partition" is one lemma, `Realizes.congr`, and it is what makes
+`canonPatterns` a **complete** enumeration for the campaign.
+
+**(3) Admissibility is not a hypothesis and not droppable — it is half the definition.** Dropped, a
+block containing an edge is unrealizable for a reason that has nothing to do with colouring, and
+again every graph with an edge gets arity floor 2. Bundled with distinctness it stops being a side
+condition and becomes the recognizable object `PartialColoring`.
+
+**(4) `arityFloor` is worth minting** — it has three real uses (D4's `≤ k`, the vacuity theorem, and
+the planted control's `= 3`), it is the milestone's headline, and in `ℕ∞` it carries no junk value.
+
+**(5) Four notions do not become five.** `Separated` and `Forces` are *exactly* the two arity-2
+compulsions (D1, one theorem covering both cases), so the new notion **contains** them. `Fan` is a
+*disjunction* of compulsions — `Fan G k v Q` holds iff every admissible pattern on `(v, q₁ … qₙ)`
+that isolates `v` is a compulsion — so it is **stratified**, not duplicated. And the repository
+already holds an arity-3 compulsion it never named the genus of: `Compulsion.no_mono_outer_triple`
+(M20 — an outer 120°-triple is never monochromatic in a proper 3-colouring) is
+`Compels _ 3 ![a,b,c] (fun _ => 0)`. The definition names something already present three times.
+
+**The find of the pass.** Because a global palette permutation is free, the palette-free definition
+and the naive one coincide:
+
+> **`realizes_iff_extends : Realizes G k S p ↔ ∃ C : G.Coloring (Fin k), ∀ i, C (S i) = p i`**
+
+The campaign's primary encoding is colour-free (§8, the >8,000× symmetry-breaking win) and its
+decorrelated second encoding is colour-pinned. This theorem says the two ask the same question —
+so the decorrelation rests on a **theorem** rather than on an assumption that the two encodings
+agree. Its proof is the one place the model is expected to resist: extending a bijection between
+two subsets of `Fin k` to a permutation of `Fin k`. Flagged for the obligation pass.
 
 ---
 
@@ -364,68 +435,91 @@ Written either way, per §13.
 
 ```lean
 -- Proofs/HadwigerNelson/Arity.lean
-import Proofs.HadwigerNelson.Coverage
-import Proofs.HadwigerNelson.Pattern
+import Proofs.HadwigerNelson.Coverage        -- Fan, fan_iff_coverage
+import Proofs.HadwigerNelson.Pattern         -- SamePattern, canonPatterns
 
 namespace HadwigerNelson
-variable {V : Type*} {G : SimpleGraph V} {k m : ℕ}
+variable {V : Type*} {G : SimpleGraph V} {k m : ℕ} {S : Fin m → V} {p : Fin m → Fin k}
 
+/-- `m` distinct vertices, properly coloured among themselves: the local data. -/
+def PartialColoring (G : SimpleGraph V) {m k : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
+  Function.Injective S ∧ ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
+
+/-- `p` is the pattern some proper `k`-colouring wears on `S`. Palette-free by construction. -/
 def Realizes (G : SimpleGraph V) (k : ℕ) {m : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
   ∃ C : G.Coloring (Fin k), SamePattern (fun i => C (S i)) p
 
-def Admissible (G : SimpleGraph V) {m k : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
-  ∀ i j, p i = p j → ¬ G.Adj (S i) (S j)
-
+/-- A partial colouring that does not extend. -/
 def Compels (G : SimpleGraph V) (k : ℕ) {m : ℕ} (S : Fin m → V) (p : Fin m → Fin k) : Prop :=
-  Admissible G S p ∧ ¬ Realizes G k S p
+  PartialColoring G S p ∧ ¬ Realizes G k S p
 
--- the reasoning surface
-theorem Realizes.admissible : Realizes G k S p → Admissible G S p := sorry
-theorem exists_realizes (C : G.Coloring (Fin k)) (S : Fin m → V) :
-    ∃ p, Realizes G k S p := sorry                      -- non-vacuity: a colouring realizes its own
+/-- How many vertices before local properness stops implying global extendability. -/
+noncomputable def arityFloor (G : SimpleGraph V) (k : ℕ) : ℕ∞ :=
+  ⨅ m ∈ {m | ∃ (S : Fin m → V) (p : Fin m → Fin k), Compels G k S p}, (m : ℕ∞)
+
+-- the reasoning surface (nobody reasons by unfolding)
+theorem Realizes.partialColoring (hS : Function.Injective S) :
+    Realizes G k S p → PartialColoring G S p := sorry
+theorem Realizes.congr {p' : Fin m → Fin k} (h : SamePattern p p') :
+    Realizes G k S p ↔ Realizes G k S p' := sorry      -- "a pattern is really a partition"
+theorem realizes_iff_extends :                          -- THE decorrelation theorem (§6b)
+    Realizes G k S p ↔ ∃ C : G.Coloring (Fin k), ∀ i, C (S i) = p i := sorry
 theorem realizes_iff_exists {n : ℕ} {G : SimpleGraph (Fin n)} {S : Fin m → Fin n}
     {p : Fin m → Fin k} : Realizes G k S p ↔
-      ∃ f : Fin n → Fin k, (∀ i j, G.Adj i j → f i ≠ f j) ∧ SamePattern (fun i => f (S i)) p := sorry
+      ∃ f : Fin n → Fin k, (∀ i j, G.Adj i j → f i ≠ f j) ∧
+        SamePattern (fun i => f (S i)) p := sorry       -- the `decide +kernel` bridge
 
--- D1: arity two IS Forces/Separated, both cases, in one statement
-theorem compels_two {S : Fin 2 → V} {p : Fin 2 → Fin k} : Compels G k S p ↔
-    (if p 0 = p 1 then ¬ G.Adj (S 0) (S 1) ∧ Separated G k (S 0) (S 1)
-     else Forces G k (S 0) (S 1)) := sorry
+-- the vacuity guard, as a value rather than a side condition
+theorem arityFloor_eq_zero_iff : arityFloor G k = 0 ↔ ¬ G.Colorable k := sorry
+theorem two_le_arityFloor (h : G.Colorable k) : 2 ≤ arityFloor G k := sorry
+theorem arityFloor_le_of_compels (h : Compels G k S p) : (m : ℕ∞) ≤ arityFloor G k := sorry
 
--- D2: compulsions extend, so the floor is well defined
-theorem Compels.extend {m' : ℕ} {S : Fin m → V} {S' : Fin m' → V}
-    {p : Fin m → Fin k} {p' : Fin m' → Fin k} (ι : Fin m → Fin m')
+-- D1: arity two IS Forces/Separated, both cases, one statement
+theorem compels_two {S : Fin 2 → V} {p : Fin 2 → Fin k} (hS : Function.Injective S) :
+    Compels G k S p ↔
+      (if p 0 = p 1 then ¬ G.Adj (S 0) (S 1) ∧ Separated G k (S 0) (S 1)
+       else Forces G k (S 0) (S 1)) := sorry
+
+-- D2: compulsions extend, so "floor" is the right word
+theorem Compels.extend {m' : ℕ} {S' : Fin m' → V} {p' : Fin m' → Fin k} (ι : Fin m → Fin m')
     (hS : S' ∘ ι = S) (hp : p' ∘ ι = p) (h : ¬ Realizes G k S p)
-    (hadm : Admissible G S' p') : Compels G k S' p' := sorry
+    (hpc : PartialColoring G S' p') : Compels G k S' p' := sorry
 
 -- D3: the fan bracket
-theorem compels_of_fan {S : Fin m → V} {p : Fin m → Fin k}
+theorem compels_of_fan
     (hfan : ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ i, C (S i) = c)
-    (hadm : Admissible G S p) (hp : ¬ Function.Surjective p) : Compels G k S p := sorry
+    (hpc : PartialColoring G S p) (hp : ¬ Function.Surjective p) : Compels G k S p := sorry
 
 -- D4: the arity floor is at most k, unconditionally
 theorem compels_rainbow_of_neighbors {v : V} (S : Fin k → V)
-    (hN : ∀ i, G.Adj v (S i)) (hinj : Function.Injective S) :
-    Compels G k S id := sorry
+    (hN : ∀ i, G.Adj v (S i)) (hinj : Function.Injective S) : Compels G k S id := sorry
+theorem arityFloor_le_of_degree {v : V} (S : Fin k → V)
+    (hN : ∀ i, G.Adj v (S i)) (hinj : Function.Injective S) : arityFloor G k ≤ k := sorry
+
+-- the bridge to the existing Fan: a disjunction of compulsions, not a fifth notion
+theorem fan_iff_forall_compels {v : V} {Q : List V} : Fan G k v Q ↔ sorry := sorry
 ```
 
 ```lean
--- Proofs/HadwigerNelson/Instances/AritySpec.lean — the models, because ∀ over an empty domain
--- proves everything.  All by `decide +kernel` through `realizes_iff_exists`.
-def p5 : List (Fin 5 × Fin 5) := [(0,1), (0,4), (1,2), (2,3), (2,4)]
+-- Proofs/HadwigerNelson/Instances/AritySpec.lean — the models, because a ∀ over an empty domain
+-- proves everything.  All through `realizes_iff_exists`, then `simp only [edgeGraph_adj]; decide`.
+def p5 : List (Fin 5 × Fin 5) := [(0,1), (0,4), (1,2), (2,3), (2,4)]   -- C₄ + a pendant on 2
 
-theorem p5_colorable_three : (edgeGraph 5 p5).Colorable 3 := sorry           -- non-vacuity
-theorem p5_no_pair_compulsion :                                             -- arity 2 is FLAT …
-    ∀ (S : Fin 2 → Fin 5) (p : Fin 2 → Fin 3), Function.Injective S → ¬ Compels _ 3 S p := sorry
-theorem p5_compels_rainbow :                                                -- … and arity 3 fires
+theorem p5_colorable_three : (edgeGraph 5 p5).Colorable 3 := sorry     -- non-vacuity, explicit
+theorem p5_no_pair_compulsion :                                       -- arity 2 is FLAT …
+    ∀ (S : Fin 2 → Fin 5) (q : Fin 2 → Fin 3), ¬ Compels (edgeGraph 5 p5) 3 S q := sorry
+theorem p5_compels_rainbow :                                          -- … and arity 3 fires
     Compels (edgeGraph 5 p5) 3 ![1, 3, 4] ![0, 1, 2] := sorry
-theorem k3_no_compulsion :                                                  -- the planted negative
-    ∀ m (S : Fin m → Fin 3) (p : Fin m → Fin 3), ¬ Compels (edgeGraph 3 tri) 3 S p := sorry
+theorem p5_arityFloor : arityFloor (edgeGraph 5 p5) 3 = 3 := sorry    -- the number, both directions
+
+theorem k3_arityFloor : arityFloor (edgeGraph 3 [(0,1),(0,2),(1,2)]) 3 = ⊤ := sorry  -- planted red
+theorem k4_arityFloor_zero : arityFloor (edgeGraph 4 k4edges) 3 = 0 := sorry -- vacuity self-report
 ```
 
-Spec obligations before any proof effort: `#eval` the pattern enumeration against `Bell(m)`;
-exhibit the explicit 3-colouring of the planted graph; and read `compels_two` aloud against
-"a virtual edge is exactly an arity-2 compulsion".
+Spec obligations, before any proof effort: `#eval` `(canonPatterns 6 3).length` against `Bell(3) = 5`
+and `canonPatterns 6 4` against `15`; exhibit the explicit 3-colouring of the planted graph; check
+`Compulsion.no_mono_outer_triple` really is an instance of `Compels`; and read `compels_two` aloud
+against "a virtual edge is exactly an arity-2 compulsion".
 
 ---
 
