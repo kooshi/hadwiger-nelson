@@ -250,60 +250,150 @@ is not planned.** What *is* complete at arity 4 is the neighbourhood sweep: `Σ_
 
 ---
 
-## §5. The kernel layer
+## §5. The kernel layer (after the domain-modeling pass, 2026-08-14)
 
-Small, and each theorem exists because a specific reading in §6 needs it. Nothing here is deep
-mathematics and the module says so; what earns their place is (a) D1 is a **correction to this
-project's own record** and belongs in the kernel rather than in prose, (b) D3 is the statement that
-makes the ladder measurement mean anything, and (c) D4 is the consumer surface any future gadget
-instantiates the same day it is found — the pattern M35 used for the avoidance surface and M44 for
-the limit lemma.
+Small, and each theorem exists because a specific reading in §6 needs it. The pass changed the shape
+of all three drafts and found one live error; what follows is what it converged on.
 
-**In `Proofs/HadwigerNelson/Arity.lean`** (extending M45's module):
+### §5a. What the pass changed
+
+**(i) The ladder theorem splits in two, and the half the measurement uses is the weaker one.** The
+draft bundled everything into `Compels.map`. But `Compels` is a conjunction of two clauses that
+travel in *opposite directions along different amounts of structure*:
+
+* **`Realizes` is reflected by any graph homomorphism.** Given `f : G →g G'`, a proper colouring of
+  `G'` wearing pattern `p` on `f ∘ S` pulls back (`Coloring.comap`) to a proper colouring of `G`
+  wearing `p` on `S`. **No injectivity, no adjacency reflection.**
+* **`PartialColoring` is preserved only by an embedding** — injectivity is needed to keep `f ∘ S`
+  distinct, and adjacency *reflection* to carry `¬ G.Adj` up to `¬ G'.Adj`.
+
+So `Compels` needs `↪g`, and both halves of `↪g` are consumed, at different places — neither is
+spare, which is the convergence signal. And `↪g` is *exactly* "induced subgraph along `f`", which is
+exactly what the measurement has: gen-1's unit edges restricted to the original 1,581 vertices
+reproduce all 7,877 and no more. **Naming the weak half separately is subtraction, not addition** —
+it is the statement the ladder phase actually consumes, since "realizable on gen-1" is the *stronger*
+answer and implies "realizable on the 1581", so a sweep higher on the ladder subsumes one below it.
+
+**(ii) Homogeneity needs neither a side condition nor an isometry *equivalence*.** The consumer only
+ever pulls a colouring back, so a bare distance-preserving map (`Isometry g`, no surjectivity)
+suffices — and `unitDistanceHom` + `Coloring.comap` is already the house idiom for exactly this
+(`IndepSearch.lean:235`). Better, the `x₀ ≠ y₀` hypothesis **dissolves**: at zero distance the
+hypothesis `∀ C, C x₀ ≠ C y₀` refutes itself against any colouring, and the conclusion supplies one.
+The parameter `d` dissolves too — say `dist x y = dist x₀ y₀` and be done. The colour type is
+generic for free.
+
+**(iii) The target's bridge already exists — one notion over — and its twin is missing.**
+`Forcer.lean` has **`Forces.comap`**: a forced-*equal* pair in a gadget is forced in every graph the
+gadget maps into, `h (C.comap φ)`, one line. The forced-*different* dual — `Separated.comap` — which
+is precisely what Act Two needs, **is not there.** That is the "a role unnamed" smell in its
+absence-shaped form, and it settles the plan's open design question: the consumer surface is not a
+new twelve-argument gadget theorem, it is *completing an existing pair*. The composition theorem
+then takes **plane-wide** hypotheses, because `Separated.comap` has already done the gadget→plane
+step and repeating it inside the composition would duplicate it.
+
+The chain is four links, each one or two lines, each hypothesis exactly the previous conclusion, and
+its entry point is the vocabulary `tools/arity.py` already measures:
+
+```
+Separated G 5 u v                     -- a virtual edge in a finite gadget  [what the meter reports]
+  →  Separated.comap                  -- forced apart at ONE plane pair
+  →  forced_pair_of_forced            -- forced apart at EVERY pair of that distance   (D4)
+  →  not_colorable_five_of_forced     -- ¬ (unitDistance ℂ).Colorable 5                (D1)
+  →  six_le_chromaticNumber_plane     -- χ(ℝ²) ≥ 6
+```
+
+**(iv) A live error in the existing module, found by reading it.** The docstring of
+`compels_rainbow_of_neighbors` (`Arity.lean:284`) claims *"Every object it holds has minimum degree
+well above its colour count."* **False** — de Grey's 1581 has minimum degree **4** against `k = 5`.
+The theorem needs SOME vertex with `k` distinct neighbours (its maximum degree is 60), not every
+vertex. This is the same false gloss corrected in four other files on 2026-08-13; this instance
+survived because it is inside a proof-carrying module rather than a plan. Fixed as part of §6.1.
+
+### §5b. The skeleton
+
+**In `Proofs/HadwigerNelson/Arity.lean`** (extending M45's module; it has no dependents but
+`AritySpec`, so editing it is cheap):
 
 ```lean
-/-- A compulsion transports along a graph embedding: more material, same compulsion. -/
-theorem Compels.map (f : H ↪g G) (h : Compels H k S p) : Compels G k (f ∘ S) p := sorry
+/-- Realizability is *reflected* by any homomorphism: pull the colouring back. -/
+theorem Realizes.comap {W : Type*} {G' : SimpleGraph W} (f : G →g G')
+    (h : Realizes G' k (f ∘ S) p) : Realizes G k S p := sorry
+
+/-- Local properness is *preserved* by an embedding — injectivity and adjacency reflection. -/
+theorem PartialColoring.map {W : Type*} {G' : SimpleGraph W} (f : G ↪g G')
+    (h : PartialColoring G S p) : PartialColoring G' (f ∘ S) p := sorry
+
+/-- A compulsion transports up an embedding: more material, same compulsion. -/
+theorem Compels.map {W : Type*} {G' : SimpleGraph W} (f : G ↪g G')
+    (h : Compels G k S p) : Compels G' k (f ∘ S) p := sorry
 
 /-- **The ladder theorem.** Growing a graph can only lower its arity floor. -/
-theorem arityFloor_le_of_embedding (f : H ↪g G) : arityFloor G k ≤ arityFloor H k := sorry
+theorem arityFloor_le_of_embedding {W : Type*} {G' : SimpleGraph W} (f : G ↪g G') :
+    arityFloor G' k ≤ arityFloor G k := sorry
+```
+
+**In `Proofs/HadwigerNelson/Fan.lean`** (the missing twin of `Forces.comap`; Fan.lean has
+dependents, so this is one added declaration and its rebuild is priced):
+
+```lean
+/-- **A virtual edge speaks about every graph its gadget maps into** — the exact dual of
+`Forces.comap`, and the step Act Two of the 6-programme travels. -/
+theorem Separated.comap {p q : V} (h : Separated G k p q) {W : Type*} {H : SimpleGraph W}
+    (φ : G →g H) (C : H.Coloring (Fin k)) : C (φ p) ≠ C (φ q) := sorry
 ```
 
 **In a new `Proofs/HadwigerNelson/Homogeneous.lean`:**
 
 ```lean
-/-- The plane's unit-distance graph is homogeneous on each distance class: for any two pairs at
-the same nonzero distance there is a distance-preserving bijection of `ℂ` carrying one to the
-other, so a compulsion at one pair is a compulsion at every pair of that distance. -/
-theorem forced_pair_of_forced (d : ℝ) (x₀ y₀ : ℂ) (hne : x₀ ≠ y₀) (hd₀ : dist x₀ y₀ = d)
-    (h : ∀ C : (unitDistance ℂ).Coloring (Fin k), C x₀ ≠ C y₀)
-    (x y : ℂ) (hd : dist x y = d) (C : (unitDistance ℂ).Coloring (Fin k)) :
-    C x ≠ C y := sorry
+/-- **The plane's isometry group is transitive on ordered pairs at a given distance.** -/
+theorem exists_isometry_map_pair {x₀ y₀ x y : ℂ} (hne : x₀ ≠ y₀) (h : dist x y = dist x₀ y₀) :
+    ∃ g : ℂ → ℂ, Isometry g ∧ g x₀ = x ∧ g y₀ = y := sorry
+
+/-- **One forced pair is all of them.** No side condition: at zero distance the hypothesis
+refutes itself. -/
+theorem forced_pair_of_forced {α : Type*} {x₀ y₀ x y : ℂ}
+    (h : ∀ C : (unitDistance ℂ).Coloring α, C x₀ ≠ C y₀) (hd : dist x y = dist x₀ y₀)
+    (C : (unitDistance ℂ).Coloring α) : C x ≠ C y := sorry
 ```
 
-**In `Proofs/HadwigerNelson/Instances/HexShell.lean`** (the target's exact shape, D1 kernel-side):
+**In `Proofs/HadwigerNelson/Instances/HexShell.lean`** (D1, the target's exact shape):
 
 ```lean
 /-- **The 6-forcer's exact requirement.** Virtual edges at BOTH √3 and 2 close the problem;
-`hexShell_plane5` is disjunctive, so one of the two classes alone does not. -/
-theorem six_le_of_virtual_edges
+`hexShell_plane5` is disjunctive, so either class alone does not. -/
+theorem not_colorable_five_of_forced
     (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ),
             dist x y = Real.sqrt 3 → C x ≠ C y)
     (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
     ¬ (unitDistance ℂ).Colorable 5 := sorry
+
+/-- The headline form, matching `add_one_le_chromaticNumber_unitDistance`'s idiom. -/
+theorem six_le_chromaticNumber_of_forced (h3 …) (h2 …) :
+    6 ≤ (unitDistance ℂ).chromaticNumber := sorry
 ```
 
-**The spec obligations** (`Instances/AritySpec.lean`, extending M45's):
+### §5c. The spec obligations, including the adversary the seam pass produced
 
-* a **positive** instance of `arityFloor_le_of_embedding` on the existing 5-vertex model — embed it
-  in a graph with one extra isolated vertex and check the floor is still 3, and embed it in a graph
-  with an added edge that *lowers* the floor, so the inequality is seen to be strict somewhere;
-* a **planted red** for D1: the hypothesis with only `h3` must NOT prove the conclusion — recorded as
-  an `example` exhibiting a 5-colouring of the `{1, √3}` graph that the full statement rules out, or,
-  if that is out of reach cheaply, as an explicit `#guard` that `hexShellP4` is nonempty, which is
-  the exact fact making the disjunction irreducible;
-* a **model of the hypotheses** for `forced_pair_of_forced` at `k = 1`, where the hypothesis is
-  vacuous, confirming the statement is not accidentally provable for the wrong reason.
+* **A model of the hypotheses**, so the ladder theorem is not vacuously about nothing: the M45
+  5-vertex model embedded in itself-plus-an-isolated-vertex, floor still 3; and an embedding into a
+  graph with an added edge where the floor genuinely **drops**, so the inequality is seen to be
+  strict somewhere and is not secretly an equality.
+* **The adversarial member for D1, and it is a THEOREM rather than a guard.** The seam pass asked
+  whether `h3` alone could prove the conclusion. It cannot, and the reason is exhibitable: the shell
+  carrier has a proper 5-colouring **whose only monochromatic pairs are diameters** — centre `3`,
+  ring `0,1,2,0,1,2`, which separates all six √3 pairs while `r₀ = r₃`. Symmetrically it has one
+  whose only mono pairs are √3 pairs — ring `0,1,2,3,0,1`. Both are `decide`-able:
+
+  ```lean
+  example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 5), ¬ MonoPair hexShellP3 C
+  example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 5), ¬ MonoPair hexShellP4 C
+  ```
+
+  Together they say **neither distance class is forced on its own** — the sharpest possible
+  statement of the D1 correction, and a pair of reds that would fire if the composition were ever
+  weakened to one class.
+* **The degenerate member for homogeneity**: `x₀ = y₀`, where the hypothesis is self-refuting —
+  checked as an `example` so the no-side-condition design is exercised rather than assumed.
 
 ---
 
