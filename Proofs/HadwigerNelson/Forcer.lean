@@ -48,6 +48,9 @@ theorem Forces.comap {p q : V} (h : Forces G k p q) (φ : G →g H) (C : H.Color
     C (φ p) = C (φ q) :=
   h (C.comap φ)
 
+-- The dual, `Separated.comap`, is in `Arity.lean` (a declaration here would rebuild this module's
+-- 48 transitive dependents). It is the step Act Two of the six-colour programme travels.
+
 /-- **More edges only force more.** The analogue of `Gadget.mono`, and free. -/
 theorem Forces.mono {G' : SimpleGraph V} (hle : G ≤ G') {p q : V} (h : Forces G k p q) :
     Forces G' k p q :=

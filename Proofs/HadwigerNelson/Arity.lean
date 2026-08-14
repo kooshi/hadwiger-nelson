@@ -281,9 +281,12 @@ theorem compels_of_fan (hfan : ∀ C : G.Coloring (Fin k), ∀ c : Fin k, ∃ i,
 `i ↦ C (S i)` an injection of `Fin k` into itself, hence a surjection, so some neighbour already
 wears the vertex's own colour.
 
-The consequence for this repository is the reason the file exists. Every object it holds has minimum
-degree well above its colour count, so a compulsion of arity `≤ k` is *guaranteed* — and four
-campaigns of pair meters reading zero measured an arity, not an absence. -/
+The consequence for this repository is the reason the file exists. The hypothesis asks only that
+*some* vertex have `k` distinct neighbours — not every vertex, and not a bound on the minimum
+degree. De Grey's 1581-vertex witness has minimum degree `4` against `k = 5`, which is irrelevant;
+what matters is that its two spindle centres have degree `60`. So a compulsion of arity `≤ k` is
+*guaranteed* on it, and four campaigns of pair meters reading zero measured an arity, not an
+absence. -/
 theorem compels_rainbow_of_neighbors {v : V} (T : Fin k → V) (hN : ∀ i, G.Adj v (T i))
     (hinj : Function.Injective T) : Compels G k T id := by
   refine ⟨⟨hinj, fun i j hij hadj => ?_⟩, fun ⟨C, hC⟩ => ?_⟩
@@ -296,5 +299,67 @@ theorem compels_rainbow_of_neighbors {v : V} (T : Fin k → V) (hN : ∀ i, G.Ad
 theorem arityFloor_le_of_degree {v : V} (T : Fin k → V) (hN : ∀ i, G.Adj v (T i))
     (hinj : Function.Injective T) : arityFloor G k ≤ (k : ℕ∞) :=
   arityFloor_le_of_compels (compels_rainbow_of_neighbors T hN hinj)
+
+/-! ## How a compulsion travels between graphs
+
+`Compels` is a conjunction whose two clauses move in *opposite* directions along *different* amounts
+of structure, and separating them is the point of this section rather than an accident of it.
+`Realizes` is reflected by any homomorphism — pull the colouring back and nothing else is needed.
+`PartialColoring` is preserved only by an embedding, which is where injectivity and adjacency
+*reflection* are spent. So the conjunction needs `↪g`, and both halves of `↪g` are consumed. -/
+
+section Transport
+
+variable {W : Type*} {G' : SimpleGraph W}
+
+/-- **Realizability is reflected by any homomorphism**: a colouring of the larger graph pulls back
+along `f` to one of the smaller wearing the same pattern.
+
+This is the direction a *ladder* measurement travels. Asking a pattern on a bigger object is the
+stronger question, so a "still realizable" answer upstairs implies the same answer downstairs, and a
+sweep higher on a closure ladder subsumes one below it. No injectivity and no adjacency reflection
+are needed — a bare `→g` suffices, which is why this is stated apart from `Compels.map`. -/
+theorem Realizes.comap (f : G →g G') (h : Realizes G' k (f ∘ S) p) : Realizes G k S p :=
+  ⟨h.choose.comap f, h.choose_spec⟩
+
+/-- **Local properness is preserved by an embedding.** Injectivity keeps `f ∘ S` distinct;
+adjacency *reflection* (`Embedding.map_adj_iff`) is what carries a non-edge upward. A bare
+homomorphism gives neither, and with only a homomorphism the statement is false. -/
+theorem PartialColoring.map (f : G ↪g G') (h : PartialColoring G S p) :
+    PartialColoring G' (f ∘ S) p :=
+  ⟨(RelEmbedding.injective f).comp h.1,
+   fun i j hij hadj => h.2 i j hij (f.map_adj_iff.mp hadj)⟩
+
+/-- **A compulsion transports up an embedding**: more material around it, same compulsion. -/
+theorem Compels.map (f : G ↪g G') (h : Compels G k S p) : Compels G' k (f ∘ S) p :=
+  ⟨h.1.map f, fun hr => h.2 (hr.comap f.toHom)⟩
+
+/-- **The ladder theorem: growing a graph can only *lower* its arity floor, never raise it.**
+
+Read the direction off the statement carefully — the *bigger* graph `G'` is on the **left**. An
+embedding `G ↪g G'` presents `G` as an induced subgraph of `G'`, and every compulsion of `G` is
+still one in `G'`, so `G'` can only compel sooner. The intuitive companion is `Realizes.comap`,
+which says the same thing from the other side: what is still realizable in the bigger graph was
+realizable in the smaller.
+
+This is what makes a closure-ladder measurement mean something. "The floor did not drop from the
+witness to its closure" is then the statement that an inequality is *tight*, rather than two
+unrelated numbers that happened to agree. -/
+theorem arityFloor_le_of_embedding (f : G ↪g G') : arityFloor G' k ≤ arityFloor G k :=
+  le_iInf₂ fun _ ⟨_, _, hc⟩ => arityFloor_le_of_compels (hc.map f)
+
+/-- **A virtual edge speaks about every graph its gadget maps into** — the exact dual of
+`Forcer.Forces.comap`, and the step Act Two of the six-colour programme travels: a finite gadget
+that separates a pair separates that pair's image in any ambient graph it is drawn inside.
+
+Housed here rather than beside `Separated` in `Fan.lean` for two reasons that agree. By content,
+this file already collects the dot-notation lemmas by which `Separated` and `Forces` travel
+(`Separated.compels`, `Forces.compels`). By cost, `Fan.lean` carries 45 transitive dependents,
+including the certificate modules, and a new *declaration* there rebuilds every one of them. -/
+theorem Separated.comap {u v : V} (h : Separated G k u v) {X : Type*} {H : SimpleGraph X}
+    (φ : G →g H) (C : H.Coloring (Fin k)) : C (φ u) ≠ C (φ v) :=
+  h (C.comap φ)
+
+end Transport
 
 end HadwigerNelson

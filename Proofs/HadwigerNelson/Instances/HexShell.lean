@@ -194,4 +194,58 @@ theorem hexShell_plane6 (C : (unitDistance ℂ).Coloring (Fin 6)) :
     ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
   hexShell_plane (by norm_num) C
 
+/-! ### What Act Two of the six-colour programme must supply
+
+The pigeonhole above is *disjunctive*, and that is the whole content of this section. Refuting the
+six `√3`-placements leaves the three diameters standing, and refuting the diameters leaves the
+`√3`-pairs standing — so `χ(ℝ²) ≥ 6` needs a virtual edge at `√3` **and** one at `2`, not one at
+either. Each alone would be a major result that halves the remaining problem; neither alone closes
+it. The two `example`s below are the proof of that claim rather than a restatement of it: each
+exhibits a proper 5-colouring of the very carrier this pigeonhole runs on which avoids one class
+entirely. -/
+
+/-- **The six-colour programme's exact requirement.** With every `√3`-pair and every distance-`2`
+pair separated in every proper 5-colouring of the plane, the plane is not 5-colourable.
+
+Three lines, because all the work is elsewhere: `hexShell_plane5` supplies the disjunction and the
+two hypotheses close its branches. The hypotheses are what `Homogeneous.Separated.plane` produces
+from a finite gadget, so a future find instantiates this the day it lands. -/
+theorem not_colorable_five_of_forced_pairs
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (unitDistance ℂ).Colorable 5 := by
+  intro hc
+  obtain ⟨x, y, hd | hd, heq⟩ := hexShell_plane5 hc.some
+  · exact h3 hc.some x y hd heq
+  · exact h2 hc.some x y hd heq
+
+/-- **`χ(ℝ²) ≥ 6`, conditional on Act Two** — the headline form, in the numeral idiom of
+`add_one_le_chromaticNumber_unitDistance`. -/
+theorem six_le_chromaticNumber_plane_of_forced_pairs
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    6 ≤ (unitDistance ℂ).chromaticNumber := by
+  have := lt_chromaticNumber_iff_not_colorable.mpr (not_colorable_five_of_forced_pairs h3 h2)
+  rwa [show ((5 : ℕ) : ℕ∞) = 5 from rfl, ← ENat.add_one_le_iff (by simp)] at this
+
+/-- **Neither distance class is forced on its own, half one.** Centre `3`, ring `0,1,2,0,1,2`:
+a proper 5-colouring separating all six `√3`-pairs. So killing the diameters alone leaves a
+colouring this pigeonhole cannot refute, and `h3` in the composition above is load-bearing. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 5), ¬ MonoPair hexShellP3 C := by
+  refine ⟨Coloring.mk ![3, 0, 1, 2, 0, 1, 2] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
+/-- **Neither distance class is forced on its own, half two.** Centre `4`, ring `0,1,2,3,0,1`:
+a proper 5-colouring separating all three diameters. So `h2` is load-bearing too, and the
+disjunction is irreducible from both sides. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 5), ¬ MonoPair hexShellP4 C := by
+  refine ⟨Coloring.mk ![4, 0, 1, 2, 3, 0, 1] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
 end HadwigerNelson

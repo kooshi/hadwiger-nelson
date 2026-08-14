@@ -61,6 +61,7 @@ import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from typing import NamedTuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -80,7 +81,14 @@ SCHEMA = (
     "list: rows with different fingerprints are about DIFFERENT GRAPHS and must never be "
     "aggregated -- a published conclusion has already turned out to be stage-dependent once. "
     "`encodings` is a list of (name, outcome, seconds), never a boolean, so 'double-encoded' is "
-    "data a reader checks rather than a claim the writer makes."
+    "data a reader checks rather than a claim the writer makes. M48 adds the SCREEN, whose "
+    "output is a `Candidate` -- a pattern no harvested colouring wore, i.e. a question NOT YET "
+    "ASKED. A candidate is not a finding and not a negative; it carries its own `harvest` "
+    "denominator, has no verdict or outcome field, and `check_recordable` refuses to "
+    "serialize one. Artifacts key them under `unsolved_candidates`. `jackpot_eligible` marks "
+    "the few rows that could be chi(R^2) >= 6 (arity 2, same-colour pattern, class sqrt3 or 2, "
+    "k = 5, genuine unit-distance stage) rather than warning on the many that cannot -- an "
+    "arity-3 compulsion is never eligible, by the counting bound of M48 §0a D2."
 )
 
 
@@ -270,6 +278,182 @@ def arity_verdict(base_outcome: str, outcome: str, proper: bool,
     return "compelled", {"minimal_arity": True}
 
 
+# ------------------------------------------------------------------ the screen (M48)
+#
+# Every earlier meter in this repository SOLVED every question it asked, so every row had an
+# outcome. The screen does not: it reports "never observed in H colourings, not yet given to a
+# solver". That is neither a finding nor a negative, and an unnamed intermediate state is exactly
+# what a summary sentence turns into a false grokking. So it gets its own TYPE, it carries its own
+# denominator, it has no `verdict` and no `outcome` field, and `record` refuses to serialize it.
+
+
+class Candidate(NamedTuple):
+    """A pattern NO harvested colouring wore — a question still to ask, never an answer.
+
+    `harvest` is part of the object on purpose: "never observed" is meaningless without the number
+    of colourings it survived (surviving 64 is noise; surviving 8,192 is worth a solver call), so
+    the denominator cannot be separated from the claim. There is deliberately no `verdict` field and
+    `arity_verdict` is never called on one of these."""
+
+    tup: tuple
+    blocks: tuple
+    fingerprint: str
+    harvest: int
+
+    def __repr__(self) -> str:  # so a stray print cannot read as a result
+        return (f"Candidate(UNSOLVED tuple={list(self.tup)} blocks={[list(b) for b in self.blocks]} "
+                f"never-observed-in={self.harvest} stage={self.fingerprint})")
+
+
+def agreement_masks(cols, n: int):
+    """`M[u, v]` = the bitmask of harvested colourings in which `u` and `v` share a colour.
+
+    Every pattern's observed-set is a boolean combination of these, so all `C(n, m)` tuples are
+    screened with bit operations and no solver. `len(cols)` must be a multiple of 64: otherwise the
+    padding bits above `H` are zero in every mask and read as 1 under negation, manufacturing false
+    *observed* readings on every pattern that has a disequality."""
+    import numpy as np
+    H = len(cols)
+    if H % 64:
+        raise SystemExit(f"HARVEST SIZE {H} IS NOT A MULTIPLE OF 64 — padding bits would read as "
+                         f"spurious observations under negation")
+    M = np.zeros((n, n, H // 64), dtype=np.uint64)
+    for h, c in enumerate(cols):
+        a = np.asarray(c, dtype=np.int16)
+        M[:, :, h // 64] |= ((a[:, None] == a[None, :]).astype(np.uint64) << np.uint64(h % 64))
+    return M
+
+
+def pattern_mask(M, tup, blocks):
+    """The reference (slow, generic) observed-mask of one pattern: agreement inside blocks,
+    disagreement across them. This is the CONTROL for the vectorized `screen3` — it is the same
+    claim computed by different code, and `self_test` cross-checks them."""
+    import numpy as np
+    lab = {i: j for j, b in enumerate(blocks) for i in b}
+    out = None
+    for a, b in itertools.combinations(range(len(tup)), 2):
+        w = M[tup[a], tup[b]]
+        w = w if lab[a] == lab[b] else ~w
+        out = w if out is None else (out & w)
+    return out if out is not None else np.array([], dtype='uint64')
+
+
+def observed_by_mask(M, tup, blocks) -> bool:
+    """Did any harvested colouring wear this pattern? Absence is a CANDIDATE, never a finding."""
+    return bool(pattern_mask(M, tup, blocks).any())
+
+
+def screen3(M, stage: dict, us=None, adj_rows=None):
+    """The exhaustive arity-3 screen: every triple, every one of the five patterns, bit operations
+    only. Yields `Candidate`s — questions still to ask.
+
+    Vectorized over the third vertex, which is what makes `C(1581,3) = 657,385,070` tractable
+    (measured: ~8 s on 28 cores at `H = 1024`). `pattern_mask` is the slow generic control for
+    exactly this computation and `self_test` cross-checks them, because a screen bug would present
+    as a silent wall of candidates or, worse, as a silently empty one."""
+    import numpy as np
+    n, H = stage["n"], M.shape[2] * 64
+    fp = stage["fingerprint"]
+    if adj_rows is None:
+        adj_rows = np.zeros((n, n), dtype=bool)
+        for a, b in stage["edges"]:
+            adj_rows[a, b] = adj_rows[b, a] = True
+    out = []
+    for u in (range(n) if us is None else us):
+        for v in range(u + 1, n):
+            a = M[u, v]
+            B, C = M[u, v + 1:], M[v, v + 1:]
+            nA, nB, nC = ~a, ~B, ~C
+            fu, fv = adj_rows[u, v + 1:], adj_rows[v, v + 1:]
+            uv_free = not adj_rows[u, v]
+            # (blocks, never-observed mask, locally-proper mask over w)
+            cases = [
+                ((( 0, 1, 2),), ~(a & B & C).any(1), (uv_free & ~fu & ~fv) if uv_free else None),
+                (((0, 1), (2,)), ~(a & nB & nC).any(1), np.full(B.shape[0], uv_free)),
+                (((0, 2), (1,)), ~(B & nA & nC).any(1), ~fu),
+                (((1, 2), (0,)), ~(C & nA & nB).any(1), ~fv),
+                (((0,), (1,), (2,)), ~(nA & nB & nC).any(1), np.full(B.shape[0], True)),
+            ]
+            for blocks, never, proper in cases:
+                if proper is None:
+                    continue
+                for off in np.flatnonzero(never & proper):
+                    out.append(Candidate((u, v, v + 1 + int(off)), blocks, fp, H))
+    return out
+
+
+def screen_neighbourhoods(M, stage: dict, k: int, m: int = 4):
+    """The complete arity-`m` screen restricted to vertex NEIGHBOURHOODS — the home of the one
+    compulsion `Arity.arityFloor_le_of_degree` guarantees exists.
+
+    Generic in `m` and in the pattern, so it runs off `pattern_mask` rather than a hand-rolled case
+    table. Affordable exactly because the enumeration is `Σ_v C(deg v, m)` and not `C(n, m)`: on de
+    Grey's 1581 that is 1,718,839 rather than 259,338,410,115."""
+    n, H = stage["n"], M.shape[2] * 64
+    nbr = [[] for _ in range(n)]
+    for a, b in stage["edges"]:
+        nbr[a].append(b)
+        nbr[b].append(a)
+    pats = [tuple(tuple(b) for b in bl) for bl in partitions(m, k)]
+    out, seen = [], set()
+    for v in range(n):
+        for tup in itertools.combinations(sorted(nbr[v]), m):
+            if tup in seen:
+                continue
+            seen.add(tup)
+            for blocks in pats:
+                if not locally_proper(stage, tup, [list(b) for b in blocks]):
+                    continue
+                if not observed_by_mask(M, tup, [list(b) for b in blocks]):
+                    out.append(Candidate(tup, blocks, stage["fingerprint"], H))
+    return out
+
+
+# ------------------------------------------------------------------ the marked few, not the many
+
+
+def jackpot_eligible(stage: dict, k: int, arity: int, blocks, dist_class: str | None) -> bool:
+    """Could THIS row, if compelled, be `chi(R^2) >= 6`? Computed in one place, like the verdict.
+
+    Marking the few rows that can be a rung beats warning on the many that cannot: a reader asking
+    "is this the big one?" then reads a single field that is `True` only where it could be true, and
+    the campaign's halt-and-verify clause becomes mechanical rather than a judgement call.
+
+    It takes all five: arity two, the same-colour pattern (a virtual edge, not a forced pair), a
+    class of `sqrt3` or `2`, five colours, and a stage that is a genuine unit-distance graph. An
+    arity-3 compulsion is NOT eligible and cannot be — forcing a monochromatic TRIPLE at five
+    colours needs 11 points, and a set whose mutual distances all lie in `{1, sqrt3, 2}` has at most
+    10 (Jung's theorem plus a packing bound; plans/M48-from-below-arity.md §0a D2)."""
+    return (arity == 2 and k == 5 and dist_class in ("sqrt3", "two")
+            and len(blocks) == 1 and stage.get("unit_distance") is True)
+
+
+def negative_headline(kind: str, asked: int, undecided: int, stage: dict, harvest: int,
+                      compelled: int = 0) -> str:
+    """The enumeration belongs IN the headline, not in a scope line further down.
+
+    M43 wrote "zero virtual edges at k = 6" for a sweep of six questions; re-asked completely on the
+    identical stage at M45 the same object had seven. The artifact's scope line had been honest and
+    the summary sentence was not, and the summary is what became a grokking."""
+    return (f"{kind}: {compelled} compulsions in {asked:,} questions asked on stage "
+            f"{stage.get('kind', '?')} ({stage.get('n', '?'):,} vertices, "
+            f"{stage.get('m_edges', '?'):,} edges, fingerprint {stage.get('fingerprint', '?')}); "
+            f"{undecided:,} undecided at cap and EXCLUDED from that count; "
+            f"screened against {harvest:,} harvested colourings.")
+
+
+def check_recordable(obj) -> None:
+    """The boundary that refuses. A screen candidate is not a result, and a summary without its
+    enumeration is the failure mode this whole file exists to prevent."""
+    if isinstance(obj, Candidate) or (isinstance(obj, (list, tuple))
+                                      and any(isinstance(x, Candidate) for x in obj)):
+        raise SystemExit("REFUSED: a screen candidate is not a result — it is a question that has "
+                         "not been asked yet. Call confirm() and record the resulting row.")
+    if isinstance(obj, dict) and obj.get("kind") == "summary" and not obj.get("headline"):
+        raise SystemExit("REFUSED: a summary must carry `headline`, which states the enumeration "
+                         "its verdict is about (see negative_headline).")
+
+
 # ------------------------------------------------------------------ observe, then confirm
 
 def _harvest_one(spec):
@@ -387,6 +571,61 @@ def self_test() -> None:
     expect("same" if make_stage("a", 4, [(0, 1)])["fingerprint"]
            == make_stage("a", 4, [(0, 2)])["fingerprint"] else "differs",
            "differs", "fingerprint of a different edge set")
+
+    # ---- M48: the screen, and the boundary that refuses --------------------------------------
+    # P4 the planted SCREEN positive: the compelled triple is worn by NO colouring, so the screen
+    #    must surface it as a candidate; and a pattern that IS worn must not be surfaced.
+    cols = harvest(p5, 3, 64, workers=8, cap=30.0)
+    expect(len(cols), 64, "P4 harvest is a full multiple of 64")
+    M = agreement_masks(cols, 5)
+    cands = {(c.tup, c.blocks) for c in screen3(M, p5)}
+    expect(((1, 3, 4), ((0,), (1,), (2,))) in cands,
+           True, "P4 the compelled triple survives the screen as a CANDIDATE")
+    expect(all(observed_by_mask(M, t, [list(b) for b in bl])
+               for (t, bl) in {((1, 3, 4), ((0,), (1,), (2,)))} ^ set()), False,
+           "P4 and the screen agrees it was never observed")
+    # the planted screen NEGATIVE: an observed pattern is not a candidate
+    expect(any(c.tup == (0, 1, 2) and c.blocks == ((0,), (1,), (2,)) for c in screen3(M, p5)),
+           observed_by_mask(M, (0, 1, 2), [[0], [1], [2]]) is False,
+           "P4 an OBSERVED pattern is not emitted as a candidate")
+    # P5 the vectorized screen against the slow generic control — same claim, different code
+    disagree = [(c.tup, c.blocks) for c in screen3(M, p5)
+                if observed_by_mask(M, c.tup, [list(b) for b in c.blocks])]
+    expect(disagree, [], "P5 screen3 agrees with the generic pattern_mask control")
+    # P6 the boundary refuses a candidate and a headline-less summary
+    for bad, what in ((Candidate((0, 1, 2), ((0,), (1,), (2,)), "x", 64), "a bare candidate"),
+                      ([Candidate((0, 1, 2), ((0,), (1,), (2,)), "x", 64)], "a list of them"),
+                      ({"kind": "summary"}, "a summary with no headline")):
+        try:
+            check_recordable(bad)
+            expect("accepted", "REFUSED", f"P6 record refuses {what}")
+        except SystemExit:
+            expect("REFUSED", "REFUSED", f"P6 record refuses {what}")
+    check_recordable({"kind": "summary", "headline": "0 in 5 questions"})
+    # P7 the padding trap: a harvest that is not a multiple of 64 must be rejected, not silently
+    #    negated into spurious observations
+    try:
+        agreement_masks(cols[:63], 5)
+        expect("accepted", "REFUSED", "P7 a non-multiple-of-64 harvest is refused")
+    except SystemExit:
+        expect("REFUSED", "REFUSED", "P7 a non-multiple-of-64 harvest is refused")
+    # P8 jackpot eligibility marks the few, and an arity-3 row can never be one
+    ud = dict(p5, unit_distance=True)
+    expect(jackpot_eligible(ud, 5, 2, ((0, 1),), "sqrt3"), True,
+           "P8 an arity-2 same-colour sqrt3 row at k=5 on a unit-distance stage IS eligible")
+    expect(jackpot_eligible(ud, 5, 3, ((0, 1, 2),), "sqrt3"), False,
+           "P8 an arity-3 row is NEVER eligible (M48 §0a D2)")
+    expect(jackpot_eligible(ud, 5, 2, ((0,), (1,)), "sqrt3"), False,
+           "P8 a FORCED pair (distinct pattern) is not a virtual edge")
+    expect(jackpot_eligible(ud, 6, 2, ((0, 1),), "sqrt3"), False, "P8 k must be 5")
+    expect(jackpot_eligible(p5, 5, 2, ((0, 1),), "sqrt3"), False,
+           "P8 the stage must be a genuine unit-distance graph")
+    expect(jackpot_eligible(ud, 5, 2, ((0, 1),), "norm13"), False,
+           "P8 the class must be sqrt3 or 2")
+    # P9 the headline carries the enumeration
+    hl = negative_headline("arity-3", 657_385_070, 11, p5, 8192)
+    expect("657,385,070" in hl and "8,192" in hl and "EXCLUDED" in hl, True,
+           "P9 the negative headline states its enumeration, harvest and exclusions")
 
     print("SELF-TEST", "PASS" if not fails else "FAIL")
     if fails:

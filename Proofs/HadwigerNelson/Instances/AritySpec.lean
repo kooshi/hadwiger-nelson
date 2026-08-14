@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Arity
+import Proofs.HadwigerNelson.Homogeneous
 import Proofs.HadwigerNelson.Sat.Encoding
 
 /-!
@@ -153,6 +154,63 @@ theorem k4_arityFloor_zero :
     arityFloor (edgeGraph 4 [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]) 3 = 0 := by
   rw [arityFloor_eq_zero_iff, not_colorable_edgeGraph_iff]
   decide +kernel
+
+/-! ## The ladder theorem, exercised in both directions
+
+`arityFloor_le_of_embedding` puts the **bigger** graph on the **left**, which is the one thing about
+it a reader can get backwards. These two instances make the direction visible: first that a
+compulsion really does survive being embedded in more material, and then that the inequality is not
+secretly an equality. -/
+
+/-- The 5-vertex model again, with a sixth vertex added and joined to nothing. -/
+abbrev P5plus : SimpleGraph (Fin 6) := edgeGraph 6 [(0, 1), (0, 4), (1, 2), (2, 3), (2, 4)]
+
+/-- Embedding the model into itself-plus-an-isolated-vertex. Adjacency is *reflected* as well as
+preserved — the added vertex touches nothing — which is exactly the hypothesis `↪g` carries and a
+bare homomorphism does not. -/
+def p5Embed : P5 ↪g P5plus where
+  toFun := Fin.castSucc
+  inj' := Fin.castSucc_injective 5
+  map_rel_iff' := by
+    intro i j
+    simp only [edgeGraph_adj]
+    revert i j
+    decide
+
+/-- **More material, same compulsion.** The floor of the enlarged graph is still at most `3` — the
+shape a closure-ladder measurement instantiates, where a witness sits inside a much larger closure
+and one asks whether anything it compels is still compelled there. -/
+example : arityFloor P5plus 3 ≤ 3 := p5_arityFloor ▸ arityFloor_le_of_embedding p5Embed
+
+/-- The triangle sits inside `K₄`. -/
+def triEmbed : (edgeGraph 3 [(0, 1), (0, 2), (1, 2)]) ↪g
+    (edgeGraph 4 [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]) where
+  toFun := Fin.castSucc
+  inj' := Fin.castSucc_injective 3
+  map_rel_iff' := by
+    intro i j
+    simp only [edgeGraph_adj]
+    revert i j
+    decide
+
+/-- **The inequality is strict somewhere**, so the ladder theorem is not a disguised equality: the
+triangle compels nothing at three colours (floor `⊤`) while `K₄`, which contains it, is not
+3-colourable at all (floor `0`). Growing a graph really can collapse the floor. -/
+example : arityFloor (edgeGraph 4 [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]) 3
+    < arityFloor (edgeGraph 3 [(0, 1), (0, 2), (1, 2)]) 3 := by
+  rw [k4_arityFloor_zero, tri_arityFloor]
+  exact ENat.top_pos
+
+/-! ## Homogeneity: the degenerate member
+
+`forced_pair_of_forced` carries no `x₀ ≠ y₀` hypothesis because at zero distance the hypothesis
+refutes itself. This exercises that branch rather than trusting it. -/
+
+/-- With `x₀ = y₀` the "forced apart" hypothesis is contradictory, so it yields anything — which is
+why the side condition a first draft would carry is unnecessary. -/
+example {α : Type*} (x₀ x y : ℂ) (h : ∀ C : (unitDistance ℂ).Coloring α, C x₀ ≠ C x₀)
+    (C : (unitDistance ℂ).Coloring α) : C x ≠ C y :=
+  forced_pair_of_forced h (by rw [dist_self]; exact absurd rfl (h C)) C
 
 end AritySpec
 

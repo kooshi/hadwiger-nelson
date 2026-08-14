@@ -86,6 +86,24 @@ open HadwigerNelson
 #print axioms AritySpec.tri_arityFloor
 #print axioms AritySpec.k4_arityFloor_zero
 
+-- M48 — how a compulsion travels between graphs, and the six-colour programme's exact requirement.
+-- `arityFloor_le_of_embedding` is the LADDER theorem (growing a graph can only LOWER its floor —
+-- the bigger graph is on the left), which is what makes a closure-ladder measurement mean anything.
+-- `Separated.comap` is the missing dual of `Forcer.Forces.comap`, and `Separated.plane` transports
+-- a finite gadget's virtual edge to the whole plane. `not_colorable_five_of_forced_pairs` is the
+-- correction this milestone makes to its own record: `hexShell_plane5` is DISJUNCTIVE, so
+-- chi(R^2) >= 6 needs a virtual edge at sqrt3 AND one at distance 2, never one at either.
+#print axioms Realizes.comap
+#print axioms PartialColoring.map
+#print axioms Compels.map
+#print axioms arityFloor_le_of_embedding
+#print axioms Separated.comap
+#print axioms exists_isometry_map_pair
+#print axioms forced_pair_of_forced
+#print axioms Separated.plane
+#print axioms not_colorable_five_of_forced_pairs
+#print axioms six_le_chromaticNumber_plane_of_forced_pairs
+
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
 
 #print axioms trianglePoints_dist

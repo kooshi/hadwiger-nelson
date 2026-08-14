@@ -79,6 +79,11 @@ Named for the word `tools/forcer.py` already uses: its oracle answers `forced`, 
 def Separated (G : SimpleGraph V) (k : ℕ) (p q : V) : Prop :=
   ∀ C : G.Coloring (Fin k), C p ≠ C q
 
+-- `Separated.comap` -- a virtual edge speaks about every graph its gadget maps into, the dual of
+-- `Forcer.Forces.comap` -- lives in `Arity.lean`, and `Separated.plane` (the plane corollary the
+-- six-colour programme calls) in `Homogeneous.lean`. Neither is here because a new *declaration*
+-- in this module rebuilds its 45 transitive dependents; a `--` comment costs nothing.
+
 /-- **Adjacent vertices are separated** — free, and the case the search meets constantly, since a
 partner adjacent to the pivot is dead weight it can drop without a solver. -/
 theorem Separated.of_adj {p q : V} (h : G.Adj p q) : Separated G k p q :=
