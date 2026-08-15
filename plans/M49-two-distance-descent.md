@@ -124,6 +124,56 @@ seed. Two independent kernel routes to the same headline (the "prove it twice" g
   explicit proper 6-colouring using all six colours) and `oneTwoK_unit_colorable_five` (the
   unit-edge part alone IS 5-colourable — so the distance-2 edges are load-bearing).
 
+### §Cʹ. What the domain-modeling pass changed (2026-08-15, before any code)
+
+1. **The spindle is homogeneity ∘ a triangle, and the "rotated copy" never appears.** The
+   theorem's content splits cleanly: *combinatorics* — in any graph on a metric space in which unit
+   pairs are adjacent, a colouring constant on all pairs at distance `d` cannot exist if a triangle
+   with sides `d, d, 1` exists (`C y = C x = C z` against the unit side); *geometry* — such a
+   triangle exists in ℂ **iff** `d ≥ 1/2` (`Glue.sphere_inter_sphere` at radii `d, 1`; the
+   converse by the triangle inequality, `dist y z ≤ 2d < 1`, which is the red control). The
+   universal "all pairs at distance `d`" is what homogeneity already supplies from one forced pair,
+   so the classical construction (place a copy, rotate) is not a step of the proof at all.
+2. **Route 1 needs only `H` (214 vertices), never `K`.** `Forces (edgeGraph 214 oneTwoAug) 5 A B`
+   from the gadget; `Forces.plane` for `distanceGraph ℂ {1,2}` (homogeneity in the `=` polarity);
+   the spindle at `d = 5`. And the two from-below corollaries — the single-class Act One
+   (`∀ C : (unitDistance ℂ).Coloring (Fin 5), ∃ x y, dist x y = 2 ∧ C x = C y`) and the halved
+   requirement — follow **abstractly** from `6 ≤ χ(ℝ²;{1,2})` (a unit-graph colouring with no
+   mono distance-2 pair IS a `{1,2}` colouring). So the 426-vertex union `K` is not needed for any
+   theorem; Route 2 (the finite `mono`/`transport`/`edge` composition on `K`) becomes optional,
+   priced by its transport `decide` (~1450 edges × ~2900 memberships), and is NOT load-bearing.
+   The certified object is `H`: table of 214 points at **denominator 24** (twelfths and halves —
+   no fiftieths, those belong to `K`), 1004 unit edges, 446 distance-2 pairs, one pair at
+   distance 5.
+3. **Homogeneity is one relation-generic lemma, not two polarities:**
+   `(∀ C : (distanceGraph ℂ D).Coloring α, R (C x₀) (C y₀)) → dist x y = dist x₀ y₀ → ∀ C, R (C x) (C y)`
+   for any `R`; `Separated.plane` (`R := Ne`) and `Forces.plane` (`R := Eq`) are its instances,
+   and `Homogeneous.lean` is generalized in place from `unitDistance ℂ` to `distanceGraph ℂ D` (the
+   isometry `z ↦ az + b` preserves every distance), the unit statements kept as `D = {1}` corollaries
+   through `unitDistance_eq_distanceGraph_singleton`. `Homogeneous.lean` has no downstream
+   consumers beyond `Instances/AritySpec.lean`, so the in-place edit costs nothing.
+4. **`distanceGraph` mirrors `unitDistance`, not `SimpleGraph.fromRel`:**
+   `Adj x y := x ≠ y ∧ dist x y ∈ D`, symmetric by `dist_comm`, loopless structurally — the `≠`
+   conjunct is intrinsic (a `SimpleGraph` is loopless whatever `D` contains). The single side
+   condition it induces is `(0:ℝ) ∉ D` in the edge-list reduction (so `dist ∈ D` gives `p i ≠ p j`),
+   discharged by `norm_num` once per `D`. New module `DistanceGraph.lean` — never an edit to
+   `UnitDistance.lean`, which every certificate imports.
+5. **μ stays out of the kernel.** A definition with no lemma API and no consumer besides prose;
+   the theorem that carries its meaning — one defect suffices — is stated directly
+   (`add_one_le_chromaticNumber_plane_of_one_defect`, from `forces_of_not_colorable_append_single`
+   + `Forces.plane` + the spindle). μ lives in the tool and in §R.
+6. **The reduction lemma earns a free consumer:** `hexShell`'s augmented list is a `K₇`, so
+   `7 ≤ (distanceGraph ℂ {1, √3, 2}).chromaticNumber` becomes a *theorem* — the docstring of
+   `hexShell_plane6` currently states it as prose only.
+7. **The gadget→`Forces` bridge** is one general lemma:
+   `forces_of_gadget (g : Gadget k n m E p) (i j : Fin m) (h : ∀ q, g.admits q = true → q i = q j) : Forces (edgeGraph n E) k (p i) (p j)`,
+   `h` by `decide` over `Fin m → Fin k` (≤ 5⁵). Port design (`A, B` + a palette triangle, or
+   `A`'s own triangle if it has one — 13 vs 3 cubes) is settled by measurement in phase 1.
+8. **Spec obligations fixed:** the rhombus at `k = 3` (`Gadget.rhombus`, tips at `√3`) through the
+   one-defect theorem yields χ(ℝ²) ≥ 4 — Moser re-proved through the abstract lemma; `H` is
+   exhibited 5-colourable (one literal colouring, `decide`) so `Forces` is not vacuous; the
+   `d < 1/2` red control as an `example` by the triangle inequality.
+
 ## §D. The seeds, and what was measured before registration (§0e)
 
 **Exoo–Ismailescu 2020** (arXiv:1909.13177): points `[a,b,c,d] := ((a√3+b√11)/12, (c+d√33)/12)` —
