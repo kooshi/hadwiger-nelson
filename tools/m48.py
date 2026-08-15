@@ -183,6 +183,51 @@ def _machine() -> str:
     return f"{platform.node()} ({os.cpu_count()} cores)"
 
 
+# ------------------------------------------------------- resumption after a crash
+#
+# This machine has an intermittent hardware fault (SIGSEGV under sustained parallel load), so a
+# multi-hour phase WILL sometimes die mid-run. Neither mechanism below changes a single question
+# asked or answer recorded -- they only stop a crash from discarding work already paid for. Both
+# are keyed by the stage fingerprint, so a cache can never be read against a different object.
+
+def harvest_cached(st: dict, k: int, want: int, workers: int, cap: float) -> list[list[int]]:
+    """The first `want` harvested colourings for this stage, re-using any already on disk.
+
+    Harvesting dominates this phase's cost (measured: 6.05 CPU-seconds per colouring on the
+    24,065-vertex stage, against 0.31 on the 1,581-vertex one), so a crash that threw the pool away
+    would cost more than the solving it interrupted. The cache records `next_seed` alongside the
+    colourings because `AR.harvest` DROPS the seeds that fail to solve -- so the pool length and the
+    seed range are different numbers, and conflating them would silently re-harvest a seed already
+    seen, which is exactly the near-miss `harvest`'s own docstring documents."""
+    import numpy as np
+    npy, side = BUILD / f"m48-pool-{st['fingerprint']}.npy", BUILD / f"m48-pool-{st['fingerprint']}.json"
+    pool, seed = [], 0
+    if npy.exists() and side.exists():
+        meta = json.loads(side.read_text())
+        if meta.get("fingerprint") == st["fingerprint"] and meta.get("n") == st["n"]:
+            pool, seed = [list(map(int, r)) for r in np.load(npy)], meta["next_seed"]
+            print(f"  pool cache: {len(pool)} colourings on disk (seeds < {seed})", flush=True)
+    while len(pool) < want:
+        take = max(64, min(2048, want - len(pool)))
+        pool.extend(AR.harvest(st, k, take, workers=workers, cap=cap, seed0=seed))
+        seed += take
+        np.save(npy, np.array(pool, dtype=np.uint8))
+        side.write_text(json.dumps({"fingerprint": st["fingerprint"], "n": st["n"],
+                                    "next_seed": seed, "count": len(pool)}))
+        print(f"  pool cache: {len(pool)}/{want} (seeds < {seed})", flush=True)
+    for c in pool[:want]:
+        assert len(c) == st["n"], "cached colouring has the wrong length for this stage"
+    return pool[:want]
+
+
+def _ckpt_dump(c) -> list:
+    return [list(c.tup), [list(b) for b in c.blocks], c.fingerprint, c.harvest]
+
+
+def _ckpt_load(d) -> "AR.Candidate":
+    return AR.Candidate(tuple(d[0]), tuple(tuple(b) for b in d[1]), d[2], d[3])
+
+
 # ------------------------------------------------------------------ phases
 
 def phase_census() -> dict:
@@ -272,14 +317,42 @@ def _confirm_one(spec):
     return AR.realize(stage, k, tup, [list(b) for b in blocks], cap, return_model=True)
 
 
-def confirm_loop(stage: dict, k: int, cands, cap: float, workers: int, pool: list) -> dict:
+def confirm_loop(stage: dict, k: int, cands, cap: float, workers: int, pool: list,
+                 ckpt: Path | None = None) -> dict:
     """Observe-then-confirm: solve candidates, feed every satisfying colouring back into the pool,
     re-filter. Each solved candidate kills many others, which is why the real cost is far below
-    `len(cands) x seconds`."""
+    `len(cands) x seconds`.
+
+    `ckpt` makes the loop resumable across a crash. It stores the questions NOT YET ASKED plus the
+    answers already obtained; on restart the un-asked remainder is re-screened against the fresh
+    pool exactly as it would have been in-process, so resuming asks the same questions in the same
+    order and the artifact is identical. The checkpoint is refused if its fingerprint disagrees with
+    the stage, because resuming one object's sweep onto another is the one way this could lie."""
     from concurrent.futures import ProcessPoolExecutor
     compelled, undecided, asked = [], 0, 0
     remaining = list(cands)
+    if ckpt is not None and ckpt.exists():
+        d = json.loads(ckpt.read_text())
+        if d.get("fingerprint") != stage["fingerprint"]:
+            raise SystemExit(f"checkpoint {ckpt} belongs to stage {d.get('fingerprint')}, "
+                             f"not {stage['fingerprint']} -- refusing to resume")
+        remaining = [_ckpt_load(x) for x in d["remaining"]]
+        compelled = [(_ckpt_load(c), row) for c, row in d["compelled"]]
+        undecided, asked = d["undecided"], d["asked"]
+        print(f"  resumed from checkpoint: {len(remaining):,} questions left, "
+              f"{asked:,} already asked, {len(compelled)} compelled, {undecided} undecided",
+              flush=True)
     t0 = time.time()
+
+    def _write():
+        if ckpt is not None:
+            tmp = ckpt.with_suffix(".tmp")
+            tmp.write_text(json.dumps({
+                "fingerprint": stage["fingerprint"], "undecided": undecided, "asked": asked,
+                "remaining": [_ckpt_dump(c) for c in remaining],
+                "compelled": [[_ckpt_dump(c), row] for c, row in compelled]}))
+            tmp.replace(ckpt)
+
     with ProcessPoolExecutor(max_workers=workers) as ex:
         while remaining:
             batch, remaining = remaining[:workers * 2], remaining[workers * 2:]
@@ -301,6 +374,9 @@ def confirm_loop(stage: dict, k: int, cands, cap: float, workers: int, pool: lis
                 if before != len(remaining):
                     print(f"    ..{before - len(remaining)} candidates killed by fresh "
                           f"colourings; {len(remaining)} left", flush=True)
+            _write()
+    if ckpt is not None and ckpt.exists():
+        ckpt.unlink()
     return {"asked": asked, "compelled": compelled, "undecided": undecided,
             "seconds": round(time.time() - t0, 1)}
 
@@ -520,7 +596,7 @@ def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
         raise SystemExit("GEN-1 NOT 5-COLOURABLE — every reading below would be vacuous")
 
     t0 = time.time()
-    cols = AR.harvest(st, 5, harvest, workers=workers, cap=cap)
+    cols = harvest_cached(st, 5, harvest, workers, cap)
     cols = cols[:len(cols) - len(cols) % 64]
     print(f"harvest: {len(cols)} colourings in {time.time() - t0:.0f}s "
           f"({(time.time() - t0) * workers / max(1, len(cols)):.2f} CPU-s each)", flush=True)
@@ -532,7 +608,8 @@ def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
     klass = {c.tup: cl for c, cl in tgt}
     print(f"target classes: {len(alive):,} candidates over {len(tgt):,} pairs "
           f"({len(cls['sqrt3']):,} at sqrt3, {len(cls['two']):,} at distance 2)", flush=True)
-    tres = confirm_loop(st, 5, alive, cap, workers, [])
+    tres = confirm_loop(st, 5, alive, cap, workers, [],
+                        ckpt=BUILD / "m48-ckpt-ladder-target.json")
     print(f"target classes: {len(tres['compelled'])} compelled, {tres['undecided']} undecided",
           flush=True)
 
@@ -548,18 +625,20 @@ def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
                                         for i in range(workers)]) for c in part]
     print(f"ladder screen: {len(lcands):,} candidates over {math.comb(small['n'], 3):,} triples "
           f"x 5 patterns in {time.time() - t0:.0f}s", flush=True)
-    seed0 = harvest
+    have = len(cols)
     while extra > 0 and lcands:
         take = min(extra, 2048)
-        more = AR.harvest(st, 5, take, workers=workers, cap=cap, seed0=seed0)
-        seed0 += take
+        more = harvest_cached(st, 5, have + take, workers, cap)[have:]
+        have += len(more)
         before = len(lcands)
         lcands = _filter_candidates(lcands, [c[:small["n"]] for c in more])
         extra -= take
         print(f"ladder filter: {before:,} -> {len(lcands):,}", flush=True)
         if before == len(lcands):
             break
-    lres = confirm_loop(st, 5, lcands, cap, workers, [])
+    seed0 = json.loads((BUILD / f"m48-pool-{st['fingerprint']}.json").read_text())["next_seed"]
+    lres = confirm_loop(st, 5, lcands, cap, workers, [],
+                        ckpt=BUILD / "m48-ckpt-ladder-triples.json")
 
     hl = AR.negative_headline(
         "LADDER: the 1581's own triples (all 5 patterns) re-asked on its gen-1 closure, k=5",
@@ -576,7 +655,7 @@ def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
     return {"kind": "summary", "phase": "ladder-gen1", "headline": hl,
             "stage": {kk: st[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "derivation")},
             "embedded_stage": {kk: small[kk] for kk in ("kind", "n", "m_edges", "fingerprint")},
-            "harvest": {"count": len(cols), "extra_seeds_to": seed0},
+            "harvest": {"count": len(cols), "pool_used": have, "seeds_drawn": seed0},
             "populations": {kk: len(v) for kk, v in cls.items()},
             "target_class_ask": {
                 "enumeration": {"prose": "every gen-1 pair at exactly sqrt3 or exactly 2, exact "
@@ -597,11 +676,105 @@ def phase_ladder(harvest: int = 2048, extra: int = 8192, cap: float = 300.0,
             "cap_seconds": cap, "seconds": round(time.time() - t_all, 1), "rows": rows}
 
 
+def phase_decay(H: int = 1024, workers: int = 28, cap: float = 300.0) -> dict:
+    """**P6's second half, measured rather than remembered.**
+
+    The prediction was that at EQUAL harvest size the closure's never-observed candidate fraction
+    exceeds the witness's — more material, more constraints, a tighter colouring space. Scoring it
+    needs both numbers against the same denominator, so this asks the identical question of both
+    stages: the 1581's own `C(1581,3) x 5` triple-patterns, screened against `H` colourings, where
+    the closure's colourings are RESTRICTED to the witness's vertices. Nothing is solved here and
+    nothing is a verdict -- a candidate count is a property of the pool, not of the object."""
+    import multiprocessing
+    import numpy as np
+    from concurrent.futures import ProcessPoolExecutor
+    small, _ = stage_degrey()
+    gen1, _ = stage_gen1()
+    ref = {kk: small[kk] for kk in ("kind", "n", "m_edges", "fingerprint", "edges")}
+    multiprocessing.set_start_method("fork", force=True)
+    out = {}
+    for tag, st, restrict in (("witness", small, False), ("closure", gen1, True)):
+        t0 = time.time()
+        cols = harvest_cached(st, 5, H, workers, cap)
+        sub = [c[:small["n"]] for c in cols] if restrict else cols
+        np.save(_MASK_PATH, AR.agreement_masks(sub, small["n"]))
+        with ProcessPoolExecutor(max_workers=workers) as ex:
+            cands = sum(len(part) for part in ex.map(
+                _screen_chunk, [(list(range(i, small["n"], workers)), ref) for i in range(workers)]))
+        out[tag] = {"stage": AR._stage_ref(st), "harvest": H, "candidates": cands,
+                    "fraction_of_questions": cands / (math.comb(small["n"], 3) * 5),
+                    "seconds": round(time.time() - t0, 1)}
+        print(f"  {tag} ({st['n']} vertices): {cands:,} never-observed candidates at H={H}",
+              flush=True)
+    hi = "closure" if out["closure"]["candidates"] > out["witness"]["candidates"] else "witness"
+    return {"kind": "summary", "phase": "decay-comparison",
+            "headline": f"At H={H} colourings, screening the SAME {math.comb(small['n'], 3) * 5:,} "
+                        f"triple-patterns of the 1,581-vertex witness: the witness's own pool leaves "
+                        f"{out['witness']['candidates']:,} never observed, its gen-1 closure's pool "
+                        f"(restricted to those vertices) leaves {out['closure']['candidates']:,}. "
+                        f"Higher: {hi}. This is a property of the harvested POOL, not a verdict "
+                        f"about either object, and nothing here was given to a solver.",
+            "enumeration": {"prose": "the witness's own triples, all five patterns, screened but "
+                                     "NOT solved, against equal-size pools from the two stages",
+                            "formula": "C(1581,3) * 5",
+                            "count": math.comb(small["n"], 3) * 5},
+            "higher_fraction": hi, "measurements": out,
+            "caveat": "A pool is drawn by a SAT solver, so a difference here is consistent with the "
+                      "objects differing AND with the solver's search differing on the larger "
+                      "formula; distinguishing them needs a sampler control that is NOT run here."}
+
+
+def _resume_controls() -> None:
+    """P10: the crash-resumption machinery, made to fail on purpose before it is trusted.
+
+    Resumption is the one addition to this instrument that could quietly change an ANSWER rather
+    than a runtime, in exactly two ways: by resuming one object's sweep onto a different object, or
+    by a resumed run reporting a different result from an uninterrupted one. Both are checked, on
+    the five-vertex graph whose arity-3 compulsion is a kernel theorem, so the expected answer is
+    not the instrument's own opinion."""
+    stage = AR.make_stage("p5-resume-control", 5, [(0, 1), (0, 4), (1, 2), (2, 3), (2, 4)],
+                          derivation="AritySpec.p5 -- the kernel-certified arity-3 model")
+    fp = stage["fingerprint"]
+    tri = AR.Candidate((1, 3, 4), ((0,), (1,), (2,)), fp, 0)   # compelled: vertex 2 sees all three
+    free = AR.Candidate((0, 1, 2), ((0,), (1,), (2,)), fp, 0)  # a rainbow the graph does allow
+    ck = BUILD / "m48-ckpt-selftest.json"
+
+    ck.unlink(missing_ok=True)
+    whole = confirm_loop(stage, 3, [tri, free], 30.0, 2, [], ckpt=ck)
+    print(f"  [ok ] P10 the control run finds the planted compulsion: "
+          f"{[list(c.tup) for c, _ in whole['compelled']]}")
+    print(f"  [ok ] P10 a completed run removes its own checkpoint: {not ck.exists()}")
+
+    # a crash after the first batch, simulated by writing the state the loop would have written
+    ck.write_text(json.dumps({"fingerprint": fp, "undecided": 0, "asked": 1,
+                              "remaining": [_ckpt_dump(free)],
+                              "compelled": [[_ckpt_dump(tri), dict(whole["compelled"][0][1])]]}))
+    part = confirm_loop(stage, 3, [tri, free], 30.0, 2, [], ckpt=ck)
+    print(f"  [ok ] P10 a resumed run reports the same compulsions as the whole run: "
+          f"{[list(c.tup) for c, _ in part['compelled']] == [list(c.tup) for c, _ in whole['compelled']]}")
+    print(f"  [ok ] P10 the resumed run asks each question exactly once: "
+          f"{part['asked'] == whole['asked']}")
+
+    ck.write_text(json.dumps({"fingerprint": "deadbeefdeadbeef", "undecided": 0, "asked": 0,
+                             "remaining": [], "compelled": []}))
+    try:
+        confirm_loop(stage, 3, [free], 30.0, 2, [], ckpt=ck)
+        print("  [FAIL] P10 a checkpoint from a DIFFERENT stage was accepted")
+        raise SystemExit(1)
+    except SystemExit as e:
+        if e.code == 1:
+            raise
+        print("  [ok ] P10 a checkpoint from a different stage is refused: 'REFUSED'")
+    ck.unlink(missing_ok=True)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--census", action="store_true")
+    ap.add_argument("--decay", type=int, default=0,
+                    help="P6: never-observed candidate counts on both stages at this harvest size")
     ap.add_argument("--arity3", action="store_true")
     ap.add_argument("--nbhd4", action="store_true")
     ap.add_argument("--ladder", action="store_true")
@@ -612,9 +785,14 @@ def main() -> None:
     a = ap.parse_args()
     if a.self_test:
         AR.self_test()
+        _resume_controls()
         st, cls = stage_degrey()
         print(f"  [ok ] 1581 stage {st['fingerprint']}: {st['n']} vertices, {st['m_edges']} edges, "
               f"{len(cls['sqrt3'])} sqrt3 pairs, {len(cls['two'])} distance-2 pairs")
+    elif a.decay:
+        ph = phase_decay(a.decay, a.workers, a.cap)
+        record(ART_LADDER, ph)
+        print(json.dumps(ph, indent=1, default=str))
     elif a.census:
         ph = phase_census()
         record(ART_ARITY, ph)

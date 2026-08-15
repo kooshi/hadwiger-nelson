@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M45, 2026-08-13.**
+**Last updated: M48, 2026-08-15.**
 
 ### Where the problem stands
 
@@ -651,6 +651,36 @@ planted control in the instrument. The milestone's remaining phases — the exha
 kernel-certified 23-core, the fan-shrink upper bracket, the randomized-order re-shrink — are **not
 run** and are reported as not run.
 
+M48 asked the from-below direction the question M45's theorem had made unavoidable, and the answer
+is a **complete determination up to one step**. `arityFloor_le_of_degree` guarantees that de Grey's
+1581-vertex witness carries a compulsion of arity at most five (its two spindle centres have degree
+60 against `k = 5`), and its arity-2 sweep was already settled *empty* over all 1,248,990 pairs — so
+the floor sat in `{3, 4, 5}` by theorem, and nobody had ever asked which. **The complete arity-3
+sweep — all 657,385,070 triples × all five patterns, 3,286,925,350 questions — returns zero**, as
+does the **complete neighbourhood arity-4 sweep** (1,718,839 deduplicated 4-subsets × 15 patterns,
+25,782,585 questions), both with zero undecided at cap. So **`arityFloor(1581, k = 5) ∈ {4, 5}`
+exactly** — and because every arity-5 compulsion the degree theorem constructs lives inside a
+neighbourhood whose 4-subsets are now all known free, **those compulsions are 1-minimal**, which is
+M45's designed-but-unrun fan-shrink bracket arriving as a corollary of a sweep aimed elsewhere. The
+engine is what made 3.3 billion questions a 46-second bit sweep: **pair colour-agreement masks**
+(`M[u,v]` = the bitmask of harvested colourings in which `u` and `v` agree, every arity-`m` pattern's
+observed set a boolean combination of the `C(m,2)` masks on its tuple), plus observe-then-confirm —
+one harvested colouring exhibits a realized pattern for *every* tuple at once, so a solver sees only
+what nothing wore, and each model it returns kills more. The **ladder** phase carried it to the
+gen-1 half-spindle closure — 24,065 vertices, 123,134 chords, the witness verified INDUCED inside it
+(7,877 edges reproduced, which is the ladder theorem's actual hypothesis) — and found the same zero:
+the witness's own 3,286,925,350 triple-patterns compel nothing there either, and gen-1's own 73,256
+target-class pairs (52,616 at √3, 20,640 at distance 2, an object never swept at all before) contain
+no virtual edge. Since `arityFloor_le_of_embedding` says the floor can only **drop** along that
+embedding, the flat reading is *an inequality measured tight*, not an absence of news. The kernel
+layer that made all of this readable landed first, and one of its three theorems is a **correction
+to this project's own record**: the seven-point pigeonhole is disjunctive over six √3-pairs and
+three diameters, so χ(ℝ²) ≥ 6 needs a virtual edge at √3 **and** one at distance 2 — never one at
+either — now proved from both sides by two explicit 5-colourings of the carrier, each separating one
+class entirely. Five of six registered predictions met; P6's second half missed and is reported with
+its measurement. Two instrument bugs found mid-campaign would each have manufactured a false
+negative, and are recorded in `plans/M48-from-below-arity.md` §R6 with the numbers they moved.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -707,6 +737,8 @@ run** and are reported as not run.
 | 41 | **The limit lemma, and the first explicit points on the ν curve** (M44). **Kernel** (`Limit.lean`, `Instances/LimitSpec.lean`, axioms exactly the standard three): a finite graph drawable inside one fixed **compact** region with every edge's length within `ε` of 1, **for every `ε > 0`**, can be drawn there with edges of length exactly 1 (`exists_unitDistance_drawing_of_approx`), so it forces the space's unit-distance chromatic number — and in the form the measurement consumes, **the graph may DIFFER at each tolerance** and only its vertex count is fixed (`add_one_le_chromaticNumber_unitDistance_of_bounded_family`, by pigeonhole over the finitely many graphs on `Fin N`), with the plane instance `seven_le_chromaticNumber_plane_of_bounded_family`. Stated for `[MetricSpace V]`, not ℂ, because compactness is all the argument uses. Attribution: the compactness argument is one any specialist would produce and no novelty is claimed for it; ours is the formalization and the programme it licenses. Three models ship with it because the statement is a `∀ ε` — an exact one, a genuinely approximate one, and a **red that is a proven theorem** (`collapsed_drawing_satisfies_one_tolerance`: at a single tolerance the hypothesis is free for ANY graph — collapse every vertex to one point — so a single-`ε` version would prove `χ(ℝ²) ≥ k+1` for every `k`). **Tools**: the **unit-distance defect** meter (`tools/embed.py` — least over drawings of the max edge-length deviation from 1; zero iff the graph is a unit-distance graph; the programme's first CONTINUOUS distance-to-target gauge, every previous meter being binary and flat), reporting bounds **certified in exact rational arithmetic** on a stored rational drawing and re-checked by independent code (`tools/verify_defect.py`, sharing no code, deciding `|√q − 1| ≤ c ⟺ (1−c)² ≤ q ≤ (1+c)²` with no square root at all; planted corruption caught on 21 edges). **The curve**: `ν(0.2792) ≤ 23`, `ν(0.2291) ≤ 66`, `ν(0.1706) ≤ 117`, `ν(0.1494) ≤ 160` — the first explicit points anywhere, upper bounds only, growing as `ε^(−2.9)`. **The minimal refuting ball is physically scale-invariant**: `R*` derived by exhaustive parallel scan (not chosen), physical radius **1.02–1.38 unit distances** across a 3.16× span of scale, all five bands decided minimal. | `Proofs/HadwigerNelson/Limit.lean`, `Instances/LimitSpec.lean`, `tools/{embed,verify_defect,m44}.py`, `build/m44-{dial,interval}.json`, `plans/M44-epsilon-dial.md` §R | M44 |
 
 | 42 | **The arity floor, and the correction it found** (M45). **Kernel** (`Arity.lean`, `Instances/AritySpec.lean`, axioms exactly the standard three): a **compulsion** is a *partial colouring that does not extend* — `m` distinct vertices, properly coloured among themselves, wearing a pattern no proper `k`-colouring induces — and the **arity floor** `arityFloor G k : ℕ∞` is the least such `m`. Phrased through the repository's existing `Pattern.SamePattern`, so it **contains** the four neighbouring notions rather than becoming a fifth: `compels_two_eq`/`compels_two_ne` say arity 2 *is* `Separated`/`Forces`, with `Separated.compels`/`Forces.compels` the constructors a caller travels; `Fan` is a disjunction of compulsions; M20's `no_mono_outer_triple` was an arity-3 compulsion all along. Two things fall out free: **`arityFloor G k = 0 ↔ ¬ G.Colorable k`** — the base-satisfiability guard every instrument carries by hand, here a *value* rather than a side condition — and **`arityFloor_le_of_degree`: the floor is at most `k`, unconditionally**, because `k` distinct neighbours can never be rainbow. That last one is the milestone's transferable sentence: *every object this repository holds has some vertex of degree far above its colour count (max degree 60 on de Grey's 1581 against `k = 5`; the theorem needs SOME vertex with `k` distinct neighbours, not every vertex), so four campaigns of pair meters reading zero were asking below a bound that was always available.* `realizes_iff_extends` (palette-free ⟺ naive extension, via `Equiv.extendSubtype`) makes the campaign's two encodings provably the same query. Spec: the smallest graph whose first compulsion is at arity 3 — 5 vertices, 5 edges, 3 colours, a 4-cycle with a pendant — with `arityFloor = 3` proved both ways, the lower direction routed entirely through the public API, and the positive instance *is* `compels_rainbow_of_neighbors` applied verbatim; plus a planted negative (`⊤`) and the vacuity self-report (`0`). **Tools**: `tools/arity.py`, whose verdict function structurally refuses the three misreadings — it returns `undetermined-subtuples` rather than a verdict when the 2-subset evidence is missing, its enum contains no "clean" so a cap can never read as a negative, and stages carry edge-list **fingerprints** so "same object?" is a comparison. **The measurement, which corrected a minted grokking**: on M43's own stage its six anchored asks reproduce exactly (6 realizable), and the same stage carries **7 virtual edges** at offset norms 27/28/31 — **triple-encoded**, controls green, 7.5–15 s each; the critical stage (core minus one vertex) carries **51** over a complete 9,636-pair sweep. Coverage primary, criticality secondary; **G28's "zero virtual edges at k = 6" refuted on the stage that produced it.** | `Proofs/HadwigerNelson/Arity.lean`, `Instances/AritySpec.lean`, `tools/{arity,m45}.py`, `plans/M45-arity-floor.md` §R | M45 |
+
+| 43 | **The arity floor of de Grey's witness, bracketed to one step — and the pigeonhole's disjunction read correctly at last** (M48). **Kernel** (`Arity.lean` §Transport, `Homogeneous.lean`, `Instances/HexShell.lean`, axioms exactly the standard three): the **ladder theorem** — `arityFloor_le_of_embedding : (f : G ↪g G') → arityFloor G' k ≤ arityFloor G k`, the BIGGER graph on the LEFT, so a compulsion survives being embedded in more material and a closure measurement is a dial with a theorem behind it — carried by three transport lemmas that want three different hypotheses (`Realizes.comap` needs only a homomorphism; `PartialColoring.map` and `Compels.map` need the embedding's *reflection* of adjacency), which is what makes the induced-subgraph condition load-bearing rather than decorative; **the plane's homogeneity** (`exists_isometry_map_pair`, `forced_pair_of_forced`, `Separated.plane`) — one forced pair at a distance is EVERY pair at that distance, via `z ↦ az + b` with `a = (y−x)/(y₀−x₀)`, and with no `x₀ ≠ y₀` side condition because at zero distance the hypothesis refutes itself; and **the correction to this project's own record** (`not_colorable_five_of_forced_pairs`, `six_le_chromaticNumber_plane_of_forced_pairs`): `hexShellPairs` is six √3-pairs PLUS three diameters and `hexShell_plane5` is disjunctive over both, so **χ(ℝ²) ≥ 6 needs a virtual edge at √3 AND one at distance 2** — never one at either — proved from both sides by two explicit proper 5-colourings of the seven-point carrier, one separating all six √3-pairs and one all three diameters, so neither class is forced alone and the conjunction is not an artifact of phrasing. **Measured** (desktop, every control green, both stages re-derived from construction with their edge counts as controls): on de Grey's 1581 at `k = 5` — arity 2, **0 over all 1,248,990 pairs** (P1, reproducing `build/m30-rigidity-1581-k5.json`; every pair observed *both* ways, so nothing reached a solver); **arity 3, COMPLETE — 0 compulsions in 3,286,925,350 questions** (657,385,070 triples × 5 patterns; 1,023,629 screen survivors in 46 s → 279 after fresh colourings → 263 solved, all satisfiable; 0 undecided; 904.7 s); **arity 4 restricted to vertex NEIGHBOURHOODS, COMPLETE — 0 compulsions in 25,782,585 questions** (1,718,839 deduplicated 4-subsets × 15 patterns; 659 solved; 0 undecided; 691.9 s). Hence **`arityFloor(1581, k = 5) ∈ {4, 5}` exactly** — 0 and 1 by `two_le_arityFloor`, 2 and 3 by complete sweep, ≤ 5 by `arityFloor_le_of_degree` — and since every arity-5 compulsion that theorem constructs lives in a neighbourhood whose 4-subsets are now all known free, **those compulsions are 1-minimal**: M45's designed-but-unrun fan-shrink bracket, delivered as a corollary. **The ladder** carried the identical questions to the gen-1 half-spindle closure (24,065 vertices, 123,134 chords; the witness verified INDUCED inside it at 7,877 edges, which *is* the theorem's hypothesis): the witness's own 3,286,925,350 triple-patterns compel nothing there either (screen 3,066,206 → 384 in five filter rounds, 332 solved, 0 undecided at cap 300 s, 5,257.6 s), and gen-1's own **73,256** target-class pairs (52,616 at exactly √3, 20,640 at exactly 2 — an object never swept at all before) hold **no virtual edge**. Because the floor can only DROP along that embedding, the flat reading is *an inequality measured tight*. The engine that made 3.3 billion questions a 46-second bit sweep: **pair colour-agreement masks** (`M[u,v]` = the bitmask of harvested colourings where `u` and `v` agree; every arity-`m` pattern's observed set is a boolean combination of the `C(m,2)` masks on its tuple) plus **observe-then-confirm** (one colouring exhibits a realized pattern for every tuple at once; every model found returns to the pool). Five of six registered predictions met; **P6's second half missed in a direction that is provably about the SAMPLER**, since an induced subgraph's restricted colourings are a subset of its own — the closure's pool exhibits ~17M witness-patterns the witness's own pool of equal size never wore, all of them achievable on the witness (`--decay`: 20,220,080 vs 3,066,206 at `H = 1024`). Two instrument bugs found mid-campaign would each have manufactured a false negative: `harvest` re-seeding from zero (so "filter against fresh colourings" re-tested the same ones and killed 0 of 1,023,629, where real fresh seeds cut it to 279), and a planted norm-constant assertion that **fired for real** — the closure builder returns lists where the witness builder returns tuples, which would have left the √3 and distance-2 classes EMPTY while the unit-edge control still passed. | `Proofs/HadwigerNelson/{Arity,Homogeneous}.lean`, `Instances/{HexShell,AritySpec}.lean`, `tools/{arity,m48}.py`, `build/m48-{arity,ladder}.json`, `plans/M48-from-below-arity.md` §R | M48 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -812,55 +844,59 @@ closure** probe. M45's correction does not reach the from-below direction, and s
 more than the sharper story. What survives as genuinely unasked is different and is what path 1 now
 is: the ARITY, one field up.)*
 
-1. **M48 — the from-below arity question** (`plans/M48-from-below-arity.md`) — **RECOMMENDED
-   NEXT.** Not because the from-below sweeps were sloppy — §above says they were complete — but
-   because of a theorem plus a complete negative meeting. **`arityFloor_le_of_degree` (kernel, M45):
-   a vertex with `k` distinct neighbours makes the all-different pattern on them unrealizable, so
-   the arity floor is at most `k` unconditionally.** De Grey's 1581 has vertices of degree up to 60,
-   so **a compulsion of arity ≤ 5 is GUARANTEED to exist on it** — and its arity-2 sweep is settled
-   *empty* over all 1.25M pairs. So the floor is in `{3, 4, 5}`, by theorem, and **nobody has ever
-   asked which.** That is the calibrated bed M45 wanted, met here better than it was there: a zero
-   at arity 3 is a real statement about mechanism, and a hit is the first nonzero structural reading
-   the from-below direction has ever produced. Carries phase B free — the gen-1 closure (24,065 pts)
-   was never swept at all and gen-2 (284,873) got 40 targeted asks, so the ordinary unfinished
-   arity-2 work lives exactly there. **A correction the stub records and the roadmap should carry:
-   G26's "one gadget at √3 *or* 2" is too weak — `hexShellPairs` is six √3-pairs PLUS three
-   diameters, and the pigeonhole is disjunctive over both classes, so χ(ℝ²) ≥ 6 needs a virtual edge
-   at √3 **and** one at 2.** Either alone would be a major result and would halve the problem.
+*(M48 CLOSED 2026-08-15 — desktop, interrupted once by the machine's hardware fault and finished
+after a reboot. The arity question is ANSWERED: `arityFloor(1581, k = 5) ∈ {4, 5}` exactly, by two
+complete sweeps (ledger row 43); G31 is minted, G26's sharpening is promoted to the kernel, and G30
+gains a failure mode nobody had named — a registered escape clause that was inductive and provably
+false. The re-rank below follows from G31's closed door: existing witnesses have nothing left to
+extract at this depth, so the hunt is a CONSTRUCTION problem now, and the ranking puts construction
+first for the first time.)*
+
+1. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — **RECOMMENDED NEXT**, and
+   promoted to the top on M48's strength rather than by default. It is still the only route to
+   χ(ℝ²) ≥ 6, and it is now the route with the sharpest possible target, because two things landed
+   together. **The target is a conjunction, kernel-side**: `six_le_chromaticNumber_plane_of_forced_
+   pairs` needs a finite unit-distance graph forcing a √3-pair apart at five colours **and** one
+   forcing a distance-2 pair apart — with two adversarial 5-colourings proving neither half suffices
+   alone. **And the extraction route is closed**: G31 says a certified 5-chromatic witness's
+   compulsion structure at its top rung is *exactly* the trivial degree-forced fan, with nothing
+   below arity 4, so no gadget is hiding in de Grey's graph to be found by a sharper meter. What
+   remains is design. Assets it did not have before: the plane's homogeneity as a theorem (one
+   forced pair at a distance is every pair at that distance — the bridge any gadget crosses), the
+   ladder theorem (a compulsion survives enrichment, so a gadget may be designed small and grown),
+   M44's defect meter (a *continuous* score for "how close is this to a unit-distance graph", with
+   an independent re-checker), and M48's mask engine (billions of pattern questions at bit-operation
+   cost, so a designed object can be audited at every arity ≤ 4 in minutes).
 2. **M45's unrun phases** (`plans/M45-arity-floor.md` §R7) — the exhaustive arity ladder on the
-   kernel-certified 23-vertex core, the fan-shrink upper bracket (which would turn `arityFloor ≤ k`
-   into a measured number), the randomized-order re-shrink that decides whether orbit concentration
-   is real or procedural, and double-encoding the remaining 44 pair compulsions. All designed, all
-   cheap, none run. Ranked below path 1 only because path 1 aims at the target and this does not.
-3. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — unchanged in substance;
-   still the only route to χ(ℝ²) ≥ 6, still carrying M44's two corrections (the registered target
-   is stronger than the theorem needs; the hetero-dimer effort curve is the probe with a dial).
-   **M44 adds a scoring instrument it did not have**: any candidate object now gets a defect
-   number, so "how close is this to being a unit-distance graph" is a measurement rather than a
-   question — and `tools/verify_defect.py` makes the answer independently checkable.
-4. **M46 — the description instrument** (`plans/M46-colouring-automaton.md`) — unchanged.
-5. **M47 — the three-distance plane** (`plans/M47-multidistance.md`) — unchanged; blocking
+   kernel-certified 23-vertex core, the randomized-order re-shrink that decides whether orbit
+   concentration is real or procedural, and double-encoding the remaining 44 pair compulsions.
+   **The fan-shrink upper bracket is now PARTLY DELIVERED** — M48's neighbourhood sweep proves the
+   degree-constructed arity-5 compulsions on the 1581 are 1-minimal — so what is left of that item
+   is the same bracket on the 23-core, where the object is kernel-certified and the answer would be
+   promotable. All cheap, none run.
+3. **M46 — the description instrument** (`plans/M46-colouring-automaton.md`) — unchanged.
+4. **M47 — the three-distance plane** (`plans/M47-multidistance.md`) — unchanged; blocking
    literature gate first.
-6. **The ε-dial's unrun tail** (`plans/M44-epsilon-dial.md` §R8) — the ladder below `p ≈ 0.109`
+5. **The ε-dial's unrun tail** (`plans/M44-epsilon-dial.md` §R8) — the ladder below `p ≈ 0.109`
    was NOT run and is reported as not run. Given M44's own finding it cannot change the verdict
    on the family: it would add points to a curve whose slope is established and whose source is
    closed. Low value, explicitly not recommended.
-7. **~~M44 — the ε-dial~~ — CLOSED 2026-08-13** (`plans/M44-epsilon-dial.md` §R). Ledger row
+6. **~~M44 — the ε-dial~~ — CLOSED 2026-08-13** (`plans/M44-epsilon-dial.md` §R). Ledger row
    41; G29 promoted in its lemma half. Kept here, not deleted, because the *stub's* prediction
    is worth remembering against the outcome: it read the recorded cores as showing a physical
    radius pinned near 1.3–1.7 and flagged that as an anthology needing a comparability phase.
    The comparability phase ran, with the ball radius derived rather than chosen, and the
    invariance **survived** at 1.02–1.38 across a 3.16× span of scale.
-8. **The certified union** (`plans/M35-certified-union.md`) — parked: consolidation with
+7. **The certified union** (`plans/M35-certified-union.md`) — parked: consolidation with
    bounded novelty; reopens on a find or the write-up trigger's "maybe" clause.
-9. **The certification programme** — standing fallback unchanged
+8. **The certification programme** — standing fallback unchanged
    (`plans/M33-witness-closure.md`).
-10. **The 1/7 core's kernel certificate** — priced and DECLINED at M43 (M06-scale, ~10⁷ LRAT
+9. **The 1/7 core's kernel certificate** — priced and DECLINED at M43 (M06-scale, ~10⁷ LRAT
    lines for a statement conditionally implied by published work). The M42 template stays
    proven and ready for a target that earns it; this is not one. Reopens only if the
    certificate machinery itself becomes the product, or if M46 §4 finds that an automaton
    emptiness certificate is a different and cheaper price.
-11. **Carried forward unchanged** — the hexagon cell module stays priced and unneeded (M36
+10. **Carried forward unchanged** — the hexagon cell module stays priced and unneeded (M36
     superseded it before it was written); the instrument audit stays parked. The line an older
     ranking carried — *"the cell family is closed as a research direction: further scales cost
     solver time and cannot produce a six"* — is now **fully vindicated in substance and was
@@ -1452,7 +1488,13 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   at 2.** Both radicands sit inside the 5-forcers' own field (a spindle at distance
   `d` needs `4d² − 1` square: 11 at √3, 15 at 2), so neither is out of reach in
   principle, and *either one alone would be a major result that halves the remaining
-  problem*. **[derived]** *The "nine copies" in the original text was always the
+  problem*. **[PROMOTED TO KERNEL at M48, 2026-08-15:
+  `HexShell.six_le_chromaticNumber_plane_of_forced_pairs` states the CONJUNCTION —
+  both classes forced, at five colours, in the plane — and the two halves are proved
+  independent from both sides by two explicit proper 5-colourings of the seven-point
+  carrier, one separating all six √3-pairs and one all three diameters. So "neither
+  class alone suffices" is no longer a reading of a disjunction; it is a theorem with
+  its own adversaries.]** *The "nine copies" in the original text was always the
   right count; what was loose was reading nine copies of ONE gadget where the nine
   pairs carry two distances.*
   **SCOPE NOTE on the detector, same date:** the m1 meters were run to COMPLETION on
@@ -1465,6 +1507,35 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   gen-1 closure (24,065 points, never run) and gen-2 (284,873 points, 40 targeted
   asks) — and the ARITY, which `arityFloor_le_of_degree` guarantees is ≤ 5 on the
   1581 while the pair sweep says it is not 2.*
+  **THE ARITY QUESTION IS NOW ANSWERED (M48) — see G31.**
+* **G31 — The witness's rigidity at its top rung is exactly its own fan, and there is
+  nothing underneath it.** (M48, 2026-08-15; a theorem plus two complete sweeps, no
+  induction anywhere.) `arityFloor_le_of_degree` guarantees de Grey's 1581 carries a
+  compulsion of arity ≤ 5 at five colours, and *constructs* it: `k` distinct
+  neighbours of one vertex can never be rainbow. The question was whether the object
+  has anything **else** — some emergent low-arity compulsion the degree bound does not
+  hand you. Measured: **nothing at arity 2** (complete, 1,248,990 pairs), **nothing at
+  arity 3** (complete, 3,286,925,350 questions), **nothing at arity 4 inside a vertex
+  neighbourhood** (complete, 25,782,585 questions) — so `arityFloor(1581, k = 5) ∈
+  {4, 5}`, and the fan compulsions the theorem constructs are **1-minimal**, since
+  deleting any vertex from one leaves a 4-subset of a neighbourhood now known free.
+  **[measured, complete; the bracket is kernel]** *The consequence for the from-below
+  hunt is a closed door, and it is worth more than the open one it closes: the
+  compulsion structure of a certified 5-chromatic witness at its own top rung is
+  **exactly the trivial one**. There is no small forced pattern hiding in de Grey's
+  graph waiting to be extracted as a gadget — G9's pairwise floppiness was not a
+  peculiarity of arity 2, it goes all the way up to the arity where a counting
+  argument forces structure to exist. So a χ ≥ 6 gadget must be **constructed**, not
+  **found**; four campaigns of meters pointed at existing witnesses were mining an
+  object that provably has nothing to mine at this depth. And the ladder says
+  enrichment does not change it: fifteen times the material, from the same
+  half-spindle group, compels nothing new on the witness's own triples — the fifth
+  independent measurement of G10 and the first above arity 2. Falsifiers, both cheap
+  to state and neither run: a general (non-neighbourhood) 4-subset compulsion —
+  `C(1581,4) = 259,338,410,115`, explicitly out of scope and NOT swept; or the same
+  ladder on another 5-chromatic witness — Heule's 510/553, or M41's three Galois
+  conjugates — finding arity-3 structure where the 1581 has none, which would make
+  this a fact about de Grey's construction rather than about 5-chromatic matter.*
 * **G27 — The witnesses have hidden arithmetic symmetry, and the Galois orbit mints
   free witnesses.** (M41 phases 4/5, 2026-08-12; every claim an exact computation
   with planted controls.) The half-spindle field tower's Galois group acts on
@@ -1600,6 +1671,17 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   (`plans/M45-arity-floor.md` is that pattern made into a milestone). Falsifier: none needed;
   like G21 this is a methodological invariant and it fails only by being ignored — but the
   tally is falsifiable and should be re-sorted at every tenth milestone.*
+  **A NEW FAILURE MODE, from M48 (2026-08-15): a registered prediction can carry an
+  inductive reading in its own escape clause.** P6 registered that if the enriched object's
+  never-observed pattern fraction came back *lower* than the witness's, that "would be the
+  first sign the closure does something structural." It came back lower — and the reading was
+  never available: the witness is an INDUCED subgraph, so the closure's achievable patterns on
+  those vertices are a **subset** of the witness's own and cannot be more numerous. The gap is
+  the SAT sampler, necessarily, and one line of derivation says so. *The rule this adds: write
+  the escape clause to the same standard as the prediction. A pre-registered interpretation is
+  still an interpretation, and being committed in advance protects it from hindsight bias but
+  not from being false. Ask of every "if it comes back the other way, that would mean X"
+  whether X is even consistent with what is already proven about the objects.*
 
 ## Whose work this is
 

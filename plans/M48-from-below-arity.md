@@ -641,4 +641,205 @@ promised.
 
 ## §R. Results
 
-*(filled at the close)*
+*Written at the close, 2026-08-14. Desktop (32 cores, 125 GB) throughout. Every number
+below is on disk at the address given; every negative carries its enumeration in its own sentence,
+per §0c.*
+
+### §R0. The one-line verdict
+
+**`arityFloor(1581, k = 5) ∈ {4, 5}` exactly, and every arity-5 compulsion that
+`arityFloor_le_of_degree` constructs on it is 1-minimal.** The floor is real — a theorem guarantees
+*something* is compelled at arity ≤ 5 — and three complete sweeps now say it is not at 2, not at 3,
+and not at 4 inside a vertex neighbourhood. Nobody had asked; the answer is a complete determination
+up to one step. On fifteen times the material it is the same answer, and by the ladder theorem that
+is an inequality measured tight rather than an absence.
+
+**What it means, and it is a closed door rather than an open one.** The compulsion structure of a
+certified 5-chromatic witness, at its own top rung, is *exactly the trivial one* — the fan a vertex's
+degree forces, and nothing beneath it. There is no small forced pattern hiding in de Grey's graph
+waiting to be extracted as a χ ≥ 6 gadget. G9's pairwise floppiness was not a peculiarity of arity
+2; it runs all the way up to the arity at which a counting argument compels structure to exist. So
+the gadget must be **constructed**, not **found**, and the ranked paths in `CLAUDE.md` now put
+construction first for the first time (grokking **G31**).
+
+### §R1. The kernel layer (§6.1) — landed, and it corrected the record
+
+Three things, on axioms exactly `[propext, Classical.choice, Quot.sound]`, gate green (build OK,
+zero `sorry`, 511 declarations audited clean plus the five declared `native_decide` purchases,
+`lake lint` silent, spec examples passing).
+
+**The ladder theorem** (`Arity.lean` §Transport). `arityFloor_le_of_embedding : (f : G ↪g G') →
+arityFloor G' k ≤ arityFloor G k` — the **bigger** graph on the **left**, which is the one thing
+about it a reader can get backwards, so `AritySpec` exercises both directions: a compulsion
+surviving into more material, and a case where the inequality is strict (a triangle compels nothing
+at three colours, floor `⊤`, while the `K₄` containing it is not 3-colourable at all, floor `0`).
+Carried by three transport lemmas that turned out to want three different hypotheses —
+`Realizes.comap` needs only a homomorphism, `PartialColoring.map` and `Compels.map` need the
+embedding's *reflection* of adjacency — which is exactly what makes the induced-subgraph hypothesis
+load-bearing rather than decorative.
+
+**The plane's homogeneity** (`Homogeneous.lean`). `exists_isometry_map_pair` builds `z ↦ az + b`
+with `a = (y − x)/(y₀ − x₀)`, and `forced_pair_of_forced` / `Separated.plane` turn one forced pair
+at a distance into *every* pair at that distance. No `x₀ ≠ y₀` side condition: at zero distance the
+hypothesis refutes itself, and `AritySpec` exercises that degenerate branch rather than trusting it.
+This is the lemma any future gadget crosses on its way from a finite graph to the plane.
+
+**The correction to this project's own record** (`Instances/HexShell.lean`). The Frontier had
+carried, since 2026-08-14, the reading that χ(ℝ²) ≥ 6 needs "one gadget at √3 **or** 2". It is now
+a theorem that this is too weak: `hexShellPairs` is six √3-pairs *plus* three diameters and
+`hexShell_plane5` is disjunctive over both, so `six_le_chromaticNumber_plane_of_forced_pairs`
+demands a virtual edge at √3 **and** one at distance 2. Proved from both sides — two explicit proper
+5-colourings of the seven-point carrier, one separating all six √3-pairs, one separating all three
+diameters — so *neither class alone is forced*, and the conjunction is not an artifact of how the
+statement was phrased. Either half alone would still be a major result and would halve the problem.
+
+### §R2. Phase A — the complete arity-3 sweep (§6.3)
+
+`build/m48-arity.json`, phase `arity3-complete`. Stage: de Grey's 1581, fingerprint
+`76b8163b27fe6f96`, 7,877 unit edges re-derived by exact field arithmetic.
+
+| ask | enumeration | result |
+|---|---|---|
+| arity 2 (the P1 reproduction control) | all **1,248,990** pairs, both patterns | **0 candidates** — every pair observed *both* ways in 4,096 harvested colourings, so there was nothing even to confirm |
+| **arity 3, complete** | **657,385,070** triples × 5 patterns = **3,286,925,350** questions | **0 compelled, 0 undecided at cap** |
+
+Decay curve, which is the evidence the screen terminated rather than an aside: 1,023,629 candidates
+out of 3.29 billion questions survived the mask screen (46 s); fresh colourings cut that to **279**;
+263 were handed to a solver and every one came back satisfiable. 904.7 s end to end.
+
+**P1 met** (prior 95 %). **P2 met** (prior 70 % zero).
+
+### §R3. Phase A2 — the complete neighbourhood arity-4 sweep (§6.4)
+
+`build/m48-arity.json`, phase `arity4-neighbourhoods`. **0 compulsions in 25,782,585 questions** —
+1,718,839 deduplicated 4-subsets of vertex neighbourhoods × 15 patterns, 659 solved, 0 undecided,
+691.9 s. Explicitly **not** covered, and named in the artifact: general 4-subsets, `C(1581,4) =
+259,338,410,115`, priced in §4d and out of scope.
+
+**P3 met** (prior 60 % zero).
+
+**The corollary that was not registered and is the better half of this phase.** Every arity-5
+compulsion `arityFloor_le_of_degree` constructs sits on five distinct neighbours of one vertex, and
+every 4-subset of a vertex neighbourhood has now been swept clean at all fifteen patterns.
+Deleting any single vertex from such a compulsion therefore leaves a *realizable* pattern — so those
+compulsions are **1-minimal**. That is M45's designed-but-unrun fan-shrink bracket, delivered as a
+consequence of a sweep that was aimed elsewhere.
+
+### §R4. Phase B — the ladder (§6.5)
+
+`build/m48-ladder.json`, phase `ladder-gen1`. Stage: the gen-1 half-spindle closure, **24,065
+vertices, 123,134 unit chords**, fingerprint `06ac45c2842a4978`, built by
+`closure.close_gen(1581, both spindle centres, GEN1_GENS)`. Two controls before any reading: the
+123,134-chord count reproduces M31's, and **the 1581's induced edge count inside the closure is
+exactly 7,877** — which is not bookkeeping but the *hypothesis of the ladder theorem*, since
+`↪g` demands adjacency be reflected as well as preserved. Vacuity guard `sat`, so nothing below is
+vacuous.
+
+| ask | enumeration | result |
+|---|---|---|
+| gen-1's own target classes (P4) | all **73,256** pairs — 52,616 at exactly √3, 20,640 at exactly 2, by exact field arithmetic | **0 candidates**, hence 0 compelled, 0 undecided. Every one of those pairs was observed sharing a colour in the harvested pool, so the meter never even reached a solver. |
+| **the ladder proper** (P5) | the witness's **own** 657,385,070 triples × 5 patterns = **3,286,925,350** questions, re-asked on the 24,065-vertex stage | **0 compelled, 0 undecided at cap 300 s** |
+
+Decay on the ladder ask: 3,066,206 candidates survived the mask screen (14 s), then five rounds of
+fresh colourings cut it **3,066,206 → 129,244 → 18,588 → 3,986 → 1,072 → 384**, and all 384 went to
+a solver — 332 solved directly, the rest killed by models found along the way. 5,257.6 s end to end
+on 28 workers, 11,264 colourings drawn.
+
+**P4 met** (prior 85 % zero). **P5 met** (prior 80 % flat).
+
+**What the flatness means here, precisely.** `arityFloor_le_of_embedding` says the floor can only
+**drop** along this embedding — so a flat reading is not "nothing happened", it is *an inequality
+measured tight at arity 3*. Fifteen times the material, drawn from the same half-spindle group that
+generates the witness, compels nothing on the witness's own triples that the witness did not already
+compel. That is the fifth independent measurement of G10's irreducible globality and the first at
+arity 3.
+
+**Reproducibility, unplanned but worth recording.** This phase ran twice — once before the machine's
+hardware fault and once after a reboot — and the two runs agree exactly where they overlap: 6.05 vs
+6.04 CPU-seconds per harvested colouring, the same 3,066,206 screen survivors, the same
+3,066,206 → 129,244 first filter, and the same 0 candidates over 73,256 target-class pairs. The
+second and third filter rounds differ by four candidates (18,592 vs 18,588), which is the SAT
+solver's own nondeterminism under a wall-clock cap and cannot change a verdict: the filter only
+decides what gets *solved*, never what gets *concluded*.
+
+### §R5. The engine, because the enumeration is the milestone
+
+3.29 billion questions is five orders of magnitude past any from-below sweep this project had run,
+and it is a 46-second bit operation for one reason: **pair colour-agreement masks.** `M[u, v]` is
+the bitmask of harvested colourings in which `u` and `v` share a colour, and *every* arity-`m`
+pattern's observed set is a boolean combination of the `C(m,2)` masks on its tuple — so "was this
+pattern ever worn?" is an AND of three 4,096-bit words, not a scan. On top of that,
+**observe-then-confirm**: one harvested colouring exhibits a realized pattern for every tuple in the
+graph simultaneously, so a solver is needed only for patterns nothing wore, and every satisfying
+model found during confirmation goes back into the pool and kills more candidates.
+
+### §R6. Instrument findings, including two that would have manufactured a false negative
+
+* **`harvest` re-seeded from zero on every call.** The "filter against fresh colourings" stage was
+  re-testing the *same* colourings and killed exactly nothing (1,023,629 → 1,023,629), and the
+  loop's `if before == len(cands): break` then abandoned the rest — a false negative produced
+  entirely by the instrument. With genuinely fresh seeds the same filter cuts 1,023,629 → **279**.
+  `seed0` is now a parameter and its docstring says why it exists.
+* **The planted norm-constant assertion fired for real**, in the direction not expected: the closure
+  builder returns coordinate lists where the witness builder returns tuples, and a tuple norm
+  constant compares unequal to every norm forever. Left alone it would have reported the √3 and
+  distance-2 classes **empty** while the unit-edge control still passed.
+* `locally_proper` rebuilt a 7,877-element adjacency set per call — invisible at pair scale, the
+  entire runtime at 25.8 million pattern checks.
+* Python 3.14 defaults to the `forkserver` start method, which surfaces as a `ConnectionResetError`
+  that reads like a machine fault rather than a configuration one.
+
+### §R7. Crash resumption, added mid-milestone and controlled
+
+Phase B was interrupted by the machine's intermittent hardware fault (three `SIGSEGV`s — two in the
+SAT solver, one in Python — reported to Kooshi, not worked past, machine rebooted). Two mechanisms
+were added so a multi-hour phase survives the next one: a **colouring pool cache** keyed by stage
+fingerprint (harvesting dominates, measured at 6.05 CPU-seconds per colouring on the 24,065-vertex
+stage) and a **solver checkpoint** holding the questions not yet asked alongside the answers already
+obtained. Neither changes a question asked or an answer recorded. Both are controlled (P10, in
+`tools/m48.py --self-test`): the control run is on the five-vertex graph whose arity-3 compulsion is
+a *kernel theorem*, so the expected answer is not the instrument's own opinion; a mid-run crash is
+planted and the resumed run is checked to report the identical compulsions and to ask each question
+exactly once; and a checkpoint carrying a foreign stage fingerprint is refused.
+
+### §R8. Scoring the registered predictions
+
+| # | prior | outcome | measurement |
+|---|---|---|---|
+| **P1** | 95 % | **MET** | 0 candidates over all 1,248,990 pairs; every pair observed both ways, reproducing `build/m30-rigidity-1581-k5.json` |
+| **P2** | 70 % zero | **MET** | 0 compulsions in 3,286,925,350 questions, 0 undecided |
+| **P3** | 60 % zero | **MET** | 0 compulsions in 25,782,585 questions, 0 undecided |
+| **P4** | 85 % zero | **MET**, twice | 0 candidates over 73,256 target-class pairs, on two independent runs |
+| **P5** | 80 % flat | **MET** | 0 compulsions when the witness's own 3,286,925,350 questions are re-asked on the 24,065-vertex closure |
+| **P6** first half | 70 % | **MET** | 6.04 CPU-s per colouring on gen-1 against 0.31 on the 1581 — **19.5×**, against a registered ≥ 10× |
+| **P6** second half | 70 % | **MISSED**, and the miss is *provably* not about the objects | witness pool leaves **20,220,080** never observed at `H = 1024`; the closure's, restricted to the same vertices, leaves **3,066,206** — 6.6× *fewer*, the opposite of the prediction |
+
+**P6's second half is the interesting row, and its registered gloss was wrong a priori.** The
+registration said a *lower* closure fraction "would be the first sign the closure does something
+structural." It cannot be. The 1581 is an **induced** subgraph of gen-1 — checked, 7,877 edges
+reproduced — so every proper colouring of gen-1, restricted to the witness's vertices, *is* a proper
+colouring of the witness. The closure's achievable pattern set on those vertices is therefore a
+**subset** of the witness's own, and can never be larger. Yet the closure's pool of 1,024 colourings
+exhibits some 17 million triple-patterns that the witness's own pool of 1,024 never wore — every one
+of them achievable on the witness, by that same restriction. **So the gap is a measurement of the
+sampler, not of either object**: harvesting on the witness alone, CaDiCaL lands in a narrower region
+of a space it is demonstrably able to reach.
+
+This is the M19 lesson again — *pool statistics measure the SAT solver's tastes, not the colouring
+space* — arriving in a milestone that had registered a structural reading for it in advance. Nothing
+downstream depends on it: the pool is a *screen*, and everything it fails to kill is handed to a
+solver, so a narrow sampler costs solver calls and can never produce a false compulsion. The one
+practical question it raises is answered against itself: the closure's colourings are ~6.6× more
+informative each but cost 19.5× more, so restricting a bigger object's colourings is a **worse**
+sampler per CPU-second, not a better one, and the instrument is left as it is.
+
+Recorded in `build/m48-ladder.json`, phase `decay-comparison`, reproducible as
+`python3 tools/m48.py --decay 1024`. Its headline names the pool as the subject, and its `caveat`
+field states the sampler confound in the artifact rather than only here.
+
+### §R9. What this licenses, and what it does not
+
+Exactly as written in §0c before any instrument ran. **Licensed:** `arityFloor(1581, k = 5) ∈
+{4, 5}`, and the 1-minimality corollary of §R3. **Not licensed:** anything about the plane, any
+other object, arity 4 outside vertex neighbourhoods, or whether a virtual edge at √3 or 2 exists
+anywhere. The HALT AND VERIFY clause did not fire, because nothing it watches for occurred.
