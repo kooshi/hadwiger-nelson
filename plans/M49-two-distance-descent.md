@@ -419,3 +419,46 @@ tools-side):
   would need √15 for ITS spindle; E–I's forced pair is at distance **5** (radicand 99 = 9·11 — inside
   the seam field, which is why K stays in ℚ(√3,√11)). Register the observation: their spindle
   distance was chosen to keep the field closed.
+
+## §R. Results (filled as phases close; every number from an artifact or a build log)
+
+### §R0. The kernel layer (phase 0) — LANDED, first sitting
+
+`DistanceGraph.lean`, `OneDefect.lean`, `Instances/OneDefectSpec.lean`, `Homogeneous.lean`
+(generalized), `PairDist.lean` (two lemmas), `Instances/HexShell.lean` (one theorem): 22 new
+declarations, all on axioms exactly `[propext, Classical.choice, Quot.sound]` (`scripts/axioms.sh`:
+528 clean, the 5 pre-existing declared Moser-cube purchases). The theorems the milestone was named
+for: **`not_colorable_of_forced_equal`** (the spindle, `k`-generic, homogeneity ∘ a `d`–`d`–`1`
+triangle), **`add_one_le_chromaticNumber_unitDistance_of_one_defect`** (one non-unit edge already
+suffices), and the spec **`four_le_chromaticNumber_plane_of_rhombus`** — the Moser bound from the
+rhombus alone through the abstract lemma, both entry points, with the `d < 1/2` red control. Free
+consumer: **`seven_le_chromaticNumber_hexShell_distances`**, χ(ℝ²;{1,√3,2}) ≥ 7 as a theorem about
+the distance graph (the M35 docstring's prose).
+
+### §R1. The seed (phase 1) — re-derived exactly; the certificate PRICED before emission
+
+* Re-derivation from the paper's data alone (`tools/twodist.py --seed`, exact rational arithmetic on
+  the 4-basis; every published count planted as an assertion): T 57, V 205, G 966 unit + 423
+  distance-2, H 214 / 1004 + 446, |AB|² = 25, K 426 / 2009 + 892, |BB'| = 1 — **all reproduce**.
+  Colouring counts up to palette (first-occurrence breaking, blocking-clause enumeration): G exactly
+  18, H exactly 35, `A = B` in all 35 — the paper's claims, independently.
+* Controls: K is 6-colourable (SAT 0.1 s); K's unit-edge part alone is 5-colourable (SAT 0.0 s) —
+  the distance-2 edges are load-bearing; G and H are 5-colourable (0.7 s / 0.6 s with breaking).
+* Port design (measured, not chosen): `A` lies on a triangle of `H` (neighbours 1 and 43 in H's
+  index), so the `Forces` gadget needs **three** cubes on ports `(A, a₁, a₂, B)` —
+  `B ∈ {a₁'s colour, a₂'s colour, fresh}` — each UNSAT in 21.7–23.1 s (pins only, no breaking, as
+  the kernel chain requires); the survivor pattern `A = B` is SAT in 0.5 s.
+* **The price, measured before any emission** (backward-trimmed, `emit_mask.read_lrat`): the three
+  cubes trim to 616,839 / 570,943 / 521,847 derived clauses carrying **24.0M / 22.9M / 19.8M hints**
+  (`--unsat` is WORSE: 773k/808k/606k clauses). At the standing kernel rate of 1.35 ms per hint that
+  is ~25 h of kernel time and ~600 MB of Lean source for the seed alone — M06's whole de Grey
+  certificate was 34M hints / 27.8 h / 396 MB. The alternative six-port design (`A`'s and `B`'s
+  triangles, 26 cubes) projects to ~78M hints from a five-cube sample; the size is intrinsic to `H`
+  at 214 vertices, not to the port design. **So the seed is being vertex-shrunk (ports protected,
+  `mechanism.greedy_1min`, necessity census) before emission** — the M07 move: the certificate is
+  priced on the core, not the paper's object.
+* Parts's `d = 2` family: under the reading `θ = 2·arccos 5/6`, strict radius `< √3`, the pool
+  `G19 ⊕ G19 ⊕ G7` has exactly **313 points** (his count) — but **no pair at `5/√3` is forced equal
+  there** (58 sampled colourings separate all 36 such pairs; and vertex deletion can never create a
+  forcing, so his 199-vertex reduction cannot come from this pool). His frame is not recoverable
+  from the prose; the explicit E–I object is the seed. Reported, not worked around.
