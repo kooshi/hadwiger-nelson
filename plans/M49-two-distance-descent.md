@@ -174,6 +174,50 @@ seed. Two independent kernel routes to the same headline (the "prove it twice" g
    exhibited 5-colourable (one literal colouring, `decide`) so `Forces` is not vacuous; the
    `d < 1/2` red control as an `example` by the triangle inequality.
 
+### §Cʺ. The obligation-modeling pass (2026-08-15) — the theory layer is PROVED, and it landed
+
+Run against the elaborator rather than on paper: every statement of §C/§Cʹ was written, its proof
+derived, and the modules built through `scripts/build.sh` in the same sitting (`DistanceGraph.lean`,
+`Homogeneous.lean` generalized in place, `OneDefect.lean` — the theory module is named for its
+payoff theorem, since `Instances/Spindle.lean` already names the Moser spindle — and
+`Instances/OneDefectSpec.lean`). `OneDefect.lean` elaborated first try; the audit reads
+`[propext, Classical.choice, Quot.sound]` on all seventeen new declarations. What the pass settled:
+
+1. **`exists_isometry_map_pair` loses its `x₀ ≠ y₀`.** The degenerate branch is a translation, so
+   `transport_pair` has no side condition at all — the strengthening was free and it removed the
+   `by_cases` from every consumer.
+2. **The spindle's proof is four lines** once the triangle is a lemma: `x := 0`, `y := (d : ℂ)`,
+   `z` from `exists_dist_eq_dist_eq`, then `C.valid` on the unit side against `h C x y` and
+   `h C x z`. The geometry lives entirely in `exists_dist_eq_dist_eq` (whose obligations are exactly
+   `Glue.sphere_inter_sphere`'s annulus bounds — `|d − 1| ≤ d` IS `1/2 ≤ d`) and its converse
+   `not_exists_dist_eq_dist_eq_of_lt_half` (the triangle inequality, three lines).
+3. **`forces_of_gadget` is one line** — `g.sound C (C.valid)` then `h`; colour symmetry is not
+   needed because `sound` quantifies over every proper colouring directly. Its `h` is a `decide`
+   over `Fin m → Fin k`, measured instant at `m = 2, k = 3` (the rhombus).
+4. **The unit graph appears exactly once**, at the end: every plane lemma is stated for
+   `distanceGraph ℂ D` and `add_one_le_chromaticNumber_unitDistance_of_forces` rewrites with
+   `unitDistance_eq_distanceGraph_singleton` (motive-correct after `revert`) — no unit-specific
+   duplicates of the theory. `Separated.plane`/`forced_pair_of_forced` survive as `D = {1}`
+   corollaries for their existing caller (`AritySpec`).
+5. **The spec closed both entry points**: `four_le_chromaticNumber_plane_of_rhombus` (the `Forces`
+   form, through `Gadget.rhombusGadget` and `forces_of_gadget` — which cross-checks against
+   `Forcer.rhombus_forces`, proved another way) and `_of_rhombus_defect` (the append form: the
+   rhombus plus its tip pair is `K₄`, refuted by `decide` over `3⁴`). Both give χ(ℝ²) ≥ 4 with no
+   spindle drawn. The `d = 1/4` red control is an `example`.
+6. **The obligation partition**: *prove* — everything above; *test* — the `#guard`/`example`s of
+   the instance module (phase 1) and the rhombus spec; *assume* — nothing: no theorem in the layer
+   carries a hypothesis a caller must discharge by hand beyond geometry the certificate produces
+   (`Valid`, `PairsAt`) and `1/2 ≤ d` / `1 ∈ D` / `0 ∉ D`, each `norm_num`.
+7. **The descent's invariants, stated as the tool's own obligations** (tools-side; nothing here is
+   trusted): the state is `(V, E₁, E₂, log)` with `¬ Colorable 5 (E₁ ++ E₂)` an invariant re-checked
+   after every step; `|E₂|` is the termination measure — it strictly decreases on every accepted
+   step and no step may add a distance-2 edge (a halo point's distance-2 pairs to `V` are NOT
+   edges; the classifier asserts it); a step is *accepted* only after (i) UNSAT of
+   `E₁ ∪ unit(P) ∪ E₂∖{e}` at k = 5, (ii) the 3-bit re-encode agreeing, (iii) `P` shrunk 1-minimal
+   with a necessity witness per survivor; the acceptance test is the exact condition (G21), not a
+   sufficient one, because the invariant *is* what is asked. Every row carries the pool
+   fingerprint and the cap; `unknown` is never folded.
+
 ## §D. The seeds, and what was measured before registration (§0e)
 
 **Exoo–Ismailescu 2020** (arXiv:1909.13177): points `[a,b,c,d] := ((a√3+b√11)/12, (c+d√33)/12)` —

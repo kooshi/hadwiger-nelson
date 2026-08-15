@@ -104,6 +104,30 @@ open HadwigerNelson
 #print axioms not_colorable_five_of_forced_pairs
 #print axioms six_le_chromaticNumber_plane_of_forced_pairs
 
+-- M49 — the distance graph of a set of forbidden distances, homogeneity made relation-generic
+-- over it, and the spindle as a theorem: `not_colorable_of_forced_equal` (forced-equal at any
+-- d >= 1/2 refutes k-colourability, homogeneity ∘ a d–d–1 triangle), the gadget→Forces bridge, and
+-- ONE DEFECT SUFFICES (`add_one_le_chromaticNumber_unitDistance_of_one_defect`: a (k+1)-chromatic
+-- plane graph with a single non-unit edge already bounds chi(R^2)). The spec re-proves the Moser
+-- bound through the abstract lemma from the rhombus alone.
+#print axioms unitDistance_eq_distanceGraph_singleton
+#print axioms chromaticNumber_unitDistance_le_distanceGraph
+#print axioms add_one_le_chromaticNumber_distanceGraph_edgeList
+#print axioms transport_pair
+#print axioms Separated.planeIn
+#print axioms Forces.planeIn
+#print axioms exists_dist_eq_dist_eq
+#print axioms not_exists_dist_eq_dist_eq_of_lt_half
+#print axioms not_colorable_of_forced_equal
+#print axioms add_one_le_chromaticNumber_of_forced_equal
+#print axioms forces_of_gadget
+#print axioms forces_of_not_colorable_append_single
+#print axioms add_one_le_chromaticNumber_unitDistance_of_forces
+#print axioms add_one_le_chromaticNumber_unitDistance_of_one_defect
+#print axioms rhombus_forces_of_gadget
+#print axioms four_le_chromaticNumber_plane_of_rhombus
+#print axioms four_le_chromaticNumber_plane_of_rhombus_defect
+
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
 
 #print axioms trianglePoints_dist
