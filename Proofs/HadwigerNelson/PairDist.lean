@@ -53,6 +53,39 @@ theorem UDCert.pairsAt_sound (c : UDCert n) (hd : c.denom ≠ 0) {ps : List (Fin
     ∀ p ∈ ps, dist (c.point p.1) (c.point p.2) = Real.sqrt (r : ℝ) :=
   fun p hp => dist_toPlane_eq_sqrt hd ((c.pairsAt_iff ps r).mp hv p hp)
 
+/-- **Soundness at a perfect square, without the root.** When the class distance is a natural
+number `m` — distance `2` is `PairsAt … (2 * 2)`, distance `5` is `PairsAt … (5 * 5)` — the
+conclusion is `dist = m` directly. Every caller of `pairsAt_sound` at `r = 4` had been rewriting
+`Real.sqrt 4 = 2` by hand (`Instances/HexShell.lean`, `Instances/Core122.lean`); this is that
+rewrite, once. -/
+theorem UDCert.pairsAt_sound_sq (c : UDCert n) (hd : c.denom ≠ 0) {ps : List (Fin n × Fin n)}
+    {m : ℕ} (hv : c.PairsAt ps (m * m) = true) :
+    ∀ p ∈ ps, dist (c.point p.1) (c.point p.2) = m := by
+  intro p hp
+  have h := c.pairsAt_sound hd hv p hp
+  rwa [show (((m : ℤ) * (m : ℤ) : ℤ) : ℝ) = (m : ℝ) ^ 2 by push_cast; ring,
+    Real.sqrt_sq (Nat.cast_nonneg m)] at h
+
+/-- **A two-distance certificate is a realization at distances in `D`.** The unit edges (`Valid`)
+and the class pairs (`PairsAt … r`) together realize the augmented edge list `c.edges ++ ps` in
+any `D` containing `1` and `√r` — stated on adjacency, which is exactly the hypothesis
+`Forces.planeIn`, `Separated.planeIn` and `distanceGraphHom` take, so no caller repeats the
+append split. -/
+theorem UDCert.adj_dist_mem (c : UDCert n) (hd : c.denom ≠ 0) (hv : c.Valid = true)
+    {ps : List (Fin n × Fin n)} {r : ℤ} (hp : c.PairsAt ps r = true) {D : Set ℝ}
+    (h1 : (1 : ℝ) ∈ D) (hr : Real.sqrt (r : ℝ) ∈ D) :
+    ∀ i j, (edgeGraph n (c.edges ++ ps)).Adj i j → dist (c.point i) (c.point j) ∈ D := by
+  have hunit := c.valid_sound hd hv
+  have hcls := c.pairsAt_sound hd hp
+  rintro i j ⟨-, hij | hji⟩
+  · rcases List.mem_append.mp hij with h | h
+    · exact (hunit (i, j) h : dist (c.point i) (c.point j) = 1) ▸ h1
+    · exact (hcls (i, j) h : dist (c.point i) (c.point j) = _) ▸ hr
+  · rw [dist_comm]
+    rcases List.mem_append.mp hji with h | h
+    · exact (hunit (j, i) h : dist (c.point j) (c.point i) = 1) ▸ h1
+    · exact (hcls (j, i) h : dist (c.point j) (c.point i) = _) ▸ hr
+
 /-! ## Specification
 
 `ValidOn` is the `r = 1` face of `PairsAt`; the spec pins the agreement on the smallest
@@ -75,6 +108,11 @@ example : dist (twoApart.point 0) (twoApart.point 1) = 2 := by
     (0, 1) (List.mem_singleton_self _)
   rwa [show Real.sqrt ((4 : ℤ) : ℝ) = 2 by
     rw [show ((4 : ℤ) : ℝ) = (2 : ℝ) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]] at h
+
+/-- The same, through `pairsAt_sound_sq` — no root to rewrite. -/
+example : dist (twoApart.point 0) (twoApart.point 1) = 2 :=
+  twoApart.pairsAt_sound_sq (by decide) (ps := [(0, 1)]) (m := 2) (by decide)
+    (0, 1) (List.mem_singleton_self _)
 
 end Spec
 

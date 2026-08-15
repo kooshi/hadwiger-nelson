@@ -89,7 +89,7 @@ theorem four_le_chromaticNumber_plane_of_rhombus_defect :
 /-- **Red control: `1/2 ≤ d` is load-bearing.** At `d = 1/4` the two circles miss and no
 `d`–`d`–`1` triangle exists, so the spindle theorem cannot be applied there. -/
 example : ¬ ∃ z : ℂ, dist 0 z = 1 / 4 ∧ dist ((1 / 4 : ℝ) : ℂ) z = 1 :=
-  not_exists_dist_eq_dist_eq_of_lt_half
+  not_exists_dist_eq_and_dist_eq_one_of_lt_half
     (by rw [dist_zero_left, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by norm_num)])
     (by norm_num)
 

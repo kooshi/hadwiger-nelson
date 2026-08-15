@@ -119,6 +119,58 @@ theorem add_one_le_chromaticNumber_distanceGraph_edgeList [MetricSpace V] {n k :
   · exact hp (i, j) hij
   · rw [dist_comm]; exact hp (j, i) hji
 
+/-! ## What a distance-graph bound says about unit-distance colourings
+
+A proper colouring of the unit-distance graph that never repeats a colour across any distance in
+`D ∖ {1}` is a proper colouring of `distanceGraph V D`. So a bound `χ(V; D) > k` reads two ways for
+the plane's own graph: every `k`-colouring has a monochromatic pair at some distance in `D ∖ {1}`
+(a *pigeonhole* — Act One of the six-colour programme with the class `D ∖ {1}`), and any gadget
+forcing every such pair apart at `k` colours refutes `k`-colourability of the plane. Stated for a
+general `D`, then for the programme's shape `{1, d}`. -/
+
+/-- **The pigeonhole reading.** If the distance graph of `D` is not `k`-colourable, every proper
+`k`-colouring of the unit-distance graph repeats a colour on some pair at a distance in `D` other
+than `1`. -/
+theorem exists_mono_pair_of_not_colorable_distanceGraph [MetricSpace V] {D : Set ℝ} {k : ℕ}
+    (h : ¬ (distanceGraph V D).Colorable k) (C : (unitDistance V).Coloring (Fin k)) :
+    ∃ x y : V, dist x y ∈ D ∧ dist x y ≠ 1 ∧ C x = C y := by
+  by_contra hcon
+  push Not at hcon
+  refine h ⟨Coloring.mk C fun {x y} hxy => ?_⟩
+  by_cases h1 : dist x y = 1
+  · exact C.valid (unitDistance_adj.mpr h1)
+  · exact hcon x y hxy.2 h1
+
+/-- **The kill reading.** If the distance graph of `D` is not `k`-colourable and some finite gadget
+separates, in every `k`-colouring of the plane, every pair at every distance of `D` other than `1`,
+then the plane itself is not `k`-colourable. -/
+theorem not_colorable_unitDistance_of_separated [MetricSpace V] {D : Set ℝ} {k : ℕ}
+    (h : ¬ (distanceGraph V D).Colorable k)
+    (hsep : ∀ (C : (unitDistance V).Coloring (Fin k)) (x y : V),
+      dist x y ∈ D → dist x y ≠ 1 → C x ≠ C y) :
+    ¬ (unitDistance V).Colorable k := by
+  rintro ⟨C⟩
+  obtain ⟨x, y, hD, h1, heq⟩ := exists_mono_pair_of_not_colorable_distanceGraph h C
+  exact hsep C x y hD h1 heq
+
+/-- The pigeonhole reading at the programme's shape `D = {1, d}`: a mono pair at distance `d`. -/
+theorem exists_mono_pair_of_not_colorable_two_distance [MetricSpace V] {d : ℝ} {k : ℕ}
+    (h : ¬ (distanceGraph V {1, d}).Colorable k) (C : (unitDistance V).Coloring (Fin k)) :
+    ∃ x y : V, dist x y = d ∧ C x = C y := by
+  obtain ⟨x, y, hD, h1, heq⟩ := exists_mono_pair_of_not_colorable_distanceGraph h C
+  rcases Set.mem_insert_iff.mp hD with h | h
+  · exact absurd h h1
+  · exact ⟨x, y, Set.mem_singleton_iff.mp h, heq⟩
+
+/-- The kill reading at `D = {1, d}`: a virtual edge at distance `d` alone closes the plane. -/
+theorem not_colorable_unitDistance_of_forced_distinct [MetricSpace V] {d : ℝ} {k : ℕ}
+    (h : ¬ (distanceGraph V {1, d}).Colorable k)
+    (hsep : ∀ (C : (unitDistance V).Coloring (Fin k)) (x y : V), dist x y = d → C x ≠ C y) :
+    ¬ (unitDistance V).Colorable k := by
+  rintro ⟨C⟩
+  obtain ⟨x, y, hd, heq⟩ := exists_mono_pair_of_not_colorable_two_distance h C
+  exact hsep C x y hd heq
+
 /-! ## Specification — the definitions say what they mean -/
 
 -- The unit case really is a special case: on the real line, `{1}` joins `0` and `1`, and `{0}` joins

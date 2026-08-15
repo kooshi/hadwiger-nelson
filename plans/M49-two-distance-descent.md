@@ -84,7 +84,7 @@ theorem Forces.plane / Separated.plane for distanceGraph
 
 **`Proofs/HadwigerNelson/Spindle.lean`** — the Moser argument as a theorem, `k`-generic.
 ```lean
-theorem exists_dist_eq_dist_eq {x y : ℂ} {d : ℝ} (hxy : dist x y = d) (hd : 1/2 ≤ d) :
+theorem exists_dist_eq_and_dist_eq_one {x y : ℂ} {d : ℝ} (hxy : dist x y = d) (hd : 1/2 ≤ d) :
     ∃ z, dist x z = d ∧ dist y z = 1                      -- Glue.sphere_inter_sphere at radii d, 1
 theorem not_colorable_of_forced_equal {D : Set ℝ} (h1 : (1:ℝ) ∈ D) {k : ℕ} {d : ℝ} (hd : 1/2 ≤ d)
     (h : ∀ (C : (distanceGraph ℂ D).Coloring (Fin k)) (x y : ℂ), dist x y = d → C x = C y) :
@@ -187,10 +187,10 @@ payoff theorem, since `Instances/Spindle.lean` already names the Moser spindle �
    `transport_pair` has no side condition at all — the strengthening was free and it removed the
    `by_cases` from every consumer.
 2. **The spindle's proof is four lines** once the triangle is a lemma: `x := 0`, `y := (d : ℂ)`,
-   `z` from `exists_dist_eq_dist_eq`, then `C.valid` on the unit side against `h C x y` and
-   `h C x z`. The geometry lives entirely in `exists_dist_eq_dist_eq` (whose obligations are exactly
+   `z` from `exists_dist_eq_and_dist_eq_one`, then `C.valid` on the unit side against `h C x y` and
+   `h C x z`. The geometry lives entirely in `exists_dist_eq_and_dist_eq_one` (whose obligations are exactly
    `Glue.sphere_inter_sphere`'s annulus bounds — `|d − 1| ≤ d` IS `1/2 ≤ d`) and its converse
-   `not_exists_dist_eq_dist_eq_of_lt_half` (the triangle inequality, three lines).
+   `not_exists_dist_eq_and_dist_eq_one_of_lt_half` (the triangle inequality, three lines).
 3. **`forces_of_gadget` is one line** — `g.sound C (C.valid)` then `h`; colour symmetry is not
    needed because `sound` quantifies over every proper colouring directly. Its `h` is a `decide`
    over `Fin m → Fin k`, measured instant at `m = 2, k = 3` (the rhombus).
@@ -217,6 +217,57 @@ payoff theorem, since `Instances/Spindle.lean` already names the Moser spindle �
    with a necessity witness per survivor; the acceptance test is the exact condition (G21), not a
    sufficient one, because the invariant *is* what is asked. Every row carries the pool
    fingerprint and the cap; `unknown` is never folded.
+
+### §Cʹʹʹ. The experience-modeling pass (2026-08-15) — the surface a caller meets
+
+Walked as the phase-1 instance module will walk it (`Forces` from a gadget → the plane → the
+headline → the from-below corollaries) and as the tool's row schema will be read by a fresh session.
+
+1. **Two preambles every two-distance caller would repeat were folded into `PairDist.lean`:**
+   `UDCert.pairsAt_sound_sq` (class distance a natural number `m`, `PairsAt … (m*m)` gives
+   `dist = m` — every existing caller of `pairsAt_sound` at `r = 4` was rewriting `√4 = 2` by hand)
+   and `UDCert.adj_dist_mem` (`Valid` + `PairsAt … r` ⟹ every adjacency of the augmented list
+   `c.edges ++ ps` is realized in any `D ∋ 1, √r` — stated on adjacency, which is exactly the
+   `hq` of `Forces.planeIn`/`Separated.planeIn`/`distanceGraphHom`, so the append split is written
+   once). `PairDist.lean` is not upstream of any generated module; its dependents rebuilt in minutes.
+2. **The from-below corollaries are general lemmas, not instance-local proofs:** in
+   `DistanceGraph.lean`, `exists_mono_pair_of_not_colorable_distanceGraph` (a unit colouring
+   avoiding every mono pair at `D ∖ {1}` IS a `D`-colouring — the pigeonhole reading) and
+   `not_colorable_unitDistance_of_separated` (the kill reading), with the programme-shaped
+   `{1, d}` instances `exists_mono_pair_of_not_colorable_two_distance` and
+   `not_colorable_unitDistance_of_forced_distinct`. So the instance module's "Act One with a single
+   class" and "the halved requirement" are each one application.
+3. **Names transcribe statements:** the triangle lemma is `exists_dist_eq_and_dist_eq_one` (its
+   converse `not_exists_dist_eq_and_dist_eq_one_of_lt_half`); the plane forms are
+   `Separated.planeIn` / `Forces.planeIn` (dot-notation from the gadget's own proof: `hf.planeIn q
+   hq h0 hd C hxy`), keeping `Separated.plane` as the unit-graph corollary its existing caller uses.
+   The one-defect theorem keeps the house's long conventional name
+   (`add_one_le_chromaticNumber_unitDistance_of_one_defect`, beside `_edgeList`).
+4. **The instance module's surface (phase 1), fixed now:** `oneTwo : UDCert 214`, `oneTwo_valid`,
+   `oneTwoPairs` (446), `oneTwo_pairs_dist : PairsAt oneTwoPairs (2*2)`,
+   `oneTwo_pairs_complete` (decide over all ordered pairs — "these are ALL the distance-2 pairs"),
+   `oneTwoAB : PairsAt [(iA, iB)] (5*5)`, `oneTwoAug := oneTwo.edges ++ oneTwoPairs`,
+   `oneTwo_forces : Forces (edgeGraph 214 oneTwoAug) 5 iA iB` (via `forces_of_gadget`),
+   `oneTwo_colorable_five` (a literal 5-colouring, so `Forces` is not vacuous),
+   `six_le_chromaticNumber_two_distance : 6 ≤ (distanceGraph ℂ {1, 2}).chromaticNumber`,
+   `oneTwo_plane : ∀ C : (unitDistance ℂ).Coloring (Fin 5), ∃ x y, dist x y = 2 ∧ C x = C y`,
+   `six_le_chromaticNumber_plane_of_forced_distinct_two`, and the controls (`#guard`s, the moved
+   vertex failing `Valid` and `PairsAt`, `oneTwoAug_colorable_six` red, unit-part-5-colourable
+   red). Plus the free consumer: `seven_le_chromaticNumber_hexShell_distances` in `HexShell.lean`.
+5. **`tools/twodist.py`'s surface (the row contract, so a fresh reader cannot misread it):**
+   * every row: `kind`, `stage_fingerprint`, `pool_fingerprint` (or `null`), `cap`, `outcome ∈
+     {sat, unsat, unknown}`, `claim_scope` prose; `unknown` never folds into anything;
+   * removal rows: `verdict ∈ {removed, candidate-removal, refused, unknown}` — `removed` REQUIRES the
+     three fields `unsat`, `reencode: unsat`, `halo: {one_minimal: true, witnesses: n}`; a writer
+     lacking any of them raises rather than downgrading silently (M48's `check_recordable`
+     pattern);
+   * the dial is always named **`mu_upper`**, never `mu`, and a `stall` row carries the sentence
+     *"an upper bound on μ within the probed pools; not a bound on μ"* in the row itself;
+   * **`mu_upper ≤ 1` at k = 5 does not write a summary — it raises the HALT-AND-VERIFY banner**
+     and exits, so the jackpot cannot be recorded as an ordinary row;
+   * `--self-test` plants: a fake removal without the triple must be refused; a moved point must
+     fail classification; the rhombus at k = 3 must read forced-equal; a shuffled edge list must
+     keep its fingerprint.
 
 ## §D. The seeds, and what was measured before registration (§0e)
 

@@ -113,11 +113,15 @@ open HadwigerNelson
 #print axioms unitDistance_eq_distanceGraph_singleton
 #print axioms chromaticNumber_unitDistance_le_distanceGraph
 #print axioms add_one_le_chromaticNumber_distanceGraph_edgeList
+#print axioms exists_mono_pair_of_not_colorable_two_distance
+#print axioms not_colorable_unitDistance_of_forced_distinct
+#print axioms UDCert.pairsAt_sound_sq
+#print axioms UDCert.adj_dist_mem
 #print axioms transport_pair
 #print axioms Separated.planeIn
 #print axioms Forces.planeIn
-#print axioms exists_dist_eq_dist_eq
-#print axioms not_exists_dist_eq_dist_eq_of_lt_half
+#print axioms exists_dist_eq_and_dist_eq_one
+#print axioms not_exists_dist_eq_and_dist_eq_one_of_lt_half
 #print axioms not_colorable_of_forced_equal
 #print axioms add_one_le_chromaticNumber_of_forced_equal
 #print axioms forces_of_gadget

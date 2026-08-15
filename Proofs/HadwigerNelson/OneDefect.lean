@@ -18,7 +18,7 @@ The classical construction — place a copy of the gadget, rotate it about one e
 far endpoints are a unit apart — is *not* a step of the proof. Homogeneity (`transport_pair`)
 already turns one forced pair into every pair at that distance, so both legs of the triangle are
 forced equal without any copy being placed. The theorem is **homogeneity ∘ a triangle**, and the
-whole of its geometry is the existence of the triangle (`exists_dist_eq_dist_eq`, from
+whole of its geometry is the existence of the triangle (`exists_dist_eq_and_dist_eq_one`, from
 `Glue.sphere_inter_sphere` at radii `d` and `1`; its converse for `d < 1/2` is the triangle
 inequality and is the red control).
 
@@ -48,7 +48,7 @@ open SimpleGraph
 /-- **A `d`–`d`–`1` triangle exists at every `d ≥ 1/2`**: given `x, y` at distance `d`, there is `z`
 at distance `d` from `x` and `1` from `y`. The circle of radius `d` about `x` and the unit circle
 about `y` meet exactly when `|d − 1| ≤ d ≤ d + 1`, i.e. `1/2 ≤ d` — `Glue.sphere_inter_sphere`. -/
-theorem exists_dist_eq_dist_eq {x y : ℂ} {d : ℝ} (hxy : dist x y = d) (hd : 1 / 2 ≤ d) :
+theorem exists_dist_eq_and_dist_eq_one {x y : ℂ} {d : ℝ} (hxy : dist x y = d) (hd : 1 / 2 ≤ d) :
     ∃ z : ℂ, dist x z = d ∧ dist y z = 1 := by
   have hpos : 0 < d := by linarith
   have hne : x ≠ y := fun h => by rw [h, dist_self] at hxy; exact hpos.ne hxy
@@ -64,7 +64,7 @@ theorem exists_dist_eq_dist_eq {x y : ℂ} {d : ℝ} (hxy : dist x y = d) (hd : 
 /-- **The red control: below `1/2` there is no such triangle** — `dist y z ≤ dist y x + dist x z =
 2d < 1`. So `1/2 ≤ d` in the spindle theorem is load-bearing, and it is exactly the geometric
 content the theorem carries. -/
-theorem not_exists_dist_eq_dist_eq_of_lt_half {x y : ℂ} {d : ℝ} (hxy : dist x y = d)
+theorem not_exists_dist_eq_and_dist_eq_one_of_lt_half {x y : ℂ} {d : ℝ} (hxy : dist x y = d)
     (hd : d < 1 / 2) : ¬ ∃ z : ℂ, dist x z = d ∧ dist y z = 1 := by
   rintro ⟨z, hxz, hyz⟩
   have := dist_triangle y x z
@@ -84,7 +84,7 @@ theorem not_colorable_of_forced_equal {D : Set ℝ} (h1 : (1 : ℝ) ∈ D) {k : 
   rintro ⟨C⟩
   have hxy : dist (0 : ℂ) (d : ℂ) = d := by
     rw [dist_zero_left, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by linarith)]
-  obtain ⟨z, hxz, hyz⟩ := exists_dist_eq_dist_eq hxy hd
+  obtain ⟨z, hxz, hyz⟩ := exists_dist_eq_and_dist_eq_one hxy hd
   have hne : (d : ℂ) ≠ z := fun heq => by rw [heq, dist_self] at hyz; exact zero_ne_one hyz
   have hadj : (distanceGraph ℂ D).Adj (d : ℂ) z := ⟨hne, hyz ▸ h1⟩
   exact C.valid hadj ((h C _ _ hxy).symm.trans (h C _ _ hxz))
