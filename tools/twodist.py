@@ -528,7 +528,7 @@ def pool_up(base_pts, centres):
 
 
 def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: int, cap: float,
-                 shrink_halo: bool = True) -> dict:
+                 shrink_halo: bool = True, framing="unsat") -> dict:
     """ONE descent question: with the halo `pool_pts` added (unit edges only — a halo point's
     distance-2 pairs are NOT edges), is the object with the target distance-2 edge REMOVED still
     not k-colourable? Returns the row (verdict per the contract). On UNSAT the halo is shrunk
@@ -547,8 +547,21 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
     E = ue + tp
     fp_stage = fingerprint(nb, list(unit_e) + list(two_e))
     fp_pool = fingerprint(n, ue)
-    st, _, dt = refute(n, E, k, cap=cap)
-    row = {"kind": "removal", "k": k, "target": list(target), "stage_fingerprint": fp_stage,
+    # the invariant: "not k-colourable" (framing "unsat"), or "A = B forced" (framing ("forced", A, B))
+    if framing == "unsat":
+        ask = lambda Es, c: refute(n, Es, k, cap=c)[0]
+        reenc = lambda Eu, Et, c: rigidity.reencode_confirm(n, Eu, k, Et, cap=c)["outcome"]
+    else:
+        _, fA, fB = framing
+        ask = lambda Es, c: ("unsat" if forces_with(n, [e for e in Es if e in set(ue)],
+                                                     [e for e in Es if e not in set(ue)], fA, fB, c)
+                             else "sat")
+        reenc = lambda Eu, Et, c: rigidity.reencode_confirm(n, Eu, k, Et + [(fA, fB)], cap=c)["outcome"]
+    t0 = time.time()
+    st = ask(E, cap)
+    dt = time.time() - t0
+    row = {"kind": "removal", "k": k, "framing": "unsat" if framing == "unsat" else "forced",
+           "target": list(target), "stage_fingerprint": fp_stage,
            "pool_fingerprint": fp_pool, "pool_size": len(pool_pts), "cap": cap, "outcome": st,
            "seconds": round(dt, 1), "claim_scope": "one distance-2 edge removed, unit halo added; "
            "unsat = the halo does that edge's job in context (a removal); sat = it does not, for THIS "
@@ -557,25 +570,22 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
         row["verdict"] = "refused" if st == "sat" else "unknown"
         return row
     row["verdict"] = "candidate-removal"
-    if k == 5:
-        r = rigidity.class_avoid_binary3(n, ue, tp, cap=cap * 4)
-        row["reencode"] = r["outcome"]
-    else:
-        row["reencode"] = "not-run-at-k!=5"
+    # the second encoding: 2-bit at k = 4, 3-bit at k = 5 (rigidity.reencode_confirm dispatches;
+    # any other k is a SystemExit there, which is right — no second encoding exists for it)
+    row["reencode"] = reenc(ue, tp, cap * 4)
     if shrink_halo:
         halo_ids = list(range(nb, n))
         def fired(keep):
             ks = set(keep) | set(range(nb))
             Es = [e for e in ue if e[0] in ks and e[1] in ks] + tp
-            s2, _, _ = refute(n, Es, k, cap=cap)
-            return s2 == "unsat", {}
+            return ask(Es, cap) == "unsat", {}
         core, dels, passes = mechanism.greedy_1min(halo_ids, list(reversed(halo_ids)), fired)
         wit = 0
         unknown = 0
         for v in core:
             keep = set(core) - {v} | set(range(nb))
             Es = [e for e in ue if e[0] in keep and e[1] in keep] + tp
-            s3, col, _ = refute(n, Es, k, cap=cap * 4)
+            s3 = ask(Es, cap * 4)
             if s3 == "sat":
                 wit += 1
             elif s3 == "unknown":
@@ -583,10 +593,75 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
             else:
                 raise SystemExit("halo shrink invariant violated: a survivor is deletable")
         row["halo"] = {"one_minimal": unknown == 0, "size": len(core), "witnesses": wit,
-                       "unknown": unknown, "passes": passes}
-        if unknown == 0 and (k != 5 or row["reencode"] == "unsat"):
+                       "unknown": unknown, "passes": passes, "ids": core}
+        if unknown == 0 and row["reencode"] == "unsat":
             row["verdict"] = "removed"
     return row
+
+
+def descend_run(label: str, pts, ue, two_e, k: int, cap: float, path: Path,
+                pool_kinds=("seam", "up"), max_steps: int = 10000, log=print, framing="unsat") -> dict:
+    """The sequential descent: repeatedly try to remove one distance-2 edge with a unit halo drawn
+    from the pools (in order), COMMIT each removal (the halo's 1-minimal core joins the object), and
+    stop when a full scan removes nothing — the stall. Every ask is a row; the stall row carries
+    `mu_upper` (an upper bound on μ within the probed pools) and never a `mu`. Order of attack:
+    edges farthest from the object's centroid first (a registered, arbitrary, deterministic order)."""
+    import closure as CL
+    pts = list(pts)
+    ue = list(ue)
+    two_e = list(two_e)
+    fp0 = fingerprint(len(pts), ue + two_e)
+    steps = 0
+    history = []
+    while steps < max_steps:
+        removed_this_scan = False
+        cx = sum(CL.approx(p)[0] for p in pts) / len(pts)
+        cy = sum(CL.approx(p)[1] for p in pts) / len(pts)
+        def far(e):
+            a, b = CL.approx(pts[e[0]]), CL.approx(pts[e[1]])
+            return -(((a[0] + b[0]) / 2 - cx) ** 2 + ((a[1] + b[1]) / 2 - cy) ** 2)
+        for e in sorted(two_e, key=far):
+            centres = [pts[e[0]], pts[e[1]]]
+            for kind in pool_kinds:
+                halo, fus = (pool_seam if kind == "seam" else pool_up)(pts, centres)
+                row = descend_step(pts, ue, two_e, e, halo, k, cap, framing=framing)
+                row.update({"label": label, "step": steps, "pool": kind, "pool_new_points": len(halo),
+                            "fusions": fus, "stage0_fingerprint": fp0,
+                            "two_edges_before": len(two_e)})
+                if row["verdict"] == "removed":
+                    core_ids = row["halo"]["ids"]
+                    nb = len(pts)
+                    newpts = [halo[i - nb] for i in core_ids]
+                    pts = pts + newpts
+                    ue = closure_unit_edges(pts)
+                    two_e = [f for f in two_e if f != e]
+                    row["mu_upper"] = len(two_e)
+                    row["object_after"] = {"n": len(pts), "unit": len(ue), "two": len(two_e)}
+                    steps += 1
+                    removed_this_scan = True
+                    log(f"[{label}] step {steps}: removed {e} with {kind} halo of {len(newpts)} pts "
+                        f"→ n={len(pts)}, unit={len(ue)}, mu_upper={len(two_e)}")
+                    record(path, row)
+                    history.append(row)
+                    break
+                else:
+                    record(path, row)
+                    log(f"[{label}] edge {e} pool {kind} ({len(halo)} pts): {row['verdict']} "
+                        f"({row['outcome']}, {row['seconds']}s)")
+            if removed_this_scan:
+                break
+        if not removed_this_scan:
+            break
+    stall = {"kind": "stall", "label": label, "k": k, "framing": "unsat" if framing == "unsat" else "forced",
+             "stage_fingerprint": fingerprint(len(pts), ue + two_e),
+             "stage0_fingerprint": fp0, "pool_fingerprint": None, "cap": cap, "outcome": "unsat",
+             "mu_upper": len(two_e), "steps": steps, "n": len(pts), "unit": len(ue),
+             "pools": list(pool_kinds),
+             "claim_scope": "an upper bound on μ within the probed pools; not a bound on μ — the "
+             "descent stalled: no remaining distance-2 edge was replaceable by any listed pool at this cap"}
+    record(path, stall)
+    log(f"[{label}] STALL at mu_upper={len(two_e)} after {steps} removals (n={len(pts)})")
+    return {"pts": pts, "unit": ue, "two": two_e, "steps": steps, "history": history}
 
 
 def load_core122():
@@ -635,6 +710,70 @@ def edge_critical(n: int, unit_e, two_e, k: int, cap: float, seed: int = 0, log=
             "necessity": {"complete": unk == 0, "witnesses": wit, "unknown": unk}, "seed": seed}
 
 
+def forces_with(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> bool:
+    """A = B forced on (unit ∪ two_sub) at five colours: `A ≠ B` as clauses (palette-invariant) with
+    first-occurrence breaking. `unknown` reads as NOT forced."""
+    cls = coloring.base_clauses(n, list(unit_e) + list(two_sub), K) + rigidity.amo_clauses(n, K)
+    cls += _brk_full(n, K, _degree_order(n, list(unit_e) + list(two_sub)))
+    cls += [[-coloring.var(iA, c, K), -coloring.var(iB, c, K)] for c in range(K)]
+    st, _ = forcer._solve(cls, n * K, cap)
+    return st == "unsat"
+
+
+def phase_seed_edges(cap: float = 60.0, orders: int = 2) -> None:
+    """Phase 2: 1-minimal subsets of H's distance-2 edges that keep A = B forced (mu_upper for the
+    forced-pair carrier), by greedy over seeded orders with the necessity census."""
+    import mechanism
+    H = ei_H()
+    cH = classify(H)
+    n = len(H)
+    iA, iB = H.index(EI_A), H.index(EI_B)
+    E1, E2 = cH[1], cH[4]
+    path = BUILD / "m49-seed-edges.json"
+    fp = fingerprint(n, E1 + E2)
+    assert forces_with(n, E1, E2, iA, iB, cap), "H does not force A = B under cap"
+    for sd in range(orders):
+        order = list(range(len(E2)))
+        random.Random(sd).shuffle(order)
+        core, dels, passes = mechanism.greedy_1min(list(range(len(E2))), order,
+            lambda sub: (forces_with(n, E1, [E2[i] for i in sub], iA, iB, cap), {}))
+        wit = unk = 0
+        for i in core:
+            ok = forces_with(n, E1, [E2[j] for j in core if j != i], iA, iB, cap * 4)
+            if ok:
+                raise SystemExit("edge-critical invariant violated on the seed")
+            wit += 1
+        ess = sorted(core)
+        row = {"kind": "edge-critical", "k": 5, "stage_fingerprint": fp, "pool_fingerprint": None,
+               "cap": cap, "outcome": "unsat", "mu_upper": len(ess), "seed": sd, "passes": passes,
+               "essential": [list(E2[i]) for i in ess],
+               "necessity": {"complete": True, "witnesses": wit, "unknown": unk},
+               "claim_scope": "a 1-minimal distance-2 edge subset of H keeping A = B forced at five "
+               "colours; mu_upper is an upper bound on the minimum, from one greedy order"}
+        record(path, row)
+        print(f"order {sd}: mu_upper {len(ess)} of {len(E2)} (passes {passes})", flush=True)
+
+
+def phase_descend5(cap: float = 120.0, pools=("seam", "up")) -> None:
+    """Phase 4: the k = 5 descent on the seed — H's essential distance-2 edges (from
+    build/m49-seed-edges.json, the smallest order), invariant "A = B stays forced", pools seam then
+    one-field-up about each target's endpoints. Jackpot at mu_upper = 0 (the spindle theorem)."""
+    H = ei_H()
+    cH = classify(H)
+    n = len(H)
+    iA, iB = H.index(EI_A), H.index(EI_B)
+    art = json.loads((BUILD / "m49-seed-edges.json").read_text())
+    rows = [r for r in art["rows"] if r["kind"] == "edge-critical"]
+    best = min(rows, key=lambda r: r["mu_upper"])
+    ess = [tuple(e) for e in best["essential"]]
+    pts = [to_closure(p) for p in H]
+    ue = closure_unit_edges(pts)
+    tp = closure_two_pairs(pts)
+    assert set(ue) == set(cH[1]) and set(tp) == set(cH[4]), "closure-currency re-classification disagrees"
+    path = BUILD / "m49-descent5.json"
+    descend_run("seed-k5", pts, ue, ess, 5, cap, path, pool_kinds=pools, framing=("forced", iA, iB))
+
+
 def phase_calib122(cap: float = 60.0, orders: int = 2) -> None:
     """Phase 3: the k = 4 calibration on the 122-core — essential distance-2 edges (P4a), then the
     seam halo (P4b: predicted to remove NONE) and the one-field-up halo (P4c) on each essential
@@ -660,19 +799,7 @@ def phase_calib122(cap: float = 60.0, orders: int = 2) -> None:
         if best is None or r["mu_upper"] < best["mu_upper"]:
             best = r
     ess = [tuple(e) for e in best["essential"]]
-    two_e = ess
-    # halos about each essential edge's endpoints
-    for e in ess:
-        centres = [pts[e[0]], pts[e[1]]]
-        for label, mk in (("seam", pool_seam), ("up", pool_up)):
-            halo, fus = mk(pts, centres)
-            row = descend_step(pts, ue, two_e, e, halo, 4, cap)
-            row.update({"pool": label, "fusions": fus, "mu_upper": len(two_e) - (1 if row["verdict"] == "removed" else 0)})
-            record(path, row)
-            print(f"  edge {e} pool {label} ({len(halo)} pts): {row['verdict']} "
-                  f"({row['outcome']}, {row['seconds']}s)", flush=True)
-            if row["verdict"] == "removed":
-                break
+    descend_run("core122-k4", pts, ue, ess, 4, cap, path, pool_kinds=("seam", "up"))
 
 
 # ---------------------------------------------------------------- rows
@@ -694,7 +821,7 @@ def record(path: Path, row: dict) -> None:
             raise SystemExit("a `removed` row needs outcome unsat + reencode unsat + a 1-minimal halo "
                              "with necessity witnesses; downgrade the verdict instead")
     if row.get("kind") in ("stall", "removal") and row.get("mu_upper") is not None and \
-            row.get("k", K) == 5 and row["mu_upper"] <= 1:
+            row.get("k", K) == 5 and row["mu_upper"] <= (0 if row.get("framing") == "forced" else 1):
         raise Jackpot("μ_upper ≤ 1 at five colours: χ(ℝ²) ≥ 6 — HALT AND VERIFY: re-derive the graph "
                       "independently, re-refute in a second encoding, report before interpreting")
     art = json.loads(path.read_text()) if path.exists() else {"schema": "m49 v1", "rows": []}
@@ -842,6 +969,10 @@ if __name__ == "__main__":
         phase_emit(cap)
     elif "--count" in args:
         phase_count(cap)
+    elif "--descend5" in args:
+        phase_descend5(cap)
+    elif "--seed-edges" in args:
+        phase_seed_edges(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--orders"), 2)))
     elif "--calib122" in args:
         phase_calib122(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--orders"), 2)))
     elif "--core" in args:
