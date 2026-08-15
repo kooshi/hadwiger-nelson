@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.PairDist
 import Proofs.HadwigerNelson.Pigeonhole
+import Proofs.HadwigerNelson.DistanceGraph
 
 /-!
 # The hexagonal-shell pigeonhole at up to six colours (M35 L1)
@@ -188,11 +189,56 @@ theorem hexShell_plane5 (C : (unitDistance ℂ).Coloring (Fin 5)) :
 
 /-- **The six-colour reading**: every proper 6-colouring of the plane has a mono pair at
 distance `√3` or `2` — equivalently, the `{1, √3, 2}` three-distance graph of the plane is
-not 6-colourable: **χ(ℝ²; {1, √3, 2}) ≥ 7**. Elementary and presumably folklore; what is new
-is the formalization, not the compulsion. -/
+not 6-colourable: **χ(ℝ²; {1, √3, 2}) ≥ 7**, stated as a theorem about that graph in
+`seven_le_chromaticNumber_hexShell_distances` below. Elementary and presumably folklore; what is
+new is the formalization, not the compulsion. -/
 theorem hexShell_plane6 (C : (unitDistance ℂ).Coloring (Fin 6)) :
     ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
   hexShell_plane (by norm_num) C
+
+/-! ### The three-distance plane, as a theorem rather than a docstring (M49)
+
+`hexShell_plane6`'s docstring reads "equivalently, χ(ℝ²; {1, √3, 2}) ≥ 7". Until M49 no such graph
+existed in the repository; with `distanceGraph` it does, and the claim is a two-line consequence
+of the same seven-point clique through the edge-list reduction. -/
+
+/-- The augmented shell is complete: every two of the seven points are joined by a unit edge, a
+`√3`-pair or a diameter. -/
+theorem edgeGraph_hexShellAug_eq_top : edgeGraph 7 (hexShellEdges ++ hexShellPairs) = ⊤ := by
+  ext i j
+  simp only [top_adj]
+  constructor
+  · exact fun h => h.1
+  · exact fun h => ⟨h, hexShell_clique i j h⟩
+
+theorem hexShellAug_not_colorable_six : ¬ (edgeGraph 7 (hexShellEdges ++ hexShellPairs)).Colorable 6 := by
+  rw [edgeGraph_hexShellAug_eq_top, ← chromaticNumber_le_iff_colorable, chromaticNumber_top,
+    Fintype.card_fin]
+  decide
+
+/-- **χ(ℝ²; {1, √3, 2}) ≥ 7.** The plane's graph with three forbidden distances — `1`, `√3` and `2` —
+needs at least seven colours: the closed first shell of the unit triangular lattice is a `K₇` of it.
+Elementary and presumably folklore; the formalization is ours. -/
+theorem seven_le_chromaticNumber_hexShell_distances :
+    ((6 + 1 : ℕ) : ℕ∞) ≤ (distanceGraph ℂ {1, Real.sqrt 3, 2}).chromaticNumber := by
+  refine add_one_le_chromaticNumber_distanceGraph_edgeList (hexShellEdges ++ hexShellPairs)
+    hexShell.point ?_ ?_ hexShellAug_not_colorable_six
+  · have hunit := hexShell.valid_sound (by decide) hexShell_valid
+    have h3 := hexShell.pairsAt_sound (by decide) hexShell_p3_dist
+    have h4 := hexShell.pairsAt_sound_sq (by decide) (m := 2) hexShell_p4_dist
+    intro e he
+    rcases List.mem_append.mp he with h | h
+    · have h1 : dist (hexShell.point e.1) (hexShell.point e.2) = 1 := hunit e h
+      rw [h1]; simp
+    · rcases List.mem_append.mp h with h' | h'
+      · rw [h3 e h']; simp
+      · rw [h4 e h']; simp
+  · -- `0 ∉ {1, √3, 2}`
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff, not_or]
+    refine ⟨by norm_num, ?_, by norm_num⟩
+    intro h
+    have := Real.sqrt_pos.mpr (by norm_num : (0 : ℝ) < 3)
+    linarith
 
 /-! ### What Act Two of the six-colour programme must supply
 

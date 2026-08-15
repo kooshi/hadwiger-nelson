@@ -131,6 +131,7 @@ open HadwigerNelson
 #print axioms rhombus_forces_of_gadget
 #print axioms four_le_chromaticNumber_plane_of_rhombus
 #print axioms four_le_chromaticNumber_plane_of_rhombus_defect
+#print axioms seven_le_chromaticNumber_hexShell_distances
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
 
