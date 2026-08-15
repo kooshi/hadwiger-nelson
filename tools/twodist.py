@@ -553,9 +553,9 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
         reenc = lambda Eu, Et, c: rigidity.reencode_confirm(n, Eu, k, Et, cap=c)["outcome"]
     else:
         _, fA, fB = framing
-        ask = lambda Es, c: ("unsat" if forces_with(n, [e for e in Es if e in set(ue)],
-                                                     [e for e in Es if e not in set(ue)], fA, fB, c)
-                             else "sat")
+        ues = set(ue)
+        ask = lambda Es, c: forces_outcome(n, [e for e in Es if e in ues],
+                                           [e for e in Es if e not in ues], fA, fB, c)
         reenc = lambda Eu, Et, c: rigidity.reencode_confirm(n, Eu, k, Et + [(fA, fB)], cap=c)["outcome"]
     t0 = time.time()
     st = ask(E, cap)
@@ -710,14 +710,21 @@ def edge_critical(n: int, unit_e, two_e, k: int, cap: float, seed: int = 0, log=
             "necessity": {"complete": unk == 0, "witnesses": wit, "unknown": unk}, "seed": seed}
 
 
-def forces_with(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> bool:
-    """A = B forced on (unit ∪ two_sub) at five colours: `A ≠ B` as clauses (palette-invariant) with
-    first-occurrence breaking. `unknown` reads as NOT forced."""
+def forces_outcome(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> str:
+    """Is A = B forced on (unit ∪ two_sub) at five colours? `A ≠ B` as clauses (palette-invariant)
+    with first-occurrence breaking. Returns the SOLVER outcome: `unsat` = forced, `sat` = a
+    separating colouring exists, `unknown` = undecided at cap (never folded into either)."""
     cls = coloring.base_clauses(n, list(unit_e) + list(two_sub), K) + rigidity.amo_clauses(n, K)
     cls += _brk_full(n, K, _degree_order(n, list(unit_e) + list(two_sub)))
     cls += [[-coloring.var(iA, c, K), -coloring.var(iB, c, K)] for c in range(K)]
     st, _ = forcer._solve(cls, n * K, cap)
-    return st == "unsat"
+    return st
+
+
+def forces_with(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> bool:
+    """`forces_outcome == "unsat"` — for the greedy, where an `unknown` deletion is (conservatively)
+    rejected. Never use this for a necessity census; use `forces_outcome` and count unknowns."""
+    return forces_outcome(n, unit_e, two_sub, iA, iB, cap) == "unsat"
 
 
 def phase_seed_edges(cap: float = 60.0, orders: int = 2) -> None:
@@ -739,17 +746,21 @@ def phase_seed_edges(cap: float = 60.0, orders: int = 2) -> None:
             lambda sub: (forces_with(n, E1, [E2[i] for i in sub], iA, iB, cap), {}))
         wit = unk = 0
         for i in core:
-            ok = forces_with(n, E1, [E2[j] for j in core if j != i], iA, iB, cap * 4)
-            if ok:
+            st = forces_outcome(n, E1, [E2[j] for j in core if j != i], iA, iB, cap * 4)
+            if st == "unsat":
                 raise SystemExit("edge-critical invariant violated on the seed")
-            wit += 1
+            if st == "sat":
+                wit += 1
+            else:
+                unk += 1
         ess = sorted(core)
         row = {"kind": "edge-critical", "k": 5, "stage_fingerprint": fp, "pool_fingerprint": None,
                "cap": cap, "outcome": "unsat", "mu_upper": len(ess), "seed": sd, "passes": passes,
                "essential": [list(E2[i]) for i in ess],
-               "necessity": {"complete": True, "witnesses": wit, "unknown": unk},
-               "claim_scope": "a 1-minimal distance-2 edge subset of H keeping A = B forced at five "
-               "colours; mu_upper is an upper bound on the minimum, from one greedy order"}
+               "necessity": {"complete": unk == 0, "witnesses": wit, "unknown": unk},
+               "claim_scope": "a distance-2 edge subset of H keeping A = B forced at five colours "
+               "(each survivor's deletion re-asked at 4x cap: sat = necessary, unknown = undecided); "
+               "mu_upper is an upper bound on the minimum, from one greedy order"}
         record(path, row)
         print(f"order {sd}: mu_upper {len(ess)} of {len(E2)} (passes {passes})", flush=True)
 
