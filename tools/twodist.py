@@ -580,20 +580,28 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
             Es = [e for e in ue if e[0] in ks and e[1] in ks] + tp
             return ask(Es, cap) == "unsat", {}
         core, dels, passes = mechanism.greedy_1min(halo_ids, list(reversed(halo_ids)), fired)
-        wit = 0
-        unknown = 0
-        for v in core:
-            keep = set(core) - {v} | set(range(nb))
+        # necessity census at 4x cap, parallel: sat = necessary (a witness), unknown = undecided;
+        # unsat = the survivor was kept only because the greedy's ask timed out at `cap` — drop it
+        # (the ask that said unsat IS the verification that the reduced core still fires; earlier
+        # witnesses stay valid on a smaller core because colourability is monotone).
+        def nec_ask(v, cur):
+            keep = (set(cur) - {v}) | set(range(nb))
             Es = [e for e in ue if e[0] in keep and e[1] in keep] + tp
-            s3 = ask(Es, cap * 4)
-            if s3 == "sat":
-                wit += 1
-            elif s3 == "unknown":
-                unknown += 1
-            else:
-                raise SystemExit("halo shrink invariant violated: a survivor is deletable")
+            return ask(Es, cap * 4)
+        wit = unknown = dropped = 0
+        while True:
+            cur = list(core)
+            outs = mechanism.pmap(lambda v: nec_ask(v, cur), cur)
+            deletable = [v for v, o in zip(cur, outs) if o == "unsat"]
+            if not deletable:
+                wit = sum(1 for o in outs if o == "sat")
+                unknown = sum(1 for o in outs if o == "unknown")
+                break
+            for v in deletable:            # one at a time, each re-verified against the CURRENT core
+                if v in core and nec_ask(v, core) == "unsat":
+                    core.remove(v); dropped += 1
         row["halo"] = {"one_minimal": unknown == 0, "size": len(core), "witnesses": wit,
-                       "unknown": unknown, "passes": passes, "ids": core}
+                       "unknown": unknown, "passes": passes, "ids": core, "dropped_at_4x": dropped}
         if unknown == 0 and row["reencode"] == "unsat":
             row["verdict"] = "removed"
     return row
@@ -661,6 +669,82 @@ def descend_run(label: str, pts, ue, two_e, k: int, cap: float, path: Path,
              "descent stalled: no remaining distance-2 edge was replaceable by any listed pool at this cap"}
     record(path, stall)
     log(f"[{label}] STALL at mu_upper={len(two_e)} after {steps} removals (n={len(pts)})")
+    return {"pts": pts, "unit": ue, "two": two_e, "steps": steps, "history": history}
+
+
+def descend_parallel(label: str, pts, ue, two_e, targets, k: int, cap: float, path: Path,
+                     pool_kinds=("seam", "up"), max_rounds: int = 1000, log=print, framing="unsat") -> dict:
+    """The descent in ROUNDS, for objects whose asks are slow (k = 5): each round asks every
+    remaining target in PARALLEL against the same object (the cheap half of `descend_step`, no
+    shrink), then commits the UNSAT candidates ONE AT A TIME through the full `descend_step` (ask
+    against the current object, 3-bit re-encode, 1-minimal halo with witnesses) — a candidate that
+    no longer refutes against the grown object is simply re-asked next round. Rounds continue while
+    something is committed; the seam pool is tried before the up pool for every target. Same rows,
+    same contract, same stall row as `descend_run`; `mu_upper` counts ALL remaining distance-2 edges
+    (targets or not)."""
+    import mechanism
+    pts = list(pts); ue = list(ue); two_e = list(two_e)
+    targets = [tuple(t) for t in targets]
+    fp0 = fingerprint(len(pts), ue + two_e)
+    steps = 0; rounds = 0; history = []
+    def ask_only(e, kind):
+        centres = [pts[e[0]], pts[e[1]]]
+        halo, fus = (pool_seam if kind == "seam" else pool_up)(pts, centres)
+        row = descend_step(pts, ue, two_e, e, halo, k, cap, shrink_halo=False, framing=framing)
+        return e, kind, halo, fus, row
+    while rounds < max_rounds and targets:
+        rounds += 1
+        committed = 0
+        for kind in pool_kinds:
+            base_pts = list(pts)
+            res = mechanism.pmap(lambda e: ask_only(e, kind), [t for t in targets if t in two_e])
+            for e, kd, halo, fus, row in res:
+                row.update({"label": label, "round": rounds, "pool": kd, "pool_new_points": len(halo),
+                            "fusions": fus, "stage0_fingerprint": fp0, "two_edges_before": len(two_e),
+                            "phase": "scan"})
+                if row["outcome"] != "unsat":
+                    record(path, row)
+                    log(f"[{label}] r{rounds} edge {e} pool {kd} ({len(halo)} pts): {row['verdict']} "
+                        f"({row['outcome']}, {row['seconds']}s)")
+            cands = [(e, kd) for e, kd, _, _, row in res if row["outcome"] == "unsat"]
+            log(f"[{label}] r{rounds} pool {kind}: {len(cands)} candidates of {len(res)} asked")
+            for e, kd in cands:
+                if e not in two_e:
+                    continue
+                centres = [pts[e[0]], pts[e[1]]]
+                halo, fus = (pool_seam if kd == "seam" else pool_up)(pts, centres)
+                row = descend_step(pts, ue, two_e, e, halo, k, cap, framing=framing)
+                row.update({"label": label, "round": rounds, "step": steps, "pool": kd, "pool_new_points": len(halo),
+                            "fusions": fus, "stage0_fingerprint": fp0, "two_edges_before": len(two_e),
+                            "phase": "commit"})
+                if row["verdict"] == "removed":
+                    core_ids = row["halo"]["ids"]; nb = len(pts)
+                    newpts = [halo[i - nb] for i in core_ids]
+                    pts = pts + newpts
+                    ue = closure_unit_edges(pts)
+                    two_e = [f for f in two_e if f != e]
+                    targets = [t for t in targets if t != e]
+                    row["mu_upper"] = len(two_e)
+                    row["object_after"] = {"n": len(pts), "unit": len(ue), "two": len(two_e)}
+                    steps += 1; committed += 1
+                    log(f"[{label}] step {steps}: removed {e} with {kd} halo of {len(newpts)} pts "
+                        f"→ n={len(pts)}, unit={len(ue)}, mu_upper={len(two_e)}")
+                    if len(newpts) == 0:
+                        log(f"[{label}]   (halo 0: a phase-2 slack edge, not a descent removal)")
+                else:
+                    log(f"[{label}] r{rounds} commit of {e} pool {kd}: {row['verdict']} "
+                        f"(outcome {row['outcome']}, reencode {row.get('reencode')}, halo {row.get('halo', {}).get('one_minimal')})")
+                record(path, row); history.append(row)
+        if committed == 0:
+            break
+    stall = {"kind": "stall", "label": label, "k": k, "framing": "unsat" if framing == "unsat" else "forced",
+             "stage_fingerprint": fingerprint(len(pts), ue + two_e), "stage0_fingerprint": fp0,
+             "pool_fingerprint": None, "cap": cap, "outcome": "unsat", "mu_upper": len(two_e), "steps": steps,
+             "rounds": rounds, "n": len(pts), "unit": len(ue), "pools": list(pool_kinds), "targets_left": len(targets),
+             "claim_scope": "an upper bound on μ within the probed pools; not a bound on μ — the descent stalled: "
+             "no remaining TARGET distance-2 edge was replaceable by any listed pool at this cap in the last round"}
+    record(path, stall)
+    log(f"[{label}] STALL at mu_upper={len(two_e)} after {steps} removals in {rounds} rounds (n={len(pts)})")
     return {"pts": pts, "unit": ue, "two": two_e, "steps": steps, "history": history}
 
 
@@ -884,7 +968,7 @@ def phase_descend5(cap: float = 120.0, pools=("seam", "up")) -> None:
     tp = closure_two_pairs(pts)
     assert set(ue) == set(cH[1]) and set(tp) == set(cH[4]), "closure-currency re-classification disagrees"
     path = BUILD / "m49-descent5.json"
-    descend_run("seed-k5", pts, ue, ess, 5, cap, path, pool_kinds=pools, framing=("forced", iA, iB))
+    descend_parallel("seed-k5", pts, ue, ess, ess, 5, cap, path, pool_kinds=pools, framing=("forced", iA, iB))
 
 
 def phase_calib122(cap: float = 60.0, orders: int = 2) -> None:
