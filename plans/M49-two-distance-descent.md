@@ -463,6 +463,44 @@ the distance graph (the M35 docstring's prose).
   forcing, so his 199-vertex reduction cannot come from this pool). His frame is not recoverable
   from the prose; the explicit E–I object is the seed. Reported, not worked around.
 
+### §R2. μ from the seed (phase 2) — a sandwich, `29 ≤ μ_H ≤ 252`, and the instrument that had to change
+
+The quantity: the fewest distance-2 edges of `H` (unit edges kept, WLOG) that keep `A = B` forced at
+five colours — the forced-pair carrier's `μ_upper`. Desktop, CaDiCaL, `A ≠ B` as clauses with
+first-occurrence palette breaking; every model validated in-process.
+
+* **The registered greedy did not finish and was replaced, with the reason recorded.** `mechanism.greedy_1min`
+  over the 446 edge indices at cap 60 s reached 276 survivors in pass 1, then its necessity census
+  found survivors deletable at 4× cap and the code exited (fixed to loop). Relaunched at cap 240 s it
+  ran **> 4 h without completing pass 1**: the batch greedy is *serial in acceptances* (an accepted
+  deletion requeues the rest of its 30-wide batch), so pass 1 with hundreds of acceptances is one
+  4-minute batch per acceptance — ~30 h. Replaced by **census-first** (`--seed-edges-census`,
+  committed): (1) all 446 single-deletion asks in parallel; (2) a *parallel* ddmin over the deletable
+  ones (every piece of a level asked against the same set concurrently, passing pieces merged with
+  re-verification); (3) the necessity census on the survivors at 4× cap. The quantity is unchanged.
+* **The census, and the lower bound it hands over for free.** `forces_outcome(H − e)` for each of the
+  446: **29 `sat`, 417 `unsat`, 0 unknown at 240 s** — reproduced exactly on the rerun (291 s, then
+  158 s). An edge whose lone deletion admits a validated separating colouring lies in **every** forcing
+  subset (if `e ∉ S` then `S ⊆ E∖{e}`, which does not force), so **`μ_H ≥ 29` rigorously** — a bound
+  the greedy could never have produced. (The exact-minimum engine `tools/hitset.py` was also run on
+  this question: rigorous, but its bound climbed to 6 in 6,600 s — 446 columns is beyond it; retired.)
+* **The shrink.** Parallel ddmin from 446 with the 417 deletable as candidates: levels 208 → 104 (0
+  passed) → 52 (7 of 8 pieces passed; −104) → 26 (−26) → 13 (−39) → 6 (−24) → 3 → 1 (0 passed) —
+  **252 survivors, 492 asks, 5,123 s**. Independently the abandoned serial run had reached 252 at its
+  chunk-6 level (same shuffle seed).
+* **The necessity census at 960 s** on the 252: **92 necessary** (deletion admits a witness), **46
+  unknown**, **114 still deletable** — the level-1 "0 passed" was mostly timeouts at 240 s, so
+  **252 is a cap-limited upper bound, not a 1-minimal set**. `build/m49-seed-edges.json` (kinds
+  `single-deletion-census`, `edge-critical`, `necessity.complete: false`).
+* **P2 (μ_upper ≤ 149 of 446): UNDECIDED at cap.** The certified sandwich is `29 ≤ μ_H ≤ 252`; the
+  upper end is solver-limited (114 of its members are individually deletable at 960 s) and a
+  higher-cap tightening is priced at ~2–4 h of the whole desktop per level. Not claimed either way.
+* **P3 (≥ half of the essential edges within distance 3 of `A, B`): met, VACUOUSLY** — 444 of all
+  446 distance-2 edges are within 3 of the pair (`|AB| = 5`, the graph is compact), so the registered
+  statistic cannot discriminate. The sharper *post-hoc* reading, offered as such and not as a
+  registered result: **6 of the 7 distance-2 edges incident to `A` or `B` are essential alone, versus
+  23 of the other 439 (5 %)** — the lower-bound set concentrates at the ports.
+
 ### §R5. μ(φ) exactly (phase 5) — Parts's {1,φ} six-forcer is edge-critical to the last edge
 
 * **Reconstruction, exact.** Parts's paper (arXiv:2010.12656 v2, fetched 2026-08-16) gives `G16`'s two
