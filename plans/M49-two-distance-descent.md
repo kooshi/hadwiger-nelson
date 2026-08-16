@@ -463,6 +463,30 @@ the distance graph (the M35 docstring's prose).
   forcing, so his 199-vertex reduction cannot come from this pool). His frame is not recoverable
   from the prose; the explicit E–I object is the seed. Reported, not worked around.
 
+### §R5. μ(φ) exactly (phase 5) — Parts's {1,φ} six-forcer is edge-critical to the last edge
+
+* **Reconstruction, exact.** Parts's paper (arXiv:2010.12656 v2, fetched 2026-08-16) gives `G16`'s two
+  edge lists explicitly and names it a subgraph of `G126 = G5^{⊕5}` (the five-fold Minkowski sum of a
+  unit-side regular pentagon; diagonal `φ`). Rebuilt in ℚ(√5) (`scratchpad/parts31.py`): `G126` has
+  **350 + 350** edges (his count, planted); the backtracking search finds `G16` as an **induced**
+  {1,φ}-subgraph — its induced lists reproduce his 28 + 28 exactly (control). `G31` = two copies of
+  `G16` about vertex 1 rotated by `arccos((95+√5)/100)`: the designed `|16−16′| = 1` is the exact identity
+  `2·(5R)²·(5−√5)/100 = 1` with `R² = (5+√5)/10`; the other 224 cross-copy pairs miss both distances by
+  ≥ 0.0132 (60-digit numeric census; the rotation leaves ℚ(√5), so this classification is numeric with
+  its margin stated). Totals **31 vertices, 57 unit + 56 φ-edges**; controls: not 5-colourable
+  (UNSAT), unit-only 5-colourable, 6-colourable.
+* **The exact value: μ(φ) over subgraphs of `G31` = 56 = ALL of them.** Every single φ-edge deletion
+  leaves a 5-colourable graph (56 SAT calls, models validated in-process), so by monotonicity no
+  proper φ-subset refutes — no hitting-set loop needed (the implicit-hitting-set engine built for it,
+  `scratchpad/hitset.py`, had reached LB = 10 after 1,550 iterations when the single-deletion census
+  settled it in 4 s: **the exact question was answerable by the cheapest instrument, and I ran the
+  expensive one first**). Every unit edge is essential too (57/57), and the forced-pair carrier
+  `G16` (1 = 16 forced at five colours) is likewise edge-critical: 28/28 φ and 28/28 unit deletions
+  each un-force the pair. Twenty greedy orders all return 56 (`build/m49-parts31.json`).
+* **P8 (≥ 20 of 56): MET** — at the extreme value. Reading: a hand-minimized forcer keeps every
+  edge; *the μ dial cannot be read off a critical object's own subgraphs* (they only bound μ above),
+  which is exactly why the descent (phase 4) ADDS material rather than deleting it.
+
 ## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
