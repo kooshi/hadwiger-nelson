@@ -815,32 +815,44 @@ def phase_seed_edges_census(cap: float = 240.0, seed: int = 0) -> None:
                   "claim_scope": "each distance-2 edge of H deleted alone from the full set: sat = a validated "
                   "5-colouring separates A, B without it (so the edge lies in EVERY forcing subset: mu_lower is "
                   "rigorous), unsat = A = B still forced without it, unknown = undecided at cap"})
-    # ddmin over the deletable ones: keep = everything not in `dele`; try dropping chunks of `dele`
+    # parallel ddmin over the deletable ones: at each chunk level every piece is tested against the
+    # SAME S in parallel; the passing pieces are then merged (their union in one ask, else one by one,
+    # each re-verified against the current S). Failed pieces are retried at the next level down.
     rng = random.Random(seed)
     cand = list(dele); rng.shuffle(cand)
-    kept_fixed = [i for i in range(len(E2)) if i not in set(dele)]
     S = set(range(len(E2)))
     asks = 0
+    ck = BUILD / "m49-seed-edges-S.json"
     def forced(sub) -> str:
         return forces_outcome(n, E1, [E2[i] for i in sorted(sub)], iA, iB, cap)
     chunk = max(1, len(cand) // 2)
-    pos = 0
-    while cand:
-        if pos >= len(cand):
+    while cand and chunk >= 1:
+        pieces = [cand[i:i + chunk] for i in range(0, len(cand), chunk)]
+        base = set(S)
+        res = mechanism.pmap(lambda piece: forced(base - set(piece)), pieces); asks += len(pieces)
+        passing = [p for p, r in zip(pieces, res) if r == "unsat"]
+        accepted = []
+        if passing:
+            union = set().union(*map(set, passing))
+            st = forced(S - union); asks += 1
+            if st == "unsat":
+                accepted = sorted(union); S -= union
+            else:
+                for p in passing:
+                    st = forced(S - set(p)); asks += 1
+                    if st == "unsat":
+                        S -= set(p); accepted += p
+        cand = [c for c in cand if c not in set(accepted)]
+        print(f"  ddmin chunk {chunk}: {len(pieces)} pieces, {len(passing)} passed, {len(accepted)} dropped → |S| = {len(S)}  "
+              f"[{asks} asks, {time.time()-t0:.0f}s]", flush=True)
+        ck.write_text(json.dumps({"S": sorted(S), "cand": cand, "chunk": chunk, "asks": asks}))
+        if not accepted:
             if chunk == 1: break
-            chunk = max(1, chunk // 2); pos = 0; continue
-        piece = cand[pos:pos + chunk]
-        st = forced(S - set(piece)); asks += 1
-        if st == "unsat":
-            S -= set(piece); cand = [c for c in cand if c not in set(piece)]
-            print(f"  ddmin: dropped {len(piece)} (chunk {chunk}) → |S| = {len(S)}  [{asks} asks, {time.time()-t0:.0f}s]", flush=True)
-            # do not advance pos: the next piece now sits at pos
-        else:
-            pos += chunk
+            chunk = max(1, chunk // 2)
     print(f"ddmin done: |S| = {len(S)} after {asks} asks, {time.time()-t0:.0f}s", flush=True)
     # necessity census at 4x cap, in parallel
     surv = sorted(S)
-    nec = mechanism.pmap(lambda i: forced(S - {i}) if False else forces_outcome(n, E1, [E2[j] for j in surv if j != i], iA, iB, cap * 4), surv)
+    nec = mechanism.pmap(lambda i: forces_outcome(n, E1, [E2[j] for j in surv if j != i], iA, iB, cap * 4), surv)
     wit = sum(1 for st in nec if st == "sat"); unk2 = sum(1 for st in nec if st == "unknown")
     still = [i for i, st in zip(surv, nec) if st == "unsat"]
     print(f"necessity at {cap*4}s: {wit} necessary, {unk2} unknown, {len(still)} still deletable", flush=True)
