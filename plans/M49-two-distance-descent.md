@@ -462,3 +462,77 @@ the distance graph (the M35 docstring's prose).
   there** (58 sampled colourings separate all 36 such pairs; and vertex deletion can never create a
   forcing, so his 199-vertex reduction cannot come from this pool). His frame is not recoverable
   from the prose; the explicit E–I object is the seed. Reported, not worked around.
+
+## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
+
+**Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
+running; phases 0–1 done; then step 8 (gate), step 9 (commit + Frontier), step 10 (report).
+Machine: desktop (32 cores). Last commit before this note: see `git log`.
+
+### What is DONE and committed
+* Kernel layer (phase 0): `Proofs/HadwigerNelson/{DistanceGraph,OneDefect,Homogeneous,PairDist}.lean`,
+  `Instances/{OneDefectSpec,HexShell}.lean`; 22 new declarations, all clean axioms; in
+  `scripts/Axioms.lean`; `Proofs.lean` imports added; `scripts/build.sh` green (170 modules).
+* `tools/twodist.py` (all phases; `--self-test` PASS): seeds (`ei_G/ei_H/ei_K`), `classify`,
+  `refute` (full first-occurrence breaking `_brk_full`), `count_colourings`, `design_ports`,
+  `shrink_core`, `edge_critical`, `forces_outcome/forces_with`, `descend_step` (framing "unsat" or
+  ("forced",A,B); triple check: unsat + reencode_confirm + 1-minimal halo with witnesses),
+  `descend_run` (sequential, commits halos, `stall` row with `mu_upper`), `record` (contract:
+  refuses uncertified `removed`, refuses `mu`, Jackpot at mu_upper ≤ 1 (unsat framing) / ≤ 0
+  (forced framing) at k=5), phases `--seed --ports --emit --count --core --seed-edges --calib122
+  --descend5`. `tools/m49_rederive.py` = the standalone re-derivation.
+* §R0/§R1 drafted in this file (kernel layer; seed re-derived exactly; certificate priced).
+
+### DECISIONS MADE (four-part form in the report; here the facts)
+* **The seed's kernel certificate is DEFERRED (P1 missed):** three cubes on ports (A,a1,a2,B)
+  each ~18–25M trimmed hints (best config `--sat`: 17.8M), total ~50–55M ≈ M06×1.6 ≈ 40 kernel-h,
+  ~600 MB source. Levers tried and measured: vertex-minimal shrink (173-core) is 3× WORSE (74M for
+  cube 0); K (426) no better (20–25M); six-port design ~78M projected; configs −26% at best;
+  proof-guided (Heule) shrink = fixed point at iteration 1 (all 214 vertices cited). Record as
+  priced-and-declined (M43 precedent); the tools-side claim is double-encoded (one-hot+breaking
+  4.9 s; 3-bit `class_avoid_binary3` with (A,B) as an instance: UNSAT 236 s; control SAT).
+  Consequence: NO `Instances/OneTwo.lean` this milestone; `six_le_chromaticNumber_two_distance`
+  is not a theorem in the repo (the conditional theory is). Template for it if ever emitted:
+  scratchpad `OneTwo.lean.template` (session-local; shape = Core122's Base/Aug/Cnf + gadget).
+* Parts's 313-pool: count reproduces (θ = 2·arccos 5/6, radius < √3) but no 5/√3 pair forced
+  under my reading (58 sampled colourings separate all 36) — reported, not used.
+* De Neve et al. {1,3} 33-vertex graph: no preprint/data found; import target only.
+* G alone: 0 forced-equal pairs, 282 forced-distinct pairs at k=5 (108 at √(7/3), 144 at 3, 12
+  at √(13/3), 6 at 4, 6+6 at two conjugate distances) — for §R.
+
+### RUNNING at compaction time (check with `pgrep -f cali[b].py` / `pgrep -f "twodist.py --seed-edge[s]"`)
+* **k=4 calibration descent** (`scratchpad/calib.py` → `tools/twodist.phase_calib122(cap=60, orders=2)`
+  with `mechanism.WORKERS=8`); log `build/m49-calib122.log`, rows `build/m49-calib122.json`.
+  Status: edge-criticality μ_upper = 37 of 40 (two orders agree; P4a MET); the sequential
+  descent with the SEAM pool has removed **22/22** attempted edges (halo sizes 5,0,3,1,0,49,0,21,
+  16,9,8,10,5,8,0,4,13,6,2,56,2,0), μ_upper 37→15, object 122→340 vertices, no refusal yet.
+  **P4b ("seam pool removes none") is REFUTED at step 1** — my P4b reasoning was wrong (G1 speaks
+  of pure unit material; here the remaining defects still carry the load, the halo transmits).
+  Awaiting the STALL row (`kind: stall`, `mu_upper`); pools order is ("seam","up") — the "up"
+  pool is tried only when seam refuses. If it descends to 0 in the seam field: that is a
+  seam-field UDG 5-forcer = G1 falsifier → HALT AND VERIFY (P4b clause).
+* **Phase 2** (`tools/twodist.py --seed-edges --cap 240 --orders 1`; log `build/m49-seed-edges.log`,
+  rows `build/m49-seed-edges.json`): first run at cap 60 reached 276/446 survivors then stopped
+  (census found a survivor deletable at 4× cap → greedy timed out; code now loops instead of
+  exiting; the 276 set was NOT saved). Relaunched at cap 240 from scratch ~22:06. Expect μ_upper
+  around ~250–276 → **P2 (≤ 149) MISSED** unless the higher cap prunes a lot.
+
+### NEXT STEPS, in order
+1. When phase 2 finishes: `python3 tools/twodist.py --descend5 --cap 120` (phase 4, the k=5
+   descent on H's essential edges, framing forced-pair, pools seam then up); log to
+   `build/m49-descent5.log`; rows `build/m49-descent5.json`. Watch for `Jackpot` (SystemExit with
+   the halt-and-verify banner) — μ_upper = 0 in the forced framing.
+2. When the k=4 descent stalls: record its stall value and per-step halo sizes in §R3 (P4b
+   refuted, P4c as measured); if it reached 0 in the seam pool → HALT AND VERIFY.
+3. μ(φ) on Parts's 31-vertex graph (P8) — small; optional if time.
+4. Gate: `./scripts/build.sh`, `./scripts/axioms.sh`, `lake lint`, `python3 tools/twodist.py --self-test`.
+5. §R complete (R2 phase 2, R3 calibration, R4 descent, R5 predictions P1–P8 scored: P1 missed,
+   P2 likely missed, P4a met, P4b refuted, others per data), CLAUDE.md Frontier: narrative
+   paragraph for M49, ledger row 44 (kernel: distanceGraph, spindle theorem, one-defect, rhombus
+   Moser re-proof, {1,√3,2}≥7; measured: seed re-derived, certificate priced, μ dial values, the
+   k=4 descent curve, the k=5 descent verdict), G-entries: G26/G31 sharpened ("any single rigid
+   pair at five colours closes it — forced-equal at any d ≥ 1/2 by the spindle; forced-distinct at
+   2 alone given the {1,2} pigeonhole"), new grokking on in-context kills at k=4 being cheap, and
+   the "vertex-minimality is adversarial to proof size" lesson; ranked paths (the descent's
+   continuation vs certificate). Report in house format.
+6. Memory: update `hadwiger-nelson-project.md` (done below at compaction) at close.
