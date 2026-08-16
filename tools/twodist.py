@@ -971,6 +971,91 @@ def phase_descend5(cap: float = 120.0, pools=("seam", "up")) -> None:
     descend_parallel("seed-k5", pts, ue, ess, ess, 5, cap, path, pool_kinds=pools, framing=("forced", iA, iB))
 
 
+def phase_descend5_lb(cap: float = 900.0, radii=(1.5, 3.0, None), pools=("seam", "up")) -> None:
+    """Phase 4′ (registered 2026-08-16 after the full-pool round read 243/252 UNKNOWN at 180 s): the
+    k = 5 descent aimed at the LOWER-BOUND set — the distance-2 edges of `H` that lie in EVERY forcing
+    subset (deletion alone admits a validated separating colouring; `single-deletion-census` row) —
+    on the FULL object `H` (all 446), so each target's removal certainly un-forces and the question
+    is exactly "does a unit halo restore the forcing?". Pools are laddered by radius about the target
+    edge's midpoint (`radii`, `None` = the whole one-generation pool): a small halo is decidable and
+    a refusal on it means little; the ladder says where decidability ends. Parallel asks per
+    (target, pool, radius); UNSAT candidates are committed one at a time through the certified
+    `descend_step` (re-ask, 3-bit re-encode, 1-minimal halo with witnesses). Rows: m49-descent5.json."""
+    import mechanism, closure as CL
+    H = ei_H()
+    cH = classify(H)
+    n = len(H)
+    iA, iB = H.index(EI_A), H.index(EI_B)
+    art = json.loads((BUILD / "m49-seed-edges.json").read_text())
+    cen = [r for r in art["rows"] if r["kind"] == "single-deletion-census"][-1]
+    targets = [tuple(e) for e in cen["essential_alone"]]
+    pts = [to_closure(p) for p in H]
+    ue = closure_unit_edges(pts)
+    two_e = closure_two_pairs(pts)
+    assert set(ue) == set(cH[1]) and set(two_e) == set(cH[4]), "closure-currency re-classification disagrees"
+    assert all(t in two_e for t in targets)
+    path = BUILD / "m49-descent5.json"
+    fp0 = fingerprint(n, ue + two_e)
+    def sub_pool(halo, e, r):
+        if r is None:
+            return halo
+        a, b = CL.approx(pts[e[0]]), CL.approx(pts[e[1]])
+        mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
+        return [q for q in halo if (CL.approx(q)[0] - mx) ** 2 + (CL.approx(q)[1] - my) ** 2 <= r * r]
+    steps = 0
+    for kind in pools:
+        for r in radii:
+            live = [t for t in targets if t in two_e]
+            def ask_only(e):
+                centres = [pts[e[0]], pts[e[1]]]
+                halo, fus = (pool_seam if kind == "seam" else pool_up)(pts, centres)
+                halo = sub_pool(halo, e, r)
+                row = descend_step(pts, ue, two_e, e, halo, 5, cap, shrink_halo=False, framing=("forced", iA, iB))
+                return e, halo, fus, row
+            res = mechanism.pmap(ask_only, live)
+            outs = {}
+            for e, halo, fus, row in res:
+                row.update({"label": "seed-k5-lb", "pool": kind, "radius": r, "pool_new_points": len(halo),
+                            "fusions": fus, "stage0_fingerprint": fp0, "two_edges_before": len(two_e), "phase": "scan"})
+                outs[row["outcome"]] = outs.get(row["outcome"], 0) + 1
+                if row["outcome"] != "unsat":
+                    record(path, row)
+            print(f"[seed-k5-lb] pool {kind} radius {r}: {outs} over {len(live)} targets "
+                  f"(pool sizes {min(len(h) for _, h, _, _ in res)}–{max(len(h) for _, h, _, _ in res)})", flush=True)
+            for e, halo, fus, row0 in res:
+                if row0["outcome"] != "unsat" or e not in two_e:
+                    continue
+                centres = [pts[e[0]], pts[e[1]]]
+                halo, fus = (pool_seam if kind == "seam" else pool_up)(pts, centres)
+                halo = sub_pool(halo, e, r)
+                row = descend_step(pts, ue, two_e, e, halo, 5, cap, framing=("forced", iA, iB))
+                row.update({"label": "seed-k5-lb", "pool": kind, "radius": r, "pool_new_points": len(halo),
+                            "fusions": fus, "stage0_fingerprint": fp0, "two_edges_before": len(two_e), "phase": "commit"})
+                if row["verdict"] == "removed":
+                    core_ids = row["halo"]["ids"]; nb = len(pts)
+                    newpts = [halo[i - nb] for i in core_ids]
+                    pts = pts + newpts
+                    ue = closure_unit_edges(pts)
+                    two_e = [f for f in two_e if f != e]
+                    row["mu_upper"] = len(two_e)
+                    row["object_after"] = {"n": len(pts), "unit": len(ue), "two": len(two_e)}
+                    steps += 1
+                    print(f"[seed-k5-lb] step {steps}: REMOVED lower-bound edge {e} with {kind} halo (radius {r}) of "
+                          f"{len(newpts)} pts → n={len(pts)}, unit={len(ue)}, two={len(two_e)}", flush=True)
+                else:
+                    print(f"[seed-k5-lb] commit of {e} pool {kind} radius {r}: {row['verdict']} (outcome {row['outcome']}, "
+                          f"reencode {row.get('reencode')}, halo 1-minimal {row.get('halo', {}).get('one_minimal')})", flush=True)
+                record(path, row)
+    stall = {"kind": "stall", "label": "seed-k5-lb", "k": 5, "framing": "forced", "stage_fingerprint": fingerprint(len(pts), ue + two_e),
+             "stage0_fingerprint": fp0, "pool_fingerprint": None, "cap": cap, "outcome": "unsat", "mu_upper": len(two_e),
+             "steps": steps, "n": len(pts), "unit": len(ue), "pools": list(pools), "radii": list(radii),
+             "targets": [list(t) for t in targets], "targets_left": len([t for t in targets if t in two_e]),
+             "claim_scope": "the lower-bound (essential-alone) distance-2 edges of H, each asked against every pool × "
+             "radius at this cap; steps = how many were replaced by a certified unit halo; not a bound on μ"}
+    record(path, stall)
+    print(f"[seed-k5-lb] done: {steps} of {len(targets)} lower-bound edges replaced; two={len(two_e)}, n={len(pts)}", flush=True)
+
+
 def phase_calib122(cap: float = 60.0, orders: int = 2) -> None:
     """Phase 3: the k = 4 calibration on the 122-core — essential distance-2 edges (P4a), then the
     seam halo (P4b: predicted to remove NONE) and the one-field-up halo (P4c) on each essential
@@ -1166,6 +1251,8 @@ if __name__ == "__main__":
         phase_emit(cap)
     elif "--count" in args:
         phase_count(cap)
+    elif "--descend5-lb" in args:
+        phase_descend5_lb(cap)
     elif "--descend5" in args:
         phase_descend5(cap)
     elif "--seed-edges-census" in args:
