@@ -727,7 +727,7 @@ def forces_with(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> bool:
     return forces_outcome(n, unit_e, two_sub, iA, iB, cap) == "unsat"
 
 
-def phase_seed_edges(cap: float = 60.0, orders: int = 2) -> None:
+def phase_seed_edges(cap: float = 60.0, orders: int = 2, start=None) -> None:
     """Phase 2: 1-minimal subsets of H's distance-2 edges that keep A = B forced (mu_upper for the
     forced-pair carrier), by greedy over seeded orders with the necessity census."""
     import mechanism
@@ -739,20 +739,34 @@ def phase_seed_edges(cap: float = 60.0, orders: int = 2) -> None:
     path = BUILD / "m49-seed-edges.json"
     fp = fingerprint(n, E1 + E2)
     assert forces_with(n, E1, E2, iA, iB, cap), "H does not force A = B under cap"
+    start_ids = list(range(len(E2))) if start is None else [E2.index(tuple(e)) for e in start]
     for sd in range(orders):
-        order = list(range(len(E2)))
+        order = list(start_ids)
         random.Random(sd).shuffle(order)
-        core, dels, passes = mechanism.greedy_1min(list(range(len(E2))), order,
+        core, dels, passes = mechanism.greedy_1min(list(start_ids), order,
             lambda sub: (forces_with(n, E1, [E2[i] for i in sub], iA, iB, cap), {}))
-        wit = unk = 0
-        for i in core:
-            st = forces_outcome(n, E1, [E2[j] for j in core if j != i], iA, iB, cap * 4)
-            if st == "unsat":
-                raise SystemExit("edge-critical invariant violated on the seed")
-            if st == "sat":
-                wit += 1
-            else:
-                unk += 1
+        # necessity census at 4x cap. A survivor whose deletion is STILL unsat at the higher cap
+        # was rejected by the greedy only because it timed out at the lower one — the set is an
+        # upper bound but not 1-minimal at this cap; loop the greedy at the higher cap on the
+        # survivors until the census is clean (each loop strictly shrinks or terminates).
+        while True:
+            wit = unk = 0
+            deletable = []
+            for i in core:
+                st = forces_outcome(n, E1, [E2[j] for j in core if j != i], iA, iB, cap * 4)
+                if st == "unsat":
+                    deletable.append(i)
+                elif st == "sat":
+                    wit += 1
+                else:
+                    unk += 1
+            if not deletable:
+                break
+            print(f"  census at {cap * 4}s: {len(deletable)} survivors deletable at the higher cap — "
+                  f"greedy again at {cap * 4}s from {len(core)}", flush=True)
+            core, _, p2 = mechanism.greedy_1min(list(core), [i for i in order if i in core],
+                lambda sub: (forces_with(n, E1, [E2[i] for i in sub], iA, iB, cap * 4), {}))
+            passes += p2
         ess = sorted(core)
         row = {"kind": "edge-critical", "k": 5, "stage_fingerprint": fp, "pool_fingerprint": None,
                "cap": cap, "outcome": "unsat", "mu_upper": len(ess), "seed": sd, "passes": passes,
@@ -983,7 +997,10 @@ if __name__ == "__main__":
     elif "--descend5" in args:
         phase_descend5(cap)
     elif "--seed-edges" in args:
-        phase_seed_edges(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--orders"), 2)))
+        st = next((args[i + 1] for i, a in enumerate(args) if a == "--start"), None)
+        start = json.loads(Path(st).read_text()) if st else None
+        phase_seed_edges(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--orders"), 2)),
+                         start=start)
     elif "--calib122" in args:
         phase_calib122(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--orders"), 2)))
     elif "--core" in args:
