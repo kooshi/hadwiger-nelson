@@ -779,6 +779,82 @@ def phase_seed_edges(cap: float = 60.0, orders: int = 2, start=None) -> None:
         print(f"order {sd}: mu_upper {len(ess)} of {len(E2)} (passes {passes})", flush=True)
 
 
+def phase_seed_edges_census(cap: float = 240.0, seed: int = 0) -> None:
+    """Phase 2, census-first (replaces the batch greedy, whose pass 1 is SERIAL in acceptances and
+    ran > 4 h without finishing at cap 240 — see §R2). Three parallel-friendly steps:
+
+    1. **Single-deletion census** (all 446 asks in parallel): `forces_outcome(H − e)`. An edge whose
+       lone deletion UN-forces `A = B` (a validated separating colouring exists) lies in EVERY forcing
+       subset — so the count of such edges is a rigorous LOWER bound on the minimum, `mu_lower`.
+       `unsat` = deletable alone; `unknown` = undecided at cap (kept, conservatively, and counted).
+    2. **ddmin shrink** over the deletable ones (delete a chunk at once while `A = B` stays forced;
+       halve the chunk on failure) — O(k log n) sequential asks instead of one per acceptance.
+    3. **Necessity census** on the survivors at 4× cap (each deletion re-asked: sat = necessary,
+       unknown = undecided) — `mu_upper` = |survivors|, 1-minimal iff every survivor is necessary.
+    """
+    import mechanism
+    H = ei_H()
+    cH = classify(H)
+    n = len(H)
+    iA, iB = H.index(EI_A), H.index(EI_B)
+    E1, E2 = cH[1], cH[4]
+    path = BUILD / "m49-seed-edges.json"
+    fp = fingerprint(n, E1 + E2)
+    assert forces_with(n, E1, E2, iA, iB, cap), "H does not force A = B under cap"
+    t0 = time.time()
+    census = mechanism.pmap(lambda i: forces_outcome(n, E1, [E2[j] for j in range(len(E2)) if j != i], iA, iB, cap),
+                            list(range(len(E2))))
+    ess = [i for i, st in enumerate(census) if st == "sat"]
+    dele = [i for i, st in enumerate(census) if st == "unsat"]
+    unk = [i for i, st in enumerate(census) if st == "unknown"]
+    print(f"census ({time.time()-t0:.0f}s): {len(ess)} essential alone (LB), {len(dele)} deletable alone, "
+          f"{len(unk)} unknown at {cap}s", flush=True)
+    record(path, {"kind": "single-deletion-census", "k": 5, "stage_fingerprint": fp, "cap": cap,
+                  "essential_alone": [list(E2[i]) for i in ess], "deletable_alone": len(dele), "unknown": len(unk),
+                  "mu_lower": len(ess),
+                  "claim_scope": "each distance-2 edge of H deleted alone from the full set: sat = a validated "
+                  "5-colouring separates A, B without it (so the edge lies in EVERY forcing subset: mu_lower is "
+                  "rigorous), unsat = A = B still forced without it, unknown = undecided at cap"})
+    # ddmin over the deletable ones: keep = everything not in `dele`; try dropping chunks of `dele`
+    rng = random.Random(seed)
+    cand = list(dele); rng.shuffle(cand)
+    kept_fixed = [i for i in range(len(E2)) if i not in set(dele)]
+    S = set(range(len(E2)))
+    asks = 0
+    def forced(sub) -> str:
+        return forces_outcome(n, E1, [E2[i] for i in sorted(sub)], iA, iB, cap)
+    chunk = max(1, len(cand) // 2)
+    pos = 0
+    while cand:
+        if pos >= len(cand):
+            if chunk == 1: break
+            chunk = max(1, chunk // 2); pos = 0; continue
+        piece = cand[pos:pos + chunk]
+        st = forced(S - set(piece)); asks += 1
+        if st == "unsat":
+            S -= set(piece); cand = [c for c in cand if c not in set(piece)]
+            print(f"  ddmin: dropped {len(piece)} (chunk {chunk}) → |S| = {len(S)}  [{asks} asks, {time.time()-t0:.0f}s]", flush=True)
+            # do not advance pos: the next piece now sits at pos
+        else:
+            pos += chunk
+    print(f"ddmin done: |S| = {len(S)} after {asks} asks, {time.time()-t0:.0f}s", flush=True)
+    # necessity census at 4x cap, in parallel
+    surv = sorted(S)
+    nec = mechanism.pmap(lambda i: forced(S - {i}) if False else forces_outcome(n, E1, [E2[j] for j in surv if j != i], iA, iB, cap * 4), surv)
+    wit = sum(1 for st in nec if st == "sat"); unk2 = sum(1 for st in nec if st == "unknown")
+    still = [i for i, st in zip(surv, nec) if st == "unsat"]
+    print(f"necessity at {cap*4}s: {wit} necessary, {unk2} unknown, {len(still)} still deletable", flush=True)
+    row = {"kind": "edge-critical", "k": 5, "stage_fingerprint": fp, "pool_fingerprint": None, "cap": cap,
+           "outcome": "unsat", "mu_upper": len(surv), "mu_lower": len(ess), "seed": seed, "asks": asks,
+           "essential": [list(E2[i]) for i in surv],
+           "necessity": {"complete": unk2 == 0 and not still, "witnesses": wit, "unknown": unk2, "still_deletable": len(still)},
+           "claim_scope": "a distance-2 edge subset of H keeping A = B forced at five colours, found by single-deletion "
+           "census + ddmin (unknowns kept); mu_upper = its size (an upper bound on the minimum; 1-minimal iff "
+           "necessity.complete); mu_lower = the edges essential alone (rigorous lower bound on the minimum)"}
+    record(path, row)
+    print(f"mu bounds for H's forced pair: {len(ess)} ≤ mu_H ≤ {len(surv)}  (1-minimal: {row['necessity']['complete']})", flush=True)
+
+
 def phase_descend5(cap: float = 120.0, pools=("seam", "up")) -> None:
     """Phase 4: the k = 5 descent on the seed — H's essential distance-2 edges (from
     build/m49-seed-edges.json, the smallest order), invariant "A = B stays forced", pools seam then
@@ -996,6 +1072,8 @@ if __name__ == "__main__":
         phase_count(cap)
     elif "--descend5" in args:
         phase_descend5(cap)
+    elif "--seed-edges-census" in args:
+        phase_seed_edges_census(cap, int(next((args[i + 1] for i, a in enumerate(args) if a == "--seed"), 0)))
     elif "--seed-edges" in args:
         st = next((args[i + 1] for i, a in enumerate(args) if a == "--start"), None)
         start = json.loads(Path(st).read_text()) if st else None
