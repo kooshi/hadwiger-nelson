@@ -501,6 +501,91 @@ first-occurrence palette breaking; every model validated in-process.
   registered result: **6 of the 7 distance-2 edges incident to `A` or `B` are essential alone, versus
   23 of the other 439 (5 %)** — the lower-bound set concentrates at the ports.
 
+### §R3. The calibration at k = 4 (phase 3) — the algorithm validated where the endpoint is known, and P4b refuted the good way
+
+Object: the M33/M34 122-point distance-2 pigeonhole core (421 unit edges, 40 distance-2 pairs, not
+4-colourable), read as a {1,2}-graph; invariant "not 4-colourable"; pools = one generation of the seam
+group (`ζ₆, σ`) about the target edge's endpoints, then one generation of `ρ₁₅, √ρ₁₅, √ρ₆₃`; cap 60 s
+(4× for the certifications); 8 workers, sequential scan (`descend_run`). Desktop, ~40 h wall.
+
+* **P4a (edge-critical count ≥ 30 of 40): MET** — two greedy orders both give **37 of 40** essential,
+  necessity complete.
+* **P4b ("the seam halo removes NONE"): REFUTED at step 1 and then 33 more times.** The seam pool
+  (790–4,368 new points per ask) removed **34 of the 37** distance-2 edges, in the scan's own order,
+  every removal certified (UNSAT, 2-bit re-encode UNSAT, halo 1-minimal with a witness per survivor —
+  527 witnesses over 527 halo vertices, zero undecided). Halo sizes, in order: 5, 0, 3, 1, 0, 49, 0,
+  21, 16, 9, 8, 10, 5, 8, 0, 4, 13, 6, 2, 56, 2, 0, 1, 45, 37, 18, 17, 21, 6, 34, 64, 29, 18, 19
+  (mean 15.5, median 8.5); object 122 → **649** vertices, 3,232 unit edges. **The stall: μ_upper = 3.**
+  The three survivors — `(15,57)` and the symmetric pair `(112,118)`, `(113,119)` — refuse the seam
+  pool AND the up pool (7,776 points) on every rescan; `(15,57)` refuses even a two-generation seam
+  pool of 27,690 points. The final object's unit part alone is 4-colourable (0.1 s): **no seam-field
+  unit-distance 5-forcer** — the field wall (G1) holds at this depth, three edges wide.
+* My P4b reasoning was wrong and is worth recording: G1 speaks of *pure* unit material forcing five;
+  a halo does a distance-2 edge's job **in context**, with the other distance-2 edges still carrying
+  the load, and that is a much weaker demand — 34 of 37 times a one-generation seam halo meets it.
+* **P4c ("the one-field-up halo removes at least one"): under the registered order (up only after
+  seam refuses) the up pool was asked only on the three survivors and refused all three (one
+  generation, 7,776 points). MET one level deeper**: the seam-then-up TWO-generation pool
+  (~64,000 points) turns all three UNSAT (284 / 126 / 246 s, one encoding). Their certified commits
+  and the final unit-part test are §R3′ below.
+* Replay: every one of the 34 (later 37) steps was re-derived from its row — the pools are
+  deterministic and every stage and pool fingerprint matched — and the object is saved
+  (`build/m49-calib122-object.json`).
+
+### §R3′. The calibration completed at depth two — PENDING at the time of writing
+
+(filled when `scratchpad/finish_k4.py` finishes: the three deep-pool commits through the certified
+step, then the unit part alone at k = 4. If it refuses: a unit-distance graph with χ ≥ 5 built by
+descent from the pigeonhole — HALT AND VERIFY before interpreting.)
+
+### §R4. The k = 5 descent on the seed (phase 4) — twelve of the twenty-nine edges every forcing subset needs, replaced by seventeen seam-field points
+
+* **The registered full-pool run stalled undecided**: 252 targets (the phase-2 survivors), forced-pair
+  framing, cap 180 s: seam pool (1,083–1,567 new points) **243 unknown / 9 refused / 0 removed**; up
+  pool (2,556) **219 unknown / 33 refused / 0 removed**. Recorded as a stall at μ_upper = 252, meaning
+  only "undecided at this cap". Replaced the same morning by **phase 4′** (`--descend5-lb`,
+  committed): targets = the **29 lower-bound edges** (each provably in every forcing subset), object
+  = the FULL seed (all 446), pools laddered by radius about the target's midpoint (1.5, 3, whole) for
+  seam then up, cap 900 s; parallel scan per rung, sequential certified commits (`descend_step`:
+  re-ask, 3-bit re-encode at 3,600 s, halo shrunk 1-minimal — by parallel ddmin after the batch
+  greedy spent 13 h on one 700-point halo — with a necessity witness per survivor at 3,600 s).
+* **The rung table (every ask decided — zero unknown anywhere):**
+
+  | pool | radius | new points | asked | UNSAT (candidates) | refused |
+  |---|---|---|---|---|---|
+  | seam | 1.5 | 153–424 | 29 | **8** | 21 |
+  | seam | 3.0 | 592–1,223 | 21, then 20 (rescan after resume) | 3, then 3 (**4 new removals**) | 17 |
+  | seam | whole | 1,386–1,677 | 17 | 0 | 17 |
+  | up | 1.5 | 235–1,271 | 17 | 0 | 17 |
+  | up | 3.0 | 1,161–2,709 | 17 | 0 | 17 |
+  | up | whole | 2,760 | 17 | 0 | 17 |
+
+* **Twelve certified removals, 17 points in all**: `(76,78)`·1, `(78,168)`·1, `(111,112)`·1,
+  `(112,134)`·2, `(134,149)`·0, `(143,210)`·0, `(168,204)`·1, `(185,211)`·1 at radius 1.5;
+  `(11,207)`·1, `(22,112)`·9, `(22,134)`·0, `(33,85)`·0 at radius 3 (halo sizes; the zeros are edges
+  whose job the points added for EARLIER edges already do — shared kills). Every one: UNSAT in
+  4.8–9.6 s, 3-bit re-encode UNSAT, halo 1-minimal, every survivor witnessed, 0 undecided
+  (`build/m49-descent5.json`, label `seed-k5-lb`; the resumed run replayed the first nine exactly).
+  Object 214 → **231** vertices, 1,004 → 1,122 unit edges, distance-2 edges 446 → **434**.
+* **The mechanism, measured on the first removal**: the kill point `p` for `(76,78)` sits at unit
+  distance from endpoint 78 (2.18 from 76 — NOT the tangency midpoint) and has **9 unit neighbours**
+  in the seed; forbidding any one colour on those nine (palette-WLOG) in `H − (76,78)` with `A ≠ B` is
+  **UNSAT** while the control without the restriction is SAT — so in every separating colouring the
+  neighbourhood is forced rainbow and `p` cannot be coloured: the kernel's A1
+  (`not_colorable_iff_covers`) at a point outside the object. `(76,78)` and `(111,112)` are a symmetry
+  pair with identical kill geometry (1.3696 from the midpoint, 2.1799 / 1.0000 from the endpoints).
+* **P5 (seam halo removes ≥ 1 essential edge at k = 5): MET, twelve times, on the strongest targets.**
+  **P6 (up pool removes further): MISSED, decisively** — 0 of 17 at every radius, all decided.
+  **P7 (k = 5 removal costs ≥ 3× the k = 4 halo): REFUTED in its literal reading** — the twelve k = 5
+  removals cost 0–9 points (median 1) against the k = 4 median 8.5 — with the selection caveat that
+  these are the twelve *cheap* ones and the other seventeen cost more than any pool offered.
+  **The jackpot clause never fired** (μ_upper 434 in the forced framing).
+* **What the flat half means, in the plan's own words**: for the seventeen refusing lower-bound edges,
+  no one-generation unit halo from either field about their endpoints transmits the forcing at this
+  cap — a stall value, not a bound on μ. G26/G31 gain: *twelve of a {1,2} six-forcer's
+  provably-essential distance-2 edges DO descend into seam-field unit material at five colours, at a
+  cost of one point each; the rest do not descend at depth one in either field.*
+
 ### §R5. μ(φ) exactly (phase 5) — Parts's {1,φ} six-forcer is edge-critical to the last edge
 
 * **Reconstruction, exact.** Parts's paper (arXiv:2010.12656 v2, fetched 2026-08-16) gives `G16`'s two
