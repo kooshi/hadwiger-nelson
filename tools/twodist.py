@@ -527,8 +527,40 @@ def pool_up(base_pts, centres):
     return g["pts"][len(base_pts):], g["fusions"]
 
 
+def _ddmin_vertices(ids: list[int], fires) -> tuple[list[int], int]:
+    """Parallel delta-debugging shrink of a vertex set under a monotone predicate `fires(keep)`
+    (True = the property holds with only `keep` retained). At each chunk level every piece is
+    tested for deletion against the SAME current set concurrently; passing pieces are merged (their
+    union in one ask, else one by one, each re-verified). O(k log n) sequential asks for a k-element
+    core — the batch greedy is one batch per acceptance and took hours on 1,000-point halos."""
+    import mechanism
+    core = list(ids)
+    chunk = max(1, len(core) // 2)
+    levels = 0
+    while core and chunk >= 1:
+        levels += 1
+        pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
+        base = list(core)
+        res = mechanism.pmap(lambda piece: fires([v for v in base if v not in set(piece)]), pieces)
+        passing = [pc for pc, ok in zip(pieces, res) if ok]
+        accepted = []
+        if passing:
+            union = set().union(*map(set, passing))
+            if fires([v for v in core if v not in union]):
+                accepted = sorted(union)
+                core = [v for v in core if v not in union]
+            else:
+                for pc in passing:
+                    if fires([v for v in core if v not in set(pc)]):
+                        core = [v for v in core if v not in set(pc)]; accepted += pc
+        if not accepted:
+            if chunk == 1: break
+            chunk = max(1, chunk // 2)
+    return core, levels
+
+
 def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: int, cap: float,
-                 shrink_halo: bool = True, framing="unsat") -> dict:
+                 shrink_halo: bool = True, framing="unsat", shrink: str = "ddmin") -> dict:
     """ONE descent question: with the halo `pool_pts` added (unit edges only — a halo point's
     distance-2 pairs are NOT edges), is the object with the target distance-2 edge REMOVED still
     not k-colourable? Returns the row (verdict per the contract). On UNSAT the halo is shrunk
@@ -579,7 +611,10 @@ def descend_step(base_pts, unit_e, two_e, target: tuple[int, int], pool_pts, k: 
             ks = set(keep) | set(range(nb))
             Es = [e for e in ue if e[0] in ks and e[1] in ks] + tp
             return ask(Es, cap) == "unsat", {}
-        core, dels, passes = mechanism.greedy_1min(halo_ids, list(reversed(halo_ids)), fired)
+        if shrink == "greedy":
+            core, dels, passes = mechanism.greedy_1min(halo_ids, list(reversed(halo_ids)), fired)
+        else:
+            core, passes = _ddmin_vertices(halo_ids, lambda keep: fired(keep)[0])
         # necessity census at 4x cap, parallel: sat = necessary (a witness), unknown = undecided;
         # unsat = the survivor was kept only because the greedy's ask timed out at `cap` — drop it
         # (the ask that said unsat IS the verification that the reduced core still fires; earlier
@@ -971,7 +1006,7 @@ def phase_descend5(cap: float = 120.0, pools=("seam", "up")) -> None:
     descend_parallel("seed-k5", pts, ue, ess, ess, 5, cap, path, pool_kinds=pools, framing=("forced", iA, iB))
 
 
-def phase_descend5_lb(cap: float = 900.0, radii=(1.5, 3.0, None), pools=("seam", "up")) -> None:
+def phase_descend5_lb(cap: float = 900.0, radii=(1.5, 3.0, None), pools=("seam", "up"), from_rung: int = 0) -> None:
     """Phase 4′ (registered 2026-08-16 after the full-pool round read 243/252 UNKNOWN at 180 s): the
     k = 5 descent aimed at the LOWER-BOUND set — the distance-2 edges of `H` that lie in EVERY forcing
     subset (deletion alone admits a validated separating colouring; `single-deletion-census` row) —
@@ -1003,8 +1038,27 @@ def phase_descend5_lb(cap: float = 900.0, radii=(1.5, 3.0, None), pools=("seam",
         mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
         return [q for q in halo if (CL.approx(q)[0] - mx) ** 2 + (CL.approx(q)[1] - my) ** 2 <= r * r]
     steps = 0
-    for kind in pools:
-        for r in radii:
+    # resume: replay the committed removals recorded so far (deterministic pools; every fingerprint
+    # re-checked), then start at rung `from_rung` of the (pool × radius) ladder
+    if path.exists():
+        done = [row for row in json.loads(path.read_text())["rows"]
+                if row.get("label") == "seed-k5-lb" and row.get("verdict") == "removed"]
+        for row in done:
+            e = tuple(row["target"]); assert e in two_e
+            assert fingerprint(len(pts), ue + two_e) == row["stage_fingerprint"], "resume: stage fingerprint mismatch"
+            halo, _ = (pool_seam if row["pool"] == "seam" else pool_up)(pts, [pts[e[0]], pts[e[1]]])
+            halo = sub_pool(halo, e, row["radius"])
+            nb = len(pts)
+            assert fingerprint(nb + len(halo), closure_unit_edges(list(pts) + list(halo))) == row["pool_fingerprint"], "resume: pool fingerprint mismatch"
+            pts = pts + [halo[i - nb] for i in row["halo"]["ids"]]
+            ue = closure_unit_edges(pts)
+            two_e = [f for f in two_e if f != e]
+            steps += 1
+        if done:
+            print(f"[seed-k5-lb] resumed: {steps} removals replayed exactly → n={len(pts)}, unit={len(ue)}, two={len(two_e)}", flush=True)
+    rungs = [(kind, r) for kind in pools for r in radii][from_rung:]
+    for kind, r in rungs:
+        if True:
             live = [t for t in targets if t in two_e]
             def ask_only(e):
                 centres = [pts[e[0]], pts[e[1]]]
@@ -1252,7 +1306,7 @@ if __name__ == "__main__":
     elif "--count" in args:
         phase_count(cap)
     elif "--descend5-lb" in args:
-        phase_descend5_lb(cap)
+        phase_descend5_lb(cap, from_rung=int(next((args[i + 1] for i, a in enumerate(args) if a == "--from-rung"), 0)))
     elif "--descend5" in args:
         phase_descend5(cap)
     elif "--seed-edges-census" in args:
