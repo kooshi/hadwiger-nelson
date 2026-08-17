@@ -610,6 +610,38 @@ descent from the pigeonhole — HALT AND VERIFY before interpreting.)
   edge; *the μ dial cannot be read off a critical object's own subgraphs* (they only bound μ above),
   which is exactly why the descent (phase 4) ADDS material rather than deleting it.
 
+### §R6. The registered predictions, scored
+
+| # | registered | outcome |
+|---|---|---|
+| P1 | seed certificate lands, every cube < 10⁶ LRAT lines | **MISSED** — priced at 24.0/22.9/19.8 M hints per cube (~50 M total, M06 × 1.6, ~40 kernel-hours, ~600 MB source); every lever measured (vertex shrink 3× worse, K no better, six ports ~78 M, configs −26 %, proof-guided a fixed point); deferred with numbers, tools-side double-encoded |
+| P2 | μ_upper ≤ 149 of 446 for H's forced pair | **UNDECIDED** — sandwich `29 ≤ μ_H ≤ 252`; the upper end is cap-limited (114 of 252 individually deletable at 960 s) |
+| P3 | ≥ half the essential edges within 3 of A, B | **MET VACUOUSLY** (444/446 of all edges are); post hoc: 6/7 port-incident edges essential alone vs 23/439 |
+| P4a | 122-core essential count ≥ 30 of 40 | **MET** — 37/40, two orders agree |
+| P4b | seam halo removes NONE at k = 4 | **REFUTED** — 34 of 37 removed, all certified; the unit part alone stays 4-colourable (G1 not contradicted — the prediction misapplied it, G30 addendum) |
+| P4c | up halo removes ≥ 1 at k = 4 | **MET AT DEPTH TWO** — one generation refused all three survivors; the seam-then-up two-generation pool turns all three UNSAT (§R3′ for the certified commits) |
+| P5 | seam halo removes ≥ 1 essential edge at k = 5 | **MET** — twelve of the twenty-nine lower-bound edges, seventeen points, every rung decided |
+| P6 | up pool removes a further one at k = 5 | **MISSED** — 0 of 17 at radii 1.5, 3, whole; all decided (jackpot never fired) |
+| P7 | k = 5 removal costs ≥ 3× the k = 4 halo | **REFUTED literally** — k = 5 median 1 point vs k = 4 median 8.5; selection caveat: these are the twelve cheap ones |
+| P8 | μ(φ) on Parts's G31 ≥ 20 of 56 | **MET at the extreme** — 56 of 56 (edge-critical to the last edge) |
+
+### §R7. The next turn (stub for the successor milestone — the ranking's item 1)
+
+The instrument exists and is checkpointed; the registered next turn, in order of expected yield per
+CPU-hour: (i) the seventeen refusing lower-bound edges against two-generation pools (seam-then-up
+about the endpoints, ~60,000 points; the k = 4 calibration needed exactly depth two where depth one
+stalled) — cap 1,800 s, parallel scan, certified commits with the ddmin shrink; (ii) the descent on
+ALL essential edges of the seed (the 92 necessary at 960 s — recompute and STORE per-edge necessity,
+the phase-2 row kept only counts), so μ for the whole object moves — that curve is the χ ≥ 6 dial;
+(iii) DESIGNED halos: for a refuser `e`, search the seam and up orbits about its endpoints for a
+single point whose unit neighbourhood in the seed is forced rainbow in every separating colouring of
+`H − e` (one coverage ask per candidate point; the twelve kills found so far are exactly such points),
+and compare the hit rate against enumerated pools; (iv) the same descent on Parts's {1,φ} G31 (its
+φ-edges are ALL essential — a clean 56-target ladder) and on De Neve's {1,3} object if its data
+surfaces; (v) the second encoding applied to the SHRUNK object rather than the full-halo object
+(today's `descend_step` re-encodes before shrinking, which certifies the candidate, not the committed
+core — the core is certified one-hot plus witnesses; make it two encodings). Jackpot clause verbatim.
+
 ## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
