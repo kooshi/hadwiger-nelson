@@ -673,6 +673,26 @@ core — the core is certified one-hot plus witnesses; make it two encodings). J
 * **Running:** connected subsets of size ≤ 9 among the strong points (~11 M), the two controls in the
   edge list. Anything found is a candidate only until certified by the standard route.
 
+* **Depth one is exhausted for the seventeen — in every field.** The whole depth-one partner set
+  (all 9,271 points, all their mutual unit edges) as one halo: for each refuser, some separating
+  colouring extends to the ENTIRE set (list-colouring SAT, ~1–8 s each), so no depth-one subset of any
+  size kills it (feasibility is monotone in the point set). Both controls read KILL. Per refuser the
+  colourings surviving depth one: 2, 4, 1, 1, 1, 6, 6, 2, 4, 2, 16, 4, 1, 1, 4, 1, 2 (of 3, 4, 16, 4,
+  2, 10, 10, 2, 4, 2, 19, 10, 2, 2, 4, 8, 3). Per-colouring depth-two single points (a point with one
+  seed neighbour squeezed by ≥ 4 forced depth-one neighbours): none, for any surviving colouring
+  (~25,000 candidates each).
+* **Depth two, restricted (intersections about seed ∪ the 284 strong depth-one points; 42,868 new
+  points; union set 52,139 points / 263,272 unit pairs), the whole set as one halo, per surviving
+  colouring:** **seven refusers are KILLED** — `(133,150)`, `(205,207)`, `(205,208)`, `(40,206)`,
+  `(56,168)`, `(56,78)`, `(77,94)`; five are one or two colourings short — `(118,212)` 1 of 2,
+  `(21,210)` 1 of 2, `(38,211)` 1 of 2, `(98,213)` 1 of 2, `(210,211)` 2 of 4; five fully survive —
+  `(126,203)`, `(206,210)`, `(206,211)`, `(4,205)`, `(71,107)`. Shrinking the seven with the lookup
+  oracle (ddmin, ~5 min each): `(133,150)` → a **122-point 1-minimal gadget** (every point
+  necessary; depth-one points with 2–3 seed neighbours and depth-two points with one, halo degrees
+  4–10) — the recursion's cost made concrete: one point at depth one, a hundred-odd at depth two.
+  Certification of the designed halos (exact sympy coordinates from the defining circle pairs, every
+  unit edge exact, two solver encodings) is `scratchpad/certify_halo.py`, running next.
+
 ## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
