@@ -693,6 +693,38 @@ core — the core is certified one-hot plus witnesses; make it two encodings). J
   Certification of the designed halos (exact sympy coordinates from the defining circle pairs, every
   unit edge exact, two solver encodings) is `scratchpad/certify_halo.py`, running next.
 
+### §R9. Designed kills — seven refusers fall to depth-two gadgets (2026-08-18 morning)
+
+* **The seven restricted-depth-two kills, shrunk 1-minimal by the lookup oracle** (ddmin over the
+  52,139-point union with per-colouring list-colouring SATs; every survivor re-checked necessary):
+  `(133,150)` **122** points (102 depth-one + 20 depth-two), `(205,207)` **267** (211 + 56),
+  `(205,208)` **254** (213 + 41), `(40,206)` **147**, `(56,168)` **87**, `(56,78)` **225**,
+  `(77,94)` **101** — gadgets of a hundred-odd points each, mostly depth-one points with 2–3 seed
+  neighbours plus depth-two points with one, unit-connected among themselves at degrees 4–10
+  (`build/m49-kill-halos*.json`). The step from one point (depth one) to ~100–270 (depth two) is
+  the recursion's cost, measured (G25).
+* **Certification** (`tools/m49/certify_halo.py`): every halo point defined exactly as an
+  intersection of unit circles about two exact points (seed–seed for depth one; seed + an exactly
+  defined depth-one point for depth two; sympy nested radicals), every claimed unit edge checked
+  exactly (sympy simplify to 0 within a 10-s budget; otherwise 200-digit numeric agreement,
+  LABELLED as such in the row — the first two gadgets: 637 exact + 46 numeric of 683 edges, and
+  1,372 + 155 of 1,527), then the one-hot ask with `A ≠ B` on `H − e + halo` and the 3-bit
+  re-encode: **`(133,150)` UNSAT/UNSAT (removed, 122 points), `(205,207)` UNSAT/UNSAT (removed, 267)**;
+  the other five were certifying at the time of writing (see the row list in `build/m49-descent5.json`,
+  label `seed-k5-design`).
+* **What was NOT reached at this depth:** five refusers are one or two colourings short of a kill
+  on the restricted depth-two union (`(118,212)`, `(21,210)`, `(38,211)`, `(98,213)`, `(210,211)`)
+  and five are untouched by it (`(126,203)`, `(206,210)`, `(206,211)`, `(4,205)`, `(71,107)`). The
+  local, unrestricted depth-two union (all depth-one centres within 1.5 of the edge) was attempted and
+  its construction was too slow with the coarse grid (hundreds of thousands of points; the unit-pair
+  census is the bottleneck, `cKDTree` is the fix) — not run to a verdict, reported as such.
+* **The k = 4 side of the same idea did not transfer:** the stalled 649-point calibration object minus
+  a refuser has more than 20,000 four-colourings up to palette (enumeration capped after 7.7 h), so
+  the lookup engine has no small list to work with there; the three depth-two UNSAT probes stand as
+  single-encoding probes, and the certified commit (a 28,000-point shrink at k = 4) was stopped after
+  9.5 h without finishing. The seed at five colours is rigid (35 colourings; 2–19 per refuser); the
+  four-colour pigeonhole object is not. Rigidity is what makes the engine cheap.
+
 ## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
