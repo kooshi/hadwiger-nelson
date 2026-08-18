@@ -642,6 +642,37 @@ surfaces; (v) the second encoding applied to the SHRUNK object rather than the f
 (today's `descend_step` re-encodes before shrinking, which certifies the candidate, not the committed
 core — the core is certified one-hot plus witnesses; make it two encodings). Jackpot clause verbatim.
 
+### §R8. The enumeration screen (2026-08-17 night, on Kooshi's "keep hunting depth and efficiency") — the kill space is finite and the solver leaves the loop
+
+* **The candidate space is enumerable, in any field.** A single added point kills a separating
+  colouring only if it cannot be coloured, so it needs ≥ 5 unit neighbours in the seed; a point at unit
+  distance from two seed vertices `u, v` is one of the two intersection points of the unit circles about
+  them (M22's gluing classification: `{a point, its mirror}`, coordinates in the seed's field extended by
+  `√(4 − |uv|²)`). Census (`scratchpad/kill_census*.py`, float geometry at 1e-7 for the candidate list —
+  a pool is a choice, not a claim): **9,485 depth-one partner points**, 214 of them the seed itself,
+  **51 non-seed points with ≥ 5 seed neighbours** (25 with five, 22 with eight); **59 distinct radicands
+  `4 − d²`** over the seed's realized distances `d < 2` — the complete list of "odd ratios" available at
+  depth one, several outside the seam field.
+* **The separating colourings are FEW.** For each of the 17 refusing lower-bound edges `e`, the proper
+  5-colourings of `H − e` with `A ≠ B` (all of which have `e`'s endpoints monochromatic), enumerated
+  exactly up to palette by blocking clauses: **2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 8, 10, 10, 10, 16, 19**
+  (7–45 s each; `build/m49-sep-*.json`). Controls: the removed edges `(76,78)` and `(22,112)` have 2 and
+  8. So a halo kills `e` iff its list-colouring problem (lists = colours unused on each member's seed
+  neighbourhood, halo unit edges as ≠) is infeasible under every listed colouring — **bit masks, no
+  solver**. The solver census on the 51 × 17 single-point questions (867 asks, cap 900 s, **0 kills, 0
+  unknown**) agrees with the lookup exactly (green cross-check).
+* **Screened so far, all 17 refusers, zero kills:** every single depth-one point (any field); every
+  unit-adjacent pair among all 9,271 non-seed depth-one points (28,734 pairs); every connected triple
+  (189,402); every connected subset of size ≤ 7 among the 284 "strong" points (≥ 3 seed neighbours;
+  548 unit edges among them; 707,239 subsets). Depth-two points (intersections about seed ∪ strong
+  points; 42,868) have ≤ 1 seed neighbour each, so they act only as connectors needing ≥ 4 halo
+  neighbours. **Control green:** the same screen finds 958 halo kills of size ≤ 5 for the removed edge
+  `(76,78)` (whose certified kill is one point) and none ≤ 5 for `(22,112)` (whose certified kill is
+  nine strong points with 13 halo edges among them — a genuine gadget, and the template the size-9
+  search below is aimed at).
+* **Running:** connected subsets of size ≤ 9 among the strong points (~11 M), the two controls in the
+  edge list. Anything found is a candidate only until certified by the standard route.
+
 ## §S. SESSION STATE FOR CONTINUATION (written 2026-08-15 ~22:15 before a context compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: step 7 (implementation), phases 3–4
