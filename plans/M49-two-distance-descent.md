@@ -746,6 +746,29 @@ clause verbatim.
   9.5 h without finishing. The seed at five colours is rigid (35 colourings; 2–19 per refuser); the
   four-colour pigeonhole object is not. Rigidity is what makes the engine cheap.
 
+### §R10. Two questions asked at the close (Kooshi, 2026-08-18) — order, and batch design
+
+* **Order dependence, measured.** The seven certified gadgets committed sequentially onto the
+  12-removal object in three orders (one-hot asks; `scratchpad/order_test.py`): by `|S_e|` ascending
+  **3 of 7** compose (`(56,168)`, `(56,78)`, and `(133,150)` — the last only after the others had
+  changed the context); by `|S_e|` descending **2**; by halo size descending **3**; by halo size
+  ascending (§R9) **2**. Small lists first is weakly better; context can HELP as well as hurt. An
+  object with **15 of 29** lower-bound edges removed exists (one-hot; 3-bit pass and row: next turn).
+* **Batch lists are enumerable.** `|S_B|` for the seed minus a whole batch `B` (no halos), exact up to
+  palette by blocking clauses: **684** for the twelve depth-one-removed edges, **1,010** for the
+  fourteen, ≥ 3,469 for the nineteen and ≥ 5,366 for all twenty-nine at a 30-min cap (still climbing
+  at 2–3/s) — thousands, plausibly tens of thousands, not millions. So the whole lower-bound set is
+  ONE design problem: a halo list-uncolourable under every colouring of `S_29` kills all twenty-nine at
+  once, composition by construction, no ordering — the next turn's cleanest formulation.
+* **Completeness caveat recorded.** The depth-`d` partner lattice is exactly the unit-compass-
+  constructible points over the seed (a 2-tower of quadratic extensions of height ≤ `d`); depth-one
+  completeness for single-point kills is a corollary of `Glue.sphere_inter_sphere` (to be written);
+  a MINIMAL kill has every point with ≥ 2 neighbours, but rigid non-2-generated halos (K₃,₃-type)
+  lie outside the lattice at every depth — so "no kill at any depth" claims are about constructible
+  halos only. Measured: the seed's own unit graph is 2-generated from 4,011 of its 22,791 point pairs
+  (never from an adjacent pair), so anchored rigid copies of the seed are in the lattice; the paper's
+  single-anchor spindle copy is not.
+
 ## §S. STATE AT THE CLOSE (2026-08-18 evening; the earlier continuation note is superseded by §R0–§R9)
 
 Milestone CLOSED. Gate: `scripts/build.sh` OK (170 modules), `scripts/axioms.sh` OK (533 clean, the
