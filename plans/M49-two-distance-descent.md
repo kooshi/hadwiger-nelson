@@ -710,8 +710,22 @@ core — the core is certified one-hot plus witnesses; make it two encodings). J
   LABELLED as such in the row — the first two gadgets: 637 exact + 46 numeric of 683 edges, and
   1,372 + 155 of 1,527), then the one-hot ask with `A ≠ B` on `H − e + halo` and the 3-bit
   re-encode: **`(133,150)` UNSAT/UNSAT (removed, 122 points), `(205,207)` UNSAT/UNSAT (removed, 267)**;
-  the other five were certifying at the time of writing (see the row list in `build/m49-descent5.json`,
-  label `seed-k5-design`).
+  and then **all seven certified** — `(205,208)` 254 (1,285 exact + 118 numeric-200 edges), `(40,206)`
+  147 (722 + 142), `(56,168)` 87 (425 + 50), `(56,78)` 225 (1,110 + 123), `(77,94)` 101 (518 + 53) —
+  each UNSAT in both encodings **on `H − e`** (rows in `build/m49-descent5.json`, label
+  `seed-k5-design`).
+* **Kills are context-dependent, and the composition says so.** All nineteen removals at once (the
+  12-removal object + the seven gadgets, 1,434 points, 23,255 unit edges, 427 distance-2 edges) is
+  **SAT** — `A ≠ B` becomes possible — because each gadget was designed against the separating
+  colourings of `H − e` with the OTHER 445 distance-2 edges present, and the multiply-reduced object
+  has more of them. Committed SEQUENTIALLY on the 12-removal object (each ask on the current object,
+  3-bit re-encode): `(56,168)` (87 points) and `(56,78)` (225) **commit**; `(77,94)`, `(133,150)`,
+  `(40,206)`, `(205,208)`, `(205,207)` do not kill in the reduced context (SAT in 0–5 s). **The
+  descent object at the close: 543 points, 3,441 unit edges, 14 of the 29 lower-bound edges removed
+  (446 → 432 distance-2 edges)** — 12 at depth one for 17 points, 2 at depth two for 312 —
+  `build/m49-compose-seq.json`; the other five gadgets are certified standalone kills on the seed and
+  are re-designable against the current object's own separating-colouring list (the engine's next
+  turn: enumerate on the CURRENT object, not on `H`).
 * **What was NOT reached at this depth:** five refusers are one or two colourings short of a kill
   on the restricted depth-two union (`(118,212)`, `(21,210)`, `(38,211)`, `(98,213)`, `(210,211)`)
   and five are untouched by it (`(126,203)`, `(206,210)`, `(206,211)`, `(4,205)`, `(71,107)`). The
