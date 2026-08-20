@@ -98,6 +98,23 @@ class Obj:
             out.append(self.add_glue(a, b, s))
         return out
 
+    def halo_structure(self):
+        """(halo_seed_nbrs, halo_adj): for each old-halo point (index ≥ 214), its SEED unit
+        neighbours and the halo–halo unit adjacency — the CSP variables' scaffolding."""
+        ue = self.unit_edges()
+        m = self.n - 214
+        hs = [[] for _ in range(m)]
+        ha = [[] for _ in range(m)]
+        for a, b in ue:
+            if a >= 214 and b >= 214:
+                ha[a - 214].append(b - 214)
+                ha[b - 214].append(a - 214)
+            elif b >= 214:
+                hs[b - 214].append(a)
+            elif a >= 214:
+                hs[a - 214].append(b)
+        return hs, ha
+
     def check(self, dps: int = 30) -> bool:
         """Re-derive every glue point from provenance at `dps`-digit mpmath and compare — the
         planted per-iteration control. Raises on drift."""
@@ -153,6 +170,10 @@ class Pool:
         tree_obj = cKDTree(np.array(obj.pts))
         self.nbrs = [sorted(j for j in tree_obj.query_ball_point(p, 1 + TOL)
                             if abs(_d2(p, obj.pts[j]) - 1) < TOL) for p in pts]
+        # seed-projection design (§R5): masks come from SEED neighbours; old-halo neighbours are
+        # CSP variables (their colours are existential, not fixed by the enumerated seed class)
+        self.nbrs_seed = [[v for v in N if v < 214] for N in self.nbrs]
+        self.nbrs_halo = [[v - 214 for v in N if v >= 214] for N in self.nbrs]
         if pts:
             tree = cKDTree(np.array(pts))
             self.adj = [[] for _ in pts]
@@ -230,8 +251,10 @@ def pool_depth2_restricted(obj: Obj, p1: Pool, min_nbrs: int = 3) -> Pool:
 # ---------------------------------------------------------------- colourings and lookups
 
 def avail_masks(obj: Obj, pool: Pool, col) -> list[int]:
+    """per pool point, colours not used on its SEED neighbours (old-halo neighbours are CSP
+    variables — §R5's seed-projection semantics; for the plain seed object the two coincide)"""
     out = []
-    for N in pool.nbrs:
+    for N in pool.nbrs_seed:
         used = 0
         for v in N:
             used |= 1 << col[v]
@@ -239,8 +262,24 @@ def avail_masks(obj: Obj, pool: Pool, col) -> list[int]:
     return out
 
 
-def feasible(pool: Pool, idxs, avail, cap=1800) -> bool:
-    """List-colouring SAT of the pool subset `idxs` under precomputed avail masks."""
+def halo_masks(obj: Obj, col) -> list[int]:
+    """per old-halo point, colours not used on its seed neighbours"""
+    hs, _ = obj.halo_structure()
+    out = []
+    for N in hs:
+        used = 0
+        for v in N:
+            used |= 1 << col[v]
+        out.append(FULL & ~used)
+    return out
+
+
+def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
+    """List-colouring SAT of the pool subset `idxs` PLUS every old-halo point of the object (the
+    old halo's colours are existential under the seed class — §R5). `hav` = the halo masks for
+    this colouring (None/[] for the plain seed object)."""
+    hav = hav if hav is not None else []
+    m = len(hav)
     loc = {p: i for i, p in enumerate(idxs)}
     cls = []
     for p in idxs:
@@ -248,19 +287,36 @@ def feasible(pool: Pool, idxs, avail, cap=1800) -> bool:
         if av == 0:
             return False
         cls.append([loc[p] * K + c + 1 for c in range(K) if av >> c & 1])
+    off = len(idxs)
+    if m:
+        hs, ha = pool.obj.halo_structure()
+        for j in range(m):
+            av = hav[j]
+            if av == 0:
+                return False
+            cls.append([(off + j) * K + c + 1 for c in range(K) if av >> c & 1])
+        for j in range(m):
+            for jj in ha[j]:
+                if jj > j:
+                    for c in range(K):
+                        cls.append([-((off + j) * K + c + 1), -((off + jj) * K + c + 1)])
+        for p in idxs:
+            for j in pool.nbrs_halo[p]:
+                for c in range(K):
+                    cls.append([-(loc[p] * K + c + 1), -((off + j) * K + c + 1)])
     for a in idxs:
         for b in pool.adj[a]:
             if b in loc and b > a:
                 for c in range(K):
                     cls.append([-(loc[a] * K + c + 1), -(loc[b] * K + c + 1)])
-    st, _ = forcer._solve(cls, len(idxs) * K, cap)
+    st, _ = forcer._solve(cls, (len(idxs) + m) * K, cap)
     assert st in ("sat", "unsat"), st
     return st == "sat"
 
 
 def kills(pool: Pool, idxs, cols_avail) -> bool:
-    """Does the subset kill EVERY colouring (avail-mask list per colouring)?"""
-    return all(not feasible(pool, idxs, av) for av in cols_avail)
+    """Does the subset kill EVERY colouring? cols_avail: list of (pool_masks, halo_masks)."""
+    return all(not feasible(pool, idxs, av, hv) for av, hv in cols_avail)
 
 
 # ---------------------------------------------------------------- enumeration (phase 2)
@@ -275,8 +331,8 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
     order = T._degree_order(obj.n, edges)
     header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
-              "batch": [list(e) for e in B], "k": K, "order_fingerprint":
-              hashlib.sha256(repr(order).encode()).hexdigest()[:16]}
+              "batch": [list(e) for e in B], "k": K, "block_on": len(blk), "order_fingerprint":
+              hashlib.sha256(repr((order, blk)).encode()).hexdigest()[:16]}
     cls = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
     cls += T._brk_full(obj.n, K, order)
     cls += [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
@@ -330,7 +386,7 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
 
 
 def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
-                    stretch: float = 300.0, split_target: int = 28, log=print) -> dict:
+                    stretch: float = 300.0, split_target: int = 28, block_on=None, log=print) -> dict:
     """The parallel form of `enumerate_seps`, with ENTROPY-GUIDED cube splitting. A cube is a list
     of (vertex, colour) pins; cubes partition the solution set (children pin one more vertex, one
     child per colour), and the breaking clauses are global, so the union over leaf cubes equals the
@@ -344,9 +400,14 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
     B = [tuple(e) for e in B]
     edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
     order = T._degree_order(obj.n, edges)
+    if block_on is not None:
+        blk = sorted(block_on)
+        order = [v for v in order if v in set(blk)]      # split vertices stay inside the projection
+    else:
+        blk = list(range(obj.n))
     header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
-              "batch": [list(e) for e in B], "k": K, "order_fingerprint":
-              hashlib.sha256(repr(order).encode()).hexdigest()[:16]}
+              "batch": [list(e) for e in B], "k": K, "block_on": len(blk), "order_fingerprint":
+              hashlib.sha256(repr((order, blk)).encode()).hexdigest()[:16]}
     cdir = path.parent / (path.stem + "-cubes")
     cdir.mkdir(exist_ok=True)
     lock = cdir / "LOCK"
@@ -478,7 +539,7 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
                 assert all(col[v] == c for v, c in pins), "cube pin violated"
                 fh.write(json.dumps("".join(map(str, col))) + "\n")
                 fh.flush()
-                cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+                cls.append([-coloring.var(v, col[v], K) for v in blk])
 
     rnd = 0
     while True:
@@ -547,7 +608,7 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     done = [0]
 
     def one(c):
-        r = not feasible(pool, allidx, avail_masks(obj, pool, c))
+        r = not feasible(pool, allidx, avail_masks(obj, pool, c), halo_masks(obj, c))
         done[0] += 1
         if done[0] % 2000 == 0:
             log(f"[profile {label}] {done[0]}/{len(cols)} [{time.time()-t0:.0f}s]", flush=True)
@@ -582,7 +643,13 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
     rows = mechanism.pmap(lambda c: bytes(avail_masks(obj, pool, c)), cols)
     for i, r in enumerate(rows):
         AVn[i] = np.frombuffer(r, dtype=np.uint8)
-    log(f"[cover] avail matrix {AVn.shape} built [{time.time()-t0:.0f}s]", flush=True)
+    nh = obj.n - 214
+    HVn = np.zeros((len(cols), nh), dtype=np.uint8)
+    if nh:
+        hrows = mechanism.pmap(lambda c: bytes(halo_masks(obj, c)), cols)
+        for i, r in enumerate(hrows):
+            HVn[i] = np.frombuffer(r, dtype=np.uint8)
+    log(f"[cover] avail matrices {AVn.shape} + halo {HVn.shape} built [{time.time()-t0:.0f}s]", flush=True)
     halo: list[int] = []
     stall: list[int] = []
     if state_path.exists():
@@ -596,7 +663,7 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
         """re-test coverage for the given colouring indices against the current halo"""
         if not halo:
             return
-        outs = mechanism.pmap(lambda t: not feasible(pool, halo, AVn[t]), list(idxs))
+        outs = mechanism.pmap(lambda t: not feasible(pool, halo, AVn[t], HVn[t]), list(idxs))
         for t, k in zip(idxs, outs):
             covered[t] = k
 
@@ -613,20 +680,20 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
             added = [empt[0]]
         else:
             allidx = list(range(len(pool.pts)))
-            if feasible(pool, allidx, AVn[t]):
+            if feasible(pool, allidx, AVn[t], HVn[t]):
                 stall.append(t)
                 queue = [q for q in queue if q != t]
                 log(f"[cover] colouring {t}: survives the whole pool — stalled ({len(stall)})")
                 _save(state_path, pool, halo, stall)
                 continue
-            added = [p for p in _ddmin_single(pool, AVn[t], log=log) if p not in set(halo)]
+            added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], log=log) if p not in set(halo)]
         halo += added
         recheck([q for q in queue])
         queue = [q for q in queue if not covered[q]]
         log(f"[cover] +{len(added)} pts (halo {len(halo)}): covered {int(covered.sum())}/{len(cols)}, "
             f"queue {len(queue)}, stall {len(stall)} [{time.time()-t0:.0f}s]", flush=True)
         _save(state_path, pool, halo, stall)
-    live = [AVn[t] for t in range(len(cols)) if t not in set(stall)]
+    live = [(AVn[t], HVn[t]) for t in range(len(cols)) if t not in set(stall)]
     halo2 = _shrink_halo(pool, halo, live, log)
     _save(state_path, pool, halo2, stall)
     row = {"kind": "cover", **pool.cite(), "n_colourings": len(cols), "halo_size": len(halo2),
@@ -643,25 +710,25 @@ def _save(state_path, pool, halo, stall):
     state_path.write_text(json.dumps({"pool_fingerprint": pool.fp, "halo": halo, "stall": stall}))
 
 
-def _ddmin_single(pool: Pool, av, log=print):
-    """Shrink the whole pool to a 1-minimal kill of ONE colouring (its avail masks `av`)."""
+def _ddmin_single(pool: Pool, av, hv, log=print):
+    """Shrink the whole pool to a 1-minimal kill of ONE colouring (its masks `av`, halo `hv`)."""
     core = [p for p in range(len(pool.pts))]
     chunk = max(1, len(core) // 2)
     while core and chunk >= 1:
         pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
         base = list(core)
-        res = mechanism.pmap(lambda pc: not feasible(pool, [v for v in base if v not in set(pc)], av),
+        res = mechanism.pmap(lambda pc: not feasible(pool, [v for v in base if v not in set(pc)], av, hv),
                              pieces)
         passing = [pc for pc, ok in zip(pieces, res) if ok]
         accepted = []
         if passing:
             union = set().union(*map(set, passing))
-            if not feasible(pool, [v for v in core if v not in union], av):
+            if not feasible(pool, [v for v in core if v not in union], av, hv):
                 core = [v for v in core if v not in union]
                 accepted = sorted(union)
             else:
                 for pc in passing:
-                    if not feasible(pool, [v for v in core if v not in set(pc)], av):
+                    if not feasible(pool, [v for v in core if v not in set(pc)], av, hv):
                         core = [v for v in core if v not in set(pc)]
                         accepted += pc
         if not accepted:
@@ -839,8 +906,8 @@ def self_test():
     sep = json.loads((BUILD / "m49-sep-76-78.json").read_text())
     cols = sep["colourings"]
     assert sep["exact"] and len(cols) == 2
-    AV = [avail_masks(obj, p1, c) for c in cols]
-    single = [p for p in range(len(p1.pts)) if all(av[p] == 0 for av in AV)]
+    AV = [(avail_masks(obj, p1, c), halo_masks(obj, c)) for c in cols]
+    single = [p for p in range(len(p1.pts)) if all(av[p] == 0 for av, _ in AV)]
     assert single, "the certified single-point kill of (76,78) not found by the mask sweep"
     probe = [single[0]] + random.sample(range(len(p1.pts)), 20)
     assert kills(p1, probe, AV), "monotonicity probe failed: adding points un-killed a kill"
@@ -951,7 +1018,7 @@ def run_commit(pool_name: str):
     sub = filter_sub(obj, cols, keep)
     print(f"[commit] batch {len(B)} edges, halo {len(halo)} pts; lookup re-check on "
           f"{len(sub)} colourings")
-    AVs = [avail_masks(obj, pool, c) for c in sub]
+    AVs = [(avail_masks(obj, pool, c), halo_masks(obj, c)) for c in sub]
     assert kills(pool, halo, AVs), "the halo does not kill the committable list — investigate"
     certify(obj, B, pool, halo, label=f"S29-{pool.name}")
 
@@ -1034,7 +1101,7 @@ if __name__ == "__main__":
             rc = [r for r in rows if r["kind"] == "recurse-census" and r["label"] == lab][-1]
             B = [tuple(e) for e in rc["essential_alone"]]
             out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2.jsonl")
-            enumerate_cubes(obj, B, BUILD / out)
+            enumerate_cubes(obj, B, BUILD / out, block_on=range(214))
         else:
             enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
