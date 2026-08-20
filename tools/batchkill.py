@@ -68,10 +68,7 @@ class Obj:
     def unit_edges(self) -> list[tuple[int, int]]:
         """cKDTree unit census over the current points, cached until the next add."""
         if self._unit is None:
-            tree = cKDTree(np.array(self.pts))
-            pairs = tree.query_pairs(1 + TOL)
-            self._unit = sorted((min(i, j), max(i, j)) for i, j in pairs
-                                if abs(_d2(self.pts[i], self.pts[j]) - 1) < TOL)
+            self._unit = unit_pairs_np(self.pts)
         return self._unit
 
     def fingerprint(self, B=()) -> str:
@@ -86,6 +83,7 @@ class Obj:
         self.pts.append(xy)
         self.prov.append(("glue", a, b, sign))
         self._unit = None
+        self._halo_struct = None
         return self.n - 1
 
     def add_halo(self, prov_list) -> list[int]:
@@ -100,7 +98,9 @@ class Obj:
 
     def halo_structure(self):
         """(halo_seed_nbrs, halo_adj): for each old-halo point (index ≥ 214), its SEED unit
-        neighbours and the halo–halo unit adjacency — the CSP variables' scaffolding."""
+        neighbours and the halo–halo unit adjacency — the CSP variables' scaffolding. Cached."""
+        if getattr(self, "_halo_struct", None) is not None:
+            return self._halo_struct
         ue = self.unit_edges()
         m = self.n - 214
         hs = [[] for _ in range(m)]
@@ -113,6 +113,7 @@ class Obj:
                 hs[b - 214].append(a)
             elif a >= 214:
                 hs[a - 214].append(b)
+        self._halo_struct = (hs, ha)
         return hs, ha
 
     def check(self, dps: int = 30) -> bool:
@@ -157,6 +158,42 @@ def _glue_xy(p, q, sign):
             (p[1] + q[1]) / 2 + sign * h * (q[0] - p[0]) / d)
 
 
+def unit_pairs_np(pts, tol: float = TOL, h: float = 0.25):
+    """All pairs at distance in [1−tol, 1+tol], by cell-pair blocks (annulus only — a disc query
+    at this density is billions of pairs; the annulus is millions)."""
+    P = np.asarray(pts)
+    keys = np.floor(P / h).astype(np.int64)
+    from collections import defaultdict as dd
+    cells = dd(list)
+    for i, (kx, ky) in enumerate(keys):
+        cells[(int(kx), int(ky))].append(i)
+    cells = {k: np.array(v) for k, v in cells.items()}
+    lo2, hi2 = (1 - tol) ** 2, (1 + tol) ** 2
+    reach = int(math.ceil((1 + tol) / h)) + 1
+    out = []
+    ck = sorted(cells.keys())
+    for (kx, ky) in ck:
+        A = cells[(kx, ky)]
+        PA = P[A]
+        for dx in range(-reach, reach + 1):
+            for dy in range(-reach, reach + 1):
+                # cell-centre distance window: skip cells that cannot contain annulus pairs
+                cd2 = (dx * dx + dy * dy) * h * h
+                if cd2 > (1 + tol + 2.83 * h) ** 2 or cd2 < max(0.0, 1 - tol - 2.83 * h) ** 2:
+                    continue
+                key2 = (kx + dx, ky + dy)
+                if key2 not in cells or key2 < (kx, ky):
+                    continue
+                B = cells[key2]
+                D = PA[:, None, :] - P[B][None, :, :]
+                d2 = (D * D).sum(axis=2)
+                ii, jj = np.nonzero((d2 >= lo2) & (d2 <= hi2))
+                for a, b in zip(A[ii], B[jj]):
+                    if key2 != (kx, ky) or a < b:
+                        out.append((int(min(a, b)), int(max(a, b))))
+    return sorted(set(out))
+
+
 # ---------------------------------------------------------------- pools (each a CHOICE)
 
 class Pool:
@@ -174,15 +211,11 @@ class Pool:
         # CSP variables (their colours are existential, not fixed by the enumerated seed class)
         self.nbrs_seed = [[v for v in N if v < 214] for N in self.nbrs]
         self.nbrs_halo = [[v - 214 for v in N if v >= 214] for N in self.nbrs]
+        self.adj = [[] for _ in pts]
         if pts:
-            tree = cKDTree(np.array(pts))
-            self.adj = [[] for _ in pts]
-            for i, j in tree.query_pairs(1 + TOL):
-                if abs(_d2(pts[i], pts[j]) - 1) < TOL:
-                    self.adj[i].append(j)
-                    self.adj[j].append(i)
-        else:
-            self.adj = []
+            for i, j in unit_pairs_np(pts):
+                self.adj[i].append(j)
+                self.adj[j].append(i)
         self.fp = hashlib.sha256(repr((obj.fingerprint(), name, sorted(params.items()),
                                        [tuple(round(v, 6) for v in p) for p in pts])).encode()).hexdigest()[:16]
 
@@ -276,40 +309,87 @@ def halo_masks(obj: Obj, col) -> list[int]:
 
 def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
     """List-colouring SAT of the pool subset `idxs` PLUS every old-halo point of the object (the
-    old halo's colours are existential under the seed class — §R5). `hav` = the halo masks for
-    this colouring (None/[] for the plain seed object)."""
-    hav = hav if hav is not None else []
+    old halo's colours are existential under the seed class — §R5). Exact list-colouring
+    KERNELIZATION first: a variable (of either kind) whose free-colour count exceeds its degree
+    among the remaining variables can always be coloured last — peeled iteratively; feasibility is
+    unchanged in both directions."""
+    hav = list(hav) if hav is not None else []
     m = len(hav)
-    loc = {p: i for i, p in enumerate(idxs)}
-    cls = []
     for p in idxs:
-        av = avail[p]
-        if av == 0:
+        if avail[p] == 0:
             return False
-        cls.append([loc[p] * K + c + 1 for c in range(K) if av >> c & 1])
-    off = len(idxs)
-    if m:
-        hs, ha = pool.obj.halo_structure()
-        for j in range(m):
-            av = hav[j]
-            if av == 0:
-                return False
-            cls.append([(off + j) * K + c + 1 for c in range(K) if av >> c & 1])
-        for j in range(m):
-            for jj in ha[j]:
-                if jj > j:
-                    for c in range(K):
-                        cls.append([-((off + j) * K + c + 1), -((off + jj) * K + c + 1)])
-        for p in idxs:
-            for j in pool.nbrs_halo[p]:
-                for c in range(K):
-                    cls.append([-(loc[p] * K + c + 1), -((off + j) * K + c + 1)])
-    for a in idxs:
+    for j in range(m):
+        if hav[j] == 0:
+            return False
+    hs, ha = pool.obj.halo_structure() if m else ([], [])
+    alive_p = set(idxs)
+    alive_h = set(range(m))
+    hp_nbrs: dict[int, list[int]] = {j: [] for j in range(m)}
+    for p in alive_p:
+        for j in pool.nbrs_halo[p]:
+            if j < m:
+                hp_nbrs[j].append(p)
+    degp = {p: sum(1 for b in pool.adj[p] if b in alive_p)
+            + sum(1 for j in pool.nbrs_halo[p] if j < m) for p in alive_p}
+    degh = {j: len(ha[j]) + len(hp_nbrs[j]) for j in alive_h}
+    nb = bin
+    stack = [("p", p) for p in alive_p if nb(avail[p]).count("1") > degp[p]] +             [("h", j) for j in alive_h if nb(hav[j]).count("1") > degh[j]]
+    while stack:
+        kind, x = stack.pop()
+        if kind == "p":
+            if x not in alive_p:
+                continue
+            alive_p.discard(x)
+            for b in pool.adj[x]:
+                if b in alive_p:
+                    degp[b] -= 1
+                    if nb(avail[b]).count("1") > degp[b]:
+                        stack.append(("p", b))
+            for j in pool.nbrs_halo[x]:
+                if j in alive_h:
+                    degh[j] -= 1
+                    if nb(hav[j]).count("1") > degh[j]:
+                        stack.append(("h", j))
+        else:
+            if x not in alive_h:
+                continue
+            alive_h.discard(x)
+            for jj in ha[x]:
+                if jj in alive_h:
+                    degh[jj] -= 1
+                    if nb(hav[jj]).count("1") > degh[jj]:
+                        stack.append(("h", jj))
+            for p in hp_nbrs[x]:
+                if p in alive_p:
+                    degp[p] -= 1
+                    if nb(avail[p]).count("1") > degp[p]:
+                        stack.append(("p", p))
+    if not alive_p and not alive_h:
+        return True
+    idxs2 = sorted(alive_p)
+    hids = sorted(alive_h)
+    loc = {p: i for i, p in enumerate(idxs2)}
+    hloc = {j: len(idxs2) + i for i, j in enumerate(hids)}
+    cls = []
+    for p in idxs2:
+        cls.append([loc[p] * K + c + 1 for c in range(K) if avail[p] >> c & 1])
+    for j in hids:
+        cls.append([hloc[j] * K + c + 1 for c in range(K) if hav[j] >> c & 1])
+    for a in idxs2:
         for b in pool.adj[a]:
             if b in loc and b > a:
                 for c in range(K):
                     cls.append([-(loc[a] * K + c + 1), -(loc[b] * K + c + 1)])
-    st, _ = forcer._solve(cls, (len(idxs) + m) * K, cap)
+        for j in pool.nbrs_halo[a]:
+            if j in hloc:
+                for c in range(K):
+                    cls.append([-(loc[a] * K + c + 1), -(hloc[j] * K + c + 1)])
+    for j in hids:
+        for jj in ha[j]:
+            if jj in hloc and jj > j:
+                for c in range(K):
+                    cls.append([-(hloc[j] * K + c + 1), -(hloc[jj] * K + c + 1)])
+    st, _ = forcer._solve(cls, (len(idxs2) + len(hids)) * K, cap)
     assert st in ("sat", "unsat"), st
     return st == "sat"
 
