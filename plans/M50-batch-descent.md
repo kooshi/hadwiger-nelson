@@ -231,6 +231,45 @@ example.
    control in `--self-test`: a known kill must REMAIN a kill after adding random points
    (monotonicity probe).
 
+## §Bʺ. The obligation-modeling pass (2026-08-19, fresh invocation) — proofs derived, invariants partitioned
+
+**The two kernel proofs derive in a few lines each; both were walked before writing.**
+`eq_gluePoint_of_unit_pair`: `h2 : dist x y ≤ 2` by the triangle through `p` (`dist_triangle` +
+`dist_comm` + the two unit hypotheses); `h0 : |1 − 1| ≤ dist x y` is `dist_nonneg`; then
+`p ∈ sphere x 1 ∩ sphere y 1` by `Metric.mem_sphere`, rewrite with `sphere_inter_sphere hne h0 h2`,
+and pair-set membership IS the disjunction (`simpa`). `finite_two_unit_neighbors`:
+`Set.Finite.subset` of the biUnion over `(V ×ˢ V).finite_toSet` of two-element sets
+(`finite_insert`/`finite_singleton`), the subset map sending each witness through
+`eq_gluePoint_of_unit_pair`. Red spec example: `¬ ∃ p : ℂ, dist p 0 = 1 ∧ dist p 3 = 1`
+(triangle) — the `dist > 2` vacuity, pinned. Mutation audit at the gate: dropping `hne` must break
+(at `x = y` the intersection is a circle).
+
+**The instrument's invariants, partitioned prove / test / execute:**
+* **Killing is monotone in the point set** (P ⊆ Q ⟹ kill(P,c) → kill(Q,c)): a solution of Q's CSP
+  restricts to one of P's (P's constraints are a subset; lists depend only on the fixed colouring).
+  Two-line prose in the module docstring; TESTED by the monotonicity probe (§Bʹ). Corollary used by
+  the design: coverage rechecks after halo growth can only mark MORE covered — recheck is an
+  optimization, never a correctness need.
+* **Cover-loop termination, with the measure named**: per depth, the work queue of uncovered
+  colourings strictly shrinks each iteration — a found kill covers its target; a FAILED kill (the
+  full depth pool cannot kill `c`) permanently stalls `c` AT THAT DEPTH, by monotonicity (no subset
+  of the pool can do what the whole pool cannot). Stalled colourings re-enter only when a deeper
+  pool opens. ≤ |S| × #depths attempts, no retry loops. The recursion's measure: the cheat count
+  strictly decreases per committed iteration, bounded by 446.
+* **The sub-batch filter is one-representative-per-orbit** — complete argument, recorded here
+  because the control leans on it: (i) a filtered `c` is a separating colouring of `H − B`
+  (properness on `H−B'`'s edges plus `B'∖B` = properness on `H−B`'s); (ii) complete — any separating
+  colouring `d` of `H − B` is one of `H − B'`, so its orbit has a rep `c ∈ S_{B'}`, and properness
+  on `B'∖B` and `c(A) ≠ c(B)` are palette-invariant, so `c` passes the filter; (iii) one per orbit,
+  inherited. TESTED end-to-end: the filters must reproduce M49's 684 and 1,010 (phase 2's control).
+* **The certification bridge is explanation, never a substitute**: lookup-killing every rep implies
+  the solver ask is UNSAT (any separating colouring is a palette image of a rep; the halo CSP is
+  palette-covariant) — but the ask is ALWAYS RUN; rows certify the run, "nothing in tools/ is
+  trusted" intact. New planted control from this pass: after each commit, ONE known kill's lookup
+  verdict is re-checked against a direct solver ask on the GROWN object — the bridge spot-check,
+  catching exactly the implementation trap this pass surfaced: **avail masks must range over ALL
+  current object vertices (halo points adjacent to A, B, or earlier halos included), not the
+  original 214** — the lists' domain grows with the recursion.
 ## §0. Registered predictions (BEFORE any campaign instrument runs)
 
 Verdict vocabulary as M49: `unknown` is never a verdict; a "removed"/"committed" claim needs the
