@@ -627,6 +627,105 @@ def self_test():
     print("batchkill self-test: PASS")
 
 
+# ---------------------------------------------------------------- phase drivers
+
+def floor_batch():
+    """The 29 lower-bound cheats (M49's single-deletion census)."""
+    cen = json.loads((BUILD / "m49-seed-edges.json").read_text())
+    return [tuple(e) for e in [r for r in cen["rows"]
+                               if r["kind"] == "single-deletion-census"][-1]["essential_alone"]]
+
+
+def _gated_seps(ack: bool):
+    header, cols = load_seps(BUILD / "m50-S29.jsonl")
+    rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
+    enum_rows = [r for r in rows if r["kind"] == "enumeration"
+                 and r["stage_fingerprint"] == header["stage_fingerprint"]]
+    assert enum_rows, "no enumeration row for this stage — run --enumerate to completion first"
+    gate = enum_rows[-1]["gate"]
+    if gate != "proceed" and not ack:
+        raise SystemExit(f"gate = {gate}: the list is capped or oversized — a design against it is "
+                         "a POOL-CHOICE; re-run with --pool-choice-ack to state that explicitly")
+    return header, cols, gate
+
+
+def _build_pool(obj: Obj, name: str) -> Pool:
+    p1 = pool_depth1(obj)
+    if name == "depth1":
+        return p1
+    if name == "depth2r":
+        return pool_depth2_restricted(obj, p1)
+    raise SystemExit(f"unknown pool {name!r} (depth1 | depth2r)")
+
+
+def filter_check():
+    """Phase 2's control: the sub-batch filters must reproduce M49's exact counts (684 for the 12
+    depth-one-removed edges, 1,010 for the composed 14) — the §Bʺ one-per-orbit argument, end to
+    end. Runnable only on the COMPLETE list."""
+    header, cols, gate = _gated_seps(ack=False)
+    B29 = set(map(tuple, header["batch"]))
+    desc = json.loads((BUILD / "m49-descent5.json").read_text())
+    r12 = [tuple(r["target"]) for r in desc["rows"]
+           if r.get("label") == "seed-k5-lb" and r.get("verdict") == "removed"]
+    r14 = r12 + [(56, 168), (56, 78)]
+    for name, B, want in (("12", r12, 684), ("14", r14, 1010)):
+        keep = [e for e in B29 if e not in set(B)]
+        got = len(filter_sub(Obj(), cols, keep))
+        print(f"filter {name}-edge batch: {got} colourings (M49 exact: {want}) "
+              f"{'OK' if got == want else 'MISMATCH'}")
+        assert got == want, "the one-per-orbit filter argument FAILED its end-to-end control"
+    row = {"kind": "filter-check", "stage_fingerprint": header["stage_fingerprint"],
+           "checks": {"12": 684, "14": 1010}, "outcome": "ok",
+           "claim_scope": "the sub-batch palette-orbit filters reproduce M49's independently "
+           "enumerated exact counts — the §Bʺ argument tested end to end"}
+    T.record(BUILD / "m50-batch.json", row)
+
+
+def run_profile(pool_name: str, ack: bool):
+    header, cols, gate = _gated_seps(ack)
+    obj = Obj()
+    pool = _build_pool(obj, pool_name)
+    print(f"[profile] pool {pool.name}: {len(pool.pts)} points (fp {pool.fp}); |S| = {len(cols)}")
+    profile(obj, pool, cols, label=f"S29-{pool.name}")
+
+
+def run_design(pool_name: str, ack: bool):
+    header, cols, gate = _gated_seps(ack)
+    obj = Obj()
+    pool = _build_pool(obj, pool_name)
+    print(f"[design] pool {pool.name}: {len(pool.pts)} points (fp {pool.fp}); |S| = {len(cols)}")
+    cover(obj, pool, cols, BUILD / f"m50-cover-{pool.name}.json")
+
+
+def run_commit(pool_name: str):
+    header, cols, gate = _gated_seps(ack=False)
+    obj = Obj()
+    pool = _build_pool(obj, pool_name)
+    st_ = json.loads((BUILD / f"m50-cover-{pool.name}.json").read_text())
+    assert st_["pool_fingerprint"] == pool.fp, "cover state is for a different pool"
+    halo, stall = st_["halo"], st_["stall"]
+    B29 = [tuple(e) for e in header["batch"]]
+    if stall:
+        # commit the largest sub-batch the cover fully kills: drop the cheats the stalled
+        # colourings force to stay (a stalled colouring separates A,B while proper on B29∖{its
+        # mono cheats} — keep every cheat some stalled colouring is mono on)
+        mono = set()
+        for t in stall:
+            c = cols[t]
+            for e in B29:
+                if c[e[0]] == c[e[1]]:
+                    mono.add(e)
+        B = [e for e in B29 if e not in mono]
+        keepcols = [c for c in filter_sub(obj, cols, mono)]
+        print(f"[commit] {len(stall)} stalled → keeping {len(mono)} cheats; batch = {len(B)} edges; "
+              f"re-checking the cover kills the {len(keepcols)}-colouring sub-list")
+        AVs = [avail_masks(obj, pool, c) for c in keepcols]
+        assert kills(pool, halo, AVs), "the halo does not kill the sub-batch list — investigate"
+    else:
+        B = B29
+    certify(obj, B, pool, halo, label=f"S29-{pool.name}")
+
+
 # ---------------------------------------------------------------- status / CLI
 
 def status():
@@ -652,9 +751,17 @@ if __name__ == "__main__":
         status()
     elif "--enumerate" in args:
         obj = Obj()
-        cen = json.loads((BUILD / "m49-seed-edges.json").read_text())
-        lb = [tuple(e) for e in [r for r in cen["rows"]
-                                 if r["kind"] == "single-deletion-census"][-1]["essential_alone"]]
-        enumerate_seps(obj, lb, BUILD / "m50-S29.jsonl")
+        enumerate_seps(obj, floor_batch(), BUILD / "m50-S29.jsonl")
+    elif "--filter-check" in args:
+        filter_check()
+    elif "--profile" in args:
+        pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth1")
+        run_profile(pool_name, ack="--pool-choice-ack" in args)
+    elif "--design" in args:
+        pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
+        run_design(pool_name, ack="--pool-choice-ack" in args)
+    elif "--commit" in args:
+        pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
+        run_commit(pool_name)
     else:
         print(__doc__)
