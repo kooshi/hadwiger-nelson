@@ -329,6 +329,117 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     return row
 
 
+def enumerate_cubes(obj: Obj, B, path: Path, cube_depth: int = 3, cap_wall: float = 12 * 3600,
+                    log=print) -> dict:
+    """The parallel form of `enumerate_seps`: pin the colours of the `cube_depth` vertices after
+    the breaking anchor (the cubes PARTITION the solution set, and the breaking clauses are global,
+    so the union over cubes is exactly the sequential run's set — one representative per palette
+    orbit); each cube enumerates independently with ONLY ITS OWN blocking clauses (small CNFs), all
+    cubes in parallel. Existing lines of `path` (a sequential run's output) are seeded into their
+    cubes once; per-cube files live in `path.with_suffix('')`+"-cubes/"; on full completion the
+    merged, deduplicated list is rewritten to `path` with the same header contract."""
+    import itertools, shutil
+    B = [tuple(e) for e in B]
+    edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
+    order = T._degree_order(obj.n, edges)
+    header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
+              "batch": [list(e) for e in B], "k": K, "order_fingerprint":
+              hashlib.sha256(repr(order).encode()).hexdigest()[:16]}
+    pins = order[1:1 + cube_depth]
+    cdir = path.parent / (path.stem + "-cubes")
+    cdir.mkdir(exist_ok=True)
+    base = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
+    base += T._brk_full(obj.n, K, order)
+    base += [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
+    cubes = list(itertools.product(range(K), repeat=cube_depth))
+    # one-time seeding from a sequential run's file
+    if path.exists():
+        lines = path.read_text().splitlines()
+        old = json.loads(lines[0])
+        assert old["order_fingerprint"] == header["order_fingerprint"], "seed: order drifted"
+        assert old["stage_fingerprint"] == header["stage_fingerprint"], "seed: stage drifted"
+        buckets: dict[tuple, list[str]] = {}
+        for line in lines[1:]:
+            cs = json.loads(line)
+            key = tuple(int(cs[p]) for p in pins)
+            buckets.setdefault(key, []).append(line)
+        for cube, ls in buckets.items():
+            f = cdir / ("cube-" + "".join(map(str, cube)) + ".jsonl")
+            assert not f.exists(), "seeding would clobber an existing cube file — already seeded?"
+            f.write_text("\n".join(ls) + "\n")
+        shutil.move(str(path), str(path) + ".seed.bak")
+        log(f"[enumerate-cubes] seeded {sum(len(v) for v in buckets.values())} colourings "
+            f"into {len(buckets)} cubes from the sequential run")
+    t0 = time.time()
+
+    def work(cube):
+        f = cdir / ("cube-" + "".join(map(str, cube)) + ".jsonl")
+        done = cdir / ("cube-" + "".join(map(str, cube)) + ".done")
+        found = 0
+        cls = list(base) + [[coloring.var(p, c, K)] for p, c in zip(pins, cube)]
+        if f.exists():
+            for line in f.read_text().splitlines():
+                col = [int(ch) for ch in json.loads(line)]
+                cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+                found += 1
+        if done.exists():
+            return cube, found, "exact"
+        status = "exact"
+        with f.open("a") as fh:
+            while True:
+                if time.time() - t0 > cap_wall:
+                    status = "capped-wall"
+                    break
+                st, model = forcer._solve(cls, obj.n * K, 1800)
+                if st == "unsat":
+                    done.write_text("unsat")
+                    break
+                if st != "sat":
+                    status = "capped-solver"
+                    break
+                col = rigidity.decode(model, obj.n, K)
+                for a, b in edges:
+                    assert col[a] != col[b]
+                assert col[obj.A] != col[obj.B]
+                assert tuple(col[p] for p in pins) == cube, "cube pin violated — encoding bug"
+                fh.write(json.dumps("".join(map(str, col))) + "\n")
+                fh.flush()
+                cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+                found += 1
+        return cube, found, status
+
+    results = mechanism.pmap(work, cubes)
+    total = sum(r[1] for r in results)
+    open_cubes = [r for r in results if r[2] != "exact"]
+    status = "exact" if not open_cubes else open_cubes[0][2]
+    if not open_cubes:
+        # merge back into the single-file contract, deduplicated
+        seen = set()
+        with path.open("w") as fh:
+            fh.write(json.dumps(header) + "\n")
+            for cube in cubes:
+                f = cdir / ("cube-" + "".join(map(str, cube)) + ".jsonl")
+                if f.exists():
+                    for line in f.read_text().splitlines():
+                        assert line not in seen, "duplicate representative across cubes"
+                        seen.add(line)
+                        fh.write(line + "\n")
+        assert len(seen) == total
+    gate = "proceed" if status == "exact" and total <= 30_000 else "blocked"
+    row = {"kind": "enumeration", **header, "count": total, "status": status, "gate": gate,
+           "cubes": {"depth": cube_depth, "open": len(open_cubes)},
+           "seconds": round(time.time() - t0, 1),
+           "claim_scope": "the separating colourings of the object minus the batch, one "
+           "representative per palette orbit under the pinned breaking order, enumerated by "
+           "parallel disjoint colour cubes on the pinned vertices (the cubes partition the "
+           "solution set, so the union equals the sequential enumeration); EXACT only if "
+           "status = exact (every cube closed by UNSAT)"}
+    T.record(BUILD / "m50-batch.json", row)
+    log(f"[enumerate-cubes] total {total} ({status}, gate {gate}, {len(open_cubes)} cubes open), "
+        f"{time.time()-t0:.0f}s")
+    return row
+
+
 def load_seps(path: Path):
     lines = path.read_text().splitlines()
     header = json.loads(lines[0])
@@ -751,7 +862,7 @@ if __name__ == "__main__":
         status()
     elif "--enumerate" in args:
         obj = Obj()
-        enumerate_seps(obj, floor_batch(), BUILD / "m50-S29.jsonl")
+        enumerate_cubes(obj, floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
         filter_check()
     elif "--profile" in args:
