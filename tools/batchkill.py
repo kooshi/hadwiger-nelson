@@ -770,6 +770,11 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
            "numeric-200 per edge); candidate = one-hot only; refused = a separating colouring "
            "exists (the design missed — investigate before anything else)"}
     T.record(BUILD / "m50-batch.json", row)
+    if verdict == "committed":
+        (BUILD / f"m50-object-{label}.json").write_text(json.dumps(
+            {"prov": obj.prov[214:], "removed": [list(e) for e in B],
+             "fingerprint": obj.fingerprint([tuple(e) for e in B]),
+             "n": obj.n, "unit": len(ue), "cheats": len(tp)}))
     log(f"[certify {label}] {verdict} (one-hot {st}, 3-bit {re}); object n={obj.n}, "
         f"cheats {len(tp)} [{time.time()-t0:.0f}s]")
     return row
@@ -951,6 +956,53 @@ def run_commit(pool_name: str):
     certify(obj, B, pool, halo, label=f"S29-{pool.name}")
 
 
+def load_object(label: str) -> tuple[Obj, list]:
+    """Rebuild a committed object from its persisted object-relative provenance; verify the
+    fingerprint and the mpmath check."""
+    d = json.loads((BUILD / f"m50-object-{label}.json").read_text())
+    obj = Obj()
+    for rec in d["prov"]:
+        kind, a, b, sgn = rec
+        assert kind == "glue"
+        obj.add_glue(a, b, sgn)
+    removed = [tuple(e) for e in d["removed"]]
+    assert obj.n == d["n"]
+    assert obj.fingerprint(removed) == d["fingerprint"], "object rebuild fingerprint mismatch"
+    obj.check()
+    return obj, removed
+
+
+def run_recurse(label: str, cap: float = 240.0):
+    """Iteration k+1's census: on the committed object, every remaining cheat's single deletion —
+    sat = essential alone (the new floor), unsat = deletable alone, unknown counted."""
+    obj, removed = load_object(label)
+    tp = [e for e in obj.cheats if tuple(e) not in set(removed)]
+    ue = obj.unit_edges()
+    print(f"[recurse] object n={obj.n} (check OK), unit {len(ue)}, cheats {len(tp)}")
+    ne = [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
+
+    def ask(i):
+        edges = ue + [e for j, e in enumerate(tp) if j != i]
+        cls = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
+        cls += T._brk_full(obj.n, K, T._degree_order(obj.n, edges)) + ne
+        st, _ = forcer._solve(cls, obj.n * K, cap)
+        return st
+
+    t0 = time.time()
+    outs = mechanism.pmap(ask, list(range(len(tp))))
+    ess = [tp[i] for i, st in enumerate(outs) if st == "sat"]
+    unk = sum(1 for st in outs if st == "unknown")
+    row = {"kind": "recurse-census", "label": label, "object_fingerprint":
+           obj.fingerprint(removed), "cheats": len(tp), "floor": len(ess), "unknown": unk,
+           "essential_alone": [list(e) for e in ess], "cap": cap,
+           "seconds": round(time.time() - t0, 1),
+           "claim_scope": "single-deletion census on the committed object: sat = a validated "
+           "separating colouring exists without that cheat alone (it lies in every forcing "
+           "subset of THIS object — the new floor), unknown = undecided at cap"}
+    T.record(BUILD / "m50-batch.json", row)
+    print(f"[recurse] floor {len(ess)} of {len(tp)} cheats ({unk} unknown) [{time.time()-t0:.0f}s]")
+
+
 # ---------------------------------------------------------------- status / CLI
 
 def status():
@@ -989,5 +1041,7 @@ if __name__ == "__main__":
     elif "--commit" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
         run_commit(pool_name)
+    elif "--recurse" in args:
+        run_recurse(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"))
     else:
         print(__doc__)
