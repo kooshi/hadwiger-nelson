@@ -926,8 +926,18 @@ def floor_batch():
                                if r["kind"] == "single-deletion-census"][-1]["essential_alone"]]
 
 
-def _gated_seps(ack: bool):
-    header, cols = load_seps(BUILD / "m50-S29.jsonl")
+def _ctx(args):
+    """(obj, removed, seps_path, tag): iteration 1 by default; --object LABEL for a committed
+    object's iteration (its floor's list at m50-S-LABEL-it2.jsonl)."""
+    lab = next((args[i + 1] for i, a in enumerate(args) if a == "--object"), None)
+    if lab:
+        obj, removed = load_object(lab)
+        return obj, removed, BUILD / f"m50-S-{lab}-it2.jsonl", f"{lab}-it2"
+    return Obj(), [], BUILD / "m50-S29.jsonl", "S29"
+
+
+def _gated_seps(seps_path: Path, ack: bool):
+    header, cols = load_seps(seps_path)
     rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
     enum_rows = [r for r in rows if r["kind"] == "enumeration"
                  and r["stage_fingerprint"] == header["stage_fingerprint"]]
@@ -956,7 +966,7 @@ def filter_check():
     """Phase 2's control: the sub-batch filters must reproduce M49's exact counts (684 for the 12
     depth-one-removed edges, 1,010 for the composed 14) — the §Bʺ one-per-orbit argument, end to
     end. Runnable only on the COMPLETE list."""
-    header, cols, gate = _gated_seps(ack=False)
+    header, cols, gate = _gated_seps(BUILD / "m50-S29.jsonl", ack=False)
     B29 = set(map(tuple, header["batch"]))
     desc = json.loads((BUILD / "m49-descent5.json").read_text())
     r12 = [tuple(r["target"]) for r in desc["rows"]
@@ -975,11 +985,11 @@ def filter_check():
     T.record(BUILD / "m50-batch.json", row)
 
 
-def run_profile(pool_name: str, ack: bool, survivors_of: str | None = None):
-    header, cols, gate = _gated_seps(ack)
-    obj = Obj()
+def run_profile(args, pool_name: str, ack: bool, survivors_of: str | None = None):
+    obj, removed, seps_path, tag = _ctx(args)
+    header, cols, gate = _gated_seps(seps_path, ack)
     pool = _build_pool(obj, pool_name)
-    label = f"S29-{pool.name}"
+    label = f"{tag}-{pool.name}"
     if survivors_of:
         idx = json.loads((BUILD / f"m50-survivors-{survivors_of}.json").read_text())
         cols = [cols[i] for i in idx]
@@ -989,38 +999,76 @@ def run_profile(pool_name: str, ack: bool, survivors_of: str | None = None):
     profile(obj, pool, cols, label=label)
 
 
-def run_design(pool_name: str, ack: bool):
-    """Cover design for the COMMITTABLE batch: the hitting-set file (m50-hitting.json) names the
-    kept cheats; the halo is designed against the filtered list (colourings proper on the kept
-    cheats — every one pool-killable by construction of the hitting set)."""
-    header, cols, gate = _gated_seps(ack)
-    obj = Obj()
+def run_hitting(args, deepest_label: str):
+    """Exact minimum hitting set over the deepest profile's survivors: keep the fewest cheats such
+    that every surviving colouring is mono on a kept cheat; commit the rest."""
+    from scipy.optimize import milp, LinearConstraint, Bounds
+    obj, removed, seps_path, tag = _ctx(args)
+    header, cols, gate = _gated_seps(seps_path, ack=False)
+    B = [tuple(e) for e in header["batch"]]
+    surv_idx = json.loads((BUILD / f"m50-survivors-{deepest_label}.json").read_text())
+    # survivors are indices into the PREVIOUS restriction chain; resolve through chained files
+    chain = deepest_label
+    idx = surv_idx
+    while "-of-" in chain:
+        chain = chain.split("-of-", 1)[1]
+        outer = json.loads((BUILD / f"m50-survivors-{chain}.json").read_text())
+        idx = [outer[i] for i in idx]
+    hard = [cols[i] for i in idx]
+    elems = sorted({e for c in hard for e in B if c[e[0]] == c[e[1]]})
+    ei = {e: k for k, e in enumerate(elems)}
+    A = np.zeros((len(hard), len(elems)))
+    for r, c in enumerate(hard):
+        for e in elems:
+            if c[e[0]] == c[e[1]]:
+                A[r, ei[e]] = 1
+    res = milp(c=np.ones(len(elems)), constraints=LinearConstraint(A, lb=np.ones(len(hard)), ub=np.inf),
+               integrality=np.ones(len(elems)), bounds=Bounds(0, 1))
+    assert res.success
+    keep = [elems[k] for k in range(len(elems)) if res.x[k] > 0.5]
+    commit = [e for e in B if e not in set(keep)]
+    (BUILD / f"m50-hitting-{tag}.json").write_text(json.dumps(
+        {"keep": [list(e) for e in keep], "commit": [list(e) for e in commit]}))
+    print(f"[hitting {tag}] {len(hard)} survivors over {len(elems)} cheats → keep {len(keep)}, "
+          f"COMMIT {len(commit)} of {len(B)}")
+
+
+def run_design(args, pool_name: str, ack: bool):
+    """Cover design for the COMMITTABLE batch (the tag's hitting-set file names the kept cheats)."""
+    obj, removed, seps_path, tag = _ctx(args)
+    header, cols, gate = _gated_seps(seps_path, ack)
     pool = _build_pool(obj, pool_name)
-    hit = json.loads((BUILD / "m50-hitting.json").read_text())
+    hit = json.loads((BUILD / f"m50-hitting-{tag}.json").read_text())
     keep = [tuple(e) for e in hit["keep"]]
     sub = filter_sub(obj, cols, keep)
-    print(f"[design] pool {pool.name}: {len(pool.pts)} pts (fp {pool.fp}); commit batch "
+    print(f"[design {tag}] pool {pool.name}: {len(pool.pts)} pts (fp {pool.fp}); commit batch "
           f"{len(hit['commit'])} edges, |S_commit| = {len(sub)}")
-    cover(obj, pool, sub, BUILD / f"m50-cover-{pool.name}.json")
+    cover(obj, pool, sub, BUILD / f"m50-cover-{tag}-{pool.name}.json")
 
 
-def run_commit(pool_name: str):
-    header, cols, gate = _gated_seps(ack=False)
-    obj = Obj()
+def run_commit(args, pool_name: str):
+    obj, removed, seps_path, tag = _ctx(args)
+    header, cols, gate = _gated_seps(seps_path, ack=False)
     pool = _build_pool(obj, pool_name)
-    st_ = json.loads((BUILD / f"m50-cover-{pool.name}.json").read_text())
+    cov_path = BUILD / f"m50-cover-{tag}-{pool.name}.json"
+    if not cov_path.exists() and tag == "S29":
+        cov_path = BUILD / "m50-cover-depth2r.json"      # iteration 1's original name
+    st_ = json.loads(cov_path.read_text())
     assert st_["pool_fingerprint"] == pool.fp, "cover state is for a different pool"
     halo, stall = st_["halo"], st_["stall"]
     assert not stall, "the cover stalled on the committable list — the hitting set must be redone"
-    hit = json.loads((BUILD / "m50-hitting.json").read_text())
+    hp = BUILD / f"m50-hitting-{tag}.json"
+    if not hp.exists() and tag == "S29":
+        hp = BUILD / "m50-hitting.json"
+    hit = json.loads(hp.read_text())
     keep = [tuple(e) for e in hit["keep"]]
     B = [tuple(e) for e in hit["commit"]]
     sub = filter_sub(obj, cols, keep)
-    print(f"[commit] batch {len(B)} edges, halo {len(halo)} pts; lookup re-check on "
+    print(f"[commit {tag}] batch {len(B)} edges, halo {len(halo)} pts; lookup re-check on "
           f"{len(sub)} colourings")
     AVs = [(avail_masks(obj, pool, c), halo_masks(obj, c)) for c in sub]
     assert kills(pool, halo, AVs), "the halo does not kill the committable list — investigate"
-    certify(obj, B, pool, halo, label=f"S29-{pool.name}")
+    certify(obj, list(removed) + B, pool, halo, label=f"{tag}-{pool.name}")
 
 
 def load_object(label: str) -> tuple[Obj, list]:
@@ -1109,13 +1157,15 @@ if __name__ == "__main__":
     elif "--profile" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth1")
         so = next((args[i + 1] for i, a in enumerate(args) if a == "--survivors-of"), None)
-        run_profile(pool_name, ack="--pool-choice-ack" in args, survivors_of=so)
+        run_profile(args, pool_name, ack="--pool-choice-ack" in args, survivors_of=so)
+    elif "--hitting" in args:
+        run_hitting(args, next(args[i + 1] for i, a in enumerate(args) if a == "--deepest"))
     elif "--design" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
-        run_design(pool_name, ack="--pool-choice-ack" in args)
+        run_design(args, pool_name, ack="--pool-choice-ack" in args)
     elif "--commit" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
-        run_commit(pool_name)
+        run_commit(args, pool_name)
     elif "--recurse" in args:
         run_recurse(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"))
     else:
