@@ -62,6 +62,7 @@ import Proofs.HadwigerNelson.Arity
 import Proofs.HadwigerNelson.DistanceGraph
 import Proofs.HadwigerNelson.Homogeneous
 import Proofs.HadwigerNelson.OneDefect
+import Proofs.HadwigerNelson.PartnerLattice
 import Proofs.HadwigerNelson.Instances.OneDefectSpec
 import Proofs.HadwigerNelson.Instances.AritySpec
 import Proofs.HadwigerNelson.Instances.Spindle

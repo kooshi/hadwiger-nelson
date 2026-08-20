@@ -372,4 +372,16 @@ sample before phase 3 commits its schedule.
 
 ## §R. Results (filled as phases close)
 
-*(empty at subplanning)*
+### §R0. The kernel piece (phase 0) — LANDED, first sitting
+
+`Proofs/HadwigerNelson/PartnerLattice.lean` (new leaf file, §Bʹ item 2 — no rebuild cascade):
+**`Glue.eq_gluePoint_of_unit_pair`** — a point at unit distance from two distinct points is the
+glue point of their unit circles or its mirror, only `x ≠ y` assumed (both annulus bounds derived
+from the witness, exactly as §Bʺ walked it — the proof is the derivation transcribed: triangle
+through `p`, `sphere_inter_sphere`, pair-set membership); **`Glue.finite_two_unit_neighbors`** —
+the depth-one candidate space over any finite vertex set is finite (biUnion cover); the red spec
+example (no common unit neighbour at distance 3) pinned. Both on axioms exactly
+`[propext, Classical.choice, Quot.sound]`; audit lines added (gate seen red first: the M50 block
+initially landed in the PURCHASED region and `axioms.sh` refused it — the cross-check working —
+then moved to the clean section; 535 clean, the 5 pre-existing purchases). Build green.
+

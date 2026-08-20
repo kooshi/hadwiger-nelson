@@ -132,6 +132,10 @@ open HadwigerNelson
 #print axioms four_le_chromaticNumber_plane_of_rhombus
 #print axioms four_le_chromaticNumber_plane_of_rhombus_defect
 #print axioms seven_le_chromaticNumber_hexShell_distances
+-- M50: the partner lattice's depth-one completeness (PartnerLattice.lean)
+#print axioms HadwigerNelson.Glue.eq_gluePoint_of_unit_pair
+#print axioms HadwigerNelson.Glue.finite_two_unit_neighbors
+
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
 
@@ -878,3 +882,4 @@ reaches above without them — which is the point of proving it twice. -/
 #print axioms moserSpindleCubes_unsat
 #print axioms moserSpindle_not_colorable_three_cubes
 #print axioms four_le_chromaticNumber_plane_certified
+
