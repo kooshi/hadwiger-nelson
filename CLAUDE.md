@@ -923,8 +923,16 @@ points, the mechanism a coverage compulsion at a point outside the object. The s
 refuse every one-generation pool in both fields. The re-rank below follows from that: the descent is
 now the from-below instrument, and its next turn is registered.)*
 
-1. **The two-distance descent, second turn** (`plans/M49-two-distance-descent.md` §R7 stub) —
-   **RECOMMENDED NEXT.** M49 built the instrument and turned it once; the registered next turn is
+1. **M50 — the batch descent** (`plans/M50-batch-descent.md`, full stub) — **RECOMMENDED NEXT,
+   chosen at the close discussion (2026-08-19)**: design ONE halo against the WHOLE batch's
+   separating-colouring list (S_B measured enumerable: 684/1,010/≥5,366 for 12/14/29 edges), so
+   composition is by construction and the M49 order problem is designed out; census → enumerate →
+   design (depth-laddered engine, cKDTree, pruned depth-3 beam) → certify → recurse; stalls are
+   studied (the holdouts' surviving colourings), kills get a field census; the depth-one
+   completeness corollary goes to the kernel. Jackpot clause verbatim. The §R7 item list below is
+   subsumed by the stub.
+2. **The two-distance descent, second turn** (`plans/M49-two-distance-descent.md` §R7 stub) —
+   subsumed into M50's stub; kept for the item list. M49 built the instrument and turned it once; the registered next turn is
    (i) the seventeen refusing lower-bound edges against DEEPER pools (two generations; the k = 4
    calibration needed depth two exactly where depth one stalled), (ii) the descent on ALL essential
    edges rather than the twenty-nine (the object grew by seventeen points for twelve edges — the
@@ -933,7 +941,7 @@ now the from-below instrument, and its next turn is registered.)*
    directly) instead of enumerated pools, and (iv) the same descent on Parts's {1,φ} object and, if
    its data ever surfaces, De Neve's {1,3}. Jackpot clause verbatim: any μ ≤ 1 at five colours is
    HALT AND VERIFY.
-2. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — the standing frame, and
+3. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — the standing frame, and
    promoted to the top on M48's strength rather than by default. It is still the only route to
    χ(ℝ²) ≥ 6, and it is now the route with the sharpest possible target, because two things landed
    together. **The target is a conjunction, kernel-side**: `six_le_chromaticNumber_plane_of_forced_
