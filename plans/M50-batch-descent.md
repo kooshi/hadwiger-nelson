@@ -123,3 +123,155 @@ are ≤ ~10⁴ (the k = 4 calibration object, > 20,000 colourings, is NOT engine
 time. Every row carries `claim_scope`; `unknown` is never a verdict; removals need the triple.
 Artifacts land in `build/m50-*.json`; the M49 explorer
 (https://claude.ai/code/artifact/97ebb92e-066d-42ea-93aa-662a4cc3cff8) gains an M50 pane at close.
+
+---
+
+# SUBPLAN (2026-08-19, on Kooshi's go; WORKFLOW step 3)
+
+## §B. Decisions settled at subplanning (measure → shape)
+
+**B1. Start object = `H` itself, batch = the full 29-edge floor.** Alternative: start from the
+543-point composed object (14 already removed). `H` wins on three measurements: (i) `S_B` for
+`B ⊆ B'` is exactly the palette-invariant FILTER of `S_B'` (a colouring of `H − B'` proper on
+`B' ∖ B` is a colouring of `H − B`; properness is palette-invariant, so one representative per
+orbit filters to one representative per orbit) — **one enumeration of `S₂₉` serves every
+sub-batch**; (ii) every M49 asset (17 depth-one kill points, 7 certified gadgets, the per-edge
+`m49-sep-*` lists) is a cover seed and a green control on `H`; (iii) the composed object's lists
+can only be supersets. Fallback if `S₂₉` outruns the cap: commit the known 14 first and enumerate
+the residual floor's list on the composed object. Confidence high.
+
+**B2. Design = greedy set-cover of the colouring list, sound by monotonicity.** The load-bearing
+fact (already exploited in M49's whole-set tests, now stated as the design principle): **killing is
+monotone increasing in the point set** — adding points adds constraints, so infeasibility is
+preserved. Hence the union of per-colouring kills kills every colouring it covers, and the design
+loop is: pick an uncovered colouring `c` (hardest first — fewest small lists), find a kill `K_c`
+(lookup ddmin against `{c}` alone — cheap), add it, recompute coverage of ALL colourings by lookup
+(one small SAT per colouring), repeat until covered; then one global ddmin shrink against the full
+list if affordable, else per-point necessity witnesses only, and the shrink level is stated in the
+row. Alternative rejected: ddmin of the whole union against the whole list from the start — each
+check costs `|S|` SATs (M49's shrink at `|S| ≤ 19` took minutes; at `|S| ~ 10⁴` it would take
+days).
+
+**B3. Provenance from birth.** Every candidate point carries a construction record —
+`("seed", i)` or `("glue", a, b, sign)` with `a, b` earlier point indices — so exact sympy
+coordinates and the field tower are derived recursively, never searched for after the fact (M49's
+`certify_halo` had to rediscover each point's defining pair). This is also what makes the
+recursion's certification object-generic.
+
+**B4. Instrument = new `tools/batchkill.py`, object-generic.** `killengine.py` computes `H`-specific
+globals at import; the recursion needs an `Obj` (points + provenance, unit edges by `cKDTree`
+census, cheat edges, `A`/`B` indices, fingerprint) threaded through every function. `killengine`'s
+exact-geometry helpers (`seed_exact`/`intersect`/`is_unit`) are imported, not duplicated.
+
+**B5. Soundness note, stated once and cited by rows.** The lookup kills fixed colourings; the
+certification ask (`(H − B) + halo`, `A ≠ B`, one-hot + 3-bit) quantifies over ALL colourings — the
+bridge is that `S_B` is enumerated EXACTLY up to palette and halo feasibility is invariant under
+global palette permutation. Validated at M49 (the 867-ask solver census agreed with the lookup
+exactly; nine gadgets certified). The enumeration's breaking order is FIXED (degree order of
+`H − B₂₉`'s edge set) so sub-batch filters stay one-per-orbit.
+
+## §C. The kernel skeleton (phase 0 — a sitting)
+
+New section in `Proofs/HadwigerNelson/Glue.lean` (or a small `PartnerLattice.lean` importing it):
+
+```lean
+/-- **Depth-one completeness.** A point at unit distance from two DISTINCT points is one of the two
+glue points of their unit circles — no side condition: both annulus bounds are derivable
+(`0 = |1−1| ≤ dist x y` and `dist x y ≤ dist x p + dist p y = 2`). The engine's "single-point kills
+live in the partner lattice, in any field" as a theorem. -/
+theorem eq_gluePoint_of_unit_pair {p x y : ℂ} (hne : x ≠ y)
+    (hx : dist p x = 1) (hy : dist p y = 1) :
+    p = gluePoint x y 1 1 ∨ p = reflAxis x y (gluePoint x y 1 1) := sorry
+
+/-- The depth-one candidate space over a finite set is finite: at most `2 · |V|²` points have two
+distinct unit neighbours in `V`. Consumer shape for the census claims. -/
+theorem finite_two_unit_neighbors (V : Finset ℂ) :
+    {p : ℂ | ∃ x ∈ V, ∃ y ∈ V, x ≠ y ∧ dist p x = 1 ∧ dist p y = 1}.Finite := sorry
+```
+
+Spec examples: the seed pair `(0, 8)`'s common neighbours 64 and 196 (M49's exact self-test) as a
+`#guard`-style example over ℚ-coordinates is NOT available in ℂ — instead one concrete example
+(`p = gluePoint 0 1 1 1` satisfies both distances, `decide`-free via `norm_num`), plus the red:
+at `x = y` the statement is vacuous by hypothesis, and a point with two neighbours at distance
+`> 2` apart cannot exist (`not_exists` via the triangle inequality) — stated as the adversarial
+example.
+
+## §0. Registered predictions (BEFORE any campaign instrument runs)
+
+Verdict vocabulary as M49: `unknown` is never a verdict; a "removed"/"committed" claim needs the
+triple (one-hot UNSAT, 3-bit UNSAT, minimality with witnesses, geometry exact-or-labelled).
+**Jackpot clause, verbatim: any μ ≤ 1 at five colours is χ(ℝ²) ≥ 6 — HALT, re-derive the object
+independently, re-refute in a second encoding, and report before interpreting.**
+
+* **P1 (the list is enumerable).** `|S₂₉|` exact ≤ 30,000, enumeration complete within 12 h wall
+  (checkpointed). Prior 0.6. Failure clause: report the partial count, fall back to B1's composed-
+  object route, and state the pool-choice in every downstream row.
+* **P2 (depth profile).** (a) The whole depth-one set kills ≥ 40 % of `S₂₉`'s colourings — prior
+  0.5. (b) The whole restricted-depth-two union kills ≥ 80 % — prior 0.5. (These are the M49
+  17-refuser fractions read forward: depth one killed 12/29 edges but the batch list mixes easy and
+  hard colourings.)
+* **P3 (the batch commit).** A certified cover halo at depth ≤ 2 removes AT LEAST the 12-edge
+  sub-batch in ONE commit (M49's twelve, re-derived with composition by construction). Prior 0.7.
+* **P4 (the stall exists).** Some colourings of `S₂₉` survive the whole depth-3 beam — prior 0.6.
+  The falsifier is the jackpot path and fires the halt-and-verify clause, not a celebration.
+* **P5 (the field question).** Every certified kill's radicands lie in `H`'s 59-list (no genuinely
+  new field needed at depth ≤ 2; depth-2 roots come from depth-1-to-depth-1 distances and may
+  leave the list — count them either way). Prior 0.4, genuinely open.
+* **P6 (rigidity persists — the engine-viability gate).** On the committed object `O₁`, the next
+  floor's list `|S_{B'}|` ≤ 30,000 (enumerable). Prior 0.5. Failure clause: the recursion stops
+  with the measured blow-up curve as the finding; the engine's scope sentence gains "one
+  iteration deep on this seed".
+* **P7 (the dial moves).** At the close the composed object's cheat count is ≤ 400 (from 446).
+  Prior 0.6.
+
+## §1. Phases (each closes with its numbers in §R before the next starts)
+
+| # | phase | deliverable | control |
+|---|---|---|---|
+| 0 | **Kernel corollary** (§C) | `eq_gluePoint_of_unit_pair`, `finite_two_unit_neighbors`, standard three axioms | the `dist x y > 2` red; spec examples |
+| 1 | **`tools/batchkill.py`** — `Obj` with provenance, cKDTree unit census, checkpointed enumeration, sub-batch filter, whole-set verdicts, per-colouring kill, greedy cover, shrink, provenance certification, field census, stall report; `--self-test` | instrument + tests green | **green control: the 17 M49 depth-one points + 2 composed gadgets, as a halo on `H − B₁₄`, must cover the FILTERED `S₁₄` (1,010) by lookup, and its certification must reproduce the composed object's verdict**; planted-failure reds (a fake kill refused; a moved point failing the census) |
+| 2 | **Enumerate `S₂₉`** exact, checkpointed, fixed breaking order; publish the count and the per-sub-batch filter counts (12/14/19/29 vs M49's 684/1,010/≥3,469/≥5,366) | `build/m50-S29.jsonl` + counts | the 684 and 1,010 must REPRODUCE as filters (P1's own control) |
+| 3 | **Depth profile** of `S₂₉`: per-colouring whole-set verdicts at depth 1 → restricted depth 2 → local unrestricted depth 2 (cKDTree) → depth-3 beam | P2, P4 numbers; the surviving-colouring list | monotonicity check: kill sets nest by depth |
+| 4 | **Cover design → certify → commit** the largest killable sub-batch (target: all of `B₂₉` minus the stall colourings' forced edges) | the halo, its certification row, the new object `O₁`; P3, P5 | triple-check per commit; jackpot armed |
+| 5 | **Recurse on `O₁`** (census → floor `B'` → enumerate → design) while lists stay ≤ 30k; stall study (structure of surviving colourings) + field census throughout | P6, P7; `build/m50-*.json` | rigidity gate explicit in every row |
+| R | §R, Frontier (ledger row, G-entries), report | | |
+
+## §2. Instruments (the new module's surface)
+
+`tools/batchkill.py` — object-generic, nothing trusted, every row carries `claim_scope`:
+* `Obj`: points (floats) + provenance (`("seed",i) | ("glue",a,b,±1)`), unit edges (cKDTree census
+  at 1e-7 with the planted-assertion control), cheat edges, `A`/`B`, `fingerprint`.
+* `enumerate_seps(obj, B, path, cap_wall)` — blocking clauses, `_brk_full` on the FIXED degree
+  order of `obj − B`, one colouring per line (jsonl), resume by replaying the file into clauses.
+* `filter_sub(S, keep_edges)` — sub-batch lists by properness masks.
+* `partners(obj, centres)` / `depth_pool(obj, level, restrict)` — candidate generation with
+  provenance; `beam3(obj, colouring)` — new centres only where lists ≤ 2 (a pool-choice, stated).
+* `whole_set_verdict(obj, pool, colouring)` — one list-colouring SAT; `sweep(obj, pool, S)` —
+  parallel per-colouring verdicts.
+* `kill_for(obj, colouring, pool)` — lookup ddmin against one colouring; `cover(obj, S, pools)` —
+  the greedy set-cover loop (B2), checkpointed.
+* `certify(obj, B, halo)` — exact sympy coordinates from provenance (10-s simplify budget,
+  labelled `numeric-200` fallback), every unit edge verified, one-hot + 3-bit on the true object,
+  the row; `field_census(halo)` — the radicand list per point.
+* `stall_report(S_surviving)` — mono-edge structure, pairwise distances, shared patterns.
+* `--self-test` — the phase-1 controls, runnable any time.
+
+## §3. Discipline
+
+M49's §3 verbatim (double-encoding or kernel for every claim; `unknown` recorded as `unknown`;
+triple for removals; jackpot HALT AND VERIFY; segfault HALT; one heavy job at a time; waiters
+anchored `pgrep -f "^python3 -u …"`). Plus M50's own: every pool is a CHOICE and its scope
+sentence says so; the constructibility caveat (§ stub) is cited in every "no kill at depth ≤ d"
+claim; the breaking order is pinned in the artifact header so filters are reproducible.
+
+## §4. Practical notes
+
+Desktop (32 cores, 125 GB). Measured costs the shape already leans on: enumeration
+2–3 colourings/s (declining with blocking clauses — the 12-h cap is ~10⁵ at worst); whole-set SAT
+1–8 s per colouring at the 52k-point union (30-wide parallel → ~20–40 min per sweep over 10⁴
+colourings); single-colouring ddmin minutes. Phase 1 re-measures the sweep cost on a 500-colouring
+sample before phase 3 commits its schedule.
+
+## §R. Results (filled as phases close)
+
+*(empty at subplanning)*
