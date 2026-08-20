@@ -401,6 +401,27 @@ sample before phase 3 commits its schedule.
   hours to spare once parallel). Cost basis for the sweeps: |S| = 51,350, ~10 ms/colouring for
   masks, ~0.3–2 s/colouring for a whole-set SAT at depth 1.
 
+### §R3. The depth profile and the hitting set (phase 3) — 99.2 % of the batch list dies by restricted depth two, and the committable batch is 19 of 29
+
+* **Depth 1** (9,271 points, the complete single-point-kill lattice): **50,192 of 51,350 colourings
+  killed (97.7 %)** — whole-set verdicts, every ask decided, 543 s for the full sweep (~95/s at 30
+  workers). Reproduced exactly on the rerun that persisted the survivor indices. **P2a (≥ 40 %):
+  MET at more than double the bound.**
+* **Depth 2 restricted** (52,139 points about seed ∪ the 284 strong depth-1 points): kills **754 of
+  the 1,158 depth-1 survivors** — cumulative **50,946 / 51,350 = 99.2 %**; **404 colourings survive
+  both pools** (whole-set verdicts, 2,556 s). **P2b (≥ 80 %): MET.**
+* **The 404 spread over 22 of the 29 cheats, but the right cut is a HITTING SET**: keep a minimum
+  set of cheats such that every surviving colouring is mono on at least one kept cheat — then the
+  kept edges exclude all 404 from the committed object's colouring space. Exact minimum (HiGHS, 22
+  columns × 404 rows): **keep 10** — `(4,205), (21,210), (38,211), (71,107), (98,213), (118,212),
+  (126,203), (206,210), (206,211), (210,211)` — **exactly M49's ten hold-out refusers, rediscovered
+  by the batch view** (the five one-or-two-short and the five untouched of M49 §R9). **Committable
+  batch: 19 of 29 in ONE commit**; the halo must kill the filtered list of **5,602** colourings
+  (proper on the kept ten), every one pool-killable by construction. `build/m50-hitting.json`.
+* Per-colouring mono-cheat counts among the 404: 42 colourings pin exactly one cheat, 109 two,
+  123 three, 98 four, 32 five — the stall structure is concentrated, not diffuse (the ten kept
+  cheats are a genuine core, not an artifact of the minimizer).
+
 ### §R0. The kernel piece (phase 0) — LANDED, first sitting
 
 `Proofs/HadwigerNelson/PartnerLattice.lean` (new leaf file, §Bʹ item 2 — no rebuild cascade):
