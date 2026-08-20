@@ -270,6 +270,30 @@ and pair-set membership IS the disjunction (`simpa`). `finite_two_unit_neighbors
   catching exactly the implementation trap this pass surfaced: **avail masks must range over ALL
   current object vertices (halo points adjacent to A, B, or earlier halos included), not the
   original 214** — the lists' domain grows with the recursion.
+## §Bʹʹʹ. The experience-modeling pass (2026-08-19, fresh invocation) — the surface a resuming session meets
+
+The primary consumer is a FUTURE SESSION with nothing but the artifact directory (compaction is
+planned); Kooshi reads rows and the report; Lean automation meets the two kernel names. Changes:
+
+1. **Resume is the zero-annotation path.** Every phase command is idempotent: re-running it loads
+   its checkpoint, prints what was loaded and what remains, and continues (or no-ops if done). No
+   bespoke resume scripts (the M49 pain). `--status` prints the whole campaign state — the first
+   command a cold session runs.
+2. **The verdict enum cannot say "clean" and cannot promote a pool.** Per-colouring:
+   `killed(pool)` / `survives-pool(pool)` (complete AT THAT DEPTH for constructible halos — the row
+   cites the §R10 caveat) / `stalled-at-depth(d)`. Per-commit: `committed` (triple) / `candidate`
+   (one-hot only) / `refused`. Every row: pool name + fingerprint + parameters, `|S|` with
+   `exact|capped` status, the pinned breaking order.
+3. **The rigidity gate is structural, not narrative**: enumeration rows carry `gate: proceed |
+   blocked`; the design phase REFUSES a capped list unless `--pool-choice-ack` names the sample
+   explicitly (G21 made a flag).
+4. **The stall list is a first-class deliverable** (`build/m50-stall.json`): per surviving
+   colouring — the colouring itself, its mono-cheat set, every pool it survived — because the stall
+   is G32's falsifier and next milestone's input, not a leftover.
+5. Kernel names stay `Glue.eq_gluePoint_of_unit_pair` / `Glue.finite_two_unit_neighbors` (the
+   `Glue` namespace keeps dot-access to the `gluePoint`/`reflAxis` API; docstrings state the
+   mirror disjunct and the derived-hypotheses fact, which IS the discovery surface).
+
 ## §0. Registered predictions (BEFORE any campaign instrument runs)
 
 Verdict vocabulary as M49: `unknown` is never a verdict; a "removed"/"committed" claim needs the
