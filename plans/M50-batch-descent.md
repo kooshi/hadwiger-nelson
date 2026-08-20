@@ -422,6 +422,26 @@ sample before phase 3 commits its schedule.
   123 three, 98 four, 32 five — the stall structure is concentrated, not diffuse (the ten kept
   cheats are a genuine core, not an artifact of the minimizer).
 
+### §R4. The batch commit (phase 4) — NINETEEN cheats removed in ONE certified commit
+
+* **The cover**: greedy set-cover over the 5,602-colouring committable list on the depth-2r pool
+  (52,139 candidates), most-constrained-first with the empty-avail stage 0. First acceptance: a
+  5-point ddmin kill whose points covered 2,876 of 5,602 outright; **full coverage with ZERO
+  stalls**; raw halo 709 → global lookup-ddmin shrink → **465 points** (~70 min cover + ~50 min
+  shrink; the numpy avail matrix and uncovered-only rechecks are what made it affordable).
+* **The commit, certified**: lookup re-check on all 5,602 green; **+11 construction auxiliaries**
+  (depth-1 parents of kept depth-2 points — the kill is monotone under adding points, the geometry
+  needs the parents; the assert that caught this is the §Bʺ topological-order obligation working);
+  all **476 points defined exactly from provenance** (sympy recursion), **2,954 halo unit edges
+  verified — 2,646 exact, 308 at 200-digit numeric, labelled per edge**; **one-hot UNSAT + 3-bit
+  UNSAT** on the true object (4,165 s end to end). The successful commit subsumes the bridge
+  spot-check control (lookup said killed; the solver confirmed UNSAT on the whole object).
+* **The object after one turn of the batch loop: 690 points, 427 cheats (446 − 19)** —
+  `build/m50-object-S29-depth2r.json` (object-relative provenance; rebuilt deterministically and
+  fingerprint-verified). **P3 (a depth-≤2 cover halo commits at least the 12-edge sub-batch in one
+  commit): MET at 19 edges.** M49's entire sequential campaign removed 14 in its composed object;
+  the batch frame removed 19 in one halo with composition by construction, exactly as designed.
+
 ### §R0. The kernel piece (phase 0) — LANDED, first sitting
 
 `Proofs/HadwigerNelson/PartnerLattice.lean` (new leaf file, §Bʹ item 2 — no rebuild cascade):
