@@ -1027,8 +1027,16 @@ if __name__ == "__main__":
     elif "--status" in args:
         status()
     elif "--enumerate" in args:
-        obj = Obj()
-        enumerate_cubes(obj, floor_batch(), BUILD / "m50-S29.jsonl")
+        lab = next((args[i + 1] for i, a in enumerate(args) if a == "--object"), None)
+        if lab:
+            obj, removed = load_object(lab)
+            rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
+            rc = [r for r in rows if r["kind"] == "recurse-census" and r["label"] == lab][-1]
+            B = [tuple(e) for e in rc["essential_alone"]]
+            out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2.jsonl")
+            enumerate_cubes(obj, B, BUILD / out)
+        else:
+            enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
         filter_check()
     elif "--profile" in args:
