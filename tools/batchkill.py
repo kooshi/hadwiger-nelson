@@ -544,8 +544,16 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     constructible halos (M49 §R10 caveat cited in the row). Returns the per-colouring kill flags."""
     allidx = list(range(len(pool.pts)))
     t0 = time.time()
-    AV = mechanism.pmap(lambda c: avail_masks(obj, pool, c), cols)
-    outs = mechanism.pmap(lambda av: not feasible(pool, allidx, av), AV)
+    done = [0]
+
+    def one(c):
+        r = not feasible(pool, allidx, avail_masks(obj, pool, c))
+        done[0] += 1
+        if done[0] % 2000 == 0:
+            log(f"[profile {label}] {done[0]}/{len(cols)} [{time.time()-t0:.0f}s]", flush=True)
+        return r
+
+    outs = mechanism.pmap(one, cols)
     row = {"kind": "profile", "label": label, **pool.cite(), "n_colourings": len(cols),
            "killed": int(sum(outs)), "survive": int(len(outs) - sum(outs)),
            "seconds": round(time.time() - t0, 1),
