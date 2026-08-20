@@ -554,7 +554,10 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
         return r
 
     outs = mechanism.pmap(one, cols)
+    (BUILD / f"m50-survivors-{label}.json").write_text(
+        json.dumps([i for i, k in enumerate(outs) if not k]))
     row = {"kind": "profile", "label": label, **pool.cite(), "n_colourings": len(cols),
+           "survivor_file": f"m50-survivors-{label}.json",
            "killed": int(sum(outs)), "survive": int(len(outs) - sum(outs)),
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "per-colouring whole-set verdict on the named pool: killed = no "
@@ -888,12 +891,18 @@ def filter_check():
     T.record(BUILD / "m50-batch.json", row)
 
 
-def run_profile(pool_name: str, ack: bool):
+def run_profile(pool_name: str, ack: bool, survivors_of: str | None = None):
     header, cols, gate = _gated_seps(ack)
     obj = Obj()
     pool = _build_pool(obj, pool_name)
+    label = f"S29-{pool.name}"
+    if survivors_of:
+        idx = json.loads((BUILD / f"m50-survivors-{survivors_of}.json").read_text())
+        cols = [cols[i] for i in idx]
+        label += f"-of-{survivors_of}"
+        print(f"[profile] restricted to the {len(cols)} survivors of {survivors_of}")
     print(f"[profile] pool {pool.name}: {len(pool.pts)} points (fp {pool.fp}); |S| = {len(cols)}")
-    profile(obj, pool, cols, label=f"S29-{pool.name}")
+    profile(obj, pool, cols, label=label)
 
 
 def run_design(pool_name: str, ack: bool):
@@ -963,7 +972,8 @@ if __name__ == "__main__":
         filter_check()
     elif "--profile" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth1")
-        run_profile(pool_name, ack="--pool-choice-ack" in args)
+        so = next((args[i + 1] for i, a in enumerate(args) if a == "--survivors-of"), None)
+        run_profile(pool_name, ack="--pool-choice-ack" in args, survivors_of=so)
     elif "--design" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth2r")
         run_design(pool_name, ack="--pool-choice-ack" in args)
