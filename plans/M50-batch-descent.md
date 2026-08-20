@@ -372,6 +372,35 @@ sample before phase 3 commits its schedule.
 
 ## §R. Results (filled as phases close)
 
+### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
+
+* **`tools/batchkill.py`** (§2 surface as modelled): provenance `Obj` (smart constructor; 30-digit
+  mpmath `check()`; planted corruption caught), cKDTree pools with fingerprints, checkpointed
+  enumeration, per-colouring profile, greedy cover with the empty-avail stage 0, provenance-recursive
+  certification, resume-default CLI. `--self-test` PASS (the depth-1 census reproduces M49's
+  9,271/25-with-5/22-with-8; the (76,78) kill found by the mask sweep; the monotonicity probe; a
+  fake kill refused).
+* **The enumeration went through three engines, each forced by a measurement.** The sequential
+  blocking loop (M49's instrument) ran at 9/s decaying to 0.5/s — the whole 40 MB CNF rewritten per
+  colouring — and would have needed ~30 h. Cube-parallelism v1 (fixed pins, one worker per cube)
+  closed 118 of 125 cubes in 100 s and then serialized on 4 heavy lineages — a global-order pin is
+  nearly constant inside a heavy cube, so splitting it moved no mass (Kooshi's "still only ~4
+  threads" caught it). **v3, the landed engine: entropy-guided adaptive splitting** — an open cube
+  splits on the vertex whose colour histogram over its own found colourings is most balanced;
+  round-based 300-s stretches; per-cube blocking clauses only; manifest + lockfile. From scratch:
+  **|S₂₉| = 51,350 EXACT in 24 min** (five rounds, 461 cubes, every leaf closed by UNSAT).
+* **The incident, recorded (G30 genre):** a failed compound command left a first enumerator running
+  and a "clean relaunch" started a second — two processes raced the same cube directory for ~20
+  minutes and produced conflicting rows (51,350 vs 33,462). Both were discarded, the state wiped,
+  a LOCKFILE added, and the clean single-process run re-derived the list from scratch. Its count
+  equals the raced run's 51,350 (independent consistency), the serial run's 31,720 are a subset,
+  and the sub-batch filters reproduce M49's exact 684 (12-edge) and 1,010 (14-edge) — the §Bʺ
+  one-per-orbit argument tested end to end. All three controls green.
+* **P1 verdict: MISSED on size** (51,350 > 30,000; the gate's 30k bound was a cost heuristic and is
+  now reported as such — the list is EXACT, which is the soundness half; the 12-h half was met with
+  hours to spare once parallel). Cost basis for the sweeps: |S| = 51,350, ~10 ms/colouring for
+  masks, ~0.3–2 s/colouring for a whole-set SAT at depth 1.
+
 ### §R0. The kernel piece (phase 0) — LANDED, first sitting
 
 `Proofs/HadwigerNelson/PartnerLattice.lean` (new leaf file, §Bʹ item 2 — no rebuild cascade):
