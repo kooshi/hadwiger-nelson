@@ -329,18 +329,18 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     return row
 
 
-def enumerate_cubes(obj: Obj, B, path: Path, cube_depth: int = 3, cap_wall: float = 200 * 3600,
-                    stretch: float = 300.0, split_target: int = 24, log=print) -> dict:
-    """The parallel form of `enumerate_seps`, with ADAPTIVE cube splitting: pin the colours of the
-    vertices after the breaking anchor (a cube is a digit string; its pins are `order[1:1+len]`).
-    Cubes PARTITION the solution set and the breaking clauses are global, so the union over leaf
-    cubes equals the sequential enumeration — one representative per palette orbit. Work runs in
-    ROUNDS: every open cube enumerates with ONLY ITS OWN blocking clauses for `stretch` seconds;
-    between rounds, while fewer than `split_target` cubes are open, each open cube splits into its
-    five children (its lines bucketed by the next pin, the parent file kept as `.split.bak`).
-    Everything is file-checkpointed; resume is the default. On completion the merged, deduplicated
-    list is rewritten to `path` under the same header contract."""
+def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
+                    stretch: float = 300.0, split_target: int = 28, log=print) -> dict:
+    """The parallel form of `enumerate_seps`, with ENTROPY-GUIDED cube splitting. A cube is a list
+    of (vertex, colour) pins; cubes partition the solution set (children pin one more vertex, one
+    child per colour), and the breaking clauses are global, so the union over leaf cubes equals the
+    sequential enumeration — one representative per palette orbit. Between rounds, while fewer than
+    `split_target` leaves are open, every open cube splits ON THE VERTEX WHOSE COLOUR DISTRIBUTION
+    OVER ITS OWN FOUND COLOURINGS IS MOST BALANCED (a global-order pin is nearly constant inside a
+    heavy cube and splits nothing). Work is round-based (`stretch` seconds per cube per round),
+    file-checkpointed, resume-by-default; the manifest is written only by the round driver."""
     import shutil
+    from collections import Counter
     B = [tuple(e) for e in B]
     edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
     order = T._degree_order(obj.n, edges)
@@ -349,138 +349,169 @@ def enumerate_cubes(obj: Obj, B, path: Path, cube_depth: int = 3, cap_wall: floa
               hashlib.sha256(repr(order).encode()).hexdigest()[:16]}
     cdir = path.parent / (path.stem + "-cubes")
     cdir.mkdir(exist_ok=True)
+    man_path = cdir / "manifest.json"
     base = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
     base += T._brk_full(obj.n, K, order)
     base += [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
 
-    def f_of(cube: str) -> Path:
-        return cdir / f"cube-{cube}.jsonl"
+    def cid(pins) -> str:
+        return "c" + hashlib.sha256(repr(list(map(tuple, pins))).encode()).hexdigest()[:12]
 
-    def marker(cube: str, kind: str) -> Path:
-        return cdir / f"cube-{cube}.{kind}"
+    def f_of(i: str) -> Path:
+        return cdir / f"{i}.jsonl"
 
-    # one-time seeding from a sequential run's file
-    if path.exists():
-        lines = path.read_text().splitlines()
-        old = json.loads(lines[0])
-        assert old["order_fingerprint"] == header["order_fingerprint"], "seed: order drifted"
-        assert old["stage_fingerprint"] == header["stage_fingerprint"], "seed: stage drifted"
-        pins = order[1:1 + cube_depth]
-        buckets: dict[str, list[str]] = {}
-        for line in lines[1:]:
-            cs = json.loads(line)
-            buckets.setdefault("".join(cs[p] for p in pins), []).append(line)
-        for cube, ls in buckets.items():
-            assert not f_of(cube).exists(), "seeding would clobber a cube file — already seeded?"
-            f_of(cube).write_text("\n".join(ls) + "\n")
-        shutil.move(str(path), str(path) + ".seed.bak")
-        log(f"[enumerate-cubes] seeded {sum(len(v) for v in buckets.values())} colourings into "
-            f"{len(buckets)} cubes")
+    def done_of(i: str) -> Path:
+        return cdir / f"{i}.done"
+
+    if man_path.exists():
+        man = json.loads(man_path.read_text())
+        assert man["order_fingerprint"] == header["order_fingerprint"], "resume: order drifted"
+        assert man["stage_fingerprint"] == header["stage_fingerprint"], "resume: stage drifted"
+    else:
+        man = {"order_fingerprint": header["order_fingerprint"],
+               "stage_fingerprint": header["stage_fingerprint"], "cubes": {}}
+        # migrate digit-string cubes from the fixed-order run, preserving their done markers
+        legacy = sorted(cdir.glob("cube-*.jsonl"))
+        if legacy or list(cdir.glob("cube-*.done")):
+            for f in sorted(cdir.glob("cube-*.done")):
+                digits = f.stem.split("-")[1]
+                pins = [[order[1 + k], int(d)] for k, d in enumerate(digits)]
+                i = cid(pins)
+                man["cubes"][i] = {"pins": pins, "split": False}
+                done_of(i).write_text("unsat")
+                lf = cdir / f"cube-{digits}.jsonl"
+                if lf.exists():
+                    shutil.move(str(lf), str(f_of(i)))
+                f.unlink()
+            for f in sorted(cdir.glob("cube-*.jsonl")):
+                digits = f.stem.split("-")[1]
+                pins = [[order[1 + k], int(d)] for k, d in enumerate(digits)]
+                i = cid(pins)
+                man["cubes"][i] = {"pins": pins, "split": False}
+                shutil.move(str(f), str(f_of(i)))
+            log(f"[enumerate-cubes] migrated {len(man['cubes'])} legacy cubes")
+        elif path.exists():
+            lines = path.read_text().splitlines()
+            old = json.loads(lines[0])
+            assert old["order_fingerprint"] == header["order_fingerprint"], "seed: order drifted"
+            i = cid([])
+            man["cubes"][i] = {"pins": [], "split": False}
+            f_of(i).write_text("\n".join(lines[1:]) + "\n" if len(lines) > 1 else "")
+            shutil.move(str(path), str(path) + ".seed.bak")
+        else:
+            i = cid([])
+            man["cubes"][i] = {"pins": [], "split": False}
+        man_path.write_text(json.dumps(man))
 
     def leaves() -> list[str]:
-        """current leaf cubes: every base-depth cube plus split children, minus split parents"""
-        import itertools
-        out = []
-        stack = ["".join(map(str, t)) for t in itertools.product(range(K), repeat=cube_depth)]
-        while stack:
-            c = stack.pop()
-            if marker(c, "split").exists():
-                stack.extend(c + str(d) for d in range(K))
-            else:
-                out.append(c)
-        return out
+        return [i for i, c in man["cubes"].items() if not c["split"]]
 
-    def split(cube: str):
-        """bucket the cube's lines into its five children by the next pin; mark it split"""
-        nxt = order[1 + len(cube)]
-        kids: dict[str, list[str]] = {cube + str(d): [] for d in range(K)}
-        if f_of(cube).exists():
-            for line in f_of(cube).read_text().splitlines():
-                cs = json.loads(line)
-                kids[cube + cs[nxt]].append(line)
-            shutil.move(str(f_of(cube)), str(f_of(cube)) + ".split.bak")
-        for kid, ls in kids.items():
-            assert not f_of(kid).exists(), ("split clobber", kid)
-            if ls:
-                f_of(kid).write_text("\n".join(ls) + "\n")
-        marker(cube, "split").write_text("")
+    def lines_of(i: str) -> list[str]:
+        return f_of(i).read_text().splitlines() if f_of(i).exists() else []
+
+    def split(i: str):
+        """entropy-guided: split on the unpinned vertex with the most balanced colour histogram
+        over this cube's found colourings (falls back to the first unpinned in the order)."""
+        pins = man["cubes"][i]["pins"]
+        pinned = {v for v, _ in pins}
+        ls = lines_of(i)
+        best_v, best_score = None, -1.0
+        if ls:
+            cols = [json.loads(x) for x in ls]
+            for v in order:
+                if v in pinned:
+                    continue
+                hist = Counter(c[v] for c in cols)
+                score = 1.0 - max(hist.values()) / len(cols)
+                if score > best_score:
+                    best_v, best_score = v, score
+                if best_score > 0.75:
+                    break
+        if best_v is None:
+            best_v = next(v for v in order if v not in pinned)
+        kids = {}
+        for d in range(K):
+            kp = pins + [[best_v, d]]
+            ki = cid(kp)
+            man["cubes"][ki] = {"pins": kp, "split": False}
+            kids[d] = ki
+        buckets: dict[int, list[str]] = {d: [] for d in range(K)}
+        for x in ls:
+            buckets[int(json.loads(x)[best_v])].append(x)
+        for d, ki in kids.items():
+            assert not f_of(ki).exists(), ("split clobber", ki)
+            if buckets[d]:
+                f_of(ki).write_text("\n".join(buckets[d]) + "\n")
+        if f_of(i).exists():
+            shutil.move(str(f_of(i)), str(f_of(i)) + ".split.bak")
+        man["cubes"][i]["split"] = True
 
     t0 = time.time()
 
-    def work(cube: str):
-        if marker(cube, "done").exists():
-            return cube, "exact"
-        pins = order[1:1 + len(cube)]
-        cls = list(base) + [[coloring.var(p, int(c), K)] for p, c in zip(pins, cube)]
-        if f_of(cube).exists():
-            for line in f_of(cube).read_text().splitlines():
-                col = [int(ch) for ch in json.loads(line)]
-                cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+    def work(i: str):
+        if done_of(i).exists():
+            return
+        pins = man["cubes"][i]["pins"]
+        cls = list(base) + [[coloring.var(v, c, K)] for v, c in pins]
+        for line in lines_of(i):
+            col = [int(ch) for ch in json.loads(line)]
+            cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
         ts = time.time()
-        status = "open"
-        with f_of(cube).open("a") as fh:
-            while True:
-                if time.time() - ts > stretch or time.time() - t0 > cap_wall:
-                    break
+        with f_of(i).open("a") as fh:
+            while time.time() - ts <= stretch and time.time() - t0 <= cap_wall:
                 st, model = forcer._solve(cls, obj.n * K, 1800)
                 if st == "unsat":
-                    marker(cube, "done").write_text("unsat")
-                    status = "exact"
-                    break
+                    done_of(i).write_text("unsat")
+                    return
                 if st != "sat":
-                    status = "capped-solver"
-                    break
+                    return
                 col = rigidity.decode(model, obj.n, K)
                 for a, b in edges:
                     assert col[a] != col[b]
                 assert col[obj.A] != col[obj.B]
-                assert all(col[p] == int(c) for p, c in zip(pins, cube)), "cube pin violated"
+                assert all(col[v] == c for v, c in pins), "cube pin violated"
                 fh.write(json.dumps("".join(map(str, col))) + "\n")
                 fh.flush()
                 cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
-        return cube, status
 
     rnd = 0
     while True:
         rnd += 1
-        lv = leaves()
-        open_cubes = [c for c in lv if not marker(c, "done").exists()]
-        total = sum(len(f_of(c).read_text().splitlines()) if f_of(c).exists() else 0 for c in lv)
-        log(f"[enumerate-cubes] round {rnd}: {len(lv)} leaves, {len(open_cubes)} open, "
+        open_cubes = [i for i in leaves() if not done_of(i).exists()]
+        total = sum(len(lines_of(i)) for i in leaves())
+        log(f"[enumerate-cubes] round {rnd}: {len(man['cubes'])} cubes, {len(open_cubes)} open, "
             f"{total} colourings, {time.time()-t0:.0f}s", flush=True)
         if not open_cubes or time.time() - t0 > cap_wall:
             break
         while 0 < len(open_cubes) < split_target:
-            for c in list(open_cubes):
-                split(c)
-            lv = leaves()
-            open_cubes = [c for c in lv if not marker(c, "done").exists()]
+            for i in list(open_cubes):
+                split(i)
+            open_cubes = [i for i in leaves() if not done_of(i).exists()]
             log(f"[enumerate-cubes]   split → {len(open_cubes)} open leaves", flush=True)
+        man_path.write_text(json.dumps(man))
         mechanism.pmap(work, open_cubes)
-    lv = leaves()
-    open_cubes = [c for c in lv if not marker(c, "done").exists()]
+    man_path.write_text(json.dumps(man))
+    open_cubes = [i for i in leaves() if not done_of(i).exists()]
     status = "exact" if not open_cubes else "capped-wall"
     seen: set[str] = set()
     if not open_cubes:
         with path.open("w") as fh:
             fh.write(json.dumps(header) + "\n")
-            for c in sorted(lv):
-                if f_of(c).exists():
-                    for line in f_of(c).read_text().splitlines():
-                        assert line not in seen, "duplicate representative across cubes"
-                        seen.add(line)
-                        fh.write(line + "\n")
-    total = len(seen) if not open_cubes else sum(
-        len(f_of(c).read_text().splitlines()) if f_of(c).exists() else 0 for c in lv)
+            for i in sorted(leaves()):
+                for line in lines_of(i):
+                    assert line not in seen, "duplicate representative across cubes"
+                    seen.add(line)
+                    fh.write(line + "\n")
+    total = len(seen) if not open_cubes else sum(len(lines_of(i)) for i in leaves())
     gate = "proceed" if status == "exact" and total <= 30_000 else "blocked"
     row = {"kind": "enumeration", **header, "count": total, "status": status, "gate": gate,
-           "cubes": {"base_depth": cube_depth, "leaves": len(lv), "open": len(open_cubes)},
+           "cubes": {"n": len(man["cubes"]), "open": len(open_cubes)},
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "the separating colourings of the object minus the batch, one "
            "representative per palette orbit under the pinned breaking order, enumerated by "
-           "adaptively split disjoint colour cubes (leaves partition the solution set, so the "
-           "union equals the sequential enumeration); EXACT only if status = exact (every leaf "
-           "closed by UNSAT)"}
+           "entropy-split disjoint colour cubes (leaves partition the solution set, so the union "
+           "equals the sequential enumeration); EXACT only if status = exact (every leaf closed "
+           "by UNSAT)"}
     T.record(BUILD / "m50-batch.json", row)
     log(f"[enumerate-cubes] total {total} ({status}, gate {gate}), {time.time()-t0:.0f}s")
     return row
