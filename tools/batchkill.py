@@ -574,11 +574,15 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
 # ---------------------------------------------------------------- the cover (phase 4)
 
 def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
-    """Greedy set-cover of the colouring list by a growing halo (§B2 + §Bʹ stage 0): the
-    empty-avail sweep first (single points that kill a colouring outright), then per-colouring
-    ddmin kills for the residue; coverage recheck after each addition (monotone: only grows).
-    Checkpointed at every acceptance; resume by re-loading the halo and recomputing coverage."""
-    AV = mechanism.pmap(lambda c: avail_masks(obj, pool, c), cols)
+    """Greedy set-cover of the colouring list by a growing halo (§B2 + §Bʹ stage 0). Avail masks
+    live in ONE uint8 numpy matrix (built once, in parallel); coverage rechecks touch only
+    UNCOVERED colourings (monotonicity: covered stays covered). Checkpointed per acceptance."""
+    t0 = time.time()
+    AVn = np.zeros((len(cols), len(pool.pts)), dtype=np.uint8)
+    rows = mechanism.pmap(lambda c: bytes(avail_masks(obj, pool, c)), cols)
+    for i, r in enumerate(rows):
+        AVn[i] = np.frombuffer(r, dtype=np.uint8)
+    log(f"[cover] avail matrix {AVn.shape} built [{time.time()-t0:.0f}s]", flush=True)
     halo: list[int] = []
     stall: list[int] = []
     if state_path.exists():
@@ -586,40 +590,44 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
         assert st_["pool_fingerprint"] == pool.fp, "resume: pool drifted"
         halo, stall = st_["halo"], st_["stall"]
         log(f"[cover] resumed: halo {len(halo)}, stall {len(stall)}")
+    covered = np.zeros(len(cols), dtype=bool)
 
-    def covered_by(halo_idxs):
-        return mechanism.pmap(lambda av: not feasible(pool, halo_idxs, av) if halo_idxs else False, AV)
+    def recheck(idxs):
+        """re-test coverage for the given colouring indices against the current halo"""
+        if not halo:
+            return
+        outs = mechanism.pmap(lambda t: not feasible(pool, halo, AVn[t]), list(idxs))
+        for t, k in zip(idxs, outs):
+            covered[t] = k
 
-    cov = covered_by(halo)
-    t0 = time.time()
-    queue = [t for t in range(len(cols)) if not cov[t] and t not in set(stall)]
-    log(f"[cover] start: {sum(cov)} covered, {len(queue)} queued, {len(stall)} stalled")
+    recheck([t for t in range(len(cols)) if not covered[t]])
+    queue = [t for t in range(len(cols)) if not covered[t] and t not in set(stall)]
+    log(f"[cover] start: {int(covered.sum())} covered, {len(queue)} queued, {len(stall)} stalled")
     while queue:
-        t = min(queue, key=lambda t: sum(1 for a in AV[t] if a == 0))  # fewest free kills last
-        # stage 0: an empty-avail single point kills cols[t] outright
-        empt = [p for p in range(len(pool.pts)) if AV[t][p] == 0 and p not in set(halo)]
-        added = None
+        # most-constrained first: fewest empty-avail (free-kill) points
+        nfree = (AVn[queue] == 0).sum(axis=1)
+        t = queue[int(np.argmin(nfree))]
+        empt = np.flatnonzero(AVn[t] == 0)
+        empt = [int(p) for p in empt if p not in set(halo)]
         if empt:
             added = [empt[0]]
         else:
             allidx = list(range(len(pool.pts)))
-            if feasible(pool, allidx, AV[t]):
+            if feasible(pool, allidx, AVn[t]):
                 stall.append(t)
                 queue = [q for q in queue if q != t]
                 log(f"[cover] colouring {t}: survives the whole pool — stalled ({len(stall)})")
                 _save(state_path, pool, halo, stall)
                 continue
-            # ddmin the pool against this single colouring
-            core = _ddmin_single(pool, AV[t], log=log)
-            added = [p for p in core if p not in set(halo)]
+            added = [p for p in _ddmin_single(pool, AVn[t], log=log) if p not in set(halo)]
         halo += added
-        cov = covered_by(halo)
-        queue = [q for q in range(len(cols)) if not cov[q] and q not in set(stall)]
-        log(f"[cover] +{len(added)} pts (halo {len(halo)}): covered {int(sum(cov))}/{len(cols)}, "
+        recheck([q for q in queue])
+        queue = [q for q in queue if not covered[q]]
+        log(f"[cover] +{len(added)} pts (halo {len(halo)}): covered {int(covered.sum())}/{len(cols)}, "
             f"queue {len(queue)}, stall {len(stall)} [{time.time()-t0:.0f}s]", flush=True)
         _save(state_path, pool, halo, stall)
-    # global shrink: drop halo points that no colouring needs (cheap necessity pass)
-    halo2 = _shrink_halo(pool, halo, [AV[t] for t in range(len(cols)) if t not in set(stall)], log)
+    live = [AVn[t] for t in range(len(cols)) if t not in set(stall)]
+    halo2 = _shrink_halo(pool, halo, live, log)
     _save(state_path, pool, halo2, stall)
     row = {"kind": "cover", **pool.cite(), "n_colourings": len(cols), "halo_size": len(halo2),
            "covered": len(cols) - len(stall), "stalled": len(stall),
@@ -906,11 +914,18 @@ def run_profile(pool_name: str, ack: bool, survivors_of: str | None = None):
 
 
 def run_design(pool_name: str, ack: bool):
+    """Cover design for the COMMITTABLE batch: the hitting-set file (m50-hitting.json) names the
+    kept cheats; the halo is designed against the filtered list (colourings proper on the kept
+    cheats — every one pool-killable by construction of the hitting set)."""
     header, cols, gate = _gated_seps(ack)
     obj = Obj()
     pool = _build_pool(obj, pool_name)
-    print(f"[design] pool {pool.name}: {len(pool.pts)} points (fp {pool.fp}); |S| = {len(cols)}")
-    cover(obj, pool, cols, BUILD / f"m50-cover-{pool.name}.json")
+    hit = json.loads((BUILD / "m50-hitting.json").read_text())
+    keep = [tuple(e) for e in hit["keep"]]
+    sub = filter_sub(obj, cols, keep)
+    print(f"[design] pool {pool.name}: {len(pool.pts)} pts (fp {pool.fp}); commit batch "
+          f"{len(hit['commit'])} edges, |S_commit| = {len(sub)}")
+    cover(obj, pool, sub, BUILD / f"m50-cover-{pool.name}.json")
 
 
 def run_commit(pool_name: str):
@@ -920,25 +935,15 @@ def run_commit(pool_name: str):
     st_ = json.loads((BUILD / f"m50-cover-{pool.name}.json").read_text())
     assert st_["pool_fingerprint"] == pool.fp, "cover state is for a different pool"
     halo, stall = st_["halo"], st_["stall"]
-    B29 = [tuple(e) for e in header["batch"]]
-    if stall:
-        # commit the largest sub-batch the cover fully kills: drop the cheats the stalled
-        # colourings force to stay (a stalled colouring separates A,B while proper on B29∖{its
-        # mono cheats} — keep every cheat some stalled colouring is mono on)
-        mono = set()
-        for t in stall:
-            c = cols[t]
-            for e in B29:
-                if c[e[0]] == c[e[1]]:
-                    mono.add(e)
-        B = [e for e in B29 if e not in mono]
-        keepcols = [c for c in filter_sub(obj, cols, mono)]
-        print(f"[commit] {len(stall)} stalled → keeping {len(mono)} cheats; batch = {len(B)} edges; "
-              f"re-checking the cover kills the {len(keepcols)}-colouring sub-list")
-        AVs = [avail_masks(obj, pool, c) for c in keepcols]
-        assert kills(pool, halo, AVs), "the halo does not kill the sub-batch list — investigate"
-    else:
-        B = B29
+    assert not stall, "the cover stalled on the committable list — the hitting set must be redone"
+    hit = json.loads((BUILD / "m50-hitting.json").read_text())
+    keep = [tuple(e) for e in hit["keep"]]
+    B = [tuple(e) for e in hit["commit"]]
+    sub = filter_sub(obj, cols, keep)
+    print(f"[commit] batch {len(B)} edges, halo {len(halo)} pts; lookup re-check on "
+          f"{len(sub)} colourings")
+    AVs = [avail_masks(obj, pool, c) for c in sub]
+    assert kills(pool, halo, AVs), "the halo does not kill the committable list — investigate"
     certify(obj, B, pool, halo, label=f"S29-{pool.name}")
 
 
