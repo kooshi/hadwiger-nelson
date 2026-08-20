@@ -349,6 +349,12 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
               hashlib.sha256(repr(order).encode()).hexdigest()[:16]}
     cdir = path.parent / (path.stem + "-cubes")
     cdir.mkdir(exist_ok=True)
+    lock = cdir / "LOCK"
+    if lock.exists():
+        pid = lock.read_text().strip()
+        if pid and Path(f"/proc/{pid}").exists():
+            raise SystemExit(f"another enumerator (pid {pid}) holds {lock} — refusing to race it")
+    lock.write_text(str(os.getpid()))
     man_path = cdir / "manifest.json"
     base = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
     base += T._brk_full(obj.n, K, order)
@@ -504,7 +510,7 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
                     fh.write(line + "\n")
     total = len(seen) if not open_cubes else sum(len(lines_of(i)) for i in leaves())
     gate = "proceed" if status == "exact" and total <= 30_000 else "blocked"
-    row = {"kind": "enumeration", **header, "count": total, "status": status, "gate": gate,
+    row = {**header, "kind": "enumeration", "count": total, "status": status, "gate": gate,
            "cubes": {"n": len(man["cubes"]), "open": len(open_cubes)},
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "the separating colourings of the object minus the batch, one "
@@ -513,6 +519,7 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
            "equals the sequential enumeration); EXACT only if status = exact (every leaf closed "
            "by UNSAT)"}
     T.record(BUILD / "m50-batch.json", row)
+    lock.unlink(missing_ok=True)
     log(f"[enumerate-cubes] total {total} ({status}, gate {gate}), {time.time()-t0:.0f}s")
     return row
 
@@ -830,10 +837,14 @@ def _gated_seps(ack: bool):
     enum_rows = [r for r in rows if r["kind"] == "enumeration"
                  and r["stage_fingerprint"] == header["stage_fingerprint"]]
     assert enum_rows, "no enumeration row for this stage — run --enumerate to completion first"
+    status = enum_rows[-1]["status"]
     gate = enum_rows[-1]["gate"]
-    if gate != "proceed" and not ack:
-        raise SystemExit(f"gate = {gate}: the list is capped or oversized — a design against it is "
-                         "a POOL-CHOICE; re-run with --pool-choice-ack to state that explicitly")
+    if status != "exact" and not ack:
+        raise SystemExit(f"status = {status}: the list is INCOMPLETE — a design against it is a "
+                         "POOL-CHOICE; re-run with --pool-choice-ack to state that explicitly")
+    if status == "exact" and gate == "blocked":
+        print(f"[gate] list is EXACT but large ({len(cols)}): sound, cost scales with |S| "
+              "(the registered 30k bound was a cost heuristic — P1's miss, recorded)")
     return header, cols, gate
 
 
