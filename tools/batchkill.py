@@ -418,7 +418,7 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
     lock.write_text(str(os.getpid()))
     man_path = cdir / "manifest.json"
     base = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
-    base += T._brk_full(obj.n, K, order)
+    base += T._brk_full(len(order), K, order)     # breaking over the PROJECTED order only
     base += [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
 
     def cid(pins) -> str:
