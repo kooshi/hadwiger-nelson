@@ -727,6 +727,9 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
     idx_of_pool: dict[int, int] = {}
     n0 = obj.n
     ordered = _topo_halo(pool, halo)
+    aux = len(ordered) - len(halo)
+    if aux:
+        log(f"[certify {label}] +{aux} construction auxiliaries (parents of kept depth-2 points)", flush=True)
     for p in ordered:
         kind, a, b, s = pool.prov[p]
         pa = a if a < n0 else idx_of_pool[a - n0] if False else a  # parents: obj index or pool index
@@ -756,7 +759,8 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
     verdict = "committed" if st == "unsat" and re == "unsat" else \
               ("candidate" if st == "unsat" else "refused")
     row = {"kind": "batch-commit", "label": label, "batch": [list(e) for e in B],
-           **pool.cite(), "halo_size": len(new_ids), "edge_verification": kinds,
+           **pool.cite(), "halo_size": len(new_ids), "construction_auxiliaries": aux,
+           "edge_verification": kinds,
            "outcome": st, "reencode": re, "verdict": verdict,
            "object_after": {"n": obj.n, "unit": len(ue), "cheats": len(tp)},
            "halo_prov": [pool.prov[p] for p in ordered],
@@ -779,21 +783,21 @@ def _pool_parent(pool, idx, n0):
 
 
 def _topo_halo(pool: Pool, halo):
-    """Order halo pool-indices so every glue parent that is itself a pool point comes first."""
+    """Order halo pool-indices so every glue parent that is itself a pool point comes first.
+    A cited parent OUTSIDE the halo is INCLUDED as a construction auxiliary: the shrink may drop a
+    depth-1 point a kept depth-2 point was built from — the kill survives (killing is monotone in
+    the point set) and the certification runs on the object actually built."""
     n0 = pool.obj.n
-    chosen = set(halo)
     out, done = [], set()
 
     def visit(p):
         if p in done:
             return
+        done.add(p)
         _, a, b, _s = pool.prov[p]
         for parent in (a, b):
             if parent >= n0:
-                q = parent - n0
-                assert q in chosen, "halo cites a pool parent outside the halo — add it"
-                visit(q)
-        done.add(p)
+                visit(parent - n0)
         out.append(p)
 
     for p in halo:
