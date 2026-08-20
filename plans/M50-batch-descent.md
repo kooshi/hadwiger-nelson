@@ -172,7 +172,7 @@ exactly; nine gadgets certified). The enumeration's breaking order is FIXED (deg
 
 ## §C. The kernel skeleton (phase 0 — a sitting)
 
-New section in `Proofs/HadwigerNelson/Glue.lean` (or a small `PartnerLattice.lean` importing it):
+New leaf file `Proofs/HadwigerNelson/PartnerLattice.lean` (importing `Glue`; §Bʹ item 2):
 
 ```lean
 /-- **Depth-one completeness.** A point at unit distance from two DISTINCT points is one of the two
@@ -195,6 +195,41 @@ Spec examples: the seed pair `(0, 8)`'s common neighbours 64 and 196 (M49's exac
 at `x = y` the statement is vacuous by hypothesis, and a point with two neighbours at distance
 `> 2` apart cannot exist (`not_exists` via the triangle inequality) — stated as the adversarial
 example.
+
+## §Bʹ. The domain-modeling pass (2026-08-19, fresh invocation) — what it changed
+
+1. **The kernel statement's shape is the POINTWISE disjunction, and that is where the hypotheses
+   vanish.** The set form (`sphere x 1 ∩ sphere y 1 = {glue, mirror}`) needs `dist x y ≤ 2` as a
+   hypothesis (beyond it the set is empty, not the pair); the pointwise form derives BOTH annulus
+   bounds from the witness itself (`0 = |1−1| ≤ dist x y` always; `dist x y ≤ dist x p + dist p y
+   = 2` by the triangle inequality through `p`). The consumer is pointwise (a candidate point
+   exists; where can it be), so `eq_gluePoint_of_unit_pair` keeps only `x ≠ y` — which is genuinely
+   load-bearing (at `x = y` the intersection is a whole circle). At `dist x y = 2` the two glue
+   points coincide and the disjunction holds degenerately — no special case. `finite_two_unit_
+   neighbors` follows by covering with the finite biUnion of pair-sets; the numeric bound
+   `2·|V|²` is prose, not a lemma (no consumer).
+2. **Phase 0 lands in a NEW file `Proofs/HadwigerNelson/PartnerLattice.lean`** (importing `Glue`),
+   not inside `Glue.lean`: `Glue` has heavy dependents (OneDefect, Triangle, MetaLadder, …) and any
+   declaration added there queues their rebuilds (the M11 trace lesson); a new leaf file costs
+   nothing downstream.
+3. **Provenance is an append-only construction DAG, enforced by a smart constructor and a cheap
+   runnable check.** A point is `("seed", i)` or `("glue", a, b, ±1)` with `a, b` STRICTLY EARLIER
+   indices; `Obj.add_glue` computes the float coordinates FROM the parents (never accepts free
+   coordinates), and `Obj.check()` re-derives every point at 30-digit mpmath from provenance and
+   compares — parse-don't-validate at the recursion's boundary, run as a planted control per
+   iteration. Cheat edges are pairs of SEED indices and never change across the recursion; unit
+   edges are derived data (cKDTree census + fingerprint, recomputed per commit). Exact sympy
+   geometry is derived from provenance only at certification (and the field census computes
+   radicands EXACTLY only for certified kill points; pool-level radicand statistics are 50-digit
+   numeric with clustering, labelled as such).
+4. **The design loop gains a stage 0: the empty-list sweep.** Under a FIXED colouring `c`, a
+   candidate point whose avail mask is empty is a single-point kill of `c` — a bitmask scan, no
+   CSP. M49's data says forced/empty-list points are common per colouring (~50 forced of ~200
+   small-list at depth one), so most of `S` should be covered by single points before any CSP kill
+   is designed; the greedy cover runs: empty-avail sweep → per-colouring CSP kills for the residue
+   → coverage recheck (monotonicity: the halo only grows, so covered only grows). New planted
+   control in `--self-test`: a known kill must REMAIN a kill after adding random points
+   (monotonicity probe).
 
 ## §0. Registered predictions (BEFORE any campaign instrument runs)
 
