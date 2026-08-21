@@ -196,6 +196,10 @@ def unit_pairs_np(pts, tol: float = TOL, h: float = 0.25):
 
 # ---------------------------------------------------------------- pools (each a CHOICE)
 
+class Undecided(Exception):
+    """A list-colouring ask hit its cap — never folded into a verdict (the M49 discipline)."""
+
+
 class Pool:
     """A candidate pool: points with provenance over `obj`, their obj-neighbour lists, and the
     unit adjacency among pool points. `name`/`params`/`fingerprint` go in every row."""
@@ -428,7 +432,8 @@ def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
                 for c in range(K):
                     cls.append([-(hloc[j] * K + c + 1), -(hloc[jj] * K + c + 1)])
     st, _ = forcer._solve(cls, (len(idxs2) + len(hids)) * K, cap)
-    assert st in ("sat", "unsat"), st
+    if st not in ("sat", "unsat"):
+        raise Undecided(f"list-colouring SAT capped at {cap}s on {len(idxs2)}+{len(hids)} vars")
     return st == "sat"
 
 
@@ -740,8 +745,11 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     done = [0]
 
     def one(c):
-        f, _ = whole_feasible(pool, avail_np(obj, pool, c), halo_masks(obj, c))
-        r = not f
+        try:
+            f, _ = whole_feasible(pool, avail_np(obj, pool, c), halo_masks(obj, c))
+            r = "killed" if not f else "survives"
+        except Undecided:
+            r = "unknown"
         done[0] += 1
         if done[0] % 2000 == 0:
             log(f"[profile {label}] {done[0]}/{len(cols)} [{time.time()-t0:.0f}s]", flush=True)
@@ -749,18 +757,24 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
 
     outs = mechanism.pmap(one, cols)
     (BUILD / f"m50-survivors-{label}.json").write_text(
-        json.dumps([i for i, k in enumerate(outs) if not k]))
+        json.dumps([i for i, k in enumerate(outs) if k != "killed"]))
+    (BUILD / f"m50-unknown-{label}.json").write_text(
+        json.dumps([i for i, k in enumerate(outs) if k == "unknown"]))
+    nk = sum(1 for o in outs if o == "killed")
+    ns = sum(1 for o in outs if o == "survives")
+    nu = sum(1 for o in outs if o == "unknown")
     row = {"kind": "profile", "label": label, **pool.cite(), "n_colourings": len(cols),
            "survivor_file": f"m50-survivors-{label}.json",
-           "killed": int(sum(outs)), "survive": int(len(outs) - sum(outs)),
+           "killed": nk, "survive": ns, "unknown": nu,
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "per-colouring whole-set verdict on the named pool: killed = no "
            "extension of the colouring to the whole pool exists (so none to any subset — "
            "monotonicity), survive = the whole pool is list-colourable under it, so NO "
            "constructible halo from this pool kills it (M49 §R10 caveat: constructible halos "
-           "only)"}
+           "only); unknown = the ask capped and is NEVER folded (survivor file includes it, so "
+           "downstream treats it conservatively as unkilled)"}
     T.record(BUILD / "m50-batch.json", row)
-    log(f"[profile {label}] {pool.name}: {sum(outs)} killed / {len(outs)-sum(outs)} survive "
+    log(f"[profile {label}] {pool.name}: {nk} killed / {ns} survive / {nu} unknown "
         f"of {len(cols)} [{time.time()-t0:.0f}s]")
     return list(outs)
 
@@ -812,7 +826,10 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
         if empt:
             added = [empt[0]]
         else:
-            f, _core = whole_feasible(pool, AVn[t], HVn[t])
+            try:
+                f, _core = whole_feasible(pool, AVn[t], HVn[t])
+            except Undecided:
+                f = True     # conservatively stalled; the row's stall list is labelled by the scope
             if f:
                 stall.append(t)
                 queue = [q for q in queue if q != t]
