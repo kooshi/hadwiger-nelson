@@ -216,8 +216,23 @@ class Pool:
             for i, j in unit_pairs_np(pts):
                 self.adj[i].append(j)
                 self.adj[j].append(i)
+        self._csr = None
         self.fp = hashlib.sha256(repr((obj.fingerprint(), name, sorted(params.items()),
                                        [tuple(round(v, 6) for v in p) for p in pts])).encode()).hexdigest()[:16]
+
+    def csr(self):
+        """CSR views for the vectorized per-colouring path: seed-neighbour lists, pool adjacency,
+        halo-neighbour lists (built once)."""
+        if self._csr is None:
+            def build(lists):
+                indptr = np.zeros(len(lists) + 1, dtype=np.int64)
+                for i, L in enumerate(lists):
+                    indptr[i + 1] = indptr[i] + len(L)
+                idx = np.fromiter((v for L in lists for v in L), dtype=np.int64,
+                                  count=int(indptr[-1]))
+                return indptr, idx
+            self._csr = (build(self.nbrs_seed), build(self.adj), build(self.nbrs_halo))
+        return self._csr
 
     def cite(self) -> dict:
         return {"pool": self.name, "pool_params": self.params, "pool_size": len(self.pts),
@@ -307,6 +322,70 @@ def halo_masks(obj: Obj, col) -> list[int]:
     return out
 
 
+_POP = np.array([bin(x).count("1") for x in range(32)], dtype=np.int8)
+
+
+def _or_reduceat(vals, indptr):
+    """bitwise_or segments of `vals` by CSR indptr; empty segments → 0 (reduceat's quirk fixed)."""
+    n = len(indptr) - 1
+    out = np.zeros(n, dtype=np.uint8)
+    lens = np.diff(indptr)
+    nz = np.flatnonzero(lens > 0)
+    if len(nz):
+        red = np.bitwise_or.reduceat(vals, indptr[nz])
+        out[nz] = red
+    return out
+
+
+def avail_np(obj: Obj, pool: Pool, col) -> np.ndarray:
+    """Vectorized `avail_masks`: per pool point, FULL minus colours on its SEED neighbours."""
+    (sp, si), _, _ = pool.csr()
+    bits = (np.uint8(1) << np.asarray(col, dtype=np.uint8)[si]).astype(np.uint8)
+    return (FULL & ~_or_reduceat(bits, sp)).astype(np.uint8)
+
+
+def peel_np(pool: Pool, av: np.ndarray, hav) -> tuple[np.ndarray, np.ndarray]:
+    """Vectorized exact list-colouring kernelization over the WHOLE pool + halo: returns the alive
+    masks (pool bool array, halo bool array). Peels any variable with freecount > remaining degree
+    (colourable last; feasibility unchanged)."""
+    _, (ap, ai), (hp, hi) = pool.csr()
+    m = len(hav)
+    alive = av != 0
+    free = _POP[av]
+    if m:
+        hs, ha = pool.obj.halo_structure()
+        halive = np.array([h != 0 for h in hav])
+        hfree = _POP[np.asarray(hav, dtype=np.uint8)]
+        hadj_ptr = np.zeros(m + 1, dtype=np.int64)
+        for j, L in enumerate(ha):
+            hadj_ptr[j + 1] = hadj_ptr[j] + len(L)
+        hadj_idx = np.fromiter((v for L in ha for v in L), dtype=np.int64, count=int(hadj_ptr[-1]))
+        # halo→pool reverse degree recomputed per pass (small m)
+    else:
+        halive = np.zeros(0, dtype=bool)
+        hfree = np.zeros(0, dtype=np.int8)
+    while True:
+        # degrees among alive
+        deg = np.zeros(len(av), dtype=np.int64)
+        contrib = alive[ai].astype(np.int64)
+        np.add.at(deg, np.repeat(np.arange(len(av)), np.diff(ap)), contrib)
+        if m:
+            hcontrib = halive[hi].astype(np.int64)
+            np.add.at(deg, np.repeat(np.arange(len(av)), np.diff(hp)), hcontrib)
+            hdeg = np.zeros(m, dtype=np.int64)
+            np.add.at(hdeg, np.repeat(np.arange(m), np.diff(hadj_ptr)), halive[hadj_idx].astype(np.int64))
+            rev = np.zeros(m, dtype=np.int64)
+            np.add.at(rev, hi, alive[np.repeat(np.arange(len(av)), np.diff(hp))].astype(np.int64))
+            hdeg += rev
+        drop = alive & (free > deg)
+        hdrop = (halive & (hfree > hdeg)) if m else np.zeros(0, dtype=bool)
+        if not drop.any() and not (m and hdrop.any()):
+            return alive, halive
+        alive &= ~drop
+        if m:
+            halive &= ~hdrop
+
+
 def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
     """List-colouring SAT of the pool subset `idxs` PLUS every old-halo point of the object (the
     old halo's colours are existential under the seed class — §R5). Exact list-colouring
@@ -322,52 +401,11 @@ def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
         if hav[j] == 0:
             return False
     hs, ha = pool.obj.halo_structure() if m else ([], [])
-    alive_p = set(idxs)
-    alive_h = set(range(m))
-    hp_nbrs: dict[int, list[int]] = {j: [] for j in range(m)}
-    for p in alive_p:
-        for j in pool.nbrs_halo[p]:
-            if j < m:
-                hp_nbrs[j].append(p)
-    degp = {p: sum(1 for b in pool.adj[p] if b in alive_p)
-            + sum(1 for j in pool.nbrs_halo[p] if j < m) for p in alive_p}
-    degh = {j: len(ha[j]) + len(hp_nbrs[j]) for j in alive_h}
-    nb = bin
-    stack = [("p", p) for p in alive_p if nb(avail[p]).count("1") > degp[p]] +             [("h", j) for j in alive_h if nb(hav[j]).count("1") > degh[j]]
-    while stack:
-        kind, x = stack.pop()
-        if kind == "p":
-            if x not in alive_p:
-                continue
-            alive_p.discard(x)
-            for b in pool.adj[x]:
-                if b in alive_p:
-                    degp[b] -= 1
-                    if nb(avail[b]).count("1") > degp[b]:
-                        stack.append(("p", b))
-            for j in pool.nbrs_halo[x]:
-                if j in alive_h:
-                    degh[j] -= 1
-                    if nb(hav[j]).count("1") > degh[j]:
-                        stack.append(("h", j))
-        else:
-            if x not in alive_h:
-                continue
-            alive_h.discard(x)
-            for jj in ha[x]:
-                if jj in alive_h:
-                    degh[jj] -= 1
-                    if nb(hav[jj]).count("1") > degh[jj]:
-                        stack.append(("h", jj))
-            for p in hp_nbrs[x]:
-                if p in alive_p:
-                    degp[p] -= 1
-                    if nb(avail[p]).count("1") > degp[p]:
-                        stack.append(("p", p))
-    if not alive_p and not alive_h:
-        return True
-    idxs2 = sorted(alive_p)
-    hids = sorted(alive_h)
+    # kernelization lives in the NUMPY path (peel_np / whole_feasible) — a Python peel here cost
+    # 0.18 s per call and dominated everything (measured); the direct CNF is milliseconds.
+    idxs2 = sorted(idxs)
+    hids = list(range(m))
+
     loc = {p: i for i, p in enumerate(idxs2)}
     hloc = {j: len(idxs2) + i for i, j in enumerate(hids)}
     cls = []
@@ -392,6 +430,20 @@ def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
     st, _ = forcer._solve(cls, (len(idxs2) + len(hids)) * K, cap)
     assert st in ("sat", "unsat"), st
     return st == "sat"
+
+
+def whole_feasible(pool: Pool, av: np.ndarray, hav) -> tuple[bool, np.ndarray]:
+    """(feasible?, peeled pool core) for the WHOLE pool under one colouring — the vectorized path:
+    peel first (usually to empty = feasible); a nonempty core goes to the SAT on the core alone
+    (peeling preserves feasibility exactly, §Bʺ). An EMPTY-list point anywhere = infeasible
+    outright (the point is uncolourable — the stage-0 kill; the peel must never discard it)."""
+    if bool((av == 0).any()) or any(h == 0 for h in hav):
+        return False, np.zeros(len(av), dtype=bool)
+    alive, halive = peel_np(pool, av, hav)
+    if not alive.any() and not halive.any():
+        return True, alive
+    core = [int(x) for x in np.flatnonzero(alive)]
+    return feasible(pool, core, av, hav), alive
 
 
 def kills(pool: Pool, idxs, cols_avail) -> bool:
@@ -688,7 +740,8 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     done = [0]
 
     def one(c):
-        r = not feasible(pool, allidx, avail_masks(obj, pool, c), halo_masks(obj, c))
+        f, _ = whole_feasible(pool, avail_np(obj, pool, c), halo_masks(obj, c))
+        r = not f
         done[0] += 1
         if done[0] % 2000 == 0:
             log(f"[profile {label}] {done[0]}/{len(cols)} [{time.time()-t0:.0f}s]", flush=True)
@@ -720,7 +773,7 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
     UNCOVERED colourings (monotonicity: covered stays covered). Checkpointed per acceptance."""
     t0 = time.time()
     AVn = np.zeros((len(cols), len(pool.pts)), dtype=np.uint8)
-    rows = mechanism.pmap(lambda c: bytes(avail_masks(obj, pool, c)), cols)
+    rows = mechanism.pmap(lambda c: avail_np(obj, pool, c).tobytes(), cols)
     for i, r in enumerate(rows):
         AVn[i] = np.frombuffer(r, dtype=np.uint8)
     nh = obj.n - 214
@@ -759,8 +812,8 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
         if empt:
             added = [empt[0]]
         else:
-            allidx = list(range(len(pool.pts)))
-            if feasible(pool, allidx, AVn[t], HVn[t]):
+            f, _core = whole_feasible(pool, AVn[t], HVn[t])
+            if f:
                 stall.append(t)
                 queue = [q for q in queue if q != t]
                 log(f"[cover] colouring {t}: survives the whole pool — stalled ({len(stall)})")
@@ -791,8 +844,11 @@ def _save(state_path, pool, halo, stall):
 
 
 def _ddmin_single(pool: Pool, av, hv, log=print):
-    """Shrink the whole pool to a 1-minimal kill of ONE colouring (its masks `av`, halo `hv`)."""
-    core = [p for p in range(len(pool.pts))]
+    """Shrink to a 1-minimal kill of ONE colouring, starting from the PEELED core (every minimal
+    kill lives inside it: a globally peelable point is peelable in any subset — §Bʺ)."""
+    alive, _halive = peel_np(pool, np.asarray(av, dtype=np.uint8), hv)
+    core = [int(x) for x in np.flatnonzero(alive)]
+    assert core or (len(_halive) and _halive.any()), "peel emptied a colouring ddmin was called on — it was feasible"
     chunk = max(1, len(core) // 2)
     while core and chunk >= 1:
         pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
