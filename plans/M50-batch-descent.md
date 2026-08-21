@@ -442,6 +442,22 @@ sample before phase 3 commits its schedule.
   commit): MET at 19 edges.** M49's entire sequential campaign removed 14 in its composed object;
   the batch frame removed 19 in one halo with composition by construction, exactly as designed.
 
+### §R6. Iteration 2 (in progress at the time of writing)
+
+* Floor of the committed object: **36** (kept 10 + 26 newly essential; 427 asks, 0 unknown, 162 s).
+* **The seed-projection architecture** (§Bʹ follow-on, forced by measurement): the full-space
+  iteration-2 enumeration grew LINEARLY past 31k with 58 leaves open (old-halo colour freedom
+  multiplies orbits without adding design information) and was replaced by enumeration blocked on
+  the 214 SEED vertices only, with the old halo's colours as CSP VARIABLES in every design ask —
+  **|S| = 1,429 seed-classes, exact, 339 s**. The list stays seed-sized at every recursion depth.
+* Iteration-2 depth-1 profile (175,166-point pool over the 690-point object, halo variables in
+  every ask): **1,325 killed / 41 survive / 63 unknown at cap** of 1,429 (10,824 s).
+* Hitting set over the conservative 104 (survivors + unknowns): they touch only 11 of the 36;
+  **keep 5, commit 31**. And the five kept are EXACTLY M49's five "untouched" refusers —
+  `(4,A), (71,107), (126,203), (206,210), (206,211)` — while M49's five "one-or-two-short"
+  refusers all became committable: **the M49 depth-2 status column predicted the split exactly.**
+  The refuser core is 10 → 5 after one batch iteration.
+
 ### §R5. Kooshi's observations on the refuser-core tool (2026-08-20), verified exactly
 
 The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`) was built on request
