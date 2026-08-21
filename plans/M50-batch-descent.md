@@ -442,6 +442,37 @@ sample before phase 3 commits its schedule.
   commit): MET at 19 edges.** M49's entire sequential campaign removed 14 in its composed object;
   the batch frame removed 19 in one halo with composition by construction, exactly as designed.
 
+### §R5. Kooshi's observations on the refuser-core tool (2026-08-20), verified exactly
+
+The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`) was built on request
+("build it as a tool, give me knobs"); all three observations made on it VERIFY in exact arithmetic:
+
+* **The blind centres v58 / v115.** Neither is a refuser endpoint, yet each locks into the core at
+  exact named distances: v58 at distance **1** from endpoints {118, 126} and **2** from
+  {71, 98, 107, 213}; v115 at **1** from {98, 107} and **2** from {118, 126, 203, 212} — six exact
+  locks each, the two points aligned with the core's "crystal-tip" fan. These are the A1-at-a-
+  blind-centre genre (M49's kill mechanism) sitting INSIDE the seed: candidate coverage centres the
+  next design round should probe first.
+* **The metapivot hexagon.** v0 carries six vertices {14, 161, 105, 49, 126, 70} at EXACTLY equal
+  distance `d² = (34 + √33)/12` (≈ 1.947²/… d ≈ 1.9470) at exact angles 0°, ±60°, ±120°, 180° —
+  and the ring's six edges all have the SAME length: a perfect equilateral hexagon about v0, at a
+  ℚ(√33) ring radius — G4's seam-ring vocabulary at a pivot distance LONGER than the two-circle
+  constructions', with one ring vertex (126) a refuser endpoint. The seed is metapivot-shaped at a
+  distance nobody has swept.
+* **The four-point pigeonhole, and it is total.** Among {98, 107, 118, 213}: some pair is
+  monochromatic in **every one of the 51,350** separating colourings of `H − B₂₉` (hence all 404
+  batch survivors). Sharper: 98≠107, 98≠212 and 118≠213 in ALL 51,350 (forced-distinct pairs of
+  the surviving space); the mono mass sits on {107,118} (20,524), {212,213} (21,698), {107,212},
+  {107,213}, {98,213}, {98,118}, {118,212}. Design lever: a halo forcing DISTINCT the seven
+  nonzero pairs of {98, 107, 118, 212, 213} would kill every survivor at once — the stall study's
+  first concrete target list.
+* **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
+  prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
+  build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
+  five — the seed is largely symmetric, unlike the 5-chromatic witnesses, so combining
+  longer-distance pivots + recursive unit material + rotation could be a generator of new seeds.
+  Filed for the close's ranking (it composes with G2/G7: rings about rotation centres; detuning as
+  the mechanism).
 ### §R0. The kernel piece (phase 0) — LANDED, first sitting
 
 `Proofs/HadwigerNelson/PartnerLattice.lean` (new leaf file, §Bʹ item 2 — no rebuild cascade):
