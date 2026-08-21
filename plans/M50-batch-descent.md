@@ -469,6 +469,15 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   forced-distinct pair on its unit circle, and the four cross pairs carry the total disjunctive
   pigeonhole. Design lever: force the FOUR cross pairs distinct and every survivor dies at once —
   the stall study's first concrete target, four pairs instead of seven.
+* **The full forcing sweep over the 17 core points** (his ask, "check the rest"; all 51,350 + the
+  404, pairwise + all 3/4-subsets by agreement bitmasks): every forced-distinct pair over the FULL
+  space is edge-explained (honest null); on the 404 stall space two genuine conditional virtual
+  edges appear, **v71–v118 and v98–v203, both non-edges at distance 3** (120/51,350 overall, 0/404);
+  and there are **NO total 3-set pigeonholes but FIFTEEN minimal 4-set ones**, all drawn from the
+  same cast (98/107/118/126 recur throughout), Kooshi's quadrilateral the cleanest at four live
+  pairs, the family's live-distance vocabulary exactly {√3, √7, 2√3, 3, 2-removed}. Design
+  formulation this yields: force distinct a HITTING SET of live pairs across the fifteen
+  pigeonholes and every survivor dies — the stall reduced to a handful of named pair-targets.
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
