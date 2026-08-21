@@ -830,8 +830,10 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
         if empt:
             added = [empt[0]]
         else:
-            # LOCAL kill first (M49's radius ladder): candidates near the colouring's own mono
-            # cheats — the giant whole-pool CNFs never form; escalate the radius on refusal.
+            # LOCAL kill first (M49's radius ladder), then the STRONG rung (points with >= 3
+            # object neighbours — what real gadgets are made of; small CNFs), then the whole pool
+            # as the completeness rung — under a per-colouring WALL BUDGET: a colouring that does
+            # not fall in time is DEFERRED (a cost verdict, never "survives").
             added = None
             centres = []
             if batch:
@@ -841,31 +843,49 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
                         p0, p1 = obj.pts[e[0]], obj.pts[e[1]]
                         centres.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))
             PP = np.asarray(pool.pts)
-            for r in (1.5, 3.0, 6.0, None):
-                if r is None or not centres:
-                    sub = None                      # whole pool (the completeness rung)
-                else:
+            strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
+            t_budget = time.time()
+            rungs = []
+            if centres:
+                for r in (1.5, 3.0):
                     m2 = np.full(len(PP), np.inf)
                     for cx, cy in centres:
                         m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
-                    sub = [int(x) for x in np.flatnonzero(m2 <= r * r)]
-                    if not sub:
-                        continue
+                    rungs.append(("local%.1f" % r, [int(x) for x in np.flatnonzero(m2 <= r * r)]))
+            rungs.append(("strong", strong))
+            rungs.append(("whole", None))
+            deferred = False
+            for name, sub in rungs:
+                if time.time() - t_budget > 1200:
+                    deferred = True
+                    break
                 try:
                     if sub is None:
                         f, core_alive = whole_feasible(pool, AVn[t], HVn[t])
                         sub_kill = None if f else [int(x) for x in np.flatnonzero(core_alive)]
                     else:
-                        sub_kill = None if feasible(pool, sub, AVn[t], HVn[t]) else sub
+                        if not sub:
+                            continue
+                        sub_kill = None if feasible(pool, sub, AVn[t], HVn[t], cap=600) else sub
                 except Undecided:
                     continue
                 if sub_kill is not None:
+                    if len(sub_kill) > 20000:
+                        deferred = True     # a ddmin from here is days — defer, commit smaller now
+                        break
                     added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], start=sub_kill, log=log)
                              if p not in set(halo)]
                     break
                 if sub is None:
                     added = "stall"
                     break
+            if deferred:
+                stall.append(t)
+                queue = [q for q in queue if q != t]
+                log(f"[cover] colouring {t}: DEFERRED (cost budget; killable status undecided at "
+                    f"budget, never 'survives') — stalled list ({len(stall)})")
+                _save(state_path, pool, halo, stall)
+                continue
             if added is None or added == "stall":
                 stall.append(t)
                 queue = [q for q in queue if q != t]
