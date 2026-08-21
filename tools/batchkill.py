@@ -818,9 +818,13 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
     queue = [t for t in range(len(cols)) if not covered[t] and t not in set(stall)]
     log(f"[cover] start: {int(covered.sum())} covered, {len(queue)} queued, {len(stall)} stalled")
     while queue:
-        # most-constrained first: fewest empty-avail (free-kill) points
+        # free single-point wins first (the accumulated halo then softens the hard cases);
+        # among colourings with no free kill, most-constrained first
         nfree = (AVn[queue] == 0).sum(axis=1)
-        t = queue[int(np.argmin(nfree))]
+        if nfree.max() > 0:
+            t = queue[int(np.argmax(nfree))]
+        else:
+            t = queue[int(np.argmin(nfree))]
         empt = np.flatnonzero(AVn[t] == 0)
         empt = [int(p) for p in empt if p not in set(halo)]
         if empt:
@@ -870,18 +874,29 @@ def _ddmin_single(pool: Pool, av, hv, log=print):
     while core and chunk >= 1:
         pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
         base = list(core)
-        res = mechanism.pmap(lambda pc: not feasible(pool, [v for v in base if v not in set(pc)], av, hv),
-                             pieces)
+
+        def try_del(pc):
+            try:
+                return not feasible(pool, [v for v in base if v not in set(pc)], av, hv)
+            except Undecided:
+                return False        # capped ⇒ deletion rejected; the kill stands, minimality degrades
+
+        res = mechanism.pmap(try_del, pieces)
         passing = [pc for pc, ok in zip(pieces, res) if ok]
         accepted = []
         if passing:
+            def kill_still(sub):
+                try:
+                    return not feasible(pool, sub, av, hv)
+                except Undecided:
+                    return False
             union = set().union(*map(set, passing))
-            if not feasible(pool, [v for v in core if v not in union], av, hv):
+            if kill_still([v for v in core if v not in union]):
                 core = [v for v in core if v not in union]
                 accepted = sorted(union)
             else:
                 for pc in passing:
-                    if not feasible(pool, [v for v in core if v not in set(pc)], av, hv):
+                    if kill_still([v for v in core if v not in set(pc)]):
                         core = [v for v in core if v not in set(pc)]
                         accepted += pc
         if not accepted:
@@ -898,17 +913,27 @@ def _shrink_halo(pool: Pool, halo, avs, log=print):
     while core and chunk >= 1:
         pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
         base = list(core)
-        res = mechanism.pmap(lambda pc: kills(pool, [v for v in base if v not in set(pc)], avs), pieces)
+        def try_del(pc):
+            try:
+                return kills(pool, [v for v in base if v not in set(pc)], avs)
+            except Undecided:
+                return False
+        res = mechanism.pmap(try_del, pieces)
         passing = [pc for pc, ok in zip(pieces, res) if ok]
         accepted = []
         if passing:
+            def still(sub):
+                try:
+                    return kills(pool, sub, avs)
+                except Undecided:
+                    return False
             union = set().union(*map(set, passing))
-            if kills(pool, [v for v in core if v not in union], avs):
+            if still([v for v in core if v not in union]):
                 core = [v for v in core if v not in union]
                 accepted = sorted(union)
             else:
                 for pc in passing:
-                    if kills(pool, [v for v in core if v not in set(pc)], avs):
+                    if still([v for v in core if v not in set(pc)]):
                         core = [v for v in core if v not in set(pc)]
                         accepted += pc
         if not accepted:
