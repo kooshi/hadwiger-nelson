@@ -459,13 +459,16 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   ℚ(√33) ring radius — G4's seam-ring vocabulary at a pivot distance LONGER than the two-circle
   constructions', with one ring vertex (126) a refuser endpoint. The seed is metapivot-shaped at a
   distance nobody has swept.
-* **The four-point pigeonhole, and it is total.** Among {98, 107, 118, 213}: some pair is
-  monochromatic in **every one of the 51,350** separating colourings of `H − B₂₉` (hence all 404
-  batch survivors). Sharper: 98≠107, 98≠212 and 118≠213 in ALL 51,350 (forced-distinct pairs of
-  the surviving space); the mono mass sits on {107,118} (20,524), {212,213} (21,698), {107,212},
-  {107,213}, {98,213}, {98,118}, {118,212}. Design lever: a halo forcing DISTINCT the seven
-  nonzero pairs of {98, 107, 118, 212, 213} would kill every survivor at once — the stall study's
-  first concrete target list.
+* **The four-point pigeonhole, and it is total — corrected to Kooshi's intended set and SHARPER.**
+  His set was {98, 118, 107, 126} (a typo first gave 213; BOTH close a total pigeonhole). On the
+  corrected set the structure is clean: **98≠107 and 118≠126 in ALL 51,350** separating colourings
+  (forced-distinct pairs), and **some CROSS pair of {98,107} × {118,126} is monochromatic in every
+  one of the 51,350** (mono mass: 107=118 20,524; 98=126 19,576; 98=118 = 107=126 11,250 each).
+  And the geometry closes the loop with the blind centres: **{98, 107} are exactly v115's two
+  unit neighbours in the core, and {118, 126} are exactly v58's** — each crystal-tip point pins a
+  forced-distinct pair on its unit circle, and the four cross pairs carry the total disjunctive
+  pigeonhole. Design lever: force the FOUR cross pairs distinct and every survivor dies at once —
+  the stall study's first concrete target, four pairs instead of seven.
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
