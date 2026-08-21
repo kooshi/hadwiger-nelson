@@ -781,7 +781,7 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
 
 # ---------------------------------------------------------------- the cover (phase 4)
 
-def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
+def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -> dict:
     """Greedy set-cover of the colouring list by a growing halo (§B2 + §Bʹ stage 0). Avail masks
     live in ONE uint8 numpy matrix (built once, in parallel); coverage rechecks touch only
     UNCOVERED colourings (monotonicity: covered stays covered). Checkpointed per acceptance."""
@@ -830,17 +830,48 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, log=print) -> dict:
         if empt:
             added = [empt[0]]
         else:
-            try:
-                f, _core = whole_feasible(pool, AVn[t], HVn[t])
-            except Undecided:
-                f = True     # conservatively stalled; the row's stall list is labelled by the scope
-            if f:
+            # LOCAL kill first (M49's radius ladder): candidates near the colouring's own mono
+            # cheats — the giant whole-pool CNFs never form; escalate the radius on refusal.
+            added = None
+            centres = []
+            if batch:
+                c = cols[t]
+                for e in batch:
+                    if c[e[0]] == c[e[1]]:
+                        p0, p1 = obj.pts[e[0]], obj.pts[e[1]]
+                        centres.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))
+            PP = np.asarray(pool.pts)
+            for r in (1.5, 3.0, 6.0, None):
+                if r is None or not centres:
+                    sub = None                      # whole pool (the completeness rung)
+                else:
+                    m2 = np.full(len(PP), np.inf)
+                    for cx, cy in centres:
+                        m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
+                    sub = [int(x) for x in np.flatnonzero(m2 <= r * r)]
+                    if not sub:
+                        continue
+                try:
+                    if sub is None:
+                        f, core_alive = whole_feasible(pool, AVn[t], HVn[t])
+                        sub_kill = None if f else [int(x) for x in np.flatnonzero(core_alive)]
+                    else:
+                        sub_kill = None if feasible(pool, sub, AVn[t], HVn[t]) else sub
+                except Undecided:
+                    continue
+                if sub_kill is not None:
+                    added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], start=sub_kill, log=log)
+                             if p not in set(halo)]
+                    break
+                if sub is None:
+                    added = "stall"
+                    break
+            if added is None or added == "stall":
                 stall.append(t)
                 queue = [q for q in queue if q != t]
-                log(f"[cover] colouring {t}: survives the whole pool — stalled ({len(stall)})")
+                log(f"[cover] colouring {t}: no decidable kill at any radius — stalled ({len(stall)})")
                 _save(state_path, pool, halo, stall)
                 continue
-            added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], log=log) if p not in set(halo)]
         halo += added
         recheck([q for q in queue])
         queue = [q for q in queue if not covered[q]]
@@ -864,12 +895,15 @@ def _save(state_path, pool, halo, stall):
     state_path.write_text(json.dumps({"pool_fingerprint": pool.fp, "halo": halo, "stall": stall}))
 
 
-def _ddmin_single(pool: Pool, av, hv, log=print):
-    """Shrink to a 1-minimal kill of ONE colouring, starting from the PEELED core (every minimal
-    kill lives inside it: a globally peelable point is peelable in any subset — §Bʺ)."""
-    alive, _halive = peel_np(pool, np.asarray(av, dtype=np.uint8), hv)
-    core = [int(x) for x in np.flatnonzero(alive)]
-    assert core or (len(_halive) and _halive.any()), "peel emptied a colouring ddmin was called on — it was feasible"
+def _ddmin_single(pool: Pool, av, hv, start=None, log=print):
+    """Shrink to a 1-minimal kill of ONE colouring, starting from `start` (a subset already known
+    to kill) or from the PEELED core (every minimal kill lives inside it — §Bʺ)."""
+    if start is not None:
+        core = list(start)
+    else:
+        alive, _halive = peel_np(pool, np.asarray(av, dtype=np.uint8), hv)
+        core = [int(x) for x in np.flatnonzero(alive)]
+        assert core, "peel emptied a colouring ddmin was called on — it was feasible"
     chunk = max(1, len(core) // 2)
     while core and chunk >= 1:
         pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
@@ -1221,7 +1255,8 @@ def run_design(args, pool_name: str, ack: bool):
     sub = filter_sub(obj, cols, keep)
     print(f"[design {tag}] pool {pool.name}: {len(pool.pts)} pts (fp {pool.fp}); commit batch "
           f"{len(hit['commit'])} edges, |S_commit| = {len(sub)}")
-    cover(obj, pool, sub, BUILD / f"m50-cover-{tag}-{pool.name}.json")
+    cover(obj, pool, sub, BUILD / f"m50-cover-{tag}-{pool.name}.json",
+          batch=[tuple(e) for e in hit["commit"]] + [tuple(e) for e in removed])
 
 
 def run_commit(args, pool_name: str):
