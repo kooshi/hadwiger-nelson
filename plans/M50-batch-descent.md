@@ -472,6 +472,56 @@ D. The information-theoretic instrument layer (MI maps, transfer-matrix capacity
    applies); the odds ledger `N_sep : N_eq` per stage; the MI floppiness map over the held lists.
    ASSUME (named): decay; anything learned.
 
+## §Sʹʹʹ. The adversarial pass (2026-08-22, one fork, full context) — what fell, what survived, what fell OUT
+
+**Attacks that landed (each now binding):**
+* **Seam ≠ glue (frame A's quantifier gap):** the M50 halos are GLUE points, mostly outside the
+  ⟨ζ₆,σ⟩ orbit — a NO on the seam question would not mean "seam-field material never finishes",
+  and the seam bite risks a boring NO via the project's own M24–M26 4-chromaticity (ambient
+  4-colouring + spare-colour fix-ups). The seam bite is DEMOTED to a cheap pre-test (attempt the
+  ambient-colouring patch on `H − B` explicitly); the compactness lens survives on the GLUE
+  closure only.
+* **5-tight ⟹ 5-chromatic (the entropy floor):** a 4-chromatic graph has α ≥ n/4, and recolouring
+  any subset of a colour class to the spare fifth colour is proper ⟹ ≥ 2^{n/4} proper
+  5-colourings ⟹ **entropy rate ≥ 0.25 bits/vertex, always**. All seam crystals are 4-chromatic
+  (M24–M26), so the crystal generator AS REGISTERED re-runs M31/M32 and is rejected by its own
+  screen; the surviving form generates by **fusing 5-forcers** (the M34 union / G25 grammar).
+  CONFIRMED on the fork's nominated unsampled member: **the E–I seed's unit part is 4-chromatic**
+  (SAT at 4 in 0.0 s, UNSAT at 3) — the seed is 4-chromatic fabric whose entire rigidity is
+  cheat-borne, exactly the floor's prediction. The α ≥ n/4 argument is small and Lean-able (a
+  Greedy.lean-adjacent kernel candidate).
+* **Pairwise MI is G28's failure mode returning:** the quadrilateral is a four-point total
+  correlation with moderate pairwise numbers; the floppiness map must measure small-set total
+  correlation, with the quadrilateral itself as the planted control.
+* **The 10⁴–10⁵ size estimate is the P4b/G30 quantifier slip** (in-context rates extrapolated
+  context-free) — demoted to "a lower bound of a lower bound", the number no longer quoted.
+* **The currency must be CONDITIONAL:** two adversarial members stand (a floppy bystander
+  component swamps total entropy; forcing can complete while total entropy moves ≤ 1 bit because
+  N_eq dominates). Together with §Sʹ: the currency is the separation odds / conditional entropy
+  given the forced event, per component — the separating/total distinction is the definition, not
+  a caveat.
+* **B reframed as the last mile:** the five kept cheats cluster on A's and B's own neighbourhoods
+  — (4,A), (206,210), (206,211) touch the forced pair. Killing the core is literally "force A = B
+  by unit material in the pair's own neighbourhood."
+
+**The two elegant items:**
+1. **5-tight ⟹ 5-chromatic** — welds G19 to G25 in one sentence: fabric for the 6-hunt cannot be
+   decorated 4-chromatic lattice; it must be built from 5-forcers.
+2. **The nominated distances** — the descent does not merely remove cheats: the surviving ensemble
+   spontaneously behaves as if √3 and √7 were partial edges (the fifteen pigeonholes' live pairs
+   sit at {√3, √7, 2√3, 3}; √7's spindle radicand 27 = (3√3)² stays in-field; the kernel already
+   holds χ(ℝ²;{1,√3,2}) ≥ 7 and G26 demands √3-and-2). **The dial migrates the forbidden-distance
+   set toward one the plane cannot satisfy, and the object names the next distances itself.**
+   Follow the nominations; do not sweep.
+
+**The sharpest M51 question (the fork's, adopted):** *extract the minimal unit-material gadgets
+that force the core's nominated pairs distinct — the (4,A)-class at 2 and the four √3/√7
+cross-pairs — in context, then measure how much of each gadget's forcing survives as the cheats
+are deleted around it.* One question = the core kill (B, last-mile form) + the constructibility
+gate for fused-fabric C and G26's absolute conjunction + the in-context→context-free gradient
+(the only unknown separating the descent from the theorem), with D's higher-order meters as
+instruments and A's glue-closure compactness as the meaning of persistent failure.
+
 ## §R. Results (filled as phases close)
 
 ### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
