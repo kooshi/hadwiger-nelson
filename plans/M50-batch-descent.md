@@ -370,6 +370,49 @@ Desktop (32 cores, 125 GB). Measured costs the shape already leans on: enumerati
 colourings); single-colouring ddmin minutes. Phase 1 re-measures the sweep cost on a 500-colouring
 sample before phase 3 commits its schedule.
 
+## §S. CLOSING DRAFT (2026-08-22, written while iteration 2's corrected profile runs)
+
+**What is DONE and certified:**
+* Phase 0: `PartnerLattice.lean` (depth-one completeness, finiteness), standard three axioms (§R0).
+* Phases 1–2: the instrument (`tools/batchkill.py`) with provenance objects, entropy-split cube
+  enumeration (lockfile; the race incident), seed-projection recursion, vectorized masks/peel,
+  local+strong+budgeted cover; **|S₂₉| = 51,350 exact**; all controls green (§R1–R2).
+* Phase 3: depth profile 97.7 % / 99.2 %; the 404; the exact hitting set (keep 10 = M49's ten
+  refusers); committable 19 (§R3).
+* Phase 4: **the 19-cheat batch commit** — 465-pt halo + 11 auxiliaries, 2,954 edges verified,
+  one-hot + 3-bit UNSAT; object 690 pts / 427 cheats (§R4). μ_upper for the seed's carrier: 427.
+* §R5: the verified observation set (blind centres, the (34+√33)/12 hexagon, the quadrilateral
+  pigeonhole family — fifteen minimal 4-sets, live distances {√3, √7, 2√3, 3}, two conditional
+  virtual edges at 3) and the FIVE registered ideas (crystal generator; no-stall reframing;
+  closure-transfer angle; rigidity currency with measured exchange rates; the information-theoretic
+  programme).
+* §R6 so far: iteration-2 floor 36 (kept ten ⊂ floor; the M49 depth-2 status column predicted the
+  10 → 5 split); the seed-projection architecture; TWO instrument incidents, both caught by
+  controls (the buggy 1,429 under-enumeration caught by the certification ask).
+
+**PENDING to close (in order):**
+1. Corrected iteration-2 chain: profile (running; 45,365 classes) → hitting → design (resume-able
+   cover) → certify → §R6 final numbers. If the certify refuses again: investigate before
+   anything else (standing rule).
+2. **The core probe** (M50's last act): on the iteration-2-committed object, re-census with the
+   kept refusers IN the batch — which of the five (or ten) fall to the grown lattice.
+3. The stall study artifact: the MI floppiness map over the held colouring lists (the M48 mask
+   engine), the field census of all committed halo points' radicands (P5's verdict), and the
+   final stall list with its pigeonhole anatomy.
+4. Predictions scored (P1 missed-on-size; P2a/P2b met; P3 met at 19; P4 pending the stall study;
+   P5 pending the field census; P6 pending iteration 2; P7 pending the close count).
+5. Gate (`build.sh`, `axioms.sh`, `lake lint`, both self-tests), Frontier (narrative + ledger row
+   45 + G-entries: the batch law, the projection, the incidents under G21/G30), ranked paths
+   (the M51 candidates below), report in the house format, memory update.
+
+**The M51 candidate frames, going into pre-modeling (this session, Kooshi's direction):**
+A. The closure-transfer question (seam closure of the reduced seed: does it force A = B?) — the
+   no-stall lemma made attackable; M24–M26 machinery; two-sided decisive.
+B. The core kill (mechanism harvest on the five refusers, hard-budgeted).
+C. The crystal generator with entropy-rate screening (constructive; G19's 5-tight fabric hunt).
+D. The information-theoretic instrument layer (MI maps, transfer-matrix capacity, compression
+   proxies, the separator-flow bound as a theorem candidate).
+
 ## §R. Results (filled as phases close)
 
 ### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
