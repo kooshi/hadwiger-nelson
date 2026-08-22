@@ -1202,7 +1202,7 @@ def _ctx(args):
     lab = next((args[i + 1] for i, a in enumerate(args) if a == "--object"), None)
     if lab:
         obj, removed = load_object(lab)
-        return obj, removed, BUILD / f"m50-S-{lab}-it2.jsonl", f"{lab}-it2"
+        return obj, removed, BUILD / f"m50-S-{lab}-it2v2.jsonl", f"{lab}-it2v2"
     return Obj(), [], BUILD / "m50-S29.jsonl", "S29"
 
 
@@ -1270,12 +1270,13 @@ def run_profile(args, pool_name: str, ack: bool, survivors_of: str | None = None
 
 
 def run_hitting(args, deepest_label: str):
-    """Exact minimum hitting set over the deepest profile's survivors: keep the fewest cheats such
-    that every surviving colouring is mono on a kept cheat; commit the rest."""
+    """Exact minimum hitting set over the deepest profile's survivors: keep the fewest FLOOR cheats
+    such that every surviving colouring is mono on a kept one; commit the rest of the FLOOR (the
+    header batch also carries the accumulated removals — those are not candidates)."""
     from scipy.optimize import milp, LinearConstraint, Bounds
     obj, removed, seps_path, tag = _ctx(args)
     header, cols, gate = _gated_seps(seps_path, ack=False)
-    B = [tuple(e) for e in header["batch"]]
+    B = [tuple(e) for e in header["batch"] if tuple(e) not in set(map(tuple, removed))]
     surv_idx = json.loads((BUILD / f"m50-survivors-{deepest_label}.json").read_text())
     # survivors are indices into the PREVIOUS restriction chain; resolve through chained files
     chain = deepest_label
@@ -1418,8 +1419,14 @@ if __name__ == "__main__":
             obj, removed = load_object(lab)
             rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
             rc = [r for r in rows if r["kind"] == "recurse-census" and r["label"] == lab][-1]
-            B = [tuple(e) for e in rc["essential_alone"]]
-            out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2.jsonl")
+            floor = [tuple(e) for e in rc["essential_alone"]]
+            # THE STAGE REMOVES removed ∪ floor: the committed removals accumulate. (Iteration 2's
+            # first enumeration passed only the floor, silently re-adding the 19 removed cheats as
+            # edges — an under-enumeration the CERTIFICATION ASK caught: the refused commit's
+            # separating colouring was mono on two removed cheats. §R6.)
+            assert not (set(map(tuple, removed)) & set(floor)), "floor and removed overlap"
+            B = [tuple(e) for e in removed] + floor
+            out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2v2.jsonl")
             enumerate_cubes(obj, B, BUILD / out, block_on=range(214))
         else:
             enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
