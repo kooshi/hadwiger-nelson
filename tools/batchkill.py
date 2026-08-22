@@ -116,6 +116,30 @@ class Obj:
         self._halo_struct = (hs, ha)
         return hs, ha
 
+    def mp_values(self, dps: int = 30):
+        """Every point re-derived from provenance at `dps`-digit mpmath (the provenance recursion
+        is exact arithmetic on nested square roots — fast at any precision)."""
+        import mpmath as mp
+        mp.mp.dps = dps
+        exact = {}
+        for i, rec in enumerate(self.prov):
+            if rec[0] == "seed":
+                a, b, c_, d_ = self.seed_exact_pts[rec[1]]
+                exact[i] = mp.mpc((mp.mpf(a.numerator) / a.denominator * mp.sqrt(3)
+                                   + mp.mpf(b.numerator) / b.denominator * mp.sqrt(11)) / 12,
+                                  (mp.mpf(c_.numerator) / c_.denominator
+                                   + mp.mpf(d_.numerator) / d_.denominator * mp.sqrt(33)) / 12)
+            else:
+                _, a, b, sgn = rec
+                u, v = exact[a], exact[b]
+                Dv = v - u
+                d2 = (Dv * mp.conj(Dv)).real
+                h = mp.sqrt(1 - d2 / 4)
+                mid = (u + v) / 2
+                perp = mp.mpc(-Dv.imag, Dv.real) / mp.sqrt(d2)
+                exact[i] = mid + sgn * h * perp
+        return exact
+
     def check(self, dps: int = 30) -> bool:
         """Re-derive every glue point from provenance at `dps`-digit mpmath and compare — the
         planted per-iteration control. Raises on drift."""
@@ -1039,15 +1063,29 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
         idx_of_pool[p] = new
         exact[new] = intersect(resolve(A_), resolve(B_), s)
     obj.check()
-    # exact verification of every unit edge touching the halo
+    # edge verification: the provenance recursion at 250-digit mpmath decides every halo-touching
+    # edge in milliseconds (iteration-2 points are glue-of-glue — sympy on their nested radicals
+    # ran ~45 s PER EDGE, measured); sympy-exact is attempted only when both endpoints are shallow
+    # (provenance depth ≤ 1), each labelled per edge.
+    import mpmath as mp
+    mpv = obj.mp_values(dps=250)
+    depth = {}
+    for i2, rec in enumerate(obj.prov):
+        depth[i2] = 0 if rec[0] == "seed" else 1 + max(depth[rec[1]], depth[rec[2]])
     ue = obj.unit_edges()
     new_ids = set(idx_of_pool.values())
-    kinds = {"exact": 0, "numeric-200": 0}
+    kinds = {"exact": 0, "numeric-250": 0}
     for a, b in ue:
         if a in new_ids or b in new_ids:
-            ok, how = is_unit(resolve(a), resolve(b))
-            assert ok, ("edge not unit", a, b)
-            kinds[how] += 1
+            dd = mpv[a] - mpv[b]
+            err = abs((dd * mp.conj(dd)).real - 1)
+            assert err < mp.mpf(10) ** -200, ("edge not unit at 250 digits", a, b, float(err))
+            if depth[a] <= 1 and depth[b] <= 1:
+                ok, how = is_unit(resolve(a), resolve(b), budget=5)
+                assert ok, ("edge not unit (exact)", a, b)
+                kinds["exact" if how == "exact" else "numeric-250"] += 1
+            else:
+                kinds["numeric-250"] += 1
     log(f"[certify {label}] {len(new_ids)} points exact, "
         f"{sum(kinds.values())} halo edges verified {kinds} [{time.time()-t0:.0f}s]", flush=True)
     # the ask
