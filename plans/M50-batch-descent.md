@@ -442,7 +442,18 @@ sample before phase 3 commits its schedule.
   commit): MET at 19 edges.** M49's entire sequential campaign removed 14 in its composed object;
   the batch frame removed 19 in one halo with composition by construction, exactly as designed.
 
-### §R6. Iteration 2 (in progress at the time of writing)
+### §R6. Iteration 2 (in progress at the time of writing; TWO instrument incidents, both caught by controls)
+
+**Incident 2 (2026-08-22, caught by the always-run-the-ask discipline):** the iteration-2
+enumeration computed its stage as "all cheats minus the floor", silently RE-ADDING the 19
+iteration-1-removed cheats as edges — an under-enumeration (1,429 was too small). The design
+covered that list, the lookup re-check passed on it, and the CERTIFICATION ASK refused: its
+separating colouring was mono on `(22,134)` and `(143,210)`, two removed cheats — diagnosed by a
+clause-level witness check after the O(n²) census audit found zero real violations. Fix: removal
+sets ACCUMULATE (stage = object − removed − floor), the hitting set draws candidates from the floor
+only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain worked exactly as
+§Bʺ designed it: the lookup is never a substitute for the ask.
+
 
 * Floor of the committed object: **36** (kept 10 + 26 newly essential; 427 asks, 0 unknown, 162 s).
 * **The seed-projection architecture** (§Bʹ follow-on, forced by measurement): the full-space
