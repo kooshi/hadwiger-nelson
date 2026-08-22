@@ -522,6 +522,54 @@ gate for fused-fabric C and G26's absolute conjunction + the in-context→contex
 (the only unknown separating the descent from the theorem), with D's higher-order meters as
 instruments and A's glue-closure compactness as the meaning of persistent failure.
 
+## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-22, written at ~98% context before compaction)
+
+**Read this first in a fresh session.** WORKFLOW position: M50 step 7 (implementation), iteration 2
+mid-chain; then close per §S. The pre-M51 modeling (§Sʹ/§Sʺ/§Sʹʹʹ) is DONE and committed — do not
+redo it; M51's adopted question is at the end of §Sʹʹʹ.
+
+**RUNNING at compaction: the corrected iteration-2 depth-1 profile** —
+`python3 -u tools/batchkill.py --profile --pool depth1 --object S29-depth2r`, log
+`build/m50-profile-it2v2.log` (check `pgrep -f "^python3 -u tools/batchkill"`; a persistent
+Monitor watches for the "killed / " line). Inputs: the CORRECTED list `build/m50-S-S29-depth2r-it2v2.jsonl`
+(45,365 seed-classes, exact; the earlier 1,429 was the under-enumeration incident, §R6) over the
+175,166-point depth-1 pool with the 476 old-halo points as CSP variables. Expect several hours
+(45,365 asks; empty-avail short-circuits most).
+
+**WHEN THE PROFILE LANDS, the remaining chain (all commands exist):**
+1. `python3 tools/batchkill.py --hitting --deepest S29-depth2r-it2v2-depth1 --object S29-depth2r`
+   — CHECK the survivor-file label printed by the profile first (it is `{tag}-{pool}` with
+   tag = `S29-depth2r-it2v2`); the hitting draws candidates from the FLOOR only (36 edges from the
+   recurse-census row), not the header batch (which now carries removed ∪ floor).
+2. `--design --pool depth1 --object S29-depth2r` (cover state file is per-tag; the old
+   `m50-cover-S29-depth2r-it2-depth1.json` belongs to the BUGGY list — do NOT resume from it;
+   delete it or let the pool-fingerprint check refuse).
+3. `--commit --pool depth1 --object S29-depth2r`. If REFUSED again: investigate before anything
+   else (the previous refusal exposed the under-enumeration; §R6 incident 2).
+4. The core probe (§S pending item 2), the stall study + field census (item 3), predictions,
+   gate, Frontier (ledger row 45), report, memory — per §S.
+
+**Gotchas for the resuming session (each cost hours this session):**
+* Waiters: anchor `pgrep -f "^python3 -u tools/batchkill"` (never a bare pattern — self-match).
+* `--design` resume: the cover state carries a pool fingerprint; a changed list does NOT change
+  the pool fp, so a stale cover state can resume silently against a new list — delete
+  `build/m50-cover-*` for a re-enumerated tag before designing.
+* certify()'s edge verification now uses the provenance recursion at 250-digit mpmath (labels
+  `numeric-250`); sympy only for depth-≤1 endpoints (glue-of-glue nested radicals cost ~45 s/edge).
+* An `Undecided` (capped ask) is a third verdict everywhere — never folded; in ddmin it means
+  "deletion rejected"; in the cover it defers the colouring (label `DEFERRED`, cost verdict).
+* One heavy job at a time; the profile owns the box until it lands.
+
+**The M51 decision state (for the subplan, after M50 closes):** the adopted question is §Sʹʹʹ's
+last paragraph (nominated pairs: the (4,A)-class at 2 + the four √3/√7 cross-pairs; minimal
+in-context forced-distinct gadgets; the in-context→context-free gradient). Kernel openers sized at
+§Sʺ item 1 (field-agnostic compactness bridge, 40–80 lines; the absorbing lemma one-liner; the
+α ≥ n/4 entropy floor as a third small piece). Cheap pre-tests: the ambient-4-colouring patch on
+`H − B` (frame A's demoted seam bite); the total-correlation floppiness map with the quadrilateral
+as planted control. C exists only in fused-5-forcer form (the entropy floor). The artifacts:
+explorer https://claude.ai/code/artifact/97ebb92e-066d-42ea-93aa-662a4cc3cff8 (dial),
+tool https://claude.ai/code/artifact/53172e9e-9e01-4398-9eae-614060d555f2 (refuser core).
+
 ## §R. Results (filled as phases close)
 
 ### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
