@@ -516,6 +516,18 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   quadrilateral family, blind centres, live distances {√3, √7, 2√3, 3}). A restricted no-stall
   lemma, for the class the descent provably stays inside, plus the concrete chain, would BE the
   theorem. Composes with the crystal generator (material supply vs target statement).
+* **The closure-transfer angle, registered** (from Kooshi's "another angle?" 2026-08-22, on the
+  co-locked-cheats observation): by compactness, the descent stalls forever iff the INFINITE
+  constructible closure of (seed − batch) admits a separating 5-colouring — so proving the closure
+  FORCES A = B yields a finite certificate nonconstructively (de Bruijn–Erdős), with no pattern
+  enumeration. The repository has settled three infinite-closure colouring problems exactly by
+  algebra (M24/M25/M26, all χ = 4; the M20 strip automaton is the method one level down). The full
+  constructible closure is field-wild (glue-of-glue adjoins unbounded radicands), so the tractable
+  first bite is the TAME sublattice: does the ⟨ζ₆,σ⟩ seam closure of H − B force A = B? Two-sided
+  decisive: yes → directed hunt for the finite certificate; no → seam material provably never
+  finishes this seed and the field jump is forced, with the separating colouring of the closure
+  saying which radicands to admit. Leading candidate frame for M51 alongside the core kill; gives
+  the crystal generator its theoretical seat (which closures have pair-forcing colouring spaces).
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
