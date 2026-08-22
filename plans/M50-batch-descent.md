@@ -505,6 +505,17 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   pairs, the family's live-distance vocabulary exactly {√3, √7, 2√3, 3, 2-removed}. Design
   formulation this yields: force distinct a HITTING SET of live pairs across the fifteen
   pigeonholes and every survivor dies — the stall reduced to a handful of named pair-targets.
+* **Kooshi's no-stall reframing, registered** (his question, 2026-08-22): if EVERY reachable
+  non-5-colourable {1,2}-graph with a distance-2 edge admits a unit augmentation removing one, then
+  induction on the cheat count (kernel ends already in `OneDefect.lean`) gives χ(ℝ²) ≥ 6 WITHOUT
+  exhibiting the final graph — a de Bruijn–Erdős-flavoured, non-constructive proof shape. Correctly
+  stated it must quantify over reachable objects (per-edge removability of the SEED does not
+  compose — the all-19 SAT measurement), and in full generality the lemma is EQUIVALENT to χ ≥ 6
+  (a unit 6-forcer removes everything at once). Its value: χ ≥ 6 reframed as "stalls have
+  impossible anatomy" — and the near-stall anatomy is already sharply constrained (the pigeonhole
+  quadrilateral family, blind centres, live distances {√3, √7, 2√3, 3}). A restricted no-stall
+  lemma, for the class the descent provably stays inside, plus the concrete chain, would BE the
+  theorem. Composes with the crystal generator (material supply vs target statement).
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
