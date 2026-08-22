@@ -538,6 +538,19 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   (×12/column measured); transfer-matrix entropy-rate screening is the ranking metric the crystal
   generator needs (and what the flat M32 campaign lacked). Careful bookkeeping caveat: separating
   vs total colouring counts are different events; the ledger needs both columns.
+* **The information-theoretic programme, registered** (Kooshi's spitball + the mapping,
+  2026-08-22): (i) fabric colourings = 2-D constrained coding — entropy rate = capacity, strip
+  transfer matrices bound it (M20's automaton generalized); the Berger–Wang caveat: capacity zero ≠
+  empty, and a zero-rate-but-colourable crystal would mean FORCED QUASIPERIODIC 5-colourings, a
+  find in itself; (ii) forcing = long-range mutual information (A=B at 5 ⟺ I = log 5 at range 5);
+  5-tight ⟺ diverging correlation length; the held 51,350 colourings suffice for the seed's full
+  pairwise-MI floppiness map (halo-targeting value; the quadrilateral is already an MI statement);
+  (iii) theorem candidate: separator data-processing + correlation decay ⟹ WIDTH lower bounds on
+  forcing gadgets — the quantitative form of G14's zero-flux matchings; (iv) compression: gzip as
+  a calibrated rigidity proxy, and MDL as the formal reading of G10's "least geometry" (the
+  generator = a short-program enumerator; score = colouring entropy — compress both directions);
+  (v) learned models PROPOSE only (CE-method over crystal parameters; marginal-predictor loss as a
+  conditional-entropy bound for unenumerable objects) — exact instruments and the kernel dispose.
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
