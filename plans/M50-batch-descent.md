@@ -522,6 +522,188 @@ gate for fused-fabric C and G26's absolute conjunction + the in-context→contex
 (the only unknown separating the descent from the theorem), with D's higher-order meters as
 instruments and A's glue-closure compactness as the meaning of persistent failure.
 
+## §Sⁱᵛ. The second pre-M51 pass (2026-08-22, at full depth, WITH measurements) — the two ladders, and what the weighted one saw on first contact
+
+*Kooshi's directive after compaction: the §Sʹ–§Sʹʹʹ passes ran at 2 % context and finished in
+minutes what deserves hours; re-run at depth, chase the information-theoretic thread further or
+find a different cross-domain frame, THEN send one adversarial subagent. This section is the
+re-run. It differs from the first round in kind, not just depth: every frame below is either a
+theorem-shaped statement with its proof sketch, or a MEASUREMENT taken today on the held lists —
+no vocabulary without an instrument. New tool: `tools/m50_skewscan.py`; new artifacts:
+`build/m50-skewscan-{S29,S29-depth2r-it2v2}.json`, `build/m50-support-probe.{log,json}`.*
+
+### 1. The two-ladders principle (the information-theoretic clarity, stated exactly)
+
+The project has TWO distinct compulsion ladders and has only ever systematically climbed one.
+
+* **The support ladder** — which colour patterns are *realizable at all*: virtual edges, forced
+  pairs, compulsions, the arity floor. Binary per tuple. M45/M48 climbed it to completion on the
+  witnesses (flat below arity 4); every "zero forced pairs" campaign lived here.
+* **The weighted ladder** — the *class-uniform measure* over a held colouring list, read through
+  palette-invariant marginals: pair agreement masses `P[u,v]`, small-set rainbow masses. Continuous
+  per tuple. Nobody had climbed it globally; the §R5 sweep climbed it implicitly on 17 points.
+
+The partial-information-decomposition naming of the whole historical record: on floppy objects the
+compulsion information is **synergistic** — held jointly by k-sets while every pairwise functional
+of the measure vanishes — which is WHY four campaigns of pair meters read zero on objects whose
+arity floor was provably ≤ 5 (G31 made this a theorem-plus-sweep; PID names the mechanism). The
+support ladder sees synergy only at the order where it becomes *certain*; the weighted ladder sees
+its shadow at every order below. Two consequences, one exact and one heuristic, kept strictly apart:
+
+* **Exact**: for any pair ABSENT from the stage, `P[u,v]·|S|` is *the number of classes a halo
+  must kill to force that pair distinct* — the cover cost of the pair-target in the design
+  engine's own units. Mono mass is a price, not a proxy. (The floor-edge cost column below is
+  this, per floor cheat.)
+* **Heuristic, G30-guarded**: high skew at a non-forced tuple reads as "almost forced". That is a
+  *search prior* for where small material tips a compulsion, never a conclusion — adding material
+  re-weights the whole measure (the quad's mass inversion below is the counterexample measured in
+  advance of the temptation).
+
+Instrument discipline (two rules the tool enforces): the held lists are palette-CANONICALIZED, so
+only palette-invariant functionals are meaningful — a raw vertex marginal measures the
+canonicalization order (G21); and the iteration-2 rows carry witness halo extensions whose columns
+are SOLVER-CHOSEN — the scan projects to the 214 seed columns and never measures the witness halo
+(the M19 lesson, "pool statistics measure the solver's tastes").
+
+### 2. First contact: the scan results (both lists; controls green)
+
+Controls first: on the it-1 list the quad masses reproduce §R5's exactly (0.3997 / 0.3812 /
+0.2191²), the fifteen minimal 4-set pigeonholes reproduce member for member, and both in-pairs
+read P = 0. The instrument agrees with the standing sweep everywhere they overlap. Then the news:
+
+* **(a) The E–I stage carries ~148 forced-distinct NON-edges, and they are ABSOLUTE.** At it-1:
+  130 pairs at distance 3 and 6 at distance 4 read P = 0 across all 51,350 (plus 12 more that
+  lapse at it-2; it-2's 136 are a strict subset — the commit created none: they are seed-native).
+  Ten of ten sampled asks WITHOUT the separation pin are UNSAT — these are **virtual edges of the
+  {1,2}-stage graph itself**, no conditioning: no proper 5-colouring of the stage wears them mono.
+  Kooshi's two (71,118), (98,203) are the only separation-CONDITIONAL members found (SAT without
+  the pin) — the instrument separates the two kinds cleanly. §R5's "every forced-distinct pair is
+  edge-explained" was a 17-point-cast statement (G21, again, in our own record; the global scan is
+  what the cast-limited sweep could not see).
+* **(b) Sixteen never-3-distinct triples, all equilateral/isoceles on {√3, √7, 2√3}, ABSOLUTE.**
+  Six √3-equilateral triangles, three 2√3-equilateral, one √7-equilateral, six √7/√7/2√3-isoceles
+  — each wears ≤ 2 colours in every listed colouring, and 5/5 sampled rainbow-asks without the
+  separation pin are UNSAT. A never-3-distinct √3-triangle is the M33/M34 pigeonhole **localized
+  to a single triangle**: *some √3-pair of THIS triangle is monochromatic in every proper
+  5-colouring of the stage* — the fabric-wide disjunction concentrated onto three points. (At
+  it-1 the medium cast already held two — (4,143,185), (40,107,126) — outside §R5's swept 17.)
+* **(c) The six distance-4 virtual edges are the six DIAMETERS of the radius-2 circle about the
+  hub v0** (each pair's unique distance-2 common neighbour is v0, collinear). Forced central
+  ANTI-symmetry at five colours — the exact sign-mirror of M30's forced central symmetry on de
+  Grey's 791 (antipodal pairs forced EQUAL at four colours). The genre transfers across fields
+  and flips sign with the colour count.
+* **(d) The polarization table** (class means over non-adjacent pairs, baseline P = 0.21): d = 3
+  → 0.014–0.016 and d = 4 → ~0 (near-forced-distinct as whole CLASSES); √3 → 0.31, √7 → 0.33,
+  2√3 → 0.31 (excess mono-mass, the pigeonhole-prone side); the single highest-agreement pairs
+  sit at the seam radii 2/√3, 1/√3, √3 at P ≈ 0.73–0.75. **The ensemble is polarized: distinctness
+  concentrating on {3, 4}, mono-mass concentrating on {√3, √7, 2√3}.** A 6-forcer's contradiction
+  needs one distance class forced-distinct by unit material while forced-mono by counting — the
+  descent is visibly driving the two poles apart, and §Sʹʹʹ's "nominated distances" now has a
+  two-sided, quantitative form. Spindle radicands of the distinctness pole: 4·3²−1 = 35 = 5·7,
+  4·4²−1 = 63 = 9·7 — **both inside the 5-forcers' own field ℚ(√3,√5,√7,√11)**; of the mono pole:
+  √3 → 11 (seam), √7 → 27 = (3√3)² (seam), 2√3 → 47 (a NEW prime — flagged, not owned).
+* **(e) The measure moves non-monotonically under commits** (the odds-monotonicity refutation,
+  now measured): the quad's cross masses INVERTED between iterations (0.40/0.38/0.22² →
+  0.23/0.18/0.59²) while its support facts held (in-pairs P = 0, zero rainbow rows, the total
+  pigeonhole standing). Support is monotone-ish (absorbing); weights slosh. Any G30-grade reading
+  of a weight trend is hereby pre-refuted by our own table.
+* **(f) The floor-edge cost column prices iteration 3**: cheapest floor cheats at 0.5–0.9 % of
+  classes ((0,76): 219 of 45,365; (0,180), (33,60), (21,38) under 1 %), most expensive at 30–38 %
+  ((206,210): 0.377, (115,212): 0.353, (58,213): 0.339 — the blind-centre edges). The kept-refuser
+  cluster is expensive in exactly the currency the scan measures.
+
+### 3. The gradient probe (the adopted M51 question's instrument, prototyped today)
+
+For an ABSOLUTE in-context compulsion, the in-context→context-free gradient has a concrete
+per-target meter: **the minimal cheat-support** — ddmin over the stage's 417 cheats keeping the
+compulsion UNSAT, 1-minimality witnessed per member. Controls: (86,183) mono is SAT on the unit
+part alone (rigidity 100 % cheat-financed, as the entropy floor demands) and UNSAT on the full
+seed. Running at the time of writing on (86,183) [d = 3], the triangle (40,107,126), and the
+diameter (20,180) [d = 4]; results land in `build/m50-support-probe.json` and below. What the
+number means: the size and SHAPE of a compulsion's cheat diet — which cheats feed it, whether the
+diets of 150 compulsions overlap in a small shared core (one design bill for many targets), and
+how the diet shrinks as halos replace cheats. This is the adopted M51 question in micro, with
+~150 named targets instead of four.
+
+### 4. The entropy floor as a theorem, and the phase monitor (cross-domain frame: freezing)
+
+* **Theorem-shaped (kernel-sized, an afternoon, Greedy.lean-adjacent):** if `χ(G) ≤ k−1` on `n`
+  vertices then G has at least `2^⌈n/(k−1)⌉` proper k-colourings — fix a (k−1)-colouring, take its
+  largest class C (|C| ≥ n/(k−1)), and S ↦ "recolour S to colour k" injects the subsets of C into
+  proper k-colourings (S is recoverable as the k-coloured set). Up to palette, divide by k! ≤ 120;
+  the floor survives astronomically. Contrapositive, the quantitative "5-tight ⟹ 5-chromatic":
+  **any object with fewer than 2^{n/4}/120 five-colouring classes has a 5-chromatic unit part.**
+  §Sʹʹʹ's floor, now with its injection named and its consumer exact.
+* **The phase monitor, and an intermediate deliverable nobody had named:** the corollary runs
+  forward along the descent. Today's ask: the 690-object's unit part is **still 4-colourable**
+  (SAT, 0.0 s — `--unitchi`). The final object of the descent is a non-5-colourable pure unit
+  graph, so **χ(unit part) must cross 4 → 5 at some commit strictly before the end — and that
+  commit mints a new 5-chromatic unit-distance witness (glue-lattice-grown, a construction genre
+  no published witness uses) as a side effect.** The ask is one SAT call per commit; it is now a
+  standing ledger column. The descent thereby carries TWO certified deliverables, not one: a new
+  5-chromatic witness at the phase crossing, then the 6-forcer at the end.
+* **The freezing naming [reading, falsifier named]:** in random-CSP language, rigid-at-k IS the
+  frozen/condensed phase, and G9/G17's "rigidity lives only at the forcing level" is the
+  statement "freezing appears only at criticality". The engine's own tractability is a phase
+  diagnostic: the lookup design works exactly because S is enumerable (deep-frozen), and the M49
+  k = 4 calibration failure (> 20,000 colourings, lookup engine dead) was the phase boundary
+  showing itself. Falsifier: an object with huge S where the batch design still succeeds, or a
+  small-S object where it fails, breaks the correspondence and demotes the vocabulary.
+
+### 5. The stall as an OBJECT: LP duality on the cover (cross-domain frame: covering codes)
+
+The cover problem the engine solves ("fewest halo points killing all of S") has an exact dual: a
+probability distribution over S under which every candidate point kills small mass. **A depth-D
+stall's certificate is the degenerate dual — the point mass on a colouring extending to the whole
+depth-D pool** (M49's whole-set test, re-read); the non-degenerate dual at the frontier depth is
+a *distribution* over survivors, its support the stall's hard core, and `1 / max-kill-mass` a
+LOWER BOUND on the point count of any gadget at that depth/pool. Validation test, registered
+before any use: compute the LP bound for the M49 depth-2 refusers and compare against the
+measured 87–267-point gadgets — a bound near the measurement validates the frame; the integrality
+gap caveat is stated in advance (LP ≤ ILP, so a LOW bound is inconclusive; a HIGH one is a real
+per-depth size theorem). Not run (kill matrices not persisted; the profile owns the box);
+M51-instrument candidate.
+
+### 6. Projectivity of K₅ (cross-domain frame: universal algebra) — what CANNOT work, proved once
+
+Pointwise combination of colourings — `f(c₁,…,cₘ)(x) = g(c₁(x),…,cₘ(x))` — maps proper colourings
+to proper colourings iff `g` preserves disequality, i.e. is a polymorphism of the complete graph
+K₅; and for k ≥ 3, K_k is **projective**: its only polymorphisms are dictators composed with
+palette permutations *(standard in the H-colouring/CSP literature; flagged for a literature check
+before anything cites it downstream)*. Three consequences, all pruning: (i) **no crossover,
+averaging, or majority-vote operation on 5-colourings exists** — the "learned model proposes new
+colourings by combining old ones" genre is dead on arrival, and the cube enumeration's cluster
+structure is genuinely combinatorial, not an algebra's orbit; (ii) **no colour-side algebraic
+obstruction to gadget existence can exist** — any impossibility argument against the χ ≥ 6 gadget
+programme must be geometric (an explicit plane colouring, or a limit/measure argument), never a
+symmetric-function/invariants argument over the palette; (iii) the separating-colouring lists are
+bare sets with no exploitable closure structure — enumeration and masks are not a naive choice
+but the only representation.
+
+### 7. What this changes for M51 (the synthesis; the adopted question survives, sharpened)
+
+The §Sʹʹʹ question — *minimal in-context forced-distinct gadgets for the nominated pairs, then the
+in-context→context-free gradient* — STANDS, and today's measurements re-arm it three ways:
+
+1. **The target list grew from 4 to ~150, with absoluteness for free.** The stage already holds
+   ~136 absolute virtual edges (d ∈ {3,4}) and 16 absolute localized pigeonhole triangles — every
+   one an in-context compulsion whose cheat-support diet is measurable by the §3 probe TODAY. The
+   gradient question becomes statistical: how do 150 diets overlap, and which cheats feed many
+   compulsions at once (one design bill, many targets)?
+2. **The polarization axis is the design compass**: drive a distance class to BOTH poles — the
+   mono pole by counting (localized triangles), the distinct pole by unit material (virtual
+   edges). The scan says the ensemble is already polarizing at {√3, √7, 2√3} vs {3, 4}; the
+   in-field spindle radicands (35, 63, 11, 27) say the closing geometry exists in fields we own.
+3. **The ledger gains three standing columns**: χ(unit part) per commit (the phase monitor — the
+   4→5 crossing is an intermediate certified deliverable); the polarization table per iteration
+   (class-mean agreement by named distance); floor-edge costs (target pricing for the next
+   hitting set). The "MI floppiness map" of pending item 3 is DELIVERED by the skewscan at exact
+   class-uniform semantics (total correlation on the cast subsumed by agreement/rainbow masses).
+
+Explicitly NOT adopted: any weight-trend inference (pre-refuted by §2e); the freezing vocabulary
+as anything but a diagnostic; the LP dual until its validation test runs; K₅ projectivity until
+the literature check lands.
+
 ## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-22, written at ~98% context before compaction)
 
 **Read this first in a fresh session.** WORKFLOW position: M50 step 7 (implementation), iteration 2
