@@ -44,7 +44,8 @@ import twodist as T  # noqa: E402
 # the provenance recursion is safe: the vocabulary's members are separated by >> 1e-3.
 DIST_NAMES = [
     (1.0, "1"), (math.sqrt(3.0), "sqrt3"), (2.0, "2"), (math.sqrt(7.0), "sqrt7"),
-    (2.0 * math.sqrt(3.0), "2sqrt3"), (3.0, "3"),
+    (2.0 * math.sqrt(3.0), "2sqrt3"), (3.0, "3"), (4.0, "4"),
+    (2.0 / math.sqrt(3.0), "2/sqrt3"), (1.0 / math.sqrt(3.0), "1/sqrt3"),
 ]
 
 
@@ -118,6 +119,28 @@ def scan(list_path: Path, object_label: str | None):
     dist_agg = {k: dict(mean=round(float(np.mean(v)), 4), n=len(v))
                 for k, v in agg.items() if k in {x for _, x in DIST_NAMES}}
 
+    # ---- the COMPLETE never-3-distinct census (cast-free — the §Sⁱᵛ-adv discipline: a positive
+    # count over a cast measures the cast, G21). Screen: never-3-distinct needs some pair to agree
+    # in every row, so P[a,b]+P[a,c]+P[b,c] >= 1 (union bound) is necessary; confirm by bitmask.
+    packed: dict[tuple[int, int], np.ndarray] = {}
+
+    def pk(a, b):
+        if (a, b) not in packed:
+            packed[(a, b)] = np.packbits(X[:, a] != X[:, b])
+        return packed[(a, b)]
+
+    full_trip = []
+    for a in range(n):
+        for b in range(a + 1, n):
+            s = P[a, b] + P[a, b + 1:] + P[b, b + 1:]
+            for c in (np.nonzero(s >= 1.0 - 1e-12)[0] + b + 1):
+                if not (pk(a, b) & pk(a, int(c)) & pk(b, int(c))).any():
+                    full_trip.append((a, b, int(c)))
+    trip_shapes: dict[str, int] = {}
+    for a, b, c in full_trip:
+        shape = "/".join(sorted([dist_label(D[a, b]), dist_label(D[a, c]), dist_label(D[b, c])]))
+        trip_shapes[shape] = trip_shapes.get(shape, 0) + 1
+
     # ---- small-set rainbow statistics, palette-invariant, two-tier cast:
     # triples on the MEDIUM cast (all absent-edge endpoints + the named core), minimal 4-sets on
     # the TIGHT cast (the named core: quadrilateral, blind centres, forced pair, kept refuser and
@@ -155,6 +178,9 @@ def scan(list_path: Path, object_label: str | None):
         conditional_virtual_edges=cond_virtual, conditional_forced_equal=cond_equal,
         lowest_P=lo, highest_P=hi, distance_aggregates=dist_agg,
         cast_tight=cast_t, cast_medium=cast_m,
+        never3distinct_full_count=len(full_trip),
+        never3distinct_full_shapes=trip_shapes,
+        never3distinct_full=[list(s) for s in full_trip],
         never3distinct_triples=[list(s) for s in trip3],
         minimal_total_pigeonhole_4sets=[list(s) for s in quads4],
         quad_control=dict(pairs=qpairs, rainbow_rows=quad_rainbow),
@@ -177,7 +203,8 @@ def scan(list_path: Path, object_label: str | None):
             print(f"    {tuple(r['pair'])}  P={r['P']:.4f}  d={r['d']}  [{r['cls']}]")
     print(f"  distance aggregates (non-adjacent): {json.dumps(dist_agg)}")
     print(f"  quad pairs: {json.dumps(qpairs)}")
-    print(f"  never-3-distinct triples: {trip3}")
+    print(f"  never-3-distinct FULL census: {len(full_trip)} triples, shapes {json.dumps(trip_shapes)}")
+    print(f"  never-3-distinct triples (medium cast): {trip3}")
     print(f"  minimal total-pigeonhole 4-sets ({len(quads4)}): {quads4[:20]}")
     return out
 

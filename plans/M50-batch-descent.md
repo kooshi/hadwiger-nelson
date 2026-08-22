@@ -524,6 +524,14 @@ instruments and A's glue-closure compactness as the meaning of persistent failur
 
 ## §Sⁱᵛ. The second pre-M51 pass (2026-08-22, at full depth, WITH measurements) — the two ladders, and what the weighted one saw on first contact
 
+> **READ WITH §Sⁱᵛ-adv below.** The adversarial pass (a fresh, deliberately decorrelated agent
+> with its own 231 solver asks and a full census) REFUTED two frames here (the LP dual as
+> written; the entropy-floor contrapositive as written), corrected the triple inventory 23×
+> UPWARD (412, not 16 — the "16" measured its cast, G21 on a positive count), fixed the
+> conditional-pair taxonomy and the d = 4 reading, and found a strictly better lemma (the
+> spare-colour lemma). Sections below stand as written for the record; the corrections are
+> binding.
+
 *Kooshi's directive after compaction: the §Sʹ–§Sʹʹʹ passes ran at 2 % context and finished in
 minutes what deserves hours; re-run at depth, chase the information-theoretic thread further or
 find a different cross-domain frame, THEN send one adversarial subagent. This section is the
@@ -596,10 +604,12 @@ read P = 0. The instrument agrees with the standing sweep everywhere they overla
   → 0.014–0.016 and d = 4 → ~0 (near-forced-distinct as whole CLASSES); √3 → 0.31, √7 → 0.33,
   2√3 → 0.31 (excess mono-mass, the pigeonhole-prone side); the single highest-agreement pairs
   sit at the seam radii 2/√3, 1/√3, √3 at P ≈ 0.73–0.75. **The ensemble is polarized: distinctness
-  concentrating on {3, 4}, mono-mass concentrating on {√3, √7, 2√3}.** A 6-forcer's contradiction
-  needs one distance class forced-distinct by unit material while forced-mono by counting — the
-  descent is visibly driving the two poles apart, and §Sʹʹʹ's "nominated distances" now has a
-  two-sided, quantitative form. Spindle radicands of the distinctness pole: 4·3²−1 = 35 = 5·7,
+  concentrated on {3, 4}, mono-mass concentrated on {√3, √7, 2√3}.** Honesty note, caught on
+  re-read before the adversarial pass: the polarization is SEED-NATIVE, not descent-driven — the
+  class means barely moved between iterations (√3: 0.3046 → 0.3141; d = 3: 0.0158 → 0.0139), so
+  the descent PRESERVES the poles rather than creating them. A 6-forcer's contradiction needs one
+  distance class forced-distinct by unit material while forced-mono by counting; §Sʹʹʹ's
+  "nominated distances" now has a two-sided, quantitative form. Spindle radicands of the distinctness pole: 4·3²−1 = 35 = 5·7,
   4·4²−1 = 63 = 9·7 — **both inside the 5-forcers' own field ℚ(√3,√5,√7,√11)**; of the mono pole:
   √3 → 11 (seam), √7 → 27 = (3√3)² (seam), 2√3 → 47 (a NEW prime — flagged, not owned).
 * **(e) The measure moves non-monotonically under commits** (the odds-monotonicity refutation,
@@ -703,6 +713,123 @@ in-context→context-free gradient* — STANDS, and today's measurements re-arm 
 Explicitly NOT adopted: any weight-trend inference (pre-refuted by §2e); the freezing vocabulary
 as anything but a diagnostic; the LP dual until its validation test runs; K₅ projectivity until
 the literature check lands.
+
+## §Sⁱᵛ-adv. The adversarial verdicts (2026-08-22; fresh decorrelated agent — NOT a fork, by
+design: it read only the written record and ran its own computations — 231 serial CaDiCaL asks,
+a cast-free census, a literature check; all controls green; no segfaults)
+
+### What it verified beyond the sample (upgrades)
+
+* **The absoluteness inventory is now COMPLETE, not sampled: 148/148 pairs and 83/83 triples
+  UNSAT** on the it-1 stage with no separation pin, zero unknowns, four negative controls SAT
+  (including mono-asks on high-P pairs and rainbow on a generic triple — the UNSATs are not a
+  formula artifact). The encoding was audited (first-occurrence palette breaking is complete for
+  the palette group; both pin genres are palette-invariant; UNSAT-with-break ⟹ UNSAT-without).
+  The forced central anti-symmetry about v0 is absolute-verified.
+* **The never-3-distinct census, cast-free, is ~23× the §Sⁱᵛ count — and the correction
+  STRENGTHENS the structural story.** Full C(214,3) census, adversary's code and our committed
+  tool independently agreeing number for number: **it-1 holds 412** (206 √3-equilateral, 92
+  √7-equilateral, 67 (√7,√7,2√3)-isoceles, **43 (√13,√13,√3)-isoceles** — a family §Sⁱᵛ never
+  saw, and √13's spindle radicand 51 = 3·17 is OUTSIDE the owned fields — and 4
+  2√3-equilateral); **it-2 holds 372, a strict subset, zero created**. Seed-nativeness survives
+  the full census; the "16" and the "{√3,√7,2√3}" vocabulary were cast artifacts (G21 applies to
+  POSITIVE counts too — the enumeration belongs in the headline). Both skewscan artifacts are
+  REGENERATED with the committed tool (the held JSONs now carry `never3distinct_full*` and the
+  complete distance vocabulary; the earlier JSONs predated the tool's d = 4 / 2/√3 / 1/√3
+  labels, which is how "d = 4 → ~0" got hand-filled wrongly).
+
+### What it refuted (each now binding)
+
+* **The LP dual (§Sⁱᵛ §5) — REFUTED as written.** Killing is a property of the SET (the §R10
+  K₃,₃ caveat is the project's own statement of this): the primal is not a per-point set cover,
+  so the packing dual bounds only the *single-point-kill* cover number, and gadgets can beat it
+  through joint kills. The project's own M49 record explodes the claimed bound: the depth-2
+  refusers have NO single-point kill in any field (depth-1 exhaustion — the LP reads +∞) while
+  87–267-point gadgets exist. The registered validation test would have detonated the frame, not
+  validated it. M51-instrument candidacy WITHDRAWN; the salvage ("bounds single-point-kill
+  covers") is the whole-set monotonicity test the engine already owns.
+* **The entropy-floor contrapositive (§Sⁱᵛ §4) — REFUTED as written, by the project's own
+  record.** "Any object with fewer than 2^{n/4}/120 classes has a 5-chromatic unit part" needs
+  the classes to belong to THE SAME GRAPH as the conclusion: the seed H holds exactly 35 classes
+  (M49) while its unit part is 4-chromatic (§Sʹʹʹ) — the counterexample sat two subsections
+  away. Correct consumer: a graph below the floor is itself not 4-colourable — fine for PURE
+  UNIT graphs, i.e. the generator-C screen, which is where §Sʹʹʹ deployed it. Also: separating
+  lists cannot feed the contrapositive at all (N_sep small says nothing about N_total).
+* **The conditional-pair taxonomy (§Sⁱᵛ §2a) — corrected.** Kooshi's (71,118), (98,203) are not
+  separation-conditional: they are **stall-conditional** (P = 120/51,350 both at it-1 — §R5's own
+  number — and 0 only on the 404). The measured taxonomy is three-tier: absolute (all 148),
+  separation-conditional (**empty as measured**), stall-conditional (Kooshi's two).
+* **"d = 4 → ~0 as a class" — wrong; d = 4 is a CENTRE, not a distance.** The class has 11
+  pairs, mean 0.0525, non-diameter members at baseline; the pole is exactly the six absolute
+  diameters through v0. Better reframe (adopted): **rank CENTRES by the compulsion load on their
+  circles** — v0's signature surfacing in the weighted ladder, mergeable with §R5's v58/v115
+  locks, computable today from the held P matrix.
+* **The "~150 targets" framing (§Sⁱᵛ §7) — reframed as a calibration corpus.** The ~150 are
+  already-compelled in-context study objects at {3, 4}; the kernel's conjunction consumes unit
+  virtual edges at √3 AND 2, the spindle theorem consumes forced-EQUAL pairs (§Sⁱᵛ §2d's
+  "spindle radicands of the distinctness pole" conflated the polarities), and no held pigeonhole
+  exists at 3 or 4 — a context-free d ∈ {3,4} virtual edge composes toward nothing until a new
+  pigeonhole partner exists. Their real value: absolute-semantics fuel for the diet meter (§3),
+  which is where the gradient question gets measured. And the ensemble is mono-heavy exactly at
+  √3 — the stage's measure points AWAY from the distinctness target the kernel needs; the
+  compass reading was too eager.
+* **PID naming (§Sⁱᵛ §1) — demoted to costume** (vocabulary with no attached instrument,
+  failing the section's own charter; "pairwise functionals vanish" was asserted about an
+  unmeasured quantity and is false on the one object now measured). What stands, and delivered:
+  the support/weighted DISTINCTION and the exact price `P·|S|` — with the scope word the
+  adversary demanded: the price is for forcing distinctness **in every separating colouring**
+  (the descent's own requirement); absolute pair-targets are priced by no held list. The
+  floor-edge column prices SEPARATING-side removal, heuristically for the joint game.
+* **K₅ projectivity — theorem CONFIRMED** (Greenwell–Lovász 1974; Larose–Tardif 2002, "strongly
+  projective graphs"), consequence (i) licensed; consequence (ii) tightened into something
+  STRONGER: by Inv–Pol with trivial polymorphism clone, every S₅-invariant relation is
+  pp-definable from ≠ abstractly — the colour side was NEVER where an obstruction could live;
+  every obstruction is unit-distance realizability. Consequence (iii) overclaimed: the lists
+  still carry the palette quotient, the seed's automorphisms, and the cluster structure the
+  enumeration exploits — only colour-side POINTWISE operations are dead.
+
+### The constructive centrepiece: the spare-colour lemma (adopted as an M51 kernel opener)
+
+**A (k−1)-colourable graph admits no pair compulsion of either polarity between non-adjacent
+vertices at k colours** — recolour one endpoint to the spare colour (kills forced-equal), or
+both (kills forced-distinct). Two lines each; an afternoon in Lean. Consequences, in force
+order: (a) **every virtual-edge gadget at five colours is itself a ≥ 5-chromatic unit-distance
+graph** — the hard floor under the whole M51 gadget hunt, G25's "each level's kill is the
+previous level's forcer" minted as a pair-level theorem-to-be, and the sharp form of §Sʹʹʹ's
+"the generator must fuse 5-forcers"; (b) the phase monitor's clean proof — a carrier forcing
+A = B at μ = 0 has χ(unit) ≥ 5, so the crossing happens NO LATER than the final commit
+(§Sⁱᵛ §4's "strictly before" was unproven, and its "final object is non-5-colourable" confused
+the carrier, χ = 5, with the spindled union one construction later; both corrected), monotone
+because the unit part only grows, one SAT ask per commit — conditional throughout on the descent
+COMPLETING (the registered stall prior is 0.6, and the "two deliverables" sentence inherits it);
+(c) **retro-explanation of the flat campaigns**: every m1 pair-meter zero ever measured on a
+4-colourable object at k = 5 (M31's flat table, M32's stacks, the hexagram chunks) was a
+THEOREM, not a finding — the meters could not have read otherwise; scope: pair-level only, class
+pigeonholes untouched. Kernel-opener list for M51 is now: the field-agnostic compactness bridge,
+the absorbing lemma, **the spare-colour lemma**, with the entropy floor as its quantitative
+sibling for the generator screen only.
+
+### The registered replication (before the polarization reading may inform design)
+
+Run the identical skewscan on **Parts's {1,φ} seed** (instrument exists: `tools/parts_phi.py`;
+its edge-criticality guarantees nonempty per-edge separating lists), with the prediction
+REGISTERED NOW: the polarization lands on THAT construction's own distance vocabulary, not on
+E–I's {3, 4} / {√3, √7, 2√3, √13} — i.e. "the dial nominates" is expected to decorrelate from
+"E–I was built this way". If instead the SAME distance classes polarize across both seeds, the
+nominated-distances reading is promoted from seed-anatomy to descent-mechanism — that would be
+the finding. Cheap; queued behind the M50 close.
+
+### Operational data from the pass
+
+The it-2 profile runs at ~0.25 asks/s (4,000/45,365 at 15,933 s): **ETA ~2 days**, not "several
+hours" — the empty-avail short-circuit is NOT catching most it-2 classes, itself a datum (the
+it-2 classes are harder for the depth-1 pool than the it-1 classes were). The §3 diet probe's
+interim: (86,183)'s cheat diet is ~184 of 417 and still descending — BROAD, the in-context
+compulsion is fabric-wide, not local (first gradient datum: these compulsions will not go
+context-free cheaply). Overall judgment quoted for the record: *"the self-delusion, where it
+exists, runs in both directions and has one common shape: sentences written past the
+enumeration or the conditioning that produced them."* The mechanical rule adopted: **every
+headline in this genre carries its enumeration and its conditioning in the same sentence.**
 
 ## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-22, written at ~98% context before compaction)
 
