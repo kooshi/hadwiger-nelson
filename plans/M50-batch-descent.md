@@ -413,6 +413,35 @@ C. The crystal generator with entropy-rate screening (constructive; G19's 5-tigh
 D. The information-theoretic instrument layer (MI maps, transfer-matrix capacity, compression
    proxies, the separator-flow bound as a theorem candidate).
 
+## §Sʹ. Pre-M51 domain-modeling pass (2026-08-22, fresh invocation) — three reshapings
+
+1. **The closure is a FIELD object, not a group orbit — the centre choice was incidental.** "Seam
+   closure about which centres" dissolves: the intrinsic object is `Γ_F(X)` = the smallest superset
+   of `X` closed under glue points whose radicand `4 − d²` is a square in `F` — no anchors, no
+   generator list; the M49 depth-one census already speaks this language (59 radicands, the
+   F-square ones are exactly the closure's moves). Frame A's FIRST deliverable is therefore
+   algebraic identification, not the transfer theorem: compute generations of `Γ_F(H − B)` and test
+   for orbit structure with the M30 anatomy instruments (ring spectra, direction classes) — the
+   M24 chord-classification engine applies only if `Γ_F` turns out group-like. And frame A's
+   FIRST experiment is the adversarial cheap shot: try every held periodic/equivariant colouring
+   (the M24/M26 colour tables, the seam-lattice colourings) on `H − B` — any one that separates
+   A, B and extends teaches that the seam closure does NOT force, in an afternoon.
+2. **The rigidity currency is an ODDS, not an entropy.** Raw −log N diverges from forcing progress
+   (both N's can shrink with the ratio fixed). The right functional for a forced-pair carrier is
+   the **separation odds** `s(X) = N_sep(X) / N_eq(X)` (colourings up to palette separating vs
+   identifying the pair): forcing ⟺ `s = 0`, and the descent's true progress metric is `log s`.
+   `N_eq` is enumerable by the same instrument (pin A = B instead of A ≠ B) — a cheap addition.
+   The per-area entropy RATE stays as the fabric-side currency (capacity); odds and rate are the
+   local and global faces of one measure.
+3. **The five ideas are functionals of ONE object: the proper-colouring Markov random field.** The
+   uniform measure over proper colourings of a graph is an MRF — separators give EXACT conditional
+   independence (the Markov property), so the "channel" language is rigorous, not metaphor.
+   Forcing = perfect long-range correlation of the MRF; the odds = a likelihood-ratio functional;
+   entropy screening = its growth rate; the closure-transfer question = the support of the MRF on
+   the infinite lattice; the separator bound = data processing through its Markov blankets; the
+   M20 automaton = its transfer operator on a strip. M51's instrument layer, whatever the frame,
+   is "the colouring MRF over a constructible lattice" — one representation, five functionals.
+
 ## §R. Results (filled as phases close)
 
 ### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
