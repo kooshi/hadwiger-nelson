@@ -528,6 +528,16 @@ The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`)
   finishes this seed and the field jump is forced, with the separating colouring of the closure
   saying which radicands to admit. Leading candidate frame for M51 alongside the core kill; gives
   the crystal generator its theoretical seat (which closures have pair-forcing colouring spaces).
+* **Kooshi's rigidity currency, registered** (2026-08-22): rigidity at 5 colours = −log N(X)
+  (colourings up to palette); a cheat's contribution = its deletion's entropy jump, a halo's = the
+  entropy it removes. Measured exchange rates from the certified commits: ~1 pt/cheat (depth-1
+  kills), ~24 (the 19-batch halo), ~8 (iteration-2's halo, pending), 87–267 (depth-2 single-edge
+  gadgets). Crude full-replacement estimate for the seed: 10⁴–10⁵ unit points — bracketing
+  Voronov's 64,513-vertex engineered 5-forcer. The deep link: G19's "5-tight fabric" = fabric with
+  near-zero 5-colouring ENTROPY RATE, and the M20 strip automaton already computes entropy rates
+  (×12/column measured); transfer-matrix entropy-rate screening is the ranking metric the crystal
+  generator needs (and what the flat M32 campaign lacked). Careful bookkeeping caveat: separating
+  vs total colouring counts are different events; the ledger needs both columns.
 * **Kooshi's construction idea, registered** (his words, 2026-08-20): sweep pivot distances (or
   prove the pivot-ring classification in Lean) while recursing through unit-radius connections to
   build arbitrary crystals, then apply the copy-and-rotate (detune) trick that got the field to
