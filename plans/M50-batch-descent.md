@@ -442,6 +442,36 @@ D. The information-theoretic instrument layer (MI maps, transfer-matrix capacity
    M20 automaton = its transfer operator on a strip. M51's instrument layer, whatever the frame,
    is "the colouring MRF over a constructible lattice" — one representation, five functionals.
 
+## §Sʺ. Pre-M51 obligation pass (2026-08-22, fresh invocation) — what would actually be proved
+
+1. **The compactness bridge is FIELD-AGNOSTIC, and that shrinks the kernel scope decisively.** The
+   statement worth proving is over an arbitrary point set `Γ : Set ℂ`: *(every finite subset of
+   `(H−B) ∪ Γ` admits a separating 5-colouring) ↔ (the whole of `(H−B) ∪ Γ` does)* — ← is
+   restriction, → is Tychonoff on `(Fin 5)^Γ` (discrete factors; properness and separation are
+   closed cylinder conditions; finite satisfiability gives the finite-intersection property).
+   Mathlib holds Tychonoff; predicted 40–80 lines; the awkward case is only the closedness
+   bookkeeping. The field-restricted closure `Γ_F` needs NO kernel definition for this — the
+   bridge quantifies over any Γ, and `Γ_F` stays a tools-side generator until the day the
+   restricted no-stall lemma itself is attempted. (The inductive `Γ_F` recursor = construction-
+   depth induction — the engine's own induction, wanted only for tools-side soundness notes.)
+2. **Odds-monotonicity is FALSE as a theorem — it is a dashboard metric.** Adding material moves
+   `N_sep` and `N_eq` by extension counts that can favour either side; the only theorem nearby is
+   the absorbing state: **forcing is monotone under augmentation** (`N_sep = 0` stays `0` — a
+   restriction one-liner, kernel-worthy, and the license the whole descent already uses
+   implicitly). Partition: prove the absorbing lemma; measure the odds.
+3. **MRF pieces, partitioned**: the Markov property of the uniform colouring measure on a finite
+   graph is provable (factorization over components of `G ∖ S`) but is NOT an opening obligation —
+   it matures only if the separator-flow width bound becomes a theorem campaign; Mathlib's
+   information-theory coverage (MI, data processing) must be checked at that point, not assumed.
+   Correlation decay stays a measured quantity (physics-grade to prove). Learned-model outputs are
+   never obligations at all.
+4. **M51's opening partition** — PROVE: the compactness bridge; the absorbing lemma. TEST (all
+   calibrated, all cheap): the cheap-shot separating-colouring attempt (every held periodic/
+   equivariant colour table against `H − B` — decides frame A's direction in an afternoon); the
+   `Γ_F` generation census with the M30 anatomy instruments (decides whether the M24 chord engine
+   applies); the odds ledger `N_sep : N_eq` per stage; the MI floppiness map over the held lists.
+   ASSUME (named): decay; anything learned.
+
 ## §R. Results (filled as phases close)
 
 ### §R1–§R2. The instrument and the exact batch list (phases 1–2) — LANDED, with one incident
