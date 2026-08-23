@@ -879,6 +879,10 @@ Monitor watches for the "killed / " line). Inputs: the CORRECTED list `build/m50
 * An `Undecided` (capped ask) is a third verdict everywhere — never folded; in ddmin it means
   "deletion rejected"; in the cover it defers the colouring (label `DEFERRED`, cost verdict).
 * One heavy job at a time; the profile owns the box until it lands.
+* The profile checkpoints per verdict to `build/m50-profile-ck-{label}.jsonl` (header line pins
+  |S| + pool fp); restarts resume exactly. The relaunched profile runs under `setsid` — stop it
+  with `kill -- -PID` (process group), never by killing the parent alone (30 orphaned workers,
+  and they match the parent's pgrep pattern).
 
 **The M51 decision state (for the subplan, after M50 closes):** the adopted question is §Sʹʹʹ's
 last paragraph (nominated pairs: the (4,A)-class at 2 + the four √3/√7 cross-pairs; minimal
@@ -983,6 +987,29 @@ only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain
   **|S| = 1,429 seed-classes, exact, 339 s**. The list stays seed-sized at every recursion depth.
 * Iteration-2 depth-1 profile (175,166-point pool over the 690-point object, halo variables in
   every ask): **1,325 killed / 41 survive / 63 unknown at cap** of 1,429 (10,824 s).
+* **Engine swaps 4+5 (2026-08-22/23, on Kooshi's "barely using any CPU" — each measured before
+  changed, regression-gated after).** Diagnosis first: the corrected 45,365-class profile ran at
+  0.25 asks/s with 31 THREADS pinned to 104 % of ONE core — `pmap` is a thread pool, and the
+  it-2 ask is GIL-held numpy/Python (cadical, which releases the GIL and parallelized it-1's
+  95 asks/s, is only the tail here). Swap 4: the profile forks a PROCESS pool (copy-on-write
+  after cache warm-up) and **checkpoints every verdict** to `m50-profile-ck-{label}.jsonl` — the
+  thread engine held all verdicts in memory to the end, so its 9.5 h died unrecoverable; the
+  checkpoint also makes engine swaps regression-testable against the run's own output. Measured:
+  0.89 asks/s (only 3.5×) — the peel was NOT the whole story. Phase-timing one ask showed why:
+  at it-2 the peel barely peels (55 absent cheats + 476 free halo variables leave too much
+  slack), a **139,293-point core** goes to SAT EVERY ask — a ~7M-clause CNF rebuilt in Python
+  and written to a temp file per ask (~5 s per UNSAT kill; SAT-side survivors ran toward the
+  1800-s cap, where the real hours lived). Swap 5, two halves: (i) `peel_np` rewritten —
+  loop-invariant row indices cached per pool (`_peel_rows`), `np.add.at` scatter → `bincount`
+  (peel now 0.06 s); (ii) `whole_feasible` TIERED — strong-rung subset UNSAT ⟹ killed (sound by
+  kill-monotonicity, small CNF), greedy whole-pool extension ⟹ survives (a witness, no solver),
+  full-core SAT only for the residue (cap 1800 → 900: unknowns arrive sooner and stay
+  conservative). Regression on the checkpoint: **383/383 verdicts identical** after each half
+  (old kernel 377 s, tiered 139 s at 16 workers). Relaunched from checkpoint: **~3.0 asks/s
+  sustained, 30 workers at ~16 effective cores (memory-bandwidth-bound — more workers would not
+  help), ETA ~4 h** where the thread engine projected ~46 h. Operational lesson recorded: killing
+  the pool's parent orphans 30 workers that match the parent's pgrep pattern — the relaunch runs
+  under `setsid`; stop it with `kill -- -PID` (the process GROUP).
 * Hitting set over the conservative 104 (survivors + unknowns): they touch only 11 of the 36;
   **keep 5, commit 31**. And the five kept are EXACTLY M49's five "untouched" refusers —
   `(4,A), (71,107), (126,203), (206,210), (206,211)` — while M49's five "one-or-two-short"

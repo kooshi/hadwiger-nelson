@@ -372,11 +372,30 @@ def avail_np(obj: Obj, pool: Pool, col) -> np.ndarray:
     return (FULL & ~_or_reduceat(bits, sp)).astype(np.uint8)
 
 
+def _peel_rows(pool: Pool):
+    """Cached loop-invariant row indices for peel_np's degree counts (built once per pool in the
+    parent, shared copy-on-write across forked workers). Engine swap 5 (2026-08-22, measured
+    first): the old peel rebuilt np.repeat row arrays over the full adjacency EVERY round of
+    EVERY ask and scattered with np.add.at (unbuffered ufunc.at) — the it-2 profile's actual
+    hot loop. bincount over cached rows is the same arithmetic; the regression set is the run's
+    own checkpoint file."""
+    r = getattr(pool, "_peel_rows_cache", None)
+    if r is None:
+        _, (ap, ai), (hp, hi) = pool.csr()
+        n = len(ap) - 1
+        rows_a = np.repeat(np.arange(n, dtype=np.int64), np.diff(ap))
+        rows_h = np.repeat(np.arange(n, dtype=np.int64), np.diff(hp))
+        pool._peel_rows_cache = r = (rows_a, rows_h)
+    return r
+
+
 def peel_np(pool: Pool, av: np.ndarray, hav) -> tuple[np.ndarray, np.ndarray]:
     """Vectorized exact list-colouring kernelization over the WHOLE pool + halo: returns the alive
     masks (pool bool array, halo bool array). Peels any variable with freecount > remaining degree
     (colourable last; feasibility unchanged)."""
     _, (ap, ai), (hp, hi) = pool.csr()
+    rows_a, rows_h = _peel_rows(pool)
+    n = len(av)
     m = len(hav)
     alive = av != 0
     free = _POP[av]
@@ -388,23 +407,17 @@ def peel_np(pool: Pool, av: np.ndarray, hav) -> tuple[np.ndarray, np.ndarray]:
         for j, L in enumerate(ha):
             hadj_ptr[j + 1] = hadj_ptr[j] + len(L)
         hadj_idx = np.fromiter((v for L in ha for v in L), dtype=np.int64, count=int(hadj_ptr[-1]))
-        # halo→pool reverse degree recomputed per pass (small m)
+        rows_hadj = np.repeat(np.arange(m, dtype=np.int64), np.diff(hadj_ptr))
     else:
         halive = np.zeros(0, dtype=bool)
         hfree = np.zeros(0, dtype=np.int8)
     while True:
-        # degrees among alive
-        deg = np.zeros(len(av), dtype=np.int64)
-        contrib = alive[ai].astype(np.int64)
-        np.add.at(deg, np.repeat(np.arange(len(av)), np.diff(ap)), contrib)
+        # degrees among alive: deg[r] = #{alive neighbours of r} — bincount over cached rows
+        deg = np.bincount(rows_a[alive[ai]], minlength=n)
         if m:
-            hcontrib = halive[hi].astype(np.int64)
-            np.add.at(deg, np.repeat(np.arange(len(av)), np.diff(hp)), hcontrib)
-            hdeg = np.zeros(m, dtype=np.int64)
-            np.add.at(hdeg, np.repeat(np.arange(m), np.diff(hadj_ptr)), halive[hadj_idx].astype(np.int64))
-            rev = np.zeros(m, dtype=np.int64)
-            np.add.at(rev, hi, alive[np.repeat(np.arange(len(av)), np.diff(hp))].astype(np.int64))
-            hdeg += rev
+            deg = deg + np.bincount(rows_h[halive[hi]], minlength=n)
+            hdeg = np.bincount(rows_hadj[halive[hadj_idx]], minlength=m)
+            hdeg = hdeg + np.bincount(hi[alive[rows_h]], minlength=m)
         drop = alive & (free > deg)
         hdrop = (halive & (hfree > hdeg)) if m else np.zeros(0, dtype=bool)
         if not drop.any() and not (m and hdrop.any()):
@@ -461,18 +474,80 @@ def feasible(pool: Pool, idxs, avail, hav=None, cap=1800) -> bool:
     return st == "sat"
 
 
-def whole_feasible(pool: Pool, av: np.ndarray, hav) -> tuple[bool, np.ndarray]:
-    """(feasible?, peeled pool core) for the WHOLE pool under one colouring — the vectorized path:
-    peel first (usually to empty = feasible); a nonempty core goes to the SAT on the core alone
-    (peeling preserves feasibility exactly, §Bʺ). An EMPTY-list point anywhere = infeasible
-    outright (the point is uncolourable — the stage-0 kill; the peel must never discard it)."""
+def _greedy_extend(pool: Pool, av: np.ndarray, hav) -> bool:
+    """Greedy list-colouring of the WHOLE pool + halo under the fixed seed colouring. True = a
+    found extension, a sound SURVIVES witness; False proves NOTHING (greedy failure). Halo vars
+    first (they couple everything), then pool points most-constrained-first (static order)."""
+    _, (ap, ai), (hp, hi) = pool.csr()
+    rows_a, rows_h = _peel_rows(pool)
+    n, m = len(av), len(hav)
+    pa = av.astype(np.int16)
+    unass = np.ones(n, dtype=bool)
+    hs, hh = pool.obj.halo_structure() if m else ([], [])
+    rev = getattr(pool, "_halo_rev_cache", None)
+    if rev is None and m:
+        rev = [[] for _ in range(m)]
+        for t in range(len(hi)):
+            rev[int(hi[t])].append(int(rows_h[t]))
+        pool._halo_rev_cache = rev = [np.array(r, dtype=np.int64) for r in rev]
+    hm = list(hav)
+    hdone = [False] * m
+    for j in sorted(range(m), key=lambda j: _POP[hm[j]]):
+        mk = hm[j]
+        if mk == 0:
+            return False
+        c = mk & -mk
+        hm[j] = c
+        hdone[j] = True
+        for jj in hh[j]:
+            if not hdone[jj]:
+                hm[jj] &= ~c
+        r = rev[j]
+        sel = r[unass[r]]
+        pa[sel] &= np.int16(~c)
+    for p in np.argsort(_POP[av], kind="stable"):
+        mk = int(pa[p])
+        if mk == 0:
+            return False
+        c = mk & -mk
+        pa[p] = c
+        unass[p] = False
+        nb = ai[ap[p]:ap[p + 1]]
+        sel = nb[unass[nb]]
+        pa[sel] &= np.int16(~c)
+        hnb = hi[hp[p]:hp[p + 1]]
+        for j in hnb:
+            if not hdone[j]:
+                hm[j] &= ~c
+    return True
+
+
+def whole_feasible(pool: Pool, av: np.ndarray, hav,
+                   cap_strong: float = 45.0, cap_full: float = 900.0) -> tuple[bool, np.ndarray]:
+    """(feasible?, peeled pool core) for the WHOLE pool under one colouring — the tiered engine
+    (swap 5's second half, 2026-08-22; regression = the run's own checkpoint): stage 0 empty-avail
+    = infeasible outright; peel-to-empty = feasible; then (1) STRONG-RUNG subset UNSAT = killed —
+    sound by kill monotonicity in the point set (the module invariant: a subset kill is a whole
+    kill), and cheap because the strong CNF is small; (2) a GREEDY whole-pool extension = a
+    survives WITNESS, no solver; (3) only the residue pays the full-core SAT. Undecided at the
+    full cap propagates as before (never folded)."""
     if bool((av == 0).any()) or any(h == 0 for h in hav):
         return False, np.zeros(len(av), dtype=bool)
     alive, halive = peel_np(pool, av, hav)
     if not alive.any() and not halive.any():
         return True, alive
+    strong = getattr(pool, "_strong_cache", None)
+    if strong is None:
+        pool._strong_cache = strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
+    try:
+        if not feasible(pool, strong, av, hav, cap=cap_strong):
+            return False, alive
+    except Undecided:
+        pass  # the strong rung is a shortcut, never a verdict
+    if _greedy_extend(pool, av, hav):
+        return True, alive
     core = [int(x) for x in np.flatnonzero(alive)]
-    return feasible(pool, core, av, hav), alive
+    return feasible(pool, core, av, hav, cap=cap_full), alive
 
 
 def kills(pool: Pool, idxs, cols_avail) -> bool:
@@ -761,25 +836,60 @@ def filter_sub(obj: Obj, cols, keep_edges):
 
 # ---------------------------------------------------------------- the profile (phase 3)
 
+_PF_CTX = None
+
+
+def _profile_one(i: int):
+    """Worker body for the process-parallel profile (context inherited via fork)."""
+    obj, pool, cols = _PF_CTX
+    try:
+        f, _ = whole_feasible(pool, avail_np(obj, pool, cols[i]), halo_masks(obj, cols[i]))
+        return i, ("killed" if not f else "survives")
+    except Undecided:
+        return i, "unknown"
+
+
 def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     """Per-colouring whole-set verdict: does the ENTIRE pool kill it? Complete at this pool for
-    constructible halos (M49 §R10 caveat cited in the row). Returns the per-colouring kill flags."""
-    allidx = list(range(len(pool.pts)))
+    constructible halos (M49 §R10 caveat cited in the row). Returns the per-colouring kill flags.
+
+    Engine note (swap 4 of the campaign, 2026-08-22, reason measured before the change): the
+    thread pmap serialized on the GIL for it-2-scale asks — 31 threads at 104 % of ONE core,
+    0.25 asks/s, because the per-ask cost is GIL-held numpy/Python kernelization over the 175k
+    pool, not cadical (which releases the GIL and was rarely reached). This engine forks a
+    PROCESS pool after the object/pool caches are warm (fork = copy-on-write; the big CSR arrays
+    stay shared), and checkpoints every verdict to a per-label jsonl so a restart resumes exactly
+    (the thread engine held all verdicts in memory until the end)."""
     t0 = time.time()
-    done = [0]
+    ck_path = BUILD / f"m50-profile-ck-{label}.jsonl"
+    hdr = f"# {len(cols)} {pool.fp}"
+    done_map: dict[int, str] = {}
+    if ck_path.exists():
+        lines = ck_path.read_text().splitlines()
+        assert lines and lines[0] == hdr, "profile checkpoint does not match this list/pool"
+        for ln in lines[1:]:
+            i, r = ln.split()
+            done_map[int(i)] = r
+        log(f"[profile {label}] resumed {len(done_map)}/{len(cols)} from checkpoint")
+    else:
+        ck_path.write_text(hdr + "\n")
+    todo = [i for i in range(len(cols)) if i not in done_map]
 
-    def one(c):
-        try:
-            f, _ = whole_feasible(pool, avail_np(obj, pool, c), halo_masks(obj, c))
-            r = "killed" if not f else "survives"
-        except Undecided:
-            r = "unknown"
-        done[0] += 1
-        if done[0] % 2000 == 0:
-            log(f"[profile {label}] {done[0]}/{len(cols)} [{time.time()-t0:.0f}s]", flush=True)
-        return r
-
-    outs = mechanism.pmap(one, cols)
+    global _PF_CTX
+    _PF_CTX = (obj, pool, cols)
+    if todo:
+        _profile_one(todo[0])  # warm every lazy cache in the parent BEFORE forking
+        import multiprocessing as mp
+        with ck_path.open("a") as ck, \
+                mp.get_context("fork").Pool(processes=mechanism.WORKERS) as px:
+            for n, (i, r) in enumerate(px.imap_unordered(_profile_one, todo, chunksize=4), 1):
+                done_map[i] = r
+                ck.write(f"{i} {r}\n")
+                ck.flush()
+                if n % 2000 == 0:
+                    log(f"[profile {label}] {len(done_map)}/{len(cols)} [{time.time()-t0:.0f}s]",
+                        flush=True)
+    outs = [done_map[i] for i in range(len(cols))]
     (BUILD / f"m50-survivors-{label}.json").write_text(
         json.dumps([i for i, k in enumerate(outs) if k != "killed"]))
     (BUILD / f"m50-unknown-{label}.json").write_text(
