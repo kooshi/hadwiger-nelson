@@ -987,6 +987,23 @@ only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain
   **|S| = 1,429 seed-classes, exact, 339 s**. The list stays seed-sized at every recursion depth.
 * Iteration-2 depth-1 profile (175,166-point pool over the 690-point object, halo variables in
   every ask): **1,325 killed / 41 survive / 63 unknown at cap** of 1,429 (10,824 s).
+* **Incident 3 (2026-08-23, the deferral cascade — found by Kooshi's second "1 core" report,
+  diagnosed by measurement, ladder-logic not soundness).** The it-2 cover accepted 5 points and
+  then DEFERRED 3,023 of 4,945 committable colourings in a row — all provably pool-killable by
+  the profile's own verdicts. Cause: at it-2 pool density (175k points) the radius-1.5/3 local
+  balls exceed the 20,000-point ddmin guard, and an oversized rung's UNSAT **broke out of the
+  ladder** instead of falling through to the SMALLER rung right behind it — while the strong
+  rung is only **1,523 points and kills 7 of 8 sampled stalled colourings in under a second**
+  (the kills sat in the cheapest rung all along). Two reporting bugs rode along: the defer
+  message blamed "cost budget" (a cause that never fired — it cost one diagnostic round), and
+  the cover row's claim_scope asserted stalled colourings "survive the WHOLE pool", false for
+  deferrals. Fix: rungs sorted by size (smallest first), oversized-kill ⟹ CONTINUE never break,
+  defer messages name the true cause, and stalls carry a `stall_kind` taxonomy — only
+  'survives-whole' means what the old claim_scope said. State surgery: buggy stalls cleared for
+  retry, the 5-point halo kept. Restart: the halo's recheck alone covered 737, first fixed-ladder
+  acceptance +4 pts → 763/4,945, queue draining. Lesson for G30: **a verdict message that names
+  a cause it did not check converts one bug into two** — the mislabel sent the first diagnosis
+  toward budgets when the guard was the culprit.
 * **Engine swaps 4+5 (2026-08-22/23, on Kooshi's "barely using any CPU" — each measured before
   changed, regression-gated after).** Diagnosis first: the corrected 45,365-class profile ran at
   0.25 asks/s with 31 THREADS pinned to 104 % of ONE core — `pmap` is a thread pool, and the

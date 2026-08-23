@@ -951,6 +951,9 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
     recheck([t for t in range(len(cols)) if not covered[t]])
     queue = [t for t in range(len(cols)) if not covered[t] and t not in set(stall)]
     log(f"[cover] start: {int(covered.sum())} covered, {len(queue)} queued, {len(stall)} stalled")
+    PP = np.asarray(pool.pts)
+    strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
+    stall_kind: dict[int, str] = {}
     while queue:
         # free single-point wins first (the accumulated halo then softens the hard cases);
         # among colourings with no free kill, most-constrained first
@@ -976,8 +979,6 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
                     if c[e[0]] == c[e[1]]:
                         p0, p1 = obj.pts[e[0]], obj.pts[e[1]]
                         centres.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))
-            PP = np.asarray(pool.pts)
-            strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
             t_budget = time.time()
             rungs = []
             if centres:
@@ -987,11 +988,16 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
                         m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
                     rungs.append(("local%.1f" % r, [int(x) for x in np.flatnonzero(m2 <= r * r)]))
             rungs.append(("strong", strong))
+            # smallest rung first — at it-2 density a radius ball can dwarf the strong rung, and
+            # the it-2 cascade (incident 3, §R6) came from an OVERSIZED early rung's UNSAT
+            # breaking the ladder instead of falling through to the smaller rung behind it
+            rungs.sort(key=lambda x: len(x[1]))
             rungs.append(("whole", None))
-            deferred = False
+            defer_why = None
+            oversized = None
             for name, sub in rungs:
                 if time.time() - t_budget > 1200:
-                    deferred = True
+                    defer_why = "budget"
                     break
                 try:
                     if sub is None:
@@ -1005,25 +1011,30 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
                     continue
                 if sub_kill is not None:
                     if len(sub_kill) > 20000:
-                        deferred = True     # a ddmin from here is days — defer, commit smaller now
-                        break
+                        oversized = name    # a kill EXISTS here but a ddmin from it is days —
+                        continue            # fall through to the next rung, never break
                     added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], start=sub_kill, log=log)
                              if p not in set(halo)]
                     break
                 if sub is None:
                     added = "stall"
                     break
-            if deferred:
+            if defer_why is None and added is None:
+                defer_why = (f"kill exists in oversized rung {oversized}, no ddmin-able rung"
+                             if oversized else "every rung undecided at cap")
+            if defer_why:
                 stall.append(t)
+                stall_kind[t] = defer_why
                 queue = [q for q in queue if q != t]
-                log(f"[cover] colouring {t}: DEFERRED (cost budget; killable status undecided at "
-                    f"budget, never 'survives') — stalled list ({len(stall)})")
+                log(f"[cover] colouring {t}: DEFERRED ({defer_why}; killable-or-undecided, never "
+                    f"'survives') — stalled list ({len(stall)})")
                 _save(state_path, pool, halo, stall)
                 continue
-            if added is None or added == "stall":
+            if added == "stall":
                 stall.append(t)
+                stall_kind[t] = "survives-whole"
                 queue = [q for q in queue if q != t]
-                log(f"[cover] colouring {t}: no decidable kill at any radius — stalled ({len(stall)})")
+                log(f"[cover] colouring {t}: survives the WHOLE pool — stalled ({len(stall)})")
                 _save(state_path, pool, halo, stall)
                 continue
         halo += added
@@ -1037,10 +1048,13 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
     _save(state_path, pool, halo2, stall)
     row = {"kind": "cover", **pool.cite(), "n_colourings": len(cols), "halo_size": len(halo2),
            "covered": len(cols) - len(stall), "stalled": len(stall),
-           "stall_indices": stall, "seconds": round(time.time() - t0, 1),
+           "stall_indices": stall, "stall_kinds": {str(k): v for k, v in stall_kind.items()},
+           "seconds": round(time.time() - t0, 1),
            "claim_scope": "a halo from the named pool whose list-colouring problem is infeasible "
-           "under every covered colouring (lookup; the certification ask is separate); stalled "
-           "colourings survive the WHOLE pool (no constructible subset kills them)"}
+           "under every covered colouring (lookup; the certification ask is separate); a stalled "
+           "colouring's meaning is its stall_kind — ONLY 'survives-whole' means the WHOLE pool "
+           "cannot kill it (no constructible subset can); deferred kinds are killable-or-"
+           "undecided at this pass's budgets (incident 3's lesson: the old row conflated them)"}
     T.record(BUILD / "m50-batch.json", row)
     return {"halo": halo2, "stall": stall, "row": row}
 
