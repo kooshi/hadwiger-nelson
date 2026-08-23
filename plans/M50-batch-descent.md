@@ -823,10 +823,21 @@ the finding. Cheap; queued behind the M50 close.
 
 The it-2 profile runs at ~0.25 asks/s (4,000/45,365 at 15,933 s): **ETA ~2 days**, not "several
 hours" — the empty-avail short-circuit is NOT catching most it-2 classes, itself a datum (the
-it-2 classes are harder for the depth-1 pool than the it-1 classes were). The §3 diet probe's
-interim: (86,183)'s cheat diet is ~184 of 417 and still descending — BROAD, the in-context
-compulsion is fabric-wide, not local (first gradient datum: these compulsions will not go
-context-free cheaply). Overall judgment quoted for the record: *"the self-delusion, where it
+it-2 classes are harder for the depth-1 pool than the it-1 classes were).
+
+**The §3 diet probe LANDED** (`build/m50-support-probe.json`; ddmin on the it-1 stage, chunked
+then singles, capped asks kept conservatively): minimal cheat supports **166** for the d = 3
+virtual edge (86,183) [1-minimal witnessed], **176** for the √3 pigeonhole triangle (40,107,126)
+[witnessed], **191** for the d = 4 diameter (20,180) [witness INCOMPLETE — some deletion asks
+capped at 120 s, so 191 is an upper bound with 1-minimality unconfirmed; reported as such]. All
+three diets are BROAD — 40–46 % of the 417 stage cheats — so the in-context compulsions are
+fabric-financed, not local, and going context-free is a long march (consistent with the
+calibration-corpus framing and M49's context-dependence of kills). The overlap answers the
+"one design bill, many targets" question's first instance: pairwise intersections 89/109/143,
+**a common core of 78 cheats feeds all three** compulsions (union 270) — substantial shared
+financing across three structurally different compulsions, but not nested. The diet meter is
+priced: ~1–3 h per target serially at the 120-s cap; a full 148-target diet map is a
+parallel-day on the desktop, M51's first census candidate. Overall judgment quoted for the record: *"the self-delusion, where it
 exists, runs in both directions and has one common shape: sentences written past the
 enumeration or the conditioning that produced them."* The mechanical rule adopted: **every
 headline in this genre carries its enumeration and its conditioning in the same sentence.**
