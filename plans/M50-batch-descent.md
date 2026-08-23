@@ -844,9 +844,14 @@ headline in this genre carries its enumeration and its conditioning in the same 
 
 ## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-22, written at ~98% context before compaction)
 
-**Read this first in a fresh session.** WORKFLOW position: M50 step 7 (implementation), iteration 2
-mid-chain; then close per §S. The pre-M51 modeling (§Sʹ/§Sʺ/§Sʹʹʹ) is DONE and committed — do not
-redo it; M51's adopted question is at the end of §Sʹʹʹ.
+**Read this first in a fresh session.** WORKFLOW position: M50 step 7 (implementation).
+**ITERATION 2 IS CLOSED AND CERTIFIED (2026-08-23, §R6): object 1,008 pts / 403 cheats, 43 of
+446 removed; kept twelve = the refuser core; 277 width-shaped stalls mandate depth 2 next.**
+Remaining to close M50 (per §S): the core probe (item 2), the field census of halo radicands
+(P5) + final stall anatomy (item 3 — the skewscan §Sⁱᵛ delivered the map half), predictions
+scored, gate, Frontier (ledger row 45), report, memory. The pre-M51 modeling (§Sʹ–§Sⁱᵛ-adv,
+TWO rounds) is DONE and committed — do not redo it; M51's adopted question is §Sʹʹʹ's last
+paragraph, its kernel openers now include the spare-colour lemma (§Sⁱᵛ-adv).
 
 **RUNNING at compaction: the corrected iteration-2 depth-1 profile** —
 `python3 -u tools/batchkill.py --profile --pool depth1 --object S29-depth2r`, log
@@ -1061,7 +1066,26 @@ only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain
   **keep 5, commit 31**. And the five kept are EXACTLY M49's five "untouched" refusers —
   `(4,A), (71,107), (126,203), (206,210), (206,211)` — while M49's five "one-or-two-short"
   refusers all became committable: **the M49 depth-2 status column predicted the split exactly.**
-  The refuser core is 10 → 5 after one batch iteration.
+  The refuser core is 10 → 5 after one batch iteration. *(Superseded below: those numbers were
+  the BUGGY 1,429 list's; the corrected chain follows.)*
+
+**ITERATION 2 CLOSED, CERTIFIED (2026-08-23).** The corrected chain end to end, on the engine
+swaps 4–6b built mid-flight: **profile** (tiered, checkpointed, process-parallel) — 45,216
+killed / 46 survive / 103 unknown of 45,365, every verdict persisted; **hitting** — keep 8 of 36
+(the M49 five + (43,A), (115,212), (132,134)); **cover** (wave engine) — 4,668 of 4,945
+committable covered, **277 stalls, all width-shaped** (strong SAT; capped ddmin from the 139k
+core lands 2,551/14,960 and still descending — distributed kills, G10 in miniature, the measured
+mandate for a depth-2 pool at iteration 3); **monotone re-hit** — keep 12, commit 24 (additions
+= the blind-centre/quadrilateral cast); **shrink** against the keep-12 live set — halo 1,118 →
+**318**; **commit CERTIFIED** — 318 points exact from provenance, 2,455 halo unit edges verified
+(30 sympy-exact, 2,425 at labelled 250-digit numeric), lookup re-check on all 1,235, **one-hot
+UNSAT + 3-bit UNSAT in 620 s**. **The object after two batch turns: 1,008 points, 403 cheats —
+43 of the seed's 446 distance-2 edges replaced by certified unit material**
+(`build/m50-object-S29-depth2r-it2v2-depth1.json`). Phase monitor on the new object: the unit
+part (6,413 edges) is **still 4-colourable** (SAT, 0.0 s) — rigidity still wholly cheat-borne.
+The iteration-3 refuser core is the kept twelve, concentrated on A's and B's neighbourhoods, the
+blind centres, and the quadrilateral; the 277 width-stalls are the priced argument that
+iteration 3's marginal edges need the depth-2 pool.
 
 ### §R5. Kooshi's observations on the refuser-core tool (2026-08-20), verified exactly
 
