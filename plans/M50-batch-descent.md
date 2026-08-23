@@ -1087,6 +1087,18 @@ The iteration-3 refuser core is the kept twelve, concentrated on A's and B's nei
 blind centres, and the quadrilateral; the 277 width-stalls are the priced argument that
 iteration 3's marginal edges need the depth-2 pool.
 
+**The iteration-3 floor census (403 asks, 0 unknown, 378 s): floor 36 → 17.** Eleven of the
+kept twelve remain essential-alone; **(132,134) dropped out** — the free minimizer's swap
+candidate was indeed the weakest kept edge, and the new halo now covers its job. Six edges
+became newly essential as removals consumed their slack: (3,179), (37,93), (37,167), (54,179),
+(56,180), (72,190). The core probe (§S item 2) is the next act, in its cheap per-edge form:
+for each kept edge `e`, enumerate the separating colourings of (object − removed − {e}) — the
+M49 H−e frame on the GROWN object, expected small if the rigidity held — and profile them
+against the grown depth-1 pool. CAUTION for the implementer: the enumeration CLI's stage is
+hardwired to `object − removed − floor` (the incident-2 fix); a per-edge probe needs a custom
+batch, and getting that wrong recreates incident 2 — derive the stage explicitly and check the
+header's stage fingerprint against a hand computation before profiling.
+
 ### §R5. Kooshi's observations on the refuser-core tool (2026-08-20), verified exactly
 
 The tool (`claude.ai/code/artifact/53172e9e…`, `scratchpad/refuser_core.html`) was built on request
