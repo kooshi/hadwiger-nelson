@@ -1004,6 +1004,25 @@ only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain
   acceptance +4 pts → 763/4,945, queue draining. Lesson for G30: **a verdict message that names
   a cause it did not check converts one bug into two** — the mislabel sent the first diagnosis
   toward budgets when the guard was the culprit.
+* **The hard residue and the monotone re-hit (2026-08-23).** After swap 6b's low-avail rungs,
+  ALL 277 whole-rung stalls re-deferred — their kills are not inside the densest 19,999 points
+  either. Anatomy (two probed): strong is genuinely SAT; a 15-min capped ddmin from the 139k
+  core lands at 2,551 resp. 14,960 points and is still descending — **the residue's kills are
+  DISTRIBUTED (width-shaped), thousands of weak points cooperating through the halo-CSP channel:
+  G10's "the forcing is distributed" in miniature, inside our own batch object.** (The probe's
+  anchor-ball rung misfired honestly: radius-2 balls about 19 anchors = 99.8 % of the pool —
+  ball rungs are meaningless at this density.) Decision: don't fight width with points at this
+  depth — RE-HIT with the 277 as survivors (149 profile ∪ 277 cover = 426). Two near-misses on
+  the way, both caught by verifies: (i) the FREE re-hit (keep 11) SWAPPED (132,134) out of the
+  kept set, silently manufacturing 431 newly-committable uncovered colourings — caught by the
+  coverage-subset verify; fixed by the MONOTONE re-hit (keep-8 pinned): **keep 12, commit 24 of
+  36**, additions exactly the §R5 cast — (0,20), (58,213), (98,213), (118,212): the blind-centre
+  and quadrilateral vertices; the hard residue concentrates on the named core. (ii) The re-hit
+  script updated `keep` but left the hitting file's `commit` field stale (25 edges incl. a kept
+  one) — caught by the design banner's 25≠24 cross-check before any certify; the file now
+  carries the recomputed complement, verified disjoint from keep. The shrink was then restarted
+  against the keep-12 live set (1,235 colourings, all covered by the 1,118-pt halo) — ~4× fewer
+  preservation constraints, smaller final halo, smaller iteration-3 object.
 * **Engine swap 6 (2026-08-23, the wave cover — on the third utilization report).** The fixed
   ladder worked but the greedy loop is one-kill-at-a-time and the ddmin's halving yields 2–3
   parallel asks — ~1 core again. The cover now runs the per-colouring ladder for a WAVE of 12
