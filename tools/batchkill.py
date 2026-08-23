@@ -943,6 +943,12 @@ def _cover_kill_one(t: int):
                 m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
             rungs.append(("local%.1f" % r, [int(x) for x in np.flatnonzero(m2 <= r * r)]))
     rungs.append(("strong", strong))
+    # low-avail FORWARD rungs (the it-2 stall study, §R6: 5 of 8 whole-rung-only stalls die
+    # inside the densest few thousand points by avail count — the kills the geometric rungs
+    # cannot see; 19,999 sits just under the ddmin guard)
+    order = np.argsort(_POP[av], kind="stable")
+    for N in (2000, 8000, 19999):
+        rungs.append((f"lowavail{N}", [int(x) for x in order[:N]]))
     rungs.sort(key=lambda x: len(x[1]))  # smallest first — incident 3's lesson
     rungs.append(("whole", None))
     oversized = None
@@ -1053,8 +1059,8 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
                     f"{int(covered.sum())}/{len(cols)}, queue {len(queue)}, stall {len(stall)} "
                     f"[{time.time()-t0:.0f}s]", flush=True)
             _save(state_path, pool, halo, stall)
-    live = [(AVn[t], HVn[t]) for t in range(len(cols)) if t not in set(stall)]
-    halo2 = _shrink_halo(pool, halo, live, log)
+    live_idx = [t for t in range(len(cols)) if t not in set(stall)]
+    halo2 = _shrink_halo(pool, halo, AVn, HVn, live_idx, log)
     _save(state_path, pool, halo2, stall)
     row = {"kind": "cover", **pool.cite(), "n_colourings": len(cols), "halo_size": len(halo2),
            "covered": len(cols) - len(stall), "stalled": len(stall),
@@ -1118,41 +1124,61 @@ def _ddmin_single(pool: Pool, av, hv, start=None, log=print):
     return core
 
 
-def _shrink_halo(pool: Pool, halo, avs, log=print):
-    """Drop halo points whose removal keeps every covered colouring killed (parallel ddmin)."""
-    core = list(halo)
-    chunk = max(1, len(core) // 2)
-    while core and chunk >= 1:
-        pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
-        base = list(core)
-        def try_del(pc):
-            try:
-                return kills(pool, [v for v in base if v not in set(pc)], avs)
-            except Undecided:
+def _kills_batch(args):
+    """Shrink worker (fork-shared context): does `sub` still kill every colouring in the index
+    chunk? Callers pre-screen — only colourings needing the CSP arrive here. Undecided = False
+    (deletion rejected, conservative)."""
+    sub, idxs = args
+    _, pool, AVn, HVn, _, _, _, _ = _CV_CTX
+    for t in idxs:
+        try:
+            if feasible(pool, sub, AVn[t], HVn[t]):
                 return False
-        res = mechanism.pmap(try_del, pieces)
-        passing = [pc for pc, ok in zip(pieces, res) if ok]
-        accepted = []
-        if passing:
-            def still(sub):
-                try:
-                    return kills(pool, sub, avs)
-                except Undecided:
-                    return False
-            union = set().union(*map(set, passing))
-            if still([v for v in core if v not in union]):
-                core = [v for v in core if v not in union]
-                accepted = sorted(union)
-            else:
-                for pc in passing:
-                    if still([v for v in core if v not in set(pc)]):
-                        core = [v for v in core if v not in set(pc)]
-                        accepted += pc
-        if not accepted:
-            if chunk == 1:
-                break
-            chunk = max(1, chunk // 2)
-        log(f"[shrink] chunk {chunk}: |halo| = {len(core)}")
+        except Undecided:
+            return False
+    return True
+
+
+def _shrink_halo(pool: Pool, halo, AVn, HVn, live_idx, log=print):
+    """Drop halo points whose removal keeps every covered colouring killed — chunked ddmin whose
+    kill test is (a) a numpy stage-0 screen (a colouring holding an empty-avail point of the
+    remaining subset needs no solver) and (b) a process-parallel CSP sweep over the rest (engine
+    swap 6's second half: the old test swept ~5k colourings serially per deletion trial)."""
+    import multiprocessing as mp
+    core = list(halo)
+    live = np.asarray(live_idx, dtype=np.int64)
+    with mp.get_context("fork").Pool(processes=mechanism.WORKERS) as px:
+        def kills_all(sub):
+            if not sub:
+                return len(live) == 0
+            need = live[~(AVn[np.ix_(live, sub)] == 0).any(axis=1)]
+            if len(need) == 0:
+                return True
+            CH = 64
+            chunks = [(sub, [int(x) for x in need[i:i + CH]]) for i in range(0, len(need), CH)]
+            return all(px.map(_kills_batch, chunks))
+
+        chunk = max(1, len(core) // 2)
+        while core and chunk >= 1:
+            pieces = [core[i:i + chunk] for i in range(0, len(core), chunk)]
+            passing = [pc for pc in pieces
+                       if kills_all([v for v in core if v not in set(pc)])]
+            accepted = []
+            if passing:
+                union = set().union(*map(set, passing))
+                if kills_all([v for v in core if v not in union]):
+                    core = [v for v in core if v not in union]
+                    accepted = sorted(union)
+                else:
+                    for pc in passing:
+                        if kills_all([v for v in core if v not in set(pc)]):
+                            core = [v for v in core if v not in set(pc)]
+                            accepted += pc
+            if not accepted:
+                if chunk == 1:
+                    break
+                chunk = max(1, chunk // 2)
+            log(f"[shrink] chunk {chunk}: |halo| = {len(core)}")
     return core
 
 
