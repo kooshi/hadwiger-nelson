@@ -1004,6 +1004,17 @@ only, artifacts bumped to `-it2v2`, re-enumeration launched. The soundness chain
   acceptance +4 pts → 763/4,945, queue draining. Lesson for G30: **a verdict message that names
   a cause it did not check converts one bug into two** — the mislabel sent the first diagnosis
   toward budgets when the guard was the culprit.
+* **Engine swap 6 (2026-08-23, the wave cover — on the third utilization report).** The fixed
+  ladder worked but the greedy loop is one-kill-at-a-time and the ddmin's halving yields 2–3
+  parallel asks — ~1 core again. The cover now runs the per-colouring ladder for a WAVE of 12
+  colourings at once in a forked process pool (`_cover_kill_one`), accepting the union: SOUND
+  because kills are independent facts about (pool, colouring) and the union halo kills the union
+  by the §Bʺ monotonicity invariant; redundancy is the global shrink's job and soundness the
+  certify ask's. Rechecks run in the same pool. Measured on resume: the serial run's 74-point
+  halo already covered 2,954/4,945; the FIRST wave added 745 points → **4,392/4,945 covered,
+  queue 553, zero stalls, 723 s**, at 13 processes + 18 concurrent cadicals (~16 cores). Wave
+  kills are fatter than serial ones (union of 12 independent ddmins) — the shrink is expected to
+  trim substantially, and its own cost at the fatter halo is the next thing to watch.
 * **Engine swaps 4+5 (2026-08-22/23, on Kooshi's "barely using any CPU" — each measured before
   changed, regression-gated after).** Diagnosis first: the corrected 45,365-class profile ran at
   0.25 asks/s with 31 THREADS pinned to 104 % of ONE core — `pmap` is a thread pool, and the

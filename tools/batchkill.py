@@ -915,6 +915,71 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
 
 # ---------------------------------------------------------------- the cover (phase 4)
 
+_CV_CTX = None
+
+
+def _cover_kill_one(t: int):
+    """Wave worker (fork-shared context): stage-0 / size-sorted rung ladder / ddmin for ONE
+    colouring. Returns (t, kind, payload) with kind in {'kill','stall','defer'} — payload is the
+    1-minimal kill's point list, or the stall/defer reason string."""
+    obj, pool, AVn, HVn, cols, batch, PP, strong = _CV_CTX
+    silent = lambda *a, **k: None  # noqa: E731
+    av, hv = AVn[t], HVn[t]
+    empt = np.flatnonzero(av == 0)
+    if len(empt):
+        return t, "kill", [int(empt[0])]
+    centres = []
+    c = cols[t]
+    for e in batch:
+        if c[e[0]] == c[e[1]]:
+            p0, p1 = obj.pts[e[0]], obj.pts[e[1]]
+            centres.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))
+    t_budget = time.time()
+    rungs = []
+    if centres:
+        for r in (1.5, 3.0):
+            m2 = np.full(len(PP), np.inf)
+            for cx, cy in centres:
+                m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
+            rungs.append(("local%.1f" % r, [int(x) for x in np.flatnonzero(m2 <= r * r)]))
+    rungs.append(("strong", strong))
+    rungs.sort(key=lambda x: len(x[1]))  # smallest first — incident 3's lesson
+    rungs.append(("whole", None))
+    oversized = None
+    for name, sub in rungs:
+        if time.time() - t_budget > 1200:
+            return t, "defer", "budget"
+        try:
+            if sub is None:
+                f, core_alive = whole_feasible(pool, av, hv)
+                sub_kill = None if f else [int(x) for x in np.flatnonzero(core_alive)]
+            else:
+                if not sub:
+                    continue
+                sub_kill = None if feasible(pool, sub, av, hv, cap=600) else sub
+        except Undecided:
+            continue
+        if sub_kill is not None:
+            if len(sub_kill) > 20000:
+                oversized = name    # a kill EXISTS here but a ddmin from it is days —
+                continue            # fall through to the next rung, never break
+            return t, "kill", _ddmin_single(pool, av, hv, start=sub_kill, log=silent)
+        if sub is None:
+            return t, "stall", "survives-whole"
+    return t, "defer", (f"kill exists in oversized rung {oversized}, no ddmin-able rung"
+                        if oversized else "every rung undecided at cap")
+
+
+def _cover_recheck_one(args):
+    """Wave worker: is colouring t covered by the CURRENT halo (passed explicitly)?"""
+    t, halo = args
+    _, pool, AVn, HVn, _, _, _, _ = _CV_CTX
+    try:
+        return t, (not feasible(pool, halo, AVn[t], HVn[t]))
+    except Undecided:
+        return t, False
+
+
 def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -> dict:
     """Greedy set-cover of the colouring list by a growing halo (§B2 + §Bʹ stage 0). Avail masks
     live in ONE uint8 numpy matrix (built once, in parallel); coverage rechecks touch only
@@ -954,95 +1019,40 @@ def cover(obj: Obj, pool: Pool, cols, state_path: Path, batch=None, log=print) -
     PP = np.asarray(pool.pts)
     strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
     stall_kind: dict[int, str] = {}
-    while queue:
-        # free single-point wins first (the accumulated halo then softens the hard cases);
-        # among colourings with no free kill, most-constrained first
-        nfree = (AVn[queue] == 0).sum(axis=1)
-        if nfree.max() > 0:
-            t = queue[int(np.argmax(nfree))]
-        else:
-            t = queue[int(np.argmin(nfree))]
-        empt = np.flatnonzero(AVn[t] == 0)
-        empt = [int(p) for p in empt if p not in set(halo)]
-        if empt:
-            added = [empt[0]]
-        else:
-            # LOCAL kill first (M49's radius ladder), then the STRONG rung (points with >= 3
-            # object neighbours — what real gadgets are made of; small CNFs), then the whole pool
-            # as the completeness rung — under a per-colouring WALL BUDGET: a colouring that does
-            # not fall in time is DEFERRED (a cost verdict, never "survives").
-            added = None
-            centres = []
-            if batch:
-                c = cols[t]
-                for e in batch:
-                    if c[e[0]] == c[e[1]]:
-                        p0, p1 = obj.pts[e[0]], obj.pts[e[1]]
-                        centres.append(((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2))
-            t_budget = time.time()
-            rungs = []
-            if centres:
-                for r in (1.5, 3.0):
-                    m2 = np.full(len(PP), np.inf)
-                    for cx, cy in centres:
-                        m2 = np.minimum(m2, (PP[:, 0] - cx) ** 2 + (PP[:, 1] - cy) ** 2)
-                    rungs.append(("local%.1f" % r, [int(x) for x in np.flatnonzero(m2 <= r * r)]))
-            rungs.append(("strong", strong))
-            # smallest rung first — at it-2 density a radius ball can dwarf the strong rung, and
-            # the it-2 cascade (incident 3, §R6) came from an OVERSIZED early rung's UNSAT
-            # breaking the ladder instead of falling through to the smaller rung behind it
-            rungs.sort(key=lambda x: len(x[1]))
-            rungs.append(("whole", None))
-            defer_why = None
-            oversized = None
-            for name, sub in rungs:
-                if time.time() - t_budget > 1200:
-                    defer_why = "budget"
-                    break
-                try:
-                    if sub is None:
-                        f, core_alive = whole_feasible(pool, AVn[t], HVn[t])
-                        sub_kill = None if f else [int(x) for x in np.flatnonzero(core_alive)]
-                    else:
-                        if not sub:
-                            continue
-                        sub_kill = None if feasible(pool, sub, AVn[t], HVn[t], cap=600) else sub
-                except Undecided:
-                    continue
-                if sub_kill is not None:
-                    if len(sub_kill) > 20000:
-                        oversized = name    # a kill EXISTS here but a ddmin from it is days —
-                        continue            # fall through to the next rung, never break
-                    added = [p for p in _ddmin_single(pool, AVn[t], HVn[t], start=sub_kill, log=log)
-                             if p not in set(halo)]
-                    break
-                if sub is None:
-                    added = "stall"
-                    break
-            if defer_why is None and added is None:
-                defer_why = (f"kill exists in oversized rung {oversized}, no ddmin-able rung"
-                             if oversized else "every rung undecided at cap")
-            if defer_why:
-                stall.append(t)
-                stall_kind[t] = defer_why
-                queue = [q for q in queue if q != t]
-                log(f"[cover] colouring {t}: DEFERRED ({defer_why}; killable-or-undecided, never "
-                    f"'survives') — stalled list ({len(stall)})")
-                _save(state_path, pool, halo, stall)
-                continue
-            if added == "stall":
-                stall.append(t)
-                stall_kind[t] = "survives-whole"
-                queue = [q for q in queue if q != t]
-                log(f"[cover] colouring {t}: survives the WHOLE pool — stalled ({len(stall)})")
-                _save(state_path, pool, halo, stall)
-                continue
-        halo += added
-        recheck([q for q in queue])
-        queue = [q for q in queue if not covered[q]]
-        log(f"[cover] +{len(added)} pts (halo {len(halo)}): covered {int(covered.sum())}/{len(cols)}, "
-            f"queue {len(queue)}, stall {len(stall)} [{time.time()-t0:.0f}s]", flush=True)
-        _save(state_path, pool, halo, stall)
+    # WAVE-PARALLEL kill search (engine swap 6, on the third utilization report): kills are
+    # independent facts about (pool, colouring) — the union halo kills the union by monotonicity
+    # (§Bʺ), redundancy is the global shrink's job, and soundness is the certify ask's — so the
+    # per-colouring ladder runs for a WAVE of colourings at once in a forked process pool. The
+    # wave keeps the free-wins-first heuristic (most empty-avail points first).
+    global _CV_CTX
+    _CV_CTX = (obj, pool, AVn, HVn, cols, [tuple(e) for e in (batch or [])], PP, strong)
+    import multiprocessing as mp
+    WAVE = min(12, mechanism.WORKERS)
+    with mp.get_context("fork").Pool(processes=WAVE) as px:
+        while queue:
+            nfree = (AVn[queue] == 0).sum(axis=1)
+            wave = [queue[int(i)] for i in np.argsort(-nfree, kind="stable")[:WAVE]]
+            added_wave: list[int] = []
+            for t, kind, payload in px.map(_cover_kill_one, wave):
+                if kind == "kill":
+                    added_wave += [p for p in payload
+                                   if p not in set(halo) and p not in set(added_wave)]
+                else:
+                    stall.append(t)
+                    stall_kind[t] = payload
+                    what = ("survives the WHOLE pool" if payload == "survives-whole"
+                            else f"DEFERRED ({payload}; killable-or-undecided, never 'survives')")
+                    log(f"[cover] colouring {t}: {what} — stalled ({len(stall)})")
+            queue = [q for q in queue if q not in set(stall)]
+            if added_wave:
+                halo += added_wave
+                for q, k in px.map(_cover_recheck_one, [(q, halo) for q in queue], chunksize=32):
+                    covered[q] = k
+                queue = [q for q in queue if not covered[q]]
+                log(f"[cover] wave +{len(added_wave)} pts (halo {len(halo)}): covered "
+                    f"{int(covered.sum())}/{len(cols)}, queue {len(queue)}, stall {len(stall)} "
+                    f"[{time.time()-t0:.0f}s]", flush=True)
+            _save(state_path, pool, halo, stall)
     live = [(AVn[t], HVn[t]) for t in range(len(cols)) if t not in set(stall)]
     halo2 = _shrink_halo(pool, halo, live, log)
     _save(state_path, pool, halo2, stall)
