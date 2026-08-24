@@ -370,6 +370,21 @@ Desktop (32 cores, 125 GB). Measured costs the shape already leans on: enumerati
 colourings); single-colouring ddmin minutes. Phase 1 re-measures the sweep cost on a 500-colouring
 sample before phase 3 commits its schedule.
 
+## §R7. Predictions scored (2026-08-24, at the close)
+
+| P | registered | verdict |
+|---|---|---|
+| P1 | \|S₂₉\| exact ≤ 30,000, complete in 12 h (prior 0.6) | **MISSED on size** — 51,350, exact; hours once the cube engine landed. The 30k was a cost heuristic; the soundness half (exactness) held. |
+| P2a | depth-1 kills ≥ 40 % (prior 0.5) | **MET ×2.4** — 97.7 %. |
+| P2b | depth-2r cumulative ≥ 80 % (prior 0.5) | **MET** — 99.2 %. |
+| P3 | one certified commit ≥ the 12-edge sub-batch (prior 0.7) | **MET at 19**, then again at 24. |
+| P4 | stalls exist (prior 0.6; falsifier = jackpot) | **MET in substance** — it-1's kept ten, it-2's 277 width-shaped stalls. Scope note: the registered "depth-3 beam" was never run — the batch architecture superseded the beam design, and the stalls are measured against the depth-1/depth-2r pools plus the hitting keeps. The jackpot clause never armed. |
+| P5 | all radicands in H's 59-list (prior 0.4; "count either way") | **REFUTED in strict form, exactly as its own clause anticipated** — 727/794 committed points carry depth-1-list radicands (371 by construction, 356 numerically), **67 (all depth ≥ 2) adjoin new roots, concentrated on a handful of recurring values**. Flag: the exact re-derived catalogue holds 60 VALUES vs M49's "59 extensions" — a square-factor collapse is plausible and unresolved. |
+| P6 | next floor's list ≤ 30,000 (prior 0.5; failure ⇒ recursion stops) | **MISSED as stated** — 45,365 — **and the failure clause did not fire**: the seed-projection architecture + engine swaps 4–6b kept it enumerable and killable. The 30k bound priced the OLD engine; the finding is that the cost model, not the rigidity, was the binding constraint. |
+| P7 | close cheat count ≤ 400 (prior 0.6) | **MISSED BY THREE** — 403. (The core probe says iteration 3 sails past it; the registered statement is about THIS close, and it reads 403.) |
+
+Tally: four met (one in substance with its scope named), four missed/refuted — every miss with its measurement, none rescoped.
+
 ## §S. CLOSING DRAFT (2026-08-22, written while iteration 2's corrected profile runs)
 
 **What is DONE and certified:**
