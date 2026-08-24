@@ -1119,7 +1119,13 @@ one longer solver run from it: the batch loop's growth is the kill mechanism, me
 carried: per-edge verdicts (removals still compose only sequentially — the batch frame's job);
 "FALLS" licenses a certified commit, it is not one; the 51 unknowns go to a long-cap re-ask
 (never folded). |S_e| runs 55–500 vs the seed's 2–19 — the 43 removals freed colourings; the
-rigidity now lives in the composed object, not the bare seed.
+rigidity now lives in the composed object, not the bare seed. **The long-cap re-ask (7,200 s,
+4.0 h wall): 2 of 51 decided — both killed, on (126,203) — and 49 remain unknown**: these are
+genuinely hard whole-pool SAT instances, the width genre again, not budget noise. The final
+table: FIVE clean falls, SIX near-falls at 0 provable survivors / 49 undecided; no verdict
+folded. (Iteration 3 would attack these colourings with subset kills in the cover, where
+whole-pool satisfiability is not the required primitive — the undecided asks do not block the
+loop.)
 
 **The iteration-3 floor census (403 asks, 0 unknown, 378 s): floor 36 → 17.** Eleven of the
 kept twelve remain essential-alone; **(132,134) dropped out** — the free minimizer's swap

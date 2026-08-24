@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M49, 2026-08-18.**
+**Last updated: M50, 2026-08-24.**
 
 ### Where the problem stands
 
@@ -742,6 +742,36 @@ reduced object, five refusers are one or two colourings short of a depth-two kil
 it entirely: the named frontier of the dial. The four-colour calibration object, by contrast, has > 20,000 colourings per
 refuser — rigidity is what makes the engine cheap, and the seed has it.
 
+M50 turned the sequential descent into a BATCH loop, and the loop compounds. The frame: design
+ONE unit halo against the WHOLE batch's separating-colouring list, so removals compose by
+construction — the M49 order problem designed out. Two certified batch commits landed: nineteen
+cheats in one 476-point halo, then twenty-four more in a 318-point halo on the grown object —
+**the composed object holds 1,008 points with 403 of the seed's 446 distance-2 edges remaining:
+43 removed, three times M49's entire sequential campaign**. The kernel piece is the engine's
+completeness licence (`PartnerLattice.lean`: a point at unit distance from two distinct points
+is a glue point or its mirror — depth-one candidate spaces are finite and enumerable, in any
+field). The close's measurement is the compounding itself: **the CORE PROBE re-asked every kept
+refuser edge against the grown object's own 394,604-point partner lattice, and five fall
+outright while the six others hold zero provably-surviving colourings** (2,402 classes, 2,351
+killed, 49 undecided at two-hour caps, not one survivor) — growth alone is the kill mechanism,
+and M49's "refusers in any field" verdict was a statement about the SEED's lattice, not the
+descent's. What resists is named: 277 batch colourings whose kills are WIDTH-shaped (thousands
+of weak points cooperating; capped minimizations land at 2,551–14,960 points and keep
+descending) — G10's distributed forcing in miniature, the priced mandate for depth 2. The
+session's second harvest came from a re-run of the pre-M51 modeling at full depth: the
+**weighted ladder** (class-uniform agreement masses on the held lists — the support ladder's
+never-climbed sibling) found the seed stage carries **148 ABSOLUTE virtual edges at distances 3
+and 4** (the six d = 4 ones are the diameters of the radius-2 circle about the hub v0 — forced
+central anti-symmetry, M30's genre sign-flipped) and **412 absolute never-3-distinct triangles
+in five equilateral/isoceles families on {√3, √7, 2√3, √13}** — the fabric pigeonhole localized
+to single triangles, all seed-native, verified COMPLETE by a decorrelated adversarial agent and
+our own instrument independently; and the **spare-colour lemma** (a (k−1)-colourable graph
+admits no pair compulsion at k — so every virtual-edge gadget at five colours is itself
+≥ 5-chromatic, and the descent's χ(unit-part) monitor must cross 4 → 5 before the end, minting
+a new 5-chromatic witness as a by-product) is adopted as an M51 kernel opener. Three instrument
+incidents were caught by controls and recorded; predictions scored four met, four missed with
+their measurements — P7 missed by exactly three cheats (403 vs ≤ 400).
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -802,6 +832,8 @@ refuser — rigidity is what makes the engine cheap, and the seed has it.
 | 43 | **The arity floor of de Grey's witness, bracketed to one step — and the pigeonhole's disjunction read correctly at last** (M48). **Kernel** (`Arity.lean` §Transport, `Homogeneous.lean`, `Instances/HexShell.lean`, axioms exactly the standard three): the **ladder theorem** — `arityFloor_le_of_embedding : (f : G ↪g G') → arityFloor G' k ≤ arityFloor G k`, the BIGGER graph on the LEFT, so a compulsion survives being embedded in more material and a closure measurement is a dial with a theorem behind it — carried by three transport lemmas that want three different hypotheses (`Realizes.comap` needs only a homomorphism; `PartialColoring.map` and `Compels.map` need the embedding's *reflection* of adjacency), which is what makes the induced-subgraph condition load-bearing rather than decorative; **the plane's homogeneity** (`exists_isometry_map_pair`, `forced_pair_of_forced`, `Separated.plane`) — one forced pair at a distance is EVERY pair at that distance, via `z ↦ az + b` with `a = (y−x)/(y₀−x₀)`, and with no `x₀ ≠ y₀` side condition because at zero distance the hypothesis refutes itself; and **the correction to this project's own record** (`not_colorable_five_of_forced_pairs`, `six_le_chromaticNumber_plane_of_forced_pairs`): `hexShellPairs` is six √3-pairs PLUS three diameters and `hexShell_plane5` is disjunctive over both, so **χ(ℝ²) ≥ 6 needs a virtual edge at √3 AND one at distance 2** — never one at either — proved from both sides by two explicit proper 5-colourings of the seven-point carrier, one separating all six √3-pairs and one all three diameters, so neither class is forced alone and the conjunction is not an artifact of phrasing. **Measured** (desktop, every control green, both stages re-derived from construction with their edge counts as controls): on de Grey's 1581 at `k = 5` — arity 2, **0 over all 1,248,990 pairs** (P1, reproducing `build/m30-rigidity-1581-k5.json`; every pair observed *both* ways, so nothing reached a solver); **arity 3, COMPLETE — 0 compulsions in 3,286,925,350 questions** (657,385,070 triples × 5 patterns; 1,023,629 screen survivors in 46 s → 279 after fresh colourings → 263 solved, all satisfiable; 0 undecided; 904.7 s); **arity 4 restricted to vertex NEIGHBOURHOODS, COMPLETE — 0 compulsions in 25,782,585 questions** (1,718,839 deduplicated 4-subsets × 15 patterns; 659 solved; 0 undecided; 691.9 s). Hence **`arityFloor(1581, k = 5) ∈ {4, 5}` exactly** — 0 and 1 by `two_le_arityFloor`, 2 and 3 by complete sweep, ≤ 5 by `arityFloor_le_of_degree` — and since every arity-5 compulsion that theorem constructs lives in a neighbourhood whose 4-subsets are now all known free, **those compulsions are 1-minimal**: M45's designed-but-unrun fan-shrink bracket, delivered as a corollary. **The ladder** carried the identical questions to the gen-1 half-spindle closure (24,065 vertices, 123,134 chords; the witness verified INDUCED inside it at 7,877 edges, which *is* the theorem's hypothesis): the witness's own 3,286,925,350 triple-patterns compel nothing there either (screen 3,066,206 → 384 in five filter rounds, 332 solved, 0 undecided at cap 300 s, 5,257.6 s), and gen-1's own **73,256** target-class pairs (52,616 at exactly √3, 20,640 at exactly 2 — an object never swept at all before) hold **no virtual edge**. Because the floor can only DROP along that embedding, the flat reading is *an inequality measured tight*. The engine that made 3.3 billion questions a 46-second bit sweep: **pair colour-agreement masks** (`M[u,v]` = the bitmask of harvested colourings where `u` and `v` agree; every arity-`m` pattern's observed set is a boolean combination of the `C(m,2)` masks on its tuple) plus **observe-then-confirm** (one colouring exhibits a realized pattern for every tuple at once; every model found returns to the pool). Five of six registered predictions met; **P6's second half missed in a direction that is provably about the SAMPLER**, since an induced subgraph's restricted colourings are a subset of its own — the closure's pool exhibits ~17M witness-patterns the witness's own pool of equal size never wore, all of them achievable on the witness (`--decay`: 20,220,080 vs 3,066,206 at `H = 1024`). Two instrument bugs found mid-campaign would each have manufactured a false negative: `harvest` re-seeding from zero (so "filter against fresh colourings" re-tested the same ones and killed 0 of 1,023,629, where real fresh seeds cut it to 279), and a planted norm-constant assertion that **fired for real** — the closure builder returns lists where the witness builder returns tuples, which would have left the √3 and distance-2 classes EMPTY while the unit-edge control still passed. | `Proofs/HadwigerNelson/{Arity,Homogeneous}.lean`, `Instances/{HexShell,AritySpec}.lean`, `tools/{arity,m48}.py`, `build/m48-{arity,ladder}.json`, `plans/M48-from-below-arity.md` §R | M48 |
 
 | 44 | **The two-distance dial: μ defined, its ends in the kernel, and the first certified descents** (M49). **Kernel** (`DistanceGraph.lean`, `OneDefect.lean`, `Homogeneous.lean` generalized, `PairDist.lean`, `Instances/{OneDefectSpec,HexShell}.lean`; axioms exactly the standard three): `distanceGraph V D` with `unitDistance_eq_distanceGraph_singleton`, `chromaticNumber_unitDistance_le_distanceGraph`, the edge-list reduction `add_one_le_chromaticNumber_distanceGraph_edgeList` (any finite non-k-colourable graph drawn with edges in `D`, `0 ∉ D`); relation-generic homogeneity `transport_pair` with `Separated.planeIn`/`Forces.planeIn` (one forced pair at a distance is every pair, in any distance graph); **`not_colorable_of_forced_equal`** — the spindle theorem, `k`-generic, for ANY `d ≥ 1/2` (a `d`–`d`–`1` triangle exists by `Glue.sphere_inter_sphere`; converse `not_exists_dist_eq_and_dist_eq_one_of_lt_half` — the `hd` hypothesis is exact); **`add_one_le_chromaticNumber_unitDistance_of_one_defect`** (a `(k+1)`-chromatic drawn graph with ONE non-unit edge at distance ≥ ½ gives χ ≥ k+1); `forces_of_gadget` (a `Gadget` whose admitted patterns all agree on two ports is a `Forces` proof); spec: `four_le_chromaticNumber_plane_of_rhombus` (the Moser bound from the rhombus alone, both entry points, `d < 1/2` red); free consumer **`seven_le_chromaticNumber_hexShell_distances`** — χ(ℝ²;{1,√3,2}) ≥ 7 as a theorem about `distanceGraph`. **Measured** (desktop, `tools/twodist.py`, every model validated in-process, every removal triple-checked): (a) Exoo–Ismailescu's seed re-derived exactly — T 57, V 205, G 966+423, H 214/1004+446, K 426/2009+892, |AB| = 5, |BB′| = 1, exactly 18/35 colourings up to palette with `A = B` in all 35 — and the certificate priced (three cubes 24.0/22.9/19.8 M hints trimmed; the 173-vertex core WORSE at 74 M; six-port design ~78 M; configs −26 %; proof-guided shrink a fixed point) and deferred; (b) **Parts's G31 rebuilt exactly** (G16 an induced {1,φ}-subgraph of the pentagon Minkowski sum G126 with 350+350 edges — his counts planted; the two-copy rotation's unit edge an exact identity, other cross pairs off by ≥ 0.0132) and **edge-critical to the last edge**: μ(φ) over its subgraphs = 56/56 (`tools/parts_phi.py`); (c) **phase 2 as a sandwich `29 ≤ μ_H ≤ 252`** — 29 distance-2 edges of H are essential ALONE (single-deletion census, 446 asks, 0 unknown, reproduced twice: an edge whose lone deletion admits a separating colouring lies in every forcing subset), 252 the parallel-ddmin survivor count with 114 of them individually deletable at 960 s (`--seed-edges-census`); (d) **the k = 4 calibration**: 37/40 essential (two orders agree); the seam pool removed **34 of 37** distance-2 edges in the scan's own order, all certified (2-bit re-encode UNSAT, halos 1-minimal, 527 witnesses over 527 halo vertices, halo sizes 5,0,3,1,0,49,0,21,16,9,8,10,5,8,0,4,13,6,2,56,2,0,1,45,37,18,17,21,6,34,64,29,18,19), 122 → 649 vertices; stall at μ_upper = 3 with the survivors `(15,57)`, `(112,118)`, `(113,119)` refusing seam AND up one-generation pools (and `(15,57)` a 27,690-point two-generation seam pool); the unit part alone still 4-colourable; **the two-generation seam-then-up pool (~64,000 points) turns all three UNSAT** — their certified commits did not finish (a 28,000-point shrink at four colours ran 9.5 h and was stopped; the three UNSAT probes stand as single-encoding probes, and the four-colour object is not rigid enough — > 20,000 colourings — for the lookup engine that finished the job at five). (e) **the k = 5 descent** (`--descend5-lb`): the registered full-pool run at 180 s undecidable (seam 243 unknown/9 refused; up 219/33) and replaced by the lower-bound-targeted radius ladder at 900 s: seam r = 1.5 (153–424 points) **8 of 29 UNSAT**, seam r = 3 (592–1,223) 4 more, seam whole (1,386–1,677) 0/17, up r = 1.5/3/whole (235–2,760) 0/17 each — **every ask decided, zero unknown**; **twelve certified removals for seventeen points** (halos 1,1,1,2,0,0,1,1,1,9,0,0; UNSAT 4.8–9.6 s each; 3-bit re-encode UNSAT; 1-minimal; every survivor witnessed), object 214 → 231, distance-2 edges 446 → 434; the mechanism measured on `(76,78)`: the kill point at unit distance from endpoint 78 with 9 unit neighbours whose neighbourhood is forced rainbow in every separating colouring (forbidding any colour on it UNSAT, control SAT). (f) **the kill engine** (`tools/killengine.py`, §R8–§R9): depth-one partner census (9,485 points, 59 radicands, 51 with ≥ 5 seed neighbours — the complete single-point kill space in any field); exact separating-colouring lists for all 17 refusers (2–19 each); lookup screens with the solver census as a green cross-check (0 single-point kills, 867 asks); **whole-set tests: depth one exhausted for all 17 in every field; restricted depth two kills 7**; seven 1-minimal gadgets by lookup ddmin (122/267/254/147/87/225/101 points), ALL certified on `H − e` with exact sympy geometry (labelled 200-digit fallback where simplify times out) and two encodings; **kills are context-dependent** — all nineteen at once is SAT — and sequential commits land two of the seven (`(56,168)`, `(56,78)`), so the composed descent object holds **14 of 29 lower-bound edges removed** (543 points, 432 distance-2 edges). Predictions: P4a/P5/P8 met, P4b refuted, P4c met at depth two (probes), P2 undecided, P3 vacuous, P6 missed (0/17 at every radius, all decided), P7 refuted literally, P1 missed. Instruments banked: `tools/twodist.py` (census-first sandwich, parallel ddmin, `descend_parallel`, radius-laddered `phase_descend5_lb` with exact resume, ddmin halo shrink with a robust parallel necessity census), `tools/hitset.py` (implicit-hitting-set exact μ engine — right for ≤ ~60 columns, measured wrong for 446), `tools/parts_phi.py`, `tools/m49_rederive.py`. | `Proofs/HadwigerNelson/{DistanceGraph,OneDefect,Homogeneous,PairDist}.lean`, `Instances/{OneDefectSpec,HexShell}.lean`, `tools/{twodist,hitset,parts_phi,m49_rederive}.py`, `build/m49-*.json`, `plans/M49-two-distance-descent.md` §R | M49 |
+
+| 45 | **The batch descent: composition by construction, and the lattice that compounds** (M50). **Kernel** (`PartnerLattice.lean`, axioms exactly the standard three): `Glue.eq_gluePoint_of_unit_pair` — a point at unit distance from two DISTINCT points is the glue point of their unit circles or its mirror, only `x ≠ y` assumed (both annulus bounds derived from the witness) — and `Glue.finite_two_unit_neighbors` — the depth-one candidate space over any finite set is finite: the kill engine's "single-point kills live in the partner lattice, in any field" as theorems. **Measured** (desktop; `tools/batchkill.py` — provenance objects, entropy-split cube enumeration, seed-projection blocking, tiered whole-pool feasibility, wave-parallel cover, process-parallel shrink, per-verdict checkpoints; SIX engine swaps mid-campaign, each measured before changed and regression-gated after, 383/383 twice): **\|S₂₉\| = 51,350 exact** (entropy-guided cubes, 24 min); **two certified batch commits** — 19 cheats via a 465+11-point halo (2,954 edges verified, one-hot + 3-bit UNSAT), then on the corrected iteration-2 chain (45,365 classes; profile 45,216/46/103) **24 more via a 318-point halo** (2,455 edges, both encodings UNSAT, 620 s) — **object 1,008 points / 403 cheats, 43 of 446 removed**; floors 29 → 36 → 17 with (132,134) falling to the halo; **the core probe** — per kept refuser edge, S_e exact on seed classes vs the grown 394,604-point lattice: **five FALL clean, six near-fall at ZERO provable survivors** (2,402 classes, 2,351 killed, 49 undecided at 7,200-s caps, never folded) — growth compounds; **277 width-shaped stalls** (strong-rung SAT, capped ddmins land 2,551–14,960 and still descending) price the depth-2 escalation; **P5 field census**: 727/794 committed points carry depth-1-catalogue radicands, 67 (all depth ≥ 2) adjoin new roots concentrated on a handful of values. **The weighted-ladder scan** (`tools/m50_skewscan.py`, palette-invariant functionals on the held lists; controls reproduce §R5 exactly; completed cast-free by a decorrelated adversarial agent + our tool independently): **148 absolute virtual edges at d ∈ {3,4}** (the six d = 4 = diameters through v0: forced central ANTI-symmetry at five colours), **412 absolute never-3-distinct triangles** in five families on {√3,√7,2√3,√13} (the "16" first reported was a cast artifact — G21 on a positive count), distance-class polarization seed-native; **the spare-colour lemma** ((k−1)-colourable ⟹ no pair compulsion at k ⟹ every 5-colour virtual-edge gadget is ≥ 5-chromatic; the χ(unit-part) phase monitor — still 4-colourable at 1,008) adopted as an M51 kernel opener; the diet meter prototyped (cheat supports 166/176/191, common core 78). Three incidents (stage under-accumulation; the deferral cascade's mislabelled cause; the free-minimizer swap) all caught by always-run-the-ask controls. Predictions: P2a/P2b/P3 met, P4 met-in-substance, P1/P6 missed on the 30k cost heuristic, P5 refuted-in-strict-form as registered, P7 missed by three. | `Proofs/HadwigerNelson/PartnerLattice.lean`, `tools/{batchkill,m50_skewscan}.py`, `build/m50-*.json`, `plans/M50-batch-descent.md` §R0–§R7, §Sⁱᵛ, §Sⁱᵛ-adv | M50 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -923,24 +955,32 @@ points, the mechanism a coverage compulsion at a point outside the object. The s
 refuse every one-generation pool in both fields. The re-rank below follows from that: the descent is
 now the from-below instrument, and its next turn is registered.)*
 
-1. **M50 — the batch descent** (`plans/M50-batch-descent.md`, full stub) — **RECOMMENDED NEXT,
-   chosen at the close discussion (2026-08-19)**: design ONE halo against the WHOLE batch's
-   separating-colouring list (S_B measured enumerable: 684/1,010/≥5,366 for 12/14/29 edges), so
-   composition is by construction and the M49 order problem is designed out; census → enumerate →
-   design (depth-laddered engine, cKDTree, pruned depth-3 beam) → certify → recurse; stalls are
-   studied (the holdouts' surviving colourings), kills get a field census; the depth-one
-   completeness corollary goes to the kernel. Jackpot clause verbatim. The §R7 item list below is
-   subsumed by the stub.
-2. **The two-distance descent, second turn** (`plans/M49-two-distance-descent.md` §R7 stub) —
-   subsumed into M50's stub; kept for the item list. M49 built the instrument and turned it once; the registered next turn is
-   (i) the seventeen refusing lower-bound edges against DEEPER pools (two generations; the k = 4
-   calibration needed depth two exactly where depth one stalled), (ii) the descent on ALL essential
-   edges rather than the twenty-nine (the object grew by seventeen points for twelve edges — the
-   full μ curve is the χ ≥ 6 dial itself), (iii) halos DESIGNED from the measured mechanism (a seam
-   point whose unit neighbourhood in the seed is forced rainbow — the coverage meter finds these
-   directly) instead of enumerated pools, and (iv) the same descent on Parts's {1,φ} object and, if
-   its data ever surfaces, De Neve's {1,3}. Jackpot clause verbatim: any μ ≤ 1 at five colours is
-   HALT AND VERIFY.
+*(M50 CLOSED 2026-08-24 — desktop, three days, six engine swaps and three control-caught
+incidents recorded. The batch loop works and COMPOUNDS: ledger row 45, G33 minted; the pre-M51
+modeling ran twice (§Sʹ–§Sʹʹʹ, then §Sⁱᵛ+§Sⁱᵛ-adv at full depth with a decorrelated adversarial
+agent). The ranking below is the close's recommendation — the core probe CHANGED the landscape
+after §Sʹʹʹ's adoption, so the fork is presented explicitly; Kooshi picks.)*
+
+1. **M51 — the descent's iteration 3+ (the compounding loop, continued)** — **RECOMMENDED**:
+   the core probe measured that growth alone re-opens every refuser (five falls, six at zero
+   provable survivors), the it-3 substrate is already priced (394,604-point pool, 1.2 GB, built
+   in 15 min; floor 17; |S| enumerable by the seed-projection engine), and P7's miss by three
+   flips in the first commit. Phases: iteration 3 at depth 1 (likely removes most of the floor),
+   the width-stalls to restricted depth 2 (the 87–267-point-gadget cost regime, measured at M49),
+   the χ(unit-part) phase monitor per commit (the 4 → 5 crossing MINTS a new 5-chromatic
+   unit-distance witness — an intermediate certified deliverable before any 6-result), and the
+   per-iteration weighted-ladder scan (the polarization table as a standing column). Jackpot
+   clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
+2. **The nominated-pairs gadget question** (§Sʹʹʹ's adopted question, now the STALL-RESPONSE
+   plan): minimal in-context forced-distinct gadgets for the (4,A)-class at 2 and the √3/√7
+   cross-pairs, the in-context→context-free gradient measured by the diet meter (prototyped:
+   supports 166/176/191 of 417, common core 78 — broad, so context-free is a long march), with
+   the ~148 absolute virtual edges and 412 pigeonhole triangles as the calibration corpus.
+   Kernel openers, cheap and milestone-independent: the **spare-colour lemma** (an afternoon;
+   the gadget hunt's hard floor), the field-agnostic **compactness bridge** (40–80 lines), the
+   **absorbing lemma** (one-liner), the **entropy floor** (generator screen). The registered
+   Parts-{1,φ} skewscan replication runs before the nominated-distances reading may inform any
+   design.
 3. **The from-below gadget hunt** (`plans/M44-from-below-gadget.md`) — the standing frame, and
    promoted to the top on M48's strength rather than by default. It is still the only route to
    χ(ℝ²) ≥ 6, and it is now the route with the sharpest possible target, because two things landed
@@ -1633,6 +1673,27 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   hundreds. Falsifiers: a deeper pool that removes NONE of the seventeen (then the seed's forcing has
   an irreducible distance-2 core at every depth probed, and μ_H sits at 17 + the slack); a coverage
   meter that finds no forced-rainbow seam point for any refuser.*
+* **G33 — The batch law, and the lattice that compounds.** (M50, 2026-08-24.) Designing ONE
+  halo against the WHOLE batch's separating-colouring list makes removals compose BY
+  CONSTRUCTION — measured twice (19 then 24 cheats per certified commit, against M49's
+  fourteen across a whole sequential campaign, where kills were context-dependent and
+  composition an afterthought). And the deeper half: **the committed material's own partner
+  lattice grows faster than the rigidity it must break** — the core probe re-asked every kept
+  refuser edge against the grown object's 394,604-point depth-1 lattice and found five falling
+  outright and six holding zero provably-surviving colourings (49 capped asks the only gap),
+  where the SAME edges refused every pool of the smaller object. M49's "refuses depth one in
+  any field" was a statement about the seed's lattice; growth alone re-opens it.
+  **[measured: two certified commits + the core probe; the kernel licence is
+  `PartnerLattice.lean`]** *Reading on top, falsifiable: the depth-1 descent is
+  SELF-ACCELERATING — each commit's points spawn the partners that kill the next batch — until
+  the width regime (the 277 stalls whose kills are thousands-of-points-wide) becomes the
+  binding constraint; the recursion's cost curve is then depth-2's, not depth-1's. Falsifiers:
+  an iteration whose grown lattice kills strictly FEWER refuser colourings than the previous
+  one (the curve bending down); or a width-stall population that GROWS as a fraction of the
+  batch across iterations (the width regime arriving early). Composes with G32 (the dial) and
+  G25 (the recursion's cost ladder); the spare-colour lemma bounds what the loop can ever
+  quietly skip — the unit part must cross 4 → 5 before the end, so the loop mints a 5-chromatic
+  witness en route or fails visibly.*
 * **G31 — The witness's rigidity at its top rung is exactly its own fan, and there is
   nothing underneath it.** (M48, 2026-08-15; a theorem plus two complete sweeps, no
   induction anywhere.) `arityFloor_le_of_degree` guarantees de Grey's 1581 carries a
