@@ -1087,6 +1087,25 @@ The iteration-3 refuser core is the kept twelve, concentrated on A's and B's nei
 blind centres, and the quadrilateral; the 277 width-stalls are the priced argument that
 iteration 3's marginal edges need the depth-2 pool.
 
+**THE CORE PROBE (§S item 2) — ANSWERED (2026-08-23/24): the growth compounds, and no refuser
+provably survives the grown lattice.** Per kept floor edge `e`: S_e = the separating colourings
+of (1,008-object − removed − {e}) enumerated EXACTLY on seed classes (stage fingerprint checked
+per edge — the incident-2 caution in code), then whole-pool verdicts against the grown depth-1
+partner lattice (394,604 points, fp 5481c3fae64e770d; built serial in 922 s at 1.2 GB peak —
+the it-2 33 GB fear did not reproduce). The table (|S_e| / killed / survive / unknown):
+(0,20) 348/348/0/0 **FALLS**; (4,A) 317/295/0/22 near-fall; (43,A) 500/497/0/3 near-fall;
+(58,213) 65/65/0/0 **FALLS**; (71,107) 85/78/0/7 near-fall; (98,213) 55/55/0/0 **FALLS**;
+(115,212) 134/134/0/0 **FALLS**; (118,212) 118/118/0/0 **FALLS**; (126,203) 139/131/0/8
+near-fall; (B,210) 290/287/0/3 near-fall; (B,211) 351/343/0/8 near-fall. **Five clean falls
+(including M49 hold-outs (58,213) and (71,107)'s cluster-mates), six cap-limited near-falls
+with ZERO provable survivors — 2,402 classes, 2,351 killed, 51 capped, 0 surviving.** Every
+one of M49's "refusers in any field at depth 1" is now, on the grown object, either killed or
+one longer solver run from it: the batch loop's growth is the kill mechanism, measured. Caveats
+carried: per-edge verdicts (removals still compose only sequentially — the batch frame's job);
+"FALLS" licenses a certified commit, it is not one; the 51 unknowns go to a long-cap re-ask
+(never folded). |S_e| runs 55–500 vs the seed's 2–19 — the 43 removals freed colourings; the
+rigidity now lives in the composed object, not the bare seed.
+
 **The iteration-3 floor census (403 asks, 0 unknown, 378 s): floor 36 → 17.** Eleven of the
 kept twelve remain essential-alone; **(132,134) dropped out** — the free minimizer's swap
 candidate was indeed the weakest kept edge, and the new halo now covers its job. Six edges
