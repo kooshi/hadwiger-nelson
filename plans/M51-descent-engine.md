@@ -526,3 +526,60 @@ belongs** — the exact-geometry work order (the certify phase's 45 s/edge sympy
 wall and the numeric-250 label debt), benchmarked by the engineer against the bespoke
 quadratic-tower-arithmetic alternative on real provenance chains; it is not a candidate for the
 enumeration, whose costs are SAT- and orchestration-shaped.
+
+## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-25, written at Kooshi's compaction call)
+
+**Read this first in a fresh session.** WORKFLOW position: M51 step 7 (implementation). Phases
+0k / 0a / 1w are CLOSED in §R above (kernel sitting landed + audited 539 clean; pool cache =
+fixture format live; widening closed by measurement). Incident 4 (§R-INC4) is fixed, recorded,
+and its Frontier correction committed. **Iteration 3's enumeration is DONE AND EXACT:
+|S| = 46,350 distinct classes** (`build/m50-S-S29-depth2r-it2v2-depth1-it2v2.jsonl`, stage fp
+a03ba8aefd06422d, every leaf closed by UNSAT; the fixed+swapped engine finished in 31 min what
+the broken one churned overnight; the swap's control reproduced the seed's 51,350 exactly
+first — both transcripts live back to back in `build/m51-enum-it3-v2.log`, so READ THE END, a
+mid-file tail cost this session a false alarm).
+
+**RUNNING at the save: the it-3 profile** — launched
+`setsid python3 -u tools/batchkill.py --profile --pool depth1 --object S29-depth2r-it2v2-depth1`,
+log `build/m51-profile-it3.log`, checkpoint
+`build/m50-profile-ck-S29-depth2r-it2v2-depth1-it2v2-depth1.jsonl` (per-verdict, resume-exact;
+duplicate rows fold by the verdict JOIN — a contradiction refuses). Pool loads from cache
+(394,604 pts, fp 5481c3fae64e770d). Waiters: `pgrep -f "^python3 -u tools/batchkill"`; stop
+with `kill -- -PGID`. The jobs ledger is `build/m51-jobs.txt`. One heavy job at a time.
+
+**The remaining it-3 chain when the profile lands (commands exist; tag/label =
+`S29-depth2r-it2v2-depth1-it2v2`, profile label appends `-depth1`):**
+1. `--hitting --deepest S29-depth2r-it2v2-depth1-it2v2-depth1 --object S29-depth2r-it2v2-depth1`
+   (floor-17 candidates from the recurse-census row; jackpot clause armed — μ ≤ 1 HALTS).
+2. `--design --pool depth1 --object S29-depth2r-it2v2-depth1` (delete any stale
+   `build/m50-cover-*` for this tag first — the M50 gotcha).
+3. `--commit --pool depth1 --object S29-depth2r-it2v2-depth1` (triple; if refused, INVESTIGATE).
+4. Per-commit columns: χ(unit) via `python3 tools/m50_skewscan.py --unitchi --object <new>`
+   (crossing ⟹ HALT-AND-CERTIFY); floor census via `--recurse --label <new-object-label>`;
+   polarization `--scan`; field census. §R numbers per phase. The GAUGE (4-colouring count of
+   the unit part) and `build/m51-columns.json` are NOT yet implemented — pending items.
+5. Width-stall probes (§B8: ddmin-overlap + smoothness/compression) fire at the FIRST it-3
+   stall batch. it-4 pool: `_build_pool` caches by object fingerprint automatically.
+
+**WO-1 (the ask kernel) is fixture-ready and NOT yet issued.** Bundle pieces on disk: it-2
+object `build/m50-object-S29-depth2r.json`; it-2 list `build/m50-S-S29-depth2r-it2v2.jsonl`
+(45,365 LINES = 24,810 distinct — incident 4; the checkpoint is LINE-indexed so replay is over
+lines); it-2 checkpoint `build/m50-profile-ck-S29-depth2r-it2v2-depth1.jsonl` (header
+`# 45365 0395d666c3eb9b3d`); it-2 pool cache `build/m51-pool-7294df4a74c714f5-depth1.{json,npz}`
+(175,166 pts, fp 0395d666c3eb9b3d — reproduces the checkpoint's pool fp). To issue: write
+`plans/WO-1-*.md` in `~/source/descent-engine` (acceptance = verdict partial-order replay +
+≥ 30×, SPEC v0.3.1 pinned by hash; the engineer's WO-0 record + ARCHITECTURE.md carry the
+inherited decisions), then **apply the phase-boundary protocol**: a PLANNING ferrous-engineer
+session first (subplan → my approval spoken → it persists and marks approved), then a FRESH
+session implements. Spawn hygiene: subagent cwd inherits my shell's momentary cwd — absolute
+paths rule. The peer-delegation skill governs every message.
+
+**Engine-repo state:** WO-0 ACCEPTED (`f82d7df`), SPEC v0.3.1 (canonical `stage_fp` =
+`stage_fp_key` in batchkill.py — pinned example: key('7f7aa18bcce0b917', [(4,205),(0,20)],
+'5481c3fae64e770d', '0395d666c3eb9b3d') = 2d481257dbf61751); the enumerator is WO-2 scope
+(§R-rust; acceptance = class-set equality vs the seed 51,350 + a completed stage; `_brk_full`
+bit-compatibility is the load-bearing export); cas-rs audition scoped to the exact-geometry WO.
+
+**Riding items not yet done:** K4 entropy-floor sitting; the Parts-{1,φ} skewscan replication
+(registered, NOT launched); `--status` next-command upgrade; core-probe distinct-class recount
+(bookkeeping, §R-INC4); predictions P1-P8 scored at close.
