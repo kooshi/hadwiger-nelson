@@ -401,3 +401,26 @@ campaign phases. Costs tracked per work order (Opus engineer turns are billed).
    in both engines), the gauge column (labelled exact/sampled), nested-filter reproductions.
    ASSUME (named): CaDiCaL as untrusted oracle (backed by certification asks); float geometry at
    engine level (backed by exact certify).
+
+## §Bʹʹʹ. The experience-modeling pass (2026-08-24, fresh invocation) — the surfaces
+
+1. **Lemma API corrections.** Contrapositives named symmetrically: **`Forces.not_colorable`** /
+   **`Separated.not_colorable`** (hypotheses in signatures, not names; dot-resolution
+   disambiguates). Spec examples pin the two things a caller actually does: a literal
+   instantiation (`Forces G 5 → ¬Colorable 4`, testing `k+1 =?= 5` unification), and the K₂ RED
+   as a POSITIVE example — `Separated K₂ 3 0 1` holds by properness alone — teaching why `¬Adj`
+   is load-bearing. Docstrings carry the consumer sentences (phase monitor; M52's gadget floor).
+2. **The resuming-session surface, structural.** `--status` prints: object + fingerprint,
+   iteration, phase position, running jobs, THE NEXT COMMAND. Every background launch appends
+   its command line + log path to `build/m51-jobs.txt` (append-only). The §B7 columns are one
+   machine artifact (`build/m51-columns.json`) plus a rendered §R row per iteration. All three
+   are phase-0a scope in `batchkill.py`.
+3. **The work-order surface.** WOs live in the ENGINE repo as `plans/WO-*.md` (the ferrous
+   workflow's native milestone shape). Each carries: deliverable; SPEC version pinned by git
+   hash; acceptance tests WITH data addresses; interface freezes (product owner's); the
+   engineer's explicit decision space; report-back = ferrous house format + a machine-greppable
+   `ACCEPTANCE: pass|fail` line + measured numbers. SPEC is edited only by the product owner;
+   amendment requests ride the engineer's reports.
+4. **Kooshi's surface.** One dashboard row per iteration (removals, cheats left, floor, |S|,
+   wall, width-stall %, gauge, χ(unit)); crossing/jackpot/hard-stall are HALT-AND-REPORT events,
+   never columns; the explorer artifact gains an M51 pane at close.
