@@ -168,3 +168,160 @@ measured cost curve as the finding and `plans/M52-nominated-gadgets.md` becomes 
 next — its calibration corpus and diet meter are already built. Engine regression (any swap
 whose regression set disagrees): revert first, diagnose second. The 49 hard unknowns are NOT a
 debt of this milestone; they die by subset kills or not at all.
+
+---
+
+# SUBPLAN (2026-08-24, on Kooshi's go; WORKFLOW step 3)
+
+## §B. Decisions settled at subplanning
+
+**B1. Two tracks in parallel; the descent never waits for engineering.** Track A (campaign,
+Python): iteration 3 launches on the proven M50 pipeline as soon as its pool builds. Track B
+(engineering, Rust): the `ferrous-engineer` agent builds the engine through work orders WO-0…WO-3
+with per-order acceptance; the Rust engine takes over at the first iteration AFTER it replays the
+fixture corpus verdict-exact. Alternative: the stub's original ordering (engine pass first, then
+iterate) — rejected because the core probe says iteration 3 is high-yield NOW, the engineer's
+compile cycles and the desktop's SAT hours barely contend, and iteration 3's run produces the
+freshest fixtures for the engine's own acceptance. Confidence high.
+
+**B2. Pool cache = fixture format = courier data, ONE artifact.** `batchkill.py` gains pool
+save/load: a JSON manifest (object fingerprint, pool params, counts, fingerprint) plus npz CSR
+arrays (`nbrs_seed`, `adj`, `nbrs_halo`, halo structure, coordinates, provenance). It serves as
+(i) the cache that kills the 922-s serial rebuilds (keyed by object fingerprint — the stub's
+"rebuilt ≥ 4× at M50, pure waste"), (ii) the fixture the Rust engine loads (npz is
+Rust-readable), (iii) the data half of any courier bundle. Alternative: separate cache and export
+formats — rejected: two formats are two bug surfaces and a drift pair. Confidence high.
+
+**B3. Iteration 3 runs the EXISTING profile-then-cover pipeline; the cover-first inversion lands
+in Rust only (WO-3),** gated by an equivalence regression on the it-2 corpus (final verdict sets
+must match; only the work distribution may differ — sound because a cover kill is a whole-pool
+kill by monotonicity, and the residue's whole-pool ask is exactly the old profile semantics).
+Alternative: implement the inversion in Python too — rejected: double-implementing the trickiest
+orchestration for at most one iteration's win. Confidence medium-high; flips if iteration 3's
+profile projects past two days, in which case the Python inversion is reconsidered.
+
+**B4. Batch width becomes a measured decision (re-read item 2).** Before iteration 3's design
+phase: enumerate |S| for the floor-17 batch AND for floor+k widened batches (k ∈ {5, 10}, the
+extra cheats chosen ascending by the §Sⁱᵛ floor-edge cost column). Commit width chosen from the
+measured |S| growth and profile cost; P5-width registered below. The enumeration reuses the cube
+engine; the sub-batch filter argument (M50 §Bʺ) makes the widest list serve every narrower batch.
+
+**B5. Kernel sitting (phase 0k): new leaf `Proofs/HadwigerNelson/SpareColour.lean`** — K1 both
+polarities with both contrapositives (§C), K3 as a consumer-shaped restatement (expected to be
+mostly `Forces.comap`; verify before writing new machinery), K4 the entropy floor as a STRETCH
+(statement in the skeleton; lands if the sitting allows, else carried to M52 explicitly, never
+silently). Alternative: extend `Arity.lean`/`Fan.lean` — rejected: the M11 rebuild-cascade lesson;
+a new leaf file costs nothing downstream. Confidence high.
+
+**B6. The distance-to-crossing gauge (re-read item 5).** Per commit, alongside the χ(unit) SAT
+ask: an estimate of the unit part's 4-colouring count (exact via the cube enumerator on the unit
+graph if it completes in minutes, else a labelled sample estimate). The monitor stops being
+binary; K1's contrapositive is the theorem behind the crossing event.
+
+**B7. The cost-curve dial (re-read item 1).** Standing per-iteration columns in §R: pool size and
+build time, |S|, per-phase wall clock, removals per commit, floor after, width-stall count and
+fraction, the gauge, the polarization table, the field census — plus one extrapolation line
+(next iteration's projected pool and |S|). The speed mandate is audited against this table.
+
+**B8. Curiosity probes housed (re-read items 4, 6).** At iteration 3's first stall batch: the
+width-stall ddmin OVERLAP census (do the stalls share kill mass? — if yes, one fat shared halo
+beats the depth-2 escalation) and the SMOOTHNESS probe (compression/periodicity of width-shaped
+colourings vs point-killable ones — if width colourings are smooth, they are the finite shadows
+of the closure object, joining K2/Q3). The P5 60-vs-59 radicand reconciliation is a sitting. The
+Parts-{1,φ} skewscan replication launches as a background job early in phase 1 (registered at
+M50; M51's cover design consumes no nominated-distance reading, so nothing here waits on it).
+
+**B9. The engineer's work-order ladder (product-owner side).**
+* **WO-0 — scaffold**: `ferrous-init`, crate layout, jsonl/npz readers, `--self-test` skeleton;
+  doubles as the live test of mid-run messaging. Accept on the ferrous gate.
+* **WO-1 — the ask kernel**: masks/peel/greedy/tier logic + subset `feasible`, SIMD-first per
+  SPEC §5; accept on verdict-exact replay of the it-2 checkpoint corpus at ≥ 30× (P3-rust).
+* **WO-2 — incremental SAT**: vendored CaDiCaL via the incremental interface; accept on the same
+  corpus, measured speedup reported honestly either way.
+* **WO-3 — drivers**: profile sweep with checkpoint/resume, cover ladder + ddmin, the cover-first
+  inversion (B3's regression), courier packaging. Accept on an end-to-end shadow run of one real
+  iteration agreeing with the Python engine's commit decision.
+SPEC.md is amended per order; semantic questions come back here; the engineer never blocks
+Track A.
+
+**B10. Server scope.** Not on M51's critical path (≥ 1 month out). WO-3's courier packaging is
+designed for it; the nominated first server job is the widened-batch enumeration + profile.
+
+## §C. The kernel skeleton (phase 0k; exact names verified against Fan/Forcer/Arity)
+
+```lean
+/-- **The spare-colour lemma, forced-equal polarity.** A `k`-colourable graph forces no pair
+equal at `k+1` colours: lift the colouring along `Fin.castSucc` and recolour ONE endpoint to the
+spare colour `Fin.last k` (proper: every neighbour wears a lifted colour). -/
+theorem not_forces_of_colorable (hG : G.Colorable k) {p q : V} (hpq : p ≠ q) :
+    ¬ Forces G (k + 1) p q := sorry
+
+/-- Forced-distinct polarity: recolour BOTH endpoints to the spare colour — proper exactly
+because they are non-adjacent, which is the load-bearing hypothesis. -/
+theorem not_separated_of_colorable (hG : G.Colorable k) {p q : V} (hadj : ¬ G.Adj p q) :
+    ¬ Separated G (k + 1) p q := sorry
+
+/-- **The phase monitor's theorem** (contrapositive): a graph forcing a pair equal at `k+1`
+colours is not `k`-colourable — at `k = 4`, the descent's carrier at μ = 0 is a 5-chromatic
+unit-distance graph, so the χ(unit) monitor crosses no later than the final commit. -/
+theorem not_colorable_of_forces (h : Forces G (k + 1) p q) (hpq : p ≠ q) :
+    ¬ G.Colorable k := sorry
+
+/-- **The gadget hard floor** (contrapositive): a virtual-edge carrier at `k+1` colours is not
+`k`-colourable — every forced-distinct gadget at five colours is itself ≥ 5-chromatic. -/
+theorem not_colorable_of_separated (h : Separated G (k + 1) p q) (hadj : ¬ G.Adj p q) :
+    ¬ G.Colorable k := sorry
+```
+
+Spec examples: the bottom graph on two vertices (`⊥ : SimpleGraph (Fin 2)`, 1-colourable) has
+neither compulsion at two colours. **The red (mutation audit): `K₂` is 2-colourable and
+`Separated K₂ 3 0 1` HOLDS** (adjacent pairs are separated by properness itself) — dropping
+`hadj` must break `not_separated_of_colorable`, and dropping `hpq` must break the Forces half
+(at `p = q`, `Forces` is trivially true). K4 stretch statement (exact `Fintype` phrasing settled
+at the sitting): a `k`-colourable graph on `n` vertices has ≥ `2^⌈n/k⌉` proper
+`(k+1)`-colourings, by the subsets-of-the-largest-class injection.
+
+## §0. Registered predictions (before any campaign instrument runs)
+
+Verdict vocabulary as M50; removals need the triple; **jackpot clause verbatim: any μ ≤ 1 at
+five colours is χ(ℝ²) ≥ 6 — HALT, re-derive independently, re-refute in a second encoding,
+report before interpreting. Any χ(unit) = 5 crossing: HALT, certify the minted witness, report.**
+
+* **P1-it3**: iteration 3's first commit removes ≥ 10 of the 17 floor edges. Prior 0.6.
+* **P2-speed**: with the pool cache alone, iteration 3 closes in ≤ 1 desktop-day (prior 0.7);
+  after Rust acceptance, one full depth-1 iteration ≤ 2 h (prior 0.6).
+* **P3-rust**: WO-1 replays the it-2 corpus verdict-exact at ≥ 30× the Python ask kernel.
+  Prior 0.6. Failure clause: the measured ratio is reported and WO-2's incrementality becomes
+  the load-bearing bet.
+* **P4-inv**: the inverted pipeline reproduces it-2's final verdicts exactly with ≥ 5× fewer
+  whole-pool solver calls. Prior 0.7.
+* **P5-width**: |S| for floor+10-cheapest ≤ 3× the floor-only |S|. Prior 0.5, genuinely open —
+  this measurement alone decides the commit width.
+* **P6-stalls**: the width-stall fraction at iteration 3 exceeds iteration 2's 5.6 % (the G33
+  falsifier dial; either direction is the recursion's cost curve). Prior 0.5.
+* **P7-gauge**: the unit part's 4-colouring count strictly decreases at every iteration-3+
+  commit. Prior 0.55.
+* **P8-crossing**: χ(unit) crosses to 5 within M51. Prior 0.3.
+
+## §1. Phases (each closes with its numbers in §R before the next starts)
+
+| # | phase | deliverable | control |
+|---|---|---|---|
+| 0k | kernel sitting | `SpareColour.lean`: K1 ×2 + contrapositives (+K3 check, K4 stretch), standard three axioms | the K₂ red; both mutation audits |
+| 0a | pool cache/fixture (Python) | save/load + exporter; it-2 fixture bundle | fingerprint round-trip; rebuilt-pool equality |
+| 0b | WO-0 (engineer, parallel) | scaffold + readers + gate | ferrous gate; mid-run messaging verified |
+| 1w | width measurement | \|S\| at floor / +5 / +10; commit width chosen | sub-batch filters reproduce |
+| 1 | iteration 3 (Python) | commit(s) + §B7 columns; stall probes (§B8) on first stall batch | M50 controls verbatim; always-run-the-ask |
+| 2 | iterations 4+ | engine handover on WO acceptance; iterate while depth 1 pays | verdict-exact regression per swap |
+| 3 | depth-2 escalation | restricted depth-2 pool for resisters | M49 gadget-cost controls |
+| R | close | §R, Frontier ledger row + G-entries, report, memory | |
+
+## §2. Discipline and practical notes
+
+M50 §3 verbatim (double-encoding or kernel for every claim; `unknown` never folded; triple for
+removals; segfault HALT; one heavy job at a time; waiters anchored; every pool a named CHOICE).
+Plus M51's own: the Rust engine is untrusted like all of `tools/` — its verdicts enter rows only
+through the same certification asks; every engine handover carries the verdict-exact regression;
+engineer reports land in the M51 job record with their acceptance verdicts. Desktop scheduling:
+the profile/cover own the box; cargo builds ride along; big Rust replay benchmarks run between
+campaign phases. Costs tracked per work order (Opus engineer turns are billed).
