@@ -70,6 +70,32 @@ measured per-phase baselines on the desktop (32 cores), and the known bottleneck
 | Floor census | 378 s | fine | none needed |
 | Hard unknowns | 49 asks undecided at 2 h | genuine SAT hardness | do NOT chase with caps — the cover kills these colourings with subsets, where whole-pool SAT is not the primitive |
 
+**The engine's home and the hardware (set 2026-08-24, Kooshi's direction at the re-read).**
+The hot kernel is rewritten in **Rust**, in the sibling repository
+**`~/source/descent-engine`** (origin `a git remote`; created
+and pushed 2026-08-24). Sibling, not nested — nesting would stack de Bruijn's Lean identity onto
+the ferrous Rust standard; there is no CLAUDE.md above `~/source/`, so the sibling receives
+exactly one standard (verified). The repo carries the ferrous standard/skills/workflow (from
+`another of the owner's projects`), a CLAUDE.md naming this session **product owner** (SPEC.md is the
+contract; semantic questions come back here; engineering decisions belong to the repo's
+engineer — an **Opus subagent** works there as the Rust engineer, per Kooshi). `SPEC.md` v0 pins
+the ask semantics (the tiered `whole_feasible`, seed-projection, kill monotonicity, the
+three-verdict discipline), the wire formats by example, the acceptance gate (**verdict-exact
+replay of the it-2 checkpoint corpus; `unknown` may only resolve, decided verdicts may never
+flip**), and the design intent (persistent incremental CaDiCaL + bitset kernels; ≥ 30× on the
+it-2 profile replay as the first measured target). The Python engine stays as the decorrelated
+second encoding, run on a per-iteration sample. Phase 0 owes the repo its **fixture bundle**
+(it-2 stage + checkpoint + a pool export whose format is settled jointly then).
+
+**The server, and the courier model (Kooshi, 2026-08-24):** the big box (192–256 cores — count
+uncertain) is available but **not for at least a month, and never interactively** — he starts
+jobs and brings results back. So server work must ship as a **self-contained deliverable**: one
+static binary + fixtures + a run script, fully checkpointed/resumable, unattended to completion,
+results packed as a single bundle. This is written into the engine's CLAUDE.md as a standing
+deployment constraint from milestone one. Consequence for planning: iterations 3+ run on the
+desktop; the server is the home for a LATER wide sweep (e.g. the widened-batch enumeration +
+profile), designed for but not blocked on.
+
 **The structural speed question the subplan must answer first:** the profile's whole-pool
 semantics ("does the ENTIRE pool kill this colouring") is the completeness question, needed for
 the hitting set — but the cover only needs *a* kill per colouring. M50 already tiered this
