@@ -961,7 +961,11 @@ modeling ran twice (§Sʹ–§Sʹʹʹ, then §Sⁱᵛ+§Sⁱᵛ-adv at full dept
 agent). The ranking below is the close's recommendation — the core probe CHANGED the landscape
 after §Sʹʹʹ's adoption, so the fork is presented explicitly; Kooshi picks.)*
 
-1. **M51 — the descent's iteration 3+ (the compounding loop, continued)** — **RECOMMENDED**:
+1. **M51 — the descent's iteration 3+ (the compounding loop, continued)**
+   (`plans/M51-descent-engine.md`, full stub with the SPEED MANDATE and the measured per-phase
+   cost anatomy — Kooshi's direction 2026-08-24; the durable theory ledger is
+   `plans/STANDING-QUESTIONS.md`) — **RECOMMENDED, and CHOSEN by Kooshi at the close ("I agree,
+   it's a worthy approach")**:
    the core probe measured that growth alone re-opens every refuser (five falls, six at zero
    provable survivors), the it-3 substrate is already priced (394,604-point pool, 1.2 GB, built
    in 15 min; floor 17; |S| enumerable by the seed-projection engine), and P7's miss by three
@@ -971,8 +975,8 @@ after §Sʹʹʹ's adoption, so the fork is presented explicitly; Kooshi picks.)*
    unit-distance witness — an intermediate certified deliverable before any 6-result), and the
    per-iteration weighted-ladder scan (the polarization table as a standing column). Jackpot
    clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
-2. **The nominated-pairs gadget question** (§Sʹʹʹ's adopted question, now the STALL-RESPONSE
-   plan): minimal in-context forced-distinct gadgets for the (4,A)-class at 2 and the √3/√7
+2. **M52 — the nominated-pairs gadget question** (`plans/M52-nominated-gadgets.md`, full stub;
+   §Sʹʹʹ's adopted question, now the STALL-RESPONSE plan): minimal in-context forced-distinct gadgets for the (4,A)-class at 2 and the √3/√7
    cross-pairs, the in-context→context-free gradient measured by the diet meter (prototyped:
    supports 166/176/191 of 417, common core 78 — broad, so context-free is a long march), with
    the ~148 absolute virtual edges and 412 pigeonhole triangles as the calibration corpus.
@@ -1778,6 +1782,13 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   `tools/arity.py`: a verdict function that returns `undetermined-subtuples` rather than any verdict
   when the evidence that would qualify it is missing, and a verdict enum containing no word that
   means "clean" at all.
+  **THIRD INSTANCE — the rule reaches POSITIVE counts (M50, 2026-08-23).** A cast-limited triangle
+  census reported "16 never-3-distinct triples on {√3,√7,2√3}"; the cast-free census holds **412,
+  in five families including one at √13 the cast never saw** — a positive count over a cast
+  measures the cast exactly as a negative does. The standing mechanical rule from the M50
+  adversarial round: **every headline of this genre carries its enumeration AND its conditioning
+  in the same sentence** — scope lines inside an artifact do not survive into summaries unless
+  they are in the headline.
 * **G29 — The cell family is not a door, it is a dial, and the open problem is the
   discontinuity at its endpoint.** (Minted 2026-08-13, on a re-reading of M39–M43 with no
   new measurement.) A colouring constant on the cells of a triangular grid at scale `p`
@@ -1879,6 +1890,17 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   not imply "no seam-field halo replaces a defect".* And the opposite direction cost P7: the k = 5
   removals were CHEAPER than the k = 4 ones (median one point against 8.5), because the descent finds
   the cheap kills first — a selection effect the registration did not name.
+  **A THIRD FAILURE MODE, from M50 (2026-08-23): a verdict message that names a cause it did not
+  check converts one bug into two.** The iteration-2 cover deferred 3,023 provably-killable
+  colourings because an oversized early rung broke the rung ladder — and the defer message said
+  "cost budget", a cause that never fired, sending the first diagnosis toward budgets while the
+  size guard was the culprit; the results row's scope sentence simultaneously asserted the stalls
+  "survive the whole pool", false for deferrals. The rule: error and verdict messages may name
+  only the branch that actually fired, and a conflated stall/defer vocabulary is itself a bug
+  (fixed with a per-item reason taxonomy in which only 'survives-whole' means what the old scope
+  claimed). The flip side, same milestone: the always-verify discipline PAID twice in one day —
+  a coverage-subset verify caught an exact minimizer silently swapping a kept edge out of the
+  hitting set, and a 25 ≠ 24 banner cross-check caught a stale commit field before any certify.
 
 ## Whose work this is
 
