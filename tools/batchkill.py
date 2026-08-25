@@ -251,6 +251,7 @@ class Pool:
             for i, j in unit_pairs_np(pts):
                 self.adj[i].append(j)
                 self.adj[j].append(i)
+        self.adj = [sorted(L) for L in self.adj]  # canonical row order (SPEC v0.3 guarantee)
         self._csr = None
         self.fp = _pool_fp(obj, name, params, pts)
 
@@ -872,10 +873,22 @@ def profile(obj: Obj, pool: Pool, cols, label: str, log=print) -> list[bool]:
     done_map: dict[int, str] = {}
     if ck_path.exists():
         lines = ck_path.read_text().splitlines()
-        assert lines and lines[0] == hdr, "profile checkpoint does not match this list/pool"
+        # SPEC v0.3 header compat: compare the FIRST TWO FIELDS only — a v2 header appends
+        # stage_fp and key=value tokens, which this reader tolerates (the Rust engine writes v2)
+        first = lines[0].split() if lines else []
+        assert len(first) >= 3 and first[0] == "#" and first[1] == str(len(cols)) \
+            and first[2] == pool.fp, "profile checkpoint does not match this list/pool — REFUSED"
         for ln in lines[1:]:
-            i, r = ln.split()
-            done_map[int(i)] = r
+            parts = ln.split()
+            i, r = int(parts[0]), parts[1]
+            # duplicate rows fold through the VERDICT JOIN (unknown < killed, unknown < survives;
+            # decided verdicts incomparable): a later row may resolve an unknown, never degrade
+            # or flip a decided verdict
+            prev = done_map.get(i)
+            if prev is None or prev == "unknown":
+                done_map[i] = r
+            elif r not in ("unknown", prev):
+                raise SystemExit(f"checkpoint contradiction at class {i}: {prev} vs {r}")
         log(f"[profile {label}] resumed {len(done_map)}/{len(cols)} from checkpoint")
     else:
         ck_path.write_text(hdr + "\n")
@@ -1357,7 +1370,7 @@ def self_test():
         and p1c.adj == p1.adj and p1c.prov == p1.prov, "pool cache round-trip mismatch"
     man_path = Path(str(base) + ".json")
     man = json.loads(man_path.read_text())
-    man["object_fingerprint"] = "0" * 16
+    man["object"]["fingerprint"] = "0" * 16
     man_path.write_text(json.dumps(man))
     try:
         load_pool(obj, "depth1")
@@ -1408,66 +1421,107 @@ def _pool_cache_base(obj: Obj, name: str) -> Path:
     return BUILD / f"m51-pool-{obj.fingerprint()}-{name}"
 
 
+def stage_fp_key(object_fp: str, batch, pool_fp: str, list_fp: str) -> str:
+    """The canonical stage key (SPEC v0.3): sha256/16 over four newline-joined key=value lines,
+    reproducible in any language — the ONE fingerprint the Rust engine can compute rather than
+    merely compare. Edges sorted lexicographically as min-max pairs; no trailing newline."""
+    edges = ",".join(f"{u}-{v}" for u, v in sorted(tuple(sorted(e)) for e in batch))
+    blob = "\n".join([f"object_fp={object_fp}", f"batch={edges}",
+                      f"pool_fp={pool_fp}", f"list_fp={list_fp}"])
+    return hashlib.sha256(blob.encode()).hexdigest()[:16]
+
+
+def _csr_u(lists, dtype):
+    indptr = np.zeros(len(lists) + 1, dtype=np.uint64)
+    for i, L in enumerate(lists):
+        indptr[i + 1] = indptr[i] + len(L)
+    idx = np.fromiter((v for L in lists for v in L), dtype=dtype, count=int(indptr[-1]))
+    return indptr, idx
+
+
 def save_pool(pool: Pool) -> Path:
-    """Persist a pool as npz CSR + JSON manifest — the M51 §B2 single artifact: the cache that
-    kills the serial rebuilds, the Rust engine's fixture, and the courier bundle's data half.
-    schema_version 1; the manifest carries the derivation key and fingerprints."""
+    """Persist a pool in the ADOPTED export layout (SPEC v0.3 — the engineer's WO-0 proposal,
+    frozen): one UNCOMPRESSED npz of five CSR pairs in SIMD-friendly widths + prov + xy, and a
+    manifest carrying fingerprints, per-array sha256, and the stated guarantees. The cache, the
+    Rust fixture, and the courier bundle's data half are this same artifact (M51 §B2)."""
     base = _pool_cache_base(pool.obj, pool.name)
-
-    def csr_of(lists):
-        indptr = np.zeros(len(lists) + 1, dtype=np.int64)
-        for i, L in enumerate(lists):
-            indptr[i + 1] = indptr[i] + len(L)
-        idx = np.fromiter((v for L in lists for v in L), dtype=np.int64, count=int(indptr[-1]))
-        return indptr, idx
-
-    nb_p, nb_i = csr_of(pool.nbrs)
-    ad_p, ad_i = csr_of(pool.adj)
-    pv = np.array([[a, b, s] for _, a, b, s in pool.prov], dtype=np.int64).reshape(-1, 3)
-    np.savez_compressed(str(base) + ".npz", pts=np.asarray(pool.pts, dtype=np.float64), prov=pv,
-                        nbrs_indptr=nb_p, nbrs_idx=nb_i, adj_indptr=ad_p, adj_idx=ad_i)
-    manifest = {"schema_version": 1, "object_fingerprint": pool.obj.fingerprint(),
-                "name": pool.name, "params": pool.params,
-                "pool_fingerprint": pool.fp, "n_points": len(pool.pts)}
+    hs, ha = pool.obj.halo_structure()
+    for j, L in enumerate(ha):  # the symmetry guarantee is stated, so it is checked at save
+        for jj in L:
+            assert j in ha[jj], f"halo adjacency not symmetric at {j},{jj}"
+    arrays = {}
+    ps_p, ps_i = _csr_u(pool.nbrs_seed, np.uint16)
+    ph_p, ph_i = _csr_u(pool.nbrs_halo, np.uint32)
+    pa_p, pa_i = _csr_u([sorted(L) for L in pool.adj], np.uint32)
+    hs_p, hs_i = _csr_u([sorted(L) for L in hs], np.uint16)
+    ha_p, ha_i = _csr_u([sorted(L) for L in ha], np.uint32)
+    arrays = {"pool_seed_indptr": ps_p, "pool_seed_idx": ps_i,
+              "pool_halo_indptr": ph_p, "pool_halo_idx": ph_i,
+              "pool_adj_indptr": pa_p, "pool_adj_idx": pa_i,
+              "halo_seed_indptr": hs_p, "halo_seed_idx": hs_i,
+              "halo_adj_indptr": ha_p, "halo_adj_idx": ha_i,
+              "pool_prov": np.array([[a, b, s] for _, a, b, s in pool.prov],
+                                    dtype=np.int32).reshape(-1, 3),
+              "pool_xy": np.asarray(pool.pts, dtype=np.float64)}
+    np.savez(str(base) + ".npz", **arrays)  # uncompressed by design: load = memcpy
+    manifest = {"schema_version": 1, "kind": "pool-export",
+                "object": {"fingerprint": pool.obj.fingerprint(), "n": pool.obj.n,
+                           "seed_n": 214, "n_halo": pool.obj.n - 214},
+                "pool": {"fingerprint": pool.fp, "name": pool.name,
+                         "n_points": len(pool.pts), "params": pool.params,
+                         "ordering": "by-depth"},
+                "arrays": {k: {"dtype": str(v.dtype), "shape": list(v.shape),
+                               "sha256": hashlib.sha256(np.ascontiguousarray(v).tobytes()).hexdigest()}
+                           for k, v in arrays.items()},
+                "guarantees": ["rows-sorted-no-duplicates", "adjacency-symmetric",
+                               "no-self-loops", "indices-in-range", "indptr-monotone"]}
     Path(str(base) + ".json").write_text(json.dumps(manifest, indent=1))
     return base
 
 
 def load_pool(obj: Obj, name: str) -> Pool | None:
-    """Load a cached pool for exactly this object. REFUSES (never warns) on schema or fingerprint
-    mismatch — the stage is a derivation key and a component that does not re-derive is a wrong
+    """Load a cached pool for exactly this object. REFUSES (never warns) on schema, object, array,
+    or recomputed-pool fingerprint mismatch — a component that does not re-derive is a wrong
     stage, incident 2's whole class (M51 §Bʹ item 2). Returns None only when no cache exists."""
     base = _pool_cache_base(obj, name)
     man_p, npz_p = Path(str(base) + ".json"), Path(str(base) + ".npz")
     if not (man_p.exists() and npz_p.exists()):
         return None
     man = json.loads(man_p.read_text())
-    if man.get("schema_version") != 1:
-        raise SystemExit(f"pool cache {man_p.name}: schema_version {man.get('schema_version')} "
-                         "!= 1 — REFUSED")
-    if man["object_fingerprint"] != obj.fingerprint():
+    if man.get("schema_version") != 1 or man.get("kind") != "pool-export":
+        raise SystemExit(f"pool cache {man_p.name}: schema {man.get('schema_version')}/"
+                         f"{man.get('kind')} not pool-export v1 — REFUSED (stale layout; "
+                         "delete to rebuild)")
+    if man["object"]["fingerprint"] != obj.fingerprint():
         raise SystemExit(f"pool cache {man_p.name}: object fingerprint "
-                         f"{man['object_fingerprint']} != {obj.fingerprint()} — REFUSED "
-                         "(stale cache for a different object; delete it to rebuild)")
+                         f"{man['object']['fingerprint']} != {obj.fingerprint()} — REFUSED "
+                         "(cache for a different object; delete it to rebuild)")
     z = np.load(str(npz_p))
-    pts = [tuple(map(float, p)) for p in z["pts"]]
-    prov = [("glue", int(a), int(b), int(s)) for a, b, s in z["prov"]]
+    for k, meta in man["arrays"].items():
+        got = hashlib.sha256(np.ascontiguousarray(z[k]).tobytes()).hexdigest()
+        if got != meta["sha256"]:
+            raise SystemExit(f"pool cache {npz_p.name}: array {k} sha256 mismatch — REFUSED "
+                             "(corrupt cache)")
+    pts = [tuple(map(float, p)) for p in z["pool_xy"]]
+    prov = [("glue", int(a), int(b), int(s)) for a, b, s in z["pool_prov"]]
 
     def lists_of(indptr, idx):
-        return [idx[indptr[i]:indptr[i + 1]].tolist() for i in range(len(indptr) - 1)]
+        return [idx[int(indptr[i]):int(indptr[i + 1])].tolist()
+                for i in range(len(indptr) - 1)]
 
     pool = Pool.__new__(Pool)
-    pool.obj, pool.name, pool.params = obj, name, man["params"]
+    pool.obj, pool.name, pool.params = obj, name, man["pool"]["params"]
     pool.prov, pool.pts = prov, pts
-    pool.nbrs = lists_of(z["nbrs_indptr"], z["nbrs_idx"])
-    pool.nbrs_seed = [[v for v in N if v < 214] for N in pool.nbrs]
-    pool.nbrs_halo = [[v - 214 for v in N if v >= 214] for N in pool.nbrs]
-    pool.adj = lists_of(z["adj_indptr"], z["adj_idx"])
+    pool.nbrs_seed = lists_of(z["pool_seed_indptr"], z["pool_seed_idx"])
+    pool.nbrs_halo = lists_of(z["pool_halo_indptr"], z["pool_halo_idx"])
+    pool.nbrs = [sorted(S + [v + 214 for v in H])
+                 for S, H in zip(pool.nbrs_seed, pool.nbrs_halo)]
+    pool.adj = lists_of(z["pool_adj_indptr"], z["pool_adj_idx"])
     pool._csr = None
     pool.fp = _pool_fp(obj, name, pool.params, pts)
-    if pool.fp != man["pool_fingerprint"]:
+    if pool.fp != man["pool"]["fingerprint"]:
         raise SystemExit(f"pool cache {man_p.name}: recomputed fingerprint {pool.fp} != "
-                         f"manifest {man['pool_fingerprint']} — REFUSED (corrupt cache)")
+                         f"manifest {man['pool']['fingerprint']} — REFUSED (corrupt cache)")
     return pool
 
 
