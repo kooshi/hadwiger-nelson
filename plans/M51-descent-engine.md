@@ -87,6 +87,27 @@ it-2 profile replay as the first measured target). The Python engine stays as th
 second encoding, run on a per-iteration sample. Phase 0 owes the repo its **fixture bundle**
 (it-2 stage + checkpoint + a pool export whose format is settled jointly then).
 
+**The engineer's launch shape (decided 2026-08-24, after two probe campaigns; Kooshi's "test
+the claude code process route / find the one-session trick"):** the engineer runs as the
+**in-session custom agent type `ferrous-engineer`** (`.claude/agents/ferrous-engineer.md` in
+THIS repo: Opus frontmatter — lands on the 1M-context variant — with the Ferrous identity and a
+context-quarantine paragraph as its SYSTEM prompt; the six ferrous skills symlinked into
+`.claude/skills/` so the Skill tool can invoke them — both probe-verified end to end, including
+a live ferrous-skill invocation from inside the agent). Known cost, measured: the lean-dir
+claudeMd (~25–30k tokens) is STILL injected into custom agents (the docs claim otherwise —
+measurement wins); on Opus-1M it is affordable and the quarantine held in the probe. Permission:
+subagents inherit the PARENT session's mode (frontmatter permissionMode is ignored) — i.e. the
+engineer works at this session's own independence level, no separate grant. Control loop:
+task notifications, SendMessage resume with context intact, TaskStop; mid-run message delivery
+is documented but unverified here. **Fallback, also fully tested:** the headless CLI route
+(`cd descent-engine && echo "<order>" | claude -p --model opus --resume <session-id>`) — clean
+context (Ferrous only, zero bleed), same-session continuity, clean permission denials; gotchas:
+the resume prompt must arrive via STDIN (positional errors on 2.1.238), and headless defaults to
+MANUAL permissions (pass `--permission-mode` explicitly). Headless `-p` workers register for
+cross-session SendMessage (docs), so the fallback is steerable too if ever needed. Subagent cwd
+inherits the parent shell's momentary cwd — the agent def mandates absolute paths for exactly
+this reason.
+
 **The server, and the courier model (Kooshi, 2026-08-24):** the big box (192–256 cores — count
 uncertain) is available but **not for at least a month, and never interactively** — he starts
 jobs and brings results back. So server work must ship as a **self-contained deliverable**: one
