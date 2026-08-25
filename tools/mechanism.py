@@ -53,7 +53,9 @@ INVARIANT_EXIT = 4
 # `_solve` runs CaDiCaL as a subprocess (the GIL drops during the wait), so a THREAD pool
 # parallelizes the SAT calls; at ≤ 2k-vertex graphs each worker is tens of MB — cores − 2
 # is safely inside RAM on both machines.
-WORKERS = max(2, (os.cpu_count() or 4) - 2)
+# MECH_WORKERS overrides for memory-pressure contingency (M51: 30 workers peaked at 118.6/125 GB
+# in a hard-ask cluster, build/m51-mem.log 13:14-13:28Z); default unchanged.
+WORKERS = int(os.environ.get("MECH_WORKERS", 0)) or max(2, (os.cpu_count() or 4) - 2)
 _ARTLOCK = Lock()
 
 

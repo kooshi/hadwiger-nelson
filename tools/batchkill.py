@@ -531,26 +531,33 @@ def _greedy_extend(pool: Pool, av: np.ndarray, hav) -> bool:
 
 def whole_feasible(pool: Pool, av: np.ndarray, hav,
                    cap_strong: float = 45.0, cap_full: float = 900.0) -> tuple[bool, np.ndarray]:
-    """(feasible?, peeled pool core) for the WHOLE pool under one colouring — the tiered engine
-    (swap 5's second half, 2026-08-22; regression = the run's own checkpoint): stage 0 empty-avail
-    = infeasible outright; peel-to-empty = feasible; then (1) STRONG-RUNG subset UNSAT = killed —
-    sound by kill monotonicity in the point set (the module invariant: a subset kill is a whole
-    kill), and cheap because the strong CNF is small; (2) a GREEDY whole-pool extension = a
-    survives WITNESS, no solver; (3) only the residue pays the full-core SAT. Undecided at the
+    """(feasible?, kill core / peeled core) for the WHOLE pool under one colouring — the tiered
+    engine (swap 5's second half, 2026-08-22; swap E2 2026-08-25: STRONG RUNG BEFORE THE PEEL —
+    verdict-neutral because the strong ask reads the UNPEELED masks and peel-to-empty implies
+    every subset is colourable, so the two tiers are mutually exclusive whichever runs first;
+    found by the WO-1 tier census: ~87% of asks die on the strong rung and were paying the peel
+    for nothing. Regression = the run's own checkpoint + the 246-line it-2 gate, §R of M51):
+    stage 0 empty-avail = infeasible outright; (1) STRONG-RUNG subset UNSAT = killed — sound by
+    kill monotonicity in the point set (the module invariant: a subset kill is a whole kill),
+    returning the STRONG SET as the kill core (a proven kill set and a far better ddmin seed
+    than the peeled core); (2) peel-to-empty = feasible; (3) a GREEDY whole-pool extension = a
+    survives WITNESS, no solver; (4) only the residue pays the full-core SAT. Undecided at the
     full cap propagates as before (never folded)."""
     if bool((av == 0).any()) or any(h == 0 for h in hav):
         return False, np.zeros(len(av), dtype=bool)
-    alive, halive = peel_np(pool, av, hav)
-    if not alive.any() and not halive.any():
-        return True, alive
     strong = getattr(pool, "_strong_cache", None)
     if strong is None:
         pool._strong_cache = strong = [i for i in range(len(pool.pts)) if len(pool.nbrs[i]) >= 3]
     try:
         if not feasible(pool, strong, av, hav, cap=cap_strong):
-            return False, alive
+            core = np.zeros(len(av), dtype=bool)
+            core[strong] = True
+            return False, core
     except Undecided:
         pass  # the strong rung is a shortcut, never a verdict
+    alive, halive = peel_np(pool, av, hav)
+    if not alive.any() and not halive.any():
+        return True, alive
     if _greedy_extend(pool, av, hav):
         return True, alive
     core = [int(x) for x in np.flatnonzero(alive)]
@@ -1491,8 +1498,8 @@ def save_pool(pool: Pool) -> Path:
         for jj in L:
             assert j in ha[jj], f"halo adjacency not symmetric at {j},{jj}"
     arrays = {}
-    ps_p, ps_i = _csr_u(pool.nbrs_seed, np.uint16)
-    ph_p, ph_i = _csr_u(pool.nbrs_halo, np.uint32)
+    ps_p, ps_i = _csr_u([sorted(L) for L in pool.nbrs_seed], np.uint16)
+    ph_p, ph_i = _csr_u([sorted(L) for L in pool.nbrs_halo], np.uint32)
     pa_p, pa_i = _csr_u([sorted(L) for L in pool.adj], np.uint32)
     hs_p, hs_i = _csr_u([sorted(L) for L in hs], np.uint16)
     ha_p, ha_i = _csr_u([sorted(L) for L in ha], np.uint32)

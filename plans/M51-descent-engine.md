@@ -527,6 +527,40 @@ wall and the numeric-250 label debt), benchmarked by the engineer against the be
 quadratic-tower-arithmetic alternative on real provenance chains; it is not a candidate for the
 enumeration, whose costs are SAT- and orchestration-shaped.
 
+## §R-E2. Engine swap E2 — strong rung before the peel (2026-08-25, from WO-1's tier census)
+
+The WO-1 planning session measured the reference's own tier anatomy by driving `peel_np` /
+`_greedy_extend` / `feasible` through a shim over the exported it-2 npz (the semantics measured
+are the reference's, not a re-reading): **~87 % of kills die on the strong rung (0.44–0.47 s),
+which reads the UNPEELED masks — yet the peel (0.80–0.97 s) ran first and its output was
+consumed only by tier 4.** The finding (Ferrous, F4 of `descent-engine`
+`plans/WO-1-pool-and-ask-subplan.md`) was verified independently against the source here before
+any change: `whole_feasible` hands `feasible(strong, av, hav)` and `_greedy_extend(av, hav)` the
+original masks; only the full-core solve reads `alive`.
+
+**The swap:** tier order 0 → strong → peel → greedy → full. Verdict-neutral by mutual
+exclusivity (peel-to-empty ⟹ the whole pool colourable ⟹ every subset colourable ⟹ the strong
+rung cannot kill), plus one improvement: a strong-rung kill now returns the **strong set**
+(~1.5 k points) as the kill core instead of the peeled core (~140 k) — a proven kill set and a
+far better ddmin seed for the design path (which had not yet run for it-3, so no existing rows
+move). Also in the same commit: `save_pool` sorts `nbrs_seed`/`nbrs_halo` explicitly (the two
+CSR families previously sorted only by inheritance — Ferrous's DEFERRED D13; existing caches
+pass the loader's sortedness refusal, so this is future-proofing, not a repair).
+
+**Regression gate (`$CLAUDE_JOB_DIR/tmp/gate_e2.py`):** the it-2 fixture (cached pool
+0395d666c3eb9b3d), ALL 46 `survives` lines + 200 random `killed` lines (seed 51), swapped
+engine vs the it-2 checkpoint; a decided–decided disagreement fails. **GATE GREEN: 246/246
+exact agreement, 0 fresh unknowns, 0 decided–decided mismatches** (2026-08-25 ~13:50Z, ~25 min
+on 28 workers). The it-3 profile was stopped at 10,768/46,350 checkpointed verdicts for the
+swap and RELAUNCHED on the new engine (resume-exact, confirmed: "resumed 10768/46350 from
+checkpoint"). Also this session: **the memory sweep Kooshi observed is characterized**
+(`build/m51-mem.log`) — hard-ask clusters, not a leak: ~325 verdicts/min at 31–90 GB used,
+then a cluster put all 30 workers into simultaneous tier-4 solves (throughput 13/min, peak
+118.6 GB used / 10.2 GB available, swap +0.9 GB, self-recovered). Contingency knob added
+dormant: `MECH_WORKERS` env override in `tools/mechanism.py`, default unchanged. WO-1 planning
+is APPROVED and closed (descent-engine e754029, SPEC v0.4 = 3133be99dcdd84f7…); the strong-set
+kill-core refinement is filed there as DEFERRED D14 for WO-5.
+
 ## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-25, written at Kooshi's compaction call)
 
 **Read this first in a fresh session.** WORKFLOW position: M51 step 7 (implementation). Phases
