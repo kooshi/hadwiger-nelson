@@ -135,6 +135,11 @@ open HadwigerNelson
 -- M50: the partner lattice's depth-one completeness (PartnerLattice.lean)
 #print axioms HadwigerNelson.Glue.eq_gluePoint_of_unit_pair
 #print axioms HadwigerNelson.Glue.finite_two_unit_neighbors
+-- M51: the spare-colour lemma, both polarities + contrapositives (SpareColour.lean)
+#print axioms HadwigerNelson.not_forces_of_colorable
+#print axioms HadwigerNelson.not_separated_of_colorable
+#print axioms HadwigerNelson.Forces.not_colorable
+#print axioms HadwigerNelson.Separated.not_colorable
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/

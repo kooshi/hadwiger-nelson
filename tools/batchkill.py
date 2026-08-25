@@ -224,6 +224,13 @@ class Undecided(Exception):
     """A list-colouring ask hit its cap — never folded into a verdict (the M49 discipline)."""
 
 
+def _pool_fp(obj, name, params, pts) -> str:
+    """The pool fingerprint — one formula, shared by the constructor and the cache loader so a
+    loaded pool re-derives and verifies it (M51 §Bʹ: a stage is a derivation key)."""
+    return hashlib.sha256(repr((obj.fingerprint(), name, sorted(params.items()),
+                                [tuple(round(v, 6) for v in p) for p in pts])).encode()).hexdigest()[:16]
+
+
 class Pool:
     """A candidate pool: points with provenance over `obj`, their obj-neighbour lists, and the
     unit adjacency among pool points. `name`/`params`/`fingerprint` go in every row."""
@@ -245,8 +252,7 @@ class Pool:
                 self.adj[i].append(j)
                 self.adj[j].append(i)
         self._csr = None
-        self.fp = hashlib.sha256(repr((obj.fingerprint(), name, sorted(params.items()),
-                                       [tuple(round(v, 6) for v in p) for p in pts])).encode()).hexdigest()[:16]
+        self.fp = _pool_fp(obj, name, params, pts)
 
     def csr(self):
         """CSR views for the vectorized per-colouring path: seed-neighbour lists, pool adjacency,
@@ -1344,6 +1350,21 @@ def self_test():
     # a fake kill refused: a random far point does not kill
     far = max(range(len(p1.pts)), key=lambda p: len(p1.nbrs[p]) == 2 and p)
     assert not kills(p1, [far], AV), "a 2-neighbour point cannot kill 2 colourings"
+    # M51 §B2: the pool cache round-trips exactly, and its refusal discipline is seen red
+    base = save_pool(p1)
+    p1c = load_pool(obj, "depth1")
+    assert p1c is not None and p1c.fp == p1.fp and p1c.nbrs == p1.nbrs \
+        and p1c.adj == p1.adj and p1c.prov == p1.prov, "pool cache round-trip mismatch"
+    man_path = Path(str(base) + ".json")
+    man = json.loads(man_path.read_text())
+    man["object_fingerprint"] = "0" * 16
+    man_path.write_text(json.dumps(man))
+    try:
+        load_pool(obj, "depth1")
+        raise AssertionError("planted object-fingerprint mismatch NOT refused")
+    except SystemExit:
+        pass
+    save_pool(p1)  # restore the good manifest
     print("batchkill self-test: PASS")
 
 
@@ -1383,13 +1404,90 @@ def _gated_seps(seps_path: Path, ack: bool):
     return header, cols, gate
 
 
+def _pool_cache_base(obj: Obj, name: str) -> Path:
+    return BUILD / f"m51-pool-{obj.fingerprint()}-{name}"
+
+
+def save_pool(pool: Pool) -> Path:
+    """Persist a pool as npz CSR + JSON manifest — the M51 §B2 single artifact: the cache that
+    kills the serial rebuilds, the Rust engine's fixture, and the courier bundle's data half.
+    schema_version 1; the manifest carries the derivation key and fingerprints."""
+    base = _pool_cache_base(pool.obj, pool.name)
+
+    def csr_of(lists):
+        indptr = np.zeros(len(lists) + 1, dtype=np.int64)
+        for i, L in enumerate(lists):
+            indptr[i + 1] = indptr[i] + len(L)
+        idx = np.fromiter((v for L in lists for v in L), dtype=np.int64, count=int(indptr[-1]))
+        return indptr, idx
+
+    nb_p, nb_i = csr_of(pool.nbrs)
+    ad_p, ad_i = csr_of(pool.adj)
+    pv = np.array([[a, b, s] for _, a, b, s in pool.prov], dtype=np.int64).reshape(-1, 3)
+    np.savez_compressed(str(base) + ".npz", pts=np.asarray(pool.pts, dtype=np.float64), prov=pv,
+                        nbrs_indptr=nb_p, nbrs_idx=nb_i, adj_indptr=ad_p, adj_idx=ad_i)
+    manifest = {"schema_version": 1, "object_fingerprint": pool.obj.fingerprint(),
+                "name": pool.name, "params": pool.params,
+                "pool_fingerprint": pool.fp, "n_points": len(pool.pts)}
+    Path(str(base) + ".json").write_text(json.dumps(manifest, indent=1))
+    return base
+
+
+def load_pool(obj: Obj, name: str) -> Pool | None:
+    """Load a cached pool for exactly this object. REFUSES (never warns) on schema or fingerprint
+    mismatch — the stage is a derivation key and a component that does not re-derive is a wrong
+    stage, incident 2's whole class (M51 §Bʹ item 2). Returns None only when no cache exists."""
+    base = _pool_cache_base(obj, name)
+    man_p, npz_p = Path(str(base) + ".json"), Path(str(base) + ".npz")
+    if not (man_p.exists() and npz_p.exists()):
+        return None
+    man = json.loads(man_p.read_text())
+    if man.get("schema_version") != 1:
+        raise SystemExit(f"pool cache {man_p.name}: schema_version {man.get('schema_version')} "
+                         "!= 1 — REFUSED")
+    if man["object_fingerprint"] != obj.fingerprint():
+        raise SystemExit(f"pool cache {man_p.name}: object fingerprint "
+                         f"{man['object_fingerprint']} != {obj.fingerprint()} — REFUSED "
+                         "(stale cache for a different object; delete it to rebuild)")
+    z = np.load(str(npz_p))
+    pts = [tuple(map(float, p)) for p in z["pts"]]
+    prov = [("glue", int(a), int(b), int(s)) for a, b, s in z["prov"]]
+
+    def lists_of(indptr, idx):
+        return [idx[indptr[i]:indptr[i + 1]].tolist() for i in range(len(indptr) - 1)]
+
+    pool = Pool.__new__(Pool)
+    pool.obj, pool.name, pool.params = obj, name, man["params"]
+    pool.prov, pool.pts = prov, pts
+    pool.nbrs = lists_of(z["nbrs_indptr"], z["nbrs_idx"])
+    pool.nbrs_seed = [[v for v in N if v < 214] for N in pool.nbrs]
+    pool.nbrs_halo = [[v - 214 for v in N if v >= 214] for N in pool.nbrs]
+    pool.adj = lists_of(z["adj_indptr"], z["adj_idx"])
+    pool._csr = None
+    pool.fp = _pool_fp(obj, name, pool.params, pts)
+    if pool.fp != man["pool_fingerprint"]:
+        raise SystemExit(f"pool cache {man_p.name}: recomputed fingerprint {pool.fp} != "
+                         f"manifest {man['pool_fingerprint']} — REFUSED (corrupt cache)")
+    return pool
+
+
 def _build_pool(obj: Obj, name: str) -> Pool:
-    p1 = pool_depth1(obj)
+    cached = load_pool(obj, name)
+    if cached is not None:
+        print(f"[pool] {name} loaded from cache: {len(cached.pts)} pts, fp {cached.fp}")
+        return cached
+    t0 = time.time()
+    p1 = _build_pool(obj, "depth1") if name == "depth2r" else pool_depth1(obj)
     if name == "depth1":
-        return p1
-    if name == "depth2r":
-        return pool_depth2_restricted(obj, p1)
-    raise SystemExit(f"unknown pool {name!r} (depth1 | depth2r)")
+        pool = p1
+    elif name == "depth2r":
+        pool = pool_depth2_restricted(obj, p1)
+    else:
+        raise SystemExit(f"unknown pool {name!r} (depth1 | depth2r)")
+    save_pool(pool)
+    print(f"[pool] {name} built in {time.time() - t0:.0f} s and cached "
+          f"({len(pool.pts)} pts, fp {pool.fp})")
+    return pool
 
 
 def filter_check():
