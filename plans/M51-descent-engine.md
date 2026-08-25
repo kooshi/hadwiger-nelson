@@ -424,3 +424,55 @@ campaign phases. Costs tracked per work order (Opus engineer turns are billed).
 4. **Kooshi's surface.** One dashboard row per iteration (removals, cheats left, floor, |S|,
    wall, width-stall %, gauge, χ(unit)); crossing/jackpot/hard-stall are HALT-AND-REPORT events,
    never columns; the explorer artifact gains an M51 pane at close.
+
+---
+
+# §R. Results (filled as phases close)
+
+## §R0. Phase 0k — the kernel sitting (2026-08-24, LANDED first sitting)
+
+`Proofs/HadwigerNelson/SpareColour.lean` (new leaf, imports `Fan`): **`not_forces_of_colorable`**,
+**`not_separated_of_colorable`**, **`Forces.not_colorable`** (the phase monitor's theorem),
+**`Separated.not_colorable`** (the gadget hard floor) — the §Bʺ-walked proofs transcribed
+(spareRecolor via a set-parametrized if-then-else, the four-case properness split, the two
+library facts `castSucc_lt_last` + update-misses). Spec examples: the ⊥-graph pair, the K₂
+POSITIVE red (`Separated ⊤ 3 0 1` by properness), both literal-unification pins (`Forces G 5 →
+¬Colorable 4` through `k+1 =?= 5`, both namespaces). **The red seen red**: applying the
+forced-distinct lemma to K₂'s adjacent pair fails exactly at the `¬Adj` obligation (`⊢ False`).
+Full build green through `scripts/build.sh`; audit lines added (axioms run chained behind the
+pool build, log `build/m51-pool-audit.log`). **K3 verdict: already held** — `Forces.mono` ("more
+edges only force more") and `Forces.comap` are in `Forcer.lean`; the set-level absorbing
+statement is one comap-along-inclusion application; nothing minted. **K4: deferred to a later
+sitting** within M51 (stretch as registered).
+
+## §R1w. The widening decision — CLOSED BY MEASUREMENT, widening deferred (2026-08-24)
+
+Both candidate orderings for widening extras died on contact with the data, before any
+enumeration was spent:
+
+* **The cost-column proxy is INAPPLICABLE to non-floor cheats** — a cheat still present as an
+  edge has zero mono-mass on any separating list (the colourings are proper on it), so §Sⁱᵛ 2f's
+  column prices only floor edges. §B4's "floor + k cheapest" carried this wrong presupposition;
+  caught here, before the instrument ran (G21's genre, applied to our own subplan).
+* **The historical-essentiality candidates are EMPTY**: M49's 29 lower-bound edges = 22 removed
+  + 7 in the current floor + 0 elsewhere. Every edge that was ever essential-alone is already
+  handled.
+
+**Verdict: iteration 3's batch is the floor-17, and P5-width's premise is dissolved** (recorded,
+not rescoped — its registered form assumed orderable extras). One structural fact banked for any
+future widening: **profile verdicts depend only on (pool, class)** — cheat edges constrain the
+class enumeration, never the pool ask — so a widened batch's marginal profile cost is exactly
+its NEW classes, and verdicts transfer across batches by class string. Widening re-opens if a
+principled order emerges (e.g. the hitting set's near-miss columns, post-Rust cheap |S|).
+
+## §R0a. Phase 0a — the pool cache (2026-08-24, LANDED)
+
+`save_pool`/`load_pool`/`_pool_fp` in `tools/batchkill.py`: npz CSR + JSON manifest,
+`schema_version` 1, REFUSAL on schema/object-fingerprint/recomputed-pool-fingerprint mismatch
+(incident 2's class designed out); `_build_pool` is cache-through (depth2r caches its depth1
+substrate too). Self-test extended: cache round-trip exact (fp, nbrs, adj, prov) + the planted
+object-fingerprint mismatch SEEN RED — `--self-test` PASS end to end. The jobs ledger
+`build/m51-jobs.txt` is live (§Bʹʹʹ item 2; `--status` upgrade pending). Iteration 3 launched:
+the floor-17 enumeration (stage = object − 43 removed − floor-17, the incident-2 assert green)
+runs under setsid, log `build/m51-enum-it3.log`; the current object's depth-1 pool is being
+built ONCE into the cache behind it.
