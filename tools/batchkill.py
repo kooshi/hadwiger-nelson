@@ -1720,6 +1720,10 @@ def load_object(label: str) -> tuple[Obj, list]:
     removed = [tuple(e) for e in d["removed"]]
     assert obj.n == d["n"]
     assert obj.fingerprint(removed) == d["fingerprint"], "object rebuild fingerprint mismatch"
+    # fingerprint_bare (v0.4.1/F6) is verified on read like its sibling — written-once-never-
+    # checked was the residual hole Ferrous named at WO-1 close; absent on pre-2026-08-25 files
+    assert "fingerprint_bare" not in d or obj.fingerprint() == d["fingerprint_bare"], \
+        "object rebuild bare-fingerprint mismatch"
     obj.check()
     return obj, removed
 
