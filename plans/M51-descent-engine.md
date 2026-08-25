@@ -357,3 +357,47 @@ campaign phases. Costs tracked per work order (Opus engineer turns are billed).
    adding that edge to the batch — "cheapest first" IS greedy list-growth minimization. Phase 1w
    additionally reports measured Δ|S| per widening step against the column's prediction (free via
    nested sub-batch filters) — a G30-grade calibration of the proxy before anything leans on it.
+
+## §Bʺ. The obligation-modeling pass (2026-08-24, fresh invocation) — proofs walked, invariants partitioned
+
+1. **The four SpareColour proofs derive from two constructions and two library facts.** Both
+   halves: lift along `Fin.castSucc ∘ C`, `Function.update` at one endpoint (Forces) or both
+   (Separated) to `Fin.last k`; properness is a four-case split closed by "update misses other
+   points" + "`castSucc ≠ last`" (exact Mathlib names queried at implementation, never recalled).
+   The hypothesis map is confirmed by the proofs: `p ≠ q` is consumed at exactly one point (the
+   update at `q` missing `p`), `¬Adj p q` at exactly one (the `v = p, w = q` properness case),
+   and the Separated half's `p = q` case closes by substitution BEFORE any construction — no
+   `hpq` owed, as §Bʹ derived. Contrapositives are one-line `mt`. **K3 downgraded to
+   mint-if-free**: expected to be one `Forces.comap` application along an inclusion hom; if not
+   literally one line, dropped (it licenses nothing the certification asks don't carry). **K4
+   walked, stretch confirmed**: fiber-pigeonhole lemma (Loogle first), colour-class independence,
+   set-recolouring injectivity via the `last`-preimage recovery; the `k = 0` corner is vacuous or
+   empty-`V` and handled by one case; 40–60 lines, attempted only after K1 lands.
+2. **The inversion's equivalence claim is over the verdict partial order, not verdict equality.**
+   Caps make unknowns run-variant, so the provable regression gate is: with `unknown < killed`
+   and `unknown < survives` (decided verdicts incomparable), the inverted pipeline's verdicts are
+   **pointwise ≥** the it-2 profile's; any decided↔decided flip is a stop-the-line bug; unknown
+   deltas are counted and reported, never folded. P4-inv's acceptance is restated in these terms
+   (and the same order defines WO-1/WO-2 acceptance). The equivalence argument: a cover kill is a
+   whole-pool kill by monotonicity; the residue's whole-pool ask is the profile's own function;
+   hence hitting-set inputs (whole-pool survivors) are preserved.
+3. **The widened-batch filter argument survives verbatim** — M50 §Bʺ's one-per-orbit proof used
+   only `B ⊆ B′` and palette invariance, never floor membership. Caution promoted to a control:
+   the breaking order pins to the WIDEST enumerated stage; every narrower filter inherits it, and
+   the nested counts (plus the known 684/1,010/51,350 reproductions) are the green controls.
+   Stage discipline verbatim from incident 2: stage = object − removed − batch, fingerprint
+   checked against a hand computation before any profile.
+4. **What the Rust regression cannot certify, with named mitigations.** Replay certifies
+   exercised paths only. Non-coverage: SIMD remainder lanes, CSR padding, stage shapes outside
+   the corpus, resume paths. Mitigations, each a WO acceptance item: a brute-force exhaustive
+   list-colouring checker for ≤ 20-point stages inside `--self-test` (decorrelated by
+   construction); differential fuzzing Python-vs-Rust on random small stages (the two-encoding
+   discipline mechanized); the M50 planted controls ported (monotonicity probe, fake kill,
+   fingerprint-mismatch refusal); crash-resume equivalence tests in WO-3. The load-bearing safety
+   property is structural and stated once: **engine verdicts never enter certified rows — the
+   certification ask is the soundness boundary — so an engine bug costs time, never truth.**
+5. **Partition.** PROVE (kernel): K1's four; K4 stretch. PROVE (prose + regression): inversion
+   equivalence (item 2), filter widening (item 3). TEST: stage_fp refusal (planted mismatch red
+   in both engines), the gauge column (labelled exact/sampled), nested-filter reproductions.
+   ASSUME (named): CaDiCaL as untrusted oracle (backed by certification asks); float geometry at
+   engine level (backed by exact certify).
