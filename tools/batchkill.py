@@ -1338,6 +1338,11 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
         (BUILD / f"m50-object-{label}.json").write_text(json.dumps(
             {"prov": obj.prov[214:], "removed": [list(e) for e in B],
              "fingerprint": obj.fingerprint([tuple(e) for e in B]),
+             # the BARE fingerprint (no removals) is the POINT-SET identity — the quantity
+             # save_pool's manifest carries — restoring the object<->pool-export cryptographic
+             # bind the Rust engine's F6 found missing (its DEFERRED D4; objects written before
+             # 2026-08-25 lack this field and bind on counts only)
+             "fingerprint_bare": obj.fingerprint(),
              "n": obj.n, "unit": len(ue), "cheats": len(tp)}))
     log(f"[certify {label}] {verdict} (one-hot {st}, 3-bit {re}); object n={obj.n}, "
         f"cheats {len(tp)} [{time.time()-t0:.0f}s]")
