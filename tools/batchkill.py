@@ -628,6 +628,45 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     return row
 
 
+_EN_CTX = None
+
+
+def _enum_work(i: str):
+    """Forked cube worker (engine swap E1). Rebuilds the cube's clause list from its file with
+    blocking over the BLK PROJECTION — the incident-4 fix: the pre-fix engine re-blocked found
+    colourings over ALL columns on resume, so a resumed cube could re-find a known class wearing
+    different halo colours, forever (82 % of the first it-3 run's lines were such phantoms).
+    In-stretch and rebuild blocking are now the same clause."""
+    cdir, pins_of, base, blk, n, A, B_, edges, stretch, cap_wall, t0 = _EN_CTX
+    f_i, done_i = cdir / f"{i}.jsonl", cdir / f"{i}.done"
+    if done_i.exists():
+        return
+    pins = pins_of[i]
+    cls = list(base) + [[coloring.var(v, c, K)] for v, c in pins]
+    if f_i.exists():
+        for line in f_i.read_text().splitlines():
+            if line:
+                col = [int(ch) for ch in json.loads(line)]
+                cls.append([-coloring.var(v, col[v], K) for v in blk])
+    ts = time.time()
+    with f_i.open("a") as fh:
+        while time.time() - ts <= stretch and time.time() - t0 <= cap_wall:
+            st, model = forcer._solve(cls, n * K, 1800)
+            if st == "unsat":
+                done_i.write_text("unsat")
+                return
+            if st != "sat":
+                return
+            col = rigidity.decode(model, n, K)
+            for a, b in edges:
+                assert col[a] != col[b]
+            assert col[A] != col[B_]
+            assert all(col[v] == c for v, c in pins), "cube pin violated"
+            fh.write(json.dumps("".join(map(str, col))) + "\n")
+            fh.flush()
+            cls.append([-coloring.var(v, col[v], K) for v in blk])
+
+
 def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
                     stretch: float = 300.0, split_target: int = 28, block_on=None, log=print) -> dict:
     """The parallel form of `enumerate_seps`, with ENTROPY-GUIDED cube splitting. A cube is a list
@@ -758,39 +797,20 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
 
     t0 = time.time()
 
-    def work(i: str):
-        if done_of(i).exists():
-            return
-        pins = man["cubes"][i]["pins"]
-        cls = list(base) + [[coloring.var(v, c, K)] for v, c in pins]
-        for line in lines_of(i):
-            col = [int(ch) for ch in json.loads(line)]
-            cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
-        ts = time.time()
-        with f_of(i).open("a") as fh:
-            while time.time() - ts <= stretch and time.time() - t0 <= cap_wall:
-                st, model = forcer._solve(cls, obj.n * K, 1800)
-                if st == "unsat":
-                    done_of(i).write_text("unsat")
-                    return
-                if st != "sat":
-                    return
-                col = rigidity.decode(model, obj.n, K)
-                for a, b in edges:
-                    assert col[a] != col[b]
-                assert col[obj.A] != col[obj.B]
-                assert all(col[v] == c for v, c in pins), "cube pin violated"
-                fh.write(json.dumps("".join(map(str, col))) + "\n")
-                fh.flush()
-                cls.append([-coloring.var(v, col[v], K) for v in blk])
+    def distinct_of(i: str) -> int:
+        out = set()
+        for l in lines_of(i):
+            full = json.loads(l)
+            out.add("".join(full[v] for v in blk))
+        return len(out)
 
     rnd = 0
     while True:
         rnd += 1
         open_cubes = [i for i in leaves() if not done_of(i).exists()]
-        total = sum(len(lines_of(i)) for i in leaves())
+        total = sum(distinct_of(i) for i in leaves())
         log(f"[enumerate-cubes] round {rnd}: {len(man['cubes'])} cubes, {len(open_cubes)} open, "
-            f"{total} colourings, {time.time()-t0:.0f}s", flush=True)
+            f"{total} distinct classes, {time.time()-t0:.0f}s", flush=True)
         if not open_cubes or time.time() - t0 > cap_wall:
             break
         while 0 < len(open_cubes) < split_target:
@@ -799,29 +819,50 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
             open_cubes = [i for i in leaves() if not done_of(i).exists()]
             log(f"[enumerate-cubes]   split → {len(open_cubes)} open leaves", flush=True)
         man_path.write_text(json.dumps(man))
-        mechanism.pmap(work, open_cubes)
+        # engine swap E1 (2026-08-25, incident 4's sibling — measured first: load 6 on 32 cores,
+        # 5 solver forks alive, the parent at 100 % of one core serializing clause lists through
+        # the GIL): one forked PROCESS per open cube per round. State stays file-per-cube; the
+        # manifest is written only by this driver, so the swap changes no artifact semantics.
+        global _EN_CTX
+        _EN_CTX = (cdir, {i: man["cubes"][i]["pins"] for i in open_cubes}, base, blk,
+                   obj.n, obj.A, obj.B, edges, stretch, cap_wall, t0)
+        import multiprocessing as mp
+        with mp.get_context("fork").Pool(processes=min(len(open_cubes), mechanism.WORKERS)) as px:
+            px.map(_enum_work, open_cubes)
     man_path.write_text(json.dumps(man))
     open_cubes = [i for i in leaves() if not done_of(i).exists()]
     status = "exact" if not open_cubes else "capped-wall"
-    seen: set[str] = set()
+    # assembly dedupes BY CLASS (the blk projection): the pre-fix engine's resumed cubes blocked
+    # found colourings over ALL columns instead of blk (incident 4, 2026-08-25), so historical
+    # cube files carry duplicate-class lines wearing different halo colours — dropped here, with
+    # the count = distinct classes. A duplicate ACROSS cubes is a partition violation and refuses.
+    owner: dict[str, str] = {}
+    dup_lines = 0
     if not open_cubes:
         with path.open("w") as fh:
             fh.write(json.dumps(header) + "\n")
             for i in sorted(leaves()):
                 for line in lines_of(i):
-                    assert line not in seen, "duplicate representative across cubes"
-                    seen.add(line)
+                    full = json.loads(line)
+                    key = "".join(full[v] for v in blk)
+                    if key in owner:
+                        assert owner[key] == i, \
+                            f"class duplicated ACROSS cubes {owner[key]}/{i} — partition violated"
+                        dup_lines += 1
+                        continue
+                    owner[key] = i
                     fh.write(line + "\n")
-    total = len(seen) if not open_cubes else sum(len(lines_of(i)) for i in leaves())
+    total = len(owner) if not open_cubes else sum(distinct_of(i) for i in leaves())
     gate = "proceed" if status == "exact" and total <= 30_000 else "blocked"
     row = {**header, "kind": "enumeration", "count": total, "status": status, "gate": gate,
            "cubes": {"n": len(man["cubes"]), "open": len(open_cubes)},
+           "duplicate_class_lines_dropped": dup_lines,
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "the separating colourings of the object minus the batch, one "
-           "representative per palette orbit under the pinned breaking order, enumerated by "
-           "entropy-split disjoint colour cubes (leaves partition the solution set, so the union "
-           "equals the sequential enumeration); EXACT only if status = exact (every leaf closed "
-           "by UNSAT)"}
+           "representative per CLASS (the blk projection) per palette orbit under the pinned "
+           "breaking order, enumerated by entropy-split disjoint colour cubes (leaves partition "
+           "the solution set); duplicate-class lines from pre-incident-4 cube files are dropped "
+           "at assembly; EXACT only if status = exact (every leaf closed by UNSAT)"}
     T.record(BUILD / "m50-batch.json", row)
     lock.unlink(missing_ok=True)
     log(f"[enumerate-cubes] total {total} ({status}, gate {gate}), {time.time()-t0:.0f}s")

@@ -476,3 +476,36 @@ object-fingerprint mismatch SEEN RED — `--self-test` PASS end to end. The jobs
 the floor-17 enumeration (stage = object − 43 removed − floor-17, the incident-2 assert green)
 runs under setsid, log `build/m51-enum-it3.log`; the current object's depth-1 pool is being
 built ONCE into the cache behind it.
+
+## §R-INC4. Incident 4 — phantom duplicate classes from resumed-cube blocking (2026-08-25)
+
+**Found by reading the enumeration worker while designing a utilization fix** (Kooshi's "we're
+not at fully concurrent utilization" — the diagnosis pass found the bug before the swap).
+**Mechanism:** on every round, a resumed cube rebuilt its blocking clauses over ALL object
+columns (`range(obj.n)`) while fresh finds blocked over the seed projection (`blk`) — so a
+resumed cube could re-find an already-found CLASS wearing different halo colours, once per
+round, forever. Iteration 1 was immune (seed object: the projections coincide); every
+blocked-on enumeration since was affected. **Measured scope:** the it-2 v2 list = 45,365 lines
+but **24,810 distinct classes** (45 % duplicates); the it-3 first run = 141,313 lines, **82 %
+phantom** (~25k real classes — the "3× bigger list" reading is retracted); the core-probe
+per-edge lists inflated 25–35 % (e.g. (43,205): 500 lines / 354 distinct).
+
+**Soundness analysis, stated precisely:** weak blocking finds MORE, never less — so every
+distinct-class SET is still COMPLETE and EXACT; only multiplicities are wrong. The certified
+commits never consumed any list (the certification ask quantifies over all colourings) and
+STAND. The it-2 hitting/cover decisions are per-line with duplicate lines carrying identical
+mono patterns and verdicts — decisions unchanged, work inflated ~1.8× (part of the it-2
+profile's measured slowness). Corrections are bookkeeping, not re-runs: it-2 |S| reads
+"45,365 lines / 24,810 distinct classes, set exact"; the core-probe class counts shrink
+proportionally with verdict structure unchanged ("zero provable survivors" survives verbatim).
+
+**The fix + the swap (E1), landed together with separated regressions:** `_enum_work` blocks
+rebuilds over `blk` (in-stretch and rebuild blocking are now the same clause); assembly dedupes
+by class projection (historical phantom lines dropped and counted in the row; a cross-cube
+class duplicate is a partition violation and REFUSES); round progress reports DISTINCT classes.
+Swap E1: one forked process per open cube per round, replacing the GIL-bound thread pool
+(measured first: load 6 on 32 cores, 5 solver forks alive, parent at 100 % of one core).
+**Control:** the swapped engine must reproduce the seed's |S₂₉| = 51,350 exactly in a fresh
+scratch dir before it-3 resumes (chained: control red ⟹ no relaunch). G21/G30 filing at close:
+"45,365 seed-classes, exact" was a headline whose count measured the enumerator's blocking
+scope — the class-set half was exact, the count half was the instrument.
