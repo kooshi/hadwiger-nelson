@@ -509,3 +509,20 @@ Swap E1: one forked process per open cube per round, replacing the GIL-bound thr
 scratch dir before it-3 resumes (chained: control red ⟹ no relaunch). G21/G30 filing at close:
 "45,365 seed-classes, exact" was a headline whose count measured the enumerator's blocking
 scope — the class-set half was exact, the count half was the instrument.
+
+## §R-rust. The Rust scope after incident 4 (2026-08-25, Kooshi's utilization question)
+
+The enumerator joins the Rust engine's scope as **WO-2's second consumer**: the same persistent
+incremental-SAT machinery serves both the ask residue and enumeration — solver held in memory
+per cube, blocking clauses added through the incremental API (no CNF rewrite, no fork, no
+re-parse, learned clauses persisting), where the Python engine pays a file rewrite plus a
+process fork per colouring even after swap E1. Acceptance: reproduce the seed's 51,350 and a
+completed it-3 stage class-for-class (set equality), with the breaking order and pin scheme
+exported in the fixture (bit-compatibility of `_brk_full` is the load-bearing detail). WO-1
+(the ask kernel) stays first — its fixture is complete today and the profile is each
+iteration's next bottleneck once enumeration lands. **cas-rs
+(https://github.com/electrifypro/cas-rs, Kooshi's pointer, 2026-08-25): auditioned where a CAS
+belongs** — the exact-geometry work order (the certify phase's 45 s/edge sympy nested-radical
+wall and the numeric-250 label debt), benchmarked by the engineer against the bespoke
+quadratic-tower-arithmetic alternative on real provenance chains; it is not a candidate for the
+enumeration, whose costs are SAT- and orchestration-shaped.
