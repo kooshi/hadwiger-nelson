@@ -595,18 +595,26 @@ with `kill -- -PGID`. The jobs ledger is `build/m51-jobs.txt`. One heavy job at 
 5. Width-stall probes (§B8: ddmin-overlap + smoothness/compression) fire at the FIRST it-3
    stall batch. it-4 pool: `_build_pool` caches by object fingerprint automatically.
 
-**WO-1 (the ask kernel) is fixture-ready and NOT yet issued.** Bundle pieces on disk: it-2
-object `build/m50-object-S29-depth2r.json`; it-2 list `build/m50-S-S29-depth2r-it2v2.jsonl`
-(45,365 LINES = 24,810 distinct — incident 4; the checkpoint is LINE-indexed so replay is over
-lines); it-2 checkpoint `build/m50-profile-ck-S29-depth2r-it2v2-depth1.jsonl` (header
-`# 45365 0395d666c3eb9b3d`); it-2 pool cache `build/m51-pool-7294df4a74c714f5-depth1.{json,npz}`
-(175,166 pts, fp 0395d666c3eb9b3d — reproduces the checkpoint's pool fp). To issue: write
-`plans/WO-1-*.md` in `~/source/descent-engine` (acceptance = verdict partial-order replay +
-≥ 30×, SPEC v0.3.1 pinned by hash; the engineer's WO-0 record + ARCHITECTURE.md carry the
-inherited decisions), then **apply the phase-boundary protocol**: a PLANNING ferrous-engineer
-session first (subplan → my approval spoken → it persists and marks approved), then a FRESH
-session implements. Spawn hygiene: subagent cwd inherits my shell's momentary cwd — absolute
-paths rule. The peer-delegation skill governs every message.
+**WO-1 IS LANDED AND ACCEPTED (2026-08-25, both phases, same day).** The phase-boundary
+protocol ran end to end: planning session (subplan approved at descent-engine `e754029`; three
+SPEC-changing findings F1/F3/F6-precursor, the tier census, the propagation tier F5, and F4 —
+the peel/strong-rung order costing the campaign ~2.5×, applied here as swap E2, §R-E2), then a
+FRESH implementation session from the durable record alone: **gate green 76/76 controls
+(verified independently by me), the full 45,365-line it-2 replay with ZERO decided–decided
+disagreements, coverage 40.8 % with the propagation tier / 3.3 % without, prefix-group control
+0 disagreements, difftest 1,000 comparisons 0 contradictions with a planted red** (commits
+`2b528bd` + `fc86dd9`, pushed; acceptance evidence in `scratch/results/wo1-acceptance.json`).
+**SPEC is v0.4.1**: v0.4 = amendments A1 (class width = object width, seed-prefix ask,
+block_on optional), A2 (strong rung = OBJECT-neighbours ≥ 3), A3 (tier 0b propagation,
+domains discarded), A4 (tier numbers are names, order free and reported); v0.4.1 = F6 ruled —
+`fingerprint_bare` (the point-set identity) joins the object JSON (writer updated here,
+`04dbaaf`), restoring the object↔pool-export cryptographic bind for every future object.
+**WO-2 next (not yet issued)**: leads with D10 (does the ~10,000-boolean strong rung need a
+vendored solver before a hand DPLL with the propagation is tried?) + the enumerator scope
+(§R-rust; the ask tier and the enumerator may want DIFFERENT answers — separate questions);
+D15 = the peel is where the undecided-ask time goes (3.7 ms median). Full-width Rust timing
+run deferred until the box is free. Spawn hygiene: subagent cwd inherits my shell's momentary
+cwd — absolute paths rule. The peer-delegation skill governs every message.
 
 **Engine-repo state:** WO-0 ACCEPTED (`f82d7df`), SPEC v0.3.1 (canonical `stage_fp` =
 `stage_fp_key` in batchkill.py — pinned example: key('7f7aa18bcce0b917', [(4,205),(0,20)],
