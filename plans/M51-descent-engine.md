@@ -325,3 +325,35 @@ through the same certification asks; every engine handover carries the verdict-e
 engineer reports land in the M51 job record with their acceptance verdicts. Desktop scheduling:
 the profile/cover own the box; cargo builds ride along; big Rust replay benchmarks run between
 campaign phases. Costs tracked per work order (Opus engineer turns are billed).
+
+## §Bʹ. The domain-modeling pass (2026-08-24, fresh invocation) — what it changed
+
+1. **SpareColour.lean converges to four declarations with an asymmetric hypothesis map, and the
+   asymmetry is derived, not chosen.** Primary pair in the repo's own vocabulary:
+   `not_forces_of_colorable (hG : G.Colorable k) (hpq : p ≠ q) : ¬ Forces G (k+1) p q` and
+   `not_separated_of_colorable (hG : G.Colorable k) (hadj : ¬ G.Adj p q) : ¬ Separated G (k+1) p q`
+   — the Separated half needs NO `p ≠ q` (at `p = q` it already fails whenever any colouring
+   exists), the Forces half genuinely does (at `p = q` it is trivially true). Contrapositives
+   DOT-NAMED for their consumers: **`Forces.not_colorable`** (the phase monitor reads
+   `h.not_colorable`) and **`Separated.not_colorable_of_not_adj`** (the gadget hard floor). The
+   `k+1` carrier is minimal and complete (`Colorable.mono` subsumes more spare colours). K4 keeps
+   a floor-division exponent (`2 ^ (n / k)`) deliberately — the consumer needs "astronomical",
+   not sharpness. NO arity generalization (the independent-set variant is speculative structure;
+   pair scope is the stated scope). New leaf file importing `Fan`/`Forcer` — imports are free,
+   additions to those files are not (M11).
+2. **A stage is a derivation KEY, not a blob.** The object is the only primary datum; the pool
+   and the list are memoized values of deterministic functions of it. Fixture manifest therefore
+   carries: the derivation key (object fingerprint, batch, pool params), each component's
+   fingerprint, a combined **`stage_fp`**, and a **`schema_version`**. Checkpoint headers cite
+   `stage_fp` (header v2, superset of the current `# |S| pool_fp`). The Rust engine REFUSES on
+   any fingerprint mismatch — incident 2's whole class (mix-and-matched stage components)
+   designed out at the format level, parse-don't-validate at the engine boundary.
+3. **Drift prevention between the two engines is the corpus, versioned.** Both engines are
+   readers/writers of the SAME files; the regression corpus is append-only (every campaign run's
+   checkpoints join it); any semantic change bumps `schema_version` and replays the corpus.
+   SPEC.md §6 to be amended with the manifest fields (a product-owner edit, WO-0 timeframe).
+4. **The batch-widening order is intrinsically justified, and gets a free calibration.** The
+   floor-edge cost column (mono-mass × |S|) is the first-order predictor of the |S|-growth from
+   adding that edge to the batch — "cheapest first" IS greedy list-growth minimization. Phase 1w
+   additionally reports measured Δ|S| per widening step against the column's prediction (free via
+   nested sub-batch filters) — a G30-grade calibration of the proxy before anything leans on it.
