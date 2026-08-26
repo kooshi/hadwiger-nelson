@@ -582,8 +582,16 @@ and Kooshi rebooted). The mp.Pool forked a replacement, but the dead worker's in
 was lost, so the parent hung forever in `px.map` — CPU silent, every process asleep; found by
 Kooshi noticing the silence. The exposure: `_shrink_halo` kept its state ONLY in the parent's
 memory and saved only on completion, so the shrink's 19 h (halo ~2,000+ → 780, chunk-1 round)
-is LOST; the cover state (`m50-cover-…-it2v2-depth1.json`, per-wave checkpointed, 3,440/3,440
-covered, zero stalls) survived intact. **Consequences adopted: (a) the standing
+is LOST; the cover state (`m50-cover-…-it2v2-depth1.json`, per-wave checkpointed) survived
+intact. **CORRECTION 2026-08-26 (found by the WO-5 planning session reading the artifact —
+not by me): the cover ended `covered 3390/3440, queue 0, STALL 50` (log line 85; the state
+file holds `stall len 50`). My "3,440/3,440, zero stalls" record conflated queue 0 with
+stall 0, written mid-incident and never re-verified. The 50 stalls are the width-shaped
+deferrals (kill exists only in the oversized whole rung, no ddmin-able rung), and
+`run_commit` (batchkill.py:1696) REFUSES on a nonempty stall list — so even a finished
+shrink of this halo was never committable. The binding constraint of iteration 3 is the
+50 stalls, not the halo's tail; WO-5's 50,000-point ladder cap targets them directly
+(its P7 registers "more than half fall" as deciding it-3 committability).** **Consequences adopted: (a) the standing
 checkpoint rule** (CLAUDE.md § Toolchain: every phase > ~15 min checkpoints at acceptance
 points and resumes exactly; the audit question "if this dies now, what does the relaunch
 redo?" answers in the subplan); **(b) the design phase moves to the Rust engine** (Kooshi's
@@ -615,9 +623,11 @@ checkpoint-JOINable sidecar rows, `unknown` → decided being the one legal revi
 **Hitting: DONE — 164 survivors over 14 cheats → keep 7, COMMIT 10 of 17** (jackpot clause
 did not fire; `build/m50-hitting-S29-depth2r-it2v2-depth1-it2v2.json` holds keep/commit).
 **Design: KILLED BY INCIDENT 5 (§R-INC5)** — the 19-h shrink is lost; the COVER STATE IS
-SAFE (`build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`: full pre-shrink halo,
-3,440/3,440 covered, zero stalls, pool fp checked on resume). Machine rebooted 2026-08-26
-~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use `MECH_WORKERS=26`**.
+SAFE (`build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`: 1,542-point pre-shrink
+halo, **covered 3,390/3,440 with 50 STALLED classes** — see the §R-INC5 correction: my
+earlier "3,440/3,440, zero stalls" was wrong, the stalls block `run_commit` outright, and
+resolving them — not finishing the shrink — is iteration 3's binding constraint). Machine
+rebooted 2026-08-26 ~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use `MECH_WORKERS=26`**.
 
 **The re-planned it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`), per Kooshi at the
 restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
