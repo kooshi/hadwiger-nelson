@@ -640,9 +640,17 @@ restart ("checkpoint everything long-running — standing rule; use Rust for the
    WIDEN the commit batch past 10 and/or drop keep below 7. If the batch changes, the cover
    redoes against the new S_commit (it converged in ~1 h last time); if not, the saved cover
    state stands.
-2. **WO-5 (Rust descent design phase) is the shrink's new home** — work order
-   `descent-engine/plans/WO-5-descent-design.md`, pushed at `a1f7c90`, planning session
-   RUNNING (cover + shrink with checkpoint-per-acceptance as an ACCEPTANCE CLAUSE;
+2. **WO-5 (Rust descent design phase) is the shrink's new home** — subplan FROZEN at
+   descent-engine `9ac56af` (2026-08-26, after TWO adversarial rounds: 18+13 findings,
+   3 design-class, all resolved — reviews in `descent-engine/scratch/reviews/`; SPEC bumped
+   to v0.6 = `8616f342…` with the six amendments applied; pushed `3e9e37e`), implementation
+   session RUNNING under the box constraint (no real-stage runs until the residue frees the
+   cores). Key design rulings: reading A of the presence encoding (old halo unconditional, no
+   presence literal); EVERY ladder rung truncated to `--ladder-cap`; **a whole-pool refutation
+   is a KILL with a solver core, not a stall** (decision 29 — the Python engine's 50 "stalls"
+   were `core_alive` at ~344k points, never a refutation core, so the Rust second pass may
+   dissolve iteration 3's binding constraint outright) (cover + shrink with
+   checkpoint-per-acceptance as an ACCEPTANCE CLAUSE;
    the Rust shrink's output halo is verified independently by the Python lookup before any
    commit — soundness by the certify, not by replay-exactness). Python fallback if WO-3
    slips: add per-acceptance `_save` inside `_shrink_halo` (5 lines) and relaunch.
