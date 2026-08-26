@@ -573,27 +573,37 @@ the broken one churned overnight; the swap's control reproduced the seed's 51,35
 first — both transcripts live back to back in `build/m51-enum-it3-v2.log`, so READ THE END, a
 mid-file tail cost this session a false alarm).
 
-**RUNNING at the save: the it-3 profile** — launched
-`setsid python3 -u tools/batchkill.py --profile --pool depth1 --object S29-depth2r-it2v2-depth1`,
-log `build/m51-profile-it3.log`, checkpoint
-`build/m50-profile-ck-S29-depth2r-it2v2-depth1-it2v2-depth1.jsonl` (per-verdict, resume-exact;
-duplicate rows fold by the verdict JOIN — a contradiction refuses). Pool loads from cache
-(394,604 pts, fp 5481c3fae64e770d). Waiters: `pgrep -f "^python3 -u tools/batchkill"`; stop
-with `kill -- -PGID`. The jobs ledger is `build/m51-jobs.txt`. One heavy job at a time.
+**STATE AS OF 2026-08-26 ~02:45Z (updated at Kooshi's second compaction warning).**
+**Profile: COMPLETE — 46,186 killed / 0 provable survivors / 164 unknown of 46,350**
+(checkpoint `build/m50-profile-ck-S29-depth2r-it2v2-depth1-it2v2-depth1.jsonl`, 46,351 rows,
+complete; ran on the E2-swapped engine at ~189 verdicts/min vs 98 pre-swap; the 164 unknowns
+are 900-s full-core caps and are WO-2's named campaign deliverable — resolves come back as
+checkpoint-JOINable sidecar rows, `unknown` → decided being the one legal revision, and every
+`killed` can shrink the floor retroactively via a hitting-set re-run).
+**Hitting: DONE — 164 survivors over 14 cheats → keep 7, COMMIT 10 of 17** (jackpot clause
+did not fire; `build/m50-hitting-S29-depth2r-it2v2-depth1-it2v2.json` holds keep/commit).
+**Design: IN FLIGHT** — `--design --pool depth1 --object S29-depth2r-it2v2-depth1`, pgid
+3171101, log `build/m51-design-it3.log`; cover converged (3,440/3,440 via halo 783 + 17),
+shrink now at |halo| ≈ 1,020 (chunk-6 round, ~31 procs); a watcher + mem sampler run in this
+session (`build/m51-mem.log`). NEAR-OOM RECORD: 25 Aug 14:29Z hit 125.2/128 GB, swap full —
+killed one of Kooshi's terminals, campaign unharmed (setsid-detached); **for the it-4
+profile launch use `MECH_WORKERS=26`** (the dormant knob in `tools/mechanism.py`; decided
+with Kooshi 2026-08-26).
 
-**The remaining it-3 chain when the profile lands (commands exist; tag/label =
-`S29-depth2r-it2v2-depth1-it2v2`, profile label appends `-depth1`):**
-1. `--hitting --deepest S29-depth2r-it2v2-depth1-it2v2-depth1 --object S29-depth2r-it2v2-depth1`
-   (floor-17 candidates from the recurse-census row; jackpot clause armed — μ ≤ 1 HALTS).
-2. `--design --pool depth1 --object S29-depth2r-it2v2-depth1` (delete any stale
-   `build/m50-cover-*` for this tag first — the M50 gotcha).
-3. `--commit --pool depth1 --object S29-depth2r-it2v2-depth1` (triple; if refused, INVESTIGATE).
-4. Per-commit columns: χ(unit) via `python3 tools/m50_skewscan.py --unitchi --object <new>`
-   (crossing ⟹ HALT-AND-CERTIFY); floor census via `--recurse --label <new-object-label>`;
-   polarization `--scan`; field census. §R numbers per phase. The GAUGE (4-colouring count of
-   the unit part) and `build/m51-columns.json` are NOT yet implemented — pending items.
-5. Width-stall probes (§B8: ddmin-overlap + smoothness/compression) fire at the FIRST it-3
-   stall batch. it-4 pool: `_build_pool` caches by object fingerprint automatically.
+**The remaining it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`):**
+1. When the design exits: `python3 -u tools/batchkill.py --commit --pool depth1 --object
+   S29-depth2r-it2v2-depth1` (the TRIPLE: halo kills the list, one-hot UNSAT, 3-bit UNSAT,
+   exact geometry; if refused, INVESTIGATE — never shrug). Success ⟹ 53/446 cheats removed,
+   floor 7, new object JSON written (first file carrying `fingerprint_bare`).
+2. Per-commit columns: χ(unit) via `python3 tools/m50_skewscan.py --unitchi --object <new>`
+   (crossing ⟹ HALT-AND-CERTIFY); floor census `--recurse --label <new-object-label>`;
+   polarization `--scan`; field census. The GAUGE and `build/m51-columns.json` remain
+   unimplemented (riding).
+3. it-4: `_build_pool` caches by object fingerprint automatically; enumerate → profile
+   (with MECH_WORKERS=26) → … Width-stall probes (§B8) fire at the first it-3 stall batch.
+**The paper-grade algorithm statement now exists: `plans/DESCENT-ALGORITHM.md`** (the loop,
+the soundness architecture, the tightrope sizing principle credited to Kooshi, the descent
+table) — keep its state table current at each iteration close.
 
 **WO-1 IS LANDED AND ACCEPTED (2026-08-25, both phases, same day).** The phase-boundary
 protocol ran end to end: planning session (subplan approved at descent-engine `e754029`; three
@@ -609,12 +619,15 @@ block_on optional), A2 (strong rung = OBJECT-neighbours ≥ 3), A3 (tier 0b prop
 domains discarded), A4 (tier numbers are names, order free and reported); v0.4.1 = F6 ruled —
 `fingerprint_bare` (the point-set identity) joins the object JSON (writer updated here,
 `04dbaaf`), restoring the object↔pool-export cryptographic bind for every future object.
-**WO-2 next (not yet issued)**: leads with D10 (does the ~10,000-boolean strong rung need a
-vendored solver before a hand DPLL with the propagation is tried?) + the enumerator scope
-(§R-rust; the ask tier and the enumerator may want DIFFERENT answers — separate questions);
-D15 = the peel is where the undecided-ask time goes (3.7 ms median). Full-width Rust timing
-run deferred until the box is free. Spawn hygiene: subagent cwd inherits my shell's momentary
-cwd — absolute paths rule. The peer-delegation skill governs every message.
+**WO-2 ISSUED 2026-08-26 (`plans/WO-2-solver-tier.md` in descent-engine, pushed at
+`b13b772`) and its PLANNING session is running** (spawned this session; report pending at
+the compaction warning). Contents: D10 measured-first in split form; enumerator scoped not
+necessarily built; it-2 coverage clause promoted HARD; **campaign deliverable = re-ask the
+it-3 164-unknown residue, sidecar checkpoint-JOINable rows** (it-3 fixture hashes pinned in
+the WO). On its return: review subplan → spoken approval → persist → fresh implementation
+session. Full-width Rust timing run deferred until the box is free. Spawn hygiene: subagent
+cwd inherits my shell's momentary cwd — absolute paths rule. The peer-delegation skill
+governs every message.
 
 **Engine-repo state:** WO-0 ACCEPTED (`f82d7df`), SPEC v0.3.1 (canonical `stage_fp` =
 `stage_fp_key` in batchkill.py — pinned example: key('7f7aa18bcce0b917', [(4,205),(0,20)],
