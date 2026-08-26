@@ -631,15 +631,25 @@ block_on optional), A2 (strong rung = OBJECT-neighbours ≥ 3), A3 (tier 0b prop
 domains discarded), A4 (tier numbers are names, order free and reported); v0.4.1 = F6 ruled —
 `fingerprint_bare` (the point-set identity) joins the object JSON (writer updated here,
 `04dbaaf`), restoring the object↔pool-export cryptographic bind for every future object.
-**WO-2 ISSUED 2026-08-26 (`plans/WO-2-solver-tier.md` in descent-engine, pushed at
-`b13b772`) and its PLANNING session is running** (spawned this session; report pending at
-the compaction warning). Contents: D10 measured-first in split form; enumerator scoped not
-necessarily built; it-2 coverage clause promoted HARD; **campaign deliverable = re-ask the
-it-3 164-unknown residue, sidecar checkpoint-JOINable rows** (it-3 fixture hashes pinned in
-the WO). On its return: review subplan → spoken approval → persist → fresh implementation
-session. Full-width Rust timing run deferred until the box is free. Spawn hygiene: subagent
-cwd inherits my shell's momentary cwd — absolute paths rule. The peer-delegation skill
-governs every message.
+**WO-2 LANDED AND ACCEPTED 2026-08-26 (both protocol phases + three adversarial rounds —
+nineteen planning findings; the record froze at descent-engine `fc8d85d`, SPEC v0.5 =
+`12e33135…`).** Implementation: gate green 103 controls (verified independently), **it-2
+soundness 45,262/45,262 decided rows matched, zero contradictions, coverage clause MET at
+the 2,000,000-conflict default** (failed first at 700,000 — 9 of the 11 exhausted rows were
+SURVIVORS: witness costs 226 s median vs refutation 0.8 s — 281×, the survivors bind every
+budget); learned-clause **reuse measured 2.59×** against the registered 1.5× line (ships;
+`--solver-reset` a flag); one real bug found and fixed mid-acceptance (a resume < 32 rows ran
+single-threaded while printing the requested worker count — would have made the residue run
+6-wide instead of 30). **The residue re-ask is BUILT, NOT LAUNCHED — schedule: after the
+it-3 commit lands → quiet-box window (Rust timing run + the 46-survivor budget sweep,
+~30 min) → residue overnight at 28 workers (preflight refuses 30 at 94.3 GB), UNLESS
+Kooshi's courier-RAM answer arrives and is large (164 workers want ~550 GB — memory, not
+cores, caps it there). Output = sidecar checkpoint-JOINable rows; merge, then re-run
+`--hitting` on joined verdicts; may resolve ZERO (measured: no cheap lever exists) and that
+outcome is a hardness measurement, floor 7 by evidence.** WO-3 (scale driver) next on the
+Rust side; the WO-3 planning brief must carry `plans/REVIEW-METHOD.md` (the five review
+conditions + the adversarial-repeat instruction). Spawn hygiene: absolute paths; the
+peer-delegation skill governs every message.
 
 **Engine-repo state:** WO-0 ACCEPTED (`f82d7df`), SPEC v0.3.1 (canonical `stage_fp` =
 `stage_fp_key` in batchkill.py — pinned example: key('7f7aa18bcce0b917', [(4,205),(0,20)],
