@@ -34,7 +34,8 @@ refuser.** Each kept refuser edge `e` was re-asked on the grown object: enumerat
 separating colourings of (object − removed − {e}) exactly (55–500 seed classes each), then ask
 whether the object's OWN depth-1 partner lattice (394,604 points) kills them. Result: **five
 edges FALL clean** — including M49 hold-outs — **and the six others hold ZERO provably
-surviving colourings** (2,402 classes, 2,351 killed, 49 undecided at 7,200-s caps, never
+surviving colourings** (2,402 list lines = 1,755 distinct classes — the §R-INC4 recount,
+2026-08-26; killed/undecided in line units, class-level undecided ≤ 49; at 7,200-s caps, never
 folded). The same edges refused every pool of the smaller object at M49. The committed
 material's own partner lattice grows faster than the rigidity it must break: **the loop is
 self-accelerating at depth 1** (G33's reading; falsifiers registered there — an iteration whose
@@ -509,6 +510,17 @@ Swap E1: one forked process per open cube per round, replacing the GIL-bound thr
 scratch dir before it-3 resumes (chained: control red ⟹ no relaunch). G21/G30 filing at close:
 "45,365 seed-classes, exact" was a headline whose count measured the enumerator's blocking
 scope — the class-set half was exact, the count half was the instrument.
+
+**The core-probe recount (the riding bookkeeping item, done 2026-08-26):** all eleven
+`build/m50-S-coreprobe-*.jsonl` lists deduplicated by 214-prefix — **2,402 lines = 1,755
+distinct classes** (per-file duplication 16.5–35.6 %, mean 26.9 %; the total matching the
+recorded "2,402 classes" exactly confirms that number was a line count). Class-level
+consequences: the zero-provable-survivor verdict is unaffected (a duplicate class killed
+twice is killed) and the "49 undecided" becomes an upper bound at class level (an undecided
+line whose duplicate was killed is a killed class). Frontier row 45 and §R0a's citation
+carry the correction inline. Per file: 0-20 348/288 · 115-212 134/97 · 118-212 118/96 ·
+126-203 139/116 · 206-210 290/212 · 206-211 351/232 · 4-205 317/204 · 43-205 500/354 ·
+58-213 65/50 · 71-107 85/68 · 98-213 55/38.
 
 ## §R-rust. The Rust scope after incident 4 (2026-08-25, Kooshi's utilization question)
 
