@@ -621,15 +621,18 @@ SAFE (`build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`: full pre-shr
 
 **The re-planned it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`), per Kooshi at the
 restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
-1. **RESIDUE FIRST (running or next)**: the WO-2 engine re-asks the 164 unknowns — command
-   and preflight in `descent-engine/plans/WO-2-outcome.md` open item 1 (28 workers offered
-   at this box; sidecar JOINable rows out). Merge into the it-3 checkpoint (verdict join;
+1. **RESIDUE FIRST — LAUNCHED 2026-08-26 14:20Z** (28 workers, out `build/m51-residue-it3/`,
+   log `build/m51-residue-it3.log`, ledger row in `build/m51-jobs.txt`): the WO-2 engine
+   re-asks the 164 unknowns — command and preflight in `descent-engine/plans/WO-2-outcome.md`
+   open item 1 (sidecar JOINable rows out; this supersedes the WO-2 paragraph's
+   after-the-commit schedule below — the incident-5 redo made residue-first strictly better). Merge into the it-3 checkpoint (verdict join;
    `unknown` → decided only), then **re-run `--hitting`** on merged verdicts — resolves can
    WIDEN the commit batch past 10 and/or drop keep below 7. If the batch changes, the cover
    redoes against the new S_commit (it converged in ~1 h last time); if not, the saved cover
    state stands.
-2. **WO-3 (Rust descent design phase) is the shrink's new home** — work order in
-   descent-engine (cover + shrink with checkpoint-per-acceptance as an ACCEPTANCE CLAUSE;
+2. **WO-5 (Rust descent design phase) is the shrink's new home** — work order
+   `descent-engine/plans/WO-5-descent-design.md`, pushed at `a1f7c90`, planning session
+   RUNNING (cover + shrink with checkpoint-per-acceptance as an ACCEPTANCE CLAUSE;
    the Rust shrink's output halo is verified independently by the Python lookup before any
    commit — soundness by the certify, not by replay-exactness). Python fallback if WO-3
    slips: add per-acceptance `_save` inside `_shrink_halo` (5 lines) and relaunch.
