@@ -2049,6 +2049,18 @@ past one looks like. Related discipline: **one heavy job at a time** — the box
 headroom for a replay, a hunt, and a build concurrently, and stacking them is how caps turn into
 OOM kills.
 
+**Every long-running phase checkpoints, and resumes exactly — a standing rule (Kooshi,
+2026-08-26).** Any run expected to exceed ~15 minutes must persist its progress at natural
+acceptance points (a verdict, a wave, an accepted deletion) and resume from that state after a
+kill; a long phase whose state lives only in a process's memory is a BUG, not a style choice —
+on this hardware it is a bet against a demonstrated segfault rate. The incident that minted the
+rule: M51's iteration-3 halo shrink ran 19 hours with its state only in the parent (the cover
+before it checkpointed per wave; the shrink saved only on completion), one worker died of a
+libpython general protection fault, the pool's `map` hung forever, and the whole shrink was
+lost (M51 §R-INC5). The audit question at every phase design: "if this process dies at any
+instant, what does the relaunch redo?" — and the answer is written in the subplan, not
+discovered at the loss.
+
 Dependency order is not decoration: naming a target whose dependencies are missing makes Lake build
 those too, in the same unrestricted pool, so a batch bounds concurrency *only* if everything beneath
 it already exists. `scripts/build_order.py` computes the order from the import graph.

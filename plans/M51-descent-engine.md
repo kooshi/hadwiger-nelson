@@ -573,6 +573,26 @@ dormant: `MECH_WORKERS` env override in `tools/mechanism.py`, default unchanged.
 is APPROVED and closed (descent-engine e754029, SPEC v0.4 = 3133be99dcdd84f7…); the strong-set
 kill-core refinement is filed there as DEFERRED D14 for WO-5.
 
+## §R-INC5. Incident 5 — a worker segfault hung the shrink, and 19 hours had no checkpoint
+(2026-08-26)
+
+At 13:32:28Z shrink worker 3342611 died of a **general protection fault in libpython3.14**
+(`coredumpctl`: SIGSEGV; the machine's known hardware fault — the standing HALT rule fired
+and Kooshi rebooted). The mp.Pool forked a replacement, but the dead worker's in-flight task
+was lost, so the parent hung forever in `px.map` — CPU silent, every process asleep; found by
+Kooshi noticing the silence. The exposure: `_shrink_halo` kept its state ONLY in the parent's
+memory and saved only on completion, so the shrink's 19 h (halo ~2,000+ → 780, chunk-1 round)
+is LOST; the cover state (`m50-cover-…-it2v2-depth1.json`, per-wave checkpointed, 3,440/3,440
+covered, zero stalls) survived intact. **Consequences adopted: (a) the standing
+checkpoint rule** (CLAUDE.md § Toolchain: every phase > ~15 min checkpoints at acceptance
+points and resumes exactly; the audit question "if this dies now, what does the relaunch
+redo?" answers in the subplan); **(b) the design phase moves to the Rust engine** (Kooshi's
+direction at the restart: "use Rust for the descent") — WO-3 issued as the descent design
+phase (cover + shrink) with checkpoint-per-acceptance a named acceptance clause; **(c) the
+sequencing GAIN from the crash**: the residue re-ask runs FIRST now (the box is free and the
+design must redo anyway), so if any of the 164 unknowns resolve, the hitting set re-runs on
+merged verdicts and the design targets a possibly WIDER batch than commit-10.
+
 ## §S-CONT. SESSION STATE FOR CONTINUATION (2026-08-25, written at Kooshi's compaction call)
 
 **Read this first in a fresh session.** WORKFLOW position: M51 step 7 (implementation). Phases
@@ -594,25 +614,30 @@ checkpoint-JOINable sidecar rows, `unknown` → decided being the one legal revi
 `killed` can shrink the floor retroactively via a hitting-set re-run).
 **Hitting: DONE — 164 survivors over 14 cheats → keep 7, COMMIT 10 of 17** (jackpot clause
 did not fire; `build/m50-hitting-S29-depth2r-it2v2-depth1-it2v2.json` holds keep/commit).
-**Design: IN FLIGHT** — `--design --pool depth1 --object S29-depth2r-it2v2-depth1`, pgid
-3171101, log `build/m51-design-it3.log`; cover converged (3,440/3,440 via halo 783 + 17),
-shrink now at |halo| ≈ 1,020 (chunk-6 round, ~31 procs); a watcher + mem sampler run in this
-session (`build/m51-mem.log`). NEAR-OOM RECORD: 25 Aug 14:29Z hit 125.2/128 GB, swap full —
-killed one of Kooshi's terminals, campaign unharmed (setsid-detached); **for the it-4
-profile launch use `MECH_WORKERS=26`** (the dormant knob in `tools/mechanism.py`; decided
-with Kooshi 2026-08-26).
+**Design: KILLED BY INCIDENT 5 (§R-INC5)** — the 19-h shrink is lost; the COVER STATE IS
+SAFE (`build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`: full pre-shrink halo,
+3,440/3,440 covered, zero stalls, pool fp checked on resume). Machine rebooted 2026-08-26
+~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use `MECH_WORKERS=26`**.
 
-**The remaining it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`):**
-1. When the design exits: `python3 -u tools/batchkill.py --commit --pool depth1 --object
-   S29-depth2r-it2v2-depth1` (the TRIPLE: halo kills the list, one-hot UNSAT, 3-bit UNSAT,
-   exact geometry; if refused, INVESTIGATE — never shrug). Success ⟹ 53/446 cheats removed,
-   floor 7, new object JSON written (first file carrying `fingerprint_bare`).
-2. Per-commit columns: χ(unit) via `python3 tools/m50_skewscan.py --unitchi --object <new>`
-   (crossing ⟹ HALT-AND-CERTIFY); floor census `--recurse --label <new-object-label>`;
-   polarization `--scan`; field census. The GAUGE and `build/m51-columns.json` remain
-   unimplemented (riding).
-3. it-4: `_build_pool` caches by object fingerprint automatically; enumerate → profile
-   (with MECH_WORKERS=26) → … Width-stall probes (§B8) fire at the first it-3 stall batch.
+**The re-planned it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`), per Kooshi at the
+restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
+1. **RESIDUE FIRST (running or next)**: the WO-2 engine re-asks the 164 unknowns — command
+   and preflight in `descent-engine/plans/WO-2-outcome.md` open item 1 (28 workers offered
+   at this box; sidecar JOINable rows out). Merge into the it-3 checkpoint (verdict join;
+   `unknown` → decided only), then **re-run `--hitting`** on merged verdicts — resolves can
+   WIDEN the commit batch past 10 and/or drop keep below 7. If the batch changes, the cover
+   redoes against the new S_commit (it converged in ~1 h last time); if not, the saved cover
+   state stands.
+2. **WO-3 (Rust descent design phase) is the shrink's new home** — work order in
+   descent-engine (cover + shrink with checkpoint-per-acceptance as an ACCEPTANCE CLAUSE;
+   the Rust shrink's output halo is verified independently by the Python lookup before any
+   commit — soundness by the certify, not by replay-exactness). Python fallback if WO-3
+   slips: add per-acceptance `_save` inside `_shrink_halo` (5 lines) and relaunch.
+3. Commit unchanged: `python3 -u tools/batchkill.py --commit --pool depth1 --object
+   S29-depth2r-it2v2-depth1` (the TRIPLE; refused ⟹ INVESTIGATE). Success ⟹ ~53+/446
+   removed, new object JSON = first `fingerprint_bare` carrier.
+4. Per-commit columns as before (χ(unit) crossing ⟹ HALT-AND-CERTIFY; `--recurse`;
+   `--scan`; field census); then it-4 (enumerate → profile at MECH_WORKERS=26 → …).
 **The paper-grade algorithm statement now exists: `plans/DESCENT-ALGORITHM.md`** (the loop,
 the soundness architecture, the tightrope sizing principle credited to Kooshi, the descent
 table) — keep its state table current at each iteration close.
