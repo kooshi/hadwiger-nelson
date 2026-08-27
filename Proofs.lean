@@ -64,6 +64,7 @@ import Proofs.HadwigerNelson.Homogeneous
 import Proofs.HadwigerNelson.OneDefect
 import Proofs.HadwigerNelson.PartnerLattice
 import Proofs.HadwigerNelson.SpareColour
+import Proofs.HadwigerNelson.EntropyFloor
 import Proofs.HadwigerNelson.Instances.OneDefectSpec
 import Proofs.HadwigerNelson.Instances.AritySpec
 import Proofs.HadwigerNelson.Instances.Spindle

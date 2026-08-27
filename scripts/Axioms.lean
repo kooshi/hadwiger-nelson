@@ -140,6 +140,9 @@ open HadwigerNelson
 #print axioms HadwigerNelson.not_separated_of_colorable
 #print axioms HadwigerNelson.Forces.not_colorable
 #print axioms HadwigerNelson.Separated.not_colorable
+-- M51: the entropy floor K4 — a k-colourable graph has ≥ 2^⌈n/k⌉ (k+1)-colourings (EntropyFloor.lean)
+#print axioms HadwigerNelson.two_pow_le_card_coloring
+#print axioms HadwigerNelson.spareColorings_eq_last_iff
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
