@@ -706,3 +706,18 @@ bit-compatibility is the load-bearing export); cas-rs audition scoped to the exa
 **Riding items not yet done:** K4 entropy-floor sitting; the Parts-{1,φ} skewscan replication
 (registered, NOT launched); `--status` next-command upgrade; core-probe distinct-class recount
 (bookkeeping, §R-INC4); predictions P1-P8 scored at close.
+
+## §R-INC6. The residue's three deaths (2026-08-26)
+
+The it-3 residue re-ask (`descent replay --reask-unknown`, 28 workers) died three times in one day
+with zero verdicts landed: SIGSEGV at 3 h 05 m, SIGSEGV (`at 10`) at 15 min, and glibc `double
+free or corruption (out)` at 13.5 min. I read the third
+as SOFTWARE (heap corruption signature) and filed INC-1 in descent-engine as an
+engine-bug investigation. **The investigation session refuted that with a decorrelated
+experiment**: a probe sharing no code with the engine, run at the residue's own footprint (28 × 2 GiB), caught a hardware fault twice. **Kooshi's hardware call stands.** Record corrections: my INC-1 text claimed WO-2's acceptance ran "30
+threads for hours" — its long sweeps ran at 6 threads / ≤ 6.2 GB, so the residue was the engine's
+first run at 9× its proven footprint, not 2.25×. Consequences for the campaign are in CLAUDE.md
+§ Toolchain (certified results immune; uncertified long-solve negatives carry exposure; D33).
+Residue: BLOCKED on hardware — options ranked for Kooshi: a hardware check then fix; the laptop at 4–5
+workers (~13–16 h, decorrelated machine); the courier. WO-5 real-stage acceptance shares the
+constraint. Investigation commits pushed (descent-engine `4428a07`); gate green 140/140.

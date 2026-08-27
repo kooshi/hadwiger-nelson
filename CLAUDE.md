@@ -2049,6 +2049,16 @@ past one looks like. Related discipline: **one heavy job at a time** — the box
 headroom for a replay, a hunt, and a build concurrently, and stacking them is how caps turn into
 OOM kills.
 
+**THE MECHANISM, FOUND 2026-08-26 (descent-engine `plans/INC-1-residue-crash.md`):** a hardware fault, caught twice by a decorrelated probe (`descent-engine/scratch/memcheck/`, run at the campaign's own 28 × 2 GiB
+footprint) after three solver deaths in one day. 
+**Consequences:** (a) kernel-checked results are immune — a flip fails the check, never passes
+it; (b) tools-side UNCERTIFIED negatives from long solver runs on this box (an UNSAT nobody
+re-derived) carry a small flip exposure — the descent's soundness rests on the commit CERTIFY, not
+on profile verdicts, which is why "profile advises, certificate decides"; D33 (re-ask a sample of
+kills on other hardware) applies to any measured negative that matters; (c) the rate is per byte
+touched, so the Rust engine — 28 solvers at 3.3 GB each, all-core — meets it hours sooner than
+Python did; long all-core solver runs belong on a machine that has passed the probe.
+
 **Every long-running phase checkpoints, and resumes exactly — a standing rule (Kooshi,
 2026-08-26).** Any run expected to exceed ~15 minutes must persist its progress at natural
 acceptance points (a verdict, a wave, an accepted deletion) and resume from that state after a
