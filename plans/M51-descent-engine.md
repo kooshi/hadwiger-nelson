@@ -631,6 +631,23 @@ rebooted 2026-08-26 ~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use
 
 **The re-planned it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`), per Kooshi at the
 restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
+
+**STATE 2026-08-27 (laptop — ONE active machine at a time; the desktop had a hardware fault at the time,
+§R-INC6, fix attempt at the weekend; the laptop is 6 physical / 12 logical cores, 31 GB, no known
+fault):** the it-3 DESIGN is running on the Rust engine (`descent-engine` WO-5 landed + WO-5b —
+`build/m51-design-it3-rust/design.jsonl`, resumable by the identical command; committable list
+exported by `tools/export_sublist.py` → `build/m51-Scommit-S29-depth2r-it2v2-depth1-it2v2.jsonl`,
+3,440 classes). **COVER DONE: 3,440/3,440 killed, ZERO stalls** — the Python engine's 50 stalls
+all fell to whole-pool solver cores (decision 29; P7 met 50/50; cover 8 m 36 s at 11 workers);
+union 4,209 points → shrink running at the shipped default (`--trials 1 --threads 5`; speculation
+across trials LOSES, measured A/B), halo 2,126 at last report, ~6–7 h floor on the laptop; WO-5c
+(D34: ask order inside a trial) in progress. Next: shrink finishes → `verify` → copy
+`<out>/halo.json` over `build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (Python
+original backed up as `.PYTHON-ORIGINAL-50stalls.json`) → `python3 -u tools/batchkill.py --commit
+--pool depth1 --object S29-depth2r-it2v2-depth1` (the triple; refused ⟹ INVESTIGATE) → columns
+→ it-4. The residue (164 unknowns) is BLOCKED on trusted hardware for long solves and DEMOTED
+to overnight filler (4 laptop workers, ~16 h, resumable) — it can only widen the batch. Kernel:
+K4 landed (`EntropyFloor.lean`, elaborates; build.sh gate + axiom audit await a quiet box).
 1. **RESIDUE FIRST — LAUNCHED 2026-08-26 14:20Z** (28 workers, out `build/m51-residue-it3/`,
    log `build/m51-residue-it3.log`, ledger row in `build/m51-jobs.txt`): the WO-2 engine
    re-asks the 164 unknowns — command and preflight in `descent-engine/plans/WO-2-outcome.md`
