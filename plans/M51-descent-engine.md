@@ -641,7 +641,22 @@ exported by `tools/export_sublist.py` → `build/m51-Scommit-S29-depth2r-it2v2-d
 all fell to whole-pool solver cores (decision 29; P7 met 50/50; cover 8 m 36 s at 11 workers);
 union 4,209 points → shrink running at the shipped default (`--trials 1 --threads 5`; speculation
 across trials LOSES, measured A/B), halo 2,126 at last report, ~6–7 h floor on the laptop; WO-5c
-(D34: ask order inside a trial) in progress. Next: shrink finishes → `verify` → copy
+(D34) PAUSED — no gain in the worklist's head, tail A/B later, fresh session. **Evening state:**
+WO-5d LANDED (reported-versus-checked: `commit-ready` one derived verdict; replayed witnesses
+audited on resume and REFUSED with a `sed` repair line on fault; stranded-trial leak fixed;
+I5 check; 156 controls) and WO-6 LANDED TO ITS BOUNDARY (the Rust enumerator: all seven
+campaign fingerprints DERIVED from the object-edges sidecar `build/m51-edges-<label>.json`
+(`tools/export_edges.py`), bit-compatibility with `_brk_full` a startup refusal; 187
+controls; the seed 51,350 / it-3 46,350 class-set-equality acceptance WAITS for the box).
+Shrink at 16:57: halo 967 (from 4,209), 1,450 tried, 426 critical, 0 undecided. Three
+Python defects found by WO-6's planner fixed (990b661: `_solve` raises on a crashed solver;
+`enumerate_seps` defines `blk`; `twodist.fingerprint` docstring). Protocol hardened twice
+today (one WO per session; one writer per tree — descent-engine CLAUDE.md). **COMMIT
+PROCEDURE (revised):** after the shrink exits, re-run the IDENTICAL design command on the
+NEW binary (resumes a finished journal: audits every witness, re-verifies with the honest
+`is_clean`, rewrites the report) → read `design.json` `commit_ready` + `verified` myself →
+copy `<out>/halo.json` over the cover path → `--commit` (certify decides) → then the WO-6
+go. Next: shrink finishes → `verify` → copy
 `<out>/halo.json` over `build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (Python
 original backed up as `.PYTHON-ORIGINAL-50stalls.json`) → `python3 -u tools/batchkill.py --commit
 --pool depth1 --object S29-depth2r-it2v2-depth1` (the triple; refused ⟹ INVESTIGATE) → columns
