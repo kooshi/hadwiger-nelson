@@ -656,7 +656,26 @@ PROCEDURE (revised):** after the shrink exits, re-run the IDENTICAL design comma
 NEW binary (resumes a finished journal: audits every witness, re-verifies with the honest
 `is_clean`, rewrites the report) → read `design.json` `commit_ready` + `verified` myself →
 copy `<out>/halo.json` over the cover path → `--commit` (certify decides) → then the WO-6
-go. Next: shrink finishes → `verify` → copy
+go. **POST-TRANSPORT (2026-08-27 evening, laptop): the shrink is RELAUNCHED on the identical
+command with the WO-5d+WO-6 binary (pid in `build/m51-design-it3-rust.pid`; journal 386,292
+records intact, 0 torn; the resume audits every `keeps` witness — a REFUSED line names a
+`sed` repair; PID watcher attached).** **ON THE SHRINK'S EXIT — the procedure, in order:** (1)
+read `build/m51-design-it3-rust/design.json`: `commit_ready` must be true AND the
+verification's `undecided` must be 0 — trust NO headline, read the fields; (2) `cp
+build/m51-design-it3-rust/halo.json build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`
+(the Python original is backed up as `…PYTHON-ORIGINAL-50stalls.json`); (3) `python3 -u
+tools/batchkill.py --commit --pool depth1 --object S29-depth2r-it2v2-depth1` — the TRIPLE
+(lookup re-check on all 3,440 + one-hot UNSAT + 3-bit UNSAT + exact geometry); refused ⟹
+INVESTIGATE, never retry; success ⟹ new object JSON (~53 of 446 cheats removed, the first
+`fingerprint_bare` carrier), commit the artifacts' records; (4) send the WO-6 implementation
+session its GO for the two class-set-equality runs (seed 51,350 = `build/m50-S29.jsonl`;
+it-3 46,350), then apply SPEC v0.7 from WO-6 subplan §14 on acceptance; (5) per-commit
+columns (`tools/m50_skewscan.py --unitchi` — χ(unit) 4→5 crossing ⟹ HALT-AND-CERTIFY;
+`--recurse`; `--scan`; field census); (6) it-4: enumerate with the Rust enumerator once
+accepted (else Python cubes), profile on the Rust replay at ≤ 5 laptop workers; (7) the
+residue (164 unknowns) overnight at 4 laptop workers when the box is otherwise idle; (8)
+weekend: back to the desktop, a hardware check, remount, `descent-engine/scratch/memcheck` probe
+before any heavy load there. Next: shrink finishes → `verify` → copy
 `<out>/halo.json` over `build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (Python
 original backed up as `.PYTHON-ORIGINAL-50stalls.json`) → `python3 -u tools/batchkill.py --commit
 --pool depth1 --object S29-depth2r-it2v2-depth1` (the triple; refused ⟹ INVESTIGATE) → columns
