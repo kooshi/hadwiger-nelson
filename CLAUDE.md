@@ -1789,6 +1789,15 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   adversarial round: **every headline of this genre carries its enumeration AND its conditioning
   in the same sentence** — scope lines inside an artifact do not survive into summaries unless
   they are in the headline.
+  **FOURTH INSTANCE — a SPEEDUP is a positive count over a population (M51, 2026-08-27).** The
+  WO-1 close reported "~250× per core" for the Rust engine's SOLVER-FREE tiers against Python's
+  peel path, with the caveat in the next sentence that the solver tail was unmeasured and would
+  dominate. The scope did not survive: later summaries said "asks are milliseconds now", the
+  WO-5 cost model then anchored the shrink on WO-2's 2.6 ms refutation median (slack rung
+  instances), and the shrink's asks — boundary instances by construction, "does this kill set
+  still kill with one point removed" — ran at 1–7 s, ~1000× the anchor, missing P2 by ~80×.
+  Neither measurement was wrong; the population was dropped from the headline twice. A speedup
+  claim names its population and its regime in the sentence that carries the number.
 * **G29 — The cell family is not a door, it is a dial, and the open problem is the
   discontinuity at its endpoint.** (Minted 2026-08-13, on a re-reading of M39–M43 with no
   new measurement.) A colouring constant on the cells of a triangular grid at scale `p`
