@@ -143,6 +143,7 @@ open HadwigerNelson
 -- M51: the entropy floor K4 — a k-colourable graph has ≥ 2^⌈n/k⌉ (k+1)-colourings (EntropyFloor.lean)
 #print axioms HadwigerNelson.two_pow_le_card_coloring
 #print axioms HadwigerNelson.spareColorings_eq_last_iff
+#print axioms HadwigerNelson.not_colorable_of_card_coloring_lt
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/

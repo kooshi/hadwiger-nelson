@@ -90,6 +90,13 @@ theorem two_pow_le_card_coloring (hG : G.Colorable k) (hk : 0 < k) (n : ℕ)
     _ = Fintype.card F.powerset := (Fintype.card_coe _).symm
     _ ≤ Fintype.card (G.Coloring (Fin (k + 1))) := Fintype.card_le_of_injective f hf
 
+/-- **The generator screen** (K4's consumer): fewer than `2 ^ n` proper `(k + 1)`-colourings with
+`k * n ≤ |V|` means the graph is NOT `k`-colourable — for the SAME graph; never for a subgraph. -/
+theorem not_colorable_of_card_coloring_lt (hk : 0 < k) (n : ℕ) (hn : k * n ≤ Fintype.card V)
+    [DecidableRel G.Adj] (hlt : Fintype.card (G.Coloring (Fin (k + 1))) < 2 ^ n) :
+    ¬ G.Colorable k :=
+  fun hG => absurd (two_pow_le_card_coloring hG hk n hn) (not_le.2 hlt)
+
 /-- Spec: the edgeless graph on two vertices is `1`-colourable, so it has at least `2 ^ 1`
 two-colourings (it has four). -/
 example : 2 ^ 1 ≤ Fintype.card ((⊥ : SimpleGraph (Fin 2)).Coloring (Fin 2)) :=
