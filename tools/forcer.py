@@ -75,7 +75,12 @@ def _solve(clauses: list[list[int]], nvars: int, timeout: float | None):
         if r.returncode == 20:
             return "unsat", None
         if r.returncode != 10:
-            return "unknown", None
+            # A solver that neither answered nor timed out CRASHED (signal, OOM kill, abort):
+            # never fold that into `unknown` — on the box INC-1 is about, a hardware-killed
+            # solver would otherwise be retried forever as a timeout (descent-engine WO-6
+            # planning, 2026-08-27). Raise; every driver surfaces it loudly (the HALT rule).
+            raise RuntimeError(f"cadical crashed: returncode {r.returncode}"
+                               f"{' stderr: ' + r.stderr[-200:] if r.stderr else ''}")
         model = {int(x) for line in r.stdout.splitlines() if line.startswith("v ")
                  for x in line[2:].split() if x != "0"}
         return "sat", model

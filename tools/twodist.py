@@ -205,7 +205,12 @@ def classify(pts: list[Pt], radii=(1, 4), window: float = 1e-6) -> dict[int, lis
 
 
 def fingerprint(n: int, edges) -> str:
-    """The stage fingerprint of tools/arity.py, so rows here can be matched against M48's."""
+    """twodist's OWN stage fingerprint: sha256 of repr((n, tuple-of-sorted-edge-tuples))[:16].
+    NOT the same digest as `arity.make_stage`, which hashes the same data with the edge
+    collection as a LIST — `repr` renders `[(..)]` vs `((..),)`, so the two never agree on
+    any graph (found by the descent-engine WO-6 planning session, 2026-08-27; no code ever
+    cross-matched rows on this claim, so no row was mis-paired — the docstring was the bug).
+    The descent engine reproduces THIS grammar (SPEC v0.7, decision 6 of WO-6)."""
     return hashlib.sha256(repr((n, tuple(sorted(tuple(sorted(e)) for e in edges)))).encode()).hexdigest()[:16]
 
 

@@ -572,7 +572,7 @@ def kills(pool: Pool, idxs, cols_avail) -> bool:
 # ---------------------------------------------------------------- enumeration (phase 2)
 
 def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
-                   cap_n: int = 200_000, log=print) -> dict:
+                   cap_n: int = 200_000, log=print, block_on=None) -> dict:
     """Exact blocking-clause enumeration of the separating colourings of `obj` minus the cheat
     batch `B`, up to palette (fixed first-occurrence breaking on the PINNED degree order). Appends
     one colouring per line to `path` (jsonl); resume is the default (existing lines are replayed
@@ -580,6 +580,10 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     B = [tuple(e) for e in B]
     edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
     order = T._degree_order(obj.n, edges)
+    # `blk` was FREE here (NameError before the first solve — found by the descent-engine WO-6
+    # planning session, 2026-08-27; the campaign runs `enumerate_cubes`, so the serial path had
+    # never been called since the projection was introduced). Same semantics as the cubes.
+    blk = sorted(block_on) if block_on else list(range(obj.n))
     header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
               "batch": [list(e) for e in B], "k": K, "block_on": len(blk), "order_fingerprint":
               hashlib.sha256(repr((order, blk)).encode()).hexdigest()[:16]}
@@ -594,7 +598,7 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
         assert old["stage_fingerprint"] == header["stage_fingerprint"], "resume: stage drifted"
         for line in lines[1:]:
             col = [int(ch) for ch in json.loads(line)]
-            cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+            cls.append([-coloring.var(v, col[v], K) for v in blk])
             found += 1
         log(f"[enumerate] resumed: {found} colourings loaded from {path.name}")
     else:
@@ -618,7 +622,7 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
             assert col[obj.A] != col[obj.B]
             fh.write(json.dumps("".join(map(str, col))) + "\n")
             fh.flush()
-            cls.append([-coloring.var(v, col[v], K) for v in range(obj.n)])
+            cls.append([-coloring.var(v, col[v], K) for v in blk])
             found += 1
             if found % 500 == 0:
                 log(f"[enumerate] {found} colourings, {time.time()-t0:.0f}s", flush=True)
