@@ -82,4 +82,8 @@ print(f"[dctl] (f) red: D + refused vertex 154 -> {st.upper()} (a separating col
 o4, _ = B.load_object(LABEL); o4.delete_vertices(D)
 st = forces(o4); assert st == "unsat", st
 print(f"[dctl] (f) green: D alone -> {st.upper()} (still forces A = B)")
+# (g) the emitters' invariants on the reduced object: the sidecar's removed is the LIVE subset
+live = set(map(tuple, obj.cheats)); rem_live = [e for e in removed if tuple(e) in live]
+assert len(removed) == 53 and len(rem_live) == 46 and len(live) - len(rem_live) == 298, (len(removed), len(rem_live), len(live))
+print(f"[dctl] (g) emitters: removed 53 -> live 46 (7 dead at deleted vertices), cheats_remaining {len(live) - len(rem_live)}")
 print(f"[dctl] ALL CONTROLS AS REQUIRED ({time.time()-t0:.0f}s)")

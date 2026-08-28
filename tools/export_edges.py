@@ -19,7 +19,13 @@ label = sys.argv[1]
 obj, removed = bk.load_object(label)
 ue = [list(e) for e in obj.unit_edges()]
 cheats = [list(e) for e in obj.cheats]
-removed_l = [list(e) for e in removed]
+# M51 amendment 2026-08-28 (WO-7 planning finding S1/S2): on a vertex-deleted object some halo-removed
+# cheats touch a deleted vertex and are no longer cheats at all. The SIDECAR's `removed` is the LIVE
+# subset, so the engine's invariants removed ⊆ cheats and batch ⊆ cheats stay strict (the object JSON
+# keeps the full history); the dead ones are counted beside it, never silently dropped.
+_live = set(map(tuple, obj.cheats))
+removed_l = [list(e) for e in removed if tuple(e) in _live]
+removed_dead = len(removed) - len(removed_l)
 assert len(ue) == 6413 or True  # counts are reported, never assumed
 side = {
     "kind": "object-edges", "schema_version": 1,
@@ -31,7 +37,7 @@ side = {
     "forced_pair": [obj.A, obj.B],
     "unit_edges": ue, "cheats": cheats, "removed": removed_l,
     "counts": {"unit": len(ue), "cheats": len(cheats), "removed": len(removed_l),
-               "cheats_remaining": len(cheats) - len(removed_l)},
+               "removed_dead": removed_dead, "cheats_remaining": len(cheats) - len(removed_l)},
     "note": "unit_edges = Obj.unit_edges() (campaign census); cheats = the seed's 446 exact distance-2 pairs, "
             "seed-index pairs; removed = the cheats already replaced by certified halos. The enumerator's graph "
             "for a batch B is unit_edges + [c in cheats : c not in removed and c not in B]."

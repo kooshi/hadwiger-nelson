@@ -2023,7 +2023,10 @@ if __name__ == "__main__":
             # edges — an under-enumeration the CERTIFICATION ASK caught: the refused commit's
             # separating colouring was mono on two removed cheats. §R6.)
             assert not (set(map(tuple, removed)) & set(floor)), "floor and removed overlap"
-            B = [tuple(e) for e in removed] + floor
+            # the stage batch is over LIVE cheats: a halo-removed cheat at a deleted vertex is no cheat
+            # (M51 amendment 2026-08-28, WO-7 finding S2) — batch ⊆ cheats stays strict for the engine
+            _live = set(map(tuple, obj.cheats))
+            B = [tuple(e) for e in removed if tuple(e) in _live] + floor
             out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2v2.jsonl")
             enumerate_cubes(obj, B, BUILD / out, block_on=obj.live_seed())
         else:
