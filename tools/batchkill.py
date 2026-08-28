@@ -1837,6 +1837,79 @@ def run_recurse(label: str, cap: float = 240.0):
     print(f"[recurse] floor {len(ess)} of {len(tp)} cheats ({unk} unknown) [{time.time()-t0:.0f}s]")
 
 
+def run_vertex_census(label: str, cap: float = 240.0, seed_only: bool = False):
+    """Whole-object single-VERTEX-deletion census on the committed object (Kooshi's question,
+    2026-08-28: "what about shrinking the entire graph?"). For each vertex v not in {A, B}: delete v
+    — every unit edge and every remaining cheat at it — and ask whether the object still forces
+    A = B. `unsat` = v is deletable ALONE (the forcing survives without it: a whole-object shrink
+    candidate; a SEED vertex deletable alone takes every remaining cheat at it with it — mu descent
+    by DELETION, cheaper than any halo); `sat` = essential alone; `unknown` = undecided at cap.
+    Deletions compose only SEQUENTIALLY (kills are context-dependent, M49) — this census yields
+    candidates, and a commit re-verifies each step with the triple. `seed_only` restricts to the
+    214 seed indices (the mu prize); the full object is the cost measurement (pool ~ n^2).
+    Checkpointed per verdict to `build/m51-vcensus-{label}[-seed].jsonl`, keyed by object fp."""
+    obj, removed = load_object(label)
+    tp = [tuple(e) for e in obj.cheats if tuple(e) not in set(removed)]
+    ue = obj.unit_edges()
+    verts = [v for v in range(obj.n) if v not in (obj.A, obj.B) and (v < 214 or not seed_only)]
+    assert obj.A not in verts and obj.B not in verts, "the forced pair is never a deletion candidate"
+    cheats_at = {v: sum(1 for e in tp if v in e) for v in verts}
+    print(f"[vcensus] object n={obj.n} (check OK), unit {len(ue)}, cheats {len(tp)}; "
+          f"{len(verts)} vertices ({'seed only' if seed_only else 'whole object'})")
+    ne = [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
+
+    def ask(v):
+        edges = [e for e in ue if v not in e] + [e for e in tp if v not in e]
+        cls = coloring.base_clauses(obj.n, edges, K) + rigidity.amo_clauses(obj.n, K)
+        cls += T._brk_full(obj.n, K, T._degree_order(obj.n, edges)) + ne
+        st, _ = forcer._solve(cls, obj.n * K, cap)
+        return st
+
+    t0 = time.time()
+    ckp = BUILD / f"m51-vcensus-{label}{'-seed' if seed_only else ''}.jsonl"
+    fp = obj.fingerprint(removed)
+    done: dict[int, str] = {}
+    if ckp.exists():
+        for line in ckp.read_text().splitlines():
+            r = json.loads(line)
+            if r.get("object_fingerprint") == fp and r.get("st") in ("sat", "unsat"):
+                done[r["v"]] = r["st"]
+        print(f"[vcensus] resumed: {len(done)} of {len(verts)} verdicts replayed from {ckp.name}")
+    import threading
+    lock = threading.Lock()
+
+    def ask_ck(v):
+        if v in done:
+            return done[v]
+        t1 = time.time()
+        st = ask(v)
+        with lock, ckp.open("a") as f:
+            f.write(json.dumps({"v": v, "seed": v < 214, "cheats_at": cheats_at[v], "st": st,
+                                "seconds": round(time.time() - t1, 1),
+                                "object_fingerprint": fp}) + "\n")
+        return st
+
+    outs = mechanism.pmap(ask_ck, verts)
+    dele = [v for v, st in zip(verts, outs) if st == "unsat"]
+    unk = sum(1 for st in outs if st == "unknown")
+    row = {"kind": "vertex-census", "label": label, "object_fingerprint": fp, "seed_only": seed_only,
+           "vertices_asked": len(verts), "deletable_alone": dele,
+           "deletable_seed": [v for v in dele if v < 214],
+           "cheats_freed_if_each_seed_deletion_alone": {v: cheats_at[v] for v in dele if v < 214},
+           "essential_alone": sum(1 for st in outs if st == "sat"), "unknown": unk, "cap": cap,
+           "seconds": round(time.time() - t0, 1), "checkpoint": ckp.name,
+           "claim_scope": "single-vertex-deletion census on the committed object: unsat = the "
+           "object minus that vertex (all its unit edges and remaining cheats) still forces A = B, "
+           "so the vertex is deletable ALONE; deletions compose only sequentially and every "
+           "committed deletion is re-certified by the triple; unknown = undecided at cap, never "
+           "folded"}
+    T.record(BUILD / "m50-batch.json", row)
+    print(f"[vcensus] deletable alone {len(dele)} of {len(verts)} ({len(row['deletable_seed'])} seed, "
+          f"freeing {sum(row['cheats_freed_if_each_seed_deletion_alone'].values())} cheats if "
+          f"taken singly), essential {row['essential_alone']}, unknown {unk} [{time.time()-t0:.0f}s]")
+    return row
+
+
 # ---------------------------------------------------------------- status / CLI
 
 def status():
@@ -1893,5 +1966,9 @@ if __name__ == "__main__":
         run_commit(args, pool_name)
     elif "--recurse" in args:
         run_recurse(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"))
+    elif "--vertex-census" in args:
+        run_vertex_census(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"),
+                          cap=float(next((args[i + 1] for i, a in enumerate(args) if a == "--cap"), 240.0)),
+                          seed_only="--seed-only" in args)
     else:
         print(__doc__)
