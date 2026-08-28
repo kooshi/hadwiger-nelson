@@ -677,7 +677,12 @@ running; `--scan` waits for it-4's lists. NEW INSTRUMENT for plan (b): `run_vert
 (`--vertex-census --label L [--seed-only] [--cap]`, checkpointed) — launches when the recurse
 frees the cores, seed vertices first. The WO-6 implementation session is GONE (no reachable
 agents) — its seed-scale GO needs a FRESH ferrous-engineer session from
-`descent-engine/plans/WO-6-outcome.md` when the box is free.
+`descent-engine/plans/WO-6-outcome.md` when the box is free. **13:20Z: floor census DONE — FLOOR 20 of 393, 0 unknown**
+(3,858 s at 8 workers, 77.5 s median; floors 29 → 36 → 17 → 20 — the seven keeps all
+essential-alone plus thirteen others; context-dependence again). **Field census DONE**: 1,648
+committed points — 376 by construction, 1,121 in-catalogue numerically (61-value seed-pair
+catalogue), 151 new-root on 8 distinct values. **Vertex census (seed-only, 212 asks) LAUNCHED
+13:21Z**, checkpoint `build/m51-vcensus-…-seed.jsonl`, pid in `build/m51-vcensus-it3-seed.pid`.
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
