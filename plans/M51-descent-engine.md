@@ -699,6 +699,44 @@ measurement (D-item). **Three halo iterations: 53 cheats for 1,648 points; one d
 cheats for zero.** The descent's next move is therefore the VERTEX-DELETED OBJECT MODEL (below),
 then it-4 from the 298-cheat object.
 
+**SUBPLAN AMENDMENT (2026-08-28, WORKFLOW step 3 within step 7 — the descent gains a second move):
+the vertex-deleted object.** *Statement.* A committed object O with live cheat set C and a set D of
+vertices such that O − D (every unit edge and every cheat at D dropped) still forces A = B is a
+{1,2}-forcer with |C − C(D)| cheats: μ descends by DELETION, at zero geometry. Deletions compose
+only sequentially and only weaken the graph, so essential-alone is monotone (O − D − v ⊆ O − v) and
+a greedy pass yields a MAXIMAL set for its order. *Model, index-preserving.* `Obj.deleted : set[int]`;
+a deleted vertex keeps its index and its point (it may be the glue PARENT of existing halo points —
+provenance, `check`, `mp_values`, `certify` resolve through it unchanged) but is EDGELESS:
+`unit_edges()` drops edges touching it; `cheats` (now a property over `_cheats_all`) drops cheats
+touching it; `A, B ∉ deleted` asserted; the object JSON carries `"deleted"` and `load_object`
+applies it BEFORE verifying the fingerprint (edges determine the fingerprint; the deleted list is
+verified as the set of edgeless seed indices). *Consumers.* (1) the seed projection blocks on LIVE
+seed vertices only — `block_on = [v < 214 : v ∉ deleted]` at the enumerate call site and in
+`enumerate_seps`; the header's `block_on` count and `order_fingerprint` change with it (the stage
+identity moves, correctly); a deleted vertex's digit in a colouring string is free and ignored by
+every consumer that indexes through neighbour lists. (2) the pool: `pool_depth1` builds glue points
+about LIVE pairs only, and `Pool.nbrs` (hence `nbrs_seed`/`nbrs_halo`) exclude deleted vertices —
+asserted at construction; the excluded-coordinate set keeps the deleted vertex's location (re-adding
+it is un-deleting, a different move). (3) `halo_structure`, `avail_*`, `feasible`, `certify`: unchanged
+— they read the filtered edge lists. (4) exports: `export_edges.py` adds `deleted` and `seed_live`;
+the Rust engine's seed dialect (`--width 214`) blocks on the first 214 indices and must learn the
+live block from the sidecar before it enumerates a deleted-vertex stage — a SPEC amendment (WO-7
+candidate) filed AFTER WO-6's session releases the tree; it-4 enumerates with Python cubes if the
+engine is not ready. *The commit.* `commit_deletions(label, deleted, new_label)`: load, apply,
+`check()`, counts must equal the vertex-deletion row's (unit 12,735 / cheats 298), then the two
+encodings re-run on the built object (one-hot cap 3,600, 3-bit cap 7,200 — the triple's solver
+half; its geometry half is vacuous, no point added), then the object JSON with `deleted` written and
+a `deletion-commit` row recorded. *Controls, seen red first.* (a) `deleted ∋ A` refused on load;
+(b) save → load roundtrip fingerprint-equal; (c) reduced counts = the independent vertex_delete row;
+(d) a pool built on the reduced object has no deleted parent or neighbour (assert) and a hand-planted
+deleted parent is refused; (e) `enumerate_seps` header on the reduced object reports `block_on = 186`;
+(f) the one-hot on the reduced object is UNSAT and, planted red, becomes SAT when one accepted
+vertex's cheats are ALSO deleted from a refused vertex… (simpler red: deleting a refused vertex, 154,
+on top of D is SAT — the census row already says so; re-asked as the control). *Cost.* the
+implementation is ~150 lines over four sites; the commit's 3-bit is ~1 h on the laptop.
+*Naming.* the reduced object is `S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28`; its iteration list
+`m50-S-…-vdel28-it2v2.jsonl` by the existing `_ctx` convention.
+
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
 **657 are witnessed ONLY by the 50 formerly-stalled classes** (188 by the other 3,390; a
