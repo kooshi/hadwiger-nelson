@@ -747,7 +747,14 @@ block, so the engine refuses a deleted-vertex stage fail-closed until it learns 
 the WO-6 session releases the tree; `fingerprint_bare` now also moves with deletions (no longer the
 pure point-set identity — a SPEC note).** Deletion is MONOTONE, so the seed move is exhausted for
 this order on the reduced object; the only remaining seed-level lever is a different greedy ORDER
-(measurement running: cheats-ascending, no confirm).
+(measurement running: cheats-ascending, no confirm). **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
+self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
+all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
+**WO-7 stub filed + pushed (`04e1271`)** — the deleted-vertex dialect (live seed block = the key, the
+blocking clauses, the order fingerprint, the width; fail-closed refusal as control A0; acceptance
+A2 on the vdel28 it-4 stage against the Python-cube list) — **planning session RUNNING** (separate
+implementation session after the freeze).
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
