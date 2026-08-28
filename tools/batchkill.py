@@ -56,10 +56,33 @@ class Obj:
         self.seed_exact_pts = H                      # 4-basis exact seed coordinates
         self.pts = [T.approx(p) for p in H]          # floats, index-aligned with prov
         self.prov = [("seed", i) for i in range(len(H))]
-        self.cheats = list(c[4])                     # seed-index pairs, never re-derived
+        self._cheats_all = list(c[4])                # seed-index pairs, never re-derived
+        self.deleted: set[int] = set()               # EDGELESS vertices (M51 amendment 08-28):
+        # a deleted vertex keeps its index and its point (it may be a glue parent of existing
+        # halo points — provenance resolves through it) but carries no unit edge and no cheat
         self.A, self.B = H.index(T.EI_A), H.index(T.EI_B)
         self._unit = None
         assert len(c[1]) == 1004 and len(self.cheats) == 446, "seed census drifted"
+
+    @property
+    def cheats(self) -> list:
+        """The seed's cheat pairs minus those touching a deleted vertex."""
+        if not self.deleted:
+            return self._cheats_all
+        return [e for e in self._cheats_all if e[0] not in self.deleted and e[1] not in self.deleted]
+
+    def delete_vertices(self, D) -> None:
+        """Make the vertices of `D` edgeless (index-preserving). The forced pair is never deletable."""
+        D = set(int(v) for v in D)
+        assert all(0 <= v < self.n for v in D), "deletion index out of range"
+        assert self.A not in D and self.B not in D, "the forced pair is never a deletion candidate"
+        self.deleted |= D
+        self._unit = None
+        self._halo_struct = None
+
+    def live_seed(self) -> list[int]:
+        """The seed indices that still carry edges — the seed-projection block."""
+        return [v for v in range(214) if v not in self.deleted]
 
     @property
     def n(self) -> int:
@@ -68,7 +91,9 @@ class Obj:
     def unit_edges(self) -> list[tuple[int, int]]:
         """cKDTree unit census over the current points, cached until the next add."""
         if self._unit is None:
-            self._unit = unit_pairs_np(self.pts)
+            raw = unit_pairs_np(self.pts)
+            self._unit = raw if not self.deleted else \
+                [e for e in raw if e[0] not in self.deleted and e[1] not in self.deleted]
         return self._unit
 
     def fingerprint(self, B=()) -> str:
@@ -241,7 +266,12 @@ class Pool:
         self.pts = pts                                # parents < obj.n are obj points; >= obj.n are pool
         tree_obj = cKDTree(np.array(obj.pts))
         self.nbrs = [sorted(j for j in tree_obj.query_ball_point(p, 1 + TOL)
-                            if abs(_d2(p, obj.pts[j]) - 1) < TOL) for p in pts]
+                            if abs(_d2(p, obj.pts[j]) - 1) < TOL and j not in obj.deleted) for p in pts]
+        # a deleted vertex is edgeless: never a neighbour (above) and never a glue PARENT of a pool
+        # point (M51 amendment 2026-08-28) — asserted here so every pool, built or loaded, carries it
+        for rec in prov:
+            assert rec[1] not in obj.deleted and rec[2] not in obj.deleted, \
+                ("pool point glued to a deleted vertex", rec)
         # seed-projection design (§R5): masks come from SEED neighbours; old-halo neighbours are
         # CSP variables (their colours are existential, not fixed by the enumerated seed class)
         self.nbrs_seed = [[v for v in N if v < 214] for N in self.nbrs]
@@ -308,8 +338,10 @@ def _partners_about(pts_np, base_pts, base_offset, exclude):
 def pool_depth1(obj: Obj) -> Pool:
     """Every glue point of unit circles about pairs of object points — complete for single-point
     kills in any field (`Glue.eq_gluePoint_of_unit_pair`)."""
-    excl = {(round(p[0], 6), round(p[1], 6)) for p in obj.pts}
-    cands = _partners_about(np.array(obj.pts), obj.pts, list(range(obj.n)), excl)
+    excl = {(round(p[0], 6), round(p[1], 6)) for p in obj.pts}   # a deleted vertex's location stays excluded
+    live = [v for v in range(obj.n) if v not in obj.deleted]
+    live_pts = [obj.pts[v] for v in live]
+    cands = _partners_about(np.array(live_pts), live_pts, live, excl)
     prov, pts = _dedupe(cands)
     return Pool(obj, "depth1", {}, prov, pts)
 
@@ -318,8 +350,9 @@ def pool_depth2_restricted(obj: Obj, p1: Pool, min_nbrs: int = 3) -> Pool:
     """depth1 ∪ glue points about (object ∪ the depth-1 points with >= `min_nbrs` object
     neighbours) — M49 §R9's restricted depth two, a CHOICE."""
     strong = [i for i in range(len(p1.pts)) if len(p1.nbrs[i]) >= min_nbrs]
-    base_pts = obj.pts + [p1.pts[i] for i in strong]
-    offset = list(range(obj.n)) + [obj.n + i for i in range(len(strong))]
+    live = [v for v in range(obj.n) if v not in obj.deleted]
+    base_pts = [obj.pts[v] for v in live] + [p1.pts[i] for i in strong]
+    offset = live + [obj.n + i for i in range(len(strong))]
     excl = {(round(p[0], 6), round(p[1], 6)) for p in obj.pts} | \
            {(round(p[0], 6), round(p[1], 6)) for p in p1.pts}
     cands = _partners_about(np.array(base_pts), base_pts, offset, excl)
@@ -583,7 +616,7 @@ def enumerate_seps(obj: Obj, B, path: Path, cap_wall: float = 12 * 3600,
     # `blk` was FREE here (NameError before the first solve — found by the descent-engine WO-6
     # planning session, 2026-08-27; the campaign runs `enumerate_cubes`, so the serial path had
     # never been called since the projection was introduced). Same semantics as the cubes.
-    blk = sorted(block_on) if block_on else list(range(obj.n))
+    blk = sorted(v for v in (block_on if block_on else range(obj.n)) if v not in obj.deleted)
     header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
               "batch": [list(e) for e in B], "k": K, "block_on": len(blk), "order_fingerprint":
               hashlib.sha256(repr((order, blk)).encode()).hexdigest()[:16]}
@@ -694,10 +727,10 @@ def enumerate_cubes(obj: Obj, B, path: Path, cap_wall: float = 500 * 3600,
     edges = obj.unit_edges() + [e for e in obj.cheats if tuple(e) not in set(B)]
     order = T._degree_order(obj.n, edges)
     if block_on is not None:
-        blk = sorted(block_on)
+        blk = sorted(v for v in block_on if v not in obj.deleted)   # LIVE vertices only (08-28)
         order = [v for v in order if v in set(blk)]      # split vertices stay inside the projection
     else:
-        blk = list(range(obj.n))
+        blk = [v for v in range(obj.n) if v not in obj.deleted]
     header = {"kind": "enumeration-header", "stage_fingerprint": obj.fingerprint(B),
               "batch": [list(e) for e in B], "k": K, "block_on": len(blk), "order_fingerprint":
               hashlib.sha256(repr((order, blk)).encode()).hexdigest()[:16]}
@@ -1772,6 +1805,9 @@ def load_object(label: str) -> tuple[Obj, list]:
         obj.add_glue(a, b, sgn)
     removed = [tuple(e) for e in d["removed"]]
     assert obj.n == d["n"]
+    if d.get("deleted"):
+        obj.delete_vertices(d["deleted"])            # before the fingerprints: edges decide them
+        assert sorted(obj.deleted) == sorted(set(int(v) for v in d["deleted"]))
     assert obj.fingerprint(removed) == d["fingerprint"], "object rebuild fingerprint mismatch"
     # fingerprint_bare (v0.4.1/F6) is verified on read like its sibling — written-once-never-
     # checked was the residual hole Ferrous named at WO-1 close; absent on pre-2026-08-25 files
@@ -1910,6 +1946,48 @@ def run_vertex_census(label: str, cap: float = 240.0, seed_only: bool = False):
     return row
 
 
+def commit_deletions(label: str, deleted, new_label: str, cap1: float = 3600.0, cap2: float = 7200.0,
+                     expect_unit: int | None = None, expect_cheats: int | None = None, log=print) -> dict:
+    """The deletion COMMIT (M51 amendment 2026-08-28): load `label`, delete `deleted`, `check()`,
+    counts against the census row's, then the triple's solver half re-run on the BUILT object —
+    one-hot UNSAT then the independent 3-bit UNSAT (its geometry half is vacuous: no point is
+    added) — and only then the object JSON with `deleted` written as `m50-object-{new_label}.json`
+    and a `deletion-commit` row recorded. Refused ⟹ investigate, never retry."""
+    t0 = time.time()
+    obj, removed = load_object(label)
+    obj.delete_vertices(deleted)
+    obj.check()
+    ue = obj.unit_edges()
+    tp = [tuple(e) for e in obj.cheats if tuple(e) not in set(removed)]
+    log(f"[delete-commit {new_label}] {len(obj.deleted)} vertices deleted: unit {len(ue)}, live cheats {len(tp)}")
+    if expect_unit is not None:
+        assert len(ue) == expect_unit, ("unit-edge count differs from the census row", len(ue), expect_unit)
+    if expect_cheats is not None:
+        assert len(tp) == expect_cheats, ("cheat count differs from the census row", len(tp), expect_cheats)
+    st = T.forces_outcome(obj.n, ue, tp, obj.A, obj.B, cap1)
+    log(f"[delete-commit {new_label}] one-hot {st} [{time.time()-t0:.0f}s]", flush=True)
+    re = rigidity.reencode_confirm(obj.n, ue, K, tp + [(obj.A, obj.B)], cap=cap2)["outcome"] \
+        if st == "unsat" else "not-run"
+    verdict = "committed" if st == "unsat" and re == "unsat" else \
+              ("candidate" if st == "unsat" else "refused")
+    row = {"kind": "deletion-commit", "label": new_label, "from": label,
+           "deleted": sorted(obj.deleted), "outcome": st, "reencode": re, "verdict": verdict,
+           "object_after": {"n": obj.n, "unit": len(ue), "cheats": len(tp), "live_seed": len(obj.live_seed())},
+           "seconds": round(time.time() - t0, 1),
+           "claim_scope": "the object with the listed vertices made edgeless still forces A = B: "
+           "UNSAT in both encodings on the built object; no geometry added; committed = both UNSAT"}
+    T.record(BUILD / "m50-batch.json", row)
+    if verdict == "committed":
+        (BUILD / f"m50-object-{new_label}.json").write_text(json.dumps(
+            {"prov": obj.prov[214:], "removed": [list(e) for e in removed],
+             "deleted": sorted(obj.deleted),
+             "fingerprint": obj.fingerprint(removed), "fingerprint_bare": obj.fingerprint(),
+             "n": obj.n, "unit": len(ue), "cheats": len(tp)}))
+    log(f"[delete-commit {new_label}] {verdict} (one-hot {st}, 3-bit {re}); object n={obj.n}, "
+        f"cheats {len(tp)}, live seed {len(obj.live_seed())} [{time.time()-t0:.0f}s]")
+    return row
+
+
 # ---------------------------------------------------------------- status / CLI
 
 def status():
@@ -1947,7 +2025,7 @@ if __name__ == "__main__":
             assert not (set(map(tuple, removed)) & set(floor)), "floor and removed overlap"
             B = [tuple(e) for e in removed] + floor
             out = next((args[i + 1] for i, a in enumerate(args) if a == "--out"), f"m50-S-{lab}-it2v2.jsonl")
-            enumerate_cubes(obj, B, BUILD / out, block_on=range(214))
+            enumerate_cubes(obj, B, BUILD / out, block_on=obj.live_seed())
         else:
             enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
@@ -1966,6 +2044,14 @@ if __name__ == "__main__":
         run_commit(args, pool_name)
     elif "--recurse" in args:
         run_recurse(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"))
+    elif "--commit-deletions" in args:
+        lab = next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r")
+        newlab = next((args[i + 1] for i, a in enumerate(args) if a == "--new-label"), lab + "-vdel")
+        rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
+        vr = [r for r in rows if r["kind"] == "vertex-deletion" and r["label"] == lab
+              and r["verdict"] == "confirmed"][-1]
+        commit_deletions(lab, vr["deleted"], newlab, expect_unit=vr["unit_after"],
+                         expect_cheats=vr["cheats_after"])
     elif "--vertex-census" in args:
         run_vertex_census(next((args[i + 1] for i, a in enumerate(args) if a == "--label"), "S29-depth2r"),
                           cap=float(next((args[i + 1] for i, a in enumerate(args) if a == "--cap"), 240.0)),

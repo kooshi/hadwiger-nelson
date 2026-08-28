@@ -24,6 +24,9 @@ assert len(ue) == 6413 or True  # counts are reported, never assumed
 side = {
     "kind": "object-edges", "schema_version": 1,
     "object": label, "n": obj.n, "seed_n": 214,
+    # M51 amendment 2026-08-28: deleted (edgeless) vertices and the LIVE seed block — an engine that
+    # projects on the first seed_n indices must block on seed_live instead once this is nonempty
+    "deleted": sorted(obj.deleted), "seed_live": obj.live_seed(),
     "fingerprint_bare": obj.fingerprint(), "fingerprint_removed": obj.fingerprint(removed),
     "forced_pair": [obj.A, obj.B],
     "unit_edges": ue, "cheats": cheats, "removed": removed_l,
