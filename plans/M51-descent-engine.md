@@ -632,6 +632,58 @@ rebooted 2026-08-26 ~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use
 **The re-planned it-3 chain (tag `S29-depth2r-it2v2-depth1-it2v2`), per Kooshi at the
 restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
 
+
+**STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
+and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
+at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
+budget, 0 stalls), verify 3,440/3,440 refuted, 0 undecided, `commit_ready` true (fields read,
+not the headline); halo.json copied over `build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json`
+(pool fp 5481c3fae64e770d = the Python original's). **Commit triple launched 00:43Z as pid in
+`build/m51-commit-it3.pid`, log `build/m51-commit-it3.log`** — at 10.5 h it is still in stage 1
+(the Python lookup re-check: `avail_masks` per colouring is pure Python over all 394,604 pool
+points, then `feasible` builds a CNF over 854 + 794 old-halo variables and runs cadical per
+colouring, 3,440 times, serial, `cap=1800` each). **INCIDENT (mine): `run_commit`/`certify`
+keep no checkpoint — a single in-memory Python phase — and I launched it on the strength of
+M50's 620-s desktop measurement (it-2's population: a 690-point object's pool, 24 cheats), which
+did not transfer to it-3's (394,604-point pool, 854-point halo, laptop). The standing audit
+question ("if this dies now, what does the relaunch redo?") was not asked at launch — a G21/G30
+instance in my own hands. If it dies it is redone from the start.** FIX BEFORE IT-4's COMMIT:
+per-stage checkpoints in `run_commit` (a per-colouring lookup verdict jsonl, resumable; then
+one-hot / 3-bit / geometry each written on completion) and the lookup on `avail_np` +
+`mechanism.pmap` (the profile path's vectorized twin, batchkill.py:375/1066) with the planted
+control (a halo missing one critical point must be REFUSED). A read-only cost probe of one
+colouring runs beside it (`build/m51-commit-it3-probe.log`) for the ETA.
+
+**Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
+cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
+**657 are witnessed ONLY by the 50 formerly-stalled classes** (188 by the other 3,390; a
+witness is the first class found surviving without the point, so 188 is a floor for a
+3,390-class halo, not its value); **one class, t = 2387, witnesses 414 points alone**; the 50
+had cover-time kill sets min 211 / median ~300 (others median 146, min 1) — no small kill
+exists for them. The Python shrink that died (§R-INC5) was at 780 with the chunk-1 round unrun
+and covered 3,390 classes only. Dropping one batch edge does NOT dissolve the expensive
+classes: 2387 and the other top witnesses each separate 9 of the 10 batch edges (t = 2387
+separates every edge but (98,213)), so they need killing under any batch keeping any of those nine.
+
+**AFTER THE COMMIT LANDS (Kooshi's question 2026-08-28, "what about shrinking the entire
+graph?") — the plan, in order:** (a) the commit's outcome: refused ⟹ INVESTIGATE, never
+retry; success ⟹ new object JSON (~1,862 points, 10 cheats removed → ~393 remaining), records
+committed, per-commit columns (`tools/m50_skewscan.py --unitchi`: χ(unit) 4 → 5 ⟹
+HALT-AND-CERTIFY; `--recurse`; `--scan`; field census). (b) **WHOLE-OBJECT SHRINK PROBE** — a
+single-vertex-deletion census on the committed object (the `--recurse` shape over VERTICES: one
+whole-object ask per vertex v ∉ {A, B}, object − v with the committed removals and A ≠ B; UNSAT
+⟹ v deletable alone), **seed vertices first (214 asks, ~1–2 h laptop)** because a deletable
+seed vertex takes every remaining cheat at it with it — μ descent by DELETION, cheaper than any
+halo — then the full object overnight as the COST measurement (pool ~ n²: 394,604 at 1,008 →
+~1.35 M at 1,862). Delete old-halo points only on a cost decision (G33: the committed lattice is
+the kill mechanism). Deletions compose sequentially like kills — the census gives candidates,
+the commit is greedy with re-verify (the triple). Engineering: the class machinery projects on
+the seed's 214 vertices (`block_on 214`); deleting seed vertices needs a re-index. M49's
+"vertex-minimal is 3× worse for LRAT size" is about the kernel certificate, not the descent.
+MUST checkpoint per verdict (standing rule) — a jsonl of (vertex, verdict, seconds), resumable.
+(c) then §S-CONT steps (4)–(8): WO-6 seed-scale GO (one heavy job at a time), it-4 with the fixed
+resumable commit, the residue overnight, the weekend desktop hardware check.
+
 **STATE 2026-08-27 (laptop — ONE active machine at a time; the desktop had a hardware fault at the time,
 §R-INC6, fix attempt at the weekend; the laptop is 6 physical / 12 logical cores, 31 GB, no known
 fault):** the it-3 DESIGN is running on the Rust engine (`descent-engine` WO-5 landed + WO-5b —
