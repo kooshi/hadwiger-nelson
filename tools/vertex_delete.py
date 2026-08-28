@@ -16,7 +16,7 @@ import coloring, rigidity, forcer
 import twodist as T
 K = B.K
 
-def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0):
+def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0, order_name: str = "cheats-desc", confirm: bool = True):
     t0 = time.time()
     obj, removed = B.load_object(label)
     tp = [tuple(e) for e in obj.cheats if tuple(e) not in set(removed)]
@@ -29,7 +29,17 @@ def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0):
         if r["object_fingerprint"] == fp and r["st"] == "unsat":
             cands[r["v"]] = r["cheats_at"]
     assert obj.A not in cands and obj.B not in cands
-    order = sorted(cands, key=lambda v: (-cands[v], v))
+    if order_name == "cheats-desc":
+        order = sorted(cands, key=lambda v: (-cands[v], v))
+    elif order_name == "cheats-asc":
+        order = sorted(cands, key=lambda v: (cands[v], v))
+    elif order_name == "index":
+        order = sorted(cands)
+    elif order_name.startswith("random:"):
+        import random; rnd = random.Random(int(order_name.split(":")[1])); order = sorted(cands); rnd.shuffle(order)
+    else:
+        raise SystemExit(f"unknown order {order_name!r}")
+    print(f"[vdelete] order {order_name}", flush=True)
     print(f"[vdelete] object n={obj.n} unit {len(ue)} live cheats {len(tp)}; {len(order)} candidates "
           f"(carrying {sum(cands.values())} cheats singly-counted)", flush=True)
     ne = [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]
@@ -47,7 +57,7 @@ def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0):
         st, _ = forcer._solve(cls, obj.n * K, cap_)
         return st
 
-    ckp = B.BUILD / f"m51-vdelete-{label}.jsonl"
+    ckp = B.BUILD / f"m51-vdelete-{label}{'' if order_name == 'cheats-desc' else '-' + order_name.replace(':', '')}.jsonl"
     accepted, refused, replay = [], [], {}
     if ckp.exists():
         for line in ckp.read_text().splitlines():
@@ -97,11 +107,11 @@ def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0):
     # (3) confirm: the final one-hot at the certify cap + the 3-bit re-encode
     t1 = time.time()
     st1 = forces_without(accepted, 3600.0)
-    re = rigidity.reencode_confirm(obj.n, u, K, c + [(obj.A, obj.B)], cap=confirm_cap)["outcome"] \
-        if st1 == "unsat" else "not-run"
+    re = (rigidity.reencode_confirm(obj.n, u, K, c + [(obj.A, obj.B)], cap=confirm_cap)["outcome"]
+          if st1 == "unsat" else "not-run") if confirm else "not-run(measurement)"
     verdict = "confirmed" if st1 == "unsat" and re == "unsat" else ("candidate" if st1 == "unsat" else "REFUSED")
     print(f"[vdelete] confirm: one-hot {st1}, 3-bit {re} -> {verdict} ({time.time()-t1:.0f}s)", flush=True)
-    row = {"kind": "vertex-deletion", "label": label, "object_fingerprint": fp,
+    row = {"kind": "vertex-deletion", "label": label, "object_fingerprint": fp, "order": order_name,
            "candidates": order, "deleted": accepted, "refused": refused,
            "all_at_once": replay["ALL"], "cheats_before": len(tp), "cheats_after": len(c),
            "cheats_freed": freed, "unit_before": len(ue), "unit_after": len(u),
@@ -116,4 +126,7 @@ def main(label: str, cap: float = 600.0, confirm_cap: float = 7200.0):
     print(f"[vdelete] recorded ({time.time()-t0:.0f}s)", flush=True)
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "S29-depth2r-it2v2-depth1-it2v2-depth1")
+    a = sys.argv[1:]
+    lab = next((x for x in a if not x.startswith("--")), "S29-depth2r-it2v2-depth1-it2v2-depth1")
+    order = next((a[i + 1] for i, x in enumerate(a) if x == "--order"), "cheats-desc")
+    main(lab, order_name=order, confirm="--no-confirm" not in a)

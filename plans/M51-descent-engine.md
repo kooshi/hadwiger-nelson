@@ -735,7 +735,19 @@ vertex's cheats are ALSO deleted from a refused vertex… (simpler red: deleting
 on top of D is SAT — the census row already says so; re-asked as the control). *Cost.* the
 implementation is ~150 lines over four sites; the commit's 3-bit is ~1 h on the laptop.
 *Naming.* the reduced object is `S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28`; its iteration list
-`m50-S-…-vdel28-it2v2.jsonl` by the existing `_ctx` convention.
+`m50-S-…-vdel28-it2v2.jsonl` by the existing `_ctx` convention. **LANDED 16:40Z (`3a43f96`): the model, the deletion commit,
+`tools/deletion_controls.py` (ten guards red/green in 148 s: counts = the composition row 12,735 /
+298; forced pair refused; roundtrip fingerprint `d6460615c957e19f`; tampered deleted list and A-in-
+file refused on load; a pool on a deleted object has no deleted parent/neighbour, planted one
+refused; live block 186; D + refused 154 → SAT, D alone → UNSAT), `commit_controls` regression
+green. DELETION COMMIT RUNNING** (pid `build/m51-vdel-commit-it3.pid`; one-hot then 3-bit on the built
+object → `m50-object-…-vdel28.json`). **CRITICAL PATH for it-4: WO-7 — the Rust engine's seed
+dialect must block on `seed_live` from the sidecar (the `order_fingerprint` now hashes the LIVE
+block, so the engine refuses a deleted-vertex stage fail-closed until it learns it); file it when
+the WO-6 session releases the tree; `fingerprint_bare` now also moves with deletions (no longer the
+pure point-set identity — a SPEC note).** Deletion is MONOTONE, so the seed move is exhausted for
+this order on the reduced object; the only remaining seed-level lever is a different greedy ORDER
+(measurement running: cheats-ascending, no confirm).
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
