@@ -750,7 +750,7 @@ this order on the reduced object; the only remaining seed-level lever is a diffe
 (measurement running: cheats-ascending, no confirm). **Result (16:08Z): the ascending order deletes 30 vertices and frees
 the SAME 95 cheats (393 → 298) — a different maximal set (symmetric difference 8 vertices), the
 identical value. Two orders agree on 95; not a maximum proof (a random order is a cheap D-item).
-The descending-order commit (28 vertices, 12,735 unit edges) stands as vdel28.** **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+The descending-order commit (28 vertices, 12,735 unit edges) stands as vdel28.** A random order (seed 1) frees **93** (28 vertices) — so the value IS order-dependent; 95 is the best of three orders and the descending commit stands; an exact maximum over the 37 candidates is a D-item worth at most a few cheats. **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
 46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
 self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
 all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
