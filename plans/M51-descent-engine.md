@@ -768,7 +768,12 @@ running `WO-7-outcome.md` §7's command against the it-4 list once the enumerati
 SPEC v0.8 applied by that session.** The halo-point (non-seed) deletion census — the cost
 measurement — is deferred (~1,648 asks at ~200 s each: a day of laptop cores). *Note to the reader:
 the dated blocks in this STATE paragraph are in insertion order, not clock order — read the
-timestamps.* **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+timestamps.* **[19:40Z] Kooshi's pick for the idle cores: WO-10** — the ask phases on a vertex-deleted
+object (`descent replay`'s duplicate-prefix control degrades silently — D47; `design` swept for
+`seed_n`-prefix assumptions; a fail-closed refusal where today there is silence; the it-4 memory
+question priced: a whole-pool worker would be ~12 GB on the 1.3 M-point pool, two per laptop) —
+stub `93a1a2b` pushed, planning session running; **D44 (the held-leaf collapse) is the work order
+after**; the older WO-7 minimum-halo stub is renumbered WO-9 (`cfe40ba`). **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
 46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
 self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
 all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
