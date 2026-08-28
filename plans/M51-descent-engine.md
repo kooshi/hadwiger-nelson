@@ -652,7 +652,22 @@ per-stage checkpoints in `run_commit` (a per-colouring lookup verdict jsonl, res
 one-hot / 3-bit / geometry each written on completion) and the lookup on `avail_np` +
 `mechanism.pmap` (the profile path's vectorized twin, batchkill.py:375/1066) with the planted
 control (a halo missing one critical point must be REFUSED). A read-only cost probe of one
-colouring runs beside it (`build/m51-commit-it3-probe.log`) for the ETA.
+colouring runs beside it (`build/m51-commit-it3-probe.log`) for the ETA. **RESOLVED 2026-08-28 11:40Z:** the probes
+proved the old process was in `certify`'s eager sympy `intersect` loop over every deep halo point —
+dead work (deep edges are certified at 250 digits from provenance; sympy is read only for depth-≤1
+endpoints) whose nested-radical `expand` costs minutes per generation-3/4 point; both whole-object
+asks are cadical SUBPROCESSES with caps, and no child ever appeared. **Patched (`9bbcff9`):** lazy
+exact resolve; `lookup_recheck` parallel + checkpointed (`build/m51-commit-lookup-{tag}-{pool}.json`,
+keyed by pool fp / halo hash / batch / keep / list size / object fp, replayed loudly on a matching
+relaunch, survivors named); `geometry_only` for controls; `tools/commit_controls.py` all red/green
+(four reds on a halo minus a critical point, replay/no-replay, lazy-exact green, bogus census pair
+refused at 250 digits — the first RED-2, a float nudge, did NOT fire and was the wrong red: the
+certificate is provenance-based and floats only find the census). The lookup stage standalone:
+3,440/3,440 killed in 530 s at 8 workers. Old process KILLED at 10.9 h (log kept as
+`m51-commit-it3-ATTEMPT1-killed.log`); **commit relaunched** on the patched code: checkpoint
+replayed, 854 points built (check OK), 6,624 halo edges verified {exact 32, numeric-250 6,592} in
+6 s, now in the one-hot ask (cap 3,600 s) then the 3-bit (cap 7,200 s) — pid in
+`build/m51-commit-it3.pid`, watcher attached.
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
