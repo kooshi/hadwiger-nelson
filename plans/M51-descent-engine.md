@@ -667,7 +667,17 @@ certificate is provenance-based and floats only find the census). The lookup sta
 `m51-commit-it3-ATTEMPT1-killed.log`); **commit relaunched** on the patched code: checkpoint
 replayed, 854 points built (check OK), 6,624 halo edges verified {exact 32, numeric-250 6,592} in
 6 s, now in the one-hot ask (cap 3,600 s) then the 3-bit (cap 7,200 s) — pid in
-`build/m51-commit-it3.pid`, watcher attached.
+`build/m51-commit-it3.pid`, watcher attached. **IT-3 COMMITTED 12:13Z (1,963 s): one-hot UNSAT, 3-bit UNSAT** —
+object `S29-depth2r-it2v2-depth1-it2v2-depth1`: **1,862 points, 13,037 unit edges, 393 cheats**
+(446 → 393; fingerprint `5380f9de38619905`, bare `3f1ac84c01ca4eec`; the first `fingerprint_bare`
+carrier). Columns: **χ(unit) SAT in 0.1 s — still 4-colourable, no crossing**; the floor census
+(`--recurse`, 393 asks, cap 240, now checkpointed per verdict, `4b48079`) running at 8 workers
+(~80 s/ask, first 16 all deletable-alone); the field census (`tools/field_census.py`, new)
+running; `--scan` waits for it-4's lists. NEW INSTRUMENT for plan (b): `run_vertex_census`
+(`--vertex-census --label L [--seed-only] [--cap]`, checkpointed) — launches when the recurse
+frees the cores, seed vertices first. The WO-6 implementation session is GONE (no reachable
+agents) — its seed-scale GO needs a FRESH ferrous-engineer session from
+`descent-engine/plans/WO-6-outcome.md` when the box is free.
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
