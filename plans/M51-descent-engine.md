@@ -682,7 +682,14 @@ agents) — its seed-scale GO needs a FRESH ferrous-engineer session from
 essential-alone plus thirteen others; context-dependence again). **Field census DONE**: 1,648
 committed points — 376 by construction, 1,121 in-catalogue numerically (61-value seed-pair
 catalogue), 151 new-root on 8 distinct values. **Vertex census (seed-only, 212 asks) LAUNCHED
-13:21Z**, checkpoint `build/m51-vcensus-…-seed.jsonl`, pid in `build/m51-vcensus-it3-seed.pid`.
+13:21Z**, checkpoint `build/m51-vcensus-…-seed.jsonl`, pid in `build/m51-vcensus-it3-seed.pid`. **13:42Z: SEED VERTEX CENSUS DONE — 37 of 212 seed vertices deletable ALONE, 0 unknown**
+(1,234 s, 46 s median), carrying 124 cheats singly-counted; 175 essential alone. Composition
+(`tools/vertex_delete.py`): all 37 at once is **SAT** (12 s) — they do not compose wholesale —
+greedy sequential by cheats carried running (pid `build/m51-vdelete-it3.pid`, checkpoint
+`build/m51-vdelete-{label}.jsonl`), then one-hot + 3-bit confirm. The object file is NOT
+rewritten by it: a vertex-deleted object needs the model change (an `Obj.deleted` set: edges at
+deleted vertices dropped, seed projection over LIVE seed vertices only, pool parents exclude
+them, export sidecar and fingerprints aware) — the next engineering item if the composition pays.
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
