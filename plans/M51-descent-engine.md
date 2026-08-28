@@ -758,7 +758,17 @@ census running (`--recurse`, 298 asks, checkpointed); sidecar exported for WO-7'
 all UNSAT at 1,200 s; median 183 s vs 77 s on the it-3 object: deletion traded slack for cheats and
 the forcing margin is thinner). Floors 29 → 36 → 17 → 20 → 39. Stage batch 46 live removed + 39
 floor = 85; **enumeration running** (Python cubes, `block_on` = the 186 live seed vertices; the
-list `m50-S-…-vdel28-it2v2.jsonl` is WO-7's A2 input). **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+list `m50-S-…-vdel28-it2v2.jsonl` is WO-7's A2 input). **[19:10Z] WO-7 BUILT to the A2 boundary and pushed (`8dfbe88`)**: the projection is a
+set of columns; 187 → 208 controls, each new one seen red under a planted regression (the plant
+harness itself found two defects — controls journalling to a fixed temp path, and `rsync -a`
+restoring mtimes so cargo reused a stale crate — both recorded, not smoothed); A0 refuses on the
+order fingerprint against the real vdel28 sidecar (a two-implementation cross-check); A1 EQUAL on
+both WO-6 stages (the it-3 orbit line now says 214, not 400); D48 filed. **A2 = a fresh GO session
+running `WO-7-outcome.md` §7's command against the it-4 list once the enumeration lands; EQUAL ⟹
+SPEC v0.8 applied by that session.** The halo-point (non-seed) deletion census — the cost
+measurement — is deferred (~1,648 asks at ~200 s each: a day of laptop cores). *Note to the reader:
+the dated blocks in this STATE paragraph are in insertion order, not clock order — read the
+timestamps.* **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
 46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
 self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
 all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
