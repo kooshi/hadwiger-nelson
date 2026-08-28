@@ -689,7 +689,15 @@ greedy sequential by cheats carried running (pid `build/m51-vdelete-it3.pid`, ch
 `build/m51-vdelete-{label}.jsonl`), then one-hot + 3-bit confirm. The object file is NOT
 rewritten by it: a vertex-deleted object needs the model change (an `Obj.deleted` set: edges at
 deleted vertices dropped, seed projection over LIVE seed vertices only, pool parents exclude
-them, export sidecar and fingerprints aware) — the next engineering item if the composition pays.
+them, export sidecar and fingerprints aware) — the next engineering item if the composition pays. **IT PAID (15:26Z): 28 seed vertices deleted TOGETHER — cheats 393 → 298 (95 freed),
+unit edges 13,037 → 12,735, CONFIRMED one-hot UNSAT + 3-bit UNSAT** (greedy by cheats carried;
+9 refused in context; the confirm took 3,876 s, the 3-bit most of it). Deleted:
+[49,172,51,15,17,73,91,92,100,106,108,122,143,147,148,156,185,191,202,192,204,13,32,68,124,145,188,207].
+The set is MAXIMAL for this order (essential-alone is monotone under further deletion: object − D − v
+⊆ object − v has the same separating colouring), not necessarily maximum — a second order is a cheap
+measurement (D-item). **Three halo iterations: 53 cheats for 1,648 points; one deletion pass: 95
+cheats for zero.** The descent's next move is therefore the VERTEX-DELETED OBJECT MODEL (below),
+then it-4 from the 298-cheat object.
 
 **Iteration 3's cost anatomy (measured from the Rust journal, 2026-08-28):** 85 halo points per
 cheat (it-1: 25, it-2: 13 — the width regime arriving). Of the 845 witnessed-critical points,
