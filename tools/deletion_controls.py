@@ -86,4 +86,9 @@ print(f"[dctl] (f) green: D alone -> {st.upper()} (still forces A = B)")
 live = set(map(tuple, obj.cheats)); rem_live = [e for e in removed if tuple(e) in live]
 assert len(removed) == 53 and len(rem_live) == 46 and len(live) - len(rem_live) == 298, (len(removed), len(rem_live), len(live))
 print(f"[dctl] (g) emitters: removed 53 -> live 46 (7 dead at deleted vertices), cheats_remaining {len(live) - len(rem_live)}")
+# (h) the design driver's rung anchors are live cheats: read the source, since run_design needs a pool
+src = open(B.__file__).read()
+i = src.find("def run_design"); j = src.find("cover(obj, pool, sub", i)
+assert "if tuple(e) in _live" in src[j:j+400], "run_design's cover batch is not filtered to live cheats"
+print("[dctl] (h) run_design's cover batch filters removed to live cheats (source check)")
 print(f"[dctl] ALL CONTROLS AS REQUIRED ({time.time()-t0:.0f}s)")

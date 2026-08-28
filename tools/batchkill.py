@@ -1723,8 +1723,13 @@ def run_design(args, pool_name: str, ack: bool):
     sub = filter_sub(obj, cols, keep)
     print(f"[design {tag}] pool {pool.name}: {len(pool.pts)} pts (fp {pool.fp}); commit batch "
           f"{len(hit['commit'])} edges, |S_commit| = {len(sub)}")
+    # the cover's batch (the cheat-ball rungs' anchors) is over LIVE cheats: a halo-removed cheat at
+    # a deleted vertex is no cheat and its rung is dead search (WO-10 planning, 2026-08-28: 442
+    # classes gained three empty rungs and 11,110 a polluted one on the it-4 list). The object
+    # JSON keeps the full removed history; only the rung anchors filter.
+    _live = set(map(tuple, obj.cheats))
     cover(obj, pool, sub, BUILD / f"m50-cover-{tag}-{pool.name}.json",
-          batch=[tuple(e) for e in hit["commit"]] + [tuple(e) for e in removed])
+          batch=[tuple(e) for e in hit["commit"]] + [tuple(e) for e in removed if tuple(e) in _live])
 
 
 def run_commit(args, pool_name: str):
