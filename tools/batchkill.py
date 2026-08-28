@@ -1798,13 +1798,38 @@ def run_recurse(label: str, cap: float = 240.0):
         return st
 
     t0 = time.time()
-    outs = mechanism.pmap(ask, list(range(len(tp))))
+    # CHECKPOINTED per verdict (standing rule 2026-08-26): `build/m51-recurse-{label}.jsonl` holds
+    # one line per decided cheat, keyed by the object fingerprint; a relaunch replays them and asks
+    # only the rest. `unknown` is NOT replayed — a relaunch re-asks it (a cap is not a verdict).
+    ckp = BUILD / f"m51-recurse-{label}.jsonl"
+    fp = obj.fingerprint(removed)
+    done: dict[int, str] = {}
+    if ckp.exists():
+        for line in ckp.read_text().splitlines():
+            r = json.loads(line)
+            if r.get("object_fingerprint") == fp and r.get("st") in ("sat", "unsat"):
+                done[r["i"]] = r["st"]
+        print(f"[recurse] resumed: {len(done)} of {len(tp)} verdicts replayed from {ckp.name}")
+    import threading
+    lock = threading.Lock()
+
+    def ask_ck(i):
+        if i in done:
+            return done[i]
+        t1 = time.time()
+        st = ask(i)
+        with lock, ckp.open("a") as f:
+            f.write(json.dumps({"i": i, "edge": list(tp[i]), "st": st, "seconds":
+                                round(time.time() - t1, 1), "object_fingerprint": fp}) + "\n")
+        return st
+
+    outs = mechanism.pmap(ask_ck, list(range(len(tp))))
     ess = [tp[i] for i, st in enumerate(outs) if st == "sat"]
     unk = sum(1 for st in outs if st == "unknown")
-    row = {"kind": "recurse-census", "label": label, "object_fingerprint":
-           obj.fingerprint(removed), "cheats": len(tp), "floor": len(ess), "unknown": unk,
+    row = {"kind": "recurse-census", "label": label, "object_fingerprint": fp,
+           "cheats": len(tp), "floor": len(ess), "unknown": unk,
            "essential_alone": [list(e) for e in ess], "cap": cap,
-           "seconds": round(time.time() - t0, 1),
+           "seconds": round(time.time() - t0, 1), "checkpoint": ckp.name,
            "claim_scope": "single-deletion census on the committed object: sat = a validated "
            "separating colouring exists without that cheat alone (it lies in every forcing "
            "subset of THIS object — the new floor), unknown = undecided at cap"}
