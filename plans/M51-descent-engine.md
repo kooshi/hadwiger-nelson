@@ -754,7 +754,11 @@ The descending-order commit (28 vertices, 12,735 unit edges) stands as vdel28.**
 `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28.json` — n 1,862, live seed 186, unit 12,735,
 cheats 298, one-hot UNSAT + 3-bit UNSAT on the built object. χ(unit) still 4 by monotonicity. THE
 DIAL: 446 → 393 (three halo turns) → 298 (one deletion pass). **IT-4 OPENED** on vdel28: floor
-census running (`--recurse`, 298 asks, checkpointed); sidecar exported for WO-7's A2.** **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+census running (`--recurse`, 298 asks, checkpointed); sidecar exported for WO-7's A2.** **19:00Z: IT-4 FLOOR = 39 of 298, 0 unknown** — the first census with capped asks (31 at 240 s,
+all UNSAT at 1,200 s; median 183 s vs 77 s on the it-3 object: deletion traded slack for cheats and
+the forcing margin is thinner). Floors 29 → 36 → 17 → 20 → 39. Stage batch 46 live removed + 39
+floor = 85; **enumeration running** (Python cubes, `block_on` = the 186 live seed vertices; the
+list `m50-S-…-vdel28-it2v2.jsonl` is WO-7's A2 input). **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
 46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
 self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
 all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
