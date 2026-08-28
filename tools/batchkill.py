@@ -1255,7 +1255,7 @@ def _shrink_halo(pool: Pool, halo, AVn, HVn, live_idx, log=print):
 
 # ---------------------------------------------------------------- certification (phase 4)
 
-def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
+def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print, geometry_only: bool = False) -> dict:
     """The commit: exact sympy coordinates for every halo point FROM ITS PROVENANCE, every unit
     edge verified (exact within a 10-s budget, else 200-digit numeric, LABELLED), then the one-hot
     ask and the 3-bit re-encode on the true object. The ask is always run (§Bʺ)."""
@@ -1264,18 +1264,22 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
     exact: dict[int, object] = {}
 
     def resolve(idx):
+        """Exact sympy coordinates from provenance, LAZILY: halo points appended by add_glue below
+        resolve through the same recursion, and only `is_unit` on depth-<=1 endpoints ever reads
+        them. (2026-08-28: the eager `intersect` over every deep halo point was dead work — its
+        nested-radical `expand` costs seconds to minutes per generation-3/4 point — and cost the
+        it-3 commit > 10 h before its first log line; the deep edges were always certified by the
+        250-digit mpmath check, never by sympy.)"""
         if idx in exact:
             return exact[idx]
-        if idx < obj.n:
-            rec = obj.prov[idx]
-            if rec[0] == "seed":
-                e = seed_exact(obj.seed_exact_pts[rec[1]])
-            else:
-                _, a, b, s = rec
-                e = intersect(resolve(a), resolve(b), s)
-            exact[idx] = e
-            return e
-        raise KeyError(idx)
+        rec = obj.prov[idx]
+        if rec[0] == "seed":
+            e = seed_exact(obj.seed_exact_pts[rec[1]])
+        else:
+            _, a, b, s = rec
+            e = intersect(resolve(a), resolve(b), s)
+        exact[idx] = e
+        return e
 
     # halo points: pool indices -> object indices as we append
     idx_of_pool: dict[int, int] = {}
@@ -1292,7 +1296,6 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
         B_ = b if b < n0 else idx_of_pool[_pool_parent(pool, b, n0)]
         new = obj.add_glue(A_, B_, s)
         idx_of_pool[p] = new
-        exact[new] = intersect(resolve(A_), resolve(B_), s)
     obj.check()
     # edge verification: the provenance recursion at 250-digit mpmath decides every halo-touching
     # edge in milliseconds (iteration-2 points are glue-of-glue — sympy on their nested radicals
@@ -1317,8 +1320,12 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print) -> dict:
                 kinds["exact" if how == "exact" else "numeric-250"] += 1
             else:
                 kinds["numeric-250"] += 1
-    log(f"[certify {label}] {len(new_ids)} points exact, "
+    log(f"[certify {label}] {len(new_ids)} points built from provenance (check OK), "
         f"{sum(kinds.values())} halo edges verified {kinds} [{time.time()-t0:.0f}s]", flush=True)
+    if geometry_only:
+        return {"kind": "certify-geometry-only", "label": label, "halo_size": len(new_ids),
+                "construction_auxiliaries": aux, "edge_verification": kinds,
+                "seconds": round(time.time() - t0, 1)}
     # the ask
     tp = [e for e in obj.cheats if tuple(e) not in set(map(tuple, B))]
     st = T.forces_outcome(obj.n, ue, tp, obj.A, obj.B, 3600)
@@ -1707,9 +1714,51 @@ def run_commit(args, pool_name: str):
     sub = filter_sub(obj, cols, keep)
     print(f"[commit {tag}] batch {len(B)} edges, halo {len(halo)} pts; lookup re-check on "
           f"{len(sub)} colourings")
-    AVs = [(avail_masks(obj, pool, c), halo_masks(obj, c)) for c in sub]
-    assert kills(pool, halo, AVs), "the halo does not kill the committable list — investigate"
+    lookup_recheck(obj, pool, halo, sub, B, keep, tag)
     certify(obj, list(removed) + B, pool, halo, label=f"{tag}-{pool.name}")
+
+
+def lookup_recheck(obj: Obj, pool: Pool, halo, sub, B, keep, tag, log=print) -> dict:
+    """The commit's stage 1: every committable colouring re-checked by the Python lookup (a code
+    path independent of the design engine). PARALLEL over colourings (no 12-GB mask list held —
+    each worker builds its own masks and asks), and CHECKPOINTED: the verdict is written to
+    `build/m51-commit-lookup-{tag}-{pool}.json` keyed by pool fingerprint, halo hash, batch, keep
+    and list size, and a relaunch with the same key SKIPS the stage loudly (standing rule
+    2026-08-26: every phase > ~15 min resumes exactly; the it-3 commit had no checkpoint and was
+    launched on a 620-s measurement from a different population — recorded M51 §S-CONT 08-28).
+    Survivors are NAMED in the refusal, never folded."""
+    key = {"pool_fingerprint": pool.fp,
+           "halo_sha256_16": hashlib.sha256(json.dumps(sorted(halo)).encode()).hexdigest()[:16],
+           "halo_size": len(halo), "batch": sorted(map(list, B)), "keep": sorted(map(list, keep)),
+           "colourings": len(sub), "object_fingerprint": obj.fingerprint()}
+    ck = BUILD / f"m51-commit-lookup-{tag}-{pool.name}.json"
+    if ck.exists():
+        old = json.loads(ck.read_text())
+        if old.get("key") == key and old.get("verdict") == "killed":
+            log(f"[commit {tag}] lookup re-check SKIPPED — replayed from checkpoint {ck.name} "
+                f"(halo {key['halo_sha256_16']}, {key['colourings']} colourings killed, "
+                f"{old.get('seconds')} s on {old.get('written')})", flush=True)
+            return old
+        log(f"[commit {tag}] lookup checkpoint {ck.name} does not match this run — re-running")
+    t0 = time.time()
+
+    def ask(c):
+        return feasible(pool, halo, avail_masks(obj, pool, c), halo_masks(obj, c))
+
+    outs = mechanism.pmap(ask, sub)
+    alive = [i for i, f in enumerate(outs) if f]
+    row = {"kind": "commit-lookup", "key": key, "verdict": "killed" if not alive else "survivors",
+           "survivors": alive[:50], "n_survivors": len(alive),
+           "seconds": round(time.time() - t0, 1), "written": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+           "claim_scope": "every committable colouring (the sub-list) is list-uncolourable on the "
+           "halo + old halo under the seed class, by the Python lookup — the design engine's "
+           "verdict re-derived on an independent code path; a checkpoint of THIS key only"}
+    ck.write_text(json.dumps(row))
+    log(f"[commit {tag}] lookup re-check: {len(sub) - len(alive)}/{len(sub)} killed "
+        f"[{row['seconds']} s] -> {ck.name}", flush=True)
+    assert not alive, (f"the halo does not kill the committable list — {len(alive)} colourings "
+                       f"survive (first {alive[:10]}) — investigate, never retry")
+    return row
 
 
 def load_object(label: str) -> tuple[Obj, list]:
