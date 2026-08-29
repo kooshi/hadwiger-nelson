@@ -773,7 +773,19 @@ object (`descent replay`'s duplicate-prefix control degrades silently — D47; `
 `seed_n`-prefix assumptions; a fail-closed refusal where today there is silence; the it-4 memory
 question priced: a whole-pool worker would be ~12 GB on the 1.3 M-point pool, two per laptop) —
 stub `93a1a2b` pushed, planning session running; **D44 (the held-leaf collapse) is the work order
-after**; the older WO-7 minimum-halo stub is renumbered WO-9 (`cfe40ba`). **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
+after**; the older WO-7 minimum-halo stub is renumbered WO-9 (`cfe40ba`). **[22:40Z] WO-10 IMPLEMENTED to its SPEC boundary and pushed (`5223314`)**: 208 → 227 controls
+(19 new, each seen red under 17 planted regressions), gate green; A0 (the meter's silence on a
+planted duplicate pair) demonstrated on the old binary; A1a/A1b exact; A1d `halo.json` and
+`design.jsonl` BYTE-IDENTICAL across binaries; A2 on the real vdel28 object incl. the
+`removed_dead` check agreeing at 7; D51 discharged (every memory "GB" was a GiB — labels fixed,
+numbers unchanged); D50/D52/D53/D54 filed. SPEC v0.9 HELD until v0.8 lands (WO-7's A2). **RECORD
+CORRECTION (WO-10 finding 3, REVIEW-METHOD item 6 fired on our own artifact): the it-3 design's
+"3,440 killed / 0 stalled" was the product of FIFTEEN invocations plus the 1,542 Python-cover halo
+points adopted through `--candidates-from`; a single fresh invocation of the same code on the same
+stage settles at 3,408 killed / 32 stalled (23 no-rung kills, 9 conflict-budget). The commit was
+carried by the certify (lookup re-check + two UNSATs on the built object), so nothing is unsound —
+but "zero stalls" above is a RECIPE number, not a code number, and the Python cover's halo was
+load-bearing in reaching it. The stalls at it-3 were dissolved by adoption, not by decision 29 alone.** **17:05Z: WO-6 ACCEPTED** — both class sets EQUAL (seed 51,350 in 63 s / 344 MiB; it-3
 46,350 in 256 s / 491 MiB, `--threads 8`), P1–P5 met, SPEC v0.7 (`d37736a3…`) applied, 187/187
 self-test re-run by me, pushed (`864979c`); FINDING: the cube tree collapsed to ONE held leaf holding
 all 46,350 classes, so eight threads did one core's work — D44's own trigger fired (a separate WO).
