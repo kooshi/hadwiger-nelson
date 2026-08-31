@@ -793,6 +793,17 @@ corrupted line refused; enumeration row recorded with `source.engine = descent e
 spawned on main (02:59Z)**: `--compare` on the sub19 fixture; EQUAL ⟹ SPEC v0.8 in WO-10 §11.1's block order with
 the `removed_dead` correction. `batchkill.py --pool-only` added; the vdel28 depth-1 pool build is running.
 
+*2026-08-31 03:20Z — WO-9 FROZEN (`70a1154`, `wo9-plan` worktree) with a NEGATIVE verdict, by theorem:* a
+criticality witness (a surviving colouring of halo ∖ {v}) is downward-closed, so every halo that is a SUBSET of the
+current one keeps every witnessed point; **845 of it-3's 854 halo points are witnessed ⟹ any point-removing pass
+saves ≤ 9 (1.05 %)**. The halo is not redundant (zero points serve one class; median 280 classes per point);
+switching among the 21,868 recorded in-halo kill sets saves nothing and a from-scratch greedy lands at 1,694; **four
+classes cover the whole halo and one (class 2387) needs 844 of 854** — the width-shaped kill of G33, seen from the
+halo's side (to read against the 277/32 width stalls: possibly the same object twice). What survives of the stub:
+1-minimal ≠ minimum, and the shrink's DELETION ORDER is the only live lever — a `--point-order` knob ships, the
+iteration-3 order experiment (~14 h) is filed for a quiet desktop slot. Rulings: all approved; v0.11 after v0.10;
+implementation small (design crate), scheduled for a quiet slot.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
