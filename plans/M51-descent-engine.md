@@ -700,6 +700,21 @@ drafts. On its freeze: I rule, merge `wo11-plan` into main (fast-forward or merg
 fresh implementation session follows once v0.9 has landed. WO-9 (minimum halo, design crate — disjoint from
 WO-11's enum crate) is the next parallel-planning candidate if Kooshi wants a second planner.
 
+*Registered 2026-08-31 (Kooshi: "performance increased when loading only physical cores … this desktop only
+has 16 real cores"):* the record holds two numbers, neither a clean SMT measurement — WO-5b §8.2 (laptop,
+11 workers on 6 physical cores, asks 3–5× slower, but that chain was the speculative shrink's restarts) and
+M50 swap 5 (desktop, 30 workers ≈ 16 effective cores, asks/s saturated — neutral, not harmful). For the
+enumeration the worker count barely matters structurally (300-s stretches per open cube per round; 39 open
+cubes → 2 waves at any W ∈ [20, 39], 3 at 16; oversubscription slows each stretch's yield without wasting
+CPU), so the run is NOT restarted. **The clean measurement, to run in the gap between the enumeration's end
+and the pool build (≈ 3 min, box otherwise idle):** K ∈ {16, 26, 32} copies of `cadical -t 60` on one
+captured in-flight cube instance (`p cnf 9310 86821`, saved from `/tmp/tmpw780xn0v.cnf` to the session
+scratchpad as `it4-cube-sample.cnf`; copy it to `build/m51-smt-sample.cnf`), aggregate `c conflicts:` per
+second across the copies. **Prediction (prior median 1.15, range 0.9–1.3):** conflicts/s at 32 copies ÷ at
+16 copies. **Decision rule:** ratio < 1.0 ⟹ every solver phase runs at 16 (enumeration `MECH_WORKERS`,
+profile/design `--threads`); ratio ≥ 1.1 ⟹ keep oversubscribing; between ⟹ 16 on memory-tight phases
+(profile), oversubscribe elsewhere. Result to be ledgered here with the conditions.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
