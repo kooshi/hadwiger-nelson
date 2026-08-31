@@ -852,6 +852,31 @@ twelve arms, 2.32× the old binary's one core; the seed stage slower at 1–4 wo
 mechanism — pins baked into a rebuilt solver instead of ASSUMED on a long-lived one (CaDiCaL assumptions keep
 learned clauses valid across cubes); measurement first, the target re-derived from 8 ÷ amplification.
 
+*2026-08-31 08:10Z — THE PROFILE'S TAIL, and two experiments registered before their results are read.* The pool
+export landed (vectorized build 5,523 s; **1,469,696 points**, 3.7× it-3; 11.4 M pool–pool unit edges; 1,464,545 of
+the points have exactly two object neighbours — the pool's killing power is pool–pool cooperation, the width
+regime). The Rust profile (WO-10's live A2) refused 16 workers by its memory model (118.8 GiB vs 94.3; 7.4 GiB per
+complete solver over 43.5 M clauses) and named 12 — the designed narrowing, exercised for real. At 12 workers:
+**26,857 of 37,316 classes answered in 1.5 h, ALL killed, 0 survive, 0 unknown** — but the sweep runs in index
+order and the tail (≥ ~27,000, plus runs near 21–25 k) is complete-solver territory: 42 core solves so far at
+0–1,758 s each, in index RUNS of consecutive classes; the last half hour answered 18 classes. A linear read is a
+day or more; **stopped at the checkpoint** (append-only; resumes). Registered, with priors, BEFORE reading:
+**(E1) locality ordering** (Kooshi: "assemble the graph in memory such that cache-level groups primarily contain
+unit-distance material" — and, on the first two candidates, "not a space-filling curve … prioritize the unit
+edges, greedily seed groups with high-connectivity points"): the same 207 classes (7 complete solves of 117–319 s
++ the 200 slowest rung refutations) on the raw export, RCM (`tools/pool_rcm.py`; median index gap between unit
+neighbours 429 k → 255 k), Morton (→ 207 k), and **greedy unit-edge groups** (`tools/pool_cluster.py`: seed =
+highest-degree unassigned point, grow by edges INTO the group to a block of 4,096; scored by the internal-edge
+fraction per block size — the currency that matches the idea); verdicts must be identical (the control); paired
+per-class solve times. Priors: RCM/Morton 1.0–1.2× (median 1.1), greedy 1.1–1.5× (median 1.25); < 1.05 ⟹ filed with
+the number; ≥ 1.3 ⟹ a stage-assembly permutation in the engine (WO-12's pool phase), export order untouched.
+**(E2) restricted pools as a POOL CHOICE for the profile** (`tools/pool_restrict.py`): the 42 known core-solve
+classes re-asked on `strong3` (≥ 3 object neighbours: 5,151 points), `mixed16` (or pool-degree ≥ 16: 109,654) and
+`pdeg12` (or ≥ 12: 285,973); a smaller pool is conservative (`survives` more likely; kills transfer by
+monotonicity). Priors: strong3 kills ≤ 20 %; mixed16 ≥ 60 % at ≥ 5× speed; pdeg12 ≥ 85 % at ≥ 3×. Rule: a pool
+killing ≥ 90 % of the core classes at ≥ 3× profiles the tail first (acknowledged pool choice), its survivors
+re-asked on the full pool; otherwise the tail runs on the full pool (server-scale work, WO-12's case).
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
