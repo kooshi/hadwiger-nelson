@@ -727,6 +727,26 @@ EQUAL** against the Python list when it lands. Bundle: `build/m51-enum-it4-rust/
 launch with an EMPTY `--floor` (the census row's `floor` is a count; the list is `essential_alone`) built the
 46-edge stage and was killed on its first log line — the stage fingerprint is the check that caught it.
 
+*2026-08-31 01:35Z — WO-11 FROZEN (`242113e`, branch `wo11-plan`, worktree; 617k tokens, 1h43m; gate
+re-executed by me: 227/227).* The planner overturned the stub's diagnosis with a measurement: **the tree is grown
+BLIND** — `split_vertex` falls back to the first unpinned vertex of the descending-degree order when no class
+exists yet, and first-occurrence palette breaking pins exactly that vertex to colour 0, so four of five children
+are empty by construction (order[0..2] pinned still leaves 100 % of it-3's 46,350 classes in one cell; the
+mechanism retrodicts WO-6's leaf sizes exactly on both stages). D44's held leaf is why the collapse is permanent,
+not why it starts. **P10 is FLAT** (first-100 vs last-100 solve medians 0.9–1.5×; per-leaf ≤ 1.2×) — blocking
+clauses cost nothing; **a task boundary costs ~1 s** (median first solve of an issue 901 ms vs 1.08 ms after; D45
+priced it 28 ms — 30× low). Design: never grow blind (a 64-class census is enough FOR THE LOOP), class-counted
+recall (linear), `--split-at` keeps two jobs, reactor untouched; predicted **8.8× at 8 workers on it-3**, seed
+stage predicted SLOWER (0.8× at 4 workers, reported at face value). SPEC amendments drafted as **v0.10**, held
+behind v0.8/v0.9. Adversarial review: 16 findings, all accepted, one a G21 instance in a G21-quoting document
+(a sweep stopped at 32 splits called a plateau a cap). Rulings (sent to the planner for §18): decision 1 (paired
+wall-clock ratio, not CPU/wall; floor 6 — the frozen §15 text says /5 while the report and §9 say 6: reconciled
+to 6) APPROVED; decision 7 (blind first split at the TAIL of the order, guarded to fire only while no class is
+held) APPROVED with one extra A2 arm (the same run with it off, so the guess gets its measurement); the seed
+arm reported without a threshold APPROVED; the eight skim decisions APPROVED. Sequencing: WO-11's implementation
+branches from main AFTER the WO-7 A2 fix lands (both edit `descent-enum/src/run.rs`), and v0.10 waits for v0.8
+(WO-7 A2 EQUAL) then v0.9 (WO-10 live A2).
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
