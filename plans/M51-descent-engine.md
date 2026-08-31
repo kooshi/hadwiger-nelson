@@ -877,6 +877,20 @@ monotonicity). Priors: strong3 kills ≤ 20 %; mixed16 ≥ 60 % at ≥ 5× speed
 killing ≥ 90 % of the core classes at ≥ 3× profiles the tail first (acknowledged pool choice), its survivors
 re-asked on the full pool; otherwise the tail runs on the full pool (server-scale work, WO-12's case).
 
+*2026-08-31 08:45Z — the two heavy cheats, identified (Kooshi: "those two points sound like χ = 6 coming into
+view … what distance are they at?").* They are `206–210` and `206–211`, both distance-2 cheats, and **206 is the
+forced pair's endpoint** (the pair is 205–206 at distance 5). 210, 211 sit at (−0.577, 0.915) and (−0.577, 2.915)
+against 206 at (1.155, 1.915): `210–206–211` is an **equilateral triangle of side 2**, with each side's midpoint an
+object point (unit-spaced collinear triples — the seed's 2-spindle geometry), unit degrees 18/14/15, three live
+cheats each. Of the full stage's 2,588,314 separating colourings, 39.6 % are mono on 206–211, 34.1 % on 206–210,
+69 % on at least one: the colourings that separate the forced pair overwhelmingly want the forced endpoint to share
+a colour with one of its two distance-2 partners. Replacing these two by unit material would force the endpoint
+apart from both at distance 2 in every 5-colouring — a virtual edge at distance 2 at the forced pair itself, which
+is the shape the jackpot takes. The greedy put-back deferred exactly these (the widest kills). **Viewer built:**
+`tools/descent-viz.html` (spliced by `tools/descentviz_refresh.py --object … --putback …`): points by kind and
+provenance depth, unit edges, live/floor/put-back/removed cheats, the forced pair, per-vertex neighbourhoods with
+rings at 1/√3/2, pan/zoom; refreshed on the current object (it-3 + deletion) and re-run after each commit.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
