@@ -780,6 +780,11 @@ feasible on a sub-batch both enumerators can finish. The A2 session's memcheck a
 **k = 11 → 37,316 (28 cheats removed)** ← the campaign's default; k = 20 → 3,186 (the WO-7 A2 fixture: both
 enumerators finish it in minutes). Floor files `build/m51-floor-it4-{sub28,sub19}.txt`; `batchkill.py --enumerate
 --floor-file` (subset-asserted) added for the Python side.
+**Both sub-batch stages enumerated fresh and EXACT (02:55Z):** sub19 (batch 65, stage `a922c570172f7bd6`) =
+**3,186**; sub28 (batch 74, stage `67670282647d53b6`) = **37,316** — each equal to the filter's prediction from the
+full list, two independent code paths agreeing (the filter never solves; the enumerator never reads the full
+list). **The campaign's it-4 list is `build/m51-S-…-vdel28-sub28-rust.jsonl`** (28 floor cheats spent: the 39
+minus `build/m51-putback-it4-sub28.txt`). The Python enumerator runs sub19 for WO-7's A2 EQUAL.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
