@@ -750,6 +750,22 @@ branches from main AFTER the WO-7 A2 fix lands (both edit `descent-enum/src/run.
 persists the fifteen-run inventory with load conditions and one killed run named). Worktree kept for the
 implementer.*
 
+*2026-08-31 02:05Z — THE IT-4 STAGE IS AN ORDER OF MAGNITUDE BIGGER THAN ANY BEFORE IT.* WO-7's A2 session
+confirmed the refusal (INC-2: the blocking clause built in two index spaces — the worker's rebuild AND the
+verifier, the second found by V3's `CONTRADICTION` after the first fix; one `ClassKey::blocking_clause` now,
+width-checked, 227 → 233 controls, `1d8df44..32e12a8`), then ran the stage: **≥ 758,948 separating colourings
+and rising at ~900/s on 4 threads** (it-2 45,365 · it-3 46,350 · seed 51,350; batch 85 vs it-3's 60 ⇒ ≈ 1.11×
+per added cheat). The Python enumeration (69,368 classes in 2.4 h, 3.7 s/class) could never finish and was
+STOPPED (cubes checkpointed). The Rust continuation runs at `--threads 16` (same `--out`, resumes;
+`scratch/wo7-acceptance/it4-exact/`, `--max-classes 20000000`); the 16→28-thread restart is the SMT A/B on the
+real workload. **The plan's cost model is broken at this |S|**: the profile/hitting/design chain was priced at
+~5×10⁴ classes. **DECISION FOR KOOSHI, prepared from the finished list by `tools/subbatch.py`:** (A) full batch —
+profile ~10⁶ classes (solver tail scales; days) vs (B) a SUB-BATCH — put floor edges back until |S'| is tractable
+(the WO-8 filter: classes proper on the put-back edges, no solving; fewer cheats removed this iteration, hours
+instead of days; the compounding lattice may cheapen the rest later, G33). WO-7's A2 EQUAL is likewise only
+feasible on a sub-batch both enumerators can finish. The A2 session's memcheck at its footprint: 291 rounds,
+0 faults, ≈ 2.3 TiB — the session's pre-flight, after the fact.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
