@@ -2066,7 +2066,10 @@ re-derived) carry a small flip exposure — the descent's soundness rests on the
 on profile verdicts, which is why "profile advises, certificate decides"; D33 (re-ask a sample of
 kills on other hardware) applies to any measured negative that matters; (c) the rate is per byte
 touched, so the Rust engine — 28 solvers at 3.3 GB each, all-core — meets it hours sooner than
-Python did; long all-core solver runs belong on a machine that has passed the probe.
+Python did; long all-core solver runs belong on a machine that has passed the probe. **REPAIRED, PROVISIONALLY (Kooshi, 2026-08-30):** a repair, after which a check found no events. **Standing pre-flight on the desktop, until a multi-hour zero-event run exists:** run
+our decorrelated probe sized to the workload (`descent-engine/scratch/memcheck`: `./memcheck 28 2 60`
+is the campaign's footprint) before the first long all-core solver run of a session, and treat any
+event as HALT — its signature is in that README.
 
 **Every long-running phase checkpoints, and resumes exactly — a standing rule (Kooshi,
 2026-08-26).** Any run expected to exceed ~15 minutes must persist its progress at natural

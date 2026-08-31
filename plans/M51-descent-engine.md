@@ -633,6 +633,61 @@ rebooted 2026-08-26 ~14:14Z. NEAR-OOM RECORD stands: **it-4 profile launches use
 restart ("checkpoint everything long-running — standing rule; use Rust for the descent"):**
 
 
+**STATE 2026-08-31 04:30Z — BACK ON THE DESKTOP (32 cores, 125 GB), written at Kooshi's
+"collect ourselves, document, compact" call. Read this block first.** The desktop's hardware fault is
+PROVISIONALLY REPAIRED. Both repos are clean
+and pushed (lean-dir `506f674`, descent-engine `df0e279`). No process survived the laptop shutdown;
+everything below resumes from checkpoints.
+
+*What is on disk, mid-flight:* (1) **the it-4 enumeration** of the vdel28 object (batch 85 = 46 live
+removed + 39 floor; block = 186 live seed vertices; stage `aca1b124b999f44c`, order
+`2ec30bde119b5d6d`) stopped at round 16 — 246 cubes, 39 open leaves, 27,109 distinct classes after
+7.4 laptop-hours; the cube manifest (`build/m50-S-…-vdel28-it2v2-cubes/`) resumes by default —
+**same command, more workers**. (2) WO-10's leftover A1c shrink (`descent-engine/scratch/wo10/
+acceptance/a1c/`, resumable by `scratch/wo10/a1c.sh`) — an acceptance row, not campaign state;
+resume only if idle cores allow. (3) WO-7 built to its A2 boundary (`8dfbe88`), WO-10 built to its
+SPEC boundary (`5223314`, 227 controls); **SPEC v0.8 lands with WO-7's A2, v0.9 after it with
+WO-10's live A2**. (4) WO-11 (D44, the held leaf) stubbed (`df0e279`), not planned.
+
+*THE DESKTOP PLAN, in order — every long step checkpointed, one heavy job at a time:*
+0. **Pre-flight, first thing:** `cd ~/source/descent-engine/scratch/memcheck && ./memcheck 28 2 60`
+   (rebuild with `rustc -O -o memcheck memcheck.rs` if the binary is stale) — one hour, the
+   campaign's own footprint; **any event ⟹ HALT and report**. Ledger the result.
+1. **Enumeration resume:** `MECH_WORKERS=26 nohup python3 -u tools/batchkill.py --enumerate --object
+   S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28 > build/m51-enum-it4.log 2>&1 &` (resumes the
+   cubes; READ THE END of the log; the assembled list is `build/m50-S-…-vdel28-it2v2.jsonl`; expect
+   |S| well above it-3's 46,350).
+2. **WO-7 A2 (a fresh GO session, one WO):** `descent-engine/plans/WO-7-outcome.md` §7's command
+   against that list at `--threads 8` (D44 means it is effectively single-core; that is the
+   measurement WO-11 needs) — EQUAL ⟹ that session applies SPEC v0.8 (nine literal blocks, WO-7
+   subplan §14). Then WO-11's planning session can start (CPU-light, tree free).
+3. **Pool + profile:** build/cache the depth-1 pool of vdel28 through the campaign (the pool export
+   `build/m51-pool-c62ecd80a01087ca-depth1.{json,npz}` must carry `object.fingerprint =
+   c62ecd80a01087ca`); then the Rust profile — `descent replay --manifest … --edges
+   build/m51-edges-…-vdel28.json --object build/m50-object-…-vdel28.json --classes build/m50-S-…
+   -vdel28-it2v2.jsonl --out build/m51-profile-it4-rust --threads N` (WO-10 outcome §11.2; the
+   engine's memory model prices a complete-tier worker at ~7.8 GiB → N ≈ 14 here; it narrows or
+   refuses and names the count). **This run IS WO-10's live A2** — its refusal legs and the
+   duplicate-class meter's "keyed on 186 live columns" line are what a follow-up session scores,
+   then applies SPEC v0.9.
+4. **Hitting set** on the merged verdicts (`--hitting`; unknowns never folded), then `tools/
+   export_sublist.py` for the committable sub-list.
+5. **Design:** `descent design --manifest … --edges … --object … --classes build/m51-Scommit-…
+   -vdel28-it2v2.jsonl --out build/m51-design-it4-rust --ladder-cap 50000 --threads 26` — and
+   NOTE the record correction: it-3's zero stalls came from adopting the Python cover's 1,542 points;
+   at it-4 there is no Python cover, so expect stalls of the 3,408/32 kind. **On the desktop the
+   whole-pool pass is affordable (~8.6 GiB a worker → ≤ 12 workers): run WITHOUT `--no-whole-pass`
+   so decision 29's whole-pool kills can dissolve them.** Shrink follows inside the same command
+   (checkpoint per acceptance; kill-9 resume is an acceptance clause).
+6. **Commit** with the patched batchkill (`--commit --pool depth1 --object …-vdel28`: checkpointed
+   parallel lookup, lazy geometry, ~30 min) — refused ⟹ INVESTIGATE never retry; success ⟹ the
+   new object, columns (`m50_skewscan.py --unitchi` — 4 → 5 is HALT-AND-CERTIFY; `--recurse`;
+   `tools/field_census.py`; `--scan` on the it-4 lists), then **it-5**. Seed-vertex deletion is
+   monotone and exhausted on this object; re-run `--vertex-census --seed-only` only after a halo
+   commit adds material (new material can make a seed vertex deletable again — that is the one
+   case the monotonicity argument does not cover).
+Jackpot clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
