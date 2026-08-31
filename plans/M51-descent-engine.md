@@ -890,6 +890,10 @@ is the shape the jackpot takes. The greedy put-back deferred exactly these (the 
 `tools/descent-viz.html` (spliced by `tools/descentviz_refresh.py --object … --putback …`): points by kind and
 provenance depth, unit edges, live/floor/put-back/removed cheats, the forced pair, per-vertex neighbourhoods with
 rings at 1/√3/2, pan/zoom; refreshed on the current object (it-3 + deletion) and re-run after each commit.
+**Published as an artifact for remote viewing: https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf** —
+after each commit: `descentviz_refresh.py` → `descentviz_artifact.py <out>` → republish with the Artifact tool to
+that URL (`url=`), label = the object. The artifact copy carries the instrument's tokens (IBM Plex Sans/Mono,
+ground `#0f1114`, selection amber) and is produced from `tools/descent-viz-artifact.tmpl.html`, never hand-edited.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly

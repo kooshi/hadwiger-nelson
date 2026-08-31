@@ -1,0 +1,61 @@
+<title>Descent Object Viewer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+ :root{--ground:#0f1114;--panel:#171a1f;--line:#262b33;--text:#d9dde3;--muted:#8b93a1;--accent:#ffd166;
+   --unit:#3a3f47;--cheat:#f28c28;--floor:#e5484d;--put:#d946ef;--removed:#4c9be8;--nbr:#22c55e;--forced:#ff2d55;
+   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+ html,body{height:100%}
+ body{margin:0;background:var(--ground);color:var(--text);font:13px/1.45 var(--sans);display:flex;height:100vh;overflow:hidden}
+ #side{width:340px;flex:none;padding:14px 16px;overflow:auto;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+ #c{flex:1;cursor:crosshair;display:block;min-width:0}
+ h1{font:600 15px/1.2 var(--sans);margin:0;letter-spacing:.01em;text-wrap:balance}
+ h2{font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+ section{display:flex;flex-direction:column;gap:4px}
+ label{display:flex;align-items:center;gap:7px;cursor:pointer}
+ .sw{width:14px;height:6px;border-radius:2px;flex:none}
+ .dot{width:10px;height:10px;border-radius:50%;flex:none}
+ #counts{font:12px/1.5 var(--mono);color:var(--muted)} #counts b{color:var(--text);font-weight:500}
+ input[type=number],input[type=text]{width:72px;background:var(--ground);color:var(--text);border:1px solid var(--line);border-radius:3px;padding:3px 6px;font:12px var(--mono)}
+ input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+ button{background:var(--ground);color:var(--text);border:1px solid var(--line);border-radius:3px;padding:3px 9px;font:12px var(--sans);cursor:pointer} button:hover{border-color:var(--muted)}
+ #info{white-space:pre-wrap;font:12px/1.5 var(--mono);background:var(--ground);padding:8px 10px;border:1px solid var(--line);border-radius:4px;min-height:132px;color:var(--text)}
+ .row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+ .hint{color:var(--muted);font-size:11.5px;margin:0}
+ @media (prefers-reduced-motion: reduce){*{transition:none}}
+</style>
+<div id="side">
+ <div>
+  <h1 id="title">Descent Object Viewer</h1>
+  <div id="counts"></div>
+ </div>
+ <section>
+  <h2>Points</h2>
+  <label><span class="dot" style="background:#f2f2f2"></span><input type="checkbox" id="pseed" checked> seed vertices (live)</label>
+  <label><span class="dot" style="border:1px solid #8b93a1"></span><input type="checkbox" id="pdel" checked> seed vertices deleted (edgeless)</label>
+  <label><span class="dot" style="background:#4fc3f7"></span><input type="checkbox" id="phalo" checked> halo points, coloured by provenance depth</label>
+  <label>show halo depth up to <input type="number" id="maxdepth" value="99" min="1"></label>
+ </section>
+ <section>
+  <h2>Edges</h2>
+  <label><span class="sw" style="background:var(--unit)"></span><input type="checkbox" id="eunit"> unit edges (all)</label>
+  <label><span class="sw" style="background:var(--cheat)"></span><input type="checkbox" id="echeat" checked> cheats still standing (distance 2)</label>
+  <label><span class="sw" style="background:var(--floor)"></span><input type="checkbox" id="efloor" checked> the floor — essential alone</label>
+  <label><span class="sw" style="background:var(--put)"></span><input type="checkbox" id="eput" checked> put back this iteration (deferred)</label>
+  <label><span class="sw" style="background:var(--removed)"></span><input type="checkbox" id="erem"> removed — replaced by halo material</label>
+ </section>
+ <section>
+  <h2>Selection</h2>
+  <div class="row">vertex <input type="text" id="sel" placeholder="206"> <button id="go">Show</button></div>
+  <label><input type="checkbox" id="rings" checked> rings at 1, √3 and 2 about it</label>
+  <label><input type="checkbox" id="nbrs" checked> its unit neighbours (green) and cheats (orange)</label>
+  <div id="info">Click a point, or type a vertex index and press Show.</div>
+ </section>
+ <section>
+  <h2>View</h2>
+  <div class="row"><button id="fit">Fit everything</button><button id="fitseed">Fit the seed</button></div>
+  <p class="hint">Drag to pan, wheel to zoom. The forced pair is ringed in crimson. Coordinates are display floats; the exact geometry lives in the certificate.</p>
+ </section>
+</div>
+<canvas id="c"></canvas>
+<script type="application/json" id="descentdata">%%DATA%%</script>
+<script>%%JS%%</script>
