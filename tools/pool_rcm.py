@@ -75,7 +75,7 @@ def main():
     arrays['pool_halo_indptr'], arrays['pool_halo_idx'] = permute_rows(hp, hi, lambda r: r)
     arrays['pool_adj_indptr'], arrays['pool_adj_idx'] = permute_rows(ap, ai, lambda r: inv[r.astype(np.int64)])
     for k in ('halo_seed_indptr', 'halo_seed_idx', 'halo_adj_indptr', 'halo_adj_idx'):
-        arrays[k] = z[k]
+        arrays[k] = z0[k]          # the export's own widths (the int64 cast above is for arithmetic only)
     prov = z['pool_prov'][perm]
     assert prov[:, :2].max() < man['object']['n'], 'a depth-2 parent would need remapping'
     arrays['pool_prov'] = prov
