@@ -715,6 +715,18 @@ second across the copies. **Prediction (prior median 1.15, range 0.9–1.3):** c
 profile/design `--threads`); ratio ≥ 1.1 ⟹ keep oversubscribing; between ⟹ 16 on memory-tight phases
 (profile), oversubscribe elsewhere. Result to be ledgered here with the conditions.
 
+*2026-08-31 00:52Z — WO-7 A2 opened EARLY, by a refusal.* The Rust enumerator, run by me on the identical it-4
+stage (batch 85, stage/order fingerprints EQUAL to the Python manifest: `aca1b124b999f44c` / `2ec30bde119b5d6d`) to
+get |S| in minutes (76 classes/s on ~1 core against Python's 5.2/s on 26 workers), **REFUSED at the first 60-s
+stretch boundary** — `point 186 is in the class key and outside this colouring of 186 points` — the `block` guard
+WO-7 wrote firing on a cube RE-ISSUE with key-length digits where a full colouring belongs (invisible on prefix
+blocks, caught on the gathered one). Fail-closed, as designed; A1's fixture never re-issued a cube on a non-prefix
+block. A fresh WO-7 A2 session owns main now: diagnose → fix (one code path) + failing-first control → run to
+`exact` (its count is the Python ETA) → compare command written as an addendum; **v0.8 applies only on an actual
+EQUAL** against the Python list when it lands. Bundle: `build/m51-enum-it4-rust/` (read-only evidence). A first
+launch with an EMPTY `--floor` (the census row's `floor` is a count; the list is `essential_alone`) built the
+46-edge stage and was killed on its first log line — the stage fingerprint is the check that caught it.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
