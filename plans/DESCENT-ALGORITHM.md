@@ -239,7 +239,12 @@ neighbours lie on a circle through ~280,000 other points, so no ordering makes m
 local; grouping bounds the spread to a ring of blocks rather than eliminating it. Whether the
 remaining locality buys measurable time is the paired A/B (fresh solver per ask) recorded in
 `plans/M51-descent-engine.md`; the loop binary treats the grouping as a cheap stage-assembly
-pass whose size parameters are measured on the host, never configured.
+pass whose size parameters are measured on the host, never configured. The timed verdict on this
+object (paired, fresh solver per ask, verdicts identical): totals favoured the grouping 1.53× on
+seven complete solves, but per-class ratios scattered 0.20–3.87× — **permuting the variables
+changes the solver's search trajectory, and that variance dwarfs the locality effect at any
+affordable sample** — so the grouping is filed as a cheap bounded pass, not a multiplier, and any
+future locality claim must be measured against trajectory noise first.
 
 ## State of the descent
 
