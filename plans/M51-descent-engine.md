@@ -784,7 +784,14 @@ enumerators finish it in minutes). Floor files `build/m51-floor-it4-{sub28,sub19
 **3,186**; sub28 (batch 74, stage `67670282647d53b6`) = **37,316** — each equal to the filter's prediction from the
 full list, two independent code paths agreeing (the filter never solves; the enumerator never reads the full
 list). **The campaign's it-4 list is `build/m51-S-…-vdel28-sub28-rust.jsonl`** (28 floor cheats spent: the 39
-minus `build/m51-putback-it4-sub28.txt`). The Python enumerator runs sub19 for WO-7's A2 EQUAL.
+minus `build/m51-putback-it4-sub28.txt`). **The Python sub19 enumeration finished EXACT: 3,186 classes in 1,514 s at 16 workers, stage `a922c570172f7bd6` — the
+same stage fingerprint and count as the engine's fresh run.** The sub28 Rust list was ADOPTED as the campaign's
+`m50-S-…-vdel28-it2v2.jsonl` by `tools/adopt_rust_list.py` (stage fingerprint re-derived in Python from the object
+and the header's batch; batch = 46 removed + 28 floor ⊆ census floor; the engine's exact/V1–V3 claim read; EVERY
+line re-validated in Python — width, palette, proper on unit ∪ remaining cheats, forced pair separated; a planted
+corrupted line refused; enumeration row recorded with `source.engine = descent enumerate`). **WO-7 A2 GO session
+spawned on main (02:59Z)**: `--compare` on the sub19 fixture; EQUAL ⟹ SPEC v0.8 in WO-10 §11.1's block order with
+the `removed_dead` correction. `batchkill.py --pool-only` added; the vdel28 depth-1 pool build is running.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
