@@ -911,6 +911,14 @@ L3-sized block. The unit-distance graph on 1.47 M dense points is well-mixed (a 
 circle through ~280 k other points); grouping bounds the spread, it cannot localize it. The reset A/B
 (`--solver-reset`, so per-class times are a function of the export alone — the first pass showed the SAME class
 varying 0.02–1.9× with the worker's solver history) runs raw → RCM → Morton → groups; the tail on pdeg12 follows.
+**E1 raw arm under `--solver-reset` (09:55Z): 3,073 s wall for the same 207 classes that took 1,361 s with solver
+reuse** — the seven core solves from cold read 596 / 722 / 49 / 1,086 / 272 / 609 / 1,209 s against 596 / 2.8 / 46 /
+89 / 271 / 401 / 107 s warm. So learned-clause reuse across asks is worth **2.3× on this sample and up to 250× on a
+single hard ask** (WO-2 measured 2.59× on slack instances) — the biggest single lever measured today on the tail,
+and the reason a worker's solver must NOT be rebuilt per ask (WO-13's mechanism applies to the profile as much as
+to the enumerator). The RCM/Morton arms refused at the npz (an int64 `halo_seed_indptr` where the layout requires
+u64 — my export copied a cast; fixed, regenerated, dtype-checked on all four exports) and are queued after the
+tail; the groups arm is running; the tail on `pdeg12` follows it.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
