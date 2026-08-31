@@ -919,6 +919,15 @@ and the reason a worker's solver must NOT be rebuilt per ask (WO-13's mechanism 
 to the enumerator). The RCM/Morton arms refused at the npz (an int64 `halo_seed_indptr` where the layout requires
 u64 — my export copied a cast; fixed, regenerated, dtype-checked on all four exports) and are queued after the
 tail; the groups arm is running; the tail on `pdeg12` follows it.
+**E1 CLOSED (10:45Z), honestly inconclusive:** groups vs raw, paired under `--solver-reset`, verdicts identical —
+totals 4,541 → 2,966 s (1.53×) on the seven core solves but per-class ratios scatter **0.20–3.87×** (geo-mean
+1.14×): permuting the variables changes the SEARCH TRAJECTORY, and at n = 7 that variance dwarfs any locality
+effect; the 200 rung refutations read 0.78× (slower). Prior was 1.1–1.5×; the measured geo-mean sits in it and the
+noise swallows it — **filed as inconclusive-leaning-positive**, the RCM/Morton arms cancelled (1.7 h to measure the
+same noise while the campaign chain waits). The definitive test is the server's, or WO-13's long-lived-solver
+regime where layout interacts with a persistent clause database. Kooshi's question is answered by the METRIC: the
+unit graph is well-mixed (0.198 internal at L3 blocks is the ceiling grouping reaches here), so cache grouping is a
+bounded, cheap (25 s) stage pass, not a multiplier.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
