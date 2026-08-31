@@ -746,6 +746,9 @@ held) APPROVED with one extra A2 arm (the same run with it off, so the guess get
 arm reported without a threshold APPROVED; the eight skim decisions APPROVED. Sequencing: WO-11's implementation
 branches from main AFTER the WO-7 A2 fix lands (both edit `descent-enum/src/run.rs`), and v0.10 waits for v0.8
 (WO-7 A2 EQUAL) then v0.9 (WO-10 live A2).
+*Planner closed at `5223be4` (rulings in §18 verbatim; A2d = the blind-off arm with P12's prior 1.31×; §2.7
+persists the fifteen-run inventory with load conditions and one killed run named). Worktree kept for the
+implementer.*
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
