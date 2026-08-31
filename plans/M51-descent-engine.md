@@ -714,6 +714,15 @@ second across the copies. **Prediction (prior median 1.15, range 0.9–1.3):** c
 16 copies. **Decision rule:** ratio < 1.0 ⟹ every solver phase runs at 16 (enumeration `MECH_WORKERS`,
 profile/design `--threads`); ratio ≥ 1.1 ⟹ keep oversubscribing; between ⟹ 16 on memory-tight phases
 (profile), oversubscribe elsewhere. Result to be ledgered here with the conditions.
+**RESULT (2026-08-31 02:40Z, box idle except the WO-9 planner at ≤ 4 threads; each copy one deterministic
+154,747-conflict SAT solve of the captured instance):** 1 copy 24,078 conflicts/s; 16 copies 18,886/s each
+(0.78× solo — memory-bound already at the physical core count: 11.96 solo-cores of 16), aggregate 287,938/s; 26
+copies 11,268/s each, aggregate 303,887/s; 32 copies 9,756/s each, aggregate 311,957/s. **Ratio 32/16 = 1.083** —
+inside the registered range, below the prior. Rule applied: **16 threads on the memory-tight profile; 26–32 on
+bulk conflict-capped phases (+5–8 %); anything WALL-capped at 16**, since per-ask latency is 2.5× worse at 32.
+Kooshi's recollection was right about per-solver speed and the loss is larger than the SMT gain suggests; the
+aggregate still favours oversubscription slightly. (The in-run 16→28 arm on the enumeration was confounded by the
+tree exhausting during the window and is not read.)
 
 *2026-08-31 00:52Z — WO-7 A2 opened EARLY, by a refusal.* The Rust enumerator, run by me on the identical it-4
 stage (batch 85, stage/order fingerprints EQUAL to the Python manifest: `aca1b124b999f44c` / `2ec30bde119b5d6d`) to
@@ -765,6 +774,12 @@ profile ~10⁶ classes (solver tail scales; days) vs (B) a SUB-BATCH — put flo
 instead of days; the compounding lattice may cheapen the rest later, G33). WO-7's A2 EQUAL is likewise only
 feasible on a sub-batch both enumerators can finish. The A2 session's memcheck at its footprint: 291 rounds,
 0 faults, ≈ 2.3 TiB — the session's pre-flight, after the fact.
+**EXACT (02:29Z): |S| = 2,588,314** (V1/V2/V3 verified, 3,249 leaves, 310,549 solves; kept as
+`build/m51-S-…-vdel28-full85-rust.jsonl`, 4.8 GB). Sub-batch curve (`tools/subbatch.py`,
+`build/m51-subbatch-it4-curve.txt`): two edges at vertex 206 carry 69 % of the count; k = 10 put-backs → 49,780;
+**k = 11 → 37,316 (28 cheats removed)** ← the campaign's default; k = 20 → 3,186 (the WO-7 A2 fixture: both
+enumerators finish it in minutes). Floor files `build/m51-floor-it4-{sub28,sub19}.txt`; `batchkill.py --enumerate
+--floor-file` (subset-asserted) added for the Python side.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly

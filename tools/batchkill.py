@@ -2023,6 +2023,15 @@ if __name__ == "__main__":
             rows = json.loads((BUILD / "m50-batch.json").read_text())["rows"]
             rc = [r for r in rows if r["kind"] == "recurse-census" and r["label"] == lab][-1]
             floor = [tuple(e) for e in rc["essential_alone"]]
+            # SUB-BATCH (2026-08-31, it-4: the full floor's stage has 2,588,314 classes): an explicit
+            # floor file `u-v,...` REPLACES the census floor; it must be a subset of it, so the stage is
+            # a sub-batch of the recorded one and no cheat outside the floor is ever spent.
+            ff = next((args[i + 1] for i, a in enumerate(args) if a == "--floor-file"), None)
+            if ff:
+                sub = [tuple(int(x) for x in e.split("-")) for e in Path(ff).read_text().strip().split(",") if e]
+                assert set(sub) <= set(floor), f"--floor-file is not a subset of the census floor: {set(sub) - set(floor)}"
+                print(f"[enumerate] SUB-BATCH floor from {ff}: {len(sub)} of the census floor's {len(floor)} edges")
+                floor = sub
             # THE STAGE REMOVES removed ∪ floor: the committed removals accumulate. (Iteration 2's
             # first enumeration passed only the floor, silently re-adding the 19 removed cheats as
             # edges — an under-enumeration the CERTIFICATION ASK caught: the refused commit's
