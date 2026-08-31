@@ -27,7 +27,7 @@ def main():
     for i, rec in enumerate(obj.prov):
         if rec[0] == 'glue':
             depth[i] = 1 + max(depth[rec[1]], depth[rec[2]])
-    ue = obj.unit_edges(); live = set(map(tuple, obj.cheats))
+    ue = obj.unit_edges(); live = set(map(tuple, obj.cheats)) - set(map(tuple, removed))   # live = present as edges
     udeg = collections.Counter(); cdeg = collections.Counter()
     for u, v in ue: udeg[u] += 1; udeg[v] += 1
     for u, v in live: cdeg[u] += 1; cdeg[v] += 1
