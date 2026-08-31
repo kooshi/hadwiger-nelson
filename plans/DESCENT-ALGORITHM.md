@@ -131,6 +131,26 @@ desktop's 16 physical / 32 logical cores, concurrent solvers run at 0.78× solo 
 from 16 to 32 while per-ask latency worsens 2.5× — so memory-tight and wall-capped phases run
 at the physical core count and only bulk conflict-capped phases oversubscribe.
 
+**3′. The profile's tail, and the pool choice that pays for it** (iteration 4, 2026-08-31). The
+shortcut tiers decide the bulk of a list in minutes (26,857 of 37,316 classes at iteration 4, all
+killed, 0.4 % reaching the complete solver); the cost is the classes that need the complete
+solver over the whole pool — 100–1,800 s each at 1.47 M points, arriving in RUNS of consecutive
+class keys. Measured on the 42 hardest: a pool **restricted to points with ≥ 3 object neighbours
+or unit-degree ≥ 12** (285,973 points, 19 % of the pool) kills all 42 in 6,582 s against 20,609 s
+on the full pool — 3.1× faster with identical verdicts — while a pool restricted harder (109,654
+points) kills 26 with 16 undecided at the conflict budget, and the 5,151 points with ≥ 3 object
+neighbours alone kill none: **too small a pool makes the refutation harder, not easier**, and the
+width regime lives in the two-object-neighbour points cooperating (1,464,545 of the 1,469,696
+have exactly two). So the profile is tiered by POOL as well as by ask: the tail runs on the
+restricted pool first (an acknowledged pool choice — kills transfer to the full pool by
+monotonicity, and the smaller solver admits more workers), and only its survivors and unknowns
+are re-asked on the full pool. Two measurement cautions the same experiments produced: **a
+class's complete-solver time is not reproducible on the same export** unless each ask starts a
+fresh solver (the engine keeps a worker's solver across asks for the learned-clause reuse it
+measured; the same seven classes read 0.02–1.9× of their earlier times under a different history —
+paired comparisons need `--solver-reset`); and the cheap tiers are contention-sensitive too (the
+same 200 refutations cost 302 s at twelve busy workers and 186 s beside seven).
+
 **4. Hitting set.** Every colouring not provably killed (survivors AND unknowns — the
 conservative fold) must stay dead the old way: each is monochromatic on some batch cheats,
 so compute the exact minimum set of cheats hitting every such colouring (ILP). Those are
@@ -202,6 +222,21 @@ never blind, a 64-class census sufficing for the loop); and **a task boundary co
 second** — the first solve on a rebuilt solver, 30× the price previously recorded — which is
 what makes leaves a budget rather than a free resource. Accumulated blocking clauses, by
 contrast, cost nothing measurable (first-hundred vs last-hundred solve medians 0.9–1.5×).
+
+**On memory locality** (Kooshi's proposal, 2026-08-31: assemble the graph in memory so that
+cache-level groups hold unit-distance material — driven by the unit edges, not by position, since
+"the vast majority of points near a point are not at all useful to it"). The measurement that
+bounds it: on the 1.47 M-point pool, the fraction of unit edges whose endpoints share a cache-sized
+block is 0.000 (L2-sized, 512 points) / 0.021 (L3-sized, 32,768) in the raw order, and a fast
+cache-topology-sized grouping (`tools/pool_groups.py`: capped two-level multi-source-BFS cells on
+the unit graph, sizes read from sysfs, 25 s, approximate by design) lifts it to **0.056 / 0.198** —
+while RCM and a Morton curve barely move the median index gap between unit neighbours (429 k →
+255 k / 207 k). **The unit-distance graph of a dense point set is well-mixed**: a point's ~8 unit
+neighbours lie on a circle through ~280,000 other points, so no ordering makes most propagation
+local; grouping bounds the spread to a ring of blocks rather than eliminating it. Whether the
+remaining locality buys measurable time is the paired A/B (fresh solver per ask) recorded in
+`plans/M51-descent-engine.md`; the loop binary treats the grouping as a cheap stage-assembly
+pass whose size parameters are measured on the host, never configured.
 
 ## State of the descent
 
