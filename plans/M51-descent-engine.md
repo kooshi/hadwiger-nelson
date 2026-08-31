@@ -688,6 +688,18 @@ WO-10's live A2**. (4) WO-11 (D44, the held leaf) stubbed (`df0e279`), not plann
    case the monotonicity argument does not cover).
 Jackpot clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
 
+*Amendment 2026-08-31 (after compaction):* step 0 SKIPPED on Kooshi's call (his check is the
+more dedicated probe); step 1 launched 26 workers from the cube manifest (246 cubes / 39 open / 27,977
+classes read back). **Kooshi's scheduling direction, now standing (memory `wo-chain-pipelining`):** subplan
+separable, benchmark-free WOs in PARALLEL on git worktrees, and PIPELINE the next WO's planning against the
+current WO's frozen plan while it is implemented. First application: **WO-11's planning session is running
+NOW in the worktree `~/source/descent-engine-wo11` (branch `wo11-plan` from `df0e279`)**, not waiting for the
+two A2s — the main tree stays free for WO-7's A2 session; the planner takes A0 (the per-leaf census, P10) on
+the seed and it-3 stages at ≤ 4 threads beside the enumeration and drafts SPEC **v0.10** against the v0.8/v0.9
+drafts. On its freeze: I rule, merge `wo11-plan` into main (fast-forward or merge commit, my push), and a
+fresh implementation session follows once v0.9 has landed. WO-9 (minimum halo, design crate — disjoint from
+WO-11's enum crate) is the next parallel-planning candidate if Kooshi wants a second planner.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
