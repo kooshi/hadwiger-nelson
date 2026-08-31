@@ -812,6 +812,18 @@ iteration-3 order experiment (~14 h) is filed for a quiet desktop slot. Rulings:
 implementation small (design crate), scheduled for a quiet slot.
 *Planner closed at `c0a5a50` (rulings §17; D56–D60 filed; the A2 "before" binary is the post-v0.8 merge base).*
 
+*2026-08-31 03:40Z — Kooshi's direction, recorded:* (1) "update the descent algorithm document with everything
+you've discovered or improved upon" — `plans/DESCENT-ALGORITHM.md` revised (`10d666b`: 0′ vertex deletion, 1′ the
+class-count law and the sub-batch with its costs stated, the minimum-halo theorem and the width regime, adoption by
+re-derivation, the engine's findings, the state table, and § The loop as a product); (2) **the 128-core server
+(1.5 TB, confirmed) gets ONE BINARY running the whole loop unattended until a stated wall** —
+`descent-engine/plans/WO-12-loop-binary.md` (stub: halt clauses, the phase coverage table Rust/Python/to-build, the
+three rules, the order of work: WO-11 → v0.9/v0.10 → WO-9 → pool → floor/vertex → hitting → certify → driver).
+His question — "I wonder what we lose out on" with the sub-batch — is answered in DESCENT-ALGORITHM 1′ (five
+items: fewer cheats per iteration; the deferred edges are the width-shaped ones we would pay for anyway; soundness
+and within-iteration composition intact; the joint-design interaction of all 39 removals is the genuine unmeasured
+loss; class count is a proxy for dial progress).
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
