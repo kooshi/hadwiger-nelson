@@ -929,6 +929,24 @@ regime where layout interacts with a persistent clause database. Kooshi's questi
 unit graph is well-mixed (0.198 internal at L3 blocks is the ceiling grouping reaches here), so cache grouping is a
 bounded, cheap (25 s) stage pass, not a multiplier.
 
+*2026-08-31 11:20Z — THE SEED'S CRYSTAL ANATOMY (Kooshi, from the visualizer: "most of the cheats are subgraphs of
+dodecahedral lattices … multiple offset crystals, not rotated relative to each other"; measured exactly).* The seed
+has NINE edge-direction classes (unit and cheat edges alike): two triangular-lattice families at **13.2213° and
+46.7787°** — a mirror pair about 30°, and the angle between them is **33.5573° = arccos(5/6) = the MOSER TWIST**
+(`FieldWall.lean`'s ρ = (5 + i√11)/6: the Exoo–Ismailescu seed is two crystal families related by the classical
+4-forcing rotation, in the seam field — consistent with M49's seam-pool successes) — plus a sparse **axis family**
+at {30°, 90°, 150°}. Each family decomposes into ~19 translated cosets (his "offset crystals, not rotated" — exact
+within a family; ACROSS families the relation is the twist/mirror). Together the two families' six-plus-six
+directions are the twelve-fold star his eye read as dodecahedral. Cheat census: 161 intra-coset + 160 cross-coset
+in family A, 11 in B, **12 on the axis**. The axis family is the INTERFACE, and it is the descent's own story told
+in geometry: three side-2 equilateral triangles (22-112-134, 56-78-168, **206-210-211**) and three DIAMETERS
+through the origin (21-38, 77-94, 133-150 — the hex-shell diameter genre at the seed's own centre; midpoints at 0,
+±(1/(2√3), 1/2), ∓1/√3 — the seam radius), plus 210-211. **Ten of the twelve are already removed** — M49/M50 ate
+the interface first without knowing it — **and the only two standing are the heavy pair 206-210/206-211 at the
+forced endpoint.** No single global mirror maps the seed to itself (0 of 214); the interface is locally mirrored
+at several centres. Reading, falsifiable: the descent's endgame is the interface's last two edges, and the width
+of their kills is the width of the twist interface itself.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
