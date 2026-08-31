@@ -895,6 +895,23 @@ after each commit: `descentviz_refresh.py` → `descentviz_artifact.py <out>` �
 that URL (`url=`), label = the object. The artifact copy carries the instrument's tokens (IBM Plex Sans/Mono,
 ground `#0f1114`, selection amber) and is produced from `tools/descent-viz-artifact.tmpl.html`, never hand-edited.
 
+*2026-08-31 09:40Z — E2 READ; E1's grouping rebuilt fast.* **E2 (restricted pools, the 42 core classes):** `strong3`
+(5,151 points) kills 0 of 42 — all `core-coloured` in 11 s (prediction met); `mixed16` (109,654) kills 26 with 16
+UNDECIDED at the conflict budget in 27,993 s — MISSED, and in the informative direction: a pool too small makes the
+refutation HARDER, not easier; **`pdeg12` (285,973 = 19 % of the pool: ≥ 3 object neighbours or pool-degree ≥ 12)
+kills 42 of 42 in 6,582 s against 20,609 s on the full pool — 3.13×, 100 % agreement — the registered rule is met**:
+the tail (10,459 classes, `build/m51-tail-rows-it4.txt`) is profiled on `pdeg12` first as an ACKNOWLEDGED POOL
+CHOICE (its smaller solver admits more workers; kills transfer by monotonicity), and its survivors/unknowns are
+re-asked on the full pool. **E1:** the greedy heap grouping was killed after 1.5 h with no output (Kooshi: "it won't
+amortize"); `tools/pool_groups.py` replaces it — capped two-level multi-source-BFS cells on the unit graph, sized
+from sysfs (L2 512 KB, L3 32 MB at an assumed 1 KiB per point → cells of ~512 / ~32,768 points), 25 s, approximate
+and machine-dependent by design. The metric says how much any grouping can buy here: the internal-edge fraction
+rises from 0.000 / 0.021 (raw, L2 / L3 blocks) to **0.056 / 0.198** — four fifths of the unit edges still cross an
+L3-sized block. The unit-distance graph on 1.47 M dense points is well-mixed (a point's ~8 unit neighbours sit on a
+circle through ~280 k other points); grouping bounds the spread, it cannot localize it. The reset A/B
+(`--solver-reset`, so per-class times are a function of the export alone — the first pass showed the SAME class
+varying 0.02–1.9× with the worker's solver history) runs raw → RCM → Morton → groups; the tail on pdeg12 follows.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
