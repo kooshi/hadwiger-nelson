@@ -254,7 +254,12 @@ standing rule, and on a 128-core box the rule is what makes a multi-day run surv
 **Thread counts are derived from measurement per phase** (physical-core count for memory-tight
 and wall-capped phases; oversubscription only for bulk conflict-capped asks), and the memory
 model prices each phase before it runs — 1.5 TB removes the profile's narrowing on this
-object but not the discipline. The order of work: land WO-11 (parallel enumeration) and the
+object but not the discipline. **And the server is dual-socket, so the binary is NUMA-aware**
+(Kooshi, same day): workers pinned per node, every solver's memory first-touched by its own
+pinned thread, the pool export replicated per node rather than shared across the interconnect,
+cross-socket traffic a printed column that can refuse a phase — because the solvers are
+memory-bound at the physical core count, and remote memory would make two sockets perform as
+one. The order of work: land WO-11 (parallel enumeration) and the
 v0.9/v0.10 contract, then port phases 2, 0, 4 and 6 in that order (pool first because it is the
 serial bottleneck today; certify last because it needs the arithmetic and the review), then
 the driver loop with its halt clauses. That is the engine's roadmap after the current work

@@ -823,6 +823,9 @@ His question — "I wonder what we lose out on" with the sub-batch — is answer
 items: fewer cheats per iteration; the deferred edges are the width-shaped ones we would pay for anyway; soundness
 and within-iteration composition intact; the joint-design interaction of all 39 removals is the genuine unmeasured
 loss; class count is a proxy for dial progress).
+*Addendum (Kooshi, minutes later): the server is DUAL-SOCKET — the loop binary must be NUMA-aware; recorded as a
+requirement in the WO-12 stub (per-node pools, first-touch after pinning, per-node export replicas, `numastat` as
+a column, per-node pre-flight; one reactor per node as the candidate shape) and in DESCENT-ALGORITHM § The loop.*
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
