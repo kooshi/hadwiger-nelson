@@ -4,7 +4,13 @@
 paper standard before any paper exists. This is the reference statement of the loop that
 M49 §R8–R10 discovered, M50 turned into a batch engine, and M51 runs at scale. The
 per-milestone records (`plans/M49…M51`, §R sections) carry the measurements and incidents;
-this file carries the algorithm. Kernel citations are to `Proofs/HadwigerNelson/`.*
+this file carries the algorithm. Kernel citations are to `Proofs/HadwigerNelson/`.
+**Revised 2026-08-31** (Kooshi: "update the descent algorithm document with everything you've
+discovered or improved upon") with iteration 3's commit, the second descent move (vertex
+deletion), the sub-batch step and the class-count law that forces it, the minimum-halo theorem,
+the adoption discipline for engine-produced lists, the engine's own findings, and the loop as a
+product. Every number here traces to `plans/M51-descent-engine.md` §S-CONT or the engine's
+`plans/WO-*-outcome.md`.*
 
 ## The object and the dial
 
@@ -36,12 +42,67 @@ the batch: the edges worth attacking are exactly the ones proven to carry load. 
 beyond the floor was measured empty at M51 §1w — present edges have zero mono-mass on
 separating lists, so no principled ordering of non-floor cheats exists yet.)
 
+**0′. Vertex deletion — the second descent move** (found 2026-08-28 on Kooshi's question
+"what about shrinking the entire graph?"). A seed vertex made **edgeless** — its index kept, its
+point kept as a possible glue parent, every edge at it removed — takes all of its cheats off
+the dial at **zero geometry**: nothing is added, so nothing needs exact coordinates or a halo.
+It is legal exactly when the object minus that vertex still refuses every proper 5-colouring
+(the same certificate as a commit: one-hot and 3-bit encodings both UNSAT). Deletion is
+monotone — a vertex deletable now stays deletable as vertices go, not as halo material
+arrives — so a single-vertex census followed by greedy composition (largest cheat-load
+first, confirmed by the certificate at each step) gives a maximal, not maximum, set; three
+orders were measured within 2 of each other (95, 95, 93 cheats freed). On iteration 3's
+object this removed **28 seed vertices carrying 102 cheats (95 live)** in one certified
+commit, 393 → 298 — three times the campaign's largest halo commit, for nothing. The rule for
+re-running it: after any halo commit, since new material can make a vertex deletable again
+(the one case monotonicity does not cover). Consequence for the object model: the seed block
+that names a class is no longer a prefix of the vertex order but a **gather** of the live seed
+vertices (186 of 214 here) — every consumer of a class key had to learn this, and the engine's
+first real run on such an object refused rather than enumerate a different stage (WO-7, INC-2).
+
 **1. Enumerate S.** Delete the batch hypothetically and enumerate **every** proper
 5-colouring the weakened object admits, up to palette symmetry, projected to the seed
 (verdicts provably depend only on the 214 seed digits — the halo re-solves as free
 variables). Exact blocking-clause enumeration, every leaf closed by UNSAT: `S` is the
 complete list of jobs the deleted cheats were doing. It grows fast with batch weakness —
-684–5,366 per single edge at M49, 51,350 for the seed's floor, 46,350 at iteration 3.
+684–5,366 per single edge at M49, 51,350 for the seed's floor, 46,350 at iteration 3 —
+and **2,588,314 at iteration 4** (batch 85: 46 replaced + 39 floor), the class count
+multiplying by roughly **1.11 per added cheat** (46,350 · 1.11²⁵ ≈ 2.9 M). The reference
+enumerator (Python, one solver process per class, ~3.7 s/class) cannot produce a list of that
+size in any useful time; the Rust engine did it in about 45 minutes of restarts on 4–28
+threads, with every leaf's closing refutation observed and the written file re-verified on
+fresh solvers (V1 ∧ V2 ∧ V3 — self-verification by an independent code path, which is a
+different kind of evidence from an oracle comparison and is recorded as such).
+
+**1′. The sub-batch.** A class list for batch `B` contains, for free, the list of every
+sub-batch `B′ ⊆ B`: exactly the lines proper on the put-back edges `B ∖ B′` (putting an edge
+back is adding a constraint; nothing is re-solved). So the full floor is enumerated **once**,
+the **put-back curve** is read from it (`tools/subbatch.py`: per class one bit per floor edge;
+greedy put-back of the edge that leaves the fewest survivors), and the iteration spends the
+largest sub-batch whose class count sits at the scale the later phases are priced for.
+Iteration 4's curve: two floor edges at one vertex carry 69 % of all 2.59 M classes; putting
+back 11 of the 39 leaves **37,316 classes with 28 cheats still spent**; 20 leaves 3,186. The
+chosen sub-batch is then enumerated **fresh** (its own palette-canonical representatives — a
+filtered list carries the parent batch's breaking order, which downstream must never read),
+and the fresh count must equal the filter's prediction: two code paths that share nothing,
+agreeing (37,316 = 37,316; 3,186 = 3,186).
+
+*What the sub-batch costs, honestly.* (i) Fewer cheats per iteration — 28 of 39 here; the
+held-back edges stay in the floor and return next iteration against a richer lattice (G33).
+(ii) The deferred edges are, by construction, the ones whose removal opens the most colouring
+freedom — the width-shaped kills, thousands of weak points cooperating — so the greedy choice
+defers exactly the removals that are most expensive per cheat; this is a cost we would have
+paid anyway, moved later, and possibly cheapened by growth. (iii) Not lost: soundness (the
+certificate is unchanged) and composition-by-construction within the iteration (the halo is
+still designed against the whole sub-batch's list). (iv) Genuinely lost: whatever a halo
+designed against the FULL batch would have learned from the interaction of all 39 removals at
+once — the classes outside `S′` are exactly the colourings that are monochromatic on some
+put-back edge, and they stay killed the old way, by that edge, until it is spent. Whether the
+joint design would have been smaller than the sum of the sequential ones is unmeasured; the
+minimum-halo theorem below says the halo is dominated by single wide classes, which argues the
+loss is small. (v) The greedy put-back optimizes class count, not dial progress per unit of
+compute; each cheat counts one on the dial, so this is the right proxy unless a cheat's
+downstream cost is known — which the profile measures only after the choice.
 
 **2. Build the pool.** The continuum of points at unit distance from the object is made
 finite by a theorem (`PartnerLattice.lean`): a point useful to any colouring argument must
@@ -50,7 +111,11 @@ inert), and every such point is one of exactly two intersections of two unit cir
 (`Glue.eq_gluePoint_of_unit_pair`). The **depth-1 pool** is therefore the complete,
 enumerable set of pairwise glue points of the current object — 394,604 points over the
 1,008-point iteration-3 object — with no number field chosen in advance: the fields are
-whatever the intersections generate.
+whatever the intersections generate. On a vertex-deleted object the pool is built about
+**live** pairs only, with every object location — deleted vertices included — excluded as a
+candidate. Engineering note: the reference pool build is a serial Python pass over ~1.7 M
+pairs (40+ minutes on the desktop for the 1,862-point object); it is the first phase the loop
+binary (below) must own, since the engine consumes the pool only as an export.
 
 **3. Profile.** For each colouring in S: fix it on the seed, free every halo and pool
 variable, and ask whether it extends properly to the **entire** pool. `killed` = some
@@ -58,7 +123,13 @@ finite unit-distance subset refuses it (unit material can do this cheat's job he
 `survives` = it extends to the whole pool, a **proof** that no depth-1 halo of any size
 kills it; `unknown` = solver cap, never folded into either side. Tiered engine
 (empty-domain → strong rung → peel → greedy witness → full solve), every tier individually
-sound, order measured not assumed.
+sound, order measured not assumed. From iteration 4 the profile is the Rust engine's
+(`descent replay`, verdict-exact against 45,365 reference lines at WO-2; the ask phases learned
+the gathered block at WO-10). Thread count is a measured rule, not a preference: on the
+desktop's 16 physical / 32 logical cores, concurrent solvers run at 0.78× solo speed already at
+16 copies (memory-bound at the physical core count) and aggregate throughput rises only 8 %
+from 16 to 32 while per-ask latency worsens 2.5× — so memory-tight and wall-capped phases run
+at the physical core count and only bulk conflict-capped phases oversubscribe.
 
 **4. Hitting set.** Every colouring not provably killed (survivors AND unknowns — the
 conservative fold) must stay dead the old way: each is monochromatic on some batch cheats,
@@ -73,13 +144,38 @@ delta-debugging of the union down toward minimality. Designing one halo against 
 batch's list is what makes removals **compose by construction** (M50's correction of M49,
 where kills designed edge-by-edge proved context-dependent and composed only sequentially).
 
+*How small a halo can be — a theorem, and the regime it exposes* (WO-9, 2026-08-31). The shrink
+reaches a **1-minimal** halo, and 1-minimal is not minimum: different deletion orders reach
+different 1-minimal halos. But a **criticality witness** for a point `v` — a colouring that
+survives on halo ∖ {v} — is downward-closed (fewer points, fewer constraints), so every halo
+that is a *subset* of the current one must keep every witnessed point. Iteration 3's halo has
+**845 witnessed points of 854**: no point-removing pass can save more than nine (1.05 %), and
+switching classes among their recorded alternative kill sets saves nothing (a from-scratch
+greedy hitting set lands at 1,694). The reason is structural: **four classes cover the whole
+halo, and one class alone needs 844 of the 854 points** — a single colouring whose kill is
+thousands of weak points cooperating. This is the *width regime* the design phase meets as
+"stalls" (277 at iteration 2, 32 in iteration 3's single fresh run — the "zero stalls" first
+recorded there came from fifteen invocations adopting a Python cover's points, a G21 instance
+now corrected), seen from the halo's side: the halo IS the union of a few wide kills, and the
+kills are wide because the colourings they answer have that much freedom. The one lever left
+is the shrink's deletion order; nothing in the mechanism family can reach below the witnessed
+floor.
+
 **6. Certify.** Add the halo with **exact geometry** (every unit edge an algebraic
 identity, sympy-verified, labelled-precision fallback recorded per edge), remove the batch,
 and certify the new object — kept cheats included — refuses all proper 5-colourings, in
 **two independent SAT encodings**. The profile and hitting set are advisory; this
 certificate is the sole truth-maker, and it cannot inherit an error from them: a design
 misled by any earlier verdict produces a REFUSED certificate ("a separating colouring
-exists — investigate"), never a silently weakened object.
+exists — investigate"), never a silently weakened object. Two disciplines added at
+iteration 4: **adoption by re-derivation** — an engine-produced class list becomes the
+campaign's only after the campaign re-derives its stage fingerprint from the object and the
+header's batch, checks the batch is a sub-batch of the recorded floor, reads the engine's
+exact-and-verified claim, and re-validates every line against its own definition of a
+separating colouring (a planted corrupted line is refused); and **the certificate is
+checkpointed** — the lookup re-check per colouring is parallel and resumable, exact geometry
+is resolved lazily (an eager pass over every deep halo point cost one commit 10.9 idle hours),
+and no phase longer than fifteen minutes may hold its state only in a process.
 
 **7. Iterate.** The committed points spawn new pairwise glue points, so the next pool is
 strictly richer — the search space compounds rather than the search trying harder (G33).
@@ -96,7 +192,16 @@ essential set) rather than chosen by ambition, and |S| is the price signal. The
 consequence for engineering: solver throughput is not a convenience but the **dial's own
 gearing** — the Rust engine (descent-engine repo, WO-1 landed: solver-free tiers ~250×
 per core, verdict-exact against 45,365 reference lines) exists to move the affordability
-frontier, which widens the batch, which steepens the descent.
+frontier, which widens the batch, which steepens the descent. Two of the engine's own findings
+belong in the algorithm's record because they are about the search, not the code: the
+enumerator's cube tree was **grown blind** — when no class exists yet the split rule falls back
+to the first vertex of the degree order, which the palette breaking pins to colour 0, so four
+of five children are empty by construction and the tree collapses to one leaf (WO-11's
+diagnosis, retrodicting every earlier run's leaf sizes exactly; the fix is that growth is
+never blind, a 64-class census sufficing for the loop); and **a task boundary costs about one
+second** — the first solve on a rebuilt solver, 30× the price previously recorded — which is
+what makes leaves a budget rather than a free resource. Accumulated blocking clauses, by
+contrast, cost nothing measurable (first-hundred vs last-hundred solve medians 0.9–1.5×).
 
 ## State of the descent
 
@@ -104,9 +209,54 @@ frontier, which widens the batch, which steepens the descent.
 |---|---|---|---|---|---|
 | seed | 214 pts | 0 / 446 | 51,350 | — | 29 |
 | 1–2 (M50) | 1,008 pts | 43 | 45,365 lines (24,810 classes) | 46 survive / 103 unknown | 17 |
-| 3 (M51, in flight) | 1,008 → TBD | 43 → 53 pending certify | 46,350 | **0 survive** / 164 unknown | 7 pending |
+| 3 (M51) | 1,008 → 1,862 pts | 53 / 446 (certified 2026-08-28; halo 854) | 46,350 | **0 survive** / 164 unknown | 20 |
+| 3′ vertex deletion | 1,862 pts, 186 live seed | 28 vertices → cheats 393 → **298** (certified, zero geometry) | — | — | 39 |
+| 4 (in flight) | 1,862 pts | sub-batch: 28 of the 39 floor edges spent | full 2,588,314 → sub 37,316 | profile pending (Rust) | — |
 
 Every claim above traces to a build artifact (checkpoints, certified commit rows with
 stated claim scope, the jobs ledger) or a kernel theorem; the per-milestone §R sections
 hold the incident record — including the three instrument bugs found by controls, which a
 paper reports as methodology, not omits.
+
+## The loop as a product — the server target
+
+*(Kooshi, 2026-08-31: "the deliverable for the 128-core server could be a single binary that
+runs the whole algo in a loop, churning out iterations, until it hits some unforeseen wall and
+we can analyze its output and refine." The server: 128 cores, 1.5 TB.)*
+
+The loop above is one iteration; the product is the loop run unattended, each iteration's
+artifacts written in the forms this document names, halting only on a clause it can state.
+The **halt clauses** are already defined: μ ≤ 1 (the jackpot — halt and verify); the unit-part
+crossing 4 → 5 (halt and certify the new 5-chromatic witness); a REFUSED certificate (halt and
+investigate, never retry); an empty floor with cheats remaining (the dial has stalled below
+the floor's reach — a mathematical wall); a sub-batch curve with no affordable point (the
+computability tightrope failing — an engineering wall); and any hardware event. Everything
+else is a phase that must run without a person: the table is the honest coverage today.
+
+| phase | reference (Python, `tools/batchkill.py`) | engine (Rust, `descent`) | for the loop binary |
+|---|---|---|---|
+| 0 floor recompute | `--recurse` (single-deletion census, cadical, checkpointed) | — | port: asks over the object; embarrassingly parallel |
+| 0′ vertex census + deletion commit | `--vertex-census`, `tools/vertex_delete.py`, `--commit-deletions` | — | port: the same asks plus the two-encoding certificate |
+| 1 enumerate | cubes (3.7 s/class) | **`enumerate`** (verified gather; WO-11 makes it parallel) | done |
+| 1′ sub-batch curve + fresh enumeration | `tools/subbatch.py` + `enumerate` | WO-8 stub (the filter) | port the curve (bit masks, trivial); the enumeration is done |
+| 2 pool | `--pool-only` (serial, 40+ min) | export consumer only | port: pairwise glue points, dedupe, neighbour structure — geometry in f64 with the provenance triples the certificate resolves exactly |
+| 3 profile | Python tiers | **`replay`** | done |
+| 4 hitting set | scipy MILP over survivors ∪ unknowns | — | port: tiny instance (tens of columns); exact ILP or branch-and-bound |
+| 5 design + shrink | cover + ddmin (Python) | **`design`** (checkpointed, resumable) | done; WO-9's order knob pending |
+| 6 certify + commit | lookup re-check, one-hot + 3-bit UNSAT, exact geometry (mpmath 250-digit from provenance; sympy for shallow edges) | — | port: the two SAT asks are the engine's own ask; exact geometry needs arbitrary-precision arithmetic in Rust (a provenance-driven evaluator at fixed high precision, with the labelled-precision fallback the record already uses) |
+| monitors | χ(unit-part), field census, weighted-ladder scan | — | χ(unit-part) is one ask; the others are columns, not gates |
+
+Three consequences for the binary's shape. **The certificate stays the sole truth-maker**: a
+loop that trusts its own profile is the M49 warning ("profile advises, certificate decides")
+turned into a bug, so phase 6 is the first port to review, not the last. **Every phase
+checkpoints at its acceptance points** and the binary resumes from the last one — the
+standing rule, and on a 128-core box the rule is what makes a multi-day run survivable.
+**Thread counts are derived from measurement per phase** (physical-core count for memory-tight
+and wall-capped phases; oversubscription only for bulk conflict-capped asks), and the memory
+model prices each phase before it runs — 1.5 TB removes the profile's narrowing on this
+object but not the discipline. The order of work: land WO-11 (parallel enumeration) and the
+v0.9/v0.10 contract, then port phases 2, 0, 4 and 6 in that order (pool first because it is the
+serial bottleneck today; certify last because it needs the arithmetic and the review), then
+the driver loop with its halt clauses. That is the engine's roadmap after the current work
+orders, filed as its own stub.
+
