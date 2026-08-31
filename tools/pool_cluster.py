@@ -102,9 +102,9 @@ def main():
     obj, _ = BK.load_object(obj_label)
     fp = BK._pool_fp(obj, man['pool']['name'], man['pool']['params'], [tuple(p) for p in arrays['pool_xy'].tolist()])
     out = Path(str(base) + '-greedy'); np.savez(str(out) + '.npz', **arrays)
-    man2 = json.loads(json.dumps(man)); man2['pool']['fingerprint'] = fp; man2['pool']['ordering'] = f'greedy-groups-{B}'
+    man2 = json.loads(json.dumps(man)); man2['pool']['fingerprint'] = fp; man2['pool']['ordering'] = 'by-depth'  # the engine validates this word; the locality note goes below
     man2['arrays'] = {k: {'dtype': str(v.dtype), 'shape': list(v.shape), 'sha256': hashlib.sha256(np.ascontiguousarray(v).tobytes()).hexdigest()} for k, v in arrays.items()}
-    man2['derived_from'] = {'manifest': base.name + '.json', 'pool_fingerprint': man['pool']['fingerprint'], 'permutation': out.name + '-perm.npy'}
+    man2['derived_from'] = {'manifest': base.name + '.json', 'pool_fingerprint': man['pool']['fingerprint'], 'permutation': out.name + '-perm.npy', 'ordering_note': f'greedy-groups-{B}'}
     Path(str(out) + '.json').write_text(json.dumps(man2, indent=1)); np.save(str(out) + '-perm.npy', pool_perm)
     print(f'wrote {out}.{{json,npz}}: pool fp {fp}')
 

@@ -86,10 +86,10 @@ def main():
     out = Path(str(base) + '-' + mode)
     np.savez(str(out) + '.npz', **arrays)
     man2 = json.loads(json.dumps(man))
-    man2['pool']['fingerprint'] = fp; man2['pool']['ordering'] = mode + '-locality'
+    man2['pool']['fingerprint'] = fp; man2['pool']['ordering'] = 'by-depth'  # the engine validates this word; the locality note goes below
     man2['arrays'] = {k: {'dtype': str(v.dtype), 'shape': list(v.shape),
                           'sha256': hashlib.sha256(np.ascontiguousarray(v).tobytes()).hexdigest()} for k, v in arrays.items()}
-    man2['derived_from'] = {'manifest': base.name + '.json', 'pool_fingerprint': man['pool']['fingerprint'], 'permutation': out.name + '-perm.npy'}
+    man2['derived_from'] = {'manifest': base.name + '.json', 'pool_fingerprint': man['pool']['fingerprint'], 'permutation': out.name + '-perm.npy', 'ordering_note': mode + '-locality'}
     (Path(str(out) + '.json')).write_text(json.dumps(man2, indent=1)); np.save(str(out) + '-perm.npy', perm)
     print(f'wrote {out}.{{json,npz}}: pool fp {fp} (raw {man["pool"]["fingerprint"]}), {n} points, {time.time()-t0:.1f} s')
 
