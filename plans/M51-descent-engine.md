@@ -792,6 +792,13 @@ line re-validated in Python — width, palette, proper on unit ∪ remaining che
 corrupted line refused; enumeration row recorded with `source.engine = descent enumerate`). **WO-7 A2 GO session
 spawned on main (02:59Z)**: `--compare` on the sub19 fixture; EQUAL ⟹ SPEC v0.8 in WO-10 §11.1's block order with
 the `removed_dead` correction. `batchkill.py --pool-only` added; the vdel28 depth-1 pool build is running.
+**WO-7 A2 CLOSED EQUAL (03:20Z)** on the sub19 fixture — `ours 3186 · theirs 3186 · only ours 0 · only theirs 0`,
+`inspect` deriving both fingerprints first, plus a decorrelated Python cross-check whose two plants go opposite
+ways (a live-column mutation → NOT EQUAL; a deleted-column mutation → EQUAL, the dialect's own claim demonstrated
+from outside). **SPEC v0.8 applied** (`e33f1e5`, nine blocks in the ruled order, `removed_dead` scoped to "derivable
+given the object file, checked by design"); engine main pushed at `ca7489f`. The session's honest scope line: the
+sub-batch is not weaker on what A2 tests (the gather, the wire field, the oracle) but is on exposure (3,186 classes
+against 2,588,314; a defect firing below ~1/1000 would not show) — the full stage rests on V1∧V2∧V3 alone.
 
 *2026-08-31 03:20Z — WO-9 FROZEN (`70a1154`, `wo9-plan` worktree) with a NEGATIVE verdict, by theorem:* a
 criticality witness (a surviving colouring of halo ∖ {v}) is downward-closed, so every halo that is a SUBSET of the
