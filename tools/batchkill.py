@@ -2047,6 +2047,15 @@ if __name__ == "__main__":
             enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
         filter_check()
+    elif "--pool-only" in args:
+        # build + cache (export) the pool for --object WITHOUT profiling — the Rust profile
+        # (`descent replay`) consumes the export; the Python profile is no longer the path (it-4).
+        pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth1")
+        lab = next((args[i + 1] for i, a in enumerate(args) if a == "--object"), None)
+        obj = load_object(lab)[0] if lab else Obj()
+        pool = _build_pool(obj, pool_name)
+        print(f"[pool-only] {pool.name}: {len(pool.pts)} points, fp {pool.fp}, object fp "
+              f"{obj.fingerprint()} → {_pool_cache_base(obj, pool.name)}.{{json,npz}}")
     elif "--profile" in args:
         pool_name = next((args[i + 1] for i, a in enumerate(args) if a == "--pool"), "depth1")
         so = next((args[i + 1] for i, a in enumerate(args) if a == "--survivors-of"), None)
