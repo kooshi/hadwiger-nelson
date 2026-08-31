@@ -836,6 +836,21 @@ scheduler invariants (a refused enumeration costs a rerun; a wrong list a day), 
 test-only knob, and `--max-classes` as a documented per-visit budget — all approved. **A2 session running now in
 the worktree** (box quiet: one serial pool build + its timing probe) — the four paired arms; the unpaired 4.9×
 against a floor of six is flagged as a live question, miss-with-anatomy preferred to a turned knob. v0.10 held.
+**A2 RAN (quiet box, one binary, four commanded arms + four supplementary): MISSED — 2.32× at eight workers
+against a floor of 6** (base 166.9 s unsplit one worker; wide 71.9 s). The anatomy is the result: ceiling 23.4×
+(tree fine), wall = solver work ÷ 7.8 busy workers to three digits (schedule fine), and the loss is **3.57× more
+solver WORK in the split tree** — 31 % cold starts (99 issues × 1.74 s) and 69 % a 2.47× per-class cost inside
+pinned cubes (D61), monotone in cube count and already 2.29× at two workers, so not concurrency. The plan's 8.8×
+rested on one coefficient measured under load 14.7 with tracing, with the wrong SIGN (split per-class cost was
+taken as cheaper than unsplit; on a quiet box it is 2.47× dearer) — G21 in the engine's currency: *a coefficient
+carried into a model is a measurement and inherits every condition of its run*. A2d (blind-tail split off) read
+0.936×, so §15 decision 7 reopened by its own rule and closed the other way: **blind split OFF by default**
+(`DESCENT_BLIND_SPLIT=on` the opt-in; the default pinned by a unit test). `--split-at 2000` is the measured
+optimum. **WO-11 LANDS as built** (merge `5e1a88d`, 244 controls held on main, pushed): correctness EQUAL on
+twelve arms, 2.32× the old binary's one core; the seed stage slower at 1–4 workers as predicted (0.58/0.76×),
+1.22× at eight. D44 closed, D45 corrected 30×, D57–D61 filed. **WO-13 stub** filed on main: D45 + D61 as one
+mechanism — pins baked into a rebuilt solver instead of ASSUMED on a long-lived one (CaDiCaL assumptions keep
+learned clauses valid across cubes); measurement first, the target re-derived from 8 ÷ amplification.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
