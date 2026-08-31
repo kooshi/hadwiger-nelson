@@ -207,10 +207,57 @@ def _glue_xy(p, q, sign):
             (p[1] + q[1]) / 2 + sign * h * (q[0] - p[0]) / d)
 
 
-def unit_pairs_np(pts, tol: float = TOL, h: float = 0.25):
+def _cross_unit_nbrs(pts, obj_pts, deleted, tol: float = TOL, h: float = 0.25):
+    """For every pool point, the sorted list of LIVE object points at distance in [1−tol, 1+tol]
+    — the annulus by cell-pair blocks, like `unit_pairs_np` but between two point sets."""
+    P = np.asarray(pts, dtype=np.float64); Q = np.asarray(obj_pts, dtype=np.float64)
+    live = np.array([j for j in range(len(Q)) if j not in deleted], dtype=np.int64)
+    Q = Q[live]
+    from collections import defaultdict as dd
+    qcells = dd(list)
+    for k, (kx, ky) in enumerate(np.floor(Q / h).astype(np.int64)):
+        qcells[(int(kx), int(ky))].append(k)
+    qcells = {k: np.array(v) for k, v in qcells.items()}
+    pcells = dd(list)
+    for i, (kx, ky) in enumerate(np.floor(P / h).astype(np.int64)):
+        pcells[(int(kx), int(ky))].append(i)
+    lo2, hi2 = (1 - tol) ** 2, (1 + tol) ** 2
+    reach = int(math.ceil((1 + tol) / h)) + 1
+    out = [[] for _ in range(len(P))]
+    for (kx, ky), A in pcells.items():
+        A = np.array(A); PA = P[A]
+        for dx in range(-reach, reach + 1):
+            for dy in range(-reach, reach + 1):
+                cd2 = (dx * dx + dy * dy) * h * h
+                if cd2 > (1 + tol + 2.83 * h) ** 2 or cd2 < max(0.0, 1 - tol - 2.83 * h) ** 2:
+                    continue
+                B = qcells.get((kx + dx, ky + dy))
+                if B is None:
+                    continue
+                D = PA[:, None, :] - Q[B][None, :, :]
+                d2 = (D * D).sum(axis=2)
+                ii, jj = np.nonzero((d2 >= lo2) & (d2 <= hi2))
+                for a, b in zip(A[ii], live[B[jj]]):
+                    out[a].append(int(b))
+    return [sorted(L) for L in out]
+
+
+def unit_pairs_np(pts, tol: float = TOL, h: float | None = None):
     """All pairs at distance in [1−tol, 1+tol], by cell-pair blocks (annulus only — a disc query
-    at this density is billions of pairs; the annulus is millions)."""
+    at this density is billions of pairs; the annulus is millions).
+
+    The cell size is chosen from the DENSITY (2026-08-31): per point the block work is
+    ∝ (points per cell) × (ring cells) ∝ ρh² · 1/h = ρh, so a fixed h = 0.25 on the it-4 pool
+    (~3 M points, ~1.4·10⁵ per unit area → ~9 k points per cell, 1.3 GB per block) ran for hours;
+    h ≈ sqrt(200/ρ) keeps blocks near 200 points. The pair SET is independent of h (the seed
+    pool's is checked equal across h in `--pool-selftest`)."""
     P = np.asarray(pts)
+    if h is None:
+        if len(P) < 2:
+            return []
+        span = (P.max(axis=0) - P.min(axis=0)); area = max(float(span[0] * span[1]), 1e-9)
+        rho = len(P) / area
+        h = float(min(0.25, max(0.02, math.sqrt(200.0 / rho))))
     keys = np.floor(P / h).astype(np.int64)
     from collections import defaultdict as dd
     cells = dd(list)
@@ -264,9 +311,11 @@ class Pool:
         self.obj, self.name, self.params = obj, name, params
         self.prov = prov                              # ("glue", a, b, s) with obj/pool indexing:
         self.pts = pts                                # parents < obj.n are obj points; >= obj.n are pool
-        tree_obj = cKDTree(np.array(obj.pts))
-        self.nbrs = [sorted(j for j in tree_obj.query_ball_point(p, 1 + TOL)
-                            if abs(_d2(p, obj.pts[j]) - 1) < TOL and j not in obj.deleted) for p in pts]
+        # Vectorized cross annulus (2026-08-31): the per-point `query_ball_point` + Python filter
+        # took > 45 min on the it-4 pool (millions of points); this is the same set — every
+        # (pool point, live object point) pair at distance within TOL of 1 — by cell blocks,
+        # identical output (checked against the loop on the seed pool: `--pool-selftest`).
+        self.nbrs = _cross_unit_nbrs(pts, obj.pts, obj.deleted, TOL) if pts else []
         # a deleted vertex is edgeless: never a neighbour (above) and never a glue PARENT of a pool
         # point (M51 amendment 2026-08-28) — asserted here so every pool, built or loaded, carries it
         for rec in prov:
@@ -2047,6 +2096,28 @@ if __name__ == "__main__":
             enumerate_cubes(Obj(), floor_batch(), BUILD / "m50-S29.jsonl")
     elif "--filter-check" in args:
         filter_check()
+    elif "--pool-selftest" in args:
+        # the vectorized cross annulus must equal the per-point loop, on the seed's depth-1 pool
+        obj = Obj(); live = [v for v in range(obj.n) if v not in obj.deleted]
+        cands = _partners_about(np.array([obj.pts[v] for v in live]), [obj.pts[v] for v in live], live,
+                                {(round(p[0], 6), round(p[1], 6)) for p in obj.pts})
+        prov, pts = _dedupe(cands)
+        t0 = time.time(); fast = _cross_unit_nbrs(pts, obj.pts, obj.deleted, TOL); t1 = time.time()
+        tree_obj = cKDTree(np.array(obj.pts))
+        slow = [sorted(j for j in tree_obj.query_ball_point(p, 1 + TOL)
+                       if abs(_d2(p, obj.pts[j]) - 1) < TOL and j not in obj.deleted) for p in pts]
+        t2 = time.time()
+        assert fast == slow, "vectorized cross annulus DIFFERS from the loop"
+        # planted red: perturb one point off the annulus and the lists must differ
+        pts2 = list(pts); pts2[0] = (pts2[0][0] + 1e-3, pts2[0][1])
+        assert _cross_unit_nbrs(pts2, obj.pts, obj.deleted, TOL)[0] != slow[0] or not slow[0], "planted red did not fire"
+        # the pair SET is independent of the cell size
+        e25 = set(map(tuple, unit_pairs_np(pts, h=0.25))); eauto = set(map(tuple, unit_pairs_np(pts)))
+        e05 = set(map(tuple, unit_pairs_np(pts, h=0.05)))
+        assert e25 == eauto == e05 and e25, ("unit_pairs_np differs across cell sizes", len(e25), len(eauto), len(e05))
+        print(f"[pool-selftest] unit_pairs_np: {len(e25)} pairs identical at h = 0.25 / auto / 0.05")
+        print(f"[pool-selftest] {len(pts)} seed pool points: vectorized == loop "
+              f"({sum(map(len, fast))} neighbour entries); {t1-t0:.1f} s vs {t2-t1:.1f} s; planted red fired")
     elif "--pool-only" in args:
         # build + cache (export) the pool for --object WITHOUT profiling — the Rust profile
         # (`descent replay`) consumes the export; the Python profile is no longer the path (it-4).
