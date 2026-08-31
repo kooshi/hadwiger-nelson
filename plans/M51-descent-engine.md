@@ -803,6 +803,7 @@ halo's side (to read against the 277/32 width stalls: possibly the same object t
 1-minimal ≠ minimum, and the shrink's DELETION ORDER is the only live lever — a `--point-order` knob ships, the
 iteration-3 order experiment (~14 h) is filed for a quiet desktop slot. Rulings: all approved; v0.11 after v0.10;
 implementation small (design crate), scheduled for a quiet slot.
+*Planner closed at `c0a5a50` (rulings §17; D56–D60 filed; the A2 "before" binary is the post-v0.8 merge base).*
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
