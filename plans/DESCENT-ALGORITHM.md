@@ -148,8 +148,11 @@ are re-asked on the full pool. Two measurement cautions the same experiments pro
 class's complete-solver time is not reproducible on the same export** unless each ask starts a
 fresh solver (the engine keeps a worker's solver across asks for the learned-clause reuse it
 measured; the same seven classes read 0.02–1.9× of their earlier times under a different history —
-paired comparisons need `--solver-reset`); and the cheap tiers are contention-sensitive too (the
-same 200 refutations cost 302 s at twelve busy workers and 186 s beside seven).
+paired comparisons need `--solver-reset`) — and that reuse is worth a great deal: the same 207
+classes cost 3,073 s from cold against 1,361 s with each worker's solver kept, single hard asks up
+to 250× cheaper warm, so a worker's solver is kept for the run and never rebuilt per ask; and the
+cheap tiers are contention-sensitive too (the same 200 refutations cost 302 s at twelve busy
+workers and 186 s beside seven).
 
 **4. Hitting set.** Every colouring not provably killed (survivors AND unknowns — the
 conservative fold) must stay dead the old way: each is monochromatic on some batch cheats,
