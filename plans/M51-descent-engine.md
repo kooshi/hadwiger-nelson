@@ -827,6 +827,16 @@ loss; class count is a proxy for dial progress).
 requirement in the WO-12 stub (per-node pools, first-touch after pinning, per-node export replicas, `numastat` as
 a column, per-node pre-flight; one reactor per node as the candidate shape) and in DESCENT-ALGORITHM § The loop.*
 
+*2026-08-31 04:50Z — WO-11 IMPLEMENTED to its A2 boundary* (`wo11-plan` `7e9008a`, worktree; merge of main
+`fc6fc73` carrying WO-7a; controls 233 → 244, twelve plants red; A1 EQUAL on five tree shapes (9–405 leaves), the
+first informed split taking the globally best column 35/35 times; the seed's `--split-at never` arm beats
+everything with zero empty leaves; P11 met, P3 met, P4 missed by two with a named cause, P8 missed; D44 CLOSED,
+D45 corrected 30× (1.36 s median first solve), D57–D60 filed). Rulings: owner-side REFUSALS for the two
+scheduler invariants (a refused enumeration costs a rerun; a wrong list a day), the `DESCENT_BLIND_SPLIT=off`
+test-only knob, and `--max-classes` as a documented per-visit budget — all approved. **A2 session running now in
+the worktree** (box quiet: one serial pool build + its timing probe) — the four paired arms; the unpaired 4.9×
+against a floor of six is flagged as a live question, miss-with-anatomy preferred to a turned knob. v0.10 held.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
