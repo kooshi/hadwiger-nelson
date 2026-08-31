@@ -947,6 +947,20 @@ forced endpoint.** No single global mirror maps the seed to itself (0 of 214); t
 at several centres. Reading, falsifiable: the descent's endgame is the interface's last two edges, and the width
 of their kills is the width of the twist interface itself.
 
+*2026-08-31 12:05Z — THE HALO'S RING SYSTEM (Kooshi's second visualizer observation: "two incredibly distinct
+rings … order 0.2 … the outer rings just touch each other, like electron shells"; census + PSLQ).* The halo-to-seed
+distance census below 0.5 is pure spikes, and every major spike is **ℚ(√33), in √3-ladders**: r² = (6−√33)/3
+(r = 0.2918, n = 1,782) with its ÷3 partner (r = 0.1685, n = 1,374); (9−√33)/18 (r = 0.4253, n = 1,487);
+**(7−√33)/6 (r = 0.4574, n = 1,401) — literally the M33 3-cover-core shell radius** — with its ÷3 partner
+(r = 0.2641). The rings sit on 213 of 214 seed vertices and halo points ring EACH OTHER (5,059 pairs at 0.2918).
+The touching he saw is algebraic too: the nearest halo–halo spike is 0.0492 (n = 1,072), d² = (23 − 4√33)/9, with
+its √3-partner 0.0851 = √3·0.0492; then (29 − 5√33)/18 and (75 − 13√33)/18; only a 30-pair family at 0.0362 lies
+beyond the √3/√11/√33 field (deeper provenance). **Reading: G4's seam shell vocabulary is not a property of the
+witnesses but of unit-glue closure over seam-field material — the descent's halo reproduces the same ℚ(√33) shell
+system around every vertex, √3-laddered, shells touching at fixed algebraic gaps.** The two heavy interface edges,
+the seam radius at the interface midpoints, and now the M33 shell radius in the halo: the E–I object and the
+de Grey fabric are speaking one shell language.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
