@@ -316,3 +316,48 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   still reads SAT at k = 4. If any transform reads UNSAT the reading is a new 5-chromatic
   unit-distance witness and the jackpot protocol applies. Regime (b) is the follow-up: the
   copies exported as pools for `descent replay` on the it-4 sub-batch list.
+
+## Q8 — RESULT (2026-09-01, the same night; verified at the tools level, kernel pending)
+
+* **A new 5-chromatic unit-distance graph, by Kooshi's construction.** U = the unit part of the
+  iteration-4 object (1,834 live points, 12,735 unit edges, 4-colourable); R = the rotation by
+  2·arcsin(1/4) = 28.955° (cos 7/8, sin √15/8 — the ρ₁₅ detune, de Grey's own angle) about
+  vertex 206. **U ∪ R(U): 3,695 points, 25,486 unit edges, refuses four colours** — three encodings
+  (one-hot with and without breaking, 2-bit), all 34 cross chords unit to 250 digits (the rotation
+  is exact; the copy of 206 fuses to 206). Same about the origin (58 chords, both signs, two
+  encodings). Only 4 chords are individually load-bearing at 206, joining two pairs of depth-1
+  glue points {225, 423}, {243, 424} at distance 1/√3 (the two-circle inner radius), 225–243 and
+  423–424 at √3. **[measured; `tools/copy_probe.py`, `copy_verify.py`, `copy_exact.py`]**
+* **It is a property of the material, not of a centre.** The same angle about the four
+  load-bearing halo points (his autocomplete's suggestion) locks with MORE chords (48–52); about
+  every live seed vertex tried, 225 of 241 asks lock (chords 13–61; non-locking: seed 79, 127,
+  129, 130). **[measured; `tools/copy_centres.py`]**
+* **Controls (`tools/copy_controls.py`).** The angle perturbed by ±0.3°, ±1°, +5°: chords fall to
+  the 18 angle-independent ones and the union is SAT. The Moser angle (√3) with hundreds to
+  thousands of chords: SAT on every object. The seed's unit part alone, iteration 1 (690) and
+  iteration 2 (1,008): SAT at the ρ₁₅ angle. **Iteration 3 (1,862): UNSAT** — the lock arrived
+  with the iteration-3 halo, which is glue points of glue points: seam-field material at depth 2
+  from the seed. That is G16's depth switch (the distance-2 pigeonhole fires on seam fabric at
+  depth ≥ 2, clean at depth ≤ 1) and 2·arcsin(1/4) is de Grey's rotation: **the descent has
+  grown de Grey-grade fabric without being asked to, and one de Grey spindle about almost any of
+  its vertices makes a 5-chromatic unit graph.** [reading: the mechanism is G15's two acts —
+  a disjunctive distance-2 pigeonhole on the depth-2 fabric × the ρ₁₅ kill; falsifier: the vertex
+  core (`tools/copy_core.py`, running) containing no distance-2 pair with its image at unit
+  distance, or a core that 4-colours once its radius-2 material about the centre is removed while
+  the rest stays.] What the k = 4 rigidity of U alone says: 137 forced-equal pairs at 8/3 and
+  8/√3 (radicands 247/9 and 253/3, outside every owned field), none at distance 2 — so the lock is
+  not a pair spindle; it is disjunctive, as G16 is.
+* **What it does to the dial (Kooshi's question).** Floor census on X ∪ R₂₀₆(U): of the 39 floor
+  cheats, 0 redundant alone, 36 essential, 3 unknown ((118,212), (126,203), (132,134)); the jackpot
+  ask (zero cheats) SAT; the composed four-copy union (9,194 points, 189 chords) k = 4 UNSAT in
+  15 s, its k = 5 asks pending. The joint counts — the delta-debugging cull over all 298 cheats
+  with and without the copy, the cheat-endpoint census with and without — are running; results
+  land in this entry. **What it changes strategically:** the χ(unit-part) 4 → 5 crossing (T7)
+  is manufactured rather than awaited, so K1's obstruction (a 4-colourable unit part carries no
+  pair compulsion at five) is gone in the copied object: pair compulsions at FIVE colours in
+  the unit material become possible for the first time — the 6-hunt's Act One has a stage
+  (G19). Adopting the copy as object material needs a provenance dialect for rotated points
+  (Python `Obj` + the Rust readers, D38) — a work order.
+* **Certification path (HALT-AND-CERTIFY):** vertex core (running; 3,695 → ~1,300 in 25 min) →
+  field inventory of the core's glue-point radicands → exact geometry in the tower → the M42
+  LRAT template at k = 4.
