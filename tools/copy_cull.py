@@ -44,7 +44,10 @@ def main():
         cls = coloring.base_clauses(n2, edges, K) + rigidity.amo_clauses(n2, K)
         cls += T._brk_full(n2, K, T._degree_order(n2, edges)) + ne
         asks += 1
-        return forcer._solve(cls, n2 * K, cap)[0]
+        t1 = time.time(); st = forcer._solve(cls, n2 * K, cap)[0]
+        with ckp.open("a") as f:
+            f.write(json.dumps({"kind": "ask", "kept": len(kept_set), "st": st, "seconds": round(time.time() - t1, 1)}) + "\n")
+        return st
 
     def save(note):
         with ckp.open("a") as f:

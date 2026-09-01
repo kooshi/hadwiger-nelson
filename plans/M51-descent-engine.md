@@ -1358,3 +1358,32 @@ HALT-AND-CERTIFY clause):** vertex core → field inventory of the load-bearing 
 points adjoin one root each; P5's catalogue) → exact geometry in the iterated tower → the M42 LRAT template at
 k = 4. Adopting X ∪ R(U) as the descent object needs a provenance dialect for rotated copies (`Obj` + the Rust
 reader, D38) — a WO. Ledger: `build/m51-jobs.txt` 03:1xZ–03:5xZ; artifacts `build/m51-copy*`.*
+
+*2026-09-01 04:00Z–05:20Z — Q8, the measurements that followed (all recorded in `build/m51-jobs.txt` as they
+landed).* **Centres:** the same angle about the four load-bearing halo points (Kooshi's autocomplete's suggestion)
+locks with MORE chords (48–52); about every live seed vertex, **360 of 380 asks lock** (`tools/copy_centres.py`,
+0 unknown, 1,349 s); the ten non-locking centres (both signs) are seed 79, 127, 129, 130, 174, 190, 199, 203,
+**205** (the forced pair's other endpoint, degree 8), 208 — mostly low-degree or peripheral. The halo-centre
+sweep (1,620 points, 3,240 asks) runs behind. **Controls (`tools/copy_controls.py`):** the angle perturbed by
+±0.3°, ±1°, +5° → the 18 angle-independent chords only (206's unit neighbours) and SAT; the Moser angle with
+hundreds–thousands of chords SAT on every object; the seed's unit part alone, it-1 (690), it-2 (1,008): SAT at
+the ρ₁₅ angle; **it-3 before deletion (1,862): UNSAT** — the lock arrived with iteration 3's halo (glue points
+of glue points = seam-field material at depth 2 from the seed): G16's depth switch, under de Grey's own rotation
+2·arcsin(1/4). **The origin copy verified to the same standard** (58 chords unit to 250 digits, three
+encodings) with NO single load-bearing chord (0 of 58 — multiple disjoint routes). **Kooshi's cheat question:**
+floor census on X ∪ R₂₀₆(U): 0 of 39 floor cheats redundant alone (36 essential, 3 unknown at 600 s:
+(118,212), (126,203), (132,134)); cheat-endpoint census: plain object 184/184 seed vertices needed (0 deletable —
+the 28 deletable ones are already gone), copied object 30 needed + 2 unknown so far, 0 deletable; the composed
+four-copy union (both signs about 206 and v0: 9,194 points, 63,770 unit edges, 189 chords): k = 4 UNSAT 15 s,
+k = 5 all-cheats control UNSAT 539 s, **zero-cheat (jackpot) ask UNKNOWN at 1,800 s** where the single copy's
+took 116 s to find a separating colouring — re-asked with a 4-h cap; a cap is not a verdict. The delta-debugging
+cull over all 298 cheats with NO halo: plain object 298 → 230 at 47 asks (82 min, running); with the copy, the
+large-chunk asks hit the 300-s cap (relaunched at 900 s with per-ask logging, resumed from state). The vertex
+core of the 206 union: 3,695 → 1,023 at 896 asks (80 min, running; certificate-only, does not touch the
+object). **Order of work agreed with Kooshi (04:30Z):** finish it-4 as designed (the lock is monotone under
+added material, so nothing is thrown away), THEN the composed object (it-4's commit + every locking copy) gets
+the full count — cull, endpoint census, floor — against the plain it-4 object as control; it-5 starts from the
+stronger object; adopting copies as object material is a provenance-dialect work order (Python `Obj` + the Rust
+readers, D38). His words: "I doubt we'll get to zero, or even 1 cheat through this alone, but if we toss all of
+these successful rotations together along with it-4's outputs, I'm very curious how many cheat vertices we can
+shrink away or edges we can eliminate."*
