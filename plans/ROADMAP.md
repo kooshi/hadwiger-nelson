@@ -126,8 +126,12 @@ row in `CLAUDE.md` § Paths forward at the next close. Nothing is worked from me
 
 ### B.5 Kooshi's ideas queue
 
-Q1–Q5 in `STANDING-QUESTIONS.md` §Q; Q6–Q7 added 2026-09-01 (his visualizer observations, measured).
-**Two more are his to state next (2026-09-01) — they get Q8 and Q9 the day they are discussed.**
+Q1–Q5 in `STANDING-QUESTIONS.md` §Q; Q6–Q7 added 2026-09-01 (his visualizer observations, measured);
+**Q8 (duplicate + rotate by the derived spindle angle) and Q9 (duplicate + mirror across the forced
+pair's line) added the same night** — the χ = 5 construction trick applied to the descended object,
+in two regimes: (a) a 5-chromatic UNIT graph by the spindle theorem if the unit part forces a pair
+equal at four colours; (b) the copy as a 1,862-point halo against the sub-batch's classes. Probe
+`tools/copy_probe.py`, predictions registered in the ledger.
 
 ## How the tracks interleave
 
@@ -150,4 +154,5 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 3. It-5 floor + sub-batch curve; the class-count law re-measured (T10's first data point).
 4. Track B in the it-5 gaps: K1 and K3 in Lean (an afternoon); Q7's ring classification stated.
 5. WO-3 planning in a worktree while it-5's profile runs (the courier pieces are the server's gate).
-6. The two ideas Kooshi wants to discuss → Q8/Q9 → slots here.
+6. Q8/Q9: the copy probe (k = 4 asks on U ∪ T(U), the k = 4 forced-equal sweep of U) in the (c)-pass gap;
+   regime (b) — the copies as pools — after the it-4 commit, on the it-5 sub-batch.

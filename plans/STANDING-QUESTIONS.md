@@ -253,3 +253,65 @@ sub-batch, adopted). Pool `m51-pool-c62ecd80a01087ca-depth1.{json,npz}` (1,469,6
 c446d855e42cb512) with `-pdeg12/-groups/-rcm/-morton/-strong3/-mixed16` re-exports. Profiles
 `m51-profile-it4-{rust,pdeg12,pdeg12b,full2}/`. Viewer: `tools/descent-viz.html`, artifact
 https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `build/m51-jobs.txt`.
+
+## §Q (continued, 2026-09-01) — Kooshi's duplication ideas, stated and sharpened the same night
+
+* **Q8 — duplicate the descended object and DETUNE the copy by rotation until it locks
+  into five** (Kooshi, 2026-09-01: "directly utilize the tricks we learned from the χ = 5 graphs
+  … copy, then rotate within the angles we found effective before until it locks into 5, or as
+  rigid as we can make it"). Heule's witnesses are a crystal rotated about its middle pivot; de
+  Grey's is closer to a mirrored copy; our descended object shows the ℚ(√33) shell vocabulary
+  (Q7) but not yet the duplication-and-detuning that made those objects five. **Sharpened by
+  arithmetic the same night.** The lock angle is not searched; it is DERIVED: a copy rotated
+  about one endpoint of a pair at distance d moves the other endpoint by exactly 1 when
+  sin(θ/2) = 1/(2d) — the spindle theorem (`OneDefect.not_forces_of_forced_equal` genre,
+  kernel: a forced-EQUAL pair at any d ≥ ½ at k colours refutes k-colourability). The table:
+
+  | pair distance d | 4d² − 1 | θ | field |
+  |---|---|---|---|
+  | √3 | 11 | 33.5573° = the Moser twist (arccos 5/6) | ℚ(√11) — seam |
+  | 2 | 15 | 28.9550° = 30° − 1.045° (ρ₁₅) | √15 — one field up |
+  | √7 | 27 = 9·3 | 21.7868° | ℚ(√3) — seam |
+  | 4 | 63 | 14.3615° = 15° − 0.638° (ρ₆₃) | √7 |
+  | **5 (the forced pair 205–206, confirmed 5.000)** | **99 = 9·11** | **11.4783°** | **ℚ(√11) — inside the seed's own field** |
+  | 3 · 2√3 · √13 | 35 · 47 · 51 | — | outside every owned field |
+
+  So G7's "effective angles" ARE the spindle angles of the crystal's own pair distances, and the
+  Exoo–Ismailescu spindle at d = 5 lives in ℚ(√11) — which is why their construction never
+  left the seam tower. Two regimes, kept apart because they have different theorems behind them:
+  **(a) at FOUR colours on the UNIT part U** — if U forces some pair EQUAL at k = 4 at a
+  spindle-able distance, then U ∪ R_θ(U) is a **5-chromatic unit-distance graph by theorem**,
+  no search: the χ(unit) 4 → 5 crossing manufactured rather than awaited (K1 says the crossing
+  must happen before the descent ends; this makes it happen now). Prerequisite measurement,
+  registered: the complete k = 4 forced-equal sweep of U (1,862 points, 12,735 unit edges;
+  `tools/rigidity.py`'s lattice). **(b) at FIVE colours with the cheats** — a rotated or
+  mirrored copy of U (cheats omitted, as he suggested) is a candidate HALO: a 1,862-point pool
+  whose kill mass over the current sub-batch's classes is exactly what `descent replay` measures.
+  A copy that kills every class is a one-shot batch commit with no shrink; the copy's field is
+  the rotation's (d = 5: no new radicand). Priors from our own record, stated honestly: copies
+  of 4-chromatic SEAM fabric at every detune couple thinly (G12, one conic of chords) and forced
+  nothing at M31/M32 — but those objects carried no forced pair and the copy was asked to force
+  alone; here the copy is asked only to kill separating colourings of a rigid carrier (T4's
+  deep-frozen regime), a different question. **[registered; probes below]**
+* **Q9 — duplicate and MIRROR across the line through the forced pair** (Kooshi, same message:
+  "copy, then mirror our whole graph across the line formed by the forced pair 205 and 206").
+  The reflection fixes both endpoints, so the copy carries the SAME forced pair — no spindle,
+  no new field (the axis direction is a field element) — and doubles the material about the
+  pair; the seed has no global mirror symmetry (Q6: 0/214), so the mirror copy is genuinely new
+  and its cross-chords to the original are exactly the axis-symmetric pairs. Same two regimes
+  as Q8: (a) χ(U ∪ mirror U) at k = 4 — one SAT ask; (b) mirror(U) as a halo against the
+  sub-batch's classes. De Grey's own object is the calibration (the 791-forcer is V ∩ −V —
+  centrosymmetric, G27; the forced central symmetry at four colours, G9).
+* **The probe for both (`tools/copy_probe.py`, registered before it runs):** for each transform
+  T ∈ {mirror across 205–206; rotation about 205, about 206, and about the seed origin v0 by
+  the spindle angles of d ∈ {5, 2, √3, √7, 4}}: build T(U), fuse coincident points, count exact
+  cross unit chords, and ask k = 4 on U ∪ T(U) — UNSAT = a 5-chromatic unit graph, HALT AND
+  CERTIFY; plus the k = 4 forced-equal sweep of U alone. Predictions, registered: P-Q8a — U
+  alone has NO forced-equal pair at k = 4 (K1's cousin: the seed's own 4-colour space is loose;
+  M49 measured > 20,000 colourings on a 122-point 4-colour object), so regime (a) reads SAT
+  for every transform (confidence medium); P-Q8b — the d = 5 rotation about 205 or 206
+  produces the most cross chords of the rotations (its angle is the seed's own); P-Q9 — the
+  mirror produces more cross chords than any rotation (every axis-symmetric pair locks) and
+  still reads SAT at k = 4. If any transform reads UNSAT the reading is a new 5-chromatic
+  unit-distance witness and the jackpot protocol applies. Regime (b) is the follow-up: the
+  copies exported as pools for `descent replay` on the it-4 sub-batch list.
