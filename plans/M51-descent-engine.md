@@ -1322,3 +1322,39 @@ first run at 9× its proven footprint, not 2.25×. Consequences for the campaign
 Residue: BLOCKED on hardware — options ranked for Kooshi: a hardware check then fix; the laptop at 4–5
 workers (~13–16 h, decorrelated machine); the courier. WO-5 real-stage acceptance shares the
 constraint. Investigation commits pushed (descent-engine `4428a07`); gate green 140/140.
+
+*2026-09-01 03:20Z–04:00Z — Q8: KOOSHI'S DUPLICATE-AND-DETUNE IDEA PRODUCED A NEW 5-CHROMATIC UNIT-DISTANCE
+GRAPH WITHIN MINUTES OF BEING STATED (verified at the tools level; kernel certificate pending).* His idea
+(`plans/STANDING-QUESTIONS.md` Q8/Q9): apply the χ = 5 constructions' trick — duplicate the object and detune
+the copy (Heule: rotation about the middle pivot; de Grey: nearer a mirror) — to the descended object, to
+manufacture the χ(unit-part) 4 → 5 crossing rather than wait for it. Sharpened before running: the lock angle
+is DERIVED, sin(θ/2) = 1/(2d) for a pair distance d (the spindle theorem), so the candidate angles are the
+spindle angles of the crystal's own distances — and the E–I forced pair's own d = 5 gives 4d² − 1 = 99 = 9·11,
+in ℚ(√11): their spindle never left the seam tower. **The probe** (`tools/copy_probe.py`, registered
+predictions P-Q8a/b, P-Q9): U = the unit part of the it-4 object (1,834 live points, 12,735 unit edges,
+4-colourable in 0.1 s); for T ∈ {the mirror across 205–206; rotations about 205, 206, v0 by the spindle angles
+of d ∈ {5, 2, √3, √7, 4}, both signs}: U ∪ T(U) asked at k = 4. **Result: the rotation by the d = 2 angle
+28.955° (cos 7/8, sin √15/8 — the ρ₁₅ detune, one field up) about 206 (both signs, 34 cross chords) and about
+v0 (both signs, 58) is UNSAT at four colours; every other transform — the mirror (1,730 chords), d = 5 (~70),
+√3 (up to 3,080), √7, 4, and d = 2 about 205 (15) — is SAT.** Verified: all 34 cross chords of the about-206
+union unit to 250 digits (`tools/copy_exact.py`, worst 4.4e-251; the copy of 206 fuses to 206 exactly); UNSAT
+in three encodings (one-hot + degree breaking 6.8 s; one-hot without breaking; 2-bit; `tools/copy_verify.py`,
+260 s). So **U ∪ R(U), 3,695 points, 25,486 unit edges, is a 5-chromatic unit-distance graph** — glue-lattice-
+grown from the Exoo–Ismailescu seed plus ONE ρ₁₅ spindle copy, no published witness's genre; T7's halt-and-
+certify event, reached by construction. **Mechanism, first reading:** only 4 of the 34 chords are individually
+load-bearing — (225 → copy of 423), (243 → 424), (423 → 225), (424 → 243): two pairs of depth-1 glue points
+{225, 423} and {243, 424} at distance exactly 1/√3 (the two-circle INNER radius) from each other, at radii
+1.3696 / 1.9470 from 206, each pair's copy landing at unit distance from its partner; 225–243 and 423–424 at
+√3. NOT a single-pair spindle: the complete k = 4 forced-equal sweep of U alone (`rigidity.Rigidity`, 142 calls,
+1,573 s) finds **137 forced-equal pairs at four colours — 131 at d = 8/3 (4d² − 1 = 247/9) and 6 at 8/√3
+(253/3), all halo-touching, both radicands outside every owned field, none at distance 2, none touching 206 or
+v0** — so P-Q8a is refuted in substance (U is 4-rigid, at distances nobody can spindle) and the lock is a
+compound compulsion; the vertex core (`tools/copy_core.py`, running) names it. Kooshi's follow-up question —
+which cheats does the union make redundant? — is running as (i) the floor census on X ∪ R(U) over the 39 floor
+cheats (`tools/copy_floor.py`: all-cheats control UNSAT, the JACKPOT ask with zero cheats SAT — no χ ≥ 6; first
+16 floor cheats all still essential) and (ii) the delta-debugging cull over all 298 cheats with no halo, on X and
+on X ∪ R(U) (`tools/copy_cull.py`) — the size difference is the free dial reading. **Certification path (the
+HALT-AND-CERTIFY clause):** vertex core → field inventory of the load-bearing halo radicands (depth-1 glue
+points adjoin one root each; P5's catalogue) → exact geometry in the iterated tower → the M42 LRAT template at
+k = 4. Adopting X ∪ R(U) as the descent object needs a provenance dialect for rotated copies (`Obj` + the Rust
+reader, D38) — a WO. Ledger: `build/m51-jobs.txt` 03:1xZ–03:5xZ; artifacts `build/m51-copy*`.*
