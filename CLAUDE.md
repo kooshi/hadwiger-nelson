@@ -839,6 +839,10 @@ their measurements — P7 missed by exactly three cheats (403 vs ≤ 400).
 
 ### Paths forward, ranked
 
+*The live two-track board — the iterations and the tangents, how they interleave, and the next seven
+days — is `plans/ROADMAP.md` (created 2026-09-01). This section stays the ranked milestone list,
+rewritten at every close; the board is updated the day anything lands.*
+
 *Rewritten 2026-08-09 at the field-jump decision. The construction ladder
 (M24 pair → M25 four-ladder → M26 hexagram, all χ = 4 exactly) closed the
 seam-field arc, and the closing observation reframed the hunt: the Moser

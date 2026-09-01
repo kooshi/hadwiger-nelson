@@ -185,3 +185,71 @@ as object censuses (the "16 triangles" that were 412 — G21 applies to positive
 verdict messages naming causes they did not check (incident 3 — one bug became two); the
 seam-closure bite as the closure-transfer opener (Q3's demotion); the 10⁴–10⁵ replacement-size
 estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱᵛ-adv.
+
+## §Q (continued, 2026-09-01) and §T (continued) — the M51 iteration-4 week
+
+* **Q6 — the seed's two crystals and the Moser interface** (Kooshi, from the descent visualizer:
+  "most of the cheats are subgraphs of dodecahedral lattices… multiple offset crystals… not
+  rotated relative to each other"; measured exact 2026-08-31, `plans/M51-descent-engine.md`
+  §S-CONT 11:20Z). The Exoo–Ismailescu seed's unit AND cheat edges fall in nine direction
+  classes: two triangular-lattice families at 13.2213° and 46.7787° (mirror images about 30°;
+  the angle BETWEEN them is arccos(5/6) = 33.5573° = the Moser twist, `FieldWall.lean`'s ρ) with
+  ~19 translated cosets each, plus a sparse axis family {30°, 90°, 150°}. The 12 axis cheats are
+  the INTERFACE: three side-2 equilateral triangles (22-112-134, 56-78-168, 206-210-211), three
+  diameters through the origin (21-38, 77-94, 133-150 — the hex-shell diameter genre at the
+  seed's own centre), and 210-211. Ten of the twelve were already removed by M49/M50 — the
+  descent consumed the interface first — and the only two standing are the heavy pair
+  206-210 / 206-211 (206 an endpoint of the forced pair 205–206 at distance 5). No single global
+  mirror maps the seed to itself (0/214). **[measured]** *Reading, falsifiable: the 5-forcing
+  IS the interface, and the two crystals are 4-chromatic fabric in G1's sense. Falsifier: the
+  heavy pair falls to a halo that lives entirely inside one crystal; or the unit part stays
+  4-colourable after both are gone.*
+* **Q7 — the halo's ring system** (Kooshi: "two incredibly distinct rings… order of 0.2… the
+  outer rings just touch, like electron shells"; measured exact 2026-08-31, §S-CONT 12:05Z).
+  The halo-to-seed distance census below 0.5 is pure spikes, every major one in ℚ(√33) on
+  √3-ladders: r² = (6−√33)/3 (r = 0.2918, n = 1,782; its ÷3 partner r = 0.1685, n = 1,374),
+  (9−√33)/18 (r = 0.4253), (7−√33)/6 (r = 0.4574 — literally the M33 3-cover-core shell; ÷3
+  partner 0.2641). His two rings at ~0.2 are 0.1685 and 0.2149. Rings sit on 213 of 214 seed
+  vertices and halo points ring each other (5,059 pairs at 0.2918). The touching: nearest
+  halo–halo spike 0.0492 with d² = (23−4√33)/9, its √3-partner (23−4√33)/3; then (29−5√33)/18
+  and (75−13√33)/18 — the shells touch at fixed algebraic gaps and rarely closer (one 0.0362
+  family beyond the √3/√11 field). **[measured]** *So G4's seam-shell vocabulary generates the
+  E–I halo's micro-geometry: one shell language across the seed object and the seam fabric.
+  Kernel-shaped question: the ring radii as glue-point corollaries of `Glue.lean` over ℚ(√33)
+  rings — stateable; not yet stated.*
+* **T10 — the sub-batch and what it loses** [engineering fact + open question]. The class count
+  grows ~1.11× per added cheat (batch 60 → 46,350 classes; batch 85 → 2,588,314), so iteration
+  4 ran a 28-cheat sub-batch (37,316 classes) chosen by the put-back curve
+  (`tools/subbatch.py`; WO-8): a class list for B contains every sub-batch's list as the lines
+  proper on the put-back edges, so no solving is spent. What is lost: the halo is designed
+  against the sub-batch's separating colourings only, so cross-cheat interactions with the
+  put-back cheats are invisible this iteration — a kill that needed two of them removed together
+  waits. Open: is the sub-batch's hitting set a subset of the full batch's, and by how much per
+  iteration? First data point: the full 85-cheat stage as the server's first courier run
+  (ROADMAP A.3), compared against the sub-batch commit.
+* **T11 — width stalls and the pool as a choice** [measured]. The classes that refuse point-kills
+  are killed by thousands of weak points cooperating (capped minimizations 2,551–14,960 points
+  and descending); on iteration 4's hard tail a RESTRICTED pool (`nobj ≥ 3 ∨ pdeg ≥ 12`,
+  285,973 of 1,469,696 points) killed 42/42 hard classes at 3.13× the speed, while a mixed pool
+  left 16 undecided and the strong-3 pool killed nothing. A restricted-pool kill transfers
+  (monotonicity, K3); a restricted-pool survive says nothing about the named pool and is adopted
+  as unknown, never folded (`tools/adopt_rust_profile.py`). Open: is width a property of the
+  class or of the pool? Does the stall fraction grow across iterations (G33's falsifier)?
+* **T12 — engine facts that bound what the server buys** [measured]. Solver reuse across asks
+  2.3× on a 207-class sample, up to 250× per hard ask (per-class times are not reproducible
+  without `--solver-reset`); memory-locality grouping (`tools/pool_groups.py`, cache-sized cells
+  from sysfs, 25 s) changes verdicts not at all and time inconclusively — a different variable
+  order changes the CDCL trajectory and that variance dwarfs the locality effect at affordable
+  n; SMT: 16 copies at 0.78× solo each, aggregate 32/16 = 1.083, so physical cores are the unit
+  on memory-tight or wall-capped phases; head-of-line blocking (index-order issue, one 2 M-conflict
+  budget, a rate-based ETA) cost 9.8 h once and is now a rule (first pass wall-capped).
+
+## §D (continued, 2026-09-01)
+
+Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and
+`…-vdel28.json` (28 seed vertices deleted; 298 cheats — the it-4 object). It-4 lists:
+`m51-S-…-vdel28-full85-rust.jsonl` (2,588,314), `m50-S-…-vdel28-it2v2.jsonl` (37,316, the
+sub-batch, adopted). Pool `m51-pool-c62ecd80a01087ca-depth1.{json,npz}` (1,469,696 pts, fp
+c446d855e42cb512) with `-pdeg12/-groups/-rcm/-morton/-strong3/-mixed16` re-exports. Profiles
+`m51-profile-it4-{rust,pdeg12,pdeg12b,full2}/`. Viewer: `tools/descent-viz.html`, artifact
+https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `build/m51-jobs.txt`.
