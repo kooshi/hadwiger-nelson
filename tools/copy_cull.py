@@ -22,8 +22,7 @@ def main():
     if tname == "none":
         n2, e2, info = obj.n, ue, dict(cross=0)
     else:
-        tf = dict(CP.transforms(obj.pts, live))[tname]
-        n2, e2, info = CP.union_graph(obj.pts, live, ue, tf)
+        n2, e2, info = CP.resolve(tname, obj.pts, live)(ue)
     cheats = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
     floor = set(tuple(e) for e in json.load(open(BUILD / "m51-floor-it4-list.json")))
     ne = [[-coloring.var(obj.A, c, K), -coloring.var(obj.B, c, K)] for c in range(K)]

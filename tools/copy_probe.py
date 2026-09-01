@@ -50,6 +50,46 @@ def transforms(pts, live, a=205, b=206, origin=0):
     return out
 
 
+def multi_union(pts, live, unit_edges, tfs):
+    """Union of several transformed copies: each copy fused against the original and all earlier copies."""
+    P = np.array(pts); live_idx = np.array(sorted(live)); n = len(pts)
+    all_pts = [tuple(p) for p in P]; edges = set(tuple(sorted(e)) for e in unit_edges)
+    cross_total = 0; fused_total = 0
+    for tf in tfs:
+        Q = tf(P[live_idx])
+        tree = cKDTree(np.array(all_pts))
+        d, j = tree.query(Q, k=1)
+        idx_map = {}
+        for ci, li in enumerate(live_idx):
+            if d[ci] < TOL:
+                idx_map[li] = int(j[ci]); fused_total += 1
+            else:
+                idx_map[li] = len(all_pts); all_pts.append(tuple(Q[ci]))
+        for (x, y) in unit_edges:
+            if x in idx_map and y in idx_map:
+                e = tuple(sorted((idx_map[x], idx_map[y])))
+                if e[0] != e[1]: edges.add(e)
+        # cross chords between the new copy's NEW points and everything before
+        new_ids = [idx_map[li] for li in live_idx if idx_map[li] >= tree.n]
+        if new_ids:
+            NP = np.array([all_pts[i] for i in new_ids]); t2 = cKDTree(NP)
+            pairs = tree.query_ball_tree(t2, 1 + TOL)
+            for oi, lst in enumerate(pairs):
+                for ni in lst:
+                    if abs(np.linalg.norm(np.array(all_pts[oi]) - NP[ni]) - 1) < TOL:
+                        edges.add(tuple(sorted((oi, new_ids[ni])))); cross_total += 1
+    return len(all_pts), sorted(edges), dict(fused=fused_total, cross=cross_total, new_pts=len(all_pts) - n)
+
+
+def resolve(name, pts, live):
+    """A transform name -> (n, edges, info) builder; 'multi:a|b|c' unions the named copies."""
+    tfs = dict(transforms(pts, live))
+    if name.startswith("multi:"):
+        parts = name[6:].split("|")
+        return lambda unit_edges: multi_union(pts, live, unit_edges, [tfs[p] for p in parts])
+    return lambda unit_edges: union_graph(pts, live, unit_edges, tfs[name])
+
+
 def union_graph(pts, live, unit_edges, tf):
     P = np.array(pts)
     live_idx = np.array(sorted(live))

@@ -31,6 +31,8 @@ def main():
         idx = {v: i for i, v in enumerate(sorted(S))}
         es = [(idx[u], idx[v]) for u, v in E if u in idx and v in idx]
         m = len(idx)
+        if m == 0 or not es:
+            return "sat"   # the empty graph is colourable: never delete everything
         cls = coloring.base_clauses(m, es, K) + rigidity.amo_clauses(m, K) + T._brk_full(m, K, T._degree_order(m, es))
         asks += 1
         return forcer._solve(cls, m * K, cap)[0]   # sat = colourable = the deletion is NOT allowed
