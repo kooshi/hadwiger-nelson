@@ -24,7 +24,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--object', required=True); ap.add_argument('--out', required=True, help='the replay --out directory')
     ap.add_argument('--pool', default='depth1')
-    ap.add_argument('--merge-tail', default=None, help='a second replay --out dir covering the classes the first left unanswered, on a RESTRICTED pool (an acknowledged pool choice: its kills transfer by monotonicity; its survives/unknown are NOT adopted as verdicts about the named pool and are counted as unknown here)')
+    ap.add_argument('--merge-tail', action='append', default=[], help='replay --out dir(s) on a RESTRICTED pool covering classes the main run left unanswered (an acknowledged pool choice: kills transfer by monotonicity; survives/unknown there say nothing about the named pool and count as unknown)')
+    ap.add_argument('--merge-full', action='append', default=[], help='replay --out dir(s) on the NAMED pool re-asking classes (their verdicts are adopted as-is and OVERRIDE a restricted-pool unknown; a wall unknown stays unknown)')
+    ap.add_argument('--unanswered-as-unknown', action='store_true', help='acknowledge that classes no checkpoint answers are adopted as unknown (never folded); without this flag a missing row is refused')
     a = ap.parse_args()
     obj, removed = BK.load_object(a.object)
     seps = BK.BUILD / f'm50-S-{a.object}-it2v2.jsonl'
@@ -43,25 +45,45 @@ def main():
         assert v in ('killed', 'survives', 'unknown'), (i, v)
         assert i not in verdict, f'class {i} answered twice'
         verdict[i] = v
-    tail_note = None
-    if a.merge_tail:
-        tf = Path(a.merge_tail) / 'verdicts.jsonl'; tl = tf.read_text().splitlines()
+    tail_note = []
+    for td in a.merge_tail:
+        tf = Path(td) / 'verdicts.jsonl'; tl = tf.read_text().splitlines()
         th = tl[0].split(); tail_conflicts = next((x.split('=')[1] for x in th[3:] if x.startswith('conflicts=')), None)
         n_kill = n_other = 0
         for l in tl[1:]:
             if not l.strip(): continue
             i, v = l.split(); i = int(i)
-            assert i not in verdict, f'class {i} answered in BOTH checkpoints'
+            assert i not in verdict or verdict[i] == 'unknown', f'class {i} already decided by an earlier checkpoint'
             if v == 'killed':
                 verdict[i] = 'killed'; n_kill += 1        # a kill on a sub-pool is a kill on the pool
-            else:
+            elif i not in verdict:
                 verdict[i] = 'unknown'; n_other += 1      # a sub-pool survive/unknown says nothing about the pool
-        tail_note = {'out': str(a.merge_tail), 'pool_fingerprint': th[2], 'conflicts_budget': tail_conflicts,
-                     'kills_adopted': n_kill, 'demoted_to_unknown': n_other,
-                     'verdicts_sha256_16': hashlib.sha256(tf.read_bytes()).hexdigest()[:16]}
-        print(f'merged tail from {a.merge_tail}: {n_kill} kills adopted (monotone), {n_other} demoted to unknown')
+        tail_note.append({'out': str(td), 'pool_fingerprint': th[2], 'conflicts_budget': tail_conflicts,
+                          'kills_adopted': n_kill, 'demoted_to_unknown': n_other,
+                          'verdicts_sha256_16': hashlib.sha256(tf.read_bytes()).hexdigest()[:16]})
+        print(f'merged restricted-pool tail {td}: {n_kill} kills adopted (monotone), {n_other} demoted to unknown')
+    full_note = []
+    for fd in a.merge_full:
+        ff = Path(fd) / 'verdicts.jsonl'; fl = ff.read_text().splitlines(); fh = fl[0].split()
+        assert fh[2] == pool.fp, f'full re-ask {fd} is on pool {fh[2]}, not the named pool {pool.fp}'
+        n_over = n_new = 0
+        for l in fl[1:]:
+            if not l.strip(): continue
+            i, v = l.split(); i = int(i)
+            assert v in ('killed', 'survives', 'unknown'), (i, v)
+            prev = verdict.get(i)
+            assert prev in (None, 'unknown'), f'class {i} was {prev} on the named pool already; a re-ask must not disagree'
+            if v != 'unknown' or prev is None:
+                verdict[i] = v; n_over += (prev is not None); n_new += (prev is None)
+        full_note.append({'out': str(fd), 'pool_fingerprint': fh[2], 'overrides': n_over, 'new': n_new,
+                          'verdicts_sha256_16': hashlib.sha256(ff.read_bytes()).hexdigest()[:16]})
+        print(f'merged full-pool re-ask {fd}: {n_over} unknowns resolved/re-asked, {n_new} new rows')
     missing = [i for i in range(N) if i not in verdict]
-    assert not missing, f'{len(missing)} classes have no verdict (first: {missing[:5]}) — the checkpoint is not complete; re-run the replay (it resumes)'
+    if missing and a.unanswered_as_unknown:
+        for i in missing: verdict[i] = 'unknown'
+        print(f'{len(missing)} classes answered by no checkpoint adopted as UNKNOWN (acknowledged; never folded)')
+        missing = []
+    assert not missing, f'{len(missing)} classes have no verdict (first: {missing[:5]}) — the checkpoint is not complete; re-run the replay (it resumes) or pass --unanswered-as-unknown'
     outs = [verdict[i] for i in range(N)]
     label = f'{a.object}-it2v2-{pool.name}'
     (BK.BUILD / f'm50-survivors-{label}.json').write_text(json.dumps([i for i, k in enumerate(outs) if k != 'killed']))
@@ -70,7 +92,7 @@ def main():
     budget = next((x.split('=')[1] for x in h[3:] if x.startswith('conflicts=')), None)
     row = {'kind': 'profile', 'label': label, **pool.cite(), 'n_colourings': N,
            'survivor_file': f'm50-survivors-{label}.json', 'killed': nk, 'survive': ns, 'unknown': nu, 'seconds': None,
-           'source': {'engine': 'descent replay (Rust)', 'out': str(a.out), 'conflicts_budget': budget, 'tail': tail_note,
+           'source': {'engine': 'descent replay (Rust)', 'out': str(a.out), 'conflicts_budget': budget, 'tails': tail_note, 'full_reasks': full_note, 'unanswered_as_unknown': a.unanswered_as_unknown,
                       'verdicts_sha256_16': hashlib.sha256(vf.read_bytes()).hexdigest()[:16], 'stage_fingerprint': header['stage_fingerprint']},
            'claim_scope': ('per-colouring whole-set verdict on the named pool, from the Rust engine: killed = no extension of the '
                            'colouring to the whole pool exists (so none to any subset — monotonicity), survives = the whole pool '
