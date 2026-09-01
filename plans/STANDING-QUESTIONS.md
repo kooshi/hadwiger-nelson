@@ -218,14 +218,15 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   Kernel-shaped question: the ring radii as glue-point corollaries of `Glue.lean` over ℚ(√33)
   rings — stateable; not yet stated.*
 * **T10 — the sub-batch and what it loses** [engineering fact + open question]. The class count
-  grows ~1.11× per added cheat (batch 60 → 46,350 classes; batch 85 → 2,588,314), so iteration
+  grows ~1.11× per added cheat (a batch counts every cheat absent from the stage: it-3's 60 →
+  46,350 classes; it-4's full floor, 46 already removed + 39 floor = 85 → 2,588,314), so iteration
   4 ran a 28-cheat sub-batch (37,316 classes) chosen by the put-back curve
   (`tools/subbatch.py`; WO-8): a class list for B contains every sub-batch's list as the lines
   proper on the put-back edges, so no solving is spent. What is lost: the halo is designed
   against the sub-batch's separating colourings only, so cross-cheat interactions with the
   put-back cheats are invisible this iteration — a kill that needed two of them removed together
   waits. Open: is the sub-batch's hitting set a subset of the full batch's, and by how much per
-  iteration? First data point: the full 85-cheat stage as the server's first courier run
+  iteration? First data point: the full-floor stage (all 39 spent, 2.59 M classes) as the server's first courier run
   (ROADMAP A.3), compared against the sub-batch commit.
 * **T11 — width stalls and the pool as a choice** [measured]. The classes that refuse point-kills
   are killed by thousands of weak points cooperating (capped minimizations 2,551–14,960 points

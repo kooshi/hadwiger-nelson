@@ -43,7 +43,7 @@ hardware event ⟹ HALT; an unknown is never folded into a verdict.
 | 1–2 (M50) | 1,008 pts | 403 | two certified batches, 43 cheats |
 | 3 (M51) | 1,862 pts, 13,037 unit edges | 393 | 854-point halo; commit 2026-08-28 |
 | 3′ deletion | 186 live seed vertices | **298** | 28 seed vertices deleted, certified both encodings |
-| **4 (live)** | floor 85 cheats → sub-batch 28 (37,316 classes) | 298 → expected ~274 | profile tail in its last wall-capped pass; hitting set keeps ≤ 4; design → certify → commit next |
+| **4 (live)** | floor 39 cheats; spending all 39 = 2.59 M classes, so a sub-batch of 28 (37,316 classes) | 298 → expected ~274 | profile tail in its last wall-capped pass; hitting set keeps ≤ 4; design → certify → commit next |
 | 5 | the put-back and kept cheats rejoin the floor | — | same loop |
 
 ### A.2 The curation queue — improvements to the loop, each mapped to the phase it speeds
@@ -55,7 +55,7 @@ hardware event ⟹ HALT; an unknown is never folded into a verdict.
 | WO-3 courier + `qualify` + profile hygiene | 3, deploy | stub (`descent-engine/plans/WO-3-profile-driver-and-courier.md`) | static binary, one results bundle, machine qualification (INC-1's lesson), head-of-line rules — **prerequisite of any server run** | 3 |
 | WO-12 loop binary | all | stub; NUMA-aware, halt clauses, phase coverage table | the single binary that churns iterations on the 128-core server | 4 (pool port first) |
 | WO-9 point order | 5 | frozen, negative by theorem; a knob | 1–2 % of the shrink; a quiet-slot job | 5 |
-| WO-13 long-lived solver (pins as assumptions) | 1 | stub | D45 + D61: cold starts and the 2.5× pinned-cube penalty | when enumeration binds (the full 85-cheat stage) |
+| WO-13 long-lived solver (pins as assumptions) | 1 | stub | D45 + D61: cold starts and the 2.5× pinned-cube penalty | when enumeration binds (the full-floor stage, 2.59 M classes) |
 | WO-4 SIMD kernels | 3, 5, 6 | stub; opens with a tier census that decides its worth | solver-free tiers; the certify's lookup masks | after the census |
 | WO-5c ask order inside a trial | 5 | paused | early exit on critical points | if the shrink is ever the floor |
 | WO-8 sub-batch filter in Rust | 1′ | stub; Python does it in seconds | removes one Python step from the loop | inside WO-12 |
@@ -70,7 +70,7 @@ memory run on the server before its first multi-day job); (2) WO-12's pool port 
 whose Python cost scales worst); (3) the certify port, reviewed first — the loop's truth-maker;
 (4) NUMA placement (per-node pools, first-touch after pinning, per-node export replicas;
 `numastat` as the control); (5) the driver with its halt clauses and per-iteration report. The
-first server job before the loop binary exists: the full 85-cheat enumeration + profile (2.59 M
+first server job before the loop binary exists: the full 39-cheat-floor enumeration + profile (2.59 M
 classes) as a courier run — the sub-batch's "what do we lose" question answered by comparison
 (Track B, T10).
 
