@@ -961,6 +961,36 @@ system around every vertex, √3-laddered, shells touching at fixed algebraic ga
 the seam radius at the interface midpoints, and now the M33 shell radius in the halo: the E–I object and the
 de Grey fabric are speaking one shell language.
 
+**STATE 2026-09-01 02:30Z — PRE-COMPACTION CHECKPOINT (desktop). Read this block first; the day's findings are
+the dated amendments above it.** WHERE THE CHAIN IS: it-4 runs on the k = 11 SUB-BATCH (28 floor cheats spent;
+list `build/m50-S-…-vdel28-it2v2.jsonl` = 37,316 classes, adopted). Profile: full pool (`build/m51-profile-it4-rust/`,
+26,857 answered, all killed) + the tail on `pdeg12` (`build/m51-profile-it4-pdeg12/`: 10,047 killed, 58 unknown,
+354 never reached — STOPPED at 9.8 h; the 28 workers sat in 2 M-conflict asks). **Even with all 412 treated as
+unknown, the hitting set keeps only FOUR cheats [(4,159),(25,52),(29,159),(194,203)] → 24 of 28 commit.**
+THE STEPS, in order, every one resumable:
+(b) `descent replay --manifest build/m51-pool-c62ecd80a01087ca-depth1-pdeg12.json <E> --threads 28 --out
+    build/m51-profile-it4-pdeg12b --rows build/m51-tail2-rows-it4.txt --wall 300s` (the 354 unreached, wall-capped
+    so nothing sits in the queue; a wall unknown is reported under its own name) — RUNNING in a chain with (c);
+(c) all unknowns from both pdeg12 checkpoints → `build/m51-unknown-rows-it4.txt`; `descent replay --manifest
+    build/m51-pool-c62ecd80a01087ca-depth1.json <E> --threads 12 --out build/m51-profile-it4-full2 --rows that
+    --wall 900s` (the full pool, bounded); `<E>` = `--edges build/m51-edges-…-vdel28.json --object
+    build/m50-object-…-vdel28.json --classes build/m50-S-…-vdel28-it2v2.jsonl --no-color`;
+(d) ADOPT: `tools/adopt_rust_profile.py --object …-vdel28 --out build/m51-profile-it4-rust --merge-tail
+    build/m51-profile-it4-pdeg12 [--merge-tail …-pdeg12b] [--merge-full build/m51-profile-it4-full2]` — the tool
+    currently takes ONE --merge-tail and REFUSES missing rows: extend it to several tail dirs + a full-pool
+    re-ask dir (full-pool verdicts adopted as-is; restricted-pool kills only; anything else unknown; never fold);
+(e) `python3 tools/batchkill.py --hitting --deepest S29-…-vdel28-it2v2-depth1 --object …-vdel28` → keep/commit;
+    `python3 tools/export_sublist.py S29-…-vdel28 S29-…-vdel28-it2v2` → `build/m51-Scommit-…jsonl` (check the name
+    it writes); (f) DESIGN: `descent design --manifest <full pool> <E with --classes = the Scommit list> --out
+    build/m51-design-it4-rust --ladder-cap 50000 --threads 26` WITHOUT `--no-whole-pass` (desktop affords
+    ~8.6 GiB/worker); stalls expected (3,408/32 kind); shrink inside; resumable; (g) COMMIT: `batchkill.py --commit
+    --pool depth1 --object …-vdel28` (checkpointed lookup; refused ⟹ INVESTIGATE never retry) → new object →
+    viewer republish (`descentviz_refresh.py` → `descentviz_artifact.py` → Artifact url=…d35ad805…) → columns
+    (`--unitchi` 4→5 = HALT-AND-CERTIFY; `--recurse`; `field_census.py`; `--scan`) → the 11 put-back + kept cheats
+    return in it-5's floor; (h) WO-10's v0.9 session (the live A2 = this profile: the 16→12 refusal leg, the block
+    line; then v0.10; WO-9 impl in a quiet slot). Rules unchanged: 16 threads on memory-tight/wall-capped phases;
+    one heavy job; segfault ⟹ HALT; every long phase checkpoints.
+
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
 at 00:41 UTC 2026-08-28: halo 907 → **854** (97 critical witnessed, 9 kept-undecided at
