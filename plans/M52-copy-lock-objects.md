@@ -216,6 +216,9 @@ then vertex group-MUS with presence selectors over the copy side, cores confirme
 checkpoint per acceptance, unknown = kept. Output: the shrunk composed object with its recipe
 (provenance for glue points, centre + sign for copies) and its certified forcing (two encodings).
 
+**Phase 4½ — the server gate (attended, an hour).** The first batch's rates and the shrink ladder's
+first asks feed §12's extrapolation; the report goes to Kooshi the same day; the desktop continues.
+
 **Phase 6 — the close.** Object cards for every candidate (`plans/Q8-FIVE-CHROMATIC-OBJECTS.md`
 extended); `data/m52/` refreshed (recipes, kept sets, atlas, the shrunk object); predictions scored;
 `CLAUDE.md` § Frontier + ledger + § Grokkings (the direction ladder and the mechanism verdict, each
@@ -532,3 +535,66 @@ repository must answer "what is this object, how big, what does its geometry say
 what field" without opening a JSON; the cold read of the cull headline must answer "which object,
 how many cheats stood, how many stand, were any asks undecided" without the log. Both are the
 test at phase 0's close, run on the planted self-test objects before any real run.
+
+## 12. The server gate (Kooshi, 2026-09-02: "if it's truly a matter of days to hours, then it's worth running on the server")
+
+**The rule.** Phases 4 and 5 start on the desktop regardless. As soon as their rates are measured,
+the extrapolation below is computed and REPORTED; Kooshi decides whether the remainder moves to the
+server (two sockets, 64 cores / 128 threads each, two NUMA nodes, 1.5 TB, Arch).
+The desktop does not wait for the decision.
+
+**What is measured (desktop), per phase, in CPU seconds and wall seconds with the worker count named:**
+
+| phase | the rate | the work | where the number comes from |
+|---|---|---|---|
+| enumeration (phase 3/4) | classes per second per worker, and per-batch wall at 8 / 16 / 28 threads | classes per batch × batches | the Rust enumerator's own journal (`--threads` sweep on the first batch) |
+| hitting set + certify (phase 4) | certify ask CPU seconds (one-hot; 3-bit for the final) | one ask per batch + two at the end | `cull_enum`'s per-batch row |
+| the control cull (cull3, phase 4) | probe CPU seconds, decided vs unknown, at 4 / 8 / 16 workers | probes per pass | its checkpoint rows |
+| the shrink (phase 5) | ask CPU seconds per accepted / refused / unknown deletion; deletions per hour at 8 / 16 workers | remaining copy points ÷ mean core jump | the shrink's checkpoint rows |
+| memory | resident set per worker, per phase | workers × RSS ≤ node memory | `ps` sampled by the launcher |
+
+**The extrapolation model (stated before the numbers exist, so the numbers cannot shape it).**
+Solver work on this desktop is memory-bound: 16 copies run at 0.78× a solo copy each, and the
+SMT half adds only +8 % in aggregate at 32 threads (T12). So the unit is the PHYSICAL core, and the
+desktop's own derating curve — solo → 8 → 16 copies, re-measured on the actual phase — is the
+conservative transfer function. Per node: `wall_server = wall_desktop × (desktop physical cores /
+64) × (desktop derating at 16 / server derating at 64)`. Two estimates are reported, never one:
+**conservative** — the server derates at 64 copies exactly as the desktop does at 16 (a 4× per-node
+gain from cores alone, 8× over two nodes); **optimistic** — no derating at 64 (the server's memory system against the desktop's — the memory wall moves), read from
+the desktop curve's shape. Two NUMA nodes are two independent pools with replicated inputs
+(`numactl --cpunodebind=N --membind=N`, first-touch after pinning), so the two-node figure is twice
+the one-node figure minus nothing, and cross-node sharing is never assumed. SMT threads are not
+counted as workers for solver phases; they are counted for the enumerator only if its desktop
+16 → 28 sweep shows a gain.
+
+**The report to Kooshi (one table, sent the day the first batch's rates exist, updated when phase
+5's exist):** rows = the remaining work per phase; columns = desktop hours at the measured rate,
+server hours conservative, server hours optimistic, the ferry cost in minutes (bundle size ÷ link,
+plus the verification at home), and the saving. Beside it: the per-worker memory and the worker
+count that fits each node. Nothing in the report is a prediction of the server's behaviour beyond
+the two bracketing estimates, and the first server run is a **calibration run** (one batch, timed)
+before any multi-day job.
+
+**The ferry discipline (Kooshi: "both the tool and its data output must be robust and independent
+to be ferried back and forth").** A phase that may travel ships as a **bundle**, built by
+`tools/ferry.py` and checked on both ends:
+
+* *the tool*: the Rust binary as built (Arch runs it as-is; the mimalloc-v2 pin per INC-3), or the
+  `tools/` directory with a pinned `requirements.txt` (python-sat/CaDiCaL 1.9.5, numpy, scipy,
+  mpmath, sympy) and a `venv` recipe; a **self-test on arrival** (the planted controls of each
+  tool, seen red and green) before any real input is touched;
+* *the inputs*: the object JSON, the edges sidecar, the class lists, the checkpoint to resume from —
+  every file named in a **manifest with sha256**, and every tool refusing on a fingerprint mismatch
+  (the existing discipline: object ↔ sidecar ↔ list bound by fingerprints, stage keys hashed);
+* *the outputs*: append-only checkpoints (`.jsonl`, one row per accepted step, resumable after a
+  kill at any instant — the standing rule) plus a results bundle with the same manifest, so a
+  bundle that arrives torn is refused by its own hashes, never read;
+* *independence*: no phase reads anything from `build/` that the manifest does not name, and no
+  output is trusted until the desktop's own **certify** re-refutes it (the truth-maker never
+  travels: a kept set or a shrunk object coming home is re-certified here in two encodings before
+  it is called a candidate).
+
+`tools/ferry.py` is a phase-0 deliverable with its own planted red (a corrupted byte in a bundled
+file refuses on arrival). WO-3's replan on the engine side (courier + `qualify`) is the same
+discipline for the Rust binary and is not on M52's critical path; the Python bundle follows its
+manifest format so the two never diverge.

@@ -159,8 +159,11 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
    a pool; `descent replay` per copy; the ranking (P5) → the composition.
 4. M52 phase 4: the cull by enumeration on the plain object (control dial) and on the composition;
    cull3 on one batch as the method control; P6/P7 scored; the final kept set certified twice.
-5. M52 phase 5: the shrink — the cheap ladder (P8) first, then vertex group-MUS with cores; the
-   server if WO-3's replan lands (not on the critical path).
+5. M52 phase 5: the shrink — the cheap ladder (P8) first, then vertex group-MUS with cores.
+   **The server gate (M52 §12):** the first batch's and the shrink's measured rates are extrapolated
+   to two server nodes (conservative and optimistic brackets) and REPORTED; Kooshi decides;
+   any travelling phase ships as a `tools/ferry.py` bundle (manifest + self-test + resumable
+   checkpoints) and its results are re-certified at home.
 6. Engine, in the gaps: WO-3 replan (Arch server, INC-3's v2 pin), D38's provenance dialect for
    rotated copies STUBBED against the composition M52 chooses (it is it-5's first work order).
 7. M52 close: object cards, `data/m52/`, Frontier + Grokkings, predictions scored, the next-milestone
