@@ -1410,8 +1410,10 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print, geometry_only:
                 "seconds": round(time.time() - t0, 1)}
     # the ask
     tp = [e for e in obj.cheats if tuple(e) not in set(map(tuple, B))]
-    st = T.forces_outcome(obj.n, ue, tp, obj.A, obj.B, 3600)
-    re = (rigidity.reencode_confirm(obj.n, ue, K, tp + [(obj.A, obj.B)], cap=7200)["outcome"]
+    st = T.forces_outcome(obj.n, ue, tp, obj.A, obj.B,
+                          float(os.environ.get("CERTIFY_ONEHOT_CAP", 3600)))
+    re = (rigidity.reencode_confirm(obj.n, ue, K, tp + [(obj.A, obj.B)],
+                                    cap=float(os.environ.get("CERTIFY_REENCODE_CAP", 7200)))["outcome"]
           if st == "unsat" else "not-run")
     verdict = "committed" if st == "unsat" and re == "unsat" else \
               ("candidate" if st == "unsat" else "refused")
