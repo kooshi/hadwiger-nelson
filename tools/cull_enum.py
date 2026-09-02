@@ -84,9 +84,14 @@ def run(label, classes_path, cap, out=None):
     head, body = read_classes(classes_path)
     batch = [tuple(e) for e in head["batch"] if tuple(e) in set(standing)]     # the NEW cheats this list spends
     assert batch, "the list's batch holds no standing cheat of this object"
-    complete = head.get("claim") in ("exact", "complete") or head.get("complete") is True
+    # the completeness claim lives in the enumerator's summary beside the list, not in the list's header
+    summ_path = Path(classes_path).with_name("enumerate.json")
+    summ = json.loads(summ_path.read_text()) if summ_path.exists() else {}
+    claim = summ.get("claim", head.get("claim"))
+    complete = claim == "exact" and summ.get("complete", True) is True and not summ.get("open")
     if not complete:
-        raise SystemExit(f"[cull {label}] REFUSED: the class list is not EXACT (claim {head.get('claim')!r}) — a capped list would make the kept set too small; shrink the batch or raise the budget. Nothing dropped.")
+        raise SystemExit(f"[cull {label}] REFUSED: the class list is not EXACT (claim {claim!r}, complete {summ.get('complete')!r}, open {summ.get('open')!r}) — a capped list would make the kept set too small; shrink the batch or raise the budget. Nothing dropped.")
+    assert summ.get("stage_fingerprint", head.get("stage_fingerprint")) == head.get("stage_fingerprint"), "summary and list disagree on the stage"
     masks = []
     for s in body:
         v = frozenset(j for j, (a, b) in enumerate(batch) if s[a] == s[b])
