@@ -1,0 +1,23 @@
+{
+ "kind": "p4-class-avoid",
+ "object": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+ "results": {
+  "d2": {
+   "instances": 5470,
+   "encoding": "onehot",
+   "n_instances": 5470,
+   "outcome": "unsat",
+   "seconds": 0.13,
+   "cap": 1800,
+   "binary": "unsat"
+  },
+  "sqrt3": {
+   "instances": 0,
+   "encoding": "onehot",
+   "n_instances": 0,
+   "outcome": "sat",
+   "seconds": 0.16,
+   "cap": 1800
+  }
+ }
+}

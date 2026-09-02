@@ -1,13 +1,13 @@
 {
  "kind": "atlas",
  "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+rot2-206p+rot2-206m",
- "fingerprint": "0d60e2543359593d",
+ "fingerprint": "3148c281f24386ab",
  "n": 5885,
  "live": 5857,
  "unit_exact": 41424,
  "census": {
   "verified": 41424,
-  "rejected": 1,
+  "rejected": 0,
   "recovered": 0
  },
  "cheats_standing": 273,
@@ -2037,6 +2037,6 @@
  ],
  "symmetries": [],
  "dps": 50,
- "seconds": 47.2,
+ "seconds": 52.1,
  "claim_scope": "exact points from provenance at dps digits; ladder membership at 1e-(dps-15) deg; PSLQ identifications are numeric (maxcoeff 1e6/1e8), a census not a proof"
 }
