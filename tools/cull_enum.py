@@ -43,7 +43,10 @@ def read_classes(path):
 
 def hitting_set(masks, ncols):
     """masks: list of frozensets of cheat indices (each nonempty). Minimum hitting set by MILP,
-    greedy fallback; returns (K, method)."""
+    greedy fallback; returns (K, method). No masks (an EXACT empty list: the batch is jointly
+    redundant, the stage refuted) ⟹ nothing to keep."""
+    if not masks:
+        return [], "empty-list"
     try:
         from scipy.optimize import milp, LinearConstraint, Bounds
         A = np.zeros((len(masks), ncols));
