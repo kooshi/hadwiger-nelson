@@ -35,7 +35,7 @@ def _stage(label, tname):
     ue = obj.unit_edges(); live = set(range(obj.n)) - set(obj.deleted)
     n2, e2, info = (obj.n, ue, dict(cross=0)) if tname == "none" else CP.resolve(tname, obj.pts, live)(ue)
     cheats = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
-    return obj, n2, e2, info, cheats
+    return obj, n2, e2, info, cheats, removed
 
 def _mkclauses(n2, e2, cheats, A, B):
     base = coloring.base_clauses(n2, e2, K) + rigidity.amo_clauses(n2, K)
@@ -53,7 +53,7 @@ def _mkclauses(n2, e2, cheats, A, B):
 
 def _init(label, tname):
     from pysat.solvers import Cadical195
-    obj, n2, e2, info, cheats = _stage(label, tname)
+    obj, n2, e2, info, cheats, removed = _stage(label, tname)
     cls, sel, nv = _mkclauses(n2, e2, cheats, obj.A, obj.B)
     s = Cadical195(bootstrap_with=cls)
     _W.update(s=s, sel=sel, nv=nv, n2=n2)
@@ -82,10 +82,13 @@ def main():
     label, tname = sys.argv[1], sys.argv[2]
     budget = int(sys.argv[3]) if len(sys.argv) > 3 else 300_000
     workers = int(sys.argv[4]) if len(sys.argv) > 4 else 4
-    obj, n2, e2, info, cheats = _stage(label, tname)
+    obj, n2, e2, info, cheats, removed = _stage(label, tname)
     A, B = obj.A, obj.B
     edges_np = np.array(e2)
-    ckp = BUILD / f"m51-copycull-{tname}.jsonl"
+    # checkpoint keyed by (label, tname); the pre-2026-09-02 name (tname only) is kept for the
+    # original it-4-input object so its running culls' checkpoints stay addressable.
+    _key = tname if label == "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28" else f"{label}-{tname}"
+    ckp = BUILD / f"m51-copycull-{_key}.jsonl"
     kept = list(cheats); necessary = {}; unknowns = set()
     if ckp.exists():
         for line in ckp.read_text().splitlines():
@@ -98,18 +101,31 @@ def main():
                               "unknown": [list(e) for e in sorted(unknowns)], "asks": -1, "note": note, "t": time.time()}) + "\n"); log.flush()
     # pre-marked necessities from the floor censuses (monotone: sat at the full set ⟹ sat below)
     pre = 0
-    for f, key in [(BUILD / "m51-floor-it4-list.json", None),
-                   (BUILD / f"m51-copyfloor-{tname}.json", "essential")]:
-        try:
-            d = json.load(open(f)); lst = d if key is None else d[key]
-            if key is None and tname != "none":
-                continue   # the plain floor list applies to the plain object; the copy has its own census
-            for e in lst:
-                e = tuple(e)
-                if e in kept and e not in necessary:
-                    necessary[e] = "floor-census"; pre += 1
-        except FileNotFoundError:
-            pass
+    lists = []
+    if tname == "none":
+        # the recurse census carries the object fingerprint per verdict row — the sound source
+        rj = BUILD / f"m51-recurse-{label}.jsonl"
+        if rj.exists():
+            fp = obj.fingerprint(removed)   # matches run_recurse: cheats net of the removed list
+            lists.append([tuple(r["edge"]) for r in map(json.loads, rj.read_text().splitlines())
+                          if r.get("st") == "sat" and r.get("object_fingerprint") == fp])
+    if label == "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28":
+        # legacy files, valid only for the object they were measured on
+        for f, key in [(BUILD / "m51-floor-it4-list.json", None),
+                       (BUILD / f"m51-copyfloor-{tname}.json", "essential")]:
+            try:
+                d = json.load(open(f))
+                if key is None and tname == "none":
+                    lists.append(d)          # the it-4 floor list applies to the plain object only
+                elif key is not None:
+                    lists.append(d[key])     # the copy-floor census applies to its own tname
+            except FileNotFoundError:
+                pass
+    for lst in lists:
+        for e in lst:
+            e = tuple(e)
+            if e in kept and e not in necessary:
+                necessary[e] = "floor-census"; pre += 1
     print(f"[cull3] {tname}: n={n2} edges={len(e2)} cheats={len(cheats)} resume kept={len(kept)} premarked-necessary={pre}", flush=True)
     pool = get_context("fork").Pool(workers, initializer=_init, initargs=(label, tname))
     t0 = time.time(); nsolve = 0
@@ -209,7 +225,7 @@ def main():
                unknown=[list(e) for e in sorted(unknowns)], solves=nsolve,
                control_forced=st, seconds=round(time.time() - t0, 1), budget=budget,
                note="group-MUS on incremental solvers; kept re-refuted on the one-shot path; witnesses validated in numpy")
-    json.dump(row, open(BUILD / f"m51-copycull-{tname}.json", "w"), indent=1)
+    json.dump(row, open(BUILD / f"m51-copycull-{_key}.json", "w"), indent=1)
     print(f"[cull3] FINAL {tname}: kept {len(kept)} of {len(cheats)}, unknown {len(unknowns)}, one-shot control {st.upper()}, solves {nsolve}, {time.time()-t0:.0f}s", flush=True)
     pool.terminate()
 
@@ -227,11 +243,11 @@ def self_test():
         e = [(0, p), (0, q), (0, r), (1, p), (1, q), (1, r), (p, q), (p, r), (q, r),
              (u, p), (u, q), (u, r), (v, p), (v, q), (v, r)]
         cheats = [(0, 5), (5, 1), (0, 6), (6, 1)]
-        return o, 7, e, dict(cross=0), cheats
+        return o, 7, e, dict(cross=0), cheats, []
     _stage = fake_stage
     sys.argv = ["", "selftest", "selftest", "300000", "2"]
     main()
-    r = json.load(open(BUILD / "m51-copycull-selftest.json"))
+    r = json.load(open(BUILD / "m51-copycull-selftest-selftest.json"))
     assert r["kept_n"] == 2 and r["control_forced"] == "unsat", r
     ks = set(map(tuple, r["kept"]))
     assert ks in ({(0, 5), (5, 1)}, {(0, 6), (6, 1)}), ks
