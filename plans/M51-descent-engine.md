@@ -1387,3 +1387,19 @@ stronger object; adopting copies as object material is a provenance-dialect work
 readers, D38). His words: "I doubt we'll get to zero, or even 1 cheat through this alone, but if we toss all of
 these successful rotations together along with it-4's outputs, I'm very curious how many cheat vertices we can
 shrink away or edges we can eliminate."*
+
+*2026-09-02 05:35Z — ITERATION 4 COMMITTED.* Profile adopted (37,316 classes: 37,174 killed, 0 survive,
+142 unknown never folded); hitting set kept 3, committed 25; the Rust design produced a **119-point
+1-minimal halo with zero stalls** (cover 986 s, shrink 17 h, verify 233 s — it-3's halo was 854 points
+for 19 cheats: the engine's shrink plus the richer object cut the per-cheat cost ~7×); certify: lookup
+20,758/20,758 killed (3,512 s, checkpointed — the incident-5 fix paying), 1,061 halo edges verified
+(3 exact, 1,058 at 250 digits), one-hot UNSAT, 3-bit UNSAT at 8,228 s after the hard 7,200-s cap was
+made configurable (CERTIFY_ONEHOT_CAP/CERTIFY_REENCODE_CAP, `ab7747e` — the first run returned
+CANDIDATE honestly and wrote nothing). **Object `…-vdel28-it2v2-depth1`: 1,981 points, 273 cheats.
+The dial: 446 → 273.** Cull incidents the same night, both caught by controls and ledgered: the v2
+copy-cull's wall caps burned 737 s median on unknowns (v3 = group-MUS on incremental solvers,
+`copy_cull3.py`, planted self-test green); v3's first FINAL row claimed "unknown 0" while its own pass
+log showed 144 erased-not-reprobed unknowns (the reset-order bug, `f87df83`) — the sound half (kept 184
+forcing on the plain object, one-shot control UNSAT) stands; both culls relaunched fixed at 3M/30M
+conflict budgets. Next: columns on the new object (χ(unit) monitor = halt clause), it-5 floor, the
+composed-object cull (the new object + every locking copy) against the plain new object as control.*
