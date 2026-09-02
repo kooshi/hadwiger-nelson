@@ -390,3 +390,71 @@ would not force — the certify of the previous batch guards this, and `cull_enu
 class). The unsampled member for D9 is a copy point coinciding with a NON-centre point — never seen,
 checked anyway at 250 digits. The next lemma the kernel shape earns for free: the two-copy union
 (both signs) is the same comap along `Sum.elim` twice, no new definition.
+
+## §Bʺ. The obligation-modeling pass (2026-09-02, fresh invocation) — proofs walked, invariants stated
+
+**The partition.** *Prove* (kernel): the six `Copy.lean` lemmas below. *Test* (elaboration-time
+examples that fail on drift): `spindleRot 2 = rho15`, `spindleRot √3 = moserTwist`,
+`(spindleRot 5).re = 49/50`, `(spindleRot 5).im ^ 2 = 99/2500`, and the red
+`Complex.normSq (spindleRot (1/4)) = 49` (the radicand is negative there, `Real.sqrt` returns 0, and
+the hypothesis `1/2 ≤ d` is shown exact by a computation, not a remark). *Assume* (named per use):
+`1/2 ≤ d`; `Complex.normSq ρ = 1` for the isometry; `∀ u v, G.Adj u v → dist (q u) (q v) = 1` for the
+containments.
+
+**The kernel proofs, each a two-line transcription once the intermediate is named.**
+
+| lemma | argument | shape |
+|---|---|---|
+| `normSq_one_sub (h : normSq ρ = 1) : normSq (1 − ρ) = 2 − 2 * ρ.re` | `(1−a)² + b² = 1 − 2a + (a² + b²)` | `normSq_apply`, `sub_re/sub_im`, `linear_combination h` — the general fact that earns every rotation's self-chord length |
+| `normSq_spindleRot (hd) : normSq (spindleRot d) = 1` | `(1 − 1/(2d²))² + (4d²−1)/(4d⁴) = 1` | `Real.mul_self_sqrt (by nlinarith)`, `field_simp`, `ring`; `d ≠ 0` from `hd` |
+| `normSq_one_sub_spindleRot (hd) : normSq (1 − spindleRot d) = 1/d²` | `2 − 2(1 − 1/(2d²))` | the two lemmas above composed, `field_simp` |
+| `norm_of_normSq (h : normSq ρ = r²) (hr : 0 ≤ r) : ‖ρ‖ = r` | `normSq = ‖·‖²`, nonneg square roots | `Complex.normSq_eq_norm_sq` (name to be queried, not recalled), `pow_left_injective`/`nlinarith` |
+| `dist_self_rotAbout : dist z (rotAbout c ρ z) = ‖1 − ρ‖ * dist z c` | `z − (c + ρ(z−c)) = (1−ρ)(z−c)` | `Complex.dist_eq`, `show … = ‖(1−ρ)*(z−c)‖ by ring_nf`, `norm_mul` — no hypothesis |
+| `dist_rotAbout (hρ) : dist (rotAbout c ρ z) (rotAbout c ρ w) = dist z w` | the difference is `ρ(z−w)`, `‖ρ‖ = 1` | `norm_mul`, `norm_of_normSq hρ` at `r = 1` |
+| `self_chord_iff (hd) : dist z (rotAbout c (spindleRot d) z) = 1 ↔ dist z c = d` | `(1/d)·x = 1 ↔ x = d` for `d > 0` | `dist_self_rotAbout`, `norm_of_normSq` at `r = 1/d`, `field_simp` |
+| the containments: `G ≤ H.comap Sum.inl`, `G ≤ H.comap Sum.inr`, `H.Adj (inl z) (inr z) ↔ dist (q z) c = d` for `H := (unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` | unfold `comap`, apply `hq` / `dist_rotAbout` / `self_chord_iff` at the point `q z` | `intro u v h; simpa using …` — the exact `Adj` shape of `distanceGraph` (whether `x ≠ y` is a conjunct) is read at implementation, not assumed |
+
+The instance identities go through `Complex.ext_iff` with `Real.sq_sqrt`, and the chromatic transfer
+(`H.chromaticNumber ≤ (unitDistance ℂ).chromaticNumber`, `Sum.elim …` being a graph hom by
+definition of `comap`) is existing vocabulary, cited not re-proved. **Mutation audit at the
+sitting:** drop `hd` from `normSq_spindleRot` (must fail — the red example is its counterexample);
+replace `1/2 ≤ d` by `0 < d` (must fail at `1/4`); drop `hρ` from `dist_rotAbout` (must fail:
+`ρ = 2` doubles distances — pin as `example : dist (rotAbout 0 2 1) (rotAbout 0 2 0) = 2`).
+
+**The cull by enumeration: the invariant, and what it buys for free.** Write `Sep(C')` for the
+separating colourings (proper on the unit graph and on the cheat set `C'`, with `f A ≠ f B`),
+`S(B) = π(Sep(C ∖ B))` for the enumerator's projections to the live seed block, and
+`V(s) = {e ∈ B : s e₁ = s e₂}`. **Claim:** for `K ⊆ B`, the object with standing set `C ∖ (B ∖ K)`
+forces ⟺ every `s ∈ S(B)` has `V(s) ∩ K ≠ ∅`. *(⇐)* a colouring in `Sep(C ∖ (B∖K))` is in
+`Sep(C ∖ B)`, so its projection `s` is in `S(B)`; it is proper on `K`, so `V(s) ∩ K = ∅`. *(⇒)* an
+unhit `s` lifts to some `f ∈ Sep(C ∖ B)` proper on `K`, hence `f ∈ Sep(C ∖ (B∖K))`. Two lines each
+way, and every step is about projections because cheats are seed pairs — the copies enter only by
+shrinking `S(B)`.
+
+Three consequences the driver is built around: (i) **soundness is guarded twice** — the driver
+re-scans the whole list after the ILP (every `V(s)` hit by `K`, a numpy check, never trust in the
+solver's optimum) AND the batch closes with one certify ask (UNSAT under the new standing set) that
+does not depend on the enumerator at all; (ii) **optimality within the batch rests on the
+enumerator's exactness alone** (WO-6/7/11's V1–V3), and an incomplete list could only make `K` too
+SMALL, which the certify ask refuses — so the failure mode is loud; (iii) **every kept cheat is
+individually necessary, with a witness**: an inclusion-minimal `K` leaves, for each `e ∈ K`, a class
+`s` with `V(s) ∩ K = {e}`, and since necessity given a standing set is monotone under removing more
+cheats (fewer constraints, more separating colourings), that necessity holds forever — so the
+final kept set is 1-minimal by construction, the floor's 27 (necessary by census, never batched)
+included, and `cull_enum` records the witness class per kept cheat (re-validated in numpy against
+the object as a proper separating colouring of the batch's stage). The loop's measure is the
+standing count, strictly decreasing per batch or the batch is closed with everything kept.
+
+**The shrink: the invariant is "the current object forces", re-established per acceptance.** A
+deletion set `D` of copy points (never seed points, so no cheat moves) is accepted iff the ask on
+the object minus `D` is UNSAT (verified, one-hot); a SAT model is a witness that `D` holds a
+necessary point (kept, pooled as a signature); a solver core over presence selectors is a candidate
+`D`, accepted only after a second ask under exactly the core; unknown at budget ⟹ kept. The
+measure is the point count. The output is 1-minimal MODULO unknowns, and the headline carries the
+unknown count beside the point count (G21); the final object's forcing is re-refuted on the
+decorrelated one-shot path in two encodings before it is called a candidate.
+
+**Where the informal claims stop and the kernel would have to start:** none of the instrument
+invariants above is formalized — they are the same soundness architecture the descent has run on
+since M50 (certify decides, replay never trusted), stated here so each instrument's correctness
+reads in two lines. The 5-chromaticity of the copy unions stays tools-level (D6).
