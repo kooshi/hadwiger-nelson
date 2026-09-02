@@ -258,6 +258,26 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   met on a descended object, one generator fewer. This is what Kooshi saw as the halo's
   elegance.* [measured, single object]
 
+* **T14 — the descended object never left the seed field** [measured EXACTLY, 2026-09-02, M52
+  phase 1]. Every live point of the iteration-4 object (186 seed + 1,767 glue points, depths 1–5)
+  has coordinates in ℚ(√3, √11): found by PSLQ at 50 digits (1,953 of 1,953) and then VERIFIED
+  with exact rational arithmetic — every one of its 13,796 unit edges is an exact identity
+  `Δx² + Δy² = 1` in the basis (1, √3, √11, √33) (`tools/copy_exact_field.py`,
+  `data/m52/exact-<label>.json`). It is implied by T13/P1, now replicated on the whole object
+  (13,796 of 13,796 directions on the half-twist ladder, `tools/copy_anatomy.py`): a glue point is a
+  parent plus a unit vector of ladder direction, and those unit vectors are in the field. **The
+  correction it makes to the record:** `field_census.py`'s "new-root" class (167 points on the
+  it-4 object; the 883-core's "24 distinct radicands, tower height ≤ 24, per-edge compositum
+  geometry") counted radicands that are not catalogue values or RATIONAL squares of one — the
+  census never asked whether a radicand is a square IN THE FIELD, and they all are (G21, on a
+  classification). Consequences: (i) the copy union U ∪ R(U) lives in ℚ(√3, √5, √11) — the copy
+  adjoins exactly √5 (ρ₁₅ = (7 + i√3·√5)/8), no √7 — the same field as Heule-510 (G27) and inside
+  M02's kernel tower ℚ(√3, √5, √7, √11), so the 883-core's certificate geometry is M06-class, not
+  the priced compositum; (ii) G1 read from below: the 4-chromatic unit part is a seam-field object
+  and the 5-chromatic union is one square root up, with √5 the root; (iii) `Obj` now carries an
+  exact-rejected `non_unit` set — the two-sign composed object's single "copy–copy chord" was a
+  float near-miss at 1e-7, caught by the exact census. [measured; exact identities]
+
 ## §D (continued, 2026-09-01)
 
 Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and

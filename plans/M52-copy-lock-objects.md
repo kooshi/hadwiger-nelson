@@ -269,6 +269,18 @@ self-chord shell about 206 (P3). The red control: `spindleRot d` for `d < 1/2` h
 radicand and `normSq_spindleRot` is FALSE there — the hypothesis is exact (the `hd` example, as in
 `OneDefect`).
 
+## 8½. Phase-1 finding that reprices D6 (2026-09-02, day one)
+
+The 883-core's certificate was priced on a field inventory of 24 radicands and a per-edge
+compositum. The exact atlas found the premise false: **the whole iteration-4 object lies in
+ℚ(√3, √11)** (T14 — every point in the 4-basis, all 13,796 unit edges exact identities), and a ρ₁₅
+copy adjoins exactly √5, so every copy union is in ℚ(√3, √5, √11), inside the kernel's existing
+M02 representation (ℚ(√3, √5, √7, √11), height 4). D6's "weeks of new geometry engineering" is
+therefore wrong: the geometry half of the certificate is the M06 pipeline with a smaller tower,
+and the price is the LRAT at k = 4 over ~880 points (M06-scale, hours of kernel time). D6's
+scope ruling (certificate OUT of M52) stands as a scope decision, but its cost basis is corrected
+and the decision report will re-present it with the new price.
+
 ## 9. Failure clauses (pre-committed)
 
 * **F1 — Act One is not the d2 pigeonhole** (P4's SAT): record it as the finding, run phase 2 (ii)

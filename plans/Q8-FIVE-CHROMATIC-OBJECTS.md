@@ -51,7 +51,11 @@ The **jackpot ask** (separate 205/206 with zero cheats): **SAT at 4,704 s** — 
 control UNSAT. A *distributed* refutation, de Grey-like, not a small gadget.
 Graph: `data/m51/m51-copycore-about206-graph.json`.
 
-**Certificate pricing (priced, not started):** 588 of the original side's 2,265 edges are free
+**CORRECTED 2026-09-02 (M52, T14):** the "24 distinct radicands / tower height ≤ 24 / per-edge
+compositum" below is superseded — every point of the object is in ℚ(√3, √11) exactly (all unit
+edges verified as exact identities) and the copy adjoins only √5, so the whole union is in
+ℚ(√3, √5, √11) ⊂ M02's kernel tower: the certificate's geometry is M06-class. Kept as written for
+the record. **Certificate pricing (as priced 2026-09-01, superseded):** 588 of the original side's 2,265 edges are free
 by construction (`Glue.lean`: a glue point is unit from both parents); the core's provenance
 closure is 515 original points (378 glue) adjoining **24 distinct radicands** 1−d²/4 — 18 in
 the seed-pair catalogue (8 exact, 10 up to a rational square), 6 new roots (21 points), top two
