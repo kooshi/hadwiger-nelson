@@ -1432,6 +1432,7 @@ def certify(obj: Obj, B, pool: Pool, halo, label: str, log=print, geometry_only:
     if verdict == "committed":
         (BUILD / f"m50-object-{label}.json").write_text(json.dumps(
             {"prov": obj.prov[214:], "removed": [list(e) for e in B],
+             **({"deleted": sorted(obj.deleted)} if obj.deleted else {}),
              "fingerprint": obj.fingerprint([tuple(e) for e in B]),
              # the BARE fingerprint (no removals) is the POINT-SET identity — the quantity
              # save_pool's manifest carries — restoring the object<->pool-export cryptographic
