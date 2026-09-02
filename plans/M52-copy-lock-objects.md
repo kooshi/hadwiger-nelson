@@ -815,3 +815,31 @@ sixteen drops) — and was ruled built the same hour. **The gate's cost model, c
 server saving is the saving on its PARALLEL part only; every sequential acceptance chain must be
 turned into a chunk chain before a core count means anything. The chunk-size law (acceptances per
 wall-hour against chunk size, measured on A4's own journal) is the number the gate now wants.
+
+## §R4. WO-14 delivered (2026-09-02, evening) — the culler exists, and it changes what the loop costs
+
+The Rust culler landed on engine main (merge of `wo14-impl` at `85fdfdd`, 24 commits): `descent
+cull --groups cheats|vertices`, `--census`, chunked acceptance; **gate 269 of 269, verified
+independently by me on the final commit** (six seconds). Acceptance as measured: A1 met (25 red
+patches each seen red); **A2 met** — on the 883-point core in vertex mode, 883 kept / 0 dropped / 0
+undecided in both arms, rotation worth 2.04× in asks (432 against 883; the subplan's mixing model
+predicted 440); **A3 met** — the census agrees with the floor census on all 273 verdicts, zero
+undecided, at 8.64 CPU-hours against `run_recurse`'s 8.68 (the census was never the slow half —
+the 10.7× belongs to the cull's guarded encoding alone); **A5 met** — hard beats guarded at 1.65×
+the processor time to decide one MORE group, agreeing wherever both decide; A7 met (kill -9 and
+resume: the same kept set group for group, no duplicate rows); A8 met (the ferry: a changed byte
+refused by its own hash); **A4 partial** — 49 of 273 dropped, 11 witnessed, stopped on my ruling
+to return the box to the enumeration cull, resumable from its journal; A6 not run, reported as not
+run.
+
+**The finding that matters for every later iteration**: at twelve workers the deletion pass
+accepted one drop per ~2 minutes REGARDLESS of width — a refutation against a stale snapshot
+licenses nothing, so accepted drops are sequential (§12′). The chunk repair (one fresh ask over the
+union of same-snapshot refutations) halved the acceptance steps but did not yet win wall clock,
+because licences arriving during a chunk ask are discarded on its acceptance: "ask at two spends
+the pool at its emptiest" (D75). The tuning — hold licences while the batch drains, refine a
+colourable chunk without accepting — and a drain-on-signal (D76: a stopped run keeps its journal
+and loses its statistics) are the follow-up order, with the clean A/B (same journal, same groups,
+input committed) as its first row. Meanwhile my `cull_enum --loop` IS a chunk engine of a different
+shape — one enumerator refutation drops a whole batch — which is why it is the run finishing the
+plain object's cull tonight.
