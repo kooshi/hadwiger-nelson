@@ -278,6 +278,33 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   exact-rejected `non_unit` set — the two-sign composed object's single "copy–copy chord" was a
   float near-miss at 1e-7, caught by the exact census. [measured; exact identities]
 
+* **T15 — the copy lock in its finite form: two large projected colouring sets across thirteen
+  chords, with the distance-2 pigeonhole underneath** [measured 2026-09-02, M52 phase 2;
+  `tools/copy_kill_table.py`, `tools/m52_p4.py`, `data/m52/killtable-*.json`,
+  `data/m52/p4-class-avoid.json`]. (a) **Act One is G16's**: on the it-4 unit part U (1,953 live
+  points) no proper 4-colouring avoids a monochromatic pair at distance 2 (5,470 exact pairs; UNSAT
+  in the one-hot and the 2-bit encodings, each under a second), while the √3 class (10,288 exact
+  pairs) is avoidable — P4 met as registered, the fabric-borne pigeonhole met from below. (b) **The
+  kill is not a small pattern.** On the 883-point 1-minimal core of U ∪ R₂₀₆(U) (13 genuine chords
+  between the sides, 7 centre–neighbour chords folded into the copy side), the side-1 4-colourings
+  project onto the 13 chord endpoints as **3,516 distinct patterns** and the side-2 ones as
+  **1,062**; with the fused centre fixed to colour 0, all **3,733,992** pairs (σ, τ) are killed by
+  some chord (unkilled 0 — the refutation re-read as a table), the killer-count histogram running
+  1: 124,458 … 8: 203,820, and **every one of the 13 chords is the sole killer of some pairs**
+  (423–R(225) alone: 46,236 pairs; 225–R(423): 18,576; the four load-bearing chords among the top
+  eight). Inside Σ and T there is **no pair compulsion** on the 13 points — no forced-equal pair, no
+  virtual edge (G9's floppiness, exact here); what the chords exploit is a bias: the chord endpoints
+  wear the CENTRE's colour far above chance (σ(423) = colour(206) in 65 % of side-1 patterns,
+  σ(225) 63 %, τ(R225) 58 %), so a chord p–R(q) kills where both ends share the centre's colour.
+  (c) **Copies never touch each other**: in every composition (both signs about 206, about the
+  origin, all four) the exact census finds 0 copy–copy unit chords; the copies interact only through
+  the original, and every cross chord is collinear with its centre and has both endpoints in
+  ℚ(√3, √11) (P2 met on 8 + 20 + 16 + 56 genuine chords). *Reading, not promoted: the lock is a
+  coverage-style compulsion — the centre's colour propagates outward on the depth-2 fabric strongly
+  enough that thirteen well-placed unit chords to a rotated copy cannot all be satisfied — G13's
+  genre; the falsifier is a core on another centre whose chord endpoints show no centre-colour bias.*
+  [measured]
+
 ## §D (continued, 2026-09-01)
 
 Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and
