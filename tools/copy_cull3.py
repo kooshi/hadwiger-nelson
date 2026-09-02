@@ -139,11 +139,6 @@ def main():
     nsolve += 1
     print(f"[cull3] control full kept: {st.upper()} ({dt:.0f}s)", flush=True)
     if st == "unknown":
-        # a resumed kept set is already verdict-witnessed by its acceptance chain; re-verify on the
-        # ladder: 10x the budget again, then the one-shot path (which produced the chain's verdicts)
-        (_, st, core, dt) = pool.apply(_probe, ((tuple(kept), None, budget * 100),)); nsolve += 1
-        print(f"[cull3] control retry @{budget*100}: {st.upper()} ({dt:.0f}s)", flush=True)
-    if st == "unknown":
         ne0 = [[-coloring.var(A, c, K), -coloring.var(B, c, K)] for c in range(K)]
         edg0 = e2 + list(kept)
         cls0 = coloring.base_clauses(n2, edg0, K) + rigidity.amo_clauses(n2, K) + T._brk_full(n2, K, T._degree_order(n2, edg0)) + ne0
