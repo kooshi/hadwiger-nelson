@@ -758,3 +758,37 @@ refutations of ~250 s each: 16 of 246 candidates dropped, the 27 floor cheats ne
 census as the reason); P7 moot (no classes killed, so the batch-size law on composed objects equals
 the plain one's); P8 moot; P9 missed as registered, met in direction; P6 pending the cull's end;
 P10 is WO-14's.
+
+## §13′. Corrections to §13 from the WO-14 planning session (2026-09-02, the planner's findings, credited)
+
+The WO-14 planner (descent-engine, worktree `wo14-plan`, frozen at `e26e6f3`) measured the six
+levers and corrected the table in three places that matter; each is the planner's finding:
+
+1. **The lever that is worth an order of magnitude was not in the table: WHICH CNF the probe
+   solves.** The reference cull's probes hand the solver the standing cheats as guarded selector
+   literals with the palette order taken over the unit edges alone; asked with the cheats as HARD
+   clauses and the order over unit ∪ standing, the same question decides — 294.5 s against 4,689 s
+   undecided on the iteration-3-era object, **121.2 s against 1,302 s** on the iteration-4 object,
+   and twelve of the reference cull's 113 stalled probes decide (0 undecided, 7 droppable) in
+   0.9 CPU-hours. My own exact-cull driver corroborates it from the other side: its certify uses
+   hard clauses and refuted the plain object at standing 269 in 113.7 s. **Lever 0: the encoding.**
+2. **The long-lived assumption solver (§13's first row) is negative on the culler's instance**
+   (1.6× slower per conflict on a fat clause database); the 2.3×/250× figures were the enumerator's
+   regime, where warm asks decide in milliseconds. WO-13 is neither absorbed nor a dependency.
+3. **The witness-pool lever does not exist**: a probe of `kept ∖ {g}` returns a model whose violated
+   set meets any later kept set in exactly `{g}`, so the pool can never answer a probe for another
+   group. Model rotation, measured against complete ground truth: **0 % for cheat groups**
+   (P10's registered bed — refuted there), **3.5 witnesses per solver call for vertex groups** on the
+   883-point core (a low-coverage rate; a mixing model prices the full run at ~2×, not 3.5×).
+   P10 is scored per mode from now on.
+4. Solver cores are demoted from the default path to a measured arm (the one core taken on the
+   iteration-4 object was the whole assumption set); the IHS minimum is WO-15 with its threshold
+   at ~60 groups, not ~200 (at 200 columns it is a totalizer, not an afternoon); `--census` ships
+   and replaces `run_recurse`'s 2,657-s floor census.
+
+The three items the planner handed back are done or in flight: the 883-core edges sidecar for A2
+(`data/m52/core883-edges.json`), the honest pre-mark re-export of the retired cull
+(`data/m52/premarks-it3-vdel28-cull3.json` — its 'ask' rows carry no cheat identity, so its 35
+necessities are not attributable and are re-paid), and `cull_enum.py` running as the D1′ control.
+The SPEC amendment (v0.11: operation G, the cull journal with `holds`, the §7 sentence) is the
+product owner's and is applied on the merge.

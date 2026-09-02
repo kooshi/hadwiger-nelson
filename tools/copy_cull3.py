@@ -13,6 +13,15 @@ the parent serializes acceptances and confirms stale UNSATs. Checkpoint per acce
 from copy_cull's own state lines (same file). Final controls, decorrelated: the kept set re-refuted
 by the OLD one-shot cadical path, and every necessity witness re-validated in numpy.
 
+NOTE (2026-09-02, WO-14's planning measurement): the probes here hand the solver the kept cheats as
+GUARDED selector literals with the palette order over the unit edges alone — and that CNF is why
+the culls stalled: the same question with the cheats as HARD clauses and the order over
+unit ∪ kept decides in 121 s where this encoding sat undecided at 1,302 s (twelve of the 113
+stalled probes decided, 0 unknown, in 0.9 CPU-h). The witness pool below can also never answer
+a probe for a group other than the one it came from (its violated set meets any later kept set
+in exactly {g}). This file stays as the reference for the Rust culler's planted controls; the
+campaign's cull runs on `descent cull` (WO-14) and, until it lands, on `tools/cull_enum.py`.
+
 Soundness ledger: pool hits and pre-marks are sound by the monotone lemma; core jumps are confirmed
 by a fresh UNSAT under the core; the final kept set is re-certified on an independent code path.
 An unknown is never folded (recorded, re-probed at 10× budget, then reported)."""
