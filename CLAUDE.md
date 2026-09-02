@@ -965,7 +965,17 @@ modeling ran twice (§Sʹ–§Sʹʹʹ, then §Sⁱᵛ+§Sⁱᵛ-adv at full dept
 agent). The ranking below is the close's recommendation — the core probe CHANGED the landscape
 after §Sʹʹʹ's adoption, so the fork is presented explicitly; Kooshi picks.)*
 
-1. **M51 — the descent's iteration 3+ (the compounding loop, continued)**
+*(M51 DEFERRED 2026-09-02 at its iteration-4 commit (object 1,981 points / 273 cheats, the dial
+446 → 273), and **M52 MINTED** — numbered as minted, not as mapped: `plans/M52-copy-lock-objects.md`.
+The reason is a phase change the loop threw off: Kooshi's duplicate-and-detune construction (Q8)
+turned the descended object into a **family of new 5-chromatic unit-distance graphs** (the unit
+part plus one ρ₁₅ copy about almost any of its vertices; `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`),
+and no cull of any of them has finished. M52 studies the family until its geometry is named,
+culls by enumeration, shrinks the strongest object, and closes at the decision; the milestone
+after it is iteration 5 from that object or the pivot the study earns. The former "M52"
+(nominated gadgets) is the unnumbered `plans/STUB-nominated-gadgets.md`.)*
+
+1. **M51 — the descent's iteration 3+ (the compounding loop, continued) — DEFERRED 2026-09-02 at its iteration-4 commit; resumes as the milestone after M52 if M52's decision is iteration 5**
    (`plans/M51-descent-engine.md`, full stub with the SPEED MANDATE and the measured per-phase
    cost anatomy — Kooshi's direction 2026-08-24; the durable theory ledger is
    `plans/STANDING-QUESTIONS.md`) — **RECOMMENDED, and CHOSEN by Kooshi at the close ("I agree,
@@ -979,7 +989,7 @@ after §Sʹʹʹ's adoption, so the fork is presented explicitly; Kooshi picks.)*
    unit-distance witness — an intermediate certified deliverable before any 6-result), and the
    per-iteration weighted-ladder scan (the polarization table as a standing column). Jackpot
    clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
-2. **M52 — the nominated-pairs gadget question** (`plans/M52-nominated-gadgets.md`, full stub;
+2. **The nominated-pairs gadget question — unnumbered stub, formerly mapped as M52** (`plans/STUB-nominated-gadgets.md`, full stub;
    §Sʹʹʹ's adopted question, now the STALL-RESPONSE plan): minimal in-context forced-distinct gadgets for the (4,A)-class at 2 and the √3/√7
    cross-pairs, the in-context→context-free gradient measured by the diet meter (prototyped:
    supports 166/176/191 of 417, common core 78 — broad, so context-free is a long march), with

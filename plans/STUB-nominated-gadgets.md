@@ -1,4 +1,10 @@
-# M52 — the nominated-pairs gadget question (pre-subplan stub; the descent's stall-response)
+# The nominated-pairs gadget question (pre-subplan stub, UNNUMBERED; the descent's stall-response)
+
+> **Renumbered 2026-09-02 (Kooshi: milestones are numbered as minted, not as mapped).** This stub was
+> filed as "M52" at the M50 close; the number went to the copy-lock-objects milestone
+> (`plans/M52-copy-lock-objects.md`) when that was minted first. It receives a number when it is
+> minted. Nothing else here has changed.
+
 
 *Stub written 2026-08-24 at the M50 close. This was the ADOPTED M51 question at the end of M50's
 first pre-M51 modeling round (§Sʹʹʹ, a full-context adversarial fork's synthesis, 2026-08-22) —

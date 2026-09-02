@@ -1,9 +1,19 @@
 # M51 — the descent engine: iteration 3+ at speed (pre-subplan stub)
 
+> **DEFERRED 2026-09-02 (Kooshi), at the iteration-4 commit.** State at the deferral: object
+> `…-vdel28-it2v2-depth1` (fp `f0871bab2b915b4f`), 1,981 points / 273 cheats, forcing certified in
+> two encodings; it-5 floor 27 of 273 (0 unknown); the culls stopped at their checkpoints, none
+> complete. The loop is paused while **M52** (`plans/M52-copy-lock-objects.md`) studies the copy-lock
+> objects the loop threw off, culls them by enumeration, shrinks the strongest, and decides. If that
+> decision is iteration 5, it resumes from M52's object as the milestone after M52 — with D38's
+> provenance dialect for rotated copies as its first work order. Nothing below is retracted; §S-CONT
+> is the campaign log up to the deferral.
+
+
 *Stub written 2026-08-24 at the M50 close, on Kooshi's direction: "our engineering for M51
 should be focused on optimizing the speed of the whole process." Per the stub rule this file
 carries everything the deciding session knew, so a fresh session with zero conversation memory
-can subplan it with all meaning intact. Companion files: `plans/M52-nominated-gadgets.md` (the
+can subplan it with all meaning intact. Companion files: `plans/STUB-nominated-gadgets.md` (the
 stall-response plan), `plans/STANDING-QUESTIONS.md` (the durable ideas ledger — READ IT, it
 holds the theory this stub only references), `plans/M50-batch-descent.md` §R (the evidence).*
 
@@ -165,7 +175,7 @@ GROUP (`setsid` + `kill -- -PID`); ONE heavy job at a time; on any crash HALT an
 ## Failure clauses
 
 Stall (no committable batch at depth 1 and depth 2 unaffordable): the milestone closes with the
-measured cost curve as the finding and `plans/M52-nominated-gadgets.md` becomes the recommended
+measured cost curve as the finding and `plans/STUB-nominated-gadgets.md` becomes the recommended
 next — its calibration corpus and diet meter are already built. Engine regression (any swap
 whose regression set disagrees): revert first, diagnose second. The 49 hard unknowns are NOT a
 debt of this milestone; they die by subset kills or not at all.

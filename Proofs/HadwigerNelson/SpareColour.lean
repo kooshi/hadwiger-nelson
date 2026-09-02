@@ -16,7 +16,7 @@ consumers:
   crossing commit mints a new 5-chromatic unit-distance witness.
 * **The gadget hard floor** (`Separated.not_colorable`): every virtual-edge gadget at five
   colours is itself a ≥ 5-chromatic unit-distance graph — the floor under any gadget hunt
-  (`plans/M52-nominated-gadgets.md`), G25's "each level's kill is the previous level's forcer"
+  (`plans/STUB-nominated-gadgets.md`), G25's "each level's kill is the previous level's forcer"
   at the pair level.
 * **The retro-explanation**: every pair-meter zero ever measured on 4-colourable material at
   five colours (M31's flat table, M32's stacks, the hexagram chunks) was a theorem, never a

@@ -43,7 +43,8 @@ hardware event ⟹ HALT; an unknown is never folded into a verdict.
 | 1–2 (M50) | 1,008 pts | 403 | two certified batches, 43 cheats |
 | 3 (M51) | 1,862 pts, 13,037 unit edges | 393 | 854-point halo; commit 2026-08-28 |
 | 3′ deletion | 186 live seed vertices | **298** | 28 seed vertices deleted, certified both encodings |
-| **4 (live)** | floor 39 cheats; spending all 39 = 2.59 M classes, so a sub-batch of 28 (37,316 classes) | 298 → expected ~274 | profile tail in its last wall-capped pass; hitting set keeps ≤ 4; design → certify → commit next |
+| 4 (M51) | 1,981 pts, 13,796 unit edges | **273** | sub-batch of 28 (37,316 classes); 119-point 1-minimal halo, zero stalls; commit 2026-09-02 05:34Z; it-5 floor 27 of 273, 0 unknown |
+| **M52 (2026-09-02, live)** | the it-4 object, its ρ₁₅ copies, their compositions | 273 (plain) | **the loop is PAUSED**: anatomy → composition ranking → cull by enumeration → shrink → the decision (`plans/M52-copy-lock-objects.md`); the next milestone is it-5 from the chosen object or a pivot |
 | 5 | the put-back and kept cheats rejoin the floor | — | same loop |
 
 ### A.2 The curation queue — improvements to the loop, each mapped to the phase it speeds
@@ -107,7 +108,7 @@ row in `CLAUDE.md` § Paths forward at the next close. Nothing is worked from me
 
 | item | where registered | why it waits |
 |---|---|---|
-| Parts-{1,φ} weighted-ladder replication | `plans/M52-nominated-gadgets.md` | decorrelates "the dial nominates" from "E–I was built this way"; background job, runs in any gap |
+| Parts-{1,φ} weighted-ladder replication | `plans/STUB-nominated-gadgets.md` | decorrelates "the dial nominates" from "E–I was built this way"; background job, runs in any gap |
 | width-stall overlap census; smoothness probe; P5 radicand 60-vs-59 | `plans/M51-descent-engine.md` §B8 | sittings; need a stall batch and a quiet box |
 | the exhaustive arity ladder on the certified 23-core; the randomized re-shrink | `plans/M45-arity-floor.md` §R7 | cheap, promotable; nobody has had a free afternoon |
 | the multi-hour zero-event memory run on the desktop | `CLAUDE.md` § Toolchain | the box is always busy; the server needs the same before day one |
@@ -116,7 +117,7 @@ row in `CLAUDE.md` § Paths forward at the next close. Nothing is worked from me
 
 | milestone | frame | trigger |
 |---|---|---|
-| M52 nominated gadgets | the stall response: minimal in-context gadgets for the (4,A)/√3/√7 pairs; the in-context → context-free gradient | the descent stalls hard, or Q6's heavy pair refuses every pool |
+| nominated gadgets (unnumbered stub — milestones are numbered at minting, Kooshi 2026-09-02; formerly mapped as M52) | the stall response: minimal in-context gadgets for the (4,A)/√3/√7 pairs; the in-context → context-free gradient | the descent stalls hard, or Q6's heavy pair refuses every pool |
 | M46 colouring automaton | the description instrument | a stage whose separating list has structure worth naming |
 | M47 multidistance | the {1, √3, 2} plane and its relatives | literature gate first |
 | Q1 crystal generator | fuse 5-forcers, screen by entropy rate | after K4 and T9(i) |
@@ -140,19 +141,27 @@ equal at four colours; (b) the copy as a 1,862-point halo against the sub-batch'
 | a long unattended phase (enumerate, profile, design, certify) — hours | monitors the phase (stall watcher, progress line) | kernel pieces (K1–K4: no compute); engine PLANNING sessions in worktrees; ledger writing |
 | a short attended phase (adopt, hitting, commit, republish, columns) — minutes | runs the steps in order | nothing — attention is the resource |
 | a gap between iterations | records the commit's columns and the findings | measurement tangents that need the box (B.3), one heavy job at a time |
-| a stall (no affordable sub-batch, or a refuser every pool misses) | halts and names the wall | M52 becomes the frame |
+| a stall (no affordable sub-batch, or a refuser every pool misses) | halts and names the wall | the nominated-gadgets stub becomes the frame |
 
 Rules that bind both: one heavy job on the box; one work order per engine session, planned and
 implemented by different agents, one writer per worktree, I push; every finding recorded the day it
 lands (his standing instruction, 2026-08-31); a headline carries its population (G21).
 
-## The next seven days, in order
+## The next seven days, in order (rewritten 2026-09-02 at the M52 minting; the loop is paused)
 
-1. It-4: full-pool pass (c) → adopt → hitting (≤ 4 kept) → design (26 threads, whole pass) →
-   certify → commit → viewer republish → columns → Q6's heavy-pair check.
-2. Engine: WO-10 v0.9 session on the it-4 profile; then WO-11 v0.10.
-3. It-5 floor + sub-batch curve; the class-count law re-measured (T10's first data point).
-4. Track B in the it-5 gaps: K1 and K3 in Lean (an afternoon); Q7's ring classification stated.
-5. WO-3 planning in a worktree while it-5's profile runs (the courier pieces are the server's gate).
-6. Q8/Q9: the copy probe (k = 4 asks on U ∪ T(U), the k = 4 forced-equal sweep of U) in the (c)-pass gap;
-   regime (b) — the copies as pools — after the it-4 commit, on the it-5 sub-batch.
+1. M52 phase 0: housekeeping (done with the subplan commit), the instruments with their planted
+   reds (`copy_anatomy`, the viewer's copy layers, `copy_pool`, `cull_enum`), the kernel sitting
+   (`Copy.lean`: the spindle rotation, the self-chord law) beside them.
+2. M52 phase 1–2 (compute-light): the atlas and the mechanism — P1's direction ladder replicated on
+   the whole object, P2/P3 on every cross chord, P4's distance-2 class-avoidance ask on U at four
+   colours, the 883-core's colouring anatomy, P9 on the non-locking centres. Viewer republished.
+3. M52 phase 3 (the heavy job): one it-5 batch list on the plain it-4 object; every candidate copy as
+   a pool; `descent replay` per copy; the ranking (P5) → the composition.
+4. M52 phase 4: the cull by enumeration on the plain object (control dial) and on the composition;
+   cull3 on one batch as the method control; P6/P7 scored; the final kept set certified twice.
+5. M52 phase 5: the shrink — the cheap ladder (P8) first, then vertex group-MUS with cores; the
+   server if WO-3's replan lands (not on the critical path).
+6. Engine, in the gaps: WO-3 replan (Arch server, INC-3's v2 pin), D38's provenance dialect for
+   rotated copies STUBBED against the composition M52 chooses (it is it-5's first work order).
+7. M52 close: object cards, `data/m52/`, Frontier + Grokkings, predictions scored, the next-milestone
+   stub (M53 = it-5 from the chosen object, or the pivot); Kooshi picks.

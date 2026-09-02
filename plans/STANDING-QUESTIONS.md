@@ -7,7 +7,7 @@ when an entry matures or dies, deprecate-never-delete, every claim carrying its 
 and its falsifier where one exists. Entries are SELF-CONTAINED statements; the M50 plan's §R/§S
 sections remain the archival evidence, cited by address. Milestone homes: the descent's
 continuation is `plans/M51-descent-engine.md`; the gadget question is
-`plans/M52-nominated-gadgets.md`.*
+`plans/STUB-nominated-gadgets.md`.*
 
 ## §K. Kernel-ready pieces (statements with proof sketches, none yet in Lean)
 
@@ -70,7 +70,7 @@ continuation is `plans/M51-descent-engine.md`; the gadget question is
   ANTI-symmetry at five colours, M30's forced-symmetry genre sign-flipped), {√3, √7, 2√3}
   carrying excess mono-mass. Seed-native (class means barely move between iterations), NOT
   descent-driven. Before this may inform design: the Parts-{1,φ} replication (registered in
-  `plans/M52-nominated-gadgets.md`) must decorrelate "the dial nominates" from "E–I was built
+  `plans/STUB-nominated-gadgets.md`) must decorrelate "the dial nominates" from "E–I was built
   this way". Vocabulary caution: the triangle census's fifth family sits at √13, whose spindle
   radicand 51 = 3·17 is OUTSIDE the owned fields.
 * **T3 — the colouring MRF unification** [frame]. The uniform measure over proper colourings of
@@ -244,6 +244,19 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   n; SMT: 16 copies at 0.78× solo each, aggregate 32/16 = 1.083, so physical cores are the unit
   on memory-tight or wall-capped phases; head-of-line blocking (index-order issue, one 2 M-conflict
   budget, a rate-based ETA) cost 9.8 h once and is now a rule (first pass wall-capped).
+
+* **T13 — the direction ladder** [measured on ONE halo; registered for replication as M52 P1].
+  The iteration-4 halo (119 glue points, provenance depths 1:1 / 2:13 / 3:32 / 4:41 / 5:32 — 93 of
+  them glue points of two HALO parents) carries 1,061 unit edges in exactly SIX directions mod 60°:
+  30.00, 46.78, 13.22, 3.56, 56.44, 20.34 — the seed's three families (Q6's two crystals at 13.22°
+  and 46.78° and the axis family at 30°) shifted by whole multiples of the Moser twist
+  33.5573° = arccos(5/6) (3.56 = 30 + 33.56 − 60; 56.44 = 30 − 33.56 + 60; 20.34 = 13.22 + 2·33.56
+  − 60 = 46.78 + 33.56 − 60). Measured 2026-09-02 at the M52 subplanning, on the halo only; the
+  whole object (12,735 older edges), the it-3-era halos and the copies (where the ladder should
+  gain ρ₁₅) are the replication. *Reading, not promoted: the object's direction group is
+  ⟨ζ₆, ρ_Moser⟩ up to the seed's frame — G8's half-spindle-group observation for de Grey's witness,
+  met on a descended object, one generator fewer. This is what Kooshi saw as the halo's
+  elegance.* [measured, single object]
 
 ## §D (continued, 2026-09-01)
 
