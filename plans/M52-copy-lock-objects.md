@@ -792,3 +792,11 @@ The three items the planner handed back are done or in flight: the 883-core edge
 necessities are not attributable and are re-paid), and `cull_enum.py` running as the D1′ control.
 The SPEC amendment (v0.11: operation G, the cull journal with `holds`, the §7 sentence) is the
 product owner's and is applied on the merge.
+
+*§13′ addendum, from the planner's close (frozen `3e26fb4`, merged to engine main): the palette
+ORDER's 2.1–2.9× was one object at one state — on the iteration-4 object the two orders are within
+7 % — so the encoding (hard clauses, no selector guards) is the lever alone; D5 ships because it
+costs one sort per probe, and its range is no longer quoted as general (a G21 on a positive, the
+planner's own catch after my corroboration). A4 stays reference-free with `cull_enum`'s kept set
+reported beside it as a second upper bound, never gated on: two 1-minimal sets of one object can
+differ and both be right.*
