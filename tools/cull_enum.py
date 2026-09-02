@@ -130,9 +130,10 @@ def self_test():
         if len(batch) == 4: break
     def line(pairs_equal):
         s = ["0"] * 214
-        c = 1
-        for (a, b) in pairs_equal:
-            s[a] = s[b] = str(c); c = c % 4 + 1
+        for (a, b) in batch:                              # background: every batch cheat SEPARATED
+            s[a], s[b] = "1", "2"
+        for (a, b) in pairs_equal:                        # the planted violations: both endpoints alike
+            s[a] = s[b] = "3"
         return "".join(s)
     body = [line([batch[0]]), line([batch[1], batch[2]]), line([batch[2], batch[3]])]
     masks = [frozenset(j for j, (a, b) in enumerate(batch) if s[a] == s[b]) for s in body]
