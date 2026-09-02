@@ -304,3 +304,89 @@ after every object change.
    critical path.
 3. *Know but do not decide* — **the it-3-era plain cull** (D3): retired at 184 kept; finished only
    on the server as a method control.
+
+## §Bʹ. The domain-modeling pass (2026-09-02, fresh invocation) — what it changed
+
+Run on the four objects the arguments named: the kernel statements, the composed object, the cull's
+formulation, and the "strongest" criterion. Each change below removes a representation rather than
+adding one.
+
+**1. The composed object is the SAME object with one more recipe constructor (D9, new).** The
+descent object is intrinsically (points given by an exact recipe over the seed, the forced pair, the
+live seed block, the standing cheats); unit edges are derived, never stored. A rotated copy is not a
+second kind of object: its points are recipes `['rot', centre, sign, source]` (cos 7/8, sin ±√15/8
+about an exact point — exact by construction, as a glue point is), and coincident recipes denote
+one vertex (the copy of the centre IS the centre; the fuse step is the quotient by coincidence,
+checked at 250 digits and never assumed — the it-4 four-copy union's "4 fused" are exactly the two
+centres × two signs). So phase 0 builds the composed objects as first-class `Obj` files
+(`tools/compose.py`: base label + a list of (centre, sign) → object JSON with fingerprints), and
+EVERY downstream instrument — `export_edges`, the floor census, the enumerator, `field_census`, the
+viewer refresh, the certify's geometry — runs on them unchanged. The ad-hoc in-memory unions of
+`copy_probe`/`copy_cull3` are retired for M52's work; D38 (the provenance dialect) collapses to
+this constructor on the Python side plus `mp_values` and the fingerprint — the Rust engine never
+reads provenance, only the edges sidecar, where copy points are ordinary non-seed material.
+Inventory sizes marked "~" in §2 become exact fingerprints at phase 0's close.
+
+**2. The composition ranking needs no pool export (phase 3 simplified; `copy_pool.py` dropped from
+M52).** For the same batch B and the same live block, the classes of the composed object are a
+SUBSET of the plain object's — restricting a separating colouring of the composed object to the
+plain points is a separating colouring with the same projection — and a class in
+`S_plain(B) ∖ S_comp(B)` is killed by the copy in the design engine's exact sense (no extension
+exists). So two enumerations give the per-copy kill mass (`1 − |S_comp|/|S_plain|`) AND the
+per-class kill masks (the set-cover read across copies) exactly, with no tiers and no unknowns —
+and the plain enumeration is phase 4's first batch, reused. P5 is scored on these counts; P7 is the
+same measurement read as a batch-size law. The engine's pool export stays what it is — iteration
+5's instrument for designing a halo out of the copy — and is that milestone's work order.
+
+**3. The mechanism has a finite intrinsic form: two projected colouring sets and a disjointness
+table (phase 2 (ii) reshaped).** A 4-colouring of the union is a PAIR (σ, τ) — σ a 4-colouring of
+the original side `U[S₁]`, τ a 4-colouring of the copy's source `U[S₂]` (both subsets of U; a point
+in `S₁ ∩ S₂` is coloured twice, independently) — coupled only by the fused centre (σ(c) = τ(c)) and
+the cross chords (σ(p) ≠ τ(q) for each chord p–R(q)). The refutation says: with the centre's colour
+fixed, the projections Σ = {σ|P} and T = {τ|Q} onto the chord endpoints (20 chords ⟹ |P|, |Q| ≤ 20)
+contain no componentwise-distinct pair. So the lock is a statement about two sets of ≤ 20-tuples over
+four colours, and the load-bearing chords are the coordinates without which a disjoint pair appears.
+Phase 2 (ii) enumerates Σ and T (projections to ≤ 21 points; if the fabric is 4-tight they are small
+— the M49 lookup engine's regime; if not, the mask engine's harvest with its coverage stated) and
+writes the kill table; Act One is then READ from Σ — which patterns on the four load-bearing points
+{225, 243, 423, 424} (the same four points on both sides, at 1/√3 and √3) every σ carries — with the
+M48 arity instrument on the 883-core's original side at that tuple as the exact form of the question.
+P4's distance-2 class-avoidance ask on U stays as the G16 test, now beside a sharper one.
+
+**4. "Strongest" is a Pareto knee, not a lexicographic order (§3 corrected).** Composition is
+monotone (`Forces.mono`): more copies never lose forcing, only cost. So criterion 1 alone always
+picks the largest composition, and the real decision is the trade between kept cheats and points
+after the shrink. The candidates are reported as a front (kept cheats × shrunk points, field cost
+beside), and the decision report argues the knee. The known limitation stands: the grown lattice's
+kill capacity (G33's compounding) is iteration 5's own measurement, unmeasurable here.
+
+**5. The kernel statements, reshaped.** (a) No graph on `ι ⊕ ι` is defined: the copy union IS
+`(unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` — every unit pair an edge, cross chords
+included — already in the repository's vocabulary; the copy construction's content is two
+containments (`G ≤ (that).comap Sum.inl` when `q` draws `G` with unit edges, and the same for
+`Sum.inr` because `rotAbout` is an isometry) and the self-chord characterization
+`Adj (inl z) (inr z) ↔ dist (q z) c = d` for the d-spindle rotation. (b) Unit-ness is EXTRINSIC:
+`rotAbout c ρ` takes `ρ : ℂ` with `Complex.normSq ρ = 1` as a per-use hypothesis (the repository's
+convention — `moserTwist`, `rho15` are plain complexes with `normSq_*` lemmas), not `ρ : Circle`;
+the self-chord law `dist z (rotAbout c ρ z) = ‖1 − ρ‖ * dist z c` needs no hypothesis at all.
+(c) `spindleRot d` is parameterized by the pair distance `d` (the intrinsic parameter; the radicand
+`4d² − 1` is derived and named by the spec examples: `(spindleRot 2).im = √15/8`,
+`(spindleRot 5).re = 49/50` — the Exoo–Ismailescu pair's own spindle). The red control is the
+computable one: `Complex.normSq (spindleRot (1/4)) = 49`, so `normSq_spindleRot`'s hypothesis
+`1/2 ≤ d` is exact. (d) Mathlib's `Circle`/`rotation` is the neighbour and is cited in the
+docstring; the bespoke affine form costs one two-line isometry lemma and spares every consumer a
+`Circle` coercion.
+
+**6. Two tools become one.** The vertex shrink of phase 5 is `copy_cull3`'s group-MUS with the
+group = a copy point's incident edges instead of a cheat's clauses; one tool, a `--groups` switch,
+the same cores/witness pool/checkpoint discipline. Phase 5's question (fewest copy points carrying
+the CULLED forcing) and the design engine's (fewest pool points killing one batch's classes) are
+different questions and keep different tools; the plan names both.
+
+*Seams validated:* the adversarial member for the cull's exactness is a class whose violated set is
+empty — impossible by construction (every class is proper on the standing cheats outside B and
+separating, so with K = B it must violate something in B, else the object with all of B present
+would not force — the certify of the previous batch guards this, and `cull_enum` asserts it per
+class). The unsampled member for D9 is a copy point coinciding with a NON-centre point — never seen,
+checked anyway at 250 digits. The next lemma the kernel shape earns for free: the two-copy union
+(both signs) is the same comap along `Sum.elim` twice, no new definition.
