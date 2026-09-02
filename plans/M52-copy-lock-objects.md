@@ -803,7 +803,9 @@ differ and both be right.*
 
 ## §12′. The server gate's first real data point (2026-09-02, from WO-14's A4)
 
-WO-14's deletion pass at twelve workers accepted one drop every ~1.9 minutes regardless of the
+WO-14's deletion pass on the iteration-4 object (273 cheats, one desktop, twelve workers — one
+object at one width, the implementer's own qualifier) accepted one drop every ~1.9 minutes
+regardless of the
 worker count: **a refutation computed against a stale snapshot licenses nothing, so accepted drops
 are strictly sequential, and in a drop-heavy phase width buys no wall clock at all** while costing
 `W` times the processor seconds. §9's projection divided the probe count by the workers, and the
@@ -837,7 +839,8 @@ accepted one drop per ~2 minutes REGARDLESS of width — a refutation against a 
 licenses nothing, so accepted drops are sequential (§12′). The chunk repair (one fresh ask over the
 union of same-snapshot refutations) halved the acceptance steps but did not yet win wall clock,
 because licences arriving during a chunk ask are discarded on its acceptance: "ask at two spends
-the pool at its emptiest" (D75). The tuning — hold licences while the batch drains, refine a
+the pool at its emptiest" (D75 — twelve chunks, all size 2, one object, one width; the clean A/B in
+WO-16 is what lets it be said without the qualifier). The tuning — hold licences while the batch drains, refine a
 colourable chunk without accepting — and a drain-on-signal (D76: a stopped run keeps its journal
 and loses its statistics) are the follow-up order, with the clean A/B (same journal, same groups,
 input committed) as its first row. Meanwhile my `cull_enum --loop` IS a chunk engine of a different
