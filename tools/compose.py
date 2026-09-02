@@ -113,6 +113,7 @@ def write_object(obj: B.Obj, label: str, removed):
     standing = [e for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
     d = {"prov": obj.prov[214:], "removed": [list(e) for e in removed],
          **({"deleted": sorted(obj.deleted)} if obj.deleted else {}),
+         **({"non_unit": sorted(list(e) for e in obj.non_unit)} if obj.non_unit else {}),
          "fingerprint": obj.fingerprint(removed), "fingerprint_bare": obj.fingerprint(),
          "n": obj.n, "unit": len(ue), "cheats": len(standing)}
     (B.BUILD / f"m50-object-{label}.json").write_text(json.dumps(d))
@@ -139,6 +140,11 @@ def main():
           f"{len([e for e in obj.cheats if tuple(e) not in set(map(tuple, removed))])}", flush=True)
     stats = compose(obj, copies, a.source)
     obj.check(30)                                   # every point re-derived from provenance
+    copy_pts = {i for i, rec in enumerate(obj.prov) if rec[0] == "rot"}
+    bad = obj.verify_unit_edges(50, only_touching=copy_pts)   # the float census, made exact
+    if bad:
+        print(f"[compose] EXACT CENSUS rejected {len(bad)} float edge(s) touching a copy: " +
+              ", ".join(f"({u},{v}) |d-1|={g}" for u, v, g in bad[:8]), flush=True)
     ue = obj.unit_edges()
     census = chord_census(obj, ue)
     print(f"[compose] {label}: n={obj.n}, unit edges {len(ue)} = {census['original']} original + "
@@ -155,6 +161,7 @@ def main():
     assert obj2.n == obj.n and obj2.fingerprint(removed2) == d["fingerprint"]
     row = {"kind": "compose", "label": label, "base": a.base, "copies": stats, "source": a.source,
            "n": obj.n, "unit": len(ue), "cheats": d["cheats"], "census": census, "k4": k4,
+           "non_unit_rejected": [[u, v, g] for u, v, g in bad],
            "fingerprint": d["fingerprint"], "fingerprint_bare": d["fingerprint_bare"],
            "seconds": round(time.time() - t0, 1),
            "claim_scope": "the composed object as an object file; copies exact by recipe (rho15 about an "

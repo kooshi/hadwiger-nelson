@@ -61,6 +61,10 @@ class Obj:
         # a deleted vertex keeps its index and its point (it may be a glue parent of existing
         # halo points — provenance resolves through it) but carries no unit edge and no cheat
         self.A, self.B = H.index(T.EI_A), H.index(T.EI_B)
+        # pairs the float census (tol 1e-7) accepts but exact arithmetic REJECTS — seen first on the
+        # two-sign composed object (M52, 2026-09-02: one copy–copy near-miss at |d − 1| < 1e-7).
+        # Populated by `verify_unit_edges`, persisted in the object file, honoured by `unit_edges`.
+        self.non_unit: set[tuple[int, int]] = set()
         self._unit = None
         assert len(c[1]) == 1004 and len(self.cheats) == 446, "seed census drifted"
 
@@ -89,12 +93,34 @@ class Obj:
         return len(self.pts)
 
     def unit_edges(self) -> list[tuple[int, int]]:
-        """cKDTree unit census over the current points, cached until the next add."""
+        """cKDTree unit census over the current points (minus the exact-rejected `non_unit` pairs),
+        cached until the next add."""
         if self._unit is None:
             raw = unit_pairs_np(self.pts)
+            raw = [tuple(e) for e in raw if tuple(e) not in self.non_unit]
             self._unit = raw if not self.deleted else \
                 [e for e in raw if e[0] not in self.deleted and e[1] not in self.deleted]
         return self._unit
+
+    def verify_unit_edges(self, dps: int = 50, only_touching=None) -> list[tuple[int, int, str]]:
+        """Re-check the float census at `dps` digits from provenance; every rejected pair joins
+        `non_unit` (and leaves `unit_edges()`), and is returned with its |d − 1|. `only_touching`
+        restricts the check to edges with an endpoint in that set (e.g. the copy points)."""
+        import mpmath as mp
+        ex = self.mp_values(dps)
+        eps = mp.mpf(10) ** (-(dps - 10))
+        bad = []
+        for u, v in list(self.unit_edges()):
+            if only_touching is not None and u not in only_touching and v not in only_touching:
+                continue
+            D = ex[u] - ex[v]
+            gap = abs(mp.sqrt((D * mp.conj(D)).real) - 1)
+            if gap >= eps:
+                bad.append((u, v, mp.nstr(gap, 6)))
+                self.non_unit.add((u, v))
+        if bad:
+            self._unit = None; self._halo_struct = None
+        return bad
 
     def fingerprint(self, B=()) -> str:
         return T.fingerprint(self.n, self.unit_edges() + [e for e in self.cheats if e not in set(B)])
@@ -1908,6 +1934,16 @@ def load_object(label: str) -> tuple[Obj, list]:
         else:
             raise AssertionError(("unknown provenance kind in object file", rec))
     removed = [tuple(e) for e in d["removed"]]
+    if d.get("non_unit"):
+        obj.non_unit = set(tuple(e) for e in d["non_unit"])
+        obj._unit = None
+        # the exclusions are re-verified on read: each must REALLY miss unit at 50 digits
+        import mpmath as mp
+        mp.mp.dps = 50
+        ex = obj.mp_values(50)
+        for u, v in obj.non_unit:
+            D = ex[u] - ex[v]
+            assert abs(mp.sqrt((D * mp.conj(D)).real) - 1) >= mp.mpf(10) ** -40, ("non_unit pair is unit", u, v)
     assert obj.n == d["n"]
     if d.get("deleted"):
         obj.delete_vertices(d["deleted"])            # before the fingerprints: edges decide them
