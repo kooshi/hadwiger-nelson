@@ -720,3 +720,41 @@ R = 3.0) and met in direction on every column; the sharper separator is the radi
 its root solve with 0 classes — the batch is probably jointly redundant, so its first solve is a
 whole-object refutation — re-running at 40 M; the ranking batch (4 floor + 4 non-floor cheats)
 enumerating on the plain object at 8 threads.
+
+## §R3. Phase 3 — the composition ranking: P5 refuted, F3 fired (2026-09-02, evening)
+
+**The measurement.** The ranking batch (four floor cheats 4-90, 4-159, 4-205, 4-208 and four
+non-floor 0-55, 0-93, 0-111, 0-132) enumerated on the plain iteration-4 object: **15,218 classes,
+exact** (169 s at 8 threads). The same batch on `it4+206p`: **15,218 classes** — projection for
+projection the same set (compared on the live seed block up to colour permutation, since the
+enumerator's palette pin follows the object's degree order and a copy changes it). **Kill fraction
+0.0000.** Decorrelated check: twenty random plain classes forced onto the composed object's original
+side all extend to the copy (20 SAT, 0 UNSAT, 0 unknown, one-hot, 300-s cap never reached), and in
+ten of ten the copy side is coloured with **four colours only**.
+
+**The reading, with its mechanism.** The copy is a 4-colourable graph (it is U) attached to the
+original through 36 chords, each forbidding one colour at one copy vertex. A separating
+5-colouring of the original leaves the copy free to take any 4-colouring of its own and any
+injection of its four colours into the five, and one of those always avoids the 36 conflicts —
+the spare-colour lemma (`SpareColour.lean`) read as a statement about halos: **a (k−1)-colourable
+halo attached by chords contributes nothing at k colours unless the chords pin it past its own
+spare colour.** The union is 5-chromatic as a unit graph precisely because at FOUR colours there
+is no spare colour to colour around with (T15); at five there is. Copies never touch each other
+(0 copy–copy chords, exactly), so every composition is copies attached independently to the
+original, and the zero transfers to `it4+0p`, `it4+206pm`, `it4+0pm` and `it4+quad` by the same
+argument; `it4+0p` runs as the replication at a second centre, the rest are cancelled.
+
+**What it decides.** F3 as registered: the strongest object by the dial is the **plain iteration-4
+object**; the copies stand as 5-chromatic unit-distance witnesses (certificate targets, geometry
+M06-class after T14) and as MATERIAL for the next iteration's partner lattice (their glue points
+with the original are new points in ℚ(√3, √5, √11) — whether THOSE kill classes is iteration 5's
+pool question, registered for the it-5 stub, not run here). Phase 5 (the shrink) has no copy
+material to shrink and is closed as moot; phase 4 reduces to the plain object's exact cull, which
+is running (`cull_enum --loop`, batches of eight; the first two batches were jointly redundant
+refutations of ~250 s each: 16 of 246 candidates dropped, the 27 floor cheats never batched).
+
+**Predictions scored so far.** P1 met (exactly, whole object); P2 met; P3 met; P4 met; P5 **refuted**
+(kill fraction 0 against ≥ 50 % registered — and the registered low confidence named the floor
+census as the reason); P7 moot (no classes killed, so the batch-size law on composed objects equals
+the plain one's); P8 moot; P9 missed as registered, met in direction; P6 pending the cull's end;
+P10 is WO-14's.

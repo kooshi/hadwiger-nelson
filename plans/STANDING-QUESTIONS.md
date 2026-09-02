@@ -305,6 +305,14 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   genre; the falsifier is a core on another centre whose chord endpoints show no centre-colour bias.*
   [measured]
 
+* **Q8 regime (b), ANSWERED 2026-09-02 (M52 phase 3):** a ρ₁₅ copy of U as a HALO against the
+  descent's classes at five colours kills **nothing** — 0 of 15,218 classes of an 8-cheat batch
+  (exact enumeration on the composed object equals the plain object's list, projection for
+  projection; 20/20 sampled classes extend by direct SAT, 10/10 with the copy side using four
+  colours). The spare-colour lemma as a halo statement: 4-colourable material attached by thin
+  chords is coloured around by the fifth colour. The copies' value is as 5-chromatic unit witnesses
+  (regime (a), T15) and as it-5 lattice material, never as cheat-killers. M52 §R3.
+
 ## §D (continued, 2026-09-01)
 
 Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and
