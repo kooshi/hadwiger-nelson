@@ -154,7 +154,7 @@ def loop(label, batch_size, max_batches, threads, conflicts, max_classes, cap, e
         cand = [e for e in standing if e not in floor and e not in done]
         if not cand:
             print(f"[cull-loop {label}] no candidates left", flush=True); break
-        b = min(batch_size, len(cand))
+        b = min(batch_size, st.get("b_max", batch_size), len(cand))   # a capped stage lowers b_max durably
         while b >= 1:
             batch = cand[:b]
             floor_arg = ",".join(f"{u}-{v}" for u, v in list(map(tuple, st["dropped"])) + batch)
@@ -173,10 +173,11 @@ def loop(label, batch_size, max_batches, threads, conflicts, max_classes, cap, e
                 print(f"[cull-loop {label}] batch {st['batches']}: b={b}, |S|={row['classes_n']} in {time.time()-t0:.0f}s, dropped {len(row['dropped'])}, kept {len(row['kept'])}; "
                       f"TOTAL dropped {len(st['dropped'])} kept {len(st['kept'])} held {len(st['held'])} of {len(standing) - len(floor)} candidates (+{len(floor)} floor)", flush=True)
                 break
-            print(f"[cull-loop {label}] batch of {b} not exact (claim {summ.get('claim')!r}, open {summ.get('open')!r}, {time.time()-t0:.0f}s) — halving", flush=True)
+            print(f"[cull-loop {label}] batch of {b} not exact (claim {summ.get('claim')!r}, {len(summ.get('open') or [])} open leaves, {time.time()-t0:.0f}s) — halving", flush=True)
             if b == 1:
                 st["held"].append(list(batch[0])); save(); break
             b //= 2
+            st["b_max"] = b; save()                       # remembered across a kill: the resume starts at the size that fit
     dropped = [tuple(e) for e in st["dropped"]]
     final_standing = [e for e in standing if e not in set(dropped)]
     print(f"[cull-loop {label}] final: standing {len(standing)} → {len(final_standing)} ({len(dropped)} dropped, {len(st['kept'])} batch-kept + {len(floor)} floor, {len(st['held'])} held); certifying one-hot at cap {cap}s …", flush=True)
