@@ -77,10 +77,11 @@ def certify(obj, standing_after, cap):
     return st, round(time.time() - t0, 1)
 
 
-def run(label, classes_path, cap, out=None):
+def run(label, classes_path, cap, out=None, do_certify=True, dropped_before=()):
     t0 = time.time()
     obj, removed = B.load_object(label)
-    standing = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
+    standing = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))
+                and tuple(e) not in set(map(tuple, dropped_before))]         # earlier batches' drops are absent
     head, body = read_classes(classes_path)
     batch = [tuple(e) for e in head["batch"] if tuple(e) in set(standing)]     # the NEW cheats this list spends
     assert batch, "the list's batch holds no standing cheat of this object"
@@ -106,12 +107,16 @@ def run(label, classes_path, cap, out=None):
         w = next((i for i, m in enumerate(masks) if m & set(K) == {j}), None)
         witnesses[f"{batch[j][0]}-{batch[j][1]}"] = w
     standing_after = [e for e in standing if e not in set(dropped)]
-    st, secs = certify(obj, standing_after, cap)
-    verdict = {"unsat": "DROPPED", "sat": "REFUSED", "unknown": "HELD"}[st]
+    if do_certify:
+        st, secs = certify(obj, standing_after, cap)
+        verdict = {"unsat": "DROPPED", "sat": "REFUSED", "unknown": "HELD"}[st]
+    else:
+        st, secs = "deferred", 0.0
+        verdict = "DROPPED-PENDING"      # sound direction re-checked by the NEXT batch's enumeration (a class with an empty violated set would refuse) and by the final certify
     row = dict(kind="cull-enum-batch", label=label, classes=classes_path, stage_fingerprint=head.get("stage_fingerprint"),
                batch=[list(e) for e in batch], classes_n=len(body), distinct_masks=len(distinct), kept=[list(e) for e in kept],
                dropped=[list(e) for e in dropped], method=method, witnesses=witnesses, certify=dict(outcome=st, secs=secs, cap=cap),
-               verdict=verdict, standing_before=len(standing), standing_after=len(standing_after) if st == "unsat" else len(standing),
+               verdict=verdict, standing_before=len(standing), standing_after=len(standing_after) if st in ("unsat", "deferred") else len(standing),
                seconds=round(time.time() - t0, 1))
     outp = Path(out) if out else (B.BUILD / f"m52-cull-{label}.jsonl")
     with outp.open("a") as f: f.write(json.dumps(row) + "\n")
@@ -121,6 +126,61 @@ def run(label, classes_path, cap, out=None):
     if st == "sat":
         print(f"[cull {label}] REFUSED: the kept set admits a separating colouring — the list was incomplete for stage {head.get('stage_fingerprint')}; nothing committed; INVESTIGATE, never retry", flush=True)
     return row
+
+
+def loop(label, batch_size, max_batches, threads, conflicts, max_classes, cap, engine):
+    """The plain-object exact cull as a LOOP of one-batch culls: pick the next `batch_size`
+    candidates (never a floor cheat, never a dropped or kept one), enumerate the stage with the
+    Rust enumerator (`--floor` = every cheat dropped so far ∪ the batch — the enumerator removes
+    the sidecar's `removed` on top), hit, drop, record; checkpoint per batch in
+    `build/m52-cull-<label>.state.json`; the sound direction is re-checked at every batch by the
+    enumeration itself (a class violating nothing refuses) and the final kept set is certified at
+    the end (one-hot here; the 3-bit re-encode is the campaign's certify). If a stage's list is not
+    exact (a capped leaf), the batch is halved and retried; a batch of one that still caps is
+    recorded as `held` and skipped. Every cheat ever dropped stays dropped (monotone)."""
+    import subprocess
+    obj, removed = B.load_object(label)
+    standing = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
+    state_p = B.BUILD / f"m52-cull-{label}.state.json"
+    st = json.loads(state_p.read_text()) if state_p.exists() else dict(dropped=[], kept=[], held=[], batches=0, witnesses={})
+    floor = set(tuple(e) for e in json.loads((B.BUILD / "m52-cull-batches.json").read_text())["floor"])
+    def save():
+        state_p.write_text(json.dumps(st))
+    for _ in range(max_batches):
+        done = set(map(tuple, st["dropped"])) | set(map(tuple, st["kept"])) | set(map(tuple, st["held"]))
+        cand = [e for e in standing if e not in floor and e not in done]
+        if not cand:
+            print(f"[cull-loop {label}] no candidates left", flush=True); break
+        b = min(batch_size, len(cand))
+        while b >= 1:
+            batch = cand[:b]
+            floor_arg = ",".join(f"{u}-{v}" for u, v in list(map(tuple, st["dropped"])) + batch)
+            out = B.BUILD / "m52-cull-enum" / label / f"batch{st['batches']:03d}-b{b}"
+            cmd = [engine, "enumerate", "--edges", str(B.BUILD / f"m51-edges-{label}.json"), "--out", str(out),
+                   "--floor", floor_arg, "--threads", str(threads), "--stretch", "60s", "--max-classes", str(max_classes),
+                   "--conflicts", str(conflicts), "--no-color"]
+            t0 = time.time(); subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            summ_p = out / "enumerate.json"
+            summ = json.loads(summ_p.read_text()) if summ_p.exists() else {}
+            if summ.get("claim") == "exact" and not summ.get("open"):
+                row = run(label, str(out / "classes.jsonl"), cap, out=B.BUILD / f"m52-cull-{label}.jsonl", do_certify=False,
+                          dropped_before=[tuple(e) for e in st["dropped"]])
+                st["dropped"] += row["dropped"]; st["kept"] += row["kept"]; st["witnesses"].update(row["witnesses"]); st["batches"] += 1
+                save()
+                print(f"[cull-loop {label}] batch {st['batches']}: b={b}, |S|={row['classes_n']} in {time.time()-t0:.0f}s, dropped {len(row['dropped'])}, kept {len(row['kept'])}; "
+                      f"TOTAL dropped {len(st['dropped'])} kept {len(st['kept'])} held {len(st['held'])} of {len(standing) - len(floor)} candidates (+{len(floor)} floor)", flush=True)
+                break
+            print(f"[cull-loop {label}] batch of {b} not exact (claim {summ.get('claim')!r}, open {summ.get('open')!r}, {time.time()-t0:.0f}s) — halving", flush=True)
+            if b == 1:
+                st["held"].append(list(batch[0])); save(); break
+            b //= 2
+    dropped = [tuple(e) for e in st["dropped"]]
+    final_standing = [e for e in standing if e not in set(dropped)]
+    print(f"[cull-loop {label}] final: standing {len(standing)} → {len(final_standing)} ({len(dropped)} dropped, {len(st['kept'])} batch-kept + {len(floor)} floor, {len(st['held'])} held); certifying one-hot at cap {cap}s …", flush=True)
+    stc, secs = certify(obj, final_standing, cap)
+    st["final_certify"] = dict(outcome=stc, secs=secs, cap=cap, standing=len(final_standing)); save()
+    print(f"[cull-loop {label}] FINAL certify {stc.upper()} {secs}s — standing {len(standing)} → {len(final_standing)}"
+          + ("" if stc == "unsat" else "  (NOT a verdict: " + ("REFUSED — investigate" if stc == "sat" else "unknown at cap") + ")"), flush=True)
 
 
 def self_test():
@@ -159,9 +219,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--object"); ap.add_argument("--classes"); ap.add_argument("--cap", type=float, default=3600.0)
     ap.add_argument("--out", default=None); ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--loop", action="store_true"); ap.add_argument("--batch-size", type=int, default=8)
+    ap.add_argument("--max-batches", type=int, default=1000); ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--conflicts", type=int, default=40_000_000); ap.add_argument("--max-classes", type=int, default=2_000_000)
+    ap.add_argument("--engine", default=str(Path.home() / "source/descent-engine/target/release/descent"))
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    if a.loop:
+        return loop(a.object, a.batch_size, a.max_batches, a.threads, a.conflicts, a.max_classes, a.cap, a.engine)
     run(a.object, a.classes, a.cap, a.out)
 
 
