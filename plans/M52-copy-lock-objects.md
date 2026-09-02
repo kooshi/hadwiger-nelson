@@ -800,3 +800,18 @@ costs one sort per probe, and its range is no longer quoted as general (a G21 on
 planner's own catch after my corroboration). A4 stays reference-free with `cull_enum`'s kept set
 reported beside it as a second upper bound, never gated on: two 1-minimal sets of one object can
 differ and both be right.*
+
+## §12′. The server gate's first real data point (2026-09-02, from WO-14's A4)
+
+WO-14's deletion pass at twelve workers accepted one drop every ~1.9 minutes regardless of the
+worker count: **a refutation computed against a stale snapshot licenses nothing, so accepted drops
+are strictly sequential, and in a drop-heavy phase width buys no wall clock at all** while costing
+`W` times the processor seconds. §9's projection divided the probe count by the workers, and the
+drop half does not divide. This is the efficiency-before-compute rule (§13) meeting a live
+measurement: the 128-core server would have bought this phase NOTHING. The repair is
+algorithmic and cheap — same-snapshot refutations unioned into one fresh chunk ask, one acceptance
+carrying many drops (exactly what `cull_enum --loop` does with its batches: one refutation, eight to
+sixteen drops) — and was ruled built the same hour. **The gate's cost model, corrected:** a phase's
+server saving is the saving on its PARALLEL part only; every sequential acceptance chain must be
+turned into a chunk chain before a core count means anything. The chunk-size law (acceptances per
+wall-hour against chunk size, measured on A4's own journal) is the number the gate now wants.
