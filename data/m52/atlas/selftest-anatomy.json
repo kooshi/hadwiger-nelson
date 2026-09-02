@@ -1,0 +1,332 @@
+{
+ "kind": "atlas",
+ "label": "selftest-anatomy",
+ "fingerprint": "a7415246890a82d4",
+ "n": 427,
+ "live": 427,
+ "unit_exact": 2011,
+ "census": {
+  "verified": 2011,
+  "rejected": 0,
+  "recovered": 0
+ },
+ "cheats_standing": 446,
+ "ladder": {
+  "half_twist_deg": 16.778654880960357,
+  "theta15_deg": 28.95502437185985,
+  "on": 2008,
+  "off": 3,
+  "histogram": {
+   "-1,0": 401,
+   "-1,1": 401,
+   "0,0": 210,
+   "0,1": 210,
+   "1,0": 393,
+   "1,1": 393
+  },
+  "off_edges": [
+   {
+    "edge": [
+     40,
+     254
+    ],
+    "kinds": [
+     "seed",
+     "copy"
+    ],
+    "angle": -2.3011426950304337
+   },
+   {
+    "edge": [
+     210,
+     423
+    ],
+    "kinds": [
+     "seed",
+     "copy"
+    ],
+    "angle": -45.522487814070075
+   },
+   {
+    "edge": [
+     211,
+     424
+    ],
+    "kinds": [
+     "seed",
+     "copy"
+    ],
+    "angle": -105.52248781407008
+   }
+  ]
+ },
+ "rings": {
+  "206": {
+   "distinct_r2": 161,
+   "top": [
+    {
+     "r2": 1.0,
+     "r": 1.0,
+     "count": 10,
+     "exact": "(-1)/-1",
+     "kinds": {
+      "seed": 5,
+      "copy": 5
+     }
+    },
+    {
+     "r2": 5.0,
+     "r": 2.23606797749979,
+     "count": 8,
+     "exact": "(-5)/-1",
+     "kinds": {
+      "seed": 4,
+      "copy": 4
+     }
+    },
+    {
+     "r2": 3.0,
+     "r": 1.7320508075688772,
+     "count": 8,
+     "exact": "3",
+     "kinds": {
+      "seed": 4,
+      "copy": 4
+     }
+    },
+    {
+     "r2": 7.0,
+     "r": 2.6457513110645907,
+     "count": 8,
+     "exact": "7",
+     "kinds": {
+      "seed": 4,
+      "copy": 4
+     }
+    },
+    {
+     "r2": 9.914854215512676,
+     "r": 3.148786149536465,
+     "count": 6,
+     "exact": null,
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 4.0,
+     "r": 2.0,
+     "count": 6,
+     "exact": "(-4)/-1",
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 6.085145784487324,
+     "r": 2.4668088260923917,
+     "count": 6,
+     "exact": null,
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 2.085145784487324,
+     "r": 1.4440033879764007,
+     "count": 6,
+     "exact": null,
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 5.914854215512676,
+     "r": 2.432047330031362,
+     "count": 6,
+     "exact": null,
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 0.08514578448732378,
+     "r": 0.2917975059648793,
+     "count": 6,
+     "exact": "(-6 + 1\u221a33)/-3",
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 3.914854215512676,
+     "r": 1.9785990537531035,
+     "count": 6,
+     "exact": null,
+     "kinds": {
+      "seed": 3,
+      "copy": 3
+     }
+    },
+    {
+     "r2": 3.457427107756338,
+     "r": 1.8594157974364793,
+     "count": 4,
+     "exact": null,
+     "kinds": {
+      "seed": 2,
+      "copy": 2
+     }
+    }
+   ]
+  }
+ },
+ "chords": [
+  {
+   "edge": [
+    40,
+    254
+   ],
+   "kind": "self",
+   "copy": "206p",
+   "source": 40,
+   "r_p": 2.0,
+   "r_q": 2.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": false
+  },
+  {
+   "edge": [
+    206,
+    259
+   ],
+   "kind": "cross",
+   "copy": "206p",
+   "source": 45,
+   "r_p": 0.0,
+   "r_q": 1.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": true
+  },
+  {
+   "edge": [
+    206,
+    383
+   ],
+   "kind": "cross",
+   "copy": "206p",
+   "source": 169,
+   "r_p": 0.0,
+   "r_q": 1.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": true
+  },
+  {
+   "edge": [
+    206,
+    387
+   ],
+   "kind": "cross",
+   "copy": "206p",
+   "source": 173,
+   "r_p": 0.0,
+   "r_q": 1.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": true
+  },
+  {
+   "edge": [
+    206,
+    425
+   ],
+   "kind": "cross",
+   "copy": "206p",
+   "source": 212,
+   "r_p": 0.0,
+   "r_q": 1.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": true
+  },
+  {
+   "edge": [
+    206,
+    426
+   ],
+   "kind": "cross",
+   "copy": "206p",
+   "source": 213,
+   "r_p": 0.0,
+   "r_q": 1.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": true
+  },
+  {
+   "edge": [
+    210,
+    423
+   ],
+   "kind": "self",
+   "copy": "206p",
+   "source": 210,
+   "r_p": 2.0,
+   "r_q": 2.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": false
+  },
+  {
+   "edge": [
+    211,
+    424
+   ],
+   "kind": "self",
+   "copy": "206p",
+   "source": 211,
+   "r_p": 2.0,
+   "r_q": 2.0,
+   "collinear": true,
+   "p_seed_field": true,
+   "q_seed_field": true,
+   "p_kind": "seed",
+   "q_kind": "seed",
+   "centre_neighbour": false
+  }
+ ],
+ "symmetries": [],
+ "dps": 40,
+ "seconds": 2.5,
+ "claim_scope": "exact points from provenance at dps digits; ladder membership at 1e-(dps-15) deg; PSLQ identifications are numeric (maxcoeff 1e6/1e8), a census not a proof"
+}

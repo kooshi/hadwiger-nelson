@@ -144,6 +144,18 @@ open HadwigerNelson
 #print axioms HadwigerNelson.two_pow_le_card_coloring
 #print axioms HadwigerNelson.spareColorings_eq_last_iff
 #print axioms HadwigerNelson.not_colorable_of_card_coloring_lt
+-- M52: the copy construction — the spindle rotation, the self-chord law, the copy union (Copy.lean)
+#print axioms HadwigerNelson.Copy.spindleRot_two
+#print axioms HadwigerNelson.Copy.spindleRot_sqrt3
+#print axioms HadwigerNelson.Copy.normSq_spindleRot
+#print axioms HadwigerNelson.Copy.norm_one_sub_spindleRot
+#print axioms HadwigerNelson.Copy.dist_self_rotAbout
+#print axioms HadwigerNelson.Copy.isometry_rotAbout
+#print axioms HadwigerNelson.Copy.self_chord_iff
+#print axioms HadwigerNelson.Copy.le_copyUnion_comap_inl
+#print axioms HadwigerNelson.Copy.le_copyUnion_comap_inr
+#print axioms HadwigerNelson.Copy.copyUnion_adj_inl_inr
+#print axioms HadwigerNelson.Copy.chromaticNumber_copyUnion_le
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
