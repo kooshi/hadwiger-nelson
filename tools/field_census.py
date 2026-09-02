@@ -36,7 +36,7 @@ def main(label: str, dps: int = 60):
     print(f"[field] object {label} n={obj.n}; seed-pair radicand catalogue: {len(cat)} values ({time.time()-t0:.0f}s)", flush=True)
     depth = {}
     for i, rec in enumerate(obj.prov):
-        depth[i] = 0 if rec[0] == "seed" else 1 + max(depth[rec[1]], depth[rec[2]])
+        depth[i] = 0 if rec[0] == "seed" else (depth[rec[2]] if rec[0] == "rot" else 1 + max(depth[rec[1]], depth[rec[2]]))
     def in_cat_numerically(r):
         for c in cat:
             if abs(r - c) < mp.mpf(10) ** -40:
@@ -49,6 +49,10 @@ def main(label: str, dps: int = 60):
     kinds = collections.Counter(); by_depth = collections.defaultdict(collections.Counter)
     new_vals = []
     for i in range(214, obj.n):
+        if obj.prov[i][0] == "rot":
+            # a rotated copy adjoins √15 once (ρ₁₅ = (7 + i√15)/8) to its source's field — no radicand
+            kinds["rotation-sqrt15"] += 1; by_depth[depth[i]]["rotation-sqrt15"] += 1
+            continue
         _, a, b, _ = obj.prov[i]
         r = radicand(a, b)
         if a < 214 and b < 214:

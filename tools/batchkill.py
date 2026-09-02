@@ -111,14 +111,34 @@ class Obj:
         self._halo_struct = None
         return self.n - 1
 
+    def add_rot(self, centre: int, source: int, sign: int) -> int:
+        """Append the image of point `source` under the distance-2 spindle rotation about point
+        `centre` (cos 7/8, sin ±√15/8 — de Grey's ρ₁₅; M52 D9: a copy is one more recipe
+        constructor, exact by construction). The centre's own image IS the centre: returns
+        `centre` without appending (the quotient by coincidence, M52 §Bʹ). Any OTHER coincidence
+        is the caller's to detect and refuse (`tools/compose.py`)."""
+        assert 0 <= centre < self.n and 0 <= source < self.n and sign in (1, -1)
+        assert centre not in self.deleted and source not in self.deleted, "copies are of LIVE points"
+        if source == centre:
+            return centre
+        self.pts.append(_rot_xy(self.pts[centre], self.pts[source], sign))
+        self.prov.append(("rot", centre, source, sign))
+        self._unit = None
+        self._halo_struct = None
+        return self.n - 1
+
     def add_halo(self, prov_list) -> list[int]:
         """Append a halo given as provenance records whose parent indices refer to THIS object's
         current indexing extended by the halo's own earlier entries (§Bʹ: append-only DAG)."""
         out = []
         for rec in prov_list:
             kind, a, b, s = rec
-            assert kind == "glue"
-            out.append(self.add_glue(a, b, s))
+            if kind == "glue":
+                out.append(self.add_glue(a, b, s))
+            elif kind == "rot":
+                out.append(self.add_rot(a, b, s))
+            else:
+                raise AssertionError(("unknown provenance kind", kind))
         return out
 
     def halo_structure(self):
@@ -154,6 +174,9 @@ class Obj:
                                    + mp.mpf(b.numerator) / b.denominator * mp.sqrt(11)) / 12,
                                   (mp.mpf(c_.numerator) / c_.denominator
                                    + mp.mpf(d_.numerator) / d_.denominator * mp.sqrt(33)) / 12)
+            elif rec[0] == "rot":
+                _, c, src, sgn = rec
+                exact[i] = exact[c] + _rot_mp(sgn, mp) * (exact[src] - exact[c])
             else:
                 _, a, b, sgn = rec
                 u, v = exact[a], exact[b]
@@ -178,6 +201,9 @@ class Obj:
                                    + mp.mpf(b.numerator) / b.denominator * mp.sqrt(11)) / 12,
                                   (mp.mpf(c_.numerator) / c_.denominator
                                    + mp.mpf(d_.numerator) / d_.denominator * mp.sqrt(33)) / 12)
+            elif rec[0] == "rot":
+                _, c, src, s = rec
+                exact[i] = exact[c] + _rot_mp(s, mp) * (exact[src] - exact[c])
             else:
                 _, a, b, s = rec
                 u, v = exact[a], exact[b]
@@ -205,6 +231,22 @@ def _glue_xy(p, q, sign):
     d = math.sqrt(d2)
     return ((p[0] + q[0]) / 2 - sign * h * (q[1] - p[1]) / d,
             (p[1] + q[1]) / 2 + sign * h * (q[0] - p[0]) / d)
+
+
+RHO15_COS, RHO15_SIN = 7 / 8, math.sqrt(15) / 8   # the distance-2 spindle rotation, exact: cos 7/8
+
+
+def _rot_xy(c, p, sign):
+    """Float image of `p` under rotation about `c` by ρ₁₅^sign (exact recipe; floats for display
+    and the unit census, the certify re-derives at 250 digits)."""
+    dx, dy = p[0] - c[0], p[1] - c[1]
+    s = sign * RHO15_SIN
+    return (c[0] + RHO15_COS * dx - s * dy, c[1] + s * dx + RHO15_COS * dy)
+
+
+def _rot_mp(sign, mp):
+    """ρ₁₅^sign at the current mpmath precision: (7 ± i√15)/8."""
+    return mp.mpc(mp.mpf(7) / 8, sign * mp.sqrt(15) / 8)
 
 
 def _cross_unit_nbrs(pts, obj_pts, deleted, tol: float = TOL, h: float = 0.25):
@@ -1858,8 +1900,13 @@ def load_object(label: str) -> tuple[Obj, list]:
     obj = Obj()
     for rec in d["prov"]:
         kind, a, b, sgn = rec
-        assert kind == "glue"
-        obj.add_glue(a, b, sgn)
+        if kind == "glue":
+            obj.add_glue(a, b, sgn)
+        elif kind == "rot":
+            idx = obj.add_rot(a, b, sgn)
+            assert idx == obj.n - 1, ("a rot record for the centre itself is never written", rec)
+        else:
+            raise AssertionError(("unknown provenance kind in object file", rec))
     removed = [tuple(e) for e in d["removed"]]
     assert obj.n == d["n"]
     if d.get("deleted"):
