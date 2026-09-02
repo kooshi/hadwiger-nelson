@@ -1,0 +1,68 @@
+{
+ "kind": "rank-copies",
+ "batch": [
+  [
+   4,
+   90
+  ],
+  [
+   4,
+   159
+  ],
+  [
+   4,
+   205
+  ],
+  [
+   4,
+   208
+  ],
+  [
+   0,
+   55
+  ],
+  [
+   0,
+   93
+  ],
+  [
+   0,
+   111
+  ],
+  [
+   0,
+   132
+  ]
+ ],
+ "plain_classes": 15218,
+ "rows": {
+  "it4+206p": {
+   "classes": 15218,
+   "killed": 0,
+   "kill_fraction": 0.0,
+   "survivors_hitting_set": [
+    [
+     4,
+     90
+    ],
+    [
+     4,
+     159
+    ],
+    [
+     4,
+     205
+    ],
+    [
+     4,
+     208
+    ]
+   ],
+   "kept_if_batch": 4,
+   "method": "milp",
+   "points": null,
+   "unique_kills_vs_others": 0
+  }
+ },
+ "claim_scope": "exact set differences of exact class lists; kill = no extension to the composed object exists"
+}
