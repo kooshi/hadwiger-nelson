@@ -1,0 +1,24 @@
+{
+  "_comment": "Q8 transform recipes — apply with tools/copy_probe.py resolve(name, pts, live). Rotation is EXACT: cos = 7/8, sin = sign*sqrt(15)/8 (the d=2 spindle angle 2*arcsin(1/4) = 28.9550 deg, de Grey's rho15). Fusion tolerance 1e-7. U = unit part of the base object with its deleted vertices removed.",
+  "base_objects": {
+    "it3-era (Q8 discovery base)": {"file": "m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28.json", "fingerprint": "d6460615c957e19f", "n": 1862, "live": 1834, "unit": 12735},
+    "it4-committed": {"file": "m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1.json", "fingerprint": "f0871bab2b915b4f", "n": 1981, "live": 1953, "unit": 13796}
+  },
+  "refusing_unions_on_it3_era_base": [
+    {"name": "rot-d2-about206-+28.9550", "centre_vertex": 206, "sign": "+", "n": 3695, "unit_edges": 25486, "cross_chords": 34, "fused": 1,
+     "verdicts": {"k4": "UNSAT (one-hot+breaking 6.8s; one-hot no-break; 2-bit)", "chords": "all 34 unit to 250 digits, worst 4.4e-251"},
+     "load_bearing_chords": [[225, "copy(423)"], [243, "copy(424)"], [423, "copy(225)"], [424, "copy(243)"]]},
+    {"name": "rot-d2-about206--28.9550", "centre_vertex": 206, "sign": "-", "verdicts": {"k4": "UNSAT"}},
+    {"name": "rot-d2-aboutv0-+28.9550 / --28.9550", "centre": "origin (v0)", "cross_chords": 58, "verdicts": {"k4": "UNSAT both signs, two encodings, 717s; chords unit to 250 digits; no single load-bearing chord (0 of 58)"}},
+    {"name": "multi:rot-d2-about206-+28.9550|rot-d2-about206--28.9550|rot-d2-aboutv0-+28.9550|rot-d2-aboutv0--28.9550",
+     "n": 9194, "unit_edges": 63770, "cross_chords": 189, "fused": 4,
+     "verdicts": {"k4": "UNSAT 15.2s", "k5_all_cheats": "UNSAT 539s", "k5_zero_cheats_jackpot": "SAT 4704s (no jackpot; single copy took 116s: ~40x hardness)"}}
+  ],
+  "refusing_unions_on_it4_committed_base": [
+    {"name": "rot-d2-about206-+28.9550", "cross_chords": 36, "verdicts": {"k4": "UNSAT 6.3s"}},
+    {"name": "rot-d2-aboutv0-+28.9550", "cross_chords": 64, "verdicts": {"k4": "UNSAT 4.2s"}}
+  ],
+  "core": {"file": "m51-copycore-about206-graph.json", "points": 883, "composition": "434 original (102 seed + 332 halo at depths 1:154/2:103/3:60/4:15) + 449 copy", "unit_edges": 4625, "cross_chords": 20, "status": "1-minimal, 0 unknown, 3412 asks, control UNSAT"},
+  "lock_centre_map": {"seed": "176 of 186 live seed vertices lock (non-locking both signs: 79,127,129,130,174,190,199,203,205,208)", "halo": "818 of 1648 lock; signs never disagree; depth-1 locks 308:68; degree median 15 vs 10"},
+  "controls": "perturbed angles (+-0.3,+-1,+5 deg) SAT with only the 18 angle-independent chords; Moser angle SAT everywhere; seed/it-1/it-2 unit parts SAT at the rho15 angle; it-3 pre-deletion (1862) UNSAT — the lock arrived with iteration 3's depth-2 halo"
+}

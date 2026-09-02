@@ -329,9 +329,13 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   glue points {225, 423}, {243, 424} at distance 1/√3 (the two-circle inner radius), 225–243 and
   423–424 at √3. **[measured; `tools/copy_probe.py`, `copy_verify.py`, `copy_exact.py`]**
 * **It is a property of the material, not of a centre.** The same angle about the four
-  load-bearing halo points (his autocomplete's suggestion) locks with MORE chords (48–52); about
-  every live seed vertex tried, 225 of 241 asks lock (chords 13–61; non-locking: seed 79, 127,
-  129, 130). **[measured; `tools/copy_centres.py`]**
+  load-bearing halo points (his autocomplete's suggestion) locks with MORE chords (48–52); the
+  full sweeps: **176 of 186 live seed vertices lock** (380 asks, 0 unknown; non-locking both
+  signs: 79, 127, 129, 130, 174, 190, 199, 203, **205** — the forced pair's other endpoint,
+  while 206 locks — and 208) and **818 of 1,648 halo points lock** (3,296 asks, 0 unknown; the
+  two signs NEVER disagree; depth-1 locks 308:68, degree median 15 vs 10) — a map of where the
+  depth-2 fabric is 4-tight. **[measured; `tools/copy_centres.py`; final numbers in
+  `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`]**
 * **Controls (`tools/copy_controls.py`).** The angle perturbed by ±0.3°, ±1°, +5°: chords fall to
   the 18 angle-independent ones and the union is SAT. The Moser angle (√3) with hundreds to
   thousands of chords: SAT on every object. The seed's unit part alone, iteration 1 (690) and
@@ -349,8 +353,11 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   not a pair spindle; it is disjunctive, as G16 is.
 * **What it does to the dial (Kooshi's question).** Floor census on X ∪ R₂₀₆(U): of the 39 floor
   cheats, 0 redundant alone, 36 essential, 3 unknown ((118,212), (126,203), (132,134)); the jackpot
-  ask (zero cheats) SAT; the composed four-copy union (9,194 points, 189 chords) k = 4 UNSAT in
-  15 s, its k = 5 asks pending. The joint counts — the delta-debugging cull over all 298 cheats
+  ask (zero cheats) SAT; the composed four-copy union (9,194 points, 63,770 unit edges, 189
+  chords) k = 4 UNSAT in 15 s, k = 5 all-cheats control UNSAT 539 s, and its zero-cheat jackpot
+  ask **SAT at 4,704 s** (no χ ≥ 6; ~40× harder than the single copy's 116 s — a hardness
+  reading, not a verdict); the endpoint census: 0 of 184 seed vertices deletable alone, plain
+  and copied alike. The joint counts — the delta-debugging cull over all 298 cheats
   with and without the copy, the cheat-endpoint census with and without — are running; results
   land in this entry. **What it changes strategically:** the χ(unit-part) 4 → 5 crossing (T7)
   is manufactured rather than awaited, so K1's obstruction (a 4-colourable unit part carries no
@@ -358,6 +365,12 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   the unit material become possible for the first time — the 6-hunt's Act One has a stage
   (G19). Adopting the copy as object material needs a provenance dialect for rotated points
   (Python `Obj` + the Rust readers, D38) — a work order.
-* **Certification path (HALT-AND-CERTIFY):** vertex core (running; 3,695 → ~1,300 in 25 min) →
-  field inventory of the core's glue-point radicands → exact geometry in the tower → the M42
-  LRAT template at k = 4.
+* **Certification path (HALT-AND-CERTIFY):** the vertex core is DONE — **883 points**
+  (434 original: 102 seed + 332 halo; 449 copy), 4,625 unit edges, 20 cross chords, 1-minimal
+  at 0 unknown over 3,412 asks — a distributed, de Grey-like refutation; its provenance closure
+  adjoins **24 distinct radicands** (18 catalogue + 6 new roots), so the certificate's geometry
+  is per-edge compositums (+ 588 parent chords free by `Glue.lean`) feeding the M42 LRAT
+  template at k = 4. Priced, not started. **The lock survives the it-4 commit** (monotonicity
+  measured: 36 chords UNSAT 6.3 s about 206; 64 chords UNSAT 4.2 s about v0 on the 1,981-point
+  object). Full object cards + machine-readable recipes: `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`,
+  `data/m51/q8-transforms.json`.

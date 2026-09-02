@@ -1403,3 +1403,22 @@ log showed 144 erased-not-reprobed unknowns (the reset-order bug, `f87df83`) —
 forcing on the plain object, one-shot control UNSAT) stands; both culls relaunched fixed at 3M/30M
 conflict budgets. Next: columns on the new object (χ(unit) monitor = halt clause), it-5 floor, the
 composed-object cull (the new object + every locking copy) against the plain new object as control.*
+
+*2026-09-02 12:30Z — CONTEXT LOSS + RECOVERY; KOOSHI'S IT-5 REDIRECTION.* The main session was
+auto-compacted TWICE (a model switch on a harness that could not yet load the model), losing the
+2026-09-01 measurement narrative from working memory; recovered in full from the session transcript
+and written durably: `plans/Q8-FIVE-CHROMATIC-OBJECTS.md` (the object cards with every final
+number), `data/m51/` (a TRACKED snapshot directory: the five-object provenance chain, the 883-point
+core graph, the it-4/it-5 floor artifacts, the exact transform recipes — the first time the descent
+chain has lived anywhere but the gitignored `build/` on one faulty-history machine; refresh at every
+iteration commit). **Kooshi's directives (his 11:31Z message):** (1) stop the floor census —
+already complete before the message (it-5 floor: 27 of 273 essential, 0 unknown, 2,657 s; verdicts
+now in `data/m51/m51-floor-it5-verdicts.jsonl`), nothing running to stop, and **no it-5 machinery
+runs on the plain object: iteration 5 begins from the STRONGEST COMPOSED OBJECT of what we now
+hold, found first** — the composed-cull evaluation is now the campaign's front; (2) the 128-core
+server runs **Arch** (glibc current) — the WO-3 static-musl courier loses its motivation (the
+native binary runs as-is), a from-scratch replan is authorized; (3) the WO-3 segfault is ruled
+**software** (his words: not the shape of this machine's fault) — the halt lifts, the engineer
+debugs to root cause per its isolation plan. Culls at the redirection: plain (old object) pass 2 at
+30M conflicts, kept 184 / necessary 53 / probing 131 unknowns; copy (old object) pass 1, kept 203,
+probing 153.*
