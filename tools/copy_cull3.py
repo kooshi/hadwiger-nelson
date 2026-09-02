@@ -88,6 +88,7 @@ def main():
     # checkpoint keyed by (label, tname); the pre-2026-09-02 name (tname only) is kept for the
     # original it-4-input object so its running culls' checkpoints stay addressable.
     _key = tname if label == "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28" else f"{label}-{tname}"
+    _key = _key.replace(":", "_").replace("|", "--")   # multi tnames carry ':' and '|'; keep filenames shell-safe
     ckp = BUILD / f"m51-copycull-{_key}.jsonl"
     kept = list(cheats); necessary = {}; unknowns = set()
     if ckp.exists():
