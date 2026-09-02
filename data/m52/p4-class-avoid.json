@@ -7,16 +7,16 @@
    "encoding": "onehot",
    "n_instances": 5470,
    "outcome": "unsat",
-   "seconds": 0.13,
+   "seconds": 0.12,
    "cap": 1800,
    "binary": "unsat"
   },
   "sqrt3": {
-   "instances": 0,
+   "instances": 10288,
    "encoding": "onehot",
-   "n_instances": 0,
+   "n_instances": 10288,
    "outcome": "sat",
-   "seconds": 0.16,
+   "seconds": 0.11,
    "cap": 1800
   }
  }

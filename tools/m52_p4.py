@@ -8,17 +8,19 @@ label="S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1"
 obj,_=B.load_object(label); ue=obj.unit_edges(); live=[i for i in range(obj.n) if i not in obj.deleted]
 mp.mp.dps=40; ex=obj.mp_values(40)
 P=np.array(obj.pts); tree=cKDTree(P[live]); lv=np.array(live)
-def pairs_at(d):
+def pairs_at(d, d_exact):
+    """pairs at float distance d (1e-6 screen) confirmed at 30 digits against the EXACT d_exact
+    (a float sqrt(3) compared at 1e-30 finds nothing — the first run's slip, caught by the ring census)"""
     out=[]
     for i,j in tree.query_pairs(d+1e-6):
         a,b=int(lv[i]),int(lv[j])
         if abs(np.linalg.norm(P[a]-P[b])-d)<1e-6:
             D=ex[a]-ex[b]
-            if abs(mp.sqrt((D*mp.conj(D)).real)-d)<mp.mpf(10)**-30: out.append((a,b))
+            if abs(mp.sqrt((D*mp.conj(D)).real)-d_exact)<mp.mpf(10)**-30: out.append((a,b))
     return sorted(out)
 res={}
-for name,d in (("d2",2.0),("sqrt3",math.sqrt(3))):
-    inst=pairs_at(d)
+for name,d,de in (("d2",2.0,mp.mpf(2)),("sqrt3",math.sqrt(3),mp.sqrt(3))):
+    inst=pairs_at(d,de)
     t0=time.time(); row=rigidity.class_avoid(obj.n, ue, 4, inst, cap=1800)
     print(f"[P4] class {name}: {len(inst)} exact pairs among {len(live)} live points; avoid-all at k=4: {row['outcome'].upper()} ({time.time()-t0:.0f}s)", flush=True)
     res[name]=dict(instances=len(inst), **{k:v for k,v in row.items() if k!='colours'})
