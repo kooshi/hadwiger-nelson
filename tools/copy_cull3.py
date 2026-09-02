@@ -159,8 +159,12 @@ def main():
             print(f"[cull3] CORE JUMP -> kept {len(kept)} ({dt2:.0f}s confirm)", flush=True)
     # 1) probe rounds
     for budget_pass in (budget, budget * 10):
-        cand = [e for e in kept if e not in necessary and e not in unknowns]
-        unknowns = set() if budget_pass != budget else unknowns
+        if budget_pass == budget:
+            cand = [e for e in kept if e not in necessary and e not in unknowns]
+        else:
+            cand = [e for e in kept if e in unknowns]   # exactly the accumulated unknowns, re-probed
+            unknowns = set()
+        print(f"[cull3] pass @{budget_pass}: probing {len(cand)} candidates", flush=True)
         while cand:
             cand = [e for e in cand if e in kept and e not in necessary]
             batch, cand = cand[:workers], cand[workers:]
