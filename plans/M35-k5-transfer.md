@@ -124,7 +124,7 @@ exists at any period is itself a fresh question.
   banked; re-rank at close.
 * A fired class that fails its re-encode: instrument catastrophe protocol
   (halt, extend self-tests, rerun).
-* Any segfault: HALT and report (standing).
+* Any crash: HALT and report (standing).
 
 ---
 
@@ -417,7 +417,7 @@ reported as probed ceilings, exactly as M33's failure clauses were.
 Desktop (32 cores, 128 GB). Builds ONLY through `./scripts/build.sh`; Lean
 iteration via `lake env lean` never concludes green. One heavy JOB at a time;
 the standing WITHIN-tool parallelism rule (threads ≤ cores − 2, RAM-bounded).
-`python3 -u` for background runs, no pipes on task output. Any segfault: HALT
+`python3 -u` for background runs, no pipes on task output. Any crash: HALT
 and report to Kooshi. Every mid-milestone experiment beyond this list
 registers a §0-addendum BEFORE running (the M32/M33/M34 pattern). The
 statement-reading gate runs at close on every headline statement; C1's

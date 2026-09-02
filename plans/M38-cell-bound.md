@@ -102,7 +102,7 @@ is attained on the window and the coarse-cell chromatic number is exactly seven.
 * If the window arithmetic needs `Real.sqrt 3` in an awkward place, state the
   conditions in squared form (`(1−p)² < p²·Q < (1+p)²`) — radical-free, as M37's
   gap lemma already is.
-* Any segfault: HALT and report to Kooshi (standing).
+* Any crash: HALT and report to Kooshi (standing).
 
 
 ---

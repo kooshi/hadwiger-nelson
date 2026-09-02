@@ -406,7 +406,7 @@ tools-side):
 * A removal is a claim only after the three checks of §0.
 * **Jackpot: HALT AND VERIFY**, verbatim as registered.
 * **P4b's failure is a finding (a seam-field 5-chromatic UDG), not an error**: HALT and verify.
-* Segfault from any process: HALT and report (standing rule).
+* Crash from any process: HALT and report (standing rule).
 
 ## §4. Practical notes
 

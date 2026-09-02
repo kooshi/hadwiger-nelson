@@ -113,7 +113,7 @@ advance.
 * The union goes 4-colourable at every affordable size: THE two-act
   assembly reading (G15's remaining [reading] half) is refuted for this
   pigeonhole — a first-class finding; report and re-rank.
-* Any segfault, any process: HALT and report to Kooshi (standing).
+* Any crash, any process: HALT and report to Kooshi (standing).
 
 ## Deliverables
 
@@ -376,7 +376,7 @@ Desktop (32 cores, 128 GB). Builds ONLY through `./scripts/build.sh`
 before choosing batch width. One heavy job at a time (a certificate
 build IS a heavy job); the standing parallelism rule applies WITHIN a
 tool run (the union SAT sweeps thread-pool at cores − 2). `python3 -u`
-for background runs, no pipes on task output. Segfault, any process:
+for background runs, no pipes on task output. Crash, any process:
 HALT and report to Kooshi. Lean iteration via `lake env lean` never
 concludes a module green (autoImplicit trap). Predictions above are
 committed before the first solver call and the first `lake` invocation

@@ -185,7 +185,7 @@ def _machine() -> str:
 
 # ------------------------------------------------------- resumption after a crash
 #
-# This machine has an intermittent hardware fault (SIGSEGV under sustained parallel load), so a
+# This machine has an intermittent hardware fault (unexplained process deaths under sustained parallel load), so a
 # multi-hour phase WILL sometimes die mid-run. Neither mechanism below changes a single question
 # asked or answer recorded -- they only stop a crash from discarding work already paid for. Both
 # are keyed by the stage fingerprint, so a cache can never be read against a different object.

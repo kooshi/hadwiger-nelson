@@ -90,7 +90,7 @@ and is instrument catastrophe).
 * If the SAT instances are too large at fine scales, report the scale reached
   and treat the rest as unprobed — never as refused (`unknown ≥ cap` is not a
   claim).
-* Any segfault: HALT and report to Kooshi (standing).
+* Any crash: HALT and report to Kooshi (standing).
 
 
 ## §0e — Mid-milestone addendum (2026-08-12, registered before the run)

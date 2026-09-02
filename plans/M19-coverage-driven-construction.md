@@ -337,7 +337,7 @@ headline set (the inner-chord classification loses its target).
 
 ## 5. Operational rules in force (unchanged, recorded in CLAUDE.md)
 
-All builds through `scripts/build.sh`; on any segfault halt and report immediately; one
+All builds through `scripts/build.sh`; on any crash halt and report immediately; one
 heavy job at a time; write-up and `lean4checker` replays deferred indefinitely (publication
 gates); `tools/` untrusted; a `minCov = 5` reading becomes a claim only through M16's
 kernel route.

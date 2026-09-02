@@ -228,7 +228,7 @@ soundness argument:
 * Any k ≤ 6 SAT: the P6 halt-and-verify clause, verbatim, before interpretation.
 * Boundary scales (T² at a threshold) belong to no band and are never probed.
 * Shrink caps: a core that exceeds its cap reports "≤ size, NOT 1-minimal".
-* Any segfault, any process: HALT and report to Kooshi (hardware, standing).
+* Any crash, any process: HALT and report to Kooshi (hardware, standing).
 * One heavy job at a time; heavy escalations (balls R ≥ 18 at k = 6, skew
   determinants ≥ 48, rectangular > 36) are DESKTOP work — ask which machine with
   the measured wall in hand before provisioning.

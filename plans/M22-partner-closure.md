@@ -86,7 +86,7 @@ nothing here is a claim until the kernel route re-derives it.
   (identity by (name, n, n_edges) for pre-sha artifacts, printed); cost one 155 s
   closure reload. The promoted `--kills` subcommand carries the fallback and a
   regression fixture for it.
-* No OOM, no segfault; caps and controls held on every other run (partner-off-circle
+* No OOM, no crash; caps and controls held on every other run (partner-off-circle
   asserts, planted glue-point control, k=3 controls, free-relaxation SAT control —
   60/60, corpus re-solve control — 0 drift).
 
@@ -298,7 +298,7 @@ exact-confirmation requests beyond the affordable count.
   kernel certification of kills (deferred until a claim needs one); closure
   generations ≥ 3 (measured pointless at the pair: the fork does not move).
 * Standing: writeups/upstreaming deferred (2026-08-04); `lean4checker` a publication
-  gate; builds via `scripts/build.sh` only; segfault ⇒ halt and report; one heavy job
+  gate; builds via `scripts/build.sh` only; crash ⇒ halt and report; one heavy job
   at a time; killed patterns become claims only through the kernel route.
 * Gate additions at close: `#print axioms` rows for every public `Glue` declaration;
   the new subcommands' self-tests wired into `scripts/regen-check.sh`; the

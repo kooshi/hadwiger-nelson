@@ -114,4 +114,4 @@ theory closes.
 * A family's sporadic table explodes (hundreds of rows): the census bounds
   it first; a table too large for `decide` routes through the M05/M06
   certificate machinery instead.
-* Any segfault, any process: HALT and report to Kooshi (standing).
+* Any crash, any process: HALT and report to Kooshi (standing).

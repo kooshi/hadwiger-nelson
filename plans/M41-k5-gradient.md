@@ -174,7 +174,7 @@ sweep did not contain.
   (an identification bug fabricates constraints and would counterfeit the jackpot).
 * **Solver walls**: report the frontier reached; unknown-at-cap is never a refusal. Ask
   for the server with measurements, per the standing hardware rule.
-* **Any segfault, any process: HALT and report to Kooshi** (standing).
+* **Any crash, any process: HALT and report to Kooshi** (standing).
 
 ## Deliverables
 
@@ -412,7 +412,7 @@ here — same frame machinery).
   (k ≤ 4 anywhere): HALT and report, per the standing rules.
 * Solver walls: report the frontier + machine; heavy solves move to the desktop by
   name, never silently.
-* Any segfault, any process: HALT and report to Kooshi (standing).
+* Any crash, any process: HALT and report to Kooshi (standing).
 
 ---
 

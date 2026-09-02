@@ -250,7 +250,7 @@ closure explorer and the anatomy pane are untouched.
 
 Desktop (32 cores, 125 GB; `nproc` confirmed at subplanning). Builds ONLY
 through `./scripts/build.sh`; one heavy job at a time; the campaign runs
-`python3 -u` in the background with no pipes on its output; on any segfault,
+`python3 -u` in the background with no pipes on its output; on any crash,
 from any process, **halt and report to Kooshi**. Registered-before-run applies
 to every campaign grid: a grid not written down here gets its own committed
 addendum first (M35 ran four — §0i–§0l — and the discipline is what made its
@@ -267,7 +267,7 @@ call); the prober keeps its first-occurrence breaking unchanged.
   instance-side (M35 §0l), no `Brick.lean` change.
 * The k = 4 mass red fires ⟹ **the relaxation is unsound**; revert `check`,
   halt, report.
-* Any segfault ⟹ halt and report to Kooshi (standing, hardware).
+* Any crash ⟹ halt and report to Kooshi (standing, hardware).
 
 ---
 

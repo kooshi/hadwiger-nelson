@@ -64,7 +64,7 @@ for i in "${!LAYERS[@]}"; do
     lake build "${BATCH_TARGETS[@]}" > "${LOG}" 2>&1
   RC=$?
 
-  # One retry, and only one, and never a quiet one. Lean segfaulted (exit 139) once in a
+  # One retry, and only one, and never a quiet one. Lean crashed (exit 139) once in a
   # three-hour run on this machine, at 1.1 s into a batch, and rebuilt cleanly on its own — a
   # transient, not a wrong proof. A real failure reproduces; that is what makes the retry safe.
   # It is announced because a build that silently retries is a build that hides how flaky it is.

@@ -363,7 +363,7 @@ rejections stay rejections downstream — and the necessity census).
 Predictions and caps unchanged; P11's budget band now has ~30× headroom.]* Caps: 300 s per query default; a capped row
 is `unknown` and NEVER a claim (`unknown ≥ cap` is not a bound). If any
 single load-bearing query wants > 600 s repeatedly, STOP and ask Kooshi
-for the desktop rather than raising caps on the laptop. Segfault, any
+for the desktop rather than raising caps on the laptop. Crash, any
 process: HALT, report, wait for his reboot. Predictions above are
 committed before the first colour query; any mid-milestone additional
 sweep registers its §0-addendum first (the M32 §0g pattern).
@@ -821,7 +821,7 @@ Fan queries: 510-scale 10–30 s; B=2-chunk-scale seconds; enriched balls
 ~one query per deletion step (hundreds of calls — budget hours, background,
 one job at a time). Avoidance queries: same order as coverage queries.
 `unknown ≥ cap` is never a compulsion claim. All standing machine rules bind
-(build.sh only; segfault → HALT and report; one heavy job).
+(build.sh only; crash → HALT and report; one heavy job).
 
 ## Failure clauses (to be sharpened at subplan registration)
 
@@ -837,7 +837,7 @@ one job at a time). Avoidance queries: same order as coverage queries.
 * **The avoidance ladder reads all-SAT through witness scale at every
   probed class**: the compulsion lives above the probed orders; report the
   probed ceiling honestly and re-rank.
-* Any segfault, any process: HALT and report to Kooshi (standing).
+* Any crash, any process: HALT and report to Kooshi (standing).
 
 ## Deliverables
 

@@ -94,7 +94,7 @@ and before any §0-D code existed. All §0 artifacts are UNTRUSTED tools-side tr
   crashed on a KeyError before any SAT call; cost one relaunch. Neither touched the
   machine; both are the class of bug the self-test-and-refuse discipline exists for, and
   the promoted instrument (§4) carries regression checks for both.
-* No OOM, no segfault, one heavy job at a time throughout; enumeration caps mandatory
+* No OOM, no crash, one heavy job at a time throughout; enumeration caps mandatory
   everywhere (`enum_canonical` refuses by name; the pair probe's frontier cap reports
   when it cut).
 
@@ -340,7 +340,7 @@ anything §5's scope keeps live must survive in `tools/` with its controls.
   the kill-structure census (WHICH pattern pairs die — the shape of the pressure);
   non-sector construction search via the probe's model corpus.
 * Standing: writeups/upstreaming deferred (2026-08-04 policy); `lean4checker` a
-  publication gate; builds via `scripts/build.sh` only; segfault ⇒ halt and report; one
+  publication gate; builds via `scripts/build.sh` only; crash ⇒ halt and report; one
   heavy job at a time; killed patterns become claims only through the kernel route.
 * Gate additions at close: `#print axioms` rows for every public `Coupled` declaration;
   the promoted tool's `--self-test` wired into `scripts/regen-check.sh` FAIL-loud; the

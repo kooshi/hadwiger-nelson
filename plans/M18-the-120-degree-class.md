@@ -272,7 +272,7 @@ once. `scripts/regen-check.sh` gains both self-tests at the gate.
 
 ## 5. Operational rules in force (unchanged, recorded in CLAUDE.md)
 
-All builds through `scripts/build.sh`; on any segfault halt and report; one heavy job at a
+All builds through `scripts/build.sh`; on any crash halt and report; one heavy job at a
 time; `lean4checker` replays deferred indefinitely (publication gate, other hardware);
 `tools/` untrusted throughout.
 

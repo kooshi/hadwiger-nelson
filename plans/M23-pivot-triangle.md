@@ -543,6 +543,6 @@ exact-tools / sampled-triage.
 ## 9. Standing constraints
 
 Writeups/upstreaming deferred (2026-08-04). Builds via `scripts/build.sh` only.
-Segfault ⇒ halt and report to Kooshi. One heavy job at a time. Killed patterns
+Crash ⇒ halt and report to Kooshi. One heavy job at a time. Killed patterns
 become claims only through the kernel route. Predictions registered BEFORE
 instruments — held at M21, M22, and §0 of this plan.

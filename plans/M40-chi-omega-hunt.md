@@ -223,7 +223,7 @@ coset-merge structure over finer ideals — is the measurement.
 * Boundary scales (T² exactly at a threshold) are excluded from every band claim
   (tie-break-sensitive; the tool's closed criterion accepts them — noted, not used).
 * Torus UNSAT stays period-bounded unless a BALL refutation is quoted (M39 standing rule).
-* Any segfault, any process: HALT and report to Kooshi (standing).
+* Any crash, any process: HALT and report to Kooshi (standing).
 
 ---
 

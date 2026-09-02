@@ -357,7 +357,7 @@ independently, re-refute in a second encoding, and report before interpreting.**
 ## §3. Discipline
 
 M49's §3 verbatim (double-encoding or kernel for every claim; `unknown` recorded as `unknown`;
-triple for removals; jackpot HALT AND VERIFY; segfault HALT; one heavy job at a time; waiters
+triple for removals; jackpot HALT AND VERIFY; crash HALT; one heavy job at a time; waiters
 anchored `pgrep -f "^python3 -u …"`). Plus M50's own: every pool is a CHOICE and its scope
 sentence says so; the constructibility caveat (§ stub) is cited in every "no kill at depth ≤ d"
 claim; the breaking order is pinned in the artifact header so filters are reproducible.
@@ -731,7 +731,7 @@ the literature check lands.
 
 ## §Sⁱᵛ-adv. The adversarial verdicts (2026-08-22; fresh decorrelated agent — NOT a fork, by
 design: it read only the written record and ran its own computations — 231 serial CaDiCaL asks,
-a cast-free census, a literature check; all controls green; no segfaults)
+a cast-free census, a literature check; all controls green; no crashes)
 
 ### What it verified beyond the sample (upgrades)
 

@@ -303,7 +303,7 @@ stronger object and was not repeated.)
 `Glue.lean` (axis-general gluing); `Coupled.lean` (`inter_eq_pair`,
 reflAcross layer); the census clean to |b| ≤ 30; M20's strip/witness
 machinery; the M22/M23 standing constraints (builds via scripts/build.sh;
-segfault ⇒ halt; one heavy job; predictions before instruments).
+crash ⇒ halt; one heavy job; predictions before instruments).
 
 ## §3 The Lean skeleton (`Proofs/HadwigerNelson/Ladder.lean`, 36 obligations)
 

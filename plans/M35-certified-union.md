@@ -69,4 +69,4 @@ carry the whole cost, and the 791 is nobody's lower bound.
   Fin-graph statement — still the modular first, minus the plane claim).
 * The forcer LRAT balloons unexpectedly: the M05 segmentation machinery
   exists; measure first.
-* Any segfault: HALT and report (standing).
+* Any crash: HALT and report (standing).

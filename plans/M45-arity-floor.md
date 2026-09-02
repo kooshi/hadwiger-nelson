@@ -704,7 +704,7 @@ a fulfilled prediction.
 * **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare or named.
   `lake env lean <file>` is fine for iterating (builds nothing) but does not apply the project's
   options, so never conclude a module is green from it.
-* **On any segfault, from any process: HALT and report to the user immediately.** It is hardware.
+* **On any crash, from any process: HALT and report to the user immediately.** It is hardware.
 * **`pkill -f <pattern>` kills your own shell** — the wrapper's command line contains the pattern.
   Use a bracketed regex (`pgrep -f "m4[5]\.py"`) or resolve the PID. The same trap silently
   disables any monitor whose command contains its own search pattern.

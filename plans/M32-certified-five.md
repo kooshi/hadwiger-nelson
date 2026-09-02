@@ -752,7 +752,7 @@ checkpoint's flat branch fires exactly as written.**
   records the wall's exact shape.
 * **Jackpot**: the escalation protocol above; nothing is claimed without the
   independent re-encode and the cube-split certificate.
-* **Any segfault, any process**: HALT and report to Kooshi (standing rule).
+* **Any crash, any process**: HALT and report to Kooshi (standing rule).
 
 ---
 

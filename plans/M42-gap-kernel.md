@@ -49,7 +49,7 @@ possibly with the two-act decomposition as a named intermediate).
 * Failure clauses: any sweep window that misses its band on exact arithmetic HALTS the
   item and reports the arithmetic (the σ-table above is hand-derived — the Lean
   elaborator is its checker); builds through `scripts/build.sh` ONLY; laptop RAM is
-  the ceiling; any segfault: HALT.
+  the ceiling; any crash: HALT.
 
 ## §0e — Domain-modeling pass (2026-08-12, applied before the skeleton)
 
@@ -180,7 +180,7 @@ Everything here is measured mathematics awaiting formalization; nothing is specu
   window per norm first) and report item 1's measured wall.
 * The 23-core decide exceeds heartbeats: the M05 LRAT segmentation machinery is the
   standing fallback.
-* Any segfault: HALT and report (standing).
+* Any crash: HALT and report (standing).
 
 ## Why it is worth a milestone
 

@@ -631,7 +631,7 @@ promised.
 * **Building Lean.** *Always* `./scripts/build.sh`, never `lake build` — bare **or named**.
   `lake env lean <file>` is fine for iterating on one file but does **not** apply the project's
   options, so never conclude a module is green from it.
-* **On any segfault, from any process: HALT and report to the user immediately.** It is hardware.
+* **On any crash, from any process: HALT and report to the user immediately.** It is hardware.
 * **`pkill -f <pattern>` kills your own shell.** Use a bracketed regex (`pgrep -f "m4[8]\.py"`).
 * **One heavy job at a time.**
 * **Artifacts.** One JSON per axis, schema-tagged, with the reading rule *in the schema string* and
@@ -791,8 +791,9 @@ model found during confirmation goes back into the pool and kills more candidate
 
 ### §R7. Crash resumption, added mid-milestone and controlled
 
-Phase B was interrupted by the machine's intermittent hardware fault (three `SIGSEGV`s — two in the
-SAT solver, one in Python — reported to Kooshi, not worked past, machine rebooted). Two mechanisms
+Phase B was interrupted by the machine's intermittent hardware fault (three unexplained
+process deaths — two in the SAT solver, one in Python — reported to Kooshi, not worked past,
+machine rebooted). Two mechanisms
 were added so a multi-hour phase survives the next one: a **colouring pool cache** keyed by stage
 fingerprint (harvesting dominates, measured at 6.05 CPU-seconds per colouring on the 24,065-vertex
 stage) and a **solver checkpoint** holding the questions not yet asked alongside the answers already

@@ -170,7 +170,7 @@ is a stretch goal, not a requirement.)
   statement that must be labelled as such, never quietly.
 * If any design-script check refutes C1–C6, halt and re-derive; the whole §0a
   is suspect and nothing goes into Lean until it is repaired.
-* Any segfault: HALT and report to Kooshi (standing, hardware).
+* Any crash: HALT and report to Kooshi (standing, hardware).
 
 
 ## §0e — Domain modeling pass (2026-08-11, fresh invocation)

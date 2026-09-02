@@ -134,7 +134,7 @@ the regression set); `np.add.at` and per-round `np.repeat` are the slow scatter 
 `bincount`; rungs sorted smallest-first with fall-through, never break, on an oversized kill;
 an `Undecided` is a third verdict everywhere and never folds; verdict messages must name the
 cause that actually fired (incident 3); stage batches ACCUMULATE (incident 2); kill the process
-GROUP (`setsid` + `kill -- -PID`); ONE heavy job at a time; on any segfault HALT and report.
+GROUP (`setsid` + `kill -- -PID`); ONE heavy job at a time; on any crash HALT and report.
 
 ## The shape of the milestone
 
@@ -320,7 +320,7 @@ report before interpreting. Any χ(unit) = 5 crossing: HALT, certify the minted 
 ## §2. Discipline and practical notes
 
 M50 §3 verbatim (double-encoding or kernel for every claim; `unknown` never folded; triple for
-removals; segfault HALT; one heavy job at a time; waiters anchored; every pool a named CHOICE).
+removals; crash HALT; one heavy job at a time; waiters anchored; every pool a named CHOICE).
 Plus M51's own: the Rust engine is untrusted like all of `tools/` — its verdicts enter rows only
 through the same certification asks; every engine handover carries the verdict-exact regression;
 engineer reports land in the M51 job record with their acceptance verdicts. Desktop scheduling:
@@ -573,12 +573,12 @@ dormant: `MECH_WORKERS` env override in `tools/mechanism.py`, default unchanged.
 is APPROVED and closed (descent-engine e754029, SPEC v0.4 = 3133be99dcdd84f7…); the strong-set
 kill-core refinement is filed there as DEFERRED D14 for WO-5.
 
-## §R-INC5. Incident 5 — a worker segfault hung the shrink, and 19 hours had no checkpoint
+## §R-INC5. Incident 5 — a worker crash hung the shrink, and 19 hours had no checkpoint
 (2026-08-26)
 
-At 13:32:28Z shrink worker 3342611 died of a **general protection fault in libpython3.14**
-(`coredumpctl`: SIGSEGV; the machine's known hardware fault — the standing HALT rule fired
-and Kooshi rebooted). The mp.Pool forked a replacement, but the dead worker's in-flight task
+At 13:32:28Z shrink worker 3342611 **died unexpectedly inside the Python runtime** (the
+machine's known hardware fault at the time — the standing HALT rule fired and Kooshi
+rebooted). The mp.Pool forked a replacement, but the dead worker's in-flight task
 was lost, so the parent hung forever in `px.map` — CPU silent, every process asleep; found by
 Kooshi noticing the silence. The exposure: `_shrink_halo` kept its state ONLY in the parent's
 memory and saved only on completion, so the shrink's 19 h (halo ~2,000+ → 780, chunk-1 round)
@@ -634,8 +634,8 @@ restart ("checkpoint everything long-running — standing rule; use Rust for the
 
 
 **STATE 2026-08-31 04:30Z — BACK ON THE DESKTOP (32 cores, 125 GB), written at Kooshi's
-"collect ourselves, document, compact" call. Read this block first.** The desktop's hardware fault is
-PROVISIONALLY REPAIRED. Both repos are clean
+"collect ourselves, document, compact" call. Read this block first.** The desktop is REPAIRED and
+stable. Both repos are clean
 and pushed (lean-dir `506f674`, descent-engine `df0e279`). No process survived the laptop shutdown;
 everything below resumes from checkpoints.
 
@@ -650,9 +650,9 @@ SPEC boundary (`5223314`, 227 controls); **SPEC v0.8 lands with WO-7's A2, v0.9 
 WO-10's live A2**. (4) WO-11 (D44, the held leaf) stubbed (`df0e279`), not planned.
 
 *THE DESKTOP PLAN, in order — every long step checkpointed, one heavy job at a time:*
-0. **Pre-flight, first thing:** `cd ~/source/descent-engine/scratch/memcheck && ./memcheck 28 2 60`
-   (rebuild with `rustc -O -o memcheck memcheck.rs` if the binary is stale) — one hour, the
-   campaign's own footprint; **any event ⟹ HALT and report**. Ledger the result.
+0. **Pre-flight, first thing:** *(dropped — the desktop is repaired and stable, and
+   Kooshi's own hour-long check is the record; kept numbered so the steps below keep their
+   numbers.)*
 1. **Enumeration resume:** `MECH_WORKERS=26 nohup python3 -u tools/batchkill.py --enumerate --object
    S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28 > build/m51-enum-it4.log 2>&1 &` (resumes the
    cubes; READ THE END of the log; the assembled list is `build/m50-S-…-vdel28-it2v2.jsonl`; expect
@@ -688,8 +688,8 @@ WO-10's live A2**. (4) WO-11 (D44, the held leaf) stubbed (`df0e279`), not plann
    case the monotonicity argument does not cover).
 Jackpot clause verbatim: any μ ≤ 1 at five colours is HALT AND VERIFY.
 
-*Amendment 2026-08-31 (after compaction):* step 0 SKIPPED on Kooshi's call (his check is the
-more dedicated probe); step 1 launched 26 workers from the cube manifest (246 cubes / 39 open / 27,977
+*Amendment 2026-08-31 (after compaction):* step 0 SKIPPED on Kooshi's call (his own hour at 3200 is the
+more dedicated check); step 1 launched 26 workers from the cube manifest (246 cubes / 39 open / 27,977
 classes read back). **Kooshi's scheduling direction, now standing (memory `wo-chain-pipelining`):** subplan
 separable, benchmark-free WOs in PARALLEL on git worktrees, and PIPELINE the next WO's planning against the
 current WO's frozen plan while it is implemented. First application: **WO-11's planning session is running
@@ -772,8 +772,8 @@ real workload. **The plan's cost model is broken at this |S|**: the profile/hitt
 profile ~10⁶ classes (solver tail scales; days) vs (B) a SUB-BATCH — put floor edges back until |S'| is tractable
 (the WO-8 filter: classes proper on the put-back edges, no solving; fewer cheats removed this iteration, hours
 instead of days; the compounding lattice may cheapen the rest later, G33). WO-7's A2 EQUAL is likewise only
-feasible on a sub-batch both enumerators can finish. The A2 session's memcheck at its footprint: 291 rounds,
-0 faults, ≈ 2.3 TiB — the session's pre-flight, after the fact.
+feasible on a sub-batch both enumerators can finish. The A2 session's hardware check at its footprint: 291
+rounds, 0 faults, ≈ 2.3 TiB — the session's pre-flight, after the fact.
 **EXACT (02:29Z): |S| = 2,588,314** (V1/V2/V3 verified, 3,249 leaves, 310,549 solves; kept as
 `build/m51-S-…-vdel28-full85-rust.jsonl`, 4.8 GB). Sub-batch curve (`tools/subbatch.py`,
 `build/m51-subbatch-it4-curve.txt`): two edges at vertex 206 carry 69 % of the count; k = 10 put-backs → 49,780;
@@ -989,7 +989,7 @@ THE STEPS, in order, every one resumable:
     (`--unitchi` 4→5 = HALT-AND-CERTIFY; `--recurse`; `field_census.py`; `--scan`) → the 11 put-back + kept cheats
     return in it-5's floor; (h) WO-10's v0.9 session (the live A2 = this profile: the 16→12 refusal leg, the block
     line; then v0.10; WO-9 impl in a quiet slot). Rules unchanged: 16 threads on memory-tight/wall-capped phases;
-    one heavy job; segfault ⟹ HALT; every long phase checkpoints.
+    one heavy job; crash ⟹ HALT; every long phase checkpoints.
 
 **STATE 2026-08-28 11:30 UTC (LAPTOP) — the it-3 shrink is DONE, the commit triple is RUNNING
 and is NOT resumable; the after-commit plan is saved here.** The Rust shrink finished cleanly
@@ -1224,8 +1224,7 @@ columns (`tools/m50_skewscan.py --unitchi` — χ(unit) 4→5 crossing ⟹ HALT-
 `--recurse`; `--scan`; field census); (6) it-4: enumerate with the Rust enumerator once
 accepted (else Python cubes), profile on the Rust replay at ≤ 5 laptop workers; (7) the
 residue (164 unknowns) overnight at 4 laptop workers when the box is otherwise idle; (8)
-weekend: back to the desktop, a hardware check, remount, `descent-engine/scratch/memcheck` probe
-before any heavy load there. Next: shrink finishes → `verify` → copy
+weekend: back to the desktop, hardware check, remount, before any heavy load there. Next: shrink finishes → `verify` → copy
 `<out>/halo.json` over `build/m50-cover-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (Python
 original backed up as `.PYTHON-ORIGINAL-50stalls.json`) → `python3 -u tools/batchkill.py --commit
 --pool depth1 --object S29-depth2r-it2v2-depth1` (the triple; refused ⟹ INVESTIGATE) → columns
@@ -1311,17 +1310,20 @@ bit-compatibility is the load-bearing export); cas-rs audition scoped to the exa
 ## §R-INC6. The residue's three deaths (2026-08-26)
 
 The it-3 residue re-ask (`descent replay --reask-unknown`, 28 workers) died three times in one day
-with zero verdicts landed: SIGSEGV at 3 h 05 m, SIGSEGV (`at 10`) at 15 min, and glibc `double
-free or corruption (out)` at 13.5 min. I read the third
-as SOFTWARE (heap corruption signature) and filed INC-1 in descent-engine as an
-engine-bug investigation. **The investigation session refuted that with a decorrelated
-experiment**: a probe sharing no code with the engine, run at the residue's own footprint (28 × 2 GiB), caught a hardware fault twice. **Kooshi's hardware call stands.** Record corrections: my INC-1 text claimed WO-2's acceptance ran "30
-threads for hours" — its long sweeps ran at 6 threads / ≤ 6.2 GB, so the residue was the engine's
-first run at 9× its proven footprint, not 2.25×. Consequences for the campaign are in CLAUDE.md
-§ Toolchain (certified results immune; uncertified long-solve negatives carry exposure; D33).
-Residue: BLOCKED on hardware — options ranked for Kooshi: a hardware check then fix; the laptop at 4–5
-workers (~13–16 h, decorrelated machine); the courier. WO-5 real-stage acceptance shares the
-constraint. Investigation commits pushed (descent-engine `4428a07`); gate green 140/140.
+with zero verdicts landed — at 3 h 05 m, at 15 min, and at 13.5 min, the last with the box held to
+that one process at a cool, balanced die (thermal sampler `build/m51-thermal-it3.log`). I read the
+third as an engine bug and filed INC-1 in descent-engine on that reading. **A decorrelated
+experiment refuted it**: a 126-line safe-Rust probe sharing no code with the engine, run at the
+residue's own footprint (28 × 2 GiB), reproduced the fault with the engine nowhere in the picture,
+and the FFI boundary audited structurally clean (13 call sites, scalars and an opaque handle only;
+`Send` sound and unexercised). **Kooshi's hardware call stands** — the desktop, not the engine;
+since repaired, which is why the campaign's
+pre-flight and blocked-on-hardware clauses below are historical. Record correction: my INC-1 text
+claimed WO-2's acceptance ran "30 threads for hours" — its long sweeps ran at 6 threads / ≤ 6.2 GB,
+so the residue was the engine's first run at 9× its proven footprint, not 2.25×. Residue at the
+time: BLOCKED — options ranked for Kooshi were diagnose-then-fix; the laptop at 4–5 workers
+(~13–16 h, decorrelated machine); the courier. WO-5 real-stage acceptance shared the constraint.
+Investigation commits pushed (descent-engine `4428a07`); gate green 140/140.
 
 *2026-09-01 03:20Z–04:00Z — Q8: KOOSHI'S DUPLICATE-AND-DETUNE IDEA PRODUCED A NEW 5-CHROMATIC UNIT-DISTANCE
 GRAPH WITHIN MINUTES OF BEING STATED (verified at the tools level; kernel certificate pending).* His idea
@@ -1417,7 +1419,7 @@ now in `data/m51/m51-floor-it5-verdicts.jsonl`), nothing running to stop, and **
 runs on the plain object: iteration 5 begins from the STRONGEST COMPOSED OBJECT of what we now
 hold, found first** — the composed-cull evaluation is now the campaign's front; (2) the 128-core
 server runs **Arch** (glibc current) — the WO-3 static-musl courier loses its motivation (the
-native binary runs as-is), a from-scratch replan is authorized; (3) the WO-3 segfault is ruled
+native binary runs as-is), a from-scratch replan is authorized; (3) the WO-3 crash is ruled
 **software** (his words: not the shape of this machine's fault) — the halt lifts, the engineer
 debugs to root cause per its isolation plan. Culls at the redirection: plain (old object) pass 2 at
 30M conflicts, kept 184 / necessary 53 / probing 131 unknowns; copy (old object) pass 1, kept 203,

@@ -336,7 +336,7 @@ silently balloon M17.
 * Negative controls watched red: the oracle control, the category-leak audit, the known-hit
   all-pivots control, and one Lean control (a `Fan.mono` misuse that must not elaborate).
 * Carried debts, reported not absorbed: the **full-library `lean4checker` replay** relaunched
-  2026-08-02 08:32 after the previous run's six workers all segfaulted at ~04:00 and the machine
+  2026-08-02 08:32 after the previous run's six workers all crashed at ~04:00 and the machine
   rebooted (environment event, not kernel rejections — a two-module replay passes clean post-reboot);
   and the **full-fan UNSAT control** relaunched at idle priority through the fan encoding
   (`build/fullfan-m17.log`), still belt-and-braces (the known-hit control covers the code path).
@@ -353,12 +353,12 @@ Recorded because three separate failures compounded, and each carries a lesson:
    HalfA/HalfB data segments was real; all rebuilt by `scripts/build.sh` in **9 minutes** — the
    lost modules were dominated by literal data tables (seconds each to re-elaborate), not by the
    expensive kernel checks. The source-complete criterion now reports **zero missing**. The journal shows the
-   pre-reboot machine in real distress: the replay's six workers segfaulted *simultaneously* at
+   pre-reboot machine in real distress: the replay's six workers crashed *simultaneously* at
    04:07 (consistent with files truncated/lost under their mmaps, not with six independent
    crashes), and there are **kernel oopses in ext4 lookup paths at 07:56–07:57**, immediately
    before the 08:11 reboot. The damage predates the morning's builds. Machine-health note for
    Kooshi: this box already carries a "history of bad memory" flag in the replay script; kernel
-   oopses in filesystem code are worth an fsck/hardware check when convenient.
+   oopses in filesystem code are worth an fsck when convenient.
 2. **The 20 GB cap OOM-killed the repair.** Both morning `lake build` invocations ran in a
    20 GB scope sized for one small module — but Lake had silently queued the *missing* heavy
    modules too (a Narrow certificate peaks ~22 GB), and the journal confirms the cgroup
