@@ -56,6 +56,7 @@ hardware event ⟹ HALT; an unknown is never folded into a verdict.
 | WO-3 courier + `qualify` + profile hygiene | 3, deploy | **frozen; premise retired, replan authorized** (subplan `WO-3-courier-and-hygiene-subplan.md`, 0788b3b: the static-musl packaging route — moot now the 128-core server runs Arch and the native binary ships as-is; `qualify` verb, budget ladder + claim-of-one, D62–D67 filed and SPEC v0.11 drafted all still live) | one results bundle, machine qualification, head-of-line rules — **prerequisite of any server run** | 3 |
 | WO-12 loop binary | all | stub; NUMA-aware, halt clauses, phase coverage table | the single binary that churns iterations on the 128-core server | 4 (pool port first) |
 | WO-9 point order | 5 | frozen, negative by theorem; a knob | 1–2 % of the shrink; a quiet-slot job | 5 |
+| **WO-14 the culler** (`descent cull --groups cheats\|vertices`: group-MUS with cores + recursive model rotation on a long-lived solver, IHS minimum, ferry-format outputs) | M52 cull + shrink | **stub; planning session to spawn now (Kooshi 2026-09-02: efficiency in Rust before compute)** | the cull and the shrink of the copy-lock objects, and every later iteration's floor/cull | **1** |
 | WO-13 long-lived solver (pins as assumptions) | 1 | stub | D45 + D61: cold starts and the 2.5× pinned-cube penalty | when enumeration binds (the full-floor stage, 2.59 M classes) |
 | WO-4 SIMD kernels | 3, 5, 6 | stub; opens with a tier census that decides its worth | solver-free tiers; the certify's lookup masks | after the census |
 | WO-5c ask order inside a trial | 5 | paused | early exit on critical points | if the shrink is ever the floor |
@@ -150,8 +151,9 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 ## The next seven days, in order (rewritten 2026-09-02 at the M52 minting; the loop is paused)
 
 1. M52 phase 0: housekeeping (done with the subplan commit), the instruments with their planted
-   reds (`copy_anatomy`, the viewer's copy layers, `copy_pool`, `cull_enum`), the kernel sitting
-   (`Copy.lean`: the spindle rotation, the self-chord law) beside them.
+   reds (`compose`, `copy_anatomy`, the viewer's copy layers, `cull_enum` as the one-batch control,
+   `ferry`), the kernel sitting (`Copy.lean`) beside them — and **WO-14's planning session spawned
+   in a worktree the same day** (M52 §13: the Rust culler is the cull's and the shrink's workhorse).
 2. M52 phase 1–2 (compute-light): the atlas and the mechanism — P1's direction ladder replicated on
    the whole object, P2/P3 on every cross chord, P4's distance-2 class-avoidance ask on U at four
    colours, the 883-core's colouring anatomy, P9 on the non-locking centres. Viewer republished.

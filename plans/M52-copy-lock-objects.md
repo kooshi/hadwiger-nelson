@@ -598,3 +598,59 @@ to be ferried back and forth").** A phase that may travel ships as a **bundle**,
 file refuses on arrival). WO-3's replan on the engine side (courier + `qualify`) is the same
 discipline for the Rust binary and is not on M52's critical path; the Python bundle follows its
 manifest format so the two never diverge.
+
+## 13. Efficiency first (Kooshi, 2026-09-02: "far more useful to have more efficient algorithms implemented in Rust rather than just throwing more compute at it … please prioritize that")
+
+**The priority, as a rule for this milestone:** before any phase is moved to the server, its
+algorithm is made efficient in the Rust engine; the server gate (§12) reports savings for the
+EFFICIENT implementation, and "as is" only as the baseline row. D1 and D5 are amended accordingly;
+the phase-0 Python instruments stay as reference implementations and controls, never as the
+campaign's workhorse on a large object.
+
+**The cull and the shrink are one problem, and the efficient algorithm for it is known.** Both ask:
+given a satisfiability-refuting set of *groups* (a cheat = five clauses; a copy point = its incident
+unit edges) guarded by selector literals on one CNF, find a minimal — and, where the minimal set is
+small enough for it to matter, a MINIMUM — subset of groups that still refutes. That is group-MUS
+extraction, and the efficient algorithms are established (Belov & Marques-Silva; Ignatiev, Previti,
+Liffiton & Marques-Silva):
+
+| lever | what it replaces | expected gain, and what it rests on |
+|---|---|---|
+| **a long-lived solver per worker, groups as assumptions** | fresh one-shot solves per probe | learned clauses persist across probes: 2.3× on a 207-class sample, up to 250× per hard ask (T12, measured on this object); the engine's WO-13 stub is this regime, and the culler is its first consumer |
+| **cores as multi-drop jumps** | one probe per group | one UNSAT under assumptions returns the groups it used; everything outside the core is dropped in one step, confirmed by a second ask under exactly the core (cull3 has this; the Rust version keeps it) |
+| **recursive model rotation** | one SAT probe per necessary group | a SAT witness for "group `g` is needed" is rotated into witnesses for other groups with NO solver call — for a vertex `v`: any neighbour holding a colour no other neighbour of `v` holds is a witness by recolouring; for a cheat: recolour one endpoint to tie exactly one other cheat while staying proper. The MUS literature's standing ~10× reduction in SAT calls on structured instances; on our objects the necessary side is the expensive side (witnesses 226 s median vs refutations 0.8 s, WO-2), so this is the lever that matters most |
+| **implicit hitting-set dualization for the MINIMUM** | enumerating every class of a batch (exponential in the batch) | classes are generated lazily as SAT counterexamples to a candidate hitting set, each new class one row; the minimum forcing subset over ALL standing cheats without enumerating `S(B)` — the algorithm `tools/hitset.py` implements in Python and measured non-convergent at 446 columns on the seed; at 246 candidates with 27 fixed, seeded with cores and rotation witnesses, it is the registered candidate for the global minimum, with convergence a MEASUREMENT (P10 below) |
+| **parallel probes, sequential acceptance, checkpoint per acceptance** | serial ddmin | the WO-5b/5d shrink discipline, already in Rust |
+| **cube-and-conquer for the certify's refutations** | the 8,228-s monolithic 3-bit ask | the enumerator's entropy-split cubes on the certify instance (G18: cubes beat monolithic CDCL on composed objects); the certify itself stays Python and reviewed (the truth-maker never travels), the cubes are a parallel front-end whose verdict it re-checks |
+
+**The work order: WO-14, the culler** (`descent-engine/plans/WO-14-culler.md`, stub written today).
+One verb, `descent cull --groups cheats|vertices`, on the edges sidecar with the standing cheats and
+the forced pair; deletion-based group-MUS with cores and recursive model rotation on WO-13's
+long-lived solver; the IHS minimum as a second pass when the minimal set is ≤ ~200 groups; outputs
+in the ferry format (§12): checkpoint per acceptance, a witness per kept group re-validated by the
+Python numpy check, the unknown count in the headline. Acceptance: agreement with `copy_cull3.py`
+on a planted object and on one real small instance (the 39-floor iteration-3-era stage), the kept
+set re-certified by the Python certify, and the rotation's saving reported as SAT calls avoided
+against the same run with rotation off. Planned NOW in a worktree by its own session
+(`wo-chain-pipelining`), while phases 0–2 run on the desktop; its planning brief carries
+`REVIEW-METHOD.md` and this section.
+
+**Amended decisions.** *D1′:* the cull's workhorse is WO-14 (`--groups cheats`), with the IHS pass
+for the minimum; the enumeration cull (`cull_enum.py`) runs ONCE, on the first batch of the plain
+object, as the exact-within-batch control that the Rust culler's kept subset of that batch must not
+beat by more than the batch's slack; cull3 is the reference on the planted object. *D5′:* the shrink's
+workhorse is WO-14 (`--groups vertices`), after the cheap ladder (P8), which is one certify ask per
+rung and needs no engine.
+
+**P10 (registered).** On the plain iteration-4 object at 246 candidates: rotation removes ≥ 60 % of
+the SAT probes the deletion pass would otherwise issue (confidence medium; the MUS literature's
+range is 70–95 % on structured industrial instances); the IHS pass converges to a proven minimum
+within 500 iterations (confidence low — the seed's 446-column run did not converge; if it does not,
+the minimal set with its per-group witnesses is the deliverable and the minimum is reported as
+open with the gap between the best hitting set and the best forcing set).
+
+**Ordering, restated.** Phase 0 (instruments, kernel) and phases 1–2 (atlas, mechanism: light
+compute) proceed on the desktop now; WO-14's planning session starts in parallel; phases 4–5 wait
+for WO-14 unless it slips past the study, in which case the Python tools run the plain object's cull
+as a baseline only and the composed objects wait for the engine. The server gate fires on WO-14's
+measured rates.
