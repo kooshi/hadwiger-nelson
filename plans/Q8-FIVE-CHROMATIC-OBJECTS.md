@@ -158,3 +158,16 @@ depth-2 seam material: **G16's depth switch, met from below, under de Grey's own
 - **symmetries** (rotations about the centres, reflections at ladder angles): 0
 - computed at 50 digits in 85.2 s; `exact points from provenance at dps digits; ladder membership at 1e-(dps-15) deg; PSLQ identifications are numeric (maxcoeff 1e6/1e8), a census not a proof`
 
+
+## What the copies are, after M52 (2026-09-02)
+
+**Witnesses, not descent material.** A ρ₁₅ copy of the unit part is 4-colourable material attached
+to the object through a few dozen chords (36 about 206, 64 about the origin); at five colours the
+fifth colour colours around it — zero of 15,218 separating-colouring classes killed on the
+ranking batch, 20 of 20 sampled classes extending by direct SAT with the copy side 4-coloured
+(M52 §R3, the spare-colour lemma read as a halo statement). Copies never touch each other (0
+copy–copy unit chords in any composition, exactly), so every composition inherits the zero. The
+descent's base for iteration 5 is therefore the PLAIN object, culled (M52's loop); the unions
+stand as 5-chromatic unit-distance graphs — the certificate's object (`plans/STUB-certify-core883.md`,
+geometry M06-class after T14: every point in ℚ(√3, √11), the copy in ℚ(√3, √5, √11)) — and as
+material for a future partner-lattice question (M53 stub).
