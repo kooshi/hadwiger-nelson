@@ -458,3 +458,77 @@ decorrelated one-shot path in two encodings before it is called a candidate.
 invariants above is formalized — they are the same soundness architecture the descent has run on
 since M50 (certify decides, replay never trusted), stated here so each instrument's correctness
 reads in two lines. The 5-chromaticity of the copy unions stays tools-level (D6).
+
+## §Bʹʹʹ. The experience-modeling pass (2026-09-02, fresh invocation) — the surfaces
+
+Three consumers, each holding something different at the moment of use: **Kooshi**, who reads
+pictures first and numbers second and wants insight he can push back on; **a fresh session** (this
+one after a compaction), which holds only `plans/`, `data/`, and the ledger; and **the tools
+downstream** (the enumerator, the certify, the viewer), which hold a fingerprint and an edge list.
+Every surface below is designed for the one that consumes it, and nothing is written twice by hand.
+
+**1. Names.** One short name per candidate, defined once in the object cards and used everywhere —
+prose, viewer layers, ledger rows, the front table: `it4` (the plain iteration-4 object),
+`it4+206p` / `it4+206m` (one ρ₁₅ copy about vertex 206, + or − sign), `it4+206pm` (both signs),
+`it4+v0pm`, `it4+quad` (both signs about both centres), and `it4+<centre><sign>` for any other
+centre. The filename grammar is the same string appended to the base label (`…-vdel28-it2v2-depth1
++rot2-206p+rot2-v0m`), shell-safe, carrying the intrinsic parameters (pair distance, centre, sign)
+and never the derived angle. The it-3-era objects keep their existing names with the prefix `it3`.
+
+**2. The composed object is an object, so it needs no new surface.** With D9 the viewer renders
+`'rot'` points as a layer because they are in `prov` — no `--transform` flag (dropped from phase 0):
+a composed object is refreshed and republished exactly like any other. What the viewer ADDS, because
+Kooshi's two findings (Q6, T13) were made in it: (a) per-copy toggles, with copies coloured by copy
+and copied-seed vs copied-halo distinguished; (b) cross chords as their own edge class, the
+load-bearing ones bold; (c) the centre marked and the **radius-d circle** drawn about it (P3's
+self-chord shell — the one line that makes the spindle geometry visible); (d) **edges coloured by
+their twist-ladder index** k (the direction family times ρ_Moserᵏ), the rendering of T13/P1; (e) the
+883-core as a highlight layer. Republished to the same artifact URL; the ledger row carries the URL.
+
+**3. The atlas has a machine twin and a human twin from ONE tool.** `copy_anatomy.py` writes
+`data/m52/atlas.json` (per object: fingerprint, sizes, the direction census as
+`{angle mod 60, ladder index, family, count}` with an explicit `off_ladder` list, ring spectra per
+named centre as `{r² exact-or-float, count}`, cross chords as `{p, q, field class, collinear?,
+radii}`, the symmetry verdict, the field census) and, with `--md`, the **atlas card** — at most
+eight lines per object, appended to `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`: direction classes
+(on-ladder / off-ladder counts), the top five rings about the centre, chords by class, the symmetry
+verdict, the field. Numbers only; readings live in the report, marked [reading]. An off-ladder edge
+is reported with its parents' distance named (P1's falsifier is a line, never a silent "other" bin).
+
+**4. The cull driver talks in the descent's own vocabulary and refuses loudly.** One line per batch:
+`[cull it4+206pm] batch 3/20: B = 12 | S = 48,213 classes (enum 214 s, EXACT) | 1,904 distinct
+violated-sets | K = 5 (ILP 0.4 s; re-scan OK) | dropped 7 | certify UNSAT 412 s | standing 246 → 239`.
+The headline at the end names its population and its conditioning in the sentence:
+`[cull it4+206pm] DONE: standing 273 → 141 kept (27 floor + 114 batch-kept, every kept cheat
+witnessed and re-validated), 132 dropped over 20 batches, certify final one-hot + 3-bit UNSAT,
+0 unknown, 14.2 h desktop`. Three refusals, each naming the branch that fired and only that branch
+(G30's third failure mode): a CAPPED enumeration (`list not exact for stage <fp> — batch refused,
+shrink B; nothing dropped`), a certify SAT (`the kept set admits a separating colouring — the list
+was incomplete for stage <fp>; nothing committed; INVESTIGATE, never retry`), a certify unknown at
+cap (`batch held; re-ask on the 10×-then-one-shot ladder`). `cull_enum.py --status <label>` prints
+the checkpoint's state and the exact next command. Outputs: `build/m52-cull-<label>.jsonl` (rows
+per batch with B, K, dropped, the witness class per kept cheat, the certify verdict, fingerprints)
+and `data/m52/kept-<label>.json` (the final kept set with witnesses, the numpy re-validation stamp).
+
+**5. The shrink reports points and unknowns in one breath.** `[shrink it4+206pm] DONE: 3,934 →
+2,588 points (1,346 copy points deleted, 0 seed/halo touched), 41 unknown at budget (KEPT),
+1-minimal modulo those 41; final forcing re-refuted one-hot + 3-bit` — the unknown count is never in
+a footnote.
+
+**6. The decision report is a front, then a knee, then the four parts.** The close's report (house
+format, plain English, zero prior context) opens with one table — rows the candidates by short name
+with a one-clause gloss each; columns: kept cheats (1-minimal, witnessed), points after the shrink
+(with unknowns), radicands, certify status, the hardness reading — then argues the knee in three
+sentences, then gives the recommendation with its confidence and the one fact that would change
+it, then the decisions in four parts (the next milestone: iteration 5 from the chosen object, or the
+pivot, each with its default), then the scored predictions (met / missed with the number), then
+the failure clauses that fired. Every claim in it points at a `data/m52/` file or a ledger row.
+
+**7. The ledger stays one file.** M52's events append to `build/m51-jobs.txt` (the name is
+historical; one append-only ledger, never two), each row starting with the object's short name.
+
+*Validated as the user:* the cold read of an atlas card by someone who has never seen the
+repository must answer "what is this object, how big, what does its geometry say, is it symmetric,
+what field" without opening a JSON; the cold read of the cull headline must answer "which object,
+how many cheats stood, how many stand, were any asks undecided" without the log. Both are the
+test at phase 0's close, run on the planted self-test objects before any real run.
