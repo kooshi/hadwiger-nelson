@@ -141,10 +141,10 @@ def self_test():
     K, m = hitting_set(sorted(set(masks), key=len), 4)
     assert len(K) == 2 and 0 in K, ("planted minimum hitting set is {0, 2}", K)
     print(f"[self-test] green: planted hitting set {K} by {m}")
-    bad = "0" * 214
+    bad = line([])                                       # every batch cheat separated: violates nothing
     try:
         v = frozenset(j for j, (a, b) in enumerate(batch) if bad[a] == bad[b]); assert v
-        raise SystemExit("red FAILED")
+        raise SystemExit("red FAILED: a class violating nothing was accepted")
     except AssertionError:
         print("[self-test] red seen: a class violating nothing is refused")
     print("[self-test] PASS")
