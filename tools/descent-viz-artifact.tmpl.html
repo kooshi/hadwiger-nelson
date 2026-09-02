@@ -34,10 +34,16 @@
   <label><span class="dot" style="border:1px solid #8b93a1"></span><input type="checkbox" id="pdel" checked> seed vertices deleted (edgeless)</label>
   <label><span class="dot" style="background:#4fc3f7"></span><input type="checkbox" id="phalo" checked> halo points, coloured by provenance depth</label>
   <label>show halo depth up to <input type="number" id="maxdepth" value="99" min="1"></label>
+  <label><span class="dot" style="background:#ff8a65"></span><input type="checkbox" id="pcopy" checked> copy points (rotated copies, coloured by copy)</label>
+  <div id="copies" style="margin-left:18px;display:flex;flex-direction:column;gap:4px"></div>
+  <label><span class="dot" style="border:2px solid #ffd54f"></span><input type="checkbox" id="pcore"> highlight the core (when the data carries one)</label>
  </section>
  <section>
   <h2>Edges</h2>
   <label><span class="sw" style="background:var(--unit)"></span><input type="checkbox" id="eunit"> unit edges (all)</label>
+  <label>colour unit edges <select id="ecolor" style="background:var(--ground);color:var(--text);border:1px solid var(--line);border-radius:3px;font:12px var(--sans)"><option value="class">by class: original / within a copy / cross chord</option><option value="ladder">by direction on the half-twist ladder (index m; cyan = copy step; red = off)</option></select></label>
+  <label><span class="sw" style="background:#00e5ff"></span><input type="checkbox" id="ecross" checked> cross chords between the original and a copy — load-bearing ones bold</label>
+  <label><input type="checkbox" id="ecircle" checked> the radius-2 circle about each copy centre (where a point meets its own copy)</label>
   <label><span class="sw" style="background:var(--cheat)"></span><input type="checkbox" id="echeat" checked> cheats still standing (distance 2)</label>
   <label><span class="sw" style="background:var(--floor)"></span><input type="checkbox" id="efloor" checked> the floor — essential alone</label>
   <label><span class="sw" style="background:var(--put)"></span><input type="checkbox" id="eput" checked> put back this iteration (deferred)</label>
