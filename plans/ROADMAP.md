@@ -52,7 +52,7 @@ hardware event ⟹ HALT; an unknown is never folded into a verdict.
 |---|---|---|---|---|
 | WO-10 contract v0.9 | 3, 5 | pending; live A2 = the it-4 profile (the 16 → 12 worker refusal, the block line) | the deleted-vertex dialect pinned in SPEC | **next engine session** |
 | WO-11 contract v0.10 | 1 | pending after v0.9 | the informed split pinned; A2's 2.32× miss recorded with D61 | 2 |
-| WO-3 courier + `qualify` + profile hygiene | 3, deploy | stub (`descent-engine/plans/WO-3-profile-driver-and-courier.md`) | static binary, one results bundle, machine qualification (INC-1's lesson), head-of-line rules — **prerequisite of any server run** | 3 |
+| WO-3 courier + `qualify` + profile hygiene | 3, deploy | **planned + frozen** (subplan `WO-3-courier-and-hygiene-subplan.md`, 0788b3b: static musl + mimalloc — plain musl anti-scales 60×; `qualify` verb; budget ladder + claim-of-one; D62–D67 filed; SPEC v0.11 drafted) | static binary, one results bundle, machine qualification (INC-1's lesson), head-of-line rules — **prerequisite of any server run** | 3 |
 | WO-12 loop binary | all | stub; NUMA-aware, halt clauses, phase coverage table | the single binary that churns iterations on the 128-core server | 4 (pool port first) |
 | WO-9 point order | 5 | frozen, negative by theorem; a knob | 1–2 % of the shrink; a quiet-slot job | 5 |
 | WO-13 long-lived solver (pins as assumptions) | 1 | stub | D45 + D61: cold starts and the 2.5× pinned-cube penalty | when enumeration binds (the full-floor stage, 2.59 M classes) |
