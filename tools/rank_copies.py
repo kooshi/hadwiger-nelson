@@ -22,30 +22,59 @@ from cull_enum import hitting_set
 OUT = Path(__file__).resolve().parent.parent / "data" / "m52"
 
 
-def load(path):
+SEED_N = 214
+
+
+def load(path, live=None):
+    """The list's classes as their SEED PROJECTIONS (the enumerator's own key: the live seed
+    columns of 214) — the lines carry every vertex's colour, so a composed object's lines are longer
+    than the plain object's and only the projection is comparable across objects. `live` = the live
+    seed indices (deleted columns are masked out of the key)."""
     lines = Path(path).read_text().splitlines()
     head = json.loads(lines[0]); body = [json.loads(l) for l in lines[1:]]
     body = [s for s in body if isinstance(s, str)]
+    if live is None:
+        live = list(range(SEED_N))
+    def canon(s):
+        # the enumerator names one representative per PALETTE naming, but its naming is pinned by the
+        # object's degree order, which a copy changes — so compare projections up to a colour
+        # permutation: relabel by first occurrence along the live seed columns
+        m = {}; out = []
+        for i in live:
+            c = s[i]
+            if c not in m: m[c] = str(len(m))
+            out.append(m[c])
+        return "".join(out)
+    proj = {canon(s) for s in body}
+    assert len(proj) == len(body), f"{path}: {len(body)} lines but {len(proj)} distinct canonical seed projections — the list is not keyed on the seed block"
     summ_path = Path(path).with_name("enumerate.json")
     summ = json.loads(summ_path.read_text()) if summ_path.exists() else {}
-    return head, set(body), summ
+    return head, proj, summ
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--plain", required=True); ap.add_argument("--composed", nargs="+", required=True)
     ap.add_argument("--batch", required=True, help="u-v,u-v,… the batch B (must equal each list's new cheats)")
+    ap.add_argument("--object", required=True, help="the PLAIN object's label (for the live seed block)")
+    ap.add_argument("--provisional", action="store_true", help="allow a not-yet-exact list (reported as provisional)")
     a = ap.parse_args()
     B = [tuple(int(x) for x in e.split("-")) for e in a.batch.split(",")]
-    hp, Sp, sump = load(a.plain)
-    assert sump.get("claim") == "exact", "the plain list must be EXACT"
+    import batchkill as BK
+    obj, _ = BK.load_object(a.object)
+    live = obj.live_seed(); pos = {v: i for i, v in enumerate(live)}
+    B_pos = [(pos[u], pos[v]) for u, v in B]                    # cheat endpoints as projection positions
+    hp, Sp, sump = load(a.plain, live)
+    assert sump.get("claim") == "exact" or a.provisional, "the plain list must be EXACT"
     print(f"[rank] plain: {len(Sp)} classes (exact), batch {a.batch}", flush=True)
     rows = {}
-    masks_plain = {s: frozenset(j for j, (u, v) in enumerate(B) if s[u] == s[v]) for s in Sp}
+    masks_plain = {s: frozenset(j for j, (u, v) in enumerate(B_pos) if s[u] == s[v]) for s in Sp}
     for spec in a.composed:
         name, path = spec.split("=", 1)
-        h, Sc, summ = load(path)
-        assert summ.get("claim") == "exact", f"{name}: the composed list must be EXACT (claim {summ.get('claim')!r})"
+        h, Sc, summ = load(path, live)
+        exact = summ.get("claim") == "exact"
+        assert exact or a.provisional, f"{name}: the composed list must be EXACT (claim {summ.get('claim')!r})"
+        if not exact: print(f"[rank] {name}: PROVISIONAL — the list is not (yet) exact", flush=True)
         extra = Sc - Sp
         if extra:
             raise SystemExit(f"[rank] REFUSED {name}: {len(extra)} composed classes are NOT plain classes — the enumerations disagree on the stage (live block / batch / canonicalization)")
@@ -57,7 +86,7 @@ def main():
         print(f"[rank] {name}: {len(Sc)} classes survive of {len(Sp)} → kill fraction {rows[name]['kill_fraction']:.4f}; "
               f"hitting set of the survivors over B: keep {len(K)} of {len(B)} ({method})", flush=True)
     # the set-cover read: unique kills per composition
-    survivors = {name: set(load(spec.split('=', 1)[1])[1]) for name, spec in ((s.split('=', 1)[0], s) for s in a.composed)}
+    survivors = {name: set(load(spec.split('=', 1)[1], live)[1]) for name, spec in ((s.split('=', 1)[0], s) for s in a.composed)}
     for name in rows:
         others = set.intersection(*[survivors[o] for o in rows if o != name]) if len(rows) > 1 else Sp
         unique = (others - survivors[name])
