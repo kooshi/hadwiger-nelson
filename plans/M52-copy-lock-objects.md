@@ -666,3 +666,57 @@ compute) proceed on the desktop now; WO-14's planning session starts in parallel
 for WO-14 unless it slips past the study, in which case the Python tools run the plain object's cull
 as a baseline only and the composed objects wait for the engine. The server gate fires on WO-14's
 measured rates.
+
+## §R0–R2. Day one (2026-09-02): phases 0, 1 and most of 2, landed and measured
+
+**Phase 0 — instruments and kernel (all with planted reds seen).** `batchkill.Obj` gained the
+`'rot'` recipe (`add_rot`; `mp_values`/`check`/`load_object` dispatch) and an exact-rejected
+`non_unit` set (persisted, re-verified on load); `tools/compose.py` (self-test: the seed's copy
+SAT, a deleted centre and a planted coincidence refused; every copy-touching edge verified at 50
+digits); `tools/copy_anatomy.py` (exact census, half-twist ladder, rings + PSLQ, chord classes,
+symmetry search, the eight-line card; self-test on the seed's copy); `tools/copy_field_probe.py`,
+`tools/copy_exact_field.py` (exact coordinates + exact edge identities), `tools/copy_kill_table.py`,
+`tools/m52_p4.py`, `tools/cull_enum.py` (self-test with a planted minimum hitting set and a
+refused empty violated-set). The viewer carries copy layers, cross chords with load-bearing bold,
+the radius-2 circle, ladder colouring and a core highlight, republished to the same artifact URL.
+**Kernel:** `Copy.lean` — every leaf proved on the first elaboration pass (two cosmetic fixes),
+`scripts/build.sh` green (406 batches), `scripts/axioms.sh` **553 clean, 5 declared purchases**,
+the M52 rows added. **WO-14** (the Rust culler) is being planned in its own worktree by its own
+session. **Engine defect filed:** D68 — `descent enumerate` prints CONTRADICTION for an undecided
+verification.
+
+**The seven compositions of the iteration-4 object**, as object files with exact censuses:
+
+| short name | points | unit edges (exact) | cross chords | k = 4 |
+|---|---|---|---|---|
+| `it4+206p`, `it4+206m` | 3,933 | 27,610 | 36 (10 self + 18 centre–neighbour + 8 genuine) | UNSAT 4.2 s |
+| `it4+0p`, `it4+0m` | 3,933 | 27,627 | 64 (15 + 29 + 20) | UNSAT 2.7 s |
+| `it4+206pm` | 5,885 | 41,424 | 72 (20 + 36 + 16); the float census's one "copy–copy chord" was a near-miss, exact-rejected | UNSAT 5.0 s |
+| `it4+0pm` | 5,885 | 41,458 | 128 | UNSAT 4.5 s |
+| `it4+quad` | 9,789 | 69,086 | 200 (50 + 94 + 56); 0 copy–copy | UNSAT 4.8 s |
+
+**Phase 1 — the atlas (T13 → P1, T14).** P1 **replicated on the whole object, exactly**: all
+13,796 unit edges of the plain object lie on the half-twist ladder θ ≡ 30a + m·16.7787° (m ∈
+{−2, …, 3}); every copy's edges lie on it one ρ₁₅ step over; the only off-ladder edges anywhere
+are the genuine and self cross chords. **T14: every live point of the object has coordinates in
+ℚ(√3, √11)**, found by PSLQ and then verified as 13,796 exact Fraction identities; the copies are
+derived exactly in ℚ(√3, √5, √11) and every edge of `it4+206p` (27,610) and `it4+quad` (69,086)
+verifies exactly. The earlier field census's "new roots" were squares in the field (a G21 on a
+classification); the 883-core's certificate geometry reprices to M06-class (§8½). P2 **met** on
+every genuine chord of every composition (all collinear with the centre, all endpoints in the seed
+field). P3 **met** (self-chords = the radius-2 shell: 10 about 206, 15 about the origin). Symmetry
+search: none. The seed-field sub-object is the whole object (the probe's question collapsed).
+
+**Phase 2 — the mechanism (T15).** P4 **met**: the distance-2 class-avoidance ask on U at four
+colours is UNSAT in both encodings (5,470 exact pairs, under a second); the √3 class is avoidable
+(10,288 pairs). The kill table on the 883-core: |Σ| = 3,516, |T| = 1,062, all 3,733,992 pairs
+killed, every one of the 13 genuine chords the sole killer of some pairs (423–R(225): 46,236);
+no pair compulsion inside Σ or T; the chord endpoints carry the centre's colour far above chance
+(up to 65 %). P9 **missed as registered** (the 60 % threshold: 5 of 10 at R = 2.5, 3 of 10 at
+R = 3.0) and met in direction on every column; the sharper separator is the radius-2 shell
+(median 5 against 9). Copies never touch each other in any composition (0 copy–copy chords exactly).
+
+**Phase 3 — in flight.** The first enumeration (8 non-floor cheats) hit the 4 M-conflict budget on
+its root solve with 0 classes — the batch is probably jointly redundant, so its first solve is a
+whole-object refutation — re-running at 40 M; the ranking batch (4 floor + 4 non-floor cheats)
+enumerating on the plain object at 8 threads.
