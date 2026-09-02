@@ -123,7 +123,11 @@ def self_test():
     hitting set is known (size 2), and a class violating nothing must be refused."""
     obj = B.Obj()
     standing = [tuple(e) for e in obj.cheats]
-    batch = standing[:4]
+    batch = []; used = set()
+    for e in standing:                                   # four pairwise vertex-disjoint cheats
+        if e[0] not in used and e[1] not in used:
+            batch.append(e); used |= set(e)
+        if len(batch) == 4: break
     def line(pairs_equal):
         s = ["0"] * 214
         c = 1
