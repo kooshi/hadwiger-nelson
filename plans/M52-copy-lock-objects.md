@@ -871,3 +871,20 @@ A2) — scored per mode from now on.
 | `it4+206p` … `it4+quad` | 273 (the copies kill nothing at five colours) | 3,933–9,789 | ℚ(√3, √5, √11) | k = 4 refusal only (the witnesses) |
 
 The cull's number is the dial reading M52 exists to produce; the decision report follows it.
+
+## Post-milestone follow-ups (filed, not worked — Kooshi, 2026-09-03: "attention exclusively on the object until the cull and shrink are done")
+
+* **The viewer does not show the rotation provenance.** The composed object FILES record it
+  (every copy point's `prov` record is `['rot', centre, source, sign]`, verified on every load by
+  the fingerprint check and re-derived at 30 digits by `Obj.check`), and `descentviz_refresh.py`
+  emits copy points as kind `copy` with `copy`/`src` fields — but the published artifact was last
+  refreshed on the PLAIN object (the cull's layer), so no copy layer was in it, and the copy
+  layers' info panel has not been checked in the artifact build (`descentviz_artifact.py` copies
+  the JS verbatim; the template carries the controls). To do after the close: republish a
+  composed object with the core and confirm the per-copy toggles and the "copy of … (source
+  depth …)" line render in the artifact; if not, the defect is in the template/JS transfer.
+
+**The shrink, re-aimed by F3.** The copies are not descent material, so phase 5's object is the
+PLAIN culled object: `descent cull --groups vertices` over its 1,767 halo points (seed points are
+never candidates) with `--standing` = the culled cheat set — the fewest halo points that carry the
+culled forcing. It runs after the cheat cull ends and before the close.
