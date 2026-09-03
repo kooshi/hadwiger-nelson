@@ -313,6 +313,21 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   chords is coloured around by the fifth colour. The copies' value is as 5-chromatic unit witnesses
   (regime (a), T15) and as it-5 lattice material, never as cheat-killers. M52 §R3.
 
+* **The halt clause, read exactly (2026-09-03, Kooshi's question at the M52 cull).** The kernel's
+  one-defect theorem (`add_one_le_chromaticNumber_unitDistance_of_one_defect`) fires on a graph
+  that is NOT 5-colourable and has ONE non-unit edge: its unit part then forces that edge's
+  endpoints equal, and a spindle at that distance — anywhere, any d ≥ ½ — closes χ ≥ 6. The
+  descent's frame is different: it maintains "unit ∪ standing cheats forces 205 = 206", i.e. that
+  graph plus one more non-unit edge (the pair) is not 5-colourable — so with one cheat standing the
+  object has TWO defects, and the distance-5 spindle that removes the pair doubles the cheat. What
+  one standing cheat gives is a DISJUNCTION on the unit part: 205 = 206 or the cheat's endpoints
+  equal; each branch is a forced pair a spindle kills, but every copy brings its own disjunction,
+  so whether a finite union closes it is a search (HALT AND VERIFY), not a theorem. **The theorem
+  fires at zero standing cheats.** G32's "μ = 1 IS the theorem" counted defects in the finished
+  graph's frame (K = X ∪ R₅(X), whose cheats come in pairs); in the descent's frame the halt clause
+  is exactly as written — verify — and "done" is standing = 0. [kernel + reading; a sharpening of
+  this project's own record]
+
 ## §D (continued, 2026-09-01)
 
 Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and
