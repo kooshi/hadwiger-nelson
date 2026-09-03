@@ -60,6 +60,37 @@ that names a class is no longer a prefix of the vertex order but a **gather** of
 vertices (186 of 214 here) — every consumer of a class key had to learn this, and the engine's
 first real run on such an object refused rather than enumerate a different stage (WO-7, INC-2).
 
+**0″. The cull — the third descent move, and the one the record never had** (M52,
+2026-09-02/03). A standing cheat is **redundant** when the object's committed material together
+with the OTHER standing cheats already forces the pair without it; redundancy is JOINT, not
+single — a set `D` of cheats may be dropped together exactly when `unit ∪ (standing ∖ D)` still
+forces `205 = 206`. Like deletion it costs **zero geometry**: nothing is added, so nothing needs a
+halo or exact coordinates, and the dial falls by the size of `D`. Two exact instruments: (i) **by
+enumeration** — for a batch `B`, the enumerator lists every separating-colouring class of the
+object with `B` absent (a class is exact by V1–V3), and the minimum hitting set of the classes'
+violated-cheat sets is the exact optimal kept subset of `B` (`tools/cull_enum.py --loop`; a batch
+that is JOINTLY redundant is one refutation with zero classes — the cheapest possible verdict, and
+how the first 100 of 246 candidates fell on the iteration-4 object); (ii) **by group-MUS** —
+`descent cull --groups cheats` (WO-14): a fresh hard-clause probe per candidate over the standing
+set, refutations accepted as drops, satisfiable answers folded as witnesses, several same-snapshot
+refutations unioned into ONE fresh chunk ask. The invariant both keep: **every kept cheat is
+individually necessary, with a witness** — a separating colouring proper on everything else that
+violates exactly it — and necessity is monotone under removing more cheats, so a kept cheat stays
+kept forever and the final standing set is 1-minimal. After a cull the floor IS the standing set.
+Two facts fixed the cull's cost, both measured at M52: the reference cull had stalled on the CNF
+it handed the solver (guarded selector literals with the palette order over the unit edges alone
+sat undecided at 1,302 s where hard clauses decide in 121 s — the encoding, not the compute), and
+near minimality the refutations dominate and accepted drops are sequential (a refutation against a
+stale snapshot licenses nothing: at twelve workers one drop per ~2 minutes whatever the width — the
+chunk is the repair, the licence-holding tuning is WO-16). **The rule for re-running it: after
+every halo commit** — new material makes more cheats jointly redundant (G33's compounding, seen
+directly: at the iteration-4 object's floor 246 of 273 cheats were droppable ALONE, and the joint
+cull dropped 122 of them in a day), so the cull is a standing per-iteration phase, and its number
+is the object's certified upper bound on μ. What the cull cannot do: a copy of the unit part
+rotated by a spindle angle is 4-colourable material attached by a few dozen chords, and at five
+colours the fifth colour colours around it — the copies that make a 5-chromatic unit graph (M52,
+T15) kill no class and drop no cheat; they are witnesses, not descent material.
+
 **1. Enumerate S.** Delete the batch hypothetically and enumerate **every** proper
 5-colouring the weakened object admits, up to palette symmetry, projected to the seed
 (verdicts provably depend only on the 214 seed digits — the halo re-solves as free
@@ -254,7 +285,9 @@ future locality claim must be measured against trajectory noise first.
 | 1–2 (M50) | 1,008 pts | 43 | 45,365 lines (24,810 classes) | 46 survive / 103 unknown | 17 |
 | 3 (M51) | 1,008 → 1,862 pts | 53 / 446 (certified 2026-08-28; halo 854) | 46,350 | **0 survive** / 164 unknown | 20 |
 | 3′ vertex deletion | 1,862 pts, 186 live seed | 28 vertices → cheats 393 → **298** (certified, zero geometry) | — | — | 39 |
-| 4 (in flight) | 1,862 pts | sub-batch: 28 of the 39 floor edges spent | full 2,588,314 → sub 37,316 | profile pending (Rust) | — |
+| 4 (M51) | 1,862 → **1,981 pts** | 78 / 446 (25 by a 119-point halo, certified 2026-09-02; sub-batch 28 of 39) | full 2,588,314 → sub 37,316 | 0 survive / 142 unknown (never folded) | 27 |
+| 4″ the cull (M52) | 1,981 pts, zero geometry | **273 → 151 standing at the last reading** (122 dropped jointly redundant; 27 floor + kept cheats each witnessed; the Rust culler finishing the tail) | per batch: 0 … 307,716 classes | — | after the cull the floor is the standing set |
+| the copies (M52, a tangent) | 3,933–9,789 pts | none — a ρ₁₅ copy kills 0 of 15,218 classes at five colours | 15,218 = 15,218 | — | the unions are 5-chromatic unit witnesses; every point of the object in ℚ(√3, √11), the copies in ℚ(√3, √5, √11) |
 
 Every claim above traces to a build artifact (checkpoints, certified commit rows with
 stated claim scope, the jobs ledger) or a kernel theorem; the per-milestone §R sections
@@ -278,8 +311,9 @@ else is a phase that must run without a person: the table is the honest coverage
 
 | phase | reference (Python, `tools/batchkill.py`) | engine (Rust, `descent`) | for the loop binary |
 |---|---|---|---|
-| 0 floor recompute | `--recurse` (single-deletion census, cadical, checkpointed) | — | port: asks over the object; embarrassingly parallel |
-| 0′ vertex census + deletion commit | `--vertex-census`, `tools/vertex_delete.py`, `--commit-deletions` | — | port: the same asks plus the two-encoding certificate |
+| 0 floor recompute | `--recurse` (single-deletion census, cadical, checkpointed) | **`cull --census`** (WO-14: 273/273 agreement, hard encoding) | done |
+| 0″ the cull | `tools/cull_enum.py --loop` (exact per batch over `enumerate` + hitting set; one refutation per jointly-redundant batch) | **`cull --groups cheats`** (WO-14: group-MUS, chunked acceptance; WO-16 tunes the licence pool) | done; run after every commit |
+| 0′ vertex census + deletion commit | `--vertex-census`, `tools/vertex_delete.py`, `--commit-deletions` | `cull --groups vertices` (WO-14, the halo shrink; seed deletion still Python) | port the seed-deletion commit; the halo shrink is done |
 | 1 enumerate | cubes (3.7 s/class) | **`enumerate`** (verified gather; WO-11 makes it parallel) | done |
 | 1′ sub-batch curve + fresh enumeration | `tools/subbatch.py` + `enumerate` | WO-8 stub (the filter) | port the curve (bit masks, trivial); the enumeration is done |
 | 2 pool | `--pool-only` (serial, 40+ min) | export consumer only | port: pairwise glue points, dedupe, neighbour structure — geometry in f64 with the provenance triples the certificate resolves exactly |
