@@ -49,6 +49,13 @@ test that decides it** (queued after the cull): replay one batch's classes again
 OUT-OF-FIELD pool alone — its kill mass by class is the number; zero means Kooshi's first horn
 (no kill needs them), nonzero means the second (the tiers hide them).
 
+**Kooshi's conditional (2026-09-03), if the test reads zero:** *keep only the √3 and √11 points for
+all iterations until we hit a wall — a tradeoff between the field-wall monitor and the compute
+exponent.* Registered in `plans/M53-iteration-5.md` (the in-field pool: ~6× smaller pool, profile
+memory and design set; sound by monotonicity as every restricted pool is; the monitor kept as a
+once-per-iteration full-pool re-ask of one batch's in-field survivors, whose first out-of-field-only
+kill lifts the restriction).
+
 **Status:** OPEN; the material exists one iteration away and has never been selected.
 
 ## R2 — The tail costs more than the head (the computability tightrope)

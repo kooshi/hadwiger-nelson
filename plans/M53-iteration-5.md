@@ -60,6 +60,23 @@ cull had ever finished.
   then the full-pool profile with per-point field tags on every kill. If out-of-field points kill
   classes the in-field pool cannot, iteration 5's design offers them explicitly (a field-aware tier).
 
+* **The in-field pool (Kooshi, 2026-09-03), conditional on the census above reading ZERO.** *"For
+  all iterations until we hit a wall — keep only the √3 and √11 points. That's a tradeoff between the
+  field-wall monitor and the compute exponent, but it may be worth it to quickly eliminate all the
+  cheats that we can within this field."* The in-field slice is 15 % of the depth-1 pool (280,390 of
+  ~1.9 M points on the iteration-4 object), so the pool build (in-field pairs only: 140,195 of
+  950,371), the profile's per-worker memory (~8 GB → ~1.3 GB, hence more workers), and the design's
+  candidate set all shrink by ~6×. It is SOUND by the rule the loop already uses for restricted
+  pools (T11, K3): a class killed on the in-field pool is killed; a class that survives it is
+  adopted as unknown against the full pool, never folded. Iteration 4's `pdeg12` restricted pool
+  (points with ≥ 12 object neighbours, 42/42 hard classes killed at 3.13× the speed) is very
+  likely this slice by another name — the census can say exactly. **The condition:** the
+  out-of-field kill census reads zero (no class killed by an out-of-field point that the in-field
+  pool does not kill). **The monitor kept:** once per iteration, one batch's survivors on the
+  in-field pool are re-asked against the full pool; the first out-of-field-only kill is the wall
+  arriving, and the restriction is lifted. R1's "does a design ever keep an out-of-field point"
+  then reads on the full-pool re-ask rather than on the design.
+
 ## Halt clauses, verbatim
 
 μ ≤ 1 at five colours ⟹ HALT AND VERIFY. χ(unit part) 4 → 5 ⟹ HALT and certify the new witness. A

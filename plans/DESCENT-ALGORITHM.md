@@ -148,6 +148,19 @@ candidate. Engineering note: the reference pool build is a serial Python pass ov
 pairs (40+ minutes on the desktop for the 1,862-point object); it is the first phase the loop
 binary (below) must own, since the engine consumes the pool only as an export.
 
+**2′. The pool by field (Kooshi, 2026-09-03; conditional).** Every point of the object is in
+K = ℚ(√3, √11) (T14), and a glue point of two K-points adjoins one square root of an element of K
+(the lattice-closure lemma, `plans/STUB-field-wall.md`), so the depth-1 pool splits by the square
+class of its radicand: on the iteration-4 object 15 % in-field, 3 % in the √5/√35/√2/√14 classes,
+81 % in non-rational classes — and every committed point so far is in-field. If the out-of-field
+kill census (M53's first row) reads zero, the pool is RESTRICTED to the in-field slice for every
+iteration until a wall: ~6× off the pool build, the profile's memory and the design's candidate
+set, with the compute exponent paid in the smaller currency. Soundness is the restricted-pool rule
+already in force (T11, K3): a kill on the restricted pool transfers; a survival is adopted as
+unknown against the full pool. The monitor that survives the restriction: once per iteration, one
+batch's in-field survivors re-asked on the full pool — an out-of-field-only kill is the field wall
+arriving (RISKS R1), and it lifts the restriction.
+
 **3. Profile.** For each colouring in S: fix it on the seed, free every halo and pool
 variable, and ask whether it extends properly to the **entire** pool. `killed` = some
 finite unit-distance subset refuses it (unit material can do this cheat's job here);
