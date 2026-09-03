@@ -35,7 +35,21 @@ in `K`, so the rational classes are `{1, 2, 5, 7, 10, 14, 35, 70}` plus the non-
 registered in `plans/M53-iteration-5.md`); a design run restricted to out-of-field pool points as
 a control; and the field-wall milestone (R5) that would say whether the wall is a theorem.
 
-**Status:** OPEN, not yet biting (the dial is still falling on in-field material).
+**First measurement (2026-09-03, `data/m52/poolfield-<it-4>.json`):** the answer is YES. Over the
+iteration-4 object's 950,371 pairs at distance < 2 (exact in K) there are 1,435 distinct radicands:
+the in-field class holds 32 of them, 140,195 pairs, **280,390 pool points — 15 % of the pool**; the
+√5 class 2 radicands / 4,092 pairs / 8,184 points; the √35 class 4 / 27,378 / 54,756 (so √7 is
+reachable with √5); √2 8,839 pairs; √14 1,884; and **1,394 radicands in non-rational classes,
+767,983 pairs, 1,535,966 points — 81 % of the pool**. Every one of the 1,767 committed points came
+from the 15 % in-field slice. *Reading, falsifiable:* the design's tiers rank pool points by their
+unit degree in the object, and in a crystal object high degree means ON the half-twist ladder,
+i.e. in-field (an out-of-field glue point generically has only its two parents as unit
+neighbours), so the selection is structural — a blind spot, not a verdict on the material. **The
+test that decides it** (queued after the cull): replay one batch's classes against the
+OUT-OF-FIELD pool alone — its kill mass by class is the number; zero means Kooshi's first horn
+(no kill needs them), nonzero means the second (the tiers hide them).
+
+**Status:** OPEN; the material exists one iteration away and has never been selected.
 
 ## R2 — The tail costs more than the head (the computability tightrope)
 

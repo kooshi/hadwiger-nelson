@@ -54,6 +54,12 @@ cull had ever finished.
 * **The culled object's own floor after the next halo.** G33's compounding predicts the floor
   keeps falling; the cull column measures it exactly now.
 
+* **The out-of-field kill census (RISKS R1's test, first).** Before iteration 5's design: export
+  the depth-1 pool restricted to out-of-field points (the pool builder's provenance pairs → the
+  radicand's square class, `tools/pool_field_census.py`) and replay one batch's classes against it;
+  then the full-pool profile with per-point field tags on every kill. If out-of-field points kill
+  classes the in-field pool cannot, iteration 5's design offers them explicitly (a field-aware tier).
+
 ## Halt clauses, verbatim
 
 μ ≤ 1 at five colours ⟹ HALT AND VERIFY. χ(unit part) 4 → 5 ⟹ HALT and certify the new witness. A

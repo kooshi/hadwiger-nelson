@@ -1,0 +1,49 @@
+{
+ "kind": "pool-field-census",
+ "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+ "live": 1953,
+ "pairs": 950371,
+ "radicands": 1435,
+ "radicands_positive": 1435,
+ "classes": {
+  "1": {
+   "radicands": 32,
+   "pairs": 140195
+  },
+  "2": {
+   "radicands": 2,
+   "pairs": 8839
+  },
+  "5": {
+   "radicands": 2,
+   "pairs": 4092
+  },
+  "7": {
+   "radicands": 0,
+   "pairs": 0
+  },
+  "10": {
+   "radicands": 0,
+   "pairs": 0
+  },
+  "14": {
+   "radicands": 1,
+   "pairs": 1884
+  },
+  "35": {
+   "radicands": 4,
+   "pairs": 27378
+  },
+  "70": {
+   "radicands": 0,
+   "pairs": 0
+  },
+  "None": {
+   "radicands": 1394,
+   "pairs": 767983
+  }
+ },
+ "dps": 50,
+ "seconds": 264.2,
+ "claim_scope": "exact d\u00b2 and radicands in K; class membership = an exact square in K found by PSLQ; 'non-rational class' = no m in {1,2,5,7,10,14,35,70} found, not a proof of irrationality of the class"
+}
