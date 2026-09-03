@@ -19,6 +19,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--object', required=True); ap.add_argument('--putback', default=None)
     ap.add_argument('--core', default=None, help='JSON file with a list of vertex indices to highlight (e.g. a 1-minimal core)')
     ap.add_argument('--load-bearing', default=None, help='JSON file with a list of [u,v] cross chords to draw bold')
+    ap.add_argument('--dropped', default=None, help='JSON file with a list of [u,v] cheats the M52 cull dropped (drawn as a separate layer; they leave the standing set)')
     a = ap.parse_args()
     obj, removed = BK.load_object(a.object)
     rows = json.loads((BK.BUILD / 'm50-batch.json').read_text())['rows']
@@ -66,13 +67,15 @@ def main():
         ulad.append(ladder(math.degrees(math.atan2(dy, dx))))
     core = json.loads(Path(a.core).read_text()) if a.core else []
     lb = json.loads(Path(a.load_bearing).read_text()) if a.load_bearing else []
+    dropped = [tuple(e) for e in json.loads(Path(a.dropped).read_text())] if a.dropped else []
+    dropped_s = set(dropped); live = {e for e in live if e not in dropped_s}
     data = {'label': a.object, 'fingerprint': obj.fingerprint(), 'n': n, 'seed_n': 214, 'deleted': sorted(obj.deleted),
             'unit_class': ucls, 'unit_ladder': ulad, 'copy_centres': sorted({rec[1] for rec in obj.prov if rec[0] == 'rot'}),
             'core': core, 'load_bearing': lb,
             'forced': [obj.A, obj.B], 'points': pts, 'unit': [list(e) for e in ue],
-            'cheats': [list(e) for e in sorted(live)], 'removed': [list(e) for e in removed],
+            'cheats': [list(e) for e in sorted(live)], 'removed': [list(e) for e in removed], 'culled': [list(e) for e in sorted(dropped)],
             'floor': [list(e) for e in floor], 'putback': [list(e) for e in put],
-            'counts': {'unit': len(ue), 'cheats': len(live), 'removed': len(removed), 'floor': len(floor), 'putback': len(put),
+            'counts': {'unit': len(ue), 'cheats': len(live), 'removed': len(removed), 'culled': len(dropped), 'floor': len(floor), 'putback': len(put),
                        'max_depth': max(depth)}}
     page = Path(__file__).resolve().parent / 'descent-viz.html'
     html = page.read_text()

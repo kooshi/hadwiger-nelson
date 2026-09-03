@@ -846,3 +846,28 @@ and loses its statistics) are the follow-up order, with the clean A/B (same jour
 input committed) as its first row. Meanwhile my `cull_enum --loop` IS a chunk engine of a different
 shape — one enumerator refutation drops a whole batch — which is why it is the run finishing the
 plain object's cull tonight.
+
+## §R5. The close (in progress, 2026-09-03) — the scored predictions and the front
+
+**Predictions, scored.** P1 **met** (exact, whole object: 13,796 of 13,796 edges on the half-twist
+ladder). P2 **met** (every genuine cross chord collinear with its centre and seed-field, on four
+compositions). P3 **met** (self-chords = the radius-2 shell: 10 about 206, 15 about the origin).
+P4 **met** (the distance-2 class fires on U at four colours in both encodings; √3 does not).
+P5 **refuted** (kill fraction 0.0000 against ≥ 50 % registered; the mechanism is the spare-colour
+lemma as a halo statement). P6 — see the front. P7 **moot** (no classes killed, so the composed
+law is the plain one). P8 **moot** (no copy material survives as descent material). P9 **missed as
+registered** (5 of 10 under the 60 % threshold at R = 2.5, 3 of 10 at R = 3.0), met in direction
+on every column; the sharper separator is the radius-2 shell (median 5 vs 9). P10 (WO-14's):
+**refuted on its registered bed** (rotation 0 % on cheat groups) and **exceeded on a bed it did not
+register** (3.5 witnesses per solver call on the 883-core's vertices; 2.04× in asks measured at
+A2) — scored per mode from now on.
+
+**The front (the plain object; the compositions are witnesses, not candidates).**
+
+| candidate | kept cheats | points | field | certify |
+|---|---|---|---|---|
+| `it4` before M52 | 273 (27 floor) | 1,981 | ℚ(√3, √11) | committed (M51) |
+| `it4` after the cull | **PENDING — 151 at the last reading, the Rust culler still running** | 1,981 | ℚ(√3, √11) | one-hot UNSAT at 167 (944 s); the 3-bit re-encode capped at 14,400 s — the final certify runs the 3-bit at a long cap |
+| `it4+206p` … `it4+quad` | 273 (the copies kill nothing at five colours) | 3,933–9,789 | ℚ(√3, √5, √11) | k = 4 refusal only (the witnesses) |
+
+The cull's number is the dial reading M52 exists to produce; the decision report follows it.
