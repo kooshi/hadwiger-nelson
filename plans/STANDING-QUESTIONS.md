@@ -328,6 +328,22 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   is exactly as written — verify — and "done" is standing = 0. [kernel + reading; a sharpening of
   this project's own record]
 
+* **Q8, the copy's timing (Kooshi, 2026-09-03: his intuition was that the copy plus its partner
+  lattice would strengthen the object POST iteration — new attachment points for more exotic
+  chords).** The reading after M52: the intuition is right in shape and gated by 5-tightness. A copy
+  of 4-colourable fabric is coloured around at five colours whatever the chords (§R3), exactly as
+  de Grey's copies of 4-TIGHT fabric are NOT coloured around at four; the copy trick's value at
+  five colours switches on when the unit part's own 5-colourings are rigid on the chord endpoints —
+  i.e. after the χ(unit) 4 → 5 crossing the spare-colour theorem requires anyway. **Monitor
+  (registered):** at every iteration after the crossing, re-run the copy kill census (two
+  enumerations, `tools/rank_copies.py`); prediction: kill fraction 0 while χ(unit) = 4, positive
+  after. The partner-lattice half is weaker than it looks: a glue point between a copy point and an
+  original is out-of-field material that generically has only its two parents as unit neighbours
+  (the R1 blind-spot mechanism), and a point needs ≥ 5 pinned neighbours to kill alone (M49) — so
+  those points kill only in the width regime, unless the ρ₁₅ union's rigid chord structure (every
+  cross chord collinear and seed-field, T15) gives them alignment coincidences; that is the pool
+  census on the composed object (`plans/M53-iteration-5.md`), unmeasured. [reading; monitor]
+
 ## §D (continued, 2026-09-01)
 
 Objects: `m50-object-S29-depth2r-it2v2-depth1-it2v2-depth1.json` (it-3, 1,862 pts) and

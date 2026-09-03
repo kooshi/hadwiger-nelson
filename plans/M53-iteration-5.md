@@ -77,6 +77,12 @@ cull had ever finished.
   arriving, and the restriction is lifted. R1's "does a design ever keep an out-of-field point"
   then reads on the full-pool re-ask rather than on the design.
 
+* **The copy kill census after the crossing (Kooshi's intuition, timed).** Once χ(unit part) reads 5
+  (the halt-and-certify event), before the next design: the two-enumeration copy census on one
+  batch. Prediction: the ρ₁₅ copy that killed 0 of 15,218 classes at χ(unit) = 4 kills a positive
+  fraction once the unit part's 5-colourings are rigid — the copy trick becoming the endgame's
+  tool exactly when the spare colour is gone.
+
 ## Halt clauses, verbatim
 
 μ ≤ 1 at five colours ⟹ HALT AND VERIFY. χ(unit part) 4 → 5 ⟹ HALT and certify the new witness. A
