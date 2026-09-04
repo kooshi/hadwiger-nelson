@@ -872,6 +872,15 @@ A2) — scored per mode from now on.
 
 The cull's number is the dial reading M52 exists to produce; the decision report follows it.
 
+**The halo shrink, priced and not run.** A 24-point random sample of the 1,767 halo points asked in
+vertex mode at the culled standing set (the Rust culler's `--census`, twelve workers): 16 necessary,
+3 droppable, 5 undecided at the 3M/30M rungs, 2.7 h wall and 95,025 CPU-seconds — about 1.1
+CPU-hours per probe. Extrapolated over the halo: ~200 hours of desktop wall clock (~1,950
+CPU-hours; ~15 hours on the server at 128 workers) to remove a fraction bounded by the sample at
+12–33 %, i.e. two to six hundred points of 1,981. The plain object goes to iteration 5 at 1,981
+points; the shrink is a server job in WO-16's regime, its value bounded by this sample, and the
+pool's cost for iteration 5 is priced on the unshrunk object.
+
 ## Post-milestone follow-ups (filed, not worked — Kooshi, 2026-09-03: "attention exclusively on the object until the cull and shrink are done")
 
 * **The viewer does not show the rotation provenance.** The composed object FILES record it
