@@ -41,8 +41,9 @@ def main():
     # M53 §Bʹ.2: the assertion's purpose is to refuse spending a cheat the census never EXAMINED. A
     # census that examined every standing cheat (the single-cheat spectrum, `tools/cheat_spectrum.py`)
     # records three lists — essential_alone / droppable_alone / unknown_alone — and any examined cheat
-    # may be spent: an unknown one soundly (spending a cheat only adds classes), a droppable-alone one
-    # for free (no class of any batch is hit only by it). An older row carries essential_alone only.
+    # may be spent: an unknown one soundly (spending a cheat only adds classes); a droppable-alone one is
+    # a cull candidate first (its single absence is refuted) and spendable in a batch like any other. An
+    # older row carries essential_alone only.
     examined = floor | {tuple(e) for e in rc.get('droppable_alone', [])} | {tuple(e) for e in rc.get('unknown_alone', [])}
     F = set(batch) - rem_live
     assert rem_live <= set(batch), 'batch misses a live removed cheat'

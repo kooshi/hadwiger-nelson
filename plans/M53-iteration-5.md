@@ -313,8 +313,12 @@ and open cubes (wall or budget). The adopted `recurse-census` row carries all th
 carried `essential_alone` and a count of unknowns). The sub-batch assertion in `adopt_rust_list.py`
 (`F ⊆ essential_alone`) exists to refuse spending an edge the census never examined; with the spectrum
 examining EVERY standing cheat its honest form is `F ⊆ examined = necessary ∪ droppable ∪ unknown`
-— an unknown cheat is spendable (sound: spending a cheat can only add classes), a droppable-alone one
-rides free (no class of any batch is hit only by it). The adopter is widened to that, with the reason
+— an unknown cheat is spendable (sound: spending a cheat can only add classes), and a droppable-alone one
+is a CULL candidate first: its single absence is already refuted, so `descent cull --candidates` can drop
+it at zero geometry (jointly with the others, which the culler's chunk asks decide — individual redundancy
+does not imply joint redundancy). CORRECTED 2026-09-04 at implementation: it does not "ride free" in a
+batch — a class violating it AND another committed cheat is a joint class the halo must kill; what holds
+is only that the hitting set never NEEDS to keep it. The adopter is widened to 'examined', with the reason
 in its docstring. The cross-instrument check is stated as the consequence it is: the culler's witness
 for `e` is proper on `unit ∪ standing ∖ {e}` and separates the pair, so its palette class is in `S_e`
 by the enumerator's completeness — a witness NOT found among the classes (or an exact-0 run for a
