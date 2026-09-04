@@ -282,22 +282,21 @@ def class_avoid_binary(n: int, edges, k: int, instances, cap: float | None = Non
     return row
 
 
-def class_avoid_binary3(n: int, edges, instances, cap: float | None = None) -> dict:
-    """The k = 5 decorrelated re-encode (M35 §0g G-5): 3-bit binary colours, the three unused
-    codes 5–7 banned per vertex, and ONE uniform mono-ban generator over all eight codes serving
-    edges and instances alike (properness IS mono-banning the edge; banning a tuple at an
-    already-banned code is sound redundancy, and uniformity keeps the generator honest). The
-    palette pin (vertex 0 wears code 0) is sound by relabelling, exactly as the 2-bit pin.
-    Exists so a k = 5 `fired` verdict never rests on a single clause generator; agreement with
-    `class_avoid` at k = 5 is asserted by the self-test gadgets and a random-graph loop."""
-    _check_instances(instances)
+def binary3_bit(v: int, i: int) -> int:
+    """The DIMACS variable for bit `i` of vertex `v`'s 3-bit code."""
+    return v * 3 + i + 1
 
-    def bit(v: int, i: int) -> int:
-        return v * 3 + i + 1
+
+def binary3_clauses(n: int, edges, instances) -> list[list[int]]:
+    """The k = 5 decorrelated re-encode's clause set, as ONE generator (M53 §B D2: the cube front-end
+    `tools/cube_certify.py` cubes over exactly these clauses, so the monolithic ask and the cubed ask
+    can never drift apart): 3-bit binary colours, the three unused codes 5–7 banned per vertex, one
+    uniform mono-ban over all eight codes for edges and instances alike, and the palette pin (vertex
+    0 wears code 0 — sound by relabelling). Variables: `n * 3`."""
 
     def lits_ne(v: int, c: int) -> list[int]:
         # literals asserting "v does not wear code c": some bit differs from c's pattern
-        return [bit(v, i) if ((c >> i) & 1) == 0 else -bit(v, i) for i in range(3)]
+        return [binary3_bit(v, i) if ((c >> i) & 1) == 0 else -binary3_bit(v, i) for i in range(3)]
 
     clauses: list[list[int]] = []
     for v in range(n):
@@ -317,13 +316,32 @@ def class_avoid_binary3(n: int, edges, instances, cap: float | None = None) -> d
         mono_ban(inst)
     if n > 0:
         for i in range(3):
-            clauses.append([-bit(0, i)])
+            clauses.append([-binary3_bit(0, i)])
+    return clauses
+
+
+def binary3_decode(model: set[int], n: int) -> list[int]:
+    """The colouring a 3-bit model encodes (codes 0–7; a code ≥ 5 means the ban clauses are wrong)."""
+    return [sum((1 << i) for i in range(3) if binary3_bit(v, i) in model) for v in range(n)]
+
+
+def class_avoid_binary3(n: int, edges, instances, cap: float | None = None) -> dict:
+    """The k = 5 decorrelated re-encode (M35 §0g G-5): 3-bit binary colours, the three unused
+    codes 5–7 banned per vertex, and ONE uniform mono-ban generator over all eight codes serving
+    edges and instances alike (properness IS mono-banning the edge; banning a tuple at an
+    already-banned code is sound redundancy, and uniformity keeps the generator honest). The
+    palette pin (vertex 0 wears code 0) is sound by relabelling, exactly as the 2-bit pin.
+    Exists so a k = 5 `fired` verdict never rests on a single clause generator; agreement with
+    `class_avoid` at k = 5 is asserted by the self-test gadgets and a random-graph loop.
+    The clauses come from `binary3_clauses` (shared with the cube front-end)."""
+    _check_instances(instances)
+    clauses = binary3_clauses(n, edges, instances)
     t0 = time.time()
     status, model = _solve(clauses, n * 3, cap)
     row = {"encoding": "binary-3bit", "n_instances": len(instances), "outcome": status,
            "seconds": round(time.time() - t0, 2), "cap": cap}
     if status == "sat":
-        colours = [sum((1 << i) for i in range(3) if bit(v, i) in model) for v in range(n)]
+        colours = binary3_decode(model, n)
         if any(c > 4 for c in colours):
             raise SystemExit("BINARY3 MODEL INVALID: a banned code (5–7) appears — the "
                              "per-vertex ban clauses are wrong")

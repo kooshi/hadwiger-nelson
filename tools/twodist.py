@@ -834,14 +834,22 @@ def edge_critical(n: int, unit_e, two_e, k: int, cap: float, seed: int = 0, log=
             "necessity": {"complete": unk == 0, "witnesses": wit, "unknown": unk}, "seed": seed}
 
 
+def forces_clauses(n: int, unit_e, two_sub, iA: int, iB: int) -> list[list[int]]:
+    """The one-hot forcing ask's clause set, as ONE generator (M53 §B D2 — the cube front-end
+    `tools/cube_certify.py` cubes over exactly these clauses): base + at-most-one on
+    `unit ∪ two_sub`, first-occurrence palette breaking over the degree order, and `A ≠ B`
+    (palette-invariant). Variables: `n * K`."""
+    cls = coloring.base_clauses(n, list(unit_e) + list(two_sub), K) + rigidity.amo_clauses(n, K)
+    cls += _brk_full(n, K, _degree_order(n, list(unit_e) + list(two_sub)))
+    cls += [[-coloring.var(iA, c, K), -coloring.var(iB, c, K)] for c in range(K)]
+    return cls
+
+
 def forces_outcome(n: int, unit_e, two_sub, iA: int, iB: int, cap: float) -> str:
     """Is A = B forced on (unit ∪ two_sub) at five colours? `A ≠ B` as clauses (palette-invariant)
     with first-occurrence breaking. Returns the SOLVER outcome: `unsat` = forced, `sat` = a
     separating colouring exists, `unknown` = undecided at cap (never folded into either)."""
-    cls = coloring.base_clauses(n, list(unit_e) + list(two_sub), K) + rigidity.amo_clauses(n, K)
-    cls += _brk_full(n, K, _degree_order(n, list(unit_e) + list(two_sub)))
-    cls += [[-coloring.var(iA, c, K), -coloring.var(iB, c, K)] for c in range(K)]
-    st, _ = forcer._solve(cls, n * K, cap)
+    st, _ = forcer._solve(forces_clauses(n, unit_e, two_sub, iA, iB), n * K, cap)
     return st
 
 

@@ -38,9 +38,15 @@ def main():
     rows = json.loads((BK.BUILD / 'm50-batch.json').read_text())['rows']
     rc = [r for r in rows if r['kind'] == 'recurse-census' and r['label'] == a.object][-1]
     floor = {tuple(e) for e in rc['essential_alone']}
+    # M53 §Bʹ.2: the assertion's purpose is to refuse spending a cheat the census never EXAMINED. A
+    # census that examined every standing cheat (the single-cheat spectrum, `tools/cheat_spectrum.py`)
+    # records three lists — essential_alone / droppable_alone / unknown_alone — and any examined cheat
+    # may be spent: an unknown one soundly (spending a cheat only adds classes), a droppable-alone one
+    # for free (no class of any batch is hit only by it). An older row carries essential_alone only.
+    examined = floor | {tuple(e) for e in rc.get('droppable_alone', [])} | {tuple(e) for e in rc.get('unknown_alone', [])}
     F = set(batch) - rem_live
     assert rem_live <= set(batch), 'batch misses a live removed cheat'
-    assert F <= floor, f'batch spends edges outside the census floor: {F - floor}'
+    assert F <= examined, f'batch spends edges the census never examined: {F - examined}'
     # 3. the engine's own claim
     rep = Path(a.report).read_text()
     assert 'claim     exact' in rep and 'IS the class set of this stage' in rep, 'report does not claim exact+verified'
