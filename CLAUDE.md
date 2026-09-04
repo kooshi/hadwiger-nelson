@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M50, 2026-08-24.**
+**Last updated: M52, 2026-09-04.**
 
 ### Where the problem stands
 
@@ -772,6 +772,53 @@ a new 5-chromatic witness as a by-product) is adopted as an M51 kernel opener. T
 incidents were caught by controls and recorded; predictions scored four met, four missed with
 their measurements — P7 missed by exactly three cheats (403 vs ≤ 400).
 
+M52 opened as a study and closed as an algorithm change. Kooshi's duplicate-and-detune construction
+had turned the descended object into a family of new 5-chromatic unit-distance graphs (Q8), and the
+milestone asked what they are and whether any of them is the stronger base for the descent. The
+atlas answered the first question exactly: **every point the descent ever committed lies in
+ℚ(√3, √11), the seed's own field** (T14 — all 13,796 unit edges verified as exact identities in the
+4-basis), because **every unit edge of the object lies on one direction ladder**, the seed's three
+families rotated by whole multiples of the Moser twist arccos(5/6) (T13, 13,796 of 13,796, and the
+copies one ρ₁₅ step over); a copy adjoins exactly √5, so the copy unions live in ℚ(√3, √5, √11),
+Heule-510's field, inside the kernel's existing M02 tower — which reprices the certificate of the
+883-point copy-lock core from a 24-radical compositum to the M06 pipeline. The mechanism of the lock
+is finite and measured (T15): the distance-2 pigeonhole fires on the unit part at four colours
+(5,470 exact pairs, both encodings, under a second — G16 met from below), and on the 883-core the
+two sides' 4-colourings project to 3,516 and 1,062 patterns on the thirteen genuine chords, every one
+of the 3,733,992 pairs killed, every chord the sole killer of some pairs, no pair compulsion inside
+either set — a distributed kill over a centre-colour bias, not a spindle. The second question closed
+the other way, **exactly**: a ρ₁₅ copy kills **0 of 15,218** separating-colouring classes at five
+colours (two enumerations; 20 of 20 sampled classes extend by direct SAT with the copy side
+4-coloured) — the spare-colour lemma acting on a halo: 4-colourable material attached by a few dozen
+chords is coloured around by the fifth colour, and copies never touch each other (0 copy–copy unit
+chords in any composition), so the compositions are witnesses, not descent material; P5 refuted, F3
+fired, and the copy trick's value is now registered as gated by the χ(unit) crossing — the
+endgame's tool, seen early. What stays is the third descent move: **the cull**. No cull had ever
+finished; the plain iteration-4 object's cheats fell **273 → 149** with no material added — 114 by
+an exact enumeration loop (a jointly redundant batch is one refutation with zero classes; the first
+100 of 246 candidates fell that way) and 10 by the Rust culler WO-14 built the same day (gate 269 of
+269, verified by the owner; census 273 of 273 against the floor census), 60 kept cheats witnessed,
+27 floor, **52 undecided at the conflict ladder and held**; the culled set refuted in the one-hot
+encoding in 10,640 s (UNSAT), the 3-bit re-encode unknown at its 12-hour cap — a CANDIDATE on one encoding until the cube front-end lands (R3). WO-14's planning found why the reference cull
+had stalled — **the CNF, not the compute**: hard clauses with the palette order over the present
+edges decide in 121 s where guarded selector literals sat undecided at 1,302 s — and its
+implementation measured the next wall: accepted drops are sequential whatever the worker count (a
+refutation against a stale snapshot licenses nothing; 2 minutes per drop at twelve workers), so
+width buys nothing in the drop phase and the chunk is the repair (WO-16). The halo shrink was priced
+by a 24-point vertex census (1.1 CPU-hours per probe; 12–33 % droppable) and not run. Two more
+things landed as the risks were written down (`plans/RISKS.md`): the depth-1 pool of the current
+object is **15 % in-field and 81 % non-rational classes, with √5 and √35 material one iteration
+away (8,184 and 54,756 pool points) — and every committed point came from the in-field 15 %**, a
+structural selection the tiers make (high object-degree means on-ladder means in-field), whose test
+(the out-of-field kill census) is iteration 5's first row and whose payoff, if it reads zero, is
+Kooshi's in-field pool at ~6× less cost; and the halt clause read exactly — one standing cheat is a
+two-branch disjunction to VERIFY, zero is the theorem. Kernel: `Copy.lean` (the spindle rotation for
+any pair distance, with the Moser twist and ρ₁₅ as instances; the self-chord law; the copy union as
+a comap), 553 declarations clean. Predictions: P1–P4 met, P5 refuted, P6 met in its first half (≤ 184 registered, 149 measured) and moot in its second (no composition is a candidate), P7/P8 moot, P9
+missed as registered, P10 refuted on cheats and exceeded on vertices. The decision at the close:
+the next milestone is iteration 5 from the culled plain object (M53) or the certificate of the
+copy-lock core; Kooshi picks.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -834,6 +881,8 @@ their measurements — P7 missed by exactly three cheats (403 vs ≤ 400).
 | 44 | **The two-distance dial: μ defined, its ends in the kernel, and the first certified descents** (M49). **Kernel** (`DistanceGraph.lean`, `OneDefect.lean`, `Homogeneous.lean` generalized, `PairDist.lean`, `Instances/{OneDefectSpec,HexShell}.lean`; axioms exactly the standard three): `distanceGraph V D` with `unitDistance_eq_distanceGraph_singleton`, `chromaticNumber_unitDistance_le_distanceGraph`, the edge-list reduction `add_one_le_chromaticNumber_distanceGraph_edgeList` (any finite non-k-colourable graph drawn with edges in `D`, `0 ∉ D`); relation-generic homogeneity `transport_pair` with `Separated.planeIn`/`Forces.planeIn` (one forced pair at a distance is every pair, in any distance graph); **`not_colorable_of_forced_equal`** — the spindle theorem, `k`-generic, for ANY `d ≥ 1/2` (a `d`–`d`–`1` triangle exists by `Glue.sphere_inter_sphere`; converse `not_exists_dist_eq_and_dist_eq_one_of_lt_half` — the `hd` hypothesis is exact); **`add_one_le_chromaticNumber_unitDistance_of_one_defect`** (a `(k+1)`-chromatic drawn graph with ONE non-unit edge at distance ≥ ½ gives χ ≥ k+1); `forces_of_gadget` (a `Gadget` whose admitted patterns all agree on two ports is a `Forces` proof); spec: `four_le_chromaticNumber_plane_of_rhombus` (the Moser bound from the rhombus alone, both entry points, `d < 1/2` red); free consumer **`seven_le_chromaticNumber_hexShell_distances`** — χ(ℝ²;{1,√3,2}) ≥ 7 as a theorem about `distanceGraph`. **Measured** (desktop, `tools/twodist.py`, every model validated in-process, every removal triple-checked): (a) Exoo–Ismailescu's seed re-derived exactly — T 57, V 205, G 966+423, H 214/1004+446, K 426/2009+892, |AB| = 5, |BB′| = 1, exactly 18/35 colourings up to palette with `A = B` in all 35 — and the certificate priced (three cubes 24.0/22.9/19.8 M hints trimmed; the 173-vertex core WORSE at 74 M; six-port design ~78 M; configs −26 %; proof-guided shrink a fixed point) and deferred; (b) **Parts's G31 rebuilt exactly** (G16 an induced {1,φ}-subgraph of the pentagon Minkowski sum G126 with 350+350 edges — his counts planted; the two-copy rotation's unit edge an exact identity, other cross pairs off by ≥ 0.0132) and **edge-critical to the last edge**: μ(φ) over its subgraphs = 56/56 (`tools/parts_phi.py`); (c) **phase 2 as a sandwich `29 ≤ μ_H ≤ 252`** — 29 distance-2 edges of H are essential ALONE (single-deletion census, 446 asks, 0 unknown, reproduced twice: an edge whose lone deletion admits a separating colouring lies in every forcing subset), 252 the parallel-ddmin survivor count with 114 of them individually deletable at 960 s (`--seed-edges-census`); (d) **the k = 4 calibration**: 37/40 essential (two orders agree); the seam pool removed **34 of 37** distance-2 edges in the scan's own order, all certified (2-bit re-encode UNSAT, halos 1-minimal, 527 witnesses over 527 halo vertices, halo sizes 5,0,3,1,0,49,0,21,16,9,8,10,5,8,0,4,13,6,2,56,2,0,1,45,37,18,17,21,6,34,64,29,18,19), 122 → 649 vertices; stall at μ_upper = 3 with the survivors `(15,57)`, `(112,118)`, `(113,119)` refusing seam AND up one-generation pools (and `(15,57)` a 27,690-point two-generation seam pool); the unit part alone still 4-colourable; **the two-generation seam-then-up pool (~64,000 points) turns all three UNSAT** — their certified commits did not finish (a 28,000-point shrink at four colours ran 9.5 h and was stopped; the three UNSAT probes stand as single-encoding probes, and the four-colour object is not rigid enough — > 20,000 colourings — for the lookup engine that finished the job at five). (e) **the k = 5 descent** (`--descend5-lb`): the registered full-pool run at 180 s undecidable (seam 243 unknown/9 refused; up 219/33) and replaced by the lower-bound-targeted radius ladder at 900 s: seam r = 1.5 (153–424 points) **8 of 29 UNSAT**, seam r = 3 (592–1,223) 4 more, seam whole (1,386–1,677) 0/17, up r = 1.5/3/whole (235–2,760) 0/17 each — **every ask decided, zero unknown**; **twelve certified removals for seventeen points** (halos 1,1,1,2,0,0,1,1,1,9,0,0; UNSAT 4.8–9.6 s each; 3-bit re-encode UNSAT; 1-minimal; every survivor witnessed), object 214 → 231, distance-2 edges 446 → 434; the mechanism measured on `(76,78)`: the kill point at unit distance from endpoint 78 with 9 unit neighbours whose neighbourhood is forced rainbow in every separating colouring (forbidding any colour on it UNSAT, control SAT). (f) **the kill engine** (`tools/killengine.py`, §R8–§R9): depth-one partner census (9,485 points, 59 radicands, 51 with ≥ 5 seed neighbours — the complete single-point kill space in any field); exact separating-colouring lists for all 17 refusers (2–19 each); lookup screens with the solver census as a green cross-check (0 single-point kills, 867 asks); **whole-set tests: depth one exhausted for all 17 in every field; restricted depth two kills 7**; seven 1-minimal gadgets by lookup ddmin (122/267/254/147/87/225/101 points), ALL certified on `H − e` with exact sympy geometry (labelled 200-digit fallback where simplify times out) and two encodings; **kills are context-dependent** — all nineteen at once is SAT — and sequential commits land two of the seven (`(56,168)`, `(56,78)`), so the composed descent object holds **14 of 29 lower-bound edges removed** (543 points, 432 distance-2 edges). Predictions: P4a/P5/P8 met, P4b refuted, P4c met at depth two (probes), P2 undecided, P3 vacuous, P6 missed (0/17 at every radius, all decided), P7 refuted literally, P1 missed. Instruments banked: `tools/twodist.py` (census-first sandwich, parallel ddmin, `descend_parallel`, radius-laddered `phase_descend5_lb` with exact resume, ddmin halo shrink with a robust parallel necessity census), `tools/hitset.py` (implicit-hitting-set exact μ engine — right for ≤ ~60 columns, measured wrong for 446), `tools/parts_phi.py`, `tools/m49_rederive.py`. | `Proofs/HadwigerNelson/{DistanceGraph,OneDefect,Homogeneous,PairDist}.lean`, `Instances/{OneDefectSpec,HexShell}.lean`, `tools/{twodist,hitset,parts_phi,m49_rederive}.py`, `build/m49-*.json`, `plans/M49-two-distance-descent.md` §R | M49 |
 
 | 45 | **The batch descent: composition by construction, and the lattice that compounds** (M50). **Kernel** (`PartnerLattice.lean`, axioms exactly the standard three): `Glue.eq_gluePoint_of_unit_pair` — a point at unit distance from two DISTINCT points is the glue point of their unit circles or its mirror, only `x ≠ y` assumed (both annulus bounds derived from the witness) — and `Glue.finite_two_unit_neighbors` — the depth-one candidate space over any finite set is finite: the kill engine's "single-point kills live in the partner lattice, in any field" as theorems. **Measured** (desktop; `tools/batchkill.py` — provenance objects, entropy-split cube enumeration, seed-projection blocking, tiered whole-pool feasibility, wave-parallel cover, process-parallel shrink, per-verdict checkpoints; SIX engine swaps mid-campaign, each measured before changed and regression-gated after, 383/383 twice): **\|S₂₉\| = 51,350 exact** (entropy-guided cubes, 24 min); **two certified batch commits** — 19 cheats via a 465+11-point halo (2,954 edges verified, one-hot + 3-bit UNSAT), then on the corrected iteration-2 chain (45,365 list lines; **corrected at M51 incident 4: 24,810 distinct classes — the class set exact, the count an enumerator artifact; commits certified independently and stand**; profile 45,216/46/103 in line units) **24 more via a 318-point halo** (2,455 edges, both encodings UNSAT, 620 s) — **object 1,008 points / 403 cheats, 43 of 446 removed**; floors 29 → 36 → 17 with (132,134) falling to the halo; **the core probe** — per kept refuser edge, S_e exact on seed classes vs the grown 394,604-point lattice: **five FALL clean, six near-fall at ZERO provable survivors** (2,402 list lines — **recounted at M51: 1,755 distinct classes, 26.9 % enumerator duplicates (incident 4); killed/undecided 2,351/49 are line units, so class-level undecided ≤ 49; the zero-survivor verdict unaffected, a duplicate killed twice is killed** — at 7,200-s caps, never folded) — growth compounds; **277 width-shaped stalls** (strong-rung SAT, capped ddmins land 2,551–14,960 and still descending) price the depth-2 escalation; **P5 field census**: 727/794 committed points carry depth-1-catalogue radicands, 67 (all depth ≥ 2) adjoin new roots concentrated on a handful of values. **The weighted-ladder scan** (`tools/m50_skewscan.py`, palette-invariant functionals on the held lists; controls reproduce §R5 exactly; completed cast-free by a decorrelated adversarial agent + our tool independently): **148 absolute virtual edges at d ∈ {3,4}** (the six d = 4 = diameters through v0: forced central ANTI-symmetry at five colours), **412 absolute never-3-distinct triangles** in five families on {√3,√7,2√3,√13} (the "16" first reported was a cast artifact — G21 on a positive count), distance-class polarization seed-native; **the spare-colour lemma** ((k−1)-colourable ⟹ no pair compulsion at k ⟹ every 5-colour virtual-edge gadget is ≥ 5-chromatic; the χ(unit-part) phase monitor — still 4-colourable at 1,008) adopted as an M51 kernel opener; the diet meter prototyped (cheat supports 166/176/191, common core 78). Three incidents (stage under-accumulation; the deferral cascade's mislabelled cause; the free-minimizer swap) all caught by always-run-the-ask controls. Predictions: P2a/P2b/P3 met, P4 met-in-substance, P1/P6 missed on the 30k cost heuristic, P5 refuted-in-strict-form as registered, P7 missed by three. | `Proofs/HadwigerNelson/PartnerLattice.lean`, `tools/{batchkill,m50_skewscan}.py`, `build/m50-*.json`, `plans/M50-batch-descent.md` §R0–§R7, §Sⁱᵛ, §Sⁱᵛ-adv | M50 |
+
+| 46 | **The copy-lock atlas, the cull, and the field** (M52). **Kernel** (`Copy.lean`, standard three axioms): `spindleRot d` with `spindleRot 2 = rho15`, `spindleRot √3 = moserTwist`, the exact `1/2 ≤ d` (red at `1/4`), `dist_self_rotAbout` (hypothesis-free), `self_chord_iff` (self-chords = the radius-d circle), `copyUnion` as `(unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` with both containments and `chromaticNumber_copyUnion_le`. **Measured, exact**: T13/P1 (13,796 of 13,796 edges on the half-twist ladder), T14 (every point in ℚ(√3, √11), all edges exact identities; copies exact in ℚ(√3, √5, √11)), P2 (every genuine cross chord collinear and seed-field), P3 (self-chords = the radius-2 shell), P4 (d = 2 pigeonhole fires on U at k = 4, √3 clean), T15 (the kill table: 3,516 × 1,062, all pairs killed, 13 sole-killer chords, no pair compulsion, centre-colour bias to 65 %), P5 REFUTED (0 of 15,218 classes; 20/20 direct extensions, copy side 4-coloured), 0 copy–copy chords; **the cull 273 → 149** (114 by enumeration, 10 by WO-14; 60 witnessed, 27 floor, 52 undecided; one-hot UNSAT 10,640 s, 3-bit unknown at 43,200 s: candidate); the pool field census (15 % in-field, √5/√35 reachable, 100 % of commits in-field); the shrink priced (1.1 CPU-h/probe, 12–33 %); WO-14 delivered (gate 269/269; A3 273/273; the CNF finding; the sequential-acceptance floor; D74–D77; WO-16 stubbed). Instruments: `compose`, `copy_anatomy`, `copy_exact_field`, `copy_field_probe`, `copy_kill_table`, `cull_enum --loop`, `rank_copies`, `pool_field_census`, `m52_final_certify`; the viewer's copy/cull layers. Records: `plans/RISKS.md`, `plans/STUB-field-wall.md`, `plans/M53-iteration-5.md`, `plans/STUB-certify-core883.md`, `DESCENT-ALGORITHM` phase 0″/2′. | `Proofs/HadwigerNelson/Copy.lean`, `tools/{compose,copy_anatomy,copy_exact_field,copy_field_probe,copy_kill_table,cull_enum,rank_copies,pool_field_census,m52_final_certify}.py`, `data/m52/`, `plans/M52-copy-lock-objects.md` §R0–R5 | M52 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -975,6 +1024,15 @@ and no cull of any of them has finished. M52 studies the family until its geomet
 culls by enumeration, shrinks the strongest object, and closes at the decision; the milestone
 after it is iteration 5 from that object or the pivot the study earns. The former "M52"
 (nominated gadgets) is the unnumbered `plans/STUB-nominated-gadgets.md`.)*
+
+*(M52 CLOSED 2026-09-04 — desktop, two days. The study answered both of its questions exactly
+(T13–T15; the compositions are witnesses, not descent material) and the cull landed as the third
+descent move: 273 → 149 on the plain iteration-4 object, one-hot certified, 3-bit pending; WO-14
+delivered the Rust culler the same day. The close's recommendation is **M53 — iteration 5 from the
+culled plain object** (`plans/M53-iteration-5.md`), opening with the out-of-field kill census
+(`plans/RISKS.md` R1) and, if it reads zero, Kooshi's in-field pool; the competing candidate is the
+certificate of the copy-lock core (`plans/STUB-certify-core883.md`, repriced to M06-class by T14).
+Kooshi picks.)*
 
 1. **M51 — the descent's iteration 3+ (the compounding loop, continued) — DEFERRED 2026-09-02 at its iteration-4 commit; resumes as the milestone after M52 if M52's decision is iteration 5**
    (`plans/M51-descent-engine.md`, full stub with the SPEED MANDATE and the measured per-phase
@@ -1713,6 +1771,24 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   G25 (the recursion's cost ladder); the spare-colour lemma bounds what the loop can ever
   quietly skip — the unit part must cross 4 → 5 before the end, so the loop mints a 5-chromatic
   witness en route or fails visibly.*
+* **G34 — The field is the selection, and the descent has never left it.** [measured, exact] Every
+  committed point lies in ℚ(√3, √11) because every glue point the design ever kept is a parent plus a
+  ladder unit vector (T13/T14), while the depth-1 pool is 85 % out-of-field with √5 and √35 material
+  one iteration away. The tiers rank pool points by object degree; in a crystal object high degree
+  means on-ladder means in-field. *Reading, falsifiable by the out-of-field kill census:* the
+  selection is structural, not a verdict on the material. Composes with G1 (the field wall) and G19
+  (5-tight fabric): if the census reads zero, Kooshi's in-field pool buys ~6× until the wall; if
+  nonzero, the design gains a field-aware tier.
+* **G32, sharpened**: the copy trick is the endgame's tool — a copy of 4-colourable fabric is
+  coloured around at five colours (P5's zero), and the same copy becomes a kill when the unit part's
+  5-colourings are rigid, i.e. after the χ(unit) crossing; registered as a per-iteration monitor.
+  And the halt clause read exactly: one standing cheat is a two-branch disjunction to verify; zero
+  is the theorem.
+* **G33, extended**: growth compounds AND redundancy accumulates — the cull is the third descent
+  move, zero geometry, and after every commit the standing set shrinks without a halo (273 → 149 on
+  the first complete cull).
+* **G21, fifth instance**: a copy union's "copy–copy chord" at the float census's 1e-7 was a
+  near-miss the exact census rejected; every composed object now carries its exact-rejected pairs.
 * **G31 — The witness's rigidity at its top rung is exactly its own fan, and there is
   nothing underneath it.** (M48, 2026-08-15; a theorem plus two complete sweeps, no
   induction anywhere.) `arityFloor_le_of_degree` guarantees de Grey's 1581 carries a

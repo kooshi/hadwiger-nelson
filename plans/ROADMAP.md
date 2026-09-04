@@ -148,25 +148,13 @@ Rules that bind both: one heavy job on the box; one work order per engine sessio
 implemented by different agents, one writer per worktree, I push; every finding recorded the day it
 lands (his standing instruction, 2026-08-31); a headline carries its population (G21).
 
-## The next seven days, in order (rewritten 2026-09-02 at the M52 minting; the loop is paused)
+## The next seven days, in order (rewritten 2026-09-04 at the M52 close)
 
-1. M52 phase 0: housekeeping (done with the subplan commit), the instruments with their planted
-   reds (`compose`, `copy_anatomy`, the viewer's copy layers, `cull_enum` as the one-batch control,
-   `ferry`), the kernel sitting (`Copy.lean`) beside them — and **WO-14's planning session spawned
-   in a worktree the same day** (M52 §13: the Rust culler is the cull's and the shrink's workhorse).
-2. M52 phase 1–2 (compute-light): the atlas and the mechanism — P1's direction ladder replicated on
-   the whole object, P2/P3 on every cross chord, P4's distance-2 class-avoidance ask on U at four
-   colours, the 883-core's colouring anatomy, P9 on the non-locking centres. Viewer republished.
-3. M52 phase 3 (the heavy job): one it-5 batch list on the plain it-4 object; every candidate copy as
-   a pool; `descent replay` per copy; the ranking (P5) → the composition.
-4. M52 phase 4: the cull by enumeration on the plain object (control dial) and on the composition;
-   cull3 on one batch as the method control; P6/P7 scored; the final kept set certified twice.
-5. M52 phase 5: the shrink — the cheap ladder (P8) first, then vertex group-MUS with cores.
-   **The server gate (M52 §12):** the first batch's and the shrink's measured rates are extrapolated
-   to two server nodes (conservative and optimistic brackets) and REPORTED; Kooshi decides;
-   any travelling phase ships as a `tools/ferry.py` bundle (manifest + self-test + resumable
-   checkpoints) and its results are re-certified at home.
-6. Engine, in the gaps: WO-3 replan (Arch server, INC-3's v2 pin), D38's provenance dialect for
-   rotated copies STUBBED against the composition M52 chooses (it is it-5's first work order).
-7. M52 close: object cards, `data/m52/`, Frontier + Grokkings, predictions scored, the next-milestone
-   stub (M53 = it-5 from the chosen object, or the pivot); Kooshi picks.
+1. Kooshi's pick: M53 (iteration 5 from the culled plain object) or the certificate.
+2. If M53: the out-of-field kill census FIRST (R1's test; ~hours: a restricted pool export + one
+   batch's replay); then the in-field pool if it reads zero; then the loop from the 149-set with
+   `descent cull --census` as phase 0 and the cull as a per-commit column.
+3. Engine: WO-16 (licence holding, drain on signal, the clean A/B; D75–D77); WO-3's replan for the
+   server; the 3-bit cube front-end (R3).
+4. The 52 undecided cheats re-asked at a higher rung on the server or overnight on the desktop.
+5. The viewer's copy-provenance follow-up (post-milestone item).
