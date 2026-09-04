@@ -85,7 +85,7 @@ cull had ever finished.
 
 ## Carried unknowns (Kooshi, 2026-09-04: "unknowns just get carried")
 
-* **The 52 undecided cheats** of M52's cull stay in the standing set as kept-undecided; their re-ask
+* **The 52 undecided cheats** of M52's cull (6 of them decided NECESSARY by the 300M-rung re-ask before it was stopped; 46 remain) stay in the standing set as kept-undecided; their re-ask
   at the 300M rung is deferred until after iteration 5's commit, when the more rigid object makes
   the asks easier (the same rule the loop has used for every unknown: carried, never folded). The
   culler's journal `build/m52-rustcull-it4/cull.jsonl` resumes by the same command.
