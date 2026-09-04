@@ -687,3 +687,34 @@ parts.
   bounds and are corrected at the close (RISKS R1 amended now, below the first measurement).
 * **The spectrum's ten-minute wall is honoured** (eight fresh root solves at 10:24 elapsed, wrapping
   up their verification); the resumed reads gave the first seven verdicts.
+
+## §R2. Phase B in flight (2026-09-04, desktop) — the culled object's single-cheat asks cost 25× the un-culled object's
+
+* **The measurement that reframed the spectrum.** On the UN-culled iteration-4 object (273 standing
+  cheats) the floor census's single-deletion asks took a median **47 s (sat) / 121 s (unsat)**, max
+  148 s (273 asks, hard one-hot, `data/m51/m51-floor-it5-verdicts.jsonl`). On the CULLED object (149
+  standing, every one witnessed necessary or undecided) the Rust culler's 320 deletion probes averaged
+  **2,962 s each** (947,902 probe-seconds; rungs 3 M / 30 M conflicts; `build/m52-rustcull-it4/cull.json`),
+  and the enumerator's single-cheat root solves at 40 M conflicts find NO separating colouring within a
+  600-s wall for the large majority of cheats — including witnessed ones whose colouring exists (the
+  witness supplies the class; the solver does not reach it). The cull made the object TIGHT: with every
+  remaining cheat individually necessary, the colourings that appear when one is removed are rare and
+  the refutations deep, so one ask costs ~50 min where it cost ~1–2 min before the cull. This is R2's
+  "the tail costs more than the head", measured on the dial's own instrument: **the price of a
+  single-cheat verdict rose ~25× across the cull**, at the same object size.
+* **What the spectrum therefore yields**: the CHEAP END exactly (the cheats whose classes appear in
+  seconds — `7-35`, `25-52`, `38-186` at 1 class; `66-142` at 6; `4-90` 4,440; `4-208` 8,242; `4-159`
+  38,694; `4-205` 50,840 — all four `4-*` floor cheats at the first-batch vertex 4), "necessary by
+  witness" for the witnessed cheats the solver cannot reach in ten minutes, "necessary by the census"
+  for the floor cheats likewise, and `unknown` for most of the 46 undecided — the batch grower needs
+  only the cheap end, so the pass's value is intact; its cost is the ~20 min per cheat (wall +
+  verification) × 149 / 16 jobs ≈ 3 h, and it runs to completion for the record and P-M53-2's score.
+* **Consequence for phase B′ (registered now, before B′ runs)**: the cube driver over ALL unknown
+  cheats would cost ~46 × (32 workers × the same hard asks) — the "carried unknowns" Kooshi deferred
+  past iteration 5 precisely because the post-it-5 object should make them cheaper. B′ is therefore a
+  MEASUREMENT on a sample (four undecided cheats, cube cap 300 s, depth ≤ 8): does the blind case split
+  decide what the monolithic 30 M-conflict probe could not? P-M53-7 is re-stated at that sample: "≥ 1
+  of 4 decided (either way)". The rest stay carried.
+* **A configuration experiment beside the pass**: `64-82` (witnessed; 0 classes in 600 s under the
+  enumerator's default `sat` solver configuration) re-run under `--solver-config default --no-verify`
+  for the same wall — result recorded below when it lands.
