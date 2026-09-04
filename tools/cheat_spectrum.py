@@ -295,10 +295,14 @@ def main():
                     if wc is None:
                         raise SystemExit(f"[spectrum] INSTRUMENT CONTRADICTION: {e}'s exact list ({r['count']} classes) does "
                                          f"not contain its witness's palette class ({W[e][1]}) — the enumeration is incomplete or the witness is not of this stage")
+                elif r["count"]:
+                    wc = "not-checkable-capped"
                 else:
-                    wc = "not-checkable-capped" if r["count"] else None
-                    if wc is None:
-                        raise SystemExit(f"[spectrum] INSTRUMENT CONTRADICTION: {e} has a witness but 0 classes were written")
+                    # an OPEN run that found no colouring within its wall is not a contradiction: the stage
+                    # is SAT (the witness is validated on it), the solver just did not reach a class in
+                    # time — the witness supplies the class, and the cheat is necessary with count ≥ 1
+                    wc = "supplies-the-class"; r["verdict"] = "necessary"
+                    r["evidence"] = {"witness_validated": True, "source": W[e][1], "enumerator": "open, no class within the wall"}
             r["witness_check"] = wc
             r["prior"] = [t for t, s in (("floor", floor), ("witnessed", set(W)), ("undecided", und - set(W))) if e in s]
             print(f"[spectrum] {done}/{len(stage.standing)} {e[0]}-{e[1]}: {r['count']:,} classes {r['claim']} in "

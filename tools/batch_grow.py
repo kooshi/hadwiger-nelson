@@ -88,7 +88,11 @@ def main():
     parse = lambda s: [tuple(int(x) for x in e.split("-")) for e in s.split(",") if e]
     excl = set(parse(a.exclude)) if a.exclude else set()
     recs = {tuple(r["cheat"]): r for r in sp["cheats"]}
-    order = [tuple(r["cheat"]) for r in sp["cheats"] if r["verdict"] == "necessary"]
+    # cheapest first: EXACT singles by count, then the open/capped ones by their (lower-bound) count —
+    # a witnessed cheat whose run found no class within the wall is hard, not cheap, and sorts last
+    nec = [r for r in sp["cheats"] if r["verdict"] == "necessary"]
+    order = [tuple(r["cheat"]) for r in sorted((r for r in nec if r["claim"] == "exact"), key=lambda r: (r["count"], r["cheat"]))]
+    order += [tuple(r["cheat"]) for r in sorted((r for r in nec if r["claim"] != "exact"), key=lambda r: (r["count"] == 0, r["count"], r["cheat"]))]
     if a.include_unknown:
         order += [tuple(r["cheat"]) for r in sp["cheats"] if r["verdict"] == "unknown"]
     order = [e for e in order if e not in excl]
