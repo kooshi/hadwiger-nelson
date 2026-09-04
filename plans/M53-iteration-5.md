@@ -623,3 +623,35 @@ parts.
   memory watched; the spectrum holds 16 threads. The standing "one heavy job" rule is about
   replays/hunts/builds contending for cores and memory; this pair contends for neither (CPU 17 of 32;
   the build's peak measured as it runs). Launched 2026-09-04 ~19:30Z, ~1.5–2 h expected.
+
+## §1′. Amendments to the phase skeleton found at implementation (2026-09-04, before phase B closed)
+
+* **Phase B's budgets** (measured on the first eight root solves): a single-cheat stage's cost is its
+  FIRST solve — finding any separating colouring, or refuting — which runs single-threaded for minutes
+  to tens of minutes at the engine's `sat` configuration; the class writing after it is cheap (~20
+  classes/s at 4 threads). So the pass runs **8 jobs × 2 threads, a 10-minute wall and a 10,000-class
+  cap** (the ranking needs the cheap cheats' counts exactly and the expensive ones' only as "≥ cap"),
+  and 40,000,000 conflicts per solve (the enumeration cull's budget; the engine's 1,000,000 default
+  ends every tight stage undecided). A finished run is done for the pass; `--rerun-open` re-runs open
+  ones at a raised budget.
+* **Phase B′ — the unknowns go to the cube driver** (§R0's correction): for every cheat the spectrum
+  leaves `unknown`, `python3 tools/cube_certify.py --edges <sidecar> --encoding onehot --drop u-v
+  --split 3 --cube-cap 300 --max-depth 8 --workers 32 --out build/m53-cube/drop-u-v` — SAT with a
+  validated colouring = necessary (the colouring is the witness), UNSAT = droppable-alone by the cover
+  invariant, UNKNOWN at the depth cap = carried. Runs after B (the same 32 workers), before A2.
+* **Phase B″ — the droppable-alone cheats go to the cull, not the batch**: `descent cull --edges
+  <sidecar> --groups cheats --candidates <the spectrum's droppable-alone list, JSON> --threads 12
+  --conflicts 3000000,30000000 --out build/m53-cull-pre` decides their JOINT drops (individual
+  redundancy does not imply joint redundancy) at zero geometry; accepted drops shrink the standing
+  set before A1 mints the object (the culled object then carries them in `removed`, with the same
+  certificate route: A2 refutes whatever standing set A1 mints). Sound because A2's certificate, not
+  the cull's bookkeeping, is the mint's truth-maker (§Bʺ.5).
+* **Phase D1 / E1 use `tools/batch_grow.py`** (committed `afa3fed`): the batch grown from the
+  spectrum's cheapest NECESSARY cheats one fresh enumeration per step, stopping before the target
+  class count, with the put-back identity checked against every exact single (§Bʺ.6) — B₀'s target
+  is 20,000 classes, iteration 5's 40,000.
+* **Phase C's numbers**: the full depth-1 pool of the iteration-4 point set is **1,636,399 points**
+  (fp `cc54cdd5a5e2ce0b`; 7,746 s on one core, 2.2 GB RSS, beside the spectrum) from 950,371 live
+  pairs — 2 × 950,371 = 1,900,742 candidate glue points less fusions and object-point coincidences
+  (264,343 fewer), so the census's "2·pairs" was an upper bound as stated; the exact field split runs
+  next and reports its own counts.
