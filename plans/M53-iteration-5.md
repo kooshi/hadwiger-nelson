@@ -83,6 +83,18 @@ cull had ever finished.
   fraction once the unit part's 5-colourings are rigid — the copy trick becoming the endgame's
   tool exactly when the spare colour is gone.
 
+## Carried unknowns (Kooshi, 2026-09-04: "unknowns just get carried")
+
+* **The 52 undecided cheats** of M52's cull stay in the standing set as kept-undecided; their re-ask
+  at the 300M rung is deferred until after iteration 5's commit, when the more rigid object makes
+  the asks easier (the same rule the loop has used for every unknown: carried, never folded). The
+  culler's journal `build/m52-rustcull-it4/cull.jsonl` resumes by the same command.
+* **The whole-object point shrink under the culled set** (the cull for points: which committed halo
+  points are still necessary now that 124 cheats are gone) — zero geometry, value = object size,
+  priced at ~1.1 CPU-h per probe; a server job, or after iteration 5.
+* **Seed-vertex deletion after the it-4 commit** was not re-run; after the cull it frees no cheat
+  (every kept cheat is necessary), so its only value is size; folded into the point shrink above.
+
 ## Halt clauses, verbatim
 
 μ ≤ 1 at five colours ⟹ HALT AND VERIFY. χ(unit part) 4 → 5 ⟹ HALT and certify the new witness. A

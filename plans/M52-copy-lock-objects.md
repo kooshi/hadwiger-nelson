@@ -883,7 +883,7 @@ pool's cost for iteration 5 is priced on the unshrunk object.
 
 ## Post-milestone follow-ups (filed, not worked — Kooshi, 2026-09-03: "attention exclusively on the object until the cull and shrink are done")
 
-* **The viewer does not show the rotation provenance.** The composed object FILES record it
+* **~~The viewer does not show the rotation provenance.~~ RESOLVED 2026-09-04, not a bug (Kooshi): the artifact he read was the plain object, which has no copies; the copy layer renders on composed objects.** The composed object FILES record it
   (every copy point's `prov` record is `['rot', centre, source, sign]`, verified on every load by
   the fingerprint check and re-derived at 30 digits by `Obj.check`), and `descentviz_refresh.py`
   emits copy points as kind `copy` with `copy`/`src` fields — but the published artifact was last
