@@ -49,6 +49,13 @@ test that decides it** (queued after the cull): replay one batch's classes again
 OUT-OF-FIELD pool alone — its kill mass by class is the number; zero means Kooshi's first horn
 (no kill needs them), nonzero means the second (the tiers hide them).
 
+**Correction (2026-09-04, M53 phase C, the exact split of the BUILT pool):** the census's pool-point
+counts were 2·pairs, an upper bound; in-field glue points fuse (a ladder point with k object neighbours
+is the glue point of C(k, 2) pairs), so the in-field slice of the 1,636,399-point pool is **16,348 points
+(1.0 %)**, not 280,390 (15 %), and the out-of-field slice is 1,620,051 (99.0 %), of which 1,620,044 have
+exactly two object neighbours. "≥ 3 object neighbours" is the in-field slice to seven points in 1.6 M —
+G34's reading measured as an identity (`plans/M53-iteration-5.md` §R1).
+
 **Kooshi's conditional (2026-09-03), if the test reads zero:** *keep only the √3 and √11 points for
 all iterations until we hit a wall — a tradeoff between the field-wall monitor and the compute
 exponent.* Registered in `plans/M53-iteration-5.md` (the in-field pool: ~6× smaller pool, profile

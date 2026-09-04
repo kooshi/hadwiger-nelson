@@ -655,3 +655,35 @@ parts.
   pairs — 2 × 950,371 = 1,900,742 candidate glue points less fusions and object-point coincidences
   (264,343 fewer), so the census's "2·pairs" was an upper bound as stated; the exact field split runs
   next and reports its own counts.
+
+## §R1. Phase C closed (2026-09-04, desktop) — the pool, and the field split's surprise
+
+* **The full depth-1 pool**: 1,636,399 points (fp `cc54cdd5a5e2ce0b`), 7,746 s on one core at 2.2 GB
+  RSS, beside the spectrum. `build/m51-pool-d5b1070e4055d241-depth1.{json,npz}`.
+* **The exact field split** (`tools/pool_field_restrict.py`, 243 s; classification = the census pair for
+  pair; PSLQ agreed on all 1,435 radicands): **in-field `depth1-infield` = 16,348 points (1.0 %),
+  87,617 pool–pool unit edges, fp `925710ee49c6becb`; out-of-field `depth1-outfield` = 1,620,051 points
+  (99.0 %), 6,485,542 pool–pool unit edges, fp `b8c27fb0f24eef01`; in + out = all; both re-load through
+  `batchkill.load_pool` with their fingerprints re-derived.**
+* **The surprise, and its mechanism.** The M52 census counted 140,195 in-field PAIRS and wrote "280,390
+  pool points — 15 % of the pool" (2 per pair) — an upper bound, and it is wrong by 17×: the 140,195
+  in-field pairs produce only 16,348 distinct points, because in-field glue points FUSE — a point with
+  k unit neighbours in the object is the glue point of every one of its C(k, 2) neighbour pairs, and
+  in-field points are the ladder points, the ones with many object neighbours. Measured on the
+  exports: **object-neighbour degree of in-field points: mean 2.94, 5,444 of 16,348 with ≥ 3 (up to 9
+  and beyond); of out-of-field points: 1,620,044 of 1,620,051 have EXACTLY 2 (seven have 3), mean 2.00.**
+  So "≥ 3 object neighbours" is, to seven points in 1.6 M, the in-field slice — G34's reading
+  ("high degree means on-ladder means in-field") is now a measured identity, not an inference, and
+  the design's strong rung (≥ 3 object neighbours) IS the in-field pool. The it-4 `pdeg12` pool
+  (285,973 points: ≥ 3 object neighbours OR pool-degree ≥ 12) was therefore ~5 k in-field points plus
+  ~280 k out-of-field points of high pool-degree — and it killed the 42 hard classes 3.1× faster than
+  the full pool with identical verdicts: the width regime the profile's tail lives in is OUT-OF-FIELD
+  material cooperating, which is exactly what phase D measures.
+* **Consequences, registered before phase D runs**: (i) Kooshi's in-field pool, if 0′ chooses it, is
+  100× smaller than the full pool, not 6× — the profile and design on it are minutes, and P-M53-8
+  (≥ 24 workers) is trivially met; (ii) the census's asymmetry sharpens: the in-field replay is
+  trivial, the residual full-pool re-ask is the whole cost; (iii) the numbers in RISKS R1 and the
+  Frontier's M52 paragraph ("15 % in-field", "8,184 and 54,756 pool points") are PAIR-based upper
+  bounds and are corrected at the close (RISKS R1 amended now, below the first measurement).
+* **The spectrum's ten-minute wall is honoured** (eight fresh root solves at 10:24 elapsed, wrapping
+  up their verification); the resumed reads gave the first seven verdicts.
