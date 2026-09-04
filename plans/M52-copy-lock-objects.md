@@ -867,7 +867,7 @@ A2) — scored per mode from now on.
 | candidate | kept cheats | points | field | certify |
 |---|---|---|---|---|
 | `it4` before M52 | 273 (27 floor) | 1,981 | ℚ(√3, √11) | committed (M51) |
-| `it4` after the cull | **PENDING — 151 at the last reading, the Rust culler still running** | 1,981 | ℚ(√3, √11) | one-hot UNSAT at 167 (944 s); the 3-bit re-encode capped at 14,400 s — the final certify runs the 3-bit at a long cap |
+| `it4` after the cull | **149** = 27 floor + 10 loop-kept + 60 witnessed + **52 undecided** at the 3M/30M conflict rungs (held, never folded); 124 dropped (114 by the enumeration loop in 13 batches, 10 by the Rust culler over 320 probes, 24.9 h at twelve workers); the culler's own bracket `[40, 149]`, its final control refutes, its breaking-off control undecided at 30M | 1,981 | ℚ(√3, √11) | the 149-set's two-encoding certify running at 12-h caps (the interim 167-set: one-hot UNSAT 944 s, 3-bit unknown at 14,400 s) |
 | `it4+206p` … `it4+quad` | 273 (the copies kill nothing at five colours) | 3,933–9,789 | ℚ(√3, √5, √11) | k = 4 refusal only (the witnesses) |
 
 The cull's number is the dial reading M52 exists to produce; the decision report follows it.
