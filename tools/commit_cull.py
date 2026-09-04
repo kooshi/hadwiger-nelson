@@ -47,7 +47,7 @@ def standing_sha(standing) -> str:
 def compose(obj, removed, cull: dict):
     """(dropped, standing_new, removed_new) with the identities asserted."""
     standing = [tuple(e) for e in obj.cheats if tuple(e) not in set(map(tuple, removed))]
-    loop = pairs_of(cull["loop"]["dropped"]); rust = pairs_of(cull["rust"]["dropped_groups"])
+    loop = pairs_of(cull["loop"]["dropped"]); rust = pairs_of(cull["rust"]["dropped"])
     assert not (set(loop) & set(rust)), "a cheat dropped by both instruments"
     dropped = sorted(set(loop) | set(rust))
     bad = set(dropped) - set(standing)
@@ -177,11 +177,13 @@ def self_test():
     obj, removed = BK.load_object(lab)
     cull = json.loads((ROOT / "data" / "m52" / "cull-result-it4.json").read_text())
     dropped, standing_new, removed_new, by = compose(obj, removed, cull)
-    assert (len(dropped), len(standing_new), len(removed_new), by) == (124, 149, 195, {"loop": 114, "rust": 10}), (len(dropped), len(standing_new), len(removed_new), by)
+    # the object file's `removed` is the FULL history (78 on it-4: 71 live + 7 at deleted vertices); the
+    # sidecar's is the live subset (71) — the fingerprint is taken over the full history in both places
+    assert (len(dropped), len(standing_new), len(removed_new) - len(removed), by) == (124, 149, 124, {"loop": 114, "rust": 10}), (len(dropped), len(standing_new), len(removed_new), by)
     fp = obj.fingerprint(removed_new)
     side = json.loads((BK.BUILD / f"m51-edges-{lab}+cull149.json").read_text())
     assert fp == side["fingerprint_removed"] == "a79347720ccda3ed", (fp, side["fingerprint_removed"])
-    print(f"[cull-commit self-test] identities hold (124 = 114 + 10 dropped, 149 standing, 195 removed); fingerprint {fp} = the sidecar's, pinned")
+    print(f"[cull-commit self-test] identities hold (124 = 114 + 10 dropped, 149 standing, removed {len(removed)} → {len(removed_new)}); fingerprint {fp} = the sidecar's, pinned")
     # the tamper red: one extra dropped cheat changes the fingerprint and is refused against the sidecar
     extra = next(e for e in standing_new)
     fp_bad = obj.fingerprint(removed_new + [extra])
