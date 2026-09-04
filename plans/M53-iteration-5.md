@@ -284,3 +284,96 @@ E5. `CERTIFY_ONEHOT_CAP=43200 CERTIFY_REENCODE=cube python3 -u tools/batchkill.p
 ## §5. Discipline (the rules this milestone runs under, restated once)
 
 One heavy job at a time (A2 waits for B; C after B; D after C; E after D). Threads: 16 on wall-capped/memory-tight phases, the pre-flight's number on the full pool, 8×4 on the spectrum. Every phase > 15 min resumes exactly (the engine's journals and checkpoints; the spectrum's per-cheat directories; the cube driver's `cubes.jsonl`; the commit's lookup checkpoint) — the pool build excepted by D6. Long runs launched from snapshot copies of any script, PIDs recorded in `build/m53-jobs.txt`, waiters by PID never by `pgrep -f`. Unknowns never folded; verdict messages name only the branch that fired; every headline carries its population and its caps. Nothing is written to `data/m53/` that is not reproducible from a `build/` artifact by a named command.
+
+## §Bʹ. The domain-modeling pass (2026-09-04, fresh invocation) — what it changed
+
+*The five objects the pass was aimed at, each run until its shape stopped looking chosen.*
+
+**1. `removed` is a SET of cheats, and the reason a cheat left is the ledger's, not the object's.**
+Three moves take a cheat off the dial — a certified halo, a vertex deletion (the cheat dies with its
+vertex), a cull (jointly redundant, no geometry) — and the object's forcing claim depends on none of
+them: it depends only on `unit ∪ standing`, with `standing = cheats ∖ removed` over live vertices. So
+`removed` means "not standing, and a certificate covered its absence", the union over all three moves;
+the +cull149 sidecar already used it that way (71 + 124). The RECORD of which move and which
+certificate lives in the `m50-batch.json` rows (`batch-commit`, `deletion-commit`, and now
+`cull-commit`), exactly as the two existing moves do. One invariant is kept strict rather than
+weakened: **an object file exists only for a committed object (both encodings UNSAT)**. Consequence
+for the schedule: the cube front-end runs on `L4` plus the dropped list BEFORE `L4c` is minted (A2
+precedes A1; the spectrum needs only the sidecar, which exists as `+cull149`), and under F3 (3-bit
+unknown at the depth cap) the file is minted with an explicit top-level `"candidate": {reencode:
+"unknown", open_cubes: N, …}` marker and the `cull-commit` row says candidate — a named exception,
+never a silent one, because the campaign continues on the object either way.
+
+**2. The single-cheat spectrum's verdict is three-valued, and each value names its evidence.** For a
+standing cheat `e`, `S_e` (the classes with `e` absent) decides: `necessary` ⟺ ≥ 1 class was written
+(the class IS the witness, whether or not the run finished — a capped run's lines are all right);
+`droppable-alone` ⟺ the run is EXACT with 0 classes (the enumerator's V3 refuted every leaf — an
+UNSAT by cubes where the culler's monolithic probe was undecided, G18's shape); `unknown` ⟺ 0 classes
+and open cubes (wall or budget). The adopted `recurse-census` row carries all three lists (the old row
+carried `essential_alone` and a count of unknowns). The sub-batch assertion in `adopt_rust_list.py`
+(`F ⊆ essential_alone`) exists to refuse spending an edge the census never examined; with the spectrum
+examining EVERY standing cheat its honest form is `F ⊆ examined = necessary ∪ droppable ∪ unknown`
+— an unknown cheat is spendable (sound: spending a cheat can only add classes), a droppable-alone one
+rides free (no class of any batch is hit only by it). The adopter is widened to that, with the reason
+in its docstring. The cross-instrument check is stated as the consequence it is: the culler's witness
+for `e` is proper on `unit ∪ standing ∖ {e}` and separates the pair, so its palette class is in `S_e`
+by the enumerator's completeness — a witness NOT found among the classes (or an exact-0 run for a
+witnessed cheat) is an instrument contradiction and the driver refuses loudly; that refusal is the
+planted red (a witness with one digit changed).
+
+**3. The field split of the pool is a partition of POINTS, and the census's number has an exact
+scope.** A glue point of two K-points `x, y` at distance `d` is `m ± v·√r` with `m = (x+y)/2 ∈ K²`,
+`v = i(y−x)/2 ∈ K² ∖ {0}`, `r = 4/d² − 1 ∈ K`; if `√r ∉ K` the point is not in `K²` (else
+`√r = (p − m)/v ∈ K`), and if `√r ∈ K` it is. So a pool point's field membership is a property of the
+point, not of which parent pair the dedupe happened to record: an in-field pair and an out-of-field
+pair can never produce the same point, and classifying by the recorded parents is well-defined.
+(This is the lattice-closure lemma's corollary, two lines; it stays tools-side by D11.) The census's
+populations, stated once and carried into the headline: `S_in` = classes that PROVABLY extend to the
+in-field pool; the number = `|{c ∈ S_in : killed on the full pool}|`; `K_out ∩ S_in` the diagnostic;
+unknowns on either side listed, never folded. The monotonicity that orders the verdicts (`killed` is
+an up-set in pools, `survives` a down-set) is enforced as a REFUSAL in the census reader — a class
+killed in-field and surviving on the full pool is an instrument fault, never a finding. The
+classification's one soft edge is named in the scope sentence: "in-field" = a K-square found by PSLQ
+and verified by squaring; a K-square PSLQ failed to find would be filed out-of-field, which biases the
+census toward the SECOND horn (a class then reads "survives in-field" on a pool missing a point it
+could have had) — so the restrict tool classifies every radicand at two precisions (50 and 100 digits,
+maxcoeff 10⁹ and 10¹²) and refuses on any disagreement, a decorrelated check at the boundary.
+
+**4. The cube tree is a prefix tree over ONE global split order, and its invariant is a cover of
+models.** Cube variables = the codes of the vertices in the object's unit-degree order (for the one-hot
+this IS the palette breaking's order, so the early cubes are mostly refuted by the breaking in
+milliseconds and the effective branching is far below 5^d; for the 3-bit every code is live and the
+tree is 5-ary). A cube at depth `d` pins the first `d` vertices; a split replaces a cube by its five
+extensions on vertex `d+1`. The invariant the verdict rests on: **the open and closed leaves together
+cover every model of F** (for each pinned vertex, "code ∈ {0..4}" is implied by F — by the one-hot's
+at-least-one clauses, by the 3-bit's per-vertex ban of codes 5–7 — so the five children of any cube
+cover everything the parent covered). UNSAT ⟺ every leaf is refuted; a SAT leaf's model is validated
+against the object (proper, codes < 5, the pin) and is a REFUSAL; a leaf undecided at the depth cap
+leaves the verdict UNKNOWN with the open cubes named. Sound over the symmetry-broken one-hot for the
+same reason (the cubes cover the models of `F ∧ brk`, and `F ∧ brk` UNSAT ⟹ F UNSAT is the breaking's
+own soundness, already trusted by every certify). Improper cubes (adjacent pinned vertices sharing a
+code) are RUN, not pruned — cadical refutes them by one clause and the journal stays a complete
+account. Resume: the frontier is recomputed from the journal (a `split` row opens five children; an
+`unsat`/`sat` row closes a leaf), so the same command continues.
+
+**5. A restricted pool is a NAMED pool of the object, fingerprinted under the name it is saved as.**
+`pool_restrict.py` (it-4) computes its fingerprint with the short name (`pdeg12`) and saves under
+`…-depth1-pdeg12`, so `load_pool(obj, "depth1-pdeg12")` refuses it — its exports were consumable by
+the engine (`--manifest`) only, never by the Python design/commit. The in-field pool must be THE pool
+under 0′ (design, lookup re-check, commit all load it by name), so `pool_field_restrict.py` saves
+`depth1-infield` / `depth1-outfield` with the fingerprint computed under exactly those names and
+`params = {"restrict": "field=in|out", "dps": …}`; `load_pool` then accepts them unchanged, and
+`certify`'s `pool.prov[p]` (parents are object indices) stays valid. The quirk in `pool_restrict.py`
+is noted for the next hygiene pass, not fixed here (its exports are still right for the engine).
+
+**6. The schedule the model implies.** B (the spectrum, on the `+cull149` sidecar) → A2 (the cube
+front-end on `L4` + dropped: one-hot control, then 3-bit) → A1 (mint `L4c`, sidecar, census row) →
+C → D → E → F. §1's phase text is read with this order; the commands are unchanged.
+
+*Unsampled members walked:* a standing cheat at a deleted vertex (impossible — the sidecar's
+`cheats` are live by construction, and the driver reads standing from it); a cheat both dropped and
+spent (refused by set arithmetic at `commit_cull.py`'s boundary); an exact-0 spectrum run for a
+witnessed cheat (the contradiction case above, refused); a pool point whose two possible parent
+pairs straddle the field (impossible, item 3); a cube tree with a split whose children were only
+partly issued at a kill (the journal's `split` row is written BEFORE any child is issued, so a resume
+re-issues all five).
