@@ -175,10 +175,11 @@ def run_one(stage: Stage, e: tuple[int, int], out: Path, a) -> dict:
     summ_p = d / "enumerate.json"
     if summ_p.exists():
         s = json.loads(summ_p.read_text())
-        if s.get("claim") == "exact" or int(s.get("classes", 0)) >= a.max_classes:
+        done = s.get("claim") == "exact" or int(s.get("classes", 0)) >= a.max_classes or not a.rerun_open
+        if done:
             return read_one(stage, e, d, a, resumed=True)
-        # an OPEN run is re-run: the engine resumes (exhausted leaves are not re-asked, open ones are
-        # asked again at this launch's budget), so a relaunch with a raised --conflicts continues it
+        # --rerun-open: the engine resumes (exhausted leaves are not re-asked, open ones are asked again
+        # at this launch's budget), so a relaunch with a raised budget continues an open run
     cmd = [str(a.engine), "enumerate", "--edges", str(stage.path), "--out", str(d), "--floor", tag,
            "--threads", str(a.threads), "--max-classes", str(a.max_classes), "--conflicts", str(a.conflicts),
            "--wall", a.wall, "--no-color"]
@@ -210,7 +211,11 @@ def read_one(stage: Stage, e: tuple[int, int], d: Path, a, resumed: bool) -> dic
     body = [json.loads(l) for l in lines[1:]]
     body = [x for x in body if isinstance(x, str)]
     count = len(body)
-    assert count == int(s.get("classes", count)), (e, count, s.get("classes"))
+    engine_count = int(s.get("classes", count))
+    # the LINES are the evidence (each is re-validated below); an engine summary that counts fewer
+    # (seen on a resumed capped run: one class row in the journal, "0 found so far" in the summary) is
+    # recorded as a discrepancy for the engine's defect list, never folded either way
+    discrepancy = None if engine_count == count else {"engine_classes": engine_count, "lines": count}
     if count:
         cols = np.stack([digits(x) for x in body])
         stage.validate_lines(cols, e, f"classes of {e}")
@@ -222,8 +227,8 @@ def read_one(stage: Stage, e: tuple[int, int], d: Path, a, resumed: bool) -> dic
            else {"open_leaves": len(s.get("open") or []), "stop_reason": "wall-or-budget"}))
     return {"cheat": list(e), "count": count, "claim": claim, "verdict": verdict, "evidence": ev,
             "leaves": s.get("leaves"), "solves": s.get("solves"), "solver_seconds": s.get("solver_seconds"),
-            "stage_fingerprint": s.get("stage_fingerprint"), "out_dir": str(d.relative_to(ROOT)),
-            "seconds": None, "resumed": resumed,
+            "stage_fingerprint": s.get("stage_fingerprint"), "out_dir": str(d),
+            "seconds": None, "resumed": resumed, **({"engine_discrepancy": discrepancy} if discrepancy else {}),
             "_canon": ({stage.canon(digits(x)) for x in body} if (exact and count) else None)}
 
 
@@ -235,9 +240,9 @@ def main():
     ap.add_argument("--culler-journal", default=None); ap.add_argument("--loop-rows", default=None)
     ap.add_argument("--floor", default=None); ap.add_argument("--undecided", default=None,
                     help="the culler's cull.json (its undecided_groups are the 'undecided' prior)")
-    ap.add_argument("--jobs", type=int, default=4); ap.add_argument("--threads", type=int, default=4)
-    ap.add_argument("--max-classes", type=int, default=50000); ap.add_argument("--conflicts", type=int, default=40_000_000)
-    ap.add_argument("--wall", default="30m")
+    ap.add_argument("--jobs", type=int, default=8); ap.add_argument("--threads", type=int, default=2)
+    ap.add_argument("--max-classes", type=int, default=10000); ap.add_argument("--conflicts", type=int, default=40_000_000)
+    ap.add_argument("--wall", default="10m"); ap.add_argument("--rerun-open", action="store_true")
     ap.add_argument("--engine", default=str(ENGINE)); ap.add_argument("--result", default=None)
     ap.add_argument("--regression", action="store_true", help="re-run the M52 enum-rank batch: 15,218 exact expected")
     a = ap.parse_args()
@@ -264,12 +269,21 @@ def main():
           f"{a.conflicts} conflicts · wall {a.wall}", flush=True)
     results: dict[tuple[int, int], dict] = {}
     done = 0
-    with ThreadPoolExecutor(max_workers=a.jobs) as ex:
+    ex = ThreadPoolExecutor(max_workers=a.jobs)
+    try:
         futs = {ex.submit(run_one, stage, e, out, a): e for e in stage.standing}
         for f in as_completed(futs):
-            e = futs[f]; r = f.result(); results[e] = r; done += 1
+            e = futs[f]; done += 1
+            try:
+                r = f.result()
+            except SystemExit:
+                ex.shutdown(wait=False, cancel_futures=True); raise
+            except Exception as exc:  # noqa: BLE001
+                r = {"cheat": list(e), "verdict": "driver-error", "count": 0, "claim": "?", "error": repr(exc)[:300], "seconds": None}
+                results[e] = r; print(f"[spectrum] {done}/{len(stage.standing)} {e[0]}-{e[1]}: DRIVER ERROR {r['error']}", flush=True); continue
+            results[e] = r
             if r["verdict"] == "engine-error":
-                print(f"[spectrum] {done}/{len(stage.standing)} {e[0]}-{e[1]}: ENGINE ERROR rc={r['rc']} — {r['log_tail'][-160:]!r}", flush=True)
+                print(f"[spectrum] {done}/{len(stage.standing)} {e[0]}-{e[1]}: ENGINE ERROR rc={r.get('rc')} — {r.get('log_tail', '')[-160:]!r}", flush=True)
                 continue
             wc = "n/a"
             if e in W:
@@ -295,6 +309,8 @@ def main():
                 for x in results.values():
                     tally[x["verdict"]] = tally.get(x["verdict"], 0) + 1
                 print(f"[spectrum]   tally after {done}: {tally}", flush=True)
+    finally:
+        ex.shutdown(wait=False)
     write_result(stage, results, W, floor, und, a, red, t0)
 
 
@@ -303,8 +319,9 @@ def write_result(stage, results, W, floor, und, a, red, t0):
     for e, r in results.items():
         r = dict(r); r.pop("_canon", None); r.setdefault("prior", []); r.setdefault("witness_check", "n/a")
         recs.append(r)
-    recs.sort(key=lambda r: (r.get("count", 10 ** 9) if r["verdict"] != "engine-error" else 10 ** 12, r["cheat"]))
-    lists = {v: sorted(r["cheat"] for r in recs if r["verdict"] == v) for v in ("necessary", "droppable-alone", "unknown", "engine-error")}
+    recs.sort(key=lambda r: (r.get("count", 10 ** 9) if r["verdict"] not in ("engine-error", "driver-error") else 10 ** 12, r["cheat"]))
+    lists = {v: sorted(r["cheat"] for r in recs if r["verdict"] == v) for v in ("necessary", "droppable-alone", "unknown", "engine-error", "driver-error")}
+    lists["engine-error"] += lists.pop("driver-error")
     exact_counts = sorted(r["count"] for r in recs if r.get("claim") == "exact")
     med = exact_counts[len(exact_counts) // 2] if exact_counts else None
     n_exact = sum(1 for r in recs if r.get("claim") == "exact"); n_cap = sum(1 for r in recs if r.get("claim") == "capped")
