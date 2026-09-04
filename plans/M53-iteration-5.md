@@ -336,8 +336,9 @@ killed in-field and surviving on the full pool is an instrument fault, never a f
 classification's one soft edge is named in the scope sentence: "in-field" = a K-square found by PSLQ
 and verified by squaring; a K-square PSLQ failed to find would be filed out-of-field, which biases the
 census toward the SECOND horn (a class then reads "survives in-field" on a pool missing a point it
-could have had) — so the restrict tool classifies every radicand at two precisions (50 and 100 digits,
-maxcoeff 10⁹ and 10¹²) and refuses on any disagreement, a decorrelated check at the boundary.
+could have had) — so the restrict tool decides squareness in K EXACTLY (the tower criterion, §Bʺ.4 — this pass's
+two-precision check was superseded by the obligation pass the same afternoon) and keeps PSLQ as the
+cross-check that must agree on every radicand.
 
 **4. The cube tree is a prefix tree over ONE global split order, and its invariant is a cover of
 models.** Cube variables = the codes of the vertices in the object's unit-degree order (for the one-hot
@@ -377,3 +378,115 @@ witnessed cheat (the contradiction case above, refused); a pool point whose two 
 pairs straddle the field (impossible, item 3); a cube tree with a split whose children were only
 partly issued at a kill (the journal's `split` row is written BEFORE any child is issued, so a resume
 re-issues all five).
+
+## §Bʺ. The obligation-modeling pass (2026-09-04, fresh invocation) — each instrument's invariant as a two-line argument, and the prove / test / assume partition
+
+**1. The cube front-end.** Let `F` be the formula (one-hot with breaking, or 3-bit with the vertex-0
+pin) and `v₁, v₂, …` the split order. A cube is a prefix pin `π : {v₁..v_d} → {0..4}`.
+*Invariant I (the cover):* every model `μ` of `F` is consistent with some leaf. *Proof, by induction on
+splits:* the root pins nothing; a split replaces a leaf `ℓ` by `ℓ ∪ {v ↦ c}` for all five `c`, and a
+model consistent with `ℓ` has `μ(v) ∈ {0..4}` because `F` implies it (one-hot: the at-least-one clause
+at `v`; 3-bit: the ban of codes 5–7 at `v`), so `μ` is consistent with the child `c = μ(v)`.
+*Verdict:* UNSAT ⟸ every leaf refuted (a model would be consistent with some leaf `ℓ` and satisfy
+`F ∧ pins(ℓ)`, contradicting `ℓ`'s refutation); SAT ⟸ a leaf's model VALIDATED against the object
+directly (proper on every edge, codes < 5, the pair separated) — a verdict independent of the cube
+machinery; UNKNOWN ⟸ an open leaf at the depth cap, named. Over the symmetry-broken one-hot the same
+argument covers the models of `F ∧ brk`, and `F ∧ brk` UNSAT ⟹ `F` UNSAT is the breaking's own
+soundness, trusted by every certify since M06. *Termination:* a leaf is asked once; undecided at depth
+`< D` it splits (depth strictly increases), at depth `D` it is recorded open; asks ≤ (5^{D+1} − 1)/4.
+*Resume:* the frontier is a function of the journal (splits open five children, `unsat`/`sat` close a
+leaf; the `split` row precedes any child's issue). — **Prove** (a docstring argument; the kernel form
+is M05's cover theorem for the certificate route): I and the verdict. **Test:** K₆ at five colours
+through cubes on 3 vertices — 125 leaves, all refuted, the leaf set asserted equal to the 125
+assignments (I made visible); a 5-colourable graph — SAT with the model validated; ten random small
+graphs — cube verdict = monolithic verdict; a journal truncated after a `split` row resumes by
+issuing exactly its five children; the planted red on the real object — `--drop <one of the 27 floor
+cheats>` must return SAT (the floor census's own `sat` says a separating colouring exists) and the
+driver prints REFUSED with the colouring validated. **Assume:** cadical's refutations (the chain's
+standing assumption; the kernel LRAT route is the final object's certificate, out of scope here).
+
+**2. The spectrum's verdict.** For a standing cheat `e`, `G_e = unit ∪ (T ∖ {e})` and `S_e` its
+separating classes. *necessary(e)* ⟸ one written line, re-validated in Python: proper on `G_e`,
+`A ≠ B`, AND monochromatic on `e` — the third is a consequence (a line proper on `e` too would be a
+separating colouring of the whole object, which the certificate refutes), so it is a free control on
+the certificate and a refusal if it fails. *droppable-alone(e)* ⟸ `claim exact ∧ 0 lines`: the
+enumerator's V3 observed a refutation of every leaf on a fresh solver — `G_e ∪ {A ≠ B}` UNSAT by
+cubes. *unknown(e)* otherwise (0 lines, open leaves). *Witness transfer (two lines):* the culler's
+witness for `e` was found against a standing set `T′ ⊇ T` (drops only shrink it), and a colouring
+proper on `unit ∪ (T′ ∖ {e})` is proper on `unit ∪ (T ∖ {e})`; so it is a separating colouring of
+`G_e`, and for an EXACT run its palette class is among the lines by completeness. A witness colouring
+identifies its own cheat: the set of standing cheats it violates must be exactly one (the driver
+derives the cheat from the colouring and refuses if the journal's group index disagrees). *The
+contradiction that must refuse:* a witnessed cheat with an exact-0 run, or an exact run not
+containing the witness's class — an instrument fault in one of the two engines, never a finding. —
+**Prove:** transfer; the verdict function given V1–V3. **Test:** the reds — a witness with one digit
+changed fails validation and is refused; the enumerator's own regression first (the M52 enum-rank
+batch on the un-culled sidecar must reproduce 15,218 classes exactly — same instrument, same input,
+before 149 fresh runs); the 27 floor cheats must all read ≥ 1 line (their `sat` rows carry no
+colouring, so containment is not checkable for them — stated). **Assume:** the engine's V1–V3
+(self-verification on an independent code path, WO-6/WO-11's evidence).
+
+**3. The out-of-field census.** Pools `P_in, P_out ⊆ P`, disjoint, `P_in ∪ P_out = P`; verdicts
+`v_Q(c) ∈ {killed, survives, unknown}`. *Monotonicity (two lines):* an extension of `c` over `Q′ ⊇ Q`
+restricts to one over `Q`, so `killed(Q) ⟹ killed(Q′)` and `survives(Q′) ⟹ survives(Q)`. *The join
+table over `(v_in, v_full)`:* `(killed, survives)` IMPOSSIBLE — refuse; `(survives, killed)` = the
+census number; `(survives, survives)` = beyond depth 1 entirely; `(unknown, killed)` = undecided for
+the test (more in-field budget might kill it); `(unknown, survives)` ⟹ `survives_in` DERIVED (labelled
+derived, never asked); `(survives, unknown)` = undecided. With `P_out` on the same residual, the
+number splits into `out-alone` (`killed_out`), and `cooperative` (`survives_out ∧ killed_full` — neither
+slice kills it, together they do; a third category the stub's form could not see). *Meaningful joins:*
+by class index over the SAME class list (the three checkpoints' headers must name the same class count
+and the census reader checks the list's sha256 and that both restricted manifests carry
+`derived_from` the full export). — **Prove:** monotonicity. **Test:** synthetic checkpoints covering
+every cell of the table, the refusal on the impossible cell, the derived label. **Assume:** the
+replay's verdict semantics (WO-2: verdict-exact against 45,365 reference lines).
+
+**4. The restricted pool by field.** *Soundness for every phase (one line):* the profile's kills on
+`P_in` transfer to `P` (item 3), its survivals are conservative for the hitting set (kept); a halo
+`⊆ P_in` is a halo `⊆ P` and the commit certifies the true object — so the restriction costs only
+dial progress, never soundness, which is what the monitor measures. *The classification, made exact
+in BOTH directions (this pass's change to D5/§Bʹ.3):* `r ∈ K` is a square iff a root exists in `K`, and
+that is decided by the tower recursion — in `F(√m)`, `x = a + b√m` is a square iff `b = 0` and (`a` or
+`m·a`) is a square in `F`, or `b ≠ 0` and `a² − m·b² = n²` for some `n ∈ F` with `(a + n)/2` or
+`(a − n)/2` a square in `F` (then `p = √((a ± n)/2)`, `q = b/(2p)`, `x = (p + q√m)²`); the base
+`F = ℚ` is decided by integer square roots of numerator and denominator. ONE function on the tower
+`ℚ ⊂ ℚ(√3) ⊂ K`, returning the root, so "in-field" = a root found and VERIFIED by squaring, and
+"out-of-field" = the criterion's refusal, exact. PSLQ (the census tool's method) becomes the
+cross-check: both must agree on all 1,435 radicands or the export refuses. The soft edge named in
+§Bʹ.3 is thereby removed. The fusion argument (§Bʹ.3) makes the split a partition of points. —
+**Prove:** the square criterion (standard, per level), the fusion argument. **Test:** planted
+squares (`y²` for random `y ∈ K` at each level — found, root `= ±y`), planted non-squares (`5y²`,
+`2y²`, `y² + 1`), the census's 32 in-field radicands all recognized and its √5/√35 radicands
+refused, PSLQ agreement on all 1,435; the export's point counts against `poolfield-L4.json` (in-field
+pairs 140,195); `load_pool(obj, "depth1-infield")` re-derives the fingerprint. **Assume:** nothing
+beyond exact rational arithmetic.
+
+**5. The culled object's minting.** *What the file asserts by existing:* `unit ∪ (cheats ∖ removed)
+∪ {A ≠ B}` is UNSAT in two encodings. *What `removed` asserts:* nothing about WHY — the row does.
+*The mint's soundness rests on A2's refutation of the 149-set, not on the cull's bookkeeping:* the
+cull could have erred about joint redundancy and the certificate would say REFUSED (a separating
+colouring of the 149-set exists), which is the investigate clause — the certificate is the sole
+truth-maker here as everywhere. The mint asserts the set identities: `dropped = loop.dropped ⊎
+rust.dropped_groups` (114 + 10, disjoint, each live and standing in `L4`), `standing_after = kept_final`
+as sets (149), `removed = removed_L4 ⊎ dropped` (195). — **Prove:** set arithmetic (asserted).
+**Test:** the pinned fingerprint `a79347720ccda3ed`; the sidecar equality with `+cull149`; the tamper
+red (one extra dropped cheat ⟹ a different fingerprint ⟹ refused against the sidecar's
+`fingerprint_removed`). **Assume:** A2's verdict.
+
+**6. The batch's joint list against the spectrum — a free identity as E1's control.** For the joint
+batch `B` (exact) and each `e ∈ B` whose single run is exact: the lines of `S_B` proper on `B ∖ {e}`
+are exactly `S_e` as orbits (properness is palette-invariant, so the put-back filter counts orbits
+exactly — the WO-8 identity it-4 verified at 37,316 = 37,316), hence `popcount` of the put-back mask
+for `e` must EQUAL the spectrum's count for `e`. Two independent runs, one identity, no solving:
+`tools/subbatch.py`'s masks give it for free. A mismatch is an enumerator fault and halts E1.
+
+**7. The partition, in one table.**
+
+| claim | prove (argument in the docstring; kernel form where it exists) | test (self-test / control / planted red) | assume |
+|---|---|---|---|
+| cube cover + verdict | I by induction on splits; kernel: M05's cover theorem | K₆ 125 leaves; SAT validated; 10 random agreements; resume after a split; `--drop floor` ⟹ REFUSED | cadical refutations |
+| spectrum verdicts | witness transfer; line validation incl. mono-on-`e` | enum-rank 15,218 reproduced; corrupted witness refused; floor ≥ 1 | V1–V3 |
+| census | monotonicity; the join table | synthetic table incl. the impossible cell; derived label | replay verdict exactness |
+| field split | square criterion on the tower; fusion argument | planted squares/non-squares; 32 in-field recognized; PSLQ agreement 1,435/1,435; counts vs census | exact arithmetic only |
+| the mint | set identities | pinned fingerprint; sidecar equality; tamper red | A2 |
+| E1's identity | put-back = single (orbit counts) | popcount = spectrum count per `e` | both runs exact |
