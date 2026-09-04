@@ -490,3 +490,88 @@ for `e` must EQUAL the spectrum's count for `e`. Two independent runs, one ident
 | field split | square criterion on the tower; fusion argument | planted squares/non-squares; 32 in-field recognized; PSLQ agreement 1,435/1,435; counts vs census | exact arithmetic only |
 | the mint | set identities | pinned fingerprint; sidecar equality; tamper red | A2 |
 | E1's identity | put-back = single (orbit counts) | popcount = spectrum count per `e` | both runs exact |
+
+## §Bʹʹʹ. The experience-modeling pass (2026-09-04, fresh invocation) — the surfaces
+
+*Consumers, inhabited at their moment of use: (i) me between runs, holding one question ("which
+command next?") and one file; (ii) a fresh session with zero memory, holding the stub and `data/m53/`;
+(iii) Kooshi at the close, holding the dial and the decision; (iv) the chain's own tools consuming each
+other's files (`load_object`, `adopt_rust_list`, `_gated_seps`, `load_pool`, the census reader) — the
+machine users, whose context is exactly the keys they read.*
+
+**Names say what the tool does** (a cold reader's dictionary): `tools/cheat_spectrum.py` (every
+standing cheat enumerated alone), `tools/cube_certify.py`, `tools/pool_field_restrict.py`,
+`tools/outfield_census.py`, `tools/commit_cull.py`. "Spectrum" is glossed at every first use.
+
+**1. The spectrum's file `data/m53/spectrum-<label>.json`** answers three questions in its first
+line: which cheats are cheap, did the second instrument agree with the culler, did any undecided cheat
+decide. `headline` (one sentence, populations and caps in it): *"L4c: 149 standing cheats enumerated
+alone (cap 50,000 classes · 1,000,000 conflicts · 4 threads, engine `<commit>`): N necessary (≥ 1 class;
+M exact, C capped), D droppable-alone (exact 0), U unknown (0 classes, open leaves); median exact count
+X; culler witnesses found K/60 (exact runs), not checkable C′ (capped); floor 27/27 ≥ 1; of the 46
+undecided: a necessary, b droppable-alone, c unknown."* Then `cheats` sorted by count ascending, one
+record each — `cheat, count, claim (exact|capped|open), verdict, evidence` (`{line_validated,
+mono_on_cheat}` | `{leaves_refuted}` | `{open_leaves, stop_reason}`), `witness_check`
+(`found | not-checkable-capped | none`), `prior` (`floor | witnessed | loop-kept | undecided`),
+`seconds, out_dir` — then the three `lists`, the `census_row` exactly as recorded, `conditioning`
+(caps, threads, engine commit, sidecar sha, object fingerprint), and `scope` ("a capped count is a
+lower bound; droppable-alone is the enumerator's refutation on one encoding and enters the object
+only through a commit's two-encoding certificate"). Progress: one line per cheat — `[spectrum] 37/149
+4-90: 1,234 classes exact in 41 s — necessary (witness found)` — and a running tally every ten.
+
+**2. The census's file `data/m53/outfield-census-<label>.json`** leads with the verdict on R1's test
+and the join table's cells by name: *"B₀ = {…} (8 cheats) on L4c: N classes. In-field pool (n_in
+points; rule: the parent pair's 4/d² − 1 is a square in ℚ(√3,√11), exact, PSLQ-agreed 1,435/1,435):
+K_in killed, S_in survive (proof), U_in unknown (cap c · wall w). Full pool (n points) on the residual
+S_in ∪ U_in: of S_in — **X killed = classes provably needing out-of-field material at depth 1**, Y
+survive the full pool too, Z unknown; of U_in — k killed, s survive (⟹ survive in-field, derived), u
+unknown. Out-of-field alone on S_in: W killed (out-alone), X − W cooperative. R1 reads: FIRST HORN
+(X = 0, Z = 0, U_in = 0) | SECOND HORN (X > 0) | UNDECIDED (X = 0 with Z + U_in > 0)."* Then
+`decision_0prime` (the pool named for it-5, the rule that named it, the monitor registered), `table`
+(every cell with its count and label; `impossible_cells` absent because the reader REFUSES rather
+than writes one), `classes` (per residual class the verdict triple), `conditioning` (the class list's
+sha256, the three manifests' fingerprints and `derived_from`, caps, walls, threads, machine).
+
+**3. The cube front-end's lines.** Progress every 60 s: `[cube binary3 L4c] leaves: 611 refuted · 0
+sat · 14 open (depth 4 → splitting) · 1,203 s · 32 workers · deepest 5`. The verdict, one of three
+shapes, mirrored in `data/m53/cube-certify-<name>.json`: `UNSAT — 1,204 leaves all refuted (max depth
+6 · cap 600 s/leaf · 3,412 solver-s · 2h01 wall)`; `REFUSED — leaf (v12=0, v88=3, v5=1) is SAT and the
+colouring is VALIDATED (proper on 13,796 unit edges and 149 cheats, separates 205/206): the standing set
+does NOT force — investigate, never retry`; `UNKNOWN — 3 leaves open at the depth cap 9 (named), 1,201
+refuted; verdict withheld: raise --max-depth or --cube-cap and re-run (resumes)`. A SAT leaf whose
+decoded colouring fails validation is `INSTRUMENT FAULT`, never REFUSED (cadical's model and the
+decoder disagree). The journal header pins the formula: encoding, object fingerprint, standing-set
+sha, split order — a resume against a different formula refuses naming both shas.
+
+**4. The restricted pool's manifest** is a `pool-export` `load_pool` accepts as `depth1-infield`
+(name and fingerprint agree), whose `pool.params` say the rule in words — `{"restrict": "field=in",
+"field": "Q(sqrt3,sqrt11)", "rule": "parent pair's 4/d²−1 is a square in K — tower criterion, exact;
+PSLQ cross-check agreed on every radicand", "exact_source": "data/m52/exact-<label>.json"}` — and
+whose `derived_from` names the full export's fingerprint and the radicand census (`total, in, out,
+pslq_agreement`). The run prints: `depth1-infield: 280,1xx of 1,8xx,xxx points (15.x %) from 140,195
+in-field parent pairs; depth1-outfield: …; in + out = all (asserted)`.
+
+**5. The `cull-commit` row** reads like its siblings (`batch-commit`, `deletion-commit`): `label,
+from, dropped (124), dropped_by {enumeration-loop: 114, rust-culler: 10}, standing_after 149,
+undecided_carried 46, onehot {outcome, secs, instrument}, reencode {outcome, instrument: "binary3
+cubed", leaves, secs}, verdict committed|candidate, object_after {n, unit, cheats}, claim_scope`. Only
+under F3 does the object file carry a top-level `"candidate": {"reencode": "unknown", "open_cubes":
+[…], "result": "data/m53/cube-certify-…json"}` — and `--status` shows the row's verdict beside the
+label, so a cold session sees CANDIDATE without opening the file.
+
+**6. Breakdowns designed first (the error path is the surface).** Every tool refuses, naming both
+sides, on: a sidecar whose label is not the `--object`; a cheat named that is not standing; the engine
+binary lacking a verb (with the rebuild command); exact coordinates missing for the label (with the
+command that writes them); a tower/PSLQ disagreement (the radicand named); checkpoints over different
+class lists (both shas); an unfinished replay handed to the census (an unfinished replay is not a
+census — no `--allow-unfinished`); a journal from another formula; an overlap between dropped and
+removed. No tool writes a partial result file: a result file's existence means the run reached its
+verdict. And the widened assertion in `adopt_rust_list.py` still refuses a spent cheat the census
+never examined; the row must carry all three lists as keys (an absent key is refused, never read as
+empty).
+
+**7. The close's report** is in the house format, every number with its population: the dial line
+(`446 → 149 → N`, the object named), the 0′ decision with its number and horn, the eight predictions
+scored (met / missed / refuted, each with the measurement), the carried unknowns as ranked items with
+defaults, the server-gate rows with their savings, and the decisions implementation forced in four
+parts.
