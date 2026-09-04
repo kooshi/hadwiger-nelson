@@ -340,10 +340,17 @@ def write_result(stage, results, W, floor, und, a, red, t0):
                 f"median exact count {med}; culler/loop witnesses found {wfound}/{len(W)} (exact runs), not checkable {wcap} (capped); "
                 f"floor {fl_ok}/{len(floor)} ≥ 1; of the {len(und_only)} undecided: {und_v['necessary']} necessary, "
                 f"{und_v['droppable-alone']} droppable-alone, {und_v['unknown']} unknown.")
-    census_row = {"kind": "recurse-census", "label": stage.label, "instrument": "cheat_spectrum (descent enumerate, one cheat absent)",
-                  "floor": len(lists["necessary"]), "unknown": len(lists["unknown"]) + len(lists["engine-error"]),
-                  "essential_alone": lists["necessary"], "droppable_alone": lists["droppable-alone"],
-                  "unknown_alone": lists["unknown"] + lists["engine-error"],
+    # the census row unions the spectrum's own evidence with the floor census's `sat` verdicts (a
+    # colouring existed for those 27 at the census — not retained — so a floor cheat whose run found no
+    # class within the wall is necessary BY THE CENSUS, and only unknown to the enumerator)
+    fl = {tuple(e) for e in floor}
+    nec_all = sorted({tuple(e) for e in lists["necessary"]} | fl)
+    unk_all = sorted({tuple(e) for e in lists["unknown"] + lists["engine-error"]} - fl)
+    by_census_only = sorted(fl - {tuple(e) for e in lists["necessary"]})
+    census_row = {"kind": "recurse-census", "label": stage.label, "instrument": "cheat_spectrum (descent enumerate, one cheat absent) ∪ the floor census's sat verdicts",
+                  "floor": len(nec_all), "unknown": len(unk_all),
+                  "essential_alone": [list(e) for e in nec_all], "droppable_alone": lists["droppable-alone"],
+                  "unknown_alone": [list(e) for e in unk_all], "necessary_by_census_only": [list(e) for e in by_census_only],
                   "object_fingerprint": stage.fp_removed, "fingerprint_bare": stage.fp_bare,
                   "claim_scope": "essential_alone = cheats whose single absence admits ≥ 1 separating class (validated); "
                                  "droppable_alone = exact 0 classes (the enumerator's refutation, one encoding); unknown_alone = "
