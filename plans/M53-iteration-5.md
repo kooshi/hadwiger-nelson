@@ -718,3 +718,12 @@ parts.
 * **A configuration experiment beside the pass**: `64-82` (witnessed; 0 classes in 600 s under the
   enumerator's default `sat` solver configuration) re-run under `--solver-config default --no-verify`
   for the same wall — result recorded below when it lands.
+* **The configuration experiment's result**: `64-82` under `--solver-config default --no-verify`,
+  2 threads, 600-s wall — **0 classes, 1 open leaf, 600.0 s** (the `sat` configuration: the same). The
+  solver configuration is not the lever; the asks are hard. `--no-verify` does remove the verification
+  pass's second wall (600 s total against 1,200 s), which would save ~50 min over the remaining pass at
+  the cost of a claim my driver cannot read as exact without the pass — not worth a mid-pass change.
+  Sequence after the pass ends (registered): D1 (`batch_grow`, B₀ from the cheap end, target 20,000)
+  → D2 (the in-field replay, minutes on 16,348 points) → D3 (the residual on the full and out-of-field
+  pools, 12 workers, hours) → D4 (the census and decision 0′) → A2 overnight (the culled set's cubed
+  one-hot, then 3-bit) → B′'s four-cheat sample → E.
