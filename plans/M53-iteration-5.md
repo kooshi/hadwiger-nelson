@@ -575,3 +575,47 @@ empty).
 scored (met / missed / refuted, each with the measurement), the carried unknowns as ranked items with
 defaults, the server-gate rows with their savings, and the decisions implementation forced in four
 parts.
+
+## §R0. The opening (2026-09-04, desktop) — controls green, one engine incident, one design correction
+
+* **The enumerator's regression control is GREEN**: the M52 enum-rank batch (8 floor cheats over the
+  71 removed, un-culled sidecar) reproduces **15,218 classes, exact, stage `58d88ed886f9ca76`** on
+  main's rebuilt binary (`787c821`; 153 s at 8 threads). Same instrument, same input, before any fresh
+  run was believed.
+* **The field classification is exact and equals the census**: `tools/pool_field_restrict.py
+  --classify-only` on the iteration-4 point set — 950,371 live pairs at distance < 2, **1,435 distinct
+  radicands, 32 in-field (140,195 pairs), 1,403 out-of-field (810,176 pairs)**, the tower square
+  criterion and PSLQ agreeing on every radicand (210 s); the self-test's 80 planted squares found with
+  roots verified, 240 planted non-squares refused, 3/11/33 squares and 2/5/−1 not. The M52 census's
+  numbers (`poolfield-<L4>.json`) are reproduced to the pair. `data/m53/fieldclass-<L4>.json`.
+* **Every instrument's planted red seen red before its first real run**: the spectrum's corrupted
+  witness refused; the cube driver's K₆ cover (125 leaves = every assignment), validated SAT, 20
+  cube-vs-monolithic agreements, resume-after-split, foreign-journal refusal, INSTRUMENT-FAULT
+  distinction; the census reader's impossible cell, unfinished residual, foreign class list; the
+  mint's tamper (one extra dropped cheat ⟹ `fd95d985e69db32d` ≠ the sidecar's `a79347720ccda3ed`) —
+  and that tamper fingerprint is EXACTLY the engine's stage fingerprint for the `4-90` single-cheat
+  stage: the Python and the Rust derivations of "removed ∪ {e}" agree, a free cross-implementation check.
+* **Engine incident (D68's shape, not a new defect)**: the spectrum's first launch at the engine's
+  default 1,000,000-conflict budget ended every single-cheat run in `CONTRADICTION: verification did
+  not hold` (rc 3) — an UNDECIDED verification (`disagreements: []`, `undecided: [0]`, claim
+  `capped-solver`, one 67-s solve) worded as a contradiction, exactly the defect filed 2026-09-02. The
+  driver now reads `enumerate.json` on any exit code: `disagreements` non-empty ⟹ a REAL contradiction
+  (halt and report); `undecided` with none ⟹ the run is OPEN and its written lines stand (re-validated
+  here). Relaunched at **40,000,000 conflicts** (the enumeration cull's budget). Single-cheat stages
+  are TIGHT instances (unit ∪ 148 cheats): the first solve — finding ANY separating colouring, or
+  refuting — runs 10+ minutes single-threaded, so the spectrum's cost is the first solve per cheat,
+  not the class writing (the four in flight at 10 min: one journal row each).
+* **Design correction found by watching the instrument (P-M53-7's mechanism was wrong)**: the
+  enumerator grows its cube tree FROM CLASSES (WO-11: "growth is never blind" — a split needs a
+  class census), so on a cheat with ZERO classes there is no split and the exact-0 verdict is ONE
+  monolithic refutation at the budget — the same ask the culler left undecided at 30 M conflicts, not
+  the cube refutation §Bʺ.2 credited. The instrument that DOES split blind is `tools/cube_certify.py
+  --drop e` (a complete prefix cover from depth `--split` regardless of classes): for each cheat the
+  spectrum leaves UNKNOWN, one cube run — SAT (validated witness) = necessary, UNSAT = droppable-alone
+  by the cover invariant, UNKNOWN at the depth cap = carried. Registered as **phase B′** (after B,
+  before A2, the same 32 workers): P-M53-7 is re-attached to B′, its mechanism corrected; the
+  spectrum's `unknown` list is B′'s input.
+* **The pool build runs beside the spectrum** (decision, recorded): one numpy process, one core,
+  memory watched; the spectrum holds 16 threads. The standing "one heavy job" rule is about
+  replays/hunts/builds contending for cores and memory; this pair contends for neither (CPU 17 of 32;
+  the build's peak measured as it runs). Launched 2026-09-04 ~19:30Z, ~1.5–2 h expected.
