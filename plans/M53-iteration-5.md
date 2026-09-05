@@ -760,3 +760,43 @@ parts.
   joint enumeration on this object completes EXACTLY at all within an hour — if step 0 (7-35 alone)
   does not, B₀ falls back to a PARTIAL list (a measurement caveat: a partial class set can show the
   second horn, never the first) and iteration 5's batch enumeration becomes the tightrope's own row.
+
+## §R4. Phase D in flight (2026-09-05, desktop) — the one-cheat batch reads the first horn; the two-cheat stage holds the real residual
+
+* **D1, the batch growth** (`batch_grow`, 16 threads, one-hour wall per step, target 20,000):
+  step 0 — `7-35` alone: **2,488 classes, EXACT, 4,008 s** (a single-cheat enumeration DOES complete
+  at 16 threads within the hour; the spectrum's "1 class in ten minutes" was a lower bound by 2,488×);
+  step 1 — `+25-52`: **81,787 classes, CAPPED at the 80,000 ceiling, 4,542 s** — not exact, so the
+  growth stopped with B₀ = {7-35}. The joint of two cheap cheats is at least 33× the larger single:
+  the class-count law on the culled object is far steeper than iteration 4's ×1.1–1.5 per cheat (every
+  standing cheat is necessary, so the colourings a pair frees are dominated by the cross term). The
+  put-back identity held trivially at step 0 (a batch of one). `data/m53/batch-<L4c>.json`.
+* **D2 on B₀ = {7-35}**: the in-field pool (16,348 points) kills **all 2,488 classes in 13 s** —
+  94.8 % at the strong rung (points with ≥ 3 object neighbours, which §R1 showed IS the in-field slice)
+  — **0 survive, 0 unknown**; the residual for the full pool is EMPTY; the registered rule reads
+  **FIRST HORN on this batch** (`data/m53/outfield-census-<L4c>.json`). Population: one cheat, 2,488
+  classes, exact.
+* **The vacuity control** (the engine's own guard was inconclusive at 6 s; cadical with palette
+  breaking UNKNOWN at 1,800 s on the unpinned 18,329-vertex graph; DSATUR + min-conflicts did not
+  resolve it): settled CONSTRUCTIVELY — a class that SURVIVES the in-field pool on the wider stage,
+  pinned on the 186 live seed columns, extends by cadical in 33 s to an explicit proper 5-colouring
+  of `unit ∪ halo ∪ P_in` (validated on all 149,508 edges; `data/m53/vacuity-infield.json`,
+  `build/m53-p0/vacuity-colouring.txt`). So a kill on the in-field pool is a kill under the class's
+  constraint, never a vacuous one, and the first-horn reading on B₀ stands. *Noted for the record: the
+  unpinned 5-colourability of the object plus its 16,348-point in-field lattice is a HARD SAT instance
+  (30 min undecided with breaking) — the lattice is near-tight, which is what the strong rung's
+  killing power says from the other side.*
+* **D2 widened to the two-cheat stage** (the partial 81,787-class list — a measurement caveat: a
+  partial class set can show the second horn, never establish the first): the in-field pool kills
+  **77,851 and leaves 3,936 survivors (proof), 0 unknown** (50 min, 16 threads). So on the wider stage
+  in-field material provably cannot do 4.8 % of the kills at depth 1 — the residual the full and
+  out-of-field pools must now answer.
+* **D3 launched**: the 3,936 residual classes on the `pdeg12` restriction of the full pool (340,292
+  points: ≥ 3 object neighbours or pool-degree ≥ 12 — the it-4 recipe, 3.1× faster with identical
+  verdicts; kills transfer) at 28 workers, 300-s wall per ask; its survivors and unknowns then go to
+  the full pool (1,636,399 points, the pre-flight's worker count, 1,800-s wall), and the census's
+  number is read from the join; the out-of-field pool alone on the same residual gives the
+  out-alone/cooperative split. A residual class killed on `pdeg12` (a pool that is 98 % out-of-field
+  points by count) is already a SECOND-HORN instance in substance — provably beyond in-field material,
+  killed by out-of-field material — and the census tool reports it as such once the full-pool join is
+  complete.
