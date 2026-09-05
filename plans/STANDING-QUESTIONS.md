@@ -492,3 +492,43 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   χ(G(ℚ(√3, √5, √11)²)) = 5 (Heule-510 lives there; residue bounds cannot reach 5), √7 without √5,
   the quadratic fields ℚ(√d) with d ≡ 7 (mod 8) (triangle-free planes), exactness of the bound for
   ℚ(√3), ℚ(√5), ℚ(√11), and whether Fischer (1990) already contains the criterion.
+
+* **T17 — The residue obstruction: what in-field material can never do, decided by a 2-SAT
+  (2026-09-05, the session holding the proof; `~/field-wall-conjecture.md` §7.2–§7.4,
+  `tools/residue_floor.py`, `data/m53/residue-floor-it4c.json`).** [theorem + measured] The residue
+  colouring r with a fifth colour on a vertex set S is a separating 5-colouring of unit ∪ C′ iff S is
+  an independent exact transversal of the cheats C′ (exactly one endpoint per cheat, no unit edge
+  inside S, not both A and B) — the 2-SAT Σ(C′) on the seed vertices — and it extends to any finite
+  set of K-points by r itself. Hence Σ(C′) SAT ⟹ no in-field halo at any depth makes C′ force; every
+  in-field-reachable standing set has Σ UNSAT (an odd cycle of distance-2 pairs, or every side choice
+  blocked). Lemma: two points of K² at distance 2 from a common K-point are never unit-apart (needs
+  √15), so two cheats always admit a transversal: **μ ≥ 3 inside K**, the three a distance-2 triangle
+  or a collinear five-point blockade. Measured on the culled it-4 object: standing cheat graph 24
+  components, 8 non-bipartite (13, 12, 11, 9, 9, 9, 8, 8), shortest odd cycle 3, Σ UNSAT; 0 of 149
+  single removals turn Σ SAT; the two-cheat batch keeps all 8 odd components; 0 of its 3,936 in-field
+  survivors are residue-type (both primes). The seed's 446 cheats: 16 components, all non-bipartite.
+  *Reading:* the in-field loop is far from its residue floor, which is why in-field material did the
+  intermediate kills; the floor and the theorem together say the loop's only value is in-context
+  reduction of the standing set, never termination.
+* **T18 — The wall-breaking material at depth one, classified exactly (2026-09-05,
+  `tools/wall_break_test.py` — the classifier the halt record asked for; `data/m53/wallbreak-it4.json`).**
+  [measured + derived] Over the it-4 object's 950,371 pairs at distance < 2: 1,435 radicands;
+  32 in-field (140,195 pairs); **5 break the wall alone (4,221 pairs, 0.44 %)** — the √5 class
+  (4,092 pairs, distances 4/3 and 2√5/3) and three others (129 pairs); 205 radicands (81,592 pairs)
+  break at exactly one 2-adic prime and need a partner (the pairs (−1,1)+(1,−1), (2,·)+(−2,·) and
+  their six relatives, 8 two-class combinations in all); **523,608 pairs are squares in ℚ₂(√3) at both
+  primes — useless in any combination.** Only 16 class pairs occur, an 𝔽₂-subspace of rank 4 of 8:
+  DERIVED — every object point keeps the Exoo–Ismailescu shape (x ∈ √3·ℚ(√33), y ∈ ℚ(√33)), so
+  every radicand lies in ℚ(√33) and is 2-adically rational, and ℚ₂'s square classes inside ℚ₂(√3) are
+  exactly ⟨−1, 2⟩ (3 ≡ 1, 5 ≡ −1). Self-test: 21 planted radicands (the note's §6.2 table plus
+  1 + √3, 2 + √3, (2 + √3)², 5(2 + √3)², √33, 4) classified as derived. *Consequence:* the endgame's
+  depth-one pool is ~8,000 √5-class points, or partner pairs from the one-prime classes; the rest of
+  the 1.6 M-point out-of-field pool is provably inert for the endgame.
+* **Q10 — Is the residue colouring rigid? (2026-09-05.)** [question] Are r₁, r₂ (up to relabelling
+  and coset choice) the only proper 4-colourings of G(K²)? For ℚ² the analogue holds (bipartite ⟹ one
+  2-colouring per component). Finite K-point graphs have many other 4-colourings — none of the it-4
+  object's 5,470 distance-2 pairs is forced mono at four colours, while 137 pairs at 8/3 and 8/√3 are —
+  so the question is about the infinite graph. A positive answer would explain the distance-2
+  pigeonhole (M33/M34) as the shadow of uniqueness, and the copy lock's arrival at iteration 3 as the
+  fabric becoming residue-rigid on the chord pairs. Dial to measure: for each distance class d of
+  positive 𝔭-adic valuation, the fraction of d-pairs forced mono at four colours, against depth.

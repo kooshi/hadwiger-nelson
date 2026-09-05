@@ -377,3 +377,11 @@ commit left the unit part 4-colourable. Measured at M53 before the halt: the in-
 points, 1 % of the depth-1 pool — ladder points fuse C(k,2) parent pairs) kills every class of a
 one-cheat batch and 95 % of a two-cheat stage's 81,787; the 4.8 % it provably cannot kill are hard for
 every material at five-minute asks on a 340k-point pool. The state table's next row is the new plan's.
+
+**Added the same day (the residue obstruction, `plans/STANDING-QUESTIONS.md` T17–T18).** The
+in-field loop's exact obstruction is a 2-SAT on the seed vertices: a batch B is in-field-removable
+only if Σ(standing ∖ B) is UNSAT (`tools/residue_floor.py`); μ ≥ 3 inside K; the wall-breaking
+pool at depth one is the √5-class (4,221 pairs) plus partner pairs from the one-prime classes, and
+523,608 pairs are 2-adically inert (`tools/wall_break_test.py`). Phase 2′ (the pool by field) is
+therefore: split by 2-adic class, keep the breakers and the partner classes, discard the inert
+two thirds.
