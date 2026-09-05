@@ -60,6 +60,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--object", required=True); ap.add_argument("--dial", required=True)
     ap.add_argument("--pair", default=None); ap.add_argument("--shrink", action="store_true")
+    ap.add_argument("--class", dest="klass", default="64/9", help="the forced pair's exact squared distance as in the dial file (64/9 or 64/3)")
     ap.add_argument("--dps", type=int, default=60); ap.add_argument("--out", default="build/m54/forced-spindle.json")
     a = ap.parse_args()
     t0 = time.time()
@@ -68,7 +69,9 @@ def main():
     live = sorted(i for i in range(obj.n) if i not in obj.deleted); idx = {v: i for i, v in enumerate(live)}
     edges = [(idx[u], idx[v]) for u, v in obj.unit_edges()]
     dial = json.loads(Path(a.dial).read_text())
-    pairs = [(u, v, k) for u, v, k in dial["forced_pairs"] if k == "64/9"]
+    pairs = [(u, v, k) for u, v, k in dial["forced_pairs"] if k == a.klass]
+    q = Fr(a.klass)                                   # d² as an exact rational
+    assert pairs, ("no forced pair of that class in the dial file", a.klass)
     if a.pair:
         x0, y0 = (int(t) for t in a.pair.split(","))
     else:
@@ -78,9 +81,10 @@ def main():
     mp.mp.dps = a.dps
     ex = obj.mp_values(a.dps)
     d = abs(ex[x0] - ex[y0])
-    assert abs(d - mp.mpf(8) / 3) < mp.mpf(10) ** -(a.dps - 10), ("the pair is not at distance 8/3", d)
+    dq = mp.sqrt(mp.mpf(q.numerator) / q.denominator)
+    assert abs(d - dq) < mp.mpf(10) ** -(a.dps - 10), ("the pair is not at the named distance", d, a.klass)
     assert forces(n, edges, x, y), "the pair is NOT forced equal at four colours on the unit part — the dial file disagrees with this object"
-    print(f"[spindle] {a.object}: pair {x0},{y0} at 8/3 confirmed forced equal at 4 colours on {n} points / {len(edges)} edges [{time.time()-t0:.0f}s]", flush=True)
+    print(f"[spindle] {a.object}: pair {x0},{y0} at d² = {a.klass} confirmed forced equal at 4 colours on {n} points / {len(edges)} edges [{time.time()-t0:.0f}s]", flush=True)
     keep = set(range(n))
     if a.shrink:
         mid = (ex[x0] + ex[y0]) / 2
@@ -103,9 +107,11 @@ def main():
         print(f"[spindle] 1-minimal core: {len(keep)} vertices, {len(sub)} unit edges, every vertex necessary [{time.time()-t0:.0f}s]", flush=True)
     core = sorted(keep); cidx = {v: i for i, v in enumerate(core)}
     cedges = [(cidx[u], cidx[w]) for u, w in edges if u in keep and w in keep]
-    # the spindle rotation about x: cos = 119/128, sin = 3√247/128
-    c, s_ = mp.mpf(119) / 128, 3 * mp.sqrt(247) / 128
-    R = c + 1j * s_ if False else mp.mpc(c, s_)
+    # the spindle rotation about x: cos θ = 1 − 1/(2d²), sin θ = √(4d² − 1)/(2d²)  (64/9 → 119/128, 3√247/128; 64/3 → 125/128, √759/128)
+    qm = mp.mpf(q.numerator) / q.denominator
+    c, s_ = 1 - 1 / (2 * qm), mp.sqrt(4 * qm - 1) / (2 * qm)
+    R = mp.mpc(c, s_)
+    rad = 4 * q - 1
     zx = ex[x0]
     pts = [ex[live[v]] for v in core]
     rot = [zx + R * (p - zx) for p in pts]
@@ -119,7 +125,7 @@ def main():
             if abs(rot[j] - pts[i]) < tol:
                 fused[j] = i
     assert fused.get(cidx[x]) == cidx[x], "the centre must fuse with itself"
-    cross = []; near = 0
+    cross = []; near = []; ambiguous = 0
     for i in range(m):
         for j in range(m):
             if j in fused:
@@ -127,9 +133,13 @@ def main():
             dd = abs(rot[j] - pts[i])
             if abs(dd - 1) < tol:
                 cross.append((i, j))
+            elif abs(dd - 1) < mp.mpf(10) ** -30:
+                ambiguous += 1                       # between the exact tolerance and a clear miss: precision trouble
             elif abs(dd - 1) < mp.mpf(10) ** -6:
-                near += 1
-    assert near == 0, ("near-unit cross chords within 1e-6 but not within tol — refuse", near)
+                near.append((live[core[i]], live[core[j]], mp.nstr(dd - 1, 8)))   # a genuine near-miss (G21's genre), recorded, not an edge
+    assert ambiguous == 0, ("cross chords between 1e-30 and the exact tolerance of unit — precision trouble, refuse", ambiguous)
+    if near:
+        print(f"[spindle] {len(near)} near-unit cross pairs REJECTED at 60 digits (|d−1| shown): {near[:6]}", flush=True)
     # union graph: core vertices 0..m-1, copy vertices m + j for unfused j
     copy_id = {}
     nxt = m
@@ -149,9 +159,10 @@ def main():
     ok5, _ = colourable(N, uedges, 5)
     print(f"[spindle] union: {N} points ({m} core + {N - m} copy, {len(fused)} fused), {len(uedges)} unit edges, {len(cross)} cross chords; "
           f"4-colourable: {ok} (must be False); 5-colourable: {ok5} (control, must be True) [{time.time()-t0:.0f}s]", flush=True)
-    out = {"kind": "forced-spindle", "object": a.object, "pair": [x0, y0], "distance": "8/3", "rotation": {"cos": "119/128", "sin": "3*sqrt(247)/128"},
-           "field": "Q(sqrt3, sqrt11, sqrt247)", "wall": "247 ≡ 7 (mod 8): broken", "core_size": m, "core_vertices": [live[v] for v in core],
-           "core_edges": len(cedges), "union_points": N, "union_edges": len(uedges), "cross_chords": len(cross), "fused": len(fused),
+    out = {"kind": "forced-spindle", "object": a.object, "pair": [x0, y0], "distance_sq": a.klass,
+           "rotation": {"cos": str(1 - Fr(1, 2) / q), "sin": f"sqrt({rad})/{2 * q}"}, "radicand_4d2_minus_1": str(rad),
+           "field": "Q(sqrt3, sqrt11, sqrt(4d^2-1))", "core_size": m, "core_vertices": [live[v] for v in core],
+           "core_edges": len(cedges), "union_points": N, "union_edges": len(uedges), "cross_chords": len(cross), "near_misses_rejected": near, "fused": len(fused),
            "union_4colourable": ok, "union_5colourable": ok5, "shrunk": a.shrink, "dps": a.dps, "seconds": round(time.time() - t0, 1),
            "claim_scope": "forcing by one SAT refutation (cadical via pysat); chords at dps digits with a 1e-6 near-miss refusal; the union's "
                           "4-refusal asked directly, not inferred from the spindle theorem"}

@@ -580,7 +580,13 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   mint 5-chromatic witnesses by itself, at a distance nobody had spindled — M51's "at distances
   nobody can spindle" meant outside the kernel's tower, not outside mathematics — and the field
   ℚ(√3, √11, √247) is new for 5-chromatic unit-distance graphs (de Grey: √5, √7; Heule: √5; the 8/√3
-  pairs give ℚ(√3, √11, √23) the same way). The 1-minimal forcing core of the pair is being shrunk;
-  the core ∪ its copy is the small witness. *Consequence for the endgame:* the wall-breaking
+  pairs give ℚ(√3, √11, √23) the same way — BUILT: pair (246, 614), 10 cross chords, one genuine
+  near-miss at |d − 1| = −7.2·10⁻⁷ rejected at 60 digits, direct 4-refusal, 5-colourable;
+  `data/m53/forced-spindle-full-8oversqrt3.json`). **The small witness (`data/m53/forced-spindle-core-8over3.json`):**
+  the greedy outside-in shrink of the 8/3 pair's forcing core is **588 vertices, 2,886 unit edges,
+  1-minimal (every vertex's deletion admits a separating 4-colouring, all 586 witnessed)**, and
+  core ∪ R(core) is a **1,175-point, 5,773-edge 5-chromatic unit-distance graph** (6 cross chords, the
+  centre fused; direct 4-refusal; 5-colourable) — de Grey's forcer at distance 4 needed 791 points
+  and √5, √7; this K-fabric forcer at 8/3 needs 588 and neither. *Consequence for the endgame:* the wall-breaking
   adjunction need not be an external angle — the fabric names its own (its valuation-6 forced
   distances), and the Q10 dial is the instrument that finds them.

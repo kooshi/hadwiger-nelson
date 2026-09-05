@@ -534,7 +534,10 @@ Built for one pair: 3,905 points, 27,593 unit edges, 8 cross chords (found at 60
 miss), refusing four colours by a direct SAT ask and admitting five. Its coordinates lie in
 ℚ(√3, √11, √247) — a 5-chromatic unit-distance graph in a field containing neither √5 nor √7, which
 every published witness needs (§6.3). The same construction at the 8/√3 pairs gives ℚ(√3, √11, √23).
-The forcing core of a single pair, shrunk to 1-minimality, is the small version of this witness.
+The forcing core of a single pair, shrunk to 1-minimality by greedy outside-in deletion, has 588
+vertices and 2,886 unit edges, every vertex necessary; core ∪ copy is a 1,175-point 5-chromatic
+unit-distance graph with 5,773 unit edges and 6 cross chords, again refused at four colours directly.
+For comparison, de Grey's forcer of a pair at distance 4 has 791 vertices and needs √5 and √7.
 
 ---
 
