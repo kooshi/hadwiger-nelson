@@ -622,5 +622,6 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   are ℚ(√d), d ≡ 23 (mod 24). *Kooshi's cheat question, first data (`tools/witness_cheats.py`):* the
   1,175-point witness W plus ALL its distance-2 pairs stays 5-colourable (850 pairs), likewise plus
   all √3 pairs (2,370); both together refuse five colours only through the hexagonal shell's K₇ —
-  not a seed. The E–I-shape question (does W + its 850 distance-2 cheats force a pair equal at five
-  colours) was launched at the session's end; see `plans/FIELD-WALL-SESSION-HANDOFF.md` §3(a).
+  not a seed. The E–I-shape question is settled NO: the complete five-colour sweep of W + its 850 distance-2
+  cheats finds **0 forced-equal pairs and 0 virtual edges** over all pairs (81 calls, 858 s;
+  `data/m53/witness-cheats-w5-rigidity.json`) — 4-rigid, 5-chromatic, 5-floppy, G9 one level up.

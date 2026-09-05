@@ -74,9 +74,11 @@ from W. That is not a descent seed, because those nine cheats are exactly the pa
 to force distinct (M48's conjunction), so replacing them is the whole problem.
 
 **The sharper form, in the Exoo–Ismailescu shape** (cheats force a PAIR equal at five colours; then
-spindle): does W + its 850 distance-2 cheats force any pair equal at five colours? A complete
-forced-equal sweep at k = 5 was launched at the end of the session (`build/m54/w5rigid.py`,
-`build/m54/w5-rigidity.json`); read its result before believing anything below.
+spindle): does W + its 850 distance-2 cheats force any pair equal at five colours? **No.** The complete
+sweep at k = 5 (`data/m53/witness-cheats-w5-rigidity.json`, the Rigidity lattice, settled in 81 calls,
+858 s): **0 forced-equal pairs and 0 virtual edges** over all pairs of W + its 850 distance-2 cheats. The
+witness with its cheats is pairwise floppy at five colours — G9's rule (rigidity lives only at the
+forcing level k − 1) holding one level up: 4-rigid, 5-chromatic, 5-floppy.
 
 **Why single-class cheats fail, and what would work.** W is 5-chromatic but its 5-colourings are
 floppy: each side (the 588-core and its copy) is K-fabric, 4-colourable, and the fifth colour is spare

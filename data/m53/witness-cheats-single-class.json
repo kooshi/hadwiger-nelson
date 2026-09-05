@@ -1,0 +1,34 @@
+{
+ "kind": "witness-cheats",
+ "witness": "data/m53/forced-spindle-core-8over3.json",
+ "points": 1175,
+ "unit_edges": 5773,
+ "classes": {
+  "4": {
+   "pairs": 850,
+   "five_colourable_with_all": true,
+   "note": "stays 5-colourable; forced-pair search not run here"
+  },
+  "3": {
+   "pairs": 2370,
+   "five_colourable_with_all": true,
+   "note": "stays 5-colourable; forced-pair search not run here"
+  },
+  "1/3": {
+   "pairs": 4794,
+   "five_colourable_with_all": true,
+   "note": "stays 5-colourable; forced-pair search not run here"
+  },
+  "16/3": {
+   "pairs": 180,
+   "five_colourable_with_all": true,
+   "note": "stays 5-colourable; forced-pair search not run here"
+  },
+  "64/9": {
+   "pairs": 2,
+   "five_colourable_with_all": true,
+   "note": "stays 5-colourable; forced-pair search not run here"
+  }
+ },
+ "seconds": 47.8
+}
