@@ -605,3 +605,22 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   and √5, √7; this K-fabric forcer at 8/3 needs 588 and neither. *Consequence for the endgame:* the wall-breaking
   adjunction need not be an external angle — the fabric names its own (its valuation-6 forced
   distances), and the Q10 dial is the instrument that finds them.
+
+* **T21 — Theorem A′, the 3-adic wall, and the residue chromatic number (2026-09-05, note §6.2′).**
+  [theorem, hand-proved] Colouring by the residue class modulo an additive subgroup H of the residue
+  field that avoids the norm-one group C refines Theorem A to [k : H] colours. For a prime 𝔮 of F above
+  an odd p ≡ 3 (mod 4) with residue field 𝔽_p, the prime above it in F(i) is conjugation-fixed with
+  residue field 𝔽_{p²}, C has p + 1 elements, and exactly (p + 1)/2 of the p + 1 lines avoid C: so
+  χ(G(F²)) ≤ p. At p = 3: **any real field with a degree-one prime above 3 has χ ≤ 3** — hence
+  χ(ℚ(√3)²) = 3 (the prime 3 ramifies; the triangle needs 3) and χ(ℚ(√7)²) = 3 (3 splits; the 5-cycle
+  needs 3), while K = ℚ(√3, √11) escapes (11 is not a square mod 3, so its primes above 3 have
+  residue 𝔽₉ ∋ √−1 and split in K(i)) — consistent with the Moser spindle. The residue method's
+  thresholds below 7 are exactly 2, 3, 4; 5, 6, 7 are invisible to it, so **no residue argument can
+  ever distinguish a field that hosts 5-chromatic graphs from one that hosts 6-chromatic ones**.
+  χ_res(F) := the least [k : H]; χ_res(ℚ) = 2, χ_res(ℚ(√3)) = χ_res(ℚ(√7)) = 3, χ_res(K) = 4 (all
+  tight), χ_res(ℚ(√3, √5, √11)) = 11 (above the plane's 7). The first quadratic planes past both walls
+  are ℚ(√d), d ≡ 23 (mod 24). *Kooshi's cheat question, first data (`tools/witness_cheats.py`):* the
+  1,175-point witness W plus ALL its distance-2 pairs stays 5-colourable (850 pairs), likewise plus
+  all √3 pairs (2,370); both together refuse five colours only through the hexagonal shell's K₇ —
+  not a seed. The E–I-shape question (does W + its 850 distance-2 cheats force a pair equal at five
+  colours) was launched at the session's end; see `plans/FIELD-WALL-SESSION-HANDOFF.md` §3(a).
