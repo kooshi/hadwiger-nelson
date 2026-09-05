@@ -1,0 +1,4932 @@
+{
+ "kind": "cheat-spectrum",
+ "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149",
+ "headline": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149: 149 standing cheats enumerated alone (cap 10,000 classes \u00b7 40,000,000 conflicts \u00b7 1 threads \u00b7 wall 10m): 89 necessary (\u2265 1 class; 0 exact, 5 capped), 0 droppable-alone (exact 0), 60 unknown (0 classes, open leaves), 0 engine errors; median exact count None; culler/loop witnesses found 0/80 (exact runs), not checkable 30 (capped); floor 13/27 \u2265 1; of the 46 undecided: 0 necessary, 0 droppable-alone, 46 unknown.",
+ "cheats": [
+  {
+   "cheat": [
+    5,
+    186
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 1799.988640006,
+   "stage_fingerprint": "29281aac481b3c51",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/5-186",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    8,
+    26
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 63.746542506,
+   "stage_fingerprint": "b2f6579b414bd51c",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/8-26",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    12,
+    196
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990407474,
+   "stage_fingerprint": "ee317fbc852f3bce",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/12-196",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    21,
+    65
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "loop batch005-b16:0",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991205332,
+   "stage_fingerprint": "91fb6801b79abce5",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/21-65",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    43,
+    205
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991756877,
+   "stage_fingerprint": "4fb994c755f0804a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/43-205",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    50,
+    171
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987015714,
+   "stage_fingerprint": "bd33b1e37ad896a2",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/50-171",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    59,
+    97
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "loop batch009-b8:0",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.995718221,
+   "stage_fingerprint": "ba708d41950c2382",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/59-97",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    61,
+    198
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "loop batch010-b4:14232",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992920196,
+   "stage_fingerprint": "73d099a2de5285ba",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/61-198",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    64,
+    82
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "loop batch011-b4:0",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992193117,
+   "stage_fingerprint": "27c5ca9090131e6d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/64-82",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    67,
+    99
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990512553,
+   "stage_fingerprint": "0412924960b3be41",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/67-99",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    69,
+    120
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 22",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.99101346,
+   "stage_fingerprint": "60dbeb3a8bc6ab88",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/69-120",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    70,
+    83
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990672949,
+   "stage_fingerprint": "e5d3dafc4a1b3ff7",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/70-83",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    71,
+    84
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 26",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988516684,
+   "stage_fingerprint": "21fd9699889130e9",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/71-84",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    71,
+    107
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992233461,
+   "stage_fingerprint": "2f02b8b2b476290f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/71-107",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    72,
+    80
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 28",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.99217656,
+   "stage_fingerprint": "3b8f26c03dd7db8c",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/72-80",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    72,
+    84
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988845075,
+   "stage_fingerprint": "a8d1b56ac6d07b12",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/72-84",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    74,
+    84
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991544846,
+   "stage_fingerprint": "e432bfbe885ff1e9",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/74-84",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    75,
+    83
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987463011,
+   "stage_fingerprint": "399b2c592ab3bd71",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/75-83",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    77,
+    121
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98854472,
+   "stage_fingerprint": "1ba51915fb6ece03",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/77-121",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    79,
+    96
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.9903269,
+   "stage_fingerprint": "3110b5ae133eb6b3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/79-96",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    79,
+    197
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988498387,
+   "stage_fingerprint": "297fc47ba6aec692",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/79-197",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    80,
+    84
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990054469,
+   "stage_fingerprint": "b835e2ff79045128",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/80-84",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    80,
+    107
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988824275,
+   "stage_fingerprint": "49ddc9f7e905f3ca",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/80-107",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    81,
+    83
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987840261,
+   "stage_fingerprint": "0197c5b94ba746fd",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/81-83",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    81,
+    105
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.994800558,
+   "stage_fingerprint": "901ab7dcfe3d8d79",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/81-105",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    81,
+    182
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 41",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990043318,
+   "stage_fingerprint": "2ce38aaf522f2091",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/81-182",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    85,
+    99
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 42",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990196017,
+   "stage_fingerprint": "ef776a3cc36d58e1",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/85-99",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    85,
+    146
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989909979,
+   "stage_fingerprint": "9832050adee7fdb8",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/85-146",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    85,
+    187
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992744638,
+   "stage_fingerprint": "1886f64a1759addd",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/85-187",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    86,
+    135
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988608608,
+   "stage_fingerprint": "6fb21325cdcab534",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/86-135",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    86,
+    150
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 46",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988369265,
+   "stage_fingerprint": "563a20cd91a933aa",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/86-150",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    86,
+    152
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 47",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.985294264,
+   "stage_fingerprint": "b98c322eff0828d4",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/86-152",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    87,
+    113
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98896744,
+   "stage_fingerprint": "3410004f50eb97cf",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/87-113",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    87,
+    150
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 49",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989565385,
+   "stage_fingerprint": "4bbf21807472e82f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/87-150",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    87,
+    152
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98735905,
+   "stage_fingerprint": "6a9384da1f4d5490",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/87-152",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    89,
+    116
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 52",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987959011,
+   "stage_fingerprint": "92ad6a4f5dd33bbe",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/89-116",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    89,
+    141
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 53",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989992206,
+   "stage_fingerprint": "e3afee0e2836ffe0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/89-141",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    89,
+    209
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990180318,
+   "stage_fingerprint": "76d6e2ba5f4a680a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/89-209",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    94,
+    197
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 56",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988351945,
+   "stage_fingerprint": "354a3226270f4db2",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/94-197",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    95,
+    200
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987706244,
+   "stage_fingerprint": "b1a3b83be30d2707",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/95-200",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    97,
+    110
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988275539,
+   "stage_fingerprint": "7b316f73b141d5a9",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/97-110",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    98,
+    107
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988999156,
+   "stage_fingerprint": "48cd637aa826751d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/98-107",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    99,
+    160
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 66",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.985175094,
+   "stage_fingerprint": "608693bcb8037f65",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/99-160",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    99,
+    181
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990127687,
+   "stage_fingerprint": "16c9230c6a23eb1e",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/99-181",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    99,
+    187
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 68",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990216447,
+   "stage_fingerprint": "6c6d2eaddf36c5d0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/99-187",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    101,
+    117
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 69",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990168828,
+   "stage_fingerprint": "8f007e5cc497a045",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/101-117",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    101,
+    133
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98811808,
+   "stage_fingerprint": "adebf4409c0d7c5b",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/101-133",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    101,
+    135
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.986364868,
+   "stage_fingerprint": "7b2df7e32edb06b5",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/101-135",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    101,
+    173
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988256427,
+   "stage_fingerprint": "fed6b22720862432",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/101-173",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    102,
+    184
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 73",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.986867665,
+   "stage_fingerprint": "be657fd0d523d185",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/102-184",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    103,
+    155
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 74",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989026147,
+   "stage_fingerprint": "2ea8beb605d72203",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/103-155",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    103,
+    193
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990019972,
+   "stage_fingerprint": "71b5f3a5830dbb1f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/103-193",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    104,
+    169
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 76",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992771869,
+   "stage_fingerprint": "5990c1bc662b92cb",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/104-169",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    105,
+    182
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.99055426,
+   "stage_fingerprint": "0d657f997fd13571",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/105-182",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    107,
+    183
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990276352,
+   "stage_fingerprint": "445200a2955019b8",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/107-183",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    109,
+    183
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 79",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98779342,
+   "stage_fingerprint": "7a7d69dc4114e357",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/109-183",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    110,
+    182
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.981899888,
+   "stage_fingerprint": "0a42c23e2e2c6e24",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/110-182",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    113,
+    117
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 81",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988875562,
+   "stage_fingerprint": "991c4953c6441fa3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/113-117",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    113,
+    173
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 83",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991394749,
+   "stage_fingerprint": "edfe73e4a1543167",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/113-173",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    114,
+    119
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 84",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989457541,
+   "stage_fingerprint": "d629a93b93b6b2bb",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/114-119",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    114,
+    128
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989680056,
+   "stage_fingerprint": "f637396aff9d6af0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/114-128",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    114,
+    154
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990546053,
+   "stage_fingerprint": "a79da520ef7b9e52",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/114-154",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    114,
+    162
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 87",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990330946,
+   "stage_fingerprint": "5ca96e553844508a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/114-162",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    114,
+    163
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 88",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98997592,
+   "stage_fingerprint": "5b1dedccc9ce4788",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/114-163",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    115,
+    153
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.985427231,
+   "stage_fingerprint": "f6ef27aa49c91128",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/115-153",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    117,
+    135
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988256493,
+   "stage_fingerprint": "57a3bed19c573dc3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/117-135",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    118,
+    126
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.984587945,
+   "stage_fingerprint": "4d3e911d6c7428a2",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/118-126",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    118,
+    129
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 97",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.979715774,
+   "stage_fingerprint": "85843d35ca3942b0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/118-129",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    119,
+    128
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988506275,
+   "stage_fingerprint": "d0b49521e1d184d9",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/119-128",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    119,
+    130
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 100",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987016788,
+   "stage_fingerprint": "a728ad36e4b93b77",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/119-130",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    120,
+    144
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 101",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.985893563,
+   "stage_fingerprint": "39dd01443416c321",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/120-144",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    120,
+    176
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 103",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.982181331,
+   "stage_fingerprint": "1425c9e9bb7aee79",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/120-176",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    123,
+    141
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 105",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988204779,
+   "stage_fingerprint": "90683173719f48df",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/123-141",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    126,
+    137
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 107",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988845089,
+   "stage_fingerprint": "27dfe5850a71baf4",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/126-137",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    126,
+    164
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988285005,
+   "stage_fingerprint": "b3db554269d41759",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/126-164",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    127,
+    130
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 111",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98253717,
+   "stage_fingerprint": "6730c3271e58a57f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/127-130",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    127,
+    140
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989228945,
+   "stage_fingerprint": "4fdd9a48327154f3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/127-140",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    128,
+    140
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 115",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988721,
+   "stage_fingerprint": "32afc42d9455a9f6",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/128-140",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    128,
+    162
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 116",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.99030545,
+   "stage_fingerprint": "5a5d3dcde77033c1",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/128-162",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    130,
+    140
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.980563089,
+   "stage_fingerprint": "8079ad48d49c71be",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/130-140",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    131,
+    139
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989050706,
+   "stage_fingerprint": "d9a742e5e2c3a6a0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/131-139",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    132,
+    180
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 120",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991642123,
+   "stage_fingerprint": "8f93a7f85bca4636",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/132-180",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    133,
+    174
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 121",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987021383,
+   "stage_fingerprint": "297932a9d0119598",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/133-174",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    135,
+    152
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 122",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988927284,
+   "stage_fingerprint": "f74a094e0912a334",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/135-152",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    135,
+    174
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987640594,
+   "stage_fingerprint": "722443519b10a3bd",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/135-174",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    136,
+    140
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 124",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.986270525,
+   "stage_fingerprint": "8c8fdbe809dfe6d3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/136-140",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    136,
+    163
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.992079865,
+   "stage_fingerprint": "d009ef63c8799652",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/136-163",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    136,
+    195
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989241653,
+   "stage_fingerprint": "3e4c53ab85080ce0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/136-195",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    137,
+    161
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 128",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98777842,
+   "stage_fingerprint": "b7e1314ad9108494",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/137-161",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    137,
+    194
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 129",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989041858,
+   "stage_fingerprint": "d8d2fdd9b4e75b3e",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/137-194",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    138,
+    176
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991384766,
+   "stage_fingerprint": "3c5a6183fb9ebedb",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/138-176",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    141,
+    155
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 131",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989021503,
+   "stage_fingerprint": "0367191406e2e315",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/141-155",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    141,
+    199
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988680121,
+   "stage_fingerprint": "6a44c38883cde43d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/141-199",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    144,
+    196
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 134",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990116784,
+   "stage_fingerprint": "dd7aedb92e9242f8",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/144-196",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    151,
+    189
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.98993903,
+   "stage_fingerprint": "58234616677c4f5c",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/151-189",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    152,
+    173
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988463752,
+   "stage_fingerprint": "66b7eafed4e98989",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/152-173",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    152,
+    174
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.986139735,
+   "stage_fingerprint": "9e30193a51a5617a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/152-174",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    153,
+    161
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.987461913,
+   "stage_fingerprint": "eeaf4905d550da60",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/153-161",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    153,
+    164
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 139",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.99124932,
+   "stage_fingerprint": "02191bad2b32b641",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/153-164",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    154,
+    163
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 141",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988663216,
+   "stage_fingerprint": "e98d23362b1d2ba3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/154-163",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    155,
+    193
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 143",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989038132,
+   "stage_fingerprint": "6829acce7965df25",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/155-193",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    155,
+    199
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.988414567,
+   "stage_fingerprint": "abf339c0e333aaa3",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/155-199",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    158,
+    196
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 145",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989655826,
+   "stage_fingerprint": "44edbefbc046b5f1",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/158-196",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    160,
+    181
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989021662,
+   "stage_fingerprint": "4aa887c4caa76436",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/160-181",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    162,
+    195
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989678559,
+   "stage_fingerprint": "5ca91c0e6c9dd17d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/162-195",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    164,
+    166
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 150",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.990464763,
+   "stage_fingerprint": "ba8b6148ad2a8e7a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/164-166",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    165,
+    195
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.989537846,
+   "stage_fingerprint": "8927b71c6f5be39b",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/165-195",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    177,
+    184
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "witness_validated": true,
+    "source": "culler holds 154",
+    "enumerator": "open, no class within the wall"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.984304847,
+   "stage_fingerprint": "a99e8969177a428f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/177-184",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "supplies-the-class",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    184,
+    200
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.986469692,
+   "stage_fingerprint": "d15792a45d17bd69",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/184-200",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "undecided"
+   ]
+  },
+  {
+   "cheat": [
+    194,
+    203
+   ],
+   "count": 0,
+   "claim": "open",
+   "verdict": "unknown",
+   "evidence": {
+    "open_leaves": 1,
+    "stop_reason": "wall-or-budget"
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991516213,
+   "stage_fingerprint": "42c2d92e01900bbe",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/194-203",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    7,
+    35
+   ],
+   "count": 1,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 1,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 73.302757174,
+   "stage_fingerprint": "0b1e477477cbbe48",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/7-35",
+   "seconds": null,
+   "resumed": true,
+   "engine_discrepancy": {
+    "engine_classes": 0,
+    "lines": 1
+   },
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    25,
+    52
+   ],
+   "count": 1,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 1,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 2,
+   "solver_seconds": 599.97596273,
+   "stage_fingerprint": "746185b3d0957729",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/25-52",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    38,
+    186
+   ],
+   "count": 1,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 1,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 2,
+   "solver_seconds": 599.978242294,
+   "stage_fingerprint": "e28d27074bb5f59c",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/38-186",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    66,
+    142
+   ],
+   "count": 6,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 6,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 1,
+   "solver_seconds": 599.991014382,
+   "stage_fingerprint": "0bed744f02c1a42b",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/66-142",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    115,
+    126
+   ],
+   "count": 1121,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 1121,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 1122,
+   "solver_seconds": 599.56074824,
+   "stage_fingerprint": "2f9621fcd249eb11",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/115-126",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    163,
+    195
+   ],
+   "count": 1920,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 1920,
+    "mono_on_cheat": true
+   },
+   "leaves": 1,
+   "solves": 1921,
+   "solver_seconds": 599.222220188,
+   "stage_fingerprint": "6672bd8bd3c27ff5",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/163-195",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    61,
+    197
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.202719964,
+   "stage_fingerprint": "4ff1b8bdb3527bcf",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/61-197",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    88,
+    184
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.134942821,
+   "stage_fingerprint": "a2e5fdfa8a4b9fa7",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/88-184",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    113,
+    152
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.140171295,
+   "stage_fingerprint": "a303bb2020945ad2",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/113-152",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    115,
+    118
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 598.897450644,
+   "stage_fingerprint": "1bb33856ccd63263",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/115-118",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    123,
+    155
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.141583926,
+   "stage_fingerprint": "ae7d206a5ef9871a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/123-155",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    126,
+    139
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.152473106,
+   "stage_fingerprint": "f4b8a40d3c12908a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/126-139",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    127,
+    163
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.021870371,
+   "stage_fingerprint": "a9d0eceb9def3612",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/127-163",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    129,
+    137
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.081394748,
+   "stage_fingerprint": "0c7b1dd4dccafbfa",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/129-137",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    141,
+    209
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.128534883,
+   "stage_fingerprint": "d166f8ed46c2bf69",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/141-209",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    161,
+    194
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.19900346,
+   "stage_fingerprint": "52f1cfd40a61e649",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/161-194",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    166,
+    203
+   ],
+   "count": 2000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2000,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2001,
+   "solver_seconds": 599.103465771,
+   "stage_fingerprint": "d1a65b4033116569",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/166-203",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    96,
+    121
+   ],
+   "count": 2225,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2225,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 2226,
+   "solver_seconds": 599.229594527,
+   "stage_fingerprint": "38fb2c05188f052a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/96-121",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    52,
+    54
+   ],
+   "count": 2664,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 2664,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 1,
+   "solver_seconds": 599.986015198,
+   "stage_fingerprint": "95b986e9103d9b2e",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/52-54",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    95,
+    177
+   ],
+   "count": 3000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3000,
+    "mono_on_cheat": true
+   },
+   "leaves": 9,
+   "solves": 3001,
+   "solver_seconds": 598.796871047,
+   "stage_fingerprint": "a912bdf2dc2b4bf2",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/95-177",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    120,
+    196
+   ],
+   "count": 3000,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3000,
+    "mono_on_cheat": true
+   },
+   "leaves": 9,
+   "solves": 3001,
+   "solver_seconds": 598.736484452,
+   "stage_fingerprint": "215639b88af7fa4d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/120-196",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    80,
+    183
+   ],
+   "count": 3225,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3225,
+    "mono_on_cheat": true
+   },
+   "leaves": 5,
+   "solves": 3226,
+   "solver_seconds": 598.672110241,
+   "stage_fingerprint": "d45f9825a340028f",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/80-183",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    128,
+    136
+   ],
+   "count": 3323,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3323,
+    "mono_on_cheat": true
+   },
+   "leaves": 9,
+   "solves": 3324,
+   "solver_seconds": 598.562553906,
+   "stage_fingerprint": "2657c51fff00dbbb",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/128-136",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    94,
+    198
+   ],
+   "count": 3973,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3973,
+    "mono_on_cheat": true
+   },
+   "leaves": 13,
+   "solves": 3974,
+   "solver_seconds": 598.304178489,
+   "stage_fingerprint": "bee1e3044be697ad",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/94-198",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    55,
+    149
+   ],
+   "count": 3975,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3975,
+    "mono_on_cheat": true
+   },
+   "leaves": 13,
+   "solves": 984,
+   "solver_seconds": 599.540986203,
+   "stage_fingerprint": "ffaa3e1ad037f1b4",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/55-149",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    137,
+    139
+   ],
+   "count": 3979,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3979,
+    "mono_on_cheat": true
+   },
+   "leaves": 9,
+   "solves": 3980,
+   "solver_seconds": 598.028255807,
+   "stage_fingerprint": "ac933d8b6774d1a7",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/137-139",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    206,
+    210
+   ],
+   "count": 3991,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 3991,
+    "mono_on_cheat": true
+   },
+   "leaves": 13,
+   "solves": 3992,
+   "solver_seconds": 598.627203496,
+   "stage_fingerprint": "7f0b4c93fad1bbcf",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/206-210",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    126,
+    203
+   ],
+   "count": 4076,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 4076,
+    "mono_on_cheat": true
+   },
+   "leaves": 9,
+   "solves": 4077,
+   "solver_seconds": 598.384356151,
+   "stage_fingerprint": "1463c4b95dc37378",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/126-203",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    98,
+    109
+   ],
+   "count": 4159,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 4159,
+    "mono_on_cheat": true
+   },
+   "leaves": 13,
+   "solves": 4160,
+   "solver_seconds": 598.285557015,
+   "stage_fingerprint": "96661d5e3161061e",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/98-109",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    206,
+    211
+   ],
+   "count": 4329,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 4329,
+    "mono_on_cheat": true
+   },
+   "leaves": 13,
+   "solves": 4330,
+   "solver_seconds": 598.24802786,
+   "stage_fingerprint": "094e961765f85e2c",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/206-211",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "n/a",
+   "prior": [
+    "floor"
+   ]
+  },
+  {
+   "cheat": [
+    4,
+    90
+   ],
+   "count": 4440,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 4440,
+    "mono_on_cheat": true
+   },
+   "leaves": 17,
+   "solves": 4444,
+   "solver_seconds": 3643.46937486,
+   "stage_fingerprint": "fd95d985e69db32d",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/4-90",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "floor",
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    115,
+    203
+   ],
+   "count": 7632,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 7632,
+    "mono_on_cheat": true
+   },
+   "leaves": 25,
+   "solves": 7633,
+   "solver_seconds": 596.760409529,
+   "stage_fingerprint": "70362007e50d9f6b",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/115-203",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    116,
+    141
+   ],
+   "count": 7718,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 7718,
+    "mono_on_cheat": true
+   },
+   "leaves": 25,
+   "solves": 7719,
+   "solver_seconds": 596.992819947,
+   "stage_fingerprint": "533108a738e8dfe4",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/116-141",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    4,
+    208
+   ],
+   "count": 8242,
+   "claim": "open",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 8242,
+    "mono_on_cheat": true
+   },
+   "leaves": 25,
+   "solves": 8246,
+   "solver_seconds": 3939.372146316,
+   "stage_fingerprint": "69a2e9374a1ed6b7",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/4-208",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "floor",
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    60,
+    85
+   ],
+   "count": 10000,
+   "claim": "capped",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 10000,
+    "mono_on_cheat": true
+   },
+   "leaves": 33,
+   "solves": 10002,
+   "solver_seconds": 505.187815814,
+   "stage_fingerprint": "e85433e9ee567dd0",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/60-85",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    120,
+    158
+   ],
+   "count": 10000,
+   "claim": "capped",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 10000,
+    "mono_on_cheat": true
+   },
+   "leaves": 33,
+   "solves": 10000,
+   "solver_seconds": 402.570557096,
+   "stage_fingerprint": "2356e645a61e6fe5",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/120-158",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    166,
+    194
+   ],
+   "count": 10000,
+   "claim": "capped",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 10000,
+    "mono_on_cheat": true
+   },
+   "leaves": 37,
+   "solves": 10000,
+   "solver_seconds": 590.93124316,
+   "stage_fingerprint": "036dd015bacb829a",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/166-194",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    4,
+    159
+   ],
+   "count": 38694,
+   "claim": "capped",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 38694,
+    "mono_on_cheat": true
+   },
+   "leaves": 101,
+   "solves": 36720,
+   "solver_seconds": 7186.209583566,
+   "stage_fingerprint": "8c5e6f97332165de",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/4-159",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "floor",
+    "witnessed"
+   ]
+  },
+  {
+   "cheat": [
+    4,
+    205
+   ],
+   "count": 50840,
+   "claim": "capped",
+   "verdict": "necessary",
+   "evidence": {
+    "lines_validated": 50840,
+    "mono_on_cheat": true
+   },
+   "leaves": 181,
+   "solves": 50855,
+   "solver_seconds": 5158.969925246,
+   "stage_fingerprint": "2cee62e10c042f56",
+   "out_dir": "build/m53-spectrum/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/4-205",
+   "seconds": null,
+   "resumed": true,
+   "witness_check": "not-checkable-capped",
+   "prior": [
+    "floor",
+    "witnessed"
+   ]
+  }
+ ],
+ "lists": {
+  "necessary": [
+   [
+    4,
+    90
+   ],
+   [
+    4,
+    159
+   ],
+   [
+    4,
+    205
+   ],
+   [
+    4,
+    208
+   ],
+   [
+    7,
+    35
+   ],
+   [
+    21,
+    65
+   ],
+   [
+    25,
+    52
+   ],
+   [
+    38,
+    186
+   ],
+   [
+    52,
+    54
+   ],
+   [
+    55,
+    149
+   ],
+   [
+    59,
+    97
+   ],
+   [
+    60,
+    85
+   ],
+   [
+    61,
+    197
+   ],
+   [
+    61,
+    198
+   ],
+   [
+    64,
+    82
+   ],
+   [
+    66,
+    142
+   ],
+   [
+    69,
+    120
+   ],
+   [
+    71,
+    84
+   ],
+   [
+    72,
+    80
+   ],
+   [
+    80,
+    183
+   ],
+   [
+    81,
+    182
+   ],
+   [
+    85,
+    99
+   ],
+   [
+    86,
+    150
+   ],
+   [
+    86,
+    152
+   ],
+   [
+    87,
+    150
+   ],
+   [
+    88,
+    184
+   ],
+   [
+    89,
+    116
+   ],
+   [
+    89,
+    141
+   ],
+   [
+    94,
+    197
+   ],
+   [
+    94,
+    198
+   ],
+   [
+    95,
+    177
+   ],
+   [
+    96,
+    121
+   ],
+   [
+    98,
+    109
+   ],
+   [
+    99,
+    160
+   ],
+   [
+    99,
+    187
+   ],
+   [
+    101,
+    117
+   ],
+   [
+    102,
+    184
+   ],
+   [
+    103,
+    155
+   ],
+   [
+    104,
+    169
+   ],
+   [
+    109,
+    183
+   ],
+   [
+    113,
+    117
+   ],
+   [
+    113,
+    152
+   ],
+   [
+    113,
+    173
+   ],
+   [
+    114,
+    119
+   ],
+   [
+    114,
+    162
+   ],
+   [
+    114,
+    163
+   ],
+   [
+    115,
+    118
+   ],
+   [
+    115,
+    126
+   ],
+   [
+    115,
+    203
+   ],
+   [
+    116,
+    141
+   ],
+   [
+    118,
+    129
+   ],
+   [
+    119,
+    130
+   ],
+   [
+    120,
+    144
+   ],
+   [
+    120,
+    158
+   ],
+   [
+    120,
+    176
+   ],
+   [
+    120,
+    196
+   ],
+   [
+    123,
+    141
+   ],
+   [
+    123,
+    155
+   ],
+   [
+    126,
+    137
+   ],
+   [
+    126,
+    139
+   ],
+   [
+    126,
+    203
+   ],
+   [
+    127,
+    130
+   ],
+   [
+    127,
+    163
+   ],
+   [
+    128,
+    136
+   ],
+   [
+    128,
+    140
+   ],
+   [
+    128,
+    162
+   ],
+   [
+    129,
+    137
+   ],
+   [
+    132,
+    180
+   ],
+   [
+    133,
+    174
+   ],
+   [
+    135,
+    152
+   ],
+   [
+    136,
+    140
+   ],
+   [
+    137,
+    139
+   ],
+   [
+    137,
+    161
+   ],
+   [
+    137,
+    194
+   ],
+   [
+    141,
+    155
+   ],
+   [
+    141,
+    209
+   ],
+   [
+    144,
+    196
+   ],
+   [
+    153,
+    164
+   ],
+   [
+    154,
+    163
+   ],
+   [
+    155,
+    193
+   ],
+   [
+    158,
+    196
+   ],
+   [
+    161,
+    194
+   ],
+   [
+    163,
+    195
+   ],
+   [
+    164,
+    166
+   ],
+   [
+    166,
+    194
+   ],
+   [
+    166,
+    203
+   ],
+   [
+    177,
+    184
+   ],
+   [
+    206,
+    210
+   ],
+   [
+    206,
+    211
+   ]
+  ],
+  "droppable-alone": [],
+  "unknown": [
+   [
+    5,
+    186
+   ],
+   [
+    8,
+    26
+   ],
+   [
+    12,
+    196
+   ],
+   [
+    43,
+    205
+   ],
+   [
+    50,
+    171
+   ],
+   [
+    67,
+    99
+   ],
+   [
+    70,
+    83
+   ],
+   [
+    71,
+    107
+   ],
+   [
+    72,
+    84
+   ],
+   [
+    74,
+    84
+   ],
+   [
+    75,
+    83
+   ],
+   [
+    77,
+    121
+   ],
+   [
+    79,
+    96
+   ],
+   [
+    79,
+    197
+   ],
+   [
+    80,
+    84
+   ],
+   [
+    80,
+    107
+   ],
+   [
+    81,
+    83
+   ],
+   [
+    81,
+    105
+   ],
+   [
+    85,
+    146
+   ],
+   [
+    85,
+    187
+   ],
+   [
+    86,
+    135
+   ],
+   [
+    87,
+    113
+   ],
+   [
+    87,
+    152
+   ],
+   [
+    89,
+    209
+   ],
+   [
+    95,
+    200
+   ],
+   [
+    97,
+    110
+   ],
+   [
+    98,
+    107
+   ],
+   [
+    99,
+    181
+   ],
+   [
+    101,
+    133
+   ],
+   [
+    101,
+    135
+   ],
+   [
+    101,
+    173
+   ],
+   [
+    103,
+    193
+   ],
+   [
+    105,
+    182
+   ],
+   [
+    107,
+    183
+   ],
+   [
+    110,
+    182
+   ],
+   [
+    114,
+    128
+   ],
+   [
+    114,
+    154
+   ],
+   [
+    115,
+    153
+   ],
+   [
+    117,
+    135
+   ],
+   [
+    118,
+    126
+   ],
+   [
+    119,
+    128
+   ],
+   [
+    126,
+    164
+   ],
+   [
+    127,
+    140
+   ],
+   [
+    130,
+    140
+   ],
+   [
+    131,
+    139
+   ],
+   [
+    135,
+    174
+   ],
+   [
+    136,
+    163
+   ],
+   [
+    136,
+    195
+   ],
+   [
+    138,
+    176
+   ],
+   [
+    141,
+    199
+   ],
+   [
+    151,
+    189
+   ],
+   [
+    152,
+    173
+   ],
+   [
+    152,
+    174
+   ],
+   [
+    153,
+    161
+   ],
+   [
+    155,
+    199
+   ],
+   [
+    160,
+    181
+   ],
+   [
+    162,
+    195
+   ],
+   [
+    165,
+    195
+   ],
+   [
+    184,
+    200
+   ],
+   [
+    194,
+    203
+   ]
+  ],
+  "engine-error": []
+ },
+ "census_row": {
+  "kind": "recurse-census",
+  "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149",
+  "instrument": "cheat_spectrum (descent enumerate, one cheat absent) \u222a the floor census's sat verdicts",
+  "floor": 103,
+  "unknown": 46,
+  "essential_alone": [
+   [
+    4,
+    90
+   ],
+   [
+    4,
+    159
+   ],
+   [
+    4,
+    205
+   ],
+   [
+    4,
+    208
+   ],
+   [
+    5,
+    186
+   ],
+   [
+    7,
+    35
+   ],
+   [
+    8,
+    26
+   ],
+   [
+    12,
+    196
+   ],
+   [
+    21,
+    65
+   ],
+   [
+    25,
+    52
+   ],
+   [
+    38,
+    186
+   ],
+   [
+    43,
+    205
+   ],
+   [
+    50,
+    171
+   ],
+   [
+    52,
+    54
+   ],
+   [
+    55,
+    149
+   ],
+   [
+    59,
+    97
+   ],
+   [
+    60,
+    85
+   ],
+   [
+    61,
+    197
+   ],
+   [
+    61,
+    198
+   ],
+   [
+    64,
+    82
+   ],
+   [
+    66,
+    142
+   ],
+   [
+    69,
+    120
+   ],
+   [
+    71,
+    84
+   ],
+   [
+    71,
+    107
+   ],
+   [
+    72,
+    80
+   ],
+   [
+    77,
+    121
+   ],
+   [
+    80,
+    183
+   ],
+   [
+    81,
+    182
+   ],
+   [
+    85,
+    99
+   ],
+   [
+    86,
+    150
+   ],
+   [
+    86,
+    152
+   ],
+   [
+    87,
+    150
+   ],
+   [
+    88,
+    184
+   ],
+   [
+    89,
+    116
+   ],
+   [
+    89,
+    141
+   ],
+   [
+    89,
+    209
+   ],
+   [
+    94,
+    197
+   ],
+   [
+    94,
+    198
+   ],
+   [
+    95,
+    177
+   ],
+   [
+    95,
+    200
+   ],
+   [
+    96,
+    121
+   ],
+   [
+    98,
+    109
+   ],
+   [
+    99,
+    160
+   ],
+   [
+    99,
+    181
+   ],
+   [
+    99,
+    187
+   ],
+   [
+    101,
+    117
+   ],
+   [
+    101,
+    133
+   ],
+   [
+    102,
+    184
+   ],
+   [
+    103,
+    155
+   ],
+   [
+    103,
+    193
+   ],
+   [
+    104,
+    169
+   ],
+   [
+    109,
+    183
+   ],
+   [
+    113,
+    117
+   ],
+   [
+    113,
+    152
+   ],
+   [
+    113,
+    173
+   ],
+   [
+    114,
+    119
+   ],
+   [
+    114,
+    162
+   ],
+   [
+    114,
+    163
+   ],
+   [
+    115,
+    118
+   ],
+   [
+    115,
+    126
+   ],
+   [
+    115,
+    203
+   ],
+   [
+    116,
+    141
+   ],
+   [
+    118,
+    129
+   ],
+   [
+    119,
+    128
+   ],
+   [
+    119,
+    130
+   ],
+   [
+    120,
+    144
+   ],
+   [
+    120,
+    158
+   ],
+   [
+    120,
+    176
+   ],
+   [
+    120,
+    196
+   ],
+   [
+    123,
+    141
+   ],
+   [
+    123,
+    155
+   ],
+   [
+    126,
+    137
+   ],
+   [
+    126,
+    139
+   ],
+   [
+    126,
+    203
+   ],
+   [
+    127,
+    130
+   ],
+   [
+    127,
+    163
+   ],
+   [
+    128,
+    136
+   ],
+   [
+    128,
+    140
+   ],
+   [
+    128,
+    162
+   ],
+   [
+    129,
+    137
+   ],
+   [
+    132,
+    180
+   ],
+   [
+    133,
+    174
+   ],
+   [
+    135,
+    152
+   ],
+   [
+    136,
+    140
+   ],
+   [
+    137,
+    139
+   ],
+   [
+    137,
+    161
+   ],
+   [
+    137,
+    194
+   ],
+   [
+    141,
+    155
+   ],
+   [
+    141,
+    209
+   ],
+   [
+    144,
+    196
+   ],
+   [
+    153,
+    164
+   ],
+   [
+    154,
+    163
+   ],
+   [
+    155,
+    193
+   ],
+   [
+    158,
+    196
+   ],
+   [
+    161,
+    194
+   ],
+   [
+    163,
+    195
+   ],
+   [
+    164,
+    166
+   ],
+   [
+    166,
+    194
+   ],
+   [
+    166,
+    203
+   ],
+   [
+    177,
+    184
+   ],
+   [
+    194,
+    203
+   ],
+   [
+    206,
+    210
+   ],
+   [
+    206,
+    211
+   ]
+  ],
+  "droppable_alone": [],
+  "unknown_alone": [
+   [
+    67,
+    99
+   ],
+   [
+    70,
+    83
+   ],
+   [
+    72,
+    84
+   ],
+   [
+    74,
+    84
+   ],
+   [
+    75,
+    83
+   ],
+   [
+    79,
+    96
+   ],
+   [
+    79,
+    197
+   ],
+   [
+    80,
+    84
+   ],
+   [
+    80,
+    107
+   ],
+   [
+    81,
+    83
+   ],
+   [
+    81,
+    105
+   ],
+   [
+    85,
+    146
+   ],
+   [
+    85,
+    187
+   ],
+   [
+    86,
+    135
+   ],
+   [
+    87,
+    113
+   ],
+   [
+    87,
+    152
+   ],
+   [
+    97,
+    110
+   ],
+   [
+    98,
+    107
+   ],
+   [
+    101,
+    135
+   ],
+   [
+    101,
+    173
+   ],
+   [
+    105,
+    182
+   ],
+   [
+    107,
+    183
+   ],
+   [
+    110,
+    182
+   ],
+   [
+    114,
+    128
+   ],
+   [
+    114,
+    154
+   ],
+   [
+    115,
+    153
+   ],
+   [
+    117,
+    135
+   ],
+   [
+    118,
+    126
+   ],
+   [
+    126,
+    164
+   ],
+   [
+    127,
+    140
+   ],
+   [
+    130,
+    140
+   ],
+   [
+    131,
+    139
+   ],
+   [
+    135,
+    174
+   ],
+   [
+    136,
+    163
+   ],
+   [
+    136,
+    195
+   ],
+   [
+    138,
+    176
+   ],
+   [
+    141,
+    199
+   ],
+   [
+    151,
+    189
+   ],
+   [
+    152,
+    173
+   ],
+   [
+    152,
+    174
+   ],
+   [
+    153,
+    161
+   ],
+   [
+    155,
+    199
+   ],
+   [
+    160,
+    181
+   ],
+   [
+    162,
+    195
+   ],
+   [
+    165,
+    195
+   ],
+   [
+    184,
+    200
+   ]
+  ],
+  "necessary_by_census_only": [
+   [
+    5,
+    186
+   ],
+   [
+    8,
+    26
+   ],
+   [
+    12,
+    196
+   ],
+   [
+    43,
+    205
+   ],
+   [
+    50,
+    171
+   ],
+   [
+    71,
+    107
+   ],
+   [
+    77,
+    121
+   ],
+   [
+    89,
+    209
+   ],
+   [
+    95,
+    200
+   ],
+   [
+    99,
+    181
+   ],
+   [
+    101,
+    133
+   ],
+   [
+    103,
+    193
+   ],
+   [
+    119,
+    128
+   ],
+   [
+    194,
+    203
+   ]
+  ],
+  "object_fingerprint": "a79347720ccda3ed",
+  "fingerprint_bare": "d5b1070e4055d241",
+  "claim_scope": "essential_alone = cheats whose single absence admits \u2265 1 separating class (validated); droppable_alone = exact 0 classes (the enumerator's refutation, one encoding); unknown_alone = 0 classes with open leaves or an engine error; a batch may spend any examined cheat"
+ },
+ "conditioning": {
+  "max_classes": 10000,
+  "conflicts": 40000000,
+  "threads": 1,
+  "jobs": 16,
+  "wall": "10m",
+  "engine": "/home/kooshi/source/descent-engine/target/release/descent",
+  "engine_commit": "15365ca",
+  "sidecar": "build/m51-edges-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149.json",
+  "sidecar_sha256_16": "db21d389f411df52",
+  "fingerprint_bare": "d5b1070e4055d241",
+  "fingerprint_removed": "a79347720ccda3ed",
+  "planted_red": "planted red fired: a witness with one digit changed was refused ([spectrum] REFUSED PLANT: line 0 is monochromatic on unit edge (np.int64(0), np.int64(8)) \u2026)",
+  "machine": "local",
+  "seconds": 5.8,
+  "written": "2026-09-05T03:15:54Z"
+ },
+ "scope": "a capped count is a lower bound (\u2265 count); necessary = at least one validated separating class exists with the cheat absent; droppable-alone = the enumerator refuted every leaf (one encoding) and enters the object only through a commit's two-encoding certificate; unknown = undecided, never folded"
+}

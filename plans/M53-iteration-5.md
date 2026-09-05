@@ -727,3 +727,36 @@ parts.
   → D2 (the in-field replay, minutes on 16,348 points) → D3 (the residual on the full and out-of-field
   pools, 12 workers, hours) → D4 (the census and decision 0′) → A2 overnight (the culled set's cubed
   one-hot, then 3-bit) → B′'s four-cheat sample → E.
+
+## §R3. Phase B closed (2026-09-05 ~03:00Z, desktop) — the spectrum's verdicts, and P-M53-2 missed decisively
+
+* **Headline (its population and caps in the sentence)**: the 149 standing cheats of the culled
+  iteration-4 object enumerated alone (cap 10,000 classes · 40,000,000 conflicts · 1 thread · 10-minute
+  wall + the engine's verification pass, 16 jobs; 20,472 s wall for the final pass, four launches in
+  all): **89 necessary (≥ 1 validated class: 39 by lines the enumerator wrote, 50 by a culler or loop
+  witness the enumerator could not reach within the wall), 0 droppable-alone, 60 unknown to the
+  enumerator (46 = every one of the cull's undecided cheats, 14 = floor cheats whose census `sat`
+  stands but whose colouring the solver did not find in ten minutes); 0 exact runs; 5 capped at the
+  class ceiling; one engine discrepancy (7-35: one validated line, summary says 0 — D78).** The census
+  row adopted for the mint: floor 103 (89 ∪ the 14 census-only), droppable-alone 0, unknown 46.
+  `data/m53/spectrum-<L4c>.json`; the per-cheat directories under `build/m53-spectrum/<L4c>/`.
+* **P-M53-2 MISSED decisively**: registered "median exact count ≤ 5,000, ≥ 85 % exact under the cap";
+  measured **0 of 149 exact** — not one single-cheat enumeration completes within a ten-minute wall on
+  the culled object, because exhausting a cube is a refutation of "no further separating colouring",
+  the same ~50-minute ask the culler paid per probe (§R2). Every count is a lower bound. The cheap END
+  is nonetheless visible and is what the batch needs: **7-35, 25-52, 38-186 at 1 class found** (rare
+  separating colourings — expensive to enumerate, few to kill), **66-142 at 6, 115-126 at 1,121,
+  163-195 at 1,920**, then a plateau of cheats at exactly 2,000 (the enumerator's split-at point, then
+  the wall — WIDE cheats, many colourings found fast) and the four `4-*` floor cheats at 4,440–50,840.
+  The ranking column therefore reads inversely to its face value at the top: "1 class in ten minutes"
+  is the cheap end and "2,000 in minutes" the wide end.
+* **B″ is empty** (no droppable-alone cheat), so the mint's standing set is the 149 as the cull left
+  it. **P-M53-7** (≥ 5 of the 46 undecided droppable-alone) is not decided by this instrument (all 46
+  unknown, as §R2 predicted once the blind-growth correction was seen) and passes to B′'s four-cheat
+  cube sample.
+* **Phase D1 launched** (`batch_grow` from the cheap end: 7-35, 25-52, 38-186, 66-142, 115-126, …;
+  16 threads, a one-hour wall per step, 40 M conflicts, target 20,000 classes, at most 12 cheats):
+  the joint stage is LOOSER than any single one, and the question the run answers first is whether a
+  joint enumeration on this object completes EXACTLY at all within an hour — if step 0 (7-35 alone)
+  does not, B₀ falls back to a PARTIAL list (a measurement caveat: a partial class set can show the
+  second horn, never the first) and iteration 5's batch enumeration becomes the tightrope's own row.
