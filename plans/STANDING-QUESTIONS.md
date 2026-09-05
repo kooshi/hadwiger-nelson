@@ -532,3 +532,13 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   pigeonhole (M33/M34) as the shadow of uniqueness, and the copy lock's arrival at iteration 3 as the
   fabric becoming residue-rigid on the chord pairs. Dial to measure: for each distance class d of
   positive 𝔭-adic valuation, the fraction of d-pairs forced mono at four colours, against depth.
+  **First reading of the dial (2026-09-05, `tools/mono_census.py`, `data/m53/mono-census-it4.json`,
+  joined to M51's four-colour forced-equal sweep — CAVEAT: the sweep ran on the 1,834-point
+  pre-it-4 unit part, the census on the 1,953-point it-4 object, a superset):** the classes the residue
+  colouring makes monochromatic, with their pair counts on it-4 — d² = 4: 5,470; 4/3: 6,669; 12: 767;
+  16: 179; 16/3: 2,145; 64/9: 178; 64/3: 11 — and the forced-mono counts M51 found: **131 at 64/9 and
+  6 at 64/3, zero in every other class**. Forcing at four colours lives ONLY in the two classes of
+  2-adic valuation 6, at 74 % and 55 % of their pairs, and nowhere at valuation 2 or 4. Reading,
+  falsifiable by the exact sweep on it-4 (15,419 mono-class pairs, the `Rigidity` engine; queued after
+  the partner replay): rigidity toward the residue colouring arrives from the deepest valuations
+  down, and distance 2 — the pigeonhole's own class — is the LAST to become rigid pairwise.

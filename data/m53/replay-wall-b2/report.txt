@@ -1,0 +1,37 @@
+REPLAY  pool 92cec9d6896f4cc3 × list classes   81,787 classes
+  asked       3,936 of 81,787 — the rows listed in build/m54/rows-infield-survivors-b2.txt
+  live block  186 of this object's 214 seed columns (28 deleted), from build/m51-edges-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149.json; 2,956 seed-incidence entries checked, none at a deleted vertex
+  tier order  0 -> 0b -> 2 -> 3 -> 4   propagation run
+              the kernelization (tier 1) is implemented and controlled, and is OFF the path in this run, because the complete tier holds one prepared solver over a fixed variable set
+
+  solver   cadical-2.1.2 (vendored), configuration `default`, kept across asks
+    prepared   24 x rung (1,767 vars / 56,172 clauses) + 24 x core (10,209 vars / 317,344 clauses)
+    memory     worst case 10.8 GiB (0.0 GiB of clauses + growth at the full budget), peak 2.4 GiB
+               the worst case assumes every worker spends its whole budget, which is what a
+               refusal must assume; the peak is what this run really reached, so the model is falsifiable
+    budgets    2,000,000 conflicts, wall ceiling 300s
+    rung       unsat 0    sat 3936    capped 0    skipped 0
+    vacuity    discharged for free: the sweep found a survivor, which is a proof the instance is not vacuous
+
+  decided by                  count     share      median        total
+    empty-domain                0     0.0%           -            -
+    propagated                  0     0.0%           -            -
+    strong-rung-infeasible      0     0.0%           -            -
+    peeled-empty                0     0.0%           -            -
+    greedy-witness              0     0.0%           -            -
+    core-infeasible             0     0.0%           -            -
+    core-coloured           3,936   100.0%     18.8 ms     1023.0 s
+    undecided                   0     0.0%           -            -
+                          -------  -------              -----------
+                            3,936   100.0%                   57.7 s   the machine, 24 threads
+
+  duplicate-class self-agreement   3,936 groups over 3,936 lines, 0 disagreements
+                                   keyed on this object's 186 live seed columns of 214 (28 deleted)
+                                   every line is its own class, so this control compared nothing
+
+  the sidecar to merge   build/m54/replay-wall-b2/verdicts.jsonl
+    3,936 rows, header `# 81787 92cec9d6896f4cc3 conflicts=2000000 wall=300`
+    the header names the LIST's length and pool fingerprint — the two fields your own
+    resume asserts on — so appending its rows to your checkpoint is accepted, and the
+    verdict join folds them: an unknown may be superseded by a decided row, never the reverse
+  tier detail  build/m54/replay-wall-b2/tiers.jsonl

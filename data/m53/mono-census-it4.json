@@ -1,0 +1,72 @@
+{
+ "kind": "mono-census",
+ "object": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+ "classes": {
+  "4": {
+   "pairs_exact": 5470,
+   "candidates": 5470,
+   "v2": 2,
+   "mono_under_residue": true
+  },
+  "16": {
+   "pairs_exact": 179,
+   "candidates": 179,
+   "v2": 4,
+   "mono_under_residue": true
+  },
+  "12": {
+   "pairs_exact": 767,
+   "candidates": 767,
+   "v2": 2,
+   "mono_under_residue": true
+  },
+  "4/3": {
+   "pairs_exact": 6669,
+   "candidates": 6669,
+   "v2": 2,
+   "mono_under_residue": true
+  },
+  "16/3": {
+   "pairs_exact": 2145,
+   "candidates": 2145,
+   "v2": 4,
+   "mono_under_residue": true
+  },
+  "64/9": {
+   "pairs_exact": 178,
+   "candidates": 178,
+   "v2": 6,
+   "mono_under_residue": true
+  },
+  "64/3": {
+   "pairs_exact": 11,
+   "candidates": 11,
+   "v2": 6,
+   "mono_under_residue": true
+  },
+  "1": {
+   "pairs_exact": 13796,
+   "candidates": 13796,
+   "v2": 0,
+   "mono_under_residue": false
+  },
+  "3": {
+   "pairs_exact": 10288,
+   "candidates": 10288,
+   "v2": 0,
+   "mono_under_residue": false
+  },
+  "1/3": {
+   "pairs_exact": 9249,
+   "candidates": 9249,
+   "v2": 0,
+   "mono_under_residue": false
+  },
+  "25": {
+   "pairs_exact": 42,
+   "candidates": 42,
+   "v2": 0,
+   "mono_under_residue": false
+  }
+ }
+}

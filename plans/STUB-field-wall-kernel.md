@@ -54,17 +54,16 @@ Every step is either finite algebra (1–3, 6) or one Mathlib theorem (4: the TF
 instance for a finitely generated ℤ-algebra). The residue field 𝔽₄ can be `GaloisField 2 2` or a
 hand-rolled four-element ring — hand-rolled is cheaper for `decide`.
 
-## 3. What Mathlib holds and what must be built (checked against v4.32.0 names before use — the
-documentation_first rule; every name here is a guess to be verified)
+## 3. What Mathlib holds and what must be built (names PROBED against the pinned Mathlib on 2026-09-05 by `lake env lean` on a `#check` file — the ones marked ✓ exist with the signatures the route needs)
 
 | need | Mathlib | to build |
 |---|---|---|
-| ζ₁₂, its minimal polynomial | `Polynomial.cyclotomic 12`, `IsPrimitiveRoot` | the concrete ζ₁₂ ∈ ℂ and Φ₁₂(ζ₁₂) = 0 by `Complex.ext` + `linear_combination` (the house pattern) |
+| ζ₁₂, its minimal polynomial | ✓ `Polynomial.cyclotomic 12 ℤ`, `IsPrimitiveRoot` | the concrete ζ₁₂ ∈ ℂ and Φ₁₂(ζ₁₂) = 0 by `Complex.ext` + `linear_combination` (the house pattern) |
 | R as a subring of ℂ with the presentation | `Algebra.adjoin`, `AdjoinRoot` (quotient — `decide` cannot reduce it; fine here, no kernel computation on R) | the map ℤ[X,Y]/(…) → ℂ and its injectivity (rank-8 independence) |
-| φ : R → 𝔽₄ | `AdjoinRoot.lift` twice | 𝔽₄ as `GaloisField 2 2` or `ZMod 2 × ZMod 2` with a hand multiplication |
+| φ : R → 𝔽₄ | ✓ `AdjoinRoot.lift (i : R →+* S) (x : S) (h : eval₂ i x f = 0) : AdjoinRoot f →+* S`, twice; or `Algebra.adjoin`'s universal property | ✓ `GaloisField 2 2`, or a hand-rolled four-element ring for `decide` |
 | P = ker φ maximal, R/P ≅ 𝔽₄ | `RingHom.ker`, `Ideal.Quotient` | `Ideal.IsMaximal` from surjectivity onto a field |
-| Localization at P, local, Noetherian, domain | `Localization.AtPrime`, `IsLocalization.AtPrime.isLocalRing`, `IsLocalization.isNoetherianRing`, `IsLocalization.isDomain_localization`; `Algebra.FiniteType` ⟹ Noetherian via Hilbert basis (`isNoetherianRing_of_fg`?) | — |
-| maximal ideal principal ⟹ DVR ⟹ valuation ring | `IsDiscreteValuationRing.TFAE` / `DiscreteValuationRing.tfae`; `IsDiscreteValuationRing.toValuationRing`? (`ValuationRing` instance from DVR) | the principal-generator lemma T ∈ π²A |
+| Localization at P, local, Noetherian, domain | ✓ `Localization.AtPrime P`, ✓ `IsLocalization.AtPrime.isLocalRing`, ✓ `IsLocalization.isNoetherianRing M S : IsNoetherianRing R → IsNoetherianRing S`, ✓ `IsLocalization.isDomain_localization`; ✓ `isNoetherianRing_of_fg : S.FG → [IsNoetherianRing R] → IsNoetherianRing ↥S` for a subalgebra S ⊆ ℂ over ℤ (so R := `Algebra.adjoin ℤ {ζ₁₂, T}` is Noetherian for free) | — |
+| maximal ideal principal ⟹ valuation ring | ✓ `IsDiscreteValuationRing.TFAE R : ¬IsField R → [IsDiscreteValuationRing R, ValuationRing R, IsDedekindDomain R, …, Submodule.IsPrincipal (IsLocalRing.maximalIdeal R), …].TFAE` for `[IsNoetherianRing R] [IsLocalRing R] [IsDomain R]` — the list contains BOTH `ValuationRing R` and the principal-maximal-ideal clause, so `tfae_have`/`TFAE.out` gives the dichotomy directly; ✓ `ValuationRing.iff_isInteger_or_isInteger R K : ValuationRing R ↔ ∀ x : K, IsInteger R x ∨ IsInteger R x⁻¹` is the form step 5 consumes | the principal-generator lemma T ∈ π²A |
 | conjugation as a ring automorphism of R and A | `starRingEnd ℂ`, `Complex.conj` | c(R) ⊆ R on generators; c(P) = P from φ∘c = Frob∘φ |
 | the colouring on cosets | `Classical.choice` for representatives (or `Quotient.out`) | the `Colorable 4` term |
 
