@@ -552,9 +552,12 @@ suggests — is the following.
 7. **Rigidity of the residue colouring.** Are the two residue colourings the only proper 4-colourings
    of G(K²), up to relabelling and the choice of coset representatives? For ℚ² the analogous statement
    is true (a bipartite graph has one 2-colouring per component). Finite K-point graphs certainly have
-   other 4-colourings — the descent's object has none of its 5,470 distance-2 pairs forced
-   monochromatic at four colours, though it has 137 forced pairs at distances 8/3 and 8/√3, both of
-   positive 𝔭-adic valuation — so the question is about the infinite graph, where boundary freedom
+   other 4-colourings — on the descent's 1,953-point object a complete sweep finds no forced
+   monochromatic pair among the 15,230 pairs at the valuation-2 and valuation-4 distances (2, 4,
+   2√3, 2/√3, 4/√3), but 163 of the 178 pairs at 8/3 and 8 of the 11 at 8/√3, the two classes of
+   valuation 6, are forced equal in every proper 4-colouring; one growth step earlier the counts were
+   131 and 6. Rigidity toward the residue colouring appears to arrive from the deepest valuations
+   downward, and the question proper is about the infinite graph, where boundary freedom
    disappears. A positive answer would explain the distance-2 pigeonhole (every 4-colouring of deep
    fabric has a monochromatic distance-2 pair) as the shadow of uniqueness.
 8. **The 2-adic classes of a lattice.** The descent's object realises only the four square classes

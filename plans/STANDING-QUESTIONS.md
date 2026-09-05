@@ -542,6 +542,15 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   falsifiable by the exact sweep on it-4 (15,419 mono-class pairs, the `Rigidity` engine; queued after
   the partner replay): rigidity toward the residue colouring arrives from the deepest valuations
   down, and distance 2 — the pigeonhole's own class — is the LAST to become rigid pairwise.
+  **The exact sweep on it-4 (`tools/rigidity_dial.py`, `data/m53/rigidity-dial-it4.json`; complete on
+  the forced-equal side, 136 calls, 2,155 s):** 171 forced-equal pairs at four colours on the
+  1,953-point unit part — **163 of 178 at d² = 64/9 (91.6 %) and 8 of 11 at 64/3 (72.7 %), both
+  valuation 6; 0 of 6,669 at 4/3, 0 of 5,470 at 4, 0 of 2,145 at 16/3, 0 of 767 at 12, 0 of 179 at
+  16 (valuations 2 and 4).** Against the pre-it-4 sweep (131/178 → 163/178 as the object grew by
+  one halo) the deepest classes moved toward total rigidity while the shallow classes stayed at
+  zero: the reading stands and is now a two-point curve. What would falsify it next: a valuation-4
+  class acquiring forced pairs before valuation 6 saturates, or any forced pair at distance 2 while
+  8/3 is still below 100 %.
 
 * **T19 — Single wall-breaking points kill nothing; the quadratic planes classified (2026-09-05).**
   [measured; derived] (a) The new plan's first row: the 8,442 glue points of the five wall-breaking
