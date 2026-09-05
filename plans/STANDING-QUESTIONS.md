@@ -542,3 +542,17 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   falsifiable by the exact sweep on it-4 (15,419 mono-class pairs, the `Rigidity` engine; queued after
   the partner replay): rigidity toward the residue colouring arrives from the deepest valuations
   down, and distance 2 — the pigeonhole's own class — is the LAST to become rigid pairwise.
+
+* **T19 — Single wall-breaking points kill nothing; the quadratic planes classified (2026-09-05).**
+  [measured; derived] (a) The new plan's first row: the 8,442 glue points of the five wall-breaking
+  radicands, exported as a pool of their own (`tools/wall_pool.py`, `depth1-wallfield`, 34,518 pool–pool
+  unit edges; each point has exactly two object neighbours), replayed against the two-cheat stage's
+  3,936 in-field survivors (`data/m53/replay-wall-b2/`): **0 killed, 3,936 extend, 19 ms median** —
+  breaking the wall is necessary for the endgame and a few thousand degree-two points are not
+  sufficient; the 572,992-point partner pool (every nontrivial 2-adic class) is sampled at 394 rows
+  in flight. (b) Corollary 6.5 of the note (`plans/FIELD-WALL-THEOREM.md`): for squarefree d > 1 the
+  unit-distance graph of ℚ(√d)² is **bipartite when d is even or d ≡ 1 (mod 8)** (Woodall's parity
+  transplants), **at most 4-chromatic when d ≡ 3, 5 (mod 8)**, and beyond the residue method when
+  d ≡ 7 (mod 8); the last class is not degenerate — ℚ(√7)² carries an explicit unit 5-cycle
+  (steps −1, ζ, ζ, (w/2)(−1 ± i) with ζ = (3 + i√7)/4, w = (1 + i√7)/2, verified exactly), so
+  χ(G(ℚ(√7)²)) ≥ 3 with no equilateral triangle available; 3, 4 or more is open.

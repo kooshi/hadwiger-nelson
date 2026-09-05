@@ -305,8 +305,23 @@ when the 2-adic completion of F(i) has residue field 𝔽₂ (equivalently, cont
 root of unity).
 
 Examples: ℚ, ℚ(√2), ℚ(√10) — two colours (ℚ(√2)² and ℚ(√10)² are bipartite); ℚ(√3), ℚ(√5),
-ℚ(√11), K = ℚ(√3, √11), K(√2), K(√35) — four colours. For a quadratic field ℚ(√d) the wall
-stands unless d ≡ 7 (mod 8); so χ(G(ℚ(√d)²)) ≤ 4 for all squarefree d ≢ 7 (mod 8).
+ℚ(√11), K = ℚ(√3, √11), K(√2), K(√35) — four colours.
+
+*Corollary 6.5 (real quadratic fields).* Let d > 1 be squarefree and F = ℚ(√d). The 2-adic completion
+of F(i) contains √−1 iff d ≡ 7 (mod 8), and contains a primitive cube root of unity iff d ≡ 3 or 5
+(mod 8) (ζ₃ ∈ ℚ₂(√d, i) iff −3 ∈ ⟨−1, d⟩·ℚ₂×², and −3 ≡ 5 mod 8). Hence the unit-distance graph of
+F² is
+
+* **bipartite** when d is even or d ≡ 1 (mod 8) — Woodall's colouring of ℚ² transplants (for
+  d ≡ 1 mod 8 the field embeds in ℚ₂, so the same parity works verbatim);
+* **at most 4-chromatic** when d ≡ 3 or 5 (mod 8) — ℚ(√3), ℚ(√5), ℚ(√11), ℚ(√13), …;
+* beyond the method when d ≡ 7 (mod 8) — ℚ(√7), ℚ(√15), ℚ(√23), …, where the wall falls.
+
+The last class is not degenerate: ℚ(√7)² contains odd cycles. With ζ = (3 + i√7)/4 (a unit vector,
+9/16 + 7/16 = 1) the three steps −1, ζ, ζ sum to w = (1 + i√7)/2 with |w|² = 2, and 4/|w|² − 1 = 1
+is a square, so the two unit vectors (w/2)(−1 ± i) close a 5-cycle whose vertices 0, −1, −1 + ζ,
+−1 + 2ζ, −1 + 2ζ + (w/2)(−1 + i) all lie in ℚ(√7)². So χ(G(ℚ(√7)²)) ≥ 3, the field has no
+equilateral triangle (√3 ∉ ℚ(√7)), and whether it is 3, 4 or more is open.
 
 **One step beyond K.** For a squarefree integer d, the square-class group of K(√d) is
 {1, 3, 11, 33}·{1, d}, and {1, 3, 11, 33} ≡ {1, 3, 3, 1} (mod 8). An odd element ≡ 7 (mod 8) appears
@@ -494,6 +509,13 @@ replay, before any of it was believed.
   every radicand lies in ℚ(√33), whose two 2-adic images are rational; the square classes of ℚ₂ in
   ℚ₂(√3) form the group ⟨−1, 2⟩ of order four, and the census finds exactly the 16 class pairs of that
   group, with the wall broken iff −1 is generated at both primes.
+
+* **Single wall-breaking points kill nothing.** Exported as a pool of their own, the 8,442 glue points
+  of the wall-breaking radicands (each with exactly two unit neighbours in the object, 34,518 unit
+  edges among themselves) were replayed against the 3,936 in-field survivors: every one of the 3,936
+  colourings extends, in 19 ms median — 0 kills. Breaking the wall is necessary for the endgame; a
+  handful of degree-two points is not what does it. (The 572,992-point pool of every radicand with a
+  nontrivial 2-adic class, sampled at 394 of the survivors, is reported below when it lands.)
 
 The reading for the programme is now quantitative: the descent confined to K cannot end (Theorem 7.1),
 can go no lower than three cheats (Corollary 7.4), and is currently far from that floor (eight odd
