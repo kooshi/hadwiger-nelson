@@ -1224,6 +1224,13 @@ off exact crystal symmetry — near enough to interlock, far enough to clash.
 Its colour rigidity is invisible at the pair level and lives in compelled
 patterns of triple order and above. None of this is visible in the brute-force
 artifacts; it took exact anatomy plus a human eye on the rendered picture.
+**Amended 2026-09-05:** the wall in that sentence is now a THEOREM, and it is
+arithmetic, not metric — the seam field K = ℚ(√3, √11) is 4-colourable by a
+residue colouring modulo a conjugation-fixed prime of K(i) above 2, and a
+detuning rotation forces the 5th colour only if its coordinates leave the
+fields where such a prime exists, i.e. only if they make −1 a 2-adic square
+(√5, √7: yes; √11, √33, √2, √35: no). "Near enough to interlock, far enough to
+clash" was the metric shadow of a 2-adic condition.
 
 * **G1 — The field wall.** The Moser twist is a seam-group word — ρ·σ² = −1,
   ρ = ζ₆³σ⁻² **[kernel: `FieldWall.lean`]** — and the seam group's countable
@@ -2051,18 +2058,105 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   a coverage-subset verify caught an exact minimizer silently swapping a kept edge out of the
   hitting set, and a 25 ≠ 24 banner cross-check caught a stale commit field before any certify.
 
-* **G35 — The wall is 2-adic, and the useful material is a congruence test.** [theorem, hand-proved; the
-  criterion measured on every reachable class] For a real number field F, the residue colouring gives
-  χ(G(F²)) ≤ N(𝔭) for a conjugation-fixed prime 𝔭 of F(i); such a prime above 2 exists iff −1 is not a
-  square in some completion of F above 2. For multiquadratic F the test is a square-class congruence (an
-  odd class ≡ 7 mod 8 breaks it); for a glue point over K = ℚ(√3, √11) with radicand r = 4/d² − 1, adjoining
-  √r breaks the wall iff −r is a square in both 2-adic completions of K — a finite check per candidate
-  point, before any search. Of the eight rational classes one gluing step reaches from K, exactly 5 and 7
-  break it; M53's exact split of the depth-1 pool (1.0 % in-field) now needs its wall-breaking sub-split.
-  *Reading on top, falsifiable by the next plan's first census: the kills that matter for the endgame come
-  from wall-breaking points, and a design that ranks candidates by object degree never sees them (G34) —
-  the field-aware tier is the fix; falsifier: a wall-breaking pool that kills nothing the in-field pool
-  does not.*
+* **G35 — The wall is 2-adic, and the useful material is a congruence test.** [theorem, hand-proved
+  (`~/field-wall-conjecture.md` §5–§6); the criterion measured on every class one gluing step reaches]
+  For a real number field F the residue colouring gives χ(G(F²)) ≤ N(𝔭) for any prime 𝔭 of F(i) fixed by
+  complex conjugation; such a prime above 2 exists iff −1 is not a square in some completion of F above
+  2, and its norm is 2 or 4. For multiquadratic F = ℚ(√d₁, …) the test is a square-class congruence: the
+  wall stands iff no odd square class is ≡ 7 (mod 8). Over K a glue point with radicand r = 4/d² − 1
+  breaks the wall iff −r is a square in both 2-adic completions of K — a finite congruence per candidate
+  point, decidable before any search. Of the eight rational classes one gluing step reaches from K
+  ({1, 2, 5, 7, 10, 14, 35, 70}), exactly 5 and 7 break it. M53's exact split of the depth-1 pool
+  (16,348 in-field of 1,636,399) needs its wall-breaking sub-split before any of it is worth a solver.
+  *Reading on top, falsifiable by the new plan's first census: the kills that matter for the endgame come
+  from wall-breaking points, and a design that ranks candidates by object degree never sees them (G34);
+  falsifier: a wall-breaking pool that kills nothing the in-field pool does not.*
+
+**The field-wall theorem's pass over the working theory (2026-09-05, on Kooshi's "mint/update
+grokkings").** One theorem re-reads a dozen entries; each is amended here in place of a rewrite, so the
+record shows what was believed, what was measured, and what is now proved.
+
+* **G1 → [theorem].** As minted: the 4/5 boundary is a field boundary. Now: χ(G(K²)) = 4 exactly, by an
+  explicit additive colouring (Woodall's genre, one field up), hand-proved and machine-tested on the seed
+  and on the descent's 1,981-point object with zero search; kernel formalization pending. The reading's
+  mechanism was right and its vocabulary was wrong: "the seam group can force 4 and no more" is true
+  because the seam group is defined over a field whose 2-adic completions do not contain √−1, not
+  because of anything about the group's words.
+* **G3 / G7, corrected.** "Radially crystal, angularly detuned" and "detune enough to clash" were the
+  metric shadows of an arithmetic fact: a rotation's coordinates carry the new field, and it forces the
+  5th colour iff that field breaks the wall. ρ₁₅ = (7 + i√15)/8 adjoins √15 ∼ √5 (5 mod 8: breaks);
+  ρ₆₃ = (31 + 3i√7)/32 adjoins √7 (breaks); the Moser twist (5 + i√11)/6 and the distance-5 spindle
+  (49 + 3i√11)/50 stay in K (never). The "forcing band" of detune angles registered at M31 was a
+  category error — 0.6°–3.6° measured which spindle distances happen to be integers, and the true
+  criterion is "4d² − 1 ≡ 7 (mod 8)", which every even integer d satisfies and no odd one does.
+* **G15 / G16 / G17, explained.** The two acts are the two sides of the prime 𝔭: Act One (the distance-2
+  pigeonhole on K-fabric) is the residue colouring's own arithmetic — 2 ∈ 𝔭, so the canonical
+  4-colouring of K makes EVERY distance of positive 𝔭-adic valuation (2, 4, 2√3, 8/3, 8/√3, …)
+  monochromatic, and no 4-colouring of a deep-enough fabric can avoid it (M33/M34, kernel); Act Two
+  (the kill) must leave K because inside K there is nothing to kill with — Theorem 7.1: no K-point unit
+  graph carries a pair compulsion at five colours. G16's sentence "the field wall is exactly the wall
+  between the two acts" is now literally a theorem, and the transmuter's forced transfer at distance 2
+  (M34) is the pigeonhole's 𝔭-adic face. M50's forced-equal pairs at 8/3 and 8/√3 — "radicands outside
+  every owned field" — were the residue colouring showing through: those are distances of positive
+  valuation, monochromatic by formula.
+* **G19, sharpened.** 5-tight fabric does not exist inside K and cannot: every K-point unit graph is
+  4-colourable, so no K-point region is 5-tight. 5-tightness needs a wall-breaking root in the fabric
+  itself — Heule-510's field ℚ(√3, √5, √11) is the first place it can live, and the residue method's
+  best bound there is 121 (the prime above 11), so nothing additive says whether that plane is exactly
+  5-chromatic. The 6-hunt's Act One has its stage only past the wall.
+* **G25, sharpened — the field ladder is 2-adic, and the residue method stops at 4.** Residue colourings
+  give bounds that are powers of two (primes above 2) or perfect squares (primes above odd p, where the
+  residue degree is 2): ℚ, ℚ(√2), ℚ(√10) are 2-colourable planes; ℚ(√3), ℚ(√5), ℚ(√11), K, K(√2), K(√35)
+  are ≤ 4; the next additive bound anywhere useful is 16 or 121. So 5, 6 and 7 — the whole Hadwiger–Nelson
+  interval — are invisible to additive colourings: the plane's answer lives in the non-additive regime,
+  and the "wall between 5 and 6" the programme hunts has no residue-colouring analogue. The recursion
+  "each level's kill is the previous level's forcer" is, at the 4 → 5 step, "each level's kill is a
+  wall-breaking adjunction"; whether the 5 → 6 step has an arithmetic wall at all is open (the note's
+  §8: is ℚ(√3, √5, √11)'s plane exactly 5?).
+* **G32, sharpened — the dial cannot reach μ ≤ 1 inside K.** Theorem 7.1's corollaries: a K-point
+  {1, 2}-graph forcing the pair has at least two distance-2 edges, and — the transversal obstruction —
+  every independent set containing exactly one endpoint of each distance-2 edge must contain both A and
+  B (recolour such a set with a fifth colour in the residue colouring and the pair separates). That is a
+  purely combinatorial lower-bound instrument on the cheat set relative to the unit graph, free of any
+  solver, and the first μ-bound that comes from arithmetic rather than from a census.
+* **G33 / G34, resolved.** The compounding is real and the selection is structural — AND the selected
+  material is the wrong material for the endgame. M53 measured the identity exactly (in-field = "≥ 3
+  object neighbours" to seven points in 1.6 million; the in-field slice is 1 % of the pool because ladder
+  points fuse C(k, 2) parent pairs) and then measured the trap: the in-field pool kills every class of a
+  one-cheat batch and 95 % of a two-cheat stage's — and by theorem can never do the last kill. Growth
+  compounds inside K toward a floor it cannot cross. The dial's fall from 446 to 149 is genuine and
+  bounded below by the wall; only a wall-breaking adjunction lets it reach the crossing.
+* **G30, a new instance — and its positive form.** The field wall was minted from measurement (G1, the
+  witness anatomy), sharpened by measurement (G34, the pool census), REGISTERED as a conditional whose
+  favourable branch ("keep only in-field points") was inductive, and then settled by derivation — the
+  derivation-first column wins again, now 8-for-8 against the measurement-first column's 0-for-10. The
+  positive lesson is about where the derivation came from: Kooshi's instruction to write the conjecture
+  UP for a stranger forced its structural statement (the unit-distance graph on F² is the Cayley graph
+  of the additive group F(i) with connection set the norm-one torus), and the classical tool
+  (Woodall/Fischer additive colourings) became visible the moment the object was named. *Rule: before
+  spending days of compute on a conjecture, write it for an outside reader in its native mathematical
+  vocabulary; the write-up is a derivation attempt in disguise, and it is cheaper than one census.*
+* **G36 — The residue colouring is the descent's canonical separating colouring, and it separates every
+  forced pair at once.** [theorem + measured] On any K-point stage the residue colouring is proper on
+  the unit part, monochromatic on every seed cheat (all 446 lie at distance 2), and separates A from B
+  (distance 5 has valuation zero) — so it is a single 4-colouring that violates ALL the cheats: the
+  hitting set of any class list must always hit it, and it is the colouring the culled object's 149
+  cheats are all still killing. Every spectrum, floor census and cull verdict of the descent is, in part,
+  a measurement of how far the object's OTHER separating colourings are from this one. Falsifier: a
+  K-point stage on which the residue colouring fails properness — impossible by theorem, so the
+  instrument (`tools/residue_colouring.py`) is a free regression control for every future object's
+  geometry (a misplaced point shows as a monochromatic unit edge).
+* **G37 — The endgame's shape is fixed: K-fabric plus one wall-breaking adjunction.** [theorem for the
+  necessity; the classical constructions for sufficiency] Every published 5-chromatic unit-distance graph
+  is K-fabric (or heptagonal fabric) plus a spindle rotation at an even distance, and Theorem 7.1 says
+  the descent cannot do otherwise: its unit part becomes 5-chromatic only after a point outside K is
+  committed, and the copy-detune construction at ρ₁₅ (M52's Q8 objects, 5-chromatic at once) is exactly
+  that adjunction done in one move. So the loop's endgame is not "more in-field kills until the crossing
+  happens" but "a wall-breaking commit, then the crossing, then the last kills in the enlarged field" —
+  and the halt clause χ(unit) 4 → 5 fires only after the field census first records an out-of-field
+  point. *Reading on top: the cheapest wall-breaking adjunction may be far smaller than a full copy — a
+  single √5-class glue point (4,092 such pairs exist on the it-4 object) placed where the residue
+  colouring is rigid; the new plan's first design question.*
 
 ## Whose work this is
 
