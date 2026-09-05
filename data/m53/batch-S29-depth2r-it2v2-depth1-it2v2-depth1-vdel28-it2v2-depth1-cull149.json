@@ -1,0 +1,69 @@
+{
+ "kind": "batch-grow",
+ "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149",
+ "fingerprint_removed": "a79347720ccda3ed",
+ "target": 20000,
+ "batch": [
+  [
+   7,
+   35
+  ]
+ ],
+ "classes": 2488,
+ "list": "build/m53-batch/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/step00-b1/classes.jsonl",
+ "steps": [
+  {
+   "batch": [
+    [
+     7,
+     35
+    ]
+   ],
+   "added": [
+    7,
+    35
+   ],
+   "single_count": 1,
+   "single_claim": "open",
+   "classes": 2488,
+   "claim": "exact",
+   "seconds": 4008.4,
+   "resumed": false,
+   "dir": "build/m53-batch/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/step00-b1",
+   "identity": {
+    "7-35": {
+     "putback": 2488,
+     "spectrum": "\u2265 1 (open)",
+     "ok": true
+    }
+   }
+  },
+  {
+   "batch": [
+    [
+     7,
+     35
+    ],
+    [
+     25,
+     52
+    ]
+   ],
+   "added": [
+    25,
+    52
+   ],
+   "single_count": 1,
+   "single_claim": "open",
+   "classes": 81787,
+   "claim": "capped-n",
+   "seconds": 4542.0,
+   "resumed": false,
+   "dir": "build/m53-batch/S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149/step01-b2"
+  }
+ ],
+ "spectrum": "data/m53/spectrum-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149.json",
+ "seconds": 8550.5,
+ "headline": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149: batch of 1 cheats 7-35 at 2,488 classes (exact), grown in 2 steps against target 20,000; put-back identity held on every exact single",
+ "claim_scope": "each step's list is exact by the enumerator's V1\u2013V3; the put-back identity compares orbit counts across two independent runs; the batch is an OFFER \u2014 the profile and hitting set decide what is committed"
+}

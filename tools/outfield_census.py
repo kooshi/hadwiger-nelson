@@ -69,7 +69,15 @@ def census(a, log=print):
         if der.get("pool_fingerprint") != fp_full:
             raise SystemExit(f"[census] REFUSED: the {k} pool is not derived from the full pool ({der.get('pool_fingerprint')} vs {fp_full})")
     cps = {}
+    # an EMPTY residual (every class killed in-field) needs no full/out replay: the engine has nothing
+    # to ask; the census then records the two pools as "not asked (empty residual)" and the join is
+    # over zero classes — the number is 0 with no unknowns, the first horn by the registered rule
+    N0, fp0, budget0, V0 = read_checkpoint(Path(a.infield))
+    empty_residual = all(i in V0 for i in range(N0)) and all(v == "killed" for v in V0.values())
     for k, d in (("in", a.infield), ("full", a.full), ("out", a.outfield)):
+        if empty_residual and k != "in":
+            cps[k] = ({}, "not asked (empty residual)")
+            continue
         N, fp, budget, V = read_checkpoint(Path(d))
         if N != n_classes:
             raise SystemExit(f"[census] REFUSED: the {k} checkpoint names {N} classes, the list has {n_classes} — different class lists")
@@ -82,6 +90,8 @@ def census(a, log=print):
         raise SystemExit(f"[census] REFUSED: the in-field replay is unfinished ({len(missing)} classes unanswered)")
     resid = sorted(i for i, v in Vin.items() if v != "killed")
     for k, V in (("full", Vfull), ("out", Vout)):
+        if empty_residual:
+            break
         miss = [i for i in resid if i not in V]
         if miss:
             raise SystemExit(f"[census] REFUSED: the {k} replay is unfinished over the residual ({len(miss)} of {len(resid)} rows unanswered; "
@@ -109,7 +119,9 @@ def census(a, log=print):
     if len(X) > 0:
         horn = "SECOND HORN — some class of this batch provably needs out-of-field material at depth 1 (the tiers hide it)"
     elif len(Z) == 0 and len(U_in) == 0:
-        horn = "FIRST HORN — no class of this batch needs an out-of-field point at depth 1 (every in-field survivor survives the full pool too)"
+        horn = ("FIRST HORN — no class of this batch needs an out-of-field point at depth 1 ("
+                + ("every class is killed by the in-field pool alone; the full pool was not asked" if not resid else
+                   "every in-field survivor survives the full pool too") + ")")
     else:
         horn = "UNDECIDED — the number is 0 but unknowns remain in the residual"
     n_in, n_full, n_out = (mans[k]["pool"]["n_points"] for k in ("in", "full", "out"))

@@ -1,0 +1,81 @@
+{
+ "kind": "outfield-census",
+ "label": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149",
+ "batch": [
+  "7-35"
+ ],
+ "classes": 2488,
+ "classes_sha256_16": "b488be48c746adc5",
+ "stage_fingerprint": "0b1e477477cbbe48",
+ "headline": "B\u2080 = {7-35} (1 cheats) on S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1-cull149: 2,488 classes. In-field pool (16,348 points; rule: the parent pair's radicand 4/d^2-1 is a square in K (tower criterion, exact; root verified by squaring); PSLQ cross-check agreed on every radicand; conflicts=2000000 wall=900): 2,488 killed, 0 survive (proof), 0 unknown. Full pool (1,636,399 points; not asked (empty residual)) on the residual S_in \u222a U_in = 0: of S_in \u2014 0 killed = classes provably needing out-of-field material at depth 1, 0 survive the full pool too, 0 unknown; of U_in \u2014 0 killed, 0 survive (\u27f9 survive in-field, derived), 0 unknown. Out-of-field pool (1,620,051 points; not asked (empty residual)) alone on the number: 0 out-alone, 0 cooperative, 0 unknown. R1 reads: FIRST HORN \u2014 no class of this batch needs an out-of-field point at depth 1 (every class is killed by the in-field pool alone; the full pool was not asked).",
+ "horn": "FIRST HORN",
+ "number": 0,
+ "table": {
+  "K_in": 2488,
+  "S_in": 0,
+  "U_in": 0,
+  "residual": 0,
+  "S_in\u00d7full": {
+   "killed": 0,
+   "survives": 0,
+   "unknown": 0
+  },
+  "U_in\u00d7full": {
+   "killed": 0,
+   "survives(derived survives_in)": 0,
+   "unknown": 0
+  },
+  "number\u00d7out": {
+   "out-alone": 0,
+   "cooperative": 0,
+   "unknown": 0
+  },
+  "impossible_cells": "refused, never written"
+ },
+ "classes_by_cell": {
+  "S_in_killed_full": [],
+  "S_in_survives_full": [],
+  "S_in_unknown_full": [],
+  "U_in_killed_full": [],
+  "U_in_survives_full": [],
+  "U_in_unknown_full": [],
+  "out_alone": [],
+  "cooperative": []
+ },
+ "per_class": {},
+ "conditioning": {
+  "pools": {
+   "in": {
+    "fingerprint": "925710ee49c6becb",
+    "n_points": 16348,
+    "params": {
+     "restrict": "field=in",
+     "field": "Q(sqrt3,sqrt11)",
+     "rule": "the parent pair's radicand 4/d^2-1 is a square in K (tower criterion, exact; root verified by squaring); PSLQ cross-check agreed on every radicand",
+     "exact_source": "data/m52/exact-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1.json"
+    },
+    "budget": "conflicts=2000000 wall=900"
+   },
+   "full": {
+    "fingerprint": "cc54cdd5a5e2ce0b",
+    "n_points": 1636399,
+    "params": {},
+    "budget": "not asked (empty residual)"
+   },
+   "out": {
+    "fingerprint": "b8c27fb0f24eef01",
+    "n_points": 1620051,
+    "params": {
+     "restrict": "field=out",
+     "field": "Q(sqrt3,sqrt11)",
+     "rule": "the parent pair's radicand 4/d^2-1 is a square in K (tower criterion, exact; root verified by squaring); PSLQ cross-check agreed on every radicand",
+     "exact_source": "data/m52/exact-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1.json"
+    },
+    "budget": "not asked (empty residual)"
+   }
+  },
+  "machine": "local",
+  "written": "2026-09-05T05:42:07Z"
+ },
+ "claim_scope": "one batch on one object; 'survives' is a proof of extension over the named pool; 'killed' transfers upward; unknowns are caps and never folded; the number counts in-field SURVIVORS killed on the full pool"
+}
