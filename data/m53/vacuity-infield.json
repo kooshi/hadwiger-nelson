@@ -1,0 +1,14 @@
+{
+ "kind": "vacuity-control",
+ "method": "a survivor class of the widened in-field replay, pinned on the live seed block, extended by cadical to the whole graph; the colouring validated on every edge",
+ "vertices": 18329,
+ "object": 1981,
+ "pool_infield": 16348,
+ "edges": 149508,
+ "outcome": "sat",
+ "seconds": 33.2,
+ "survivor_class": 42689,
+ "survivors_in_widened_replay": 3929,
+ "colouring_sha256_16": "a412cff1a0967819",
+ "claim_scope": "unit \u222a halo \u222a the in-field depth-1 pool is 5-colourable (explicit colouring, validated) \u2014 so a class killed on that pool is killed by the list-colouring constraint under its fixed seed class, not vacuously; cadical with palette breaking was UNKNOWN at 1,800 s on the unpinned graph, DSATUR+repair did not resolve it"
+}
