@@ -1,0 +1,60 @@
+{
+ "kind": "residue-colouring",
+ "branches": {
+  "sqrt33\u226117 mod 256": {
+   "points": 1953,
+   "non_integral": 0,
+   "unit_mono": 0,
+   "unit_edges": 13796,
+   "two_not_mono": 0,
+   "two_edges": 344,
+   "classes": [
+    499,
+    489,
+    487,
+    478
+   ],
+   "pair": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "ok": true,
+   "components": 1
+  },
+  "sqrt33\u2261239 mod 256": {
+   "points": 1953,
+   "non_integral": 0,
+   "unit_mono": 0,
+   "unit_edges": 13796,
+   "two_not_mono": 0,
+   "two_edges": 344,
+   "classes": [
+    491,
+    489,
+    488,
+    485
+   ],
+   "pair": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "ok": true,
+   "components": 1
+  }
+ },
+ "object": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+ "seconds": 1.4,
+ "claim_scope": "the residue 4-colouring of Theorem B (~/field-wall-conjecture.md), computed at 200 2-adic bits on both primes above 2, validated proper on every unit edge and monochromatic on every seed distance-2 pair; the forced pair separated"
+}
