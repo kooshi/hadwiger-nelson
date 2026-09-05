@@ -148,13 +148,23 @@ Rules that bind both: one heavy job on the box; one work order per engine sessio
 implemented by different agents, one writer per worktree, I push; every finding recorded the day it
 lands (his standing instruction, 2026-08-31); a headline carries its population (G21).
 
-## The next seven days, in order (rewritten 2026-09-04 at the M52 close)
+## The next seven days, in order (rewritten 2026-09-05, the field-wall session)
 
-1. Kooshi's pick: M53 (iteration 5 from the culled plain object) or the certificate.
-2. If M53: the out-of-field kill census FIRST (R1's test; ~hours: a restricted pool export + one
-   batch's replay); then the in-field pool if it reads zero; then the loop from the 149-set with
-   `descent cull --census` as phase 0 and the cull as a per-commit column.
-3. Engine: WO-16 (licence holding, drain on signal, the clean A/B; D75–D77); WO-3's replan for the
-   server; the 3-bit cube front-end (R3).
-4. The 52 undecided cheats re-asked at a higher rung on the server or overnight on the desktop.
-5. The viewer's copy-provenance follow-up (post-milestone item).
+*The field wall is a theorem (`plans/FIELD-WALL-THEOREM.md`); M53 halted on it; the residue obstruction
+(T17), the wall-break census (T18) and the first wall-breaking replay (T19: 0 kills) are in. The board:*
+
+1. **Read the partner-pool sample** (`build/m54/replay-partner-sample/`, 394 of the 3,936 in-field
+   survivors against the 572,992-point pool of every nontrivial 2-adic class, 300-s walls): the
+   kill/unknown split decides whether any depth-one out-of-field material kills at five colours or
+   whether the endgame is width-only (M52's copies: 0 kills; single breakers: 0 kills).
+2. **Read the rigidity dial** (`build/m54/rigidity-dial-it4.json`, the exact four-colour forced-equal
+   sweep of the it-4 unit part by 2-adic valuation class): if forcing sits only at valuation 6,
+   Q10's reading stands and the dial's next point is the it-5-grade fabric.
+3. **Kooshi's pick between**: (a) minting the kernel milestone for Theorem B
+   (`plans/STUB-field-wall-kernel.md`, names probed); (b) the endgame design question — what
+   5-rigid wall-broken material looks like, G19/G25 with the theorem underneath; (c) continuing the
+   in-field loop as in-context reduction (admissible batches by `tools/residue_floor.py`; it cannot
+   end and its floor is three).
+4. The carried engineering: WO-16, the 3-bit cube front-end for the culled set (R3), WO-3's server
+   replan — unchanged, none blocking.
+
