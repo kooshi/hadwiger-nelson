@@ -522,6 +522,20 @@ can go no lower than three cheats (Corollary 7.4), and is currently far from tha
 components); the material that can take it past the wall is a few thousand pairs of the √5-class, or
 combinations of the "one-prime" classes, and nothing else at depth one.
 
+### 7.5 A witness the theory predicted
+
+The rigidity measurement of §8.7 says the programme's K-point fabric forces 163 of its 178 pairs at
+distance 8/3 to share a colour in every proper 4-colouring. The spindle theorem (§7.1) turns any such
+pair into a 5-chromatic unit-distance graph: rotate the fabric about one endpoint x by the angle
+with cos θ = 1 − 1/(2d²) = 119/128, sin θ = 3√247/128, so that the other endpoint y lands one unit
+from its image, and the union cannot be 4-coloured. Theorem B demands that the union leave every
+field where the wall stands, and it does: 247 = 13·19 ≡ 7 (mod 8), so √247 makes −1 a 2-adic square.
+Built for one pair: 3,905 points, 27,593 unit edges, 8 cross chords (found at 60 digits, no near
+miss), refusing four colours by a direct SAT ask and admitting five. Its coordinates lie in
+ℚ(√3, √11, √247) — a 5-chromatic unit-distance graph in a field containing neither √5 nor √7, which
+every published witness needs (§6.3). The same construction at the 8/√3 pairs gives ℚ(√3, √11, √23).
+The forcing core of a single pair, shrunk to 1-minimality, is the small version of this witness.
+
 ---
 
 ## 8. What is open after this

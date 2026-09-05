@@ -2203,6 +2203,14 @@ record shows what was believed, what was measured, and what is now proved.
   cheapest wall-breaking adjunction is a √5-class glue point (a pair at distance 4/3 — G4's
   "forced-pair radius" — or 2√5/3), and the endgame's pool at depth one is those ~8,000 points, or
   pairs from the one-prime classes (−1, 1) with (1, −1), (2, ·) with (−2, ·).
+  **AND the fabric names its own wall-breaking angle (T20, same day).** The rigidity dial's
+  valuation-6 forced pairs (163 of 178 at 8/3 on the it-4 unit part) are spindle-able: cos 119/128,
+  sin 3√247/128, and 247 ≡ 7 (mod 8) breaks the wall as the theorem requires — U ∪ R(U) is a
+  **5-chromatic unit-distance graph in ℚ(√3, √11, √247)** (3,905 points, direct 4-refusal,
+  5-colourable control), the first 5-forcer without √5 or √7. So a wall-breaking adjunction is not
+  only an external detune (ρ₁₅) or a pool class: pure K-fabric, grown deep enough to be 4-rigid at
+  its deepest 2-adic valuation, supplies the angle itself. The endgame's design principle, sharpened:
+  grow 4-rigidity in K (cheap, in-field), read the forced distances off the dial, spindle.
 
 ## Whose work this is
 

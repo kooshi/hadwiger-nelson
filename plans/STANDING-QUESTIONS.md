@@ -565,3 +565,22 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   d ≡ 7 (mod 8); the last class is not degenerate — ℚ(√7)² carries an explicit unit 5-cycle
   (steps −1, ζ, ζ, (w/2)(−1 ± i) with ζ = (3 + i√7)/4, w = (1 + i√7)/2, verified exactly), so
   χ(G(ℚ(√7)²)) ≥ 3 with no equilateral triangle available; 3, 4 or more is open.
+
+* **T20 — The fabric's own forced distance, spindled: a 5-chromatic unit-distance graph in
+  ℚ(√3, √11, √247) (2026-09-05, `tools/forced_spindle.py`, `data/m53/forced-spindle-full.json`).**
+  [measured, derived first] The rigidity dial (Q10) found 163 pairs at distance 8/3 forced equal in
+  every proper 4-colouring of the it-4 unit part U (pure K-fabric, no √5, no √7). The spindle theorem
+  then says U ∪ R(U), R the rotation about one endpoint x with cos θ = 1 − 1/(2d²) = 119/128 and
+  sin θ = √(4d² − 1)/(2d²) = 3√247/128, has no proper 4-colouring — and 247 = 13·19 ≡ 7 (mod 8), so
+  this spindle breaks the wall exactly as Theorem B requires of any 5-forcer (the wall's
+  even-distance rule generalised: 4d² − 1 ≡ 7 mod 8 up to squares). Built for the pair (35, 1859):
+  **3,905 points (1,953 + 1,952, the centre fused), 27,593 unit edges, 8 cross chords at 60 digits
+  with a 1e-6 near-miss refusal; refuses four colours by a DIRECT SAT ask (not via the theorem), and
+  is 5-colourable (control).** So the seam-field fabric grown by the descent is 4-rigid enough to
+  mint 5-chromatic witnesses by itself, at a distance nobody had spindled — M51's "at distances
+  nobody can spindle" meant outside the kernel's tower, not outside mathematics — and the field
+  ℚ(√3, √11, √247) is new for 5-chromatic unit-distance graphs (de Grey: √5, √7; Heule: √5; the 8/√3
+  pairs give ℚ(√3, √11, √23) the same way). The 1-minimal forcing core of the pair is being shrunk;
+  the core ∪ its copy is the small witness. *Consequence for the endgame:* the wall-breaking
+  adjunction need not be an external angle — the fabric names its own (its valuation-6 forced
+  distances), and the Q10 dial is the instrument that finds them.
