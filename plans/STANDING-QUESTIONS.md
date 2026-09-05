@@ -551,6 +551,15 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   zero: the reading stands and is now a two-point curve. What would falsify it next: a valuation-4
   class acquiring forced pairs before valuation 6 saturates, or any forced pair at distance 2 while
   8/3 is still below 100 %.
+  **The zero rows are a theorem, not a measurement (2026-09-05).** The residue colouring r is a proper
+  4-colouring of every K-point graph with r(x) = r(y) iff v_𝔭(x − y) > 0. Hence in ANY K-point
+  unit-distance graph, at four colours, a pair forced EQUAL lies at positive 𝔭-adic valuation (a
+  valuation-0 pair is separated by r) and a pair forced DISTINCT — a virtual edge — lies at valuation
+  0 (a positive-valuation pair is equated by r). So the dial's valuation-0 rows read 0 forced-equal
+  by theorem, and the measured content is only the distribution over the positive-valuation classes;
+  likewise every virtual edge at four colours the programme ever found on K-fabric (M45's 27/28/31
+  offsets were on the cell family, not K) must sit at valuation 0. Two lines, kernel-ready once
+  Theorem B is.
 
 * **T19 — Single wall-breaking points kill nothing; the quadratic planes classified (2026-09-05).**
   [measured; derived] (a) The new plan's first row: the 8,442 glue points of the five wall-breaking
