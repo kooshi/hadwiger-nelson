@@ -567,8 +567,14 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   unit edges; each point has exactly two object neighbours), replayed against the two-cheat stage's
   3,936 in-field survivors (`data/m53/replay-wall-b2/`): **0 killed, 3,936 extend, 19 ms median** —
   breaking the wall is necessary for the endgame and a few thousand degree-two points are not
-  sufficient; the 572,992-point partner pool (every nontrivial 2-adic class) is sampled at 394 rows
-  in flight. (b) Corollary 6.5 of the note (`plans/FIELD-WALL-THEOREM.md`): for squarefree d > 1 the
+  sufficient; the 572,992-point partner pool (every nontrivial 2-adic class; 2,237,572 pool–pool edges),
+  sampled at every tenth survivor — 394 rows, 16 workers, 300-s walls, 2 M conflicts:
+  **394 unknown, 0 killed, 0 survive** (`data/m53/replay-partner-sample/`). Read exactly: the
+  instance (a 5-colour list-colouring over 574,759 variables) is undecidable at that wall for every
+  sampled class, the same shape as M53's pdeg12 pass (5 killed, 3,676 unknown of 3,681); a five-minute
+  wall on a half-million-point pool measures the wall, not the material. Whether wall-relevant depth-one
+  material kills at five colours is UNDECIDED here, and the next honest ask is a smaller pool (the
+  partner classes restricted to high pool-degree, the pdeg12 recipe) with an hour-scale wall. (b) Corollary 6.5 of the note (`plans/FIELD-WALL-THEOREM.md`): for squarefree d > 1 the
   unit-distance graph of ℚ(√d)² is **bipartite when d is even or d ≡ 1 (mod 8)** (Woodall's parity
   transplants), **at most 4-chromatic when d ≡ 3, 5 (mod 8)**, and beyond the residue method when
   d ≡ 7 (mod 8); the last class is not degenerate — ℚ(√7)² carries an explicit unit 5-cycle

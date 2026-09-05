@@ -1,0 +1,39 @@
+REPLAY  pool a10c012481f17bca × list classes   81,787 classes
+  asked       394 of 81,787 — the rows listed in build/m54/rows-partner-sample.txt
+  live block  186 of this object's 214 seed columns (28 deleted), from build/m51-edges-S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1+cull149.json; 100,272 seed-incidence entries checked, none at a deleted vertex
+  tier order  0 -> 0b -> 2 -> 3 -> 4   propagation run
+              the kernelization (tier 1) is implemented and controlled, and is OFF the path in this run, because the complete tier holds one prepared solver over a fixed variable set
+
+  solver   cadical-2.1.2 (vendored), configuration `default`, kept across asks
+    prepared   16 x rung (1,770 vars / 56,220 clauses) + 16 x core (574,759 vars / 17,056,099 clauses)
+    memory     worst case 41.2 GiB (2.2 GiB of clauses + growth at the full budget), peak 43.5 GiB
+               the worst case assumes every worker spends its whole budget, which is what a
+               refusal must assume; the peak is what this run really reached, so the model is falsifiable
+    budgets    2,000,000 conflicts, wall ceiling 300s
+    rung       unsat 0    sat 394    capped 0    skipped 0
+    vacuity    not applicable — this run recorded no kills, so there is nothing to doubt
+
+  decided by                  count     share      median        total
+    empty-domain                0     0.0%           -            -
+    propagated                  0     0.0%           -            -
+    strong-rung-infeasible      0     0.0%           -            -
+    peeled-empty                0     0.0%           -            -
+    greedy-witness              0     0.0%           -            -
+    core-infeasible             0     0.0%           -            -
+    core-coloured               0     0.0%           -            -
+    undecided                 394   100.0%     300.1 s   118776.5 s
+                          -------  -------              -----------
+                              394   100.0%                 9021.9 s   the machine, 16 threads
+    undecided                 394   100.0%
+      wall-clock              394     NOT reproducible — this box, this load, this hour
+
+  duplicate-class self-agreement   394 groups over 394 lines, 0 disagreements
+                                   keyed on this object's 186 live seed columns of 214 (28 deleted)
+                                   every line is its own class, so this control compared nothing
+
+  the sidecar to merge   build/m54/replay-partner-sample/verdicts.jsonl
+    394 rows, header `# 81787 a10c012481f17bca conflicts=2000000 wall=300`
+    the header names the LIST's length and pool fingerprint — the two fields your own
+    resume asserts on — so appending its rows to your checkpoint is accepted, and the
+    verdict join folds them: an unknown may be superseded by a decided row, never the reverse
+  tier detail  build/m54/replay-partner-sample/tiers.jsonl

@@ -514,8 +514,10 @@ replay, before any of it was believed.
   of the wall-breaking radicands (each with exactly two unit neighbours in the object, 34,518 unit
   edges among themselves) were replayed against the 3,936 in-field survivors: every one of the 3,936
   colourings extends, in 19 ms median — 0 kills. Breaking the wall is necessary for the endgame; a
-  handful of degree-two points is not what does it. (The 572,992-point pool of every radicand with a
-  nontrivial 2-adic class, sampled at 394 of the survivors, is reported below when it lands.)
+  handful of degree-two points is not what does it. The 572,992-point pool of every radicand with a
+  nontrivial 2-adic class, sampled at 394 of the survivors with five-minute walls, returned 394
+  undecided, 0 killed, 0 provably surviving: at that size the ask is beyond a five-minute solver
+  budget, and whether combined wall-breaking material kills at five colours is open.
 
 The reading for the programme is now quantitative: the descent confined to K cannot end (Theorem 7.1),
 can go no lower than three cheats (Corollary 7.4), and is currently far from that floor (eight odd
