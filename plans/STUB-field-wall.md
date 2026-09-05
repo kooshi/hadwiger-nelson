@@ -1,3 +1,10 @@
+> **PROVED 2026-09-05** — by Kooshi's other session while writing the conjecture up: `~/field-wall-conjecture.md`
+> §5 (Theorem B: χ(G(ℚ(√3, √11)²)) = 4, the residue colouring modulo a conjugation-fixed prime of K(i)
+> above 2). Statement 2 below is settled in the affirmative; statement 1 is Lemma 7.2 of the note. The
+> theorem's kernel formalization is the next milestone, planned by that session; this stub is kept as
+> the record of how the question was posed. Checked here: `tools/residue_colouring.py` (the seed:
+> 1,004/1,004 proper, 446/446 mono; the it-4 object: 13,796/13,796 proper, 344/344 mono).
+
 # The field wall, formalized (pre-subplan stub, UNNUMBERED — Kooshi, 2026-09-03: "sounds like we need to formalize the field wall — new milestone?")
 
 *Numbered if minted. The evidence: `plans/RISKS.md` R1/R5; T14 (`plans/STANDING-QUESTIONS.md`);

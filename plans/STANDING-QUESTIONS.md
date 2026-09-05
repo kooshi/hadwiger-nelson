@@ -473,3 +473,22 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   measured: 36 chords UNSAT 6.3 s about 206; 64 chords UNSAT 4.2 s about v0 on the 1,981-point
   object). Full object cards + machine-readable recipes: `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`,
   `data/m51/q8-transforms.json`.
+
+* **T16 — The field wall is a theorem (2026-09-05, `~/field-wall-conjecture.md` §5; Kooshi's other
+  session).** χ(G(K²)) = 4 for K = ℚ(√3, √11): colour a point by its residue modulo a conjugation-fixed
+  prime 𝔭 of K(i) above 2 (2 = (𝔭₁𝔭₂)² in ℚ(i, √3, √11), residue fields 𝔽₄, decomposition field
+  ℚ(√33) real so conjugation fixes each 𝔭ⱼ); a unit vector u has v(u) + v(ū) = 0 and v(ū) = v(u), so
+  it is a 𝔭-adic unit and a unit step changes the residue. Woodall's 2-colouring of ℚ² is the case
+  𝔭 = (1 + i). Checked here (`tools/residue_colouring.py`): the seed (1,004/1,004 proper, 446/446
+  distance-2 pairs mono, A ≠ B) and the it-4 object (13,796/13,796, 344/344, A ≠ B), both 2-adic
+  branches. **Consequences:** T7's crossing cannot happen inside K (Theorem 7.1: no pair compulsion at
+  five colours in K), so the descent must leave K to end; the wall's location is 2-adic — it falls
+  for a real field F iff −1 is a square in some completion of F above 2, for multiquadratic F iff an
+  odd square class is ≡ 7 (mod 8): √5, √7 break it, √2/√10/√14/√35/√70 do not; spindles at even
+  distance always break it (4d² − 1 ≡ 7 mod 8). M50's forced pairs at 8/3 and 8/√3, M34's mono
+  distance-2 pairs, M24–M26's χ = 4 closures, and M52's P5 (copies at ρ₁₅ make 5-chromatic unit
+  graphs; in-field commits never do) are all instances. G1 is promoted from reading to theorem
+  (hand-proved; kernel formalization the next milestone's). Open after it (the note's §8): whether
+  χ(G(ℚ(√3, √5, √11)²)) = 5 (Heule-510 lives there; residue bounds cannot reach 5), √7 without √5,
+  the quadratic fields ℚ(√d) with d ≡ 7 (mod 8) (triangle-free planes), exactness of the bound for
+  ℚ(√3), ℚ(√5), ℚ(√11), and whether Fischer (1990) already contains the criterion.

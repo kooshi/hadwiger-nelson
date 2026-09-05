@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M52, 2026-09-04.**
+**Last updated: M53 HALTED at the field-wall theorem, 2026-09-05.**
 
 ### Where the problem stands
 
@@ -819,6 +819,43 @@ missed as registered, P10 refuted on cheats and exceeded on vertices. The decisi
 the next milestone is iteration 5 from the culled plain object (M53) or the certificate of the
 copy-lock core; Kooshi picks.
 
+M53 (iteration 5 from the culled plain object) ran for a day and a half and was HALTED at its phase D
+on 2026-09-05, because the field-wall conjecture stopped being a conjecture: Kooshi's other session,
+asked to write it up, proved it (`~/field-wall-conjecture.md` §5). **Theorem B: every finite
+unit-distance graph with all coordinates in K = ℚ(√3, √11) is 4-colourable**, by an explicit
+residue colouring — in K(i) = ℚ(i, √3, √11) the prime 2 factors as (𝔭₁𝔭₂)² with residue fields 𝔽₄
+and decomposition field ℚ(√33), which is real, so complex conjugation fixes each 𝔭ⱼ; a unit vector
+then has 𝔭-adic valuation zero, so colouring a point by its residue mod 𝔭 (four residues) changes at
+every unit step (Woodall's 2-colouring of ℚ² is the same argument at 𝔭 = (1 + i)). The Moser spindle
+lives in K and K is the smallest field drawing it, so four is exact. The wall's location is 2-adic:
+it falls for a real field iff −1 is a square in some completion above 2 — for multiquadratic fields
+iff an odd square class is ≡ 7 (mod 8) — which is why the 5-forcers carry √5 and √7 and why √2, √10,
+√14, √35, √70 can never help; spindles at even distance (de Grey's d = 2, 4; Haugland's d = 2) always
+break it. **Checked here before believing**: the note's own decisive test on the Exoo–Ismailescu
+seed (proper on 1,004/1,004 unit edges, monochromatic on 446/446 distance-2 edges, the forced pair
+separated, both 2-adic branches) and, on the descent's 1,981-point object, proper on 13,796/13,796
+unit edges and monochromatic on 344/344 live cheats with zero search (`tools/residue_colouring.py`)
+— consistent with M50's forced pairs at 8/3 and 8/√3 (positive 𝔭-adic valuation), M34's mono
+distance-2 pairs (2 ∈ 𝔭), and M24–M26's χ = 4 closures (instances). What it means: **a descent
+confined to K cannot end** (no pair compulsion at five colours exists in K, by the spare-colour
+lemma), so M53's decisive measurement — the in-field pool alone kills every class of a one-cheat
+batch (2,488 of 2,488, 13 s; vacuity settled by an explicit 5-colouring) — was Kooshi's first horn
+and a trap at once: in-field material does the intermediate kills and can never do the last one.
+What M53 measured before the halt stands as data: the culled object's single-cheat asks cost ~25×
+the un-culled object's (the cull tightened it); the exact field split of the 1,636,399-point depth-1
+pool is 1.0 % in-field (16,348 points — ladder points fuse C(k, 2) parent pairs; "≥ 3 object
+neighbours" is the in-field slice to seven points in 1.6 M, G34 as an identity); the spectrum of the
+149 standing cheats (89 necessary, 0 droppable-alone, 60 unknown to a ten-minute enumerator); the
+batch law on the culled object (one cheat 2,488 classes, two cheats > 80,000); and a two-cheat stage's
+3,936 in-field survivors, hard for every material at five-minute asks. Instruments banked: the cube
+front-end for the second encoding (R3's lever, self-tested, not yet run on the 149-set), the exact
+tower square test, the spectrum, the census reader, the mint, the batch grower, the residue
+colouring. The new plan is the other session's: the pool must be WALL-BREAKING (rational classes
+5 and 7 mod 8, or −r a 2-adic square — the note's §7.3 test, an instrument to build), the kernel
+formalization of Theorem B is the natural next milestone, and the questions the note leaves open
+(§8: is ℚ(√3, √5, √11)'s plane exactly 5-chromatic; √7 without √5; the triangle-free quadratic
+planes ℚ(√d), d ≡ 7 mod 8) are the next research targets.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -883,10 +920,16 @@ copy-lock core; Kooshi picks.
 | 45 | **The batch descent: composition by construction, and the lattice that compounds** (M50). **Kernel** (`PartnerLattice.lean`, axioms exactly the standard three): `Glue.eq_gluePoint_of_unit_pair` — a point at unit distance from two DISTINCT points is the glue point of their unit circles or its mirror, only `x ≠ y` assumed (both annulus bounds derived from the witness) — and `Glue.finite_two_unit_neighbors` — the depth-one candidate space over any finite set is finite: the kill engine's "single-point kills live in the partner lattice, in any field" as theorems. **Measured** (desktop; `tools/batchkill.py` — provenance objects, entropy-split cube enumeration, seed-projection blocking, tiered whole-pool feasibility, wave-parallel cover, process-parallel shrink, per-verdict checkpoints; SIX engine swaps mid-campaign, each measured before changed and regression-gated after, 383/383 twice): **\|S₂₉\| = 51,350 exact** (entropy-guided cubes, 24 min); **two certified batch commits** — 19 cheats via a 465+11-point halo (2,954 edges verified, one-hot + 3-bit UNSAT), then on the corrected iteration-2 chain (45,365 list lines; **corrected at M51 incident 4: 24,810 distinct classes — the class set exact, the count an enumerator artifact; commits certified independently and stand**; profile 45,216/46/103 in line units) **24 more via a 318-point halo** (2,455 edges, both encodings UNSAT, 620 s) — **object 1,008 points / 403 cheats, 43 of 446 removed**; floors 29 → 36 → 17 with (132,134) falling to the halo; **the core probe** — per kept refuser edge, S_e exact on seed classes vs the grown 394,604-point lattice: **five FALL clean, six near-fall at ZERO provable survivors** (2,402 list lines — **recounted at M51: 1,755 distinct classes, 26.9 % enumerator duplicates (incident 4); killed/undecided 2,351/49 are line units, so class-level undecided ≤ 49; the zero-survivor verdict unaffected, a duplicate killed twice is killed** — at 7,200-s caps, never folded) — growth compounds; **277 width-shaped stalls** (strong-rung SAT, capped ddmins land 2,551–14,960 and still descending) price the depth-2 escalation; **P5 field census**: 727/794 committed points carry depth-1-catalogue radicands, 67 (all depth ≥ 2) adjoin new roots concentrated on a handful of values. **The weighted-ladder scan** (`tools/m50_skewscan.py`, palette-invariant functionals on the held lists; controls reproduce §R5 exactly; completed cast-free by a decorrelated adversarial agent + our tool independently): **148 absolute virtual edges at d ∈ {3,4}** (the six d = 4 = diameters through v0: forced central ANTI-symmetry at five colours), **412 absolute never-3-distinct triangles** in five families on {√3,√7,2√3,√13} (the "16" first reported was a cast artifact — G21 on a positive count), distance-class polarization seed-native; **the spare-colour lemma** ((k−1)-colourable ⟹ no pair compulsion at k ⟹ every 5-colour virtual-edge gadget is ≥ 5-chromatic; the χ(unit-part) phase monitor — still 4-colourable at 1,008) adopted as an M51 kernel opener; the diet meter prototyped (cheat supports 166/176/191, common core 78). Three incidents (stage under-accumulation; the deferral cascade's mislabelled cause; the free-minimizer swap) all caught by always-run-the-ask controls. Predictions: P2a/P2b/P3 met, P4 met-in-substance, P1/P6 missed on the 30k cost heuristic, P5 refuted-in-strict-form as registered, P7 missed by three. | `Proofs/HadwigerNelson/PartnerLattice.lean`, `tools/{batchkill,m50_skewscan}.py`, `build/m50-*.json`, `plans/M50-batch-descent.md` §R0–§R7, §Sⁱᵛ, §Sⁱᵛ-adv | M50 |
 
 | 46 | **The copy-lock atlas, the cull, and the field** (M52). **Kernel** (`Copy.lean`, standard three axioms): `spindleRot d` with `spindleRot 2 = rho15`, `spindleRot √3 = moserTwist`, the exact `1/2 ≤ d` (red at `1/4`), `dist_self_rotAbout` (hypothesis-free), `self_chord_iff` (self-chords = the radius-d circle), `copyUnion` as `(unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` with both containments and `chromaticNumber_copyUnion_le`. **Measured, exact**: T13/P1 (13,796 of 13,796 edges on the half-twist ladder), T14 (every point in ℚ(√3, √11), all edges exact identities; copies exact in ℚ(√3, √5, √11)), P2 (every genuine cross chord collinear and seed-field), P3 (self-chords = the radius-2 shell), P4 (d = 2 pigeonhole fires on U at k = 4, √3 clean), T15 (the kill table: 3,516 × 1,062, all pairs killed, 13 sole-killer chords, no pair compulsion, centre-colour bias to 65 %), P5 REFUTED (0 of 15,218 classes; 20/20 direct extensions, copy side 4-coloured), 0 copy–copy chords; **the cull 273 → 149** (114 by enumeration, 10 by WO-14; 60 witnessed, 27 floor, 52 undecided; one-hot UNSAT 10,640 s, 3-bit unknown at 43,200 s: candidate); the pool field census (15 % in-field, √5/√35 reachable, 100 % of commits in-field); the shrink priced (1.1 CPU-h/probe, 12–33 %); WO-14 delivered (gate 269/269; A3 273/273; the CNF finding; the sequential-acceptance floor; D74–D77; WO-16 stubbed). Instruments: `compose`, `copy_anatomy`, `copy_exact_field`, `copy_field_probe`, `copy_kill_table`, `cull_enum --loop`, `rank_copies`, `pool_field_census`, `m52_final_certify`; the viewer's copy/cull layers. Records: `plans/RISKS.md`, `plans/STUB-field-wall.md`, `plans/M53-iteration-5.md`, `plans/STUB-certify-core883.md`, `DESCENT-ALGORITHM` phase 0″/2′. | `Proofs/HadwigerNelson/Copy.lean`, `tools/{compose,copy_anatomy,copy_exact_field,copy_field_probe,copy_kill_table,cull_enum,rank_copies,pool_field_census,m52_final_certify}.py`, `data/m52/`, `plans/M52-copy-lock-objects.md` §R0–R5 | M52 |
+| 47 | **The field-wall theorem, and M53's measurements before the halt** (M53, HALTED). **Hand-proved, NOT kernel-checked** (`~/field-wall-conjecture.md` §5, Kooshi's other session; formalization pending): χ(G(ℚ(√3, √11)²)) = 4 via the residue colouring modulo a conjugation-fixed prime of K(i) above 2 — the first plane-colouring bound over a field beyond ℚ in this programme's record, subsuming M24–M26's closures; the wall located 2-adically (falls iff −1 is a square in a completion above 2; for multiquadratic fields iff an odd square class ≡ 7 mod 8; √5/√7 break it, √2/√10/√14/√35/√70 do not; even-distance spindles always do). **Measured, exact**: the seed test (1,004/1,004 proper, 446/446 mono, pair separated, both branches) and the it-4 object (13,796/13,796, 344/344, pair separated) — `tools/residue_colouring.py`; the exact field split of the depth-1 pool (16,348 in-field of 1,636,399 — 1.0 %, fusion-explained; out-of-field points have exactly two object neighbours to seven in 1.6 M); the spectrum (89/0/60 of 149; 0 exact at 10 min); the batch law (2,488 → > 80,000 at two cheats); the one-cheat census (in-field kills 2,488/2,488, vacuity witnessed); the two-cheat stage's 3,936 in-field survivors (5 killed, 3,676 unknown at 300 s on pdeg12); the 25× ask-cost rise across the cull. Instruments: `cheat_spectrum`, `cube_certify`, `pool_field_restrict`, `outfield_census`, `commit_cull`, `batch_grow`, `residue_colouring`; the shared generators `binary3_clauses`/`forces_clauses`. Records: `plans/M53-iteration-5.md` §R0–§R5, `plans/RISKS.md` R1 resolved, `plans/STUB-field-wall.md` bannered, `data/m53/`. | `tools/{cheat_spectrum,cube_certify,pool_field_restrict,outfield_census,commit_cull,batch_grow,residue_colouring}.py`, `data/m53/`, `plans/M53-iteration-5.md` | M53 (halted) |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
+
+*(M53 HALTED 2026-09-05 at phase D — the field-wall conjecture is a theorem (`~/field-wall-conjecture.md`),
+and the plan below is SUPERSEDED pending the new plan from the session holding the proof: the descent must
+leave K through wall-breaking material; the theorem's kernel formalization and the note's §8 questions are the
+candidates. `plans/M53-iteration-5.md` §R5 lists what M53 left resumable.)*
 
 *The live two-track board — the iterations and the tangents, how they interleave, and the next seven
 days — is `plans/ROADMAP.md` (created 2026-09-01). **The standing risk register — what could stop the
@@ -1187,6 +1230,12 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   closures are exactly 4-chromatic **[kernel: M24–M26]**; the 5-forcers need
   √5 and √7. The 4/5 boundary is a field boundary. *Reading on top: 4 is what
   ⟨ζ₆,σ⟩ can force, and it forces it everywhere; 5 begins one field up.*
+* **G1, PROMOTED 2026-09-05 — the field wall is a THEOREM (hand-proved, kernel pending).** Theorem B of
+  `~/field-wall-conjecture.md`: χ(G(ℚ(√3, √11)²)) = 4 by the residue colouring modulo a conjugation-fixed
+  prime of K(i) above 2; the boundary is 2-adic (−1 a square in a completion above 2), which is exactly the
+  √5/√7 line G1 drew from the witnesses. Checked here on the seed and the it-4 object with zero search
+  (`tools/residue_colouring.py`). Corollary for the descent: no K-point unit graph carries a pair compulsion
+  at five colours, so the loop must adjoin a wall-breaking root to end — the copy at ρ₁₅ (√15) is that step.
 * **G2 — The construction grammar of the picture.** Rings about a point ⟺ that
   point was a rotation centre of the construction (orbits about a centre lie on
   circles about it — invariance, not coincidence). De Grey's two ring-hearts
@@ -2001,6 +2050,19 @@ artifacts; it took exact anatomy plus a human eye on the rendered picture.
   claimed). The flip side, same milestone: the always-verify discipline PAID twice in one day —
   a coverage-subset verify caught an exact minimizer silently swapping a kept edge out of the
   hitting set, and a 25 ≠ 24 banner cross-check caught a stale commit field before any certify.
+
+* **G35 — The wall is 2-adic, and the useful material is a congruence test.** [theorem, hand-proved; the
+  criterion measured on every reachable class] For a real number field F, the residue colouring gives
+  χ(G(F²)) ≤ N(𝔭) for a conjugation-fixed prime 𝔭 of F(i); such a prime above 2 exists iff −1 is not a
+  square in some completion of F above 2. For multiquadratic F the test is a square-class congruence (an
+  odd class ≡ 7 mod 8 breaks it); for a glue point over K = ℚ(√3, √11) with radicand r = 4/d² − 1, adjoining
+  √r breaks the wall iff −r is a square in both 2-adic completions of K — a finite check per candidate
+  point, before any search. Of the eight rational classes one gluing step reaches from K, exactly 5 and 7
+  break it; M53's exact split of the depth-1 pool (1.0 % in-field) now needs its wall-breaking sub-split.
+  *Reading on top, falsifiable by the next plan's first census: the kills that matter for the endgame come
+  from wall-breaking points, and a design that ranks candidates by object degree never sees them (G34) —
+  the field-aware tier is the fix; falsifier: a wall-breaking pool that kills nothing the in-field pool
+  does not.*
 
 ## Whose work this is
 

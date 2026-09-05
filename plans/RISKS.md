@@ -63,7 +63,15 @@ memory and design set; sound by monotonicity as every restricted pool is; the mo
 once-per-iteration full-pool re-ask of one batch's in-field survivors, whose first out-of-field-only
 kill lifts the restriction).
 
-**Status:** OPEN; the material exists one iteration away and has never been selected.
+**RESOLVED AS A THEOREM (2026-09-05):** the wall is real — χ(G(K²)) = 4 by the residue colouring
+modulo a conjugation-fixed prime of K(i) above 2 (`~/field-wall-conjecture.md` §5, hand-proved; checked
+here on the seed and on the 1,981-point object with zero search, `tools/residue_colouring.py`). A
+descent confined to K cannot end (no pair compulsion at five colours exists in K); the in-field pool
+is a non-terminating loop and Kooshi's conditional is withdrawn by the theorem. **The monitor becomes:
+does the design keep a WALL-BREAKING point** — a radicand whose square class is 5 or 7 (mod 8), or a
+non-rational radicand r with −r a square in both 2-adic completions of K (the note's §7.3 test, an
+instrument to build). **Status:** the risk is a theorem; its mitigation is the new plan's (the
+wall-breaking pool; the copy at a wall-breaking angle is the classical endgame).
 
 ## R2 — The tail costs more than the head (the computability tightrope)
 
@@ -128,7 +136,10 @@ points in K = ℚ(√3, √11) is 4-colourable). The conjecture cuts both ways: 
 leave K to end; false, its counterexample is a seam-field 5-chromatic unit graph — which is exactly
 what the descent's unit part would be if it ever ended inside K.
 
-**Status:** OPEN; the stub written 2026-09-03.
+**Status (2026-09-05):** the field wall is PROVED (see R1); what R5 named as unnameable splits in two —
+the field wall (a theorem now; its kernel formalization is the next milestone, planned by the session
+holding the proof) and the plane's own answer (whether χ(ℝ²) = 5), which no stall criterion inside a
+loop can separate from a hard stall; the new plan owns both.
 
 ## R6 — Unknown-unknowns of the instrument kind
 

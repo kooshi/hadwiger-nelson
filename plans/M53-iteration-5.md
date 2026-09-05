@@ -800,3 +800,97 @@ parts.
   points by count) is already a SECOND-HORN instance in substance — provably beyond in-field material,
   killed by out-of-field material — and the census tool reports it as such once the full-pool join is
   complete.
+
+## §R5. HALT (2026-09-05, Kooshi) — the field-wall conjecture is a THEOREM, and the milestone stops at phase D
+
+*Kooshi's instruction, verbatim in substance: another session, asked to write the field-wall
+conjecture up, proved it (`~/field-wall-conjecture.md`, §5); that session takes the reins for a
+new plan; this session reads the proof, considers what it means, wraps up what is in flight, and
+documents what is still viable. This section is that record. Every phase's artifacts are left in
+a resumable state and named below.*
+
+### The theorem, and how it was checked here
+
+**Theorem B** (the note's §5.3): χ(G(K²)) = 4 for K = ℚ(√3, √11) — every finite unit-distance graph
+with all coordinates in K is 4-colourable, and the Moser spindle (drawable in K, and K is the
+smallest field that draws it) shows four is needed. The colouring is EXPLICIT and search-free: in
+L = K(i) = ℚ(i, √3, √11), the prime 2 factors as (𝔭₁𝔭₂)² with residue fields 𝔽₄, the decomposition
+field of 2 is ℚ(√33) — real, so complex conjugation fixes each 𝔭ⱼ — and Theorem A (the note's §5.1)
+says a conjugation-fixed prime makes every unit vector a 𝔭-adic unit, so colouring a point by its
+residue mod 𝔭 (four residues) is proper on every unit edge. Woodall's 2-colouring of ℚ² is the same
+argument at 𝔭 = (1 + i). The wall's location (§6): for a real number field F, the argument works
+iff −1 is not a square in some 2-adic completion of F; for multiquadratic F = ℚ(√d₁, …), iff no
+odd element of the square-class group is ≡ 7 (mod 8). Adjoining √5 or √7 to K (equivalently √15,
+√21) breaks it — exactly the roots the known 5-forcers carry (de Grey: √5, √7; Heule: √5) — while
+√2, √10, √14, √35, √70 do not. **Spindles at even distance always break the wall** (4d² − 1 ≡ 7 mod
+8 for even d): de Grey's d = 2 and d = 4, Haugland's d = 2; spindles at d = 1, √3, 5 stay inside K.
+
+*Checked here, before believing (G30):* (i) the note's own decisive finite test (§9.4): the residue
+colouring on the Exoo–Ismailescu seed is **proper on all 1,004 unit edges, monochromatic on all 446
+distance-2 edges, and separates the forced pair, on BOTH 2-adic branches** (√33 ≡ 17 and ≡ −17 mod
+256); (ii) on our own 1,981-point iteration-4 object: **proper on all 13,796 unit edges, monochromatic
+on all 344 live seed distance-2 pairs, the pair 205/206 separated, both branches, zero search** —
+the unit part's 4-colourability, which every commit measured by a SAT ask, is a formula.
+`tools/residue_colouring.py`; `data/m53/residue-{seed,it4}.json`. Consistency with the record: M50's
+forced-equal pairs at 8/3 and 8/√3 are distances of positive 𝔭-adic valuation (the residue colouring
+makes them monochromatic); M34's "every 4-colouring of the plane has a mono distance-2 pair" is the
+statement 2 ∈ 𝔭; the seam lattices' χ = 4 (M24–M26) are instances.
+
+### What it means for M53, phase by phase (the honest reading)
+
+* **Phase D's first horn was a TRAP the theorem springs.** On B₀ = {7-35} the in-field pool killed
+  all 2,488 classes (§R4) — and by Theorem 7.1 (the note) in-field material can NEVER finish the
+  descent: a K-point unit-distance graph carries no pair compulsion at five colours, so the unit
+  part cannot cross 4 → 5 inside K, which the spare-colour lemma says must happen before the end.
+  The in-field pool is a provably non-terminating loop, however many cheats it removes. **Kooshi's
+  conditional (the in-field pool) is withdrawn by the theorem; decision 0′ is moot; P-M53-1's
+  refutation on B₀ is explained**: of course in-field points do the intermediate kills — they are
+  the high-degree ladder points (§R1's identity) — the endgame is what they cannot reach.
+* **The residual on the two-cheat stage is the first sighting of the wall from inside**: 3,936 of
+  81,787 classes (4.8 %) provably survive the in-field pool; the pdeg12 pass over them (340,292
+  points, 98 % out-of-field by count, 300-s walls, 28 workers, 11.4 h) read **5 killed, 0 survive,
+  3,676 unknown of 3,681 asked** (262 not asked; stopped at its checkpoint
+  `build/m53-p0/replay-pdeg12-b2/` at the halt) — the classes in-field material cannot kill are hard
+  for every material at five-minute asks. Whether WALL-BREAKING points (the √5-class 4,092 pairs,
+  the 2-adic-positive non-rational classes) kill them is the question the new plan inherits.
+* **The out-of-field pool as built (1,620,051 points) is the wrong cut**: most of it (√2, √14, √35,
+  √10, √70 classes and every non-rational class with −r a 2-adic non-square) is provably useless for
+  the endgame. The useful material is characterised: rational classes 5 and 7 (mod 8), and for a
+  general radicand r ∈ K the finite congruence test "−r₁ and −r₂ are squares in ℚ₂(√3)" over the two
+  2-adic embeddings (the note's §7.3). **An instrument to build: `tools/wall_break_test.py`** — the
+  exact 2-adic classifier per radicand, the sub-split of the out-of-field export into wall-breaking
+  and wall-preserving pools. Not built here.
+* **The χ(unit) monitor is retired for K-point objects** — the residue colouring IS the 4-colouring,
+  no ask needed — and returns as the theorem's contrapositive: the first commit that keeps a
+  wall-breaking point is the first commit where the crossing can happen.
+* **The cull, the spectrum, the cube front-end, the mint stand.** They measure the object, not the
+  field; the culled object's second-encoding certificate (A2) is still R3's open item.
+
+### The state of every M53 artifact at the halt (resumable, named)
+
+| phase | state | where | resume / run |
+|---|---|---|---|
+| A1 mint of `L4c` | NOT RUN (A2 first, by design) | `tools/commit_cull.py` (self-test green) | after A2: `python3 tools/commit_cull.py --object <L4> --cull data/m52/cull-result-it4.json --new-label <L4>-cull149 --onehot data/m52/final-certify-149.json --cube-onehot … --cube-binary3 … --sidecar-check build/m51-edges-<L4>+cull149.json --spectrum data/m53/spectrum-<L4c>.json` |
+| A2 cubed certificates of the 149-set | NOT RUN | `tools/cube_certify.py` (self-test green) | `python3 tools/cube_certify.py --edges build/m51-edges-<L4>+cull149.json --encoding onehot --split 4 --cube-cap 600 --max-depth 9 --workers 32 --out build/m53-cube/L4c-onehot`, then `--encoding binary3`; the planted red `--drop 7-35` first |
+| B spectrum | DONE | `data/m53/spectrum-<L4c>.json`, `build/m53-spectrum/<L4c>/` (§R3) | — |
+| B′ four-cheat cube sample / B″ | NOT RUN / EMPTY | — | `cube_certify --drop <one of the 46 undecided>` per cheat |
+| C pool + field split | DONE | `build/m51-pool-d5b1070e4055d241-depth1{,-infield,-outfield,-pdeg12}.{json,npz}` (§R1) | the wall-breaking sub-split is the missing export |
+| D1 batch | DONE at one cheat | `data/m53/batch-<L4c>.json`; lists under `build/m53-batch/<L4c>/step0{0,1}-*` | — |
+| D2 in-field replays | DONE | `build/m53-p0/replay-infield{,-b2}/` | — |
+| D3 residual passes | STOPPED at checkpoint (pdeg12); full/out-of-field never launched | `build/m53-p0/replay-pdeg12-b2/` | the same command resumes; a wall-breaking pool is the right next ask |
+| D4 census | DONE for B₀ (first horn, now read as the trap) | `data/m53/outfield-census-<L4c>.json`, `data/m53/vacuity-infield.json` | — |
+| E, F | NOT RUN | — | superseded by the new plan |
+
+### Predictions scored at the halt
+
+P-M53-1 **refuted on B₀** and explained by the theorem (in-field material suffices for intermediate
+kills; it cannot suffice for the end). P-M53-2 **missed decisively** (0 of 149 exact). P-M53-3 to
+P-M53-8 **not reached** — moot under the pivot. The registered post-pass sequence (§R2) stops at D4.
+
+### Carried unknowns (unchanged, plus the halt's)
+
+The 46 undecided cheats; the culled set's second encoding (A2, ready); D78 (the engine's resumed-cap
+count); the whole-object point shrink; the copies' partner lattice and the copy kill census after the
+crossing — the last two now read through the theorem: a copy rotated by a wall-breaking angle (ρ₁₅,
+√15 ∼ √5·√3) is the endgame's mechanism and the crossing cannot precede it. New: the wall-breaking
+sub-split of the out-of-field pool (the 2-adic classifier) and the residual's fate on it.

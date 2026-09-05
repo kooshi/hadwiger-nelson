@@ -355,3 +355,25 @@ serial bottleneck today; certify last because it needs the arithmetic and the re
 the driver loop with its halt clauses. That is the engine's roadmap after the current work
 orders, filed as its own stub.
 
+
+## The wall — a theorem, 2026-09-05 (`~/field-wall-conjecture.md`; this section supersedes 2′)
+
+**Theorem B.** Every finite unit-distance graph with all coordinates in K = ℚ(√3, √11) is 4-colourable;
+the colouring is explicit — the residue of a point modulo a conjugation-fixed prime of K(i) above 2
+(residue field 𝔽₄; every unit vector is a 𝔭-adic unit, so a unit step changes the residue; every
+distance of positive 𝔭-adic valuation — 2, 4, 2√3, 8/3, 8/√3 — never does). Checked on the seed and on
+the iteration-4 object with zero search (`tools/residue_colouring.py`). **Consequences for the loop:**
+(i) the unit part of a K-point object is 4-colourable by formula, so the χ(unit) monitor is retired for
+K-point objects; (ii) by the spare-colour lemma no K-point unit graph carries a pair compulsion at five
+colours, so the descent CANNOT END while its points stay in K — phase 2′'s in-field restriction (M53's
+conditional) is a provably non-terminating loop and is withdrawn; (iii) the material that can end it is
+characterised: a glue point breaks the wall iff its radicand r = 4/d² − 1 has −r a square in both 2-adic
+completions of K — for rational square classes exactly 5 and 7 (mod 8) (√5 ∼ √15, √7 ∼ √21; √2, √10,
+√14, √35, √70 never), for a general r a finite congruence test — so phase 2's pool gains a
+WALL-BREAKING sub-split (an instrument to build) and the design a field-aware tier over it; (iv) the
+classical endgame — a copy rotated by a spindle at an even distance (ρ₁₅ at d = 2 adjoins √15) — is a
+wall-breaking adjunction, which is why M52's copies made 5-chromatic unit graphs while every in-field
+commit left the unit part 4-colourable. Measured at M53 before the halt: the in-field pool (16,348
+points, 1 % of the depth-1 pool — ladder points fuse C(k,2) parent pairs) kills every class of a
+one-cheat batch and 95 % of a two-cheat stage's 81,787; the 4.8 % it provably cannot kill are hard for
+every material at five-minute asks on a 340k-point pool. The state table's next row is the new plan's.
