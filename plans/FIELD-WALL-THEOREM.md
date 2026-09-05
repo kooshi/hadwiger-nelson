@@ -346,6 +346,50 @@ distance d has sine √(4d² − 1)/(2d²). For an integer d, 4d² − 1 ≡ 7 (
 spindle rotations are at d = 2 (sine √15/8) and d = 4 (sine 3√7/32); Haugland's is at d = 2.
 Spindles at d = 1, √3 or 5 (radicands 3, 11, 99 = 9·11) stay inside K and cannot help.
 
+### 6.2′ The linear refinement, and the 3-adic wall
+
+Theorem A colours by the full residue class. When the residue field is larger than needed, a
+subgroup of it suffices.
+
+*Theorem A′.* Let 𝔭 be a conjugation-fixed prime of F(i) with residue field k, and let k₀ be the
+residue field of 𝔮 = 𝔭 ∩ F. Every unit vector reduces into the norm-one group C = {c ∈ k× : c·c̄ = 1}
+(conjugation acts on k as the k₀-Frobenius). If H ⊆ k is an additive subgroup with H ∩ C = ∅, then
+z ↦ (z mod 𝔭) + H is a proper colouring of G(F²) with [k : H] colours.
+
+*Proof.* A unit step changes the residue by an element of C, which is not in H. ∎
+
+*Corollary 6.6 (the 3-adic wall).* If F has a prime above 3 of residue degree one — some completion
+of F at 3 is ℚ₃ or a ramified extension of it — then χ(G(F²)) ≤ 3. More generally, if F has a prime
+above an odd p ≡ 3 (mod 4) of residue degree one, then χ(G(F²)) ≤ p.
+
+*Proof.* Such a 𝔮 has residue field 𝔽_p in which −1 is not a square, so 𝔮 is inert in F(i): the
+prime above it is conjugation-fixed with residue field 𝔽_{p²}, and C has order p + 1. The 𝔽_p-lines
+of 𝔽_{p²} number p + 1; a line through c ∈ C meets C exactly in {c, −c} (λc ∈ C forces λ² = 1), so
+exactly (p + 1)/2 lines meet C and the others avoid it. Take H to be one of them: p colours. ∎
+
+Consequences for the small fields:
+
+* **χ(G(ℚ(√3)²)) = 3.** The prime 3 ramifies in ℚ(√3) with residue field 𝔽₃, so three colours
+  suffice, and the equilateral triangle needs three.
+* **χ(G(ℚ(√7)²)) = 3.** The prime 3 splits in ℚ(√7) (7 ≡ 1 mod 3); the 5-cycle of Corollary 6.5
+  needs three.
+* **K = ℚ(√3, √11) escapes.** Its primes above 3 have residue field 𝔽₉ (11 is not a square mod 3),
+  which contains √−1, so they split in K(i) and Theorem A′ has nothing to colour with: consistent
+  with the Moser spindle in K.
+* **Every field containing a Moser spindle passes both walls.** χ ≥ 4 needs: no conjugation-fixed
+  prime above 3 with residue field 𝔽₃ (Corollary 6.6), and — this is the content of §6.1–6.2 — a
+  4-chromatic graph is still allowed behind the 2-adic wall. χ ≥ 5 needs the 2-adic wall broken as
+  well. The residue method's thresholds below 7 are exactly 2, 3 and 4; 5, 6 and 7 are invisible to it.
+* **The smallest quadratic candidates for χ ≥ 4 without triangles** are ℚ(√d) with d ≡ 7 (mod 8)
+  (2-adic wall broken) and d ≡ 2 (mod 3) (3 inert, so no residue-𝔽₃ prime): d ≡ 23 (mod 24) —
+  ℚ(√23), ℚ(√47), ℚ(√71), …. Whether any of these planes needs four colours is open; the 8/√3
+  witness of §7.5 lives in ℚ(√3, √11, √23).
+
+Define the **residue chromatic number** χ_res(F) as the least [k : H] over all conjugation-fixed
+primes 𝔭 of F(i) and all additive H ⊆ k avoiding C. Then χ(G(F²)) ≤ χ_res(F), with χ_res(ℚ) = 2,
+χ_res(ℚ(√3)) = χ_res(ℚ(√7)) = 3, χ_res(K) = 4 (each tight), and χ_res = 11 already for Heule's
+field ℚ(√3, √5, √11) — above the plane's own 7, so the invariant says nothing there.
+
 ### 6.3 Reading the known constructions through the wall
 
 Every published 5-chromatic unit-distance graph has the shape *K-fabric plus a wall-breaking
@@ -560,9 +604,9 @@ suggests — is the following.
    (d = 7, 15, 23, 31, …). These planes contain no equilateral triangle. What are their chromatic
    numbers? Any 5-chromatic unit-distance graph in one of them would be triangle-free and would live
    in a quadratic field — the smallest conceivable coordinate field for such a graph.
-4. **Exactness of the residue bound.** For ℚ(√3), ℚ(√5), ℚ(√11) the method gives 4; the true values
-   are 3 or 4 (ℚ(√3) contains triangles), respectively 2, 3 or 4. Are any of these 4? For K the
-   answer is 4 by the Moser spindle; for ℚ(√3) alone the spindle is unavailable (Lemma 4.1).
+4. **Exactness of the residue bound.** With Theorem A′, ℚ(√3) and ℚ(√7) are settled at 3. For ℚ(√5)
+   and ℚ(√11) the invariant gives 4 and the truth is 2, 3 or 4 (neither has triangles; ℚ(√11)²
+   contains the Moser twist ρ = (5 + i√11)/6 as a unit vector). Are either of these 4-chromatic?
 5. **Additive versus arbitrary colourings.** The colouring of Theorem B is additive in Fischer's
    sense. Where the residue method fails, could a non-additive colouring still succeed? For
    ℚ(√3, √5, √11) Heule's graph says no at four colours. Whether Theorem B itself, or the

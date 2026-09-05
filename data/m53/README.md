@@ -12,3 +12,11 @@ springs); `vacuity-infield.json` — an explicit proper 5-colouring of the objec
 in-field pool (kills non-vacuous); `residue-seed.json`, `residue-it4.json` — the theorem's residue
 4-colouring validated on the seed and on the 1,981-point object; `cube-certify-*` — none (A2 not run).
 The engine checkpoints (`build/m53-*`) are resumable; the pdeg12 residual pass stopped at 3,681 of 3,936.
+
+## Added by the field-wall session (2026-09-05; see `plans/FIELD-WALL-SESSION-HANDOFF.md`)
+
+* `residue-floor-it4c.json` — Σ(C′) on the culled object, the odd-cycle census, the residue-type scan (`tools/residue_floor.py`).
+* `wallbreak-it4.json` — the exact 2-adic classification of all 1,435 radicands (`tools/wall_break_test.py`).
+* `mono-census-it4.json`, `rigidity-dial-it4.json` — the rigidity dial's denominators and the exact four-colour sweep.
+* `forced-spindle-full.json`, `forced-spindle-core-8over3.json`, `forced-spindle-full-8oversqrt3.json` — the new 5-chromatic witnesses (`tools/forced_spindle.py`).
+* `replay-wall-b2/`, `replay-partner-sample/` — the wall-breaking and partner-pool replays of the two-cheat stage's in-field survivors.
