@@ -521,3 +521,50 @@ natCast_im` and the zero hypotheses closes every closure/hom field without leavi
 the instance module 13.9 s in the probe, of which the 14,641-pair `decide` is the bulk; `heule510_sevenFree` under a
 second (510 table walks). No `maxHeartbeats` raised anywhere; `maxRecDepth 100000` set in the instance module as
 `Heule510/Valid.lean` does.
+
+## §M3. Experience-modeling pass (2026-09-06; fresh Skill invocation)
+
+**The kernel surface, as a consumer walks it.** A reader holding `χ(UD(𝔽₁₁, 2)) = 5` in mind searches for "finite plane";
+the object was `unitQuadrance (ZMod 11)`, correct and unrecognizable. Added `finitePlane p := unitQuadrance (ZMod p)` as an
+`abbrev` — reducible, so every `unitQuadrance` lemma applies unchanged — and the headline reads `(finitePlane 11).chromaticNumber
+= 5`. The kernel, the plan and the instrument now share one word for the object. `unitQuadrance_adj` is `@[simp]` toward the
+arithmetic form, the house pattern (`edgeGraph_adj`, `unitDistance_adj`): a goal leaves graph vocabulary for a ring identity
+`linear_combination` closes. `unitQuadrance.map` keeps its name — Mathlib's `Foo.map f` is the functorial action on a
+morphism (`Subring.map`, `Finset.map`), and that is what it is. `Adjoin.lift_apply` stays a `@[simp]` `rfl` lemma: it is the
+only reasoning surface `lift` owns, and it fires exactly when `map_*` has been exhausted. `Q3.lift`/`Q4.lift` get no apply
+lemma (`decide` evaluates them by unfolding; no human consumer computes them). `Q4.res131` moved out of the spec section to
+sit beside `Q4.lift` — a spec section is not where a consumer looks for the residue hom the 131 instance uses. `res11` became
+`Q4.sevenFree.res11`: parallel to `Q4.res131`, and its home is the field's order, not the witness — any `√7`-free certificate
+reduces through it. `heule510_sevenFree` became `heule510_coordsIn_sevenFree` (the statement's own vocabulary), `heule510Reduce`
+became `heule510Reduce11` (the prime is part of what it is; the 131 hom is inline). `UDCert.coord_quadrance` is public with a
+docstring: it is the piece any third reduction target reuses. Everything else kept its name.
+
+**Pins added** (data the theorems cannot pin): the circle at `11` has `12` points (`decide` over `Finset.univ.filter`); the
+colouring uses all five colours (`∀ c, ∃ v, …` by `decide` — the table witnesses `χ = 5`, not `≤ 5` with a colour to spare);
+three `#guard`s on table entries so a regenerated table is caught at the build.
+
+**Docstrings.** Both module docs state what a consumer may and may not conclude: the reduction is the kernel's and holds
+over every commutative ring; the hand theorem's integrality step (from the field to the certificate form) is NOT formalized;
+the plane's value is on the standard three axioms; the instance module says which two `decide`s it runs and that no edge of
+Heule-510 is re-examined.
+
+**Placement.** `Proofs.lean`: `UnitQuadrance` in the general block after `EdgeList`; `Instances.FinitePlane11` after
+`Instances.Heule510.Bound`. `scripts/Axioms.lean`: an M58 block — `unitQuadrance_adj`, `UDCert.drawing_adj`,
+`UDCert.colorable_of_unitQuadrance`, `UDCert.add_one_le_chromaticNumber_unitQuadrance`, `heule510_coordsIn_sevenFree`,
+`finitePlane11_colorable_five`, `finitePlane11_not_colorable_four`, `chromaticNumber_finitePlane11`, `heule510_colorable_five`,
+`chromaticNumber_heule510`, `five_le_chromaticNumber_finitePlane131`.
+
+**The instrument's surface** (`tools/fplane.py`, extended): `spectral --p P` (one character sum per norm class; the Kloosterman
+identity as a self-check; the full 2-D FFT as a cross-check; λ_min, the Hoffman number, its integer consequence, the float
+error bound — in the record and in the headline), `spectral --all-below B` (the table), `shadow <stage> --p P [--k K]` (the
+direction residues up to sign, |D|, the spectral floor, χ by SAT on request), `map` (the field table with the exact 2-adic
+criterion — an odd square class ≡ 7 mod 8 among the products — the usable primes, the sealing prime and its record, the
+verdict in the vocabulary `sealed-at-4 (Theorem B)` / `sealed-at-5 (p, record)` / `6-open (spectral ≥ 67; record below)` /
+`open-pending (p)`), `chi --pin-clique` (a maximal clique through the origin pinned, palette symmetry gone). **Every headline
+carries its population and its conditioning** (G21): "UD(F_23,2): 529 vertices, degree 24, ω = 3: k = 5 UNSAT after N s
+(the solver's claim); spectral floor 4.02". `self-test` gains: the Kloosterman residual at 11 and 23 (< 1e-6), Hoffman at 59
+> 5 and at 47 < 5, the wall criterion on G35's eight classes (exactly 5 and 7 break), the planted single-pair shadow
+(2-chromatic), and a planted sign flip of λ_min that the FFT cross-check must catch.
+
+**`data/fplane/README.md`** is rewritten at the close with a kernel column: which values are kernel-certified (11 exactly;
+131 ≥ 5; Heule-510 = 5) and which are tools-only (every `chi` UNSAT, every `spectral` row, every `shadow`).

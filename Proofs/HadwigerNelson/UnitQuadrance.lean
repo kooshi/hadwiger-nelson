@@ -51,10 +51,17 @@ plane `UD(𝔽_p, 2)` at `R = ZMod p`, the real plane in coordinates at `R = ℝ
 def unitQuadrance (R : Type*) [CommRing R] : SimpleGraph (R × R) :=
   addCayley {v : R × R | v.1 ^ 2 + v.2 ^ 2 = 1}
 
+/-- **The finite Euclidean plane** `UD(𝔽_p, 2)` — Vinh's unit-quadrance graph of `𝔽_p`, the Cayley graph of
+`𝔽_p²` on the circle. An abbreviation, so every lemma about `unitQuadrance` applies to it unchanged; it
+exists so that the milestone's headline reads in the domain's words. -/
+abbrev finitePlane (p : ℕ) : SimpleGraph (ZMod p × ZMod p) := unitQuadrance (ZMod p)
+
 variable {R S : Type*} [CommRing R] [CommRing S]
 
 /-- Adjacency is unit quadrance of the difference — the reasoning surface; never unfold
-`unitQuadrance`. -/
+`unitQuadrance`. `@[simp]` toward the arithmetic form, as `edgeGraph_adj` and `unitDistance_adj` are:
+goals leave graph vocabulary for ring identities, where `linear_combination` and `decide` close them. -/
+@[simp]
 theorem unitQuadrance_adj {u v : R × R} :
     (unitQuadrance R).Adj u v ↔ u ≠ v ∧ (u.1 - v.1) ^ 2 + (u.2 - v.2) ^ 2 = 1 := by
   rw [unitQuadrance, addCayley_adj]
@@ -123,6 +130,15 @@ def Q4.lift (r₃ r₅ r₇ r₁₁ : R) (h₃ : r₃ ^ 2 = 3) (h₅ : r₅ ^ 2 
     (h₁₁ : r₁₁ ^ 2 = 11) : Q4 →+* R :=
   Adjoin.lift (Adjoin.lift (Adjoin.lift (Adjoin.lift (Int.castRingHom R) r₃ (by simpa using h₃))
     r₅ (by simpa using h₅)) r₇ (by simpa using h₇)) r₁₁ (by simpa using h₁₁)
+
+instance : Fact (1 < 131) := ⟨by decide⟩
+
+/-- **The residue hom at `131`** on the whole tower (`38² = 3`, `23² = 5`, `20² = 7`, `50² = 11` in
+`ZMod 131`): the first usable prime of de Grey's field, where every radicand is a residue. Stated on
+`⊤ : Subring Q4` so that it feeds the reduction theorem directly with `coordsIn_top`. -/
+def Q4.res131 : (⊤ : Subring Q4) →+* ZMod 131 :=
+  (Q4.lift (R := ZMod 131) 38 23 20 50 (by decide) (by decide) (by decide) (by decide)).comp
+    (Subring.subtype ⊤)
 
 /-- **The `√7`-free subring** of the tower: the tower is `Adjoin 11 (Adjoin 7 (Adjoin 5 (Adjoin 3 ℤ)))`, so
 the `√7`-coefficients of `x` are the inner `.im` of each `√11`-component. Closed under the ring
@@ -271,9 +287,12 @@ there. The unit pair drawn at `131` through the whole tower is the positive mode
 
 section Spec
 
-example : (unitQuadrance (ZMod 3)).Adj (0, 0) (0, 1) := by decide
-example : ¬ (unitQuadrance (ZMod 3)).Adj (0, 0) (1, 1) := by decide
-example : ¬ (unitQuadrance (ZMod 3)).Adj (0, 0) (0, 0) := by decide
+example : (finitePlane 3).Adj (0, 0) (0, 1) := by decide
+example : ¬ (finitePlane 3).Adj (0, 0) (1, 1) := by decide
+example : ¬ (finitePlane 3).Adj (0, 0) (0, 0) := by decide
+
+/-- The circle of `𝔽₁₁` has `p + 1 = 12` points (`p ≡ 3 (mod 4)`): the plane's degree. -/
+example : (Finset.univ.filter fun v : ZMod 11 × ZMod 11 => v.1 ^ 2 + v.2 ^ 2 = 1).card = 12 := by decide
 
 /-- The unit pair `(0,0)`, `(11,0)` at denominator `11`: valid, and at `p = 11` there is no inverse. -/
 private def unitPair11 : UDCert 2 where
@@ -291,16 +310,9 @@ private def unitPair : UDCert 2 where
   edges := [(0, 1)]
   denom := 1
 
-instance : Fact (1 < 131) := ⟨by decide⟩
-
-/-- The residue hom at `131` on the whole tower (`38² = 3`, `23² = 5`, `20² = 7`, `50² = 11`). -/
-def Q4.res131 : (⊤ : Subring Q4) →+* ZMod 131 :=
-  (Q4.lift (R := ZMod 131) 38 23 20 50 (by decide) (by decide) (by decide) (by decide)).comp
-    (Subring.subtype ⊤)
-
 example : unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 1 = (1, 0) := by decide
 
-example : (unitQuadrance (ZMod 131)).Adj (unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 0)
+example : (finitePlane 131).Adj (unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 0)
     (unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 1) :=
   unitPair.drawing_adj Q4.res131 unitPair.coordsIn_top (by decide) (by decide)
     (edgeGraph_adj_of_mem (by decide) (by decide))

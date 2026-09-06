@@ -15,7 +15,7 @@ table back to Heule-510 — the kernel's first UPPER bound on a certified 5-chro
 
 `7` is not a square modulo `11`, so no ring hom `Q4 →+* ZMod 11` exists. Heule's coordinates live in
 `ℚ(√3, √5, √11)`, a subfield of the M02 tower whose `√7`-parts are identically zero (`Heule510.lean`'s
-module doc says so; here the kernel checks it, `heule510_sevenFree`). The `√7`-free elements are the
+module doc says so; here the kernel checks it, `heule510_coordsIn_sevenFree`). The `√7`-free elements are the
 subring `Q4.sevenFree ≅ Q3 = ℤ[√3, √5, √11]`, and the residue hom `Q3 →+* ZMod 11` exists:
 `√3 ↦ 5, √5 ↦ 4, √11 ↦ 0` (`5² = 3`, `4² = 5`, `0² = 0 = 11`).
 
@@ -43,21 +43,24 @@ open SimpleGraph
 
 instance : Fact (1 < 11) := ⟨by decide⟩
 
-/-- `√3 ↦ 5, √5 ↦ 4, √11 ↦ 0` on `Q3`, then along `Q4.sevenFree ≅ Q3`. -/
-def res11 : Q4.sevenFree →+* ZMod 11 :=
+/-- **The residue hom at `11`** on the `√7`-free subring: `√3 ↦ 5, √5 ↦ 4, √11 ↦ 0` on `Q3`, along
+`Q4.sevenFree ≅ Q3`. Its home is Heule's field's order, not the witness: any `√7`-free certificate
+reduces through it. -/
+def Q4.sevenFree.res11 : Q4.sevenFree →+* ZMod 11 :=
   (Q3.lift (R := ZMod 11) 5 4 0 (by decide) (by decide) (by decide)).comp Q4.sevenFree.toQ3
 
 /-! ### Heule-510 reduces -/
 
 /-- **P8**: the certified table is `√7`-free at all 510 points — the module doc's claim, now checked. -/
-theorem heule510_sevenFree : heule510.CoordsIn Q4.sevenFree := by decide +kernel
+theorem heule510_coordsIn_sevenFree : heule510.CoordsIn Q4.sevenFree := by decide +kernel
 
 /-- `7 · 96 = 672 = 61 · 11 + 1`: the denominator's inverse mod `11`. -/
 theorem heule510_denom_inv : (7 : ZMod 11) * heule510.denom = 1 := by decide
 
-/-- The reduction of Heule-510 into the plane at `11`. -/
-def heule510Reduce : edgeGraph 510 heule510.edges →g unitQuadrance (ZMod 11) :=
-  heule510.drawingHom res11 heule510_sevenFree heule510_denom_inv heule510_valid
+/-- **The reduction of Heule-510 into the plane at `11`**, as a graph homomorphism — every listed edge
+lands on the circle, by `heule510_valid` through `UDCert.drawing_adj`; no edge is re-examined. -/
+def heule510Reduce11 : edgeGraph 510 heule510.edges →g finitePlane 11 :=
+  heule510.drawingHom Q4.sevenFree.res11 heule510_coordsIn_sevenFree heule510_denom_inv heule510_valid
 
 /-! ### The plane's colouring -/
 
@@ -75,20 +78,30 @@ def finitePlane11Colouring (v : ZMod 11 × ZMod 11) : Fin 5 := finitePlane11Tabl
 
 /-- Proper: decided over every pair of points of the plane. -/
 theorem finitePlane11_colouring_proper :
-    ∀ {u v : ZMod 11 × ZMod 11}, (unitQuadrance (ZMod 11)).Adj u v →
+    ∀ {u v : ZMod 11 × ZMod 11}, (finitePlane 11).Adj u v →
       finitePlane11Colouring u ≠ finitePlane11Colouring v := by
   decide +kernel
 
+/-- The colouring uses all five colours — so the table is a witness for `χ = 5` in both directions'
+vocabulary, not merely `≤ 5` with a colour to spare. -/
+example : ∀ c : Fin 5, ∃ v, finitePlane11Colouring v = c := by decide
+
+-- The data, pinned: the origin's colour and the far corner's, so a regenerated table that silently
+-- changed is caught at the build.
+#guard finitePlane11Table 0 0 = 0
+#guard finitePlane11Table 10 10 = 0
+#guard finitePlane11Table 3 4 = 4
+
 /-- **`χ(UD(𝔽₁₁, 2)) ≤ 5`**, by the verified table. -/
-theorem finitePlane11_colorable_five : (unitQuadrance (ZMod 11)).Colorable 5 :=
+theorem finitePlane11_colorable_five : (finitePlane 11).Colorable 5 :=
   ⟨Coloring.mk finitePlane11Colouring finitePlane11_colouring_proper⟩
 
 /-- **`χ(UD(𝔽₁₁, 2)) > 4`**: a 4-colouring of the plane would pull back to Heule-510. No solver. -/
-theorem finitePlane11_not_colorable_four : ¬ (unitQuadrance (ZMod 11)).Colorable 4 :=
-  fun h => heule510_not_colorable_four (Colorable.of_hom heule510Reduce h)
+theorem finitePlane11_not_colorable_four : ¬ (finitePlane 11).Colorable 4 :=
+  fun h => heule510_not_colorable_four (Colorable.of_hom heule510Reduce11 h)
 
 /-- **`χ(UD(𝔽₁₁, 2)) = 5`.** -/
-theorem chromaticNumber_finitePlane11 : (unitQuadrance (ZMod 11)).chromaticNumber = 5 :=
+theorem chromaticNumber_finitePlane11 : (finitePlane 11).chromaticNumber = 5 :=
   chromaticNumber_eq_iff_colorable_not_colorable.mpr
     ⟨finitePlane11_colorable_five, finitePlane11_not_colorable_four⟩
 
@@ -97,7 +110,7 @@ theorem chromaticNumber_finitePlane11 : (unitQuadrance (ZMod 11)).chromaticNumbe
 /-- **`χ(Heule-510) ≤ 5`**, the plane's colouring pulled back — the first certified upper bound on a
 certified 5-chromatic witness. -/
 theorem heule510_colorable_five : (edgeGraph 510 heule510.edges).Colorable 5 :=
-  Colorable.of_hom heule510Reduce finitePlane11_colorable_five
+  Colorable.of_hom heule510Reduce11 finitePlane11_colorable_five
 
 /-- **`χ(Heule-510) = 5` exactly.** -/
 theorem chromaticNumber_heule510 : (edgeGraph 510 heule510.edges).chromaticNumber = 5 :=
@@ -113,7 +126,7 @@ floor, and the second instance of one theorem.) -/
 /-- `116 · 96 = 11136 = 85 · 131 + 1`: the denominator's inverse mod `131`. -/
 theorem heule510_denom_inv131 : (116 : ZMod 131) * heule510.denom = 1 := by decide
 
-theorem five_le_chromaticNumber_finitePlane131 : 5 ≤ (unitQuadrance (ZMod 131)).chromaticNumber :=
+theorem five_le_chromaticNumber_finitePlane131 : 5 ≤ (finitePlane 131).chromaticNumber :=
   heule510.add_one_le_chromaticNumber_unitQuadrance Q4.res131 heule510.coordsIn_top
     heule510_denom_inv131 heule510_valid heule510_not_colorable_four
 
@@ -125,7 +138,7 @@ example : ¬ ((4 : ZMod 11) ^ 2 = 3) := by decide
 
 /-- A corrupted table is refused: paint the origin with colour `1`, and its neighbour `(0, 1)` — already
 colour `1` — becomes a monochromatic edge. -/
-example : ∃ u v : ZMod 11 × ZMod 11, (unitQuadrance (ZMod 11)).Adj u v ∧
+example : ∃ u v : ZMod 11 × ZMod 11, (finitePlane 11).Adj u v ∧
     Function.update finitePlane11Colouring (0, 0) 1 u = Function.update finitePlane11Colouring (0, 0) 1 v :=
   ⟨(0, 0), (0, 1), by decide, by decide⟩
 
