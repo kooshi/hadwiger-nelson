@@ -740,3 +740,15 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
 * **T31 — the loose-incidence count as a tightness gauge for CHEATS.** On the seed, G's cheats close every {a, b}-subgraph
   (γ 1,098 → 0) and H's attachment leaves 12; the 252-subset keeps the forcing with the family open. Does γ over the
   cheat set predict the size of the colouring space (35 vs > 5,000), i.e. is γ the dial the descent should have read?
+
+### The finite-plane pivot (2026-09-06)
+
+* **T32 — which finite planes refuse five colours, and is 11 the last 5-sealing prime?** χ(UD(𝔽_p, 2)) is 3, 4, 5, 5 at
+  p = 3, 7, 11, 13 (13 ≡ 1 mod 4: not usable). For the usable primes 19, 23, …, 83, 107, 131: the first p whose plane
+  refuses five is the first prime that seals nothing; if every usable p ≥ 19 has χ ≥ 6, then for multiquadratic fields
+  "6-open" is exactly "some radicand is a quadratic non-residue mod 11" and de Grey's field, K(√7), K(√35) are open. FS-7.
+* **T33 — the reduction as a kernel theorem.** The homomorphism for a SPECIFIC certified graph is a decide over its edge
+  list (Heule-510 → UD(𝔽₁₁,2): 2,504 checks), and χ(UD(𝔽₁₁,2)) = 5 follows in the kernel from the 121-point colouring plus
+  Heule-510's certified refusal of four colours — no LRAT. The GENERAL statement "χ(ℚ(√3,√5,√11)²) ≤ 5" quantifies over all
+  finite unit-distance graphs in the field and needs the integrality of unit vectors at the inert prime (a valuation
+  argument); priced in FS-7 phase C.

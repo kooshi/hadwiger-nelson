@@ -66,7 +66,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M57 CLOSED (additive rigidity), 2026-09-06.**
+**Last updated: the finite-plane pivot, 2026-09-06 (after M57 CLOSED the same day).**
 
 ### Where the problem stands
 
@@ -990,6 +990,23 @@ purchase: the unit parts inside K are 4-colourable (no rigidity possible), the w
 five orders of magnitude, and the one thickening that moves redundancy erases the family. What it leaves is exact: the
 gauge, the kernel target, and G as the single object that meets it — with cheats.
 
+**The pivot of 2026-09-06 — the finite-plane bound (Kooshi's web-Claude session, `reference/Chat-analysis/`; VERIFIED
+here, `reference/Chat-analysis/VERIFICATION.md`).** Theorem B coloured the residue plane 𝔽_p² LINEARLY, and that is why the
+additive method's next values after 4 were 7 and 11 (G38): the residue map of a unit-distance graph in F² at a degree-one
+prime 𝔭 above p ≡ 3 (mod 4) lands in the finite Euclidean plane UD(𝔽_p, 2) = Cay(𝔽_p², {a² + b² = 1}) as a graph
+HOMOMORPHISM (𝔭 is inert in F(i) since 𝔽_p lacks √−1, conjugation reduces to Frobenius, unit vectors are integral, and an
+edge reduces to a circle difference), so **χ(F²) ≤ χ(UD(𝔽_p, 2))** — the finite plane's OWN chromatic number, which is not
+linear: **χ(UD(𝔽₁₁, 2)) = 5** (four refused, five found and verified; Vinh 2005 computed only p = 7, where it is 4).
+Instantiated exactly on our objects: Heule-510 reduces modulo the prime above 11 with all 2,504 edges on the circle and the
+pulled-back 5-colouring proper (so the lower half needs no solver — Heule-510 is kernel-certified 5-chromatic), W with all
+5,773, the seed with all 1,004. **Hence χ(ℚ(√3, √5, √11)²) = 5 and χ(K(√247)²) = 5 exactly — the first exact values of
+wall-broken planes — and every field the descent ever used (K, K(√5), K(√247), K(√5, √247), Heule's) is 5-SEALED: no
+6-chromatic unit-distance graph has its coordinates there.** De Grey's field has no usable prime below 131 (√7 makes 11
+inert), K(√7) has 83 first, K(√35) has 107 first; whether those planes refuse five colours decides whether those fields are
+6-open, and that is the field sieve (FS-7, opening as M58). Novelty is provisional (Vinh and the library's number-field
+papers do not contain the bound; Soifer 2024 unread). Not kernel-checked: the reduction is a hand proof, the plane's value a
+verified colouring plus the solver's refusal — priced in the stub.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -1060,13 +1077,19 @@ gauge, the kernel target, and G as the single object that meets it — with chea
 | 50 | **The additive yardstick, and the seed's arithmetic tightness** (M56). **Kernel** (`Additive.lean`, standard three axioms): `additiveColoring` (a hom nonzero on edge differences is a `Coloring`), `not_forces_of_addMonoidHom` / `not_separated_of_addMonoidHom` (the refutations in the `Forces`/`Separated` vocabulary), `addMonoidHom_apply_eq_of_sub_eq_nsmul` and its `exponent` instance (L1); spec: the grid's parity colouring, three examples, the planted red (the zero hom refused). **Derived** (plan §S1, §M1, §R3): L2 F_true ⊆ F_add; L3 rank ≤ 4 for every K-object; L5 the ℤ/5 arithmetic of distances 2, 3, 4, 5; L7 1/d² ∈ Σ₀ from every spindle rotation, so no additive k ≤ 10 on any wall-broken plane; the Kempe localization F_true ⊆ F_K; L8 the additive spindle theorem. **Measured** (`tools/additive.py`, 27 controls incl. the residue colourings reproduced 2-adically; `data/m56/`): the bed U at 4 — 8 additive colourings, F_add = depth ≥ 2 (2,513 pairs), F_K = 187, F_true = 171 (a 16-pair residue); the seed at 5 — F_add = {(205, 206)} over 21,787 pairs, 18 of 35 colourings additive, the rest at defect ≤ 2, Exoo–Ismailescu's G exactly additive (18 = 18); the witnesses — no additive 4-colouring on any (the 1581's cross edge and W's spindle chord in 4Λ; Heule-510 and the 791 by hyperplane cover), additive 5-colourings 24 / 432 / ≥ 2,981, every additively forced pair separated non-additively (Heule's 91 by asks, W's 291 and the 1581's 356 by the complete sweeps), sampled colourings at the random baseline from both families. Fischer's framework; the chunk theory, the localization, L7/L8 and the seed reading are ours. | `Proofs/HadwigerNelson/Additive.lean`, `tools/additive.py`, `data/m56/`, `plans/M56-arithmetic-of-tightness.md` §R | M56 |
 | 51 | **Additive rigidity: the reduction theorem, the closure gauge, and where the family dies** (M57). **Kernel** (`AdditiveRigid.lean`, standard three axioms): `IsAdditive q C` (a coset colouring along an address map — the same-colour relation is the trace of the cosets of a subgroup containing k·V; the iff is the content), `AdditivelyRigid`, the bridge from homs and from M56's `additiveColoring`, `IsAdditive.apply_eq` (L1), **`forces_of_additivelyRigid`**, `add_one_le_chromaticNumber_unitDistance_of_additivelyRigid`, **`six_le_chromaticNumber_plane_of_additivelyRigid`** (the target: all 5-colourings additive + a 5Λ-pair at distance ≥ 1/2 ⟹ χ ≥ 6), the unit path as the model (`three_le_chromaticNumber_plane_of_pathGraph`), two reds (`cycleGraph 6` at three pins `k • v ∈ H` and ←; the path at three pins →). **Derived**: rigidity ⟹ Kempe-closure (every {a, b}-subgraph of every admissible hom connected), γ = Σ (components − 1) with loose vertices its size-1 face; on three-ladder K-material the residue colourings' Λ_c have rank ≤ 3, so no such chunk is additively 4-rigid. **Measured** (`tools/additive_rigid.py`, 17 controls; `data/m57/`): the Moser spindle 16/12/4 at four colours (P1 refuted); G γ = 0 with 18 = 18 (P10); H γ = 12 = its defect-1 count; the 122-/588-cores and the seed's unit part γ = 200/182/126 at four, the solver's first 2,000 colourings all non-additive; the witnesses at five loose on 16–24 % per colouring; W's 71 cross points: 67 in-lattice, the gauge within 1.4 %, kills to 110/200; W + 63 cross points: 500 units in 5Λ, no hom (the depth-2 stage vacuous at every radius); Heule-510: 3,456 homs to r² ≤ 3, 96 whole; the 252-cheat forcing subset: > 5,000 colourings in three defect regimes. Fischer's framework; the closure gauge, the reduction, the 5-divisibility of the cross lattice and the G/H reading are ours. | `Proofs/HadwigerNelson/AdditiveRigid.lean`, `tools/{additive_rigid,m57_b2,m57_richness}.py`, `data/m57/`, `plans/M57-additive-rigidity.md` §R | M57 |
 
+| 52 | **The finite-plane bound and the first exact wall-broken planes** (the pivot of 2026-09-06; hand proof + verified computation, NOT kernel-checked). Theorem: F ⊂ ℝ a number field with a prime above p ≡ 3 (mod 4) of odd residue degree ⟹ every finite unit-distance graph in F² maps homomorphically into UD(𝔽_p, 2), so χ(F²) ≤ χ(UD(𝔽_p, 2)). Measured: χ(UD(𝔽₃,2)) = 3, χ(UD(𝔽₇,2)) = 4 (Vinh 2005), **χ(UD(𝔽₁₁,2)) = 5**, χ(UD(𝔽₁₃,2)) = 5 (p ≡ 1: not usable); Heule-510 → UD(𝔽₁₁,2) with 2,504/2,504 edges on the circle and a proper pulled-back 5-colouring; W 5,773/5,773; the seed 1,004/1,004. **χ(ℚ(√3,√5,√11)²) = χ(K(√247)²) = 5**; K, K(√5), K(√5,√247) sealed; de Grey's field's first usable prime is 131. The theorem and the value are the web session's; the verification, the instrument (`tools/fplane.py`, 11 controls incl. a planted wrong root) and the field consequences as stated are ours. | `reference/Chat-analysis/`, `tools/fplane.py`, `data/fplane/` | pivot |
+
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
 
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
-(WORKFLOW step 9). **Re-ranked at the M57 close, 2026-09-06:** FS-1 is CLOSED as M57 (the principle is exact and, on every
+(WORKFLOW step 9). **Re-ranked at the finite-plane pivot, 2026-09-06, after the M57 close (Kooshi: stubs for all, then the
+field sieve):** rank 1 FS-7 the field sieve (`plans/STUB-field-sieve.md`, opening as M58 — which fields can host a 6-forcer;
+the exact wall-broken planes; the kernel certificate of χ(UD(𝔽₁₁,2)) = 5 through the certified Heule-510); rank 2 FS-6 on de
+Grey's field only; rank 3 FS-2 re-aimed with its scope note; rank 4 FS-8 the Haugland 7-adic check (new); FS-4, FS-5; FS-3
+DEMOTED (K(√247) is 5-sealed). The M57-close text follows for the record. **Re-ranked at the M57 close, 2026-09-06:** FS-1 is CLOSED as M57 (the principle is exact and, on every
 object we hold, without purchase); the table's top is now FS-2 the Kempe classes, re-aimed by G42 (b) at what carries
 forcing when the family does not — the 252-cheat object and K-fabric's 16-pair residue; FS-3 thickened material, with
 the additive pre-filter it planned now VACUOUS on F₂₄₇ (no ℤ/5-hom on the thickened stage) and its bearing unchanged;
@@ -2565,6 +2588,25 @@ record shows what was believed, what was measured, and what is now proved.
   re-aimed). Falsifiers: a unit-distance chunk in a wall-broken field with γ = 0 and a nonzero family; a thickening whose
   joint lattice stays 5-indivisible. Composes with G41 (the yardstick), G38 (additive bounds stop at four), G40 (thin
   material absorbed — here, thin material either does nothing to γ or kills the family).*
+
+* **G43 — The residue plane has its own chromatic number, and it seals fields.** (The pivot of 2026-09-06; hand proof +
+  verified measurement, kernel pending.) Every linear instrument — additive colourings, the fractional number, density,
+  Hoffman — is blind to the 5–7 interval by construction (χ_f(ℝ²) ≤ 4.36; the residue method's values jump 4 → 7), and the
+  step past it was already in Theorem B's own proof: the residue map at a degree-one prime above p ≡ 3 (mod 4) is a graph
+  homomorphism into the finite Euclidean plane UD(𝔽_p, 2), whose chromatic number is NOT linear — 5 at p = 11 where the
+  linear bound is 11. So χ(F²) ≤ χ(UD(𝔽_p, 2)) for every usable p, and the arithmetic that sees 5 is "which primes are
+  usable in F" (Legendre symbols, for multiquadratic fields) composed with "the chromatic number of a finite plane" (one
+  SAT call each, exact, kernel-promotable as a colouring plus a homomorphism). **[hand proof + measured]** *Consequences,
+  exact: every field the descent ever used is 5-sealed (11 is usable in K, K(√5), K(√247), Heule's); a field is 6-open only
+  if its smallest usable prime's plane refuses five colours — de Grey's (131), K(√7) (83), K(√35) (107) are the candidates;
+  and the profile of a 6-hosting field is now: the 2-adic wall broken (Theorem B) AND no degree-one prime above any p ≡ 3
+  (mod 4) whose plane is ≤ 5-chromatic. Readings on top, falsifiable: (a) 11 is the last 5-sealing prime (P4 of FS-7);
+  then "6-open" for multiquadratic fields is exactly "some radicand is a non-residue mod 11"; (b) the 𝔭-adic pullbacks are
+  the constructive wild colourings the upper-bound theorems (Townsend, Coulson, Thomassen) say a 6-colouring of ℝ² would have
+  to be — field by field, never gluing across fields; (c) Haugland's heptagonal field is 7-sealed unless his detuning
+  adjoins a 7-inert radical (FS-8). Composes with G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of one mechanism,
+  and "blind above four" was the linear reading), G42 (de Grey's field is the one place both the family and the 6-option
+  survive).*
 
 ## Whose work this is
 

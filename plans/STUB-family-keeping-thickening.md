@@ -1,4 +1,11 @@
-# FS-6 — A family-keeping thickening: where M57's principle could bite (STUB, 2026-09-06, minted at the M57 close)
+# FS-6 — A family-keeping thickening: where M57's principle could bite (STUB, 2026-09-06, minted at the M57 close; restricted to de Grey's field the same day)
+
+> **RESTRICTED 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): F₂₄₇ = K(√247) is a
+> 5-sealed field (a degree-one prime above 11, χ(UD(𝔽₁₁,2)) = 5), so nothing built there can be 6-chromatic; this stub's
+> F₂₄₇ half is struck. Its de Grey half stands and is strengthened: de Grey's field ℚ(√3,√5,√7,√11) has no usable prime
+> below 131 (√7 makes 11 inert), and the gen-1 half-spindle closure keeps ≥ 300 ℤ/5-homs at every radius (M57 §R5
+> addendum) — the one field we hold that is both 6-open (pending the plane at 131, `plans/STUB-field-sieve.md`) and
+> family-keeping. Run phase B on de Grey's field only.**
 
 *Read beside this: `plans/M57-additive-rigidity.md` §R4–§R5 (the F₂₄₇ cross lattice's 5-divisibility, the cumulative
 dial 1,728 → 960 → 640 → 0, Heule-510's 3,456 → 96), §M1.6 (the dial's axis is the direction set), M56 §M1.7 (L7:

@@ -1,4 +1,10 @@
-# FS-3 — Thickened material: redundancy without stars (STUB, carried from the M55 close; re-read 2026-09-06)
+# FS-3 — Thickened material: redundancy without stars (STUB, carried from the M55 close; re-read 2026-09-06; DEMOTED the same day)
+
+> **DEMOTED 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): no 6-chromatic unit-distance
+> graph has coordinates in K(√247) — the field has a degree-one prime above 11 and χ(UD(𝔽₁₁,2)) = 5, so every graph in it
+> is 5-colourable by the pulled-back colouring (W's 5,773 edges verified to land on the circle). The F₂₄₇ cross thickening can
+> move the redundancy dial but can never reach six. The stub is kept for its measurements (T24, the 108 asks, whose result
+> is still to be read); it reopens only in a 6-open field (`plans/STUB-field-sieve.md`).**
 
 *M55's paths-forward item 1, now a stub of its own so the frontier set holds it. Read beside this:
 `plans/M55-absorption.md` §R4 (the F₂₄₇ cross thickening), §R6 (the full-pool critical set: a unit triangle

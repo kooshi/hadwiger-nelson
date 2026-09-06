@@ -1,4 +1,12 @@
-# FS-2 — The Kempe classes of K-fabric's 4-colourings: what carries rigidity beyond the additive skeleton (STUB, 2026-09-06)
+# FS-2 — The Kempe classes of K-fabric's 4-colourings: what carries rigidity beyond the additive skeleton (STUB, 2026-09-06; re-aimed at the M57 close; scope note the same day)
+
+> **SCOPE NOTE 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): every object this stub
+> names lives in K or K(√247), both 5-sealed fields (a degree-one prime above 11; χ(UD(𝔽₁₁,2)) = 5) — fine as MECHANISM
+> beds (what carries forcing without rigidity is a question about colouring spaces, and the seed's 252-cheat subset is the
+> best bed we have), but no answer found there produces a 6-object. The design consequence of any answer must be carried to
+> a 6-open field (`plans/STUB-field-sieve.md` decides which). M57 answered the seed half: H's 35-vertex Kempe graph lies
+> within two single-vertex moves of its 18 additive colourings (M57 §R2); what remains is K-fabric's 16-pair residue and
+> the 252-object's components (T29).**
 
 *Minted at the M56 close. Read beside this: `plans/M56-arithmetic-of-tightness.md` §M1.5 (the Kempe localization),
 §R1 (the bed's table: F_true 171 ⊆ F_K 187 ⊆ F_add 2,513), `data/m56/kempe-object-…-k4.json` (every Kempe verdict
