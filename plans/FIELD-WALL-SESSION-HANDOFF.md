@@ -151,7 +151,17 @@ Yes, in these ways, most already built:
 7. **Free geometry control**: a misplaced K-point shows as a monochromatic unit edge in the residue
    colouring (G36).
 
-## 4. The papers I could not reach (exact names)
+## 4. The papers I could not reach (exact names) — ARRIVED 2026-09-05/06 (Kooshi: `~/source/library/{papers,pdf,notes}`)
+
+*Fischer 1990 read in full 2026-09-06; the reconciliation is `~/field-wall-conjecture.md` §10.1 (copy
+`plans/FIELD-WALL-THEOREM.md`): the additive framework and the whole real-quadratic classification are his
+(Theorems 8–10), including χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3 and the d ≡ 23 (mod 24) candidates; Corollary 6.5
+was wrong at d ≡ 5 (mod 8) (bipartite, not ≤ 4 — conjugation in inertia); Theorem B (the biquadratic
+K, χ = 4 exactly) and the local criterion remain ours. Johnson DM 79, Chilakamarri DM 69, Chow DM 115
+are in `../library/papers/`; Johnson CN 60 and Zaks are print-only (request notes in `../library/notes/`);
+Soifer's book is being borrowed.*
+
+### (the original list) The papers I could not reach (exact names)
 
 1. K. G. Fischer, *Additive K-colorable extensions of the rational plane*, Discrete Mathematics 82
    (1990), no. 2, 181–195. DOI 10.1016/0012-365X(90)90324-B. (Defines additive k-colourings —
