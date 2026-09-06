@@ -1,0 +1,60 @@
+{
+ "kind": "additive-obstruct",
+ "stage": {
+  "name": "EI-seed-unit",
+  "n": 214,
+  "edges": 1004,
+  "fingerprint": "82721251bc0ccca5",
+  "source": "twodist.ei_H() unit edges (the seed's unit part; cheats are NOT edges here)",
+  "frame": {
+   "name": "EI4",
+   "meaning": "((a*sqrt3 + b*sqrt11)/12, (c + d*sqrt33)/12)",
+   "dim": 4
+  },
+  "unit_verified": "every edge verified by twodist.dist2_is (exact)",
+  "components": 1,
+  "forced_pair": [
+   205,
+   206
+  ],
+  "cheats": 446
+ },
+ "k": 5,
+ "lattice": {
+  "rank": 4,
+  "basis": [
+   [
+    1,
+    3,
+    3,
+    3
+   ],
+   [
+    0,
+    6,
+    0,
+    2
+   ],
+   [
+    0,
+    0,
+    6,
+    2
+   ],
+   [
+    0,
+    0,
+    0,
+    4
+   ]
+  ],
+  "scale": 1
+ },
+ "exponents": {
+  "5": {
+   "units_in_eLambda": 0,
+   "example_edges": []
+  }
+ },
+ "claim_scope": "a unit vector u \u2208 e\u039b (all coordinates \u2261 0 mod e) kills every hom into a group of exponent e (L1); the chunk form of Fischer's 1/k \u2208 \u03a3\u2080; absence is NOT existence"
+}

@@ -1,0 +1,173 @@
+{
+ "kind": "additive-test",
+ "stage": {
+  "name": "EI-seed-unit",
+  "n": 214,
+  "edges": 1004,
+  "fingerprint": "82721251bc0ccca5",
+  "source": "twodist.ei_H() unit edges (the seed's unit part; cheats are NOT edges here)",
+  "frame": {
+   "name": "EI4",
+   "meaning": "((a*sqrt3 + b*sqrt11)/12, (c + d*sqrt33)/12)",
+   "dim": 4
+  },
+  "unit_verified": "every edge verified by twodist.dist2_is (exact)",
+  "components": 1,
+  "forced_pair": [
+   205,
+   206
+  ],
+  "cheats": 446
+ },
+ "k": 5,
+ "family_partitions": 18,
+ "family_exact": true,
+ "colourings": 35,
+ "additive": 18,
+ "improper": [],
+ "verdicts": [
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 32
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 4
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 25
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 5
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 3
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 34
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 27
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 28
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 2
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 0
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 1
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 30
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 31
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 35
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 26
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 33
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 29
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "additive",
+   "group": 0,
+   "hom": 24
+  }
+ ],
+ "colourings_file": "data/m56/colourings-EI-seed-12graph-k5.json",
+ "claim_scope": "a colouring is `additive` iff its partition of the vertices equals that of a listed admissible hom's colouring (M1.3: partitions, not labels); with a complete family `not-additive` is exact"
+}

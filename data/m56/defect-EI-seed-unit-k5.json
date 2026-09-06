@@ -1,0 +1,71 @@
+{
+ "kind": "additive-defect",
+ "stage": {
+  "name": "EI-seed-unit",
+  "n": 214,
+  "edges": 1004,
+  "fingerprint": "82721251bc0ccca5",
+  "source": "twodist.ei_H() unit edges (the seed's unit part; cheats are NOT edges here)",
+  "frame": {
+   "name": "EI4",
+   "meaning": "((a*sqrt3 + b*sqrt11)/12, (c + d*sqrt33)/12)",
+   "dim": 4
+  },
+  "unit_verified": "every edge verified by twodist.dist2_is (exact)",
+  "components": 1,
+  "forced_pair": [
+   205,
+   206
+  ],
+  "cheats": 446
+ },
+ "k": 5,
+ "family": 72,
+ "family_exact": true,
+ "colourings": 35,
+ "improper": [],
+ "defects": [
+  0,
+  1,
+  1,
+  2,
+  1,
+  0,
+  0,
+  0,
+  0,
+  1,
+  2,
+  0,
+  0,
+  1,
+  0,
+  0,
+  2,
+  1,
+  0,
+  0,
+  1,
+  0,
+  1,
+  0,
+  1,
+  0,
+  2,
+  1,
+  0,
+  0,
+  1,
+  0,
+  2,
+  1,
+  0
+ ],
+ "histogram": {
+  "0": 18,
+  "1": 12,
+  "2": 5
+ },
+ "colourings_file": "data/m56/colourings-EI-seed-12graph-k5.json",
+ "claim_scope": "defect = the least Hamming distance from the colouring to an additive colouring of the listed family under the best palette bijection (all k! tried); exact when the family is complete, an upper bound otherwise"
+}
