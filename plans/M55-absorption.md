@@ -377,3 +377,49 @@ One bullet per artifact: what the object is, the command that regenerates it, th
 population, and THE THEOREM IT INSTANTIATES (`Absorb.extends_of_hubs` for an absorb verdict,
 `Absorb.extends_of_extensionOrder` for a core, D5 for a ν bracket, `CriticalSet` for a census) — so a
 reader can tell a measurement of a theorem from a measurement of the world at a glance.
+
+## §R0. Phase 0 and phase A closed (2026-09-06 ~05:30Z, desktop)
+
+**The kernel module** `Proofs/HadwigerNelson/Absorb.lean`: 21 declarations, zero sorry, elaborates; imported
+in `Proofs.lean` after `CriticalSet`; twelve audit entries in `scripts/Axioms.lean` (the gate's build and
+axiom receipt run at the close). One statement changed at implementation, at exactly the joint §Bʺ
+flagged: `extends_of_hubs`'s colourability hypothesis is `∃ ψ : (G.induce Aᶜ).Coloring (Fin k), ∃ h : V → Fin k,
+∀ b ∉ A, G.Adj b (hub b) → ψ b ≠ h (hub b)` — a `k`-colouring of the piece with one designated colour per hub
+that the hub's piece-neighbours avoid — rather than "each fibre plus its hub is `k`-colourable". The former
+is what the proof uses; the latter implies it by gluing (trivial tool-side, a dependent-type exercise in
+Lean that carries no mathematics), and the single-hub instance `extends_of_hub_matching` derives it from
+the fibre-plus-hub colouring by `induceHomOfLE`. Everything else landed as the modeling passes specified.
+
+**The mutation audit (registered §Bʺ), all six refused** (`build/m55/mutation-audit.log` from `tools/m55_mutation_audit.py`, scratch copies, 3 s
+each): the repaint lemma without independence — refused at the two-clash case; without the no-spare-neighbour
+hypothesis — refused at the repainted-across-the-cut case; `extends_of_hubs` without `hcomp` — refused at
+`φ`'s properness; without `hdeg` — refused at the spare-neighbour step; `ExtensionOrder` at `≤ k + 1` —
+refused at the pigeonhole; `extends_symCopy` at `1 ≤ k` — refused (`omega` cannot derange `Fin 1`). Every
+hypothesis is load-bearing.
+
+**The instrument** `tools/absorb_dial.py` (dispatched from `five_dial.py`: `absorb`, `core5`, `nu-exact`
+with `--method ladder|ihs`, `multi-spindle --pairs|--flower --powers`, `shrink`, `cross-lattice --depth 2`,
+`absorb-self-test`): 13 planted controls green — the K₃,₃-pendants red (not absorbed, `hind` violated on
+exactly the nine K₃,₃ edges, the red colouring refused by a direct extension ask), the K₄−e hub green
+(absorbed), the outside-degree-2 plant (`hdeg` violated at vertex 5 by name), the K₆-plus-path core (the
+path peels, the order re-checked), the lone K₅ (peels entirely at five colours — correct: it is invisible),
+ν(K₅ ⊔ K₅) = 2 by both methods, ν(K₅) = 1, ν(K₅ − e) = 1 at four. `build_multi_spindle` gained a rotation
+power per spindle (the flower).
+
+## §R1. B1 — the two M54 objects read by the new instruments (2026-09-06 ~05:40Z)
+
+| object | `absorb` at five colours | `core5` |
+|---|---|---|
+| core-star₂ (2,229; fp `e84485d3b20dc6f6`) | base 1,100 (4-colourable ✓); two pieces (587, 542) with hubs; **every piece vertex has ≤ 1 base neighbour** ({0: 1,116, 1: 13}); 0 piece–piece edges; piece ∪ hubs 4-colourable ✓ (0.1 s); non-hub chords **2 with 0 edges among them** — **ABSORBED: the base extends at five colours by `extends_of_hubs`**; D5: ν ≤ 0 + 2 = 2 | 5-core 2,186 of 2,229 (43 peeled in 3 rounds) |
+| star₂ (5,857; fp `a7d58e7346920d3a`) | base 1,953 (4-colourable ✓); pieces 1,952 + 1,952, hubs 31 and 785; {0: 3,885, 1: 19}; 0 piece–piece edges; piece ∪ hubs 4-colourable ✓ (0.2 s); non-hub chords **2 with 0 edges** — **ABSORBED**; D5: ν ≤ 2 | 5-core 5,854 of 5,857 (3 peeled) |
+
+**Reading, and a sharpening the census found.** P-M55-2 MET. And the cross chords are not "a thin conic of
+which the spindle chord is one": on both objects every cross chord but ONE per copy is a HUB chord — a
+copy point on the unit circle about the centre (the copy's image of a centre neighbour, 5–10 of them);
+the single non-hub chord per copy is the spindle chord y–R(y) itself. So the copy hangs on the fabric by
+its fused centre and one chord, and the theorem's bound is tight: **ν(core-star₂) = ν(star₂) = 2 exactly**,
+the lower bound from M54's C = ∅ (no single deletion 4-colours either object) and the upper from D5 — no
+solver run was needed for the exact value; the ladder (B2, in flight) is its confirmation. P-M55-3 MET by
+derivation before measurement. The 0 / 0 five-colour readings of M54 §R7 are instances of
+`extends_of_hubs` for every pair inside the base; only pairs with a copy-side endpoint were ever a
+measurement.

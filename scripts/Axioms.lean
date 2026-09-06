@@ -155,6 +155,20 @@ open HadwigerNelson
 #print axioms HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces
 #print axioms HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_lt_dist
 #print axioms HadwigerNelson.encard_criticalSet_le_two_of_forces
+-- M55: absorption (Absorb.lean) — the extension principle, the repaint carrier, hub / matching /
+-- greedy / symmetric-copy absorption, the degree instance, the red's finite heart
+#print axioms HadwigerNelson.Extends.forces_iff
+#print axioms HadwigerNelson.Extends.separated_iff
+#print axioms HadwigerNelson.Extends.not_forces_of_colorable
+#print axioms HadwigerNelson.Extends.not_separated_of_colorable
+#print axioms HadwigerNelson.extends_of_repaint
+#print axioms HadwigerNelson.extends_of_hubs
+#print axioms HadwigerNelson.extends_of_hub_matching
+#print axioms HadwigerNelson.extends_of_matching
+#print axioms HadwigerNelson.extends_of_extensionOrder
+#print axioms HadwigerNelson.extends_compl_singleton_of_degree_le
+#print axioms HadwigerNelson.extends_symCopy
+#print axioms HadwigerNelson.k33_lists_refuse
 -- M51: the entropy floor K4 — a k-colourable graph has ≥ 2^⌈n/k⌉ (k+1)-colourings (EntropyFloor.lean)
 #print axioms HadwigerNelson.two_pow_le_card_coloring
 #print axioms HadwigerNelson.spareColorings_eq_last_iff

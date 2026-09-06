@@ -22,6 +22,7 @@ Subcommands (each headline names its population and, where it prunes, the theore
     python3 tools/five_dial.py cross-lattice --exact data/m54/witness-exact-8over3.json --workers 28
     python3 tools/five_dial.py planted-sweep --witness data/m53/forced-spindle-core-8over3.json
     python3 tools/five_dial.py sweep     --witness ... --k 5 --wall 600
+    # M55 (implemented in tools/absorb_dial.py): absorb, core5, nu-exact, multi-spindle, shrink, cross-lattice --depth 2, absorb-self-test
 
 Stages: `--seed` (the Exoo–Ismailescu {1, 2}-graph), `--object <label>` (a descent object's {1, 2}-
 graph with its standing cheats), `--witness <json>` (a forced-spindle record rebuilt at 60 digits),
@@ -949,11 +950,12 @@ def build_multi_spindle(label: str, spindles, dps: int = 60, log=print):
     from scipy.spatial import cKDTree
     mp.mp.dps = dps
     obj, _ = BK.load_object(label); ex = obj.mp_values(dps)
-    base = sorted(set().union(*(set(c) for _, _, c in spindles)))
+    spindles = [tuple(sp) + (1,) if len(sp) == 3 else tuple(sp) for sp in spindles]      # (pair, q, core, power)
+    base = sorted(set().union(*(set(sp[2]) for sp in spindles)))
     pts = [ex[v] for v in base]; names = [("U", v) for v in base]
-    for si, (pair, q, core) in enumerate(spindles):
+    for si, (pair, q, core, power) in enumerate(spindles):
         q = Fr(q); qm = mp.mpf(q.numerator) / q.denominator
-        R = mp.mpc(1 - 1 / (2 * qm), mp.sqrt(4 * qm - 1) / (2 * qm)); zx = ex[pair[0]]
+        R = mp.mpc(1 - 1 / (2 * qm), mp.sqrt(4 * qm - 1) / (2 * qm)) ** power; zx = ex[pair[0]]
         assert abs(abs(ex[pair[0]] - ex[pair[1]]) ** 2 - qm) < mp.mpf(10) ** -(dps - 10), ("pair not at the named distance", pair, q)
         for v in core:
             if v == pair[0]:
@@ -997,11 +999,11 @@ def build_multi_spindle(label: str, spindles, dps: int = 60, log=print):
         if si.isdisjoint(sj):
             key = "|".join(sorted(sorted(si)[0:1] + sorted(sj)[0:1]))
             cross[key] = cross.get(key, 0) + 1
-    info = dict(spindles=[dict(pair=list(p), q=str(q), core=len(c)) for p, q, c in spindles], base_points=len(base), fused=fused,
+    info = dict(spindles=[dict(pair=list(p), q=str(q), core=len(c), power=pw) for p, q, c, pw in spindles], base_points=len(base), fused=fused,
                 sides=sides, cross_chords=cross, near_misses=near, dps=dps)
     log(f"[multi] {label}: {n} points ({len(base)} in U, {n - len(base)} in {len(spindles)} copies, {fused} fused), {len(unit)} unit edges, "
         f"cross chords {cross}, near-misses rejected {len(near)}", flush=True)
-    st = Stage(f"spindles-{'-'.join(f'{p[0]}_{p[1]}' for p, _, _ in spindles)}" + ("-full" if len(base) == len(ex) - len(obj.deleted) else ""), n, unit,
+    st = Stage(f"spindles-{'-'.join(f'{p[0]}_{p[1]}' for p, _, _, _ in spindles)}" + ("-full" if len(base) == len(ex) - len(obj.deleted) else ""), n, unit,
                f"multi-spindle union on {label}", meta=info, pts=upts)
     return st, unames, info
 
@@ -1189,6 +1191,7 @@ def main():
     p = sub.add_parser("exact-witness"); p.add_argument("--witness", required=True); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
     p = sub.add_parser("cross-lattice"); p.add_argument("--exact", required=True); p.add_argument("--workers", type=int, default=8)
     p.add_argument("--same-side", action="store_true"); p.add_argument("--out")
+    p.add_argument("--depth", type=int, default=1); p.add_argument("--cross", help="depth 2: the depth-one census to grow from")
     p = sub.add_parser("planted-sweep"); stage_args(p); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     p = sub.add_parser("two-spindle"); p.add_argument("--witness", required=True); p.add_argument("--pair2", required=True)
     p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--full", action="store_true"); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
@@ -1196,6 +1199,15 @@ def main():
     p.add_argument("--strong", type=int, default=0, help="keep only pool points with at least this many parents"); p.add_argument("--out")
     p = sub.add_parser("sweep"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     p.add_argument("--no-amo", action="store_true")
+    # M55 (tools/absorb_dial.py)
+    p = sub.add_parser("absorb"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
+    p = sub.add_parser("core5"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--out")
+    p = sub.add_parser("nu-exact"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0)
+    p.add_argument("--method", choices=["ladder", "ihs"], default="ladder"); p.add_argument("--max", type=int, default=6); p.add_argument("--lower", type=int, default=0); p.add_argument("--out")
+    p = sub.add_parser("multi-spindle"); p.add_argument("--object", required=True); p.add_argument("--q", default="64/9"); p.add_argument("--pairs")
+    p.add_argument("--flower"); p.add_argument("--powers", default="1"); p.add_argument("--full", action="store_true"); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
+    p = sub.add_parser("shrink"); p.add_argument("--object", required=True); p.add_argument("--pair", required=True); p.add_argument("--wall", type=float, default=None)
+    sub.add_parser("absorb-self-test")
     a = ap.parse_args()
     if a.cmd == "self-test":
         self_test()
@@ -1208,7 +1220,10 @@ def main():
     elif a.cmd == "exact-witness":
         cmd_exact_witness(a)
     elif a.cmd == "cross-lattice":
-        cmd_cross_lattice(a)
+        if a.depth == 2:
+            import absorb_dial; absorb_dial.cmd_cross2(a)
+        else:
+            cmd_cross_lattice(a)
     elif a.cmd == "planted-sweep":
         cmd_planted_sweep(a)
     elif a.cmd == "two-spindle":
@@ -1217,6 +1232,10 @@ def main():
         cmd_grow(a)
     elif a.cmd == "sweep":
         cmd_sweep(a)
+    elif a.cmd in ("absorb", "core5", "nu-exact", "multi-spindle", "shrink", "absorb-self-test"):
+        import absorb_dial
+        {"absorb": absorb_dial.cmd_absorb, "core5": absorb_dial.cmd_core, "nu-exact": absorb_dial.cmd_nu_exact,
+         "multi-spindle": absorb_dial.cmd_multi_spindle, "shrink": absorb_dial.cmd_shrink, "absorb-self-test": lambda _: absorb_dial.self_test()}[a.cmd](a)
 
 
 if __name__ == "__main__":

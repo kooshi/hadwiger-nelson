@@ -28,3 +28,8 @@
 2026-09-06T01:48:15Z M54 gate build (scripts/build.sh) log build/m54/gate-build.log
 2026-09-06T02:05:55Z M54 gate: build OK, axioms OK (566 clean, 5 declared purchases), lake lint passed (two unused DecidableRel binders in EntropyFloor.lean removed to get there); the 5,857-point union's sweep (chain 4) still in flight
 2026-09-06T03:36:10Z M55 minted (many spindles over one fabric → absorption): the orphan cadical 490914 (the first sweep attempt's 3.47M-var batch query, parent dead 2 h) killed by PID and its 442 MB temp CNF removed; chain 4 (seeder 30/40 then the sweep) left running, monitored
+2026-09-06T04:04:10Z M55 mutation audit (six statement mutations of Absorb.lean, scratch copies) log build/m55/mutation-audit.log
+2026-09-06T04:10:03Z M55 B3: forcing census of U for pair 3 = (1205,1442) (24 workers; the pair whose midpoint is farthest, 1.98, from spindles 1 and 2) log build/m55/forcing-census-1205-1442.log → data/m54/forcing-critical-U-1205-1442.json
+2026-09-06T04:10:03Z M55 B3: greedy 1-minimal forcing core of (1205,1442) (sequential, checkpointed every 50) log build/m55/shrink-1205-1442.log ckpt build/m55/shrink-1205-1442.json
+2026-09-06T04:10:24Z M55 B2: ν of the two-core union (2,229 pts) by the cardinality ladder (two encodings, wall 1800 s per ask, max 6) log build/m55/nu-ladder-core-star2.log
+2026-09-06T04:12:53Z M55 B5: the depth-two F247 cross lattice of W (glue census over W ∪ P₁, 20 workers) log build/m55/cross2-W.log
