@@ -600,3 +600,17 @@ rule (CLAUDE.md, 2026-08-26) paid for itself twice in one hour.
 third run — the first refused a redundant `@[simp]` on `induce_adj` (simp reaches it through `comap_adj`;
 attribute removed), the second an auto-named decidability instance with an underscore (named
 `decidablePredMemHubPiece`). Every check's red was seen on the way to its green.
+
+## §R6. Addenda after the close (2026-09-06, 10:15Z onward)
+
+* **The third core.** The greedy 1-minimal forcing core of (1205, 1442) on U: **587 vertices, 2,881 unit
+  edges, every vertex's necessity witnessed** (4,346 s, sequential; `build/m55/shrink-1205-1442.json`).
+  Three cores of 588 / 543 / 587 for three pairs at the same distance — the forcing cores are the same size
+  to within 8 %. The three-core star is launched: its critical set is bounded by the TRIPLE intersection of
+  the 1-minimal cores with no asks (a base vertex is critical only if its deletion breaks every spindle's
+  forcing, and a core's vertex breaks only its own), and it is the first real object for the hitting-set ν
+  engine (`nu-exact --method ihs`) — P-M55-5's ν question, if the engine finishes.
+* **The full-pool census** kept writing to its checkpoint after I moved the file (an open append handle
+  follows a rename on one filesystem); 981 of 1,175 verdicts at this note, **2 critical: the fused centre
+  (index 12) and one more (565)**. If the run dies before finishing, move the checkpoint back under
+  `data/m54/` before resuming.
