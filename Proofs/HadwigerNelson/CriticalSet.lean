@@ -62,6 +62,11 @@ theorem exists_coloring_isolating_of_mem_criticalSet {c : V} (hc : c ∈ Critica
       (∀ v ∈ S, C v = Fin.last k) ∧ ∀ v, v ∉ S → C v ≠ Fin.last k := by
   sorry
 
+/-- A forced pair is forced the other way round — the step every consumer of the localization
+theorems needs once; minted here rather than in `Forcer.lean` (48 dependents). -/
+theorem Forces.symm {p q : V} (h : Forces G k p q) : Forces G k q p :=
+  fun C => (h C).symm
+
 /-! ## The two localization theorems -/
 
 /-- **A critical vertex non-adjacent to `p` separates `p` from every other `q`.** The case `c = p`
@@ -130,7 +135,7 @@ distance 2. -/
 open Glue in
 /-- **In the plane a forcing graph's critical vertices are drawn at the forced pair's two glue
 points.** -/
-theorem forces_criticalSet_glue {ι : Type*} {G : SimpleGraph ι} (q : ι → ℂ)
+theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces {ι : Type*} {G : SimpleGraph ι} (q : ι → ℂ)
     (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} (hne : q u ≠ q v)
     (h : Forces G (k + 1) u v) :
     ∀ c ∈ CriticalSet G k,

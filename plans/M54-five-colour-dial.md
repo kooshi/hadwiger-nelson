@@ -346,3 +346,64 @@ greedy outside-in order under a one-hour wall (checkpointed per accepted deletio
 3,800 s). Decision B3 is settled that way. The exhaustive sweep on the union (E4b) is the one
 heavy job of phase C; its pruned reading is expected to be "no candidates" (|C| ≫ 2Δ) and the sweep
 confirms the theorem's zero at one point.
+
+## §Bʹʹʹ. The experience-modeling pass (2026-09-05, fresh invocation) — the surfaces
+
+### (1) `CriticalSet.lean` — what a consumer holds, and which direction to reach for
+
+| you have | you want | use |
+|---|---|---|
+| a colouring of `G` minus one vertex `c`, and `c` not adjacent to `p` | no forced pair `(p, q)` for any `q ≠ c` — one colouring retires every partner at once | `not_forces_of_mem_criticalSet` |
+| the same `c`, adjacent to neither `p` nor `q` | no virtual edge `(p, q)` | `not_separated_of_mem_criticalSet` |
+| the same `c`, outside a fan's partner list | no fan at `p` over that list | `not_fan_of_mem_criticalSet` |
+| a forced pair | the critical set inside its common neighbourhood; the count bounded by a degree | `criticalSet_subset_inter_neighborSet_of_forces`, `encard_criticalSet_le_degree_of_forces` |
+| a forced pair drawn in the plane with unit edges | its critical vertices at the two glue points; none beyond distance 2; at most two | `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`, `criticalSet_eq_empty_of_forces_of_two_lt_dist`, `encard_criticalSet_le_two_of_forces` |
+| a packed colouring of an edge list minus a vertex | membership in the critical set | `Critical.colorable_delete_of_packed`, then `mem_criticalSet_iff` (definitional) — no new edge-list surface is minted |
+| a forced pair `(p, q)` and need it the other way round | `Forces G k q p` | `Forces.symm` (minted here, not in `Forcer.lean`, whose 48 dependents a new declaration would rebuild) |
+
+Two names failed the cold read and are changed in the skeleton: `forces_criticalSet_glue` (says nothing
+about its conclusion) becomes `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`; and the
+swapped-pair step is a named theorem rather than `fun C => (h C).symm` at every use.
+
+**A consumer nobody had named.** Every stage of the descent — the seed, every committed object, the
+final unit graph — forces `(205, 206)` at five colours in its own {1, 2}-graph, so by the theorem its
+critical set is EMPTY at four colours (the endpoints are five apart; no vertex is within {1, 2}-distance
+of both). One deletion ask per vertex is therefore a free regression control on any committed object:
+a critical vertex is a vertex whose deletion 4-colours the {1, 2}-graph, i.e. the object has stopped
+forcing — a bug, not a finding. Recorded in the tool as `critical --seed` / `critical --object`.
+
+### (2) `tools/five_dial.py` — the command line and the result files
+
+One file; one shared **stage loader** (`--witness <json>` rebuilds W from a forced-spindle record;
+`--seed` the E–I {1, 2}-graph; `--object <label>` the descent object's {1, 2}-graph; `--graph <json>`
+any `{n, edges}`; `--planted k5e | k4e | two-k5 | shell` the controls); every subcommand prints a
+one-line headline that names its population and the theorem it leans on, and writes one JSON with a
+common header:
+
+```
+kind, stage: {name, n, edges, fingerprint (sha256 of the sorted edge list), source}, k, seconds, claim_scope
+```
+
+| subcommand | arguments | headline (the shape, with populations) | file |
+|---|---|---|---|
+| `self-test` | — | every planted control's expected/observed, `ok`/`FAIL` per line, nonzero exit on any FAIL | — |
+| `critical` | stage, `--k`, `--workers`, `--wall`, `--out` | `[critical] <stage> k=4: |C| = a of n (a verified colourings, u unknown at wall), Δ = d; forced-equal candidates e (theorem: C ⊆ N(p) ∩ N(q)), virtual-edge candidates f (C ⊆ N(p) ∪ N(q))` | `critical-<stage>.json`: `critical` (list), `unknown`, `delta`, `candidates_eq`, `candidates_ne` (lists when ≤ 10,000, counts always) |
+| `ask` | `--critical <file>`, `--k`, `--wall` | `[ask] <stage> k=5: e forced-equal candidates → hits h / refuted r / unknown u; f virtual-edge candidates → …` | `ask-<stage>.json`; on any hit ALSO `jackpot-<stage>.json` and the banner `JACKPOT CANDIDATE — HALT AND VERIFY` with the pair, its exact distance, the second encoding's verdict; exit code 3 |
+| `nu` | stage, `--k`, `--wall` | `[nu] <stage> k=5: ν = m (optimal | upper bound, wall hit), spare class {…} verified proper` | `nu-<stage>.json` |
+| `exact-witness` | `--witness`, `--out` | `[exact] W: n points in F_247 (a core in K, b rotated), unit edges exact e/e, cross chords exact c/c, near-misses exactly non-unit m/m` | `witness-exact-<name>.json`: per point `[[A-coeffs],[B-coeffs]]` for x and y (A + √247·B, A, B in the (1, √3, √11, √33) basis), the edge list, the chord list |
+| `cross-lattice` | `--exact <file>`, `--workers`, `--out` | `[cross] W: P cross pairs at d < 2 of Q; in-F247 glue points g (r %), distinct points p, fusions (≥ 3 W-neighbours) f, pool–pool unit edges e, max pool degree m; same-side 247-class pairs s` | `cross-lattice-<name>.json`: the radicand class table, the pool's exact coordinates and parents, the pool edges |
+| `planted-sweep` | `--witness` | `[sweep-control] W + 7 shell cheats k=5: forced-equal confirmed {the two planted pairs} …` | `sweep-control-<name>.json` |
+| `two-spindle` | `--object`, `--dial`, `--second <pair>`, `--shrink-wall` | the union's n, edges, chords; then `critical`'s and `nu`'s headlines on it | `two-spindle-<pairs>.json` + the census files |
+| `sweep` | stage, `--k`, `--wall` | the exhaustive `Rigidity` reading, both sides, unsettled counts | `sweep-<stage>.json` |
+
+Breakdowns designed: an ask that times out is `unknown` in its own column, never folded; a stage whose
+base colourability fails at `k+1` is reported `vacuous` and nothing else runs on it (the Rigidity
+engine's own guard); `critical` refuses to pin the palette on the deleted vertex; every SAT answer's
+colouring is verified in Python before it counts (a solver returning an improper model is a `FAIL`
+that halts, with the offending edge named); the jackpot exit code stops any driver.
+
+### (3) `data/m54/README.md`
+
+One paragraph per file in the order the phases produce them, each with the reading in one sentence
+and the regenerating command; a header naming the milestone, the halt/close state, and the plan's §R
+section holding the numbers.
