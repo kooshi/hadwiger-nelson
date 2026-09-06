@@ -691,3 +691,139 @@ language, each with its population and its caveat:
 | the jackpot boundary | `additive.py` emits `candidates_for_ask`; `five_dial.py ask` decides | asking inside the tool | one protocol, one banner, one exit code | high |
 | the Lean name | `additiveColoring` (sealed def) + `additiveColoring_apply` (simp) | `Coloring.ofAddMonoidHom` in Mathlib's namespace | Fischer's word is what a reader searches; the Mathlib-style name would sit in our namespace anyway | medium |
 | knobs | none beyond `--k`, the pair selection, `--dial/--sweep`, `--out`, `--max` for SAT caps | `--group`, `--frame` | every group of order k always; the frame is the loader's | high |
+
+---
+
+## §R. Results (2026-09-06; every number from a record in `data/m56/`, every headline with its population)
+
+### R0. The instrument
+
+`tools/additive.py` (subcommands `lattice`, `homs`, `forced`, `kempe`, `defect`, `additive-test`, `obstruct`,
+`self-test`; §M3's stage vocabulary, records and verdict words) with **27 planted controls, all green** before the
+first real run: the grid's parity hom (unique; (0,0),(2,0) identified; half a unit vector refused by the lattice),
+the hexagonal lattice at 3 (the (√−3) colouring) and at 4 (the derived ℤ/4-hom (2, 1); the mod-2 colouring as
+6 homs = 1 partition; the Kempe swap separating (−2,0),(2,0) verified), the Moser spindle (rank 4; no ℤ/3-hom;
+ℤ/4 and 𝔽₂² homs present), K₄−e, the four L7 witness chunks (1/3 for the Moser twist; 1/4 for ρ₁₅, for Heule's
+(√5 + i√11)/4 without √7, and for ρ₂₄₇ — `obstruct` fires at 3 / 4 / 4 / 4 and is silent at 5), a disconnected
+chunk (not-comparable), **SAT enumeration agreeing with brute force on the seed at k = 5 (72), k = 4 ℤ/4 (12)
+and 𝔽₂² (12)**, the per-pair SAT re-ask UNSAT on the seed's forced pair, the defect reading 0 on a hom and 1 on
+a repaint, and — the independent cross-check — **the two residue colourings computed 2-adically by
+`tools/residue_colouring.py` are exactly the two 𝔽₂²-partitions of the fabric**. Helpers: `tools/m56_dump_seed_
+colourings.py` (the 35, 255 s), `tools/m56_ask_pairs.py` (the jackpot protocol on `candidates_for_ask`),
+`tools/m56_sample_colourings.py`, `tools/m56_rr_defect.py`, `tools/m56_export_791.py`, `tools/m56_seed_G.py`.
+
+### R1. The bed: the fabric U at four colours (1,953 points, 13,796 edges, one component; Λ of rank 4, scale 3)
+
+**Additive 4-colourings: 8 up to palette** — 12 ℤ/4-homs = 6 colourings up to sign, 12 𝔽₂²-homs = the 2 residue
+colourings under GL₂(𝔽₂) (`homs-object-…-k4.json`). No unit vector in 2Λ or 4Λ (`obstruct`); 12 additive
+5-colourings (48 ℤ/5-homs); no ℤ/3-hom.
+
+| class (d²) | v₂ | pairs (exact) | 2-adic depth of the difference | F_add | F_K (Kempe) | dial F_true |
+|---|---|---|---|---|---|---|
+| 4/3 · 4 · 12 | 2 | 6,669 · 5,470 · 767 | 1 | all separated (ℤ/4-homs with φ(u) odd) | all separated | all free |
+| 16/3 · 16 | 4 | 2,145 · 179 | 2 (∈ 4Λ) | **all forced-additively** | **all kempe-separated** (2,321 by the sublattice mechanism, 3 by the finite component) | all free |
+| 64/9 | 6 | 178 | 3 (∈ 8Λ) | all forced-additively | 176 kempe-forced, 2 kempe-separated (component) | 163 forced, 15 free |
+| 64/3 | 6 | 11 | 3 | all forced-additively | 11 kempe-forced | 8 forced, 3 free |
+
+So **F_true (171) ⊆ F_K (187) ⊆ F_add (2,513)**, the two containments being theorems (L2, M1.5) and both read as
+such by the instrument (the assertions `F_add ⊇ dial-forced` and `F_K ⊇ dial-forced` held on every class).
+The additive family over-forces by 2,342 pairs; the Kempe sublattices of the eight additive colourings recover
+2,326 of them; **16 pairs of 2-adic depth 3 (13 at 64/9, 3 at 64/3) are Kempe-forced under every listed
+colouring and still separated by the solver** — the non-additive residue of K-fabric's 4-rigidity, named. Scoring:
+**P1′ MET** (depth ≥ 2 forced-additively, the dial free at depth 2: the separating 4-colourings are
+non-additive; the additive rigidity conjecture is false on U); **P1″ half-MISSED** (depth exactly 1 ✓; twelve
+ℤ/4-homs exist, predicted absent); **P8 MET-IN-SUBSTANCE** (F_K ∖ F_true = 16 of 187 = 8.6 %, under the
+registered 10 %; equality missed by those 16).
+
+### R2. The seed at five colours (Exoo–Ismailescu's H: 214 points, 1,004 unit edges, 446 cheats; Λ of rank 4)
+
+**F_add(H, 5) = {(205, 206)} exactly**: over all 21,787 non-adjacent pairs of the unit part, exactly ONE is
+identified by every one of the 72 admissible ℤ/5-homs, and it is the forced pair; every cheat (446), every pair
+at d² = 9 (157) and d² = 16 (11) is separated by every hom (the L5 arithmetic: φ(m u) = m φ(u) ≠ 0 for
+m ∈ {2, 3, 4}, φ(5 u) = 0). **18 of the 35 five-colourings of H are additive** (`additive-test`: partition
+equality against the complete family of 18 additive partitions; all 18 among the 35; none outside) and **the
+other 17 have additive defect 1 (12 of them) or 2 (5)** — H's whole colouring space lies within two repaints of
+its additive family. At four colours: the 11 distance-4 pairs forced-additively (∈ 4Λ), the 446 cheats
+separated (the ℤ/4-homs), d² = 9 and 25 separated. **Exoo–Ismailescu's G (205 points, 966 + 423 edges, exactly
+18 five-colourings by their Claim 2.1) has 72 admissible ℤ/5-homs = 18 additive colourings, and its 18
+five-colourings are exactly those 18** (`seed-G-additive-k5.json`; 432 SAT models, 18 classes): **G's colouring
+space IS the additive family of its unit lattice.** The paper (§2–§3, re-read; `BIBLIOGRAPHY.md`) builds the
+graphs by reflections and π/3-rotations of a 23-point set and counts colourings by exhaustive search, with no
+algebraic colouring and no citation of Fischer; the additive reading is ours, and its appearance in later
+literature is unchecked. Scoring: **P3′ MET, P3″ MET** (0 < 18 < 35; defects ≤ 2).
+
+### R3. The witnesses (frames: `field16[3,5,7,11]` for Heule-510 and the 1581, K247-16 for W)
+
+| object | Λ rank | units in 2Λ / 4Λ (k = 4) | additive 4-colourings | additive 5-colourings | F_add at 5 (non-adjacent) |
+|---|---|---|---|---|---|
+| Heule-510 (510, 2,504) | 8 | 12 / 0 | **none** (𝔽₂² by divisibility, ℤ/4 by hyperplane cover) | 96 homs = 24 colourings | **91 forced-additively of 127,291 — all 91 refuted by the solver** (`ask-heule510-k5.json`, 2 s, no second-encoding hit: no jackpot) |
+| de Grey 1581 (1,581, 7,877) | 16 | 13 / **1 — the single cross edge (11, 802) between the halves, 2-adic depth 2** | none (divisibility) | ≥ 2,981 colourings (3,000 homs by SAT, capped) | pending (`forced-degrey1581-k5.json`, against the complete M30 sweep) |
+| W = core ∪ R(core) (1,175, 5,773) | 8 | 1 / **1 — the spindle chord (565, 1152), depth 3** | none (divisibility) | 1,728 homs = 432 colourings | **291 forced-additively of 683,952 — all 291 recorded separated by the complete sweep of W ∪ its 850 distance-2 cheats** (a colouring of the larger graph is one of W) |
+| the 791-forcer (791, 3,938; rebuilt through `construct.py`, edge set = the M30 record's) | 8 | 6 / 0 | **none** | — | its six forced pairs at k = 4: `vacuous` — de Grey's 4-forcing lives entirely in non-additive colourings |
+
+**L8 — the additive spindle theorem, derived after the culprits were read.** On both spindle witnesses the
+unique unit vector in 4Λ is the spindle chord. Derivation: (c, q) forced equal at four colours on the fabric with
+q − c ∈ 4Λ_fabric (depth ≥ 2: all of K-fabric's forced classes are at depth 3), R the rotation about c with
+|Rq − q| = 1: the chord vector Rq − q = (Rq − Rc) − (q − c) is a difference of two elements of 4Λ (one in the
+copy's lattice, one in the fabric's), so it lies in 4Λ(union) — **every spindle over an additively forced pair has
+its chord in 4Λ, hence no additive 4-colouring of the union** (equivalently: additive colourings of the union
+restrict to additive colourings of both cosets, which identify q, c and Rq). De Grey's (11, 802) at depth 2 (his
+forced pair is at distance 4 = 4u) and ours at depth 3 (8u/3 ∈ 8Λ) are the two instances. The additive theory
+thus reproduces the spindle mechanism exactly at the additively-forced level — and Heule-510, which is a
+SAT-shrinking of de Grey's construction, has lost the 4Λ chord but not the 2Λ ones.
+
+**The defect gauge on W** (`colourings-sample-W-core-8over3-k5.json`: 200 SAT-sampled five-colourings, distinct
+up to palette, NOT uniform): additive defect **850–876 of 1,175** against the complete family of 1,728 (none
+additive); residue-per-coset (RR) defect **816–880** (both 2-adic branches, the copy's residue transported
+through R⁻¹ exactly, independent palettes per side). A random colouring under the best of 120 palettes sits near
+0.73 n ≈ 858, so **the sampled colourings carry no detectable additive or residue structure**. The
+single-fifth-vertex colourings (a 4-colouring of W − v, one SAT model each for 15 vertices): RR defect 354–845 —
+W − 1152 (the chord's copy-side endpoint) at 354 and W − 565 at 501 are the two nearest, the rest 561–845.
+Scoring: **P4′ MET** on the 1581 and W (a unit vector in 4Λ), **MET-IN-SUBSTANCE** on Heule-510 (no hom, by
+cover); **P5′ MET** on W and Heule-510 (homs exist; every additively forced pair is separated non-additively —
+by the sweep on W, by 91 asks on Heule), the 1581 pending; **P6′ NOT RUN as registered** (the interface census
+of the residue-plus-repair family was replaced by the RR defect gauge, which reads the family as far from W's
+colourings as the additive one — the registered ν-comparison is unmade and is reported so); **P7′ MET by
+derivation (L7)** with the four witness chunks in the self-test (P7″).
+
+### R4. What the milestone found, in three sentences (the plain-language versions are §M3.6)
+
+1. The Exoo–Ismailescu seed's tightness is arithmetic: its forced pair is the unique pair every ℤ/5-additive
+   colouring of its unit lattice identifies, its cheats and distance-3/4 pairs are additively separated, 18 of its
+   35 colourings are additive and the rest are within two repaints — and for the paper's own G the colouring
+   space is exactly the additive family.
+2. K-fabric's four-colour rigidity is additive at depths 1 and 3, non-additive at depth 2, and the Kempe
+   sublattices of its eight additive colourings recover the dial to 16 pairs of 2,342.
+3. Every spindle over an additively forced pair puts its chord in 4Λ (L8) — the 1581's one cross edge and W's
+   spindle chord are the two instances — so no 5-chromatic witness we hold has an additive 4-colouring, while
+   all of them keep additive 5-colourings whose forced pairs (91, 291, …) are separated non-additively; no
+   wall-broken plane has an additive k-colouring for k ≤ 10 (L7), and the witnesses' actual 5-colourings, as
+   sampled, are at the random baseline from both algebraic families.
+
+### R5. Incidents (caught by controls or by reading; none moved a verdict)
+
+* The `forced --sweep` candidate line was inverted at first (a complete sweep listing no forced pairs has
+  settled every pair as SEPARATED); read off the W record before any claim, fixed (§M3's boundary: candidates
+  exist only when no complete sweep is given) — W's 291 were never candidates.
+* The hom colourings were computed through Fraction coordinates point by point: 25 minutes on the 1581's 3,000
+  homs; replaced by a cached integer coordinate matrix (seconds); no verdict affected (the job was killed and
+  rerun).
+* The 791-forcer exported as V ∩ −V of `tools/degrey_cert.json` returned 0 points (the file is not centred at
+  the symmetry centre gradient.py used); rebuilt through `construct.py` with the M30 record's edge set as the
+  vertex-order control (equal).
+* The hexagonal control's pair (4, 0) lay outside the R = 3 ball; the self-test went red and the pair became
+  (−2, 0), (2, 0) — the difference 4·1 ∈ 4Λ the control wanted.
+
+### R6. Scoring table
+
+| # | verdict | evidence |
+|---|---|---|
+| P1′ | met | R1 |
+| P1″ | half-missed (depth ✓, ℤ/4-homs exist) | R1 |
+| P3′ | met | R2 |
+| P3″ | met | R2 |
+| P4′ | met (1581, W); met-in-substance (Heule-510) | R3 |
+| P5′ | met (W, Heule-510); 1581 pending | R3 |
+| P6′ | not run as registered; replaced by the RR defect gauge | R3 |
+| P7′ | met by derivation + P7″ witnesses | R0, §M1.7 |
+| P8 | met-in-substance (16 of 187) | R1 |

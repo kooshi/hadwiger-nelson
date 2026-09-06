@@ -870,7 +870,7 @@ def cmd_forced(a):
         if total_homs == 0:
             rows["vacuous"] += len(same); same = []
         forced_pairs = []
-        B = 20000
+        B = max(1000, int(2e7 // max(1, total_homs)))   # ≤ ~2·10⁷ comparisons per block
         for s0 in range(0, len(same), B):
             blk = same[s0:s0 + B]
             ua = np.array([u for u, _ in blk]); va = np.array([v for _, v in blk])
