@@ -52,6 +52,12 @@ refutation. Nothing below that bar is written up, however novel the rung.
 See `ARCHITECTURE.md` for the module DAG and the milestone roadmap; `plans/` for per-milestone
 subplans.
 
+**The bibliography is explicit and maintained (Kooshi, 2026-09-06): `BIBLIOGRAPHY.md`.** Every external
+work this project cites, reproduces, depends on, or corrects is an entry there — added the day it is
+first used, with what of ours rests on it, where our copy is (`~/source/library/`), and how much of it
+has actually been read. A ledger row or grokking that rests on prior art names its bibliography key.
+Titles seen only in search listings are marked as such until checked against the paper.
+
 ## Frontier
 
 *The current state of the art, the ledger of everything novel this project has produced, and

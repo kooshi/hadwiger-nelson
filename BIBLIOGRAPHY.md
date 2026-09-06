@@ -1,0 +1,86 @@
+# Bibliography
+
+*Created 2026-09-06 on Kooshi's direction ("from here on out we maintain an explicit bibliography"). The
+standing rule: **every external work this project cites, reproduces, depends on, or corrects is an
+entry here, added the day it is first used, with (i) what of ours rests on it, (ii) where our copy is,
+(iii) how much of it we have actually read.** A theorem in `CLAUDE.md` § Frontier or a grokking that
+rests on prior art names its entry. Local copies live in `~/source/library/` (outside this repository:
+`papers/` are Kooshi's, `pdf/` the search agent's, `notes/` its findings, the book at the top level).*
+
+*Provenance of this first version: the repository's plans, `CLAUDE.md`, the memory files, and a sweep
+of all fifteen conversation transcripts for arXiv identifiers and DOIs (2026-09-06). Titles marked
+**[title from a search listing]** were seen only in web-search results during earlier sessions and have
+not been checked against the paper; titles marked **[unverified]** are our description, not the paper's.
+Read status: **read** (in full), **abstract**, **second-hand** (its content reached us through another
+paper or a memory), **unread**.*
+
+## A. Load-bearing — works our results reproduce, depend on, or correct
+
+| key | work | what of ours rests on it | copy | read |
+|---|---|---|---|---|
+| **[deGrey2018]** | A. D. N. J. de Grey, *The chromatic number of the plane is at least 5*, Geombinatorics 28 (2018) 18–31; arXiv:1804.02385 | rung B (the 1,581-vertex witness, kernel-certified, M06–M09); the anatomy G1–G10, G27, G31; the forced pairs of the 791-forcer | — (arXiv) | read (earlier sessions) |
+| **[Heule2018]** | M. J. H. Heule, *Computing small unit-distance graphs with chromatic number 5*, Geombinatorics 28 (2018); arXiv:1805.12181 | the 553- and 510-vertex witnesses, kernel-certified; G6, G13 | — | read (earlier sessions) |
+| **[Heule2019]** | M. J. H. Heule, *Trimming graphs using clausal proof optimization*, arXiv:1907.00929 (the 529-vertex graph) | G8's "shrinking scars" reading | — | abstract |
+| **[ExooIsmailescu2019]** | G. Exoo, D. Ismailescu, *The chromatic number of the plane is at least 5 — a new proof*, Discrete Comput. Geom. (2019), doi 10.1007/s00454-019-00058-1; arXiv:1805.00157 | context for the 5-chromatic landscape (G11) | — | second-hand |
+| **[ExooIsmailescu2020]** | G. Exoo, D. Ismailescu, *A 6-chromatic two-distance graph in the plane*, Geombinatorics 29 (2020); arXiv:1909.13177; data at cs.indstate.edu/ge/ExooIsmailescuData/ | **the seed of the descent** (M49–M53): the 214-point {1, 2}-graph H with 446 distance-2 edges forcing (205, 206) at distance 5, re-derived exactly (M49); the calibration bed of M54 (C(H) = ∅, ν(H) = 38) | — | read (M49) |
+| **[Parts2020a]** | J. Parts, *Graph minimization, focusing on the example of 5-chromatic unit-distance graphs in the plane*, arXiv:2010.12665 (Geombinatorics 29/4); the 509-vertex record | the vertex-count record every "smaller witness" claim is measured against; import target (G3/G4 falsifier) | — | abstract |
+| **[Parts2020b]** | J. Parts, arXiv:2010.12656 — the {1, φ} 16-vertex 6-chromatic two-distance graph (G31 = two copies), and the d = 2 397-vertex six-forcer from Minkowski sums of the hex wheel and its Moser-rotated copies **[title unverified]** | M49: Parts's {1, φ} G31 rebuilt exactly and shown edge-critical (μ over subgraphs = 56/56); G32 | — | read (M49) |
+| **[Voronov2021]** | A. Voronov, A. Neopryatnaya, E. Dergachev (as recorded; authorship to verify), *Constructing 5-chromatic unit distance graphs embedded in the Euclidean plane and two-dimensional spheres* **[title from a search listing]**, arXiv:2106.11824 — the 64,513-vertex Moser-spindle-free 5-chromatic graph | G11 (the Moser subgraph is not necessary for 5) | — | second-hand |
+| **[Voronov2023]** | *The chromatic number of the plane with an interval of forbidden distances* (Exoo's conjecture proved) **[title from a search listing]**, arXiv:2304.10163 | M43/G24/G29: conditional on it, χ(G(p)) ≥ 7 for the whole cell family — **flagged everywhere as external and unverified by us** | — | abstract |
+| **[Haugland2026]** | J. K. Haugland, arXiv:2608.04542 (2026) — a Moser-spindle-free 5-chromatic unit-distance graph of 2,131 vertices on a heptagonal fabric with an explicit detuning parameter **[title unverified]** | G3's scope correction, G7's independent support, G11; verification is floats + uncertified SAT; import target | — | read (2026-08-10) |
+| **[Fischer1990]** | K. G. Fischer, *Additive k-colorable extensions of the rational plane*, Discrete Math. 82 (1990) 181–195, doi 10.1016/0012-365X(90)90324-B | **the framework of the field-wall theorem** (additive colourings = our residue colourings), Theorem 1 (2-colourable ⟺ ring homomorphism Σ₀ → ℤ/2), Theorem 6 (transcendental extensions), **Theorems 8–10: the complete real-quadratic classification** — 2 colours iff N ≢ 3 (mod 4), 3 colours for N ≢ 2 (mod 3) hence χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3, 4 colours for N ≡ 3 (mod 8), no additive k ≤ 6 for N ≡ 23 (mod 24). Our note's Corollary 6.5 was corrected against his Theorem 8 (T23); what stays ours: the local criterion, the multiquadratic case, Theorem B's exact 4 | `library/papers/1-s2.0-0012365X9090324B-main.pdf` | **read (2026-09-06)** |
+| **[Johnson1990]** | P. D. Johnson Jr., *Two-colorings of a dense subgroup of ℚⁿ that forbid many distances*, Discrete Math. 79 (1989/90) 191–195, doi 10.1016/0012-365X(90)90033-E | the 2-adic lineage of the residue colouring (ℤ₍₂₎ⁿ two-coloured forbidding all √(p/q), p, q odd); Fischer's "if" half of Theorem 8 in more generality | `library/papers/1-s2.0-0012365X9090033E-main.pdf` | abstract |
+| **[Johnson1987]** | P. D. Johnson Jr., *Two-colorings of real quadratic extensions of ℚ² that forbid many distances*, Congressus Numerantium 60 (1987) 51–58 | cited by Fischer for the bipartite quadratic planes | not held (print only; a request note in `library/notes/`) | — |
+| **[Zaks1992]** | J. Zaks, *On the chromatic number of some rational spaces*, Ars Combinatoria 33 (1992) 253–256 | the rational-space background of the note's §2 | `library/papers/volume-33-paper-23.pdf` (to confirm it is this paper) | unread |
+| **[Chilakamarri1988]** | K. B. Chilakamarri, *Unit-distance graphs in rational n-spaces*, Discrete Math. 69 (1988) 213–218, doi 10.1016/0012-365X(88)90049-0 | connectivity of G(ℚᵈ) (the note cites "not connected for d = 2"; Fischer's Example 1 gives Σ₀(ℚ²) = ℤ_S[i]) | `library/papers/1-s2.0-0012365X88900490-main.pdf` | unread |
+| **[Chow1993]** | T. Y. Chow, *Distances forbidden by two-colorings of ℚ³ and Aₙ*, Discrete Math. 115 (1993) 95–102, doi 10.1016/0012-365X(93)90481-8 | background for the additive-colouring framework beyond the plane | `library/papers/1-s2.0-0012365X93904818-main.pdf` | unread |
+| **[JoeNoble2023]** | *A Triangle-free, 4-chromatic ℚ³ Euclidean Distance Graph Scavenger Hunt* **[title from a search listing]**, arXiv:2303.09513 — restates Johnson 1990 and Chow 1993 with attribution | the search agent's source for those two papers' statements (`library/notes/FINDINGS.md`, second-hand — verify against the originals) | `library/pdf/arXiv-2303.09513.pdf` | second-hand |
+| **[Woodall1973]** | D. R. Woodall, *Distances realized by sets covering the plane*, J. Combin. Theory Ser. A 14 (1973) 187–200 | the 2-colouring of ℚ² — the archetype of the residue colouring (note §5.1 names it) | not held | second-hand (via Fischer) |
+| **[BendaPerles]** | M. Benda, M. Perles, *Colorings of metric spaces* (preprint, 1970s; Geombinatorics 9 (2000)) | χ(ℚ⁴) = 4; the reduction of χ(ℝ²) to finite algebraic extensions (Fischer's Remark 1) | not held | second-hand (via Fischer) |
+| **[deBruijnErdos1951]** | N. G. de Bruijn, P. Erdős, *A colour problem for infinite graphs and a problem in the theory of relations*, Indag. Math. 13 (1951) 371–373 | compactness: every bound on χ(ℝ²) is witnessed by a finite graph — the licence behind every certificate here | not held | second-hand |
+| **[Isbell / HDK1964]** | H. Hadwiger, H. Debrunner, V. Klee, *Combinatorial Geometry in the Plane* (Holt, Rinehart and Winston, 1964) — Isbell's hexagonal 7-colouring | M36 (χ(ℝ²) ≤ 7 kernel-checked; attribution to Isbell), M37 | not held | second-hand |
+| **[Moser1961]** | L. Moser, W. Moser, *Solution to problem 10*, Canad. Math. Bull. 4 (1961) 187–189 — the Moser spindle | rung A; `FieldWall.lean`; the whole seam-field arc | not held | second-hand |
+| **[Soifer2009]** | A. Soifer, *The Mathematical Coloring Book: Mathematics of Coloring and the Colorful Life of its Creators*, Springer 2009, doi 10.1007/978-0-387-74642-5 | the survey of number-field planes (chapters 11–12); whether Johnson/Zaks settle the note's small cases | not held (being borrowed) | — |
+| **[Soifer2024]** | A. Soifer, *The New Mathematical Coloring Book*, Springer 2024 (with Grünbaum, Johnson, Rousseau updating the number-field chapter; chapter doi 10.1007/978-1-0716-3597-1_58 covers Exoo–Ismailescu) | the same, updated; **Kooshi obtained it 2026-09-06 — NOT yet read (context budget); read post-compaction when needed** | `library/Alexander Soifer - The New Mathematical Coloring Book_ … (2024).pdf` | unread |
+| **[DeNeve2025]** | J. De Neve, V. Vanden Kerchove, K. Colle, W. Tavernier, M. Pickavet, *On the chromatic number of the plane with two forbidden distances*, Amer. Math. Monthly 132(10) (2025), doi 10.1080/00029890.2025.2559554 — {1, 3} in 33 vertices, {1, 2 + √6} in 117 | the two-distance landscape M49 measured μ against | — | abstract |
+| **[Agoston2026]** | G. Ágoston, *On the range of two-distance graphs* **[title from a search listing]**, arXiv:2601.07828 — edge-bicoloured graphs; Bukh's conjecture | the two-distance landscape; Pálvölgyi–Ágoston's Polymath16 claims (d = √3, (√3 + 1)/√2) are cited through it | — | abstract |
+| **[Polymath16]** | Polymath16, *Hadwiger–Nelson problem* (2018–), the project's threads (thread 14 for the Pálvölgyi–Ágoston two-distance claims) | landscape; the probabilistic two-distance claims | — | second-hand |
+| **[GreenwellLovasz1974]** | D. Greenwell, L. Lovász, *Applications of product colouring*, Acta Math. Acad. Sci. Hungar. 25 (1974), doi 10.1007/BF01886093 — uniquely colourable products | cited in a derivation about projective (dictator) graphs in an earlier session; **[the derivation's location in `plans/` to be re-found]** | — | second-hand |
+| **[CranstonRabern2017]** | D. W. Cranston, L. Rabern, *The fractional chromatic number of the plane*, Combinatorica (2017), doi 10.1007/s00493-016-3380-3; arXiv:1501.01647 | the fractional bounds M17/M40 compare against; cites Fischer | `library/pdf/arXiv-1501.01647.pdf` | unread |
+
+## B. Held in the library, not yet read (the search agent's fetch of 2026-09-05; its one-line reason for each is in `library/fetch-papers.sh`)
+
+| arXiv | title | why fetched |
+|---|---|---|
+| 0707.1177 | *Unit distance graphs with ambiguous chromatic number* [search listing] | cites Fischer |
+| 1206.1934 | (see `fetch-papers.sh`) | cites Fischer |
+| 1509.03667 | *Chromatic properties of the Euclidean plane* [search listing] | cites Fischer |
+| 2103.02757 | (see `fetch-papers.sh`) | number-field planes |
+| 2106.05333 | (see `fetch-papers.sh`) | number-field planes |
+| 2108.07713 | *Embedding Euclidean distance graphs in ℝⁿ and ℚⁿ* [search listing] | rational embeddings |
+| 2201.00275 | (see `fetch-papers.sh`) | number-field planes |
+| 2305.07770 | (see `fetch-papers.sh`) | number-field planes |
+| — | A. M. Raigorodskii, Borsuk survey (Russian) — `library/pdf/raigorodskii-borsuk-survey-RU.pdf` | context |
+
+## C. Seen in earlier sessions' web searches only — unread, listed so nothing is lost (titles as the search listings gave them)
+
+Relevant to our questions, worth reading when a milestone touches them:
+
+* arXiv:2502.01958 *On the chromatic number of the plane for map-type colorings* — the cell-family / coset colourings of M37–M40 may have prior art here.
+* arXiv:2303.06262, 2303.06272 *Chromatic numbers of Cayley graphs of abelian groups: a matrix method* / *cases of small dimension and rank* — the unit-distance graph on F² as a Cayley graph (the field-wall note's §2 viewpoint).
+* arXiv:2303.14722 *More certainty in coloring the plane with a forbidden distance interval*; doi 10.1007/s00454-004-1092-8 *ε-unit distance graphs* (Discrete Comput. Geom.) — the interval/ε-dial theme of M43–M44.
+* arXiv:2311.10069 *The fractional chromatic number of the plane is at least 4*; arXiv:1810.00960 *On the density of sets of the Euclidean plane avoiding distance 1*; arXiv:2606.28157 *A unit-distance graph in the plane with independence ratio below 1/4* — the fractional/density side.
+* arXiv:2206.12632 *A 6-chromatic odd-distance graph in the plane*; arXiv:2205.12312 *The chromatic number of ℝⁿ with multiple forbidden distances*; arXiv:2506.19151 *Yet another species of forbidden-distances chromatic …*; arXiv:2404.05509 *Extending the continuum of six-colorings*; arXiv:2506.19126 *Upper chromatic numbers: an update*; arXiv:2206.12635 *Tiling the plane with hexagons: improved separations for k-colourings*; arXiv:2206.12633 *On the plane and its coloring* — the multi-distance and upper-bound landscape (M35, M47).
+* arXiv:2303.06801 *A 5-chromatic same-distance graph in the hyperbolic plane*; arXiv:2201.04499 *Coloring distance graphs on the plane*; arXiv:1305.2765 *Coloring distance graphs: a few answers and many questions*; arXiv:1507.00025 *Chromatic number of Euclidean plane*; doi 10.1007/s00373-012-1249-9 *On the chromatic number of subsets of the Euclidean plane*; doi 10.1007/BF01858462 *On the connectivity of unit distance graphs* — surveys and neighbours.
+* arXiv:2604.15466 *Any 2-coloring of the plane contains monochromatic unit rhombuses*; arXiv:2510.15002 *Determining unit distance graphs with coordinates in ℤ² is NP-complete*; arXiv:2312.15336 *The Gray graph is a unit-distance graph*; arXiv:1802.06460 *Embedding distance graphs in finite field vector spaces*; arXiv:0711.1157, 0912.5395 (unit-distance embeddings of the Heawood graph) — unit-distance embedding results.
+* arXiv:2604.01408 (strongly projective graphs; the "dictator" form) — with [GreenwellLovasz1974].
+* doi 10.1007/978-0-8176-8092-3_8 (Soifer's essay chapter on the chromatic number of the plane); doi 10.1007/978-3-540-28629-5_19 (group colouring complexity); arXiv:1111.1015, 1003.2588 (colourings of abelian groups); arXiv:1903.09444, 2508.19775 (perfect colourings, Johnson graphs); arXiv:2207.13892 (random ε-distance graphs on spheres).
+
+Not relevant (name collisions in searches, recorded so they are not re-fetched): arXiv:2106.05621 (rationalizability of field extensions, Feynman integrals); doi 10.1007/s00209-025-03728-4 (an algebraic Fischer–Grauert theorem); arXiv:1301.3998 (dihedral group actions).
+
+## D. Standing tasks for this file
+
+1. Verify every **[title from a search listing]** and **[title unverified]** against the paper (arXiv landing pages) — a five-minute job per entry, deferred by context budget on 2026-09-06.
+2. Re-find where [GreenwellLovasz1974] / arXiv:2604.01408 were used and record the plan section.
+3. Read [Soifer2024]'s number-field chapter and [Chilakamarri1988], [Chow1993], [Zaks1992] against the field-wall note's §2 and §8, and record what each settles (the note's §10.1 holds Fischer's reconciliation as the template).
+4. When a theorem lands whose proof follows a paper, the ledger row in `CLAUDE.md` names the key from column one of table A.
