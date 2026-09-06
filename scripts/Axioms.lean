@@ -913,6 +913,12 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms HadwigerNelson.stressPairing_eq_zero_of_lift
 #print axioms HadwigerNelson.not_exists_lift_of_stressPairing_ne_zero
 #print axioms HadwigerNelson.UDCert.stressPairing_eq_zero_of_drawing
+-- the first instance (Instances/LiftObstruction131.lean): the 1581's merged image at 131 is not a shadow — a 48-edge
+-- witness stress with pairing 7205 ≠ 0 in ZMod (131²); and the plane's clique number pinned at 11 and 19
+#print axioms HadwigerNelson.merged131_no_lift
+#print axioms HadwigerNelson.merged131_no_drawing
+#print axioms HadwigerNelson.finitePlane11_triangle
+#print axioms HadwigerNelson.finitePlane19_triangle_free
 
 -- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
 #print axioms mono_pair_of_clique

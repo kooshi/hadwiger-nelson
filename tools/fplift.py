@@ -466,6 +466,10 @@ def shrink_vertices(p, k, wall, verts, log, protected=frozenset()):
                         log(f"  vertices {len(cur) + len(chunk)} → {len(cur)} (batch {batch})")
                 i += batch
         batch //= 2
+    # protected vertices (kept out of the batches so the sphere structure survives the pass) are tried last, plainly
+    for v in [w for w in cur if w in protected]:
+        if len(cur) > 1 and ask([w for w in cur if w != v])[0] == "unsat":
+            cur = [w for w in cur if w != v]; log(f"  protected {v} deleted: {len(cur)}")
     witnesses = {}; undecided = []
     for v in list(cur):
         st, col = ask([w for w in cur if w != v])
@@ -521,11 +525,11 @@ def hensel_sqrt(d, p, prec):
     """A root of x² = d in Z_p to precision p^prec from its residue (d a nonzero square mod p)."""
     import fplane as FP
     r = FP.sqrt_mod(d, p); assert r not in (None, 0), f"√{d} has no simple residue mod {p}"
-    mod = p
-    for _ in range(prec):
-        mod = mod * mod
+    mod = p ** prec                                    # Newton doubles the precision each step: log₂(prec) + 1 steps
+    for _ in range(prec.bit_length() + 1):             # at the FIXED modulus (never square the modulus itself)
         r = (r - (r * r - d) * pow(2 * r, -1, mod)) % mod
-    return r % (p ** prec)
+    assert (r * r - d) % mod == 0, "INSTRUMENT CATASTROPHE: the Hensel root did not converge"
+    return r
 
 
 def embed_stage(ch, p, prec):
@@ -574,6 +578,26 @@ def hub_test(p, w, nbrs, prec):
     return None, x, rk
 
 
+def hub_scan(p, have, pts_by_res, prec, min_degree):
+    """Every residue point outside `have` with ≥ min_degree neighbours in it, tested as a hub against the p-adic points
+    `pts_by_res` of those neighbours. Returns (rows, counts by degree)."""
+    C = circle(p); rows = []; counts = {}
+    for x in range(p):
+        for y in range(p):
+            w = (x, y)
+            if w in have:
+                continue
+            nb = [((w[0] - c[0]) % p, (w[1] - c[1]) % p) for c in C]
+            nb = [r for r in nb if r in have]
+            d = len(nb)
+            if d < min_degree:
+                continue
+            lvl, pt, rk = hub_test(p, w, [pts_by_res[r] for r in nb], prec)
+            counts[d] = counts.get(d, 0) + 1
+            rows.append(dict(residue=list(w), degree=d, direction_rank=rk, verdict=(f"passes-to-precision-{prec}" if lvl is None else f"obstructed-at-level-{lvl}"), point=pt))
+    return rows, counts
+
+
 def cmd_hubs(a):
     import additive as AD
     p, prec = a.p, a.prec; t0 = time.time()
@@ -590,22 +614,8 @@ def cmd_hubs(a):
     assert all((emb[i][0] % p, emb[i][1] % p) == red[i] for i in range(len(red))), "INSTRUMENT CATASTROPHE: the embedding does not reduce to the residues"
     bad = [(u, v) for u, v in ch.edges if ((emb[u][0] - emb[v][0]) ** 2 + (emb[u][1] - emb[v][1]) ** 2 - 1) % mod]
     assert not bad, ("INSTRUMENT CATASTROPHE: a stage edge is not unit in the p-adic embedding", bad[:3])
-    C = circle(p); have = set(classes)
-    pts_by_res = {r: emb[i] for r, i in classes.items()}
-    rows = []; counts = {}
-    for x in range(p):
-        for y in range(p):
-            w = (x, y)
-            if w in have:
-                continue
-            nb = [((w[0] - c[0]) % p, (w[1] - c[1]) % p) for c in C]
-            nb = [r for r in nb if r in have]
-            d = len(nb)
-            if d < a.min_degree:
-                continue
-            lvl, pt, rk = hub_test(p, w, [pts_by_res[r] for r in nb], prec)
-            counts[d] = counts.get(d, 0) + 1
-            rows.append(dict(residue=list(w), degree=d, direction_rank=rk, verdict=(f"passes-to-precision-{prec}" if lvl is None else f"obstructed-at-level-{lvl}"), point=pt))
+    have = set(classes); pts_by_res = {r: emb[i] for r, i in classes.items()}
+    rows, counts = hub_scan(p, have, pts_by_res, prec, a.min_degree)
     passers = [r for r in rows if r["verdict"].startswith("passes")]
     lvl2 = sum(1 for r in rows if r["verdict"] == "obstructed-at-level-2")
     rec = dict(kind="fplane-hubs", stage=fw.meta["stage"], p=p, prec=prec, min_degree=a.min_degree, injective_vertices=len(have),
@@ -719,6 +729,23 @@ def self_test():
     fw = stage_framework(a, 131); r = local_test(fw, prec=6, want_witness=False)
     check(f"Heule-510's injective sub-reduction at 131 ({fw.n} residues of 510, {fw.m} edges): level 2 passes ({r['level2']['of']} conditions), {r['verdict']}",
           r["level2"]["failing"] == 0 and r["verdict"].startswith("passes"))
+    # 6b. the hub scan's positive control: delete one vertex of Heule-510's injective sub-reduction at 131 (degree ≥ 3)
+    #     and scan — its residue must come back as a passer of exactly its degree (it is a real point)
+    ch = fw.meta["chunk"]; emb, _ = embed_stage(ch, 131, 8)
+    import fplane as FP
+    red = FP.reduce_stage(ch, 131, fw.meta["roots"]); classes = {}
+    for i, rr in enumerate(red):
+        classes.setdefault(rr, i)
+    degs = {}
+    for u, v in fw.edges:
+        degs[u] = degs.get(u, 0) + 1; degs[v] = degs.get(v, 0) + 1
+    vdel = max(range(fw.n), key=lambda i: degs.get(i, 0)); rdel = fw.verts[vdel]
+    have = set(classes) - {rdel}; pts_by_res = {r: emb[i] for r, i in classes.items() if r != rdel}
+    rows, counts = hub_scan(131, have, pts_by_res, 8, 3)
+    passers = [r for r in rows if r["verdict"].startswith("passes")]
+    mine = [r for r in passers if tuple(r["residue"]) == rdel]
+    check(f"hub scan on Heule-510 at 131 minus its vertex of degree {degs[vdel]}: {len(rows):,} candidates, {len(passers)} passer(s) — the deleted vertex's residue {rdel} is recovered (degree {mine[0]['degree'] if mine else None})",
+          len(mine) == 1 and mine[0]["degree"] == degs[vdel])
     fw11 = stage_framework(a, 11); r11 = local_test(fw11, prec=4, want_witness=False)
     check(f"planted: Heule-510's injective sub-reduction at 11 (ramified: {fw11.n} residues, {fw11.m} edges) is obstructed — {r11['verdict']}", r11["verdict"] == "obstructed-at-level-2")
     # 7. planted corruption: a moved vertex on the hex shell breaks the unit check loudly

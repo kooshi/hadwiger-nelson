@@ -523,3 +523,16 @@ claim-scope field in every record.
   reduction (a hom, the upper bound) is fine at ramified primes, the LIFT (the lower bound) is not — the 11-sealing of the
   K-fields, which uses the ramified prime above 11, says nothing about lifts at 11; the unramified usable primes of K
   (83, 107, 131, …) are the lift's primes. Controls re-registered: obstructed at 11 (ramified) is the planted red.
+* **P4 measured (2026-09-06, `data/fplane/lift-degrey1581-p131{,-merged}.json`).** The 1581's injective sub-reduction at 131
+  (1,547 residues, 7,541 kept edges): rigid (rank 3,091 = 2n − 3), stress dimension 4,450, level 2 passes all 4,450
+  conditions, and the gauge-fixed Hensel lift of a 3,091-edge Laman basis has EVERY one of the 7,541 edges unit to precision
+  131²⁰ (24 s) — the p-adic configuration recovered from residues alone. The merged image (the 34 collision pairs identified,
+  7,876 edges, ≥ 5-chromatic as a hom image): OBSTRUCTED at level 2 — 2,406 of 4,785 stress-basis conditions fail; the
+  minimal-support witness is 48 edges on 26 vertices with pairing 7205 ≢ 0 (mod 131²): a kernel-instance-sized certificate
+  that a ≥ 5-chromatic subgraph of the plane is not a shadow.
+* **Instrument incident.** `hensel_sqrt` squared its modulus at every Newton step (p^(2^20)); the `hubs` step and the
+  isometry check stalled on seven-megabit arithmetic. Fixed (fixed modulus, ⌈log₂ prec⌉ + 1 steps, convergence asserted).
+* **P4, the isometry half.** The Newton lift of the injective sub-reduction and the tower embedding (the 1581's actual
+  coordinates through the Hensel-lifted roots of 3, 5, 7, 11 mod 131²⁰) agree on all 20,000 sampled pairwise quadrances
+  mod 131²⁰ — the same configuration up to a p-adic isometry, as the rigid dichotomy says; the embedding has all 7,877
+  stage edges unit mod 131²⁰.
