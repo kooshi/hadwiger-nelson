@@ -16,6 +16,7 @@ import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.CriticalSet
 import Proofs.HadwigerNelson.Absorb
 import Proofs.HadwigerNelson.Additive
+import Proofs.HadwigerNelson.AdditiveRigid
 import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.FanMono
 import Proofs.HadwigerNelson.Greedy

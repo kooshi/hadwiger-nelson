@@ -1,0 +1,1515 @@
+{
+ "kind": "additive-closure",
+ "stage": {
+  "name": "hexball-2",
+  "n": 19,
+  "edges": 42,
+  "fingerprint": "a8d34144ba24dc21",
+  "source": "the hexagonal lattice ball of radius 2 (hex coordinates)",
+  "frame": {
+   "name": "hex2",
+   "meaning": "(a, b) meaning a + b*zeta6",
+   "dim": 2
+  },
+  "unit_verified": "by construction",
+  "components": 1,
+  "origin": 9,
+  "radius": 2
+ },
+ "k": 4,
+ "cheats": 0,
+ "cheats_source": null,
+ "edges_used": "unit (42)",
+ "family": {
+  "homs": 12,
+  "partitions": 4,
+  "exact": true,
+  "rank": 2,
+  "groups": [
+   {
+    "group": "Z/4",
+    "count": 6,
+    "partitions": 3,
+    "method": "enumerate",
+    "exact": true
+   },
+   {
+    "group": "Z/2xZ/2",
+    "count": 6,
+    "partitions": 1,
+    "method": "enumerate",
+    "exact": true
+   }
+  ],
+  "filtered_by_cheats": false
+ },
+ "gamma_exact": true,
+ "verdict": "family-kempe-open",
+ "gamma": 36,
+ "gamma_bar": 9.0,
+ "loose_part": 6,
+ "kempe_part": 30,
+ "loose_incidences": 6,
+ "loose_vertices": 6,
+ "loose_by_vertex": {
+  "0": 1,
+  "2": 1,
+  "7": 1,
+  "11": 1,
+  "16": 1,
+  "18": 1
+ },
+ "pairs_total": 24,
+ "disconnected": 24,
+ "connected": 0,
+ "component_histogram": {
+  "2": 12,
+  "3": 12
+ },
+ "swaps": {
+  "built": 24,
+  "proper": 24,
+  "non_additive": 24,
+  "additive": 0,
+  "undecided": 0
+ },
+ "hom_rows": [
+  {
+   "hom": 0,
+   "group": [
+    4
+   ],
+   "hom_vector": [
+    [
+     1,
+     2
+    ]
+   ],
+   "gamma": 9,
+   "verdict": "kempe-open",
+   "loose": [
+    [
+     7,
+     1
+    ],
+    [
+     11,
+     3
+    ]
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       4,
+       8,
+       13,
+       16
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       1,
+       2
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       3,
+       8,
+       12,
+       16
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      7
+     ],
+     "swap": {
+      "component": [
+       7
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       3,
+       4,
+       5,
+       6
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      11
+     ],
+     "swap": {
+      "component": [
+       11
+      ],
+      "verdict": "not-additive"
+     }
+    }
+   ]
+  },
+  {
+   "hom": 1,
+   "group": [
+    4
+   ],
+   "hom_vector": [
+    [
+     1,
+     3
+    ]
+   ],
+   "gamma": 9,
+   "verdict": "kempe-open",
+   "loose": [
+    [
+     2,
+     1
+    ],
+    [
+     16,
+     3
+    ]
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       4,
+       5,
+       10,
+       11
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       3,
+       7
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       1,
+       5,
+       6,
+       11
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      2
+     ],
+     "swap": {
+      "component": [
+       2
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       1,
+       4,
+       8,
+       12
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      16
+     ],
+     "swap": {
+      "component": [
+       16
+      ],
+      "verdict": "not-additive"
+     }
+    }
+   ]
+  },
+  {
+   "hom": 2,
+   "group": [
+    4
+   ],
+   "hom_vector": [
+    [
+     2,
+     1
+    ]
+   ],
+   "gamma": 9,
+   "verdict": "kempe-open",
+   "loose": [
+    [
+     18,
+     1
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      18
+     ],
+     "swap": {
+      "component": [
+       18
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       2,
+       6,
+       11
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "components": 3,
+     "sizes": [
+      1,
+      3,
+      5
+     ],
+     "isolated": [
+      0
+     ],
+     "swap": {
+      "component": [
+       0
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       1,
+       2,
+       3,
+       4,
+       7
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       1,
+       5,
+       10,
+       15
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      5,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       2,
+       4,
+       5,
+       7,
+       8
+      ],
+      "verdict": "not-additive"
+     }
+    }
+   ]
+  },
+  {
+   "hom": 3,
+   "group": [
+    2,
+    2
+   ],
+   "hom_vector": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gamma": 9,
+   "verdict": "kempe-open",
+   "loose": [],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       2,
+       6,
+       11
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       1,
+       2
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "components": 3,
+     "sizes": [
+      3,
+      3,
+      5
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       0,
+       3,
+       7
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       1,
+       4,
+       8,
+       12
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       3,
+       4,
+       5,
+       6
+      ],
+      "verdict": "not-additive"
+     }
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "components": 2,
+     "sizes": [
+      4,
+      4
+     ],
+     "isolated": [],
+     "swap": {
+      "component": [
+       1,
+       5,
+       10,
+       15
+      ],
+      "verdict": "not-additive"
+     }
+    }
+   ]
+  }
+ ],
+ "swap_records": [
+  {
+   "hom": 0,
+   "pair": [
+    0,
+    1
+   ],
+   "component": [
+    0,
+    4,
+    8,
+    13,
+    16
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    1,
+    2,
+    0,
+    3,
+    0,
+    3,
+    1,
+    2,
+    1,
+    2,
+    0,
+    2,
+    3,
+    0,
+    3,
+    1,
+    1,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 0,
+   "pair": [
+    0,
+    2
+   ],
+   "component": [
+    0,
+    1,
+    2
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    1,
+    2,
+    0,
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    1,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 0,
+   "pair": [
+    0,
+    3
+   ],
+   "component": [
+    0,
+    3,
+    8,
+    12,
+    16
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    3,
+    2,
+    0,
+    0,
+    1,
+    3,
+    1,
+    2,
+    3,
+    2,
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 0,
+   "pair": [
+    1,
+    2
+   ],
+   "component": [
+    7
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    0,
+    3,
+    1,
+    3,
+    1,
+    1,
+    0,
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    1,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 0,
+   "pair": [
+    1,
+    3
+   ],
+   "component": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    2,
+    0,
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    1,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 0,
+   "pair": [
+    2,
+    3
+   ],
+   "component": [
+    11
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    0,
+    3,
+    1,
+    3,
+    1,
+    2,
+    0,
+    2,
+    0,
+    3,
+    3,
+    1,
+    3,
+    1,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    0,
+    1
+   ],
+   "component": [
+    0,
+    4,
+    5,
+    10,
+    11
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    1,
+    3,
+    2,
+    2,
+    0,
+    1,
+    3,
+    0,
+    3,
+    2,
+    0,
+    1,
+    1,
+    0,
+    3,
+    2,
+    2,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    0,
+    2
+   ],
+   "component": [
+    0,
+    3,
+    7
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    2,
+    3,
+    2,
+    0,
+    1,
+    0,
+    3,
+    2,
+    3,
+    2,
+    1,
+    0,
+    1,
+    0,
+    3,
+    2,
+    2,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    0,
+    3
+   ],
+   "component": [
+    0,
+    1,
+    5,
+    6,
+    11
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    3,
+    0,
+    2,
+    2,
+    1,
+    3,
+    0,
+    0,
+    3,
+    2,
+    1,
+    3,
+    1,
+    0,
+    3,
+    2,
+    2,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    1,
+    2
+   ],
+   "component": [
+    2
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    3,
+    1,
+    2,
+    1,
+    0,
+    3,
+    0,
+    3,
+    2,
+    1,
+    0,
+    1,
+    0,
+    3,
+    2,
+    2,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    1,
+    3
+   ],
+   "component": [
+    1,
+    4,
+    8,
+    12
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    1,
+    2,
+    2,
+    3,
+    0,
+    3,
+    0,
+    1,
+    2,
+    1,
+    0,
+    3,
+    0,
+    3,
+    2,
+    2,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 1,
+   "pair": [
+    2,
+    3
+   ],
+   "component": [
+    16
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    3,
+    2,
+    2,
+    1,
+    0,
+    3,
+    0,
+    3,
+    2,
+    1,
+    0,
+    1,
+    0,
+    3,
+    2,
+    3,
+    1,
+    0
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    0,
+    1
+   ],
+   "component": [
+    18
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    1,
+    2,
+    1,
+    2,
+    3,
+    0,
+    2,
+    3,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    3,
+    2,
+    3,
+    1
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    0,
+    2
+   ],
+   "component": [
+    2,
+    6,
+    11
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    1,
+    0,
+    1,
+    2,
+    3,
+    2,
+    2,
+    3,
+    0,
+    1,
+    0,
+    0,
+    1,
+    2,
+    3,
+    2,
+    3,
+    0
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    0,
+    3
+   ],
+   "component": [
+    0
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    3,
+    1,
+    2,
+    1,
+    2,
+    3,
+    0,
+    2,
+    3,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    3,
+    2,
+    3,
+    0
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    1,
+    2
+   ],
+   "component": [
+    1,
+    2,
+    3,
+    4,
+    7
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    1,
+    2,
+    1,
+    3,
+    0,
+    1,
+    3,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    3,
+    2,
+    3,
+    0
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    1,
+    3
+   ],
+   "component": [
+    1,
+    5,
+    10,
+    15
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    3,
+    2,
+    1,
+    2,
+    1,
+    0,
+    2,
+    3,
+    0,
+    3,
+    2,
+    0,
+    1,
+    2,
+    1,
+    2,
+    3,
+    0
+   ]
+  },
+  {
+   "hom": 2,
+   "pair": [
+    2,
+    3
+   ],
+   "component": [
+    2,
+    4,
+    5,
+    7,
+    8
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    1,
+    3,
+    1,
+    3,
+    2,
+    0,
+    3,
+    2,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    3,
+    2,
+    3,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    0,
+    1
+   ],
+   "component": [
+    2,
+    6,
+    11
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    1,
+    3,
+    1,
+    3,
+    0,
+    0,
+    2,
+    0,
+    2,
+    1,
+    1,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    0,
+    2
+   ],
+   "component": [
+    0,
+    1,
+    2
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    1,
+    0,
+    2,
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    0,
+    3
+   ],
+   "component": [
+    0,
+    3,
+    7
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    3,
+    2,
+    0,
+    0,
+    1,
+    3,
+    1,
+    3,
+    2,
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    1,
+    2
+   ],
+   "component": [
+    1,
+    4,
+    8,
+    12
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    1,
+    0,
+    3,
+    2,
+    3,
+    1,
+    0,
+    1,
+    0,
+    2,
+    0,
+    2,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    1,
+    3
+   ],
+   "component": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0,
+    2,
+    0,
+    1,
+    3,
+    1,
+    3,
+    0,
+    2,
+    0
+   ]
+  },
+  {
+   "hom": 3,
+   "pair": [
+    2,
+    3
+   ],
+   "component": [
+    1,
+    5,
+    10,
+    15
+   ],
+   "verdict": "not-additive",
+   "colouring": [
+    0,
+    3,
+    0,
+    3,
+    1,
+    2,
+    1,
+    0,
+    2,
+    0,
+    3,
+    0,
+    1,
+    3,
+    1,
+    2,
+    0,
+    2,
+    0
+   ]
+  }
+ ],
+ "colourings_used": 4,
+ "seconds": 0.0,
+ "claim_scope": "\u03b3 is exact when the family is complete and a LOWER bound when it is a sample; every kempe-open row carries a swapped colouring verified proper on the stage's full edge list, and one tested non-additive is a certificate of non-rigidity; \u03b3 = 0 proves nothing about rigidity (other reconfiguration components may exist)."
+}

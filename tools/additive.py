@@ -1255,6 +1255,8 @@ def main():
         p.add_argument("--colourings", required=True); p.set_defaults(f=f)
     p = sub.add_parser("obstruct"); stage_args(p); p.add_argument("--k", type=int, required=True); p.set_defaults(f=cmd_obstruct)
     p = sub.add_parser("self-test"); p.set_defaults(f=lambda a: sys.exit(0 if self_test() else 1))
+    import additive_rigid
+    additive_rigid.register(sub)   # M57: closure / rigid / free / extend / self-test-rigid
     a = ap.parse_args()
     a.f(a)
 

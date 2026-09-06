@@ -194,6 +194,18 @@ open HadwigerNelson
 #print axioms HadwigerNelson.addMonoidHom_apply_eq_of_sub_eq_nsmul
 #print axioms HadwigerNelson.addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul
 #print axioms HadwigerNelson.parity_grid
+-- M57: additive rigidity (AdditiveRigid.lean) — the reduction theorem (all colourings additive ⟹ kΛ-pairs forced),
+-- its plane corollaries, the bridge from homs, the spec (the unit path at 2 ⟹ χ ≥ 3) and the two reds
+#print axioms HadwigerNelson.isAdditive_of_addMonoidHom
+#print axioms HadwigerNelson.isAdditive_additiveColoring
+#print axioms HadwigerNelson.IsAdditive.apply_eq
+#print axioms HadwigerNelson.forces_of_additivelyRigid
+#print axioms HadwigerNelson.add_one_le_chromaticNumber_unitDistance_of_additivelyRigid
+#print axioms HadwigerNelson.six_le_chromaticNumber_plane_of_additivelyRigid
+#print axioms HadwigerNelson.pathGraph_additivelyRigid
+#print axioms HadwigerNelson.three_le_chromaticNumber_plane_of_pathGraph
+#print axioms HadwigerNelson.cycleGraph_six_not_additivelyRigid
+#print axioms HadwigerNelson.pathGraph_not_additivelyRigid_three
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
