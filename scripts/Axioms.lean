@@ -905,6 +905,15 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms core122_plane
 #print axioms core122_pairs_complete
 
+-- M59: the finite-plane lift (Lift.lean) — colourings pull back along an injective image (χ(H) ≤ χ(G) when
+-- H ≤ G.map f), the plane composite for a lifted (k+1)-forcer, the first-order obstruction (a stress with a
+-- nonzero pairing refutes every lift x₀ + π • y in any ring with π² = 0), and its certificate consumer at ZMod (p²).
+#print axioms HadwigerNelson.chromaticNumber_le_of_le_map
+#print axioms HadwigerNelson.UDCert.add_one_le_chromaticNumber_plane_of_lift
+#print axioms HadwigerNelson.stressPairing_eq_zero_of_lift
+#print axioms HadwigerNelson.not_exists_lift_of_stressPairing_ne_zero
+#print axioms HadwigerNelson.UDCert.stressPairing_eq_zero_of_drawing
+
 -- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
 #print axioms mono_pair_of_clique
 #print axioms hexShell_pigeonhole

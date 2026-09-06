@@ -510,3 +510,16 @@ reports `flexible (1)`, a planted false edge on the spindle at 83 is obstructed 
 computed), a planted corruption of a Newton residual is caught by the exact re-check, Heule-510's injective sub-reduction
 at 11 passes every level to the registered precision. The M58 conventions kept: records in `data/fplane/`, `--out`, the
 claim-scope field in every record.
+
+## §R-notes. Findings during implementation (running list; folded into §R at the close)
+
+* **The lift theory is for UNRAMIFIED degree-one primes, and the instrument found it.** The self-test's first run read three
+  reds: the Moser spindle's residue framework at 11 "obstructed at level 2" (its degenerate antipodal copy carries a stress
+  whose pairing is nonzero), Heule-510's injective sub-reduction at 11 obstructed, and a vacuous false-hub control. The first
+  two are the instrument being right and the controls wrong: 11 is RAMIFIED in ℚ(√11), so the spindle's and Heule-510's
+  coordinates live in ℤ₁₁[√11] with uniformizer √11, not in ℤ₁₁ — their residue frameworks are shadows of ℤ₁₁[√11]-
+  configurations and are provably not ℤ₁₁-lifts (a ℤ₁₁-lift of the spindle would put √11 in ℚ₁₁). The hex shell (ℚ(√3),
+  11 unramified) passes, the spindle passes at 83 and 131. So §S1's "𝔭 a degree-one prime" must read "unramified": M58's
+  reduction (a hom, the upper bound) is fine at ramified primes, the LIFT (the lower bound) is not — the 11-sealing of the
+  K-fields, which uses the ramified prime above 11, says nothing about lifts at 11; the unramified usable primes of K
+  (83, 107, 131, …) are the lift's primes. Controls re-registered: obstructed at 11 (ramified) is the planted red.

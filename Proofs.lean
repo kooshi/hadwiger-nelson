@@ -5,6 +5,7 @@ import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Field.Approx
 import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.UnitQuadrance
+import Proofs.HadwigerNelson.Lift
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion

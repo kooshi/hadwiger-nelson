@@ -42,7 +42,11 @@ the image (isolated in `H`, since `H ≤ G.map f`) by any colour — `Nonempty V
 the statement fails: an empty `V` and a nonempty `W` give `H = ⊥` on `W`, `1`-chromatic, above `χ(G) = 0`. -/
 theorem Colorable.of_le_map [Nonempty V] {f : V → W} (hf : Function.Injective f) (hH : H ≤ G.map f)
     {k : ℕ} (hG : G.Colorable k) : H.Colorable k := by
-  sorry
+  classical
+  refine Colorable.of_hom ⟨Function.invFun f, ?_⟩ hG
+  intro w w' hw
+  obtain ⟨-, u, u', huu', rfl, rfl⟩ := (map_adj' f G _ _).mp (hH hw)
+  rwa [Function.leftInverse_invFun hf u, Function.leftInverse_invFun hf u']
 
 /-- **The lift theorem, abstractly.** `χ(H) ≤ χ(G)` whenever `H ≤ G.map f` for an injection `f`. -/
 theorem chromaticNumber_le_of_le_map [Nonempty V] {f : V → W} (hf : Function.Injective f)
@@ -57,7 +61,8 @@ def quad {R : Type*} [CommRing R] (d : R × R) : R := d.1 ^ 2 + d.2 ^ 2
 /-- Adjacent points of `unitQuadrance R` differ by a vector of quadrance one. -/
 theorem quad_eq_one_of_adj {R : Type*} [CommRing R] {u v : R × R} (h : (unitQuadrance R).Adj u v) :
     quad (u - v) = 1 := by
-  sorry
+  rw [unitQuadrance_adj] at h
+  simpa [quad] using h.2
 
 namespace UDCert
 
@@ -68,7 +73,7 @@ through the composite hom. This relates a certificate's drawing at level `p` to 
 @[simp] theorem drawing_map (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) (u : R)
     (g : R →+* R') (i : Fin n) :
     Prod.map g g (c.drawing φ hS u i) = c.drawing (g.comp φ) hS (g u) i := by
-  sorry
+  simp only [drawing, Prod.map_apply, map_mul, RingHom.comp_apply]
 
 /-- **The lift theorem for certificates.** A valid certificate whose drawing into `R × R` is injective
 covers every graph `H` on `R × R` below the drawing's image; such an `H` bounds the certificate's chromatic
@@ -90,8 +95,9 @@ theorem add_one_le_chromaticNumber_plane_of_lift (c : UDCert n) {S : Subring Q4}
     (φ : S →+* R) (hS : c.CoordsIn S) {u : R} (hinj : Function.Injective (c.drawing φ hS u)) (hn : 0 < n)
     (H : SimpleGraph (R × R)) (hH : H ≤ (edgeGraph n c.edges).map (c.drawing φ hS u))
     (hd : c.denom ≠ 0) (hv : c.Valid = true) {k : ℕ} (hk : ¬ H.Colorable k) :
-    (k + 1 : ℕ) ≤ (unitDistance ℂ).chromaticNumber := by
-  sorry
+    (k + 1 : ℕ) ≤ (unitDistance ℂ).chromaticNumber :=
+  have : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
+  c.add_one_le_chromaticNumber_of_valid hd hv fun hcol => hk (Colorable.of_le_map hinj hH hcol)
 
 end UDCert
 
@@ -117,7 +123,7 @@ def netStress (x₀ : V → R × R) (L : List (StressedEdge V R)) (v : V) : R ×
     (v : V) :
     netStress x₀ (e :: L) v = ((if e.src = v then e.wt else 0) • (x₀ e.src - x₀ e.dst)
       - (if e.dst = v then e.wt else 0) • (x₀ e.src - x₀ e.dst)) + netStress x₀ L v := by
-  sorry
+  simp only [netStress, List.map_cons, List.sum_cons]
 
 variable [Fintype V]
 
@@ -143,23 +149,29 @@ def stressPairing (x₀ : V → R × R) (L : List (StressedEdge V R)) : R :=
 /-- The bilinear form on `R × R` in which the first-order term of `quad` is written. -/
 def dot (a b : R × R) : R := a.1 * b.1 + a.2 * b.2
 
-@[simp] theorem dot_zero_left (b : R × R) : dot (0 : R × R) b = 0 := by sorry
-theorem dot_add_left (a a' b : R × R) : dot (a + a') b = dot a b + dot a' b := by sorry
-theorem dot_sub_left (a a' b : R × R) : dot (a - a') b = dot a b - dot a' b := by sorry
-theorem dot_smul_left (c : R) (a b : R × R) : dot (c • a) b = c * dot a b := by sorry
-theorem dot_sub_right (a b b' : R × R) : dot a (b - b') = dot a b - dot a b' := by sorry
+@[simp] theorem dot_zero_left (b : R × R) : dot (0 : R × R) b = 0 := by simp [dot]
+theorem dot_add_left (a a' b : R × R) : dot (a + a') b = dot a b + dot a' b := by simp [dot]; ring
+theorem dot_sub_left (a a' b : R × R) : dot (a - a') b = dot a b - dot a' b := by simp [dot]; ring
+theorem dot_smul_left (c : R) (a b : R × R) : dot (c • a) b = c * dot a b := by simp [dot]; ring
+theorem dot_sub_right (a b b' : R × R) : dot a (b - b') = dot a b - dot a b' := by simp [dot]; ring
 
 /-- **The first-order expansion of the quadrance**: the per-edge identity the obstruction rests on. -/
 theorem quad_add_smul (a b : R × R) (π : R) :
     quad (a + π • b) = quad a + 2 * π * dot a b + π ^ 2 * quad b := by
-  sorry
+  simp only [quad, dot, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]; ring
 
 /-- **Summation by parts along the edge list**: the weighted edge vectors against the coboundary of `y`
 regroup as the net stresses against `y`. The one induction of the module — on the list. -/
 theorem sum_dot_eq_sum_netStress (x₀ y : V → R × R) (L : List (StressedEdge V R)) :
     (L.map fun e => e.wt * dot (x₀ e.src - x₀ e.dst) (y e.src - y e.dst)).sum
       = ∑ v, dot (netStress x₀ L v) (y v) := by
-  sorry
+  induction L with
+  | nil => simp
+  | cons e L ih =>
+    rw [List.map_cons, List.sum_cons, ih]
+    simp only [netStress_cons, dot_add_left, Finset.sum_add_distrib, dot_sub_left, dot_smul_left,
+      Finset.sum_sub_distrib, ite_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true, dot_sub_right]
+    ring
 
 /-- **The first-order obstruction.** With `π² = 0`, a lift of a stressed framework forces its stress pairing
 to vanish. Proof shape: `quad (x₀ e + π • y e) − 1 = (quad (x₀ e) − 1) + 2π⟨x₀ e, y e⟩` since `π² = 0`;
@@ -171,14 +183,28 @@ lift restricts, so a nonzero pairing on a SMALL sub-framework refutes every lift
 theorem stressPairing_eq_zero_of_lift {π : R} (hπ : π ^ 2 = 0) {x₀ y : V → R × R}
     {L : List (StressedEdge V R)} (hs : IsStress π x₀ L) (hy : IsLift π x₀ y L) :
     stressPairing x₀ L = 0 := by
-  sorry
+  have key : ∀ e ∈ L, e.wt * (quad (x₀ e.src - x₀ e.dst) - 1)
+      = -(2 * π) * (e.wt * dot (x₀ e.src - x₀ e.dst) (y e.src - y e.dst)) := by
+    intro e he
+    have h := hy e he
+    have hre : (x₀ e.src + π • y e.src) - (x₀ e.dst + π • y e.dst)
+        = (x₀ e.src - x₀ e.dst) + π • (y e.src - y e.dst) := by
+      rw [smul_sub]; abel
+    rw [hre, quad_add_smul, hπ] at h
+    linear_combination e.wt * h
+  unfold stressPairing
+  rw [List.map_congr_left key, List.sum_map_mul_left, sum_dot_eq_sum_netStress, Finset.mul_sum]
+  refine Finset.sum_eq_zero fun v _ => ?_
+  calc -(2 * π) * dot (netStress x₀ L v) (y v) = -2 * dot (π • netStress x₀ L v) (y v) := by
+        rw [dot_smul_left]; ring
+    _ = 0 := by rw [hs v, dot_zero_left, mul_zero]
 
 /-- **No lift**: the headline in the form an instance cites — a stress with a nonzero pairing refutes every
 lift at once. -/
 theorem not_exists_lift_of_stressPairing_ne_zero {π : R} (hπ : π ^ 2 = 0) {x₀ : V → R × R}
     {L : List (StressedEdge V R)} (hs : IsStress π x₀ L) (hb : stressPairing x₀ L ≠ 0) :
-    ¬ ∃ y : V → R × R, IsLift π x₀ y L := by
-  sorry
+    ¬ ∃ y : V → R × R, IsLift π x₀ y L :=
+  fun ⟨_, hy⟩ => hb (stressPairing_eq_zero_of_lift hπ hs hy)
 
 end Obstruction
 
@@ -195,11 +221,18 @@ theorem ZMod.exists_eq_add_mul_of_castHom_eq (p : ℕ) {a b : ZMod (p ^ 2)}
     (h : ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p) a
       = ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p) b) :
     ∃ t : ZMod (p ^ 2), a = b + (p : ZMod (p ^ 2)) * t := by
-  sorry
+  rw [ZMod.castHom_apply, ZMod.castHom_apply, ← ZMod.intCast_cast (R := ZMod p) a,
+    ← ZMod.intCast_cast (R := ZMod p) b, ZMod.intCast_eq_intCast_iff_dvd_sub] at h
+  obtain ⟨m, hm⟩ := h
+  refine ⟨-(m : ZMod (p ^ 2)), ?_⟩
+  have ha : ((ZMod.cast a : ℤ) : ZMod (p ^ 2)) = a := ZMod.intCast_zmod_cast a
+  have hb : ((ZMod.cast b : ℤ) : ZMod (p ^ 2)) = b := ZMod.intCast_zmod_cast b
+  have hab : (ZMod.cast a : ℤ) = ZMod.cast b - p * m := by linarith
+  rw [← ha, ← hb, hab]; push_cast; ring
 
 /-- `p² = 0` in `ZMod (p²)`: the square-zero element of the level-`p²` instance. -/
 theorem ZMod.natCast_sq_eq_zero (p : ℕ) : ((p : ZMod (p ^ 2)) ^ 2 : ZMod (p ^ 2)) = 0 := by
-  sorry
+  rw [← Nat.cast_pow, ZMod.natCast_self]
 
 end ResidueClass
 
@@ -225,7 +258,18 @@ theorem stressPairing_eq_zero_of_drawing (p : ℕ) [Nontrivial (ZMod (p ^ 2))] (
     (hres : ∀ v, residue p (c.drawing φ hS u (g v)) = residue p (x₀ v))
     (hE : ∀ e ∈ L, (edgeGraph n c.edges).Adj (g e.src) (g e.dst)) :
     stressPairing x₀ L = 0 := by
-  sorry
+  have hy : ∀ v, ∃ y : ZMod (p ^ 2) × ZMod (p ^ 2),
+      c.drawing φ hS u (g v) = x₀ v + (p : ZMod (p ^ 2)) • y := by
+    intro v
+    obtain ⟨t₁, h₁⟩ := ZMod.exists_eq_add_mul_of_castHom_eq p (congrArg Prod.fst (hres v))
+    obtain ⟨t₂, h₂⟩ := ZMod.exists_eq_add_mul_of_castHom_eq p (congrArg Prod.snd (hres v))
+    refine ⟨(t₁, t₂), Prod.ext ?_ ?_⟩
+    · rw [Prod.fst_add, Prod.smul_fst, smul_eq_mul]; exact h₁
+    · rw [Prod.snd_add, Prod.smul_snd, smul_eq_mul]; exact h₂
+  choose y hy using hy
+  refine stressPairing_eq_zero_of_lift (ZMod.natCast_sq_eq_zero p) hs (y := y) fun e he => ?_
+  have := quad_eq_one_of_adj (c.drawing_adj φ hS hu hv (hE e he))
+  rwa [hy, hy] at this
 
 end UDCert
 
