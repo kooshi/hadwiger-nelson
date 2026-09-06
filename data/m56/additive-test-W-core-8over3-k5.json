@@ -1,0 +1,654 @@
+{
+ "kind": "additive-test",
+ "stage": {
+  "name": "W-core-8over3",
+  "n": 1175,
+  "edges": 5773,
+  "fingerprint": "2db5071070c6d5bc",
+  "source": "exact witness data/m54/witness-exact-core-8over3.json",
+  "frame": {
+   "name": "K247-16",
+   "meaning": "(x, y) each as A + sqrt(247)*B with A, B over (1, sqrt3, sqrt11, sqrt33)",
+   "dim": 16
+  },
+  "unit_verified": "every listed edge is (\u0394x)\u00b2 + (\u0394y)\u00b2 = 1 as an exact identity in K(\u221am); the near-miss pairs are exactly non-unit; the edge list is the 60-digit census of the record",
+  "components": 1,
+  "centre_index": 12,
+  "cross_chords": [
+   [
+    12,
+    610
+   ],
+   [
+    12,
+    626
+   ],
+   [
+    12,
+    640
+   ],
+   [
+    12,
+    764
+   ],
+   [
+    12,
+    1020
+   ],
+   [
+    565,
+    1152
+   ]
+  ]
+ },
+ "k": 5,
+ "family_partitions": 432,
+ "family_exact": true,
+ "colourings": 200,
+ "additive": 0,
+ "improper": [],
+ "verdicts": [
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  },
+  {
+   "verdict": "not-additive"
+  }
+ ],
+ "colourings_file": "data/m56/colourings-sample-W-core-8over3-k5.json",
+ "claim_scope": "a colouring is `additive` iff its partition of the vertices equals that of a listed admissible hom's colouring (M1.3: partitions, not labels); with a complete family `not-additive` is exact"
+}

@@ -54,3 +54,5 @@
 2026-09-06T05:34:29Z M55 addendum: the 108 theorem-admitted virtual-edge asks on the full-pool grown witness (10,541 pts; C = a triangle through the centre), wall 900 each, log build/m55/ask-depth2.log; P-M55-10 registered (0 hits)
 2026-09-06T08:17:00Z M54/M55: the 5,857-point union's sweep DONE 0/0 (16,752 s); chain 4 exited
 2026-09-06T11:59:34Z M56 stubbed (plans/M56-arithmetic-of-tightness.md); the 108 asks on the thickened witness left running by Kooshi's instruction (pid 839605, log build/m55/ask-depth2.log)
+2026-09-06T12:43:21Z M56 B2 dump of the seed's 35 colourings: build/m56/dump_seed_colourings.py pid 1225376 log build/m56/dump-seed.log
+2026-09-06T13:13:30Z M56 B3 homs --degrey --k 5 --max 3000 relaunched on the fast path, pid 1252784, log build/m56/homs-degrey-k5.log

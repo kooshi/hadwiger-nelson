@@ -1,0 +1,755 @@
+{
+ "kind": "additive-ask",
+ "stage": {
+  "name": "heule510",
+  "n": 510,
+  "edges": 2504,
+  "fingerprint": "d67e15eb8400d9b0",
+  "source": "/home/kooshi/source/lean-dir/tools/heule510.json (vertex order of the file; the same order as tools/degrey_graph.json for the 1581)",
+  "frame": {
+   "name": "field16[3, 5, 7, 11]",
+   "meaning": "(x, y) each a 16-vector over the square-free radicals of [3, 5, 7, 11], scaled by 1/96",
+   "dim": 32
+  },
+  "unit_verified": "all 2504 edges verified unit by field.is_unit at load",
+  "components": 1
+ },
+ "k": 5,
+ "record": "data/m56/forced-heule510-k5.json",
+ "wall": 300.0,
+ "asked": 91,
+ "results": [
+  {
+   "pair": [
+    37,
+    297
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    40,
+    306
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "88cd2eb034089090"
+  },
+  {
+   "pair": [
+    41,
+    303
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2e3ffaf3ae0d6692"
+  },
+  {
+   "pair": [
+    44,
+    294
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    45,
+    291
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    48,
+    300
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    58,
+    284
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    58,
+    289
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    59,
+    281
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    59,
+    288
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "0396be45baee16f0"
+  },
+  {
+   "pair": [
+    102,
+    193
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    103,
+    196
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "c7daafbfcaf2f865"
+  },
+  {
+   "pair": [
+    104,
+    197
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    105,
+    188
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "50d6198ad1d7b3ec"
+  },
+  {
+   "pair": [
+    106,
+    189
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    107,
+    192
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "8b8c5d98a7d798e4"
+  },
+  {
+   "pair": [
+    109,
+    312
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    110,
+    315
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "281a3f8acc0db1d8"
+  },
+  {
+   "pair": [
+    113,
+    314
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    114,
+    311
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    117,
+    310
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    118,
+    313
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    120,
+    203
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "5017903f6b703af2"
+  },
+  {
+   "pair": [
+    125,
+    210
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    126,
+    207
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    131,
+    202
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "6f41762b9281fd4a"
+  },
+  {
+   "pair": [
+    132,
+    199
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "7a024a42840f7c1d"
+  },
+  {
+   "pair": [
+    137,
+    206
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "1a3de7e6e700bb5d"
+  },
+  {
+   "pair": [
+    139,
+    246
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    139,
+    357
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "017a4b2133c8ccb9"
+  },
+  {
+   "pair": [
+    139,
+    370
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "017a4b2133c8ccb9"
+  },
+  {
+   "pair": [
+    140,
+    241
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    143,
+    234
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    144,
+    247
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    144,
+    354
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    144,
+    374
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    147,
+    240
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    147,
+    366
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "22cc75dc59e44c34"
+  },
+  {
+   "pair": [
+    148,
+    235
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    148,
+    372
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "59504c297fc4446c"
+  },
+  {
+   "pair": [
+    150,
+    155
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    152,
+    156
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    153,
+    159
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    163,
+    364
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    166,
+    373
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "d5e1fcc47f88be84"
+  },
+  {
+   "pair": [
+    181,
+    186
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    182,
+    183
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "96decb3dfb9c54ae"
+  },
+  {
+   "pair": [
+    184,
+    185
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    211,
+    325
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    212,
+    326
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    213,
+    327
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    214,
+    328
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    215,
+    329
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    216,
+    330
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    217,
+    331
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    218,
+    332
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    219,
+    333
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    220,
+    316
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    221,
+    317
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    222,
+    318
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    223,
+    319
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    224,
+    320
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    225,
+    321
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    226,
+    322
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    227,
+    323
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "56945e8203733b73"
+  },
+  {
+   "pair": [
+    228,
+    324
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    230,
+    367
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "bfe78dd766d44730"
+  },
+  {
+   "pair": [
+    235,
+    372
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "665d57aab6f5b5a8"
+  },
+  {
+   "pair": [
+    240,
+    366
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "dee57eaddaa51612"
+  },
+  {
+   "pair": [
+    246,
+    357
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "0f1d7a5d4f9d6946"
+  },
+  {
+   "pair": [
+    246,
+    370
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "a9d3db9d5c88eef8"
+  },
+  {
+   "pair": [
+    247,
+    354
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "3405d7d1953c48cf"
+  },
+  {
+   "pair": [
+    247,
+    374
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "9304e97cb8e74efc"
+  },
+  {
+   "pair": [
+    250,
+    259
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    252,
+    253
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    256,
+    257
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    278,
+    283
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    279,
+    286
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "11c414a5bdd65fc6"
+  },
+  {
+   "pair": [
+    279,
+    356
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    280,
+    285
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "be0f7333246b6584"
+  },
+  {
+   "pair": [
+    281,
+    288
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    282,
+    287
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "25e6010ae14556f2"
+  },
+  {
+   "pair": [
+    282,
+    365
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "232ed3233d961135"
+  },
+  {
+   "pair": [
+    284,
+    289
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    286,
+    356
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    287,
+    365
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "e3ce9e3405d7950f"
+  },
+  {
+   "pair": [
+    309,
+    368
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2df0b5d713b36918"
+  },
+  {
+   "pair": [
+    338,
+    355
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "2b4450be82be372b"
+  },
+  {
+   "pair": [
+    339,
+    371
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "3099fcf307f3e3c0"
+  },
+  {
+   "pair": [
+    354,
+    374
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "4162481844230527"
+  },
+  {
+   "pair": [
+    357,
+    370
+   ],
+   "verdict": "refuted",
+   "colouring_sha": "05bf69aecd5f569a"
+  }
+ ],
+ "hits": [],
+ "unknown": [],
+ "seconds": 1.6,
+ "claim_scope": "each candidate asked once (polarity eq: a proper k-colouring separating the pair exists?) with a wall; 'refuted' = a verified separating colouring exists (the pair is NOT forced); 'HIT' in two encodings = a jackpot candidate to verify by hand; 'unknown' = the wall"
+}
