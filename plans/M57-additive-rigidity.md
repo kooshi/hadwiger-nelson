@@ -840,3 +840,22 @@ solver-free half, the gauge, is what the principle owns, and it barely moves).
 4. **The reduction theorem is in the kernel** with its two reds and the unit path as its model, and the principle it
    states is sufficient and far from necessary: the seed's 252-cheat forcing subset keeps the forced pair with a
    colouring space above 5,000, two thirds of it far from additive.
+
+### R5 addendum — the de Grey dial (`richness-degrey-k5.json`, in flight at the close; rows as they landed)
+
+The 1581's gen-1 half-spindle closure, regenerated exactly (24,065 points; balls about the origin pivot, unit pairs
+re-derived exactly, the lattice on the distinct directions):
+
+| ball r² ≤ | points | edges | distinct directions | rank | \|S₅\| | units in 5Λ | ℤ/5-homs |
+|---|---|---|---|---|---|---|---|
+| 1 | 11,053 | 36,288 | 329 | 32 | 243 | 0 | **≥ 300** (cap) |
+| 2 | 16,597 | 72,239 | 333 | 32 | 247 | 0 | **≥ 300** (cap) |
+| 4, whole | (running at the close; recorded when they land) | | | | | | |
+
+**The contrast with F₂₄₇ is the reading.** De Grey's closure is crystalline: eleven thousand points within radius 1 span
+only 329 unit directions (the half-spindle words permute a small direction set), the lattice has full rank 32 with no
+unit vector 5-divisible, and the family survives — where W's 63 cross points, in 26 → 82 direction classes, made 500
+units 5-divisible at once. FS-6's D1 is the derivation to run: a thickening keeps the family iff its new points are
+in-lattice or new-direction and never rational of an order divisible by 5, and the two constructions sit on opposite
+sides of that line. **P4 on de Grey: the family does NOT die below 3,000 points — MISSED at every radius measured so far**
+(the 1581 itself keeps ≥ 2,981; its closure's inner 16,597 points keep ≥ 300).
