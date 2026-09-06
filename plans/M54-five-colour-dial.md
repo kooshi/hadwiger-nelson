@@ -433,3 +433,30 @@ census (28 workers), the pair-2 shrink.
 the additive framework and the real-quadratic classification (note §10.1); the milestone's kernel piece
 is unaffected (a graph-theoretic theorem), and the field-wall note's Corollary 6.5 is corrected at
 d ≡ 5 (mod 8).
+
+## §R1. Phase D closed (2026-09-06 ~01:30Z) — the F₂₄₇ cross lattice is rare and lattice-like
+
+| quantity (population) | measured |
+|---|---|
+| cross pairs (core × copy) at distance < 2, of all 345,156 cross pairs | 287,695 |
+| pairs whose glue points lie in F₂₄₇ (r = 4/d² − 1 a square in K(√247), exact) | **104 (0.04 %)** |
+| distinct glue points (exact coordinates) | **71** — the 208 glue points fuse heavily |
+| points with ≥ 3 parents (fusions) | **20**; the parent histogram runs to (1 core, 18 copy) parents and (7, 1) |
+| pool–pool unit edges (40-digit screen, exact confirm) / near-misses rejected | **114** / 0; the pool graph has two components (53 and 18 points) |
+| coincidences with W | **8** — the fused centre x itself is a "glue point" of every pair (p, R(p)) with p a unit neighbour of x, and 7 more |
+| radial classes about the centre | 35 distinct exact \|g − x\|²: 27 points on the UNIT circle about x (glue points of (x, R(p)) pairs), 5 at \|g − x\|² = 247/64, **2 at 64/9 — the forced-pair radius**, the rest in K(√247) proper (B-part nonzero) |
+| the core's own same-side pairs at d < 2 (152,000) | 21,958 in-K glue (the K-lattice), **0 in the √247 class**, 130,042 out of field |
+| the grown stage W ∪ pool (`grow`, exact unit census over all 1,238 points) | 1,238 points, 5,977 unit edges (**204 new**), 0 near-misses; new points' W-degree {2: 51, 3: 3, 4: 1, 5: 2, 6: 2, 7: 2, 8: 1, 10: 1}, max total degree on a new point 12 |
+
+**P-M54-5 scored: MET in its sparsity half (0.04 % ≪ 2 %), REFUTED in its structural half** — 20
+fusions against 0 predicted, a pool-degree far above 1. The reading the derivation missed: the cross
+lattice at depth one is not generic F₂₄₇ dust but the SHADOW OF THE K-LATTICE — the pool's high-parent
+points are rotated in-field K-glue points of the core (a copy point with 18 copy-parents is R of a
+K-lattice fusion point) that happen to be a unit from a core point, and the centre's unit circle
+carries the glue points of (x, R(p)). The half-angle rotation ρ^{1/2} = (√247 + 3i)/16 is where the
+(p, R(p)) glue points live — de Grey's half-spindle group (G8) reappearing on our fabric. Anatomy
+beyond this paragraph is a tangent, recorded in §7 of the close.
+
+**Phase E1 launched on the grown stage** (1,238 points, 20 workers). The derived rule of §Bʹ ("a halo
+of W-degree 2 with pool-degree ≤ 1 cannot move the critical set") does NOT cover this pool (W-degrees
+to 10, pool degrees to 12), so E1 is a genuine measurement.
