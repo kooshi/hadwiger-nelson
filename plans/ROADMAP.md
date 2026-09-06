@@ -160,11 +160,17 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 2. **Read the rigidity dial** (`build/m54/rigidity-dial-it4.json`, the exact four-colour forced-equal
    sweep of the it-4 unit part by 2-adic valuation class): if forcing sits only at valuation 6,
    Q10's reading stands and the dial's next point is the it-5-grade fabric.
-3. **Kooshi's pick between**: (a) minting the kernel milestone for Theorem B
+3. **M54 — the five-colour dial (LIVE 2026-09-05, Kooshi: "You are go for the 5 dial milestone";
+   `plans/M54-five-colour-dial.md`)**: the critical-set localization theorem in the kernel first (a pair
+   compulsion at χ colours lives inside the critical set's complement's neighbourhoods — in the plane a
+   forcing graph has ≤ 2 critical vertices, 0 beyond distance 2), then the calibrated sub-dials
+   (criticality census, ν), the F₂₄₇ cross-lattice census of the 1,175-point witness, and the
+   five-colour sweep on the grown object. Supersedes item 3(b) below.
+4. **Kooshi's pick between** (item 3 as it stood before M54 was minted): (a) minting the kernel milestone for Theorem B
    (`plans/STUB-field-wall-kernel.md`, names probed); (b) the endgame design question — what
    5-rigid wall-broken material looks like, G19/G25 with the theorem underneath; (c) continuing the
    in-field loop as in-context reduction (admissible batches by `tools/residue_floor.py`; it cannot
    end and its floor is three).
-4. The carried engineering: WO-16, the 3-bit cube front-end for the culled set (R3), WO-3's server
+5. The carried engineering: WO-16, the 3-bit cube front-end for the culled set (R3), WO-3's server
    replan — unchanged, none blocking.
 
