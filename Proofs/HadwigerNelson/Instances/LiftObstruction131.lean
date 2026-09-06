@@ -37,9 +37,11 @@ theorem merged131_unit_mod_p :
     ∀ e ∈ merged131, (131 : ZMod (131 ^ 2)) * (quad (merged131x e.src - merged131x e.dst) - 1) = 0 := by
   decide +kernel
 
+/-- The weights are a self-stress modulo 131 of the witness sub-framework (decided). -/
 theorem merged131_isStress : IsStress (131 : ZMod (131 ^ 2)) merged131x merged131 := by
   decide +kernel
 
+/-- The stress pairing, decided: `7205 = 131 · 55`, nonzero in `ZMod (131²)`. -/
 theorem merged131_pairing : stressPairing merged131x merged131 = 7205 := by
   decide +kernel
 
