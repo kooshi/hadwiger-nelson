@@ -647,3 +647,13 @@ chords are not a thin conic each), or cross material with outside-degree ≥ 2 i
 
 `lake env lean` green on the module (zero sorry); `./scripts/build.sh` and `scripts/axioms.sh` run at the
 close — their verdicts are in the closing commit's message; `lake lint` likewise.
+
+## §R7, addendum (2026-09-06 ~08:15Z, recorded at the M55 close) — the scale twin lands
+
+The 5,857-point three-fabric union's exhaustive five-colour sweep (chain 4: 40 relabelling-seeded models,
+`--no-amo`, 3,600-s wall per call): **status done — 0 forced-equal pairs (0 unsettled), 0 virtual edges
+(0 unsettled); 138 models, 98 calls, 16,752 s** (`data/m54/sweep-spindles-35_1859-813_1939-full.json`).
+The §R4 registration MET, as its 2,229-point twin already read in 31 s. M55 then showed why by theorem
+(`Absorb.extends_of_hubs`, `plans/M55-absorption.md` §R1): every cross chord of each copy but the spindle
+chord is a hub chord, so every 5-colouring of the fabric extends over the copies and the base's pairs
+were never a measurement; the copy-side pairs were, and they are floppy too.

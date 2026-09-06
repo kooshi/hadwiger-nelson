@@ -541,7 +541,7 @@ rule (CLAUDE.md, 2026-08-26) paid for itself twice in one hour.
 
 | # | registered | outcome |
 |---|---|---|
-| P-M55-1 | star₂'s sweep reads 0 / 0 complete | **in flight at the close** — the forced-equal side CLOSED at 0 candidates by observation (50 seeded + drawn models); the virtual-edge side in its batch queries (58 models, 4,450 s); recorded as an addendum when it lands |
+| P-M55-1 | star₂'s sweep reads 0 / 0 complete | **MET** (landed after the close, §R6): 0 / 0 complete, 138 models, 98 calls, 16,752 s |
 | P-M55-2 | both M54 objects absorbed by `extends_of_hubs` | **MET, sharpened**: every cross chord but ONE per copy is a hub chord (the copy's image of the centre's neighbourhood); the one non-hub chord is the spindle chord |
 | P-M55-3 | ν(core-star₂) = 2, ν(star₂) = 2 | **MET by derivation** (D5's ν ≤ 2 from the census, ν ≥ 2 from M54's C = ∅) — the ladder was to confirm it and could not (§ Incidents) |
 | P-M55-4 | flower − x 4-colourable at K = 1, 2, 3 | **MET** at all three (one verified colouring each) |
@@ -639,3 +639,6 @@ attribute removed), the second an auto-named decidability instance with an under
   5-chromatic subgraphs the solver returns. A ν instrument for these objects needs either core
   minimization (each shrink a deletion ask) or the structural route — the ν = number-of-spindles law as a
   theorem (T25). `data/m55/nu-spindles-35_1859-813_1939-1205_1442-k5.json`.
+* **star₂'s sweep landed** (2026-09-06 ~08:15Z): **0 forced-equal, 0 virtual edges, complete — 138 models, 98
+  calls, 16,752 s** (`data/m54/sweep-spindles-35_1859-813_1939-full.json`). P-M55-1 MET; M54 §R4's
+  registration MET; the addendum written into `plans/M54-five-colour-dial.md` §R7.

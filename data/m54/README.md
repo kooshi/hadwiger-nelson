@@ -31,6 +31,8 @@ theorem-admitted candidates. Every file carries the stage's edge-list fingerprin
   1-minimal cores) and `critical-spindles-35_1859-813_1939.json` (31/31: C = ∅).
 * `sweep-spindles-35_1859-813_1939.json` — **the dial's reading on a C = ∅ object: 0 forced-equal, 0 virtual
   edges, complete, 31 s** (`sweep --graph … --k 5 --no-amo`, seeded by `build/m54/seed_models.py`).
+* `sweep-spindles-35_1859-813_1939-full.json` — the 5,857-point union's sweep: **0 / 0 complete, 138 models, 98
+  calls, 16,752 s** (landed 2026-09-06; M55's absorption theorem says why the base's pairs were never in doubt).
 * `nu-exact-EI-seed-12graph.json` — ν(H) = 38 exact over the 35 colourings (`build/m54/nu_exact_seed.py`);
   `nu-*.json` — the RC2 runs that hit their walls (bounds only).
 * `W-plus-cross.json`, `critical-W-plus-cross.json` — the witness ∪ its cross pool (1,238 points): C loses 3.
