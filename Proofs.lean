@@ -13,6 +13,7 @@ import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Critical
 import Proofs.HadwigerNelson.CriticalDiagnose
+import Proofs.HadwigerNelson.CriticalSet
 import Proofs.HadwigerNelson.Fan
 import Proofs.HadwigerNelson.FanMono
 import Proofs.HadwigerNelson.Greedy
