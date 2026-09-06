@@ -4,7 +4,7 @@
 > 5-sealed field (a degree-one prime above 11, χ(UD(𝔽₁₁,2)) = 5), so nothing built there can be 6-chromatic; this stub's
 > F₂₄₇ half is struck. Its de Grey half stands and is strengthened: de Grey's field ℚ(√3,√5,√7,√11) has no usable prime
 > below 131 (√7 makes 11 inert), and the gen-1 half-spindle closure keeps ≥ 300 ℤ/5-homs at every radius (M57 §R5
-> addendum) — the one field we hold that is both 6-open (pending the plane at 131, `plans/STUB-field-sieve.md`) and
+> addendum) — the one field we hold that is both 6-open (pending the plane at 131, `plans/M58-field-sieve.md`) and
 > family-keeping. Run phase B on de Grey's field only.**
 
 *Read beside this: `plans/M57-additive-rigidity.md` §R4–§R5 (the F₂₄₇ cross lattice's 5-divisibility, the cumulative

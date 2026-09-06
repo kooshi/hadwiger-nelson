@@ -1,4 +1,4 @@
-# data/fplane — the finite-plane bound (the pivot of 2026-09-06; `reference/Chat-analysis/VERIFICATION.md`; the milestone is M58, `plans/STUB-field-sieve.md`)
+# data/fplane — the finite-plane bound (the pivot of 2026-09-06; `reference/Chat-analysis/VERIFICATION.md`; the milestone is M58, `plans/M58-field-sieve.md`)
 
 A real number field F with a prime 𝔭 above p ≡ 3 (mod 4) whose residue field is 𝔽_p (or 𝔽_{p^f}, f odd) sends every
 finite unit-distance graph in F² homomorphically into the finite Euclidean plane UD(𝔽_p, 2) = Cay(𝔽_p², {a² + b² = 1}),

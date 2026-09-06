@@ -64,3 +64,6 @@
 2026-09-06T17:30:00Z M57 CLOSED (gate green: build OK, axioms 595 clean, lint passed); left running: the 108 asks (pid 839605) and the degrey dial
 2026-09-06T18:00:00Z M57 degrey dial DONE (1,234 s): ≥ 300 homs at every radius incl. the whole gen-1 closure, no unit in 5Λ; still running: the 108 asks (pid 839605)
 2026-09-06T19:30:00Z the finite-plane pivot: finite planes running — p = 17,19,23 at k = 4/5 (build/m57/fplane-1923.log) and p = 83,107,131 at k = 5 with a 2400 s wall each (build/m57/fplane-big.log); re-run with tools/fplane.py chi --p P if lost; the 108 asks (pid 839605) still running
+2026-09-06T19:10:05Z M58 open: killed by PID the 12 orphaned five_dial forkserver workers (+ resource tracker) of the M55 cross-only census stopped at 04:41 (their parent died with the pkill self-match); ~20 % of a core reclaimed
+2026-09-06T19:11:20Z M58 phase 0: the two scratchpad plane runs KILLED by PID (p = 17 at k = 5 unfinished after 50 min; p = 83 at k = 5 past its wall) — the Hoffman bracket (D6) settles p ≥ 59 without SAT (59: 5.02, 83: 5.74, 107: 6.67, 131: 7.25); SAT is needed only at 19, 23, 31, 43, 47
+2026-09-06T19:11:34Z M58 phase A: UD(F_23,2) and UD(F_19,2) at k = 5, wall 14000 s each, logs build/m58/chi-p{23,19}-k5.log (one cadical each)

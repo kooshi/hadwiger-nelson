@@ -4,7 +4,7 @@
 > names lives in K or K(√247), both 5-sealed fields (a degree-one prime above 11; χ(UD(𝔽₁₁,2)) = 5) — fine as MECHANISM
 > beds (what carries forcing without rigidity is a question about colouring spaces, and the seed's 252-cheat subset is the
 > best bed we have), but no answer found there produces a 6-object. The design consequence of any answer must be carried to
-> a 6-open field (`plans/STUB-field-sieve.md` decides which). M57 answered the seed half: H's 35-vertex Kempe graph lies
+> a 6-open field (`plans/M58-field-sieve.md` decides which). M57 answered the seed half: H's 35-vertex Kempe graph lies
 > within two single-vertex moves of its 18 additive colourings (M57 §R2); what remains is K-fabric's 16-pair residue and
 > the 252-object's components (T29).**
 

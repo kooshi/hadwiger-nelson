@@ -1086,7 +1086,7 @@ verified colouring plus the solver's refusal — priced in the stub.
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
 (WORKFLOW step 9). **Re-ranked at the finite-plane pivot, 2026-09-06, after the M57 close (Kooshi: stubs for all, then the
-field sieve):** rank 1 FS-7 the field sieve (`plans/STUB-field-sieve.md`, opening as M58 — which fields can host a 6-forcer;
+field sieve):** rank 1 FS-7 the field sieve (`plans/M58-field-sieve.md`, opening as M58 — which fields can host a 6-forcer;
 the exact wall-broken planes; the kernel certificate of χ(UD(𝔽₁₁,2)) = 5 through the certified Heule-510); rank 2 FS-6 on de
 Grey's field only; rank 3 FS-2 re-aimed with its scope note; rank 4 FS-8 the Haugland 7-adic check (new); rank 5 FS-4; ranks
 6–7 FS-9 topological lower bounds and FS-10 Nullstellensatz certificates (the two rooms the analysis named, stubbed, not
