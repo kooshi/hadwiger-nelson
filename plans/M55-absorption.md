@@ -291,3 +291,46 @@ the solver's sampling, not of the object. Both are recorded, neither is the dial
 **Seams.** The model of the hub hypotheses is a spec example (`k4MinusEdgeHub`: `K₄ − e` with a path at
 hub 2 and a chord to 1, every hypothesis closed by `decide`); the red is `k33Pendants`. Nothing in the
 kernel names ν (B8 stands).
+
+## §Bʺ. The obligation-modeling pass (2026-09-06, fresh invocation) — each proof's space, and the prove / test / assume partition
+
+### The kernel piece, obligation by obligation
+
+| obligation | space and decomposition | lines |
+|---|---|---|
+| `Extends.forces_iff`, `separated_iff` | (→) take a colouring `c` of `G[A]`, extend it to `C`, read `C p = C q`; (←) restrict any `C` by `restrictColoring` (definitional on points) | 2 + 2 each |
+| `Extends.not_forces_of_colorable`, `not_separated_of_colorable` | rewrite through the iff, then `not_forces_of_colorable` / `not_separated_of_colorable` (SpareColour) on the induced graph; the adjacency transports by `comap_adj` | 2 each |
+| `extends_of_repaint` (the carrier) | glue `f v := if v ∈ A then c v else if clashes v then last else castSucc (φ v)` (classical decidability); properness in FOUR cases, each naming its hypothesis: both in `A` — `c.valid`; both outside — two clashes: the INDEPENDENCE hypothesis; one clash: `castSucc < last`; none: `φ.valid`; across the cut, outside end repainted — the NO-SPARE-NEIGHBOUR hypothesis; not repainted — the clash definition (equal colours would be a clash witness). Restriction by `dif_pos` and subtype eta | ~35 |
+| `extends_of_hubs` | the colourability hypothesis is re-indexed by HUB VALUE `x ∈ hub '' Aᶜ` (the pass's one statement change: choice is per fibre, and two piece vertices with the same hub name the same set); classical choice of `ψ x`; the palette swap `Equiv.swap (ψ x x) j` where `j = castPred (c x)` when `c x ≠ last` and a dummy `swap a a = 1` otherwise — one uniform definition; glue `φ b := (σ ∘ ψ) (hub b) b` (adjacent piece vertices share a hub by `hcomp`, so `φ` is proper fibre by fibre); then the repaint lemma with: a hub chord never clashes (`σ ψ b = σ ψ x` would give `ψ b = ψ x` against `ψ`'s validity on the fibre-plus-hub), so every clash is through the unique non-hub neighbour (`hdeg`), whence independence (`hind`) and no spare neighbour (`hdeg` again) | ~60 |
+| `extends_of_hub_matching` | `extends_of_hubs` at `hub := fun _ => x`; the fibre set rewrites to `insert x Aᶜ` by `Set.ext` | ~6 |
+| `extends_of_matching` | the repaint lemma with `φ` the given colouring; clashes are attached vertices, independent by `hind`; no spare neighbour by `hdeg` | ~8 |
+| `exists_notMem_of_encard_le` (private) | `S = univ` would have `encard = k + 1 > k`; so some colour is missing (`Set.encard_univ`, `ENat` arithmetic) | ~6 |
+| `extends_of_extensionOrder` | induction on the inductive predicate — the recursor IS the induction and `A` is generalized by the index: `nil` — `A = univ`, restrict/extend trivially; `cons` — from `c` on `G[A]` build `c'` on `G[insert b A]` giving `b` a colour missing from its `≤ k` coloured `A`-neighbours (the private pigeonhole on the image of `c` over `N(b) ∩ A`, transported by `Subtype.val_injective.encard_image`), then the IH extends `c'`; restriction to `A` avoids `b` | ~40 |
+| `extends_compl_singleton_of_degree_le` | `ExtensionOrder.cons` with `N(b) ∩ {b}ᶜ = N(b)` and `encard N(b) = degree b` (the M54 calc), then `nil` | ~8 |
+| `symCopy.coloringOfPerm` validity | `fromRel_adj` then the four constructor cases: `inl–inl` `c.valid`; `inr–inr` `c.valid` + `π.injective`; `inl–inr` / `inr–inl` the chord condition `a = b ∧ a ∈ S` and `hπ` | ~12 |
+| `extends_symCopy` | transport `c'` on the induced first copy to `c` on `G`; `k = n + 2`; `π := finRotate (n+2)`, derangement by `finRotate_succ_apply` and `Fin.ext_iff`/`omega`; `coloringOfPerm`; restriction by proof irrelevance on the subtype | ~15 |
+| spec: the hub model | `extends_of_hub_matching` with every hypothesis a finite check over `Fin 6` (`decide`; the fibre colouring explicit if `decide` refuses the subtype quantifier) | ~10 |
+| spec: the red | `k33_lists_refuse` by `decide +kernel` over the 729 functions `Fin 6 → Fin 3` (isolated so its cost is measured alone); then from a hypothetical extension `C`: `f i := C i` is proper on `K₃,₃`, hits a forbidden colour, but that colour is `C` of the pendant adjacent to `i` — `C.valid` refutes | ~20 |
+
+**Prove / test / assume.** Prove: everything above. Test: the hub model (non-vacuity of `extends_of_hubs`'s
+hypotheses), the red (the independence hypothesis load-bearing), an edge-count `decide` on each spec
+graph so a mis-transcribed relation is caught by name. Assume (tool-side, never in the kernel): that a
+copy `Rᵢ(U)` is 4-colourable — Theorem B is hand-proved, so the instrument VERIFIES a 4-colouring of
+each fibre-plus-hub by SAT and the kernel theorem takes colourability as a hypothesis.
+
+**Mutation audit, registered.** Drop the independence hypothesis → the repaint lemma's two-clash case
+fails; drop the no-spare-neighbour hypothesis → the repainted-across-the-cut case fails; drop `hcomp` →
+`φ` is not proper across fibres; drop `hdeg` from `extends_of_hubs` → the clash may have a second,
+spare-coloured neighbour; `≤ k + 1` in place of `≤ k` in `ExtensionOrder` → the pigeonhole fails;
+`1 ≤ k` in place of `2 ≤ k` → `finRotate 1` is the identity. Each is run once at implementation and its
+failure recorded in the closing commit.
+
+### The instrument's invariants (what each subcommand asserts, and the test that would catch it lying)
+
+| subcommand | asserts | how it is tested |
+|---|---|---|
+| `absorb` | for the base `A` and pieces `Bᵢ` with hubs `xᵢ` (from the builder's side labels): each `G[Bᵢ ∪ {xᵢ}]` 4-colourable by a colouring VERIFIED on the induced edges; no edge between different pieces (`hcomp`); every piece vertex has ≤ 1 base neighbour (`hdeg`, the histogram reported); the non-hub-attached piece vertices pairwise non-adjacent (`hind`); verdict "A extends by `extends_of_hubs`" or the list of violating vertices; the D5 bound `ν ≤ ν(A) + #non-hub chords` with `ν(A) = 0` when `A` 4-colours | planted: the K₃,₃-pendants graph → `hind` violated AND the tool's direct extension ask (the red colouring, SAT on the piece with lists) returns UNSAT; the K₄−e hub graph → all hypotheses hold; a copy with one vertex of outside-degree 2 planted → `hdeg` violated at that vertex by name |
+| `core5` | the `k`-core by peeling (`k = 5`: remove degree ≤ 4 repeatedly); the peel list REVERSED is an `ExtensionOrder` from the core, re-checked by counting each vertex's neighbours among the core and its predecessors | planted: the seed `H` plus a pendant path → the path peels, `H`'s core is unchanged; a disjoint `K₅` peels entirely (degree 4 ≤ 4: a lone `K₅` is invisible at five colours, which is correct) |
+| `nu-ihs` | (i) each solver core `K` (the assumptions `¬dᵥ`, `v ∈ K`, jointly 4-UNSAT) is RE-VERIFIED by a second encoding (the 3-bit `binary3` refutation of `G[K]`) before it enters the hitting-set family — a wrong core would inflate the lower bound, the unsafe direction; (ii) the hitting-set step is EXACT (RC2 on the family: soft `¬dᵥ`, hard "each core hit"; the family is small) — the lower bound is the optimum's size; (iii) at a SAT `S` the 4-colouring of `G − S` is decoded and verified in Python — the upper bound is certified; (iv) exact when lower = upper; the core list and the best `S` checkpointed every iteration; a wall returns the bracket | planted: two disjoint `K₅` at `k = 4` → ν = 2; the seed `H` at `k = 5` → ν = 38 (known exact); `K₅ − e` at `k = 4`… ν = 1 with `C ≠ ∅` |
+| `multi-spindle` | each pair at its declared squared distance (mpmath, 60 digits); rotations from `q` (and `ρ^k` for `--power`); unit edges by float prescreen + 60-digit confirmation, near-misses rejected; fusions detected; four-colour refusal and five-colour admission asked directly; sides labelled for `absorb` | `--pairs 35,1859;813,1939 --full` reproduces star₂'s fingerprint `a7d58e7346920d3a`; `--power 1` about 35 on core₁ reproduces W |
+| `cross-lattice --depth 2` | the glue census over every non-adjacent pair of `W ∪ P₁` at distance < 2, exact in F₂₄₇; every glue point re-verified at unit distance from both parents; fusions and pool edges exact | run on `W` alone (depth 1) it reproduces `cross-lattice-W-core-8over3.json` |

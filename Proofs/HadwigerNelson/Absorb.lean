@@ -122,7 +122,7 @@ every piece vertex has at most one neighbour in `A`; and the piece vertices whos
 not their hub are pairwise non-adjacent. Then `A` extends at `k + 1` colours. -/
 theorem extends_of_hubs {A : Set V} (hub : V → V) (hhub : ∀ b ∉ A, hub b ∈ A)
     (hcomp : ∀ b ∉ A, ∀ b' ∉ A, G.Adj b b' → hub b = hub b')
-    (hcol : ∀ b ∉ A, (G.induce (insert (hub b) {b' | b' ∉ A ∧ hub b' = hub b})).Colorable k)
+    (hcol : ∀ x ∈ hub '' Aᶜ, (G.induce (insert x {b' | b' ∉ A ∧ hub b' = x})).Colorable k)
     (hdeg : ∀ b ∉ A, ∀ a ∈ A, ∀ a' ∈ A, G.Adj b a → G.Adj b a' → a = a')
     (hind : ∀ b ∉ A, ∀ b' ∉ A, (∃ a ∈ A, a ≠ hub b ∧ G.Adj b a) →
       (∃ a' ∈ A, a' ≠ hub b' ∧ G.Adj b' a') → ¬ G.Adj b b') :
@@ -153,6 +153,11 @@ inductive ExtensionOrder (G : SimpleGraph V) (k : ℕ) : Set V → List V → Pr
   | nil (A : Set V) : ExtensionOrder G k A []
   | cons {A : Set V} {b : V} {L : List V} (hb : b ∉ A) (hdeg : (G.neighborSet b ∩ A).encard ≤ k)
       (hL : ExtensionOrder G k (insert b A) L) : ExtensionOrder G k A (b :: L)
+
+/-- A set of at most `k` colours out of `k + 1` misses one. -/
+private theorem exists_notMem_of_encard_le (S : Set (Fin (k + 1))) (hS : S.encard ≤ k) :
+    ∃ j, j ∉ S := by
+  sorry
 
 /-- **Greedy absorption**: if a greedy extension order from `A` exhausts the complement, `A` extends
 at `k + 1` colours. Nothing outside the `(k+1)`-core is visible at `k + 1` colours. -/
@@ -219,6 +224,13 @@ def k33Pendants : SimpleGraph (Fin 12) :=
 
 instance : DecidableRel k33Pendants.Adj := fun a b =>
   decidable_of_iff _ (SimpleGraph.fromRel_adj _ a b).symm
+
+/-- The finite heart of the red: no proper 3-colouring of `K₃,₃` avoids the lists
+`{0,1}, {0,2}, {1,2}` on each side — every colouring hits a forbidden colour `2, 1, 0, 2, 1, 0`. -/
+theorem k33_lists_refuse :
+    ∀ f : Fin 6 → Fin 3, (∀ i j : Fin 6, i < 3 → 3 ≤ j → f i ≠ f j) →
+      ∃ i, f i = ![2, 1, 0, 2, 1, 0] i := by
+  sorry
 
 /-- **The planted red**: with the pendants coloured `2, 1, 0, 2, 1, 0` the six lists are
 `{0,1}, {0,2}, {1,2}` per side and `K₃,₃` refuses — the pendants' set does NOT extend at three
