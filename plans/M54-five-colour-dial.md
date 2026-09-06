@@ -225,3 +225,68 @@ measurement, never rescoped.
 | B5 ν's engine | RC2 (pysat's MaxSAT) with a wall, reporting bound + optimality flag | a cardinality ladder of plain SAT asks | RC2 returns an optimum with a certificate of optimality when it finishes and a bound when it does not; the ladder needs one ask per rung | medium — if RC2 stalls on W, the ladder at ν ≤ 3 is enough for P-M54-2 |
 | B6 what "the dial" reports | forced-equal AND virtual edges, with the √3 and distance-2 classes broken out | forced-equal only (the spindle's input) | G26 sharpened says the 6-hunt needs virtual edges at √3 and 2 as much as a forced pair anywhere; the Rigidity engine settles both sides in one run | high |
 | B7 the milestone's number | M54 | fold into the halted M53 | M53 is halted at phase D with its own resumable state; this is a new objective (the dial), not iteration 5 | high |
+
+## §Bʹ. The domain-modeling pass (2026-09-05, fresh invocation) — what it changed
+
+**The model that converged.** Three objects: a graph with `k` colours; its **critical set**
+`CriticalSet G k = {c | (G − c's edges) is k-colourable}` (a `Set V`, so the theorems are containments
+and the plane bound is an `encard`); and the **isolating lemma** — through any critical vertex `c`, any
+independent set `S ∋ c` can be painted with the spare colour over a `k`-colouring of the rest. Every
+compulsion statement of the milestone is one instance of the lemma at one `S`: `S = {c}` is
+`Critical.exists_isolating_of_colorable_delete`; `S = {p}` and `S = {p, q}` with every vertex critical
+are the two `SpareColour` recolourings; `S = {p, c}` is the forced-equal localization; `S = {p, q, c}`
+the virtual-edge localization; and `S = {p, c}` with `c ∉ Q` refutes a **fan** at `p` over `Q` —
+`C ⊆ N(p) ∪ Q`, the general form, with `Forces` its width-one case (`fan_singleton_iff`). The fan
+theorem is added to the skeleton because the repository's compulsion vocabulary is the fan, and the
+statement costs one line.
+
+**Simulated before stated** (grok): K₄ minus the edge {0, 1} at two colours has C = {2, 3} =
+N(0) ∩ N(1) exactly — the bound is tight on four vertices, and that graph is the spec example. The Moser
+spindle at three colours is vertex-critical (delete the hub: two triangles joined by an edge; delete a
+tip: a rhombus and a triangle), so at four colours it has no pair compulsion — a statement the
+spare-colour lemma cannot make (the spindle is not 3-colourable), so the theorem is strictly stronger.
+The seed H: no point is within {1, 2}-distance of both endpoints of a pair at distance 5, so C(H) = ∅
+(P-M54-1 is the simulation, run by the machine).
+
+**The instrument's true quantity is the candidate set, not the sweep.** The theorem admits, on any
+graph, exactly the pairs 𝒫_eq(G) = {(p, q) : C ⊆ N(p) ∩ N(q)} for forced-equal and
+𝒫_ne(G) = {(p, q) ≁ : C ⊆ N(p) ∪ N(q)} for virtual edges. In a unit-distance graph
+|N(p) ∩ N(q)| ≤ 2, so 𝒫_eq = ∅ unless |C| ≤ 2, and 𝒫_ne = ∅ unless |C| ≤ 2Δ. **Hence the criticality
+census subsumes the complete five-colour sweep whenever |C| > 2Δ** — on such an object the sweep
+measures a theorem, and T21's 858-second sweep of W was one. Phase E is reshaped accordingly:
+
+| step | what | population in the headline |
+|---|---|---|
+| E1 | the criticality census of the grown object: C, Δ, |C|/n (the redundancy dial) | n asks at four colours |
+| E2 | the candidate sets 𝒫_eq, 𝒫_ne from C and the adjacency lists — zero solver calls | pairs admitted by the theorem |
+| E3 | targeted asks on the candidates only (one SAT ask per candidate pair per polarity, second encoding on any hit) | |𝒫_eq| + |𝒫_ne| asks |
+| E4 | the complete `Rigidity` sweep ONLY as (a) the planted red/green control and (b) the one-point confirmation on the two-spindle union that the pruned reading agrees with the exhaustive one | the whole pair set, once |
+
+**The redundancy dial and ν are two slices of one family.** The spare classes 𝒮(G) = {S independent :
+G − S is k-colourable} are exactly the fifth-colour classes of the (k+1)-colourings; C(G) is the
+|S| = 1 slice, ν(G) = min |S| over 𝒮, and ν = 1 ⟺ C ≠ ∅. A forced-equal pair needs every S ∈ 𝒮 to
+contain both or neither endpoint — the |S| = 2 slice through a critical vertex is the theorem. So |C|/n
+(from 1 on a vertex-critical object toward 0) and ν (from 1 upward) are the two cheap readings of the
+same structure, and ν's RC2 encoding is the natural one: hard = proper (k+1)-colouring (at-least-one
+per vertex plus edge clauses; exactly-one is not needed because a doubly-coloured vertex only ever
+costs), soft = "v does not wear the spare colour".
+
+**When a halo cannot move the dial (derived, replacing the loose sentence in P-M54-6).** If every
+added point has at most three already-coloured neighbours at the time it is coloured — two parents in
+W plus pool-degree ≤ 1 — a 4-colouring of W − c extends greedily over the halo, so C(W ∪ P) ⊇ C(W)
+EXACTLY, with no ask. A halo moves the critical set only through its own non-4-colourable (or
+boundary-constrained) structure, which is why P-M54-5's pool-degree number is the number that
+matters, and why E1 is asked before E3 rather than after.
+
+**Seams validated.** (i) The theorems hold for `u = v`? `Forces G (k+1) u u` is trivially true and the
+plane statement's `hne : q u ≠ q v` excludes it — the hypothesis is the true one (`u ≠ v` alone would
+let `q u = q v` collapse the two neighbourhoods into one and the bound of two fail). (ii) Injectivity
+enters only the count (`encard ≤ 2`); the glue-point statement needs none. (iii) `encard`, not
+`ncard`: an infinite critical set would make `ncard ≤ 2` vacuously true. (iv) Adversarial member: a
+graph with `C = ∅` and no compulsion (two disjoint copies of the Moser spindle at three colours:
+C = ∅ since each deletion leaves the other spindle 4-chromatic; no forced pair since the copies are
+independent) — the theorem is necessary, never sufficient, and the plan says so.
+
+**Not added** (the injunction): no `SpareClass` structure (ν is instrument-side; no kernel consumer),
+no `Fintype` on the localization theorems (only the count needs it), no edge-list API for the critical
+set (the tool filters, the kernel does not certify a census).

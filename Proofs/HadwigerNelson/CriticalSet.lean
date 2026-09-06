@@ -75,6 +75,19 @@ theorem not_separated_of_mem_criticalSet {p q c : V} (hpq : ¬ G.Adj p q) (hpc :
     (hqc : ¬ G.Adj q c) (hc : c ∈ CriticalSet G k) : ¬ Separated G (k + 1) p q := by
   sorry
 
+/-- **A critical vertex outside a fan's partner list, non-adjacent to the pivot, refutes the fan**
+— the general form (`Critical.not_fan_of_colorable_delete` is `c = p`); `Forces` is the width-one
+case. -/
+theorem not_fan_of_mem_criticalSet {p c : V} {Q : List V} (hp : p ∉ Q) (hcQ : c ∉ Q)
+    (hpc : ¬ G.Adj p c) (hc : c ∈ CriticalSet G k) : ¬ Fan G (k + 1) p Q := by
+  sorry
+
+/-- **Localization for a fan**: the critical set lies in the pivot's neighbourhood or the partner
+list. -/
+theorem criticalSet_subset_of_fan {p : V} {Q : List V} (hp : p ∉ Q) (h : Fan G (k + 1) p Q) :
+    CriticalSet G k ⊆ G.neighborSet p ∪ {c | c ∈ Q} := by
+  sorry
+
 /-- **Localization, forced-equal polarity**: the critical set lies in the common neighbourhood of a
 forced-equal pair. In particular neither endpoint is critical. -/
 theorem criticalSet_subset_inter_neighborSet_of_forces {p q : V} (hpq : p ≠ q)
