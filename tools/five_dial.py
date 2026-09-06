@@ -123,7 +123,12 @@ def load_stage(a) -> Stage:
         return st
     if getattr(a, "graph", None):
         d = json.loads(Path(a.graph).read_text())
-        return Stage(d.get("name", Path(a.graph).stem), d["n"], [tuple(e) for e in d["edges"]], f"graph {a.graph}", meta=d.get("meta"))
+        pts = None
+        if d.get("points"):
+            import mpmath as mp
+            mp.mp.dps = max(mp.mp.dps, 60)
+            pts = [mp.mpc(mp.mpf(re), mp.mpf(im)) for re, im in d["points"]]
+        return Stage(d.get("name", Path(a.graph).stem), d["n"], [tuple(e) for e in d["edges"]], f"graph {a.graph}", meta=d.get("meta"), pts=pts)
     if getattr(a, "planted", None):
         return planted_stage(a.planted)
     raise SystemExit("no stage given (--seed | --object | --witness | --graph | --planted)")
@@ -855,6 +860,145 @@ def cmd_sweep(a):
     out.write_text(json.dumps(rep, indent=1)); print(f"[sweep] wrote {out}")
 
 
+
+# ----------------------------------------------------------------------------- phase C: a second spindle
+
+def shrink_core(label: str, pair, ckpt: Path, log=print, wall_total: float | None = None):
+    """The greedy outside-in 1-minimal forcing core of `pair` at four colours on the object's unit part
+    (the forced_spindle.py order), checkpointed every 50 tried vertices to `ckpt` and resumable;
+    returns (core as object labels, tried, complete)."""
+    import batchkill as BK, mpmath as mp
+    from forced_spindle import forces
+    obj, _ = BK.load_object(label)
+    live = sorted(i for i in range(obj.n) if i not in obj.deleted); idx = {v: i for i, v in enumerate(live)}
+    edges = [(idx[u], idx[v]) for u, v in obj.unit_edges()]
+    n = len(live); x, y = idx[pair[0]], idx[pair[1]]
+    mp.mp.dps = 30; ex = obj.mp_values(30)
+    mid = (ex[pair[0]] + ex[pair[1]]) / 2
+    order = sorted((v for v in range(n) if v not in (x, y)), key=lambda v: -abs(ex[live[v]] - mid))
+    keep = set(range(n)); tried = set()
+    if ckpt.exists():
+        d = json.loads(ckpt.read_text()); keep = set(d["keep"]); tried = set(d["tried"])
+        log(f"[shrink] resumed from {ckpt}: {len(keep)} kept, {len(tried)} tried")
+    assert forces(n, [(u, w) for u, w in edges if u in keep and w in keep], x, y), "the pair is not forced on the current keep set"
+    t0 = time.time(); complete = True
+    for v in order:
+        if v in tried:
+            continue
+        trial = keep - {v}
+        sub = [(u, w) for u, w in edges if u in trial and w in trial]
+        if forces(n, sub, x, y):
+            keep = trial
+        tried.add(v)
+        if len(tried) % 50 == 0:
+            ckpt.write_text(json.dumps(dict(keep=sorted(keep), tried=sorted(tried), complete=False)))
+            log(f"[shrink] {len(tried)}/{len(order)} tried, {len(keep)} kept [{time.time()-t0:.0f}s]", flush=True)
+        if wall_total and time.time() - t0 > wall_total:
+            complete = False; break
+    if complete:
+        sub = [(u, w) for u, w in edges if u in keep and w in keep]
+        for v in sorted(keep):
+            if v in (x, y):
+                continue
+            assert not forces(n, [(u, w) for u, w in sub if v not in (u, w)], x, y), ("not 1-minimal", live[v])
+        log(f"[shrink] 1-minimal core of {pair}: {len(keep)} vertices, {len(sub)} unit edges, every vertex necessary [{time.time()-t0:.0f}s]", flush=True)
+    ckpt.write_text(json.dumps(dict(keep=sorted(keep), tried=sorted(tried), complete=complete, core_labels=sorted(live[v] for v in keep))))
+    return sorted(live[v] for v in keep), len(tried), complete
+
+
+def build_multi_spindle(label: str, spindles, dps: int = 60, log=print):
+    """U-part = the union of the cores (object labels); each spindle's copy = R_i(core_i ∖ {x_i}), R_i the
+    rotation about x_i with cos = 1 − 1/(2q_i), sin = √(4q_i − 1)/(2q_i); coincident points fused; unit
+    pairs by a float prescreen confirmed at `dps` digits; near-misses (|d − 1| < 1e-6, not unit) counted
+    and rejected. Returns (Stage with pts, names, info)."""
+    import batchkill as BK, mpmath as mp, numpy as np
+    from scipy.spatial import cKDTree
+    mp.mp.dps = dps
+    obj, _ = BK.load_object(label); ex = obj.mp_values(dps)
+    base = sorted(set().union(*(set(c) for _, _, c in spindles)))
+    pts = [ex[v] for v in base]; names = [("U", v) for v in base]
+    for si, (pair, q, core) in enumerate(spindles):
+        q = Fr(q); qm = mp.mpf(q.numerator) / q.denominator
+        R = mp.mpc(1 - 1 / (2 * qm), mp.sqrt(4 * qm - 1) / (2 * qm)); zx = ex[pair[0]]
+        assert abs(abs(ex[pair[0]] - ex[pair[1]]) ** 2 - qm) < mp.mpf(10) ** -(dps - 10), ("pair not at the named distance", pair, q)
+        for v in core:
+            if v == pair[0]:
+                continue
+            pts.append(zx + R * (ex[v] - zx)); names.append((f"R{si}", v))
+    arr = np.array([[float(z.real), float(z.imag)] for z in pts])
+    tree = cKDTree(arr)
+    tol = mp.mpf(10) ** -(dps - 15)
+    # fusions
+    parent = list(range(len(pts)))
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]; a = parent[a]
+        return a
+    fused = 0
+    for i, j in tree.query_pairs(1e-7):
+        if abs(pts[i] - pts[j]) < tol:
+            ri, rj = find(i), find(j)
+            if ri != rj:
+                parent[max(ri, rj)] = min(ri, rj); fused += 1
+    reps = sorted(set(find(i) for i in range(len(pts)))); rid = {r: k for k, r in enumerate(reps)}
+    upts = [pts[r] for r in reps]; unames = [[names[i] for i in range(len(pts)) if find(i) == r] for r in reps]
+    arr2 = np.array([[float(z.real), float(z.imag)] for z in upts]); tree2 = cKDTree(arr2)
+    unit, near = [], []
+    for i, j in tree2.query_pairs(1 + 1e-6):
+        dd = abs(upts[i] - upts[j])
+        if abs(dd - 1) < tol:
+            unit.append((min(i, j), max(i, j)))
+        elif abs(dd - 1) < mp.mpf(10) ** -6:
+            near.append((min(i, j), max(i, j), mp.nstr(dd - 1, 6)))
+    for i, j in unit:
+        assert abs(abs(upts[i] - upts[j]) - 1) < tol
+    n = len(upts)
+    sides = {}
+    for k_, nm in enumerate(unames):
+        for side, _ in nm:
+            sides[side] = sides.get(side, 0) + 1
+    cross = {}
+    for i, j in unit:
+        si = {s for s, _ in unames[i]}; sj = {s for s, _ in unames[j]}
+        if si.isdisjoint(sj):
+            key = "|".join(sorted(sorted(si)[0:1] + sorted(sj)[0:1]))
+            cross[key] = cross.get(key, 0) + 1
+    info = dict(spindles=[dict(pair=list(p), q=str(q), core=len(c)) for p, q, c in spindles], base_points=len(base), fused=fused,
+                sides=sides, cross_chords=cross, near_misses=near, dps=dps)
+    log(f"[multi] {label}: {n} points ({len(base)} in U, {n - len(base)} in {len(spindles)} copies, {fused} fused), {len(unit)} unit edges, "
+        f"cross chords {cross}, near-misses rejected {len(near)}", flush=True)
+    st = Stage(f"spindles-{'-'.join(f'{p[0]}_{p[1]}' for p, _, _ in spindles)}", n, unit, f"multi-spindle union on {label}", meta=info, pts=upts)
+    return st, unames, info
+
+
+def cmd_two_spindle(a):
+    W = json.loads(Path(a.witness).read_text())
+    label = W["object"]; pair1 = tuple(W["pair"]); core1 = W["core_vertices"]
+    q1 = Fr(W["distance_sq"]) if "distance_sq" in W else Fr(W["distance"]) ** 2
+    pair2 = tuple(int(t) for t in a.pair2.split(","))
+    BUILD.mkdir(parents=True, exist_ok=True)
+    ckpt = BUILD / f"shrink-{pair2[0]}-{pair2[1]}.json"
+    core2, tried, complete = shrink_core(label, pair2, ckpt, wall_total=a.shrink_wall)
+    if not complete:
+        print(f"[two-spindle] the shrink hit its wall after {tried} tried vertices ({len(core2)} kept); rerun to resume"); sys.exit(2)
+    ov = sorted(set(core1) & set(core2))
+    print(f"[two-spindle] core1 {len(core1)}, core2 {len(core2)}, overlap {len(ov)} ({100*len(ov)/len(core2):.1f} % of core2)", flush=True)
+    st, unames, info = build_multi_spindle(label, [(pair1, q1, core1), (pair2, Fr(a.q2), core2)], a.dps)
+    ok4, _ = sat(colour_clauses(st.n, st.edges, 4) + [[var(0, 0, 4)]])[0] == "sat", None
+    ok5 = sat(colour_clauses(st.n, st.edges, 5) + [[var(0, 0, 5)]])[0] == "sat"
+    print(f"[two-spindle] 4-colourable: {ok4} (must be False); 5-colourable: {ok5} (must be True)", flush=True)
+    out = Path(a.out) if a.out else DATA / f"{st.name}.json"
+    DATA.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(dict(name=st.name, n=st.n, edges=st.edges, meta=dict(info, core1=core1, core2=core2, overlap=ov, four_colourable=ok4, five_colourable=ok5,
+                                                                                 names=[[list(x) for x in nm] for nm in unames]),
+                                   points=[[mp_str(z.real), mp_str(z.imag)] for z in st.pts])))
+    print(f"[two-spindle] wrote {out} (a --graph stage for critical / nu / sweep)")
+
+
+def mp_str(x):
+    import mpmath as mp
+    return mp.nstr(x, 60)
+
 # ----------------------------------------------------------------------------- self-test
 
 def self_test():
@@ -943,6 +1087,8 @@ def main():
     p = sub.add_parser("cross-lattice"); p.add_argument("--exact", required=True); p.add_argument("--workers", type=int, default=8)
     p.add_argument("--same-side", action="store_true"); p.add_argument("--out")
     p = sub.add_parser("planted-sweep"); stage_args(p); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
+    p = sub.add_parser("two-spindle"); p.add_argument("--witness", required=True); p.add_argument("--pair2", required=True)
+    p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
     p = sub.add_parser("sweep"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     a = ap.parse_args()
     if a.cmd == "self-test":
@@ -959,6 +1105,8 @@ def main():
         cmd_cross_lattice(a)
     elif a.cmd == "planted-sweep":
         cmd_planted_sweep(a)
+    elif a.cmd == "two-spindle":
+        cmd_two_spindle(a)
     elif a.cmd == "sweep":
         cmd_sweep(a)
 

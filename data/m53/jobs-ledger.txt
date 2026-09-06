@@ -10,3 +10,7 @@
 2026-09-05T06:31:56Z D3a: residual 3,936 (in-field survivors of the 81,787-class two-cheat stage) on pdeg12 (340,292 pts) pid 3658593, 28 threads, wall 300s
 2026-09-05T17:58:39Z HALT (Kooshi): the field-wall conjecture is PROVED (~/field-wall-conjecture.md §5); D3's pdeg12 residual pass stopped at its checkpoint (3,674 of 3,936 asked: 5 killed, 0 survive, 3,669 unknown at 300 s); nothing else running
 2026-09-06T00:27:49Z M54 critical census of W (24 workers, wall 600) log build/m54/critical-W.log
+2026-09-06T00:28:16Z M54 nu(seed) wall 1800 log build/m54/nu-seed.log; planted-sweep on W wall 900 log build/m54/planted-sweep-W.log
+2026-09-06T00:31:48Z M54 phase D cross-lattice of W (28 workers) log build/m54/cross-lattice-W.log
+2026-09-06T00:31:50Z M54 nu(W) wall 1800 log build/m54/nu-W.log
+2026-09-06T00:32:00Z M54 phase C two-spindle (shrink of pair 813,1939 then the union) log build/m54/two-spindle.log ckpt build/m54/shrink-813-1939.json

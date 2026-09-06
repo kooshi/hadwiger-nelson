@@ -407,3 +407,29 @@ that halts, with the offending edge named); the jackpot exit code stops any driv
 One paragraph per file in the order the phases produce them, each with the reading in one sentence
 and the regenerating command; a header naming the milestone, the halt/close state, and the plan's §R
 section holding the numbers.
+
+## §R0. Phases 0, A, B1, B3 and C1 closed (2026-09-06 ~00:30–01:00Z, desktop)
+
+| phase | result | file |
+|---|---|---|
+| 0 — the kernel piece | `CriticalSet.lean` fully proved: the isolating lemma, both localization theorems, the fan form, `Forces.symm`, the spare-colour re-derivation, the degree bound, the three plane corollaries (glue points / empty beyond 2 / `encard ≤ 2`), the K₄ − e tight spec; zero `sorry` under `lake env lean`; imported into `Proofs.lean` (the full gate build runs at the close, after the box is free) | `Proofs/HadwigerNelson/CriticalSet.lean` |
+| A — exact geometry | the 1,175-point witness exact in K(√247): **5,773 / 5,773 unit edges and all 6 cross chords are exact identities**; 0 near-misses at 60 digits; T20 upgraded from "chords at 60 digits" to exact | `data/m54/witness-exact-core-8over3.json` |
+| B1 — P-M54-1 | **MET: C(H) = ∅** — every one of the 214 single-vertex deletions of the Exoo–Ismailescu {1, 2}-seed still refuses four colours (214 non-critical, 0 unknown, 1 s); the theorem's calibration passed | `data/m54/critical-EI-seed-12graph.json` |
+| B3 — the sweep's control | W + 7 shell cheats (ring [165, 277, 374, 570, 319, 223] about 7): the two planted pairs (165, 374) at √3 and (277, 319) at 2 found forced equal, status done in 25 s; the red (all nine pairs) seen vacuous; the shell's rigidity also throws 32 virtual edges — recorded, not a finding | `data/m54/sweep-control-W-core-8over3.json` |
+| C1 — the witness's critical set | **W is VERTEX-CRITICAL: \|C(W)\| = 1,175 of 1,175** (every deletion 4-colourable, each certified by a verified colouring; 0 unknown; Δ = 26; 24 workers, ~4 min). Hence 0 forced-equal candidates and 0 virtual-edge candidates at five colours BY THEOREM, and T21's exhaustive zero (858 s) was an instance. P-M54-2 met beyond its registration (> 500 predicted; all 1,175 measured). Side fact: W is a vertex-critical 5-chromatic unit-distance graph | `data/m54/critical-W-core-8over3.json` |
+
+**Cost anchors realized.** A critical deletion ask on W: 0.2–0.6 s (SAT); the whole census 1,175 asks
+on 24 workers ≈ 4 min. The seed's 214 asks: 1 s.
+
+**Phase C's second pair.** Of the 163 forced pairs at 8/3, the one whose midpoint lies farthest from
+pair 1's (3.15 units; both endpoints outside core₁, nearest endpoint 2.23 from pair 1's) is
+**(813, 1939)**; its 1-minimal core is being shrunk (checkpointed, `build/m54/shrink-813-1939.json`)
+and the union core₁ ∪ R₁(core₁) ∪ core₂ ∪ R₂(core₂) built by `two-spindle`. Decision B3 realized.
+
+**In flight at this record**: ν(H) (RC2, wall 1,800 s), ν(W) (wall 1,800 s), the phase-D cross-lattice
+census (28 workers), the pair-2 shrink.
+
+**Literature reconciliation done in the same session** (Kooshi brought the papers): Fischer 1990 owns
+the additive framework and the real-quadratic classification (note §10.1); the milestone's kernel piece
+is unaffected (a graph-theoretic theorem), and the field-wall note's Corollary 6.5 is corrected at
+d ≡ 5 (mod 8).
