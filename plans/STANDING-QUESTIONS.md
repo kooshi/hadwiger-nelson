@@ -768,7 +768,29 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   vertex, in its residue class, every edge unit — is a copy of H in F², so a lifted 6-critical subgraph of UD(𝔽₁₃₁,2) would be
   a 6-chromatic unit-distance graph. The system is overdetermined (|E| ≥ 5|V|/2 quadratics in 2|V| unknowns); the local
   𝔭-adic test (Hensel) decides cheaply whether any core can lift. FS-11.
+  **ANSWERED IN PART at M59 (2026-09-06).** The lift is a first-order rigidity problem: modulo p² it exists iff the defect pairs
+  to zero with every self-stress of the residue framework (kernel: `Lift.lean`), and for a framework rigid at its residues a
+  Laman basis Hensel-lifts uniquely up to isometry, the remaining edges decide at a finite level, and a local lift is ALGEBRAIC —
+  its field has an unramified degree-one prime above p; real iff that field has a real place. A 6-critical H carries ≥ |V|/2 + 3
+  independent first-order conditions, so it lifts only if it is a shadow; the finite plane's own 6-forcing gives no reason it
+  should be. The lift needs an UNRAMIFIED prime (at 11 the spindle and Heule-510 are provably not ℤ₁₁-lifts). Measured: the 1581
+  is recovered from its residues at 131 to 131²⁰; its merged image is obstructed (a 48-edge witness, in the kernel); the 6-critical
+  cores at 131 were not reached (the whole plane at k = 5 undecided at one hour — FS-13). Open: whether ANY 6-critical
+  subgraph of any finite plane is a shadow — no mechanism suggests one, and the count says a random one is not.
 * **T38 — the exact values χ(UD(𝔽_p,2)) at p = 23, 31, 43, 47, and the growth law.** The values known: 3, 4, 5, 5 at 3, 7, 11,
   19; ≥ 6 from 59 on by the spectrum. Is the sequence monotone in p? Does χ(UD(𝔽_p,2)) − Hoffman(p) stay bounded (Hoffman is
   tight for very regular graphs; the planes at 11 and 19 sit 1.5 and 1.4 above it)? The instrument is `fplane.py chi` with
   the clique pin; 23 and 47 (ω = 3) may need cube-and-conquer.
+
+* **T39 — what configuration are the 1581's hubs a piece of?** (M59.) The finite plane finds 3,739 exact points of ℚ(√3,√5,√7,√11)²
+  at unit distance from 3–13 vertices of de Grey's 1581 (none in its half-spindle closure; the count at 479 and the intersection
+  with 131 are FS-12's completeness check), and 1,171 for Heule-510 of which 11 are Heule-553's discarded vertices. De Grey's
+  construction is a Minkowski-sum-and-shrink; are the hubs the discarded points of the un-shrunk sum (then their count and
+  supports are computable from the construction, and the scan is a derivation check), or new coincidences of the partner lattice?
+  Either way: the object the 1581 is a piece of, with its hubs restored, is a 5-chromatic unit-distance graph with far more
+  redundancy (M54's dial) — and the hub scan is its constructor.
+* **T40 — the lift at the unramified primes, the sieve at the ramified one.** (M59.) For fields over K the sealing prime 11 is
+  ramified and never a lift's prime; 83, 107, 131 are lift primes and none seals. Is that a coincidence of K, or a rule — does a
+  sealing prime of a field always fail to be a lifting prime of its objects (a sealing plane's colourings are too free to be a
+  shadow's colourings)? FS-14's F₁₁/S₁₁ is where the answer starts.
+

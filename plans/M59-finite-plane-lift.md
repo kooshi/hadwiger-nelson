@@ -613,3 +613,83 @@ the refutation of the finite graph — and says so in its docstring.
   therefore NOT produced this milestone; the calibration cores (5-critical at 11: 63 vertices; at 19: in flight) and the
   merged-image witness are the milestone's finite-plane objects, and P2 (every such core obstructed) stands untested at 131 —
   its derivation (§S1 (b)) says what the search would find. 83 and 59 follow in the chain, one hour each.
+* **Gate (2026-09-06 22:28 UTC, `build/m59/gate-{build,axioms,lint}.log`):** `scripts/build.sh` OK; `scripts/axioms.sh` OK —
+  615 clean, 5 declared purchases (all M59 declarations on exactly `[propext, Classical.choice, Quot.sound]`: the lift
+  theorem, the plane composite, the obstruction and its headline, the certificate consumer, the instance's four theorems);
+  `lake lint` passed (after three field docstrings); zero `sorry`.
+* **P7 measured, corrected scan (`data/fplane/hubs-degrey1581-p131.json`, 602 s):** of the 15,596 residue classes at 131 with
+  ≥ 3 residue-neighbours among the 1581's 1,547, **3,739 carry a p-adic point at unit distance from ≥ 3 of the 1581's vertices**
+  to precision 131²⁰ — support 3: 1,277; 4: 1,269; 5: 442; 6: 372; 7: 115; 8: 114; 9: 80; 10: 2; 11: 12; 12: 36; 13: 20 — each
+  the exact unit-circumcentre of three of its neighbours in ℚ(√3, √5, √7, √11); the other 11,857 fit no three. None of these is in
+  the gen-1 half-spindle closure (which has no point with ≥ 3 neighbours in the 1581): they are partner-lattice points with
+  coincidences — the finite side's reading of de Grey's construction as a shrunk piece of a larger configuration, as Heule-553's
+  discarded vertices are of the 510's. P7's "fewer than 50, all gen-1" is REFUTED in both halves.
+
+### §R3. The measurements
+
+| object | result | population / conditioning | record |
+|---|---|---|---|
+| the 1581's injective sub-reduction at 131 (1,547 residues, 7,541 edges) | rigid; 4,450 stress conditions all pass; the Laman-basis Newton lift has every edge unit mod 131²⁰; equal to the tower configuration on 20,000 pairwise quadrances | 3,091 edges fitted, 4,450 checked; 24 s | `lift-degrey1581-p131.json` |
+| the 1581's merged image at 131 (34 identifications, 7,876 edges; ≥ 5-chromatic) | **OBSTRUCTED at level 2**: 2,406 of 4,785 stress conditions fail; witness 48 edges on 26 vertices, pairing 7205 | the kernel instance `Instances/LiftObstruction131.lean` decides it | `lift-degrey1581-p131-merged.json` |
+| Heule-510's injective sub-reduction at 131 (507 residues, 2,483 edges) | passes 1,472 stress conditions and Newton to precision 131⁶ | self-test control | — |
+| the Moser spindle at 83, 131 / at 11 | lifts (rigid, no stress, precision 12) / OBSTRUCTED — 11 is ramified in ℚ(√11) | self-test | — |
+| Heule-510 at 11 (ramified) | OBSTRUCTED at level 2 | self-test | — |
+| the hex shell at 11; the collinear triangle at 3 | passes (pairing 0 in ZMod 121, twelve nonzero defects cancelling) / obstructed (pairing 6 in ZMod 9) | decided in the kernel AND by the instrument (the two evaluators agree) | `Lift.lean` spec |
+| hubs of Heule-510 at 131 | **1,171** residue classes carry an exact point at unit distance from ≥ 3 of the 510's vertices (support 3–10); 11 of the strict scan's 64 are Heule-553's discarded vertices; 100 of 100 sampled verified exactly | 12,339 candidates; missed: classes a vertex occupies | `hubs-heule510-p131.json` |
+| hubs of the 1581 at 131 | **3,739** (support 3–13); none in the gen-1 closure; 60 random + the 5 of highest support verified exactly in the tower (65 of 65) | 15,596 candidates; 602 s | `hubs-degrey1581-p131.json` |
+| UD(𝔽₁₃₁,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (external cadical; spectrum says ≥ 8) | P3 refuted in this half | `build/m59/plane-p131-k5.log` |
+| UD(𝔽₈₃,2), UD(𝔽₅₉,2) at k = 5 | in flight (one hour each) | — | `build/m59/plane-p{83,59}-k5.log` |
+| the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses) | the solver's refusal (untrusted) + verified colourings; its `local` in flight | `core-p11-k4-spheres.json` |
+| the 5-critical core of UD(𝔽₁₉,2) | in flight (the sphere shrink; near-threshold asks at the 600-s wall) | — | `build/m59/cores-p19-k4.log` |
+
+### §R4. Registered predictions, scored
+
+| # | prediction | verdict |
+|---|---|---|
+| P1 | the smallest 6-critical subgraph of UD(𝔽₁₃₁,2) found has > 1,000 vertices | NOT TESTED — no 6-critical core at 131 was reached (P3) |
+| P2 | every 6-critical core fails level 2 with a high obstruction count | NOT TESTED at 131; stands by derivation (§S1 (b)); the merged image (a ≥ 5-chromatic subgraph) fails with 2,406 of 4,785 |
+| P3 | cadical refutes five colours on the whole plane at 131 within an hour; at 59 it does not | **first half REFUTED** (undecided at 1 h); 59 in flight |
+| P4 | the injective sub-reduction passes to 131²⁰ and equals the tower coordinates; the merged image is obstructed at level 2 | **MET, all three parts** |
+| P5 | every core found is infinitesimally rigid at its residues | pending on the 11- and 19-cores' `local` (in flight) |
+| P6 | the sphere-minimal ≥ 6 object at 131 has 20–60 spheres | NOT TESTED |
+| P7 | fewer than 50 hub passers on the 1581, all gen-1 residues | **REFUTED in both halves**: 3,739, none in gen-1 |
+| P8 | `Lift.lean` on the standard three, the obstruction theorem under 250 lines | **MET** (the module is 320 lines with its spec; the obstruction section is 90) |
+| P9 | the 1581's shadow at 131 is 5-colourable (M58's P7) | pending (undecided at 3 h+) |
+
+### §R5. Incidents and instrument facts
+
+* Three self-test controls were wrong and the instrument right (the Moser spindle and Heule-510 at the RAMIFIED prime 11;
+  a degree-2 hub can never be inconsistent) — G21 on controls, three times in one milestone; each corrected control now
+  states the derivation it rests on.
+* The strict hub test was wrong on every dense reduction (false residue-neighbours; found by the deleted-vertex control
+  reading RED on the 1581, though GREEN on Heule-510's centre by luck); corrected to the largest consistent subset.
+* `hensel_sqrt` squared its modulus per step (p^(2^20)); found by a 600-s stall; fixed with a convergence assert.
+* The sphere shrink protected the origin and then found it deletable — an assert fired as designed; the shrink now tries
+  protected vertices last.
+* A killed chain step let its parent chain move on to the next step, doubling a run — killed by PID; the stub rule for
+  chains: kill the chain's shell first.
+* The `netStress` selector form costs 0.7 ms per vertex–edge pair in `decide`; a thousand-vertex instance would be 35 min
+  — the minimal-support witness design (§M2) made the instance 48 edges and seconds.
+
+### §R6. The kernel, and what the milestone did not do
+
+Kernel: §R0, §R2, the gate in §R-notes. Not done: a 6-critical core of any finite plane (FS-13); the algebraic recognition of
+a passing Newton lift by LLL (`recognize` — unneeded: every passing object was either a real object whose tower coordinates
+were the check, or a hub, exact by circumcentre); the level-p³ instance of the tower (one theorem, never instantiated); the
+kernel form of the rigid dichotomy (hand derivation, §S1).
+
+### §R7. What this changes for the hunt
+
+* **The lift question is answered structurally, not by search.** A subgraph of a finite plane lifts only if it is a shadow,
+  and being 6-critical in the plane is no evidence of that: the obstruction is ≥ |V|/2 + 3 independent linear conditions,
+  and the finite plane's 6-forcing is Kloosterman-carried, global, and made of edges unit modulo p only. The route "design in
+  the finite plane, lift to the field" is closed as a way to FIND a 6-forcer; what survives is its converse — the finite plane
+  as an exact, cheap FILTER on designs made in the field.
+* **The filter has teeth and a new instrument.** The level-p² test decides in seconds whether a residue configuration is any
+  configuration's shadow; the hub scan enumerates, over every field with an unramified degree-one prime above p at once, the
+  points at unit distance from ≥ 3 vertices of an object — 3,739 for the 1581, 1,171 for Heule-510 — recovering discarded
+  construction points (Heule-553's) and exposing the objects as shrunk pieces of larger configurations (FS-12).
+* **The lift's primes are the unramified ones.** For fields over K: 83, 107, 131, …; the prime that seals (11) is never a
+  lift's prime — the upper bound and the lower bound use different primes of the same field.
+* **The finite planes' 6-critical cores are for autopsy** (FS-13), not for lifting; and CDCL does not see a spectral refusal
+  at 17,161 vertices in an hour.

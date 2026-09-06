@@ -557,8 +557,9 @@ def embed_stage(ch, p, prec):
 
 
 def hub_test(p, w, nbrs, prec):
-    """Digit-by-digit: y ∈ Z_p² with |ŵ + p·y − x*_v|² = 1 for every neighbour x*_v (known to precision p^prec).
-    Returns (first failing level or None, the point mod p^prec, the rank of the direction system)."""
+    """Digit-by-digit: y ∈ Z_p² with |ŵ + p·y − x*_v|² = 1 for EVERY listed neighbour x*_v (known to precision p^prec).
+    Returns (first failing level or None, the point mod p^prec, the rank of the direction system). The strict form —
+    every listed neighbour must fit; `hub_best` is the scan's form."""
     x = [w[0], w[1]]
     Ds = [((w[0] - v[0]) % p, (w[1] - v[1]) % p) for v in nbrs]
     A = np.array(Ds, dtype=np.int64); Ar, piv = rref_mod(A.copy(), p); rk = len(piv)
@@ -566,7 +567,6 @@ def hub_test(p, w, nbrs, prec):
     for k in range(1, prec):
         pk = p ** k; mod = p ** (k + 1)
         rhs = np.array([(((x[0] - v[0]) ** 2 + (x[1] - v[1]) ** 2 - 1) // pk) % p for v in nbrs], dtype=np.int64)
-        # solve 2⟨D_v, δ⟩ ≡ −rhs_v (mod p) for δ ∈ F_p²
         M = np.hstack([A % p, ((-rhs * inv2) % p).reshape(-1, 1)])
         Mr, pv = rref_mod(M, p)
         if 2 in pv:                                   # inconsistent
@@ -578,9 +578,29 @@ def hub_test(p, w, nbrs, prec):
     return None, x, rk
 
 
+def hub_best(p, w, nbrs, prec):
+    """The scan's hub test. A candidate residue point w sees on its residue circle every class at unit RESIDUE distance —
+    its true neighbours and, by mod-p coincidence, ~|have|·(p+1)/p² false ones — so the question is the LARGEST subset
+    of them consistent with one p-adic point in class w: for each transverse pair (a, b) Hensel-lift their glue point in
+    class w and count the neighbours it fits to precision p^prec. Returns (support size, the point, the supporting
+    neighbour indices) for the best pair, or (≤ 2, None, []) when no pair's glue point fits a third neighbour."""
+    mod = p ** prec; best = (0, None, [])
+    for i in range(len(nbrs)):
+        for j in range(i + 1, len(nbrs)):
+            lvl, pt, rk = hub_test(p, w, [nbrs[i], nbrs[j]], prec)
+            if pt is None or rk < 2:
+                continue
+            supp = [k for k, v in enumerate(nbrs) if ((pt[0] - v[0]) ** 2 + (pt[1] - v[1]) ** 2 - 1) % mod == 0]
+            if len(supp) > best[0]:
+                best = (len(supp), pt, supp)
+                if len(supp) == len(nbrs):
+                    return best
+    return best
+
+
 def hub_scan(p, have, pts_by_res, prec, min_degree):
-    """Every residue point outside `have` with ≥ min_degree neighbours in it, tested as a hub against the p-adic points
-    `pts_by_res` of those neighbours. Returns (rows, counts by degree)."""
+    """Every residue point outside `have` with ≥ min_degree residue-neighbours in it, tested by `hub_best` against the
+    p-adic points `pts_by_res` of those neighbours. Returns (rows, counts by residue-degree)."""
     C = circle(p); rows = []; counts = {}
     for x in range(p):
         for y in range(p):
@@ -592,9 +612,11 @@ def hub_scan(p, have, pts_by_res, prec, min_degree):
             d = len(nb)
             if d < min_degree:
                 continue
-            lvl, pt, rk = hub_test(p, w, [pts_by_res[r] for r in nb], prec)
+            supp, pt, si = hub_best(p, w, [pts_by_res[r] for r in nb], prec)
             counts[d] = counts.get(d, 0) + 1
-            rows.append(dict(residue=list(w), degree=d, direction_rank=rk, verdict=(f"passes-to-precision-{prec}" if lvl is None else f"obstructed-at-level-{lvl}"), point=pt))
+            rows.append(dict(residue=list(w), residue_degree=d, support=supp,
+                             verdict=(f"passes-to-precision-{prec}" if supp >= min_degree else "obstructed"),
+                             point=pt, neighbours=[list(nb[k]) for k in si]))
     return rows, counts
 
 
@@ -617,13 +639,16 @@ def cmd_hubs(a):
     have = set(classes); pts_by_res = {r: emb[i] for r, i in classes.items()}
     rows, counts = hub_scan(p, have, pts_by_res, prec, a.min_degree)
     passers = [r for r in rows if r["verdict"].startswith("passes")]
-    lvl2 = sum(1 for r in rows if r["verdict"] == "obstructed-at-level-2")
+    lvl2 = sum(1 for r in rows if r["verdict"] == "obstructed")
+    supp_hist = {}
+    for r in passers:
+        supp_hist[r["support"]] = supp_hist.get(r["support"], 0) + 1
     rec = dict(kind="fplane-hubs", stage=fw.meta["stage"], p=p, prec=prec, min_degree=a.min_degree, injective_vertices=len(have),
-               candidates=len(rows), by_degree=counts, obstructed_at_2=lvl2, passers=len(passers), rows=rows, seconds=round(time.time() - t0),
-               claim_scope="candidates = residue points outside the injective sub-reduction with ≥ min_degree neighbours in it; the hub test is against the stage's own p-adic embedding (its actual coordinates, so no Newton is involved); a passer is a residue class carrying a p-adic point at unit distance from all its neighbours to the stated precision — a real hub of the stage over some field with a degree-one prime above p iff it is algebraic (recognize)")
-    print(f"[fplift hubs] {fw.meta['stage']} at p = {p} (prec {prec}): {len(have):,} injective residues; {len(rows):,} candidate residue points with ≥ {a.min_degree} neighbours (by degree {dict(sorted(counts.items()))}); obstructed at level 2: {lvl2:,}; PASS to precision {prec}: {len(passers):,}   [{rec['seconds']}s]")
-    for r in passers[:20]:
-        print(f"    passer {r['residue']} degree {r['degree']}: point mod p^{prec} = {r['point']}")
+               candidates=len(rows), by_residue_degree=counts, obstructed=lvl2, passers=len(passers), passers_by_support=dict(sorted(supp_hist.items())), rows=rows, seconds=round(time.time() - t0),
+               claim_scope="candidates = residue points outside the injective sub-reduction with ≥ min_degree residue-neighbours in it (classes at unit RESIDUE distance — true neighbours and mod-p coincidences alike); the hub test lifts each pair's glue point in the class against the stage's own p-adic embedding and counts the neighbours it fits: a passer is a residue class carrying a p-adic point at unit distance from ≥ min_degree of the stage's points to the stated precision — the unit-circumcentre of any three of them, hence an EXACT point of the stage's field; missed: hubs whose residue class is occupied by a stage vertex")
+    print(f"[fplift hubs] {fw.meta['stage']} at p = {p} (prec {prec}): {len(have):,} injective residues; {len(rows):,} candidate residue points with ≥ {a.min_degree} residue-neighbours (by residue-degree {dict(sorted(counts.items()))}); no p-adic point fits ≥ {a.min_degree}: {lvl2:,}; PASS to precision {prec}: {len(passers):,} (by support {dict(sorted(supp_hist.items()))})   [{rec['seconds']}s]")
+    for r in passers[:12]:
+        print(f"    passer {r['residue']} support {r['support']} of residue-degree {r['residue_degree']}")
     DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"hubs-{ch.name}-p{p}.json"
     path.write_text(json.dumps(rec, indent=1, default=str)); print(f"  wrote {path}")
     return rec
@@ -710,6 +735,11 @@ def self_test():
     Xbad = [list(v) for v in X]; Xbad[0][0] = (Xbad[0][0] + 11) % 11 ** 12
     lvlb, _, _ = hub_test(11, hexx[1], [tuple(Xbad[0]), tuple(X[2]), tuple(X[6])], 12)
     check(f"planted: with the origin's coordinate corrupted at level 2 the same degree-3 candidate fails at level {lvlb}", lvlb is not None)
+    #    the scan's form: the same three true neighbours plus a FALSE one (a shell point at unit residue distance but not
+    #    unit p-adic distance) — hub_best must return support 3 on the true three, never 4
+    false_nb = tuple(X[3])                              # rim vertex 3 is at distance √3 from rim vertex 1: not a neighbour
+    supp, pt, si = hub_best(11, hexx[1], [tuple(X[0]), tuple(X[2]), tuple(X[6]), false_nb], 12)
+    check(f"hub_best: three true neighbours plus a false one give support {supp} on the true three ({sorted(si)})", supp == 3 and sorted(si) == [0, 1, 2])
     # 5b. a planted false edge on the spindle, at the first usable prime where one exists
     for pp in (11, 83, 107, 131):
         sp = spindle_framework(pp); S = set(circle(pp))
@@ -744,8 +774,8 @@ def self_test():
     rows, counts = hub_scan(131, have, pts_by_res, 8, 3)
     passers = [r for r in rows if r["verdict"].startswith("passes")]
     mine = [r for r in passers if tuple(r["residue"]) == rdel]
-    check(f"hub scan on Heule-510 at 131 minus its vertex of degree {degs[vdel]}: {len(rows):,} candidates, {len(passers)} passer(s) — the deleted vertex's residue {rdel} is recovered (degree {mine[0]['degree'] if mine else None})",
-          len(mine) == 1 and mine[0]["degree"] == degs[vdel])
+    check(f"hub scan on Heule-510 at 131 minus its vertex of degree {degs[vdel]}: {len(rows):,} candidates, {len(passers)} passer(s) — the deleted vertex's residue {rdel} is recovered with support {mine[0]['support'] if mine else None} of residue-degree {mine[0]['residue_degree'] if mine else None}",
+          len(mine) == 1 and mine[0]["support"] == degs[vdel])
     fw11 = stage_framework(a, 11); r11 = local_test(fw11, prec=4, want_witness=False)
     check(f"planted: Heule-510's injective sub-reduction at 11 (ramified: {fw11.n} residues, {fw11.m} edges) is obstructed — {r11['verdict']}", r11["verdict"] == "obstructed-at-level-2")
     # 7. planted corruption: a moved vertex on the hex shell breaks the unit check loudly

@@ -81,7 +81,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M58 CLOSED, 2026-09-06 (the field sieve; the finite-plane pivot's milestone).**
+**Last updated: M59 CLOSED, 2026-09-06 (the finite-plane lift; the first milestone under the programme).**
 
 ### Where the problem stands
 
@@ -1047,6 +1047,34 @@ free. The field-level statement (the integrality of unit vectors at the primes a
 at the close: a LIFT of a 6-critical subgraph of UD(𝔽₁₃₁,2) into de Grey's field — one point per residue class, every edge
 unit — would be a 6-chromatic unit-distance graph; the local 𝔭-adic test says cheaply whether any core can lift.
 
+**M59 — the finite-plane lift (CLOSED 2026-09-06, the same day; the first milestone under the programme).** The question was
+whether a 6-critical subgraph of a finite plane can be LIFTED — one point of the field per residue class, every edge unit — into a
+6-chromatic unit-distance graph; the answer came by derivation, and it is no. Writing a candidate lift as x₀ + p·y, the condition
+modulo p² is the **rigidity matrix** of the residue framework against a **defect** vector, solvable iff the defect pairs to zero with
+every **self-stress** — so a 6-critical H (|E| ≥ 5|V|/2) carries at least |V|/2 + 3 independent linear conditions, and passes them
+only if it is already a shadow of a real configuration; the finite plane's 6-forcing, Kloosterman-carried and global, gives no reason
+it should be. The theorem is first-order rigidity in any ring with a square-zero element (`Lift.lean`: a stress with a nonzero pairing
+refutes every deformation), so the whole Hensel tower is one theorem; for a framework rigid at its residues a Laman basis lifts
+uniquely up to p-adic isometry, the remaining edges decide at a finite level, and **a local lift is algebraic** — its field has an
+unramified degree-one prime above p, real iff it has a real place. Measured, the theory recovers de Grey's graph from its residues
+alone (at 131: rigid, 4,450 stress conditions all pass, the Laman-basis Newton lift has every one of 7,541 edges unit to 131²⁰ and
+IS the tower configuration on 20,000 pairwise quadrances), and refutes its **merged image** (34 residue collisions identified — a
+≥ 5-chromatic subgraph of the plane) with a 48-edge witness stress the kernel decides (`Instances/LiftObstruction131.lean`: no
+lift modulo 131², no covering tower certificate). The instrument's own controls corrected the derivation's scope: at 11 the Moser
+spindle and Heule-510 are RIGHTLY obstructed — 11 is ramified in ℚ(√11), their coordinates live in ℤ₁₁[√11] — so **the lift's primes
+are the unramified ones (83, 107, 131, … over K), never the prime that seals (11)**. The whole plane at 131 is undecided by cadical
+at five colours in an hour (P3 refuted), so no 6-critical core was reached; the 5-critical core of UD(𝔽₁₁,2) is 63 vertices. And the
+constructive reading the stub gestured at became an instrument: the **hub scan** — every residue class outside an object, tested
+for a p-adic point at unit distance from ≥ 3 of its vertices by lifting each pair's glue point — enumerates in minutes, over every
+field with an unramified degree-one prime above p at once, the object's exact depth-one hubs: **3,739 for the 1581 at 131 (support
+up to 13, none in its half-spindle closure), 1,171 for Heule-510 (eleven of them Heule-553's discarded vertices, to the p-adic
+digit)** — the constructions seen as shrunk pieces of larger configurations. Kernel: `Lift.lean` (the lift theorem χ(H) ≤ χ(G) along
+an injective covering and its plane composite — the recipe a lifted forcer would consume — the naturality of the drawing, the
+obstruction, its certificate consumer, the hex shell at 11 and the collinear triangle at 3 decided), the instance, the clique number
+of the plane pinned at 11 and 19; 615 clean on the standard three axioms. Under the programme the milestone closes on its derivation:
+the lift question is settled structurally, the finite plane survives as a filter and an enumerator (FS-12, FS-13), and the programme's
+next derivation — the five-colour residue obstruction at 11 — is minted as FS-14.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -1119,6 +1147,7 @@ unit — would be a 6-chromatic unit-distance graph; the local 𝔭-adic test sa
 
 | 52 | **The finite-plane bound and the first exact wall-broken planes** (the pivot of 2026-09-06; hand proof + verified computation, NOT kernel-checked). Theorem: F ⊂ ℝ a number field with a prime above p ≡ 3 (mod 4) of odd residue degree ⟹ every finite unit-distance graph in F² maps homomorphically into UD(𝔽_p, 2), so χ(F²) ≤ χ(UD(𝔽_p, 2)). Measured: χ(UD(𝔽₃,2)) = 3, χ(UD(𝔽₇,2)) = 4 (Vinh 2005), **χ(UD(𝔽₁₁,2)) = 5**, χ(UD(𝔽₁₃,2)) = 5 (p ≡ 1: not usable); Heule-510 → UD(𝔽₁₁,2) with 2,504/2,504 edges on the circle and a proper pulled-back 5-colouring; W 5,773/5,773; the seed 1,004/1,004. **χ(ℚ(√3,√5,√11)²) = χ(K(√247)²) = 5**; K, K(√5), K(√5,√247) sealed; de Grey's field's first usable prime is 131. The theorem and the value are the web session's; the verification, the instrument (`tools/fplane.py`, 11 controls incl. a planted wrong root) and the field consequences as stated are ours. | `reference/Chat-analysis/`, `tools/fplane.py`, `data/fplane/` | pivot |
 | 53 | **The field sieve: the finite planes' spectra, the 6-open fields as a congruence, and the exact plane at 11 in the kernel** (M58). **Kernel** (`UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, standard three axioms): `unitQuadrance R` (any commutative ring; `finitePlane p := unitQuadrance (ZMod p)`), `unitQuadrance_adj`, **`unitQuadrance.map`** (a ring hom applied coordinatewise is a graph hom — the finite-plane bound as functoriality), `Adjoin.lift`/`Q3.lift`/`Q4.lift` (the towers' universal property into any ring), `Q4.sevenFree : Subring Q4` with `Q4.sevenFree.toQ3` (the √7-free elements ARE ℤ[√3,√5,√11]), **`UDCert.drawing_adj`** (a valid certificate + a subring holding its coordinates + a hom out of it + an inverse of D ⟹ a graph hom into `unitQuadrance R`; no field, no condition on p), `colorable_of_unitQuadrance` / `not_colorable_unitQuadrance` / `add_one_le_chromaticNumber_unitQuadrance`, **`chromaticNumber_finitePlane11 : χ(UD(𝔽₁₁,2)) = 5`** (two decides and one comap; no LRAT, no solver, no edge re-examined), **`chromaticNumber_heule510 = 5`** (the first certified upper bound on a certified witness), `five_le_chromaticNumber_finitePlane131`, `heule510_coordsIn_sevenFree` (P8), reds (no inverse of 11 in ZMod 11; D ≠ 0 would not do — ZMod 4; a wrong root; a corrupted table). **Derived** (`plans/M58-field-sieve.md` §S1–§S2, §R1–§R2): λ(c) = −K(1, c/4) ⟹ χ(UD(𝔽_p,2)) ≥ 1 + (p+1)/(2√p) > 5 for p ≥ 62 (Weil + Hoffman), 59 by the exact spectrum; for F ⊇ K the only usable prime below 67 is 11 ⟹ **6-open ⟺ wall broken ∧ 11 inert**; the wall over K breaks for odd squarefree d ≡ 5, 7 (mod 8). **Measured** (`tools/fplane.py`, 21 controls; `data/fplane/`): the spectral table below 600 (Kloosterman residual ≤ 5.7·10⁻¹⁴, FFT cross-check); χ = 3, 4, 5, **5** at 3, 7, 11, **19** (P1/P4 refuted as stated); the map of 19 fields (de Grey's, K(√7), K(√13), K(√79), K(√127) 6-open); the shadows: the 1581 at 131 floor 4.96, at 479 4.32; the gen-1 closure at 131 the whole plane, at 479 floor 8.38; 23/31/43/47 and the 1581's shadow at k = 5 in flight. Vinh's objects and bounds; Medrano–Myers–Stark–Terras's spectrum (second-hand); the reduction theorem in certificate form, the K-field theorem, the exact plane in the kernel, the map and the shadow floors are ours. | `Proofs/HadwigerNelson/UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, `tools/fplane.py`, `data/fplane/`, `plans/M58-field-sieve.md` | M58 |
+| 54 | **The finite-plane lift: first-order rigidity decides it, and the hub scan** (M59). **Kernel** (`Lift.lean`, `Instances/LiftObstruction131.lean`, standard three axioms): `Colorable.of_le_map` / `chromaticNumber_le_of_le_map` (colourings pull back along an injective image), `UDCert.drawing_map` (the drawing is natural in the ring), `UDCert.chromaticNumber_le_of_drawing` and **`add_one_le_chromaticNumber_plane_of_lift`** (a finite-plane subgraph refusing k colours, covered injectively by a valid certificate, gives χ(ℝ²) ≥ k + 1 — the recipe); `StressedEdge`, `netStress`, `IsStress`, `IsLift`, `stressPairing`, **`stressPairing_eq_zero_of_lift`** (in any commutative ring with π² = 0, a lift x₀ + π • y of a stressed framework forces the pairing Σ wt·(quad − 1) to vanish — the level-p² obstruction at ZMod (p²), the level-(k+1) one at π = p^k) and **`not_exists_lift_of_stressPairing_ne_zero`**; `ZMod.exists_eq_add_mul_of_castHom_eq` (the residue class is the deformation space), `UDCert.stressPairing_eq_zero_of_drawing` (a certificate drawn at level p² agreeing modulo p is a lift); spec: the hex shell at 11 (pairing 0 in ZMod 121, twelve nonzero defects cancelling), the collinear triangle at 3 (pairing −3 ≠ 0 in ZMod 9); **the instance**: the 1581's merged image at 131 — 26 vertices, 48 edges, pairing 7205 ≠ 0 — has no lift modulo 131² and no covering tower certificate; ω(UD(𝔽₁₁,2)) = 3, ω(UD(𝔽₁₉,2)) = 2 decided. **Derived** (`plans/M59-finite-plane-lift.md` §S1–§S2, §R1): the obstruction count ≥ |V|/2 + 3 for a 6-critical H; the rigid dichotomy (unique local lift, algebraic, real iff a real place); the lift's primes unramified; triangles iff p ≡ 11 (mod 12), the spindle iff p usable for K, sphere chords iff the Heron quantity is a square. **Measured** (`tools/fplift.py`, 16 controls; `data/fplane/`): the 1581 recovered from residues at 131 to 131²⁰ (P4); its merged image obstructed (2,406 of 4,785 conditions); Heule-510 at 131 passes 1,472 conditions; the 131 plane undecided at five colours in an hour; the 5-critical core of UD(𝔽₁₁,2) at 63 vertices; **the hub scan: 3,739 exact depth-one hubs of the 1581 at 131 (support 3–13), 1,171 of Heule-510 (11 = Heule-553's discarded vertices), samples verified exactly in the tower**. Classical rigidity theory (Laman, Asimow–Roth) and Hensel; the obstruction in the dual-number form over any ring, its kernel instance, the lift dichotomy for finite-plane subgraphs, the ramification scope and the hub scan are ours. | `Proofs/HadwigerNelson/Lift.lean`, `Instances/LiftObstruction131.lean`, `tools/fplift.py`, `data/fplane/{lift,core,hubs}-*.json`, `plans/M59-finite-plane-lift.md` | M59 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -1126,7 +1155,14 @@ unit — would be a 6-chromatic unit-distance graph; the local 𝔭-adic test sa
 
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
-(WORKFLOW step 9). **Re-ranked at the M58 close, 2026-09-06:** FS-7 CLOSED as M58 (the field-selection instrument the hunt now consults
+(WORKFLOW step 9). **Re-ranked at the M59 close, 2026-09-06:** FS-11 CLOSED as M59 (the lift is first-order rigidity; a finite-plane subgraph lifts only if it
+is a shadow; the 1581 recovered from its residues, its merged image obstructed in the kernel; the hub scan). The table's top, under the
+programme's rule (derivations first): **rank 1 FS-14, the five-colour residue obstruction at 11** (`plans/STUB-five-colour-residue-obstruction.md`
+— over a 5-sealed field every pulled-back 5-colouring is constant on residue classes, so a pair compulsion at five colours has its
+residues in the finite sets F₁₁ / S₁₁ every 5-colouring of UD(𝔽₁₁,2) identifies / separates: the 5-colour analogue of T17, the programme's
+named next derivation); rank 2 FS-6 on the 6-open fields, now with the hub scan as its enumerator; rank 3 FS-12 (the hub scan as the
+design instrument); rank 4 FS-13 (the finite planes' 6-critical cores, for autopsy); then FS-2, FS-8, FS-4, FS-9, FS-10, FS-5. Kooshi picks.
+**Re-ranked at the M58 close, 2026-09-06:** FS-7 CLOSED as M58 (the field-selection instrument the hunt now consults
 first: a field over K is 6-open iff its 2-adic wall is broken and 11 is inert; the finite planes refuse five from 59 up by their spectra;
 χ(UD(𝔽₁₁,2)) = 5 in the kernel). The table's top: **rank 1 FS-11, lift a 6-critical subgraph of UD(𝔽₁₃₁,2) into de Grey's field**
 (`plans/M59-finite-plane-lift.md`, opened as M59 — the constructive face of the pivot, the one route it opens that could PRODUCE a 6-object; the
@@ -2723,6 +2759,30 @@ record shows what was believed, what was measured, and what is now proved.
   bounded, so the planes are within a constant of their spectral floor (T38 — refuted if 23 or 47 turns out far above 5); (b) no
   6-critical subgraph of UD(𝔽₁₃₁,2) passes the local lift test into de Grey's field (FS-11 P2). Composes with G43 (the residue plane's
   own chromatic number) and G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of the same sieve).*
+
+* **G45 — A residue configuration lifts only if it is a shadow: the lift is first-order rigidity, its primes are the unramified
+  ones, and the finite plane is an enumerator, not a designer.** (M59, 2026-09-06; kernel for the obstruction, derivation for the
+  dichotomy, measured on the 1581 and Heule-510.) Modulo p² a subgraph H of UD(𝔽_p, 2) lifts iff its defect (the edges' failure to be
+  unit modulo p², one number per edge) pairs to zero with every self-stress of the residue framework — the rigidity matrix's left
+  kernel — and that is a theorem in any ring with a square-zero element, so the Hensel tower is one statement repeated
+  (`stressPairing_eq_zero_of_lift`). A 6-critical H has ≥ |V|/2 + 3 such conditions and no reason to satisfy them: the plane's
+  6-forcing is Kloosterman-carried and made of edges unit modulo p only. For a framework rigid at its residues, a Laman basis lifts
+  uniquely up to isometry and a lift that passes every edge is algebraic, in a field with an unramified degree-one prime above p —
+  which is why the 1581 is recovered from its residues at 131 to twenty digits and its merged image (34 collisions identified) is
+  refuted by a 48-edge stress the kernel decides, and why at 11 — RAMIFIED in ℚ(√11) — the spindle and Heule-510 are rightly obstructed:
+  the sealing prime of a field is never a lifting prime of it. **[kernel + derived + measured]** *Consequences: (a) "design in the
+  finite plane, lift to the field" is closed as a route to a 6-forcer; what the finite plane does for the hunt is FILTER (the level-p²
+  test on any residue configuration, in seconds) and ENUMERATE — the hub scan lifts each pair's glue point in a residue class and
+  counts the vertices it fits, listing every exact point at unit distance from ≥ 3 vertices of an object over all fields with an
+  unramified degree-one prime above p at once: 3,739 for the 1581 (support to 13, none in its half-spindle closure), 1,171 for
+  Heule-510 (eleven of them Heule-553's discarded vertices) — the witnesses are shrunk pieces of larger configurations the plane sees
+  whole; (b) a Hoffman-carried refusal is not a CDCL-sized one (the 131 plane at five colours, undecided in an hour; the 55-direction
+  shadow, undecided at three), so the finite planes' 6-critical cores are autopsy objects (FS-13), reachable by cube-and-conquer if at
+  all. Readings on top, falsifiable: (i) no 6-critical subgraph of any finite plane is a shadow (the count says a random one is not;
+  a structured one would be a real 6-forcer's image and would come from the field side first); (ii) among an object's hubs, the ones
+  whose support is forced rainbow at five colours are its kills (A1), decidable on the object without the point (FS-12's D1).
+  Composes with G43/G44 (the sieve's two faces), G37 (the endgame's adjunction — now enumerable), G32 (the dial's material: hubs, not
+  glue points of pairs).*
 
 ## Whose work this is
 
