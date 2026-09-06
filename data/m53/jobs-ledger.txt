@@ -52,3 +52,5 @@
 2026-09-06T05:11:01Z M55 gate: build OK, axioms OK (578 clean, 5 declared purchases), lake lint passed (third run); M55 CLOSED — star₂ sweep, the full-pool census and the third core's shrink still in flight
 2026-09-06T05:24:45Z M55 addendum: the three-core star (cores 588/543/587) — build, absorb, core5, the triple-intersection criticality asks, then ν by implicit hitting sets (wall 3600), log build/m55/corestar3.log
 2026-09-06T05:34:29Z M55 addendum: the 108 theorem-admitted virtual-edge asks on the full-pool grown witness (10,541 pts; C = a triangle through the centre), wall 900 each, log build/m55/ask-depth2.log; P-M55-10 registered (0 hits)
+2026-09-06T08:17:00Z M54/M55: the 5,857-point union's sweep DONE 0/0 (16,752 s); chain 4 exited
+2026-09-06T11:59:34Z M56 stubbed (plans/M56-arithmetic-of-tightness.md); the 108 asks on the thickened witness left running by Kooshi's instruction (pid 839605, log build/m55/ask-depth2.log)

@@ -1007,6 +1007,13 @@ needed the wall), and fixed.
 
 ### Paths forward, ranked
 
+*(**M56 STUBBED 2026-09-06 on Kooshi's direction — `plans/M56-arithmetic-of-tightness.md`: the arithmetic of
+tightness, with the field as input; G30-motivated — Fischer's additive colourings restricted to a chunk's difference
+lattice as the yardstick, K at four colours (the M53 dial) as the calibrated bed, the seed's 35 colourings as the
+five-colour calibration, then Heule's field ℚ(√3, √5, √11), de Grey's and F₂₄₇: which vertices tighten, and how tight
+each field's material can be made. It supersedes item 1 below as the next milestone; a session resuming here
+subplans it first.)*
+
 *(M55 CLOSED 2026-09-06 — absorption; `plans/M55-absorption.md` §R0–§R5. The paths-forward entry M54
 wrote ("many spindles at many centres over one fabric so that no large sub-piece is 4-colourable") is now
 a theorem's corollary in the negative: every copy hangs by its fused centre and ONE chord, the base extends,
