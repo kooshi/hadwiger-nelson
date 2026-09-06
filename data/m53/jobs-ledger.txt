@@ -27,3 +27,4 @@
 2026-09-06T01:46:28Z M54 sweep on the two-core union (2,229 pts, C = ∅ measured): 40 seed models then sweep --no-amo, log build/m54/sweep-union-cores.log
 2026-09-06T01:48:15Z M54 gate build (scripts/build.sh) log build/m54/gate-build.log
 2026-09-06T02:05:55Z M54 gate: build OK, axioms OK (566 clean, 5 declared purchases), lake lint passed (two unused DecidableRel binders in EntropyFloor.lean removed to get there); the 5,857-point union's sweep (chain 4) still in flight
+2026-09-06T03:36:10Z M55 minted (many spindles over one fabric → absorption): the orphan cadical 490914 (the first sweep attempt's 3.47M-var batch query, parent dead 2 h) killed by PID and its 442 MB temp CNF removed; chain 4 (seeder 30/40 then the sweep) left running, monitored
