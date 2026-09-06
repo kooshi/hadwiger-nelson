@@ -81,3 +81,45 @@ overdetermined diophantine system, and D2's local test says early whether there 
 
 `tools/fplane.py` (`shadow`, `chi`), `tools/celllat.py` (the 1-minimal shrink, the ball machinery), `tools/closure.py`,
 `Proofs/HadwigerNelson/UnitQuadrance.lean`, `plans/M58-field-sieve.md`.
+
+## §H. Handoff for the session that opens M59 (written 2026-09-06 at the M58 close, before Kooshi's compaction)
+
+**Kooshi's decision:** M59 = this stub (FS-11, rank 1 of `plans/FRONTIER-STUBS.md`). Do NOT re-decide it. **And the goalposts
+moved the same evening** (`plans/PROGRAMME-ALGEBRAIC-PROOF.md` §1, §6): a lifted 6-forcer, if one lands, is a stepping stone —
+the milestone continues until the algebraic reason it forces six is a derivation for a class; the write-up is the derivation.
+
+**Read, in this order:** (1) `CLAUDE.md` § The mission (the trigger as amended 2026-09-06) and § Frontier — the M58 paragraph,
+ledger row 53, G43's amendment, G44; (2) `plans/PROGRAMME-ALGEBRAIC-PROOF.md` (the programme and the honest assessment);
+(3) this stub §1–§8; (4) `plans/M58-field-sieve.md` §S1–§S2 (the spectral facts and the K-field theorem), §M1 (the kernel's
+shape: `UDCert.drawing_adj` is the reduction any lift inverts), §R; (5) `tools/fplane.py`'s docstring, `self-test`, and the
+`shadow` subcommand (the direction residues the lift must respect); (6) `tools/celllat.py`'s ball/shrink machinery (M42/M43:
+the 1-minimal core extraction the finite plane's 6-critical subgraphs need).
+
+**Then WORKFLOW step 3 onward, no shortcuts:** `git mv plans/STUB-finite-plane-lift.md plans/M59-finite-plane-lift.md` (keep the
+FS-11 row in `FRONTIER-STUBS.md` with status "opened as M59"); write the subplan — **D2 derived first** (the lift as a system:
+x_v = v̂ + p·y_v, the unit condition as a quadratic in y, the local Hensel test stated exactly, and the COUNT: |E| ≥ 5|V|/2 equations
+in 2|V| unknowns — say what structure a solvable instance must have before searching for one), D1's cost priced (the plane at 59
+has 3,481 vertices, degree 60; at 131, 17,161 vertices, degree 132 — a 1-minimal 5-refusing subgraph by the M43 ball ladder, with
+the vertex-transitivity used to centre balls at the origin), the shadow constraint stated (a liftable H into de Grey's field must
+have its edge directions among the 66 classes the closure hits — all of them at 131, so no constraint there; at 479 only 210 of
+240), the kernel skeleton (the lift as a `UDCert` whose `drawing` reduces to H: `UDCert.drawing_adj` gives the hom for free, and
+"H ≅ a subgraph of the lift" is `edgeGraph` inclusion — sorry at the leaves), the instrument (`tools/fplane.py lift` or a new
+`tools/fplift.py`: `cores --p P --k 5` (the 1-minimal cores), `local --core FILE --field …` (Hensel), `lift --core FILE` (the
+global search)); commit; the three modeling passes as FRESH Skill invocations, each committed; then implement. Register P1–P2
+as they stand unless a derivation settles one first.
+
+**First things to read from disk:** the M58 solves left running — `build/m58/chi-p{23,31,43,47}-k5.log` (UD(𝔽_p,2) at five
+colours; walls 14,000 s; re-run `python3 tools/fplane.py chi --p P --k 5 --pin-clique --wall 14000` if lost) and
+`build/m58/shadow-1581-p131-k5.log` (the 1581's 55-direction shadow at five colours, a scratch runner; the record is written by
+`python3 tools/fplane.py shadow --degrey --p 131 --k 5 --wall 14000` — run it if the scratch died); record each in
+`data/fplane/` and in `plans/M58-field-sieve.md` §R3 as an addendum (P1 at 23, P4's re-registration at 31/43/47, P7); and the M55
+108 asks (pid 839605, `build/m55/ask-depth2.log` → `data/m55/ask-W-plus-cross-depth2-k5.json`, exit 3 = jackpot; ~15 h at the
+close): record as an M55 §R6 addendum and an FS-3 datum, then move `data/m54/critical-W-plus-cross-depth2.json` into `data/m55`
+and commit.
+
+**Standing rules that bit M58:** kill by PID (anchor `^python3`, never `pkill -f` a pattern matching the shell); `build/` is
+gitignored — scripts in `tools/`, records in `data/`; ALWAYS `./scripts/build.sh`; one heavy job at a time; instantiating a
+`∀ e ∈ es` fact against tower arithmetic needs the pair written out (`hval (i, j) hij`, never `hval _ hij` — a 400k-heartbeat
+unification otherwise); pysat's wall does not interrupt big instances — use the `cadical` binary under `timeout`; a planted
+control can itself be wrong (M58's odd-cycle shadow) — read a RED self-test as information before "fixing" the code; every
+"sealed"/"open" verdict names its prime and its record; the M02 tower's √7 parts are zero on Heule-510 (`heule510_coordsIn_sevenFree`).

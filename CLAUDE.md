@@ -48,6 +48,21 @@ converging):** mathematics everywhere is accelerating and nothing minor will get
 publication bar is exactly two events: *maybe* our own certified 5-chromatic object, if what it
 reveals is interesting enough (his call at that point); *definitely* χ(ℝ²) ≥ 6 or its
 refutation. Nothing below that bar is written up, however novel the rung.
+**The goalposts moved (Kooshi, 2026-09-06, at the M58 close; `plans/PROGRAMME-ALGEBRAIC-PROOF.md` holds his words in full and
+the assessment of what each side needs):** *"The derivations are an order of magnitude more important than individual objects
+… If we find a 6 chromatic object, we should use it as a stepping stone for the algebraic reasoning behind it and then we'll
+write that up instead. … when we find that reasoning, we'll also spend some time attacking the upper bound with these same
+approaches. … I believe we can provide the algebraic proof of the Hadwiger–Nelson problem in its entirety with a few more
+weeks or months of work … The strength in our approach is that we've discovered the intrinsic nature of the problem."* So the
+trigger now fires on a DERIVATION: a 6-chromatic unit-distance graph is the first instance of a mechanism, the milestone that
+finds it continues until the mechanism is stated and proved for a class, and the paper is the algebra with the object as its
+example; after the lower bound the same viewpoint is turned on the upper bound, and the aim is one account of the whole problem.
+**The assessment, so it can be pushed back on:** the lower bound is the side the viewpoint is built for (every upper bound we
+hold on a field plane is a residue argument at a small prime, and a forcer is a construction that hides its field from every
+small prime — the finite-plane lift, M59, is a direct attempt at the mechanism); the residue methods as they stand are
+structurally one-sided and cannot reach the upper bound (a field with no small usable prime receives no bound from any finite
+plane, and the 𝔭-adic colourings do not glue across fields), so "the same approaches" must mean the viewpoint — the arithmetic
+of small primes governs the chromatic number — and not the tools. That is where the ratchet actually is.
 
 See `ARCHITECTURE.md` for the module DAG and the milestone roadmap; `plans/` for per-milestone
 subplans.
