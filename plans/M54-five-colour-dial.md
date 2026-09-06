@@ -567,3 +567,20 @@ The cost anchor to carry: at 5,857 vertices a five-colour SAT call is a minute, 
 hours-scale job and belongs to the one-heavy-job rule; the census (one 4-colour ask per vertex, 3 s
 when the pair's forcing is asked on the fabric) is the cheap instrument, and the derivation that
 reduced the union's critical set to F₁ ∩ F₂ replaced 5,857 deletion asks by 34.
+
+## §R6. The two-core union: C = ∅ measured, on a third of the size (2026-09-06 ~02:30Z)
+
+| quantity | measured |
+|---|---|
+| core₂, the 1-minimal forcing core of (813, 1939) on U (greedy outside-in, checkpointed, 4,254 s; every vertex's necessity witnessed) | **543 vertices, 2,672 unit edges** (core₁: 588) |
+| core₁ ∩ core₂ | **31 vertices (5.7 % of core₂)** |
+| the union core₁ ∪ R₁(core₁) ∪ core₂ ∪ R₂(core₂) | **2,229 points** (1,100 in U, 1,129 in the copies, no fusion), **12,030 unit edges**, cross chords U–R₁ 6, U–R₂ 7, copy–copy 0, 0 near-misses; refuses four colours, admits five |
+| critical set (the derivation bounds it by the 31 shared vertices; all 31 asked at four colours, 24 workers, 900-s wall) | **∅ — 31/31 non-critical, 0 unknown**; the 2,198 others non-critical by the derivation |
+
+**Reading.** The derivation's bound C ⊆ core₁ ∩ core₂ is an upper bound and the truth is empty: deleting
+a vertex that lies in BOTH 1-minimal cores breaks both spindles' forcing on the base side and the union
+still refuses four colours — its 5-chromaticity has routes beyond the two spindle chords (the thirteen
+accidental chords and the copies' own rigidity, which the deletion does not touch). So a 2,229-point
+5-chromatic unit-distance graph with no critical vertex, built from two disjoint-enough 1-minimal
+cores; its exhaustive five-colour sweep (40 relabelling-seeded models, `--no-amo`) is launched as the
+cheaper twin of §R4's, with the same registered prediction (0 / 0).

@@ -24,3 +24,4 @@
 2026-09-06T01:15:01Z M54 sweep RELAUNCHED with 80 pre-seeded random models, log build/m54/sweep-union-full-2.log
 2026-09-06T01:18:35Z M54 sweep RELAUNCHED (chain 3: relabelling seeder then the sweep) log build/m54/sweep-union-full-3.log
 2026-09-06T01:26:01Z M54 sweep chain 4: 40 seed models without AMO (66 s each) then the sweep --no-amo, log build/m54/sweep-union-full-4.log
+2026-09-06T01:46:28Z M54 sweep on the two-core union (2,229 pts, C = ∅ measured): 40 seed models then sweep --no-amo, log build/m54/sweep-union-cores.log
