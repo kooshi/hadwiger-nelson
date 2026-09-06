@@ -4,6 +4,7 @@ import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Field.Approx
 import Proofs.HadwigerNelson.Certificate
+import Proofs.HadwigerNelson.UnitQuadrance
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion
@@ -94,6 +95,7 @@ import Proofs.HadwigerNelson.Instances.CoreSpindle.Diagnose
 import Proofs.HadwigerNelson.Instances.Heule510
 import Proofs.HadwigerNelson.Instances.Heule510.Critical
 import Proofs.HadwigerNelson.Instances.Heule510.Bound
+import Proofs.HadwigerNelson.Instances.FinitePlane11
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound

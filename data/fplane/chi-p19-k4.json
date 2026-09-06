@@ -1,0 +1,17 @@
+{
+ "kind": "fplane-chi",
+ "p": 19,
+ "n": 361,
+ "edges": 3610,
+ "degree": 20,
+ "rows": [
+  {
+   "k": 4,
+   "status": "unsat",
+   "seconds": 5.1
+  }
+ ],
+ "chi": null,
+ "exact": false,
+ "claim_scope": "chi = k when k\u22121 is the solver's UNSAT (untrusted) and k carries a colouring verified proper here (a certificate of \u2264 k); with --k only the given k is asked"
+}

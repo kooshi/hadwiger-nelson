@@ -67,3 +67,7 @@
 2026-09-06T19:10:05Z M58 open: killed by PID the 12 orphaned five_dial forkserver workers (+ resource tracker) of the M55 cross-only census stopped at 04:41 (their parent died with the pkill self-match); ~20 % of a core reclaimed
 2026-09-06T19:11:20Z M58 phase 0: the two scratchpad plane runs KILLED by PID (p = 17 at k = 5 unfinished after 50 min; p = 83 at k = 5 past its wall) — the Hoffman bracket (D6) settles p ≥ 59 without SAT (59: 5.02, 83: 5.74, 107: 6.67, 131: 7.25); SAT is needed only at 19, 23, 31, 43, 47
 2026-09-06T19:11:34Z M58 phase A: UD(F_23,2) and UD(F_19,2) at k = 5, wall 14000 s each, logs build/m58/chi-p{23,19}-k5.log (one cadical each)
+2026-09-06T19:39:55Z M58 phase A: UD(F_19,2) at k = 4 and UD(F_p,2) at k = 5 for p = 31, 43, 47 launched, wall 14000 s each, logs build/m58/chi-p<P>-k<K>.log (one cadical each; 23 at k = 5 still running)
+2026-09-06T19:39:55Z M58 phase A′: the 1581's 55-direction shadow at 131 (17,161 vertices, 110-regular) at k = 5, wall 14000 s, log build/m58/shadow-1581-p131-k5.log (scratch runner; the shadow subcommand re-derives it for the record)
+2026-09-06T19:43:26Z M58 gate: scripts/build.sh (UnitQuadrance.lean and Instances/FinitePlane11.lean new; the rest cached) log build/m58/build.log
+2026-09-06T19:52:23Z M58 gate chain: build OK (build/m58/build.log) → axioms.sh → lake lint; logs build/m58/{axioms,lint}.log

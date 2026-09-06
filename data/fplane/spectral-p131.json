@@ -1,0 +1,15 @@
+{
+ "kind": "fplane-spectral",
+ "p": 131,
+ "n": 17161,
+ "degree": 132,
+ "lambda_min": -21.108297496436304,
+ "class_of_min": 120,
+ "weil": -22.891046284519195,
+ "kloosterman_residual": 1.0658141036401503e-14,
+ "fft_lambda_min": -21.108297496436307,
+ "hoffman": 7.2534650187816165,
+ "hoffman_error": 2.962562480388285e-10,
+ "chi_floor": 8,
+ "derivation": "eigenvalues of the Cayley graph = character sums over the circle; \u03bb(c) = \u2212K(1, c/4) (Kloosterman); Weil |K| \u2264 2\u221ap; Hoffman \u03c7 \u2265 1 + (p+1)/(\u2212\u03bb_min). Floats to 1e-12; the margin above is what rounding could move."
+}

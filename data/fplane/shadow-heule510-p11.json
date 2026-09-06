@@ -1,0 +1,39 @@
+{
+ "kind": "fplane-shadow",
+ "stage": "heule510 (n=510, edges=2504, fp=d67e15eb8400d9b0, frame=field16[3, 5, 7, 11])",
+ "p": 11,
+ "circle_pairs": 6,
+ "dirs": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   3,
+   5
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   5,
+   3
+  ],
+  [
+   5,
+   8
+  ]
+ ],
+ "dir_count": 6,
+ "degree": 12,
+ "n": 121,
+ "edges": 726,
+ "lambda_min": -4.795754778231585,
+ "hoffman": 3.502213010237557,
+ "chi_floor": 4
+}

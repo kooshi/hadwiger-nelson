@@ -206,6 +206,20 @@ open HadwigerNelson
 #print axioms HadwigerNelson.three_le_chromaticNumber_plane_of_pathGraph
 #print axioms HadwigerNelson.cycleGraph_six_not_additivelyRigid
 #print axioms HadwigerNelson.pathGraph_not_additivelyRigid_three
+-- M58: the finite-plane bound (UnitQuadrance.lean, Instances/FinitePlane11.lean) — the reduction of a valid
+-- certificate through a ring hom out of a subring of the tower, χ(UD(F_11,2)) = 5 and χ(Heule-510) = 5 exactly,
+-- the floor at 131 through the whole tower
+#print axioms HadwigerNelson.unitQuadrance_adj
+#print axioms HadwigerNelson.UDCert.drawing_adj
+#print axioms HadwigerNelson.UDCert.colorable_of_unitQuadrance
+#print axioms HadwigerNelson.UDCert.add_one_le_chromaticNumber_unitQuadrance
+#print axioms HadwigerNelson.heule510_coordsIn_sevenFree
+#print axioms HadwigerNelson.finitePlane11_colorable_five
+#print axioms HadwigerNelson.finitePlane11_not_colorable_four
+#print axioms HadwigerNelson.chromaticNumber_finitePlane11
+#print axioms HadwigerNelson.heule510_colorable_five
+#print axioms HadwigerNelson.chromaticNumber_heule510
+#print axioms HadwigerNelson.five_le_chromaticNumber_finitePlane131
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/

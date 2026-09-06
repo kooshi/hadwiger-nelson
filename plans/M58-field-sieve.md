@@ -568,3 +568,111 @@ carries its population and its conditioning** (G21): "UD(F_23,2): 529 vertices, 
 
 **`data/fplane/README.md`** is rewritten at the close with a kernel column: which values are kernel-certified (11 exactly;
 131 ≥ 5; Heule-510 = 5) and which are tools-only (every `chi` UNSAT, every `spectral` row, every `shadow`).
+
+---
+
+## §R. Results (M58, 2026-09-06 — the field sieve)
+
+### §R0. What shipped
+
+* **Kernel** (`Proofs/HadwigerNelson/UnitQuadrance.lean`, `Instances/FinitePlane11.lean`; axioms exactly the standard three —
+  606 clean at the gate): `unitQuadrance R` for every commutative ring, `finitePlane p`, the functoriality `unitQuadrance.map`,
+  `Adjoin.lift` / `Q3.lift` / `Q4.lift`, the `√7`-free subring `Q4.sevenFree ≅ Q3` and its hom, **the reduction theorem**
+  `UDCert.drawing_adj` (a `Valid` certificate, a subring `S` holding its coordinates, a hom `S →+* R`, an inverse of `D` in `R`
+  ⟹ a graph hom into `unitQuadrance R`) with `colorable_of_unitQuadrance` / `not_colorable_unitQuadrance` /
+  `add_one_le_chromaticNumber_unitQuadrance`; **`chromaticNumber_finitePlane11 : (finitePlane 11).chromaticNumber = 5`** (the
+  ≤ half a 121-entry table decided proper, the ≥ half Heule-510's certified refusal of four through the reduction — no solver,
+  no LRAT, no edge re-examined); **`chromaticNumber_heule510 : (edgeGraph 510 heule510.edges).chromaticNumber = 5`** — the
+  first certified UPPER bound on a certified 5-chromatic witness; `five_le_chromaticNumber_finitePlane131` through the whole
+  tower; reds and pins. Elaboration: 3 s + 14 s.
+* **Instrument** (`tools/fplane.py`, 21 self-test controls green): `spectral` (D6), `shadow` (D7), `map` (the field table),
+  `chi --pin-clique`, the population-carrying headlines. **Records** (`data/fplane/`): `chi-p{3,7,11,19}`, `chi-p19-k4`,
+  `spectral-below-600`, `spectral-p131`, `shadow-{heule510-p11, degrey1581-p131, degrey1581-p479, degrey-gen1-p131,
+  degrey-gen1-p479}`, `map.json` + `map.md`; the README rewritten with a kernel column.
+
+### §R1. D6 — the spectrum settles every plane from 59 up, and the big SAT runs were never needed
+
+The eigenvalues of UD(𝔽_p, 2) are the character sums over the circle, one per nonzero norm class, and they ARE Kloosterman
+sums: **λ(c) = −K(1, c/4)**, checked to 10⁻¹³ at every p ≡ 3 (mod 4) below 600 (`spectral-below-600.json`: the maximum
+residual 5.7·10⁻¹⁴; the full 2-D FFT agrees with the class sums to 10⁻¹⁴ everywhere). Weil's |K| ≤ 2√p and Hoffman's
+χ ≥ 1 + λ_max/(−λ_min) give χ(UD(𝔽_p,2)) ≥ 1 + (p+1)/(2√p) > 5 for p ≥ 62 — **every usable prime p ≥ 67 refuses five colours
+with no computation** — and the exact spectrum adds 59 (Hoffman 5.022, margin 0.022 against a float error ≤ 10⁻¹²). The
+values that matter: 83 → ≥ 6 (P2 met), 107 → ≥ 7, **131 → ≥ 8 (P3 met)**, 479 → ≥ 13. Below 59 the bound reads ≥ 4 at 11
+and 19, ≥ 5 at 23, 31, 43, 47 — the only planes where a solver has anything to say.
+
+### §R2. D3 — the field table is a theorem for every field containing K
+
+For F ⊇ K = ℚ(√3, √11) multiquadratic, the usable primes are p ≡ 11 (mod 12) with p a non-residue mod 11: {11, 83, 107, 131,
+167, 227, …} — **11 is the only usable prime below 67**, and 11's plane is 5-chromatic. With §R1:
+
+> **F ⊇ K is 6-open ⟺ the 2-adic wall is broken (Theorem B) ∧ 11 is inert in F (some radicand is a non-residue mod 11).**
+
+The map (`data/fplane/map.md`, 19 fields): sealed at 3 — ℚ, ℚ(√3), ℚ(√7) (p = 3); sealed at 4 by Theorem B — ℚ(√2), ℚ(√5),
+ℚ(√11), K, K(√35); sealed at 5 by p = 11 — K(√5), K(√23), K(√247), K(√5, √247), Heule's ℚ(√3, √5, √11); **6-open — de Grey's
+ℚ(√3, √5, √7, √11) (usable 131, 479), K(√7) (83, …), K(√13) (107, …), K(√79) (107, …), K(√127) (83, …), K(√5, √7, √247)
+(479)**. The 2-adic criterion, exactly: over K a single radical d breaks the wall iff an odd square class among {d, 3d, 11d,
+33d} is ≡ 7 (mod 8) — odd squarefree **d ≡ 5 or 7 (mod 8)** (5 through 3d ≡ 15 ≡ 7); the stub's D3′ had listed only d ≡ 7.
+The candidate single radicals over K, up to K-classes: **7, 13, 29, 61, 79, 85, 95, 101, 109, 127, 149, 151, 167, 173, 197, …**
+(odd squarefree, ≡ 5 or 7 mod 8, non-residue mod 11). Every one is 6-open: its usable primes are all ≥ 83.
+
+### §R3. The measurements
+
+| object | result | population / conditioning | record |
+|---|---|---|---|
+| UD(𝔽₃,2), UD(𝔽₇,2), UD(𝔽₁₁,2) | χ = 3, 4, 5 | verified colourings; k − 1 the solver's refusal (at 11 the kernel's, via Heule-510) | `chi-p3`, `chi-p7`, `chi-p11` |
+| UD(𝔽₁₉,2) | **χ = 5** | k = 5 found in 18 s (verified); k = 4 refused in 5 s (the solver's claim); Hoffman floor 4; ω = 2 (3 is a non-residue mod 19: the plane is triangle-free) | `chi-p19-k5`, `chi-p19-k4` |
+| UD(𝔽₂₃,2), UD(𝔽₃₁,2), UD(𝔽₄₃,2), UD(𝔽₄₇,2) at k = 5 | in flight at the close (see the addendum below) | 529 / 961 / 1,849 / 2,209 vertices; Hoffman floors 4.02 / 4.00 / 4.68 / 4.74 (≥ 5); ω = 3, 2, 2, 3 | `build/m58/chi-p*-k5.log` |
+| UD(𝔽_p,2), p ≥ 59 | χ ≥ 6 (59: 5.022; 67: 5.52; 71: 6.08 → ≥ 7; 83: 5.74; 107: 6.67 → ≥ 7; 131: 7.25 → ≥ 8; 479: 12.3 → ≥ 13) | the spectral bound — a derivation plus a float sum with a stated margin; no solver | `spectral-below-600` |
+| the 1581's shadow at 131 | 55 of 66 residue pairs; Cay(𝔽₁₃₁², D₅₅): 17,161 vertices, degree 110; spectral floor 4.96 → ≥ 5; k = 5 in flight | `shadow-degrey1581-p131` |
+| the 1581's shadow at 479 | 64 of 240; degree 128; floor 4.32 → ≥ 5 | `shadow-degrey1581-p479` |
+| the gen-1 closure's shadow at 131 / 479 | 66 of 66 (the whole plane: ≥ 8) / 210 of 240 (degree 420; floor 8.38 → ≥ 9) | `shadow-degrey-gen1-p{131,479}` |
+| Heule-510's shadow at 11 (control) | 6 of 6 — the whole plane, ≥ 5 by the theorem | `shadow-heule510-p11` |
+
+### §R4. The kernel, read aloud against the claim
+
+*"The finite Euclidean plane over 𝔽₁₁ has chromatic number exactly five"* — `(finitePlane 11).chromaticNumber = 5`, where
+`finitePlane 11 = unitQuadrance (ZMod 11) = addCayley {v | v.1² + v.2² = 1}` on `ZMod 11 × ZMod 11`, and `chromaticNumber` is
+Mathlib's. *"Heule's 510-point graph has chromatic number exactly five"* — `(edgeGraph 510 heule510.edges).chromaticNumber = 5`,
+the same graph M09 refuted at four. What the kernel does NOT say: anything about ℚ(√3, √5, √11)² as a field plane — the
+reduction is stated for certificates (a subring of the tower, an inverse of the denominator), and the step from the field to
+that form (unit vectors are integral at the primes above 11) is a hand argument (`VERIFICATION.md` §1), priced in §S3 and
+deferred. The certificate-level statement is, in exchange, MORE general than the hand theorem: every commutative ring, every
+subring, no condition on p.
+
+### §R5. Registered predictions, scored
+
+| # | prediction | verdict |
+|---|---|---|
+| P1 | χ(UD(𝔽₁₇,2)) = 5; 19 and 23 = 6 | **19 REFUTED: χ = 5** (measured both ways); 17 dropped (not usable; undecided at 50 min); 23 pending |
+| P2 | 83 refuses five | **MET by derivation** (5.743) |
+| P3 | 131 refuses five | **MET by derivation** (7.253 → ≥ 8) |
+| P4 | 11 is the last 5-sealing prime | **REFUTED as stated** (19 seals at 5); **the form that matters is a THEOREM**: for F ⊇ K the only sealing prime is 11 |
+| P5 | the field table | sharpened and made a theorem for K-fields; the candidate list corrected (d ≡ 5 mod 8 joins) |
+| P6 | `FinitePlane11` on the standard three, no LRAT, < 200 lines | **MET** (two decides, one comap; plus the general theorem and χ(Heule-510) = 5) |
+| P7 | the 1581's shadow at 131 is 5-chromatic | undecided at the close (spectral floor 4.96; SAT in flight) |
+| P8 | the Heule table is √7-free at all 510 points | **MET** (`heule510_coordsIn_sevenFree`, decided) |
+
+### §R6. Incidents and instrument facts
+
+* The stub's p = 83 run at k = 5 did not return at its 2,400-s wall (killed at 44 min): pysat's `solve_limited(expect_interrupt)`
+  + timer did not interrupt a 6,889-vertex instance in time — the same genre as M55's inert wall. Not fixed (the spectral bound
+  made the run moot); a future big SAT should use the external `cadical` binary under `timeout`, as `five_dial` does.
+* A planted self-test control was itself wrong — "the single direction (0,1) at p = 11 is 2-colourable" — because the
+  11-cycles it produces are ODD; the self-test read RED and the control was corrected (2 refused, 3 found). G21 on the
+  instrument's own controls.
+* Twelve orphaned `five_dial` workers from M55 (their parent killed by the `pkill` self-match) had run 14 h at 1.7 % CPU each;
+  killed by PID at opening.
+* The kernel trap of §M2 (`hval _ hij` unifying through the tower) recorded for the next module that instantiates a
+  `∀ e ∈ es` fact against tower arithmetic.
+
+### §R7. What this changes for the hunt
+
+* **Where a 6-forcer can live is now a congruence for every field the hunt might use over K**: wall broken ∧ 11 inert. The
+  descent's endgame field must satisfy it; ρ₁₅ (K(√5)) and ρ at 8/3 (K(√247)) do not; the spindles at d with 4d² − 1 in the
+  classes of 7, 13, 29, 61, 79, … do.
+* **No usable prime ever seals a field above 5 except through 3, 7, 11, 19 (and possibly 23–47)**: the sieve's whole power
+  is at small primes, and for √3-fields at 11 alone. A field with 11 inert and the wall broken is open to every finite-plane
+  test there is.
+* **The finite planes are ≥ 6-chromatic from 59 up and ≥ 8 at 131**: their 6-critical subgraphs exist and are computable
+  without geometry, and a LIFT of one to de Grey's field (points in the residue classes with every edge unit) would be a
+  6-chromatic unit-distance graph — the constructive face of the pivot, stubbed as FS-11.

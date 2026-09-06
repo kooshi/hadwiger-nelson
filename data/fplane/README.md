@@ -1,23 +1,26 @@
-# data/fplane — the finite-plane bound (the pivot of 2026-09-06; `reference/Chat-analysis/VERIFICATION.md`; the milestone is M58, `plans/M58-field-sieve.md`)
+# data/fplane — the finite-plane bound (M58, `plans/M58-field-sieve.md`; the pivot of 2026-09-06, `reference/Chat-analysis/VERIFICATION.md`)
 
 A real number field F with a prime 𝔭 above p ≡ 3 (mod 4) whose residue field is 𝔽_p (or 𝔽_{p^f}, f odd) sends every
 finite unit-distance graph in F² homomorphically into the finite Euclidean plane UD(𝔽_p, 2) = Cay(𝔽_p², {a² + b² = 1}),
 so χ(F²) ≤ χ(UD(𝔽_p, 2)). The records here are the computable halves of that statement. Regenerate with
-`tools/fplane.py` (`self-test` first: 11 controls, including a planted wrong residue for √3 that must break the homomorphism).
+`tools/fplane.py` (`self-test` first: 21 controls, including a planted wrong residue for √3 that must break the
+homomorphism, a planted sign flip of λ_min the FFT cross-check must catch, and the odd-cycle shadow).
 
-**What a record licenses.** *A `chi-p<P>` record's `colouring` is verified proper here — a certificate that χ(UD(𝔽_P,2)) ≤ chi;
-its `unsat` rows are the solver's claim (untrusted) — `exact: true` means chi − 1 was refused by the solver and chi carries
-a verified colouring. A `reduce-<stage>-p<P>` record's `edges_on_circle = edges` is an exact finite check that the stage's
-reduction is a homomorphism (a certificate for THAT stage); its `pullback_proper: true` is a verified colouring of the stage
-(a certificate that χ(stage) ≤ k). Neither record says anything about χ(ℝ²).*
+**What a record licenses — the kernel column is the one that matters.**
 
-| artifact | what | what a reader may conclude |
-|---|---|---|
-| `chi-p11.json` | UD(𝔽₁₁, 2): 121 vertices, 726 edges (the circle has 12 points); k = 2, 3, 4 refused (solver), k = 5 found and verified; the colouring as 11 rows | χ(UD(𝔽₁₁,2)) ≤ 5 certified by the colouring; = 5 given the solver's refusal at 4 — or, solver-free, given Heule-510's kernel-certified refusal of four colours and its reduction below |
-| `reduce-heule510-p11.json` | Heule-510 (ℚ(√3,√5,√11), denominator 96) reduced with √3 ↦ 5, √5 ↦ 4, √11 ↦ 0: 510 points onto all 121 residues, 2,504 / 2,504 edges on the circle, the pulled-back 5-colouring proper | the reduction is a homomorphism; χ(Heule-510) ≤ 5 by pullback; with the kernel's χ(Heule-510) ≥ 5, χ(UD(𝔽₁₁,2)) ≥ 5 without any solver |
-| `reduce-W-core-8over3-p11.json` | the T20 witness W (K(√247)): √247 ↦ 4 (247 ≡ 5 mod 11); 5,773 / 5,773 on the circle; pullback proper | χ(K(√247)²) = 5 exactly (W is 5-chromatic) |
-| `reduce-EI-seed-unit-p11.json` | the Exoo–Ismailescu seed's unit part (K): 214 points onto 51 residues; 1,004 / 1,004; pullback proper | consistent with Theorem B's 4 (the 11-bound is the weaker one on K) |
+| record kind | what it holds | a reader may conclude | kernel-certified? |
+|---|---|---|---|
+| `chi-p<P>[-k<K>].json` | UD(𝔽_P, 2): the plane's size and degree; per k the solver's verdict and time; the colouring found, verified proper here, as P rows | the verified colouring is a certificate that χ(UD(𝔽_P,2)) ≤ chi; an `unsat` row is the solver's claim (untrusted); `exact: true` means chi − 1 was refused and chi carries a verified colouring | **p = 11: yes, both halves** (`Instances/FinitePlane11.lean`: χ = 5 on the standard three axioms — the ≤ half by the table, the ≥ half from Heule-510's certified refusal of four colours through the reduction, no solver); every other prime: tools only |
+| `spectral-p<P>.json`, `spectral-below-600.json` | the eigenvalues of UD(𝔽_P, 2) — one character sum per nonzero norm class, the identity λ(c) = −K(1, c/4) with the Kloosterman sum checked to 1e-13, the full 2-D FFT as a cross-check, λ_min, the Hoffman number 1 + (P+1)/(−λ_min), its integer consequence, the float margin | χ(UD(𝔽_P,2)) ≥ ⌈Hoffman⌉ — a DERIVATION resting on two classical theorems (the spectrum of a Cayley graph on an abelian group is the DFT of its connection set; Hoffman's bound χ ≥ 1 + λ_max/(−λ_min)) and a float sum of P + 1 unit complex numbers whose error (≤ 1e-12) is far below every margin used (the smallest, at 59, is 0.022). For P ≥ 67 the bound is ≥ 6 with no computation beyond Weil's |K| ≤ 2√P | no (a hand derivation + floats); the planes at 83, 107, 131 are settled this way and by nothing else |
+| `shadow-<stage>-p<P>.json` | the residues of a stage's unit directions up to sign (D), how many of the (P+1)/2 circle residues they cover, the Cayley subgraph Cay(𝔽_P², D)'s size and degree, its spectral floor, and — when asked — χ by SAT (a verified colouring or the solver's refusal) | the stage, and every unit-distance graph built from its directions, maps into the shadow; χ(shadow) ≤ k (verified colouring) seals all of them; χ(shadow) ≥ k + 1 (spectral, or the solver's refusal) says a 6-forcer from those directions is not excluded by this prime | no |
+| `reduce-<stage>-p<P>.json` | a stage reduced modulo a degree-one prime above P: the residues, the exact check that every unit edge lands on the circle, and the pulled-back colouring verified proper | `edges_on_circle = edges` is a certificate that the reduction is a homomorphism FOR THAT STAGE; `pullback_proper: true` is a verified colouring — χ(stage) ≤ k | **Heule-510 at 11: yes** — `heule510_colorable_five`, and with M09's refusal of four, `chromaticNumber_heule510 = 5` exactly; W and the seed: tools only |
+| `map.json`, `map.md` | the field table: radicands, the 2-adic wall by Theorem B's exact criterion (an odd square class ≡ 7 mod 8 among the products of the radicands), the usable primes, the sealing prime and its record, the verdict | `sealed-at-k (p, record)`: χ(F²) ≤ k by the named record (or Theorem B's 4); `6-open`: no usable prime seals — every usable prime ≥ 67 has a plane ≥ 6 by the spectral bound and every usable prime below has a record refusing five; `open-pending (p)`: a usable plane below 67 is undecided | no; but for every field containing K = ℚ(√3, √11) the verdict is a theorem (the only usable prime below 67 is 11 — `plans/M58-field-sieve.md` §S1) |
 
-Not here: the sieve's outputs (`fplane.py usable --rads …`, printed, not written), the planes at p = 13–23 and 83/107/131
-(running at the compaction, logs under `build/m57/`; M58 writes their records here as `chi-p<P>.json`), and the shadow
-sieve's records (`shadow-<stage>-p<P>.json`, M58).
+**The values, as they stand (2026-09-06).** χ(UD(𝔽_p, 2)) = 3, 4, 5, 5 at p = 3, 7, 11, 19 (verified colourings; the lower
+halves the solver's except at 11, where the kernel's Heule-510 does it); at 23, 31, 43, 47 the spectral floor is 5 and the
+k = 5 asks are recorded as they finish; at 59 the exact spectrum gives ≥ 6 (Hoffman 5.022); at every p ≥ 67, ≥ 6 by Weil
++ Hoffman (83: ≥ 6, 107: ≥ 7, 131: ≥ 8, 479: ≥ 13). The kernel holds χ(UD(𝔽₁₁, 2)) = 5 exactly and χ(UD(𝔽₁₃₁, 2)) ≥ 5
+(Heule-510 through the whole-tower hom — the free floor; the spectral ≥ 8 is tools-only).
+
+**Not here:** the sieve's outputs (`fplane.py usable --rads …`, printed; `map` records them per field), the background
+logs (`build/m58/`), and the M31 closure the `--gen1` shadow regenerates (3 s, from `tools/closure.py`).
