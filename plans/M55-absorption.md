@@ -500,3 +500,9 @@ vertices (a pool point can never be critical — deleting it leaves the 5-chroma
 says whether the thickening removes W's critical set. Also measured: the depth-two pool is again
 lattice-like (309 fusions among 1,195 points — a quarter of the points are reached from two or more
 parent pairs).
+
+**§R2, continued (2026-09-06 ~07:40Z) — the sweeps.** The K = 2 flower's exhaustive five-colour sweep
+(40 relabelling-seeded models, `--no-amo`): **status done — 0 forced-equal pairs (0 unsettled), 0 virtual
+edges (0 unsettled), 46 models, 6 calls, 11 s** (`data/m54/sweep-flower-35_1859-p1_-1_2_-2.json`). P-M55-9
+MET at K = 2 — the first object of the milestone that the absorption theorem does NOT decide reads floppy
+anyway, as the spare-colour argument on the centre predicted; K = 3 queued behind it.
