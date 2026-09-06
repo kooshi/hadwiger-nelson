@@ -506,3 +506,31 @@ parent pairs).
 edges (0 unsettled), 46 models, 6 calls, 11 s** (`data/m54/sweep-flower-35_1859-p1_-1_2_-2.json`). P-M55-9
 MET at K = 2 — the first object of the milestone that the absorption theorem does NOT decide reads floppy
 anyway, as the spare-colour argument on the centre predicted; K = 3 queued behind it.
+The K = 3 flower's sweep, the same recipe: **status done — 0 / 0, 47 models, 7 calls, 29.8 s**
+(`data/m54/sweep-flower-35_1859-p1_-1_2_-2_3_-3.json`). P-M55-9 MET at K = 3 as well. So the single-centre
+genre, at every depth tried, is pairwise floppy at five colours and reads so in seconds — the theorem does not
+absorb it, but the localization theorem's C = {x} leaves the sweep only the centre's neighbourhood to
+settle, and it settles it by observation alone (forced-equal side) and a handful of batch queries.
+
+**§R4, continued (2026-09-06 ~08:20Z) — the criticality censuses of the grown stages.** A pool point can
+never be critical (deleting it leaves the 5-chromatic W intact), so both censuses ask W's 1,175 vertices
+only (`critical --only`; the census's "recorded non-critical by the caller's theorem" is exactly that
+theorem).
+
+| grown stage | asked | critical | freed relative to W ∪ P₁ (1,172 critical of 1,175) | candidates at five colours |
+|---|---|---|---|---|
+| cross-only, 2,433 points (fp `ebd913ef61c9f013`) | 1,175, 0 unknown (mean 10.8 s per ask; 937 verified colourings) | **937** | **238 freed — every one on the copy side (R(core₁)), none on the core side** | 0 forced-equal, 0 virtual-edge: C (937 vertices, spread over the copy and the whole core) is coverable by no two unit circles — **the dial reads zero by theorem** |
+| all pairs, 10,541 points (fp `5cc40ce1af4f9aa9`) | 169 of 1,175 at the checkpoint (mean 113 s per ask); resumed at 16 workers | **1 of 169 so far** | the K-partner thickening of both cosets makes the 5-chromaticity redundant almost everywhere — the same-side pool is the fabric's own partner lattice, and M54 §R3 measured the same on the full fabric (C = 13 of 3,905) | pending: if C = ∅ the sweep is the reading |
+
+**Reading.** P-M55-6's criticality half: C nonempty (ν = 1) MET on the cross-only stage, but "shrinking
+by at most a few" MISSED by two orders (238); and the shrinkage is one-sided. The asymmetry is a
+finding to explain, not a number to pass over: the depth-two cross pool gives the COPY's forcing of
+(x, R(y)) alternative routes and the CORE's forcing of (x, y) none — the same one-sidedness as M54's
+depth-one reading (three copy-side vertices freed, none on the core side), now at scale. Registered as
+an open question (T24 at the close): what distinguishes the two K-cosets in the F₂₄₇ pool — the pool
+points are glue points of (core, copy) pairs and their descendants, symmetric in the construction, so
+the asymmetry must come from the rotation's direction relative to the fabric's own ladder structure
+(T13). Incident recorded: I stopped both censuses believing them stalled — their checkpoints were being
+written under `data/m54/` (the tool's default DATA dir), not `data/m55/` where I looked; the cross-only
+census was one vertex from done. Both resumed from their checkpoints; nothing was lost. The checkpoint
+rule (CLAUDE.md, 2026-08-26) paid for itself twice in one hour.

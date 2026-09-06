@@ -42,3 +42,8 @@
 2026-09-06T04:37:08Z M55 B5: the full-pool grown-stage census (10,541 pts) STOPPED by me at load 38 to unblock the cross-only census (no partial checkpoint had been written yet); the pkill self-matched my shell once more (exit 144) — the census died, the shell with it
 2026-09-06T04:39:31Z M55 B4: the exhaustive five-colour sweep of the K=2 flower (2,936 pts; NOT absorbed by theorem, C = {x}) — 40 seeded models then sweep --no-amo, log build/m55/sweep-flower-p2.log
 2026-09-06T04:40:10Z M55 B4: the K=3 flower's seeded sweep (4,110 pts) queued behind the K=2 sweep, log build/m55/sweep-flower-p3.log
+2026-09-06T04:40:27Z M55 gate: scripts/build.sh (only Absorb.lean and the surface are new; the rest cached) log build/m55/gate-build.log
+2026-09-06T04:41:23Z M55 B5: the cross-only grown-stage census STOPPED by me — no ask finished in 40 min at a 300-s wall (every deletion ask on W ∪ P₁ ∪ P₂ is hard); replaced by a 7-vertex probe at wall 1800
+2026-09-06T04:41:27Z M55 B5: 7-vertex criticality probe on the cross-only grown stage (the three vertices M54's pool freed + four still-critical ones), wall 1800, log build/m55/critical-depth2-crossonly-probe.log
+2026-09-06T04:42:35Z M55 B4: the K=3 flower's sweep done 0/0 (29.8 s); the K=2 flower's 0/0 (11 s)
+2026-09-06T04:43:46Z M55 B5: the full-pool grown-stage census RESUMED from its 169-verdict checkpoint (data/m54/…partial.jsonl; 168 of 169 non-critical so far), 16 workers, wall 600, log build/m55/critical-depth2-resume.log
