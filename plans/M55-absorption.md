@@ -334,3 +334,46 @@ failure recorded in the closing commit.
 | `nu-ihs` | (i) each solver core `K` (the assumptions `¬dᵥ`, `v ∈ K`, jointly 4-UNSAT) is RE-VERIFIED by a second encoding (the 3-bit `binary3` refutation of `G[K]`) before it enters the hitting-set family — a wrong core would inflate the lower bound, the unsafe direction; (ii) the hitting-set step is EXACT (RC2 on the family: soft `¬dᵥ`, hard "each core hit"; the family is small) — the lower bound is the optimum's size; (iii) at a SAT `S` the 4-colouring of `G − S` is decoded and verified in Python — the upper bound is certified; (iv) exact when lower = upper; the core list and the best `S` checkpointed every iteration; a wall returns the bracket | planted: two disjoint `K₅` at `k = 4` → ν = 2; the seed `H` at `k = 5` → ν = 38 (known exact); `K₅ − e` at `k = 4`… ν = 1 with `C ≠ ∅` |
 | `multi-spindle` | each pair at its declared squared distance (mpmath, 60 digits); rotations from `q` (and `ρ^k` for `--power`); unit edges by float prescreen + 60-digit confirmation, near-misses rejected; fusions detected; four-colour refusal and five-colour admission asked directly; sides labelled for `absorb` | `--pairs 35,1859;813,1939 --full` reproduces star₂'s fingerprint `a7d58e7346920d3a`; `--power 1` about 35 on core₁ reproduces W |
 | `cross-lattice --depth 2` | the glue census over every non-adjacent pair of `W ∪ P₁` at distance < 2, exact in F₂₄₇; every glue point re-verified at unit distance from both parents; fusions and pool edges exact | run on `W` alone (depth 1) it reproduces `cross-lattice-W-core-8over3.json` |
+
+## §Bʹʹʹ. The experience-modeling pass (2026-09-06, fresh invocation) — the surfaces
+
+### (1) `Absorb.lean` — what a consumer holds, and which direction to reach for
+
+The consumer is a future certificate of a copy union, the descent's halt clauses, or the dial's reader,
+holding a goal `¬ Forces G 5 p q` with `p q : V` known to lie in the base `A`. The path they travel:
+`Extends.not_forces_of_colorable h hA hp hq hpq`, with `h := extends_of_hubs …` and `hA` the base's
+4-colourability — so the two negative corollaries take MEMBERSHIP proofs `(hp : p ∈ A) (hq : q ∈ A)`
+(changed from subtype elements by this pass); the two iffs keep the subtype because they mention the
+induced graph's vertices. `induce_adj` (definitional, `@[simp]`) is the one normal form every downstream
+proof needs, added so no proof opens with the same `comap_adj`/`coe_subtype` preamble (Mathlib has no
+`SimpleGraph.induce_adj`; checked). Public: `Extends`, `restrictColoring` (+ its `@[simp]` apply lemma),
+`Clashes` (it appears in the carrier's statement), `ExtensionOrder` (consumers build it), `symCopy` and
+`symCopy.coloringOfPerm`; private: the free-colour pigeonhole. Names follow `colorable_of_degree_lt`'s
+pattern (`extends_of_hubs`, `extends_of_matching`, `extends_of_extensionOrder`, `extends_symCopy`);
+`ExtensionOrder.extends` was rejected because `extends` is a keyword. Docstrings state the contract
+first ("you hold …; you get …") and the plane instance second. The module doc's table is the API.
+
+### (2) `tools/five_dial.py` — the new subcommands
+
+| subcommand | arguments | headline (population and conditioning in the sentence) | result file |
+|---|---|---|---|
+| `absorb --graph <stage> [--k 5]` | pieces and hubs INFERRED from the builder's side labels (`meta.names` sides `R{i}`, hub = the base vertex named `("U", pairᵢ[0])`); no other input | `[absorb] <label> k=5: base U (n, 4-colourable ✓ verified); piece R0 (n₀, hub 35): piece∪hub 4-colourable ✓, base-neighbour histogram {0: a, 1: b, 2: c}, cross-piece edges 0, non-hub chords m with e edges among their piece endpoints → absorbed / NOT (reason, vertices); … VERDICT: U extends at 5 colours by Absorb.extends_of_hubs — no compulsion among U's pairs; D5: ν ≤ Σ non-hub chords = s` | `data/m55/absorb-<name>.json`: kind, k, stage header, per-piece records, verdict, theorem, bound, claim_scope |
+| `core5 <stage> --k 5` | any stage | `[core5] <label>: 5-core n_core of n (m peeled in r rounds; the reversed peel order re-checked as an ExtensionOrder) — by Absorb.extends_of_extensionOrder the m peeled vertices are invisible at 5 colours` | `data/m55/core-<name>-k5.json`: core, peel order, recheck |
+| `nu-ihs <stage> --k 5 --wall W [--max M]` | k, wall, optional cap on |S| | per iteration `[nu] iter i: cores c (all re-verified), min hitting set s, ask SAT/UNSAT`; final EITHER `ν(<label>) = s EXACT (k=5; lower = the exact hitting set of c re-verified cores, upper = a verified 4-colouring of G − S)` OR `ν ∈ [lo, hi] at the wall (lo … , hi …)` — the word EXACT only when both bounds are certified and equal | `data/m55/nu-<name>-k5.json`: lower, upper, exact, cores, S, iterations, seconds, claim_scope; checkpoint `build/m55/nu-ihs-<name>-k5.json` every iteration |
+| `multi-spindle --object <L4> --q 64/9 (--pairs "35,1859;813,1939" \| --flower 35,1859 --powers 1,-1,2,-2) [--full] [--dps 60]` | two modes: distinct centres, or one centre with rotation powers; cores looked up (`data/m53/forced-spindle-core-8over3.json`, `build/m54/shrink-<x>-<y>.json`) unless `--full`; a missing core names the `shrink` command to run | `[multi] <label>: n points (n_U in U, copies …, fused f), e unit edges, cross chords {…}, near-misses rejected r; 4-colourable: False (must be); 5-colourable: True` | `data/m55/spindles-<pairs>[-full].json` / `data/m55/flower-<x>_<y>-p<powers>.json` (a `--graph` stage with points and sides) |
+| `shrink --object <L4> --pair x,y [--wall]` | the greedy 1-minimal forcing core, checkpointed (exists as a function; exposed) | `[shrink] 1-minimal core of (x, y): n vertices, every vertex necessary` | `build/m55/shrink-<x>-<y>.json` |
+| `cross-lattice --depth 2 --exact <witness> --cross <depth-1 json> [--workers]` | the depth-one output | `[cross2] W ∪ P₁ (n): pairs at d < 2 not adjacent: N; in-F₂₄₇ glue points: p (q %); pool P₂: m distinct points, fusions f, … ; grown stage n' points, e edges; total-degree profile of P₁ ∪ P₂: {2: …, 3: …, 4: …, ≥5: …}` | `data/m55/cross-lattice-depth2-<name>.json` and the grown stage `data/m55/W-plus-cross-depth2.json` |
+
+Breakdowns designed: `absorb` on a piece whose piece-plus-hub is NOT 4-colourable says so as a READING
+("the piece is itself 5-chromatic; extends_of_hubs does not apply") rather than an error; a stage without
+side labels fails naming the missing field; `nu-ihs` at its wall never prints "=" — the bracket carries
+which side is certified how; `multi-spindle` refuses a pair not at the declared distance by name. The
+jackpot protocol (banner, second encoding, exit 3) stays in `ask`/`sweep`; the new subcommands never
+produce a compulsion and say nothing about one.
+
+### (3) `data/m55/README.md`
+
+One bullet per artifact: what the object is, the command that regenerates it, the headline number with its
+population, and THE THEOREM IT INSTANTIATES (`Absorb.extends_of_hubs` for an absorb verdict,
+`Absorb.extends_of_extensionOrder` for a core, D5 for a ν bracket, `CriticalSet` for a census) — so a
+reader can tell a measurement of a theorem from a measurement of the world at a glance.

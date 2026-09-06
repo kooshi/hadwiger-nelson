@@ -46,8 +46,8 @@ consequence for copy unions are this module's.
 
 | you have | you want | use |
 |---|---|---|
-| `A` extends, `p q ∈ A` | the compulsion in `G` is `G[A]`'s | `Extends.forces_iff`, `Extends.separated_iff` |
-| `A` extends and `G[A]` is `k`-colourable | no compulsion at `k + 1` among `A` | `Extends.not_forces_of_colorable`, `Extends.not_separated_of_colorable` |
+| `A` extends, `p q : A` | the compulsion in `G` is `G[A]`'s | `Extends.forces_iff`, `Extends.separated_iff` |
+| `A` extends, `G[A]` `k`-colourable, `p ∈ A`, `q ∈ A` | no compulsion at `k + 1` between them | `Extends.not_forces_of_colorable`, `Extends.not_separated_of_colorable` |
 | copies fused at hubs, coupled by a thin matching | `A` extends | `extends_of_hubs` (one hub: `extends_of_hub_matching`; no hub: `extends_of_matching`) |
 | a greedy order adding low-degree vertices | `A` extends | `extends_of_extensionOrder` (one vertex: `extends_compl_singleton_of_degree_le`) |
 | two copies joined by symmetric chords | the first copy extends at any `k ≥ 2` | `extends_symCopy` |
@@ -65,6 +65,9 @@ variable {V : Type*} {G : SimpleGraph V} {k : ℕ}
 restriction of a proper `k`-colouring of `G`. -/
 def Extends (G : SimpleGraph V) (A : Set V) (k : ℕ) : Prop :=
   ∀ c : (G.induce A).Coloring (Fin k), ∃ C : G.Coloring (Fin k), ∀ a : A, C a = c a
+
+/-- Adjacency in an induced subgraph is adjacency in `G` (definitional; the simp-normal form). -/
+@[simp] theorem induce_adj {A : Set V} {a b : A} : (G.induce A).Adj a b ↔ G.Adj a b := Iff.rfl
 
 /-- The restriction of a colouring of `G` to `G[A]`. -/
 def restrictColoring (A : Set V) (C : G.Coloring (Fin k)) : (G.induce A).Coloring (Fin k) :=
@@ -88,12 +91,14 @@ theorem Extends.separated_iff {A : Set V} (h : Extends G A k) {p q : A} :
 /-- **The spare-colour lemma relative to a piece**: an extending set whose induced subgraph is
 `k`-colourable carries no forced-equal pair at `k + 1` colours. -/
 theorem Extends.not_forces_of_colorable {A : Set V} (h : Extends G A (k + 1))
-    (hA : (G.induce A).Colorable k) {p q : A} (hpq : p ≠ q) : ¬ Forces G (k + 1) p q := by
+    (hA : (G.induce A).Colorable k) {p q : V} (hp : p ∈ A) (hq : q ∈ A) (hpq : p ≠ q) :
+    ¬ Forces G (k + 1) p q := by
   sorry
 
 /-- … nor a virtual edge. -/
 theorem Extends.not_separated_of_colorable {A : Set V} (h : Extends G A (k + 1))
-    (hA : (G.induce A).Colorable k) {p q : A} (hpq : ¬ G.Adj p q) : ¬ Separated G (k + 1) p q := by
+    (hA : (G.induce A).Colorable k) {p q : V} (hp : p ∈ A) (hq : q ∈ A) (hpq : ¬ G.Adj p q) :
+    ¬ Separated G (k + 1) p q := by
   sorry
 
 /-! ## The repaint lemma — the carrier -/
