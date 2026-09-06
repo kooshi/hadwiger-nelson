@@ -503,11 +503,11 @@ parent pairs).
 
 **§R2, continued (2026-09-06 ~07:40Z) — the sweeps.** The K = 2 flower's exhaustive five-colour sweep
 (40 relabelling-seeded models, `--no-amo`): **status done — 0 forced-equal pairs (0 unsettled), 0 virtual
-edges (0 unsettled), 46 models, 6 calls, 11 s** (`data/m54/sweep-flower-35_1859-p1_-1_2_-2.json`). P-M55-9
+edges (0 unsettled), 46 models, 6 calls, 11 s** (`data/m55/sweep-flower-35_1859-p1_-1_2_-2.json`). P-M55-9
 MET at K = 2 — the first object of the milestone that the absorption theorem does NOT decide reads floppy
 anyway, as the spare-colour argument on the centre predicted; K = 3 queued behind it.
 The K = 3 flower's sweep, the same recipe: **status done — 0 / 0, 47 models, 7 calls, 29.8 s**
-(`data/m54/sweep-flower-35_1859-p1_-1_2_-2_3_-3.json`). P-M55-9 MET at K = 3 as well. So the single-centre
+(`data/m55/sweep-flower-35_1859-p1_-1_2_-2_3_-3.json`). P-M55-9 MET at K = 3 as well. So the single-centre
 genre, at every depth tried, is pairwise floppy at five colours and reads so in seconds — the theorem does not
 absorb it, but the localization theorem's C = {x} leaves the sweep only the centre's neighbourhood to
 settle, and it settles it by observation alone (forced-equal side) and a handful of batch queries.

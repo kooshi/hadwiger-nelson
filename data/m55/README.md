@@ -24,7 +24,7 @@ world. Regenerate with `tools/five_dial.py` (`absorb-self-test` first; 13 plante
   `multi-spindle --object <L4> --flower 35,1859 --powers 1,-1[,2,-2[,3,-3]]`. Its centre is critical at every
   K (one deletion ask each, `critical --only`), so by `CriticalSet.lean` any compulsion lives inside the
   centre's unit neighbourhood; the K = 2 flower's exhaustive five-colour sweep reads 0 / 0 complete
-  (`data/m54/sweep-flower-…json`, 11 s).
+  (`data/m55/sweep-flower-…json`, 11 s).
 * `spindles-35_1859-813_1939-1205_1442-full.json` — the three-spindle star on the full fabric (7,809 points);
   C = ∅ (the two candidates F₁ ∩ F₃ = {29, 1753} asked, `critical --only`), absorbed, ν ∈ [2, 3].
   `data/m54/forcing-critical-U-1205-1442.json` is the third pair's forcing census (`tools/m54_forcing_census.py`).
