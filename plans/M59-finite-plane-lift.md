@@ -1,0 +1,331 @@
+# FS-11 — Lift a 6-critical subgraph of a finite plane to the field (STUB, 2026-09-06; minted at the M58 close)
+
+*The constructive face of the finite-plane bound. Read beside this: `plans/M58-field-sieve.md` (the reduction theorem, the
+spectral table, the field map), `CLAUDE.md` G43/G44, `Proofs/HadwigerNelson/UnitQuadrance.lean` (`UDCert.drawing_adj` —
+the reduction as a graph hom), `data/fplane/spectral-below-600.json` (χ(UD(𝔽₁₃₁,2)) ≥ 8), `reference/Chat-analysis/analysis.txt`
+("design in the finite plane, lift to the field" — the web session's speculative paragraph, here made precise).*
+
+## 1. Mission context, in plain language
+
+The reduction sends a unit-distance graph G in F² to a subgraph of the finite plane UD(𝔽_p, 2), and homs run the wrong way
+for lower bounds: χ(G) ≤ χ(image). But a **lift** runs the right way. Let H be a subgraph of UD(𝔽_p, 2) — say a 6-critical
+one, which exists at every p ≥ 59 because the plane there is ≥ 6-chromatic (≥ 8 at 131). A lift of H is a choice, for each
+vertex v of H, of a point x_v ∈ F² in the residue class of v (with respect to the degree-one prime 𝔭 above p) such that every
+edge uv of H is a unit edge: |x_u − x_v| = 1. Then the x_v are distinct (their residues are), H is isomorphic to a subgraph of
+the unit-distance graph on {x_v}, and **χ(F²) ≥ χ(H) ≥ 6**. A lifted 6-critical subgraph of UD(𝔽₁₃₁, 2) into de Grey's field
+would be a 6-chromatic unit-distance graph — the object of the whole hunt — found by solving a diophantine system whose
+combinatorial part (which edges) is decided in the finite plane first, with no geometry.
+
+The honest difficulty is in the count: a 6-critical graph has |E| ≥ (5/2)|V| edges and the lift has 2|V| unknowns in F
+(each x_v is free within its residue class — the class is a coset of 𝔭 × 𝔭, an infinite set), so the unit-edge system is
+overdetermined by a factor 5/4 and generically has no solution; a solution needs the finite plane's structure to be the
+shadow of real structure (the residues of a genuine unit-distance configuration). The place to look is therefore not an
+arbitrary 6-critical subgraph but one INSIDE the shadow of a known object (D7: the 1581's directions cover 55 of the 66
+residue pairs at 131; its gen-1 closure all 66): the shadow's vertices that are residues of actual closure points already
+lift, and the question becomes whether the closure's points contain a 6-critical subgraph of the plane — which is exactly
+"is the closure 6-chromatic", decidable by the M31 machinery, and known NO for the gen-1 closure (k = 5 SAT in 1.14 s). So the
+lift problem is the question of which NEW points, in which residue classes, a closure would need — a design vocabulary.
+
+## 2. What we know
+
+| fact | where |
+|---|---|
+| χ(UD(𝔽_p,2)) ≥ 6 for p ≥ 59; ≥ 8 at 131; the plane at 131 has 17,161 vertices, degree 132 | `data/fplane/spectral-below-600.json` |
+| the reduction is a graph hom for every valid certificate (kernel) — a lift's edges reduce to the plane's edges by construction | `UnitQuadrance.lean` |
+| the 1581's shadow at 131 covers 55 of 66 direction classes; the gen-1 closure's all 66, but the closure is 5-colourable | M58 §R3; M31 |
+| a unit-distance graph's lift into a fixed residue class per vertex: each vertex free in 𝔭² (a 2-dimensional 𝔭-adic ball); each edge one quadratic equation | derivation §1 |
+
+## 3. Derivations first
+
+**D1 — the smallest 6-critical subgraphs of UD(𝔽₅₉,2) and UD(𝔽₁₃₁,2).** The plane at 59 is ≥ 6 by Hoffman with margin
+0.022 — its 6-critical subgraphs may be large (Hoffman is tight only for very regular objects). Compute: the 1-minimal
+5-refusing subgraphs by the M42/M43 shrink machinery on the plane (vertex-transitive, so start from balls in the Cayley
+metric). Size, symmetry, and whether they are contained in a shadow of any object we hold.
+
+**D2 — the lift as a system.** For H with vertices in 𝔽_p², unknowns x_v ∈ F² with x_v ≡ v (mod 𝔭): write x_v = v̂ + p·y_v
+with v̂ a fixed lift and y_v ∈ O_𝔭²; the unit condition |x_u − x_v|² = 1 becomes a quadratic in y. Count solutions in the
+𝔭-adic completion first (Hensel: a solution mod 𝔭² that is nonsingular lifts) — the LOCAL obstruction is decidable and
+cheap, and a system with no 𝔭-adic solution has no global one. Register: most 6-critical H fail already locally.
+
+**D3 — which H are shadows of real unit-distance graphs.** Necessary: H's edge directions (residues) must be liftable to
+unit vectors of F² — every direction of UD(𝔽_p,2) is (the circle residues are exactly the residues of unit vectors, by
+the theorem's own argument at p where the field has enough unit vectors — check which of the 66 classes at 131 are hit by
+directions of the closure: all 66). Sufficient conditions are the content.
+
+## 4. Phases
+
+| phase | what | cost |
+|---|---|---|
+| 0 | D1 at 59 and 131 (the plane's 6-critical cores); D2's local test implemented | days |
+| A | the local (𝔭-adic) lift test on every core found; a global lift attempt on any core that passes locally (a polynomial system over the field — sympy/Gröbner at small |V|, or the M49 descent's machinery: fix the edges, search points) | days to weeks |
+
+## 5. Registered predictions
+
+| # | prediction | confidence |
+|---|---|---|
+| P1 | the smallest 6-critical subgraph of UD(𝔽₁₃₁,2) has > 100 vertices | medium |
+| P2 | no 6-critical subgraph of UD(𝔽₁₃₁,2) passes the local lift test into de Grey's field | medium-low |
+
+## 6. Failure and pivot clauses
+
+A core that lifts globally: HALT AND VERIFY — it is a 6-chromatic unit-distance graph (the jackpot clause verbatim).
+All cores failing locally: the finite planes' 6-forcing is not the shadow of any unit-distance forcing at that prime — record,
+and the shadow sieve (D7) becomes the only bridge left between the planes and the hunt.
+
+## 7. Bearing on 6, honestly
+
+Medium. It is the one route the pivot opens that could PRODUCE a 6-object rather than exclude fields; its odds are set by an
+overdetermined diophantine system, and D2's local test says early whether there is anything to search.
+
+## 8. Addresses
+
+`tools/fplane.py` (`shadow`, `chi`), `tools/celllat.py` (the 1-minimal shrink, the ball machinery), `tools/closure.py`,
+`Proofs/HadwigerNelson/UnitQuadrance.lean`, `plans/M58-field-sieve.md`.
+
+## §H. Handoff for the session that opens M59 (written 2026-09-06 at the M58 close, before Kooshi's compaction)
+
+**Kooshi's decision:** M59 = this stub (FS-11, rank 1 of `plans/FRONTIER-STUBS.md`). Do NOT re-decide it. **And the goalposts
+moved the same evening** (`plans/PROGRAMME-ALGEBRAIC-PROOF.md` §1, §6): a lifted 6-forcer, if one lands, is a stepping stone —
+the milestone continues until the algebraic reason it forces six is a derivation for a class; the write-up is the derivation.
+
+**Read, in this order:** (1) `CLAUDE.md` § The mission (the trigger as amended 2026-09-06) and § Frontier — the M58 paragraph,
+ledger row 53, G43's amendment, G44; (2) `plans/PROGRAMME-ALGEBRAIC-PROOF.md` (the programme and the honest assessment);
+(3) this stub §1–§8; (4) `plans/M58-field-sieve.md` §S1–§S2 (the spectral facts and the K-field theorem), §M1 (the kernel's
+shape: `UDCert.drawing_adj` is the reduction any lift inverts), §R; (5) `tools/fplane.py`'s docstring, `self-test`, and the
+`shadow` subcommand (the direction residues the lift must respect); (6) `tools/celllat.py`'s ball/shrink machinery (M42/M43:
+the 1-minimal core extraction the finite plane's 6-critical subgraphs need).
+
+**Then WORKFLOW step 3 onward, no shortcuts:** `git mv plans/STUB-finite-plane-lift.md plans/M59-finite-plane-lift.md` (keep the
+FS-11 row in `FRONTIER-STUBS.md` with status "opened as M59"); write the subplan — **D2 derived first** (the lift as a system:
+x_v = v̂ + p·y_v, the unit condition as a quadratic in y, the local Hensel test stated exactly, and the COUNT: |E| ≥ 5|V|/2 equations
+in 2|V| unknowns — say what structure a solvable instance must have before searching for one), D1's cost priced (the plane at 59
+has 3,481 vertices, degree 60; at 131, 17,161 vertices, degree 132 — a 1-minimal 5-refusing subgraph by the M43 ball ladder, with
+the vertex-transitivity used to centre balls at the origin), the shadow constraint stated (a liftable H into de Grey's field must
+have its edge directions among the 66 classes the closure hits — all of them at 131, so no constraint there; at 479 only 210 of
+240), the kernel skeleton (the lift as a `UDCert` whose `drawing` reduces to H: `UDCert.drawing_adj` gives the hom for free, and
+"H ≅ a subgraph of the lift" is `edgeGraph` inclusion — sorry at the leaves), the instrument (`tools/fplane.py lift` or a new
+`tools/fplift.py`: `cores --p P --k 5` (the 1-minimal cores), `local --core FILE --field …` (Hensel), `lift --core FILE` (the
+global search)); commit; the three modeling passes as FRESH Skill invocations, each committed; then implement. Register P1–P2
+as they stand unless a derivation settles one first.
+
+**First things to read from disk:** the M58 solves left running — `build/m58/chi-p{23,31,43,47}-k5.log` (UD(𝔽_p,2) at five
+colours; walls 14,000 s; re-run `python3 tools/fplane.py chi --p P --k 5 --pin-clique --wall 14000` if lost) and
+`build/m58/shadow-1581-p131-k5.log` (the 1581's 55-direction shadow at five colours, a scratch runner; the record is written by
+`python3 tools/fplane.py shadow --degrey --p 131 --k 5 --wall 14000` — run it if the scratch died); record each in
+`data/fplane/` and in `plans/M58-field-sieve.md` §R3 as an addendum (P1 at 23, P4's re-registration at 31/43/47, P7); and the M55
+108 asks (pid 839605, `build/m55/ask-depth2.log` → `data/m55/ask-W-plus-cross-depth2-k5.json`, exit 3 = jackpot; ~15 h at the
+close): record as an M55 §R6 addendum and an FS-3 datum, then move `data/m54/critical-W-plus-cross-depth2.json` into `data/m55`
+and commit.
+
+**Standing rules that bit M58:** kill by PID (anchor `^python3`, never `pkill -f` a pattern matching the shell); `build/` is
+gitignored — scripts in `tools/`, records in `data/`; ALWAYS `./scripts/build.sh`; one heavy job at a time; instantiating a
+`∀ e ∈ es` fact against tower arithmetic needs the pair written out (`hval (i, j) hij`, never `hval _ hij` — a 400k-heartbeat
+unification otherwise); pysat's wall does not interrupt big instances — use the `cadical` binary under `timeout`; a planted
+control can itself be wrong (M58's odd-cycle shadow) — read a RED self-test as information before "fixing" the code; every
+"sealed"/"open" verdict names its prime and its record; the M02 tower's √7 parts are zero on Heule-510 (`heule510_coordsIn_sevenFree`).
+
+## §S. Subplan (M59 opened 2026-09-06, on Kooshi's go after his compaction; WORKFLOW step 3)
+
+### §S0. The state on disk at opening (read first, as §H said)
+
+* The four planes at five colours (23, 31, 43, 47; pids 1617655, 1645642/44/43) and the 1581's 55-direction shadow at 131
+  (pid 1645673) were still running at opening — 1.5–2 h into 14,000-s walls; their records land in `data/fplane/` when they
+  finish and go into `plans/M58-field-sieve.md` §R3 as an addendum. The M55 108 asks (pid 839605) at 15.6 h. Nothing to record yet.
+* The stub renamed; the FS-11 row marked "OPENED as M59"; the references in the programme document, the roadmap and
+  `CLAUDE.md` § Paths forward repointed.
+* Two grokking probes run before anything was written (`build/m59/`, scratch): (i) the 1581's reduction at 131 is
+  infinitesimally rigid — rank of its rigidity matrix mod 131 is 3,159 = 2·1581 − 3, stress space of dimension 4,718 — and
+  NOT injective: the 1,581 points fall on **1,547** residue classes (34 collisions: pairs of vertices whose difference lies in
+  𝔭 × 𝔭); (ii) torus-symmetric sphere-set subgraphs of UD(𝔽₁₃₁,2) (the origin plus whole spheres of chosen quadrances — the
+  finite-plane form of the ring vocabulary G4) have Hoffman floors of only 2.0–2.8 at up to eight spheres, 2.26 for the
+  seam-like set {1, 3, 4, 9, 12, 1/3, 4/3, 5/3}: the plane's six-forcing is a large-scale effect, not a small-core one.
+  Both change the registrations below (§S6).
+
+### §S1. D2 derived — the lift as a system, the obstruction tower, and the dichotomy for rigid frameworks
+
+**The setting.** 𝔭 a degree-one prime of a real number field F above p ≡ 3 (mod 4), so F_𝔭 = ℚ_p and O_𝔭 = ℤ_p; the reduction
+of an integral point of F² is its image in 𝔽_p². A **lift** of a subgraph H ⊆ UD(𝔽_p, 2) is a map v ↦ x_v ∈ ℤ_p² (local) or
+∈ O_𝔭² ⊂ F² (global) with x_v ≡ v (mod p) and |x_u − x_v|² = 1 for every edge uv of H. A global lift is a local lift; a lifted H
+is a copy of H in F² (residues distinct ⟹ points distinct), so χ(F²) ≥ χ(H).
+
+**The unit vectors.** 𝔽_p² ≅ 𝔽_{p²} = 𝔽_p(i) (−1 is a non-residue), quadrance = norm, and the circle C = {N = 1} is the cyclic
+norm-one group of order p + 1. Over ℤ_p the same: ℤ_p[i] is the unramified quadratic extension's integers, its norm-one group
+T(ℤ_p) reduces ONTO C (Hensel on the smooth group scheme), with kernel the pro-p group T(1 + pℤ_p[i]) ≅ ℤ_p. So every circle
+residue is the reduction of p-adic unit vectors, a ℤ_p-torsor of them — the per-edge freedom of the lift — and a lift is a
+choice of unit vector z_e ≡ D̄_e per edge such that the chosen vectors sum to zero around every cycle of H (positions exist iff
+the 1-cochain is a coboundary). The vertex-variable form is the one the instrument uses:
+
+**The system.** Fix integer reference positions x₀ : V → ℤ² reducing to H (coordinates in [0, p)), and write a candidate lift as
+x_v = x₀(v) + p·y_v with y_v ∈ ℤ_p². For an edge e = uv let D_e = x₀(u) − x₀(v) ∈ ℤ² (so D̄_e = u − v ∈ C) and
+w_e = y_u − y_v. Then
+
+    |x_u − x_v|² − 1 = (|D_e|² − 1) + 2p⟨D_e, w_e⟩ + p²|w_e|²,   with |D_e|² − 1 = p·m_e, m_e ∈ ℤ.
+
+*Level p² (the linear obstruction).* The lift exists mod p² iff for every edge ⟨D̄_e, w̄_e⟩ ≡ −m_e/2 (mod p), i.e. iff
+**R(H)·ȳ = b** over 𝔽_p, where R(H) is the **rigidity matrix** of the framework H in 𝔽_p² (rows = edges, row uv carries D̄_e at
+the u-block and −D̄_e at the v-block; |E| × 2|V|) and b_e = −m_e/2 = (1 − |D_e|²)/(2p) mod p is the **defect**. Changing the
+reference lift x₀ by p·t changes b by R(H)·t̄, so the class of b in coker R(H) is canonical. By the Fredholm alternative over 𝔽_p:
+
+> **Level-p² theorem.** H lifts mod p² ⟺ b ∈ im R(H) ⟺ ⟨λ, b⟩ = 0 for every **self-stress** λ ∈ ker R(H)ᵀ — every assignment
+> of scalars to the edges whose weighted edge-vector sum vanishes at every vertex.
+
+The kernel form (`Lift.lean`, `stressPairing_dvd_of_lift`): over ℤ, a stress mod p and a lift mod p² force
+p² ∣ Σ_e λ_e (|D_e|² − 1); the contrapositive `no_lift_of_stressPairing` is what an instance cites — a stress with a nonzero
+pairing refutes every candidate lift at once. **The count.** ker R(H) always contains the three infinitesimal isometries
+(two translations, the rotation v ↦ Jv, since ⟨D̄, J D̄⟩ = 0), so rank R(H) ≤ 2|V| − 3 and dim(stresses) ≥ |E| − 2|V| + 3. A
+6-critical H has minimum degree ≥ 5, so |E| ≥ 5|V|/2 and **the level-p² test imposes at least |V|/2 + 3 independent linear
+conditions on b**; for a "random" H each fails with probability 1 − 1/p, so a 6-critical H with 100 vertices passes by chance
+with probability ~ p^{−53}. A liftable H is not random: it is a shadow, and the conditions hold because a lift exists. This is
+the exact sense in which the stub's "overdetermined by 5/4" is a theorem: the overdetermination is the stress space, and the
+obstruction is its pairing with the defect.
+
+*Higher levels, and the dichotomy.* Given a solution mod p^k, the next digit solves R(H)·ȳ' = b' with the SAME matrix and a new
+defect depending on the digits chosen so far; the choices at each level form an affine space over ker R(H). Two cases:
+
+> **The rigid case (rank R(H) = 2|V| − 3 — "infinitesimally rigid at its residue positions").** Choose a row basis E′ ⊆ E
+> (2|V| − 3 edges, a Laman basis at these positions), gauge-fix the three isometries (pin one vertex and one edge direction), and
+> the E′-system is square with an invertible Jacobian mod p: **Hensel lifts the residue positions to a UNIQUE ℤ_p-solution of
+> E′ in the residue class, up to p-adic isometry.** The remaining edges E ∖ E′ are then determined: either some edge e has
+> |x_u − x_v|² − 1 = c_e ≠ 0 in ℤ_p — detected at the finite level v_p(c_e) + 1 — and H has NO lift; or every remaining edge is
+> unit and H lifts, uniquely up to isometry. In the second case the lift is an isolated nonsingular ℚ_p-point of a variety
+> defined over ℚ (the realization variety of the abstract graph H, gauge-fixed), hence **algebraic**: its coordinates generate a
+> number field F_H ⊂ ℚ_p, which therefore has a degree-one unramified prime above p, and H is a unit-distance graph in F_H².
+> It is a unit-distance graph in ℝ² — a 6-forcer if χ(H) ≥ 6 — iff F_H has a real place (under a real embedding σ the point
+> σ(x) is a real realization with the same unit edges, the equations being rational).
+
+So for rigid H the whole question is decided by one Newton iteration plus one algebraic recognition: **local lift ⟹ global
+algebraic lift, and the only remaining question is a real place.** (The M43/M44-era question "which field" is answered by the
+lift itself: F_H is whatever the coordinates generate, and the sieve then says whether it is 6-open — it must be, if χ(H) ≥ 6
+and F_H is real, by the finite-plane bound at every usable prime; a consistency check the instrument runs.)
+
+> **The flexible case (rank < 2|V| − 3).** The E′-solutions form a manifold of dimension 3 + f (f the infinitesimal-flex
+> dimension), the remaining edges cut it, and the Hensel tree branches p^f ways per level. Decidable in principle (Greenberg);
+> the instrument reports f, runs the level-p² test, and stops. A 6-critical H is over-braced by |V|/2 edges beyond Laman and is
+> expected rigid at its residues (P5); the flexible case is recorded, not searched.
+
+**Two consequences worth stating before any instrument runs.**
+(a) *The adding-a-vertex form.* For a lifted H₀ (rigid) and a residue point w with d neighbours in H₀, the framework H₀ + w has
+stress dimension larger by exactly d − 2, so the level-p² test on H₀ + w is d − 2 new linear conditions — a degree-2 residue
+point always lifts (the glue point, in whatever field the discriminant names — M22's classification, reduced), a degree-3 point
+lifts mod p² with probability 1/p unless it is a shadow. In a dense reduction (the 1581 at 131: every residue class has ≈ 12
+neighbours among the 1,547 residues) EVERY residue point is a degree-≥3 candidate, and the level-p² test with Newton behind it
+enumerates, over all fields with a degree-one prime above p at once, the residue classes that carry a real point at unit
+distance from ≥ 3 points of H₀ — the depth-one partner space of M49–M50 (9,485 points in 59 quadratic extensions for the seed)
+seen from the finite side, with the field read off the lift rather than adjoined by hand. That is the constructive instrument
+the stub gestured at ("a design vocabulary"), and it is phase B.
+(b) *What the finite plane's own 6-critical subgraphs are.* By the count, a 6-critical H found by search is obstructed at
+level p² unless it is a shadow, and nothing in "6-critical in UD(𝔽_p, 2)" makes it one — the plane's high chromatic number is
+Kloosterman-controlled (G44), a global counting fact carried by the whole connection set, while liftability is a local rigidity
+fact. The registered expectation (P2) is that every core fails at level 2, and the derivation says why: the plane's forcing is
+made of edges that are unit modulo p and not modulo p², and a critical subgraph uses ≥ |V|/2 of them beyond what any rigid
+lift could absorb.
+
+### §S2. The finite plane's geometry, derived (the vocabulary D1 and the autopsy use)
+
+All from 𝔽_p² ≅ 𝔽_p(i) with quadrance = norm and C the cyclic norm-one group of order p + 1 (p > 3):
+
+* **Triangles.** A unit triangle 0, a, b is a, b ∈ C with a − b ∈ C: N(1 − b/a) = 2 − Tr(b/a) = 1 ⟺ b/a is a primitive sixth
+  root of unity in C ⟺ 6 ∣ p + 1 ⟺ **p ≡ 11 (mod 12)**. So ω(UD(𝔽_p,2)) = 3 iff p ≡ 11 (mod 12), else 2 — which is exactly
+  M58's measured ω (3 at 11, 23, 47, 59; 2 at 19, 31, 43), and the induced graph on the circle is a union of (p+1)/6 hexagons.
+  Checked at every p ≡ 3 (mod 4) below 132 (p = 3 is degenerate: 2·(1,0) is on the circle).
+* **The Moser spindle.** Its rhombus tips sit at quadrance 3 (N(a + b) = 2 + Tr(ω) = 3), and the rotation ρ carrying one tip to
+  the other at unit distance satisfies Tr(ρ) = 5/3, N(ρ) = 1 — the roots of x² − (5/3)x + 1, discriminant −11/9 — which lie on
+  the torus iff −11 is a non-residue or zero mod p, i.e. iff **11 is a residue or zero mod p**. So the spindle embeds in
+  UD(𝔽_p,2) iff p ≡ 11 (mod 12) and (11/p) ≠ −1: **exactly the usable primes of K = ℚ(√3, √11)** (at 11 through the antipodal
+  copy ρ = −1). Checked: present at 11, 83, 107, 131; absent at 23, 47, 59, 71. The finite plane knows which real objects it
+  is the shadow of — the reduction theorem read from the finite side.
+* **Spheres and their chords (the ring vocabulary, reduced).** Spheres about a point are torsors for C. Two spheres of quadrances
+  c, c′ carry unit chords iff the triangle with squared sides c, c′, 1 has square "area": 4cc′ − (c + c′ − 1)² a nonzero
+  square (then every point of one sphere has exactly TWO unit neighbours on the other — the glue point and its mirror,
+  `Glue.sphere_inter_sphere` mod p) or zero (one neighbour, the tangent case); a sphere carries chords within itself iff
+  **4c − 1 is a square** — the spindle-distance condition 4d² − 1 of G12/G37, verbatim. The induced subgraph on a set S of
+  spheres about the origin is therefore a 2-regular-per-pair lift of the "sphere graph" Γ_p[S], a circulant-coupled structure
+  of the M20 strip-automaton genre — and its Hoffman floor is small (§S0: ≤ 2.8 at eight spheres) because it is sparse.
+
+### §S3. D1 priced — where a 6-critical subgraph of a finite plane can be found, and what it costs
+
+The planes: 59 (3,481 vertices, degree 60, Hoffman 5.022 — the smallest ≥ 6 plane, tight), 83 (6,889, degree 84, 5.74 —
+K(√7)'s first usable prime), 131 (17,161, degree 132, 7.25 → ≥ 8 — de Grey's field's first usable prime). Cayley balls jump
+from 1 + (p + 1) vertices (the origin plus the circle: χ = 3, a wheel of hexagons) to the whole plane at radius 2 (C + C is
+everything), so the M43 ball ladder does not apply; the growth orders available are (i) the whole plane shrunk, (ii) unions of
+spheres about the origin shrunk sphere-by-sphere (torus-symmetric, |S| asks per pass instead of |V|), (iii) direction subsets
+Cay(𝔽_p², D) with D ⊂ C/± (vertex-transitive, spectral floor by FFT — the 1581's 55 at 131 give 4.96; which of the 11 missing
+directions lifts the floor past 5 is one FFT each). Costs: a k = 5 SAT on the whole plane at 131 is 85,805 variables and
+5.7 M binary clauses — far above the threshold (χ ≥ 8), so CDCL may refute it fast, or not at all (Hoffman-tight refutations
+are resolution-hard; 59 is the tight one). The external `cadical` binary under `timeout`, one plane at a time, one hour each,
+in the order 131, 83, 59, decides which planes are searchable (P3). A refuting plane is shrunk by spheres first (130 spheres,
+~ 8 passes × 130 asks), then by vertices inside the sphere-minimal object (the M42/M43 discipline: batched destructive pass
+outside-in, every deletion re-asked, the core re-certified with per-vertex necessity witnesses, a second encoding on the final
+core). The shadow constraint: a liftable H into de Grey's field needs its edge directions among the residues of the field's
+unit vectors — all 66 classes at 131 (the gen-1 closure hits every one), 210 of 240 at 479 — no constraint at 131.
+
+### §S4. The kernel skeleton (`Proofs/HadwigerNelson/Lift.lean`, elaborating, six `sorry` leaves)
+
+* `Colorable.of_le_map` / `chromaticNumber_le_of_le_map`: for an injective `f : V → W`, `H ≤ G.map f` gives `χ(H) ≤ χ(G)`
+  (`[Nonempty V]` — the colour for vertices outside the image; the empty-`V` case is the one adversary of the statement).
+* `UDCert.chromaticNumber_le_of_drawing`: the certificate form (an injective drawing covering `H`), and
+  `UDCert.add_one_le_chromaticNumber_plane_of_lift`: `H` refuses `k` colours ⟹ χ(ℝ²) ≥ k + 1 through
+  `add_one_le_chromaticNumber_of_valid` — the composite a lifted core would consume; its `¬ H.Colorable k` hypothesis is where
+  an LRAT refutation of the finite graph enters (the M05 chain on `H` presented as an edge list — not this milestone unless a
+  core lifts).
+* `netStress`, `IsStressMod`, `stressPairing`, **`stressPairing_dvd_of_lift`** (the level-p² theorem over ℤ) and
+  `no_lift_of_stressPairing` (its contrapositive, the instance form). Spec: the collinear triangle of UD(𝔽₃,2) as the
+  three-point frame (its edges are unit mod 3 by `decide`); the pairing instance on a real core is phase C.
+
+### §S5. The instrument (`tools/fplift.py`, new; `tools/fplane.py` untouched except a `cores` hook if convenient)
+
+| subcommand | what | record |
+|---|---|---|
+| `local --core FILE [--prec N]` | rank of R(H) mod p (dense elimination, numpy int64 — 8 s at 1,581 vertices), stress dimension, the defect b from the canonical [0, p) lifts, the level-p² pairing on a stress basis (how many of dim Σ conditions fail — the **obstruction count**); if rigid: a Laman basis, the gauge-fixed digit-by-digit Hensel lift to precision p^N, and for every remaining edge the first level at which it fails; verdict `obstructed-at-level-k (count)` / `passes-to-precision-N` / `flexible (f)` | `lift-<core>-p<P>.json` |
+| `cores --p P --k 5 [--method plane\|spheres\|dirs] [--wall S]` | the whole-plane refutation attempt (external cadical), the sphere-shrink, the vertex-shrink with certification | `core-p<P>-k5-<method>.json` |
+| `hubs --stage … --p P` | phase B: every residue point with ≥ 3 neighbours in a stage's injective reduction, the level-p² test on each, Newton on the survivors, the recognized field of each survivor (LLL against the tower basis, then minimal polynomials to degree 16) | `hubs-<stage>-p<P>.json` |
+| `recognize --lift FILE` | the algebraic recognition of a passing lift's coordinates (sympy `DomainMatrix.lll`), exact verification of every edge in the recognized field, the real-place check | `lift-<core>-p<P>-field.json` |
+| `self-test` | the controls below | — |
+
+Controls (each seen red or green before any measurement): the Moser spindle's residues at 11, 83, 131 lift (rigid, Newton
+reproduces its K-coordinates to precision N, F_H = K recognized); Heule-510's injective reduction at 11 passes every level;
+the 1581's injective sub-reduction at 131 (one vertex per residue class) passes and its Newton lift equals the tower
+coordinates embedded in ℤ₁₃₁ (the roots of 3, 5, 7, 11 Hensel-lifted); the 1581's MERGED image (34 identified pairs, the
+union of neighbourhoods) is the adversarial member — ≥ 5-chromatic as a hom image and expected obstructed; a planted false
+edge on the spindle fails at level 2; a 4-cycle reports `flexible (1)`; a planted corruption of the Newton residual is caught
+by the exact re-check; the collinear triangle at p = 3.
+
+### §S6. Phases and registered predictions
+
+| phase | what | cost |
+|---|---|---|
+| 0 | D2 written (§S1–§S2); `fplift.py local` + self-test; the whole-plane refutation attempts at 131, 83, 59 (external cadical, 1 h each, sequential) | a day |
+| A | cores: sphere-shrink then vertex-shrink of every refuting plane; `local` on each core (obstruction level and count); the finite-plane autopsy of a core (ω, floor, sphere structure, class avoidance at k = 5) | days |
+| B | `hubs` on the 1581's injective reduction at 131 (and Heule-510's at 11 as the calibrated bed: its hubs are the K-lattice's) | a day |
+| C | the kernel: `Lift.lean` proved; an instance `Instances/LiftObstruction<P>.lean` — a core, a stress, the pairing decided nonzero (only if phase A yields a core failing at level 2) | a day |
+| D | gate, §R, Frontier, re-rank, close | — |
+
+Predictions, registered before any instrument runs (the two probes of §S0 are grokking, not measurements — their numbers
+are re-derived by the instrument):
+
+| # | prediction | confidence |
+|---|---|---|
+| P1 | the smallest 6-critical subgraph of UD(𝔽₁₃₁,2) found by the sphere-then-vertex shrink has > 1,000 vertices (the stub said > 100; sharpened by §S0 (ii)) | medium |
+| P2 | every 6-critical core found fails the level-p² test, with an obstruction count above (1 − 2/p)·dim Σ | high |
+| P3 | the external cadical refutes five colours on the whole plane at 131 within one hour; at 59 it does not | medium |
+| P4 | the 1581's injective sub-reduction at 131 passes the local test to precision 131²⁰ and its Newton lift equals the tower coordinates; the merged image (34 identifications) is obstructed at level 2 | high / medium |
+| P5 | every core found is infinitesimally rigid at its residue positions | medium-high |
+| P6 | the sphere-minimal ≥ 6 object at 131 has between 20 and 60 spheres | low |
+| P7 | among the 17,161 residue points at 131, those with ≥ 3 neighbours in the 1581's injective reduction that pass level 2 are fewer than 50, every one passes Newton to precision 20, and they are residues of gen-1 closure points | medium-low |
+| P8 | `Lift.lean` lands on the standard three axioms, the obstruction theorem under 250 lines | medium |
+| P9 | (M58's P7, carried) the 1581's shadow at 131 is 5-colourable | medium |
+
+Failure and pivot clauses stand as the stub wrote them (§6): a core that lifts globally is HALT AND VERIFY, and under the
+programme (`plans/PROGRAMME-ALGEBRAIC-PROOF.md` §6) the milestone then continues into the derivation of why it forces six;
+all cores obstructed is a recorded negative with its count, and the shadow sieve plus the hub instrument are what the
+finite planes still offer the hunt.
+
+### §S7. Decisions at subplanning
+
+| decision | alternative | why | confidence |
+|---|---|---|---|
+| D2 before D1, with the level-p² theorem in the kernel skeleton | search for cores first, test later | the count says what a search can find (nothing liftable by chance); the theorem is the milestone's derivation and the receipt for every negative | high |
+| the local test as rank + Newton (rigid case), flex dimension reported and not searched | a Hensel tree with branching | 6-critical H is over-braced by |V|/2; the tree is exponential and buys nothing a rigid core does not | high |
+| the whole-plane refutation with the external `cadical` binary under `timeout` | pysat (M58's wall did not interrupt) | the M58 incident | high |
+| sphere-shrink before vertex-shrink | vertex ddmin from the whole plane | 130 asks per pass against 17,161, and a torus-symmetric object is the finite plane's analogue of the rot6 cores (M40/M42), autopsy-friendly | medium — if the sphere-minimal object is nearly the whole plane, vertex ddmin runs anyway |
+| phase B (hubs) inside this milestone | a separate stub | it is D2 (a) applied, it reuses `local`, and it is the constructive reading the programme ranks first | medium |

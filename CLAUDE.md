@@ -1129,7 +1129,7 @@ next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated 
 (WORKFLOW step 9). **Re-ranked at the M58 close, 2026-09-06:** FS-7 CLOSED as M58 (the field-selection instrument the hunt now consults
 first: a field over K is 6-open iff its 2-adic wall is broken and 11 is inert; the finite planes refuse five from 59 up by their spectra;
 χ(UD(𝔽₁₁,2)) = 5 in the kernel). The table's top: **rank 1 FS-11, lift a 6-critical subgraph of UD(𝔽₁₃₁,2) into de Grey's field**
-(`plans/STUB-finite-plane-lift.md` — the constructive face of the pivot, the one route it opens that could PRODUCE a 6-object; the
+(`plans/M59-finite-plane-lift.md`, opened as M59 — the constructive face of the pivot, the one route it opens that could PRODUCE a 6-object; the
 local 𝔭-adic lift test first); rank 2 FS-6 on the 6-open fields (de Grey's, K(√7), K(√13), K(√79), K(√127)); rank 3 FS-2; rank 4 FS-8
 (one `map` row once Haugland's field is known); FS-4; FS-9; FS-10; FS-5. The 23/31/43/47 planes and the 1581's shadow at 131 at five
 colours were in flight at the close (`build/m58/`); their records go into `data/fplane/` as `chi-p<P>-k5.json` / `shadow-degrey1581-p131.json`

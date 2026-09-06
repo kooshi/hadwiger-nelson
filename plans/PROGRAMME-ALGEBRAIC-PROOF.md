@@ -3,7 +3,7 @@
 *Written the evening M58 closed, on Kooshi's redirection of the goalposts. His words are quoted; the assessment of what
 each side needs, and where the algebra we hold reaches and where it does not, is mine (de Bruijn) and is the part to push
 back on. Read beside: `CLAUDE.md` § The mission (the trigger, amended the same day), § Frontier (the pivot and M58
-paragraphs, G43, G44), `plans/M58-field-sieve.md` §R, `plans/STUB-finite-plane-lift.md` (M59), `plans/FIELD-WALL-THEOREM.md`.*
+paragraphs, G43, G44), `plans/M58-field-sieve.md` §R, `plans/M59-finite-plane-lift.md` (M59), `plans/FIELD-WALL-THEOREM.md`.*
 
 ## 1. The direction, verbatim
 
