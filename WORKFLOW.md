@@ -70,6 +70,9 @@ leaves.
 9. **Commit** — and in the same closing commit, **update `CLAUDE.md` § Frontier** (the
    state-of-the-art summary, the novel-results ledger, the ranked paths forward). A
    milestone whose close does not update the Frontier is not closed (rule set 2026-08-04).
+   **And re-rank the frontier set** (`plans/FRONTIER-STUBS.md`, rule set 2026-09-06, Kooshi): add every
+   candidate the milestone surfaced as a stub file, re-rank the table with each row's bearing on χ ≥ 6
+   stated honestly, demote with a banner, never delete; § Paths forward mirrors the top of the table.
 10. **Report what landed** — in the house format of **§ "How to report to the user"**: the milestone's
     name and purpose, the shape that actually shipped, every decision implementation forced or
     overturned (in its four parts, with the confidence you now hold after seeing it run), and what to
