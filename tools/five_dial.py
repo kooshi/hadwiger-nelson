@@ -863,6 +863,14 @@ def cmd_sweep(a):
     t0 = time.time()
     print(f"[sweep] {st.label()} k={a.k}: the exhaustive Rigidity sweep, wall {a.wall}s per call", flush=True)
     R = rigidity.Rigidity(st.n, st.edges, a.k, timeout=a.wall)
+    if a.no_amo:
+        # Drop the exactly-one clauses (measured 4× slower on the 5,857-point union: 281 s vs 66 s per solve).
+        # Sound without them: a proper single-colour model is a one-hot model, so an UNSAT batch query still
+        # certifies every candidate on its side; every observed model is decoded to its smallest true colour
+        # and is proper because the edge clauses bind every true colour.
+        from coloring import base_clauses
+        R.base = base_clauses(st.n, R.edges, a.k)
+        print("[sweep] --no-amo: exactly-one clauses dropped (sound; 4× faster per call on this object)", flush=True)
     # checkpoint: every observed model is appended to <ckpt>; on restart they are replayed before any query
     BUILD.mkdir(parents=True, exist_ok=True)
     ckpt = BUILD / f"sweep-models-{st.name}-k{a.k}.txt"
@@ -1187,6 +1195,7 @@ def main():
     p = sub.add_parser("grow"); p.add_argument("--exact", required=True); p.add_argument("--cross", required=True)
     p.add_argument("--strong", type=int, default=0, help="keep only pool points with at least this many parents"); p.add_argument("--out")
     p = sub.add_parser("sweep"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
+    p.add_argument("--no-amo", action="store_true")
     a = ap.parse_args()
     if a.cmd == "self-test":
         self_test()

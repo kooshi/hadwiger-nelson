@@ -545,3 +545,25 @@ P-M54-7 (ν(H) ≥ 10) MET. Instrument note: RC2 is the wrong engine at this sca
 exact value came from enumeration where the colouring space is rigid (35 classes), and from the
 critical set where it is floppy (ν = 1 ⟺ C ≠ ∅). ν is therefore a dial only between those two
 regimes, and the union's reading will come from the sweep, not from ν.
+
+### §R4′. The sweep's engine at 5,857 points — three relaunches, each with its reason (2026-09-06 01:10–01:45Z)
+
+1. The first launch was stopped at 4 GB resident two minutes in: the `Rigidity` engine's first batch
+   query is over the eq-candidates after one model — with five classes of ≈ 1,170 vertices that is
+   ≈ 3.4 million selector variables — a size the engine was never run at (T21: 2,025 vertices).
+   Repair: pre-seed the model checkpoint so the candidate sets are small before the first query.
+2. The first seeder (random 60-vertex pins) produced nothing in two minutes: a random pin set on a
+   5-chromatic graph is often inconsistent, and refuting it is a hard UNSAT ask. Repair: diversity by a
+   random relabelling of the formula per model, always satisfiable.
+3. Measured before the third launch: one 5-colour solve of the union takes **66 s** in the plain
+   at-least-one encoding and **281 s** with the exactly-one clauses the engine adds by default.
+   The exactly-one clauses are not needed for soundness (a proper single-colour model is a one-hot
+   model, so an UNSAT batch query certifies its side either way; observed models are decoded to the
+   smallest true colour and are proper because the edge clauses bind every true colour) — `sweep
+   --no-amo` drops them, the seeder likewise, 40 seed models. Chain 4 is the live run; its models are
+   checkpointed and replayed on restart.
+
+The cost anchor to carry: at 5,857 vertices a five-colour SAT call is a minute, so the sweep is an
+hours-scale job and belongs to the one-heavy-job rule; the census (one 4-colour ask per vertex, 3 s
+when the pair's forcing is asked on the fabric) is the cheap instrument, and the derivation that
+reduced the union's critical set to F₁ ∩ F₂ replaced 5,857 deletion asks by 34.
