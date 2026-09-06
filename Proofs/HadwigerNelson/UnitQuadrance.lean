@@ -57,7 +57,11 @@ variable {R S : Type*} [CommRing R] [CommRing S]
 `unitQuadrance`. -/
 theorem unitQuadrance_adj {u v : R × R} :
     (unitQuadrance R).Adj u v ↔ u ≠ v ∧ (u.1 - v.1) ^ 2 + (u.2 - v.2) ^ 2 = 1 := by
-  sorry
+  rw [unitQuadrance, addCayley_adj]
+  simp only [Set.mem_setOf_eq, Prod.fst_add, Prod.snd_add, Prod.fst_neg, Prod.snd_neg]
+  constructor
+  · rintro ⟨hne, h | h⟩ <;> exact ⟨hne, by linear_combination h⟩
+  · rintro ⟨hne, h⟩; exact ⟨hne, Or.inr (by linear_combination h)⟩
 
 /-- The graph computes wherever equality in `R` does: `decide` reaches every finite statement about
 `unitQuadrance (ZMod p)`. -/
@@ -70,7 +74,16 @@ two adjacent points because their images would then have quadrance `0 = 1`. `Non
 what that last step uses. -/
 def unitQuadrance.map [Nontrivial S] (f : R →+* S) : unitQuadrance R →g unitQuadrance S where
   toFun v := (f v.1, f v.2)
-  map_rel' h := by sorry
+  map_rel' {u v} h := by
+    rw [unitQuadrance_adj] at h ⊢
+    obtain ⟨-, hq⟩ := h
+    have hq' : (f u.1 - f v.1) ^ 2 + (f u.2 - f v.2) ^ 2 = 1 := by
+      simpa only [map_add, map_pow, map_sub, map_one] using congrArg f hq
+    refine ⟨fun heq => ?_, hq'⟩
+    have h1 : f u.1 = f v.1 := congrArg Prod.fst heq
+    have h2 : f u.2 = f v.2 := congrArg Prod.snd heq
+    rw [h1, h2] at hq'
+    simp at hq'
 
 /-! ### Homs out of the towers -/
 
@@ -84,10 +97,12 @@ this at `R = ℝ`; stated here rather than by editing `Field/Quadratic.lean`, wh
 module imports. -/
 def lift (f : K →+* R) (r : R) (hr : r ^ 2 = d) : Adjoin d K →+* R where
   toFun x := f x.re + f x.im * r
-  map_one' := by sorry
-  map_mul' x y := by sorry
-  map_zero' := by sorry
-  map_add' x y := by sorry
+  map_one' := by simp
+  map_mul' x y := by
+    simp only [mul_re, mul_im, map_add, map_mul, map_natCast]
+    linear_combination (-(f x.im * f y.im)) * hr
+  map_zero' := by simp
+  map_add' x y := by simp only [add_re, add_im, map_add]; ring
 
 @[simp] theorem lift_apply (f : K →+* R) (r : R) (hr : r ^ 2 = d) (x : Adjoin d K) :
     lift f r hr x = f x.re + f x.im * r := rfl
@@ -114,11 +129,19 @@ the `√7`-coefficients of `x` are the inner `.im` of each `√11`-component. Cl
 operations because the `√7`-cross terms vanish when both factors have none. -/
 def Q4.sevenFree : Subring Q4 where
   carrier := {x | x.re.im = 0 ∧ x.im.im = 0}
-  mul_mem' := by sorry
-  one_mem' := by sorry
-  add_mem' := by sorry
-  zero_mem' := by sorry
-  neg_mem' := by sorry
+  mul_mem' {x y} hx hy := by
+    simp only [Set.mem_setOf_eq] at hx hy ⊢
+    obtain ⟨hx1, hx2⟩ := hx; obtain ⟨hy1, hy2⟩ := hy
+    simp only [Adjoin.mul_re, Adjoin.mul_im, Adjoin.add_im, Adjoin.natCast_re, Adjoin.natCast_im,
+      hx1, hx2, hy1, hy2, mul_zero, zero_mul, add_zero, and_self]
+  one_mem' := by simp
+  add_mem' {x y} hx hy := by
+    simp only [Set.mem_setOf_eq] at hx hy ⊢
+    simp [Adjoin.add_im, hx.1, hx.2, hy.1, hy.2]
+  zero_mem' := by simp
+  neg_mem' {x} hx := by
+    simp only [Set.mem_setOf_eq] at hx ⊢
+    simp [Adjoin.neg_im, hx.1, hx.2]
 
 /-- Membership decides: a `decide` over a certificate's table checks `√7`-freeness. -/
 instance : DecidablePred (· ∈ Q4.sevenFree) :=
@@ -128,12 +151,20 @@ instance : DecidablePred (· ∈ Q4.sevenFree) :=
 parts forgotten are zero on both sides of every product. -/
 def Q4.sevenFree.toQ3 : Q4.sevenFree →+* Q3 where
   toFun x := ⟨x.1.re.re, x.1.im.re⟩
-  map_one' := by sorry
-  map_mul' x y := by sorry
-  map_zero' := by sorry
-  map_add' x y := by sorry
+  map_one' := rfl
+  map_mul' x y := by
+    obtain ⟨hx1, hx2⟩ := x.2; obtain ⟨hy1, hy2⟩ := y.2
+    apply Adjoin.ext <;>
+    simp only [Subring.coe_mul, Adjoin.mul_re, Adjoin.mul_im, Adjoin.add_re, Adjoin.natCast_re,
+      Adjoin.natCast_im, hx1, hx2, hy1, hy2, mul_zero, zero_mul, add_zero]
+  map_zero' := rfl
+  map_add' x y := by apply Adjoin.ext <;> simp only [Subring.coe_add, Adjoin.add_re, Adjoin.add_im]
 
 /-! ### The reduction of a certificate -/
+
+/-- A stored squared distance is symmetric in its arguments (a square is). -/
+theorem Pt.distSq_comm (p q : Pt) : p.distSq q = q.distSq p := by
+  simp only [Pt.distSq, FastSq.sq_eq]; ring
 
 namespace UDCert
 
@@ -143,25 +174,62 @@ variable {n : ℕ}
 def CoordsIn (c : UDCert n) (S : Subring Q4) : Prop := ∀ i, (c.verts i).x ∈ S ∧ (c.verts i).y ∈ S
 
 instance (c : UDCert n) (S : Subring Q4) [DecidablePred (· ∈ S)] : Decidable (c.CoordsIn S) :=
-  inferInstanceAs (Decidable (∀ i, _ ∧ _))
+  inferInstanceAs (Decidable (∀ _, _ ∧ _))
 
 /-- Every certificate has its coordinates in the whole tower. -/
 theorem coordsIn_top (c : UDCert n) : c.CoordsIn ⊤ := fun _ => ⟨Subring.mem_top _, Subring.mem_top _⟩
+
+/-- The stored coordinates of vertex `i`, as elements of `S`. -/
+def coord (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) (i : Fin n) : S × S :=
+  (⟨(c.verts i).x, (hS i).1⟩, ⟨(c.verts i).y, (hS i).2⟩)
+
+@[simp] theorem coe_coord_fst (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) (i : Fin n) :
+    ((c.coord hS i).1 : Q4) = (c.verts i).x := rfl
+
+@[simp] theorem coe_coord_snd (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) (i : Fin n) :
+    ((c.coord hS i).2 : Q4) = (c.verts i).y := rfl
+
+/-- **The stored unit distance, read inside the subring**: for a listed edge, in either orientation,
+the coordinates' differences satisfy `Δx·Δx + Δy·Δy = D·D` as elements of `S`. The coercion into `Q4`
+is injective, so this is `Valid` at that edge and nothing more. -/
+theorem coord_quadrance (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) (hv : c.Valid = true)
+    {i j : Fin n} (h : (edgeGraph n c.edges).Adj i j) :
+    ((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
+      ((c.coord hS i).2 - (c.coord hS j).2) * ((c.coord hS i).2 - (c.coord hS j).2) =
+      ((c.denom * c.denom : ℤ) : S) := by
+  have key : (c.verts i).distSq (c.verts j) = c.denomSq := by
+    have hval := (validOn_iff c c.edges).mp hv
+    rcases h with ⟨-, hij | hji⟩
+    · exact hval (i, j) hij
+    · rw [Pt.distSq_comm]; exact hval (j, i) hji
+  apply Subtype.ext
+  simp only [Pt.distSq, FastSq.sq_eq, denomSq] at key
+  push_cast
+  simpa only [coe_coord_fst, coe_coord_snd, Int.cast_mul] using key
 
 /-- **The drawing of a certificate in `R × R`**: each stored coordinate through `φ`, times a chosen
 inverse `u` of the denominator. Meaningful when `u * D = 1`; `drawing_adj` demands exactly that. -/
 def drawing (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) (u : R) (i : Fin n) :
     R × R :=
-  (u * φ ⟨(c.verts i).x, (hS i).1⟩, u * φ ⟨(c.verts i).y, (hS i).2⟩)
+  (u * φ (c.coord hS i).1, u * φ (c.coord hS i).2)
 
-/-- **The reduction theorem, one edge.** A stored unit distance `distSq = D²` in the tower, pushed through
-`φ` and scaled by `u² = D⁻²`, is unit quadrance in `R²`; distinctness of the images is the same
-identity read at `0 ≠ 1`. -/
+/-- **The reduction theorem, one edge.** The stored identity `Δx² + Δy² = D²`, pushed through `φ` and
+scaled by `u² = D⁻²`, is unit quadrance in `R²`; distinctness of the images is the same identity read at
+`0 ≠ 1`. -/
 theorem drawing_adj [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S)
     {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true) {i j : Fin n}
     (h : (edgeGraph n c.edges).Adj i j) :
     (unitQuadrance R).Adj (c.drawing φ hS u i) (c.drawing φ hS u j) := by
-  sorry
+  have hφ := congrArg φ (c.coord_quadrance hS hv h)
+  simp only [map_add, map_mul, map_sub, map_intCast, Int.cast_mul] at hφ
+  have hq : ((c.drawing φ hS u i).1 - (c.drawing φ hS u j).1) ^ 2 +
+      ((c.drawing φ hS u i).2 - (c.drawing φ hS u j).2) ^ 2 = 1 := by
+    simp only [drawing]
+    linear_combination u ^ 2 * hφ + (u * (c.denom : R) + 1) * hu
+  rw [unitQuadrance_adj]
+  refine ⟨fun heq => ?_, hq⟩
+  rw [heq] at hq
+  simp at hq
 
 /-- **The reduction, as a graph homomorphism.** -/
 def drawingHom [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S)
@@ -188,16 +256,18 @@ theorem not_colorable_unitQuadrance [Nontrivial R] (c : UDCert n) {S : Subring Q
 theorem add_one_le_chromaticNumber_unitQuadrance [Nontrivial R] (c : UDCert n) {S : Subring Q4}
     (φ : S →+* R) (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true) {k : ℕ}
     (hk : ¬ (edgeGraph n c.edges).Colorable k) : (k + 1 : ℕ) ≤ (unitQuadrance R).chromaticNumber := by
-  sorry
+  rw [Nat.cast_add, Nat.cast_one, ENat.add_one_le_iff (ENat.coe_ne_top k)]
+  exact lt_of_not_ge fun h =>
+    c.not_colorable_unitQuadrance φ hS hu hv hk (chromaticNumber_le_iff_colorable.mp h)
 
 end UDCert
 
 /-! ### Spec
 
 `UD(𝔽₃, 2)` is the smallest usable plane (χ = 3): its circle has four points and `(0,0)–(0,1)` is an
-edge. The hypotheses of `drawing_adj` are load-bearing: a certificate whose denominator vanishes in `R`
-has no inverse there, and a drawing made with a wrong `u` collapses the unit pair to a loop, which
-`unitQuadrance` strips. -/
+edge. The hypotheses of `drawing_adj` are load-bearing: a certificate whose denominator has no inverse in
+`R` cannot be drawn, and `D ≠ 0` would not do in its place — `2 ≠ 0` in `ZMod 4` and `2` has no inverse
+there. The unit pair drawn at `131` through the whole tower is the positive model. -/
 
 section Spec
 
@@ -212,17 +282,28 @@ private def unitPair11 : UDCert 2 where
   denom := 11
 
 example : unitPair11.Valid = true := by decide
+example : ¬ ∃ u : ZMod 11, u * (unitPair11.denom : ZMod 11) = 1 := by decide
+example : (2 : ZMod 4) ≠ 0 ∧ ¬ ∃ u : ZMod 4, u * 2 = 1 := by decide
 
-/-- No `u` inverts `11` in `ZMod 11`: the reduction theorem's hypothesis fails, and indeed the drawing
-made with any `u` puts both points at the origin. -/
-example : ¬ ∃ u : ZMod 11, u * (unitPair11.denom : ZMod 11) = 1 := by sorry
+/-- The unit pair at denominator `1`. -/
+private def unitPair : UDCert 2 where
+  verts := ![⟨0, 0⟩, ⟨1, 0⟩]
+  edges := [(0, 1)]
+  denom := 1
 
-example (u : ZMod 11) :
-    unitPair11.drawing (Q4.lift (R := ZMod 11) 5 4 0 0 (by decide) (by decide) sorry (by decide) |>.comp
-      (Subring.subtype ⊤)) unitPair11.coordsIn_top u 0 =
-    unitPair11.drawing (Q4.lift (R := ZMod 11) 5 4 0 0 (by decide) (by decide) sorry (by decide) |>.comp
-      (Subring.subtype ⊤)) unitPair11.coordsIn_top u 1 := by
-  sorry
+instance : Fact (1 < 131) := ⟨by decide⟩
+
+/-- The residue hom at `131` on the whole tower (`38² = 3`, `23² = 5`, `20² = 7`, `50² = 11`). -/
+def Q4.res131 : (⊤ : Subring Q4) →+* ZMod 131 :=
+  (Q4.lift (R := ZMod 131) 38 23 20 50 (by decide) (by decide) (by decide) (by decide)).comp
+    (Subring.subtype ⊤)
+
+example : unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 1 = (1, 0) := by decide
+
+example : (unitQuadrance (ZMod 131)).Adj (unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 0)
+    (unitPair.drawing Q4.res131 unitPair.coordsIn_top 1 1) :=
+  unitPair.drawing_adj Q4.res131 unitPair.coordsIn_top (by decide) (by decide)
+    (edgeGraph_adj_of_mem (by decide) (by decide))
 
 end Spec
 

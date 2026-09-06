@@ -480,3 +480,44 @@ states in the vocabulary and would tie the real plane to the finite ones formall
 field-level D5 would consume `unitQuadrance.map` on the valuation ring plus "unit-distance points lie in the
 valuation ring" — the one missing piece, named. Files renamed to match the object: `UnitQuadrance.lean`,
 `Instances/FinitePlane11.lean`.
+
+## §M2. Obligation-modeling pass (2026-09-06; fresh Skill invocation) — every leaf discharged in the probe
+
+**The partition.** *Prove* (kernel): `unitQuadrance_adj`, `unitQuadrance.map`, `Adjoin.lift` (four hom fields),
+`Q4.sevenFree` (five closure fields), `Q4.sevenFree.toQ3` (four hom fields), `Pt.distSq_comm`, `UDCert.coord_quadrance`,
+`UDCert.drawing_adj`, the three colouring consequences and the numeral form; at `11`: `heule510_sevenFree` (P8),
+`heule510_denom_inv`, `finitePlane11_colouring_proper`, the four chromatic-number theorems; at `131`: the inverse and the
+floor. *Test* (elaboration-time facts): the `ZMod 3` adjacency examples, `unitPair11` valid, the two hypothesis reds
+(`¬ ∃ u, u * 11 = 1` in `ZMod 11`; `2 ≠ 0 ∧ ¬ ∃ u, u * 2 = 1` in `ZMod 4` — `D ≠ 0` would not do), the unit pair drawn at
+`131` (`decide` evaluates the hom: `(1, 0)`), the wrong-root red, the corrupted-table red. *Assume*: nothing beyond the
+standard three axioms (the gate checks).
+
+**What the design removed.** The edge homomorphism for Heule-510 is NOT decided: it follows from `heule510_valid` (M09's
+2,504 exact unit distances) through `drawing_adj`, so the kernel re-examines no edge. The two `decide`s that remain are
+the 510-point `√7`-freeness and the 121-point colouring's properness — and the probe measured the whole instance module
+at **13.9 s of elaboration** (`build/m58/probe11.lean`), the 14,641-pair `decide +kernel` included; the registered
+circle-offset fallback (`121 × 12`) is not needed and is dropped.
+
+**The crux, and the one trap.** `drawing_adj` factors through `coord_quadrance`: the stored identity `Δx·Δx + Δy·Δy = D·D`,
+read as an equation between elements of `S` (`Subtype.ext`, `push_cast`, the two `coe_coord` simp lemmas, `Int.cast_mul`),
+then `congrArg φ`, then one `linear_combination u ^ 2 * hφ + (u * D + 1) * hu` for the quadrance and `simp` at `0 = 1` for
+the distinctness. The named coordinates `UDCert.coord hS i : S × S` (with `coe_coord_fst/snd` as `rfl` simp lemmas)
+replaced inline subtype literals — the first attempt with `⟨_, (hS i).1⟩` timed out at `whnf` (200,000 heartbeats). The
+trap: extracting one edge's identity as `hval _ hij` with the pair left to unification makes `exact` unify
+`(c.verts ?e.1).distSq …` against `(c.verts i).distSq …` before `?e` is assigned, and the unifier unfolds `distSq` into
+the tower's arithmetic looking for an assignment — an `isDefEq` timeout at 400,000 heartbeats. Written `hval (i, j) hij`
+it is instant. Recorded because it will recur wherever a `∀ e ∈ es` fact is instantiated against a tower expression.
+
+**Two simp facts of the tower.** After `simp`'s cast normalization the radicand `(d : K)` in `mul_re` becomes an `OfNat`
+literal (`11.im`) that `Adjoin.natCast_im` no longer matches; `simp only` with `mul_re, mul_im, add_re, add_im, natCast_re,
+natCast_im` and the zero hypotheses closes every closure/hom field without leaving the natCast form. And `ext` on a nested
+`Adjoin` recurses to the leaves (`case re.re.re`); `apply Adjoin.ext` splits one level, which is where the hom fields live.
+
+**Mutation audit, run in the probe.** `Nontrivial S` dropped from `map`: `simp at hq'` cannot derive `False` from `0 = 1`
+— fails. `hu` dropped from `drawing_adj`: the `linear_combination` has no `(u·D)² = 1` — fails. `hv` dropped: no
+`coord_quadrance` — fails. `hu` weakened to `D ≠ 0`: refuted by the `ZMod 4` red. Every hypothesis load-bearing.
+
+**Kernel-cost ledger (laptop-class elaboration, `lake env lean`, desktop):** `UnitQuadrance.lean` 3.2 s;
+the instance module 13.9 s in the probe, of which the 14,641-pair `decide` is the bulk; `heule510_sevenFree` under a
+second (510 table walks). No `maxHeartbeats` raised anywhere; `maxRecDepth 100000` set in the instance module as
+`Heule510/Valid.lean` does.
