@@ -419,3 +419,64 @@ change to any consequence the hunt uses.
 | √7 at p = 11 | `SevenFree` predicate + partial multiplicativity of `res11` | a hom into `Adjoin 7 (ZMod 11)` and a projection | the same fact, fewer rings | medium — if the partial-hom lemmas exceed ~80 lines the 𝔽₁₂₁ route is tried |
 | P4's form | a theorem for K-fields, SAT only for the map | keep the literal "11 is the last" | it was false (19), and the fields the hunt uses never see 19, 23, 47 | high |
 | the field-level D5 | priced, deferred | attempt the integrality lemma | a week for a statement whose every consequence the certificate form already delivers | high |
+
+## §M1. Domain-modeling pass (2026-09-06; fresh Skill invocation)
+
+**The true shape found: the plane is a functor of the coordinate ring, and the reduction is its action on a
+ring hom.** The skeleton had stated the finite plane as `fplane p` on `ZMod p × ZMod p` and the reduction as a
+theorem about a ring hom `Q4 →+* ZMod p` with a division by `φ(D)` under `[Fact p.Prime]`, with a second copy
+(`reduce11`) for `p = 11` where no hom leaves `Q4`. Three pieces of incidental structure were in it:
+
+1. **The field.** Nothing in the reduction uses that the target is a finite field, or a field, or has any
+   particular `p`. The intrinsic statement is: for any commutative ring `R`, `unitQuadrance R` (the graph on
+   `R × R` joined at quadrance `1` — Vinh's own term) is functorial in `R`: a ring hom `f : R →+* S` with `S`
+   nontrivial applied coordinatewise is a graph hom `unitQuadrance R →g unitQuadrance S`, because it preserves
+   the quadrance identity and cannot collapse an adjacent pair (`1 = 0` in `S` otherwise). At `R = ℝ` the graph is
+   the Hadwiger–Nelson graph in coordinates; at `R = 𝔽_p` it is `UD(𝔽_p, 2)`. The condition `p ≡ 3 (mod 4)` and
+   the odd residue degree are conditions for a hom to exist out of the field's valuation ring — the content of
+   the unformalized D5 — and never conditions on the graphs. **Finding: the certificate-level theorem has no
+   hypothesis on `p` at all**; the reduction into `unitQuadrance (ZMod 13)` of a certificate with a hom is a
+   homomorphism just the same, and the sieve's usability lives entirely in whether a `φ` exists.
+2. **The division.** `(φ D)⁻¹` under `[Fact p.Prime]` was the field creeping in. The theorem needs only some
+   `u` with `u * D = 1` in `R`; `D` enters `R` as an integer cast, so `φ` is not even applied to it. The
+   hypothesis `hu : u * (c.denom : R) = 1` is decidable at every instance (`7 · 96 = 1` in `ZMod 11`,
+   `116 · 96 = 1` in `ZMod 131`) and excludes `D = 0` in every nontrivial ring for free.
+3. **The `√7` duplicate.** `reduce11` duplicated `reduce` with the hom hypothesis replaced by an ad hoc
+   "multiplicative on `√7`-free elements". The role unnamed was the **subring**: the `√7`-free elements are a
+   `Subring Q4` (`Q4.sevenFree`, closed because the `√7`-cross terms vanish when both factors lack them), and a
+   ring hom out of a subring is Mathlib's native object. So ONE theorem, `UDCert.drawing_adj`, takes
+   `(S : Subring Q4) (φ : S →+* R) (hS : c.CoordsIn S)` and both instances are its cases: `S = ⊤` with `Q4.lift`
+   at `131`; `S = Q4.sevenFree` at `11`, where the hom is `Q3.lift 5 4 0` composed with the forgetful hom
+   `Q4.sevenFree.toQ3` — **the `√7`-free subring IS the smaller tower `Q3 = ℤ[√3, √5, √11]`**, and Heule's field's
+   order gets a name. Membership in `Q4.sevenFree` decides (`x.re.im = 0 ∧ x.im.im = 0`), so `heule510.CoordsIn
+   Q4.sevenFree` is a 510-point `decide` (P8). The alternative weighed — a genuine hom into `Adjoin 7 (ZMod 11)`
+   ≅ 𝔽₁₂₁ and a projection — moves the same zero-`√7`-part fact one ring over without removing it; rejected.
+   `Pt` is hard-wired to `Q4`, so re-typing the certificate in `Q3` was never available, and that is what makes
+   the subring the right placement: extrinsic (a predicate beside the type), decided per certificate.
+
+**Consequences for the statements.** `Adjoin.evalHom` is renamed `Adjoin.lift` — it is the universal property of
+`K[√d]` (a hom out of `K` and a root in the target determine the hom), `Adjoin.eval` being its instance at `ℝ`;
+`Q3.lift`/`Q4.lift` for the towers. The colouring table is a `Fin 11 → Fin 11 → Fin 5` literal (`![…]`), total
+with no default — the `List.getD` form was junk-value totality on an index the type already bounds; `ZMod 11` is
+`Fin 11` definitionally, so the colouring on the plane is the table applied. The properness `decide` runs over
+all `121 × 121` pairs first (the honest statement); if the kernel balks, the obligation pass has the
+circle-offset form (`121 × 12` checks plus a 121-element lemma that adjacency is a circle difference) as the
+registered fallback. The plane at `131` is now the free second instance of the general theorem (five lines),
+which is the "used twice" test the domain pass asks of a generalization.
+
+**Seams checked.** Non-vacuity: Heule-510 at `11` and at `131` are models of every hypothesis (real
+certificates); the toy unit pair at `p = 3` is the spec. Unsampled member: a loop edge `(i, i)` — `Valid` refuses
+it whenever `D ≠ 0` (`distSq = 0 ≠ D²`), and `edgeGraph.Adj` carries `i ≠ j` anyway, so no theorem needs it.
+Adversarial members: a valid certificate with `11 ∣ D` at `p = 11` — no `u` exists (the red `unitPair11`, denom
+`11`), and a drawing made with an arbitrary `u` collapses the pair to a loop; a prime `p ≡ 1 (mod 4)` — the
+certificate theorem holds verbatim there, so it is NOT the hand theorem's adversary but its generalization, and
+the record says so. What the type still admits that the domain forbids: a subring `S` with a hom `φ` and a
+certificate whose coordinates are NOT in `S` cannot be drawn (the membership is a hypothesis of `drawing`),
+which is the right failure — parse at the boundary, never re-check inside.
+
+**Next-lemma test.** "De Grey's 1581 reduces at 131" states in the vocabulary as written (`S = ⊤`, `Q4.lift`,
+`u = 96⁻¹` — the 1581's denominator is 768); "`unitQuadrance ℝ ≃g unitDistance ℂ`"
+states in the vocabulary and would tie the real plane to the finite ones formally (not this milestone); the
+field-level D5 would consume `unitQuadrance.map` on the valuation ring plus "unit-distance points lie in the
+valuation ring" — the one missing piece, named. Files renamed to match the object: `UnitQuadrance.lean`,
+`Instances/FinitePlane11.lean`.
