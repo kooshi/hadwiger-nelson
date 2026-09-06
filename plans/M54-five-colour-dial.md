@@ -290,3 +290,59 @@ independent) — the theorem is necessary, never sufficient, and the plan says s
 **Not added** (the injunction): no `SpareClass` structure (ν is instrument-side; no kernel consumer),
 no `Fintype` on the localization theorems (only the count needs it), no edge-list API for the critical
 set (the tool filters, the kernel does not certify a census).
+
+## §Bʺ. The obligation-modeling pass (2026-09-05, fresh invocation) — each proof's space, and the prove / test / assume partition
+
+### The kernel piece, obligation by obligation
+
+| obligation | the space, and the local check that closes it |
+|---|---|
+| `exists_coloring_isolating_of_mem_criticalSet` | `hc` yields `C' : (G − c).Coloring (Fin k)`; the colouring is `v ↦ if v ∈ S then Fin.last k else (C' v).castSucc` (classical membership); validity by the four cases on `(v ∈ S, w ∈ S)`: both — `hS`; one — `castSucc_lt_last`; neither — `deleteIncidenceSet_adj` needs `v ≠ c` and `w ≠ c`, both from `c ∈ S`, then `C'.valid` and `castSucc_injective`. **`c ∈ S` is exactly the hypothesis that makes the deleted edges harmless.** The two conclusions are `if_pos` and `if_neg` + `castSucc_lt_last` |
+| `not_forces_of_mem_criticalSet` | `S = {p, c}`; independence by the four cases (irrefl, `hpc`, `hpc` via `Adj.symm`, irrefl); `C p = last`, `C q ≠ last` since `q ∉ S` (`hpq.symm`, `hcq.symm`); `Forces` contradicts. **Mutation audit:** `hcq` is load-bearing for THIS instance (at `c = q` the set `{p, q}` paints both alike and refutes nothing) but NOT for the truth — at `c = q` the conclusion still holds by the instance `S = {q}`, which is `Critical.not_forces_of_colorable_delete` on the swapped pair. So the ∩-theorem's proof is a case split the informal two-liner hid: first `c ≠ p` and `c ≠ q` through `S = {c}` (the pair and its swap, `Forces` being symmetric by `(h C).symm`), then adjacency through `S = {p, c}` |
+| `not_separated_of_mem_criticalSet` | `S = {p, q, c}`; nine independence cases from `hpq`, `hpc`, `hqc`, irrefl and `Adj.symm`; `C p = C q = last` contradicts `Separated`. No `p ≠ q`: at `p = q` the set is `{p, c}` and `Separated G _ p p` already fails |
+| `not_fan_of_mem_criticalSet` / `criticalSet_subset_of_fan` | `S = {p, c}`; the fan's witness `q ∈ Q` has `q ≠ p` (`hp`), `q ≠ c` (`hcQ`), so `C q ≠ last = C p`; the subset form is `by_contra` + `Set.mem_union`/`mem_neighborSet` |
+| `criticalSet_subset_inter_neighborSet_of_forces` | as above: `c ∉ {p, q}` first, then `G.Adj p c` by contradiction with the `S = {p, c}` instance and `G.Adj q c` with the swap; `SimpleGraph.mem_neighborSet` |
+| `criticalSet_subset_union_neighborSet_of_separated` | `by_contra` on membership gives `¬ Adj p c ∧ ¬ Adj q c`; the three-point instance. At `c = p` the hypotheses hold trivially (`irrefl`, `hpq.symm`), so `p ∉ CriticalSet` is a corollary, not an extra case |
+| `not_mem_criticalSet_of_forces` | the ∩-theorem at `c = p` gives `Adj p p` — `G.loopless` |
+| `criticalSet_eq_univ_of_colorable` | `deleteIncidenceSet_le` + `Colorable.mono_left` (the name to be taken from `exact?`) |
+| the spare-colour `example` | `criticalSet_eq_univ_of_colorable` + `not_mem_criticalSet_of_forces`, two lines |
+| `encard_criticalSet_le_degree_of_forces` | `Set.encard_le_encard` (monotone) along `CriticalSet ⊆ N(p) ∩ N(q) ⊆ N(p)`, then `(G.neighborSet p).encard = G.degree p` by `Set.encard_eq_coe_toFinset_card` and `degree`/`neighborFinset` unfolding — the one place `Fintype`/`DecidableRel` are needed |
+| `forces_criticalSet_glue` | `hne → u ≠ v`; the ∩-theorem gives `Adj u c`, `Adj v c`; `hq` turns them into unit distances; `dist_comm`; `Glue.eq_gluePoint_of_unit_pair hne` |
+| `criticalSet_eq_empty_of_forces_of_two_lt_dist` | `Set.eq_empty_iff_forall_notMem`; `u ≠ v` from `hd` (`dist_self`); the two unit distances and `dist_triangle` give `dist (q u) (q v) ≤ 2`, against `hd` |
+| `encard_criticalSet_le_two_of_forces` | `CriticalSet ⊆ q ⁻¹' {g, g'}` from the glue theorem; `(q ⁻¹' T).encard = (q '' (q ⁻¹' T)).encard ≤ T.encard` by `hinj.encard_image` and `Set.image_preimage_subset`; `T = insert g {g'}` has `encard ≤ 1 + 1` by `Set.encard_insert_le` + `Set.encard_singleton` |
+| the K₄ − e spec examples | a `DecidableRel k4MinusEdge.Adj` instance (`decidable_of_iff` through `SimpleGraph.fromRel_adj`); `Forces … 3 0 1`: the four adjacencies by `decide`, then the closed decidable fact `∀ a b c d : Fin 3, a ≠ c → a ≠ d → b ≠ c → b ≠ d → c ≠ d → a = b` by `decide` (81 cases); `2 ∈ CriticalSet`: the explicit colouring `![0, 0, 0, 1]`, properness by `deleteIncidenceSet_adj` then `revert` + `decide` over the 16 pairs; `0 ∉ CriticalSet`: `rintro ⟨C⟩`, the triangle `{1, 2, 3}`'s three adjacencies, and `∀ a b c : Fin 2, a ≠ b → a ≠ c → b ≠ c → False` by `decide` |
+
+**A vacuity seam checked.** `Forces G (k+1) p q` is vacuously true on a non-`(k+1)`-colourable graph; the
+theorems still hold there because a critical vertex manufactures a `(k+1)`-colouring (the isolating
+lemma at `S = {c}`), so on such a graph the critical set is empty and every containment is trivial.
+No colourability hypothesis is needed and none was added.
+
+**Partition.** *Prove*: the thirteen declarations above. *Test*: the K₄ − e triple (the tight case:
+`C = N(0) ∩ N(1)` exactly) and the spare-colour example (an existing theorem re-derived). *Assume*:
+nothing — every side condition is a stated hypothesis, and the mutation audit (drop `hpc`: K₄ − e
+refutes; drop `hpq`: `Forces p p` is trivial; drop `hcq`: the statement stays TRUE by the other
+instance, which is the one hypothesis whose deletion the audit must read as "provable another way"
+rather than "vacuous") is recorded here so the implementation does not re-run it.
+
+### The instrument's invariants (what each subcommand asserts, and the test that would catch it lying)
+
+| subcommand | asserts | local check | test |
+|---|---|---|---|
+| `critical` | `C(G) = {v : G − v is k-colourable}` exactly; every SAT answer carries a colouring **verified proper on G − v in Python** (so membership in C is certified by an explicit witness); every UNSAT is solver-trusted and only ENLARGES the candidate sets — the safe direction | the palette pin is placed on a vertex ≠ v (a pin on the deleted vertex would be vacuous) | K₅ − e at three colours: `C = {x, y, z}` (the clique triple), the two non-adjacent vertices not critical; the E–I seed: `C = ∅` (P-M54-1) |
+| `candidates` | `𝒫_eq = pairs inside T_eq = ⋂_{c ∈ C} N(c)`; `𝒫_ne = {(p, q) ≁ : q ∈ ⋂_{c ∈ C ∖ N(p)} N(c)}` (with `C ∖ N(p) = ∅` admitting every non-neighbour `q`); `C = ∅` admits every pair; bitset intersections, O(n·\|C\|), zero solver calls | equal to the brute-force `C ⊆ N(p) ∩ N(q)` test on every pair for n ≤ 50 | K₅ − e: `𝒫_eq = 𝒫_ne = {(a, b)}`; K₄ − e at two colours: `𝒫_eq = {(0, 1)}` |
+| `ask` | for each candidate the forced-equal ask (`G ∧ p ≠ q` at k+1) and the virtual-edge ask (`G ∧ p = q`); an UNSAT is a HIT and triggers the jackpot protocol (second encoding, exact geometry) | a hit's second encoding must agree | K₅ − e: `(a, b)` forced equal, not separated |
+| `nu` | `ν(G) = min` over proper `(k+1)`-colourings of the spare class size; RC2 with hard = at-least-one + edge exclusion (exactly-one unnecessary: a doubly-coloured vertex only ever costs), soft = `¬x_{v, k}` weight 1; the optimum's colouring is decoded (smallest true colour) and **verified proper**; on a wall the result is `unknown` with the best upper bound seen | `ν = 1 ⟺ C ≠ ∅` cross-checks `critical` on every object | K₅ at five colours: 1; two disjoint K₅: 2; K₄ − e at three colours: 1 |
+| `exact-witness` | every unit edge and every cross chord of W is an exact identity in `KExt(247)`; the 60-digit near-miss list is exactly non-unit | the arithmetic class's `(a + b√m)` product law tested against mpmath on random elements; `sqrt_ext` at m = 247 verified by squaring on every root | a planted moved point fails exactly one incident edge |
+| `cross-lattice` | every glue point written is at exact unit distance from both parents (re-verified from the coordinates, parse-don't-validate); fusions by exact coordinate equality; pool–pool edges screened at 60 digits and confirmed exactly | a K-pair with an in-field radicand (from T18's table) is classified in-field by the same code at m = 247 (K ⊂ F₂₄₇); a cross pair with a non-square radicand refuses | the counts carry their populations |
+| `planted-sweep` | the exhaustive `Rigidity` sweep at five colours on W + (a hexagonal shell's nine {√3, 2} pairs minus two disjoint ones) confirms exactly the two missing pairs forced equal | the shell is located by its 12 unit edges among 7 points | seen red first: the same object with all nine pairs is vacuous (K₇), reported as such |
+
+### Phase C's object, priced by these obligations
+
+The two-spindle union's critical set is essentially `core₁ ∩ core₂` (a vertex of U in both forcing
+cores breaks both spindles; a copy vertex breaks one and the other spindle carries χ = 5), so the
+redundancy reading `|C|/n` is the overlap of the two cores, and the second pair should be chosen to
+minimize it — the forced pair whose endpoints lie farthest from pair 1's midpoint, shrunk by the
+greedy outside-in order under a one-hour wall (checkpointed per accepted deletion; the first core took
+3,800 s). Decision B3 is settled that way. The exhaustive sweep on the union (E4b) is the one
+heavy job of phase C; its pruned reading is expected to be "no candidates" (|C| ≫ 2Δ) and the sweep
+confirms the theorem's zero at one point.
