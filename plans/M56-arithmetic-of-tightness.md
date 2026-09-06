@@ -509,3 +509,86 @@ written; B7). Phase C optional, an hour; the obligation pass writes the three st
 | the forced-set bound | F_true ⊆ F_add ∩ F_K, with F_K from the Kempe sublattices | F_add alone | M1.5: the bed's gap is exactly where F_K bites | high on the theorem; P8 on the equality |
 | the gauge | Hamming defect primary; Kempe graph only on the seed | Kempe distance everywhere | M1.6 | high |
 | kernel piece | three two-line theorems on a graph over an additive group, `Forces`-vocabulary; optional, phase C | none / the Kempe theorem | M1.8; B7 | medium — dropped without regret if B4 runs long |
+
+## §M2. Obligation modeling pass (2026-09-06, fresh invocation after §M1's commit)
+
+### M2.1 The derivations as proofs — hypotheses, the two-line statement, the mutation audit
+
+| claim | the statement the proof derives from | proof | hypotheses load-bearing (drop it, watch it break) |
+|---|---|---|---|
+| **L1** | `φ : V →+ G`, `he : ∀ g : G, e • g = 0`, `p − q = e • w` ⟹ `φ p = φ q` | `sub_eq_zero.mp (by rw [← map_sub, h, map_nsmul, he])` | `he`: the identity ℤ →+ ℤ with e = 2, w = 1 refutes it; `h`: any pair with φ(p − q) ≠ 0 refutes it |
+| **L1, the collapse** | in an e-torsion group A, `n • x = 0` with `Nat.Coprime n e` ⟹ `x = 0` | `addOrderOf x ∣ n` and `∣ e` (`addOrderOf_dvd_iff_nsmul_eq_zero`) ⟹ `∣ gcd = 1` ⟹ `x = 0` (`addOrderOf_eq_one_iff`) | coprimality: ℤ/4 with n = 2, x = 2 refutes it. Derivation only — the instrument's "depth" reading; NOT a kernel obligation (the kernel statement is L1 on eΛ directly) |
+| **L2** (the colouring) | `Coloring.ofAddMonoidHom Γ φ (h : ∀ a b, Γ.Adj a b → φ (a − b) ≠ 0) : Γ.Coloring G`, colour = φ | `⟨φ, fun hab heq => h _ _ hab (by rw [map_sub, heq, sub_self])⟩` | `h`: the zero hom on a graph with an edge fails the constructor (the planted red) |
+| **L2, consumed** | `not_forces_of_addMonoidHom [Fintype G] (hk : card G = k) (h) (hpq : φ (p − q) ≠ 0) : ¬ Forces Γ k p q`; dually `not_separated_of_addMonoidHom (hpq : φ (p − q) = 0) : ¬ Separated Γ k p q` | recolour along `Fintype.equivFinOfCardEq hk` (`Coloring.recolorOfEquiv`), read `Forces` at that colouring, cancel the equiv, `map_sub` | `hpq`: the pair (p, p) makes `Forces` true; `hk`: without it `Forces Γ k` with k < card G quantifies over colourings the hom does not give |
+| **Kempe localization** (M1.5) | (i) *the swap lemma*: `c : Γ.Coloring G`, `a ≠ b`, K ⊆ V closed under the {a,b}-subgraph's adjacency ⟹ swapping a ↔ b on K is a proper colouring; (ii) *the coset lemma*: for `c = c_φ` and K the {a, a − c}-component of p, K ⊆ p + Λ_c^φ (walk induction: each step's difference has φ = ±c); (iii) q − p ∉ Λ_c^φ, c_φ(p) = c_φ(q) ⟹ the swapped colouring separates p, q | (i) three cases on an edge (both in K: swapped, distinct; neither: unchanged; one: the outside endpoint's colour is not in {a, b} by closure, so it differs from the swapped inside colour); (ii) induction on the walk; (iii) q ∉ K by (ii) | (i) closure: a K cutting an {a,b}-edge breaks it; (ii) additivity: for a non-additive c the component need not lie in a coset; (iii) c ≠ 0. The statement (i) is from which the proof is two lines: **K closed**, not "K a component" — components are the instance. NOT a kernel obligation (B7, M1.8): the instrument certifies every instance by verifying the swapped colouring, which is the whole honesty the measurement needs |
+
+### M2.2 The Lean skeleton (phase C, optional; every leaf `sorry` until then)
+
+```lean
+import Proofs.HadwigerNelson.Forcer   -- Forces
+import Proofs.HadwigerNelson.Fan      -- Separated
+namespace HadwigerNelson
+variable {V G : Type*} [AddCommGroup V] [AddCommGroup G]
+
+/-- An additive colouring: a hom nonzero on every edge difference colours the graph by itself. -/
+def SimpleGraph.Coloring.ofAddMonoidHom (Γ : SimpleGraph V) (φ : V →+ G)
+    (h : ∀ a b, Γ.Adj a b → φ (a - b) ≠ 0) : Γ.Coloring G := sorry
+@[simp] theorem coloring_ofAddMonoidHom_apply … : Coloring.ofAddMonoidHom Γ φ h a = φ a := rfl
+theorem not_forces_of_addMonoidHom [Fintype G] {k : ℕ} (hk : Fintype.card G = k) (Γ : SimpleGraph V)
+    (φ : V →+ G) (h : ∀ a b, Γ.Adj a b → φ (a - b) ≠ 0) {p q : V} (hpq : φ (p - q) ≠ 0) :
+    ¬ Forces Γ k p q := sorry
+theorem not_separated_of_addMonoidHom … (hpq : φ (p - q) = 0) : ¬ Separated Γ k p q := sorry
+theorem addMonoidHom_apply_eq_of_sub_eq_nsmul (φ : V →+ G) {e : ℕ} (he : ∀ g : G, e • g = 0)
+    {p q w : V} (h : p - q = e • w) : φ p = φ q := sorry
+theorem addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul (φ : V →+ G) {p q w : V}
+    (h : p - q = AddMonoid.exponent G • w) : φ p = φ q := sorry   -- via AddMonoid.exponent_nsmul_eq_zero
+-- spec: the grid ℤ × ℤ with Adj a b ↔ a − b ∈ {(±1,0),(0,±1)}, φ = (x + y) mod 2 : ℤ × ℤ →+ ZMod 2;
+--   example : ¬ Forces grid 2 (0,0) (1,0);  example : φ (0,0) = φ (2,0)  (L1 with e = 2, w = (1,0));
+--   planted red: example : ¬ ∀ a b, grid.Adj a b → (0 : ℤ × ℤ →+ ZMod 2) (a - b) ≠ 0.
+```
+Axioms: the standard three (no decide, no data). Cost ~1–2 h with the gate; dropped without regret if B4
+runs long. The unit-distance instance (V = a lattice ⊂ ℂ, Γ = comap of `unitDistance ℂ` along w ↦ p₀ + w)
+is a one-line example, added only if a consumer appears.
+
+### M2.3 The instrument's obligations — prove / test / assume, and the verify-as-control-flow rule
+
+**The rule.** A verdict of the form "this pair is SEPARATED" (additively, or by a Kempe swap) is emitted
+only after the instrument has BUILT the colouring it claims and VERIFIED it proper on every edge and unequal
+on the pair; a verify failure is an instrument catastrophe (banner, halt) — never a caught exception. A
+verdict "additively forced" is theory-level (F_add ⊇ F_true) and is worded so: `forced-additively`, never
+`forced`. A sweep may consume `separated-additively` as a certified not-forced and skip the pair; it must still
+ask the solver about `forced-additively` pairs. `vacuous` (no admissible hom) is its own verdict and is never
+folded into `forced-additively`; `not-comparable` (different unit-components) likewise.
+
+| subcommand | asserts (prove: by the code's invariant; test: at every run; assume: a named hypothesis) | control (seen red before the first real run) |
+|---|---|---|
+| `lattice` | test: every edge vector has integral coordinates in the HNF basis (span ⊇ E); test: two insertion orders give the same reduced HNF (uniqueness ⟹ span = E both ways); assume: the coordinates are exact (the loader's claim, e.g. the exact-file's verified identities) | a planted non-member (half a unit vector) has a non-integral coordinate; a member (u + v) integral; the seed's rank = 4 |
+| `homs --k` | test: every reported φ is nonzero on every unit class, re-checked by a second code path (Python ints, not numpy); test (rank ≤ 4): the count equals an independent enumeration (itertools + Fractions); test (U at 4): the two residue colourings computed by `tools/residue_colouring.py` (2-adic Hensel — an independent method) appear among the 𝔽₂²-homs' partitions; SAT-found families (rank > 8) report `exact: false` unless enumerated to completion with blocking | ℚ²'s grid chunk at 2: exactly the parity hom; the Moser spindle at 3: none; at 4: the derived (1, 2, 3, 2) present |
+| `forced --k` | per pair: `separated-additively` WITH φ and the verified colouring; `forced-additively` (every enumerated hom kills d — or, SAT-found, the UNSAT of ∃ φ admissible with φ(d) ≠ 0); `not-comparable`; `vacuous`; test: the dial's forced pairs are all `forced-additively` on U (F_add ⊇ F_true — a violation is a bug in the lattice, the homs or the dial) | a planted depth-2 pair forced-additively; a depth-1 pair separated with its colouring verified |
+| `kempe --k` | per additive colouring φ and c ≠ 0: Λ_c^φ from the units with φ(u) = ±c; per same-colour pair: if q − p ∉ Λ_c^φ predict separation, then BUILD the {a, a − c}-component of p by BFS, swap, verify — verdicts `kempe-separated` (with the mechanism: `sublattice` when q − p ∉ Λ_c^φ, `component` when q − p ∈ Λ_c^φ but q ∉ the finite component), `kempe-forced` (q in p's component for every φ, c — theory-level); test: every predicted separation verifies (the theorem — a failure halts); test: F_K ⊇ the dial's forced set (a violation is a bug) | the hexagonal lattice ball: a pair 4·1 apart is separated by the swap of the classes whose difference is not r(1); a pair 4ζ₆ apart likewise; the planted (0, 2·1) pair in a chunk where every direction's sublattice contains it reads kempe-forced |
+| `defect --k --colourings` | exact minimum over the enumerated family × palette bijections (≤ 120 at five); an incomplete (SAT-found) family gives an UPPER bound, flagged | the residue colouring reads 0; one repaint reads 1; a random proper colouring reads large; the 18 seed homs read 0 |
+| `additive-test --colourings` | the same-colour differences' linear system over ℤ/k, its solution subgroup W, then a solution avoiding the different-colour differences (enumeration or SAT); verdict `additive` with φ (and the partition equality re-verified) or `not-additive` | the 18 seed homs' colourings → additive; a one-vertex repaint → not-additive |
+| `obstruct --k` | the unit vectors with all coordinates ≡ 0 (mod k) (u ∈ kΛ); nonempty ⟹ "no additive k-colouring (chunk form of Fischer's obstruction)"; empty ⟹ "obstruction absent — homs may still fail by hyperplane cover" (then `homs` decides) | the L7 witness chunk {0, 1, 2, ρ, ρ̄, ρ + ρ̄} for the Moser twist: 1/3 ∈ Λ, so `--k 3` fires; a chunk without it does not |
+
+### M2.4 Scoring — the evidence each prediction needs, and the verdict enum
+
+Verdicts: `met` · `met-in-substance` · `missed` · `vacuous` (the prediction's precondition failed — no hom, no
+pair) · `not-comparable` (the compared populations differ) · `undecided` (a cap). No verdict word means "clean".
+
+| # | evidence | met iff | met-in-substance iff |
+|---|---|---|---|
+| P1′ | `lattice` + `forced --k 4` on U (all seven classes, every pair) beside the dial's per-class counts | depth-2 classes `forced-additively` and dial-free, depth-3 `forced-additively` | — (a partial class is `missed`) |
+| P1″ | the depth table; `homs --k 4` by type | depth-1 exactly AND no ℤ/4-hom | scored as two halves: `met` / `missed` (§S6 already: half-missed) |
+| P3′ | the seed's homs (18), `forced --k 5` on (205, 206), the cheats, d² = 9, 16; the 35-colouring dump with `additive-test` | 18 distinct additive partitions, all among the 35 | fewer than 18 distinct partitions (homs sharing a partition), still all among the 35; an additive colouring NOT among the 35 is an instrument catastrophe (the 35 are complete) |
+| P3″ | `additive-test` on the 35; `defect` on the non-additive ones | 0 < additive < 35 | — |
+| P4′ | `obstruct --k 4` on the 1581 and Heule-510; if absent, `homs --k 4` by SAT | a unit vector in 4Λ on both | no unit vector in 4Λ but no admissible hom either (hyperplane cover) |
+| P5′ | `homs --k 5` (SAT) on both; `forced --k 5` on the non-adjacent pairs; the complete sweeps `build/m30-rigidity-1581-k5.json`, `build/m41-*` | homs exist and every `forced-additively` non-adjacent pair is recorded separated in the sweep | homs exist and F_add has no non-adjacent pair at all |
+| P6′ | the RR interface census on core-star₂, star₂, W | family ν = measured ν on every object and density < 1 % | family ν = measured ν on all but one |
+| P7′ | derivation L7 (the 1/2 and 1/3 halves) + `obstruct` on the finite witness chunks (P7″) | the witnesses fire as derived | — |
+| P8 | `kempe --k 4` on U over all eight additive colourings; F_K per class beside the dial | F_K = the dial's forced set exactly (F_K ⊇ dial-forced is the control) | F_K ∖ dial-forced ≤ 10 % of F_K |
+
+**The jackpot path, exactly one:** a `forced-additively` non-adjacent pair at five colours on a chunk that no
+complete sweep has recorded — asked through `five_dial.py ask` (second encoding, jackpot file, exit 3). An
+additively forced pair a sweep records as separated is the expected finding (a non-additive separator), not
+a bug; an additively SEPARATED pair a sweep records as forced is the instrument-catastrophe branch (the
+hom's colouring is the witness — one of the two is wrong).
