@@ -356,3 +356,61 @@ lookups: minutes. Nothing here wants the server.
 | `kill-census --k --pool FILE --colourings FILE` | per pool point (exact frame): its unit neighbours in S, in-lattice or not (Λ-coordinates integral / rational / new direction), kills over the sampled colourings (rainbow neighbourhood), survival of each additive colouring (D5: in-lattice — a new unit in ker φ; out-of-lattice — the rainbow / extension condition) | the kill-count distribution, the top points, per-point records | a planted point rainbow under one colouring and not another; an in-lattice planted point kills no additive colouring; a planted out-of-lattice point with a rainbow neighbourhood under a hom kills it |
 | stages: `--hexball R`, `--ball R --centre i`, `--core122`, `--core588`, `--gen1`, `--depth2` | the hex ball (exists as `--planted hex`; parametrized), a radius restriction of any stage about a vertex, and loaders for the four new objects in their exact frames | the stage header carries the restriction | fingerprints; the restricted stage's edge count re-derived |
 | `tools/m57_richness.py` | the dial driver: radii × {`homs --k 5` (SAT, cap), `obstruct`}, one record per field | per radius: points, rank, unit classes, hom count (exact or ≥ cap), and at zero the mechanism | the 1581 itself reproduces M56's ≥ 2,981; Heule-510 its 96 |
+
+### S6. Measured at the subplan (after the §S2 commit `b6b36de`; scratch scripts, no controls — phase A reproduces every number under controls before anything is claimed)
+
+**(a) The four-colour bridging bed is EMPTY beyond the rhombus — P1 REFUTED.** The Moser spindle at four colours
+has **16** proper colourings up to palette (brute force, 4⁷ labellings); its additive family is 48 homs = 12
+partitions (ℤ/4 and 𝔽₂²), all 12 among the 16, and **4 colourings are non-additive**, each at defect 1 — e.g.
+`0 1 2 0 1 2 3` (hub 0, both rhombi coloured alike, the far apexes 0 and 3). K₄ − e is additively rigid at 3 and 4
+(one and two colourings, all additive); the hexagonal ball of radius 1 is rigid at 3 (one colouring) and NOT at 4
+(11 colourings, 4 additive); radius 2 is rigid at 3 and, at 4, the residue hom's {0, 1}-subgraph has **three
+components** (sizes 3, 3, 5: three parallel lines) whose single-component swap is proper and non-additive — D3 (v)
+and P1″ confirmed on the mechanism; on that ball EVERY colour pair of EVERY hom (36 + 36) is disconnected.
+
+**(b) The seed's free classes — P7 MET exactly.** Λ(H) has rank 4; H's 1,004 unit edges lie in **9 directions up
+to sign** (three ζ₆-orbits: the ζ₆-image of every direction lies in Λ and is one of the nine), 18 signed classes mod
+5. Of the 624 nonzero classes of 𝔽₅⁴: **forced 0, free 36 = 𝔽₅×·S₅ exactly, mixed 588**. The forced pair's
+difference is the zero class (∈ 5Λ: L1). Non-adjacent pairs: 780 free (all 446 cheats, all 157 at d² = 9, all 11 at
+d² = 16, and 166 others), 21,006 mixed, 1 in 5Λ. **The in-lattice design room is empty**: the norm-1 vectors of
+Λ(H) with coordinates of absolute value ≤ 6 in the Hermite basis are exactly the nine edge directions — no unused
+unit vector, so any new unit direction enlarges Λ and changes the family.
+
+**(c) The sharpest necessary condition, found by reading the 17 (D3′ — VERTEX TIGHTNESS).** All 17 non-additive
+colourings of the {1, 2}-seed are single-vertex recolourings of additive ones: 12 at defect 1 (one vertex, a
+component of size 1 in the {x, y}-subgraph), 5 at defect 2 (two single-vertex recolourings, one of them sequential:
+vertex 209 becomes free only after 207 moves). Every differing vertex lies in {207, 208, 209, 210, 211, 212, 213} —
+the points Exoo–Ismailescu attached to G to make H. Call a vertex **loose** in a colouring when its neighbours use
+fewer than k − 1 of the other colours (it can be recoloured), **tight** otherwise. Census over the 18 additive
+colourings: on the {1, 2}-graph, 8 colourings have no loose vertex, 8 have one, 2 have two — **12 loose (colouring,
+vertex) incidences, on six vertices of the attachment, = the 12 defect-1 colourings**; **on G (vertices 0–204 with
+their own unit and cheat edges) there are 0 loose incidences in all 18 colourings** — G's rigidity IS vertex
+tightness; on H's unit part alone 28–39 loose vertices per colouring, 102 vertices loose somewhere (the cheats'
+job, in the principle's terms, is tightening: a cheat at 2u puts a fifth neighbour-colour on both ends). The Moser
+spindle's twelve additive 4-colourings each have 2 or 3 loose vertices (the far apexes loose for the hub's colour, or
+a whole rhombus loose for one colour) — its non-rigidity is looseness. **Derivation:** a loose vertex v in an
+additive colouring f (missing colour y) gives the proper colouring c = f with v ↦ y, and c is non-additive whenever
+S holds an untouched translate of (v, p') for some p' of colour f(v) (D3 (iii) with a size-1 component). Hence
+**additive k-rigidity ⟹ every vertex tight in every admissible additive colouring** — per hom φ, the unit
+vectors at v must cover G ∖ {0} under φ; in particular no admissible hom may be *thin* (φ(S) ⊉ G ∖ {0}), and the
+minimum degree must be ≥ k − 1. This is a lattice computation (no colourings enumerated, no solver) and it is
+CONTINUOUS: the loose-incidence count under the family is the gauge the stub asked for, solver-free, where the
+defect gauge needs SAT-sampled colourings. Scored: **P6** first half MISSED literally (10 of the 180 (hom, colour
+pair) subgraphs of the unit part are connected, 170 disconnected — component counts 1–16), second half MET for 12 of
+17 (one swap) and MISSED for 5 (two single-vertex swaps); the 5 are Kempe-adjacent to a defect-1 colouring, so FS-2's
+connectedness reading survives.
+
+**(d) What the bed says about the milestone.** At four colours in K nothing beyond the rhombus is additively rigid
+(P1 refuted; the failure clause fires: B1 records the tightness profile of the K-chunks rather than hunting a rigid
+one). At five colours the one rigid object, G, is rigid by tightness, and tightness needs the cheats — the unit part
+is loose at 102 vertices. So the principle's design question is exactly: **can unit material tighten every vertex
+under every surviving hom?** — and the instrument for it is `tight`, run before `rigid`.
+
+**Predictions re-registered on the scratch (P1 replaced; P8–P9 added; the rest stand):**
+
+| # | prediction | basis | confidence |
+|---|---|---|---|
+| P1 (replaced) | no 4-chromatic K-chunk beyond K₄ − e is additively 4-rigid: the 122-core, the 588-core and U each have loose (vertex, hom) incidences under every residue colouring, at boundary vertices with fewer than three residue classes among their directions | (c); boundary degrees | high |
+| P8 | on the 5-chromatic witnesses at five colours every additive colouring has loose vertices, more than 10 % of the vertices on each (Heule-510: 24 colourings; W: 432; the 1581: the 3,000-hom sample) | W's colourings at the random baseline; boundary vertices | medium-high |
+| P9 | on every chunk the number of defect-1 non-additive colourings up to palette is at most the number of loose (colouring, vertex, missing colour) incidences, with equality on the seed (12 = 12) and on the spindle (4 < 30: palette collapse) | (c): each defect-1 colouring is a loose incidence | high on ≤, medium on the seed's equality being typical |
+| P5′ (sharpened P5) | W's depth-one and depth-two cross points reduce the loose-incidence count of W's 432 additive colourings by under 5 % when adjoined (each point tightens only its own unit neighbours), and kill fewer than 5 % of the 200 sampled colourings | D5; (c) | medium |
