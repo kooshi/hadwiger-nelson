@@ -709,7 +709,8 @@ def cmd_cross_lattice(a):
     t0 = time.time()
     cross_all = [(i, j) for i in range(mc) for j in range(mc, n)]
     cross = [(i, j) for i, j in cross_all if abs(Z[i] - Z[j]) < 2]
-    same = [(i, j) for i in range(mc) for j in range(i + 1, mc) if abs(Z[i] - Z[j]) < 2 and (i, j) not in set(rec["edges"])]
+    eset = set(tuple(e) for e in rec["edges"])
+    same = [(i, j) for i in range(mc) for j in range(i + 1, mc) if abs(Z[i] - Z[j]) < 2 and (i, j) not in eset]
     print(f"[cross] {rec['stage']['name']}: {len(cross)} cross pairs at d < 2 of {len(cross_all)}; {len(same)} same-side (core) pairs at d < 2 [{time.time()-t0:.0f}s]", flush=True)
     chunks = [cross[i::a.workers] for i in range(a.workers)]
     results = []
@@ -999,6 +1000,67 @@ def mp_str(x):
     import mpmath as mp
     return mp.nstr(x, 60)
 
+
+# ----------------------------------------------------------------------------- phase E: W ∪ the cross pool as a stage
+
+def cmd_grow(a):
+    """W ∪ (the in-field cross pool): a --graph stage with points. Pool points coincident with W points
+    are fused; every unit pair among W ∪ pool is found by a float screen and confirmed EXACTLY (so a
+    pool point's W-degree is its true one, not only its two parents)."""
+    import mpmath as mp, numpy as np
+    from scipy.spatial import cKDTree
+    mp.mp.dps = 40
+    rec = json.loads(Path(a.exact).read_text()); cr = json.loads(Path(a.cross).read_text())
+    m = rec["m"]; F = type(f"K{m}", (KExt,), {"m": m, "__slots__": ()})
+    X = [F.of_json(p[0]) for p in rec["points"]]; Y = [F.of_json(p[1]) for p in rec["points"]]
+    nW = len(X)
+    PX = [F.of_json(e["x"]) for e in cr["pool"]]; PY = [F.of_json(e["y"]) for e in cr["pool"]]
+    if a.strong:
+        keep = [i for i, e in enumerate(cr["pool"]) if len(e["parents"]) >= a.strong]
+        PX = [PX[i] for i in keep]; PY = [PY[i] for i in keep]
+    AX, AY = X + PX, Y + PY
+    Wset = {(tuple(X[i].A.c), tuple(X[i].B.c), tuple(Y[i].A.c), tuple(Y[i].B.c)): i for i in range(nW)}
+    fused = 0; idx = list(range(nW)); nxt = nW
+    for j in range(len(PX)):
+        key = (tuple(PX[j].A.c), tuple(PX[j].B.c), tuple(PY[j].A.c), tuple(PY[j].B.c))
+        if key in Wset:
+            idx.append(Wset[key]); fused += 1
+        else:
+            idx.append(nxt); nxt += 1
+    n = nxt
+    ux = [None] * n; uy = [None] * n
+    for k_, (x, y) in enumerate(zip(AX, AY)):
+        ux[idx[k_]] = x; uy[idx[k_]] = y
+    Z = [mp.mpc(ux[i].mp(), uy[i].mp()) for i in range(n)]
+    arr = np.array([[float(z.real), float(z.imag)] for z in Z]); tree = cKDTree(arr)
+    one = F.one(); unit = []; near = 0
+    for i, j in tree.query_pairs(1 + 1e-6):
+        d = abs(Z[i] - Z[j])
+        if abs(d - 1) < 1e-6:
+            dx, dy = ux[i] - ux[j], uy[i] - uy[j]
+            if dx * dx + dy * dy == one:
+                unit.append((min(i, j), max(i, j)))
+            else:
+                near += 1
+    Wedges = set(tuple(e) for e in rec["edges"])
+    missing = [e for e in Wedges if e not in set(unit)]
+    assert not missing, ("W's own edges not recovered by the exact census", missing[:3])
+    deg = [0] * n
+    for u, v in unit:
+        deg[u] += 1; deg[v] += 1
+    pool_ids = list(range(nW, n))
+    wdeg = {i: sum(1 for v in range(n) if v < nW and (min(i, v), max(i, v)) in set(unit)) for i in pool_ids} if pool_ids else {}
+    print(f"[grow] W ({nW} points) ∪ pool ({len(PX)} points, {fused} coincide with W): {n} points, {len(unit)} unit edges "
+          f"({len(unit) - len(Wedges)} new; near-misses rejected {near}); pool W-degree histogram "
+          f"{ {d: sum(1 for x in wdeg.values() if x == d) for d in sorted(set(wdeg.values()))} }, max total degree on the pool {max((deg[i] for i in pool_ids), default=0)}", flush=True)
+    out = Path(a.out) if a.out else DATA / f"W-plus-cross{'-strong' + str(a.strong) if a.strong else ''}.json"
+    DATA.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(dict(name=f"W-plus-cross{'-strong' + str(a.strong) if a.strong else ''}", n=n, edges=sorted(unit),
+                                   meta=dict(exact=a.exact, cross=a.cross, W_points=nW, pool_points=len(PX), fused=fused, new_edges=len(unit) - len(Wedges),
+                                             near_rejected=near, pool_w_degree={str(k): v for k, v in wdeg.items()}),
+                                   points=[[mp.nstr(z.real, 60), mp.nstr(z.imag, 60)] for z in Z])))
+    print(f"[grow] wrote {out}")
+
 # ----------------------------------------------------------------------------- self-test
 
 def self_test():
@@ -1089,6 +1151,8 @@ def main():
     p = sub.add_parser("planted-sweep"); stage_args(p); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     p = sub.add_parser("two-spindle"); p.add_argument("--witness", required=True); p.add_argument("--pair2", required=True)
     p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
+    p = sub.add_parser("grow"); p.add_argument("--exact", required=True); p.add_argument("--cross", required=True)
+    p.add_argument("--strong", type=int, default=0, help="keep only pool points with at least this many parents"); p.add_argument("--out")
     p = sub.add_parser("sweep"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     a = ap.parse_args()
     if a.cmd == "self-test":
@@ -1107,6 +1171,8 @@ def main():
         cmd_planted_sweep(a)
     elif a.cmd == "two-spindle":
         cmd_two_spindle(a)
+    elif a.cmd == "grow":
+        cmd_grow(a)
     elif a.cmd == "sweep":
         cmd_sweep(a)
 

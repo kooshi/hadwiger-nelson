@@ -14,3 +14,4 @@
 2026-09-06T00:31:48Z M54 phase D cross-lattice of W (28 workers) log build/m54/cross-lattice-W.log
 2026-09-06T00:31:50Z M54 nu(W) wall 1800 log build/m54/nu-W.log
 2026-09-06T00:32:00Z M54 phase C two-spindle (shrink of pair 813,1939 then the union) log build/m54/two-spindle.log ckpt build/m54/shrink-813-1939.json
+2026-09-06T00:37:06Z M54 phase E1 critical census of W ∪ cross pool (1,238 pts, 20 workers) log build/m54/critical-Wcross.log
