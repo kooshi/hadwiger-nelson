@@ -592,3 +592,102 @@ complete sweep has recorded — asked through `five_dial.py ask` (second encodin
 additively forced pair a sweep records as separated is the expected finding (a non-additive separator), not
 a bug; an additively SEPARATED pair a sweep records as forced is the instrument-catastrophe branch (the
 hom's colouring is the witness — one of the two is wrong).
+
+## §M3. Experience modeling pass (2026-09-06, fresh invocation after §M2's commit)
+
+**The users.** (a) The next session, zero memory, resuming mid-milestone: it must predict the tool from
+`five_dial.py`'s conventions and read every record cold. (b) A sweep consuming `separated-additively` as a
+certified skip: it needs the colouring itself, in the stage's vertex order, under the stage's fingerprint.
+(c) Kooshi reading `data/m56/README.md`: what each file is, which derivation it instantiates, what a row
+licenses. (d) `exact?`, if phase C runs: Mathlib-shaped names.
+
+**M3.1 `tools/additive.py` — stages.** One `--stage` vocabulary, shared with `five_dial.py`, each loader
+carrying an EXACT frame and naming it in the record's header (`frame: {name, meaning, dim}`):
+`--seed` (E–I 4-frame `EI4`: ((a√3 + b√11)/12, (c + d√33)/12), `twodist.ei_H`), `--object LABEL`
+(`data/m52/exact-LABEL.json`, K's 4-basis per coordinate → `K8`, reduced to `EI4` when the other four
+coordinates vanish, which the loader checks), `--witness PATH` (`five_dial.KExt`: K(√247), 16 rationals per
+point, `K247-16`), `--heule510` (`tools/heule510.json`, `field16[3,5,7,11]` over denominator 96),
+`--degrey` (the standing exact loader's frame and vertex order, recorded — the M06 `degrey_graph.json`
+order differs, M34's lesson; the loader that pairs coordinates with THAT edge list is the one used and named),
+`--graph FILE` (the tool's own exact JSON: `frame`, rational `points`, `edges`; a float file is REFUSED with
+a message naming the four exact loaders), `--planted NAME` (`grid`, `hex`, `moser`, `k4e`, `l7-moser` — the
+six-point 1/3 witness — `disconnected`, `repaint`). Edges are taken as the graph; `unit_verified` records
+the loader's own claim (the exact-file's verified identities, the seed's `dist2_is`, or "as given").
+
+**M3.2 Subcommands, arguments, records.** `lattice`, `homs --k`, `forced --k [--all | --classes d2,… |
+--pairs FILE] [--dial FILE] [--sweep FILE]`, `kempe --k [--all | --classes | --pairs] [--dial]`,
+`defect --k --colourings FILE`, `additive-test --k --colourings FILE`, `obstruct --k`, `self-test`; every
+subcommand `--out PATH` (default `data/m56/<sub>-<stage>-k<k>.json`). Every record: `kind:
+additive-<sub>`, the stage header `{name, n, edges, fingerprint, source, frame, unit_verified, components}`
+(the same header shape as `five_dial`'s records, plus frame and components), `k`, `groups` (every abelian
+group of order k, by name: `Z/4`, `Z/2xZ/2`, `Z/5`, …), `lattice: {rank, basis, scale, method}`,
+`method: enumerate | sat` with `exact: bool`, the populations, `claim_scope`. Verdict words, exactly §M2.4's:
+`forced-additively`, `separated-additively`, `kempe-separated` with `mechanism: sublattice | component`,
+`kempe-forced`, `not-comparable`, `vacuous`, `undecided`. **The colourings travel in the record**: `homs`
+writes each admissible colouring as a colour vector over the stage's vertices (k values per vertex, the
+stage's order, ≤ 8 × 1,953 ints on U), and `forced` cites a separating colouring by index, so a consumer
+holds the certificate without the lattice: it checks the fingerprint, checks the vector proper on its own
+edge list, and skips the pair. The fingerprint mismatch is a refusal, never a warning. `--dial FILE` and
+`--sweep FILE` (a complete rigidity record) produce the per-class comparison table and are refused on a
+fingerprint mismatch. **The jackpot is never reached inside this tool**: `forced --k 5 --sweep` lists the
+`forced-additively` non-adjacent pairs the sweep has NOT recorded as separated under `candidates_for_ask`,
+prints "CANDIDATE — ask through five_dial.py ask" and exits 0; the ask protocol (second encoding, jackpot
+file, exit 3) stays in `five_dial.py`.
+
+**M3.3 Headlines carry population and conditioning (G21).** One line per run, the numbers with their
+denominators and their conditioning in the same sentence, e.g.
+`[homs] EI-seed (n=214, edges=1450, fp=…) k=5: 72 admissible Z/5-homs on Λ/5Λ (rank 4, enumerated, exact) = 18 colourings up to palette (18 distinct partitions)`;
+`[forced] U (…) k=4, class 16 (179 pairs, all exact): 179 forced-additively (difference in 4Λ), 0 separated-additively; dial: 0 forced of 179 — the 179 dial separations are non-additive`;
+`[homs] U (…) k=4: 12 Z/4-homs = 6 colourings up to sign; 12 Z/2xZ/2-homs = the 2 residue colourings under GL₂(F₂) (residue_colouring.py agrees on both)`.
+Breakdowns teach: a stage without exact coordinates names the exact loaders; a colourings file of the wrong
+length prints both lengths; a rank above 8 switches to SAT and says so in the headline with `exact`.
+
+**M3.4 `data/m56/README.md`.** A table: artifact → stage → subcommand → the derivation it instantiates
+(L1 for `forced-additively`; L2 for `separated-additively`; M1.5 for `kempe-*`; L7 for `obstruct` on the
+witness chunks; M1.3 for `additive-test`) → what a reader may conclude. And one standing paragraph, verbatim
+in the README and in every `forced` record's `claim_scope`: *"A row reading `forced-additively` says every
+ADDITIVE colouring of this chunk gives the pair one colour; it does NOT say every colouring does — the
+fabric's valuation-4 pairs are the standing counterexample (forced-additively, separated by the solver). A
+row reading `separated-additively` or `kempe-separated` comes with an explicit proper colouring in the same
+file, verified; it IS a certificate that the pair is not forced. `vacuous` means no additive colouring
+exists and says nothing about χ."*
+
+**M3.5 The Lean surface (phase C, optional).** Names by convention and namespace: `HadwigerNelson.
+additiveColoring (Γ : SimpleGraph V) (φ : V →+ G) (h) : Γ.Coloring G` (a sealed `def`; Fischer's word, the
+one a reader searches), `@[simp] additiveColoring_apply : additiveColoring Γ φ h a = φ a` (rfl — the
+simp-normal form: consumers never unfold), `not_forces_of_addMonoidHom`, `not_separated_of_addMonoidHom`
+(the `Forces`/`Separated` vocabulary of `Forcer.lean`/`Fan.lean`, so `exact?` finds them from those goals),
+`addMonoidHom_apply_eq_of_sub_eq_nsmul` and its `exponent` instance. Each docstring states the consumer's
+licence AND its limit: "a hom separating p and q refutes `Forces`; a hom identifying them refutes
+`Separated` — and says nothing about `Forces`, additive colourings being a proper subset (plans/M56 §S6)."
+File `Proofs/HadwigerNelson/Additive.lean`, imported in `Proofs.lean` after `Absorb`, four entries in
+`scripts/Axioms.lean`. No notation, no instance, no second simp lemma.
+
+**M3.6 The close's report, drafted now so the numbers land in the sentences.** Three findings in plain
+language, each with its population and its caveat:
+1. *The Exoo–Ismailescu seed's forced pair is arithmetic.* Colour each of its 214 points by a linear
+   functional mod 5 of its lattice coordinates; 18 such functionals (up to scaling) colour the whole
+   {1, 2}-graph properly, and every one gives the two special points one colour because their difference is
+   5 times a lattice vector. Population: all 1,450 edges, the pair, 157 + 11 pairs at distances 3 and 4.
+   Caveat: 17 of the seed's 35 colourings are NOT of this form and identify the pair too — the additive
+   family explains half the colouring space; the forcing itself is proved by the 35-enumeration, not by
+   arithmetic.
+2. *The fabric's four-colour rigidity is additive at two depths and not at the third.* On the 1,953-point
+   K-fabric, pairs whose lattice difference is divisible by 2 exactly once are free, twice are forced by
+   every additive colouring yet separated by the solver (2,324 pairs), three times are forced (171 of 189).
+   Population: all 15,419 exact pairs of the seven classes. Caveat: F_add ⊇ F_true is a theorem; the
+   equality at depth 3 minus 18 is measured, and P8's Kempe reading is the candidate explanation, scored at
+   the close.
+3. *No wall-broken plane has an additive colouring with ten or fewer colours.* The spindle rotations put
+   1/3, 1/5, 1/7 (and, when the 2-adic wall is broken, 1/2) into the group the unit vectors generate, and a
+   1/k there kills every additive k-colouring (Fischer). Derived (L7), witnessed by six-point chunks.
+   Caveat: a statement about one family of colourings, not about χ — the plane's 5-, 6- and 7-colourings
+   are all non-additive, which is exactly why the additive theory can localize a compulsion and never
+   produce one.
+
+| decision (experience pass) | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| where the certificate lives | the colourings inside the `homs`/`forced` records, cited by index | a separate file per pair | thousands of pairs; a consumer needs the vector and the fingerprint, nothing else | high |
+| the jackpot boundary | `additive.py` emits `candidates_for_ask`; `five_dial.py ask` decides | asking inside the tool | one protocol, one banner, one exit code | high |
+| the Lean name | `additiveColoring` (sealed def) + `additiveColoring_apply` (simp) | `Coloring.ofAddMonoidHom` in Mathlib's namespace | Fischer's word is what a reader searches; the Mathlib-style name would sit in our namespace anyway | medium |
+| knobs | none beyond `--k`, the pair selection, `--dial/--sweep`, `--out`, `--max` for SAT caps | `--group`, `--frame` | every group of order k always; the frame is the loader's | high |
