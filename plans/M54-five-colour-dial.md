@@ -460,3 +460,26 @@ beyond this paragraph is a tangent, recorded in §7 of the close.
 **Phase E1 launched on the grown stage** (1,238 points, 20 workers). The derived rule of §Bʹ ("a halo
 of W-degree 2 with pool-degree ≤ 1 cannot move the critical set") does NOT cover this pool (W-degrees
 to 10, pool degrees to 12), so E1 is a genuine measurement.
+
+## §R2. Phase E1 closed (2026-09-06 ~01:45Z) — the pool moves the redundancy dial by three vertices, remotely
+
+| quantity | measured |
+|---|---|
+| the grown stage W ∪ pool | 1,238 points, 5,977 unit edges, Δ = 32 (fingerprint 63795de0d0f1a332) |
+| critical set at four colours | **1,172 of 1,238** (each certified by a verified colouring; 0 unknown; 20 workers, 227 s) |
+| the 66 non-critical vertices | **63 are the new points** (never critical while W stays a subgraph — trivial) and **3 are W-vertices: 689, 957, 1151**, all on the COPY side at 2.15, 2.24, 2.17 from the centre, each with NO new neighbour |
+| candidates at five colours | forced-equal 0, virtual-edge 0 (\|C\| = 1,172 ≫ 2Δ = 64) — by theorem |
+
+**Reading.** P-M54-6 met in its dial half (0 candidates, hence 0 compulsions at five colours by
+theorem — no sweep needed) and missed in its "C stays > Δ unchanged" half in an instructive way: the
+critical set did move, and it moved at three vertices the pool does not touch. Deleting 689 leaves W
+4-colourable, but every such 4-colouring fails to extend over the 63 pool points — the pool KILLS
+the separating colourings of W − v for exactly three v, the way a descent halo kills a batch's
+colourings (M49's mechanism, one level up). So the depth-one F₂₄₇ material is not inert for
+redundancy: it is a weak kill at three sites of 1,175. The redundancy dial reads \|C ∩ W\|/\|W\| =
+1,172/1,175 = 0.997, down from 1.000.
+
+**What the derivation of §Bʹ missed and what it now says.** The halo's W-degree-2 points cannot
+UNMAKE a critical vertex; they can make one vertex non-critical only collectively, through their own
+edges (114 pool–pool edges, a 53-point component) — the "boundary-constrained non-4-colourable
+structure" the §Bʹ rule named as the only mechanism. It fired, at three sites.
