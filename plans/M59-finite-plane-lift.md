@@ -387,3 +387,52 @@ derived-and-measured this milestone: its kernel form wants 𝔽_p(i) as the norm
 pins of ω at 11 and 19 are the honest kernel trace and go in the instance module. Kernel-cost note for the obligation
 pass: `netStress` as a selector sum over the list is O(|V|·|L|) in `decide` (~10⁶–10⁷ steps on a thousand-vertex core —
 minutes); an accumulate-form evaluator with a soundness lemma (the M04 pattern) is the fallback if the instance balks.
+
+## §M2. Obligation-modeling pass (2026-09-06; fresh Skill invocation) — every leaf discharged in the probe
+
+**The statement from which the proof derives, found by two computations before any tactic.** (i) The derivation was
+tested on a real object first: the closed hex shell reduced at 11 has twelve edge defects `(Q(x₀ e) − 1)/11 =
+0, 3, 4, 0, 3, 3, 9, 8, 8, 0, 9, 8`, individually nonzero, and its self-stress (rim +1, spokes −1) pairs them to exactly
+−121 ≡ 0 (mod 121) — the cancellation the theorem demands of every real configuration, and not a trivial one. (ii) The
+collinear triangle of UD(𝔽₃, 2) with stress (2, 2, −1) pairs to 6 = −3 ≠ 0 in ZMod 9 (three `decide`s green in the
+skeleton since §M1). The theorem is therefore neither vacuous nor over-hedged before its proof exists.
+
+**The space, characterized.** Every obligation of `Lift.lean` is one of three kinds:
+
+| kind | obligations | the local obligation |
+|---|---|---|
+| a `linear_combination`/`ring` identity | `quad_add_smul` (the per-edge expansion `quad (a + π•b) = quad a + 2π·dot a b + π²·quad b`), the five `dot` lemmas, the per-edge step of the crux (`e.2.2 * (quad D − 1) = −2π · e.2.2 · dot D Y` from `hunit`, `hπ`) | `simp only [quad, dot, Prod.fst_add, …]; ring` and `linear_combination e.2.2 * h` — each closed first try |
+| one induction on the edge list | **`sum_dot_eq_sum_netStress`** — the summation by parts — the hardest lemma and the module's only induction; `nil` by `simp`, `cons` by `rw [ih]` FIRST (the induction hypothesis must be rewritten before `simp` normalizes the map's body under `dot_sub_right`, or it never matches — the one stuck case of the pass), then `simp only [netStress_cons, dot_add_left, Finset.sum_add_distrib, dot_sub_left, dot_smul_left, Finset.sum_sub_distrib, ite_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, if_true, dot_sub_right]; ring` | the recursor is the list's; `netStress_cons` (`rfl`-adjacent) is the equation lemma that makes the step local |
+| a bridge to the environment | `Colorable.of_le_map` (a hom `H →g G` built on `Function.invFun` with `Function.leftInverse_invFun`; adjacency by `map_adj'` at this pin — `(G.map f).Adj u v ↔ u ≠ v ∧ ∃ u' v', G.Adj u' v' ∧ f u' = u ∧ f v' = v`, `Iff.rfl`); `quad_eq_one_of_adj` (`simpa [quad] using h.2`); `drawing_map` (`simp only [drawing, Prod.map_apply, map_mul, RingHom.comp_apply]`); the plane composite (`add_one_le_chromaticNumber_of_valid hd hv` with the contrapositive of `Colorable.of_le_map`, `Nonempty (Fin n)` from `0 < n`); `ZMod.exists_smul_of_castHom_eq` (`castHom_apply`, `← intCast_cast (R := ZMod p) a` — the explicit arguments matter: without them the second `←` rewrite re-matches the ℤ-cast just introduced — `intCast_eq_intCast_iff_dvd_sub`, then `intCast_zmod_cast` and `push_cast; ring`; conclusion restated with the ring scalar `(p : ZMod (p²)) * t`, so the consumer needs no ℕ-smul cast lemma); `ZMod.natCast_sq_eq_zero` (`← Nat.cast_pow, natCast_self`); the consumer `UDCert.stressPairing_eq_zero_of_drawing` (`choose` the deformation from the residue agreement componentwise; `drawing_adj` at `R = ZMod (p²)` + `quad_eq_one_of_adj`; the two `Prod.ext` leaves close by `rw [Prod.fst_add, Prod.smul_fst, smul_eq_mul]; exact h₁` — `exact`, not `simpa`, because `(c.drawing …).1` and `u * φ …` are equal only under the default transparency) | each a citation found by query (`grep` of the pinned Mathlib and core), not recalled |
+
+Everything closed in `build/m59/probe_obl.lean` (zero `sorry`); the proofs port verbatim at implementation.
+
+**Partition.** *Prove:* the eleven theorems above. *Test:* the tri3 reds (three `decide`s), the hex-shell green at 11
+(a `decide` over ZMod 121 once the residues are in the module — the model of the hypotheses), the two ω pins.
+*Assume* (hypotheses the caller discharges): `π² = 0` (at ZMod (p²): `natCast_sq_eq_zero`), `IsStress` (decided per
+instance), the residue agreement `hres` and the edge covering `hE` (per instance, from the drawing).
+
+**The instance-scale cost, measured, and the design it forces.** A synthetic stressed framework of 100 vertices and 300
+weighted edges over ZMod (131²): `IsStress` plus the pairing by `decide +kernel` in **20.5 s of type checking**
+(`build/m59/probe_time.lean`) — 0.7 ms per (vertex, edge) pair, i.e. ~20 kernel steps per selector step (a `Fin`
+equality, a `ZMod` product on a pair, a subtraction) against the 33-µs model. Extrapolated: a 1,000-vertex, 3,000-edge
+core is ~35 min (acceptable once; the certificate segments of M06 were larger), a 3,000 × 10,000 core ~6 h (not). The
+selector form of `netStress` is O(|V|·|L|) and no kernel representation makes it linear without the M04 Nat-packed
+tables (~200 lines of evaluator plus soundness — priced, not built). **The design that removes the question: an
+obstruction is certified by a stress of small support.** A self-stress of a sub-framework, extended by zero, is a
+self-stress of the whole (the net stress at a vertex sees only the edges carrying weight), and a lift of the whole
+restricts to a lift of the sub-framework — so ONE small over-braced sub-framework whose stress pairs nontrivially with
+the defect refutes every lift of the core, and the kernel instance is that sub-framework alone (tens of edges, a second
+of `decide`). Since a random over-braced sub-framework of a finite-plane core is obstructed with probability 1 − 1/p,
+such a witness exists in every obstructed core unless the obstruction is genuinely global; the instrument's `local`
+therefore reports a **minimal-support obstructing stress** (search over closed vertex neighbourhoods and small balls of
+the core, smallest support first), and the instance module consumes it. No new theorem is needed — the instance takes
+`V = Fin m` for the sub-framework's vertices; a docstring says why that suffices. P8 stands at < 250 lines for the
+general module; the instance's kernel time is now seconds.
+
+**Mutation audit (run at implementation, each expected to break the proof exactly where named).** Drop `hπ`: the π²·quad
+term survives in `h` and `linear_combination e.2.2 * h` fails — and the theorem is genuinely false without it (R = ℤ,
+π = 1, x₀ ≡ 0 with any weights, y a unit path: pairing −Σλ ≠ 0). Drop `hs`: the final `Finset.sum_eq_zero` leaf cannot
+close (any weights would qualify — false). Replace `x₀ + π • y` by arbitrary `x`: `hre` has no statement — the whole
+content is the deformation shape. Drop `Nonempty V` in `Colorable.of_le_map`: `Function.invFun` fails to elaborate, and
+the theorem is false (empty V, nonempty W). The three `decide` reds and the hex-shell green are the spec's adversaries.

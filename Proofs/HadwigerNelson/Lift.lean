@@ -115,6 +115,36 @@ instance [DecidableEq R] (π : R) (L : StressedEdges V R) (x₀ : V → R × R) 
 def stressPairing (L : StressedEdges V R) (x₀ : V → R × R) : R :=
   (L.map fun e => e.2.2 * (quad (x₀ e.1 - x₀ e.2.1) - 1)).sum
 
+/-- The bilinear form on `R × R` the first-order term of `quad` is written in. -/
+def dot (a b : R × R) : R := a.1 * b.1 + a.2 * b.2
+
+@[simp] theorem dot_zero_left (b : R × R) : dot (0 : R × R) b = 0 := by sorry
+theorem dot_add_left (a a' b : R × R) : dot (a + a') b = dot a b + dot a' b := by sorry
+theorem dot_sub_left (a a' b : R × R) : dot (a - a') b = dot a b - dot a' b := by sorry
+theorem dot_smul_left (c : R) (a b : R × R) : dot (c • a) b = c * dot a b := by sorry
+theorem dot_sub_right (a b b' : R × R) : dot a (b - b') = dot a b - dot a b' := by sorry
+
+/-- **The first-order expansion of the quadrance**: the per-edge identity the obstruction rests on. -/
+theorem quad_add_smul (a b : R × R) (π : R) :
+    quad (a + π • b) = quad a + 2 * π * dot a b + π ^ 2 * quad b := by
+  sorry
+
+omit [Fintype V] in
+theorem netStress_nil (x₀ : V → R × R) (v : V) : netStress ([] : StressedEdges V R) x₀ v = 0 := rfl
+
+omit [Fintype V] in
+theorem netStress_cons (e : V × V × R) (L : StressedEdges V R) (x₀ : V → R × R) (v : V) :
+    netStress (e :: L) x₀ v = ((if e.1 = v then e.2.2 else 0) • (x₀ e.1 - x₀ e.2.1)
+      - (if e.2.1 = v then e.2.2 else 0) • (x₀ e.1 - x₀ e.2.1)) + netStress L x₀ v := by
+  sorry
+
+/-- **Summation by parts along the edge list**: the weighted edge-vector sums against the coboundary of
+`y` regroup as the net stresses against `y`. The one induction of the module — on the list. -/
+theorem sum_dot_eq_sum_netStress (L : StressedEdges V R) (x₀ y : V → R × R) :
+    (L.map fun e => e.2.2 * dot (x₀ e.1 - x₀ e.2.1) (y e.1 - y e.2.1)).sum
+      = ∑ v, dot (netStress L x₀ v) (y v) := by
+  sorry
+
 /-- **The first-order obstruction.** With `π² = 0`, a deformation `x₀ + π • y` of a stressed framework
 along which every listed edge has quadrance `1` forces the stress pairing to vanish. Proof shape:
 `quad (x₀ e + π • y e) − 1 = (quad (x₀ e) − 1) + 2π⟨x₀ e, y e⟩` since `π² = 0`; summing against the
@@ -143,7 +173,7 @@ the hypothesis shape of `stressPairing_eq_zero_of_lift`. -/
 theorem ZMod.exists_smul_of_castHom_eq (p : ℕ) {a b : ZMod (p ^ 2)}
     (h : ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p) a
       = ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p) b) :
-    ∃ t : ZMod (p ^ 2), a = b + (p : ℕ) • t := by
+    ∃ t : ZMod (p ^ 2), a = b + (p : ZMod (p ^ 2)) * t := by
   sorry
 
 /-- `p² = 0` in `ZMod (p²)`: the square-zero element of the level-`p²` instance. -/
@@ -151,6 +181,31 @@ theorem ZMod.natCast_sq_eq_zero (p : ℕ) : ((p : ZMod (p ^ 2)) ^ 2 : ZMod (p ^ 
   sorry
 
 end ResidueClass
+
+namespace UDCert
+
+variable {V : Type*} [Fintype V] [DecidableEq V] {n : ℕ}
+
+/-- **A certificate drawn at level `p²` cannot cover an obstructed framework.** A valid tower certificate
+drawn through a hom into `ZMod (p²)` whose residues modulo `p` agree with `x₀` on the framework's vertices,
+with every framework edge a certificate edge, is a deformation `x₀ + p • y` with unit edges — so the stress
+pairing of every self-stress vanishes. The kernel-checked sense of "this subgraph of `UD(𝔽_p, 2)` is not the
+shadow of any certified unit-distance graph in the tower": an instance exhibits one stress with a nonzero
+pairing. -/
+theorem stressPairing_eq_zero_of_drawing (p : ℕ) [Nontrivial (ZMod (p ^ 2))] (c : UDCert n)
+    {S : Subring Q4} (φ : S →+* ZMod (p ^ 2)) (hS : c.CoordsIn S) {u : ZMod (p ^ 2)}
+    (hu : u * c.denom = 1) (hv : c.Valid = true) (g : V → Fin n)
+    (L : StressedEdges V (ZMod (p ^ 2))) (x₀ : V → ZMod (p ^ 2) × ZMod (p ^ 2))
+    (hs : IsStress (p : ZMod (p ^ 2)) L x₀)
+    (hres : ∀ v, Prod.map (ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p))
+        (ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p)) (c.drawing φ hS u (g v))
+      = Prod.map (ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p))
+        (ZMod.castHom (dvd_pow_self p two_ne_zero) (ZMod p)) (x₀ v))
+    (hE : ∀ e ∈ L, (edgeGraph n c.edges).Adj (g e.1) (g e.2.1)) :
+    stressPairing L x₀ = 0 := by
+  sorry
+
+end UDCert
 
 /-! ## Spec: a real framework passes, the collinear triangle of `UD(𝔽₃, 2)` does not
 
