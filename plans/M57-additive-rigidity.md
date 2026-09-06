@@ -567,3 +567,104 @@ encoding with a different pinned vertex; (2) the pair's difference re-derived ex
 and its distance exactly; (3) the pair asked through `five_dial.py ask` (forced-equal, second encoding, JACKPOT file,
 exit 3) — the kernel certificate is the refutation of the spindle union (the M34 bridge), the reduction theorem the
 statement. The additivity census is never the certificate.
+
+## §M3. Experience modeling pass (2026-09-06, fresh invocation after §M2's commit `35989b5`)
+
+**M3.1 The verdict vocabulary — M56's words kept, three levels added, none confusable.** M56's pair words stand
+(`forced-additively`, `separated-additively`, `kempe-separated:{sublattice,component}`, `kempe-forced`,
+`not-comparable`, `vacuous`, `undecided`). New, at three levels: the STAGE (`rigid`): `additively-rigid` ·
+`not-rigid: n of N` · `capped: 0 non-additive of N sampled` · `vacuous` (not k-colourable per the solver); the
+FAMILY (`closure`): `family-kempe-closed` (γ = 0) · `family-kempe-open: γ = N` — per hom `kempe-closed` /
+`kempe-open` (not `kempe-stable`: the concept §M1 named is closure, and `kempe-forced` is a pair word); per (hom,
+colour pair) `connected` / `disconnected: c components`; per (hom, vertex) `tight` / `loose: missing {…}`. The
+`free` split at the pair level: `forced-additively` (the zero class — L1) · `free` (every additive colouring
+separates: the constraint costs the family nothing) · `mixed`; free ∪ mixed = M56's `separated-additively`.
+
+**M3.2 Headlines carry population and conditioning in one sentence (G21).** Templates:
+`[closure] EI-seed-unit k=5: γ = 1,197 over 18 additive colourings × 10 colour pairs (family complete, 72 Z/5-homs);
+170 of 180 subgraphs disconnected (2–16 components), 10 connected; loose incidences L on M of 214 vertices; 170
+swaps built, 170 proper, 170 non-additive (exact partition test)` — and when the family is a SAT sample the gauge
+prints as `γ ≥ N (family incomplete: M sampled homs)`, never as a number. `[rigid] planted-moser k=4: not-rigid — 4
+non-additive of 16 colourings up to palette (enumeration complete; family 12 partitions of 48 homs); defects {1: 4}`.
+`[free] EI-seed-unit k=5: 624 nonzero classes → forced 0 / free 36 / mixed 588 (family complete; F5x·S5 = 36 ⊆ free);
+21,787 non-adjacent pairs → forced-additively 1 / free 780 / mixed 21,006`. `[kill-census] W k=5: 134 pool points ×
+family 432 × 200 sampled: γ̄ before 12.3 → after [11.9, 12.3] (Δγ̄ min −0.4 at point 57); sampled kills max 3 of 200;
+family restricted at 13 points, extended at 0` — γ̄ = γ/|family| is the gauge when the family's size changes, and a
+point that empties the family reads `vacuous`, not `γ = 0`. The richness driver's rows are `(rank, |S_k|, homs)` with
+the radius an incidental column, and the first zero row names its mechanism (`obstruct` fired — exact; or the hom
+SAT's UNSAT, re-run in a second encoding).
+
+**M3.3 The jackpot line is a HALT, never a claim.** `rigid --k 5` reading `additively-rigid` on a stage with NO
+cheats prints exactly:
+```
+[rigid] HALT — additively-rigid at five colours on a unit-distance stage. NOT a certificate. Before any claim:
+  (1) python3 tools/additive.py rigid <stage> --k 5 --encoding 3bit --pin <another vertex>
+  (2) python3 tools/additive.py free  <stage> --k 5 --pairs        # the 5Λ-pairs and their distances (need ≥ 1/2)
+  (3) python3 tools/five_dial.py ask  <stage> --k 5 --pairs …      # the jackpot protocol: second encoding, JACKPOT file, exit 3
+```
+and its record has `jackpot_candidate: true` and no field a sweep reader treats as settled (no `verdicts` list in
+M56's pair vocabulary); `claim_scope` says the verdict is the untrusted enumeration's claim, consumed by
+`AdditiveRigid.lean` only as a hypothesis.
+
+**M3.4 Breakdowns, designed.** `rigid` without `--cap` on a stage above 300 points applies cap 2,000 and says so in
+the headline ("a capped verdict is never additively-rigid"). `--with-cheats FILE` with a fingerprint not the stage's
+refuses naming both (M56's pattern); the record then says `edges_used: unit (1,004) + cheats (446)` and that the
+family was filtered by admissibility on the cheat differences (automatic at prime k, not at 4). `extend --point`
+with no unit neighbour in the stage refuses ("nothing to extend"). `kill-census` with a pool in another frame refuses
+naming both frames. Silent non-errors forbidden structurally: a swap that is improper is an assertion (catastrophe),
+never a skipped row; a BFS vertex set containing a third colour is an assertion; the `additively-rigid` verdict is
+computed from `complete ∧ all_additive ∧ N ≥ 1`, so a cap cannot produce it.
+
+**M3.5 The kernel surface.** Names: `IsAdditive` (Fischer's word; the docstring says "coset colouring along q" and
+why the iff is the content) — no second name; `AdditivelyRigid`; `IsAdditive.apply_eq` (dot notation on the
+hypothesis); `isAdditive_of_addMonoidHom` (the `of_` convention); **`isAdditive_additiveColoring`** (new, one line:
+M56's `additiveColoring Γ φ h` with q = id IS additive here — the next lemma a consumer wants, stated in the
+vocabulary for free); `forces_of_additivelyRigid` (what `exact?` returns for a `Forces` goal with rigidity in
+context); `add_one_le_chromaticNumber_unitDistance_of_additivelyRigid` beside OneDefect's `_unitDistance_of_forces`
+(k-generic family) and **`six_le_chromaticNumber_plane_of_additivelyRigid`** beside HexShell's
+`six_le_chromaticNumber_plane_of_forced_pairs` (the χ ≥ 6 target family — renamed from `_unitDistance_`), with the
+spec `three_le_chromaticNumber_plane_of_pathGraph`. No simp lemma: the definition is sealed and the API is the three
+lemmas. The `Fin 2` helper is not in Mathlib (grepped) and is used once: inlined as a `have` inside
+`pathGraph_three_coloring_two`. Docstrings: `forces_of_additivelyRigid` and the two corollaries say the rigidity
+hypothesis is an untrusted enumeration's claim, never kernel-certified, and that the certificate of any
+consequence is a refutation; each red's docstring names the clause it pins (`cycleGraph 6`: `k • v ∈ H` and ←;
+`pathGraph 3` at three colours: →). Placement: `Proofs.lean` right after `Additive`; `scripts/Axioms.lean` an M57
+block: the six theorems, `isAdditive_additiveColoring`, `pathGraph_additivelyRigid`,
+`three_le_chromaticNumber_plane_of_pathGraph`, and the two reds.
+
+**M3.6 `data/m57/README.md` — what a reader may conclude.** One table (artifact · stage · subcommand · derivation
+instantiated · licence). The licence paragraph: *`additively-rigid` is the untrusted enumeration's claim (a SAT
+blocking loop that ended UNSAT) — it licenses nothing by itself; the kernel consumes it as a hypothesis. `not-rigid`
+carries a verified proper non-additive colouring — a CERTIFICATE that the stage is not rigid. γ is exact when the
+family is complete and a lower bound when it is a sample; every `kempe-open` row carries a verified swapped
+colouring, so γ > 0 with a verified swap is a certificate of non-rigidity, and γ = 0 proves nothing about rigidity.
+`capped` licenses nothing. A `vacuous` richness row licenses "no additive k-colouring" only when `obstruct` fired
+(exact); a SAT UNSAT is the solver's claim.*
+
+**M3.7 The report to Kooshi at the close (house format; the findings so far, each with population and caveat).**
+(a) *The four-colour bridging bed is empty beyond the rhombus.* The Moser spindle has 16 four-colourings up to
+palette, 12 of them additive and 4 not (P1 refuted, S6, brute force over 4⁷); K₄ − e is the only additively 4-rigid
+chunk found; the hexagonal ball of radius 1 already has 11 four-colourings with 4 additive. Caveat: rigidity at k = χ
+with few colourings was the hope; even there a loose vertex appears at once. (b) *Exoo–Ismailescu's G is rigid by
+vertex tightness, and H's non-additivity is exactly its attachment.* Over G's 18 additive 5-colourings not one vertex
+is loose; H's seven attached vertices carry 12 loose incidences = its 12 defect-1 colourings, and its 5 defect-2
+colourings are two single-vertex recolourings each. Caveat: measured on the {1, 2}-graph (cheats as edges); the unit
+part alone is loose at 102 of 214 vertices — the cheats' job IS tightening. (c) *The design principle, restated:*
+target Kempe-closure of the additive family (γ = 0: every {a, b}-subgraph of every admissible hom connected), a
+solver-free lattice census; rigidity is its consequence when no other reconfiguration component exists; derived: on
+three-family K-material the residue colourings' {a, b}-subgraphs lie in rank-3 slices, so γ > 0 always at four
+colours. (d) *The reduction theorem is in the kernel* (eight leaves probed green; two reds pin its clauses; the path at
+two colours is its non-vacuous model — χ(ℝ²) ≥ 3 from the unit path). Caveat: the theorem consumes rigidity as a
+hypothesis; it certifies nothing about any chunk by itself. Decisions the close presents: (1) FS-2's seed half is
+answered by B2 (re-rank it on the K-fabric half alone); (2) B4's design attempt runs only if the kill census refutes
+P5′ (default: census yes, attempt no); (3) whether the richness dial's per-field ceiling changes FS-3's thickening
+plan (know, do not decide).
+
+| decision (experience pass) | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| hom-level word | `kempe-closed` / `kempe-open` | `kempe-stable` (the stub) | the concept is closure; no prefix collision with the pair word `kempe-forced` | high |
+| the gauge printed from a sample | `γ ≥ N (family incomplete)` | a number | a lower bound printed as a value is a lie a summary will repeat (G21) | high |
+| the gauge under a changing family | γ̄ = γ/\|family\| beside γ | γ alone | a point that kills homs lowers γ for the wrong reason | high |
+| the numeral corollary's name | `six_le_chromaticNumber_plane_of_additivelyRigid` | `…_unitDistance_…` | beside HexShell's `six_le_chromaticNumber_plane_of_forced_pairs`, the χ ≥ 6 family | high |
+| the `Fin 2` helper | inlined `have` at its one use | a namespaced lemma | one use; a `HadwigerNelson.Fin.…` name misleads | high |
+| `isAdditive_additiveColoring` | added (one line) | omitted | the next lemma a consumer wants, free in the vocabulary; ties M56's object to M57's definition | high |
