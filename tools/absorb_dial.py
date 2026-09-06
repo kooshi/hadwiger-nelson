@@ -492,6 +492,12 @@ def cmd_cross2(a):
     t0 = time.time()
     arr = np.array([[float(z.real), float(z.imag)] for z in Z]); tr = cKDTree(arr)
     pairs = [(min(i, j), max(i, j)) for i, j in tr.query_pairs(2 - 1e-9) if (min(i, j), max(i, j)) not in eset and abs(Z[i] - Z[j]) < 2]
+    mc = rec.get("core_size", nW)
+    side = lambda i: 0 if i < mc else (1 if i < nW else 2)          # core / copy / pool
+    if getattr(a, "cross_only", False):
+        before = len(pairs)
+        pairs = [(i, j) for i, j in pairs if not (side(i) == side(j) and side(i) < 2)]
+        print(f"[cross2] --cross-only: {len(pairs)} of {before} pairs kept (both endpoints on one K-coset side dropped: their glue points are that side's own partner lattice)", flush=True)
     print(f"[cross2] W ∪ P₁: {n1} points ({nW} in W, {n1 - nW} pool), {len(E1)} unit edges (near-misses rejected {near1}); non-adjacent pairs at d < 2: {len(pairs)} [{time.time()-t0:.0f}s]", flush=True)
     chunks = [pairs[i::a.workers] for i in range(a.workers)]
     results = []
@@ -529,14 +535,15 @@ def cmd_cross2(a):
           f"grown stage W ∪ P₁ ∪ P₂: {n2} points, {len(E2)} unit edges (near-misses rejected {near2}); total-degree profile of the {len(pool_ids)} pool points {dict(sorted(prof.items()))} [{time.time()-t0:.0f}s]", flush=True)
     DATA.mkdir(parents=True, exist_ok=True)
     name = rec["stage"]["name"]
-    out = Path(a.out) if a.out else DATA / f"cross-lattice-depth2-{name}.json"
+    tag = "-crossonly" if getattr(a, "cross_only", False) else ""
+    out = Path(a.out) if a.out else DATA / f"cross-lattice-depth2{tag}-{name}.json"
     out.write_text(json.dumps(dict(kind="cross-lattice-depth2", exact=a.exact, cross=a.cross, m=m, W_points=nW, P1_points=n1 - nW, pairs_tested=len(pairs),
                                    infield_pairs=len(infield), P2_points=len(P2), coincident=coincide, fusions=fus, grown_points=n2, grown_edges=len(E2),
                                    near_rejected=[near1, near2], pool_degree_profile=prof, pool=[dict(x=e["x"], y=e["y"], parents=e["parents"]) for e in P2],
                                    seconds=round(time.time() - t0, 1),
                                    claim_scope=f"every non-adjacent pair of W ∪ P₁ at distance < 2 (40-digit screen) tested exactly for r = 4/d² − 1 square in K(√{m}); glue points exact and re-verified at unit distance from both parents; all unit edges of the grown stage confirmed exactly")))
-    stage_out = DATA / f"W-plus-cross-depth2.json"
-    stage_out.write_text(json.dumps(dict(name="W-plus-cross-depth2", n=n2, edges=E2, meta=dict(exact=a.exact, cross=a.cross, cross2=str(out), W_points=nW, P1_points=n1 - nW, P2_points=len(P2)),
+    stage_out = DATA / f"W-plus-cross-depth2{tag}.json"
+    stage_out.write_text(json.dumps(dict(name=f"W-plus-cross-depth2{tag}", n=n2, edges=E2, meta=dict(exact=a.exact, cross=a.cross, cross2=str(out), W_points=nW, P1_points=n1 - nW, P2_points=len(P2)),
                                          points=[[mp.nstr(z.real, 60), mp.nstr(z.imag, 60)] for z in Z2])))
     print(f"[cross2] wrote {out} and the grown stage {stage_out}")
 

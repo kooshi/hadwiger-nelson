@@ -1192,6 +1192,7 @@ def main():
     p = sub.add_parser("cross-lattice"); p.add_argument("--exact", required=True); p.add_argument("--workers", type=int, default=8)
     p.add_argument("--same-side", action="store_true"); p.add_argument("--out")
     p.add_argument("--depth", type=int, default=1); p.add_argument("--cross", help="depth 2: the depth-one census to grow from")
+    p.add_argument("--cross-only", action="store_true", help="depth 2: test only pairs not both on one K-coset side")
     p = sub.add_parser("planted-sweep"); stage_args(p); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     p = sub.add_parser("two-spindle"); p.add_argument("--witness", required=True); p.add_argument("--pair2", required=True)
     p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--full", action="store_true"); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")

@@ -423,3 +423,80 @@ solver run was needed for the exact value; the ladder (B2, in flight) is its con
 derivation before measurement. The 0 / 0 five-colour readings of M54 §R7 are instances of
 `extends_of_hubs` for every pair inside the base; only pairs with a copy-side endpoint were ever a
 measurement.
+
+## §R2. B4 — the single-centre flower (2026-09-06 ~06:10–06:30Z)
+
+Petals R^k(core₁ − x), k = ±1, …, ±K, about x = 35 on the 588-core (`multi-spindle --flower 35,1859
+--powers …`; rotations ρ^k at 60 digits, near-misses rejected 6 / 18).
+
+| K | object | cross chords | `absorb` at five colours | the centre's deletion ask at four colours |
+|---|---|---|---|---|
+| 1 | 1,762 points, 8,660 edges (fp `6ed9b47bec37930f`) | U–R 6, U–R⁻¹ 6, R–R⁻¹ 0 | base 588 extends by `extends_of_hubs` (one hub; 5 hub chords + 1 spindle chord per petal; piece ∪ hub 4-colourable); D5: ν ≤ 2 | **flower − x is 4-colourable** (verified colouring, 1 ask): x ∈ C, ν = 1 |
+| 2 | 2,936 points, 14,434 edges (fp `eba0475e9adf5fef`) | U–R^{±1} 6, U–R^{±2} 5, **R–R² 1, R⁻¹–R⁻² 1** (the ring chords R(y)–R²(y)), all else 0 | **NOT absorbed by theorem**: the petal union plus the hub REFUSES four colours (69 s; direct check: R ∪ R² ∪ {x} is a rotated copy of W — 1,175 vertices, 5,773 edges, UNSAT) — `hcol` fails; hdeg/hind/hcomp hold (non-hub base chords 2, independent) | **flower − x is 4-colourable** (verified, 1 ask): x ∈ C, ν = 1; by `CriticalSet` a forced-equal pair must lie inside N(x) (300 candidate pairs), a virtual edge must touch N(x) (72,760) — the sweep is the reading (P-M55-9) |
+| 3 | 4,110 points, 20,208 edges (fp `9c835c297a4ced54`) | U–R^{±1} 6, U–R^{±2} 5, U–R^{±3} 5; R^k–R^{k+1} exactly 1 for each consecutive pair (four ring chords); all else 0; 30 near-misses rejected | **NOT absorbed by theorem** (`hcol` fails: the petal union plus hub is 5-chromatic — every consecutive petal pair with the hub is a rotated W; direct check UNSAT on all four such pairs and on the union) | **flower − x is 4-colourable** (verified, 1 ask): x ∈ C, ν = 1; candidates confined to N(x) as at K = 2 — the sweep is the reading (P-M55-9) |
+
+**Incident, recorded.** My first reading of the K = 2 and K = 3 verdicts came from a log line I had cut to
+300 characters — the `hcol` field and the VERDICT sat beyond the cut — and I wrote both rows as "absorbed".
+The recorded JSON said UNSAT / not absorbed all along, and the derivation (§3 D6's own observation that
+R ∪ R² with the fused centre and the ring chord is W rotated) says the same; a direct 4-colour ask on every
+consecutive petal pair and on the petal union confirmed it before the rows were corrected. Rule kept: never
+read a verdict off a truncated headline — the tool's headline carries it whole, the cut was mine.
+
+**Reading.** P-M55-4 MET at K = 1, 2 and 3: the single-centre genre has a critical centre
+exactly as the palette-permutation argument (§3 D6) predicts, and the conic coupling between consecutive
+petals is a single ring chord — de Grey's genre with our angle is a star folded onto one point. But the
+K ≥ 2 flowers are the milestone's first objects the theorem does NOT decide: the petal union plus hub is
+itself 5-chromatic (consecutive petals with the fused centre and their ring chord form a rotated W), so
+`extends_of_hubs` cannot absorb it, and with C = {x} the localization theorem confines any compulsion to
+the centre's unit neighbourhood — a forced-equal pair inside N(x), a virtual edge touching it. **Registered
+before the run — P-M55-9: the exhaustive five-colour sweeps of the K = 2 and K = 3 flowers read 0 / 0,
+complete** (basis: colour x with the spare colour; every petal and the base are then 4-colourable pieces
+joined by single ring and spindle chords, a chain of pieces coloured by palette permutations, so the
+colouring space with x spare is huge; colourings with x not spare add more). Falsifier: any hit inside
+N(x) — the jackpot protocol. Two
+sharpenings the census supplies: (i) the "conic of chords" between a copy and its base is, on this
+fabric, the centre's unit neighbourhood plus the spindle chord and nothing else — 5 or 6 hub chords
+and one non-hub chord per petal — so at K = 1 D2 applies with the bound ν ≤ 2; (ii) with x critical
+the flower is worse than the two-centre star (ν = 1 against ν = 2) at every K. The 5-core drops 60 / 100
+vertices (the petals' outer rims). The `critical --only` run asked ONE vertex; the "2,935 non-critical"
+in its record is the tool's framing for a caller-supplied theorem and is NOT derived here — only the
+centre's verdict is a measurement.
+
+## §R3. B3 — the third pair and the three-spindle star (2026-09-06 ~06:50Z)
+
+| quantity | measured |
+|---|---|
+| pair 3 = (1205, 1442), the forced pair at 8/3 whose midpoint is farthest (1.98) from the two existing spindles' midpoints among the 163 with endpoints outside F₁ ∪ F₂ | forcing census 1,951 asks, 24 workers, 592 s: **F₃ = {29, 1753, 1899, 1950} ∪ {1205, 1442}**, four of the six inside the 588-core |
+| F₃ ∩ (F₁ ∪ F₂) | **{29, 1753}** — NOT disjoint: two of pair 1's five indispensable helpers are pair 3's too (P-M55-5's disjointness half MISSED on the first pair tried; the derivation then bounds C by F₁ ∩ F₃, two vertices) |
+| star₃ = U ∪ R₁(U − x₁) ∪ R₂(U − x₂) ∪ R₃(U − x₃) (`multi-spindle --pairs … --full`) | **7,809 points, 55,187 unit edges**; cross chords U–R₁ 8, U–R₂ 11, U–R₃ 11, copy–copy 0; 2 near-misses rejected; refuses four colours, admits five (fp `ffb0ff162cd4c392`) |
+| critical set | **∅**: the two candidates 29 and 1753 asked directly at four colours (3,000-s wall) — both NON-critical; every other vertex non-critical by the §R3-M54 derivation (a base vertex is critical only if forcing-critical for every pair; no copy vertex is) |
+| `absorb` at five colours | ABSORBED by `extends_of_hubs`: every piece vertex has ≤ 1 base neighbour ({0: 5,826, 1: 30}); 0 piece–piece edges; the three non-hub chords are the three spindle chords, pairwise non-adjacent; piece ∪ hubs 4-colourable (verified) — **no compulsion at five colours among U's 1,953 vertices; D5: ν ≤ 3** |
+| 5-core | 7,805 of 7,809 |
+
+**Reading.** A third 5-chromatic unit-distance graph with no critical vertex, reached by two censuses
+and two asks; ν ∈ [2, 3] (C = ∅ below, D5 above — the ladder decides, B2). The overlap F₁ ∩ F₃ =
+{29, 1753} says the fabric's forcings share helpers: 29 and 1753 are indispensable to two of the three
+pairs tried, so "generators = pairs with disjoint forcing-critical sets" is a filter that will reject
+some pairs, and the derivation's fallback (ask the intersection) costs one deletion ask per shared
+vertex — here two asks of a few minutes each on 7,809 points.
+
+## §R4. B5 — the F₂₄₇ cross lattice one depth further (2026-09-06 ~06:40–07:10Z; the criticality census pending)
+
+Two censuses over W ∪ P₁ (1,238 points: the witness plus its 63-point depth-one pool), every non-adjacent
+pair at distance < 2 tested exactly in F₂₄₇ (`cross-lattice --depth 2`, 20 and 12 workers):
+
+| census | pairs tested | in-field glue | new points P₂ | fusions (≥ 3 parents) | grown stage | total-degree profile of the pool P₁ ∪ P₂ |
+|---|---|---|---|---|---|---|
+| all pairs | 649,158 | 45,861 (**7.07 %**) | 9,303 (55,932 glue points coincide with existing points) | 4,023 | 10,541 points, 69,910 edges; 5-core 8,462 (2,079 peeled in 5 rounds; max degree 53) | **{2: 358, 3: 530, 4: 631, ≥ 5: 7,847}** — 84 % at degree ≥ 5 |
+| `--cross-only` (pairs not both on one K-coset side — the plan's intended object; a same-side pair's glue points are that coset's own partner lattice, M50's material) | 345,704 | 2,243 (**0.65 %**; depth one read 0.04 %) | 1,195 (2,468 coincide) | 309 | 2,433 points, 10,632 edges | **{2: 59, 3: 155, 4: 241, ≥ 5: 803}** — 64 % at degree ≥ 5 |
+
+**Reading.** P-M55-6 MISSED in both its sparsity half (0.65 % cross-only against < 0.2 % registered; the
+all-pairs 7 % is the K-partner lattice showing through and was never the question) and its degree half
+(64 % of the cross-only pool at degree ≥ 5 against ≥ 90 % at ≤ 4 registered) — **the F₂₄₇ thickening is
+live in the sense the failure clause named**: depth-two pool points mostly clear the greedy-absorption
+floor (D3 peels only the degree ≤ 4 minority), so they are visible at five colours. What remains for
+the dial is the first rung: the criticality census of the cross-only grown stage on W's own 1,175
+vertices (a pool point can never be critical — deleting it leaves the 5-chromatic W intact), which
+says whether the thickening removes W's critical set. Also measured: the depth-two pool is again
+lattice-like (309 fusions among 1,195 points — a quarter of the points are reached from two or more
+parent pairs).
