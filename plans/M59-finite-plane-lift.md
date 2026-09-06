@@ -695,7 +695,8 @@ kernel form of the rigid dichotomy (hand derivation, §S1).
   lift's prime — the upper bound and the lower bound use different primes of the same field.
 * **The finite planes' 6-critical cores are for autopsy** (FS-13), not for lifting; and CDCL does not see a spectral refusal
   at 17,161 vertices in an hour.
-* **The corrected scan's positive control on the 1581 (`build/m59/hubs-degrey-recover.log`):** with vertex 0 (degree 60)
-  deleted, 15,597 candidates, 3,740 passers (3,739 + 1), and the deleted residue recovered with support 60 of its 66
-  residue-neighbours — the six false ones excluded. The scan is sound on the dense object; the strict form's zero was the
-  instrument, not the 1581.
+* **The corrected scan's positive control on the 1581 (`build/m59/hubs-degrey-recover.log`):** deleting vertex 0 (degree 60),
+  vertex 100 (degree 12) and vertex 700 (degree 8) in turn, the scan recovers each deleted residue as a passer with support
+  exactly its degree — 60 of 66, 12 of 16, 8 of 17 residue-neighbours, the false ones excluded — among 3,740 / 3,737 / 3,734
+  passers (hubs whose third neighbour was the deleted vertex drop out). The scan is sound on the dense object; the strict
+  form's zero was the instrument, not the 1581.
