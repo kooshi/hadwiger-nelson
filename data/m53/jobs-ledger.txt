@@ -18,3 +18,5 @@
 2026-09-06T00:43:04Z M54 forcing census of U for (35,1859) (24 workers) log build/m54/forcing-census.log
 2026-09-06T00:44:09Z M54 forcing census RELAUNCHED (the first run lacked the __main__ guard under forkserver — a code error, not a crash) log build/m54/forcing-census-2.log
 2026-09-06T00:53:38Z M54 forcing census of U for pair 2 (813,1939), 24 workers, log build/m54/forcing-census-813-1939.log
+2026-09-06T01:11:56Z M54 control census on the 3-fabric union's 34 load-bearing vertices (24 workers) log build/m54/critical-union-full.log
+2026-09-06T01:12:10Z M54 the exhaustive five-colour sweep on the 3-fabric union (5,857 pts, C = ∅), wall 3600 s/call, checkpointed models build/m54/sweep-models-*.txt, log build/m54/sweep-union-full.log

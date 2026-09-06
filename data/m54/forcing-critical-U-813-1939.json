@@ -1,0 +1,24 @@
+{
+ "kind": "forcing-critical-set",
+ "object": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+ "pair": [
+  813,
+  1939
+ ],
+ "n": 1953,
+ "F_live_index": [
+  400,
+  480,
+  579,
+  785,
+  1911
+ ],
+ "F_labels": [
+  428,
+  508,
+  607,
+  813,
+  1939
+ ],
+ "claim_scope": "one forcing ask (U \u2212 v forces the pair at four colours?) per vertex; F = the refusals; the pair itself included"
+}

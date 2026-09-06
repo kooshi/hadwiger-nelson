@@ -1,0 +1,23 @@
+{
+ "kind": "nu",
+ "stage": {
+  "name": "EI-seed-12graph",
+  "n": 214,
+  "edges": 1450,
+  "fingerprint": "2d32649c20cc9b32",
+  "source": "tools/batchkill.Obj() unit \u222a cheats",
+  "unit_edges": 1004,
+  "cheats": 446,
+  "forced_pair": [
+   205,
+   206
+  ]
+ },
+ "k": 5,
+ "wall": 1800.0,
+ "nu": null,
+ "status": "unknown",
+ "upper_bound": 40,
+ "seconds": 1801.6,
+ "claim_scope": "RC2 (pysat) minimum of the spare class over proper k-colourings; 'optimal' only when RC2 finished within the wall; the optimum's colouring verified proper"
+}

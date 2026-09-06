@@ -1,0 +1,24 @@
+{
+ "kind": "nu",
+ "stage": {
+  "name": "W-core-8over3",
+  "n": 1175,
+  "edges": 5773,
+  "fingerprint": "2db5071070c6d5bc",
+  "source": "witness data/m53/forced-spindle-core-8over3.json at 60 digits",
+  "object": "S29-depth2r-it2v2-depth1-it2v2-depth1-vdel28-it2v2-depth1",
+  "pair": [
+   35,
+   1859
+  ],
+  "distance_sq": "64/9",
+  "centre_index": 12
+ },
+ "k": 5,
+ "wall": 1800.0,
+ "nu": null,
+ "status": "unknown",
+ "upper_bound": 169,
+ "seconds": 1801.0,
+ "claim_scope": "RC2 (pysat) minimum of the spare class over proper k-colourings; 'optimal' only when RC2 finished within the wall; the optimum's colouring verified proper"
+}

@@ -508,3 +508,27 @@ is a 5-chromatic unit-distance graph with NO critical vertex, the first such obj
 would hold besides the {1, 2}-seed, and on it the theorem admits every pair: the exhaustive
 five-colour sweep is then the only instrument (D2 predicts it reads zero). Pair 2's forcing census is
 launched; the two-core union of decision B3 continues in parallel as the smaller sibling.
+
+## §R4. The three-fabric union: a 5-chromatic unit-distance graph with no critical vertex (2026-09-06 ~03:15Z; the sweep in flight)
+
+| quantity | measured |
+|---|---|
+| F₂, the forcing-critical set of U for pair 2 = (813, 1939) (1,951 asks, 24 workers, 636 s) | **5 vertices: {428, 508, 607} ∪ {813, 1939}, none in the 588-core** |
+| F₁ ∩ F₂ | **∅** |
+| the union U ∪ R₁(U) ∪ R₂(U) (`two-spindle --full`, 60 digits, float prescreen) | **5,857 points** (1,953 + 1,952 + 1,952, no fusion — each copy omits its centre), **41,390 unit edges**; cross chords U–R₁ 8, U–R₂ 11, **R₁–R₂ 0** (copies never touch: G12/M52 again); 2 near-misses rejected; refuses four colours, admits five |
+| critical set | **∅ by the §R3 derivation** (a vertex of U is critical only if forcing-critical for BOTH pairs; no copy vertex is) — the control census on the 34 load-bearing vertices (F₁ ∪ F₂ and their copies) is running; every one is predicted non-critical |
+| candidates at five colours | every pair (C = ∅ admits everything): the exhaustive `Rigidity` sweep at five colours is the reading, launched with a 3,600-s wall per call and per-model checkpoints |
+
+**What this object is.** The first 5-chromatic unit-distance graph in this programme's hands whose
+5-chromaticity survives EVERY single vertex deletion (the seed has that property only as a {1, 2}-graph).
+It was reached by derivation and two cheap censuses (≈ 20 minutes of forcing asks), not by search: the
+localization theorem said what the object must look like (no vertex whose removal drops χ), the forcing-
+critical set said how to get it (two spindles whose indispensable vertices are disjoint), and the full
+fabric's redundancy (7 and 5 indispensable vertices of 1,953) supplied it. It is also, by the same
+derivation, the natural generator of such objects: every pair of the 163 forced pairs with disjoint
+forcing-critical sets gives one.
+
+**Prediction for the sweep (registered here, before the first model):** 0 forced-equal pairs and 0 virtual
+edges (D2: each copy is 4-colourable K-fabric attached by ≤ 11 chords, each chord endpoint of outside-
+degree one, so every 5-colouring of the base extends over both copies; and the base U is 4-colourable
+with a spare colour). Falsifier: any confirmed compulsion — the jackpot clause.

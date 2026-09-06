@@ -862,7 +862,23 @@ def cmd_sweep(a):
     st = load_stage(a)
     t0 = time.time()
     print(f"[sweep] {st.label()} k={a.k}: the exhaustive Rigidity sweep, wall {a.wall}s per call", flush=True)
-    R = rigidity.Rigidity(st.n, st.edges, a.k, timeout=a.wall); R.run()
+    R = rigidity.Rigidity(st.n, st.edges, a.k, timeout=a.wall)
+    # checkpoint: every observed model is appended to <ckpt>; on restart they are replayed before any query
+    BUILD.mkdir(parents=True, exist_ok=True)
+    ckpt = BUILD / f"sweep-models-{st.name}-k{a.k}.txt"
+    if ckpt.exists():
+        for line in ckpt.read_text().splitlines():
+            if line.strip():
+                R.observe([int(c) for c in line.strip()])
+        print(f"[sweep] replayed {len(R.models)} checkpointed models from {ckpt}", flush=True)
+    _obs = R.observe
+    def observe_ckpt(colours):
+        _obs(colours)
+        with ckpt.open("a") as fh:
+            fh.write("".join(str(c) for c in colours) + "\n")
+        print(f"[sweep] model {len(R.models)}: eq-candidates {len(R.eq_candidates())} [{time.time()-t0:.0f}s]", flush=True)
+    R.observe = observe_ckpt
+    R.run()
     rep = rigidity.report(R, st.label())
     out = Path(a.out) if a.out else DATA / f"sweep-{st.name}.json"
     DATA.mkdir(parents=True, exist_ok=True)
@@ -977,7 +993,8 @@ def build_multi_spindle(label: str, spindles, dps: int = 60, log=print):
                 sides=sides, cross_chords=cross, near_misses=near, dps=dps)
     log(f"[multi] {label}: {n} points ({len(base)} in U, {n - len(base)} in {len(spindles)} copies, {fused} fused), {len(unit)} unit edges, "
         f"cross chords {cross}, near-misses rejected {len(near)}", flush=True)
-    st = Stage(f"spindles-{'-'.join(f'{p[0]}_{p[1]}' for p, _, _ in spindles)}", n, unit, f"multi-spindle union on {label}", meta=info, pts=upts)
+    st = Stage(f"spindles-{'-'.join(f'{p[0]}_{p[1]}' for p, _, _ in spindles)}" + ("-full" if len(base) == len(ex) - len(obj.deleted) else ""), n, unit,
+               f"multi-spindle union on {label}", meta=info, pts=upts)
     return st, unames, info
 
 
@@ -987,10 +1004,16 @@ def cmd_two_spindle(a):
     q1 = Fr(W["distance_sq"]) if "distance_sq" in W else Fr(W["distance"]) ** 2
     pair2 = tuple(int(t) for t in a.pair2.split(","))
     BUILD.mkdir(parents=True, exist_ok=True)
-    ckpt = BUILD / f"shrink-{pair2[0]}-{pair2[1]}.json"
-    core2, tried, complete = shrink_core(label, pair2, ckpt, wall_total=a.shrink_wall)
-    if not complete:
-        print(f"[two-spindle] the shrink hit its wall after {tried} tried vertices ({len(core2)} kept); rerun to resume"); sys.exit(2)
+    if a.full:
+        import batchkill as BK
+        obj, _ = BK.load_object(label)
+        core1 = core2 = sorted(i for i in range(obj.n) if i not in obj.deleted)
+        print(f"[two-spindle] --full: both spindles on the whole {len(core1)}-point fabric (no shrink); C ⊆ F₁ ∩ F₂ by §R3", flush=True)
+    else:
+        ckpt = BUILD / f"shrink-{pair2[0]}-{pair2[1]}.json"
+        core2, tried, complete = shrink_core(label, pair2, ckpt, wall_total=a.shrink_wall)
+        if not complete:
+            print(f"[two-spindle] the shrink hit its wall after {tried} tried vertices ({len(core2)} kept); rerun to resume"); sys.exit(2)
     ov = sorted(set(core1) & set(core2))
     print(f"[two-spindle] core1 {len(core1)}, core2 {len(core2)}, overlap {len(ov)} ({100*len(ov)/len(core2):.1f} % of core2)", flush=True)
     st, unames, info = build_multi_spindle(label, [(pair1, q1, core1), (pair2, Fr(a.q2), core2)], a.dps)
@@ -1160,7 +1183,7 @@ def main():
     p.add_argument("--same-side", action="store_true"); p.add_argument("--out")
     p = sub.add_parser("planted-sweep"); stage_args(p); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
     p = sub.add_parser("two-spindle"); p.add_argument("--witness", required=True); p.add_argument("--pair2", required=True)
-    p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
+    p.add_argument("--q2", default="64/9"); p.add_argument("--shrink-wall", type=float, default=None); p.add_argument("--full", action="store_true"); p.add_argument("--dps", type=int, default=60); p.add_argument("--out")
     p = sub.add_parser("grow"); p.add_argument("--exact", required=True); p.add_argument("--cross", required=True)
     p.add_argument("--strong", type=int, default=0, help="keep only pool points with at least this many parents"); p.add_argument("--out")
     p = sub.add_parser("sweep"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
