@@ -329,3 +329,61 @@ finite planes still offer the hunt.
 | the whole-plane refutation with the external `cadical` binary under `timeout` | pysat (M58's wall did not interrupt) | the M58 incident | high |
 | sphere-shrink before vertex-shrink | vertex ddmin from the whole plane | 130 asks per pass against 17,161, and a torus-symmetric object is the finite plane's analogue of the rot6 cores (M40/M42), autopsy-friendly | medium — if the sphere-minimal object is nearly the whole plane, vertex ddmin runs anyway |
 | phase B (hubs) inside this milestone | a separate stub | it is D2 (a) applied, it reuses `local`, and it is the constructive reading the programme ranks first | medium |
+
+## §M1. Domain-modeling pass (2026-09-06; fresh Skill invocation)
+
+**The true shape found: the level-p² obstruction is first-order rigidity in a ring with a square-zero element, and
+the Hensel tower is that one theorem at every level.** The skeleton had stated the obstruction over ℤ with
+componentwise divisibility by p and p², a stress as a separate function `V × V → ℤ` with a mod-p predicate, and the
+positions as integer lifts. Three pieces of incidental structure were in it:
+
+1. **The prime, the integers, and the divisibility.** The proof of "a lift mod p² forces the stress pairing to vanish"
+   uses exactly two facts — `π² = 0` and `π • netStress = 0` at every vertex — and never that π is a prime, that the ring is
+   ℤ/p², or that the residue class is all of x₀ + (p). The intrinsic statement is over ANY commutative ring R with an
+   element π of square zero: a deformation `x = x₀ + π • y` of a stressed framework along which every edge has quadrance 1
+   forces `Σ λ_e (quad (x₀ e) − 1) = 0`. Instantiated at `R = ZMod (p²)`, `π = p` it is the level-p² obstruction (the residue
+   class of x₀ IS `x₀ + p • y`); at `R = ZMod (p^(k+1))`, `π = p^k` with x₀ a level-k solution it is the level-(k+1)
+   obstruction — the whole tower with no new statement (π² = p^{2k} = 0 for k ≥ 1; π • netStress = 0 is the same mod-p
+   stress condition at every level). This is classical first-order rigidity read in the dual numbers R[π]/π²; `PadicInt`
+   is not needed, because the certificate side reaches ZMod (p²) directly: `Q4.lift` with mod-p² roots and the M58 theorem
+   `drawing_adj`, which already holds over every ring. The ℤ × ℤ componentwise divisibility (two conditions) became the
+   parametrization `x₀ + π • y` (none), and `quadZ` became `quad` on `R × R` for any ring, with `quad_eq_one_of_adj` the
+   bridge to `unitQuadrance_adj`.
+2. **A stress lives with its edges.** A stressed framework is a list of weighted edges `List (V × V × R)`
+   (`StressedEdges`): the sums need an orientation and tolerate multiplicity, a list gives both, and the kernel instance
+   is one literal — the stress as a function on `V × V` was the wrong carrier for the theorem (which quantifies over
+   constraints) and for the instance (a table lookup on a product type). `Finset` was rejected on kernel cost (literal
+   insertion is quadratic in `decide`); the house shape is the certificate's own `List` with a fold. The `SimpleGraph` H
+   appears only on the χ side, where the covering is `H ≤ G.map f` with `Injective f` as a hypothesis (Mathlib's `map`
+   at this pin takes a plain function): the natural statement of "H sits inside the lift", and `Colorable.of_hom` on the
+   inverse map is its proof. `Nonempty V` is intrinsic — empty V with nonempty W makes H = ⊥ on W 1-chromatic above
+   χ(G) = 0 — and comes free from `0 < n` in the certificate form. No Fredholm alternative, no `Matrix`, no linear-map
+   kernel enters the kernel: only the ⟹ direction is load-bearing (an instance is a NEGATIVE), and it is one identity plus
+   a summation by parts along the edge list; the ⟺ (b ⊥ stresses ⟹ a mod-p² lift exists) is the instrument's completeness
+   statement and the Newton lift's business.
+3. **The drawing is natural in the ring** (`UDCert.drawing_map`: a ring hom applied coordinatewise to a drawing is the
+   drawing through the composite hom, by `map_mul`). This is the bridge between the two consumers, which live at different
+   levels: the χ-consumer at level p (`H ≤ (edgeGraph n c.edges).map (c.drawing φ hS u)` with `φ : S →+* ZMod p`) and
+   the obstruction consumer at level p² (a certificate drawn through `S →+* ZMod (p²)` agreeing with x₀ modulo p is a
+   deformation `x₀ + p • y`, by `ZMod.exists_smul_of_castHom_eq`). M58's "the plane is a functor of the coordinate ring"
+   extends to "the drawing is a natural transformation".
+
+**Seams checked.** Non-vacuity: the closed hex shell (a point and its six unit neighbours: 7 vertices, 12 edges, one
+self-stress) is a real configuration reducing at every p ≡ 11 (mod 12), so its pairing is zero — the model of the
+hypotheses, to be pinned at 11 once the theorems are proved. Adversarial member: the collinear triangle `0, (1,0), (2,0)`
+of UD(𝔽₃, 2) — pairwise unit mod 3, no real unit triangle reduces to it — with stress `(2, 2, −1)`: `IsStress 3` decides
+true and the pairing decides to `6 = −3 ≠ 0` in `ZMod 9` (three `decide`s in the skeleton, already green), so it has no lift
+even modulo 9. Unsampled members: a loop `(v, v, λ)` makes the unit hypothesis false (quad 0 = 1) and the theorem vacuous;
+an empty list has pairing 0; `p = 0` (ZMod 0 = ℤ, π = 0) reduces the theorem to "unit edges at x₀ give pairing 0", true;
+`p = 1` collapses everything — the theorem needs no positivity or primality anywhere. A "stress" with weights all in (π)
+pairs to zero trivially, so an informative instance has a weight outside (π) — the theorem does not need to say so.
+
+**Next-lemma test.** "The 1581 at level 131² is a deformation of its residue framework" states in the vocabulary
+(`Q4.lift` with roots mod 131², `drawing_adj` at `R = ZMod (131²)`, `drawing_map` to level 131); "the merged image of the
+1581 is obstructed" states (a `StressedEdges` literal over `ZMod (131²)`, one `decide`); "the level-p³ obstruction of a
+core passing level p²" states with π = p² over ZMod (p³) and x₀ the level-p² solution. The finite plane's geometry of
+§S2 (triangles iff p ≡ 11 mod 12; the spindle iff p usable for K; sphere chords iff the Heron quantity is a square) stays
+derived-and-measured this milestone: its kernel form wants 𝔽_p(i) as the norm-one group, a module of its own; two `decide`
+pins of ω at 11 and 19 are the honest kernel trace and go in the instance module. Kernel-cost note for the obligation
+pass: `netStress` as a selector sum over the list is O(|V|·|L|) in `decide` (~10⁶–10⁷ steps on a thousand-vertex core —
+minutes); an accumulate-form evaluator with a soundness lemma (the M04 pattern) is the fallback if the instance balks.
