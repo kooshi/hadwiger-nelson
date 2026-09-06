@@ -15,3 +15,6 @@
 2026-09-06T00:31:50Z M54 nu(W) wall 1800 log build/m54/nu-W.log
 2026-09-06T00:32:00Z M54 phase C two-spindle (shrink of pair 813,1939 then the union) log build/m54/two-spindle.log ckpt build/m54/shrink-813-1939.json
 2026-09-06T00:37:06Z M54 phase E1 critical census of W ∪ cross pool (1,238 pts, 20 workers) log build/m54/critical-Wcross.log
+2026-09-06T00:43:04Z M54 forcing census of U for (35,1859) (24 workers) log build/m54/forcing-census.log
+2026-09-06T00:44:09Z M54 forcing census RELAUNCHED (the first run lacked the __main__ guard under forkserver — a code error, not a crash) log build/m54/forcing-census-2.log
+2026-09-06T00:53:38Z M54 forcing census of U for pair 2 (813,1939), 24 workers, log build/m54/forcing-census-813-1939.log

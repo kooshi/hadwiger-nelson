@@ -87,12 +87,14 @@ def rebuild_witness(path: str, dps: int = 60):
     zx = ex[x0]
     pts = [ex[v] for v in core] + [zx + R * (ex[v] - zx) for v in core if v != x0]
     n = len(pts); tol = mp.mpf(10) ** -(dps - 15)
+    import numpy as np
+    from scipy.spatial import cKDTree
+    arr = np.array([[float(z.real), float(z.imag)] for z in pts])
     unit = []
-    for i in range(n):
-        pi = pts[i]
-        for j in range(i + 1, n):
-            if abs(abs(pi - pts[j]) - 1) < tol:
-                unit.append((i, j))
+    for i, j in cKDTree(arr).query_pairs(1 + 1e-6):
+        if abs(abs(pts[i] - pts[j]) - 1) < tol:
+            unit.append((min(i, j), max(i, j)))
+    unit.sort()
     assert n == W["union_points"] and len(unit) == W["union_edges"], \
         ("the rebuilt witness differs from the record", n, len(unit), W["union_points"], W["union_edges"])
     name = Path(path).stem.replace("forced-spindle-", "W-")
@@ -241,7 +243,8 @@ def critical_census(st: Stage, k: int, workers: int, wall: float | None, out: Pa
             if line.strip():
                 r = json.loads(line); done[r["v"]] = (r["verdict"], r["info"])
         log(f"[critical] resumed {len(done)} verdicts from {part}")
-    todo = [v for v in range(st.n) if v not in done]
+    only = getattr(critical_census, "only", None)
+    todo = [v for v in range(st.n) if v not in done and (only is None or v in only)]
     t0 = time.time()
     with part.open("a") as fh, ProcessPoolExecutor(max_workers=workers, initializer=_init_worker,
                                                  initargs=(st.n, st.edges, k, wall)) as ex:
@@ -258,6 +261,8 @@ def critical_census(st: Stage, k: int, workers: int, wall: float | None, out: Pa
     C = sorted(v for v, (vd, _) in done.items() if vd == "critical")
     U = sorted(v for v, (vd, _) in done.items() if vd == "unknown")
     NC = sorted(v for v, (vd, _) in done.items() if vd == "noncritical")
+    if only is not None:
+        NC += sorted(v for v in range(st.n) if v not in only and v not in done)   # non-critical by the caller's theorem
     return dict(critical=C, unknown=U, noncritical=NC,
                 colourings={v: done[v][1]["colouring"] for v in C},
                 seconds=round(time.time() - t0, 1))
@@ -313,6 +318,10 @@ def cmd_critical(a):
     out = Path(a.out) if a.out else DATA / f"critical-{st.name}.json"
     log = print
     log(f"[critical] {st.label()}: k = {a.k}, {a.workers} workers, wall {a.wall}s per ask", flush=True)
+    if getattr(a, "only", None):
+        only = set(json.loads(Path(a.only).read_text())["vertices"])
+        critical_census.only = only
+        log(f"[critical] --only: {len(only)} vertices asked; the other {st.n - len(only)} recorded non-critical by the caller's theorem ({a.only})", flush=True)
     res = critical_census(st, a.k, a.workers, a.wall, out, log)
     C, U = res["critical"], res["unknown"]
     cands = candidate_sets(st, C, U)
@@ -322,7 +331,7 @@ def cmd_critical(a):
         f"{len(res['noncritical'])} non-critical), Δ = {delta}, |C|/n = {len(C)/st.n:.3f}; "
         f"forced-equal candidates {n_eq} (theorem: C ⊆ N(p) ∩ N(q)), virtual-edge candidates {n_ne} (C ⊆ N(p) ∪ N(q))"
         + ("" if not U else f" — {len(U)} unknowns treated as non-critical (conservative)"), flush=True)
-    rec = dict(kind="critical-census", stage=st.header(), k=a.k, wall=a.wall,
+    rec = dict(kind="critical-census", stage=st.header(), k=a.k, wall=a.wall, only=getattr(a, "only", None),
                critical=C, unknown=U, noncritical_count=len(res["noncritical"]), delta=delta,
                ratio=len(C) / st.n, common_neighbourhood=cands["common_neighbourhood"],
                candidates_eq_count=n_eq, candidates_ne_count=n_ne,
@@ -1142,6 +1151,7 @@ def main():
     sub.add_parser("self-test")
     p = sub.add_parser("critical"); stage_args(p); p.add_argument("--k", type=int, default=4); p.add_argument("--workers", type=int, default=8)
     p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")
+    p.add_argument("--only", help="a json {vertices: [...]}: ask only these; the rest are non-critical by the caller's theorem")
     p = sub.add_parser("ask"); p.add_argument("--critical", required=True); p.add_argument("--k", type=int, default=5)
     p.add_argument("--wall", type=float, default=600.0); p.add_argument("--max", type=int, default=20000); p.add_argument("--out")
     p = sub.add_parser("nu"); stage_args(p); p.add_argument("--k", type=int, default=5); p.add_argument("--wall", type=float, default=600.0); p.add_argument("--out")

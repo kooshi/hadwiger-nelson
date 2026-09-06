@@ -483,3 +483,28 @@ redundancy: it is a weak kill at three sites of 1,175. The redundancy dial reads
 UNMAKE a critical vertex; they can make one vertex non-critical only collectively, through their own
 edges (114 pool–pool edges, a 53-point component) — the "boundary-constrained non-4-colourable
 structure" the §Bʹ rule named as the only mechanism. It fired, at three sites.
+
+## §R3. The forcing-critical set, and the single-centre union on the full fabric (2026-09-06 ~02:30Z)
+
+**Derivation (two lines).** For W⁺ = U ∪ R(U) with the spindle chord y–R(y): if v ∈ U is not
+forcing-critical for (x, y) — U − v still forces x = y — then W⁺ − v ⊇ (U − v) ∪ R(U) refuses four
+colours (R(U) forces x = R(y) and the chord separates y from R(y)); likewise for R(v). So
+**C(W⁺) ⊆ F ∪ R(F)**, F the forcing-critical set of U for the pair — and F is one forcing ask per
+vertex ("does U − v still force?"), 3 s each, against a 60-s deletion ask on the union.
+
+| quantity | measured |
+|---|---|
+| F for (35, 1859) on the 1,953-point fabric U (1,951 asks, 24 workers, 449 s) | **7 vertices: {29, 79, 161, 199, 1753} ∪ {35, 1859}**, all inside the 588-core — the forcing survives every other single deletion |
+| C(W⁺) on the 13 vertices F ∪ R(F) (13 asks at four colours on 3,905 points, 900-s wall; the other 3,892 non-critical by the derivation) | **exactly 13 of 13 critical** (each certified by a verified colouring); \|C\|/n = 0.003, Δ = 33 |
+| candidates at five colours | forced-equal 0, virtual-edge 0 — the 13 critical vertices (the pair, its five indispensable helpers, and their copies) are dispersed across the fabric and no two unit neighbourhoods cover them |
+
+**Readings.** (i) The single-centre corollary of D1 sharpened: C ⊇ {x, y, R(y)} always, and any
+further critical vertex only helps the theorem refuse. (ii) The dial's quantity is not \|C\| but
+whether C is COVERABLE BY TWO UNIT CIRCLES (a forced-equal pair needs C inside the two glue points
+of the pair). (iii) **A route to C = ∅, derived**: on U ∪ R₁(U) ∪ R₂(U) with two spindles on the FULL
+fabric, a vertex of U is critical only if it is forcing-critical for BOTH pairs, and a copy vertex
+never is (the other spindle survives) — so C ⊆ F₁ ∩ F₂ exactly, with no ask. If F₁ ∩ F₂ = ∅ the union
+is a 5-chromatic unit-distance graph with NO critical vertex, the first such object this programme
+would hold besides the {1, 2}-seed, and on it the theorem admits every pair: the exhaustive
+five-colour sweep is then the only instrument (D2 predicts it reads zero). Pair 2's forcing census is
+launched; the two-core union of decision B3 continues in parallel as the smaller sibling.
