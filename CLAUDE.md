@@ -1088,8 +1088,10 @@ next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated 
 (WORKFLOW step 9). **Re-ranked at the finite-plane pivot, 2026-09-06, after the M57 close (Kooshi: stubs for all, then the
 field sieve):** rank 1 FS-7 the field sieve (`plans/STUB-field-sieve.md`, opening as M58 — which fields can host a 6-forcer;
 the exact wall-broken planes; the kernel certificate of χ(UD(𝔽₁₁,2)) = 5 through the certified Heule-510); rank 2 FS-6 on de
-Grey's field only; rank 3 FS-2 re-aimed with its scope note; rank 4 FS-8 the Haugland 7-adic check (new); FS-4, FS-5; FS-3
-DEMOTED (K(√247) is 5-sealed). The M57-close text follows for the record. **Re-ranked at the M57 close, 2026-09-06:** FS-1 is CLOSED as M57 (the principle is exact and, on every
+Grey's field only; rank 3 FS-2 re-aimed with its scope note; rank 4 FS-8 the Haugland 7-adic check (new); rank 5 FS-4; ranks
+6–7 FS-9 topological lower bounds and FS-10 Nullstellensatz certificates (the two rooms the analysis named, stubbed, not
+scheduled); FS-5; FS-3 DEMOTED (K(√247) is 5-sealed). FS-7 also carries the SHADOW sieve (an object's direction residues
+seal every graph built from its directions — the 1581's 55 of 66 at 131). The M57-close text follows for the record. **Re-ranked at the M57 close, 2026-09-06:** FS-1 is CLOSED as M57 (the principle is exact and, on every
 object we hold, without purchase); the table's top is now FS-2 the Kempe classes, re-aimed by G42 (b) at what carries
 forcing when the family does not — the 252-cheat object and K-fabric's 16-pair residue; FS-3 thickened material, with
 the additive pre-filter it planned now VACUOUS on F₂₄₇ (no ℤ/5-hom on the thickened stage) and its bearing unchanged;
@@ -2424,6 +2426,9 @@ record shows what was believed, what was measured, and what is now proved.
   B (recolour such a set with a fifth colour in the residue colouring and the pair separates). That is a
   purely combinatorial lower-bound instrument on the cheat set relative to the unit graph, free of any
   solver, and the first μ-bound that comes from arithmetic rather than from a census.
+  **SHARPENED 2026-09-06 (the pivot):** μ = 1 is impossible not only inside K but inside every 5-sealed field — a rigid pair
+  at five colours plus its spindle is a 6-chromatic unit-distance graph in the spindle's field, and K(√5), K(√247),
+  K(√5, √247) are all 5-sealed; the dial's endgame lives only in a 6-open field (FS-7).
 * **G33 / G34, resolved.** The compounding is real and the selection is structural — AND the selected
   material is the wrong material for the endgame. M53 measured the identity exactly (in-field = "≥ 3
   object neighbours" to seven points in 1.6 million; the in-field slice is 1 % of the pool because ladder
@@ -2497,6 +2502,11 @@ record shows what was believed, what was measured, and what is now proved.
   only an external detune (ρ₁₅) or a pool class: pure K-fabric, grown deep enough to be 4-rigid at
   its deepest 2-adic valuation, supplies the angle itself. The endgame's design principle, sharpened:
   grow 4-rigidity in K (cheap, in-field), read the forced distances off the dial, spindle.
+  **SHARPENED 2026-09-06 (the finite-plane pivot, G43):** the adjunction must ALSO keep the field 6-open — the spindle's
+  field F(√(4d² − 1)) must have no usable prime whose plane is ≤ 5-chromatic. The descent's own endgame spindle ρ₁₅ (d = 2,
+  √15 ∼ √5) lands in K(√5), which is 5-SEALED (11 usable, χ(UD(𝔽₁₁,2)) = 5), and so does K(√247) (d = 8/3): every endgame
+  the descent could have run was provably ≤ 5. The endgame's field must be wall-breaking AND 11-inert AND clear at 83, 107,
+  131, … — over K the single radicals d = 7, 79, 127, … (FS-7 D3′), i.e. spindle distances with 4d² − 1 in those classes.
 * **G38 — Three walls, and the arithmetic goes blind above four.** [theorem, hand-proved; T21] The
   residue method colours F² by a residue class modulo an additive subgroup avoiding the norm-one
   group. Its thresholds: 2 when the 2-adic wall stands with residue field 𝔽₂ (ℚ, ℚ(√2), ℚ(√10),

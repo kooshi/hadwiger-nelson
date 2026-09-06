@@ -63,3 +63,4 @@
 2026-09-06T17:05:00Z M57 B3 richness: heule done (3,456 → 96); f247 done (vacuous at every radius, 98 % units in 5Λ); degrey relaunched after two instrument fixes (dense-ball pair proposal, direction dedup) log build/m57/richness-degrey.log
 2026-09-06T17:30:00Z M57 CLOSED (gate green: build OK, axioms 595 clean, lint passed); left running: the 108 asks (pid 839605) and the degrey dial
 2026-09-06T18:00:00Z M57 degrey dial DONE (1,234 s): ≥ 300 homs at every radius incl. the whole gen-1 closure, no unit in 5Λ; still running: the 108 asks (pid 839605)
+2026-09-06T19:30:00Z the finite-plane pivot: finite planes running — p = 17,19,23 at k = 4/5 (build/m57/fplane-1923.log) and p = 83,107,131 at k = 5 with a 2400 s wall each (build/m57/fplane-big.log); re-run with tools/fplane.py chi --p P if lost; the 108 asks (pid 839605) still running

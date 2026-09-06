@@ -746,7 +746,8 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
 * **T32 — which finite planes refuse five colours, and is 11 the last 5-sealing prime?** χ(UD(𝔽_p, 2)) is 3, 4, 5, 5 at
   p = 3, 7, 11, 13 (13 ≡ 1 mod 4: not usable). For the usable primes 19, 23, …, 83, 107, 131: the first p whose plane
   refuses five is the first prime that seals nothing; if every usable p ≥ 19 has χ ≥ 6, then for multiquadratic fields
-  "6-open" is exactly "some radicand is a quadratic non-residue mod 11" and de Grey's field, K(√7), K(√35) are open. FS-7.
+  "6-open" is exactly "the 2-adic wall broken and some radicand a quadratic non-residue mod 11" — de Grey's field and K(√7) are
+  open pending their planes (K(√35) is 11-inert but its 2-adic wall stands: χ = 4). FS-7.
 * **T33 — the reduction as a kernel theorem.** The homomorphism for a SPECIFIC certified graph is a decide over its edge
   list (Heule-510 → UD(𝔽₁₁,2): 2,504 checks), and χ(UD(𝔽₁₁,2)) = 5 follows in the kernel from the 121-point colouring plus
   Heule-510's certified refusal of four colours — no LRAT. The GENERAL statement "χ(ℚ(√3,√5,√11)²) ≤ 5" quantifies over all

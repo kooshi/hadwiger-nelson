@@ -26,7 +26,8 @@ Consequences already verified here: χ(ℚ(√3, √5, √11)²) = 5 exactly (He
 χ(K(√247)²) = 5 exactly (the T20 witness W below), and **every field the descent (M49–M53), the copy-lock family (M52),
 the witness and the thickening (M54–M57) ever used — K, K(√5), K(√247), K(√5, √247), Heule's ℚ(√3, √5, √11) — is
 5-SEALED: no 6-chromatic unit-distance graph has its coordinates there.** De Grey's field ℚ(√3, √5, √7, √11) has no usable
-prime below 131 (√7 makes 11 inert); K(√7) has 83 first, K(√35) has 107 first.
+prime below 131 (√7 makes 11 inert); K(√7) has 83 first; K(√35) has 107 first but never breaks the 2-adic wall, so it is
+sealed at FOUR by Theorem B (D3′) — the live candidates are de Grey's field and K(√7), and the single radicals d = 7, 79, 127, …
 
 The milestone: (i) solve the finite planes at the candidate fields' smallest usable primes and map which primes SEAL
 (their plane is ≤ 5-chromatic) and which do not; (ii) state the exact values χ(ℚ(√3, √5, √11)²) = χ(K(√247)²) = 5 as
@@ -155,7 +156,7 @@ settle 131 without SAT). If SAT is needed: cube-and-conquer over the colours of 
 | P2 | UD(𝔽₈₃, 2) refuses five colours (K(√7) is open at its first prime) | Hoffman: n/α with α small on a dense circulant-like graph; Vinh's bound ≈ 4.6 is not decisive | medium |
 | P3 | UD(𝔽₁₃₁, 2) refuses five colours (de Grey's field is 6-open) | as P2, larger | medium-high |
 | P4 | 11 is the last 5-sealing prime: every usable p ≥ 19 has χ(UD(𝔽_p,2)) ≥ 6 | growth of degree and of the Hoffman bound | medium-low |
-| P5 | the field table reads: sealed — K (at 3 for four colours already), K(√5), K(√247), K(√5,√247), Heule's; open — de Grey's, K(√7), K(√35); the seam field K sealed at four | the sieve + P2–P4 | medium (P2/P3-conditional) |
+| P5 | the field table reads: sealed at 4 — K (Theorem B) and K(√35) (the 2-adic wall stands); sealed at 5 — K(√5), K(√247), K(√5,√247), Heule's; open pending their planes — de Grey's (131) and K(√7) (83); among single radicals over K only d ≡ 7 (mod 8) non-residues mod 11 (7, 79, 127, …) can be open | the sieve + Theorem B + P2–P4 | medium (P2/P3-conditional) |
 | P6 | `Instances/FPlane11.lean` lands on the standard three axioms with no LRAT: two decides and one comap, under 200 lines | D4 | high |
 | P7 | the 1581's 55-direction shadow at 131 is 5-chromatic (no 6-forcer from the 1581's directions in de Grey's field), while the whole plane at 131 refuses five (P3): the shadow sieve separates the object from its field | D7; the 1581's directions are a crystal's, the plane's full circle is richer | medium-low |
 

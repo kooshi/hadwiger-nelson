@@ -190,3 +190,5 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 
 3d. **M57 — additive rigidity (CLOSED 2026-09-06; `plans/M57-additive-rigidity.md` §R)**: the reduction theorem in the kernel (all 5-colourings additive + a 5Λ-pair ⟹ χ ≥ 6), rigidity as Kempe-closure with the solver-free gauge γ, G exactly rigid and every unit-distance object we hold open by orders of magnitude, the F₂₄₇ thickening 5-divisible at depth one (no additive family). The frontier set re-ranked: FS-2 re-aimed (what carries forcing without rigidity), FS-6 minted (a family-keeping thickening).
 
+3e. **The finite-plane pivot (2026-09-06, after M57; `reference/Chat-analysis/VERIFICATION.md`)**: χ(F²) ≤ χ(UD(𝔽_p, 2)) at a degree-one prime above p ≡ 3 (mod 4); χ(UD(𝔽₁₁,2)) = 5 seals K, K(√5), K(√247), Heule's field — χ(ℚ(√3,√5,√11)²) = χ(K(√247)²) = 5 exactly; de Grey's field and K(√7) open pending the planes at 131 and 83. The frontier set re-ranked: **M58 = FS-7 the field sieve** (`plans/STUB-field-sieve.md`, with the shadow sieve); FS-6 on de Grey's field; FS-2 scoped; FS-8 Haugland; FS-9/FS-10 the untaken rooms; FS-3 demoted.
+
