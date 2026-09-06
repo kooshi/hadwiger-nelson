@@ -584,3 +584,23 @@ accidental chords and the copies' own rigidity, which the deletion does not touc
 5-chromatic unit-distance graph with no critical vertex, built from two disjoint-enough 1-minimal
 cores; its exhaustive five-colour sweep (40 relabelling-seeded models, `--no-amo`) is launched as the
 cheaper twin of §R4's, with the same registered prediction (0 / 0).
+
+## §R7. The dial's reading on a C = ∅ object (2026-09-06 ~02:40Z) — redundancy is necessary, not sufficient
+
+| quantity | measured |
+|---|---|
+| the two-core union (2,229 points, 12,030 edges, C = ∅ by §R6), the exhaustive `Rigidity` sweep at five colours, `--no-amo`, 40 seeded models | **status done: 0 forced-equal pairs (0 unsettled), 0 virtual edges (0 unsettled)** over every pair; 78 models, 38 calls, 31.5 s; the forced-equal side closed by observation alone (every pair seen separated by model 59), the virtual-edge side by batch queries |
+
+**Scored.** P-M54-4 MET (the two-spindle union reads zero on both sides, and its critical set is not
+merely smaller than W's but empty). The registered prediction for the C = ∅ sweep (§R4, D2's
+absorption) MET at this point: each copy is 4-colourable K-fabric attached by six or seven chords whose
+copy-side endpoints have outside-degree one, so every 5-colouring of the base extends over both copies,
+and the base — two overlapping K-cores, 4-colourable — has a spare colour of its own. **So the
+theorem's precondition (no critical vertex) is necessary and NOT sufficient**: this is G9/G31's
+floppiness one rung higher, with the redundancy rung cleared. What remains between such an object and
+a compulsion at five colours is the absorption obstruction (D2): the fifth colour is spare on every
+4-colourable piece attached thinly, and the union is such pieces all the way through. The dial's next
+rung is therefore named by derivation, not by search — material whose 5-colourings have no spare
+colour on any large piece, i.e. a base that is itself 5-chromatic densely (many spindles whose
+chords are not a thin conic each), or cross material with outside-degree ≥ 2 into rigid pieces
+(§R1's pool, grown deeper). The big union's sweep (§R4′, chain 4) continues as the scale twin.
