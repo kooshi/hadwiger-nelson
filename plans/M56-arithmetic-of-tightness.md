@@ -368,3 +368,55 @@ per candidate pair one call. The seed's 35 colourings: 314 s once. Fresh 4-colou
 | homs above rank 8 | a small SAT over 𝔽_p per question | enumeration | 5³² is not enumerable; a hyperplane-avoidance instance is trivial for a solver | high |
 | kernel scope | decided at the modeling pass; at most L1/L2 as theorems | none | B7 | high |
 | the scratch checks | run at the subplan, after §S2 is committed, reproduced by the controlled instrument in phase A | wait for phase A | the checks fix the milestone's shape (G30's derivation → registration → measurement order is kept by committing §S2 first) | high |
+
+### S6. Measured at the subplan (after the §S2 commit `a119efe`; scratch script, no controls — phase A reproduces it under controls before anything is claimed)
+
+**The seed at five colours** (214 points, 1,004 unit edges, 446 cheats; 157 pairs at d² = 9, 11 at d² = 16,
+13 at d² = 25; unit graph connected; Λ rank 4, basis [[1,3,3,3],[0,6,0,2],[0,0,6,2],[0,0,0,4]] in the E–I frame):
+
+| k | distinct unit classes mod k | admissible homs | forced pair (205, 206) | d² = 4 (cheats) | d² = 9 | d² = 16 | d² = 25 |
+|---|---|---|---|---|---|---|---|
+| 5 | 18 of 624 | **72 = 18 up to scalar** | **additively FORCED** | 446/446 separated by every hom | 157/157 separated | 11/11 separated | 1 forced (the pair), 12 mixed |
+| 4 | 18 | 12 ℤ/4 + 12 𝔽₂² | free | mixed | all separated | 11/11 forced (∈ 4Λ) | all separated |
+| 3 | 14 | **none** | — | | | | |
+| 7 | 18 | 564 = 94 up to scalar | free | | | | |
+
+The 18 additive 5-colourings' class-size profiles have minima {38: 1, 39: 5, 40: 2, 41: 7, 42: 3} — a
+sub-multiset of the recorded 35 colourings' minima {38: 3, 39: 6, 40: 4, 41: 13, 42: 9}
+(`data/m54/nu-exact-EI-seed-12graph.json`); three sampled homs verified proper on all 1,450 edges with
+A, B equal. **P3′ holds at the lattice level**: the Exoo–Ismailescu forced pair is a ℤ/5-theorem of the
+seed's difference lattice, its cheats and its distance-3/4 pairs are additively separated (M50's 148
+absolute virtual edges explained for the additive colourings), and at most 18 of the 35 colourings are
+additive (exactly 18 if the 18 homs induce distinct partitions — B2's dump decides; the other 17 are
+non-additive and are the gauge's first population). No additive 3-colouring (the seed is 4-chromatic; no
+claim follows from the additive absence — L2).
+
+**The fabric U at four colours** (1,953 points, 13,796 edges; Λ rank 4 at scale 3, basis
+[[1,3,3,11],[0,6,0,6],[0,0,6,6],[0,0,0,12]]; 9 unit classes mod 2, 36 mod 4; **12 ℤ/4-homs and 12 𝔽₂²-homs**
+admissible — the 12 𝔽₂² are the two residue colourings under GL₂(𝔽₂), the 12 ℤ/4 are six new additive
+4-colourings up to sign; no ℤ/3-hom; 48 ℤ/5-homs):
+
+| class | v₂ | pairs (exact, all) | 2-adic depth of the difference in Λ | additively | dial |
+|---|---|---|---|---|---|
+| 4/3, 4, 12 | 2 | 6,669 / 5,470 / 767 | exactly 1 (2Λ ∖ 4Λ) | FREE (the ℤ/4-homs with φ(u) odd separate them; the 𝔽₂²-homs force them) | free |
+| 16/3, 16 | 4 | 2,145 / 179 | exactly 2 (∈ 4Λ) | **FORCED** (L1) | **free** |
+| 64/9, 64/3 | 6 | 178 / 11 | exactly 3 (∈ 8Λ) | FORCED | forced 163 + 8; free 15 + 3 |
+
+**P1′ holds**: the valuation-4 differences lie in 4Λ, every additive 4-colouring makes them monochromatic,
+the dial separates every one of them — so the 4-colourings of U separating them are NON-additive, and the
+additive rigidity conjecture is false on U. **P1″ half-misses**: the depth-1 half holds, but ℤ/4-homs DO
+exist (12), and they are what make the additive theory reproduce the valuation-2 freedom. So on the bed:
+**F_add = {depth ≥ 2} and F_true = {most of depth 3}: the additive yardstick is exact at depths 1 and 3
+(up to 18 non-additive exceptions) and over-forces all of depth 2** (2,324 pairs).
+
+**The candidate pattern this raises (registered for B1, derived on the hexagonal lattice first, G30):**
+a Kempe swap of the colours {a, b} in an additive colouring φ acts on a component of the {a, b}-subgraph,
+whose vertex differences lie in the **Kempe sublattice** Λ_c = ℤ-span{u unit : φ(u) = c}, c = a − b; on
+ℤ[ζ₆] with the residue colouring mod 2, Λ_1 = ℤ·1 has rank 1 (lines), so a pair 4u apart is separated by
+the swap of any class pair whose difference is not r(u) — one swap per direction. **P8**: on U, for the
+residue hom φ₁, some Λ_c misses the depth-2 differences (4u ∉ Λ_c for a c the pair's direction does not
+carry) while every Λ_c contains the depth-3 differences (8u/3 ∈ Λ_c for all c) — i.e. the dial's F_true is
+the intersection of the Kempe sublattices, and the 18 depth-3 exceptions are the pairs some Λ_c misses.
+Confidence low-medium; a lattice computation, phase B1. If it holds, K-fabric's 4-rigidity is a statement
+about three sublattices of Λ, no solver — and the same computation applies verbatim to a wall-broken chunk
+at five colours wherever ℤ/5-homs exist.
