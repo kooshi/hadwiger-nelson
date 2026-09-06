@@ -188,3 +188,5 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 5. The carried engineering: WO-16, the 3-bit cube front-end for the culled set (R3), WO-3's server
    replan — unchanged, none blocking.
 
+3d. **M57 — additive rigidity (CLOSED 2026-09-06; `plans/M57-additive-rigidity.md` §R)**: the reduction theorem in the kernel (all 5-colourings additive + a 5Λ-pair ⟹ χ ≥ 6), rigidity as Kempe-closure with the solver-free gauge γ, G exactly rigid and every unit-distance object we hold open by orders of magnitude, the F₂₄₇ thickening 5-divisible at depth one (no additive family). The frontier set re-ranked: FS-2 re-aimed (what carries forcing without rigidity), FS-6 minted (a family-keeping thickening).
+

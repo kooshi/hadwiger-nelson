@@ -54,6 +54,53 @@ def hexball(R: int) -> AD.Chunk:
                     meta=dict(origin=idx[(Fr(0), Fr(0))], radius=R))
 
 
+def unit_pairs(points, frame) -> list:
+    """All pairs at exact squared distance 1 (float proposal by KD-tree, exact disposal by the frame) — without
+    `Chunk.pairs_at`'s same-component filter, so it serves an edgeless sub-stage."""
+    from scipy.spatial import cKDTree
+    xy = np.array([AD.float_of(frame, p) for p in points])
+    tree = cKDTree(xy)
+    out = []
+    for i in range(len(points)):          # per-point shell query: a dense ball never materializes its inner pairs
+        js = np.array(tree.query_ball_point(xy[i], 1 + 1e-6), dtype=int)
+        js = js[js > i]
+        if len(js) == 0:
+            continue
+        d = np.sqrt(((xy[js] - xy[i]) ** 2).sum(axis=1))
+        for j in js[np.abs(d - 1) < 1e-6]:
+            if frame.rational_of_key(frame.dist2_key(points[i], points[int(j)])) == 1:
+                out.append((i, int(j)))
+    return sorted(out)
+
+
+def build_lattice_dirs(ch: AD.Chunk):
+    """`additive.build_lattice` on the DISTINCT edge directions (up to sign): the same lattice, inserted once per direction
+    instead of once per edge — the difference between seconds and hours on a dense closure. Returns (L, dirs, scale)
+    with `dirs` the distinct scaled direction vectors; both of build_lattice's controls are kept."""
+    scale = 1
+    for p in ch.points:
+        for x in p:
+            scale = scale * x.denominator // math.gcd(scale, x.denominator)
+    seen = set(); dirs = []
+    for u, v in ch.edges:
+        d = tuple(int((ch.points[u][i] - ch.points[v][i]) * scale) for i in range(ch.frame.dim))
+        key = min(d, tuple(-x for x in d))
+        if key not in seen:
+            seen.add(key); dirs.append(d)
+    L = AD.Lattice(ch.frame.dim)
+    for d in dirs:
+        L.insert(d)
+    L.reduce()
+    bad = [i for i, d in enumerate(dirs) if AD.Lattice.depth(L.coords(d), 2) is None]
+    assert not bad, ("lattice: a direction is not in its own span?!", bad[:3])
+    L2 = AD.Lattice(ch.frame.dim)
+    for d in reversed(dirs):
+        L2.insert(d)
+    L2.reduce()
+    assert L.basis() == L2.basis(), "lattice: two insertion orders disagree"
+    return L, dirs, scale
+
+
 def restrict_ball(ch: AD.Chunk, R2: Fr, centre: int, rederive: bool = True) -> AD.Chunk:
     """The sub-stage of the points within distance √R2 of `centre` (float threshold with a 1e-9 margin; a point within
     the margin of the boundary is logged), with the stage's edges among them; the unit pairs re-derived exactly and
@@ -69,7 +116,7 @@ def restrict_ball(ch: AD.Chunk, R2: Fr, centre: int, rederive: bool = True) -> A
                    ch.unit_verified, meta=dict(ball=str(R2), centre=centre, parent_fingerprint=ch.fingerprint(), parent_index=keep,
                                                 boundary_coincidences=len(near)))
     if rederive and sub.n <= 6000:
-        ue = set(sub.pairs_at(Fr(1)))
+        ue = set(unit_pairs(sub.points, sub.frame))
         assert ue == set(sub.edges), ("the restricted edge list disagrees with the exact re-derivation", len(ue), len(sub.edges))
         sub.unit_verified = f"{ch.unit_verified}; sub-stage unit pairs re-derived exactly ({len(ue)})"
     return sub
@@ -137,21 +184,21 @@ def load_depth2() -> AD.Chunk:
         (xA, xB), (yA, yB) = pt
         cands.append(tuple(Fr(n, dd) for n, dd in xA) + tuple(Fr(n, dd) for n, dd in xB) + tuple(Fr(n, dd) for n, dd in yA) + tuple(Fr(n, dd) for n, dd in yB))
     cands += kext_points(c1["pool"]) + kext_points(c2["pool"])
-    def dec(v16):
-        x = KExt(K(*v16[0:4]), K(*v16[4:8])).mp(); y = KExt(K(*v16[8:12]), K(*v16[12:16])).mp()
-        return (mp.nstr(x, 40, strip_zeros=False), mp.nstr(y, 40, strip_zeros=False))
-    table = {}
-    for i, v in enumerate(cands):
-        table.setdefault(dec(v), []).append(i)
-    P = []; multi = 0
+    from scipy.spatial import cKDTree
+    exact_mp = [(KExt(K(*v[0:4]), K(*v[4:8])).mp(), KExt(K(*v[8:12]), K(*v[12:16])).mp()) for v in cands]
+    fl = np.array([[float(x), float(y)] for x, y in exact_mp])
+    tree = cKDTree(fl)
+    P = []
     for sx, sy in st["points"]:
-        key = (mp.nstr(mp.mpf(sx), 40, strip_zeros=False), mp.nstr(mp.mpf(sy), 40, strip_zeros=False))
-        hits = table.get(key)
-        assert hits, ("a depth-2 stage point matches no exact candidate at 40 digits", sx[:20], sy[:20])
-        if len({cands[h] for h in hits}) > 1:
-            multi += 1
-        P.append(cands[hits[0]])
-    assert multi == 0, ("ambiguous decimal matches", multi)
+        x, y = mp.mpf(sx), mp.mpf(sy)
+        dd, jj = tree.query([float(x), float(y)], k=2)
+        j, j2 = int(jj[0]), int(jj[1])
+        err = abs(exact_mp[j][0] - x) + abs(exact_mp[j][1] - y)
+        assert err < mp.mpf("1e-40"), ("a depth-2 stage point matches no exact candidate at 1e-40", sx[:20], sy[:20], mp.nstr(err, 5))
+        if cands[j2] != cands[j]:
+            err2 = abs(exact_mp[j2][0] - x) + abs(exact_mp[j2][1] - y)
+            assert err2 > mp.mpf("1e-20"), ("ambiguous match", sx[:20], sy[:20])
+        P.append(cands[j])
     fr = AD.FrameKExt16(247)
     ch = AD.Chunk("W-plus-cross-depth2", P, [tuple(e) for e in st["edges"]], fr,
                   "data/m55/W-plus-cross-depth2.json (M55's full-pool thickened stage), exact points recovered from the witness and pool files by 40-digit decimal matching",
@@ -170,6 +217,11 @@ def load_stage(a) -> AD.Chunk:
         ch = load_core588()
     elif getattr(a, "depth2", False):
         ch = load_depth2()
+    elif getattr(a, "depth1", False):
+        full = load_depth2(); n1 = int(full.meta.get("W_points", 1175)) + int(full.meta.get("P1_points", 63))
+        E = [(u, v) for u, v in full.edges if u < n1 and v < n1]
+        ch = AD.Chunk("W-plus-cross-depth1", full.points[:n1], E, full.frame, full.source + f"; the first {n1} vertices (W and the depth-one pool P1) with the stage's edges among them",
+                      full.unit_verified, meta=dict(parent_fingerprint=full.fingerprint(), W_points=full.meta.get("W_points"), P1_points=full.meta.get("P1_points")))
     else:
         ch = AD.load_chunk(a)
     if getattr(a, "ball", None) is not None:
@@ -181,7 +233,7 @@ def stage_args(p):
     p.add_argument("--seed", action="store_true"); p.add_argument("--object"); p.add_argument("--witness"); p.add_argument("--heule510", action="store_true")
     p.add_argument("--degrey", action="store_true"); p.add_argument("--field16"); p.add_argument("--graph"); p.add_argument("--planted"); p.add_argument("--out")
     p.add_argument("--hexball", type=int); p.add_argument("--core122", action="store_true"); p.add_argument("--core588", action="store_true")
-    p.add_argument("--depth2", action="store_true"); p.add_argument("--ball", help="restrict to the ball of this squared radius (a rational) about --centre")
+    p.add_argument("--depth2", action="store_true"); p.add_argument("--depth1", action="store_true"); p.add_argument("--ball", help="restrict to the ball of this squared radius (a rational) about --centre")
     p.add_argument("--centre", type=int); p.add_argument("--with-cheats", help="'auto' (the seed's 446 distance-2 pairs) or a JSON file of extra edges [[u, v], …]")
 
 

@@ -58,3 +58,7 @@
 2026-09-06T13:13:30Z M56 B3 homs --degrey --k 5 --max 3000 relaunched on the fast path, pid 1252784, log build/m56/homs-degrey-k5.log
 2026-09-06T13:24:21Z M56 B3 forced --degrey --k 5 --all --sweep m30 (capped family 3000 + SAT re-ask), pid 1262928, log build/m56/forced-degrey-k5.log
 2026-09-06T14:00:49Z M56 CLOSED: forced --degrey --k 5 done (356 forced-additively, all sweep-separated); gate green (build OK, axioms 585 clean, lint passed)
+2026-09-06T14:30:00Z M57 opened (Kooshi: go); the 108 asks still running (pid 839605)
+2026-09-06T16:40:00Z M57 B4 extend on W (71 depth-one cross points) done in ~100 s; closure --degrey --k 5 (300-hom sample, cap 200) done
+2026-09-06T17:05:00Z M57 B3 richness: heule done (3,456 → 96); f247 done (vacuous at every radius, 98 % units in 5Λ); degrey relaunched after two instrument fixes (dense-ball pair proposal, direction dedup) log build/m57/richness-degrey.log
+2026-09-06T17:30:00Z M57 CLOSED (gate green: build OK, axioms 595 clean, lint passed); left running: the 108 asks (pid 839605) and the degrey dial

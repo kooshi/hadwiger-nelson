@@ -725,3 +725,18 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   colouring additive (G has it, the seed nearly, U at four colours not at all); is a unit-distance chunk in a
   wall-broken field with that property buildable — that would be 5-tightness by arithmetic; are the seed's 17
   non-additive colourings Kempe-images of the 18.
+
+### M57 (2026-09-06)
+
+* **T29 — the reconfiguration graph of a forcing object.** The seed's 252-cheat subset forces (205, 206) with > 5,000
+  colourings up to palette, one of them additive, in three defect regimes (≤ 14 / 16–28 / 94–105); H has 35, all within
+  two single-vertex moves of its 18 additive ones. How many components does the move graph (single-vertex recolourings,
+  Kempe swaps) of the 252-object have, and is the forced pair constant on each? Falsifier for "forcing is carried by
+  finitely many Kempe classes": a component on which the pair takes both values. FS-2's re-aimed question.
+* **T30 — 5-divisibility as a design invariant.** Which thickenings keep a chunk's joint lattice 5-indivisible (D1 of
+  FS-6): the F₂₄₇ cross lattice does not (500 of W's units in 5Λ at depth one); in-lattice and new-direction points
+  never cause it; rational points of order divisible by 5 do. Is the half-spindle closure of the 1581 5-indivisible at
+  any radius holding new directions?
+* **T31 — the loose-incidence count as a tightness gauge for CHEATS.** On the seed, G's cheats close every {a, b}-subgraph
+  (γ 1,098 → 0) and H's attachment leaves 12; the 252-subset keeps the forcing with the family open. Does γ over the
+  cheat set predict the size of the colouring space (35 vs > 5,000), i.e. is γ the dial the descent should have read?

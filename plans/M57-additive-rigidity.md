@@ -668,3 +668,175 @@ plan (know, do not decide).
 | the numeral corollary's name | `six_le_chromaticNumber_plane_of_additivelyRigid` | `…_unitDistance_…` | beside HexShell's `six_le_chromaticNumber_plane_of_forced_pairs`, the χ ≥ 6 family | high |
 | the `Fin 2` helper | inlined `have` at its one use | a namespaced lemma | one use; a `HadwigerNelson.Fin.…` name misleads | high |
 | `isAdditive_additiveColoring` | added (one line) | omitted | the next lemma a consumer wants, free in the vocabulary; ties M56's object to M57's definition | high |
+
+## §R. Results (2026-09-06; every number from a record in `data/m57/`, every headline with its population)
+
+### R0. The kernel and the instrument
+
+**Kernel** (`Proofs/HadwigerNelson/AdditiveRigid.lean`, standard three axioms, `scripts/Axioms.lean` M57 block: 595 clean,
+5 declared purchases; build OK, lint passed, no `sorry`): `IsAdditive q C` (the same-colour relation is the trace through
+the address map q of the cosets of a subgroup H ⊇ k·V — the `↔` is the content), `AdditivelyRigid q Γ k`, the bridge
+`isAdditive_of_addMonoidHom` and its M56 instance `isAdditive_additiveColoring`, `IsAdditive.apply_eq` (L1),
+**`forces_of_additivelyRigid`** (the reduction), `add_one_le_chromaticNumber_unitDistance_of_additivelyRigid`,
+**`six_le_chromaticNumber_plane_of_additivelyRigid`** (the target statement), the spec `pathGraph_additivelyRigid` with
+`three_le_chromaticNumber_plane_of_pathGraph` (the unit path at two colours forces its endpoints equal by the
+reduction; drawn at unit spacing, χ(ℝ²) ≥ 3 — the non-vacuous model), and the two reds `cycleGraph_six_not_additivelyRigid`
+(pins `k • v ∈ H` and ←) and `pathGraph_not_additivelyRigid_three` (pins →: at three colours every colouring of the path
+is 3·V-periodic, so the implication form would call it rigid, and `0 1 0` is no coset colouring). Every leaf closed with
+the term §M2.1 recorded. **Instrument** (`tools/additive_rigid.py`, registered into `additive.py`: `closure`, `rigid`,
+`free`, `extend`; the stages `--hexball R`, `--ball R² --centre i`, `--core122`, `--core588`, `--depth1`, `--depth2`;
+17 planted controls green — the hex balls, K₄−e, the spindle's 16/12/4, the kernel's own spec objects (the path rigid at
+2 and not at 3), the seed's 72/18 family after the cheat filter, its 12 loose incidences on 6 vertices, γ = 1,197 with
+10 of 180 connected on the unit part, the 36/0/588 and 780/21,006/1 splits, the in-lattice and new-direction extension
+cases). Drivers: `tools/m57_b2.py` (the seed at five), `tools/m57_richness.py` (the dial).
+
+### R1. The bridging bed at four colours (P1 replaced, P1′, P1″, P2)
+
+| chunk (frame) | additive family | γ | loose incidences (vertices) | Kempe part | disconnected / total | swaps non-additive |
+|---|---|---|---|---|---|---|
+| 122-core (field16) | 24 homs = 8 partitions | **200** | 115 (40 of 122) | 85 | 36 / 48 | 36 / 36 |
+| 588-core (K8) | 8 partitions | **182** | 91 (55 of 588) | 91 | 47 / 48 | 47 / 47 |
+| the seed's unit part (EI4) | 8 partitions | **126** | 58 (20 of 214) | 68 | 30 / 48 | 30 / 30 |
+| hex ball R = 2 | 4 partitions | 36 | 6 (6 of 19) | 30 | 24 / 24 | 24 / 24 |
+| hex ball R = 3 | 4 partitions | 60 | 6 (6 of 37) | 54 | 24 / 24 | 24 / 24 |
+
+Per hom, every K-chunk is loose under BOTH residue colourings (the 122-core: 30 and 21 incidences; the 588-core: 9 and 7;
+the seed's unit part: 13 and 13) and under every ℤ/4-type colouring — **P1 (replaced) MET**. P1″ MET (the hex balls'
+line swaps, verified non-additive; every colour pair of every hom disconnected at R ≥ 2). P1′: rigid at 3 (one
+colouring) MET, at 4 MISSED (11 colourings, 4 additive — S6, reproduced by the instrument). **P2**: `rigid --cap 2000` on
+the three K-chunks returns `not-rigid: 2000 of 2000` — the solver's first two thousand four-colourings are ALL
+non-additive, at defects 67–78 of 122, 143–153 of 588 and 128–147 of 214 — near the random baseline (≈ 0.73 n at
+k = 4 is 89 / 429 / 156; the best palette of the 24 homs brings it down to these), not one of them a residue Kempe
+swap: the existence half MET, the "first found is a single swap" half MISSED, and the reading is the same as W's at
+five (M56 §R3): a SAT solver's colourings of K-fabric sit far from its additive family. The four-colour bed holds no
+rigid chunk beyond K₄ − e, and the additive family of every K-chunk is Kempe-open by a wide margin.
+
+### R3. The 5-chromatic witnesses at five colours (P8)
+
+| witness | family | γ | loose incidences | loose vertices per additive colouring (min / median / max) | swaps |
+|---|---|---|---|---|---|
+| Heule-510 | 96 homs = 24 partitions (complete) | 3,014 | 2,306 on 284 of 510 | 84 / 91 / 98 of 510 (16–19 %) | 240 built, 240 non-additive |
+| W (1,175, K(√247)) | 1,728 = 432 (complete) | 147,456 | 121,600 on 755 of 1,175 | 234 / 267 / 284 of 1,175 (20–24 %) | 4,320 built, 4,320 non-additive |
+| de Grey's 1581 | a 300-hom SAT sample, census on 200 | ≥ 76,115 | 67,246 on 935 of 1,581 | 303 / 328 / 352 of 1,581 (19–22 %) | 2,000 built, 2,000 proper, all `undecided` (sampled family) |
+
+**P8 MET** on all three: every additive 5-colouring of every witness is loose on a fifth of its vertices, and every
+colour pair of every hom is disconnected (components 6–22 on Heule, 14–72 on W, 22–63 on the 1581). The additive
+families of the witnesses are nowhere near Kempe-closed — the principle's necessary condition fails by three orders of
+magnitude on the objects that are 5-chromatic, exactly where M56 read their colourings at the random baseline.
+
+### R4. The family delta on W (P5′; `extend-W-core-8over3-k5.json`)
+
+W's 71 depth-one cross points (M54's in-field glue points, K(√247)) all extend: **67 are in-lattice** (their first unit
+vector lies in Λ(W)) and **4 have index 5** (u₁ ∈ ℚΛ ∖ Λ of order 5: each hom extends iff φ(5u₁) = 0, so a third of the
+1,728 homs die — the family falls to 1,152 at those four points, and to 960 at two in-lattice points by admissibility).
+The gauge per colouring, γ̄ = γ/|family| = 341.3 before, moves to [336.5, 343.7]: the largest fall, −4.8 (−1.4 %), is at
+the index-5 points and comes from the family SHRINKING, not from tightening; the median move is +2.0 (a new point with
+two neighbours is itself loose for two colours in every hom); the in-lattice points with the most neighbours move it by
+−0.8 (point 14, ten neighbours) to −0.3. **The kills are a different story**: point 14 kills **110 of the 200** sampled
+five-colourings (a rainbow neighbourhood under 55 % of them), point 4 (eight neighbours) 90, three more 10–40, the other
+64 none — and, as D5 derived, **no in-lattice point kills an additive colouring by coverage** (the family is unchanged
+at 65 of the 67). Scoring: **P5′ gauge half MET** (|Δγ̄| ≤ 1.4 % < 5 %), **kill half REFUTED** (55 % > 5 %). The reading:
+the additive kill census separates the two things the descent's halos always did at once — a high-degree in-lattice
+point kills the non-additive colourings whose neighbourhood it covers and leaves the additive family intact (the
+principle's own move, at zero cost to the family), while the family's closure gauge is a global property that single
+points barely move. Neighbour counts of the 71: 51 have two, 20 have three to nineteen; the killers are the latter.
+
+### R7. Incidents (caught by controls or assertions; none moved a verdict)
+
+1. **The sub-stage with no unit pairs.** `Chunk.pairs_at` (M56) filters to same-component pairs, so on an edgeless
+   sub-stage (every point its own component) it returns nothing: the first Heule-510 dial read `edges 0` on all five
+   balls INCLUDING the whole 510 (2,504 edges) — the control that caught it. Replaced by `unit_pairs` (float proposal,
+   exact disposal, no component filter) in the dial and in `--ball`; the full 510 re-derives its 2,504.
+2. **The 40-digit rounding boundary.** The depth-2 stage file holds 60-digit decimals; matching them to the exact
+   candidates by equality of 40-digit renderings failed on one point whose 41st digit straddled a rounding boundary
+   (every point matches its candidate at float tolerance; the assertion fired). Replaced by nearest-candidate matching
+   confirmed in 70-digit arithmetic at 10⁻⁴⁰ with a 10⁻²⁰ uniqueness margin.
+3. **Balls by point count on a dense closure.** The gen-1 closure's 1,581 points nearest the origin lie within radius
+   0.34 and share no unit pair (the closure is dense near its centres); a dial indexed by count would have read
+   "no homs" for the wrong reason. The `edges 0` column caught it; the dial is indexed by squared radius (§M1.6 already
+   said the radius is incidental — the direction set is the axis, and a ball must be wide enough to hold one).
+4. **`--seed` twice.** The stage flag `--seed` (Exoo–Ismailescu's seed) collided with the shuffle seed of `rigid`;
+   argparse refused at registration. Renamed `--shuffle`.
+
+### R2. The seed at five colours (P10, P3, P9, P6, P7; `b2-seed-k5.json`, `tools/m57_b2.py`)
+
+**Exoo–Ismailescu's G is Kempe-closed and rigid, exactly.** On G's {1, 2}-graph (205 points, 966 unit + 423 distance-2
+edges) the additive family is 18 colourings, and **γ = 0**: all 180 {a, b}-subgraphs connected, not one loose vertex,
+and the complete enumeration returns 18 colourings, all additive — **P10 MET** in full (its H half too: γ(H) = 12 with
+Kempe part 0 — every size-≥ 2 component is the whole subgraph — the 12 single-vertex swaps non-additive, and the
+complete enumeration 35 = 18 additive + 12 at defect 1 + 5 at defect 2, M56's numbers). G's unit part alone: γ = 1,098,
+loose on 96 of 205 vertices — the cheats do all the closing. **P9 MET**: loose incidences ≥ defect-1 classes on every
+stage (the seed 12 = 12; the spindle 32 vs 4; the hex ball at 4: 6 = 6; K₄ − e: 4 vs 0 — its loose recolourings land on
+the other additive colouring, the over-count the ≤ allows for). P6 and P7 stand as scored at S6, reproduced by the
+instrument's controls.
+
+**P3 MISSED, and the miss is the finding.** (a) M49's 19 separating lists (H − e for the refuser cheats e, 115
+colourings, all proper on H − e) are bimodal: for 13 of the 19 edges every separating colouring lies within defect 5 of
+the family (≤ 3 for five edges, 4–5 for eight), and for **six edges — (21,210), (56,168), (76,78), (78,168), (98,213),
+(118,212) — H − e admits colourings at defect 79–90 of 214, the random baseline** (a 5-colouring with no additive
+structure at all separates the pair once that one cheat is gone). (b) The 252-cheat object (M49's ddmin survivors,
+which still force A = B) has a colouring space **above 5,000 up to palette** (the cap; H's is 35), in three regimes:
+1,701 within defect 14 of the family (one of them additive), 2,167 at defects 16–28, and 576 at defects 94–105 — the
+random baseline. So a forcing subset of the seed's cheats keeps the forced pair while losing additivity almost
+entirely: **rigidity is sufficient for the forcing and far from necessary, on the seed's own subsets** — the 252-object
+forces (205, 206) with thousands of non-additive colourings agreeing on the pair. The principle names a sufficient
+condition; the seed H is its near-instance and G its exact instance; the descent's objects never were.
+
+### R5. The richness dial (P4; `richness-{heule,f247,degrey}-k5.json`, `tools/m57_richness.py`; balls by squared radius about a centre, unit pairs re-derived exactly)
+
+| field / object | ball r² ≤ | points | edges | rank | \|S₅\| | units in 5Λ | ℤ/5-homs | mechanism at zero |
+|---|---|---|---|---|---|---|---|---|
+| Heule-510 (about vertex 0) | 0.5 · 1 · 2 · 3 | 88 · 209 · 315 · 428 | 96 · 684 · 1,308 · 2,003 | 8 | 40 · 42 · 42 · 42 | 0 | **3,456** at all four | — |
+| | 4 · whole (5.9) | 493 · 510 | 2,405 · 2,504 | 8 | 60 | 0 | **96** | — (M56's 96 reproduced) |
+| F₂₄₇: W + its depth-one cross points, cumulative (the first m of 63) | — | 1,176 … 1,223 (m ≤ 48) | | 8 | 49 → 53 → 56 | 0 | 1,728 (m ≤ 8) → 960 (16–24) → 640 (32–48) | the cover |
+| | — | 1,238 (m = 63) | 5,977 | 8 | 47 | **500** | **0** | a unit vector in 5Λ (exact) |
+| F₂₄₇: the depth-2 stage (about W's centre) | 1 · 2 · 3 · 4 · 6 | 1,166 · 2,457 · 3,844 · 5,141 · 7,021 | 2,901 · 8,615 · 16,190 · 24,110 · 38,213 | 8 · 10 · 10 · 10 · 10 | 26 · 52 · 68 · 80 · 82 | 2,838 · 8,369 · 15,582 · 23,065 · 36,370 | **0** at every radius | a unit vector in 5Λ (exact) |
+
+**P4 on F₂₄₇: MET-IN-SUBSTANCE** (the family dies below 3,000 points — at 1,238 — but by the exact obstruction, a unit
+vector in 5Λ, not by the cover as registered). The mechanism is L7 realized at depth one: the depth-one cross points'
+unit vectors, taken together, generate a lattice in which 500 of W's own unit vectors are 5-divisible (u/5 ∈ Λ), so no
+hom into ℤ/5 can be nonzero on them — while any 48 of the 63 points leave a 640-hom family, and each point alone
+leaves ≥ 960 (R4). In the depth-2 stage the phenomenon is total: 98 % of the unit vectors of every ball lie in 5Λ.
+**Consequence for the principle:** on thickened F₂₄₇ material — the one construction that moved M54's redundancy dial
+(FS-3) — the additive family is EMPTY from depth one on; the principle has no target there, and the design tension of
+D4 (richness kills homs, sparseness leaves swaps) resolves against richness at the first thickening step. Heule-510
+keeps a family to its last ring (3,456 homs on the inner 428 points, 96 on the whole); the de Grey dial: see below.
+
+### R6. Scoring (verdicts per §M2.3)
+
+| # | prediction | verdict | the measurement |
+|---|---|---|---|
+| P1 (replaced) | no 4-chromatic K-chunk beyond K₄ − e is additively 4-rigid; loose under both residue colourings | **met** | 122-core γ = 200 (residue homs loose 30, 21), 588-core 182 (9, 7), the seed's unit part 126 (13, 13); K₄ − e rigid at 3 and 4 |
+| P1′ | hex ball R = 1 rigid at 3 and at 4 | **met at 3, missed at 4** | 1 colouring at 3; 11 at 4 with 4 additive |
+| P1″ | no hex ball R ≥ 2 rigid at 4; the first non-additive is a line swap | **met** | R = 2, 3: every colour pair of every hom disconnected; the (3, 3, 5) line components; swaps non-additive |
+| P2 | the K-chunks have non-additive 4-colourings, the first found a residue Kempe swap | **met / missed** | 2,000 of 2,000 non-additive on each, at defects 67–153 — none a single swap |
+| P3 | H − e at defect ≤ 3 for the 29 essential e; the 252-object at ≤ 3 under a cap | **missed** | 13 of 19 lists within 5, six at 79–90; the 252-object: > 5,000 colourings in three regimes (≤ 14, 16–28, 94–105) |
+| P4 | the family dies below 3,000 points by the cover (gen-1; F₂₄₇) | F₂₄₇ **met-in-substance**; de Grey: see the addendum | F₂₄₇: at 1,238 points (W + 63) by a unit vector in 5Λ; every depth-2 ball vacuous |
+| P5′ | Δγ̄ < 5 % and kills < 5 % for W's depth-one points | **gauge half met, kill half refuted** | \|Δγ̄\| ≤ 1.4 %; point 14 kills 110 of 200 |
+| P6 | all 180 subgraphs of the seed's homs disconnected; the 17 one swap each | **met-in-substance** (S6) | 170 of 180; 12 one swap, 5 two single-vertex swaps |
+| P7 | free = 𝔽₅×·S₅ exactly (36) | **met** | 36 / 0 / 588 |
+| P8 | every additive 5-colouring of every witness loose on > 10 % of vertices | **met** | 16–19 % (Heule), 20–24 % (W), 19–22 % (the 1581, sampled family) |
+| P9 | defect-1 classes ≤ loose incidences, equality on the seed | **met** | 12 = 12; 4 ≤ 32; 6 = 6; 0 ≤ 4 |
+| P10 | γ(G) = 0; H's isolated part 12 with no non-additive size-≥ 2 swap | **met** | γ(G) = 0, 18 = 18 additive; γ(H) = 12, Kempe part 0 |
+
+Jackpot: not reached (no `additively-rigid` at five colours on any unit stage; the only rigid five-colour object is G, a
+{1, 2}-graph). Failure clauses fired: "P1 refuted" (the four-colour bed is K₄ − e alone — recorded in R1); "P5′ refuted"
+on its kill half (the census's kill column is M49's coverage kill with sampled colourings, not a new score — the
+solver-free half, the gauge, is what the principle owns, and it barely moves).
+
+### R8. What the milestone found, in four sentences
+
+1. **Additive rigidity is a closure property, and its gauge is solver-free**: the additive family is rigid only if
+   every {a, b}-subgraph of every admissible hom is connected (γ = 0; loose vertices are its size-1 face), and on
+   Exoo–Ismailescu's G that is exactly what holds — γ = 0 and all 18 colourings additive — while H's 17 non-additive
+   colourings are precisely its attachment's 12 loose incidences and their pairs.
+2. **No unit-distance object we hold is anywhere near**: at four colours every K-chunk beyond the rhombus is
+   Kempe-open (derived by rank for three-family material, measured on the 122- and 588-cores), and at five every
+   additive colouring of every 5-chromatic witness is loose on a fifth of its vertices (γ = 3,014 / 147,456 /
+   ≥ 76,115).
+3. **Thickening kills the family before it could close it**: W's 63 depth-one cross points in F₂₄₇ generate a lattice in
+   which 500 of W's unit vectors are 5-divisible, so the thickened stage has no additive 5-colouring at all (L7 at
+   depth one), and each in-lattice point alone kills non-additive colourings without touching the family.
+4. **The reduction theorem is in the kernel** with its two reds and the unit path as its model, and the principle it
+   states is sufficient and far from necessary: the seed's 252-cheat forcing subset keeps the forced pair with a
+   colouring space above 5,000, two thirds of it far from additive.
