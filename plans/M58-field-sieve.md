@@ -676,3 +676,16 @@ subring, no condition on p.
 * **The finite planes are ≥ 6-chromatic from 59 up and ≥ 8 at 131**: their 6-critical subgraphs exist and are computable
   without geometry, and a LIFT of one to de Grey's field (points in the residue classes with every edge unit) would be a
   6-chromatic unit-distance graph — the constructive face of the pivot, stubbed as FS-11.
+
+### §R3 addendum (2026-09-06, written at the M59 close): the k = 5 runs left in flight
+
+UD(𝔽_p, 2) at five colours for p = 23, 31, 43, 47 (529 / 961 / 1,849 / 2,209 vertices, the maximal clique through the origin
+pinned) and the 1581's 55-direction shadow at 131 (17,161 vertices, degree 110) all returned **no verdict in four hours**: the
+processes were killed by their external `timeout 14400` before pysat's 14,000-s wall fired (the §R6 incident, again — the wall
+does not interrupt a large instance), so the logs hold only the headers. Records `data/fplane/chi-p{23,31,43,47}-k5.json` say
+`unknown` with the reason. So: P1 at 23 undecided; P4's re-registration at 31/43/47 undecided (the spectral floors ≥ 5 stand);
+**P7 (the 1581's shadow 5-colourable) undecided** — with M59's finding that the whole plane at 131 is undecided at k = 5 in an
+hour of the external cadical, these Cayley instances at 17,161 vertices are not CDCL-sized either way. What decides them is
+cube-and-conquer over a neighbourhood's colourings (FS-13's D1) or, for the small planes, the exact 5-colouring count by the
+strip-automaton genre (T38). The instrument rule stands: big instances run under the external `cadical` binary and `timeout`,
+never pysat's wall.

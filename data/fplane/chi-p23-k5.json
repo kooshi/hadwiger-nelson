@@ -1,0 +1,33 @@
+{
+ "kind": "fplane-chi",
+ "p": 23,
+ "n": 529,
+ "edges": 6348,
+ "degree": 24,
+ "omega": 3,
+ "pins": [
+  [
+   0,
+   0
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   196,
+   2
+  ]
+ ],
+ "rows": [
+  {
+   "k": 5,
+   "status": "unknown",
+   "seconds": 14400,
+   "note": "killed by the external timeout (14,400 s); pysat's 14,000-s wall did not interrupt (the M58 \u00a7R6 incident, again) \u2014 no verdict"
+  }
+ ],
+ "chi": null,
+ "exact": false,
+ "claim_scope": "UNDECIDED: UD(F_p,2) at k = 5 returned no verdict in 4 h (one cadical via pysat); the spectral floor stands (\u2265 5); a decision needs cube-and-conquer (T38)"
+}

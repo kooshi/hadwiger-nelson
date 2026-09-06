@@ -86,3 +86,4 @@
 2026-09-06T22:29:14Z M59 gate GREEN: build OK, axioms 615 clean / 5 purchases, lint passed
 2026-09-06T22:36:38Z M59: second instance (LiftObstruction11) added; gate chain re-run
 2026-09-06T22:41:15Z M59 gate GREEN (third run, with LiftObstruction11): build OK, axioms 616 clean / 5 purchases, lint passed
+2026-09-06T23:51:25Z M58 planes 23/31/43/47 at k=5 and the 1581's shadow at 131: NO VERDICT at the 4-h external timeout (pysat's wall inert again); undecided records written; M58 §R3 addendum

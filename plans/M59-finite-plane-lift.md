@@ -640,7 +640,8 @@ the refutation of the finite graph — and says so in its docstring.
 | hubs of Heule-510 at 131 | **1,171** residue classes carry an exact point at unit distance from ≥ 3 of the 510's vertices (support 3–10); 11 of the strict scan's 64 are Heule-553's discarded vertices; 100 of 100 sampled verified exactly | 12,339 candidates; missed: classes a vertex occupies | `hubs-heule510-p131.json` |
 | hubs of the 1581 at 131 | **3,739** (support 3–13); none in the gen-1 closure; 60 random + the 5 of highest support verified exactly in the tower (65 of 65) | 15,596 candidates; 602 s | `hubs-degrey1581-p131.json` |
 | UD(𝔽₁₃₁,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (external cadical; spectrum says ≥ 8) | P3 refuted in this half | `build/m59/plane-p131-k5.log` |
-| UD(𝔽₈₃,2), UD(𝔽₅₉,2) at k = 5 | in flight (one hour each) | — | `build/m59/plane-p{83,59}-k5.log` |
+| UD(𝔽₈₃,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (6,889 vertices, 1,522,472 clauses) | — | `build/m59/plane-p83-k5.log` |
+| UD(𝔽₅₉,2) at k = 5, whole plane | in flight (one hour; ends 00:25 UTC) | — | `build/m59/plane-p59-k5.log` |
 | the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses); **rigid (rank 123 = 2n − 3), OBSTRUCTED at level 2 — 98 of 123 stress conditions fail; witness 12 edges on 9 vertices, pairing 33** — the plane's own 5-critical core is not a shadow (P2's analogue one level down; kernel instance `Instances/LiftObstruction11.lean`) | the solver's refusal (untrusted) + verified colourings; the obstruction decided | `core-p11-k4-spheres.json`, `lift-core-p11-k4-spheres.json` |
 | the 5-critical core of UD(𝔽₁₉,2) | in flight (the sphere shrink; near-threshold asks at the 600-s wall) | — | `build/m59/cores-p19-k4.log` |
 
@@ -656,7 +657,7 @@ the refutation of the finite graph — and says so in its docstring.
 | P6 | the sphere-minimal ≥ 6 object at 131 has 20–60 spheres | NOT TESTED |
 | P7 | fewer than 50 hub passers on the 1581, all gen-1 residues | **REFUTED in both halves**: 3,739, none in gen-1 |
 | P8 | `Lift.lean` on the standard three, the obstruction theorem under 250 lines | **MET** (the module is 320 lines with its spec; the obstruction section is 90) |
-| P9 | the 1581's shadow at 131 is 5-colourable (M58's P7) | pending (undecided at 3 h+) |
+| P9 | the 1581's shadow at 131 is 5-colourable (M58's P7) | UNDECIDED at four hours (the external timeout killed the run; M58 §R3 addendum) |
 
 ### §R5. Incidents and instrument facts
 
