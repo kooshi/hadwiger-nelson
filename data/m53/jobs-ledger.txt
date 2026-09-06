@@ -51,3 +51,4 @@
 2026-09-06T04:51:27Z M55 B2: the ν ladder on core-star₂ STOPPED by me — its rung-1 ask hit the 1,800-s wall and the wall's timer thread raised (the interrupt failed), leaving the solve unbounded; ν = 2 there is exact by theorem + census (§R1); the interrupt mechanism under test
 2026-09-06T05:11:01Z M55 gate: build OK, axioms OK (578 clean, 5 declared purchases), lake lint passed (third run); M55 CLOSED — star₂ sweep, the full-pool census and the third core's shrink still in flight
 2026-09-06T05:24:45Z M55 addendum: the three-core star (cores 588/543/587) — build, absorb, core5, the triple-intersection criticality asks, then ν by implicit hitting sets (wall 3600), log build/m55/corestar3.log
+2026-09-06T05:34:29Z M55 addendum: the 108 theorem-admitted virtual-edge asks on the full-pool grown witness (10,541 pts; C = a triangle through the centre), wall 900 each, log build/m55/ask-depth2.log; P-M55-10 registered (0 hits)

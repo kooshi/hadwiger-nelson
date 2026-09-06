@@ -614,3 +614,20 @@ attribute removed), the second an auto-named decidability instance with an under
   follows a rename on one filesystem); 981 of 1,175 verdicts at this note, **2 critical: the fused centre
   (index 12) and one more (565)**. If the run dies before finishing, move the checkpoint back under
   `data/m54/` before resuming.
+* **The full-pool grown witness's critical set, complete** (1,175 asks, mean 113 s, 0 unknown;
+  `data/m55/critical-W-plus-cross-depth2.json`): **C = {12, 565, 1152} — three vertices, the fused centre and
+  two of its neighbours, pairwise adjacent** (degrees 54, 49, 49), of 10,541. The K-partner thickening of both
+  cosets makes the witness's 5-chromaticity redundant everywhere except at one unit triangle through the
+  centre. The localization theorem then admits **0 forced-equal candidates and 108 virtual-edge candidates**
+  (non-adjacent pairs whose neighbourhoods cover the triangle). **Registered before the run — P-M55-10: all
+  108 asks are refuted (0 hits)**; basis: the object is the witness's two cosets thickened by their own
+  K-partner lattices plus the cross pool, and every earlier reading of this kind (M54 §R2, §R3) was zero;
+  falsifier: any hit — the jackpot protocol.
+* **The three-core star** (cores 588 / 543 / 587, pairwise overlaps 31 / 220 / 98, triple intersection 16):
+  **3,100 points, 17,402 unit edges** (fp `c19235b55e35b1e5`); ABSORBED by `extends_of_hubs` (base 1,385,
+  4-colourable; three pieces with hubs; base-neighbour histogram {0: 1,692, 1: 23}); **C = ∅** (the 16 triple-
+  intersection vertices asked at four colours, 0 unknown; every other vertex non-critical by the cores'
+  1-minimality) — the fourth 5-chromatic unit-distance graph with no critical vertex; ν ∈ [2, 3]. The
+  hitting-set ν engine's first real run: solver cores of ~1,960 vertices, the hitting set a singleton
+  refuted one vertex per iteration (~65 s each) — the cores overlap in a large common set, so the lower
+  bound climbs only when that set empties; reported at its wall as a bracket.
