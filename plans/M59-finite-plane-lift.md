@@ -436,3 +436,77 @@ term survives in `h` and `linear_combination e.2.2 * h` fails — and the theore
 close (any weights would qualify — false). Replace `x₀ + π • y` by arbitrary `x`: `hre` has no statement — the whole
 content is the deformation shape. Drop `Nonempty V` in `Colorable.of_le_map`: `Function.invFun` fails to elaborate, and
 the theorem is false (empty V, nonempty W). The three `decide` reds and the hex-shell green are the spec's adversaries.
+
+## §M3. Experience-modeling pass (2026-09-06; fresh Skill invocation)
+
+**The consumers, and what each holds.** (a) A reader of `Lift.lean` with a subgraph `H` of `finitePlane p` that refuses
+five colours, asking how it becomes χ(ℝ²) ≥ 6: they hold `H`, a refutation of `H` (an LRAT chain on `H` presented as an
+edge list, transported along the isomorphism), and — if the lift exists — a tower certificate `c` and a residue hom `φ`.
+The path is ONE theorem, `UDCert.add_one_le_chromaticNumber_plane_of_lift`, whose docstring is the recipe, and every
+hypothesis it takes is something the reader can produce (`Injective (c.drawing φ hS u)` and `H ≤ (edgeGraph …).map
+(drawing)` decide on a concrete certificate). (b) A reader with a framework and a stress, asking whether the framework
+lifts: the headline must be a statement about LIFTS, so the deformation predicate is named — `IsLift π x₀ L y` ("along
+`y`, every listed edge of `x₀ + π • y` has quadrance one") — and the negative reads `¬ ∃ y, IsLift π x₀ L y`
+(`not_exists_lift_of_stressPairing_ne_zero`), with `stressPairing_eq_zero_of_lift (hy : IsLift π x₀ L y)` its positive
+form. The consumer's residue hypothesis is written with a named `residue p : ZMod (p²) × ZMod (p²) → ZMod p × ZMod p`
+("the drawing's residue is `x₀`'s residue"), decidable on an instance, instead of a `Prod.map castHom castHom` pair. (c)
+`exact?` and `simp`: `drawing_map` is `@[simp]` (toward one drawing through the composite hom — the shape a consumer holds
+after mapping coordinatewise), `netStress_nil`/`netStress_cons` are `@[simp]` (the equation lemmas; terminating on a
+literal), `dot_zero_left` is `@[simp]`; the four distributing `dot` lemmas stay cited (`simp only`) — the module's proofs
+are their only users and a global outward-distribution rule is an unrequested byte. `Colorable.of_le_map` /
+`chromaticNumber_le_of_le_map` follow `Colorable.of_hom` / `Colorable.mono_left`; the hom on `Function.invFun` stays
+inside the proof (no consumer asked for it). (d) The instance author: `e.2.2` for a weight and `e.2.1` for a head are the
+implementation across the wire — a stressed edge is a `structure StressedEdge V R` with `src`, `dst`, `wt`, the literal
+`⟨0, 1, 2⟩` costs nothing, and the abbrev `StressedEdges` is dropped (`List (StressedEdge V R)` already reads). The
+framework's positions name the object, so `x₀` is the FIRST argument of `netStress`, `IsStress`, `stressPairing`,
+`IsLift`, `sum_dot_eq_sum_netStress` alike. `quad` keeps its name (Mathlib has no `quadrance` at this pin) with
+`quad_eq_one_of_adj` the single bridge from `unitQuadrance_adj`. `ZMod.exists_smul_of_castHom_eq` becomes
+`ZMod.exists_eq_add_mul_of_castHom_eq` (it concludes `a = b + p * t`); its home is `HadwigerNelson.ZMod`, no collision.
+
+**The docstrings' contract.** `stressPairing_eq_zero_of_lift` says what a nonzero pairing licenses and on what: the
+framework has no lift `x₀ + π • y` in the ring; at `ZMod (p²)` no lift modulo `p²`; a stress supported on a sub-framework
+is a stress of the whole, and a lift restricts, so a nonzero pairing on a SUB-framework refutes every lift of the whole
+core (§M2's design). `UDCert.stressPairing_eq_zero_of_drawing` says exactly what an instance certifies — no valid tower
+certificate, drawn at level `p²` through any hom out of any subring with an inverse of its denominator, covers the
+framework with matching residues — and what it does not: other number fields, configurations not presentable as tower
+certificates; the ℤ_p statement ("no lift at any level, hence none in any number field with a degree-one prime above
+`p`") is the hand derivation §S1, of which the kernel theorem is the level-`p²` face. `add_one_le_chromaticNumber_plane_of_lift`
+names its one unstated cost: `¬ H.Colorable k` is where a refutation certificate of the finite graph enters.
+
+**Placement and receipts.** `Proofs.lean`: `Lift` after `UnitQuadrance` in the general block; the instance module (when a
+core exists) after `Instances.FinitePlane11`. `scripts/Axioms.lean` M59 block: `chromaticNumber_le_of_le_map`,
+`UDCert.add_one_le_chromaticNumber_plane_of_lift`, `stressPairing_eq_zero_of_lift`, `not_exists_lift_of_stressPairing_ne_zero`,
+`UDCert.stressPairing_eq_zero_of_drawing`, and the instance's headline. Spec: the three `tri3` reds stay; the hex shell at
+11 is the green (`IsStress (11 : ZMod 121)` and `stressPairing … = 0` by `decide`, residues `(0,0), (1,0), (6,3), (5,3),
+(10,0), (5,8), (6,8)`, rim weights 1, spoke weights 120) — the same numbers the instrument's self-test reproduces, so the
+two evaluators are checked against each other; the ω pins (a triangle exists at 11; none at 19, a `decide` over 361²
+pairs) live in the instance module with the other `p`-specific data.
+
+**The instrument (`tools/fplift.py`).** The conversation: a session holding a core asks "does it lift?" and gets one
+command, one line, one record —
+
+    python3 tools/fplift.py local --core data/fplane/core-p131-k5-spheres.json
+    [fplift] core-p131-k5-spheres (n=1,204, m=3,612, p=131): rigid (rank 2,405 = 2n − 3), stress dim 1,207;
+             OBSTRUCTED at level 2 — 1,198 of 1,207 stress-basis conditions fail; minimal-support witness: 9 edges on
+             6 vertices, pairing 57 ≠ 0 (mod 131²)   → wrote data/fplane/lift-core-p131-k5-spheres.json
+
+— the verdict vocabulary `obstructed-at-level-k`, `passes-to-precision-N`, `flexible (f)`, `undecided` (a cap was hit;
+never a word meaning "clean"), the population in the same sentence as the verdict (G21's headline rule), and the witness
+in the record as the kernel instance's literal (`vertices`, `x0` as residues in [0, p), `edges` as `[u, v, λ]` triples,
+`pairing`). Records and what each licenses (the README row): `core-p<P>-k<K>-<method>.json` — the solver's refusal
+(untrusted) plus per-vertex necessity witnesses (verified colourings) and the second encoding's verdict; `lift-<core>.json` —
+`obstructed-at-level-2` with a witness is a certificate re-checkable by the kernel instance, `obstructed-at-level-k > 2` a
+certificate re-checkable by exact arithmetic (the level-(k−1) solution and the failing digit are in the record),
+`passes-to-precision-N` the coordinates modulo p^N with every edge unit modulo p^N (anyone re-checks with integer
+arithmetic; no solver, no float); `hubs-<stage>-p<P>.json` — per residue point its degree, its level-2 verdict with the
+count, its Newton verdict, and for the passers the recognized coordinates and field. Errors that must not be silent: a
+core whose listed edges are not all unit modulo p is refused by an `INSTRUMENT CATASTROPHE` assert naming the first
+offending edge; a stage reduced at a prime where a radicand is a non-residue is refused naming the radicand; a Newton
+step whose Jacobian is singular modulo p reports `flexible` rather than dividing. The self-test is the user's first
+experience: each control's line names the object, the expected reading, and what a red would mean — the spindle at 11,
+83, 131 lifts (rigid; Newton reproduces its K-coordinates; K recognized), the hex shell at 11 passes level 2 with the
+kernel's own numbers, the collinear triangle at 3 is obstructed with pairing 6 (mod 9) (the kernel's number), a 4-cycle
+reports `flexible (1)`, a planted false edge on the spindle at 83 is obstructed at level 2 (its pairing pinned once
+computed), a planted corruption of a Newton residual is caught by the exact re-check, Heule-510's injective sub-reduction
+at 11 passes every level to the registered precision. The M58 conventions kept: records in `data/fplane/`, `--out`, the
+claim-scope field in every record.
