@@ -743,17 +743,17 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
 
 ### The finite-plane pivot (2026-09-06)
 
-* **T32 — which finite planes refuse five colours, and is 11 the last 5-sealing prime?** χ(UD(𝔽_p, 2)) is 3, 4, 5, 5 at
+* **T32 — which finite planes refuse five colours, and is 11 the last 5-sealing prime? ANSWERED at M58 (2026-09-06):** every p ≥ 67 refuses five by Weil + Hoffman (λ(c) = −K(1, c/4)); 59 by its exact spectrum (5.022); 19 does NOT (χ(UD(𝔽₁₉,2)) = 5, measured) — so 11 is not the last 5-sealing prime in general, but for every field containing K it is the ONLY usable prime below 67, hence the only sealing prime: F ⊇ K is 6-open ⟺ the 2-adic wall is broken ∧ 11 is inert. 23, 31, 43, 47 are the remaining undecided planes (Hoffman floor 5; SAT in flight at the close). Original text: χ(UD(𝔽_p, 2)) is 3, 4, 5, 5 at
   p = 3, 7, 11, 13 (13 ≡ 1 mod 4: not usable). For the usable primes 19, 23, …, 83, 107, 131: the first p whose plane
   refuses five is the first prime that seals nothing; if every usable p ≥ 19 has χ ≥ 6, then for multiquadratic fields
   "6-open" is exactly "the 2-adic wall broken and some radicand a quadratic non-residue mod 11" — de Grey's field and K(√7) are
   open pending their planes (K(√35) is 11-inert but its 2-adic wall stands: χ = 4). FS-7.
-* **T33 — the reduction as a kernel theorem.** The homomorphism for a SPECIFIC certified graph is a decide over its edge
+* **T33 — the reduction as a kernel theorem. ANSWERED at M58 in its certificate form:** `UDCert.drawing_adj` (any commutative ring, any subring of the tower with a hom, an inverse of the denominator), `chromaticNumber_finitePlane11 = 5`, `chromaticNumber_heule510 = 5`; the field-level statement (integrality of unit vectors at the primes above 11) stays a hand argument, priced in `plans/M58-field-sieve.md` §S3. Original text: The homomorphism for a SPECIFIC certified graph is a decide over its edge
   list (Heule-510 → UD(𝔽₁₁,2): 2,504 checks), and χ(UD(𝔽₁₁,2)) = 5 follows in the kernel from the 121-point colouring plus
   Heule-510's certified refusal of four colours — no LRAT. The GENERAL statement "χ(ℚ(√3,√5,√11)²) ≤ 5" quantifies over all
   finite unit-distance graphs in the field and needs the integrality of unit vectors at the inert prime (a valuation
   argument); priced in FS-7 phase C.
-* **T34 — the shadow sieve as a dial on the closure.** At p = 131 the 1581's directions reduce to 55 of the circle's 66
+* **T34 — the shadow sieve as a dial on the closure. PARTLY ANSWERED at M58:** the spectral floor of the 1581's 55-direction shadow at 131 is 4.96 (≥ 5 only) and at 479 4.32; the gen-1 closure's shadow at 131 is the whole plane (≥ 8) and at 479 has floor 8.38; whether the 1581's shadow is 5-chromatic (P7) is a 17,161-vertex SAT question, in flight at the close. Original text: At p = 131 the 1581's directions reduce to 55 of the circle's 66
   residue pairs and its gen-1 closure's to all 66; at 479, 64 and 210 of 240. The closure's shadow at 131 is the whole
   plane; is the 1581's own 55-direction shadow 5-chromatic (P7 of FS-7)? If so, no 6-forcer uses only the 1581's
   directions, and a 6-forcer in de Grey's field needs new directions — which ones, i.e. which direction sets D have
@@ -763,3 +763,12 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
 * **T36 — the Nullstellensatz degree of the certified cores.** The spindle at 3 colours, the 9-core and 122-core at 4, the
   23-core at 6: the least degree of a polynomial-identity refutation — does it read the integrality gap (the 23-core's
   χ = ω + 3) where the relaxations read nothing?
+
+* **T37 — can a 6-critical subgraph of a finite plane be lifted to the field?** A lift of H ⊆ UD(𝔽_p,2) — one point of F² per
+  vertex, in its residue class, every edge unit — is a copy of H in F², so a lifted 6-critical subgraph of UD(𝔽₁₃₁,2) would be
+  a 6-chromatic unit-distance graph. The system is overdetermined (|E| ≥ 5|V|/2 quadratics in 2|V| unknowns); the local
+  𝔭-adic test (Hensel) decides cheaply whether any core can lift. FS-11.
+* **T38 — the exact values χ(UD(𝔽_p,2)) at p = 23, 31, 43, 47, and the growth law.** The values known: 3, 4, 5, 5 at 3, 7, 11,
+  19; ≥ 6 from 59 on by the spectrum. Is the sequence monotone in p? Does χ(UD(𝔽_p,2)) − Hoffman(p) stay bounded (Hoffman is
+  tight for very regular graphs; the planes at 11 and 19 sit 1.5 and 1.4 above it)? The instrument is `fplane.py chi` with
+  the clique pin; 23 and 47 (ω = 3) may need cube-and-conquer.

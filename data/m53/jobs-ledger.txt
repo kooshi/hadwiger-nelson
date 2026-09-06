@@ -71,3 +71,4 @@
 2026-09-06T19:39:55Z M58 phase A′: the 1581's 55-direction shadow at 131 (17,161 vertices, 110-regular) at k = 5, wall 14000 s, log build/m58/shadow-1581-p131-k5.log (scratch runner; the shadow subcommand re-derives it for the record)
 2026-09-06T19:43:26Z M58 gate: scripts/build.sh (UnitQuadrance.lean and Instances/FinitePlane11.lean new; the rest cached) log build/m58/build.log
 2026-09-06T19:52:23Z M58 gate chain: build OK (build/m58/build.log) → axioms.sh → lake lint; logs build/m58/{axioms,lint}.log
+2026-09-06T19:57:56Z M58 CLOSED (gate: build OK, axioms 606 clean / 5 purchases, lint passed, no sorry); left running: UD(F_p,2) at k = 5 for p = 23, 31, 43, 47 (build/m58/chi-p*-k5.log), the 1581's shadow at 131 at k = 5 (build/m58/shadow-1581-p131-k5.log, scratch runner), the M55 108 asks (pid 839605)

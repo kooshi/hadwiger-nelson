@@ -66,7 +66,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: the finite-plane pivot, 2026-09-06 (after M57 CLOSED the same day).**
+**Last updated: M58 CLOSED, 2026-09-06 (the field sieve; the finite-plane pivot's milestone).**
 
 ### Where the problem stands
 
@@ -1007,6 +1007,31 @@ inert), K(√7) has 83 first, K(√35) has 107 first; whether those planes refus
 papers do not contain the bound; Soifer 2024 unread). Not kernel-checked: the reduction is a hand proof, the plane's value a
 verified colouring plus the solver's refusal — priced in the stub.
 
+**M58 — the field sieve (CLOSED 2026-09-06, the same day).** The milestone opened with a derivation that removed its own
+solver runs: the eigenvalues of UD(𝔽_p, 2) are Kloosterman sums, **λ(c) = −K(1, c/4)** (checked to 10⁻¹³ at every p ≡ 3 mod 4
+below 600), so Weil's |K| ≤ 2√p and Hoffman's χ ≥ 1 + λ_max/(−λ_min) give **χ(UD(𝔽_p,2)) ≥ 1 + (p+1)/(2√p) > 5 for every
+p ≥ 62** with no computation, and the exact spectrum adds 59 (Hoffman 5.022). The planes the stub had queued for SAT are
+≥ 6 at 83, ≥ 7 at 107, **≥ 8 at 131**, ≥ 13 at 479 — P2 and P3 met by derivation, the 40-minute solver runs killed. Then the
+arithmetic: for every field containing K = ℚ(√3, √11) the usable primes are p ≡ 11 (mod 12) with p a non-residue mod 11, so
+**11 is the only usable prime below 67, and "F ⊇ K is 6-open ⟺ the 2-adic wall is broken ∧ 11 is inert in F" is a theorem** —
+de Grey's field (131, 479), K(√7) (83, …), K(√13), K(√79), K(√127) and every odd squarefree d ≡ 5 or 7 (mod 8) that is a
+non-residue mod 11 (the stub's list corrected: d ≡ 5 breaks the wall through 3d ≡ 7) are 6-open; K(√5), K(√23), K(√247),
+K(√5,√247), Heule's are sealed at 5; K and K(√35) at 4. The measurements: **χ(UD(𝔽₁₉,2)) = 5** (P1 and the stub's "11 is the
+last 5-sealing prime" refuted as stated — 19 seals fields without √3, which Fischer already bounds at 4); 23, 31, 43, 47 at
+five colours in flight at the close (Hoffman floors 4.0–4.7; ω = 3, 2, 2, 3); the shadow sieve's spectral floors — the 1581's
+55-direction shadow at 131 reads 4.96 (≥ 5 only; its five-colourability a 17,161-vertex SAT in flight), the gen-1 closure's
+shadow at 131 IS the plane (≥ 8) and at 479 has floor 8.38. **Kernel** (`UnitQuadrance.lean`, `Instances/FinitePlane11.lean`;
+axioms exactly the standard three): the plane as a functor of the coordinate ring — `unitQuadrance R` for every commutative
+ring, a ring hom applied coordinatewise a graph hom (`unitQuadrance.map`, the finite-plane bound in one line) — and the
+reduction of a certificate as ONE theorem over a subring of the tower with a hom and an inverse of the denominator (no
+field, no condition on p: usability lives in the existence of the hom), instantiated at 11 through the `√7`-free subring
+`Q4.sevenFree ≅ ℤ[√3,√5,√11]` and at 131 through the whole tower; **`χ(UD(𝔽₁₁, 2)) = 5`** with no solver (the 121-entry table
+decided proper; the refusal of four from Heule-510's certified refusal through the reduction — no edge re-examined) and
+**`χ(Heule-510) = 5` exactly** — the first certified upper bound on a certified 5-chromatic witness; `χ(UD(𝔽₁₃₁,2)) ≥ 5` for
+free. The field-level statement (the integrality of unit vectors at the primes above 11) stays a hand argument. FS-11 minted
+at the close: a LIFT of a 6-critical subgraph of UD(𝔽₁₃₁,2) into de Grey's field — one point per residue class, every edge
+unit — would be a 6-chromatic unit-distance graph; the local 𝔭-adic test says cheaply whether any core can lift.
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -1078,6 +1103,7 @@ verified colouring plus the solver's refusal — priced in the stub.
 | 51 | **Additive rigidity: the reduction theorem, the closure gauge, and where the family dies** (M57). **Kernel** (`AdditiveRigid.lean`, standard three axioms): `IsAdditive q C` (a coset colouring along an address map — the same-colour relation is the trace of the cosets of a subgroup containing k·V; the iff is the content), `AdditivelyRigid`, the bridge from homs and from M56's `additiveColoring`, `IsAdditive.apply_eq` (L1), **`forces_of_additivelyRigid`**, `add_one_le_chromaticNumber_unitDistance_of_additivelyRigid`, **`six_le_chromaticNumber_plane_of_additivelyRigid`** (the target: all 5-colourings additive + a 5Λ-pair at distance ≥ 1/2 ⟹ χ ≥ 6), the unit path as the model (`three_le_chromaticNumber_plane_of_pathGraph`), two reds (`cycleGraph 6` at three pins `k • v ∈ H` and ←; the path at three pins →). **Derived**: rigidity ⟹ Kempe-closure (every {a, b}-subgraph of every admissible hom connected), γ = Σ (components − 1) with loose vertices its size-1 face; on three-ladder K-material the residue colourings' Λ_c have rank ≤ 3, so no such chunk is additively 4-rigid. **Measured** (`tools/additive_rigid.py`, 17 controls; `data/m57/`): the Moser spindle 16/12/4 at four colours (P1 refuted); G γ = 0 with 18 = 18 (P10); H γ = 12 = its defect-1 count; the 122-/588-cores and the seed's unit part γ = 200/182/126 at four, the solver's first 2,000 colourings all non-additive; the witnesses at five loose on 16–24 % per colouring; W's 71 cross points: 67 in-lattice, the gauge within 1.4 %, kills to 110/200; W + 63 cross points: 500 units in 5Λ, no hom (the depth-2 stage vacuous at every radius); Heule-510: 3,456 homs to r² ≤ 3, 96 whole; the 252-cheat forcing subset: > 5,000 colourings in three defect regimes. Fischer's framework; the closure gauge, the reduction, the 5-divisibility of the cross lattice and the G/H reading are ours. | `Proofs/HadwigerNelson/AdditiveRigid.lean`, `tools/{additive_rigid,m57_b2,m57_richness}.py`, `data/m57/`, `plans/M57-additive-rigidity.md` §R | M57 |
 
 | 52 | **The finite-plane bound and the first exact wall-broken planes** (the pivot of 2026-09-06; hand proof + verified computation, NOT kernel-checked). Theorem: F ⊂ ℝ a number field with a prime above p ≡ 3 (mod 4) of odd residue degree ⟹ every finite unit-distance graph in F² maps homomorphically into UD(𝔽_p, 2), so χ(F²) ≤ χ(UD(𝔽_p, 2)). Measured: χ(UD(𝔽₃,2)) = 3, χ(UD(𝔽₇,2)) = 4 (Vinh 2005), **χ(UD(𝔽₁₁,2)) = 5**, χ(UD(𝔽₁₃,2)) = 5 (p ≡ 1: not usable); Heule-510 → UD(𝔽₁₁,2) with 2,504/2,504 edges on the circle and a proper pulled-back 5-colouring; W 5,773/5,773; the seed 1,004/1,004. **χ(ℚ(√3,√5,√11)²) = χ(K(√247)²) = 5**; K, K(√5), K(√5,√247) sealed; de Grey's field's first usable prime is 131. The theorem and the value are the web session's; the verification, the instrument (`tools/fplane.py`, 11 controls incl. a planted wrong root) and the field consequences as stated are ours. | `reference/Chat-analysis/`, `tools/fplane.py`, `data/fplane/` | pivot |
+| 53 | **The field sieve: the finite planes' spectra, the 6-open fields as a congruence, and the exact plane at 11 in the kernel** (M58). **Kernel** (`UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, standard three axioms): `unitQuadrance R` (any commutative ring; `finitePlane p := unitQuadrance (ZMod p)`), `unitQuadrance_adj`, **`unitQuadrance.map`** (a ring hom applied coordinatewise is a graph hom — the finite-plane bound as functoriality), `Adjoin.lift`/`Q3.lift`/`Q4.lift` (the towers' universal property into any ring), `Q4.sevenFree : Subring Q4` with `Q4.sevenFree.toQ3` (the √7-free elements ARE ℤ[√3,√5,√11]), **`UDCert.drawing_adj`** (a valid certificate + a subring holding its coordinates + a hom out of it + an inverse of D ⟹ a graph hom into `unitQuadrance R`; no field, no condition on p), `colorable_of_unitQuadrance` / `not_colorable_unitQuadrance` / `add_one_le_chromaticNumber_unitQuadrance`, **`chromaticNumber_finitePlane11 : χ(UD(𝔽₁₁,2)) = 5`** (two decides and one comap; no LRAT, no solver, no edge re-examined), **`chromaticNumber_heule510 = 5`** (the first certified upper bound on a certified witness), `five_le_chromaticNumber_finitePlane131`, `heule510_coordsIn_sevenFree` (P8), reds (no inverse of 11 in ZMod 11; D ≠ 0 would not do — ZMod 4; a wrong root; a corrupted table). **Derived** (`plans/M58-field-sieve.md` §S1–§S2, §R1–§R2): λ(c) = −K(1, c/4) ⟹ χ(UD(𝔽_p,2)) ≥ 1 + (p+1)/(2√p) > 5 for p ≥ 62 (Weil + Hoffman), 59 by the exact spectrum; for F ⊇ K the only usable prime below 67 is 11 ⟹ **6-open ⟺ wall broken ∧ 11 inert**; the wall over K breaks for odd squarefree d ≡ 5, 7 (mod 8). **Measured** (`tools/fplane.py`, 21 controls; `data/fplane/`): the spectral table below 600 (Kloosterman residual ≤ 5.7·10⁻¹⁴, FFT cross-check); χ = 3, 4, 5, **5** at 3, 7, 11, **19** (P1/P4 refuted as stated); the map of 19 fields (de Grey's, K(√7), K(√13), K(√79), K(√127) 6-open); the shadows: the 1581 at 131 floor 4.96, at 479 4.32; the gen-1 closure at 131 the whole plane, at 479 floor 8.38; 23/31/43/47 and the 1581's shadow at k = 5 in flight. Vinh's objects and bounds; Medrano–Myers–Stark–Terras's spectrum (second-hand); the reduction theorem in certificate form, the K-field theorem, the exact plane in the kernel, the map and the shadow floors are ours. | `Proofs/HadwigerNelson/UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, `tools/fplane.py`, `data/fplane/`, `plans/M58-field-sieve.md` | M58 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
@@ -1085,7 +1111,15 @@ verified colouring plus the solver's refusal — priced in the stub.
 
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
-(WORKFLOW step 9). **Re-ranked at the finite-plane pivot, 2026-09-06, after the M57 close (Kooshi: stubs for all, then the
+(WORKFLOW step 9). **Re-ranked at the M58 close, 2026-09-06:** FS-7 CLOSED as M58 (the field-selection instrument the hunt now consults
+first: a field over K is 6-open iff its 2-adic wall is broken and 11 is inert; the finite planes refuse five from 59 up by their spectra;
+χ(UD(𝔽₁₁,2)) = 5 in the kernel). The table's top: **rank 1 FS-11, lift a 6-critical subgraph of UD(𝔽₁₃₁,2) into de Grey's field**
+(`plans/STUB-finite-plane-lift.md` — the constructive face of the pivot, the one route it opens that could PRODUCE a 6-object; the
+local 𝔭-adic lift test first); rank 2 FS-6 on the 6-open fields (de Grey's, K(√7), K(√13), K(√79), K(√127)); rank 3 FS-2; rank 4 FS-8
+(one `map` row once Haugland's field is known); FS-4; FS-9; FS-10; FS-5. The 23/31/43/47 planes and the 1581's shadow at 131 at five
+colours were in flight at the close (`build/m58/`); their records go into `data/fplane/` as `chi-p<P>-k5.json` / `shadow-degrey1581-p131.json`
+(re-run with `fplane.py chi --p P --k 5 --pin-clique` / `shadow --degrey --p 131 --k 5` if lost). Kooshi picks. The pivot text follows for the record.
+**Re-ranked at the finite-plane pivot, 2026-09-06, after the M57 close (Kooshi: stubs for all, then the
 field sieve):** rank 1 FS-7 the field sieve (`plans/M58-field-sieve.md`, opening as M58 — which fields can host a 6-forcer;
 the exact wall-broken planes; the kernel certificate of χ(UD(𝔽₁₁,2)) = 5 through the certified Heule-510); rank 2 FS-6 on de
 Grey's field only; rank 3 FS-2 re-aimed with its scope note; rank 4 FS-8 the Haugland 7-adic check (new); rank 5 FS-4; ranks
@@ -2651,6 +2685,29 @@ record shows what was believed, what was measured, and what is now proved.
   (d ≡ 7 mod 8 and a non-residue mod 11), not 35. Composes with G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of one mechanism,
   and "blind above four" was the linear reading), G42 (de Grey's field is the one place both the family and the 6-option
   survive).*
+  **AMENDED at M58 (2026-09-06): reading (a) is REFUTED as stated and REPLACED by a theorem.** 19 is a 5-sealing prime (χ(UD(𝔽₁₉,2)) = 5,
+  measured), so 11 is not the last one in general — but 19, 23, 31, 43, 47 are never usable for a field containing √3 and √11, and every
+  prime from 59 up has a plane ≥ 6-chromatic BY ITS SPECTRUM (G44), so for F ⊇ K the only sealing prime is 11 and "6-open ⟺ wall broken ∧
+  11 inert" is exact. The kernel now holds χ(UD(𝔽₁₁,2)) = 5 (no solver) and the reduction as a theorem over any ring; the candidate radicals
+  over K are the odd squarefree d ≡ 5 or 7 (mod 8) that are non-residues mod 11 (13 joins 7, 79, 127). Reading (d) gained its instrument
+  (`fplane.py shadow`) and its first floors (the 1581's shadow at 131: 4.96 — five colours undecided); FS-11 is the constructive reading
+  the analysis gestured at, made precise: a lifted 6-critical subgraph of a finite plane IS a 6-chromatic unit-distance graph.
+
+* **G44 — The finite planes are Kloosterman-controlled, so the sieve's whole power lives at small primes, and a field's 6-openness
+  is a congruence.** (M58, 2026-09-06; derived, then measured to 10⁻¹³.) The eigenvalues of UD(𝔽_p, 2) are minus the Kloosterman sums
+  K(1, c/4), one per norm class; Weil bounds them by 2√p and Hoffman turns that into χ ≥ 1 + (p+1)/(2√p), which exceeds 5 from p = 62 —
+  so **no prime above 47 can ever seal a field at 5, the sieve decides fields with its four or five smallest usable primes, and for
+  fields over K it is the single prime 11.** The planes' true values sit well above the floor (5 against 3.5 at 11; 5 against 3.6 at
+  19), so the floor never decides a small plane and always decides a large one: the two regimes are exactly "a SAT question" and "a
+  theorem", with the boundary at 59. **[derived + measured: `data/fplane/spectral-below-600.json`]** *Consequences: (i) the descent's
+  endgame field, the copy trick's field, any field a construction adjoins, is checked by a Legendre symbol at 11 and a square-class
+  congruence mod 8 before a solver runs — the field-selection instrument the pivot promised, now a two-line test (`fplane.py map`);
+  (ii) the finite planes from 59 up are ≥ 6-chromatic objects whose 6-critical subgraphs are computable without geometry, and each is
+  a candidate template for a 6-forcer if it lifts (FS-11); (iii) the shadow sieve inherits the same instrument — a direction set D
+  has a spectral floor 1 + |D|/(−λ_min(D)), read before any SAT. Readings on top, falsifiable: (a) χ(UD(𝔽_p,2)) − Hoffman(p) stays
+  bounded, so the planes are within a constant of their spectral floor (T38 — refuted if 23 or 47 turns out far above 5); (b) no
+  6-critical subgraph of UD(𝔽₁₃₁,2) passes the local lift test into de Grey's field (FS-11 P2). Composes with G43 (the residue plane's
+  own chromatic number) and G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of the same sieve).*
 
 ## Whose work this is
 
