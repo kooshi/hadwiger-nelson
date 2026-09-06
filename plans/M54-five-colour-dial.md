@@ -516,7 +516,7 @@ launched; the two-core union of decision B3 continues in parallel as the smaller
 | F₂, the forcing-critical set of U for pair 2 = (813, 1939) (1,951 asks, 24 workers, 636 s) | **5 vertices: {428, 508, 607} ∪ {813, 1939}, none in the 588-core** |
 | F₁ ∩ F₂ | **∅** |
 | the union U ∪ R₁(U) ∪ R₂(U) (`two-spindle --full`, 60 digits, float prescreen) | **5,857 points** (1,953 + 1,952 + 1,952, no fusion — each copy omits its centre), **41,390 unit edges**; cross chords U–R₁ 8, U–R₂ 11, **R₁–R₂ 0** (copies never touch: G12/M52 again); 2 near-misses rejected; refuses four colours, admits five |
-| critical set | **∅ by the §R3 derivation** (a vertex of U is critical only if forcing-critical for BOTH pairs; no copy vertex is) — the control census on the 34 load-bearing vertices (F₁ ∪ F₂ and their copies) is running; every one is predicted non-critical |
+| critical set | **∅ by the §R3 derivation** (a vertex of U is critical only if forcing-critical for BOTH pairs; no copy vertex is) — **control green: all 34 load-bearing vertices (F₁ ∪ F₂ and their copies) asked directly, 34/34 non-critical, 0 unknown at an 1,800-s wall** (`data/m54/critical-spindles-35_1859-813_1939-full.json`); the other 5,823 non-critical by the derivation |
 | candidates at five colours | every pair (C = ∅ admits everything): the exhaustive `Rigidity` sweep at five colours is the reading, launched with a 3,600-s wall per call and per-model checkpoints |
 
 **What this object is.** The first 5-chromatic unit-distance graph in this programme's hands whose
