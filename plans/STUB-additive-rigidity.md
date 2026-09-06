@@ -164,3 +164,39 @@ witness `data/m54/witness-exact-core-8over3.json`; the 1581 `tools/degrey_cert.j
 | the kernel piece | D1, the reduction theorem, first — it names the target | measure first | the hypotheses ARE the design spec; an afternoon | high |
 | the bridging case | four colours in K before five anywhere | five directly | the calibrated-bed rule; D3's obstruction is visible at four | high |
 | bearing on 6 | HIGH: a sufficient condition the kernel can hold, and a continuous gauge for the descent's stalled goal | — | — | — |
+
+## §H. Handoff for the session that opens M57 (written 2026-09-06 at the compaction before it)
+
+**Kooshi's decision:** M57 = this stub (FS-1, rank 1 of `plans/FRONTIER-STUBS.md`). Do NOT re-decide it.
+
+**Read, in this order, before anything else:** (1) `CLAUDE.md` § Frontier — the M56 paragraph, G41, § Paths forward's
+pointer; (2) this stub, §1–§B in full; (3) `plans/M56-arithmetic-of-tightness.md` §S1 (the derivations L1–L7), §M1.5
+(the Kempe localization), §R1–§R3 (the numbers this stub's facts table cites); (4) `Proofs/HadwigerNelson/Additive.lean`
+(the four theorems D1 composes with; note `Forces` lives in `Forcer.lean`, `Separated` in `Fan.lean`, the spindle
+theorem `not_colorable_of_forced_equal` in `OneDefect.lean`); (5) `tools/additive.py`'s module docstring and
+`data/m56/README.md` (the stage vocabulary, the verdict words, what a row licenses).
+
+**Then WORKFLOW step 3 onward, no shortcuts:** rename this file to `plans/M57-additive-rigidity.md` (git mv; keep the
+FS-1 row in `FRONTIER-STUBS.md` with status "opened as M57"); write the subplan (the skeleton for D1 — the reduction
+theorem's exact statement over `Additive.lean`'s vocabulary, `sorry` at the leaf — and the instrument's subcommand
+table with its controls; measure before specifying only where cost decides a shape); commit; the three modeling
+passes as FRESH Skill invocations (`debruijn-domain-modeling`, then `debruijn-obligation-modeling`, then
+`debruijn-experience-modeling`), each committed before the next; then implement. The calibrated-bed rule applies:
+the four-colour bridging case (B1: is the Moser spindle additively 4-rigid; where D3's coset-component condition
+first fails on K-chunks) runs BEFORE anything at five colours. Register P1–P5 as they stand unless the subplan's
+derivations sharpen them — and if a derivation settles one before measurement, say so in the subplan as M56 did.
+
+**Cheap first computations the subplan may run** (scratch, then reproduced under controls in phase A): the Moser
+spindle's 4-colourings up to palette against its 8-or-fewer additive ones (seconds); the seed's 446 cheats' free
+classes under D2 (seconds); D3's component condition on the hexagonal ball (seconds).
+
+**Running at the compaction:** the M55 108 targeted asks on the full-pool thickened witness (pid 839605, ~9 h,
+`build/m55/ask-depth2.log`; result `data/m55/ask-W-plus-cross-depth2-k5.json` when written; exit 3 = jackpot;
+registered P-M55-10: 0 hits). Read its result when it exists, record it as an M55 §R6 addendum and an FS-3 datum,
+then move the untracked `data/m54/critical-W-plus-cross-depth2.json` into `data/m55` and commit. It is the only
+untracked path; the tree is otherwise clean at commit `2520113`.
+
+**Standing rules that bit this session:** kill by PID (never `pkill -f` a pattern matching the shell); `build/` is
+gitignored — scripts go in `tools/`; ALWAYS `./scripts/build.sh`; one heavy job at a time; every claim of
+"separated" carries a verified colouring, every "forced-additively" is theory-level and worded so (L2); a complete
+sweep listing no forced pairs has settled every pair as separated (the inverted-candidate incident, M56 §R5).
