@@ -414,3 +414,87 @@ under every surviving hom?** — and the instrument for it is `tight`, run befor
 | P8 | on the 5-chromatic witnesses at five colours every additive colouring has loose vertices, more than 10 % of the vertices on each (Heule-510: 24 colourings; W: 432; the 1581: the 3,000-hom sample) | W's colourings at the random baseline; boundary vertices | medium-high |
 | P9 | on every chunk the number of defect-1 non-additive colourings up to palette is at most the number of loose (colouring, vertex, missing colour) incidences, with equality on the seed (12 = 12) and on the spindle (4 < 30: palette collapse) | (c): each defect-1 colouring is a loose incidence | high on ≤, medium on the seed's equality being typical |
 | P5′ (sharpened P5) | W's depth-one and depth-two cross points reduce the loose-incidence count of W's 432 additive colourings by under 5 % when adjoined (each point tightens only its own unit neighbours), and kill fewer than 5 % of the 200 sampled colourings | D5; (c) | medium |
+
+## §M1. Domain modeling pass (2026-09-06, fresh invocation after the §S6 commit `30501cc`)
+
+**M1.1 The object is a reconfiguration graph, and rigidity is a closure property.** The chunk's proper
+k-colourings carry moves — single-vertex recolourings and Kempe swaps — and every obstruction S6 found is an
+edge of that graph LEAVING the additive family A: a loose vertex is a Kempe component of size 1, a disconnected
+{a, b}-subgraph a component of size ≥ 2. So "A is additively rigid" (A = the whole space) decomposes as "A is
+closed under every move" (necessary, solver-free) plus "the move graph has no other component" (the remainder,
+enumeration only). D3 and D3′ are one census: for each admissible hom and each colour pair, the components of the
+{a, b}-subgraph; the **gauge** γ(X, k) := Σ over (hom, colour pair) of (components − 1), whose isolated-vertex
+part is the loose-incidence count and whose remainder is the Kempe part; γ = 0 ⟺ A is tight and connected. On
+the seed's unit part γ = 1,197 (from S6's histogram); on H's {1, 2}-graph the isolated part is 12 (= the 12
+defect-1 colourings) and every size-≥ 2 swap is either the whole subgraph or lands on another additive colouring
+(the 35 are complete, so no other non-additive colouring exists); on G, predicted γ = 0 (P10 below). Since
+connected {a, b}-subgraphs imply every vertex has a neighbour of every other colour, tightness IS the size-1 face
+of connectedness and needs no separate instrument. **The design principle, restated:** target γ = 0 first (lattice
+and BFS, no colourings enumerated), rigidity second (`rigid`, where the space is enumerable). The four-colour bed
+came out empty because γ > 0 on every K-chunk we hold, and that is a theorem for three-family material: a
+ζ₆-orbit of unit directions hits each of the three nonzero residues of 𝔽₄ exactly once (ζ₆ acts on ℤ[ζ₆]/2 as a
+primitive cube root of unity), so with ≤ 3 orbits (T13: the seed's and every descent object's three ladder
+families) each residue class holds ≤ 3 directions and Λ_c^φ has rank ≤ 3 < 4 under either residue colouring — the
+{a, a+c}-subgraphs lie in rank-3 slices, disconnected on any chunk of positive thickness. The 122-core and the
+588-core have more orbits (seam-lattice words) and are computed, not derived.
+
+**M1.2 Three forms of "additive", and which is the definition.** (i) *Implication*: constant on the cosets of some
+H ⊇ k·V — equivalent to k·V-periodicity, which is the reduction's CONCLUSION; as a definition it makes the theorem
+a tautology. The hom form with an arbitrary palette map is the same thing. (ii) *Iff*: the same-colour relation is
+the trace of the coset partition of some H ⊇ k·V — Fischer's notion minus his order condition |V/H| ∣ k (never
+read by the reduction; the family it admits is slightly broader — a coset colouring of V/H = 𝔽₅² on five
+addresses whose differences hit all six lines has no functional injective on them, so it is not Fischer-additive
+while being additive here — and the instrument's `additive` verdict, partition equality with an admissible hom, is
+an instance). (iii) *Translation invariance* (p − q = r − s ⟹ (C p = C q ↔ C r = C s)) — the Kempe witness's
+language, weaker than (ii) on a sparse chunk (no chain to add differences). **The definition is (ii)**; the
+skeleton's `IsAdditiveOn` (implication form) is replaced.
+
+**M1.3 The carrier is an address map, not a vertex set.** The chunk's points are addresses in a free abelian group;
+the instrument's `point_coords` IS a map `Fin n → ℤ^r`. So the kernel statement takes `q : ι → V` and a graph on ι:
+no `Set V`, no subtype, no `∈ S` hypotheses in any theorem, and the plane consumer
+(`add_one_le_chromaticNumber_unitDistance_of_forces`) already quantifies over an arbitrary ι. V must be the
+lattice (a free group of finite rank, where k·V has finite index): with V = ℂ, k·ℂ = ℂ and every additive
+colouring is constant — the divisible ambient group is the wrong carrier, which is why the drawing `dr : ι → ℂ` is
+a separate map and affinity in q is never used. Cross-component pairs: the instrument's per-component bases
+correspond to an address group with a free generator per extra component, under which no cross difference lies in
+k·V — the kernel takes whatever q is given, and the two readings agree. `Additive.lean` (M56) is the q = id case
+and stays as it is; the reduction uses only its graph-free L1 lemma.
+
+**M1.4 The reshaped skeleton (`Proofs/HadwigerNelson/AdditiveRigid.lean`, elaborates, eight `sorry`).**
+`IsAdditive (q : ι → V) (C : Γ.Coloring (Fin k)) := ∃ H : AddSubgroup V, (∀ v, k • v ∈ H) ∧ ∀ a b, C a = C b ↔
+q a − q b ∈ H`; `AdditivelyRigid q Γ k := ∀ C, IsAdditive q C`; `isAdditive_of_addMonoidHom` (H = ker φ, from
+`C a = C b ↔ φ (q a) = φ (q b)` and k • G = 0); `IsAdditive.apply_eq` (L1); `forces_of_additivelyRigid`;
+`add_one_le_chromaticNumber_unitDistance_of_additivelyRigid`; `six_le_…` (k = 5, numeral form). Spec on
+Mathlib's graphs, no hand-rolled ones: `pathGraph 3` addressed by `i ↦ (i, 0)` in ℤ × ℤ is additively 2-rigid,
+`Forces (pathGraph 3) 2 0 2` by the reduction (the `decide` on the address difference already passes), and
+`3 ≤ χ(ℝ²)` from the unit drawing — the model of every hypothesis; the red: `cycleGraph 6` addressed by the identity
+into `ZMod 6` (= `Fin 6`) at three colours with `0 1 0 1 0 2`.
+
+**M1.5 The kill census is a family delta.** Adjoining a point p with unit vectors u_i = p − x_i (all in one coset
+of Λ) gives Λ′ = Λ + ℤu₁, and A(X ∪ p) is computed from A(X) by cases on [Λ′ : Λ]: u₁ ∈ Λ (the family restricts to
+the homs nonzero on the u_i); u₁ ∈ ℚΛ ∖ Λ of order m (each hom extends iff φ(m u₁) ∈ m·G — uniquely when m is
+coprime to k); u₁ ∉ ℚΛ (k extensions per hom, the admissible ones those avoiding the rainbow). So the census is
+`extend(A, p)` — one operation on one object — and its reading is the GAUGE DELTA γ(X ∪ p) − γ(X) alongside the new
+family size, with the survival of sampled non-additive colourings (the rainbow condition) as the secondary column.
+D5's kill counts were the shadow of this.
+
+**M1.6 The richness dial's x-axis is the direction set.** The hom count of a chunk depends only on (Λ, S_k) — the
+star {0} ∪ S has the same lattice as any chunk with those directions — so the dial is a function of the unit
+direction set, filtered by the group's word length (the closure's generations), not of a ball's radius: the
+"additive spectrum of the half-spindle group's orbit". Balls in the gen-1 closure and cross-lattice depths in F₂₄₇
+are sampling paths through that function; each row reports (rank, |S_k|, hom count), and the radius is incidental.
+
+| decision (domain pass) | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| the target | Kempe-closure of the additive family (γ = 0), rigidity as its consequence | rigidity directly | closure is one solver-free census and every obstruction found is one of its edges; rigidity needs enumeration | high |
+| the kernel carrier | an address map q : ι → V, graph on ι | a vertex set S ⊆ V with the graph on V | two membership hypotheses gone from every statement; matches `point_coords` and the plane consumer | high |
+| the definition of additive | the iff form with H ⊇ k·V | the implication form; the hom form | (i) is the conclusion in disguise; the hom form needs an existential type; Fischer's order condition is not read | high |
+| the gauge | γ = Σ (components − 1) with its isolated part named | loose incidences alone; the defect distribution | tightness is the size-1 face; one BFS census; solver-free where the defect needs SAT samples | high |
+| the kill census | the family delta `extend(A, p)` and the gauge delta | kill counts | one operation on one object; the counts are its shadow | high |
+| the dial's axis | (rank, |S_k|) with the radius incidental | the radius | the hom question is a function of the direction set | high |
+| `Additive.lean` | untouched (q = id instance) | generalize its theorems to addresses | no consumer needs the address form of `not_forces`; a landed module | medium |
+| the four-colour bed | γ > 0 on three-family K-material by rank (derived); the 122/588 cores computed | measured everywhere | one ζ₆-orbit per residue per family | high |
+
+**P10 (registered by this pass):** γ(G, {1, 2}-graph, k = 5) = 0 — Exoo–Ismailescu's G is Kempe-closed under all 18
+homs with its cheats as edges; and γ(H, {1, 2}) has isolated part exactly 12 with every size-≥ 2 component swap
+additive or the whole subgraph (the 35 are complete). Confidence high on the second, medium-high on the first.
