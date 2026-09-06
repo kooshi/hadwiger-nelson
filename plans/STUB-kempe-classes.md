@@ -97,3 +97,17 @@ everything, and hands FS-1 its mechanism (or its obstruction). One day of work.
 (the 187 kempe-forced pairs and the swap witnesses), `data/m53/rigidity-dial-it4.json` (the 171), `data/m56/
 colourings-EI-seed-12graph-k5.json` (the 35), `data/m56/colourings-sample-W-core-8over3-k5.json` (the 200),
 `tools/m56_sample_colourings.py` (the sampler, for 4-colourings of U).
+
+## 9. Literature to ingest (from Kooshi's web-Claude analysis, 2026-09-06; second-hand until read — `BIBLIOGRAPHY.md`)
+
+Kempe invariants are the classical instance of a mod-n quantity that sees exactly the integrality of a colour: Heawood's
+parity criterion (a planar triangulation is 3-colourable iff every vertex has even degree) is one; Mohar–Salas (2009) built
+the 4-colour instance on triangulations — a Kempe invariant that makes the Wang–Swendsen–Kotecký algorithm non-ergodic —
+and Mohar (2006) and Bonamy–Bousquet–Feghali–Johnson (2019) carry the Kempe-equivalence theory to regular graphs. The
+project's "holonomy" at the 3 → 4 step (G25: rainbow-clique propagation returning shifted) is monodromy in S₃; the Kempe
+theory is its 4 → 5 vocabulary. **The question this adds to D4:** is there a mod-n invariant of the 5-colourings of a
+unit-distance graph that is constant on Kempe classes and separates the additive family from the rest? On the seed the
+Kempe graph of the 35 is connected within two moves of the additive 18 (M57 §R2), so no invariant separates them there;
+on the 252-cheat forcing subset (> 5,000 colourings in three defect regimes) the components are unknown (T29) — the first
+place an invariant could live. Note the scope of the literature: Heawood and Mohar–Salas are about planar triangulations;
+unit-distance graphs are not planar, and nothing transfers directly (FS-2 D4 said so of Meyniel/Mohar already).

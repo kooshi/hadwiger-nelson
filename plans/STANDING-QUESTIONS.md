@@ -752,3 +752,13 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   Heule-510's certified refusal of four colours — no LRAT. The GENERAL statement "χ(ℚ(√3,√5,√11)²) ≤ 5" quantifies over all
   finite unit-distance graphs in the field and needs the integrality of unit vectors at the inert prime (a valuation
   argument); priced in FS-7 phase C.
+* **T34 — the shadow sieve as a dial on the closure.** At p = 131 the 1581's directions reduce to 55 of the circle's 66
+  residue pairs and its gen-1 closure's to all 66; at 479, 64 and 210 of 240. The closure's shadow at 131 is the whole
+  plane; is the 1581's own 55-direction shadow 5-chromatic (P7 of FS-7)? If so, no 6-forcer uses only the 1581's
+  directions, and a 6-forcer in de Grey's field needs new directions — which ones, i.e. which direction sets D have
+  χ(Cay(𝔽₁₃₁², D)) ≥ 6: a design vocabulary computed without geometry.
+* **T35 — the topological bound of the 791-forcer.** V ∩ −V of the 1581 is centrally symmetric (a free ℤ₂-action); its
+  neighbourhood complex is, by FS-9's D1, homotopy 2-dimensional (bound ≤ 4); what is its box-complex coindex?
+* **T36 — the Nullstellensatz degree of the certified cores.** The spindle at 3 colours, the 9-core and 122-core at 4, the
+  23-core at 6: the least degree of a polynomial-identity refutation — does it read the integrality gap (the 23-core's
+  χ = ω + 3) where the relaxations read nothing?
