@@ -236,3 +236,135 @@ both primes) and the residue floor `tools/residue_floor.py` (Σ(C′) as 2-SAT);
 | B5 the coset decomposition of the classical witnesses | the half-spindle group's words (M30's direction classes) define the cosets; fusion points are the equality constraints | treat the witness as one piece | the residue calculus needs cosets that are K-images; the witnesses are built that way (G8) | medium — Heule's 510/553 carry residue direction classes outside the group (6 each) that the decomposition must place |
 | B6 the milestone's number | M56 | fold into M55 | a new input (the field) and a new derivation programme | high |
 | B7 kernel scope | at most D1's trivial certificate lemma; the rigidity conjecture is NOT a deliverable | attempt the rigidity theorem | its proof needs a Kempe-chain/local-uniqueness argument nobody has sketched; the milestone's job is to find out whether it is TRUE (P1) | high |
+
+---
+
+## §S. Subplan (2026-09-06, the session after the M55 close; WORKFLOW step 3)
+
+*Written before any instrument ran. §S1 corrects the stub where the derivation found it wrong; §S2 registers
+the sharpened predictions; §S6 (appended after the commit of §S1–§S5) records the two lattice checks the
+subplan needed to fix the milestone's shape — run AFTER §S2 was committed, per G30.*
+
+### S1. The derivations, done (D1–D3 sharpened; two claims of the stub withdrawn)
+
+**L1 — the exponent-divisibility lemma.** Let X be a finite unit-distance graph with points in F(i), Λ = Λ(X)
+the ℤ-span of its unit vectors, and φ : Λ → G a homomorphism into an abelian group of exponent e. Then φ
+vanishes on Λ ∩ e·Λ₍ₑ₎ = {d ∈ Λ : n·d ∈ eΛ for some n coprime to e} (n·φ(d) = φ(n d) ∈ φ(eΛ) = 0 and n is
+invertible mod e). Every additive k-colouring has G of exponent dividing k, so **every pair whose difference
+lies in k·Λ₍ₖ₎ is forced equal in every additive k-colouring** — at k = 4: everything in 4Λ₍₂₎; for the
+exponent-2 groups (𝔽₂², i.e. every residue colouring) everything in 2Λ₍₂₎; at k = 5: everything in 5Λ₍₅₎.
+*Corollary (Fischer's obstruction, chunk form):* if some unit vector u lies in k·Λ₍ₖ₎, X has no additive
+k-colouring. (Fischer's plane form: 1/k ∈ Σ₀(F²) ⟹ no additive k-colouring; and 1/5 ∈ Σ₀(ℚ²) ⊆ Σ₀(F²) for
+every F by his Example 1, so **no plane F² has an additive 5-colouring** — the stub's P7 is a theorem
+already, for every field, and the additive theory at five colours lives only on finite chunks.)
+
+**L2 — the direction of every certificate (the stub's D1 corrected).** Additive colourings are proper
+colourings (Fischer Thm 1(i)). Hence, with F_true(X, k) the pairs forced equal in EVERY proper k-colouring
+and F_add(X, k) := the pairs whose difference lies in every admissible hom's kernel:
+
+    F_true(X, k) ⊆ F_add(X, k),   and every additively separated pair is truly separated (the hom is the witness).
+
+The additive theory therefore EXHIBITS colourings and separations solver-free and bounds from above where
+forcing can live; it never proves forcing, and **"no admissible hom" says nothing about χ(X)** — the stub's
+`certify-not-colorable` ("no admissible hom ⟹ χ > k, an arithmetic certificate") is WITHDRAWN: the Moser
+spindle has no additive 3-colouring and no 3-colouring, but the first does not prove the second (a chunk of
+ℚ(√167)² with 1/7 ∈ Λ has no additive 7-colouring and is 7-colourable). Likewise the stub's jackpot clause
+"an additive prediction contradicted by a complete sweep is an instrument bug" is WRONG: a complete sweep
+separating an additively forced pair means a NON-additive colouring separates it — that is the expected
+finding, not a bug (the bug branch is only: an additively SEPARATED pair that a complete sweep calls forced,
+because the hom is an explicit colouring). The theory's value is (i) the localization F_true ⊆ F_add — a
+pre-filter for any sweep, like M54's critical-set theorem, computable from Λ alone; (ii) the gauge of how
+NON-additive the actual colourings are.
+
+**L3 — the rank.** Every point of the Exoo–Ismailescu seed and of every descent object has the shape
+((a√3 + b√11)/12, (c + d√33)/12) (T18: x ∈ √3·ℚ(√33), y ∈ ℚ(√33)), so Λ ⊂ ℚ⁴ has rank ≤ 4 and
+Hom(Λ/mΛ, ℤ/m) has m⁴ elements: 256 at m = 4, 625 at m = 5 — enumeration is trivial, not the stub's
+65,536-fold. For the classical witnesses the rank is ≤ 32 (two 16-dimensional coordinates) and the hom
+question becomes a hyperplane-avoidance problem over 𝔽_p: φ ∈ 𝔽_p^r with φ·s ≠ 0 for every unit class s —
+a SAT/ILP of r variables over 𝔽_p and |S| ≤ (direction classes) constraints; F_add per pair is one more
+such call with φ(d) ≠ 0 added (UNSAT ⟺ additively forced). Enumerate below rank 9, solve above.
+
+**L4 — what L1 says on the bed (the stub's D2/P1 re-derived).** The M53 dial (`data/m53/rigidity-dial-it4.json`,
+forced-equal half complete): classes 4/3, 4, 12 (2-adic valuation 2), 16/3, 16 (valuation 4) all FREE;
+64/9, 64/3 (valuation 6) forced 163/178 and 8/11. A pair at squared distance 16 is 4u for a unit vector u; if
+u ∈ Λ₍₂₎ (a lattice direction, or 2-adically one) then 4u ∈ 4Λ₍₂₎ and L1 forces it in EVERY additive
+4-colouring, of either group type. So P1 as minted ("the additive theory reproduces the dial: valuation 4
+free") can hold only if the valuation-4 differences have lattice coordinates of 2-adic depth < 2 — a
+membership test, not a colouring search. If they have depth ≥ 2 the derivation says: the dial's freedom at
+valuation 4 is carried by NON-additive 4-colourings, and the additive rigidity conjecture is false on U.
+Similarly the valuation-2 classes (2u) are forced by every exponent-2 (residue-type) colouring and can be
+additively separated only by a ℤ/4-type hom with φ(u) odd — so "do admissible ℤ/4-homs of Λ(U) exist" is
+the second membership-level question.
+
+**L5 — what L1 says at five (the stub's D4/P3 re-derived).** At k = 5 the only group is ℤ/5, so an additive
+5-colouring of a chunk X is φ : Λ/5Λ ≅ 𝔽₅^r → 𝔽₅ nonzero on every unit class, up to the scalar action of
+𝔽₅× (= palette). For any unit vector u and m ∈ {2, 3, 4}: φ(m u) = m·φ(u) ≠ 0, and φ(5 u) = 0. So **in every
+additive 5-colouring, every pair at distance 2, 3 or 4 along a lattice direction is separated and every pair
+at distance 5 along one is forced equal.** The Exoo–Ismailescu seed's forced pair (205, 206) is at distance 5;
+its 446 cheats are distance-2 pairs; M50's 148 absolute virtual edges sit at distances 3 and 4 (the d = 4 ones
+diameters through the hub — "forced central anti-symmetry"). Every one of these is an additive theorem IF the
+seed's unit lattice admits ℤ/5-homs and the pairs' differences are m·(lattice direction) with the right
+m — which is the stub's P3 ("residue plus repair", a 2-adic family) replaced by a 5-adic family. The residue
+colouring mod 𝔭 (𝔽₄-valued) has nothing to do with it: the seed's 5-colourings, if additive, are ℤ/5-homs
+of a rank-≤ 4 lattice, and there are at most 624/4 = 156 of them up to palette against the measured 35.
+
+**L6 — Fischer's obstruction as the field-as-input statement.** For the plane F², 1/k ∈ Σ₀(F²) kills every
+additive k-colouring, and Σ₀ is a ring, so 1/2 ∈ Σ₀ kills every 2^a-colouring and 1/3 every 3^b·(…). With
+1/5 ∈ Σ₀ always: the plane over F has additive colourings only at k coprime to 5 and to every prime ≡ 1
+(mod 4). 1/2 ∈ Σ₀(F²) holds when the 2-adic wall is broken (a unit vector with even denominator, e.g.
+(3 + i√7)/4, gives 3/2 ∈ Σ₀) and fails when a conjugation-fixed prime above 2 exists (Σ₀ lies in its local
+ring); 1/3 likewise against the 3-adic wall. So for the wall-broken fields (Heule's, de Grey's, F₂₄₇) the
+plane admits **no additive k-colouring for k ∈ {2, 3, 4, 5, 6, 8, 9, 10, 12, …}** — the first open value is
+7 (1/7 ∈ Σ₀ needs a unit vector of the (b + i√N)/(7a) shape; Fischer's Example 4 has it for ℚ(√167)). The
+stub's D6 ("if every 5-colouring were additive, rich chunks would be 6-chromatic") is therefore vacuous at
+the plane level — additive 5-colourings never exist there — and lives only as the CHUNK question: at what
+richness does a wall-broken chunk lose its last ℤ/5-hom (some unit vector enters 5Λ₍₅₎), and are its actual
+5-colourings near the additive ones while they last.
+
+**What survives of the stub's D4 (residue-plus-repair).** It is a second, 2-adic family at five colours —
+each K-coset residue-coloured under its own palette, a fifth colour on the clashes — and the seed decides
+which family its 35 colourings belong to (P3 vs P3′ below). The interface calculus is kept for the witnesses
+(coset unions) in phase B4, with the defect gauge measuring distance to BOTH families.
+
+### S2. Registered predictions, sharpened (before the §S6 checks ran)
+
+| # | prediction | basis | confidence |
+|---|---|---|---|
+| P1′ | on U, every dial pair at squared distance 16/3, 16, 64/9, 64/3 has lattice coordinates of 2-adic depth ≥ 2 (lies in 4Λ₍₂₎), hence is additively forced by L1; since the dial reads 16/3 and 16 FREE (0 of 2,145 and 0 of 179), **the 4-colourings of U separating them are non-additive and the additive rigidity conjecture is false on U** — P1 as minted MISSES | L1 + the dial; the pairs' directions are the fabric's ladder directions (T13) | medium-high (escape: valuation-4 differences of depth < 2 — then P1 could hold at valuation 4 and that is the finding instead) |
+| P1″ | the valuation-2 classes lie in 2Λ₍₂₎ ∖ 4Λ₍₂₎ (depth exactly 1); admissible 𝔽₂²-homs of Λ(U) exist (the two residue colourings and their GL₂(𝔽₂) images at least); admissible ℤ/4-homs do NOT exist on U | 𝔽₄ is the residue field; a ℤ/4-colouring needs exactly one "2"-side per unit triangle, which the twelve-fold ladder directions of K-fabric should contradict | low — genuinely uncertain; if ℤ/4-homs exist, the valuation-2 freedom is additive and the derivation sharpens |
+| P3′ | the seed's unit lattice admits ℤ/5-homs; (205, 206) lies in 5Λ₍₅₎ (additively forced); every cheat and every pair at squared distance 9 and 16 is additively separated; the admissible homs up to scalar are among the 35 colourings with near-balanced classes (38–42) | L5; the recorded class-size floors 38–42 ≈ 214/5 | medium (the uncertain half is existence: if the seed's unit classes mod 5 cover 𝔽₅⁴ by hyperplanes, none exist and the seed's tightness is non-additive) |
+| P3″ | if P3′ holds: some but not all of the 35 colourings are additive (the additive count up to scalar is < 35); the non-additive ones have small defect from the nearest additive one | rigid objects have few colourings, additivity is a strong constraint | low-medium |
+| P4′ | de Grey's 1581 chunk has some unit vector in 4Λ₍₂₎ (the additive obstruction at 4 fires on the chunk: no additive 4-colouring) and Heule-510 likewise | the 2-adic wall is broken in both fields and the chunks are rich in units (Moser spindles, hexagonal fabric) | medium |
+| P5′ | the 1581 and Heule-510 chunks admit ℤ/5-homs (no unit vector in 5Λ₍₅₎ yet), and F_add at five contains some non-adjacent pairs (differences in 5Λ₍₅₎), all of which the complete sweeps (M30/M41/M48) record as separated — i.e. non-additively | the sweeps' complete zeros + L1 | medium |
+| P6′ | the residue-plus-repair family's ν equals the measured ν on the stars (2) and the witnesses (1), and its Hall-violating-interface density is below 1 % per point on every object | M55's measurements | medium (unchanged from P6) |
+| P7′ | 1/2 and 1/3 ∈ Σ₀(F²) for Heule's, de Grey's and F₂₄₇ (the walls broken ⟹ no additive k ≤ 6 on those planes); for K: 1/2 ∉ Σ₀ (the residue colouring's local ring), 1/3 ∉ Σ₀ (K's primes above 3 have residue 𝔽₉ ∌ … — to be checked: the 3-adic wall STANDS for K? No: K escapes the 3-adic wall, so 1/3 ∈ Σ₀(K²) is expected) | L6 | medium-high for the 2-adic half; medium for 1/3 |
+
+### S3. The phases, re-shaped
+
+| phase | what | reads | cost |
+|---|---|---|---|
+| 0 | §S1 (done) + the §S6 checks (the seed's lattice at 5; U's lattice at 4 with the divisibility table of the dial's classes and the admissible-hom counts) — the two computations that fix the milestone's shape; run from a scratch script, reproduced by the instrument with controls in phase A | P1′, P1″, P3′ scored provisionally | minutes |
+| A | `tools/additive.py`: `lattice` (Λ(X) in the field's ℚ-basis: the E–I 4-frame for K-objects, `field.py`'s 16-basis for the classical witnesses, `five_dial.KExt` for F₂₄₇; HNF basis, rank, unit classes mod m), `homs --k` (enumeration ≤ rank 8, 𝔽_p-SAT above; count by group type at k = 4), `forced --k [--pairs FILE\|--classes]` (F_add per pair: enumeration or one SAT per pair; the comparison table against a rigidity-dial file), `separate --k --pair u v` (an explicit additive colouring separating the pair, verified proper — the witness the theory hands to a sweep), `obstruct --k` (unit vectors in kΛ₍ₖ₎ — the chunk form of Fischer's obstruction, reported as "no additive k-colouring", NEVER as a χ claim), `defect --k --colourings FILE` (per colouring: the least Hamming distance to an admissible additive colouring up to palette; histogram), `additive-test --colourings FILE` (is a given colouring a hom? — c(p) − c(q) a function of p − q on the lattice). Planted controls seen red first: ℚ²'s parity colouring (unique admissible 𝔽₂-hom; forced = even differences), the Moser spindle at 3 (no admissible hom) and at 4 (ℤ/4-homs exist, as derived: (1, 2, 3, 2) on the basis {1, ζ₆, ρ, ρζ₆}), the triangular lattice ℤ[ζ₆] at 3 (the (√−3) colouring) and at 4 (φ(1) = 2, φ(ζ₆) = 1), a K-chunk with a planted valuation-4 pair (forced) and a moved point (refused by the exact unit test) | — | a day |
+| B1 | the bed: U at 4 — the divisibility table (all seven dial classes, all pairs, exact), the admissible homs by type, F_add vs the dial per class; the defect of ~200 fresh 4-colourings of U (pysat, randomized phases + blocking) from the additive family; P1′, P1″ scored | whether 4-rigidity is arithmetic, and how far from it | an hour |
+| B2 | the seed at 5: regenerate the 35 colourings with a dump (`tools/m54_nu_exact_seed.py`, 314 s); `additive-test` on each; F_add of the seed (the forced pair, the cheats, d² = 9 and 16); the class sizes; the defect of the non-additive ones; the residue-plus-repair reading (P3) tested on the same list; P3′, P3″ scored. **Bibliography gate before any novelty claim: read Exoo–Ismailescu's construction for whether the seed is built as an additive/group object** | whether the seed's tightness is a lattice theorem | an hour |
+| B3 | the witnesses: the 1581 (`tools/degrey_graph.json` + coordinates via `tools/degrey.py`'s field frame — the M06 vertex order caveat), Heule-510, W (F₂₄₇) at k = 4 (`obstruct`: P4′) and k = 5 (`homs` by SAT; F_add vs the complete sweeps: P5′); the 791-forcer at 4 (its six forced pairs at 4 and 4/√3 against F_add — if it admits additive 4-colourings, L1 must contain them) | whether additive arithmetic sees classical 5-chromaticity at chunk level | an hour |
+| B4 | the fields: Fischer's obstruction per plane (1/2, 1/3 ∈ Σ₀? — P7′, by exhibiting unit vectors with the needed denominators or the local-ring argument) and the chunk-level richness at which the last ℤ/5-hom dies (grow a hexagonal-fabric chunk in each field and watch the admissible count); the residue-plus-repair interface census on the stars and W (D4, P6′); the defect of harvested 5-colourings of the witnesses (M48's pools) from both families | the first "how tight can this field be made" numbers | hours |
+| C | close: the gate (kernel piece, if any, decided at the modeling pass — candidate: `Additive.lean` with L1/L2 as theorems over a graph on a subset of an additive group; B7 stands: at most that), `data/m56/README.md`, the Frontier, the report | | |
+
+### S4. Costs (desktop)
+
+Rank ≤ 4 objects: everything is milliseconds. The classical witnesses: HNF of 7,877 × 32 integer rows —
+seconds; homs by 𝔽₅-SAT (≤ 32 variables one-hot, ≤ 67 mod-5 sum constraints) — milliseconds per call; F_add
+per candidate pair one call. The seed's 35 colourings: 314 s once. Fresh 4-colourings of U: pysat on
+1,953 × 4 variables, seconds each. Nothing needs a checkpoint except the 35-colouring regeneration (it has one).
+
+### S5. Settled at the subplan
+
+| decision | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| the certificate direction | the additive theory bounds forcing from above (F_true ⊆ F_add) and exhibits colourings; it never claims non-colourability | the stub's "no hom ⟹ χ > k" | L2: false as stated | high |
+| the five-colour family | ℤ/5-additive homs (F5) first; residue-plus-repair (RR) second, both gauged by the defect | RR only (the stub) | L5: the seed's forced pair at distance 5, its cheats at 2, M50's virtual edges at 3 and 4 are all ℤ/5 theorems if F5 applies | high on the ordering; the seed decides the substance |
+| the frame for K-objects | the E–I 4-coordinate frame (rank ≤ 4) | K(i)'s 8-basis | L3: half the coordinates are identically zero on every descent point | high |
+| homs above rank 8 | a small SAT over 𝔽_p per question | enumeration | 5³² is not enumerable; a hyperplane-avoidance instance is trivial for a solver | high |
+| kernel scope | decided at the modeling pass; at most L1/L2 as theorems | none | B7 | high |
+| the scratch checks | run at the subplan, after §S2 is committed, reproduced by the controlled instrument in phase A | wait for phase A | the checks fix the milestone's shape (G30's derivation → registration → measurement order is kept by committing §S2 first) | high |
