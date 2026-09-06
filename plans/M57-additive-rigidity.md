@@ -498,3 +498,72 @@ are sampling paths through that function; each row reports (rank, |S_k|, hom cou
 **P10 (registered by this pass):** γ(G, {1, 2}-graph, k = 5) = 0 — Exoo–Ismailescu's G is Kempe-closed under all 18
 homs with its cheats as edges; and γ(H, {1, 2}) has isolated part exactly 12 with every size-≥ 2 component swap
 additive or the whole subgraph (the 35 are complete). Confidence high on the second, medium-high on the first.
+
+## §M2. Obligation modeling pass (2026-09-06, fresh invocation after §M1's commit `02969cb`)
+
+### M2.1 The kernel — every leaf probed to its closing term (scratch copy `build/m57/AdditiveRigid-probe.lean`, green: no error, no `sorry`)
+
+| leaf | closing term (the statement from which it is one line) | hypotheses it reads |
+|---|---|---|
+| `isAdditive_of_addMonoidHom` | `⟨φ.ker, fun v => by rw [mem_ker, map_nsmul, hk], fun a b => by rw [hC, mem_ker, map_sub, sub_eq_zero]⟩` | `hk`, `hC` (both directions) |
+| `IsAdditive.apply_eq` | `let ⟨_, hk, hC⟩ := h; (hC a b).mpr (hab ▸ hk w)` | the ← direction and `k • v ∈ H` only |
+| `forces_of_additivelyRigid` | `fun C => (h C).apply_eq hab` | — |
+| `add_one_le_…_of_additivelyRigid` | `add_one_le_chromaticNumber_unitDistance_of_forces dr hdr hd hhalf (forces_of_additivelyRigid h hab)` | — |
+| `six_le_…` | `by simpa using add_one_le_…` (the cast `((5+1 : ℕ) : ℕ∞) = 6` by `simp`) | — |
+| `pathGraph_additivelyRigid` | via the local obligation `pathGraph_three_coloring_two : C a = C b ↔ (a.val + b.val) % 2 = 0` (9 cases by `fin_cases`, closed by `Fin.two_eq_of_ne_of_ne : x ≠ y → y ≠ z → x = z` on `Fin 2`, an 8-case `decide`); then `H = parity.ker`, `k • v ∈ H` by `generalize parity v = x; revert x; decide`, the iff by `fin_cases` + `decide` | `pathGraph_adj` |
+| `three_le_…_of_pathGraph` | the plane corollary at `k = 2`, `a = 0`, `b = 2`, `w = (−1, 0)`, drawing `i ↦ (i : ℂ)`; unit edges by `fin_cases` over `pathGraph_adj` + `Complex.dist_eq`; `d = 2` by `norm_num`; `simpa` | — |
+| `cycleGraph_six_not_additivelyRigid` | `hexColoring := Coloring.mk ![0,1,0,1,0,2] (by decide)`; `obtain ⟨H, hk, hC⟩ := h hexColoring`; `3 ∈ H` from `hk 1`; `(hC 0 3).mpr` gives `C 0 = C 3`; `absurd … (by decide)` | `k • v ∈ H` and the ← direction |
+
+**The mutation audit, run on the definition.** (a) Delete `∀ v, k • v ∈ H`: `IsAdditive.apply_eq` loses `hk w` and the
+reduction is unprovable (a colouring injective on addresses would be "additive" with `H = ⊥`); the hexagon red also
+stops refuting. Load-bearing. (b) Delete the `→` direction of the iff: NOTHING in the reduction breaks (it reads only
+`←`), and the hexagon red still refutes — so the hexagon does not pin the clause that keeps the definition from
+being the conclusion in disguise. **A second red pins it:** at THREE colours the path's addresses never differ by an
+element of `3 • V`, so every colouring is `3•V`-periodic and the implication form would call `pathGraph 3` additively
+3-rigid; but `0 1 0` is no coset colouring — `C 0 = C 2` puts `(−2, 0)` in `H` (the → direction), `3 • (1, 0) ∈ H`, so
+`(1, 0) ∈ H` and `(hC 0 1).mpr` gives `C 0 = C 1`, refuted by `decide`. `pathGraph_not_additivelyRigid_three` is in
+the probe, green. (c) Replace `Fin k` by an arbitrary colour type: `Forces` is stated on `Fin k` and the composition
+breaks — the vocabulary is the repository's, kept. (d) Delete `hhalf`: the spindle theorem refuses (its `hd` is exact,
+`OneDefect.not_exists_dist_eq_and_dist_eq_one_of_lt_half`). Every hypothesis is read by some leaf.
+
+**Prove / test / assume.** PROVE: the six theorems and the spec's rigidity (the path at 2). TEST (kernel-checked
+concrete facts): the two reds, the `Forces (pathGraph 3) 2 0 2` example, `3 ≤ χ(ℝ²)` from the path. ASSUME (never in
+the kernel): that a chunk's colourings are all additive — the untrusted enumeration's claim, consumed only as the
+theorem's hypothesis; at a jackpot the certificate is a refutation.
+
+### M2.2 The instrument's obligations (`tools/additive.py`; verify-as-control-flow: a check that fails is an assertion, never a log line)
+
+| subcommand | proves about its own output (asserted) | tested (planted, red then green) | assumed (named in `claim_scope`) |
+|---|---|---|---|
+| `closure --k` | the components of each {a, b}-subgraph partition its vertex set and no subgraph edge crosses them; every swapped colouring is proper on the stage's FULL edge list (an improper swap is a catastrophe — the swap lemma is a theorem); non-additivity only by partition equality against a COMPLETE family, else `undecided`; γ = Σ (components − 1) recomputed from the listed components | the seed's unit part reproduces S6's 180-row histogram and γ = 1,197; the hex ball R = 2 at 4 gives the (3, 3, 5) line components with the swap non-additive; the planted disconnected chunk; G's {1, 2}-graph (P10) | the family's completeness (rank ≤ 8 enumeration; above, a SAT sample marks `exact: false` and γ is a LOWER bound) |
+| `rigid --k [--cap N] [--with-cheats FILE]` | every enumerated colouring verified proper; additivity by partition equality (complete family) else per-colouring `undecided`; the verdict rule: `additively-rigid` iff the enumeration ended by UNSAT AND every colouring additive AND ≥ 1 colouring; `not-rigid: n of N` iff n ≥ 1 (complete or not); `capped` iff the cap was hit with 0 non-additive; 0 colourings = `vacuous` (χ > k, no rigidity claim) | the seed with cheats at 5: 35 / 18 (M56); the spindle at 4: 16 / 12; K₄ − e at 3, 4: rigid (1, 2); hex R = 1 at 3 rigid, at 4 not-rigid 7 of 11; the kernel's spec objects as instrument controls — `pathGraph 3` at 2 rigid, at 3 not-rigid, `cycleGraph 6` at 3 not-rigid with `0 1 0 1 0 2` among the non-additive (the kernel and the instrument agree on the same objects) | the solver's terminal UNSAT (completeness of the blocking enumeration) |
+| `free --k` | at prime k, free ⊇ 𝔽_k×·S_k (asserted — a theorem); the three counts sum to k^r − 1; the stage's pairs each land in exactly one split | the grid at 2; the seed at 5 (36 / 0 / 588; 780 / 21,006 / 1) | family completeness (a sample over-approximates both free and forced, and the record says so) |
+| `extend --point` / `kill-census --pool` | the case by [Λ′ : Λ] from `L.coords` (integral / rational of order m / None); in the in-lattice case NO additive colouring is killed by coverage (asserted — its own colour is free; the family shrinks only by admissibility); every extended colouring verified proper on X ∪ p; a sampled colouring killed iff its neighbourhood is rainbow, re-verified by attempting the extension | the hex ball plus an in-lattice point (0 additive kills, the restricted family); plus a new-direction point (the Moser twist of a unit: k − 1 admissible extensions per hom at one neighbour); a rainbow neighbourhood under a planted colouring → killed | the exact frame's unit verification of the pool's edges (M54/M55's cross-lattice files) |
+| the richness driver | per row (rank, \|S_k\|, hom count exact-or-≥-cap); at zero the mechanism: `obstruct` fired (a unit in kΛ, exact) or the hom SAT's UNSAT | the 1581 reproduces M56's ≥ 2,981 and Heule-510's 96; the L7 witness chunks fire at the right exponents | the SAT's UNSAT at rank > 8 (a second encoding is run on the first zero row) |
+| `--ball R --centre i` | the sub-stage's edge list re-derived from the exact frame (all pairs at exact dist² = 1 among the retained points) and asserted equal to the restriction of the stage's list; the sub-stage's fingerprint recorded | a ball that is the whole stage reproduces the stage's fingerprint | — |
+
+### M2.3 Scoring — the evidence per prediction and the verdict rule
+
+Verdicts: `met` · `met-in-substance` · `missed` · `vacuous` · `not-comparable` · `undecided`.
+
+| # | evidence | met iff | met-in-substance iff |
+|---|---|---|---|
+| P1 (replaced) | `closure --k 4` on the 122-core, 588-core, U | each has γ > 0 with loose incidences under both residue colourings | γ > 0 by the Kempe part alone on some |
+| P1′ | `rigid` on hex R = 1 at 3 and 4 | rigid at 3 (S6: yes) AND at 4 | — (S6 already: the 4-half MISSED — 11 colourings, 4 additive; scored now, reproduced in A) |
+| P1″ | `closure --k 4` on hex R = 2, 3 | γ > 0 with the residue line swaps verified non-additive | — |
+| P2 | `rigid --cap 2000` on the 122-core, 588-core, the seed's unit part at 4 | ≥ 1 non-additive each, the first found a single Kempe component swap of a residue hom | non-additive found but not a single swap |
+| P3 | the 29 alone-essential cheats' separating lists (M49's exact lists, or re-enumerated by blocking, ~1 min each) through `defect`; the 252-cheat object under `rigid --cap 5000 --with-cheats` | every listed colouring at defect ≤ 3 | ≤ 5 |
+| P4 | the driver on the gen-1 closure and the depth-2 F₂₄₇ stage | first zero row below 3,000 points, mechanism = cover | below 3,000 by a unit in 5Λ |
+| P5′ | `extend` on W with the depth-one (63 + 71) and depth-two pools | max Δγ/γ < 5 % AND kills < 5 % of the 200 | one of the two |
+| P6 | S6 (scored): first half MISSED (10 of 180 connected), second MET for 12 of 17 → **met-in-substance**; phase A's `closure` reproduces the histogram | — | — |
+| P7 | S6 (scored): **MET**; `free` reproduces | — | — |
+| P8 | `closure --k 5` on Heule-510 (24), W (432), the 1581 (sample) | loose fraction > 10 % of vertices in every colouring on each | on two of three |
+| P9 | `closure` (loose incidences) vs `rigid` (defect-1 classes) on the seed with cheats, the spindle, hex R = 1 at 4, K₄ − e | ≤ everywhere AND equality on the seed | ≤ everywhere |
+| P10 | `closure --k 5` on G's {1, 2}-graph and on H's | γ(G) = 0; H: isolated part 12 and no non-additive size-≥ 2 swap | G: isolated part 0 with every size-≥ 2 swap additive |
+
+**The single jackpot path.** A `rigid --k 5` verdict `additively-rigid` (complete) on a UNIT-distance stage (no cheats)
+that holds a non-adjacent pair with difference in 5Λ at distance ≥ 1/2 ⟹ HALT: (1) the enumeration re-run in the 3-bit
+encoding with a different pinned vertex; (2) the pair's difference re-derived exactly (`L.coords` integral and ≡ 0 mod 5)
+and its distance exactly; (3) the pair asked through `five_dial.py ask` (forced-equal, second encoding, JACKPOT file,
+exit 3) — the kernel certificate is the refutation of the spindle union (the M34 bridge), the reduction theorem the
+statement. The additivity census is never the certificate.
