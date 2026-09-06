@@ -631,3 +631,11 @@ attribute removed), the second an auto-named decidability instance with an under
   hitting-set ν engine's first real run: solver cores of ~1,960 vertices, the hitting set a singleton
   refuted one vertex per iteration (~65 s each) — the cores overlap in a large common set, so the lower
   bound climbs only when that set empties; reported at its wall as a bracket.
+* **The hitting-set ν engine on the three-core star, to its wall**: 196 iterations in 3,601 s, every solver
+  core ≈ 1,950 of the 3,100 vertices (re-verified each time), the exact hitting set a singleton throughout
+  — the cores' common intersection never emptied — so the instrument returns only ν ≥ 1, below what the
+  theorem and the census already give (ν ∈ [2, 3]). Both ν engines are unfit on objects of this size:
+  the ladder's rung s = 1 is one intractable ask, the hitting-set loop needs cores far smaller than the
+  5-chromatic subgraphs the solver returns. A ν instrument for these objects needs either core
+  minimization (each shrink a deletion ask) or the structural route — the ν = number-of-spindles law as a
+  theorem (T25). `data/m55/nu-spindles-35_1859-813_1939-1205_1442-k5.json`.
