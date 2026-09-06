@@ -79,3 +79,7 @@
 2026-09-06T21:56:03Z M59 phase A/B chain (P4 local --degrey --p 131 injective + merged; P7 hubs --degrey --p 131; calibration cores p=11 k=4, p=19 k=4), build/m59/phaseAB_chain-snapshot.sh, logs build/m59/{local-degrey-p131,local-degrey-p131-merged,hubs-degrey-p131,cores-p11-k4,cores-p19-k4}.log
 2026-09-06T22:08:31Z M59: hubs --degrey --p 131 and the isometry check killed by PID (hensel_sqrt squared its modulus: p^(2^20)); fixed; hubs relaunched (log build/m59/hubs-degrey-p131.log); the chain continues with the calibration cores
 2026-09-06T22:10:53Z M59: calibration cores relaunched after the shrink's protected-vertex fix (chain build/m59/cores_chain-snapshot.sh: cores p11 k4, p19 k4, then local on each)
+2026-09-06T22:18:15Z M59: hub test corrected (max-consistent-subset over residue-neighbour pairs; the strict form demanded unit distance to mod-p-coincidental neighbours); hubs rerun on Heule-510 and the 1581 at 131 + the 1581 deleted-vertex control, chain build/m59/hubs_chain-snapshot.sh
+2026-09-06T22:18:57Z M59 gate chain: build.sh → axioms.sh → lake lint, log build/m59/gate-chain.log
+2026-09-06T22:22:53Z M59: the stale phaseAB chain (it had moved on to cores p19 after its hubs step was killed) and its duplicate cores p19 run killed by PID; the cores_chain's p19 run (pid 1815621) continues
+2026-09-06T22:24:05Z M59 gate chain re-run after the field docstrings

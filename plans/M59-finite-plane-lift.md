@@ -536,3 +536,80 @@ claim-scope field in every record.
   coordinates through the Hensel-lifted roots of 3, 5, 7, 11 mod 131²⁰) agree on all 20,000 sampled pairwise quadrances
   mod 131²⁰ — the same configuration up to a p-adic isometry, as the rigid dichotomy says; the embedding has all 7,877
   stage edges unit mod 131²⁰.
+* **The hub test's flaw, found by its own control, and the corrected scan.** The first `hubs` run on the 1581 at 131 read
+  0 passers among 15,596 candidates; the positive control (delete a vertex of the 1581, rescan, expect its residue back)
+  read RED. Cause: at 131 a candidate residue class sees on its unit residue-circle, by mod-p coincidence, ≈ |stage
+  residues|·(p+1)/p² classes that are NOT true neighbours (≈ 12 for the 1581's 1,547 classes, ≈ 4 for Heule-510's 507),
+  and the strict test demanded unit p-adic distance to all of them. The scan now lifts each residue-neighbour PAIR's glue
+  point in the class and reports the largest subset it fits (`hub_best`); the strict form survives as `hub_test`. The 64
+  Heule-510 passers of the strict run were the hubs with no false neighbour by luck — all 64 verified EXACT (the
+  unit-circumcentre of three neighbours in ℚ(√3,√5,√7,√11) is at unit distance from every claimed neighbour, sympy), 11 of
+  them Heule-553's discarded vertices to the p-adic digit — and the corrected scan on Heule-510 minus its centre finds
+  1,171 (the centre back with support 36 of 36). The corrected scans on the full Heule-510 and on the 1581 are in flight.
+* **The calibration core at 11 (`data/fplane/core-p11-k4-spheres.json`).** The 5-critical subgraph of UD(𝔽₁₁, 2) found by
+  the sphere-then-vertex shrink: **63 vertices, 246 edges, six quadrances about the origin, 1-minimal with all 63
+  necessity witnesses**, 12 s. Its local test follows the 19-core's shrink in the chain.
+
+## §R. Results (M59, 2026-09-06 — the finite-plane lift)
+
+### §R0. What shipped
+
+* **Derivation** (§S1–§S2): the lift as a system; the level-p² obstruction as the rigidity matrix against the defect,
+  solvable iff every self-stress pairs to zero; the dichotomy for rigid frameworks (a Laman basis Hensel-lifts uniquely up
+  to isometry; the remaining edges decide at a finite level; a local lift is algebraic with a degree-one prime above p,
+  real iff its field has a real place); the adding-a-vertex form; the finite plane's geometry (triangles iff p ≡ 11 mod 12;
+  the spindle iff p is usable for K; sphere chords iff the Heron quantity is a square; self-chords iff 4c − 1 is). Found by
+  the instrument's own controls: the theory is for UNRAMIFIED degree-one primes (§R1).
+* **Kernel** (`Proofs/HadwigerNelson/Lift.lean`, `Instances/LiftObstruction131.lean`; the gate in §R6): the lift theorem
+  `χ(H) ≤ χ(G)` along an injective covering and its plane composite `add_one_le_chromaticNumber_plane_of_lift` (the recipe a
+  lifted 6-forcer consumes); the naturality `drawing_map`; **the first-order obstruction** `stressPairing_eq_zero_of_lift`
+  over any commutative ring with a square-zero element and its headline `not_exists_lift_of_stressPairing_ne_zero`; the
+  certificate consumer `stressPairing_eq_zero_of_drawing` at `ZMod (p²)`; the spec (the hex shell at 11 passes with twelve
+  nonzero defects cancelling, the collinear triangle at 3 obstructed — all decided); **the first instance**: the 1581's merged
+  image at 131 is not a shadow — a 26-vertex, 48-edge witness stress, `IsStress` and pairing `7205 ≠ 0` decided, no lift
+  modulo 131² and no covering tower certificate; the plane's clique number pinned (a triangle at 11, none at 19).
+* **Instrument** (`tools/fplift.py`, 16 self-test controls green): `local` (rank, stresses, level-2 pairing with counts, a
+  minimal-support witness, the gauge-fixed digit-by-digit Hensel lift of a Laman basis, per-edge first failing levels),
+  `cores` (external cadical under `timeout`, sphere shrink, vertex shrink with necessity witnesses), `hubs` (the residue-point
+  scan against a stage's own p-adic embedding, corrected to the largest consistent neighbour subset). Records in
+  `data/fplane/` (`lift-*`, `core-*`, `hubs-*`; README rows with the licence column).
+
+### §R1. The derivation, and what the controls taught it
+
+The level-p² theorem is first-order rigidity in the dual numbers, and its kernel form uses only π² = 0 and π·netStress = 0 —
+so the whole Hensel tower is that one theorem at π = p^k (§M1). Tested before any tactic: the closed hex shell at 11 has edge
+defects 0, 3, 4, 0, 3, 3, 9, 8, 8, 0, 9, 8 and its self-stress pairs them to exactly −121 ≡ 0 (mod 121). Tested after: the
+1581's injective sub-reduction at 131 passes all 4,450 stress conditions and the Laman-basis Newton lift has every one of its
+7,541 edges unit to precision 131²⁰ with 3,091 fitted — and that configuration agrees with the 1581's tower coordinates
+(embedded through Hensel-lifted roots) on 20,000 sampled pairwise quadrances: the residues determine the 1581 up to a
+p-adic isometry, as the dichotomy says. **The controls corrected the derivation's scope:** the Moser spindle and Heule-510
+at 11 read obstructed, and rightly — 11 is ramified in ℚ(√11), their coordinates live in ℤ₁₁[√11], and a ℤ₁₁-lift would put
+√11 in ℚ₁₁. The lift needs an unramified degree-one prime; the reduction (M58's upper bound) does not. For fields over K the
+lift's primes are 83, 107, 131, … — never 11, the prime that seals them.
+
+### §R2. The kernel, read aloud against the claims
+
+*"No choice of one point per residue class makes all 48 edges of this sub-framework unit modulo 131²"* —
+`merged131_no_lift : ¬ ∃ y, IsLift 131 merged131x y merged131`, where `IsLift π x₀ y L` says every listed edge of `x₀ + π • y`
+has quadrance one and, at `ZMod (131²)`, `x₀ + 131 • y` ranges over exactly the configurations with `x₀`'s residues
+(`ZMod.exists_eq_add_mul_of_castHom_eq`). *"No valid tower certificate, drawn at level 131² through any hom out of any subring
+with an inverse of its denominator, covers it with matching residues"* — `merged131_no_drawing`. What the kernel does NOT
+say: that the merged image has no lift in ℤ₁₃₁² or in other number fields (the hand dichotomy, §S1), nor anything about
+configurations not presentable as tower certificates. *"χ(H) ≤ χ(G) when H ≤ G.map f for injective f"* needs `Nonempty V`
+and is false without it. The lift theorem's plane composite has one hypothesis no certificate decides, `¬ H.Colorable k` —
+the refutation of the finite graph — and says so in its docstring.
+* **Heule-510's hubs at 131, corrected scan (`data/fplane/hubs-heule510-p131.json`, 65 s):** 12,339 candidate residue
+  classes; **1,171 carry a p-adic point at unit distance from ≥ 3 of the 510's points** to precision 131²⁰ (support 3: 511,
+  4: 264, 5: 201, 6: 121, 7: 37, 8: 25, 9: 10, 10: 2) — each the unit-circumcentre of three of its neighbours, an exact point
+  of Heule's field; the 11,168 others fit no three (false hubs of the finite plane). Missed by construction: hubs whose
+  residue class a 510 vertex occupies (≈ 3 %).
+* **The hubs are exact.** 100 random passers of the 1,171 verified in exact arithmetic (sympy over ℚ(√3,√5,√7,√11)): the
+  unit-circumcentre of three supporting neighbours is at unit distance from EVERY supporting neighbour, 100 of 100.
+* **P3, first half REFUTED (`build/m59/plane-p131-k5.log`).** The whole plane UD(𝔽₁₃₁, 2) at five colours — 85,805 variables,
+  5,851,904 clauses, the origin and a unit triangle pinned — is UNDECIDED by the external cadical at the one-hour wall
+  (exit 124, 59 min 37 s of CPU), although its spectrum proves ≥ 8. A Hoffman-carried refusal is not a CDCL-sized one at
+  this scale (the M43 genre: "integrality-carried", resolution-hard). M58's k = 5 run on the 1581's 55-direction shadow at
+  131 (17,161 vertices, degree 110) was likewise undecided at 3 h when this was written. The 6-critical core at 131 is
+  therefore NOT produced this milestone; the calibration cores (5-critical at 11: 63 vertices; at 19: in flight) and the
+  merged-image witness are the milestone's finite-plane objects, and P2 (every such core obstructed) stands untested at 131 —
+  its derivation (§S1 (b)) says what the search would find. 83 and 59 follow in the chain, one hour each.

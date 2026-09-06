@@ -107,8 +107,11 @@ variable {V : Type*} [DecidableEq V] {R : Type*} [CommRing R]
 
 /-- A **weighted edge** of a framework: source, target, and the weight a self-stress assigns it. -/
 structure StressedEdge (V R : Type*) where
+  /-- The edge's source vertex. -/
   src : V
+  /-- The edge's target vertex; the edge vector is `x₀ src - x₀ dst`. -/
   dst : V
+  /-- The weight a self-stress assigns to the edge. -/
   wt : R
 
 /-- The net stress at a vertex `v` of the framework `x₀` under the weights `L`: the weighted sum of the
@@ -297,9 +300,10 @@ example : ∀ e ∈ hex11, (11 : ZMod 121) * (quad (hex11x e.src - hex11x e.dst)
 example : IsStress (11 : ZMod 121) hex11x hex11 := by decide
 example : stressPairing hex11x hex11 = 0 := by decide
 
-/-- The collinear triangle of `UD(𝔽₃,2)` with the stress `(2, 2, −1)`, over `ZMod 9`. -/
+/-- The collinear triangle of `UD(𝔽₃,2)`, `0, (1,0), (2,0)`, as points of `(ℤ/9)²`. -/
 def tri3x : Fin 3 → ZMod 9 × ZMod 9 := ![(0, 0), (1, 0), (2, 0)]
 
+/-- Its three edges, weighted by the stress `(2, 2, −1)`. -/
 def tri3 : List (StressedEdge (Fin 3) (ZMod 9)) := [⟨0, 1, 2⟩, ⟨1, 2, 2⟩, ⟨0, 2, 8⟩]
 
 example : ∀ e ∈ tri3, (3 : ZMod 9) * (quad (tri3x e.src - tri3x e.dst) - 1) = 0 := by decide
