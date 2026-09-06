@@ -850,12 +850,16 @@ re-derived exactly, the lattice on the distinct directions):
 |---|---|---|---|---|---|---|---|
 | 1 | 11,053 | 36,288 | 329 | 32 | 243 | 0 | **≥ 300** (cap) |
 | 2 | 16,597 | 72,239 | 333 | 32 | 247 | 0 | **≥ 300** (cap) |
-| 4, whole | (running at the close; recorded when they land) | | | | | | |
+| 4 | 20,913 | 102,298 | 352 | 32 | 264 | 0 | **≥ 300** (cap) |
+| whole (r² = 22.4) | 24,065 | 123,134 | 358 | 32 | 269 | 0 | **≥ 300** (cap) |
 
 **The contrast with F₂₄₇ is the reading.** De Grey's closure is crystalline: eleven thousand points within radius 1 span
 only 329 unit directions (the half-spindle words permute a small direction set), the lattice has full rank 32 with no
 unit vector 5-divisible, and the family survives — where W's 63 cross points, in 26 → 82 direction classes, made 500
 units 5-divisible at once. FS-6's D1 is the derivation to run: a thickening keeps the family iff its new points are
 in-lattice or new-direction and never rational of an order divisible by 5, and the two constructions sit on opposite
-sides of that line. **P4 on de Grey: the family does NOT die below 3,000 points — MISSED at every radius measured so far**
-(the 1581 itself keeps ≥ 2,981; its closure's inner 16,597 points keep ≥ 300).
+sides of that line. **P4 on de Grey: MISSED outright — the family never dies**: the whole 24,065-point closure (123,134 edges, 358 distinct
+directions, rank 32, 269 unit classes mod 5, no unit in 5Λ) keeps at least 300 ℤ/5-homs (the cap). The half-spindle
+closure adds only 29 directions to the 1581's 329 across 22,484 new points — it is a crystal, and a crystal's lattice
+stays 5-indivisible. FS-6's failure clause fires in its favourable direction: the family is far more robust than
+F₂₄₇'s, and FS-6's phase B runs on de Grey's field first.

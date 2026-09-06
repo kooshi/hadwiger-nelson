@@ -1070,8 +1070,8 @@ next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated 
 object we hold, without purchase); the table's top is now FS-2 the Kempe classes, re-aimed by G42 (b) at what carries
 forcing when the family does not — the 252-cheat object and K-fabric's 16-pair residue; FS-3 thickened material, with
 the additive pre-filter it planned now VACUOUS on F₂₄₇ (no ℤ/5-hom on the thickened stage) and its bearing unchanged;
-FS-6 (new) the family-keeping thickening — a field and construction that add directions without 5-divisibility, tested
-first on the de Grey gen-1 closure; FS-4 Theorem B in the kernel; FS-5 bookkeeping.)*
+FS-6 (new) the family-keeping thickening — a field and construction that add directions without 5-divisibility; de Grey's
+half-spindle closure is one (its whole gen-1 closure keeps ≥ 300 homs); FS-4 Theorem B in the kernel; FS-5 bookkeeping.)*
 
 *(**M57 CLOSED 2026-09-06 — additive rigidity; `plans/M57-additive-rigidity.md` §R.** The ranking after M57:
 
@@ -1081,8 +1081,9 @@ first on the de Grey gen-1 closure; FS-4 Theorem B in the kernel; FS-5 bookkeepi
    4-rigidity residue (16 pairs) and the 252-object's forcing are carried by the same mechanism. The instruments
    (`closure`, `rigid`, M56's `kempe`) are in hand; the 252-object's 5,000 colourings are on disk.
 2. **FS-6, a family-keeping thickening (new stub).** The principle bites only where directions can be added without
-   the joint lattice becoming 5-divisible. The de Grey gen-1 closure's dial (running at the close) is the first reading;
-   Heule's field (the 510 keeps 96 homs) and the half-spindle words are the candidate generators. If no such thickening
+   the joint lattice becoming 5-divisible. The de Grey gen-1 closure's dial read at the close: the family SURVIVES the whole closure
+   (≥ 300 homs at 24,065 points, no unit in 5Λ) — so the half-spindle words are a family-keeping generator, and FS-6's
+   phase B (grow, read γ̄ per step) runs on de Grey's field first; Heule's field (the 510 keeps 96) is the second. If no such thickening
    exists in any owned field, the principle is closed at five colours as a design route.
 3. **FS-3, thickened material** — unchanged in bearing; its D2 (the additive pre-filter) is vacuous on F₂₄₇ and is
    struck; the 108 asks are still running at the close (`build/m55/ask-depth2.log`).
@@ -2556,7 +2557,9 @@ record shows what was believed, what was measured, and what is now proved.
   requirements of the principle — a nonzero family and a closed one — pull apart on every construction in F₂₄₇ and K:
   in-field material keeps the family (in-lattice points) but K-unit parts are 4-colourable, and wall-broken thickening
   erases it; a field and construction keeping a family while adding directions is the only place the principle could
-  bite — the de Grey gen-1 closure's dial is the test in hand. (b) Forcing does not need rigidity: the seed's 252-cheat
+  bite — and de Grey's half-spindle closure IS one: its whole 24,065-point gen-1 closure (358 directions, rank 32, no unit
+  in 5Λ) keeps ≥ 300 ℤ/5-homs, where W's 63 cross points killed every one — a crystal thickens 5-indivisibly, a cross
+  lattice does not (FS-6's first datum). (b) Forcing does not need rigidity: the seed's 252-cheat
   forcing subset holds the pair with > 5,000 colourings, two thirds far from the family — so whatever carries forcing on
   such objects is a property of the reconfiguration graph's components, not of the additive family (FS-2's question,
   re-aimed). Falsifiers: a unit-distance chunk in a wall-broken field with γ = 0 and a nonzero family; a thickening whose

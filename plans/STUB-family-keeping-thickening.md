@@ -23,7 +23,7 @@ keeps the joint lattice 5-indivisible — to close the Kempe subgraphs before th
 | W (1,175, F₂₄₇): 1,728 homs; W + first 48 cross points: 640; W + 63: 0 with 500 units in 5Λ | M57 §R5 |
 | the depth-2 F₂₄₇ stage: no hom at any radius; 98 % of every ball's units in 5Λ | M57 §R5 |
 | Heule-510: 3,456 homs on its inner 428 points, 96 on the whole (the last ring, |S₅| 42 → 60) | M57 §R5 |
-| the 1581: ≥ 2,981 homs (rank 16); its gen-1 half-spindle closure (24,065 points): the dial running at the M57 close | M56 §R3; `build/m57/richness-degrey.log` |
+| the 1581: ≥ 2,981 homs (rank 16); its gen-1 half-spindle closure (24,065 points, 358 directions, rank 32): ≥ 300 homs at every radius, no unit in 5Λ — the family never dies | M56 §R3; M57 §R5 addendum, `data/m57/richness-degrey-k5.json` |
 | in-lattice points never kill a hom by coverage; a new-direction point kills a hom iff its neighbours' colours cover the group | M57 D5 / §M1.5 |
 
 ## 3. Derivations first
@@ -50,7 +50,7 @@ and the family survives longer than in F₂₄₇ (whose cross points are all ra
 
 | # | prediction | confidence |
 |---|---|---|
-| P1 | the gen-1 closure keeps ℤ/5-homs on its r² ≤ 1 ball (11,053 points) and loses them by r² ≤ 4 | low |
+| P1 | the gen-1 closure keeps ℤ/5-homs on its r² ≤ 1 ball (11,053 points) and loses them by r² ≤ 4 | low — **SCORED at the M57 close: refuted in the favourable direction; the whole closure keeps ≥ 300 (M57 §R5 addendum), so phase B runs on de Grey's field first** |
 | P2 | no in-lattice-plus-new-direction thickening of W reaches γ̄ below half its value before its family falls below 100 | medium |
 
 ## 6. Failure and jackpot clauses
