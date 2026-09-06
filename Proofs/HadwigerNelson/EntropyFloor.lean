@@ -69,7 +69,7 @@ theorem spareColorings_eq_last_iff (C : G.Coloring (Fin k)) (y : Fin k) (S : Fin
 least `2 ^ n` proper `(k + 1)`-colourings. The hypothesis `0 < k` is exact: at `k = 0` the graph
 is empty, `k * n ≤ |V|` holds for every `n`, and there is exactly one `1`-colouring. -/
 theorem two_pow_le_card_coloring (hG : G.Colorable k) (hk : 0 < k) (n : ℕ)
-    (hn : k * n ≤ Fintype.card V) [DecidableRel G.Adj] :
+    (hn : k * n ≤ Fintype.card V) :
     2 ^ n ≤ Fintype.card (G.Coloring (Fin (k + 1))) := by
   obtain ⟨C⟩ := hG
   haveI : Nonempty (Fin k) := ⟨⟨0, hk⟩⟩
@@ -93,7 +93,7 @@ theorem two_pow_le_card_coloring (hG : G.Colorable k) (hk : 0 < k) (n : ℕ)
 /-- **The generator screen** (K4's consumer): fewer than `2 ^ n` proper `(k + 1)`-colourings with
 `k * n ≤ |V|` means the graph is NOT `k`-colourable — for the SAME graph; never for a subgraph. -/
 theorem not_colorable_of_card_coloring_lt (hk : 0 < k) (n : ℕ) (hn : k * n ≤ Fintype.card V)
-    [DecidableRel G.Adj] (hlt : Fintype.card (G.Coloring (Fin (k + 1))) < 2 ^ n) :
+    (hlt : Fintype.card (G.Coloring (Fin (k + 1))) < 2 ^ n) :
     ¬ G.Colorable k :=
   fun hG => absurd (two_pow_le_card_coloring hG hk n hn) (not_le.2 hlt)
 

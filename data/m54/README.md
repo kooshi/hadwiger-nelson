@@ -22,3 +22,15 @@ theorem-admitted candidates. Every file carries the stage's edge-list fingerprin
   the core's same-side pairs classified (in-K / √247-class / other). `cross-lattice --exact … --same-side`.
 * `spindles-*.json` — the two-spindle union (a `--graph` stage with points); `critical-spindles-*.json`,
   `nu-spindles-*.json`, `sweep-spindles-*.json` its dials. `two-spindle --witness … --pair2 813,1939`.
+* `forcing-critical-U-35-1859.json`, `forcing-critical-U-813-1939.json` — the forcing-critical sets F of the
+  1,953-point fabric (7 and 5 vertices, disjoint): one forcing ask per vertex. `build/m54/forcing_census.py <pair>`.
+* `critical-W-full.json` — the single-centre full-fabric union: C = F ∪ R(F) exactly, 13 of 3,905 (`critical
+  --witness data/m53/forced-spindle-full.json --only build/m54/only-Wplus.json`).
+* `spindles-35_1859-813_1939-full.json` (5,857 points) and `critical-spindles-…-full.json` (34/34 load-bearing
+  deletions non-critical: C = ∅) — `two-spindle --full`; `spindles-35_1859-813_1939.json` (2,229 points, the two
+  1-minimal cores) and `critical-spindles-35_1859-813_1939.json` (31/31: C = ∅).
+* `sweep-spindles-35_1859-813_1939.json` — **the dial's reading on a C = ∅ object: 0 forced-equal, 0 virtual
+  edges, complete, 31 s** (`sweep --graph … --k 5 --no-amo`, seeded by `build/m54/seed_models.py`).
+* `nu-exact-EI-seed-12graph.json` — ν(H) = 38 exact over the 35 colourings (`build/m54/nu_exact_seed.py`);
+  `nu-*.json` — the RC2 runs that hit their walls (bounds only).
+* `W-plus-cross.json`, `critical-W-plus-cross.json` — the witness ∪ its cross pool (1,238 points): C loses 3.

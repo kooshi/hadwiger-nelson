@@ -664,3 +664,16 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   ≤ 4, on ℚ(√N) alone), the descent consequences, and the 2-adic reading of the classical 5-forcers.
   Open from his table: χ(ℚ(√11)²) ∈ {3, 4}, triangle-free. Note §10.1; handoff §4; Johnson DM 79 (the
   2-adic 2-colourings of ℤ₍₂₎ⁿ forbidding all √(p/q), p, q odd) is the lineage.
+
+* **T22, closed (2026-09-06 ~03:00Z) — the dial read on C = ∅ objects.** [measured, complete] The forcing-
+  critical sets F of the 1,953-point fabric for (35, 1859) and (813, 1939) are 7 and 5 vertices and
+  DISJOINT (one 3-s forcing ask per vertex); hence U ∪ R₁U ∪ R₂U (5,857 points) has no critical vertex by
+  the derivation C ⊆ F₁ ∩ F₂ (34/34 load-bearing deletions checked), and the two 1-minimal cores (588,
+  543, overlap 31) give a 2,229-point union with C = ∅ measured on all 31. **Its exhaustive five-colour
+  sweep: 0 forced-equal pairs, 0 virtual edges, complete (78 models, 38 calls, 31 s).** So the theorem's
+  precondition is necessary, not sufficient; the live obstruction is the absorption principle
+  (`plans/M54-five-colour-dial.md` §3 D2, §R7): a 4-colourable piece attached by outside-degree-one chords
+  is coloured around by the spare colour. Also: the single-centre full-fabric union has C = F ∪ R(F)
+  exactly (13 of 3,905); ν(H) = 38 exact, ν(W) = 1; the witness exact in K(√247); the F₂₄₇ cross lattice
+  is the K-lattice's shadow (71 points, 20 fusions, 114 edges, two components) and moves the witness's
+  critical set by three remote vertices. The big union's sweep continues as the scale twin.

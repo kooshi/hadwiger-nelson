@@ -60,7 +60,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M53 HALTED at the field-wall theorem, 2026-09-05.**
+**Last updated: M54 CLOSED (the five-colour dial), 2026-09-06.**
 
 ### Where the problem stands
 
@@ -856,6 +856,49 @@ formalization of Theorem B is the natural next milestone, and the questions the 
 (§8: is ℚ(√3, √5, √11)'s plane exactly 5-chromatic; √7 without √5; the triangle-free quadratic
 planes ℚ(√d), d ≡ 7 mod 8) are the next research targets.
 
+
+M54 asked the question the field-wall theorem left — where, on 5-chromatic material, can a pair
+compulsion at five colours live at all? — and answered it with a theorem before any instrument ran,
+then built the first objects that satisfy the theorem's precondition and read the dial on them. **The
+critical-set localization theorem** (`CriticalSet.lean`, kernel, standard three axioms): with C(G) the
+vertices whose deletion drops the chromatic number, a pair forced EQUAL at χ(G) colours has C(G)
+inside the pair's common neighbourhood, a virtual edge has C(G) inside the union of the endpoints'
+neighbourhoods, and a fan has it inside the pivot's neighbourhood or the partner list — one
+recolouring (a critical vertex isolates any independent set through it, painted with the spare
+colour), of which the spare-colour lemma is the case C = V. Two points of the plane have at most two
+common unit neighbours (the glue point and its mirror), so **a unit-distance graph that forces a pair
+equal at its own chromatic number has at most two critical vertices, and none if the pair is more
+than two apart** — the 6-forcer built as "5-rigid fabric plus a spindle at distance above 2" needs
+fabric whose 5-chromaticity survives every single vertex deletion. Redundancy before rigidity: the
+dial's first rung costs one 4-colour ask per vertex, and it prunes the five-colour sweep to the
+theorem-admitted candidates (none, whenever the critical set is not coverable by two unit circles).
+**Measured, every reading as the theorem said**: the Exoo–Ismailescu seed's critical set is EMPTY
+(214/214 deletions refuse four colours — its forced pair is five apart); the 1,175-point witness of
+T20 is VERTEX-CRITICAL (1,175/1,175, each certified by a colouring), so T21's 858-second five-colour
+sweep of it measured a theorem; the witness plus its depth-one F₂₄₇ cross lattice (104 in-field pairs
+of 287,695, collapsing onto 71 points with 20 fusions and 114 edges among them — the K-lattice's
+shadow, not dust) loses exactly three copy-side vertices from its critical set, remotely; the
+single-centre union on the full fabric has critical set EXACTLY the forcing-critical set of the
+fabric and its copy — 13 of 3,905, because the forcing of (35, 1859) survives every deletion but
+seven — still uncoverable. Then the derivation that clears the rung: on two spindles over the FULL
+fabric a vertex is critical only if it is forcing-critical for BOTH pairs, so with disjoint
+forcing-critical sets (measured: 7 and 5 vertices, disjoint) **the 5,857-point union U ∪ R₁U ∪ R₂U
+has NO critical vertex** — reached by two twenty-minute forcing censuses rather than search, with its
+34 load-bearing deletions checked directly — and the two 1-minimal cores (588 and 543, overlapping
+in 31) give a **2,229-point union with no critical vertex either** (all 31 shared vertices asked).
+**The dial's reading on it: 0 forced-equal pairs and 0 virtual edges at five colours, complete, in
+31 seconds** (78 models, 38 calls) — the theorem's precondition is necessary and NOT sufficient, and
+the next obstruction is the one derived and registered before the run: each copy is 4-colourable
+K-fabric attached by six or seven chords of outside-degree one, absorbed by the spare colour
+(G9/G31 one rung up, the redundancy rung cleared). The big union's sweep runs on as the scale twin.
+Also landed: the witness's geometry exact in K(√247) (5,773/5,773 edges, all six chords); ν — the
+fifth colour's smallest class — reads 38 on the seed (exact, over its 35 colourings) and 1 on the
+witness; and the literature arrived: Fischer 1990 owns the additive framework and the whole
+real-quadratic classification (T23), which corrects the field-wall note at d ≡ 5 (mod 8) and leaves
+it Theorem B and the local criterion. Seven registered predictions: five met, one met-and-refuted
+(the cross lattice is sparse but lattice-like), one missed in its second half (the pool did move the
+critical set — by three remote vertices).
+
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -921,10 +964,38 @@ planes ℚ(√d), d ≡ 7 mod 8) are the next research targets.
 
 | 46 | **The copy-lock atlas, the cull, and the field** (M52). **Kernel** (`Copy.lean`, standard three axioms): `spindleRot d` with `spindleRot 2 = rho15`, `spindleRot √3 = moserTwist`, the exact `1/2 ≤ d` (red at `1/4`), `dist_self_rotAbout` (hypothesis-free), `self_chord_iff` (self-chords = the radius-d circle), `copyUnion` as `(unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` with both containments and `chromaticNumber_copyUnion_le`. **Measured, exact**: T13/P1 (13,796 of 13,796 edges on the half-twist ladder), T14 (every point in ℚ(√3, √11), all edges exact identities; copies exact in ℚ(√3, √5, √11)), P2 (every genuine cross chord collinear and seed-field), P3 (self-chords = the radius-2 shell), P4 (d = 2 pigeonhole fires on U at k = 4, √3 clean), T15 (the kill table: 3,516 × 1,062, all pairs killed, 13 sole-killer chords, no pair compulsion, centre-colour bias to 65 %), P5 REFUTED (0 of 15,218 classes; 20/20 direct extensions, copy side 4-coloured), 0 copy–copy chords; **the cull 273 → 149** (114 by enumeration, 10 by WO-14; 60 witnessed, 27 floor, 52 undecided; one-hot UNSAT 10,640 s, 3-bit unknown at 43,200 s: candidate); the pool field census (15 % in-field, √5/√35 reachable, 100 % of commits in-field); the shrink priced (1.1 CPU-h/probe, 12–33 %); WO-14 delivered (gate 269/269; A3 273/273; the CNF finding; the sequential-acceptance floor; D74–D77; WO-16 stubbed). Instruments: `compose`, `copy_anatomy`, `copy_exact_field`, `copy_field_probe`, `copy_kill_table`, `cull_enum --loop`, `rank_copies`, `pool_field_census`, `m52_final_certify`; the viewer's copy/cull layers. Records: `plans/RISKS.md`, `plans/STUB-field-wall.md`, `plans/M53-iteration-5.md`, `plans/STUB-certify-core883.md`, `DESCENT-ALGORITHM` phase 0″/2′. | `Proofs/HadwigerNelson/Copy.lean`, `tools/{compose,copy_anatomy,copy_exact_field,copy_field_probe,copy_kill_table,cull_enum,rank_copies,pool_field_census,m52_final_certify}.py`, `data/m52/`, `plans/M52-copy-lock-objects.md` §R0–R5 | M52 |
 | 47 | **The field-wall theorem, and M53's measurements before the halt** (M53, HALTED). **Hand-proved, NOT kernel-checked** (`~/field-wall-conjecture.md` §5, Kooshi's other session; formalization pending): χ(G(ℚ(√3, √11)²)) = 4 via the residue colouring modulo a conjugation-fixed prime of K(i) above 2 — the first plane-colouring bound over a field beyond ℚ in this programme's record, subsuming M24–M26's closures; the wall located 2-adically (falls iff −1 is a square in a completion above 2; for multiquadratic fields iff an odd square class ≡ 7 mod 8; √5/√7 break it, √2/√10/√14/√35/√70 do not; even-distance spindles always do). **Measured, exact**: the seed test (1,004/1,004 proper, 446/446 mono, pair separated, both branches) and the it-4 object (13,796/13,796, 344/344, pair separated) — `tools/residue_colouring.py`; the exact field split of the depth-1 pool (16,348 in-field of 1,636,399 — 1.0 %, fusion-explained; out-of-field points have exactly two object neighbours to seven in 1.6 M); the spectrum (89/0/60 of 149; 0 exact at 10 min); the batch law (2,488 → > 80,000 at two cheats); the one-cheat census (in-field kills 2,488/2,488, vacuity witnessed); the two-cheat stage's 3,936 in-field survivors (5 killed, 3,676 unknown at 300 s on pdeg12); the 25× ask-cost rise across the cull. Instruments: `cheat_spectrum`, `cube_certify`, `pool_field_restrict`, `outfield_census`, `commit_cull`, `batch_grow`, `residue_colouring`; the shared generators `binary3_clauses`/`forces_clauses`. Records: `plans/M53-iteration-5.md` §R0–§R5, `plans/RISKS.md` R1 resolved, `plans/STUB-field-wall.md` bannered, `data/m53/`. **Same day, the proving session:** the residue obstruction (T17 — Σ(C′) SAT ⟹ no in-field halo ever makes C′ force; μ ≥ 3 inside K; measured: 8 odd components, 0 blocked singles, 0 residue-type survivors) and the wall-break census (T18 — 5 radicands / 4,221 pairs break alone, 523,608 pairs inert, classes = ⟨−1, 2⟩ at each prime because every radicand lies in ℚ(√33)); `tools/{residue_floor,wall_break_test}.py`, `data/m53/{residue-floor-it4c,wallbreak-it4}.json`; the note copied to `plans/FIELD-WALL-THEOREM.md`; the kernel plan `plans/STUB-field-wall-kernel.md`.**Later the same day:** the rigidity dial exact (163/178 at 8/3, 8/11 at 8/√3, 0 at valuations 2 and 4; the zero rows a theorem), the **new 5-chromatic witnesses in ℚ(√3, √11, √247) (1,175 points from a 588-vertex 1-minimal K-forcer) and ℚ(√3, √11, √23)** (T20), Theorem A′ with the 3-adic wall and χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3 (T21), the wall-pool and partner replays (T19), and the handoff `plans/FIELD-WALL-SESSION-HANDOFF.md`. | `tools/{cheat_spectrum,cube_certify,pool_field_restrict,outfield_census,commit_cull,batch_grow,residue_colouring}.py`, `data/m53/`, `plans/M53-iteration-5.md` | M53 (halted) |
+| 48 | **The critical-set localization theorem, and the first objects that satisfy it** (M54). **Kernel** (`CriticalSet.lean`, standard three axioms): `CriticalSet G k = {c | (G − c).Colorable k}`; the isolating lemma (`exists_coloring_isolating_of_mem_criticalSet`: a critical vertex isolates any independent set through it); **`criticalSet_subset_inter_neighborSet_of_forces`** (C ⊆ N(p) ∩ N(q) for a forced-equal pair), **`criticalSet_subset_union_neighborSet_of_separated`** (C ⊆ N(p) ∪ N(q) for a virtual edge), `criticalSet_subset_of_fan` (C ⊆ N(p) ∪ Q), `not_forces_of_mem_criticalSet` / `not_separated_of_mem_criticalSet` / `not_fan_of_mem_criticalSet` (the one-line negatives), `criticalSet_eq_univ_of_colorable` with the spare-colour lemma re-derived, `encard_criticalSet_le_degree_of_forces`, and the plane: **`eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`** (critical vertices drawn at the pair's two glue points), **`criticalSet_eq_empty_of_forces_of_two_lt_dist`** (none beyond distance 2), `encard_criticalSet_le_two_of_forces`; the K₄ − e spec pins the bound tight. Folklore in its vertex-critical case; the localization and its plane form are new packaging. **Measured** (`tools/five_dial.py`, 22 planted controls incl. the K₅ − e end-to-end positive; every critical vertex certified by a verified colouring; every headline with its population): the E–I seed C = ∅ (214/214); the witness vertex-critical (1,175/1,175) — T21's zero was a theorem; W ∪ its 71-point F₂₄₇ cross pool: C loses three remote copy-side vertices; the full-fabric single-centre union: C = F ∪ R(F) exactly, 13 of 3,905 (F = the forcing-critical set, 7 of 1,953, by 1,951 three-second asks); **two spindles on the full fabric: C = ∅ by derivation (F₁ ∩ F₂ = ∅, 34/34 load-bearing deletions checked)**; **the two-core union (588 + 543, overlap 31): C = ∅ measured, 2,229 points, and its exhaustive five-colour sweep reads 0 / 0 complete in 31 s** — redundancy necessary, not sufficient. The witness exact in K(√247); ν(H) = 38 exact, ν(W) = 1; the Fischer reconciliation (T23). | `Proofs/HadwigerNelson/CriticalSet.lean`, `tools/five_dial.py`, `data/m54/`, `plans/M54-five-colour-dial.md` §R0–§R7 | M54 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
+
+*(M54 CLOSED 2026-09-06 — the five-colour dial; `plans/M54-five-colour-dial.md` §R0–§R8. The critical-set
+localization theorem is in the kernel and every reading obeyed it; two 5-chromatic unit-distance graphs with
+NO critical vertex now exist here (5,857 and 2,229 points) and the smaller one reads pairwise floppy at five
+colours, complete, in 31 seconds. **The ranking after M54, derived from what the sweep could not do:**
+
+1. **Material with no spare colour on any thinly attached piece.** The two obstructions are now both
+   theorems-with-measurements: a compulsion at five colours needs (a) no critical vertex outside the
+   pair's glue points (M54's theorem — cleared by two spindles on redundant fabric) and (b) no
+   4-colourable piece attached by outside-degree-one chords (the absorption principle, D2, measured at
+   one point). (b) names the construction: bases whose 5-chromaticity is carried densely — many
+   spindles at many centres over ONE fabric (every pair of the 163 forced pairs with disjoint
+   forcing-critical sets is a generator, and the forcing censuses cost 3 s per vertex), so that no
+   large sub-piece is 4-colourable; and the cross pool (§R1: the K-lattice's shadow, 20 fusions, a
+   53-point component) grown one depth further into F₂₄₇ so that copy-side points acquire
+   outside-degree ≥ 2 into rigid pieces. The census-then-candidates pipeline (`tools/five_dial.py`)
+   reads each such object at one 4-colour ask per vertex before any sweep.
+2. **The kernel formalization of Theorem B** (`plans/STUB-field-wall-kernel.md`) — unchanged, and now
+   with Fischer 1990 as the attribution frame (T23): the additive framework and the quadratic planes
+   are his; the biquadratic exact 4 and the local criterion are ours.
+3. **The anatomy of the F₂₄₇ cross lattice** (§R1) — the half-angle rotation ρ^{1/2} = (√247 + 3i)/16 and
+   the K-lattice's shadow; a tangent with a derivation waiting, cheap.
+4. **The dial as the descent's monitor**: every committed object's critical set is EMPTY by theorem
+   (it forces a pair five apart), so a critical vertex on a committed object is a bug — a free
+   regression control for Track A.
+
+The M53-halt ranking below is kept for the record.)*
 
 *(M53 HALTED 2026-09-05 at phase D — the field-wall conjecture is a theorem (`plans/FIELD-WALL-THEOREM.md`,
 canonical copy `~/field-wall-conjecture.md`). **The new plan, written the same day by the session holding
@@ -2226,6 +2297,41 @@ record shows what was believed, what was measured, and what is now proved.
   residue-𝔽₃ prime above 3 or with the 2-adic wall standing — impossible by theorem, so the only
   live falsifier is a NON-additive colouring beating χ_res somewhere, which would be a new
   colouring genre.
+  **AMENDED 2026-09-06 (Fischer 1990 read, T23):** the framework is Fischer's *additive k-colouring* and the
+  quadratic thresholds are his Theorems 8–10 — including χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3, which T21 claimed; and
+  the entry's "4 when the 2-adic wall stands with residue field 𝔽₄" is wrong when complex conjugation lies in
+  INERTIA (ℚ(√N), N ≡ 5 mod 8: 2 inert with residue 𝔽₄, then ramified in ℚ(√N, i)) — there the reduced
+  norm-one group is {1} and a line avoids it: those planes are BIPARTITE (his Theorem 8). The general rule:
+  colour by cosets of an additive subgroup avoiding the REDUCED norm-one group, which is the norm-one group
+  of the residue field over its conjugation-fixed subfield when conjugation acts nontrivially, and {±1}
+  when it lies in inertia. What stays ours: the local criterion, the multiquadratic case, Theorem B's exact 4.
+* **G39 — Redundancy before rigidity: a pair compulsion at χ colours lives only where the critical
+  set lets it, and in the plane that is two points or none.** (M54, 2026-09-06; kernel-checked in
+  `CriticalSet.lean`, measured on the seed, the witness, and the grown witness.) With C(G) the set of
+  vertices whose deletion drops the chromatic number, a forced-equal pair at χ(G) colours has
+  C(G) ⊆ N(p) ∩ N(q) and a virtual edge C(G) ⊆ N(p) ∪ N(q) — one recolouring (a critical vertex
+  isolates any independent set through it) of which the spare-colour lemma is the case C = V. Two
+  points of the plane have at most two common unit neighbours, so **a unit-distance graph that forces
+  a pair equal at its own chromatic number has at most two critical vertices, and none if the pair is
+  more than 2 apart.** Consequences: (i) the 6-forcer built as 5-rigid fabric plus a spindle at
+  d > 2 needs fabric whose 5-chromaticity survives EVERY single vertex deletion — the dial's first
+  rung is redundancy, not rigidity, and it costs one 4-colour ask per vertex; (ii) single-centre
+  spindle unions read zero by theorem (the fused centre is critical); (iii) the criticality census
+  SUBSUMES the exhaustive five-colour sweep whenever |C| > 2Δ — T21's 858-second sweep of the witness
+  measured a theorem; (iv) every descent stage has C = ∅ (it forces a pair five apart), a free
+  regression control. **[kernel + measured: the E–I seed C = ∅ (214/214); the 1,175-point witness
+  VERTEX-CRITICAL (1,175/1,175, each certified by a colouring); the witness plus its F₂₄₇ cross pool
+  loses three remote copy-side critical vertices; the full-fabric single-centre union C = F ∪ R(F) = 13 of
+  3,905; two spindles on the full fabric C = ∅ (F₁ ∩ F₂ = ∅, 34/34 checked); the two-core union C = ∅
+  (31/31 checked) and its complete five-colour sweep 0 / 0 in 31 s]** *Reading on top, falsifiable — and its first half is now MEASURED: the C = ∅ objects are still floppy, so
+  the second obstruction, the absorption principle (each 4-colourable piece attached by outside-degree-one
+  chords is coloured around by the spare colour), is the live one. every 5-chromatic unit-distance graph built as "4-rigid fabric plus one spindle"
+  is vertex-critical or nearly so, because the spindle is the only route to the fifth colour; the
+  redundancy the theorem demands must come from MANY routes — many spindles at many centres, or
+  fabric whose 5-chromaticity is carried the way K-fabric's 4-chromaticity is, by density rather than
+  by one chord. Falsifier: a 5-chromatic unit-distance graph with C ≤ 2 that a pair sweep still
+  reads floppy at five colours (then redundancy is necessary but the rigidity gap is elsewhere).*
+
 
 ## Whose work this is
 

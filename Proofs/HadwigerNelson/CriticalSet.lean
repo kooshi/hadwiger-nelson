@@ -60,6 +60,7 @@ it is the set of vertices whose removal drops the chromatic number. -/
 def CriticalSet (G : SimpleGraph V) (k : ℕ) : Set V :=
   {c | (G.deleteIncidenceSet c).Colorable k}
 
+/-- Membership is definitional: a critical vertex is one whose deleted graph is `k`-colourable. -/
 theorem mem_criticalSet_iff {c : V} :
     c ∈ CriticalSet G k ↔ (G.deleteIncidenceSet c).Colorable k :=
   Iff.rfl
@@ -203,12 +204,15 @@ theorem criticalSet_subset_union_neighborSet_of_separated {p q : V} (hpq : ¬ G.
   simp only [Set.mem_union, SimpleGraph.mem_neighborSet, not_or] at hcn
   exact not_separated_of_mem_criticalSet hpq hcn.1 hcn.2 hc h
 
+/-- **Neither endpoint of a forced-equal pair is critical** — the ∩-theorem at `c = p`, where membership
+would make `p` its own neighbour. -/
 theorem not_mem_criticalSet_of_forces {p q : V} (hpq : p ≠ q) (h : Forces G (k + 1) p q) :
     p ∉ CriticalSet G k :=
   fun hp => G.irrefl (criticalSet_subset_inter_neighborSet_of_forces hpq h hp).1
 
 /-! ## The spare-colour lemma as the case `CriticalSet = univ` -/
 
+/-- **On a `k`-colourable graph every vertex is critical** — the case the spare-colour lemma lives in. -/
 theorem criticalSet_eq_univ_of_colorable (h : G.Colorable k) : CriticalSet G k = Set.univ :=
   Set.eq_univ_of_forall fun c =>
     SimpleGraph.Colorable.mono_left (SimpleGraph.deleteIncidenceSet_le G c) h
@@ -293,6 +297,7 @@ colours of the adjacent pair `{2, 3}`), and its critical set at two colours is e
 def k4MinusEdge : SimpleGraph (Fin 4) :=
   SimpleGraph.fromRel fun i j => i ≠ j ∧ ¬ ({i, j} : Finset (Fin 4)) = {0, 1}
 
+/-- Adjacency in `k4MinusEdge` is decidable, so the spec examples close by `decide`. -/
 instance : DecidableRel k4MinusEdge.Adj := fun a b =>
   decidable_of_iff _ (SimpleGraph.fromRel_adj _ a b).symm
 

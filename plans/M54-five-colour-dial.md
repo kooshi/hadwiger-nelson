@@ -604,3 +604,46 @@ rung is therefore named by derivation, not by search — material whose 5-colour
 colour on any large piece, i.e. a base that is itself 5-chromatic densely (many spindles whose
 chords are not a thin conic each), or cross material with outside-degree ≥ 2 into rigid pieces
 (§R1's pool, grown deeper). The big union's sweep (§R4′, chain 4) continues as the scale twin.
+
+## §R8. Close (2026-09-06 ~03:15Z)
+
+### Predictions scored
+
+| # | registered | outcome |
+|---|---|---|
+| P-M54-1 | C(H) = ∅ | **MET** — 214/214 deletions refuse four colours (1 s); the theorem's calibration |
+| P-M54-2 | \|C(W)\| > Δ(W), > 500; ν(W) = 1 | **MET** beyond registration — W is vertex-critical (1,175/1,175); ν(W) = 1 |
+| P-M54-3 | the 588-core forces no second pair | **not run as stated** — superseded: the second spindle was taken from the full fabric's forced-pair inventory (pair 2 = (813, 1939)) and its own 1-minimal core shrunk (543); the core's own second-pair question is an open end |
+| P-M54-4 | the two-spindle union has \|C\| < \|C(W)\| and reads 0 / 0 | **MET** — \|C\| = 0 (not merely smaller) on both the full-fabric union (by derivation, 34/34 checked) and the two-core union (31/31 checked); the two-core union's exhaustive sweep reads 0 / 0, complete |
+| P-M54-5 | the F₂₄₇ cross lattice is sparse (< 2 %), 0 fusions, pool degree < 1 | **MET in its sparsity half** (0.04 %), **REFUTED in its structural half** — 71 points, 20 fusions, 114 edges, two components: the K-lattice's shadow |
+| P-M54-6 | W ∪ pool reads 0 / 0 and \|C\| stays > Δ | **MET in its dial half** (0 candidates by theorem), **MISSED in its second half** — the pool removed three copy-side vertices from the critical set, remotely (the §Bʹ rule's only mechanism, which fired) |
+| P-M54-7 | ν(H) ≥ 10 | **MET** — ν(H) = 38 exact |
+| §R4's registration | the C = ∅ union's sweep reads 0 / 0 | **MET** on the two-core twin (31 s, complete); the 5,857-point original's sweep in flight at the close |
+
+### What landed, in one table
+
+| deliverable | state |
+|---|---|
+| `CriticalSet.lean` | 15 declarations, zero sorry, standard three axioms (audit entries in `scripts/Axioms.lean`) |
+| `tools/five_dial.py` | 11 subcommands, 22 planted controls; `build/m54/{forcing_census,seed_models,nu_exact_seed}.py` |
+| objects | the witness exact in K(√247); W ∪ cross pool (1,238); the full-fabric single-centre union (3,905); **two 5-chromatic unit-distance graphs with no critical vertex (5,857 and 2,229 points)** |
+| readings | every critical set as the theorem predicted; the dial on a C = ∅ object: pairwise floppy at five colours, complete |
+| literature | Fischer 1990 reconciled (T23); the note's Cor. 6.5 corrected |
+
+### Open ends (not run, or run to a wall)
+
+* The 5,857-point union's sweep (chain 4) — in flight; its result is an addendum here when it lands.
+* The 588-core's own forced pairs at four colours (P-M54-3 as stated); other pairs of the 163 with
+  disjoint forcing-critical sets (every such pair is a C = ∅ generator; the census costs 3 s per vertex).
+* The cross lattice's anatomy (§R1): the half-angle rotation, the 53-point component, the 27 unit-circle
+  points about the centre — a derivation waiting.
+* Depth two of the cross lattice; the cross lattice of the C = ∅ unions (their copies never touch, so
+  cross material is the only way to give copy-side points outside-degree ≥ 2).
+* ν beyond the two regimes RC2 cannot reach (35 s enumeration where rigid, C ≠ ∅ where floppy).
+* Kooshi's papers: Chow 1993, Chilakamarri 1988, the arXiv set in `../library/pdf` — unread beyond
+  Fischer and Johnson DM 79's abstract; Soifer's chapters and Johnson CN 60 / Zaks pending.
+
+### The gate
+
+`lake env lean` green on the module (zero sorry); `./scripts/build.sh` and `scripts/axioms.sh` run at the
+close — their verdicts are in the closing commit's message; `lake lint` likewise.

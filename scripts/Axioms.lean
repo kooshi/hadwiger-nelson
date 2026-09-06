@@ -140,6 +140,21 @@ open HadwigerNelson
 #print axioms HadwigerNelson.not_separated_of_colorable
 #print axioms HadwigerNelson.Forces.not_colorable
 #print axioms HadwigerNelson.Separated.not_colorable
+-- M54: the critical-set localization theorem (CriticalSet.lean) — the isolating lemma, both polarities
+-- and the fan form, the spare-colour re-derivation's engine, the degree bound, the three plane corollaries
+#print axioms HadwigerNelson.exists_coloring_isolating_of_mem_criticalSet
+#print axioms HadwigerNelson.not_forces_of_mem_criticalSet
+#print axioms HadwigerNelson.not_separated_of_mem_criticalSet
+#print axioms HadwigerNelson.not_fan_of_mem_criticalSet
+#print axioms HadwigerNelson.criticalSet_subset_of_fan
+#print axioms HadwigerNelson.criticalSet_subset_inter_neighborSet_of_forces
+#print axioms HadwigerNelson.criticalSet_subset_union_neighborSet_of_separated
+#print axioms HadwigerNelson.not_mem_criticalSet_of_forces
+#print axioms HadwigerNelson.criticalSet_eq_univ_of_colorable
+#print axioms HadwigerNelson.encard_criticalSet_le_degree_of_forces
+#print axioms HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces
+#print axioms HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_lt_dist
+#print axioms HadwigerNelson.encard_criticalSet_le_two_of_forces
 -- M51: the entropy floor K4 — a k-colourable graph has ≥ 2^⌈n/k⌉ (k+1)-colourings (EntropyFloor.lean)
 #print axioms HadwigerNelson.two_pow_le_card_coloring
 #print axioms HadwigerNelson.spareColorings_eq_last_iff

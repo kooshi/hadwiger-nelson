@@ -160,7 +160,7 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
 2. **Read the rigidity dial** (`build/m54/rigidity-dial-it4.json`, the exact four-colour forced-equal
    sweep of the it-4 unit part by 2-adic valuation class): if forcing sits only at valuation 6,
    Q10's reading stands and the dial's next point is the it-5-grade fabric.
-3. **M54 — the five-colour dial (LIVE 2026-09-05, Kooshi: "You are go for the 5 dial milestone";
+3. **M54 — the five-colour dial (CLOSED 2026-09-06; the theorem in the kernel, two C = ∅ 5-chromatic objects, the 2,229-point one pairwise floppy at five colours in 31 s; next rung named in `CLAUDE.md` § Paths forward item 1) — was: LIVE 2026-09-05, Kooshi: "You are go for the 5 dial milestone";
    `plans/M54-five-colour-dial.md`)**: the critical-set localization theorem in the kernel first (a pair
    compulsion at χ colours lives inside the critical set's complement's neighbourhoods — in the plane a
    forcing graph has ≤ 2 critical vertices, 0 beyond distance 2), then the calibrated sub-dials

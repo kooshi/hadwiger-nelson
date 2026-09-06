@@ -189,7 +189,7 @@ already there. My guess: the bipartite cases and the framework are; the biquadra
 
 ## 5. Novel approaches now open (my take, ranked)
 
-1. **The five-colour dial on 5-chromatic fabric grown in its own field.** Take W (or the 3,905-point
+1. **DONE as M54 (2026-09-06, `plans/M54-five-colour-dial.md`) — the reading: the localization theorem, two C = ∅ objects, pairwise floppy at five colours; next rung = no spare colour on any thinly attached piece.** *(as written:)* **The five-colour dial on 5-chromatic fabric grown in its own field.** Take W (or the 3,905-point
    union), build its depth-one glue lattice in F₂₄₇ (the tools work on any field once exact
    coordinates exist — a K(√247) arithmetic class is needed, the K5 class in `copy_exact_field.py`
    is the template), commit points that increase five-colour rigidity (the dial as the objective, not
