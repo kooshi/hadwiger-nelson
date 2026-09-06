@@ -420,3 +420,92 @@ the intersection of the Kempe sublattices, and the 18 depth-3 exceptions are the
 Confidence low-medium; a lattice computation, phase B1. If it holds, K-fabric's 4-rigidity is a statement
 about three sublattices of Λ, no solver — and the same computation applies verbatim to a wall-broken chunk
 at five colours wherever ℤ/5-homs exist.
+
+## §M1. Domain modeling pass (2026-09-06, fresh invocation after the §S6 commit)
+
+**M1.1 The carrier is finite: (Λ/kΛ, S_k).** Every group of order k has exponent dividing k, so every
+additive k-colouring of X factors through A_k := Λ/kΛ ≅ (ℤ/k)^r; the unit classes S_k ⊂ A_k ∖ {0} and the
+same-component difference classes are all the data. Admissibility, F_add, the enumeration (r ≤ 8) and the
+SAT form (r > 8, A_p = 𝔽_p^r, S_p the hyperplane normals) are statements about (A_k, S_k) alone; Λ (its HNF
+basis) exists to compute the coordinate map. And L1 loses its localization: for d ∈ Λ, n·d ∈ eΛ with n
+coprime to e forces d ∈ eΛ (Λ/eΛ is e-torsion and n invertible on it), so **eΛ₍ₑ₎ ∩ Λ = eΛ** — "2-adic
+depth ≥ 2 in Λ" IS membership in 4Λ, which is what §S6 computed. The localization is needed only for
+differences not known to lie in Λ, which are exactly the cross-component pairs (M1.4).
+
+**M1.2 Two notions, named, and which one each claim quantifies over.** An *additive k-colouring of X* is a
+hom on Λ(X) (the chunk's own lattice, the ℤ-span of its edge vectors — the chunk analogue of Fischer's Σ₀,
+which is the ℤ-span of ALL unit vectors of F). An *additive k-colouring of F²* is Fischer's. The chunk
+family is the larger one, so its F_add is the SHARPER localization (F_true(X) ⊆ F_add^{Λ(X)} ⊆ F_add^{Σ₀|X});
+the plane notion is the directed limit as chunks grow. P1′, P3′, P4′, P5′, P8 quantify over the chunk
+notion; P7′ over the plane notion — and the plane obstruction has FINITE witnesses: Σ₀ is the ℤ-span of the
+unit vectors, so 1/k ∈ Σ₀(F²) iff 1/k ∈ Λ(X) for some finite X, and the instrument's `obstruct` on that
+X is the plane-level certificate.
+
+**M1.3 "The same colouring up to palette" is equality of the induced partitions of V.** That is the
+intrinsic notion for a finite point set; Aut(G)-orbits of homs (𝔽_p×-scaling for ℤ/p, GL₂(𝔽₂) for 𝔽₂²,
+{±1} for ℤ/4) are the hom-side proxy, equal to it when the difference set is rich enough to separate kernels.
+Headlines count partitions; populations count homs (G21). The test "is a given colouring c additive up to
+palette": the same-colour differences {p − q : c(p) = c(q)} impose LINEAR conditions φ(d) = 0 on A_k; solve
+for that subspace, then ask whether some solution avoids the different-colour differences and the units —
+enumeration below rank 9, SAT above. So `additive-test` is linear algebra plus avoidance, never a search
+over palettes.
+
+**M1.4 Components are a third verdict.** A pair in different unit-components is never additively forced or
+separated (each component's base colour is free): the instrument reports `not-comparable`, never `free`.
+The seed and U are connected (§S6); the witnesses are checked, not assumed.
+
+**M1.5 The Kempe object, and the two-line theorem it carries (P8 restated).** For an admissible φ and
+c ∈ G ∖ {0} let Λ_c^φ := ⟨u ∈ E : φ(u) ∈ {c, −c}⟩ — a sublattice (symmetric generators), with
+Σ_c Λ_c^φ = Λ. The {a, a−c}-subgraph of the colouring c_φ has its edges exactly on the units with
+φ(u) = ±c, so each of its components lies in one coset of Λ_c^φ. **Theorem (Kempe localization):** if
+c_φ(p) = c_φ(q) and q − p ∉ Λ_c^φ for some c, then swapping a ↔ a − c on the component of p is a proper
+colouring separating p from q; hence F_true(X, k) ⊆ F_K(X, k) := ∩_φ ∩_c Λ_c^φ (on same-component pairs),
+and F_true ⊆ F_add ∩ F_K. This refines the additive bound exactly where the bed showed the gap: a depth-2
+difference 4u lies in ker φ (additively forced) and may still miss some Λ_c^φ. **P8, restated:**
+F_K(U, 4) = the dial's forced set (163 + 8 pairs), i.e. every depth-3 difference lies in every Λ_c^φ of the
+two residue homs and the six ℤ/4-homs, every depth-2 difference misses some Λ_c^φ, and the 18 free
+depth-3 pairs are the ones some Λ_c^φ misses. A lattice computation; if it holds, K-fabric's 4-rigidity is
+"the intersection of the Kempe sublattices of its additive colourings", solver-free, and the same computation
+runs on any wall-broken chunk at five colours wherever ℤ/5-homs survive.
+
+**M1.6 The gauge.** The *additive defect* of a colouring c is its least Hamming distance to an admissible
+additive colouring up to palette — a distance to a finite family, cheap wherever the family is enumerable
+(the seed: 18 homs × 120 palettes on 214 points). Kempe distance (fewest swaps) is a structural claim, not a
+metric, and is measured only where the colouring space itself is enumerable: the seed's 35 colourings, whose
+Kempe graph (35 vertices, edges = one swap) is B2's second reading (are the 17 non-additive colourings
+Kempe-reachable from the 18 additive ones?).
+
+**M1.7 L7 — the spindle rotation is the obstruction, and the fields' additive spectra follow.** A spindle
+rotation at distance d has trace ρ + ρ̄ = 2 cos θ = 2 − 1/d² ∈ Σ₀(F²) (ρ is a unit vector), so **1/d² ∈ Σ₀(F²)
+for every spindle-able distance d with d² ∈ ℚ**. Instances: d² = 3 (Moser) gives 1/3; d = 5 gives 1/25;
+d² = 7/3 gives 1/7 (4d² − 1 = 25/3, ρ = (11 + 5i√3)/14 ∈ ℚ(√3)(i)); the Pythagorean (3 + 4i)/5 gives 1/5
+in ℚ² already; d = 2 (√15) gives 1/4 and d = 8/3 (√247) gives 9/64 hence 1/64. So Fischer's 1/k obstruction
+is the field wall in his language, and: **over K, 1/3, 1/5, 1/7 ∈ Σ₀ and 1/2 ∉ Σ₀** (Σ₀ lies in the local
+ring of the conjugation-fixed prime) — additive k-colourings of K² exist only for k coprime to 105, the
+residue colouring at 4 among them; **over Heule's, de Grey's and F₂₄₇, 1/2 ∈ Σ₀ too, so no additive
+k-colouring exists for any k ≤ 10** (11 is the first candidate, the norm of K(i)'s conjugation-fixed prime
+above 11 — the note's χ_res = 11). This settles P7′ by derivation (the 1/3 half for K: 2ρ + 2ρ̄ − 3 = 1/3
+from the Moser twist alone; the 1/2 half: the local ring). What B4 measures is only the chunk level: at what
+richness a chunk of each field loses its last hom at k = 4 and k = 5 (`obstruct` reporting the killing
+unit vectors), plus the finite witnesses of L7 (P7″: the chunk {0, 1, ρ, ρ̄, ρ², ρ̄²} for each rotation has
+1/d² ∈ Λ). Conjecture, NOT claimed: 1/p ∈ Σ₀(F²) iff no conjugation-fixed prime of F(i) lies above p (one
+direction is the local-ring argument).
+
+**M1.8 The Lean shape, least type.** No subgroup, no coset, no lattice: a graph Γ on an additive group V
+(the lattice, translated so a base point is 0) and a hom φ : V →+ G nonzero on every edge difference —
+`Coloring.ofAddMonoidHom Γ φ (h : ∀ a b, Γ.Adj a b → φ (a − b) ≠ 0) : Γ.Coloring G` (one line: φ a − φ b =
+φ (a − b)); `not_forces_of_addMonoidHom` in the repository's `Forces` vocabulary (compose with G ≃ Fin k);
+and L1 as `addMonoidHom_apply_eq_of_sub_eq_nsmul` via Mathlib's `AddMonoid.exponent_nsmul_eq_zero`
+(`Mathlib/GroupTheory/Exponent.lean:147`; grepped, present). Mathlib has NO Cayley-graph object (grepped
+2026-09-06: the only hits are unrelated). The unit-distance instance is the comap of `unitDistance ℂ` along
+`Λ → ℂ, w ↦ p₀ + w`. The Kempe theorem (M1.5) is NOT in kernel scope (a component-swap lemma nobody has
+written; B7). Phase C optional, an hour; the obligation pass writes the three statements.
+
+| decision (domain pass) | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| the carrier | (Λ/kΛ, S_k) finite; Λ only to compute it | Λ with 2-adic localization | M1.1: eΛ₍ₑ₎ ∩ Λ = eΛ; every consumer is finite | high |
+| chunk vs plane | both named; chunk primary (sharper localization), plane as limit with finite witnesses | one notion | M1.2 | high |
+| palette | partitions of V; Aut(G) as the hom proxy; additivity test by linear algebra + avoidance | palette enumeration | M1.3 | high |
+| the forced-set bound | F_true ⊆ F_add ∩ F_K, with F_K from the Kempe sublattices | F_add alone | M1.5: the bed's gap is exactly where F_K bites | high on the theorem; P8 on the equality |
+| the gauge | Hamming defect primary; Kempe graph only on the seed | Kempe distance everywhere | M1.6 | high |
+| kernel piece | three two-line theorems on a graph over an additive group, `Forces`-vocabulary; optional, phase C | none / the Kempe theorem | M1.8; B7 | medium — dropped without regret if B4 runs long |
