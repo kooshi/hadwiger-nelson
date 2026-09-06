@@ -66,7 +66,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M54 CLOSED (the five-colour dial), 2026-09-06.**
+**Last updated: M55 CLOSED (absorption), 2026-09-06.**
 
 ### Where the problem stands
 
@@ -905,6 +905,36 @@ it Theorem B and the local criterion. Seven registered predictions: five met, on
 (the cross lattice is sparse but lattice-like), one missed in its second half (the pool did move the
 critical set — by three remote vertices).
 
+
+M55 was minted as "many spindles over one fabric" — the paths-forward entry M54 had written — and began by
+deriving that the entry cannot work as stated, for any number of spindles, then turned the reason into a
+kernel theorem and measured what the theorem leaves open. **Absorption** (`Absorb.lean`): a vertex set A
+EXTENDS at k colours when every proper k-colouring of G[A] restricts from one of G, and then the pair
+compulsions of G among A's vertices are G[A]'s own — none, if G[A] is (k−1)-colourable. One construction
+proves every sufficient condition — colour the piece, repaint the clashes with the spare colour — and its
+instances are the shapes the hunt builds: **hub absorption** (pieces fused to the rest at one hub each, at
+most one base neighbour per piece vertex, the non-hub chords a matching with independent endpoints, the piece
+union plus hubs (k−1)-colourable) is EXACTLY a union of spindle copies hanging off one fabric; **greedy
+absorption** (the (k+1)-core: vertices of degree ≤ k, peeled, are invisible); **symmetric copies** (ring chords
+without fusion are absorbed at every k ≥ 2 by a palette rotation — a spindle forces only through its fused
+centre). Measured, every reading as the theorem said and one sharper: on M54's two C = ∅ objects and on a
+new three-spindle star (7,809 points, C = ∅ by two asks) **every cross chord but the spindle chord is a hub
+chord** — a copy hangs on its fabric by its fused centre and ONE chord — so the base extends at five colours,
+no compulsion lives among the fabric's vertices however many spindles there are, and **ν (the fifth colour's
+smallest class = the fewest deletions to 4-colourability, D5) is exactly 2 on both two-spindle objects** by
+theorem above and M54's census below, with no solver run. The single-centre **flower** (rotation powers about
+one centre, de Grey's genre with our angle) has a critical centre at every depth tried (K = 1, 2, 3: one
+deletion ask each) — and at K ≥ 2 it is the first object the theorem does NOT decide (consecutive petals with
+the fused centre are a rotated copy of the 5-chromatic witness), yet with C = {x} the localization theorem
+leaves its sweep only the centre's neighbourhood, and the exhaustive five-colour sweeps read **0 / 0 complete
+in 11 s and 30 s**. The F₂₄₇ cross lattice one depth further (the plan's other route) is denser than
+registered (0.65 % of cross pairs glue in-field, sixteen times depth one; 64 % of the new points at degree ≥ 5,
+so visible) and it moves the witness's critical set from 1,172 to 937 — **all 238 freed vertices on the copy
+side, none on the core side**, a one-sided effect registered as T24. Nine predictions: five met (two by
+derivation before measurement), one met-in-substance, three missed in their numbers with the numbers
+recorded. Three instrument incidents were caught by controls; one — a solver wall that had never actually
+been able to fire — was found because the ν ladder reached it, audited (no recorded ask of M54 or M55 ever
+needed the wall), and fixed.
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -971,10 +1001,35 @@ critical set — by three remote vertices).
 | 46 | **The copy-lock atlas, the cull, and the field** (M52). **Kernel** (`Copy.lean`, standard three axioms): `spindleRot d` with `spindleRot 2 = rho15`, `spindleRot √3 = moserTwist`, the exact `1/2 ≤ d` (red at `1/4`), `dist_self_rotAbout` (hypothesis-free), `self_chord_iff` (self-chords = the radius-d circle), `copyUnion` as `(unitDistance ℂ).comap (Sum.elim q (rotAbout c ρ ∘ q))` with both containments and `chromaticNumber_copyUnion_le`. **Measured, exact**: T13/P1 (13,796 of 13,796 edges on the half-twist ladder), T14 (every point in ℚ(√3, √11), all edges exact identities; copies exact in ℚ(√3, √5, √11)), P2 (every genuine cross chord collinear and seed-field), P3 (self-chords = the radius-2 shell), P4 (d = 2 pigeonhole fires on U at k = 4, √3 clean), T15 (the kill table: 3,516 × 1,062, all pairs killed, 13 sole-killer chords, no pair compulsion, centre-colour bias to 65 %), P5 REFUTED (0 of 15,218 classes; 20/20 direct extensions, copy side 4-coloured), 0 copy–copy chords; **the cull 273 → 149** (114 by enumeration, 10 by WO-14; 60 witnessed, 27 floor, 52 undecided; one-hot UNSAT 10,640 s, 3-bit unknown at 43,200 s: candidate); the pool field census (15 % in-field, √5/√35 reachable, 100 % of commits in-field); the shrink priced (1.1 CPU-h/probe, 12–33 %); WO-14 delivered (gate 269/269; A3 273/273; the CNF finding; the sequential-acceptance floor; D74–D77; WO-16 stubbed). Instruments: `compose`, `copy_anatomy`, `copy_exact_field`, `copy_field_probe`, `copy_kill_table`, `cull_enum --loop`, `rank_copies`, `pool_field_census`, `m52_final_certify`; the viewer's copy/cull layers. Records: `plans/RISKS.md`, `plans/STUB-field-wall.md`, `plans/M53-iteration-5.md`, `plans/STUB-certify-core883.md`, `DESCENT-ALGORITHM` phase 0″/2′. | `Proofs/HadwigerNelson/Copy.lean`, `tools/{compose,copy_anatomy,copy_exact_field,copy_field_probe,copy_kill_table,cull_enum,rank_copies,pool_field_census,m52_final_certify}.py`, `data/m52/`, `plans/M52-copy-lock-objects.md` §R0–R5 | M52 |
 | 47 | **The field-wall theorem, and M53's measurements before the halt** (M53, HALTED). **Hand-proved, NOT kernel-checked** (`~/field-wall-conjecture.md` §5, Kooshi's other session; formalization pending): χ(G(ℚ(√3, √11)²)) = 4 via the residue colouring modulo a conjugation-fixed prime of K(i) above 2 — the first plane-colouring bound over a field beyond ℚ in this programme's record, subsuming M24–M26's closures; the wall located 2-adically (falls iff −1 is a square in a completion above 2; for multiquadratic fields iff an odd square class ≡ 7 mod 8; √5/√7 break it, √2/√10/√14/√35/√70 do not; even-distance spindles always do). **Measured, exact**: the seed test (1,004/1,004 proper, 446/446 mono, pair separated, both branches) and the it-4 object (13,796/13,796, 344/344, pair separated) — `tools/residue_colouring.py`; the exact field split of the depth-1 pool (16,348 in-field of 1,636,399 — 1.0 %, fusion-explained; out-of-field points have exactly two object neighbours to seven in 1.6 M); the spectrum (89/0/60 of 149; 0 exact at 10 min); the batch law (2,488 → > 80,000 at two cheats); the one-cheat census (in-field kills 2,488/2,488, vacuity witnessed); the two-cheat stage's 3,936 in-field survivors (5 killed, 3,676 unknown at 300 s on pdeg12); the 25× ask-cost rise across the cull. Instruments: `cheat_spectrum`, `cube_certify`, `pool_field_restrict`, `outfield_census`, `commit_cull`, `batch_grow`, `residue_colouring`; the shared generators `binary3_clauses`/`forces_clauses`. Records: `plans/M53-iteration-5.md` §R0–§R5, `plans/RISKS.md` R1 resolved, `plans/STUB-field-wall.md` bannered, `data/m53/`. **Same day, the proving session:** the residue obstruction (T17 — Σ(C′) SAT ⟹ no in-field halo ever makes C′ force; μ ≥ 3 inside K; measured: 8 odd components, 0 blocked singles, 0 residue-type survivors) and the wall-break census (T18 — 5 radicands / 4,221 pairs break alone, 523,608 pairs inert, classes = ⟨−1, 2⟩ at each prime because every radicand lies in ℚ(√33)); `tools/{residue_floor,wall_break_test}.py`, `data/m53/{residue-floor-it4c,wallbreak-it4}.json`; the note copied to `plans/FIELD-WALL-THEOREM.md`; the kernel plan `plans/STUB-field-wall-kernel.md`.**Later the same day:** the rigidity dial exact (163/178 at 8/3, 8/11 at 8/√3, 0 at valuations 2 and 4; the zero rows a theorem), the **new 5-chromatic witnesses in ℚ(√3, √11, √247) (1,175 points from a 588-vertex 1-minimal K-forcer) and ℚ(√3, √11, √23)** (T20), Theorem A′ with the 3-adic wall and χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3 (T21), the wall-pool and partner replays (T19), and the handoff `plans/FIELD-WALL-SESSION-HANDOFF.md`. | `tools/{cheat_spectrum,cube_certify,pool_field_restrict,outfield_census,commit_cull,batch_grow,residue_colouring}.py`, `data/m53/`, `plans/M53-iteration-5.md` | M53 (halted) |
 | 48 | **The critical-set localization theorem, and the first objects that satisfy it** (M54). **Kernel** (`CriticalSet.lean`, standard three axioms): `CriticalSet G k = {c | (G − c).Colorable k}`; the isolating lemma (`exists_coloring_isolating_of_mem_criticalSet`: a critical vertex isolates any independent set through it); **`criticalSet_subset_inter_neighborSet_of_forces`** (C ⊆ N(p) ∩ N(q) for a forced-equal pair), **`criticalSet_subset_union_neighborSet_of_separated`** (C ⊆ N(p) ∪ N(q) for a virtual edge), `criticalSet_subset_of_fan` (C ⊆ N(p) ∪ Q), `not_forces_of_mem_criticalSet` / `not_separated_of_mem_criticalSet` / `not_fan_of_mem_criticalSet` (the one-line negatives), `criticalSet_eq_univ_of_colorable` with the spare-colour lemma re-derived, `encard_criticalSet_le_degree_of_forces`, and the plane: **`eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`** (critical vertices drawn at the pair's two glue points), **`criticalSet_eq_empty_of_forces_of_two_lt_dist`** (none beyond distance 2), `encard_criticalSet_le_two_of_forces`; the K₄ − e spec pins the bound tight. Folklore in its vertex-critical case; the localization and its plane form are new packaging. **Measured** (`tools/five_dial.py`, 22 planted controls incl. the K₅ − e end-to-end positive; every critical vertex certified by a verified colouring; every headline with its population): the E–I seed C = ∅ (214/214); the witness vertex-critical (1,175/1,175) — T21's zero was a theorem; W ∪ its 71-point F₂₄₇ cross pool: C loses three remote copy-side vertices; the full-fabric single-centre union: C = F ∪ R(F) exactly, 13 of 3,905 (F = the forcing-critical set, 7 of 1,953, by 1,951 three-second asks); **two spindles on the full fabric: C = ∅ by derivation (F₁ ∩ F₂ = ∅, 34/34 load-bearing deletions checked)**; **the two-core union (588 + 543, overlap 31): C = ∅ measured, 2,229 points, and its exhaustive five-colour sweep reads 0 / 0 complete in 31 s** — redundancy necessary, not sufficient. The witness exact in K(√247); ν(H) = 38 exact, ν(W) = 1; the Fischer reconciliation (T23). | `Proofs/HadwigerNelson/CriticalSet.lean`, `tools/five_dial.py`, `data/m54/`, `plans/M54-five-colour-dial.md` §R0–§R7 | M54 |
+| 49 | **Absorption: the pieces a five-colour sweep cannot see, and the ν dial** (M55). **Kernel** (`Absorb.lean`, standard three axioms, 21 declarations): `Extends G A k` (the restriction of colourings onto G[A] is onto) with `Extends.forces_iff` / `separated_iff` (compulsions among A are G[A]'s) and `Extends.not_forces_of_colorable` / `not_separated_of_colorable` (none when G[A] is k-colourable — the spare-colour lemma relative to a piece); the carrier **`extends_of_repaint`** (a piece colouring whose clashes across the cut are pairwise non-adjacent and touch no spare-coloured neighbour extends by repainting); **`extends_of_hubs`** (pieces fused at hubs, ≤ 1 base neighbour each, non-hub chords a matching with independent piece endpoints, a piece colouring with a designated hub colour each hub's neighbours avoid — the spindle-copy shape) with `extends_of_hub_matching` and `extends_of_matching`; **`extends_of_extensionOrder`** (the inductive greedy order — the (k+1)-core's backing) with `extends_compl_singleton_of_degree_le`; **`symCopy.coloringOfPerm`** and **`extends_symCopy`** (symmetric chords absorbed at every k ≥ 2 by a palette rotation; fusion = a fixed-colour constraint the forced pair refuses); spec: the K₄−e hub model and the **K₃,₃-pendants red** (`k33_lists_refuse`, 729-case decide: the independence hypothesis is load-bearing); six statement mutations refused. Folklore in each instance; the packaging as what a sweep cannot see, the hub form, and the copy-union consequence are ours. **Measured** (`tools/absorb_dial.py`, 13 planted controls): core-star₂, star₂ and the new three-spindle star (7,809, C = ∅ by two asks) ABSORBED — every cross chord but the spindle chord is a hub chord — so ν(core-star₂) = ν(star₂) = 2 exactly (D5 above, M54's C = ∅ below), ν(star₃) ∈ [2, 3]; the flowers K = 1, 2, 3 (1,762 / 2,936 / 4,110 points) have a critical centre each, K ≥ 2 NOT absorbed (rotated W inside) and swept 0 / 0 complete in 11 s / 30 s; the F₂₄₇ cross lattice at depth two: 0.65 % cross-only in-field (16× depth one), 64 % of the pool at degree ≥ 5, the witness's critical set 1,172 → 937 with all 238 freed vertices copy-side (T24); the third pair's forcing-critical set overlaps pair 1's in {29, 1753}. The walled SAT helper found inert and made real (no recorded ask had ever reached its wall). | `Proofs/HadwigerNelson/Absorb.lean`, `tools/absorb_dial.py`, `data/m55/`, `plans/M55-absorption.md` §R0–§R5 | M55 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
+
+*(M55 CLOSED 2026-09-06 — absorption; `plans/M55-absorption.md` §R0–§R5. The paths-forward entry M54
+wrote ("many spindles at many centres over one fabric so that no large sub-piece is 4-colourable") is now
+a theorem's corollary in the negative: every copy hangs by its fused centre and ONE chord, the base extends,
+ν = the number of spindles at most, and no compulsion among the fabric's vertices at any number of spindles.
+**The ranking after M55, from what the theorem admits and what the censuses moved:**
+
+1. **Thickened material, not star-shaped.** The absorption theorem needs a 4-colourable piece attached by a
+   hub and a matching; the F₂₄₇ cross thickening of the witness (M55 §R4) is neither a star nor absorbable,
+   and it is the only construction that MOVED the redundancy dial (238 critical vertices freed at one
+   depth, on one side). Grow it until the critical set is empty on a thickened object — deeper cross
+   lattice, or the K-partner thickening of both cosets (the full-pool grown stage's census, in flight at
+   the close, reads 1 critical vertex in 389 and that one is the fused centre) — then sweep: the first
+   object where neither theorem applies and ν could exceed 2 by structure rather than by count. T24 first
+   (why only the copy side frees), by derivation.
+2. **The ν = number-of-spindles law as a theorem**, and ν's exact engine: pairwise-disjoint forcing-critical
+   sets plus one-chord attachment should give ν = m outright (an afternoon's derivation); the hitting-set
+   engine is untested beyond its controls, the cardinality ladder is unfit above ~2,000 points.
+3. **The kernel formalization of Theorem B** (`plans/STUB-field-wall-kernel.md`) — unchanged.
+4. **The plane instance of `extends_of_hubs`** — a `Copy.copyUnion` shown to satisfy the hypotheses from
+   census data, the certificate shape for "this union carries no compulsion"; and the dial as the
+   descent's regression monitor (every committed object has C = ∅ by theorem) — unchanged.
+
+The M54 ranking below is kept for the record.)*
 
 *(M54 CLOSED 2026-09-06 — the five-colour dial; `plans/M54-five-colour-dial.md` §R0–§R8. The critical-set
 localization theorem is in the kernel and every reading obeyed it; two 5-chromatic unit-distance graphs with
@@ -2338,6 +2393,28 @@ record shows what was believed, what was measured, and what is now proved.
   by one chord. Falsifier: a 5-chromatic unit-distance graph with C ≤ 2 that a pair sweep still
   reads floppy at five colours (then redundancy is necessary but the rigidity gap is elsewhere).*
 
+* **G40 — Absorption: what a five-colour sweep cannot see, and why every star reads zero.** (M55,
+  2026-09-06; kernel-checked in `Absorb.lean`, measured on five objects.) A vertex set A whose colourings all
+  extend to the whole graph carries exactly the compulsions of its induced subgraph — none, when that
+  subgraph has a spare colour. Every sufficient condition is one move (colour the piece, repaint the clashes
+  with the spare colour), and its instances are the hunt's own constructions: a copy fused at one hub and
+  coupled by a matching with independent endpoints; a vertex of degree ≤ k, and by iteration everything
+  outside the (k+1)-core; a symmetric copy joined by ring chords, absorbed by a palette rotation at every
+  k ≥ 2 — so a spindle forces only through its fused centre. **[kernel]** Measured: on every spindle union
+  built here the copy hangs on its fabric by the centre's neighbourhood plus ONE chord (the spindle chord),
+  so the base extends, ν ≤ the number of spindles, and ν = 2 exactly on the two-spindle objects; the
+  single-centre flower has a critical centre at every depth and, where the theorem does not absorb it
+  (K ≥ 2: consecutive petals with the fused centre are a rotated witness), the localization theorem leaves
+  its sweep only the centre's neighbourhood — 0 / 0 in seconds. **[measured]** *The consequence for the
+  6-hunt: neither more spindles nor more centres can create a compulsion; a compulsion at five colours needs
+  material with no absorbable piece — every large 4-colourable sub-piece attached by a hub-and-matching is
+  invisible, and by Theorem B every K-coset piece is 4-colourable — so the object must be THICK in the
+  wall-breaking field (F₂₄₇ here), which is exactly what the cross thickening begins to build, and the one
+  construction that moved the redundancy dial (238 critical vertices freed at depth two, all on the copy
+  side: T24). Reading on top, falsifiable: the copy-side asymmetry is the rotation's direction against the
+  fabric's ladder structure (T13), and thickening both cosets symmetrically will free both sides. Falsifier
+  for the theorem: none needed; for the reading, a depth-three census freeing core-side vertices, or a
+  symmetric thickening that does not.*
 
 ## Whose work this is
 

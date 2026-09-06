@@ -68,8 +68,9 @@ restriction of a proper `k`-colouring of `G`. -/
 def Extends (G : SimpleGraph V) (A : Set V) (k : ℕ) : Prop :=
   ∀ c : (G.induce A).Coloring (Fin k), ∃ C : G.Coloring (Fin k), ∀ a : A, C a = c a
 
-/-- Adjacency in an induced subgraph is adjacency in `G` (definitional; the simp-normal form). -/
-@[simp] theorem induce_adj {A : Set V} {a b : A} : (G.induce A).Adj a b ↔ G.Adj a b := Iff.rfl
+/-- Adjacency in an induced subgraph is adjacency in `G` (definitional). Not a simp lemma: `simp` already
+reaches it through `SimpleGraph.comap_adj`, and the linter says so. -/
+theorem induce_adj {A : Set V} {a b : A} : (G.induce A).Adj a b ↔ G.Adj a b := Iff.rfl
 
 /-- The restriction of a colouring of `G` to `G[A]`. -/
 def restrictColoring (A : Set V) (C : G.Coloring (Fin k)) : (G.induce A).Coloring (Fin k) :=
@@ -264,7 +265,9 @@ theorem extends_of_matching {A : Set V} (hB : (G.induce Aᶜ).Colorable k)
 /-- **A greedy extension order from `A`**: the listed vertices are added one at a time, each with
 at most `k` neighbours among `A` and the vertices before it. The reverse of a `(k+1)`-core peeling. -/
 inductive ExtensionOrder (G : SimpleGraph V) (k : ℕ) : Set V → List V → Prop
+  /-- Nothing left to add. -/
   | nil (A : Set V) : ExtensionOrder G k A []
+  /-- Add `b ∉ A`, which has at most `k` neighbours in `A`, then continue from `insert b A`. -/
   | cons {A : Set V} {b : V} {L : List V} (hb : b ∉ A) (hdeg : (G.neighborSet b ∩ A).encard ≤ k)
       (hL : ExtensionOrder G k (insert b A) L) : ExtensionOrder G k A (b :: L)
 
@@ -446,7 +449,8 @@ instance : DecidableRel k4MinusEdgeHub.Adj := fun a b =>
 /-- The intended edge list, pinned: five of `K₄ − e`, the path, the chord. -/
 example : k4MinusEdgeHub.edgeFinset.card = 8 := by decide
 
-instance : DecidablePred (· ∈ insert (2 : Fin 6) {i : Fin 6 | i < 4}ᶜ) := fun i =>
+/-- Membership in the hub instance's piece-plus-hub set, decided. -/
+instance decidablePredMemHubPiece : DecidablePred (· ∈ insert (2 : Fin 6) {i : Fin 6 | i < 4}ᶜ) := fun i =>
   decidable_of_iff (i = 2 ∨ ¬ i < 4) (by simp [Set.mem_insert_iff])
 
 /-- The hub instance's hypotheses are satisfiable — the model of `extends_of_hub_matching`: the piece

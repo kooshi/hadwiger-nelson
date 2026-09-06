@@ -166,6 +166,12 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
    forcing graph has ≤ 2 critical vertices, 0 beyond distance 2), then the calibrated sub-dials
    (criticality census, ν), the F₂₄₇ cross-lattice census of the 1,175-point witness, and the
    five-colour sweep on the grown object. Supersedes item 3(b) below.
+3b. **M55 — absorption (CLOSED 2026-09-06; `plans/M55-absorption.md`)**: the theorem that "many spindles
+   over one fabric" cannot carry a compulsion at any number of spindles (a copy hangs by its fused centre
+   and one chord, the base extends, ν ≤ the number of spindles), the ν dial, the single-centre flower
+   (critical centre at every depth; floppy in seconds), and the F₂₄₇ cross thickening as the only
+   construction that moved the redundancy dial (T24). Next per `CLAUDE.md` § Paths forward: thickened
+   material, not stars.
 4. **Kooshi's pick between** (item 3 as it stood before M54 was minted): (a) minting the kernel milestone for Theorem B
    (`plans/STUB-field-wall-kernel.md`, names probed); (b) the endgame design question — what
    5-rigid wall-broken material looks like, G19/G25 with the theorem underneath; (c) continuing the

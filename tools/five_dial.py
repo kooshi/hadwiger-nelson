@@ -167,17 +167,20 @@ def colour_clauses(n: int, edges, k: int) -> list[list[int]]:
 
 
 def sat(clauses, nv_hint: int = 0, wall: float | None = None):
-    """('sat', model) | ('unsat', None) | ('unknown', None); `wall` in seconds via interrupt."""
+    """('sat', model) | ('unsat', None) | ('unknown', None). A walled ask runs the toolchain's cadical in a
+    subprocess with a real timeout (`forcer._solve`, the Rigidity engine's route; the child is killed on
+    expiry). The in-process pysat route is used only without a wall: pysat's `interrupt()` does not stop
+    cadical153 (measured 2026-09-06 — a 2-s timer never fired back, and the timer thread raised), so
+    the earlier Timer-based wall was inert. No recorded ask ever reached its wall (max 213 s against
+    walls ≥ 600 s), so every earlier verdict stands; the guard is now real."""
+    if wall:
+        from forcer import _solve
+        nv = max(nv_hint, max((abs(l) for c in clauses for l in c), default=0))
+        st, model = _solve(clauses, nv, wall)
+        return st, (model if st == "sat" else None)
     from pysat.solvers import Solver
     with Solver(name="cadical153", bootstrap_with=clauses) as s:
-        if wall:
-            t = threading.Timer(wall, s.interrupt); t.start()
-            try:
-                r = s.solve_limited(expect_interrupt=True)
-            finally:
-                t.cancel()
-        else:
-            r = s.solve()
+        r = s.solve()
         if r is None:
             return "unknown", None
         if r:

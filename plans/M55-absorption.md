@@ -534,3 +534,69 @@ the asymmetry must come from the rotation's direction relative to the fabric's o
 written under `data/m54/` (the tool's default DATA dir), not `data/m55/` where I looked; the cross-only
 census was one vertex from done. Both resumed from their checkpoints; nothing was lost. The checkpoint
 rule (CLAUDE.md, 2026-08-26) paid for itself twice in one hour.
+
+## §R5. Close (2026-09-06 ~09:30Z; the star₂ sweep, the full-pool census and the third core's shrink in flight)
+
+### Predictions scored
+
+| # | registered | outcome |
+|---|---|---|
+| P-M55-1 | star₂'s sweep reads 0 / 0 complete | **in flight at the close** — the forced-equal side CLOSED at 0 candidates by observation (50 seeded + drawn models); the virtual-edge side in its batch queries (58 models, 4,450 s); recorded as an addendum when it lands |
+| P-M55-2 | both M54 objects absorbed by `extends_of_hubs` | **MET, sharpened**: every cross chord but ONE per copy is a hub chord (the copy's image of the centre's neighbourhood); the one non-hub chord is the spindle chord |
+| P-M55-3 | ν(core-star₂) = 2, ν(star₂) = 2 | **MET by derivation** (D5's ν ≤ 2 from the census, ν ≥ 2 from M54's C = ∅) — the ladder was to confirm it and could not (§ Incidents) |
+| P-M55-4 | flower − x 4-colourable at K = 1, 2, 3 | **MET** at all three (one verified colouring each) |
+| P-M55-5 | the three-spindle star: F's pairwise disjoint, C = ∅, ν = 3 | disjointness **MISSED** on the first pair tried (F₃ ∩ F₁ = {29, 1753}); C = ∅ **MET** by the two asks the derivation left; ν ∈ [2, 3] **UNDECIDED** (the ladder is infeasible at 7,809 points on this evidence) |
+| P-M55-6 | depth-two pool < 0.2 % of pairs; ≥ 90 % at degree ≤ 4; the 5-core drops ≥ 90 % of the pool; C nonempty, shrinking by a few | sparsity **MISSED** (0.65 % cross-only; 7 % all pairs, the K-partner lattice showing through); degree **MISSED** (64 % of the cross-only pool at ≥ 5); the 5-core clause **MISSED** (the cross-only stage's 5-core is 1,756 of 2,433 — about half the pool peels, not 90 %); C nonempty **MET**, "by a few" **MISSED** by two orders (238, all copy-side) |
+| P-M55-7 | the kernel specs elaborate first try after the passes | **MISSED in letter** (three elaboration rounds: a name resolving to the theorem under construction, `induceHomOfLE`'s explicit graph argument, two motive-failing rewrites, the decide-shaped specs' argument order; then one simp attribute the linter refused), **MET in substance** (no statement changed except `hcol`'s form, and that at the joint §Bʺ flagged) |
+| P-M55-8 | no compulsion anywhere | **MET** — 0 / 0 complete on core-star₂ (M54), on the K = 2 and K = 3 flowers; star₂'s forced-equal side; every other object by theorem |
+| P-M55-9 | the K = 2, 3 flowers' sweeps read 0 / 0 | **MET** (11 s and 30 s, complete) |
+
+### What landed, in one table
+
+| deliverable | state |
+|---|---|
+| `Absorb.lean` | 21 declarations, zero sorry, standard three axioms (578 clean in the audit); the six-mutation audit all refused |
+| `tools/absorb_dial.py` + `five_dial.py` hooks | `absorb`, `core5`, `nu-exact` (ladder / ihs), `multi-spindle --pairs / --flower --powers`, `shrink`, `cross-lattice --depth 2 [--cross-only]`, `absorb-self-test` (13 controls); the walled SAT helper made real |
+| objects | the three-spindle star (7,809, C = ∅); the flowers K = 1, 2, 3 (1,762 / 2,936 / 4,110; centre critical); the cross-only depth-two grown witness (2,433; C = 937 of W's 1,175) and the full-pool one (10,541) |
+| readings | every star absorbed by theorem (ν = number of spindles as an upper bound, = 2 exactly at two spindles); the K ≥ 2 flowers NOT absorbed and floppy anyway in seconds; the F₂₄₇ thickening moves the critical set one-sidedly (T24) |
+
+### Incidents (each caught by a control or a derivation; none moved a result)
+
+1. **The truncated headline** (§R2): two flower verdicts read off a 300-character cut of a log line; the
+   JSON and a direct ask said the opposite; corrected before any downstream use.
+2. **Censuses stopped as "stalled"** (§R4): their checkpoints lived under `data/m54/` (the tool's default),
+   not `data/m55/` where I looked; one was a vertex from done. Both resumed; nothing lost.
+3. **The inert wall.** `five_dial.sat`'s Timer-based wall never worked: pysat's `interrupt()` does not stop
+   cadical153 (measured: a 2-s timer never returned; when the ν ladder's rung-1 ask reached 1,800 s the
+   timer thread raised and the solve ran on unbounded). Audit: no recorded ask of M54 or M55 ever reached
+   its wall (maximum 213 s against walls ≥ 600 s), so every "0 unknown at wall" verdict stands as a
+   verdict, but the guard was fiction. Fixed: walled asks now run the toolchain's cadical in a subprocess
+   with a real timeout (`forcer._solve`, the Rigidity engine's route); a hard ask returns `unknown` at its
+   wall to the second, and the planted K₅ − e control is green.
+4. **The ν ladder** could not confirm ν = 2 on core-star₂ within its walls: the rung s = 0 refused in
+   55 s and 60 s (two encodings), the rung s = 1 — the whole criticality census as ONE cardinality-
+   constrained ask — exceeded 30 min per encoding. ν there is exact by theorem + census, not by the
+   instrument; the ladder is reported as unfit at this size, the hitting-set method untested beyond its
+   controls (an open end).
+5. **A self-matching `pkill -f`** (the standing trap, CLAUDE.md memory) killed my shell once; the intended
+   process died too, and the ledger records it.
+
+### Open ends (not run, or run to a wall)
+
+* star₂'s five-colour sweep (chain 4), virtual-edge side; the full-pool grown stage's census
+  (1 critical of the first 389 asked, and that one is the fused CENTRE — the single-centre corollary once more;
+  C = {x} is the likely reading, ν = 1, and the theorem then confines any compulsion to N(x)); the third core's shrink (650 of 1,951 at the close) and the three-core star.
+* ν exact on the three-spindle star (bracket [2, 3]); the ν = number-of-spindles law as a theorem (a
+  derivation from disjoint forcing-critical sets and the one-chord attachment is the natural next kernel
+  piece); the IHS engine on a real object.
+* T24: the copy-side asymmetry of the F₂₄₇ thickening.
+* Absorb.lean's plane instance (a copy union as a `Copy.copyUnion` satisfying `extends_of_hubs`'s
+  hypotheses from the census data) — the certificate shape for "this star carries no compulsion",
+  unpriced.
+
+### The gate
+
+`./scripts/build.sh` OK; `scripts/axioms.sh` OK (578 clean, 5 declared purchases); `lake lint` PASSED on the
+third run — the first refused a redundant `@[simp]` on `induce_adj` (simp reaches it through `comap_adj`;
+attribute removed), the second an auto-named decidability instance with an underscore (named
+`decidablePredMemHubPiece`). Every check's red was seen on the way to its green.

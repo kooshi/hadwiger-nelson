@@ -677,3 +677,24 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   exactly (13 of 3,905); ν(H) = 38 exact, ν(W) = 1; the witness exact in K(√247); the F₂₄₇ cross lattice
   is the K-lattice's shadow (71 points, 20 fusions, 114 edges, two components) and moves the witness's
   critical set by three remote vertices. The big union's sweep continues as the scale twin.
+
+* **T24 — The F₂₄₇ cross thickening frees the copy side only (M55, 2026-09-06).** [measured, exact]
+  The depth-two cross-only glue census over the 1,175-point witness W = core₁ ∪ R(core₁) and its
+  63-point depth-one pool adds 1,195 points (0.65 % of 345,704 cross pairs glue in-field; 309 fusions;
+  64 % of the pool at total degree ≥ 5), and the criticality census of the grown stage on W's vertices
+  reads 937 critical of 1,175 — **238 freed, every one in R(core₁), none in core₁** (M54's depth one had
+  freed three, also copy-side). The construction is symmetric in the two cosets (glue points of (core,
+  copy) pairs and their descendants), so the asymmetry must come from the rotation R = (119 + 3i√247)/128
+  against the fabric's own ladder structure (T13: every unit edge of U lies on one of three direction
+  families rotated by multiples of the Moser twist). Question: derive which coset the pool's unit edges
+  favour and why; prediction to test: thickening both cosets symmetrically (the pool's image under R⁻¹
+  adjoined) frees both sides. Falsifier of the reading: a depth-three census freeing core-side vertices
+  without the symmetric adjunction. Data: `data/m55/cross-lattice-depth2-crossonly-W-core-8over3.json`,
+  `data/m55/critical-W-plus-cross-depth2-crossonly.json`.
+* **T25 — The ν = number-of-spindles law (M55, open).** [measured on three objects; a derivation waiting]
+  On every spindle union built here a copy hangs on its fabric by its fused centre's neighbourhood plus
+  ONE chord, the spindle chord, so `Absorb.extends_of_hubs` gives ν ≤ m (D5), and M54's C = ∅ gives
+  ν ≥ 2: ν = 2 exactly on both two-spindle objects, ν ∈ [2, 3] on the three-spindle star. Conjecture:
+  with pairwise-disjoint forcing-critical sets, ν = m outright. The cardinality ladder is unfit above
+  ~2,000 points (its s = 1 rung exceeded 30 min on 2,229) and the hitting-set engine is untested beyond
+  controls; the derivation should come first.
