@@ -236,3 +236,58 @@ over 15 minutes checkpoints. The jobs ledger `data/m53/jobs-ledger.txt` records 
 | B6 the flower's centre | x = 35 (pair 1's centre), powers ±1..±K | a centre in two forced pairs (two spindle chords per petal) | 35 is the best-measured centre (F₁, core₁, W⁺ all about it) and the ring chords are ≤ 2 per petal at any centre | high |
 | B7 the milestone's number | M55 | reopen M54 | a new question (absorption) with its own theorem | high |
 | B8 kernel ν | ν stays an instrument quantity; the identity ν = δ₄ is one sentence in the plan and the tool's docstring | a kernel `deletionNumber` with the identity proved | nothing downstream consumes it yet; the cost is an ℕ∞ layer for a bookkeeping fact | medium — promoted the day a theorem needs it |
+
+## §Bʹ. The domain-modeling pass (2026-09-06, fresh invocation) — what it changed
+
+**The carrier.** `Extends G A k` — the restriction map from `k`-colourings of `G` to `k`-colourings of the
+induced subgraph `G[A]` is onto — is the intrinsic object: the compulsions of `G` among `A`'s vertices are
+determined by the IMAGE of that map, and "the image is everything" is exactly the boundary case in which
+they are `G[A]`'s own. Kept, with the two `iff`s (D1) as its API. Unsampled members checked: `A = ∅` says
+`G` is `k`-colourable; `A = univ` is trivial; `k = 0` is consistent (a `0`-colouring exists iff the vertex
+type is empty).
+
+**The proof under every sufficient condition is one construction**, so it becomes the kernel's carrier
+beneath the instances: the **repaint lemma** — colour the piece with `k` colours, repaint every piece
+vertex that clashes across the cut with the spare colour; proper iff the clashing vertices are pairwise
+non-adjacent and none touches a spare-coloured neighbour (`Clashes`, `extends_of_repaint`). The hub and
+matching statements differ only in HOW the piece's colouring is chosen (a palette permutation putting the
+hub's colour on the hub; nothing), so they are instances, ten lines each, and the "which hypothesis is
+load-bearing" question has one answer: the independence of the clash set.
+
+**D2 generalizes to many hubs at once.** The m-spindle star has m fused centres, one per copy, and the
+copies never touch; iterating a single-hub theorem would pass through nested induced subgraphs (casts on
+every step — the ugliness the pass exists to catch). Instead: a hub map `hub : V → V` whose fibres on the
+piece are the components (adjacent piece vertices share a hub), each fibre plus its hub `k`-colourable,
+one permutation per fibre. `extends_of_hubs` is the theorem; the single hub and the plain matching are
+instances. The plain matching is NOT the single-hub theorem at a hub with no piece neighbours in general
+(different colourability hypothesis), so it stays a separate instance of the repaint lemma.
+
+**D3 generalizes to a greedy extension order** — the inductive `ExtensionOrder G k A L`: vertices added to
+`A` one at a time, each with at most `k` neighbours among `A` and its predecessors (the reverse of a
+`(k+1)`-core peeling) — because that, iterated, is what the `core5` instrument claims, and the single
+vertex is its instance. The recursor is the induction; each step colours one vertex with a colour its
+≤ `k` coloured neighbours miss.
+
+**D4's carrier is the palette-permutation colouring** `symCopy.coloringOfPerm`: any permutation moving
+every ring colour colours the symmetric copy; the shift is the instance (`extends_symCopy`). Fusing a
+point is the constraint that the permutation fix its colour; a ring point forced to wear that colour
+makes it impossible — the spindle, stated in palette language, and the reason the symmetric part of a
+copy's attachment can never force. `symCopy` on `V ⊕ V` (no identification) is the right model of ring
+chords WITHOUT fusion; fusion is modelled as the constraint, never as a quotient.
+
+**The planted red was wrong and is corrected before it could mislead.** `K₂,₄` is not 2-choosable only
+with FOUR colours in play; under a 3-colour palette every size-2 list assignment on it is colourable. The
+right red at three colours is `K₃,₃` with lists `{0,1}, {0,2}, {1,2}` on each side (each side needs two
+colours, four in all), realized by six pendant attachment vertices coloured `2, 1, 0, 2, 1, 0` — every
+piece vertex has exactly one neighbour across the cut and the piece is 2-colourable, so only the
+independence hypothesis is violated. Decidable over the piece's 729 colourings.
+
+**ν stays the measurable.** ν = δ₄ is an object invariant, monotone under adding vertices and edges (a
+deletion set of a supergraph restricts to one of the subgraph), bracketed a priori by D5, computable by
+implicit hitting sets. The number of 5-colourings up to palette is astronomically large on every floppy
+object (a dial that reads "∞" until the jackpot); the sweep's models-to-closure count is a property of
+the solver's sampling, not of the object. Both are recorded, neither is the dial.
+
+**Seams.** The model of the hub hypotheses is a spec example (`k4MinusEdgeHub`: `K₄ − e` with a path at
+hub 2 and a chord to 1, every hypothesis closed by `decide`); the red is `k33Pendants`. Nothing in the
+kernel names ν (B8 stands).
