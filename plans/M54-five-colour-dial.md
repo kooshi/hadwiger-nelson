@@ -532,3 +532,16 @@ forcing-critical sets gives one.
 edges (D2: each copy is 4-colourable K-fabric attached by ≤ 11 chords, each chord endpoint of outside-
 degree one, so every 5-colouring of the base extends over both copies; and the base U is 4-colourable
 with a spare colour). Falsifier: any confirmed compulsion — the jackpot clause.
+
+## §R5. ν, the fifth colour's smallest class (2026-09-06 ~01:30Z)
+
+| object | ν | how |
+|---|---|---|
+| the E–I {1, 2}-seed H, five colours | **38** (exact) | all 840 proper 5-colourings enumerated under the exactly-one encoding with one vertex pinned = the 35 colourings up to palette M49 re-derived × 24; smallest class 38, largest-smallest 42 — every colouring is nearly balanced (≈ 43 per class) and the fifth colour is never spare. RC2 (MaxSAT) hit its 1,800-s wall at an upper bound of 40 |
+| the witness W, five colours | **1** | a critical vertex v (all 1,175 are) with W − v 4-coloured and v in the fifth colour; RC2 hit its wall at an upper bound of 169 |
+| the three-fabric union, five colours | **≥ 2** | C = ∅ (§R4) |
+
+P-M54-7 (ν(H) ≥ 10) MET. Instrument note: RC2 is the wrong engine at this scale (both walls hit); the
+exact value came from enumeration where the colouring space is rigid (35 classes), and from the
+critical set where it is floppy (ν = 1 ⟺ C ≠ ∅). ν is therefore a dial only between those two
+regimes, and the union's reading will come from the sweep, not from ν.
