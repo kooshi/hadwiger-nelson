@@ -1,0 +1,150 @@
+{
+ "kind": "fplane-lift",
+ "framework": "core-p11-k4-spheres",
+ "fingerprint": "e64c6d0887cc0e10",
+ "p": 11,
+ "n": 63,
+ "m": 246,
+ "rank": 123,
+ "laman_expected": 123,
+ "rigid": true,
+ "flex_dim": 0,
+ "stress_dim": 123,
+ "level2": {
+  "failing": 98,
+  "of": 123
+ },
+ "verdict": "obstructed-at-level-2",
+ "witness": {
+  "vertices": 9,
+  "edges": 12,
+  "x0": [
+   [
+    3,
+    4
+   ],
+   [
+    5,
+    0
+   ],
+   [
+    8,
+    4
+   ],
+   [
+    8,
+    7
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    9
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    5,
+    10
+   ],
+   [
+    6,
+    10
+   ]
+  ],
+  "weighted_edges": [
+   [
+    0,
+    8,
+    8
+   ],
+   [
+    0,
+    5,
+    8
+   ],
+   [
+    1,
+    6,
+    5
+   ],
+   [
+    1,
+    7,
+    5
+   ],
+   [
+    2,
+    5,
+    5
+   ],
+   [
+    2,
+    7,
+    5
+   ],
+   [
+    3,
+    4,
+    8
+   ],
+   [
+    3,
+    6,
+    8
+   ],
+   [
+    4,
+    7,
+    1
+   ],
+   [
+    4,
+    8,
+    5
+   ],
+   [
+    5,
+    6,
+    7
+   ],
+   [
+    7,
+    8,
+    1
+   ]
+  ],
+  "pairing_mod_p2": 33,
+  "original_vertices": [
+   0,
+   2,
+   4,
+   5,
+   6,
+   7,
+   9,
+   10,
+   12
+  ],
+  "original_edges": [
+   1,
+   5,
+   12,
+   13,
+   23,
+   26,
+   28,
+   31,
+   35,
+   37,
+   40,
+   56
+  ]
+ },
+ "seconds": 0.0,
+ "claim_scope": "obstructed-at-level-2: the witness stress pairs nonzero with the defect \u2014 no lift mod p\u00b2 (the kernel's not_exists_lift_of_stressPairing_ne_zero on the witness sub-framework); obstructed-at-level-k: the Laman-basis Hensel lift (unique up to isometry, rigid case) violates an edge at level k \u2014 no lift in Z_p\u00b2; passes-to-precision-N: coordinates mod p^N with every edge unit mod p^N; flexible: not decided here."
+}

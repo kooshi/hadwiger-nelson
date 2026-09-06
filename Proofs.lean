@@ -98,6 +98,7 @@ import Proofs.HadwigerNelson.Instances.Heule510.Critical
 import Proofs.HadwigerNelson.Instances.Heule510.Bound
 import Proofs.HadwigerNelson.Instances.FinitePlane11
 import Proofs.HadwigerNelson.Instances.LiftObstruction131
+import Proofs.HadwigerNelson.Instances.LiftObstruction11
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound

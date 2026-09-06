@@ -567,7 +567,9 @@ claim-scope field in every record.
   certificate consumer `stressPairing_eq_zero_of_drawing` at `ZMod (p²)`; the spec (the hex shell at 11 passes with twelve
   nonzero defects cancelling, the collinear triangle at 3 obstructed — all decided); **the first instance**: the 1581's merged
   image at 131 is not a shadow — a 26-vertex, 48-edge witness stress, `IsStress` and pairing `7205 ≠ 0` decided, no lift
-  modulo 131² and no covering tower certificate; the plane's clique number pinned (a triangle at 11, none at 19).
+  modulo 131² and no covering tower certificate; **the second instance** (`Instances/LiftObstruction11.lean`): the 5-critical core of
+  UD(𝔽₁₁,2) — a 9-vertex, 12-edge witness, pairing `33 ≠ 0` — has no lift modulo 121; the plane's clique number pinned (a
+  triangle at 11, none at 19).
 * **Instrument** (`tools/fplift.py`, 16 self-test controls green): `local` (rank, stresses, level-2 pairing with counts, a
   minimal-support witness, the gauge-fixed digit-by-digit Hensel lift of a Laman basis, per-edge first failing levels),
   `cores` (external cadical under `timeout`, sphere shrink, vertex shrink with necessity witnesses), `hubs` (the residue-point
@@ -613,9 +615,9 @@ the refutation of the finite graph — and says so in its docstring.
   therefore NOT produced this milestone; the calibration cores (5-critical at 11: 63 vertices; at 19: in flight) and the
   merged-image witness are the milestone's finite-plane objects, and P2 (every such core obstructed) stands untested at 131 —
   its derivation (§S1 (b)) says what the search would find. 83 and 59 follow in the chain, one hour each.
-* **Gate (2026-09-06 22:28 UTC, `build/m59/gate-{build,axioms,lint}.log`):** `scripts/build.sh` OK; `scripts/axioms.sh` OK —
-  615 clean, 5 declared purchases (all M59 declarations on exactly `[propext, Classical.choice, Quot.sound]`: the lift
-  theorem, the plane composite, the obstruction and its headline, the certificate consumer, the instance's four theorems);
+* **Gate (2026-09-06 22:28 and 22:40 UTC, `build/m59/gate-{build,axioms,lint}.log`):** `scripts/build.sh` OK; `scripts/axioms.sh`
+  OK — 616 clean, 5 declared purchases (all M59 declarations on exactly `[propext, Classical.choice, Quot.sound]`: the lift
+  theorem, the plane composite, the obstruction and its headline, the certificate consumer, the two instances' theorems);
   `lake lint` passed (after three field docstrings); zero `sorry`.
 * **P7 measured, corrected scan (`data/fplane/hubs-degrey1581-p131.json`, 602 s):** of the 15,596 residue classes at 131 with
   ≥ 3 residue-neighbours among the 1581's 1,547, **3,739 carry a p-adic point at unit distance from ≥ 3 of the 1581's vertices**
@@ -639,7 +641,7 @@ the refutation of the finite graph — and says so in its docstring.
 | hubs of the 1581 at 131 | **3,739** (support 3–13); none in the gen-1 closure; 60 random + the 5 of highest support verified exactly in the tower (65 of 65) | 15,596 candidates; 602 s | `hubs-degrey1581-p131.json` |
 | UD(𝔽₁₃₁,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (external cadical; spectrum says ≥ 8) | P3 refuted in this half | `build/m59/plane-p131-k5.log` |
 | UD(𝔽₈₃,2), UD(𝔽₅₉,2) at k = 5 | in flight (one hour each) | — | `build/m59/plane-p{83,59}-k5.log` |
-| the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses) | the solver's refusal (untrusted) + verified colourings; its `local` in flight | `core-p11-k4-spheres.json` |
+| the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses); **rigid (rank 123 = 2n − 3), OBSTRUCTED at level 2 — 98 of 123 stress conditions fail; witness 12 edges on 9 vertices, pairing 33** — the plane's own 5-critical core is not a shadow (P2's analogue one level down; kernel instance `Instances/LiftObstruction11.lean`) | the solver's refusal (untrusted) + verified colourings; the obstruction decided | `core-p11-k4-spheres.json`, `lift-core-p11-k4-spheres.json` |
 | the 5-critical core of UD(𝔽₁₉,2) | in flight (the sphere shrink; near-threshold asks at the 600-s wall) | — | `build/m59/cores-p19-k4.log` |
 
 ### §R4. Registered predictions, scored
@@ -647,10 +649,10 @@ the refutation of the finite graph — and says so in its docstring.
 | # | prediction | verdict |
 |---|---|---|
 | P1 | the smallest 6-critical subgraph of UD(𝔽₁₃₁,2) found has > 1,000 vertices | NOT TESTED — no 6-critical core at 131 was reached (P3) |
-| P2 | every 6-critical core fails level 2 with a high obstruction count | NOT TESTED at 131; stands by derivation (§S1 (b)); the merged image (a ≥ 5-chromatic subgraph) fails with 2,406 of 4,785 |
+| P2 | every 6-critical core fails level 2 with a high obstruction count | NOT TESTED at 131; stands by derivation (§S1 (b)); its analogue one level down MEASURED — the 5-critical core of UD(𝔽₁₁,2) fails with 98 of 123; the merged image (a ≥ 5-chromatic subgraph) with 2,406 of 4,785 |
 | P3 | cadical refutes five colours on the whole plane at 131 within an hour; at 59 it does not | **first half REFUTED** (undecided at 1 h); 59 in flight |
 | P4 | the injective sub-reduction passes to 131²⁰ and equals the tower coordinates; the merged image is obstructed at level 2 | **MET, all three parts** |
-| P5 | every core found is infinitesimally rigid at its residues | pending on the 11- and 19-cores' `local` (in flight) |
+| P5 | every core found is infinitesimally rigid at its residues | **MET on the 11-core** (rank 123 = 2n − 3); the 19-core in flight |
 | P6 | the sphere-minimal ≥ 6 object at 131 has 20–60 spheres | NOT TESTED |
 | P7 | fewer than 50 hub passers on the 1581, all gen-1 residues | **REFUTED in both halves**: 3,739, none in gen-1 |
 | P8 | `Lift.lean` on the standard three, the obstruction theorem under 250 lines | **MET** (the module is 320 lines with its spec; the obstruction section is 90) |
@@ -693,3 +695,7 @@ kernel form of the rigid dichotomy (hand derivation, §S1).
   lift's prime — the upper bound and the lower bound use different primes of the same field.
 * **The finite planes' 6-critical cores are for autopsy** (FS-13), not for lifting; and CDCL does not see a spectral refusal
   at 17,161 vertices in an hour.
+* **The corrected scan's positive control on the 1581 (`build/m59/hubs-degrey-recover.log`):** with vertex 0 (degree 60)
+  deleted, 15,597 candidates, 3,740 passers (3,739 + 1), and the deleted residue recovered with support 60 of its 66
+  residue-neighbours — the six false ones excluded. The scan is sound on the dense object; the strict form's zero was the
+  instrument, not the 1581.

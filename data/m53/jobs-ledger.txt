@@ -84,3 +84,5 @@
 2026-09-06T22:22:53Z M59: the stale phaseAB chain (it had moved on to cores p19 after its hubs step was killed) and its duplicate cores p19 run killed by PID; the cores_chain's p19 run (pid 1815621) continues
 2026-09-06T22:24:05Z M59 gate chain re-run after the field docstrings
 2026-09-06T22:29:14Z M59 gate GREEN: build OK, axioms 615 clean / 5 purchases, lint passed
+2026-09-06T22:36:38Z M59: second instance (LiftObstruction11) added; gate chain re-run
+2026-09-06T22:41:15Z M59 gate GREEN (third run, with LiftObstruction11): build OK, axioms 616 clean / 5 purchases, lint passed

@@ -919,6 +919,8 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms HadwigerNelson.merged131_no_drawing
 #print axioms HadwigerNelson.finitePlane11_triangle
 #print axioms HadwigerNelson.finitePlane19_triangle_free
+-- the second instance (Instances/LiftObstruction11.lean): the 5-critical core of UD(F_11,2) is not a shadow (a 12-edge witness, pairing 33)
+#print axioms HadwigerNelson.core11_no_lift
 
 -- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
 #print axioms mono_pair_of_clique
