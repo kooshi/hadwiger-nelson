@@ -66,7 +66,7 @@ step 9); a milestone whose close does not update this section is not closed. The
 UNDERSTANDING the results add up to — the mechanistic picture we build on — lives in the
 sibling section § Grokkings below, under the same maintenance rule.*
 
-**Last updated: M55 CLOSED (absorption), 2026-09-06.**
+**Last updated: M56 CLOSED (the arithmetic of tightness), 2026-09-06.**
 
 ### Where the problem stands
 
@@ -935,6 +935,34 @@ derivation before measurement), one met-in-substance, three missed in their numb
 recorded. Three instrument incidents were caught by controls; one — a solver wall that had never actually
 been able to fire — was found because the ν ladder reached it, audited (no recorded ask of M54 or M55 ever
 needed the wall), and fixed.
+
+M56 changed the input from the graph to the FIELD and asked, derivation first, what arithmetic says about tightness.
+The yardstick is Fischer's additive colouring restricted to a chunk's difference lattice Λ — a homomorphism from Λ
+into a group of order k, nonzero on every edge vector — and the derivations came before the instrument: an
+additive colouring is a proper colouring (kernel, `Additive.lean`), so the pairs every additive colouring identifies,
+F_add, CONTAIN the truly forced pairs and never certify one, while every difference in kΛ is additively forced (L1);
+and no plane over a wall-broken field has an additive k-colouring for any k ≤ 10, because every spindle rotation at
+distance d puts 1/d² into the group the unit vectors generate (L7: 1/3 from the Moser twist, 1/5 from ℚ, 1/7 from
+d² = 7/3, 1/2 from any even-distance spindle) — Fischer's 1/k obstruction IS the field wall in his language. Then
+the measurements, on a bed whose answer was already known and then above it. **The Exoo–Ismailescu seed's
+tightness is arithmetic**: of its 21,787 non-adjacent pairs exactly one is identified by every ℤ/5-homomorphism of
+its unit lattice, and it is the forced pair; its 446 cheats and its distance-3 and -4 pairs are separated by every
+one (M50's 148 absolute virtual edges, explained); 18 of its 35 five-colourings are additive and the other 17 lie
+within two repaints of the family; and for the paper's own G, whose 18 five-colourings Exoo and Ismailescu counted
+by exhaustive search, **the colouring space is exactly the additive family** — none of it in the paper, which
+cites no algebra. **K-fabric's four-colour rigidity is additive at two depths and not at the third**: on the
+1,953-point fabric the additive family (eight colourings: the two residue colourings and six ℤ/4-type ones nobody
+had named) forces exactly the pairs of 2-adic depth ≥ 2 in Λ; the solver separates every depth-2 pair (2,324, all
+non-additively) and forces 171 of the 189 at depth 3; and the Kempe sublattices of the eight colourings — a two-line
+theorem, F_true ⊆ F_K — separate every depth-2 pair and leave 187, sixteen more than the truth. **And the additive
+spindle theorem (L8)**: a spindle over an additively forced pair has its chord in 4Λ, so the union has no additive
+4-colouring — on de Grey's 1581 the one unit vector in 4Λ is its single cross edge (11, 802), on our witness it is
+the spindle chord (565, 1152); Heule-510's SAT-shrinking lost the 4Λ chord but not twelve 2Λ ones, and de Grey's
+791-forcer has no additive 4-colouring at all. Every witness keeps additive FIVE-colourings (24, 432, ≥ 2,981)
+whose forced pairs — 91 on Heule-510, 291 on W, 356 on the 1581 — are all separated by non-additive colourings (91
+solver asks under the jackpot protocol, all refuted; the 291 and the 356 by the complete sweeps), and W's sampled five-colourings sit at the random baseline from both algebraic
+families (additive and residue-per-coset): above four colours, tightness is not arithmetic on the objects we hold,
+and the seed is the one object that makes the yardstick read true.
 ### The novel-results ledger (all kernel-checked unless marked)
 
 | # | Result | Where | Milestone |
@@ -1002,17 +1030,33 @@ needed the wall), and fixed.
 | 47 | **The field-wall theorem, and M53's measurements before the halt** (M53, HALTED). **Hand-proved, NOT kernel-checked** (`~/field-wall-conjecture.md` §5, Kooshi's other session; formalization pending): χ(G(ℚ(√3, √11)²)) = 4 via the residue colouring modulo a conjugation-fixed prime of K(i) above 2 — the first plane-colouring bound over a field beyond ℚ in this programme's record, subsuming M24–M26's closures; the wall located 2-adically (falls iff −1 is a square in a completion above 2; for multiquadratic fields iff an odd square class ≡ 7 mod 8; √5/√7 break it, √2/√10/√14/√35/√70 do not; even-distance spindles always do). **Measured, exact**: the seed test (1,004/1,004 proper, 446/446 mono, pair separated, both branches) and the it-4 object (13,796/13,796, 344/344, pair separated) — `tools/residue_colouring.py`; the exact field split of the depth-1 pool (16,348 in-field of 1,636,399 — 1.0 %, fusion-explained; out-of-field points have exactly two object neighbours to seven in 1.6 M); the spectrum (89/0/60 of 149; 0 exact at 10 min); the batch law (2,488 → > 80,000 at two cheats); the one-cheat census (in-field kills 2,488/2,488, vacuity witnessed); the two-cheat stage's 3,936 in-field survivors (5 killed, 3,676 unknown at 300 s on pdeg12); the 25× ask-cost rise across the cull. Instruments: `cheat_spectrum`, `cube_certify`, `pool_field_restrict`, `outfield_census`, `commit_cull`, `batch_grow`, `residue_colouring`; the shared generators `binary3_clauses`/`forces_clauses`. Records: `plans/M53-iteration-5.md` §R0–§R5, `plans/RISKS.md` R1 resolved, `plans/STUB-field-wall.md` bannered, `data/m53/`. **Same day, the proving session:** the residue obstruction (T17 — Σ(C′) SAT ⟹ no in-field halo ever makes C′ force; μ ≥ 3 inside K; measured: 8 odd components, 0 blocked singles, 0 residue-type survivors) and the wall-break census (T18 — 5 radicands / 4,221 pairs break alone, 523,608 pairs inert, classes = ⟨−1, 2⟩ at each prime because every radicand lies in ℚ(√33)); `tools/{residue_floor,wall_break_test}.py`, `data/m53/{residue-floor-it4c,wallbreak-it4}.json`; the note copied to `plans/FIELD-WALL-THEOREM.md`; the kernel plan `plans/STUB-field-wall-kernel.md`.**Later the same day:** the rigidity dial exact (163/178 at 8/3, 8/11 at 8/√3, 0 at valuations 2 and 4; the zero rows a theorem), the **new 5-chromatic witnesses in ℚ(√3, √11, √247) (1,175 points from a 588-vertex 1-minimal K-forcer) and ℚ(√3, √11, √23)** (T20), Theorem A′ with the 3-adic wall and χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3 (T21), the wall-pool and partner replays (T19), and the handoff `plans/FIELD-WALL-SESSION-HANDOFF.md`. | `tools/{cheat_spectrum,cube_certify,pool_field_restrict,outfield_census,commit_cull,batch_grow,residue_colouring}.py`, `data/m53/`, `plans/M53-iteration-5.md` | M53 (halted) |
 | 48 | **The critical-set localization theorem, and the first objects that satisfy it** (M54). **Kernel** (`CriticalSet.lean`, standard three axioms): `CriticalSet G k = {c | (G − c).Colorable k}`; the isolating lemma (`exists_coloring_isolating_of_mem_criticalSet`: a critical vertex isolates any independent set through it); **`criticalSet_subset_inter_neighborSet_of_forces`** (C ⊆ N(p) ∩ N(q) for a forced-equal pair), **`criticalSet_subset_union_neighborSet_of_separated`** (C ⊆ N(p) ∪ N(q) for a virtual edge), `criticalSet_subset_of_fan` (C ⊆ N(p) ∪ Q), `not_forces_of_mem_criticalSet` / `not_separated_of_mem_criticalSet` / `not_fan_of_mem_criticalSet` (the one-line negatives), `criticalSet_eq_univ_of_colorable` with the spare-colour lemma re-derived, `encard_criticalSet_le_degree_of_forces`, and the plane: **`eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`** (critical vertices drawn at the pair's two glue points), **`criticalSet_eq_empty_of_forces_of_two_lt_dist`** (none beyond distance 2), `encard_criticalSet_le_two_of_forces`; the K₄ − e spec pins the bound tight. Folklore in its vertex-critical case; the localization and its plane form are new packaging. **Measured** (`tools/five_dial.py`, 22 planted controls incl. the K₅ − e end-to-end positive; every critical vertex certified by a verified colouring; every headline with its population): the E–I seed C = ∅ (214/214); the witness vertex-critical (1,175/1,175) — T21's zero was a theorem; W ∪ its 71-point F₂₄₇ cross pool: C loses three remote copy-side vertices; the full-fabric single-centre union: C = F ∪ R(F) exactly, 13 of 3,905 (F = the forcing-critical set, 7 of 1,953, by 1,951 three-second asks); **two spindles on the full fabric: C = ∅ by derivation (F₁ ∩ F₂ = ∅, 34/34 load-bearing deletions checked)**; **the two-core union (588 + 543, overlap 31): C = ∅ measured, 2,229 points, and its exhaustive five-colour sweep reads 0 / 0 complete in 31 s** — redundancy necessary, not sufficient. The witness exact in K(√247); ν(H) = 38 exact, ν(W) = 1; the Fischer reconciliation (T23). | `Proofs/HadwigerNelson/CriticalSet.lean`, `tools/five_dial.py`, `data/m54/`, `plans/M54-five-colour-dial.md` §R0–§R7 | M54 |
 | 49 | **Absorption: the pieces a five-colour sweep cannot see, and the ν dial** (M55). **Kernel** (`Absorb.lean`, standard three axioms, 21 declarations): `Extends G A k` (the restriction of colourings onto G[A] is onto) with `Extends.forces_iff` / `separated_iff` (compulsions among A are G[A]'s) and `Extends.not_forces_of_colorable` / `not_separated_of_colorable` (none when G[A] is k-colourable — the spare-colour lemma relative to a piece); the carrier **`extends_of_repaint`** (a piece colouring whose clashes across the cut are pairwise non-adjacent and touch no spare-coloured neighbour extends by repainting); **`extends_of_hubs`** (pieces fused at hubs, ≤ 1 base neighbour each, non-hub chords a matching with independent piece endpoints, a piece colouring with a designated hub colour each hub's neighbours avoid — the spindle-copy shape) with `extends_of_hub_matching` and `extends_of_matching`; **`extends_of_extensionOrder`** (the inductive greedy order — the (k+1)-core's backing) with `extends_compl_singleton_of_degree_le`; **`symCopy.coloringOfPerm`** and **`extends_symCopy`** (symmetric chords absorbed at every k ≥ 2 by a palette rotation; fusion = a fixed-colour constraint the forced pair refuses); spec: the K₄−e hub model and the **K₃,₃-pendants red** (`k33_lists_refuse`, 729-case decide: the independence hypothesis is load-bearing); six statement mutations refused. Folklore in each instance; the packaging as what a sweep cannot see, the hub form, and the copy-union consequence are ours. **Measured** (`tools/absorb_dial.py`, 13 planted controls): core-star₂, star₂ and the new three-spindle star (7,809, C = ∅ by two asks) ABSORBED — every cross chord but the spindle chord is a hub chord — so ν(core-star₂) = ν(star₂) = 2 exactly (D5 above, M54's C = ∅ below), ν(star₃) ∈ [2, 3]; the flowers K = 1, 2, 3 (1,762 / 2,936 / 4,110 points) have a critical centre each, K ≥ 2 NOT absorbed (rotated W inside) and swept 0 / 0 complete in 11 s / 30 s; the F₂₄₇ cross lattice at depth two: 0.65 % cross-only in-field (16× depth one), 64 % of the pool at degree ≥ 5, the witness's critical set 1,172 → 937 with all 238 freed vertices copy-side (T24); the third pair's forcing-critical set overlaps pair 1's in {29, 1753}. The walled SAT helper found inert and made real (no recorded ask had ever reached its wall). | `Proofs/HadwigerNelson/Absorb.lean`, `tools/absorb_dial.py`, `data/m55/`, `plans/M55-absorption.md` §R0–§R5 | M55 |
+| 50 | **The additive yardstick, and the seed's arithmetic tightness** (M56). **Kernel** (`Additive.lean`, standard three axioms): `additiveColoring` (a hom nonzero on edge differences is a `Coloring`), `not_forces_of_addMonoidHom` / `not_separated_of_addMonoidHom` (the refutations in the `Forces`/`Separated` vocabulary), `addMonoidHom_apply_eq_of_sub_eq_nsmul` and its `exponent` instance (L1); spec: the grid's parity colouring, three examples, the planted red (the zero hom refused). **Derived** (plan §S1, §M1, §R3): L2 F_true ⊆ F_add; L3 rank ≤ 4 for every K-object; L5 the ℤ/5 arithmetic of distances 2, 3, 4, 5; L7 1/d² ∈ Σ₀ from every spindle rotation, so no additive k ≤ 10 on any wall-broken plane; the Kempe localization F_true ⊆ F_K; L8 the additive spindle theorem. **Measured** (`tools/additive.py`, 27 controls incl. the residue colourings reproduced 2-adically; `data/m56/`): the bed U at 4 — 8 additive colourings, F_add = depth ≥ 2 (2,513 pairs), F_K = 187, F_true = 171 (a 16-pair residue); the seed at 5 — F_add = {(205, 206)} over 21,787 pairs, 18 of 35 colourings additive, the rest at defect ≤ 2, Exoo–Ismailescu's G exactly additive (18 = 18); the witnesses — no additive 4-colouring on any (the 1581's cross edge and W's spindle chord in 4Λ; Heule-510 and the 791 by hyperplane cover), additive 5-colourings 24 / 432 / ≥ 2,981, every additively forced pair separated non-additively (Heule's 91 by asks, W's 291 and the 1581's 356 by the complete sweeps), sampled colourings at the random baseline from both families. Fischer's framework; the chunk theory, the localization, L7/L8 and the seed reading are ours. | `Proofs/HadwigerNelson/Additive.lean`, `tools/additive.py`, `data/m56/`, `plans/M56-arithmetic-of-tightness.md` §R | M56 |
 
 | 36 | **The scale is not monotone, and the classical one is a local optimum** (M39; ω-values and the §0e shell-exhaustion claim corrected at M40 — see row 37): `Coset.eight_le_card_of_cell_constant` and `Coset.seven_le_card_fine` — for `1/2 < p < 3/5` any colouring constant on the triangular lattice's cells needs at least EIGHT colours, via an 8-clique of the constraint graph (the `3 × 3` address block minus a corner, pairwise norms `{1,3,4,7}`), and at least SEVEN again for `3/8 < p < 2/5` via the `√3`-scaled copy of the shell (the index-3 sublattice, pairwise norms `{3,9,12}`) — so the shell reappears at every scaled copy of the lattice and the oscillation seven → eight → seven is kernel-checked at three windows. Since the classical seven-colouring lives at `p ∈ (0.671, 0.866]`, **shrinking the cells past the classical scale costs a colour** — refining is not a route to six. Tools-side (`tools/celllat.py`, exact rational edge criterion, necessary AND sufficient, green control reproducing M38): the clique census across scales (7 → 8 → 7 → 4 → 3 → 2), no six-colouring at twelve scales on tori to 24 × 24 (period-bounded), a seven-colouring at `p = 6/13` below the classical window on three tori, `k = 8` also refusing in the bad band (so ≥ 9 at those periods), the `k = 4` mass red green throughout, and the torus-size control that retracted a tempting reading — the fine-scale refusals are period-bounded and the 24 × 24 row is UNKNOWN at cap. | `Coset.lean`, `tools/celllat.py`, `build/m39-*.json`, `plans/M39-constraint-graph.md` §R | M39 |
 
 ### Paths forward, ranked
 
-*(**M56 STUBBED 2026-09-06 on Kooshi's direction — `plans/M56-arithmetic-of-tightness.md`: the arithmetic of
-tightness, with the field as input; G30-motivated — Fischer's additive colourings restricted to a chunk's difference
-lattice as the yardstick, K at four colours (the M53 dial) as the calibrated bed, the seed's 35 colourings as the
-five-colour calibration, then Heule's field ℚ(√3, √5, √11), de Grey's and F₂₄₇: which vertices tighten, and how tight
-each field's material can be made. It supersedes item 1 below as the next milestone; a session resuming here
-subplans it first.)*
+*(**M56 CLOSED 2026-09-06 — the arithmetic of tightness; `plans/M56-arithmetic-of-tightness.md` §R.** The
+additive yardstick is built, calibrated on the bed and read on every witness; the seed's tightness is arithmetic,
+K-fabric's is additive at two depths of three, the witnesses' is not. **The ranking after M56:**
+
+1. **The Kempe classes of K-fabric's 4-colourings** — the 16-pair residue (§R1): walk the Kempe graph from the
+   eight additive colourings of U (are the dial's separators for those 16 pairs two swaps away, and is every
+   4-colouring of U Kempe-equivalent to an additive one?); if yes, K-fabric's 4-rigidity is a finite lattice
+   computation, and the same walk at five colours on the seed decides whether its 17 non-additive colourings are
+   Kempe-images of the 18 (an afternoon; G41 (b)).
+2. **The additive richness dial on the witnesses' fields** — grow hexagonal-fabric chunks of Heule's field and
+   F₂₄₇ and watch the ℤ/5-homs die (1/5 ∈ Σ₀ says they must): the first chunk of each field with no additive
+   5-colouring, and the additive family's size along the way — the field-as-input number the stub asked for,
+   measured rather than inferred (G41 (c)).
+3. **The seed as the design template** — Exoo–Ismailescu's G is 5-tight and its colouring space is its additive
+   family; the derivation first: which lattice property makes every colouring of a chunk additive (G's 205 points
+   have it at five colours, U's 1,953 do not at four), and whether a UNIT-distance chunk in a wall-broken field can
+   have it — that would be 5-tightness by arithmetic, the milestone's own reading of "how tight can a field be made".
+4. **Thickened material** (M55's item 1), **the ν = m law** (T25), **Theorem B in the kernel**, **the plane instance
+   of `extends_of_hubs`** — unchanged.
+
+The M55 ranking below is kept for the record.)*
 
 *(M55 CLOSED 2026-09-06 — absorption; `plans/M55-absorption.md` §R0–§R5. The paths-forward entry M54
 wrote ("many spindles at many centres over one fabric so that no large sub-piece is 4-colourable") is now
@@ -2422,6 +2466,26 @@ record shows what was believed, what was measured, and what is now proved.
   fabric's ladder structure (T13), and thickening both cosets symmetrically will free both sides. Falsifier
   for the theorem: none needed; for the reading, a depth-three census freeing core-side vertices, or a
   symmetric thickening that does not.*
+
+* **G41 — Tightness is arithmetic exactly once: additive colourings bound where a compulsion can live, and on
+  the Exoo–Ismailescu seed the bound is the truth.** (M56, 2026-09-06; kernel for the bound, measured for the rest.)
+  A homomorphism of a chunk's lattice into a group of order k, nonzero on the edge vectors, is a proper colouring, so
+  F_true ⊆ F_add := the pairs every such hom identifies — a solver-free localization with the hom itself as the
+  certificate for every pair outside it (M54's critical-set theorem's genre, one direction only) — and every
+  difference in kΛ lies in F_add; the Kempe swaps of the additive colourings sharpen it to F_true ⊆ F_K.
+  **[kernel + measured]** On K-fabric at four colours the yardstick over-forces exactly at 2-adic depth 2 and F_K
+  closes the gap to 16 pairs; at five colours on the seed F_add IS the forced pair, 18 of 35 colourings are
+  additive and the paper's G is entirely additive; on the 5-chromatic witnesses no additive 4-colouring exists (L8:
+  the spindle chord lies in 4Λ) and the additive 5-colourings' forced pairs are all separated by non-additive
+  ones. *Readings on top, falsifiable: (a) the seed's near-additivity is what makes it RIGID (35 colourings), and
+  the witnesses' floppiness is the same fact from the other side — a chunk whose colouring space is far from its
+  additive family has room for non-additive separators; falsifier: a 5-chromatic chunk whose sampled colourings
+  sit near its additive family and are still floppy. (b) The 16-pair residue on U is either two Kempe swaps away
+  or carried by colourings outside the Kempe classes of the eight additive ones — decidable on U by a Kempe-graph
+  walk. (c) Since 1/5 ∈ Σ₀ of every plane, every plane's rich chunks eventually lose their ℤ/5-homs; the richness
+  at which the 1581 or Heule's field does is a dial nobody has turned. Composes with G38 (additive bounds stop at
+  four: at five the theory can only localize), G35 (Fischer's 1/k obstruction is the wall), G39/G40 (three
+  localizations now: the critical set, absorption, the additive family).*
 
 ## Whose work this is
 

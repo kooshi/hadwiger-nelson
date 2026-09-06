@@ -57,3 +57,4 @@
 2026-09-06T12:43:21Z M56 B2 dump of the seed's 35 colourings: build/m56/dump_seed_colourings.py pid 1225376 log build/m56/dump-seed.log
 2026-09-06T13:13:30Z M56 B3 homs --degrey --k 5 --max 3000 relaunched on the fast path, pid 1252784, log build/m56/homs-degrey-k5.log
 2026-09-06T13:24:21Z M56 B3 forced --degrey --k 5 --all --sweep m30 (capped family 3000 + SAT re-ask), pid 1262928, log build/m56/forced-degrey-k5.log
+2026-09-06T14:00:49Z M56 CLOSED: forced --degrey --k 5 done (356 forced-additively, all sweep-separated); gate green (build OK, axioms 585 clean, lint passed)

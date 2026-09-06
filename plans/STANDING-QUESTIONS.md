@@ -698,3 +698,30 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   with pairwise-disjoint forcing-critical sets, ν = m outright. The cardinality ladder is unfit above
   ~2,000 points (its s = 1 rung exceeded 30 min on 2,229) and the hitting-set engine is untested beyond
   controls; the derivation should come first.
+* **T26 — The additive localization, and K-fabric's 16-pair residue (M56, 2026-09-06).** [kernel for the bound;
+  measured, exact] A homomorphism of a chunk's difference lattice into a group of order k, nonzero on the edge
+  vectors, is a proper colouring (`Additive.lean`), so F_true ⊆ F_add := ∩ ker over admissible homs, and every
+  difference in kΛ lies in F_add (L1); Kempe swaps of the additive colourings sharpen it to F_true ⊆ F_K (the swap
+  on a component of the {a, a−c}-subgraph, whose vertices lie in one coset of Λ_c^φ = ⟨u : φ(u) = ±c⟩). On the
+  1,953-point fabric at four colours: eight additive colourings (two residue, six ℤ/4-type), F_add = the pairs of
+  2-adic depth ≥ 2 (2,513), F_K = 187, the dial's F_true = 171 — the 16 depth-3 pairs (13 at 64/9, 3 at 64/3)
+  Kempe-forced under every additive colouring yet separated by the solver are the non-additive residue.
+  *Question:* are those 16 separated by two swaps (a Kempe-graph walk from the eight colourings), and is every
+  4-colouring of U Kempe-equivalent to an additive one? `data/m56/kempe-object-…-k4.json`.
+* **T27 — The additive spindle theorem (M56 L8).** [derived; measured on both spindle witnesses] If (c, q) is
+  additively forced on a fabric with q − c ∈ 4Λ and R is a rotation about c with |Rq − q| = 1, the chord vector
+  (Rq − Rc) − (q − c) lies in 4Λ(union): every spindle over an additively forced pair puts its chord in 4Λ, so the
+  union has no additive 4-colouring. Measured: the 1581's unique 4Λ unit vector is its single cross edge (11, 802),
+  depth 2 (de Grey's forced distance 4 = 4u); W's is the spindle chord (565, 1152), depth 3 (8u/3 ∈ 8Λ);
+  Heule-510 (a SAT-shrinking) keeps twelve 2Λ units and no 4Λ one; the 791-forcer has no additive 4-colouring by
+  hyperplane cover. *Reading:* the additive theory reproduces the spindle mechanism exactly at the
+  additively-forced level, which on K-fabric is depth ≥ 2 — one depth shallower than the truth.
+* **T28 — The Exoo–Ismailescu seed's tightness is arithmetic, and G's colouring space is its additive family
+  (M56 §R2).** [measured, exact; the paper re-read — no algebra in it] Over the seed's 21,787 non-adjacent pairs the
+  unique pair identified by every ℤ/5-hom of its unit lattice is the forced pair (205, 206); every cheat and every
+  pair at d² = 9, 16 is additively separated; 18 of the 35 five-colourings are additive and the other 17 have
+  additive defect 1 (12) or 2 (5); Exoo–Ismailescu's G (205 points, exactly 18 five-colourings by their Claim 2.1)
+  has exactly 18 additive colourings and they are its colourings. *Questions:* which lattice property makes every
+  colouring additive (G has it, the seed nearly, U at four colours not at all); is a unit-distance chunk in a
+  wall-broken field with that property buildable — that would be 5-tightness by arithmetic; are the seed's 17
+  non-additive colourings Kempe-images of the 18.

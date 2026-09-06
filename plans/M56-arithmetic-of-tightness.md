@@ -757,7 +757,7 @@ literature is unchecked. Scoring: **P3′ MET, P3″ MET** (0 < 18 < 35; defects
 | object | Λ rank | units in 2Λ / 4Λ (k = 4) | additive 4-colourings | additive 5-colourings | F_add at 5 (non-adjacent) |
 |---|---|---|---|---|---|
 | Heule-510 (510, 2,504) | 8 | 12 / 0 | **none** (𝔽₂² by divisibility, ℤ/4 by hyperplane cover) | 96 homs = 24 colourings | **91 forced-additively of 127,291 — all 91 refuted by the solver** (`ask-heule510-k5.json`, 2 s, no second-encoding hit: no jackpot) |
-| de Grey 1581 (1,581, 7,877) | 16 | 13 / **1 — the single cross edge (11, 802) between the halves, 2-adic depth 2** | none (divisibility) | ≥ 2,981 colourings (3,000 homs by SAT, capped) | pending (`forced-degrey1581-k5.json`, against the complete M30 sweep) |
+| de Grey 1581 (1,581, 7,877) | 16 | 13 / **1 — the single cross edge (11, 802) between the halves, 2-adic depth 2** | none (divisibility) | ≥ 2,981 colourings (3,000 homs by SAT, capped) | **356 forced-additively of 1,241,113** (each decided exactly by a per-pair SAT re-ask: no admissible hom separates them), **all 356 recorded separated by the complete M30 sweep** (`forced-degrey1581-k5.json`; 1,240,757 separated by the 3,000-hom sample) |
 | W = core ∪ R(core) (1,175, 5,773) | 8 | 1 / **1 — the spindle chord (565, 1152), depth 3** | none (divisibility) | 1,728 homs = 432 colourings | **291 forced-additively of 683,952 — all 291 recorded separated by the complete sweep of W ∪ its 850 distance-2 cheats** (a colouring of the larger graph is one of W) |
 | the 791-forcer (791, 3,938; rebuilt through `construct.py`, edge set = the M30 record's) | 8 | 6 / 0 | **none** | — | its six forced pairs at k = 4: `vacuous` — de Grey's 4-forcing lives entirely in non-additive colourings |
 
@@ -780,8 +780,8 @@ through R⁻¹ exactly, independent palettes per side). A random colouring under
 single-fifth-vertex colourings (a 4-colouring of W − v, one SAT model each for 15 vertices): RR defect 354–845 —
 W − 1152 (the chord's copy-side endpoint) at 354 and W − 565 at 501 are the two nearest, the rest 561–845.
 Scoring: **P4′ MET** on the 1581 and W (a unit vector in 4Λ), **MET-IN-SUBSTANCE** on Heule-510 (no hom, by
-cover); **P5′ MET** on W and Heule-510 (homs exist; every additively forced pair is separated non-additively —
-by the sweep on W, by 91 asks on Heule), the 1581 pending; **P6′ NOT RUN as registered** (the interface census
+cover); **P5′ MET** on W, Heule-510 and the 1581 (homs exist; every additively forced pair is separated non-additively —
+by the sweep on W, by 91 asks on Heule, by the complete M30 sweep on the 1581's 356); **P6′ NOT RUN as registered** (the interface census
 of the residue-plus-repair family was replaced by the RR defect gauge, which reads the family as far from W's
 colourings as the additive one — the registered ν-comparison is unmade and is reported so); **P7′ MET by
 derivation (L7)** with the four witness chunks in the self-test (P7″).
@@ -796,7 +796,7 @@ derivation (L7)** with the four witness chunks in the self-test (P7″).
    sublattices of its eight additive colourings recover the dial to 16 pairs of 2,342.
 3. Every spindle over an additively forced pair puts its chord in 4Λ (L8) — the 1581's one cross edge and W's
    spindle chord are the two instances — so no 5-chromatic witness we hold has an additive 4-colouring, while
-   all of them keep additive 5-colourings whose forced pairs (91, 291, …) are separated non-additively; no
+   all of them keep additive 5-colourings whose forced pairs (91, 291, 356) are separated non-additively; no
    wall-broken plane has an additive k-colouring for k ≤ 10 (L7), and the witnesses' actual 5-colourings, as
    sampled, are at the random baseline from both algebraic families.
 
@@ -823,7 +823,7 @@ derivation (L7)** with the four witness chunks in the self-test (P7″).
 | P3′ | met | R2 |
 | P3″ | met | R2 |
 | P4′ | met (1581, W); met-in-substance (Heule-510) | R3 |
-| P5′ | met (W, Heule-510); 1581 pending | R3 |
+| P5′ | met (W, Heule-510, the 1581) | R3 |
 | P6′ | not run as registered; replaced by the RR defect gauge | R3 |
 | P7′ | met by derivation + P7″ witnesses | R0, §M1.7 |
 | P8 | met-in-substance (16 of 187) | R1 |

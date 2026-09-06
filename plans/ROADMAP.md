@@ -172,11 +172,14 @@ lands (his standing instruction, 2026-08-31); a headline carries its population 
    (critical centre at every depth; floppy in seconds), and the F₂₄₇ cross thickening as the only
    construction that moved the redundancy dial (T24). Next per `CLAUDE.md` § Paths forward: thickened
    material, not stars.
-3c. **M56 — the arithmetic of tightness (STUBBED 2026-09-06, Kooshi's direction; `plans/M56-arithmetic-of-tightness.md`)**:
-   additive colourings of a chunk's difference lattice as the solver-free yardstick of tightness; K at four
-   colours as the calibrated bed (does the finite additive theory reproduce the M53 dial?), the seed's 35
-   colourings at five, then Heule's, de Grey's and F₂₄₇ material — which vertices tighten, how tight each
-   field can be made. THE NEXT MILESTONE; subplan it first after the compaction.
+3c. **M56 — the arithmetic of tightness (CLOSED 2026-09-06; `plans/M56-arithmetic-of-tightness.md` §R)**: the
+   additive yardstick (`tools/additive.py`, `Additive.lean`) calibrated on K at four colours (F_true 171 ⊆ F_K 187 ⊆
+   F_add 2,513 — additive at depths 1 and 3, not at depth 2), read on the seed (its forced pair is the unique
+   additively forced pair; 18 of 35 colourings additive; E–I's G exactly additive) and on every witness (no additive
+   4-colouring — the spindle chord lies in 4Λ, L8; additive 5-colourings whose forced pairs are all separated
+   non-additively; no jackpot). Next per `CLAUDE.md` § Paths forward: the Kempe classes of K-fabric's
+   4-colourings (the 16-pair residue), the additive richness dial on the witnesses' fields, the seed as the
+   design template.
 4. **Kooshi's pick between** (item 3 as it stood before M54 was minted): (a) minting the kernel milestone for Theorem B
    (`plans/STUB-field-wall-kernel.md`, names probed); (b) the endgame design question — what
    5-rigid wall-broken material looks like, G19/G25 with the theorem underneath; (c) continuing the

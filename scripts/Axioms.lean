@@ -185,6 +185,15 @@ open HadwigerNelson
 #print axioms HadwigerNelson.Copy.le_copyUnion_comap_inr
 #print axioms HadwigerNelson.Copy.copyUnion_adj_inl_inr
 #print axioms HadwigerNelson.Copy.chromaticNumber_copyUnion_le
+-- M56: additive colourings (Additive.lean) — an additive colouring is a colouring, its two refutations
+-- in the Forces/Separated vocabulary, and the divisibility lemma (L1) at any exponent and at the exponent
+#print axioms HadwigerNelson.additiveColoring
+#print axioms HadwigerNelson.additiveColoring_apply
+#print axioms HadwigerNelson.not_forces_of_addMonoidHom
+#print axioms HadwigerNelson.not_separated_of_addMonoidHom
+#print axioms HadwigerNelson.addMonoidHom_apply_eq_of_sub_eq_nsmul
+#print axioms HadwigerNelson.addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul
+#print axioms HadwigerNelson.parity_grid
 
 
 /-! ## M01 — the model of the hypotheses, and χ ≥ 3 -/
