@@ -1038,7 +1038,7 @@ and the seed is the one object that makes the yardstick read true.
 
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
-(WORKFLOW step 9). The ranked list below mirrors its top: FS-1 additive rigidity (`plans/STUB-additive-rigidity.md`,
+(WORKFLOW step 9). The ranked list below mirrors its top: FS-1 additive rigidity (`plans/M57-additive-rigidity.md`,
 HIGH bearing — a kernel-able sufficient condition for χ ≥ 6 and a continuous gauge for the descent's stalled goal),
 FS-2 the Kempe classes (`plans/STUB-kempe-classes.md`), FS-3 thickened material (`plans/STUB-thickened-material.md`),
 FS-4 Theorem B in the kernel, FS-5 bookkeeping.)*

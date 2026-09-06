@@ -2,7 +2,7 @@
 
 *Minted at the M56 close. Read beside this: `plans/M56-arithmetic-of-tightness.md` §M1.5 (the Kempe localization),
 §R1 (the bed's table: F_true 171 ⊆ F_K 187 ⊆ F_add 2,513), `data/m56/kempe-object-…-k4.json` (every Kempe verdict
-with its verified swapped colouring), `plans/STUB-additive-rigidity.md` D3 (the coset-component condition), `CLAUDE.md`
+with its verified swapped colouring), `plans/M57-additive-rigidity.md` D3 (the coset-component condition), `CLAUDE.md`
 G41 (b).*
 
 ## 1. Mission context, in plain language
