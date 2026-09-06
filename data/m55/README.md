@@ -27,7 +27,7 @@ world. Regenerate with `tools/five_dial.py` (`absorb-self-test` first; 13 plante
   (`data/m55/sweep-flower-…json`, 11 s).
 * `spindles-35_1859-813_1939-1205_1442-full.json` — the three-spindle star on the full fabric (7,809 points);
   C = ∅ (the two candidates F₁ ∩ F₃ = {29, 1753} asked, `critical --only`), absorbed, ν ∈ [2, 3].
-  `data/m54/forcing-critical-U-1205-1442.json` is the third pair's forcing census (`tools/m54_forcing_census.py`).
+  `data/m55/forcing-critical-U-1205-1442.json` is the third pair's forcing census (`tools/m54_forcing_census.py`).
 * `cross-lattice-depth2-W-core-8over3.json`, `cross-lattice-depth2-crossonly-W-core-8over3.json` — the F₂₄₇
   glue census over W ∪ P₁ (all pairs / pairs not both on one K-coset side), exact; the pools P₂, their fusions,
   the degree profiles; the grown stages `W-plus-cross-depth2[-crossonly].json` (`--graph` stages with points).
