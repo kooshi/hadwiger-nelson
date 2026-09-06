@@ -1994,6 +1994,10 @@ clash" was the metric shadow of a 2-adic condition.
   6-forcer as a DETUNED OLIGOMER of 5-chromatic domains whose compulsion lives in
   interface conformation algebra (the M20 strip automaton is the method precedent);
   where it lies: proteins have one energy scale, we have a field ladder (G1).
+  **AMENDED 2026-09-06 (mined from the web-Claude analysis; second-hand until read): the 3 → 4 step has a route that is
+  NOT rainbow-clique holonomy — Wormald (1979) built a 4-chromatic unit-distance graph of girth 5 and O'Donnell (Rutgers
+  thesis, 1999) of arbitrary girth, with no triangles at all; triangle-free forcing is the regime of topological and
+  Mycielski-type arguments (FS-9), and the "holonomy" mechanism is the mechanism of the objects we hold, not of the step.**
   **[reading — falsifiers per shape in SHAPES-OF-SIX §3: menus total ⟹ Shape A
   starves; gen-2/3 clean at depth ⟹ Shape B demoted; no equivariance compulsion at
   k = 5 anywhere ⟹ Shape C demoted; the 23-core autopsy finding a known genre ⟹
@@ -2338,6 +2342,27 @@ clash" was the metric shadow of a 2-adic condition.
   a coverage-subset verify caught an exact minimizer silently swapping a kept edge out of the
   hitting set, and a 25 ≠ 24 banner cross-check caught a stale commit field before any certify.
 
+  **THE STRENGTHENING (Kooshi, 2026-09-06, on the finite-plane pivot — his reading of the whole record as a ladder of
+  disciplines, each hop forced by a wall that turned out to be a theorem in the next room):**
+  *graph theory* (the problem, the Moser spindle) → *computational combinatorics / SAT* (the wall: hand refutation dies at
+  ~20 vertices; de Grey, Heule, Polymath16) → *formal verification* (the wall: SAT certificates are opaque bitstreams;
+  Lean's kernel — this project's entry point) → *Euclidean geometry* (the wall: the graphs are not abstract — rotation groups,
+  spindle angles, the 1/√3 circle; M1–M20) → *algebraic number theory* (the wall: "why do all 5-chromatic graphs contain √5
+  or √7?" — a question about the coordinates' field, not the graph; M20–M24) → *p-adic / local algebra* (the wall: "what
+  makes K = ℚ(√3,√11) special?" — how 2 factors when i is adjoined: ramification, inertia, residue fields; Theorem B — the
+  steepest hop, where CS-flavoured discrete mathematics has almost no overlap) → *additive combinatorics* (the wall: "why does
+  the residue method go blind between 4 and 7?" — it only uses homomorphisms, linear maps; the Cayley-graph reframing, M56)
+  → *finite field geometry* (the wall: "is linearity the only thing the finite picture can do?" — no: the reduction lands in
+  an actual finite Euclidean plane whose chromatic number is non-linear and sees 5; Vinh 2005 studied the objects, nobody
+  had connected them to the field descent). Suggested and not yet entered: *algebraic topology* (Borsuk–Ulam, box
+  complexes — the one lower-bound technique sharp at every integer; FS-9) and *commutative algebra* (Nullstellensatz
+  certificates — polynomial infeasibility proofs sensitive to integrality; FS-10). **The pattern: the project hits a wall in
+  discipline N; the wall is a theorem in discipline N + 1; that theorem explains the wall and opens the next room. Every
+  transition was forced by a specific obstruction, never by wandering — which is why "derivation kills, measurement
+  generates" keeps holding: the walls ARE the theorems, and the work is recognizing which field each one belongs to.**
+  *Rule this adds: when a measured wall resists derivation in the discipline it was found in, name the discipline the
+  wall's statement naturally lives in and look for the theorem there before building another instrument here.*
+
 * **G35 — The wall is 2-adic, and the useful material is a congruence test.** [theorem, hand-proved
   (`~/field-wall-conjecture.md` §5–§6); the criterion measured on every class one gluing step reaches]
   For a real number field F the residue colouring gives χ(G(F²)) ≤ N(𝔭) for any prime 𝔭 of F(i) fixed by
@@ -2487,6 +2512,10 @@ record shows what was believed, what was measured, and what is now proved.
   residue-𝔽₃ prime above 3 or with the 2-adic wall standing — impossible by theorem, so the only
   live falsifier is a NON-additive colouring beating χ_res somewhere, which would be a new
   colouring genre.
+  **AMENDED AGAIN 2026-09-06 (the finite-plane pivot, G43): the gap at 5 is a theorem — 5 ≡ 1 (mod 4), so 𝔽₅ contains √−1,
+  every prime above 5 splits in F(i), and no prime above 5 (or 13, 17, 29, …) is ever usable; the usable primes are exactly
+  those with residue field 𝔽_q, q ≡ 3 (mod 4) — p ≡ 3 (mod 4) with odd residue degree — and "blind above four" was the
+  linear reading: at such a prime the residue plane's own chromatic number bounds χ(F²), and it is 5 at p = 11.**
   **AMENDED 2026-09-06 (Fischer 1990 read, T23):** the framework is Fischer's *additive k-colouring* and the
   quadratic thresholds are his Theorems 8–10 — including χ(ℚ(√3)²) = χ(ℚ(√7)²) = 3, which T21 claimed; and
   the entry's "4 when the 2-adic wall stands with residue field 𝔽₄" is wrong when complex conjugation lies in
@@ -2604,7 +2633,12 @@ record shows what was believed, what was measured, and what is now proved.
   then "6-open" for multiquadratic fields is exactly "some radicand is a non-residue mod 11"; (b) the 𝔭-adic pullbacks are
   the constructive wild colourings the upper-bound theorems (Townsend, Coulson, Thomassen) say a 6-colouring of ℝ² would have
   to be — field by field, never gluing across fields; (c) Haugland's heptagonal field is 7-sealed unless his detuning
-  adjoins a 7-inert radical (FS-8). Composes with G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of one mechanism,
+  adjoins a 7-inert radical (FS-8); (d) the SHADOW sieve — an object's unit directions reduce to a subset D of the circle,
+  and χ(Cay(𝔽_p², D)) seals every graph built from those directions: the 1581's 67 directions cover 55 of the 66 residue
+  pairs at 131 while its gen-1 closure covers all 66 (FS-7 D7, T34) — a design vocabulary for 6-forcers computed without
+  geometry. One correction to the analysis, derived: K(√35) is 11-inert but does NOT break the 2-adic wall (its odd square
+  classes are ≡ 1, 3 mod 8), so χ(K(√35)²) = 4 by Theorem B — the candidate single radicals over K are d = 7, 79, 127, …
+  (d ≡ 7 mod 8 and a non-residue mod 11), not 35. Composes with G35/G38 (the walls at 2 and 3 are the p = 2, 3 faces of one mechanism,
   and "blind above four" was the linear reading), G42 (de Grey's field is the one place both the family and the 6-option
   survive).*
 
