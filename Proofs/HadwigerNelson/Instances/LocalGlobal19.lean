@@ -16,7 +16,7 @@ import Proofs.HadwigerNelson.Instances.OneDefectSpec
   (`tools/fplane.py periodic`); the six-colouring is checked here, and the certified 5-colouring of the plane (M58) is
   aperiodic (M60) — the 11-plane's five is carried by non-periodic colourings only.
 * **The 3-plane is forces-free at three colours** — every nonzero difference fails to be a period of one of two tables
-  (`eq_of_forces_of_forall_exists_not_periodic`) — so `Forces.no_hom_of_spindle_radicand` has a model below `11`: the
+  (`Forces.eq_of_forall_exists_not_periodic`) — so `Forces.no_hom_of_spindle_radicand` has a model below `11`: the
   rhombus drawn in `UD(𝔽₃, 2)` with its far corners at ONE point (their residues coincide, as the theorem's first step
   says they must), forcing them equal at three colours; the radicand hypothesis is then the only one a hom could fail,
   and it does (`√11` at `3`).
@@ -103,38 +103,39 @@ example : ¬ ∀ d ∈ circ11D, ∀ x : ZMod 11, (![0, 1, 2, 4, 3, 5, 1, 0, 3, 2
 
 /-! ### The 3-plane is forces-free at three colours -/
 
-/-- The second table at `3`: `(x + 2y) mod 3`, a period at `(1, 1)`; M60's `finitePlane3Colouring` is `(x + y) mod 3`,
+/-- The second table at `3`: `(x − y) mod 3`, a period at `(1, 1)`; M60's `finitePlane3Colouring` is `(x + y) mod 3`,
 a period at `(1, 2)`. Together the two tables have no common nonzero period. -/
-def finitePlane3Colouring' (v : ZMod 3 × ZMod 3) : Fin 3 :=
+def finitePlane3ColouringDiff (v : ZMod 3 × ZMod 3) : Fin 3 :=
   (![![0, 2, 1], ![1, 0, 2], ![2, 1, 0]] : Fin 3 → Fin 3 → Fin 3) v.1 v.2
 
 theorem finitePlane3Colouring_proper : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
     finitePlane3Colouring u ≠ finitePlane3Colouring v := by decide
 
-theorem finitePlane3Colouring'_proper : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
-    finitePlane3Colouring' u ≠ finitePlane3Colouring' v := by decide
+theorem finitePlane3ColouringDiff_proper : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
+    finitePlane3ColouringDiff u ≠ finitePlane3ColouringDiff v := by decide
 
 /-- The two tables as colourings of the plane. -/
 def finitePlane3Colouring.toColoring : (finitePlane 3).Coloring (Fin 3) :=
   Coloring.mk finitePlane3Colouring finitePlane3Colouring_proper
 
-def finitePlane3Colouring'.toColoring : (finitePlane 3).Coloring (Fin 3) :=
-  Coloring.mk finitePlane3Colouring' finitePlane3Colouring'_proper
+def finitePlane3ColouringDiff.toColoring : (finitePlane 3).Coloring (Fin 3) :=
+  Coloring.mk finitePlane3ColouringDiff finitePlane3ColouringDiff_proper
 
 /-- No nonzero difference is a period of both tables. -/
 theorem finitePlane3_no_common_period : ∀ d : ZMod 3 × ZMod 3, d ≠ 0 →
-    ¬ Function.Periodic finitePlane3Colouring d ∨ ¬ Function.Periodic finitePlane3Colouring' d := by
+    ¬ Function.Periodic finitePlane3Colouring d ∨ ¬ Function.Periodic finitePlane3ColouringDiff d := by
   decide
 
-/-- **The 3-plane forces no pair equal at three colours** — two tables refute every candidate period. -/
-theorem finitePlane3_forces_free : ∀ u v : ZMod 3 × ZMod 3, Forces (finitePlane 3) 3 u v → u = v :=
-  fun _ _ hf => eq_of_forces_of_forall_exists_not_periodic
-    (fun d hd => (finitePlane3_no_common_period d hd).elim
-      (fun h => ⟨finitePlane3Colouring.toColoring, h⟩) (fun h => ⟨finitePlane3Colouring'.toColoring, h⟩)) hf
+/-- **The 3-plane forces no pair equal at three colours** — two tables refute every candidate period; the shape of
+M60's `finitePlane11_forces_iff`. -/
+theorem finitePlane3_forces_iff {u v : ZMod 3 × ZMod 3} : Forces (finitePlane 3) 3 u v ↔ u = v :=
+  ⟨Forces.eq_of_forall_exists_not_periodic fun d hd => (finitePlane3_no_common_period d hd).elim
+      (fun h => ⟨finitePlane3Colouring.toColoring, h⟩) (fun h => ⟨finitePlane3ColouringDiff.toColoring, h⟩),
+   fun h => h ▸ fun _ => rfl⟩
 
 /-- M60's singleton case, re-derived through the family lemma: the 11 table alone. -/
 example : ∀ u v : ZMod 11 × ZMod 11, Forces (finitePlane 11) 5 u v → u = v :=
-  fun _ _ hf => eq_of_forces_of_forall_exists_not_periodic
+  fun _ _ hf => Forces.eq_of_forall_exists_not_periodic
     (fun d hd => ⟨finitePlane11Colouring.toColoring, fun hper => hd (finitePlane11_aperiodic d hper)⟩) hf
 
 /-! ### The spindle theorem's model: the rhombus in `UD(𝔽₃, 2)` -/
@@ -162,7 +163,7 @@ hypothesis is then unsatisfiable — `x² = (4·0 − 1)·e² = −e²` has no s
 content: the spindle over the rhombus's pair (`√11`) cannot be drawn where the rhombus reduces. -/
 theorem rhombus_spindle_no_hom_3 {x e : ZMod 3}
     (hx : x ^ 2 = (4 * quadrance (rhombusIn3 0 - rhombusIn3 3) - 1) * e ^ 2) (he : e ≠ 0) : False :=
-  Forces.no_hom_of_spindle_radicand (by decide) finitePlane3_forces_free rhombusIn3 (RingHom.id _)
+  Forces.no_hom_of_spindle_radicand (by decide) (fun _ _ hf => finitePlane3_forces_iff.mp hf) rhombusIn3 (RingHom.id _)
     rhombus_forces_of_gadget hx he
 
 -- And directly: in `ZMod 3` the radicand equation has no solution with `e ≠ 0` — the theorem is not vacuous by accident.

@@ -13,7 +13,7 @@ milestone's derivations produced:
 * **The periodic quotient** (§S3). A colouring of a Cayley graph `addCayley S` that is constant on the cosets of a
   subgroup is a colouring of the quotient Cayley graph: an additive hom `π` whose kernel misses `S` is a graph hom
   `addCayley S →g addCayley D` for any `D` containing the projected connection set (`addCayleyMap`), so a colouring
-  of the quotient pulls back (`colorable_of_addCayley_quotient`). For the finite plane the quotient along a null
+  of the quotient pulls back (`colorable_of_addCayleyMap`). For the finite plane the quotient along a null
   direction (`projAlong v`) is a circulant on `p` vertices, and a table on `ZMod p` that is proper along the projected
   circle is a periodic colouring of the plane (`addCayleyColoring`, `unitQuadrance_colorable_of_quotient`). At `19`
   this is a nineteen-entry certificate of `χ(UD(𝔽₁₉, 2)) ≤ 5` (`Instances/LocalGlobal19.lean`).
@@ -26,7 +26,8 @@ milestone's derivations produced:
   into a field cannot send `d` to `0` when the source holds the spindle radicand `√(4d − 1)` up to a unit without
   making `−1` a square in the target (`isSquare_neg_one_of_spindle_radicand`). Composed with M60's transfer: **a graph
   forcing a pair equal at `k` colours, drawn in a ring that holds that pair's spindle radicand, admits no reduction to
-  a plane that is forces-free at `k`** (`Forces.no_hom_of_spindle_radicand`, `Forces.isEmpty_ringHom_of_spindle_radicand`).
+  a plane that is forces-free at `k`** (`Forces.no_hom_of_spindle_radicand`, `Forces.isEmpty_ringHom_of_spindle_radicand` — no reduction of the coordinate
+  ring `R` at `p`).
   That is the mechanism of tightness: a forcer built as "fabric forcing a pair at `k` colours + the spindle over it"
   lands in a field where the prime that sealed the fabric at `k` is no longer usable — the local bound it beats is the
   one its own construction removes.
@@ -92,7 +93,7 @@ def addCayleyMap (π : A →+ B) {S : Set A} {D : Set B} (hS : ∀ s ∈ S, π s
     (hD : ∀ s ∈ S, π s ∈ D) (a : A) : addCayleyMap π hS hD a = π a := rfl
 
 /-- **A colouring of the quotient is a colouring of the graph** — a periodic colouring, in the quotient's words. -/
-theorem colorable_of_addCayley_quotient (π : A →+ B) {S : Set A} {D : Set B} (hS : ∀ s ∈ S, π s ≠ 0)
+theorem colorable_of_addCayleyMap (π : A →+ B) {S : Set A} {D : Set B} (hS : ∀ s ∈ S, π s ≠ 0)
     (hD : ∀ s ∈ S, π s ∈ D) (h : (addCayley D).Colorable k) : (addCayley S).Colorable k :=
   h.of_hom (addCayleyMap π hS hD)
 
@@ -122,14 +123,15 @@ section Family
 
 variable {A : Type*} [AddCommGroup A] {k : ℕ}
 
-/-- `Function.Periodic` computes on a finite domain. -/
+/-- `Function.Periodic` computes on a finite domain. (M60's `Aperiodic` instance unfolds the same quantifier by hand;
+with this instance `decide` reaches `Periodic` goals directly.) -/
 instance decidablePeriodic {α β : Type*} [Fintype α] [Add α] [DecidableEq β] (f : α → β) (c : α) :
     Decidable (Function.Periodic f c) :=
   inferInstanceAs (Decidable (∀ x, f (x + c) = f x))
 
 /-- **Colourings with no common nonzero period refute every forced pair** — M60's `forces_iff_eq_of_aperiodic`
 is the case of one colouring; here each nonzero `d` may be refuted by a different one. -/
-theorem eq_of_forces_of_forall_exists_not_periodic {S : Set A}
+theorem Forces.eq_of_forall_exists_not_periodic {S : Set A}
     (h : ∀ d : A, d ≠ 0 → ∃ c : (addCayley S).Coloring (Fin k), ¬ Function.Periodic c d) {x y : A}
     (hf : Forces (addCayley S) k x y) : x = y := by
   by_contra hne
@@ -163,7 +165,7 @@ theorem unitQuadrance_colorable_of_quotient (π : R × R →+ R) {D : Set R} (hS
     (hD : ∀ s ∈ unitCircle R, π s ∈ D) (tab : R → Fin k) (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) :
     (unitQuadrance R).Colorable k :=
   show (addCayley (unitCircle R)).Colorable k from
-    colorable_of_addCayley_quotient π hS hD ⟨addCayleyColoring tab h⟩
+    colorable_of_addCayleyMap π hS hD ⟨addCayleyColoring tab h⟩
 
 end Plane
 
@@ -230,11 +232,6 @@ theorem quadrance_eq_zero_iff (hp : p % 4 = 3) {w : ZMod p × ZMod p} : quadranc
   rw [sq_add_sq_eq_zero_iff hp, Prod.ext_iff]
   exact Iff.rfl
 
-/-- A ring hom commutes with the quadrance. -/
-theorem quadrance_map {R S : Type*} [CommRing R] [CommRing S] (φ : R →+* S) (w : R × R) :
-    quadrance (φ w.1, φ w.2) = φ (quadrance w) := by
-  simp only [quadrance, map_add, map_pow]
-
 /-- **The spindle radicand forces `√−1` into the target.** If `R` holds `x, e` with `x² = (4d − 1)·e²` — the radicand
 of the spindle over a pair at squared distance `d`, up to the unit `e` — then a ring hom `φ` into a field that sends
 `d` to `0` and keeps `e` nonzero makes `−1` a square: `φ(x/e)² = −1`. -/
@@ -272,7 +269,9 @@ theorem Forces.no_hom_of_spindle_radicand {V R : Type*} {G : SimpleGraph V} [Com
   have hf := h.image ((unitQuadrance.map φ).comp g)
   no_ringHom_of_spindle_radicand hp φ hx (quadrance_sub_eq_zero_of_map_eq g φ (hfree _ _ hf)) he
 
-/-- The consumer's shape: with the unit `e` a unit of `R`, **no reduction of `R` at `p` exists at all**. -/
+/-- The consumer's shape: with `e` a unit of `R`, **no ring hom from `R` — the coordinate ring holding the radicand — to
+`ZMod p` exists at all**. (That every prime of the FIELD above `p` then has even residue degree is the hand argument of
+`plans/M61-local-global-tightness.md` §S5, not stated here.) -/
 theorem Forces.isEmpty_ringHom_of_spindle_radicand {V R : Type*} {G : SimpleGraph V} [CommRing R] {k : ℕ}
     (hp : p % 4 = 3) (hfree : ∀ u v : ZMod p × ZMod p, Forces (finitePlane p) k u v → u = v)
     (g : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) {x e : R}

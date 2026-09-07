@@ -521,3 +521,45 @@ audit and `#print axioms` on nine consumers, all on the standard three.*
 `ℤ[√19] →+* ZMod 5` exists although `19 = 4·5 − 1` — the radicand lemma needs it too; the non-null direction at `7` and the
 moved-entry table at `11` pin `hS` and properness. Vacuity: the composition's model at `3` exhibits every hypothesis but the
 radicand, and the `#guard` pins that the radicand equation is the one that dies.
+
+## §M3. Experience-modeling pass (2026-09-07; fresh Skill invocation)
+
+*The users: a proof-writer holding `(finitePlane p).Colorable k` or `Forces G k u v` in the InfoView; `decide`, which sees only
+the instances in scope; `exact?`, which sees statement shapes; the next session, which reads `data/fplane/README.md` and runs one
+command per question; and Kooshi, who reads the close's report cold.*
+
+| surface | the user's situation | decision |
+|---|---|---|
+| `unitCircle R`, `quadrance w`, `mem_unitCircle` | a reader wants the domain's words; `simp` already unfolds both (reducible) and `Set.mem_setOf_eq` fires | kept; `mem_unitCircle` NOT simp (nothing to normalize) |
+| `addCayleyMap π hS hD` | "the Cayley hom an additive hom induces" — M60's `addCayleyTranslate` set the `addCayley<Verb>` pattern | kept |
+| `colorable_of_addCayley_quotient` | the statement has no quotient; a consumer guesses the name from the construction | **renamed `colorable_of_addCayleyMap`**; the periodic reading lives in the docstring |
+| `addCayleyColoring tab h` | "I have a table, I decided it along `D`, give me the colouring" — the hypothesis is written as the decide-user writes it | kept |
+| `decidablePeriodic` | a global instance on Mathlib's `Function.Periodic` — no Mathlib instance exists to collide with, and it makes `decide` reach `Periodic` goals directly (M60 had to unfold by hand) | kept global; M60's `Aperiodic` instance cross-referenced in a `--` comment, not re-derived (upstream) |
+| `eq_of_forces_of_forall_exists_not_periodic` | a consumer holds `hf : Forces …` and wants `hf.…`, as with `Forces.image` | **renamed `Forces.eq_of_forall_exists_not_periodic (h) (hf)`** |
+| `projAlong v`, `projAlong_apply`, `projAlong_self` | a proof-user rewriting `projAlong v w` wants the apply lemma; `decide` never does | `projAlong_apply` `@[simp]` (an `rfl` apply lemma, conventionally simp) |
+| `unitQuadrance_colorable_of_quotient π hS hD tab h` | the instance reads in the order a reader narrates it: project, the circle misses the kernel, projects into `D`, the table, its properness; bundling `tab, h` as a `Coloring` would make the theorem `colorable_of_addCayleyMap` again | kept |
+| the counting section, `_of_colorable` suffix vs `SimpleGraph.Colorable.card_le_mul_indepNum` | dot-notation would be the consumer's wish, but `SimpleGraph.Colorable` is Mathlib's namespace — a name minted there reads as Mathlib's in every future search | **suffix kept**, no namespace extension |
+| `quadrance_map` | oriented against Mathlib's `map_*` convention and used by no proof (`simp` unfolds the abbrev and `map_add`/`map_pow` do the work) | **deleted** — one unrequested byte |
+| `isSquare_neg_one_of_spindle_radicand`, `no_ringHom_of_spindle_radicand … : False`, the tower specs as `⟨fun φ => …⟩` | the `False` form with `φ` explicit is what a consumer holding a hom uses; the `IsEmpty` form is the field-level reading and exists in the `Forces` composition | kept |
+| `Forces.no_hom_of_spindle_radicand`, `Forces.isEmpty_ringHom_of_spindle_radicand` — seven / six explicit arguments | the order narrates: the congruence, the plane's freedom, the drawing, the hom, the forcing, the radicand, the unit; the docstring's contract says "no reduction of **`R`**, the coordinate ring holding the radicand" — never "the field has no prime above `p`", which is the hand statement | kept; contract sharpened in the docstrings |
+| `finitePlane3Colouring'` | a prime says "variant"; the two tables are peers with content: `(x + y) mod 3` (M60's) and `(x − y) mod 3` | **renamed `finitePlane3ColouringDiff`** |
+| `finitePlane3_forces_free` | M60 states the 11 fact as `finitePlane11_forces_iff : Forces … ↔ u = v`; the two should read alike and feed `hfree` the same way | **restated as `finitePlane3_forces_iff`** |
+| the `_11` suffix on the two 11 instances; `rhombusIn3`, `rhombusIn3_adj`, `rhombus_spindle_no_hom_3` | M60's instance-file convention | kept |
+| module docs | say: the quotient gives UPPER bounds only; the lower halves (19 refuses four; the circulant at 11 refuses five) are the solver's; the residue-degree statement is a hand argument; `hfree` carries colourability | present; the instance module's doc names the solver's claims explicitly |
+| `Proofs.lean`, `scripts/Axioms.lean` | `LocalGlobal` after `ResidueObstruction`, the instance after `ResidueObstruction11`; the M61 block audits the nine consumers plus the radicand lemmas, the isotropy lemma, the counting primitive, `finitePlane3_forces_iff`, `finitePlane11_colorable_six_periodic` | as listed |
+
+**The instrument** (`tools/fplane.py`, the module that owns the plane's own invariants; `equivariant` beside `chi` because the
+consumer asking "is the 23-plane 5-colourable" reaches for `chi` and should find its symmetric restriction next to it):
+
+| command | record | `claim_scope` (the licence column) | self-test control |
+|---|---|---|---|
+| `alpha --p P [--N N \| --ladder] [--wall S]` | `alpha-p<P>.json` (the ladder: per `N` the verdict, seconds, the set when SAT) | SAT: a verified independent set of size `≥ N` (`α ≥ N`); UNSAT: the solver's claim `α < N` (untrusted); unknown: wall | the SAT set re-checked independent |
+| `periodic --below B` | `periodic-below-<B>.json` (per `p`: the null direction, `D`, `χ(C_p)` as `[lo, hi]`, `α(C_p)` as `[lo, hi]`, the colouring and the set) | `hi` carries a colouring of the circulant VERIFIED as a colouring of the plane after lifting; `lo` is the solver's refusal; `α(C_p)·p` is a verified independent set of the plane | the 19 lift verified; `χ(C_11) = 6` reproduced (five refused); a planted non-null direction refused as improper |
+| `theta --below B` | `theta-below-<B>.json` (per `p`: `ϑ`, `ϑ′`, the Hoffman column, `⌈n/ϑ′⌉`) | a float LP (HiGHS) over the Kloosterman eigenmatrix; the Hoffman column is the control that must agree to `1e-6`; `χ ≥ ⌈n/ϑ′⌉` is a derivation resting on Lovász's theorem for arc-transitive graphs | `ϑ = Hoffman` at 11 |
+| `equivariant --p P --k K [--conf N]` | `equivariant-p<P>-k<K>.json` (per rotation order and `τ` cycle type: the verdict; the colouring when SAT) | SAT: a colouring verified proper AND equivariant; UNSAT: the solver's; unknown: the conflict budget | the 11 order-2 colouring verified |
+| `chi --q Q` (`Q = p^f`, `f` odd) | `chi-q<Q>.json` | as `chi-p`, over the explicit field `𝔽_q = 𝔽_p[t]/(m)` with `m` recorded | the circle has `q + 1` points |
+
+Every output line names its population and its trust word ("verified colouring" / "solver refusal" / "unknown at N conflicts").
+The report to Kooshi: the house format; the headline carries the population and the trust of each verdict (G21); §S5's derivation
+is the product and is stated first, in one paragraph a reader with no context can follow, with the six attained rows as its
+instances and the 6-level's reduction as its consequence.
