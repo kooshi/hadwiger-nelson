@@ -295,3 +295,56 @@ an instrument catastrophe (it contradicts the certified forcing) and halts the p
 | the instrument | a new `tools/fpcompel.py` importing `fplane.py` | subcommands added to `fplane.py` | M58's tool stays as its record describes; the new tool has its own self-test | high |
 | the augmented-plane test | the cheats' SPECIFIC residue pairs | the whole norm-4 class as a Cayley generator | the pullback family is defined by the actual pairs; the class version is a different (stronger) finite object worth a line, not the test | high |
 | the hex-shell corollary's statement | at the certificate level over `sevenFree` with `11 ∤ D`, plus the general `(r : R) ≠ 1` form for any prime through any hom | a field-level statement | the field-level integrality is the hand argument the programme already carries; the kernel says exactly what it checks | high |
+
+## §M1. Domain-modeling pass (2026-09-07; fresh Skill invocation)
+
+**Grok.** The objects are: a graph `G`, a hom `f` into a vertex-transitive graph `P` whose translations act simply transitively
+on its vertices (the plane is `addCayley S` on the abelian group `R × R`, `S` the circle), and the colouring space of `P` at `k`
+colours, on which the translations act. The compulsions of `P` at arity 2 are two relations on vertices: `Forces P k x y` (an
+equivalence relation, the intersection of the kernel relations of all colourings) and `Separated P k x y` (a symmetric relation
+containing adjacency). Both are invariant under every automorphism, so on a Cayley graph both are determined at the origin:
+`Forces P k x y ↔ Forces P k 0 (y − x)`, `Separated P k x y ↔ Separated P k 0 (y − x)`. And a compulsion at the origin is refuted
+by ONE colouring: `Forces P k 0 d` fails iff some colouring `C` has `C (t + d) ≠ C t` for some `t` — iff `d` is not a period of
+`C` (Mathlib's `Function.Periodic C d := ∀ x, C (x + d) = C x`); `Separated P k 0 d` fails iff some colouring coincides at `d`
+somewhere. The transfer to `G` is then a composition: compulsions of `G` map FORWARD along `f` (`Forces.comap` restated as
+`Forces G k u v → Forces P k (f u) (f v)`), and `P` has none beyond the trivial ones.
+
+**The cut.** Intrinsic: the group action (translations are automorphisms of every Cayley graph — Mathlib's
+`addCayley_adj_add_iff_right`, a simp lemma, is exactly that), the reduction of a compulsion to the origin, and "one table refutes
+one origin compulsion" through `Function.Periodic`. Incidental, and stripped: the circle (the property `CoincidesOffCircle` is
+about NON-EDGES of the Cayley graph, whatever its connection set — renamed `CoincidesAtNonedges P col`); the ring (`unitQuadrance R`
+is `addCayley _` by definition, so every Cayley-level theorem applies to it by unification and the plane is one instance);
+the integrality of the class distance `r` (the plane-level distance law is `quad (f u − f v) = 0` / `= 1`, with no `r` at all;
+`r : ℤ` enters only in the certificate corollaries where `PairsAt` puts it). Not adopted: naming the period subgroup (no
+consumer inspects it; `Periodic.neg`/`.add` carry the structure if one ever does); a LIST of tables (the true object is the
+colouring space; the origin-reduction theorem already takes "no origin compulsion at `d`" as its hypothesis, so a family of
+tables is several applications of the one-table lemma — 19's eighteen colourings would instantiate it without a new theorem).
+
+**Rebuild — the module's shape (replacing §S4's first table):**
+
+| layer | declarations | idea |
+|---|---|---|
+| Cayley: translations | `addCayley.translate (t : A) : addCayley S →g addCayley S` (`v ↦ t + v`, Mathlib's lemma) | automorphism |
+| Cayley: reduction to the origin | `forces_iff_forces_zero : Forces (addCayley S) k x y ↔ Forces … 0 (y − x)`; `separated_iff_separated_zero` | transitivity |
+| one table refutes one origin compulsion | `not_forces_zero_of_not_periodic (col : Coloring) (h : ¬ Periodic col d) : ¬ Forces … 0 d`; `not_separated_zero_of_coincides (col) (h : ∃ t, col (t + d) = col t) : ¬ Separated … 0 d` | the two transfers T1′/T2′, contrapositive |
+| the two table properties | `Aperiodic col := ∀ d, Function.Periodic col d → d = 0`; `CoincidesAtNonedges P col := ∀ d, d ≠ 0 → ¬ P.Adj 0 d → ∃ t, col (t + d) = col t` (decidable on finite `A`) | (A), (C) |
+| the plane's own compulsions | `forces_iff_eq_of_aperiodic`, `separated_iff_adj_of_coincides`, `three_le_arityFloor_of_aperiodic_coincides` (Cayley level) | F = {0}, S = edges |
+| the transfer, any graphs | `Forces.image (f : G →g P) : Forces G k u v → Forces P k (f u) (f v)`; `Separated.image` | compulsions map forward |
+| the transfer, composed | `Forces.image_eq_of_aperiodic … : f u = f v`; `Separated.image_adj_of_coincides … : Adj (f u) (f v)` | one line each |
+| the distance law, plane level (`unitQuadrance R`) | `Forces.quad_image_eq_zero : quad (f u − f v) = 0`; `Separated.quad_image_eq_one : quad (f u − f v) = 1` | no `r` |
+| certificates | `UDCert.coord_distSq`; `UDCert.drawing_quad : quad (drawing i − drawing j) = u² · φ(Δx·Δx + Δy·Δy)` (hypothesis-free; `drawing_adj` is its `r = 1` face, left untouched upstream); `drawing_quad_of_distSq (hp : distSq = r·D²) : … = r`; `not_forces_of_distSq (hr : (r : R) ≠ 0)`, `not_separated_of_distSq (hr : (r : R) ≠ 1)`; the `PairsAt` wrappers | the residue of the squared distance IS the quadrance of the drawn difference |
+
+**Seams.** Model of the hypotheses: the table at 11 (a `Coloring`, aperiodic, coincides at non-edges — decided). Unsampled members:
+the zero ring and `k = 0` make every theorem vacuous and none wrong (a `Coloring (Fin 0)` of a nonempty graph does not exist);
+`Nontrivial R` is needed nowhere in the transfer (only `drawing_adj` upstream used it). Adversarial member: a proper table WITH a
+period — the 3-plane's table (`(1, 1)` is a period) — the theorem is silent, as it should be, and the plane at 3 is pairwise free
+by its other eleven colourings (phase 0); kept as the red. Next-lemma test: the 19 instance states as `CoincidesAtNonedges` for
+a family = eighteen applications of `not_separated_zero_of_coincides` with eighteen tables — no restatement; the shadow Cayley
+graphs `Cay(𝔽_p², D)` (M58 D7) and the cell-family graphs (M39–M43, Cayley graphs of `ℤ²`) are instances of the Cayley layer with
+no change. Decorrelation: the two properties were computed by the tool before the kernel states them (§S2), and the per-class
+solver pass agrees with the table where the table decides.
+
+**Decisions.** Cayley generality — adopted (subtraction: the translation lemma is Mathlib's; a plane-only statement would
+re-prove it). `Function.Periodic` — adopted as the forced side's primitive (the standard word, with its API). The list of tables —
+not adopted (the origin-reduction theorem absorbs it). `drawing_adj` — untouched upstream; `drawing_quad` is the new general
+identity beside it. The plane-level distance law without `r` — adopted; `r : ℤ` confined to the certificate corollaries.

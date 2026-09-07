@@ -1,115 +1,173 @@
 import Proofs.HadwigerNelson.Lift
 import Proofs.HadwigerNelson.Arity
 import Proofs.HadwigerNelson.PairDist
+import Mathlib.Algebra.Ring.Periodic
 
 /-!
-# The residue obstruction: what a colouring of the plane forces on everything that reduces into it
+# The residue obstruction: compulsions map forward, and a Cayley graph coloured by one good table has none
 
-A graph `G` with a homomorphism `f` into the unit-quadrance graph `unitQuadrance R` (M58: every valid
-certificate over a subring of the tower, through a ring hom out of it, has one) inherits every
-`k`-colouring of the plane by pullback. So a pair FORCED equal in every `k`-colouring of `G` is identified
-by every colouring of the plane at its images, and a pair SEPARATED by every `k`-colouring of `G` (a
-virtual edge) is separated by every colouring of the plane at its images. Two lines, already in the
-kernel as `Forces.comap` and `Separated.comap`.
+A graph `G` with a homomorphism `f` into a graph `P` inherits every `k`-colouring of `P` by pullback, so a
+pair forced equal in every `k`-colouring of `G` is forced equal in `P` at its images, and a pair separated
+by every colouring of `G` (a virtual edge) is separated in `P` at its images: **compulsions map forward
+along homomorphisms** (`Forces.image`, `Separated.image` — `Forces.comap` and `Separated.comap` read as
+statements about `P`).
 
-The content is what "every colouring of the plane" costs. Translation `w ↦ w + t` is an automorphism
-of `unitQuadrance R` (adjacency depends only on the difference), so ONE colouring table `col` supplies
-a colouring for every `t`, and along that orbit the two transfers read, with `d := f v − f u`:
+On a Cayley graph `addCayley S` of an abelian group the translations are automorphisms (Mathlib's
+`addCayley_adj_add_iff_right`), so every compulsion reduces to the origin (`forces_iff_forces_zero`,
+`separated_iff_separated_zero`), and an origin compulsion at `d` is refuted by ONE colouring: `Forces P k 0 d`
+fails as soon as some colouring `C` has `C (t + d) ≠ C t` for some `t` — as soon as `d` is not a period of `C`
+(`Function.Periodic`); `Separated P k 0 d` fails as soon as some colouring coincides at `d` somewhere.
+Two decidable properties of a single table therefore settle the whole compulsion structure of the graph at
+arity 2: **`Aperiodic col`** (no nonzero period) gives `Forces P k x y ↔ x = y`, and **`CoincidesAtNonedges P col`**
+(every nonzero non-edge difference coincides somewhere) gives `Separated P k x y ↔ P.Adj x y`; together they
+put the arity floor of `P` at `k` colours at `3` or above.
 
-* forced ⟹ `∀ t, col t = col (t + d)` — `d` is a **period** of the table;
-* separated ⟹ `∀ t, col t ≠ col (t + d)` — `d` is a **never-coincident difference** of the table.
-
-Hence two decidable properties of a single table settle the transfer completely (`Aperiodic`: no
-nonzero period; `CoincidesOffCircle`: every nonzero difference off the unit circle coincides somewhere):
-**a forced pair has equal images, and a virtual edge has adjacent images.** At `11` the certified table
-of `Instances/FinitePlane11.lean` has both properties (`Instances/ResidueObstruction11.lean`), so over
-the `√7`-free subring of the tower a forced-equal pair at five colours has squared distance `≡ 0`
-and a virtual edge squared distance `≡ 1` modulo `11` — and the hex-shell distances `√3` and `2`
-(`3, 4 ≢ 0, 1` modulo every prime `≥ 5`) can carry neither, over any field whose plane at a usable
-prime is 5-colourable. That is the compulsion-level content of "5-sealed" (M58), one gadget at a time.
-
-The same two properties say the plane itself has no arity-2 compulsion beyond its edges
-(`forces_iff_eq_of_aperiodic`, `separated_iff_adj_of_coincides`, `three_le_arityFloor_of_aperiodic_coincides`).
+The finite plane `UD(𝔽_p, 2) = unitQuadrance (ZMod p)` is `addCayley` of the circle by definition. At `11` the
+certified table of `Instances/FinitePlane11.lean` has both properties (`Instances/ResidueObstruction11.lean`),
+so for every `√7`-free tower certificate with `11 ∤ D`: a pair forced equal at five colours has equal
+residues — the residue of its squared distance is `0` — and a virtual edge has adjacent residues — the residue
+of its squared distance is `1` (`Forces.quad_image_eq_zero`, `Separated.quad_image_eq_one`, through
+`UDCert.drawing_quad`: the quadrance of a drawn difference IS the residue of the stored squared distance).
+The hex-shell distances `√3` and `2` (`3, 4 ≢ 0, 1` modulo every prime `≥ 5`) can therefore carry neither
+compulsion over any field whose plane at a usable prime is 5-colourable. That is the compulsion-level
+content of "5-sealed" (M58), one gadget at a time.
 -/
 
 namespace HadwigerNelson
 
 open SimpleGraph
 
-variable {R : Type*} [CommRing R] {V : Type*} {G : SimpleGraph V} {k : ℕ}
+variable {V W : Type*} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ}
 
-/-! ### Translations are automorphisms -/
+/-! ### Compulsions map forward along homomorphisms -/
 
-/-- **Translation by `t` is a graph homomorphism** of the unit-quadrance graph: adjacency depends only
-on the difference of the two points. (An automorphism, in fact; the homomorphism is all a pullback needs.) -/
-def unitQuadrance.translate (t : R × R) : unitQuadrance R →g unitQuadrance R where
-  toFun v := v + t
-  map_rel' h := by sorry
+/-- **A forced pair's image is forced.** `Forces.comap` read as a statement about the target graph. -/
+theorem Forces.image (f : G →g P) {u v : V} (h : Forces G k u v) : Forces P k (f u) (f v) :=
+  fun C => h.comap f C
 
-@[simp] theorem unitQuadrance.translate_apply (t v : R × R) : unitQuadrance.translate t v = v + t := rfl
+/-- **A virtual edge's image is a virtual edge.** -/
+theorem Separated.image (f : G →g P) {u v : V} (h : Separated G k u v) : Separated P k (f u) (f v) :=
+  fun C => h.comap f C
+
+/-! ### Cayley graphs: translations reduce every compulsion to the origin -/
+
+variable {A : Type*} [AddCommGroup A] {S : Set A}
+
+/-- **Translation by `t` is a homomorphism** (an automorphism) of the Cayley graph: adjacency depends only
+on the difference (`addCayley_adj_add_iff_right`). -/
+def addCayley.translate (S : Set A) (t : A) : addCayley S →g addCayley S where
+  toFun v := t + v
+  map_rel' h := (addCayley_adj_add_iff_right).mpr h
+
+@[simp] theorem addCayley.translate_apply (t v : A) : addCayley.translate S t v = t + v := rfl
+
+/-- A forced pair of a Cayley graph is forced at the origin, by its difference. -/
+theorem forces_iff_forces_zero {x y : A} :
+    Forces (addCayley S) k x y ↔ Forces (addCayley S) k 0 (y - x) := by
+  sorry
+
+/-- A virtual edge of a Cayley graph is a virtual edge at the origin, by its difference. -/
+theorem separated_iff_separated_zero {x y : A} :
+    Separated (addCayley S) k x y ↔ Separated (addCayley S) k 0 (y - x) := by
+  sorry
+
+/-! ### One table refutes one origin compulsion -/
+
+/-- **`d` is forced at the origin only if it is a period of every colouring**: a colouring with `C (t + d) ≠ C t`
+somewhere, translated so that `t` sits at the origin, separates `0` from `d`. -/
+theorem not_forces_zero_of_not_periodic (col : (addCayley S).Coloring (Fin k)) {d : A}
+    (h : ¬ Function.Periodic col d) : ¬ Forces (addCayley S) k 0 d := by
+  sorry
+
+/-- **`d` is separated at the origin only if no colouring ever coincides at it**: a colouring with
+`C (t + d) = C t`, translated so that `t` sits at the origin, identifies `0` and `d`. -/
+theorem not_separated_zero_of_coincides (col : (addCayley S).Coloring (Fin k)) {d : A}
+    (h : ∃ t, col (t + d) = col t) : ¬ Separated (addCayley S) k 0 d := by
+  sorry
 
 /-! ### The two properties of a table -/
 
-/-- **No nonzero period**: for every nonzero difference `d` some point and its `d`-translate are coloured
-differently. The property a forced-equal pair's image must violate. -/
-def Aperiodic (col : R × R → Fin k) : Prop := ∀ d : R × R, d ≠ 0 → ∃ t, col t ≠ col (t + d)
+/-- **No nonzero period.** The property whose failure at `d` a forced-equal pair with difference `d` needs. -/
+def Aperiodic (col : A → Fin k) : Prop := ∀ d, Function.Periodic col d → d = 0
 
-/-- **Every off-circle difference coincides somewhere**: for every nonzero `d` that is not a unit-quadrance
-step, some point and its `d`-translate share a colour. The property a virtual edge's image must violate. -/
-def CoincidesOffCircle (col : R × R → Fin k) : Prop :=
-  ∀ d : R × R, d ≠ 0 → ¬ (unitQuadrance R).Adj 0 d → ∃ t, col t = col (t + d)
+/-- **Every nonzero non-edge difference coincides somewhere.** The property whose failure at `d` a virtual
+edge with difference `d` needs. -/
+def CoincidesAtNonedges (P : SimpleGraph A) (col : A → Fin k) : Prop :=
+  ∀ d, d ≠ 0 → ¬ P.Adj 0 d → ∃ t, col (t + d) = col t
 
-instance [Fintype R] [DecidableEq R] (col : R × R → Fin k) : Decidable (Aperiodic col) :=
-  inferInstanceAs (Decidable (∀ _, _ → ∃ _, _))
+instance [Fintype A] [DecidableEq A] (col : A → Fin k) : Decidable (Aperiodic col) :=
+  inferInstanceAs (Decidable (∀ d, (∀ x, col (x + d) = col x) → d = 0))
 
-instance [Fintype R] [DecidableEq R] (col : R × R → Fin k) : Decidable (CoincidesOffCircle col) :=
+instance [Fintype A] [DecidableEq A] (P : SimpleGraph A) [DecidableRel P.Adj] (col : A → Fin k) :
+    Decidable (CoincidesAtNonedges P col) :=
   inferInstanceAs (Decidable (∀ _, _ → _ → ∃ _, _))
 
-/-! ### The transfer -/
+/-! ### A Cayley graph coloured by one good table has no arity-2 compulsion -/
 
-/-- **A forced-equal pair has equal images** in any plane coloured by an aperiodic table: if the images
-differed by `d ≠ 0`, the translate of the table exhibiting `d` as a non-period, pulled back along `f`, would
-separate the pair. -/
-theorem eq_of_forces_of_aperiodic (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
-    (f : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) : f u = f v := by
+/-- **Forced pairs are trivial** when one colouring is aperiodic. -/
+theorem forces_iff_eq_of_aperiodic (col : (addCayley S).Coloring (Fin k)) (ha : Aperiodic col) {x y : A} :
+    Forces (addCayley S) k x y ↔ x = y := by
   sorry
 
-/-- **A virtual edge has adjacent images** in any plane coloured by a table coinciding off the circle: equal
-images are identified by the table itself, and non-adjacent distinct images by the translate exhibiting the
-coincidence. -/
-theorem adj_of_separated_of_coincides (col : (unitQuadrance R).Coloring (Fin k))
-    (hc : CoincidesOffCircle col) (f : G →g unitQuadrance R) {u v : V} (h : Separated G k u v) :
-    (unitQuadrance R).Adj (f u) (f v) := by
+/-- **Virtual edges are edges** when one colouring coincides at every non-edge difference. -/
+theorem separated_iff_adj_of_coincides (col : (addCayley S).Coloring (Fin k))
+    (hc : CoincidesAtNonedges (addCayley S) col) {x y : A} :
+    Separated (addCayley S) k x y ↔ (addCayley S).Adj x y := by
   sorry
 
-/-! ### The plane's own compulsions -/
-
-/-- The plane coloured by an aperiodic table forces no pair but the trivial ones. -/
-theorem forces_iff_eq_of_aperiodic (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
-    {u v : R × R} : Forces (unitQuadrance R) k u v ↔ u = v := by
+/-- **No arity-2 compulsion at `k` colours**: arity 2 is exactly `Separated`/`Forces` (`compels_two_eq`,
+`compels_two_ne`), and both are trivial by the two `iff`s. -/
+theorem three_le_arityFloor_of_aperiodic_coincides (col : (addCayley S).Coloring (Fin k))
+    (ha : Aperiodic col) (hc : CoincidesAtNonedges (addCayley S) col) :
+    3 ≤ arityFloor (addCayley S) k := by
   sorry
 
-/-- The plane coloured by a table coinciding off the circle separates no pair but its edges. -/
-theorem separated_iff_adj_of_coincides (col : (unitQuadrance R).Coloring (Fin k))
-    (hc : CoincidesOffCircle col) {u v : R × R} :
-    Separated (unitQuadrance R) k u v ↔ (unitQuadrance R).Adj u v := by
+/-! ### The transfer, composed -/
+
+/-- **A forced-equal pair has equal images** in a Cayley graph with an aperiodic colouring. -/
+theorem Forces.image_eq_of_aperiodic (col : (addCayley S).Coloring (Fin k)) (ha : Aperiodic col)
+    (f : G →g addCayley S) {u v : V} (h : Forces G k u v) : f u = f v :=
+  (forces_iff_eq_of_aperiodic col ha).mp (h.image f)
+
+/-- **A virtual edge has adjacent images** in a Cayley graph with a colouring coinciding at non-edges. -/
+theorem Separated.image_adj_of_coincides (col : (addCayley S).Coloring (Fin k))
+    (hc : CoincidesAtNonedges (addCayley S) col) (f : G →g addCayley S) {u v : V}
+    (h : Separated G k u v) : (addCayley S).Adj (f u) (f v) :=
+  (separated_iff_adj_of_coincides col hc).mp (h.image f)
+
+/-! ### The plane: the distance law at the level of quadrance -/
+
+variable {R : Type*} [CommRing R]
+
+/-- **Forced equal ⟹ the image difference has quadrance `0`.** -/
+theorem Forces.quad_image_eq_zero (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
+    (f : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) : quad (f u - f v) = 0 := by
   sorry
 
-/-- **The plane has no arity-2 compulsion at `k` colours** when one table is aperiodic and coincides off
-the circle: arity 2 is exactly `Separated`/`Forces` (`compels_two_eq`, `compels_two_ne`), and both are
-trivial by the two `iff`s above. -/
-theorem three_le_arityFloor_of_aperiodic_coincides (col : (unitQuadrance R).Coloring (Fin k))
-    (ha : Aperiodic col) (hc : CoincidesOffCircle col) : 3 ≤ arityFloor (unitQuadrance R) k := by
+/-- **A virtual edge ⟹ the image difference has quadrance `1`.** -/
+theorem Separated.quad_image_eq_one (col : (unitQuadrance R).Coloring (Fin k))
+    (hc : CoincidesAtNonedges (unitQuadrance R) col) (f : G →g unitQuadrance R) {u v : V}
+    (h : Separated G k u v) : quad (f u - f v) = 1 := by
   sorry
 
-/-! ### Certificates: the distance law -/
+/-! ### Certificates: the quadrance of a drawn difference is the residue of the stored squared distance -/
 
 namespace UDCert
 
 variable {n : ℕ}
 
-/-- `coord_quadrance` at class distance `√r`: a pair whose stored squared distance is `r · D²` in `Q4`
-satisfies `Δx·Δx + Δy·Δy = r · D²` inside the subring. -/
+/-- **The drawn difference's quadrance**, for any pair: `u² · φ(Δx·Δx + Δy·Δy)`, the stored squared distance
+read in the subring, through `φ`, scaled by the denominator's inverse squared. (`drawing_adj` is the case
+where the stored value is `D²` and `u · D = 1`.) -/
+theorem drawing_quad (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) (u : R)
+    (i j : Fin n) :
+    quad (c.drawing φ hS u i - c.drawing φ hS u j) =
+      u ^ 2 * φ (((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
+        ((c.coord hS i).2 - (c.coord hS j).2) * ((c.coord hS i).2 - (c.coord hS j).2)) := by
+  sorry
+
+/-- `coord_quadrance` at class distance `√r`: a pair stored at squared distance `r · D²` in `Q4` satisfies
+`Δx·Δx + Δy·Δy = r · D²` inside the subring. -/
 theorem coord_distSq (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) :
     ((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
@@ -117,16 +175,15 @@ theorem coord_distSq (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) {i j : 
       ((r * (c.denom * c.denom) : ℤ) : S) := by
   sorry
 
-/-- **The distance law.** A pair at stored squared distance `r · D²` is drawn at quadrance `r` — the
-identity `drawing_adj` uses at `r = 1`, for every `r`. -/
-theorem drawing_quad (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) {u : R}
+/-- **The distance law.** A pair stored at squared distance `r · D²` is drawn at quadrance `r`. -/
+theorem drawing_quad_of_distSq (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) {u : R}
     (hu : u * c.denom = 1) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) :
     quad (c.drawing φ hS u i - c.drawing φ hS u j) = (r : R) := by
   sorry
 
-/-- **A pair whose squared distance is not `0` in `R` is never forced equal** at `k` colours, for any
-`k` at which the plane over `R` is coloured by an aperiodic table. -/
+/-- **A pair whose squared distance is not `0` in `R` is never forced equal** at `k` colours, whenever the
+plane over `R` has an aperiodic `k`-colouring. -/
 theorem not_forces_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
     (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col) {i j : Fin n} {r : ℤ}
@@ -134,11 +191,12 @@ theorem not_forces_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ 
     ¬ Forces (edgeGraph n c.edges) k i j := by
   sorry
 
-/-- **A pair whose squared distance is not `1` in `R` is never a virtual edge** at `k` colours, for any
-`k` at which the plane over `R` is coloured by a table coinciding off the circle. -/
+/-- **A pair whose squared distance is not `1` in `R` is never a virtual edge** at `k` colours, whenever the
+plane over `R` has a `k`-colouring coinciding at every non-edge difference. -/
 theorem not_separated_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
-    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesOffCircle col) {i j : Fin n} {r : ℤ}
+    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesAtNonedges (unitQuadrance R) col)
+    {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) (hr : (r : R) ≠ 1) :
     ¬ Separated (edgeGraph n c.edges) k i j := by
   sorry
@@ -154,9 +212,9 @@ theorem not_forces_of_pairsAt [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ
 /-- `not_separated_of_distSq` for a pair listed in a `PairsAt` certificate. -/
 theorem not_separated_of_pairsAt [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
-    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesOffCircle col) {ps : List (Fin n × Fin n)}
-    {r : ℤ} (hps : c.PairsAt ps r = true) {i j : Fin n} (hmem : (i, j) ∈ ps) (hr : (r : R) ≠ 1) :
-    ¬ Separated (edgeGraph n c.edges) k i j :=
+    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesAtNonedges (unitQuadrance R) col)
+    {ps : List (Fin n × Fin n)} {r : ℤ} (hps : c.PairsAt ps r = true) {i j : Fin n} (hmem : (i, j) ∈ ps)
+    (hr : (r : R) ≠ 1) : ¬ Separated (edgeGraph n c.edges) k i j :=
   c.not_separated_of_distSq φ hS hu hv col hc ((c.pairsAt_iff ps r).mp hps (i, j) hmem) hr
 
 end UDCert

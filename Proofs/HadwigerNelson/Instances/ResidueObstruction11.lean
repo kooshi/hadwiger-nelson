@@ -40,7 +40,7 @@ theorem finitePlane11_aperiodic : Aperiodic finitePlane11Colouring := by
 /-- **The table coincides at every off-circle difference**: for every nonzero `d` off the unit circle some
 point and its `d`-translate share a colour. Decided over the 108 such differences (at least four
 coincidences each, `tools/fpcompel.py`). -/
-theorem finitePlane11_coincides : CoincidesOffCircle finitePlane11Colouring := by
+theorem finitePlane11_coincides : CoincidesAtNonedges (finitePlane 11) finitePlane11Colouring := by
   sorry
 
 /-- The certified colouring, as the `Coloring` the general theorems take. -/
@@ -76,7 +76,7 @@ theorem residue_eq_of_forces11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u 
     (hu : u * c.denom = 1) (hv : c.Valid = true) {i j : Fin n}
     (h : Forces (edgeGraph n c.edges) 5 i j) :
     c.drawing Q4.sevenFree.res11 hS u i = c.drawing Q4.sevenFree.res11 hS u j :=
-  eq_of_forces_of_aperiodic finitePlane11Coloring finitePlane11_aperiodic
+  Forces.image_eq_of_aperiodic finitePlane11Coloring finitePlane11_aperiodic
     (c.drawingHom Q4.sevenFree.res11 hS hu hv) h
 
 /-- **A virtual edge at five colours ⟹ adjacent residues at `11`.** -/
@@ -84,7 +84,7 @@ theorem residue_adj_of_separated11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree)
     (hu : u * c.denom = 1) (hv : c.Valid = true) {i j : Fin n}
     (h : Separated (edgeGraph n c.edges) 5 i j) :
     (finitePlane 11).Adj (c.drawing Q4.sevenFree.res11 hS u i) (c.drawing Q4.sevenFree.res11 hS u j) :=
-  adj_of_separated_of_coincides finitePlane11Coloring finitePlane11_coincides
+  Separated.image_adj_of_coincides finitePlane11Coloring finitePlane11_coincides
     (c.drawingHom Q4.sevenFree.res11 hS hu hv) h
 
 /-- **The distance law at `11`, forced half**: a pair listed at squared distance `r` with `r ≢ 0 (mod 11)` is
@@ -170,7 +170,7 @@ example : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
     finitePlane3Colouring u ≠ finitePlane3Colouring v := by decide
 
 /-- … and it is NOT aperiodic — `(1, 1)` is a period — so `Aperiodic` is a real property of a table and
-the hypothesis of `eq_of_forces_of_aperiodic` is load-bearing. (The 3-plane itself is pairwise free, by all
+the hypothesis of `Forces.image_eq_of_aperiodic` is load-bearing. (The 3-plane itself is pairwise free, by all
 twelve of its 3-colourings, `tools/fpcompel.py`; this one table does not show it.) -/
 example : ¬ Aperiodic finitePlane3Colouring := by decide
 
