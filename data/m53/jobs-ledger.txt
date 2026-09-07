@@ -96,3 +96,5 @@
 2026-09-07T21:10:51Z M60 gate chain launched (build → axioms → lint), logs build/m60/gate-*.log
 2026-09-07T21:15:08Z M60 gate GREEN (630 clean / 5 purchases, lint passed); phase B chain launched (sets 3/7/11/19, augment seed/object, filter M55 asks) → build/m60/phaseB.log
 2026-09-07T21:27:04Z M60 CLOSED — gate GREEN twice (630 clean / 5 purchases, lint); phase B records in data/fplane/; nothing in flight
+2026-09-07T22:15:29Z M61 pre-opening: alpha(UD(F_23,2)) >= 106? launched (external cadical, 2 h wall) → build/m61/alpha-p23-N106.json / alpha-p23.log
+2026-09-07T22:16:33Z Kooshi: FS-15 is next (M61). §H written into the stub; alpha loops at 11/19 (build/m61/alpha-p{11,19}-N*.json) and 23 (alpha-p23.log) in flight; compaction next

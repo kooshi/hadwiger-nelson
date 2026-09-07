@@ -153,3 +153,66 @@ colours is a congruence on the squared distance (`≡ 0` forced, `≡ 1` separat
 time. Derivation (d) here — the obstruction to gluing local colourings — now has its finite counterpart: the local colourings at a
 sealing prime are so free that they force nothing; what a 6-open field's plane forces at SIX colours (its own compulsion sets at
 k = 6 when χ ≥ 6, e.g. at 59 or 131) is the next computable object of this stub.
+
+---
+
+## §H. Handoff for the session that opens M61 (written 2026-09-07 at the M60 close, on Kooshi's "FS-15 next", before his compaction)
+
+**Kooshi's decision, not to be re-decided: the next milestone is M61 = FS-15, this stub.** Open it per WORKFLOW step 3 onward.
+
+**Read, in this order.** (1) `CLAUDE.md` § Frontier — the M58, M59, M60 paragraphs and G43–G47 (the sieve, the lift, the residue
+obstruction; the rule G46 and its ranking corollary; G47 the compulsion face of sealing). (2) This stub §1–§9 and the M60 addendum
+above. (3) `plans/M60-five-colour-residue-obstruction.md` §S1–§S3 and §R7 — the transfer theorem and the distance law, which are this
+stub's derivation (b) DONE (see below). (4) `plans/M58-field-sieve.md` §S1–§S2 (the spectra, the usable primes, the field map) and
+§R3 (the undecided planes). (5) `plans/STUB-finite-plane-cores.md` (FS-13's D1, the cube-and-conquer route for a plane's χ). (6)
+`data/fplane/README.md` for every record's licence.
+
+**Opening moves.** `git mv plans/STUB-local-global-tightness.md plans/M61-local-global-tightness.md`; re-point every reference
+(`grep -rn STUB-local-global-tightness CLAUDE.md plans/ tools/` and the memory file); mark the FS-15 row of `plans/FRONTIER-STUBS.md`
+"opened as M61"; then the subplan §S with the derivations FIRST (G46), the skeleton, three FRESH modeling passes each committed.
+
+**What M60 already delivered of this stub, so the subplan does not redo it.** Derivation (b), the compulsion-level face, is a
+kernel theorem in general form: compulsions map forward along any homomorphism (`Forces.image`, `Separated.image`) and a Cayley
+graph coloured by one aperiodic table coinciding at non-edges has no arity-2 compulsion (`ResidueObstruction.lean`); at 11 the
+certified table is such a table (`Instances/ResidueObstruction11.lean`), and the distance law says forced ⟹ `d² ≡ 0`, separated ⟹
+`d² ≡ 1 (mod 11)`. Measured: the sealing planes at 3, 7, 11, 19 are all pairwise free (`data/fplane/compulsions-p*.json`). So P2's
+first half is MET (in one day, at M60). P2's second half is ILL-POSED as written and should be re-registered: the seed's 148 absolute
+virtual edges at distances 3 and 4 (M50) are compulsions of the `{1, 2}`-graph, which has no homomorphism into the plane (its cheats
+reduce to norm-4 pairs, not edges), so the transfer does not apply to them; on the UNIT part alone, pairs at distances 3 and 4 have
+`r = 9, 16 ≢ 1 (mod 11)` and are therefore NEVER virtual edges at five colours over a sealed field — the opposite of the registered
+reading. Record that under §6 at opening.
+
+**The first derivation to make at opening (phase A's shape, G46).** The first digit is "is any finite plane exactly 6-chromatic",
+and the planes at 23, 31, 43, 47 (values 5 or 6) refused the colouring SAT at four hours (`data/fplane/chi-p{23,31,43,47}-k5.json`,
+all `unknown`; 59, 83, 131 at one hour with external cadical, M59). Before another solver hour, name the classical objects:
+
+* **The fractional face.** The planes are vertex-transitive, so their fractional chromatic number is `p²/α` with `α` the
+  independence number, and `χ ≥ ⌈p²/α⌉`. A 5-colouring needs a colour class of size `≥ p²/5`, i.e. **`α(UD(𝔽_p, 2)) ≥ ⌈p²/5⌉`
+  is a NECESSARY condition for `χ = 5`** — a cardinality-constrained SAT far smaller than the colouring (`build/m61/alpha.py`, an
+  opening scratch instrument to promote into `tools/fpcompel.py` if it earns it). Calibrated at the close: it is NOT tight — the
+  planes at 11 and 19 have independent sets of size ≥ 26 (> 121/5) and ≥ 74 (> 361/5), so their fractional numbers sit below their
+  χ = 5 (the finite planes share the real plane's pathology, G24: ω = 3, every relaxation low, χ high); the exact α at 11 and 19
+  and the decisive instance at 23 (`α ≥ 106?`, 2-hour wall) were running at the compaction — `build/m61/alpha-p*.json`,
+  `build/m61/alpha-p23.log`, the jobs ledger. If 23 returns UNSAT, `χ(UD(𝔽₂₃, 2)) ≥ 6` with no colouring search, and a 6-colouring
+  (cheap to find if it exists) makes it exactly 6: the first plane at 6, and a field named by congruences. If SAT (likely, by the
+  calibration), the necessary condition is met and the colouring question stands.
+* **The symmetry face.** The automorphism group has order `2p²(p + 1)` (translations and the orthogonal group), so a 5-colouring
+  is sought up to it: pin a maximal clique (`fplane.py chi --pin-clique`, done) AND break the rotations — colourings invariant under
+  a subgroup of the rotation group (order `p + 1`, cyclic) are a much smaller space, and every colouring found at 3, 7, 11, 19 should
+  be tested for such invariance first (if the known colourings are all invariant under something, search the invariant space at
+  23–47; if none is, that is a finding about the genre). The lower-bound side: a 6-forcing subgraph (a 6-critical core, FS-13's
+  object) is what an UNSAT would need to be certified — cube-and-conquer over the neighbourhood's colourings is the route, and
+  the certificate size is the M43 lesson (price before running).
+* **The odd-degree planes (derivation (a)).** M58's reduction works at residue degree `f` odd into the plane over `𝔽_{p^f}`; its
+  chromatic numbers are unknown (`UD(𝔽₉, 2)`, `UD(𝔽₂₇, 2)`, `UD(𝔽₄₉, 2)`… — 𝔽_{p^f} with `p^f ≡ 3 mod 4`): the table of L(F) is
+  incomplete without them, and each is one `chi` run on a small graph (81, 729, 2401 vertices).
+
+**Standing rules that bit M59 and M60** (so they are not paid again): pysat's wall is inert on big instances — run the cadical
+binary under `timeout` (as `alpha.py` does); `pgrep -f` self-matches a waiter's command line (anchor `^python3`, kill by PID); a
+planted control can be wrong (M59: three; M60: the 3-plane's period); every headline names its population and the trust of each
+verdict (G21); the M58 seed-frame packer truncates a descent object's coordinates — reduce through `fpcompel.reduce_K`; one heavy job
+at a time; checkpoint anything over fifteen minutes; ALWAYS `./scripts/build.sh`; a bare `rw` fails across the
+`addCayley`/`unitQuadrance` coercions — use a typed `have`.
+
+**Machine at the close:** the desktop (32 cores, 125 GB). In flight at the compaction: the α loop at 11 and 19 and the 23 instance
+(above). Nothing else. Tree clean at the commit that carries this section.
