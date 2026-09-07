@@ -707,6 +707,6 @@ kernel form of the rigid dichotomy (hand derivation, §S1).
 * The 5-critical core of UD(𝔽₁₉,2) (`build/m59/cores_chain-snapshot.sh`: the sphere shrink, then the vertex shrink, then `local` on
   both calibration cores; logs `build/m59/cores-p19-k4.log`, `local-core-p{11,19}-k4.log`) — its record and its obstruction
   verdict go into §R3 and P5's row.
-* The M55 108 asks (pid 839605, 17.5 h; `build/m55/ask-depth2.log` → `data/m55/ask-W-plus-cross-depth2-k5.json`, exit 3 =
-  jackpot): an M55 §R6 addendum and an FS-3 datum, then `data/m54/critical-W-plus-cross-depth2.json` moves into `data/m55`.
+* ~~The M55 108 asks~~ — DONE at 00:22 UTC (0 hits, 22 refuted, 86 undecided; M55 §R6 addendum written, the FS-3 datum
+  recorded, the input file moved into `data/m55`).
 

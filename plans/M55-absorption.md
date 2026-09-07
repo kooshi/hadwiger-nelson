@@ -642,3 +642,9 @@ attribute removed), the second an auto-named decidability instance with an under
 * **star₂'s sweep landed** (2026-09-06 ~08:15Z): **0 forced-equal, 0 virtual edges, complete — 138 models, 98
   calls, 16,752 s** (`data/m54/sweep-spindles-35_1859-813_1939-full.json`). P-M55-1 MET; M54 §R4's
   registration MET; the addendum written into `plans/M54-five-colour-dial.md` §R7.
+
+* **The 108 asks, DONE (2026-09-07 00:22 UTC, 85,651 s; `data/m55/ask-W-plus-cross-depth2-k5.json`).** On the full-pool grown
+  witness (10,541 points, 69,910 edges; critical set a triangle through the centre) the theorem-admitted candidates at five
+  colours were 0 forced-equal and 108 virtual-edge pairs. Result: **0 HIT, 22 refuted by verified separating colourings, 86
+  UNDECIDED at the 900-s wall.** P-M55-10 ("0 hits") is met on the 22 decided candidates and undecided on 86 — the population
+  in the headline, as G21 requires; no jackpot. The input `data/m54/critical-W-plus-cross-depth2.json` now lives in `data/m55/`.

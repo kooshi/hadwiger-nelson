@@ -88,3 +88,4 @@
 2026-09-06T22:41:15Z M59 gate GREEN (third run, with LiftObstruction11): build OK, axioms 616 clean / 5 purchases, lint passed
 2026-09-06T23:51:25Z M58 planes 23/31/43/47 at k=5 and the 1581's shadow at 131: NO VERDICT at the 4-h external timeout (pysat's wall inert again); undecided records written; M58 §R3 addendum
 2026-09-07T00:26:31Z M59 CLOSED (final commit); the 59 plane undecided at 1 h (P3 second half met); left running: the 19-core chain (pid 1815621), the M55 asks (pid 839605)
+2026-09-07T05:23:08Z M55 108 asks DONE (85,651 s): virtual-edge candidates on the full-pool grown witness at k=5 — 0 HIT, 22 refuted (verified colourings), 86 unknown at the 900-s wall; record data/m55/ask-W-plus-cross-depth2-k5.json; data/m54/critical-W-plus-cross-depth2.json moved to data/m55

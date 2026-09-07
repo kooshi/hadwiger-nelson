@@ -60,7 +60,7 @@ few hundred asks instead of 50 million pairs.
 
 | # | prediction | confidence |
 |---|---|---|
-| P1 | the 108 asks read 0 hits (P-M55-10 as registered) | high |
+| P1 | the 108 asks read 0 hits (P-M55-10 as registered) | high — **MEASURED 2026-09-07: 0 hits, 22 refuted, 86 undecided at 900 s** (M55 §R6) |
 | P2 | the symmetric thickening frees core-side vertices (T24's reading) | medium |
 | P3 | F_add at five on the depth-2 thickened stage has under 2,000 members, and every one is separated by the solver | medium |
 

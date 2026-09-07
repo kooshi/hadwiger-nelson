@@ -1,0 +1,898 @@
+{
+ "kind": "targeted-asks",
+ "stage": {
+  "name": "W-plus-cross-depth2",
+  "n": 10541,
+  "edges": 69910,
+  "fingerprint": "5cc40ce1af4f9aa9",
+  "source": "graph data/m55/W-plus-cross-depth2.json",
+  "exact": "data/m54/witness-exact-core-8over3.json",
+  "cross": "data/m54/cross-lattice-W-core-8over3.json",
+  "cross2": "/home/kooshi/source/lean-dir/data/m55/cross-lattice-depth2-W-core-8over3.json",
+  "W_points": 1175,
+  "P1_points": 63,
+  "P2_points": 9303
+ },
+ "k": 5,
+ "wall": 900.0,
+ "summary": {
+  "eq": {
+   "HIT": 0,
+   "refuted": 0,
+   "unknown": 0
+  },
+  "ne": {
+   "HIT": 0,
+   "refuted": 22,
+   "unknown": 86
+  }
+ },
+ "results": [
+  {
+   "pair": [
+    23,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    23,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    39,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    39,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    53,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    53,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    177,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    177,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    433,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    433,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    610,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    610,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    626,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    626,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    640,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    640,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    764,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    764,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1020,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1020,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1175,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1175,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1177,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1177,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1178,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1178,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1179,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1179,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1180,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1180,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1183,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1183,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1186,
+    1189
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1186,
+    1190
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1191
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1192
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1193
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    1194
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1198
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    1204
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    1205
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1206
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1210
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1214
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1215
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    1218
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1223
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1224
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    1225
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1345
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    1505
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    2186
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    2209
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    2817
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    2903
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    2904
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    3309
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    3827
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4148
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4449
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4706
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4844
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4933
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4992
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    4993
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    5093
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    5149
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    5393
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    5565
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1189,
+    8183
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1189,
+    9625
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    1191
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1192
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    1193
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    1194
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1198
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1204
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1205
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1206
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1210
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1214
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1215
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1218
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1223
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1224
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1225
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1345
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    1505
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    2186
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    2209
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    2817
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    2903
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    2904
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    3309
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    3827
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    4148
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    4449
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    4706
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    4844
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    4933
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    4992
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    4993
+   ],
+   "polarity": "ne",
+   "verdict": "refuted"
+  },
+  {
+   "pair": [
+    1190,
+    5093
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    5149
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    5393
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    5565
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    8183
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  },
+  {
+   "pair": [
+    1190,
+    9625
+   ],
+   "polarity": "ne",
+   "verdict": "unknown"
+  }
+ ],
+ "seconds": 85651.2,
+ "claim_scope": "one SAT ask per theorem-admitted candidate per polarity; HIT = UNSAT (solver-trusted, second encoding by vertex relabelling); refuted = a verified separating/uniting colouring"
+}
