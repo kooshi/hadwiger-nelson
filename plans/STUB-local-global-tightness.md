@@ -144,3 +144,12 @@ for after the lower bound. It produces no object by itself.
 `tools/fplane.py` (`chi`, `spectral`, `map`, `usable`), `data/fplane/`, `Proofs/HadwigerNelson/UnitQuadrance.lean`
 (`unitQuadrance.map`, the reduction as a functor), `Instances/FinitePlane11.lean`, `plans/M60-five-colour-residue-obstruction.md`,
 `plans/STUB-finite-plane-cores.md`, `plans/FIELD-WALL-THEOREM.md`.
+
+---
+
+**Addendum 2026-09-07 (the M60 close).** The compulsion-level face of this conjecture (FS-14) is proved: a sealing plane has no pair
+compulsion at its own chromatic number (kernel at 11; measured at 3, 7, 11, 19), so over a sealed field every pair compulsion at five
+colours is a congruence on the squared distance (`≡ 0` forced, `≡ 1` separated), and the two hex-shell gadgets are impossible one at a
+time. Derivation (d) here — the obstruction to gluing local colourings — now has its finite counterpart: the local colourings at a
+sealing prime are so free that they force nothing; what a 6-open field's plane forces at SIX colours (its own compulsion sets at
+k = 6 when χ ≥ 6, e.g. at 59 or 131) is the next computable object of this stub.

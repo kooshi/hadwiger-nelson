@@ -1,0 +1,55 @@
+{
+ "kind": "fplane-augment",
+ "stage": {
+  "name": "EI-seed-unit",
+  "n": 214,
+  "edges": 1004,
+  "fingerprint": "82721251bc0ccca5",
+  "source": "twodist.ei_H() unit edges (the seed's unit part; cheats are NOT edges here)",
+  "frame": {
+   "name": "EI4",
+   "meaning": "((a*sqrt3 + b*sqrt11)/12, (c + d*sqrt33)/12)",
+   "dim": 4
+  },
+  "unit_verified": "every edge verified by twodist.dist2_is (exact)",
+  "components": 1,
+  "forced_pair": [
+   205,
+   206
+  ],
+  "cheats": 446
+ },
+ "p": 11,
+ "k": 5,
+ "roots": {
+  "3": 5,
+  "11": 0
+ },
+ "cheats": 446,
+ "forced_pair": [
+  205,
+  206
+ ],
+ "forced_pair_residues": [
+  [
+   1,
+   0
+  ],
+  [
+   7,
+   0
+  ]
+ ],
+ "forced_pair_norm": 3,
+ "cheat_residue_norms": {
+  "4": 446
+ },
+ "cheats_same_residue": 0,
+ "distinct_cheat_residue_pairs": 102,
+ "new_augmenting_pairs": 102,
+ "augmented_edges": 828,
+ "colourable": false,
+ "colourable_evidence": "solver-unsat (untrusted)",
+ "seconds": 0.0,
+ "claim_scope": "the plane at p augmented by the cheats' residue pairs (each cheat's two residues joined); colourable on a verified colouring or the solver's UNSAT (untrusted); identifies_forced_pair on the solver's UNSAT of the pinned-apart instance (untrusted) \u2014 a SAT there would be a proper pullback separating the forced pair, which the certified forcing forbids (asserted)"
+}

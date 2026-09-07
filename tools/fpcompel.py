@@ -18,6 +18,7 @@ Consequences upstream, for a certificate reduced at p with a pair at squared dis
     python3 tools/fpcompel.py filter --heule510 --p 11 --k 5 --pairs "0,1;0,7"          # named pairs of a stage
     python3 tools/fpcompel.py augment --seed --p 11 --k 5                               # the seed's cheats' residue pairs on the plane
     python3 tools/fpcompel.py augment --object LABEL --sidecar build/m51-edges-LABEL+cull149.json --p 11 --k 5
+    python3 tools/fpcompel.py arity --p 11 --k 5                                        # the plane's arity-3 compulsions (M45's vocabulary), up to translation
     python3 tools/fpcompel.py self-test
 
 What a record licenses. `sets`: `in_F: false` / `in_S: false` carry a VERIFIED colouring (or the table's own coincidence); `in_S: true`
@@ -174,6 +175,73 @@ def cmd_sets(a):
     return rec
 
 
+# ---------------------------------------------------------------------- the reduction of K-frame points, p-adically
+def hensel_root(d: int, p: int, N: int) -> int:
+    """The p-adic square root of d with residue sqrt_mod(d, p), modulo p^N (Newton at a fixed modulus; p odd, p ∤ d)."""
+    r = FP.sqrt_mod(d, p); assert r is not None and d % p, ("no root", d, p)
+    M = p ** N
+    for _ in range(N.bit_length() + 2):
+        r = (r - (r * r - d) * pow(2 * r, -1, M)) % M
+    assert (r * r - d) % M == 0
+    return r
+
+
+def reduce_K(ch, p: int, N: int = 40):
+    """Residues at a prime above p of a stage whose points lie in K = Q(√3, √11) or K(√m), for p usable: every point is read
+    p-adically — the coefficients of the basis elements whose radicand p does not divide are evaluated with Hensel-lifted roots
+    modulo p^N, the sum is divided EXACTLY by the point's denominator (a denominator divisible by p is fine when the point is
+    p-integral, which every vertex of a connected unit-distance graph with one integral vertex is), and the basis elements whose
+    radicand p DOES divide (√11 and √33 at p = 11) vanish modulo the prime: their p-adic valuation is odd, hence ≥ 1 on an
+    integral point. An M58 reduce_stage that inverts the denominator modulo p is the v_p(denominator) = 0 case of this."""
+    fr = ch.frame.name
+    if fr == "EI4":
+        # ((a√3 + b√11)/12, (c + d√33)/12) with a, b, c, d exact (integers on the seed; Fractions on a descent object — never truncated)
+        pts16 = [((Fr(0), Fr(aa) / 12, Fr(bb) / 12, Fr(0)), (Fr(0),) * 4, (Fr(cc) / 12, Fr(0), Fr(0), Fr(dd) / 12), (Fr(0),) * 4) for aa, bb, cc, dd in ch.points]; m = None
+    elif fr == "K8":
+        pts16 = [(tuple(Fr(x) for x in P[0:4]), (Fr(0),) * 4, tuple(Fr(y) for y in P[4:8]), (Fr(0),) * 4) for P in ch.points]; m = None
+    elif fr.startswith("K") and fr.endswith("-16"):
+        m = int(fr[1:-3]); pts16 = [(tuple(P[0:4]), tuple(P[4:8]), tuple(P[8:12]), tuple(P[12:16])) for P in ch.points]
+    else:
+        raise SystemExit(f"fpcompel: frame {fr} is not a K-frame")
+    rads = {3: 3, 11: 11}
+    if m is not None:
+        rads[m] = m
+    for d in rads:
+        if d % p and FP.sqrt_mod(d, p) is None:
+            raise SystemExit(f"fpcompel: the stage carries √{d}, a non-residue modulo {p}: {p} is not usable for this stage")
+    M = p ** N
+    lift = {d: (0 if d % p == 0 else hensel_root(d, p, N)) for d in rads}
+    # basis (1, √3, √11, √33) for the A-part; times √m for the B-part; a factor whose radicand p divides makes the term vanish
+    def coeff_basis(withm: bool):
+        b = []
+        for rad in (1, 3, 11, 33):
+            val = 1
+            for q in (3, 11):
+                if rad % q == 0:
+                    val = None if (lift[q] == 0 or val is None) else val * lift[q] % M
+            if withm:
+                val = None if (val is None or lift[m] == 0) else val * lift[m] % M
+            b.append(val)
+        return b
+    bA, bB = coeff_basis(False), (coeff_basis(True) if m is not None else [None] * 4)
+    def residue(coeffs, basis):
+        d = 1
+        for c in coeffs:
+            d = d * c.denominator // __import__("math").gcd(d, c.denominator)
+        S = sum(int(c * d) * b for c, b in zip(coeffs, basis) if b is not None) % M
+        v = 0; dd = d
+        while dd % p == 0:
+            dd //= p; v += 1
+        assert S % (p ** v) == 0, f"INSTRUMENT CATASTROPHE: a point is not {p}-integral (denominator valuation {v}, numerator valuation lower)"
+        return (S // (p ** v)) * pow(dd, -1, p) % p
+    red = []
+    for xA, xB, yA, yB in pts16:
+        x = residue(list(xA) + list(xB), bA + bB); y = residue(list(yA) + list(yB), bA + bB)
+        red.append((x, y))
+    roots = {d: (FP.sqrt_mod(d, p) if d % p else 0) for d in rads}
+    return red, roots
+
+
 # ---------------------------------------------------------------------- stages, reduced
 def roots_for(rads, p: int) -> dict:
     return {d: FP.sqrt_mod(d, p) for d in rads}
@@ -183,20 +251,15 @@ def reduce_chunk(ch, p: int):
     """Residues of a chunk at a degree-one prime above p; every unit edge must land on the circle (the homomorphism check)."""
     fr = ch.frame.name
     if fr.startswith("field16"):
-        rads = ch.frame.primes
-    elif fr == "EI4" or fr == "K8":
-        rads = [3, 11]
-    elif fr.startswith("K") and fr.endswith("-16"):
-        rads = [3, 11, int(fr[1:-3])]
+        # a radicand with no residue gets None: reduce_stage then demands every coordinate's coefficient on it be zero
+        # (Heule-510 is √7-free inside the 16-basis), and names the basis element otherwise
+        roots = {d: FP.sqrt_mod(d, p) for d in ch.frame.primes}
+        try:
+            red = FP.reduce_stage(ch, p, roots)
+        except AssertionError as e:
+            raise SystemExit(f"fpcompel: the stage carries a radical with no residue modulo {p} (roots {roots}): {e}")
     else:
-        raise SystemExit(f"fpcompel: frame {fr} not handled")
-    roots = {}
-    for d in rads:
-        r = FP.sqrt_mod(d, p)
-        if r is None:
-            raise SystemExit(f"fpcompel: the stage carries √{d}, which has no residue modulo {p} ({d} is a non-residue): {p} is not usable for this stage")
-        roots[d] = r
-    red = FP.reduce_stage(ch, p, roots)
+        red, roots = reduce_K(ch, p)
     onc = sum(1 for u, v in ch.edges if norm(p, ((red[u][0] - red[v][0]) % p, (red[u][1] - red[v][1]) % p)) == 1)
     assert onc == len(ch.edges), f"INSTRUMENT CATASTROPHE: {len(ch.edges) - onc} of {len(ch.edges)} unit edges are NOT on the circle mod {p}"
     return red, roots
@@ -235,17 +298,17 @@ def assemble_ask_stage(ask_path: Path):
     key = {}
     for c in cands:
         x = q4_to_mp(c[0:4], c[4:8], m, dps); y = q4_to_mp(c[8:12], c[12:16], m, dps)
-        key[(mp.nstr(x, 40), mp.nstr(y, 40))] = c
+        key[(mp.nstr(x, 30), mp.nstr(y, 30))] = c
     exact_pts = []; missing = []
     for i, (xs, ys) in enumerate(pts):
-        kk = (mp.nstr(mp.mpf(xs), 40), mp.nstr(mp.mpf(ys), 40))
+        kk = (mp.nstr(mp.mpf(xs), 30), mp.nstr(mp.mpf(ys), 30))
         if kk in key:
             exact_pts.append(tuple(Fr(n_, d_) for n_, d_ in key[kk]))
         else:
             missing.append(i)
     if missing:
         raise SystemExit(f"fpcompel: {len(missing)} of {n} stage points have no exact candidate in {st['exact']}, {st['cross']}, {st['cross2']} (first {missing[:5]})")
-    ch = AD.Chunk(st["name"], exact_pts, edges, AD.FrameKExt16(m), f"assembled exactly from {st['exact']} + the two cross-lattice pools, matched to the graph's 60-digit points at 40 digits", "exact records")
+    ch = AD.Chunk(st["name"], exact_pts, edges, AD.FrameKExt16(m), f"assembled exactly from {st['exact']} + the two cross-lattice pools, matched to the graph's 60-digit points at 30 digits (the graph's strings carry fewer true digits than they print)", "exact records")
     return ch, d
 
 
@@ -437,6 +500,116 @@ def cmd_augment(a):
     return rec
 
 
+# ---------------------------------------------------------------------- arity: compulsions of the plane at arity m (M45's vocabulary)
+def orthogonal_group(p: int):
+    """O(2, F_p): the 2(p+1) norm-preserving linear maps, as (a, b, c, d) matrices [[a, b], [c, d]]."""
+    circ = FP.circle(p)
+    return [(a, b, (-b) % p, a) for a, b in circ] + [(a, b, b, (-a) % p) for a, b in circ]
+
+
+def harvest(p: int, col, extra: int = 0, k: int | None = None, seed: int = 0):
+    """Every translate of every O(2)-image of the table (2(p+1)·p² proper colourings), plus `extra` random solver models."""
+    import random
+    cols = []
+    for a, b, c, d in orthogonal_group(p):
+        img = {(x, y): col[((a * x + b * y) % p, (c * x + d * y) % p)] for x in range(p) for y in range(p)}
+        for tx in range(p):
+            for ty in range(p):
+                cols.append([img[((x + tx) % p, (y + ty) % p)] for x in range(p) for y in range(p)])
+    if extra:
+        E, _ = FP.ud_edges(p); n = p * p; rng = random.Random(seed)
+        for _ in range(extra):
+            pins = [(0, 0)] + [(rng.randrange(1, n), rng.randrange(k)) for _ in range(3)]
+            st, cc = FP.colourable(n, E, k, pins=pins)
+            if st == "sat":
+                cols.append(cc)
+    return cols
+
+
+PATTERNS3 = {"all-same": [(0, 1, True), (0, 2, True), (1, 2, True)], "01|2": [(0, 1, True), (0, 2, False), (1, 2, False)],
+             "02|1": [(0, 2, True), (0, 1, False), (1, 2, False)], "12|0": [(1, 2, True), (0, 1, False), (0, 2, False)],
+             "all-distinct": [(0, 1, False), (0, 2, False), (1, 2, False)]}
+
+
+def pattern_sat(p: int, k: int, E, S, constraints, wall=None):
+    """Is there a proper k-colouring of the plane realizing the pattern (pairs of positions equal / distinct) on S?"""
+    from pysat.solvers import Solver
+    n = p * p; var = lambda v, c: v * k + c + 1
+    cl = [[var(v, c) for c in range(k)] for v in range(n)]
+    cl += [[-var(v, c1), -var(v, c2)] for v in range(n) for c1 in range(k) for c2 in range(c1 + 1, k)]
+    cl += [[-var(u, c), -var(v, c)] for u, v in E for c in range(k)]
+    cl.append([var(S[0], 0)])
+    for i, j, eq in constraints:
+        u, v = S[i], S[j]
+        if eq:
+            cl += [[-var(u, c), var(v, c)] for c in range(k)] + [[var(u, c), -var(v, c)] for c in range(k)]
+        else:
+            cl += [[-var(u, c), -var(v, c)] for c in range(k)]
+    with Solver(name="cadical153", bootstrap_with=cl) as s:
+        r = s.solve()
+        m = s.get_model() if r else None
+    if not r:
+        return "unsat", None
+    cc = [next(c for c in range(k) if m[var(v, c) - 1] > 0) for v in range(n)]
+    assert all(cc[u] != cc[v] for u, v in E), "INSTRUMENT CATASTROPHE: improper model"
+    for i, j, eq in constraints:
+        assert (cc[S[i]] == cc[S[j]]) == eq, "INSTRUMENT CATASTROPHE: the model does not wear the pattern"
+    return "sat", cc
+
+
+def arity3(p: int, k: int, table_path: Path | None = None, extra: int = 200):
+    """Every arity-3 compulsion of UD(F_p,2) at k colours, up to translation (triples through the origin): observe on the
+    harvested colourings, confirm the survivors by SAT."""
+    t0 = time.time()
+    table_path = table_path or DATA / (f"chi-p{p}.json" if (DATA / f"chi-p{p}.json").exists() else f"chi-p{p}-k{k}.json")
+    col, ktab = load_table(table_path, p); assert ktab == k
+    E, deg = FP.ud_edges(p); n = p * p; adj = set(E)
+    isadj = lambda u, v: (min(u, v), max(u, v)) in adj
+    cols = harvest(p, col, extra=extra, k=k)
+    triples = [(0, a, b) for a in range(1, n) for b in range(a + 1, n)]
+    # admissible (triple, pattern): equal positions non-adjacent (PartialColoring)
+    questions = []
+    for S in triples:
+        for name, cons in PATTERNS3.items():
+            if all(not isadj(S[i], S[j]) for i, j, eq in cons if eq):
+                questions.append((S, name))
+    # observe
+    realized = set()
+    for S, name in questions:
+        key = (S, name)
+        cons = PATTERNS3[name]
+        for cc in cols:
+            if all((cc[S[i]] == cc[S[j]]) == eq for i, j, eq in cons):
+                realized.add(key); break
+    survivors = [q for q in questions if q not in realized]
+    # confirm
+    compulsions = []; sat_extra = 0
+    for S, name in survivors:
+        st, cc = pattern_sat(p, k, E, S, PATTERNS3[name])
+        if st == "sat":
+            sat_extra += 1; cols.append(cc)
+        else:
+            compulsions.append({"triple": list(S), "pattern": name})
+    rec = dict(kind="fplane-arity", p=p, k=k, m=3, table_file=str(table_path.relative_to(ROOT)), harvested_colourings=len(cols) - sat_extra,
+               triples_through_origin=len(triples), admissible_questions=len(questions), observed_realized=len(realized), survivors_to_sat=len(survivors),
+               sat_realized=sat_extra, compulsions=compulsions, seconds=round(time.time() - t0, 1),
+               claim_scope="arity-3 compulsions of the plane at k colours, up to translation (every triple contains the origin); a question is realized on a "
+                           "verified colouring (harvest or solver model) or compelled on the solver's UNSAT (untrusted); complete over all admissible "
+                           "(triple, pattern) pairs — so an empty list is 'no arity-3 compulsion' (solver-trusted) and arityFloor ≥ 4")
+    line = (f"[fpcompel] arity 3 of UD(F_{p},2) at k={k}: {len(questions)} admissible (triple, pattern) questions over {len(triples)} triples through the origin; "
+            f"{len(realized)} realized on {len(cols) - sat_extra} harvested colourings, {sat_extra} more by solver models, "
+            f"{len(compulsions)} COMPELLED (solver UNSAT)" + (f": arityFloor = 3, e.g. {compulsions[0]}" if compulsions else ": no arity-3 compulsion, arityFloor ≥ 4") + f"; {rec['seconds']}s")
+    return rec, line
+
+
+def cmd_arity(a):
+    rec, line = arity3(a.p, a.k, Path(a.table) if a.table else None, a.extra); print(line)
+    DATA.mkdir(parents=True, exist_ok=True)
+    path = Path(a.out) if a.out else DATA / f"arity3-p{a.p}-k{a.k}.json"
+    path.write_text(json.dumps(rec, indent=1)); print(f"  wrote {path}")
+    return rec
+
+
 # ---------------------------------------------------------------------- self-test
 def self_test():
     fails = []
@@ -490,6 +663,7 @@ def main():
     s.add_argument("--p", type=int, required=True); s.add_argument("--k", type=int, required=True); s.set_defaults(f=cmd_filter)
     s = sub.add_parser("augment"); s.add_argument("--seed", action="store_true"); s.add_argument("--object"); s.add_argument("--sidecar"); s.add_argument("--all-live", action="store_true")
     s.add_argument("--p", type=int, required=True); s.add_argument("--k", type=int, required=True); s.add_argument("--wall", type=float); s.add_argument("--out"); s.set_defaults(f=cmd_augment)
+    s = sub.add_parser("arity"); s.add_argument("--p", type=int, required=True); s.add_argument("--k", type=int, required=True); s.add_argument("--table"); s.add_argument("--extra", type=int, default=200); s.add_argument("--out"); s.set_defaults(f=cmd_arity)
     s = sub.add_parser("self-test"); s.set_defaults(f=lambda a: sys.exit(0 if self_test() else 1))
     a = ap.parse_args(); a.f(a)
 

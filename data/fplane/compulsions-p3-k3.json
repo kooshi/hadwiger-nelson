@@ -1,0 +1,72 @@
+{
+ "kind": "fplane-compulsions",
+ "p": 3,
+ "k": 3,
+ "table_file": "data/fplane/chi-p3.json",
+ "n": 9,
+ "degree": 4,
+ "norm_classes": 2,
+ "table_proper": true,
+ "table_periods": [
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   1
+  ]
+ ],
+ "table_aperiodic": false,
+ "classes": {
+  "1": {
+   "rep": [
+    0,
+    1
+   ],
+   "size": 4,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": true,
+   "evidence_S": "properness (the circle is the edge set)"
+  },
+  "2": {
+   "rep": [
+    1,
+    1
+   ],
+   "size": 4,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     1,
+     2
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "F_classes": [],
+ "S_classes": [
+  1
+ ],
+ "unknown_classes": [],
+ "exact_by_enumeration": true,
+ "proper_colourings_enumerated": 12,
+ "seconds": 0.0,
+ "claim_scope": "F: a class is OUT on one verified colouring not periodic at it (the table, or a solver model), IN only on the solver's UNSAT (untrusted) or, at p*p \u2264 16, by exhaustive enumeration; S: OUT on a verified coincidence (table member or solver model), IN on UNSAT (untrusted) or enumeration; the circle (norm 1) is IN by properness. The kernel holds p = 11 only."
+}

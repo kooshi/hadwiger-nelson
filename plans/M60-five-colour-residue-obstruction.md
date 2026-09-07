@@ -426,3 +426,121 @@ free — with its falsifier); the Frontier paragraph; the memory file.
 
 **Applied to the skeleton (this commit):** every rename above; the floor's upper end; the positive example; the two `#guard`s;
 both module docs; the probe regenerated from the renamed modules with the proofs substituted — green in 3.4 s.
+
+## §R. Results (M60, 2026-09-07 — the five-colour residue obstruction)
+
+### §R0. What shipped
+
+**Kernel** (`Proofs/HadwigerNelson/ResidueObstruction.lean`, `Instances/ResidueObstruction11.lean`; standard three axioms — 630
+declarations clean, 5 declared purchases, lint passed; the whole theory elaborates in 3.4 s including both kernel decides):
+`Forces.image`/`Separated.image` (compulsions map forward along any homomorphism); `addCayleyTranslate` (translation is a hom of
+every Cayley graph — Mathlib's adjacency lemma, our hom); `forces_iff_forces_zero_sub`/`separated_iff_separated_zero_sub` (every
+compulsion of a Cayley graph reduces to the origin); `not_forces_zero_of_not_periodic` (through Mathlib's `Function.Periodic`) and
+`not_separated_zero_of_coincides` (one colouring refutes one origin compulsion); `Aperiodic`, `CoincidesAtNonedges` (decidable);
+**`forces_iff_eq_of_aperiodic`, `separated_iff_adj_of_coincides`, `three_le_arityFloor_of_aperiodic_coincides`** (a Cayley graph
+coloured by one good table has no arity-2 compulsion); `Forces.image_eq_of_aperiodic`, `Separated.image_adj_of_coincides`;
+**`Forces.quad_sub_eq_zero`, `Separated.quad_sub_eq_one`** (the distance law at the level of quadrance, no `r`);
+`UDCert.drawing_quad` (the quadrance of a drawn difference IS the residue of the stored squared distance — `drawing_adj` is its
+`r = 1` face), `coord_distSq`, `drawing_quad_of_distSq`, `not_forces_of_distSq`, `not_separated_of_distSq`, the `PairsAt` wrappers.
+At 11: `finitePlane11_aperiodic`, `finitePlane11_coincides` (two decides over the certified table), **`finitePlane11_forces_iff`
+(`↔ u = v`), `finitePlane11_separated_iff` (`↔ Adj u v`), `three_le_arityFloor_finitePlane11`, `arityFloor_finitePlane11_le_five`**
+(the bracket `{3, 4, 5}`), `UDCert.residue_eq_of_forces_11`, `residue_adj_of_separated_11`, `not_forces_of_pairsAt_11`,
+`not_separated_of_pairsAt_11`, **`not_separated_sqrt3_11`, `not_separated_two_11`**, `not_forces_two_11`, `not_forces_five_11`;
+spec: Heule-510's forced pairs have equal residues and its edges adjacent ones (through the theorem), the hex shell's first
+`√3`-pair and first diameter through the API; reds: the 3-plane's table proper and periodic (`(x + y) mod 3`, period `(1, 2)`);
+`#guard`s pinning `3, 4 ≢ 0, 1`, `12 ≡ 1`, `25 ≢ 0, 1` modulo 11, and the two table properties through the compiled evaluator.
+
+**Instrument** `tools/fpcompel.py` (`sets`, `filter`, `augment`, `arity`, `self-test` with 8 planted controls): the residue
+reduction of K-frame stages done p-adically with exact division (`reduce_K`: a denominator divisible by the ramified prime is
+fine on an integral point; the odd-valuation `√11`-terms vanish), the M55 stage assembled exactly from its three records and
+certified by every edge landing on the circle. **Records** `data/fplane/compulsions-p{3,7,11,19}-k*.json`, `augment-EI-seed-p11.json`,
+`augment-object-…-standing149-p11.json`, `residue-filter-W-plus-cross-depth2-p11.json`, `residue-filter-heule510-p11.json`,
+`arity3-p11-k5.json`; README rows.
+
+### §R1. The derivation, and what the measurements added
+
+The transfer is two lines (§S1) and the whole content is the plane's own compulsion structure, which ONE table decides (§S2). What
+the measurements added beyond the derivation: **every sealing plane with a table is pairwise free at its own chromatic number** —
+`F_p(χ) = {0}`, `S_p(χ) = N₁` at 3 (all twelve proper 3-colourings enumerated), 7, 11, 19 (the tables aperiodic; every non-unit
+class identified by a verified colouring — at 7 and 19 by a member of the class in the single table, so no solver verdict is
+load-bearing anywhere); and the sealing plane at 11 has **no arity-3 compulsion either** (31,602 admissible triple-pattern
+questions through the origin, every one realized on a verified colouring: 31,598 on the table's 2,904 translates and rotations plus
+170 solver samples, 4 on solver models), so `arityFloor(UD(𝔽₁₁,2), 5) ∈ {4, 5}` — the bracket M48 measured on de Grey's witness.
+
+### §R2. The kernel, read aloud against the claims
+
+"Over a 5-sealed field a pair forced equal at five colours has residues that coincide, and a virtual edge has residues that are
+adjacent; so a `√3`-pair or a distance-2 pair is neither." The formal statements say exactly that for `√7`-free tower certificates
+with `11 ∤ D` through `res11` — the same hypotheses M58's reduction takes, plus the pair's class distance as a `PairsAt` line.
+NOT claimed: the field-level statement (that every unit-distance graph in Heule's field is such a certificate — the hand argument),
+anything at a prime whose plane refuses five colours (no table, no hypothesis), anything at 19 (tools only). The plane-level
+statements (`finitePlane11_forces_iff`, `…_separated_iff`, the floor bracket) are about the finite graph alone and are unconditional.
+
+### §R3. The measurements
+
+| what | reading |
+|---|---|
+| `sets` at 3 / 7 / 11 / 19 (k = 3 / 4 / 5 / 5) | `F = {0}`, `S = N₁` at all four; the 3-table has periods `(1,2)`, `(2,1)` (F decided by enumeration); 7, 11, 19 aperiodic; S: every non-unit class identified by a coincidence of the single table (5 / 9 / 17 classes) — no solver UNSAT anywhere |
+| the seed's augmented plane at 11 | 446 cheats → 102 distinct residue pairs, all of norm 4; forced pair residues at norm 3; the plane plus those 102 pairs (828 edges) is NOT 5-colourable (solver UNSAT) — no pullback is proper on the `{1,2}`-graph: the seed's forcing lives entirely outside the residue family |
+| the it-4 object's augmented plane | 149 standing cheats → 64 pairs (norm 4), 344 live → 102; both augmented planes refuse five (solver UNSAT) — the same reading on the descended object |
+| the M55 asks re-read by residue (`W-plus-cross-depth2`, 10,541 points assembled exactly, all 69,910 edges on the circle at 11, all 121 residues hit) | 108 asks; of the 86 UNDECIDED at M55's 900-s wall, **35 are settled by the theorem** with a verified uniting colouring each (norms 3: 5, 4: 6, 5: 5, 7: 5, 9: 8, 10: 6), **51 are residue-allowed at norm 1** (41 distinct exact squared distances, 41 cross–cross pairs, 10 W–cross); of the 22 solver-refuted, 10 are also refuted by residue |
+| `arity 3` of the plane at 11 | 0 compulsions of 31,602 questions; every question realized on a verified colouring; `arityFloor ∈ {4, 5}` |
+| Heule-510 pairs | an edge: forces-impossible, separated-allowed; the non-edge `(1, 2)` at residue norm 3: both impossible |
+
+### §R4. Registered predictions, scored
+
+| # | prediction | result |
+|---|---|---|
+| P1 | `F₁₁(5) = {0}` | **met** at subplanning (the table has no period; kernel) |
+| P2 | `S₁₁(5) = N₁` | **met** at subplanning (kernel) |
+| P3 | every seed cheat's residues in `S₁₁ ∪ F₁₁` | **refuted by derivation** — the cheats (r = 4) and the forced pair (r = 25 ≡ 3) lie in neither, and that IS the theorem (`not_forces_two_11`, `not_separated_two_11`, `not_forces_five_11`); measured: all 446 cheat residue pairs at norm 4, the forced pair at norm 3 |
+| P4 | `S₁₉(5) = N₁` | **met** (phase 0; by the table's own coincidences per class) |
+| P5 | `S₇(4) ⊋ N₁` | **refuted** — the 7-plane is pairwise free too; the single table's three extra never-coincident classes measured the table (G21) |
+| P6 | the seed's augmented plane at 11 is not 5-colourable | **met** (solver UNSAT); the descended object's likewise |
+| P7 | ≥ 60 of the 86 undecided M55 asks settled by residue | **refuted**: 35 settled, 51 residue-allowed — 59 % of the theorem-admitted candidates sit at residue norm 1, far from the uniform 1/11 the prediction assumed; the reason is open (T44) |
+| P8 | `arityFloor(UD(𝔽₁₁,2), 5) ∈ {4, 5}` | **met**, by verified colourings alone |
+
+### §R5. Incidents and instrument facts
+
+* **The seed-frame packer truncates a descent object's coordinates.** M58's `reduce_stage` EI4 branch reads `int(aa)` on coordinates
+  scaled by 12, exact on the seed and silently wrong on the it-4 object (denominators beyond 12); the reduction failed its own circle
+  check (824 of 13,796 edges off the circle — the INSTRUMENT CATASTROPHE assertion fired as designed). The fix is not a bigger
+  denominator but the right arithmetic: at the ramified prime the reduction is p-adic — Hensel-lifted roots for the residue radicands,
+  exact division by the denominator's p-power (licensed by the point's integrality, which connectivity through unit edges guarantees),
+  and the odd-valuation `√11`-terms dropped (`reduce_K`). M58's branch is the `v_p(denominator) = 0` case.
+* **A planted control was wrong**: the 3-plane's table is `(x + y) mod 3`, whose period is `(1, 2)`, not the `(1, 1)` I had planted;
+  the kernel's decide had found the true period, the tool's self-test caught my control. Corrected in both.
+* **The M55 stage's decimal strings carry fewer true digits than they print**: matching at 40 digits left 1,097 of 10,541 points
+  unmatched, at 30 digits every point matched and the circle check certified the assembly.
+* **A `√7`-free stage in the 16-basis needs a `None` root, not a refusal** (`fplane.reduce_stage`'s convention); the filter now
+  passes `None` and reports the basis element if a coefficient on it is nonzero.
+* A bare `rw` fails across the `addCayley`/`unitQuadrance` coercions where a typed `have` succeeds (§M2).
+
+### §R6. What the milestone did not do
+
+The kernel instance at 19 (its table decides `S` per class through rotations, which the kernel statement does not use — eighteen
+small tables or a rotation lemma would do it; an afternoon, not run). The field-level statement stays a hand argument. The 51
+residue-allowed M55 asks are not decided here. Arity 4 of the plane (4.2 million questions) not run.
+
+### §R7. What this changes for the hunt
+
+1. **"Sealed" now has a compulsion-level meaning, and it bites one gadget at a time.** Over any field with a usable prime whose plane
+   is 5-colourable, no finite unit-distance graph separates a `√3`-pair or a distance-2 pair at five colours, and none forces either
+   equal — each of the two gadgets `six_le_chromaticNumber_plane_of_forced_pairs` needs is impossible separately (kernel at 11 for the
+   `√7`-free tower). The 6-forcer's field must be 6-open for a reason with the same shape as the 5-forcer's escape from 2: the sealing
+   plane's own compulsions are trivial, so nothing pulled back through it can be rigid.
+2. **The descent is closed by theorem at the level it worked at.** Every cheat (distance 2) and the forced pair (distance 5) of the
+   Exoo–Ismailescu seed are residue-blocked at 11 — no unit material over K, K(√5), K(√247) or Heule's field could ever have made a
+   cheat a virtual edge or the pair forced at five colours. T17 (the 4-colour residue obstruction inside K) has its 5-colour analogue,
+   with the distances named: forced-equal needs `11 | d²`, a virtual edge needs `d² ≡ 1 (mod 11)`.
+3. **A free first pass for every five-colour ask over a sealed field**: `fpcompel.py filter` settles a pair's compulsion question by
+   residue in milliseconds with a verified colouring — 35 of M55's 86 undecided asks fell to it. The residue-ALLOWED distances
+   (`d² ≡ 1`: `2√3`, `8/3`, `√23`, `√34`, `3√5`, `10`, …) are the only places a five-colour virtual edge can live over such a field —
+   a design vocabulary, and the 51 residue-allowed asks are its first census (FS-16).
+4. **The sealing planes are pairwise free at their own chromatic number** (four primes; at 11 also arity-3 free, floor in `{4, 5}`)
+   — the finite planes carry their χ the way de Grey's witness carries its five: with no small compulsion, all the way up to the
+   degree bound (G31's finite analogue, G47).
+
+### §R8. Left in flight at the close
+
+Nothing. The gate chain's second run (after a docstring correction) is recorded in `build/m60/gate-chain.log`.

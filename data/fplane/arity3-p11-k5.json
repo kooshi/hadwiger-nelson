@@ -1,0 +1,16 @@
+{
+ "kind": "fplane-arity",
+ "p": 11,
+ "k": 5,
+ "m": 3,
+ "table_file": "data/fplane/chi-p11.json",
+ "harvested_colourings": 3074,
+ "triples_through_origin": 7140,
+ "admissible_questions": 31602,
+ "observed_realized": 31598,
+ "survivors_to_sat": 4,
+ "sat_realized": 4,
+ "compulsions": [],
+ "seconds": 39.0,
+ "claim_scope": "arity-3 compulsions of the plane at k colours, up to translation (every triple contains the origin); a question is realized on a verified colouring (harvest or solver model) or compelled on the solver's UNSAT (untrusted); complete over all admissible (triple, pattern) pairs \u2014 so an empty list is 'no arity-3 compulsion' (solver-trusted) and arityFloor \u2265 4"
+}

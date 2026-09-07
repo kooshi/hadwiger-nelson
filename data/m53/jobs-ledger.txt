@@ -94,3 +94,5 @@
 2026-09-07T20:18:13Z after the M59 close (Kooshi): G46 documented, FS-15 minted (rank 2), programme/T41–T42 amended; NEXT M60 = FS-14 after his compaction
 2026-09-07T20:51:53Z M60 OPENED (FS-14): subplan §S written; phase 0 at opening — F_p = {0}, S_p = N_1 at p = 3, 7, 11, 19 (per-class SAT / enumeration, log build/m60/phase0-perclass.log)
 2026-09-07T21:10:51Z M60 gate chain launched (build → axioms → lint), logs build/m60/gate-*.log
+2026-09-07T21:15:08Z M60 gate GREEN (630 clean / 5 purchases, lint passed); phase B chain launched (sets 3/7/11/19, augment seed/object, filter M55 asks) → build/m60/phaseB.log
+2026-09-07T21:27:04Z M60 CLOSED — gate GREEN twice (630 clean / 5 purchases, lint); phase B records in data/fplane/; nothing in flight

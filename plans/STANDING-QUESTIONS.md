@@ -804,3 +804,11 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   refute the bold form and be the first colouring of a field plane that is local at no prime — the genre the upper-bound side
   needs either way.
 
+* **T43 — is the sealing plane's arity floor 4 or 5?** (M60.) `arityFloor(UD(𝔽₁₁,2), 5) ∈ {4, 5}`: `≥ 3` and `≤ 5` in the kernel,
+  no arity-3 compulsion by verified colourings (31,602 questions). Arity 4 is 4.2 million questions through the origin — the mask
+  engine's size. De Grey's witness sits at the same bracket (M48); a plane at exactly 4 would be the first object anywhere with a
+  compulsion strictly below the degree bound.
+* **T44 — why do the theorem-admitted five-colour candidates concentrate at residue norm 1?** (M60 §R3, FS-16.) Of M55's 86
+  undecided asks on the grown witness, 51 have residue difference of norm 1 at 11 — the residue-allowed class — against a uniform
+  1/11; they are 41 distinct exact squared distances, 41 of them cross–cross pairs. If structural (the critical-set localization and
+  the residue theorem selecting overlapping populations), the residue filter is weakest exactly where the localization admits.

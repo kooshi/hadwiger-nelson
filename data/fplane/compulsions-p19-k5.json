@@ -1,0 +1,463 @@
+{
+ "kind": "fplane-compulsions",
+ "p": 19,
+ "k": 5,
+ "table_file": "data/fplane/chi-p19-k5.json",
+ "n": 361,
+ "degree": 20,
+ "norm_classes": 18,
+ "table_proper": true,
+ "table_periods": [],
+ "table_aperiodic": true,
+ "classes": {
+  "1": {
+   "rep": [
+    0,
+    1
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": true,
+   "evidence_S": "properness (the circle is the edge set)"
+  },
+  "2": {
+   "rep": [
+    1,
+    1
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     1,
+     1
+    ],
+    "translate": [
+     0,
+     2
+    ]
+   }
+  },
+  "3": {
+   "rep": [
+    4,
+    5
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     5,
+     15
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "4": {
+   "rep": [
+    0,
+    2
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     2,
+     0
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "5": {
+   "rep": [
+    0,
+    9
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     0,
+     9
+    ],
+    "translate": [
+     0,
+     2
+    ]
+   }
+  },
+  "6": {
+   "rep": [
+    0,
+    5
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     3,
+     15
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "7": {
+   "rep": [
+    0,
+    8
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     1,
+     5
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "8": {
+   "rep": [
+    1,
+    8
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    2
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     1,
+     8
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "9": {
+   "rep": [
+    0,
+    3
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     0,
+     3
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "10": {
+   "rep": [
+    1,
+    3
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     3,
+     18
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "11": {
+   "rep": [
+    0,
+    7
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     0,
+     7
+    ],
+    "translate": [
+     0,
+     14
+    ]
+   }
+  },
+  "12": {
+   "rep": [
+    1,
+    7
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     5,
+     5
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "13": {
+   "rep": [
+    2,
+    3
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     2,
+     3
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "14": {
+   "rep": [
+    3,
+    9
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     4,
+     6
+    ],
+    "translate": [
+     0,
+     2
+    ]
+   }
+  },
+  "15": {
+   "rep": [
+    2,
+    7
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    1
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     2,
+     7
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  },
+  "16": {
+   "rep": [
+    0,
+    4
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     3,
+     8
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "17": {
+   "rep": [
+    0,
+    6
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     0,
+     6
+    ],
+    "translate": [
+     0,
+     1
+    ]
+   }
+  },
+  "18": {
+   "rep": [
+    1,
+    6
+   ],
+   "size": 20,
+   "in_F": false,
+   "evidence_F": "table",
+   "witness_F": [
+    0,
+    0
+   ],
+   "in_S": false,
+   "evidence_S": "table",
+   "witness_S": {
+    "member": [
+     6,
+     1
+    ],
+    "translate": [
+     0,
+     0
+    ]
+   }
+  }
+ },
+ "F_classes": [],
+ "S_classes": [
+  1
+ ],
+ "unknown_classes": [],
+ "exact_by_enumeration": false,
+ "proper_colourings_enumerated": null,
+ "seconds": 0.0,
+ "claim_scope": "F: a class is OUT on one verified colouring not periodic at it (the table, or a solver model), IN only on the solver's UNSAT (untrusted) or, at p*p \u2264 16, by exhaustive enumeration; S: OUT on a verified coincidence (table member or solver model), IN on UNSAT (untrusted) or enumeration; the circle (norm 1) is IN by properness. The kernel holds p = 11 only."
+}
