@@ -44,13 +44,13 @@ open SimpleGraph
 /-- **The table has no nonzero period**: for every nonzero `d ∈ 𝔽₁₁²` some point and its `d`-translate
 differ in colour. Decided over the 120 differences. -/
 theorem finitePlane11_aperiodic : Aperiodic finitePlane11Colouring := by
-  sorry
+  decide +kernel
 
 /-- **The table coincides at every off-circle difference**: for every nonzero `d` off the unit circle some
 point and its `d`-translate share a colour. Decided over the 108 such differences (at least four
 coincidences each, `tools/fpcompel.py`). -/
 theorem finitePlane11_coincides : CoincidesAtNonedges (finitePlane 11) finitePlane11Colouring := by
-  sorry
+  decide +kernel
 
 /-- The certified colouring function, bundled with its properness as the `Coloring` the general theorems
 take. Named by dot notation on the function so the two are one object, not two spellings. -/
@@ -197,7 +197,7 @@ def finitePlane3Colouring (v : ZMod 3 × ZMod 3) : Fin 3 :=
 example : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
     finitePlane3Colouring u ≠ finitePlane3Colouring v := by decide
 
-/-- … and it is NOT aperiodic — `(1, 1)` is a period — so `Aperiodic` is a real property of a table and
+/-- … and it is NOT aperiodic — it is `(x + y) mod 3`, so `(1, 2)` is a period — so `Aperiodic` is a real property of a table and
 the hypothesis of `Forces.image_eq_of_aperiodic` is load-bearing. (The 3-plane itself is pairwise free, by all
 twelve of its 3-colourings, `tools/fpcompel.py`; this one table does not show it.) -/
 example : ¬ Aperiodic finitePlane3Colouring := by decide

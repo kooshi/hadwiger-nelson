@@ -924,6 +924,26 @@ pairs at distance √3, nor at distance 2. -/
 -- the third instance (Instances/LiftObstruction19.lean): the 5-critical core of the triangle-free plane at 19 (138 vertices) is not a shadow (a 29-edge witness, pairing 342)
 #print axioms HadwigerNelson.core19_no_lift
 
+-- M60: the five-colour residue obstruction (ResidueObstruction.lean, Instances/ResidueObstruction11.lean) —
+-- compulsions map forward along homomorphisms; a Cayley graph coloured by one aperiodic table forces no pair
+-- and by one table coinciding at non-edges separates only edges (arity floor ≥ 3); the quadrance of a drawn
+-- difference is the residue of the stored squared distance; at 11: the sealing plane is pairwise free at
+-- five colours (floor in {3,4,5}), and no √7-free certificate with 11 ∤ D separates a √3- or distance-2
+-- pair or forces a distance-5 pair equal at five colours.
+#print axioms Forces.image
+#print axioms forces_iff_eq_of_aperiodic
+#print axioms separated_iff_adj_of_coincides
+#print axioms three_le_arityFloor_of_aperiodic_coincides
+#print axioms UDCert.drawing_quad
+#print axioms UDCert.not_separated_of_distSq
+#print axioms finitePlane11_forces_iff
+#print axioms finitePlane11_separated_iff
+#print axioms three_le_arityFloor_finitePlane11
+#print axioms arityFloor_finitePlane11_le_five
+#print axioms UDCert.not_separated_sqrt3_11
+#print axioms UDCert.not_separated_two_11
+#print axioms UDCert.not_forces_five_11
+
 -- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
 #print axioms mono_pair_of_clique
 #print axioms hexShell_pigeonhole

@@ -76,12 +76,28 @@ def addCayleyTranslate (S : Set A) (t : A) : addCayley S →g addCayley S where
 /-- A forced pair of a Cayley graph is forced at the origin, by its difference. -/
 theorem forces_iff_forces_zero_sub {x y : A} :
     Forces (addCayley S) k x y ↔ Forces (addCayley S) k 0 (y - x) := by
-  sorry
+  constructor
+  · intro h
+    have := h.image (addCayleyTranslate S (-x))
+    simpa only [addCayleyTranslate_apply, neg_add_cancel, neg_add_eq_sub] using this
+  · intro h
+    have := h.image (addCayleyTranslate S x)
+    have h2 : x + (y - x) = y := by abel
+    simp only [addCayleyTranslate_apply, add_zero] at this
+    rwa [h2] at this
 
 /-- A virtual edge of a Cayley graph is a virtual edge at the origin, by its difference. -/
 theorem separated_iff_separated_zero_sub {x y : A} :
     Separated (addCayley S) k x y ↔ Separated (addCayley S) k 0 (y - x) := by
-  sorry
+  constructor
+  · intro h
+    have := h.image (addCayleyTranslate S (-x))
+    simpa only [addCayleyTranslate_apply, neg_add_cancel, neg_add_eq_sub] using this
+  · intro h
+    have := h.image (addCayleyTranslate S x)
+    have h2 : x + (y - x) = y := by abel
+    simp only [addCayleyTranslate_apply, add_zero] at this
+    rwa [h2] at this
 
 /-! ### One table refutes one origin compulsion -/
 
@@ -89,13 +105,22 @@ theorem separated_iff_separated_zero_sub {x y : A} :
 somewhere, translated so that `t` sits at the origin, separates `0` from `d`. -/
 theorem not_forces_zero_of_not_periodic (col : (addCayley S).Coloring (Fin k)) {d : A}
     (h : ¬ Function.Periodic col d) : ¬ Forces (addCayley S) k 0 d := by
-  sorry
+  intro hf
+  refine h fun t => ?_
+  have ht : col (t + 0) = col (t + d) := hf (col.comap (addCayleyTranslate S t))
+  rw [add_zero] at ht
+  exact ht.symm
 
 /-- **`d` is separated at the origin only if no colouring ever coincides at it**: a colouring with
 `C (t + d) = C t`, translated so that `t` sits at the origin, identifies `0` and `d`. -/
 theorem not_separated_zero_of_coincides (col : (addCayley S).Coloring (Fin k)) {d : A}
     (h : ∃ t, col (t + d) = col t) : ¬ Separated (addCayley S) k 0 d := by
-  sorry
+  intro hs
+  obtain ⟨t, ht⟩ := h
+  refine hs (col.comap (addCayleyTranslate S t)) ?_
+  show col (t + 0) = col (t + d)
+  rw [add_zero]
+  exact ht.symm
 
 /-! ### The two properties of a table -/
 
@@ -119,20 +144,53 @@ instance [Fintype A] [DecidableEq A] (P : SimpleGraph A) [DecidableRel P.Adj] (c
 /-- **Forced pairs are trivial** when one colouring is aperiodic. -/
 theorem forces_iff_eq_of_aperiodic (col : (addCayley S).Coloring (Fin k)) (ha : Aperiodic col) {x y : A} :
     Forces (addCayley S) k x y ↔ x = y := by
-  sorry
+  constructor
+  · intro h
+    by_contra hne
+    have hd : y - x ≠ 0 := sub_ne_zero.mpr (Ne.symm hne)
+    exact not_forces_zero_of_not_periodic col (fun hp => hd (ha _ hp))
+      (forces_iff_forces_zero_sub.mp h)
+  · rintro rfl
+    exact fun _ => rfl
 
 /-- **Virtual edges are edges** when one colouring coincides at every non-edge difference. -/
 theorem separated_iff_adj_of_coincides (col : (addCayley S).Coloring (Fin k))
     (hc : CoincidesAtNonedges (addCayley S) col) {x y : A} :
     Separated (addCayley S) k x y ↔ (addCayley S).Adj x y := by
-  sorry
+  constructor
+  · intro h
+    by_contra hadj
+    rcases eq_or_ne x y with rfl | hne
+    · exact h col rfl
+    · have hd : y - x ≠ 0 := sub_ne_zero.mpr hne.symm
+      have hadj0 : ¬ (addCayley S).Adj 0 (y - x) := by
+        intro h0
+        have := (addCayley_adj_add_iff_right (d := x) (u := 0) (v := y - x)).mpr h0
+        have h2 : x + (y - x) = y := by abel
+        rw [add_zero, h2] at this
+        exact hadj this
+      exact not_separated_zero_of_coincides col (hc _ hd hadj0) (separated_iff_separated_zero_sub.mp h)
+  · exact Separated.of_adj
 
 /-- **No arity-2 compulsion at `k` colours**: arity 2 is exactly `Separated`/`Forces` (`compels_two_eq`,
 `compels_two_ne`), and both are trivial by the two `iff`s. -/
 theorem three_le_arityFloor_of_aperiodic_coincides (col : (addCayley S).Coloring (Fin k))
     (ha : Aperiodic col) (hc : CoincidesAtNonedges (addCayley S) col) :
     3 ≤ arityFloor (addCayley S) k := by
-  sorry
+  refine le_arityFloor_iff.mpr fun m ⟨T, q, hcomp⟩ => ?_
+  have h2 : (2 : ℕ∞) ≤ m := le_arityFloor_iff.mp (two_le_arityFloor ⟨col⟩) m ⟨T, q, hcomp⟩
+  by_contra hlt
+  have hm : m = 2 := by
+    have h2' : 2 ≤ m := by exact_mod_cast h2
+    have h3' : m < 3 := by exact_mod_cast not_le.mp hlt
+    omega
+  subst hm
+  have hT : Function.Injective T := hcomp.1.1
+  by_cases hq : q 0 = q 1
+  · obtain ⟨hne, hsep⟩ := (compels_two_eq hT hq).mp hcomp
+    exact hne ((separated_iff_adj_of_coincides col hc).mp hsep)
+  · have hf := (compels_two_ne hT hq).mp hcomp
+    exact absurd (hT ((forces_iff_eq_of_aperiodic col ha).mp hf)) (by decide)
 
 /-! ### The transfer, composed -/
 
@@ -154,13 +212,15 @@ variable {R : Type*} [CommRing R]
 /-- **Forced equal ⟹ the image difference has quadrance `0`.** -/
 theorem Forces.quad_sub_eq_zero (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
     (f : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) : quad (f u - f v) = 0 := by
-  sorry
+  have hfu : f u = f v := h.image_eq_of_aperiodic col ha f
+  rw [hfu, sub_self]
+  simp [quad]
 
 /-- **A virtual edge ⟹ the image difference has quadrance `1`.** -/
 theorem Separated.quad_sub_eq_one (col : (unitQuadrance R).Coloring (Fin k))
     (hc : CoincidesAtNonedges (unitQuadrance R) col) (f : G →g unitQuadrance R) {u v : V}
-    (h : Separated G k u v) : quad (f u - f v) = 1 := by
-  sorry
+    (h : Separated G k u v) : quad (f u - f v) = 1 :=
+  quad_eq_one_of_adj (h.image_adj_of_coincides col hc f)
 
 /-! ### Certificates: the quadrance of a drawn difference is the residue of the stored squared distance -/
 
@@ -176,7 +236,8 @@ theorem drawing_quad (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.Co
     quad (c.drawing φ hS u i - c.drawing φ hS u j) =
       u ^ 2 * φ (((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
         ((c.coord hS i).2 - (c.coord hS j).2) * ((c.coord hS i).2 - (c.coord hS j).2)) := by
-  sorry
+  simp only [drawing, quad, Prod.fst_sub, Prod.snd_sub, map_add, map_mul, map_sub]
+  ring
 
 /-- `coord_quadrance` at class distance `√r`: a pair stored at squared distance `r · D²` in `Q4` satisfies
 `Δx·Δx + Δy·Δy = r · D²` inside the subring. -/
@@ -185,14 +246,19 @@ theorem coord_distSq (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) {i j : 
     ((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
       ((c.coord hS i).2 - (c.coord hS j).2) * ((c.coord hS i).2 - (c.coord hS j).2) =
       ((r * (c.denom * c.denom) : ℤ) : S) := by
-  sorry
+  apply Subtype.ext
+  simp only [Pt.distSq, FastSq.sq_eq] at hp
+  push_cast
+  simpa only [coe_coord_fst, coe_coord_snd, Int.cast_mul] using hp
 
 /-- **The distance law.** A pair stored at squared distance `r · D²` is drawn at quadrance `r`. -/
 theorem drawing_quad_of_distSq (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) {u : R}
     (hu : u * c.denom = 1) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) :
     quad (c.drawing φ hS u i - c.drawing φ hS u j) = (r : R) := by
-  sorry
+  rw [c.drawing_quad φ hS u i j, c.coord_distSq hS hp, map_intCast]
+  push_cast
+  linear_combination (r : R) * (u * c.denom + 1) * hu
 
 /-- **A pair whose squared distance is not `0` in `R` is never forced equal** at `k` colours, whenever the
 plane over `R` has an aperiodic `k`-colouring. -/
@@ -201,7 +267,11 @@ theorem not_forces_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ 
     (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) (hr : (r : R) ≠ 0) :
     ¬ Forces (edgeGraph n c.edges) k i j := by
-  sorry
+  intro h
+  have := h.quad_sub_eq_zero col ha (c.drawingHom φ hS hu hv)
+  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 0 at this
+  rw [c.drawing_quad_of_distSq φ hS hu hp] at this
+  exact hr this
 
 /-- **A pair whose squared distance is not `1` in `R` is never a virtual edge** at `k` colours, whenever the
 plane over `R` has a `k`-colouring coinciding at every non-edge difference. -/
@@ -211,7 +281,11 @@ theorem not_separated_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (
     {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) (hr : (r : R) ≠ 1) :
     ¬ Separated (edgeGraph n c.edges) k i j := by
-  sorry
+  intro h
+  have := h.quad_sub_eq_one col hc (c.drawingHom φ hS hu hv)
+  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 1 at this
+  rw [c.drawing_quad_of_distSq φ hS hu hp] at this
+  exact hr this
 
 /-- `not_forces_of_distSq` for a pair listed in a `PairsAt` certificate. -/
 theorem not_forces_of_pairsAt [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
