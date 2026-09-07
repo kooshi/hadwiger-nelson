@@ -1155,7 +1155,11 @@ next derivation — the five-colour residue obstruction at 11 — is minted as F
 
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
-(WORKFLOW step 9). **Re-ranked at the M59 close, 2026-09-06:** FS-11 CLOSED as M59 (the lift is first-order rigidity; a finite-plane subgraph lifts only if it
+(WORKFLOW step 9). **Amended 2026-09-07 (Kooshi: document the rule, mint the conjecture):** G46 holds the rule the two finite-plane milestones taught
+(recognize the classical theory first; the search only produces its instances) and its ranking corollary; **FS-15, the local–global
+tightness conjecture** (`plans/STUB-local-global-tightness.md` — χ(F²) equals its best local bound; first digit: is any finite plane
+exactly 6-chromatic; bold form: χ(ℝ²) = 7) enters at rank 2, the conjecture whose compulsion-level face FS-14 is. The order: FS-14,
+FS-15, FS-6, FS-12, FS-13, FS-2, FS-8, FS-4, FS-9, FS-10, FS-5. **Re-ranked at the M59 close, 2026-09-06:** FS-11 CLOSED as M59 (the lift is first-order rigidity; a finite-plane subgraph lifts only if it
 is a shadow; the 1581 recovered from its residues, its merged image obstructed in the kernel; the hub scan). The table's top, under the
 programme's rule (derivations first): **rank 1 FS-14, the five-colour residue obstruction at 11** (`plans/STUB-five-colour-residue-obstruction.md`
 — over a 5-sealed field every pulled-back 5-colouring is constant on residue classes, so a pair compulsion at five colours has its
@@ -2783,6 +2787,34 @@ record shows what was believed, what was measured, and what is now proved.
   whose support is forced rainbow at five colours are its kills (A1), decidable on the object without the point (FS-12's D1).
   Composes with G43/G44 (the sieve's two faces), G37 (the endgame's adjunction — now enumerable), G32 (the dial's material: hubs, not
   glue points of pairs).*
+
+* **G46 — The rule the finite-plane milestones taught, and its corollary for choosing work.** (Minted 2026-09-07 on Kooshi's
+  direction, from the two milestones that ran under the frontier-set discipline; a methodological invariant in G21/G30's
+  lineage.) M58 and M59 were each stubbed as half derivation, half object search, and in both the object half either became
+  unnecessary or failed while the derivation half delivered: M58's planned solver runs on the big planes were settled by a
+  classical spectral bound before they ran, and the small planes it left to the solver never returned; M59's planned search
+  for 6-critical cores failed (a spectral refusal is not a CDCL-sized one) while classical rigidity theory settled the lift
+  question before any core existed, and the instrument's real product was an enumerator. What did the work both times was
+  RECOGNITION: the finite planes are Cayley graphs of an abelian group, so their spectra are character sums (Kloosterman);
+  a residue configuration is a framework over a ring, so its lifts are first-order rigidity (Hensel, self-stresses). **The
+  rule: name the object in the vocabulary of the classical theory it already belongs to, and let that theory decide the
+  question's shape — possible, impossible, where — before any search runs; the search's role shrinks to producing the
+  instances the derivation predicts.** This is G30's "derivation kills, measurement generates" with its missing step made
+  explicit — the derivation comes from recognizing WHICH discipline's theorem the measured wall is (Kooshi's ladder of
+  disciplines, under G30) — and the measurements that mattered were the controls that corrected the derivation's SCOPE
+  (ω = 3 iff p ≡ 11 mod 12; the lift's primes are the unramified ones), not the searches. **The corollary for ranking the
+  frontier set: prefer a stub whose question becomes a finite exact computation plus a named theorem over a stub that
+  searches for an object; treat a stub with no such recognition yet (the topological and Nullstellensatz rooms) as a reading
+  room rather than a milestone until one appears; and read a search's failure as information about the search's genre, not
+  about the objects.** Applied at the M59 close: FS-14 (a 121-vertex computation plus a homomorphism argument) over FS-6 (an
+  object search); and the broad question the two milestones point at — every upper bound we hold is local at one prime and
+  every forcer hides from every small prime — minted as the local–global tightness conjecture (FS-15,
+  `plans/STUB-local-global-tightness.md`): χ(F²) equals its best local bound wherever that bound is ≤ 6 (attained at all six
+  fields where χ is known, twice predicted before the forcer was built), whose first digit is "is any finite Euclidean plane
+  exactly 6-chromatic" and whose bold form is χ(ℝ²) = 7. **[the rule: the project's own record, two milestones; the
+  conjecture: six instances, no counterexample, stated to be pushed back on]** *Falsifier for the rule: a frontier milestone
+  whose object search delivers what no recognition predicted — then the corollary's ranking is wrong for that genre. Falsifier
+  for the conjecture: a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime.*
 
 ## Whose work this is
 

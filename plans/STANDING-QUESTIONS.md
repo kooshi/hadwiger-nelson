@@ -794,3 +794,13 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   sealing prime of a field always fail to be a lifting prime of its objects (a sealing plane's colourings are too free to be a
   shadow's colourings)? FS-14's F₁₁/S₁₁ is where the answer starts.
 
+* **T41 — is any finite Euclidean plane exactly 6-chromatic?** (FS-15's first digit.) The values known: 3, 4, 5, 5 at 3, 7, 11,
+  19; the planes at 23, 31, 43, 47 (floors 4.0–4.7) and 59, 67, 79, 83 (floors 5.0–5.7) undecided at four solver-hours each;
+  from p ≈ 100 every plane is ≥ 7. Under tightness a plane at exactly 6 names, by congruences, a field that hosts a 6-chromatic
+  unit-distance graph; no plane at 6 says the answer to Hadwiger–Nelson is never 6. The instrument is cube-and-conquer over a
+  neighbourhood's colourings, or an exact count through the torus structure (T38, FS-13 D1).
+* **T42 — is de Grey's field's plane 7-chromatic?** (FS-15's bold form.) Its local bound is 8 (first usable prime 131) and the
+  hexagonal cap is 7; tightness in its bold form says χ = 7 there, i.e. χ(ℝ²) = 7. A 6-colouring of that field's plane would
+  refute the bold form and be the first colouring of a field plane that is local at no prime — the genre the upper-bound side
+  needs either way.
+

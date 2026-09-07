@@ -83,6 +83,10 @@ supremum of χ(F²) over such F). What the residue methods give:
   of the 𝔭-adic completion's plane for a NON-degree-one prime (the plane over 𝔽_{p²} has −1 a square and the theorem
   fails at integrality — is there a substitute), and (b) whether the finite planes' chromatic numbers admit a uniform
   6- or 7-colouring pattern that lifts to characteristic zero for every field at once — the question G44 leaves.
+* **The conjecture that names the upper-bound question in this vocabulary (2026-09-07, FS-15):** every colouring we can
+  construct is local at one prime, and the only global one is the hexagonal seven; the local–global tightness conjecture
+  says χ(F²) is exactly its best local bound, capped at 7 — whose bold form is χ(ℝ²) = 7 and whose upper-bound face is "what
+  obstructs gluing local colourings into a global one" (its §4 (d)). That is the derivation target for this side.
 * **My assessment, stated so it can be pushed back on:** the lower bound is the side our viewpoint is built for, and
   FS-11 is a real attempt at it; the upper bound is not reachable by the residue methods as they stand, and "the same
   approaches" will have to mean the viewpoint (the arithmetic of small primes governs the chromatic number), not the
@@ -97,6 +101,7 @@ supremum of χ(F²) over such F). What the residue methods give:
 |---|---|---|
 | M59 | FS-11: the 6-critical cores of UD(𝔽₅₉,2) and UD(𝔽₁₃₁,2); the local lift test; a global lift attempt on any core that passes | which residue configurations are shadows of unit-distance configurations |
 | next | the 5-colour residue obstruction one prime up (T17 at 11): why a rigid pair at five colours needs the 11-wall broken | the lower bound's mechanism as arithmetic |
+| then | **FS-15, the local–global tightness conjecture** (`plans/STUB-local-global-tightness.md`, minted 2026-09-07): χ(F²) = its best local bound wherever that is ≤ 6 — attained at every field where χ is known; its first digit is whether any finite plane is exactly 6-chromatic (a plane at 6 names the 6-forcer's field); its bold form χ(ℝ²) = 7 | the frame that makes both halves one question — the lower bound a target computation, the upper bound a gluing obstruction |
 | then | the write-up of the lower bound's derivation, if one lands — the paper is the algebra, the object its example | — |
 | then | §4 (a) and (b): the two upper-bound questions, derivation-first | whether any mechanism reaches the upper bound |
 

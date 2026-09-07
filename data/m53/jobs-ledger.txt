@@ -91,3 +91,4 @@
 2026-09-07T05:23:08Z M55 108 asks DONE (85,651 s): virtual-edge candidates on the full-pool grown witness at k=5 — 0 HIT, 22 refuted (verified colourings), 86 unknown at the 900-s wall; record data/m55/ask-W-plus-cross-depth2-k5.json; data/m54/critical-W-plus-cross-depth2.json moved to data/m55
 2026-09-07T06:30:45Z M59: the 19-core DONE (138 vertices, 1-minimal, 8.3 h; obstructed 330/346); third instance LiftObstruction19 added; gate chain re-run
 2026-09-07T06:34:46Z M59 gate GREEN (fourth run, with LiftObstruction19): build OK, axioms 617 clean / 5 purchases, lint passed; nothing left in flight
+2026-09-07T20:18:13Z after the M59 close (Kooshi): G46 documented, FS-15 minted (rank 2), programme/T41–T42 amended; NEXT M60 = FS-14 after his compaction
