@@ -1161,7 +1161,7 @@ tightness conjecture** (`plans/STUB-local-global-tightness.md` — χ(F²) equal
 exactly 6-chromatic; bold form: χ(ℝ²) = 7) enters at rank 2, the conjecture whose compulsion-level face FS-14 is. The order: FS-14,
 FS-15, FS-6, FS-12, FS-13, FS-2, FS-8, FS-4, FS-9, FS-10, FS-5. **Re-ranked at the M59 close, 2026-09-06:** FS-11 CLOSED as M59 (the lift is first-order rigidity; a finite-plane subgraph lifts only if it
 is a shadow; the 1581 recovered from its residues, its merged image obstructed in the kernel; the hub scan). The table's top, under the
-programme's rule (derivations first): **rank 1 FS-14, the five-colour residue obstruction at 11** (`plans/STUB-five-colour-residue-obstruction.md`
+programme's rule (derivations first): **rank 1 FS-14, the five-colour residue obstruction at 11** (`plans/M60-five-colour-residue-obstruction.md`
 — over a 5-sealed field every pulled-back 5-colouring is constant on residue classes, so a pair compulsion at five colours has its
 residues in the finite sets F₁₁ / S₁₁ every 5-colouring of UD(𝔽₁₁,2) identifies / separates: the 5-colour analogue of T17, the programme's
 named next derivation); rank 2 FS-6 on the 6-open fields, now with the hub scan as its enumerator; rank 3 FS-12 (the hub scan as the

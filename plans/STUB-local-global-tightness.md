@@ -3,7 +3,7 @@
 *A derivation stub. It is written to be read cold: every term is defined where it first appears. Read beside, when
 you want the evidence in full: `plans/FIELD-WALL-THEOREM.md` (the 2-adic wall), `plans/M58-field-sieve.md` §S1–§S2 and §R
 (the finite-plane bound and the spectra), `plans/M59-finite-plane-lift.md` §S1 and §R (why finite-plane objects do not lift),
-`plans/PROGRAMME-ALGEBRAIC-PROOF.md` (the aim this stub serves), `plans/STUB-five-colour-residue-obstruction.md` (FS-14, the
+`plans/PROGRAMME-ALGEBRAIC-PROOF.md` (the aim this stub serves), `plans/M60-five-colour-residue-obstruction.md` (FS-14, the
 conjecture's first compulsion-level instance).*
 
 ## 1. The setting, in plain language
@@ -142,5 +142,5 @@ for after the lower bound. It produces no object by itself.
 ## 9. Addresses
 
 `tools/fplane.py` (`chi`, `spectral`, `map`, `usable`), `data/fplane/`, `Proofs/HadwigerNelson/UnitQuadrance.lean`
-(`unitQuadrance.map`, the reduction as a functor), `Instances/FinitePlane11.lean`, `plans/STUB-five-colour-residue-obstruction.md`,
+(`unitQuadrance.map`, the reduction as a functor), `Instances/FinitePlane11.lean`, `plans/M60-five-colour-residue-obstruction.md`,
 `plans/STUB-finite-plane-cores.md`, `plans/FIELD-WALL-THEOREM.md`.
