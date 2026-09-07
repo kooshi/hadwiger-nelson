@@ -348,3 +348,36 @@ solver pass agrees with the table where the table decides.
 re-prove it). `Function.Periodic` — adopted as the forced side's primitive (the standard word, with its API). The list of tables —
 not adopted (the origin-reduction theorem absorbs it). `drawing_adj` — untouched upstream; `drawing_quad` is the new general
 identity beside it. The plane-level distance law without `r` — adopted; `r : ℤ` confined to the certificate corollaries.
+
+## §M2. Obligation-modeling pass (2026-09-07; fresh Skill invocation) — every leaf discharged in the probe
+
+**The space.** No induction anywhere: every obligation is a case split, a rewrite along a translation, a `ring`/`linear_combination`
+identity, or a finite decide. The partition: **prove** — the sixteen leaves below; **test** — the two decides at 11 (the model of
+the hypotheses), the 3-plane reds, the residue `#guard`s; **assume** — a `Coloring` of the plane (data, never `Colorable`), the
+subring hom and the denominator's inverse (the certificate's reduction hypotheses, M58's).
+
+**Discharged (`build/m60/probe_obl.lean`, `lake env lean` green in 3.2 s, zero `sorry`):**
+
+| obligation | discharge | shape |
+|---|---|---|
+| `forces_iff_forces_zero`, `separated_iff_separated_zero` | `→`: `h.image (translate S (−x))`, then `simpa only [translate_apply, neg_add_cancel, neg_add_eq_sub]`; `←`: `h.image (translate S x)`, `add_zero`, and `x + (y − x) = y` by `abel` | two translations |
+| `not_forces_zero_of_not_periodic` | `refine h fun t => ?_`; the translated colouring `col.comap (translate S t)` at `0` and `d` is `col (t + 0) = col (t + d)` BY DEFINITION (`Coloring.comap` is composition — the `have` with the stated type is the whole proof), `add_zero`, symm | one colouring per `t` |
+| `not_separated_zero_of_coincides` | dual: `show col (t + 0) = col (t + d)` after `refine hs (col.comap …) ?_` | one colouring |
+| `forces_iff_eq_of_aperiodic` | `→`: `by_contra`, `sub_ne_zero.mpr`, `not_forces_zero_of_not_periodic col (fun hp => hd (ha _ hp))` on `forces_iff_forces_zero.mp h`; `←`: `rintro rfl; exact fun _ => rfl` | composition |
+| `separated_iff_adj_of_coincides` | `→`: `by_contra`; `x = y` refuted by `h col rfl`; `x ≠ y`: `¬ Adj 0 (y − x)` from `¬ Adj x y` through `addCayley_adj_add_iff_right (d := x)` and `abel`, then `not_separated_zero_of_coincides col (hc _ hd hadj0)`; `←`: `Separated.of_adj` | composition + Mathlib's invariance |
+| `three_le_arityFloor_of_aperiodic_coincides` | `le_arityFloor_iff.mpr`; `2 ≤ m` from `le_arityFloor_iff.mp (two_le_arityFloor ⟨col⟩)` (M45's lemma consumed exactly as designed); `m < 3` by `exact_mod_cast`; `omega` pins `m = 2`; `subst`; `compels_two_eq`/`compels_two_ne` on `q 0 = q 1` against the two `iff`s; injectivity of `T` refutes `T 0 = T 1` by `decide` | case bash at `m = 2` |
+| `Forces.quad_image_eq_zero` | a TYPED `have hfu : f u = f v := h.image_eq_of_aperiodic col ha f` (a bare `rw` fails: the lemma's `f u` is coerced through `addCayley`, the goal's through `unitQuadrance` — the one incident of the pass), `sub_self`, `simp [quad]` | rewrite |
+| `Separated.quad_image_eq_one` | `quad_eq_one_of_adj (h.image_adj_of_coincides col hc f)` — term mode; `unitQuadrance R` unifies with `addCayley _` everywhere | one line |
+| `UDCert.drawing_quad` | `simp only [drawing, quad, Prod.fst_sub, Prod.snd_sub, map_add, map_mul, map_sub]; ring` | identity |
+| `UDCert.coord_distSq` | `coord_quadrance`'s proof with `hp` as the key: `Subtype.ext`, `simp only [Pt.distSq, FastSq.sq_eq] at hp`, `push_cast`, `simpa only [coe_coord_fst, coe_coord_snd, Int.cast_mul] using hp` | copied shape |
+| `UDCert.drawing_quad_of_distSq` | `rw [drawing_quad, coord_distSq, map_intCast]; push_cast; linear_combination (r : R) * (u * c.denom + 1) * hu` (the witness: `u²rD² − r = r(uD + 1)(uD − 1)`) | identity |
+| `UDCert.not_forces_of_distSq`, `not_separated_of_distSq` | `intro h`; the plane-level law on `c.drawingHom …`; `change quad (drawing i − drawing j) = _ at this` (the hom applied is the drawing, definitionally); `rw [drawing_quad_of_distSq]`; `exact hr this` | composition |
+| `finitePlane11_aperiodic`, `finitePlane11_coincides` | `decide +kernel` — both inside the probe's 3.2 s (the `∃ t` exits at the first witness; ≥ 4 per difference) | decide |
+
+**Adversarial validation.** The model of the hypotheses is exhibited (the table at 11, both decides). The hypotheses are
+load-bearing by construction of the reds: the 3-plane's table is proper and periodic (`¬ Aperiodic`, decided), so `ha` cannot be
+dropped from `forces_iff_eq_of_aperiodic`; `(12 : ZMod 11) = 1` pins that `not_separated_of_distSq`'s `hr` is exactly `≠ 1` and
+not weaker (a `2√3`-pair is residue-allowed). The statements read aloud: "a pair forced equal at five colours over the `√7`-free
+subring has equal residues at 11; a virtual edge has adjacent residues; hence `√3`- and distance-2 pairs are neither" — and the
+formal statements say exactly that, with the certificate-level hypotheses M58 already carries. Nothing in the pass changed a
+statement; the decomposition is descending everywhere (sixteen leaves, each one idea).
