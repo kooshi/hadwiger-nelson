@@ -641,9 +641,9 @@ the refutation of the finite graph — and says so in its docstring.
 | hubs of the 1581 at 131 | **3,739** (support 3–13); none in the gen-1 closure; 60 random + the 5 of highest support verified exactly in the tower (65 of 65) | 15,596 candidates; 602 s | `hubs-degrey1581-p131.json` |
 | UD(𝔽₁₃₁,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (external cadical; spectrum says ≥ 8) | P3 refuted in this half | `build/m59/plane-p131-k5.log` |
 | UD(𝔽₈₃,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (6,889 vertices, 1,522,472 clauses) | — | `build/m59/plane-p83-k5.log` |
-| UD(𝔽₅₉,2) at k = 5, whole plane | in flight (one hour; ends 00:25 UTC) | — | `build/m59/plane-p59-k5.log` |
+| UD(𝔽₅₉,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (3,481 vertices, 560,444 clauses; Hoffman 5.022) | P3's second half as registered | `build/m59/plane-p59-k5.log` |
 | the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses); **rigid (rank 123 = 2n − 3), OBSTRUCTED at level 2 — 98 of 123 stress conditions fail; witness 12 edges on 9 vertices, pairing 33** — the plane's own 5-critical core is not a shadow (P2's analogue one level down; kernel instance `Instances/LiftObstruction11.lean`) | the solver's refusal (untrusted) + verified colourings; the obstruction decided | `core-p11-k4-spheres.json`, `lift-core-p11-k4-spheres.json` |
-| the 5-critical core of UD(𝔽₁₉,2) | in flight (the sphere shrink; near-threshold asks at the 600-s wall) | — | `build/m59/cores-p19-k4.log` |
+| the 5-critical core of UD(𝔽₁₉,2) | in flight at the close (the sphere shrink at 9 spheres, near-threshold asks hitting the 600-s wall; then the vertex shrink and `local`) — the record lands in `data/fplane/core-p19-k4-spheres.json` and `lift-core-p19-k4-spheres.json` | — | `build/m59/cores-p19-k4.log`, `local-core-p19-k4.log` |
 
 ### §R4. Registered predictions, scored
 
@@ -651,7 +651,7 @@ the refutation of the finite graph — and says so in its docstring.
 |---|---|---|
 | P1 | the smallest 6-critical subgraph of UD(𝔽₁₃₁,2) found has > 1,000 vertices | NOT TESTED — no 6-critical core at 131 was reached (P3) |
 | P2 | every 6-critical core fails level 2 with a high obstruction count | NOT TESTED at 131; stands by derivation (§S1 (b)); its analogue one level down MEASURED — the 5-critical core of UD(𝔽₁₁,2) fails with 98 of 123; the merged image (a ≥ 5-chromatic subgraph) with 2,406 of 4,785 |
-| P3 | cadical refutes five colours on the whole plane at 131 within an hour; at 59 it does not | **first half REFUTED** (undecided at 1 h); 59 in flight |
+| P3 | cadical refutes five colours on the whole plane at 131 within an hour; at 59 it does not | **first half REFUTED** (undecided at 1 h; 83 likewise); **second half MET** (59 undecided at 1 h) |
 | P4 | the injective sub-reduction passes to 131²⁰ and equals the tower coordinates; the merged image is obstructed at level 2 | **MET, all three parts** |
 | P5 | every core found is infinitesimally rigid at its residues | **MET on the 11-core** (rank 123 = 2n − 3); the 19-core in flight |
 | P6 | the sphere-minimal ≥ 6 object at 131 has 20–60 spheres | NOT TESTED |
@@ -701,3 +701,12 @@ kernel form of the rigid dichotomy (hand derivation, §S1).
   exactly its degree — 60 of 66, 12 of 16, 8 of 17 residue-neighbours, the false ones excluded — among 3,740 / 3,737 / 3,734
   passers (hubs whose third neighbour was the deleted vertex drop out). The scan is sound on the dense object; the strict
   form's zero was the instrument, not the 1581.
+
+### §R8. Left in flight at the close (2026-09-07 00:26 UTC)
+
+* The 5-critical core of UD(𝔽₁₉,2) (`build/m59/cores_chain-snapshot.sh`: the sphere shrink, then the vertex shrink, then `local` on
+  both calibration cores; logs `build/m59/cores-p19-k4.log`, `local-core-p{11,19}-k4.log`) — its record and its obstruction
+  verdict go into §R3 and P5's row.
+* The M55 108 asks (pid 839605, 17.5 h; `build/m55/ask-depth2.log` → `data/m55/ask-W-plus-cross-depth2-k5.json`, exit 3 =
+  jackpot): an M55 §R6 addendum and an FS-3 datum, then `data/m54/critical-W-plus-cross-depth2.json` moves into `data/m55`.
+
