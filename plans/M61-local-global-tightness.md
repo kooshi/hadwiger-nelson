@@ -487,3 +487,37 @@ composition. Adversaries: the non-null direction at 7 (red); the moved-entry tab
 non-colourable plane (`hfree` false, so no instance — by design). The next lemma the vocabulary earns for free: the 23-plane's
 periodic bound `χ ≤ 8` would be one more `projAlong (1,1)` instance with a 23-entry table (2 is a non-residue mod 23) — not
 worth a kernel row, but it states.
+
+## §M2. Obligation-modeling pass (2026-09-07; fresh Skill invocation) — every leaf discharged in the probe
+
+*The space: no induction anywhere — every obligation is a finite case split (two disjuncts of `addCayley_adj`, two cases
+of `a = 0`), a chain of rewrites through a ring hom, or a `decide`. The probe `build/m61/probe_obl.lean` (gitignored)
+carries all twenty-three leaves discharged and elaborates with no warnings; `build/m61/probe_audit.lean` adds the mutation
+audit and `#print axioms` on nine consumers, all on the standard three.*
+
+| obligation | the local check | discharge | what the probe corrected |
+|---|---|---|---|
+| `addCayleyMap.map_rel'` | `addCayley_adj` both ways; per disjunct `π (−a + b) ∈ D` by `hD` and `π a ≠ π b` by `hS` | `obtain ⟨-, h ∣ h⟩`, `rw [← map_neg, ← map_add]`, `neg_add_cancel` | the rewrite direction: the goal already reads `−π a + π b`, so fold the hom (`←`), not unfold |
+| `addCayleyColoring` | `v = u + (−u + v)` (`add_neg_cancel_left`) per disjunct | two `have`s, one `.symm` | the two cases' orientations were swapped once |
+| `periodic_comp_of_mem_ker` | `map_add`, `hd`, `add_zero` | one `simp only` | — |
+| `eq_of_forces_of_forall_exists_not_periodic` | `by_contra`; `y − x ≠ 0`; M60's `not_forces_zero_of_not_periodic` against `forces_iff_forces_zero_sub` | three lines | the `List` of colourings was dead weight (the membership was never used): the hypothesis quantifies `∃ c : Coloring` directly and the instances supply their tables; and M60's translation lemmas live over `AddCommGroup`, so the lemma moved to its own section |
+| `unitQuadrance_colorable_of_quotient` | `unitQuadrance R = addCayley (unitCircle R)` by `rfl` | `show … from colorable_of_addCayley_quotient … ⟨addCayleyColoring …⟩` | the elaborator does not unfold the `def` on its own; `show` names the unfolding |
+| `card_le_mul_of_colorable` | `card = Σ_c card(fiber c)` (`Finset.card_eq_sum_card_fiberwise`), each fiber independent by `C.valid`, `Finset.sum_le_sum`, `sum_const` | one `calc` | — |
+| `card_le_chromaticNumber_mul_indepNum` | `colorable_chromaticNumber_of_fintype`, `chromaticNumber_ne_top_iff_exists`, `ENat.coe_toNat_eq_self`, `exact_mod_cast` | one `calc` | — (the `ℕ∞` form cost four lines; kept) |
+| `sq_add_sq_eq_zero_iff` | `a = 0` or not; `ZMod.mod_four_ne_three_of_sq_eq_neg_sq` (Mathlib) with `y := b` named | four lines | the implicit `y` is unconstrained by the conclusion, so `linear_combination` saw a metavariable — name it |
+| `quadrance_eq_zero_iff` | `show` the abbrev, the scalar lemma, `Prod.ext_iff` | three lines | `rw [quadrance]` on an abbrev has nothing to rewrite; `show` instead |
+| `isSquare_neg_one_of_spindle_radicand` | `congrArg φ hx`, `simp only [map_*, hd]`, `ring`; witness `φ x / φ e` with `div_pow`, `neg_div`, `div_self` | four lines | `φ 4` stays an atom for `ring` — no `map_ofNat` needed |
+| `quadrance_sub_eq_zero_of_map_eq` | `congrArg Prod.fst/snd h` are the coordinate equalities by `rfl` (the map is coordinatewise); `simp [quadrance, h1, h2]` | three lines | — |
+| `Forces.no_hom_of_spindle_radicand` | `h.image`, `hfree`, the identification lemma, the radicand lemma | two lines | `Fact (1 < p)` from `Fact p.Prime` is Mathlib's `Nat.Prime.one_lt'` |
+| the tower specs | `x := ⟨0, 1⟩`, `d := 3` / `11`, `e := 1`; `decide` on the `Adjoin` equation; `map_ofNat` + `decide`; `map_one` | one line each | `Fact (Nat.Prime 11)` had to be in scope BEFORE the spec (the missing instance surfaced as "expected type contains metavariables") |
+| `circ19_image`, `circ11_image` | stated on the `Finset` (decidable), consumed as the coerced `Set` (`Finset.mem_coe` is `Iff.rfl`) | `decide` | — |
+| `finitePlane19_colorable_five`, `…_le_five`, the 11 six | the theorem applied; `Colorable.chromaticNumber_le` | one line each | — |
+| `lines19_isIndepSet` | Mathlib's `Decidable (IsIndepSet ↑s)` for a `Finset` | `decide +kernel` (76 × 76 pairs) | **`decide` proved the first statement FALSE**: the lines `y − x ∈ {0, 4, 8, 12}` were the circulant's independent set in the OTHER projection's coordinate (`β = (y − x)/2`, §S3's scratch); under `projAlong (1, 1)` the set is `{0, 5, 8, 16}` — the kernel caught the transcription, exactly what a decided model is for |
+| `finitePlane3_no_common_period` | `Decidable (Function.Periodic f c)` — no Mathlib instance; minted `decidablePeriodic` on a finite domain | `decide` | — |
+| `finitePlane3_forces_free` | the family lemma with `Or.elim` supplying one of two bundled colourings | four lines | — |
+| `rhombusIn3.map_rel'` | `edgeGraph` has no decidable adjacency by design (`Sat/Encoding.lean`); its unfolding `i ≠ j ∧ (… ∈ E ∨ …)` does | an auxiliary `rhombusIn3_adj` by `decide`, applied through `edgeGraph_adj.mp` | — |
+
+**Mutation audit** (in the module as reds): at `5`, `(1, 2)` is isotropic — the isotropy lemma needs `p ≡ 3 (mod 4)`;
+`ℤ[√19] →+* ZMod 5` exists although `19 = 4·5 − 1` — the radicand lemma needs it too; the non-null direction at `7` and the
+moved-entry table at `11` pin `hS` and properness. Vacuity: the composition's model at `3` exhibits every hypothesis but the
+radicand, and the `#guard` pins that the radicand equation is the one that dies.

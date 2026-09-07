@@ -78,7 +78,15 @@ projected connection set. Adjacent vertices differ by an element of `S`, whose i
 def addCayleyMap (π : A →+ B) {S : Set A} {D : Set B} (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D) :
     addCayley S →g addCayley D where
   toFun := π
-  map_rel' := sorry
+  map_rel' {a b} h := by
+    rw [addCayley_adj] at h ⊢
+    obtain ⟨-, h | h⟩ := h
+    · refine ⟨fun heq => hS _ h ?_, Or.inl ?_⟩
+      · rw [map_add, map_neg, heq, neg_add_cancel]
+      · rw [← map_neg, ← map_add]; exact hD _ h
+    · refine ⟨fun heq => hS _ h ?_, Or.inr ?_⟩
+      · rw [map_add, map_neg, heq, neg_add_cancel]
+      · rw [← map_neg, ← map_add]; exact hD _ h
 
 @[simp] theorem addCayleyMap_apply (π : A →+ B) {S : Set A} {D : Set B} (hS : ∀ s ∈ S, π s ≠ 0)
     (hD : ∀ s ∈ S, π s ∈ D) (a : A) : addCayleyMap π hS hD a = π a := rfl
@@ -93,21 +101,42 @@ one a finite instance checks — no coincidence `tab (x + d) = tab x` at any `d 
 demands the coincidence at every non-edge; properness forbids it at every edge). -/
 def addCayleyColoring {D : Set B} (tab : B → Fin k) (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) :
     (addCayley D).Coloring (Fin k) :=
-  sorry
+  Coloring.mk tab fun {u v} hadj => by
+    rw [addCayley_adj] at hadj
+    obtain ⟨-, hd | hd⟩ := hadj
+    · have := h _ hd u
+      rw [add_neg_cancel_left] at this
+      exact this.symm
+    · have := h _ hd v
+      rwa [add_neg_cancel_left] at this
 
 /-- The pulled-back colouring is periodic at every element of the kernel — the periodic colourings of M60's
 `Aperiodic` vocabulary are exactly these. -/
 theorem periodic_comp_of_mem_ker (π : A →+ B) (tab : B → Fin k) {d : A} (hd : π d = 0) :
     Function.Periodic (fun a => tab (π a)) d :=
-  sorry
-
-/-- **A family of colourings with no common nonzero period refutes every forced pair** — M60's
-`forces_iff_eq_of_aperiodic` is the singleton case. -/
-theorem eq_of_forces_of_forall_exists_not_periodic {S : Set A} (cols : List ((addCayley S).Coloring (Fin k)))
-    (h : ∀ d : A, d ≠ 0 → ∃ c ∈ cols, ¬ Function.Periodic c d) {x y : A} (hf : Forces (addCayley S) k x y) : x = y :=
-  sorry
+  fun a => by simp only [map_add, hd, add_zero]
 
 end Quotient
+
+section Family
+
+variable {A : Type*} [AddCommGroup A] {k : ℕ}
+
+/-- `Function.Periodic` computes on a finite domain. -/
+instance decidablePeriodic {α β : Type*} [Fintype α] [Add α] [DecidableEq β] (f : α → β) (c : α) :
+    Decidable (Function.Periodic f c) :=
+  inferInstanceAs (Decidable (∀ x, f (x + c) = f x))
+
+/-- **Colourings with no common nonzero period refute every forced pair** — M60's `forces_iff_eq_of_aperiodic`
+is the case of one colouring; here each nonzero `d` may be refuted by a different one. -/
+theorem eq_of_forces_of_forall_exists_not_periodic {S : Set A}
+    (h : ∀ d : A, d ≠ 0 → ∃ c : (addCayley S).Coloring (Fin k), ¬ Function.Periodic c d) {x y : A}
+    (hf : Forces (addCayley S) k x y) : x = y := by
+  by_contra hne
+  obtain ⟨c, hc⟩ := h (y - x) (sub_ne_zero.mpr (Ne.symm hne))
+  exact not_forces_zero_of_not_periodic c hc (forces_iff_forces_zero_sub.mp hf)
+
+end Family
 
 /-! ### The plane's periodic colourings -/
 
@@ -133,7 +162,8 @@ kernel's elements as periods. -/
 theorem unitQuadrance_colorable_of_quotient (π : R × R →+ R) {D : Set R} (hS : ∀ s ∈ unitCircle R, π s ≠ 0)
     (hD : ∀ s ∈ unitCircle R, π s ∈ D) (tab : R → Fin k) (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) :
     (unitQuadrance R).Colorable k :=
-  sorry
+  show (addCayley (unitCircle R)).Colorable k from
+    colorable_of_addCayley_quotient π hS hD ⟨addCayleyColoring tab h⟩
 
 end Plane
 
@@ -146,8 +176,14 @@ variable {V : Type*} {G : SimpleGraph V} {k a : ℕ}
 /-- **A `k`-colourable finite graph has at most `k · a` vertices when no independent set exceeds `a`**: the colour
 classes partition the vertices into `k` independent sets. -/
 theorem card_le_mul_of_colorable [Fintype V] [DecidableEq V] (hα : ∀ s : Finset V, G.IsIndepSet (s : Set V) → s.card ≤ a)
-    (h : G.Colorable k) : Fintype.card V ≤ k * a :=
-  sorry
+    (h : G.Colorable k) : Fintype.card V ≤ k * a := by
+  obtain ⟨C⟩ := h
+  calc Fintype.card V = ∑ c : Fin k, (Finset.univ.filter fun v => C v = c).card := by
+        rw [← Finset.card_univ, Finset.card_eq_sum_card_fiberwise (fun v _ => Finset.mem_univ (C v))]
+    _ ≤ ∑ _c : Fin k, a := Finset.sum_le_sum fun c _ => hα _ fun u hu v hv _ hadj => by
+        rw [Finset.mem_coe, Finset.mem_filter] at hu hv
+        exact C.valid hadj (hu.2.trans hv.2.symm)
+    _ = k * a := by simp [Finset.sum_const, Finset.card_univ]
 
 /-- The bound at `a = indepNum`. -/
 theorem card_le_mul_indepNum_of_colorable [Fintype V] [DecidableEq V] (h : G.Colorable k) :
@@ -161,8 +197,11 @@ theorem not_colorable_of_mul_lt [Fintype V] [DecidableEq V] (hα : ∀ s : Finse
 
 /-- **The fractional face: `card ≤ χ · α`**, in `ℕ∞`. -/
 theorem card_le_chromaticNumber_mul_indepNum [Fintype V] [DecidableEq V] :
-    (Fintype.card V : ℕ∞) ≤ G.chromaticNumber * G.indepNum :=
-  sorry
+    (Fintype.card V : ℕ∞) ≤ G.chromaticNumber * G.indepNum := by
+  have hne : G.chromaticNumber ≠ ⊤ := chromaticNumber_ne_top_iff_exists.mpr ⟨_, G.colorable_of_fintype⟩
+  calc (Fintype.card V : ℕ∞) ≤ ((ENat.toNat G.chromaticNumber * G.indepNum : ℕ) : ℕ∞) := by
+        exact_mod_cast card_le_mul_indepNum_of_colorable G.colorable_chromaticNumber_of_fintype
+    _ = G.chromaticNumber * G.indepNum := by rw [Nat.cast_mul, ENat.coe_toNat_eq_self.mpr hne]
 
 end Counting
 
@@ -174,12 +213,22 @@ variable {p : ℕ} [Fact p.Prime]
 
 /-- **No isotropic vectors modulo a prime `≡ 3 (mod 4)`**: `a² + b² = 0` forces `a = b = 0`, because otherwise
 `(a/b)² = −1` and `−1` is not a square (`ZMod.exists_sq_eq_neg_one_iff`). -/
-theorem sq_add_sq_eq_zero_iff (hp : p % 4 = 3) {a b : ZMod p} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 :=
-  sorry
+theorem sq_add_sq_eq_zero_iff (hp : p % 4 = 3) {a b : ZMod p} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 := by
+  constructor
+  · intro h
+    by_cases ha : a = 0
+    · subst ha
+      refine ⟨rfl, ?_⟩
+      simpa using h
+    · exact absurd hp (ZMod.mod_four_ne_three_of_sq_eq_neg_sq (y := b) ha (by linear_combination h))
+  · rintro ⟨rfl, rfl⟩
+    simp
 
 /-- The same, for a vector of the plane. -/
 theorem quadrance_eq_zero_iff (hp : p % 4 = 3) {w : ZMod p × ZMod p} : quadrance w = 0 ↔ w = 0 := by
-  rw [quadrance, sq_add_sq_eq_zero_iff hp, Prod.ext_iff]; rfl
+  show w.1 ^ 2 + w.2 ^ 2 = 0 ↔ w = 0
+  rw [sq_add_sq_eq_zero_iff hp, Prod.ext_iff]
+  exact Iff.rfl
 
 /-- A ring hom commutes with the quadrance. -/
 theorem quadrance_map {R S : Type*} [CommRing R] [CommRing S] (φ : R →+* S) (w : R × R) :
@@ -190,8 +239,12 @@ theorem quadrance_map {R S : Type*} [CommRing R] [CommRing S] (φ : R →+* S) (
 of the spindle over a pair at squared distance `d`, up to the unit `e` — then a ring hom `φ` into a field that sends
 `d` to `0` and keeps `e` nonzero makes `−1` a square: `φ(x/e)² = −1`. -/
 theorem isSquare_neg_one_of_spindle_radicand {R K : Type*} [CommRing R] [Field K] (φ : R →+* K) {x d e : R}
-    (hx : x ^ 2 = (4 * d - 1) * e ^ 2) (hd : φ d = 0) (he : φ e ≠ 0) : IsSquare (-1 : K) :=
-  sorry
+    (hx : x ^ 2 = (4 * d - 1) * e ^ 2) (hd : φ d = 0) (he : φ e ≠ 0) : IsSquare (-1 : K) := by
+  have h1 : φ x ^ 2 = -(φ e ^ 2) := by
+    have := congrArg φ hx
+    simp only [map_pow, map_mul, map_sub, map_one, hd] at this
+    rw [this]; ring
+  exact ⟨φ x / φ e, by rw [← sq, div_pow, h1, neg_div, div_self (pow_ne_zero 2 he)]⟩
 
 /-- **The spindle radicand kills the prime**: at `p ≡ 3 (mod 4)` no such hom exists. -/
 theorem no_ringHom_of_spindle_radicand {R : Type*} [CommRing R] (hp : p % 4 = 3) (φ : R →+* ZMod p) {x d e : R}
@@ -203,8 +256,10 @@ theorem no_ringHom_of_spindle_radicand {R : Type*} [CommRing R] (hp : p % 4 = 3)
 `0`. -/
 theorem quadrance_sub_eq_zero_of_map_eq {V R S : Type*} {G : SimpleGraph V} [CommRing R] [CommRing S] [Nontrivial S]
     (g : G →g unitQuadrance R) (φ : R →+* S) {u v : V}
-    (h : (unitQuadrance.map φ).comp g u = (unitQuadrance.map φ).comp g v) : φ (quadrance (g u - g v)) = 0 :=
-  sorry
+    (h : (unitQuadrance.map φ).comp g u = (unitQuadrance.map φ).comp g v) : φ (quadrance (g u - g v)) = 0 := by
+  have h1 : φ (g u).1 = φ (g v).1 := congrArg Prod.fst h
+  have h2 : φ (g u).2 = φ (g v).2 := congrArg Prod.snd h
+  simp [quadrance, h1, h2]
 
 /-- **A forced pair's spindle escapes every plane that is forces-free at that many colours.** `G` is drawn in `R`
 by `g`; the pair `u, v` is forced equal at `k` colours; the plane `UD(ZMod p)` is `k`-forces-free; then no ring hom
@@ -214,7 +269,8 @@ theorem Forces.no_hom_of_spindle_radicand {V R : Type*} {G : SimpleGraph V} [Com
     (hfree : ∀ u v : ZMod p × ZMod p, Forces (finitePlane p) k u v → u = v)
     (g : G →g unitQuadrance R) (φ : R →+* ZMod p) {u v : V} (h : Forces G k u v) {x e : R}
     (hx : x ^ 2 = (4 * quadrance (g u - g v) - 1) * e ^ 2) (he : φ e ≠ 0) : False :=
-  sorry
+  have hf := h.image ((unitQuadrance.map φ).comp g)
+  no_ringHom_of_spindle_radicand hp φ hx (quadrance_sub_eq_zero_of_map_eq g φ (hfree _ _ hf)) he
 
 /-- The consumer's shape: with the unit `e` a unit of `R`, **no reduction of `R` at `p` exists at all**. -/
 theorem Forces.isEmpty_ringHom_of_spindle_radicand {V R : Type*} {G : SimpleGraph V} [CommRing R] {k : ℕ}
@@ -227,11 +283,17 @@ end Spindle
 
 /-! ### Spec: the radicand lemma on the towers -/
 
+instance : Fact (Nat.Prime 11) := ⟨by decide⟩
+
 -- The Moser spindle's radicand: `11 = 4·3 − 1` for the rhombus's `√3`-pair. No hom `ℤ[√11] → ZMod 3`.
-example : IsEmpty (Adjoin 11 ℤ →+* ZMod 3) := sorry
+example : IsEmpty (Adjoin 11 ℤ →+* ZMod 3) :=
+  ⟨fun φ => no_ringHom_of_spindle_radicand (by decide) φ (x := ⟨0, 1⟩) (d := 3) (e := 1) (by decide)
+    (by rw [map_ofNat]; decide) (by rw [map_one]; exact one_ne_zero)⟩
 
 -- The 6-level's radicand over a 5-sealed field: `43 = 4·11 − 1` for a forced `√11`-pair. No hom `ℤ[√43] → ZMod 11`.
-example : IsEmpty (Adjoin 43 ℤ →+* ZMod 11) := sorry
+example : IsEmpty (Adjoin 43 ℤ →+* ZMod 11) :=
+  ⟨fun φ => no_ringHom_of_spindle_radicand (by decide) φ (x := ⟨0, 1⟩) (d := 11) (e := 1) (by decide)
+    (by rw [map_ofNat]; decide) (by rw [map_one]; exact one_ne_zero)⟩
 
 -- Positive controls: `√3 ↦ 5` reduces `ℤ[√3]` at `11` (`25 ≡ 3`), and `√11 ↦ 0` reduces `ℤ[√11]` at `11` — sending
 -- the radicand's `d` to `0` alone is no obstruction; the spindle's `4d − 1 ≡ −1` is.
@@ -241,5 +303,10 @@ example : Adjoin 11 ℤ →+* ZMod 11 := Adjoin.lift (Int.castRingHom (ZMod 11))
 -- Red for the quotient: at `7` the direction `(1, 1)` is NOT null (`2 = 3²`), so `projAlong (1, 1)` kills a circle point
 -- and `unitQuadrance_colorable_of_quotient` has no `hS` to take — a colouring constant on that line's cosets is improper.
 example : ¬ ∀ s ∈ unitCircle (ZMod 7), projAlong ((1 : ZMod 7), (1 : ZMod 7)) s ≠ 0 := by decide
+
+-- Reds for `p ≡ 3 (mod 4)`: at `5` the vector `(1, 2)` is isotropic, and `ℤ[√19] → ZMod 5` exists although `19 = 4·5 − 1`
+-- (`√19 ↦ 2`): without the congruence neither the isotropy lemma nor the radicand lemma holds.
+example : (1 : ZMod 5) ^ 2 + 2 ^ 2 = 0 := by decide
+example : Adjoin 19 ℤ →+* ZMod 5 := Adjoin.lift (Int.castRingHom (ZMod 5)) 2 (by decide)
 
 end HadwigerNelson
