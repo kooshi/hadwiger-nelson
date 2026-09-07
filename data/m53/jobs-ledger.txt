@@ -99,3 +99,4 @@
 2026-09-07T22:15:29Z M61 pre-opening: alpha(UD(F_23,2)) >= 106? launched (external cadical, 2 h wall) → build/m61/alpha-p23-N106.json / alpha-p23.log
 2026-09-07T22:16:33Z Kooshi: FS-15 is next (M61). §H written into the stub; alpha loops at 11/19 (build/m61/alpha-p{11,19}-N*.json) and 23 (alpha-p23.log) in flight; compaction next
 2026-09-07T22:23:55Z alpha loop DONE: alpha(11) = 28 exact (29 unsat 92 s); alpha(19) >= 76, size 78 unknown at 800 s; alpha(23) >= 106? still running (pid 3359887, 2-h wall, build/m61/alpha-p23.log)
+2026-09-07T23:15:27Z M61 opening: derivations A (circulant quotient), B (theta LP), C/F (equivariance), E (F_27 plane) run in build/m61/; half-turn-equivariant 5-colouring at 23 chained behind alpha(23) (1-h wall) → build/m61/halfturn-chain.log

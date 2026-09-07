@@ -1184,12 +1184,12 @@ milestone closes on its derivation: the third in a row where the search only pro
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
 (WORKFLOW step 9). **Re-ranked at the M60 close, 2026-09-07:** FS-14 CLOSED as M60 (the compulsion face of sealing: the sealing plane
 has no pair compulsion, so over a sealed field a forced pair has `d² ≡ 0` and a virtual edge `d² ≡ 1`; each hex-shell gadget impossible
-separately). The table's top: **rank 1 FS-15, the local–global tightness conjecture** (`plans/STUB-local-global-tightness.md` — its
+separately). The table's top: **rank 1 FS-15, the local–global tightness conjecture** (`plans/M61-local-global-tightness.md` — its
 compulsion face now proved; first digit: is any finite plane exactly 6-chromatic); rank 2 FS-6; rank 3 FS-12; rank 4 FS-13; **rank 5
 FS-16, the residue-allowed distances** (`plans/STUB-residue-allowed-distances.md` — why M55's theorem-admitted candidates concentrate at
 residue norm 1, and the 51 undecided asks there); then FS-2, FS-8, FS-4, FS-9, FS-10, FS-5. Kooshi picks. **Amended 2026-09-07 (Kooshi: document the rule, mint the conjecture):** G46 holds the rule the two finite-plane milestones taught
 (recognize the classical theory first; the search only produces its instances) and its ranking corollary; **FS-15, the local–global
-tightness conjecture** (`plans/STUB-local-global-tightness.md` — χ(F²) equals its best local bound; first digit: is any finite plane
+tightness conjecture** (`plans/M61-local-global-tightness.md` — χ(F²) equals its best local bound; first digit: is any finite plane
 exactly 6-chromatic; bold form: χ(ℝ²) = 7) enters at rank 2, the conjecture whose compulsion-level face FS-14 is. The order: FS-14,
 FS-15, FS-6, FS-12, FS-13, FS-2, FS-8, FS-4, FS-9, FS-10, FS-5. **Re-ranked at the M59 close, 2026-09-06:** FS-11 CLOSED as M59 (the lift is first-order rigidity; a finite-plane subgraph lifts only if it
 is a shadow; the 1581 recovered from its residues, its merged image obstructed in the kernel; the hub scan). The table's top, under the
@@ -2841,7 +2841,7 @@ record shows what was believed, what was measured, and what is now proved.
   about the objects.** Applied at the M59 close: FS-14 (a 121-vertex computation plus a homomorphism argument) over FS-6 (an
   object search); and the broad question the two milestones point at — every upper bound we hold is local at one prime and
   every forcer hides from every small prime — minted as the local–global tightness conjecture (FS-15,
-  `plans/STUB-local-global-tightness.md`): χ(F²) equals its best local bound wherever that bound is ≤ 6 (attained at all six
+  `plans/M61-local-global-tightness.md`): χ(F²) equals its best local bound wherever that bound is ≤ 6 (attained at all six
   fields where χ is known, twice predicted before the forcer was built), whose first digit is "is any finite Euclidean plane
   exactly 6-chromatic" and whose bold form is χ(ℝ²) = 7. **[the rule: the project's own record, two milestones; the
   conjecture: six instances, no counterexample, stated to be pushed back on]** *Falsifier for the rule: a frontier milestone
