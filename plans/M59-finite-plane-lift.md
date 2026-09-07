@@ -615,10 +615,10 @@ the refutation of the finite graph — and says so in its docstring.
   therefore NOT produced this milestone; the calibration cores (5-critical at 11: 63 vertices; at 19: in flight) and the
   merged-image witness are the milestone's finite-plane objects, and P2 (every such core obstructed) stands untested at 131 —
   its derivation (§S1 (b)) says what the search would find. 83 and 59 follow in the chain, one hour each.
-* **Gate (2026-09-06 22:28 and 22:40 UTC, `build/m59/gate-{build,axioms,lint}.log`):** `scripts/build.sh` OK; `scripts/axioms.sh`
-  OK — 616 clean, 5 declared purchases (all M59 declarations on exactly `[propext, Classical.choice, Quot.sound]`: the lift
-  theorem, the plane composite, the obstruction and its headline, the certificate consumer, the two instances' theorems);
-  `lake lint` passed (after three field docstrings); zero `sorry`.
+* **Gate (2026-09-06 22:28, 22:40 and 2026-09-07 06:34 UTC, `build/m59/gate-{build,axioms,lint}.log`):** `scripts/build.sh` OK;
+  `scripts/axioms.sh` OK — 617 clean, 5 declared purchases (all M59 declarations on exactly `[propext, Classical.choice,
+  Quot.sound]`: the lift theorem, the plane composite, the obstruction and its headline, the certificate consumer, the three
+  instances' theorems at 131, 11 and 19); `lake lint` passed (after three field docstrings); zero `sorry`.
 * **P7 measured, corrected scan (`data/fplane/hubs-degrey1581-p131.json`, 602 s):** of the 15,596 residue classes at 131 with
   ≥ 3 residue-neighbours among the 1581's 1,547, **3,739 carry a p-adic point at unit distance from ≥ 3 of the 1581's vertices**
   to precision 131²⁰ — support 3: 1,277; 4: 1,269; 5: 442; 6: 372; 7: 115; 8: 114; 9: 80; 10: 2; 11: 12; 12: 36; 13: 20 — each
@@ -643,7 +643,7 @@ the refutation of the finite graph — and says so in its docstring.
 | UD(𝔽₈₃,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (6,889 vertices, 1,522,472 clauses) | — | `build/m59/plane-p83-k5.log` |
 | UD(𝔽₅₉,2) at k = 5, whole plane | UNDECIDED at the one-hour wall (3,481 vertices, 560,444 clauses; Hoffman 5.022) | P3's second half as registered | `build/m59/plane-p59-k5.log` |
 | the 5-critical core of UD(𝔽₁₁,2) | **63 vertices, 246 edges**, six quadrances about the origin, 1-minimal (63 necessity witnesses); **rigid (rank 123 = 2n − 3), OBSTRUCTED at level 2 — 98 of 123 stress conditions fail; witness 12 edges on 9 vertices, pairing 33** — the plane's own 5-critical core is not a shadow (P2's analogue one level down; kernel instance `Instances/LiftObstruction11.lean`) | the solver's refusal (untrusted) + verified colourings; the obstruction decided | `core-p11-k4-spheres.json`, `lift-core-p11-k4-spheres.json` |
-| the 5-critical core of UD(𝔽₁₉,2) | in flight at the close (the sphere shrink at 9 spheres, near-threshold asks hitting the 600-s wall; then the vertex shrink and `local`) — the record lands in `data/fplane/core-p19-k4-spheres.json` and `lift-core-p19-k4-spheres.json` | — | `build/m59/cores-p19-k4.log`, `local-core-p19-k4.log` |
+| the 5-critical core of UD(𝔽₁₉,2) | **138 vertices, 619 edges**, eight quadrances about the origin, 1-minimal (138 necessity witnesses, 0 undecided; 8.3 h — the near-threshold asks hit the 600-s wall and were kept, soundly); **rigid (rank 273 = 2n − 3), OBSTRUCTED at level 2 — 330 of 346 stress conditions fail; witness 29 edges on 17 vertices, pairing 342** (kernel instance `Instances/LiftObstruction19.lean`) | the solver's refusal (untrusted) + verified colourings; the obstruction decided | `core-p19-k4-spheres.json`, `lift-core-p19-k4-spheres.json` |
 
 ### §R4. Registered predictions, scored
 
@@ -653,7 +653,7 @@ the refutation of the finite graph — and says so in its docstring.
 | P2 | every 6-critical core fails level 2 with a high obstruction count | NOT TESTED at 131; stands by derivation (§S1 (b)); its analogue one level down MEASURED — the 5-critical core of UD(𝔽₁₁,2) fails with 98 of 123; the merged image (a ≥ 5-chromatic subgraph) with 2,406 of 4,785 |
 | P3 | cadical refutes five colours on the whole plane at 131 within an hour; at 59 it does not | **first half REFUTED** (undecided at 1 h; 83 likewise); **second half MET** (59 undecided at 1 h) |
 | P4 | the injective sub-reduction passes to 131²⁰ and equals the tower coordinates; the merged image is obstructed at level 2 | **MET, all three parts** |
-| P5 | every core found is infinitesimally rigid at its residues | **MET on the 11-core** (rank 123 = 2n − 3); the 19-core in flight |
+| P5 | every core found is infinitesimally rigid at its residues | **MET on both calibration cores** (11: rank 123 = 2n − 3; 19: rank 273 = 2n − 3) |
 | P6 | the sphere-minimal ≥ 6 object at 131 has 20–60 spheres | NOT TESTED |
 | P7 | fewer than 50 hub passers on the 1581, all gen-1 residues | **REFUTED in both halves**: 3,739, none in gen-1 |
 | P8 | `Lift.lean` on the standard three, the obstruction theorem under 250 lines | **MET** (the module is 320 lines with its spec; the obstruction section is 90) |
@@ -704,9 +704,8 @@ kernel form of the rigid dichotomy (hand derivation, §S1).
 
 ### §R8. Left in flight at the close (2026-09-07 00:26 UTC)
 
-* The 5-critical core of UD(𝔽₁₉,2) (`build/m59/cores_chain-snapshot.sh`: the sphere shrink, then the vertex shrink, then `local` on
-  both calibration cores; logs `build/m59/cores-p19-k4.log`, `local-core-p{11,19}-k4.log`) — its record and its obstruction
-  verdict go into §R3 and P5's row.
+* ~~The 5-critical core of UD(𝔽₁₉,2)~~ — DONE at 2026-09-07T06:29:26Z (138 vertices, 1-minimal, obstructed with 330 of 346; §R3, P5; kernel instance `Instances/LiftObstruction19.lean`).
+  Nothing is left in flight.
 * ~~The M55 108 asks~~ — DONE at 00:22 UTC (0 hits, 22 refuted, 86 undecided; M55 §R6 addendum written, the FS-3 datum
   recorded, the input file moved into `data/m55`).
 
