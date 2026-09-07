@@ -191,10 +191,9 @@ all `unknown`; 59, 83, 131 at one hour with external cadical, M59). Before anoth
   is a NECESSARY condition for `χ = 5`** — a cardinality-constrained SAT far smaller than the colouring (`build/m61/alpha.py`, an
   opening scratch instrument to promote into `tools/fpcompel.py` if it earns it). Calibrated at the close: it is NOT tight —
   **`α(UD(𝔽₁₁, 2)) = 28` exactly** (size 28 found in 0.1 s, size 29 refused by cadical in 92 s), so the fractional number at 11 is
-  `121/28 ≈ 4.32` against the true `χ = 5`; at 19, `α ≥ 76` (> 361/5 = 72.2) with the loop still climbing at the compaction. The
+  `121/28 ≈ 4.32` against the true `χ = 5`; at 19, `α ≥ 76` (> 361/5 = 72.2; size 78 unknown at an 800-s wall, so `α(19) ∈ {76, 77}` or the wall was too short). The
   finite planes share the real plane's pathology (G24: ω = 3, every relaxation low, χ high), so the fractional face will not decide
-  the first digit alone; it is a free necessary condition and a calibration of how far below χ every relaxation sits. The exact α
-  at 19 and the decisive instance at 23 (`α ≥ 106?`, 2-hour wall) were running at the compaction — `build/m61/alpha-p*.json`,
+  the first digit alone; it is a free necessary condition and a calibration of how far below χ every relaxation sits. The decisive instance at 23 (`α ≥ 106?`, 2-hour wall) were running at the compaction — `build/m61/alpha-p*.json`,
   `build/m61/alpha-p23.log`, the jobs ledger (all gitignored; copy any verdict into `data/fplane/` at opening). If 23 returns UNSAT, `χ(UD(𝔽₂₃, 2)) ≥ 6` with no colouring search, and a 6-colouring
   (cheap to find if it exists) makes it exactly 6: the first plane at 6, and a field named by congruences. If SAT (likely, by the
   calibration), the necessary condition is met and the colouring question stands.
