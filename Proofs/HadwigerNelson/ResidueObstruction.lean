@@ -13,8 +13,8 @@ along homomorphisms** (`Forces.image`, `Separated.image` — `Forces.comap` and 
 statements about `P`).
 
 On a Cayley graph `addCayley S` of an abelian group the translations are automorphisms (Mathlib's
-`addCayley_adj_add_iff_right`), so every compulsion reduces to the origin (`forces_iff_forces_zero`,
-`separated_iff_separated_zero`), and an origin compulsion at `d` is refuted by ONE colouring: `Forces P k 0 d`
+`addCayley_adj_add_iff_right`), so every compulsion reduces to the origin (`forces_iff_forces_zero_sub`,
+`separated_iff_separated_zero_sub`), and an origin compulsion at `d` is refuted by ONE colouring: `Forces P k 0 d`
 fails as soon as some colouring `C` has `C (t + d) ≠ C t` for some `t` — as soon as `d` is not a period of `C`
 (`Function.Periodic`); `Separated P k 0 d` fails as soon as some colouring coincides at `d` somewhere.
 Two decidable properties of a single table therefore settle the whole compulsion structure of the graph at
@@ -26,11 +26,21 @@ The finite plane `UD(𝔽_p, 2) = unitQuadrance (ZMod p)` is `addCayley` of the 
 certified table of `Instances/FinitePlane11.lean` has both properties (`Instances/ResidueObstruction11.lean`),
 so for every `√7`-free tower certificate with `11 ∤ D`: a pair forced equal at five colours has equal
 residues — the residue of its squared distance is `0` — and a virtual edge has adjacent residues — the residue
-of its squared distance is `1` (`Forces.quad_image_eq_zero`, `Separated.quad_image_eq_one`, through
+of its squared distance is `1` (`Forces.quad_sub_eq_zero`, `Separated.quad_sub_eq_one`, through
 `UDCert.drawing_quad`: the quadrance of a drawn difference IS the residue of the stored squared distance).
 The hex-shell distances `√3` and `2` (`3, 4 ≢ 0, 1` modulo every prime `≥ 5`) can therefore carry neither
 compulsion over any field whose plane at a usable prime is 5-colourable. That is the compulsion-level
 content of "5-sealed" (M58), one gadget at a time.
+
+## What a consumer may conclude, and what not
+
+Every theorem here is about a graph `G` with a homomorphism into a Cayley graph coloured by ONE table with
+the two properties, or about a certificate reduced through a subring hom (M58's hypotheses: coordinates in
+the subring, an inverse of the denominator, `Valid`). Nothing here says that a unit-distance graph in a
+number field reduces — that every unit vector is `𝔭`-integral is the hand argument of M58 — nor anything
+about a prime whose plane refuses `k` colours (then no table exists and the theorems have no hypothesis to
+take: de Grey's field at `131`). The general theorems quantify over any `k`; the instance at `11` fixes
+`k = 5`. Solver-found colourings at other primes (`data/fplane/compulsions-p*.json`) are not here.
 -/
 
 namespace HadwigerNelson
@@ -41,11 +51,12 @@ variable {V W : Type*} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ}
 
 /-! ### Compulsions map forward along homomorphisms -/
 
-/-- **A forced pair's image is forced.** `Forces.comap` read as a statement about the target graph. -/
+/-- **A forced pair's image is forced.** `Forces.comap` (M13) read as a statement about the target graph, and
+`Forces.map` (an endomorphism carries a forced pair) generalized to any homomorphism. -/
 theorem Forces.image (f : G →g P) {u v : V} (h : Forces G k u v) : Forces P k (f u) (f v) :=
   fun C => h.comap f C
 
-/-- **A virtual edge's image is a virtual edge.** -/
+/-- **A virtual edge's image is a virtual edge.** `Separated.comap` (M48) as a statement about the target. -/
 theorem Separated.image (f : G →g P) {u v : V} (h : Separated G k u v) : Separated P k (f u) (f v) :=
   fun C => h.comap f C
 
@@ -54,20 +65,21 @@ theorem Separated.image (f : G →g P) {u v : V} (h : Separated G k u v) : Separ
 variable {A : Type*} [AddCommGroup A] {S : Set A}
 
 /-- **Translation by `t` is a homomorphism** (an automorphism) of the Cayley graph: adjacency depends only
-on the difference (`addCayley_adj_add_iff_right`). -/
-def addCayley.translate (S : Set A) (t : A) : addCayley S →g addCayley S where
+on the difference (Mathlib's `addCayley_adj_add_iff_right` is the adjacency fact; the hom is ours, kept out
+of Mathlib's `SimpleGraph.addCayley` namespace). -/
+def addCayleyTranslate (S : Set A) (t : A) : addCayley S →g addCayley S where
   toFun v := t + v
   map_rel' h := (addCayley_adj_add_iff_right).mpr h
 
-@[simp] theorem addCayley.translate_apply (t v : A) : addCayley.translate S t v = t + v := rfl
+@[simp] theorem addCayleyTranslate_apply (t v : A) : addCayleyTranslate S t v = t + v := rfl
 
 /-- A forced pair of a Cayley graph is forced at the origin, by its difference. -/
-theorem forces_iff_forces_zero {x y : A} :
+theorem forces_iff_forces_zero_sub {x y : A} :
     Forces (addCayley S) k x y ↔ Forces (addCayley S) k 0 (y - x) := by
   sorry
 
 /-- A virtual edge of a Cayley graph is a virtual edge at the origin, by its difference. -/
-theorem separated_iff_separated_zero {x y : A} :
+theorem separated_iff_separated_zero_sub {x y : A} :
     Separated (addCayley S) k x y ↔ Separated (addCayley S) k 0 (y - x) := by
   sorry
 
@@ -140,12 +152,12 @@ theorem Separated.image_adj_of_coincides (col : (addCayley S).Coloring (Fin k))
 variable {R : Type*} [CommRing R]
 
 /-- **Forced equal ⟹ the image difference has quadrance `0`.** -/
-theorem Forces.quad_image_eq_zero (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
+theorem Forces.quad_sub_eq_zero (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col)
     (f : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) : quad (f u - f v) = 0 := by
   sorry
 
 /-- **A virtual edge ⟹ the image difference has quadrance `1`.** -/
-theorem Separated.quad_image_eq_one (col : (unitQuadrance R).Coloring (Fin k))
+theorem Separated.quad_sub_eq_one (col : (unitQuadrance R).Coloring (Fin k))
     (hc : CoincidesAtNonedges (unitQuadrance R) col) (f : G →g unitQuadrance R) {u v : V}
     (h : Separated G k u v) : quad (f u - f v) = 1 := by
   sorry

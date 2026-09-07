@@ -381,3 +381,48 @@ not weaker (a `2√3`-pair is residue-allowed). The statements read aloud: "a pa
 subring has equal residues at 11; a virtual edge has adjacent residues; hence `√3`- and distance-2 pairs are neither" — and the
 formal statements say exactly that, with the certificate-level hypotheses M58 already carries. Nothing in the pass changed a
 statement; the decomposition is descending everywhere (sixteen leaves, each one idea).
+
+## §M3. Experience-modeling pass (2026-09-07; fresh Skill invocation)
+
+**The users.** (i) A session holding `Forces`/`Separated` on a certificate over Heule's field with M58's three reduction
+hypotheses already in hand (`CoordsIn sevenFree`, the denominator's inverse, `Valid`) and asking what residues say: the path
+must add nothing but the pair's class distance. (ii) A session citing "the plane at 11 has no pair compulsion at five colours":
+three closed statements. (iii) The tools' reader of `data/fplane/*.json`. (iv) `exact?`/`apply?` on `¬ Separated (edgeGraph n
+c.edges) 5 i j`. The frozen upstream vocabulary the surface must not rename: `Forces.comap`/`Forces.map` (Forcer.lean),
+`Separated.comap` (Arity.lean), `res11`, `heule510Reduce11`, `finitePlane11Colouring` (FinitePlane11.lean).
+
+**Decisions (each: choice · alternative · why · confidence).**
+
+| surface | choice | alternative | why | conf. |
+|---|---|---|---|---|
+| the forward transfer | `Forces.image` / `Separated.image` (`Forces P k (f u) (f v)`), docstrings naming `comap` (per-colouring form) and `map` (endomorphisms) as the same fact | rename nothing, use `comap` inline | `comap`'s conclusion is about one colouring; the consumer holds the target graph's compulsion; `map` is taken by the endomorphism form in a frozen module | high |
+| the translation hom | `addCayleyTranslate S t` in `HadwigerNelson` | `addCayley.translate` (reads as Mathlib's namespace; a future Mathlib name clash is plausible) | Mathlib's namespace stays Mathlib's; the docstring says whose the hom is | high |
+| the origin reduction | `forces_iff_forces_zero_sub`, `separated_iff_separated_zero_sub` | `_zero` | the name says the right-hand side (`0` and `y − x`) | high |
+| the coincidence hypothesis | the raw `∃ t, col (t + d) = col t` | a def `Coincides col d` | two uses, both readable raw; Mathlib names only the `∀` dual (`Periodic`); one fewer name | medium — if a third use appears, mint it |
+| `@[simp]` | none: not the two `iff`s (data hypotheses), not the 11 instances (`Forces (finitePlane 11) 5 u v` never appears in a simp goal), not `drawing_quad` (its normal form is large) | tag the 11 instances | every simp lemma taxes every simp call; no consumer benefits | high |
+| the distance law's names | `Forces.quad_sub_eq_zero`, `Separated.quad_sub_eq_one` (what vanishes / what is one) | `quad_image_eq_zero` | Mathlib names the shape of the conclusion | high |
+| the certificate identity | `drawing_quad` (object-first, beside M58's `coord_quadrance`), `drawing_quad_of_distSq`, `coord_distSq`; `drawing_adj` untouched (a `--` note that it is the `r = 1` face) | re-derive `drawing_adj` from it | an upstream edit rebuilds four modules for a cross-reference | high |
+| the six hypotheses | kept: M58's three (`hS hu hv`, named theorems every certificate already has) + `hps hmem` (one decide each) + `hr` (a decide) — the `_11` instances fix `r` and drop `hr` | bundle `CoordsIn ∧ u·D = 1 ∧ Valid` into one decidable predicate | `Valid` is never re-decided on a large certificate (`heule510_valid` is a theorem); bundling would push consumers to re-decide it | high |
+| instance names | uniform `_11` suffix on theorems (`residue_eq_of_forces_11`, `not_separated_sqrt3_11`, …); defs keep M58's `res11` style | `finitePlane11` token in every name | length; the token is the module's | medium |
+| the spelling trap | the bundled colouring is `finitePlane11Colouring.toColoring` (dot notation on the function) | `finitePlane11Coloring` (one letter from the function's name) | one object, one name; the trap is gone | high |
+| the floor's upper end | `arityFloor_finitePlane11_le_five` by `arityFloor_le_of_degree` on five neighbours of the origin (`(1,0),(0,1),(10,0),(0,10),(5,3)`) — the bracket `{3,4,5}` in the kernel | leave `≤ 5` to the docstring | a consumer citing the bracket should not have to prove the easy half | high |
+| the positive spec | an edge of Heule-510 is separated (`Separated.of_adj`) and the theorem returns adjacent residues | none | closes the loop — the theorem is not only a refuter | high |
+| the second path | `#guard decide (Aperiodic …)` and `#guard decide (CoincidesAtNonedges …)`: the compiled evaluator beside the kernel decide | none | a decorrelated check of the two properties, free | high |
+| module docs | both carry "what a consumer may conclude, and what not" (M58's pattern): certificate level, not field level; no table at a refusing prime | — | the boundary is the most important byte on the wire | high |
+| the audit block | `Forces.image`, `forces_iff_eq_of_aperiodic`, `separated_iff_adj_of_coincides`, `three_le_arityFloor_of_aperiodic_coincides`, `UDCert.drawing_quad`, `UDCert.not_separated_of_distSq`, `finitePlane11_forces_iff`, `finitePlane11_separated_iff`, `three_le_arityFloor_finitePlane11`, `arityFloor_finitePlane11_le_five`, `UDCert.not_separated_sqrt3_11`, `UDCert.not_separated_two_11`, `UDCert.not_forces_five_11` | — | the headline theorems and every instance a report cites | high |
+
+**The instrument's surface** (`tools/fpcompel.py`): every headline names its population and the trust of each verdict in the
+same sentence (G21): `sets` — "p=11 k=5: F = {0}, S = N₁ of 10 norm classes; F by the table (aperiodic); S: 9 classes identified by
+verified colourings (table 9, solver 0), 0 solver-UNSAT"; `filter` — per pair the residue norm, the verdict, and for
+`separated-impossible` the TRANSLATE `t` of the table (the colouring `v ↦ table(res(v) + t)` is then re-derivable from the record's
+residues and the table file without the tool) verified proper on the whole stage and identifying the pair; `augment` — the cheat
+residue pairs, `k`-colourable or not (UNSAT marked untrusted), the A/B identification with its colouring; the error path: a stage
+with a radical lacking a residue names the radical; the M55 assembly is accepted only when `n = 10,541` and all 69,910 edges land
+on the circle, else it names the count. Records carry `claim_scope`. What the tool does NOT claim: solver UNSATs; anything the
+kernel holds is the 11 instance only.
+
+**The report surfaces.** §R0–§R8 as M59's; ledger row 55; G47 (the compulsion face of sealing — the four sealing planes pairwise
+free — with its falsifier); the Frontier paragraph; the memory file.
+
+**Applied to the skeleton (this commit):** every rename above; the floor's upper end; the positive example; the two `#guard`s;
+both module docs; the probe regenerated from the renamed modules with the proofs substituted — green in 3.4 s.
