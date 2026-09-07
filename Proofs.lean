@@ -7,6 +7,7 @@ import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.UnitQuadrance
 import Proofs.HadwigerNelson.Lift
 import Proofs.HadwigerNelson.ResidueObstruction
+import Proofs.HadwigerNelson.LocalGlobal
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
 import Proofs.HadwigerNelson.Motion
@@ -102,6 +103,7 @@ import Proofs.HadwigerNelson.Instances.LiftObstruction131
 import Proofs.HadwigerNelson.Instances.LiftObstruction11
 import Proofs.HadwigerNelson.Instances.LiftObstruction19
 import Proofs.HadwigerNelson.Instances.ResidueObstruction11
+import Proofs.HadwigerNelson.Instances.LocalGlobal19
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound

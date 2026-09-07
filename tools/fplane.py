@@ -99,6 +99,11 @@ def clique_pins(p: int):
 
 
 def cmd_chi(a):
+    if getattr(a, "q", None):
+        out = chi_q(a.q, a.k, a.conf)
+        DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"chi-q{a.q}.json"
+        path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+        return out
     p = a.p; E, deg = ud_edges(p); n = p * p
     ks = [a.k] if a.k else list(range(2, p + 2))
     pins, omega = (clique_pins(p) if a.pin_clique else (None, None))
@@ -540,15 +545,379 @@ def self_test():
     check("shadow: the single direction (0,1) at p = 11 gives 11 disjoint 11-cycles — odd, so 2 refused and 3 found", s2 == "unsat" and s3 == "sat" and len(E1) == 121)
     D510 = shadow_dirs(red, H.edges, 11)
     check(f"shadow: Heule-510's directions cover all 6 circle residues up to sign at p = 11 (got {len(D510)})", len(D510) == 6)
+    # M61: the periodic quotient, the Lovász number, the symmetry face
+    r19 = periodic_row(19); r11 = periodic_row(11)
+    check(f"periodic: χ(C_19) = 5 with the lifted colouring verified on the plane; α(C_19) = 4 lifts to 76 verified (got {r19['chi_circ']}, {r19['alpha_plane_ge']})",
+          r19["chi_circ"] == 5 == r19["chi_circ_lo"] and r19.get("lift_verified") and r19["alpha_plane_ge"] == 76 and r19.get("indep_lift_verified"))
+    check(f"periodic: χ(C_11) = 6 — five refused (the solver's), six lifted and verified: no periodic 5-colouring at 11 (got [{r11['chi_circ_lo']}, {r11['chi_circ']}])",
+          r11["chi_circ"] == 6 == r11["chi_circ_lo"] and r11.get("lift_verified"))
+    # planted red: a NON-null direction at 7 — (1,1) has norm 2 = 3², its line meets the circle, so the projected set contains 0
+    check("planted red: the non-null direction (1,1) at 7 projects a circle point to 0 (no periodic colouring along it)", 0 in {proj_along((1, 1), s_, 7) for s_ in circle(7)})
+    th = theta_row(11)
+    check(f"theta: ϑ = ϑ′ = Hoffman at 11 to 1e-6 (arc-transitivity; got {th['theta']:.4f} vs {th['hoffman_alpha']:.4f})", abs(th["theta_minus_hoffman"]) < 1e-6 and abs(th["theta_prime"] - th["hoffman_alpha"]) < 1e-6)
+    g2 = next(g for g, o in rotations(11) if o == 2)
+    st_e, _ = equivariant_colouring(11, 5, g2, (1, 0, 3, 2, 4), 5_000_000)
+    check("equivariant: the half-turn with τ = (01)(23) admits a 5-colouring at 11, verified proper and equivariant", st_e == "sat")
+    st_i, _ = equivariant_colouring(11, 5, g2, (0, 1, 2, 3, 4), 5_000_000)
+    check("planted red: a rotation-INVARIANT (τ = id) proper colouring is impossible (z ~ −z on the circle of norm 1/4)", st_i == "unsat")
     ok = not fails
     print(f"[self-test] {'ALL GREEN' if ok else 'RED: ' + ', '.join(fails)}")
     return ok
 
 
+# ---------------------------------------------------------------------- M61: the plane's own invariants
+# The periodic quotient, the fractional face, the Lovász number, the symmetry face, the odd-degree planes
+# (`plans/M61-local-global-tightness.md` §S1–§S4). Every verdict line names its population and its trust word.
+
+def is_square_mod(x: int, p: int) -> bool:
+    x %= p
+    return x == 0 or pow(x, (p - 1) // 2, p) == 1
+
+def null_direction(p: int):
+    """a direction (a, b) of non-square norm: the line F_p·(a,b) misses the unit circle"""
+    for a in range(p):
+        for b in range(p):
+            if (a, b) != (0, 0) and not is_square_mod(a * a + b * b, p):
+                return (a, b)
+    raise ValueError(f"no null direction at {p} (p ≡ 1 mod 4?)")
+
+def proj_along(v, w, p: int) -> int:
+    """the projection along v: the 2-D determinant v.1·w.2 − v.2·w.1 (kernel = the line through v) — `projAlong` in the kernel"""
+    return (v[0] * w[1] - v[1] * w[0]) % p
+
+def quotient_set(p: int, v):
+    """D = the projections of the unit circle along v (never 0 when v is null; symmetric; (p+1)/2 elements)"""
+    D = sorted({proj_along(v, s, p) for s in circle(p)})
+    return D
+
+def circulant_edges(p: int, D):
+    return [(i, j) for i in range(p) for j in range(i + 1, p) if (j - i) % p in D]
+
+def sat_colour_budget(n: int, E, k: int, pins=None, conf: int = 2_000_000, extra=None):
+    """k-colouring under a conflict budget: ('sat', col) with col verified proper, ('unsat', None) the solver's, ('unknown', None)"""
+    from pysat.solvers import Cadical195
+    var = lambda v, c: v * k + c + 1
+    s = Cadical195()
+    for v in range(n):
+        s.add_clause([var(v, c) for c in range(k)])
+    for (u, v) in E:
+        for c in range(k):
+            s.add_clause([-var(u, c), -var(v, c)])
+    for (v, c) in (pins or [(0, 0)]):
+        s.add_clause([var(v, c)])
+    for cl in (extra or []):
+        s.add_clause(cl)
+    s.conf_budget(conf)
+    ok = s.solve_limited()
+    if ok is None:
+        return "unknown", None
+    if not ok:
+        return "unsat", None
+    m = set(x for x in s.get_model() if x > 0)
+    col = [next(c for c in range(k) if var(v, c) in m) for v in range(n)]
+    assert all(col[u] != col[v] for (u, v) in E), "INSTRUMENT CATASTROPHE: the model is not a proper colouring"
+    return "sat", col
+
+def sat_indep_atleast(n: int, E, N: int, conf: int = 2_000_000):
+    """an independent set of size ≥ N under a conflict budget: ('sat', S) verified, ('unsat', None) the solver's, ('unknown', None)"""
+    from pysat.solvers import Cadical195
+    from pysat.card import CardEnc, EncType
+    s = Cadical195()
+    for (u, v) in E:
+        s.add_clause([-(u + 1), -(v + 1)])
+    s.add_clause([1])
+    for cl in CardEnc.atleast(lits=list(range(1, n + 1)), bound=N, top_id=n, encoding=EncType.seqcounter).clauses:
+        s.add_clause(cl)
+    s.conf_budget(conf)
+    ok = s.solve_limited()
+    if ok is None:
+        return "unknown", None
+    if not ok:
+        return "unsat", None
+    m = set(x for x in s.get_model() if x > 0)
+    S = [v for v in range(n) if (v + 1) in m]
+    Es = set(E)
+    assert all((min(u, v), max(u, v)) not in Es for u in S for v in S if u != v), "INSTRUMENT CATASTROPHE: not independent"
+    return "sat", S
+
+def periodic_row(p: int, conf: int = 2_000_000, verify_lift: bool = True):
+    """the circulant C_p of a null direction: χ(C_p) as [lo, hi] (hi a colouring VERIFIED as a lifted colouring of the plane),
+    α(C_p) as [lo, hi] (lo a set whose lift is VERIFIED independent in the plane)"""
+    v = null_direction(p)
+    D = quotient_set(p, v)
+    assert 0 not in D and len(D) == (p + 1) // 2 and all((-d) % p in D for d in D)
+    E = circulant_edges(p, D)
+    lo, hi, col = 1, None, None
+    for k in range(1, p + 1):
+        st, c = sat_colour_budget(p, E, k, conf=conf)
+        if st == "unsat":
+            lo = k + 1
+        elif st == "sat":
+            hi, col = k, c
+            break
+    alo, ahi, S = 0, None, None
+    N = 1
+    while True:
+        st, S1 = sat_indep_atleast(p, E, N, conf=conf)
+        if st == "unsat":
+            ahi = alo; break
+        if st == "unknown":
+            break
+        S, alo = S1, len(S1); N = alo + 1
+    row = dict(p=p, direction=v, D=D, circulant_edges=len(E), chi_circ_lo=lo, chi_circ=hi, alpha_circ=alo, alpha_circ_hi=ahi,
+               colouring=col, indep=S, alpha_plane_ge=p * alo)
+    if verify_lift and p <= 100:
+        circ = set(circle(p))
+        if col is not None:
+            lifted = {(x, y): col[proj_along(v, (x, y), p)] for x in range(p) for y in range(p)}
+            assert all(lifted[(a, b)] != lifted[((a + s) % p, (b + t) % p)] for (a, b) in lifted for (s, t) in circ), \
+                "INSTRUMENT CATASTROPHE: the lifted colouring is not proper on the plane"
+            row["lift_verified"] = True
+        if S is not None:
+            pts = [(x, y) for x in range(p) for y in range(p) if proj_along(v, (x, y), p) in set(S)]
+            assert len(pts) == p * alo
+            assert all(((a - c) % p, (b - d) % p) not in circ for (a, b) in pts for (c, d) in pts), \
+                "INSTRUMENT CATASTROPHE: the lifted independent set is not independent"
+            row["indep_lift_verified"] = True
+    return row
+
+def cmd_periodic(a):
+    rows = []
+    t0 = time.time()
+    for p in range(3, a.below + 1):
+        if not is_prime(p) or p % 4 != 3:
+            continue
+        t1 = time.time()
+        r = periodic_row(p, conf=a.conf)
+        r["seconds"] = round(time.time() - t1, 1)
+        rows.append(r)
+        chis = f"{r['chi_circ']}" if r["chi_circ"] == r["chi_circ_lo"] else f"[{r['chi_circ_lo']}, {r['chi_circ']}]"
+        als = f"{r['alpha_circ']}" if r["alpha_circ_hi"] == r["alpha_circ"] else f"≥ {r['alpha_circ']}"
+        print(f"[periodic] p={p:3d}: C_p has {len(r['D'])} generators; χ(C_p) = {chis:>8s} (hi: a lifted colouring verified on the plane; lo: the solver's refusal), "
+              f"α(C_p) = {als:>4s} (a lifted independent set of {r['alpha_plane_ge']} plane points verified) → χ(UD) ≤ {r['chi_circ']}, α(UD) ≥ {r['alpha_plane_ge']}  [{r['seconds']}s]", flush=True)
+    out = dict(kind="fplane-periodic", below=a.below, conflict_budget=a.conf, rows=rows, seconds=round(time.time() - t0, 1),
+               claim_scope="per prime, the circulant C_p = Cay(F_p, π(S)) of one null direction (all null directions are one rotation orbit): "
+                           "chi_circ carries a colouring of C_p whose lift (constant on the null line's cosets) is VERIFIED proper on the plane — χ(UD(F_p,2)) ≤ chi_circ; "
+                           "chi_circ_lo − 1 is the solver's refusal (untrusted): no PERIODIC colouring below it; alpha_circ·p is a verified independent set of the plane; "
+                           "alpha_circ_hi = alpha_circ means alpha_circ + 1 was refused by the solver; unknown budgets leave hi = null")
+    DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"periodic-below-{a.below}.json"
+    path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+    return out
+
+def scheme_eigen(p: int):
+    """λ_c(c') = Σ_{s ∈ N_c} cos(2π⟨m, s⟩/p) with N(m) = c' — the eigenmatrix of the norm-class translation scheme"""
+    classes = {}
+    for x in range(p):
+        for y in range(p):
+            if (x, y) != (0, 0):
+                classes.setdefault((x * x + y * y) % p, []).append((x, y))
+    reps = {c: classes[c][0] for c in classes}
+    L = {}
+    for c in range(1, p):
+        for cp in range(0, p):
+            m = (0, 0) if cp == 0 else reps[cp]
+            L[(c, cp)] = sum(math.cos(2 * math.pi * (m[0] * s[0] + m[1] * s[1]) / p) for s in classes[c])
+    return L
+
+def theta_row(p: int):
+    """ϑ and Schrijver's ϑ′ of UD(F_p,2) by the LP over the norm classes (translation + O(2) symmetry); Hoffman as the control"""
+    import numpy as np
+    from scipy.optimize import linprog
+    L = scheme_eigen(p)
+    cs = list(range(2, p)); n = p * p
+    cobj = -np.array([(p + 1)] * len(cs), dtype=float)
+    A = [[-L[(c, cp)] for c in cs] for cp in range(0, p)]; b = [1.0] * p
+    res = {}
+    for name, bounds in (("theta", (None, None)), ("theta_prime", (0, None))):
+        r = linprog(cobj, A_ub=np.array(A), b_ub=np.array(b), bounds=[bounds] * len(cs), method="highs")
+        assert r.status == 0, r.message
+        res[name] = float(1 - r.fun)
+    lmin = min(L[(1, cp)] for cp in range(1, p))
+    hoff_alpha = n * (-lmin) / ((p + 1) - lmin)
+    return dict(p=p, n=n, theta=res["theta"], theta_prime=res["theta_prime"], hoffman_alpha=hoff_alpha,
+                theta_minus_hoffman=res["theta"] - hoff_alpha,
+                chi_floor=math.ceil(n / res["theta_prime"] - 1e-9), alpha_needed_for_5=math.ceil(n / 5))
+
+def cmd_theta(a):
+    rows = []
+    for p in range(3, a.below + 1):
+        if not is_prime(p) or p % 4 != 3:
+            continue
+        r = theta_row(p); rows.append(r)
+        print(f"[theta] p={p:3d} n={r['n']:5d}: ϑ = {r['theta']:9.3f}, ϑ′ = {r['theta_prime']:9.3f}, Hoffman α ≤ {r['hoffman_alpha']:9.3f} "
+              f"(ϑ − Hoffman = {r['theta_minus_hoffman']:.1e}) → χ ≥ {r['chi_floor']} (a float LP; α ≥ {r['alpha_needed_for_5']} needed for five colours)", flush=True)
+    out = dict(kind="fplane-theta", below=a.below, rows=rows,
+               claim_scope="ϑ(UD(F_p,2)) and Schrijver's ϑ′ by the LP over the p−1 norm classes of the translation scheme (its eigenmatrix the "
+                           "Kloosterman table), solved by HiGHS in floats; α ≤ ϑ′ ≤ ϑ, χ ≥ ⌈n/ϑ′⌉ — a derivation (Lovász 1979) plus a float LP; "
+                           "the Hoffman column is the control: for an arc-transitive graph ϑ equals the Hoffman ratio bound (Lovász, Thm 9), so "
+                           "theta_minus_hoffman must be ~0; no kernel content")
+    DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"theta-below-{a.below}.json"
+    path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+    return out
+
+def cmd_alpha(a):
+    """the independence number's ladder under the EXTERNAL cadical (pysat's wall is inert on big instances)"""
+    import subprocess, os
+    from pysat.formula import CNF
+    from pysat.card import CardEnc, EncType
+    p = a.p; E, deg = ud_edges(p); n = p * p
+    cad = os.path.join(subprocess.check_output(["lean", "--print-prefix"]).decode().strip(), "bin", "cadical")
+    Ns = [a.N] if a.N else list(range(math.ceil(n / 5) - 2, n))
+    rows = []; best = None; scratch = ROOT / "build" / "m61"; scratch.mkdir(parents=True, exist_ok=True)
+    for N in Ns:
+        cnf = CNF()
+        for u, v in E: cnf.append([-(u + 1), -(v + 1)])
+        cnf.append([1])
+        cnf.extend(CardEnc.atleast(lits=list(range(1, n + 1)), bound=N, top_id=n, encoding=EncType.seqcounter).clauses)
+        path = scratch / f"alpha-p{p}-N{N}.cnf"; cnf.to_file(str(path))
+        t0 = time.time()
+        r = subprocess.run(["timeout", str(int(a.wall)), cad, "-q", str(path)], capture_output=True, text=True)
+        secs = round(time.time() - t0, 1); out = r.stdout
+        st = "sat" if "s SATISFIABLE" in out else "unsat" if "s UNSATISFIABLE" in out else "unknown"
+        row = dict(N=N, status=st, seconds=secs)
+        if st == "sat":
+            lits = [int(x) for l in out.splitlines() if l.startswith("v ") for x in l[2:].split()]
+            S = [x - 1 for x in lits if 0 < x <= n]; Es = set(E)
+            assert all((min(u, v), max(u, v)) not in Es for u in S for v in S if u != v), "INSTRUMENT CATASTROPHE: not independent"
+            row["size"] = len(S); row["independent_set"] = S; best = S
+        rows.append(row)
+        word = {"sat": f"a verified independent set of size {row.get('size')}", "unsat": "the solver's refusal (untrusted)", "unknown": f"unknown at the {int(a.wall)}-s wall"}[st]
+        print(f"[alpha] UD(F_{p},2) ({n} vertices): size ≥ {N}? {st.upper()} — {word} [{secs}s]  (p²/5 = {n/5:.1f})", flush=True)
+        if st != "sat":
+            break
+    lo = max((r["size"] for r in rows if r["status"] == "sat"), default=0)
+    hi = next((r["N"] - 1 for r in rows if r["status"] == "unsat"), None)
+    out = dict(kind="fplane-alpha", p=p, n=n, degree=deg, wall=a.wall, rows=rows, alpha_ge=lo, alpha_le=hi, independent_set=best,
+               claim_scope="alpha_ge: a verified independent set; alpha_le: the external cadical's refusal of size alpha_le + 1 (untrusted); "
+                           "a 5-colouring needs α ≥ ⌈p²/5⌉ (card_le_mul_of_colorable in the kernel), so alpha_le < ⌈p²/5⌉ would give χ ≥ 6 on the solver's word")
+    DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"alpha-p{p}.json"
+    path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+    return out
+
+def rotations(p: int):
+    """the rotation group as matrices ((a, −b), (b, a)), a² + b² = 1, with orders"""
+    I = ((1, 0), (0, 1))
+    def mul(g, h):
+        return ((g[0][0] * h[0][0] + g[0][1] * h[1][0]) % p, (g[0][0] * h[0][1] + g[0][1] * h[1][1]) % p), \
+               ((g[1][0] * h[0][0] + g[1][1] * h[1][0]) % p, (g[1][0] * h[0][1] + g[1][1] * h[1][1]) % p)
+    out = []
+    for (a, b) in circle(p):
+        g = ((a, (-b) % p), (b, a)); h = g; o = 1
+        while h != I:
+            h = mul(h, g); o += 1
+        out.append((g, o))
+    return out
+
+def perm_class_reps(k: int):
+    """one representative per conjugacy class of S_k, with its order"""
+    import itertools
+    seen = {}
+    for perm in itertools.permutations(range(k)):
+        vis = [False] * k; ct = []
+        for i in range(k):
+            if not vis[i]:
+                j = i; l = 0
+                while not vis[j]:
+                    vis[j] = True; j = perm[j]; l += 1
+                ct.append(l)
+        ct = tuple(sorted(ct, reverse=True))
+        if ct not in seen:
+            o = 1
+            for l in ct: o = o * l // math.gcd(o, l)
+            seen[ct] = (perm, o)
+    return seen
+
+def equivariant_colouring(p: int, k: int, g, tau, conf: int):
+    """col(g z) = tau(col z) for all z, as extra clauses; the model is verified proper AND equivariant"""
+    E, _ = ud_edges(p); n = p * p
+    var = lambda v, c: v * k + c + 1
+    extra = []
+    gz_of = {}
+    for x in range(p):
+        for y in range(p):
+            z = x * p + y
+            gz = ((g[0][0] * x + g[0][1] * y) % p) * p + (g[1][0] * x + g[1][1] * y) % p
+            gz_of[z] = gz
+            for c in range(k):
+                extra.append([-var(z, c), var(gz, tau[c])])
+    fixed = next(c for c in range(k) if tau[c] == c)
+    st, col = sat_colour_budget(n, E, k, pins=[(0, fixed)], conf=conf, extra=extra)
+    if st == "sat":
+        assert all(col[gz_of[z]] == tau[col[z]] for z in range(n)), "INSTRUMENT CATASTROPHE: the model is not equivariant"
+    return st, col
+
+def cmd_equivariant(a):
+    p, k = a.p, a.k
+    by_order = {}
+    for g, o in rotations(p):
+        by_order.setdefault(o, g)
+    reps = perm_class_reps(k)
+    rows = []
+    for o in sorted(by_order):
+        if o == 1:
+            continue
+        g = by_order[o]
+        for ct, (tau, to) in reps.items():
+            if o % to != 0:
+                continue
+            t0 = time.time()
+            st, col = equivariant_colouring(p, k, g, tau, a.conf)
+            secs = round(time.time() - t0, 1)
+            rows.append(dict(rotation_order=o, rotation=g, tau=list(tau), tau_cycle_type=list(ct), status=st, seconds=secs, colouring=col))
+            word = {"sat": "a colouring verified proper and equivariant", "unsat": "the solver's refusal", "unknown": f"unknown at {a.conf} conflicts"}[st]
+            print(f"[equivariant] p={p} k={k}: rotation of order {o:2d}, τ of cycle type {ct}: {st.upper():7s} — {word} [{secs}s]", flush=True)
+    out = dict(kind="fplane-equivariant", p=p, k=k, conflict_budget=a.conf, rows=rows,
+               claim_scope="colourings of UD(F_p,2) with col(r z) = τ(col z) for one rotation r of each order about the origin and one τ per "
+                           "conjugacy class of S_k of compatible order (conjugate τ and the rotation's other generators give equivalent instances); "
+                           "sat: a colouring verified proper and equivariant; unsat: the solver's refusal at the conflict budget (untrusted); "
+                           "unknown: the budget ran out — a refusal of every class says a k-colouring has no rotational symmetry, not that none exists")
+    DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"equivariant-p{p}-k{k}.json"
+    path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+    return out
+
+def field_q27():
+    """F_27 = F_3[t]/(t³ − t − 1): elements as coefficient triples; returns (elements, add, mul, one)"""
+    els = [(a, b, c) for a in range(3) for b in range(3) for c in range(3)]
+    def add(u, v): return tuple((x + y) % 3 for x, y in zip(u, v))
+    def mul(u, v):
+        r = [0] * 5
+        for i in range(3):
+            for j in range(3):
+                r[i + j] = (r[i + j] + u[i] * v[j]) % 3
+        r[2] = (r[2] + r[4]) % 3; r[1] = (r[1] + r[4]) % 3
+        r[1] = (r[1] + r[3]) % 3; r[0] = (r[0] + r[3]) % 3
+        return tuple(r[:3])
+    return els, add, mul, (1, 0, 0)
+
+def chi_q(q: int, k, conf: int):
+    """the unit-quadrance graph over F_q for q = p^f, f odd (only 27 is built): χ by budgeted SAT"""
+    assert q == 27, "only F_27 = F_3[t]/(t^3 - t - 1) is implemented (the next odd-degree planes, 343 and 1331, are spectral: ≥ 6)"
+    els, add, mul, one = field_q27()
+    circ = [(s, t) for s in els for t in els if add(mul(s, s), mul(t, t)) == one]
+    assert len(circ) == q + 1, "the circle over F_q must have q + 1 points (q ≡ 3 mod 4)"
+    V = [(x, y) for x in els for y in els]; idx = {v: i for i, v in enumerate(V)}
+    E = sorted({(min(idx[(x, y)], idx[(add(x, s), add(y, t))]), max(idx[(x, y)], idx[(add(x, s), add(y, t))])) for (x, y) in V for (s, t) in circ})
+    rows = []; chi = None; col = None
+    for kk in ([k] if k else range(2, 12)):
+        t0 = time.time(); st, c = sat_colour_budget(len(V), E, kk, conf=conf)
+        rows.append(dict(k=kk, status=st, seconds=round(time.time() - t0, 1)))
+        word = {"sat": "a verified colouring", "unsat": "the solver's refusal", "unknown": f"unknown at {conf} conflicts"}[st]
+        print(f"[chi] UD(F_{q},2): {len(V)} vertices, degree {len(circ)}, k={kk}: {st.upper()} — {word} [{rows[-1]['seconds']}s]", flush=True)
+        if st == "sat":
+            chi, col = kk, c; break
+        if st == "unknown":
+            break
+    exact = chi is not None and any(r["k"] == chi - 1 and r["status"] == "unsat" for r in rows)
+    return dict(kind="fplane-chi-oddegree", q=q, p=3, f=3, modulus="t^3 - t - 1", n=len(V), edges=len(E), degree=len(circ), rows=rows, chi=chi, exact=exact,
+                colouring=col, claim_scope="the plane over the residue field F_27 (a cubic field's inert prime above 3 sees it): chi carries a verified colouring; "
+                                            "chi − 1 refused is the solver's claim (untrusted); unknown at the conflict budget is silence")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p = sub.add_parser("chi"); p.add_argument("--p", type=int, required=True); p.add_argument("--k", type=int); p.add_argument("--wall", type=float); p.add_argument("--out")
+    p = sub.add_parser("chi"); p.add_argument("--p", type=int); p.add_argument("--q", type=int, help="the odd-degree plane over F_q (q = 27 only)"); p.add_argument("--k", type=int); p.add_argument("--wall", type=float); p.add_argument("--out")
+    p.add_argument("--conf", type=int, default=20_000_000, help="conflict budget for --q")
     p.add_argument("--pin-clique", action="store_true", help="pin a maximal clique through the origin (breaks the palette symmetry)"); p.set_defaults(f=cmd_chi)
     p = sub.add_parser("spectral"); p.add_argument("--p", type=int); p.add_argument("--all-below", type=int, default=600); p.add_argument("--out"); p.set_defaults(f=cmd_spectral)
     p = sub.add_parser("shadow")
@@ -562,6 +931,10 @@ def main():
     p.add_argument("--degrey", action="store_true"); p.add_argument("--field16"); p.add_argument("--graph"); p.add_argument("--planted")
     p.add_argument("--p", type=int, required=True); p.add_argument("--roots", help="d:r,... the residue of each √d (default: the least square root mod p, 0 if ramified)")
     p.add_argument("--colouring", help="a chi-p<P>.json record whose colouring is pulled back"); p.add_argument("--out"); p.set_defaults(f=cmd_reduce)
+    p = sub.add_parser("periodic"); p.add_argument("--below", type=int, default=100); p.add_argument("--conf", type=int, default=2_000_000); p.add_argument("--out"); p.set_defaults(f=cmd_periodic)
+    p = sub.add_parser("theta"); p.add_argument("--below", type=int, default=100); p.add_argument("--out"); p.set_defaults(f=cmd_theta)
+    p = sub.add_parser("alpha"); p.add_argument("--p", type=int, required=True); p.add_argument("--N", type=int); p.add_argument("--wall", type=float, default=3600); p.add_argument("--out"); p.set_defaults(f=cmd_alpha)
+    p = sub.add_parser("equivariant"); p.add_argument("--p", type=int, required=True); p.add_argument("--k", type=int, required=True); p.add_argument("--conf", type=int, default=5_000_000); p.add_argument("--out"); p.set_defaults(f=cmd_equivariant)
     p = sub.add_parser("self-test"); p.set_defaults(f=lambda a: sys.exit(0 if self_test() else 1))
     a = ap.parse_args(); a.f(a)
 

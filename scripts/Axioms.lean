@@ -924,6 +924,32 @@ pairs at distance √3, nor at distance 2. -/
 -- the third instance (Instances/LiftObstruction19.lean): the 5-critical core of the triangle-free plane at 19 (138 vertices) is not a shadow (a 29-edge witness, pairing 342)
 #print axioms HadwigerNelson.core19_no_lift
 
+-- M61: local–global tightness (LocalGlobal.lean, Instances/LocalGlobal19.lean) — the periodic quotient (an
+-- additive hom whose kernel misses the connection set is a Cayley hom; a table proper along the projected
+-- circle colours the plane periodically: χ(UD(F_19,2)) ≤ 5 by a 19-entry table); the counting bound
+-- card ≤ χ·α; no isotropic vectors mod p ≡ 3 (4); the spindle radicand √(4d−1) forces √−1 into any
+-- residue field where d vanishes, so a pair forced equal at k colours, drawn in a ring holding its spindle
+-- radicand, has no reduction to a k-forces-free plane (the mechanism of tightness); the 3-plane forces-free
+-- by two tables; the rhombus at 3 as the model; the instance at 11.
+#print axioms addCayleyMap
+#print axioms unitQuadrance_colorable_of_quotient
+#print axioms Forces.eq_of_forall_exists_not_periodic
+#print axioms card_le_mul_of_colorable
+#print axioms card_le_chromaticNumber_mul_indepNum
+#print axioms sq_add_sq_eq_zero_iff
+#print axioms quadrance_eq_zero_iff
+#print axioms isSquare_neg_one_of_spindle_radicand
+#print axioms no_ringHom_of_spindle_radicand
+#print axioms Forces.no_hom_of_spindle_radicand
+#print axioms Forces.isEmpty_ringHom_of_spindle_radicand
+#print axioms finitePlane19_colorable_five
+#print axioms chromaticNumber_finitePlane19_le_five
+#print axioms indepNum_finitePlane19_ge
+#print axioms finitePlane11_colorable_six_periodic
+#print axioms finitePlane3_forces_iff
+#print axioms rhombus_spindle_no_hom_3
+#print axioms Forces.isEmpty_ringHom_of_spindle_radicand_11
+
 -- M60: the five-colour residue obstruction (ResidueObstruction.lean, Instances/ResidueObstruction11.lean) —
 -- compulsions map forward along homomorphisms; a Cayley graph coloured by one aperiodic table forces no pair
 -- and by one table coinciding at non-edges separates only edges (arity floor ≥ 3); the quadrance of a drawn
