@@ -261,3 +261,53 @@ table and its eleven-edge properness, the residues of `ζ₆, ρ, σ, τ₅`, th
 
 **Mutation audit for the close**: drop `Odd m` from `psiOf_eq`; put `80` in `spindleOrd_norm`;
 weaken `Colorable 4` to `Colorable 3`. Each must break.
+
+## 8. Experience-modeling pass (2026-09-07)
+
+The consumers are three: a future milestone of this repository, a human reading beside
+`plans/FIELD-WALL-THEOREM.md`, and the automation (`simp`, `exact?`). What each holds at the moment
+of use decided the following.
+
+**E1 — export the consequences the record actually cites, not only the headline.** The reason this
+theorem matters here is not "`K²` is 4-colourable"; it is the two sentences the Frontier quotes:
+*no `K`-point unit-distance graph carries a pair compulsion at five colours* (the sentence that
+halted M53) and *every distance of positive 𝔭-adic valuation is monochromatic in this colouring*.
+Both are short over the finished statement and both are added:
+
+* `not_forces_five_seamPlane` / `not_separated_five_seamPlane` — two lines through
+  `SpareColour.not_forces_of_colorable` at `k = 4` (a new import, `SpareColour.lean`, small);
+* **`residueColouring_eq_of_dist_two`** — a *theorem*, not a spec example: a pair at distance `2`
+  is `2 ·` a unit vector, so its residue is `0` in characteristic two and the two points get the
+  same colour. It is the honest form of the stub's §6 planted red ("a version of Theorem B for the
+  `{1,2}`-graph would be false") and it is what makes Exoo–Ismailescu's 6-chromatic `{1,2}`-graph
+  consistent with this theorem.
+
+**E2 — design the membership path, because that is where a user gets stuck.** Every consumer must
+first prove `z ∈ seamPlane`. Shipped: `mem_seamPlane_iff` (in `seamField` terms), `mem_seamField_iff`
+(the explicit ℚ-span, `Iff.rfl`), and the generators `sqrt3_mem`, `sqrt11_mem`, `sqrt33_mem` — after
+which the whole `Subfield` API (`add_mem`, `mul_mem`, `inv_mem`, `ratCast_mem`) is the user's, for
+free. A worked `example` certifying one point is shipped in the spec section; it is the highest-value
+piece of documentation in the file.
+
+**E3 — the note's residue table and ours differ, and the file says why.** `FIELD-WALL-THEOREM.md`
+§5.3 lists `ζ₆ ↦ ω², ρ ↦ ω, σ ↦ ω², τ₅ ↦ ω²`. Our `psiZero` (`T ↦ 0`) gives
+`ζ₆ ↦ Ω², ρ ↦ Ω², σ ↦ Ω², τ₅ ↦ Ω`. The two tables are the **two different primes above 2**: the
+note fixes the 2-adic embedding by `√33 ↦ s ≡ 17 (mod 256)`, so its `T = (1+s)/2 ≡ 9 ≡ 1`, i.e. its
+prime is our `psiOne`. Recorded in the module docstring, because a reader comparing tables would
+otherwise conclude one of them is wrong.
+
+**E4 — names.** `Aodd → oddDenom` (a subring of points with an odd denominator over the order),
+`IsAodd → IsOddDenom`; the one-letter `w`, `tt` (which would shadow local variables in this very
+file) → `ordOmega`, `ordTau`, `ordI`; `colour → residueColouring` and
+`colour_ne_of_unit → residueColouring_ne_of_dist_one` (the old name advertised a hypothesis the
+statement does not take). `four_colorable_of_seam_field` is kept as the backlog names it and is the
+headline; `colorable_four_of_subset_seamPlane` is the general form it instantiates.
+`export FieldWall4 (seamSpan seamField seamPlane residueColouring)` so a consumer writes
+`seamPlane`, not `FieldWall4.seamPlane` — the skeleton's `abbrev seamField := FieldWall4.seamField`
+was two names for one object, the boundary's version of the two-costumes smell.
+
+**E5 — the `@[simp]` budget.** Every tag stays inside `Quad` (component projections, `lift_apply`,
+`conj*_apply`) — no other type in the repository is a `Quad`, so the set taxes nothing outside this
+file. `mem_seamPlane_iff` and `mem_seamField_iff` are deliberately **not** tagged: they are `Iff.rfl`
+and tagging them would drive every membership goal into raw existentials, which is the opposite of
+the path E2 designs.

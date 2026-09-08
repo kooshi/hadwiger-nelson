@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Ladder
+import Proofs.HadwigerNelson.SpareColour
 import Proofs.HadwigerNelson.FieldWall
 import Proofs.HadwigerNelson.Instances.SpindleBound
 
@@ -351,6 +352,16 @@ def seamPlane : Set ℂ := {z | z.re ∈ seamSpan ∧ z.im ∈ seamSpan}
 
 theorem mem_seamPlane_iff {z : ℂ} : z ∈ seamPlane ↔ z.re ∈ seamField ∧ z.im ∈ seamField := Iff.rfl
 
+/-- Membership in `K`, spelled out. With this and the three generators below, the whole `Subfield`
+API (`add_mem`, `mul_mem`, `inv_mem`, `ratCast_mem`, …) certifies a point of `K²`. -/
+theorem mem_seamField_iff {x : ℝ} :
+    x ∈ seamField ↔ ∃ a b c d : ℚ, x = a + b * Real.sqrt 3 + c * Real.sqrt 11 + d * Real.sqrt 33 :=
+  Iff.rfl
+
+theorem sqrt3_mem : Real.sqrt 3 ∈ seamField := by sorry
+theorem sqrt11_mem : Real.sqrt 11 ∈ seamField := by sorry
+theorem sqrt33_mem : Real.sqrt 33 ∈ seamField := by sorry
+
 theorem seamPlane_sub {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane) :
     z - w ∈ seamPlane := by sorry
 
@@ -365,58 +376,64 @@ theorem exists_nat_mul_mem_range {z : ℂ} (hz : z ∈ seamPlane) :
 /-! ## §7 Unit vectors lie in the order with odd denominator -/
 
 /-- `A = O[1/odd]`: a point with an odd integer multiple in the order. -/
-def IsAodd (z : ℂ) : Prop := ∃ x : SeamOrder, ∃ m : ℤ, Odd m ∧ (m : ℂ) * z = den x
+def IsOddDenom (z : ℂ) : Prop := ∃ x : SeamOrder, ∃ m : ℤ, Odd m ∧ (m : ℂ) * z = den x
 
 /-- `A`, as a subring of the plane. -/
-def Aodd : Subring ℂ where
-  carrier := {z | IsAodd z}
+def oddDenom : Subring ℂ where
+  carrier := {z | IsOddDenom z}
   zero_mem' := by sorry
   one_mem' := by sorry
   add_mem' := by sorry
   neg_mem' := by sorry
   mul_mem' := by sorry
 
-theorem mem_Aodd_iff {z : ℂ} : z ∈ Aodd ↔ IsAodd z := Iff.rfl
+theorem mem_oddDenom_iff {z : ℂ} : z ∈ oddDenom ↔ IsOddDenom z := Iff.rfl
 
 /-- **Every unit vector of `K(i)` lies in `A`** — the theorem's engine. -/
-theorem mem_Aodd_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1) : u ∈ Aodd := by sorry
+theorem mem_oddDenom_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1) : u ∈ oddDenom := by sorry
 
 /-- The residue of a point of `A`, as a total function. Sealed: reason through `psiOf_eq`. -/
 noncomputable def psiOf (z : ℂ) : F4 :=
-  open Classical in if h : IsAodd z then psiZero h.choose else 0
+  open Classical in if h : IsOddDenom z then psiZero h.choose else 0
 
 theorem psiOf_eq {z : ℂ} {m : ℤ} {x : SeamOrder} (hm : Odd m) (hx : (m : ℂ) * z = den x) :
     psiOf z = psiZero x := by sorry
 
-theorem psiOf_sub {z w : ℂ} (hz : z ∈ Aodd) (hw : w ∈ Aodd) :
+theorem psiOf_sub {z w : ℂ} (hz : z ∈ oddDenom) (hw : w ∈ oddDenom) :
     psiOf (z - w) = psiOf z - psiOf w := by sorry
 
-theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ Aodd) (h1 : normSq u = 1) : psiOf u ≠ 0 := by sorry
+theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ oddDenom) (h1 : normSq u = 1) : psiOf u ≠ 0 := by sorry
 
 /-! ## §8 The colouring -/
 
 /-- A chosen representative of each coset of `A` in the plane. -/
 noncomputable def base (z : ℂ) : ℂ :=
-  Quotient.out (QuotientAddGroup.mk' Aodd.toAddSubgroup z)
+  Quotient.out (QuotientAddGroup.mk' oddDenom.toAddSubgroup z)
 
-theorem sub_base_mem (z : ℂ) : z - base z ∈ Aodd := by sorry
+theorem sub_base_mem (z : ℂ) : z - base z ∈ oddDenom := by sorry
 
-theorem base_eq_of_sub_mem {z w : ℂ} (h : z - w ∈ Aodd) : base z = base w := by sorry
+theorem base_eq_of_sub_mem {z w : ℂ} (h : z - w ∈ oddDenom) : base z = base w := by sorry
 
-/-- The residue colouring of the plane over `K`. -/
-noncomputable def colour (z : ℂ) : F4 := psiOf (z - base z)
+/-- **The residue colouring of the plane over `K`.** On each coset of `oddDenom` it is the
+residue map `psiZero` of §3; the coset representative is chosen once, by `Classical.choice`. -/
+noncomputable def residueColouring (z : ℂ) : F4 := psiOf (z - base z)
 
-theorem colour_ne_of_unit {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
-    (h : dist z w = 1) : colour z ≠ colour w := by sorry
+/-- Adjacent points of `K²` get different colours — the properness of the colouring. -/
+theorem residueColouring_ne_of_dist_one {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
+    (h : dist z w = 1) : residueColouring z ≠ residueColouring w := by sorry
+
+/-- **Distance `2` is monochromatic**, because `2` lies in the prime: a pair at distance `2` is
+`2 ·` a unit vector and the residue field has characteristic two. The honest form of "a version of
+this theorem for the `{1, 2}`-distance graph would be false" — Exoo–Ismailescu's 6-chromatic
+`{1, 2}`-graph has all its coordinates in `K`. -/
+theorem residueColouring_eq_of_dist_two {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
+    (h : dist z w = 2) : residueColouring z = residueColouring w := by sorry
 
 end FieldWall4
 
-open FieldWall4
+export FieldWall4 (seamSpan seamField seamPlane residueColouring)
 
-/-- `K = ℚ(√3, √11)`. -/
-noncomputable abbrev seamField := FieldWall4.seamField
-/-- `K²`, the plane over `K`. -/
-abbrev seamPlane := FieldWall4.seamPlane
+open FieldWall4
 
 /-- **Theorem B.** Every unit-distance graph drawn in `ℚ(√3, √11)²` is 4-colourable. -/
 theorem four_colorable_of_seam_field :
@@ -426,23 +443,40 @@ theorem four_colorable_of_seam_field :
 theorem colorable_four_of_subset_seamPlane (S : Set ℂ) (hS : S ⊆ seamPlane) :
     ((unitDistance ℂ).induce S).Colorable 4 := by sorry
 
+/-! ### The consequence that stopped a campaign
+
+A `K`-point unit-distance graph is 4-colourable, so by the spare-colour lemma it carries no pair
+compulsion at five colours — in either polarity. This is why a descent confined to `K` can never
+terminate (`plans/M53-iteration-5.md`, halted 2026-09-05). -/
+
+/-- **No forced-equal pair at five colours over `K`.** -/
+theorem not_forces_five_of_subset_seamPlane {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
+    (hpq : p ≠ q) : ¬ Forces ((unitDistance ℂ).induce S) 5 p q :=
+  not_forces_of_colorable (colorable_four_of_subset_seamPlane S hS) hpq
+
+/-- **No virtual edge at five colours over `K`.** -/
+theorem not_separated_five_of_subset_seamPlane {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
+    (hadj : ¬ ((unitDistance ℂ).induce S).Adj p q) :
+    ¬ Separated ((unitDistance ℂ).induce S) 5 p q :=
+  not_separated_of_colorable (colorable_four_of_subset_seamPlane S hS) hadj
+
 /-! ### The lower bound: the Moser spindle is an identity in the order -/
 
 namespace FieldWall4
 
 /-- `ω` inside the order. -/
-def w : SeamOrder := Quad.incl (Quad.incl Quad.theta)
+def ordOmega : SeamOrder := Quad.incl (Quad.incl Quad.theta)
 /-- `T` inside the order. -/
-def tt : SeamOrder := Quad.incl Quad.theta
+def ordTau : SeamOrder := Quad.incl Quad.theta
 
 /-- `9ρ`, where `ρ = (5 + i√11)/6` is the Moser twist: `9ρ = 7 − ω + T + 2ωT`. -/
-def rho9 : SeamOrder := 7 - w + tt + 2 * w * tt
+def rho9 : SeamOrder := 7 - ordOmega + ordTau + 2 * ordOmega * ordTau
 
 /-- The seven Moser-spindle points, scaled by `9` into the order: the rhombus is
 `{0, 1+ω, ω, 1+2ω}` and its image under the twist. -/
 def spindleOrd : Fin 7 → SeamOrder :=
-  ![0, 9 * (1 + w), 9 * w, 9 * (1 + 2 * w),
-    rho9 * (1 + w), rho9 * w, rho9 * (1 + 2 * w)]
+  ![0, 9 * (1 + ordOmega), 9 * ordOmega, 9 * (1 + 2 * ordOmega),
+    rho9 * (1 + ordOmega), rho9 * ordOmega, rho9 * (1 + 2 * ordOmega)]
 
 /-- The seven points themselves. -/
 noncomputable def spindlePt (i : Fin 7) : ℂ := den (spindleOrd i) * (1 / 9)
