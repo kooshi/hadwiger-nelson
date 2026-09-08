@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Ladder
+import Proofs.HadwigerNelson.ResidueColouring
 import Proofs.HadwigerNelson.SpareColour
 import Proofs.HadwigerNelson.FieldWall
 import Proofs.HadwigerNelson.Instances.SpindleBound
@@ -27,9 +28,16 @@ Complex conjugation of the order induces Frobenius on `𝔽₄` (`psi_comp_conj`
 `u` — one with `u·ū = 1` — has an odd denominator over `O` (`mem_oddDenom_of_unit`): if the
 denominator were even, both residue maps would kill the numerator, and the numerator would be
 divisible by `(1+i)² = 2i`, halving the denominator. On the subring `A = O[1/odd]` the residue
-descends, a unit vector is a unit of `A` and so has nonzero residue, and every unit step stays
-inside one coset of `A`. Choosing a representative per coset gives the colouring
+descends (`psiA`), a unit vector is a unit of `A` and so has nonzero residue, and every unit step
+stays inside one coset of `A`. Choosing a representative per coset gives the colouring
 (`residueColouring`), which is proper on the whole plane over `K` with no finiteness hypothesis.
+
+**The last two sentences are not proved here.** They are
+`Proofs/HadwigerNelson/ResidueColouring.lean` — the residue colouring in general, of which this file
+is one instance: the arithmetic below (the order, the two residue maps, the parity descent, the
+Moser spindle in the order) is everything that is specific to `K`, and the colouring itself,
+its properness, and the unit-is-a-unit step are the general theorem applied at `A = oddDenom`,
+`ψ = psiA`.
 
 ## Why this shape
 
@@ -63,6 +71,11 @@ this file's `psiOne`. Either prime colours; `psiZero` is the one used.
   and `residueColouring_eq_of_dist_two` the reason no version of this theorem holds for the
   `{1, 2}`-distance graph — Exoo–Ismailescu's 6-chromatic `{1, 2}`-graph has all its coordinates
   in `K`.
+* To colour a plane over a *different* field, do not copy this file: supply a conjugation-stable
+  subring, a ring homomorphism to a finite nontrivial ring, and a proof that unit-distance
+  differences land in the subring, and call
+  `ResidueColouring.colorable_unitDistance_induce_of_residue`. What is specific to `K` here is
+  `conj_mem_oddDenom`, `psiA`, and `mem_oddDenom_of_unit` — three inputs, nothing else.
 
 ## Attribution
 
@@ -148,6 +161,8 @@ def om : F4 := ⟨0, 1⟩
 
 @[simp] theorem om_u : om.u = 0 := rfl
 @[simp] theorem om_v : om.v = 1 := rfl
+
+instance : Nontrivial F4 := ⟨0, 1, by decide⟩
 
 theorem card_eq_four : Fintype.card F4 = 4 := by decide
 
@@ -1034,17 +1049,22 @@ theorem mem_oddDenom_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1
   obtain ⟨n, hn, x, hx⟩ := exists_nat_mul_mem_range hu
   exact oddDenom_aux n u x hn (mul_conj_eq_one h1) hx
 
-/-- The residue of a point of `A`, as a total function. Sealed: reason through `psiOf_eq`. -/
-noncomputable def psiOf (z : ℂ) : F4 :=
-  open Classical in if h : IsOddDenom z then psiZero h.choose else 0
+/-- **`A` is stable under conjugation** — the order is (`den_conj`), and the denominators are
+rational, so conjugation fixes them. -/
+theorem conj_mem_oddDenom : ∀ z ∈ oddDenom, (starRingEnd ℂ) z ∈ oddDenom := by
+  rintro z ⟨x, m, hm, hx⟩
+  refine ⟨conj x, m, hm, ?_⟩
+  rw [den_conj, ← hx, map_mul, map_intCast]
 
-theorem psiOf_eq {z : ℂ} {m : ℤ} {x : SeamOrder} (hm : Odd m) (hx : (m : ℂ) * z = den x) :
-    psiOf z = psiZero x := by
-  classical
-  have h : IsOddDenom z := ⟨x, m, hm, hx⟩
-  rw [psiOf, dif_pos h]
-  obtain ⟨m', hm', hx'⟩ := h.choose_spec
-  have key : ((m' : SeamOrder)) * x = (m : SeamOrder) * h.choose := by
+/-- The residue of a point of `A`, before bundling. Sealed: reason through `psiA_eq`. -/
+private noncomputable def psiAFun (z : oddDenom) : F4 := psiZero z.2.choose
+
+/-- The residue is read off any witness: if `m·z` is `x` in the order with `m` odd, the choice the
+definition made has the same residue as `x`. -/
+private theorem psiAFun_eq (z : oddDenom) {m : ℤ} {x : SeamOrder} (hm : Odd m)
+    (hx : (m : ℂ) * (z : ℂ) = den x) : psiAFun z = psiZero x := by
+  obtain ⟨m', hm', hx'⟩ := z.2.choose_spec
+  have key : ((m' : SeamOrder)) * x = (m : SeamOrder) * z.2.choose := by
     refine den_injective ?_
     rw [map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hx']
     ring
@@ -1053,78 +1073,62 @@ theorem psiOf_eq {z : ℂ} {m : ℤ} {x : SeamOrder} (hm : Odd m) (hx : (m : ℂ
     one_mul, one_mul] at hpsi
   exact hpsi.symm
 
-theorem psiOf_sub {z w : ℂ} (hz : z ∈ oddDenom) (hw : w ∈ oddDenom) :
-    psiOf (z - w) = psiOf z - psiOf w := by
-  obtain ⟨x, m, hm, hx⟩ := hz
-  obtain ⟨y, n, hn, hy⟩ := hw
-  have key : ((m * n : ℤ) : ℂ) * (z - w) = den ((n : SeamOrder) * x - (m : SeamOrder) * y) := by
-    rw [map_sub, map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hy]
-    push_cast; ring
-  rw [psiOf_eq (hm.mul hn) key, psiOf_eq hm hx, psiOf_eq hn hy, map_sub, map_mul, map_mul,
-    map_intCast, map_intCast, F4.intCast_odd hm, F4.intCast_odd hn, one_mul, one_mul]
+/-- **The residue map of `A = O[1/odd]`**, as a ring homomorphism onto `𝔽₄`: a point `z` with
+`m·z = x` in the order and `m` odd has residue `psiZero x`, which `psiA_eq` says does not depend on
+the witness. It is a *ring* homomorphism, which is what makes a unit vector's residue nonzero. -/
+noncomputable def psiA : oddDenom →+* F4 where
+  toFun := psiAFun
+  map_one' := by
+    rw [psiAFun_eq 1 odd_one (x := 1) (by simp), map_one]
+  map_mul' x y := by
+    obtain ⟨a, m, hm, hx⟩ := x.2
+    obtain ⟨b, n, hn, hy⟩ := y.2
+    have key : ((m * n : ℤ) : ℂ) * ((x * y : oddDenom) : ℂ) = den (a * b) := by
+      rw [map_mul, ← hx, ← hy]
+      push_cast
+      ring
+    rw [psiAFun_eq (x * y) (hm.mul hn) key, psiAFun_eq x hm hx, psiAFun_eq y hn hy, map_mul]
+  map_zero' := by
+    rw [psiAFun_eq 0 odd_one (x := 0) (by simp), map_zero]
+  map_add' x y := by
+    obtain ⟨a, m, hm, hx⟩ := x.2
+    obtain ⟨b, n, hn, hy⟩ := y.2
+    have key : ((m * n : ℤ) : ℂ) * ((x + y : oddDenom) : ℂ)
+        = den ((n : SeamOrder) * a + (m : SeamOrder) * b) := by
+      rw [map_add, map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hy]
+      push_cast
+      ring
+    rw [psiAFun_eq (x + y) (hm.mul hn) key, psiAFun_eq x hm hx, psiAFun_eq y hn hy,
+      map_add, map_mul, map_mul, map_intCast, map_intCast, F4.intCast_odd hm, F4.intCast_odd hn,
+      one_mul, one_mul]
 
-theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ oddDenom) (h1 : normSq u = 1) : psiOf u ≠ 0 := by
-  obtain ⟨x, m, hm, hx⟩ := hu
-  rw [psiOf_eq hm hx]
-  intro h0
-  have hxc : x * conj x = ((m ^ 2 : ℤ) : SeamOrder) := norm_eq_of_den (mul_conj_eq_one h1) hx
-  have := congrArg psiZero hxc
-  rw [map_mul, psiZero_conj, h0, map_intCast,
-    F4.intCast_odd (by simpa [pow_two] using hm.mul hm)] at this
-  exact absurd this (by decide)
+/-- The residue is read off any witness — the reasoning surface of `psiA`. -/
+theorem psiA_eq {z : ℂ} (hz : z ∈ oddDenom) {m : ℤ} {x : SeamOrder} (hm : Odd m)
+    (hx : (m : ℂ) * z = den x) : psiA ⟨z, hz⟩ = psiZero x := psiAFun_eq ⟨z, hz⟩ hm hx
 
 /-! ## §8 The colouring
 
-Every unit step stays inside one coset of `A`, so choosing a representative per coset and reading
-the residue of the offset is a proper colouring of the whole plane over `K` — no finiteness
-hypothesis anywhere. -/
+Every unit step stays inside one coset of `A`, so the general residue colouring of
+`Proofs/HadwigerNelson/ResidueColouring.lean` applies at `A = oddDenom`, `ψ = psiA`: choose a
+representative per coset and read the residue of the offset. No finiteness hypothesis anywhere. -/
 
-private theorem mk_surjective :
-    Function.Surjective ⇑(QuotientAddGroup.mk' oddDenom.toAddSubgroup) :=
-  fun q => Quot.exists_rep q
+/-- **The residue colouring of the plane over `K`.** The general `cosetResidue` map at this file's
+subring and residue map — on each coset of `A` it is `psiZero`, and the coset representative is
+chosen once, by `Classical.choice`. -/
+noncomputable def residueColouring (z : ℂ) : F4 :=
+  cosetResidue (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom z
 
-/-- A chosen representative of each coset of `A` in the plane. -/
-noncomputable def base (z : ℂ) : ℂ :=
-  Function.surjInv mk_surjective (QuotientAddGroup.mk' oddDenom.toAddSubgroup z)
-
-private theorem mk_base (z : ℂ) :
-    QuotientAddGroup.mk' oddDenom.toAddSubgroup (base z)
-      = QuotientAddGroup.mk' oddDenom.toAddSubgroup z :=
-  Function.surjInv_eq mk_surjective _
-
-theorem sub_base_mem (z : ℂ) : z - base z ∈ oddDenom := by
-  have := QuotientAddGroup.eq.mp (mk_base z)
-  simpa [sub_eq_neg_add] using this
-
-theorem base_eq_of_sub_mem {z w : ℂ} (h : z - w ∈ oddDenom) : base z = base w := by
-  have hq : QuotientAddGroup.mk' oddDenom.toAddSubgroup z
-      = QuotientAddGroup.mk' oddDenom.toAddSubgroup w := by
-    simp only [QuotientAddGroup.mk'_apply]
-    refine QuotientAddGroup.eq.mpr ?_
-    simpa [neg_add_eq_sub] using oddDenom.neg_mem h
-  exact congrArg (Function.surjInv mk_surjective) hq
-
-/-- **The residue colouring of the plane over `K`.** On each coset of `oddDenom` it is the residue
-map `psiZero` of §3; the coset representative is chosen once, by `Classical.choice`. -/
-noncomputable def residueColouring (z : ℂ) : F4 := psiOf (z - base z)
-
-/-- Adjacent points of `K²` get different colours — the properness of the colouring. -/
+/-- Adjacent points of `K²` get different colours — the properness of the colouring. A unit vector
+is a unit of `A` (`conj_mem_oddDenom` gives its inverse), so its residue is nonzero. -/
 theorem residueColouring_ne_of_dist_one {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
     (h : dist z w = 1) : residueColouring z ≠ residueColouring w := by
-  have hnorm : normSq (z - w) = 1 := by
-    have : ‖z - w‖ = 1 := by rwa [← Complex.dist_eq]
-    have h2 := congrArg (fun t : ℝ => t ^ 2) this
-    simpa [Complex.sq_norm] using h2
-  have hmem : z - w ∈ oddDenom := mem_oddDenom_of_unit (seamPlane_sub hz hw) hnorm
-  have hbase : base z = base w := base_eq_of_sub_mem hmem
-  intro hcol
-  have hz' : z - base z ∈ oddDenom := sub_base_mem z
-  have hw' : w - base z ∈ oddDenom := hbase ▸ sub_base_mem w
-  have h1 : psiOf (z - base z) = residueColouring z := rfl
-  have h2 : psiOf (w - base z) = residueColouring w := by rw [hbase]; rfl
-  have key := psiOf_sub hz' hw'
-  rw [show (z - base z) - (w - base z) = z - w by ring, h1, h2, hcol, sub_self] at key
-  exact psiOf_ne_zero_of_unit hmem hnorm key
+  have hone : z - w ∈ normOne (starRingEnd ℂ) := sub_mem_normOne_conj_iff.mpr h
+  have hmem : z - w ∈ oddDenom :=
+    mem_oddDenom_of_unit (seamPlane_sub hz hw) (mem_normOne_conj_iff.mp hone)
+  intro hc
+  have hzero := (cosetResidue_eq_iff (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom hmem).mp hc
+  rw [cosetResidue_apply_of_mem _ hmem] at hzero
+  exact map_ne_zero_of_mem_normOne conj_mem_oddDenom psiA hmem hone hzero
 
 /-- **Distance `2` is monochromatic**, because `2` lies in the prime: a pair at distance `2` is
 `2 ·` a unit vector and the residue field has characteristic two. The honest form of "a version of
@@ -1146,19 +1150,13 @@ theorem residueColouring_eq_of_dist_two {z w : ℂ} (hz : z ∈ seamPlane) (hw :
   have hvA : v ∈ oddDenom := mem_oddDenom_of_unit hvmem hnorm
   have hsub : z - w = v + v := by rw [hv]; push_cast; ring
   have hmem : z - w ∈ oddDenom := hsub ▸ oddDenom.add_mem hvA hvA
-  have hbase : base z = base w := base_eq_of_sub_mem hmem
-  have hz' : z - base z ∈ oddDenom := sub_base_mem z
-  have hw' : w - base z ∈ oddDenom := hbase ▸ sub_base_mem w
-  have hzero : psiOf (z - w) = 0 := by
-    obtain ⟨x, m, hm, hx⟩ := hvA
-    have hx2 : (m : ℂ) * (z - w) = den (2 * x) := by
-      rw [hsub, map_mul, map_ofNat, ← hx]; ring
-    rw [psiOf_eq hm hx2, map_mul, map_ofNat, show (2 : F4) = 0 from rfl, zero_mul]
-  have h1 : psiOf (z - base z) = residueColouring z := rfl
-  have h2 : psiOf (w - base z) = residueColouring w := by rw [hbase]; rfl
-  have key := psiOf_sub hz' hw'
-  rw [show (z - base z) - (w - base z) = z - w by ring, h1, h2, hzero] at key
-  exact sub_eq_zero.mp key.symm
+  refine (cosetResidue_eq_iff (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom hmem).mpr ?_
+  rw [cosetResidue_apply_of_mem _ hmem]
+  obtain ⟨x, m, hm, hx⟩ := hvA
+  have hx2 : (m : ℂ) * (z - w) = den (2 * x) := by
+    rw [hsub, map_mul, map_ofNat, ← hx]; ring
+  show psiA ⟨z - w, hmem⟩ = 0
+  rw [psiA_eq hmem hm hx2, map_mul, map_ofNat, show (2 : F4) = 0 from rfl, zero_mul]
 
 end FieldWall4
 
@@ -1169,14 +1167,11 @@ open FieldWall4 SimpleGraph Complex
 /-- Any set of points with coordinates in `K` is 4-colourable. -/
 theorem colorable_four_of_subset_seamPlane (S : Set ℂ) (hS : S ⊆ seamPlane) :
     ((unitDistance ℂ).induce S).Colorable 4 := by
-  classical
-  refine ⟨SimpleGraph.Coloring.mk
-    (fun v => Fintype.equivFinOfCardEq FieldWall4.F4.card_eq_four (residueColouring v.1)) ?_⟩
-  intro v w hvw
-  have hd : dist (v : ℂ) (w : ℂ) = 1 := hvw
-  intro heq
-  exact FieldWall4.residueColouring_ne_of_dist_one (hS v.2) (hS w.2) hd
-    ((Fintype.equivFinOfCardEq FieldWall4.F4.card_eq_four).injective heq)
+  have h := colorable_unitDistance_induce_of_residue FieldWall4.conj_mem_oddDenom FieldWall4.psiA
+    (S := S) fun z hz w hw hd =>
+      FieldWall4.mem_oddDenom_of_unit (FieldWall4.seamPlane_sub (hS hz) (hS hw))
+        (mem_normOne_conj_iff.mp (sub_mem_normOne_conj_iff.mpr hd))
+  rwa [FieldWall4.F4.card_eq_four] at h
 
 /-- **Theorem B.** Every unit-distance graph drawn in `ℚ(√3, √11)²` is 4-colourable. -/
 theorem four_colorable_of_seam_field :

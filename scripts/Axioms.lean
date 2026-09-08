@@ -1042,6 +1042,33 @@ degeneracy, `den`'s injectivity, the descent, and the spindle's eleven unit dist
 #print axioms FieldWall4.spindlePt_dist
 #print axioms FieldWall4.den_rho9
 
+/-! ## A — Theorem A in the kernel: the residue colouring in general
+
+The argument of B1 with the field removed. `colorable_of_residue` is the whole theorem — a graph
+drawn in an abelian group whose edge differences lie in a subgroup and are nonzero under a
+homomorphism out of it. Then the two arithmetic layers (a norm-one element of a σ-stable subring is
+a unit of it, so its residue is nonzero; a σ-stable valuation subring contains every norm-one
+element), the ring and valuation forms, and the plane forms — of which `FieldWall4`'s headline is
+now an instance. `colorable_unitQuadrance_of_residue` is the same theorem over the coordinate group
+of an arbitrary commutative ring, which is what makes "this does not need `ℂ`" checkable. -/
+
+#print axioms cosetResidue_apply_of_mem
+#print axioms cosetResidue_sub
+#print axioms cosetResidue_eq_iff
+#print axioms colorable_of_residue
+#print axioms isUnit_of_mem_normOne
+#print axioms map_ne_zero_of_mem_normOne
+#print axioms normOne_subset
+#print axioms normOne_subset_valuationSubring
+#print axioms colorable_of_normOne
+#print axioms colorable_of_valuationSubring
+#print axioms sub_mem_normOne_conj_iff
+#print axioms colorable_unitDistance_of_residue
+#print axioms colorable_unitDistance_induce_of_residue
+#print axioms colorable_unitQuadrance_of_residue
+#print axioms FieldWall4.conj_mem_oddDenom
+#print axioms FieldWall4.psiA_eq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

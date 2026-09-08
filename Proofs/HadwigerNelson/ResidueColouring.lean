@@ -67,6 +67,9 @@ Four neighbouring modules do things that read alike and are different:
   it is strictly sharper where it applies.
 * `ResidueObstruction.lean` (M60) — despite the name, about pair compulsions transported along a
   graph homomorphism. No colouring is constructed there.
+* `Lift.lean` (M59) — owns the name `residue`, for the reduction of a point of `(ℤ/p²)²` to `𝔽_p²`.
+  That is why the map here is `cosetResidue`: it is a residue read *coset by coset*, which is the
+  one thing this construction adds to a homomorphism.
 
 The connection set of `unitQuadrance R` is `LocalGlobal.unitCircle R ⊆ R × R`, which is `normOne` of
 the conjugation of `R[i]` under the identification `R × R ≅ R[i]`. That identification is not
@@ -86,11 +89,11 @@ To colour a set `S` of complex points with `k` colours:
    valuation subring, `normOne_subset_valuationSubring` discharges it outright.
 4. Call `colorable_unitDistance_induce_of_residue`.
 
-The colouring itself is `residue ψ.toAddMonoidHom`, and it is *sealed*: reason about it through
-`residue_apply_of_mem` (on `A` it is `ψ`), `residue_sub` (a conditional `map_sub`) and
-`residue_eq_iff` (when two points share a colour). Note that the subgroup cannot be inferred from
-the homomorphism — write `residue (A := A.toAddSubgroup) ψ.toAddMonoidHom`, or the elaborator
-reports a mismatch against `↥?m`. `residue` is noncomputable: one coset representative is chosen by
+The colouring itself is `cosetResidue ψ.toAddMonoidHom`, and it is *sealed*: reason about it through
+`cosetResidue_apply_of_mem` (on `A` it is `ψ`), `cosetResidue_sub` (a conditional `map_sub`) and
+`cosetResidue_eq_iff` (when two points share a colour). Note that the subgroup cannot be inferred from
+the homomorphism — write `cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom`, or the elaborator
+reports a mismatch against `↥?m`. `cosetResidue` is noncomputable: one coset representative is chosen by
 `Classical.choice`, which is why a colouring built this way has no `#eval`.
 
 ## Attribution
@@ -109,7 +112,7 @@ open SimpleGraph
 
 `ψ`, extended from the subgroup `A` to the whole group by choosing one representative per coset.
 The section is normalized so that the zero coset is represented by `0`, which is what makes
-`residue` literally extend `ψ` and lets every statement below avoid subtypes. -/
+`cosetResidue` literally extend `ψ` and lets every statement below avoid subtypes. -/
 
 section Residue
 
@@ -156,25 +159,25 @@ private theorem cosetRep_eq_of_sub_mem {x y : M} (h : x - y ∈ A) :
     (by rw [show -x + y = -(x - y) by abel]; exact A.neg_mem h))
 
 /-- **The residue map**: `ψ`, extended from `A` to the whole group by choosing coset
-representatives. Sealed — reason through `residue_apply_of_mem`, `residue_sub` and
-`residue_eq_iff`. Noncomputable: the representatives come from `Classical.choice`. -/
-noncomputable def residue (ψ : A →+ G) (x : M) : G :=
+representatives. Sealed — reason through `cosetResidue_apply_of_mem`, `cosetResidue_sub` and
+`cosetResidue_eq_iff`. Noncomputable: the representatives come from `Classical.choice`. -/
+noncomputable def cosetResidue (ψ : A →+ G) (x : M) : G :=
   ψ ⟨x - cosetRep A x, sub_cosetRep_mem A x⟩
 
 /-- **On `A` the residue map is `ψ`** — the normalization of the section, and the way to compute any
 residue a consumer actually holds. -/
-theorem residue_apply_of_mem (ψ : A →+ G) {x : M} (h : x ∈ A) : residue ψ x = ψ ⟨x, h⟩ :=
+theorem cosetResidue_apply_of_mem (ψ : A →+ G) {x : M} (h : x ∈ A) : cosetResidue ψ x = ψ ⟨x, h⟩ :=
   congrArg ψ (Subtype.ext (by simp only [cosetRep_of_mem h, sub_zero]))
 
-@[simp] theorem residue_zero (ψ : A →+ G) : residue ψ 0 = 0 := by
-  rw [residue_apply_of_mem ψ A.zero_mem]
+@[simp] theorem cosetResidue_zero (ψ : A →+ G) : cosetResidue ψ 0 = 0 := by
+  rw [cosetResidue_apply_of_mem ψ A.zero_mem]
   exact map_zero ψ
 
 /-- **The defining property: a conditional `map_sub`.** Within one coset of `A` the residue map is
 additive; between cosets it is unconstrained. -/
-theorem residue_sub (ψ : A →+ G) {x y : M} (h : x - y ∈ A) :
-    residue ψ x - residue ψ y = residue ψ (x - y) := by
-  rw [residue_apply_of_mem ψ h, residue, residue, ← map_sub]
+theorem cosetResidue_sub (ψ : A →+ G) {x y : M} (h : x - y ∈ A) :
+    cosetResidue ψ x - cosetResidue ψ y = cosetResidue ψ (x - y) := by
+  rw [cosetResidue_apply_of_mem ψ h, cosetResidue, cosetResidue, ← map_sub]
   refine congrArg ψ (Subtype.ext ?_)
   show x - cosetRep A x - (y - cosetRep A y) = x - y
   rw [cosetRep_eq_of_sub_mem h]
@@ -183,9 +186,9 @@ theorem residue_sub (ψ : A →+ G) {x y : M} (h : x - y ∈ A) :
 /-- **When two points of one coset share a colour.** The `←` direction is properness (an edge
 difference with nonzero residue separates); the `→` direction is what makes a whole class of
 distances monochromatic. -/
-theorem residue_eq_iff (ψ : A →+ G) {x y : M} (h : x - y ∈ A) :
-    residue ψ x = residue ψ y ↔ residue ψ (x - y) = 0 := by
-  rw [← residue_sub ψ h, sub_eq_zero]
+theorem cosetResidue_eq_iff (ψ : A →+ G) {x y : M} (h : x - y ∈ A) :
+    cosetResidue ψ x = cosetResidue ψ y ↔ cosetResidue ψ (x - y) = 0 := by
+  rw [← cosetResidue_sub ψ h, sub_eq_zero]
 
 end Residue
 
@@ -202,11 +205,11 @@ The count is `Fintype.card G` and not the index `[A : ker ψ]`, which would be s
 consumer here has a surjective `ψ` onto a field, so the sharper form has no customer. -/
 theorem colorable_of_residue [Fintype G] (Γ : SimpleGraph V) (f : V → M) (ψ : A →+ G)
     (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
-    (hne : ∀ ⦃v w⦄, Γ.Adj v w → residue ψ (f v - f w) ≠ 0) :
+    (hne : ∀ ⦃v w⦄, Γ.Adj v w → cosetResidue ψ (f v - f w) ≠ 0) :
     Γ.Colorable (Fintype.card G) :=
   SimpleGraph.Coloring.colorable <|
-    SimpleGraph.Coloring.mk (fun v => residue ψ (f v)) fun {_ _} hvw hc =>
-      hne hvw ((residue_eq_iff ψ (hmem hvw)).mp hc)
+    SimpleGraph.Coloring.mk (fun v => cosetResidue ψ (f v)) fun {_ _} hvw hc =>
+      hne hvw ((cosetResidue_eq_iff ψ (hmem hvw)).mp hc)
 
 end Colouring
 
@@ -264,7 +267,7 @@ theorem colorable_of_normOne {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A
     Γ.Colorable (Fintype.card G) := by
   refine colorable_of_residue (A := A.toAddSubgroup) Γ f ψ.toAddMonoidHom
     (fun _ _ hvw => hmem hvw) fun v w hvw => ?_
-  rw [residue_apply_of_mem _ (hmem hvw)]
+  rw [cosetResidue_apply_of_mem _ (hmem hvw)]
   exact map_ne_zero_of_mem_normOne hσ ψ (hmem hvw) (hnorm hvw)
 
 end NormOne
@@ -358,7 +361,7 @@ variable {R G : Type*} [CommRing R] [AddCommGroup G]
 a subgroup `A` of the coordinate group with nonzero residues. -/
 theorem colorable_unitQuadrance_of_residue [Fintype G] {A : AddSubgroup (R × R)} (ψ : A →+ G)
     (hmem : ∀ v : R × R, v.1 ^ 2 + v.2 ^ 2 = 1 → v ∈ A)
-    (hne : ∀ v : R × R, v.1 ^ 2 + v.2 ^ 2 = 1 → residue ψ v ≠ 0) :
+    (hne : ∀ v : R × R, v.1 ^ 2 + v.2 ^ 2 = 1 → cosetResidue ψ v ≠ 0) :
     (unitQuadrance R).Colorable (Fintype.card G) := by
   have key : ∀ u v : R × R, (unitQuadrance R).Adj u v → (u - v).1 ^ 2 + (u - v).2 ^ 2 = 1 :=
     fun u v huv => by simpa using (unitQuadrance_adj.mp huv).2
@@ -379,11 +382,11 @@ private theorem dbl_injective : Function.Injective dbl := by
   have h2 : 2 * a = 2 * b := hab
   omega
 
+private theorem dbl_mem (k : ℤ) : dbl k ∈ dbl.range := AddMonoidHom.mem_range.mpr ⟨k, rfl⟩
+
 /-- **Halving on the even integers** — a homomorphism that provably does *not* extend to `ℤ`
 (`2 · φ 1 = 1` has no solution in `ZMod 2`), so the model below exercises a genuinely partial `ψ`
 rather than `Additive.additiveColoring` in disguise. -/
-private theorem dbl_mem (k : ℤ) : dbl k ∈ dbl.range := AddMonoidHom.mem_range.mpr ⟨k, rfl⟩
-
 noncomputable def halfMod : dbl.range →+ ZMod 2 :=
   (Int.castAddHom (ZMod 2)).comp (AddMonoidHom.ofInjective dbl_injective).symm.toAddMonoidHom
 
@@ -412,14 +415,14 @@ example : twoStep.Colorable 2 := by
   · rcases hstep a b hab with h | h <;> exact h ▸ dbl_mem _
   · have hid : id a - id b = a - b := rfl
     rcases hstep a b hab with h | h <;>
-      rw [hid, h, residue_apply_of_mem _ (dbl_mem _), halfMod_apply] <;> decide
+      rw [hid, h, cosetResidue_apply_of_mem _ (dbl_mem _), halfMod_apply] <;> decide
 
 /-- **The subsumption of `Additive.additiveColoring`**, as an equation between the two colourings
 rather than a claim in a docstring: it is the case `A = ⊤`. -/
 example {M G : Type*} [AddCommGroup M] [AddCommGroup G] (Γ : SimpleGraph M) (φ : M →+ G)
     (h : ∀ a b, Γ.Adj a b → φ (a - b) ≠ 0) (x : M) :
-    additiveColoring Γ φ h x = residue (φ.comp (⊤ : AddSubgroup M).subtype) x := by
-  rw [additiveColoring_apply, residue_apply_of_mem _ (AddSubgroup.mem_top x)]
+    additiveColoring Γ φ h x = cosetResidue (φ.comp (⊤ : AddSubgroup M).subtype) x := by
+  rw [additiveColoring_apply, cosetResidue_apply_of_mem _ (AddSubgroup.mem_top x)]
   rfl
 
 /-- **Red: the residue hypothesis is load-bearing.** With `A = ⊤` and the parity homomorphism on
