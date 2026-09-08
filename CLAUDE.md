@@ -48,6 +48,18 @@ converging):** mathematics everywhere is accelerating and nothing minor will get
 publication bar is exactly two events: *maybe* our own certified 5-chromatic object, if what it
 reveals is interesting enough (his call at that point); *definitely* χ(ℝ²) ≥ 6 or its
 refutation. Nothing below that bar is written up, however novel the rung.
+**THE TRIGGER FIRED 2026-09-08, for one result, on a third ground the bar did not anticipate (Kooshi: "Theorem B
+does look like it's publishable. Stub the writing of its draft as its own milestone").** The ground is not size and
+not novelty of method: it is that the library read (FS-18) found **the same question posed three times across fifty
+years by groups who do not cite one another** — Benda–Perles's Open Problem 11.6 (circulated 1976, published 2000,
+recorded in `[Soifer2024]` ch. 11), `[Moorhouse2010]` §1 ("We have not determined the exact value of χ(K²) in this
+case"), and `[CranstonRabern2015]` in Combinatorica ("What about its chromatic number?") — and `χ(ℚ(√3,√11)²) = 4`
+answers all three, kernel-checked. **The bar is therefore amended, not abandoned: a result that answers a question
+the literature has independently and repeatedly posed clears it, whatever its size.** The milestone is FS-20,
+`plans/STUB-theorem-B-writeup.md`, and it carries a first-class naming deliverable — every working term in this
+repository is coined in-house and appears in no paper, which is the exact mechanism G49 says hid the prior art, so
+the manuscript's vocabulary is a design problem with a ban list, not a finishing touch. **The deferral stands for
+everything else**, including the rung-B write-up, Mathlib contributions, and the M58–M61 sieve arc.
 **The goalposts moved (Kooshi, 2026-09-06, at the M58 close; `plans/PROGRAMME-ALGEBRAIC-PROOF.md` holds his words in full and
 the assessment of what each side needs):** *"The derivations are an order of magnitude more important than individual objects
 … If we find a 6 chromatic object, we should use it as a stepping stone for the algebraic reasoning behind it and then we'll
@@ -1301,8 +1313,11 @@ Theorem 4 leans on the bad form; [SchneiderSilva2013] proves it properly.
 *(**The frontier set is `plans/FRONTIER-STUBS.md`** (created 2026-09-06 at the M56 close on Kooshi's direction): every
 next milestone as a full stub, ranked, each with its bearing on χ ≥ 6 stated honestly; re-ranked at every close
 (WORKFLOW step 9). **RE-RANKED AT THE FS-18 CLOSE, 2026-09-08 (the second re-rank of the day): FS-18 is
-CLOSED — the library was read — and the top of the table is now rank 1 FS-6 (the design target in a SEALED
-field, unchanged and already chosen by Kooshi as M62), rank 2 FS-19 (NEW — the number-field analogue of
+CLOSED — the library was read — and **FS-20, the Theorem B paper, enters at rank 2 on Kooshi's firing of the
+write-up trigger** (`plans/STUB-theorem-B-writeup.md`; its bearing on χ ≥ 6 is none and the stub says so — it is
+ranked on the trigger, not on the hunt, and it does not compete with M62 for anything but attention). The rest of
+the table is now rank 1 FS-6 (the design target in a SEALED
+field, unchanged and already chosen by Kooshi as M62), rank 3 FS-19 (also new — the number-field analogue of
 `[Chow1993]`'s complete classification of forbidden distance sets, `v_𝔭(d²)` for his two-index; a derivation
 whose machinery is already in the kernel, `plans/STUB-padic-distance-classification.md`), then FS-16, FS-13
 (now carrying the acquisition of `[Krebs2022]`, whose `χ > ω` criterion is the most wanted page in the
