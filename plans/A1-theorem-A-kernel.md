@@ -326,9 +326,91 @@ through it so it is load-bearing rather than decorative. The cost is two lines (
 * **Prove / test / assume**: everything in §§1–5 is proved; the model and the two reds are tests;
   nothing is assumed — no axiom, no `native_decide`, no new trust.
 
-## 9. Experience-modeling pass
+## 9. Experience-modeling pass (2026-09-08)
 
-*(to be run and recorded before implementation)*
+### E1. Who consumes this, and what they hold
+
+| consumer | what they hold at the moment of use | what they need from the surface |
+|---|---|---|
+| a future milestone colouring a plane over a field | a set of points and a hunch that "the residue method applies" | the exact triple they must produce, as a numbered recipe |
+| a reader auditing the ledger claim | the write-up's Theorem A (number field, prime `𝔭`, `N(𝔭)` colours) | how the formal statement relates to it — **and what is not proved** |
+| `FieldWall4` | a subring, a ring hom, and a descent | `residue_apply_of_mem`, `residue_eq_iff`, and the plane entry point |
+| `exact?` | statement shapes | *nothing* — the colour count `Fintype.card G` is an input, not determined by the goal, so no search can find these theorems. **Discovery is the module docstring's job**, which is why "Using this file" is a five-step recipe naming a lemma at each step. |
+
+### E2. The honesty clause, written into the module
+
+A stated theorem arrives with total authority, so the docstring says in its own section what is
+**not** proved: that a number field with a conjugation-fixed prime *has* the subring layer 2 wants.
+Without that sentence, "Theorem A is kernel-checked" is a claim the formal statement does not back.
+
+### E3. Names changed by the pass
+
+| was | now | why |
+|---|---|---|
+| `residue_ne` + `residue_eq` | **`residue_eq_iff`** | one name for both directions; the implicature of stating one half is that the other is false or hard. Consumers need both (properness one way, the monochromatic distance class the other) |
+| `apply_ne_zero_of_mem_normOne` | **`map_ne_zero_of_mem_normOne`** | Mathlib names `f a ≠ 0` as `map_ne_zero`; "apply" named nothing |
+| `mem_of_mem_normOne` | **`normOne_subset`** | it is a subset relation, which is how the write-up states it ("unit vectors are integral"); `mem_of_mem` read as noise |
+| `ValuationSubring.mem_of_mem_normOne` | **`normOne_subset_valuationSubring`** | a lemma about our `normOne` does not belong in a Mathlib namespace |
+| `colorable_of_additive` (a theorem) | *deleted* — a spec **example** instead | see E4 |
+
+### E4. One theorem deleted, and replaced by something stronger
+
+`colorable_of_additive` (the `A = ⊤` corollary) had no customer: users of `Additive.lean` reach for
+`additiveColoring` directly. But the subsumption claim still has to be *checkable* rather than
+asserted, so the spec section now proves the two colourings are **the same function**:
+`additiveColoring Γ φ h x = residue (φ.comp (⊤ : AddSubgroup M).subtype) x`. Stronger evidence,
+smaller surface, and it removes a name a reader would otherwise have to place.
+
+Same reasoning kept `colorable_unitQuadrance_of_residue`, which does have a claim to back: "nothing
+in §1 needed `ℂ`, a metric or a field" is a docstring assertion until a statement over an arbitrary
+commutative ring stands beside it.
+
+### E5. The `simp` budget: exactly one tag
+
+Only `residue_zero` is `@[simp]` — a normal form we own, terminating, no overlap.
+
+`mem_normOne` was a candidate (the house drives goals out of graph/set vocabulary into ring
+arithmetic, as `unitQuadrance_adj` and `unitDistance_adj` do). **Rejected**: consumers state
+`hnorm` in `normOne` vocabulary and `colorable_of_normOne` consumes it in that form, so a tagged
+`mem_normOne` would make any `simp at *` unfold the hypothesis out of the shape the theorem wants —
+the "every use site opens with a simp preamble" smell, inverted. `normOne` stays sealed and
+`mem_normOne` is the bridge a consumer applies by name. `sub_mem_normOne_conj_iff` is untagged for
+the same reason plus an overlap: its left-hand side would match a tagged `mem_normOne` first.
+
+### E6. The breakdown surface
+
+The one failure a consumer will hit that teaches nothing on its own: writing
+`residue ψ.toAddMonoidHom` and getting `Application type mismatch … ↥?m.8 →+ G`, because the
+subgroup cannot be inferred from the homomorphism (higher-order unification on `↥?A ≡ ↥A`). The
+error names no fix, so **the docstring names it**: write `residue (A := A.toAddSubgroup) …`. Every
+public statement in §§3–5 was checked to be free of this — none of them mentions a residue map at
+all, so the annotation is written exactly once in the whole repository, inside `FieldWall4`'s own
+definition of its colouring.
+
+Second breakdown, designed out rather than documented: a consumer holding `ψ : A →+* G` for a
+subring should never be routed to `colorable_of_residue` (which wants an `AddSubgroup` and an
+`AddMonoidHom`). The docstring's recipe sends them to `colorable_of_normOne` and its plane forms;
+the group layer is named as the primitive and is not on the recipe.
+
+### E7. What a reader will confuse this with, said explicitly
+
+The module docstring carries a "What this is not" section naming four neighbours and the one-line
+difference in each: `Additive` (total homomorphism — this file *is* that with the hom made partial),
+`LocalGlobal` (a quotient construction, also total), `UnitQuadrance` (functoriality — a different
+mechanism, and strictly sharper where it applies, since it yields the residue plane's own chromatic
+number rather than the size of a residue field), and `ResidueObstruction` (M60 — pair compulsions,
+no colouring built). Without it the file's name alone puts it within one letter of a module about
+something else.
+
+### E8. Validation planned
+
+* **API-only proof**: the `FieldWall4` refactor is exactly this test — it must be written with no
+  `unfold` of `residue`, `sect` or `cosetRep` (the last two are `private`, so the kernel enforces
+  it), and every reach for the source is a hole in the surface to be filled by a lemma.
+* **New-import test**: the spec section's `twoStep` model is written as a cold consumer would — name
+  a subgroup, name a hom, apply the entry point — and it is the first thing to break if the recipe
+  is wrong.
+* **`#print axioms`** on the six public headlines, registered in `scripts/Axioms.lean`.
 
 ## 10. Results
 
