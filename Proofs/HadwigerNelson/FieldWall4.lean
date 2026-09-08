@@ -1010,30 +1010,92 @@ theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ oddDenom) (h1 : normSq u = 1
     F4.intCast_odd (by simpa [pow_two] using hm.mul hm)] at this
   exact absurd this (by decide)
 
-/-! ## §8 The colouring -/
+/-! ## §8 The colouring
+
+Every unit step stays inside one coset of `A`, so choosing a representative per coset and reading
+the residue of the offset is a proper colouring of the whole plane over `K` — no finiteness
+hypothesis anywhere. -/
+
+private theorem mk_surjective :
+    Function.Surjective ⇑(QuotientAddGroup.mk' oddDenom.toAddSubgroup) :=
+  fun q => Quot.exists_rep q
 
 /-- A chosen representative of each coset of `A` in the plane. -/
 noncomputable def base (z : ℂ) : ℂ :=
-  Quotient.out (QuotientAddGroup.mk' oddDenom.toAddSubgroup z)
+  Function.surjInv mk_surjective (QuotientAddGroup.mk' oddDenom.toAddSubgroup z)
 
-theorem sub_base_mem (z : ℂ) : z - base z ∈ oddDenom := by sorry
+private theorem mk_base (z : ℂ) :
+    QuotientAddGroup.mk' oddDenom.toAddSubgroup (base z)
+      = QuotientAddGroup.mk' oddDenom.toAddSubgroup z :=
+  Function.surjInv_eq mk_surjective _
 
-theorem base_eq_of_sub_mem {z w : ℂ} (h : z - w ∈ oddDenom) : base z = base w := by sorry
+theorem sub_base_mem (z : ℂ) : z - base z ∈ oddDenom := by
+  have := QuotientAddGroup.eq.mp (mk_base z)
+  simpa [sub_eq_neg_add] using this
 
-/-- **The residue colouring of the plane over `K`.** On each coset of `oddDenom` it is the
-residue map `psiZero` of §3; the coset representative is chosen once, by `Classical.choice`. -/
+theorem base_eq_of_sub_mem {z w : ℂ} (h : z - w ∈ oddDenom) : base z = base w := by
+  have hq : QuotientAddGroup.mk' oddDenom.toAddSubgroup z
+      = QuotientAddGroup.mk' oddDenom.toAddSubgroup w := by
+    simp only [QuotientAddGroup.mk'_apply]
+    refine QuotientAddGroup.eq.mpr ?_
+    simpa [neg_add_eq_sub] using oddDenom.neg_mem h
+  exact congrArg (Function.surjInv mk_surjective) hq
+
+/-- **The residue colouring of the plane over `K`.** On each coset of `oddDenom` it is the residue
+map `psiZero` of §3; the coset representative is chosen once, by `Classical.choice`. -/
 noncomputable def residueColouring (z : ℂ) : F4 := psiOf (z - base z)
 
 /-- Adjacent points of `K²` get different colours — the properness of the colouring. -/
 theorem residueColouring_ne_of_dist_one {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
-    (h : dist z w = 1) : residueColouring z ≠ residueColouring w := by sorry
+    (h : dist z w = 1) : residueColouring z ≠ residueColouring w := by
+  have hnorm : normSq (z - w) = 1 := by
+    have : ‖z - w‖ = 1 := by rwa [← Complex.dist_eq]
+    have h2 := congrArg (fun t : ℝ => t ^ 2) this
+    simpa [Complex.sq_norm] using h2
+  have hmem : z - w ∈ oddDenom := mem_oddDenom_of_unit (seamPlane_sub hz hw) hnorm
+  have hbase : base z = base w := base_eq_of_sub_mem hmem
+  intro hcol
+  have hz' : z - base z ∈ oddDenom := sub_base_mem z
+  have hw' : w - base z ∈ oddDenom := hbase ▸ sub_base_mem w
+  have h1 : psiOf (z - base z) = residueColouring z := rfl
+  have h2 : psiOf (w - base z) = residueColouring w := by rw [hbase]; rfl
+  have key := psiOf_sub hz' hw'
+  rw [show (z - base z) - (w - base z) = z - w by ring, h1, h2, hcol, sub_self] at key
+  exact psiOf_ne_zero_of_unit hmem hnorm key
 
 /-- **Distance `2` is monochromatic**, because `2` lies in the prime: a pair at distance `2` is
 `2 ·` a unit vector and the residue field has characteristic two. The honest form of "a version of
 this theorem for the `{1, 2}`-distance graph would be false" — Exoo–Ismailescu's 6-chromatic
 `{1, 2}`-graph has all its coordinates in `K`. -/
 theorem residueColouring_eq_of_dist_two {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
-    (h : dist z w = 2) : residueColouring z = residueColouring w := by sorry
+    (h : dist z w = 2) : residueColouring z = residueColouring w := by
+  set v : ℂ := (1/2 : ℚ) * (z - w) with hv
+  have hvmem : v ∈ seamPlane := seamPlane_ratMul (seamPlane_sub hz hw) _
+  have hnorm : normSq v = 1 := by
+    have hzw : ‖z - w‖ = 2 := by rwa [← Complex.dist_eq]
+    have hns : normSq (z - w) = 4 := by
+      have h2 := congrArg (fun t : ℝ => t ^ 2) hzw
+      simp only [Complex.sq_norm] at h2
+      rw [h2]; norm_num
+    rw [hv, show ((1/2 : ℚ) : ℂ) = (1/2 : ℂ) by push_cast; ring, map_mul, hns]
+    rw [show normSq (1/2 : ℂ) = 1/4 by simp; norm_num]
+    norm_num
+  have hvA : v ∈ oddDenom := mem_oddDenom_of_unit hvmem hnorm
+  have hsub : z - w = v + v := by rw [hv]; push_cast; ring
+  have hmem : z - w ∈ oddDenom := hsub ▸ oddDenom.add_mem hvA hvA
+  have hbase : base z = base w := base_eq_of_sub_mem hmem
+  have hz' : z - base z ∈ oddDenom := sub_base_mem z
+  have hw' : w - base z ∈ oddDenom := hbase ▸ sub_base_mem w
+  have hzero : psiOf (z - w) = 0 := by
+    obtain ⟨x, m, hm, hx⟩ := hvA
+    have hx2 : (m : ℂ) * (z - w) = den (2 * x) := by
+      rw [hsub, map_mul, map_ofNat, ← hx]; ring
+    rw [psiOf_eq hm hx2, map_mul, map_ofNat, show (2 : F4) = 0 from rfl, zero_mul]
+  have h1 : psiOf (z - base z) = residueColouring z := rfl
+  have h2 : psiOf (w - base z) = residueColouring w := by rw [hbase]; rfl
+  have key := psiOf_sub hz' hw'
+  rw [show (z - base z) - (w - base z) = z - w by ring, h1, h2, hzero] at key
+  exact sub_eq_zero.mp key.symm
 
 end FieldWall4
 
