@@ -100,3 +100,7 @@
 2026-09-07T22:16:33Z Kooshi: FS-15 is next (M61). §H written into the stub; alpha loops at 11/19 (build/m61/alpha-p{11,19}-N*.json) and 23 (alpha-p23.log) in flight; compaction next
 2026-09-07T22:23:55Z alpha loop DONE: alpha(11) = 28 exact (29 unsat 92 s); alpha(19) >= 76, size 78 unknown at 800 s; alpha(23) >= 106? still running (pid 3359887, 2-h wall, build/m61/alpha-p23.log)
 2026-09-07T23:15:27Z M61 opening: derivations A (circulant quotient), B (theta LP), C/F (equivariance), E (F_27 plane) run in build/m61/; half-turn-equivariant 5-colouring at 23 chained behind alpha(23) (1-h wall) → build/m61/halfturn-chain.log
+2026-09-07T23:45:23Z M61 gate chain launched (build → axioms → lint), logs build/m61/gate-*.log
+2026-09-07T23:47:38Z M61 records chain launched (theta, periodic ≤ 71, equivariant 11/19) → build/m61/records.log
+2026-09-07T23:59:45Z M61: lint fixes; gate chain #2 launched; equivariant rerun with at-most-one (11, 19) → build/m61/equiv.log; half-turn CNF at 23 re-dumped with AMO (chain still waiting on alpha(23))
+2026-09-08T00:00:15Z M61: fplane.py chi --q 27 (F_27 plane, 20M-conflict budget per k) → build/m61/chi-q27.log

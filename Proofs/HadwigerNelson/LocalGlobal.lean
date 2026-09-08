@@ -177,7 +177,7 @@ variable {V : Type*} {G : SimpleGraph V} {k a : ℕ}
 
 /-- **A `k`-colourable finite graph has at most `k · a` vertices when no independent set exceeds `a`**: the colour
 classes partition the vertices into `k` independent sets. -/
-theorem card_le_mul_of_colorable [Fintype V] [DecidableEq V] (hα : ∀ s : Finset V, G.IsIndepSet (s : Set V) → s.card ≤ a)
+theorem card_le_mul_of_colorable [Fintype V] (hα : ∀ s : Finset V, G.IsIndepSet (s : Set V) → s.card ≤ a)
     (h : G.Colorable k) : Fintype.card V ≤ k * a := by
   obtain ⟨C⟩ := h
   calc Fintype.card V = ∑ c : Fin k, (Finset.univ.filter fun v => C v = c).card := by
@@ -188,17 +188,17 @@ theorem card_le_mul_of_colorable [Fintype V] [DecidableEq V] (hα : ∀ s : Fins
     _ = k * a := by simp [Finset.sum_const, Finset.card_univ]
 
 /-- The bound at `a = indepNum`. -/
-theorem card_le_mul_indepNum_of_colorable [Fintype V] [DecidableEq V] (h : G.Colorable k) :
+theorem card_le_mul_indepNum_of_colorable [Fintype V] (h : G.Colorable k) :
     Fintype.card V ≤ k * G.indepNum :=
   card_le_mul_of_colorable (fun _ hs => hs.card_le_indepNum) h
 
 /-- The contrapositive — the consumer of a certified refutation of an independent set. -/
-theorem not_colorable_of_mul_lt [Fintype V] [DecidableEq V] (hα : ∀ s : Finset V, G.IsIndepSet (s : Set V) → s.card ≤ a)
+theorem not_colorable_of_mul_lt [Fintype V] (hα : ∀ s : Finset V, G.IsIndepSet (s : Set V) → s.card ≤ a)
     (h : k * a < Fintype.card V) : ¬ G.Colorable k :=
   fun hc => absurd (card_le_mul_of_colorable hα hc) (not_le.mpr h)
 
 /-- **The fractional face: `card ≤ χ · α`**, in `ℕ∞`. -/
-theorem card_le_chromaticNumber_mul_indepNum [Fintype V] [DecidableEq V] :
+theorem card_le_chromaticNumber_mul_indepNum [Fintype V] :
     (Fintype.card V : ℕ∞) ≤ G.chromaticNumber * G.indepNum := by
   have hne : G.chromaticNumber ≠ ⊤ := chromaticNumber_ne_top_iff_exists.mpr ⟨_, G.colorable_of_fintype⟩
   calc (Fintype.card V : ℕ∞) ≤ ((ENat.toNat G.chromaticNumber * G.indepNum : ℕ) : ℕ∞) := by

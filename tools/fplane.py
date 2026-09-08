@@ -558,6 +558,9 @@ def self_test():
     g2 = next(g for g, o in rotations(11) if o == 2)
     st_e, _ = equivariant_colouring(11, 5, g2, (1, 0, 3, 2, 4), 5_000_000)
     check("equivariant: the half-turn with τ = (01)(23) admits a 5-colouring at 11, verified proper and equivariant", st_e == "sat")
+    g3 = next(g for g, o in rotations(11) if o == 3)
+    st_3, _ = equivariant_colouring(11, 5, g3, (1, 2, 0, 3, 4), 5_000_000)
+    check(f"equivariant: the order-3 rotation with τ a 3-cycle at 11 returns a verdict under at-most-one (got {st_3}; without AMO the model was proper but not equivariant)", st_3 in ("sat", "unsat"))
     st_i, _ = equivariant_colouring(11, 5, g2, (0, 1, 2, 3, 4), 5_000_000)
     check("planted red: a rotation-INVARIANT (τ = id) proper colouring is impossible (z ~ −z on the circle of norm 1/4)", st_i == "unsat")
     ok = not fails
@@ -828,10 +831,16 @@ def perm_class_reps(k: int):
     return seen
 
 def equivariant_colouring(p: int, k: int, g, tau, conf: int):
-    """col(g z) = tau(col z) for all z, as extra clauses; the model is verified proper AND equivariant"""
+    """col(g z) = tau(col z) for all z, as extra clauses; the model is verified proper AND equivariant.
+    At-most-one colour per vertex is ENFORCED here (the plain colouring instance does without it, since any true colour of a
+    vertex is a proper choice; the equivariance clauses relate the colours of z and g z, so a vertex with two true colours could
+    satisfy them while the chosen colouring is not equivariant — the self-check caught exactly that on 2026-09-07).
+    A τ without a fixed colour refuses trivially: the origin is fixed by every rotation, so col 0 = τ (col 0)."""
     E, _ = ud_edges(p); n = p * p
     var = lambda v, c: v * k + c + 1
-    extra = []
+    if not any(tau[c] == c for c in range(k)):
+        return "unsat", None
+    extra = [[-var(v, c), -var(v, d)] for v in range(n) for c in range(k) for d in range(c + 1, k)]
     gz_of = {}
     for x in range(p):
         for y in range(p):
@@ -864,7 +873,7 @@ def cmd_equivariant(a):
             st, col = equivariant_colouring(p, k, g, tau, a.conf)
             secs = round(time.time() - t0, 1)
             rows.append(dict(rotation_order=o, rotation=g, tau=list(tau), tau_cycle_type=list(ct), status=st, seconds=secs, colouring=col))
-            word = {"sat": "a colouring verified proper and equivariant", "unsat": "the solver's refusal", "unknown": f"unknown at {a.conf} conflicts"}[st]
+            word = {"sat": "a colouring verified proper and equivariant", "unsat": ("no τ-fixed colour for the origin (trivial)" if not any(tau[c] == c for c in range(k)) else "the solver's refusal"), "unknown": f"unknown at {a.conf} conflicts"}[st]
             print(f"[equivariant] p={p} k={k}: rotation of order {o:2d}, τ of cycle type {ct}: {st.upper():7s} — {word} [{secs}s]", flush=True)
     out = dict(kind="fplane-equivariant", p=p, k=k, conflict_budget=a.conf, rows=rows,
                claim_scope="colourings of UD(F_p,2) with col(r z) = τ(col z) for one rotation r of each order about the origin and one τ per "

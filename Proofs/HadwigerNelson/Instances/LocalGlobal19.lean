@@ -114,10 +114,11 @@ theorem finitePlane3Colouring_proper : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlan
 theorem finitePlane3ColouringDiff_proper : ∀ {u v : ZMod 3 × ZMod 3}, (finitePlane 3).Adj u v →
     finitePlane3ColouringDiff u ≠ finitePlane3ColouringDiff v := by decide
 
-/-- The two tables as colourings of the plane. -/
+/-- The sum table as a colouring of the plane. -/
 def finitePlane3Colouring.toColoring : (finitePlane 3).Coloring (Fin 3) :=
   Coloring.mk finitePlane3Colouring finitePlane3Colouring_proper
 
+/-- The difference table as a colouring of the plane. -/
 def finitePlane3ColouringDiff.toColoring : (finitePlane 3).Coloring (Fin 3) :=
   Coloring.mk finitePlane3ColouringDiff finitePlane3ColouringDiff_proper
 

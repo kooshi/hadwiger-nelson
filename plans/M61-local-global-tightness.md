@@ -346,7 +346,7 @@ S₅ of compatible order, pysat cadical at 5·10⁶ conflicts):
 
 | p | rotation orders with an equivariant 5-colouring | refused | undecided |
 |---|---|---|---|
-| 11 | 2 (τ a transposition or a double transposition), 3 (τ a 3-cycle), 6 (τ = 3-cycle × transposition) | 4, 12 — every τ | — |
+| 11 | 2 (τ a transposition or a double transposition), 3 (τ a 3-cycle) — **[corrected at implementation: the opening scratch also reported order 6 with τ = 3-cycle × transposition, an artifact of an encoding without at-most-one-colour clauses; τ has no fixed colour, so the origin cannot be coloured and the class refuses trivially — §R5]** | 4, 6, 12 — every τ | — |
 | 19 | 2 (τ a double transposition only) | 4, 5, 10, 20 — every τ; order 2 with a single transposition (108 s) | — |
 | 23 | — | 3, 4, 6, 8, 12, 24 — every τ, all in ≤ 2 s; order 2 with the identity or a transposition | **order 2 with τ a double transposition: unknown at 500 s** |
 
