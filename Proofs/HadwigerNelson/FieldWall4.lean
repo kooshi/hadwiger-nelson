@@ -83,6 +83,9 @@ instance instCommRing : CommRing F4 where
 /-- The primitive cube root of unity, `Ω`. -/
 def om : F4 := ⟨0, 1⟩
 
+@[simp] theorem om_u : om.u = 0 := rfl
+@[simp] theorem om_v : om.v = 1 := rfl
+
 theorem card_eq_four : Fintype.card F4 = 4 := by decide
 
 /-- `𝔽₄` is a field, in the one form §5 consumes. -/
@@ -506,26 +509,133 @@ theorem psiZero_conj (x : SeamOrder) : psiZero (conj x) = psiZero x * psiZero x 
 theorem psiOne_conj (x : SeamOrder) : psiOne (conj x) = psiOne x * psiOne x :=
   congrArg (fun h : SeamOrder →+* F4 => h x) (psi_comp_conj 1 hs_one (by decide))
 
-/-! ## §4 `den` is injective -/
+/-! ## §4 `den` is injective
 
-theorem den_injective : Function.Injective den := by sorry
+The eight monomials `{1, ω} × {1, i} × {1, T}` are ℚ-independent, so an element of the order is
+determined by its image in the plane. Two consumers: the well-definedness of the residue on `A`
+(§7) and the norm equations of §5. The same two coordinate formulas give `den x ∈ K²` in §6. -/
 
-/-! ## §5 The descent -/
+private theorem sqrt3_mul_sqrt33 : Real.sqrt 3 * Real.sqrt 33 = 3 * Real.sqrt 11 := by
+  rw [← Real.sqrt_mul (by norm_num), show (3:ℝ) * 33 = 9 * 11 by norm_num,
+    Real.sqrt_mul (by norm_num), show (9:ℝ) = 3 ^ 2 by norm_num,
+    Real.sqrt_sq (by norm_num)]
+
+/-- The real part of a drawn order element, in the basis `1, √3, √11, √33` of `K`. -/
+theorem den_re (a b e f c d g h : ℤ) :
+    (den ⟨⟨⟨a, b⟩, ⟨e, f⟩⟩, ⟨⟨c, d⟩, ⟨g, h⟩⟩⟩).re
+      = ((a - b/2 + e/2 - f/4 : ℚ) : ℝ) + ((-d/2 - h/4 : ℚ) : ℝ) * Real.sqrt 3
+        + ((-3*h/4 : ℚ) : ℝ) * Real.sqrt 11 + ((e/2 - f/4 : ℚ) : ℝ) * Real.sqrt 33 := by
+  simp only [den_apply, denET_apply, denE_apply, omega3, tau, Complex.add_re, Complex.mul_re,
+    Complex.add_im, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.intCast_re,
+    Complex.intCast_im]
+  push_cast
+  linear_combination (-(h : ℝ)/4) * sqrt3_mul_sqrt33
+
+/-- The imaginary part of a drawn order element, in the same basis. -/
+theorem den_im (a b e f c d g h : ℤ) :
+    (den ⟨⟨⟨a, b⟩, ⟨e, f⟩⟩, ⟨⟨c, d⟩, ⟨g, h⟩⟩⟩).im
+      = ((c - d/2 + g/2 - h/4 : ℚ) : ℝ) + ((b/2 + f/4 : ℚ) : ℝ) * Real.sqrt 3
+        + ((3*f/4 : ℚ) : ℝ) * Real.sqrt 11 + ((g/2 - h/4 : ℚ) : ℝ) * Real.sqrt 33 := by
+  simp only [den_apply, denET_apply, denE_apply, omega3, tau, Complex.add_re, Complex.mul_re,
+    Complex.add_im, Complex.mul_im, Complex.I_re, Complex.I_im, Complex.intCast_re,
+    Complex.intCast_im]
+  push_cast
+  linear_combination ((f : ℝ)/4) * sqrt3_mul_sqrt33
+
+theorem den_injective : Function.Injective den := by
+  refine (injective_iff_map_eq_zero den).mpr ?_
+  rintro ⟨⟨⟨a, b⟩, ⟨e, f⟩⟩, ⟨⟨c, d⟩, ⟨g, h⟩⟩⟩ hx
+  have hre : ((a - b/2 + e/2 - f/4 : ℚ) : ℝ) + ((-d/2 - h/4 : ℚ) : ℝ) * Real.sqrt 3
+      + ((-3*h/4 : ℚ) : ℝ) * Real.sqrt 11 + ((e/2 - f/4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
+    rw [← den_re]; rw [hx]; rfl
+  have him : ((c - d/2 + g/2 - h/4 : ℚ) : ℝ) + ((b/2 + f/4 : ℚ) : ℝ) * Real.sqrt 3
+      + ((3*f/4 : ℚ) : ℝ) * Real.sqrt 11 + ((g/2 - h/4 : ℚ) : ℝ) * Real.sqrt 33 = 0 := by
+    rw [← den_im]; rw [hx]; rfl
+  obtain ⟨r1, r3, r11, r33⟩ := Ladder.sqrt_indep hre
+  obtain ⟨i1, i3, i11, i33⟩ := Ladder.sqrt_indep him
+  have hh : h = 0 := by exact_mod_cast (by linarith : ((h : ℚ)) = 0)
+  have hf : f = 0 := by exact_mod_cast (by linarith : ((f : ℚ)) = 0)
+  subst hh; subst hf
+  have hd : d = 0 := by exact_mod_cast (by linarith : ((d : ℚ)) = 0)
+  have hb : b = 0 := by exact_mod_cast (by linarith : ((b : ℚ)) = 0)
+  have he : e = 0 := by exact_mod_cast (by linarith : ((e : ℚ)) = 0)
+  have hg : g = 0 := by exact_mod_cast (by linarith : ((g : ℚ)) = 0)
+  subst hd; subst hb; subst he; subst hg
+  have ha : a = 0 := by exact_mod_cast (by linarith : ((a : ℚ)) = 0)
+  have hc : c = 0 := by exact_mod_cast (by linarith : ((c : ℚ)) = 0)
+  subst ha; subst hc
+  rfl
+
+/-! ## §5 The descent
+
+The joint kernel of the two residue maps is `(1 + i)·O`, and seeing it costs no ideal theory:
+writing `z = p + q·i`, the two conditions say exactly that `p` and `q` agree modulo `2` in all four
+coordinates, and then `z/(1+i) = (p+q)/2 + ((q−p)/2)·i` has integer coordinates. -/
 
 /-- `1 + i` in the order. -/
 def onePlusI : SeamOrder := 1 + Quad.theta
 
-theorem den_onePlusI : den onePlusI = 1 + Complex.I := by sorry
+theorem den_onePlusI : den onePlusI = 1 + Complex.I := by
+  simp [onePlusI, den]
 
-/-- **The descent.** An element of the order killed by both residue maps is divisible by `1 + i`:
-writing `z = p + qi`, the two conditions say exactly `p ≡ q` mod `2` in all four coordinates, and
-then `z/(1+i) = (p+q)/2 + ((q−p)/2)·i` has integer coordinates. -/
+/-- The order has no `2`-torsion — one line, through the drawing. -/
+theorem two_mul_cancel {a b : SeamOrder} (h : (2 : SeamOrder) * a = 2 * b) : a = b := by
+  refine den_injective ?_
+  have h' := congrArg den h
+  simp only [map_mul, map_ofNat] at h'
+  exact mul_left_cancel₀ (by norm_num : (2 : ℂ) ≠ 0) h'
+
+private theorem psiZero_apply (x : SeamOrder) : psiZero x = psiE x.re.re + psiE x.im.re := by
+  simp [psiZero, psi_apply]
+
+private theorem psiOne_apply (x : SeamOrder) :
+    psiOne x = psiE x.re.re + psiE x.re.im + (psiE x.im.re + psiE x.im.im) := by
+  simp [psiOne, psi_apply]
+
+private theorem two_dvd_add {m n : ℤ} (h : ((m : ZMod 2)) = (n : ZMod 2)) : (2 : ℤ) ∣ m + n := by
+  refine (ZMod.intCast_zmod_eq_zero_iff_dvd _ 2).mp ?_
+  push_cast
+  rw [h, show ((n : ZMod 2)) + (n : ZMod 2) = 2 * (n : ZMod 2) by ring,
+    show ((2 : ZMod 2)) = 0 from rfl, zero_mul]
+
+private theorem exists_half_eis {p q : Eis} (h : psiE p = psiE q) : ∃ a : Eis, p + q = a + a := by
+  have hu : ((p.re : ZMod 2)) = (q.re : ZMod 2) := by
+    have := congrArg F4.u h; simpa [F4.mul_u] using this
+  have hv : ((p.im : ZMod 2)) = (q.im : ZMod 2) := by
+    have := congrArg F4.v h; simpa [F4.mul_v] using this
+  obtain ⟨k, hk⟩ := two_dvd_add hu
+  obtain ⟨l, hl⟩ := two_dvd_add hv
+  exact ⟨⟨k, l⟩, Quad.ext (by simpa using by omega) (by simpa using by omega)⟩
+
+private theorem exists_half_eisT {p q : EisT} (h0 : psiE p.re = psiE q.re)
+    (h1 : psiE p.im = psiE q.im) : ∃ A : EisT, p + q = A + A := by
+  obtain ⟨a, ha⟩ := exists_half_eis h0
+  obtain ⟨b, hb⟩ := exists_half_eis h1
+  exact ⟨⟨a, b⟩, Quad.ext ha hb⟩
+
+/-- **The descent.** An element of the order killed by both residue maps is divisible by `1 + i`. -/
 theorem exists_mul_onePlusI {z : SeamOrder} (h0 : psiZero z = 0) (h1 : psiOne z = 0) :
-    ∃ w : SeamOrder, w * onePlusI = z := by sorry
+    ∃ w : SeamOrder, w * onePlusI = z := by
+  rw [psiZero_apply] at h0
+  rw [psiOne_apply] at h1
+  have e1 : psiE z.re.re = psiE z.im.re := F4.eq_of_add_eq_zero h0
+  have e2 : psiE z.re.im = psiE z.im.im := by
+    refine F4.eq_of_add_eq_zero ?_
+    linear_combination h1 - h0
+  obtain ⟨A, hA⟩ := exists_half_eisT e1 e2
+  refine ⟨⟨A, A - z.re⟩, Quad.ext ?_ ?_⟩
+  · show A * 1 + ((-1 : ℤ) : EisT) * ((A - z.re) * 1) = z.re
+    push_cast; ring
+  · show A * 1 + (A - z.re) * 1 + ((0 : ℤ) : EisT) * ((A - z.re) * 1) = z.im
+    push_cast; linear_combination -hA
 
 /-- A residue map compatible with conjugation kills any element of even norm. -/
 theorem eq_zero_of_even_norm {f : SeamOrder →+* F4} (hf : ∀ x, f (conj x) = f x * f x)
-    {z : SeamOrder} {N : ℤ} (hN : Even N) (h : z * conj z = (N : SeamOrder)) : f z = 0 := by sorry
+    {z : SeamOrder} {N : ℤ} (hN : Even N) (h : z * conj z = (N : SeamOrder)) : f z = 0 := by
+  refine F4.eq_zero_of_cube_eq_zero ?_
+  have : f z * f (conj z) = ((N : ℤ) : F4) := by rw [← map_mul, h, map_intCast]
+  rw [hf z] at this
+  rw [this, F4.intCast_even hN]
 
 /-! ## §6 The seam field and its plane -/
 
