@@ -674,3 +674,60 @@ would make it get skipped:
 The gate will change at least one milestone's *scope* (not merely its attribution) within the next
 three milestones — because the pattern here was not "we duplicated a result" but "we spent four
 milestones re-deriving the entrance to a room, and the interesting work started after it."
+
+## 13. The poros session's papers, verified (2026-09-08)
+
+*Kooshi pointed at the last messages of the `../poros` session (`~/.claude/projects/-home-kooshi-source-poros`),
+with the warning that the conversation tripped a cyber-safety false positive and was downgraded to a
+weaker model, so its reasoning is not to be trusted but its paper finds should be. Read: the final
+14 k-character assistant message (model `claude-opus-4-8`). Its three citations are **real and
+correctly given** — checked one by one, which is exactly the check a downgraded model's citations
+need.*
+
+### P1. The three papers
+
+| work | what it is | why it matters here | status |
+|---|---|---|---|
+| `[Krebs2022]` M. Krebs, *Clique numbers of finite unit-quadrance graphs*, J. Algebraic Combin. 57 (2023) | determines `ω(UD(F, n))` **completely for every finite field and every `n`**; also computes bipartiteness and connectedness, and **bounds the chromatic numbers**, with conditions under which `χ > ω` | M59 `decide`s `ω = 3` at 11 and `ω = 2` at 19 one prime at a time; a closed form replaces that. G24/G40/G44's `ω`-versus-`χ` readings — the programme's own account of where the integrality gap lives — have a paper about them | abstract read; **not held** (paywalled) |
+| `[SchneiderSilva2013]` C. Schneider, A. Silva, arXiv:1306.6050, J. Algebra Appl. | generalized Paley graphs with `ω = χ`, tied to synchronization in primitive affine permutation groups | **`UD(𝔽_q, 2)` is a generalized Paley graph** for `q ≡ 3 (mod 4)`: the quadrance is the norm of `𝔽_{q²}/𝔽_q`, so the connection set is the norm-one subgroup of order `q + 1` — `GP(q², q − 1)`. Our planes are the `ω ≠ χ` case, so their criterion is about our family, and it names a discipline (synchronization) absent from the ladder under G30 | abstract read; **not held** |
+| `[CervantesKrebs2023]` J. Cervantes, M. Krebs, *Chromatic numbers of Cayley graphs of abelian groups: a matrix method*, Lin. Alg. Appl. (2023), arXiv:2303.06262 / 06272 | an abelian Cayley graph is an integer matrix; row operations give graph homomorphisms to smaller Cayley graphs, hence `χ` upper bounds | **this is M61's periodic quotient, systematized.** `addCayleyMap` / `unitQuadrance_colorable_of_quotient` is one row operation done by hand, per prime. **It was already in our bibliography §B/§C, unread, since 2026-09-06** — promoted to §A now. Follow-up arXiv:2511.03028 (rank two, 2025) | **listed and unread for two days**; now promoted |
+
+Same Mike Krebs in two of the three: there is a live, coherent line of work on exactly our objects,
+and none of it was in the record.
+
+### P2. The convergence that matters more than the papers
+
+The poros session's card 3 — *"the discipline was named (generalized Paley graph) and one of its
+theorems used (Lovász ϑ), but its chromatic literature past Vinh was not read"* — is the **same
+diagnosis** §11 reached from a completely different direction (Moorhouse 2010, found by searching for
+a side claim of a closed item). Two independent routes, one downgraded model and one literature
+check, to the same finding on the same day. That is as strong an argument for §12's prior-art gate
+as the record is going to produce, and it should be scored that way rather than as two anecdotes.
+
+### P3. One checkable thing the session did not have, and it is a cheaper target than the backlog's
+
+Searching for a published exact value of `χ(UD(𝔽₂₃, 2))` — FS-17's first digit, and backlog item
+**B3, budgeted at twenty-four hours of compute** — found none. **So B3 is not answered in the
+literature and its budget is not wasted.** But `[Moorhouse2010]` Table 6.1 (§11) stops at `q = 17`
+and leaves two entries **open**:
+
+* `χ(𝔽₁₃²) ∈ {5, 6}` — which our own record already settles at **5** (frontier row 52, from the
+  2026-09-06 pivot session), apparently without knowing it was an open entry;
+* **`χ(𝔽₁₇²) ∈ {5, 6, 7}` — open in the literature, and never touched here.** `data/fplane/` holds
+  records at 3, 7, 11, 19, 23, 27, 31, 43, 47, 131; there is nothing at 13 or 17.
+
+**`𝔽₁₇²` has 289 vertices against `𝔽₂₃²`'s 529**, and *if it is 6 the first digit is answered* — the
+question FS-17 and B3 exist for. The caveat is real and belongs in the same sentence: `17 ≡ 1
+(mod 4)`, so it is never a usable prime for the sieve, and a 6-chromatic plane there answers the
+**range** half of the local–global conjecture (is the answer ever exactly 6) and contributes nothing
+to the **sieve** half. That is precisely the fork the poros session put to Kooshi as its rank-1 card,
+now with a concrete cheap instance attached.
+
+### P4. What of the session I did *not* adopt
+
+Its diagnosis (the arithmetic frame bounds, locates and explains but cannot compute; the first digit
+sits at the frame's own edge; it is off the path to a 6-object by G45 and FS-17 D3) reads as
+coherent and is consistent with the record I can check — but it is a *reading* produced by a
+downgraded model, its rank-1 card is explicitly Kooshi's to rule on, and its card 2 ("search the
+fibre of the mod-11 reduction with M59's idle mod-`p²` machinery") is offered by its own author in
+the hypothetical mood. None of it is recorded here as a finding. The papers are.
