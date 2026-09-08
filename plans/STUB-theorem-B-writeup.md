@@ -156,9 +156,33 @@ caused the duplication, and `[Moorhouse2010]`'s fate is the cautionary example.
 * **R-c: our vocabulary leaking in.** A dedicated late pass grepping for every banned term.
 * **R-d: scope creep.** The sieve, the lift theory, the compulsion transfer and the tightness mechanism
   (M58–M61) are **not** in this paper.
-* **R-e: tone.** A paper that says "six people missed each other" must be generous, not clever. Every one of the
-  six did good work; the failure is the literature's structure, not theirs — and we are the sixth, which is the
-  fact that makes the paper honest rather than smug.
+* **R-e: TONE — and this is a hard requirement, not a risk to be managed.** Kooshi, 2026-09-08, on reading a
+  draft of this section: *"We shouldn't be smug at all, I mean, it shouldn't even risk coming off that way."*
+  The bar is therefore not "avoid smugness"; it is **leave no sentence that could be read as smug by an unkind
+  reader on a bad day** — including by any of the six authors, each of whom will recognize their own work in it.
+
+  What that means concretely, and every one of these is checkable:
+  - **The paper never says anyone "missed" anything.** They worked in different decades, different countries,
+    different disciplines, and mostly before the search tools that made this synthesis possible existed. Fischer
+    and Chow published in the same volume of the same journal on the same problem without meeting; that is a
+    fact about how mathematics is indexed, not about them.
+  - **We are the sixth, and the paper says so early and plainly.** We did not find these six by being careful.
+    We found them *after* reconstructing four milestones' worth of results that were already published, and we
+    found the closest one — Madore — only because a reference list in a paper we had wrongly declared
+    unobtainable happened to name it. The introduction states this. It is the paper's own evidence for its
+    thesis, and withholding it would be both dishonest and worse writing.
+  - **Every one of the six is cited for what they did, in their own vocabulary, at their strongest form** — not
+    at the weakest form that makes our contribution look larger. §3's credit table is the instrument for this.
+  - **Madore's "has not found the courage" line is quoted with warmth, never as a gotcha.** He identified the
+    exact gap, said so in print, and declined to fill it — which is a service, not an omission. That we filled
+    it eleven years later with a proof assistant he did not have is a statement about tools, not about
+    mathematicians.
+  - **No claim about novelty appears without its search attached** (§1), and no claim about absence of citation
+    appears without "as far as we could determine".
+
+  *The honest register for the whole paper: we are reporting a structural feature of a literature, we are
+  standing inside the feature we are reporting, and the result we add is one value and one generalization on top
+  of six people's work.*
 
 ## 9. Cost and bearing
 
