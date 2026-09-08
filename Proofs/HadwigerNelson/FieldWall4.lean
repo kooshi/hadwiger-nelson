@@ -871,7 +871,11 @@ theorem exists_nat_mul_mem_range {z : ℂ} (hz : z ∈ seamPlane) :
   rw [this]
   exact Cl_add (Cl_of_seamSpan hz.1) (Cl_mul (Cl_of_seamSpan hz.2) Cl_I)
 
-/-! ## §7 Unit vectors lie in the order with odd denominator -/
+/-! ## §7 Unit vectors lie in the order, with an odd denominator
+
+The engine. A unit vector's denominator over the order is odd: if it were even, both residue maps
+would kill the numerator, two descents would divide it by `(1+i)² = 2i`, and the denominator would
+halve. -/
 
 /-- `A = O[1/odd]`: a point with an odd integer multiple in the order. -/
 def IsOddDenom (z : ℂ) : Prop := ∃ x : SeamOrder, ∃ m : ℤ, Odd m ∧ (m : ℂ) * z = den x
@@ -879,28 +883,132 @@ def IsOddDenom (z : ℂ) : Prop := ∃ x : SeamOrder, ∃ m : ℤ, Odd m ∧ (m 
 /-- `A`, as a subring of the plane. -/
 def oddDenom : Subring ℂ where
   carrier := {z | IsOddDenom z}
-  zero_mem' := by sorry
-  one_mem' := by sorry
-  add_mem' := by sorry
-  neg_mem' := by sorry
-  mul_mem' := by sorry
+  zero_mem' := ⟨0, 1, odd_one, by simp⟩
+  one_mem' := ⟨1, 1, odd_one, by simp⟩
+  add_mem' := by
+    rintro z w ⟨x, m, hm, hx⟩ ⟨y, n, hn, hy⟩
+    refine ⟨(n : SeamOrder) * x + (m : SeamOrder) * y, m * n, hm.mul hn, ?_⟩
+    rw [map_add, map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hy]
+    push_cast; ring
+  neg_mem' := by
+    rintro z ⟨x, m, hm, hx⟩
+    exact ⟨-x, m, hm, by rw [map_neg, ← hx]; ring⟩
+  mul_mem' := by
+    rintro z w ⟨x, m, hm, hx⟩ ⟨y, n, hn, hy⟩
+    refine ⟨x * y, m * n, hm.mul hn, ?_⟩
+    rw [map_mul, ← hx, ← hy]; push_cast; ring
 
 theorem mem_oddDenom_iff {z : ℂ} : z ∈ oddDenom ↔ IsOddDenom z := Iff.rfl
 
+private theorem mul_conj_eq_one {u : ℂ} (h : normSq u = 1) : u * (starRingEnd ℂ) u = 1 := by
+  rw [Complex.mul_conj, h]; norm_num
+
+private theorem onePlusI_mul_conj : onePlusI * conj onePlusI = (2 : SeamOrder) := by decide
+
+private theorem onePlusI_sq : onePlusI * onePlusI = 2 * ordI := by decide
+
+/-- The norm equation an order element inherits from a unit vector with denominator `n`. -/
+private theorem norm_eq_of_den {u : ℂ} {x : SeamOrder} {n : ℤ}
+    (hu : u * (starRingEnd ℂ) u = 1) (hx : (n : ℂ) * u = den x) :
+    x * conj x = ((n ^ 2 : ℤ) : SeamOrder) := by
+  refine den_injective ?_
+  rw [map_mul, den_conj, map_intCast, ← hx]
+  push_cast
+  rw [map_mul, map_intCast]
+  calc ((n : ℂ) * u) * ((n : ℂ) * (starRingEnd ℂ) u)
+      = (n : ℂ) ^ 2 * (u * (starRingEnd ℂ) u) := by ring
+    _ = (n : ℂ) ^ 2 := by rw [hu, mul_one]
+
+private theorem oddDenom_aux : ∀ n : ℕ, ∀ (u : ℂ) (x : SeamOrder), 0 < n →
+    u * (starRingEnd ℂ) u = 1 → (n : ℂ) * u = den x → IsOddDenom u := by
+  intro n
+  induction n using Nat.strong_induction_on with
+  | _ n ih =>
+    intro u x hn hu hx
+    rcases Nat.even_or_odd n with he | ho
+    · -- the denominator is even: descend twice and halve it
+      obtain ⟨k, hk⟩ := he
+      have hk0 : 0 < k := by omega
+      have hkn : k < n := by omega
+      have hxc : x * conj x = (((n : ℤ) ^ 2 : ℤ) : SeamOrder) :=
+        norm_eq_of_den hu (by exact_mod_cast hx)
+      have hEven : Even ((n : ℤ) ^ 2) := by
+        refine ⟨2 * (k : ℤ) ^ 2, ?_⟩
+        have : (n : ℤ) = 2 * k := by exact_mod_cast (by omega : n = 2 * k)
+        rw [this]; ring
+      obtain ⟨w, hw⟩ := exists_mul_onePlusI
+        (eq_zero_of_even_norm psiZero_conj hEven hxc)
+        (eq_zero_of_even_norm psiOne_conj hEven hxc)
+      have hww : (2 : SeamOrder) * (w * conj w) = (((n : ℤ) ^ 2 : ℤ) : SeamOrder) := by
+        rw [← hxc, ← hw, map_mul]
+        rw [show (w * onePlusI) * (conj w * conj onePlusI)
+            = (w * conj w) * (onePlusI * conj onePlusI) by ring, onePlusI_mul_conj]
+        ring
+      have hww2 : w * conj w = ((2 * (k : ℤ) ^ 2 : ℤ) : SeamOrder) := by
+        refine two_mul_cancel ?_
+        rw [hww]
+        have : (n : ℤ) = 2 * k := by exact_mod_cast (by omega : n = 2 * k)
+        rw [this]
+        push_cast
+        ring
+      have hEven2 : Even (2 * (k : ℤ) ^ 2) := ⟨(k : ℤ) ^ 2, by ring⟩
+      obtain ⟨v, hv⟩ := exists_mul_onePlusI
+        (eq_zero_of_even_norm psiZero_conj hEven2 hww2)
+        (eq_zero_of_even_norm psiOne_conj hEven2 hww2)
+      have hxv : x = v * (2 * ordI) := by rw [← onePlusI_sq, ← hw, ← hv]; ring
+      have hku : (k : ℂ) * u = den (ordI * v) := by
+        have h2 : (2 : ℂ) * ((k : ℂ) * u) = 2 * den (ordI * v) := by
+          have hn2 : (n : ℂ) = 2 * (k : ℂ) := by exact_mod_cast (by omega : n = 2 * k)
+          rw [← mul_assoc, ← hn2, hx, hxv]
+          rw [map_mul, map_mul, map_ofNat, map_mul]
+          ring
+        exact mul_left_cancel₀ (by norm_num : (2 : ℂ) ≠ 0) h2
+      exact ih k hkn u (ordI * v) hk0 hu hku
+    · exact ⟨x, (n : ℤ), by exact_mod_cast ho, by exact_mod_cast hx⟩
+
 /-- **Every unit vector of `K(i)` lies in `A`** — the theorem's engine. -/
-theorem mem_oddDenom_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1) : u ∈ oddDenom := by sorry
+theorem mem_oddDenom_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1) : u ∈ oddDenom := by
+  obtain ⟨n, hn, x, hx⟩ := exists_nat_mul_mem_range hu
+  exact oddDenom_aux n u x hn (mul_conj_eq_one h1) hx
 
 /-- The residue of a point of `A`, as a total function. Sealed: reason through `psiOf_eq`. -/
 noncomputable def psiOf (z : ℂ) : F4 :=
   open Classical in if h : IsOddDenom z then psiZero h.choose else 0
 
 theorem psiOf_eq {z : ℂ} {m : ℤ} {x : SeamOrder} (hm : Odd m) (hx : (m : ℂ) * z = den x) :
-    psiOf z = psiZero x := by sorry
+    psiOf z = psiZero x := by
+  classical
+  have h : IsOddDenom z := ⟨x, m, hm, hx⟩
+  rw [psiOf, dif_pos h]
+  obtain ⟨m', hm', hx'⟩ := h.choose_spec
+  have key : ((m' : SeamOrder)) * x = (m : SeamOrder) * h.choose := by
+    refine den_injective ?_
+    rw [map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hx']
+    ring
+  have hpsi := congrArg psiZero key
+  rw [map_mul, map_mul, map_intCast, map_intCast, F4.intCast_odd hm', F4.intCast_odd hm,
+    one_mul, one_mul] at hpsi
+  exact hpsi.symm
 
 theorem psiOf_sub {z w : ℂ} (hz : z ∈ oddDenom) (hw : w ∈ oddDenom) :
-    psiOf (z - w) = psiOf z - psiOf w := by sorry
+    psiOf (z - w) = psiOf z - psiOf w := by
+  obtain ⟨x, m, hm, hx⟩ := hz
+  obtain ⟨y, n, hn, hy⟩ := hw
+  have key : ((m * n : ℤ) : ℂ) * (z - w) = den ((n : SeamOrder) * x - (m : SeamOrder) * y) := by
+    rw [map_sub, map_mul, map_mul, map_intCast, map_intCast, ← hx, ← hy]
+    push_cast; ring
+  rw [psiOf_eq (hm.mul hn) key, psiOf_eq hm hx, psiOf_eq hn hy, map_sub, map_mul, map_mul,
+    map_intCast, map_intCast, F4.intCast_odd hm, F4.intCast_odd hn, one_mul, one_mul]
 
-theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ oddDenom) (h1 : normSq u = 1) : psiOf u ≠ 0 := by sorry
+theorem psiOf_ne_zero_of_unit {u : ℂ} (hu : u ∈ oddDenom) (h1 : normSq u = 1) : psiOf u ≠ 0 := by
+  obtain ⟨x, m, hm, hx⟩ := hu
+  rw [psiOf_eq hm hx]
+  intro h0
+  have hxc : x * conj x = ((m ^ 2 : ℤ) : SeamOrder) := norm_eq_of_den (mul_conj_eq_one h1) hx
+  have := congrArg psiZero hxc
+  rw [map_mul, psiZero_conj, h0, map_intCast,
+    F4.intCast_odd (by simpa [pow_two] using hm.mul hm)] at this
+  exact absurd this (by decide)
 
 /-! ## §8 The colouring -/
 
