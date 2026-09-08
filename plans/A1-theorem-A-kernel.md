@@ -600,3 +600,77 @@ Theorem B itself; the 2-adic wall criterion and the multiquadratic classificatio
 (M58: which fields are 6-open, `11` the only sealing prime over `K`); the lift theory (M59); the
 compulsion transfer (M60); the tightness mechanism (M61); and every kernel certificate in the
 repository. None of that is in Moorhouse or Fischer.
+
+## 12. The workflow change this argues for: a prior-art gate at a milestone's OPENING
+
+*Written 2026-09-08 at Kooshi's direction, from §11. This is a proposal for `WORKFLOW.md`; the edit
+itself is his, not mine (the backlog ground rules keep me out of the standards files).*
+
+### W1. The failure, stated as a mechanism rather than a lesson
+
+Four milestones (M58–M61) rest on a bound that a 2010 draft states twice (`[Moorhouse2010]` §8.2,
+§10.3), and on a value that its Table 6.1 contains. The draft is public, on the author's university
+page, indexed, and **one web search away**. It was found on 2026-09-08 — after all four milestones
+had closed — and only because a *side* claim of an already-closed item was questioned.
+
+Three things went wrong, and only the third is about diligence:
+
+1. **The check ran at the close, not the opening.** Every milestone here ends with a literature
+   note; by then the derivation is done, the instruments are built, and the check can only assign
+   credit. Run at the opening it would have changed what M58 was *for*.
+2. **The check searched in this project's vocabulary.** "Finite-plane bound", "field wall",
+   "residue obstruction", "5-sealed" — all coined here, none in any paper. The search that worked
+   used the field's own words: *chromatic number of planes over fields*. **A private vocabulary is
+   an excellent instrument for thinking and a perfect filter against finding out you are not first.**
+3. **The check searched the wrong literature.** The bibliography's §B and §C hold thirty-odd
+   arXiv items about unit-distance graphs and colourings. Moorhouse is not on arXiv, is not
+   published, and is not cited by the papers we hold — he sits in the finite-geometry community, and
+   Vinh (2005), whose objects we also use, does not cite him either, nor he Vinh. **The two
+   literatures this project's pivot connected had never met, which is exactly why searching either
+   one alone found nothing.**
+
+### W2. The proposed step
+
+**`WORKFLOW.md` step 3a — the prior-art gate. Between subplanning and the modeling passes, before
+any derivation.** Its output is a section of the subplan; a milestone whose subplan has no §PA is
+not subplanned.
+
+The gate is four questions, and it is cheap — thirty minutes, not a day:
+
+1. **Name the object in the vocabulary of the discipline it belongs to**, not this project's. G46
+   already demands this recognition step for *deriving*; the same sentence is the search query.
+   ("The finite planes are Cayley graphs of an abelian group" → search *Cayley graph chromatic
+   number abelian group*, not *finite-plane bound*.)
+2. **Search under at least two disciplines' names for the same object.** The M58 arc's object is
+   simultaneously a number-field colouring question and a finite-geometry question; searching one
+   found Vinh, searching the other would have found Moorhouse. Kooshi's ladder of disciplines
+   (under G30) already names which two rooms any given wall sits between — use it as the search
+   plan.
+3. **Search for the QUESTION, not only the method.** "Has anyone computed χ of the plane over this
+   field?" would have surfaced Moorhouse §1 immediately, and with it the fact that Theorem B answers
+   a stated open question — worth knowing *before* the milestone, not after.
+4. **Look outside arXiv.** Personal pages, unpublished drafts, theses, and the pre-2000 journal
+   literature. Two of the three works that mattered most here (Fischer 1990, Moorhouse 2010) are in
+   neither arXiv nor our search history.
+
+### W3. What the gate is *for*, which is not credit
+
+The instinct is to read this as a novelty-protection measure. It is not, and framing it that way
+would make it get skipped:
+
+* **It aims the milestone.** Had M58 opened knowing §10.3, its subplan would have been "formalize a
+  known bound and push past it" — which is what it in fact did, and the field sieve, the lift theory
+  and the tightness mechanism would have been the headline from the first day.
+* **It hands over free theorems.** §9's Hedetniemi tie, Lemma 2.3, and Table 6.1 are all results we
+  re-derived at cost.
+* **It finds the open questions.** The single most valuable line in the draft — "We have not
+  determined the exact value of χ(K²) in this case" — is a stated open problem this project has now
+  answered, and it went unnoticed for the entire arc.
+* **The negative result is worth the thirty minutes too.** Knowing that Moorhouse and Vinh do not
+  cite each other is itself a finding: it says where the unworked ground is.
+
+### W4. Registered prediction, to be scored the next time the gate runs
+
+The gate will change at least one milestone's *scope* (not merely its attribution) within the next
+three milestones — because the pattern here was not "we duplicated a result" but "we spent four
+milestones re-deriving the entrance to a room, and the interesting work started after it."
