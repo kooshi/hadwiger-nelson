@@ -438,6 +438,17 @@ theorem den_conj (x : SeamOrder) : den (conj x) = (starRingEnd ℂ) (den x) := b
       simp [den]
   exact congrArg (fun h : SeamOrder →+* ℂ => h x) this
 
+/-- `ω` inside the order. -/
+def ordOmega : SeamOrder := Quad.incl (Quad.incl Quad.theta)
+/-- `T` inside the order. -/
+def ordTau : SeamOrder := Quad.incl Quad.theta
+/-- `i` inside the order. -/
+def ordI : SeamOrder := Quad.theta
+
+@[simp] theorem den_ordOmega : den ordOmega = omega3 := by simp [ordOmega, den, denET, denE]
+@[simp] theorem den_ordTau : den ordTau = tau := by simp [ordTau, den, denET]
+@[simp] theorem den_ordI : den ordI = Complex.I := by simp [ordI, den]
+
 /-! ### The two residue maps
 
 `ψ` sends `ω ↦ Ω`, `i ↦ 1` and `T ↦ s` for either idempotent `s ∈ {0, 1}` of `𝔽₄`. The two choices
@@ -637,21 +648,121 @@ theorem eq_zero_of_even_norm {f : SeamOrder →+* F4} (hf : ∀ x, f (conj x) = 
   rw [hf z] at this
   rw [this, F4.intCast_even hN]
 
-/-! ## §6 The seam field and its plane -/
+/-! ## §6 The seam field and its plane
+
+`K = ℚ(√3, √11)` is the ℚ-span of `1, √3, √11, √33`. The span is the primitive — it is what the
+proof clears denominators against — and the `Subfield` structure sits beside it, so a reader sees a
+field where the argument uses only an additive group. -/
 
 /-- The ℚ-span of `1, √3, √11, √33`. -/
 def seamSpan : Set ℝ :=
   {x | ∃ a b c d : ℚ, x = a + b * Real.sqrt 3 + c * Real.sqrt 11 + d * Real.sqrt 33}
 
+private theorem sq_sqrt11 : Real.sqrt 11 * Real.sqrt 11 = 11 := Real.mul_self_sqrt (by norm_num)
+
+private theorem sqrt3_mul_sqrt11 : Real.sqrt 3 * Real.sqrt 11 = Real.sqrt 33 := by
+  rw [← Real.sqrt_mul (by norm_num)]; norm_num
+
+private theorem sqrt11_mul_sqrt33 : Real.sqrt 11 * Real.sqrt 33 = 11 * Real.sqrt 3 := by
+  rw [← Real.sqrt_mul (by norm_num), show (11:ℝ) * 33 = 11 ^ 2 * 3 by norm_num,
+    Real.sqrt_mul (by positivity), Real.sqrt_sq (by norm_num)]
+
+private theorem mem_seamSpan_add {x y : ℝ} (hx : x ∈ seamSpan) (hy : y ∈ seamSpan) :
+    x + y ∈ seamSpan := by
+  obtain ⟨a, b, c, d, rfl⟩ := hx
+  obtain ⟨a', b', c', d', rfl⟩ := hy
+  exact ⟨a + a', b + b', c + c', d + d', by push_cast; ring⟩
+
+private theorem mem_seamSpan_neg {x : ℝ} (hx : x ∈ seamSpan) : -x ∈ seamSpan := by
+  obtain ⟨a, b, c, d, rfl⟩ := hx
+  exact ⟨-a, -b, -c, -d, by push_cast; ring⟩
+
+private theorem mem_seamSpan_mul {x y : ℝ} (hx : x ∈ seamSpan) (hy : y ∈ seamSpan) :
+    x * y ∈ seamSpan := by
+  obtain ⟨a, b, c, d, rfl⟩ := hx
+  obtain ⟨a', b', c', d', rfl⟩ := hy
+  refine ⟨a*a' + 3*(b*b') + 11*(c*c') + 33*(d*d'), a*b' + b*a' + 11*(c*d' + d*c'),
+    a*c' + c*a' + 3*(b*d' + d*b'), a*d' + d*a' + b*c' + c*b', ?_⟩
+  push_cast
+  linear_combination ((b:ℝ)*b') * sq_sqrt3 + ((c:ℝ)*c') * sq_sqrt11 + ((d:ℝ)*d') * sq_sqrt33
+    + ((b:ℝ)*c' + (c:ℝ)*b') * sqrt3_mul_sqrt11 + ((b:ℝ)*d' + (d:ℝ)*b') * sqrt3_mul_sqrt33
+    + ((c:ℝ)*d' + (d:ℝ)*c') * sqrt11_mul_sqrt33
+
+private theorem mem_seamSpan_ratCast (q : ℚ) : (q : ℝ) ∈ seamSpan :=
+  ⟨q, 0, 0, 0, by push_cast; ring⟩
+
+/-- The four sign-conjugates of a span element: `x`, and the images under `√3 ↦ −√3`,
+`√11 ↦ −√11`. Their product is rational, which is what makes the span closed under inverse. -/
+private theorem mem_seamSpan_inv {x : ℝ} (hx : x ∈ seamSpan) : x⁻¹ ∈ seamSpan := by
+  rcases eq_or_ne x 0 with rfl | hx0
+  · simpa using mem_seamSpan_ratCast 0
+  obtain ⟨a, b, c, d, rfl⟩ := hx
+  set s3 := Real.sqrt 3 with hs3
+  set s11 := Real.sqrt 11 with hs11
+  set s33 := Real.sqrt 33 with hs33
+  -- the coefficient tuple is nonzero
+  have hcoeff : ¬ (a = 0 ∧ b = 0 ∧ c = 0 ∧ d = 0) := by
+    rintro ⟨rfl, rfl, rfl, rfl⟩; exact hx0 (by push_cast; ring)
+  have hzero : ∀ p q r t : ℚ, ((p : ℝ) + q * s3 + r * s11 + t * s33 = 0) →
+      (p = 0 ∧ q = 0 ∧ r = 0 ∧ t = 0) := fun p q r t h => Ladder.sqrt_indep h
+  set x1 : ℝ := (a : ℝ) - b * s3 - c * s11 + d * s33 with hx1def
+  set x2 : ℝ := (a : ℝ) + b * s3 - c * s11 - d * s33 with hx2def
+  set x3 : ℝ := (a : ℝ) - b * s3 + c * s11 - d * s33 with hx3def
+  set P : ℚ := a^2 + 33*d^2 - 3*b^2 - 11*c^2 with hP
+  set Q : ℚ := 2*a*d - 2*b*c with hQ
+  set N : ℚ := P^2 - 33*Q^2 with hN
+  have h1 : ((a : ℝ) + b * s3 + c * s11 + d * s33) * x1 = (P : ℝ) + Q * s33 := by
+    rw [hx1def, hP, hQ]; push_cast
+    linear_combination (-(b:ℝ)^2) * sq_sqrt3 + (-(c:ℝ)^2) * sq_sqrt11 + ((d:ℝ)^2) * sq_sqrt33
+      + (-2*(b:ℝ)*c) * sqrt3_mul_sqrt11
+  have h2 : x2 * x3 = (P : ℝ) - Q * s33 := by
+    rw [hx2def, hx3def, hP, hQ]; push_cast
+    linear_combination (-(b:ℝ)^2) * sq_sqrt3 + (-(c:ℝ)^2) * sq_sqrt11 + ((d:ℝ)^2) * sq_sqrt33
+      + (2*(b:ℝ)*c) * sqrt3_mul_sqrt11
+  have hprod : ((a : ℝ) + b * s3 + c * s11 + d * s33) * (x1 * (x2 * x3)) = (N : ℝ) := by
+    rw [hN]; push_cast
+    calc ((a : ℝ) + b * s3 + c * s11 + d * s33) * (x1 * (x2 * x3))
+        = (((a : ℝ) + b * s3 + c * s11 + d * s33) * x1) * (x2 * x3) := by ring
+      _ = ((P : ℝ) + Q * s33) * ((P : ℝ) - Q * s33) := by rw [h1, h2]
+      _ = (P : ℝ)^2 - 33 * (Q : ℝ)^2 := by
+            linear_combination (-(Q:ℝ)^2) * sq_sqrt33
+  have hx1 : x1 ≠ 0 := by
+    intro h
+    have := hzero a (-b) (-c) d (by rw [hx1def] at h; push_cast; linarith [h])
+    exact hcoeff ⟨this.1, by linarith [this.2.1], by linarith [this.2.2.1], this.2.2.2⟩
+  have hx2 : x2 ≠ 0 := by
+    intro h
+    have := hzero a b (-c) (-d) (by rw [hx2def] at h; push_cast; linarith [h])
+    exact hcoeff ⟨this.1, this.2.1, by linarith [this.2.2.1], by linarith [this.2.2.2]⟩
+  have hx3 : x3 ≠ 0 := by
+    intro h
+    have := hzero a (-b) c (-d) (by rw [hx3def] at h; push_cast; linarith [h])
+    exact hcoeff ⟨this.1, by linarith [this.2.1], this.2.2.1, by linarith [this.2.2.2]⟩
+  have hNne : (N : ℝ) ≠ 0 := by
+    rw [← hprod]
+    exact mul_ne_zero hx0 (mul_ne_zero hx1 (mul_ne_zero hx2 hx3))
+  have hNq : N ≠ 0 := fun h => hNne (by rw [h]; norm_num)
+  have hinv : ((a : ℝ) + b * s3 + c * s11 + d * s33)⁻¹ = ((N⁻¹ : ℚ) : ℝ) * (x1 * (x2 * x3)) := by
+    refine inv_eq_of_mul_eq_one_right ?_
+    rw [show (((N⁻¹ : ℚ)) : ℝ) = ((N : ℝ))⁻¹ by push_cast; ring,
+      show ((a : ℝ) + b * s3 + c * s11 + d * s33) * (((N : ℝ))⁻¹ * (x1 * (x2 * x3)))
+        = ((N : ℝ))⁻¹ * (((a : ℝ) + b * s3 + c * s11 + d * s33) * (x1 * (x2 * x3))) by ring,
+      hprod, inv_mul_cancel₀ hNne]
+  rw [hinv]
+  refine mem_seamSpan_mul (mem_seamSpan_ratCast _) (mem_seamSpan_mul ?_ (mem_seamSpan_mul ?_ ?_))
+  · exact ⟨a, -b, -c, d, by rw [hx1def]; push_cast; ring⟩
+  · exact ⟨a, b, -c, -d, by rw [hx2def]; push_cast; ring⟩
+  · exact ⟨a, -b, c, -d, by rw [hx3def]; push_cast; ring⟩
+
 /-- `K = ℚ(√3, √11)`, as a subfield of `ℝ`. -/
 noncomputable def seamField : Subfield ℝ where
   carrier := seamSpan
-  zero_mem' := by sorry
-  one_mem' := by sorry
-  add_mem' := by sorry
-  neg_mem' := by sorry
-  mul_mem' := by sorry
-  inv_mem' := by sorry
+  zero_mem' := ⟨0, 0, 0, 0, by norm_num⟩
+  one_mem' := ⟨1, 0, 0, 0, by norm_num⟩
+  add_mem' := mem_seamSpan_add
+  neg_mem' := mem_seamSpan_neg
+  mul_mem' := mem_seamSpan_mul
+  inv_mem' := fun _ hx => mem_seamSpan_inv hx
 
 @[simp] theorem seamField_carrier : (seamField : Set ℝ) = seamSpan := rfl
 
@@ -666,20 +777,99 @@ theorem mem_seamField_iff {x : ℝ} :
     x ∈ seamField ↔ ∃ a b c d : ℚ, x = a + b * Real.sqrt 3 + c * Real.sqrt 11 + d * Real.sqrt 33 :=
   Iff.rfl
 
-theorem sqrt3_mem : Real.sqrt 3 ∈ seamField := by sorry
-theorem sqrt11_mem : Real.sqrt 11 ∈ seamField := by sorry
-theorem sqrt33_mem : Real.sqrt 33 ∈ seamField := by sorry
+theorem sqrt3_mem : Real.sqrt 3 ∈ seamField := ⟨0, 1, 0, 0, by push_cast; ring⟩
+theorem sqrt11_mem : Real.sqrt 11 ∈ seamField := ⟨0, 0, 1, 0, by push_cast; ring⟩
+theorem sqrt33_mem : Real.sqrt 33 ∈ seamField := ⟨0, 0, 0, 1, by push_cast; ring⟩
 
 theorem seamPlane_sub {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane) :
-    z - w ∈ seamPlane := by sorry
+    z - w ∈ seamPlane :=
+  ⟨mem_seamSpan_add hz.1 (mem_seamSpan_neg hw.1), mem_seamSpan_add hz.2 (mem_seamSpan_neg hw.2)⟩
 
-theorem den_mem_seamPlane (x : SeamOrder) : den x ∈ seamPlane := by sorry
+theorem den_mem_seamPlane (x : SeamOrder) : den x ∈ seamPlane := by
+  obtain ⟨⟨⟨a, b⟩, ⟨e, f⟩⟩, ⟨⟨c, d⟩, ⟨g, h⟩⟩⟩ := x
+  refine ⟨⟨_, _, _, _, den_re a b e f c d g h⟩, ⟨_, _, _, _, den_im a b e f c d g h⟩⟩
 
-theorem seamPlane_ratMul {z : ℂ} (hz : z ∈ seamPlane) (q : ℚ) : (q : ℂ) * z ∈ seamPlane := by sorry
+theorem seamPlane_ratMul {z : ℂ} (hz : z ∈ seamPlane) (q : ℚ) : (q : ℂ) * z ∈ seamPlane := by
+  refine ⟨?_, ?_⟩
+  · rw [show ((q : ℂ) * z).re = (q : ℝ) * z.re by simp]
+    exact mem_seamSpan_mul (mem_seamSpan_ratCast q) hz.1
+  · rw [show ((q : ℂ) * z).im = (q : ℝ) * z.im by simp]
+    exact mem_seamSpan_mul (mem_seamSpan_ratCast q) hz.2
 
-/-- Every point of `K²` has a nonzero integer multiple in the order. -/
+/-! ### Clearing denominators -/
+
+/-- The points with *some* nonzero integer multiple in the order. -/
+private def Cl : Set ℂ := {z | ∃ n : ℕ, 0 < n ∧ ∃ x : SeamOrder, (n : ℂ) * z = den x}
+
+private theorem Cl_add {z w : ℂ} (hz : z ∈ Cl) (hw : w ∈ Cl) : z + w ∈ Cl := by
+  obtain ⟨n, hn, x, hx⟩ := hz
+  obtain ⟨m, hm, y, hy⟩ := hw
+  refine ⟨n * m, Nat.mul_pos hn hm, (m : SeamOrder) * x + (n : SeamOrder) * y, ?_⟩
+  push_cast
+  rw [map_add, map_mul, map_mul, map_natCast, map_natCast, ← hx, ← hy]
+  ring
+
+private theorem Cl_mul {z w : ℂ} (hz : z ∈ Cl) (hw : w ∈ Cl) : z * w ∈ Cl := by
+  obtain ⟨n, hn, x, hx⟩ := hz
+  obtain ⟨m, hm, y, hy⟩ := hw
+  refine ⟨n * m, Nat.mul_pos hn hm, x * y, ?_⟩
+  push_cast
+  rw [map_mul, ← hx, ← hy]
+  ring
+
+private theorem Cl_ratMul {z : ℂ} (hz : z ∈ Cl) (q : ℚ) : (q : ℂ) * z ∈ Cl := by
+  obtain ⟨n, hn, x, hx⟩ := hz
+  refine ⟨n * q.den, Nat.mul_pos hn q.pos, (q.num : SeamOrder) * x, ?_⟩
+  have hq : (q : ℂ) * (q.den : ℂ) = (q.num : ℂ) := by
+    exact_mod_cast congrArg (fun r : ℚ => ((r : ℂ))) (Rat.mul_den_eq_num q)
+  push_cast
+  rw [map_mul, map_intCast, ← hx]
+  linear_combination ((n : ℂ) * z) * hq
+
+private theorem Cl_one : (1 : ℂ) ∈ Cl := ⟨1, one_pos, 1, by simp⟩
+private theorem Cl_I : Complex.I ∈ Cl := ⟨1, one_pos, ordI, by simp [ordI, den]⟩
+
+private theorem Cl_sqrt33 : ((Real.sqrt 33 : ℝ) : ℂ) ∈ Cl := by
+  refine ⟨1, one_pos, 2 * ordTau - 1, ?_⟩
+  rw [map_sub, map_mul, map_one, map_ofNat, den_ordTau]
+  apply Complex.ext <;> simp [tau]
+  ring
+
+private theorem Cl_I_sqrt3 : Complex.I * ((Real.sqrt 3 : ℝ) : ℂ) ∈ Cl := by
+  refine ⟨1, one_pos, 1 + 2 * ordOmega, ?_⟩
+  rw [map_add, map_mul, map_one, map_ofNat, den_ordOmega]
+  apply Complex.ext <;> simp [omega3] <;> ring
+
+private theorem Cl_sqrt3 : ((Real.sqrt 3 : ℝ) : ℂ) ∈ Cl := by
+  have h : ((Real.sqrt 3 : ℝ) : ℂ) = (-1 : ℚ) * (Complex.I * (Complex.I * (Real.sqrt 3 : ℝ))) := by
+    push_cast
+    linear_combination ((Real.sqrt 3 : ℝ) : ℂ) * Complex.I_sq
+  rw [h]
+  exact Cl_ratMul (Cl_mul Cl_I Cl_I_sqrt3) _
+
+private theorem Cl_sqrt11 : ((Real.sqrt 11 : ℝ) : ℂ) ∈ Cl := by
+  have h : ((Real.sqrt 11 : ℝ) : ℂ)
+      = ((1/3 : ℚ)) * (((Real.sqrt 3 : ℝ) : ℂ) * ((Real.sqrt 33 : ℝ) : ℂ)) := by
+    rw [← Complex.ofReal_mul, sqrt3_mul_sqrt33]; push_cast; ring
+  rw [h]
+  exact Cl_ratMul (Cl_mul Cl_sqrt3 Cl_sqrt33) _
+
+private theorem Cl_of_seamSpan {x : ℝ} (hx : x ∈ seamSpan) : ((x : ℝ) : ℂ) ∈ Cl := by
+  obtain ⟨a, b, c, d, rfl⟩ := hx
+  push_cast
+  refine Cl_add (Cl_add (Cl_add ?_ ?_) ?_) ?_
+  · simpa using Cl_ratMul Cl_one a
+  · simpa using Cl_ratMul Cl_sqrt3 b
+  · simpa using Cl_ratMul Cl_sqrt11 c
+  · simpa using Cl_ratMul Cl_sqrt33 d
+
+/-- Every point of `K²` has a positive integer multiple in the order. -/
 theorem exists_nat_mul_mem_range {z : ℂ} (hz : z ∈ seamPlane) :
-    ∃ n : ℕ, 0 < n ∧ ∃ x : SeamOrder, (n : ℂ) * z = den x := by sorry
+    ∃ n : ℕ, 0 < n ∧ ∃ x : SeamOrder, (n : ℂ) * z = den x := by
+  have : z = ((z.re : ℝ) : ℂ) + ((z.im : ℝ) : ℂ) * Complex.I := by
+    apply Complex.ext <;> simp
+  rw [this]
+  exact Cl_add (Cl_of_seamSpan hz.1) (Cl_mul (Cl_of_seamSpan hz.2) Cl_I)
 
 /-! ## §7 Unit vectors lie in the order with odd denominator -/
 
@@ -771,11 +961,6 @@ theorem not_separated_five_of_subset_seamPlane {S : Set ℂ} (hS : S ⊆ seamPla
 /-! ### The lower bound: the Moser spindle is an identity in the order -/
 
 namespace FieldWall4
-
-/-- `ω` inside the order. -/
-def ordOmega : SeamOrder := Quad.incl (Quad.incl Quad.theta)
-/-- `T` inside the order. -/
-def ordTau : SeamOrder := Quad.incl Quad.theta
 
 /-- `9ρ`, where `ρ = (5 + i√11)/6` is the Moser twist: `9ρ = 7 − ω + T + 2ωT`. -/
 def rho9 : SeamOrder := 7 - ordOmega + ordTau + 2 * ordOmega * ordTau
