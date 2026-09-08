@@ -21,17 +21,27 @@ variable {M G : Type*} [AddCommGroup M] [AddCommGroup G] {A : AddSubgroup M}
 private theorem mk_surjective (A : AddSubgroup M) :
     Function.Surjective ⇑(QuotientAddGroup.mk' A) := sorry
 
-/-- A chosen representative of each coset of `A`, normalized so that `A` itself gets `0`. -/
-private noncomputable def cosetRep (A : AddSubgroup M) (x : M) : M :=
+/-- A section of the quotient map, normalized so that the zero coset is represented by `0`. -/
+private noncomputable def sect (A : AddSubgroup M) (q : M ⧸ A) : M :=
   open Classical in
-  if x ∈ A then 0 else Function.surjInv (mk_surjective A) (QuotientAddGroup.mk' A x)
+  if q = 0 then 0 else Function.surjInv (mk_surjective A) q
+
+private theorem sect_spec (A : AddSubgroup M) (q : M ⧸ A) :
+    QuotientAddGroup.mk' A (sect A q) = q := sorry
+
+private theorem sect_zero (A : AddSubgroup M) : sect A 0 = 0 := sorry
+
+/-- The chosen representative of `x`'s coset. -/
+private noncomputable def cosetRep (A : AddSubgroup M) (x : M) : M :=
+  sect A (QuotientAddGroup.mk' A x)
 
 private theorem cosetRep_of_mem {x : M} (h : x ∈ A) : cosetRep A x = 0 := sorry
 
 private theorem sub_cosetRep_mem (A : AddSubgroup M) (x : M) : x - cosetRep A x ∈ A := sorry
 
 private theorem cosetRep_eq_of_sub_mem {x y : M} (h : x - y ∈ A) :
-    cosetRep A x = cosetRep A y := sorry
+    cosetRep A x = cosetRep A y :=
+  congrArg (sect A) sorry
 
 /-- **The residue map**: `ψ`, extended from `A` to the whole group. -/
 noncomputable def residue (ψ : A →+ G) (x : M) : G :=
@@ -135,6 +145,8 @@ section Plane
 open Complex
 
 variable {V : Type*}
+
+theorem mem_normOne_conj_iff {z : ℂ} : z ∈ normOne (starRingEnd ℂ) ↔ normSq z = 1 := sorry
 
 theorem sub_mem_normOne_conj_iff {z w : ℂ} :
     z - w ∈ normOne (starRingEnd ℂ) ↔ dist z w = 1 := sorry

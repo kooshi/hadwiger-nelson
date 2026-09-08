@@ -219,9 +219,112 @@ colour"* — `FieldWall4`'s distance-2 statement, and the first thing any future
 It states in the existing vocabulary and proves in one line
 (`residue_eq_of_eq_zero`, from `residue_sub` and `sub_eq_zero`). The model earns it.
 
-## 8. Obligation-modeling pass
+## 8. Obligation-modeling pass (2026-09-08)
 
-*(to be run and recorded before implementation)*
+### O1. The space has no induction in it
+
+Every obligation in the new module is a **case split** or an **equational derivation**; there is no
+recursion anywhere. The one induction in the whole item is `FieldWall4`'s existing `oddDenom_aux`
+descent (strong induction on the denominator), which this milestone does not touch. So the space is
+characterized by writing the case tables, not by choosing a recursor — and the only design question
+is *where the case splits live*.
+
+### O2. The one derivation that moved a case split off a two-element lemma
+
+The domain pass's normalization (`cosetRep A x = 0` for `x ∈ A`) buys subtype-freedom, but it
+threatens to cost a four-case proof of the agreement lemma
+`cosetRep A x = cosetRep A y` (two live cases, two impossible by `x ∈ A ↔ y ∈ A`). Read as a report:
+the case split is on `x` and on `y` separately, and the statement is about *one* coset — so the
+split is in the wrong place.
+
+**Move the normalization into a section of the quotient, not of the group.**
+
+```lean
+private noncomputable def sect (A : AddSubgroup M) (q : M ⧸ A) : M :=
+  if q = 0 then 0 else Function.surjInv (mk_surjective A) q
+private def cosetRep (A : AddSubgroup M) (x : M) : M := sect A (QuotientAddGroup.mk' A x)
+```
+
+Now the case split is a one-element lemma — `sect_spec : mk' A (sect A q) = q`, two cases — and the
+agreement lemma is **`congrArg (sect A)`**, one line, because `x − y ∈ A` says exactly that the two
+arguments are the same quotient element. Back's corollary: shape the definition around the
+statement, and the statement keeps its one-line proof.
+
+### O3. The dependent-rewrite hazard in `residue_sub`, and where it dies
+
+`residue ψ x − residue ψ y = residue ψ (x − y)` is proved by rewriting `cosetRep A y` to
+`cosetRep A x` — but that term appears inside a *membership proof* (`⟨y − cosetRep A y, _⟩`), which
+is the classic "motive is not type correct". The fix is to never rewrite there: apply
+`← map_sub` first, so the goal is an equation between two elements of `↥A`, then `Subtype.ext`
+**strips both proofs**, leaving `(x − cosetRep A x) − (y − cosetRep A y) = x − y` in `M`, where the
+agreement lemma is an ordinary `rw` and `abel` closes. No `▸`, no `Eq.mpr`, no motive.
+
+### O4. The case tables, and the local obligation of each
+
+| obligation | shape | size |
+|---|---|---|
+| `mk_surjective` | `Quot.exists_rep` | 1 line |
+| `sect_spec` | 2 cases (`q = 0`: `mk 0 = 0`; else `surjInv_eq`) | 4 |
+| `sect_zero`, `cosetRep_of_mem` | `if_pos`, `QuotientAddGroup.eq_zero_iff` | 2 each |
+| `sub_cosetRep_mem` | `sect_spec` + `QuotientAddGroup.eq` | 3 |
+| `cosetRep_eq_of_sub_mem` | `congrArg (sect A)` | 1 |
+| `residue_apply_of_mem` | `cosetRep_of_mem` + `sub_zero` under `Subtype.ext` | 3 |
+| `residue_sub` | O3 above | 5 |
+| `residue_ne` / `residue_eq` | `residue_sub` + `sub_self` / `sub_eq_zero` | 2 each |
+| `colorable_of_residue` | `Coloring.mk … |>.colorable` | 1 |
+| `colorable_of_additive` | `A = ⊤`, `f = id`, `residue_apply_of_mem` | 8 |
+| `isUnit_of_mem_normOne` | `isUnit_of_mul_eq_one _ _ (Subtype.ext h)` | 2 |
+| `apply_ne_zero_of_mem_normOne` | route through `isUnit_of_mem_normOne`, then `exists_right_inv` and `0 = 1` | 4 |
+| `mem_of_mem_normOne` | 2 cases; the second is `hσ` then `hσσ` | 4 |
+| `ValuationSubring.mem_of_mem_normOne` | `mem_or_inv_mem` + `w = z⁻¹` from `z * w = 1` | 6 |
+| `colorable_of_normOne` | `colorable_of_residue` + `residue_apply_of_mem` | 5 |
+| `colorable_of_valuationSubring` | 1 application | 2 |
+| `mem_normOne_conj_iff`, `sub_mem_normOne_conj_iff` | `Complex.mul_conj`, `sq_norm`, `dist_eq` | 8 |
+| the two plane forms, `colorable_unitQuadrance_of_residue` | 1–6 lines each | 12 |
+
+Nothing above needs a walkthrough, which is the terminal test met: each statement's proof is its own
+transcription.
+
+### O5. A hypothesis deleted before it was written
+
+`apply_ne_zero_of_mem_normOne` can be proved *without* `isUnit_of_mem_normOne` — apply `ψ` to
+`u · σu = 1` directly and read `0 = 1`. That would leave `isUnit_of_mem_normOne` unused, which the
+ugliness catalog calls dead weight. Resolution: keep the lemma, because it **is** the mechanism
+("a norm-one element is a unit of `A`") and a consumer may want it, and route the nonzero-ness
+through it so it is load-bearing rather than decorative. The cost is two lines (`exists_right_inv`,
+`0 = 1`) instead of one.
+
+### O6. The `FieldWall4` refactor, as obligations
+
+* **new** `conj_mem_oddDenom` (~6 lines): `den (conj x) = starRingEnd (den x)` is `den_conj`, and
+  the odd `m` is real, so `map_intCast` carries it.
+* **new** `psiAFun` / `psiAFun_eq` / `psiA : oddDenom →+* F4` / `psiA_eq` (~45): `psiAFun_eq` is
+  B1's `psiOf_eq` verbatim; each of the four ring-hom fields is one witness through it
+  (`m = 1, x = 1`; `m = 1, x = 0`; `mn` with `n·x + m·y`; `mn` with `x·y`), with
+  `F4.intCast_odd` killing the `m`s. Defining the function first and bundling second is what avoids
+  the circularity of stating `psiA_eq` about a hom whose fields need it.
+* **deleted** (~70 lines): `psiOf`, `psiOf_eq`, `psiOf_sub`, `psiOf_ne_zero_of_unit`,
+  `mk_surjective`, `base`, `mk_base`, `sub_base_mem`, `base_eq_of_sub_mem`.
+* **rewritten**: `residueColouring := residue (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom`;
+  `residueColouring_ne_of_dist_one` from `residue_ne` + `apply_ne_zero_of_mem_normOne` (15 lines →
+  6); `residueColouring_eq_of_dist_two` from `residue_eq` + `psiA_eq` (25 → 12);
+  `colorable_four_of_subset_seamPlane` as one application of the plane form (9 → 6).
+* **survives untouched**: the descent (`oddDenom_aux`, `mem_oddDenom_of_unit`), `psi_comp_conj` and
+  `psiZero_conj` (still the descent's engine), `norm_eq_of_den`, and every name in
+  `scripts/Axioms.lean` — none of the deleted ones is registered.
+
+### O7. Validation, decorrelated from the generator
+
+* **Mutation audit, registered now and run at the close.** Each of these must break the proof:
+  drop `hσσ` from `mem_of_mem_normOne`; drop `hσ` from `apply_ne_zero_of_mem_normOne`; drop
+  `Nontrivial G`; drop `h : x − y ∈ A` from `residue_sub`; drop `hmem` from `colorable_of_residue`.
+* **Non-vacuity**: the `twoStep` model with a genuinely partial `ψ` (halving on the even integers),
+  and `FieldWall4` as the second, real model.
+* **The end-to-end test already in the repository**: `FieldWall4`'s spec example
+  `residueColouring 0 = residueColouring 2` now runs through the *new* mechanism, and its `#guard`s
+  on `psiZero` are untouched — so the refactor is checked by tests written before it.
+* **Prove / test / assume**: everything in §§1–5 is proved; the model and the two reds are tests;
+  nothing is assumed — no axiom, no `native_decide`, no new trust.
 
 ## 9. Experience-modeling pass
 
