@@ -412,6 +412,87 @@ something else.
   is wrong.
 * **`#print axioms`** on the six public headlines, registered in `scripts/Axioms.lean`.
 
-## 10. Results
+## 10. Results (2026-09-08)
 
-*(to be written at the close)*
+**Landed, gate green** — build OK, zero `sorry`, `#print axioms` **682 clean / 5 declared purchases**
+(all five pre-existing `native_decide` axioms of M03's certificate routes; nothing new bought), lint
+silent, spec examples passing. `Proofs/HadwigerNelson/ResidueColouring.lean`, 534 lines of which 244
+are code.
+
+### R1. What is in the kernel
+
+| statement | what it says |
+|---|---|
+| `colorable_of_residue` | a graph **drawn** in an abelian group, every edge difference in a subgroup `A` and of nonzero residue under `ψ : A →+ G`, is `Fintype.card G`-colourable |
+| `cosetResidue`, `cosetResidue_apply_of_mem`, `cosetResidue_sub`, `cosetResidue_eq_iff` | the colouring map: `ψ` extended to the whole group, restricting to `ψ` on `A`, additive within each coset |
+| `isUnit_of_mem_normOne`, `map_ne_zero_of_mem_normOne` | a norm-one element of a σ-stable subring is a **unit** of it, so its residue is nonzero — the norm-one condition's entire role |
+| `normOne_subset`, `normOne_subset_valuationSubring` | a σ-stable subring holding one of every pair of reciprocals contains every norm-one element — Theorem A's `v_𝔭(u) = 0` step, two lines |
+| `conj_mem_valuationSubringAtPrime` | the localization of a Dedekind domain at a height-one prime **fixed by an automorphism** is stable under it — the Galois-equivariance the stub named as load-bearing |
+| `colorable_of_normOne`, `colorable_of_valuationSubring` | the ring and valuation forms |
+| `colorable_unitDistance_of_residue`, `colorable_unitDistance_induce_of_residue` | the plane, for a drawing and for a set of points — the stub's A1 |
+| **`colorable_unitDistance_induce_of_valuationSubring`** | **Theorem A in the write-up's own shape**: a conjugation-stable subfield of `ℂ`, a conjugation-stable valuation subring of it, a hom to a finite nontrivial ring |
+| `colorable_unitQuadrance_of_residue` | the same theorem over the coordinate group of an arbitrary commutative ring |
+
+`FieldWall4`'s Theorem B is now an instance: `colorable_four_of_subset_seamPlane` is one application
+of the plane form, and the file is a **net deletion** (1403 → 1386 lines) despite gaining a
+`Nontrivial F4` instance, `conj_mem_oddDenom`, and a bundled ring hom `psiA` in place of the
+junk-extended `psiOf`.
+
+### R2. What is *not* in the kernel, stated exactly
+
+That a number field with a conjugation-fixed prime `𝔭` supplies the valuation subring **with a
+residue field of size `N(𝔭)`**. The stability half is now proved
+(`conj_mem_valuationSubringAtPrime`); what remains is the finiteness and the count (`Ideal.absNorm`
+and the `NumberField` instances) and the typing that places an abstract number field inside `ℂ`.
+Both are classical arithmetic and Mathlib plumbing with no new content. The module docstring says so
+in its own section, so the file does not claim more than it proves.
+
+### R3. Phase 3 was re-aimed, and the re-aim is a deviation from the registration
+
+Registered: "the number-field instantiation (rung 2), one attempt, ~150 lines, stop if the
+σ-stability of `valuationSubringAtPrime` resists". What was done instead: **Theorem A in the
+write-up's own shape** (§R1's headline) plus the σ-stability lemma alone. The reason, and it is the
+stub's own §3a analysis: rung 3 — an abstract number field with a chosen complex embedding — "buys
+*nothing*, the same proof re-typed", and the marginal content of the full instantiation over the
+valuation form is exactly the two classical facts named in R2. Landing the *shape* a reader compares
+against §5.1, plus the one arithmetic step the stub flagged as the risk, is where the content is.
+
+The σ-stability probe, when it ran, took **four lines** — far inside the registered budget — and the
+reason is worth recording: it is not a statement about valuations at all. Mathlib's
+`valuationSubringAtPrime` has elements `a / s` with `s` outside `𝔭`, so stability is
+`σa / σs` with `σs` outside `𝔭`. The stub had priced this as the place the milestone could balloon.
+
+### R4. Predictions, scored
+
+| # | registered | outcome |
+|---|---|---|
+| P1 | the theorem and its three layers land under 300 lines | **met** — 244 code lines (534 with docstrings) |
+| P2 | the `FieldWall4` refactor is a net deletion | **met** — 1403 → 1386, with a new instance and a new theorem added |
+| P3 | `additiveColoring` recoverable as `A = ⊤` in under ten lines | **met, and in a stronger form** — three lines, and as an *equation between the two colourings* rather than a colourability corollary, so the subsumption is checkable rather than asserted |
+| P4 | `Subring.toAddSubgroup` friction: an explicit `AddMonoidHom` will be needed | **refuted in its main clause** — `↥A` and `↥A.toAddSubgroup` are transparently the same type, `ψ.toAddMonoidHom` feeds `cosetResidue` with no wrapper, and membership transfers by `rfl`; **met in a weaker residual form** — the subgroup cannot be *inferred* from the hom (`↥?A ≡ ↥A` is higher-order), so `(A := A.toAddSubgroup)` must be written, exactly once in the repository. The refutation deleted a planned `ringResidue` wrapper and its four mirrored lemmas |
+| P5 | the number-field instantiation needs `IsFractionRing`, `valuationSubringAtPrime`, an automorphism fixing the prime, residue-field finiteness; σ-stability is where it stalls | **half-tested, and the tested half is refuted.** The first three names were needed and are in `conj_mem_valuationSubringAtPrime`; σ-stability did **not** stall — four lines. Residue-field finiteness was not attempted (R3), so that clause is untested and is reported as untested |
+| P6 | no existing proof breaks except inside `FieldWall4` | **met in substance, with a correction I did not predict**: no proof broke, but `Proofs.lean` refused the import outright — `HadwigerNelson.residue` already exists in `Lift.lean` (M59's reduction of a point of `(ℤ/p²)²` to `𝔽_p²`). The map is renamed `cosetResidue`. The experience pass had flagged `residue` as a generic name and let it stand; the environment settled it, which is the cheaper way to be told |
+
+### R5. Mutation audit (registered in §8 O7)
+
+Deleting `hσσ` from `normOne_subset`, `Nontrivial G` from `map_ne_zero_of_mem_normOne`, `x − y ∈ A`
+from `cosetResidue_sub`, and `hmem` from `colorable_of_residue` each breaks the file (2, 1, 4 and 5
+errors). The control — an unused hypothesis added to a lemma with no call sites — stays green at 0,
+so the audit's instrument is calibrated rather than merely red.
+
+### R6. One vacuity finding, recorded because it fixes the shape
+
+`colorable_of_valuationSubring` cannot be widened to `A : ValuationSubring ℂ`: a homomorphism from a
+valuation ring to a finite nontrivial ring has a prime kernel whose quotient is a finite domain,
+hence a field, hence the kernel is the maximal ideal — and the residue field of a valuation subring
+of an algebraically closed field is algebraically closed, hence infinite. So the hypotheses would be
+unsatisfiable over `ℂ`, and the subfield in `colorable_unitDistance_induce_of_valuationSubring` is
+load-bearing rather than decorative. The argument is in the module docstring, **marked as an
+argument and not a theorem**, because it is not formalized.
+
+### R7. What a future milestone gets
+
+The recipe, in the module docstring: name a conjugation-stable subring of `ℂ`, a ring hom to a
+finite nontrivial ring, and a proof that unit-distance differences land in the subring — and if the
+subring is a valuation subring of a subfield, the third step is free. `FieldWall4` now names its own
+three inputs (`conj_mem_oddDenom`, `psiA`, `mem_oddDenom_of_unit`) and says not to copy the file.

@@ -1061,10 +1061,13 @@ of an arbitrary commutative ring, which is what makes "this does not need `ℂ`"
 #print axioms normOne_subset
 #print axioms normOne_subset_valuationSubring
 #print axioms colorable_of_normOne
+#print axioms conj_mem_valuationSubringAtPrime
 #print axioms colorable_of_valuationSubring
 #print axioms sub_mem_normOne_conj_iff
 #print axioms colorable_unitDistance_of_residue
 #print axioms colorable_unitDistance_induce_of_residue
+#print axioms conjOn_conjOn
+#print axioms colorable_unitDistance_induce_of_valuationSubring
 #print axioms colorable_unitQuadrance_of_residue
 #print axioms FieldWall4.conj_mem_oddDenom
 #print axioms FieldWall4.psiA_eq

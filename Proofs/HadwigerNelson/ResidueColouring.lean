@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Additive
 import Proofs.HadwigerNelson.UnitQuadrance
 import Mathlib.RingTheory.Valuation.ValuationSubring
+import Mathlib.RingTheory.DedekindDomain.AdicValuation
 
 /-!
 # The residue colouring — Theorem A
@@ -34,7 +35,18 @@ The arithmetic enters only as sufficient conditions for the two hypotheses, in t
 3. **The plane.** `dist z w = 1` in `ℂ` says exactly that `z − w` is norm-one for complex
    conjugation (`sub_mem_normOne_conj_iff`), so the two plane forms
    (`colorable_unitDistance_of_residue` for a drawing, `colorable_unitDistance_induce_of_residue`
-   for a set of points) are specializations at `L = ℂ`, `σ = starRingEnd ℂ`.
+   for a set of points) are specializations at `L = ℂ`, `σ = starRingEnd ℂ`. Layers 2 and 3
+   compose into **`colorable_unitDistance_induce_of_valuationSubring`**, which is Theorem A in the
+   write-up's own shape: a conjugation-stable subfield of `ℂ`, a conjugation-stable valuation
+   subring of it, a homomorphism to a finite nontrivial ring, and every unit-distance graph drawn
+   in the subfield is colourable with that many colours.
+
+   The subfield is load-bearing and cannot be widened to `ℂ` itself: a homomorphism from a
+   valuation ring to a finite nontrivial ring has a prime kernel with a finite domain — hence a
+   field — as quotient, so the kernel is the maximal ideal, and the residue field of a valuation
+   subring of an algebraically closed field is algebraically closed, hence infinite. (An argument,
+   not a theorem — it is not formalized here; it is recorded because it says why the shape is what
+   it is.)
 
 ## What this generalizes, and what it does not
 
@@ -45,11 +57,14 @@ layer 2's hypothesis — so everything the write-up proves follows from what is 
 `FieldWall4`'s own subring is the *intersection* of the two localizations at the two primes above
 `2`, which is not a valuation ring and so is outside the write-up's statement.
 
-**Not proved here:** that a number field with a conjugation-fixed prime *has* such a subring. That
-is the classical arithmetic (`IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime` plus the
-Galois-equivariance that makes it `σ`-stable, plus finiteness of the residue field), and it is
-recorded as an open instantiation in `plans/A1-theorem-A-kernel.md` §6. Nothing in this file assumes
-it.
+**What is proved of the arithmetic input**: `conj_mem_valuationSubringAtPrime` — the localization
+of a Dedekind domain at a height-one prime fixed by an automorphism is stable under that
+automorphism, which is the Galois-equivariance step the write-up's proof spends its valuation theory
+on. **What is not**: that the residue field of that localization is finite of size `N(𝔭)`
+(`Ideal.absNorm`, and the `NumberField` instances behind it), and the typing that places an abstract
+number field inside `ℂ`. Both are classical arithmetic and Mathlib plumbing with no new content;
+they are recorded as the open instantiation in `plans/A1-theorem-A-kernel.md` §6, and nothing in
+this file assumes them.
 
 ## What this is not
 
@@ -88,6 +103,10 @@ To colour a set `S` of complex points with `k` colours:
    — the descent, or the valuation argument, or whatever the field supplies. If `A` comes from a
    valuation subring, `normOne_subset_valuationSubring` discharges it outright.
 4. Call `colorable_unitDistance_induce_of_residue`.
+
+If instead you hold a *field* — a conjugation-stable subfield `L ⊆ ℂ` and a conjugation-stable
+valuation subring of it — step 3 is free and the entry point is
+`colorable_unitDistance_induce_of_valuationSubring`.
 
 The colouring itself is `cosetResidue ψ.toAddMonoidHom`, and it is *sealed*: reason about it through
 `cosetResidue_apply_of_mem` (on `A` it is `ψ`), `cosetResidue_sub` (a conditional `map_sub`) and
@@ -289,6 +308,26 @@ theorem normOne_subset_valuationSubring (A : ValuationSubring L) {σ : L →+* L
     have hw : w = z⁻¹ := by field_simp; linear_combination hzw
     rwa [hw]
 
+/-- **A σ-fixed height-one prime gives a σ-stable valuation subring** — the classical source of
+layer 2's hypothesis, and the step `plans/STUB-theorem-A-kernel.md` §3 named as load-bearing (the
+Galois-equivariance of `v_𝔭`). Mathlib supplies the valuation subring
+(`IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime`); what a consumer still owes is its
+stability, and that turns out to be a statement about the localization's own elements — `a / s` with
+`s` outside `𝔭` maps to `σa / σs` with `σs` outside `𝔭` — rather than about valuations at all.
+
+`σO` is the automorphism `σ` restricts to on the Dedekind domain, `hcomm` says it does restrict, and
+`hfix` says it fixes the prime. -/
+theorem conj_mem_valuationSubringAtPrime {O : Type*} [CommRing O] [IsDedekindDomain O]
+    {L : Type*} [Field L] [Algebra O L] [IsFractionRing O L]
+    (v : IsDedekindDomain.HeightOneSpectrum O) (σ : L ≃+* L) (σO : O ≃+* O)
+    (hcomm : ∀ a : O, σ (algebraMap O L a) = algebraMap O L (σO a))
+    (hfix : ∀ a : O, σO a ∈ v.asIdeal → a ∈ v.asIdeal) :
+    ∀ z ∈ IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime L v,
+      σ z ∈ IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime L v := by
+  rintro z ⟨a, s, hs, rfl⟩
+  refine ⟨σO a, σO s, fun h => hs (hfix s h), ?_⟩
+  rw [map_mul, map_inv₀, hcomm, hcomm]
+
 /-- **Theorem A, valuation form.** Over a field, with `A` a conjugation-stable valuation subring,
 the integrality hypothesis is discharged and only the geometry remains. -/
 theorem colorable_of_valuationSubring (A : ValuationSubring L) {σ : L →+* L}
@@ -345,6 +384,50 @@ theorem colorable_unitDistance_induce_of_residue {A : Subring ℂ}
     ((unitDistance ℂ).induce S).Colorable (Fintype.card G) :=
   colorable_unitDistance_of_residue hσ ψ (fun v : S => (v : ℂ)) (fun _ _ hvw => hvw)
     fun v w hvw => hS _ v.2 _ w.2 hvw
+
+/-! ### Theorem A, as the write-up states it
+
+The write-up's `L = F(i)` is a subfield of `ℂ` closed under conjugation, and its
+`A = (O_L)_𝔭` is a conjugation-stable valuation subring. Those two hypotheses, and nothing else
+about number fields, give the statement below. -/
+
+/-- **Complex conjugation, restricted to a conjugation-stable subfield.** -/
+def conjOn {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) : L →+* L where
+  toFun z := ⟨(starRingEnd ℂ) (z : ℂ), hL _ z.2⟩
+  map_one' := Subtype.ext (map_one _)
+  map_mul' _ _ := Subtype.ext (map_mul _ _ _)
+  map_zero' := Subtype.ext (map_zero _)
+  map_add' _ _ := Subtype.ext (map_add _ _ _)
+
+@[simp] theorem coe_conjOn {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (z : L) :
+    ((conjOn hL z : L) : ℂ) = (starRingEnd ℂ) (z : ℂ) := rfl
+
+/-- Restricted conjugation is an involution. -/
+theorem conjOn_conjOn {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (z : L) :
+    conjOn hL (conjOn hL z) = z := Subtype.ext (Complex.conj_conj _)
+
+/-- **Theorem A.** Let `L` be a subfield of `ℂ` closed under complex conjugation, `A` a valuation
+subring of `L` that conjugation maps into itself, and `ψ` a ring homomorphism from `A` to a finite
+nontrivial ring `G`. Then every unit-distance graph drawn in `L` is `|G|`-colourable.
+
+This is `plans/FIELD-WALL-THEOREM.md` §5.1 with its number-theoretic hypotheses replaced by the two
+properties its proof uses: the write-up's `L = F(i)` is such a subfield, its `A = (O_L)_𝔭` at a
+conjugation-fixed prime is such a valuation subring, and its `N(𝔭)` is `Fintype.card G`. What is
+*not* proved here is that a number field with a conjugation-fixed prime supplies such an `A` — see
+the module docstring. -/
+theorem colorable_unitDistance_induce_of_valuationSubring {L : Subfield ℂ}
+    (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (A : ValuationSubring L)
+    (hσ : ∀ z ∈ A, conjOn hL z ∈ A)
+    {G : Type*} [CommRing G] [Nontrivial G] [Fintype G] (ψ : A.toSubring →+* G)
+    {S : Set ℂ} (hS : S ⊆ (L : Set ℂ)) :
+    ((unitDistance ℂ).induce S).Colorable (Fintype.card G) := by
+  refine colorable_of_valuationSubring A hσ (conjOn_conjOn hL) ψ _
+    (fun v : S => (⟨(v : ℂ), hS v.2⟩ : L)) fun v w hvw => ?_
+  have hd : dist (v : ℂ) (w : ℂ) = 1 := hvw
+  have hone : (v : ℂ) - (w : ℂ) ∈ normOne (starRingEnd ℂ) := sub_mem_normOne_conj_iff.mpr hd
+  show _ * conjOn hL _ = 1
+  refine Subtype.ext ?_
+  simpa [mem_normOne, map_sub] using hone
 
 end Plane
 

@@ -126,3 +126,71 @@ default.
 Branch `backlog`; never `lake build` (use `./scripts/build.sh`); one heavy job at a time; register
 new theorems in `scripts/Axioms.lean`; do not edit `CLAUDE.md` § Frontier / § Grokkings or the
 frontier-set ranking; results go into a `## §B. Built` section of this stub.
+
+---
+
+## §B. Built (Opus 5, 2026-09-08)
+
+**Landed the same day as B1.** `Proofs/HadwigerNelson/ResidueColouring.lean`, zero `sorry`, on axioms
+exactly `[propext, Classical.choice, Quot.sound]`; the full gate green (build, 682 clean axioms with
+5 pre-existing declared purchases, lint silent). The subplan, the three modeling passes and the
+scored predictions are `plans/A1-theorem-A-kernel.md`.
+
+**The reading this stub registered as the first action ran first, and its answer was neither of the
+two anticipated.** `Additive.additiveColoring`, `LocalGlobal.addCayleyMap`/`addCayleyColoring` and
+`UnitQuadrance.unitQuadrance.map` are three different theorems; all three homomorphisms are
+**total**, and M58's is functoriality — a different mechanism. What the reading paid: `additiveColoring`
+is exactly the `A = ⊤` case of the theorem to be written, so the general theorem is `additiveColoring`
+with the homomorphism made **partial**, and that single change is what forces the coset
+representatives and is the whole content of B1's §8.
+
+**Rung 4 landed, and past it.** `colorable_of_residue`: a graph *drawn* in an abelian group, all of
+whose edge differences lie in a subgroup `A` and are nonzero under `ψ : A →+ G`, is `|G|`-colourable.
+No metric, no field, no ring, no Cayley structure — the edge set need not even be
+translation-invariant. `colorable_unitQuadrance_of_residue` states it over the coordinate group of an
+arbitrary commutative ring, so "this does not need `ℂ`" is checkable rather than asserted, and the
+spec proves `additiveColoring` is literally the same function at `A = ⊤`.
+
+**The arithmetic of Theorem A, reduced to the two properties the proof uses.** (1) A norm-one element
+of a σ-stable subring is a **unit of that subring**, so its residue is nonzero in any nontrivial
+target — the norm-one condition's entire role. (2) A σ-stable subring holding one of every pair of
+reciprocals contains every norm-one element — Theorem A's `v_𝔭(u) = 0` step in two lines, with
+Mathlib's `ValuationSubring` as the bundled hypothesis. Composed:
+**`colorable_unitDistance_induce_of_valuationSubring`** is §5.1 in the write-up's own shape — a
+conjugation-stable subfield of `ℂ`, a conjugation-stable valuation subring of it, a homomorphism to a
+finite nontrivial ring. Strictly more general than the write-up's statement, which cannot even reach
+B1's own subring (the intersection of the two localizations at the two primes above `2`, not a
+valuation ring).
+
+**The risk this stub named is closed.** §3 flagged the Galois-equivariance of `v_𝔭` as "the
+load-bearing name and the first thing to find", with a stop rule at ~150 lines.
+`conj_mem_valuationSubringAtPrime` — the localization of a Dedekind domain at a height-one prime
+fixed by an automorphism is stable under it — is **four lines**, because it is not a statement about
+valuations at all: Mathlib's `valuationSubringAtPrime` has elements `a / s` with `s` outside `𝔭`, so
+stability is `σa / σs` with `σs` outside `𝔭`.
+
+**What is NOT proved, stated exactly** (and said in the module's own docstring, so the file does not
+claim more than it proves): that a number field with a conjugation-fixed prime supplies the valuation
+subring **with a residue field of size `N(𝔭)`**. The stability half is proved; what remains is the
+finiteness and the count (`Ideal.absNorm`, the `NumberField` instances) and the typing that places an
+abstract number field inside `ℂ`. Both are classical arithmetic and Mathlib plumbing with no new
+content — and §3a's ladder prices that rung at "nothing".
+
+**B1 is now an instance, which was the honest test.** `FieldWall4`'s
+`colorable_four_of_subset_seamPlane` is one application of the plane form; its coset machinery and
+junk-extended residue map are deleted, its `psiOf` is replaced by a bundled ring hom `psiA`, and the
+file is a **net deletion** (1403 → 1386 lines) despite gaining a `Nontrivial F4` instance and a new
+theorem. The reason a unit vector's residue is nonzero also changed: B1 proved it through the
+Frobenius compatibility and an odd-square identity; it is now the unit argument. `psi_comp_conj`
+survives — it is still the descent's engine, the genuinely field-specific part.
+
+**Two findings worth carrying.** (a) `HadwigerNelson.residue` was already taken by `Lift.lean`
+(M59's reduction of a point of `(ℤ/p²)²`); the map is `cosetResidue`, and the collision was found by
+the build rather than by inspection. (b) The valuation form cannot be widened to `ℂ` itself — a
+valuation subring of an algebraically closed field has an algebraically closed, hence infinite,
+residue field, so the hypotheses would be unsatisfiable; the subfield is load-bearing. (Recorded in
+the module docstring as an argument, not a theorem — it is not formalized.)
+
+**The named follow-ups**, neither scheduled: the residue-field finiteness step above; and Woodall's
+`χ(ℚ²) = 2` as a second concrete instance at a different prime and a different residue field, which
+would need the `ℤ[i]` descent (~200 lines) and is a classical result, not news.
