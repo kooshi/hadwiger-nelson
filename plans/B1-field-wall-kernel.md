@@ -311,3 +311,15 @@ was two names for one object, the boundary's version of the two-costumes smell.
 file. `mem_seamPlane_iff` and `mem_seamField_iff` are deliberately **not** tagged: they are `Iff.rfl`
 and tagging them would drive every membership goal into raw existentials, which is the opposite of
 the path E2 designs.
+
+
+---
+
+## 9. Results (2026-09-08)
+
+Landed; the record is `plans/STUB-field-wall-kernel.md` §B. Gate green (build, lint, axioms), zero
+`sorry`, 1,403 lines, axioms exactly the standard three on all fifteen registered declarations.
+Predictions: P1, P2, P3, P4, P6 met; **P5 missed by 17 %** (1,403 lines against ≤ 1,200 registered —
+the `Subfield` and the spec section are the overrun). No stop rule fired. Two corrections the kernel
+forced are recorded in §B: the `√11·√33 = 11√3` coefficient, and the two-primes reconciliation of the
+write-up's residue table with this file's.

@@ -103,3 +103,73 @@ It is the programme's first plane-colouring theorem over a field beyond ℚ, the
 the halt of M53, and — by its §6 generalisation — a statement about every real number field. The
 publication-bar policy is unchanged (nothing below χ ≥ 6 is written up); the kernel receipt is for
 the repository's own standard: a hand proof that stopped a campaign should not stay hand-proved.
+
+---
+
+## §B. Built (Opus 5, 2026-09-08)
+
+**Landed.** `Proofs/HadwigerNelson/FieldWall4.lean`, 1,403 lines, zero `sorry`, on axioms exactly
+`[propext, Classical.choice, Quot.sound]`. Gate green: `./scripts/build.sh` OK (3 m 36 s, desktop),
+`lake lint` passed, `./scripts/axioms.sh` OK — 663 clean, 5 pre-existing declared purchases, none of
+them reachable from anything here. The subplan is `plans/B1-field-wall-kernel.md` (§6–§8 hold the
+three modeling passes).
+
+**The headline.**
+
+```lean
+theorem four_colorable_of_seam_field : ((unitDistance ℂ).induce seamPlane).Colorable 4
+theorem colorable_four_of_subset_seamPlane (S : Set ℂ) (hS : S ⊆ seamPlane) :
+    ((unitDistance ℂ).induce S).Colorable 4
+theorem chromaticNumber_seamPlane : ((unitDistance ℂ).induce seamPlane).chromaticNumber = 4
+```
+
+Stated for the **whole plane over `K`**, not just finite graphs: the coset colouring needs no
+finiteness, so §1's `Finset` form is the two-line corollary rather than the theorem. `seamField` is
+a `Subfield ℝ` (the ℚ-span of `1, √3, √11, √33`, with `inv_mem` proved), so the vertex set really is
+`K²` and the name is earned. Also exported, because they are what the Frontier actually cites:
+`not_forces_five_of_subset_seamPlane` and `not_separated_five_of_subset_seamPlane` — the sentence
+that halted M53, now a theorem — and `residueColouring_eq_of_dist_two`, the reason no version of
+Theorem B can hold for the `{1, 2}`-distance graph.
+
+**§2's route was not taken, and did not need to be.** The stub priced `Localization.AtPrime`,
+`IsDiscreteValuationRing.TFAE` and `ValuationRing`, and named `AdjoinRoot`-over-ℤ as the risk. None
+of it appears. In the basis `{1, ω} × {1, i} × {1, T}` the joint kernel of the two residue maps is
+*visibly* `(1+i)·O`: with `z = p + q·i`, the two conditions say `p ≡ q (mod 2)` in all four
+coordinates and then `z/(1+i) = (p+q)/2 + ((q−p)/2)·i` is integral — three small lemmas
+(`exists_mul_onePlusI`), no ideal, no localization, no valuation. Conjugation's step 3 becomes one
+equality of ring homomorphisms, `psi_comp_conj : (psi s).comp conj = F4.sq.comp (psi s)`, checked on
+two generators through a universal property (`Quad.hom_ext`) that the three-layer structure has for
+free. **The stop rules never fired**; `Subfield` (design choice D5, the medium-confidence one) landed
+in ~90 lines through two quadratic conjugate steps rather than one quartic identity.
+
+**The unexpected simplification.** `ζ₆ = 1 + ω`, `ζ₃ = ω`, `i√3 = 1 + 2ω` and `9ρ = 7 − ω + T + 2ωT`,
+so all seven Moser-spindle points are `den x / 9` for explicit `x : SeamOrder` — and since `den` is a
+ring homomorphism intertwining the two conjugations, **each of the eleven unit distances is the single
+identity `(xᵢ − xⱼ) · conj (xᵢ − xⱼ) = 81` in the order**, decided by the kernel over all forty-nine
+pairs at once. §8 contains no `Real.sqrt` manipulation at all.
+
+**Two corrections the kernel forced.** The subplan's first product table for `seamSpan` had
+`√11·√33 = 3√3`; it is `11√3`, and the `√3`-coefficient of a product is `11(cd′ + dc′)`. And the
+write-up's §5.3 residue table (`ζ₆ ↦ ω², ρ ↦ ω, σ ↦ ω², τ₅ ↦ ω²`) disagrees with this file's
+(`Ω², Ω², Ω², Ω`) because they are **the two different primes**: fixing `√33 ↦ s ≡ 17 (mod 256)` makes
+`T ≡ 1`, so the note's prime is `psiOne`, not `psiZero`. Both colour; the module docstring records it
+so a reader comparing tables does not conclude one is wrong.
+
+**§6's spec examples all ship**, with each order element pinned to its complex value before its
+residue is read (`den_rho9`, `den_sigma3`, `den_tauFive25`), plus the spindle's seven residues (all
+four colours used, eleven edges distinct), a worked `K²`-membership example through the `Subfield`
+API, and the negative controls. **Mutation audit** (registered in the subplan §7): dropping `Odd m`
+from `psiOf_eq`, weakening the headline to `Colorable 3`, and collapsing `psiOne` to `psiZero` each
+break the build — every hypothesis is load-bearing, and the two primes are genuinely different maps.
+
+**Predictions.** P1 met (standard three axioms). P2 met — the parity argument needs no 256-case
+`decide`. P3 met — `den` injectivity closes through `Ladder.sqrt_indep` twice with no new
+independence lemma, and the same two coordinate formulas serve `den_mem_seamPlane`. P4 met exactly
+(`0, Ω², Ω, 1, Ω, 1, Ω²`, all four colours). P5 met (1,403 lines against ≤ 1,200 registered — **missed
+by 17 %**, the overrun being the `Subfield` and the spec section, and reported as a miss). P6 met
+(16 s wall / 32 s CPU, minimum of three).
+
+**What is still hand-proved.** Theorem A (the general residue colouring over any number field) and
+Lemma 5.2 (the factorization of `2` in `K(i)`) are not formalized; this file proves Theorem B by a
+route that never needs them, so a reader wanting the general statement still has only the write-up.
+That is the honest gap, and it is the stub's §6 generalisation.
