@@ -67,12 +67,49 @@ Step 2 is the whole content and it is two lines *given* the valuation's Galois-e
   directly because everything was already a subring of `ℂ`; the general statement has to place an
   abstract `L` in `ℂ` (an `Algebra L ℂ`, or quantify over a subfield of `ℂ` from the start).
 
-**The last bullet is the real modeling fork**, and it should be settled in the subplan before any
-proof effort: state Theorem A over an abstract number field with a chosen complex embedding, or
-state it over a *subfield of `ℂ`* that happens to be a number field. The second is much closer to
-B1 and to every consumer this repository has (`seamPlane`, `unitDistance ℂ`); the first is the
-write-up's phrasing. My lean is the second, with the abstract phrasing as a corollary if it is
-cheap — but that is a decision for the subplan, not a settled one.
+**The last bullet was the modeling fork. Kooshi settled it, 2026-09-08:** *"the more general you
+can make it, the more interesting it is. If you need to do the more simple case first before
+returning again for the more general, that's fine."* So generality is the objective, the concrete
+case is a permitted **stepping stone and not a substitute**, and a milestone that stops at a lower
+rung says so and records the return. §3a is the ladder that direction points up.
+
+## 3a. The generality ladder, and where the interesting rung actually is
+
+Written down because "be more general" needs a target to aim past, and because the obvious reading
+of it is the wrong one: moving from *a subfield of `ℂ`* to *an abstract number field with a chosen
+complex embedding* is a phrasing change, not a generalization — the content is identical and the
+proof is the same proof. The rung that pays is one further out.
+
+| rung | statement | what it buys |
+|---|---|---|
+| 0 | `χ(ℚ(√3,√11)²) = 4` | landed (B1) |
+| 1 | A1: any conjugation-stable subring `A ⊆ ℂ` with a finite quotient | the colouring stops depending on the field |
+| 2 | Theorem A over a number field inside `ℂ` | the write-up's statement, with the arithmetic |
+| 3 | Theorem A over an abstract number field + a complex embedding | *nothing* — the same proof, re-typed |
+| **4** | **drop `ℂ`: the Cayley form** | the interesting one — see below |
+
+**Rung 4.** The unit-distance graph on `F²` *is* the Cayley graph of the additive group `F(i)` with
+connection set the norm-one group — the write-up's own §2 framing. Nothing in the colouring argument
+uses `ℝ`, `ℂ`, distance or geometry: it uses an abelian group, an involution, the elements with
+`u·ū = 1`, a subring containing them, and a homomorphism to something finite. Stated that way the
+theorem covers the real plane, the finite planes, and any quadratic extension of any commutative
+ring at once.
+
+**That is not idle generality — this repository already holds two instances of it.**
+`LocalGlobal.lean` has `addCayleyMap` / `addCayleyColoring` (a table proper along a connection set
+colours the Cayley graph) and `Additive.lean` has `additiveColoring` (a homomorphism nonzero on the
+edge differences is a colouring); `UnitQuadrance.lean` has the finite planes as
+`unitQuadrance R` for *any* commutative ring. **First action of the subplan, before any new
+statement is written: read those three and find out whether A1 is nearly free from them, or whether
+they already are the general theorem with the norm-one condition missing.** If they are, the work
+is smaller than §2 prices it and the payoff is larger — one theorem under `FieldWall4`,
+`Additive`, `LocalGlobal` and the finite-plane bound together.
+
+**Staging, then.** A1 (rung 1) first, because it makes `FieldWall4` smaller and is the shape of the
+argument in isolation; then rung 4 if the reading above holds, with rung 2 as its corollary; rung 3
+only if someone asks for the write-up's exact phrasing. Rung 2 alone is an acceptable stopping
+point *with the return recorded* — that is Kooshi's licence, not a licence to stop at rung 2 by
+default.
 
 ## 4. Risks, and the stop rule to register
 
