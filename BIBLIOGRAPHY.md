@@ -106,6 +106,16 @@ Not relevant (name collisions in searches, recorded so they are not re-fetched):
 
 ## D. Standing tasks for this file
 
+0. **THE PRIOR-ART GATE IS NOW A WORKFLOW STEP (2026-09-08, `WORKFLOW.md` step 3a, `CLAUDE.md` § Grokkings G49).**
+   Every milestone runs a thirty-minute prior-art search at its OPENING, before any derivation, and records the
+   result as a §PA section of its subplan — searching in the *discipline's* vocabulary and never in this
+   project's coined one, under at least two disciplines for the same object, for the QUESTION as well as the
+   method, and outside arXiv. Anything found lands in this file the same day. The gate exists because four
+   milestones (M58–M61) reconstructed `[Moorhouse2010]`, which was one web search away, while
+   `[CervantesKrebs2023]` sat in §C of this very file, unread, systematizing one of their kernel theorems.
+0b. **The whole shelf is being read (FS-18, `plans/STUB-library-read.md`, rank 1 as of 2026-09-08).** Until that
+   pass closes, treat every "unread"/"abstract"/"second-hand" row here as an open liability rather than a note.
+
 1. Verify every **[title from a search listing]** and **[title unverified]** against the paper (arXiv landing pages) — a five-minute job per entry, deferred by context budget on 2026-09-06.
 2. Re-find where [GreenwellLovasz1974] / arXiv:2604.01408 were used and record the plan section.
 3. Read [Soifer2024]'s number-field chapter and [Chilakamarri1988], [Chow1993], [Zaks1992] against the field-wall note's §2 and §8, and record what each settles (the note's §10.1 holds Fischer's reconciliation as the template).

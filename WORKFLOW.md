@@ -27,6 +27,26 @@ leaves.
    plausibility and then benchmarked is a shape you will rewrite. Refine scope here: if a milestone is bigger than it looked, push the
    excess to a later milestone — and whenever we carry scope forward, drop a subplan **stub** in
    `plans/` capturing the carry-forward notes → `plans/<Mxx-milestone>.md`.
+3a. **Prior-art gate** — *before any derivation, and before the modeling passes.* Thirty minutes, and its
+   output is a **§PA section of the subplan**; a subplan without one is not a subplan. Minted 2026-09-08
+   (`CLAUDE.md` § Grokkings G49) after a check found that four consecutive milestones had reconstructed the
+   contents of a 2010 draft that was one web search away, and that a paper systematizing one of their kernel
+   theorems had been sitting unread in our own bibliography. Four questions:
+   1. **Name the object in the vocabulary of the discipline it belongs to, and search THAT.** G46 already
+      demands the recognition step for *deriving*; the sentence it produces is the search query. "The finite
+      planes are Cayley graphs of an abelian group" → search *Cayley graph chromatic number abelian group*.
+      **Never search in this project's coined vocabulary** — "field wall", "finite-plane bound", "5-sealed"
+      appear in no paper, and a private vocabulary is a perfect filter against finding out you are not first.
+   2. **Search under at least two disciplines' names for the same object.** Kooshi's ladder of disciplines
+      (under G30) already names which two rooms a given wall sits between; use it as the search plan. The
+      2026-09-08 miss happened precisely because the object was in two literatures that do not cite each other.
+   3. **Search for the QUESTION, not only the method** — "has anyone computed χ of the plane over this field?"
+      A stated open problem you are about to answer is worth knowing *before* the milestone.
+   4. **Look outside arXiv** — personal pages, unpublished drafts, theses, and the pre-2000 journal literature.
+   Record the result in §PA either way: a negative ("searched X, Y, Z under these names; nothing") is a finding
+   about where the unworked ground is. **Sell this as AIMING the milestone, not as protecting novelty**, or it
+   gets skipped: it hands over free theorems and it finds the open questions the work is answering. Anything
+   found goes into `BIBLIOGRAPHY.md` the same day, per the bibliography rule.
 4. **Commit** the subplan (skeleton included) and move directly to modeling without pausing.
 5. **Modeling pass** — reforge the subplan through the de Bruijn modeling skills before implementing.
    Each skill is a fresh **Skill**-tool invocation scoped to the current milestone — *always* freshly
