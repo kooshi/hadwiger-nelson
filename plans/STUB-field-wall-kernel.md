@@ -1,5 +1,7 @@
 # The field-wall theorem in the kernel (pre-subplan stub, UNNUMBERED — written 2026-09-05 by the session holding the proof)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B1):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *The theorem: χ(G(K²)) = 4 for K = ℚ(√3, √11) — every finite unit-distance graph with all coordinates
 in K is properly 4-colourable (`~/field-wall-conjecture.md` §5, Theorem B; the record in `CLAUDE.md`
 ledger row 47 says "hand-proved, NOT kernel-checked"). This stub prices the formalization and fixes

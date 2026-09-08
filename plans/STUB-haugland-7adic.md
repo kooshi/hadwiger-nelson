@@ -1,5 +1,7 @@
 # FS-8 — The Haugland 7-adic check: does the heptagonal 5-forcer live in a 4-sealed field? (STUB, 2026-09-06)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B7):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Minted on the finite-plane pivot (`reference/Chat-analysis/analysis.txt` corollary (3), VERIFIED framework in
 `reference/Chat-analysis/VERIFICATION.md`). Read beside this: `plans/M58-field-sieve.md` (the theorem and the sieve),
 `BIBLIOGRAPHY.md` [Haugland2026], `CLAUDE.md` G3/G7/G11 (what the project believes about his construction).*

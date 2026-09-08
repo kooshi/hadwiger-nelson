@@ -1,5 +1,7 @@
 # FS-17 — The first digit at 23: is UD(𝔽₂₃, 2) exactly 5-chromatic? (STUB, 2026-09-08; minted at the M61 close — M61's phase A, undecided)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B3):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Read beside: `plans/M61-local-global-tightness.md` §S2–§S4 and §R3 (what was tried and what it cost), `plans/STUB-finite-plane-cores.md`
 (FS-13, the same solver question one rung up), `data/fplane/{theta,periodic,alpha,equivariant}-*.json`, `chi-p23-k5.json`.*
 

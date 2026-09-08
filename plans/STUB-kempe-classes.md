@@ -1,5 +1,7 @@
 # FS-2 — The Kempe classes of K-fabric's 4-colourings: what carries rigidity beyond the additive skeleton (STUB, 2026-09-06; re-aimed at the M57 close; scope note the same day)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` MEASURE ONLY (the walk)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 > **SCOPE NOTE 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): every object this stub
 > names lives in K or K(√247), both 5-sealed fields (a degree-one prime above 11; χ(UD(𝔽₁₁,2)) = 5) — fine as MECHANISM
 > beds (what carries forcing without rigidity is a question about colouring spaces, and the seed's 252-cheat subset is the

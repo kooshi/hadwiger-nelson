@@ -1,5 +1,7 @@
 # FS-12 — The hub scan as the design instrument: depth-one partners over every field at once (STUB, 2026-09-06; minted at the M59 close)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B6):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Read beside: `plans/M59-finite-plane-lift.md` §S1 (a), §R3; `tools/fplift.py hubs`; `data/fplane/hubs-*.json`; M49 §R8–§R9 (the
 kill engine's partner census: 9,485 depth-one points of the seed in 59 quadratic extensions); M50 (`PartnerLattice.lean`:
 depth-one candidates are finite, in any field); G37 (the endgame is K-fabric plus one wall-breaking adjunction).*

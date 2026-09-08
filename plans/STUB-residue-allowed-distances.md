@@ -1,5 +1,7 @@
 # FS-16 — The residue-allowed distances: where a five-colour virtual edge can live over a sealed field (STUB, 2026-09-07; minted at the M60 close)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B5):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Read beside: `plans/M60-five-colour-residue-obstruction.md` §S3, §R3, §R7 (the distance law and the M55 census); `Instances/ResidueObstruction11.lean`
 (`not_separated_of_pairsAt_11`: a virtual edge at five colours over the `√7`-free tower needs `d² ≡ 1 (mod 11)`); `data/fplane/residue-filter-W-plus-cross-depth2-p11.json`.*
 

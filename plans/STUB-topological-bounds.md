@@ -1,5 +1,7 @@
 # FS-9 — Topological lower bounds on unit-distance graphs: the one technique sharp at every integer (STUB, 2026-09-06)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` LEAVE (reading room)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Minted while mining Kooshi's web-Claude analysis (`reference/Chat-analysis/analysis.txt`, "the lower-bound side: what sees
 integrality"), on his direction to mine it fully. A room the project has not entered: algebraic topology. Read beside this:
 `CLAUDE.md` G9/G27 (the 791-forcer is exactly V ∩ −V — a centrally symmetric graph, which is what a free ℤ₂-action looks

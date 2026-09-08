@@ -1,5 +1,7 @@
 # FS-13 — The 6-critical cores of the finite planes, and their autopsy (STUB, 2026-09-06; minted at the M59 close — M59's phase A, unfinished)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` MEASURE ONLY (phase 0)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Read beside: `plans/M59-finite-plane-lift.md` §S3, §R3 (P3: the whole plane at 131 undecided at one hour; the 5-critical cores at 11
 and 19); `tools/fplift.py cores`; `data/fplane/core-*.json`; M42/M43 (the cell family's 1-minimal cores and their autopsy); G44.*
 

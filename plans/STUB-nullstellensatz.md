@@ -1,5 +1,7 @@
 # FS-10 — Nullstellensatz certificates: a kernel-checkable certificate genre that sees integrality (STUB, 2026-09-06)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` LEAVE (reading room)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Minted while mining Kooshi's web-Claude analysis (`reference/Chat-analysis/analysis.txt`, "Nullstellensatz certificates"),
 on his direction to mine it fully. A room the project has not entered: commutative algebra as a certificate language. Read
 beside this: `CLAUDE.md` G18 (composition sees what search cannot; LRAT is the standing certificate genre), G24 ("a polynomial

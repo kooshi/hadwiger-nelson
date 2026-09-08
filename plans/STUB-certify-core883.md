@@ -1,5 +1,7 @@
 # The certificate of the copy lock: the 883-point core as a kernel-checked 5-chromatic unit-distance graph (pre-subplan stub, UNNUMBERED — the COMPETING next milestone)
 
+> **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B2(c)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
+
 *Stub drafted 2026-09-02 during M52. Numbered if minted (milestones are numbered as minted). The
 object cards are `plans/Q8-FIVE-CHROMATIC-OBJECTS.md`; the finding that repriced this is M52 T14
 (`plans/STANDING-QUESTIONS.md`); the exact coordinates already exist in `data/m52/exact-*.json`.*
