@@ -130,9 +130,94 @@ of §4. Every name registered in `scripts/Axioms.lean` survives — none of the 
   `scripts/Axioms.lean`; results into `plans/STUB-theorem-A-kernel.md` as `## §B. Built`; do not
   touch `CLAUDE.md` § Frontier / § Grokkings or the frontier-set ranking.
 
-## 7. Domain-modeling pass
+## 7. Domain-modeling pass (2026-09-08)
 
-*(to be run and recorded before implementation)*
+### M1. What the object actually is
+
+The skeleton had `residue ψ x = ψ ⟨x − cosetRep A x, _⟩` with `cosetRep` an arbitrary section of
+`M ⧸ A`. Simulating it: what is `residue ψ` characterized by? A function `Ψ : M → G` with
+`Ψ x − Ψ y = ψ (x − y)` whenever `x − y ∈ A` is exactly "ψ, translated by an arbitrary constant on
+each coset". So `residue ψ` is one witness of an existence statement, and the *property* is what
+every consumer travels — which is why the definition must be sealed and the property stated.
+
+### M2. The one change that dissolved the subtypes
+
+Nothing forces the section to be arbitrary. **Normalize it: send the zero coset to `0`**
+(`cosetRep A x = if x ∈ A then 0 else surjInv …`; the patched section still satisfies
+`cosetRep_eq_of_sub_mem`, because `x − y ∈ A` makes `x ∈ A ↔ y ∈ A` and both branches agree).
+Then
+
+* `residue ψ` **restricts to `ψ` on `A`** (`residue_apply_of_mem`), so `residue ψ 0 = 0`; and
+* `residue_sub` states with no subtype at all: `residue ψ x − residue ψ y = residue ψ (x − y)`
+  whenever `x − y ∈ A` — a conditional `map_sub`.
+
+The consequence is the whole point. The skeleton's hypothesis was
+`∃ a : A, (a : M) = f v − f w ∧ ψ a ≠ 0` — one quantifier hiding a membership, an equation and a
+value condition, and every use site opening with a `▸` to recover the membership. It is replaced by
+**two independent, non-dependent, subtype-free hypotheses**:
+
+```lean
+(hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+(hne  : ∀ ⦃v w⦄, Γ.Adj v w → residue ψ (f v - f w) ≠ 0)
+```
+
+**D2 is superseded**: the existential shape was incidental structure — an artifact of an
+un-normalized section — not the mathematics. The mathematics is "the difference lies in `A`, and its
+residue is nonzero", and with the normalization both clauses are statements about `M`, not about
+`↥A`.
+
+### M3. The reframes walked, and what each returned
+
+* **Function or relation, data or proof.** `residue ψ : M → G` stays a `def` (sealed) rather than an
+  existence statement, because `FieldWall4` needs a *named colour function* to carry its two
+  theorems (`residueColouring_ne_of_dist_one`, `_eq_of_dist_two`). The property is `residue_sub`.
+* **Subgroup pair instead of a homomorphism?** The statement "`K ≤ A ≤ M`, every edge difference in
+  `A \ K`, therefore `[A : K]`-colourable" is strictly sharper (it gives the index, not `card G`).
+  Rejected: every consumer here *has* a hom and would have to compute an index and prove
+  surjectivity to use it. The hom form is the usable one; the sharper count is noted in the
+  docstring and not claimed.
+* **`SetLike` + `AddSubgroupClass` instead of `AddSubgroup M`?** It would remove the
+  `Subring.toAddSubgroup` conversions at the two ring-layer call sites. Rejected as speculative
+  generality — and the probe run during this pass says the conversions are nearly free: `↥A` and
+  `↥A.toAddSubgroup` are transparently the same type, `ψ.toAddMonoidHom` feeds `residue` with no
+  wrapper, and membership transfers by `rfl`, for `Subring` and `ValuationSubring` alike. The one
+  residual friction is that the subgroup cannot be *inferred* from the hom (`↥?A ≡ ↥A` is
+  higher-order), so it must be written `residue (A := A.toAddSubgroup) ψ.toAddMonoidHom`. That
+  killed a planned `ringResidue` wrapper and its four mirrored lemmas: the ring layer's public
+  statements (`colorable_of_normOne`, `colorable_of_valuationSubring`, both plane forms) mention no
+  residue map at all, so the annotation is written exactly once, in `FieldWall4`'s own definition of
+  its colouring.
+* **`normOne σ` as a `Submonoid`?** It is one (closed under multiplication, contains `1`). No
+  consumer needs the closure, so it stays a plain `Set L`. It keeps its *name* because it is the
+  noun in three statements — "every norm-one element lies in `A`", the valuation bridge, and the
+  plane bridge `dist z w = 1 ↔ z − w ∈ normOne (starRingEnd ℂ)`.
+* **Which recursor?** None: the theorem has no induction. The only recursion in the whole item is
+  `FieldWall4`'s existing descent, which is not touched.
+
+### M4. Seams
+
+* **Model of the hypotheses (non-vacuity).** Needed with a *genuinely partial* `ψ` — one that does
+  not extend to `M` — or the theorem is `additiveColoring` in disguise. Spec model: `M = ℤ`,
+  `A = range(x ↦ 2x)`, `ψ : A →+ ZMod 2` halving; no extension exists (`2 · φ 1 = 1` is unsolvable
+  in `ZMod 2`), and the graph "differ by 2" is 2-coloured by it. `FieldWall4` is the second and
+  real model.
+* **Unsampled members.** `A = ⊥`: `hmem` forces `f v = f w` on edges and then `residue ψ 0 = 0`
+  contradicts `hne` — so the hypotheses are simply unsatisfiable for a graph with an edge, which is
+  correct. Empty `V`, edgeless `Γ`: fine, and `Fintype.card G ≥ 1` because `G` holds `0`.
+  Non-injective drawings: excluded at exactly the edges, by the same route.
+* **Adversarial member.** The conclusion `Colorable (Fintype.card G)` is weaker than the truth
+  (`[A : ker ψ]` colours suffice). Deliberate, stated, and irrelevant to every consumer here, all of
+  which have a surjective `ψ` onto a field.
+* **Reds planted.** `hne` is load-bearing (the triangle drawn at `0, 1, 2` in `ℤ` with the parity
+  hom: `residue (0 − 2) = 0`, and a triangle is not 2-colourable); `Nontrivial G` is load-bearing at
+  the ring layer (a graph with an edge is not 1-colourable).
+
+### M5. Next-theorem test, run before consulting the model
+
+Named in advance: *"two points differing by an element of `A` with zero residue get the same
+colour"* — `FieldWall4`'s distance-2 statement, and the first thing any future consumer will want.
+It states in the existing vocabulary and proves in one line
+(`residue_eq_of_eq_zero`, from `residue_sub` and `sub_eq_zero`). The model earns it.
 
 ## 8. Obligation-modeling pass
 
