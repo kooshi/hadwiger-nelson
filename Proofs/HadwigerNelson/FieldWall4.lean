@@ -6,7 +6,70 @@ import Proofs.HadwigerNelson.Instances.SpindleBound
 /-!
 # The field wall: `χ(ℚ(√3, √11)²) = 4`
 
-Skeleton (B1 subplan `plans/B1-field-wall-kernel.md`, after the domain-modeling pass §6).
+Colour the plane over `K = ℚ(√3, √11)` — the complex numbers whose real and imaginary parts are
+ℚ-combinations of `1, √3, √11, √33` — so that no two points one unit apart share a colour. Four
+colours suffice, and four are needed: the Moser spindle can be drawn in `K²`, and `K` is the
+smallest field in which it can be drawn at all. So `χ(K²) = 4` exactly.
+
+This is Theorem B of `plans/FIELD-WALL-THEOREM.md` §5, hand-proved 2026-09-05 by the session that
+was asked to write the conjecture up for a stranger and proved it instead. It is the theorem that
+halted the M53 descent: a construction confined to `K²` is 4-colourable, so by the spare-colour
+lemma it can never force a pair at five colours, so it can never terminate
+(`not_forces_five_of_subset_seamPlane` below).
+
+## The mechanism, in one paragraph
+
+Colour a point by its residue modulo a prime above `2` — Woodall's 2-colouring of `ℚ²`, one field
+up. Concretely, let `O = ℤ[ω, i, T]` with `ω = ζ₃` and `T = (1+√33)/2`: a free ℤ-module of rank
+eight, and the order this file colours by. It carries two ring homomorphisms onto the four-element
+field `𝔽₄` (`psiZero`, `psiOne`: `ω ↦ Ω`, `i ↦ 1`, `T ↦ 0` resp. `1`) — the two primes above `2`.
+Complex conjugation of the order induces Frobenius on `𝔽₄` (`psi_comp_conj`), so a unit vector
+`u` — one with `u·ū = 1` — has an odd denominator over `O` (`mem_oddDenom_of_unit`): if the
+denominator were even, both residue maps would kill the numerator, and the numerator would be
+divisible by `(1+i)² = 2i`, halving the denominator. On the subring `A = O[1/odd]` the residue
+descends, a unit vector is a unit of `A` and so has nonzero residue, and every unit step stays
+inside one coset of `A`. Choosing a representative per coset gives the colouring
+(`residueColouring`), which is proper on the whole plane over `K` with no finiteness hypothesis.
+
+## Why this shape
+
+The hand proof runs through the localization of `O` at a prime above `2`, proves that local ring
+is a discrete valuation ring, and concludes that every unit vector or its inverse is integral. None
+of that is needed. In the basis `{1, ω} × {1, i} × {1, T}` the joint kernel of the two residue maps
+is *visibly* `(1+i)·O`: writing `z = p + q·i`, the two conditions say exactly that `p` and `q` agree
+modulo `2` in all four coordinates, and then `z/(1+i) = (p+q)/2 + ((q−p)/2)·i` has integer
+coordinates (`exists_mul_onePlusI`). No ideal, no localization, no valuation.
+
+`T` is what makes the order maximal at `2`, and it is load-bearing: the Moser twist
+`ρ = (5 + i√11)/6` is `(7 − ω + T + 2ωT)/9`, which has no integer coordinates without it, and in
+the smaller order `ℤ[ζ₁₂, √33]` the descent fails outright (`1 + √33 = 2T` satisfies its hypothesis
+and not its conclusion). `𝔽₄` is forced too: `Φ₁₂` has no root in `ℤ/4` or in `𝔽₂[ε]/(ε²)`.
+
+## Two tables that look like they disagree
+
+`plans/FIELD-WALL-THEOREM.md` §5.3 lists `ζ₆ ↦ ω², ρ ↦ ω, σ ↦ ω², τ₅ ↦ ω²`; the spec section below
+gets `ζ₆ ↦ Ω², ρ ↦ Ω², σ ↦ Ω², τ₅ ↦ Ω`. They are the **two different primes**: the write-up fixes
+its 2-adic embedding by `√33 ↦ s ≡ 17 (mod 256)`, so its `T = (1+s)/2 ≡ 9 ≡ 1` and its prime is
+this file's `psiOne`. Either prime colours; `psiZero` is the one used.
+
+## Using this file
+
+* `four_colorable_of_seam_field` — the headline; `colorable_four_of_subset_seamPlane` for any subset
+  of `K²`, and `chromaticNumber_seamPlane` for the exact value.
+* To certify that a point lies in `K²`: `mem_seamPlane_iff`, `mem_seamField_iff`, and the generators
+  `sqrt3_mem`, `sqrt11_mem`, `sqrt33_mem` — after which the whole `Subfield` API (`add_mem`,
+  `mul_mem`, `inv_mem`, `ratCast_mem`, …) applies. A worked example is in the spec section.
+* `residueColouring` is the colouring itself, with `residueColouring_ne_of_dist_one` its properness
+  and `residueColouring_eq_of_dist_two` the reason no version of this theorem holds for the
+  `{1, 2}`-distance graph — Exoo–Ismailescu's 6-chromatic `{1, 2}`-graph has all its coordinates
+  in `K`.
+
+## Attribution
+
+The residue-colouring method is Woodall's (1973) and Fischer's (1990); Theorem B, the location of
+the wall at `2`, and this proof's outline are the write-up's. Ours is the formalization, the
+parity descent that replaces the valuation theory, and the reading of the Moser spindle as an
+identity in the order.
 -/
 
 namespace HadwigerNelson
@@ -304,14 +367,14 @@ def lift {S : Type*} [CommRing S] (f : R →+* S) (t : S) (ht : t * t = (b : S) 
     (ht : t * t = (b : S) * t + (c : S)) (x : Quad b c R) :
     lift f t ht x = f x.re + f x.im * t := rfl
 
-@[simp] theorem lift_theta {S : Type*} [CommRing S] (f : R →+* S) (t : S)
+theorem lift_theta {S : Type*} [CommRing S] (f : R →+* S) (t : S)
     (ht : t * t = (b : S) * t + (c : S)) : lift f t ht theta = t := by simp
 
 @[simp] theorem lift_comp_incl {S : Type*} [CommRing S] (f : R →+* S) (t : S)
     (ht : t * t = (b : S) * t + (c : S)) : (lift f t ht).comp incl = f := by
   ext r; simp
 
-@[simp] theorem lift_incl {S : Type*} [CommRing S] (f : R →+* S) (t : S)
+theorem lift_incl {S : Type*} [CommRing S] (f : R →+* S) (t : S)
     (ht : t * t = (b : S) * t + (c : S)) (r : R) : lift f t ht (incl r) = f r := by simp
 
 /-- The nontrivial involution: `θ ↦ b − θ`, with the base conjugated by `g`. -/
@@ -335,9 +398,9 @@ def conjBase (g : R →+* R) : Quad b c R →+* Quad b c R where
 @[simp] theorem conjBase_apply (g : R →+* R) (x : Quad b c R) :
     conjBase g x = ⟨g x.re, g x.im⟩ := rfl
 
-@[simp] theorem conjSwap_incl (g : R →+* R) (r : R) :
+theorem conjSwap_incl (g : R →+* R) (r : R) :
     conjSwap (b := b) (c := c) g (incl r) = incl (g r) := by ext <;> simp
-@[simp] theorem conjBase_incl (g : R →+* R) (r : R) :
+theorem conjBase_incl (g : R →+* R) (r : R) :
     conjBase (b := b) (c := c) g (incl r) = incl (g r) := by ext <;> simp
 
 @[simp] theorem conjSwap_comp_incl (g : R →+* R) :
@@ -346,9 +409,9 @@ def conjBase (g : R →+* R) : Quad b c R →+* Quad b c R where
 @[simp] theorem conjBase_comp_incl (g : R →+* R) :
     (conjBase (b := b) (c := c) g).comp incl = incl.comp g := by
   ext r <;> simp [RingHom.comp_apply]
-@[simp] theorem conjSwap_theta (g : R →+* R) :
+theorem conjSwap_theta (g : R →+* R) :
     conjSwap (b := b) (c := c) g theta = (b : Quad b c R) - theta := by ext <;> simp
-@[simp] theorem conjBase_theta (g : R →+* R) :
+theorem conjBase_theta (g : R →+* R) :
     conjBase (b := b) (c := c) g theta = theta := by ext <;> simp
 
 end Quad
@@ -445,9 +508,9 @@ def ordTau : SeamOrder := Quad.incl Quad.theta
 /-- `i` inside the order. -/
 def ordI : SeamOrder := Quad.theta
 
-@[simp] theorem den_ordOmega : den ordOmega = omega3 := by simp [ordOmega, den, denET, denE]
-@[simp] theorem den_ordTau : den ordTau = tau := by simp [ordTau, den, denET]
-@[simp] theorem den_ordI : den ordI = Complex.I := by simp [ordI, den]
+theorem den_ordOmega : den ordOmega = omega3 := by simp [ordOmega, den, denET, denE]
+theorem den_ordTau : den ordTau = tau := by simp [ordTau, den, denET]
+theorem den_ordI : den ordI = Complex.I := by simp [ordI, den]
 
 /-! ### The two residue maps
 
@@ -1101,15 +1164,24 @@ end FieldWall4
 
 export FieldWall4 (seamSpan seamField seamPlane residueColouring)
 
-open FieldWall4
+open FieldWall4 SimpleGraph Complex
+
+/-- Any set of points with coordinates in `K` is 4-colourable. -/
+theorem colorable_four_of_subset_seamPlane (S : Set ℂ) (hS : S ⊆ seamPlane) :
+    ((unitDistance ℂ).induce S).Colorable 4 := by
+  classical
+  refine ⟨SimpleGraph.Coloring.mk
+    (fun v => Fintype.equivFinOfCardEq FieldWall4.F4.card_eq_four (residueColouring v.1)) ?_⟩
+  intro v w hvw
+  have hd : dist (v : ℂ) (w : ℂ) = 1 := hvw
+  intro heq
+  exact FieldWall4.residueColouring_ne_of_dist_one (hS v.2) (hS w.2) hd
+    ((Fintype.equivFinOfCardEq FieldWall4.F4.card_eq_four).injective heq)
 
 /-- **Theorem B.** Every unit-distance graph drawn in `ℚ(√3, √11)²` is 4-colourable. -/
 theorem four_colorable_of_seam_field :
-    ((unitDistance ℂ).induce seamPlane).Colorable 4 := by sorry
-
-/-- The subset form: any set of points with coordinates in `K` is 4-colourable. -/
-theorem colorable_four_of_subset_seamPlane (S : Set ℂ) (hS : S ⊆ seamPlane) :
-    ((unitDistance ℂ).induce S).Colorable 4 := by sorry
+    ((unitDistance ℂ).induce seamPlane).Colorable 4 :=
+  colorable_four_of_subset_seamPlane seamPlane (subset_refl _)
 
 /-! ### The consequence that stopped a campaign
 
@@ -1128,9 +1200,17 @@ theorem not_separated_five_of_subset_seamPlane {S : Set ℂ} (hS : S ⊆ seamPla
     ¬ Separated ((unitDistance ℂ).induce S) 5 p q :=
   not_separated_of_colorable (colorable_four_of_subset_seamPlane S hS) hadj
 
-/-! ### The lower bound: the Moser spindle is an identity in the order -/
+/-! ### The lower bound: the Moser spindle is an identity in the order
+
+`ζ₆ = 1 + ω`, `ζ₃ = ω`, `i√3 = 1 + 2ω`, and `9ρ = 7 − ω + T + 2ωT` for the Moser twist
+`ρ = (5 + i√11)/6`. So all seven spindle points are `den x / 9` for explicit `x : SeamOrder`, and
+because `den` is a ring homomorphism intertwining the two conjugations, each of the eleven unit
+distances is the single identity `(xᵢ − xⱼ) · conj (xᵢ − xⱼ) = 81` in the order — eight integers,
+decided by the kernel. No `Real.sqrt` manipulation appears in this section at all. -/
 
 namespace FieldWall4
+
+open Complex
 
 /-- `9ρ`, where `ρ = (5 + i√11)/6` is the Moser twist: `9ρ = 7 − ω + T + 2ωT`. -/
 def rho9 : SeamOrder := 7 - ordOmega + ordTau + 2 * ordOmega * ordTau
@@ -1142,28 +1222,182 @@ def spindleOrd : Fin 7 → SeamOrder :=
     rho9 * (1 + ordOmega), rho9 * ordOmega, rho9 * (1 + 2 * ordOmega)]
 
 /-- The seven points themselves. -/
-noncomputable def spindlePt (i : Fin 7) : ℂ := den (spindleOrd i) * (1 / 9)
-
-/-- The eleven unit distances, as one identity in the order. -/
-theorem spindleOrd_norm (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i j) :
-    (spindleOrd i - spindleOrd j) * conj (spindleOrd i - spindleOrd j) = (81 : SeamOrder) := by
-  sorry
-
-theorem spindlePt_mem (i : Fin 7) : spindlePt i ∈ seamPlane := by sorry
-
-theorem spindlePt_dist (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i j) :
-    dist (spindlePt i) (spindlePt j) = 1 := by sorry
+noncomputable def spindlePt (i : Fin 7) : ℂ := ((1/9 : ℚ) : ℂ) * den (spindleOrd i)
 
 /-- The twist really is `(5 + i√11)/6` — the spec check that pins `rho9`. -/
-theorem den_rho9 : den rho9 = 9 * FieldWall.moserTwist := by sorry
+theorem den_rho9 : den rho9 = 9 * FieldWall.moserTwist := by
+  rw [rho9]
+  simp only [map_add, map_sub, map_mul, map_ofNat, den_ordOmega, den_ordTau]
+  apply Complex.ext <;>
+    simp [omega3, tau, FieldWall.moserTwist, Complex.mul_re, Complex.mul_im] <;>
+    nlinarith [sq_sqrt3, sq_sqrt33, sqrt3_mul_sqrt33, Real.sq_sqrt (by norm_num : (0:ℝ) ≤ 11)]
+
+private theorem spindleOrd_norm_aux : ∀ i j : Fin 7,
+    (i ≠ j ∧ ((i, j) ∈ moserSpindleEdges ∨ (j, i) ∈ moserSpindleEdges)) →
+      (spindleOrd i - spindleOrd j) * conj (spindleOrd i - spindleOrd j) = (81 : SeamOrder) := by
+  decide
+
+/-- **The eleven unit distances, as one identity in the order.** -/
+theorem spindleOrd_norm (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i j) :
+    (spindleOrd i - spindleOrd j) * conj (spindleOrd i - spindleOrd j) = (81 : SeamOrder) :=
+  spindleOrd_norm_aux i j h
+
+private theorem dist_eq_one_of_normSq {z w : ℂ} (h : normSq (z - w) = 1) : dist z w = 1 := by
+  rw [Complex.dist_eq]
+  have h2 : ‖z - w‖ ^ 2 = 1 := by rw [Complex.sq_norm, h]
+  nlinarith [norm_nonneg (z - w)]
+
+theorem spindlePt_mem (i : Fin 7) : spindlePt i ∈ seamPlane :=
+  seamPlane_ratMul (den_mem_seamPlane _) _
+
+theorem spindlePt_dist (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i j) :
+    dist (spindlePt i) (spindlePt j) = 1 := by
+  refine dist_eq_one_of_normSq ?_
+  set u : SeamOrder := spindleOrd i - spindleOrd j with hu
+  have hden : normSq (den u) = 81 := by
+    have h1 : den u * (starRingEnd ℂ) (den u) = (81 : ℂ) := by
+      rw [← den_conj, ← map_mul, hu, spindleOrd_norm i j h, map_ofNat]
+    rw [Complex.mul_conj] at h1
+    exact_mod_cast h1
+  have hsub : spindlePt i - spindlePt j = ((1/9 : ℚ) : ℂ) * den u := by
+    rw [spindlePt, spindlePt, hu, map_sub]; ring
+  rw [hsub, map_mul, hden]
+  rw [show normSq (((1/9 : ℚ) : ℂ)) = 1/81 by
+    rw [show (((1/9 : ℚ)) : ℂ) = (1/9 : ℂ) by push_cast; ring]; simp; norm_num]
+  norm_num
 
 end FieldWall4
 
 theorem four_le_chromaticNumber_seamPlane :
-    4 ≤ ((unitDistance ℂ).induce seamPlane).chromaticNumber := by sorry
+    4 ≤ ((unitDistance ℂ).induce seamPlane).chromaticNumber := by
+  have hom : (edgeGraph 7 moserSpindleEdges) →g ((unitDistance ℂ).induce seamPlane) :=
+    { toFun := fun i => ⟨FieldWall4.spindlePt i, FieldWall4.spindlePt_mem i⟩
+      map_rel' := fun {i j} h => FieldWall4.spindlePt_dist i j h }
+  have hmono := chromaticNumber_mono_of_hom hom
+  have hlt : (3 : ℕ∞) < (edgeGraph 7 moserSpindleEdges).chromaticNumber :=
+    lt_chromaticNumber_iff_not_colorable.mpr moserSpindle_not_colorable_three
+  have : (3 : ℕ∞) < ((unitDistance ℂ).induce seamPlane).chromaticNumber := lt_of_lt_of_le hlt hmono
+  rwa [show (4 : ℕ∞) = (3 : ℕ∞) + 1 by rfl, ENat.add_one_le_iff (by decide)]
 
 /-- **`χ(ℚ(√3, √11)²) = 4` exactly.** -/
 theorem chromaticNumber_seamPlane :
-    ((unitDistance ℂ).induce seamPlane).chromaticNumber = 4 := by sorry
+    ((unitDistance ℂ).induce seamPlane).chromaticNumber = 4 :=
+  le_antisymm (chromaticNumber_le_iff_colorable.mpr four_colorable_of_seam_field)
+    four_le_chromaticNumber_seamPlane
+
+
+/-! ## Spec — what would go red if the model drifted
+
+These are the checks that catch a wrong *statement*, which no amount of green elaboration can. `#guard` runs interpreted at elaboration and
+buys no axioms. -/
+
+namespace FieldWall4
+
+section Spec
+
+open Complex
+
+/-! ### The residue table
+
+The four residues of `ζ₆ = 1 + ω`, the Moser twist `ρ` (through `9ρ = rho9`), the seam rotation
+`σ = (√3 + i√33)/6` (through `3σ`) and `τ₅ = (49 + 3i√11)/50` (through `25τ₅`) — the write-up's
+§5.3 table at this file's prime. Each order element is pinned to its complex value first, so the
+residues are residues *of the right numbers*. -/
+
+/-- `3σ`, where `σ = (√3 + i√33)/6` is the seam rotation. -/
+def sigma3 : SeamOrder := -ordI - ordOmega * ordI + ordI * ordTau
+
+/-- `25τ₅`, where `τ₅ = (49 + 3i√11)/50` is the rotation of the distance-5 spindle. -/
+def tauFive25 : SeamOrder := 24 - ordOmega + ordTau + 2 * ordOmega * ordTau
+
+theorem den_sigma3 : den sigma3 = ⟨Real.sqrt 3 / 2, Real.sqrt 33 / 2⟩ := by
+  rw [sigma3]
+  simp only [map_add, map_sub, map_mul, map_neg, den_ordOmega, den_ordTau, den_ordI]
+  apply Complex.ext <;> simp [omega3, tau, Complex.mul_re, Complex.mul_im]
+  ring
+
+theorem den_tauFive25 : den tauFive25 = ⟨49 / 2, 3 * Real.sqrt 11 / 2⟩ := by
+  rw [tauFive25]
+  simp only [map_add, map_sub, map_mul, map_ofNat, den_ordOmega, den_ordTau]
+  apply Complex.ext <;>
+    simp [omega3, tau, Complex.mul_re, Complex.mul_im] <;>
+    nlinarith [sq_sqrt3, sq_sqrt33, sqrt3_mul_sqrt33]
+
+-- `ζ₆ ↦ Ω²`, `ρ ↦ Ω²`, `σ ↦ Ω²`, `τ₅ ↦ Ω`. See the module docstring on why the write-up's table
+-- reads differently: it fixes the other prime.
+#guard psiZero (1 + ordOmega) == (⟨1, 1⟩ : F4)
+#guard psiZero rho9 == (⟨1, 1⟩ : F4)
+#guard psiZero sigma3 == (⟨1, 1⟩ : F4)
+#guard psiZero tauFive25 == (⟨0, 1⟩ : F4)
+
+-- The other prime disagrees on `ρ` and `τ₅` — the two maps are genuinely different.
+#guard psiOne rho9 == (⟨0, 1⟩ : F4)
+#guard psiOne tauFive25 == (⟨1, 1⟩ : F4)
+
+/-! ### The spindle, coloured
+
+The seven Moser-spindle points get residues `0, Ω², Ω, 1, Ω, 1, Ω²`; all four colours appear, and
+adjacent points differ. This is the colouring doing its job on the object that forces four. -/
+
+#guard ((List.finRange 7).map fun i => psiZero (spindleOrd i))
+  == [(⟨0, 0⟩ : F4), ⟨1, 1⟩, ⟨0, 1⟩, ⟨1, 0⟩, ⟨0, 1⟩, ⟨1, 0⟩, ⟨1, 1⟩]
+
+#guard (((List.finRange 7).map fun i => psiZero (spindleOrd i)).dedup).length == 4
+
+/-- The eleven edges of the spindle get distinct residues. -/
+example : ∀ i j : Fin 7, (i ≠ j ∧ ((i, j) ∈ moserSpindleEdges ∨ (j, i) ∈ moserSpindleEdges)) →
+    psiZero (spindleOrd i) ≠ psiZero (spindleOrd j) := by decide
+
+/-! ### Certifying a point of `K²`
+
+The path a consumer walks: `mem_seamPlane_iff`, then the `Subfield` API over the three generators. -/
+
+example : (⟨1/2, Real.sqrt 3 / 2⟩ : ℂ) ∈ seamPlane := by
+  have h2 : (2 : ℝ) ∈ seamField := by
+    have h := seamField.add_mem seamField.one_mem seamField.one_mem
+    rwa [show (1 : ℝ) + 1 = 2 by norm_num] at h
+  have hhalf : (2 : ℝ)⁻¹ ∈ seamField := seamField.inv_mem h2
+  refine mem_seamPlane_iff.mpr ⟨?_, ?_⟩
+  · show (1/2 : ℝ) ∈ seamField
+    rw [one_div]; exact hhalf
+  · show (Real.sqrt 3 / 2 : ℝ) ∈ seamField
+    rw [div_eq_mul_inv]; exact seamField.mul_mem sqrt3_mem hhalf
+
+/-! ### Negative controls
+
+Each of these is a mutation of a load-bearing statement, and each must be *false*. -/
+
+-- The descent's hypothesis is not vacuous: `1` is not killed by the residue map, so
+-- `exists_mul_onePlusI` does not apply to it.
+#guard psiZero 1 != (0 : F4)
+
+-- The norm identity is exact: `80` is refuted where `81` is proved.
+example : (spindleOrd 0 - spindleOrd 1) * conj (spindleOrd 0 - spindleOrd 1) ≠ (80 : SeamOrder) := by
+  decide
+
+-- `F4` really has four elements and characteristic two — the two facts the whole argument turns on.
+#guard Fintype.card F4 == 4
+example : (2 : F4) = 0 := by decide
+
+-- The order is not the whole plane: `1/2` has an even denominator, so the coset machinery is not
+-- dead code. (`m · (1/2) = den x` with `m` odd would put a half-integer coordinate in `ℤ`.)
+example : ((1/2 : ℚ) : ℂ) ∈ seamPlane :=
+  ⟨⟨1/2, 0, 0, 0, by simp⟩, ⟨0, 0, 0, 0, by simp⟩⟩
+
+end Spec
+
+end FieldWall4
+
+/-! ### The distance-2 red, on the plane
+
+A pair at distance `2` gets **one** colour, so the same construction cannot 4-colour the
+`{1, 2}`-distance graph — which is as it must be: Exoo–Ismailescu's 6-chromatic `{1, 2}`-graph has
+all of its coordinates in `K`. -/
+
+example : residueColouring 0 = residueColouring 2 := by
+  refine FieldWall4.residueColouring_eq_of_dist_two ?_ ?_ ?_
+  · exact ⟨⟨0, 0, 0, 0, by norm_num⟩, ⟨0, 0, 0, 0, by norm_num⟩⟩
+  · exact ⟨⟨2, 0, 0, 0, by norm_num⟩, ⟨0, 0, 0, 0, by norm_num⟩⟩
+  · rw [Complex.dist_eq]; norm_num
 
 end HadwigerNelson

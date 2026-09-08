@@ -1019,6 +1019,29 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms core23_colorable_seven
 #print axioms Coset.seven_le_card_gap
 
+/-! ## B1 — Theorem B in the kernel: `χ(ℚ(√3, √11)²) = 4`
+
+The residue colouring of the plane over the seam field, the theorem that halted the M53 descent.
+The headline, its subset form, the exact chromatic number, the two spare-colour consequences, and
+the pieces a reader checks the model against: the colouring's properness, its distance-2
+degeneracy, `den`'s injectivity, the descent, and the spindle's eleven unit distances. -/
+
+#print axioms four_colorable_of_seam_field
+#print axioms colorable_four_of_subset_seamPlane
+#print axioms chromaticNumber_seamPlane
+#print axioms four_le_chromaticNumber_seamPlane
+#print axioms not_forces_five_of_subset_seamPlane
+#print axioms not_separated_five_of_subset_seamPlane
+#print axioms FieldWall4.residueColouring_ne_of_dist_one
+#print axioms FieldWall4.residueColouring_eq_of_dist_two
+#print axioms FieldWall4.den_injective
+#print axioms FieldWall4.exists_mul_onePlusI
+#print axioms FieldWall4.mem_oddDenom_of_unit
+#print axioms FieldWall4.psi_comp_conj
+#print axioms FieldWall4.spindleOrd_norm
+#print axioms FieldWall4.spindlePt_dist
+#print axioms FieldWall4.den_rho9
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
