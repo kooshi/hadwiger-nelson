@@ -1,0 +1,19 @@
+{
+ "kind": "fplane-alpha",
+ "p": 23,
+ "n": 529,
+ "degree": 24,
+ "wall": 7200,
+ "rows": [
+  {
+   "N": 106,
+   "status": "unknown",
+   "seconds": 7200.0
+  }
+ ],
+ "alpha_ge": 69,
+ "alpha_le": null,
+ "independent_set": null,
+ "provenance": "the opening scratch build/m61/alpha.py (the same CNF the instrument writes: edge clauses + a sequential-counter 'at least N' + the origin pinned) under the external cadical, 2-h wall, desktop; alpha_ge = 69 is the periodic lift's three null lines (data/fplane/periodic-below-71.json, verified independent)",
+ "claim_scope": "alpha_ge: a verified independent set (three null lines); size 106 = \u2308p\u00b2/5\u2309 UNDECIDED at a 7200-s wall \u2014 the fractional face neither meets nor refutes the 5-colouring's necessary condition at 23; Hoffman gives \u03b1 \u2264 131"
+}

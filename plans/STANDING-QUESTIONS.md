@@ -812,3 +812,10 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   undecided asks on the grown witness, 51 have residue difference of norm 1 at 11 — the residue-allowed class — against a uniform
   1/11; they are 41 distinct exact squared distances, 41 of them cross–cross pairs. If structural (the critical-set localization and
   the residue theorem selecting overlapping populations), the residue filter is weakest exactly where the localization admits.
+* **T45 — the 19 → 23 cliff.** (M61 §R5.) The 5-colouring at 19 (361 vertices) took 18 s and an independent set of 76 (21 %) 200 s;
+  at 23 (529 vertices) neither a 5-colouring (4 h, pinned clique) nor an independent set of 106 (20 %, 2 h) returned. ϑ = Hoffman at
+  both, ω = 2 at 19 and 3 at 23. Is the cliff the value (χ(23) = 6 and the instances are refutations in disguise) or the encoding (a
+  symmetric or cube-split instance decides in minutes)? FS-17's first phase.
+* **T46 — is any finite Euclidean plane exactly 6-chromatic?** (M61, the conjecture's first digit.) Candidates 23, 31, 43, 47 (χ ∈ {5, 6}),
+  59, 67, 79, 83 (≥ 6). Under T1 a plane at 6 names the 6-chromatic fields by congruences; none at 6 (all small planes 5, all others ≥ 7)
+  says no field plane is exactly 6-chromatic. G48 decouples this from the mechanism: the answer is integrality-carried.

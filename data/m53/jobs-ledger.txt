@@ -104,3 +104,4 @@
 2026-09-07T23:47:38Z M61 records chain launched (theta, periodic ≤ 71, equivariant 11/19) → build/m61/records.log
 2026-09-07T23:59:45Z M61: lint fixes; gate chain #2 launched; equivariant rerun with at-most-one (11, 19) → build/m61/equiv.log; half-turn CNF at 23 re-dumped with AMO (chain still waiting on alpha(23))
 2026-09-08T00:00:15Z M61: fplane.py chi --q 27 (F_27 plane, 20M-conflict budget per k) → build/m61/chi-q27.log
+2026-09-08T00:16:19Z M61: alpha(23) >= 106? UNKNOWN at 7200 s (record data/fplane/alpha-p23.json); half-turn at 23 running (1-h wall, started 00:15:48Z); alpha ladder at 19 launched (800-s wall) → build/m61/alpha19.log

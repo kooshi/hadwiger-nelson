@@ -563,3 +563,155 @@ Every output line names its population and its trust word ("verified colouring" 
 The report to Kooshi: the house format; the headline carries the population and the trust of each verdict (G21); §S5's derivation
 is the product and is stated first, in one paragraph a reader with no context can follow, with the six attained rows as its
 instances and the 6-level's reduction as its consequence.
+
+## §R. Results (M61, 2026-09-07/08 — the local–global tightness conjecture, opened)
+
+### §R0. What shipped
+
+**Kernel** (`Proofs/HadwigerNelson/LocalGlobal.lean`, `Instances/LocalGlobal19.lean`; gate GREEN twice — build OK, `#print axioms`
+**648 clean on `[propext, Classical.choice, Quot.sound]` with the 5 declared purchases unchanged**, lint passed; the whole theory
+elaborates in seconds):
+
+| piece | declarations |
+|---|---|
+| the circle and the quadrance named | `unitCircle`, `quadrance` (reducible), `unitQuadrance_eq_addCayley`, `mem_unitCircle` |
+| the periodic quotient | `addCayleyMap` (an additive hom whose kernel misses `S` is a Cayley hom into any `D ⊇ π '' S`), `colorable_of_addCayleyMap`, `addCayleyColoring` (a table proper along `D` is a colouring), `periodic_comp_of_mem_ker`, `decidablePeriodic`, **`Forces.eq_of_forall_exists_not_periodic`** (colourings with no common nonzero period refute every forced pair), `projAlong` (the projection along a direction) with `projAlong_apply`, `projAlong_self`, **`unitQuadrance_colorable_of_quotient`** |
+| the counting bound | `card_le_mul_of_colorable`, `card_le_mul_indepNum_of_colorable`, `not_colorable_of_mul_lt`, **`card_le_chromaticNumber_mul_indepNum`** (`card ≤ χ · α` in `ℕ∞`) |
+| the spindle escapes its prime | `sq_add_sq_eq_zero_iff`, `quadrance_eq_zero_iff` (no isotropic vectors at `p ≡ 3 (mod 4)`), **`isSquare_neg_one_of_spindle_radicand`** (a hom into a field killing `d` while `R ∋ √(4d − 1)·e` makes `−1` a square), `no_ringHom_of_spindle_radicand`, `quadrance_sub_eq_zero_of_map_eq`, **`Forces.no_hom_of_spindle_radicand`**, **`Forces.isEmpty_ringHom_of_spindle_radicand`** |
+| specs and reds | `ℤ[√11] →+* ZMod 3` and `ℤ[√43] →+* ZMod 11` empty; `ℤ[√3] →+* ZMod 11` and `ℤ[√11] →+* ZMod 11` inhabited; at `5` the isotropic `(1, 2)` and `ℤ[√19] →+* ZMod 5`; at `7` the non-null direction `(1, 1)` |
+| the 19 instance | `circ19D`, `circ19_ker`, `circ19_image`, `circ19Table` (19 entries), `circ19_proper`, **`finitePlane19_colorable_five`**, **`chromaticNumber_finitePlane19_le_five`**, the period `(1, 1)`, `lines19` (four null lines, `lines19_card = 76`), **`lines19_isIndepSet`**, `indepNum_finitePlane19_ge : 76 ≤ α` |
+| the 11 control | `circ11D`, `circ11_ker`, `circ11_image`, `circ11Table` (six colours), `circ11_proper`, `finitePlane11_colorable_six_periodic`, the moved-entry red |
+| the 3-plane and the model | `finitePlane3ColouringDiff` (`(x − y) mod 3`) beside M60's sum table, both proper, `finitePlane3_no_common_period`, **`finitePlane3_forces_iff`** (M60's shape at `3`), the singleton example re-deriving the 11 fact through the family lemma, `rhombusIn3` (`rhombusIn3_adj`), the residue coincidence `rhombusIn3 0 = rhombusIn3 3` by `rfl`, **`rhombus_spindle_no_hom_3`**, the `#guard` on the radicand's unsatisfiability in `ZMod 3` |
+| the 11 instance | **`Forces.no_hom_of_spindle_radicand_11`**, **`Forces.isEmpty_ringHom_of_spindle_radicand_11`** |
+
+**Instrument** (`tools/fplane.py`): `periodic` (the circulant of a null direction, every lifted colouring and independent set
+verified on the plane), `theta` (ϑ and ϑ′ by the norm-class LP, Hoffman as the control), `alpha` (the independence ladder under
+the external cadical), `equivariant` (rotation-equivariant colourings, verified proper AND equivariant under enforced
+at-most-one), `chi --q 27` (the odd-degree plane); 27 self-test controls green. **Records** (`data/fplane/`): `theta-below-83`,
+`periodic-below-71`, `equivariant-p11-k5`, `equivariant-p19-k5`, `alpha-p11`, `alpha-p19`, `alpha-p23`, `chi-q27` (the last
+three filled at the close, §R8). **Plan**: §S with the derivations, §M1–§M3, this §R. **Bibliography**: `[Lovasz1979]`.
+
+### §R1. The derivations, and what the measurements added
+
+1. **The mechanism of tightness (§S5) is a theorem, and it is two lines.** Over a field sealed at `k` by a usable prime `𝔭` whose
+   plane is pairwise free, a pair forced equal at `k` colours has `𝔭 ∣ d²` (M60); the spindle over the pair adjoins `√(4d² − 1)`,
+   and `4d² − 1 ≡ −1 (mod 𝔭)`, so every prime of the new field above `p` acquires `√−1` in its residue field — `p` stops being
+   usable. **The forcer's own construction removes exactly the prime that gave the bound it beats.** In the kernel as
+   `Forces.isEmpty_ringHom_of_spindle_radicand`: a graph forcing a pair at `k` colours, drawn in a ring holding that pair's spindle
+   radicand, has NO ring hom to `ZMod p` for any `p ≡ 3 (mod 4)` whose plane is `k`-forces-free. Every attained row of §2 is an
+   instance (the Moser spindle: `11 = 4·3 − 1` at `3`; de Grey's and Haugland's `√15` at `2`; T20's `√247`), and the 6-level reduces
+   to ONE question — *does a 5-sealed field carry a 5-rigid pair?* — with the pair's distances named (`11 ∣ d²`) and the spindle's
+   field named (`√43`, `√131`, `5√7`, `√10`, …: each `≡ √−1 (mod 11)`).
+2. **Every linear relaxation of the first digit collapses to Hoffman's bound.** The plane is arc-transitive, so `ϑ = ϑ′ = Hoffman`
+   (Lovász, Theorem 9) — measured equal at eleven primes to `2·10⁻¹⁰`. Below `59` the first digit (`χ ∈ {5, 6}` at 23, 31, 43,
+   47) is therefore integrality-carried: the finite planes reproduce the real plane's pathology exactly (G24), and the only
+   relaxation that could reach `6` is `α` itself by a cardinality refutation.
+3. **Periodic colourings are the finite lattice colourings, and the wrong family from 23 on.** `χ_per(p) = χ(C_p)` = 3, 4, **6**,
+   5, 8, 8, 8, [9–10], [9–10], [9–12], [9–12] at 3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71 (every `hi` a lifted colouring verified on
+   the plane; every `lo` the solver's). The 11-plane's five is non-periodic (M60's aperiodicity was necessary); the 19-plane's five
+   is periodic and became a 19-entry kernel certificate; from 23 on no periodic colouring reaches the Hoffman floor's neighbourhood.
+4. **The symmetric colourings narrow with `p`.** Equivariant 5-colourings (`col ∘ r = τ ∘ col`) exist at 11 for rotations of
+   order 2 and 3, at 19 only for the half-turn with a colour double-swap; at 23 every rotation of order ≥ 3 and the half-turn with
+   the identity or a single swap are refused in ≤ 2 s, and the half-turn with a double swap is the one open instance (§R8). The
+   solver's own colourings at 11 and 19 have trivial equivariance groups — the symmetric colourings exist beside them, unseen.
+5. **The odd-degree face of the sieve.** `UD(𝔽₂₇, 2)` (729 vertices, degree 28) refuses four colours (the solver's, 7 s); five is
+   undecided at the budget. So a cubic field whose prime above 3 has residue degree 3 — Haugland's heptagonal field — gets no
+   bound below 5 from 3.
+
+### §R2. The kernel, read aloud against the claims
+
+* `chromaticNumber_finitePlane19_le_five` says the 19-plane HAS a 5-colouring — the nineteen-entry table lifted along `(1, 1)`;
+  it does not say `χ = 5` (the refusal of four is the solver's, `chi-p19-k4.json`). The plane is the second finite plane in the
+  kernel; its certificate is a hundredth of the 361-entry table's size and carries a period.
+* `indepNum_finitePlane19_ge` says `α ≥ 76` by an exhibited set; `α ≤ 77` (78 unknown) is the solver's silence, not a theorem.
+* `Forces.isEmpty_ringHom_of_spindle_radicand` says: for a ring `R` in which the graph is drawn and which holds `x, e` with
+  `x² = (4·quadrance(g u − g v) − 1)·e²`, `e` a unit — no ring hom `R →+* ZMod p`. It does NOT say the FIELD of the spindled graph
+  has no prime above `p` of odd residue degree; that is the hand argument (§S5), exactly as M58's integrality of unit vectors is.
+  Its hypothesis `hfree` (the plane forces no pair at `k` colours) is a theorem at `11` and `3` and can only hold when the plane is
+  `k`-colourable.
+* `card_le_chromaticNumber_mul_indepNum` is unconditional; its consumer — a certified `α < ⌈p²/5⌉` — does not exist yet.
+* `finitePlane3_forces_iff` and `finitePlane11_forces_iff` now read alike: the sealing planes at 3 and 11 force no pair at their
+  own chromatic number, the first by two tables with no common period, the second by one aperiodic table.
+
+### §R3. The measurements
+
+| object | result | population / conditioning | trust | record |
+|---|---|---|---|---|
+| ϑ, ϑ′ of UD(𝔽_p, 2), p ∈ {11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83} | ϑ = ϑ′ = Hoffman's α-bound, \|ϑ − Hoffman\| ≤ 2·10⁻¹⁰; χ ≥ 4, 4, 5, 5, 5, 5, 6, 6, 7, 6, 6 | the LP over the p − 1 norm classes (Kloosterman eigenmatrix) | a float LP (HiGHS) + Lovász's theorem, recalled and measured | `theta-below-83` |
+| the periodic quotient C_p, p ≤ 71 | χ(C_p) = 3, 4, 6, 5, 8, 8, 8, [9,10], [9,10], [9,12], [9,12]; α(C_p) = 1, 2, 2, 4, 3, 4, 6, 5, 6, 6, 6 → α(UD) ≥ 3, 14, 22, 76, 69, 124, 258, 235, 354, 402, 426 | one null direction per prime (all are one rotation orbit); 2·10⁶-conflict budgets | every `hi` and every independent set VERIFIED on the plane after lifting; every `lo` the solver's | `periodic-below-71` (19 and the 11 six-colouring in the kernel) |
+| α(UD(𝔽₁₁, 2)) | **28** | the ladder 27, 28 SAT; 29 refused | 28: a verified set; the refusal (92 s) the solver's | `alpha-p11` |
+| α(UD(𝔽₁₉, 2)) | **≥ 76**; 77–78 undecided at 800 s | the ladder from 71 | 76: a verified set (also `lines19` in the kernel); above: silence | `alpha-p19` |
+| α(UD(𝔽₂₃, 2)) ≥ 106 = ⌈p²/5⌉? | **UNDECIDED at 7200 s** (external cadical) | one cardinality instance, the origin pinned | silence — neither the 5-colouring's necessary condition nor its refutation; α ∈ [69, 131] | `alpha-p23` |
+| equivariant 5-colourings at 11 | rotation orders 2 (τ a transposition or a double transposition) and 3 (τ a 3-cycle) SAT; orders 4, 6, 12 refused for every τ | one rotation per order, one τ per conjugacy class; 5·10⁶ conflicts | SAT: verified proper and equivariant; UNSAT: the solver's (fixed-point-free τ: trivial) | `equivariant-p11-k5` |
+| equivariant 5-colourings at 19 | only the half-turn with τ a double transposition; orders 4, 5, 10, 20 and the half-turn with id / a single swap refused | as above | as above | `equivariant-p19-k5` |
+| equivariant 5-colourings at 23 | every rotation of order 3, 4, 6, 8, 12, 24 refused for every τ (≤ 2 s each); the half-turn with id / a single swap refused; **the half-turn with a double swap: see §R8** | the opening scratch (an encoding without at-most-one, whose REFUSALS are sound: the relaxation refused) | the solver's | `build/m61/partF.log`; the sound rerun of the surviving instance under the external cadical, §R8 |
+| the solver's colourings at 11 and 19 (`chi-p11`, `chi-p19-k5`) | equivariance group under 𝔽_p² ⋊ O(2): trivial | all 2p²(p+1) automorphisms tested | exact | `build/m61/derive.py C` |
+| UD(𝔽₂₇, 2) | ≥ 5: four colours refused (7 s); five: see §R8 | 729 vertices, degree 28; 𝔽₂₇ = 𝔽₃[t]/(t³ − t − 1) | the solver's | `chi-q27` |
+
+### §R4. Registered predictions, scored
+
+| # | prediction | verdict |
+|---|---|---|
+| P1 | 23, 31, 43, 47 are 5-chromatic; 59 is 6-chromatic | **undecided** — no plane's first digit moved; what moved is the shape of the question (§R7) |
+| P1a | the half-turn family at 23 is SAT | §R8 |
+| P2 | first half MET (M60); second half settled by derivation: pairs at distances 3 and 4 have r = 9, 16 ≢ 1 (mod 11), so they are NEVER virtual edges at five colours over a sealed field — the opposite of the stub's reading | **settled, by derivation** |
+| P3 | T1 fails nowhere among the fields held | unchanged (no field's χ moved) |
+| P4 | ϑ = Hoffman at every prime | **MET** (eleven primes, 2·10⁻¹⁰) |
+| P5 | α(23) ≥ 106 | **undecided** (2 h wall) — the calibration's expectation "likely SAT" met a hardness cliff between 19 (200 s) and 23 |
+| P6 | no rotation-equivariant 5-colouring of order ≥ 3 at 23; the same at 31, 43, 47 | **MET at 23** (every order ≥ 3 refused in ≤ 2 s); 31, 43, 47 NOT RUN |
+| P7 | χ(C_p) ≥ 6 for every p ≥ 23 | **MET to 71** (χ(C_p) ≥ 8 from 23) |
+| P8 | χ(UD(𝔽₂₇, 2)) = 5 | four refused; five §R8 |
+
+### §R5. Incidents and instrument facts
+
+1. **The equivariance encoding was loose, and the instrument's own check caught it on the first record run.** The scratch
+   SAT for `col(r z) = τ(col z)` enforced at-least-one colour per vertex but not at-most-one; a vertex with two true colours can
+   satisfy the equivariance clauses while the CHOSEN colouring (the first true colour) is not equivariant. The promoted
+   instrument asserts equivariance on every model and fired (`INSTRUMENT CATASTROPHE`) on the order-3 case at 11. Fixed: at-most-one
+   enforced in the equivariant instance (the plain colouring instance needs none — any true colour is a proper choice), a τ
+   without a fixed colour refuses trivially (the origin is fixed by every rotation), a self-test control added. **Corrected
+   verdicts**: the opening scratch's "order 6 at 11" was the artifact (its τ = 3-cycle × transposition has no fixed colour); orders
+   2 and 3 at 11 stand (verified equivariant colourings); every REFUSAL of the loose encoding stands (a relaxation's refusal is
+   the strict problem's). The half-turn CNF at 23 was re-dumped with at-most-one BEFORE its chained run started. **G21, again:
+   a SAT verdict is a statement about the encoding's acceptance set, and a model must be checked against the property it was asked
+   for, not only against properness.**
+2. **The kernel caught a transcription in the four-line independent set** (§M2): `{0, 4, 8, 12}` was the circulant's set in the
+   scratch projection's coordinate `(y − x)/2`; under `projAlong (1, 1)` it is `{0, 5, 8, 16}`. `decide` refused the wrong set.
+3. **The α ladder at 23 met a wall the calibration did not predict**: 106 of 529 (20 %) undecided at two hours where 76 of 361
+   (21 %) took 200 s — the independence question has the same cliff between 19 and 23 as the colouring question (P5's "likely
+   SAT" was a reading; recorded as undecided).
+4. The standing rules paid: pysat's wall is inert on big instances (the external cadical under `timeout` throughout); a bare `rw`
+   on an abbrev has nothing to rewrite (`show`); an implicit argument unconstrained by a lemma's conclusion must be named for
+   `linear_combination` (`y := b`); a `Fact` instance must precede the spec that needs it or the error reads as "metavariables".
+5. `lint`: an unused `[DecidableEq V]` on the counting lemmas (the fibres are over `Fin k`) and a missing docstring — two edits,
+   gate rerun, green.
+
+### §R6. What the milestone did not do
+
+* **Decide any first digit.** 23, 31, 43, 47 stay at χ ∈ {5, …}; cube-and-conquer over the origin's neighbourhood was PRICED
+  (four disjoint hexagons at 23, `732⁴ ≈ 3·10¹¹` cubes before symmetry, ~`2.5·10⁸` after O(2) and the palette) and NOT run —
+  above a day, per the §S8 clause. The equivariant sweeps at 31, 43, 47 and the six-colour question at 59 were not run.
+* **The odd-degree plane's five** (UD(𝔽₂₇, 2)): see §R8; the larger odd-degree planes are ≥ 6 by Weil + Hoffman (no row needed).
+* **The field-level statement** of §S5 (every prime of F(√(4d² − 1)) above p has even residue degree) stays a hand argument, as
+  M58's integrality does; the kernel holds the ring-level mechanism and its consumer.
+* **Phase C** (the gluing obstruction, §S6): notes only, as registered.
+* The converse of the periodic quotient (a periodic proper colouring of the plane is a colouring of the circulant) is not in the
+  kernel; it is needed only to READ a solver refusal of the circulant, whose antecedent is not certified.
+
+### §R7. What this changes for the hunt
+
+1. **Tightness has a mechanism, and it is arithmetic in one line**: forced-equal at `k` colours over a sealed field ⟹ `𝔭 ∣ d²`
+   (M60) ⟹ the spindle adjoins `√(4d² − 1) ≡ √−1 (mod 𝔭)` ⟹ `p` is unusable in the forcer's field (kernel: the ring-level
+   composition; hand: the residue degrees). The local bound is attained one level up because the forcer removes exactly the prime
+   that sealed it — never a coincidence of fields. **The 6-level reduces to one question: does any 5-sealed field carry a pair forced
+   equal at five colours?** Its distances are named (`11 ∣ d²` over Heule's field, K(√247), K(√23)), its spindle fields are named
+   (`ℚ(√3, √5, √11, √43)` for a forced `√11`-pair, …), and those fields are 6-open BY CONSTRUCTION — so T1's prediction of "the
+   forcer's field" is exact, and FS-6/FS-16's design vocabulary gains the forced-equal side beside M60's virtual-edge side.
+2. **The first digit is integrality-carried below 59 and has no periodic or symmetric shortcut.** ϑ = Hoffman closes every linear
+   relaxation; periodic colourings need ≥ 8 colours from 23 on; rotational symmetry of order ≥ 3 is refused at 23. What decides
+   23–47 is a SAT question with the real plane's own pathology — the finite planes are the right laboratory for "clique-free
+   forcing" (FS-13), and the wrong place to expect a cheap answer.
+3. **The 19-plane joins the kernel by a nineteen-entry periodic table**, and the fractional face is calibrated: not tight at 11
+   (28 against 34.5) or 19 (≥ 76 against 99.5), undecided at 23.
+4. **The sieve's table gains its cubic column**: a residue field 𝔽₂₇ above 3 gives no bound below 5 — Haugland's field is not
+   3-sealed below his object's five.
