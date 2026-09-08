@@ -70,3 +70,80 @@ runs on de Grey's field first.
 
 Medium. It is the only place M57's principle could apply; a negative closes the principle at five colours as a design
 route and hands the question back to FS-2 (what carries forcing without rigidity).
+
+---
+
+## §H. Handoff for the session that opens M62 (written 2026-09-08 at the M61 close, on Kooshi's "FS-6 it is", before his compaction)
+
+**Kooshi's decision, not to be re-decided: the next milestone is M62 = FS-6, this stub, RE-AIMED by G48.** Open it per
+WORKFLOW step 3 onward: `git mv plans/STUB-family-keeping-thickening.md plans/M62-family-keeping-thickening.md`, re-point every
+reference (`grep -rn STUB-family-keeping-thickening CLAUDE.md plans/ tools/` and the memory file), mark the FS-6 row of
+`plans/FRONTIER-STUBS.md` "opened as M62", then the subplan §S with the derivations FIRST (G46), the skeleton, three FRESH modeling
+passes each committed, implement, gate, Frontier, re-rank, report.
+
+**Read, in this order.** (1) `CLAUDE.md` § Frontier — the M60 and M61 paragraphs and G47–G48 (the compulsion face of sealing; the
+mechanism of tightness). (2) This stub §1–§7 and the M58 restriction banner above (F₂₄₇'s half was struck because F₂₄₇ is 5-SEALED —
+under G48 that is no longer a reason to strike it: a 5-sealed field is exactly where the new target lives). (3)
+`plans/M61-local-global-tightness.md` §S5 and §R7 (the mechanism: forced at five over a sealed field ⟹ `11 ∣ d²` ⟹ the spindle
+adjoins `√(4d² − 1) ≡ √−1 (mod 11)` ⟹ the spindle's field is 6-open by construction). (4) `plans/M60-five-colour-residue-obstruction.md`
+§S3 and §R7 (the residue filter `tools/fpcompel.py filter`: a five-colour forced-pair ask over a sealed field is decided by residue in
+milliseconds unless `11 ∣ d²`). (5) `plans/M54-five-colour-dial.md` §R and `plans/M55-absorption.md` §R (the two obstructions a forced
+pair at five colours must clear — the critical set inside the pair's common neighbourhood, and no absorbable 4-colourable piece — and
+the objects that clear the first: the two-core union, the two-spindle full-fabric union, the F₂₄₇ cross-thickened witness whose critical
+set moved). (6) `plans/M57-additive-rigidity.md` §R4–§R5 (the stub's original question, the family-keeping dial, now the secondary
+instrument). (7) `data/fplane/README.md`, `data/m54/`, `data/m55/`, `data/m57/` for every record's licence.
+
+**What G48 changed, in one paragraph.** This stub was minted to ask where M57's principle (make every 5-colouring additive) could
+bite, and it restricted itself to de Grey's field because only a 6-open field can host a 6-forcer. M61 derived that the 6-forcer's
+field is 6-open BY CONSTRUCTION and need not be chosen: over a field sealed at five by the prime 11 (Heule's `ℚ(√3, √5, √11)`, K(√247),
+K(√23)), any pair forced equal at five colours has `11 ∣ d²` (M60's law), and the spindle over it adjoins `√(4d² − 1)`, which is `≡ √−1
+(mod 11)` and so makes 11 inert — the spindled graph lands in a wall-broken, 11-inert field whose every usable prime is ≥ 67, i.e. 6-open.
+**So the design target is a pair forced equal at five colours over a SEALED field, at a distance with `11 ∣ d²`; the spindle then does
+the rest, and the field jumps by itself** — exactly as K's 4-rigid fabric at `8/3` jumped to K(√247). The family-keeping question (a
+nonzero, closed additive family) is one localization of where such a pair can live (G41/G42) and is kept as an instrument, not the target.
+
+**The first derivations to make at opening (G46).**
+
+* **D1 — the forced-distance vocabulary, per sealed field.** Over Heule's field the squared distances realizable between unit-graph points
+  with `11 ∣ d²`: `d² ∈ {11, 33, 44, 99, 11/4, 11/9, 44/9, 11/3, …}` — list which occur among the pairs of the objects we hold (Heule-510
+  and its closure, W and its F₂₄₇ cross lattice at depths 1–2, the two-core union) by exact arithmetic (`fpcompel.py filter --pairs` already
+  reports every pair's residue norm; `0` is the class). Per distance, the spindle's radicand and field: `d² = 11 → √43`; `33 → √131`;
+  `44 → √175 = 5√7`, i.e. **a forced pair at distance `2√11` over Heule's field spindles into ℚ(√3, √5, √7, √11) — de Grey's field, the one
+  6-open field where 5-chromatic material already exists**; `99 → √395`; `11/4 → √10`; `11/9 → √35/3` (K(√5, √35) is 6-open). Derive the
+  Heron/glue conditions (M59 §S1) for each: which of these distances admit a spindle at all in the field (the `d ≥ 1/2` clause is trivial;
+  the field must hold the rotation's cosine `1 − 1/(2d²)`, always rational, so every one does).
+* **D2 — what a five-colour forced pair over a sealed field looks like at the residues.** Its two endpoints reduce to ONE point of
+  UD(𝔽₁₁, 2) (M60), so every pulled-back colouring identifies them for free, and forcing is a statement about the graph's colourings that
+  are NOT pullbacks. Derive: a graph G over Heule's field forces a `√11`-pair at five colours iff every proper 5-colouring of G agrees on the
+  pair; the pullbacks agree automatically; so the question is whether G's colouring space can be confined to (something like) the
+  pullbacks — the finite-plane analogue of M57's additive rigidity ("every colouring is a pullback"). State the exact relation between
+  "all colourings pull back from the plane" and the forced-pair property: the former implies the latter for every `11 ∣ d²` pair at once,
+  and a G whose colourings all pull back is 5-chromatic AND pairwise rigid at every residue-coincident pair. **Is any object we hold
+  pullback-rigid at five?** — a decidable question on Heule-510 (its 5-colourings vs the 121-table's translates and rotations, `fpcompel`'s
+  harvest), on W at 11 (reduce_K), and on the thickened stages. This is the milestone's central computation and it costs colourings, not
+  refutations.
+* **D3 — the residue filter as the ask-pruner.** The five-colour forced-pair sweep on any sealed-field object need only ask the pairs with
+  `11 ∣ d²` (every other pair is separated by a verified colouring — M60): count them on each object before any solver; the M54/M55 sweeps
+  that read 0/0 complete did so over ALL pairs, so their zeros already cover this class — say so, and aim the new asks at objects those
+  sweeps never saw (the depth-2 cross-thickened stage, the Heule closure).
+* **D4 — the family-keeping dial (the stub's own D1–D2), re-scoped to the sealed fields**: on Heule's field and K(√247) the additive family
+  of a thickened stage vs its 5-divisibility, as the secondary localization of where a forced pair can be.
+
+**Phases (proposed; the subplan re-prices).** 0: D1–D3 as exact enumerations on the objects held (a day). A: pullback-rigidity at 11 on
+Heule-510, W, the cross-thickened stages; the pruned forced-pair asks on the objects the M54/M55 sweeps never covered (a day). B: if any
+object is pullback-rigid or any `11 ∣ d²` pair is forced — HALT AND VERIFY (the jackpot protocol: two encodings, exact geometry, the spindle
+built, its field named, the kernel's `Forces.isEmpty_ringHom_of_spindle_radicand_11` instantiated); otherwise the family-keeping dial (the
+stub's phase B) on the sealed fields as the standing instrument. Registered predictions to write at opening: P1 no object we hold is
+pullback-rigid at five (medium-high — G31's floppiness at the top rung); P2 the depth-2 cross-thickened stage carries ≥ 1 pair at `11 ∣ d²`
+(measure); P3 the number of `11 ∣ d²` pairs among a 10,000-point stage is ≲ 1 % of pairs (a 1/11 density heuristic, one norm class of ten).
+
+**Standing rules that bit M61** (so they are not paid again): a property-constrained SAT instance (equivariance, or "every colouring pulls
+back") needs AT-MOST-ONE-colour clauses or its models are proper but not the property — always assert the property on the model
+(`INSTRUMENT CATASTROPHE` on failure); pysat's wall is inert on big instances — the external cadical under `timeout`; a bare `rw` on an
+abbrev has nothing to rewrite (`show`); name an implicit unconstrained by a lemma's conclusion (`(y := b)`); a `Fact` instance before the
+spec that needs it; ALWAYS `./scripts/build.sh`; one heavy job; HALT on an unexplained crash; checkpoint anything over fifteen minutes;
+every headline names its population and its trust (G21); the bibliography rule.
+
+**Machine and tree at the close:** the desktop (32 cores, 125 GB). Nothing in flight. The working branch is `backlog`, which Kooshi
+checked out at the M61 close commit (`main` and `backlog` coincide at `b54942a`); the handoff commit lands on `backlog` — merge or rebase
+is his call. Scratch (gitignored): `build/m61/` (`derive.py`, `alpha.py`, the probes, CNFs, logs).
