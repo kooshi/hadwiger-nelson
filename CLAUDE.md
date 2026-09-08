@@ -1119,7 +1119,7 @@ Hoffman's bound (measured equal at eleven primes to `2·10⁻¹⁰` — every li
 is a colouring of one circulant on `p` vertices (`χ_per = 3, 4, 6, 5, 8, 8, 8, …` at `3, 7, 11, 19, 23, 31, 43, …` — the 11-plane's
 five is non-periodic, the 19-plane's five is periodic and became a **nineteen-entry kernel certificate**, `chromaticNumber_finitePlane19_le_five`,
 and from 23 on the periodic family needs eight); and the symmetric colourings narrow with `p` (equivariant 5-colourings at 11 for rotations
-of order 2 and 3, at 19 only the half-turn with a colour double-swap, at 23 every order ≥ 3 refused in seconds; [HALFTURN]). The
+of order 2 and 3, at 19 only the half-turn with a colour double-swap, at 23 every order ≥ 3 refused in seconds and the last symmetric family — the half-turn with a colour double-swap — refused by the external cadical in 18.5 min: **a 5-colouring of the 23-plane, if one exists, has no rotational symmetry at all**). The
 fractional face is calibrated (α = 28 at 11 against ϑ = 34.5; α ≥ 76 at 19; the instance at 23 undecided at two hours — the
 independence question has the same cliff between 19 and 23 as the colouring question) and its bound `card ≤ χ·α` is in the kernel. The
 odd-degree face of the sieve got its first row: UD(𝔽₂₇, 2) refuses four colours, so a cubic field's inert prime above 3 seals nothing below

@@ -640,27 +640,27 @@ three filled at the close, §R8). **Plan**: §S with the derivations, §M1–§M
 | ϑ, ϑ′ of UD(𝔽_p, 2), p ∈ {11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83} | ϑ = ϑ′ = Hoffman's α-bound, \|ϑ − Hoffman\| ≤ 2·10⁻¹⁰; χ ≥ 4, 4, 5, 5, 5, 5, 6, 6, 7, 6, 6 | the LP over the p − 1 norm classes (Kloosterman eigenmatrix) | a float LP (HiGHS) + Lovász's theorem, recalled and measured | `theta-below-83` |
 | the periodic quotient C_p, p ≤ 71 | χ(C_p) = 3, 4, 6, 5, 8, 8, 8, [9,10], [9,10], [9,12], [9,12]; α(C_p) = 1, 2, 2, 4, 3, 4, 6, 5, 6, 6, 6 → α(UD) ≥ 3, 14, 22, 76, 69, 124, 258, 235, 354, 402, 426 | one null direction per prime (all are one rotation orbit); 2·10⁶-conflict budgets | every `hi` and every independent set VERIFIED on the plane after lifting; every `lo` the solver's | `periodic-below-71` (19 and the 11 six-colouring in the kernel) |
 | α(UD(𝔽₁₁, 2)) | **28** | the ladder 27, 28 SAT; 29 refused | 28: a verified set; the refusal (92 s) the solver's | `alpha-p11` |
-| α(UD(𝔽₁₉, 2)) | **≥ 76**; 77–78 undecided at 800 s | the ladder from 71 | 76: a verified set (also `lines19` in the kernel); above: silence | `alpha-p19` |
+| α(UD(𝔽₁₉, 2)) | **≥ 76**; 77 undecided at 800 s | the ladder from 71 (71–76 SAT in 6, 5, 5, 9, 35, 229 s) | 76: a verified set (also `lines19` in the kernel); above: silence | `alpha-p19` |
 | α(UD(𝔽₂₃, 2)) ≥ 106 = ⌈p²/5⌉? | **UNDECIDED at 7200 s** (external cadical) | one cardinality instance, the origin pinned | silence — neither the 5-colouring's necessary condition nor its refutation; α ∈ [69, 131] | `alpha-p23` |
 | equivariant 5-colourings at 11 | rotation orders 2 (τ a transposition or a double transposition) and 3 (τ a 3-cycle) SAT; orders 4, 6, 12 refused for every τ | one rotation per order, one τ per conjugacy class; 5·10⁶ conflicts | SAT: verified proper and equivariant; UNSAT: the solver's (fixed-point-free τ: trivial) | `equivariant-p11-k5` |
 | equivariant 5-colourings at 19 | only the half-turn with τ a double transposition; orders 4, 5, 10, 20 and the half-turn with id / a single swap refused | as above | as above | `equivariant-p19-k5` |
-| equivariant 5-colourings at 23 | every rotation of order 3, 4, 6, 8, 12, 24 refused for every τ (≤ 2 s each); the half-turn with id / a single swap refused; **the half-turn with a double swap: see §R8** | the opening scratch (an encoding without at-most-one, whose REFUSALS are sound: the relaxation refused) | the solver's | `build/m61/partF.log`; the sound rerun of the surviving instance under the external cadical, §R8 |
+| equivariant 5-colourings at 23 | every rotation of order 3, 4, 6, 8, 12, 24 refused for every τ (≤ 2 s each); the half-turn with id / a single swap refused; **the half-turn with a double swap REFUSED — external cadical, 1,110 s, the sound (at-most-one) encoding, 2,645 variables / 40,205 clauses**: no 5-colouring of the 23-plane has ANY rotational symmetry about a point | the opening scratch (an encoding without at-most-one, whose REFUSALS are sound: the relaxation refused) and the promoted instrument's rerun | the solver's (a 1-h wall never reached) | `equivariant-p23-k5` (the double-swap row from the external run, `build/m61/halfturn-p23-k5.{cnf,out}`) |
 | the solver's colourings at 11 and 19 (`chi-p11`, `chi-p19-k5`) | equivariance group under 𝔽_p² ⋊ O(2): trivial | all 2p²(p+1) automorphisms tested | exact | `build/m61/derive.py C` |
-| UD(𝔽₂₇, 2) | ≥ 5: four colours refused (7 s); five: see §R8 | 729 vertices, degree 28; 𝔽₂₇ = 𝔽₃[t]/(t³ − t − 1) | the solver's | `chi-q27` |
+| UD(𝔽₂₇, 2) | ≥ 5: four colours refused (7 s); five UNKNOWN at 2·10⁷ conflicts (39 min) | 729 vertices, degree 28; 𝔽₂₇ = 𝔽₃[t]/(t³ − t − 1) | the solver's | `chi-q27` |
 
 ### §R4. Registered predictions, scored
 
 | # | prediction | verdict |
 |---|---|---|
 | P1 | 23, 31, 43, 47 are 5-chromatic; 59 is 6-chromatic | **undecided** — no plane's first digit moved; what moved is the shape of the question (§R7) |
-| P1a | the half-turn family at 23 is SAT | §R8 |
+| P1a | the half-turn family at 23 is SAT | **REFUTED** (the solver's refusal, 1,110 s): the last symmetric family is empty; a 5-colouring at 23 has no rotational symmetry |
 | P2 | first half MET (M60); second half settled by derivation: pairs at distances 3 and 4 have r = 9, 16 ≢ 1 (mod 11), so they are NEVER virtual edges at five colours over a sealed field — the opposite of the stub's reading | **settled, by derivation** |
 | P3 | T1 fails nowhere among the fields held | unchanged (no field's χ moved) |
 | P4 | ϑ = Hoffman at every prime | **MET** (eleven primes, 2·10⁻¹⁰) |
 | P5 | α(23) ≥ 106 | **undecided** (2 h wall) — the calibration's expectation "likely SAT" met a hardness cliff between 19 (200 s) and 23 |
 | P6 | no rotation-equivariant 5-colouring of order ≥ 3 at 23; the same at 31, 43, 47 | **MET at 23** (every order ≥ 3 refused in ≤ 2 s); 31, 43, 47 NOT RUN |
 | P7 | χ(C_p) ≥ 6 for every p ≥ 23 | **MET to 71** (χ(C_p) ≥ 8 from 23) |
-| P8 | χ(UD(𝔽₂₇, 2)) = 5 | four refused; five §R8 |
+| P8 | χ(UD(𝔽₂₇, 2)) = 5 | **undecided**: four refused (7 s), five unknown at 2·10⁷ conflicts (39 min) |
 
 ### §R5. Incidents and instrument facts
 
@@ -715,3 +715,12 @@ three filled at the close, §R8). **Plan**: §S with the derivations, §M1–§M
    (28 against 34.5) or 19 (≥ 76 against 99.5), undecided at 23.
 4. **The sieve's table gains its cubic column**: a residue field 𝔽₂₇ above 3 gives no bound below 5 — Haugland's field is not
    3-sealed below his object's five.
+
+### §R8. Left in flight at the close
+
+Nothing. The half-turn instance at 23 (queued behind the α run) returned UNSAT at 00:34 UTC; the α ladders at 11 and 19 and the
+𝔽₂₇ record finished; the instrument's own sweep at 23 (`equivariant-p23-k5.json`) was regenerated with the double-swap row carrying
+the external refusal. Records in `data/fplane/`; scratch (gitignored) in `build/m61/`: `derive.py`, `alpha.py`, the probes, the CNFs,
+the logs. **Priced, not done**: the half-turn refusal at 23 is a 40,205-clause CNF whose LRAT the kernel could replay — but its
+statement ("no 5-colouring with `col(−z) = τ(col z)`") is not a plain colouring refutation and would need its own consumer; and
+cube-and-conquer for the digit itself (FS-17).

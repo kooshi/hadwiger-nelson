@@ -22,16 +22,16 @@ plane's is.
 | χ ≤ 8 (a periodic colouring; the least periodic colouring needs exactly 8) | verified colouring; the refusal of 7 periodic is the solver's | `periodic-below-71` |
 | α ≥ 69 (three null lines); α ≤ 131 (Hoffman); α ≥ 106 = ⌈529/5⌉ UNDECIDED at 7200 s | verified / derivation / silence | `alpha-p23` |
 | no equivariant 5-colouring under any rotation of order 3, 4, 6, 8, 12, 24, nor the half-turn with τ = id or one swap | the solver's (≤ 2 s each) | `build/m61/partF.log` (M61 §R3) |
-| the half-turn with a colour double-swap | M61 §R8 | `build/m61/halfturn-*` |
+| the half-turn with a colour double-swap: REFUSED (external cadical, 1,110 s, the sound encoding) — **no 5-colouring at 23 has any rotational symmetry** | the solver's | `equivariant-p23-k5` |
 | ω = 3 (23 ≡ 11 mod 12: triangles exist); the origin's neighbourhood is four disjoint hexagons | exact | M59 |
 
 ## 3. Derivations first
 
 **D1 — price the split before running it.** The origin and its 24 neighbours: a 5-colouring gives the origin one colour and each of the
 four hexagons a proper colouring in the other four — 732⁴ ≈ 2.9·10¹¹ neighbourhood colourings, ~2.5·10⁸ up to the stabilizer O(2)
-(order 48) and the palette (24). Too many as cubes. The half-turn family halves the plane (264 free vertices); cubes on ONE hexagon
-(732, ~15 up to symmetry) with the equivariance clauses are the priced first split. A refusal of the half-turn family says a
-5-colouring at 23 has no symmetry at all — G31's floppiness in the finite plane; it does not decide χ.
+(order 48) and the palette (24). Too many as cubes. The half-turn family is REFUSED (M61's last run), so every 5-colouring is asymmetric and
+no symmetry can shrink the cube space; the first split is on one hexagon's colourings (732, ~15 up to O(2) and the palette) of the
+PLAIN instance, each cube a 5-colouring ask with 24 vertices pinned — priced at hours per cube on the M58 evidence.
 
 **D2 — the α route.** `card_le_mul_of_colorable` (kernel): a 5-colouring needs an independent set of size 106. The cardinality
 instance is small (1.5 MB) but undecided at two hours; a cube-and-conquer on it (fix the intersection with the origin's neighbourhood)
@@ -55,7 +55,7 @@ unit-distance graph — a target field named by congruences before any object ex
 | # | prediction | confidence |
 |---|---|---|
 | P1 | χ(UD(𝔽₂₃, 2)) = 5 | low-medium (Hoffman is 1.4 below the truth at 11 and 19, which would put 23 at 5 or 6) |
-| P2 | the half-turn family is refused (no symmetric 5-colouring at 23) | medium |
+| P2 | the half-turn family is refused (no symmetric 5-colouring at 23) | **MET at minting** (M61's last run; carried here as the datum, not a prediction) |
 | P3 | the α instance at 106 is SAT (the fractional face is silent at 23) | medium |
 
 ## 6. Bearing on 6, honestly
