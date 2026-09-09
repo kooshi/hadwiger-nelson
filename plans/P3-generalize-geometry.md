@@ -438,3 +438,75 @@ Eleven `sorry` leaves, each replaced by zero. No leaf decomposes. **The stop sig
 grows past ten lines is not a transcription of the argument, and the response is to ascend to the
 statement rather than to lengthen the tactic block** — the argument in every case is one sentence
 long, so a long proof means the statement is off.
+
+## 10. Experience-modeling pass (WORKFLOW step 5, third pass)
+
+The consumer that matters is not the two modules that call the old names — those are untouched by
+construction — but **the next agent, cold, holding `plans/STUB-four-colour-valuation-law.md` and
+looking for the transport theorem.** Their session was walked turn by turn, and it changed four
+things.
+
+### 10.1 The breakdown happens at the OLD name, so that is where the teaching goes
+
+Turn by turn: they read *"transport it by a norm-one element of `K(i)`"*, open `Homogeneous.lean`,
+and reach for `transport_pair`. Over `↥seamPlane` it does not typecheck — a bare type mismatch,
+which teaches nothing. **So `transport_pair`'s own docstring must point forward**: *over a space
+whose isometry group is not transitive on equidistant pairs — a number-field plane, say — use
+`transport_pair_of_isometry` and supply the map.* One sentence, on the name they actually reach for
+first. It is the highest-leverage edit in the package.
+
+### 10.2 The module docstring is the discovery surface, and it is currently ℂ-framed
+
+`Homogeneous.lean` opens *"The plane is homogeneous, so one forced pair is all of them"* and every
+following sentence is about `ℂ`. A reader working over a number field concludes in two sentences
+that this module is not for them, and leaves. It gets a re-head and a short **"## Off the plane"**
+section — the three pieces, the one obligation the caller owes (that the map keeps points in the
+field), and the one wall this package knows about and they do not (`FieldWall4` states its
+four-colourability as `(unitDistance ℂ).induce seamPlane`, and identifying that with
+`distanceGraph ↥seamPlane {1}` is a lemma nobody has written). Progressive disclosure: the contract
+in the docstring, the worked sketch in the handoff.
+
+### 10.3 The vacuity disclosure belongs on the theorem, not only in a plan file
+
+This repository's own standing trap is a theorem whose conclusion quantifies over an empty type.
+`transport_pair_of_isometry` concludes about every proper colouring of `distanceGraph V D`, and at
+`V = ℂ`, `D = {1}`, four colours that type **is** empty. The docstring says so, names
+`isEmpty_coloring_plane_four` as the reason, and names the instance where the same statement *does*
+have content — `K²` at four colours, inhabited by Theorem B. **A user reading only the docstring
+must be able to tell the two apart**, because that distinction is the entire reason the
+generalization was worth doing.
+
+### 10.4 Argument order follows parallelism, not partial application
+
+`transport_pair` is `(h) (hd) (C)` — the colouring hypothesis, the geometry, the colouring. The
+skeleton had `transport_pair_of_isometry` as `(hg) (h) (C)`, which reads slightly better partially
+applied. **Overruled in favour of `(h) (hg) (C)`**: a user who knows one predicts the other, and a
+predictable library is worth more than a pretty partial application. Likewise `Separated.transport`
+puts the isometry hypothesis exactly where `Separated.planeIn` puts its distance hypothesis, so the
+call reads `hs.transport q hq h0 hg C`.
+
+### 10.5 Names, settled
+
+| name | why |
+|---|---|
+| `transport_pair_of_isometry` | greppable on "transport"; the `_of_` names the hypothesis that replaced `ℂ` |
+| `isometry_affine` | matches Mathlib's root-level `isometry_*` family (`isometry_subtype_coe`, `isometry_mul_left`), and `exact?` finds it by shape |
+| `exists_isometry_map_pair_of_mapsTo` | predictable from `exists_isometry_map_pair` plus its added hypothesis |
+| `Separated.transport`, `Forces.transport` | the existing family is `plane` ⊂ `planeIn` ⊂ this; the third is *not* about a plane, and the name stops claiming it is |
+| `eq_gluePoint_of_dist_pair` | one token off the old `eq_gluePoint_of_unit_pair`, which is the strongest discoverability signal available to someone who knows the old one |
+| `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_of_dist` | sixty characters, and **kept** over the shorter Mathlib-idiomatic prime (`…_of_forces'`): a prime means "different hypotheses" only to someone who already knows the convention, and the consumer here is a cold agent. Informative beats short. Its real discovery surface is the module's table, not its name |
+| `criticalSet_eq_empty_of_forces_of_two_mul_lt_dist` | parallels `…_of_two_lt_dist`, which it generalizes |
+
+### 10.6 The machine user: nothing is tagged, deliberately
+
+No `@[simp]`, no instance, no notation, no `@[ext]`. None of these lemmas rewrites toward a normal
+form, none supplies a canonical choice, and the domain owns no notation for any of it. Every
+`@[simp]` taxes every future `simp` call forever; the right number here is zero, and recording that
+it was a decision rather than an omission is the point.
+
+### 10.7 The table in `CriticalSet.lean` gains two rows and states a boundary
+
+The row *"a forced pair drawn with unit edges"* currently points at three theorems as though they
+generalize together. **They do not**, and the table must say so: the localization and the emptiness
+theorem lose the unit hypothesis, and the counting bound cannot — at read-off radii the two glue
+points depend on the critical vertex, so "at most two" is simply false without a fixed radius pair.
