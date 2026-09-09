@@ -1337,6 +1337,20 @@ Theorem 4 leans on the bad form; [SchneiderSilva2013] proves it properly.
 
 ### Paths forward, ranked
 
+*(**Amended 2026-09-09 (third amendment), Kooshi's choice of next work: "continue reading unread papers and
+solidifying our knowledge web within the prior art, and potentially updating our vocabulary to match theirs where
+it makes sense."** Minted and ranked as **FS-23 at rank 3**, `plans/STUB-prior-art-web.md`, which is also the
+session handoff: three short reading debts named exactly, a §C sweep, verification of every load-bearing
+attribution **against the source PDF** (the FS-20 repair did four of Madore's and one of Moorhouse's on
+2026-09-09 and they held), the six lineages' citation graph *including the edges that do not exist*, and the
+vocabulary decision. **On vocabulary the stub's recommendation is a translation table plus adoption in new
+writing, NOT a global rename** — the coinages are cross-referenced across this file and ~90 plan files, and
+renaming would rewrite the record of what we believed when, which the house rules forbid. Two concrete finds
+already: `[Parts2020a]` §2 **rejects "virtual edge" in print** in favour of *mono-pair / non-mono-pair* (a term
+this project uses in almost every milestone), and `[Aggarwal2025]` calls our direction ladder the **"Moser
+Lattice"**. Bearing on χ ≥ 6: none directly, and the stub says so; **M62 (FS-6) is untouched at rank 1.** The
+second amendment of the day follows.)*
+
 *(**Amended 2026-09-09 (second amendment): `plans/STUB-four-colour-valuation-law.md` is CLOSED — the law is
 kernel-checked (ledger row 59), Parts's seven distances are each barred from the wrong column, and the stub's
 companion duality is retracted because `core9_plane`/`core122_plane` are vacuous. What it leaves open, stubbed in

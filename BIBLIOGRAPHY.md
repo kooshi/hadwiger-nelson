@@ -146,10 +146,11 @@ Not relevant (name collisions in searches, recorded so they are not re-fetched):
    under a §C note that *correctly guessed so*). **A §C entry whose one-line guess touches a live milestone is
    fetched and scanned before that milestone opens, not after it closes** — the cheap half of `WORKFLOW.md`
    step 3a, costing minutes, because the guess is already written down.
-0d. **What is still NOT held, named and ranked (as of 2026-09-08).** In priority order:
-   `[Manta2021]` (*Triangle colorings require at least seven colors*, Discrete Math. 344(7) 2021 — the earliest
-   likely prior art for the triangular cell family; **read before any further cell-family claim**);
-   `[Krebs2022]` (clique numbers of exactly our graphs, complete, with `χ > ω` conditions);
+0d. **What is still NOT held, named and ranked (corrected 2026-09-09 — two rows were stale).**
+   ~~`[Manta2021]`~~ **obtained and READ 2026-09-08 (FS-18)**, and it does *not* subsume the cell family (his
+   theorem needs a vertex of degree ≥ 4). ~~`[Krebs2022]`~~ **obtained by Kooshi from Springer and READ
+   2026-09-08**; its `χ > ω` content is Prop. 6.1 and is weaker than what we hold at every prime that matters, so
+   that acquisition item is discharged with a negative. Still not held, in priority order:
    `[Johnson2006]` (the compendium of the whole algebraic direction — the most likely place for further
    number-field prior art);
    `[Fischer1990b]` (the multiquadratic component paper, on exactly our fields);
