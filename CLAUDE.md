@@ -3913,13 +3913,22 @@ failure here:
   noticed four weeks later only because somebody tried to *use* it. Deciding vacuity is
   undecidable, so the check does not try: it **requires evidence**, exactly as `axioms.sh`
   requires every trust purchase to be declared rather than verifying any proof. Three verdicts,
-  and the third is the load-bearing one — `VACUOUS` (`IsEmpty` proved: the theorem says nothing),
-  `WITNESSED` (`Colorable`/`Nonempty` proved: it has content), `UNKNOWN` (**reported and counted,
-  never silent**, because this repository has already shipped two gates that failed open). It runs
-  against a **baseline that only ever shrinks**, so new declarations must carry their evidence
-  while the 238 pre-existing unresolved sites are burned down over time. Red/green control run at
-  introduction: a planted vacuous theorem was detected by name and the gate exited 1;
-  removed, it returned to green. **It found `core9_plane` and `core122_plane` on its first run,
+  and its vocabulary deliberately mirrors `axioms.sh`'s, because it is the same epistemic move:
+  `WITNESSED` is that gate's `CLEAN`, and `DECLARED` is its `PURCHASED` — **not a defect, but never
+  silent, named per use with its reason in the declaration's own docstring** (`VACUITY DECLARED:`),
+  printed under its own banner on every run so every deliberate case is readable in one place and
+  challengeable. Beside them: `VACUOUS` (provably empty and *undeclared* — the `core9_plane` bug),
+  `STALE` (a docstring claims emptiness that is **not proved**, which is what makes the annotation
+  a checked claim rather than a `# noqa`), and `UNKNOWN` (**reported and counted, never silent**,
+  because this repository has already shipped two gates that failed open). **`VACUOUS` and `STALE`
+  are unconditional failures checked before the baseline, so no baseline entry can ever excuse
+  one.** The baseline holds `UNKNOWN` **and nothing else** — an earlier version let `VACUOUS` in
+  too, which gave one shrink-only list two entry classes with opposite lifecycles and made a real
+  defect indistinguishable from unfinished work — so it only ever shrinks and its target is empty;
+  the 238 pre-existing unresolved sites are burned down over time. Red/green controls run at
+  introduction: a planted undeclared-vacuous theorem and a planted false declaration were each
+  detected by name, the gate exited 1, **adding both to the baseline did not excuse them**, and
+  removing them returned it to green. **It found `core9_plane` and `core122_plane` on its first run,
   knowing nothing about them** — which is the only evidence worth having that it works;
 - every definition has a `#eval`/`example` that would fail if it drifted;
 - the Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT

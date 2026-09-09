@@ -152,7 +152,9 @@ theorem core9_pigeonhole (C : (edgeGraph 9 core9Edges).Coloring (Fin 4)) :
 /-- **No proper 4-colouring of the plane avoids monochromatic √3-pairs.** Classical folklore
 (the spindle literature's virtual-edge distance; de Grey argues the triple form) — what is
 new is the carrier, not the compulsion: a nine-point 1-minimal witness, kernel-checked end to
-end. The witnesses are two of the nine certified points. -/
+end. The witnesses are two of the nine certified points.
+
+VACUITY DECLARED: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous. -/
 theorem core9_plane (C : (unitDistance ℂ).Coloring (Fin 4)) :
     ∃ x y : ℂ, dist x y = Real.sqrt 3 ∧ C x = C y := by
   have hunit := core9.valid_sound (by decide) core9_valid

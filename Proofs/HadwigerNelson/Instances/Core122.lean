@@ -145,7 +145,9 @@ pigeonhole shadow of Haugland's forced-equal pair (arXiv:2608.04542) — what is
 carrier, not the compulsion: a 122-point 1-minimal witness on the certified hexagram's seam
 lattice, kernel-checked end to end. Distance 2 is the ρ₁₅ spindle distance; every kill of
 this compulsion lives one field up (G16). The witnesses are two of the 122 certified
-points. -/
+points.
+
+VACUITY DECLARED: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content. -/
 theorem core122_plane (C : (unitDistance ℂ).Coloring (Fin 4)) :
     ∃ x y : ℂ, dist x y = 2 ∧ C x = C y := by
   have hunit := core122.valid_sound (by decide) core122_valid

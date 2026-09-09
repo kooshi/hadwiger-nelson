@@ -1,7 +1,8 @@
 # Vacuity baseline — every (verdict, declaration) not yet resolved.
-# The gate fails on anything NOT listed here. This file only ever SHRINKS.
-# A VACUOUS line needs a reason: some are deliberate (a theorem that assumes a
-# structure in order to REFUTE it cannot be damaged by that structure being empty).
+# The gate fails on any UNKNOWN not listed here. This file only ever SHRINKS,
+# and its target is EMPTY. VACUOUS and STALE can never appear here by construction:
+# they fail the gate outright, and deliberate emptiness is declared in the
+# declaration's own docstring (VACUITY DECLARED:) rather than suppressed in this file.
 # Regenerate deliberately: scripts/vacuity.sh --baseline
 UNKNOWN HadwigerNelson.addCayleyColoring
 UNKNOWN HadwigerNelson.additiveColoring
@@ -202,6 +203,3 @@ UNKNOWN HadwigerNelson.UDCert.not_separated_sqrt3_11
 UNKNOWN HadwigerNelson.UDCert.not_separated_two_11
 UNKNOWN HadwigerNelson.UDCert.residue_adj_of_separated_11
 UNKNOWN HadwigerNelson.UDCert.residue_eq_of_forces_11
-VACUOUS HadwigerNelson.core122_plane
-VACUOUS HadwigerNelson.core9_plane
-VACUOUS HadwigerNelson.vacuous_of_plane_four_coloring

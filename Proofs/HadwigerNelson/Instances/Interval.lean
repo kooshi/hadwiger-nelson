@@ -72,7 +72,9 @@ theorem isEmpty_coloring_plane_four : IsEmpty ((unitDistance ℂ).Coloring (Fin 
 
 /-- **So a statement about every proper four-colouring of the plane says nothing.** Stated as the
 general fact rather than instance by instance, and used as the honest reading of `core9_plane` and
-`core122_plane`. -/
+`core122_plane`.
+
+VACUITY DECLARED: emptiness is the entire content here — this theorem exists to SAY that a statement over plane four-colourings is empty, so a gate flagging it would be flagging the detector. `scripts/Vacuity.lean`'s `vacuous_of_isEmpty` is its general form. -/
 theorem vacuous_of_plane_four_coloring (P : (unitDistance ℂ).Coloring (Fin 4) → Prop) :
     ∀ C, P C := fun C => (isEmpty_coloring_plane_four.false C).elim
 

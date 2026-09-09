@@ -66,12 +66,42 @@ this term is a statement with no content. It is the general form of `Instances/I
 theorem vacuous_of_isEmpty {X : Sort*} [IsEmpty X] (P : X → Prop) : ∀ x, P x :=
   fun x => (IsEmpty.false x).elim
 
-/-- Three outcomes, never two. -/
-inductive Verdict | vacuous | witnessed | unknown
+/-- The verdicts. Five, and the shape mirrors `scripts/axioms.sh` deliberately.
+
+That gate does not treat a `native_decide` purchase as a failure — it treats it as *expected, by
+design*, **declared per use with its reason in the declaration's own docstring**, and listed under
+its own banner. Vacuity is the same epistemic situation, so it gets the same vocabulary:
+
+* `witnessed` — an inhabitant is proved. The `CLEAN` analogue.
+* `declared`  — the domain is provably empty **and the declaration says so, with a reason**. The
+                `PURCHASED` analogue: not a defect, but never silent. Sometimes emptiness IS the
+                content (`vacuous_of_plane_four_coloring` is nothing else); sometimes a statement
+                is known vacuous and retained under this project's never-delete rule.
+* `vacuous`   — provably empty and **undeclared**. The `core9_plane` bug. Always a failure, and
+                unlike `unknown` it can never be baselined: a suppression list that can hide this
+                is the thing this whole file exists to prevent.
+* `stale`     — the docstring claims emptiness that is **not proved**. This is what separates a
+                declaration from a `# noqa`: "empty on purpose" is a verifiable claim, so it is
+                verified, and an annotation that outlives its truth fails the gate.
+* `unknown`   — undecided. Reported, counted, baselined, ratcheted to zero. -/
+inductive Verdict | vacuous | declared | stale | witnessed | unknown
   deriving BEq, Inhabited
 
 def Verdict.tag : Verdict → String
-  | .vacuous => "VACUOUS" | .witnessed => "WITNESSED" | .unknown => "UNKNOWN"
+  | .vacuous => "VACUOUS" | .declared => "DECLARED" | .stale => "STALE"
+  | .witnessed => "WITNESSED" | .unknown => "UNKNOWN"
+
+/-- The marker a declaration uses to say its emptiness is deliberate. It lives in the DOCSTRING,
+where `CLAUDE.md` § Trust ledger already requires a `native_decide` purchase to be named — same
+rule, same place, so a reader meets the justification at the declaration rather than in a side
+file they will never open. -/
+def marker : String := "VACUITY DECLARED:"
+
+/-- The reason a declaration gives, if it gives one: the rest of the marker's line. -/
+def reasonIn? (doc : String) : Option String :=
+  match doc.splitOn marker with
+  | _ :: rest :: _ => some (((rest.splitOn "\n").headD "").trim)
+  | _ => none
 
 /-- Is this declaration one of ours, rather than Mathlib's or core's? -/
 def isOurs (env : Environment) (n : Name) : Bool :=
@@ -181,19 +211,32 @@ def audit : CommandElabM Unit := liftTermElabM do
   let env ← getEnv
   let ev ← gather env
   logInfo m!"evidence: {ev.empties.size} emptiness proof(s), {ev.witnesses.size} colourability witness(es)"
-  let mut rows : Array (Name × Verdict) := #[]
+  let mut rows : Array (Name × Verdict × String) := #[]
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
     let carriers ← try carriersOf ci.type catch _ => pure #[]
     for τ in carriers do
-      let v ← probe ev τ
+      let raw ← probe ev τ
+      -- The declaration is CHECKED against the probe, never merely trusted.
+      let reason := (← findDocString? env n).bind reasonIn?
+      let (v, r) := match raw, reason with
+        | .vacuous, some r => (Verdict.declared, r)
+        | .vacuous, none   => (Verdict.vacuous, "")
+        | _,        some r => (Verdict.stale, r)
+        | v,        none   => (v, "")
       trace[vacuity] "{n} : {Verdict.tag v}"
-      rows := rows.push (n, v)
-  let count (v : Verdict) := rows.filter (·.2 == v) |>.size
+      rows := rows.push (n, v, r)
+  let count (v : Verdict) := rows.filter (·.2.1 == v) |>.size
   logInfo m!"=== VACUITY AUDIT ==="
-  for (n, v) in rows do
-    if v != .witnessed then logInfo m!"{Verdict.tag v} {n}"
-  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} witnessed={count .witnessed} unknown={count .unknown}"
+  -- Declared emptiness gets its own banner with its reasons, the way the axiom audit prints its
+  -- purchases: the point is that every deliberate case is READABLE IN ONE PLACE and challengeable.
+  logInfo m!"=== DECLARED ==="
+  for (n, v, r) in rows do
+    if v == .declared then logInfo m!"DECLARED {n} :: {r}"
+  logInfo m!"=== FLAGGED ==="
+  for (n, v, _) in rows do
+    if v == .vacuous || v == .stale || v == .unknown then logInfo m!"{Verdict.tag v} {n}"
+  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} unknown={count .unknown}"
 
 end VacuityAudit
 
