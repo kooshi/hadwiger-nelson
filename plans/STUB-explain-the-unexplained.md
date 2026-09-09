@@ -206,6 +206,23 @@ derivation removes the gate, and says which lattice condition puts the fifth fam
 **Cost:** an afternoon. **Confidence:** high on the lemma, medium on how much of the 412 it covers without case
 analysis.
 
+### E7 — honourable mention: the physically scale-invariant refuting ball
+
+`plans/M44-epsilon-dial.md:584` / ledger row 41 / `G29` record, with the ball radius **derived rather than
+chosen**: *"the minimal refuting configuration is physically scale-invariant at 1.02–1.38 unit distances across
+a 3.16× span of scale."* M44's only gloss is circular (*"a fixed physical region sampled ever more finely,
+which is the mechanism the invariance implies"*).
+
+A genuine bracket looks reachable from two facts the record already holds and has never combined: the **lower**
+end from a diameter argument (the forcing configuration must span at least the hex shell, diameter 2, so
+physical radius ≥ 1 — which is 1.02 to within measurement), and the **upper** end from `[Voronov2023]`
+Theorem 1.3, whose explicit radius-3 disc the record flags as *"the first published constraint on the `N(p)`
+divergence"* **and then never uses**.
+
+**Ranked last on purpose.** One milestone, medium confidence, and **low strategic value — the cell family is
+closed in both directions** (no six-colouring, and no bounded-size family either). Listed so the connection is
+not lost, not because it should be run soon.
+
 ## 3. The honest part — what is unexplained because it is hard
 
 Recorded so nobody re-opens these expecting an afternoon:

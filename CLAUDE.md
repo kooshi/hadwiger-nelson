@@ -2885,7 +2885,15 @@ clash" was the metric shadow of a 2-adic condition.
   *Rule this adds: when a measured wall resists derivation in the discipline it was found in, name the discipline the
   wall's statement naturally lives in and look for the theorem there before building another instrument here.*
 
-* **G35 — The wall is 2-adic, and the useful material is a congruence test.** [theorem, hand-proved
+* **G35 — The wall is 2-adic, and the useful material is a congruence test.**
+  **[GATE NAMED 2026-09-09 by the record audit: what is kernel-checked is the reduction over a SUBRING
+  (`ResidueColouring.colorable_unitDistance_induce_of_valuationSubring`, with `normOne_subset_valuationSubring`
+  and `conj_mem_valuationSubringAtPrime` beside it). The FIELD-level statement below — for a real number field
+  `F` with a conjugation-fixed prime, `χ(F²) ≤ N(𝔭)` — is gated on exactly ONE unproved lemma, named verbatim in
+  ledger row 57: *that a number field with a conjugation-fixed prime supplies the valuation subring with residue
+  field of size `N(𝔭)`*. That is a Mathlib-shaped finiteness statement about residue fields, not a new idea, and
+  closing it promotes G35 and G43 together — and with them the field-level half of the whole sieve. Recorded here
+  so the gap is one line rather than an inference across three files.]** [theorem, hand-proved
   (`~/field-wall-conjecture.md` §5–§6); the criterion measured on every class one gluing step reaches]
   For a real number field F the residue colouring gives χ(G(F²)) ≤ N(𝔭) for any prime 𝔭 of F(i) fixed by
   complex conjugation; such a prime above 2 exists iff −1 is not a square in some completion of F above
@@ -3074,7 +3082,11 @@ record shows what was believed, what was measured, and what is now proved.
   3,905; two spindles on the full fabric C = ∅ (F₁ ∩ F₂ = ∅, 34/34 checked); the two-core union C = ∅
   (31/31 checked) and its complete five-colour sweep 0 / 0 in 31 s]** *Reading on top, falsifiable — and its first half is now MEASURED: the C = ∅ objects are still floppy, so
   the second obstruction, the absorption principle (each 4-colourable piece attached by outside-degree-one
-  chords is coloured around by the spare colour), is the live one. every 5-chromatic unit-distance graph built as "4-rigid fabric plus one spindle"
+  chords is coloured around by the spare colour), is the live one.**
+  *[Splice repaired 2026-09-09 by the record audit: the 2026-09-06 amendment above was pasted into the middle of this
+  reading, leaving a lower-case sentence start and no way to tell which clause "its first half is now MEASURED"
+  governed. It governs the ABSORPTION sentence, not the one that follows. The original reading resumes here:]*
+  Every 5-chromatic unit-distance graph built as "4-rigid fabric plus one spindle"
   is vertex-critical or nearly so, because the spindle is the only route to the fifth colour; the
   redundancy the theorem demands must come from MANY routes — many spindles at many centres, or
   fabric whose 5-chromaticity is carried the way K-fabric's 4-chromaticity is, by density rather than
@@ -3151,7 +3163,9 @@ record shows what was believed, what was measured, and what is now proved.
   material absorbed — here, thin material either does nothing to γ or kills the family).*
 
 * **G43 — The residue plane has its own chromatic number, and it seals fields.** (The pivot of 2026-09-06; hand proof +
-  verified measurement, kernel pending.) Every linear instrument — additive colourings, the fractional number, density,
+  verified measurement, kernel pending — **and the gate is one named lemma, the same one G35 now names: the residue
+  field of size `N(𝔭)` at a conjugation-fixed prime of a number field. Everything else in the chain is kernel.**)
+  Every linear instrument — additive colourings, the fractional number, density,
   Hoffman — is blind to the 5–7 interval by construction (χ_f(ℝ²) ≤ 4.36; the residue method's values jump 4 → 7), and the
   step past it was already in Theorem B's own proof: the residue map at a degree-one prime above p ≡ 3 (mod 4) is a graph
   homomorphism into the finite Euclidean plane UD(𝔽_p, 2), whose chromatic number is NOT linear — 5 at p = 11 where the

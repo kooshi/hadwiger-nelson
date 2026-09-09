@@ -166,6 +166,29 @@ project's own discipline says derive the witnesses in sympy first.
   mints `F4.equivFin` with a comment explaining why). Two helper lemmas remove the boilerplate, and they are a
   prerequisite for a clean G2.
 
+## 2b. Considered and DECLINED, with the reason — so nobody re-opens these
+
+Recorded because a survey's negatives are as useful as its positives, and each of these looks generalizable
+until you check.
+
+* **`Pigeonhole.lean`'s bridge at `edgeGraph n E` / `Fin n`** (`mono_pair_of_not_colorable_append` `:82`,
+  `mono_pair_of_clique` `:112`). `mono_pair_of_clique` is pure counting over an arbitrary graph and an arbitrary
+  augmentation, so it *looks* like a free generalization — but the `Fin n` + `List` shape **is** the interface
+  the LRAT certificate chain consumes. Generalizing it would put a translation layer between the kernel and
+  every certificate. **Declined.**
+* **`Mascot.no_four_unit_points` over `ℂ`** (`:166`). The Gram-determinant argument is 2-dimensional; the
+  natural general form is *no `d+2` points of `ℝ^d` are pairwise unit-distant*, which would make
+  `not_forces_of_unit_drawing` (`:229`) dimension-generic. That is a genuine re-proof needing affine-independence
+  machinery, and **nothing in the mission wants higher dimensions**. Low.
+* **`UDCert` hard-wired to the four-radical tower `Q4`** (`Certificate.lean:71`, and every `{S : Subring Q4}` in
+  `UnitQuadrance`, `Lift`, `ResidueObstruction`). Generalizing the coefficient ring is a redesign of the
+  certificate layer and of every module under `Instances/`; and the case that would motivate it — Haugland's
+  heptagonal witness — needs cubic-field machinery this repository does not have. **Declined outright**, not
+  merely deferred.
+* **`Coset.lean` to a general planar lattice.** The whole file runs on `hexQ = a² + ab + b²`. The Frontier
+  already prices this: the crude Hermite-plus-covering chain gives `k ≥ 6` for every planar lattice, and closing
+  `k = 6` needs a near-equality rigidity argument from reduction theory — **mathematics we do not have.** Lowest.
+
 ## 3. Consolidation — the same thing proved twice
 
 Not over-specific statements; duplicates. **Read the build caveat in §4 before touching any of these.**
