@@ -224,6 +224,68 @@ its norm-one set is `{1, −1}`, so the norm-one hypothesis is exercised by a me
 identity. The field-level inhabitant is `ValuationLaw.lean`'s own `oddDenom` / `psiA`, named in a
 `--` comment.
 
+## §M2 Obligation-modeling pass (`debruijn-obligation-modeling`)
+
+**There is no induction in this package**, and saying so is the pass's first finding: no recursion,
+no termination measure, no case tree. The space that has to be characterized is not a space of
+inputs but **the space of consumers** — every old statement is fixed in advance, byte-identical, and
+only the proofs move. So the local obligation is:
+
+> does each fixed old statement derive from the new general one in two lines? A re-proof that stays
+> long is a report that the general statement is the wrong one.
+
+**Both routes into the general layer are used, so both earn their place.** The colouring-level
+consumers (`residueColouring_eq_of_forces` and `residueColouring_ne_of_separated`, *both named in
+`scripts/Axioms.lean`*) need the residue colouring as an object, which is `normOneColoring`; the
+difference-keyed consumers (`not_forces_of_sub`, `not_separated_of_sub`) need the law as a statement
+about `Forces`, which is `not_forces_of_map_ne_zero`. The distance-keyed forms and then the seven
+table rows derive from the difference-keyed ones. That is the chain, and it is four links:
+
+    general law  →  difference form  →  distance form  →  table row
+
+**`div_mem_normOne` is on probation.** Its only consumer is `sub_mem_oddDenom_of_dist`, whose
+existing three-line `field_simp` already produces the same fact. It stays **iff** that proof gets no
+longer; otherwise it is speculative structure and is cut, with the cut recorded.
+
+**Mutation audit, designed before the proofs** — three reds, each pinning one hypothesis:
+
+| hypothesis | red |
+|---|---|
+| `hker` (the kernel is `σ`-stable) in `map_mul_conj_eq_zero_iff` | `A = ZMod 5 × ZMod 5`, `σ` = swap, `ψ` = first projection: `v = (1,0)` has `ψ v ≠ 0` and `v · σ v = 0`. **This is the split prime, concretely** |
+| `IsUnit u` in `map_mul_eq_zero_iff_of_isUnit` | `ψ = Int.castRingHom (ZMod 2)`, `a = 1`, `u = 2`: `ψ (1·2) = 0` while `ψ 1 ≠ 0` |
+| `Fintype.card α = k` in `Forces.eq_of_card` | `Forces (⊤ : SimpleGraph (Fin 2)) 1 0 1` holds **vacuously** (there is no `Fin 1`-colouring of an edge) while a `Bool`-colouring separates the two vertices |
+
+One implementation note banked from the probe: `map_mul_normOne_eq_zero_iff` needs
+`(a := ⟨d, hd⟩)` supplied — the unifier cannot invert `⟨d * u, _⟩` into a product of subtypes on its
+own. Every other step of the package elaborated first try.
+
+## §M3 Experience-modeling pass (`debruijn-experience-modeling`)
+
+**The module is named `Palette.lean`** because *palette* is the word this repository already uses for
+exactly this concept ("palette symmetry costs 6.5–35× solver time", "up to palette", "the palette
+pin"). One vocabulary throughout beats an abstractly better name.
+
+**`cosetResidue_eq_iff_map` exists to remove a fumble the module docstring currently warns about.**
+`ResidueColouring.lean`'s own "Using this file" section says *"the subgroup cannot be inferred from
+the homomorphism — write `cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom`, or the elaborator
+reports a mismatch"*. Taking `ψ : A →+* G` and doing that conversion internally is the fix, and it is
+the difference between a warning and a design.
+
+**Argument order is set from the call sites**, not from the proofs: `h.eq_of_card hk C` puts the
+colouring last so dot-notation reads as a sentence; `not_forces_of_coloring_ne hk C hne` matches
+`Additive.not_forces_of_addMonoidHom`'s existing shape so the two are learned once.
+
+**Machine-user budget: one new instance and one new `@[simp]` lemma, both justified.**
+`NoZeroDivisors F4` is canonical for a project-local four-element field. `normOneColoring_apply` is
+tagged `@[simp]` to match `additiveColoring_apply`, which is the same unfolding lemma for the same
+kind of sealed colouring one module over. Nothing else is tagged.
+
+**`map_mul_conj_eq_zero_iff` keeps the file's `_conj` vocabulary** rather than a more accurate
+`_norm`, because `norm` is already spoken for by `‖·‖` and because the file has `conjOn`,
+`conj_mem_valuationSubringAtPrime` and `conj_mem_oddDenom`. The hypothesis's *meaning* — that the
+prime is fixed by conjugation — goes in the docstring, where a reader expecting the Frobenius
+identity will meet it.
+
 ## §3 Registered predictions
 
 | # | prediction | how it fails |
