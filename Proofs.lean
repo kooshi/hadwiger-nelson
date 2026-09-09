@@ -52,6 +52,7 @@ import Proofs.HadwigerNelson.Quadrature
 import Proofs.HadwigerNelson.NarrowFan
 import Proofs.HadwigerNelson.NarrowFanDiagnose
 import Proofs.HadwigerNelson.Forcer
+import Proofs.HadwigerNelson.Mascot
 import Proofs.HadwigerNelson.ForcerDiagnose
 import Proofs.HadwigerNelson.Fractional
 import Proofs.HadwigerNelson.FractionalSpec
