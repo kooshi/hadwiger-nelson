@@ -312,6 +312,89 @@ identity will meet it.
   `not_separated_of_map_eq_zero`, deliberately *not* the names the `FieldWall4` namespace already
   uses.
 
-## §R Results
+## §R Results — closed 2026-09-09, LANDED
 
-*(filled at the close)*
+**The gate, all four items.** `./scripts/build.sh` → `build: OK`. No live `sorry` in `Proofs/`.
+`./scripts/axioms.sh` → **747 clean, 5 declared purchases** (baseline 725/5 — the five did not move,
+and twenty-two new declarations are audited). `lake lint` → *Linting passed for Proofs*.
+
+### The honest test
+
+| file | before | after | |
+|---|---|---|---|
+| `FieldWall4.lean` | 1398 | **1392** | **−6 — P1 met** |
+| `Additive.lean` | 125 | **122** | −3 — P6 met |
+| `ValuationLaw.lean` | 461 | 484 | +23 (three new named facts, below) |
+| `ResidueColouring.lean` | 534 | 760 | +226 — the general layer, its docstrings and its two reds |
+| `Palette.lean` | — | 114 | new leaf |
+
+The specialization shrank, which is what the test asks. Where it shrank matters more than by how
+much: the two proofs the law touches lost 9 lines to the general statements, and **two `private`
+theorems of `FieldWall4` turned out to be re-proofs of lemmas `ResidueColouring` already had** —
+`mul_conj_eq_one` is `mem_normOne_conj_iff`, and `dist_eq_one_of_normSq` is
+`sub_mem_normOne_conj_iff`. Both deleted, both uncited anywhere. Against that, the
+`NoZeroDivisors F4` instance and its docstring cost 6.
+
+### Evidence the generalization is absorption and not a layer
+
+Every general declaration has a consumer in this package, which is the check that distinguishes the
+two:
+
+| general | instantiated at |
+|---|---|
+| `normOneColoring` | `colorable_of_normOne` (its own corollary) **and** `seamResidueColouring` |
+| `cosetResidue_eq_iff_map` | `residueColouring_eq_iff_sub`, `residueColouring_ne_of_dist_one` |
+| `cosetResidue_ne_of_mem_normOne` | `residueColouring_ne_of_dist_one` |
+| `map_mul_eq_zero_iff_of_isUnit` | `map_mul_normOne_eq_zero_iff` |
+| `map_mul_normOne_eq_zero_iff` | `residueColouring_eq_of_dist_two`, `map_eq_zero_iff_of_mul_conj_eq` |
+| `map_mul_conj_eq_zero_iff` | `psiA_eq_zero_iff_normSq` |
+| `div_mem_normOne` | `map_eq_zero_iff_of_mul_conj_eq` |
+| `map_eq_zero_iff_of_mul_conj_eq` | `sub_mem_oddDenom_of_dist` |
+| `not_forces_of_map_ne_zero`, `not_separated_of_map_eq_zero` | `not_forces_of_sub`, `not_separated_of_sub` |
+| `Forces.eq_of_card`, `Separated.ne_of_card` | `residueColouring_eq_of_forces`, `..._ne_of_separated` |
+| `not_forces_of_coloring_ne`, `not_separated_of_coloring_eq` | `Additive`'s two, and the two above |
+
+Two of `Palette`'s eight — `Forces.of_equiv`, `Separated.of_equiv` — have **no consumer**, and are
+kept deliberately: they are the converse direction of the module's own claim, one line each, and
+without them the module states half of "compulsions are palette-independent". Recorded rather than
+hidden.
+
+### Predictions
+
+| # | outcome |
+|---|---|
+| **P1** | **MET** — 1398 → 1392 |
+| **P2** | **MET** — no pre-existing declaration line was removed or altered anywhere in the package (`git diff -U0 d093033`), so all eleven statements and the seven table rows are byte-identical. The only removals are the two `private` duplicates above |
+| **P3** | **MET** — 747 clean, exactly 5 purchases |
+| **P4** | **MET** — `map_mul_conj_eq_zero_iff` takes only `ψ (σ z) = 0 → ψ z = 0`. The Frobenius identity `psiA_conj` survives as what *discharges* it at `𝔽₄` (`psiA_ker_stable`), never as what the law needs |
+| **P5** | **MET in substance** — no consumer outside the package changed. Two non-consumer files were touched: `Proofs.lean` (one import line, the flat surface) and `scripts/Axioms.lean` (twenty-two audit lines). Neither is another package's |
+| **P6** | **MET** — 125 → 122 |
+| **P7** | **MET** — `map_mul_eq_zero_iff_of_isUnit` has no hypothesis on the residue ring at all |
+
+### The probation, and its reversal — worth recording as a process note
+
+§M2 put `div_mem_normOne` on probation because its only consumer computed the same fact more
+directly, and it was **cut**, with the cut written into the module docstring so nobody re-derived
+the negative. Then the *scope* question that had been left implicit got asked out loud — the
+difference-keyed law was general and the **distance**-keyed law, which is the form the ledger states
+it in, was not — and closing that gap produced `map_eq_zero_iff_of_mul_conj_eq`, whose proof is
+exactly `div_mem_normOne` composed with `map_mul_normOne_eq_zero_iff`. The lemma came back with a
+consumer, and `sub_mem_oddDenom_of_dist` became an instance (27 → 20 lines).
+
+The process note is the useful part: **the cut was right on the evidence available and wrong on the
+evidence one question later.** What surfaced the question was not a better instinct but a written
+scope claim being read back against what was actually proved.
+
+### Scope, stated plainly
+
+**What is now general**: the residue law keyed on the difference, keyed on the scalar over a field,
+its two compulsion consumers, and the residue colouring as an object — at any commutative ring, any
+`σ`-stable subring, any residue map into a ring, any colour count.
+
+**What is necessarily not**: the *integrality* step — that a unit vector lies in the subring. Over
+`K` that is `mem_oddDenom_of_unit`, an elementary parity descent, and it cannot be general because
+`oddDenom` is an intersection of two localizations rather than a valuation ring, so
+`normOne_subset_valuationSubring` does not reach it. `map_eq_zero_iff_of_mul_conj_eq` takes exactly
+that one fact as its hypothesis `hq`, and nothing else — **so a caller at a new prime of a new field
+owes one lemma and gets the law.** That is the debt this milestone set out to pay, and the shape of
+the payment is visible in the signature.
