@@ -123,11 +123,23 @@ example {ι : Type} {G : SimpleGraph ι} (a b : ℂ) (ha : ‖a‖ = 1)
 kind `FieldWall4.seamPlane_sub` and `FieldWall4.seamPlane_ratMul` already do — nothing about
 colourings, isometries or graphs is left.
 
-**And the colouring type above is inhabited, not merely believed to be.** `FieldWall4` states its
-result as `((unitDistance ℂ).induce seamPlane).Colorable 4`; `unitDistance_induce` turns that into
-`(unitDistance ↥seamPlane).Colorable 4`, and `unitDistance_eq_distanceGraph_singleton` into
-`(distanceGraph ↥seamPlane {1}).Colorable 4`, which is the type the transport concludes about. Do
-that rewrite once at the top of your file and the vacuity question is closed.
+**And the colouring type above is inhabited, not merely believed to be** — which is the whole
+difference between this and the `ℂ` statement that had to be retracted. `FieldWall4` states its
+result as `((unitDistance ℂ).induce seamPlane).Colorable 4`, and two rewrites turn it into the type
+the transport concludes about. This elaborates today; paste it at the top of your file and the
+vacuity question is closed:
+
+```lean
+example : (distanceGraph FieldWall4.seamPlane {1}).Colorable 4 := by
+  have := four_colorable_of_seam_field
+  rwa [unitDistance_induce, unitDistance_eq_distanceGraph_singleton] at this
+```
+
+It is deliberately not shipped as a declaration: it needs `FieldWall4.lean`, so it would want a new
+leaf module and an edit to `Proofs.lean` while five other packages are live in this repository. The
+three lines above are the whole of it, and the briefing's own rule — a structure-valued hypothesis
+ships with an inhabitant *or a note saying which theorem supplies one* — is met by the note in
+`Homogeneous.lean`'s docstring.
 
 Steps 1 and 3 of the stub's sketch — showing `core9`'s nine points lie in `K²`, and gluing the
 transported objects onto the carrier's six `√3`-pairs — are untouched by this package, and step 1
