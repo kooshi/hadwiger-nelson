@@ -36,7 +36,9 @@ general statement is.*
 
 ## 2. The work, ranked
 
-### E1 — Every finite Euclidean plane is forced-pair-free, at every prime and every colour count
+### E1 — Every finite Euclidean plane is forced-pair-free, at every prime `p ≡ 3 (mod 4)` and every colour count it can achieve — **CLOSED 2026-09-09 (package P4)**
+
+> ⚠ **This heading overclaimed on BOTH halves, and the proof found it.** *Every prime* is wrong: planes at `p ≡ 1 (mod 4)` are finite Euclidean planes too and are **not** covered — the argument fails there because an isotropic vector's quarter turn is collinear with it. *Every colour count* is wrong in a sharper way: at a count the plane cannot achieve, the statement is **false**, not merely empty — "forced" means "every proper colouring agrees", which holds vacuously when there are none. The shipped theorem takes `k`-colourability as a hypothesis and carries the counterexample (`p = 3, k = 2`) beside a positive inhabitant. That this stub's own headline walked into the trap the stub was written to catch is recorded in `CLAUDE.md` § Grokkings, G30's sixth failure mode.
 
 **CLOSED 2026-09-09 (consolidation package P4), with its headline corrected.** Proved for every prime
 `p ≡ 3 (mod 4)` and every `k` the plane **admits** — the colourability hypothesis is load-bearing and a
@@ -88,7 +90,7 @@ computation the record prices as possibly out of reach.
 norm-one element is an automorphism" and step 3. **Confidence: high** — the argument is checked and the pieces
 are named.
 
-### E2 — Which circles close, and why the `r² = 3` shell is the Moser twist
+### E2 — Which circles close, and why the `r² = 3` shell is the Moser twist  **[OPEN — held back; collides with consolidation item A]**
 
 **Today:** `plans/M18-the-120-degree-class.md:118` records *"`r² = 3` is NOT explained by the 120° story (its
 angle is irrational, its structure pure paths)"* as a census result, and `:91` defers the general question:
@@ -117,7 +119,7 @@ integer in `[−2,2]`, hence an integer. The irrational case inverts directly.
 **Cost:** an afternoon; half a page of mathematics and a Lean statement beside `exists_unit_triangle_iff`.
 **Confidence: high** (arithmetic checked both directions).
 
-### E3 — The periodic quotient is a classical circulant, and the record never says which
+### E3 — The periodic quotient is a classical circulant, and the record never says which  **[CLOSED 2026-09-09 (P2)]**
 
 > **WORKED OUT AND VERIFIED 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §2.**
 > The closed form is confirmed **against the direct construction at eight primes** and against M61's
@@ -155,7 +157,7 @@ extend**; and `α(C_p)` acquires a combinatorial description, which is what driv
 — but the identification is worth having either way. **Confidence: high** on the closed form (verified at two
 primes against our own table); **medium** on P7 falling out.
 
-### E4 — The 1581's zero forced-equal pairs at five colours is a corollary, not a sweep — and it is the cheapest item here
+### E4 — The 1581's zero forced-equal pairs at five colours is a corollary, not a sweep — and it is the cheapest item here  **[CLOSED 2026-09-09 (P2) — forced-equal half only]**
 
 > **WORKED OUT 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §1. The conclusion
 > stands; the input below does not.** `G10`'s *"two edges PROVEN critical end-to-end"* has **no
@@ -191,7 +193,7 @@ its full value; only the pair layer collapses.
 
 **Cost:** an hour to write, or a day of CPU to close both halves. **Confidence: high.**
 
-### E5 — The 16-pair residue on `K`-fabric is a size effect, and three of the four facts are already ours
+### E5 — The 16-pair residue on `K`-fabric is a size effect, and three of the four facts are already ours  **[CLOSED 2026-09-09 (P2)]**
 
 > **WORKED OUT AND VERIFIED 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §3.**
 > Every number re-read from `data/m56/kempe-object-…-k4.json`: the 16 residue pairs are at
@@ -229,7 +231,7 @@ the offset without explaining it.
 **Cost:** the connection, an afternoon. The reconciliation, an afternoon to a milestone. **Confidence:** high on
 the connection (the numbers match exactly), medium-high on the reconciliation.
 
-### E6 — The mirror of additive rigidity: virtual edges from arithmetic
+### E6 — The mirror of additive rigidity: virtual edges from arithmetic  **[OPEN — not attempted]**
 
 **Today:** `AdditiveRigid.lean` proves `forces_of_additivelyRigid` — if every colouring of a chunk is additive
 then a pair at a `5Λ`-difference is forced monochromatic. **The mirror is missing**: if every colouring is
@@ -249,7 +251,7 @@ derivation removes the gate, and says which lattice condition puts the fifth fam
 **Cost:** an afternoon. **Confidence:** high on the lemma, medium on how much of the 412 it covers without case
 analysis.
 
-### E7 — honourable mention: the physically scale-invariant refuting ball
+### E7 — honourable mention: the physically scale-invariant refuting ball  **[OPEN — not attempted]**
 
 `plans/M44-epsilon-dial.md:584` / ledger row 41 / `G29` record, with the ball radius **derived rather than
 chosen**: *"the minimal refuting configuration is physically scale-invariant at 1.02–1.38 unit distances across

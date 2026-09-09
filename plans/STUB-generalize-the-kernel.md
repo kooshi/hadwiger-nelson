@@ -38,7 +38,7 @@ finiteness appears only where a degree is counted. That is a clean bill on the c
 
 ## 2. The work, ranked
 
-### G1 — `transport_pair` is stated over `ℂ`; its proof needs only "an isometry exists"
+### G1 — `transport_pair` is stated over `ℂ`; its proof needs only "an isometry exists"  **[CLOSED 2026-09-09 (P3)]**
 
 `Homogeneous.lean:80`, with consumers at `:54, :90, :100, :108, :118`.
 
@@ -63,12 +63,11 @@ with `transport_pair := transport_pair_of_isometry (exists_isometry_map_pair hd)
 the isometry group is not transitive on equidistant pairs**, so the `ℂ`-shaped theorem is not merely
 inconvenient there — it is unusable, and a `K`-caller cannot state its hypothesis. The
 hypothesis-taking form is exactly what such a caller *can* discharge, for the pairs a `K`-rotation reaches.
-The same split serves `EuclideanSpace ℝ (Fin n)` and the finite planes, where `addCayleyTranslate`
-(`ResidueObstruction.lean:70`) is the isometry.
+The same split serves `EuclideanSpace ℝ (Fin n)`. ~~and the finite planes, where `addCayleyTranslate` is the isometry~~ — **STRUCK 2026-09-09 (package P3), verified false**: the finite planes are graphs over `ZMod p × ZMod p`, which is not a `MetricSpace`, so no theorem in this module reaches them however it is stated. The `EuclideanSpace` half stands.
 
 **Cost:** under an hour. **Confidence: high.** **Blocking**: the `√3`-carrier-over-`K` work waits on it.
 
-### G2 — the 2-adic law lives at one field, one prime, four colours
+### G2 — the 2-adic law lives at one field, one prime, four colours  **[CLOSED 2026-09-09 (P6)]**
 
 `ValuationLaw.lean` §1–§3: `:104, :139, :147, :163, :180, :228, :235, :243, :249, :262, :274`.
 
@@ -93,7 +92,7 @@ speak and the current statement cannot be spoken in.
 **Cost:** a real but mechanical re-proof, about a day, most of it re-instantiating the seven-row table in §4.
 `FieldWall4.lean` should get *smaller*, the way it did when Theorem A absorbed it — that is the honest test.
 
-### G3 — the spindle-kills-its-prime theorems are at `ZMod p`; the proof needs a field where `−1` is not a square
+### G3 — the spindle-kills-its-prime theorems are at `ZMod p`; the proof needs a field where `−1` is not a square  **[CLOSED 2026-09-09 (P4)]**
 
 **CLOSED 2026-09-09 (consolidation package P4).** Landed as stated: five field-level forms taking
 `¬ IsSquare (-1 : K)`, the `ZMod` statements kept verbatim as one-line corollaries. See
@@ -114,7 +113,7 @@ clique number of `UD(𝔽_q,2)` in closed form for **every** prime power.
 
 **Cost:** an hour or two. **Confidence: high.**
 
-### G4 — the `χ ≥ 6` target is pinned at five colours where its own lemma is `k`-generic
+### G4 — the `χ ≥ 6` target is pinned at five colours where its own lemma is `k`-generic  **[CLOSED 2026-09-09 (P5) — both halves]**
 
 `Instances/HexShell.lean:259, :271`.
 
@@ -132,7 +131,7 @@ target of M49/M50, which today has no kernel statement connecting it to the hex 
 medium-high** — whether `hexShell.valid_sound` composes without friction at a non-singleton `D` is not checked,
 though `seven_le_chromaticNumber_hexShell_distances` (`:222`) already does the analogous thing.
 
-### G5 — `Coset.lean` proves one theorem five times
+### G5 — `Coset.lean` proves one theorem five times  **[OPEN — held back deliberately, low value]**
 
 `:932/:951, :996/:1014, :1061/:1080, :1240/:1270, :1299/:1327`.
 
@@ -144,7 +143,7 @@ unit pairs at scale `p` ⟹ `N` labels*. The five wrappers are byte-for-byte ide
 **Bearing on χ ≥ 6: none** — the Frontier has struck this family as a source of novelty. **Value:** ~200 lines
 becoming ~60, and it is precisely "generalize our specific proofs". Half a day.
 
-### G6 — the 2-adic independence engine is hard-coded at `√5`, and the record says so
+### G6 — the 2-adic independence engine is hard-coded at `√5`, and the record says so  **[OPEN — held back; needs sympy-derived witnesses first]**
 
 `Quadrature.lean:238`, with `:56, :75, :155`, and the consumer `quadrature_rho15` at `:372`.
 
@@ -154,7 +153,7 @@ named open item — the quadrature law at `√7`. **Cost:** a real re-proof. **C
 `linear_combination` witnesses were not verified to fall out identically; the module claims they do, and this
 project's own discipline says derive the witnesses in sympy first.
 
-### G7 — three small ones, minutes each
+### G7 — three small ones, minutes each  **[CLOSED 2026-09-09 — G7a (P3), G7b (P5), G7c (P6)]**
 
 * **`Glue.eq_gluePoint_of_unit_pair`** (`PartnerLattice.lean:29`) is at radii `(1,1)`; `Glue.sphere_inter_sphere`
   (`Glue.lean:247`) is already radii-generic and the two triangle-inequality lines give the annulus bounds for
