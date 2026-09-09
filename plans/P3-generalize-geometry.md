@@ -266,3 +266,118 @@ Iterate with `lake env lean <file>` (≈2 s); never conclude a module is green f
 * **`finite_two_unit_neighbors` is left at unit radii.** Its consumer is the kill engine's
   depth-one census, which is a unit-circle census; a two-distance version would be a statement
   nobody has asked for. Noted rather than built.
+
+---
+
+## 8. Domain-modeling pass (WORKFLOW step 5, first pass) — what it changed
+
+Run 2026-09-09 against §2 and §3. **Four changes, three of them subtractions, and two findings
+recorded rather than built.**
+
+### 8.1 The intrinsic structure, named
+
+The property `transport_pair` transports is *"every proper colouring puts the colours of these two
+vertices in relation `R`"*, and the fact that makes it transport is not geometric at all: **a
+colouring pulls back along a graph homomorphism, so that property is carried forward by any
+endomorphism of the graph.** The metric enters at exactly one point — to manufacture the
+endomorphism from an isometry (`Isometry.distanceGraphHom`, already generic). So the true fixed
+point of this pass is a graph-level statement with no metric in it.
+
+**It is deliberately not minted.** The repository already carries that pattern twice — `Forces.comap`
+(`Forcer.lean:47`) and `Separated.comap` (`Arity.lean`) — and both live in files this package does
+not own. A third copy here would *add* a name where the honest move is to *collapse* three into one;
+that collapse belongs to a round whose owner holds `Forcer`, `Arity` and `Homogeneous` together. The
+finding is recorded in the module as a `--` comment and in the handoff, and `transport_pair_of_isometry`
+keeps its metric-flavoured statement, which is also the shape a reader of this module is looking for.
+
+### 8.2 The `∃`-hypothesis is confirmed, and its classical name adopted
+
+Four representations were weighed. A bundled `IsometryEquiv` was refused, as the module already
+refuses it for a stated reason (surjectivity is an obligation no consumer spends). A `MulAction` of
+an isometry group on pairs is machinery no consumer asked for. A named relation
+`SameOrbit x₀ y₀ x y` was refused for a sharper reason: **an isometry of a general metric space need
+not be surjective, so "reachable by an isometry" is a preorder and not an equivalence** — calling it
+an orbit would invite a symmetry that is false. The bare `∃` stays; the docstring gains the classical
+name for the *global* version of the condition (a metric space in which it always holds is
+**two-point homogeneous**, §PA).
+
+Call-site test, both directions: a caller holding the map writes `⟨g, hg, rfl, rfl⟩` (four tokens); a
+caller holding an existence statement — which is what every transitivity lemma produces — passes it
+directly. The `∃` form is the cheaper call site both ways and has one hypothesis instead of three.
+
+### 8.3 Two inhabitants dropped, one extracted — the API gets smaller
+
+§2.2 proposed three new lemmas around the hypothesis. The pass found the ℂ witness
+`exists_isometry_map_pair` is proving one fact twice, inline, in both its branches: **that
+`z ↦ a·z + b` with `‖a‖ = 1` is an isometry of the plane.** Extracting that fact is a subtraction:
+
+```lean
+theorem isometry_affine {a : ℂ} (ha : ‖a‖ = 1) (b : ℂ) : Isometry fun z => a * z + b
+```
+
+With it in hand:
+
+* `exists_isometry_map_pair_affine` is **dropped** — it is now
+  `exists_isometry_map_pair_of_mapsTo (isometry_affine ha b) hS hx hy`, one term, and a wrapper that
+  saves a caller zero lines of thought is a name for nothing. The composite is written out in §5's
+  caller sketch instead.
+* `exists_isometry_map_pair_of_sub_eq` (translation in a normed additive group) is **dropped** — over
+  `ℂ` it is `isometry_affine` at `a = 1`, and its only other consumers would be `EuclideanSpace ℝ
+  (Fin n)` and `ℝⁿ`, which are two-point homogeneous anyway, so it buys nothing today. It is three
+  lines whenever someone wants it, and the handoff says so. *A finding that came with the drop:* the
+  parent stub's remark that this split "serves the finite planes, where `addCayleyTranslate` is the
+  isometry" does **not** hold as stated — the finite planes are `unitQuadrance` graphs over
+  `ZMod p × ZMod p`, which is not a metric space, so no theorem in this file reaches them.
+
+What survives is two names: `isometry_affine` (the plane's rigid motions, extracted from a
+duplicated proof) and `exists_isometry_map_pair_of_mapsTo` (an ambient isometry restricted to a set
+it preserves — the piece that actually carries the hypothesis into a subspace).
+
+### 8.4 The non-vacuity witness changed, and improved
+
+§2.2 planned a normed-group lemma as the "not just `ℂ`" inhabitant. That is a weak witness: in a
+normed group the wholesale transitivity theorem is available anyway, so it never exercises the case
+the generalization exists for. Replaced by a spec `example` over the **Gaussian integers**
+`{z : ℂ | ∃ m n : ℤ, z = m + n * I}` with the quarter-turn `z ↦ i·z` — a subspace of the plane whose
+isometry group is a proper subgroup of the plane's, which is the regime `K²` lives in.
+
+### 8.5 The `CriticalSet` generalization is re-shaped
+
+§3 proposed reading the radii off the critical vertex, which puts `dist (q u) (q c)` in the statement
+four times and makes the old corollary a rewrite underneath `gluePoint`. Better: take the critical
+vertex as an argument (matching the pointwise style of `eq_gluePoint_of_dist_pair` one file down),
+and name the radii as implicits with `rfl`-dischargeable hypotheses.
+
+```lean
+theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_of_dist {ι : Type*}
+    {G : SimpleGraph ι} (q : ι → ℂ) {u v c : ι} {r₁ r₂ : ℝ} (hne : q u ≠ q v)
+    (h : Forces G (k + 1) u v) (hc : c ∈ CriticalSet G k)
+    (h₁ : dist (q u) (q c) = r₁) (h₂ : dist (q v) (q c) = r₂) :
+    q c = Glue.gluePoint (q u) (q v) r₁ r₂ ∨
+      q c = Glue.reflAxis (q u) (q v) (Glue.gluePoint (q u) (q v) r₁ r₂)
+```
+
+Passing `rfl rfl` reads the radii off the point; passing the drawing's edge facts recovers the old
+statement's `1 1` **directly, with no rewriting inside `gluePoint`**. The old name's proof becomes
+`fun c hc => …`, one line.
+
+### 8.6 Seams checked
+
+* **Non-vacuity of the new hypothesis:** two inhabitants, one of them outside the two-point
+  homogeneous regime (§8.4).
+* **Vacuity of the *conclusion*, which is the trap that produced this package's sibling work:**
+  `transport_pair_of_isometry` concludes about every colouring of `distanceGraph V D`, and at
+  `V = ℂ`, `D = {1}`, four colours that type is empty. The docstring says which instances are
+  non-vacuous and names `Instances/Interval.lean`'s `isEmpty_coloring_plane_four` as the reason the
+  `ℂ` instance is not one of them.
+* **Unsampled member for `eq_gluePoint_of_dist_pair`:** `r₁ = 0` (the point sits on a centre) forces
+  `dist x y = r₂`, tangency, and both disjuncts collapse to `x` — the statement holds and still says
+  something. Negative radii are unreachable because `hx : dist p x = r₁` supplies non-negativity, so
+  unlike `sphere_inter_sphere` this statement needs no `nonneg_of_annulus`.
+* **A stronger form recorded and not built:** `sphere_inter_sphere` itself can drop both annulus
+  hypotheses in favour of one witness of membership, giving the whole set equality rather than the
+  pointwise disjunction. Three lines whenever a consumer wants it; both consumers today are pointwise.
+* **The bound that genuinely needs the unit hypothesis:** `encard_criticalSet_le_two_of_forces` is
+  *not* generalized, and this is a finding rather than a gap — at read-off radii the two glue points
+  depend on the critical vertex, so "at most two" is false without a fixed radius pair. The
+  localization theorem above it needs no such hypothesis; the counting theorem does.
