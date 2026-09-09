@@ -91,6 +91,9 @@ theorem seamPlane_realMul {c : ℝ} (hc : c ∈ seamField) {z : ℂ} (hz : z ∈
   · simpa [Complex.mul_re] using seamField.mul_mem hc hre
   · simpa [Complex.mul_im] using seamField.mul_mem hc him
 
+-- Superseded 2026-09-09 by the `NoZeroDivisors F4` instance in `FieldWall4.lean`, which is the
+-- same sixteen-case `decide` in the form `mul_eq_zero` and the general law consume. Kept because
+-- the record cites the sixteen-pair exhaustion as this law's mechanism.
 /-- **A residue is zero as soon as a cofactor of nonzero residue makes it so** — `𝔽₄` has no zero
 divisors, by exhaustion over sixteen pairs. -/
 theorem F4.eq_zero_of_mul_eq_zero {a b : F4} (h : a * b = 0) (hb : b ≠ 0) : a = 0 := by
@@ -105,42 +108,28 @@ theorem sub_mem_oddDenom_of_dist {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ 
     {d : ℝ} (hd : (d : ℂ) ∈ oddDenom) (hd0 : d ≠ 0) (hdist : dist z w = d) :
     ∃ h : z - w ∈ oddDenom, (psiA ⟨z - w, h⟩ = 0 ↔ psiA ⟨(d : ℂ), hd⟩ = 0) := by
   have hdK : d ∈ seamField := (mem_seamPlane_iff.mp (oddDenom_subset_seamPlane hd)).1
-  have hv : z - w ∈ seamPlane := seamPlane_sub hz hw
+  have hd0' : (d : ℂ) ≠ 0 := by exact_mod_cast hd0
   have hnsq : normSq (z - w) = d ^ 2 := by
     have hn : ‖z - w‖ = d := by rwa [← Complex.dist_eq]
-    have := congrArg (fun t : ℝ => t ^ 2) hn
-    simpa only [Complex.sq_norm] using this
-  set u : ℂ := ((d⁻¹ : ℝ) : ℂ) * (z - w) with hu
-  have huP : u ∈ seamPlane := seamPlane_realMul (seamField.inv_mem hdK) hv
-  have hunorm : normSq u = 1 := by
-    rw [hu, map_mul, Complex.normSq_ofReal, hnsq]
+    have hsq := congrArg (fun t : ℝ => t ^ 2) hn
+    simpa only [Complex.sq_norm] using hsq
+  have hquot : (z - w) / (d : ℂ) = ((d⁻¹ : ℝ) : ℂ) * (z - w) := by push_cast; field_simp
+  have hqP : (z - w) / (d : ℂ) ∈ seamPlane :=
+    hquot ▸ seamPlane_realMul (seamField.inv_mem hdK) (seamPlane_sub hz hw)
+  have hqnorm : normSq ((z - w) / (d : ℂ)) = 1 := by
+    rw [hquot, map_mul, Complex.normSq_ofReal, hnsq]
     field_simp
-  have huA : u ∈ oddDenom := mem_oddDenom_of_unit huP hunorm
-  have hfac : z - w = (d : ℂ) * u := by
-    rw [hu]
-    have : (d : ℂ) ≠ 0 := by exact_mod_cast hd0
-    push_cast
-    field_simp
-  have hmem : z - w ∈ oddDenom := hfac ▸ oddDenom.mul_mem hd huA
-  refine ⟨hmem, ?_⟩
-  have hune : psiA ⟨u, huA⟩ ≠ 0 :=
-    map_ne_zero_of_mem_normOne conj_mem_oddDenom psiA huA (mem_normOne_conj_iff.mpr hunorm)
-  have hsplit : psiA ⟨z - w, hmem⟩ = psiA ⟨(d : ℂ), hd⟩ * psiA ⟨u, huA⟩ := by
-    rw [← map_mul]
-    congr 1
-    exact Subtype.ext hfac
-  rw [hsplit]
-  constructor
-  · exact fun h => F4.eq_zero_of_mul_eq_zero h hune
-  · exact fun h => by rw [h, zero_mul]
+  refine map_eq_zero_iff_of_mul_conj_eq conj_mem_oddDenom psiA hd hd0'
+    (mem_oddDenom_of_unit hqP hqnorm) ?_
+  rw [Complex.mul_conj, Complex.mul_conj, hnsq, Complex.normSq_ofReal]
+  push_cast
+  ring
 
 /-- **Within one coset of `A` the colouring is the residue map** — the general
 `cosetResidue_eq_iff` at this file's subring, and the primitive both forms of the law travel. -/
 theorem residueColouring_eq_iff_sub {z w : ℂ} (hmem : z - w ∈ oddDenom) :
-    residueColouring z = residueColouring w ↔ psiA ⟨z - w, hmem⟩ = 0 := by
-  have hkey := cosetResidue_eq_iff (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom
-    (x := z) (y := w) hmem
-  rwa [cosetResidue_apply_of_mem (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom hmem] at hkey
+    residueColouring z = residueColouring w ↔ psiA ⟨z - w, hmem⟩ = 0 :=
+  cosetResidue_eq_iff_map psiA hmem
 
 /-- **The law.**  Two points of `K²` at a distance `d` which itself lies in `K` with odd
 denominator get the same residue colour exactly when `d` lies in the prime. -/
@@ -175,17 +164,27 @@ theorem normSq_mem_oddDenom {v : ℂ} (hv : v ∈ oddDenom) :
   have h := oddDenom.mul_mem hv (conj_mem_oddDenom v hv)
   rwa [Complex.mul_conj] at h
 
+/-- **Conjugation maps `psiA`'s kernel into itself** — the hypothesis the general law spends, and
+the one `plans/FIELD-WALL-THEOREM.md` states Theorem A with: *the prime is fixed by complex
+conjugation*. Here it follows from the sharper `psiA_conj` (conjugation induces Frobenius), which is
+special to `𝔽₄`; the general statement asks only for this implication, and the red in
+`ResidueColouring.lean` §7 shows a split prime where it fails. -/
+theorem psiA_ker_stable (z : oddDenom) :
+    psiA ((starRingEnd ℂ).restrict oddDenom oddDenom conj_mem_oddDenom z) = 0 → psiA z = 0 := by
+  intro h
+  rw [show ((starRingEnd ℂ).restrict oddDenom oddDenom conj_mem_oddDenom z)
+      = (⟨(starRingEnd ℂ) (z : ℂ), conj_mem_oddDenom _ z.2⟩ : oddDenom) from rfl,
+    psiA_conj z.2] at h
+  exact mul_self_eq_zero.mp h
+
 /-- **The law, through the squared distance.**  A difference lying in `A` has zero residue exactly
 when its squared length does. -/
 theorem psiA_eq_zero_iff_normSq {v : ℂ} (hv : v ∈ oddDenom) :
     psiA ⟨v, hv⟩ = 0 ↔ psiA ⟨((normSq v : ℝ) : ℂ), normSq_mem_oddDenom hv⟩ = 0 := by
-  have hcube : psiA ⟨((normSq v : ℝ) : ℂ), normSq_mem_oddDenom hv⟩
-      = psiA ⟨v, hv⟩ * (psiA ⟨v, hv⟩ * psiA ⟨v, hv⟩) := by
-    rw [← psiA_conj hv, ← map_mul]
-    congr 1
-    exact Subtype.ext (Complex.mul_conj v).symm
-  rw [hcube]
-  exact ⟨fun h => by rw [h]; ring, fun h => F4.eq_zero_of_cube_eq_zero h⟩
+  rw [show (⟨((normSq v : ℝ) : ℂ), normSq_mem_oddDenom hv⟩ : oddDenom)
+      = ⟨v, hv⟩ * (starRingEnd ℂ).restrict oddDenom oddDenom conj_mem_oddDenom ⟨v, hv⟩ from
+    Subtype.ext (Complex.mul_conj v).symm]
+  exact (map_mul_conj_eq_zero_iff conj_mem_oddDenom psiA psiA_ker_stable ⟨v, hv⟩).symm
 
 /-- **The law, through the squared distance, at the level of the colouring.** -/
 theorem residueColouring_eq_iff_normSq {z w : ℂ} (hmem : z - w ∈ oddDenom) :
@@ -195,16 +194,40 @@ theorem residueColouring_eq_iff_normSq {z w : ℂ} (hmem : z - w ∈ oddDenom) :
 
 /-! ## §3 The residue colouring as a four-colouring, and what it refutes -/
 
-/-- `𝔽₄` numbered, so the residue colouring speaks to `Forces` and `Separated`, which quantify
-over `Fin k`-colourings. -/
+/-- **A unit step inside `K²` stays in the odd-denominator ring** — the integrality half of the
+general residue theory's hypothesis, at this field. Written once because three declarations below
+need it. -/
+theorem sub_mem_oddDenom_of_adj {S : Set ℂ} (hS : S ⊆ seamPlane) :
+    ∀ ⦃v w : S⦄, ((unitDistance ℂ).induce S).Adj v w → (v : ℂ) - (w : ℂ) ∈ oddDenom :=
+  fun v w hvw => mem_oddDenom_of_unit (seamPlane_sub (hS v.2) (hS w.2))
+    (mem_normOne_conj_iff.mp (sub_mem_normOne_conj_iff.mpr hvw))
+
+/-- **A unit step is a unit vector** — the norm-one half, which is the whole of the geometry. -/
+theorem sub_mem_normOne_of_adj {S : Set ℂ} :
+    ∀ ⦃v w : S⦄, ((unitDistance ℂ).induce S).Adj v w →
+      (v : ℂ) - (w : ℂ) ∈ normOne (starRingEnd ℂ) :=
+  fun _ _ hvw => sub_mem_normOne_conj_iff.mpr hvw
+
+/-- **Theorem B's colouring of a `K`-object, valued in `𝔽₄`** — the general `normOneColoring` at
+this file's subring and residue map. This is the object the compulsion consumers evaluate; the
+`Fin 4` presentation below is its recolouring. -/
+noncomputable def seamResidueColouring (S : Set ℂ) (hS : S ⊆ seamPlane) :
+    ((unitDistance ℂ).induce S).Coloring F4 :=
+  normOneColoring conj_mem_oddDenom psiA _ (fun v : S => (v : ℂ))
+    (sub_mem_oddDenom_of_adj hS) sub_mem_normOne_of_adj
+
+theorem seamResidueColouring_apply {S : Set ℂ} (hS : S ⊆ seamPlane) (v : S) :
+    seamResidueColouring S hS v = residueColouring (v : ℂ) := rfl
+
+/-- `𝔽₄` numbered. Kept because the record cites `seamColouring` by name; the compulsion consumers
+below no longer need it — `Palette.lean` translates a colouring of any four-element palette into
+`Forces`/`Separated`'s own `Fin 4`. -/
 noncomputable def F4.equivFin : F4 ≃ Fin 4 := Fintype.equivFinOfCardEq F4.card_eq_four
 
 /-- **Theorem B's colouring, as a `Fin 4`-colouring of any `K`-object.** -/
 noncomputable def seamColouring (S : Set ℂ) (hS : S ⊆ seamPlane) :
     ((unitDistance ℂ).induce S).Coloring (Fin 4) :=
-  SimpleGraph.Coloring.mk (fun v => F4.equivFin (residueColouring (v : ℂ)))
-    fun {v w} hvw hc =>
-      residueColouring_ne_of_dist_one (hS v.2) (hS w.2) hvw (F4.equivFin.injective hc)
+  SimpleGraph.recolorOfEquiv _ F4.equivFin (seamResidueColouring S hS)
 
 theorem seamColouring_apply {S : Set ℂ} (hS : S ⊆ seamPlane) (v : S) :
     seamColouring S hS v = F4.equivFin (residueColouring (v : ℂ)) := rfl
@@ -213,15 +236,13 @@ theorem seamColouring_apply {S : Set ℂ} (hS : S ⊆ seamPlane) (v : S) :
 theorem residueColouring_eq_of_forces {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
     (h : Forces ((unitDistance ℂ).induce S) 4 p q) :
     residueColouring (p : ℂ) = residueColouring (q : ℂ) :=
-  F4.equivFin.injective (by
-    simpa only [seamColouring_apply] using h (seamColouring S hS))
+  h.eq_of_card F4.card_eq_four (seamResidueColouring S hS)
 
 /-- A virtual edge is separated by *this* colouring. -/
 theorem residueColouring_ne_of_separated {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
     (h : Separated ((unitDistance ℂ).induce S) 4 p q) :
-    residueColouring (p : ℂ) ≠ residueColouring (q : ℂ) := fun hc => by
-  refine h (seamColouring S hS) ?_
-  simp only [seamColouring_apply, hc]
+    residueColouring (p : ℂ) ≠ residueColouring (q : ℂ) :=
+  h.ne_of_card F4.card_eq_four (seamResidueColouring S hS)
 
 /-- **A distance outside the prime carries no forced-monochromatic pair at four colours over
 `K`** — the half that rules gadgets out. -/
@@ -242,14 +263,16 @@ theorem not_separated_of_residue_eq_zero {S : Set ℂ} (hS : S ⊆ seamPlane) {p
 form, which reaches pairs whose distance does not lie in `K`. -/
 theorem not_forces_of_sub {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
     (hmem : (p : ℂ) - (q : ℂ) ∈ oddDenom) (hres : psiA ⟨(p : ℂ) - (q : ℂ), hmem⟩ ≠ 0) :
-    ¬ Forces ((unitDistance ℂ).induce S) 4 p q := fun h =>
-  hres ((residueColouring_eq_iff_sub hmem).mp (residueColouring_eq_of_forces hS h))
+    ¬ Forces ((unitDistance ℂ).induce S) 4 p q :=
+  not_forces_of_map_ne_zero F4.card_eq_four conj_mem_oddDenom psiA (fun v : S => (v : ℂ))
+    (sub_mem_oddDenom_of_adj hS) sub_mem_normOne_of_adj hmem hres
 
 /-- **A difference inside the prime carries no virtual edge**, likewise. -/
 theorem not_separated_of_sub {S : Set ℂ} (hS : S ⊆ seamPlane) {p q : S}
     (hmem : (p : ℂ) - (q : ℂ) ∈ oddDenom) (hres : psiA ⟨(p : ℂ) - (q : ℂ), hmem⟩ = 0) :
-    ¬ Separated ((unitDistance ℂ).induce S) 4 p q := fun h =>
-  residueColouring_ne_of_separated hS h ((residueColouring_eq_iff_sub hmem).mpr hres)
+    ¬ Separated ((unitDistance ℂ).induce S) 4 p q :=
+  not_separated_of_map_eq_zero F4.card_eq_four conj_mem_oddDenom psiA (fun v : S => (v : ℂ))
+    (sub_mem_oddDenom_of_adj hS) sub_mem_normOne_of_adj hmem hres
 
 /-! ## §4 The table
 

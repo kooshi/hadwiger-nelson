@@ -1,5 +1,6 @@
 import Mathlib.GroupTheory.Exponent
 import Proofs.HadwigerNelson.Fan
+import Proofs.HadwigerNelson.Palette
 
 /-!
 # Additive colourings (M56)
@@ -51,21 +52,17 @@ different colours then not every proper `k`-colouring identifies them — the in
 a homomorphism identifying `p` and `q` says nothing about `Forces` (see the module docstring). -/
 theorem not_forces_of_addMonoidHom [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
     (Γ : SimpleGraph V) (φ : V →+ G) (h : ∀ a b, Γ.Adj a b → φ (a - b) ≠ 0)
-    {p q : V} (hpq : φ (p - q) ≠ 0) : ¬ Forces Γ k p q := by
-  intro hF
-  let e : G ≃ Fin k := Fintype.equivFinOfCardEq hk
-  have h1 : e (φ p) = e (φ q) := hF (recolorOfEquiv Γ e (additiveColoring Γ φ h))
-  exact hpq (by rw [map_sub, sub_eq_zero]; exact e.injective h1)
+    {p q : V} (hpq : φ (p - q) ≠ 0) : ¬ Forces Γ k p q :=
+  not_forces_of_coloring_ne hk (additiveColoring Γ φ h) fun h1 =>
+    hpq (by rw [map_sub, sub_eq_zero]; exact h1)
 
 /-- **An identifying homomorphism refutes `Separated`.** If some additive colouring gives `p` and `q`
 one colour then they are not forced apart at `k` colours. -/
 theorem not_separated_of_addMonoidHom [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
     (Γ : SimpleGraph V) (φ : V →+ G) (h : ∀ a b, Γ.Adj a b → φ (a - b) ≠ 0)
-    {p q : V} (hpq : φ (p - q) = 0) : ¬ Separated Γ k p q := by
-  intro hS
-  let e : G ≃ Fin k := Fintype.equivFinOfCardEq hk
-  have h1 : e (φ p) ≠ e (φ q) := hS (recolorOfEquiv Γ e (additiveColoring Γ φ h))
-  exact h1 (congrArg e (sub_eq_zero.mp (by rwa [map_sub] at hpq)))
+    {p q : V} (hpq : φ (p - q) = 0) : ¬ Separated Γ k p q :=
+  not_separated_of_coloring_eq hk (additiveColoring Γ φ h)
+    (sub_eq_zero.mp (by rwa [map_sub] at hpq))
 
 /-- **The divisibility lemma (L1).** If `e` kills `G` and `p − q = e • w`, every homomorphism into `G`
 identifies `p` and `q`: a difference in `e·Λ` is forced in every additive colouring into a group of
