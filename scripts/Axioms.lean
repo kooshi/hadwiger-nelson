@@ -120,6 +120,16 @@ open HadwigerNelson
 #print axioms transport_pair
 #print axioms Separated.planeIn
 #print axioms Forces.planeIn
+-- P3 (consolidation 2026-09-09): the same transport off ℂ, over any metric space, with the
+-- existence of the isometry as a hypothesis; plus the two ways to discharge it.
+#print axioms HadwigerNelson.transport_pair_of_isometry
+#print axioms HadwigerNelson.isometry_affine
+#print axioms HadwigerNelson.exists_isometry_map_pair_of_mapsTo
+#print axioms HadwigerNelson.Separated.transport
+#print axioms HadwigerNelson.Forces.transport
+#print axioms HadwigerNelson.quarterTurn_mapsTo
+#print axioms HadwigerNelson.distanceGraph_induce
+#print axioms HadwigerNelson.unitDistance_induce
 #print axioms exists_dist_eq_and_dist_eq_one
 #print axioms not_exists_dist_eq_and_dist_eq_one_of_lt_half
 #print axioms not_colorable_of_forced_equal
@@ -135,6 +145,8 @@ open HadwigerNelson
 -- M50: the partner lattice's depth-one completeness (PartnerLattice.lean)
 #print axioms HadwigerNelson.Glue.eq_gluePoint_of_unit_pair
 #print axioms HadwigerNelson.Glue.finite_two_unit_neighbors
+-- P3 (consolidation 2026-09-09): the same, at arbitrary radii.
+#print axioms HadwigerNelson.Glue.eq_gluePoint_of_dist_pair
 -- M51: the spare-colour lemma, both polarities + contrapositives (SpareColour.lean)
 #print axioms HadwigerNelson.not_forces_of_colorable
 #print axioms HadwigerNelson.not_separated_of_colorable
@@ -154,6 +166,10 @@ open HadwigerNelson
 #print axioms HadwigerNelson.encard_criticalSet_le_degree_of_forces
 #print axioms HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces
 #print axioms HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_lt_dist
+-- P3 (consolidation 2026-09-09): the two-distance and metric-space generalizations of the
+-- previous two lines. The counting bound below them does NOT generalize — see the module.
+#print axioms HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in
+#print axioms HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_mul_lt_dist
 #print axioms HadwigerNelson.encard_criticalSet_le_two_of_forces
 -- M55: absorption (Absorb.lean) — the extension principle, the repaint carrier, hub / matching /
 -- greedy / symmetric-copy absorption, the degree instance, the red's finite heart
