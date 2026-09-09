@@ -38,6 +38,13 @@ general statement is.*
 
 ### E1 — Every finite Euclidean plane is forced-pair-free, at every prime and every colour count
 
+**CLOSED 2026-09-09 (consolidation package P4), with its headline corrected.** Proved for every prime
+`p ≡ 3 (mod 4)` and every `k` the plane **admits** — the colourability hypothesis is load-bearing and a
+counterexample without it ships (`p = 3, k = 2`). The proof needed **four** steps, not five: the
+orbit–stabiliser count of §2.1's step 4 is unnecessary, because one rotation that moves the period line
+suffices and the quarter turn always does. Prime fields only; the `𝔽_{p^n}` boundary is stated precisely.
+See `plans/HANDOFF-p4.md`.
+
 **Today:** four instances. `CLAUDE.md:1105` (ledger row 55): *"the sealing planes at 3, 7, 11, 19 are ALL
 pairwise free at their own chromatic number"*, each established by exhibiting a table. `CLAUDE.md:3203` (G47)
 carries it as reading (i), *"four instances"*, with a falsifier named.
