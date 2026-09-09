@@ -232,3 +232,38 @@ false without `Colorable`); the unsampled members `k = 0` (hypothesis unsatisfia
 (excluded by the congruence), `x = y` (the reverse direction). The predictable next lemma — the arity
 floor at `≥ 3` — is **not** free: `three_le_arityFloor_of_aperiodic_coincides` is packaged as *one table
 with both properties*, and this milestone supplies only the `Forces` half.
+
+## 8. Obligation-modeling pass (WORKFLOW step 5), run 2026-09-09
+
+**There is no induction in E1.** The space is not carved by a recursor: the argument is a chain of
+implications, and the only induction anywhere is Mathlib's, inside `Function.Periodic.nsmul`. So this
+pass's work was the *statement*, not the case table.
+
+**The change it produced: the local obligation, extracted and stated positively.** `exists_not_periodic`
+was written as a proof by contradiction over "every colouring is `d`-periodic". Underneath it is a
+statement with no negation and no quantifier over colourings at all:
+
+> **`not_periodic_quarterTurn`** — a proper colouring of `finitePlane p` is never periodic at both a
+> nonzero `d` and its quarter turn.
+
+That is the mathematics; the `by_contra` was plumbing. It is now a named lemma, and `exists_not_periodic`
+is its three-line wrapper. A caller who wants the mechanism gets it without the negation.
+
+**The prove / test / assume partition, made deliberately.**
+* **Prove** — the rotation layer (`rotEquiv`, `quadrance_rotMap`, `rotHom`), the two period-transfer
+  lemmas, the basis fact, `not_periodic_quarterTurn`, and the two theorems above it.
+* **Test** — `finitePlane3_colorable_three` and `finitePlane3_not_colorable_two` by `decide`, the
+  vacuity `example`, and the instantiations at `p = 11, 19`. These are the instruments that catch a
+  *wrong statement*, which no proof can.
+* **Assume** — `p % 4 = 3`, `[Fact p.Prime]`, `(finitePlane p).Colorable k`. Each is discharged by the
+  shipped inhabitant at `p = 3`, so none of the theorems is vacuous.
+
+**Mutation audit.** Dropping `Colorable k` makes the theorem **false**, and the counterexample ships in
+the file (`p = 3, k = 2`). Dropping `p % 4 = 3` breaks the *argument* exactly and visibly: at `p ≡ 1
+(mod 4)` an isotropic `d` has `quarterTurn d = −i·d` **collinear with `d`**, so the basis step fails and
+a colouring periodic along that line genuinely exists (`unitQuadrance_colorable_of_quotient` builds
+one). Whether the *conclusion* also fails there is a different question and is **not** settled here — see
+§9's honest-boundary note.
+
+**Transcription.** `decide` at the finite leaves is the faithful transcription of "check them all", not a
+shortcut; the rest is a `have` chain with every stepping stone typed.

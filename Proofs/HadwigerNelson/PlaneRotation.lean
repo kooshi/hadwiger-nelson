@@ -114,6 +114,13 @@ section FinitePlane
 
 variable {p k : ℕ} [Fact p.Prime]
 
+/-- **The local obligation of the whole module**: a proper colouring is never periodic at both a
+nonzero `d` and its quarter turn. The two periods generate a subgroup reaching the circle point
+`(1, 0)`, which the colouring would then have to give the origin's colour. -/
+theorem not_periodic_quarterTurn (hp : p % 4 = 3) (c : (finitePlane p).Coloring (Fin k))
+    {d : ZMod p × ZMod p} (hd : d ≠ 0) (h1 : Function.Periodic (⇑c) d)
+    (h2 : Function.Periodic (⇑c) (quarterTurn (ZMod p) d)) : False := by sorry
+
 /-- **No nonzero vector is a period of every colouring**: one of `c` and `c ∘ quarterTurn` refutes it. -/
 theorem exists_not_periodic (hp : p % 4 = 3) (c : (finitePlane p).Coloring (Fin k))
     {d : ZMod p × ZMod p} (hd : d ≠ 0) :
