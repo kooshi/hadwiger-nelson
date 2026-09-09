@@ -381,3 +381,60 @@ statement's `1 1` **directly, with no rewriting inside `gluePoint`**. The old na
   *not* generalized, and this is a finding rather than a gap — at read-off radii the two glue points
   depend on the critical vertex, so "at most two" is false without a fixed radius pair. The
   localization theorem above it needs no such hypothesis; the counting theorem does.
+
+## 9. Obligation-modeling pass (WORKFLOW step 5, second pass)
+
+**There is no induction anywhere in this package**, and no recursion, no termination obligation, and
+no claim over an infinite case split that is not already a Mathlib theorem. Every one of the eleven
+leaves is one or two steps. So this pass reduces to the two things the skill says matter when the
+strongest move available is reduction to a named theorem: **do the search first**, and **decide in
+advance which hypotheses are load-bearing and how their failure will be witnessed.**
+
+### 9.1 The search, done before deriving anything
+
+| wanted | found | verdict |
+|---|---|---|
+| `Isometry (fun z : ℂ => a * z + b)` for `‖a‖ = 1` | nothing directly | mint `isometry_affine`; it is an extraction of a proof already written twice in this file, not a new derivation |
+| `dist (a • x) (a • y) = ‖a‖ * dist x y` | `dist_smul₀` (`Analysis/Normed/MulAction.lean:153`) | try it first for `isometry_affine`; fall back to the file's existing `Complex.dist_eq` idiom, which is known to elaborate |
+| `isometry_mul_left` | exists, but for `IsIsometricSMul` — metric groups where *every* left multiplication is isometric | **does not apply**: `ℂ` under multiplication is not one, only the unit circle is. A near-miss worth recording so nobody reaches for it again |
+| an isometry restricted to an invariant set | only `isometry_subtype_coe` (`Isometry ((↑) : s → α)`) | no restriction lemma; `exists_isometry_map_pair_of_mapsTo` builds it from `Subtype.dist_eq` |
+| the reverse triangle inequality in the shape the annulus bound wants | `abs_dist_sub_le (x y z) : \|dist x z - dist y z\| ≤ dist x y` | exact fit, `z := p` |
+
+### 9.2 The partition: prove / test / assume
+
+* **Prove** — the eight statements of §8, plus the three old names re-derived as corollaries.
+* **Test** — a model of the new hypothesis (§9.3) and two reds (§9.4). No `#guard`s are useful here;
+  nothing computes.
+* **Assume** — nothing new. No axiom is purchased, no `native_decide` is used, and the trust ledger
+  must read exactly as it did before (725+ clean, 5 declared purchases).
+
+### 9.3 The model of the hypotheses — the trap this batch exists to avoid
+
+`transport_pair_of_isometry`'s hypothesis is structure-valued, so the file ships an inhabitant. The
+`ℂ` one (`exists_isometry_map_pair`) is *too strong* to be a useful witness: it discharges the
+hypothesis unconditionally, so it never exercises the case the generalization exists for. The
+shipped model is therefore the **Gaussian integers** `{z : ℂ | ∃ m n : ℤ, z = m + n * I}` under the
+quarter-turn `z ↦ i·z`, carrying the pair `(0, 1)` to `(0, i)`.
+
+That space is *not* two-point homogeneous — its isometries are the eight symmetries of the square
+lattice composed with translations, and the norm-25 vectors `(5, 0)` and `(3, 4)` lie in different
+orbits — so the hypothesis there is a real obligation rather than a free one. **That last sentence
+is a remark and not a theorem**, and the module says so in those words; what is *proved* is only
+that the hypothesis holds for the exhibited pair, which is what non-vacuity needs.
+
+### 9.4 The mutation audit, decided in advance
+
+| theorem | hypothesis under test | how its failure is witnessed |
+|---|---|---|
+| `isometry_affine` | `‖a‖ = 1` | **new red**: `¬ Isometry (fun z : ℂ => 2 * z)` — a dilation, the adversarial member |
+| `eq_gluePoint_of_dist_pair` | `x ≠ y` | the module's own docstring already records that at `x = y` the intersection is a whole circle; the existing red (`¬ ∃ p, dist p 0 = 1 ∧ dist p 3 = 1`) pins the beyond-the-annulus case and is kept |
+| `exists_isometry_map_pair_of_mapsTo` | `Set.MapsTo g S S` | **structurally** load-bearing — without it the restricted map cannot be written down, so the statement does not typecheck. No red needed and none is manufactured |
+| `transport_pair_of_isometry` | `Isometry g` | structurally load-bearing: `Isometry.distanceGraphHom` is the only route from `g` to a graph endomorphism |
+| `criticalSet_eq_empty_of_forces_of_two_mul_lt_dist` | `2 * M < dist (q u) (q v)` | the old name at `M = 1` is its own regression: if the bound were not load-bearing the `2 <` version would not be recoverable |
+
+### 9.5 Burn-down measure
+
+Eleven `sorry` leaves, each replaced by zero. No leaf decomposes. **The stop signal: any leaf that
+grows past ten lines is not a transcription of the argument, and the response is to ascend to the
+statement rather than to lengthen the tactic block** — the argument in every case is one sentence
+long, so a long proof means the statement is off.
