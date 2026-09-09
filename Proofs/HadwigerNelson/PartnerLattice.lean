@@ -9,10 +9,18 @@ nowhere else to be**. This module is that fact as a theorem, the depth-one compl
 engine's "in any field" claims cite.
 
 The statement is pointwise, and that is where the hypotheses vanish (M50 §Bʹ): both annulus bounds
-of `Glue.sphere_inter_sphere` are derivable from the witness itself — `|1 − 1| = 0 ≤ dist x y`
-always, and `dist x y ≤ dist x p + dist p y = 2` by the triangle inequality through `p` — so only
-`x ≠ y` remains, and it is genuinely load-bearing (at `x = y` the intersection is a whole circle).
-At `dist x y = 2` the glue point and its mirror coincide and the disjunction holds degenerately.
+of `Glue.sphere_inter_sphere` are derivable from the witness itself — `|r₁ − r₂| ≤ dist x y` by the
+reverse triangle inequality, and `dist x y ≤ dist x p + dist p y = r₁ + r₂` by the triangle
+inequality through `p` — so only `x ≠ y` remains, and it is genuinely load-bearing (at `x = y` the
+intersection is a whole circle). At `dist x y = r₁ + r₂` the glue point and its mirror coincide and
+the disjunction holds degenerately.
+
+**The radii are arbitrary** (consolidation, 2026-09-09). `eq_gluePoint_of_dist_pair` is the general
+form and `eq_gluePoint_of_unit_pair` its `(1, 1)` corollary — the widening is free, because the
+derivation above never used the value `1`. What it buys is downstream: `CriticalSet.lean`'s plane
+corollary drops its unit-edge hypothesis entirely, since the radii can simply be read off the
+point, so it now covers the `{1, d}` two-distance objects of the descent as well as unit-distance
+drawings.
 
 The finiteness corollary is the census's consumer shape: over a finite vertex set, only finitely
 many points of the plane have two distinct unit neighbours in it (at most two per pair — the bound
@@ -22,15 +30,34 @@ stays prose; finiteness is what the claims cite).
 namespace HadwigerNelson
 namespace Glue
 
-/-- **Depth-one completeness, pointwise.** A point at unit distance from two DISTINCT points is
-the glue point of their unit circles or its mirror — no other hypothesis: both annulus bounds are
-derived from the witness (`0 ≤ dist x y` and, through `p`, `dist x y ≤ 2`). The kill engine's
-"single-point kills live in the partner lattice, in any field" as a theorem. -/
+/-- **Depth-one completeness, pointwise, at any pair of radii.** A point at distances `r₁` and `r₂`
+from two DISTINCT points is the glue point of those two circles or its mirror — and there is no
+other hypothesis, because **both annulus bounds of `Glue.sphere_inter_sphere` are derived from the
+witness itself**: `dist x y ≤ dist x p + dist p y = r₁ + r₂` by the triangle inequality through `p`,
+and `|r₁ − r₂| = |dist x p − dist y p| ≤ dist x y` by the reverse one. So the generalized statement
+carries no more hypotheses than the unit-radius one it replaces, and `x ≠ y` is the only thing it
+asks — genuinely load-bearing, since at `x = y` the intersection is a whole circle.
+
+Nor is radius non-negativity needed here, where `sphere_inter_sphere` had to derive it: `hx` and
+`hy` supply it. Calling with `rfl, rfl` reads the radii off the point, which is the form
+`CriticalSet.lean`'s plane corollary uses to drop its unit-edge hypothesis altogether. The kill
+engine's "single-point kills live in the partner lattice, in any field" as a theorem. -/
 theorem eq_gluePoint_of_dist_pair {p x y : ℂ} (hne : x ≠ y) {r₁ r₂ : ℝ}
     (hx : dist p x = r₁) (hy : dist p y = r₂) :
-    p = gluePoint x y r₁ r₂ ∨ p = reflAxis x y (gluePoint x y r₁ r₂) := sorry
+    p = gluePoint x y r₁ r₂ ∨ p = reflAxis x y (gluePoint x y r₁ r₂) := by
+  have hhi : dist x y ≤ r₁ + r₂ := by
+    calc dist x y ≤ dist x p + dist p y := dist_triangle x p y
+    _ = r₁ + r₂ := by rw [dist_comm x p, hx, hy]
+  have hlo : |r₁ - r₂| ≤ dist x y := by
+    have := abs_dist_sub_le x y p
+    rwa [dist_comm x p, dist_comm y p, hx, hy] at this
+  have hmem : p ∈ Metric.sphere x r₁ ∩ Metric.sphere y r₂ :=
+    ⟨Metric.mem_sphere.mpr hx, Metric.mem_sphere.mpr hy⟩
+  rw [sphere_inter_sphere hne hlo hhi] at hmem
+  simpa using hmem
 
-/-- SKELETON: old name, old statement -/
+/-- **Depth-one completeness at unit radii** — the `r₁ = r₂ = 1` reading of
+`eq_gluePoint_of_dist_pair`, and the form the kill engine's census consumes. -/
 theorem eq_gluePoint_of_unit_pair {p x y : ℂ} (hne : x ≠ y)
     (hx : dist p x = 1) (hy : dist p y = 1) :
     p = gluePoint x y 1 1 ∨ p = reflAxis x y (gluePoint x y 1 1) :=

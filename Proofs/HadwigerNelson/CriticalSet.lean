@@ -22,7 +22,17 @@ Consequences:
   literature; the localization to an arbitrary critical set, and its plane form, are this module's.
 * **In the plane the critical set of a forcing graph has at most two points** — the glue point of
   the forced pair and its mirror (`PartnerLattice.eq_gluePoint_of_unit_pair`) — and NONE when the
-  pair is more than two apart. So a 6-forcer built as "5-rigid fabric plus a spindle at distance
+  pair is more than two apart.
+
+  **The unit-edge hypothesis is only half needed** (consolidation, 2026-09-09). The localization
+  and the emptiness both hold for a drawing whose edges merely lie in a set `D` of distances, which
+  is what M49's `{1, d}` two-distance objects are: a critical vertex then sits at a glue point of
+  *some* radius pair from `D`, so a two-distance forcer confines its critical set to at most eight
+  points where a unit one confines it to two. **The counting bound `encard_criticalSet_le_two_of_forces`
+  does not generalize and is not a gap** — with the radii free the two glue points move with the
+  critical vertex, and "at most two" is simply false. Stated for `D` in
+  `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in`, and for an edge-length bound `M` over
+  any metric space in `criticalSet_eq_empty_of_forces_of_two_mul_lt_dist`. So a 6-forcer built as "5-rigid fabric plus a spindle at distance
   `d > 2`" needs fabric whose 5-chromaticity survives every single vertex deletion: **redundancy
   before rigidity**, the first rung of the five-colour dial, readable at one 4-colour ask per vertex.
 * **Single-centre spindle unions are dead for the dial by theorem**: the fused centre is critical
@@ -45,6 +55,8 @@ finding.
 | the same `c`, outside a fan's partner list | no fan at `p` over it | `not_fan_of_mem_criticalSet` |
 | a forced pair | the critical set inside its common neighbourhood; a degree bound | `criticalSet_subset_inter_neighborSet_of_forces`, `encard_criticalSet_le_degree_of_forces` |
 | a forced pair drawn with unit edges | critical vertices at the two glue points; none beyond 2; at most two | `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces`, `criticalSet_eq_empty_of_forces_of_two_lt_dist`, `encard_criticalSet_le_two_of_forces` |
+| a forced pair drawn with edges at distances in `D` (the descent's `{1, d}` objects) | critical vertices at a glue point of *some* radius pair from `D` | `eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in` |
+| the same, with every edge at most `M` | none at all, once the pair is more than `2M` apart | `criticalSet_eq_empty_of_forces_of_two_mul_lt_dist` (any metric space) |
 | a packed colouring of an edge list minus a vertex | membership in the critical set | `Critical.colorable_delete_of_packed`, then `mem_criticalSet_iff` (definitional) |
 
 Stated over an arbitrary vertex type with no finiteness and no decidability, like `Critical.lean`;
@@ -242,36 +254,73 @@ unit neighbours of two distinct points are the glue point and its mirror, and no
 distance 2. -/
 
 open Glue in
-/-- **In the plane a forcing graph's critical vertices are drawn at the forced pair's two glue
-points.** -/
-theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_dist {ι : Type*} {G : SimpleGraph ι}
-    (q : ι → ℂ) {u v : ι} (hne : q u ≠ q v) (h : Forces G (k + 1) u v) :
-    ∀ c ∈ CriticalSet G k,
-      q c = gluePoint (q u) (q v) (dist (q u) (q c)) (dist (q v) (q c)) ∨
-      q c = reflAxis (q u) (q v)
-              (gluePoint (q u) (q v) (dist (q u) (q c)) (dist (q v) (q c))) := sorry
+/-- **In the plane a forcing graph's critical vertices are drawn at a glue point of the forced
+pair**, at radii taken from the drawing's own distance set. A critical vertex is adjacent to both
+endpoints (`criticalSet_subset_inter_neighborSet_of_forces`), so each of its two distances to them
+is an edge length, and `Glue.eq_gluePoint_of_dist_pair` then pins it — the annulus bounds coming
+free from the vertex itself.
+
+The distance set is where the content is: at `D = {1}` this is the two-point localization M54
+proved, and at `D = {1, d}` — the descent's two-distance objects — it confines the critical set to
+the eight glue points of the four radius pairs. Reading the radii off the vertex instead of
+constraining them would leave a true statement with nothing in it, since *every* point of the plane
+is a glue point of any two distinct points at its own two distances. -/
+theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in {ι : Type*}
+    {G : SimpleGraph ι} {D : Set ℝ} (q : ι → ℂ)
+    (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ∈ D) {u v : ι} (hne : q u ≠ q v)
+    (h : Forces G (k + 1) u v) :
+    ∀ c ∈ CriticalSet G k, ∃ r₁ ∈ D, ∃ r₂ ∈ D,
+      q c = gluePoint (q u) (q v) r₁ r₂ ∨
+        q c = reflAxis (q u) (q v) (gluePoint (q u) (q v) r₁ r₂) := by
+  intro c hc
+  have huv : u ≠ v := fun h' => hne (by rw [h'])
+  obtain ⟨hu, hv⟩ := criticalSet_subset_inter_neighborSet_of_forces huv h hc
+  exact ⟨_, hq u c hu, _, hq v c hv,
+    Glue.eq_gluePoint_of_dist_pair hne (dist_comm (q u) (q c) ▸ rfl)
+      (dist_comm (q v) (q c) ▸ rfl)⟩
 
 open Glue in
-/-- SKELETON: old name, old statement -/
+/-- **The unit-edge reading**, kept in its M54 form for the callers that speak of unit drawings:
+with every edge of the drawing at distance one, the two radii are `1` and the critical vertices sit
+at the forced pair's own glue point or its mirror. -/
 theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces {ι : Type*} {G : SimpleGraph ι}
     (q : ι → ℂ) (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} (hne : q u ≠ q v)
     (h : Forces G (k + 1) u v) :
     ∀ c ∈ CriticalSet G k,
       q c = gluePoint (q u) (q v) 1 1 ∨ q c = reflAxis (q u) (q v) (gluePoint (q u) (q v) 1 1) :=
-  sorry
+  fun c hc => by
+    obtain ⟨r₁, hr₁, r₂, hr₂, hcc⟩ :=
+      eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in (D := {1}) q
+        (fun i j hij => Set.mem_singleton_iff.mpr (hq i j hij)) hne h c hc
+    rwa [Set.mem_singleton_iff.mp hr₁, Set.mem_singleton_iff.mp hr₂] at hcc
 
 /-- **Beyond distance 2 the critical set is empty**: a 6-forcer spindled at a distance above 2 needs
 fabric with no critical vertex at all. -/
-theorem criticalSet_eq_empty_of_forces_of_lt_dist {ι W : Type*} [MetricSpace W]
-    {G : SimpleGraph ι} (q : ι → W) {M : ℝ} (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ≤ M)
+theorem criticalSet_eq_empty_of_forces_of_two_mul_lt_dist {ι W : Type*} [MetricSpace W]
+    {G : SimpleGraph ι} (q : ι → W) {M : ℝ} (hM : 0 ≤ M)
+    (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ≤ M)
     {u v : ι} (hd : 2 * M < dist (q u) (q v)) (h : Forces G (k + 1) u v) :
-    CriticalSet G k = ∅ := sorry
+    CriticalSet G k = ∅ := by
+  rw [Set.eq_empty_iff_forall_notMem]
+  intro c hc
+  have huv : u ≠ v := by
+    rintro rfl
+    simp only [dist_self] at hd
+    linarith
+  obtain ⟨hu, hv⟩ := criticalSet_subset_inter_neighborSet_of_forces huv h hc
+  have hle : dist (q u) (q v) ≤ 2 * M := by
+    calc dist (q u) (q v) ≤ dist (q u) (q c) + dist (q c) (q v) := dist_triangle _ _ _
+      _ ≤ M + M := add_le_add (hq u c hu) (by rw [dist_comm]; exact hq v c hv)
+      _ = 2 * M := by ring
+  linarith
 
-/-- SKELETON: old name, old statement -/
+/-- **Beyond distance 2 the critical set is empty** — the unit-edge reading (`M = 1`), kept in its
+M54 form. -/
 theorem criticalSet_eq_empty_of_forces_of_two_lt_dist {ι : Type*} {G : SimpleGraph ι} (q : ι → ℂ)
     (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} (hd : 2 < dist (q u) (q v))
     (h : Forces G (k + 1) u v) : CriticalSet G k = ∅ :=
-  sorry
+  criticalSet_eq_empty_of_forces_of_two_mul_lt_dist q (M := 1) zero_le_one
+    (fun i j hij => (hq i j hij).le) (by linarith) h
 
 /-- **At most two critical vertices** for an injective drawing. -/
 theorem encard_criticalSet_le_two_of_forces {ι : Type*} {G : SimpleGraph ι} {q : ι → ℂ}
