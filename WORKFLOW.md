@@ -93,7 +93,10 @@ leaves.
    select one obligation (the goal state is the machine's own prioritization), **query** the
    environment before inhabiting, then close it or split it into finitely many strictly-smaller,
    named `have`/lemma children. Replacing one `sorry` with smaller ones is the only legal move.
-8. **Quality gate** — the full gate from DEBRUIJN's `<the_loop>` / `<commands>`: `lake build` green ·
+8. **Quality gate** — the full gate from DEBRUIJN's `<the_loop>` / `<commands>`, plus
+   **`./scripts/vacuity.sh` green** (no new theorem quantifying over a provably empty domain, and no
+   new carrier without a proved inhabitant — `CLAUDE.md` § The gate has the rationale and the
+   baseline rule): `lake build` green ·
    zero `sorry` (`grep -rn --include="*.lean" "sorry"`) · `#print axioms` clean on the public
    surface · linters silent (`lake lint`) · spec examples passing.
 9. **Commit** — and in the same closing commit, **update `CLAUDE.md` § Frontier** (the

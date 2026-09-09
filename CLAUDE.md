@@ -3908,6 +3908,19 @@ on the public surface, linters silent, spec examples passing. On top of that, th
 statement-level gate, because a formalization that proves the *wrong* theorem is the characteristic
 failure here:
 
+- **`./scripts/vacuity.sh` is green** — the check that a theorem is not a `∀` over an empty
+  domain. Added 2026-09-09, after a theorem held since M34 turned out to say nothing and was
+  noticed four weeks later only because somebody tried to *use* it. Deciding vacuity is
+  undecidable, so the check does not try: it **requires evidence**, exactly as `axioms.sh`
+  requires every trust purchase to be declared rather than verifying any proof. Three verdicts,
+  and the third is the load-bearing one — `VACUOUS` (`IsEmpty` proved: the theorem says nothing),
+  `WITNESSED` (`Colorable`/`Nonempty` proved: it has content), `UNKNOWN` (**reported and counted,
+  never silent**, because this repository has already shipped two gates that failed open). It runs
+  against a **baseline that only ever shrinks**, so new declarations must carry their evidence
+  while the 238 pre-existing unresolved sites are burned down over time. Red/green control run at
+  introduction: a planted vacuous theorem was detected by name and the gate exited 1;
+  removed, it returned to green. **It found `core9_plane` and `core122_plane` on its first run,
+  knowing nothing about them** — which is the only evidence worth having that it works;
 - every definition has a `#eval`/`example` that would fail if it drifted;
 - the Moser spindle's non-3-colourability is proved **twice** — by `decide` and through the SAT
   bridge — so the CNF encoding is checked against an independent oracle;
