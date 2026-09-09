@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Additive
+import Proofs.HadwigerNelson.Palette
 import Proofs.HadwigerNelson.UnitQuadrance
 import Mathlib.RingTheory.Valuation.ValuationSubring
 import Mathlib.RingTheory.DedekindDomain.AdicValuation
@@ -289,7 +290,72 @@ theorem colorable_of_normOne {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A
   rw [cosetResidue_apply_of_mem _ (hmem hvw)]
   exact map_ne_zero_of_mem_normOne hσ ψ (hmem hvw) (hnorm hvw)
 
+/-- **The residue colouring**, as a colouring rather than a colourability (SKELETON). -/
+noncomputable def normOneColoring {G : Type*} [CommRing G] [Nontrivial G] {A : Subring L}
+    {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) : Γ.Coloring G := sorry
+
+theorem normOneColoring_apply {G : Type*} [CommRing G] [Nontrivial G] {A : Subring L}
+    {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) (v : V) :
+    normOneColoring hσ ψ Γ f hmem hnorm v
+      = cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom (f v) := sorry
+
 end NormOne
+
+/-! ## §4 Which pairs a residue colouring identifies (SKELETON) -/
+
+section Law
+
+variable {L V : Type*} [CommRing L] {A : Subring L} {σ : L →+* L}
+variable {G : Type*} [CommRing G]
+
+theorem cosetResidue_eq_iff_map (ψ : A →+* G) {z w : L} (hmem : z - w ∈ A) :
+    cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom z
+        = cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom w
+      ↔ ψ ⟨z - w, hmem⟩ = 0 := sorry
+
+theorem cosetResidue_ne_of_mem_normOne [Nontrivial G] (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
+    {z w : L} (hmem : z - w ∈ A) (hnorm : z - w ∈ normOne σ) :
+    cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom z
+      ≠ cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom w := sorry
+
+theorem map_mul_normOne_eq_zero_iff [Nontrivial G] [NoZeroDivisors G]
+    (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {d u : L} (hd : d ∈ A) (hu : u ∈ A)
+    (hnorm : u ∈ normOne σ) :
+    ψ ⟨d * u, A.mul_mem hd hu⟩ = 0 ↔ ψ ⟨d, hd⟩ = 0 := sorry
+
+theorem map_mul_conj_eq_zero_iff [NoZeroDivisors G] (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
+    (hker : ∀ z, ∀ hz : z ∈ A, ψ ⟨σ z, hσ z hz⟩ = 0 → ψ ⟨z, hz⟩ = 0)
+    {v : L} (hv : v ∈ A) :
+    ψ ⟨v * σ v, A.mul_mem hv (hσ v hv)⟩ = 0 ↔ ψ ⟨v, hv⟩ = 0 := sorry
+
+theorem not_forces_of_map_ne_zero [Nontrivial G] [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
+    (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {Γ : SimpleGraph V} (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ)
+    {p q : V} (hpq : f p - f q ∈ A) (hres : ψ ⟨f p - f q, hpq⟩ ≠ 0) :
+    ¬ Forces Γ k p q := sorry
+
+theorem not_separated_of_map_eq_zero [Nontrivial G] [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
+    (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {Γ : SimpleGraph V} (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ)
+    {p q : V} (hpq : f p - f q ∈ A) (hres : ψ ⟨f p - f q, hpq⟩ = 0) :
+    ¬ Separated Γ k p q := sorry
+
+end Law
+
+section LawField
+
+variable {L : Type*} [Field L] {σ : L →+* L}
+
+theorem div_mem_normOne {v d : L} (hd : d ≠ 0) (h : v * σ v = d * σ d) : v / d ∈ normOne σ := sorry
+
+end LawField
+
 
 section Valuation
 
@@ -341,7 +407,7 @@ theorem colorable_of_valuationSubring (A : ValuationSubring L) {σ : L →+* L}
 
 end Valuation
 
-/-! ## §4 The plane -/
+/-! ## §5 The plane -/
 
 section Plane
 
@@ -431,7 +497,7 @@ theorem colorable_unitDistance_induce_of_valuationSubring {L : Subfield ℂ}
 
 end Plane
 
-/-! ## §5 The unit-quadrance graph
+/-! ## §6 The unit-quadrance graph
 
 The theorem read on the coordinate group of any commutative ring — evidence, rather than a docstring
 claim, that nothing in §1 needed `ℂ`, a metric, or a field. -/
@@ -453,7 +519,7 @@ theorem colorable_unitQuadrance_of_residue [Fintype G] {A : AddSubgroup (R × R)
 
 end Quadrance
 
-/-! ## §6 Spec — the model of the hypotheses, the subsumption, and the reds -/
+/-! ## §7 Spec — the model of the hypotheses, the subsumption, and the reds -/
 
 section Spec
 

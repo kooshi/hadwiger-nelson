@@ -169,6 +169,61 @@ Written as real files with `sorry` at every leaf, so the *specification* elabora
 effort. Commit `skeleton: P6` carries it. Every declaration below is a signature this milestone
 commits to; the proofs are the milestone.
 
+## §M1 Domain-modeling pass (WORKFLOW step 5, `debruijn-domain-modeling`)
+
+Three changes, two of them substantive, one cut.
+
+**(a) The scalar half of the law needs no primality — and the mechanism is not the one the
+specialization used.** `ValuationLaw.lean` cancels the unit vector by `𝔽₄`-has-no-zero-divisors
+(`F4.eq_zero_of_mul_eq_zero`, sixteen cases by `decide`). That is not what is happening. A ring
+homomorphism's kernel is an **ideal**, and *a unit is invisible to an ideal* — `a·u ∈ I ↔ a ∈ I`
+for any ideal and any unit, which is Mathlib's `Ideal.mul_unit_mem_iff_mem`. So the primitive is
+
+```lean
+theorem map_mul_eq_zero_iff_of_isUnit (ψ : A →+* G) {a u : A} (hu : IsUnit u) :
+    ψ (a * u) = 0 ↔ ψ a = 0
+```
+
+with **no hypothesis on `G` whatsoever** — not `NoZeroDivisors`, not `Nontrivial`, not `Fintype`.
+The skeleton had both instances on this lemma and they were incidental structure inherited from
+the four-element field.
+
+**(b) The `σ`-stable-kernel hypothesis is stated interiorly, through Mathlib's own restriction.**
+The skeleton's hypothesis carried a dependent double binder
+(`∀ z, ∀ hz : z ∈ A, ψ ⟨σ z, hσ z hz⟩ = 0 → …`), which is the anonymous-constructor smell.
+`RingHom.restrict` (`Mathlib/Algebra/Ring/Subring/Basic.lean:981`) restricts `σ : L →+* L` to
+`A →+* A` given exactly the stability hypothesis we already hold, so the statement becomes
+
+```lean
+theorem map_mul_conj_eq_zero_iff [NoZeroDivisors G] (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
+    (hker : ∀ z : A, ψ (σ.restrict A A hσ z) = 0 → ψ z = 0) (v : A) :
+    ψ (v * σ.restrict A A hσ v) = 0 ↔ ψ v = 0
+```
+
+— one binder, no anonymous constructors, and `[Nontrivial G]` drops out (`mul_eq_zero` does not
+want it). **This is the half where primality is genuinely spent**, and the honest hypothesis is
+`(RingHom.ker ψ).IsPrime`; `[NoZeroDivisors G]` is chosen instead because it is *instance-implicit*
+and therefore free at every call site (every target here is a residue field), where `IsPrime` is a
+hypothesis every caller would have to discharge by hand. The alternative is recorded in a `--`
+comment beside the statement.
+
+**(c) Cut.** `forces_iff_forall_coloring` / `separated_iff_forall_coloring` are dropped — no
+consumer, and a caller holding both directions can assemble the `iff` in one line. Eight
+declarations in `Palette.lean`, not ten.
+
+**The adversarial member, and it is the mathematics.** Drop `hker` from (b) and the statement is
+false, with the counterexample being **exactly a split prime**: take `A = ZMod 5 × ZMod 5`
+(which *is* `ℤ[i]/5`), `σ` the coordinate swap (which *is* complex conjugation), `ψ` the first
+projection (which *is* reduction at one of the two primes above 5). Then `v = (1, 0)` has
+`ψ v = 1 ≠ 0` while `v · σ v = 0`, so `ψ (v · σ v) = 0`. That is the concrete reason the field-wall
+theorem demands a prime **fixed** by conjugation, and it ships as a red in `ResidueColouring.lean`
+§4, decidable in four lines.
+
+**Non-vacuity.** §4's model is `ℤ` with `σ = RingHom.id`, `A = ⊤`, `ψ = Int.castRingHom (ZMod 2)`;
+its norm-one set is `{1, −1}`, so the norm-one hypothesis is exercised by a member that is not the
+identity. The field-level inhabitant is `ValuationLaw.lean`'s own `oddDenom` / `psiA`, named in a
+`--` comment.
+
 ## §3 Registered predictions
 
 | # | prediction | how it fails |
@@ -179,6 +234,7 @@ commits to; the proofs are the milestone.
 | **P4** | The `σ`-stable-kernel hypothesis `ψ (σ z) = 0 → ψ z = 0` suffices for the squared-distance half; the Frobenius identity is *not* needed in general. | The general proof needs `ψ ∘ σ = F ∘ ψ` for an injective `F` after all, in which case that hypothesis is named precisely in the report and the finding is *why the law looked field-specific*. **Probed and provisionally met before this file was written** (`map_mul_conj_eq_zero_iff` elaborates). |
 | **P5** | No file outside this package needs editing. | A consumer elsewhere breaks — say so, do not edit it. |
 | **P6** | `Additive.lean` gets smaller. | It does not. |
+| **P7** | The scalar half of the law is proved with **no** hypothesis on the residue ring (§M1(a)). | It needs one after all. |
 
 ## §4 Risks
 
