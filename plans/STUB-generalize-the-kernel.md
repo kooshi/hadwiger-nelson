@@ -95,6 +95,10 @@ speak and the current statement cannot be spoken in.
 
 ### G3 — the spindle-kills-its-prime theorems are at `ZMod p`; the proof needs a field where `−1` is not a square
 
+**CLOSED 2026-09-09 (consolidation package P4).** Landed as stated: five field-level forms taking
+`¬ IsSquare (-1 : K)`, the `ZMod` statements kept verbatim as one-line corollaries. See
+`plans/HANDOFF-p4.md`.
+
 `LocalGlobal.lean:218, :230, :247, :265, :275`.
 
 **Verified by hand 2026-09-09, and this is the cleanest evidence in the survey: the general lemma is already

@@ -1140,6 +1140,37 @@ that comes with it: at four colours the *plane*-level form of such a statement i
 #print axioms isEmpty_coloring_plane_four
 #print axioms vacuous_of_plane_four_coloring
 
+/-! ## P4 (FS-24 G3 + FS-25 E1) — the spindle theorems off `ZMod`, and the planes' forced-pair-freedom
+
+`LocalGlobal.lean` §Spindle now has a field-level form of every theorem that was stated at `ZMod p`
+under `p % 4 = 3` (the old names are kept and are audited above, unchanged), and
+`PlaneRotation.lean` proves that a finite Euclidean plane at any prime `≡ 3 (mod 4)` has no forced
+pair at any colour count it admits — replacing the four measured instances of ledger row 55, which
+`Instances/PlaneFreedom.lean` re-derives. -/
+
+#print axioms sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one
+#print axioms quadrance_eq_zero_iff_of_not_isSquare_neg_one
+#print axioms no_ringHom_of_spindle_radicand_of_not_isSquare_neg_one
+#print axioms Forces.no_hom_of_spindle_radicand_of_not_isSquare_neg_one
+#print axioms Forces.isEmpty_ringHom_of_spindle_radicand_of_not_isSquare_neg_one
+
+#print axioms quadrance_rotMap
+#print axioms exists_smul_quarterTurn_eq
+#print axioms periodic_zmod_smul
+#print axioms not_periodic_quarterTurn
+#print axioms finitePlane_forces_iff
+#print axioms finitePlane_forces_eq
+#print axioms Forces.no_hom_of_spindle_radicand_of_colorable
+#print axioms Forces.isEmpty_ringHom_of_spindle_radicand_of_colorable
+
+#print axioms finitePlane3_colorable_three
+#print axioms finitePlane3_not_colorable_two
+#print axioms finitePlane7_colorable_four
+#print axioms finitePlane3_forces_eq
+#print axioms finitePlane7_forces_eq
+#print axioms finitePlane11_forces_eq
+#print axioms finitePlane19_forces_eq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

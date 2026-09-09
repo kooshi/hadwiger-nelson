@@ -105,6 +105,8 @@ import Proofs.HadwigerNelson.Instances.LiftObstruction11
 import Proofs.HadwigerNelson.Instances.LiftObstruction19
 import Proofs.HadwigerNelson.Instances.ResidueObstruction11
 import Proofs.HadwigerNelson.Instances.LocalGlobal19
+import Proofs.HadwigerNelson.PlaneRotation
+import Proofs.HadwigerNelson.Instances.PlaneFreedom
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound

@@ -213,24 +213,48 @@ section Spindle
 
 variable {p : ℕ} [Fact p.Prime]
 
-/-- **No isotropic vectors modulo a prime `≡ 3 (mod 4)`**: `a² + b² = 0` forces `a = b = 0`, because otherwise
-`(a/b)² = −1` and `−1` is not a square (`ZMod.exists_sq_eq_neg_one_iff`). -/
-theorem sq_add_sq_eq_zero_iff (hp : p % 4 = 3) {a b : ZMod p} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 := by
+-- G3 (FS-24, 2026-09-09). The theorems of this section were stated at `ZMod p` under `p % 4 = 3`,
+-- and their proofs use that congruence for exactly one thing: to know `-1` is not a square. Each now
+-- has a field-level form taking that as its hypothesis, with the `ZMod` statement kept verbatim as a
+-- one-line corollary, so no caller and no ledger citation moves. `isSquare_neg_one_of_spindle_radicand`
+-- was already stated over an arbitrary field; the wrapper immediately below it was what threw the
+-- generality away. What this buys: the planes over fields with `p^n` elements -- `unitQuadrance` has
+-- been ring-generic since M58 -- become expressible here, and that is the odd-degree face of the sieve
+-- (M61's `UD(F_27, 2)`, Haugland's cubic field).
+
+/-- **No isotropic vectors over a field where `-1` is not a square**: `a² + b² = 0` forces `a = b = 0`,
+because otherwise `(a/b)² = -1`. -/
+theorem sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K))
+    {a b : K} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 := by
   constructor
   · intro h
-    by_cases ha : a = 0
-    · subst ha
-      refine ⟨rfl, ?_⟩
-      simpa using h
-    · exact absurd hp (ZMod.mod_four_ne_three_of_sq_eq_neg_sq (y := b) ha (by linear_combination h))
+    by_cases hb : b = 0
+    · subst hb
+      exact ⟨by simpa using h, rfl⟩
+    · exact absurd ⟨a / b, by field_simp; linear_combination -h⟩ hK
   · rintro ⟨rfl, rfl⟩
     simp
 
-/-- The same, for a vector of the plane. -/
-theorem quadrance_eq_zero_iff (hp : p % 4 = 3) {w : ZMod p × ZMod p} : quadrance w = 0 ↔ w = 0 := by
+/-- The same, for a vector of the plane over such a field. -/
+theorem quadrance_eq_zero_iff_of_not_isSquare_neg_one {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K))
+    {w : K × K} : quadrance w = 0 ↔ w = 0 := by
   show w.1 ^ 2 + w.2 ^ 2 = 0 ↔ w = 0
-  rw [sq_add_sq_eq_zero_iff hp, Prod.ext_iff]
+  rw [sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one hK, Prod.ext_iff]
   exact Iff.rfl
+
+/-- `p ≡ 3 (mod 4)` is one way to discharge the field hypothesis, through
+`ZMod.exists_sq_eq_neg_one_iff`. -/
+theorem not_isSquare_neg_one_zmod (hp : p % 4 = 3) : ¬ IsSquare (-1 : ZMod p) :=
+  fun h => ZMod.exists_sq_eq_neg_one_iff.mp h hp
+
+/-- **No isotropic vectors modulo a prime `≡ 3 (mod 4)`**: `a² + b² = 0` forces `a = b = 0`, because
+otherwise `(a/b)² = −1` and `−1` is not a square (`ZMod.exists_sq_eq_neg_one_iff`). -/
+theorem sq_add_sq_eq_zero_iff (hp : p % 4 = 3) {a b : ZMod p} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 :=
+  sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one (not_isSquare_neg_one_zmod hp)
+
+/-- The same, for a vector of the plane. -/
+theorem quadrance_eq_zero_iff (hp : p % 4 = 3) {w : ZMod p × ZMod p} : quadrance w = 0 ↔ w = 0 :=
+  quadrance_eq_zero_iff_of_not_isSquare_neg_one (not_isSquare_neg_one_zmod hp)
 
 /-- **The spindle radicand forces `√−1` into the target.** If `R` holds `x, e` with `x² = (4d − 1)·e²` — the radicand
 of the spindle over a pair at squared distance `d`, up to the unit `e` — then a ring hom `φ` into a field that sends
@@ -243,10 +267,16 @@ theorem isSquare_neg_one_of_spindle_radicand {R K : Type*} [CommRing R] [Field K
     rw [this]; ring
   exact ⟨φ x / φ e, by rw [← sq, div_pow, h1, neg_div, div_self (pow_ne_zero 2 he)]⟩
 
+/-- **The spindle radicand kills every field in which `-1` is not a square** — no such ring hom exists. -/
+theorem no_ringHom_of_spindle_radicand_of_not_isSquare_neg_one {R K : Type*} [CommRing R] [Field K]
+    (hK : ¬ IsSquare (-1 : K)) (φ : R →+* K) {x d e : R}
+    (hx : x ^ 2 = (4 * d - 1) * e ^ 2) (hd : φ d = 0) (he : φ e ≠ 0) : False :=
+  hK (isSquare_neg_one_of_spindle_radicand φ hx hd he)
+
 /-- **The spindle radicand kills the prime**: at `p ≡ 3 (mod 4)` no such hom exists. -/
 theorem no_ringHom_of_spindle_radicand {R : Type*} [CommRing R] (hp : p % 4 = 3) (φ : R →+* ZMod p) {x d e : R}
     (hx : x ^ 2 = (4 * d - 1) * e ^ 2) (hd : φ d = 0) (he : φ e ≠ 0) : False :=
-  ZMod.exists_sq_eq_neg_one_iff.mp (isSquare_neg_one_of_spindle_radicand φ hx hd he) hp
+  no_ringHom_of_spindle_radicand_of_not_isSquare_neg_one (not_isSquare_neg_one_zmod hp) φ hx hd he
 
 /-- **A reduction that identifies two drawn points kills their squared distance.** A drawing `g` into `R` composed with
 `φ` is a drawing into `S`; if that drawing sends `u` and `v` to one point, `φ` sends the quadrance of `g u − g v` to
@@ -258,16 +288,35 @@ theorem quadrance_sub_eq_zero_of_map_eq {V R S : Type*} {G : SimpleGraph V} [Com
   have h2 : φ (g u).2 = φ (g v).2 := congrArg Prod.snd h
   simp [quadrance, h1, h2]
 
-/-- **A forced pair's spindle escapes every plane that is forces-free at that many colours.** `G` is drawn in `R`
-by `g`; the pair `u, v` is forced equal at `k` colours; the plane `UD(ZMod p)` is `k`-forces-free; then no ring hom
-`φ : R →+* ZMod p` can exist once `R` holds the pair's spindle radicand — along `φ` the pair's residues coincide
-(`Forces.image` + forces-freeness), so `φ` kills the squared distance, which the radicand lemma forbids. -/
+/-- **A forced pair's spindle escapes every plane that is forces-free at that many colours**, over any field
+in which `-1` is not a square. `G` is drawn in `R` by `g`; the pair `u, v` is forced equal at `k` colours; the
+plane `unitQuadrance K` is `k`-forces-free; then no ring hom `φ : R →+* K` can exist once `R` holds the pair's
+spindle radicand — along `φ` the pair's residues coincide (`Forces.image` + forces-freeness), so `φ` kills the
+squared distance, which the radicand lemma forbids. -/
+theorem Forces.no_hom_of_spindle_radicand_of_not_isSquare_neg_one {V R K : Type*} {G : SimpleGraph V} [CommRing R]
+    [Field K] {k : ℕ} (hK : ¬ IsSquare (-1 : K))
+    (hfree : ∀ u v : K × K, Forces (unitQuadrance K) k u v → u = v)
+    (g : G →g unitQuadrance R) (φ : R →+* K) {u v : V} (h : Forces G k u v) {x e : R}
+    (hx : x ^ 2 = (4 * quadrance (g u - g v) - 1) * e ^ 2) (he : φ e ≠ 0) : False :=
+  have hf := h.image ((unitQuadrance.map φ).comp g)
+  no_ringHom_of_spindle_radicand_of_not_isSquare_neg_one hK φ hx
+    (quadrance_sub_eq_zero_of_map_eq g φ (hfree _ _ hf)) he
+
+/-- The `ZMod` instance: at `p ≡ 3 (mod 4)`, against the finite plane `UD(ZMod p)`. -/
 theorem Forces.no_hom_of_spindle_radicand {V R : Type*} {G : SimpleGraph V} [CommRing R] {k : ℕ} (hp : p % 4 = 3)
     (hfree : ∀ u v : ZMod p × ZMod p, Forces (finitePlane p) k u v → u = v)
     (g : G →g unitQuadrance R) (φ : R →+* ZMod p) {u v : V} (h : Forces G k u v) {x e : R}
     (hx : x ^ 2 = (4 * quadrance (g u - g v) - 1) * e ^ 2) (he : φ e ≠ 0) : False :=
-  have hf := h.image ((unitQuadrance.map φ).comp g)
-  no_ringHom_of_spindle_radicand hp φ hx (quadrance_sub_eq_zero_of_map_eq g φ (hfree _ _ hf)) he
+  Forces.no_hom_of_spindle_radicand_of_not_isSquare_neg_one (not_isSquare_neg_one_zmod hp) hfree g φ h hx he
+
+/-- The consumer's shape over a field: with `e` a unit of `R`, **no ring hom from `R` — the coordinate ring
+holding the radicand — to `K` exists at all**. -/
+theorem Forces.isEmpty_ringHom_of_spindle_radicand_of_not_isSquare_neg_one {V R K : Type*} {G : SimpleGraph V}
+    [CommRing R] [Field K] {k : ℕ} (hK : ¬ IsSquare (-1 : K))
+    (hfree : ∀ u v : K × K, Forces (unitQuadrance K) k u v → u = v)
+    (g : G →g unitQuadrance R) {u v : V} (h : Forces G k u v) {x e : R}
+    (hx : x ^ 2 = (4 * quadrance (g u - g v) - 1) * e ^ 2) (he : IsUnit e) : IsEmpty (R →+* K) :=
+  ⟨fun φ => Forces.no_hom_of_spindle_radicand_of_not_isSquare_neg_one hK hfree g φ h hx (he.map φ).ne_zero⟩
 
 /-- The consumer's shape: with `e` a unit of `R`, **no ring hom from `R` — the coordinate ring holding the radicand — to
 `ZMod p` exists at all**. (That every prime of the FIELD above `p` then has even residue degree is the hand argument of
