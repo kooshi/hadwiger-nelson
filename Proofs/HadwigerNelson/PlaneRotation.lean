@@ -86,6 +86,13 @@ def quarterTurn (R : Type*) [CommRing R] : R × R ≃+ R × R := rotEquiv (a := 
 
 theorem quarterTurn_apply (w : R × R) : quarterTurn R w = (-w.2, w.1) := by sorry
 
+/-- **A nonzero vector and its quarter turn are a basis**, over any field in which `-1` is not a
+square. With `q = quadrance d` — invertible there, by `quadrance_eq_zero_iff_of_not_isSquare` — the
+combination is `s = (w.1·d.1 + w.2·d.2)/q`, `t = (w.2·d.1 − w.1·d.2)/q`. Pure linear algebra: this is
+the half of the freeness argument below that has nothing to do with primes. -/
+theorem exists_smul_quarterTurn_eq {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K)) {d : K × K}
+    (hd : d ≠ 0) (w : K × K) : ∃ s t : K, s • d + t • (quarterTurn K d) = w := by sorry
+
 end Rotation
 
 /-! ### Periods travel along automorphisms and scalars -/
@@ -106,11 +113,6 @@ theorem periodic_zmod_smul {n : ℕ} [NeZero n] {M β : Type*} [AddCommGroup M] 
 section FinitePlane
 
 variable {p k : ℕ} [Fact p.Prime]
-
-/-- **The quarter turn completes any nonzero vector to a basis reaching the circle.** With
-`q = quadrance d` invertible, `(d.1/q) • d + (−d.2/q) • (quarterTurn d) = (1, 0)`. -/
-theorem exists_smul_quarterTurn_eq (hp : p % 4 = 3) {d : ZMod p × ZMod p} (hd : d ≠ 0) :
-    ∃ s t : ZMod p, s • d + t • (quarterTurn (ZMod p) d) = ((1 : ZMod p), (0 : ZMod p)) := by sorry
 
 /-- **No nonzero vector is a period of every colouring**: one of `c` and `c ∘ quarterTurn` refutes it. -/
 theorem exists_not_periodic (hp : p % 4 = 3) (c : (finitePlane p).Coloring (Fin k))

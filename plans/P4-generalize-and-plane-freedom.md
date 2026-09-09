@@ -182,3 +182,53 @@ without its aperiodicity table.
   statement about a different table property and the record's instances there are not obviously a theorem.
 * **`Instances/ResidueObstruction11.lean`** is not edited (P4 owns new files, not existing instance
   files); that `finitePlane11_forces_iff` is now a corollary of a general theorem is recorded in the handoff.
+
+---
+
+## 7. Domain-modeling pass (WORKFLOW step 5), run 2026-09-09
+
+Four things moved; three deliberately did not.
+
+**Moved.**
+
+1. **The spanning lemma left `ZMod` entirely.** `exists_smul_quarterTurn_eq` was written at `ZMod p`
+   under `p % 4 = 3`, producing the single vector `(1, 0)`. Both restrictions were incidental. The fact
+   is linear algebra: **over any field where `−1` is not a square, a nonzero `d` and its quarter turn are
+   a basis** — the quadrance of `d` is invertible, and the coefficients are two divisions. Stating it
+   there and for an arbitrary target vector *deletes* two arbitrary choices (why `ZMod p`? why `(1,0)`?)
+   rather than adding generality, and it makes the module's boundary exact: **the only step that needs a
+   prime field is the closure of periods under scalars.** That sentence is now checkable against the
+   source rather than asserted in a docstring.
+2. `p % 4 = 3` is kept as the hypothesis of the *plane* theorems, but is now discharged through
+   `not_isSquare_neg_one_zmod` — so the congruence appears where the sieve speaks it and the field
+   property appears where the proof uses it. The two are equivalent for every prime, `p = 2` included
+   (`ZMod.exists_sq_eq_neg_one_iff`), so nothing is lost.
+3. `finitePlane_forces_eq` is kept beside `finitePlane_forces_iff` although it is `.mp` wrapped: the
+   `∀ u v, Forces … → u = v` shape is what four existing signatures take as `hfree`, so the packaged
+   form is the API the next caller is a special case of, not a second name for one theorem.
+4. Three layers — `rotMap` (the additive map), `rotEquiv` (invertible: needs `a² + b² = 1`), `rotHom`
+   (graph-preserving: needs the same) — were audited for duplication and kept. They are three different
+   structures on one function, each adding exactly one obligation, and Lean has no bundled "additive
+   graph automorphism" that would carry both at once. `rotEquiv` cannot be dropped in favour of a bare
+   surjectivity lemma, because `rotHom`'s adjacency step needs injectivity as well.
+
+**Deliberately not moved.**
+
+5. **`isSquare_neg_one_of_spindle_radicand` stays over a field.** Its proof would generalize to a
+   commutative ring with `IsUnit (φ e)` in place of `φ e ≠ 0`. No consumer wants that, and its sibling
+   `quadrance_eq_zero_iff_of_not_isSquare` genuinely needs inverses — the whole section is about
+   *residue fields* of primes. Recorded here rather than in the file so a later G3-style audit does not
+   re-derive it.
+6. **The `Submodule.span … = ⊤` phrasing of the basis fact** was considered and rejected: the consumer
+   wants one explicit combination, and `span_induction` would be a detour. The elementary `∃ s t`
+   form *is* the spanning statement.
+7. **Module name.** `PlaneRotation.lean` names the mechanism (reusable: rotations of `unitQuadrance R`
+   over any ring) rather than the headline theorem (freeness, prime fields only). A future milestone
+   asking "is rotation an automorphism of the plane?" greps for the mechanism.
+
+**Seams checked.** A named inhabitant of every hypothesis (`p = 3`, three-coloured by `x + y`); the
+adversarial member (`k = 2` at `p = 3`: no colouring, so every pair vacuously forced — the theorem is
+false without `Colorable`); the unsampled members `k = 0` (hypothesis unsatisfiable, harmless), `p = 2`
+(excluded by the congruence), `x = y` (the reverse direction). The predictable next lemma — the arity
+floor at `≥ 3` — is **not** free: `three_le_arityFloor_of_aperiodic_coincides` is packaged as *one table
+with both properties*, and this milestone supplies only the `Forces` half.
