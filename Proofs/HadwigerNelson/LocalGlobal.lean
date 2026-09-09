@@ -226,12 +226,21 @@ variable {p : ℕ} [Fact p.Prime]
 because otherwise `(a/b)² = -1`. -/
 theorem sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K))
     {a b : K} : a ^ 2 + b ^ 2 = 0 ↔ a = 0 ∧ b = 0 := by
-  sorry
+  constructor
+  · intro h
+    by_cases hb : b = 0
+    · subst hb
+      exact ⟨by simpa using h, rfl⟩
+    · exact absurd ⟨a / b, by field_simp; linear_combination -h⟩ hK
+  · rintro ⟨rfl, rfl⟩
+    simp
 
 /-- The same, for a vector of the plane over such a field. -/
 theorem quadrance_eq_zero_iff_of_not_isSquare_neg_one {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K))
     {w : K × K} : quadrance w = 0 ↔ w = 0 := by
-  sorry
+  show w.1 ^ 2 + w.2 ^ 2 = 0 ↔ w = 0
+  rw [sq_add_sq_eq_zero_iff_of_not_isSquare_neg_one hK, Prod.ext_iff]
+  exact Iff.rfl
 
 /-- `p ≡ 3 (mod 4)` is one way to discharge the field hypothesis, through
 `ZMod.exists_sq_eq_neg_one_iff`. -/
