@@ -34,6 +34,7 @@ import Proofs.HadwigerNelson.Instances.Core122
 import Proofs.HadwigerNelson.Instances.Core23
 import Proofs.HadwigerNelson.Instances.HexShell
 import Proofs.HadwigerNelson.Brick
+import Proofs.HadwigerNelson.BrickDistance
 import Proofs.HadwigerNelson.Instances.Nine
 import Proofs.HadwigerNelson.Instances.Seven
 import Proofs.HadwigerNelson.Instances.Interval

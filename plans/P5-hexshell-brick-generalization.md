@@ -505,3 +505,45 @@ vocabulary; the dangling reference is reported in the handoff, in a file this pa
   experience reason agrees — it would be a name nobody would ever search for.
 * **Tagging anything `@[simp]`.** Nothing here has a normal form to drive toward, and every tag taxes
   every future `simp` call.
+
+---
+
+## 9. Implementation record (WORKFLOW step 7) — what landed, and one measurement taken on the way
+
+Everything below elaborated on the first attempt; the three modelling passes had already compiled
+every shape as a probe, so implementation was transcription. `Brick.lean` is **byte-for-byte
+unchanged** — the bridge went into a new leaf as D3 decided, so `Instances/Seven.lean` and
+`Instances/Interval.lean` were not disturbed.
+
+**`Instances/Instances/HexShell.lean`** — thirteen new declarations, nothing removed, no cited
+statement altered. **`Proofs/HadwigerNelson/BrickDistance.lean`** — new leaf, three declarations.
+**`Instances/Nine.lean`** — one import and two theorems. **`Proofs.lean`** — one import line.
+**`scripts/Axioms.lean`** — one contiguous block of eighteen `#print axioms` lines; see the handoff,
+because this is a shared file.
+
+### The house rule is now mechanically enforced rather than promised
+
+"Every generalized theorem keeps its old form at its old name" is a promise unless something checks
+it. A pinning section at the foot of `HexShell.lean` ascribes the **pre-generalization type** to each
+of the eight names the record cites and closes it with the name as it now stands, so the whole rule
+is compiled every build. **The negative control was run**: mutating one pin's `Fin 5` to `Fin 6`
+produces the expected type mismatch naming both types, and reverting restores green. A check nobody
+has watched fail is not known to work.
+
+### The measurement: which certificate actually carries the avoidance surface
+
+`Instances/Nine.lean`'s docstring claims the nine-colouring is kept, though superseded as a bound,
+because *"it carries the avoidance surface at distances the seven-colouring does not avoid."* That
+had never been measured. Probed over **480 rationals `n/d` with `n < 41`, `d < 13`** (the
+enumeration, stated in the same sentence as the result, per G21):
+
+* **`sevenBrick` passes with NO second guard — one hit out of 480, and it is the properness guard
+  `1` itself.** The classical seven-colouring's cell diagonal is exactly `1`, so every margin it has
+  is zero, and boundary-tightness (M36's finding) shows up here as an *inability to carry any
+  avoidance at all*.
+* **`nineBrick` passes with 41 of them**, `3/2` among them — its slack margins buy a whole family.
+
+So the module's stated reason for existing is confirmed, quantitatively and for the first time, and
+`χ(ℝ²; {1, √q}) ≤ 9` is available for 41 probed values of `q` where the seven-colouring offers none.
+Only `q = 3/2` is minted as a theorem, because that is the value the record quotes; the rest is a
+measurement, reported as one, over a named enumeration.

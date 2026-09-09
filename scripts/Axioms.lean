@@ -986,6 +986,35 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms plane_colorable_nine
 #print axioms nine_avoids_sqrt_three_halves
 
+-- FS-24 G4 + G7b (2026-09-09) — statements moved to the level their proofs occupy. Kept as ONE
+-- block rather than filed next to each milestone's section, because this pass touches three
+-- milestones' surfaces at once and a single contiguous region is what makes the receipt readable.
+-- Every name the record cited before this pass still appears above with its old statement; these
+-- are the additions.
+-- The pigeonhole over an arbitrary set of forbidden distances, and the discharge map that makes
+-- the one-gadget forms instances of the two-gadget one rather than copies of its argument:
+#print axioms coloring_ne_of_dist_mem
+#print axioms hexShell_planeIn
+#print axioms hexShell_plane
+-- The single conditional theorem, and the two shapes with one distance already an edge:
+#print axioms not_colorable_distanceGraph_of_forced_pairs
+#print axioms not_colorable_distanceGraph_of_forced_sqrt3
+#print axioms not_colorable_distanceGraph_of_forced_two
+-- The plane, colour-generic — and the k = 6 reading, which is chi(R^2) >= 7 conditional on two
+-- six-colour gadgets, a sentence this repository could not previously write:
+#print axioms not_colorable_of_forced_pairs
+#print axioms add_one_le_chromaticNumber_plane_of_forced_pairs
+#print axioms not_colorable_six_of_forced_pairs
+#print axioms seven_le_chromaticNumber_plane_of_forced_pairs
+-- The two-distance dial's target: chi(R^2; {1,2}) >= 6 from a single sqrt3 gadget.
+#print axioms six_le_chromaticNumber_oneTwo_of_forced_sqrt3
+-- G7b: a brick certificate colours a distance graph, and the nine-colour avoider as one theorem.
+#print axioms Brick.colorable_distanceGraph
+#print axioms Brick.chromaticNumber_distanceGraph_le
+#print axioms Brick.colorable_avoiding
+#print axioms plane_colorable_nine_avoiding_sqrt_three_halves
+#print axioms chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine
+
 -- M36: the boundary-tight sharpening and the classical upper bound
 #print axioms Brick.check_pos
 #print axioms Brick.sq_lt_of_abs_lt

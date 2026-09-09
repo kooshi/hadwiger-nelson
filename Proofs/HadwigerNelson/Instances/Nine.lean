@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Brick
+import Proofs.HadwigerNelson.BrickDistance
 
 /-!
 # The nine-colour brick colouring: `χ(ℝ²) ≤ 9`, kernel-checked (M35 L3's instance)
@@ -28,6 +29,12 @@ sufficient-but-not-necessary check measures the check. See M36 §0a C2.
 The same table also witnesses the AVOIDANCE surface: it avoids the squared distance `3/2`
 (no two same-coloured points at distance `√(3/2)`), certifying `Brick.avoids` live — the
 consumer any future k = 6/5 avoider find would use.
+
+**Two facts, one theorem** (FS-24 G7b). Proper colouring and distance avoidance are two
+statements about one function, and `distanceGraph` (M49) is the object that holds them
+together: the same certificate says `χ(ℝ²; {1, √(3/2)}) ≤ 9` — the plane with BOTH the unit
+distance and `√(3/2)` forbidden needs at most nine colours. That is the form a future avoider
+find is quoted in, and it is what this module says it exists for.
 -/
 
 namespace HadwigerNelson
@@ -70,6 +77,23 @@ theorem nine_avoids_sqrt_three_halves :
       (by rw [unitDistance_adj.mp hadj]; norm_num), fun z z' hd => ?_⟩
   exact nineBrick.avoids (List.mem_cons_of_mem _ (List.mem_singleton.mpr rfl))
     nineBrick_check_avoid hd
+
+/-- **`χ(ℝ²; {1, √(3/2)}) ≤ 9`, as one theorem.** The plane's graph with both the unit distance
+and `√(3/2)` forbidden is 9-colourable — `plane_colorable_nine` and `nine_avoids_sqrt_three_halves`
+above, which are two statements about the same function, joined into the object that carries both.
+No new mathematics and no new certificate: one `decide` (`nineBrick_check_avoid`) does all of it. -/
+theorem plane_colorable_nine_avoiding_sqrt_three_halves :
+    (distanceGraph ℂ {1, Real.sqrt ((3/2 : ℚ) : ℝ)}).Colorable 9 :=
+  nineBrick.colorable_avoiding List.mem_cons_self
+    (List.mem_cons_of_mem _ (List.mem_singleton.mpr rfl)) nineBrick_check_avoid
+
+/-- The same in chromatic-number form, which is how the record states it. Note the honest reading:
+a two-distance upper bound is a bound on a graph *containing* the unit-distance graph, so it is a
+STRONGER statement than `χ(ℝ²) ≤ 9` (`chromaticNumber_unitDistance_le_distanceGraph`) — the extra
+content is exactly the avoidance. -/
+theorem chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine :
+    (distanceGraph ℂ {1, Real.sqrt ((3/2 : ℚ) : ℝ)}).chromaticNumber ≤ 9 :=
+  plane_colorable_nine_avoiding_sqrt_three_halves.chromaticNumber_le
 
 /-! ### Controls — compiled, every build -/
 
