@@ -29,23 +29,70 @@ Three deliverables, in this order of weight:
    Cayley structure. **This is the formulation Madore explicitly declined to write** (§2).
 3. **The exact value.** `χ(ℚ(√3,√11)²) = 4`, closing `[Madore2015]`'s `4 ≤ χ ≤ 5`. Everything is kernel-checked.
 
-## 1. The search: is the exact value known? — **No, and here is the evidence**
+## 1. The search: is the exact value known? — **No, and here is the evidence (re-run 2026-09-09)**
 
-Kooshi: *"are we sure no one has found this? Search for the claim exactly."* Run 2026-09-08:
+Kooshi: *"are we sure no one has found this? Search for the claim exactly."*
+
+**⚠ THE 2026-09-08 RUN WAS FLAWED, AND THE FLAW IS INSTRUCTIVE — it is `G50` inside a check written to
+enforce `G49`.** It walked the citations of `[Madore2015]` and **characterised each one by its abstract**.
+`[ExooIsmailescu2019]` was dismissed in five words as *"a new proof of `χ(ℝ²) ≥ 5`"*, which is exactly what its
+abstract says and exactly what its **conclusion does not**: three lines above its Madore citation it asks the
+question this paper answers. The paper was **on our own shelf, held since 2026-09-05**. A citation list is not a
+literature review; the fix is to open the papers, and the repair below does.
+
+### 1a. The corrected citation audit of `[Madore2015]` — all four, opened
+
+| citing work | what it actually says | threat to novelty |
+|---|---|---|
+| **`[ExooIsmailescu2019]`** (Discrete Comput. Geom. 2019 / arXiv:1805.00157) | **Asks our question.** Verbatim, concluding section: *"One interesting question is whether there exists a 5-chromatic unit distance graph which can be embedded in `Q[√3,√11] × Q[√3,√11]`. If true, this would be the best possible as a recent result of Madore shows. More generally, what is the smallest subfield of `E²` that requires 5 colors?"* **`χ(K²) = 4` answers the first sentence outright (no, there is none); the second is M58's sieve and stays open.** Also on that page: Heule's 826-vertex witness in `Q[√3,√11,√5]`, and *"What is the minimum order of a 5-chromatic unit distance graph in the plane?"* | **none — it poses the question, and is a fourth independent posting** |
+| **`[Krebs2022]`** (J. Algebraic Combin. 2023) | cites Madore for the `≥ 4` bound only; his own content is clique numbers, and his `χ > ω` section is Prop. 6.1, weaker than what we hold at every prime that matters | none |
+| **Davies, *Chromatic number of spacetime*** (Acta Arith. 2024 / arXiv:2308.16885) | **opened 2026-09-09, held locally.** Cites Madore once, for the pseudo-Euclidean question and the observation that `χ(ℝ^{1,1}) = ∞ ⟹ χ(ℂ²) = ∞`. Zero number-field chromatic content (checked by full-text sweep) | none — the 2026-09-08 characterisation was right |
+| **`[Aggarwal2025]`** (MIT PRIMES 2025) — **the "one unindexed item", now identified** | **Names our exact field as the open case**: *"computing `χ(R^d)` for `d > 2` and `χ(K^d)` for certain fields `K`, particularly when `K = Q(√3,√11)`"*, citing Madore. **Does not compute it.** Uses the **Moser Lattice `L_moser ⊂ Q[√3,√11]²`** (our direction ladder under another name) and, in his Thm 2.8, the *norm-one ⟹ unit in `O_{K(i)}`* observation that is our Theorem A's engine — for finiteness of unit vectors, not for a colouring | **none, and it is a gift**: an independent 2025 appearance of both our field and our hinge |
+
+### 1b. The search the 2026-09-08 run should have done — the citations of the paper that POSED the question
+
+Anyone answering *"is there a 5-chromatic unit-distance graph in `K²`?"* would cite **Exoo–Ismailescu**, not
+Madore. That is a different and much larger graph — **47 citing works** (Semantic Scholar, 2026-09-09) against
+Madore's four — and it was never walked.
+
+| test | result |
+|---|---|
+| all 47 citations of `[ExooIsmailescu2019]`, titles and venues scanned | **none answers the `K²` question.** The near neighbours were opened: Voronov et al.'s 5-chromatic constructions (Discrete Math. 2021), Noble's *Embedding Euclidean distance graphs in `ℝⁿ` and `ℚⁿ`* (already a recorded negative, §B), Mukherjee's *conditional approach* (arXiv:2210.16212 — measure-theoretic, no fields), and the ICML 2025 neural six-colouring paper. Nothing computes `χ` over a proper extension of `ℚ` |
+| **`[CostaSilvaFilho2026]`** (arXiv:2607.19995, July 2026), the one 2026 citation about **fields** | certifies the **exact coordinate fields** of the triangle-free Exoo–Ismailescu graphs EI17/EI19 by Galois theory — the nearest published relative of this repository's exact-geometry layer, and evidence the community has begun doing exact field arithmetic. **No chromatic number over a field; no `Q(√3,√11)`; does not cite Madore** | none |
+| OpenAlex cross-check of Madore's citation count | **1** (it indexes only the Exoo–Ismailescu preprint), against Semantic Scholar's 4 — so a single-database citation audit is itself unsafe, and both were run |
+
+### 1c. The direct searches, re-run
 
 | test | result |
 |---|---|
 | arXiv full search, `all:"Hadwiger-Nelson problem over"` | **1 hit, ever: Madore 2015** |
 | arXiv abstract search, `"chromatic number"` + `"number field"` | **0 hits** |
-| arXiv abstract search, `"Hadwiger-Nelson"` + `"field"`, 2015–2026 | **2 hits, both 2015**: Madore, and Bardestani–Mallahi-Karai (Borel chromatic numbers, a different question) |
-| **every citation of Madore 2015** (Semantic Scholar: exactly **4** in eleven years) | `[Krebs2022]` — cites him for the `≥ 4` bound, does not close it; *Chromatic number of spacetime* (2308.16885) — cites him only for a pseudo-Euclidean question; Exoo–Ismailescu 1805.00157 — a new proof of `χ(ℝ²) ≥ 5`; one unindexed item |
-| web search on the claim | returns the bracket `4 ≤ χ ≤ 5` as the state of the art |
-| `[Soifer2024]`, the field's standard reference, 2024 edition | carries **Benda–Perles Open Problem 11.6** as open and contains no number-field chromatic theory at all |
+| web search on the exact claim (`χ` of `Q(√3,√11)²`, 4-colourability of that plane) | returns the `[4,5]` bracket and the two-distance witness literature; **nobody states the value** |
+| `[Soifer2024]`, the field's standard reference, 2024 edition | carries **Benda–Perles Open Problem 11.6** as open; contains no number-field chromatic theory at all (838 pages swept, FS-18) |
+| any claim CONTRADICTING Theorem B (a 5-chromatic unit-distance graph inside `K²`) | **none found, and the literature says the opposite**: Exoo–Ismailescu 2018 call it open, their own witness needs `√247`, Heule's needs `√5`, de Grey's needs `√5, √7`. Consistent with `χ(K²) = 4` |
 
-**Conclusion: the public state of the art is `4 ≤ χ(ℚ(√3,√11)²) ≤ 5`, standing since 2015, in a paper with four
-citations none of which touches it.** The exact value is not in the literature. *(Registered caveat: Geombinatorics
-is print-first and poorly indexed, and `[Johnson2006]` — the compendium of this exact direction — is not obtained.
-See §5 R2.)*
+**Conclusion, on better evidence than the first run had: the public state of the art is
+`4 ≤ χ(ℚ(√3,√11)²) ≤ 5`, standing since 2015, and the exact value is not in the literature.**
+
+**And the repair STRENGTHENS the paper's thesis rather than denting it.** The question has now been posed or
+named **six times across fifty years, in four literatures that do not cite one another**:
+
+| # | who | where | what they asked |
+|---|---|---|---|
+| 1 | **Benda–Perles** | circulated 1976, published Geombinatorics IX(3) 2000; in `[Soifer2024]` ch. 11 as Open Problem 11.6 | *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic extension of `ℚ²`"* |
+| 2 | **`[Moorhouse2010]`** §1 | unpublished draft, finite geometry | *"We have not determined the exact value of `χ(K²)` in this case"* |
+| 3 | **`[Madore2015]`** Prop. 4.6 | arXiv, number theory | proves `4 ≤ χ(K²) ≤ 5`, leaves the gap |
+| 4 | **`[CranstonRabern2015]`** | Combinatorica | *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`? What about its chromatic number?"* |
+| 5 | **`[ExooIsmailescu2019]`** | **Discrete & Computational Geometry** — the strongest venue of the six | *"whether there exists a 5-chromatic unit distance graph which can be embedded in `Q[√3,√11] × Q[√3,√11]`"* |
+| 6 | **`[Aggarwal2025]`** | MIT PRIMES | names `χ(K^d)`, *"particularly when `K = Q(√3,√11)`"*, as the case to study |
+
+*(Registered caveat, unchanged: Geombinatorics is print-first and poorly indexed, and `[Johnson2006]` — the
+compendium of this exact direction — is still not obtained. See §5 R2.)*
+
+**Method note for the next check (and for `WORKFLOW.md` step 3a):** walk the citation graph of the paper that
+**posed** the question, not only of the paper that **proved** the nearest result; open every citing work whose
+title is in the neighbourhood rather than characterising it from its abstract; and cross-check the citation list
+in at least two databases, because they disagreed here by a factor of four.
 
 ## 2. The six lineages — the paper's actual content
 
@@ -73,6 +120,17 @@ empty**, which is the fact the paper exists to repair.
 
 ## 3. The credit table — the paper's spine, and non-negotiable
 
+**Every attribution below was re-verified against the source PDF on 2026-09-09**, not carried from a summary,
+because a unification paper is judged on exactly this and a wrong credit is the one error that cannot be
+apologised away. Checked verbatim: `[Madore2015]` **Prop. 3.2** (the valuation-ring form with anisotropy over
+`κ`), **Prop. 3.8** (the `mod m²` refinement), **Prop. 4.6** (*"If `K = Q(√3,√11)`, then `4 ≤ χ(K²) ≤ 5`"*, its
+lower bound from his 2.4 and its upper bound *through the finite plane at 11*), and the *"has not found the
+courage"* parenthetical — which introduces **Prop. 3.9**, where the obstacle is stated in his own words as
+*"there is a slight difficulty, though, in that `(1/√2)A` is **not a ring**, so we can't immediately apply 2.2"*,
+confirming that the thing he declined to formulate is exactly what Theorem A formulates. Checked verbatim:
+`[Moorhouse2010]` **Prop. 1.4(b)**, *"`K²` contains a Moser spindle iff `K` contains `1/66`, `√3` and `√11`"*.
+
+
 | piece | whose |
 |---|---|
 | `χ(K²) ≥ 4`; `K` is the smallest number field whose plane holds a Moser spindle | **`[Moorhouse2010]` Prop. 1.4(b)**, and independently `[Madore2015]` §2.4 |
@@ -84,6 +142,7 @@ empty**, which is the fact the paper exists to repair.
 | `χ(𝔽₁₁²) = 5` | **`[Moorhouse2010]` Table 6.1**; known to `[Madore2015]` |
 | `ω(UD(F,2)) = 3` iff 3 is a square | **`[Krebs2022]` Thm 5.2** |
 | **Theorem A in full generality** — arbitrary graph, arbitrary subgroup, partial homomorphism | **ours**, and it is the formulation Madore declined |
+| the forced-pair-at-`8/3`-then-spindle move into `ℚ(√3,√11,√247)` | **`[ExooIsmailescu2019]` Claim 2.1 (2018)**, whose `G40` forces `[0,0,0,0]` and `[0,0,96,0]` — distance `8/3` — then rotates by `sin θ = 3√247/128`. **Ours is the UNCONDITIONAL version** (their forced pair is conditional on no monochromatic `√(11/3)`-pair, so they need three acts); M53's T20 novelty claim was retracted 2026-09-09 |
 | **`χ(K²) ≤ 4`, hence `= 4`** — closing an eleven-year-old bracket | **ours** |
 | **the unification and its citation graph** | **ours** |
 | **every line machine-checked** on axioms exactly `[propext, Classical.choice, Quot.sound]` | **ours**, and a first in this literature |
@@ -107,6 +166,7 @@ prime* · *seam plane* / *seam field* / *seam group* · *the finite-plane bound*
 | **N2** | the anisotropy/2-adic criterion | **Do not name it.** Fischer, Madore and Bardestani–Mallahi-Karai all state it unnamed; naming it would obscure that they are the same condition, which is the paper's point |
 | **N3** | **"quadrance" or not** | The term picks a readership: `[Vinh]`/`[Krebs]` say *unit-quadrance graph*, `[Moorhouse]`/`[Fischer]`/`[Madore]`/`[Soifer]` say `K²` and *unit-distance graph*. **Recommendation: `K²` throughout, and one explicit sentence naming "unit-quadrance graph" as the finite-field literature's term for the same object — that sentence IS the bridge this paper exists to build**, and `[Krebs2022]` is the sole precedent for crossing it |
 | **N4** | the title | must be findable from either side. It should say *the reduction*, *number field*, and the value |
+| **N5** | **"virtual edge" — the literature has already rejected it, in print** (found 2026-09-09, reading `[Parts2020a]` §2 at the source) | Parts, verbatim: *"A non-mono pair that does not define an edge has sometimes been termed a **virtual edge**, but in our opinion, this term is not entirely successful, since it does not clearly express whether one means a mono- or non-mono-pair, which leads to confusion."* **This project uses "virtual edge" in almost every milestone.** His vocabulary — ***mono-pair***, ***non-mono-pair***, ***spindle*** (*"a cycle of two mono-pairs and a unit edge"*) — is the two-distance community's, it is published, and it is *better*: it names the polarity, which is exactly the distinction the 2-adic law turns on. **Recommendation: adopt mono-pair / non-mono-pair throughout and drop "virtual edge", noting the term in one parenthesis for readers who know it.** This is the ban list's own principle applied to a coinage we did not coin but did inherit |
 
 **The test:** *would Fischer, Moorhouse, Madore, Soifer, Johnson, Vinh and Krebs each recognize every term
 without a definition, and would each find this paper by searching for what they themselves called it?*

@@ -242,7 +242,7 @@ ever built has five hundred vertices and a computer behind it.
    and reason 3 below are each fatal on their own, and the valuation law adds a third that *is*
    proved — a `√3`-pair over `K` can never be forced *monochromatic*. What I cannot claim, and did,
    is that a `√3` virtual edge is impossible.
-3. The skeleton was published anyway: `[ExooIsmailescu2018]` build a 79-point configuration in
+3. The skeleton was published anyway: `[ExooIsmailescu2019]` build a 79-point configuration in
    `ℚ[√3,√11,√247]` with `sin θ = 3√247/128` — my twist exactly.
 
 **What survives from §§1–6 is the arithmetic**: the valuation law and the identity

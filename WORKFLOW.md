@@ -43,6 +43,15 @@ leaves.
    3. **Search for the QUESTION, not only the method** — "has anyone computed χ of the plane over this field?"
       A stated open problem you are about to answer is worth knowing *before* the milestone.
    4. **Look outside arXiv** — personal pages, unpublished drafts, theses, and the pre-2000 journal literature.
+   5. **Walk the citation graph of the paper that POSED the question, not only of the one that proved the nearest
+      result** — added 2026-09-09, after a check walked the four citations of the paper with the nearest theorem
+      and never touched the forty-seven of the paper that asked the question. Anyone answering a question cites
+      whoever asked it.
+   6. **Open every citing work whose title is in the neighbourhood; never characterise one from its abstract** —
+      the same check dismissed a paper held on our own shelf as "a new proof of `χ(ℝ²) ≥ 5`", which its abstract
+      says and its conclusion contradicts. An abstract is not a reading (G50).
+   7. **Cross-check citation lists in two databases** — OpenAlex and Semantic Scholar disagreed by a factor of
+      four on the same paper, and the missing three were the informative ones.
    Record the result in §PA either way: a negative ("searched X, Y, Z under these names; nothing") is a finding
    about where the unworked ground is. **Sell this as AIMING the milestone, not as protecting novelty**, or it
    gets skipped: it hands over free theorems and it finds the open questions the work is answering. Anything

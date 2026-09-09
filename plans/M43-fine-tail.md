@@ -399,7 +399,7 @@ family at every scale.
   same-colour distance set misses a whole closed interval around 1 — intra-cell
   distances stay ≤ 2p/√3 < 1, and the finitely many cross-cell offset windows near 1
   are closed sets not containing 1, so a positive gap δ exists — properly
-  6-colouring Voronov's G_{δ/2}. Contradiction. **Conditional on [Vor2023]:
+  6-colouring Voronov's G_{δ/2}. Contradiction. **Conditional on [Voronov2023]:
   χ(G(p)) ≥ 7 for the ENTIRE cell family, every band, all the way down** — G23/G24's
   "why is every band ≥ 7" has a conditional explanation, and by de Bruijn–Erdős
   compactness every band owns a finite refuting ball. Our refutations are the
@@ -456,7 +456,7 @@ family at every scale.
   The full depth-1 tree is ~10⁷ lines / ~600 MB. This is an M06-scale certificate build
   (GB of module data, tens of hours of elaboration), not a same-day step.
   **Recommendation: do not spend it.** The statement it would certify is (i) conditionally
-  implied by a published theorem [Vor2023], (ii) not a rung toward χ ≥ 6, and (iii) below
+  implied by a published theorem [Voronov2023], (ii) not a rung toward χ ≥ 6, and (iii) below
   the standing publication bar. The template stays proven and ready (M42) for a target
   that earns it.
 
@@ -493,8 +493,14 @@ family at every scale.
   pair's pure arrival).
 * The k = 8 question at the deep pocket is untouched (M40's χ ∈ [8,16] stands).
 * No kernel work landed this milestone; nothing is claimed kernel-side.
-* [Vor2023] and [Parts2023] are external preprints, unverified by this project's standards;
+* [Voronov2023] and [Parts2023] are external preprints, unverified by this project's standards;
   every consequence drawn from them is labelled conditional.
+  **AMENDED 2026-09-09 (bibliography key audit; the milestone's verdict at its close is left as written).**
+  Two updates for a later reader: `[Voronov2023]` was **read and verified** at FS-18 on 2026-09-08 — its
+  Theorem 1.1 is proved non-computationally — so the conditional it carried is **discharged** and the cell
+  family's `≥ 7` at every scale is unconditional (`CLAUDE.md` ledger row 40, G24/G29). `[Parts2023]` is
+  arXiv:2303.14722, **held and still unread**; it was cited here under a key that did not exist in
+  `BIBLIOGRAPHY.md` until the audit defined it, and anything resting on it stays conditional.
 
 ---
 
