@@ -1,5 +1,23 @@
 # ROADMAP — the descent era, as two interwoven tracks
 
+> **⚠ SUPERSEDED 2026-09-09, and bannered rather than deleted (the house rule is deprecate, never delete).**
+> This file was created to organise the **descent era's** two tracks — the batch-descent iterations and the
+> tangents beside them. That era ended when M53 was halted on 2026-09-05 and the field-wall theorem redirected
+> the whole programme into the finite-plane / field-sieve / algebraic-derivation arc. Its last dated entry is
+> **M61 (closed 2026-09-08)**; it records nothing of FS-18 (the library read), the mascot challenge
+> (ledger rows 58–59), FS-19 through FS-25, or the choice of **M62 = FS-6**. Its own header rule — *"update
+> triggers: every iteration commit, every work-order close, every tangent finding — the same day"* — has
+> therefore not been met since 2026-09-08, and a board nobody updates is worse than no board because it reads
+> as current.
+>
+> **The live board is now two files and only two**: `CLAUDE.md` § Frontier / § Paths forward (the ranked
+> milestone list, rewritten at every close) and `plans/FRONTIER-STUBS.md` (the ranked stub table). Everything
+> below is an accurate record of the descent era and is kept for that.
+>
+> *Found by the record audit of 2026-09-09; the decision to banner rather than revive is de Bruijn's, on the
+> ground that the two-track structure this file encodes no longer describes how the work runs.*
+
+
 *Created 2026-09-01 on Kooshi's direction: "we've transitioned from structured milestones to chasing
 tangents while the iterations churn, which is a good use of time, but risks losing ideas — let's make
 a proper roadmap, and one we can follow while we curate and improve the iterations." This file is
