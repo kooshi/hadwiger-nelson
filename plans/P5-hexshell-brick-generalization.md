@@ -338,3 +338,69 @@ bridge that side condition is **never assumed and never needed**: a distance in 
 guard `q`, and `Brick.check_pos` proves every certified guard positive, so `0 ∈ D` is impossible. A
 side condition that the certificate discharges rather than the caller is the sign that the hypothesis
 was cut in the right place.
+
+---
+
+## 7. Obligation-modeling pass (WORKFLOW step 5, second pass) — the decomposition, probed rather than predicted
+
+Every shape below was compiled before being written down here
+(`/tmp/…/scratchpad/Probe{1,2,3}.lean`, three files, all green). The pass asked two questions.
+
+### Q1 — how does each of the twelve declarations become a one- or two-line consequence?
+
+**Answer: the unit-distance case is a literal instance of the distance-graph case, through the bridge
+the `DistanceGraph` module was built to provide.** `unitDistance_eq_distanceGraph_singleton`
+(`DistanceGraph.lean:64`) is an equality of graphs whose own docstring says it exists "to make every
+`unitDistance` theorem a `D = {1}` instance", and nobody had used it that way. Two idioms, and which
+one applies is decided by whether the goal mentions the graph:
+
+* **the goal mentions the graph** (`¬ (unitDistance ℂ).Colorable k`) → `rw [unitDistance_eq_
+  distanceGraph_singleton] at h3 h2 ⊢`, then apply. **Two lines, no argument repeated.**
+* **the goal mentions only the colouring** (`∃ x y, … ∧ C x = C y`) → the rewrite does not reach the
+  goal, so transport the colouring inline with one `Coloring.mk`. Probed: the conclusion is
+  definitionally the same because the underlying function is literally the same. **Three lines.**
+
+The two one-hypothesis-free corollaries are then `master … (fun C _ _ h => coloring_ne_of_dist_mem C
+hm _ h)` — **one line each**, which is F3 of the domain pass cashed out.
+
+### Q2 — where does the `ℕ∞` numeral arithmetic belong so it happens once?
+
+**Answer: nowhere new. It already has a home and the home is documented.**
+`add_one_le_chromaticNumber_iff_not_colorable` (`UnitDistance.lean:69`) is exactly this, and its
+docstring reads *"Derived once here so that the `ℕ∞` arithmetic does not recur at every call site"*.
+Every chromatic-number form in this package is `add_one_le_chromaticNumber_iff_not_colorable.mpr
+(not_colorable_… )` — one line, zero arithmetic.
+
+The **only** arithmetic is at the two headline names that carry a bare numeral (`6 ≤ χ`, `7 ≤ χ`),
+where `((5 + 1 : ℕ) : ℕ∞)` must meet the literal `6`. One `exact_mod_cast` each; probed. Note this
+*replaces* the existing proof of `six_le_chromaticNumber_plane_of_forced_pairs`, which hand-rolled
+`rw [show ((5 : ℕ) : ℕ∞) = 5 from rfl, ← ENat.add_one_le_iff (by simp)]` — the statement is unchanged
+and the proof gets shorter. A declined generalization is recorded with it: a bespoke numeral-bridge
+lemma was considered and rejected, because minting one would have put the arithmetic in a *second*
+place, which is the opposite of the answer to Q2.
+
+### The mutation audit (validate-adversarially), and what it produced
+
+Each hypothesis was deleted in thought and the failure sought concretely.
+
+* `hk : k < 7` — already red-tested in the module (the seven-colour rainbow, `:148`).
+* `h1 : (1 : ℝ) ∈ D` — **a new red, and it is worth having.** The map `![0,0,1,2,3,4,5] : Fin 7 →
+  Fin 6` has **no** monochromatic pair among the six `√3`-pairs and three diameters, and its one
+  repeat sits on the listed unit edge `(0,1)`. So without properness at distance `1` the conclusion
+  is false at the carrier, and the hypothesis is load-bearing rather than inherited. Compiles; ships
+  as an `example` with the repeat pinned by a `#guard`.
+* `hm : (2 : ℝ) ∈ D` in the one-free corollary — it is the sole input to the discharge; deleting it
+  leaves `h2` unprovable.
+* **The consistency cross-check passes**: the master with *both* hypotheses discharged from
+  membership proves `¬ (distanceGraph ℂ {1, √3, 2}).Colorable 6`, which the module already proves by
+  the independent edge-list route at `:222`. Two proofs of one fact, by different arguments, is the
+  evidence D1 was chosen on — it ships as an `example`.
+
+### What the pass declined
+
+* **A pair of named colouring-transport definitions** (`{1}`-colouring ↔ unit colouring, both ways).
+  Declined: `rw` plus one inline `Coloring.mk` covers both call sites, and the module already owns
+  the bridge these would duplicate.
+* **Forcing the unit conditional through the `D` conditional by hand-transporting hypotheses.**
+  Superseded — the `rw` idiom does it for free, which is strictly better than either the transport or
+  the five-line duplicate the pass started out expecting to accept.
