@@ -267,3 +267,74 @@ reports 725+ clean and **exactly 5 declared purchases** — if that 5 moves, sto
 **The one real risk, named in the parent stub and tested first, not last:** whether
 `hexShell.valid_sound` composes without friction at a non-singleton `D`. If it does not, the shape
 of the friction is the finding and is reported as such rather than worked around.
+
+---
+
+## 6. Domain-modeling pass (WORKFLOW step 5, first pass) — two findings that change the claims
+
+### F1 — the relaxation of `hexShell_plane` is a **repackaging, not a strengthening**, and the record must say so
+
+The pass asked whether `hexShell_planeIn` (over `distanceGraph ℂ D`) is stronger than `hexShell_plane`
+(over `unitDistance ℂ`). **It is not — they are interderivable, each in one line.** Downward is the
+obvious direction (a unit-distance colouring is a `{1}`-colouring). Upward is the one that matters and
+it also holds: given a colouring `C` of `distanceGraph ℂ D` with `1 ∈ D`, the *same function* is a
+proper colouring of `unitDistance ℂ`, because a unit pair is a pair of distinct points at a distance
+in `D`. So `hexShell_plane` already implies `hexShell_planeIn`.
+
+**So G4b at the level of the pigeonhole buys usability, not mathematics, and this subplan will not
+claim otherwise.** The master is still stated over `D` — deriving the special case downward is cleaner
+than converting sideways at every call site — but the honest word is "restated", not "generalized".
+
+### F2 — the mathematics moves one level up, at the conditional refutation, and there it moves in both directions
+
+`not_colorable_five_of_forced_pairs` concludes `¬ (unitDistance ℂ).Colorable 5` from hypotheses about
+*every proper 5-colouring of the unit-distance plane*. Its `D`-form concludes
+`¬ (distanceGraph ℂ D).Colorable k` from hypotheses about every proper `k`-colouring of **that** graph.
+Both halves move, and they move the same way:
+
+* **the hypothesis weakens** — every `{1,2}`-colouring is a unit-distance colouring but not conversely,
+  so "all of the smaller set separate `√3`-pairs" is a strictly easier thing to establish;
+* **the conclusion weakens** — a bound on a two-distance graph is weaker than the same bound on the
+  plane (`chromaticNumber_unitDistance_le_distanceGraph`, `DistanceGraph.lean:82`).
+
+Neither statement implies the other. **That is the whole point**, and it is why this is worth doing:
+the objects the μ-dial programme actually holds are `{1,2}`-graphs (Exoo–Ismailescu's 214-point seed is
+one), so the weaker hypothesis is the one a real gadget could discharge, and the weaker conclusion —
+`χ(ℝ²; {1,2}) ≥ 6` — is a quantity the literature already tracks (§PA).
+
+### F3 — there is exactly ONE conditional theorem, and the helper is what makes that true
+
+The pass looked for a cleaner factoring and found one. In each of the wanted statements the requirement
+per distance is *either* "it lies in `D`, so the colouring's own validity separates it" *or* "some
+gadget separates it". But the first **implies** the second, through
+`coloring_ne_of_dist_mem`. So the disjunction collapses: there is a single theorem with two separation
+hypotheses, and the `{1,2}` and `{1,√3}` headline forms are **instances obtained by discharging one
+hypothesis from a membership** — not copies of an argument.
+
+That reclassifies D2's helper: `coloring_ne_of_dist_mem` is not a convenience, it is **the discharge
+map**, and it is why the count of conditional theorems is one rather than three.
+
+### F4 — three shapes considered and declined, with the reason
+
+* **A bare function `f : ℂ → Fin k` with a hand-rolled hypothesis `∀ x y, dist x y = 1 → f x ≠ f y`.**
+  This is the weakest possible hypothesis and it is the level the four-line proof literally occupies.
+  **Declined:** it is the same theorem in a *third* costume — `Coloring.mk` converts in one line — and
+  the repository already has two names for that concept (`Coloring` and `Separated`). Minting an
+  anonymous third spelling is drifting vocabulary, which the ugliness catalog lists as a smell in its
+  own right.
+* **Making the shell `V`-generic over a metric space.** **Declined:** the seven points are a *drawing*,
+  and the drawing is `ℂ`-valued by construction (`hexShell.point`); a `V`-generic form would have to
+  take the drawing as a parameter, which is what
+  `add_one_le_chromaticNumber_distanceGraph_edgeList` already is. The helper `coloring_ne_of_dist_mem`
+  IS stated `V`-generically, because there the generality is free.
+* **A `Brick.guardedDists` definition naming the square-roots of a guard list.** **Declined:** the
+  membership hypothesis `∀ r ∈ D, ∃ q ∈ guards, r = √q` is weaker, needs no new name, and asks the
+  caller for exactly the same work. A definition whose only job is to be unfolded is not subtraction.
+
+### F5 — a seam that came out right on its own, recorded as evidence rather than as luck
+
+`distanceGraph` needs `0 ∉ D` wherever a listed distance must give *distinct* points. In the G7b
+bridge that side condition is **never assumed and never needed**: a distance in `D` is `√q` for a
+guard `q`, and `Brick.check_pos` proves every certified guard positive, so `0 ∈ D` is impossible. A
+side condition that the certificate discharges rather than the caller is the sign that the hypothesis
+was cut in the right place.
