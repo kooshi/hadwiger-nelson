@@ -244,33 +244,34 @@ distance 2. -/
 open Glue in
 /-- **In the plane a forcing graph's critical vertices are drawn at the forced pair's two glue
 points.** -/
+theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_dist {ι : Type*} {G : SimpleGraph ι}
+    (q : ι → ℂ) {u v : ι} (hne : q u ≠ q v) (h : Forces G (k + 1) u v) :
+    ∀ c ∈ CriticalSet G k,
+      q c = gluePoint (q u) (q v) (dist (q u) (q c)) (dist (q v) (q c)) ∨
+      q c = reflAxis (q u) (q v)
+              (gluePoint (q u) (q v) (dist (q u) (q c)) (dist (q v) (q c))) := sorry
+
+open Glue in
+/-- SKELETON: old name, old statement -/
 theorem eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces {ι : Type*} {G : SimpleGraph ι}
     (q : ι → ℂ) (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} (hne : q u ≠ q v)
     (h : Forces G (k + 1) u v) :
     ∀ c ∈ CriticalSet G k,
-      q c = gluePoint (q u) (q v) 1 1 ∨ q c = reflAxis (q u) (q v) (gluePoint (q u) (q v) 1 1) := by
-  intro c hc
-  have huv : u ≠ v := fun h' => hne (by rw [h'])
-  obtain ⟨hu, hv⟩ := criticalSet_subset_inter_neighborSet_of_forces huv h hc
-  exact eq_gluePoint_of_unit_pair hne (by rw [dist_comm]; exact hq u c hu)
-    (by rw [dist_comm]; exact hq v c hv)
+      q c = gluePoint (q u) (q v) 1 1 ∨ q c = reflAxis (q u) (q v) (gluePoint (q u) (q v) 1 1) :=
+  sorry
 
 /-- **Beyond distance 2 the critical set is empty**: a 6-forcer spindled at a distance above 2 needs
 fabric with no critical vertex at all. -/
+theorem criticalSet_eq_empty_of_forces_of_lt_dist {ι W : Type*} [MetricSpace W]
+    {G : SimpleGraph ι} (q : ι → W) {M : ℝ} (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ≤ M)
+    {u v : ι} (hd : 2 * M < dist (q u) (q v)) (h : Forces G (k + 1) u v) :
+    CriticalSet G k = ∅ := sorry
+
+/-- SKELETON: old name, old statement -/
 theorem criticalSet_eq_empty_of_forces_of_two_lt_dist {ι : Type*} {G : SimpleGraph ι} (q : ι → ℂ)
     (hq : ∀ i j, G.Adj i j → dist (q i) (q j) = 1) {u v : ι} (hd : 2 < dist (q u) (q v))
-    (h : Forces G (k + 1) u v) : CriticalSet G k = ∅ := by
-  rw [Set.eq_empty_iff_forall_notMem]
-  intro c hc
-  have huv : u ≠ v := by
-    rintro rfl
-    norm_num at hd
-  obtain ⟨hu, hv⟩ := criticalSet_subset_inter_neighborSet_of_forces huv h hc
-  have : dist (q u) (q v) ≤ 2 := by
-    calc dist (q u) (q v) ≤ dist (q u) (q c) + dist (q c) (q v) := dist_triangle _ _ _
-      _ = 1 + 1 := by rw [hq u c hu, dist_comm, hq v c hv]
-      _ = 2 := by norm_num
-  linarith
+    (h : Forces G (k + 1) u v) : CriticalSet G k = ∅ :=
+  sorry
 
 /-- **At most two critical vertices** for an injective drawing. -/
 theorem encard_criticalSet_le_two_of_forces {ι : Type*} {G : SimpleGraph ι} {q : ι → ℂ}

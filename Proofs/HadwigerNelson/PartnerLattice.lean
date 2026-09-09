@@ -26,17 +26,15 @@ namespace Glue
 the glue point of their unit circles or its mirror — no other hypothesis: both annulus bounds are
 derived from the witness (`0 ≤ dist x y` and, through `p`, `dist x y ≤ 2`). The kill engine's
 "single-point kills live in the partner lattice, in any field" as a theorem. -/
+theorem eq_gluePoint_of_dist_pair {p x y : ℂ} (hne : x ≠ y) {r₁ r₂ : ℝ}
+    (hx : dist p x = r₁) (hy : dist p y = r₂) :
+    p = gluePoint x y r₁ r₂ ∨ p = reflAxis x y (gluePoint x y r₁ r₂) := sorry
+
+/-- SKELETON: old name, old statement -/
 theorem eq_gluePoint_of_unit_pair {p x y : ℂ} (hne : x ≠ y)
     (hx : dist p x = 1) (hy : dist p y = 1) :
-    p = gluePoint x y 1 1 ∨ p = reflAxis x y (gluePoint x y 1 1) := by
-  have h2 : dist x y ≤ 1 + 1 := by
-    calc dist x y ≤ dist x p + dist p y := dist_triangle x p y
-    _ = 1 + 1 := by rw [dist_comm x p, hx, hy]
-  have h0 : |(1 : ℝ) - 1| ≤ dist x y := by simp [dist_nonneg]
-  have hmem : p ∈ Metric.sphere x 1 ∩ Metric.sphere y 1 :=
-    ⟨Metric.mem_sphere.mpr hx, Metric.mem_sphere.mpr hy⟩
-  rw [sphere_inter_sphere hne h0 h2] at hmem
-  simpa using hmem
+    p = gluePoint x y 1 1 ∨ p = reflAxis x y (gluePoint x y 1 1) :=
+  eq_gluePoint_of_dist_pair hne hx hy
 
 /-- **The depth-one candidate space over a finite set is finite**: only finitely many points of
 the plane have two distinct unit neighbours in `V` — the census's "the whole single-point kill

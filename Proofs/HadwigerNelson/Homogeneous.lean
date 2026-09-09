@@ -73,17 +73,38 @@ theorem exists_isometry_map_pair {x₀ y₀ x y : ℂ} (h : dist x y = dist x₀
   · have hkey : a * (y₀ - x₀) = y - x := div_mul_cancel₀ _ hsub
     linear_combination hkey
 
+/-- SKELETON -/
+theorem transport_pair_of_isometry {V : Type*} [MetricSpace V] {α : Type*} {D : Set ℝ}
+    {R : α → α → Prop} {x₀ y₀ x y : V}
+    (hg : ∃ g : V → V, Isometry g ∧ g x₀ = x ∧ g y₀ = y)
+    (h : ∀ C : (distanceGraph V D).Coloring α, R (C x₀) (C y₀))
+    (C : (distanceGraph V D).Coloring α) : R (C x) (C y) := sorry
+
+/-- SKELETON -/
+theorem exists_isometry_map_pair_of_sub_eq {V : Type*} [SeminormedAddCommGroup V]
+    {x₀ y₀ x y : V} (h : y - x = y₀ - x₀) :
+    ∃ g : V → V, Isometry g ∧ g x₀ = x ∧ g y₀ = y := sorry
+
+/-- SKELETON -/
+theorem exists_isometry_map_pair_of_mapsTo {V : Type*} [MetricSpace V] {S : Set V} {g : V → V}
+    (hg : Isometry g) (hS : Set.MapsTo g S S) {x₀ y₀ x y : S}
+    (hx : g x₀ = x) (hy : g y₀ = y) :
+    ∃ g' : S → S, Isometry g' ∧ g' x₀ = x ∧ g' y₀ = y := sorry
+
+/-- SKELETON -/
+theorem exists_isometry_map_pair_affine {S : Set ℂ} {a b : ℂ} (ha : ‖a‖ = 1)
+    (hS : ∀ z ∈ S, a * z + b ∈ S) {x₀ y₀ x y : S}
+    (hx : a * (x₀ : ℂ) + b = (x : ℂ)) (hy : a * (y₀ : ℂ) + b = (y : ℂ)) :
+    ∃ g : S → S, Isometry g ∧ g x₀ = x ∧ g y₀ = y := sorry
+
 /-- **Homogeneity, relation-generic.** Whatever relation the colours of one pair satisfy in every
 proper colouring of the distance graph, the colours of every pair at the same distance satisfy it
 too. `R := Ne` is a virtual edge transported; `R := Eq` is a forced-equal pair transported — the
 premise of the spindle. No side condition, and an arbitrary colour type. -/
 theorem transport_pair {α : Type*} {D : Set ℝ} {R : α → α → Prop} {x₀ y₀ x y : ℂ}
     (h : ∀ C : (distanceGraph ℂ D).Coloring α, R (C x₀) (C y₀)) (hd : dist x y = dist x₀ y₀)
-    (C : (distanceGraph ℂ D).Coloring α) : R (C x) (C y) := by
-  obtain ⟨g, hg, hgx, hgy⟩ := exists_isometry_map_pair hd
-  have := h (C.comap (Isometry.distanceGraphHom hg))
-  rwa [show (C.comap _ : ℂ → α) x₀ = C x from congrArg C hgx,
-       show (C.comap _ : ℂ → α) y₀ = C y from congrArg C hgy] at this
+    (C : (distanceGraph ℂ D).Coloring α) : R (C x) (C y) :=
+  transport_pair_of_isometry (exists_isometry_map_pair hd) h C
 
 /-- **One forced pair is all of them** — the unit-distance instance (`D = {1}`, `R := Ne`), kept
 in its M48 form for the callers that speak of `unitDistance ℂ`. -/
@@ -97,6 +118,20 @@ theorem forced_pair_of_forced {α : Type*} {x₀ y₀ x y : ℂ}
 /-- **A gadget's virtual edge, transported to the whole plane** — every pair at the gadget's own
 distance is separated in every proper colouring of the distance graph of `D`, given a drawing whose
 edges are realized at distances in `D`. `Separated.plane` is the `D = {1}` reading. -/
+theorem Separated.transport {ι V : Type*} [MetricSpace V] {G : SimpleGraph ι} {k : ℕ} {D : Set ℝ}
+    (q : ι → V) (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ∈ D) (h0 : (0 : ℝ) ∉ D) {u v : ι}
+    (hs : Separated G k u v) {x y : V}
+    (hg : ∃ g : V → V, Isometry g ∧ g (q u) = x ∧ g (q v) = y)
+    (C : (distanceGraph V D).Coloring (Fin k)) : C x ≠ C y := sorry
+
+/-- SKELETON -/
+theorem Forces.transport {ι V : Type*} [MetricSpace V] {G : SimpleGraph ι} {k : ℕ} {D : Set ℝ}
+    (q : ι → V) (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ∈ D) (h0 : (0 : ℝ) ∉ D) {u v : ι}
+    (hf : Forces G k u v) {x y : V}
+    (hg : ∃ g : V → V, Isometry g ∧ g (q u) = x ∧ g (q v) = y)
+    (C : (distanceGraph V D).Coloring (Fin k)) : C x = C y := sorry
+
+/-- SKELETON -/
 theorem Separated.planeIn {ι : Type*} {G : SimpleGraph ι} {k : ℕ} {D : Set ℝ} (q : ι → ℂ)
     (hq : ∀ i j, G.Adj i j → dist (q i) (q j) ∈ D) (h0 : (0 : ℝ) ∉ D) {u v : ι} {d : ℝ}
     (hd : dist (q u) (q v) = d) (hs : Separated G k u v)
