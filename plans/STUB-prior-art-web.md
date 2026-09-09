@@ -224,6 +224,20 @@ design target posed eight years early and which M60's residue law answers in the
   Madore propositions and one Moorhouse (FS-20, 2026-09-09) and for everything read today; the older §A rows
   that rest on `[Fischer1990]` and `[Moorhouse2010]` are **not** re-verified.
 * ~~FS-20's R6~~ — **done, see R3b.**
-* The key audit's regex misses keys with digits inside the name (`[Polymath16wiki]`); widen it before relying
-  on it again.
+* **The key audit's regex is now widened** (it missed keys with digits inside the name, e.g.
+  `[Polymath16wiki]`, and stopped at `[Author]dddd`). Current form, and the result on 2026-09-09 is **zero
+  dangling over 103 defined keys**:
+
+  ```
+  python3 - <<'EOF'
+  import re, glob, collections
+  defined = {m.group(1) for m in re.finditer(r'\*\*\[([A-Za-z0-9]+)\]\*\*', open('BIBLIOGRAPHY.md').read())}
+  used = collections.Counter()
+  for f in ['CLAUDE.md','WORKFLOW.md','ARCHITECTURE.md'] + glob.glob('plans/*.md'):
+      for m in re.finditer(r'\[([A-Z][A-Za-z]+\d*[a-z]*\d{0,4}[a-z]{0,4})\]', open(f).read()):
+          k = m.group(1)
+          if re.search(r'\d', k): used[k] += 1
+  print({k: v for k, v in used.items() if k not in defined} or "no dangling keys")
+  EOF
+  ```
 
