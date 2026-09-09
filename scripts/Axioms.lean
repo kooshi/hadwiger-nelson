@@ -1072,14 +1072,21 @@ of an arbitrary commutative ring, which is what makes "this does not need `ℂ`"
 #print axioms FieldWall4.conj_mem_oddDenom
 #print axioms FieldWall4.psiA_eq
 
-/-! ## The mascot obstruction (2026-09-09) — the Moser spindle's recipe works at exactly one `k` -/
+/-! ## The mascot obstruction (2026-09-09) — the recipe's threshold, sharp in both directions -/
 
 #print axioms card_le_of_forces
 #print axioms colorable_of_not_adj
 #print axioms isNClique_of_forces_of_card
+#print axioms isNClique_image
+#print axioms not_forces_of_drawing
 #print axioms no_four_unit_points
 #print axioms no_isNClique_four
+#print axioms no_isNClique_of_four_le
 #print axioms not_forces_of_unit_drawing
+#print axioms not_forces_five_points
+#print axioms rhombusDraw_injective
+#print axioms rhombusDraw_unit
+#print axioms exists_forces_of_unit_drawing_three
 
 #eval IO.println "=== PURCHASED ==="
 
