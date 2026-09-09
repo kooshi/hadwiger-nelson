@@ -57,10 +57,11 @@ hypothesis, and the **one obligation a caller owes is `hS`** — that `z ↦ a·
 the subspace inside it, which for `K²` is the closure of `K` under the arithmetic of a norm-one
 element of `K(i)`.
 
-One thing a `K`-caller will hit that is not solved here: `FieldWall4.lean` states the
-four-colourability of the `K`-plane as `((unitDistance ℂ).induce seamPlane).Colorable 4`, while the
-transport concludes about `(distanceGraph ↥seamPlane {1}).Coloring (Fin 4)`. Those two graphs agree
-— a subtype carries the ambient metric — but identifying them is a lemma nobody has written.
+`FieldWall4.lean` states the four-colourability of the `K`-plane as
+`((unitDistance ℂ).induce seamPlane).Colorable 4`, while the transport concludes about
+`(distanceGraph ↥seamPlane {1}).Coloring (Fin 4)`. Those two graphs agree — a subtype carries the
+ambient metric — and `unitDistance_induce` / `distanceGraph_induce` are the identification, so the
+caller's colouring type really is inhabited rather than merely believed to be.
 
 ## Non-vacuity is the caller's business
 
@@ -155,6 +156,23 @@ theorem exists_isometry_map_pair {x₀ y₀ x y : ℂ} (h : dist x y = dist x₀
   refine ⟨fun z => a * z + (x - a * x₀), isometry_affine hnorm _, by ring, ?_⟩
   have hkey : a * (y₀ - x₀) = y - x := div_mul_cancel₀ _ hsub
   linear_combination hkey
+
+/-- **A distance graph restricted to a subspace is the subspace's own distance graph.** A subtype
+carries the ambient metric, so `induce` and `distanceGraph` commute — the bridge between how a
+result about a subspace is usually *stated* (as an induced subgraph of the plane) and the form the
+transport concludes about (a distance graph on the subtype). -/
+theorem distanceGraph_induce {V : Type*} [MetricSpace V] {D : Set ℝ} (S : Set V) :
+    (distanceGraph V D).induce S = distanceGraph (↥S) D := by
+  ext x y
+  simp [distanceGraph_adj, Subtype.dist_eq, Subtype.ext_iff]
+
+/-- The unit-distance reading of `distanceGraph_induce`, in the shape `FieldWall4.lean` states its
+four-colourability of the `K`-plane: `((unitDistance ℂ).induce seamPlane).Colorable 4` and
+`(unitDistance ↥seamPlane).Colorable 4` are the same statement. -/
+theorem unitDistance_induce {V : Type*} [MetricSpace V] (S : Set V) :
+    (unitDistance V).induce S = unitDistance (↥S) := by
+  rw [unitDistance_eq_distanceGraph_singleton, distanceGraph_induce,
+    ← unitDistance_eq_distanceGraph_singleton]
 
 /-! ## The transport -/
 

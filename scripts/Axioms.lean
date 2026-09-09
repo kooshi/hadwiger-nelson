@@ -128,6 +128,8 @@ open HadwigerNelson
 #print axioms HadwigerNelson.Separated.transport
 #print axioms HadwigerNelson.Forces.transport
 #print axioms HadwigerNelson.quarterTurn_mapsTo
+#print axioms HadwigerNelson.distanceGraph_induce
+#print axioms HadwigerNelson.unitDistance_induce
 #print axioms exists_dist_eq_and_dist_eq_one
 #print axioms not_exists_dist_eq_and_dist_eq_one_of_lt_half
 #print axioms not_colorable_of_forced_equal
