@@ -40,6 +40,38 @@ read as a pass. A vacuity check that says nothing when it cannot decide is that 
   colours** — the sharper trap `plans/STUB-vacuity-and-record-integrity.md` §A2 names, and the
   one no reader sees in the statement. The probe is on `G.Coloring (Fin k)` either way.
 
+## What about the INSTANTIATIONS of a generic carrier? Measured, and blocked — read this before
+## trying it, because the idea is right and the mechanism is not available.
+
+Vacuity is really a property of an *instantiation*: a parametric theorem is not vacuous, but a
+*call site* that instantiates it at an empty carrier proves nothing. So the sharp version of this
+check would walk proof terms, find every application of a colouring lemma, instantiate its carrier
+at the actual arguments, and probe THAT — recursively, since a generic lemma may be reached
+through another generic one. It would turn `generic` from "unanalysable" into "analysed at every
+place it is actually used".
+
+**It cannot be done from a script, and the reason is not a design choice.** Measured 2026-09-09
+over this library: of **3,307 theorems, `ConstantInfo.value?` is available for 0**; of 2,708
+definitions, for all 2,708. Lean does not retain theorem bodies in the importable environment, so
+an imported proof term simply is not there to walk. A first attempt returned "0 concrete carriers
+at 56 application sites", and that number was a measurement of the instrument rather than of the
+library — `G21` in this project's own vocabulary, caught by pointing the instrument at
+`core9_plane`, whose proof it could not see at all.
+
+Two further facts bound what is lost, both measured the same day:
+
+* the whole library mentions only **13 distinct concrete carriers** — the plane at 4, 5, 6 and 9
+  colours, the finite planes at 3 and 11, the 9- and 122-point cores, de Grey's 1581, the
+  `{1,2}` two-distance plane, and three spec models;
+* **none of them appears only inside a proof**: every one occurs in some statement, which this
+  check already scans.
+
+So the upside here is small and the cost is not: doing it properly means instrumenting the BUILD
+— a hook that fires as each theorem is elaborated, when the proof term is in hand, writing what it
+finds into a persistent environment extension — rather than adding a post-hoc script. That is a
+real option and it is the only one; it is recorded here so the next person to have this good idea
+starts from the blocker instead of rediscovering it.
+
 ## What it deliberately does NOT flag
 
 Vacuity is not always a defect. `Instances/HexShell.lean`'s consumers assume a colouring **in
