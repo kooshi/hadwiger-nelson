@@ -97,11 +97,16 @@ the peripheral, thinly-surrounded ones: no forced pair lies further than 3.212 f
 centroid and five of the eighteen lie beyond that, with median local density 530 against 742. It is
 a tendency, not a separator — three of the eighteen sit in dense interior — and the write-up says so.
 
-**The theorem underneath is simpler than the stub expected, and it was already in the kernel.** An
-algebraic ("additive") colouring is a homomorphism from the object's difference lattice into a group
-of `k` elements; if that group has exponent `e`, everything in `e·Λ` gets one colour. At four colours
-the group is `ℤ/4` or `ℤ/2 × ℤ/2`, so **every additive four-colouring, of every object, over every
-field, identifies every pair whose difference lies in `4Λ`** — a floor, not a coincidence. Three
+**The theorem underneath is simpler than the stub expected, it was already in the kernel, and — the
+prior-art gate's finding — its main half is Fischer's from 1990.** An algebraic ("additive")
+colouring is a homomorphism from the object's difference lattice into a group of `k` elements; since
+`k` times anything in a group of order `k` is zero, everything in `k·Λ` gets one colour. At four
+colours that means **every additive four-colouring, of every object, over every field, identifies
+every pair whose difference lies in `4Λ`** — a floor, not a coincidence. **That much is
+`[Fischer1990]`'s own central obstruction, checked in our copy of his paper, and it is on the
+Polymath16 wiki from 2018; no novelty is claimed for it.** The refinement that is not published is
+that the bound is the group's **exponent** rather than its order, so a non-cyclic target sees one
+level further. Three
 things follow: the "depth 2" boundary needs no identification of the six exotic colourings the stub
 wanted to identify; the valuation law (kernel-checked, and the source of the weaker "depth ≥ 1"
 condition) is exactly the **exponent-2 member** of the same family, which is the whole of the
@@ -149,12 +154,18 @@ applied. The house rule is followed: amend in place, keep what was measured, add
 
 ### 2.3 Grokking `G41` (`CLAUDE.md:3119`) — insert a new amendment paragraph above the existing FS-18 one
 
-> **AMENDED 2026-09-09 (FS-25 item E5): the additive localization has a FLOOR, and it is the
-> exponent of the target group.** An additive colouring is a homomorphism `φ : Λ → G` with
-> `|G| = k`; if `G` has exponent `e` then `eΛ ⊆ ker φ`, which is already the kernel's
-> `Additive.addMonoidHom_apply_eq_of_sub_eq_nsmul`. At four colours `G` is `ℤ/4` or `ℤ/2 × ℤ/2`, so
-> **`4Λ ⊆ F_add` for every object over every field: no additive four-colouring can ever separate a
-> pair of 2-adic depth `≥ 2`.** Three consequences. (i) `T26`'s measured `F_add = {depth ≥ 2}` on
+> **AMENDED 2026-09-09 (FS-25 item E5): the additive localization has a FLOOR, it is Fischer's own
+> obstruction read as a bound on what the family can DISTINGUISH, and the exponent refinement is
+> what reconciles it with the valuation law.** An additive colouring is a homomorphism `φ : Λ → G`
+> with `|G| = k`; since `k · G = 0`, `kΛ ⊆ ker φ`. **That much is `[Fischer1990]`'s central
+> obstruction** — verified in our own copy, where he uses `k · v(1/k) = v(1) ≠ 0` against `k · G = 0`
+> at least three times — **and is restated on the `[Polymath16wiki]` (2018) as "a linear `k`-coloring
+> is always periodic with period `k`", and used live in the 2018 blog threads at `k = 5, d = 5/3` and
+> at `k = 4, d = 8/3`; no novelty is claimed for it.** What this repository adds is the *sharper*
+> form its own kernel already carries (`Additive.addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul`):
+> the bound is the **exponent**, not the order, so a non-cyclic target sees one level further. At
+> four colours `G` is `ℤ/4` or `ℤ/2 × ℤ/2`, so **`4Λ ⊆ F_add` for every object over every field: no
+> additive four-colouring can ever separate a pair of 2-adic depth `≥ 2`.** Three consequences. (i) `T26`'s measured `F_add = {depth ≥ 2}` on
 > `K`-fabric is the floor **attained**, not a property of that object — the six `ℤ/4` colourings are
 > needed only for the reverse containment, which the artifact confirms (all 12,906 depth-1 pairs
 > separated additively). (ii) **The valuation law of ledger row 59 is the exponent-2 member of this
@@ -196,10 +207,34 @@ Found by the prior-art gate on item E3. None is held here; all are named-only un
 | `[BardestaniMallahiKarai2017]` | M. Bardestani and K. Mallahi-Karai, *On a generalization of the Hadwiger–Nelson problem*, Israel J. Math. (2017), arXiv:1507.05300 | Borel chromatic number of quadratic-form graphs over **local fields**; infinite iff the form is isotropic. The nearest thing found to "periodic colourings of these planes", and the closest neighbour to our own field arc on the analytic side. | not obtained |
 | `[Salie1931]` / `[Katz1988]` | H. Salié (1931); N. Katz, *Gauss Sums, Kloosterman Sums, and Monodromy Groups*, Ann. Math. Studies 116 (1988) | The classical and the modern framing of "Kloosterman sum = character sum over the elliptic torus of the conic" — i.e. of the identification in §2.4. Katz Ch. 4 is where a specialist would look; **not verified by us**, reported as a lead. | not obtained |
 | — | *Chromatic numbers of circulants with indispensable generators*, arXiv:2607.23841 | Checked and **ruled out** as prior art for E3: it treats a fixed small generator set, not one of size `(p+1)/2`. Recorded so the negative is auditable. | abstract + structure only |
+| `[Heule2021b]` | M. Heule, *Easier variants of notorious math problems*, Nieuw Archief voor Wiskunde 5/22(3) (2021) 153–157 — **free on the author's page, cs.cmu.edu/~mheule** | States the odd-distance virtual-edge rule in his own words as an unexplained empirical surprise. **This is a citable, open-access substitute for the paywalled `[Heule2021]` Geombinatorics paper**, which nobody has been able to obtain — it should be added beside that row. | not obtained, but freely obtainable |
+| *(no key — a blog thread)* | Jannis Harder, Polymath16 blog, 2018, reported by Tamás Hubai (9 May 2018) and used by Philip Gibbs (6 May 2018) | **The earliest known instance of the valuation law's phenomenon**: that `8/3` is monochromatic in every 4-colouring of the Moser ring. Predates `[Heule2019]`, `[PartsOdd2022]` and `[Ducz2026]`, and it is the distance carrying 13 of item E5's 16 residue pairs. Ledger row 59's provenance list should gain it. | thread text held at `~/source/library/notes/polymath16-threads-1-18-text.txt` |
+| *(no key — a wiki page)* | Polymath16 wiki, **"Coloring R_2"** | An unfinished draft attempting a **rigidity** proof for the `ℚ(√−3)` analogue of Theorem B's mechanism — residue field `𝔽₄` at a conjugation-fixed prime above 2, Frobenius = conjugation, built on the square root of the Moser twist — stopping mid-argument at "Corollary 9". **This is the closest anyone has come to attempting Theorem B's argument rather than its statement, and it belongs in FS-20's related work.** Not previously known to this project. | not obtained (offline; Internet Archive) |
 
 Also worth a `§C` line: **`arXiv:2503.01721`** (Lorenz–Zimmermann's diameter/girth sibling to
 `[LorenzZimmermann2023]`) was opened during the gate and confirmed to stay on the full vector space,
 never the quotient.
+
+---
+
+## 3a. Two things I found that belong to other work
+
+* **A transcription discrepancy in ledger row 59, which is not my item.** Two independent search
+  threads read `[Parts2020a]`'s Table 1 differently: the 214-vertex row as `3` versus `√3`, and the
+  312-vertex row as `1/3` versus `1/√3`. Both were reading automated PDF extractions, which is
+  exactly where a root sign vanishes. **Ledger row 59 quotes `3` and `1/3`.** The two
+  *monochromatic* rows (`8/3` at 367 vertices, `8/√3` at 421) are **not** disputed, so item E5 is
+  unaffected and so is the law's mono side — but the row should be checked against the actual table,
+  and the check is one PDF away. *(The prediction is probably unchanged either way: `3` and `√3`
+  have the same 2-adic valuation at the prime in question, as do `1/3` and `1/√3`.)*
+* **The Polymath16 wiki has a page nobody here has seen, and it bears on FS-20 (the paper).** Titled
+  **"Coloring R_2"**, it is an unfinished, careful draft attempting a *rigidity* proof — not merely
+  exhibiting a colouring — for the `ℚ(√−3)` analogue of Theorem B's own mechanism, using the residue
+  field `𝔽₄` at a conjugation-fixed prime above 2 with Frobenius equal to complex conjugation, built
+  around the square root of the Moser-spindle twist. It stops mid-argument at "Corollary 9" with no
+  conclusion. **This is the closest anyone has come to attempting Theorem B's actual argument**, as
+  opposed to posing its question, and FS-20's related-work section should read it before it is
+  finalised. The page is offline; the Internet Archive has the wiki.
 
 ---
 
