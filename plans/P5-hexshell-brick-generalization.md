@@ -404,3 +404,104 @@ Each hypothesis was deleted in thought and the failure sought concretely.
 * **Forcing the unit conditional through the `D` conditional by hand-transporting hypotheses.**
   Superseded — the `rw` idiom does it for free, which is strictly better than either the transport or
   the five-line duplicate the pass started out expecting to accept.
+
+---
+
+## 8. Experience-modeling pass (WORKFLOW step 5, third pass) — and it found the gap that actually matters
+
+### The finding: the relaxation closes a **session-level** gap, not a statement-level one
+
+The pass asked what a future gadget-finder holds at the moment of use, and the answer changes the
+report. `Homogeneous.lean` already carries the convention this package needs, and carries it under
+exactly this name:
+
+```lean
+theorem Separated.planeIn … (C : (distanceGraph ℂ D).Coloring (Fin k)) {x y : ℂ}
+    (hxy : dist x y = d) : C x ≠ C y            -- Homogeneous.lean:100
+theorem Separated.plane   …                     -- Homogeneous.lean:118, the D = {1} instance
+```
+
+Two things follow, and the second is the point of the whole item.
+
+1. **`hexShell_planeIn` is the name the user's learned convention already predicts.** `…In` means
+   "over `distanceGraph ℂ D`", `…` means the `D = {1}` case derived from it in two lines. The naming
+   below is not invented; it is inherited.
+2. **`Separated.planeIn`'s conclusion is, verbatim, the hypothesis shape `h3` and `h2` need.** So a
+   gadget-finder who has proved a `Separated` fact about a finite graph gets this package's
+   hypothesis out of `Separated.planeIn` with no plumbing at all.
+   **Before this change they could not**: `Separated.planeIn` hands back a `distanceGraph`-shaped
+   fact, and `not_colorable_five_of_forced_pairs` only accepted a `unitDistance`-shaped one — so the
+   only usable route was `Separated.plane`, the `{1}` case, which throws the two-distance option away
+   at the very step the μ-dial exists to exploit. **One turn of the session produced exactly what the
+   next turn could not consume.** That is the gap, it is invisible at the level of the statements,
+   and it is what G4b closes.
+
+### Q1 — the names
+
+Read off the module's existing conventions (`not_colorable_<k>_of_<hyp>`, `<numeral>_le_
+chromaticNumber_<what>_of_<hyp>`, `add_one_le_chromaticNumber_<what>` for the generic form,
+`hexShell_plane<k>`), so every new name is predictable from a name already read.
+
+| name | what it says |
+|---|---|
+| `coloring_ne_of_dist_mem` | *helper.* A colouring of a distance graph separates any pair at a nonzero listed distance. `[MetricSpace V]`, any colour type. **Deliberately not `Coloring.ne_of_dist_mem`** — inside `namespace HadwigerNelson` that name would not resolve by dot notation on a `SimpleGraph.Coloring`, a trap `CLAUDE.md` records twice. |
+| `hexShell_planeIn` | the master pigeonhole, over `distanceGraph ℂ D` with `1 ∈ D` |
+| `hexShell_plane` `hexShell_plane5` `hexShell_plane6` | **<OLD>**, unchanged statements |
+| `not_colorable_distanceGraph_of_forced_pairs` | the single conditional theorem |
+| `not_colorable_distanceGraph_of_forced_sqrt3` | its instance with `2 ∈ D`, so only a `√3` gadget is asked for |
+| `not_colorable_distanceGraph_of_forced_two` | its instance with `√3 ∈ D`, the mirror |
+| `not_colorable_of_forced_pairs` | the unit-distance case, colour-generic |
+| `add_one_le_chromaticNumber_plane_of_forced_pairs` | its bound, colour-generic |
+| `not_colorable_five_of_forced_pairs` `six_le_chromaticNumber_plane_of_forced_pairs` | **<OLD>**, unchanged statements, shorter proofs |
+| `not_colorable_six_of_forced_pairs` `seven_le_chromaticNumber_plane_of_forced_pairs` | **NEW** — the sentences that could not previously be typed |
+| `six_le_chromaticNumber_oneTwo_of_forced_sqrt3` | **NEW** — the μ-dial headline |
+
+`Brick.colorable_distanceGraph`, `Brick.chromaticNumber_distanceGraph_le`,
+`Brick.colorable_avoiding` — the last composes the module's own two words (`colorable` + `avoids`)
+and needs no coinage. In `Instances/Nine.lean`:
+`plane_colorable_nine_avoiding_sqrt_three_halves` and
+`chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine`, predictable from `plane_colorable_nine`
+and `Seven.lean`'s `chromaticNumber_plane_le_seven`.
+
+### Q2 — how the μ-dial headline reads, and the one asymmetry
+
+Only the `{1,2}` shape gets a named instance, because that is the shape M49 and M50 measured
+against. The mirror is one line from `not_colorable_distanceGraph_of_forced_two` at
+`D = {1, √3}`, and its docstring says so rather than leaving the asymmetry as a puzzle.
+
+**Both membership hypotheses are discharged by unification from the goal** — a caller with the goal
+`6 ≤ (distanceGraph ℂ {1,2}).chromaticNumber` writes `apply`, and `D` is determined — so no `(D := …)`
+annotation is ever needed at a concrete site. That is why the generic forms need no further
+specializations: the specialization is free.
+
+Vocabulary note: `oneTwo` is not invented here. `DistanceGraph.lean`'s own docstring forward-references
+a module `Instances/OneTwo` for the certified `{1,2}` six-forcer — **a module that was never built**
+(M49 priced its certificate at ~50 M proof hints and deferred it). The name picks up the intended
+vocabulary; the dangling reference is reported in the handoff, in a file this package does not own.
+
+### Q3 — what the docstrings owe, in three debts
+
+* **The repackaging must not read as a strengthening** (F1). `hexShell_planeIn`'s docstring states
+  that it and `hexShell_plane` are interderivable, and that the `D` form exists so consumers over
+  two-distance graphs need no transport.
+* **The vacuity map must be printed** (briefing §8), because the honest answer has three regions and
+  only the middle one is interesting. Over `D = {1}`: at `k ≤ 4` the hypothesis is an empty type
+  (rung B — `isEmpty_coloring_plane_four`), so the theorem is **vacuous**; at `k ∈ {5,6}` whether it
+  is inhabited **is the Hadwiger–Nelson problem**; at `k ≥ 7` the `hk` hypothesis excludes it, and
+  `plane_colorable_seven` is the inhabitant just outside. And at `D ⊇ {1, √3, 2}` with `k = 6` the
+  hypothesis is **provably** empty — which is not a defect but
+  `seven_le_chromaticNumber_hexShell_distances` seen from the other side, and the docstring says so.
+  The non-vacuity that actually anchors the argument is at the finite carrier, where the module's
+  existing `example` at `:141` exhibits a proper 3-colouring.
+* **The two-distance conclusion must not be mistaken for `χ(ℝ²) ≥ 6`** (F2). The μ-dial docstring
+  states plainly that the statement is weaker than the plane's in **both** its hypothesis and its
+  conclusion, and that this is exactly why it is reachable.
+
+### What the pass declined
+
+* **A `{1, √3}` named instance.** Declined for the reason above: one line for a caller, a pointer in
+  the docstring, and one fewer name to keep predictable.
+* **A separate numeral-bridge lemma.** Already declined in §7 for the arithmetic reason; the
+  experience reason agrees — it would be a name nobody would ever search for.
+* **Tagging anything `@[simp]`.** Nothing here has a normal form to drive toward, and every tag taxes
+  every future `simp` call.
