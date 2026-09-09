@@ -204,6 +204,18 @@ confusion**):
 * **The sharpest single fix**: the literature indexes the spindle rotation by the **squared** distance
   (`ω_t = spindleRot √t`), so their `ω₄` is our `spindleRot 2`. A `--` note is now in `Copy.lean`.
 
+## R3b. FS-20's R6, discharged the same day — the eighteen Polymath16 threads
+
+All eighteen fetched and searched (**1,673,859 characters**, April 2018 – January 2026; archived to
+`library/notes/polymath16-threads-1-18-text.txt`). Full record in `plans/STUB-theorem-B-writeup.md` §1d. The
+short form: **the Theorem B question is posed there on 2 May 2018 in our exact notation and is never answered**
+— every four-colouring result in eight years is about the rank-4 *ring*, never the field plane — and
+**"Fischer", "Moorhouse" and "Vinh" occur zero times in the entire corpus** while "Woodall" occurs in four
+threads and "Madore" in one. Two more gifts: the residue colouring conjectured for UFDs in the first thread
+(April 2018, an eighth independent statement of the reduction), and the 2018 question *"does `5/3` receive the
+same colour as `0` in every 5-colouring of `R`? … a spindling argument implies `χ ≥ 6`"*, **which is FS-6/G48's
+design target posed eight years early and which M60's residue law answers in the negative.**
+
 ## R4. What is left
 
 * **Phase B, deliverable 2 — the citation graph of the seven lineages.** Not drawn. The evidence for "they do
@@ -211,8 +223,7 @@ confusion**):
 * **Phase B, deliverable 1 — verify every load-bearing §A attribution against its PDF.** Done for the four
   Madore propositions and one Moorhouse (FS-20, 2026-09-09) and for everything read today; the older §A rows
   that rest on `[Fischer1990]` and `[Moorhouse2010]` are **not** re-verified.
-* **FS-20's R6, narrowed**: the seventeen Polymath16 **blog threads**. The wiki is done; the threads are where
-  its computer-assisted claims were actually made, and they are the last place a competing `χ(K²) = 4` could be.
+* ~~FS-20's R6~~ — **done, see R3b.**
 * The key audit's regex misses keys with digits inside the name (`[Polymath16wiki]`); widen it before relying
   on it again.
 

@@ -94,6 +94,52 @@ compendium of this exact direction — is still not obtained. See §5 R2.)*
 title is in the neighbourhood rather than characterising it from its abstract; and cross-check the citation list
 in at least two databases, because they disagreed here by a factor of four.
 
+### 1d. R6 DISCHARGED THE SAME DAY — all eighteen Polymath16 threads searched, and the result is the paper's best evidence
+
+**Done 2026-09-09.** All eighteen threads on `dustingmixon.wordpress.com` (14 April 2018 – 17 January 2026),
+**1,673,859 characters** with the LaTeX recovered from WordPress's alt text, archived to
+`library/notes/polymath16-threads-1-18-text.txt`. Three results, and they point the same way.
+
+**(i) The question is posed there — a fifth independent posting, and it names the field.** Third thread,
+**2 May 2018**, Dan Ismailescu, verbatim:
+
+> *"As mentioned in the paper, Madore proved that `ℚ[√3,√11] × ℚ[√3,√11]` can be 5-colored.
+> **As Dustin asked in one of his posts, it would be nice to decide if the chromatic number of this subfield
+> is 5.**"*
+
+So the count in §0 rises: **Benda–Perles (1976/2000), Moorhouse (2010), Cranston–Rabern (2015), Madore (2015,
+as a bracket), Mixon and Ismailescu on Polymath16 (2018), and Exoo–Ismailescu (2018/2019)** — the same question,
+six postings, five groups, and the Polymath16 one is the only one that had read Madore.
+
+**(ii) It is never answered.** Every four-colouring result in eighteen threads is about the **ring** `R₂` —
+`[Hubai2018]`'s 22 colourings, Speyer's non-4-periodic ones, Gibbs's period-8 analysis — and never about the
+field plane. Gibbs even records a hidden relation that *"could potentially throw into doubt even the claim
+that the ring is 4-colourable."* The eighteenth thread (January 2026) has moved to simplex-free chromatic
+numbers in `ℝ^d`. **The paper's central claim survives its hardest available test.**
+
+**(iii) The two-literatures thesis, now measured rather than argued.** In 1.67 million characters across eight
+years, by the community that *posed* this question and *had* Madore in hand:
+
+| name | occurrences in all eighteen threads |
+|---|---|
+| Fischer | **0** |
+| Moorhouse | **0** |
+| Vinh | **0** |
+| Madore | 1 thread |
+| Woodall | 4 threads |
+| "valuation" | 1 (and about a different problem — `[HalesStraus1982]`) |
+
+**That table should be in the paper.** It is a cleaner instance of the thesis than any citation graph, because
+these are the people who would most have benefited.
+
+**Three further things the threads gave us, all now in `BIBLIOGRAPHY.md`.** The residue colouring
+**conjectured in the first thread** (April 2018) for UFDs with integer norms — an *eighth* independent
+statement of the reduction; **Lior Silberman** proposing number-field rings on 19 April 2018; and the 2018
+question *"does `5/3` receive the same colour as `0` in every 5-colouring of `R`? … a spindling argument
+implies `χ ≥ 6`"* — **which is FS-6/G48's design target posed eight years early, and which M60's residue law
+answers in the negative** (`(5/3)² ≡ 4 ≢ 0 mod 11`). That last one is a second answered question and belongs
+in the paper's closing section.
+
 ## 2. The six lineages — the paper's actual content
 
 Each derives the same reduction, or its immediate neighbourhood. **The citation graph between them is almost
@@ -300,7 +346,8 @@ not be used in the manuscript.**
 
 ## 5. Still owed before submission (blocking, per G50)
 
-* **R6 — the Polymath16 threads (NEW, 2026-09-09, and it is now the top of this list alongside R2).** The wiki
+* **~~R6 — the Polymath16 threads~~ — DISCHARGED 2026-09-09, see §1d.** All eighteen searched; the question is
+  posed there and never answered; Fischer, Moorhouse and Vinh appear zero times in 1.67M characters. The wiki
   page is **done** (`[Polymath16wiki]`, read in full, text archived at
   `library/notes/polymath16-algebraic-formulation-2018.txt`). What remains is the **seventeen blog threads** on
   `dustingmixon.wordpress.com`, where the wiki's computer-assisted claims were actually made and where
