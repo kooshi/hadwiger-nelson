@@ -215,6 +215,15 @@ arXiv:1301.3998 (dihedral group actions).
    `[MMST1996]` (still second-hand — the Kloosterman identity is verified numerically here, never against the
    paper); `[Coulson2004]`, `[Townsend2005]`. The Geombinatorics and Congressus Numerantium items need a
    library or an interlibrary loan, not a fetch.
+   **RE-RANKED 2026-09-09 (FS-23): `[Heule2021]` enters SECOND, immediately after `[Johnson2006]`** — *Odd-distance
+   virtual edges in unit-distance graphs*, Geombinatorics 31(2) (2021) 68–76, no preprint anywhere, and it is the
+   direct prior art for ledger row 59: it states the `d ↦ 1/d` duality for virtual edges over *"larger objects like
+   `ℚ(√3,√11)`"* and `[PartsOdd2022]` records in print that **its proof is wanted**. Then, lower: `[Exoo2005]`
+   (paywalled DCG, not ILL-hard — the origin of the interval direction and M37's sharpness half in published form);
+   `[Ivanov2007]`/`[Ivanov2011]` (the cell family's irregular-hexagon ancestor, whose derivation de Grey and Parts
+   say they could not reconstruct); `[Parts2021]` (low priority, not load-bearing). Briefs for all four are in
+   the library's notes under the 2026-09-09 heading. **Not needed after all**: `[deGreyParts2022]` and
+   `[Parts2022]` are on arXiv (2206.12635, 2206.12633) and are now held.
 0e. **Two of three remain unread (updated 2026-09-09).** `[Parts2020a]` is now **READ** (Table 1, §6 Results and
    §2's definitions — first at the mascot challenge, then re-verified at the source independently on 2026-09-09
    because a kernel theorem asserts its table). Still held and unread: `[Heule2019]` (arXiv:1907.00929, the

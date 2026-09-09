@@ -147,3 +147,31 @@ every headline names its population and its trust (G21); the bibliography rule.
 **Machine and tree at the close:** the desktop (32 cores, 125 GB). Nothing in flight. The working branch is `backlog`, which Kooshi
 checked out at the M61 close commit (`main` and `backlog` coincide at `b54942a`); the handoff commit lands on `backlog` — merge or rebase
 is his call. Scratch (gitignored): `build/m61/` (`derive.py`, `alpha.py`, the probes, CNFs, logs).
+
+---
+
+## PRIOR ART, ADDED 2026-09-09 (FS-23) — this milestone's design target was posed in 2018, and one instance is already settled
+
+**The Polymath16 project asked FS-6's question, eight years early.** Fourth thread, 2018
+(`[Polymath16threads]`, archived at `library/notes/polymath16-threads-1-18-text.txt`), verbatim:
+
+> *"Question. Does `5/3` receive the same color as `0` in every 5-coloring of `R`? These two points are always
+> monochromatic for homomorphic colorings, and if this behavior persists for general colorings, then a
+> spindling argument implies `χ ≥ 6`."*
+
+That is exactly G48's mechanism and this stub's target: **find a pair forced equal at five colours over a
+5-sealed field, spindle it, and the field jumps by itself.** Two things follow, and both are useful.
+
+1. **Their specific instance is dead, and our own theorem kills it.** M60's distance law (ledger row 55) says a
+   pair forced equal at five colours over a field where 11 is usable has `11 ∣ d²`. `(5/3)² = 25/9 ≡ 4 ≢ 0
+   (mod 11)`. So the behaviour cannot persist to general colourings at `5/3`, over `K` or over any field the
+   descent ever used. **The residue law is the filter they did not have** — they were looking at the additive
+   ("homomorphic") colourings and had no way to tell which of their forced pairs survive non-additive ones.
+2. **So this milestone's first move is now free**: enumerate the residue-ALLOWED distances (`11 ∣ d²` — the
+   FS-16 list) *before* any search, and never spend a solver on a distance the law forbids. That is the
+   difference between the 2018 question and this one.
+
+**Also relevant to the thickening question itself**: `[Polymath16wiki]`'s ring table records that the Moser
+spindle ring is 4-colourable with **all** 4-colourings periodic of period 8, and asks which additional
+generators reduce it to linear colourings only — the additive-family-survival question of §B, in the ring
+language, in 2018. Read `library/notes/polymath16-algebraic-formulation-2018.txt` before designing the sweep.
