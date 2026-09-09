@@ -267,3 +267,41 @@ one). Whether the *conclusion* also fails there is a different question and is *
 
 **Transcription.** `decide` at the finite leaves is the faithful transcription of "check them all", not a
 shortcut; the rest is a `have` chain with every stepping stone typed.
+
+## 9. Experience-modeling pass (WORKFLOW step 5), run 2026-09-09
+
+Five changes, each from a specific consumer's seat.
+
+1. **`_of_not_isSquare` → `_of_not_isSquare_neg_one`.** Read cold, the shorter suffix does not say *what*
+   is not a square, and a reader of `no_ringHom_of_spindle_radicand_of_not_isSquare` would reasonably
+   guess "the radicand". The longer form is exact, matches the phrase in Mathlib's own
+   `ZMod.exists_sq_eq_neg_one_iff`, and is uniform across the family and the helper
+   (`not_isSquare_neg_one_zmod`) — so a reader who finds one finds all six.
+2. **The module docstring overclaimed and is corrected.** It opened *"Every finite Euclidean plane is
+   forced-pair-free"*. Planes at `p ≡ 1 (mod 4)` are finite Euclidean planes and are **not** covered; the
+   headline now says `p ≡ 3 (mod 4)`, and so does the section heading. (FS-25's own headline carries the
+   same overclaim; flagged for the record in the handoff.)
+3. **`not_periodic_quarterTurn` returns a `¬`, not `False`.** Stated as
+   `(h1 : Periodic c d) : ¬ Periodic c (quarterTurn d)`, the name is the statement and a caller who has
+   only one of the two periods can still use it. As a two-hypothesis `False` it was a lemma whose name
+   described neither its givens nor its conclusion.
+4. **`quarterTurn_apply` is `@[simp]`.** The intended normal form is `(−w.2, w.1)`; without the tag a
+   `simp` reaching it through `rotEquiv_apply` lands on `(0 * w.1 − 1 * w.2, 1 * w.1 + 0 * w.2)` and needs
+   arithmetic to recover. The tag is cheap: its head symbol is `quarterTurn`, so it costs nothing in any
+   goal that does not mention one. The three `_apply` lemmas were audited for confluence — each rewrites a
+   coercion into a `Prod` literal, none loops, and this is the house pattern (`projAlong_apply`,
+   `addCayleyTranslate_apply`).
+5. **The instances module carries the record's four primes, not three.** `p = 7` had no certified
+   colouring in the kernel; it takes eight lines through the existing quotient machinery — the line
+   through `(1, 2)` has non-square quadrance `5`, so the circle projects to `{1, 2, 5, 6} ⊂ ZMod 7` and
+   the table `[0,1,2,0,1,2,3]` is proper along it (worked by hand, checked by `decide`). So
+   `Instances/PlaneFreedom.lean` re-derives **3, 7, 11 and 19** — exactly ledger row 55's four measured
+   instances — rather than a subset, which is what makes it evidence.
+
+**Not done, deliberately.** A decomposed `three_le_arityFloor` taking the `Forces` and `Separated` halves
+separately (M60 packages them as one table with both properties, so my theorem cannot feed it). No user
+asks for it yet; noted in the handoff instead of built.
+
+**Checks run.** `exact?`-shape: the goal a caller actually holds is `hfree : ∀ u v, Forces … → u = v`, and
+`finitePlane_forces_eq` has exactly that shape. API-only test: `Instances/PlaneFreedom.lean` proves the
+record's four instances through the public surface with no `unfold`.

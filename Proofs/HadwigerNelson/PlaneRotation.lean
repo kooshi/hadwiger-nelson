@@ -3,8 +3,8 @@ import Proofs.HadwigerNelson.LocalGlobal
 /-!
 # Rotations of the quadrance plane, and the freedom they force
 
-**Every finite Euclidean plane is forced-pair-free, at every prime and at every colour count it can
-actually be coloured with.** That is `finitePlane_forces_iff`, and it replaces the record's four
+**Every finite Euclidean plane at a prime `p ≡ 3 (mod 4)` is forced-pair-free, at every colour count
+it can actually be coloured with.** That is `finitePlane_forces_iff`, and it replaces the record's four
 measured instances (`p = 3, 7, 11, 19`, each a table checked by `decide`) with an argument.
 
 The mechanism is one rotation. Over any commutative ring the map `(x, y) ↦ (a·x − b·y, b·x + a·y)` at
@@ -84,10 +84,10 @@ def rotHom {a b : R} (h : a ^ 2 + b ^ 2 = 1) : unitQuadrance R →g unitQuadranc
 /-- **The quarter turn** `(x, y) ↦ (−y, x)`: rotation by `(0, 1)`, a circle point of every ring. -/
 def quarterTurn (R : Type*) [CommRing R] : R × R ≃+ R × R := rotEquiv (a := (0 : R)) (b := 1) (by ring)
 
-theorem quarterTurn_apply (w : R × R) : quarterTurn R w = (-w.2, w.1) := by sorry
+@[simp] theorem quarterTurn_apply (w : R × R) : quarterTurn R w = (-w.2, w.1) := by sorry
 
 /-- **A nonzero vector and its quarter turn are a basis**, over any field in which `-1` is not a
-square. With `q = quadrance d` — invertible there, by `quadrance_eq_zero_iff_of_not_isSquare` — the
+square. With `q = quadrance d` — invertible there, by `quadrance_eq_zero_iff_of_not_isSquare_neg_one` — the
 combination is `s = (w.1·d.1 + w.2·d.2)/q`, `t = (w.2·d.1 − w.1·d.2)/q`. Pure linear algebra: this is
 the half of the freeness argument below that has nothing to do with primes. -/
 theorem exists_smul_quarterTurn_eq {K : Type*} [Field K] (hK : ¬ IsSquare (-1 : K)) {d : K × K}
@@ -108,7 +108,7 @@ theorem periodic_zmod_smul {n : ℕ} [NeZero n] {M β : Type*} [AddCommGroup M] 
     {f : M → β} {d : M} (h : Function.Periodic f d) (s : ZMod n) :
     Function.Periodic f (s • d) := by sorry
 
-/-! ### Every finite Euclidean plane is forced-pair-free -/
+/-! ### Every finite Euclidean plane at `p ≡ 3 (mod 4)` is forced-pair-free -/
 
 section FinitePlane
 
@@ -118,8 +118,8 @@ variable {p k : ℕ} [Fact p.Prime]
 nonzero `d` and its quarter turn. The two periods generate a subgroup reaching the circle point
 `(1, 0)`, which the colouring would then have to give the origin's colour. -/
 theorem not_periodic_quarterTurn (hp : p % 4 = 3) (c : (finitePlane p).Coloring (Fin k))
-    {d : ZMod p × ZMod p} (hd : d ≠ 0) (h1 : Function.Periodic (⇑c) d)
-    (h2 : Function.Periodic (⇑c) (quarterTurn (ZMod p) d)) : False := by sorry
+    {d : ZMod p × ZMod p} (hd : d ≠ 0) (h1 : Function.Periodic (⇑c) d) :
+    ¬ Function.Periodic (⇑c) (quarterTurn (ZMod p) d) := by sorry
 
 /-- **No nonzero vector is a period of every colouring**: one of `c` and `c ∘ quarterTurn` refutes it. -/
 theorem exists_not_periodic (hp : p % 4 = 3) (c : (finitePlane p).Coloring (Fin k))
