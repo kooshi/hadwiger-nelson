@@ -112,6 +112,17 @@ integer in `[−2,2]`, hence an integer. The irrational case inverts directly.
 
 ### E3 — The periodic quotient is a classical circulant, and the record never says which
 
+> **WORKED OUT AND VERIFIED 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §2.**
+> The closed form is confirmed **against the direct construction at eight primes** and against M61's
+> own `χ`/`α` table at seven; the record's unexplained `0 ∉ D` is forced by `p ≡ 3 (mod 4)`; the
+> circulant's spectrum is exactly **half the plane's own**, so Weil gives `χ(C_p) ≥ 6` for every
+> `p ≥ 67` and the exact spectrum adds `p = 59` — **P7 reduces to four small finite checks at
+> 23, 31, 43, 47**. Two corrections to the text below: *"traces of the non-split torus"* is loose
+> (the norm-`ν` fibre is a **coset**, not a torus), and the cycle-power coincidence **stops at
+> `p = 11`** — at `p = 19` the connection set is not a dilation of any `{±1, …, ±r}`. Prior-art
+> gate run: the identification is **not found in print**; the spectral half is Li–Feng (1992).
+
+
 **Today:** `plans/M61-local-global-tightness.md:300–331` reduces every periodic colouring of a finite plane to
 a colouring of a circulant `C_p`, then computes `χ(C_p) = 3, 4, 6, 5, 8, 8, 8, …` **prime by prime with a
 solver**, *"every `lo` the solver's"*. Registered prediction P7 (`χ(C_p) ≥ 6` for every `p ≥ 23`) is
@@ -139,6 +150,18 @@ primes against our own table); **medium** on P7 falling out.
 
 ### E4 — The 1581's zero forced-equal pairs at five colours is a corollary, not a sweep — and it is the cheapest item here
 
+> **WORKED OUT 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §1. The conclusion
+> stands; the input below does not.** `G10`'s *"two edges PROVEN critical end-to-end"* has **no
+> witnesses on disk** (ad-hoc probes, artifacts under the untracked `build/`, edges never named), so
+> a corollary resting on it would inherit *"measured, witness lost"*. It is replaced by a better
+> input needing no solver: de Grey's 1581 is a **1-sum** — two 791-vertex halves meeting at vertex
+> `14`, plus the single cross edge `(11, 802)`, with **all 7,877 edges inside a half or the cross
+> edge**, verified exhaustively — so `11`, `802` and `14` are three critical vertices by palette
+> permutation, with explicit verified 4-colourings now committed at
+> `data/e4-critical-vertices.json`. **And the seam's forcing structure turned out to be M06's own
+> kernel-checked argument**, re-derived here without noticing; recorded there as a re-derivation.
+
+
 **Today:** `CLAUDE.md:2545` (G31) reports *"nothing at arity 2 (complete, 1,248,990 pairs)"* as a completed
 measurement.
 
@@ -162,6 +185,19 @@ its full value; only the pair layer collapses.
 **Cost:** an hour to write, or a day of CPU to close both halves. **Confidence: high.**
 
 ### E5 — The 16-pair residue on `K`-fabric is a size effect, and three of the four facts are already ours
+
+> **WORKED OUT AND VERIFIED 2026-09-09 (consolidation package P2) — see `plans/FS25-P2.md` §3.**
+> Every number re-read from `data/m56/kempe-object-…-k4.json`: the 16 residue pairs are at
+> `d = 8/3` (13) and `d = 8/√3` (3), confirmed. **One correction to the text below:** *"the same two
+> distances are forced on three other objects and not on `U`"* — they **are** forced on `U`, **171
+> of the 189 times**; the 18 that are not are measured to be the peripheral, thinly-surrounded ones.
+> **And the sharper theorem is simpler than this stub expected**: the depth-2 boundary needs no
+> identification of the six `ℤ/4` homomorphisms at all — it is forced by the **exponent** of a group
+> of order 4, which is already the kernel's `Additive.addMonoidHom_apply_eq_of_sub_eq_nsmul`, so
+> `4Λ ⊆ F_add` for *every* object over *every* field, and the valuation law is the family's
+> exponent-2 member. Consequence: the 16 sit at depth 3, where every additive colouring is blind by
+> theorem, so `T26`'s question is a reconfiguration question and cannot be answered by arithmetic.
+
 
 **Today:** `plans/STANDING-QUESTIONS.md:701` (T26) records that on the 1,953-point `K`-fabric the algebraic
 localization forces 187 pairs at four colours and the solver forces 171 — *"the 16 depth-3 pairs (13 at 64/9, 3

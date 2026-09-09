@@ -299,6 +299,20 @@ with the contrapositive as the consumer of any future certified α refusal. No i
 
 ### §S3. The periodic quotient — every periodic colouring of the plane is a colouring of one circulant on p vertices
 
+> **THE CIRCULANT IS IDENTIFIED, 2026-09-09 (FS-25 item E3, `plans/FS25-P2.md` §2).**
+> `C_p = Cay(ℤ/p, D)` with **`D = { t : t² − 4ν is a non-square }`** for any fixed non-square `ν` —
+> the traces of the norm-`ν` elements of `𝔽_{p²}`, equivalently the `t` for which `X² − tX + ν` is
+> irreducible. Verified against the direct construction (project the real circle along every
+> circle-missing line) at **eight primes**, and against this section's own `χ`/`α` table at the seven
+> where it is exact. `|D| = (p+1)/2`, `D = −D`, and **`0 ∉ D` because `−4ν` is a square when
+> `p ≡ 3 (mod 4)`** — the fact this section states and does not explain. The complement is
+> `D^c = {x + ν/x : x ∈ 𝔽_p^*}`, giving `α(C_p)` a combinatorial description. And the spectrum is
+> **literally half the plane's**: `λ_{C_p}(a) = ½·λ_{UD}(aγ)`, so the eigenvalues are the same
+> Kloosterman family and Hoffman gives `χ(C_p) ≥ 1 + (p+1)/(2√p) > 5` for **`p ≥ 67`**, with the exact
+> spectrum adding `p = 59` — **so P7 (`χ(C_p) ≥ 6` for `p ≥ 23`) reduces to four finite checks at
+> 23, 31, 43, 47.** One correction to this section's wording: at `p = 11` the circulant is a cycle
+> power, but that **stops at 11** — at `p = 19` no dilation makes it one.
+
 **The classical object.** A colouring of 𝔽_p² with a nonzero period d is constant on the cosets of the line ℓ = 𝔽_p·d (the
 period group is a subgroup, and the subgroups of order p of 𝔽_p² are exactly its lines). It is proper only if ℓ misses the unit
 circle — ℓ is a **null line**, its direction of non-square norm — and then it is exactly a proper colouring of the quotient
