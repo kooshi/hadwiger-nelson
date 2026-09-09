@@ -44,9 +44,13 @@ any.** Its refutation is of the *augmented* edge list, and **a SAT certificate c
 "the forty added pairs did the work" from "the unit part alone was already uncolourable."** If the
 second reading were true, this repository would own a **122-vertex 5-chromatic unit-distance graph,
 four times smaller than Heule's 510**, and would not know it. Nobody has noticed, so it is not so —
-but "nobody has noticed" is a sociological argument. **It is repairable in about fifteen lines and I
-verified the route**: all 122 coordinates were parsed and every one lies in `ℚ(√3, √11)`, so
-Theorem B supplies the colouring outright.
+but "nobody has noticed" is a sociological argument. **It is repairable and I verified the route**: all 122
+coordinates were parsed and every one lies in `ℚ(√3, √11)`, so Theorem B supplies the colouring.
+**The first estimate of "fifteen lines" was corrected during the sweep and the correction sharpens
+the finding**: nothing in the library bridges a certificate's coordinates to `seamPlane` membership,
+so a genuinely new lemma is needed and the job is 60–100 lines. *"The inhabitant is three citations
+away" and "the inhabitant needs a lemma nobody has written" are different states of the world, and
+the second is a far better explanation of why nobody has noticed.*
 
 **(c) Theorem A's headline form has never been exercised.** The declaration the module itself calls
 *"Theorem A in the write-up's own shape"* (`colorable_unitDistance_induce_of_valuationSubring`) has
@@ -114,17 +118,25 @@ package found**, so please do not lose it. Suggested text, to follow the sixth m
 
 ## 4. What I did NOT do, and why
 
-**The two `example`s that would close finding (b) and its sibling.** Both repairs are identified,
-verified and cheap — `Instances/Core122.lean` gets its four-colouring from Theorem B (all 122 points
-verified in `ℚ(√3,√11)`), and `Instances/Core9.lean` gets `![0,1,0,2,2,1,2,2,2]`, which I checked is
-proper on all thirteen edges with the pigeonhole's conclusion live on it at four of the six listed
-pairs. **Both modules are leaves — nothing imports either — so each costs one module
+**The two repairs that would close finding (b) and its sibling.** Both are identified and
+verified, and they are **not** the same size. `Instances/Core9.lean` really is one `example` —
+`![0,1,0,2,2,1,2,2,2]`, which I checked is proper on all thirteen edges with the pigeonhole's
+conclusion live on it at four of the six listed pairs. `Instances/Core122.lean` is **60–100 lines in
+four steps**, because `Q4.eval` and `seamSpan` never meet anywhere in the library and the
+eval-to-span bridge has to be written; the other three steps are mechanical (a `Q4.seamOnly` subring
+copied from the existing `Q4.sevenFree`, one `decide`, then the pullback). Full recipe in
+`plans/FS26-vacuity-table.md` §5.1. **Both modules are leaves — nothing imports either — so each costs one module
 re-elaboration and nothing downstream.** I did not write them for one reason: **this worktree has no
 Lean build cache** (see §5), so I could not verify that anything I wrote elaborates, and handing an
 unverified declaration into a six-way parallel merge is worse than handing over a precise
 instruction. Note for whoever writes them: **Theorem B does not reach the nine-core** — its
 coordinates use `√5, √7, √15, √21, √35, √105`, verified here — so the hand colouring is the only
-route there.
+route there. **One more trap for whoever takes the `IsLift` item in §1(c)'s neighbourhood**: the
+closed hex shell looks like the obvious five-line witness and is not one — its edges are unit only
+modulo 11, not modulo 121, so finding a lift there is a solve rather than a `decide`. The cheap
+witness is a two-vertex model in `ZMod 121` (`x₀ = ![(0,0),(1,0)]`, `L = [⟨0,1,11⟩]`, `y = 0`), which
+closes the vacuity question but is **not** the red that would show the machinery distinguishes
+shadows from non-shadows; that needs a real residue framework and is a day.
 
 **The docstrings on `core9_plane` and `core122_plane`.** The scope corrections on both are `--`
 comments, so a reader who arrives via `exact?` or a hover still sees only the original docstring —

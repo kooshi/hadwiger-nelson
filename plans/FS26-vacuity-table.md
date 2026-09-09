@@ -156,9 +156,15 @@ The other unexercised rows, in descending order of how much they matter:
   `core9_plane`; what it means is that only the contrapositive of M59's machinery has ever been
   used, and the forward theorem has never been run on a real configuration. The module docstring
   claims one exists — *"the closed hex shell … is a real configuration"* — and then checks only
-  `IsStress` and the pairing (`:300, :301`), never the lift. **A five-line example would close it
-  and would double as a red**, showing the machinery distinguishes shadows from non-shadows rather
-  than only refusing.
+  `IsStress` and the pairing (`:300, :301`), never the lift. **And the shell is a trap for whoever
+  repairs this**: `IsLift` demands quadrance exactly `1`, and the shell's edges are unit only modulo
+  11, not modulo 121 — the same docstring lists twelve nonzero defects, and one was checked by hand
+  (`(1,0)` to `(6,3)` has quadrance 34, not 1, in `ZMod 121`). A lift may exist there, but finding it
+  is a *solve*, not a `decide`. **The cheap witness that does work** is a two-vertex model —
+  `R = ZMod 121`, `π = 11`, `x₀ = ![(0,0),(1,0)]`, `L = [⟨0,1,11⟩]`, `y = 0`, three `decide`s —
+  which inhabits `IsLift` and the `IsStress ∧ IsLift` conjunction. **That closes the vacuity question
+  and is not the red**: showing the machinery distinguishes shadows from non-shadows needs a genuine
+  residue framework, which is a day's work. The two should not be conflated.
 * `UDCert.chromaticNumber_le_of_drawing` (`Lift.lean:81`) and
   `add_one_le_chromaticNumber_plane_of_lift` (`:94`) — the recipe a lifted forcer would consume,
   never instantiated at any `k`. At `k = 5` instantiating it **is** the six-colour problem, so this
@@ -195,13 +201,32 @@ If the second reading were the true one, this repository would be sitting on a *
 Nobody has noticed, so it is not so; but *"nobody has noticed"* is a sociological argument, and it is
 currently the only one on offer.
 
-**It is cheaply and completely repairable, and the route is verified here.** All 122 points were
-parsed out of `Instances/Core122/Base.lean` and every coordinate uses only the basis
-`{1, √3, √11, √33}` — **they lie in `K = ℚ(√3, √11)`** — so **Theorem B**
+**It is repairable and the route is verified here, but it is NOT the afternoon it first looks
+like — and that correction is worth more than the original estimate.** All 122 points were parsed
+out of `Instances/Core122/Base.lean` and every coordinate uses only the basis `{1, √3, √11, √33}` —
+**they lie in `K = ℚ(√3, √11)`** — so **Theorem B**
 (`FieldWall4.colorable_four_of_subset_seamPlane`, `FieldWall4.lean:1167`) supplies the four-colouring
-outright, and it pulls back along `core122.point` because `core122_valid` makes every listed edge
-exactly unit. **About fifteen lines, and `Instances/Core122.lean` is a LEAF — nothing in the
-repository imports it, so nothing downstream rebuilds.**
+in principle. The first estimate here was *"about fifteen lines"*; that covers only the last step.
+**Checking properly: there is no bridge anywhere in the library from a certificate's coordinates to
+`seamPlane` membership.** `Q4.eval` and `seamSpan` never meet — every existing proof of
+`z ∈ seamPlane` runs structurally through `SeamOrder`, `oddDenom` or the closure lemmas, and the one
+place explicit points are shown to lie in `K²` (`FieldWall4.spindlePt_mem`, `:1245`) is a hand
+construction for seven points. So the repair is four steps:
+
+1. `Q4.seamOnly : Subring Q4` — copy `Q4.sevenFree` (`UnitQuadrance.lean:146`) one level deeper,
+   killing the `√5` slots as well as the `√7` slots. ~25 mechanical lines, entirely by analogy.
+2. `core122.CoordsIn Q4.seamOnly` — one `decide +kernel`; `CoordsIn` is already decidable and this
+   is exactly the shape of the existing `heule510_coordsIn_sevenFree`.
+3. **The bridge: `Q4.eval` of a `seamOnly` element lies in `seamSpan`.** The only genuinely new
+   lemma, and the only risky part — unfold through four `Adjoin` levels into the `∃ a b c d : ℚ`
+   shape, with `sqrt3_mul_sqrt11` (`FieldWall4.lean:741`) supplying `√3·√11 = √33`.
+4. The pullback along `core122.point`, properness from `core122_valid`. The fifteen lines.
+
+**Sixty to a hundred lines, not fifteen** — and `Instances/Core122.lean` is a LEAF, so nothing
+downstream rebuilds. *The correction sharpens the finding rather than weakening it*: "the inhabitant
+is three citations away" and "the inhabitant needs a lemma nobody has written" are different states
+of the world, and the second is a much better explanation of why a load-bearing non-vacuity
+assumption has gone unchecked for a year.
 
 ### 5.2 `core9_pigeonhole` — same gap, harmless, and Theorem B does *not* reach it
 
