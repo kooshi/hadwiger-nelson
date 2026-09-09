@@ -198,6 +198,38 @@ question the paper answers — Benda–Perles 11.6, Moorhouse §1, Cranston–Ra
 plane. **But §1's "verified open" evidence does not currently cover this community at all, and it must**:
 Polymath16 threads are not indexed by any citation database, and Geombinatorics is not indexed well either.
 
+**And the community's own reference document was found the same day, which is the sharpest part of this.**
+`[Polymath16wiki]`, *Algebraic formulation of Hadwiger-Nelson problem*, **last edited 4 June 2018**, indexed by
+no citation database, currently 404 on the live site and read here through the Internet Archive. It contains,
+without proofs and with several claims marked computer-assisted: unit-distance graphs as **Cayley graphs**;
+***linear* colourings** (a homomorphism onto a finite group of order `k` — Fischer's additive colourings);
+**periodic** colourings and the `R/pR` quotient; **Theorem A's recipe in three steps** (ring hom to a finite
+ring → image of the unit-modulus set → colour the finite ring avoiding it); a **table of eight rings × six
+colour counts**, in which the Moser spindle ring `R̄₂ = ℤ[ζ₆, (1+√33)/2, ⅓]` is **4-colourable with all
+4-colourings periodic of period 8**; the statement that **`8/3` has the same colour as zero in `R̄₂`**; the
+`√247` spindle `ω_{64/9} = (119+3i√247)/128` over it, giving a ring with **no** 4-colouring; and the
+**unit-modulus group of `R̄₂` derived by UFD factorisation** as `ζ₆^i η^j`, `η = (√33+i√3)/6`.
+
+**Read that list against this project's ledger and the overlap is large — rows 26, 47, 57, 59 and grokking G8
+all touch it, and each is now amended in place.** It changes the paper's framing rather than its theorem:
+
+* **The theorem is untouched.** Every ring on that page has `ℚ`-rank ≤ 4. `K² = ℚ(√3,√11)²` has rank **8**;
+  `R̄₂` sits inside it as `ℚ(√33) + i(√3ℚ + √11ℚ)`, exactly half. `[Madore2015]`'s `4 ≤ χ(K²) ≤ 5` is about the
+  field plane, was written by an author who knew the residue method thoroughly, and stood for eleven years.
+* **The framing changes.** "Six lineages that do not cite one another" becomes **seven**, and the seventh is a
+  wiki — which is a *stronger* instance of the paper's own thesis, not a weaker one: the community closest to
+  this material published its synthesis somewhere no citation database indexes, which is precisely how a
+  literature fails to talk to itself.
+* **The paper must say all of this in its own §1, in one honest paragraph**, naming `[Polymath16wiki]`,
+  `[Hubai2018]` and `[Ducz2026]` and stating the rank-4-versus-rank-8 distinction. A referee from Polymath16
+  will otherwise read the manuscript as re-proving their wiki.
+* **What the wiki does not contain, checked line by line**: any chromatic number of a **finite plane** (its
+  finite rings carry only *linear* colourings — the non-linear step that sees 5 at `p = 11` is absent, and that
+  step is the whole pivot of M58–M61), any usable-prime analysis, the field plane itself, Theorem A's general
+  form (its recipe is ring-to-finite-ring with unit modulus; ours is an arbitrary abelian group, a subgroup, and
+  a **partial** homomorphism — the formulation `[Madore2015]` declined to write), M59's lift theory, and any
+  proof of anything.
+
 **Two consequences, both actionable.**
 
 1. **New blocking item R6 below**: read the Polymath16 threads for `ℚ(√3,√11)` claims. This is where a
@@ -214,12 +246,15 @@ Polymath16 threads are not indexed by any citation database, and Geombinatorics 
 
 ## 5. Still owed before submission (blocking, per G50)
 
-* **R6 — the Polymath16 threads (NEW, 2026-09-09, and it is now the top of this list alongside R2).** Seventeen
-  threads on Dustin Mixon's blog, plus the wiki mirror at `asone.ai/polymath`. Search them for `ℚ(√3,√11)`,
-  "Moser lattice", "Moser ring", and any four-colouring claim about a field plane. `[Hubai2018]` shows the
-  community was enumerating 4-colourings of the Moser ring in 2018; `[Heule2021]`'s odd-distance duality and
-  `[PartsOdd2022]`'s `ℚ(√3,√11)` observation both come out of it. **No citation database indexes it**, so no
-  search in §1 has ever touched it.
+* **R6 — the Polymath16 threads (NEW, 2026-09-09, and it is now the top of this list alongside R2).** The wiki
+  page is **done** (`[Polymath16wiki]`, read in full, text archived at
+  `library/notes/polymath16-algebraic-formulation-2018.txt`). What remains is the **seventeen blog threads** on
+  `dustingmixon.wordpress.com`, where the wiki's computer-assisted claims were actually made and where
+  `[Hubai2018]`'s 22 colourings of the Moser ring live. Search them for `ℚ(√3,√11)`, "Moser ring", "Moser
+  lattice", "linear coloring", and any four-colouring claim about a **field** plane rather than a ring. **No
+  citation database indexes any of it**, so no search in §1 has ever touched it, and it is the one place a
+  competing `χ(K²) = 4` could still be. Budget: half a day, and it is the last thing between this paper and
+  submission on the novelty side.
 
 * **R1 — `[Fischer1990b]`**, *The connected components of the graph `ℚ(√N₁,…,√N_d)²`*, Congr. Numer. 72 (1990)
   213–221. The **multiquadratic** paper, on exactly this paper's fields. Not digitised; needs a library.
