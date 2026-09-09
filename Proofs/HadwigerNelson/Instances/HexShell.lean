@@ -156,6 +156,30 @@ example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 7),
 
 /-! ### The plane corollaries -/
 
+-- SCOPE, added 2026-09-09 (FS-26, the vacuity sweep). The three theorems below quantify over
+-- `(unitDistance ℂ).Coloring (Fin k)`, and how much they say depends on `k` in three steps:
+--
+--   * `k ≤ 4` — VACUOUS. Rung B makes the type empty (`Instances/Interval.lean`,
+--     `isEmpty_coloring_plane_four`). `hexShell_plane` is colour-generic and its `hk : k < 7`
+--     admits this range, so the theorem is true and empty there; it has no consumer at `k ≤ 4`.
+--   * `k ∈ {5, 6}` — OPEN, and open in the exact sense that whether the type is inhabited IS the
+--     Hadwiger-Nelson problem: if `χ(ℝ²) = 7` then both are empty and `hexShell_plane5` and
+--     `hexShell_plane6` are vacuous too.
+--   * `k ≥ 7` — inhabited (`Instances/Seven.lean`), and excluded by `hk` because the counting
+--     argument stops there.
+--
+-- That middle step is not a defect and needs no repair, because BOTH consumers assume a colouring
+-- in order to REFUTE it: `not_colorable_five_of_forced_pairs` concludes `¬ Colorable 5`, and
+-- `seven_le_chromaticNumber_hexShell_distances` concludes a lower bound. Assuming a structure in
+-- order to derive a contradiction is the one shape vacuity cannot damage -- emptiness there is the
+-- conclusion, not a hidden hypothesis. It is written down because the distinction is invisible in
+-- the statements themselves, and because a reader who takes `hexShell_plane5` as a positive fact
+-- ABOUT five-colourings would be making the `core9_plane` mistake one colour up.
+--
+-- The genuinely non-vacuous content of this module is the seven-point carrier, which really is
+-- colourable: `Coloring (Fin 3)` and `Coloring (Fin 7)` of it are exhibited above, and two
+-- `Coloring (Fin 5)` of it below, which is why the load-bearing reds work at all.
+
 /-- **The plane pigeonhole, colour-generic.** Every proper colouring of the plane's
 unit-distance graph with fewer than seven colours has a monochromatic pair at distance `√3`
 or at distance `2`. The witnesses are two of the seven certified shell points. -/
