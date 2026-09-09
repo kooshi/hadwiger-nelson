@@ -109,6 +109,13 @@ If instead you hold a *field* — a conjugation-stable subfield `L ⊆ ℂ` and 
 valuation subring of it — step 3 is free and the entry point is
 `colorable_unitDistance_induce_of_valuationSubring`.
 
+To ask instead **which pairs that colouring identifies** — §4 — you need one thing more, and it is
+the hypothesis the write-up already states: that `σ` maps `ψ`'s kernel into itself, i.e. that the
+prime is fixed by conjugation. Then `not_forces_of_map_ne_zero` and `not_separated_of_map_eq_zero`
+say which distances can carry a compulsion at `Fintype.card G` colours, and
+`map_mul_normOne_eq_zero_iff` / `map_mul_conj_eq_zero_iff` reduce a difference's residue to a
+scalar's or to its norm's.
+
 The colouring itself is `cosetResidue ψ.toAddMonoidHom`, and it is *sealed*: reason about it through
 `cosetResidue_apply_of_mem` (on `A` it is `ψ`), `cosetResidue_sub` (a conditional `map_sub`) and
 `cosetResidue_eq_iff` (when two points share a colour). Note that the subgroup cannot be inferred from
@@ -277,6 +284,30 @@ theorem normOne_subset {A : Subring L} {σ : L →+* L}
 
 variable {V : Type*}
 
+/-- **The residue colouring, as a colouring.** `colorable_of_normOne` below is this with the colour
+count read off, and is what a milestone bounding a chromatic number calls; a caller who has to
+*evaluate* the colouring — every compulsion consumer in §4 does — needs the colouring itself.
+
+The two hypotheses are the two halves of the arithmetic: `hmem` says the edge differences are
+integral, `hnorm` says they are unit vectors. -/
+noncomputable def normOneColoring {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A)
+    {G : Type*} [CommRing G] [Nontrivial G] (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) : Γ.Coloring G :=
+  SimpleGraph.Coloring.mk (fun v => cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom (f v))
+    fun {v w} hvw hc => by
+      have h0 : cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom (f v - f w) = 0 :=
+        (cosetResidue_eq_iff (A := A.toAddSubgroup) ψ.toAddMonoidHom (hmem hvw)).mp hc
+      rw [cosetResidue_apply_of_mem (A := A.toAddSubgroup) ψ.toAddMonoidHom (hmem hvw)] at h0
+      exact map_ne_zero_of_mem_normOne hσ ψ (hmem hvw) (hnorm hvw) h0
+
+@[simp] theorem normOneColoring_apply {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A)
+    {G : Type*} [CommRing G] [Nontrivial G] (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
+    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
+    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) (v : V) :
+    normOneColoring hσ ψ Γ f hmem hnorm v
+      = cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom (f v) := rfl
+
 /-- **The residue colouring over a ring.** The two hypotheses are the two halves of the arithmetic:
 `hmem` says the edge differences are integral, `hnorm` says they are unit vectors. -/
 theorem colorable_of_normOne {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A)
@@ -284,78 +315,160 @@ theorem colorable_of_normOne {A : Subring L} {σ : L →+* L} (hσ : ∀ z ∈ A
     (Γ : SimpleGraph V) (f : V → L)
     (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
     (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) :
-    Γ.Colorable (Fintype.card G) := by
-  refine colorable_of_residue (A := A.toAddSubgroup) Γ f ψ.toAddMonoidHom
-    (fun _ _ hvw => hmem hvw) fun v w hvw => ?_
-  rw [cosetResidue_apply_of_mem _ (hmem hvw)]
-  exact map_ne_zero_of_mem_normOne hσ ψ (hmem hvw) (hnorm hvw)
-
-/-- **The residue colouring**, as a colouring rather than a colourability (SKELETON). -/
-noncomputable def normOneColoring {G : Type*} [CommRing G] [Nontrivial G] {A : Subring L}
-    {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
-    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
-    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) : Γ.Coloring G := sorry
-
-theorem normOneColoring_apply {G : Type*} [CommRing G] [Nontrivial G] {A : Subring L}
-    {σ : L →+* L} (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) (Γ : SimpleGraph V) (f : V → L)
-    (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
-    (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ) (v : V) :
-    normOneColoring hσ ψ Γ f hmem hnorm v
-      = cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom (f v) := sorry
+    Γ.Colorable (Fintype.card G) :=
+  (normOneColoring hσ ψ Γ f hmem hnorm).colorable
 
 end NormOne
 
-/-! ## §4 Which pairs a residue colouring identifies (SKELETON) -/
+/-! ## §4 Which pairs a residue colouring identifies
+
+The colouring of §2 is *one* proper colouring, so every claim of the form "in every proper
+`k`-colouring these two points agree" has to be true of it — and which pairs it identifies is
+arithmetic rather than geometry. This section is that arithmetic, and it is two facts.
+
+**A unit is invisible.** `RingHom.ker ψ` is an *ideal*, and multiplying by a unit of `A` does not
+move an element in or out of an ideal. So the residue of `d · u` vanishes exactly when `d`'s does,
+whenever `u` is a unit — and a norm-one element of a `σ`-stable subring *is* a unit
+(`isUnit_of_mem_normOne`). This costs nothing: no primality, no finiteness, no nontriviality of the
+residue ring.
+
+**A `σ`-stable kernel makes the norm a test for the element.** `ψ (v · σ v) = ψ v · ψ (σ v)`, so in
+a ring with no zero divisors the norm's residue vanishes iff one factor's does — and if the kernel
+of `ψ` is stable under `σ` those two conditions are the same one. *That hypothesis is exactly "the
+prime is fixed by conjugation"*, which is the hypothesis `plans/FIELD-WALL-THEOREM.md` states
+Theorem A with; the red at the end of §7 shows it is load-bearing, with a split prime as the
+counterexample. This is the half that spends primality.
+
+Then the two consumers, in the vocabulary the six-colour hunt uses: a difference whose residue is
+nonzero carries **no forced-monochromatic pair**, and one whose residue vanishes carries **no
+virtual edge** (`Forcer.lean`, `Fan.lean`; the palette translation is `Palette.lean`).
+
+`Proofs/HadwigerNelson/ValuationLaw.lean` is the instance at `L = ℂ`, `A` the odd-denominator ring
+of `ℚ(√3, √11)`, `σ` complex conjugation and `G = 𝔽₄`, where it reproduces a table of computer-found
+results from `[Parts2020a]`.
+
+Over a **field** the law can be keyed on a scalar rather than on the difference, which is the form
+the ledger states it in: *two points at distance `d` get the same colour exactly when `d` lies in
+the prime*. `map_eq_zero_iff_of_mul_conj_eq` is that, and it is the entry point a caller at a new
+prime walks to — the one thing it still owes is the **integrality** of the unit vector `(z − w)/d`,
+which is the field's own arithmetic and cannot be general (`oddDenom` is an intersection of two
+localizations, not a valuation ring, so `normOne_subset_valuationSubring` does not reach it). -/
 
 section Law
 
 variable {L V : Type*} [CommRing L] {A : Subring L} {σ : L →+* L}
 variable {G : Type*} [CommRing G]
 
+/-- **When two points of one coset share a colour** — `cosetResidue_eq_iff` for a *ring*
+homomorphism, which is the form every consumer holds and which spares them the `(A := …)`
+annotation the module docstring warns about. -/
 theorem cosetResidue_eq_iff_map (ψ : A →+* G) {z w : L} (hmem : z - w ∈ A) :
     cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom z
         = cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom w
-      ↔ ψ ⟨z - w, hmem⟩ = 0 := sorry
+      ↔ ψ ⟨z - w, hmem⟩ = 0 := by
+  rw [cosetResidue_eq_iff (A := A.toAddSubgroup) ψ.toAddMonoidHom hmem,
+    cosetResidue_apply_of_mem (A := A.toAddSubgroup) ψ.toAddMonoidHom hmem]
+  rfl
 
+/-- **A norm-one difference is never identified** — the properness of the residue colouring, read at
+one pair rather than along a graph. -/
 theorem cosetResidue_ne_of_mem_normOne [Nontrivial G] (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
     {z w : L} (hmem : z - w ∈ A) (hnorm : z - w ∈ normOne σ) :
     cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom z
-      ≠ cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom w := sorry
+      ≠ cosetResidue (A := A.toAddSubgroup) ψ.toAddMonoidHom w := fun hc =>
+  map_ne_zero_of_mem_normOne hσ ψ hmem hnorm ((cosetResidue_eq_iff_map ψ hmem).mp hc)
 
-theorem map_mul_normOne_eq_zero_iff [Nontrivial G] [NoZeroDivisors G]
-    (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {d u : L} (hd : d ∈ A) (hu : u ∈ A)
-    (hnorm : u ∈ normOne σ) :
-    ψ ⟨d * u, A.mul_mem hd hu⟩ = 0 ↔ ψ ⟨d, hd⟩ = 0 := sorry
+/-- **A unit is invisible to a residue.** The kernel of a ring homomorphism is an ideal, and an
+ideal absorbs units both ways (`Ideal.mul_unit_mem_iff_mem`).
 
+Note what is *not* assumed: nothing whatsoever about `G`. The four-element field's
+no-zero-divisors argument, which is how this step was first written one field down, is not the
+mechanism. -/
+theorem map_mul_eq_zero_iff_of_isUnit (ψ : A →+* G) {a u : A} (hu : IsUnit u) :
+    ψ (a * u) = 0 ↔ ψ a = 0 := by
+  rw [← RingHom.mem_ker, ← RingHom.mem_ker, Ideal.mul_unit_mem_iff_mem _ hu]
+
+/-- **Scaling by a unit vector cannot move a residue off zero.** The scalar half of the law: for a
+difference that factors as `d · u` with `u` norm-one, the residue is the *scalar's*. -/
+theorem map_mul_normOne_eq_zero_iff (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
+    {d u : L} (hd : d ∈ A) (hu : u ∈ A) (hnorm : u ∈ normOne σ) :
+    ψ ⟨d * u, A.mul_mem hd hu⟩ = 0 ↔ ψ ⟨d, hd⟩ = 0 :=
+  map_mul_eq_zero_iff_of_isUnit ψ (a := ⟨d, hd⟩) (isUnit_of_mem_normOne hσ hu hnorm)
+
+/-- **The norm's residue vanishes exactly with the element's**, when `σ` maps the kernel of `ψ` into
+itself. That hypothesis is the write-up's *"the prime is fixed by complex conjugation"*, and it is
+strictly weaker than what the four-element field supplies (there `σ` induces Frobenius, so
+`ψ (σ z) = ψ z ^ 2` outright); only the implication `ψ (σ z) = 0 → ψ z = 0` is used.
+
+`σ.restrict A A hσ` is `σ` cut down to `A`, which is where both sides of the statement live.
+
+`[NoZeroDivisors G]` is what spends primality here. The honest hypothesis is
+`(RingHom.ker ψ).IsPrime`, which is strictly weaker; the instance is chosen because it is inferred
+at every call site (every residue ring in this development is a finite field) where the ideal
+hypothesis would have to be discharged by hand. -/
 theorem map_mul_conj_eq_zero_iff [NoZeroDivisors G] (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
-    (hker : ∀ z, ∀ hz : z ∈ A, ψ ⟨σ z, hσ z hz⟩ = 0 → ψ ⟨z, hz⟩ = 0)
-    {v : L} (hv : v ∈ A) :
-    ψ ⟨v * σ v, A.mul_mem hv (hσ v hv)⟩ = 0 ↔ ψ ⟨v, hv⟩ = 0 := sorry
+    (hker : ∀ z : A, ψ (σ.restrict A A hσ z) = 0 → ψ z = 0) (v : A) :
+    ψ (v * σ.restrict A A hσ v) = 0 ↔ ψ v = 0 := by
+  rw [map_mul, mul_eq_zero]
+  exact ⟨fun h => h.elim id (hker v), Or.inl⟩
 
+/-- **A difference whose residue is nonzero carries no forced-monochromatic pair** — the half that
+rules gadgets out. The residue colouring is a colouring the pair would have to survive, and it does
+not identify them. -/
 theorem not_forces_of_map_ne_zero [Nontrivial G] [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
     (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {Γ : SimpleGraph V} (f : V → L)
     (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
     (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ)
     {p q : V} (hpq : f p - f q ∈ A) (hres : ψ ⟨f p - f q, hpq⟩ ≠ 0) :
-    ¬ Forces Γ k p q := sorry
+    ¬ Forces Γ k p q :=
+  not_forces_of_coloring_ne hk (normOneColoring hσ ψ Γ f hmem hnorm) fun hc =>
+    hres ((cosetResidue_eq_iff_map ψ hpq).mp (by simpa using hc))
 
+/-- **A difference whose residue vanishes carries no virtual edge** — the dual half. -/
 theorem not_separated_of_map_eq_zero [Nontrivial G] [Fintype G] {k : ℕ} (hk : Fintype.card G = k)
     (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G) {Γ : SimpleGraph V} (f : V → L)
     (hmem : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ A)
     (hnorm : ∀ ⦃v w⦄, Γ.Adj v w → f v - f w ∈ normOne σ)
     {p q : V} (hpq : f p - f q ∈ A) (hres : ψ ⟨f p - f q, hpq⟩ = 0) :
-    ¬ Separated Γ k p q := sorry
+    ¬ Separated Γ k p q :=
+  not_separated_of_coloring_eq hk (normOneColoring hσ ψ Γ f hmem hnorm)
+    (by simpa using (cosetResidue_eq_iff_map ψ hpq).mpr hres)
 
-end Law
+/-! ### Keyed on the distance rather than on the difference
+
+The two lemmas below need `L` to be a field, because they divide by the scalar. -/
 
 section LawField
 
-variable {L : Type*} [Field L] {σ : L →+* L}
+variable {L : Type*} [Field L] {A : Subring L} {σ : L →+* L}
+variable {G : Type*} [CommRing G]
 
-theorem div_mem_normOne {v d : L} (hd : d ≠ 0) (h : v * σ v = d * σ d) : v / d ∈ normOne σ := sorry
+/-- **The factorization step, with the geometry removed.** A difference whose norm equals a nonzero
+scalar `d`'s norm is `d` times a norm-one element — over `ℂ` with `σ` complex conjugation, "two
+points at distance `d` differ by `d` times a unit vector". -/
+theorem div_mem_normOne {v d : L} (hd : d ≠ 0) (h : v * σ v = d * σ d) : v / d ∈ normOne σ := by
+  have hsd : σ d ≠ 0 := fun h0 => hd (σ.injective (by rw [h0, map_zero]))
+  rw [mem_normOne, map_div₀, div_mul_div_comm, h, div_self (mul_ne_zero hd hsd)]
+
+/-- **The law, keyed on a scalar.** A difference `z` whose norm equals that of a nonzero `d ∈ A`,
+and whose quotient by `d` lies in `A`, lies in `A` itself and has exactly `d`'s residue.
+
+Over `ℂ` this is *"two points at distance `d` get the same colour iff `d` lies in the prime"*, and
+the three hypotheses separate cleanly: `hnorm` is the geometry (the distance), `hd` says the scalar
+is integral, and **`hq` is the only arithmetic** — the field's own statement that a unit vector is
+integral. A caller at a new prime supplies `hq` and nothing else. -/
+theorem map_eq_zero_iff_of_mul_conj_eq (hσ : ∀ z ∈ A, σ z ∈ A) (ψ : A →+* G)
+    {z d : L} (hd : d ∈ A) (hd0 : d ≠ 0) (hq : z / d ∈ A) (hnorm : z * σ z = d * σ d) :
+    ∃ h : z ∈ A, (ψ ⟨z, h⟩ = 0 ↔ ψ ⟨d, hd⟩ = 0) := by
+  have hfac : z = d * (z / d) := by field_simp
+  have hz : z ∈ A := hfac ▸ A.mul_mem hd hq
+  refine ⟨hz, ?_⟩
+  rw [show (⟨z, hz⟩ : A) = ⟨d * (z / d), A.mul_mem hd hq⟩ from Subtype.ext hfac]
+  exact map_mul_normOne_eq_zero_iff hσ ψ hd hq (div_mem_normOne hd0 hnorm)
 
 end LawField
 
+end Law
 
 section Valuation
 
@@ -594,6 +707,53 @@ example : ¬ (⊤ : SimpleGraph (Fin 2)).Colorable 1 := by
     by_contra hne
     exact C.valid (by simpa using hne) hab
   simpa using Fintype.card_le_of_injective C hinj
+
+/-! ### §4's hypotheses: a model, and the two reds -/
+
+/-- The integers as a model of §4: `σ` the identity, `A = ⊤`, and reduction mod 2 as the residue
+map. Its norm-one set is `{1, −1}`, so the norm-one hypothesis below is exercised by a member that
+is not the unit. -/
+private def intPsi : (⊤ : Subring ℤ) →+* ZMod 2 :=
+  (Int.castRingHom (ZMod 2)).comp (⊤ : Subring ℤ).subtype
+
+private theorem intTop (z : ℤ) : z ∈ (⊤ : Subring ℤ) := Subring.mem_top z
+
+example : (-1 : ℤ) ∈ normOne (RingHom.id ℤ) := by simp [mem_normOne]
+
+/-- **The model of §4's hypotheses**, non-vacuous: scaling by `−1` really does leave every residue
+where it was, and `−1` is a norm-one element that is not `1`. -/
+example (d : ℤ) : intPsi ⟨d * (-1), intTop _⟩ = 0 ↔ intPsi ⟨d, intTop d⟩ = 0 :=
+  map_mul_normOne_eq_zero_iff (fun z _ => intTop (RingHom.id ℤ z)) intPsi (intTop d) (intTop (-1))
+    (by simp [mem_normOne])
+
+/-- **Red: `IsUnit` is load-bearing in `map_mul_eq_zero_iff_of_isUnit`.** Drop it and the statement
+is false — `2` is not a unit of `ℤ`, and multiplying by it lands `1` in the kernel of reduction
+mod 2. -/
+example : intPsi ⟨(1 : ℤ) * 2, intTop _⟩ = 0 ∧ intPsi ⟨(1 : ℤ), intTop 1⟩ ≠ 0 := by
+  constructor
+  · show ((1 * 2 : ℤ) : ZMod 2) = 0
+    decide
+  · show ((1 : ℤ) : ZMod 2) ≠ 0
+    decide
+
+/-- Coordinate swap on `ZMod 5 × ZMod 5` — which is complex conjugation on `ℤ[i]/5`. -/
+private def swap5 : (ZMod 5 × ZMod 5) →+* (ZMod 5 × ZMod 5) where
+  toFun p := (p.2, p.1)
+  map_one' := rfl
+  map_mul' _ _ := rfl
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
+/-- **Red: the `σ`-stable-kernel hypothesis of `map_mul_conj_eq_zero_iff` is load-bearing, and the
+counterexample is a SPLIT PRIME.** `ZMod 5 × ZMod 5` *is* `ℤ[i]/5`; `swap5` *is* complex
+conjugation; the first projection *is* reduction at one of the two primes above 5, and conjugation
+exchanges them rather than fixing either. Then `v = (1, 0)` has nonzero residue while its norm
+`v · σ v` is zero — so without `hker` the theorem would be false, which is the concrete reason
+`plans/FIELD-WALL-THEOREM.md` demands a prime **fixed** by conjugation. -/
+example : ∃ v : ZMod 5 × ZMod 5,
+    (RingHom.fst (ZMod 5) (ZMod 5)) (v * swap5 v) = 0 ∧
+      (RingHom.fst (ZMod 5) (ZMod 5)) v ≠ 0 :=
+  ⟨(1, 0), by decide, by decide⟩
 
 end Spec
 

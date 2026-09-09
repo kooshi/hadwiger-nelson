@@ -110,6 +110,7 @@ import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound
 import Proofs.HadwigerNelson.Instances.Mycielski
 import Proofs.HadwigerNelson.Instances.Mycielski.Bound
+import Proofs.HadwigerNelson.Palette
 import Proofs.HadwigerNelson.ResidueColouring
 import Proofs.HadwigerNelson.FieldWall4
 import Proofs.HadwigerNelson.ValuationLaw

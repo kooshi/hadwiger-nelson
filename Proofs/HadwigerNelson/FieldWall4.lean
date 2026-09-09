@@ -164,6 +164,12 @@ def om : F4 := ⟨0, 1⟩
 
 instance : Nontrivial F4 := ⟨0, 1, by decide⟩
 
+/-- `𝔽₄` has no zero divisors — sixteen cases. This is what lets `ResidueColouring`'s
+`map_mul_conj_eq_zero_iff` be instantiated here: the general statement spends primality of the
+residue map's kernel, and an instance is how a caller pays for it without a hypothesis. -/
+instance : NoZeroDivisors F4 where
+  eq_zero_or_eq_zero_of_mul_eq_zero := by decide
+
 theorem card_eq_four : Fintype.card F4 = 4 := by decide
 
 /-- `𝔽₄` is a field, in the one form §5 consumes. -/
@@ -978,9 +984,6 @@ def oddDenom : Subring ℂ where
 
 theorem mem_oddDenom_iff {z : ℂ} : z ∈ oddDenom ↔ IsOddDenom z := Iff.rfl
 
-private theorem mul_conj_eq_one {u : ℂ} (h : normSq u = 1) : u * (starRingEnd ℂ) u = 1 := by
-  rw [Complex.mul_conj, h]; norm_num
-
 private theorem onePlusI_mul_conj : onePlusI * conj onePlusI = (2 : SeamOrder) := by decide
 
 private theorem onePlusI_sq : onePlusI * onePlusI = 2 * ordI := by decide
@@ -1047,7 +1050,7 @@ private theorem oddDenom_aux : ∀ n : ℕ, ∀ (u : ℂ) (x : SeamOrder), 0 < n
 /-- **Every unit vector of `K(i)` lies in `A`** — the theorem's engine. -/
 theorem mem_oddDenom_of_unit {u : ℂ} (hu : u ∈ seamPlane) (h1 : normSq u = 1) : u ∈ oddDenom := by
   obtain ⟨n, hn, x, hx⟩ := exists_nat_mul_mem_range hu
-  exact oddDenom_aux n u x hn (mul_conj_eq_one h1) hx
+  exact oddDenom_aux n u x hn (mem_normOne.mp (mem_normOne_conj_iff.mpr h1)) hx
 
 /-- **`A` is stable under conjugation** — the order is (`den_conj`), and the denominators are
 rational, so conjugation fixes them. -/
@@ -1121,14 +1124,10 @@ noncomputable def residueColouring (z : ℂ) : F4 :=
 /-- Adjacent points of `K²` get different colours — the properness of the colouring. A unit vector
 is a unit of `A` (`conj_mem_oddDenom` gives its inverse), so its residue is nonzero. -/
 theorem residueColouring_ne_of_dist_one {z w : ℂ} (hz : z ∈ seamPlane) (hw : w ∈ seamPlane)
-    (h : dist z w = 1) : residueColouring z ≠ residueColouring w := by
+    (h : dist z w = 1) : residueColouring z ≠ residueColouring w :=
   have hone : z - w ∈ normOne (starRingEnd ℂ) := sub_mem_normOne_conj_iff.mpr h
-  have hmem : z - w ∈ oddDenom :=
-    mem_oddDenom_of_unit (seamPlane_sub hz hw) (mem_normOne_conj_iff.mp hone)
-  intro hc
-  have hzero := (cosetResidue_eq_iff (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom hmem).mp hc
-  rw [cosetResidue_apply_of_mem _ hmem] at hzero
-  exact map_ne_zero_of_mem_normOne conj_mem_oddDenom psiA hmem hone hzero
+  cosetResidue_ne_of_mem_normOne conj_mem_oddDenom psiA
+    (mem_oddDenom_of_unit (seamPlane_sub hz hw) (mem_normOne_conj_iff.mp hone)) hone
 
 /-- **Distance `2` is monochromatic**, because `2` lies in the prime: a pair at distance `2` is
 `2 ·` a unit vector and the residue field has characteristic two. The honest form of "a version of
@@ -1148,15 +1147,15 @@ theorem residueColouring_eq_of_dist_two {z w : ℂ} (hz : z ∈ seamPlane) (hw :
     rw [show normSq (1/2 : ℂ) = 1/4 by simp; norm_num]
     norm_num
   have hvA : v ∈ oddDenom := mem_oddDenom_of_unit hvmem hnorm
-  have hsub : z - w = v + v := by rw [hv]; push_cast; ring
-  have hmem : z - w ∈ oddDenom := hsub ▸ oddDenom.add_mem hvA hvA
-  refine (cosetResidue_eq_iff (A := oddDenom.toAddSubgroup) psiA.toAddMonoidHom hmem).mpr ?_
-  rw [cosetResidue_apply_of_mem _ hmem]
-  obtain ⟨x, m, hm, hx⟩ := hvA
-  have hx2 : (m : ℂ) * (z - w) = den (2 * x) := by
-    rw [hsub, map_mul, map_ofNat, ← hx]; ring
-  show psiA ⟨z - w, hmem⟩ = 0
-  rw [psiA_eq hmem hm hx2, map_mul, map_ofNat, show (2 : F4) = 0 from rfl, zero_mul]
+  have h2A : (2 : ℂ) ∈ oddDenom := ⟨2, 1, odd_one, by rw [map_ofNat]; push_cast; ring⟩
+  have hfac : z - w = (2 : ℂ) * v := by rw [hv]; push_cast; ring
+  have hmem : z - w ∈ oddDenom := hfac ▸ oddDenom.mul_mem h2A hvA
+  refine (cosetResidue_eq_iff_map psiA hmem).mpr ?_
+  rw [show (⟨z - w, hmem⟩ : oddDenom) = ⟨(2 : ℂ) * v, oddDenom.mul_mem h2A hvA⟩ from
+      Subtype.ext hfac,
+    map_mul_normOne_eq_zero_iff conj_mem_oddDenom psiA h2A hvA (mem_normOne_conj_iff.mpr hnorm),
+    psiA_eq h2A odd_one (x := 2) (by rw [map_ofNat]; push_cast; ring)]
+  decide
 
 end FieldWall4
 
@@ -1237,17 +1236,12 @@ theorem spindleOrd_norm (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i
     (spindleOrd i - spindleOrd j) * conj (spindleOrd i - spindleOrd j) = (81 : SeamOrder) :=
   spindleOrd_norm_aux i j h
 
-private theorem dist_eq_one_of_normSq {z w : ℂ} (h : normSq (z - w) = 1) : dist z w = 1 := by
-  rw [Complex.dist_eq]
-  have h2 : ‖z - w‖ ^ 2 = 1 := by rw [Complex.sq_norm, h]
-  nlinarith [norm_nonneg (z - w)]
-
 theorem spindlePt_mem (i : Fin 7) : spindlePt i ∈ seamPlane :=
   seamPlane_ratMul (den_mem_seamPlane _) _
 
 theorem spindlePt_dist (i j : Fin 7) (h : (edgeGraph 7 moserSpindleEdges).Adj i j) :
     dist (spindlePt i) (spindlePt j) = 1 := by
-  refine dist_eq_one_of_normSq ?_
+  refine sub_mem_normOne_conj_iff.mp (mem_normOne_conj_iff.mpr ?_)
   set u : SeamOrder := spindleOrd i - spindleOrd j with hu
   have hden : normSq (den u) = 81 := by
     have h1 : den u * (starRingEnd ℂ) (den u) = (81 : ℂ) := by

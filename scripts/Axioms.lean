@@ -1042,6 +1042,20 @@ degeneracy, `den`'s injectivity, the descent, and the spindle's eleven unit dist
 #print axioms FieldWall4.spindlePt_dist
 #print axioms FieldWall4.den_rho9
 
+/-! ## Palette independence (2026-09-09) — `Palette.lean`
+
+`Forces` and `Separated` quantify over `Fin k`; a caller who builds a colouring valued in a group or
+a residue field needs them to speak about that palette too, and these say they do. -/
+
+#print axioms Forces.eq_of_equiv
+#print axioms Forces.eq_of_card
+#print axioms Forces.of_equiv
+#print axioms not_forces_of_coloring_ne
+#print axioms Separated.ne_of_equiv
+#print axioms Separated.ne_of_card
+#print axioms Separated.of_equiv
+#print axioms not_separated_of_coloring_eq
+
 /-! ## A — Theorem A in the kernel: the residue colouring in general
 
 The argument of B1 with the field removed. `colorable_of_residue` is the whole theorem — a graph
@@ -1069,6 +1083,16 @@ of an arbitrary commutative ring, which is what makes "this does not need `ℂ`"
 #print axioms conjOn_conjOn
 #print axioms colorable_unitDistance_induce_of_valuationSubring
 #print axioms colorable_unitQuadrance_of_residue
+#print axioms normOneColoring
+#print axioms cosetResidue_eq_iff_map
+#print axioms cosetResidue_ne_of_mem_normOne
+#print axioms map_mul_eq_zero_iff_of_isUnit
+#print axioms map_mul_normOne_eq_zero_iff
+#print axioms map_mul_conj_eq_zero_iff
+#print axioms not_forces_of_map_ne_zero
+#print axioms not_separated_of_map_eq_zero
+#print axioms div_mem_normOne
+#print axioms map_eq_zero_iff_of_mul_conj_eq
 #print axioms FieldWall4.conj_mem_oddDenom
 #print axioms FieldWall4.psiA_eq
 
@@ -1105,6 +1129,10 @@ that comes with it: at four colours the *plane*-level form of such a statement i
 #print axioms FieldWall4.not_forces_of_sub
 #print axioms FieldWall4.not_separated_of_sub
 #print axioms FieldWall4.psiA_onePlusI
+#print axioms FieldWall4.psiA_ker_stable
+#print axioms FieldWall4.sub_mem_oddDenom_of_adj
+#print axioms FieldWall4.sub_mem_normOne_of_adj
+#print axioms FieldWall4.seamResidueColouring
 #print axioms FieldWall4.seamColouring
 #print axioms FieldWall4.residueColouring_eq_of_forces
 #print axioms FieldWall4.residueColouring_ne_of_separated
