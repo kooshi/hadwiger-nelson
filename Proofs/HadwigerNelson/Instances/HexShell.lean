@@ -154,43 +154,74 @@ example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 7),
     intro p hp
     fin_cases hp <;> decide
 
-/-! ### The plane corollaries -/
+/-! ### The plane corollaries
 
--- SCOPE, added 2026-09-09 (FS-26, the vacuity sweep). The three theorems below quantify over
--- `(unitDistance ℂ).Coloring (Fin k)`, and how much they say depends on `k` in three steps:
+The pigeonhole above is about a proper colouring, and the only thing its proof asks of one is that
+it separate points at distance `1`. So the natural hypothesis is not "a colouring of the
+unit-distance graph" but "a colouring of `distanceGraph ℂ D` for some `D` containing `1`" — the
+same relaxation `Homogeneous.lean` already makes, where `Separated.planeIn` is stated over an
+arbitrary `D` and `Separated.plane` is its `D = {1}` instance. The naming here follows that
+convention, and the reason is not tidiness: `Separated.planeIn`'s conclusion is *verbatim* the
+hypothesis shape the conditional theorems at the foot of this file want, so a finite gadget's
+`Separated` fact now feeds them with no transport step in between. -/
+
+-- SCOPE, added 2026-09-09 (FS-26, the vacuity sweep). Kept beside the docstring below rather than
+-- folded into it because two audits running in parallel reached the same three-region reading of
+-- these theorems on the same day, and the convergence is worth recording as convergence.
 --
---   * `k ≤ 4` — VACUOUS. Rung B makes the type empty (`Instances/Interval.lean`,
---     `isEmpty_coloring_plane_four`). `hexShell_plane` is colour-generic and its `hk : k < 7`
---     admits this range, so the theorem is true and empty there; it has no consumer at `k ≤ 4`.
---   * `k ∈ {5, 6}` — OPEN, and open in the exact sense that whether the type is inhabited IS the
---     Hadwiger-Nelson problem: if `χ(ℝ²) = 7` then both are empty and `hexShell_plane5` and
---     `hexShell_plane6` are vacuous too.
---   * `k ≥ 7` — inhabited (`Instances/Seven.lean`), and excluded by `hk` because the counting
---     argument stops there.
---
--- That middle step is not a defect and needs no repair, because BOTH consumers assume a colouring
--- in order to REFUTE it: `not_colorable_five_of_forced_pairs` concludes `¬ Colorable 5`, and
+-- What that reading does not say, and it is the part that matters: the vacuity here is HARMLESS,
+-- and harmless structurally rather than luckily. Both consumers assume a colouring in order to
+-- REFUTE it -- `not_colorable_five_of_forced_pairs` concludes `¬ Colorable 5`, and
 -- `seven_le_chromaticNumber_hexShell_distances` concludes a lower bound. Assuming a structure in
--- order to derive a contradiction is the one shape vacuity cannot damage -- emptiness there is the
--- conclusion, not a hidden hypothesis. It is written down because the distinction is invisible in
--- the statements themselves, and because a reader who takes `hexShell_plane5` as a positive fact
--- ABOUT five-colourings would be making the `core9_plane` mistake one colour up.
---
--- The genuinely non-vacuous content of this module is the seven-point carrier, which really is
--- colourable: `Coloring (Fin 3)` and `Coloring (Fin 7)` of it are exhibited above, and two
--- `Coloring (Fin 5)` of it below, which is why the load-bearing reds work at all.
+-- order to derive a contradiction is the one shape vacuity cannot damage: emptiness there is the
+-- conclusion, not a hidden hypothesis. A reader who instead took `hexShell_plane5` as a positive
+-- fact ABOUT five-colourings would be making the `core9_plane` mistake one colour up.
 
-/-- **The plane pigeonhole, colour-generic.** Every proper colouring of the plane's
-unit-distance graph with fewer than seven colours has a monochromatic pair at distance `√3`
-or at distance `2`. The witnesses are two of the seven certified shell points. -/
-theorem hexShell_plane {k : ℕ} (hk : k < 7) (C : (unitDistance ℂ).Coloring (Fin k)) :
+/-- **A proper colouring of a distance graph separates every listed distance.** Stated for any
+metric space and any colour type because the proof uses neither: the pair is adjacent because its
+distance lies in `D`, and it is a pair of *distinct* points because that distance is not zero.
+
+This is the discharge map that makes `not_colorable_distanceGraph_of_forced_sqrt3` and its mirror
+*instances* of one theorem rather than copies of one argument. -/
+-- Its natural home is `DistanceGraph.lean`; it is kept local because a declaration added there
+-- rebuilds `Homogeneous.lean`, `Copy.lean` and `Mascot.lean` forever after, and moving it later is
+-- a cut-and-paste. Deliberately NOT named `Coloring.ne_of_dist_mem`: inside `namespace
+-- HadwigerNelson` that spelling would not resolve by dot notation on a `SimpleGraph.Coloring`.
+theorem coloring_ne_of_dist_mem {V α : Type*} [MetricSpace V] {D : Set ℝ}
+    (C : (distanceGraph V D).Coloring α) {d : ℝ} (hd : d ∈ D) (hd0 : d ≠ 0)
+    {x y : V} (hxy : dist x y = d) : C x ≠ C y :=
+  C.valid ⟨fun h => hd0 (by rw [← hxy, h, dist_self]), hxy ▸ hd⟩
+
+/-- **The plane pigeonhole, colour-generic and distance-set-generic.** Every proper colouring of
+`distanceGraph ℂ D` with fewer than seven colours, for any `D` containing `1`, has a monochromatic
+pair at distance `√3` or at distance `2`. The witnesses are two of the seven certified shell
+points.
+
+**This is a restatement, not a strengthening, and the record should say so.** It and
+`hexShell_plane` are interderivable, each in one line: downward because a unit-distance colouring is
+a `{1}`-colouring, and upward because the *same function* is a proper unit-distance colouring
+whenever `1 ∈ D`. It is stated over `D` so that a consumer working in a two-distance plane needs no
+transport, which is where the value is (see the conditional theorems below).
+
+**Vacuity, which has three regions and only the middle one is interesting** (the house rule asks
+every structure-valued hypothesis for a named inhabitant). Over `D = {1}`: at `k ≤ 4` the hypothesis
+is an *empty* type — this repository's `χ(ℝ²) ≥ 5` makes it so, and `Interval.lean`'s
+`isEmpty_coloring_plane_four` is that emptiness as a theorem — so the statement is vacuous there; at
+`k ∈ {5, 6}` whether it is inhabited **is the Hadwiger–Nelson problem itself**; at `k = 7` the
+inhabitant is `Instances/Seven.lean`'s `plane_colorable_seven`, just outside the `hk` window. And at
+any `D ⊇ {1, √3, 2}` with `k = 6` the hypothesis is *provably* empty — which is not a defect but
+`seven_le_chromaticNumber_hexShell_distances` below, seen from the other side. The non-vacuity that
+anchors the argument is at the finite carrier, where the `example` above exhibits a proper
+3-colouring of the seven points. -/
+theorem hexShell_planeIn {k : ℕ} (hk : k < 7) {D : Set ℝ} (h1 : (1 : ℝ) ∈ D)
+    (C : (distanceGraph ℂ D).Coloring (Fin k)) :
     ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y := by
   have hunit := hexShell.valid_sound (by decide) hexShell_valid
   have hvalid : ∀ {i j : Fin 7}, (edgeGraph 7 hexShellEdges).Adj i j →
       C (hexShell.point i) ≠ C (hexShell.point j) := by
     rintro i j ⟨hne, hm | hm⟩
-    · exact C.valid (unitDistance_adj.mpr (hunit (i, j) hm))
-    · exact C.valid (unitDistance_adj.mpr (by rw [dist_comm]; exact hunit (j, i) hm))
+    · exact coloring_ne_of_dist_mem C h1 one_ne_zero (hunit (i, j) hm)
+    · exact coloring_ne_of_dist_mem C h1 one_ne_zero (by rw [dist_comm]; exact hunit (j, i) hm)
   obtain ⟨p, hp, heq⟩ :=
     hexShell_pigeonhole hk (Coloring.mk (fun i => C (hexShell.point i)) hvalid)
   refine ⟨hexShell.point p.1, hexShell.point p.2, ?_, heq⟩
@@ -203,10 +234,19 @@ theorem hexShell_plane {k : ℕ} (hk : k < 7) (C : (unitDistance ℂ).Coloring (
     rwa [show Real.sqrt ((4 : ℤ) : ℝ) = 2 by
       rw [show ((4 : ℤ) : ℝ) = (2 : ℝ) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]] at h
 
-/-- **The five-colour reading** — the 6-programme's Act-One seed: every proper 5-colouring of
-the plane has a mono pair at distance `√3` or `2`. A 6-forcer built over this compound
-pigeonhole needs kill webs for both distances (radicands 11 and 15, inside the 5-forcers'
-field). Compound = disjunctive: strictly weaker than a single-distance firing. -/
+/-- **The plane pigeonhole, colour-generic.** Every proper colouring of the plane's unit-distance
+graph with fewer than seven colours has a monochromatic pair at distance `√3` or at distance `2`.
+The `D = {1}` case of `hexShell_planeIn`, and interderivable with it. -/
+theorem hexShell_plane {k : ℕ} (hk : k < 7) (C : (unitDistance ℂ).Coloring (Fin k)) :
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  hexShell_planeIn hk (Set.mem_singleton (1 : ℝ))
+    (Coloring.mk C fun {_ _} hxy =>
+      C.valid (unitDistance_adj.mpr (Set.mem_singleton_iff.mp hxy.2)))
+
+/-- **The five-colour reading** — the 6-programme's Act-One seed: every proper 5-colouring of the
+plane has a mono pair at distance `√3` or `2`. A 6-forcer built over this compound pigeonhole needs
+kill webs for both distances (radicands 11 and 15, inside the 5-forcers' field). Compound =
+disjunctive: strictly weaker than a single-distance firing. -/
 theorem hexShell_plane5 (C : (unitDistance ℂ).Coloring (Fin 5)) :
     ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
   hexShell_plane (by norm_num) C
@@ -222,7 +262,7 @@ theorem hexShell_plane6 (C : (unitDistance ℂ).Coloring (Fin 6)) :
 
 /-! ### The three-distance plane, as a theorem rather than a docstring (M49)
 
-`hexShell_plane6`'s docstring reads "equivalently, χ(ℝ²; {1, √3, 2}) ≥ 7". Until M49 no such graph
+`hexShell_plane6`'s docstring reads "equivalently, χ(ℝ², {1, √3, 2}) ≥ 7". Until M49 no such graph
 existed in the repository; with `distanceGraph` it does, and the claim is a two-line consequence
 of the same seven-point clique through the edge-list reduction. -/
 
@@ -270,9 +310,77 @@ The pigeonhole above is *disjunctive*, and that is the whole content of this sec
 six `√3`-placements leaves the three diameters standing, and refuting the diameters leaves the
 `√3`-pairs standing — so `χ(ℝ²) ≥ 6` needs a virtual edge at `√3` **and** one at `2`, not one at
 either. Each alone would be a major result that halves the remaining problem; neither alone closes
-it. The two `example`s below are the proof of that claim rather than a restatement of it: each
-exhibits a proper 5-colouring of the very carrier this pigeonhole runs on which avoids one class
-entirely. -/
+it. The four `example`s below are the proof of that claim rather than a restatement of it: each
+exhibits a proper colouring of the very carrier this pigeonhole runs on which avoids one class
+entirely — at five colours and again at six, so the new colour-generic statements are as honest as
+the ones they generalize.
+
+There is exactly **one** conditional theorem here. Per distance, the requirement is either "it lies
+in `D`, so the colouring's own validity separates it" or "some gadget separates it" — and the first
+*implies* the second through `coloring_ne_of_dist_mem`, so the disjunction collapses and every
+named form below is an instance obtained by discharging a hypothesis from a membership. -/
+
+/-- **The six-colour programme's exact requirement, over any distance graph containing `1`.** With
+every `√3`-pair and every distance-`2` pair separated in every proper `k`-colouring, `k < 7`, the
+graph is not `k`-colourable.
+
+The hypotheses are exactly what `Homogeneous.Separated.planeIn` produces from a finite gadget, so a
+future find instantiates this the day it lands. -/
+theorem not_colorable_distanceGraph_of_forced_pairs {k : ℕ} (hk : k < 7) {D : Set ℝ}
+    (h1 : (1 : ℝ) ∈ D)
+    (h3 : ∀ (C : (distanceGraph ℂ D).Coloring (Fin k)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (distanceGraph ℂ D).Coloring (Fin k)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (distanceGraph ℂ D).Colorable k := by
+  intro hc
+  obtain ⟨x, y, hd | hd, heq⟩ := hexShell_planeIn hk h1 hc.some
+  · exact h3 hc.some x y hd heq
+  · exact h2 hc.some x y hd heq
+
+/-- **One gadget suffices when the other distance is already forbidden.** If `2 ∈ D` then the
+shell's three diameters are edges of the graph, so the distance-`2` half is discharged by the
+colouring's own validity and only a `√3` gadget is asked for.
+
+`six_le_chromaticNumber_oneTwo_of_forced_sqrt3` is the instance the descent programme wants. -/
+theorem not_colorable_distanceGraph_of_forced_sqrt3 {k : ℕ} (hk : k < 7) {D : Set ℝ}
+    (h1 : (1 : ℝ) ∈ D) (hm : (2 : ℝ) ∈ D)
+    (h3 : ∀ (C : (distanceGraph ℂ D).Coloring (Fin k)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y) :
+    ¬ (distanceGraph ℂ D).Colorable k :=
+  not_colorable_distanceGraph_of_forced_pairs hk h1 h3
+    fun C _ _ h => coloring_ne_of_dist_mem C hm two_ne_zero h
+
+/-- **The mirror**: if `√3 ∈ D` then the shell's six `√3`-pairs are edges, and only a distance-`2`
+gadget is asked for. Instantiate at `D = {1, Real.sqrt 3}` for the two-distance headline; that
+instance is not minted here because no measurement programme targets it, where the `{1,2}` one
+below carries M49's and M50's. -/
+theorem not_colorable_distanceGraph_of_forced_two {k : ℕ} (hk : k < 7) {D : Set ℝ}
+    (h1 : (1 : ℝ) ∈ D) (hm : Real.sqrt 3 ∈ D)
+    (h2 : ∀ (C : (distanceGraph ℂ D).Coloring (Fin k)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (distanceGraph ℂ D).Colorable k :=
+  not_colorable_distanceGraph_of_forced_pairs hk h1
+    (fun C _ _ h => coloring_ne_of_dist_mem C hm (by positivity) h) h2
+
+/-- **The six-colour programme's exact requirement for the plane**, colour-generic. The `D = {1}`
+case, reached through `unitDistance_eq_distanceGraph_singleton` — the equality of graphs that module
+provides precisely so that a `unitDistance` theorem can be a `D = {1}` instance. -/
+theorem not_colorable_of_forced_pairs {k : ℕ} (hk : k < 7)
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin k)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin k)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (unitDistance ℂ).Colorable k := by
+  rw [unitDistance_eq_distanceGraph_singleton] at h3 h2 ⊢
+  exact not_colorable_distanceGraph_of_forced_pairs hk (D := {1}) rfl h3 h2
+
+/-- **The plane bound, colour-generic**, in the numeral idiom of
+`add_one_le_chromaticNumber_unitDistance`. All the `ℕ∞` arithmetic lives in
+`add_one_le_chromaticNumber_iff_not_colorable`, which exists for that reason. -/
+theorem add_one_le_chromaticNumber_plane_of_forced_pairs {k : ℕ} (hk : k < 7)
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin k)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin k)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber :=
+  add_one_le_chromaticNumber_iff_not_colorable.mpr (not_colorable_of_forced_pairs hk h3 h2)
 
 /-- **The six-colour programme's exact requirement.** With every `√3`-pair and every distance-`2`
 pair separated in every proper 5-colouring of the plane, the plane is not 5-colourable.
@@ -284,11 +392,8 @@ theorem not_colorable_five_of_forced_pairs
     (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ),
             dist x y = Real.sqrt 3 → C x ≠ C y)
     (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
-    ¬ (unitDistance ℂ).Colorable 5 := by
-  intro hc
-  obtain ⟨x, y, hd | hd, heq⟩ := hexShell_plane5 hc.some
-  · exact h3 hc.some x y hd heq
-  · exact h2 hc.some x y hd heq
+    ¬ (unitDistance ℂ).Colorable 5 :=
+  not_colorable_of_forced_pairs (by norm_num) h3 h2
 
 /-- **`χ(ℝ²) ≥ 6`, conditional on Act Two** — the headline form, in the numeral idiom of
 `add_one_le_chromaticNumber_unitDistance`. -/
@@ -297,8 +402,61 @@ theorem six_le_chromaticNumber_plane_of_forced_pairs
             dist x y = Real.sqrt 3 → C x ≠ C y)
     (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
     6 ≤ (unitDistance ℂ).chromaticNumber := by
-  have := lt_chromaticNumber_iff_not_colorable.mpr (not_colorable_five_of_forced_pairs h3 h2)
-  rwa [show ((5 : ℕ) : ℕ∞) = 5 from rfl, ← ENat.add_one_le_iff (by simp)] at this
+  have := add_one_le_chromaticNumber_plane_of_forced_pairs (k := 5) (by norm_num) h3 h2
+  exact_mod_cast this
+
+/-- **The same requirement one colour up**, which the five-colour phrasing could not express. With
+every `√3`-pair and every distance-`2` pair separated in every proper 6-colouring of the plane, the
+plane is not 6-colourable. -/
+theorem not_colorable_six_of_forced_pairs
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    ¬ (unitDistance ℂ).Colorable 6 :=
+  not_colorable_of_forced_pairs (by norm_num) h3 h2
+
+/-- **`χ(ℝ²) ≥ 7`, conditional on two six-colour gadgets** — the affirmative side of the
+local–global conjecture in its bold form, and a sentence this repository could not previously
+write. Note what it is not: the hypotheses are about six-colourings, which is a strictly harder
+demand than the five-colour ones of `six_le_chromaticNumber_plane_of_forced_pairs`, and nothing
+here suggests either is within reach. -/
+theorem seven_le_chromaticNumber_plane_of_forced_pairs
+    (h3 : ∀ (C : (unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y)
+    (h2 : ∀ (C : (unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = 2 → C x ≠ C y) :
+    7 ≤ (unitDistance ℂ).chromaticNumber := by
+  have := add_one_le_chromaticNumber_plane_of_forced_pairs (k := 6) (by norm_num) h3 h2
+  exact_mod_cast this
+
+/-- **The two-distance dial's target: `χ(ℝ²; {1,2}) ≥ 6` from a single `√3` gadget.** In the plane
+with both `1` and `2` forbidden, the shell's three diameters are already edges, so half of the
+compound pigeonhole is free and only the `√3` half needs a gadget — where the plane itself needs
+both (`six_le_chromaticNumber_plane_of_forced_pairs`).
+
+**Read the trade honestly: this is weaker than `χ(ℝ²) ≥ 6` at both ends.** The hypothesis is weaker,
+because every `{1,2}`-colouring is a unit-distance colouring but not conversely, so "all of the
+smaller family separate `√3`-pairs" is a strictly easier thing to establish; and the conclusion is
+weaker, because a bound on a two-distance graph is weaker than the same bound on the plane
+(`chromaticNumber_unitDistance_le_distanceGraph`). Neither statement implies the other. That trade is
+the point: the objects M49 and M50 measured `μ` against are `{1,2}`-graphs, so this is the version a
+real gadget could discharge.
+
+The mirror — a distance-`2` gadget over `{1, √3}` — is
+`not_colorable_distanceGraph_of_forced_two` at `D = {1, Real.sqrt 3}`, one line. -/
+theorem six_le_chromaticNumber_oneTwo_of_forced_sqrt3
+    (h3 : ∀ (C : (distanceGraph ℂ {1, 2}).Coloring (Fin 5)) (x y : ℂ),
+            dist x y = Real.sqrt 3 → C x ≠ C y) :
+    6 ≤ (distanceGraph ℂ {1, 2}).chromaticNumber := by
+  have := add_one_le_chromaticNumber_iff_not_colorable.mpr
+    (not_colorable_distanceGraph_of_forced_sqrt3 (k := 5) (by norm_num) (by simp) (by simp) h3)
+  exact_mod_cast this
+
+/-! ### Controls for the generalization — compiled, every build
+
+The first two pin that the conjunction is irreducible **from both sides**, at five colours; the next
+two do the same at six, so the colour-generic statements are as honest as the ones they generalize.
+The fifth pins that properness at distance `1` — the hypothesis `1 ∈ D` — is load-bearing rather
+than inherited. The last is the consistency cross-check that decided this file's factoring. -/
 
 /-- **Neither distance class is forced on its own, half one.** Centre `3`, ring `0,1,2,0,1,2`:
 a proper 5-colouring separating all six `√3`-pairs. So killing the diameters alone leaves a
@@ -317,5 +475,86 @@ example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 5), ¬ MonoPair hexS
   · rintro i j ⟨hne, hm⟩
     fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
   · rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
+/-- The same at six colours, half one — so `h3` is load-bearing in
+`seven_le_chromaticNumber_plane_of_forced_pairs` too, and the new instance carries its own
+adversary rather than inheriting the five-colour one. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 6), ¬ MonoPair hexShellP3 C := by
+  refine ⟨Coloring.mk ![3, 0, 1, 2, 0, 1, 2] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
+/-- The same at six colours, half two. -/
+example : ∃ C : (edgeGraph 7 hexShellEdges).Coloring (Fin 6), ¬ MonoPair hexShellP4 C := by
+  refine ⟨Coloring.mk ![4, 0, 1, 2, 3, 0, 1] ?_, ?_⟩
+  · rintro i j ⟨hne, hm⟩
+    fin_cases i <;> fin_cases j <;> revert hne hm <;> decide
+  · rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
+/-- **Properness at distance `1` is load-bearing** — the hypothesis `1 ∈ D`, read at the carrier.
+This six-colour labelling of the seven shell points has NO monochromatic pair among the six
+`√3`-pairs or the three diameters; its one repeat sits on the listed unit edge `(0,1)`. So drop
+properness at distance `1` and the pigeonhole's conclusion is false, six colours or not. -/
+example : ¬ MonoPair hexShellPairs (![0, 0, 1, 2, 3, 4, 5] : Fin 7 → Fin 6) := by
+  rw [not_monoPair_iff]; intro p hp; fin_cases hp <;> decide
+
+-- and the repeat really is on a listed unit edge, so the counterexample is the one described
+#guard (0, 1) ∈ hexShellEdges
+#guard (![0, 0, 1, 2, 3, 4, 5] : Fin 7 → Fin 6) 0 = (![0, 0, 1, 2, 3, 4, 5] : Fin 7 → Fin 6) 1
+
+/-- **The consistency cross-check that decided this file's factoring.** The conditional theorem with
+*both* hypotheses discharged from membership reproves `¬ (distanceGraph ℂ {1, √3, 2}).Colorable 6` —
+which `seven_le_chromaticNumber_hexShell_distances` above already proves by the independent
+edge-list route. Two proofs of one fact by different arguments; a generalization that re-derives a
+theorem the file already had is a generalization stated at the right level.
+
+It is also the vacuity note made concrete: at this `D` and this `k`, `hexShell_planeIn`'s hypothesis
+is an empty type, and that emptiness is exactly this statement. -/
+example : ¬ (distanceGraph ℂ {1, Real.sqrt 3, 2}).Colorable 6 :=
+  not_colorable_distanceGraph_of_forced_pairs (by norm_num) (by simp)
+    (fun C _ _ h => coloring_ne_of_dist_mem C (by simp) (by positivity) h)
+    (fun C _ _ h => coloring_ne_of_dist_mem C (by simp) two_ne_zero h)
+
+/-! ### The record's cited names, pinned at their old statements
+
+`CLAUDE.md` cites these by address, and the rule for a generalization here is that no cited name
+disappears and no cited statement changes. That rule is a promise unless something checks it, so
+these `example`s check it: each ascribes the *pre-generalization* type and is closed by the name as
+it now stands. Change any of those statements and this section goes red, which is the point. -/
+
+example : ∀ {k : ℕ}, k < 7 → ∀ (C : (unitDistance ℂ).Coloring (Fin k)),
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  @hexShell_plane
+
+example : ∀ (C : (unitDistance ℂ).Coloring (Fin 5)),
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  @hexShell_plane5
+
+example : ∀ (C : (unitDistance ℂ).Coloring (Fin 6)),
+    ∃ x y : ℂ, (dist x y = Real.sqrt 3 ∨ dist x y = 2) ∧ C x = C y :=
+  @hexShell_plane6
+
+example :
+    (∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = Real.sqrt 3 → C x ≠ C y) →
+    (∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) →
+    ¬ (unitDistance ℂ).Colorable 5 :=
+  @not_colorable_five_of_forced_pairs
+
+example :
+    (∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = Real.sqrt 3 → C x ≠ C y) →
+    (∀ (C : (unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y) →
+    6 ≤ (unitDistance ℂ).chromaticNumber :=
+  @six_le_chromaticNumber_plane_of_forced_pairs
+
+example : ((6 + 1 : ℕ) : ℕ∞) ≤ (distanceGraph ℂ {1, Real.sqrt 3, 2}).chromaticNumber :=
+  seven_le_chromaticNumber_hexShell_distances
+
+example : ¬ (edgeGraph 7 (hexShellEdges ++ hexShellPairs)).Colorable 6 :=
+  hexShellAug_not_colorable_six
+
+example : ∀ {k : ℕ}, k < 7 → ∀ (C : (edgeGraph 7 hexShellEdges).Coloring (Fin k)),
+    MonoPair hexShellPairs C :=
+  @hexShell_pigeonhole
 
 end HadwigerNelson
