@@ -83,13 +83,27 @@ its own banner. Vacuity is the same epistemic situation, so it gets the same voc
 * `stale`     — the docstring claims emptiness that is **not proved**. This is what separates a
                 declaration from a `# noqa`: "empty on purpose" is a verifiable claim, so it is
                 verified, and an annotation that outlives its truth fails the gate.
-* `unknown`   — undecided. Reported, counted, baselined, ratcheted to zero. -/
-inductive Verdict | vacuous | declared | stale | witnessed | unknown
+* `generic`   — the carrier mentions a bound variable: an arbitrary graph, an arbitrary colour
+                count. **No inhabitant witness can exist**, because the claim is parametric — not
+                every graph is `k`-colourable, and a theorem quantified over all of them is not
+                vacuous, it is *conditionally applicable*, and vacuity is then a property of each
+                instantiation, which is the caller's obligation and not this theorem's. Reported
+                and counted so it is never silent, but **never baselined**: 223 of the first run's
+                238 `unknown`s were this, and asking a shrink-only list to absorb entries that can
+                never be resolved is the same lifecycle confusion that put `VACUOUS` in the
+                baseline in the first version of this file. Twice, in one file, is enough.
+* `unknown`   — a CONCRETE carrier — a specific named object — with no proved inhabitant. The only
+                state the baseline may hold, and the only one anybody can actually discharge.
+                Fifteen of them, and `core122_pigeonhole` is one: independently flagged by the
+                2026-09-09 vacuity audit as resting on a premise nothing in the library
+                establishes (`plans/STUB-consolidation-remainder.md` §1). Two different methods
+                pointing at one declaration is the best evidence this check works. -/
+inductive Verdict | vacuous | declared | stale | witnessed | generic | unknown
   deriving BEq, Inhabited
 
 def Verdict.tag : Verdict → String
   | .vacuous => "VACUOUS" | .declared => "DECLARED" | .stale => "STALE"
-  | .witnessed => "WITNESSED" | .unknown => "UNKNOWN"
+  | .witnessed => "WITNESSED" | .generic => "GENERIC" | .unknown => "UNKNOWN"
 
 /-- The marker a declaration uses to say its emptiness is deliberate. It lives in the DOCSTRING,
 where `CLAUDE.md` § Trust ledger already requires a `native_decide` purchase to be named — same
@@ -216,7 +230,11 @@ def audit : CommandElabM Unit := liftTermElabM do
     if n.isInternal || !isOurs env n then continue
     let carriers ← try carriersOf ci.type catch _ => pure #[]
     for τ in carriers do
-      let raw ← probe ev τ
+      -- Probe FIRST, always: a carrier that is demonstrably empty must be reported as such even
+      -- when it is generic, so classification can never let a real vacuity escape. `generic` is
+      -- only ever a refinement of an INCONCLUSIVE result.
+      let probed ← probe ev τ
+      let raw := if probed == .unknown && (← instantiateMVars τ).hasFVar then .generic else probed
       -- The declaration is CHECKED against the probe, never merely trusted.
       let reason := (← findDocString? env n).bind reasonIn?
       let (v, r) := match raw, reason with
@@ -233,10 +251,12 @@ def audit : CommandElabM Unit := liftTermElabM do
   logInfo m!"=== DECLARED ==="
   for (n, v, r) in rows do
     if v == .declared then logInfo m!"DECLARED {n} :: {r}"
+  -- Only these reach the gate. `generic` is counted in the totals and deliberately absent here:
+  -- it is not work anyone can do, so it must not sit in a list whose target is zero.
   logInfo m!"=== FLAGGED ==="
   for (n, v, _) in rows do
     if v == .vacuous || v == .stale || v == .unknown then logInfo m!"{Verdict.tag v} {n}"
-  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} unknown={count .unknown}"
+  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} generic={count .generic} unknown={count .unknown}"
 
 end VacuityAudit
 

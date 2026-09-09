@@ -3922,10 +3922,19 @@ failure here:
   a checked claim rather than a `# noqa`), and `UNKNOWN` (**reported and counted, never silent**,
   because this repository has already shipped two gates that failed open). **`VACUOUS` and `STALE`
   are unconditional failures checked before the baseline, so no baseline entry can ever excuse
-  one.** The baseline holds `UNKNOWN` **and nothing else** — an earlier version let `VACUOUS` in
-  too, which gave one shrink-only list two entry classes with opposite lifecycles and made a real
-  defect indistinguishable from unfinished work — so it only ever shrinks and its target is empty;
-  the 238 pre-existing unresolved sites are burned down over time. Red/green controls run at
+  one.** And `GENERIC` — a carrier quantified over an arbitrary graph or colour count, where **no
+  inhabitant witness can exist**, because the claim is parametric and vacuity is then a property
+  of each instantiation, which is the caller's obligation rather than the theorem's. **The baseline
+  holds `UNKNOWN` and nothing else.** That took two corrections, both of the same shape and both
+  worth recording: the first version let `VACUOUS` in, and the second let parametric carriers in as
+  `UNKNOWN` — each time putting two entry classes with **opposite lifecycles** into one shrink-only
+  list, so that a real defect was indistinguishable from unfinished work and the list's own target
+  of zero was unreachable by construction. Separating them took the baseline from **238 entries to
+  15**, all of them concrete and dischargeable — and two of those fifteen are `hexShell_plane5` and
+  `hexShell_plane6`, where proving the inhabitant **is** Hadwiger–Nelson, so the baseline is grouped
+  and annotated to say which entries are chores, which are the open problem, and which are the two
+  `core*_pigeonhole` sites `plans/STUB-consolidation-remainder.md` §1 independently flagged —
+  **two methods pointing at one declaration is the best evidence this check works.** Red/green controls run at
   introduction: a planted undeclared-vacuous theorem and a planted false declaration were each
   detected by name, the gate exited 1, **adding both to the baseline did not excuse them**, and
   removing them returned it to green. **It found `core9_plane` and `core122_plane` on its first run,
