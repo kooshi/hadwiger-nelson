@@ -131,21 +131,55 @@ are recorded here as explicit negatives so they are not re-scanned.*
 | 2305.07770 | Brouwer, Joe & Noble, *Odd vector cycles in `ℤᵐ`* | **Negative for prior art, one nice hook.** `ℤᵐ` and `ℚ³`; the 2-adic content is only the coordinate-sum parity split. Cites `[Manturov2012]` — the one citation by which the finite-plane reduction sat next to this community without anyone connecting it to number fields. The hook: they prove that their Conjecture 1 would re-derive Arno's class-number-4 theorem without its computer proof — a combinatorial statement about odd cycles implying a deep number-theoretic classification, the genre our programme aims at from the other side |
 | — | Raigorodskii, Borsuk survey (Russian), `library/pdf/raigorodskii-borsuk-survey-RU.pdf` | **Not read (Russian, no OCR run).** Its §§3–4 are `χ(ℚᵈ)` with proofs. `[Payne2009]` records that this survey **miscites Chilakamarri's `χ(ℚ⁵) = 8` conjecture as a theorem**, so it is not a safe secondary source. Low priority: the `ℚᵈ` direction is now covered directly by the papers above |
 
-## C. Seen in earlier sessions' web searches only — unread, listed so nothing is lost (titles as the search listings gave them)
+## C. SWEPT 2026-09-09 (FS-23) — every row now carries a verdict, and this section is closed
 
-Relevant to our questions, worth reading when a milestone touches them:
+*Rule 0c says a §C row is a **liability**, not an archive: three of them have turned out to be prior art for
+work running at the time. **This section was swept row by row on 2026-09-09** — each item was either promoted
+into §A with a read, or given a written reason it cannot touch anything we do. Nothing here is a standing debt
+any more; new titles are added with their verdict on the same day, or they do not go in.*
 
-* ~~arXiv:2502.01958 *On the chromatic number of the plane for map-type colorings*~~ — **PROMOTED 2026-09-08 to `[SokolovVoronov2025]` in §A. The 2026-09-06 guess ("the cell-family / coset colourings of M37–M40 may have prior art here") was RIGHT, and it sat in this list unread for two days: their Theorem 2 is `χ_poly(ℝ²) = 7`, which subsumes our cell family's `≥ 7` at every scale. This is the second time a §C row has turned out to be load-bearing prior art while unread (the first was `[CervantesKrebs2023]`), and it is the direct argument for §D rule 0c below.**
-* arXiv:2303.06262, 2303.06272 *Chromatic numbers of Cayley graphs of abelian groups: a matrix method* / *cases of small dimension and rank* — **PROMOTED 2026-09-08 to `[CervantesKrebs2023]` in §A: it was listed here unread since 2026-09-06, and the poros session independently named it. J. Cervantes and M. Krebs, Lin. Alg. Appl. (2023). A connected finite-degree Cayley graph on an abelian group is encoded by an integer matrix; adding or subtracting rows produces a graph homomorphism to a graph of smaller dimension, hence an upper bound on `χ` — which is systematically what M61's `addCayleyMap` / `unitQuadrance_colorable_of_quotient` (the periodic quotient along a null direction) does by hand, one prime at a time. Same Krebs as `[Krebs2022]`. Follow-up: arXiv:2511.03028, *Chromatic numbers of rank-two Abelian Cayley graphs* (2025). Reading this before FS-17's cube-and-conquer is the cheapest move available.**
-* arXiv:2303.14722 *More certainty in coloring the plane with a forbidden distance interval* (fetched 2026-09-08, held at `library/pdf/arXiv-2303.14722-more-certainty-interval.pdf`, unread); doi 10.1007/s00454-004-1092-8 *ε-unit distance graphs* (Discrete Comput. Geom.) — the interval/ε-dial theme of M43–M44.
-* arXiv:2311.10069 *The fractional chromatic number of the plane is at least 4*; arXiv:1810.00960 *On the density of sets of the Euclidean plane avoiding distance 1*; arXiv:2606.28157 *A unit-distance graph in the plane with independence ratio below 1/4* — the fractional/density side.
-* arXiv:2206.12632 *A 6-chromatic odd-distance graph in the plane*; arXiv:2205.12312 *The chromatic number of ℝⁿ with multiple forbidden distances*; arXiv:2506.19151 *Yet another species of forbidden-distances chromatic …*; arXiv:2404.05509 *Extending the continuum of six-colorings*; arXiv:2506.19126 *Upper chromatic numbers: an update*; arXiv:2206.12635 *Tiling the plane with hexagons: improved separations for k-colourings*; arXiv:2206.12633 *On the plane and its coloring* — the multi-distance and upper-bound landscape (M35, M47).
-* arXiv:2303.06801 *A 5-chromatic same-distance graph in the hyperbolic plane*; arXiv:2201.04499 *Coloring distance graphs on the plane*; arXiv:1305.2765 *Coloring distance graphs: a few answers and many questions*; arXiv:1507.00025 *Chromatic number of Euclidean plane*; doi 10.1007/s00373-012-1249-9 *On the chromatic number of subsets of the Euclidean plane*; doi 10.1007/BF01858462 *On the connectivity of unit distance graphs* — surveys and neighbours.
-* arXiv:2604.15466 *Any 2-coloring of the plane contains monochromatic unit rhombuses*; arXiv:2510.15002 *Determining unit distance graphs with coordinates in ℤ² is NP-complete*; arXiv:2312.15336 *The Gray graph is a unit-distance graph*; arXiv:1802.06460 *Embedding distance graphs in finite field vector spaces*; arXiv:0711.1157, 0912.5395 (unit-distance embeddings of the Heawood graph) — unit-distance embedding results.
-* arXiv:2604.01408 (strongly projective graphs; the "dictator" form) — with [GreenwellLovasz1974].
-* doi 10.1007/978-0-8176-8092-3_8 (Soifer's essay chapter on the chromatic number of the plane); doi 10.1007/978-3-540-28629-5_19 (group colouring complexity); arXiv:1111.1015, 1003.2588 (colourings of abelian groups); arXiv:1903.09444, 2508.19775 (perfect colourings, Johnson graphs); arXiv:2207.13892 (random ε-distance graphs on spheres).
+**PROMOTED into §A on this sweep (each was a bare title before, each is now read or scanned):**
 
-Not relevant (name collisions in searches, recorded so they are not re-fetched): arXiv:2106.05621 (rationalizability of field extensions, Feynman integrals); doi 10.1007/s00209-025-03728-4 (an algebraic Fischer–Grauert theorem); arXiv:1301.3998 (dihedral group actions).
+* ~~arXiv:2206.12635 *Tiling the plane with hexagons: improved separations for k-colourings*~~ →
+  **`[deGreyParts2022]`**, and it is prior art for the whole cell family (rows 34–37). *Third* §C row to turn
+  out that way.
+* ~~arXiv:2206.12632 *A 6-chromatic odd-distance graph in the plane*~~ → **`[PartsOdd2022]`**, which states the
+  observed form of ledger row 59's 2-adic law, naming `ℚ(√3,√11)`, in June 2022.
+* ~~arXiv:2303.14722 *More certainty…*~~ → **`[Parts2023]`**, read in full; ~~arXiv:2201.04499 *Coloring
+  distance graphs on the plane*~~ → **`[ChybowskaSokol2022]`**; ~~arXiv:2206.12633 *On the plane and its
+  coloring*~~ → **`[Parts2022]`**, now held; ~~doi 10.1007/s00454-004-1092-8 *ε-unit distance graphs*~~ →
+  **`[Exoo2005]`**, still not held.
+* ~~arXiv:2311.10069 *The fractional chromatic number of the plane is at least 4*~~ →
+  **`[MatolcsiEtAl2025]`**, which names our direction ladder the **Moser lattice**; ~~arXiv:2606.28157 *A
+  unit-distance graph … independence ratio below 1/4*~~ → **`[DuczVarga2026]`**, whose reference list led to
+  **`[Ducz2026]`** and thence to **`[Polymath16wiki]`**.
+* ~~arXiv:2404.05509 *Extending the continuum of six-colorings*~~ → this is **`[Mundinger2024]`**, already in
+  §A; the key numbers are `0.354 ≤ d ≤ 0.657`, the first improvement in thirty years.
+* ~~arXiv:2502.01958~~ → `[SokolovVoronov2025]` and ~~arXiv:2303.06262/06272~~ → `[CervantesKrebs2023]`
+  (both promoted at FS-18, 2026-09-08).
+
+**SWEPT AND CLOSED — each with the reason it cannot touch our questions:**
+
+| item | verdict (2026-09-09) |
+|---|---|
+| arXiv:1802.06460 *Embedding distance graphs in finite field vector spaces* (Iosevich–Parshall) | **Negative.** Erdős–Falconer *distance-set* problems: large subsets of `𝔽_q^d` determine prescribed configurations, `d ≥ 2t`. No chromatic number, no number fields, no residue colouring. The nearest-title trap for M58 and it is not it |
+| arXiv:2205.12312 *The chromatic number of `ℝⁿ` with multiple forbidden distances* (Naslund) | **Negative for the plane.** Asymptotics in `n` for `χ(ℝⁿ; m)` by the partition-rank method; `n = 2` appears only as background. Does not bear on `μ(d)`, which counts `d`-edges rather than distances |
+| arXiv:1810.00960 *On the density of sets … avoiding distance 1*; arXiv:2207.13892 (random `ε`-distance graphs on spheres) | **Background only.** The density side `m₁(ℝ²)` that `[MatolcsiEtAl2025]`'s Hall-ratio result now dominates; the sphere paper is a random-graph model |
+| arXiv:2303.06801 *A 5-chromatic same-distance graph in the hyperbolic plane* | **Negative.** Hyperbolic; no field structure, no transfer |
+| arXiv:1305.2765 *Coloring distance graphs: a few answers and many questions* | **Scanned.** A survey of distance graphs on *non-Euclidean* spaces; its own framing is that only a few such spaces have been studied. No number fields |
+| arXiv:1507.00025 *Chromatic number of Euclidean plane* | **Junk.** Its argument is that `χ(ℝ²) > 4` contradicts the four-colour theorem for planar graphs. Recorded so it is never fetched again |
+| arXiv:2506.19151, arXiv:2506.19126 | **Negative.** Re-postings of 2000/2001 surveys on *upper* chromatic numbers (a different parameter) |
+| arXiv:2604.15466 *Any 2-coloring … monochromatic unit rhombuses* | **Negative, one datum.** A compulsion theorem for the plane at **two** colours (a mono rhombus with unit sides and non-unit diagonals). Right genre, wrong rung |
+| arXiv:2510.15002 (`ℤ²` unit-distance recognition NP-complete); arXiv:2312.15336 (Gray graph); arXiv:0711.1157, 0912.5395 (Heawood embeddings) | **Negative.** Realizability, not colouring; `[Schaefer2013]` is the general statement |
+| arXiv:1111.1015, arXiv:1003.2588 (Banakh; Banakh–Chervak) | **Negative.** Ramsey-theoretic *symmetry* numbers and centerpole sets of abelian groups — the name collision "colourings of abelian groups" is with `[CervantesKrebs2023]`, and these are unrelated |
+| arXiv:1903.09444 (perfect 2-colourings of circulants with odd distances); arXiv:2508.19775 (Johnson-type graphs) | **Negative.** Perfect (equitable) colourings and Johnson graphs; neither is a plane or a field |
+| arXiv:2604.01408 (commutativity gadgets, quantum polymorphisms) | **Negative.** Quantum CSP reductions; the `[GreenwellLovasz1974]` link is a citation, not a shared question |
+| arXiv:1908.03880 *Lattice approach to plane colorings* (Heinäsmäki) | **Negative, and a naming trap: "lattice" here is a discretisation grid, not an algebraic lattice.** A spin-model heuristic whose ground states approximate plane colourings; its conclusion (seven colours needed) is numerical evidence, not a theorem |
+| doi 10.1007/978-0-8176-8092-3_8 (Soifer essay); doi 10.1007/978-3-540-28629-5_19 (group colouring complexity); doi 10.1007/s00373-012-1249-9; doi 10.1007/BF01858462 | **Superseded or background.** `[Soifer2024]` covers the first; the others are complexity and connectivity questions with no field content |
+
+Not relevant (name collisions, recorded so they are not re-fetched): arXiv:2106.05621 (rationalizability of
+field extensions, Feynman integrals); doi 10.1007/s00209-025-03728-4 (an algebraic Fischer–Grauert theorem);
+arXiv:1301.3998 (dihedral group actions).
 
 ## D. Standing tasks for this file
 
@@ -188,7 +222,59 @@ Not relevant (name collisions in searches, recorded so they are not re-fetched):
    paywalled and stays at abstract. **Read `[Parts2020a]` before any claim about minimal witness size**, and
    before the G3/G4 shell-vocabulary falsifier is tested.
 
+0f. **MINE THE REFERENCE LIST OF EVERY PAPER YOU READ, THE SAME DAY (added 2026-09-09, FS-23; `CLAUDE.md`
+   G50's third instance).** When a work is read, every title in its bibliography that sits in our neighbourhood
+   goes into §A as a **named-only row immediately**, with one line saying why it might matter. On 2026-09-09
+   this produced `[Heule2021]`, `[Ardal2009]`, `[Exoo2005]`, `[Ivanov2007]`, `[Lonc2007]`, `[Bukh2008]`,
+   `[Maehara1991]`, `[deGreyParts2022]`, `[Ducz2026]`, `[Hubai2018]` and `[Polymath16wiki]` in one day — and
+   `[Heule2021]` is the closest published work to a theorem proved here the day before. The chain that found
+   the seventh lineage was four references deep: `[Parts2023]` → `[deGreyParts2022]`; `[DuczVarga2026]` →
+   `[Ducz2026]` → the Polymath16 wiki. **A citation list read the day the paper is read costs ten minutes; the
+   same list read a year late costs a retracted novelty claim.**
+
+0g. **AN ABSTRACT IS NOT A READING, AND A SEARCH IS NOT A LITERATURE (2026-09-09).** Two further habits, both
+   paid for. Open the paper: `[ExooIsmailescu2019]` was dismissed by its abstract while its conclusion asked
+   the question Theorem B answers. And **look outside the indexes**: the seventh lineage is a wiki page last
+   edited 4 June 2018 that no citation database lists, that currently 404s on its own site, and that had to be
+   read through the Internet Archive. Anything found that way is archived to `library/notes/` the same day, as
+   `[Polymath16wiki]` now is.
+
 1. Verify every **[title from a search listing]** and **[title unverified]** against the paper (arXiv landing pages) — a five-minute job per entry, deferred by context budget on 2026-09-06.
 2. Re-find where [GreenwellLovasz1974] / arXiv:2604.01408 were used and record the plan section.
 3. Read [Soifer2024]'s number-field chapter and [Chilakamarri1988], [Chow1993], [Zaks1992] against the field-wall note's §2 and §8, and record what each settles (the note's §10.1 holds Fischer's reconciliation as the template).
 4. When a theorem lands whose proof follows a paper, the ledger row in `CLAUDE.md` names the key from column one of table A.
+
+## E. Glossary — this project's vocabulary against the literature's (FS-23, 2026-09-09)
+
+*Why this exists.* `CLAUDE.md` § Grokkings **G49** names a private vocabulary as **the mechanism that hid the
+prior art**: every working term here was coined in-house, appears in no paper, and is therefore a perfect filter
+against discovering we are not first. Six searches missed `[Polymath16wiki]`; the search that found
+`[Vinh2006]` used *the discipline's* phrase, not ours.
+
+*The decision (Kooshi, 2026-09-09):* **"we should not wholly rewrite our history with the terms of the
+literature, but we should replace any where the scope is small and our chosen term might lead to confusion."**
+So: **a translation table, adoption of the literature's term in all NEW writing and in the paper, targeted
+replacement where the term is both narrow and confusable, and closed milestone records left alone** — a
+milestone's record is what we believed when we believed it, and `T13` keeps its title.
+
+| ours | the literature's | source | decision |
+|---|---|---|---|
+| **the direction ladder** (T13) | **the Moser lattice** `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩`, `ω₃ = (5+i√11)/6` | `[MatolcsiEtAl2025]` Def. 1, `[Ducz2026]`, `[Aggarwal2025]` — **three independent sources** | **ADOPTED 2026-09-09.** Narrow (25 uses) and genuinely confusable — "ladder" also names M24's *matched ladder pair*. New writing says **Moser lattice**; tool output updated; `STANDING-QUESTIONS.md`'s T13 keeps its title with a gloss |
+| **the seam field** `K` | `ℚ(√3,√11)`; the ring `ℤ[ζ₆, (1+√33)/2, ⅓]` is the **Moser spindle ring** `R̄₂` | `[Polymath16wiki]`; `[Madore2015]` Prop. 4.6 just writes the field | **Say the field.** In the paper, `K` defined once and never nicknamed |
+| **the seam plane** | `K²` | — | **Say `K²`.** Four prose uses; the Lean identifier `seamPlane` stays (renaming it costs a rebuild and buys nothing) |
+| **virtual edge** | **`[Heule2019]`'s own term** — *"hence 1/3 is a so-called virtual-edge"*; `[Heule2021]` builds on it | `[Heule2019]` §5 | **KEEP — it was never ours.** But `[Parts2020a]` §2 rejects it in print: *"this term is not entirely successful, since it does not clearly express whether one means a mono- or non-mono-pair, which leads to confusion."* **He is right, and the 2-adic law is exactly about that polarity**, so the paper uses **mono-pair / non-mono-pair** |
+| **forced pair**, *forced monochromatic* | **mono-pair** | `[Parts2020a]`, `[PartsOdd2022]` | **Adopt in new writing.** Theirs is shorter and states the polarity |
+| **cheats**, *non-unit edges* | **`d`-edges** / *blue edges* in the two-distance literature | `[Agoston2026]` (red/blue edge-bicoloured graphs) | **Keep in the record (817 uses — not narrow), never in the paper.** New writing says *`d`-edge* |
+| **spindle chord** | **rotation edge** | `[PartsOdd2022]` §1 | Adopt in new writing; ours is not wrong, theirs is published |
+| **`spindleRot d`** (indexed by the **distance**) | **`ω_t` / `θ_t`, indexed by the SQUARED distance**: `ω_t = exp(i·arccos(1 − 1/2t))` | `[Polymath16wiki]`, `[Heule2019]` §2 | **HIGHEST CONFUSION RISK IN THIS TABLE.** Their `ω₄` is our `spindleRot 2`; their `ω_{64/9}` is our `spindleRot (8/3)`. A `--` note is in `Copy.lean`; always state which convention |
+| **the half-spindle group** `⟨ζ₁₂, σ, √ρ₁₅, √ρ₆₃⟩` | the **unit-modulus group** of the ring, `⟨ω, η, ζ, α, β, γ⟩` with `η = (√33+i√3)/6`, `ζ = (1+i√15)/4`, **`α = (√5+i√11)/4`** | `[Polymath16wiki]`, derived by UFD factorisation, 2018 | **Theirs is earlier, derived, and has a generator we lack.** See G8 |
+| **pigeonhole × kill** (G15) | *"the **large part** limits the 4-colourings of 12 vertices at distance 2 to 19; the **small part** prevents these"* | `[Heule2019]` §6.2, after `[Heule2018]` | Keep ours as the mechanism's name; cite his as the construction's own description |
+| **additive colouring** (M56) | **linear colouring** on the wiki; **additive colouring** in `[Fischer1990]` | `[Fischer1990]`, `[Polymath16wiki]` | Fischer's is the published mathematical term; **use "additive"** |
+| **the field wall**, **wall-broken**, **5-sealed**, **usable prime** | *unnamed everywhere* — `[Fischer1990]`, `[Madore2015]` and `[BardestaniMallahiKarai]` all state the condition (anisotropy of `x²+y²` at the prime) without naming it | — | **Keep for thinking; do NOT name it in the paper** (FS-20 §4 decision N2): naming it obscures that six authors state one condition |
+| **the descent**, **the μ-dial**, **the arity floor**, **the hexagram**, **the matched ladder pair**, **the transmuter**, **the seam hexagon** | *no counterpart* | — | Ours, and they name objects nobody else has. Each keeps its name; the paper defines any it uses |
+| **mono-pair at distance `d`, `v_𝔭(d) > 0`** | *odd distance* / *even distance* for integers | `[Heule2021]`, `[PartsOdd2022]`, `[Ardal2009]` | **Ours generalises theirs**: odd integers are exactly the integer case of `v_𝔭(d) = 0`. Say the valuation, cite the parity |
+
+**One collision to know about.** `[Agoston2026]` uses *virtual* in a third, unrelated sense — a "partly virtual
+edge-bicoloured graph" has green edges constrained to equal **vectors**, a construction device. Three senses of
+one word across three communities; the paper should not use the bare word at all.
+

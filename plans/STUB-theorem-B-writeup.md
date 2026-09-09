@@ -244,6 +244,60 @@ all touch it, and each is now amended in place.** It changes the paper's framing
    amenability step is where the work is; a day, and it would strengthen the paper's headline from one answered
    question to two.
 
+## 4c. The citation graph — drawn 2026-09-09 (FS-23), with the edges that do not exist
+
+**This is the paper's central evidence and it should be a figure.** Until today §2 asserted "they mostly do not
+cite one another"; here is the graph, with each edge marked by how it was verified. **A reference list I opened
+myself is `✓`; anything inherited from an earlier session's note is `~`; anything unchecked is blank and must
+not be used in the manuscript.**
+
+**The two sides.**
+
+* **The number-field side** — `[Fischer1990]`, `[Fischer1990b]`, `[Moorhouse2010]`, `[Manturov2012]`,
+  `[Madore2015]`, `[BardestaniMallahiKarai]`, plus the finite-field line
+  `[MMST1996]` → `[Vinh2005]` → `[Vinh2006]` → `[SchneiderSilva2013]` → `[Krebs2022]` →
+  `[LorenzZimmermann2023]`, `[CervantesKrebs2023]`, and `[Johnson2006]`/`[Chow1993]`.
+* **The Polymath16 / Moser-lattice side** — `[Polymath16wiki]`, `[Hubai2018]`, `[Heule2018]`, `[Heule2019]`,
+  `[Heule2021]`, `[Parts2020a/b/c/hv]`, `[Parts2021]`, `[Parts2022]`, `[PartsOdd2022]`, `[Parts2023]`,
+  `[deGreyParts2022]`, `[ChybowskaSokol2022]`, `[AmbrusEtAl2024]`, `[MatolcsiEtAl2025]`, `[Ducz2026]`,
+  `[DuczVarga2026]`, `[Agoston2026]`, `[Aggarwal2025]`, `[ExooIsmailescu2019/2020]`, `[CostaSilvaFilho2026]`.
+
+**Edges verified by opening the reference list.**
+
+| from | to | how |
+|---|---|---|
+| `[Manturov2012]` → `[Fischer1990]` | the only citation from the number-field side to Fischer we hold | ~ (FS-18) |
+| `[ExooIsmailescu2019]` → `[Madore2015]` | ✓ (FS-20 repair) — **a bridge**, and the only one until 2025 |
+| `[Aggarwal2025]` → `[Madore2015]` | ✓ (FS-20 repair) — **the second bridge** |
+| `[LorenzZimmermann2023]` → `[Krebs2022]` | ~ (FS-18) — internal to the finite-field line |
+| `[SchneiderSilva2013]` → `[Vinh2005/2006]` | ~ (FS-18) — internal |
+| `[Ducz2026]` → `[MatolcsiEtAl2025]`, `[AmbrusEtAl2024]`, `[Hubai2018]` | ✓ — **three references, all internal** |
+| `[Parts2023]` → `[ChybowskaSokol2022]`, `[Coulson2004]`, `[CurrieEggleton2016]`, `[Exoo2005]`, `[deGrey2018]`, `[deGreyParts2022]`, `[Heule2018]`, `[Parts2022]`, `[Soifer2009]` | ✓ — **all internal** |
+| `[deGreyParts2022]` → `[ChybowskaSokol2022]`, `[Ivanov2011]`, `[Parts2021]`, `[Polymath16wiki]`, `[Soifer2009]`, Gardner, Rao | ✓ — **all internal** |
+| `[Heule2019]` → `[deGrey2018]`, `[Heule2018]`, `[Soifer2008]`, de Bruijn–Erdős, Hadwiger, Moser–Moser + SAT literature | ✓ — **all internal, and this is the paper whose §5 is titled "…points in `Q[√3,√11]`"** |
+| `[PartsOdd2022]` → `[Ardal2009]`, `[ExooIsmailescu2020]`, `[Heule2018]`, `[Heule2021]`, `[Parts2020b]`, `[Soifer2016]` | ✓ — **all internal** |
+| `[Agoston2026]` → `[Bukh2008]`, `[deGrey2018]`, `[ExooIsmailescu2020]`, `[Maehara1991]`, `[Parts2020b]`, `[Schaefer2013]`, Seidenberg, Tarski | ✓ — **all internal** |
+| `[ChybowskaSokol2022]` → `[Exoo2005]`, `[Lonc2007]`, `[Ivanov2007]`, `[Coulson2004]`, `[CurrieEggleton2016]` | ✓ — **all internal** |
+| `[Davies2024]` → `[Ardal2009]`, `[Heule2021]`, `[PartsOdd2022]`, Rosenfeld, Erdős, `[Soifer]` | ✓ — **all internal** |
+
+**The edges that do not exist, and this is the finding.**
+
+1. **`[Madore2015]` cites none of Fischer, Moorhouse, Manturov, Vinh, Johnson or Chow** (✓, FS-18).
+2. **`[Moorhouse2010]` and `[Vinh2005]` do not cite each other** — Moorhouse's §6 *guesses* an asymptotic that
+   Vinh had proved five years earlier (✓, FS-18).
+3. **Not one work on the Polymath16 / Moser-lattice side cites Fischer, Moorhouse, Manturov, Madore, Vinh,
+   MMST, Schneider–Silva, Krebs or Johnson** — checked against ten reference lists opened on 2026-09-09,
+   covering 2018 to 2026. `[Heule2019]` writes `ℚ[√3,√11]` in a section title and cites no number theory at
+   all. `[Ducz2026]` proves a residue colouring of the Moser ring in five pages with three references.
+4. **Not one work on the number-field side cites any Polymath16 output** (no counterexample found; marked `~`
+   because `[Krebs2022]`, `[Johnson2006]` and `[BardestaniMallahiKarai]` are unread).
+5. **The only bridges in either direction are `[ExooIsmailescu2019]` → `[Madore2015]` and
+   `[Aggarwal2025]` → `[Madore2015]`.** Two edges, both into Madore, both from the Polymath16 side, and
+   neither is reciprocated.
+
+**Still to verify before the figure ships**: `[Krebs2022]`, `[Johnson2006]`, `[BardestaniMallahiKarai]`,
+`[MMST1996]`, `[Chow1993]` reference lists (all unread), and the seventeen Polymath16 blog threads (R6).
+
 ## 5. Still owed before submission (blocking, per G50)
 
 * **R6 — the Polymath16 threads (NEW, 2026-09-09, and it is now the top of this list alongside R2).** The wiki

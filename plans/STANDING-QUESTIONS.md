@@ -245,7 +245,7 @@ estimate (Q4). Full incident anatomy: `plans/M50-batch-descent.md` §R6, §Sⁱ�
   on memory-tight or wall-capped phases; head-of-line blocking (index-order issue, one 2 M-conflict
   budget, a rate-based ETA) cost 9.8 h once and is now a rule (first pass wall-capped).
 
-* **T13 — the direction ladder** [measured on ONE halo; registered for replication as M52 P1].
+* **T13 — the direction ladder** — *renamed 2026-09-09 (FS-23): the literature calls this object the **Moser lattice** (`[MatolcsiEtAl2025]`, `[Ducz2026]`, `[Aggarwal2025]`); the result keeps its title, new writing uses theirs* [measured on ONE halo; registered for replication as M52 P1].
   The iteration-4 halo (119 glue points, provenance depths 1:1 / 2:13 / 3:32 / 4:41 / 5:32 — 93 of
   them glue points of two HALO parents) carries 1,061 unit edges in exactly SIX directions mod 60°:
   30.00, 46.78, 13.22, 3.56, 56.44, 20.34 — the seed's three families (Q6's two crystals at 13.22°

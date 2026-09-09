@@ -36,6 +36,12 @@ open Complex
 /-- Rotation of the plane about `c` by the complex number `ρ` (an isometry when `‖ρ‖ = 1`). -/
 noncomputable def rotAbout (c ρ z : ℂ) : ℂ := c + ρ * (z - c)
 
+-- NAMING, against the literature (2026-09-09, FS-23; a `--` comment, so no dependent rebuilds).
+-- The Polymath16 wiki and Heule index this rotation by the SQUARED distance, not the distance:
+-- their `ω_t = θ_t = exp (i · arccos (1 − 1/(2t)))` is our `spindleRot (√t)`.  So their `ω₃` is the
+-- Moser twist `spindleRot √3`, their `ω₄` is `spindleRot 2 = rho15`, and their `ω_{64/9}` — the
+-- rotation `(119 + 3i√247)/128` that spindles the monochromatic `8/3` pair — is `spindleRot (8/3)`.
+-- State the convention whenever quoting a value across the boundary.
 /-- The spindle rotation for a pair distance `d`: `sin (θ/2) = 1/(2d)`, written as
 `(cos θ, sin θ) = (1 − 1/(2d²), √(4d² − 1)/(2d²))`. -/
 noncomputable def spindleRot (d : ℝ) : ℂ :=

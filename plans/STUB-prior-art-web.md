@@ -154,3 +154,65 @@ firing a fourth time; it is what the paper (FS-20) needs before submission; and 
 makes any future result of this project *findable* by the people who have been asking its questions for fifty
 years. **M62 (FS-6, the design target in a 5-sealed field) remains the ranked rank-1 milestone for the hunt
 itself and is untouched by this.**
+
+---
+
+# §R — RESULTS, 2026-09-09 (one day; phases A and C done, B partly)
+
+**Kooshi's amendment at the go:** *"I agree we should not wholly rewrite our history with the terms of the
+literature, but we should replace any where the scope is small and our chosen term might lead to confusion.
+Otherwise, carry on in making our knowledge graph as rigid as we want our unit graphs!"*
+
+## R1. Phase A — the reading debts, discharged
+
+| paper | verdict against its registered question |
+|---|---|
+| `[Heule2019]` | **Read in full.** His §5 is titled *"Observed patterns of points in `Q[√3,√11] × Q[√3,√11]`"* — he names `K` in 2019 and says `G553`'s 420-vertex large part lies in `K²`. His §6.2 states **pigeonhole × kill** as a design principle (G15 amended). **"virtual edge" is his published term, not ours.** Two of his three observed colouring regularities are instances of ledger row 59's law, recorded there as unexplained. G8's "shrinking scars" reading is neither confirmed nor refuted, and now has a sharp test |
+| `[Parts2023]` | **Read in full.** Does **not** bear on M43's conditional (already discharged at FS-18). Its value was its reference list: it is the door to `[deGreyParts2022]`, and hence to the cell family's prior art |
+| `[Agoston2026]` | **Read.** Does **not** bear on `μ(d)` — a realizability paper, not a colouring one. Free: Bukh's conjecture, Maehara's theorem, and the `d ↦ 1/d` range inversion. Author's initial corrected at source (P., not G.) |
+
+**Also read, none of them on any list before today:** `[deGreyParts2022]`, `[PartsOdd2022]`, `[Ducz2026]`,
+`[MatolcsiEtAl2025]`, `[Polymath16wiki]`; scanned `[ChybowskaSokol2022]`, `[DuczVarga2026]`, `[Davies2024]`,
+`[Parts2022]`. Named-only rows added for `[Heule2021]`, `[Ardal2009]`, `[Exoo2005]`, `[Ivanov2007]`,
+`[Lonc2007]`, `[Bukh2008]`, `[Maehara1991]`, `[Schaefer2013]`, `[Parts2021]`, `[Hubai2018]`,
+`[AmbrusEtAl2024]`. **Twenty entries, in one day, and the whole chain was four references deep.**
+
+## R2. The two corrections, and the seventh lineage
+
+1. **Ledger row 59's identification half is `[Ducz2026]` (10 June 2026)** and one instance is
+   `[Polymath16wiki]` (4 June 2018). What survives is delimited in the row and the row is **stronger**:
+   `[Heule2021]` asks for this theorem in print, and it now sits inside a classification conjecture.
+2. **The cell family (rows 34–37, 39; G22–G24) was studied from the dual direction** by `[deGreyParts2022]`
+   in 2022, agreeing with our band boundaries at three points. What survives is arbitrary labels, measured:
+   twelve colours their way against seven ours on the G\* band.
+3. **`[Polymath16wiki]`, the seventh lineage** — the Cayley reframing, linear colourings, the periodic
+   quotient, Theorem A's recipe, the Moser ring's 4-colourability, `8/3` monochromatic, the `√247` spindle,
+   and the half-spindle group derived by UFD factorisation. Rows 26, 47, 57, 59 and G8 amended.
+
+## R3. Phase C — the vocabulary decision, settled
+
+`BIBLIOGRAPHY.md` **§E** is the translation table. Applying Kooshi's criterion (**narrow scope AND real
+confusion**):
+
+* **Replaced: *direction ladder* → *Moser lattice*** (25 uses; three independent published sources; and
+  "ladder" already names M24's *matched ladder pair*). Tool output updated, `T13` keeps its title with a gloss,
+  closed milestone records untouched.
+* **Not replaced, and the reasons are on the record**: *virtual edge* (it was never ours — `[Heule2019]`'s), so
+  keeping it is the correction; *cheats* (817 uses — not narrow, and the paper will say `d`-edge anyway);
+  *field wall / 5-sealed* (no published counterpart, and FS-20 N2 already forbids naming the criterion in the
+  paper).
+* **The sharpest single fix**: the literature indexes the spindle rotation by the **squared** distance
+  (`ω_t = spindleRot √t`), so their `ω₄` is our `spindleRot 2`. A `--` note is now in `Copy.lean`.
+
+## R4. What is left
+
+* **Phase B, deliverable 2 — the citation graph of the seven lineages.** Not drawn. The evidence for "they do
+  not cite one another" is now much stronger (three more non-citing sources) but it is still assertion.
+* **Phase B, deliverable 1 — verify every load-bearing §A attribution against its PDF.** Done for the four
+  Madore propositions and one Moorhouse (FS-20, 2026-09-09) and for everything read today; the older §A rows
+  that rest on `[Fischer1990]` and `[Moorhouse2010]` are **not** re-verified.
+* **FS-20's R6, narrowed**: the seventeen Polymath16 **blog threads**. The wiki is done; the threads are where
+  its computer-assisted claims were actually made, and they are the last place a competing `χ(K²) = 4` could be.
+* The key audit's regex misses keys with digits inside the name (`[Polymath16wiki]`); widen it before relying
+  on it again.
+

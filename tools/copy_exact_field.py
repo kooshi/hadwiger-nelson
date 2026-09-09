@@ -2,7 +2,7 @@
 """copy_exact_field — EXACT coordinates of a descent object in ℚ(√3, √11), and of its ρ₁₅ copies in
 ℚ(√3, √5, √11), with every unit edge verified by exact rational arithmetic (M52 phase 1/2; the
 finding that made it necessary: PSLQ says all 1,953 points of the it-4 object are in the seed field,
-which the direction ladder implies — every glue point is a parent plus a ladder unit vector).
+which the Moser lattice (our former "direction ladder", T13) implies — every glue point is a parent plus a ladder unit vector).
 
     python3 tools/copy_exact_field.py --object <label> [--dps 60]
 

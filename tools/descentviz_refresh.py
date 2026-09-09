@@ -44,7 +44,7 @@ def main():
                     'depth': depth[i], 'parents': list(rec[1:3]) if rec[0] in ('glue', 'rot') else None,
                     'sign': rec[3] if rec[0] in ('glue', 'rot') else None, 'udeg': udeg[i], 'cdeg': cdeg[i],
                     **({'copy': f"{rec[1]}{'p' if rec[3] > 0 else 'm'}", 'src': rec[2]} if rec[0] == 'rot' else {})})
-    # edge classes (0 original, 1 within one copy, 2 cross) and the direction ladder index per unit edge:
+    # edge classes (0 original, 1 within one copy, 2 cross) and the Moser-lattice direction index per unit edge:
     # θ ≡ 30·a + m·(t/2) + j·θ₁₅ (mod 360), t = arccos(5/6) the Moser twist (its half is the seam's
     # complement), θ₁₅ = 2·arcsin(1/4) the ρ₁₅ angle; (m, j) with the least |m|+|j| within 1e-3°, else null
     import math
@@ -84,7 +84,7 @@ def main():
     assert new != html or 'descentdata' in html, 'data block not found'
     page.write_text(new)
     off = sum(1 for L in ulad if L[0] is None)
-    print(f'spliced {a.object}: {n} points ({len(obj.deleted)} deleted, {sum(1 for c in ucls if c)} copy-touching edges, max depth {max(depth)}), {len(ue)} unit edges ({off} off the direction ladder), {len(live)} cheats, floor {len(floor)}, put-back {len(put)} → {page}')
+    print(f'spliced {a.object}: {n} points ({len(obj.deleted)} deleted, {sum(1 for c in ucls if c)} copy-touching edges, max depth {max(depth)}), {len(ue)} unit edges ({off} off the Moser lattice), {len(live)} cheats, floor {len(floor)}, put-back {len(put)} → {page}')
 
 if __name__ == '__main__':
     main()
