@@ -1253,6 +1253,19 @@ dropping a factor 2 in the denominator. That form gives `χ(UD(𝔽₁₉,2)) �
 Theorem 4 leans on the bad form; [SchneiderSilva2013] proves it properly.
 
 ### The novel-results ledger (all kernel-checked unless marked)
+*Reading the **Where** column. Paths under `Proofs/`, `data/`, `plans/`, `tools/`, `scripts/`,
+`library/` and `reference/` are **tracked**: they are in the repository and a fresh clone has them.
+Paths under **`build/` are LOCAL measurement artifacts and are not tracked** — `build/` is gitignored
+(29 GB on the working machine, of which the ledger cites 51 MB), the files are regenerable from
+`tools/`, and by this project's own standard they are the *search*, never the certificate: what a
+reviewer re-checks is the Lean module beside them. From M51 onward artifacts were written to `data/`
+instead, which is why the `build/` citations all predate it; they are kept as provenance, not as
+promises. **Decided 2026-09-09 (FS-26 B3) rather than fixed**: copying them into git would add 51 MB
+of untrusted search output to a proof repository to satisfy a citation whose value is historical.
+Noted with it, because it is a `G21` instance on our own instrument: the record audit of 2026-09-09
+reported that *all 176 cited artifact paths exist*, and that was true **of the directory it ran in**
+— in a fresh checkout exactly one of the 34 cited `build/` paths resolves.*
+
 
 | # | Result | Where | Milestone |
 |---|---|---|---|
