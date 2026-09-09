@@ -54,6 +54,49 @@ first rung to 1 and the third is exactly `2c + 1`; at the Moser twist `c = 5/6` 
 `ℚ(√3,√11,√247)` — Exoo–Ismailescu's own field — fall out of `cos θ = 5/6` in two lines rather than
 by search. (Not formalized; it is arithmetic about a rotation, not about a colouring.)
 
+## The prior art, found 2026-09-09 the next day (FS-23) — and what it leaves
+
+Four works touch this law and none of them draws its consequence.
+
+* **`[Ducz2026]`** (arXiv:2606.12325, 10 June 2026) — **the identification half, in coordinates, three months
+  earlier.** An integral *geometric* 4-colouring of the **Moser lattice** `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩` (`ω₃` = the Moser
+  twist; the literature's name for our direction ladder) as a hom onto `(ℤ/2)²`, with properness through: writing
+  `|z|² = (N + M√33)/6`, two points share a colour **iff `N + M ≡ 0 (mod 4)`**. His Lemma 2.1 is the structural
+  fact — an integral colouring is geometric iff sharing a colour depends only on the distance — and his Theorem
+  3.2 says the Moser ring has **exactly two**, which are our two conjugate primes above 2. His congruence
+  reproduces ten for ten of the data below.
+* **`[Heule2021]`**, *Odd-distance virtual edges in unit-distance graphs*, Geombinatorics 31(2) (2021) —
+  **asks for this theorem in print.** He states that if an odd `d` is a `k`-virtual edge of a subset of the plane
+  then so is `1/d`, meaning it of *"larger objects like `ℚ(√3,√11)`"*; `[PartsOdd2022]` §4 reports a finite
+  counterexample and writes that *"a more accurate formulation of the statement and its proof are of certain
+  interest."* Our law is that formulation on the necessary side: `v_𝔭(1/d) = −v_𝔭(d)`, so **the condition is
+  invariant under `d ↦ 1/d`**, the odd integers are exactly the integer case of `v_𝔭(d) = 0`, and a finite
+  counterexample cannot touch a necessary condition.
+* **`[PartsOdd2022]`** §1 — the observation, in print, June 2022, naming the field: *"for a proper 4-coloring of
+  some UDGs embedded in `ℚ(√3,√11)`, so-called virtual edges naturally appear between the vertices at an odd
+  distance from each other."*
+* **`[Heule2019]`** §5/§7 and **`[Ardal2009]`** — the data: `1/3` a virtual edge and `2/3` forced mono in a
+  `K`-object (2019), a forced mono pair at distance `8` in the triangular lattice (2009).
+
+**What survives is (1) the field-level statement over all of `K²` rather than the rank-4 Moser ring — which needs
+Theorem B; (2) the valuation formulation, intrinsic and answering Heule's `d ↦ 1/d` question; (3) the compulsion
+consumers, the step from "this colouring identifies these pairs" to "no proper four-colouring can force the
+others"; (4) the tables explained and the kernel certification.**
+
+## The open half — a classification conjecture, and every published data point supports it
+
+> **Conjecture (FS-23, 2026-09-09).** Over `K = ℚ(√3,√11)` at four colours, a pair at distance `d ∈ K` is a
+> virtual edge in some finite `K`-object **iff** `v_𝔭(d) = 0`, and is forced monochromatic in some finite
+> `K`-object **iff** `v_𝔭(d) > 0`.
+
+The two "only if" halves are the kernel theorems above. The two "if" halves are open. The evidence: all five
+non-mono rows of `[Parts2020a]`'s Table 1 plus his `3`, `1/3`, `3^{±a}`, `5`, and Heule's `1/3` on one side;
+`2` (de Grey, Haugland), `8/3`, `8/√3`, `2/3`, `8` on the other. **No counterexample is known and none is
+possible on the "only if" side.** A consistency check that is really an identification: this law is **G48's
+tightness mechanism at the prime above 2** — a forced pair at `d` with `v_𝔭(d) > 0` has
+`4d² − 1 ≡ −1 (mod 𝔭)`, so its spindle breaks the 2-adic wall, which is why every mono distance in the list has
+`√(4d²−1) ∉ K` (`√15, 3√7, √255, √247/3, √759/3, √7/3` — six checked) and why `χ(K²) = 4` survives them all.
+
 ## The companion duality — **RETRACTED 2026-09-09, in the formalization that found it**
 
 This stub claimed: *a plane-wide pigeonhole at distance `d` forbids every virtual edge at `d`; our
