@@ -116,7 +116,9 @@ without a definition, and would each find this paper by searching for what they 
 * **R1 — `[Fischer1990b]`**, *The connected components of the graph `ℚ(√N₁,…,√N_d)²`*, Congr. Numer. 72 (1990)
   213–221. The **multiquadratic** paper, on exactly this paper's fields. Not digitised; needs a library.
 * **R2 — `[Johnson2006]`**, the compendium of this exact direction, Geombinatorics XVI(1) 209–218. **The one
-  place a seventh lineage could hide.** Print-only.
+  place a seventh lineage could hide.** **NEARLY IN HAND**: the OJS galley is at
+  `https://geombinatorics.uccs.edu/archive/index.php/home/article/view/62/198` (Kooshi, 2026-09-08) — a browser
+  walks through the Cloudflare challenge that blocks every script. Needs a subscription or a one-off purchase.
 * **R3 — `[BendaPerles2000]`**, to quote Open Problem 11.6 from the source rather than through Soifer.
 * **R4 — `[MMST1996]`**, still second-hand.
 * **R5** — hand-check Geombinatorics' back issues 2015–2026; it is where this community publishes and it is not
@@ -130,9 +132,35 @@ without a definition, and would each find this paper by searching for what they 
 exactly **what is not** proved in Lean (the residue-field-size statement is not; the σ-stability half is);
 (8) open problems handed back, incl. the number-field analogue of Chow's classification (FS-19).
 
-**Venue:** arXiv immediately, then **Discrete Mathematics** (Fischer's, Johnson's and Chow's home), with
-*Geombinatorics* second. A unification paper wants the well-indexed venue — the whole thesis is that obscurity
-caused the duplication, and `[Moorhouse2010]`'s fate is the cautionary example.
+**Venue — REVISED 2026-09-08 on Kooshi's read of the field** (*"It looks like geombinatorics is where we want to
+be though"*), and he is right, with one condition that is not a hedge:
+
+**arXiv on completion, and submit to *Geombinatorics*.** Not a compromise — the two do different jobs and the paper
+needs both.
+
+*Why Geombinatorics is the right journal.* It is not merely where this community publishes; it is where **four of
+this paper's six lineages actually appear**: `[BendaPerles2000]` (the source of the open problem), `[Johnson2006]`
+(the compendium), the Exoo–Ismailescu and Parts two-distance work, and Soifer's own essays. **Alexander Soifer
+edits it, and his 2024 book poses the open problem this paper answers and then refers the reader to Johnson's
+compendium in the same journal.** A unification of this literature submitted anywhere else is addressed to people
+who did not write it.
+
+*Why arXiv is not optional.* **The paper's thesis is that this literature is hard to find, and Geombinatorics is
+the sharpest instance of the diagnosis.** Concretely, on 2026-09-08: its digital archive sits behind a Cloudflare
+browser challenge (`[Johnson2006]`'s own PDF is one click from a browser and unreachable from a script); its
+subscription flow defeated a motivated reader; its two web properties disagree (a metadata-only listing at
+`geombina.uccs.edu`, an OJS archive at `geombinatorics.uccs.edu/archive`); zbMATH carries no review for the
+compendium; and this project — actively hunting exactly this literature, with a prior-art gate in its workflow —
+**took a day of searching to learn that the compendium exists.** Publishing the diagnosis *only* into the venue
+that best exemplifies it would perform the failure the paper documents.
+
+So: **arXiv gives permanence, indexing and a citable preprint the day it is done; Geombinatorics gives the
+readership that posed the question.** Discrete Mathematics (Fischer's, Johnson's and Chow's archival home) stays
+the fallback if Geombinatorics declines or stalls.
+
+*One thing to decide before submitting, not after:* whether the §3 credit table and the tone rules (§8 R-e) read
+correctly to an editor who is himself one of the people being unified. They should — the paper is generous by
+construction and names us sixth — but Soifer is the reader most able to tell if they do not.
 
 **Artifact:** the zeta-23 comparator pattern (`CLAUDE.md` § Paths forward), or a repository link plus the
 `#print axioms` receipt. **Do not claim independent-kernel replay unless `lean4checker` has actually been run.**
