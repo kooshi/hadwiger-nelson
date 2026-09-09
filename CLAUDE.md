@@ -332,10 +332,17 @@ no search; geometry at denom 512; the six pairs kernel-certified as ALL
 √3-pairs among the nine) and `core122_pigeonhole` (a 12,578-line pinned
 LRAT on the augmented list, replayed across 16 segments in minutes;
 geometry at denom 12 in the seam sub-basis; the forty pairs
-kernel-complete over 14,884 checks) — with the plane corollaries: **no
+kernel-complete over 14,884 checks) — with the plane corollaries: ~~**no
 proper 4-colouring of the plane avoids monochromatic pairs at distance
-√3, nor at distance 2** — the compulsions classical/Haugland-adjacent,
-the 1-minimal carriers and the kernel formalizations ours. All on
+√3, nor at distance 2**~~ — **struck 2026-09-09 (FS-26): those two
+corollaries are VACUOUS, because rung B makes the type of four-colourings
+of the plane empty, and this narrative sentence still stated them as
+results four weeks after ledger row 31 was corrected. The correction had
+reached the ledger and not the prose that summarises the same milestone.
+What stands is the milestone's actual content, below:** the compulsions
+classical/Haugland-adjacent, the 1-minimal carriers and the kernel
+formalizations ours — and the carriers are the part that says something,
+since they quantify over four-colourings of a finite graph that has them. All on
 axioms exactly `[propext, Classical.choice, Quot.sound]`. The census:
 the forty d2 instances fall into **FIVE congruence classes** under the
 exact order-12 dihedral group about the metapivot (which preserves the
