@@ -1976,6 +1976,16 @@ clash" was the metric shadow of a 2-adic condition.
   with `tools/anatomy.py`; if they are, "SAT-shrinking scars" is refuted and
   replaced by "our generating set was short by one", which is a better
   answer and a G21 instance on our own instrument.
+  **AND THE TWO GROUPS ARE RECONCILED EXACTLY (2026-09-09, verified numerically
+  to 1e-13; a two-line Lean theorem waiting to be written).** Their `η` and our
+  seam rotation `σ = (√3 + i√33)/6` are **`η = i·σ⁻¹`**, so `ησ = i`; and
+  **`η² = ρ`, the Moser twist**, which is why the wiki calls `η` the square root
+  of `ω₃` — while `σ² = −ρ⁻¹`, which is this project's own kernel identity
+  `moserTwist_mul_seam_sq` (`ρσ² = −1`) rewritten. Writing a general element as
+  `ζ₁₂^a σ^b`, the wiki's `⟨ζ₆, η⟩` is exactly `{ζ₁₂^a σ^b : a + b even}` — **an
+  index-2 subgroup of our `⟨ζ₁₂, σ⟩`** — and that is why `σ ∉ R̄₂`: it is the
+  odd class. So the two derivations agree, ours is the larger group by one
+  half-step, and neither is wrong.
 * **G9 — Rigidity lives only at the forcing level.** The 791 forcer at 4
   colours: exactly six forced pairs — the axis pair at distance 4 and five
   ANTIPODAL pairs at 4/√3, i.e. forced central symmetry on that circle, and a
