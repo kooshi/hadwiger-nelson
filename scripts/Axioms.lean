@@ -1088,6 +1088,42 @@ of an arbitrary commutative ring, which is what makes "this does not need `ℂ`"
 #print axioms rhombusDraw_unit
 #print axioms exists_forces_of_unit_drawing_three
 
+/-! ## The 2-adic law of four-colour compulsions (2026-09-09) — `ValuationLaw.lean`
+
+Which distances can carry a compulsion at four colours over `K = ℚ(√3, √11)`, and the correction
+that comes with it: at four colours the *plane*-level form of such a statement is vacuous. -/
+
+#print axioms FieldWall4.oddDenom_subset_seamPlane
+#print axioms FieldWall4.seamPlane_realMul
+#print axioms FieldWall4.sub_mem_oddDenom_of_dist
+#print axioms FieldWall4.residueColouring_eq_iff_sub
+#print axioms FieldWall4.residueColouring_eq_iff_psiA_zero
+#print axioms FieldWall4.psiA_conj
+#print axioms FieldWall4.normSq_mem_oddDenom
+#print axioms FieldWall4.psiA_eq_zero_iff_normSq
+#print axioms FieldWall4.residueColouring_eq_iff_normSq
+#print axioms FieldWall4.not_forces_of_sub
+#print axioms FieldWall4.not_separated_of_sub
+#print axioms FieldWall4.psiA_onePlusI
+#print axioms FieldWall4.seamColouring
+#print axioms FieldWall4.residueColouring_eq_of_forces
+#print axioms FieldWall4.residueColouring_ne_of_separated
+#print axioms FieldWall4.not_forces_of_residue_ne_zero
+#print axioms FieldWall4.not_separated_of_residue_eq_zero
+#print axioms FieldWall4.den_ordSqrt3
+#print axioms FieldWall4.den_ordSqrt33
+#print axioms FieldWall4.not_forces_dist_sqrt_three
+#print axioms FieldWall4.not_separated_dist_two
+#print axioms FieldWall4.not_separated_dist_eight_thirds
+#print axioms FieldWall4.not_separated_dist_eight_over_sqrt_three
+#print axioms FieldWall4.not_forces_dist_three
+#print axioms FieldWall4.not_forces_dist_seven_thirds
+#print axioms FieldWall4.not_forces_dist_five_thirds
+#print axioms FieldWall4.not_forces_dist_one_third
+#print axioms FieldWall4.not_forces_dist_sqrt_eleven_thirds
+#print axioms isEmpty_coloring_plane_four
+#print axioms vacuous_of_plane_four_coloring
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

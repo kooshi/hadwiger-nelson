@@ -112,6 +112,7 @@ import Proofs.HadwigerNelson.Instances.Mycielski
 import Proofs.HadwigerNelson.Instances.Mycielski.Bound
 import Proofs.HadwigerNelson.ResidueColouring
 import Proofs.HadwigerNelson.FieldWall4
+import Proofs.HadwigerNelson.ValuationLaw
 
 /-!
 # Proofs

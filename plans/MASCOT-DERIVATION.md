@@ -200,6 +200,15 @@ angle so the two forced vertices land at distance 1. The recipe stops at `k = 3`
 | `no_four_unit_points` | four points of the plane are never pairwise at distance 1 |
 | `not_forces_of_unit_drawing` | **no five points of the plane carry a pair forced to share a colour at four colours** |
 
+**Generalized the same day** (`Mascot.lean`, second pass): the obstruction is host-generic —
+`not_forces_of_drawing` says *a host graph with no `k`-clique draws no minimal forcing gadget at `k`
+colours*, with the clique number the entire hypothesis and nothing geometric in the statement, and
+`not_forces_of_unit_drawing` is its plane instance **at every `k ≥ 4`** (and at `≤ k+1` vertices,
+since below the floor forcing is impossible outright). The other direction is now a theorem too:
+`exists_forces_of_unit_drawing_three` exhibits the rhombus DRAWN — four points at `ζ₆, 0, 1, ζ̄₆`,
+injective, every edge exactly one unit, forcing its far corners at three colours. So the threshold
+is sharp, not merely bounded.
+
 The proof of the geometric half is the one worth keeping: four points pairwise at distance 1 give
 three plane vectors whose Gram determinant is `1/2` from the distance data and `0` because any three
 vectors in a two-dimensional space are dependent. One `ring` call and one `linear_combination` each.
@@ -220,13 +229,19 @@ ever built has five hundred vertices and a computer behind it.
    in the text extraction turned distance **3** into `√3`. Parts's Table 1 (`[Parts2020a]`, read
    today) lists non-monochromatic **pairs** at `3, 7/3, 5/3, 1/3, √(11/3)` and puts `√3` only among
    the **triples**.
-2. Worse, no such gadget can exist: `Instances/Core9.lean`'s `core9_plane` says every proper
-   4-colouring of the plane has a monochromatic `√3`-pair, and `Homogeneous.lean`'s transport says
-   one forced-apart pair at a distance forces every pair at that distance. **So `√3` admits no
-   virtual edge at four colours, ever — and neither does distance 2, by `core122_plane`.** Both
-   distances of my configuration were provably unusable. *A plane-wide pigeonhole at `d` forbids
-   every virtual edge at `d`* — that duality is worth keeping and is what I should have checked
-   first.
+2. ~~Worse, no such gadget can exist: `core9_plane` says every proper 4-colouring of the plane has a
+   monochromatic `√3`-pair, so `√3` admits no virtual edge at four colours, ever.~~ **RETRACTED
+   2026-09-09, later the same day, while kernel-checking the valuation law.** The argument is
+   unsound: `core9_plane` quantifies over proper four-colourings of the *whole plane*, and this
+   repository's own `χ(ℝ²) ≥ 5` makes that type **empty**, so the theorem is vacuously true and
+   forbids nothing (`Instances/Interval.lean`, `isEmpty_coloring_plane_four`). The same applies to
+   `core122_plane` at distance 2. The duality *"a plane-wide pigeonhole at `d` forbids every virtual
+   edge at `d`"* is empty at four colours for the same reason, and its non-vacuous form — over a
+   class of objects that really is four-colourable, i.e. over `K` by Theorem B — is sketched but
+   unproved (`plans/STUB-four-colour-valuation-law.md`). **The object stays dead**: reason 1 above
+   and reason 3 below are each fatal on their own, and the valuation law adds a third that *is*
+   proved — a `√3`-pair over `K` can never be forced *monochromatic*. What I cannot claim, and did,
+   is that a `√3` virtual edge is impossible.
 3. The skeleton was published anyway: `[ExooIsmailescu2018]` build a 79-point configuration in
    `ℚ[√3,√11,√247]` with `sin θ = 3√247/128` — my twist exactly.
 

@@ -132,6 +132,14 @@ theorem core122_pigeonhole (C : (edgeGraph 122 core122Edges).Coloring (Fin 4)) :
 
 /-! ### The plane corollary -/
 
+-- SCOPE, added 2026-09-09 (`Instances/Interval.lean`, `isEmpty_coloring_plane_four`): the plane
+-- needs five colours, so `(unitDistance ℂ).Coloring (Fin 4)` is an EMPTY type and this corollary
+-- is vacuously true. It is not evidence for anything, and an argument that reads it as forbidding
+-- a compulsion at this distance is unsound. The milestone's content is the carrier above, which
+-- quantifies over four-colourings of a finite graph that has them. The non-vacuous plane-level
+-- form has to name a four-colourable class of objects: over `K = ℚ(√3, √11)` there is one, by
+-- Theorem B, and re-stating this carrier there is open work (`ValuationLaw.lean`, §Scope).
+
 /-- **No proper 4-colouring of the plane avoids monochromatic distance-2 pairs.** The
 pigeonhole shadow of Haugland's forced-equal pair (arXiv:2608.04542) — what is new is the
 carrier, not the compulsion: a 122-point 1-minimal witness on the certified hexagram's seam
