@@ -708,6 +708,23 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   Kempe-forced under every additive colouring yet separated by the solver are the non-additive residue.
   *Question:* are those 16 separated by two swaps (a Kempe-graph walk from the eight colourings), and is every
   4-colouring of U Kempe-equivalent to an additive one? `data/m56/kempe-object-…-k4.json`.
+  **AMENDED 2026-09-09 (FS-25 item E5, `plans/FS25-P2.md` §3) — the depth-2 boundary is a THEOREM and
+  the question above cannot be answered by arithmetic.** An additive colouring is a hom `φ : Λ → G`
+  with `|G| = k`; if `G` has exponent `e` then `eΛ ⊆ ker φ` (`Additive.addMonoidHom_apply_eq_of_sub_eq_nsmul`,
+  kernel). At four colours `G ∈ {ℤ/4, ℤ/2 × ℤ/2}`, so **`4Λ ⊆ F_add` for every object over every
+  field** — the additive method's floor is depth ≥ 2 by theorem, and the six ℤ/4 colourings are needed
+  only for the *reverse* containment, which the artifact confirms (all 12,906 depth-1 pairs separated
+  additively). So (a) `F_add = {depth ≥ 2}` here is the floor ATTAINED, not a property of `U`;
+  (b) **the valuation law (ledger row 59) is this family's exponent-2 member** — the residue colouring
+  targets `𝔽₄`'s additive group, exponent 2, hence `2Λ`, hence depth ≥ 1 — and the one level between
+  the two necessary conditions is exactly that exponent gap; (c) the 16 sit at **depth 3**, where every
+  additive four-colouring is blind by theorem, so the Kempe question is a question about the
+  reconfiguration graph and no arithmetic in this family can settle it. Also verified from the artifact:
+  the 16 are at `d = 8/3` (13) and `d = 8/√3` (3) — the two distances of `[Parts2020a]`'s Table 1 and of
+  our own dial — and **`U` forces 171 of the 189 pairs at those distances**; the 18 it does not are
+  measured to be the peripheral, thinly-surrounded ones (no forced pair beyond outer radius 3.212, five
+  unforced beyond it; median local density 530 against 742). *The stub's reading that these distances
+  are "forced on three other objects and not on U" is corrected: they are forced on `U` too, 171 times.*
 * **T27 — The additive spindle theorem (M56 L8).** [derived; measured on both spindle witnesses] If (c, q) is
   additively forced on a fabric with q − c ∈ 4Λ and R is a rotation about c with |Rq − q| = 1, the chord vector
   (Rq − Rc) − (q − c) lies in 4Λ(union): every spindle over an additively forced pair puts its chord in 4Λ, so the
