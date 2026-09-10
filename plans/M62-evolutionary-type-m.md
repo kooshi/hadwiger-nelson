@@ -1060,3 +1060,26 @@ Two rewrites chased the wrong cost. The truth, measured directly:
 while working correctly — indistinguishable from a wedge, and I twice diagnosed a stall that was not
 there. `imap_unordered` with a running count fixed it. **The rule was written for the engine and
 applied to nothing around it; that is the whole lesson.**
+
+### §R16 — The night's overnight state, and a process-management failure recorded five times over
+
+**Where the descent stands.** The exact-box descent, alternating both halves on the seam base at
+subtype `(1, 5)`, completed its first census: **471 of 473 `L`-orbits are individually droppable**
+(669 s on 28 cores, visible progress throughout). `L` is therefore massively over-provisioned, and
+the batch bisection was running when the machine was cleared. Relaunched under `setsid` with its
+process group recorded at `/tmp/ed4.pgid`; log `/tmp/m62ed4b.log`.
+
+**The failure, recorded because it happened FIVE times in one session and each time cost work.**
+Every attempt to stop a background job by matching its command line — `pkill -f`, `ps | grep | kill`,
+and finally an ancestry walk that did not account for the `timeout` wrapper — **killed the killer**,
+or killed jobs it meant to keep. The last instance took down the live descent and the baseline
+together, thirty seconds after they were the only things running.
+
+**Standing rule adopted, and it is mechanical rather than a resolution to be careful:**
+
+> A long job is launched with `setsid`, writes **both its PID and its process-group id** to a file at
+> startup, and is stopped **only** by `kill -TERM -$(cat …pgid)`. No pattern ever matches a command
+> line. The wrapper is part of the job, so the group is the unit — not the PID, and never the name.
+
+This project already had a memory note about the `pkill -f` self-match. A note was not enough; the
+launch discipline is.
