@@ -683,3 +683,68 @@ mistake; I6 guards the *assumption the other five rest on*.
 Shrink terminates on a strictly decreasing `|present|`. The rotation enumeration is `|B|²`, finite.
 **The GA has no monotone measure** — it is stochastic, bounded by generation count, and will be
 **reported as bounded, never as converged** (§3's failure clause).
+
+---
+
+## §R — Results (running; phases B–E NOT run)
+
+### §R1 — Phase A CLOSED. §0a met, §0b delivered. `tools/typem.py`, `data/m62/`.
+
+**P1 MET.** M31's quadrature law reproduces both of Parts's cross-edge kinds, exactly (§M1.0), and
+the object confirms it independently of the paper (12 reference + 6 auxiliary cross edges on
+Heule-510, all at `cos = 7/8`, with the conic accepting exactly those two families and rejecting the
+two that do not occur).
+
+**§0b delivered as an exact enumeration.** The sieve needs **no floating point in any verdict**: for
+radii `|u|² , |v|²` the rotation adjoins `√D` with `D = |u|²|v|² − k²`, `k = (|u|²+|v|²−1)/2`, all in
+`K`, and the three outcomes are decided by an exact tower squareness test —
+
+| outcome | meaning |
+|---|---|
+| `D < 0` | the radius pair admits no rotation |
+| `D` a square in `K` | the rotation lies in `K(i)`, the union stays in `K²`, **Theorem B four-colours it** |
+| else | the rotation adjoins `√D` and leaves `K` — a candidate |
+
+**Measured** (Moser lattice, radius 2.05, span 4 — 873 points, 4,702 exact unit edges, 87 distinct
+squared radii; 46 s):
+
+- 762,129 radius pairs → **125,232 REJECTED-IN-K by Theorem B**, 123,785 admitting no rotation.
+- 2,042 raw radicands → **1,336 rotation classes** after merging by square class.
+- **412 of the 1,336 are type-M admissible** (≥ 2 radius families — Parts's *"the existence of
+  triangles of the second kind is essential"*). Max families in any class: **31**.
+- **The record's own rotation is in the enumeration and carries both of its known kinds**: the
+  `√15` class contains Parts's reference family `(4, 4)` **and** his auxiliary family
+  `((17±√33)/6)`, both confirmed `True`, and **ranks 58th of 1,336 by family count.**
+
+**So Parts's stated open question — *"Working constructions of type M with other rotations are not
+known yet"* — now has an enumerable candidate list where it had none: 411 other admissible rotation
+classes on this base alone, 57 of them richer in cross-edge kinds than the one every published
+construction uses.** Whether any yields a 5-chromatic object is the search (phases B–E); the
+**candidate list is the derivation**, and it costs 46 seconds.
+
+**A second, sharper lead fell out.** The record's rotation has **seven** radius families and Parts
+uses **two**. His subtypes M3/M6A/M6B/M6C/M10/M12 enumerate how many *auxiliary* edges are used —
+i.e. how much of the **second** kind. He never considers a **third**. Five unused cross-edge kinds
+sit at the very rotation the record is built on, and the two he uses are the two smallest-radius
+ones. That is a concrete, cheap direction independent of the whole evolutionary apparatus.
+
+**Two corrections made in flight, both by controls:**
+1. **Grouping by radicand splits rotations.** `15/4` (reference) and `5/3` (auxiliary) differ by
+   `(3/2)²`, so they are ONE rotation — which is *why* a single rotation realises both of Parts's
+   kinds. Grouping by `D` alone undercounts exactly the quantity Parts calls essential; the sieve
+   merges by square class, `2042 → 1336`.
+2. **A control caught a wrong expectation of mine, not a bug.** The Moser lattice's origin has
+   **18** unit neighbours, not 6 — three direction families × six hex rotations, which is T13's
+   ladder structure (ledger row 46). The assertion now carries the measured number and the reason.
+
+**Registered honestly:** `--self-test` is green (24 controls, including the planted Theorem-B
+rejection and the exact reproduction of `ρ₁₅`'s radicand from the reference family). The count
+**412 is a property of THIS base's radius spectrum and does not transfer** to another base — the
+`claim_scope` field in the artifact says so. Admissibility is **necessary and not sufficient**: no
+claim is made that any listed rotation yields a 5-chromatic graph.
+
+### §R2 — Not run
+
+Phases **B** (genome and generator), **C** (the engine), **D** (the run) and **E** (certification)
+are **not run**. Predictions P2–P6 are unscored. No search has been executed and no candidate
+5-chromatic object exists; the record stands at 509.
