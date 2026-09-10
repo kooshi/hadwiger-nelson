@@ -659,3 +659,75 @@ oversight.
 - **`w* = 0`** — the empty selection keeps the property, i.e. `C` alone refuses four colours, so
   `W` is doing no work at all. Verdict **`companion-suffices`**, and it is a bug in the setup rather
   than a result.
+
+---
+
+## §E — The experience-modelling pass (WORKFLOW step 5, `debruijn-experience-modeling`)
+
+**The cut, for this milestone.** What the system knows and the record will not is **the order things
+happened in** — was the parameter set fixed before or after the number was seen? That is not
+recoverable from a results table, and it is the entire difference between a reproduction and a fit.
+So it has to be serialized, and the only serialization that cannot be quietly edited is **git**.
+
+### The four things now structurally impossible, in `tools/parts_report.py`
+
+Not discouraged — **unwritable**. Every refusal is planted and watched to fire by
+`python3 tools/parts_report.py` (13 checks, all green).
+
+1. **There is no verdict word for optimality at all.** A search returns
+   `Bound(lower, upper, rung, undecided)`, and `closed` is true only when `lower == upper` **and**
+   `undecided == 0`. Whether that is *the* minimum or the minimum over `out`-symmetric selections is
+   read off `rung`, which every rendered form carries: `minimum 374 over all selections` versus
+   `minimum 376 over rung-3-symmetric selections`. §O(2) proved the atom restriction unsound, so the
+   rung is the scope and cannot be separated from the number.
+2. **A count without its enumeration will not serialize.** `Count(n, method, of)`, with `method`
+   from a closed list and `truncated` a **value** of it rather than an absence — `G21`'s general
+   form. `Count(5, "clean")` raises; so does a truncated count that does not name its population.
+3. **`|{M}|` cannot be a bare integer.** `SetSize(count, up_to)` — the group is a required field.
+   His own `1092` is un-gateable precisely because his paper does not name the group, and this type
+   is what stops us reproducing that ambiguity in our own record.
+4. **A comparison to his tables carries the mode it was produced in.** In `tuning` mode every row
+   renders stamped `** TUNING - not evidence **`; a `frozen` row cannot be constructed without the
+   commit its prediction was registered in. Rows also carry his value's **attestation count**,
+   because the verification pass measured that all four of his `M` columns check and three of four
+   `A` columns do not.
+
+**And there is no `reproduced` field, deliberately.** Rows say `agrees` or `differs` and nothing
+sums them. Reproduction is a judgement over a whole held-out set, made once by a human reading
+frozen predictions against frozen results; a per-row boolean that adds up to it is the fit wearing
+a checkmark.
+
+### The freeze is a commit, not a config field
+
+`data/m62/m63-freeze.json` holds the frozen configuration; `require_frozen(config)` refuses to run
+a held-out experiment unless (i) the file exists, (ii) **it has no uncommitted edits** — *a freeze
+that can be edited after the fact is not a freeze* — and (iii) the config offered equals the frozen
+one, naming the differing entries when it does not. Every artifact stamps `freeze_commit` and
+`config_sha256`, so *"was this tuned after we froze?"* is answered by `git log`.
+
+### The per-iteration line, for a loop with no measure
+
+Since §O(3) says the outer loop does not terminate and *"`A` stopped changing"* is the real stopping
+rule, the line carries **exactly the three quantities his success criterion is about, each with its
+delta** — all three zero **is** the stall — plus the hypergraph's shape and the stall counter:
+
+```
+it 7   rung 3   W 451   |M| 376 (+0)  |{M}| 96 (+14)  |A| 451 (+0)   Y: d1 88 d2 611 d3 24   STALL 4/6   [f47e1f3·a19c4d21]
+```
+
+**And a level is forecast before it is entered, never after.** The cost is `|candidates|` cheap asks
+plus `|{M}|` **expensive** ones — a success KEEPS the property, hence UNSAT, hence the 10-second ask
+— and the expensive count is unknown until it happens, so `level_forecast` returns the projection
+**and the assumption it rests on**, printed in the same breath. A level whose candidate count cannot
+be bounded (§4 phase C's induced-matching `2^m` test) is **REFUSED before any ask**, which is the
+verdict that saves the six hours rather than discovering them.
+
+### The artifact schema, so "same object?" is a comparison
+
+**Two fingerprints per selection, not one** — `fp` over his `(a,b,c,d)` coordinates as found, and
+`canonical_fp` over the group-canonical frame — because finding (v) showed his own files are each in
+their own frame and a literal containment test reports a false negative. Plus `fp_base`, over the
+radius, orbit labels and orbit sizes, so *"do not leave the base unfrozen"* is checkable rather than
+promised. `{M}` carries each member's **orbit-filling profile**, which is both §3's gate and the
+space M62's genome will live in. Every artifact stamps machine, cores, git commit, git-dirty,
+freeze commit and config hash.
