@@ -680,3 +680,86 @@ That is the honest limit of Parts's own claim that *"the orbit-filling tables ar
 informative than the graph image"*: they are, and they are also a coarse invariant that hides a
 6.3%-of-product interaction between the two blocks entirely. Any expansion strategy driven by
 profiles alone (M64 C3, FS-35) is working with that blindness, and should say so.
+
+---
+
+## §R10 — THE BOUND IS AN EQUALITY, AND THE WHOLE RUNG LATTICE IS FREE
+
+*Poros's second advisory (`plans/POROS-2026-09-10-b-closure-equality.md`), checked here before
+belief. It upgrades §R5's theorem and retires §R5's own open question.*
+
+### (a) §R5's inequality is an equality — I minimised over the wrong index set
+
+> **Theorem.** Let `R` be upward closed and `H` act on the atoms. Then
+> **`M_H = min{ |cl_H(M)| : M ∈ min(R) }`**, where `min(R)` is the set of **inclusion-minimal**
+> members — *not* `{M}`, the minimum-**size** ones.
+>
+> *`≤`:* `cl_H(M) ⊇ M` and `R` is upward closed, so `cl_H(M) ∈ R`, and it is `H`-invariant.
+> *`≥`:* an `H`-invariant `S ∈ R` contains an inclusion-minimal `M ∈ R` (minimal within `S` is
+> minimal outright, by upward closure), and `h(M) ⊆ h(S) = S` for every `h`, so `cl_H(M) ⊆ S`. ∎
+
+**Two hypotheses §R5 assumed and does not need**, both spotted by Poros: `H` needs **no
+equivariance** — it need not be a symmetry of `R`, of `A`, or of the companion, only act on the
+atoms — and nothing about colouring or geometry enters. It is a statement about upward-closed
+families and finishes in four lines.
+
+**Our own data already proved the missing direction, with no new computation.** A refuser strictly
+inside a 375-atom `S` has at most 374 atoms, and *every* 374-atom refuser is in `{M}`. So §R1's
+measured **`0 of 1,302`** says those 1,302 contain no proper refuser: **all 1,302 are
+inclusion-minimal refusers of size 375**, and they are exactly the witnesses that pull `M_H` down
+from the closure bound of 376 to the true 375. Same for the full stabiliser's 4.
+
+**So §R5's open question — "where does the bound fail to be tight, and why?" — dissolves.** It never
+fails. What §R5 measured as a gap is one functional on two nested index sets:
+`gap(H) = min_{{M}} |cl_H| − min_{min(R)} |cl_H|`, **vanishing exactly when a minimum-size refuser
+is a closure-minimiser**. And that is overcompression stated in one line: *containment fails at `H`
+precisely when the `|cl_H|`-minimiser is inclusion-minimal but not of minimum size.*
+`[Parts2020a]` §6's sentence is that condition holding.
+
+### (b) The rung lattice costs no colouring ask at all
+
+An `H`-invariant selection is a **union of `H`-orbits**, and it refuses **iff it hits every
+correction set** — and a correction set is a property of the **base problem, not the rung**. So
+`M_H` is a **weighted minimum hitting set over the `H`-orbits**, weight = orbit size, and the `Y`
+phase A started storing is **the complete constraint system for every subgroup at once**.
+
+**The test that could have failed, stated before it ran:** over the *harvested* `Y` — a subset of
+the true one, hence fewer constraints, hence a **lower** bound — the answer must come in at or below
+each of §R1's four searched values, and anything **above** any of them refutes the duality or
+rung-independence. It came in at **374 / 374 / 375 / 378 — matching all four exactly.**
+
+**The complete lattice, both stages, 58 seconds including one verification ask per rung** (`ask`
+returns `unsat`, so the witness really refuses and the lower bound closes to an equality):
+
+| | rungs | minimum, in vertices, by subgroup |
+|---|---|---|
+| **L**, `\|Aut(A)\| = 12` | 16 | order 1: **375** · order 2: **375, 375, 375, 376, 376, 376, ≥377** · order 3: **376** · order 4: **379, 379, 379** · order 6: **376, 379, 379** · order 12: **379** |
+| **S**, `\|Aut(A)\| = 6` | 6 | order 1: **136** · order 2: **138, 138, ≥138** · order 3: **≥139** · order 6: **142** |
+
+**15 of 16 L rungs and 4 of 6 S rungs are EXACT**; the rest are lower bounds whose witness did not
+refuse and are reported as such. §R1 spent 195 seconds on four of these; the other twelve were free.
+
+### (c) "Not monotone in `\|H\|`" was a category error, and the truth is sharper
+
+`H ≤ K` implies `cl_H(M) ⊆ cl_K(M)`, so **`H ↦ M_H` is order-preserving on the SUBGROUP LATTICE,
+always** — measured here, **0 violations across all 16 L rungs**. §R5's "+4 at order 4 against +10
+at order 3" compared Klein against `C₃`, which are **incomparable**; there was never anything to
+explain.
+
+**What the lattice actually says is more useful than monotonicity in the order, and it bears on
+`[Parts2020a]`'s own method.** The L side has an **order-6 rung costing +1 vertex** while every
+**order-4 rung costs +4** — so *the price of symmetry is not a function of how much symmetry you
+demand.* **His §5.4 ladder walks `24 → 6 → 3 → 2 → 1`, ordered by group order, and that is the wrong
+lattice**; the cheap rungs have to be found, and after phase A they can be, for free, before any
+search.
+
+**A free control passed and not claimed at first:** the seven involutions read `375, 375, 375, 376,
+376, 376, ≥377` — the two reflection classes of `D₆` plus the centre. **The excess is a class
+function**, which is what it must be, and nothing in the computation was told so.
+
+**And it settles one of our own numbers.** M62's symmetry ladder reads **624 / 576 / 558 / 582** at
+symmetry 24 / 6 / 3 / 1, and the stub named the non-monotonicity as a trap without being able to
+prove it was one. **Monotonicity on the lattice proves it: the true minima cannot rise as the group
+shrinks, so 582-at-rung-1 against 558-at-rung-3 is a SEARCH failure, now as a theorem rather than an
+argument** — and 624, 576, 558 are certified upper bounds at every smaller rung, bracketing rungs
+nobody ran.

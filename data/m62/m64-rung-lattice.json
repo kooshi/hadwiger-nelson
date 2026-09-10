@@ -1,0 +1,248 @@
+{
+ "S": {
+  "aut_A_order": 6,
+  "base_level_atoms": 135,
+  "base_level_vertices": 136,
+  "rungs": [
+   {
+    "order": 1,
+    "orbits": 165,
+    "bound": 135,
+    "attained": true,
+    "vertices": 136,
+    "excess": 0,
+    "invariant_minima_at_base": 48
+   },
+   {
+    "order": 2,
+    "orbits": 86,
+    "bound": 137,
+    "attained": true,
+    "vertices": 138,
+    "excess": 2,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 2,
+    "orbits": 86,
+    "bound": 137,
+    "attained": false,
+    "vertices": 138,
+    "excess": 2,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 2,
+    "orbits": 86,
+    "bound": 137,
+    "attained": true,
+    "vertices": 138,
+    "excess": 2,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 3,
+    "orbits": 55,
+    "bound": 138,
+    "attained": false,
+    "vertices": 139,
+    "excess": 3,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 6,
+    "orbits": 31,
+    "bound": 141,
+    "attained": true,
+    "vertices": 142,
+    "excess": 6,
+    "invariant_minima_at_base": 0
+   }
+  ],
+  "asks": {
+   "colourable": {
+    "n": 2,
+    "mean_s": 0.112
+   },
+   "refusing": {
+    "n": 4,
+    "mean_s": 2.979
+   },
+   "undecided": 0
+  },
+  "note": "bound = weighted minimum hitting set over the HARVESTED Y (a subset of the true Y, hence a lower bound); 'attained' means the witness was verified to refuse, which closes it to an equality."
+ },
+ "L": {
+  "aut_A_order": 12,
+  "base_level_atoms": 374,
+  "base_level_vertices": 375,
+  "rungs": [
+   {
+    "order": 1,
+    "orbits": 450,
+    "bound": 374,
+    "attained": true,
+    "vertices": 375,
+    "excess": 0,
+    "invariant_minima_at_base": 3264
+   },
+   {
+    "order": 2,
+    "orbits": 232,
+    "bound": 374,
+    "attained": true,
+    "vertices": 375,
+    "excess": 0,
+    "invariant_minima_at_base": 40
+   },
+   {
+    "order": 2,
+    "orbits": 237,
+    "bound": 375,
+    "attained": true,
+    "vertices": 376,
+    "excess": 1,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 2,
+    "orbits": 237,
+    "bound": 375,
+    "attained": true,
+    "vertices": 376,
+    "excess": 1,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 2,
+    "orbits": 232,
+    "bound": 374,
+    "attained": true,
+    "vertices": 375,
+    "excess": 0,
+    "invariant_minima_at_base": 40
+   },
+   {
+    "order": 2,
+    "orbits": 232,
+    "bound": 374,
+    "attained": true,
+    "vertices": 375,
+    "excess": 0,
+    "invariant_minima_at_base": 40
+   },
+   {
+    "order": 2,
+    "orbits": 237,
+    "bound": 375,
+    "attained": true,
+    "vertices": 376,
+    "excess": 1,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 2,
+    "orbits": 225,
+    "bound": 376,
+    "attained": false,
+    "vertices": 377,
+    "excess": 2,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 3,
+    "orbits": 150,
+    "bound": 375,
+    "attained": true,
+    "vertices": 376,
+    "excess": 1,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 4,
+    "orbits": 122,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 4,
+    "orbits": 122,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 4,
+    "orbits": 122,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 6,
+    "orbits": 82,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 6,
+    "orbits": 87,
+    "bound": 375,
+    "attained": true,
+    "vertices": 376,
+    "excess": 1,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 6,
+    "orbits": 75,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   },
+   {
+    "order": 12,
+    "orbits": 47,
+    "bound": 378,
+    "attained": true,
+    "vertices": 379,
+    "excess": 4,
+    "invariant_minima_at_base": 0
+   }
+  ],
+  "asks": {
+   "colourable": {
+    "n": 1,
+    "mean_s": 0.099
+   },
+   "refusing": {
+    "n": 15,
+    "mean_s": 1.354
+   },
+   "undecided": 0
+  },
+  "note": "bound = weighted minimum hitting set over the HARVESTED Y (a subset of the true Y, hence a lower bound); 'attained' means the witness was verified to refuse, which closes it to an equality."
+ },
+ "provenance": {
+  "generated": "2026-09-10T19:39:38",
+  "machine": "local",
+  "cores": 32,
+  "git_commit": "f73e1bee6d183c79ff031a1968a0395ff557007a",
+  "git_dirty": false,
+  "freeze_commit": null,
+  "config_sha256": null
+ },
+ "producer": "scratchpad/lattice.py over tools/parts_faces.py"
+}
