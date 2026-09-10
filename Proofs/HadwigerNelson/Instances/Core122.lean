@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Instances.Core122.Cnf.Cert
 import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.PairDist
 import Proofs.HadwigerNelson.Pigeonhole
+import Proofs.HadwigerNelson.SeamCert
 
 /-!
 # The 122-point distance-2 pigeonhole (M34, from the M33 core)
@@ -161,5 +162,30 @@ theorem core122_plane (C : (unitDistance ℂ).Coloring (Fin 4)) :
   have h := core122.pairsAt_sound (by decide) core122_pairs_dist p hp
   rwa [show Real.sqrt ((4 : ℤ) : ℝ) = 2 by
     rw [show ((4 : ℤ) : ℝ) = (2 : ℝ) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]] at h
+
+/-! ### The inhabitant
+
+`core122_pigeonhole` quantifies over proper 4-colourings of the 122 points, and until 2026-09-09
+**nothing in this library showed one existed** (`plans/STUB-consolidation-remainder.md` §1). The
+worry was specific: had there been none, this project would own a 122-point graph needing five
+colours — four times smaller than the record — and would not know it.
+
+There is one, by arithmetic rather than by search. Every coordinate above uses only `1, √3, √11`
+and `√33`, so the points lie in `K = ℚ(√3, √11)`, and **Theorem B four-colours every finite
+unit-distance graph drawn there** (`FieldWall4.lean`; delivered to certificates by
+`SeamCert.lean`). Both hypotheses decide off the table. -/
+
+/-- The 122 points avoid `√5` and `√7` — they are seam-lattice points, so they lie in `K`. -/
+theorem core122_coordsIn_seamFree : core122.CoordsIn Q4.seamFree := by decide +kernel
+
+/-- **The 122-point carrier is 4-colourable**, so `core122_pigeonhole` is not vacuous — and this
+project does not own an unnoticed 122-point 5-chromatic graph. Theorem B, applied.
+
+What it does **not** say: the pigeonhole's content is that no 4-colouring avoids all forty
+distance-2 pairs, and the graph refuting that is the *augmented* one. Four-colouring the unit
+edges is free over `K`; doing it while separating the pairs is impossible, and the gap is the
+theorem. -/
+theorem core122_colorable_four : (edgeGraph 122 core122Edges).Colorable 4 :=
+  core122.colorable_four_of_seamFree (by decide) core122_valid core122_coordsIn_seamFree
 
 end HadwigerNelson

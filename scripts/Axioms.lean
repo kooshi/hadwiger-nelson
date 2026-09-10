@@ -916,10 +916,19 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms core9_pigeonhole
 #print axioms core9_plane
 #print axioms core9_pairs_complete
+#print axioms core9_colorable_three
+#print axioms core9_colorable_four
 #print axioms core122_unsat
 #print axioms core122_pigeonhole
 #print axioms core122_plane
 #print axioms core122_pairs_complete
+#print axioms core122_coordsIn_seamFree
+#print axioms core122_colorable_four
+-- FS-27 section 1: Theorem B delivered to certificates. The general layer, whose only
+-- consumer today is core122_colorable_four above.
+#print axioms Q4.eval_mem_seamField
+#print axioms UDCert.point_mem_seamPlane
+#print axioms UDCert.colorable_four_of_seamFree
 
 -- M59: the finite-plane lift (Lift.lean) — colourings pull back along an injective image (χ(H) ≤ χ(G) when
 -- H ≤ G.map f), the plane composite for a lifted (k+1)-forcer, the first-order obstruction (a stress with a

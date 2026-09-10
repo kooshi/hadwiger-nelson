@@ -116,6 +116,7 @@ import Proofs.HadwigerNelson.Instances.Mycielski.Bound
 import Proofs.HadwigerNelson.Palette
 import Proofs.HadwigerNelson.ResidueColouring
 import Proofs.HadwigerNelson.FieldWall4
+import Proofs.HadwigerNelson.SeamCert
 import Proofs.HadwigerNelson.ValuationLaw
 
 /-!

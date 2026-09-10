@@ -168,4 +168,28 @@ theorem core9_plane (C : (unitDistance ℂ).Coloring (Fin 4)) :
   have h := core9.pairsAt_sound (by decide) core9_pairs_dist p hp
   rwa [show ((3 : ℤ) : ℝ) = 3 by norm_num] at h
 
+/-! ### The inhabitant
+
+`core9_pigeonhole` quantifies over proper 4-colourings of the nine points, so it says nothing
+unless one exists. `CLAUDE.md` `G30`'s fifth failure mode asks every such theorem to ship a named
+inhabitant in its own file; this is it, and `scripts/vacuity.sh` reads it.
+
+The nine points carry `√5` and `√7` and **no `√11`** — they are cut from de Grey's 1581, not from
+the seam lattice — so `K` is the wrong field and Theorem B does not reach them
+(`SeamCert.lean` is the route that does, and it is `core122`'s, not this one's). Nothing that deep
+is needed: thirteen unit edges on nine vertices are three-colourable, and the colouring decides. -/
+
+/-- **The nine-core is 3-colourable**, hence 4-colourable: `core9_pigeonhole` is not vacuous. Note
+what this is NOT — the pigeonhole's content is that no 4-colouring avoids all six `√3`-pairs, and
+the augmented graph (these edges plus those pairs) is exactly what `core9_aug_not_colorable`
+refutes. Colouring the unit edges alone is easy; colouring them while separating the pairs is
+impossible, and that gap is the theorem. -/
+theorem core9_colorable_three : (edgeGraph 9 core9Edges).Colorable 3 :=
+  ⟨Coloring.mk (![0, 1, 0, 2, 2, 1, 2, 2, 2] : Fin 9 → Fin 3)
+    (by simp only [edgeGraph_adj]; decide)⟩
+
+/-- The form the vacuity gate consumes: the carrier of `core9_pigeonhole` is inhabited. -/
+theorem core9_colorable_four : (edgeGraph 9 core9Edges).Colorable 4 :=
+  core9_colorable_three.mono (by norm_num)
+
 end HadwigerNelson

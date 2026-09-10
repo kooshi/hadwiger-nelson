@@ -13,6 +13,24 @@ item there now carries a status banner. This file is the residue.
 
 ## 1. The sharpest item, and the only one with real mathematical content
 
+> **CLOSED 2026-09-09 — and the answer is the reassuring one.** `plans/FS27-1-core-inhabitants.md`
+> holds the subplan and §R. **`core122`'s 122 points lie in `K = ℚ(√3, √11)`** — measured out of
+> the certificate data rather than its docstring: zero `√5`/`√7` leaves across all 122 — **so
+> Theorem B four-colours them** (`core122_colorable_four`, via the new leaf `SeamCert.lean`, whose
+> general form `UDCert.colorable_four_of_seamFree` covers **any** `√5`- and `√7`-free certificate
+> and never mentions `core122`). **There is no unnoticed 122-point 5-chromatic graph.** Verified
+> independently before the kernel work: cadical, class sizes `[26, 27, 34, 35]`, all 421 unit edges
+> re-checked outside the solver.
+>
+> **Two corrections to the text below.** *(a)* The route's price was right in shape and low in
+> amount — the bridging lemma is `Q4.seamFree`, a `Subring Q4` mirroring `Q4.sevenFree` one level
+> deeper so `CoordsIn` still **decides**, and the module came to ~130 lines including its prose.
+> *(b)* **`core9` was never the same repair**, and grouping the two cost nothing here only because
+> the estimate was generous: its nine points carry `√5` and `√7` and **no `√11`** — cut from de
+> Grey's 1581, not the seam lattice — so Theorem B does not reach them. Thirteen unit edges on
+> nine vertices are **three**-colourable, by `decide`.
+
+
 **`core122_pigeonhole` rests on a premise nothing in the library establishes** (found by package P1, phase A3).
 
 The theorem is about proper four-colourings of a specific 122-point graph. **Nothing here shows that graph has

@@ -111,3 +111,78 @@ leaves the `.olean` byte-identical; a docstring does not).
 
 **Cost:** an afternoon. **No compute. Bearing on χ(ℝ²) ≥ 6: none** — but §1's worry ("this project
 may own a 122-point 5-chromatic graph and not know it") is closed in the negative, in the kernel.
+
+---
+
+# §R — Results (closed 2026-09-09, same day)
+
+## R0. The gate
+
+| item | result |
+|---|---|
+| `./scripts/build.sh` | **OK** (4m34s) |
+| live `sorry` | **zero** |
+| `./scripts/axioms.sh` | **801 clean, 5 declared purchases** — up from 794/5: seven newly audited theorems, **no new trust bought** |
+| `lake lint` | **passed** |
+| `./scripts/vacuity.sh` | **OK** — `sites=215 … witnessed=12 unknown=2`, baseline **2 entries** |
+| `./scripts/vacuity.sh --self-test` | **OK**, all seven controls fire |
+
+## R1. What landed
+
+* **`SeamCert.lean`** (new leaf, ~130 lines): `Q4.seamFree` + its `DecidablePred`,
+  `Q4.eval_mem_seamField`, `UDCert.point_mem_seamPlane`, and the consumer
+  **`UDCert.colorable_four_of_seamFree` — any valid certificate drawn without `√5` or `√7` has a
+  4-colourable graph**, stated with no mention of `core122`.
+* **`core122_coordsIn_seamFree`** (`decide +kernel`) and **`core122_colorable_four`** — one line.
+* **`core9_colorable_three`** and **`core9_colorable_four`** — `decide`.
+
+**The vacuity baseline: 4 → 2**, and both survivors are `hexShell_plane5/6`, where proving the
+inhabitant *is* Hadwiger–Nelson. **Nothing dischargeable remains in it.**
+
+## R2. The finding, and it is a negative in the reassuring direction
+
+`core122_pigeonhole` is not vacuous, and **this project does not own an unnoticed 122-point
+5-chromatic graph.** The reason is arithmetic and not luck: the carrier is drawn in Theorem B's own
+field. Measured before proved — cadical, `[26, 27, 34, 35]`, 421 edges re-verified outside the
+solver — which is the right order when the question is "is the worry real".
+
+## R3. Three things the subplan got right, and two it did not
+
+**Right:** the field measurement (§1) and its consequence; that `core9` and `core122` are different
+repairs; that placement had to be measured (`Field/Quadratic.lean` and `Certificate.lean` carry
+~1,498 transitive dependents each, so `seamFree` could not sit beside its sibling `sevenFree`).
+
+**Wrong, and both found by writing it:**
+
+1. **The predicted hardest step was `Q4.eval_mem_seamField`, and it was — but not for the predicted
+   reason.** The worry was that `Q4.eval`'s docstring forbids unfolding. The resolution was already
+   in the repository: `Field/Approx.lean:203` holds a `private theorem eval_mk … := rfl`, the
+   defining equation restated locally, for exactly the reason this module needs a second copy —
+   the lemma belongs on `Adjoin.eval` upstream and upstream costs ~1,498 rebuilds. **Two private
+   copies of one `rfl` is FS-24 item D's shape, recorded in the module rather than repaired.**
+2. **The `√5`-free subring does not exist**, so the intended "intersect two subrings" collapse was
+   unavailable. Forgetting an **inner** generator of the tower is not independently multiplicative:
+   with `√7` still present, `(a+b√7)(a'+b'√7)` contributes `7bb'`, whose `√5`-part need not vanish.
+   Only after the outer generator is gone does the inner condition close. **The four conditions
+   have to be taken together, and that is now the module's own docstring** — a negative worth
+   keeping, since "just intersect them" is the obvious next idea.
+
+## R4. Mutation audit — six mutations, each watched to break
+
+Every carrier condition deleted once (`√5` on `x.re`, `√7` on `x.im`), every consumer hypothesis
+deleted once (`hv : c.Valid`, `hS : CoordsIn`), the basis coefficient mis-fed, and the
+`√3·√11 = √33` step dropped: **all six break, positive control green.**
+
+**And the harness needed repairing mid-run.** The first attempt at the sixth mutation matched **no
+pattern**, left the previous mutation's file on disk, and reported `ok BREAKS` — a stale read
+scoring as a pass. That is the M04 failure mode in a five-line test rig, and it is the second time
+in two days that a *checker* here failed open. The harness now treats an unmatched pattern as a
+FAILURE and deletes its scratch file first.
+
+## R5. Not done
+
+`core122_plane`'s **non-vacuous replacement over `K`** — restating the distance-2 pigeonhole for
+`K`-objects rather than for the plane — is still open (`ValuationLaw.lean` §Scope,
+`plans/STUB-four-colour-valuation-law.md`). This milestone gives it a piece it lacked:
+`UDCert.point_mem_seamPlane` says the carrier's points are `K`-points, which is the hypothesis
+that restatement has to quantify over.
