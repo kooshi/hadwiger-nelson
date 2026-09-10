@@ -543,3 +543,119 @@ An atom that is not an `out`-orbit; a hyperedge that contains another; a `{M}` h
 group-images of one graph; a `Symmetry` whose `out` is not normal in `inp`; a `Companion` vertex in
 the deletable set. Each of those was reachable in the current tools and each is a way the
 reproduction could report a number that means something else.
+
+---
+
+## §O — The obligation-modelling pass (WORKFLOW step 5, `debruijn-obligation-modeling`)
+
+### The space, and the one theorem everything is an instance of
+
+The state space is the finite lattice of subsets `S ⊆ Atoms`. One predicate:
+
+  `R(S)` := *`W[S ∪ fixed] ∪ C` refuses four colours* — the key property.
+
+**`R` is upward closed**, because adding vertices to a graph that is not 4-colourable cannot make it
+4-colourable — and *that is a property of the SHAPE the domain pass chose*, not a separate fact:
+expressing every key property as non-colourability of `W ∪ C` makes monotonicity structural. Dually
+`¬R` (colourability) is downward closed, so the maximal colourable sets and their complements — the
+**minimal correction sets** — are the extremal data, and
+
+> **`R(S)` ⟺ `S` meets every minimal correction set.**
+
+That is MCS/MUS hitting-set duality, it is exact in both directions, and it is why Parts's phase 2
+and our `exact.py` are the same algorithm: **his hypergraph `Y` IS the family of minimal correction
+sets, and his phase-2 enumeration IS minimum hitting set.**
+
+### (1) Completeness, as an invariant rather than a hope
+
+Write `Y*` for the complete family and `Y ⊆ Y*` for what has been harvested. Three obligations:
+
+**(a) Termination of the optimality loop.** Each non-optimal iteration produces a correction set `C`
+that the current hitting set `h` misses, so `C ∉ Y` and `|Y|` strictly grows. **Measure:
+`|Y*| − |Y|`**, bounded because `Atoms` is finite. At most `|Y*|` iterations.
+
+**(b) The lower bound is rigorous at every instant.** `Y ⊆ Y*` means *fewer* constraints, so
+`mhs(Y) ≤ mhs(Y*)`; and when the returned `h` satisfies `R(h)`, `h` is a transversal of `Y*`, giving
+`mhs(Y*) ≤ w(h) = mhs(Y)` and hence equality. **The sandwich closing IS the optimality proof** — a
+run stopped early still reports an honest interval, which is why a budgeted run here does not lie.
+
+**(c) Completeness of `{M}`.** Enumerate at weight exactly `w*`, holding `E` = optima found:
+
+> **Invariant.** `E ⊆ {S : R(S), w(S) = w*}`, and every `S` with `R(S)` and `w(S) = w*` that is not
+> in `E` is still feasible for the current MaxSAT instance.
+
+*Preservation.* A blocking clause removes only a member of `E` (already `R`-true and recorded); a
+new correction set removes only sets that are not `R`-true. **Neither ever removes an unrecorded
+`R`-true `w*` set.** *Termination.* Each iteration grows `E` or grows `Y`; **measure
+`(#{S : w(S) = w*} − |E|, |Y*| − |Y|)`, lexicographic.** *At exit (UNSAT).* No `w*` set both hits
+all of `Y` and avoids `E`; every `R`-true `w*` set hits all of `Y* ⊇ Y`; hence it is in `E`. ∎
+
+*The one step that is easy to get wrong and is written down here so it is not:* when `¬R(h)`, **do
+not block `h`.** Blocking it would be sound but wasteful; adding the correction set `h` misses
+removes `h` and infinitely many like it, and blocking would let the same `h` return under a
+different guise. And **every correction set must be verified before insertion** — `exact.py`'s are
+derived from an actual colouring, so they are verified by construction; a *guessed* one would let
+`mhs(Y)` exceed the truth and turn the lower bound into an unsound optimality claim. Its shrink loop
+is also safe under a capped ask, because it treats *undecided* as *still needed*, and a non-minimal
+correction set is still a correction set.
+
+### (2) Soundness of the pre-filters — three sound, one NOT, and the one that is not is the report
+
+| filter | obligation | verdict |
+|---|---|---|
+| degree-1 census fixes criticals | if deleting `{a}` alone loses `R`, every `S` missing `a` is `⊆ Atoms∖{a}`, and `¬R` is downward closed | **sound**, from monotonicity alone |
+| correction-set pruning | `R(S) ⟹ S` meets every correction set | **sound**, the duality |
+| beat-the-incumbent pruning | we want only the first feasible size; a candidate that cannot reach it cannot be in `{M}` | **sound**, and it is what makes `{M}` the level set rather than everything |
+| **the atom partition** | restricting to `out`-symmetric candidates **provably loses minima** — that is overcompression, his own §5.8 | **NOT sound, and must never be reported as if it were** |
+
+**Monotonicity is the hypothesis everything leans on, so name where it breaks:** *"χ is exactly 5"*
+is not monotone; *"1-minimal"* is not; *"admits a proper 4-colouring"* is downward, not upward. The
+guard is structural — a key property is admissible here **only** if it is expressible as
+`¬ Colorable(W ∪ C, 4)`, which is what the `Companion` type enforces.
+
+**The last row is this milestone's sharpest reporting obligation**, and it is exactly where a word
+meaning "clean" would lie. The verdict for a search at `out ≠ 1` is **`exact-at-rung`**, never
+`exact`; `exact` is available only at `out = 1`; and the rung travels in the same sentence as the
+number, per `G21`. Nothing else in the vocabulary may be read as "we found the minimum".
+
+**Canonicalization merges exactly the `inp`-orbits and nothing else** (measured: the four held
+374-vertex minima give four distinct forms, a planted group image collapses, a genuine sibling does
+not). So the honest report is **`|{M}| up to Aut B`**, never *"up to isomorphism"* — which is also
+precisely the ambiguity that makes his own `1092` un-gateable (§3).
+
+### (3) The outer loop has NO measure, and saying so is the finding
+
+Expansion adds vertices, so `|W|` is unbounded above; and his own success criterion fires when
+`{M}` grows at fixed `|M|`, so `|M|` is not a measure either. **The loop does not terminate, and
+the real stopping rule is "`A` stopped changing".** Therefore:
+
+- report `(|M|, |{M}|, |A|)` **every iteration**, with `A`'s growth curve;
+- **`stalled` is a verdict, not a success** — all three unchanged for `k` iterations;
+- a stall is a control signal: his own escape is *"increasing the number of new vertices introduced
+  in the expansion stage"*, so the monitor feeds the next expansion rather than ending the run.
+
+### (4) What the kernel owes: nothing, and the decline is priced
+
+The reproduction certifies **his** object, not a new one, and *"a formalization of a known theorem
+is no longer news"* is standing policy. **But the cheap thing should be named rather than left as a
+gap**: `¬ Colorable(Parts-509, 4)` through the existing `UDCert` + LRAT chain would be the
+**smallest kernel-certified 5-chromatic unit-distance graph anywhere**, at 509 vertices and 2442
+edges — *smaller than Heule-510, which this repository already certifies* — so the machinery is
+built and the instance is the smallest it has ever been handed. **Priced at an afternoon on the M06
+pipeline and DECLINED for M63**, because it is a control on a calibration corpus rather than a
+result, and because the objects that will need certifying are the ones our own pipeline finds.
+Recorded so that *"we reproduced the record and never certified it"* is a decision and not an
+oversight.
+
+### (5) Vacuity guards, each with its own verdict word
+
+- **`R(Atoms)` must hold before phase 1** — if the working graph itself does not keep the property,
+  every claim downstream quantifies over an empty set. Verdict **`base-fails`**, its own word,
+  folded into nothing. (This is the base-satisfiability guard the census already carries as control
+  flow; it is here promoted to a value, exactly as `Arity.arityFloor_eq_zero_iff` did for the
+  emptiness detector.)
+- **`w* = w(Atoms)`** — nothing is deletable, `{M} = {W}`. Not vacuous but trivial. Verdict
+  **`no-reduction`**.
+- **`w* = 0`** — the empty selection keeps the property, i.e. `C` alone refuses four colours, so
+  `W` is doing no work at all. Verdict **`companion-suffices`**, and it is a bug in the setup rather
+  than a result.
