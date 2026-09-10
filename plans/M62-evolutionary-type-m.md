@@ -1083,3 +1083,30 @@ together, thirty seconds after they were the only things running.
 
 This project already had a memory note about the `pkill -f` self-match. A note was not enough; the
 launch discipline is.
+
+### §R17 — Three blockers stubbed (2026-09-10, Kooshi: *"stub all 3; I suspect we won't get anywhere until those are addressed"*)
+
+M62 does not continue as a compute problem until these are settled. All three are ranked **1a/1b/1c**
+in `plans/FRONTIER-STUBS.md`, ahead of everything, and each is written to be picked up by a session
+with no memory of this one.
+
+| | stub | in one line |
+|---|---|---|
+| **1a** | `plans/STUB-parts-base-reconciliation.md` | **2,246 orbits against his 400, and our reconstruction of his base is 4-colourable.** Either the truncation is wrong or the cross-edge law is incomplete — and if it is the law, *every measurement M62 made is on an arena missing edges*. Hours to settle. |
+| **1b** | `plans/STUB-smus-reduction.md` | The reduction stage is **smallest-MUS extraction**, solved in another literature with a tool. Calibrate by reproducing Heule's 375 from his 393. If it lands, all that is left is the expansion stage — where our theorems are. |
+| **1c** | `plans/STUB-consume-rotation-list.md` | **412 admissible rotations on disk, one `print` as their only reader**, and every arena hard-wired to the rotation the record is already optimal for. |
+
+**The through-line, and it is why Kooshi is right that compute will not help yet.** M62 spent a night
+optimising *inside* a frame it had not checked: one rotation (the published one), one base (my own
+reconstruction, now suspect), and one search stage (the one Parts's paper says twice is
+insufficient). Every genuine gain of the night came from **checking the frame** — Theorem B giving
+the pattern decomposition, the exhaustive subtype census, the exact-box acceptance test — and every
+wasted hour came from grinding inside it. **1a says whether the arena is even right; 1b says whether
+the stage we are grinding is worth grinding; 1c says whether the rotation is.** None is a compute
+question and all three are days at most.
+
+**Still running at the time of writing** (`setsid`, group id at `/tmp/ed4.pgid`, log
+`/tmp/m62ed4b.log`): the alternating exact-box descent on the seam base at subtype `(1,5)`. Its
+first census reproduces — **471 of 473 `L`-orbits individually droppable** — and it is on the batch
+bisection. Whatever it returns is a `REFUSED-4` candidate at ~5,000 vertices, not a find, and it
+does not bear on the three blockers above.
