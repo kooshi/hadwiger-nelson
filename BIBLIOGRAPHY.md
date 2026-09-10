@@ -142,6 +142,27 @@ paper or a memory), **unread**.*
 
 | **[LiffitonEtAl2016]** / **[BacchusKatsirelos2016]** / **[SymmetriesMUS2024]** | M. Liffiton, A. Previti, A. Malik, J. Marques-Silva, *Fast, flexible MUS enumeration* (**MARCO**), Constraints 21 (2016) 223–250; F. Bacchus, G. Katsirelos, *Finding a collection of MUSes incrementally*, CPAIOR 2016 (arXiv:1606.03289); **and *Exploiting Symmetries in MUS Computation*, arXiv:2412.13606 (2024)** | **Named 2026-09-10 (M64 close, second Poros advisory) — the field that owns COMPLETE LEVEL SETS, which is what M63's reduction produces and what `[Parts2020a]` did not have.** Our `Y` is a family of **minimal correction sets** and `{M}` is a set of **minimum hitting sets**; enumerating all of them is **MUS/MCS enumeration**, and MARCO is its standard tool. **The last of the three is the exact intersection of this milestone's two halves — symmetry × MUS enumeration — and the M64 prior-art gate did not have it.** What the field derives from a level set is the **backbone**: the constraints present in every MUS. **Our 336 necessary atoms ARE that backbone** — and our **24 conservation pairs are a structure their vocabulary appears to lack a word for**: a backbone entry is 0-dimensional (*this atom, always*), a conservation pair is 1-dimensional (*exactly one of these two, always*), derived by one ask each and accounting with the budget for 100 of 108 profile exclusions. **If M64 holds a finding that is not about Hadwiger–Nelson, that is it, and confirming or killing it is a read of these three papers.** | not held | **not read — named only; BLOCKING for any FS-35 novelty claim** |
 
+| **[IgnatievEtAl2015]** / **[LiffitonSakallah2008]** / **[Junker2004]** | A. Ignatiev, A. Previti, M. Liffiton, J. Marques-Silva, *Smallest MUS Extraction with Minimal Hitting Set Dualization*, **CP 2015**, with the tool **`forqes`** (`alexeyignatiev.github.io/software/forqes/`); M. Liffiton, K. Sakallah, *Algorithms for computing minimal unsatisfiable subsets of constraints*, **J. Automated Reasoning 40 (2008)** *(year/venue recalled, not checked against the paper)*; U. Junker, ***QUICKXPLAIN**: Preferred Explanations and Relaxations for Over-Constrained Problems*, **AAAI 2004** | **Named in `plans/STUB-smus-reduction.md` on 2026-09-10 and NOT logged here until the 2026-09-10 bibliography audit — the exact `G50` failure mode of recording prior art in a stub and never in the ledger.** These are the algorithms `[Parts2020a]` reinvented in Mathematica without naming: **his hyperedges are minimal correction sets**, **his subset enumeration is MUS/MCS hitting-set dualization** (Liffiton–Sakallah), **his "8-4-2-1" grouping is QuickXplain**, and **the smallest-MUS problem he solves by hand has a dedicated algorithm and tool** (Ignatiev et al., `forqes`). Bears on **FS-32** (rank 2a) directly, and on M63's phase-2 engine, which implements the dualization by hand | not held | **not read — named only; BLOCKING for FS-32** |
+| **[Davies2024]** | S. Davies, *Chromatic number of spacetime*, **Acta Arithmetica (2024)**, arXiv:2308.16885 | **Opened 2026-09-09 during FS-20's prior-art repair and held locally, but never given a row until the 2026-09-10 audit.** Cites `[Madore2015]` once, for the pseudo-Euclidean question and the observation that `χ(ℝ^{1,1}) = ∞ ⟹ χ(ℂ²) = ∞`. **Zero number-field chromatic content, confirmed by a full-text sweep** — a checked negative for the claim that Theorem B's question was answered elsewhere, and worth keeping *as* the negative | held locally (per `plans/STUB-theorem-B-writeup.md` §1) | **read (full-text sweep, 2026-09-09) — a confirmed negative** |
+| **[Mukherjee2022]** | Mukherjee, *a conditional approach to the Hadwiger–Nelson problem*, arXiv:2210.16212 *(title paraphrased from our own note; NOT checked against the paper)* | Named 2026-09-09 in FS-20's scan of all 47 citations of `[ExooIsmailescu2019]`, characterised there as **measure-theoretic, no fields** — i.e. a checked negative for the `K²` question. Logged 2026-09-10 by the audit so the negative is findable rather than buried in a stub's table | not held | **not read — characterised from its abstract only, which `G50` says is not a reading** |
+| **[SetCoverSymmetry2025]** | *breaking symmetries from a set-covering perspective*, arXiv:2502.10056 *(title as reported by the Poros advisory; NOT verified)* | Named 2026-09-10 (M64 §PA(d)). The nearest thing the symmetry-breaking literature has to M64's containment claim, and it is **a different statement**: it is about *incomplete symmetry-breaking constraints losing solutions*, not about the optima at two symmetry levels being incomparable. **The reason M64 could report "no prior art found" for its own claim** | not held | **not read — named only** |
+| **[OrbitopalFixingSAT2026]** | orbitopal fixing, a 2026 SAT-solver treatment, arXiv:2601.16855 *(title not recorded; NOT verified)* | Named 2026-09-10 (second Poros advisory) alongside `[KaibelPfetsch2008]` as current machinery in the symmetry-gap literature that owns overcompression. Not load-bearing for anything we hold; logged so the M64 §PA list is complete | not held | **not read — named only** |
+| **[HypergraphGNNMUS2026]** | a hypergraph-GNN acceleration for MUS computation, arXiv:2604.09001 *(title not recorded; NOT verified)* | Named 2026-09-10 (second Poros advisory) beside `[LiffitonEtAl2016]`. Logged for completeness of the MUS-enumeration list; **the one in that group that actually bears on us is arXiv:2412.13606 on symmetries in MUS computation** | not held | **not read — named only** |
+| **[Bellitto2021]** | T. Bellitto *et al.*, on the density of sets avoiding distance 1 / the fractional chromatic number of the plane — **CITATION UNRESOLVED** | **A key this repository USES and never defined**, found by the 2026-09-10 audit: `[AmbrusEtAl2024]`'s row refers to *"`[Bellitto2021]`-type bounds"* as the fractional/density state of the art the `χ_f(K²)` bracket sits inside. The label is doing work in our prose with no entry behind it. **Resolve the citation or de-key the reference** — it is recorded here as a debt rather than left invisible | not held | **not read; citation not verified — an outstanding bibliography debt** |
+
+### A′. Retired and alternate keys
+
+*Added 2026-09-10 by the bibliography audit. Three keys are cited in this repository's prose and
+have no bolded row, because each was **merged into another entry** and the merge was recorded only
+inside that entry's prose — invisible to any mechanical check. They are listed here so the audit can
+see them, and because a citation a reader cannot resolve is a debt whichever way it arose.*
+
+| cited as | canonical key | why |
+|---|---|---|
+| `[BardestaniMallahiKarai2017]` | **`[BardestaniMallahiKarai2015]`** | one paper (arXiv:1507.05300, Israel J. Math. 2017); re-found independently on 2026-09-09 under the later year and merged |
+| `[CranstonRabern2017]` | **`[CranstonRabern2015]`** | one paper (arXiv:1501.01647, Combinatorica 2017); duplicate found and merged on 2026-09-08 by the FS-18 read |
+| `[Katz1988]` | **`[Salie1931]`** | the row carries two works — Salié (1931) and Katz, *Gauss Sums, Kloosterman Sums, and Monodromy Groups* (1988) — and reserved this key for the second without ever opening a row for it |
+
 ## B. Held in the library — ALL READ as of 2026-09-08 (FS-18, `plans/STUB-library-read.md` §R)
 
 *This section is now empty of unread items. The 2026-09-05 fetch of eleven arXiv PDFs was opened for the first
@@ -213,6 +234,23 @@ field extensions, Feynman integrals); doi 10.1007/s00209-025-03728-4 (an algebra
 arXiv:1301.3998 (dihedral group actions).
 
 ## D. Standing tasks for this file
+
+**Rule 0g (added 2026-09-10, after an audit found six works cited and never logged in four days).**
+`python3 tools/bib_audit.py` must report **zero** unlogged works, and `--self-test` must fire its
+three controls. It walks every `.md` in the repository, extracts arXiv ids and bracketed citation
+keys, and checks each against a keyed row or the retired-key table in § A′. **Run it at every
+milestone close, beside the Frontier update.**
+
+*Why it exists, stated as the failure it is:* rule 0f already said a work is logged the day it is
+first used, and on 2026-09-10 the audit found **`[IgnatievEtAl2015]` plus the whole MUS /
+hitting-set-dualization literature named in a stub and never in the ledger** — the algorithms
+`[Parts2020a]` reinvented without naming, and prior art for FS-32 at rank 2a — **a paper held
+locally and read in full with no row** (`[Davies2024]`), and four arXiv works named by an advisory.
+Every one was written down somewhere in `plans/`. **Prose is not an index**, and a rule enforced by
+memory is not enforced. *The script also shipped with a blind spot on its first run — it could not
+see a key that had been merged into another entry, and reported three resolved citations as gaps —
+which is why § A′ exists and why the self-test requires a planted gap to be seen.*
+
 
 0. **THE PRIOR-ART GATE IS NOW A WORKFLOW STEP (2026-09-08, `WORKFLOW.md` step 3a, `CLAUDE.md` § Grokkings G49).**
    Every milestone runs a thirty-minute prior-art search at its OPENING, before any derivation, and records the
