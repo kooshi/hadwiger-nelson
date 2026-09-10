@@ -4,6 +4,57 @@
 > (`plans/STUB-vacuity-coverage.md` §Phase C, minted one day earlier on 2026-09-09). The older
 > mint keeps the number; no content here changed.**
 
+> **CORRECTED 2026-09-10 by Kooshi, and the correction changes the stub's whole shape: WE ALREADY
+> HAVE GROUP-LEVEL MUS EXTRACTION, in `~/source/descent-engine`, and this stub's own gate — "does
+> the tool take clause GROUPS rather than single clauses" — was answered in the affirmative a week
+> ago by our own code. I recorded it as unverified without looking.**
+>
+> `crates/descent-sat/src/subset.rs`, `SubsetSolver`: one **presence literal per pool point** (a
+> group of clauses, never a single clause), assumed true when present and false when absent; a
+> refutation's **failed assumptions ARE a sufficient subset**, read by sweeping `allowed` so that
+> `core ⊆ allowed` is structural; `search()` proposes that core and `confirm()` re-asks over exactly
+> it, **descending while the core keeps shrinking** (`CORE_ROUNDS = 4`, a ceiling and not a target);
+> and the universe can be **extended** with new points and edges while keeping everything learned.
+> `crates/descent-cull/` is the group-level cull built on it — `GroupKind::{Cheats, Vertices}`, the
+> necessity-is-permanent / droppability-is-not asymmetry as its concurrency argument, journal,
+> resume, a fingerprinted group list, and a termination bound asserted in the shipped binary.
+> Gate 269/269, verified independently by the owner.
+>
+> **And the ask's shape is an exact match for the type-M box test, which nobody noticed because the
+> two milestones use different words for the same thing.** `decide(allowed, masks, budget)` takes a
+> present subset and a **per-variable forbidden-colour mask** — and a *box* IS such a mask. So:
+>
+> | type-M descent (M62) | descent engine |
+> |---|---|
+> | the current `L` or `S` selection, by orbit | `allowed`, the present pool subset |
+> | one box (the other side's pattern on the cross endpoints) | `masks`, a class |
+> | — *nothing; the Python descent throws this away* — | **`core`: which orbits actually killed that box** |
+>
+> **That last row is the prize.** M62's descent asks *"does this drop still block every box?"* and
+> gets one bit back, so it finds a drop size by a doubling probe: measured 2026-09-10, ~14 probe
+> steps × 18,408 boxes ≈ **258,000 solves to choose one drop**. The engine's ask returns, per box,
+> the minimal set of orbits that killed it — and since blocking is monotone upward in the selection,
+> **the union of the per-box cores is a sufficient selection**, computed in **one** pass of 18,408
+> solves as a by-product of refuting. That is ~14× fewer solves *and* a better answer than a prefix
+> of a shuffled list. `subset.rs` says this in its own words: *"a refutation's failed assumptions are
+> a kill set, computed by the solver as a by-product of refuting, where the reference finds one by
+> deleting points and re-asking."* **M62's Python descent is "the reference" in that sentence.**
+>
+> **So the work is ADAPT, not import, and it is smaller than this stub assumed:**
+> 1. a third `GroupKind::Orbits` — structurally identical to `Vertices` (a group whose deletion
+>    removes a set of edges), and the type-M orbits are 1, 6, 12 or 24 vertices each;
+> 2. the box test as the engine's ask — already its native shape, per the table above;
+> 3. drive the descent from the **union of cores** instead of the doubling probe.
+>
+> **What is still genuinely NOT ours, and stays the literature import:** `confirm()` reaches a
+> *locally* minimal core in at most four rounds; Liffiton–Sakallah / `forqes` reach the **minimum**
+> by MCS hitting-set dualization. Parts's own algorithm is the dualization — so the minimum-seeking
+> half of this stub survives intact, and the extraction half is already built and gated.
+>
+> *(Today's parallel box sweep, `tools/boxsweep.py`, is a crude stand-in for what the engine does
+> properly: it wins 4× by fanning out and loses half of that by starting every worker cold, where
+> the engine keeps one incremental solver and never rebuilds.)*
+
 *Minted 2026-09-10 at Kooshi's direction ("stub all 3; I suspect we won't get anywhere until those
 are addressed"). Found by Poros in the M62 review, `plans/POROS-2026-09-10-m62.md`. **Not yet acted
 on.** Read `plans/M62-evolutionary-type-m.md` §R6, §R15 and §R11 first — they hold the measurements
