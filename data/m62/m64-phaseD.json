@@ -1,0 +1,120 @@
+{
+ "S": {
+  "lp_over_harvest": 125.25,
+  "integer_optimum": 135,
+  "exclusions": {
+   "by_exchange_equalities": 0,
+   "inside_affine_hull": 1
+  },
+  "survivors": [
+   {
+    "profile": [
+     5,
+     8,
+     14
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   }
+  ]
+ },
+ "L": {
+  "lp_over_harvest": 369.0,
+  "integer_optimum": 374,
+  "exclusions": {
+   "by_exchange_equalities": 100,
+   "inside_affine_hull": 8
+  },
+  "survivors": [
+   {
+    "profile": [
+     5,
+     3,
+     9,
+     7
+    ],
+    "in_hull": true,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     5,
+     4,
+     8,
+     7
+    ],
+    "in_hull": true,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     5,
+     5,
+     7,
+     7
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     5,
+     6,
+     6,
+     7
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     6,
+     3,
+     9,
+     6
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     6,
+     4,
+     8,
+     6
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     6,
+     5,
+     7,
+     6
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   },
+   {
+    "profile": [
+     6,
+     6,
+     6,
+     6
+    ],
+    "in_hull": false,
+    "hits_all_of_Y": false,
+    "verdict": "Y-excludes"
+   }
+  ]
+ }
+}

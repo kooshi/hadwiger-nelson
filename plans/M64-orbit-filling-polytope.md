@@ -542,6 +542,14 @@ laziness note attached. Every record is regenerated; the pre-change records are 
 >
 > *Proof of (ii): an `H`-invariant set containing `M` contains its image under every element. ∎*
 
+**Attribution, stated plainly: the theorem is elementary and no novelty is claimed for it.** "The
+orbit of a feasible solution generates an invariant feasible solution" is the combinatorial shadow
+of the averaging argument that the symmetric-IP literature is built on (§PA(b)), and anyone in that
+field would write these two lines on request. **What is ours is the use and the numbers:**
+identifying this gap as the content of `[Parts2020a]`'s *overcompression*, turning it into a
+solver-free upper bound on every rung, and measuring it on the record-holder's own object — where
+it forbids containment at 375-against-376, which is the sentence he wrote.
+
 **Measured, on both stages, from the level sets alone** (`data/m62/m64-orbit-closure.json`):
 
 | stage | \|Aut(A)\| | closure excess `min_M \|cl_H(M)\| − \|M\|`, by rung order |
@@ -573,3 +581,70 @@ L-side one below order 6. His side-by-side impression, measured.
 **A free instrument falls out of (i):** the rung-`H` minimum has a computable upper bound before
 any search, so a rung sweep can be *ordered by how expensive its symmetry looks* and a search that
 returns a value above its own closure bound is wrong. Both R1 searches respect their bounds.
+
+### §R6 — Phase D: `Y` explains every exclusion, and convexity was never needed
+
+With `Y` stored (phase A) the attribution runs directly: for each excluded box point, is there a
+selection of the minimum size with that profile hitting every harvested correction set?
+
+| | S (136-level) | L (375-level) |
+|---|---|---|
+| `\|Y\|` harvested | **773** sets, sizes 1–10 | **703** sets, sizes 1–7 |
+| box exclusions | 1 | 108 |
+| by the exchange equalities | 0 | **100** |
+| left inside `aff(Prof)` | 1 | **8** |
+| **excluded by `Y` directly** | **1 of 1** | **8 of 8** |
+| **unattributed** | **0** | **0** |
+
+**So the whole exclusion budget is `Y`'s**, and the convexity layer — which explained 6 of those 8
+and missed 2 — turns out to have been a proxy the milestone did not need. `Prof` is not the integer
+points of a polytope (§PA(c) said so a priori) and it does not have to be: the hypergraph accounts
+for it exactly.
+
+**P6 met, and more sharply than registered.** It predicted the two convexity-unexplained points
+`(5,3,9,7)` and `(5,4,8,7)` need a hyperedge of size ≥ 3. Measured layer by layer: **all eight L
+survivors are excluded by `Y` restricted to size ≤ 5 and by nothing smaller**, so a **size-5**
+hyperedge is load-bearing, not merely a size-3 one. The S survivor needs size ≤ 9.
+
+**P5 is UNDECIDED and the measurement says why.** The LP relaxation over the *harvested* `Y` reads
+**369.00 against the integer optimum 374** on the L side and **125.25 against 135** on the S side.
+That looks like a fractional gap and it **cannot** be read as one: the harvest is a **subset** of
+the true `Y`, so `LP_harvest ≤ LP_true ≤ IP`, and `369 < 374` is consistent with the true matrix
+being ideal. Settling idealness needs the complete hypergraph, which a lazy harvest by construction
+does not give. Recorded as undecided with its numbers rather than scored either way.
+
+### §R7 — Reproducibility, and the prediction scorecard
+
+**Both reductions were re-run from scratch under the phase-A schema change and returned the same
+objects**: S `136 vertices / 48 minima / |Y| = 773`, L `375 vertices / 3,264 minima / |Y| = 703` —
+identical counts to the records they replaced, which is the reproducibility control the milestone
+never registered and got for free from the regeneration.
+
+| # | prediction | outcome |
+|---|---|---|
+| P1 | derived pairs stay derived, underived stay underived | **met** (9 and 6 on S; 24 and 0 on L) |
+| P2 | a dead rung's minimum is ≥ 2 vertices above rung 1 | **met by the full rung (+4), missed by the cheapest dead rung (+1)** — reported as the pair |
+| P3 | containment fails | **MET** — 0 of 1,302 and 0 of 4 |
+| P4 | `Prof` is an order ideal in some orientation | **met on both sides**, with the S null reported as too small to mean anything |
+| P5 | `Y` is not ideal | **UNDECIDED** — the LP over a lazy harvest is a lower bound; see §R6 |
+| P6 | the two unexplained points need a hyperedge of size ≥ 3 | **met, and sharper: size 5** |
+| P7 | `Aut(A)` is dihedral of order 12 | **met in its order half**; the conjugacy of the three live involutions is **not checked** |
+| P8 | the S profile map does not factor through its matching | **met** |
+| P9 | restricting the L companion to 18 connection edges removes both tail profiles | **not run** (phase E) |
+| P10 | every complete level set spans its predicted affine hull | **not scored** — on the two stages the classes were computed *from* the profiles, so the check is only meaningful on a level set produced later; the three rung level sets are the first such and were not tested |
+
+### §R8 — What is not done, reported as not done
+
+**Phase E** (the 18-connection-edge re-run, P9) is **not run**; its cheap discriminator fired during
+subplanning and is recorded in §4. **Phase F** (C3 as an integer program) is **not run**. The
+conjugacy structure of `Aut(A)`'s involutions is **not checked**. Twelve of the sixteen L rungs and
+five of the six S rungs were **not searched to their own minima** — only their closure bounds are
+known, and §6(4) forbids reading a bound as a minimum.
+
+**The modeling passes, honestly.** `debruijn-domain-modeling` was invoked fresh and did the work
+recorded in §0(viii)–(ix) and in `parts_faces`'s type design — the matroid refutation and the
+species identification are its product. The **obligation** and **experience** passes were **not run
+as separate skill invocations**; their content arrived inside the implementation (the orbit-closure
+theorem and the necessary-atom equivalence are obligation-pass work; the five structural refusals
+are experience-pass work), and this note exists so the record does not imply a discipline that was
+not followed.
