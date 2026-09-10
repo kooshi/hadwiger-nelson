@@ -648,3 +648,35 @@ as separate skill invocations**; their content arrived inside the implementation
 theorem and the necessary-atom equivalence are obligation-pass work; the five structural refusals
 are experience-pass work), and this note exists so the record does not imply a discipline that was
 not followed.
+
+### §R9 — The level set does not factor, and the profile map hides a coupling it does not remove
+
+A loose end from §R2, asked because `3,264 = 2⁶ · 3 · 17` and the 17 looked like it wanted a
+reason. It does not have one, and the negative is worth as much as a reason would have been.
+
+Split every minimum into its **pair-pattern** (which endpoint of each exclusive pair is kept) and
+its **residual pattern** (which of the profile-invisible free atoms are kept):
+
+| | S | L |
+|---|---|---|
+| distinct pair-patterns | 24 | **2,943** |
+| distinct residual patterns | 42 | **48** |
+| product | 1,008 | 141,264 |
+| **minima** | **48** | **3,264** |
+| residual completions admitted **per** pair-pattern | 1 (×12), 2 (×6), 4 (×6) | **1 (×2,646), 2 (×273), 3 (×24)** |
+| distinct families of admissible residual sets | 18 | 123 |
+
+**So the two halves are not independent, and the L count is a sum rather than a product:**
+`2,646·1 + 273·2 + 24·3 = 3,264`. The 17 is incidental — there is no factorisation for it to come
+from.
+
+**And a sharper dissociation underneath.** The 24 pairs fall into **two orbit-blocks of 12**, one per
+conservation law. Block 1 realises **99** of its `2¹² = 4,096` possible patterns, block 2 realises
+**473**, and the two together realise **2,943 of the 46,827 product — 6.3%, so the blocks are
+COUPLED.** Yet their *profile* coordinates are all but independent: the 27 profiles are
+`{a ≤ 4} × {b ∈ 2..6}` plus two tail points. **The profile map washes out almost the whole coupling.**
+
+That is the honest limit of Parts's own claim that *"the orbit-filling tables are usually more
+informative than the graph image"*: they are, and they are also a coarse invariant that hides a
+6.3%-of-product interaction between the two blocks entirely. Any expansion strategy driven by
+profiles alone (M64 C3, FS-35) is working with that blindness, and should say so.
