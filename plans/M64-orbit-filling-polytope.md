@@ -440,7 +440,7 @@ the 375-vertex graphs"***. He states it as a nuisance of his procedure and does 
 
 **Reproduced here as a statement about symmetry rungs, from an independent computation, at exactly
 375 and 376.** The reduction was run at four rungs of the L stage's own stabiliser `Aut(A)`
-(order 12, dihedral — **P7 met** in its order half), each to a **closed bound with zero undecided
+(order 12, dihedral, **7 involutions**, of which 3 are live — **P7 met** in its order half), each to a **closed bound with zero undecided
 asks**, each level `exhaustive-level`:
 
 | rung | \|H\| | atoms | minimum | **vertices** | minima (complete) | **contains a rung-1 minimum** |
@@ -449,6 +449,10 @@ asks**, each level `exhaustive-level`:
 | **live involution** (40 invariant members at the 374-level) | 2 | 232 | 374 | **375** | **40** | **40 of 40** |
 | **dead involution** (0 invariant members) | 2 | 237 | 375 | **376** | **1,302** | **0 of 1,302** |
 | **full stabiliser** | 12 | 47 | 378 | **379** | **4** | **0 of 4** |
+
+*(Of the 16 subgroups, **7 have order 2** — dihedral of order 12 has six reflections and one
+central rotation — and exactly **3** of those seven carry invariant minima at the 374-level. An
+earlier draft of this section said "3 of the 6 involutions"; it is 3 of 7.)*
 
 **The positive control is the row that makes the rest readable.** The live involution's rung was
 predicted, before it ran, to return the rung-1 minimum and to contain trivially — because the
@@ -519,3 +523,53 @@ laziness note attached. Every record is regenerated; the pre-change records are 
    version took one representative per class, which gave the S side a single free coordinate and
    made the order-ideal test **decline on a set it should have decided**. Caught because the S row
    came back empty where the L row did not. Now a control.
+
+### §R5 — THE MECHANISM: overcompression is an orbit-closure gap, and it is two lines
+
+§R1 measured that containment fails. This is *why*, and it is a derivation rather than a census.
+
+> **Theorem (orbit-closure obstruction).** Let `R` be upward closed and `H ≤ Aut(A)`. For any
+> `M ∈ R`, every `h(M)` is in `R`, so the **orbit closure** `cl_H(M) = ⋃_{h ∈ H} h(M)` is an
+> `H`-invariant member of `R`. Hence:
+>
+> **(i)** `min_{M ∈ {M}} |cl_H(M)|` is an **upper bound on the rung-`H` minimum**, computable from
+> the rung-1 level set with **no solver at all**; and
+>
+> **(ii)** if `S ∈ R` is `H`-invariant and `S ⊇ M`, then `S ⊇ h(M)` for every `h`, so
+> `|S| ≥ |cl_H(M)|`. Therefore
+> **`min_M |cl_H(M)| > |M_H|` forbids containment outright** — no minimum sits inside any rung-`H`
+> minimum.
+>
+> *Proof of (ii): an `H`-invariant set containing `M` contains its image under every element. ∎*
+
+**Measured, on both stages, from the level sets alone** (`data/m62/m64-orbit-closure.json`):
+
+| stage | \|Aut(A)\| | closure excess `min_M \|cl_H(M)\| − \|M\|`, by rung order |
+|---|---|---|
+| **L**, 374-atom level, 3,264 minima | 12 | order 1: **0** · order 2: **0** (×3, the live rungs), **+2** (×3), **+4** (×1) · order 3: **+10** · order 4: **+4** · order 6: **+10, +16, +16** · **order 12: +16** |
+| **S**, 135-atom level, 48 minima | 6 | order 1: **0** · **order 2: +8** · order 3: **+12** · **order 6: +24** |
+
+**Against §R1's four searched rungs the theorem holds and is not tight, which is the whole point:**
+
+| rung | `min_M \|cl_H(M)\|` (the bound) | `\|M_H\|` searched | containment |
+|---|---|---|---|
+| live involution | 374 | **374** | bound tight; containment **holds** (40 of 40) |
+| dead involution | **376** | **375** | `376 > 375` ⟹ **containment forbidden**, and it was measured 0 of 1,302 |
+| full stabiliser | **390** | **378** | `390 > 378` ⟹ **forbidden**, measured 0 of 4 |
+
+**So overcompression, stated exactly: the cheapest object obtainable by SYMMETRISING an optimum
+costs 376 and 390, while the true symmetric optima are 375 and 378. Symmetrisation overshoots by
+one vertex and by twelve, and the true symmetric optimum lies strictly below every symmetrisation
+— which is why no asymmetric optimum can sit inside it.** That is the symmetry gap of symmetric
+integer programming (§PA(b)) in the combinatorial form this problem wears: averaging an LP optimum
+stays feasible, but the closure of an *integer* optimum overshoots the integer optimum of the fixed
+space.
+
+**And it quantifies his parenthetical.** `[Parts2020a]` §5.8 says overcompression is *"especially
+noticeable for S-subgraphs"* and gives no number. **On the S side the cheapest nontrivial rung
+costs 8 vertices against the L side's 1** — every S-side closure excess (8, 12, 24) exceeds every
+L-side one below order 6. His side-by-side impression, measured.
+
+**A free instrument falls out of (i):** the rung-`H` minimum has a computable upper bound before
+any search, so a rung sweep can be *ordered by how expensive its symmetry looks* and a search that
+returns a value above its own closure bound is wrong. Both R1 searches respect their bounds.

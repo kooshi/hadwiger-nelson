@@ -1,0 +1,388 @@
+{
+ "S": {
+  "level_size": 135,
+  "minima": 48,
+  "aut_A_order": 6,
+  "rungs": [
+   {
+    "order": 1,
+    "invariant_minima": 48,
+    "min_closure": 135,
+    "closure_excess": 0,
+    "upper_bound_on_M_H": 135,
+    "closure_distribution": {
+     "135": 48
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 143,
+    "closure_excess": 8,
+    "upper_bound_on_M_H": 143,
+    "closure_distribution": {
+     "143": 2,
+     "145": 6,
+     "147": 10,
+     "149": 20,
+     "151": 8,
+     "153": 2
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 143,
+    "closure_excess": 8,
+    "upper_bound_on_M_H": 143,
+    "closure_distribution": {
+     "143": 2,
+     "145": 6,
+     "147": 10,
+     "149": 20,
+     "151": 8,
+     "153": 2
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 143,
+    "closure_excess": 8,
+    "upper_bound_on_M_H": 143,
+    "closure_distribution": {
+     "143": 2,
+     "145": 6,
+     "147": 10,
+     "149": 20,
+     "151": 8,
+     "153": 2
+    }
+   },
+   {
+    "order": 3,
+    "invariant_minima": 0,
+    "min_closure": 147,
+    "closure_excess": 12,
+    "upper_bound_on_M_H": 147,
+    "closure_distribution": {
+     "147": 6,
+     "150": 6,
+     "153": 12,
+     "156": 18,
+     "159": 6
+    }
+   },
+   {
+    "order": 6,
+    "invariant_minima": 0,
+    "min_closure": 159,
+    "closure_excess": 24,
+    "upper_bound_on_M_H": 159,
+    "closure_distribution": {
+     "159": 30,
+     "165": 18
+    }
+   }
+  ]
+ },
+ "L": {
+  "level_size": 374,
+  "minima": 3264,
+  "aut_A_order": 12,
+  "rungs": [
+   {
+    "order": 1,
+    "invariant_minima": 3264,
+    "min_closure": 374,
+    "closure_excess": 0,
+    "upper_bound_on_M_H": 374,
+    "closure_distribution": {
+     "374": 3264
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 40,
+    "min_closure": 374,
+    "closure_excess": 0,
+    "upper_bound_on_M_H": 374,
+    "closure_distribution": {
+     "374": 40,
+     "376": 128,
+     "378": 176,
+     "380": 180,
+     "382": 220,
+     "384": 336,
+     "386": 556,
+     "388": 728,
+     "390": 588,
+     "392": 256,
+     "394": 52,
+     "396": 4
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 376,
+    "closure_excess": 2,
+    "upper_bound_on_M_H": 376,
+    "closure_distribution": {
+     "376": 4,
+     "378": 38,
+     "380": 116,
+     "381": 40,
+     "382": 206,
+     "383": 252,
+     "384": 252,
+     "385": 600,
+     "386": 216,
+     "387": 696,
+     "388": 140,
+     "389": 424,
+     "390": 78,
+     "391": 140,
+     "392": 32,
+     "393": 24,
+     "394": 6
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 376,
+    "closure_excess": 2,
+    "upper_bound_on_M_H": 376,
+    "closure_distribution": {
+     "376": 4,
+     "378": 38,
+     "380": 116,
+     "381": 40,
+     "382": 206,
+     "383": 252,
+     "384": 252,
+     "385": 600,
+     "386": 216,
+     "387": 696,
+     "388": 140,
+     "389": 424,
+     "390": 78,
+     "391": 140,
+     "392": 32,
+     "393": 24,
+     "394": 6
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 40,
+    "min_closure": 374,
+    "closure_excess": 0,
+    "upper_bound_on_M_H": 374,
+    "closure_distribution": {
+     "374": 40,
+     "376": 128,
+     "378": 176,
+     "380": 180,
+     "382": 220,
+     "384": 336,
+     "386": 556,
+     "388": 728,
+     "390": 588,
+     "392": 256,
+     "394": 52,
+     "396": 4
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 40,
+    "min_closure": 374,
+    "closure_excess": 0,
+    "upper_bound_on_M_H": 374,
+    "closure_distribution": {
+     "374": 40,
+     "376": 128,
+     "378": 176,
+     "380": 180,
+     "382": 220,
+     "384": 336,
+     "386": 556,
+     "388": 728,
+     "390": 588,
+     "392": 256,
+     "394": 52,
+     "396": 4
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 376,
+    "closure_excess": 2,
+    "upper_bound_on_M_H": 376,
+    "closure_distribution": {
+     "376": 4,
+     "378": 38,
+     "380": 116,
+     "381": 40,
+     "382": 206,
+     "383": 252,
+     "384": 252,
+     "385": 600,
+     "386": 216,
+     "387": 696,
+     "388": 140,
+     "389": 424,
+     "390": 78,
+     "391": 140,
+     "392": 32,
+     "393": 24,
+     "394": 6
+    }
+   },
+   {
+    "order": 2,
+    "invariant_minima": 0,
+    "min_closure": 378,
+    "closure_excess": 4,
+    "upper_bound_on_M_H": 378,
+    "closure_distribution": {
+     "378": 54,
+     "380": 276,
+     "382": 606,
+     "384": 792,
+     "386": 732,
+     "388": 504,
+     "390": 234,
+     "392": 60,
+     "394": 6
+    }
+   },
+   {
+    "order": 3,
+    "invariant_minima": 0,
+    "min_closure": 384,
+    "closure_excess": 10,
+    "upper_bound_on_M_H": 384,
+    "closure_distribution": {
+     "384": 36,
+     "387": 324,
+     "390": 990,
+     "393": 1176,
+     "396": 552,
+     "399": 156,
+     "402": 30
+    }
+   },
+   {
+    "order": 4,
+    "invariant_minima": 0,
+    "min_closure": 378,
+    "closure_excess": 4,
+    "upper_bound_on_M_H": 378,
+    "closure_distribution": {
+     "378": 2,
+     "382": 34,
+     "386": 256,
+     "390": 986,
+     "394": 1330,
+     "398": 520,
+     "402": 136
+    }
+   },
+   {
+    "order": 4,
+    "invariant_minima": 0,
+    "min_closure": 378,
+    "closure_excess": 4,
+    "upper_bound_on_M_H": 378,
+    "closure_distribution": {
+     "378": 2,
+     "382": 34,
+     "386": 256,
+     "390": 986,
+     "394": 1330,
+     "398": 520,
+     "402": 136
+    }
+   },
+   {
+    "order": 4,
+    "invariant_minima": 0,
+    "min_closure": 378,
+    "closure_excess": 4,
+    "upper_bound_on_M_H": 378,
+    "closure_distribution": {
+     "378": 2,
+     "382": 34,
+     "386": 256,
+     "390": 986,
+     "394": 1330,
+     "398": 520,
+     "402": 136
+    }
+   },
+   {
+    "order": 6,
+    "invariant_minima": 0,
+    "min_closure": 384,
+    "closure_excess": 10,
+    "upper_bound_on_M_H": 384,
+    "closure_distribution": {
+     "384": 24,
+     "390": 294,
+     "396": 1164,
+     "402": 1782
+    }
+   },
+   {
+    "order": 6,
+    "invariant_minima": 0,
+    "min_closure": 390,
+    "closure_excess": 16,
+    "upper_bound_on_M_H": 390,
+    "closure_distribution": {
+     "390": 96,
+     "396": 1800,
+     "402": 1368
+    }
+   },
+   {
+    "order": 6,
+    "invariant_minima": 0,
+    "min_closure": 390,
+    "closure_excess": 16,
+    "upper_bound_on_M_H": 390,
+    "closure_distribution": {
+     "390": 288,
+     "396": 1392,
+     "402": 1584
+    }
+   },
+   {
+    "order": 12,
+    "invariant_minima": 0,
+    "min_closure": 390,
+    "closure_excess": 16,
+    "upper_bound_on_M_H": 390,
+    "closure_distribution": {
+     "390": 96,
+     "402": 3168
+    }
+   }
+  ]
+ },
+ "theorem": "R upward closed and H <= Aut(A): every h(M) refuses, so cl_H(M) = U_h h(M) is an H-invariant refuser.  Hence (i) min_M |cl_H(M)| is an upper bound on the rung-H minimum, computable with no solver, and (ii) an H-invariant S containing a minimum M has |S| >= |cl_H(M)|, so min_M |cl_H(M)| > |M_H| forbids containment outright.",
+ "provenance": {
+  "generated": "2026-09-10T18:37:25",
+  "machine": "local",
+  "cores": 32,
+  "git_commit": "070be23f6a520c842e65b68bfeec547e0055fb3f",
+  "git_dirty": true,
+  "freeze_commit": null,
+  "config_sha256": null
+ },
+ "producer": "scratchpad/orb2.py against tools/parts_faces.py"
+}
