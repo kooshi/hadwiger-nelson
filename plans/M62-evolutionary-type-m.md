@@ -915,3 +915,80 @@ cannot tell a working search from a stalled one" failure §M3.2 was written to p
 written after §M3.2. The census is being allowed to finish rather than restarted, but the pattern is
 worth the note: the experience pass's rule was applied to the *engine* and not to the *scripts around
 it*.
+
+### §R11 — POROS REVIEW (2026-09-10): the acceptance test had the WRONG FIXED POINT, and the record's own half fails it
+
+Kooshi offered a decorrelated advisor for exactly the situation G51 describes, and it found by
+**reading the code** what no amount of running it would have shown. Full report:
+`plans/POROS-2026-09-10-m62.md`.
+
+**The defect.** `tools/m62_run.py` computes `P_L` and `P_S` **once, on the full arena, and never
+updates them**; the accept branch fires only when a reduced half admits no pattern outside that
+**fixed** set. Since removing vertices can only *grow* a pattern set, the invariant maintained
+across the whole descent is
+
+> `P_{L'} = P_L(the full 5,401-point arena)` — exactly.
+
+So the fixed point is *"the smallest `L` still realising the whole arena's own 55 patterns"*, not
+*"the smallest `L` that `S` still kills"*. `typem.clash` computes the right condition **and is never
+called in the loop**. My own comment conceded the test was "sufficient and not necessary" — that
+undersold it. It is a different fixed point.
+
+**Confirmed, by pointing the instrument at a known positive (G21's own rule, applied to me):**
+
+> **The acceptance test REJECTS Heule-510's own `L`, in 0 seconds.** The descent provably could not
+> have reached even the known 510-vertex object, let alone 509.
+
+The engine had not been launched, so no compute was lost — but the test would have run all night
+measuring itself.
+
+**The repair, which Poros also supplied and is now implemented** (`typem.kills_all_boxes`): the
+exact condition is that `L` must block every **box** `Safe(q)` — for a pattern `q` that `S` can
+impose, a colouring of `L` survives `q` when `colour(u) ≠ q[v]` on every cross edge, which is one
+forbidden colour per endpoint, i.e. **unit clauses**. So
+
+> `L ∪ ρS` is 4-colourable **iff** for some `q ∈ P_S`, `L` admits a colouring surviving `q`.
+
+Acceptance is `|P_S|` independent solver calls on the `L`-only graph, and **a single SAT rejects
+immediately** — which matches the measured cost structure (§R6), since rejections are the cheap
+verdict. Poros's further suggestion, not yet implemented: each UNSAT's **unsat core** is a set of
+`L`-vertices sufficient to block that box, so the minimum `L` is a **minimum hitting set over the
+cores** — generating rather than filtering, which is what §M3 asked for and did not get.
+
+### §R12 — Four more findings from the same review, three of them against me
+
+**(1) G50 in its sharpest form yet: `[Parts2020a]` §2's notation line reads `ρ = exp(i arccos 7/8)`.**
+§M1.0 spent an entire modelling pass deriving that constant and calling it a finding. It is in the
+paper's *notation section*. My §PA re-read covered "§§3–5 and 6" and skipped §2. **The rule that
+exists because of exactly this — read what the search already found — was applied to the sections I
+chose and not to the paper.**
+
+**(2) The base is in the paper in closed form, and §R7's three rebuilds recover a worse version.**
+`[Parts2020a]` §5.6: `B = ⊕⁴H²`, orbits on a disk of radius 2, *"only about 400 such orbits, of which
+about 40 are included in R"*, and *"all useful orbits satisfy the relation `abcd = 0`"* — with the
+coordinates and the order-24 symmetry group given explicitly in §2. Our 948 orbits over 5,401 points
+with two generators is a poorer version of a published construction.
+
+**(3) Pure reduction is what his paper says twice is insufficient.** §5.8: *"the minimal asymmetric
+graph is usually **not** a subgraph of the minimal symmetric graph"*; §6: *"none of the 376-vertex
+graphs is an overgraph of any of the 375-vertex graphs"*. His method **alternates** expansion with
+reduction over an accumulative graph precisely to escape the local minimum phases C/D sit in. He
+also caps his own asks: §5.11, *"the number of vertices is limited to about 1000"* — ours ran at
+5,191–14,346.
+
+**(4) The problem is named and solved in another literature.** "Smallest vertex subset preserving
+unsatisfiability" is **smallest-MUS extraction**; Parts's hyperedges are **minimal correction sets**
+and his subset enumeration is **MUS/MCS hitting-set dualization** (Liffiton–Sakallah), and his
+"8-4-2-1" is QuickXplain/delta-debugging. There is a dedicated algorithm (Ignatiev et al., CP 2015)
+and a tool, `forqes`. **The cost asymmetry §R6 reports as a surprising refutation of my assumption
+is stated in his §5.8** as a named accelerator: *"to get the result True it takes an order of
+magnitude less time than to get the result False."*
+
+**And one wind-egg called, correctly.** §R1 describes the 412-rotation list as "the derivation".
+It is not one yet: admissibility is necessary and not sufficient, **nothing has consumed the list**
+(one `print` at `typem.py:305` is its only reader), and the arena is hard-wired to `ρ₁₅` — the
+rotation every published construction already uses. It may become the milestone's product; it is not
+one now, and §R1's wording is corrected here rather than left standing. **What IS already a
+derivation is smaller and better: the quadrature law explains which cross-edge families a type-M
+rotation can carry and rejects the ones that do not occur** — the mechanism behind a fact the
+record-holder states as an observation and calls essential.

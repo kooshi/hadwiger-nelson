@@ -846,3 +846,42 @@ def preserves_patterns(args):
     cl = side_cnf(A, side) + _blocks(A, ep, P)
     st, _ = sat(cl, A.N * 4, wall=wall)
     return {"unsat": "safe", "sat": "grew", "unknown": "unknown"}[st]
+
+
+# ====================================================================== the EXACT acceptance test
+# The pattern-PRESERVING test (above) is not merely conservative -- it is a different fixed point,
+# and it REJECTS the record's own L in 0 s (M62 §R11). Found by Poros, 2026-09-10, by reading the
+# code rather than the results; confirmed here by pointing the test at a known positive.
+#
+# The exact condition. For q a pattern S can impose on its endpoints, a colouring of L SURVIVES q
+# when no cross edge is monochromatic, i.e. colour(u) != q[v] for every cross edge (u, v). That is a
+# BOX -- one forbidden colour per L-endpoint -- so it is a set of unit clauses, and
+#
+#     L u rho-S is 4-colourable  <=>  for SOME q in P_S, L admits a colouring surviving q.
+#
+# So acceptance is |P_S| independent SAT calls on the L-only graph, and a single SAT REJECTS
+# immediately. That matches the measured cost structure (§R6): rejections are the cheap verdict.
+def survives_box(A, side, cross_edges, ep_index, q, k=4, wall=300.0):
+    """Can `side` be k-coloured with every cross edge avoiding the fixed opposite pattern q?"""
+    from five_dial import sat
+    def var(v, c): return v * k + c + 1
+    cl = side_cnf(A, side, k)
+    for (u, v) in cross_edges:
+        qi = ep_index.get(A.n + v)
+        if qi is None:
+            continue
+        cl.append([-var(u, q[qi])])
+    st, _ = sat(cl, A.N * k, wall=wall)
+    return st                                     # 'sat' = a survivor exists = union 4-colourable
+
+
+def kills_all_boxes(A, side, cross_edges, Sep, PS, wall=300.0):
+    """The EXACT acceptance test: `side` blocks every box of P_S. Returns (bool, verdict, q)."""
+    ep_index = {v: t for t, v in enumerate(Sep)}
+    for q in PS:
+        st = survives_box(A, side, cross_edges, ep_index, q, wall=wall)
+        if st == "sat":
+            return False, "survivor", q
+        if st == "unknown":
+            return False, "unknown", q
+    return True, "blocks-all", None
