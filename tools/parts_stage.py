@@ -42,12 +42,14 @@ class Stage:
       side      -- which half is being reduced, for the record
     """
 
-    def __init__(self, base, L_tuples, S_tuples, side="S", rung=1, pin=True):
+    def __init__(self, base, L_tuples, S_tuples, side="S", rung=1, pin=True, rung_maps=None):
         if side not in ("L", "S"):
             raise ValueError("side is 'L' or 'S' -- L and S are minimized separately against a "
                              "frozen companion ([Parts2020a] §5.3)")
         keys = sorted(set(L_tuples) | set(S_tuples))
-        self.base, self.side, self.rung = base, side, rung
+        self.base, self.side = base, side
+        self.rung_maps = rung_maps
+        self.rung = len(rung_maps) if rung_maps is not None else rung
         self.keys = keys
         self.ix = {t: i for i, t in enumerate(keys)}
         pts = [P.kpoint(t) for t in keys]
@@ -67,7 +69,7 @@ class Stage:
         self.Lbits, self.Sbits = Lbits, Sbits
         deletable = Sbits if side == "S" else (Lbits & ~(1 << self.A.centre))
         self.fixed = self.present & ~deletable
-        self.atoms, self.atom_labels = self._atoms(deletable, rung)
+        self.atoms, self.atom_labels = self._atoms(deletable, self.rung)
         self.pin = tuple(self.ix[t] for t in PIN_TRIANGLE) if pin else ()
         if pin:
             for t in PIN_TRIANGLE:
@@ -77,9 +79,41 @@ class Stage:
 
     def _atoms(self, deletable, rung):
         """The out-orbits of the deletable vertices. rung 1 = singletons; rung 24 = base orbits;
-        anything between = the orbits of the corresponding subgroup of <zeta6> x| Gal."""
+        any other rung = the orbits of the explicit group passed as `rung_maps`.
+
+        **Why an atom construction and not symmetry clauses on the rung-1 CNF.** Both express the
+        same restriction, and the subplan first specified the clause form; implementation found the
+        orbit form is strictly cheaper, because `reduce_stage` already weights an atom by
+        `bit_count()` — so an orbit of `k` vertices costs `k` automatically, the RC2 objective is
+        unchanged, and phase 1, the correction sets, the pin and its soundness control all carry
+        over verbatim. The clause form would have needed a new weight accounting for the same
+        answer. Recorded because it is a correction to a committed design, not a free choice.
+
+        `rung_maps` is a list of lattice-tuple permutations of the base -- necessarily a subgroup of
+        the STAGE's stabiliser `Aut(A)` (order 12 and 6 on M63's two stages), never of the base
+        group (order 24): `parts_faces.stage_symmetry` measures it and is the only thing that should
+        build it."""
         n = self.A.n
         verts = [v for v in range(2 * n) if (deletable >> v) & 1]
+        if self.rung_maps is not None:
+            buck, seen = [], {}
+            for v in verts:
+                if v in seen:
+                    continue
+                side_off, t = (v // n) * n, self.keys[v % n]
+                orb = {side_off + self.ix[g[t]] for g in self.rung_maps}
+                if not orb <= set(verts):
+                    raise ValueError(
+                        f"rung_maps does not preserve the deletable set (vertex {v}); the rung must "
+                        f"be a subgroup of the stage's own stabiliser")
+                m = 0
+                for w in orb:
+                    seen[w] = True
+                    m |= 1 << w
+                buck.append((min(orb), m, sorted(orb)))
+            buck.sort()
+            return ([m for _, m, _ in buck],
+                    [[self.side, list(self.keys[o[0] % n]), len(o)] for _, _, o in buck])
         if rung == 1:
             return [1 << v for v in verts], [[self.side, self.keys[v % n]] for v in verts]
         if rung == 24:
@@ -156,7 +190,7 @@ class Stage:
                                                        "the pin cannot restrict the search"}
         bare = Stage(self.base, [self.keys[v] for v in range(n) if (self.Lbits >> v) & 1],
                      [self.keys[v - n] for v in range(n, 2 * n) if (self.Sbits >> v) & 1],
-                     side=self.side, rung=self.rung, pin=False)
+                     side=self.side, rung=self.rung, pin=False, rung_maps=self.rung_maps)
         c1, s1, _, _ = self.cnf(); self._sel = s1
         c2, s2, _, _ = bare.cnf(); bare._sel = s2
         allA = list(range(len(self.atoms)))

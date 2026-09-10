@@ -1,0 +1,1031 @@
+{
+ "S": {
+  "level": {
+   "size": 135,
+   "atoms": 165,
+   "minima": {
+    "n": 48,
+    "method": "exhaustive-level",
+    "of": null
+   }
+  },
+  "atom_classes": {
+   "necessary": 105,
+   "in_observed_pairs": 30,
+   "residual": 30,
+   "unused": 0,
+   "arithmetic": "105 + 15 + 15 of 30 = 135"
+  },
+  "exclusions": {
+   "observed": {
+    "n": 15,
+    "method": "exhaustive-level",
+    "of": 48
+   },
+   "derived": {
+    "n": 9,
+    "method": "exhaustive",
+    "of": 15
+   },
+   "not_derived": [
+    [
+     5,
+     139
+    ],
+    [
+     14,
+     141
+    ],
+    [
+     17,
+     151
+    ],
+    [
+     30,
+     157
+    ],
+    [
+     59,
+     60
+    ],
+    [
+     99,
+     110
+    ]
+   ],
+   "pairs": [
+    [
+     0,
+     8,
+     "derived-by-ask"
+    ],
+    [
+     3,
+     41,
+     "derived-by-ask"
+    ],
+    [
+     13,
+     65,
+     "derived-by-ask"
+    ],
+    [
+     25,
+     134,
+     "derived-by-ask"
+    ],
+    [
+     31,
+     140,
+     "derived-by-ask"
+    ],
+    [
+     47,
+     111,
+     "derived-by-ask"
+    ],
+    [
+     104,
+     150,
+     "derived-by-ask"
+    ],
+    [
+     118,
+     162,
+     "derived-by-ask"
+    ],
+    [
+     160,
+     164,
+     "derived-by-ask"
+    ]
+   ]
+  },
+  "profiles": {
+   "orbits": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     0,
+     2,
+     2,
+     0
+    ],
+    [
+     0,
+     2,
+     4,
+     6
+    ],
+    [
+     0,
+     2,
+     6,
+     0
+    ],
+    [
+     0,
+     4,
+     0,
+     0
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     6,
+     0,
+     0,
+     6
+    ],
+    [
+     6,
+     0,
+     4,
+     6
+    ],
+    [
+     6,
+     2,
+     0,
+     0
+    ],
+    [
+     6,
+     2,
+     4,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "varying": [
+    [
+     0,
+     4,
+     0,
+     0
+    ],
+    [
+     6,
+     0,
+     4,
+     6
+    ],
+    [
+     6,
+     2,
+     4,
+     0
+    ]
+   ],
+   "lo": [
+    12,
+    6,
+    3,
+    12,
+    24,
+    12,
+    4,
+    12,
+    12,
+    7,
+    12,
+    14,
+    3
+   ],
+   "hi": [
+    12,
+    6,
+    3,
+    12,
+    24,
+    12,
+    5,
+    12,
+    12,
+    9,
+    12,
+    16,
+    3
+   ],
+   "distinct": 4,
+   "multiplicity": {
+    "[12, 6, 3, 12, 24, 12, 4, 12, 12, 7, 12, 16, 3]": 12,
+    "[12, 6, 3, 12, 24, 12, 4, 12, 12, 8, 12, 15, 3]": 18,
+    "[12, 6, 3, 12, 24, 12, 4, 12, 12, 9, 12, 14, 3]": 6,
+    "[12, 6, 3, 12, 24, 12, 5, 12, 12, 7, 12, 15, 3]": 12
+   }
+  },
+  "shape": {
+   "affine_dim": 2,
+   "ambient_dim": 3,
+   "fill": "4/5 = 0.800 within aff(Prof) (dim 2 of 3); 4/5 = 0.800 against the full box \u2014 the second number is a statement about the ambient dimension, not about the set",
+   "hull": "hull holds 4, Prof 4, 0 in the hull and not realised  -- WEAK: only 1 point(s) the test could ever have got wrong",
+   "hull_unexplained": [],
+   "exchange_classes": [
+    [
+     [
+      [
+       0,
+       4,
+       0,
+       0
+      ],
+      [
+       6,
+       0,
+       4,
+       6
+      ],
+      [
+       6,
+       2,
+       4,
+       0
+      ]
+     ],
+     27
+    ]
+   ],
+   "order_ideal": {
+    "orientations": [
+     [
+      1,
+      1
+     ]
+    ],
+    "null_per_orientation": 2,
+    "population": 15
+   }
+  },
+  "producer": "tools/parts_faces.py:analyse",
+  "stage_fingerprint": "5f927abee3ee5a093e2600200eb315cc",
+  "base_fingerprint": "3946d036a2525ae8c679275ed10e27c1",
+  "provenance": {
+   "generated": "2026-09-10T18:15:11",
+   "machine": "local",
+   "cores": 32,
+   "git_commit": "12029a99fb62f787a0e04cfafe1c95b08ae2fe15",
+   "git_dirty": true,
+   "freeze_commit": null,
+   "config_sha256": null
+  },
+  "oracle": {
+   "colourable": {
+    "n": 9,
+    "mean_s": 0.255
+   },
+   "refusing": {
+    "n": 6,
+    "mean_s": 1.534
+   },
+   "undecided": 0
+  },
+  "symmetry": {
+   "aut_A_order": 6,
+   "subgroups": 6,
+   "census": [
+    {
+     "order": 1,
+     "invariant": 48,
+     "profiles": 4,
+     "render": "|H| =  1  invariant members of the 135-level: 48/48, 4 profiles"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 135-level: 0/48, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 135-level: 0/48, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 135-level: 0/48, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 3,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  3  invariant members of the 135-level: 0/48, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 6,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  6  invariant members of the 135-level: 0/48, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    }
+   ]
+  }
+ },
+ "L": {
+  "level": {
+   "size": 374,
+   "atoms": 402,
+   "minima": {
+    "n": 3264,
+    "method": "exhaustive-level",
+    "of": null
+   }
+  },
+  "atom_classes": {
+   "necessary": 336,
+   "in_observed_pairs": 48,
+   "residual": 18,
+   "unused": 0,
+   "arithmetic": "336 + 24 + 14 of 18 = 374"
+  },
+  "exclusions": {
+   "observed": {
+    "n": 24,
+    "method": "exhaustive-level",
+    "of": 3264
+   },
+   "derived": {
+    "n": 24,
+    "method": "exhaustive",
+    "of": 24
+   },
+   "not_derived": [],
+   "pairs": [
+    [
+     4,
+     52,
+     "derived-by-ask"
+    ],
+    [
+     5,
+     51,
+     "derived-by-ask"
+    ],
+    [
+     6,
+     13,
+     "derived-by-ask"
+    ],
+    [
+     9,
+     18,
+     "derived-by-ask"
+    ],
+    [
+     36,
+     40,
+     "derived-by-ask"
+    ],
+    [
+     38,
+     42,
+     "derived-by-ask"
+    ],
+    [
+     59,
+     70,
+     "derived-by-ask"
+    ],
+    [
+     61,
+     72,
+     "derived-by-ask"
+    ],
+    [
+     90,
+     326,
+     "derived-by-ask"
+    ],
+    [
+     101,
+     314,
+     "derived-by-ask"
+    ],
+    [
+     123,
+     343,
+     "derived-by-ask"
+    ],
+    [
+     135,
+     364,
+     "derived-by-ask"
+    ],
+    [
+     170,
+     177,
+     "derived-by-ask"
+    ],
+    [
+     190,
+     197,
+     "derived-by-ask"
+    ],
+    [
+     257,
+     272,
+     "derived-by-ask"
+    ],
+    [
+     259,
+     274,
+     "derived-by-ask"
+    ],
+    [
+     377,
+     388,
+     "derived-by-ask"
+    ],
+    [
+     379,
+     390,
+     "derived-by-ask"
+    ],
+    [
+     392,
+     445,
+     "derived-by-ask"
+    ],
+    [
+     403,
+     444,
+     "derived-by-ask"
+    ],
+    [
+     405,
+     409,
+     "derived-by-ask"
+    ],
+    [
+     411,
+     415,
+     "derived-by-ask"
+    ],
+    [
+     433,
+     441,
+     "derived-by-ask"
+    ],
+    [
+     434,
+     442,
+     "derived-by-ask"
+    ]
+   ]
+  },
+  "profiles": {
+   "orbits": [
+    [
+     0,
+     0,
+     2,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     0,
+     0,
+     12,
+     0
+    ],
+    [
+     0,
+     2,
+     2,
+     0
+    ],
+    [
+     0,
+     2,
+     6,
+     0
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     2,
+     0,
+     2,
+     4
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     2,
+     0,
+     6,
+     4
+    ],
+    [
+     2,
+     0,
+     8,
+     2
+    ],
+    [
+     4,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     0,
+     0,
+     4
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     4,
+     0,
+     6,
+     2
+    ],
+    [
+     4,
+     0,
+     10,
+     2
+    ],
+    [
+     6,
+     0,
+     0,
+     2
+    ],
+    [
+     6,
+     0,
+     0,
+     6
+    ],
+    [
+     6,
+     0,
+     10,
+     0
+    ],
+    [
+     6,
+     2,
+     0,
+     0
+    ],
+    [
+     6,
+     2,
+     4,
+     0
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     8,
+     0,
+     2,
+     2
+    ],
+    [
+     8,
+     0,
+     4,
+     4
+    ],
+    [
+     8,
+     0,
+     6,
+     2
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ],
+    [
+     10,
+     0,
+     2,
+     4
+    ],
+    [
+     10,
+     0,
+     4,
+     2
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ],
+    [
+     14,
+     0,
+     0,
+     2
+    ],
+    [
+     14,
+     0,
+     2,
+     4
+    ]
+   ],
+   "varying": [
+    [
+     2,
+     0,
+     6,
+     4
+    ],
+    [
+     4,
+     0,
+     10,
+     2
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     10,
+     0,
+     2,
+     4
+    ]
+   ],
+   "lo": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    12,
+    12,
+    12,
+    12,
+    10,
+    24,
+    0,
+    12,
+    4,
+    12,
+    24,
+    12,
+    2,
+    12,
+    12,
+    12,
+    12,
+    24,
+    6,
+    24,
+    12,
+    12,
+    6,
+    6,
+    12,
+    6,
+    12,
+    6,
+    12
+   ],
+   "hi": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    12,
+    12,
+    12,
+    12,
+    10,
+    24,
+    6,
+    12,
+    4,
+    12,
+    24,
+    12,
+    6,
+    12,
+    12,
+    12,
+    12,
+    24,
+    10,
+    24,
+    12,
+    12,
+    6,
+    12,
+    12,
+    6,
+    12,
+    6,
+    12
+   ],
+   "distinct": 27,
+   "multiplicity": {
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 0, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 12, 12, 6, 12, 6, 12]": 6,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 0, 12, 4, 12, 24, 12, 3, 12, 12, 12, 12, 24, 9, 24, 12, 12, 6, 12, 12, 6, 12, 6, 12]": 24,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 0, 12, 4, 12, 24, 12, 4, 12, 12, 12, 12, 24, 8, 24, 12, 12, 6, 12, 12, 6, 12, 6, 12]": 36,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 0, 12, 4, 12, 24, 12, 5, 12, 12, 12, 12, 24, 7, 24, 12, 12, 6, 12, 12, 6, 12, 6, 12]": 24,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 0, 12, 4, 12, 24, 12, 6, 12, 12, 12, 12, 24, 6, 24, 12, 12, 6, 12, 12, 6, 12, 6, 12]": 6,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 1, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 11, 12, 6, 12, 6, 12]": 60,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 1, 12, 4, 12, 24, 12, 3, 12, 12, 12, 12, 24, 9, 24, 12, 12, 6, 11, 12, 6, 12, 6, 12]": 156,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 1, 12, 4, 12, 24, 12, 4, 12, 12, 12, 12, 24, 8, 24, 12, 12, 6, 11, 12, 6, 12, 6, 12]": 180,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 1, 12, 4, 12, 24, 12, 5, 12, 12, 12, 12, 24, 7, 24, 12, 12, 6, 11, 12, 6, 12, 6, 12]": 108,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 1, 12, 4, 12, 24, 12, 6, 12, 12, 12, 12, 24, 6, 24, 12, 12, 6, 11, 12, 6, 12, 6, 12]": 24,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 2, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 10, 12, 6, 12, 6, 12]": 198,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 2, 12, 4, 12, 24, 12, 3, 12, 12, 12, 12, 24, 9, 24, 12, 12, 6, 10, 12, 6, 12, 6, 12]": 336,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 2, 12, 4, 12, 24, 12, 4, 12, 12, 12, 12, 24, 8, 24, 12, 12, 6, 10, 12, 6, 12, 6, 12]": 330,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 2, 12, 4, 12, 24, 12, 5, 12, 12, 12, 12, 24, 7, 24, 12, 12, 6, 10, 12, 6, 12, 6, 12]": 180,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 2, 12, 4, 12, 24, 12, 6, 12, 12, 12, 12, 24, 6, 24, 12, 12, 6, 10, 12, 6, 12, 6, 12]": 36,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 3, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 9, 12, 6, 12, 6, 12]": 312,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 3, 12, 4, 12, 24, 12, 3, 12, 12, 12, 12, 24, 9, 24, 12, 12, 6, 9, 12, 6, 12, 6, 12]": 288,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 3, 12, 4, 12, 24, 12, 4, 12, 12, 12, 12, 24, 8, 24, 12, 12, 6, 9, 12, 6, 12, 6, 12]": 240,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 3, 12, 4, 12, 24, 12, 5, 12, 12, 12, 12, 24, 7, 24, 12, 12, 6, 9, 12, 6, 12, 6, 12]": 120,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 3, 12, 4, 12, 24, 12, 6, 12, 12, 12, 12, 24, 6, 24, 12, 12, 6, 9, 12, 6, 12, 6, 12]": 24,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 4, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 8, 12, 6, 12, 6, 12]": 264,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 4, 12, 4, 12, 24, 12, 3, 12, 12, 12, 12, 24, 9, 24, 12, 12, 6, 8, 12, 6, 12, 6, 12]": 84,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 4, 12, 4, 12, 24, 12, 4, 12, 12, 12, 12, 24, 8, 24, 12, 12, 6, 8, 12, 6, 12, 6, 12]": 54,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 4, 12, 4, 12, 24, 12, 5, 12, 12, 12, 12, 24, 7, 24, 12, 12, 6, 8, 12, 6, 12, 6, 12]": 24,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 4, 12, 4, 12, 24, 12, 6, 12, 12, 12, 12, 24, 6, 24, 12, 12, 6, 8, 12, 6, 12, 6, 12]": 6,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 5, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 7, 12, 6, 12, 6, 12]": 120,
+    "[6, 6, 6, 6, 6, 12, 12, 12, 12, 10, 24, 6, 12, 4, 12, 24, 12, 2, 12, 12, 12, 12, 24, 10, 24, 12, 12, 6, 6, 12, 6, 12, 6, 12]": 24
+   }
+  },
+  "shape": {
+   "affine_dim": 2,
+   "ambient_dim": 4,
+   "fill": "27/35 = 0.771 within aff(Prof) (dim 2 of 4); 27/135 = 0.200 against the full box \u2014 the second number is a statement about the ambient dimension, not about the set",
+   "hull": "hull holds 29, Prof 27, 2 in the hull and not realised",
+   "hull_unexplained": [
+    [
+     5,
+     3,
+     9,
+     7
+    ],
+    [
+     5,
+     4,
+     8,
+     7
+    ]
+   ],
+   "exchange_classes": [
+    [
+     [
+      [
+       2,
+       0,
+       6,
+       4
+      ],
+      [
+       10,
+       0,
+       2,
+       4
+      ]
+     ],
+     12
+    ],
+    [
+     [
+      [
+       4,
+       0,
+       10,
+       2
+      ],
+      [
+       6,
+       2,
+       8,
+       0
+      ]
+     ],
+     12
+    ]
+   ],
+   "order_ideal": {
+    "orientations": [
+     [
+      1,
+      1
+     ]
+    ],
+    "null_per_orientation": 17,
+    "population": 23535820
+   }
+  },
+  "producer": "tools/parts_faces.py:analyse",
+  "stage_fingerprint": "0700718c70107448b8658a630c5456ee",
+  "base_fingerprint": "3946d036a2525ae8c679275ed10e27c1",
+  "provenance": {
+   "generated": "2026-09-10T18:15:19",
+   "machine": "local",
+   "cores": 32,
+   "git_commit": "12029a99fb62f787a0e04cfafe1c95b08ae2fe15",
+   "git_dirty": true,
+   "freeze_commit": null,
+   "config_sha256": null
+  },
+  "oracle": {
+   "colourable": {
+    "n": 24,
+    "mean_s": 0.226
+   },
+   "refusing": {
+    "n": 0,
+    "mean_s": 0.0
+   },
+   "undecided": 0
+  },
+  "symmetry": {
+   "aut_A_order": 12,
+   "subgroups": 16,
+   "census": [
+    {
+     "order": 1,
+     "invariant": 3264,
+     "profiles": 27,
+     "render": "|H| =  1  invariant members of the 374-level: 3264/3264, 27 profiles"
+    },
+    {
+     "order": 2,
+     "invariant": 40,
+     "profiles": 9,
+     "render": "|H| =  2  invariant members of the 374-level: 40/3264, 9 profiles"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 2,
+     "invariant": 40,
+     "profiles": 9,
+     "render": "|H| =  2  invariant members of the 374-level: 40/3264, 9 profiles"
+    },
+    {
+     "order": 2,
+     "invariant": 40,
+     "profiles": 9,
+     "render": "|H| =  2  invariant members of the 374-level: 40/3264, 9 profiles"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 2,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  2  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 3,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  3  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 4,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  4  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 4,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  4  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 4,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  4  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 6,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  6  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 6,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  6  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 6,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| =  6  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    },
+    {
+     "order": 12,
+     "invariant": 0,
+     "profiles": 0,
+     "render": "|H| = 12  invariant members of the 374-level: 0/3264, 0 profiles   -> this rung's own minimum is LARGER (by an unmeasured amount)"
+    }
+   ]
+  }
+ }
+}

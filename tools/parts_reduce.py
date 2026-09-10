@@ -230,7 +230,18 @@ def reduce_stage(stage, wall=600.0, max_minima=0, log=print, checkpoint=None,
         "A_atoms": len(Aatoms),
         "minima": [sorted(x) for x in E],
         "A": Aatoms,
+        # THE SETS THEMSELVES, not only their cardinalities.  Until 2026-09-10 this field held
+        # counts, `Y` was computed at ~10 minutes a side and thrown away, and M64's whole
+        # explanatory programme -- which facet, which exclusion, which layer kills which profile --
+        # had nothing to read.  `Y` is the object; the census is a view of it.
         "hypergraph": {"degree_1": len(crit), "correction_sets": len(corr),
+                       "sets": sorted((sorted(c) for c in corr), key=lambda c: (len(c), c)),
+                       "harvest": R.asdict(R.Count(len(corr), "harvested")),
+                       "note": "harvested lazily, so this is a SUBSET of the true minimal "
+                               "correction sets; every hitting-set bound over it is a lower bound, "
+                               "closed by the SAT step (M63 section O(1)).  Measured on the two M63 "
+                               "stages: the degree-1 layer here missed 9 and 24 of the necessary "
+                               "atoms that the complete level set exhibits.",
                        "by_size": dict(sorted(defaultdict(int, {
                            k: sum(1 for c in corr if len(c) == k)
                            for k in sorted({len(c) for c in corr})}).items()))},

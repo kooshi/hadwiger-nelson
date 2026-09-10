@@ -426,3 +426,96 @@ must flip a verdict.
 
 **Data:** `data/m62/m63-S166-reduction.json`, `m63-L451-reduction.json` (the two complete level sets),
 `data/m62/parts-ref11/JP/Large/` (his 43 exact objects), `data/m62/parts-table2-orbit-fillings.json`.
+
+---
+
+## §R — Results
+
+*Written as each phase closed. Every number carries its enumeration; every bound carries its rung.*
+
+### §R1 — THE DECISIVE EXPERIMENT: overcompression measured, at his own two vertex counts
+
+`[Parts2020a]` §6, on his own search: ***"none of the 376-vertex graphs is an overgraph of any of
+the 375-vertex graphs"***. He states it as a nuisance of his procedure and does not explain it.
+
+**Reproduced here as a statement about symmetry rungs, from an independent computation, at exactly
+375 and 376.** The reduction was run at four rungs of the L stage's own stabiliser `Aut(A)`
+(order 12, dihedral — **P7 met** in its order half), each to a **closed bound with zero undecided
+asks**, each level `exhaustive-level`:
+
+| rung | \|H\| | atoms | minimum | **vertices** | minima (complete) | **contains a rung-1 minimum** |
+|---|---|---|---|---|---|---|
+| trivial | 1 | 450 | 374 | **375** | 3,264 | — |
+| **live involution** (40 invariant members at the 374-level) | 2 | 232 | 374 | **375** | **40** | **40 of 40** |
+| **dead involution** (0 invariant members) | 2 | 237 | 375 | **376** | **1,302** | **0 of 1,302** |
+| **full stabiliser** | 12 | 47 | 378 | **379** | **4** | **0 of 4** |
+
+**The positive control is the row that makes the rest readable.** The live involution's rung was
+predicted, before it ran, to return the rung-1 minimum and to contain trivially — because the
+rung-1 level set has exactly 40 members invariant under it, counted independently by
+`RungCensus` with no solver. It returned **375 vertices, exactly 40 minima, and 40 of 40
+containments**. The instrument agrees with the census on a number the census computed a different
+way.
+
+**Then the finding.** One step of symmetry in the *other* involution class costs **one vertex** —
+376 against 375 — and **not one of its 1,302 minima contains any of the 3,264 minima at 375**;
+that is 4.25 million containment tests, all negative. The full stabiliser costs **four** vertices
+and its four minima contain nothing either. **So Parts's sentence is not a fact about his search:
+it is what a symmetry rung does to a covering problem, and the rung whose invariant level is empty
+is exactly the rung whose minimum sits above and outside.**
+
+Total compute for all four rungs: **195 seconds, one core.**
+
+**Predictions scored.** **P3 met** (containment fails, 0 of 1,302 and 0 of 4). **P2 met with its
+number reported against the registration**: it asked for a dead rung whose minimum is **≥ 2**
+vertices above rung 1, and the full stabiliser gives **+4** — but the *smallest* dead rung gives
+**+1**, so the registered threshold is met by one rung and missed by another, and the honest form
+is *the gap is 1 at the cheapest dead rung and 4 at the full one*. **P7 met** in its order half;
+the conjugacy of the three live involutions is not yet checked.
+
+**What this does NOT say, and §6(4) forbids inferring:** an empty invariant level says the rung's
+minimum is larger, never by how much — the +1 and +4 above are *measured*, one rung at a time, and
+nothing here predicts the twelve other dead rungs.
+
+### §R2 — The decomposition, reproduced by the instrument on both complete level sets
+
+`tools/parts_faces.py`, **19 planted controls, all fire** (`--self-test`), including the facet bug
+that inflated a hull count during subplanning. Run on both M63 level sets with derivation by ask:
+
+| | S (136-vertex level) | L (375-vertex level) |
+|---|---|---|
+| atoms | 165 | 402 |
+| **necessary + paired + residual** | 105 + 30 + 30 | 336 + 48 + 18 |
+| **every minimum is** | 105 + 15 + **15 of 30** = 135 | 336 + 24 + **14 of 18** = 374 |
+| exclusive pairs **observed** | 15 | 24 |
+| exclusive pairs **derived by ask** | **9** | **24** |
+| **not derived** | **6** | 0 |
+| affine dim of `Prof` (of ambient) | 2 of 3 | 2 of 4 |
+| fill within `aff(Prof)` | **0.800** | **0.771** |
+| exchange classes | **one of size 3**, sum 27 | **two of size 2**, each sum 12 |
+| `conv(Prof) ∩ ℤ` vs `Prof` | 4 vs 4 — **WEAK, 1 opportunity** | 29 vs 27, unexplained `(5,3,9,7)`, `(5,4,8,7)` |
+| **order ideal** | yes, 1 of 4 orientations; **null 2 of 15 — not discriminating** | yes, 1 of 4; **null 17 of 23,535,820, `p ≤ 2.9 × 10⁻⁶`** |
+
+**P1 met** (9 derived and 6 not, reproduced). **P4 met on both sides**, and the instrument reports
+the S side's null as too small to mean anything rather than counting it as a pass. **P8 met** — the
+S profile map does not factor through its matching.
+
+### §R3 — Phase A: `Y` is an artifact
+
+`reduce_stage` now stores the harvested correction sets themselves beside their census, with the
+laziness note attached. Every record is regenerated; the pre-change records are kept as
+`*.pre-Y.json`, since they are what §R1 and §R2 were computed from.
+
+### §R4 — Two design corrections found at implementation
+
+1. **The rung is an atom construction, not a set of symmetry clauses.** §4 phase C2 specified
+   `sel[a] ↔ sel[g(a)]` on the rung-1 CNF. Implementation found the orbit form strictly cheaper:
+   `reduce_stage` already weights an atom by its vertex count, so an H-orbit costs its size for
+   free, and phase 1, the correction sets, the pin and its soundness control all carry over
+   unchanged — where the clause form needed a new weight accounting for the same answer. The clause
+   generator was written, found unused, and **deleted**; the reason is recorded in
+   `Stage._atoms`'s docstring so nobody re-derives it.
+2. **An exchange class of size `k` contributes `k − 1` free coordinates, not one.** The first
+   version took one representative per class, which gave the S side a single free coordinate and
+   made the order-ideal test **decline on a set it should have decided**. Caught because the S row
+   came back empty where the L row did not. Now a control.
