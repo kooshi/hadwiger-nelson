@@ -3915,6 +3915,25 @@ pattern) and never accumulate one during a kernel evaluation. Two corollaries: `
 `Nat` **literal** costs ~2.3 KB of olean while plain data in a literal tree costs ~145 bytes per node,
 so pack many values into few big `Nat`s rather than emitting one literal per value.
 
+**`grep -E` on this machine is `ugrep`, not GNU grep, and it silently UNDER-MATCHES a common
+pattern.** Alternation inside a repeated group fails where the same pattern without the alternation
+succeeds:
+
+```
+^\s*(private )*theorem              matches `private theorem foo`
+^\s*(private |protected )*theorem   DOES NOT MATCH the same line
+```
+
+Measured 2026-09-09: an inventory of this library's Lean declarations written with the second shape
+returned **4,957 names where the true count is 5,490** — a silent 10% undercount, which then
+reported two declarations as deleted that were sitting in the file, and would have reported a clean
+bill on any that really had been. **Use `grep -P` (this build has `pcre2jit`) for anything whose
+count you intend to believe**, and never a bare `grep -E` alternation-in-a-star. The gate scripts
+are unaffected — checked — because their alternations (`^(VACUOUS|STALE) `) are not inside a
+repetition. *This is `G21` wearing a tool's clothes: the negative measured the instrument. It cost
+one wrong audit result and nearly cost a real one, because a 10%-blind extractor that reports
+"2 lost" reads exactly like a 100%-correct one.*
+
 **A failed `exact?` is not an absence.** It proves the *shape you asked for* was not found. Vary the
 statement — `= true` versus `decide (…)`, an `iff` versus an implication — before concluding Mathlib
 lacks something. `Nat.testBit_two_pow_sub_one` was reported missing here on exactly that error.
