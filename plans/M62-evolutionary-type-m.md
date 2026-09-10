@@ -598,3 +598,88 @@ Yes, and that is the strongest evidence the model is intrinsic rather than fitte
 FS-6 wants the same search one colour up over a 5-sealed field: **the genome, the arena, the
 operators and the cache are unchanged**; the colour count is a parameter and the field lives in the
 base construction. Nothing in this representation knows it is working at four colours.
+
+---
+
+## §M5 — Ferrous execution modeling pass (parallelism and invariants, 2026-09-09)
+
+### §M5.1 — The invariant that resolves "exact resume" against "full parallelism"
+
+The two hard constraints look opposed. They are not, and one sentence separates them:
+
+> **Evaluating a candidate is a pure function of `(arena, candidate, budget)`.**
+
+So determinism belongs to the *decisions*, and freedom belongs to the *schedule*. Each generation is
+three phases with the serialization exactly where the dependencies already force it:
+
+| phase | order | parallel? |
+|---|---|---|
+| **breed** — `(population, RNG state) → next genomes` | deterministic, pure bit-ops, no evaluation | no, and it costs microseconds |
+| **evaluate** — `genomes → verdicts` | **an antichain — genomes are independent** | fully, work-stealing |
+| **select** — `(genomes, verdicts) → survivors` | deterministic, **total order with fingerprint tie-break** so equal fitness still orders stably | no |
+
+**Invariant I3 (determinism):** the population at generation `g` is a function of `(seed, g, arena)`.
+**Checked, not assumed** — each checkpoint stores a population digest, and a resumed run recomputes
+it and compares. "Exact resume" becomes a comparison rather than a hope.
+
+### §M5.2 — The heterogeneity constraint, and the trap inside the obvious fix
+
+Constraint (2) says a generation must not block on one candidate, so the obvious fix is a wall-clock
+timeout. **That breaks I3**: a candidate that times out on one machine and finishes on another makes
+the population diverge, and the divergence is silent.
+
+> **Budget in solver conflicts, not seconds.** A conflict limit is machine-independent and, with the
+> solver version pinned (the toolchain ships `cadical`), makes `UNDECIDED-AT-CAP` a *stable verdict
+> at that budget* rather than a property of the afternoon.
+
+The budget is therefore part of the cache key `(candidate fp, arena fp, budget)` — **invariant I4**:
+a verdict computed under one budget is never silently reused under another.
+
+The heterogeneity then mostly evaporates for a second reason: the residue-composition filter and the
+greedy pass are microseconds, so only a handful of each generation's candidates ever reach the
+solver. The generation's makespan is bounded by the *budget*, not by the sum over the population.
+
+### §M5.3 — The shrink phase, designed around M52's measured wall rather than into it
+
+WO-14 measured that accepted deletions are sequential whatever the worker count — a refutation
+against a stale snapshot licenses nothing — at two minutes per drop on twelve workers. The named
+repair was chunking; here it is the design from the start:
+
+- **Propose a chunk of `k` deletions and test the chunk in one call.** UNSAT accepts all `k`; SAT
+  bisects. That is delta-debugging (`ddmin`), turning `n` sequential asks into `O(k log n)`, and the
+  M49/M50 parallel-ddmin implementation already exists.
+- **Disjoint chunks are independent**, so proposals parallelize even though *commits* serialize.
+- **Measure:** `|present|` strictly decreases per accepted chunk, so the phase terminates — the local
+  obligation, named, rather than "it obviously finishes".
+
+### §M5.4 — Coordination placed where the dependencies already force it
+
+The one shared mutable object is the evaluation cache. Rather than locking it on the hot path:
+
+- workers **read** from an immutable snapshot taken at the generation barrier;
+- new verdicts go to a lock-free append queue;
+- the queue is **merged at the barrier** — the serialization point that `breed`/`select` already
+  require.
+
+No lock is added anywhere the dependency order did not already have one, which is this pass's whole
+standard.
+
+### §M5.5 — The invariants, each with how it is checked
+
+| # | invariant | checked by |
+|---|---|---|
+| I1 | centre bit set, S-side centre bit clear, `present ⊆ valid` | `debug_assert` on construction; mask test at each generation barrier |
+| I2 | **elitism** — best feasible size never worsens | asserted at `select`; a violation is a selection bug, not noise |
+| I3 | population digest is a function of `(seed, g)` | recomputed and compared on every resume (§M5.1) |
+| I4 | a cached verdict is reused only at matching `(cand, arena, budget)` | the key *is* the triple; a mismatch is a miss |
+| I5 | the live control ranks feasible **every generation** | §M3.4 — halts loudly, does not warn |
+| I6 | **evaluation is pure** — the same key twice gives the same verdict | with small probability, re-evaluate a cached key and compare. A few percent of cost, and it is the only thing that would catch solver nondeterminism or a corrupted cache before they silently poison every downstream generation |
+
+I6 is the one that would not have been written without this pass. Every other invariant guards a
+mistake; I6 guards the *assumption the other five rest on*.
+
+### §M5.6 — Termination, stated rather than assumed
+
+Shrink terminates on a strictly decreasing `|present|`. The rotation enumeration is `|B|²`, finite.
+**The GA has no monotone measure** — it is stochastic, bounded by generation count, and will be
+**reported as bounded, never as converged** (§3's failure clause).
