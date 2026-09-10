@@ -885,3 +885,49 @@ def kills_all_boxes(A, side, cross_edges, Sep, PS, wall=300.0):
         if st == "unknown":
             return False, "unknown", q
     return True, "blocks-all", None
+
+
+# ====================================================================== incremental enumeration
+# MEASURED bottleneck: every walled `sat()` writes ~190k clauses to disk and spawns cadical, so a
+# pattern enumeration paid that once per pattern. Incremental in-process solving builds the CNF ONCE
+# and adds one blocking clause per pattern found. Same verdicts, and the wall is traded for a cap on
+# the number of patterns -- which is the honest budget anyway, since a capped enumeration licenses
+# nothing either way (M62 §M3.1).
+def patterns_inc(A, side, endpoints, k=4, cap=20000):
+    from pysat.solvers import Solver
+    def var(v, c): return v * k + c + 1
+    cl = side_cnf(A, side, k)
+    ep = list(endpoints)
+    out = []
+    with Solver(name="cadical153", bootstrap_with=cl) as s:
+        while len(out) < cap:
+            if not s.solve():
+                return out, True
+            true = set(l for l in s.get_model() if l > 0)
+            pat = tuple(next(c for c in range(k) if var(v, c) in true) for v in ep)
+            out.append(pat)
+            s.add_clause([-var(v, pat[i]) for i, v in enumerate(ep)])
+    return out, False
+
+
+def kills_all_boxes_inc(A, side, cross_edges, Sep, PS, k=4):
+    """The exact acceptance test, incremental: one solver, assumptions per box.
+
+    Surviving a box is a conjunction of 'this endpoint is not that colour', i.e. unit assumptions,
+    so a single solver instance answers every box under `assumptions=` with no rebuild."""
+    from pysat.solvers import Solver
+    def var(v, c): return v * k + c + 1
+    ep_index = {v: t for t, v in enumerate(Sep)}
+    boxes = []
+    for q in PS:
+        a = set()
+        for (u, v) in cross_edges:
+            qi = ep_index.get(A.n + v)
+            if qi is not None:
+                a.add(-var(u, q[qi]))
+        boxes.append(sorted(a))
+    with Solver(name="cadical153", bootstrap_with=side_cnf(A, side, k)) as s:
+        for b in boxes:
+            if s.solve(assumptions=b):
+                return False, "survivor"
+    return True, "blocks-all"

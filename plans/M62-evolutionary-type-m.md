@@ -992,3 +992,31 @@ one now, and §R1's wording is corrected here rather than left standing. **What 
 derivation is smaller and better: the quadrature law explains which cross-edge families a type-M
 rotation can carry and rejects the ones that do not occur** — the mechanism behind a fact the
 record-holder states as an observation and calls essential.
+
+### §R13 — The corrected engine, and two more defects the controls caught
+
+**Incremental solving, controlled.** Every walled solver call wrote ~190k clauses to disk and
+spawned `cadical`, and a pattern enumeration paid that once per pattern. `typem.patterns_inc` and
+`kills_all_boxes_inc` build the CNF once and use one live solver — blocking clauses for enumeration,
+**assumptions** for the box test. Controlled against the walled version on the known case:
+**55 patterns, exact, both ways; 93 s → 13.7 s (7×).**
+
+**Defect 3, caught by the full-`L` control**: the box test excluded the **centre** cross edges while
+the arena includes them, so it reported a survivor where the census says the base refuses four
+colours. The repair is not to add them as endpoints (that would take the endpoint set from 18 to 49
+and blow up `|P_S|`) — the shared centre is in `L` and **pinned to one colour**, so those edges say
+exactly *"no `S` point of unit radius takes that colour"*: **thirty unit clauses, not a pattern
+dimension.** With that, `|P_S| = 160` exact in 5 s and the full-`L` control passes in 11 s.
+
+**Defect 4, caught by re-reading my own driver**: it shrank **only `L`**, against a fixed full-size
+`S` — so the total could never fall below `|S| = 5,401` however well `L` did. `tools/m62_descent.py`
+alternates: characterise one half, shrink the other against it, swap, repeat, with the
+current-half-blocks-all-boxes control asserted **before every round** (a failure exits rather than
+descending).
+
+**And a self-inflicted one worth recording because it happened FOUR times in one session**: killing
+a background job by matching its command line (`pkill -f`, `ps | grep | kill`) **matches the killing
+shell itself**, because the wrapper's command line contains the pattern. This project has a standing
+note about exactly that trap. It cost one lost file append (`build_c13_base`, silently absent until
+an `AttributeError`) and three dead shells. **Rule adopted: background jobs write a PID file at
+launch and are killed by PID, never by pattern.**
