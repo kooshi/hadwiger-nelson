@@ -1,11 +1,11 @@
 {
  "kind": "exact-reduction-in-progress",
  "optimal": false,
- "lower_bound": 166,
+ "lower_bound": 183,
  "upper_bound": 756,
- "correction_sets": 194,
- "iterations": 50,
+ "correction_sets": 258,
+ "iterations": 114,
  "fingerprint": "1113e4b94347aa049533304e8a2a3438",
- "seconds": 836.7,
+ "seconds": 1354.2,
  "scope": "LB is the minimum-weight hitting set of the correction sets found SO FAR -- rigorous and monotonically rising; UB is the best selection witnessed to refuse. The pair is the product."
 }
