@@ -1,0 +1,18 @@
+{
+ "kind": "parts-lattice-base",
+ "radius": 2.0,
+ "points": 1603,
+ "orbits": 92,
+ "orbit_sizes": {
+  "1": 1,
+  "6": 11,
+  "12": 32,
+  "24": 48
+ },
+ "unit_edges": 11286,
+ "cross_edges": 126,
+ "cross_off_centre": 66,
+ "cross_orbit_pairs": 5,
+ "full_arena_k4": "unsat",
+ "claim_scope": "UNSAT on the FULL arena means the base is non-vacuous; it is NOT a find."
+}

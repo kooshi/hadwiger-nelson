@@ -1153,3 +1153,120 @@ what inflates an orbit count.
 solver call correspondingly cheaper.** Saved at `/tmp/p24_arena.pkl`; the descent restarts on it.
 Still 650 orbits against his "about 400", so the reconciliation is improved and not finished — the
 remaining factor is the open half of FS-31.
+
+### §R19 — FS-31 CLOSED: his base is in his own §5.6, the vacuity was ours, and his two connecting orbits fall out of our law by name
+
+The open half of FS-31 — *"650 orbits against his 'about 400', and the untried lever is the
+representative reading of `abcd = 0`"* — is answered, and the answer was **four paragraphs of
+`[Parts2020a]` §5.6 that §PA had not read.** `G50` a second time in one milestone: the paper was on
+the shelf, the section was named in §R14's own source reading, and the search stopped at §2. His
+words, verbatim:
+
+> We used the base graph `B = ⊕⁴H²`, choosing orbits that fall completely or partially on a disk of
+> radius `r = 2` […]. The corresponding base orbits `(a,b,c,d)` satisfy the relations
+> `(a−b√33)² + (c√3−d√11)² ≤ (12r)²`, `a,b,c,d ∈ |2ℤ|`, `a−b+c+d ∈ 4ℤ`.
+> There are only about 400 such orbits, of which about 40 are included in R. We noticed that all
+> useful orbits satisfy the relation `abcd = 0`.
+
+**Four readings, each DERIVED and then measured rather than guessed.**
+
+**(1) The group is `⟨ζ₆⟩ ⋊ Gal(K/ℚ)`, order 24 — and complex conjugation is one of its Galois
+elements.** On a point `z = (a + b√33 + i(c√3 + d√11))/12`, the automorphism `√3 ↦ −√3, √11 ↦ −√11`
+fixes `√33`, so it fixes `x` and negates `y`: it *is* the geometric reflection. His "dihedral plus
+conjugation by `√33`" is therefore `ζ₆` together with the two single-radical flips, and the two
+extra elements are **arithmetic symmetries with no geometric meaning** — which is why an orbit's
+members carry two squared norms, `n` and `σ(n)`, and why a Euclidean disk had looked
+group-incompatible. Every element preserves unit distance (a ring hom fixing `ℚ`, applied
+coordinatewise) **and the `ρ₁₅` cross-edge law** (both of its conditions are polynomial identities
+over `K`), so the whole type-M arena is equivariant and orbit-level selection is sound.
+
+**(2) `arena_orbits` was using half his group.** It acts by `⟨rot₆, conj⟩` — order 12 — which is
+exactly the geometric half. **That is where "650" came from.** Under the full order-24 group the
+same seam core has **188** orbits, with sizes `{1: 1, 6: 13, 12: 49, 24: 125}` — his stated orders
+`1, 6, 12, 24`, reproduced on a base built with no knowledge of them.
+
+**(3) `a, b, c, d ∈ |2ℤ|` cannot be a condition on every point, and what IS stable is derivable.**
+`ζ₆` sends `(a,b,c,d)` to `((a−3c)/2, (b−d)/2, (a+c)/2, (d+3b)/2)`, so `a = 2, c = 0` has an odd
+image: all-even is not preserved. Integrality forces `a ≡ c` and `b ≡ d (mod 2)`; the congruence's
+image is `a+b−c+d`, which agrees with `a−b+c+d` mod 4 exactly when `b ≡ c (mod 2)` — so the stable
+lattice condition is **`a ≡ b ≡ c ≡ d (mod 2)`** together with `a−b+c+d ≡ 0 (mod 4)`. With it the
+radius-2 set is **exactly closed: zero images outside, measured over all 24 elements.** All-even is
+therefore a condition on the orbit's canonical **representative** — which is what his orbit labels
+are, and **all nineteen labels published in his paper are all-even and non-negative.**
+
+**(4) `abcd = 0` is the same kind of condition, and on this base it is the same condition.** Of the
+92 orbit representatives (his own sort: fewest nonzeros, then fewest negatives, then lex), **84 are
+all-even and the *same* 84 satisfy `abcd = 0`** — his two stated relations coincide here. And **all
+nineteen of his published labels have a zero coordinate, 19 for 19.** The pointwise reading stays
+dead (§R18).
+
+**The base, and the control that decides it.**
+
+| | ours (§R18) | `⊕⁴H²` r=2, our §2 build | **his §5.6 lattice, r = 2** |
+|---|---|---|---|
+| points | 3,667 | 5,995 (symmetric core) | **1,603** |
+| orbits (order-24) | 188 | 307 | **92** |
+| orbit sizes | {1,6,12,24} | {1,6,12,24} | **{1: 1, 6: 11, 12: 32, 24: 48}** |
+| images outside the base | 0 | 0 | **0** |
+| his 19 labels as canonical reps | — | — | **18 / 19** |
+| unit edges | 30,846 | 32,268 | **11,286** |
+| cross edges at `ρ₁₅` | 126 | 186 | **126** |
+| **`k = 4` on the full arena** | UNSAT | **SAT — vacuous** | **UNSAT, 10 s** |
+
+**So §R14's vacuity verdict was ours, not his.** The base built from §2 is 4-colourable and admits
+no 5-chromatic selection; the base his §5.6 relations describe refuses four colours on 3,206
+vertices in ten seconds. **Reading (A) of FS-31 is confirmed and repaired; reading (B) — that our
+cross-edge law does not describe his construction — stays refuted, and is now refuted against his
+own object rather than against Heule's.**
+
+**The nineteenth label is what decides the disk reading.** `(0,0,6,6)` has `|z|² = (7+√33)/2 ≈
+6.37 > 4` and conjugate `(7−√33)/2 ≈ 0.63 < 4`, so it is admitted only by his "falls completely **or
+partially** on a disk" clause. Read as *completely inside*, the count is **92**; read as *meets the
+disk*, over `⊕⁸H¹` (105,889 points, group-closed, and the smallest construction here containing all
+nineteen labels), it is **1,023**, of which 515 also satisfy `abcd = 0`. His "about 400" sits between
+and the text does not decide which he used. **What the text does decide is that the base is not
+vacuous, and that is the question FS-31 was minted by.**
+
+**Our §2 reconstruction of `B` is wrong, and the control says so plainly:** `⊕⁴H²` — untruncated,
+27,301 points, group-closed — **misses eight of his nineteen labels, including both connecting
+orbits.** `⊕⁸H¹` contains all nineteen. So `parts_base`/`H_m` do not build his base graph, and are
+now marked as such; the §5.6 relations do, and `typem.parts_lattice` is that.
+
+**And the cross-edge structure comes out as his two kinds, by name, with his counts.** §3: *"it is
+enough to leave two base orbits to connect L and S, namely `(0,4,4,0)` and `(0,0,2,6)`. Each of the
+orbits includes 12 vertices. The reference orbit `(0,4,4,0)` is always full, while the auxiliary
+orbit `(0,0,2,6)` may be only partially filled."* Our law, run on our base with no input from that
+sentence, returns five off-centre cross-edge orbit pairs:
+
+| orbit pair | edges | `|u|²` | kind |
+|---|---|---|---|
+| **`(0,4,4,0)` × itself** | **12** | 4 | **reference — his** |
+| `(20,0,0,4)` × itself | 12 | 4 | reference |
+| `(24,0,0,0)` × itself | 6 | 4 | reference |
+| **`(0,0,2,6)` × itself** | **12** | `(17−√33)/6` | **auxiliary — his** |
+| `(16,0,6,2)` × itself | 24 | `(17−√33)/6` | auxiliary |
+
+plus 60 centre-incident edges. **Both of his orbits, both at twelve edges, at exactly the two radii
+M31's quadrature law predicts** — radius 2 for the reference kind and the conjugate-ring pair
+`(17±√33)/6` with product `8/3` for the auxiliary. §0a's closure is now confirmed against the record
+holder's own object and not only against Heule's.
+
+**And his subtype is non-vacuous on our base:** restricted to those two orbits alone — 24 off-centre
+cross edges plus the centre's 60 — the full arena still refuses four colours (11 s). His §3 claim,
+reproduced from first principles.
+
+**The descent restarts here**, and the base is better on every axis that costs: **1,603 points
+against 5,401 (3.4×), 92 orbits against 473 (5.1×), 11,286 unit edges against 30,846 (2.7×)**, with
+the acceptance test correspondingly cheaper. `data/m62/parts-lattice.json`,
+`typem.parts_lattice/parts_group/parts_orbits`.
+
+**Two instrument incidents, both caught by controls, both `G21`/`G30` again.**
+*(a)* The first `abcd = 0` census used `parts_coords`, which accepted only denominator-12 points and
+returned `None` otherwise — so every denominator-18 and -36 point of `⊕⁴H²` was **silently excluded
+from the test**, and the count measured the extractor. It showed as an exact tie between two
+different bases (43 orbits, 625 points, both), which is what made it visible. A zero coordinate is
+scale-invariant and needs no denominator at all.
+*(b)* The non-vacuity gate printed `SAT   (undecided at cap)` — the verdict was right and the gloss
+named a branch that never fired, because the gloss tested for `'refuted'`/`'satisfiable'` where
+`refuses_four` returns `'unsat'`/`'sat'`. **`G30`'s third failure mode inside a script written to
+settle a vacuity question**; the verdict stood, the sentence beside it did not.

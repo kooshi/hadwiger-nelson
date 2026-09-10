@@ -984,7 +984,18 @@ def H_m(m: int):
 
 
 def parts_base(n: int = 4, m: int = 2, radius: float = 2.0):
-    """B = (+)^n H^m truncated to the disk of the given radius -- Parts's own base graph."""
+    """B = (+)^n H^m truncated to the disk of the given radius.
+
+    NOT Parts's base graph, measured 2026-09-10 (M62 section R19): (+)^4 H^2 built this way --
+    untruncated, 27,301 points, closed under his order-24 group -- MISSES EIGHT of the nineteen
+    orbit labels his paper publishes, including BOTH of his connecting orbits (0,4,4,0) and
+    (0,0,2,6); its radius-2 symmetric core is 4-colourable, hence vacuous. ((+)^8 H^1 does
+    contain all nineteen.) His base is the one his section 5.6 states in closed form --
+    `parts_lattice` below, 1,603 points / 92 orbits, arena UNSAT in ten seconds.
+    Kept for the record and for the |H^2| = 31 control, which does pass."""
+    # NOTE: intermediate sums are pruned at the FINAL radius, so points reachable only
+    # through a farther intermediate are lost. Harmless for the |H^2| control, wrong for
+    # any base claim -- use parts_lattice instead.
     G = H_m(m)
     r2 = radius * radius
     seen = {(Z, Z)}
@@ -1000,3 +1011,117 @@ def parts_base(n: int = 4, m: int = 2, radius: float = 2.0):
         if not frontier:
             break
     return sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
+
+
+# ====================================================================== Parts's base, from §5.6
+# [Parts2020a] §5.6 states the base-orbit relations in closed form, and M62's §PA read had skipped
+# them (G50 -- the paper was on the shelf):
+#
+#     (a - b*sqrt33)^2 + (c*sqrt3 - d*sqrt11)^2 <= (12r)^2 ,  a,b,c,d in |2Z| ,  a-b+c+d in 4Z
+#
+# for z = (a + b*sqrt33 + i(c*sqrt3 + d*sqrt11))/12, r = 2.  Three readings are DERIVED rather than
+# guessed (M62 §R19):
+#
+#  * The denominator is 12, so the denominator-18 and -36 points of (+)^4 H^2 are not base orbits.
+#  * `a,b,c,d in |2Z|` cannot hold at every point: zeta6 sends (a,b,c,d) to
+#    ((a-3c)/2, (b-d)/2, (a+c)/2, (d+3b)/2), and a=2, c=0 gives an odd image.  It is a condition on
+#    the orbit's canonical REPRESENTATIVE -- confirmed by his own published orbit labels, all
+#    nineteen of which are all-even and non-negative.
+#  * What IS stable is a = b = c = d (mod 2): the congruence's image under zeta6 is a+b-c+d, which
+#    agrees with a-b+c+d mod 4 exactly when b = c mod 2, and integrality already forces a = c and
+#    b = d mod 2.  With it the radius-2 set is exactly closed under the order-24 group (measured:
+#    zero images outside), with orbit sizes {1: 1, 6: 11, 12: 32, 24: 48} -- his stated orders.
+#
+# The disk bounds BOTH the norm and its Galois conjugate, which is why a Euclidean disk had looked
+# group-incompatible: an orbit's members carry exactly the two squared norms n and sigma(n).
+def parts_lattice(r: float = 2.0):
+    """The denominator-12 base lattice inside the disk of radius r, exactly as [Parts2020a] §5.6.
+
+    Returns (pts, tuples). Group-closed under the order-24 group by construction; at r = 2 it is
+    1,603 points in 92 orbits, and eighteen of his nineteen published orbit labels are canonical
+    representatives of it (the nineteenth, (0,0,6,6), sits outside radius 2 and is admitted only by
+    his 'falls ... partially on a disk' clause)."""
+    L = (12.0 * r) ** 2
+    R33, R3, R11 = 33 ** 0.5, 3 ** 0.5, 11 ** 0.5
+    A = int(L ** 0.5) + 2
+    B = int((L / 33) ** 0.5) + 2
+    C = int((L / 3) ** 0.5) + 2
+    Dm = int((L / 11) ** 0.5) + 2
+    out = []
+    for a in range(-A, A + 1):
+        for b in range(-B, B + 1):
+            for c in range(-C, C + 1):
+                for d in range(-Dm, Dm + 1):
+                    if (a - b) % 2 or (a - c) % 2 or (a - d) % 2 or (a - b + c + d) % 4:
+                        continue
+                    if ((a + b*R33) ** 2 + (c*R3 + d*R11) ** 2 <= L + 1e-9 and
+                        (a - b*R33) ** 2 + (c*R3 - d*R11) ** 2 <= L + 1e-9):
+                        out.append((a, b, c, d))
+    pts = [((Fr(a, 12), Fr(0), Fr(0), Fr(b, 12)), (Fr(0), Fr(c, 12), Fr(d, 12), Fr(0)))
+           for (a, b, c, d) in out]
+    order = sorted(range(len(pts)), key=lambda i: (kfloat(norm2(pts[i])),
+                                                   kfloat(pts[i][0]), kfloat(pts[i][1])))
+    return [pts[i] for i in order], [out[i] for i in order]
+
+
+def parts_group():
+    """The order-24 group <zeta6> x| Gal(K/Q) as a list of maps on K-points.
+
+    Complex conjugation IS the Galois element sqrt3,sqrt11 |-> -sqrt3,-sqrt11 on this lattice, so
+    his 'dihedral plus conjugation by sqrt33' is zeta6 together with the two single-radical flips.
+    Every element preserves unit distances (a ring hom fixing Q, applied coordinatewise) AND the
+    rho15 cross-edge law (both of its conditions are polynomial identities over K), so the whole
+    type-M arena is equivariant and orbit-level selection is sound."""
+    half = Fr(1, 2)
+    s3 = (Fr(0), half, Fr(0), Fr(0))                       # sqrt3/2 as a K element
+
+    def z6(p):
+        x, y = p
+        return (ksub(kscale(x, half), kmul(s3, y)), kadd(kmul(s3, x), kscale(y, half)))
+
+    def gal(f3, f11):
+        def g(p):
+            def h(u):
+                a, b, c, d = u
+                return (a, f3 * b, f11 * c, f3 * f11 * d)
+            return (h(p[0]), h(p[1]))
+        return g
+
+    gens = [z6, gal(-1, 1), gal(1, -1)]
+    probe = [lattice_point(1, 0, 0, 0), lattice_point(0, 1, 0, 0),
+             lattice_point(0, 0, 1, 0), lattice_point(0, 0, 0, 1)]
+    seen = {tuple(probe): (lambda p: p)}
+    frontier = list(seen.values())
+    while frontier:
+        nxt = []
+        for f in frontier:
+            for g in gens:
+                h = (lambda f=f, g=g: (lambda p: g(f(p))))()
+                key = tuple(h(q) for q in probe)
+                if key not in seen:
+                    seen[key] = h; nxt.append(h)
+        frontier = nxt
+    return list(seen.values())
+
+
+def parts_orbits(pts, group=None):
+    """Orbits of a group-closed point list under the order-24 group, as index lists."""
+    G = group or parts_group()
+    idx = {p: i for i, p in enumerate(pts)}
+    parent = list(range(len(pts)))
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]; x = parent[x]
+        return x
+    def union(x, y):
+        x, y = find(x), find(y)
+        if x != y: parent[x] = y
+    outside = 0
+    for g in G:
+        for i, p in enumerate(pts):
+            q = g(p)
+            if q in idx: union(i, idx[q])
+            else: outside += 1
+    orb = defaultdict(list)
+    for i in range(len(pts)): orb[find(i)].append(i)
+    return list(orb.values()), outside

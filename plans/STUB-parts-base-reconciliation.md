@@ -1,22 +1,35 @@
 # FS-31 — Is Parts's base vacuous under our cross-edge law, or is my reconstruction wrong?
 
-> **PARTLY ANSWERED THE SAME NIGHT (2026-09-10). Reading (B) is REFUTED and reading (A) is
-> CONFIRMED-AND-PARTLY-FIXED — see `plans/M62-evolutionary-type-m.md` §R18 for the measurements.**
-> - **The cross-edge law is COMPLETE.** All 30 of Heule-510's cross edges are predicted (18 at
->   `cos = 7/8`, 12 centre-incident); no M62 arena is missing edges. Reading (B) is closed.
-> - **Our base IS in his coordinate system** — all 5,401 points expressible as
->   `(a + b√33 + i(c√3 + d√11))/12`, all satisfying his congruence `a − b + c + d ≡ 0 (mod 4)`.
-> - **It was NOT closed under his group**: of his four generators (120° rotation, both reflections,
->   conjugation by `√33`), three preserve our base and **conjugation moves 1,734 points out of it**.
->   Closing it gives **3,667 points / 650 orbits**, keeps all 126 cross edges, and still refuses four
->   colours in 12 s. A third smaller for free.
-> - **`abcd = 0` is not the product of the coordinates.** As a product it breaks his own 120°
->   rotation (2,412 of 5,401) and makes the base vacuous. It is almost certainly a condition on the
->   orbit's *canonical representative*, which he sorts by number of nonzero entries. **Dead end
->   recorded so it is not re-derived.**
+> **CLOSED 2026-09-10. The reconstruction was wrong; the cross-edge law was right. The answer was
+> `[Parts2020a]` §5.6, which states the base in closed form and which §PA had not read — `G50` a
+> second time in one milestone. Full measurements in `plans/M62-evolutionary-type-m.md` §R19.**
 >
-> **What is still open:** 650 orbits against his "about 400". The remaining factor is unexplained,
-> and the untried lever is the representative reading of `abcd = 0`.
+> - **Reading (A) CONFIRMED and repaired.** His §5.6 relations
+>   (`(a−b√33)² + (c√3−d√11)² ≤ (12r)²`, `a,b,c,d ∈ |2ℤ|`, `a−b+c+d ∈ 4ℤ`) describe a
+>   **1,603-point, 92-orbit** lattice at `r = 2` whose type-M arena **refuses four colours in ten
+>   seconds**. The base built from his §2 (`⊕⁴H²`) is 4-colourable — the vacuity was ours.
+> - **Reading (B) stays REFUTED, now against his own object.** Our `ρ₁₅` law returns **both of his
+>   named connecting orbits** — `(0,4,4,0)` at radius 2 (reference) and `(0,0,2,6)` at
+>   `(17±√33)/6` (auxiliary) — **at twelve edges each, exactly his §3 counts**, and his two-orbit
+>   subtype is non-vacuous on our base (11 s).
+> - **"650 orbits" was half his group.** `arena_orbits` acts by `⟨rot₆, conj⟩`, order 12; his group
+>   is order 24 = `⟨ζ₆⟩ ⋊ Gal(K/ℚ)`, where **complex conjugation is itself the Galois element
+>   `√3,√11 ↦ −√3,−√11`** and the two extra elements are arithmetic with no geometric meaning.
+>   Orbit sizes come out `{1, 6, 12, 24}` — his stated orders — on every base tried.
+> - **`a,b,c,d ∈ |2ℤ|` and `abcd = 0` are both conditions on the canonical REPRESENTATIVE**, not on
+>   every point: `ζ₆` sends `(a,b,c,d)` to `((a−3c)/2, (b−d)/2, (a+c)/2, (d+3b)/2)`, so all-even is
+>   not stable. What is stable, derived rather than guessed, is `a ≡ b ≡ c ≡ d (mod 2)`. Control:
+>   **all nineteen of his published orbit labels are all-even, non-negative, and have a zero
+>   coordinate — and eighteen are canonical representatives of our orbits.** The nineteenth,
+>   `(0,0,6,6)`, lies outside radius 2 and is admitted only by his "falls … partially" clause.
+> - **What is NOT settled, and does not matter for the hunt:** whether his "about 400" counts orbits
+>   *inside* the disk (ours: 92) or orbits *meeting* it (ours over `⊕⁸H¹`: 1,023, of which 515 also
+>   satisfy `abcd = 0`). His text does not decide it. The question FS-31 was minted by — is the base
+>   vacuous — is decided, in the negative.
+> - **Our `H_m`/`parts_base` do not build his base graph**: `⊕⁴H²` untruncated misses eight of his
+>   nineteen labels including both connecting orbits, while `⊕⁸H¹` contains all nineteen. The
+>   functions are kept and marked; `typem.parts_lattice` is the §5.6 base and is what the descent
+>   now runs on.
 
 *Minted 2026-09-10 at Kooshi's direction. Read `plans/M62-evolutionary-type-m.md` §R14 (the
 measurement) and §R3 (the cross-edge law and its confirmation) first.*
