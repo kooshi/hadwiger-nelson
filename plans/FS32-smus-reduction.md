@@ -241,3 +241,46 @@ here**, because `refutes(τ(X)) ⟺ refutes(X)`. So a lex-leader restriction to 
 *control* is free and catches encoding bugs (any reported optimum's `τ`-image must have equal weight
 and must also refute), while as symmetry *breaking* it is new constraint code inside the one place a
 bug produces a too-small answer. **Control first; the 2× only if the run needs it.**
+
+## §R1 — B1, the planted control: green, and it caught my own bed first
+
+`tools/gmus.py` (the encoder, the search, and an **independent** re-verifier that rebuilds the
+induced graph from scratch and asks `k`-colourability directly, so nothing trusts the MUS tool's own
+bookkeeping). The bed: a `K4` and a Moser spindle, vertex-disjoint, plus twenty isolated vertices,
+asked at `k = 3` — three rows whose answers are known by hand.
+
+| row | what it tests | expected | got |
+|---|---|---|---|
+| unit weights | the encoding, and that padding never enters | `K4`, 4 vertices | **`K4`, weight 4, no leak** |
+| `K4` groups padded to weight 10 each | **weight vs count** — the row that matters | the **spindle**, weight 7 | **spindle, weight 7 (7 groups over 4)** |
+| a vertex both `hard` and grouped | Rule 1 | refused | **refused, by name** |
+
+**The second row is the load-bearing one and it is why it was designed**: it is the only way to tell
+whether `OptUx` minimises the **weight** of the MUS or merely its **cardinality**, and the record is
+quoted in vertices. It minimises weight — it took the 7-group answer over the 4-group one.
+
+**And the control's first run came back `WRONG`, on a defect that was mine.** The Moser spindle's
+edge list was written from memory and is **3-colourable** — so the `K4` was the only
+non-3-colourable subgraph in the bed, the tool was right, and the "failure" was a measurement of my
+own edge list. `G21` in its purest form. The spindle is now **built from its definition** (an apex,
+two rhombi, the far tips joined) and **verified vertex-critical at four colours before use** — every
+one of its seven deletions 3-colourable — which is the check that would have caught it immediately.
+
+## §R2 — B2, and a complete measurement the project did not hold
+
+Before running the calibration it needs its expected answer, so: **the complete vertex-criticality
+census of both Heule witnesses at four colours, every vertex, zero unknown.**
+
+| | vertices | edges | whole graph at `k = 4` | deletions that still refuse | **vertex-critical** |
+|---|---|---|---|---|---|
+| Heule-510 | 510 | 2,504 | UNSAT | **0 of 510** | **yes** |
+| Heule-553 | 553 | 2,722 | UNSAT | **0 of 553** | **yes** |
+
+The project held this only by sampling on de Grey's 1581 (`G10`, and its two "proven critical" edges
+have no witnesses on disk) and for Heule-510's centre alone (M31). **A consequence corrects an
+assumption made here an hour ago:** since Heule-553 is vertex-critical, **510 is not 553 with 43
+vertices deleted** — they are separate constructions, not nested, and Heule's "shrink" was a
+redesign. So the hoped-for calibration *"does the tool reproduce 510 from 553"* does not exist, and
+what both witnesses give instead is a calibration with a **known exact answer**: a vertex-critical
+graph's smallest vertex-granularity group-MUS is the whole graph, so the tool must return 510 and
+553 and nothing smaller.
