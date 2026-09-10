@@ -1,2 +1,6 @@
   s1(r=8) it     0: no swap under 8 [best 582, ask 8, 0s]
   s1(r=8) it   200: no swap under 8 [best 582, ask 1608, 28s]
+  s1(r=8) it   400: no swap under 8 [best 582, ask 3208, 60s]
+  s1(r=8) it   600: no swap under 8 [best 582, ask 4808, 96s]
+  s1(r=8) it   800: no swap under 8 [best 582, ask 6408, 137s]
+  s1(r=8) it  1000: no swap under 8 [best 582, ask 8008, 175s]

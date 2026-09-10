@@ -1,1 +1,4 @@
   s5(r=32) it     0: no swap under 32 [best 582, ask 32, 0s]
+  s5(r=32) it   200: no swap under 32 [best 582, ask 6412, 38s]
+  s5(r=32) it   400: no swap under 32 [best 582, ask 12748, 85s]
+  s5(r=32) it   600: no swap under 32 [best 582, ask 19083, 139s]

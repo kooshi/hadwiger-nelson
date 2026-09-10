@@ -1,2 +1,5 @@
   s3(r=16) it     0: no swap under 16 [best 582, ask 16, 0s]
   s3(r=16) it   200: no swap under 16 [best 582, ask 3216, 27s]
+  s3(r=16) it   400: no swap under 16 [best 582, ask 6416, 61s]
+  s3(r=16) it   600: no swap under 16 [best 582, ask 9616, 99s]
+  s3(r=16) it   800: no swap under 16 [best 582, ask 12807, 140s]

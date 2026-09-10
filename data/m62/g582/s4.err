@@ -1,1 +1,5 @@
   s4(r=24) it     0: no swap under 24 [best 582, ask 24, 0s]
+  s4(r=24) it   200: no swap under 24 [best 582, ask 4811, 34s]
+  s4(r=24) it   400: no swap under 24 [best 582, ask 9608, 74s]
+  s4(r=24) it   600: no swap under 24 [best 582, ask 14408, 120s]
+  s4(r=24) it   800: no swap under 24 [best 582, ask 19208, 172s]

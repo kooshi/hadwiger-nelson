@@ -1,0 +1,12 @@
+{"group": 0, "verdict": "critical", "weight": 6, "seconds": 0.01}
+{"group": 10, "verdict": "critical", "weight": 6, "seconds": 0.06}
+{"group": 18, "verdict": "critical", "weight": 6, "seconds": 0.0}
+{"group": 26, "verdict": "critical", "weight": 6, "seconds": 0.01}
+{"group": 39, "verdict": "critical", "weight": 6, "seconds": 0.01}
+{"group": 48, "verdict": "critical", "weight": 6, "seconds": 0.02}
+{"group": 59, "verdict": "critical", "weight": 6, "seconds": 0.0}
+{"group": 71, "verdict": "critical", "weight": 6, "seconds": 0.05}
+{"group": 83, "verdict": "critical", "weight": 6, "seconds": 0.1}
+{"group": 98, "verdict": "critical", "weight": 6, "seconds": 0.03}
+{"group": 106, "verdict": "critical", "weight": 6, "seconds": 0.02}
+{"group": 116, "verdict": "critical", "weight": 6, "seconds": 0.27}

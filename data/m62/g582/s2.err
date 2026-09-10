@@ -1,2 +1,5 @@
   s2(r=12) it     0: no swap under 12 [best 582, ask 12, 0s]
   s2(r=12) it   200: no swap under 12 [best 582, ask 2412, 28s]
+  s2(r=12) it   400: no swap under 12 [best 582, ask 4805, 59s]
+  s2(r=12) it   600: no swap under 12 [best 582, ask 7203, 96s]
+  s2(r=12) it   800: no swap under 12 [best 582, ask 9594, 141s]
