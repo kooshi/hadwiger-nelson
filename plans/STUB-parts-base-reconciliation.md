@@ -1,5 +1,23 @@
 # FS-31 — Is Parts's base vacuous under our cross-edge law, or is my reconstruction wrong?
 
+> **PARTLY ANSWERED THE SAME NIGHT (2026-09-10). Reading (B) is REFUTED and reading (A) is
+> CONFIRMED-AND-PARTLY-FIXED — see `plans/M62-evolutionary-type-m.md` §R18 for the measurements.**
+> - **The cross-edge law is COMPLETE.** All 30 of Heule-510's cross edges are predicted (18 at
+>   `cos = 7/8`, 12 centre-incident); no M62 arena is missing edges. Reading (B) is closed.
+> - **Our base IS in his coordinate system** — all 5,401 points expressible as
+>   `(a + b√33 + i(c√3 + d√11))/12`, all satisfying his congruence `a − b + c + d ≡ 0 (mod 4)`.
+> - **It was NOT closed under his group**: of his four generators (120° rotation, both reflections,
+>   conjugation by `√33`), three preserve our base and **conjugation moves 1,734 points out of it**.
+>   Closing it gives **3,667 points / 650 orbits**, keeps all 126 cross edges, and still refuses four
+>   colours in 12 s. A third smaller for free.
+> - **`abcd = 0` is not the product of the coordinates.** As a product it breaks his own 120°
+>   rotation (2,412 of 5,401) and makes the base vacuous. It is almost certainly a condition on the
+>   orbit's *canonical representative*, which he sorts by number of nonzero entries. **Dead end
+>   recorded so it is not re-derived.**
+>
+> **What is still open:** 650 orbits against his "about 400". The remaining factor is unexplained,
+> and the untried lever is the representative reading of `abcd = 0`.
+
 *Minted 2026-09-10 at Kooshi's direction. Read `plans/M62-evolutionary-type-m.md` §R14 (the
 measurement) and §R3 (the cross-edge law and its confirmation) first.*
 
