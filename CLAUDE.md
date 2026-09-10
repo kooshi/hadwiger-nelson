@@ -1361,6 +1361,24 @@ reported that *all 176 cited artifact paths exist*, and that was true **of the d
 
 ### Paths forward, ranked
 
+*(**Amended 2026-09-09 (sixth amendment) — THE VACUITY RULE IS NOW A GATE, AND ITS COVERAGE IS
+STUBBED.** `G30`'s fifth failure mode — *every theorem whose hypothesis is a structure ships with a
+named inhabitant* — was a convention enforced by memory; it is now `scripts/vacuity.sh`, required by
+`WORKFLOW.md` step 8 and documented in § The gate. **On its first run it found `core9_plane` and
+`core122_plane` knowing nothing about them.** Its vocabulary mirrors `axioms.sh` deliberately:
+`DECLARED` is that gate's `PURCHASED` — deliberate emptiness is not a defect but is named per use,
+with its reason, in the declaration's own docstring, and printed every run. **FS-28 enters at rank
+4** (`plans/STUB-vacuity-coverage.md`): the gate tracks four carrier families and **87
+structure-valued hypothesis sites sit in families it does not examine at all**, the sharpest being
+the three `AdditivelyRigid` ones, since M57 measured that nothing here is additively rigid at four
+colours. Its §4 records, with the measurement, why instantiation analysis is blocked — Lean exposes
+a proof term for **0 of 3,307 theorems** — and why vacuity is nonetheless **not** a silent `sorry`:
+a vacuous theorem is *true*, so using it is sound, and vacuity propagates through STATEMENTS rather
+than proofs, which is what the gate reads. **That last is an argument and not a measurement, and
+§4 says where it is weakest** — the 67 `Forces`-consumer sites, where a vacuous hypothesis can yield
+a conclusion that is genuinely non-vacuous and still overstates what was shown. **M62 (FS-6) keeps
+rank 1.** The fifth amendment follows.)*
+
 *(**Amended 2026-09-09 (fifth amendment) — THE CONSOLIDATION IS RUN AND MERGED.** Six packages in parallel git worktrees; the union builds green at 794 clean / 5 purchases. **FS-25, FS-24 and FS-26 are CLOSED but for named remainders**, which are collected and ranked as **FS-27 at rank 3** (`plans/STUB-consolidation-remainder.md`) — led by `core122_pigeonhole`'s unestablished premise, the only item on the board that could change what this project believes it owns. **FS-20, the paper, moves to rank 2**: it gains two inputs it did not have, both cheap and both blocking — Theorem A's headline form has no worked example anywhere, and a Polymath16 wiki page ATTEMPTS the rigidity argument behind Theorem B rather than posing it, which every other prior-art find in the seventh-lineage sweep merely did. **The three items held back deliberately** are FS-24's G5 (no bearing on the hunt) and G6 (a real re-proof whose witnesses must be sympy-derived first), the fourteen private copies of `√3·√3 = 3` (last, alone, in the main tree, into a NEW leaf module — a declaration added upstream rebuilds every dependent forever, which is *why* the fourteen copies exist), and a three-way collapse P3 saw and rightly declined because its three files were owned by three packages that day. **The operational lesson, since it cost real time: a fresh git worktree has no build cache and would rebuild Mathlib from source — hours, per worktree.** Symlink `.lake/packages`, copy `.lake/build` (19 s, and it is accepted across directories — measured), never share `.lake/build`, serialize every real build behind one lock, and iterate with `lake env lean` (3 s, builds nothing) rather than `scripts/build.sh` (3½ minutes even when nothing changed). **M62 (FS-6) keeps rank 1; the live work is ranks 2–3.** The fourth amendment follows.)*
 
 *(**Amended 2026-09-09 (fourth amendment) — CONSOLIDATION, Kooshi's direction: *"let's not focus on pushing to
@@ -2763,6 +2781,23 @@ clash" was the metric shadow of a 2-adic condition.
   adversarial round: **every headline of this genre carries its enumeration AND its conditioning
   in the same sentence** — scope lines inside an artifact do not survive into summaries unless
   they are in the headline.
+  **THREE MORE INSTANCES IN ONE SESSION, 2026-09-09, all while building the instrument that exists
+  to stop exactly this.** (i) and (ii): asked whether the vacuity gate could resolve its parametric
+  carriers by finding their instantiations, two probes were written and both returned a clean,
+  plausible **zero**. Both zeros measured the probe. *Collect closed carrier subterms from proof
+  terms* → 0, because the **type** never appears as a subterm of a proof term, only its arguments
+  do. *Infer the type at each application site* → 0 across 56 sites, because a fully-applied site's
+  `inferType` is its **conclusion**, and the carrier is the type of an **argument**. The real
+  blocker — Lean exposes a proof term for **0 of this library's 3,307 theorems** — surfaced only on
+  pointing the instrument at `core9_plane`, a case known to exist, which it could not see at all.
+  ***Point every new instrument at a known positive before believing any zero it reports.*** Both
+  probes had correct-looking code and ran without error. (iii) The same session then re-ranked
+  `plans/FRONTIER-STUBS.md` by writing 20 rows into a table that had 19 slots, **silently dropping
+  the last row (FS-15) entirely**, and the verification printed the length of the *input list*
+  rather than counting the rows in the *file*. Recovered from git two edits later. *A check that
+  reads its own inputs is not a check; assert on the artifact.* All three are recorded in
+  `plans/STUB-vacuity-coverage.md` §4 with their measurements.
+
   **FOURTH INSTANCE — a SPEEDUP is a positive count over a population (M51, 2026-08-27).** The
   WO-1 close reported "~250× per core" for the Rust engine's SOLVER-FREE tiers against Python's
   peel path, with the caveat in the next sentence that the solver tail was unmeasured and would
