@@ -164,14 +164,23 @@ is `∃g ∈ Aut B : g(M) ⊆ A`. The L-side files happen to be framed compatibl
 (`v374e1860 ⊆ v412e2106`, `v374e1868 ⊆ v406e2082`, `v376e1890 ⊆ v451e2400`,
 `v375e1920 ⊆ v403e2112`, all literal), which is exactly how this would have gone unnoticed.
 
-**(vi) The base lattice has TWO components and we implement one of them.** The three off-base files
-— `v214e977` and `v226e1037` (the distance-3 non-mono-pair and its `A`) and `v312e1502` (the 1/3
-one) — are not off the lattice: **every one of their points satisfies `a ≡ b ≡ c ≡ d (mod 2)` and
-`a − b + c + d ≡ 2 (mod 4)`**, where every other object satisfies `≡ 0`, and none of the three
-contains the origin. So `a − b + c + d ∈ 4ℤ` selects the component through the origin, and those
-graphs are anchored on the other one — their forced pairs sit at `(±3/2, 0)` and `(±1/6, 0)`, which
-live there. **The held-out mono-pair and non-mono-pair runs need the base re-anchored, and that is a
-one-line change that would otherwise have read as "his data is off our lattice".**
+**(vi) Three of his objects are on a TRANSLATE of the base, not on a second component of it —
+and the first reading of this was wrong, killed by the modelling pass's own seam test.** The three
+off-base files are `v214e977` and `v226e1037` (the distance-3 non-mono-pair and its `A`) and
+`v312e1502` (the 1/3 one). Every one of their points satisfies `a ≡ b ≡ c ≡ d (mod 2)` with
+`a − b + c + d ≡ 2 (mod 4)`, where every other object satisfies `≡ 0`. **It is tempting, and wrong,
+to read that as "the lattice has two components and we implement one":** built and measured, the
+`≡ 2` set at `r = 2.6` has 4,448 points and **71,168 group images outside itself** — it is not
+group-closed and is not a lattice under the order-24 group about the origin, where the `≡ 0` set is
+closed exactly (0 outside). What is true is one line further on: `φ(p) = a − b + c + d mod 4` is
+additive, so the difference of any two `≡ 2` points is `≡ 0`, and **translating such a graph by any
+one of its own vertices lands every point back on the base** (measured: 214 of 214, parities intact).
+So they are ordinary base graphs anchored off the origin, and the reason is geometric — their forced
+pair sits at `(±3/2, 0)` whose **midpoint is not a lattice point**, so the object cannot be centred
+where its symmetry is. None of the three is in the reproduction path or in the held-out set (the
+`8/3` mono-pair `v367e1822` and the `√3` non-mono-triple `v221e1006` are both on the base), so this
+is a bounded, named residual: **what group those three ARE invariant under is open and this milestone
+does not need it.**
 
 ---
 
@@ -482,3 +491,55 @@ bitsets lands on the critical path.
 **Solver:** CaDiCaL 1.5.3 measured best here (1.9.5 +19% on our recorded trace, 3.0.0 ≥ 6× worse);
 the engineering advisor measured 1.9.5 8% *better* on its own trace, so that row is a live
 disagreement and is not load-bearing for anything in this plan.
+
+
+---
+
+## §M — The domain-modelling pass (WORKFLOW step 5, `debruijn-domain-modeling`)
+
+The pass was run on his vocabulary before any of it was implemented. It produced one collapse, one
+correction to a finding made earlier the same day (§1 vi), and three predictions that were confirmed
+on his own files afterwards.
+
+### The collapse: `granularity` and `sym` are the same unnamed role
+
+`mkstate.build(..., granularity="vertex"|"orbit")` and `symstate.build(..., sym=24|6|3|2|1)` are two
+parallel mechanisms doing one job — **N declarations identical modulo naming, a role unnamed.** The
+role is *the partition of `W`'s deletable vertices into indivisible atoms*, and it always comes from
+the same place: **the orbits of a chosen subgroup.** Vertex granularity is the trivial subgroup;
+orbit granularity is the whole base group; a symmetry rung is a subgroup in between. One type, three
+constructors, and the flag disappears.
+
+### The model
+
+| object | shape | why this and not the alternative |
+|---|---|---|
+| `Lattice` | `a ≡ b ≡ c ≡ d (mod 2)` **and** `a − b + c + d ≡ 0 (mod 4)` | the mod-4 clause is part of the lattice, not a component choice — dropping it costs group-closure (§1 vi). A graph anchored elsewhere is a **translate**, handled by translating. |
+| `Base` | the lattice truncated once at a generous radius, carrying per-orbit `(r_min, r_max)` | *"within radius r"* then becomes a **selection predicate with two honest readings** — `meets` (`r_min ≤ r`, his stated *"completely or partially"*) and `inside` (`r_max ≤ r`, our `parts_lattice`) — instead of a constructor parameter that silently picks one. An orbit carries two conjugate radii, so a disk is not group-invariant and no single number can be the answer. |
+| `Drawing` | a vertex set over the base plus its derived edges | `M`, `A`, `W`, `R`, and the `L`/`S` halves are one type in five roles. Five types would be five copies of one thing. |
+| `Companion` | **(extra vertices, extra edges)** adjoined to `W`; the key property is *`W ∪ C` refuses four colours* | four constructors — `frozen_side`, `mono_pair` (0 vertices, 1 edge), `non_mono_set` (a 3-clique joined to every member), `pendants` — and **C's vertices are never deletable**, which is exactly why pendants set the symmetry for free. This is our own kernel's bridge (`Pigeonhole.mono_pair_of_not_colorable_append`, ledger row 31) as a data structure, and it is what turns one paper into fifteen results. |
+| `Symmetry` | a **pair** `(inp, out)` with `out ◁ inp ≤ Aut(W ∪ C)` | not four ad-hoc parameters. `out` is the **output** symmetry and its orbits are the atoms; `inp` is the **input** symmetry and the quotient `inp/out` is the dedup group. Normality is what makes the quotient act, and it is an invariant of the type rather than an unstated assumption. |
+| `Atoms` | the `out`-orbits of `W`'s deletable vertices | derived, never configured. The unit of every deletion, hyperedge and candidate. |
+| `Y` | an **antichain** of atom-sets | minimality is an invariant enforced at insertion. *"No hyperedge may contain a lower-degree one"* was going to be a control run afterwards; it is a property of the type. |
+| `{M}` | a set of **canonical representatives** under the `inp/out` action (the minimum over the images) | *"quotient or canonical form?"* — the group is finite and small, so canonical form, computed once at insertion. That makes *"non-isomorphic"* a property of the type instead of a convention in prose, which is what §3 needed. |
+| `A` | the union over the **full `inp`-orbit** of each representative | **not** the union of the representatives. `A` must be `inp`-invariant, and canonicalizing first would break that — this is finding (v) as a design rule instead of a nuisance. |
+
+### Three predictions the model made before being consulted, all confirmed on his own files
+
+- **Table 1's symmetry column is `|Stab(M)|`.** Measured in `Aut B`: `v374e1860` → **2** (his row reads
+  *"1 (2)"*), `v136e564` → **1** (his row reads *"1"*). So the parenthetical is the actual stabilizer
+  of the fewest-edge member and the bare number is the `out` subgroup the search was constrained to —
+  it is not a second search parameter.
+- **The accumulative graph is more symmetric than its minima**, because it carries `inp` where they
+  carry `out`: `v412e2106`, `v406e2082`, `v451e2400`, `v403e2112` all have stabilizer **12** against
+  `v374e1860`'s **2**; `v166e774` has **6** against `v136e564`'s **1**.
+- **Canonicalization separates genuinely different minima and collapses group-images.** The four held
+  374-vertex minima give **4 distinct canonical forms**; a planted group-image of `v374e1860`
+  canonicalizes equal to it (control fires); `v374e1864` does not (negative control fires).
+
+### What the model refuses to represent
+
+An atom that is not an `out`-orbit; a hyperedge that contains another; a `{M}` holding two
+group-images of one graph; a `Symmetry` whose `out` is not normal in `inp`; a `Companion` vertex in
+the deletable set. Each of those was reachable in the current tools and each is a way the
+reproduction could report a number that means something else.
