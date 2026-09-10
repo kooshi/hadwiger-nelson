@@ -1,0 +1,870 @@
+{
+ "kind": "parts-lattice-subtype-census",
+ "cross_kinds": [
+  [
+   [
+    16,
+    0,
+    6,
+    2
+   ],
+   [
+    16,
+    0,
+    6,
+    2
+   ],
+   24,
+   1.87591
+  ],
+  [
+   [
+    0,
+    0,
+    2,
+    6
+   ],
+   [
+    0,
+    0,
+    2,
+    6
+   ],
+   12,
+   1.87591
+  ],
+  [
+   [
+    0,
+    4,
+    4,
+    0
+   ],
+   [
+    0,
+    4,
+    4,
+    0
+   ],
+   12,
+   4.0
+  ],
+  [
+   [
+    20,
+    0,
+    0,
+    4
+   ],
+   [
+    20,
+    0,
+    0,
+    4
+   ],
+   12,
+   4.0
+  ],
+  [
+   [
+    24,
+    0,
+    0,
+    0
+   ],
+   [
+    24,
+    0,
+    0,
+    0
+   ],
+   6,
+   4.0
+  ]
+ ],
+ "rows": [
+  {
+   "subset": [],
+   "off_centre_edges": 0,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ]
+   ],
+   "off_centre_edges": 12,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 12,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 12,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 6,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 30,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 18,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 18,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 18,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 48,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 48,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 42,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 48,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 42,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 42,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 30,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 30,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 30,
+   "verdict": "sat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 60,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 54,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 54,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 54,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 42,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 66,
+   "verdict": "unsat"
+  }
+ ],
+ "works": 21,
+ "minimal": [
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 36,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     16,
+     0,
+     6,
+     2
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 30,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     0,
+     4,
+     4,
+     0
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     20,
+     0,
+     0,
+     4
+    ]
+   ],
+   "off_centre_edges": 24,
+   "verdict": "unsat"
+  },
+  {
+   "subset": [
+    [
+     0,
+     0,
+     2,
+     6
+    ],
+    [
+     24,
+     0,
+     0,
+     0
+    ]
+   ],
+   "off_centre_edges": 18,
+   "verdict": "unsat"
+  }
+ ],
+ "claim_scope": "UNSAT rows are non-vacuous subtypes, not finds."
+}

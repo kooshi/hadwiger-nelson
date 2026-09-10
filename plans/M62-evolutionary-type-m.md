@@ -1270,3 +1270,37 @@ scale-invariant and needs no denominator at all.
 named a branch that never fired, because the gloss tested for `'refuted'`/`'satisfiable'` where
 `refuses_four` returns `'unsat'`/`'sat'`. **`G30`'s third failure mode inside a script written to
 settle a vacuity question**; the verdict stood, the sentence beside it did not.
+
+### §R20 — The subtype law on the corrected base, exhaustive: a connection works iff it carries BOTH kinds
+
+With the base right (§R19), the subtype question is 32 exact asks instead of a search, and it comes
+back as a clean characterisation. The five off-centre cross-edge orbit pairs split by radius into
+Parts's own two kinds:
+
+* **reference**, `|u|² = 4` (radius 2): `(0,4,4,0)` — 12 edges, **his** — plus `(20,0,0,4)` 12 and
+  `(24,0,0,0)` 6.
+* **auxiliary**, `|u|² = (17±√33)/6` (the conjugate-ring channel, product `8/3`): `(0,0,2,6)` — 12
+  edges, **his** — plus `(16,0,6,2)` 24.
+
+**All 32 subsets decided, no cap, no unknown:**
+
+| | subsets | verdict |
+|---|---|---|
+| contains ≥ 1 reference **and** ≥ 1 auxiliary | **21** | **all UNSAT — the arena refuses four colours** |
+| one kind only (or empty) | **11** | **all SAT — 4-colourable** |
+
+`(2² − 1)(2³ − 1) = 21` and `2² + 2³ − 1 = 11`: the split is **exactly** by kind, with no exception
+in either direction. **So `[Parts2020a]` §3's *"the existence of triangles of the second kind is
+essential"* is proved rather than observed — and it is symmetric, which his sentence does not say:
+the FIRST kind is equally essential.** The two sharp negatives are the ones a search would not have
+bothered to run: **both auxiliary orbits together fail** (36 edges, SAT), and **all three reference
+orbits together fail** (30 edges, SAT) — every reference cross edge the base has, and it is not
+enough. The property is of the *radii*, not of the orbits.
+
+**Six minimal subtypes, and the cheapest is not his.** `(0,0,2,6) + (24,0,0,0)` connects at **18
+off-centre cross edges** (12 auxiliary + 6 reference) where his `(0,4,4,0) + (0,0,2,6)` uses 24.
+Whether fewer cross edges is better for the descent is a separate question — fewer edges means a
+looser arena and more patterns for the other side to kill — and is not claimed here.
+
+`data/m62/pl-subtypes.json`, 497 s single-threaded. Cost asymmetry as everywhere in this milestone:
+a SAT row costs ~1 s, an UNSAT row 10–50 s.
