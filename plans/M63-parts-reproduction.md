@@ -731,3 +731,64 @@ radius, orbit labels and orbit sizes, so *"do not leave the base unfrozen"* is c
 promised. `{M}` carries each member's **orbit-filling profile**, which is both §3's gate and the
 space M62's genome will live in. Every artifact stamps machine, cores, git commit, git-dirty,
 freeze commit and config hash.
+
+---
+
+## §R1 — THE DECISIVE EXPERIMENT: his S-subgraph reduction, reproduced on every attested number
+
+*Run 2026-09-10 on the machine, one core, 588 s. Artifact `data/m62/m63-S166-reduction.json`;
+instruments `tools/parts_stage.py`, `tools/parts_reduce.py`, `tools/parts_minima.py`.*
+
+**The setup, and why it is decisive.** Both the input and the output of one complete iteration of
+his algorithm are published: `v166e774.vtx` is his accumulative S-graph `A`, and `v136e564.vtx` is
+one of the minima it reduces to. Our pipeline saw only the input. The companion `C` was his own
+`v374e1860` (an L-subgraph), frozen; the rung was **1**, which is the output symmetry his Table 1
+gives for that row; nothing was tuned, because there was nothing to tune — this was the first run.
+
+**First, the stage reproduces his 509 from our own geometry.** `Stage(L374, S136)` builds
+**509 vertices, 2442 edges, and exactly 18 connection edges not touching the shared centre** — his
+`12` reference plus `6` auxiliary, i.e. the subtype name `M6` read off the edge count — with the
+cross edges coming from *our* `ρ₁₅` law and nothing from his tables. It refuses four colours.
+
+**Then the reduction, against Table 1's S-subgraph M6A row:**
+
+| quantity | `[Parts2020a]` | ours | |
+|---|---|---|---|
+| `\|M\|` | **136** | **136** — `minimum 135 over all selections`, plus the shared centre | agrees |
+| edges of `M` | **564–567** | **{564: 6, 565: 6, 566: 24, 567: 12}** | agrees, and both endpoints attained |
+| `\|A\|` | **166** | **166 — and `A` equals his `v166e774` AS A SET** | agrees |
+| `\|{M}\|` | **8** | **8** up to `Aut(A)` (order 6); 24 up to `Aut(A) ∩ Aut(C)` (order 2); 48 as found | agrees, once the group is named |
+| his own `v136e564` | — | **is one of our 48 minima** (six of its group images appear) | — |
+
+**`A = ⋃{M}` recovering his published accumulative graph vertex for vertex is the strongest single
+result here**, because `A` is the loop's state variable and it is the thing a descent has no
+analogue for. The level closed properly — *"next candidate weighs 136 > 135: the level is
+complete"*, method `exhaustive-level`, **zero undecided asks** — so the bound is
+`lower = upper = 135` at rung 1 and is therefore the true minimum, not a rung-restricted one.
+
+**And it settles the convention his paper leaves unstated, by measurement.** §3 recorded `|{M}|` as
+un-gateable because *"non-isomorphic"* is never defined and §5.8 removes duplicates by *"the set of
+permutations of the quotient group"* — a property of his run. Our 48 raw minima give **24** up to
+the stage's own input symmetry `Aut(W ∪ C)` and **8** up to `Aut(A)`, the symmetry of the reduced
+graph with the companion free to move with it. **His number is 8**, so that is his convention, and
+`|{M}|` is gateable for the rest of the milestone where it was not before. *This is exactly what the
+experience pass's `SetSize` type was for: a bare integer would have hidden the question.*
+
+**The hypergraph, for calibration.** 96 degree-1 hyperedges (critical atoms) of 165, then 773
+correction sets in all — by size `{1: 96, 2: 106, 3: 133, 4: 179, 5: 53, 6: 130, 7: 39, 8: 22,
+9: 13, 10: 2}`. His §6 says he used *"degrees 3 or 4 for S-subgraph"*; harvesting them lazily from
+the solver's own models reaches degree 10 for free.
+
+**The cost, with its populations separated** (they differ by 12×, so a merged mean would describe a
+mixture nobody can reproduce): **13,176 colourable asks at 0.009 s** and **3,076 refusing asks at
+0.108 s**, 16,252 in all, **zero undecided**, 588 s on one core. His own §5.10 budget for the
+S reduction was *"slightly more than 10⁵ checks … slightly more than a day on a standard laptop"* —
+we are 6× fewer asks and 150× faster in wall clock, on one core, which says the implicit
+hitting-set form is a real improvement on his explicit enumeration and not merely a restatement.
+
+**One instrument incident, caught by the house rule and not by luck.** The first run of phase 2 was
+**silent for five minutes at 99.5 % CPU** — my own tool breaking *"report from inside a phase, never
+only at its end"*, because the loop logged on `OPTIMUM FOUND` and every fifth minimum and nothing
+else. It was killed and rebuilt with a time-gated per-iteration line carrying the rising lower
+bound, the two ask populations with their separate means, and a tick inside the correction-set
+shrink; only then was it possible to see that the bound was climbing 118 → 135 rather than stuck.
