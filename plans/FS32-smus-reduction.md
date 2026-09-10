@@ -169,3 +169,75 @@ unaffected (it asked with every group present), but nothing further could have b
 the tool's own base case); a selection whose two sides are unequal (legal — Parts's own object is
 375 + 135); a group whose members span both blocks (**forbidden by construction** — the group list is
 built per side).
+
+## §M2 — Execution modelling pass: the invariant, and the failure mode that would look like a record
+
+**The one structural fact everything rests on is monotonicity.** `S ⊆ S'` and `refutes(S)` implies
+`refutes(S')` — more vertices, more constraints, and a colouring of `S'` restricts to one of `S`. So
+`refutes` is **upward closed**, and that alone gives the duality:
+
+> **`refutes(S)` ⟺ `S` hits every correction set.**
+> (⟸) if `S` misses a correction set `C` then `S ⊆ G ∖ C`, which is colourable, so by monotonicity
+> `S` is too. (⟹) if `S` refutes and `S ∩ C = ∅` then `S ⊆ G ∖ C` and monotonicity contradicts `C`
+> being a correction set.
+
+**The loop invariant.** `M` is a set of **correction sets** (`¬refutes(G ∖ C)` for each), and `S` is a
+minimum-**weight** hitting set of `M`.
+
+**Why `w(S)` is a rigorous LOWER bound at every single iteration** — the property that makes an
+interrupted run reportable: every refuting selection hits every correction set, so it hits every
+member of `M`; `M` is a *subset* of the correction sets, so minimising over it is a **relaxation**.
+Hence `w(S) ≤ w(S*)` always, and `w(S)` is non-decreasing as `M` grows. **The bound needs only that
+each `C ∈ M` really is a correction set — minimality is nowhere required**, which is why the loop may
+add un-minimised correction sets and stay sound.
+
+**The exit condition and the optimality certificate are the same event.** `UB` = the least weight
+among selections the oracle has *refuted*; when the oracle refutes the current minimum hitting set,
+`LB = UB` and the answer is optimal. Nothing else has to be checked.
+
+**Termination.** If the oracle finds a colouring of `S` then `G ∖ S` is a correction set, and it is
+**new**, because `S` hits every member of `M` while `S ∩ (G ∖ S) = ∅`. So `|M|` strictly grows and
+the loop terminates. **The bound is `2^m` and therefore useless in practice** (`m = 184`); real
+termination is `LB` rising to meet `UB`, which is empirical. *Recorded as a known-weak measure rather
+than dressed up*: minimising each correction set to an MCS would bound the count by the number of
+MCSes, at `|C|` extra oracle calls apiece — with `|C| ≈ 180` and ~10 s per call that is half an hour
+per minimisation, so it is a measured trade and not an obvious win.
+
+**The failure mode that would look like a record, and it is the sharpest thing in this pass.** The
+oracle is three-valued — refutes / colourable / **unknown at budget** — and an `unknown` may be
+folded into *neither*:
+
+* fold it as **colourable** and you add `G ∖ S` to `M` as a correction set **without having shown it
+  is one**. If it is not, the hitting-set constraint is spurious, `w(S)` **stops being a lower
+  bound**, and the loop can return a selection **lighter than the true optimum**. That is not a lost
+  measurement — *it is a smaller-than-true answer wearing the shape of a record.*
+* fold it as **refuting** and an infeasible selection is reported as feasible.
+* skip it and continue, and the hitting-set solver returns the same `S` next iteration forever;
+  excluding `S` to escape that **is** the first unsound move in different clothes.
+
+**So `unknown` halts the loop and reports the sandwich `[LB, UB]`, naming the selection that caused
+it.** Raising the budget and re-asking is the only other sound response. `tools/hitset.py` already
+does exactly this and its docstring says so — *"Oracle `unknown` at cap ends the run with the
+sandwich `[LB, UB]` reported as such"* — which is the third time today the answer was already in the
+repository.
+
+**The box test, same question, different answer, because the two are asymmetric.** `blocks()` decides
+whether to *accept a drop*, and **declining a drop is always safe** — it costs completeness, never
+soundness. So an undecided box may be treated as "do not accept". What it may **not** do is *say
+survivor*, because "a survivor exists" is a claim about the world that later reasoning consumes
+("this orbit is essential"). The verdict type is therefore three-valued —
+`Blocked | Survivor(i) | Undecided(i, budget)` — the decision folds `Undecided` with `Survivor`, the
+**log and the artifact do not**, and a descent that finishes with any `Undecided` has converged to a
+fixed point **of its budget**, not of the mathematics, and its summary must say so. This is M62
+§M3.1's own verdict rule applied where it had not been: today's live descent had **no budget at
+all** and spent 18 minutes of CPU on one box before it was stopped.
+
+**The `L↔S` involution is sound as symmetry breaking, and is being used as a control anyway.**
+`τ(L, S) = (σS, σL)` is an isometry of arenas, so it preserves feasibility *exactly* and preserves
+weight (`σ` permutes orbits of equal size; the swap preserves the total). The minimisation hazard —
+breaking a symmetry whose two images are not both feasible can cut the optimum — **does not arise
+here**, because `refutes(τ(X)) ⟺ refutes(X)`. So a lex-leader restriction to one representative per
+`τ`-orbit is sound and would buy ~2×. **It is nonetheless held in reserve**: the same fact used as a
+*control* is free and catches encoding bugs (any reported optimum's `τ`-image must have equal weight
+and must also refute), while as symmetry *breaking* it is new constraint code inside the one place a
+bug produces a too-small answer. **Control first; the 2× only if the run needs it.**
