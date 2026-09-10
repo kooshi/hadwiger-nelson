@@ -1399,3 +1399,98 @@ available the whole time and never run — the lattice congruences check against
 loop and pass 510 for 510, isolating the failure to radius; the milestone validated against
 nineteen published orbit labels instead. `G21` again, and this time on the *boundary* of an
 enumeration rather than on its contents.
+
+### §R23 — The speed campaign: five rounds, and the fourth one measured that speed was never the binding constraint
+
+Kooshi's instruction was *"iterate and optimize … improve the descent speed … at least 5 rounds of
+optimization with your advisors."* Rounds 1–3 are speed and they landed; round 4 measured that no
+amount of it reaches the target, and round 5 is the move that could.
+
+**Round 1 — the ask kernel.** A recorded 14-ask trace, replayed under swappable backends, verdicts
+compared against the reference on every row (a backend that is faster and answers differently is
+not faster). Desktop, 32 cores: **CaDiCaL 1.5.3 = 73.5 s, 1.9.5 = 87.9 s (+19 %), 3.0.0 killed at
+≥ 6×.** Newer is worse on this family; the advisor's own sweep puts 1.9.5 8 % *ahead* instead, so
+that row is a disagreement and is recorded as one. Its mechanism, offered with its test: CaDiCaL 2.x
+added gate and congruence extraction, and a one-hot colouring encoding is nothing *but* gates, while
+96 % of the runtime is search. **The cost split is the useful half**: colourable asks 0.02–2.8 s,
+refusing asks 10–15 s, and one refusing ask ran **17 minutes** before it was killed.
+
+**Round 2 — the algorithm, and the measurement inverted my own design.** The census was built on a
+theorem — colourability is downward closed, so a criticality witness is *permanent* — and run first
+on the argument that a permanent fact should never be re-derived. Measured: the first **191 asks
+came back 177 droppable-alone and 14 critical**, at a median 7.9 s each. **At the top of a descent
+the census discriminates almost nothing; at the bottom it is exactly right**, because there almost
+everything is critical and its asks are the cheap colourable ones. Driver rewritten as
+descend-then-census (`tools/descent3.py`). The descent's own inner search became **gallop-then-
+bisect** on the droppable prefix: refusal is monotone in the prefix length, and a plain bisection
+spends `log2(n)` asks to learn that not even one vertex comes off, which is the common case late.
+
+**Round 3 — three structural findings, two of them from the engineering advisor and all three
+re-derived here before use.**
+
+*(a) The census is 47 asks, not 756, and it is exact.* All 24 elements of the base's group are
+automorphisms of the 757-vertex arena and the closure is orbit-closed, so deleting `v` and deleting
+`g(v)` give **isomorphic** instances. Control: every member of orbits of size 6, 12 and 24 asked
+separately — verdicts constant in each (`DDDDDD`, `CCCCCCCCCCCC`, `CCCCCCCCCCCCCCCCCCCCCCCC`).
+**10 critical orbits / 144 vertices; LOWER BOUND 145.** The discount is available once per arena,
+from the orbit-closed selection: Heule-510's setwise stabiliser in the group is trivial, so vertex
+granularity really is forced after the first round.
+
+*(b) Heule-510 is exactly vertex-critical.* A full 509-ask census, 8 workers, **40 seconds**:
+**509 critical, 0 droppable-alone, 0 undecided.** So no proper subset of it refuses, and the
+identity closes from both sides: `144 critical + 365 droppable-and-in-Heule + 1 centre = 510`.
+
+*(c) Failed-assumption cores are worthless here, and the mechanism I first wrote for that was
+wrong.* Measured: `asked 756 → core 756, zero free drops, fixed point at round one`. I read it as a
+granularity effect — one literal per vertex, so every touched vertex is in the core. The derivation
+runs the other way: a coarse group's literal is free only when **every** member is unused, which is
+strictly stronger, so coarsening can only weaken cores. The discriminating ask at orbit granularity
+returns **zero free orbits** as the derivation predicts. **The variable is how much of the object a
+single refutation touches**, and this object is tightly coupled — which its vertex-critical core
+independently confirms. `get_core()` is free, so call it; expect nothing on a tightly-coupled
+object at any granularity.
+
+**Round 4 — the measurement that ends the speed campaign.** Nine random-order 1-minimal descents
+from the 757 closure, ~500–900 s each, twelve in parallel:
+
+**582, 586, 589, 593, 595, 598, 599, 599, 609** — mean 594.4, standard deviation 7.6.
+
+**The 510 all nine of them contain is eleven standard deviations below that mean.** The minimum of
+`N` samples improves like `sqrt(2 ln N)`, so no number of orders and no amount of parallelism gets
+there — 768 descents would be expected to reach 529, and that is eleven hours. **Order diversity is
+not a route to the record, and every parallel shape converts cores into more samples of a fixed
+distribution.** Three parallel shapes were priced against it and all lose: racing seeds is **3.1×
+worse** than spending the same cores on more descents (the 23× heavy tail is on the *colourable*
+asks, which are 80 % of the count and 18 % of the time, while the refusing asks that are 82 % of the
+time have a 1.6× spread); cube-and-conquer is aimed three orders of magnitude away from a
+65,000-conflict median accept; clause sharing is sound for free here (every worker bootstraps the
+identical CNF) and still speeds up sampling, which is not the constraint.
+
+**Round 5 — the move a descent cannot make.** `tools/lns_worker.py` and `tools/lns_guided.py`:
+destroy `r` vertices of a solution and repair with material currently outside it, refusing to spend
+`r` — a swap that must pay. The guided repair is this project's own kill engine (M49 §R8, M50) one
+level up and **counterexample-guided**: ask, take the colouring the solver hands back, add a vertex
+whose neighbourhood inside the selection is rainbow under it — which is the only way one vertex can
+destroy one colouring — and repeat. Failing iterations cost about `log2(r)` colourable asks and run
+at ~200 asks/s; only an iteration about to improve pays a refusing ask.
+
+**Two wrong versions are kept in the files rather than deleted.** The first repair pool *contained*
+the destroyed set, so it re-added 96 of 100, grew a 509-vertex object to 585, and then spent ~100
+expensive asks trimming back toward where a plain descent lands anyway — an LNS that is a slow
+re-run of the thing it exists to beat. The second had a gallop that never tested the full pool (1,
+2, 4, 8, 16, 32, then exit at 64 with 48 candidates), so it reported "no repair" for a pool that
+always had one — **silently, because that branch had no log line**, which is the blind-phase rule
+broken again inside a tool written after it.
+
+**What stands at the close.** The best object is **583 vertices (582 + the hard centre),
+independently certified vertex-critical** — a fresh 582-ask census, 40 s, 582 critical / 0 droppable
+/ 0 undecided. The sandwich for the 757 closure is **145 ≤ minimum ≤ 510**. **No object below 510
+has been found, and the record of 509 is not beaten.** The guided search is running; it has found no
+improving swap in several thousand iterations from either start, which is itself a statement about
+how tight this object is.
+
+**Speed, stated as the same task before and after.** *Produce a certified 1-minimal refusing
+selection from the arena.* Before: eight seeded descents on the radius-2 arena, 43 minutes, **none
+converged**, best 2,538 on an object that provably excludes the target. After: **nine converged and
+certified 1-minimal objects in about fifteen minutes of wall clock**, on an arena that contains the
+record's own lineage exactly.
