@@ -1,4 +1,8 @@
-# FS-29 — The reduction stage is a solved problem in another literature
+# FS-32 — The reduction stage is a solved problem in another literature
+
+> **RENUMBERED 2026-09-10: minted as FS-29, a number already taken by the overclaim check
+> (`plans/STUB-vacuity-coverage.md` §Phase C, minted one day earlier on 2026-09-09). The older
+> mint keeps the number; no content here changed.**
 
 *Minted 2026-09-10 at Kooshi's direction ("stub all 3; I suspect we won't get anywhere until those
 are addressed"). Found by Poros in the M62 review, `plans/POROS-2026-09-10-m62.md`. **Not yet acted

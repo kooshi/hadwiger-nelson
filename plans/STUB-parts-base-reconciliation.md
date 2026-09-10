@@ -106,4 +106,4 @@ made at `ρ₁₅` is on an arena missing edges**, which would also explain why 
 of magnitude larger than the record.
 
 Either way it is one of the two things that must be settled before more compute is spent (the other
-is FS-29).
+is FS-32).
