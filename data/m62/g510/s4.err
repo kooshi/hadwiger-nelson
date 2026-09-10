@@ -1,0 +1,2 @@
+  s4(r=16) it     0: no swap under 16 [best 509, ask 16, 0s]
+  s4(r=16) it   200: no swap under 16 [best 509, ask 3216, 20s]

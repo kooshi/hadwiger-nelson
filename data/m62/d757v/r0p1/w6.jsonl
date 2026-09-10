@@ -1,0 +1,17 @@
+{"group": 6, "verdict": "droppable-alone", "weight": 1, "seconds": 16.36}
+{"group": 22, "verdict": "droppable-alone", "weight": 1, "seconds": 12.82}
+{"group": 38, "verdict": "droppable-alone", "weight": 1, "seconds": 7.3}
+{"group": 54, "verdict": "droppable-alone", "weight": 1, "seconds": 7.23}
+{"group": 70, "verdict": "droppable-alone", "weight": 1, "seconds": 6.24}
+{"group": 86, "verdict": "droppable-alone", "weight": 1, "seconds": 8.16}
+{"group": 102, "verdict": "droppable-alone", "weight": 1, "seconds": 9.31}
+{"group": 118, "verdict": "droppable-alone", "weight": 1, "seconds": 10.2}
+{"group": 134, "verdict": "critical", "weight": 1, "seconds": 0.1}
+{"group": 150, "verdict": "droppable-alone", "weight": 1, "seconds": 7.58}
+{"group": 166, "verdict": "droppable-alone", "weight": 1, "seconds": 6.34}
+{"group": 182, "verdict": "droppable-alone", "weight": 1, "seconds": 1.08}
+{"group": 198, "verdict": "droppable-alone", "weight": 1, "seconds": 7.45}
+{"group": 214, "verdict": "droppable-alone", "weight": 1, "seconds": 1.32}
+{"group": 230, "verdict": "critical", "weight": 1, "seconds": 0.1}
+{"group": 246, "verdict": "droppable-alone", "weight": 1, "seconds": 1.43}
+{"group": 262, "verdict": "droppable-alone", "weight": 1, "seconds": 2.82}

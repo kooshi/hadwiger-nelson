@@ -1,0 +1,8 @@
+  s3(r=6) it     0: no swap cheaper than 6 [best 509, ask 3, 0s]
+  s3(r=6) it   500: no swap cheaper than 6 [best 509, ask 1503, 25s]
+  s3(r=6) it  1000: no swap cheaper than 6 [best 509, ask 3003, 53s]
+  s3(r=6) it  1500: no swap cheaper than 6 [best 509, ask 4503, 87s]
+  s3(r=6) it  2000: no swap cheaper than 6 [best 509, ask 6003, 124s]
+  s3(r=6) it  2500: no swap cheaper than 6 [best 509, ask 7503, 157s]
+  s3(r=6) it  3000: no swap cheaper than 6 [best 509, ask 9003, 194s]
+  s3(r=6) it  3500: no swap cheaper than 6 [best 509, ask 10503, 238s]

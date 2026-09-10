@@ -1,0 +1,5 @@
+  s1(r=4) it     0: no swap cheaper than 4 [best 582, ask 2, 0s]
+  s1(r=4) it   500: no swap cheaper than 4 [best 582, ask 1002, 48s]
+  s1(r=4) it  1000: no swap cheaper than 4 [best 582, ask 2002, 103s]
+  s1(r=4) it  1500: no swap cheaper than 4 [best 582, ask 3002, 166s]
+  s1(r=4) it  2000: no swap cheaper than 4 [best 582, ask 4002, 234s]

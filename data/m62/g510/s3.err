@@ -1,0 +1,2 @@
+  s3(r=12) it     0: no swap under 12 [best 509, ask 12, 0s]
+  s3(r=12) it   200: no swap under 12 [best 509, ask 2412, 20s]

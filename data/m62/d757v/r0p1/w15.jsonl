@@ -1,0 +1,12 @@
+{"group": 15, "verdict": "droppable-alone", "weight": 1, "seconds": 19.06}
+{"group": 31, "verdict": "droppable-alone", "weight": 1, "seconds": 13.56}
+{"group": 47, "verdict": "droppable-alone", "weight": 1, "seconds": 10.08}
+{"group": 63, "verdict": "droppable-alone", "weight": 1, "seconds": 7.93}
+{"group": 79, "verdict": "droppable-alone", "weight": 1, "seconds": 8.96}
+{"group": 95, "verdict": "droppable-alone", "weight": 1, "seconds": 10.52}
+{"group": 111, "verdict": "droppable-alone", "weight": 1, "seconds": 9.1}
+{"group": 127, "verdict": "critical", "weight": 1, "seconds": 0.62}
+{"group": 143, "verdict": "critical", "weight": 1, "seconds": 2.28}
+{"group": 159, "verdict": "droppable-alone", "weight": 1, "seconds": 9.51}
+{"group": 175, "verdict": "droppable-alone", "weight": 1, "seconds": 8.61}
+{"group": 191, "verdict": "droppable-alone", "weight": 1, "seconds": 8.28}

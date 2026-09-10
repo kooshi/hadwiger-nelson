@@ -1,0 +1,2 @@
+  s6(r=32) it     0: no swap under 32 [best 509, ask 32, 0s]
+  s6(r=32) it   200: no swap under 32 [best 509, ask 6384, 29s]
