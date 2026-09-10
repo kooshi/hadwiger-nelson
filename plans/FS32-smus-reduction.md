@@ -105,3 +105,67 @@ corrected base at Parts's own subtype.
   box solves no budget, so one hard box hangs the descent forever — measured today, two workers at
   18 minutes of CPU on a single refine step. A box solve that exceeds its budget is **undecided**,
   the drop is **not accepted**, and the log must say `undecided at budget`, never `survivor`.
+
+## §M1 — Domain modelling pass: one representation, and a bug the pass caught
+
+**Three representations were in play and they collapse to one, because two of them differ only in a
+LIST.** `descent-cull` already names the role — `GroupKind::{Cheats, Vertices}` — and the type-M
+descent's orbit granularity is a third value of that same enum, not a third model:
+
+```
+Arena       vertices 0..2n, edges          — exists (typem.Arena), unchanged
+GroupList   [(label, weight, members)]     — the one thing missing
+              members ⊆ arena vertices, pairwise disjoint
+              their union is exactly the DROPPABLE vertices
+              anything in no group is HARD — always present
+Encoding    hard = guarded at-least-one ∧ colour⇒present ∧ conflicts ∧ pins
+            soft = unit (a_g), weight |members|
+```
+
+**"Orbit-level" and "vertex-level" are one model with two group lists**, which is what makes the
+two-stage descent (coarse then fine) a parameter rather than a rewrite.
+
+**Decision 1 — the box decomposition is INCIDENTAL and is dropped.** What is intrinsic is the
+*interface*: the two blocks touch only at the cross-endpoint vertices, so each constrains the other
+only through the colouring pattern there. The box enumeration is one way to exploit that separation
+and it **materialises a set exponential in the interface** — measured today at 18,408 for 24
+endpoints. The monolithic CNF exploits the same separation implicitly, inside the solver, for free.
+*What the box form uniquely gives is diagnostic, not structural*: `|P_L|` and `|P_S|` are objects one
+can count, and their asymmetry (264 against 18,408) is how §R21 found the centre-pin effect. Keep it
+as an instrument; do not build the search on it. **A second reason, from the unsampled member:** the
+box form indexes patterns by one side's endpoints and quietly assumes the two sides' endpoint sets
+correspond — true at `ρ₁₅` on this base, where cross edges join `u` to `ρu` within one orbit, and
+**not a fact about type M in general**. The monolithic form never asks.
+
+**Decision 2 — the `L` and `ρS` copies of one base orbit are TWO groups, and the pass found the
+symmetry that makes that safe.** Parts chooses them independently (his reference orbit is *"always
+full"*, his auxiliary *"may be only partially filled"*). And the problem has a genuine involution:
+since `ρρ̄ = 1` and complex conjugation `σ` is *in* the order-24 group,
+
+> `ρσ(L ∪ ρS) = σS ∪ ρ(σL)` — **the arena of `(L, S)` is isometric to the arena of `(σS, σL)`.**
+
+So the optimum comes in pairs under a permutation of the group list, which halves the space and is a
+**free control**: any reported optimum must be matched by its image.
+
+**Decision 3 — weight is the VERTEX COUNT, not the group count.** The record is quoted in vertices
+(509) and orbits here are 1, 6, 12 or 24 vertices, so minimising groups is a different problem.
+`OptUx` takes a weighted WCNF, so this costs nothing.
+
+**Decision 4 — orbit granularity provably cannot reach the record, and that is fine.** Parts's `L` is
+375 vertices; orbit sizes are `{1, 6, 12, 24}` with **exactly one orbit of size 1** (the centre — a
+point fixed by the whole group is the origin), so 375 is not plausibly a union of whole orbits, and
+his §5.6 says so outright: *"priority should be given to partially filled base orbits"*. **Orbit
+groups are stage one; vertex groups are stage two; they are the same model.**
+
+**The bug the pass caught, before any run.** The centre is pinned by a **hard** clause
+(`colour(centre) = 0`) while also sitting in an orbit of its own. Make that orbit droppable and the
+encoding says *"the centre wears colour 0"* and *"the centre wears no colour"* at once — **UNSAT for
+a reason that has nothing to do with colouring**, so a hitting-set search would price the centre as
+essential on a contradiction and every optimum below it would be corrupt. **The centre belongs to no
+group: it is hard.** The feasibility probe of §A had this defect; its 180-of-184 core reading is
+unaffected (it asked with every group present), but nothing further could have been trusted.
+
+*Illegal states remaining, audited rather than assumed:* an empty selection (legal, 4-colourable, and
+the tool's own base case); a selection whose two sides are unequal (legal — Parts's own object is
+375 + 135); a group whose members span both blocks (**forbidden by construction** — the group list is
+built per side).
