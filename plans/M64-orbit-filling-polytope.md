@@ -483,7 +483,7 @@ nothing here predicts the twelve other dead rungs.
 
 ### §R2 — The decomposition, reproduced by the instrument on both complete level sets
 
-`tools/parts_faces.py`, **19 planted controls, all fire** (`--self-test`), including the facet bug
+`tools/parts_faces.py`, **18 planted controls, all fire** (`--self-test`), including the facet bug
 that inflated a hull count during subplanning. Run on both M63 level sets with derivation by ask:
 
 | | S (136-vertex level) | L (375-vertex level) |
