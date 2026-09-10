@@ -1,3 +1,23 @@
+# STUB — FS-35: the expansion step's missing LOOK-AHEAD
+
+> **RE-AIMED 2026-09-10, before any work, by the second Poros advisory — and the re-aim is a hard
+> push-back on this stub's own premise.** *"Neither is a measure, and a measure is the wrong
+> product."* Expansion **enlarges** the atom set, so the minimum is already non-increasing — a
+> decreasing integer bounded below, which terminates for free. **Termination was never the problem;
+> STAGNATION is**, and M63 §O(3)'s own reading of his stopping rule is *"`A` stopped changing"*. A
+> local search has **basins, not measures**. What this milestone should aim at is a **LOOK-AHEAD**:
+> *price a candidate expansion before paying to reduce it* — which M64 §R10(b) makes free, since the
+> rung lattice and every rung's minimum now come from the stored `Y` by hitting-set duality with no
+> colouring ask.
+>
+> **And a hard precondition, half an hour against a session:** compute both candidate quantities at
+> **each state of the one recorded trajectory** — `[Parts2020a]`'s own four-state path, transcribed
+> at M63 §4 phase E, with his four published `{M}` columns on disk. *A quantity that does not move
+> along the only path anyone has ever recorded is dead before the milestone opens.* **Run that
+> first; if it reads flat, this stub is retired rather than worked.**
+
+# (original text follows)
+
 # STUB — FS-35: the expansion step's missing measure
 
 *Minted 2026-09-10 at the M64 close, from what M64 §R5 handed over. Written for a reader with zero
