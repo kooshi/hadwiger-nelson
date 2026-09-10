@@ -204,3 +204,121 @@ degree statistic in disguise and is used only to drive density in generation 1.
 Tools under `tools/`; data under `data/m62/`; the Lean consumer for a certified find; a
 `BIBLIOGRAPHY.md` pass adding `[Wagner2021]`, `[MundingerEtAl2025]` and the RL follow-ups; and
 this file's §R with every prediction scored.
+
+---
+
+## §M1 — Domain modeling pass (`debruijn-domain-modeling`, 2026-09-09)
+
+### §M1.0 — §0a IS CLOSED, and P1 is MET. The coupling constant is `7/8`, not the Moser twist.
+
+The skill's first instruction is to externalize at the tripwire rather than head-simulate, and the
+tripwire was already tripped once (the subplan records a failed substitution). Externalized twice —
+against the paper's arithmetic, then **decorrelated against the object itself**.
+
+**Against the arithmetic.** Parts's auxiliary radii `√11/2 ± √3/6` square to **`(17 ± √33)/6`** with
+product **`8/3`** — which is, character for character, M31's **conjugate-ring channel**, derived a
+priori in the M31 subplan on 2026-08-10 and verified at 26 exact censuses. M31's quadrature conic
+`t² + r² − 2·Re(W)·tr = 1` returns **exactly 1** for *both* of Parts's families at `Re(W) = 7/8`,
+and returns `4/3` and `11/9` at `Re(ρ) = 5/6`.
+
+**Against the object** (`tools/heule510.json`, exact field-16 coordinates, centre = vertex 0):
+
+| | measured on Heule-510 | Parts §4 says | conic at `Re = 7/8` |
+|---|---|---|---|
+| vertices at `r² = 4` | **24** (= 12 per copy) | reference orbit `(0,4,4,0)`, 12, *always full* | — |
+| vertices at `r² = (17±√33)/6` | **9 and 9** | auxiliary orbit `(0,0,2,6)`, 12, *may be partial* | — |
+| ref–ref edges | **12** | reference edges | `= 1` ✓ |
+| aux+ – aux− edges | **6** | auxiliary edges, "connected crosswise" | `= 1` ✓ |
+| aux+ – aux+ | **0** | — | `0.948` ✗ |
+| aux− – aux− | **0** | — | `0.469` ✗ |
+
+Every cross edge of the object sits at `cos θ = 7/8` at the centre, and the conic **selects exactly
+the two families that occur and rejects the two that do not.** Six auxiliary edges — subtype M6,
+matching Parts's classification of the Heule lineage.
+
+**`7/8 = Re(ρ₁₅)`**, the distance-2 spindle rotation, which this project has carried since M31.
+Parts writes *"the rotation multiplier is ρ"*; whatever his `ρ` denotes, the coupling invariant of
+the record's own construction is `7/8`, and **the quadrature law is the general form of a fact he
+states as an observation and calls essential without explaining.**
+
+**Why this is the milestone's lever.** His open question — *"working constructions of type M with
+other rotations are not known yet"* — becomes computable: for a coupling constant `c`, the
+admissible cross-edge families are the base-lattice radius pairs on `t² + r² − 2c·tr = 1`, in
+closed form, **before any graph is built.**
+
+### §M1.1 — Theorem B pins the rotation. It is a constraint, not an obstacle.
+
+The candidate obstruction: if the rotation lies in the norm-one group of `K(i)`, the whole object
+stays in `K²` and **Theorem B makes it 4-colourable** — the search would be hunting an object our
+own kernel forbids. Checked: Heule-510 carries `√5` (G27), and `ρ₁₅` adjoins `√15 = √3·√5`. So the
+rotation *must* leave `K`, exactly as the 2-adic wall requires, and the constraint is sharp:
+
+> **The rotation is a norm-one element of `K(i)(√w)` for a wall-breaking `w`, its real part is
+> rational, and that real part must admit at least two radius families in the base lattice** —
+> Parts: *"the existence of triangles of the second kind is essential."*
+
+**This also kills the milestone's worst adversarial member for free.** A candidate could satisfy the
+letter (not 4-colourable) while violating the intent (`L` alone is already 5-chromatic, the cross
+edges doing nothing). **Theorem B makes that unrepresentable**: `L ⊆ K²` is always 4-colourable, so
+every find's fifth colour is necessarily bought by the coupling. No guard needed; the theorem is
+the guard.
+
+### §M1.2 — The genome: a bitset pair over a fixed base lattice. Points are never moved.
+
+The tension in the pass's brief resolves to **orbit-structured subsets of a fixed lattice**, and the
+record-holder says so himself: *"The orbit-filling tables are usually more informative than the
+graph image, and allow one to compare different graphs and to devise directions of further attack."*
+
+The intrinsic structure is a **selection**, not a placement:
+
+```
+Base       B     : a finite G-closed set of K-points, computed once   (immutable, shared)
+           E_int : all unit pairs inside B                            (immutable, shared)
+           E_cross(ρ) : all (u,v) with |u − ρv| = 1                   (immutable per rotation)
+Candidate  (L, S) : two bitsets over B, both containing the centre
+Graph      V = L ⊔ ρS with the centre identified
+           E = E_int|_L  ∪  E_int|_S  ∪  E_cross ∩ (L × S)
+```
+
+**`S`'s internal edges are `E_int`, the same table, because `ρ` is an isometry.** Three fixed tables
+and two bitmasks are the whole object.
+
+What this representation deletes, which is the measure of its rightness:
+
+| ugliness in the conversational plan | why it is gone |
+|---|---|
+| "move a point to a nearby location in K" severs every unit edge | there is no *nearby* — only *a different orbit member*. Every candidate is a valid unit-distance graph in the base by construction |
+| random walks generate trees | the base's edges are precomputed; a selection inherits them |
+| 50/50 point crossover leaves two disconnected halves | crossover is a bitwise mix on a **shared** index set — the halves are already registered to each other |
+| the 1 % in-field glue-point hit rate | paid once, when `B` is built, not per mutation |
+| unit-distance validity as a per-candidate check | an invariant of the base; a candidate cannot express an invalid graph |
+
+**The rotation is NOT a gene.** `E_cross` changes discontinuously with `ρ`, so crossover between
+rotations is meaningless; `ρ` indexes independent runs (§0b's finite candidate list is the
+experiment design). This is the intrinsic/incidental cut applied: the rotation is not a coordinate
+of the search space, it is the space's identity.
+
+### §M1.3 — Placement cut: everything extrinsic, and the reason
+
+`UDCert` already exists and its validity **decides**; the LRAT chain already turns a refutation into
+`¬ Colorable 4`. So a certified find needs **no new Lean type** — the candidate is a bitmask in the
+untrusted searcher and a certificate at the boundary, which is *parse, don't validate* with the
+parse already written (M05/M06). Two statements are wanted and one is new:
+
+- `¬ (graph).Colorable 4` — existing pipeline, exact geometry + LRAT.
+- `chromaticNumber = 5` **exactly** — the upper half via `colorable_succ_of_colorable_delete`
+  (FS-28's one-line find, which gave `χ(Heule-553) = 5`). A record claimed without it is a lower
+  bound wearing an equality.
+
+### §M1.4 — Seam checks (the skill's non-vacuity discipline)
+
+| member | expected | status |
+|---|---|---|
+| empty candidate (`L = S = {centre}`) | one vertex, 4-colourable, worst fitness | must not crash the scorer |
+| full candidate (`L = S = B`) | **the seed the search starts from** — Parts reduces from a large graph; if the full base is 4-colourable the base is too poor and the run is vacuous | **blocking pre-run check per rotation** |
+| `L` alone | 4-colourable **by Theorem B** | free adversary exclusion (§M1.1) |
+| a rotation with one radius family | should fail — Parts says the second kind is essential | negative control for §0b |
+
+**The full-base check is the non-vacuity gate for the whole milestone** and it is one SAT call per
+rotation: a base whose *entire* selection is 4-colourable contains no find, and every generation
+spent on it is measuring the base rather than the problem.
