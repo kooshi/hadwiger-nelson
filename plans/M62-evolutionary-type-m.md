@@ -1020,3 +1020,43 @@ shell itself**, because the wrapper's command line contains the pattern. This pr
 note about exactly that trap. It cost one lost file append (`build_c13_base`, silently absent until
 an `AttributeError`) and three dead shells. **Rule adopted: background jobs write a PID file at
 launch and are killed by PID, never by pattern.**
+
+### §R14 — Parts's own base, built from his §2, is VACUOUS at `ρ₁₅` under our cross-edge law
+
+Read properly after Poros flagged that §2 had been skipped. His construction, verbatim: `H = H⁰ = W₇`
+the **7-vertex hexagonal wheel**; `η = exp(i arccos 5/6)` the **Moser twist**;
+`ρ = exp(i arccos 7/8)` — `ρ₁₅`, in his *notation line*; `H^m = ⋃_{a=−m..m} η^a H`; and the base
+`B = ⊕ⁿ H^m`, his working choice `⊕⁴H²` on a disk of radius 2.
+
+**Control passed: `|H²| = 31` exactly — de Grey's own V31.** So the reconstruction is faithful at
+least that far. Built: 13,063 points, **82,782 exact unit edges**, 2,246 orbits (he reports "about
+400", so my truncation is about threefold too generous), **186 cross edges at `ρ₁₅`**.
+
+> **NON-VACUITY GATE: `k = 4` SAT in 209 s. Parts's base, as reconstructed, is 4-colourable** — so
+> no selection from it can be 5-chromatic under our cross-edge law.
+
+Recorded as a **negative, not hidden**. Two readings and I cannot yet separate them: my
+reconstruction is wrong somewhere (the `h = ⌈m/2⌉` denominator, the radius convention, or the orbit
+truncation — his 400 against my 2,246 says something is off by a factor), **or** his construction
+attaches the two halves by cross edges our collinearity law does not describe. The law itself is
+derived and was confirmed on Heule-510 to nine decimals (§R3), so the second reading would mean his
+`L ∪ ρS` shares more than the centre. **Either way the seam base stands as the working one** — it
+passes the gate, contains all 375 of Heule-510's in-field points, and is what the descent runs on.
+
+### §R15 — The descent's real bottleneck was not what I twice guessed, and the diagnosis was one measurement
+
+Two rewrites chased the wrong cost. The truth, measured directly:
+
+- **A single-orbit drop is accepted in ~7.5 s, and 8 of 8 sampled drops were accepted.** The descent
+  could always move; the chunk ladder simply started at `|live|/4 ≈ 118` orbits, which always fails,
+  and burned 28 proposals × 160 solver calls per failed round.
+- CNF construction was **not** the bottleneck either (0.09 s once the flat edge list replaced the
+  bitset walk — kept, since it is free).
+- So the loop is inverted: **census every single drop in parallel, then batch-verify the accepted set
+  with bisection.** Running: `473` orbits, **50 censused in 91 s and all 50 droppable.**
+
+**And the observability rule of §M3.2 was broken twice more, by me, in scripts written after it.**
+`Pool.map` returns everything at once, so two consecutive drivers printed nothing for tens of minutes
+while working correctly — indistinguishable from a wedge, and I twice diagnosed a stall that was not
+there. `imap_unordered` with a running count fixed it. **The rule was written for the engine and
+applied to nothing around it; that is the whole lesson.**

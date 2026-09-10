@@ -383,6 +383,10 @@ class Arena:
             adj[i] |= 1 << (self.n + j); adj[self.n + j] |= 1 << i
         self.adj = adj
         self.E_int, self.E_cross = E_int, E_cross
+        # flat edge list on the 2n index space: filtering this by a mask is far faster than walking
+        # the adjacency bitsets, and CNF construction per proposal was the descent's bottleneck.
+        self.flat = ([(i, j) for i, j in E_int] + [(self.n + i, self.n + j) for i, j in E_int]
+                     + [(i, self.n + j) for i, j in E_cross])
         self.centre = next(k for k, p in enumerate(pts) if p == (Z, Z))
         # invariant I1: the centre is L-side only; bit (n + centre) is never set in a candidate
         self.forbidden = 1 << (self.n + self.centre)
@@ -825,7 +829,9 @@ def clash(PL, PS, Lep, Sep, cross_edges, A):
 def side_cnf(A, side, k=4, pin_centre=True):
     def var(v, c): return v * k + c + 1
     cl = [[var(v, c) for c in range(k)] for v in range(A.N)]
-    for u, v in A.induced(side):
+    for u, v in A.flat:
+        if not ((side >> u) & 1 and (side >> v) & 1):
+            continue
         for c in range(k):
             cl.append([-var(u, c), -var(v, c)])
     if pin_centre and (side >> A.centre) & 1:
@@ -931,3 +937,66 @@ def kills_all_boxes_inc(A, side, cross_edges, Sep, PS, k=4):
             if s.solve(assumptions=b):
                 return False, "survivor"
     return True, "blocks-all"
+
+
+# ====================================================================== Parts's OWN base (M62 §R14)
+# From `[Parts2020a]` §2 and §5.6, read properly after Poros pointed out that §2 was skipped:
+#
+#   H = H^0 = W7, the 7-vertex hexagonal WHEEL: (0,0), (+-1,0), (+-1/2, +-sqrt3/2)
+#   eta = exp(i arccos 5/6)  -- the MOSER TWIST;  rho = exp(i arccos 7/8) -- rho15, in his notation line
+#   H^m = union of eta^a H for a = -m..m ;  H^2 = V31, de Grey's own 31-vertex fabric piece
+#   B = (+)^n H^m , the n-fold Minkowski sum. His working base is (+)^4 H^2 on a disk of radius 2,
+#   with "about 400 orbits, of which about 40 are included in R", and "all useful orbits satisfy
+#   abcd = 0". Symmetry group order 24 = dihedral + conjugation by sqrt33.
+#
+# Every earlier base in this milestone was a reconstruction of something already published in closed
+# form. This one is his.
+def eta_pow(a: int):
+    """eta^a as a K(i) element, returned as (re, im) in K. eta = (5 + i sqrt11)/6."""
+    re, im = ONE, Z
+    e_re, e_im = (Fr(5, 6), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(1, 6), Fr(0))
+    if a < 0:                                   # eta^-1 = conj(eta) since |eta| = 1
+        e_im = kneg(e_im); a = -a
+    for _ in range(a):
+        re, im = ksub(kmul(re, e_re), kmul(im, e_im)), kadd(kmul(re, e_im), kmul(im, e_re))
+    return re, im
+
+
+def wheel7():
+    """H = W7: the origin and the six unit hexagon points."""
+    h = [(Z, Z)]
+    hx = [(Fr(1), Fr(0)), (Fr(1, 2), Fr(1, 2)), (Fr(-1, 2), Fr(1, 2)),
+          (Fr(-1), Fr(0)), (Fr(-1, 2), Fr(-1, 2)), (Fr(1, 2), Fr(-1, 2))]
+    for a, b in hx:                              # x = a, y = b*sqrt3
+        h.append(((a, Fr(0), Fr(0), Fr(0)), (Fr(0), b, Fr(0), Fr(0))))
+    return h
+
+
+def H_m(m: int):
+    """H^m = union over a in -m..m of eta^a H. |H^2| should be 31 (de Grey's V31)."""
+    out = {}
+    for a in range(-m, m + 1):
+        er, ei = eta_pow(a)
+        for (x, y) in wheel7():
+            p = (ksub(kmul(x, er), kmul(y, ei)), kadd(kmul(x, ei), kmul(y, er)))
+            out[p] = True
+    return list(out)
+
+
+def parts_base(n: int = 4, m: int = 2, radius: float = 2.0):
+    """B = (+)^n H^m truncated to the disk of the given radius -- Parts's own base graph."""
+    G = H_m(m)
+    r2 = radius * radius
+    seen = {(Z, Z)}
+    frontier = {(Z, Z)}
+    for _ in range(n):
+        new = set()
+        for p in frontier:
+            for g in G:
+                q = (kadd(p[0], g[0]), kadd(p[1], g[1]))
+                if q not in seen and kfloat(norm2(q)) <= r2 + 1e-12:
+                    seen.add(q); new.add(q)
+        frontier = new
+        if not frontier:
+            break
+    return sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
