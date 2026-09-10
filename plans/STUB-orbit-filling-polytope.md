@@ -1,5 +1,16 @@
 # STUB — overcompression as a face phenomenon: the orbit-filling polytope of a level set
 
+> **SUPERSEDED 2026-09-10 by `plans/M64-orbit-filling-polytope.md`, which is the subplan.** Kept
+> verbatim below because it is the record of what was believed when the milestone was minted, and
+> two of its beliefs were overturned during subplanning. **(a)** §3's C1 — that `Prof` is the integer
+> points of a low-complexity polytope — is the *small* half: the dominant structure is a perfect
+> matching of 24 atom pairs derived from the degree-2 layer of `Y`, giving two exact conservation
+> laws that account for 100 of the L side's 108 box exclusions before convexity is invoked at all.
+> **(b)** §5's claim that the harvested correction sets are *"the `hypergraph` field of each reduction
+> record"* is **FALSE** — that field holds cardinalities only, and `Y` itself was discarded; making it
+> an artifact is M64 phase A. §4's phases 1, 2 and the core of 4 were run during subplanning and their
+> results are M64 §0.
+
 *Minted 2026-09-10 at Kooshi's direction, at the M63 mid-point, to be worked in the session after
 this one's compaction. Written for a reader with **zero memory of the session that minted it** —
 every term is defined, every number carries where it was measured, and the falsifiers are named
