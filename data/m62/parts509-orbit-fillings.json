@@ -1,0 +1,525 @@
+{
+ "kind": "parts-509-orbit-fillings",
+ "source": "[Parts2020a] arXiv:2010.12665 Tables 3 and 4",
+ "note": "L is subtype M6A/M6B (Table 3, M column); S is subtype M6A (Table 4, M6A column). The orbit (0,0,0,0) is the shared rotation centre, filling 1 on both sides, so the graph has 374 + 136 - 1 = 509 vertices and 2442 edges. Orbit labels are Parts's canonical representatives (a,b,c,d) of the point (a + b*sqrt33 + i(c*sqrt3 + d*sqrt11))/12. A filling below the orbit size means the orbit is PARTIAL and which members are taken is NOT in the table -- section 6 says unfilled orbits 'usually include exactly half or a quarter', i.e. whole orbits of an index-2 or index-4 subgroup. Vertex lists are published at reference [11]: Polymath16 thread 15 comment 24942, and the Dropbox folder JP/Large.",
+ "L_orbits": [
+  {
+   "label": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "degree": 30,
+   "filling": 1
+  },
+  {
+   "label": [
+    4,
+    0,
+    0,
+    0
+   ],
+   "degree": 8,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    4,
+    0
+   ],
+   "degree": 26,
+   "filling": 6
+  },
+  {
+   "label": [
+    12,
+    0,
+    0,
+    0
+   ],
+   "degree": 23,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    0,
+    4
+   ],
+   "degree": 6,
+   "filling": 3
+  },
+  {
+   "label": [
+    0,
+    0,
+    8,
+    0
+   ],
+   "degree": 14,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    12,
+    0
+   ],
+   "degree": 6,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    2,
+    2
+   ],
+   "degree": 12,
+   "filling": 8
+  },
+  {
+   "label": [
+    6,
+    2,
+    0,
+    0
+   ],
+   "degree": 17,
+   "filling": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    0,
+    2
+   ],
+   "degree": 19,
+   "filling": 12
+  },
+  {
+   "label": [
+    6,
+    0,
+    0,
+    2
+   ],
+   "degree": 9,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    0,
+    6,
+    6
+   ],
+   "degree": 6,
+   "filling": 6
+  },
+  {
+   "label": [
+    10,
+    0,
+    0,
+    2
+   ],
+   "degree": 15,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "degree": 25,
+   "filling": 12
+  },
+  {
+   "label": [
+    4,
+    0,
+    0,
+    4
+   ],
+   "degree": 11,
+   "filling": 12
+  },
+  {
+   "label": [
+    14,
+    0,
+    0,
+    2
+   ],
+   "degree": 9,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    2,
+    6,
+    0
+   ],
+   "degree": 13,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    0,
+    2,
+    6
+   ],
+   "degree": 6,
+   "filling": 6
+  },
+  {
+   "label": [
+    6,
+    0,
+    10,
+    0
+   ],
+   "degree": 11,
+   "filling": 12
+  },
+  {
+   "label": [
+    6,
+    0,
+    0,
+    6
+   ],
+   "degree": 10,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    4,
+    4,
+    0
+   ],
+   "degree": 4,
+   "filling": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    4,
+    2
+   ],
+   "degree": 17,
+   "filling": 24
+  },
+  {
+   "label": [
+    12,
+    2,
+    2,
+    0
+   ],
+   "degree": 14,
+   "filling": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    6,
+    4
+   ],
+   "degree": 7,
+   "filling": 2
+  },
+  {
+   "label": [
+    4,
+    0,
+    2,
+    2
+   ],
+   "degree": 16,
+   "filling": 24
+  },
+  {
+   "label": [
+    4,
+    0,
+    6,
+    2
+   ],
+   "degree": 11,
+   "filling": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    8,
+    2
+   ],
+   "degree": 10,
+   "filling": 12
+  },
+  {
+   "label": [
+    8,
+    0,
+    2,
+    2
+   ],
+   "degree": 17,
+   "filling": 24
+  },
+  {
+   "label": [
+    8,
+    0,
+    6,
+    2
+   ],
+   "degree": 13,
+   "filling": 12
+  },
+  {
+   "label": [
+    6,
+    2,
+    4,
+    0
+   ],
+   "degree": 13,
+   "filling": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    2,
+    4
+   ],
+   "degree": 10,
+   "filling": 8
+  },
+  {
+   "label": [
+    10,
+    0,
+    4,
+    2
+   ],
+   "degree": 12,
+   "filling": 12
+  },
+  {
+   "label": [
+    8,
+    0,
+    4,
+    4
+   ],
+   "degree": 8,
+   "filling": 12
+  },
+  {
+   "label": [
+    4,
+    0,
+    10,
+    2
+   ],
+   "degree": 6,
+   "filling": 0
+  },
+  {
+   "label": [
+    10,
+    0,
+    2,
+    4
+   ],
+   "degree": 7,
+   "filling": 10
+  },
+  {
+   "label": [
+    6,
+    2,
+    8,
+    0
+   ],
+   "degree": 10,
+   "filling": 12
+  },
+  {
+   "label": [
+    14,
+    0,
+    2,
+    4
+   ],
+   "degree": 8,
+   "filling": 12
+  }
+ ],
+ "L_sum": 374,
+ "S_orbits": [
+  {
+   "label": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "degree": 12,
+   "filling": 1
+  },
+  {
+   "label": [
+    0,
+    0,
+    4,
+    0
+   ],
+   "degree": 16,
+   "filling": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    8,
+    0
+   ],
+   "degree": 8,
+   "filling": 3
+  },
+  {
+   "label": [
+    0,
+    4,
+    0,
+    0
+   ],
+   "degree": 6,
+   "filling": 4
+  },
+  {
+   "label": [
+    6,
+    2,
+    0,
+    0
+   ],
+   "degree": 15,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "degree": 16,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    2,
+    6,
+    0
+   ],
+   "degree": 11,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    0,
+    2,
+    6
+   ],
+   "degree": 10,
+   "filling": 12
+  },
+  {
+   "label": [
+    6,
+    0,
+    0,
+    6
+   ],
+   "degree": 9,
+   "filling": 12
+  },
+  {
+   "label": [
+    0,
+    4,
+    4,
+    0
+   ],
+   "degree": 8,
+   "filling": 12
+  },
+  {
+   "label": [
+    12,
+    2,
+    2,
+    0
+   ],
+   "degree": 6,
+   "filling": 3
+  },
+  {
+   "label": [
+    6,
+    2,
+    4,
+    0
+   ],
+   "degree": 11,
+   "filling": 14
+  },
+  {
+   "label": [
+    6,
+    0,
+    4,
+    6
+   ],
+   "degree": 8,
+   "filling": 9
+  },
+  {
+   "label": [
+    0,
+    2,
+    4,
+    6
+   ],
+   "degree": 7,
+   "filling": 24
+  }
+ ],
+ "S_sum": 136,
+ "total": 509,
+ "edges": 2442,
+ "L_edges": 1860,
+ "S_edges": 564
+}

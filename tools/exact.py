@@ -119,6 +119,19 @@ def main():
             if not left:
                 log("  greedy extension coloured everything -- the selection does not refuse; stop")
                 break
+            # SHRINK the correction set to a MINIMAL one. A greedily-extended colouring leaves a
+            # correction set that is valid but fat -- measured on the 757 object, ~148 vertices,
+            # and 695 such sets moved the bound only from 145 to 147. A set is minimal when no
+            # member can be given back, and each test is a COLOURABLE ask, which on a sub-critical
+            # selection measures 0.00-0.02 s. Small sets are what make a hitting-set bound climb.
+            left = sorted(left)
+            i = 0
+            while i < len(left):
+                trial = left[:i] + left[i + 1:]
+                if not trial: break
+                rr = ask([g for g in keep if g not in set(trial)])
+                if rr is True: left = trial            # still a correction set without that member
+                else: i += 1
             corr.append(sorted(left))
             if it % 25 == 0 or it < 5:
                 log(f"  it {it}: LB {lb}  <=  minimum  <=  UB {ub}   "
