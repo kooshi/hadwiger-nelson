@@ -346,3 +346,65 @@ on each offspring. Crossover of two working selections need not work, so the fit
 refutes, penalty if not*, with greedy 1-minimalisation as the local search — which is the standard
 shape for set-cover-like problems, and is M62's original evolutionary design finally holding the
 right unit.
+
+## §R3 — What the reduction stage actually costs, measured, and the verdict on pure reduction
+
+Kooshi: *"seems slow"*. It is, and the cause splits three ways — one of them mine.
+
+**(a) The unit cost, and it GROWS as the descent succeeds.** An ask is a four-colouring query on the
+3,205-vertex arena under presence assumptions:
+
+| | |
+|---|---|
+| reject (a colouring turns up) | **~6 s** |
+| accept (still refuses four colours), idle box | **~15 s** |
+| accept, under the load I created | **17–39 s** |
+| accept, ten minutes into a descent | **44–308 s** |
+
+The growth is the point: dropping groups moves the instance toward its satisfiability threshold, so
+*the further a descent gets, the more each further step costs.*
+
+**(b) I oversubscribed the machine.** Twenty-four portfolio workers plus two `OptUx` runs on 32
+cores, load 27. SAT solving is memory-bandwidth-bound, so the workers thrashed each other — the same
+lesson as §R21's box sweep, which got 4.1× from 28 workers. Cutting to eight seeds took load 27 → 9
+and accepts 39 s → 16 s.
+
+**(c) The workers logged nothing, because I passed `log=None`.** Twenty-eight minutes of zero
+visibility, in a module written *after* §M3.2 wrote the rule down. **Third violation of that rule in
+one day.** And clearing it up sprang the `pkill -f` trap from my own memory note — exit 144, my shell
+nearly taken with it. Killed by PID.
+
+**Three levers tried; two failed, and the failures are the useful part.**
+
+1. **Chunked deletion — kept.** `[Parts2020a]`'s own "8-4-2-1", which is QuickXplain: one expensive
+   ask drops a whole chunk rather than one group. Immediately visible — a single 86-second ask
+   dropped 22 groups. It does not change the unit cost, only how many units are needed.
+2. **Palette symmetry breaking — FLAT, and it contradicts a number I imported.** Value precedence
+   (`used[v][c]`, the compact `O(n·k)` encoding, verdict-preserving on the planted control) buys
+   **nothing**: full arena UNSAT **14.8 s → 14.2 s**, a 20-group drop **15.2 s → 15.1 s**, for 48,000
+   extra clauses. M52 measured palette symmetry at **6.5–35×** and I imported that figure — but it
+   was measured on the descent's *cheat-based CNF with guarded selector literals*, a different
+   instance family. **A cost factor is a fact about an encoding, not about a solver.**
+3. **`OptUx`, the exact method — does not scale here.** Thirty-five minutes on **Heule-510**, the
+   *smaller* instance at 510 vertices, without finishing even its disjoint-MCS bootstrap. Killed.
+   The hitting-set side supplies FS-32's rigorous lower bound and it cannot supply it at this size.
+
+**The portfolio's spread is the prediction, confirmed quantitatively.** Eight seeds, ten minutes in:
+weights **2,538 / 2,652 / 2,796 / 2,874 / 2,952 / 3,048 / 3,066 / 3,120** from an identical start of
+3,204. **A 23 % spread produced by nothing but the deletion order** — which is exactly what
+`DESCENT-ALGORITHM.md` says a greedy 1-minimalisation is, now with a number.
+
+**The verdict, and it is a negative about the frame rather than about the tools.** The arena is 3,205
+vertices and the record is 509, so pure reduction must shed **84 %** of the mass. This morning's
+independent measurement on the *other* base put joint drop capacity near **12 %**, and the eight
+seeds here are consistent with it. **`[Parts2020a]` §5.6 says in print, twice, that pure reduction
+cannot reach a minimum** — his method alternates reduction with **expansion**, an accumulator `A`
+growing from a reserve `R` of about forty orbits and shrinking again, with solver instances he keeps
+near a thousand vertices rather than three thousand.
+
+**So we have been running the wrong half of his algorithm, well.** `portfolio.repair` — *add* groups,
+cheapest-first, until the selection refuses again — is the expansion move written down, and
+`tools/memetic.py` is the frame that alternates it with the greedy: crossover, **repair (add)**,
+greedy (remove). That is also why Kooshi's genetic suggestion is *structurally* right and not merely
+faster: **a portfolio can only ever remove, and is therefore trapped in the downward closure of
+wherever it started.**

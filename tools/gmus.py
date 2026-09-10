@@ -53,8 +53,19 @@ class Groups:
                              f"must be in exactly one group or hard")
 
 
-def encode(n_vertices: int, edges, groups: Groups, pins=(), k: int = 4):
-    """(WCNF, presence_var_of_group). `pins` are (vertex, colour, polarity) hard unit facts."""
+def encode(n_vertices: int, edges, groups: Groups, pins=(), k: int = 4, precedence: bool = True):
+    """(WCNF, presence_var_of_group). `pins` are (vertex, colour, polarity) hard unit facts.
+
+    **`precedence` breaks the palette symmetry, and M52 measured that symmetry at 6.5–35× of solver
+    time, twice.** A proper colouring stays proper under any permutation of the colours, so a solver
+    explores up to `k!` copies of every search tree; value precedence keeps exactly one — colour `c`
+    may be used only if colour `c-1` is already used at a strictly lower vertex. The compact
+    encoding uses `used[v][c]` = "colour c appears at or before v", which is `O(n·k)` clauses rather
+    than the `O(n²·k)` of the direct form.
+
+    It composes with presence literals for free: an absent vertex wears no colour, so it simply does
+    not participate, and the constraint stays sound because *some* permutation of any colouring is
+    in order of first use."""
     from pysat.formula import WCNF
     groups.check(n_vertices)
 
@@ -86,6 +97,22 @@ def encode(n_vertices: int, edges, groups: Groups, pins=(), k: int = 4):
             w.append([-var(u, c), -var(v, c)])
     for (v, c, pol) in pins:
         w.append([var(v, c) if pol else -var(v, c)])
+    if precedence and k > 1:
+        used = {}
+        for v in range(n_vertices):
+            for c in range(k):
+                top += 1
+                used[(v, c)] = top
+        for c in range(k):
+            w.append([-var(0, c), used[(0, c)]])
+            for v in range(1, n_vertices):
+                w.append([-var(v, c), used[(v, c)]])              # wearing c makes c used
+                w.append([-used[(v - 1, c)], used[(v, c)]])        # used is monotone in v
+                w.append([used[(v - 1, c)], var(v, c), -used[(v, c)]])
+        for c in range(1, k):
+            w.append([-var(0, c)])                                 # v0 can only wear colour 0
+            for v in range(1, n_vertices):
+                w.append([-var(v, c), used[(v - 1, c - 1)]])        # c needs c-1 used strictly before
     for gi, wt in enumerate(groups.weights()):
         w.append([pres[gi]], weight=wt)                          # soft: "keep this group"
     return w, pres

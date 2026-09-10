@@ -22,8 +22,19 @@ from __future__ import annotations
 import random, time
 
 
-def greedy(hard, pres, weights, order=None, seed=0, budget=0, log=None, solver="cadical153"):
-    """One seeded greedy 1-minimalisation over the groups. Returns a dict, never a bare number."""
+def greedy(hard, pres, weights, order=None, seed=0, budget=0, log=None, solver="cadical153",
+           chunked=True):
+    """One seeded descent over the groups. Returns a dict, never a bare number.
+
+    **Chunked, not one-at-a-time — this is the difference between minutes and an hour.** Measured
+    2026-09-10 on the type-M arena: an ask costs 9 s on an idle box and 17-39 s under contention,
+    and a one-at-a-time pass needs one ask per group (182). The halving schedule (`Parts2020a`'s own
+    "8-4-2-1", which is QuickXplain) spends ONE expensive ask to drop a whole chunk, so the number
+    of *accepting* asks falls from "one per dropped group" to "one per chunk". Rejections are cheap
+    (a colouring turns up fast); acceptances are the UNSAT calls that cost.
+
+    A chunk whose ask is `undecided` at budget is SPLIT rather than dropped or kept wholesale —
+    the safe direction, since declining a drop never costs soundness."""
     from pysat.solvers import Solver
     m = len(pres)
     order = list(range(m)) if order is None else list(order)
@@ -38,26 +49,83 @@ def greedy(hard, pres, weights, order=None, seed=0, budget=0, log=None, solver="
              if budget else s.solve(assumptions=[pres[g] for g in sorted(keep)])
         if r0 is not False:
             return dict(status="vacuous-or-undecided", detail=str(r0), seed=seed)
-        for g in order:
-            trial = keep - {g}
+        asks = [0]
+
+        def refuses(trial):
+            asks[0] += 1
             a = [pres[x] for x in sorted(trial)]
             if budget:
                 s.conf_budget(budget)
-                r = s.solve_limited(assumptions=a, expect_interrupt=False)
-            else:
-                r = s.solve(assumptions=a)
-            if r is False:                      # still refuses four colours -> drop it
-                keep = trial; dropped.append(g)
-            elif r is True:                     # a colouring survives -> criticality witness
-                witnessed.append(g)
-            else:                               # budget exhausted: KEEP, and say so
-                undecided.append(g)
-            if log and (len(dropped)+len(witnessed)+len(undecided)) % 25 == 0:
-                log(f"    seed {seed}: {len(dropped)} dropped, {len(witnessed)} witnessed, "
-                    f"{len(undecided)} undecided, weight {sum(weights[x] for x in keep)} "
-                    f"[{time.time()-t0:.0f}s]")
+                return s.solve_limited(assumptions=a, expect_interrupt=False)
+            return s.solve(assumptions=a)
+
+        def attempt(chunk):
+            """Drop `chunk` wholesale if that still refuses; else halve; singletons are decided."""
+            nonlocal keep
+            if not chunk:
+                return
+            st = time.time()
+            r = refuses(keep - set(chunk))
+            if r is False:
+                keep -= set(chunk); dropped.extend(chunk)
+                if log: log(f"    seed {seed}: DROPPED chunk of {len(chunk)} -> "
+                            f"{len(keep)} groups / weight {sum(weights[x] for x in keep)} "
+                            f"[{time.time()-st:.0f}s, ask {asks[0]}, {time.time()-t0:.0f}s total]")
+                return
+            if len(chunk) == 1:
+                (witnessed if r is True else undecided).append(chunk[0])
+                if log and asks[0] % 20 == 0:
+                    log(f"    seed {seed}: {len(dropped)} dropped, {len(witnessed)} witnessed, "
+                        f"{len(undecided)} undecided, weight {sum(weights[x] for x in keep)} "
+                        f"[ask {asks[0]}, {time.time()-t0:.0f}s]")
+                return
+            h = len(chunk) // 2
+            attempt(chunk[:h]); attempt(chunk[h:])
+
+        if chunked:
+            attempt(order)
+        else:
+            for g in order:
+                attempt([g])
     return dict(status="ok" if not undecided else "ok-with-undecided",
                 seed=seed, keep=sorted(keep), weight=sum(weights[x] for x in keep),
                 groups=len(keep), dropped=len(dropped), witnessed=len(witnessed),
-                undecided=undecided, seconds=round(time.time()-t0, 1),
+                undecided=undecided, asks=asks[0], seconds=round(time.time()-t0, 1),
                 claim_scope="1-minimal for THIS order; an upper bound, never a minimum")
+
+
+def repair(hard, pres, weights, keep, candidates=None, budget=0, solver="cadical153", log=None):
+    """Make a selection refuse four colours by ADDING groups, cheapest-first.
+
+    **This is the move pure descent cannot make, and it is the whole reason a memetic layer beats a
+    portfolio.** A greedy descent from the full base only ever removes, so it is trapped in the
+    downward closure of wherever it started; `[Parts2020a]` §5.6 says in print that pure reduction
+    cannot reach a minimum, and his method alternates reduction with **expansion** from a small
+    accumulator plus a reserve graph. `repair` is that expansion: given a selection that does NOT
+    refuse — a crossover child, or a deliberately over-shrunk one — put groups back until it does.
+
+    Cheapest-first because the objective is vertices; the caller re-runs the local search after, so
+    this only has to reach feasibility, not minimality. Returns None if even every candidate fails.
+    """
+    from pysat.solvers import Solver
+    keep = set(keep)
+    pool = sorted(set(range(len(pres))) - keep if candidates is None else set(candidates) - keep,
+                  key=lambda g: weights[g])
+    with Solver(name=solver, bootstrap_with=hard) as s:
+        def refuses(sel):
+            a = [pres[x] for x in sorted(sel)]
+            if budget:
+                s.conf_budget(budget)
+                return s.solve_limited(assumptions=a, expect_interrupt=False)
+            return s.solve(assumptions=a)
+        if refuses(keep) is False:
+            return sorted(keep)
+        for g in pool:
+            keep.add(g)
+            r = refuses(keep)
+            if r is False:
+                if log: log(f"    repaired by adding {len(keep)} groups "
+                            f"(weight {sum(weights[x] for x in keep)})")
+                return sorted(keep)
+            # an `unknown` here is NOT evidence either way; keep adding, which is the safe direction
+    return None
