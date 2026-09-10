@@ -10,6 +10,52 @@ phases; §5 the registered predictions; §6 what must not be done; §7 the instr
 
 ---
 
+## §PA — The prior-art gate (WORKFLOW step 3a)
+
+**It was not run when the stub was minted, and it was not run by me at the top of this subplan — I
+went straight to measurement. Poros ran it** (advisory 2026-09-10, `plans/POROS-2026-09-10-orbit-polytope.md`)
+**and it named four literatures, three of which own a piece of this milestone.** That is `G49`/`G50`
+again: the recognition step supplies the search query for free, and the query was never issued.
+
+**(a) The polytope question has a name and a testable hypothesis: IDEALNESS.** `{M}` is the set of
+minimum hitting sets of `Y` (M63 §O). A 0/1 matrix `A` is **ideal** when `{x ≥ 0 : Ax ≥ 1}` is
+integral; then the minimum hitting sets are exactly the integer points of that polyhedron's optimal
+face — which is C1 *stated upstairs, at the atoms*, as a theorem with a hypothesis one can check.
+**Lehman** characterised the minimally non-ideal matrices completely. Entry points: Abdi's LTCC
+*Blocking and antiblocking theory* notes and CO750 *Packing and Covering*; Conforti–Cornuéjols–
+Zambelli *Integer Programming*, the ideal-matrices chapter; Cornuéjols, *Combinatorial Optimization:
+Packing and Covering* (CBMS 74). **This is the cheapest theorem the milestone was missing.**
+
+**(b) Overcompression is the SYMMETRY GAP of symmetric integer programming, and that field owns it.**
+For a linear program with an invariant objective, averaging over the group puts an optimum in the
+fixed space; for an *integer* program averaging leaves the lattice, so the fixed-space optimum can be
+strictly worse. **That gap is Parts's overcompression in the vocabulary of the field that owns it**,
+and our `Λ_H` slices are its fixed spaces. Machinery: **core points** (Herr–Rehn–Schürmann, ORL 2013,
+arXiv:1202.0435; Bödi–Herr–Joswig, Math. Prog. 2013, arXiv:1012.4941; arXiv:2007.10863),
+**orbitopes** (Kaibel–Pfetsch, *Packing and partitioning orbitopes*, arXiv:math/0603678 — literally
+the convex hulls of orbit-restricted 0/1 matrices, with complete facet descriptions in the cyclic
+case), **orbitopal fixing**, **orbital branching** (Ostrowski–Linderoth–Rossi–Smriglio, Math. Prog.
+2011), and Margot's survey *Symmetry in integer linear programming*. **C2 is restated in this
+vocabulary in §2 and every artifact of this milestone uses it.**
+
+**(c) The projection step has a theorem, and it predicts C1's failure a priori.** Ginsburg–Spanier:
+Presburger-definable = semilinear; semilinear sets are closed under projection, and *polytopes'
+integer points are not*. Barvinok–Woods, and Nguyen–Pak for the unbounded case (arXiv:1612.08030),
+give the structure and the complexity of exactly *"the projection of the integer points of a
+polyhedron"*. **`Prof` is a linear image of `{M}`, so it is semilinear and generally NOT a polytope's
+integer points — the species was nameable before we measured it, and the L side's 2-point defect is
+generic projection behaviour rather than a surprise.**
+
+**(d) What was NOT found, and it is the encouraging half.** No prior art for the specific claim
+*"the minimum symmetric optimum is not an overgraph of the minimum asymmetric one"* as a structural
+statement about covering optima. The symmetry-breaking literature knows that *incomplete* symmetry
+breaking loses solutions (arXiv:2502.10056 is set-covering-flavoured) — a different statement.
+**Restated in (b)'s vocabulary, the conjecture has room.**
+
+Every one of these goes into `BIBLIOGRAPHY.md` as named-only rows the day this milestone opens.
+
+---
+
 ## §0 — What subplanning measured, and what it overturned
 
 The stub conjectured (C1) that the profile set `Prof` of a complete level set is *"the integer points
@@ -76,21 +122,41 @@ profile-invisible. **On the S side the factorisation FAILS** (24 pair-patterns �
 function): there the residual atoms sit inside the varying orbits and do move the profile. The two
 sides are structurally different and that is a finding, not noise.
 
-### (v) The convexity story is real but SMALL, and the stub's headline number was mostly the laws
+### (v) The convexity story is SMALL, one of its two numbers was an ARTIFACT, and on one side the test could not fail
 
-Exact integer hulls, computed in rational arithmetic:
+Exact integer hulls, rational arithmetic:
 
 | | S | L |
 |---|---|---|
 | box points with the right sum | 5 | 135 |
+| **box points in `aff(Prof)`** | **5** | **35** |
 | `\|Prof\|` | **4** | **27** |
-| `\|conv(Prof) n Z^O\|` | **4** | **29** |
-| exclusions convexity explains | 1 of 1 | 106 of 108 |
+| `\|conv(Prof) ∩ ℤ^O\|` | **4** | **29** |
 
-That 98% reads impressively and **it must not be reported that way**: of the 108 L-side exclusions,
-**100 are the two conservation laws** (which cut 135 → 35 before any convexity is invoked) and
-convexity adds **6 of the remaining 8**. The two survivors are named: `(5,3,9,7)` and `(5,4,8,7)`.
-*A phase that reports 98% without that decomposition is measuring its own framing.*
+**~~fill fraction 0.80 (S) against 0.20 (L)~~ — CORRECTED, and the correction deletes a finding.**
+The stub's headline contrast between the two sides was a **dimension artifact**: `Prof` has affine
+dimension 2 on *both* sides, so the L side's 135-point box is 100 points of ambient space the set was
+never free to occupy. Against the affine box the fills are **S 0.800 and L 0.771 — the same
+density** — and the stub's §2 finding (i), *"the profiles are sparse in the box"*, and its S-vs-L
+contrast both dissolve. (Found by Poros; verified here independently.) **Any fill fraction this
+milestone prints carries its ambient dimension in the same sentence.**
+
+**And the S-side convexity result was structurally forced, so it measured nothing.** `Prof` there is
+4 points whose hull is a triangle of area 1; by Pick's theorem `1 = I + 4/2 − 1` gives `I = 0`, so it
+has **no interior lattice point and `Prof = conv(Prof) ∩ ℤ^O` could not have failed** whatever the
+data said. That is `G21` on my own subplanning measurement: a check run against a criterion that
+cannot fire measures the criterion.
+
+**What survives, decomposed in the only honest order.** Of the L side's 108 excluded box points:
+**100 are the two conservation laws** (135 → 35 before convexity is invoked at all), **6 are
+convexity** (35 → 29), and **2 are neither** — `(5,3,9,7)` and `(5,4,8,7)`.
+
+**The replacement test, with a null that is not vacuous.** `Prof` is an **order ideal** — a down-set
+in the coordinatewise order on the two free coordinates. Measured here: on the L side it is a
+down-set in **exactly one of the four orientations** of the two conservation blocks, and of the
+`C(35,27) = 23,535,820` subsets of the affine box only **17 are down-sets in a given orientation**,
+so `p ≤ 4·17/23,535,820 ≈ 2.9 × 10⁻⁶`. **That is a test convexity could not be: it discriminates on
+both sides, and it fires where convexity was guaranteed to pass.**
 
 ### (vi) THE MECHANISM OF OVERCOMPRESSION, measured — and it reproduces his parenthetical
 
@@ -121,6 +187,44 @@ field of each reduction record"*. **They are not.** `parts_reduce.reduce_stage` 
 was computed at a cost of ~10 minutes per side and thrown away. Fixing that is phase A below, and it
 is a schema obligation, not a nicety: **`Y` is the explanatory object of this entire milestone.**
 
+### (viii) It is NOT a matroid, and that was worth refuting
+
+The natural reframe is the complement: `S` refuses **iff** the dropped set `D = A \ S` contains no
+member of `Y`, so the droppable sets are the **independence complex of `Y`** — a downward-closed set
+system — and `{M}` corresponds to its **maximum** faces, all of one size (28 on L, 30 on S). If that
+complex were a **matroid**, `{M}` would be its bases, `Prof` would be a linear image of a matroid base
+polytope, and every integer point of the image would be attained — which the 2-point defect would
+contradict. **Measured: the basis-exchange axiom fails in 3,296 of 4,000 sampled trials on the L side
+and 1,029 of 1,128 on the S side.** Not a matroid, decisively — so the complex, not the matroid, is
+the species, and the defect is consistent with §PA(c)'s theorem rather than with a broken measurement.
+
+### (ix) The exchange classes, and a free completeness control
+
+The difference lattice of `Prof` is generated by **single orbit swaps** `e_o − e_o'` realised between
+actual profiles. S: all six swaps among its three varying orbits — **one exchange class of size 3**.
+L: exactly `±(e_a − e_d)` and `±(e_b − e_c)`, none across — **two classes of size 2**, which is what
+the conservation laws are, seen from the lattice side. Inside its affine hull the L set is literally
+`{a ≤ 4} ∪ {b ≤ 2}` — one disjunction, and therefore non-convex by construction.
+
+Poros pre-registered the class structure and ran it on **all four of `[Parts2020a]`'s independently
+published `{M}` columns**: on `374_m6c` the partition is **forced and is our pair with our constant
+12**; on `374_m6ab` (13 consistent partitions) and `375_m6ab` (4) **exactly one contains both of our
+measured pairs**; on `376_m6a` (27,202) it is consistent but uninformative. Its first form of the
+claim — *pairs* — fired its own registered falsifiers on `376_m6a` and on our S side; the general
+form, **constant-sum groups**, passes everywhere, and the S side is a class of size 3 rather than a
+failure.
+
+**The control this buys, and it is free on every future run: the exchange classes determine
+`aff(Prof)`, so a level set whose profiles do not span the predicted affine hull is INCOMPLETE** — a
+completeness check entirely orthogonal to `exhaustive-level`'s own proof.
+
+### (x) One artifact has no producer
+
+`data/m62/m63-profiles-S.json` and `-L.json` were written by a scratchpad script that was never
+committed, so the atom → profile map is not recoverable from the repository and the advisory could
+not re-derive it. Phase B owns the fix: the profile computation lives in `tools/parts_faces.py` and
+the JSON records its producer and fingerprints.
+
 ---
 
 ## §1 — The objects, restated on the measurements
@@ -146,38 +250,45 @@ is never called the `H`-minimum until a search at rung `H` has returned one.
 
 ---
 
-## §2 — The corrected conjecture
+## §2 — The corrected conjecture, in the vocabulary of the fields that own it
 
-> **C1' (structure).** A complete level set's profile set is the image of a hitting-set feasible
-> region under orbit-aggregation: `Prof = pi(F)`, `F ⊆ {0,1}^(free atoms)` cut out by `Y` and the
-> budget. Its dominant structure is the **small-hyperedge layer of `Y` together with the tightness of
-> the budget** — degree-1 hyperedges give the stable orbits, degree-2 hyperedges plus a tight budget
-> give exact conservation laws, and convexity is a *residual approximation* to whatever is left.
+> **C1-upstairs (idealness).** Is `Y` an **ideal** 0/1 matrix? If it is, `{M}` is exactly the integer
+> point set of the optimal face of `{x ≥ 0 : Ax ≥ 1}`, and everything the stub wanted about `Prof`
+> follows from a named theorem rather than from a fit (§PA(a)).
 
-*Falsifier:* a level set where the degree-1 and degree-2 layers of `Y` plus the budget leave most of
-the box unexplained, so that convexity — not `Y` — is carrying the description.
+*Falsifier:* `Y` is not ideal — in which case Lehman's characterisation of the minimally non-ideal
+matrices says which sub-structure to look for, so the negative is informative too.
 
-> **C2' (overcompression).** Overcompression is the emptiness of `{M} ∩ Fix(H)`: at most rungs the
-> minimum level carries no invariant member, so the rung's own minimum is strictly larger, and the
-> larger symmetric object is not an overgraph of any member of the smaller level.
+> **C1-downstairs (the species).** `Prof` is **not** the integer points of a polytope and was never
+> going to be: it is a linear image of `{M}`, hence **semilinear** (§PA(c)). Its measured description
+> is *exchange classes* (equalities) **∩** box **∩** an **order ideal** in one orientation, with
+> convexity as a residual approximation good to 6 of the last 8 exclusions.
 
-*Falsifier, and this is the milestone's decisive experiment:* run the reduction **at rung `H`** on a
-rung whose invariant level is empty, obtain its true minimum `M_H`, and test containment. If some
-member of `{M}` at the smaller size **is** contained in some member of `{M_H}`, overcompression is not
-this, and C2' dies on our own reproduction of his own object.
+*Falsifier:* a level set whose `Prof` is not an order ideal in any orientation — at `p ≈ 3 × 10⁻⁶`
+per level set, that is a test with teeth.
 
-> **C3' (the payoff).** With `Y`'s small layers in hand, *which orbits to add and how much of each* —
-> Parts's expansion stage, which M63 §O(3) proved has **no termination measure at all** — is an integer
-> program over the profile coordinates.
+> **C2 (overcompression = the symmetry gap).** In the vocabulary of symmetric integer programming:
+> the objective is invariant, so averaging puts an *LP* optimum in the fixed space, but averaging
+> leaves the lattice, so the *IP* optimum over `Fix(H)` can be strictly worse. **Overcompression is
+> that gap, and its combinatorial face is the emptiness of `{M} ∩ Fix(H)`** — at most rungs the
+> minimum level carries no invariant member, so the rung's own minimum is strictly larger and cannot
+> be an overgraph of anything at the smaller level.
 
-*Falsifier:* the useful directions leave the current base's orbit support entirely, so no inequality
-over present orbits can see them.
+*Falsifier, the decisive experiment:* run the reduction **at rung `H`** on a rung whose invariant
+level is empty, obtain `{M_H}`, and test containment both ways against `{M}`. If some member of `{M}`
+sits inside some member of `{M_H}`, C2 dies on our own reproduction of his own object.
 
-**Bearing on χ(ℝ²) ≥ 6: indirect, and stated as such.** This is a theory of search landscapes, not a
+> **C3 (the payoff), sharpened.** The expansion step's missing measure is not *"optimise over an
+> inequality description"*. It is **the exchange classes and their totals** — a short integer vector
+> per iteration that moves when the problem changes. M63 §O(3) proved his outer loop has **no
+> termination measure at all**; this is a candidate for one.
+
+*Falsifier:* the classes are constant across the loop's own recorded moves, so the vector carries no
+information about progress.
+
+**Bearing on χ(ℝ²) ≥ 6: indirect, and stated as such.** A theory of search landscapes, not a
 construction. Its value is a measure for the expansion step, and a proof for the record-holder's
 stated nuisance.
-
----
 
 ## §3 — The acceptance test
 
@@ -231,11 +342,22 @@ an observed-but-underived pair must never be reported as derived. *Cost: half a 
 orbit coordinates, attribute each excluded box point to the layer that kills it, and report what is
 left. Only here does convexity enter, and only as the residual. *Cost: half a day, no solver.*
 
-**Phase E — the L-vs-his range fork (stub §2 ii), if C's containment test leaves time.** Our L ranges
-are wider than his on two of four orbits. Re-run the L reduction with the companion restricted to the
-M6A subtype's 18 connection edges (ours carries 24) and see whether `Prof` narrows to his. **State
-before running that this changes the problem**, so a narrowing is evidence about the connection count
-and not proof that his 282 was a count. *Cost: one reduction run.*
+**Phase E — the L-vs-his range fork (stub §2 ii). THE CHEAP TEST IS ALREADY RUN AND ITS REGISTERED
+FALSIFIER FIRED.** Poros noticed what the stub's table hides: expressed in the two free coordinates,
+his published `375` ranges give exactly `[0,4] × [2,6]` — **25 profiles — and ours is that plus
+exactly `(5,2)` and `(6,2)`, which are precisely the two points that make `Prof` non-convex.** It
+pre-registered the discriminator: *if his enumeration was truncated, the two tail profiles should
+carry far fewer minima than the body average; falsifier — either one at ≥ 40 minima.*
+
+**Measured here: `(5,2,10,7)` carries 120 minima against a body mean of 124.8 across the 25 body
+profiles, and `(6,2,10,6)` carries 24 (the smallest body multiplicity is 6).** The falsifier fires on
+the first. **A profile carrying 120 of 3,264 minima is not something a size-ordered enumeration
+plausibly misses while recording 282 others, so truncation is not supported and the live explanation
+is that our stage is genuinely wider** — his minimal M6A subtype uses 18 connection edges where our
+companion carries 24. The phase is therefore reduced to one run: re-reduce L with the companion
+restricted to 18 connection edges and see whether the two tail profiles disappear. **State before
+running that this changes the problem**, so their disappearance is evidence about the connection
+count and not proof about his 282.
 
 **Phase F — C3', only if D leaves the description usable.** State the expansion as an integer program
 over profile coordinates and test it against one recorded move of Parts's own four-state path.
@@ -246,14 +368,16 @@ over profile coordinates and test it against one recorded move of Parts's own fo
 
 | # | prediction | how it is scored |
 |---|---|---|
-| P1 | Every pair the S side reports as *derived* stays derived on re-run; the 6 undderived stay underived. | phase B |
+| P1 | Every pair the S side reports as *derived* stays derived on re-run; the 6 underived stay underived. | phase B |
 | P2 | At least one rung with an empty invariant level has its own minimum **≥ 2 vertices above** the rung-1 minimum. | phase C3 |
 | P3 | **The containment test fails** — no member of `{M}` sits inside any member of `{M_H}`. | phase C3 |
-| P4 | The degree-1 and degree-2 layers of `Y` alone account for **≥ 90 %** of the L-side box exclusions. | phase D |
-| P5 | The two unexplained L profile points `(5,3,9,7)`, `(5,4,8,7)` are excluded by a hyperedge of size ≥ 3. | phase D |
-| P6 | Restricting the L companion to 18 connection edges narrows at least one of the two wide ranges. | phase E |
+| P4 | `Prof` is an **order ideal** in some orientation at every complete level set this milestone produces, including the rung-`H` ones. | phases B, C3 |
+| P5 | `Y` is **not** ideal (§PA(a)) — the L side's 2-point defect is the visible shadow of it. | phase D |
+| P6 | The two unexplained L profile points `(5,3,9,7)`, `(5,4,8,7)` are excluded by a hyperedge of size ≥ 3. | phase D |
 | P7 | `Aut(A)` on the L side is dihedral of order 12 and the three live involutions are conjugate in it. | phase C1 |
 | P8 | The S side's profile map does **not** factor through its matching at any rung. | phase B |
+| P9 | Restricting the L companion to 18 connection edges removes **both** tail profiles `(5,2)` and `(6,2)`. | phase E |
+| P10 | Every complete level set spans the affine hull its exchange classes predict (the free completeness control, §0 ix). | phases B, C3 |
 
 ---
 
@@ -273,6 +397,15 @@ over profile coordinates and test it against one recorded move of Parts's own fo
    pin bug is what happens when a symmetry is assumed rather than measured.
 6. **No silent overwrite of a reduction record.** Phase A regenerates both; the old ones keep their
    fingerprints.
+7. **No fill fraction, ever, without its ambient dimension in the same sentence.** The stub's own
+   headline contrast between the two sides was a dimension artifact and it survived into a committed
+   file; that is the standing example.
+8. **No convexity test on a hull that cannot have an interior point.** Report the affine dimension and
+   the Pick/volume bound first; if the test cannot fail, it is not run and the order-ideal test is run
+   instead.
+9. **No artifact without a committed producer.** `m63-profiles-*.json` was written by a throwaway
+   script and could not be re-derived from the repository by an outside reader; every JSON this
+   milestone writes names the module and function that made it.
 
 ---
 
