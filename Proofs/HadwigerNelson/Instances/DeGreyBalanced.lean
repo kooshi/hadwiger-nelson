@@ -100,4 +100,13 @@ example : ¬ ∀ c : Fin 5, (Finset.univ.filter fun v => balancedColoring v = c)
 example : ¬ ∀ v : Fin 1581, balancedColorRaw v.val < 4 := by
   decide +kernel
 
+
+
+/-- **`χ(de Grey's 1581) ≤ 5`** — the balanced witness above, with its balance forgotten. Stated
+because a colourability fact and an existence-of-a-balanced-colouring fact are different
+statements to a reader and to a search, and only the first is the non-vacuity witness for every
+`Forces`/`Fan`/`Separated` claim made about this graph. -/
+theorem deGrey_colorable_five : (edgeGraph 1581 deGrey.edges).Colorable 5 :=
+  deGrey_balanced.elim fun C _ => ⟨C⟩
+
 end HadwigerNelson

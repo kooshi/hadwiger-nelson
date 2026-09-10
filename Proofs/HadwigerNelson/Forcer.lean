@@ -220,6 +220,15 @@ algebra: two routes to one claim, so the algebra is cross-checked rather than tr
 theorem rhombus_forces : Forces (edgeGraph 4 rhombus) 3 0 3 :=
   Forces.of_edges (by decide +kernel)
 
+/-- **The non-vacuity witness for `rhombus_forces`**, and the reason it is here rather than in a
+side file: `Forces G k p q` is `∀ C : G.Coloring (Fin k), C p = C q`, so on a graph with no
+`k`-colouring it is true and says nothing. `CLAUDE.md` `G30`'s fifth failure mode asks every
+theorem whose hypothesis is a structure to ship a named inhabitant in the same file; this is that
+inhabitant, and `scripts/vacuity.sh` reads it. -/
+theorem rhombus_colorable_three : (edgeGraph 4 rhombus).Colorable 3 :=
+  ⟨SimpleGraph.Coloring.mk (![0, 1, 2, 0] : Fin 4 → Fin 3)
+    (by simp only [edgeGraph_adj]; decide)⟩
+
 /-! ### The controls
 
 Each is a countermodel rather than a build failure: a claim that is *false*, exhibited, so that

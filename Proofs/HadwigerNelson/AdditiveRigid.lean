@@ -121,6 +121,14 @@ refuting it needs the `→` direction, which is why the `↔` is the definition.
 /-- The path's addresses: `i ↦ (i, 0)`. -/
 def pathAddr : Fin 3 → ℤ × ℤ := fun i => ((i : ℕ), 0)
 
+/-- **The non-vacuity witness for everything below about `pathGraph 3` at two colours.** The path
+on three vertices is bipartite, so `0 1 0` is proper — and without this, `pathGraph_three_coloring_two`
+and `pathGraph_additivelyRigid` would both quantify over a type nothing had shown inhabited
+(`CLAUDE.md` `G30`, fifth failure mode; `scripts/vacuity.sh` reads it). -/
+theorem pathGraph_three_colorable_two : (pathGraph 3).Colorable 2 :=
+  ⟨Coloring.mk (![0, 1, 0] : Fin 3 → Fin 2) (fun {u v} h => by
+    rw [pathGraph_adj] at h; revert h; revert u v; decide)⟩
+
 /-- Every proper 2-colouring of the path on three vertices is the parity colouring: it identifies
 exactly the pairs of indices with the same parity. -/
 theorem pathGraph_three_coloring_two (C : (pathGraph 3).Coloring (Fin 2)) (a b : Fin 3) :

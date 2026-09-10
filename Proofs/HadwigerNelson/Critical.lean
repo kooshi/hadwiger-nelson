@@ -113,6 +113,18 @@ theorem exists_isolating_of_colorable_delete {p : V} (h : (G.deleteIncidenceSet 
     rw [if_pos rfl, if_neg hq]
     exact (Fin.castSucc_lt_last (D q)).ne'
 
+/-- **The upper bound the criticality data always implied**, and it was one line inside the proof
+above: `exists_isolating_of_colorable_delete` *builds* a `(k+1)`-colouring of `G` and then keeps
+only its isolation property, so every witness this repository derived from vertex-criticality was
+a lower bound and nothing else. Vertex-critical at `k` means `χ = k+1` exactly; this is the `≤`.
+
+Named 2026-09-09 during the vacuity milestone, because the vacuity gate wants exactly this: an
+unconditional `Colorable` is a proof that a colouring type is INHABITED, so a graph known
+vertex-critical can never make a `Forces`/`Fan` statement about it vacuous. -/
+theorem colorable_succ_of_colorable_delete {p : V} (h : (G.deleteIncidenceSet p).Colorable k) :
+    G.Colorable (k + 1) :=
+  (exists_isolating_of_colorable_delete h).elim fun C _ => ⟨C⟩
+
 /-- **The compression.** A `(k+1)`-colouring of `G` that gives `p` a colour nobody else has is a
 `k`-colouring of `G` minus `p`'s edges: delete that colour and renumber.
 

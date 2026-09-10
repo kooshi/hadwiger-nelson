@@ -298,3 +298,108 @@ as an argument and not a measurement.
 **Cost:** half a day. **No compute.** **Bearing on χ(ℝ²) ≥ 6: none, and this milestone says so.**
 Its value is FS-26's: this is the only kind of work on the board that could find another
 `core9_plane`. **M62 (FS-6) remains rank 1 for the hunt itself.**
+
+---
+
+# §R — Results (closed 2026-09-09, same day)
+
+## R0. The gate, run
+
+| item | result |
+|---|---|
+| `./scripts/build.sh` | **OK** (7m17s including one failure and its fix, then 4m42s clean) |
+| live `sorry` | **zero** |
+| `./scripts/axioms.sh` | **794 clean, 5 declared purchases** — the three-way match, unmoved |
+| `lake lint` | **passed** |
+| `./scripts/vacuity.sh` | **OK** — `sites=213 vacuous=0 stale=0 declared=3 witnessed=10 generic=196 unknown=4`, baseline **4 entries** |
+| `./scripts/vacuity.sh --self-test` | **OK** — seven planted controls, each watched to fire; and the self-test's own failure path watched by breaking one |
+
+## R1. The headline is a negative, and it is the honest one
+
+**Phases A + B ran and found nothing.** Twelve named `Prop` carrier families, **+86 sites
+(249 → 335)**, and the fifteen baselined sites unchanged — `vacuous=0`, `stale=0`. Recorded at the
+standard a positive would get, so it is not re-run.
+
+## R2. Three overturns of the stub, all by measurement (§1 above has the detail)
+
+`UDCert`/`Gadget`/`Brick` are a **category error**, not a low-yield item; `Justified`'s **1,426**
+binder sites confirm the named-list rule an order of magnitude past the stub's fear; and
+`AdditivelyRigid` did not fire because its consumers are generic in `k`.
+
+## R3. Four defects in the gate — the milestone's actual product
+
+D1–D3 are §2 above, unchanged. **D4 came from the modeling pass and is the deepest:**
+
+> `carrierOf?` special-cased `Forces`/`Separated`/`Fan` into `G.Coloring (Fin k)` **wherever they
+> appeared**. Measured: `forallTelescopeReducing` already unfolds a `Forces` **conclusion** into
+> the binder `C : G.Coloring (Fin k)` (verified on `rhombus_forces`), and **all 127 occurrences
+> reach the extractor as binders** — so the arm never once fired where it was right, and always
+> fired where it asked the wrong question. At a binder, an empty `Coloring` makes
+> `Forces G k p q` **true and free**, so the theorem asserts its conclusion outright: an
+> **overclaim**, not a vacuity.
+
+**One law replaced the two shapes** — *a statement is vacuous exactly when some `∀`-binder of it
+has an empty domain* — and it names the boundary the subplan drew by intuition: emptiness at
+**negative** polarity (a binder) is vacuity, this gate's business; at **positive** polarity (inside
+a hypothesis) it is overclaim, FS-29's business.
+
+**And one structural rule replaced two ad-hoc mechanisms**: skip a declaration whose conclusion is
+`False`. A refutation says *these cannot all hold*, so its binders are meant to be unsatisfiable.
+That retired both the evidence-`providers` set the extension first grew (needed only because the
+reducing telescope turned a refutation into a site) and the baseline's prose exemption for
+statements "consumed in order to refute". **Checked against the known positive rather than
+assumed:** `core9_plane` concludes an `∃`, not `False`, and is still flagged.
+
+## R4. Phase D — eleven discharged, and only two were library work
+
+| went | how | count |
+|---|---|---|
+| `deGrey_no_narrow_fan_{630,633,1420,1423}`, `heule553_no_five_fan` | **refutations** — the structural skip | 5 |
+| `hexColoring`, `pathColoring3` | **they ARE colourings** — `gather` now reads a `def` whose type is a carrier as the inhabitant it plainly is | 2 |
+| `rhombus_forces`, `rhombus_forces_of_gadget` | `rhombus_colorable_three` (`Forcer.lean`, one line) | 2 |
+| `pathGraph_three_coloring_two`, `pathGraph_additivelyRigid` | `pathGraph_three_colorable_two` (`AdditiveRigid.lean`, one line) | 2 |
+
+**Baseline 15 → 4**, and all four are principled: `hexShell_plane5/6` (proving the inhabitant *is*
+Hadwiger–Nelson) and `core9_pigeonhole`/`core122_pigeonhole` (`plans/STUB-consolidation-remainder.md` §1).
+
+## R5. Two results the repository did not hold, and they were one line away
+
+`colorable_succ_of_colorable_delete` (`Critical.lean`) — **the upper bound vertex-criticality
+always implied.** `exists_isolating_of_colorable_delete` *builds* a `(k+1)`-colouring of `G` and
+then keeps only its isolation property, so **every witness this repository derived from
+criticality data was a lower bound and nothing else.** From it:
+
+* **`chromaticNumber_heule553 = 5` exactly** (`Instances/Heule553/Critical.lean`) — the lower half
+  is M09's certified refusal of four colours, the upper half is the line above. Before today only
+  Heule-510 had an upper bound, through M58's finite-plane reduction.
+* **`deGrey_colorable_five`** (`Instances/DeGreyBalanced.lean`) — M19's balanced witness with its
+  balance forgotten, because a colourability fact and an existence-of-a-balanced-colouring fact are
+  different statements to a reader and to a search, and only the first is a non-vacuity witness.
+  (`χ(1581) = 5` exactly still wants a four-colour refusal on **this** edge list; the certified one
+  is on `deGreyRotEdges`.)
+
+## R6. Predictions, scored
+
+| # | registered | outcome |
+|---|---|---|
+| P1 | extending the families finds at least one new `VACUOUS` | **missed** — nothing, and it is R1 |
+| P2 | `AdditivelyRigid` is the family most likely to fire | **missed**, with the reason: generic in `k` |
+| P3 | the `UDCert` bulk is "mostly confirmation" | **refuted** — it is a category error |
+| P4 | Phase D is eleven witnesses' worth of work | **refuted, downward** — nine were instrument, two were library |
+| P5 | the controls will pass first try | **refuted twice** — they could not run, then ran wrong (D3) |
+| P6 | the tracked list must stay named | **met**, and understated (`Justified`, 1,426) |
+
+## R7. Not done, deliberately
+
+**Phase C**, now **FS-29** and unranked: the 67 `Forces`-consumer sites, where a vacuous hypothesis
+yields a conclusion that is true, non-vacuous and therefore unflaggable. Different technique
+(hypothesis mutation), a day or more, research-shaped. **Not attempted here, and the boundary is
+the polarity law rather than a guess.**
+
+**Not done, and named so nobody re-derives it:** filtering auto-generated declarations
+(`Lean.Name.isBlackListed`) — measured to buy ~5 sites of 249, so it is not worth the dependency;
+and "a refutation of a universal statement witnesses its domain" (classically true, elegant, and
+no ugliness demanded it — cut under the modeling loop's stopping rule).
+
+**Known limit of the check, stated rather than chased:** a carrier reachable only *inside* a data
+structure — `Set (G.Coloring (Fin 4))`, a structure field — is out of scope. It reads `∀`-binders.

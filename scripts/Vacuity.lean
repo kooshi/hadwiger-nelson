@@ -32,13 +32,50 @@ So every carrier type gets one of three verdicts, and the third is the important
 M03 ledger comparison that did not exist, and the M04 `set -e` abort that produced no output and
 read as a pass. A vacuity check that says nothing when it cannot decide is that bug a third time.
 
-## Two shapes, because the trap has two forms
+## The law it implements — one law, not two shapes
 
-* **Shape A** — a binder `(C : G.Coloring α)`. The `core9_plane` shape.
-* **Shape B** — a `Forces` / `Separated` / `Fan` claim. `Forces G k p q` is *by definition*
-  `∀ C : G.Coloring (Fin k), C p = C q`, so it is **vacuously true whenever `G` refuses `k`
-  colours** — the sharper trap `plans/STUB-vacuity-and-record-integrity.md` §A2 names, and the
-  one no reader sees in the statement. The probe is on `G.Coloring (Fin k)` either way.
+**A statement is vacuous exactly when some `∀`-binder of it has an empty domain.** Everything
+else follows from where the binder sits, and the position is what the first version of this file
+got wrong.
+
+* A binder `(C : G.Coloring α)` is the `core9_plane` shape. Its carrier is itself.
+* A binder `(h : Forces G k p q)` is **not** that shape. `Forces G k p q` is
+  `∀ C : G.Coloring (Fin k), C p = C q`, so an empty `Coloring` makes the hypothesis **true and
+  free**: the theorem then asserts its conclusion outright, which is an *overclaim* — a true thing
+  that means less than the sentence around it claims — and not a vacuity. Its carrier is
+  `Forces G k p q` itself, refuted by the library's own `not_forces_*` theorems.
+* A `Forces` **conclusion** needs no rule: `forallTelescopeReducing` unfolds it and hands back the
+  binder `C : G.Coloring (Fin k)`, which is the first case.
+
+The first version special-cased `Forces`/`Separated`/`Fan` into `G.Coloring (Fin k)` wherever they
+appeared. Measured 2026-09-09: **all 127 of their occurrences reach the carrier extractor as
+binders**, so that arm never once fired where it was right and always fired where it asked the
+wrong question. The dual defect — *emptiness at positive polarity, i.e. inside a hypothesis* — is
+real, is Phase C of `plans/STUB-vacuity-coverage.md`, and needs a different technique
+(hypothesis mutation); this file does not attempt it and says so.
+
+## A refutation is skipped, structurally
+
+A declaration whose conclusion is `False` says *these cannot all hold*: its binders are **meant**
+to be jointly unsatisfiable. `isEmpty_coloring_plane_four` is the example — a proof that the plane
+has no four-colouring, whose only binder is a four-colouring of the plane. Flagging it would be
+flagging a theorem for its own content. One structural rule, and it replaces two ad-hoc
+mechanisms the extension first grew: a set of "providers" threaded through the evidence so a
+refutation was not audited against the emptiness it proves, and the baseline's prose exemption for
+statements consumed in order to refute. It does **not** blind the check to the case that motivated
+it — `core9_plane` concludes an `∃`, not `False`, and is still flagged. Verified, not assumed.
+
+## The controls, and why they could not be run until 2026-09-09
+
+`CLAUDE.md` § "Make the gate fail, and watch it fail" requires the negative control at every
+milestone. This gate's could not be run at all: `isOurs` could not see declarations made in the
+file being elaborated, so a planted control was invisible and testing meant editing a library
+module and rebuilding; and once that was fixed, the first control that ran came back with a
+clean-looking **wrong answer**, because `lake env lean` does not apply the lakefile's
+`autoImplicit := false` and the control's `pathGraph` silently auto-bound to a fresh variable,
+making it a different, generic statement. Both are repaired at the top of this file, and
+`scripts/vacuity.sh --self-test` plants seven controls — including the load-bearing one, the same
+family at an instantiation nothing refutes, which must come back `UNKNOWN` and never `VACUOUS`.
 
 ## What about the INSTANTIATIONS of a generic carrier? Measured, and blocked — read this before
 ## trying it, because the idea is right and the mechanism is not available.
@@ -85,6 +122,13 @@ subplan had hypotheses that were *trivially satisfiable*, so the conclusion had 
 is neither emptiness nor a dead hypothesis, and no mechanical check finds it. A modeling pass did.
 -/
 import Proofs
+
+-- `lake env lean` does NOT apply the lakefile's options, so `autoImplicit := false` is not in
+-- force here (CLAUDE.md § Toolchain). Without these two lines a planted control's `pathGraph`
+-- auto-binds to a fresh variable, the control silently becomes a DIFFERENT statement, and the
+-- run returns a clean-looking wrong answer. Measured, 2026-09-09.
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
 
 open Lean Lean.Meta Lean.Elab Lean.Elab.Command
 
@@ -156,7 +200,32 @@ def isOurs (env : Environment) (n : Name) : Bool :=
     match env.header.moduleNames[idx.toNat]? with
     | some m => (`Proofs.HadwigerNelson).isPrefixOf m || m == `Proofs
     | none => false
-  | none => false
+  -- No module index means the declaration was made in the file being elaborated RIGHT NOW.
+  -- Those are ours too, and saying so is what makes a planted control a one-file operation
+  -- instead of a library edit plus a full rebuild. Without it the gate cannot see its own
+  -- controls at all, which is how `CLAUDE.md` § "Make the gate fail" went unenforced here.
+  | none => true
+
+/-- **The named carrier families.** A *named* list, never "every `Prop` binder": measured
+2026-09-09, `HadwigerNelson.Justified` alone owns **1,426** binder sites (the LRAT watermark
+induction, inhabited by construction), and the algebraic carriers — `Q4`, `Pt`, `Ival`,
+`ClauseTable`, … — add some eight hundred more that are always inhabited. The signal drowns.
+
+Two exclusions are worth their reasons, because both look like obvious additions:
+
+* **`UDCert`, `Gadget`, `Brick` are absent on purpose.** They are `structure`s — records of lists
+  and integers — so "does one exist" is answered by writing one down. The live question for a
+  certificate is *validity*, and `UDCert.Valid : UDCert n → Bool` is an equation `decide` settles.
+  Adding them buys ~100 parametric lines and ~37 lines that are the constructions themselves.
+* **`Forces`, `Separated` and `Fan` ARE here**, and that is a correction. They used to be
+  special-cased into `G.Coloring (Fin k)` at every occurrence; see `carrierOf?` for why that is
+  the right move at a conclusion and the wrong question at a binder. -/
+def trackedProps : List Name :=
+  [`HadwigerNelson.Forces, `HadwigerNelson.Separated, `HadwigerNelson.Fan,
+   `HadwigerNelson.AdditivelyRigid, `HadwigerNelson.Extends, `HadwigerNelson.IsStress,
+   `HadwigerNelson.IsLift, `HadwigerNelson.Aperiodic, `HadwigerNelson.CoincidesAtNonedges,
+   `HadwigerNelson.IsAdditive, `HadwigerNelson.Compels, `HadwigerNelson.Realizes,
+   `HadwigerNelson.MonoPair, `HadwigerNelson.CoverAtLeast, `HadwigerNelson.UDCert.CoordsIn]
 
 /-- **The evidence the library already holds.**
 
@@ -173,11 +242,39 @@ structure Evidence where
   empties   : Array Expr := #[]
   witnesses : Array Expr := #[]
 
-/-- Collect every unconditional `IsEmpty τ` and `Colorable G k` this library proves. -/
+/-- **One relation, several recognizers.** Every rule below collects a declaration whose type is
+*definitionally* `Nonempty τ` or `IsEmpty τ`:
+
+* `IsEmpty α`            — itself;
+* `¬ P`                  — `IsEmpty P`, for a tracked `P`;
+* `Colorable G k`        — `Nonempty (G.Coloring (Fin k))`, the definitional fact this whole
+                           check turns on, and the reason instance search alone finds nothing;
+* `Nonempty α`           — itself;
+* a constant `c : τ` whose type IS a carrier — `Nonempty τ` by `⟨c⟩`. A `def` of a colouring
+                           (`hexColoring`, `pathColoring3`) is the most direct witness there is,
+                           and the check used to flag those very definitions as unresolved.
+
+Only **unconditional** declarations count: one with real hypotheses is a conditional claim, and
+"someone could probably discharge those" is the social argument the kernel replaces. -/
 def gather (env : Environment) : MetaM Evidence := do
   let mut ev : Evidence := {}
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
+    -- A refutation `¬ P` is emptiness evidence for `P`, and it must be read WITHOUT reducing:
+    -- `Not P` IS `P → False`, so a reducing telescope eats the arrow, the evidence is lost, AND
+    -- the refutation becomes one more site carrying a hypothesis nothing satisfies — the
+    -- emptiness proof flagged by the very emptiness it proves.
+    let refuted ← (try forallTelescope ci.type fun xs concl => do
+        for x in xs do
+          if !(← x.fvarId!.getDecl).binderInfo.isInstImplicit then return none
+        pure (if concl.getAppFn.constName? == some ``Not then concl.getAppArgs[0]? else none)
+      catch _ => pure none)
+    if let some p := refuted then
+      if !p.hasLooseBVars then
+        if let some h := p.getAppFn.constName? then
+          if trackedProps.contains h then
+            ev := { ev with empties := ev.empties.push p }
+            continue
     let some τ ← (try forallTelescopeReducing ci.type fun xs concl => do
         -- only instance-implicit binders may remain: anything else is a real hypothesis
         for x in xs do
@@ -189,12 +286,20 @@ def gather (env : Environment) : MetaM Evidence := do
     | some ``IsEmpty =>
       if let some c := τ.getAppArgs[0]? then
         if !c.hasLooseBVars then ev := { ev with empties := ev.empties.push c }
+    | some ``Nonempty =>
+      if let some c := τ.getAppArgs[0]? then
+        if !c.hasLooseBVars then ev := { ev with witnesses := ev.witnesses.push c }
     | some ``SimpleGraph.Colorable =>
       let a := τ.getAppArgs
-      if h : 2 < a.size then
+      if 2 < a.size then
         if !a[1]!.hasLooseBVars && !a[2]!.hasLooseBVars then
           ev := { ev with witnesses := ev.witnesses.push (← mkAppM ``SimpleGraph.Coloring #[a[1]!, ← mkAppM ``Fin #[a[2]!]]) }
-    | _ => pure ()
+    | some ``SimpleGraph.Coloring =>
+      -- `def c : G.Coloring (Fin k)` — the inhabitant, stated as a definition.
+      ev := { ev with witnesses := ev.witnesses.push τ }
+    | some h =>
+      if trackedProps.contains h then ev := { ev with witnesses := ev.witnesses.push τ }
+    | none => pure ()
   return ev
 
 /-- Does `τ` match any collected piece of evidence? Compared under `withNewMCtxDepth` inside
@@ -219,32 +324,45 @@ def probe (ev : Evidence) (τ : Expr) : MetaM Verdict := do
   if ← synth ``Nonempty then return .witnessed
   return .unknown
 
-/-- The carrier a declaration's binder or claim is really about.
+/-- **The carrier a binder commits to — taken as it stands, never unfolded.**
 
-Shape A: the binder's own type, when it is a `SimpleGraph.Coloring`.
-Shape B: `Forces G k _ _` / `Separated G k _ _` / `Fan G k _ _` — rebuilt as `G.Coloring (Fin k)`,
-because that is the type the definition quantifies over and therefore the type whose emptiness
-makes the claim vacuous. -/
+The law this implements, and it is one law rather than two: *a statement is vacuous exactly when
+some `∀`-binder of it has an empty domain.* Everything else follows from where the binder sits.
+
+* A binder `(C : G.Coloring α)` is the `core9_plane` shape. Carrier: itself.
+* A binder `(h : Forces G k p q)` is **not** that shape, and unfolding it is the wrong question.
+  `Forces G k p q` is `∀ C : G.Coloring (Fin k), C p = C q`, so an empty `Coloring` makes the
+  hypothesis **true and free** — the theorem then says its conclusion outright, which is an
+  *overclaim* and not a vacuity. The carrier is `Forces G k p q` itself, refuted by the library's
+  own `not_forces_*` theorems.
+* A `Forces` **conclusion** needs no rule here at all: `forallTelescopeReducing` unfolds it and
+  hands back the binder `C : G.Coloring (Fin k)`, which is the first case (verified on
+  `rhombus_forces`, 2026-09-09). Measured the same day: all 127 `Forces`/`Separated`/`Fan`
+  occurrences reach this function as **binders**, so the old rebuild-as-`Coloring` arm never once
+  fired where it was right and always fired where it was wrong.
+
+**Known limit, stated rather than chased:** a carrier reachable only *inside* a data structure —
+`Set (G.Coloring (Fin 4))`, a structure field — is out of scope. This reads `∀`-binders. -/
 def carrierOf? (e : Expr) : MetaM (Option Expr) := do
-  let fn := e.getAppFn
-  let args := e.getAppArgs
-  match fn.constName? with
+  match e.getAppFn.constName? with
   | some ``SimpleGraph.Coloring => return some e
-  | some n =>
-    if n == ``HadwigerNelson.Forces || n == ``HadwigerNelson.Separated || n == ``HadwigerNelson.Fan then
-      -- ⟨V, G, k, …⟩ — V implicit at 0, G at 1, k at 2, for all three.
-      if 2 < args.size then
-        let G := args[1]!
-        let k := args[2]!
-        if G.hasLooseBVars || k.hasLooseBVars then return none
-        return some (← mkAppM ``SimpleGraph.Coloring #[G, ← mkAppM ``Fin #[k]])
-      else return none
-    else return none
+  | some n => return if trackedProps.contains n then some e else none
   | none => return none
 
-/-- Every carrier a declaration's statement commits to: each binder's type, plus the conclusion. -/
+/-- Every carrier a declaration's statement commits to: each binder's type, plus the conclusion.
+
+**A refutation is skipped, structurally.** A declaration whose conclusion is `False` says *these
+cannot all hold*: its binders are **meant** to be jointly unsatisfiable, so flagging one for
+emptiness is flagging the theorem for its own content. `isEmpty_coloring_plane_four` is the
+example — a proof that the plane has no four-colouring, whose only binder is a four-colouring of
+the plane. This one rule replaces two ad-hoc mechanisms: a `providers` set threaded through the
+evidence, and the baseline's prose exemption for statements "consumed in order to refute".
+
+It does **not** blind the check to the case that motivated it: `core9_plane` concludes an `∃`,
+not `False`, and is still flagged. Verified, not assumed. -/
 def carriersOf (type : Expr) : MetaM (Array Expr) :=
   forallTelescopeReducing type fun xs concl => do
+    if concl.isConstOf ``False then return #[]
     let mut out := #[]
     for x in xs do
       if let some τ ← carrierOf? (← inferType x) then out := out.push τ
@@ -258,8 +376,13 @@ def audit : CommandElabM Unit := liftTermElabM do
   let ev ← gather env
   logInfo m!"evidence: {ev.empties.size} emptiness proof(s), {ev.witnesses.size} colourability witness(es)"
   let mut rows : Array (Name × Verdict × String) := #[]
+  let mut scanned : Nat := 0
+  let mut refutations : Nat := 0
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
+    scanned := scanned + 1
+    if ← (try forallTelescopeReducing ci.type fun _ c => pure (c.isConstOf ``False) catch _ => pure false) then
+      refutations := refutations + 1
     let carriers ← try carriersOf ci.type catch _ => pure #[]
     for τ in carriers do
       -- Probe FIRST, always: a carrier that is demonstrably empty must be reported as such even
@@ -288,6 +411,9 @@ def audit : CommandElabM Unit := liftTermElabM do
   logInfo m!"=== FLAGGED ==="
   for (n, v, _) in rows do
     if v == .vacuous || v == .stale || v == .unknown then logInfo m!"{Verdict.tag v} {n}"
+  -- Accounting, because an unexplained change in the site count is exactly the failure mode
+  -- `D1` was: a silently disabled arm that still printed a plausible report.
+  logInfo m!"=== SCANNED === declarations={scanned} refutations-skipped={refutations}"
   logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} generic={count .generic} unknown={count .unknown}"
 
 end VacuityAudit

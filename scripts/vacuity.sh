@@ -2,13 +2,12 @@
 # The vacuity gate — a theorem can pass every other check here and still say nothing.
 #
 # `scripts/Vacuity.lean` scans the library and prints one line per (declaration, carrier type)
-# with one of three verdicts. This script turns that into a pass/fail, against a baseline.
+# with one of six verdicts. This script turns that into a pass/fail, against a baseline.
 #
-# WHY A BASELINE, AND WHAT IT MAY HOLD. Deciding vacuity is undecidable, so most carriers come
-# back UNKNOWN — 238 of 249, because a carrier is only WITNESSED when the library proves it
-# inhabited unconditionally. Demanding a witness for all of them today would be a 238-site change,
-# so the gate is a RATCHET: unresolved sites are grandfathered, the check fails on anything new,
-# and the baseline only ever shrinks.
+# WHY A BASELINE, AND WHAT IT MAY HOLD. Deciding vacuity is undecidable, so a carrier is only
+# WITNESSED when the library proves it inhabited unconditionally, and unresolved sites have to be
+# grandfathered: the gate is a RATCHET — it fails on anything new, and the baseline only ever
+# shrinks. It held 15 entries at introduction and holds 4 today, all four principled.
 #
 # **The baseline holds UNKNOWN and nothing else**, and that is a correction to this file's first
 # version, which also let VACUOUS in. Those two have OPPOSITE lifecycles: the UNKNOWNs should
@@ -21,7 +20,7 @@
 #              list able to hide this is exactly what this gate exists to prevent.
 #   STALE    — a docstring claims emptiness that is NOT proved. Always fails. This is what makes
 #              the annotation a claim rather than a `# noqa`.
-#   DECLARED — provably empty AND the declaration says so with a reason, in its docstring, which
+#   DECLARED - provably empty AND the declaration says so with a reason, in its docstring, which
 #              is where CLAUDE.md already requires a `native_decide` purchase to be named. Passes,
 #              and is PRINTED with its reason on every run so every deliberate case stays readable
 #              in one place and challengeable — the `PURCHASED` banner of `axioms.sh`.
@@ -37,6 +36,66 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO}"
 source "${REPO}/scripts/dev-env.sh"
 BASELINE="${REPO}/scripts/vacuity-baseline.txt"
+
+# ---------------------------------------------------------------------------------------------
+# --self-test — break the check on purpose and watch it fail.
+#
+# `CLAUDE.md` § "Make the gate fail, and watch it fail": a check is not known to work until it has
+# been seen to fail, and this repository has twice shipped a gate that failed OPEN. Until
+# 2026-09-09 this gate's controls could not be run at all — `scripts/Vacuity.lean`'s header says
+# how — so they are now a flag rather than a memory.
+#
+# Seven planted declarations, in `scripts/vacuity-controls.lean`, spliced into a COPY of the audit
+# (never the file itself, which must stay editable while a run is in flight).
+# ---------------------------------------------------------------------------------------------
+if [[ "${1:-}" == "--self-test" ]]; then
+  TMP="$(mktemp -d)"
+  awk 'BEGIN{ins=0} /^namespace VacuityAudit$/ && !ins {while((getline l < "'"${REPO}"'/scripts/vacuity-controls.lean")>0) print l; ins=1} {print}' \
+    "${REPO}/scripts/Vacuity.lean" > "${TMP}/Vacuity.lean"
+
+  if ! OUT="$(lake env lean "${TMP}/Vacuity.lean" 2>&1)"; then
+    echo "${OUT}"
+    echo "==> vacuity self-test: FAIL — the control run did not elaborate (above)."
+    rm -rf "${TMP}"; exit 1
+  fi
+  rm -rf "${TMP}"
+
+  fails=0
+  expect() {  # expect <verdict> <declaration> <what it proves>
+    if echo "${OUT}" | grep -qE "^$1 HadwigerNelson\.$2\$"; then
+      echo "    ok    $1 $2 — $3"
+    else
+      echo "    FAIL  expected '$1 $2' and it is absent — $3"
+      echo "${OUT}" | grep -E "HadwigerNelson\.$2\$" | sed 's/^/            got: /'
+      fails=$((fails+1))
+    fi
+  }
+  silent() {  # silent <declaration> <what it proves>
+    if echo "${OUT}" | grep -qE "^[A-Z]+ HadwigerNelson\.$1\$"; then
+      echo "    FAIL  $1 produced a row and must produce none — $2"
+      fails=$((fails+1))
+    else
+      echo "    ok    (no row) $1 — $2"
+    fi
+  }
+
+  echo "==> vacuity self-test: seven planted defects, each watched to fire"
+  expect VACUOUS planted_vacuous_coloring "the core9_plane shape: a colouring type the library proves empty"
+  expect VACUOUS planted_vacuous_prop     "a tracked Prop hypothesis the library refutes"
+  expect VACUOUS planted_vacuous_forces   "a Forces hypothesis refuted by a theorem in the same run"
+  expect UNKNOWN planted_unknown_prop     "THE LOAD-BEARING ONE: same family, an instantiation nothing refutes"
+  expect STALE   planted_stale            "a VACUITY DECLARED: annotation whose claim is false"
+  silent planted_refutation               "a refutation's binders are meant to be empty"
+  silent planted_not_forces               "the evidence itself is never audited against the emptiness it proves"
+
+  if [[ "${fails}" -gt 0 ]]; then
+    echo "==> vacuity self-test: FAIL — ${fails} control(s) did not behave as designed."
+    echo "    The gate cannot be trusted until every one of these fires. Do not baseline around it."
+    exit 1
+  fi
+  echo "==> vacuity self-test: OK — every control fired, and the two silent ones stayed silent."
+  exit 0
+fi
 
 if ! RAW="$(lake env lean scripts/Vacuity.lean 2>&1)"; then
   echo "${RAW}"

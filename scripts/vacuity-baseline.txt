@@ -4,6 +4,23 @@
 # they fail the gate outright, and deliberate emptiness is declared in the
 # declaration's own docstring (VACUITY DECLARED:) rather than suppressed in this file.
 # Regenerate deliberately: scripts/vacuity.sh --baseline
+#
+# FOUR ENTRIES, down from fifteen (2026-09-09, FS-28), and all four are principled —
+# there is no longer a "dischargeable remainder" here. Eleven went as follows, and the
+# breakdown matters because only two of them were library work:
+#   * five (the four deGrey_no_narrow_fan_* and heule553_no_five_fan) are REFUTATIONS —
+#     their conclusion is False, so their binders are MEANT to be unsatisfiable, and the
+#     check now skips that shape structurally instead of exempting it in prose here;
+#   * two (hexColoring, pathColoring3) ARE colourings — the check now reads a `def` whose
+#     type is a carrier as the inhabitant it plainly is, and used to flag the witness;
+#   * four fell to two one-line witnesses shipped beside the theorems they witness
+#     (rhombus_colorable_three in Forcer.lean, pathGraph_three_colorable_two in
+#     AdditiveRigid.lean) — G30's fifth failure mode, applied.
+#
+# Counts to hold, because a silent change in them is this gate's own failure mode (FS-28 D1,
+# where a shadowed match arm dropped witnessed 8 -> 1 and still printed a plausible report):
+#   declarations=6216  refutations-skipped=231  sites=213
+#   vacuous=0 stale=0 declared=3 witnessed=10 generic=196 unknown=4
 
 # --- These two ARE the Hadwiger-Nelson problem. Whether a proper 5- or 6-colouring of the plane
 # exists is exactly what this repository is trying to settle, so 'prove an inhabitant' here is not
@@ -20,17 +37,3 @@ UNKNOWN HadwigerNelson.hexShell_plane6
 # plans/STUB-consolidation-remainder.md section 1.
 UNKNOWN HadwigerNelson.core122_pigeonhole
 UNKNOWN HadwigerNelson.core9_pigeonhole
-
-# --- The genuinely dischargeable remainder: concrete objects whose colourability is neither
-# open nor hard, just unproved. These are where the count actually comes down.
-UNKNOWN HadwigerNelson.deGrey_no_narrow_fan_1420
-UNKNOWN HadwigerNelson.deGrey_no_narrow_fan_1423
-UNKNOWN HadwigerNelson.deGrey_no_narrow_fan_630
-UNKNOWN HadwigerNelson.deGrey_no_narrow_fan_633
-UNKNOWN HadwigerNelson.heule553_no_five_fan
-UNKNOWN HadwigerNelson.hexColoring
-UNKNOWN HadwigerNelson.pathColoring3
-UNKNOWN HadwigerNelson.pathGraph_additivelyRigid
-UNKNOWN HadwigerNelson.pathGraph_three_coloring_two
-UNKNOWN HadwigerNelson.rhombus_forces
-UNKNOWN HadwigerNelson.rhombus_forces_of_gadget

@@ -1,5 +1,27 @@
 # FS-28 — The vacuity instrument's coverage: what it does not yet look at
 
+> **CLOSED 2026-09-09.** The subplan, the results and the numbers are
+> `plans/FS28-vacuity-coverage.md`. **Read this stub for the incident and the vocabulary; do not
+> trust its Phase table** — measurement overturned three of its premises, and its largest item is
+> a category error. In short:
+>
+> * **Phases A + B ran and found NOTHING.** Twelve named `Prop` families, +86 sites, the fifteen
+>   baselined sites unchanged, `vacuous=0`, `stale=0`. A real negative, recorded so it is not
+>   re-run.
+> * **§2's table is wrong at its top.** `UDCert` (61 sites, *"the bulk"*), `Gadget` and `Brick` are
+>   `structure`s — always inhabited. A certificate's live question is **validity**
+>   (`UDCert.Valid : … → Bool`, which `decide` settles), not existence. Excluded, not deferred.
+> * **§3's Phase-B warning is right and understated.** `Justified` alone owns **1,426** binder
+>   sites; "every `Prop` binder" would have buried everything.
+> * **§2's sharp hope did not pay.** `AdditivelyRigid`'s consumers are generic in the colour count,
+>   where M57's measurement is specific to four.
+> * **What the milestone actually produced were four defects in the gate**, none of them here, all
+>   found by trying to run a control — including that **the controls could not be run at all**.
+>   The baseline fell **15 → 4**, all four principled, and only two of the eleven were library work.
+> * **§4 is still correct and still worth reading** — the instantiation blocker, its two measured
+>   false zeros, and the argument (stated as an argument) for why vacuity is not a silent `sorry`.
+> * **Phase C was not attempted and is now FS-29.**
+
 *Minted 2026-09-09 by de Bruijn, at Kooshi's direction, out of the session that built the vacuity
 gate. **Written for a reader with no memory of that session or of this project**, because the stub
 rule (`WORKFLOW.md` § Plan) exists precisely because sessions die and compaction loses nuance.*

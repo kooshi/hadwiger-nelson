@@ -1,3 +1,4 @@
+import Proofs.HadwigerNelson.Instances.Heule553.Bound
 import Proofs.HadwigerNelson.Instances.Heule553.Critical.Rows00
 import Proofs.HadwigerNelson.Instances.Heule553.Critical.Rows01
 import Proofs.HadwigerNelson.Instances.Heule553.Critical.Rows02
@@ -84,5 +85,18 @@ it the theorem covers every fan that says anything. -/
 theorem heule553_no_five_fan (p : Fin 553) (Q : List (Fin 553)) (hp : p ∉ Q) :
     ¬ Fan (edgeGraph 553 heule553.edges) 5 p Q :=
   not_fan_of_vertex_critical heule553_vertex_critical hp
+
+/-- **`χ(Heule-553) ≤ 5`** — free from the criticality table: delete one vertex's edges, take the
+4-colouring the table certifies, and paint that vertex the fifth colour. -/
+theorem heule553_colorable_five : (edgeGraph 553 heule553.edges).Colorable 5 :=
+  colorable_succ_of_colorable_delete (heule553_vertex_critical 0)
+
+/-- **`χ(Heule-553) = 5` exactly.** The lower half is `Bound.lean`'s certified refusal of four
+colours; the upper half is the line above, which the vertex-criticality data has implied since
+M09 and nobody had written down. It is also the non-vacuity witness for `heule553_no_five_fan`:
+a fan statement about a graph with no 5-colouring would be empty, and this says there is one. -/
+theorem chromaticNumber_heule553 : (edgeGraph 553 heule553.edges).chromaticNumber = 5 :=
+  SimpleGraph.chromaticNumber_eq_iff_colorable_not_colorable.mpr
+    ⟨heule553_colorable_five, heule553_not_colorable_four⟩
 
 end HadwigerNelson
