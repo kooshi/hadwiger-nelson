@@ -1304,3 +1304,35 @@ looser arena and more patterns for the other side to kill — and is not claimed
 
 `data/m62/pl-subtypes.json`, 497 s single-threaded. Cost asymmetry as everywhere in this milestone:
 a SAT row costs ~1 s, an UNSAT row 10–50 s.
+
+### §R21 — The box sweep goes parallel, and the measured ceiling is not the core count
+
+§R15 recorded that parallelism bought nothing for this descent, on a measurement that was true when
+it was taken: 160 box solves in 7.5 s. **On the corrected base it is no longer true.** The S side's
+acceptance test now sweeps **18,408 boxes and costs 116 s**, because dropping orbits from `L` loosens
+it and inflates the pattern set the other side must kill — the cost *grows as the descent succeeds*.
+`|P_S| = 264` against `|P_L| = 18,408` on the same arena, the asymmetry structural: the shared centre
+lives on the `L` side, so the `S` block carries 30 extra unit clauses ("no `S` point of norm 1 takes
+colour 0") and is far more constrained.
+
+`tools/boxsweep.py` fans the sweep out over **plain subprocesses — no pool, no queue, no epoll**,
+because this project owns one multiprocessing wedge (a parent asleep in `do_epoll_wait` for 96
+minutes) and five self-inflicted process kills. A worker prints one line and exits; the parent kills
+the rest on the first survivor; a worker that fails **raises rather than returning a verdict**.
+
+**Validated red/green before it decided anything**, against the sequential answer on both branches —
+a state that blocks all 18,408 boxes, and a state with a survivor. Both agree.
+
+**Measured, and the number is 4.1× rather than 28×:** sequential 116 s, parallel 28 s on 28 workers,
+while another job held a core. The profile says why, and it is worth recording because it caps every
+future fan-out of this shape: **load and bootstrap are free** (0.05 s together — 48,260 clauses and
+18,408 boxes), and the whole cost is the solves, at **6.3 ms/box sequentially against 13 ms/box in a
+worker.** The sequential sweep reuses ONE incremental solver across every box, so its learned clauses
+accumulate; each worker starts cold and throws that away. So the achievable speedup is capped near
+*half* the core count before contention, and memory bandwidth takes the rest.
+
+**Incident, the sixth of its shape and the first that ran two jobs at once.** The relaunch that added
+per-round logging wrote its pgid from `pgrep -f … | head -1`, which matched a process whose group was
+not the job's, so the kill was a no-op and **two descents ran concurrently on one log**. The standing
+memory note says the *script* writes its own pgid at startup; this launch did not. It does now
+(`os.getpgid(0)`, first line of `__main__`).
