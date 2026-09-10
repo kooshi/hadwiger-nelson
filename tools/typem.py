@@ -739,3 +739,110 @@ def build_c13_base(depth: int = 8, radius: float = 2.5):
         if not frontier:
             break
     return sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
+
+
+# ====================================================================== THE PATTERN ENGINE (M62 §R8)
+# This is the part that is ours rather than Parts's, and it comes straight out of Theorem B.
+#
+# Theorem B: every finite unit-distance graph drawn in K is 4-colourable. Both L and S are drawn in
+# K. So NEITHER HALF CAN EVER BE THE OBSTRUCTION -- the fifth colour is bought entirely by the cross
+# edges, of which the whole arena has ~126 and the record uses 18. Those touch only the ~24
+# cross-endpoint vertices per side. Hence:
+#
+#     L u rho-S refuses four colours
+#         <=>  for every pattern p that L can impose on its cross endpoints,
+#              and every pattern q that S can impose on its own,
+#              some cross edge is monochromatic under (p, q).
+#
+# So the search decomposes: characterise each half ONCE by its pattern set, then compatibility is a
+# |P_L| x |P_S| table lookup with no solver in the loop. Heule's own design note reports the analogue
+# number for his object -- the large part admits 19 patterns on 12 vertices, and the small part
+# avoids all 19 -- which is this object with the projection taken.
+#
+# The enumeration blocks PATTERNS, not colourings: one blocking clause per pattern, so the loop runs
+# |P| times and not (number of colourings) times. That is what makes it affordable.
+def patterns(A, side, endpoints, k=4, cap=20000, wall=600.0, pin_centre=True):
+    """The set of colour patterns on `endpoints` realisable by proper k-colourings of A[side].
+
+    Returns (patterns, exact). `exact=False` means the cap or a wall was hit -- a cap is NEVER a
+    negative (M62 §M3.1), and a truncated pattern set may not be used to claim a refusal."""
+    from five_dial import sat
+    def var(v, c): return v * k + c + 1
+    cl = [[var(v, c) for c in range(k)] for v in range(A.N)]
+    for u, v in A.induced(side):
+        for c in range(k):
+            cl.append([-var(u, c), -var(v, c)])
+    if pin_centre and (side >> A.centre) & 1:
+        cl.append([var(A.centre, 0)])
+    ep = list(endpoints)
+    out = []
+    while len(out) < cap:
+        st, model = sat(cl, A.N * k, wall=wall)
+        if st == "unsat":
+            return out, True
+        if st == "unknown":
+            return out, False
+        true = set(l for l in model if l > 0)
+        pat = tuple(next(c for c in range(k) if var(v, c) in true) for v in ep)
+        out.append(pat)
+        cl.append([-var(v, pat[i]) for i, v in enumerate(ep)])   # block the PATTERN, not the model
+    return out, False
+
+
+def cross_endpoints(A, cross_edges):
+    """The L-side and S-side vertices any cross edge touches. Everything else in each half is
+    invisible to the other half."""
+    Lep = sorted({i for i, j in cross_edges})
+    Sep = sorted({A.n + j for i, j in cross_edges})
+    return Lep, Sep
+
+
+def clash(PL, PS, Lep, Sep, cross_edges, A):
+    """Is every (p, q) pair killed by some cross edge? If so the union refuses four colours."""
+    li = {v: t for t, v in enumerate(Lep)}
+    si = {v: t for t, v in enumerate(Sep)}
+    pairs = [(li[i], si[A.n + j]) for i, j in cross_edges]
+    survivors = []
+    for p in PL:
+        for q in PS:
+            if not any(p[a] == q[b] for a, b in pairs):
+                survivors.append((p, q))
+                if len(survivors) > 8:
+                    return False, survivors
+    return (not survivors), survivors
+
+
+# ====================================================================== the pattern-preserving shrink
+# The acceptance test, derived. Removing vertices from L can only RELAX its colouring problem, so
+# P_{L'} always CONTAINS P_L. Hence a drop is safe when it introduces NO NEW PATTERN, and that is
+# ONE solver call: take the L-side CNF, add the blocking clauses for every p in P_L (which the
+# pattern enumeration has already built), and ask. UNSAT means P_{L'} = P_L, so whatever clash the
+# whole object had is preserved -- WITHOUT ever colouring the union.
+#
+# This is sufficient and not necessary: P_{L'} may grow and still be killed by P_S. It is taken
+# because it costs one call on a HALF-SIZE graph instead of one on the union, and because it makes
+# the two halves independently optimisable, which is the whole point of the decomposition.
+def side_cnf(A, side, k=4, pin_centre=True):
+    def var(v, c): return v * k + c + 1
+    cl = [[var(v, c) for c in range(k)] for v in range(A.N)]
+    for u, v in A.induced(side):
+        for c in range(k):
+            cl.append([-var(u, c), -var(v, c)])
+    if pin_centre and (side >> A.centre) & 1:
+        cl.append([var(A.centre, 0)])
+    return cl
+
+
+def _blocks(A, ep, P, k=4):
+    def var(v, c): return v * k + c + 1
+    return [[-var(v, p[i]) for i, v in enumerate(ep)] for p in P]
+
+
+def preserves_patterns(args):
+    """Worker: does this candidate side admit a pattern outside P?  ('safe' | 'grew' | 'unknown')"""
+    import pickle as pk
+    A, side, ep, P, wall = args
+    from five_dial import sat
+    cl = side_cnf(A, side) + _blocks(A, ep, P)
+    st, _ = sat(cl, A.N * 4, wall=wall)
+    return {"unsat": "safe", "sat": "grew", "unknown": "unknown"}[st]

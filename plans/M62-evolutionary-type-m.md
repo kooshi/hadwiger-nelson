@@ -853,3 +853,65 @@ orbit-level reduction is running from there.
 **Honest reading of where this sits: 6,925 against a record of 509.** A radius-ordered prefix is a
 ball, and the record is a sparse selection — the shape is wrong, and closing that gap is what the
 remaining phases are for. Nothing here is a find; every verdict is `REFUSED-4`.
+
+### §R8 — THE PATTERN ENGINE: Theorem B turned into a search principle
+
+This is the part of M62 that is this project's rather than the record-holder's, and it falls straight
+out of a theorem we already own.
+
+**The derivation.** `L` and `S` are both drawn in `K`, so **by Theorem B neither half can ever be the
+obstruction** — each is 4-colourable on its own, always. The fifth colour is therefore bought
+*entirely* by the cross edges, of which the whole arena has 126 and the record uses 18, and those
+touch only a few dozen vertices per side. So:
+
+> `L ∪ ρS` refuses four colours **iff** every pattern `L` can impose on its cross-endpoints clashes,
+> on some cross edge, with every pattern `S` can impose on its own.
+
+**The consequence is that the two halves become independently optimisable**, and the inner loop
+never colours the union.
+
+**Measured, and it is the night's best number:** the **entire** 5,401-point `L` half admits only
+**55 patterns** on its 30 reference cross-endpoints — 55 out of `4³⁰ ≈ 10¹⁸` — enumerated exactly in
+**57 seconds**. The enumeration blocks *patterns*, not colourings, so it runs `|P|` times rather
+than once per colouring, which is what makes it affordable. `[Heule2019]` reports the analogue for
+his own object without deriving it: *"the large part limits the number of valid 4-colorings of 12
+vertices at distance 2 from the origin to 19."*
+
+**The acceptance test that follows, one solver call per proposal on a HALF-SIZE graph.** Dropping
+vertices can only relax a half's problem, so its pattern set can only **grow**; a drop is safe
+exactly when it admits no pattern outside the set we started with — and that CNF is the one the
+pattern enumeration has already built. Sufficient, not necessary (the set may grow and still clash),
+and taken because it makes the halves independent. `tools/m62_run.py`, parallel over proposals.
+
+### §R9 — Parts's "essential second kind", confirmed and made symmetric
+
+Parts writes that for type M, *"unlike graphs of type A, the existence of triangles of the second
+kind is essential"* — an assertion about the auxiliary edges, with no measurement and no statement
+about the first kind. Tested directly on the symmetric core, full base:
+
+| cross edges used | `k = 4` |
+|---|---|
+| reference only (90) | **SAT** — 4-colourable |
+| auxiliary only (96) | **SAT** — 4-colourable |
+| both (126) | **UNSAT** — 5-chromatic |
+
+**Neither kind suffices; both are necessary.** His claim is confirmed, and the symmetric half of it —
+that the *reference* kind is equally essential — is measured here for the first time.
+
+**And the subtype question is finite.** The cross edges fall into exactly **seven orbits** under
+`⟨rot₆, conjugation⟩` (three reference: 6, 12, 12 edges; four auxiliary: 12, 6, 12, 6), so Parts's
+second open question — *"which subtype leads to the smallest 5-chromatic graph?"* — is an
+**exhaustive search over 127 subsets**, running.
+
+### §R10 — Where this honestly stands, and one observability defect
+
+**Best refusing object: ~5,200 vertices. The record is 509.** An order of magnitude out, and the
+reduction is grinding — two accepted drops in eighteen minutes, because each accepted drop is the
+expensive verdict (§R6).
+
+**Defect in my own instrument, recorded**: the subtype census uses `Pool.map`, which returns
+everything at once, so it emits **no progress at all** until all 127 finish — exactly the "you
+cannot tell a working search from a stalled one" failure §M3.2 was written to prevent, in a tool
+written after §M3.2. The census is being allowed to finish rather than restarted, but the pattern is
+worth the note: the experience pass's rule was applied to the *engine* and not to the *scripts around
+it*.
