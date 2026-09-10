@@ -322,3 +322,114 @@ parse already written (M05/M06). Two statements are wanted and one is new:
 **The full-base check is the non-vacuity gate for the whole milestone** and it is one SAT call per
 rotation: a base whose *entire* selection is 4-colourable contains no find, and every generation
 spent on it is measuring the base rather than the problem.
+
+---
+
+## §M2 — Obligation modeling pass (`debruijn-obligation-modeling`, 2026-09-09)
+
+### §M2.1 — §0b made finite: vote, then filter by Theorem B. **The naive objective is backwards.**
+
+The chord condition, written algebraically rather than angularly (`u, v ∈ K² ≅ K(i)`, `ρ` norm-one):
+
+> `|u − ρv|² = 1  ⟺  Re(ρ · ū v) = (|u|² + |v|² − 1)/2`
+
+For a **fixed pair** `(u, v)` this is a line meeting the unit circle: **at most two rotations make any
+given pair adjacent.** So the candidate rotations are enumerable by *voting* — scan `B × B`, solve the
+quadratic, tally — a Hough transform over the base lattice. `O(|B|²)`, embarrassingly parallel, and
+**the tally is `|E_cross(ρ)|`, so the enumeration and the precomputation §M1.2 needs are one
+computation.** That is the convergence signal this pass looks for.
+
+Run twice, and each run corrected the design:
+
+**(i) On Heule-510 — measured the wrong population (G21).** 47,755 candidate rotations, but the top
+votes are the lattice's own `±60°, ±120°, 180°` symmetries, because the 510-point set **already is**
+`L ∪ ρS`. A rotation vote over a finished object recovers its symmetry group, not its construction.
+
+**(ii) On a fresh Moser-lattice ball** (873 points, 4,702 unit edges, radius 2.05 — the literature's
+own base, `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩`): 135,833 candidate rotations, and the top non-symmetry hits sit at
+`cos = ±√33/6 ≈ ±0.957427`, `±0.728714`, `±0.228714`. **`7/8` — the record's own coupling constant —
+is nowhere near the top.**
+
+That is not a defect in the enumeration; it is the objective being **anti-correlated with the goal**,
+and the reason is a theorem we already own:
+
+> A rotation that creates the *most* cross edges is one that nearly preserves the base lattice.
+> Preserving the lattice means lying in the norm-one group of `K(i)`. Lying there keeps the whole
+> union inside `K²`. **And Theorem B four-colours everything in `K²`.**
+
+Checked: `cos = √33/6` has `sin = √3/6`, both in `K` — the top-voted rotations are *exactly* the
+useless ones. `ρ₁₅ = (7 + i√15)/8` scores low precisely because `√15 ∉ K`, so it carries the base
+into a different lattice and only sparse coincidences survive. **Maximal coupling is a symptom of
+staying inside the wall.**
+
+**So the enumeration's obligation order is fixed, and the order is the content:**
+
+| step | rule | licence |
+|---|---|---|
+| 1 | vote over `B × B`, exact arithmetic | completeness of the pair scan |
+| 2 | **reject every `ρ` with `Re ρ, Im ρ ∈ K`** | Theorem B — the union would be 4-colourable |
+| 3 | keep `ρ` whose surviving cross edges fall in **≥ 2 radius families** | Parts: *"the existence of triangles of the second kind is essential"* |
+| 4 | prefer wall-breaking radicands (`≡ 5, 7 mod 8`) | the 2-adic law, ledger row 59 |
+| 5 | rank the survivors — **not by raw vote count** | step 2's finding |
+
+Steps 2–4 are three of our own theorems used as a *sieve on the search space* rather than as
+commentary, which is what "combining CS and our math" has to mean if it means anything.
+
+### §M2.2 — The free pre-filter, derived rather than borrowed
+
+The conversational plan proposed the algebraic forced-pair predictor (`F_true ⊆ F_K`) as the
+admissible filter. **Wrong target here**: the property is *non-4-colourability*, not *has a forced
+pair*. The right filter falls out of Theorem B instead:
+
+> `L ⊆ K²` and `S ⊆ K²`, so **each carries the residue 4-colouring**. Compose them across the
+> rotation and test all 24 palette permutations against `E_cross`. If any is proper, the object is
+> 4-colourable — **rejected, with an exhibited colouring.**
+
+Cost: `24 × |E_cross|` integer comparisons, no solver. **Admissible in the strongest sense — it does
+not estimate, it produces a witness**, so it cannot discard a winner. Widenable for free to all
+additive 4-colourings of each side (M56 found eight on one object). Obligation: **none new in Lean**
+— a rejection is never reported as a result, and the properness check is verified in the tool against
+a planted control.
+
+### §M2.3 — Lean-side obligations for a certified find
+
+| half | obligation | status |
+|---|---|---|
+| `¬ Colorable 4` | exact geometry (`UDCert.valid`, decides) + LRAT replay | **exists**, M05/M06 |
+| `Colorable 5` | a colour table + properness by `decide` over the edge list | routine |
+| `chromaticNumber = 5` | `le_antisymm` of the two | **wanted as a named helper** — M09 did this ad hoc for de Grey; a record claimed without the upper half is a lower bound wearing an equality |
+
+Nothing else is new. The searcher is untrusted; the certificate is the boundary, which is
+*parse, don't validate* with the parser already written.
+
+### §M2.4 — Measures, so the loops terminate by construction
+
+- **Local (memetic) step:** greedy vertex deletion preserving non-4-colourability — `|L| + |S|`
+  strictly decreases, so it terminates; this is Parts's own reduction stage, and his pruning rule
+  (*a vertex whose deletion loses the property is in every solution*) is the criticality argument
+  already in `CriticalSet.lean`.
+- **Outer GA:** stochastic, no monotone measure; bounded by generation count and **reported as
+  bounded**, never as converged.
+- **Enumeration:** `|B|²`, finite.
+
+### §M2.5 — §0c is DEMOTED from blocking to optional
+
+*Decision, four parts.* **Choice:** stop treating "is gauge-zero reachable in `K` at four colours"
+as a gate. **Alternative weighed:** keep it blocking, costing half a day before any code.
+**Why:** §0d already replaced the gauge as the fitness and §M2.2 replaced it as the filter, so
+nothing in the loop can hang on the answer; the rank argument would only tell us how constrained
+`K`-fabric's colourings are, which is background. **Confidence:** high — if any later phase reaches
+for the gauge, the question returns as blocking at that moment. *P6 stays registered and will be
+scored if the question is answered in passing.*
+
+### §M2.6 — Adversarial validation registered for the enumeration
+
+Per the skill's mutation discipline, each of these must be **seen to fire** before any run is believed:
+
+- plant a pair whose solving rotation is irrational / outside every candidate field → must be rejected
+  by the exact disposal (the float-propose/exact-dispose seam is where a spurious rotation enters);
+- plant `ρ ∈ K(i)` norm-one → must be rejected at step 2, and the object it builds must be
+  4-colourable by the residue filter, **both**;
+- plant a rotation with exactly one radius family → must be rejected at step 3;
+- **the base non-vacuity gate**: the full base at the chosen `ρ` must refuse 4 colours, or the run is
+  measuring the base and not the problem (§M1.4).
