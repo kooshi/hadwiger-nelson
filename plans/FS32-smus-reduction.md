@@ -277,10 +277,72 @@ census of both Heule witnesses at four colours, every vertex, zero unknown.**
 | Heule-553 | 553 | 2,722 | UNSAT | **0 of 553** | **yes** |
 
 The project held this only by sampling on de Grey's 1581 (`G10`, and its two "proven critical" edges
-have no witnesses on disk) and for Heule-510's centre alone (M31). **A consequence corrects an
-assumption made here an hour ago:** since Heule-553 is vertex-critical, **510 is not 553 with 43
-vertices deleted** — they are separate constructions, not nested, and Heule's "shrink" was a
-redesign. So the hoped-for calibration *"does the tool reproduce 510 from 553"* does not exist, and
-what both witnesses give instead is a calibration with a **known exact answer**: a vertex-critical
-graph's smallest vertex-granularity group-MUS is the whole graph, so the tool must return 510 and
-553 and nothing smaller.
+have no witnesses on disk) and for Heule-510's centre alone (M31).
+
+**What I then inferred from it was wrong, and Kooshi corrected it: two vertex-critical objects are
+exactly what one expects from two different DELETION ORDERS, not evidence of separate
+constructions.** `plans/DESCENT-ALGORITHM.md` (WO-9, 2026-08-31) already says so: *"the shrink
+reaches a **1-minimal** halo, and 1-minimal is not minimum: different deletion orders reach different
+1-minimal halos […] the one lever left is the shrink's deletion order."* And M49→M50's whole
+correction was that **kills are context-dependent** — a removal that works against one object need
+not work once other removals have landed — which is the same fact one level down. Vertex-criticality
+is a property of *where a descent stopped*, and it distinguishes nothing about where it started.
+
+**Measured, since the claim was cheap to test and I had not tested it:** neither witness contains the
+other, and **they share 257 vertices** — half of Heule-510 — on identical exact coordinates.
+
+| | |
+|---|---|
+| `510 ⊆ 553` | **no** |
+| `553 ⊆ 510` | no (553 is larger) |
+| shared vertices | **257** of 510 / 553 |
+| 510-only / 553-only | 253 / 296 |
+
+So they are neither nested nor unrelated: **half-shared, which is the signature of two descent paths
+that diverged and were separately re-expanded**, and not of a redesign. The retracted sentence is
+kept here rather than deleted.
+
+*What survives, and it is what the calibration needs:* a vertex-critical graph's smallest
+vertex-granularity group-MUS **is the whole graph**, so both witnesses are calibrations with a known
+exact answer — the tool must return 510 and 553 and nothing smaller.
+
+## §B4 — The portfolio, on Kooshi's correction: the deletion order IS the search space
+
+The correction above is not only a retraction; it names the lever. If 1-minimality is a property of
+*where a descent stopped*, then a single greedy run reports one sample from a distribution, and
+`plans/DESCENT-ALGORITHM.md` had already reduced the whole mechanism family to that one knob:
+**"the one lever left is the shrink's deletion order."** So sample it.
+
+`tools/portfolio.py` — one seeded greedy 1-minimalisation per process, all orders at once, over the
+**orbit groups** (which is also the answer to *"if we can break the graph into units"*: the units
+exist now, there are 182 of them, and they are the symmetry's own). Each run keeps one incremental
+solver and asks *"does the arena still refuse four colours without this group?"* under assumptions,
+so the learned clauses carry across all 182 asks of a run instead of being thrown away.
+
+**What a run proves and what it does not**, stated in the module because it is the thing most easily
+overclaimed: a finished run is 1-minimal, and each kept group carries a colouring that survives its
+removal. By the downward-closure of criticality witnesses (same doc), that witness proves the group
+belongs to **every working subset of that run's own final set** — so the run's answer is the unique
+minimal subset *of itself*, and says nothing whatever about sets it never contained. **A portfolio
+yields UPPER bounds only.**
+
+**And that is exactly why it composes with the hitting-set side rather than competing with it.** The
+two halves of FS-32 bracket the answer from opposite directions:
+
+| | gives | rigour |
+|---|---|---|
+| `tools/gmus.py` — hitting-set dualization (`OptUx`) | **LB**, rising every iteration | exact; a relaxation over the correction sets found so far |
+| `tools/portfolio.py` — seeded greedy, many orders | **UB**, the best 1-minimal found | exact; each answer independently re-verified |
+
+**They are reported as a sandwich `[LB, UB]` and they close when they meet.** Neither is a find.
+
+**Budget discipline, per §M2**: an ask that exhausts its conflict budget is `undecided`, the group is
+**kept** — declining a drop is always safe — and the run reports the count, because a descent that
+ends with undecideds has converged to a fixed point of its *budget*, not of the mathematics.
+
+**Next, and not yet run:** the memetic step Kooshi named — seed a population from the portfolio's
+1-minimal solutions (each a 182-bit mask over orbits), recombine, and re-run the greedy local search
+on each offspring. Crossover of two working selections need not work, so the fitness is *weight if it
+refutes, penalty if not*, with greedy 1-minimalisation as the local search — which is the standard
+shape for set-cover-like problems, and is M62's original evolutionary design finally holding the
+right unit.
