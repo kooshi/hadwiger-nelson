@@ -1336,3 +1336,66 @@ per-round logging wrote its pgid from `pgrep -f … | head -1`, which matched a 
 not the job's, so the kill was a no-op and **two descents ran concurrently on one log**. The standing
 memory note says the *script* writes its own pgid at startup; this launch did not. It does now
 (`os.getpgid(0)`, first line of `__main__`).
+
+### §R22 — THE ARENA WAS THE WRONG OBJECT: radius 2 excludes the record's own lineage, and radius 2.44 hands back a 757-vertex refuting selection for free
+
+**The finding, and it came from an advisor rather than from the descent.** Poros was asked to
+check the *frame* of a five-round campaign to make the reduction stage faster, and answered on the
+**object** axis: the arena being descended cannot contain the objects the descent is aimed below.
+Every number here was then re-derived independently before it was believed.
+
+**Heule's published 510-vertex 5-chromatic graph is a type-M object at `ρ₁₅`, and 37 of its 510
+points lie outside `parts_lattice(2.0)` — by radius alone.** Decoded from `tools/heule510.json`
+into complex floats, all 2,504 of its edges are unit distance, its centre is the origin, and its
+**maximum radius is 2.4320**. Since `|ρ₁₅| = 1`, every vertex of an arena built on a radius-`r`
+base has radius `≤ r`, so a radius-2 arena **provably** misses them. Measured coverage of the 510
+against `parts_lattice(r)`:
+
+| `r` | base points | Heule-510 covered |
+|---|---|---|
+| 2.00 | 1,603 | **473 / 510** (L 369, `ρ`S 105) |
+| 2.10 | 1,879 | 479 / 510 |
+| 2.30 | 2,773 | 486 / 510 |
+| **2.44** | **3,433** | **510 / 510** (L 375, `ρ`S 136) |
+
+**At `r = 2.44` the arena contains Heule-510 exactly.** The base is group-closed (179 orbits, sizes
+`{1: 1, 6: 14, 12: 49, 24: 115}`, **zero images outside**); the induced subgraph on those 510
+vertices has **2,504 edges, every one of Heule's own and not one extra**; `refuses_four` returns
+UNSAT in 10.5 s. That is an independent reconstruction of a published 5-chromatic record from our
+own §5.6 lattice and our own `ρ₁₅` cross-edge law — a positive result that was sitting inside a
+negative.
+
+**And the orbit closure of those 510 points is 48 orbit-halves / 757 vertices, refusing four
+colours in 7.5 s.** Against which the eight-seed portfolio of the same day, on the radius-2 arena,
+had spent **4.4 CPU-hours to reach 2,310 and was still descending**.
+
+**The cross-edge count does not move, and that is a theorem rather than a coincidence.** Collinearity
+forces `|u − ρv|² = t² + s² − (7/4)ts = 1`; the form is positive definite (`(7/4)² < 4`), so its
+solution set is an ellipse and real `s` requires `t² ≤ 4/(4 − (7/4)²) = 64/15`. **Every `ρ₁₅`
+cross-edge endpoint has radius at most `8/√15 ≈ 2.0656`**, so enlarging the base past that adds
+only interior material and the cross structure is already complete: **126 cross edges at `r = 2.00`
+and 126 at `r = 2.44`, unchanged**, exactly as the bound predicts. §R20's exhaustive subtype law is
+therefore untouched by the enlargement.
+
+**One correction to §R3's own reading, and it is the useful half.** §R3 wrote *"dropping groups
+moves the instance toward its satisfiability threshold, so the further a descent gets, the more each
+step costs."* True inside one arena; **false as a law**. On the radius-2 arena an accept at weight
+2,310 costs 295 s, while on the 2.1× LARGER radius-2.44 arena a selection of weight 757 costs 7.6 s
+and the record's own 510 costs 10.5 s. The variable is **slack over the nearest refutation**, not
+weight and not arena size — so "keep the instance near a thousand vertices, as Parts does" is not
+the mechanism either; *working where the answer is not yet close* is, and seeding at 757 buys it.
+
+**What this retires.** The eight portfolio trajectories are retired rather than optimised, and the
+"23% spread from the deletion order" they were quoted for is withdrawn as stated: those were
+**ten-minute snapshots of runs that had not converged**, so the spread mixes variance with progress
+and measures neither. The deletion-order finding itself (WO-9) is untouched — it is measured
+elsewhere — but this data does not support it.
+
+**What was summarised rather than read, recorded because it is the mechanism.** §R19 closed FS-31
+with the boundary question — *"whether his 'about 400' counts orbits INSIDE the disk (ours: 92) or
+orbits MEETING it (ours: 1,023) — his text does not decide it"* — marked **immaterial**. It was not
+immaterial: it is exactly the truncation that excludes the record. And a 510-point control was
+available the whole time and never run — the lattice congruences check against Heule-510 in one
+loop and pass 510 for 510, isolating the failure to radius; the milestone validated against
+nineteen published orbit labels instead. `G21` again, and this time on the *boundary* of an
+enumeration rather than on its contents.

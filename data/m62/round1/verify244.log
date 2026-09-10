@@ -1,0 +1,12 @@
+[   0.2s] base r=2.44: 3433 points
+[   7.4s]   orbits 179, images outside 0, sizes {1: 1, 6: 14, 12: 49, 24: 115}
+[  10.1s]   unit edges inside the base: 28566
+[  11.1s]   cross edges at rho15: 126
+[  11.1s]   Heule-510 vertices found in the arena: 510/510  (L-side 375, S-side 135)
+[  11.1s]   induced subgraph on those 510: 2504 edges; Heule's own list has 2504
+[  11.1s]     Heule edges present in the arena: 2504/2504
+[  11.1s]     arena edges NOT in Heule's list : 0
+[  21.7s]   refuses_four on Heule-510 as an arena selection: UNSAT
+[  21.7s]   ORBIT CLOSURE of those 510: 48 orbit-halves, 757 vertices
+[  29.2s]   refuses_four on the orbit closure: UNSAT
+[  29.2s]   saved /tmp/arena244.pkl

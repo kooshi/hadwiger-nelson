@@ -1,0 +1,12 @@
+### --solver cadical153 --mode incremental --pin centre --tag baseline
+   12 unsat ok          14.18s
+   13 sat   ok           0.24s
+RESULT {"tag": "baseline", "solver": "cadical153", "mode": "incremental", "pin": "centre", "guard_back": true, "precedence": false, "asks": 14, "bootstrap_wall": 0.06, "bootstrap_cpu": 0.06, "wall": 73.54, "cpu": 73.21, "mismatches": [], "verdicts": "USSSSUSSUSUSUS"}
+### --solver cadical195 --mode incremental --pin centre
+   12 unsat ok          15.28s
+   13 sat   ok           0.04s
+RESULT {"tag": "cadical195/incremental/pin=centre", "solver": "cadical195", "mode": "incremental", "pin": "centre", "guard_back": true, "precedence": false, "asks": 14, "bootstrap_wall": 0.07, "bootstrap_cpu": 0.07, "wall": 87.94, "cpu": 87.52, "mismatches": [], "verdicts": "USSSSUSSUSUSUS"}
+### --solver cadical300 --mode incremental --pin centre
+    7 sat   ok           0.01s
+    8 unsat ok          69.32s
+    9 sat   ok           4.25s
