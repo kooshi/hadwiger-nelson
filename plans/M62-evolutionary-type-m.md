@@ -1110,3 +1110,46 @@ question and all three are days at most.
 first census reproduces — **471 of 473 `L`-orbits individually droppable** — and it is on the batch
 bisection. Whatever it returns is a `REFUSED-4` candidate at ~5,000 vertices, not a find, and it
 does not bear on the three blockers above.
+
+### §R18 — FS-31 partly answered the same night: the law is complete, the base was not closed, and `abcd = 0` is not what I read it as
+
+Four measurements, in the order they settle the stub's two readings.
+
+**1. The cross-edge law is COMPLETE — reading (B) is refuted.** Heule-510 splits **375 in-field /
+135 out**, matching `[Parts2020a]`'s own recorded `L`-size exactly. Of the **30** edges running
+between the two halves, **all 30 are explained**: 18 at `cos = 7/8` and 12 incident to the shared
+centre. **No cross edge exists that the collinearity law does not predict**, so no M62 arena is
+missing edges and every measurement at `ρ₁₅` stands.
+
+**2. Our base IS in Parts's coordinate system.** All **5,401 of 5,401** points are expressible as
+`(a + b√33 + i(c√3 + d√11))/12`, and **all 5,401 satisfy his congruence `a − b + c + d ≡ 0 (mod 4)`.**
+That is a strong, unlooked-for validation of a base I reconstructed by guesswork.
+
+**3. `abcd = 0` is NOT "the product of the four coordinates", and the test that showed it is worth
+keeping.** His sentence — *"all useful orbits satisfy the relation `abcd = 0`"* — is about **orbits**,
+so the condition must be group-invariant. Applying it as a product: it keeps 1,509 of 5,401 points,
+**breaks the gate** (`k = 4` SAT in 1 s), and **is not preserved by his own 120° rotation** (broken on
+2,412 of 5,401), while it *is* preserved by both reflections and by conjugation. A condition that
+survives three generators and dies on the fourth is a misreading, not a filter. Most likely it is a
+condition on the orbit's **canonical representative** — he sorts orbit members *"by the number of
+nonzero and negative elements"* — i.e. every useful orbit contains a point with a zero coordinate.
+**Not pursued further; recorded so the next session does not re-derive the dead end.**
+
+**4. The base was not closed under his group, and closing it is free improvement.** His generators,
+derived from the geometry rather than transcribed from a garbled PDF table — 120° rotation, both
+reflections, and conjugation by `√33` (`b ↦ −b`, `d ↦ −d`, from his own footnote) — test as:
+**rot120, refl-vert and refl-horz all map our base into itself; conjugation by `√33` does not, and
+1,734 points leave.** So our base carried a third of its mass outside his symmetry, which is exactly
+what inflates an orbit count.
+
+| | seam base | **closed under his order-24 group** |
+|---|---|---|
+| points | 5,401 | **3,667** |
+| orbits (our `⟨rot₆, conj⟩`) | 948 | **650** |
+| cross edges at `ρ₁₅` | 126 | **126 — unchanged** |
+| `k = 4` on the full base | UNSAT (16 s) | **UNSAT (12 s)** |
+
+**A third smaller, a third fewer orbits, the same cross-edge structure, still 5-chromatic, and every
+solver call correspondingly cheaper.** Saved at `/tmp/p24_arena.pkl`; the descent restarts on it.
+Still 650 orbits against his "about 400", so the reconciliation is improved and not finished — the
+remaining factor is the open half of FS-31.
