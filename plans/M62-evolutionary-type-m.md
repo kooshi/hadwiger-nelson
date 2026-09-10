@@ -798,3 +798,58 @@ exact geometry decides and an LRAT replay is kernel-checked.
 a trap this project has a standing note about (anchor the pattern or use PIDs). No work was lost;
 the background job it was meant to kill had already completed successfully. Recorded because the
 note existed and was not consulted.
+
+### §R6 — The cost structure is INVERTED from the assumption, and it changed the algorithm
+
+Calibrating the cheap filter against the solver (16 rows, arena at `ρ₁₅`) produced the milestone's
+most useful measurement, and it refuted my own diagnosis of the stall:
+
+| kept vertices | edges | greedy | solver | solver seconds |
+|---|---|---|---|---|
+| 400 / 800 / 1500 | 98 / 428 / 1345 | 4-coloured | SAT | 0.73 / 0.04 / 0.05 |
+| 3000 / 6000 | 5452 / 21667 | *missed* | SAT | 0.07 / 0.72 |
+| 10000 | 61440 | *missed* | **UNSAT** | **127.9** |
+
+**The solver is fast on 4-colourable and slow on NOT-4-colourable.** I had assumed the opposite and
+wired a greedy filter to catch the cheap case. So:
+
+> **Deleting vertices pays the expensive verdict on every ACCEPTED drop; growing pays the cheap one
+> on every rejected prefix and the expensive one only ~log₂(N) times.** Same answer, inverted cost.
+
+Measured directly against each other on the same arena: the shrink managed **one** accepted drop in
+53 s and then stalled for minutes; **binary search over a radius-ordered prefix converged in 14 asks
+and 118 seconds** to the smallest refusing prefix, 9,167 vertices. This is Parts's *expansion* stage
+standing in for his *reduction* stage — chosen from a measurement rather than from his write-up.
+
+The greedy filter stays: it is sound (it exhibits a colouring, re-verified against the induced edge
+list before it is believed) and it is free. It is simply not where the cost was.
+
+### §R7 — Two defects in my own base, both found by controls rather than by inspection
+
+**(1) The "seam lattice" is not a lattice.** Four generators spanning a **rank-4 ℤ-module in the
+plane** is *dense*, so "all points in a ball" is infinite — measured as a point count that never
+converges (7,173 → 9,243 → 11,537 → 14,077 → 16,921 as the coefficient box grew). This is why
+Heule's base is a **bounded Minkowski sum** and not a ball, and I had not registered the distinction.
+
+**(2) The coefficient box broke the symmetry, and the orbit builder caught it.** Truncating a
+dense module by a box in generator coordinates plus a radius is **not rotation-invariant**, so the
+arena had **zero** symmetry generators and 14,346 singleton orbits. The orbit builder reported that
+as its own output rather than crashing, which is what made it visible.
+
+**The repair, and it costs nothing:** take the **symmetric core** — the points whose entire orbit
+under `⟨rot₆, conjugation⟩` is already present.
+
+| | span-7 ball | symmetric core |
+|---|---|---|
+| points | 7,173 | **5,401** |
+| Heule-510's `L`-side contained | 375 of 375 | **375 of 375 — nothing lost** |
+| valid symmetry generators | 0 | **2** |
+| orbits / vertices | 14,346 / 14,346 | **948 / 10,802 → 11.4× reduction** |
+| `k = 4` on the full selection | UNSAT (18 s) | **UNSAT (16 s)** |
+
+**Orbit-level growth on the symmetric core: 614 orbits, 6,925 vertices, 10 asks, 87 seconds.** The
+orbit-level reduction is running from there.
+
+**Honest reading of where this sits: 6,925 against a record of 509.** A radius-ordered prefix is a
+ball, and the record is a sparse selection — the shape is wrong, and closing that gap is what the
+remaining phases are for. Nothing here is a find; every verdict is `REFUSED-4`.

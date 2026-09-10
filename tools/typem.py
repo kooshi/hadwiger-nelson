@@ -551,3 +551,191 @@ def shrink(A, present, rng, wall=600.0, log=print, checkpoint=None, budget_s=Non
             break
     return present, dict(asks=asks, accepted=accepted, stopped="converged",
                          seconds=round(time.time()-t0, 1))
+
+
+# ====================================================================== the cheap filters (§M2.2)
+def greedy_four(A, present, rng=None, tries=24):
+    """DSATUR-ish greedy on bitsets: returns a proper 4-colouring as a list, or None.
+
+    This is the workhorse the SAT solver must never be asked to do. During a shrink the COMMON case
+    is 'this selection is 4-colourable' (the drop is rejected), and a greedy pass answers that in
+    microseconds where a solver grinds for minutes. Bitset adjacency is why DSATUR is cheap here:
+    the inner question 'which colours appear in N(v)' is `adj[v] & class_c` plus a popcount
+    (M62 §M4.2)."""
+    import random
+    rng = rng or random.Random(0)
+    verts = []
+    m = present
+    while m:
+        v = (m & -m).bit_length() - 1
+        m &= m - 1
+        verts.append(v)
+    adj = A.adj
+    for attempt in range(tries):
+        colour = {}
+        cls = [0, 0, 0, 0]
+        order = sorted(verts, key=lambda v: -(adj[v] & present).bit_count())
+        if attempt:
+            rng.shuffle(order)
+        ok = True
+        for v in order:
+            nb = adj[v] & present
+            free = [c for c in range(4) if not (nb & cls[c])]
+            if not free:
+                ok = False
+                break
+            c = free[0] if attempt == 0 else rng.choice(free)
+            colour[v] = c
+            cls[c] |= 1 << v
+        if ok:
+            return [colour[v] for v in verts], verts
+    return None
+
+
+def refuses_four_filtered(A, present, wall=600.0, rng=None, stats=None):
+    """Cheap filter first, solver only on survivors. Returns 'sat' | 'unsat' | 'unknown'.
+
+    A greedy hit is a CERTIFICATE of 4-colourability -- it exhibits the colouring -- so the filter
+    can never discard a winner (§M2.2). Verified here rather than trusted: every greedy colouring is
+    re-checked against the induced edge list before it is believed."""
+    g = greedy_four(A, present, rng)
+    if g is not None:
+        cols, verts = g
+        idx = {v: i for i, v in enumerate(verts)}
+        for u, v in A.induced(present):
+            assert cols[idx[u]] != cols[idx[v]], "GREEDY MODEL INVALID: monochromatic edge"
+        if stats is not None:
+            stats["greedy_hits"] = stats.get("greedy_hits", 0) + 1
+        return "sat"
+    if stats is not None:
+        stats["solver_calls"] = stats.get("solver_calls", 0) + 1
+    return refuses_four(A, present, wall)
+
+
+def grow_to_refusal(A, order, wall=900.0, log=print):
+    """Find the shortest prefix of `order` that refuses four colours, by binary search.
+
+    MEASURED cost structure (M62 §R6): on this arena the solver answers SAT in 0.04-0.7 s and UNSAT
+    in ~128 s at 10k vertices. Deleting vertices pays the EXPENSIVE verdict on every accepted drop;
+    growing pays the CHEAP one on every rejected prefix and the expensive one only ~log2(N) times.
+    Same answer, inverted cost. This is Parts's expansion stage standing in for his reduction stage,
+    chosen from a measurement rather than from his write-up."""
+    import time
+    centre_bit = 1 << A.centre
+    def pref(m):
+        p = centre_bit
+        for v in order[:m]:
+            p |= 1 << v
+        return p
+    lo, hi = 1, len(order)
+    if refuses_four(A, pref(hi), wall) != "unsat":
+        log("  the whole order does not refuse four colours"); return None, {}
+    asks = 0
+    t0 = time.time()
+    while lo < hi:
+        mid = (lo + hi) // 2
+        p = pref(mid)
+        asks += 1
+        st = refuses_four_filtered(A, p, wall)
+        log(f"  prefix {mid:6} ({p.bit_count():6} vertices): {st:8}  [{time.time()-t0:.0f}s]")
+        if st == "unsat":
+            hi = mid
+        elif st == "sat":
+            lo = mid + 1
+        else:
+            log("  UNDECIDED-AT-CAP -- widening, no claim"); lo = mid + 1
+    return pref(hi), dict(asks=asks, vertices=pref(hi).bit_count(), seconds=round(time.time()-t0, 1))
+
+
+# ====================================================================== orbits (M62 §M4.1)
+def arena_orbits(A, pts):
+    """The diagonal action of the dihedral group of order 12 (rot6 about the centre, and complex
+    conjugation) on the 2|B|-vertex arena.
+
+    Both generators preserve every block: they fix the centre, preserve radii, and preserve
+    collinearity-with-the-centre, so E_int and E_cross are both invariant. Selecting whole orbits is
+    Parts's 'output symmetry', which is the dimensionality reduction his method actually runs on --
+    hundreds of choices instead of 14,346 -- and it is what this project's own §M4.1 specified and
+    the first search runs did not use."""
+    idx = {p: i for i, p in enumerate(pts)}
+    z6 = ((Fr(1, 2), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(1, 2), Fr(0), Fr(0)))     # (1 + i sqrt3)/2
+
+    def rot(p):
+        x, y = p
+        # (x + iy)(a + ib) = (xa - yb) + i(xb + ya) with a = 1/2, b = sqrt3/2
+        a, b = z6[0], z6[1]
+        return (ksub(kmul(x, a), kmul(y, b)), kadd(kmul(x, b), kmul(y, a)))
+
+    def conj(p):
+        return (p[0], kneg(p[1]))
+
+    def perm(f):
+        out = [None] * A.N
+        for i, p in enumerate(pts):
+            q = f(p)
+            j = idx.get(q)
+            if j is None:
+                return None                       # not a symmetry of THIS truncation
+            out[i] = j; out[A.n + i] = A.n + j
+        return out
+
+    gens = [g for g in (perm(rot), perm(conj)) if g is not None]
+    parent = list(range(A.N))
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]; x = parent[x]
+        return x
+    def union(x, y):
+        rx, ry = find(x), find(y)
+        if rx != ry: parent[rx] = ry
+    for g in gens:
+        for v in range(A.N):
+            union(v, g[v])
+    orb = defaultdict(list)
+    for v in range(A.N):
+        orb[find(v)].append(v)
+    masks = []
+    for members in orb.values():
+        m = 0
+        for v in members: m |= 1 << v
+        masks.append(m)
+    return masks, len(gens)
+
+
+# ====================================================================== the C_{1/3} base (M62 §R7)
+# The seam MODULE is rank 4 over Z inside the plane, hence DENSE -- "all lattice points in a ball"
+# is infinite and the point count never converges (measured: 7173, 9243, 11537, 14077, 16921 as the
+# coefficient box grows). Heule's base is therefore a BOUNDED Minkowski sum, not a ball:
+# G2167 = (+)^8 C_{1/3}, with C_{1/3} the radius-1/3 hexagon together with the 90-degree-rotated
+# hexagon of radius (sqrt3 + sqrt11)/6 (squared radius (7 + sqrt33)/18, a seam radius). The
+# generator set is rot6-invariant, so every Minkowski power of it is, and orbits exist.
+def c13_generators():
+    out = []
+    hx = [(Fr(1, 3), Fr(0)), (Fr(1, 6), Fr(1, 6)), (Fr(-1, 6), Fr(1, 6)),
+          (Fr(-1, 3), Fr(0)), (Fr(-1, 6), Fr(-1, 6)), (Fr(1, 6), Fr(-1, 6))]
+    for a, b in hx:                                   # z6^k / 3 : x = a, y = b*sqrt3
+        out.append(((a, Fr(0), Fr(0), Fr(0)), (Fr(0), b, Fr(0), Fr(0))))
+    R = (Fr(0), Fr(1, 2), Fr(1, 2), Fr(0))            # r = (sqrt3 + sqrt11)/6 times 3 ... see below
+    R = (Fr(0), Fr(1, 6), Fr(1, 6), Fr(0))            # r itself, as a K element with zero rational part
+    for a, b in hx:                                   # (a + i b sqrt3) * i r = -(b sqrt3) r + i a r
+        bs = (Fr(0), b, Fr(0), Fr(0))
+        out.append((kneg(kmul(bs, R)), kmul((a, Fr(0), Fr(0), Fr(0)), R)))
+    return out
+
+
+def build_c13_base(depth: int = 8, radius: float = 2.5):
+    gens = c13_generators()
+    r2 = radius * radius
+    seen = {(Z, Z)}
+    frontier = {(Z, Z)}
+    for _ in range(depth):
+        new = set()
+        for p in frontier:
+            for g in gens:
+                q = (kadd(p[0], g[0]), kadd(p[1], g[1]))
+                if q not in seen and kfloat(norm2(q)) <= r2 + 1e-12:
+                    seen.add(q); new.add(q)
+        frontier = new
+        if not frontier:
+            break
+    return sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
