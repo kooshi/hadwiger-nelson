@@ -521,3 +521,80 @@ Self-describing or it is not an artifact: `kind`; `base {fingerprint, n, edges, 
 `rotation {exact, cos, in_K, radicand, wall_breaking}`; `run {seed, generations, population, every
 cap}`; the results; and `claim_scope` — the house field, carrying **what was not explored**, because
 a count without its enumeration is the failure mode this repository has recorded five times.
+
+---
+
+## §M4 — Ferrous domain modeling pass (data structures, 2026-09-09)
+
+### §M4.1 — The collapse: one mask, not two, and "which side" becomes an index
+
+The de Bruijn pass left a candidate as *two* subsets `(L, S)`. Carried into code that is a case
+analysis at every use — which block is this vertex in, which table do I consult. The collapse:
+
+> Index the candidate on a **fixed `2|B|`-vertex space** — `L` at `0..|B|`, `S` at `|B|..2|B|` — and
+> precompute, **once per rotation**, a single immutable bit-matrix whose three blocks are
+> `(L,L) = adj_int`, `(S,S) = adj_int` *(the same table — the rotation is an isometry)*, and
+> `(L,S) = adj_cross`.
+
+Then **a candidate is one `2|B|`-bit mask** and its induced graph is `adj[v] & present`. The L/S
+distinction is incidental — it is *which copy* — and it survives only as an index range. This is the
+"N structures identical modulo naming" cure: the role is named, the copies are demoted.
+
+```rust
+pub struct Arena {                    // immutable, shared, one per (base, rotation)
+    pub n: usize,                     // 2|B|
+    pub adj: Vec<Bits>,               // 2|B| rows, block structure above
+    pub valid: Bits,                  // trailing-bit mask; every constructor ANDs with it
+    pub orbit_mask: Vec<Bits>,        // one mask per symmetry orbit -> orbit flip is ONE bitop
+    pub orbit_of: Vec<u16>,
+    pub fp: [u8; 16],                 // base+rotation fingerprint (exact, not float-derived)
+}
+pub type Bits = [u64; W];             // W fixed, not generic
+#[derive(Clone, Copy)] pub struct Cand(pub Bits);   // Copy: mutation and crossover allocate NOTHING
+```
+
+**The centre is L-side only** and bit `|B|` is permanently unset. No special case follows: the centre
+sits at the origin, so `adj_cross[0] = { v : |v| = 1 }` falls out of the same table as everything
+else. One invariant, stated once, rather than a branch in the hot loop.
+
+**`W` is fixed, not a const generic.** We will not vary it enough to pay for a parameter threading
+through every signature — the skill's own injunction against speculative structure. At `W = 64`
+(4096 bits) a candidate is 512 bytes, a population of 200 is 100 KB, and the matrix is ~2 MB: L2/L3
+resident, shared read-only across every thread.
+
+### §M4.2 — Adjacency bitsets, not edge lists, and the reason is the consumer
+
+The tables could be `Vec<(u16,u16)>` and restriction a filter. Rejected: **the consumer is a
+colouring algorithm, which wants neighbourhoods, not pairs.** DSATUR's inner question is "which
+colours appear in `N(v)`", and with bitset adjacency that is `adj[v] & colour_class[c]` plus a
+popcount — the representation *is* the algorithm's question. An edge list would be re-derived into
+this on every evaluation.
+
+### §M4.3 — The fingerprint trap, which is a real Rust trap and not a style note
+
+The experience pass requires fingerprints **stable across process restarts**. Rust's default
+`HashMap` hasher is **randomly seeded per process**, so the obvious implementation produces a cache
+that silently misses everything after a restart — a checkpoint contract that appears to work, costs
+nothing to violate, and shows up only as "why is the resumed run slow".
+
+- **Persisted key: BLAKE3-128 of the candidate's raw bytes plus the arena fingerprint.** Deterministic
+  by construction.
+- In-memory map: `FxHashMap` keyed on the same 16 bytes — fast and irrelevant to persistence.
+- The cache is an **append-only log** of `(key, verdict, cost)`, replayed on start. Crash-safe by
+  construction rather than by flushing discipline.
+
+### §M4.4 — Seam validation (the skill's unsampled-member discipline)
+
+| member | realistic? | must do |
+|---|---|---|
+| `|B|` not a multiple of 64 | **yes, generically** | `valid` mask on every constructor, or popcount lies about the vertex count |
+| symmetry group of order 1 | **yes — Parts dials output symmetry down to 1 at convergence** | orbit flip degenerates to bit flip; must work, not divide by zero |
+| `E_cross` empty | yes, for most rotations | two disjoint `K`-graphs, both 4-colourable — caught by the base non-vacuity gate, never by a crash |
+| `L` empty | yes, under mutation | fitness and diversity must be defined |
+
+### §M4.5 — Next-feature test: does this earn FS-6 (the 5 → 6 milestone) for free?
+
+Yes, and that is the strongest evidence the model is intrinsic rather than fitted to this milestone.
+FS-6 wants the same search one colour up over a 5-sealed field: **the genome, the arena, the
+operators and the cache are unchanged**; the colour count is a parameter and the field lives in the
+base construction. Nothing in this representation knows it is working at four colours.
