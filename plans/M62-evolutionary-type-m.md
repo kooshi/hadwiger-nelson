@@ -433,3 +433,91 @@ Per the skill's mutation discipline, each of these must be **seen to fire** befo
 - plant a rotation with exactly one radius family → must be rejected at step 3;
 - **the base non-vacuity gate**: the full base at the chosen `ρ` must refuse 4 colours, or the run is
   measuring the base and not the problem (§M1.4).
+
+---
+
+## §M3 — Experience modeling pass (`debruijn-experience-modeling`, 2026-09-09)
+
+*Three consumers, and what each actually holds when the surface reaches them.*
+
+### §M3.1 — The verdict vocabulary, and the one distinction the tool must be unable to blur
+
+The milestone's whole risk is one word. A solver returning UNSAT is **not a find**; it is a
+candidate. The verdicts:
+
+| verdict | means | may it accompany a vertex-count claim? |
+|---|---|---|
+| `FOUR-COLOURED` | a proper 4-colouring was **exhibited** (residue filter or solver model) — a certificate of *not a find*, and it carries the colouring | n/a |
+| `REFUSED-4` | the solver returned UNSAT | **NO** |
+| `CERTIFIED` | exact geometry decided + LRAT replayed + a verified 5-colouring | **yes, and only this** |
+| `UNDECIDED-AT-CAP` | the cap was reached — not a negative, not a positive | no |
+| `VACUOUS-BASE` | the **full** base at this rotation is 4-colourable, so no selection from it can be a find | no |
+| `REJECTED-IN-K` | the rotation lies in `K(i)`; Theorem B four-colours anything it builds | no |
+
+Following *parse, don't validate*: **the record-claim formatter accepts only a `Certified` value, and
+only the Lean-acceptance path constructs one.** A `REFUSED-4` cannot be formatted into a record
+sentence because the type does not permit it — not because the author remembered. No verdict word
+means "clean", and every count is printed with its enumeration in the *same sentence* (G21's third
+instance: scope lines inside an artifact do not survive into summaries).
+
+### §M3.2 — The progress line: what separates working from stalled
+
+The naive line (`gen 47  best 612`) is a number with no reference — it cannot distinguish a search
+that is converging from one that died twenty generations ago. What Kooshi holds at that moment is a
+terminal and no memory of generation 27, so the line carries the **derivative and the diversity**:
+
+```
+gen  47 | best 612 v (flat 19 gen) | feasible 34/200 | div 0.61 | 1420 asks, 2.1 s mean | control OK
+```
+
+- **`flat 19 gen`** — generations since the best improved. The single most informative number on the
+  line; a rising flat count is the honest signal that the run is finished whatever the budget says.
+- **`feasible 34/200`** — how many individuals refuse four colours. **Zero means the population is
+  wandering in 4-colourable space and the size objective is meaningless there**; that is a different
+  failure from a plateau and must look different.
+- **`div`** — genome diversity. Collapse means restart, regardless of generations remaining.
+- **`control OK`** — see §M3.4. A run whose live control is failing must say so on every line.
+
+### §M3.3 — Fingerprints, so "same object?" is a comparison and not a memory
+
+Every artifact carries a **base fingerprint** (hash of the exact sorted point list *and* the edge
+list), an **exact rotation** (its algebraic representation, never a float), and a **candidate
+fingerprint** (the two bitsets plus the base fingerprint). A tool handed an artifact whose base
+fingerprint does not match the base it has loaded **refuses**, and does not silently proceed — the
+M52 incident (an M06-era vertex order against the standing loader, caught only by a control) is the
+recorded reason.
+
+### §M3.4 — The live control, because a broken fitness looks exactly like a working search
+
+This milestone's most dangerous failure is silent: a search that runs, reports generations, and is
+optimizing the wrong thing looks identical to one that works. The defence is the rule G21 earned
+three times this session — *point every instrument at a known positive before believing any zero*:
+
+> **Seed the population with a known 5-chromatic object expressed in the genome** (Heule-510, when
+> the base contains it) and re-check every generation that the scorer ranks it feasible. If the
+> known winner is not ranked feasible, **the fitness is broken and the run must halt loudly**, not
+> print another generation line.
+
+This is a control that runs *continuously*, not once at startup, because the failure it guards
+against can arrive mid-run with a cache eviction or a base edit.
+
+### §M3.5 — The checkpoint contract
+
+The standing rule's audit question — *if this process dies at any instant, what does the relaunch
+redo?* — answered in the design rather than discovered at the loss (the M51 incident: 19 hours lost
+because the state lived in a parent process):
+
+- Checkpointed every generation: **the population, the RNG state, the generation counter, and the
+  evaluation cache** (solver verdicts keyed by candidate fingerprint).
+- The evaluation cache is the expensive object and is persisted separately, append-only.
+- **Answer: at most one generation of work, and zero solver calls** — every prior verdict is a cache
+  hit keyed by a fingerprint that survives the restart.
+- Resume is *exact*: the RNG state is part of the checkpoint, so a resumed run continues the same
+  sequence rather than a statistically-similar one.
+
+### §M3.6 — What the artifact must say for a reader with no memory of this session
+
+Self-describing or it is not an artifact: `kind`; `base {fingerprint, n, edges, radius, generators}`;
+`rotation {exact, cos, in_K, radicand, wall_breaking}`; `run {seed, generations, population, every
+cap}`; the results; and `claim_scope` — the house field, carrying **what was not explored**, because
+a count without its enumeration is the failure mode this repository has recorded five times.
