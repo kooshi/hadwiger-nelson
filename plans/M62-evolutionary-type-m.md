@@ -748,3 +748,53 @@ claim is made that any listed rotation yields a 5-chromatic graph.
 Phases **B** (genome and generator), **C** (the engine), **D** (the run) and **E** (certification)
 are **not run**. Predictions P2–P6 are unscored. No search has been executed and no candidate
 5-chromatic object exists; the record stands at 509.
+
+### §R3 — Phase B: the arena, and a base correction the gate caught before any search ran
+
+**The cross-edge law, derived exactly and confirmed on the record's own object.** For
+`ρ₁₅ = (7 + i√15)/8`, writing `ū v = p + iq` with `p, q ∈ K`, the condition `Re(ρ · ū v) = k'`
+splits over `K(√15)`: the `√15`-part forces **`q = 0` — the two points are collinear with the
+centre** — and the `K`-part forces `p = 4(|u|² + |v|² − 1)/7`. **Verified on Heule-510: all 18 of
+its cross edges subtend exactly `arccos(7/8)` at the centre**, i.e. every pre-image pair is
+collinear, to nine decimals. This is M31's quadrature law's *anchor-collinear* clause, on the
+record's lineage. No floating point in the test.
+
+**The base was wrong, and the non-vacuity gate caught it in 0 seconds on the first real run.**
+Building the arena over the **Moser lattice** `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩` (the literature's own name for
+our direction ladder, and the natural first guess) gave `k = 4` **SAT** on the full selection —
+`VACUOUS-BASE`, and since a subgraph of a 4-colourable graph is 4-colourable, **no selection from it
+could ever have been a find.** A search would have run indefinitely against a wall we could prove.
+
+Diagnosed rather than guessed: **only 90 of Heule-510's 510 points lie in the Moser lattice at any
+radius.** The record's lineage descends from Heule's `G2167 = ⊕⁸ C_{1/3}`, where `C_{1/3}` is the
+radius-`1/3` hexagon together with the 90°-rotated hexagon of radius `(√3+√11)/6` — squared radius
+`(7+√33)/18`, **a seam radius**. The base is the *seam* lattice, not the Moser lattice.
+
+**Rebuilt, and the validation is exact:** the seam base at radius 2.5 contains **375** of
+Heule-510's 510 points — and `[Parts2020a]` Table 2 records Heule-510's `L`-subgraph as **375
+vertices**. The base contains the record's entire `K`-side, vertex for vertex. The other 135 are the
+rotated `ρS` side, which is outside `K` by construction.
+
+**The arena** (7,173 base points → **14,346 vertices**; 62,714 exact internal unit edges by
+float-propose/exact-dispose; **126 cross edges** in exactly Parts's three families — 30 reference at
+radius 2, 36 auxiliary at `(17±√33)/6`, 60 at the centre):
+
+> **NON-VACUITY GATE: `k = 4` UNSAT in 18 seconds. The arena is 5-chromatic.** Reduction can start.
+
+### §R4 — Phase C: the reduction, in flight
+
+`typem.shrink` — Parts's reduction stage with adaptive chunk halving (his own "8-4-2-1"), designed
+around M52's WO-14 measurement that accepted drops serialise whatever the worker count, so the width
+goes into the **chunk** and not the worker count. Checkpointed every accepted drop
+(`data/m62/shrink-ckpt.json`), so a crash redoes at most one ask.
+
+Running at the time of writing: **14,345 → 12,552 vertices on its first ask (53 s).** The target is
+509. **`REFUSED-4` is a candidate verdict and is not a find** (§M3.1); nothing is a record until the
+exact geometry decides and an LRAT replay is kernel-checked.
+
+### §R5 — An incident, recorded
+
+`pkill -f "build_seam_base"` **killed its own shell** — the wrapper matched its own pattern. This is
+a trap this project has a standing note about (anchor the pattern or use PIDs). No work was lost;
+the background job it was meant to kill had already completed successfully. Recorded because the
+note existed and was not consulted.

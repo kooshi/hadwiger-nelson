@@ -337,3 +337,217 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ====================================================================== the arena (M62 §M1.2, §M4.1)
+def conj_mul(u, v):
+    """conj(u) * v for u, v in K^2 read as K(i): returns (p, q) in K with conj(u)v = p + i q."""
+    ux, uy = u; vx, vy = v
+    return (kadd(kmul(ux, vx), kmul(uy, vy)), ksub(kmul(ux, vy), kmul(uy, vx)))
+
+
+def cross_edges_rho15(pts):
+    """E_cross for rho15 = (7 + i sqrt15)/8, derived exactly (M62 §R1):
+
+        |u - rho v| = 1  <=>  Re(rho * conj(u) v) = k',  k' = (|u|^2 + |v|^2 - 1)/2
+
+    and with rho = 7/8 + (sqrt15/8) i the sqrt15-component must vanish, so  q' = 0 -- the two points
+    are COLLINEAR WITH THE CENTRE -- and then  p' = 4(|u|^2 + |v|^2 - 1)/7.  Verified against
+    Heule-510: all 18 of its cross edges subtend exactly arccos(7/8), i.e. their pre-images are
+    collinear. No floating point in the test."""
+    n = len(pts)
+    norms = [norm2(p) for p in pts]
+    E = []
+    for i in range(n):
+        for j in range(n):
+            p, q = conj_mul(pts[i], pts[j])
+            if q != Z:
+                continue                                   # not collinear with the centre
+            want = kscale(ksub(kadd(norms[i], norms[j]), ONE), Fr(4, 7))
+            if p == want:
+                E.append((i, j))
+    return E
+
+
+class Arena:
+    """Immutable, shared: the 2|B|-vertex adjacency, blocks (L,L)=(S,S)=E_int and (L,S)=E_cross."""
+    def __init__(self, pts, E_int, E_cross, label="rho15"):
+        self.pts, self.n = pts, len(pts)
+        self.N = 2 * self.n                                # L at 0..n, S at n..2n
+        self.label = label
+        adj = [0] * self.N
+        for i, j in E_int:                                 # both blocks, same table: rho is an isometry
+            adj[i] |= 1 << j; adj[j] |= 1 << i
+            adj[self.n + i] |= 1 << (self.n + j); adj[self.n + j] |= 1 << (self.n + i)
+        for i, j in E_cross:                               # u in L, v in S
+            adj[i] |= 1 << (self.n + j); adj[self.n + j] |= 1 << i
+        self.adj = adj
+        self.E_int, self.E_cross = E_int, E_cross
+        self.centre = next(k for k, p in enumerate(pts) if p == (Z, Z))
+        # invariant I1: the centre is L-side only; bit (n + centre) is never set in a candidate
+        self.forbidden = 1 << (self.n + self.centre)
+        self.full = ((1 << self.N) - 1) & ~self.forbidden
+
+    def induced(self, present):
+        """Edge list of the induced subgraph, as (u, v) index pairs on the 2n space."""
+        out = []
+        m = present
+        while m:
+            v = (m & -m).bit_length() - 1
+            m &= m - 1
+            nb = self.adj[v] & present & ~((1 << (v + 1)) - 1)
+            while nb:
+                w = (nb & -nb).bit_length() - 1
+                nb &= nb - 1
+                out.append((v, w))
+        return out
+
+    def order(self, present):
+        return present.bit_count()
+
+
+# ====================================================================== the SEAM base (M62 §R2)
+# The Moser lattice is the WRONG base and the non-vacuity gate caught it: only 90 of Heule-510's
+# 510 points lie in Z<1, z6, w3, z6*w3> at any radius. The record's lineage descends from Heule's
+# G2167 = (+)^8 C_{1/3}, where C_{1/3} is the radius-1/3 hexagon together with the 90-degree-rotated
+# hexagon of radius (sqrt3 + sqrt11)/6 -- squared radius (7 + sqrt33)/18, a seam radius. So the base
+# is the Z-lattice on those twelve vectors, and it lies in K.
+def seam_generators():
+    """1/3 * z6^k  and  i*r*z6^k  with r = (sqrt3 + sqrt11)/6, as K^2 points. Four suffice as a
+    Z-basis; the twelve are their +-/rotations."""
+    third   = ((Fr(1, 3), Fr(0), Fr(0), Fr(0)), Z)                      # 1/3
+    z6third = ((Fr(1, 6), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(1, 6), Fr(0), Fr(0)))   # z6/3 = (1 + i r3)/6
+    ir      = (Z, (Fr(0), Fr(1, 6), Fr(1, 6), Fr(0)))                   # i (r3 + r11)/6
+    # i r z6 = [ -(3 + r33) + i (r3 + r11) ] / 12
+    irz6    = ((Fr(-3, 12), Fr(0), Fr(0), Fr(-1, 12)), (Fr(0), Fr(1, 12), Fr(1, 12), Fr(0)))
+    return [third, z6third, ir, irz6]
+
+
+def build_seam_base(radius: float, span: int = 5):
+    g = seam_generators()
+    r2 = radius * radius
+    seen = {}
+    rng = range(-span, span + 1)
+    for a in rng:
+        for b in rng:
+            for c in rng:
+                for d in rng:
+                    x = kadd(kadd(kscale(g[0][0], a), kscale(g[1][0], b)),
+                             kadd(kscale(g[2][0], c), kscale(g[3][0], d)))
+                    y = kadd(kadd(kscale(g[0][1], a), kscale(g[1][1], b)),
+                             kadd(kscale(g[2][1], c), kscale(g[3][1], d)))
+                    p = (x, y)
+                    if kfloat(norm2(p)) <= r2 + 1e-12:
+                        seen.setdefault(p, (a, b, c, d))
+    pts = sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
+    return pts, [seen[p] for p in pts]
+
+
+# ====================================================================== fast exact edge building
+# Float PROPOSE, exact DISPOSE -- the house pattern. O(n^2) Fraction arithmetic is unaffordable at
+# 7k points; a KD-tree proposes and K decides. No float ever reaches a verdict.
+def unit_edges_fast(pts):
+    from scipy.spatial import cKDTree
+    import numpy as np
+    F = np.array([[kfloat(p[0]), kfloat(p[1])] for p in pts])
+    tree = cKDTree(F)
+    cand = tree.query_pairs(1.0 + 1e-7, output_type='ndarray')
+    keep = []
+    for i, j in cand:
+        i, j = int(i), int(j)
+        dx, dy = ksub(pts[i][0], pts[j][0]), ksub(pts[i][1], pts[j][1])
+        if kadd(kmul(dx, dx), kmul(dy, dy)) == ONE:
+            keep.append((i, j))
+    return keep, len(cand)
+
+
+def cross_edges_rho15_fast(pts, norms=None):
+    """The rho15 law (M62 §R1): q' = 0 (collinear with the centre) and p' = 4(a+b-1)/7. Proposed by
+    grouping points into rays on floats, disposed exactly in K."""
+    import numpy as np
+    from collections import defaultdict
+    n = len(pts)
+    norms = norms or [norm2(p) for p in pts]
+    F = [(kfloat(p[0]), kfloat(p[1])) for p in pts]
+    rays = defaultdict(list)
+    for i, (x, y) in enumerate(F):
+        if x == 0 and y == 0:
+            continue
+        m = (x*x + y*y) ** 0.5
+        rays[(round(x/m, 9), round(y/m, 9))].append(i)
+    centre = next(k for k, p in enumerate(pts) if p == (Z, Z))
+    E = []
+    # the centre is on no ray: |0 - rho v| = |v|, so it meets every point of norm 1 both ways
+    for j in range(n):
+        if norms[j] == ONE:
+            E.append((centre, j)); E.append((j, centre))
+    for _, idx in rays.items():
+        for i in idx:
+            for j in idx:
+                want = kscale(ksub(kadd(norms[i], norms[j]), ONE), Fr(4, 7))
+                p, q = conj_mul(pts[i], pts[j])
+                if q == Z and p == want:
+                    E.append((i, j))
+    return sorted(set(E))
+
+
+# ====================================================================== the shrink (M62 §M5.3)
+def cnf_for(A, present, k=4, pin=True):
+    def var(v, c): return v * k + c + 1
+    cl = [[var(v, c) for c in range(k)] for v in range(A.N)]
+    for u, v in A.induced(present):
+        for c in range(k):
+            cl.append([-var(u, c), -var(v, c)])
+    if pin:
+        cl.append([var(A.centre, 0)])
+    return cl
+
+
+def refuses_four(A, present, wall=600.0):
+    """('unsat' | 'sat' | 'unknown'). UNSAT means this selection is 5-chromatic — a CANDIDATE,
+    never a find (M62 §M3.1); only the Lean pipeline may promote it."""
+    from five_dial import sat
+    st, _ = sat(cnf_for(A, present), A.N * 4, wall=wall)
+    return st
+
+
+def shrink(A, present, rng, wall=600.0, log=print, checkpoint=None, budget_s=None):
+    """Parts's reduction stage, chunked (M52's WO-14 measured that accepted drops serialise, so the
+    width goes into the CHUNK, not the worker count). Adaptive halving is his own '8-4-2-1'."""
+    import json, time, random
+    t0 = time.time()
+    live = [v for v in range(A.N) if (present >> v) & 1 and v != A.centre]
+    chunk = max(1, len(live) // 8)
+    asks = accepted = 0
+    while chunk >= 1:
+        progress = False
+        order = live[:]; rng.shuffle(order)
+        i = 0
+        while i < len(order):
+            if budget_s and time.time() - t0 > budget_s:
+                log(f"  budget reached at {present.bit_count()} vertices"); return present, dict(
+                    asks=asks, accepted=accepted, stopped="budget", seconds=round(time.time()-t0, 1))
+            batch = [v for v in order[i:i+chunk] if (present >> v) & 1]
+            i += chunk
+            if not batch:
+                continue
+            trial = present
+            for v in batch:
+                trial &= ~(1 << v)
+            asks += 1
+            st = refuses_four(A, trial, wall)
+            if st == "unsat":
+                present = trial; accepted += len(batch); progress = True
+                if checkpoint:
+                    json.dump(dict(present=hex(present), n=present.bit_count(), asks=asks,
+                                   accepted=accepted, chunk=chunk,
+                                   seconds=round(time.time()-t0, 1)), open(checkpoint, "w"))
+                log(f"  -{len(batch):5} -> {present.bit_count():6} vertices   (chunk {chunk}, ask {asks}, {time.time()-t0:.0f}s)")
+            live = [v for v in live if (present >> v) & 1]
+        if not progress:
+            chunk //= 2
+            log(f"  chunk -> {chunk}")
+        if chunk == 0:
+            break
+    return present, dict(asks=asks, accepted=accepted, stopped="converged",
+                         seconds=round(time.time()-t0, 1))
