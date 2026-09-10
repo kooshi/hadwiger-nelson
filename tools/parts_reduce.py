@@ -141,6 +141,13 @@ def reduce_stage(stage, wall=600.0, max_minima=0, log=print, checkpoint=None,
     allA = list(range(len(atoms)))
     orc = Oracle(stage, wall)
 
+    pin = stage.pin_is_sound()
+    log(f"  pin control: {pin['verdict']} ({pin.get('checked', 0)} checks)")
+    if pin["verdict"] == "pin-changes-answers":
+        return {"verdict": "pin-unsound", "pin": pin,
+                "note": "the symmetry break changes answers, so every refusal it produced is a "
+                        "statement about a larger graph than was asked for"}
+
     v, _ = orc.ask(allA)
     if v != "unsat":
         return {"verdict": "base-fails",

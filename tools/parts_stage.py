@@ -128,9 +128,49 @@ class Stage:
             iu, iv = loc[u], loc[v]
             for c in range(k):
                 cls.append([-var(iu, c), -var(iv, c)])
-        for j, v in enumerate(self.pin):                            # §5.9: a rainbow unit triangle
-            cls.append([var(loc[v], j)])
+        # [Parts2020a] §5.9's symmetry break: a rainbow unit triangle of L, three unit clauses and
+        # no new variables. It MUST be conditional on presence when a pin vertex is deletable --
+        # an unconditional `var(v, j)` forces `sel[atom(v)]` true through the presence coupling, so
+        # the solver silently evaluates a LARGER graph than was asked for and a selection dropping a
+        # pin vertex can come back `unsat` when it is in fact colourable. That bug was live for one
+        # run of the L-side reduction on 2026-09-10 and reported a 373-vertex L-subgraph, one below
+        # the world record, before `pin_is_sound` caught it. Pinning the PRESENT members of a clique
+        # to distinct colours stays a valid palette WLOG whichever of them are absent.
+        for j, v in enumerate(self.pin):
+            ai = of.get(v)
+            cls.append([var(loc[v], j)] if ai is None else [-sel[ai], var(loc[v], j)])
         return cls, sel, top, loc
+
+    def pin_is_sound(self, trials=6, rng=None):
+        """The control that catches the pin forcing its own vertices present.
+
+        For each deletable pin vertex, ask the same selection with the pin and without it and
+        require the verdicts to agree. A pin is a symmetry break: it may never change an answer."""
+        import random
+        rng = rng or random.Random(0)
+        n = self.A.n
+        pin_atoms = [ai for ai, m in enumerate(self.atoms)
+                     if ((m & -m).bit_length() - 1) in self.pin]
+        if not pin_atoms:
+            return {"verdict": "pin-is-fixed", "note": "every pin vertex is in the frozen part, so "
+                                                       "the pin cannot restrict the search"}
+        bare = Stage(self.base, [self.keys[v] for v in range(n) if (self.Lbits >> v) & 1],
+                     [self.keys[v - n] for v in range(n, 2 * n) if (self.Sbits >> v) & 1],
+                     side=self.side, rung=self.rung, pin=False)
+        c1, s1, _, _ = self.cnf(); self._sel = s1
+        c2, s2, _, _ = bare.cnf(); bare._sel = s2
+        allA = list(range(len(self.atoms)))
+        rows = []
+        for ai in pin_atoms:
+            for extra in range(trials):
+                drop = {ai} | set(rng.sample(allA, min(extra * 3, len(allA) - 1)))
+                kept = [x for x in allA if x not in drop]
+                a, b = refuses(self, kept), refuses(bare, kept)
+                rows.append({"dropped_pin_atom": ai, "extra_dropped": len(drop) - 1,
+                             "with_pin": a, "without_pin": b, "agree": a == b})
+        bad = [r for r in rows if not r["agree"]]
+        return {"verdict": "pin-changes-answers" if bad else "pin-agrees-everywhere",
+                "checked": len(rows), "disagreements": bad[:4]}
 
     @property
     def side_fixed(self) -> int:
@@ -173,3 +213,45 @@ def refuses(stage, kept, wall=600.0, solver=None):
     if own:
         solver.delete()
     return "sat" if st else "unsat"
+
+
+def _self_test():
+    """Plant the bug the pin control exists to catch, and watch the control fire.
+
+    A gate not seen to fail is not known to work — and this one shipped broken for exactly one run
+    (see `Stage.cnf`). The plant restores the unconditional pin clause; the control must then report
+    `pin-changes-answers`, and must report agreement once the plant is removed."""
+    import parts_repro as P, parts_vtx as V
+    D = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                     "data", "m62", "parts-ref11", "JP", "Large")
+    B = P.Base(P.PARTS_R)
+    st = Stage(B, V.load_lattice(os.path.join(D, "v451e2400.vtx")),
+               V.load_lattice(os.path.join(D, "v136e564.vtx")), side="L", rung=1)
+    good = st.pin_is_sound()
+    print(f"  as shipped:  {good['verdict']}  ({good['checked']} checks)")
+    real = Stage.cnf
+
+    def unsound(self, k=4):                       # the bug, restored verbatim
+        cls, sel, top, loc = real(self, k)
+        cls = [c for c in cls if not (len(c) == 2 and c[0] < 0 and -c[0] - 1 < len(sel)
+                                      and sel[-c[0] - 1] == -c[0] and c[1] > 0
+                                      and (c[1] - 1) // k in [loc[v] for v in self.pin])]
+        for j, v in enumerate(self.pin):
+            cls.append([loc[v] * k + j + 1])
+        return cls, sel, top, loc
+
+    Stage.cnf = unsound
+    try:
+        bad = Stage(B, V.load_lattice(os.path.join(D, "v451e2400.vtx")),
+                    V.load_lattice(os.path.join(D, "v136e564.vtx")), side="L", rung=1).pin_is_sound()
+    finally:
+        Stage.cnf = real
+    print(f"  with the bug planted: {bad['verdict']}  ({bad['checked']} checks, "
+          f"{len(bad['disagreements'])} disagreements shown)")
+    ok = good["verdict"] == "pin-agrees-everywhere" and bad["verdict"] == "pin-changes-answers"
+    print("\n" + ("CONTROL FIRES" if ok else "CONTROL DID NOT FIRE — the check is worthless"))
+    return ok
+
+
+if __name__ == "__main__":
+    sys.exit(0 if _self_test() else 1)
