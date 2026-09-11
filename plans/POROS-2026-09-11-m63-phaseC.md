@@ -51,6 +51,7 @@ a fact about *our* stage may be a defect in *his* table (card 2).
 - `plans/FRONTIER-STUBS.md` rows M63 and FS-35 — read against: a current-state mirror of the plans — surprised: no
 - `tools/parts_stage.py:45-127`, `tools/parts_faces.py:465-538, 671-756` — read against: stage = one deletable side against a frozen companion; rung = subgroup of Aut(A) — surprised: no; `Stage.__init__` refuses any side but L or S, "L and S are minimized separately against a frozen companion" (parts_stage.py:46-48), so a joint stage is unwritable today
 - Phase C planner's second report, 2026-09-11 — read against: card 1 adopted and its frame settled — surprised: yes; the relative frame is not one frame but a double coset Stab(W_L)\G/Stab(W_S), giving at most TWO inequivalent joint problems (12 and 6, two cosets of size 12) and four for the M6B stage, so card 1 is two runs and not one; and card 1's positive control is derivable rather than needing a run, since any refusing proper subset of the record with both halves deletable would give a side below 374 or 136 against his published minimality; also measured there: the joint stage is 577 vertices and 576 atoms, his M6B L refuses with S141 in 12 of 24 frames and never with S136, and the S stage's order-3 rung closes at 142 where M64 §R10 had only ">= 139"
+- Phase C planner's third report, 2026-09-11 — read against: cards 6 and 7 answered with reasons — surprised: yes; card 6 caught a gap in the audit itself (the 8-4-2-1 accelerator was named among the drops in its report to the product owner while its table carried no row for it at all, now row B-12), which is the second time this phase a card found something the table asserted without carrying; and it corrected my card 6 evidence — the 2^m induced-matching bound is NOT our pipeline's "refused before any ask" guard, since that guard was written for his explicit candidate list and the implicit hitting set never builds one, so X-7 is a re-scope rather than a drop and its replacement forecast lives in phase D
 - Product owner's flag, 2026-09-11: `tools/parts_verify.py` rewrote the tracked `data/m62/parts-ref11-verified.json` (date stamp only) — read against: none of my commands write tracked files — surprised: no; I ran no `tools/` script; every command so far read, or wrote into the scratch directory
 
 ## Hunch ledger
@@ -222,6 +223,29 @@ question: which-held-out-problem-tests-the-loop-hardest
   hunch: the mono-pair from v367e1822 is strictly stronger, and the S-138 run is worth keeping as the control, because its obstruction is derived
   falsifier: the mono-pair cannot start from a single minimum because the expansion rule's reserve needs an accumulator that one minimum does not supply
   rank: 7
+
+**Fates of cards 6 and 7, and of the roadmap answer — the planner, 2026-09-11.** Card 6 adopted as
+**C4.0**: the joint stage measures its own ask costs as a by-product of being built, before the drops
+take effect; the drops stand for C–E only, with the measured regime as their condition, re-tested at F's
+first expanded W and G's first non-ρ₁₅ arena, and the cost-control items return if costs rise tenfold. My
+hunch is registered there as **P-C4.0 at 60%** with my falsifier. Card 7 adopted with the roles swapped:
+the **8/3 mono-pair from v367e1822** is phase E's required held-out loop run, against 367 vertices, 27
+minima up to the named group and A = v375e1862 with Table 5's ranges, and the S-138 start becomes the
+mechanism control. The roadmap answer is adopted in both halves: the disk-radius re-test is **F(g)**, and
+the kernel-certification budget is carried in F's acceptance; the joint runs go first in wall-clock order
+(§3). **Correction to card 6's evidence, accepted:** the 2^m bound is not our guard (see the inventory).
+
+question: is-his-published-expansion-ranking-device-the-one-D-should-register
+  evidence: M3 scored his §5.6 priority sentence and his §5.6 reserve rule, and neither selects his recorded move. His paper carries a third device I did not test: §5.6's third strategy, "preliminary cycle of quick verification (to a small hyperedge degree) of the entire list of new vertices (with the addition of one or two orbits at each iteration) and allocation for further study of the most promising orbits by numerical indicators (see 5.10)" (parts:546-549), whose indicators are "the number of free vertices, the number of hyperedges of some small degrees, the order of the maximum independent set for hyperedges of degree 2" (parts:710-712). Those are hypergraph quantities rather than geometry, and they are the only published device that ranks candidate expansions. M63's P6 — that the §5.10 indicators are subsumed by exact.py's hitting-set bound — is among the P4-P7 predictions the audit proposes dropping, so nothing in the phase now tests them.
+  expected: D registers a rule of our own, because his stated rules failed M3
+  ask: does his §5.6 third-strategy device, run on candidate orbit additions to A403, rank the four orbits his move used above the rest?
+  if it ranks them top: D registers his own published device as the rule, M3's negative localises to two sentences rather than to his method, and the rank diagnostic the product owner asked for becomes informative
+  if it does not: no published device predicts his own recorded move, so D's rule is ours alone and can only be scored by outcome, as the owner's clause already requires, and the record says plainly that his expansion craft is not reproducible from the paper
+  answered by: run — the indicators, beside our hitting-set bound, on about fourteen candidate expansions of A403 (the four partial fills and the top ten reserve orbits), each needing a small-degree hyperedge census of the enlarged stage
+  cost: roughly six thousand asks, tens of minutes at the stage's measured costs, and it discharges P6, which is on the drop list
+  hunch: the indicators separate his four from the rest better than degree does, being about the constraint structure rather than the geometry; held at about 50%, since M64 §R9 measured that summaries at this level can wash out a real coupling
+  falsifier: his four orbits do not all rank in the top half under any single §5.10 indicator
+  rank: 8
 
 ## Measurements
 

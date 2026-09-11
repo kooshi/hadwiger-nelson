@@ -86,8 +86,9 @@ product owner's explicit approval). Row ids are stable for citation.*
 
 **Every `drop?` row is conditional on phase C4.0's measurement** (Poros card 6, adopted): the arguments
 rest on ask costs from stages with a frozen companion, and the joint stage is the first without one. If
-the joint stage's asks rise ten-fold, the cost-control rows — B-8, B-11, B-12, C-5, D-6 and X-7's guard —
-come back for F and G.
+the joint stage's asks rise ten-fold, the cost-control rows — B-8, B-11, D-6 and X-7's guard — come back
+for F and G. **C-5 and B-12 are no longer drops at all** (Poros card 8): they carry a second role, in
+phase D's expansion rule, that the cost argument never touched.
 
 | id | promise (address) | status | evidence, or the argument | goes to |
 |---|---|---|---|---|
@@ -115,13 +116,13 @@ come back for F and G.
 | B-8 | cyclic implication chain for mono-sets | drop? | an encoding alternative to the clique companion; asks cost ≤ 0.11 s (S.2 #11), nothing to accelerate; E revisits if the triple's asks are slow | — |
 | B-9 | one-time CNF | done | `parts_reduce.Oracle` | — |
 | B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | partly | refusal §R1; both-side criticality unchecked | C4's positive control |
-| B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | drop? | phase 1 is 450–576 asks at 0.006–0.11 s, under a minute; his batching answers a 10 s refusing ask. **Conditional on C4.0** | — |
+| B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | **not done — NO LONGER A DROP** | it prices a candidate expansion in tens of asks instead of a full reduction (delete eight necessary atoms at once; a refusal frees all eight), which is the shape D's look-ahead needs. Its phase-1 role remains unnecessary at the measured costs, and that half stays conditional on C4.0 | **D** |
 | B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100× | — |
 | C-1 | degree 2 by `hyperedges_run.py` on M62's arena (§4 C) | retired | `reduce_stage` harvests every degree lazily (sizes 1–10 stored, M64 §R3); M62's arena is off the path (M62 §R23) | — |
 | C-2 | degree ≥ 3 harvested | done | same | — |
 | C-3 | every hyperedge re-verified by an independent rebuild; no hyperedge contains another | not done | correction sets are verified by construction only | C2 |
 | C-4 | hyperedge counts carry their enumeration | done | `Count(…, "harvested")` | — |
-| C-5 | the cheap statistics: non-isolated count, component profile, `α`, the `2^m` induced-matching bound, `α + \|free\|` test | drop? | they size his explicit maximal-independent-set enumeration, which we do not run; our levels close in ~10 min and our cost depends on the number of minima, which `2^m` does not bound. The alternative is ~1 h on the two stored `Y` for the record | — |
+| C-5 | the cheap statistics: non-isolated count, component profile, `α`, the `2^m` induced-matching bound, `α + \|free\|` test | **not done — NO LONGER A DROP** | they have a second role my drop argument missed (Poros card 8): the free-vertex count, the small-degree hyperedge counts and `α` of the degree-2 graph **are** §5.10's numerical indicators, and §5.6's third strategy ranks candidate expansions by them — the only published device that ranks an expansion, which is what D needs. Their *sizing* role is still superseded | **D** |
 | D-1 | enumerate the whole optimal level (§4 D) | done | `reduce_stage`, `exhaustive-level` | — |
 | D-2 | dedup by the input group before verifying | retired for type M | `Aut(W ∪ C)` is trivial (S.2 #1); the 12-fold multiplicity is `Aut(A)` with the companion moving, not a symmetry of the stage, so images must still be verified. D may measure "propose images as candidates" on the `A412` level | D (measurement only) |
 | D-3 | `A = ⋃{M}` | done | §R1, S.2 #2 | — |
@@ -139,7 +140,7 @@ come back for F and G.
 | P3 | `v451e2400 → 375`, varying only where Table 2 marks unstable | partly | 375 met; two range differences (S.2 #4); partition needs the shading | C2, C3 |
 | P4 | degree-2 count on the 757 arena in the tens | retired | the arena is off the path | — |
 | P5 | MIS enumeration infeasible on 757, affordable on `A412` | retired | explicit MIS enumeration is not implemented | — |
-| P6 | §5.10 indicators subsumed by `exact.py` | retired | `exact.py` is off the path (§6) | — |
+| P6 | §5.10 indicators subsumed by `exact.py` | **restated, not retired** | the comparison with `exact.py` is off the path, but the indicators are not: the useful form is *do they rank the orbits his own move used above the rest?* (Poros card 8) | **D** |
 | P7 | seeding `exact.py` with the degree-2 census | retired | same | — |
 | P8 | one iteration `A412 → 374` ≈ 3.5 h ±2× | not done | it assumed 2–4 s asks; measured 0.006/0.02 s (S.2 #11). Revised forecast registered in D: 20–90 min single core for ~13k raw minima | D |
 | O-1 | the completeness invariant (§O 1) | done | `reduce_stage` | — |
@@ -207,6 +208,20 @@ Acceptance:
   `A = v451e2400`, 1890–1947 edges); 374 at rung 1 on `A412` (1,092; `A = v412e2106`; 1860–1884; P8
   scored); 374 at the rung-2 subgroup (78; `A406 = v406e2082` up to the group; 1868–1884), computed both as
   the invariant part of the rung-1 level and by a direct rung-2 reduction, which must agree.
+- [ ] **His own published ranking device is scored first** (Poros card 8). §5.6's third strategy ranks
+  candidate expansions by §5.10's numerical indicators — the free-vertex count, the small-degree
+  hyperedge counts, and the size of the maximum independent set of the degree-2 hyperedge graph. Run it
+  on about fourteen candidate expansions of `A403` (the four partial fills and the top ten reserve
+  orbits) and report whether the orbits his own move used rank top. **If they do**, D registers *his*
+  device as the rule, and the earlier negative localises to two sentences rather than to his method.
+  **If they do not**, then no published device predicts his own recorded move: D's rule is ours alone,
+  scorable only by outcome, and the record says that plainly. Discharges P6 in its useful form.
+  *(≈ 6,000 asks, tens of minutes at the measured costs.)*
+- [ ] **A candidate rule of our own, offered by Poros and unverified:** rank an expansion by **how many
+  currently necessary atoms it frees** — an atom is necessary exactly when it is a singleton correction
+  set, and an expansion helps when the new material covers what such an atom covered alone. Priced in
+  tens of asks by his own 8-4-2-1 batching, and scorable on his recorded move, because both level sets
+  are complete: the atoms necessary at 375 and not at 374 are exactly what his move freed.
 - [ ] The expansion rule committed before it runs — candidates, ranking, batch size, stall response — each
   choice with its reason; his stated priorities are an input, not the definition.
 - [ ] The loop runner: the per-iteration line, `stalled` as a verdict, exact resume per iteration, the
