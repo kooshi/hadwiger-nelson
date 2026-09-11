@@ -307,6 +307,10 @@ root of unity).
 Examples: ℚ, ℚ(√2), ℚ(√10) — two colours (ℚ(√2)² and ℚ(√10)² are bipartite); ℚ(√3), ℚ(√5),
 ℚ(√11), K = ℚ(√3, √11), K(√2), K(√35) — four colours.
 
+> **Corrected in §10.2 (2026-09-11).** The two-colour clause is too narrow, and the example line puts ℚ(√5) —
+> whose plane is bipartite (`[Fischer1990]` Theorem 8) — under four colours. Two colours hold exactly when no odd
+> element of S is ≡ 3 (mod 4).
+
 *Corollary 6.5 (real quadratic fields).* Let d > 1 be squarefree and F = ℚ(√d). The 2-adic completion
 of F(i) contains √−1 iff d ≡ 7 (mod 8), and contains a primitive cube root of unity iff d ≡ 3 or 5
 (mod 8) (ζ₃ ∈ ℚ₂(√d, i) iff −3 ∈ ⟨−1, d⟩·ℚ₂×², and −3 ≡ 5 mod 8). Hence the unit-distance graph of
@@ -730,3 +734,49 @@ K. G. Fischer, *Additive k-colorable extensions of the rational plane*, Discrete
   so not 2-colourable, 11 ≡ 2 (mod 3) so no additive 3-colouring; it has no equilateral triangle
   (√3 ∉ ℚ(√11)). So χ(ℚ(√11)²) ∈ {3, 4}, and 4 would need a triangle-free 4-chromatic unit-distance graph
   in a quadratic plane — the same shape of question §8 asks for d ≡ 23 (mod 24), one class earlier.
+
+
+## 10.2 The two-colour condition of Proposition 6.4, corrected (2026-09-11)
+
+*Found by the handoff from Kooshi's conversation with ChatGPT (OpenAI), 2026-09-11, and checked before being
+believed: `reference/ChatGPT-multiquadratic/` (the handoff's §3, and `VERIFICATION.md` items 4 and 4′).*
+
+**What was wrong.** Proposition 6.4 grants two colours only when the 2-adic completion of F(i) has residue
+field 𝔽₂. That condition is sufficient and not necessary. ℚ(√5) is the counterexample: at 2 its residue field
+is 𝔽₄, yet ℚ(√5)² is bipartite (`[Fischer1990]` Theorem 8). §10.1 found the mechanism — conjugation in the
+inertia group — for quadratic fields only; Proposition 6.4 itself was never corrected, and its example line
+still lists ℚ(√5) under four colours.
+
+**Proposition 6.4, corrected.** Let F = ℚ(√d : d ∈ S) be real multiquadratic and V ⊆ ℚ₂^×/ℚ₂^×² the image of
+its square-class group.
+
+* (a) If [−1] ∉ V, then χ(G(F²)) ≤ 4. *(Unchanged.)*
+* (b) If [−1] ∉ V and [3] ∉ V, then χ(G(F²)) = 2.
+* (c) If [−1] ∈ V or [3] ∈ V, then χ(G(F²)) ≥ 3.
+
+Together: **χ(G(F²)) = 2 exactly when no odd element of S's square-class group is ≡ 3 (mod 4).**
+
+*Proof of (b).* Let E be the completion of F at 2 and L = E(i), a quadratic extension because [−1] ∉ V. The
+unique unramified quadratic extension of ℚ₂ is ℚ₂(√5) (−3 ≡ 5 mod 8). If [5] ∈ V, then E already has residue
+degree 2, and a multiquadratic extension of ℚ₂ has residue degree at most 2, so L/E is ramified; and [3] ∉ V,
+since otherwise [15] = [−1] ∈ V. If [5] ∉ V, then L/E is unramified exactly when L = E(√5), that is when
+[−5] = [3] ∈ V. So L/E is ramified exactly when [3] ∉ V. When it is, complex conjugation lies in the inertia
+group and acts trivially on the residue field k, which has characteristic 2. A unit vector u then has residue
+r(u) with r(u)² = r(u)·r(ū) = 1, so r(u) = 1. Any 𝔽₂-linear functional λ : k → 𝔽₂ with λ(1) = 1 makes λ ∘ r
+an additive 2-colouring, by Theorem A applied with ψ = λ ∘ r. ∎ *(Field-level status as for Theorem A: the
+kernel holds the mechanism for an explicit valuation subring, FS-36's `TwoColourResidue.lean`, not the number
+field's prime — `plans/A1-theorem-A-kernel.md` §R2.)*
+
+*Proof of (c).* An odd squarefree e has 2-adic class [3] or [7] = [−1] exactly when e ≡ 3 (mod 4). So [3] or
+[−1] in V puts such an e in the square-class group, hence √e ∈ F; and `[Fischer1990]` Theorem 8's odd cycle
+lies in ℚ(√e)² ⊆ F². ∎
+
+**Which verdicts change.** Exactly the fields with [5] ∈ V and [−1] ∉ V: ℚ(√5), ℚ(√13), ℚ(√2, √5),
+ℚ(√5, √6), and their like move from "≤ 4" to "= 2". On the other twelve subgroups of the local group the old and
+the new conditions agree (`reference/ChatGPT-multiquadratic/independent_check.py` checks all sixteen).
+
+**Consistency with the sources.** Quadratic fields: `[Fischer1990]` Theorem 8, N ≢ 3 (mod 4). Odd-degree
+fields: `[Moorhouse2010]` Theorem 7.1, whose trace is one choice of λ. ℚ(√2): `[Madore2015]` Proposition 3.9,
+which works coordinate-wise over ℚ₂(√2), where unit vectors are not integral; in F(i) they are, which is why
+the statement above needs no special case. Corollary 6.5's list for ℚ(√d), already corrected in §10.1, is the
+quadratic case of (b) and (c).
