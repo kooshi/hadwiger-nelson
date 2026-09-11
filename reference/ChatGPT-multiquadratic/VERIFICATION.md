@@ -20,7 +20,7 @@ Desktop (32 cores, 125 GB), CPU seconds as user + sys.
 |---|---|---|
 | `handoff_check.py`, as received | 43,488 passed (16,288 decomposition instances, 13,288 rule instances) | 67.6, 68.3, **67.1** (three runs) |
 | `handoff_check.py`, tidied | 43,488 passed | 67.8 (one run) |
-| `independent_check.py` | 36,673 passed (15,288 decomposition instances, 13,287 two-colour instances) | 16.5 (one run) |
+| `independent_check.py` | 36,679 passed (15,288 decomposition instances, 13,287 two-colour instances) | 16.0 (one run, after FS-36's domain pass added §5; 36,673 and 16.5 s before it) |
 
 **The tidy.** `rule16`'s first branch read `return True if not [d for d in ds if d % 2 and d % 8 not in (1, 3)] else False`
 inside `if any(d % 8 not in (1, 3) for d in ds if d % 2):`. The branch condition makes that list nonempty, so the
@@ -33,7 +33,10 @@ representative in `{1, 3, 5, 7, 2, 6, 10, 14}`, and it holds square-class groups
 basis, with ranks from Gaussian elimination. It also checks three things the first script does not:
 - the screening rule on all 256 patterns of local classes, which is a proof rather than a sample;
 - the ramification step behind the two-colour criterion, on all 16 subgroups of the local group;
-- the exact set of fields on which the field-wall note's old two-colour condition and the corrected one disagree.
+- the exact set of fields on which the field-wall note's old two-colour condition and the corrected one disagree;
+- (§5, added by FS-36's domain pass) that **the splitting needs only `[2]`**: every one of the 16 local subgroups that
+  holds `[2]` is the sum of its parts inside `{1, 3, 2, 6}` and inside `{1, 3, 10, 14}`, and the subgroups that do not
+  split are exactly `{1, 5}`, `{1, 7}` and `{1, 3, 5, 7}`.
 
 ## 2. The claims, one by one
 

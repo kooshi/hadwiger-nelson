@@ -334,4 +334,16 @@ cut = [p for p in PR3 if (p + 1) ** 2 <= 4 * p * 25]
 check("Weil + Hoffman leave six colours possible only up to 83 among primes 3 mod 4", max(cut) == 83 and 103 not in cut)
 check("de Grey's field: 7 is a non-residue mod 11, so the 11-plane bound is lost", not euler_residue(7, 11))
 
+# ---------------------------------------------------------------- 5. the splitting needs only [2] (FS-36 §M1)
+def splits(V):
+    """Is V the sum of its parts inside the two blocks?"""
+    return lspan(list((V & U_A) | (V & U_B))) == V
+
+
+for V in SUBGROUPS:
+    if 2 in V:
+        check(f"a local subgroup holding [2] splits along the two blocks: V = {sorted(V)}", splits(V))
+check("the local subgroups that do not split are exactly {1,5}, {1,7} and {1,3,5,7}",
+      sorted(sorted(V) for V in SUBGROUPS if not splits(V)) == [[1, 3, 5, 7], [1, 5], [1, 7]])
+
 print(f"all {checks} checks passed ({n_dec} decomposition instances, {n_two} two-colour instances)")
