@@ -190,7 +190,7 @@ def marker : String := "VACUITY DECLARED:"
 /-- The reason a declaration gives, if it gives one: the rest of the marker's line. -/
 def reasonIn? (doc : String) : Option String :=
   match doc.splitOn marker with
-  | _ :: rest :: _ => some (((rest.splitOn "\n").headD "").trim)
+  | _ :: rest :: _ => some (((rest.splitOn "\n").headD "").trimAscii.copy)
   | _ => none
 
 /-- Is this declaration one of ours, rather than Mathlib's or core's? -/
@@ -204,7 +204,11 @@ def isOurs (env : Environment) (n : Name) : Bool :=
   -- Those are ours too, and saying so is what makes a planted control a one-file operation
   -- instead of a library edit plus a full rebuild. Without it the gate cannot see its own
   -- controls at all, which is how `CLAUDE.md` § "Make the gate fail" went unenforced here.
-  | none => true
+  -- The audit's OWN declarations are the exception: they are the instrument, not the library, and
+  -- counting them made `declarations=` move whenever this file was edited — measured 2026-09-11, when
+  -- adding the report's `Row` structure moved it by 20 with the library unchanged. The planted
+  -- controls live in `HadwigerNelson`, so they stay visible.
+  | none => !(`VacuityAudit).isPrefixOf n
 
 /-- **The named carrier families.** A *named* list, never "every `Prop` binder": measured
 2026-09-09, `HadwigerNelson.Justified` alone owns **1,426** binder sites (the LRAT watermark
@@ -227,6 +231,16 @@ def trackedProps : List Name :=
    `HadwigerNelson.IsAdditive, `HadwigerNelson.Compels, `HadwigerNelson.Realizes,
    `HadwigerNelson.MonoPair, `HadwigerNelson.CoverAtLeast, `HadwigerNelson.UDCert.CoordsIn]
 
+/-- A carrier or a statement as one line of text, for the report. Called where its binders are still in
+scope: outside the telescope a generic carrier's variables print as `_fvar.N`, whose numbering shifts
+whenever the library changes, so two runs could not be compared row for row. Never throws — a carrier
+that will not print is still audited and still reported. -/
+def showCarrier (τ : Expr) : MetaM String := do
+  try
+    return ((← ppExpr τ).pretty 1000000).replace "\n" " "
+  catch _ =>
+    return "<did not pretty-print>"
+
 /-- **The evidence the library already holds.**
 
 `SimpleGraph.Colorable G n` is *definitionally* `Nonempty (G.Coloring (Fin n))`, so every
@@ -237,10 +251,13 @@ zero verdicts, including on `core9_plane`, the declaration that motivated the wh
 
 So the audit collects that evidence from the environment rather than asking anyone to tag it.
 Only **unconditional** witnesses count: a theorem with real hypotheses is a conditional claim, and
-"someone could probably discharge those" is precisely the social argument the kernel replaces. -/
+"someone could probably discharge those" is precisely the social argument the kernel replaces.
+
+Each piece is kept with the declaration that supplied it and its statement as text, so the report can
+say which theorem decided a verdict. -/
 structure Evidence where
-  empties   : Array Expr := #[]
-  witnesses : Array Expr := #[]
+  empties   : Array (Name × Expr × String) := #[]
+  witnesses : Array (Name × Expr × String) := #[]
 
 /-- **One relation, several recognizers.** Every rule below collects a declaration whose type is
 *definitionally* `Nonempty τ` or `IsEmpty τ`:
@@ -264,65 +281,81 @@ def gather (env : Environment) : MetaM Evidence := do
     -- `Not P` IS `P → False`, so a reducing telescope eats the arrow, the evidence is lost, AND
     -- the refutation becomes one more site carrying a hypothesis nothing satisfies — the
     -- emptiness proof flagged by the very emptiness it proves.
-    let refuted ← (try forallTelescope ci.type fun xs concl => do
+    let refuted : Option (Expr × String) ← (try forallTelescope ci.type fun xs concl => do
         for x in xs do
           if !(← x.fvarId!.getDecl).binderInfo.isInstImplicit then return none
-        pure (if concl.getAppFn.constName? == some ``Not then concl.getAppArgs[0]? else none)
+        let some p := (if concl.getAppFn.constName? == some ``Not then concl.getAppArgs[0]? else none)
+          | return none
+        -- its statement as text, taken here, where the binders still have names
+        return some (p, ← showCarrier p)
       catch _ => pure none)
-    if let some p := refuted then
+    if let some (p, shown) := refuted then
       if !p.hasLooseBVars then
         if let some h := p.getAppFn.constName? then
           if trackedProps.contains h then
-            ev := { ev with empties := ev.empties.push p }
+            ev := { ev with empties := ev.empties.push (n, p, shown) }
             continue
-    let some τ ← (try forallTelescopeReducing ci.type fun xs concl => do
+    let found : Option (Expr × String) ← (try forallTelescopeReducing ci.type fun xs concl => do
         -- only instance-implicit binders may remain: anything else is a real hypothesis
         for x in xs do
           if !(← x.fvarId!.getDecl).binderInfo.isInstImplicit then return none
-        pure (some concl)
-      catch _ => pure none) | continue
+        -- the statement as text, for the report, and only for the shapes that can be evidence
+        let evidential := match concl.getAppFn.constName? with
+          | some h => h == ``IsEmpty || h == ``Nonempty || h == ``SimpleGraph.Colorable ||
+              h == ``SimpleGraph.Coloring || trackedProps.contains h
+          | none => false
+        let shown ← if evidential then showCarrier concl else pure ""
+        return some (concl, shown)
+      catch _ => pure none)
+    let some (τ, shown) := found | continue
     if τ.hasLooseBVars then continue
     match τ.getAppFn.constName? with
     | some ``IsEmpty =>
       if let some c := τ.getAppArgs[0]? then
-        if !c.hasLooseBVars then ev := { ev with empties := ev.empties.push c }
+        if !c.hasLooseBVars then ev := { ev with empties := ev.empties.push (n, c, shown) }
     | some ``Nonempty =>
       if let some c := τ.getAppArgs[0]? then
-        if !c.hasLooseBVars then ev := { ev with witnesses := ev.witnesses.push c }
+        if !c.hasLooseBVars then ev := { ev with witnesses := ev.witnesses.push (n, c, shown) }
     | some ``SimpleGraph.Colorable =>
       let a := τ.getAppArgs
       if 2 < a.size then
         if !a[1]!.hasLooseBVars && !a[2]!.hasLooseBVars then
-          ev := { ev with witnesses := ev.witnesses.push (← mkAppM ``SimpleGraph.Coloring #[a[1]!, ← mkAppM ``Fin #[a[2]!]]) }
+          let c ← mkAppM ``SimpleGraph.Coloring #[a[1]!, ← mkAppM ``Fin #[a[2]!]]
+          ev := { ev with witnesses := ev.witnesses.push (n, c, shown) }
     | some ``SimpleGraph.Coloring =>
       -- `def c : G.Coloring (Fin k)` — the inhabitant, stated as a definition.
-      ev := { ev with witnesses := ev.witnesses.push τ }
+      ev := { ev with witnesses := ev.witnesses.push (n, τ, shown) }
     | some h =>
-      if trackedProps.contains h then ev := { ev with witnesses := ev.witnesses.push τ }
+      if trackedProps.contains h then ev := { ev with witnesses := ev.witnesses.push (n, τ, shown) }
     | none => pure ()
   return ev
 
-/-- Does `τ` match any collected piece of evidence? Compared under `withNewMCtxDepth` inside
-`withoutModifyingState`, so a probe can never leak an assignment into the next one. -/
-def matchesAny (τ : Expr) (cands : Array Expr) : MetaM Bool :=
-  cands.anyM fun c => withoutModifyingState <| withNewMCtxDepth <| (try isDefEq τ c catch _ => pure false)
+/-- The first collected piece of evidence `τ` matches, named by the declaration that supplied it.
+Compared under `withNewMCtxDepth` inside `withoutModifyingState`, so a probe can never leak an
+assignment into the next one. -/
+def firstMatch? (τ : Expr) (cands : Array (Name × Expr × String)) : MetaM (Option Name) := do
+  for (n, c, _) in cands do
+    let hit ← withoutModifyingState <| withNewMCtxDepth <| (try isDefEq τ c catch _ => pure false)
+    if hit then return some n
+  return none
 
-/-- Ask whether `τ` is provably empty, provably inhabited, or neither.
+/-- Ask whether `τ` is provably empty, provably inhabited, or neither — and say what decided it: the
+declaration whose statement matched, or `instance search`.
 
 The third answer is the point. A carrier this check cannot decide is reported and counted, never
 passed over in silence — this repository has twice shipped a gate that failed open. -/
-def probe (ev : Evidence) (τ : Expr) : MetaM Verdict := do
-  if ← matchesAny τ ev.empties then return .vacuous
-  if ← matchesAny τ ev.witnesses then return .witnessed
+def probe (ev : Evidence) (τ : Expr) : MetaM (Verdict × String) := do
+  if let some n ← firstMatch? τ ev.empties then return (.vacuous, toString n)
+  if let some n ← firstMatch? τ ev.witnesses then return (.witnessed, toString n)
   -- instance search as a fallback, for carriers whose inhabitedness is structural
   let synth (head : Name) : MetaM Bool := do
     try
       match ← synthInstance? (← mkAppM head #[τ]) with
       | some _ => pure true | none => pure false
     catch _ => pure false
-  if ← synth ``IsEmpty then return .vacuous
-  if ← synth ``Nonempty then return .witnessed
-  return .unknown
+  if ← synth ``IsEmpty then return (.vacuous, "instance search")
+  if ← synth ``Nonempty then return (.witnessed, "instance search")
+  return (.unknown, "")
 
 /-- **The carrier a binder commits to — taken as it stands, never unfolded.**
 
@@ -360,22 +393,44 @@ evidence, and the baseline's prose exemption for statements "consumed in order t
 
 It does **not** blind the check to the case that motivated it: `core9_plane` concludes an `∃`,
 not `False`, and is still flagged. Verified, not assumed. -/
-def carriersOf (type : Expr) : MetaM (Array Expr) :=
+def carriersOf (type : Expr) : MetaM (Array (Expr × String)) :=
   forallTelescopeReducing type fun xs concl => do
     if concl.isConstOf ``False then return #[]
-    let mut out := #[]
+    let mut out : Array Expr := #[]
     for x in xs do
       if let some τ ← carrierOf? (← inferType x) then out := out.push τ
     if let some τ ← carrierOf? concl then out := out.push τ
-    return out.filter (!·.hasLooseBVars)
+    -- Each carrier's text is taken HERE, inside the telescope, where its binders still have names.
+    (out.filter (!·.hasLooseBVars)).mapM fun τ => do return (τ, ← showCarrier τ)
 
-/-- Run the audit and print one line per (declaration, carrier). Machine-readable by design:
-`scripts/vacuity.sh` parses these lines, so the format is a contract. -/
+/-- One audited site: a declaration, one carrier its statement commits to, and the verdict on it. -/
+structure Row where
+  decl    : Name
+  verdict : Verdict
+  /-- the `VACUITY DECLARED:` reason, when the declaration's docstring gives one -/
+  reason  : String
+  /-- the carrier as one line, printed where its binders are in scope -/
+  carrier : String
+  /-- what decided a `witnessed` or `vacuous` probe: a declaration's name, or `instance search` -/
+  source  : String
+
+/-- Run the audit and print its report. Machine-readable by design — `scripts/vacuity.sh` and
+`scripts/gate_report.py` parse these lines, so the format is a contract:
+
+* `evidence: …`; `=== DECLARED ===` rows `DECLARED <decl> :: <reason>`; `=== FLAGGED ===` rows
+  `<VACUOUS|STALE|UNKNOWN> <decl>` — the rows the gate decides on;
+* `=== EVIDENCE ===` rows `EVIDENCE <EMPTY|WITNESS> <decl> :: <statement>` — every piece of evidence
+  gathered, by the declaration that supplied it;
+* `=== SITES ===` rows `SITE <verdict> <decl> :: <carrier>`, ending ` [by <source>]` when evidence or
+  instance search decided the probe — every site, all six verdicts. The gate reads none of these; they
+  exist so that nothing the scan decided is lost, and a run can be compared with the last one row for row;
+* `=== SCANNED ===` and `=== TOTALS ===` — the accounting, whose silent drift is this gate's own failure
+  mode. -/
 def audit : CommandElabM Unit := liftTermElabM do
   let env ← getEnv
   let ev ← gather env
   logInfo m!"evidence: {ev.empties.size} emptiness proof(s), {ev.witnesses.size} colourability witness(es)"
-  let mut rows : Array (Name × Verdict × String) := #[]
+  let mut rows : Array Row := #[]
   let mut scanned : Nat := 0
   let mut refutations : Nat := 0
   for (n, ci) in env.constants.toList do
@@ -384,11 +439,11 @@ def audit : CommandElabM Unit := liftTermElabM do
     if ← (try forallTelescopeReducing ci.type fun _ c => pure (c.isConstOf ``False) catch _ => pure false) then
       refutations := refutations + 1
     let carriers ← try carriersOf ci.type catch _ => pure #[]
-    for τ in carriers do
+    for (τ, shown) in carriers do
       -- Probe FIRST, always: a carrier that is demonstrably empty must be reported as such even
       -- when it is generic, so classification can never let a real vacuity escape. `generic` is
       -- only ever a refinement of an INCONCLUSIVE result.
-      let probed ← probe ev τ
+      let (probed, source) ← probe ev τ
       let raw := if probed == .unknown && (← instantiateMVars τ).hasFVar then .generic else probed
       -- The declaration is CHECKED against the probe, never merely trusted.
       let reason := (← findDocString? env n).bind reasonIn?
@@ -398,19 +453,29 @@ def audit : CommandElabM Unit := liftTermElabM do
         | _,        some r => (Verdict.stale, r)
         | v,        none   => (v, "")
       trace[vacuity] "{n} : {Verdict.tag v}"
-      rows := rows.push (n, v, r)
-  let count (v : Verdict) := rows.filter (·.2.1 == v) |>.size
+      rows := rows.push { decl := n, verdict := v, reason := r, carrier := shown, source := source }
+  let count (v : Verdict) := rows.filter (·.verdict == v) |>.size
   logInfo m!"=== VACUITY AUDIT ==="
   -- Declared emptiness gets its own banner with its reasons, the way the axiom audit prints its
   -- purchases: the point is that every deliberate case is READABLE IN ONE PLACE and challengeable.
   logInfo m!"=== DECLARED ==="
-  for (n, v, r) in rows do
-    if v == .declared then logInfo m!"DECLARED {n} :: {r}"
+  for row in rows do
+    if row.verdict == .declared then logInfo m!"DECLARED {row.decl} :: {row.reason}"
   -- Only these reach the gate. `generic` is counted in the totals and deliberately absent here:
   -- it is not work anyone can do, so it must not sit in a list whose target is zero.
   logInfo m!"=== FLAGGED ==="
-  for (n, v, _) in rows do
-    if v == .vacuous || v == .stale || v == .unknown then logInfo m!"{Verdict.tag v} {n}"
+  for row in rows do
+    if row.verdict == .vacuous || row.verdict == .stale || row.verdict == .unknown then
+      logInfo m!"{row.verdict.tag} {row.decl}"
+  -- Everything else the scan decided, so that no question it already answered — which theorem
+  -- witnesses a site, which sites are generic, which are new since the last run — needs a second scan.
+  logInfo m!"=== EVIDENCE ==="
+  for (d, _, s) in ev.empties do logInfo m!"EVIDENCE EMPTY {d} :: {s}"
+  for (d, _, s) in ev.witnesses do logInfo m!"EVIDENCE WITNESS {d} :: {s}"
+  logInfo m!"=== SITES ==="
+  for row in rows do
+    let decidedBy := if row.source.isEmpty then "" else s!" [by {row.source}]"
+    logInfo m!"SITE {row.verdict.tag} {row.decl} :: {row.carrier}{decidedBy}"
   -- Accounting, because an unexplained change in the site count is exactly the failure mode
   -- `D1` was: a silently disabled arm that still printed a plausible report.
   logInfo m!"=== SCANNED === declarations={scanned} refutations-skipped={refutations}"

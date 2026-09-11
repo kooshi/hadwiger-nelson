@@ -23,6 +23,9 @@ source "${REPO}/scripts/dev-env.sh"
 
 V="${1:-$(mktemp -d)}"
 mkdir -p "${V}"
+# Every step's output goes to a log in here, and the directory is never deleted: a FAIL line names the
+# step and prints its log, so reading why something differs never means regenerating again.
+echo "==> scratch directory, kept, with every step's log: ${V}"
 CADICAL="${CADICAL:-$(lean --print-prefix)/bin/cadical}"
 FAIL=0
 
@@ -39,13 +42,15 @@ for w in "${WITNESSES[@]}"; do
 
   # 1. exact coordinates, from the vendored vertex/edge lists
   python3 tools/heule.py "tools/heule/${SIZE}.vtx" "tools/heule/${SIZE}.edge" -o "${V}/${NAME}.json" \
-    > /dev/null 2>&1 || { echo "    FAIL: geometry did not re-derive"; FAIL=1; continue; }
+    > "${V}/${NAME}-geometry.log" 2>&1 \
+    || { echo "    FAIL: geometry did not re-derive:"; sed 's/^/      /' "${V}/${NAME}-geometry.log"; FAIL=1; continue; }
   if ! cmp -s "${V}/${NAME}.json" "tools/${NAME}.json"; then
-    echo "    FAIL: ${NAME}.json differs from the committed inputs"; FAIL=1; continue
+    echo "    FAIL: ${NAME}.json differs from the committed inputs: $(cmp "${V}/${NAME}.json" "tools/${NAME}.json" 2>&1)"
+    FAIL=1; continue
   fi
 
   # 2. the formula, and the certificate the solver produces for it
-  python3 - "${V}" "${NAME}" "${N}" "${PINS}" <<'PY'
+  python3 - "${V}" "${NAME}" "${N}" "${PINS}" > "${V}/${NAME}-cnf.log" 2>&1 <<'PY' || { echo "    FAIL: the formula did not re-emit:"; sed 's/^/      /' "${V}/${NAME}-cnf.log"; FAIL=1; continue; }
 import json, sys
 sys.path.insert(0, 'tools')
 from coloring import write_cnf
@@ -55,33 +60,44 @@ g = json.load(open(f'tools/{name}.json'))
 write_cnf(Path(f'{V}/{name}.cnf'), n, [tuple(e) for e in g['edges']], pins)
 PY
   "${CADICAL}" -q --lrat --no-binary --unsat "--seed=${SEED}" \
-    "${V}/${NAME}.cnf" "${V}/${NAME}.lrat" > /dev/null 2>&1
-  [[ "$?" -eq 20 ]] || { echo "    FAIL: the formula did not refute"; FAIL=1; continue; }
+    "${V}/${NAME}.cnf" "${V}/${NAME}.lrat" > "${V}/${NAME}-cadical.log" 2>&1
+  RC=$?
+  [[ "${RC}" -eq 20 ]] || { echo "    FAIL: the formula did not refute (cadical exit ${RC}; 20 is UNSAT):"
+    sed 's/^/      /' "${V}/${NAME}-cadical.log"; FAIL=1; continue; }
 
   # 3. the modules, into a scratch tree, then compared ignoring only the import prefix that the
   #    emitter derives from its own output path
   D="Proofs/HadwigerNelson/Instances/$(tr '[:lower:]' '[:upper:]' <<< "${NAME:0:1}")${NAME:1}"
   MOD="Proofs.HadwigerNelson.Instances.$(tr '[:lower:]' '[:upper:]' <<< "${NAME:0:1}")${NAME:1}"
   mkdir -p "${V}/${NAME}/Cnf"
+  # The emitters' statuses were never checked — the comparison below decides — so a nonzero exit is
+  # reported with the emitter's output, as information, and the verdict stays with the comparison.
   python3 tools/emit_cert.py "tools/${NAME}.json" "${NAME}" --dir "${V}/${NAME}" \
-    --chunk "${CHUNK}" --per-module 2 > /dev/null 2>&1
+    --chunk "${CHUNK}" --per-module 2 > "${V}/${NAME}-emit_cert.log" 2>&1 \
+    || { echo "    !! tools/emit_cert.py exited $?; its output (the comparison below decides):"; sed 's/^/      /' "${V}/${NAME}-emit_cert.log"; }
   python3 tools/emit_diffs.py "tools/${NAME}.json" "${NAME}" --dir "${V}/${NAME}" \
-    --module "${MOD}" > /dev/null 2>&1
+    --module "${MOD}" > "${V}/${NAME}-emit_diffs.log" 2>&1 \
+    || { echo "    !! tools/emit_diffs.py exited $?; its output (the comparison below decides):"; sed 's/^/      /' "${V}/${NAME}-emit_diffs.log"; }
   # The certificate imports the *edge list*, never the geometry: that is what keeps a change to the
   # geometry from re-checking every segment module beneath it (plans/M08 § 0(f)).
   python3 tools/emit_mask.py --edges "tools/${NAME}.json" --n "${N}" --edges-name "${EDGES}" \
     --import "${MOD}.Edges" \
     --pins "${PINS}" --lrat "${V}/${NAME}.lrat" --name "${NAME}" --out "${V}/${NAME}/Cnf" \
     --module "${MOD}.Cnf" \
-    --segments 82 --table-modules 4 > /dev/null 2>&1
+    --segments 82 --table-modules 4 > "${V}/${NAME}-emit_mask.log" 2>&1 \
+    || { echo "    !! tools/emit_mask.py exited $?; its output (the comparison below decides):"; sed 's/^/      /' "${V}/${NAME}-emit_mask.log"; }
 
   N_OK=0
   while IFS= read -r f; do
     a="${V}/${NAME}/${f}"; b="${D}/${f}"
     [[ -f "${a}" ]] || { echo "    FAIL: ${f} was not regenerated"; FAIL=1; continue; }
-    if ! diff -q <(grep -v '^import ' "${a}") <(grep -v '^import ' "${b}") > /dev/null; then
-      echo "    FAIL: ${f} differs in content"; FAIL=1; continue
+    D_OUT="${V}/${NAME}-$(tr '/' '_' <<< "${f}").diff"
+    if ! diff <(grep -v '^import ' "${a}") <(grep -v '^import ' "${b}") > "${D_OUT}"; then
+      echo "    FAIL: ${f} differs in content ($(grep -c '^[<>]' "${D_OUT}") changed lines; whole diff: ${D_OUT}); the first:"
+      head -12 "${D_OUT}" | cut -c1-200 | sed 's/^/      /'
+      FAIL=1; continue
     fi
+    rm -f "${D_OUT}"
     N_OK=$((N_OK + 1))
     # `Critical.lean` and `Critical/` come from a different emitter and are checked below, on their
     # own terms -- their evidence is colourings rather than a refutation.
@@ -97,11 +113,13 @@ echo "==> deGrey (geometry only)"
 DG="Proofs/HadwigerNelson/Instances/DeGrey"
 mkdir -p "${V}/deGrey"
 python3 tools/emit_diffs.py tools/degrey_cert.json deGrey --dir "${V}/deGrey" \
-  --module Proofs.HadwigerNelson.Instances.DeGrey > /dev/null 2>&1 \
-  || { echo "    FAIL: the difference witness did not re-derive"; FAIL=1; }
+  --module Proofs.HadwigerNelson.Instances.DeGrey > "${V}/deGrey-emit_diffs.log" 2>&1 \
+  || { echo "    FAIL: the difference witness did not re-derive:"; sed 's/^/      /' "${V}/deGrey-emit_diffs.log"; FAIL=1; }
 for f in Diffs.lean Valid.lean; do
-  if ! diff -q <(grep -v '^import ' "${V}/deGrey/${f}") <(grep -v '^import ' "${DG}/${f}") > /dev/null
-  then echo "    FAIL: ${f} differs in content"; FAIL=1
+  if ! diff <(grep -v '^import ' "${V}/deGrey/${f}") <(grep -v '^import ' "${DG}/${f}") > "${V}/deGrey-${f}.diff"
+  then echo "    FAIL: ${f} differs in content (whole diff: ${V}/deGrey-${f}.diff); the first lines:"
+    head -12 "${V}/deGrey-${f}.diff" | cut -c1-200 | sed 's/^/      /'
+    FAIL=1
   fi
 done
 [[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical"
@@ -114,14 +132,15 @@ done
 echo "==> coreSpindle"
 CS="Proofs/HadwigerNelson/Instances/CoreSpindle"
 python3 tools/corespindle.py --rows 6 5 4 --out "${V}/corespindle63.json" \
-  --lean "${V}/Weights.lean" > /dev/null 2>&1 \
-  || { echo "    FAIL: the generator did not re-run"; FAIL=1; }
+  --lean "${V}/Weights.lean" > "${V}/corespindle.log" 2>&1 \
+  || { echo "    FAIL: the generator did not re-run:"; sed 's/^/      /' "${V}/corespindle.log"; FAIL=1; }
 cmp -s "${V}/corespindle63.json" tools/corespindle63.json \
-  || { echo "    FAIL: corespindle63.json differs from what the construction produces"; FAIL=1; }
+  || { echo "    FAIL: corespindle63.json differs from what the construction produces: $(cmp "${V}/corespindle63.json" tools/corespindle63.json 2>&1)"; FAIL=1; }
 python3 tools/emit_cert.py "${V}/corespindle63.json" coreSpindle --out "${V}/Cert.lean" \
-  > /dev/null 2>&1 || { echo "    FAIL: the certificate did not re-emit"; FAIL=1; }
+  > "${V}/corespindle-emit_cert.log" 2>&1 \
+  || { echo "    FAIL: the certificate did not re-emit:"; sed 's/^/      /' "${V}/corespindle-emit_cert.log"; FAIL=1; }
 for f in Cert.lean Weights.lean; do
-  cmp -s "${V}/${f}" "${CS}/${f}" || { echo "    FAIL: ${f} differs"; FAIL=1; }
+  cmp -s "${V}/${f}" "${CS}/${f}" || { echo "    FAIL: ${f} differs: $(cmp "${V}/${f}" "${CS}/${f}" 2>&1)"; FAIL=1; }
 done
 [[ "${FAIL}" -eq 0 ]] && echo "    2 generated modules identical, weights re-derived from the LP"
 
@@ -209,8 +228,9 @@ for W in heule510 heule553; do
   if ! python3 tools/emit_critical.py "${W}" --colours 4 --rows 64 > "${V}/${W}-crit.log" 2>&1; then
     sed 's/^/    /' "${V}/${W}-crit.log"
     echo "    FAIL: tools/emit_critical.py refused to emit ${W}"; FAIL=1
-  elif ! diff -r -q "${V}/${W}-crit-before" "${DIR}" > /dev/null; then
-    echo "    FAIL: ${W}'s criticality certificate is not what the emitter produces"; FAIL=1
+  elif ! diff -r -q "${V}/${W}-crit-before" "${DIR}" > "${V}/${W}-crit.diff" 2>&1; then
+    echo "    FAIL: ${W}'s criticality certificate is not what the emitter produces; the files that differ:"
+    sed 's/^/      /' "${V}/${W}-crit.diff"; FAIL=1
   else
     echo "    ${W}: $(ls "${DIR}" | wc -l) chunks identical, every pivot settled, 0 removable"
   fi
@@ -234,9 +254,11 @@ elif ! python3 tools/emit_narrow.py degrey_cert --pivot 630 --pivot 633 --pivot 
 else
   NARROW_OK=1
   for P in 630 633 1420 1423; do
-    if ! diff -q "${NARROW_BEFORE}/Narrow${P}.lean" \
-        "Proofs/HadwigerNelson/Instances/DeGrey/Narrow${P}.lean" > /dev/null; then
-      echo "    FAIL: Narrow${P}.lean is not what the emitter produces"; FAIL=1; NARROW_OK=0
+    if ! diff "${NARROW_BEFORE}/Narrow${P}.lean" \
+        "Proofs/HadwigerNelson/Instances/DeGrey/Narrow${P}.lean" > "${V}/Narrow${P}.diff"; then
+      echo "    FAIL: Narrow${P}.lean is not what the emitter produces (whole diff: ${V}/Narrow${P}.diff); the first lines:"
+      head -12 "${V}/Narrow${P}.diff" | cut -c1-200 | sed 's/^/      /'
+      FAIL=1; NARROW_OK=0
     fi
   done
   if [[ "${NARROW_OK}" -eq 1 ]]; then
@@ -325,6 +347,8 @@ fi
 
 if [[ "${FAIL}" -ne 0 ]]; then
   echo "==> regen-check: FAIL — the tree does not match what the generators produce"
+  echo "    every step's log and diff: ${V}"
   exit 1
 fi
 echo "==> regen-check: OK"
+echo "    every step's log: ${V}"

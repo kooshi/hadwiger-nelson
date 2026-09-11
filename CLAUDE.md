@@ -655,7 +655,10 @@ and has taken the desktop down. A *named* target is not safe either: Lake silent
 stale dependency into the same unrestricted pool. `scripts/build.sh` builds every module in dependency order
 (`scripts/build_order.py`), leaves first, in explicitly named batches (`BATCH`, default 10), each under a
 `systemd-run` memory cap (`MEMMAX`, default 100G); `scripts/build.sh --plan` prints the batches and builds
-nothing.
+nothing. It first asks Lake once, under the same cap, whether any of those modules is out of date
+(`lake build --no-build`, which compiles nothing): about 2 seconds, against about 3 minutes to walk the
+batches. Only exit 0 skips the walk; any other status walks it, so the check can cost time but never skip a
+build.
 
 **`lake env lean <file>` is fine for iteration — it builds nothing — and it is not the same check.** It does
 not apply the lakefile's options, so `autoImplicit := false` is not in force: a stray identifier is
@@ -754,11 +757,17 @@ because a formalization that proves the *wrong* theorem is the characteristic fa
   `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
   not proved), which fail unconditionally before the baseline; `GENERIC` (parametric — the caller's
   obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
-  silent change in them is this gate's own failure mode: `declarations=6249 refutations-skipped=239
+  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6178 refutations-skipped=239
   sites=217`, `vacuous=0 stale=0 declared=3 witnessed=12 generic=200 unknown=2`. The baseline's two entries,
   `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
   `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
   at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`.
+- **Every gate keeps what it computed — read it before re-running one.** `build.sh`, `axioms.sh`,
+  `vacuity.sh` and `lean4checker.sh` save their tool's complete output under `build/gate/<gate>/` (`latest`
+  is the last complete run; `scripts/gate-log.sh`) and print a digest: every count, whether the counts
+  recorded in this file still match, every flagged or declared row in full, and every row that changed
+  since the previous run (`scripts/gate_report.py`). The vacuity log holds every site with the evidence
+  that decided it. `regen-check.sh` keeps each step's log in its scratch directory.
 - **Every theorem whose hypothesis is a structure** (a colouring, an embedding, a certificate, a
   homomorphism) **ships a named inhabitant** in the same file, or a one-line note naming the theorem that
   supplies one.

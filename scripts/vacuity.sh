@@ -30,12 +30,26 @@
 # produced no output and read as a pass when piped. So: the Lean status is captured explicitly and
 # never through a pipe, a run that does not elaborate is a FAILURE and not an empty result, and a
 # missing baseline is a failure rather than a free pass.
+#
+# WHAT IT PRINTS, AND WHAT IT KEEPS. A scan takes minutes, and this file used to keep three lines of
+# it, so the declaration count, or the names of two new sites, meant scanning again. The scan's complete
+# output is now saved under `build/gate/vacuity/` (`scripts/gate-log.sh`), and `scripts/gate_report.py`
+# prints the digest from that file: every count the scan computed and whether it still matches the counts
+# recorded in the baseline's header, the witnessed sites with the evidence behind each, and every site or
+# evidence row that changed since the previous complete run. The rows the gate decides on — declared,
+# vacuous, stale, unknown — follow in full, never cut at a column.
 set -uo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO}"
 source "${REPO}/scripts/dev-env.sh"
+source "${REPO}/scripts/gate-log.sh"
 BASELINE="${REPO}/scripts/vacuity-baseline.txt"
+
+# The non-empty lines of $1, and how many — so an empty list is zero rows, never one blank one.
+rows() { printf '%s\n' "$1" | sed '/^$/d'; }
+count() { rows "$1" | grep -c . || true; }
+kept() { echo "    full output: ${GATE_LOG#"${REPO}"/}"; }
 
 # ---------------------------------------------------------------------------------------------
 # --self-test — break the check on purpose and watch it fail.
@@ -49,30 +63,41 @@ BASELINE="${REPO}/scripts/vacuity-baseline.txt"
 # (never the file itself, which must stay editable while a run is in flight).
 # ---------------------------------------------------------------------------------------------
 if [[ "${1:-}" == "--self-test" ]]; then
+  gate_log_open vacuity-self-test
   TMP="$(mktemp -d)"
   awk 'BEGIN{ins=0} /^namespace VacuityAudit$/ && !ins {while((getline l < "'"${REPO}"'/scripts/vacuity-controls.lean")>0) print l; ins=1} {print}' \
     "${REPO}/scripts/Vacuity.lean" > "${TMP}/Vacuity.lean"
 
   if ! OUT="$(lake env lean "${TMP}/Vacuity.lean" 2>&1)"; then
+    printf '%s\n' "${OUT}" > "${GATE_LOG}"
     echo "${OUT}"
     echo "==> vacuity self-test: FAIL — the control run did not elaborate (above)."
     rm -rf "${TMP}"; exit 1
   fi
   rm -rf "${TMP}"
+  printf '%s\n' "${OUT}" > "${GATE_LOG}"
+  gate_log_complete
+  grep -E '^=== (SCANNED|TOTALS) ===' <<< "${OUT}" | sed 's/^/    control run: /'
 
   fails=0
+  # Here-strings, never `echo | grep -q`: under `pipefail` a `grep -q` that stops at its first match
+  # SIGPIPEs the writer once the text outgrows the pipe buffer, and a control that fired reads as
+  # absent (`axioms.sh` found this at M26). The per-site rows made this output large enough to hit it.
   expect() {  # expect <verdict> <declaration> <what it proves>
-    if echo "${OUT}" | grep -qE "^$1 HadwigerNelson\.$2\$"; then
+    if grep -qE "^$1 HadwigerNelson\.$2\$" <<< "${OUT}"; then
       echo "    ok    $1 $2 — $3"
     else
       echo "    FAIL  expected '$1 $2' and it is absent — $3"
-      echo "${OUT}" | grep -E "HadwigerNelson\.$2\$" | sed 's/^/            got: /'
+      grep -E "^(SITE )?[A-Z]+ HadwigerNelson\.$2( |\$)" <<< "${OUT}" | sed 's/^/            got: /'
       fails=$((fails+1))
     fi
   }
+  # Any verdict row counts, the per-site `SITE` rows included: a planted refutation that produced even
+  # a `GENERIC` row has been audited against the emptiness it proves.
   silent() {  # silent <declaration> <what it proves>
-    if echo "${OUT}" | grep -qE "^[A-Z]+ HadwigerNelson\.$1\$"; then
+    if grep -qE "^(SITE )?[A-Z]+ HadwigerNelson\.$1( |\$)" <<< "${OUT}"; then
       echo "    FAIL  $1 produced a row and must produce none — $2"
+      grep -E "^(SITE )?[A-Z]+ HadwigerNelson\.$1( |\$)" <<< "${OUT}" | sed 's/^/            got: /'
       fails=$((fails+1))
     else
       echo "    ok    (no row) $1 — $2"
@@ -91,33 +116,48 @@ if [[ "${1:-}" == "--self-test" ]]; then
   if [[ "${fails}" -gt 0 ]]; then
     echo "==> vacuity self-test: FAIL — ${fails} control(s) did not behave as designed."
     echo "    The gate cannot be trusted until every one of these fires. Do not baseline around it."
+    kept
     exit 1
   fi
   echo "==> vacuity self-test: OK — every control fired, and the two silent ones stayed silent."
+  kept
   exit 0
 fi
 
+gate_log_open vacuity
 if ! RAW="$(lake env lean scripts/Vacuity.lean 2>&1)"; then
+  printf '%s\n' "${RAW}" > "${GATE_LOG}"
   echo "${RAW}"
   echo "==> vacuity: FAIL — scripts/Vacuity.lean did not elaborate (above)."
   echo "    A scan that cannot run is not a clean scan. This is the M04 failure mode."
   exit 1
 fi
-echo "${RAW}" | grep -E '^evidence:|^=== TOTALS' | sed 's/^/    /'
+printf '%s\n' "${RAW}" > "${GATE_LOG}"
+PREV="${GATE_PREV}"
+gate_log_complete
 
-# The declared-emptiness ledger, printed every run — never hidden in a file nobody opens.
-DECL="$(echo "${RAW}" | grep -E '^DECLARED ' || true)"
+# The digest: every count, the recorded counts, the witnessed sites, and what changed since the last run.
+if ! python3 "${REPO}/scripts/gate_report.py" vacuity "${GATE_LOG}" "${PREV}" "${BASELINE}"; then
+  echo "==> vacuity: FAIL — no digest could be built from this run's output (above). The scan's output"
+  echo "    format is a contract, and a digest that silently printed less would be this gate failing open."
+  kept
+  exit 1
+fi
+
+# The declared-emptiness ledger, printed every run and in full — never hidden in a file nobody opens,
+# and never cut at a column: a reason nobody can read whole is a reason nobody can challenge.
+DECL="$(grep -E '^DECLARED ' <<< "${RAW}" || true)"
 if [[ -n "${DECL}" ]]; then
-  echo "    --- declared empty, by design ($(echo "${DECL}" | wc -l)) ---"
-  echo "${DECL}" | sed 's/^/    /' | cut -c1-160
+  echo "    --- declared empty, by design ($(count "${DECL}")) ---"
+  rows "${DECL}" | sed 's/^/    /'
 fi
 
 # VACUOUS and STALE are unconditional failures and are checked BEFORE the baseline, so no
 # baseline entry can ever suppress them.
-HARD="$(echo "${RAW}" | grep -E '^(VACUOUS|STALE) ' || true)"
+HARD="$(grep -E '^(VACUOUS|STALE) ' <<< "${RAW}" || true)"
 if [[ -n "${HARD}" ]]; then
-  echo "==> vacuity: FAIL — $(echo "${HARD}" | wc -l) site(s) that no baseline can excuse:"
-  echo "${HARD}" | sed 's/^/      /'
+  echo "==> vacuity: FAIL — $(count "${HARD}") site(s) that no baseline can excuse:"
+  rows "${HARD}" | sed 's/^/      /'
   echo
   echo "    VACUOUS: true, kernel-checked, and says NOTHING — its hypothesis type is provably"
   echo "             empty. Either fix the statement, or, if the emptiness is the conclusion"
@@ -125,6 +165,7 @@ if [[ -n "${HARD}" ]]; then
   echo "               VACUITY DECLARED: <why emptiness is the point here>"
   echo "    STALE:   a docstring declares emptiness that is not proved. The declaration outlived"
   echo "             its truth — remove it, or prove the emptiness it claims."
+  kept
   exit 1
 fi
 
@@ -135,35 +176,47 @@ if [[ "${1:-}" == "--baseline" ]]; then
     echo "# they fail the gate outright, and deliberate emptiness is declared in the"
     echo "# declaration's own docstring (VACUITY DECLARED:) rather than suppressed in this file."
     echo "# Regenerate deliberately: scripts/vacuity.sh --baseline"
-    echo "${RAW}" | grep -E '^UNKNOWN ' | sort -u
+    grep -E '^UNKNOWN ' <<< "${RAW}" | sort -u
   } > "${BASELINE}"
   echo "==> vacuity: baseline written ($(grep -cE '^UNKNOWN ' "${BASELINE}") entries, UNKNOWN only)"
+  kept
   exit 0
 fi
 
 if [[ ! -f "${BASELINE}" ]]; then
   echo "==> vacuity: FAIL — no baseline at ${BASELINE}."
   echo "    Refusing to pass with nothing to compare against; run: scripts/vacuity.sh --baseline"
+  kept
   exit 1
 fi
 
-CUR="$(echo "${RAW}" | grep -E '^UNKNOWN ' | sort -u)"
-NEW="$(comm -13 <(grep -E '^UNKNOWN ' "${BASELINE}" | sort -u) <(echo "${CUR}"))"
+CUR="$(grep -E '^UNKNOWN ' <<< "${RAW}" | sort -u)"
+BASE="$(grep -E '^UNKNOWN ' "${BASELINE}" | sort -u)"
+NEW="$(comm -13 <(rows "${BASE}") <(rows "${CUR}"))"
+HELD="$(comm -12 <(rows "${BASE}") <(rows "${CUR}"))"
+RESOLVED="$(comm -23 <(rows "${BASE}") <(rows "${CUR}"))"
+
+if [[ -n "${HELD}" ]]; then
+  echo "    --- unknown, held by the baseline ($(count "${HELD}")) ---"
+  rows "${HELD}" | sed 's/^/    /'
+fi
 
 if [[ -n "${NEW}" ]]; then
-  echo "==> vacuity: FAIL — $(echo "${NEW}" | wc -l) site(s) not in the baseline:"
-  echo "${NEW}" | sed 's/^/      /'
+  echo "==> vacuity: FAIL — $(count "${NEW}") site(s) not in the baseline:"
+  rows "${NEW}" | sed 's/^/      /'
   echo
   echo "    UNKNOWN: no unconditional inhabitant is proved for the carrier. Ship one — the rule"
   echo "             is CLAUDE.md G30's fifth failure mode: every theorem whose hypothesis is a"
   echo "             structure ships with a named inhabitant, or a note naming what supplies one."
+  kept
   exit 1
 fi
 
-RESOLVED="$(comm -23 <(grep -E '^UNKNOWN ' "${BASELINE}" | sort -u) <(echo "${CUR}") | wc -l)"
-if [[ "${RESOLVED}" -gt 0 ]]; then
-  echo "==> vacuity: OK — and ${RESOLVED} baseline entr(ies) are now resolved."
+if [[ -n "${RESOLVED}" ]]; then
+  echo "==> vacuity: OK — and $(count "${RESOLVED}") baseline entr(ies) are now resolved:"
+  rows "${RESOLVED}" | sed 's/^/      /'
   echo "    The baseline only shrinks: scripts/vacuity.sh --baseline"
 else
   echo "==> vacuity: OK"
 fi
+kept

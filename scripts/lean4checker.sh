@@ -10,6 +10,11 @@
 # lean4checker is not a package dependency — it pins its own toolchain and would drag the project's
 # pin around. It is cloned and built on demand here, into the directory given by $CHECKER_DIR
 # (default: a sibling of the repo), with our `lean-toolchain` forced on it.
+#
+# A full replay runs for many hours, so nothing it prints is thrown away: each slice's module list,
+# output, exit status and time are kept under `build/gate/lean4checker/<run>/` (`scripts/gate-log.sh`),
+# every slice is summarized on the terminal, and on a failure every rejecting slice's output is printed
+# whole. The first version deleted all of it at exit and printed six lines of the first failure.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -17,6 +22,7 @@ CHECKER_DIR="${CHECKER_DIR:-${REPO}/.lake/lean4checker}"
 TARGET="${1:-Proofs}"
 
 source "${REPO}/scripts/dev-env.sh"
+source "${REPO}/scripts/gate-log.sh"
 
 if [[ ! -x "${CHECKER_DIR}/.lake/build/bin/lean4checker" ]]; then
   echo "==> building lean4checker in ${CHECKER_DIR}"
@@ -102,7 +108,10 @@ done
 echo "==> replaying ${#MODULES[@]} modules matching ${TARGET} through the independent kernel"
 echo "    (${#PREFIXES[@]} of them expand to a subtree and are checked first, alone)"
 echo "    ${JOBS} processes, one worker each"
-WORK="$(mktemp -d)"
+gate_log_open lean4checker
+WORK="${GATE_LOG%.log}"
+mkdir -p "${WORK}"
+echo "    each slice's module list, output and status: ${WORK#"${REPO}"/}/"
 MODULES=("${PREFIXES[@]}" "${LEAVES[@]}")
 N=${#MODULES[@]}
 for ((j = 0; j < JOBS; j++)); do
@@ -112,26 +121,51 @@ for ((k = 0; k < N; k++)); do
   echo "${MODULES[$k]}" >> "${WORK}/slice$((k % JOBS))"
 done
 
+START="$(date +%s)"
 PIDS=()
 for ((j = 0; j < JOBS; j++)); do
   [[ -s "${WORK}/slice${j}" ]] || continue
+  # The status is written whatever the checker returns, so a slice with no status file is one whose
+  # process died — reported below as exactly that, never read as a pass.
   ( mapfile -t SLICE < "${WORK}/slice${j}"
-    if ! "${CHECK}" --num-workers=1 "${SLICE[@]}" > "${WORK}/out${j}" 2>&1; then
-      echo "${j}" > "${WORK}/fail${j}"
-    fi ) &
+    t0="$(date +%s)"
+    rc=0
+    "${CHECK}" --num-workers=1 "${SLICE[@]}" > "${WORK}/out${j}" 2>&1 || rc=$?
+    echo "${rc} $(( $(date +%s) - t0 ))" > "${WORK}/status${j}" ) &
   PIDS+=($!)
 done
-wait "${PIDS[@]}" 2>/dev/null
+wait "${PIDS[@]}" 2>/dev/null || true
+ELAPSED=$(( $(date +%s) - START ))
 
-N_FAIL=$(find "${WORK}" -name 'fail*' | wc -l)
-if [[ "${N_FAIL}" -ne 0 ]]; then
-  echo "==> lean4checker: FAIL — ${N_FAIL} slice(s) rejected. First failure:"
-  for f in "${WORK}"/fail*; do
-    grep -Ev "^Searching|^Found" "${WORK}/out$(basename "${f}" | tr -dc 0-9)" | head -6 | sed 's/^/    /'
-    break
+FAILED=()
+for ((j = 0; j < JOBS; j++)); do
+  [[ -s "${WORK}/slice${j}" ]] || continue
+  n_mod="$(wc -l < "${WORK}/slice${j}")"
+  if [[ ! -s "${WORK}/status${j}" ]]; then
+    line="slice ${j}: ${n_mod} modules — NO STATUS: its process died before the checker returned"
+    FAILED+=("${j}")
+  else
+    read -r rc secs < "${WORK}/status${j}"
+    line="slice ${j}: ${n_mod} modules, exit ${rc}, $((secs / 60))m$((secs % 60))s"
+    [[ "${rc}" -eq 0 ]] || FAILED+=("${j}")
+  fi
+  echo "    ${line}"
+  echo "${line}" >> "${GATE_LOG}"
+done
+gate_log_complete
+
+if [[ "${#FAILED[@]}" -ne 0 ]]; then
+  echo "==> lean4checker: FAIL — ${#FAILED[@]} slice(s) rejected or died. Each one's output, whole:"
+  for j in "${FAILED[@]}"; do
+    echo "    --- slice ${j} (its modules: ${WORK#"${REPO}"/}/slice${j})"
+    if [[ -f "${WORK}/out${j}" ]]; then
+      grep -Ev "^Searching|^Found" "${WORK}/out${j}" | sed 's/^/    /' || true
+    else
+      echo "    (no output file)"
+    fi
   done
-  rm -rf "${WORK}"
+  echo "    everything, the passing slices included: ${WORK#"${REPO}"/}/"
   exit 1
 fi
-rm -rf "${WORK}"
-echo "==> lean4checker: OK — ${#MODULES[@]} modules replayed by a separately written kernel"
+echo "==> lean4checker: OK — ${#MODULES[@]} modules replayed by a separately written kernel, in $((ELAPSED / 60))m$((ELAPSED % 60))s"
+echo "    kept: ${WORK#"${REPO}"/}/"
