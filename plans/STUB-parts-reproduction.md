@@ -1,5 +1,8 @@
 # STUB — reproduce `[Parts2020a]`'s algorithm, end to end
 
+> **OPENED 2026-09-10 as M63** (`plans/M63-parts-reproduction.md`), which supersedes this stub and records
+> where its frame was wrong.
+
 *Minted 2026-09-10 at Kooshi's direction: **"the next session will be 100% repro of his algo. The
 session after that will be introducing our new angle on it, as described in the stub."** The stub
 holding the new angle is `plans/M62-evolutionary-type-m.md`; this file is the rehearsal it needs.

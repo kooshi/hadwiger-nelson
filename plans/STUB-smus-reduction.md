@@ -1,5 +1,11 @@
 # FS-32 — The reduction stage is a solved problem in another literature
 
+> **ABSORBED 2026-09-10 (frontier-stubs sync).** Opened as `plans/FS32-smus-reduction.md`. Its §R3 verdict —
+> the exact method (`OptUx`) does not scale here, and pure reduction cannot reach the record — pointed to
+> reproducing `[Parts2020a]`'s full loop, and M63 (`plans/M63-parts-reproduction.md`) then reproduced the
+> reduction stage exactly, with complete level sets. The minimum this stub wanted to import is what M63's
+> enumeration over the correction-set hypergraph computes. No longer ranked.
+
 > **RENUMBERED 2026-09-10: minted as FS-29, a number already taken by the overclaim check
 > (`plans/STUB-vacuity-coverage.md` §Phase C, minted one day earlier on 2026-09-09). The older
 > mint keeps the number; no content here changed.**

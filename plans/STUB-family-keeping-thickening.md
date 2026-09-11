@@ -1,5 +1,10 @@
 # FS-6 — A family-keeping thickening: where M57's principle could bite (STUB, 2026-09-06, minted at the M57 close; restricted to de Grey's field the same day)
 
+> **NAMING 2026-09-10 (frontier-stubs sync).** This stub was chosen as M62 at the M61 close, but the number went
+> to the milestone that ran first — the evolutionary type-M search (`plans/M62-evolutionary-type-m.md`), of which
+> FS-6 is the sequel: the same search one colour up, over a 5-sealed field. FS-6 takes a milestone number when it
+> runs. Where §H below says "M62", it means this stub.
+
 > **RESTRICTED 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): F₂₄₇ = K(√247) is a
 > 5-sealed field (a degree-one prime above 11, χ(UD(𝔽₁₁,2)) = 5), so nothing built there can be 6-chromatic; this stub's
 > F₂₄₇ half is struck. Its de Grey half stands and is strengthened: de Grey's field ℚ(√3,√5,√7,√11) has no usable prime

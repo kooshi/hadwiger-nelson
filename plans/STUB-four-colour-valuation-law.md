@@ -1,5 +1,10 @@
 # The 2-adic law of four-colour compulsions — KERNEL-CHECKED 2026-09-09
 
+> **NOTE 2026-09-10 (frontier-stubs sync).** The follow-up sketched below — re-state the `√3` carrier over `K` by
+> showing `core9`'s nine points lie in `K²` — **cannot work as sketched**: FS-27 §1 found that `core9`'s points
+> carry `√5` and `√7` and no `√11` (they are cut from de Grey's 1581, not from the seam lattice), so they are not
+> in `K²`. A `√3` carrier inside `K` would have to be found first.
+
 *Minted 2026-09-09 out of the mascot challenge, and closed the same day
 (`Proofs/HadwigerNelson/ValuationLaw.lean`, axioms exactly the standard three). Kept, per the
 deprecate-never-delete rule, because the record of what it claimed before it was checked contains
