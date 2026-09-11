@@ -5,6 +5,7 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.Combinatorics.SimpleGraph.CycleGraph
 import Mathlib.Algebra.CharP.Reduced
 import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Algebra.ZMod
 
 /-!
 # Two colours from a residue that conjugation does not move

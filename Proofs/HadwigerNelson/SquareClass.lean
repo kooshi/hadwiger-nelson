@@ -66,6 +66,9 @@ noncomputable def sqClass (n : ℕ) : SqClass :=
   Finsupp.comapDomain Subtype.val (n.factorization.mapRange (fun e : ℕ => (e : ZMod 2)) Nat.cast_zero)
     Subtype.val_injective.injOn
 
+/-- **The coordinate formula**: every `sqClass` identity reduces to it, one prime at a time. -/
+theorem sqClass_apply (n : ℕ) (p : Nat.Primes) : sqClass n p = (n.factorization p : ZMod 2) := rfl
+
 theorem sqClass_zero : sqClass 0 = 0 := sorry
 
 theorem sqClass_one : sqClass 1 = 0 := sorry
@@ -74,6 +77,9 @@ theorem sqClass_mul {a b : ℕ} (ha : a ≠ 0) (hb : b ≠ 0) : sqClass (a * b) 
   sorry
 
 theorem sqClass_prime {p : ℕ} (hp : p.Prime) : sqClass p = Finsupp.single ⟨p, hp⟩ 1 := sorry
+
+/-- A perfect square has trivial class. -/
+theorem sqClass_sq (b : ℕ) : sqClass (b ^ 2) = 0 := sorry
 
 /-- **A nonzero natural number whose square class is trivial is a perfect square.** -/
 theorem isSquare_of_sqClass_eq_zero {n : ℕ} (hn : n ≠ 0) (h : sqClass n = 0) : IsSquare n := sorry
@@ -120,6 +126,11 @@ theorem minusOne_not_mem_blockTwo : minusOne ∉ blockTwo := sorry
 
 theorem minusOne_not_mem_blockTen : minusOne ∉ blockTen := sorry
 
+/-- **Every class lies in a block, or lands in `blockTen` once `[2]` is added** — the eight-case fact the local
+splitting derives from, a `decide` once span membership is a finite existential. -/
+theorem mem_blockTwo_or_mem_blockTen_or_add_two_mem_blockTen (v : LocTwo) :
+    v ∈ blockTwo ∨ v ∈ blockTen ∨ v + (0, 0, 1) ∈ blockTen := sorry
+
 /-- **Every subgroup of `ℚ₂^×/(ℚ₂^×)²` that holds `[2]` splits along the two blocks.** The only classes outside
 both blocks are `[5]` and `[−1]`, and `[2]` carries each into `blockTen` (`2 · 5 = 10`, `2 · 7 = 14`). -/
 theorem le_inf_blockTwo_sup_inf_blockTen {V : Submodule (ZMod 2) LocTwo}
@@ -149,6 +160,10 @@ theorem sqClass_mem_inf_comap {W : Submodule (ZMod 2) SqClass} {U : Submodule (Z
     (hW : sqClass n ∈ W) (hU : loc2 (sqClass n) ∈ U) : sqClass n ∈ W ⊓ U.comap loc2 :=
   Submodule.mem_inf.mpr ⟨hW, hU⟩
 
+/-- **A class group's 2-adic image lies in a plane iff every radicand's class does.** -/
+theorem map_loc2_classGroup_le_iff {D : Set ℕ} {U : Submodule (ZMod 2) LocTwo} :
+    (classGroup D).map loc2 ≤ U ↔ ∀ d ∈ D, loc2 (sqClass d) ∈ U := sorry
+
 /-! ## §5 Fields: a Galois connection -/
 
 /-- **The multiquadratic field** `ℚ(√d : d ∈ D)`. -/
@@ -160,10 +175,28 @@ lies in `W`. -/
 noncomputable def sqrtField (W : Submodule (ZMod 2) SqClass) : Subfield ℝ :=
   mqField {n | sqClass n ∈ W}
 
-/-- **The square classes of a real field**: those of the natural numbers whose square roots it contains. A
-subgroup with no appeal to the independence of square roots — `√a, √b ∈ F` puts `√(ab)` in `F`. -/
+/-- **The generators**: `√d ∈ ℚ(√D)` for `d ∈ D`. The image is named explicitly because
+`Subfield.subset_closure` cannot infer it through `mqField`. -/
+theorem sqrt_mem_mqField {D : Set ℕ} {d : ℕ} (hd : d ∈ D) : Real.sqrt d ∈ mqField D :=
+  Subfield.subset_closure (Set.mem_image_of_mem (fun d : ℕ => Real.sqrt d) hd)
+
+theorem mqField_mono {D₁ D₂ : Set ℕ} (h : D₁ ⊆ D₂) : mqField D₁ ≤ mqField D₂ := sorry
+
+/-- **Equal square classes carry field membership of the root**, in both directions and with no side
+condition — the one arithmetic fact under the Galois connection. Class `0` means a square or zero, whose
+root is rational. -/
+theorem sqrt_mem_iff_of_sqClass_eq {F : Subfield ℝ} {n m : ℕ} (h : sqClass n = sqClass m) :
+    Real.sqrt n ∈ F ↔ Real.sqrt m ∈ F := sorry
+
+/-- **A radical identity from an integer one**: `a · b = s² · c` gives `√a · √b = s · √c`. -/
+theorem sqrt_mul_sqrt_eq {a b c s : ℕ} (h : a * b = s ^ 2 * c) :
+    Real.sqrt a * Real.sqrt b = s * Real.sqrt c := sorry
+
+/-- **The square classes of a real field**: those of the nonzero natural numbers whose square roots it
+contains. A subgroup with no appeal to the independence of square roots — `√a, √b ∈ F` puts `√(ab)` in `F` —
+and, requiring `n ≠ 0`, one whose closure never leans on the junk value `sqClass 0 = 0`. -/
 noncomputable def kummerClasses (F : Subfield ℝ) : Submodule (ZMod 2) SqClass where
-  carrier := {v | ∃ n : ℕ, sqClass n = v ∧ Real.sqrt n ∈ F}
+  carrier := {v | ∃ n : ℕ, n ≠ 0 ∧ sqClass n = v ∧ Real.sqrt n ∈ F}
   add_mem' := sorry
   zero_mem' := sorry
   smul_mem' := sorry
@@ -188,11 +221,16 @@ theorem sqrtField_eq_sup (W : Submodule (ZMod 2) SqClass) (h2 : sqClass 2 ∈ W)
 /-- **The plane over a real subfield**: the complex numbers with both coordinates in it. -/
 def fieldPlane (F : Subfield ℝ) : Set ℂ := {z | z.re ∈ F ∧ z.im ∈ F}
 
+theorem mem_fieldPlane {F : Subfield ℝ} {z : ℂ} : z ∈ fieldPlane F ↔ z.re ∈ F ∧ z.im ∈ F := Iff.rfl
+
 theorem fieldPlane_seamField : fieldPlane seamField = seamPlane := rfl
 
 /-- **A plane over a field containing `ℚ(√3, √11)` needs four colours** — the Moser spindle. -/
 theorem four_le_chromaticNumber_fieldPlane {F : Subfield ℝ} (hF : seamField ≤ F) :
     4 ≤ ((unitDistance ℂ).induce (fieldPlane F)).chromaticNumber := sorry
+
+/-- **`ℚ(√3, √11)` is generated by `√3` and `√11`.** -/
+theorem seamField_le_mqField : seamField ≤ mqField {3, 11} := sorry
 
 theorem seamField_le_sqrtField {W : Submodule (ZMod 2) SqClass} (h3 : sqClass 3 ∈ W)
     (h11 : sqClass 11 ∈ W) : seamField ≤ sqrtField W := sorry
