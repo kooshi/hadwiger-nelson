@@ -184,6 +184,29 @@ as I write. Its attested values are `|M| = 136`, level 8 up to `Aut(A)` (48 as f
 `A` equal to his `v166e774` as a set. If the regeneration disagrees with the stored record, that
 matters more than this probe and the sweep stops until it is explained.
 
+## 6b — The escalation path, rehearsed before it was needed
+
+A path rehearsed only on paper fails at the moment it is needed, and the promise made to the product
+owner is an exact-arithmetic re-check plus an independent refutation **within the hour** of anything
+reading below 136. So it was driven end to end on a calibrated bed whose answer is known — the
+509-vertex record itself — while the sweep ran (`scratchpad/probe-S/rehearse.py`):
+
+1. **Geometry.** The record rebuilds from our own base and cross-edge law at exactly **509 vertices
+   and 2,442 edges**. Exactness is `typem.unit_edges_fast`: floats only propose neighbours, and
+   every proposal is decided by `Fraction` arithmetic in `K`, so no float reaches a verdict.
+2. **Formula.** `tools/coloring.write_cnf` — the same emitter `scripts/regen-check.sh` uses for
+   Heule's 510-vertex graph — with a pinned unit triangle (vertices 0, 16, 75 at colours 0, 1, 2).
+3. **Refutation.** `cadical -q --lrat --no-binary --unsat`: **exit 20, refuted, in 4.6 s, with a
+   50.2 MB LRAT proof**.
+4. **The negative control, which is the half that matters.** The record minus one vertex must be
+   *colourable*, since a minimum-cardinality refusing selection has no redundant vertex: **exit 10,
+   colourable, in 0.0 s**. A pipeline that can only ever return "refuted" would certify anything
+   handed to it, so the partner that goes red was run in the same breath as the one that goes green.
+
+The Lean kernel certificate (`tools/emit_cert.py`, `tools/emit_mask.py`, on the pattern of
+`Instances/Heule510.lean`) is **not** rehearsed here and is explicitly a later phase's work. Nothing
+in this probe claims it.
+
 ## 7 — Registered predictions
 
 *Written before the first solver started; scored in §8 as written. Confidences are mine.*
