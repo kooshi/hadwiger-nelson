@@ -32,6 +32,9 @@ If not in general, can it prove the concrete instances FS-36's decomposition nam
 - `χ(ℚ(√2,√3,√11,√35)²) = 4`
 - `χ(ℚ(√3,√10,√11,√35)²) = 4`
 - `χ(ℚ(√3,√11,√35)²) = 4`
+- `χ(ℚ(√3,√11,√14)²) = χ(ℚ(√3,√11,√70)²) = 4`. The kernel already holds that both fields pass the test and that the
+  plane over their compositum needs five colours (`Instances/CompositumFive.lean`, FS-36 Phase C). These two values
+  would finish the statement "no combining rule for test-passing fields gives four" in the kernel.
 
 ## Two routes, as priced at minting
 

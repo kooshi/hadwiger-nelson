@@ -82,7 +82,7 @@ paths forward. Rewritten in place at every milestone close (WORKFLOW step 9); a 
 not update this section is not closed. The understanding the results add up to lives in § Grokkings, under
 the same rule.*
 
-*Last updated: 2026-09-10, at the M64 close.*
+*Last updated: 2026-09-11, at the FS-36 close.*
 
 ### Where the problem stands
 
@@ -91,7 +91,7 @@ the same rule.*
 `[propext, Classical.choice, Quot.sound]`.
 
 **What the kernel holds, beyond the interval** (the ledger below has each result and its address):
-**Theorems A and B** and the finite-plane machinery around them (rows 52–60); the compulsion toolkit —
+**Theorems A and B** and the finite-plane machinery around them (rows 52–60); Theorem A's two-colour case and the 2-adic splitting of real multiquadratic fields, with two test-passing fields whose compositum needs five colours (row 63); the compulsion toolkit —
 arity floor, homogeneity, the spindle theorem, critical sets, absorption, additive rigidity (rows 42–51);
 **the χ ≥ 6 target as a theorem** — χ(ℝ²) ≥ k + 1 follows from a k-colour virtual edge at √3 AND one at 2,
 never either alone, and over the distance set {1, 2} a single five-colour √3 gadget gives χ(ℝ²; {1,2}) ≥ 6
@@ -136,7 +136,7 @@ formulation); Theorem B, which closes Madore's 4 ≤ χ ≤ 5, answers Moorhouse
 plane freedom at every prime p ≡ 3 (mod 4); every kernel certificate. **Not ours:** the finite-plane bound
 and χ(𝔽₁₁²) = 5 (Moorhouse, Manturov, Madore); the unit argument and the 1/k obstruction (Fischer); ω and
 ω ≠ χ on finite planes (Vinh, Krebs, Schneider–Silva); the cell family's ≥ 7 floor (Sokolov–Voronov); the
-observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz).
+observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz); the two-colour mechanism over fields (Woodall, Fischer, Moorhouse, Madore); the multiquadratic decomposition (ChatGPT, credited in row 63).
 
 ### The novel-results ledger
 
@@ -209,6 +209,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 60 | **Plane freedom**: rotations by circle points are automorphisms of `unitQuadrance R` (`rotHom`, `quarterTurnHom`); over a field where −1 is not a square a vector and its quarter turn span the plane; so **over ZMod p with p ≡ 3 (mod 4), `Forces ↔ x = y` whenever the plane is k-colourable** (`finitePlane_forces_iff`) — without colourability the statement is false (`finitePlane3_not_colorable_two`). Prime fields only; the virtual-edge half is proved only at 11. | `PlaneRotation.lean`, `Instances/PlaneFreedom.lean` | 2026-09-09 |
 | 61 | **Statements at their proofs' level**: the six-target is colour-generic (`seven_le_chromaticNumber_plane_of_forced_pairs`: two six-colour gadgets give χ ≥ 7) and distance-set-generic, and over {1, 2} one √3 gadget suffices (`six_le_chromaticNumber_oneTwo_of_forced_sqrt3`); a passing brick certificate colours `distanceGraph ℂ D` (`chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine`); the old names are pinned by compiled type ascriptions. | `Instances/HexShell.lean`, `BrickDistance.lean` | FS-24 |
 | 62 | **Overcompression is an orbit-closure gap**: for an upward-closed refusal family and H ≤ Aut(A), the rung-H minimum equals min \|cl_H(M)\| over inclusion-minimal refusers M, so every symmetry rung is a hitting-set problem over H-orbits against the correction-set hypergraph Y, with no colouring ask. [tools] On `[Parts2020a]`'s L stage: 375 vertices / 3,264 minima at the trivial rung; a dead involution gives 376 with containment 0 of 1,302 — his §6 sentence reproduced at 375 and 376; S-side rungs cost 8 vertices where L's cost 1; Y accounts for every exclusion. **Prior art:** the symmetry gap of symmetric integer programming (`[HerrRehnSchurmann2013]`), idealness, semilinear sets, MUS/MCS enumeration (arXiv:2412.13606 — our 336 necessary atoms are its backbone). | `tools/parts_faces.py`, `tools/parts_reduce.py`, `data/m62/m64-*.json` | M64 |
+| 63 | **Two colours from inertia, and the 2-adic splitting of multiquadratic fields**: a residue map into a reduced characteristic-2 ring that conjugation does not move two-colours every unit-distance graph over its valuation subring (`colorable_two_unitDistance_induce_of_valuationSubring`); a square-class group holding [2] is the sum of two pieces whose 2-adic images avoid [−1], so every real multiquadratic field lies, once √2 is adjoined, in the compositum of two fields that pass the four-colour test (`fieldOfRadicands_le_sup`) — each holding a Moser spindle when the field contains ℚ(√3,√11); de Grey's field lies in ℚ(√2,√3,√11,√35)·ℚ(√3,√10,√11,√35); ℚ(√3,√11,√14) and ℚ(√3,√11,√70) pass the test and their compositum's plane needs five colours (`five_le_chromaticNumber_planeOver_fourteen_sup_seventy`), so, granted the factors' hand χ ≤ 4, no combining rule for test-passing fields gives four. **Not proved:** χ ≤ 4 for any piece (FS-37). [hand] For real multiquadratic F, χ(F²) = 2 iff no odd square class is ≡ 3 (mod 4). **Credit:** the decomposition is ChatGPT's (OpenAI, with Kooshi, 2026-09-11). **Prior art:** the mechanism is Woodall's, `[Fischer1990]` Thm 8, `[Moorhouse2010]` Thm 7.1, `[Madore2015]` Prop. 3.9; the multiquadratic iff is unchecked against `[AxenovichEtAl2014]` and `[Johnson2006]`. | `TwoColourResidue.lean`, `SquareClass.lean`, `Instances/CompositumFive.lean` | FS-36 |
 
 ### Paths forward, ranked
 
@@ -236,15 +237,16 @@ session after that will be introducing our new angle on it"*):
 | 5 | FS-27 consolidation remainder — `plans/STUB-consolidation-remainder.md` | §2 the paper's two blockers; §3 the fourteen private copies of √3·√3 = 3 (last, alone, into a new leaf module), G5, G6, E2/E6/E7; §4 a three-way collapse; §5 record leftovers | none |
 | 6 | FS-23 the knowledge web — `plans/STUB-prior-art-web.md` | the seven lineages' citation graph; re-verify the older Fischer and Moorhouse attributions against the PDFs | none; stops G49 recurring |
 | 7 | FS-19 𝔭-adic classification of forbidden distances — `plans/STUB-padic-distance-classification.md` | `[Chow1993]`'s classification with v_𝔭(d²) in place of v₂(d²); does a colouring at N(𝔭) > 2 forbid only one valuation class? | low-medium |
-| 8 | FS-16 residue-allowed distances — `plans/STUB-residue-allowed-distances.md` | over a sealed field, virtual edges only at d² ≡ 1 (mod 11), forced pairs only at 11 ∣ d²; the 51 undecided asks at residue norm 1 | low-medium |
-| 9 | FS-22 √7 phase pinning — `plans/STUB-sqrt7-phase-pinning.md` | Parts's four-colour construction with the Moser twist in place of his √5 step lands in ℚ(√3,√7,√11), a 6-open field | medium |
-| 10 | FS-13 the finite planes' 6-critical cores — `plans/STUB-finite-plane-cores.md` | cube-and-conquer autopsy objects for clique-free forcing | low-medium |
-| 11 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? (χ ∈ {5,…,8}) | medium as a frame |
-| 12 | FS-12 the hub scan as a design instrument — `plans/STUB-hub-scan-design.md` | a hub whose support is forced rainbow at five colours is a kill | medium-low |
-| 13 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not | medium, mechanism only |
-| 14 | FS-8 Haugland 7-adic check — `plans/STUB-haugland-7adic.md` | does the heptagonal 5-forcer's field have a degree-one prime above 7? | low-medium |
-| 15–17 | FS-9 topological bounds, FS-10 Nullstellensatz certificates, FS-5 bookkeeping | reading rooms and small loose ends | low |
-| — | FS-29 the overclaim check (unranked; rank it at the next close) | 67 theorems take a `Forces`/`Separated`/`Fan` hypothesis that is vacuously true when k colours are refused; hypothesis mutation — delete a binder, require the proof to break | none |
+| 8 | FS-37 the 2-adic criteria at the field level — `plans/STUB-field-level-criteria.md` | the kernel holds the four- and two-colour mechanisms for a given valuation subring; can it prove that a real multiquadratic field passing the test supplies one, or χ = 4 for FS-36's named factors? The gap is Theorem A's own | none; feeds FS-20's field section |
+| 9 | FS-16 residue-allowed distances — `plans/STUB-residue-allowed-distances.md` | over a sealed field, virtual edges only at d² ≡ 1 (mod 11), forced pairs only at 11 ∣ d²; the 51 undecided asks at residue norm 1 | low-medium |
+| 10 | FS-22 √7 phase pinning — `plans/STUB-sqrt7-phase-pinning.md` | Parts's four-colour construction with the Moser twist in place of his √5 step lands in ℚ(√3,√7,√11), a 6-open field | medium |
+| 11 | FS-13 the finite planes' 6-critical cores — `plans/STUB-finite-plane-cores.md` | cube-and-conquer autopsy objects for clique-free forcing | low-medium |
+| 12 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? (χ ∈ {5,…,8}) | medium as a frame |
+| 13 | FS-12 the hub scan as a design instrument — `plans/STUB-hub-scan-design.md` | a hub whose support is forced rainbow at five colours is a kill | medium-low |
+| 14 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not | medium, mechanism only |
+| 15 | FS-8 Haugland 7-adic check — `plans/STUB-haugland-7adic.md` | does the heptagonal 5-forcer's field have a degree-one prime above 7? | low-medium |
+| 16 | FS-29 the overclaim check — `plans/STUB-vacuity-coverage.md` §Phase C | 67 theorems take a `Forces`/`Separated`/`Fan` hypothesis that is vacuously true when k colours are refused; FS-36's mutation audit showed that deleting a binder the proof names always breaks, so the check needs a counterexample per binder | none |
+| 17–19 | FS-9 topological bounds, FS-10 Nullstellensatz certificates, FS-5 bookkeeping | reading rooms and small loose ends | low |
 
 **Closed as directions** (reasons in the grokkings): the cell family, in both directions (G29); extracting a
 gadget from an existing witness (G31); many spindles over one fabric (G40); designing in a finite plane and
@@ -451,7 +453,7 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
 * **G38 — The linear method's thresholds. [hand theorem; Fischer's framework]** Colouring by cosets of a
   subgroup avoiding the reduced norm-one group gives 2, 3 or 4 colours and then nothing below 7. With
   conjugation in inertia the reduced group is {±1}, so ℚ(√N)² with N ≡ 5 (mod 8) is bipartite
-  (`[Fischer1990]` Thm 8); ℚ(√3)² and ℚ(√7)² need 3; K² needs 4. The finite-plane bound sees 5 (G43); its
+  (`[Fischer1990]` Thm 8); ℚ(√3)² and ℚ(√7)² need 3; K² needs 4. Over a real multiquadratic field the two-colour case is exact: F² is 2-colourable iff no odd square class is ≡ 3 (mod 4) (hand; the mechanism is kernel, row 63), correcting `plans/FIELD-WALL-THEOREM.md` Prop. 6.4. The finite-plane bound sees 5 (G43); its
   usable primes are exactly those with residue field 𝔽_q, q ≡ 3 (mod 4). A 6-forcer's field is predicted by
   its construction (a spindle at forced distance d lands in F(√(4d² − 1))), not by linear arithmetic.
 * **G39 — Redundancy before rigidity. [kernel]** A forced-equal pair at χ(G) colours confines the critical
@@ -600,7 +602,7 @@ the emitted data. A generator bug can only produce data Lean refuses to certify.
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 810 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
+current audit reads 846 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
 holds none.
 
 | Entry | Status |
@@ -757,8 +759,8 @@ because a formalization that proves the *wrong* theorem is the characteristic fa
   `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
   not proved), which fail unconditionally before the baseline; `GENERIC` (parametric — the caller's
   obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
-  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6178 refutations-skipped=239
-  sites=217`, `vacuous=0 stale=0 declared=3 witnessed=12 generic=200 unknown=2`. The baseline's two entries,
+  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6261 refutations-skipped=242
+  sites=220`, `vacuous=0 stale=0 declared=3 witnessed=12 generic=203 unknown=2`. The baseline's two entries,
   `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
   `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
   at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`.

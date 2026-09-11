@@ -1120,3 +1120,91 @@ found. Total: 50 s wall.
     still FS-37's.
 - **Item 2, de Grey's factors identified with the general theorem's pieces: not attempted.** It would restate, as a
   32-case analysis, an identification `independent_check.py` already makes, and nothing consumes it.
+
+### R5 The gate, the read-aloud re-check, and the close
+
+**The acceptance test (§9), item by item.**
+
+| # | check | result |
+|---|---|---|
+| 1 | `./scripts/build.sh` | green twice: after Phases A and B (170 of 170 batches, 3 modules rebuilt, no warnings, 3 min 20 s; `build/gate/build/20260911T182913Z-2402713.log`) and after Phase C (2 rebuilt, no warnings, 3 min 21 s; `…/20260911T184104Z-2426352.log`) |
+| 2 | zero `sorry` | 0 in `TwoColourResidue.lean`, `SquareClass.lean` and `Instances/CompositumFive.lean` |
+| 3 | `./scripts/axioms.sh` | 810 → 846 clean, exactly the 36 registered: §9's 26, R2's 3, R4's 7. Every one is on `[propext, Classical.choice, Quot.sound]` or fewer; `map_mul_self_eq_one_of_mem_normOne_of_conj_eq` needs no `Classical.choice`. Declared purchases stay at 5, and the recorded count matches |
+| 4 | `./scripts/vacuity.sh` and `--self-test` | both green; counts accounted below; all seven planted controls fired, and the two silent ones stayed silent |
+| 5 | `tools/check_architecture.py` | PASS: 139 of 139 module rows, 0 import mismatches; the two rows lost "Skeleton (FS-36)" and gained row 63, and `Instances/CompositumFive` has a row |
+| 6 | `tools/bib_audit.py` | every cited work resolves; 0 unlogged |
+| 7 | spec examples, reds, mutation audit | all pass; the audit is R3 |
+| 8 | §7 re-read | below |
+
+**The vacuity counts, accounted.**
+- **sites 217 → 220 and generic 200 → 203:** the three new parametric sites the digest lists. They are
+  `normOneColoringTwo` (carrier `Γ.Coloring (ZMod 2)`) and the two certificate lemmas of R4 (carrier
+  `c.CoordsIn Q4.sevenFree`). Witnessed stays 12; the new witness evidence is `colorable_two_cycleGraph_four_of_gaussResidue`.
+- **refutations-skipped 239 → 242:** `minusOne_not_mem_spanThreeTwo`, `minusOne_not_mem_spanThreeTen` and
+  `minusOne_not_mem_map_inf_comap`. Measured by a scratch script that applies the gate's own filter (`isInternal`,
+  `isOurs`) to the three modules.
+- **declarations 6178 → 6261 (+83):** the same script counts **85** in the three modules (13 + 63 + 9). That includes
+  constants `simp` materialized there, such as `Q4.eval.eq_1`. The remaining −2 is not in the library: git shows no
+  other Lean module changed since the previous run at 11:03 UTC. It lies in the audit's count of itself, which commit
+  `3dfa643` changed sixteen minutes after that run. The committed script from before that change counts 71 of its own
+  declarations against today's library (6332), so the 11:03 run used an uncommitted intermediate version. **Attributed
+  by elimination, not reconstructed.**
+- `scripts/vacuity-baseline.txt`'s header and `CLAUDE.md` § The gate carry the new counts; a re-run reports both as
+  matching.
+
+**§7 re-read against the finished statements.**
+- **`colorable_two_unitDistance_induce_of_valuationSubring`:** the statement is the skeleton's, unchanged, and §7's
+  paragraph reads true, including what it does not say.
+- **The decomposition:** the three statements §7 reads are unchanged. Its note "`A, B ⊆ F(√2)` … worth one `example`"
+  is now a named lemma (`fieldOfClasses_inf_comap_le_fieldOfRadicands`). The handoff's `K ⊆ A, B` is
+  `seamField_le_fieldOfClasses_inf_comap`. Both are clauses of `multiquadratic_decomposition`, which now matches the
+  handoff's sentence clause for clause except `χ ≤ 4`.
+- **De Grey's field:** §7's heading uses the pre-rename `minusOne_not_mem_map_classGroup_…`. The finished names are
+  `map_twoAdic_deGreyTwo_le` and `map_twoAdic_deGreyTen_le`, which state containment in `spanThreeTwo` and `spanThreeTen`;
+  the test itself is drawn in an `example`. The paragraph reads true.
+- **Phase C, read aloud:** *the 2-adic classes of `ℚ(√3,√11,√14)` lie in a subgroup avoiding `[−1]`, as do those of
+  `ℚ(√3,√11,√70)`, and the plane over their compositum needs at least five colours.* Against the handoff's "each
+  4-chromatic, compositum 5-chromatic":
+  - the test on each factor and `χ ≥ 5` for the compositum are kernel;
+  - `χ ≥ 4` for each factor is one line from `four_le_chromaticNumber_planeOver`;
+  - each factor's `χ ≤ 4` (the dyadic criterion) and the compositum's `χ ≤ 5` (the 11-plane reduction) are hand, and
+    the docstrings say so.
+
+**Predictions (§11), scored.**
+
+| # | prediction | measured | verdict |
+|---|---|---|---|
+| P1 | Phase A ≤ 180 code lines | 29 added (100 total) | holds |
+| P2 | Phase B ≤ 430 | 229 added (401 total) | holds |
+| P3 | `isSquare_of_sqClass_eq_zero` is B's longest leaf | 19 proof lines; the `[7]` red 18 | holds, narrowly |
+| P4 | nothing Kummer-theoretic beyond the two leaves | none | holds |
+| P5 | no existing module edited but `Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean` | none; Phase C added a new module | holds |
+| P6 | `frobenius_inj` in ≤ 3 lines | 1 | holds |
+| P7 | local splitting ≤ 25 lines, by cases | 2 + 11 | holds |
+
+**What the close recorded (§10).**
+1. **Ledger row 63**, in the draft's words, plus Phase C's clause ("…their compositum's plane needs five colours, so,
+   granted the factors' hand `χ ≤ 4`, no combining rule for test-passing fields gives four"), and "Not proved: `χ ≤ 4`
+   for any piece". `CLAUDE.md` is 85,976 characters.
+2. **`CLAUDE.md` § Frontier:**
+   - the kernel-holds summary names row 63;
+   - the not-ours list gains the two-colour mechanism and the credited decomposition;
+   - G38 gains the two-colour iff and its correction of Proposition 6.4;
+   - FS-37 is ranked 8 and FS-29 16;
+   - "What the hunt has established" gets no clause: this is not hunt material.
+3. **`plans/FRONTIER-STUBS.md`:**
+   - FS-36 is closed;
+   - FS-37 is ranked 8, just below FS-19, with the ranks below it shifted;
+   - **FS-29 is ranked 16**, because the file told this close to rank it, and its row now carries R3's finding.
+   - A check on the written file found 37 rows, with FS-1 … FS-37 each exactly once.
+4. **`CLOSED-QUESTIONS.md` §2.3**, the main session's default section: `[Krebs2022]` Remark 2.3 and `[Fischer1990]` §1,
+   with Benda–Perles 11.6 as bearing. Answered at the value 2 for real multiquadratic fields, as a hand theorem with its
+   mechanism in the kernel; `[AxenovichEtAl2014]` and `[Johnson2006]` are named unread. Moving it to §1 is Kooshi's call.
+5. **`plans/STUB-theorem-B-writeup.md` §2b:** the decomposition with its credit line; the two-colour companion to
+   Theorem A; the Galois connection as the dictionary.
+6. **`plans/STUB-consolidation-remainder.md` §5:** `tools/fplane.py usable` must test the whole square-class group.
+7. **`reference/ChatGPT-multiquadratic/VERIFICATION.md`:** §2 rows 4 and 9 and §4 now say kernel for what landed.
+8. **`plans/STUB-field-level-criteria.md` (FS-37)** gains Phase C's two factors as instances that would finish the
+   combining-rule statement in the kernel.
+- **`[AxenovichEtAl2014]`:** the preprint was not at `~/source/library/pdf/` at the close, so its read status and row
+  63's prior-art clause stay "unchecked".

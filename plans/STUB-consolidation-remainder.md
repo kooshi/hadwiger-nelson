@@ -103,6 +103,9 @@ fourteen radical copies happened.
 * **The three-way inconsistency in `G30`'s instance count** is repaired (P3's two additions are the fourteenth
   and fifteenth, P4's the sixteenth, P6's the seventeenth) — recorded here because three agents each counted
   correctly from what they could see, and only the coordinator could see all three.
+* **`tools/fplane.py usable` tests radicands one at a time** (found at FS-36; `reference/ChatGPT-multiquadratic/VERIFICATION.md`
+  §3). `--rads 22,33` wrongly passes at 11, because each radicand is tested alone and both are divisible by 11. The
+  check must test the whole square-class group the radicands span, not each radicand.
 
 ## 6. Cost, order, bearing
 

@@ -171,6 +171,25 @@ empty**, which is the fact the paper exists to repair.
   parenthetical: ***"which the author has not found the courage to try to formulate under the most general
   auspices."*** **Theorem A is that formulation.** That sentence should appear in the introduction.
 
+## 2b. Material from FS-36 for the field section (kernel-checked 2026-09-11, ledger row 63)
+
+- **The decomposition is a candidate proposition.** Every real multiquadratic field, once `√2` is adjoined, lies in the
+  compositum of two fields that pass the 2-adic four-colour test, each containing `ℚ(√3,√11)` when the field does
+  (`SquareClass.fieldOfRadicands_le_sup`, bundled for reading aloud as `multiquadratic_decomposition`). Its credit line,
+  verbatim: *a corollary of the 2-adic four-colour criterion (`plans/FIELD-WALL-THEOREM.md` §6.2), stated and proved by
+  ChatGPT (OpenAI) in conversation with Kooshi, 2026-09-11; no prior statement found.* It colours nothing. Its content
+  is that a combining rule "`χ(A²), χ(B²) ≤ 4` implies `χ((AB)²) ≤ c`" for test-passing fields would bound every
+  multiquadratic plane. The kernel shows `ℚ(√3,√11,√14)` and `ℚ(√3,√11,√70)` pass the test while their compositum's
+  plane needs five colours (`Instances/CompositumFive.lean`), so, granted the factors' hand `χ ≤ 4`, such a rule
+  needs `c ≥ 5`.
+- **The two-colour case is Theorem A's natural companion** (`colorable_two_unitDistance_induce_of_valuationSubring`).
+  When conjugation lies in the inertia group, colour through an additive functional to `𝔽₂`. It replaces Madore's
+  "slight difficulty" in Prop. 3.9 (a coordinate-wise valuation over `ℚ₂(√2)`) with one hypothesis on the residue
+  map. At the field level, as a hand theorem, it answers `CLOSED-QUESTIONS.md` §2.3 for real multiquadratic fields.
+- **The Galois connection** between square-class groups and real fields (`gc_fieldOfClasses_classesOfField`) is the
+  field-to-class-group dictionary the field section needs anyway.
+- **Blocked as Theorem A is:** every field-level reading needs FS-37.
+
 ## 3. The credit table — the paper's spine, and non-negotiable
 
 **Every attribution below was re-verified against the source PDF on 2026-09-09**, not carried from a summary,

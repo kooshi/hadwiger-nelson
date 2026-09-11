@@ -230,6 +230,44 @@ holds at every usable prime — it gives `χ ≥ 4` at `p = 11`, where `χ = 5` 
 is stays open and ours to work (`CLAUDE.md` G44), outside this ledger; the finite-plane values the literature
 did pose are §1.5 and §3. The number is kept so that it is not reused.
 
+### 2.3 Which planes over real multiquadratic fields are 2-colourable
+
+> **`[Krebs2022]`** Remark 2.3, verbatim, on fields of characteristic zero: *"It might be interesting, however,
+> to try to find necessary and sufficient conditions for UD(F,n) to be bipartite for such fields."*
+>
+> **`[Fischer1990]`** §1, verbatim: *"This still begs the general question, however, whether some algebraic
+> criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree
+> over Q."*
+>
+> Bearing on the same family: **`[BendaPerles2000]`** Open Problem 11.6 (via `[Soifer2024]` ch. 11; restated in
+> `[GrahamTressler2010]` §3), *"Find the chromatic number of ℚ²(√2) and, in general, of any algebraic extension of
+> ℚ²."*
+
+**What we have: the answer at the value 2, in dimension 2, for real multiquadratic fields, as a hand theorem.**
+For a real multiquadratic field `F`, `χ(F²) = 2` exactly when no odd square class of `F` is `≡ 3 (mod 4)` —
+equivalently, when the 2-adic image of `F`'s square classes contains neither `[−1]` nor `[3]`.
+- **"If":** conjugation then lies in the inertia group of the prime above 2 in `F(i)`, and an additive functional to
+  `𝔽₂` two-colours the plane (`plans/FIELD-WALL-THEOREM.md` §10.2; checked on all 16 subgroups of the 2-adic group,
+  `reference/ChatGPT-multiquadratic/VERIFICATION.md` row 4). The mechanism is **kernel-checked** in valuation-subring
+  form (`colorable_two_unitDistance_induce_of_valuationSubring`, ledger row 63). That a field meeting the criterion
+  supplies the valuation subring is **not** in the kernel (FS-37).
+- **"Only if":** an odd class `N ≡ 3 (mod 4)` puts `√N` in `F`, and `ℚ(√N)²` already carries an odd cycle
+  (`[Fischer1990]` Theorem 8).
+
+**The caveats that must travel.**
+- It answers Krebs's remark for `n = 2` and real multiquadratic `F` only, and Fischer's question only at the value 2.
+  Which such planes are 3-colourable is untouched.
+- The quadratic case of the iff is exactly `[Fischer1990]` Theorem 8. The mechanism is also Woodall's `χ(ℚ²) = 2`
+  (`[Woodall1973]`, second-hand), `[Moorhouse2010]` Theorem 7.1 (odd degree) and `[Madore2015]` Proposition 3.9
+  (`ℚ(√2)²`). What is new, if anything, is the multiquadratic iff.
+- **Two works that could contain the multiquadratic iff are unread:** `[AxenovichEtAl2014]`, whose abstract names
+  "extensions of the rational plane" and which is not held, and `[Johnson2006]`, which discusses `ℚ(√m)²` and is not
+  held. Until both are read, no novelty is claimed.
+- Nobody citing `[Krebs2022]` has answered the remark (OpenAlex and Semantic Scholar, 2026-09-11).
+
+**Status:** answered for a class of fields, as a hand theorem with its mechanism in the kernel. Not written up;
+candidate material for FS-20.
+
 ---
 
 ## §3 — Adjacent and open
