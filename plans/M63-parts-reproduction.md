@@ -1245,8 +1245,69 @@ discriminator first; the fix for the log is already committed.
 
 *This also re-reads C4.0's own numbers.* Its 5.7 s and 8.7 s were taken on fresh solvers by design,
 minimum of three — which is why they are the right figures for a per-ask comparison and the wrong
-ones for a run forecast. The drop condition rests on them because the comparison they make is
-like-for-like: cold against cold, the frozen-companion stages measured the same way.
+ones for a run forecast.
+
+**CORRECTION, 2026-09-11, and it is mine.** An earlier draft of this section defended the drop
+condition as *"cold against cold, the frozen-companion stages measured the same way"*. **That is
+false.** C4.0's joint figures are cold; the frozen-companion baseline beside them (0.006–0.009 /
+0.02–0.108) is read off the stored records' `asks` block, which is the **in-run mean over a whole
+run on one incremental oracle** — warm. So the 16–88× that fires the condition behind four drop
+rows is computed **across the warm/cold seam**, the very seam this section establishes is worth up
+to three orders of magnitude. The missing cell — a cold refusing ask on a frozen-companion stage —
+was never measured, and I asserted its absence away.
+
+What can be said before the measurement lands:
+
+- **warm against warm**, both already on record, does *not* obviously clear tenfold: joint in-run
+  0.023 / 0.27 against frozen-companion in-run 0.006–0.009 / 0.02–0.108 is about 3× cheap and
+  3–13× expensive — straddling the threshold;
+- **cold against cold** is the comparison the condition needs, and is under measurement.
+
+**And the "third regime" above is not yet attributable to warm-up** (Poros, card 14). The two
+numbers that produced it differ in the **pin** as well as the stage: `frames` builds its stages
+with `pin=False` and measured 186–229 s, while C4.0 builds through `Stage.cnf` with **the pin ON**
+and measured 5.7 s. §5.9's pin and radial ordering are worth a reported 10× and live exactly where
+the CNF is built, so *cold* and *missing an accelerator* are indistinguishable in this log — the
+same shape as the other four instruments. The run under way asks one cold refusing ask on four
+stages with the pin on and off; **until it lands, the warm-up reading in this section is a
+hypothesis, not a result.**
+
+**Three quantities, one threshold, and they have come apart** (Poros's reading, adopted verbatim
+because it outlives this phase):
+
+| quantity | reads | governs |
+|---|---|---|
+| absolute in-run cost | 0.029 / 0.27 s | run duration, the resume path, scheduling |
+| the warm refusing-to-colourable asymmetry | 0.27 / 0.029 ≈ **9×**, close to his own 1 s against 10 s | whether 8-4-2-1's premise holds — **it survives warm**, so the lever fails on card 12's structure, not on the asymmetry |
+| the warm/cold ratio | 32× to 2,000× | whether parallelism helps at all — and it argues against fanning out on this family |
+
+**The risk to name for F and G:** *if a later phase re-instates the parallel sweep because "costs
+rose", it will be using the first quantity to decide a question governed by the third.* M62 §R21
+measured only a 2× per-ask loss on its own family and still capped the speedup near half the core
+count; at 10²–10³ a cold worker discards a state worth more than the parallelism buys.
+
+### R2.4b — Which gated row the tenfold condition actually governs: none of them
+
+*Poros's card 15, answered by derivation over quantities already measured — no asks. The condition
+was attached to every proposed drop as one dial; each row turns out to have its own quantity, and
+three of those are now measured.*
+
+| gated row | what its need is actually governed by | current reading | verdict |
+|---|---|---|---|
+| **B-8** cyclic implication chain for mono-sets | per-ask cost **on the stage phase E will build** (a √3 triple), not on the joint stage | warm in-run refusing 0.27 s here; E's stage unbuilt | the closest thing to a cost row — and the measured number still does not govern it, because it was taken on a different object |
+| **B-11** each lever measured against a recorded trace | **comparability with his attested timings**, not our cost | his 0.2 s for √3 triples was measured *with* the five-vertex assignment (§5.9) | not a cost row; the condition is provenance, and a timing compared with his must say whether that lever was on |
+| **D-6** the level in parallel | the **warm/cold ratio** | 32× – 2,000× | not a cost row, and its own quantity argues **against** fan-out rather than for it |
+| **X-7** the `2^m` level-forecast guard | the level's **size** and the enumeration's shape | the joint level at 509 holds ≥ 13k raw L-minima | not a cost row at all |
+| **B-4** pendant companions | superseded **structurally** — `Aut(W ∪ C)` is trivial on type-M stages | — | never a cost question |
+| **M64-6** idealness of `Y` | needs a **complete** `Y`; off the record path | — | never a cost question |
+| *(B-12, 8-4-2-1)* | *no longer a drop*; killed by card 12 on singleton density, not by cost | 423 of 576 atoms are singleton correction sets | the warm asymmetry (9×) leaves his premise intact; the structure does not |
+
+**So no gated row's need rises and falls with per-ask cost on the object the condition was measured
+on.** The tenfold dial has been a proxy standing in for four different questions, and the decision
+it produced — the cost-control rows return for D, F and G — is right for those rows for *their own*
+reasons, not for the one the dial measured. **F and G inherit this table rather than the dial**, so
+that a later "costs rose" cannot move a row it does not govern. The cold-against-cold pair is still
+worth having, as the per-ask figure it is and nothing more.
 
 **The condition attached to the seven proposed drops ("if they rise tenfold or more, the
 cost-control items come back") is judged on C4.0's quiet numbers**, which are decisive (16–88×) and
