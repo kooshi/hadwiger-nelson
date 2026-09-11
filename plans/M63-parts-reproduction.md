@@ -291,9 +291,14 @@ Acceptance:
   subtype at 18 edges, and `(20,0,0,4)`, `(16,0,6,2)` (FS-30's cheap lead); (e) the loop continued past
   his stopping point from a larger reserve; (f) symmetric seeds from the rung lattice; **(g) his own
   negative on the disk radius** — *"expanding the base graph and increasing the radius of the disk did not
-  lead to new results in our case"* (§5.6) — which he measured **inside his own loop, under his own
-  stopping rule, at about 100 laptop hours**; at 150× his reduction speed it is cheap to re-test, and a
-  radius is exactly what hid 37 of Heule-510's own points from M62's arena (§R22).
+  lead to new results in our case"* (§5.6). **The radius half is STRUCK, 2026-09-11: the question is
+  answered without a run.** Under all three readings of his admission rule **zero** orbits outside his
+  `r = 2` disk qualify, on all three accumulators; and the deflation was tested — thirteen excluded orbits
+  sit *closer* to his boundary than the `√5` pair and all score lower, so **admissibility is not ordered by
+  radius**. His negative is therefore a fact about his **filter**, not his **disk**
+  (`plans/M63-phaseD-the-loop.md` §X.3, from the phase D advisor's P5). What remains of (g) is the
+  **base-graph half** — `⊕ⁿHᵐ` variants — and phase D tests the claim at **two runs** through the `√5`
+  orbit on each half rather than at a radius sweep.
 
 *Cost:* open-ended; an experiment is 1 h – 1 day of compute; a certificate about a day.
 
@@ -1218,6 +1223,31 @@ on a solver that keeps every clause it learns. The gap is about six-fold, and a 
 the isolated figures overstates a real run by that factor — which was most of the six hours Poros's
 card 11 forecast for C4a.
 
+**And there is a THIRD regime, an order of magnitude worse than either, which phase C found by
+accident and phase D must not.** `parts_stage.refuses` builds a fresh solver per call. Measured on
+the M6B pair (`v375e1916` against a framed `v141e594`, 544 vertices, a FROZEN companion — the cheap
+kind of stage):
+
+| the same stage, refusing ask | cost |
+|---|---|
+| warmed incremental oracle, mid-run | 0.02 – 0.11 s |
+| cold fresh solver (`PS.refuses`) | **186 s, 229 s** (two elements; a colourable one took 0.49 s) |
+
+That is not a six-fold gap, it is about a thousand-fold, and it is entirely the warm-up: the same
+instance, the same solver, the same machine. **The colourable direction stays cheap cold** (0.49 s),
+which is why nothing noticed until a search asked the refusing direction twenty-four times.
+
+The consequence, measured rather than inferred: `frames --refuses-with` costs **~40 minutes** on
+this pair, because 12 of the 24 frames refuse (§S.2 #7) at ~200 s each — and that, not a wedge, is
+what phase C3 spent its first forty minutes doing behind a log that said nothing (§R2.5). **The fix
+for phase D is one incremental solver per frame search rather than one per ask**, or asking a cheap
+discriminator first; the fix for the log is already committed.
+
+*This also re-reads C4.0's own numbers.* Its 5.7 s and 8.7 s were taken on fresh solvers by design,
+minimum of three — which is why they are the right figures for a per-ask comparison and the wrong
+ones for a run forecast. The drop condition rests on them because the comparison they make is
+like-for-like: cold against cold, the frozen-companion stages measured the same way.
+
 **The condition attached to the seven proposed drops ("if they rise tenfold or more, the
 cost-control items come back") is judged on C4.0's quiet numbers**, which are decisive (16–88×) and
 were taken in the right regime: minimum of three, CPU seconds, nothing else running. The in-run
@@ -1270,6 +1300,23 @@ including the centre**. His decomposition `2442 = 1860 + 564 + 12 + 6` is our
 `1860 + 552 + 12 (centre) + 12 (reference) + 6 (auxiliary)`. The audit now compares `e_S_his`, and
 the convention is written into the function rather than into a comment somewhere else. **A false
 `differs` is as damaging as a false `agrees`**, and this one was waiting inside the S-side audit.
+
+### R2.6b — Which edge number an audit row means, now that the secondary bar has moved
+
+`[deGreyParts2023]` footnote 2 discards 36 edges from the 509 without an exhaustive search, so
+**the published edge state at 509 vertices is 2,406, not 2,442** (§S.1, corrected in place by the
+product owner 2026-09-11). Two different numbers are therefore in play and every row that quotes
+one must say which:
+
+- **2,442** is `[Parts2020a]`'s own decomposition of his own object — `1860 + 564 + 12 + 6` — and it
+  is what c5.5 and c4.1 reproduce. Every edge comparison phase C makes is of this kind: against his
+  Table 1 **per-row** ranges (`L375` 1920–1930, `S136` 564–567), never against a record bar.
+- **2,406** is the bar a *secondary* record must beat at 509 vertices. Nothing in phase C is
+  compared against it, and nothing in phase C claims it.
+
+So R2.6's accounting sentence stands as written — it is about his decomposition — and the audit's
+`edge_profile` compares `e_L_his` / `e_S_his` against transcribed Table 1 rows, which are untouched
+by the footnote.
 
 ### R2.7 — What phase C did NOT do, stated as such
 
