@@ -1,5 +1,7 @@
 # FS-36 — The multiquadratic handoff folded in: two colours from inertia, and the 2-adic splitting
 
+> **Approved by the main session on 2026-09-11, with all 22 decisions standing.**
+
 *Opened 2026-09-11. WORKFLOW steps 3, 3a and 4 by the planning agent; step 5's modeling passes are §M1–§M3 at
 the end, and **§1–§11 already describe the shape after them**. Steps 7–10 belong to the implementer, who starts
 from this file and remembers nothing of the conversation that produced it. The source and its verification are in
