@@ -1118,3 +1118,162 @@ only at its end"*, because the loop logged on `OPTIMUM FOUND` and every fifth mi
 else. It was killed and rebuilt with a time-gated per-iteration line carrying the rising lower
 bound, the two ask populations with their separate means, and a tick inside the correction-set
 shrink; only then was it possible to see that the bound was climbing 118 → 135 rather than stuck.
+ shrink. The lesson generalised into the house rule this milestone now runs under.
+
+---
+
+## §R2 — Phase C: what ran, what fired, and what every registered prediction scored
+
+*Written 2026-09-11 by de Bruijn (the phase C implementer) as the phase ran, on the machine (the
+32-core desktop, 125 GB). The subplan is `plans/M63-phaseC-joint-stage.md`; its §6 is the acceptance
+checklist this section answers box by box. The product owner's §A.2 redirection set the order: the
+cross-edge law, the ask wall, exact resume, the minimum driver, C4's three controls, the predictions
+committed, the announcement, the launch — then everything else while the run goes.*
+
+### R2.1 — The scoring of every registered prediction (subplan §4)
+
+| # | registered | measured | verdict |
+|---|---|---|---|
+| P-C1.1 | both regenerations are `regenerated-identical` on minima, bound and `A`; **`Y` identical too** | L451 and S166 both `regenerated-identical` on stage fingerprint, bound, verdict, `M_vertices`, `A`, `A_atoms`, level size and the minima as a set. `Y`: 719 against 703 on L, 759 against 773 on S, differing both ways | **met on the level, FALSIFIED on `Y`** — and the falsifier was already in the plan: §O2 proves the harvest is a launch artifact, so the prediction demanded something the same subplan had shown could not be demanded. Recorded as a lesson about registering a prediction against a proof one already holds |
+| P-C1.2 | PySAT's `cadical153` honours `interrupt()` | it raises `NotImplementedError('Limited solve is currently unsupported by CaDiCaL')` — from inside the timer thread, where the exception is printed and swallowed while the ask runs on | **FALSIFIED, and worse than its own falsifier.** The registered falsifier was "the 1 ms wall returns unsat"; the truth is that the wall does not return at all. Replaced by a conflict-budget loop (R2.3) |
+| P-C4.0 | the joint stage's asks rise above the frozen-companion stages but **stay under a second** (Poros, 0.60) | quiet, min of three, CPU: full working graph **5.73 s** refusing, the record's own selection **8.74 s** refusing, the record minus one atom 0.008 s; phase-1 population 0.170 s colourable / **1.758 s** refusing against 0.006–0.009 / 0.02–0.108 | **FALSIFIED on the expensive population** (16–88× and seconds, not tenths), **met on the cheap one** (20–28×, still under a second) |
+| P-C5.1 | the explicit law reproduces the L451 fingerprint and the record's 2,442 edges at no measurable cost | fingerprint `0700718c70107448b8658a630c5456ee` unchanged; the record stage rebuilds at 509 / 2,442; 126 ordered cross edges on the base under both laws | **met** |
+| P-C4.1 | the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is exactly 509 vertices (planner 0.60, Poros 0.65) | *pending — C4a* | *pending* |
+| P-C4.2 | if 509, every minimum found splits as (374, 136) | *pending — C4a* | *pending* |
+| P-C4.3 | phase 1 < 60 s; the bound closes within 90 minutes; ≥ 1,500 correction sets | phase 1: **85 s** (576 asks) — outside the registered 60 s | *partly scored; the rest pending* |
+| P-C4.4 | C4b, the second relative frame, also closes at 509 (0.5, no higher) | *pending — C4b* | *pending* |
+| P-C2.1 … P-C2.7 | the S166 and L451 audits, the shading, Tables 5–7, `Y`, the open rungs, the involution class | *pending — C2* | *pending* |
+| P-C3.1, P-C3.2 | the M6B level and the "M6A&B" column | *pending — C3* | *pending* |
+
+### R2.2 — The joint stage, and the controls whose answers were known in advance
+
+**c4.1, the positive control, fired in its strongest form.** Over the record itself with both halves
+deletable: verdict **`no-reduction`**, minimum **508 atoms + the shared centre = 509 vertices**,
+**exactly one minimum** (`exhaustive-level`, 0 undecided), phase-1 census **508 critical, 0
+droppable, 0 unknown**, 58 s. The answer is a theorem given his published minimality of 374 against
+`S136` and 136 against `L374` plus upward closure (§O9), so this is a control with a derived
+expectation rather than a hope. **It also discharges B-10's unchecked half**: every single-vertex
+deletion of the record, on either side, is colourable — and that is what "0 droppable" says.
+
+Poros's sharper form earned its keep: *"it refuses"* would have passed on a stage carrying spurious
+cross edges; *508 critical with exactly one minimum* would not.
+
+**The planted S-omission fired solver-free.** The bug (`deletable = Lbits & ~centre` for `"LS"`) is
+literally the L-only stage's deletable set, so building it gives 373 atoms over one half and the
+control reports `joint-stage-omits-a-side`. Planting the bug rather than a stand-in for it means no
+solver's mood can explain the result away.
+
+**c4.2** `pin-agrees-everywhere` on the joint stage over `A412 ∪ ρ·g⁻¹(A166)`, 12 checks.
+**c4.3** `joint-degenerates-to-L`: 20 of 20 seeded selections agree verdict for verdict between the
+joint stage with every S atom forced kept and the L-only stage over the same working graph.
+
+**A control that came free and is worth more than either planted one.** The joint working graph
+contains the record, so the record's own 508-atom selection is a near-optimal ask whose verdict is
+known in advance — it refuses — and the record minus one atom is colourable. Both fired, on a stage
+built independently of c4.1's.
+
+### R2.3 — The ask budget is a conflict budget, and why that is a finding
+
+The subplan specified `solve_limited(expect_interrupt=True)` with a `threading.Timer` calling
+`interrupt()`, and told the implementer to query it first. On PySAT 1.9.dev15, **CaDiCaL implements
+neither `interrupt()` nor `clear_interrupt()`** — both raise `NotImplementedError`. The timer thread
+*does* run during the solve, so in production the exception is raised inside that thread, printed to
+stderr and swallowed, while the ask continues: **a wall that silently does nothing**, which is the
+failure this repository's standard names first.
+
+What CaDiCaL does honour is `conf_budget` + `solve_limited`, and the control that says so is
+two-sided: an easy instance returns a real verdict under a budget of 10⁹, a hard one returns
+`unknown` at 1,000 conflicts. So `unknown` is neither impossible nor automatic. A bounded ask is now
+a loop over conflict slices under a time wall — deterministic per slice, learned clauses kept across
+slices, and free in the normal regime, where the first slice decides every ask (measured: c4.1 used
+exactly 509 slices for its 509 budgeted asks).
+
+**The wall's true granularity, which is the price of losing `interrupt()`:** the full-graph refusal
+uses 95,301 conflicts in 5.74 s CPU, i.e. **16,613 conflicts per CPU second**, so one
+100,000-conflict slice is **about 6 s**. That is the most a time wall can overshoot by, and it is
+recorded beside the budget in every record.
+
+Glucose, MiniSat, MapleChrono and MergeSat *do* honour `interrupt()`; CaDiCaL 1.5.3 is measured best
+on this workload (§7), so the solver stays and the mechanism changed.
+
+### R2.4 — Two ask-cost regimes, and which one the drop condition rests on
+
+| population | frozen companion (L451 / S166) | joint stage, **quiet, min of 3, CPU** | joint stage, **in-run**, one incremental solver |
+|---|---|---|---|
+| colourable | 0.006 – 0.009 s | 0.170 s | **0.020 – 0.023 s** |
+| refusing | 0.02 – 0.108 s | 1.758 s (single asks 5.7 – 8.7 s) | **0.20 – 0.28 s** |
+
+**These answer different questions and neither is wrong.** A fresh solver, minimum of three, is the
+right way to measure one ask reproducibly; it is the wrong way to forecast sixteen thousand of them
+on a solver that keeps every clause it learns. The gap is about six-fold, and a forecast built from
+the isolated figures overstates a real run by that factor — which was most of the six hours Poros's
+card 11 forecast for C4a.
+
+**The condition attached to the seven proposed drops ("if they rise tenfold or more, the
+cost-control items come back") is judged on C4.0's quiet numbers**, which are decisive (16–88×) and
+were taken in the right regime: minimum of three, CPU seconds, nothing else running. The in-run
+means corroborate and do not carry the verdict — they were taken with up to eight other Python jobs
+on the box, and that load is recorded with them rather than reported as clean. **The conditional
+mechanism has fired**: B-8, B-11, D-6 and X-7's guard come back for D, F and G, with this
+measurement as their stated reason. That is the condition working, not a reversal.
+
+**8-4-2-1 would have LOST on this phase 1, and the reason generalises** (Poros cards 11–12, and his
+correction to my model). A batched group clears in one ask only when the union of its deletions
+contains no correction set; being droppable *one at a time* is that statement for singletons only,
+so per-atom density overestimates the clear rate. On the joint stage 423 of 576 atoms are singleton
+correction sets, so a group of eight drawn anywhere contains one almost surely and must be split
+8 → 4 → 2 → 1 at up to fifteen asks where eight would have done; on the record stage every atom is
+critical, so every group splits to the bottom. **The sharpened, zero-ask form goes to phase D**: on
+the stored `Y`, what fraction of eight-subsets *of the non-necessary atoms* has a `Y`-independent
+union, under the natural order and under an order built inside a maximum independent set of `Y`, and
+what does it look like at group sizes 2 and 4? That is answerable with no solver at all.
+
+### R2.5 — Four instruments, one failure shape
+
+Four instruments failed in this phase, each caught by its owner, and **all four said "nothing to
+see" when what they meant was "I could not see"**:
+
+1. the ask wall that could not fire and reported nothing (R2.3);
+2. the exception raised inside a timer thread, printed and swallowed, while the work continued;
+3. **my own c1.3 control**, which asked the same question twice on one solver and read a verdict —
+   the repeat came back from learned clauses at zero conflicts, so the one-conflict budget never
+   bit. *A limit that cannot fire looks exactly like a limit that is generous.* Fixed by asking on
+   a fresh solver, and paired with a positive half: the same ask under no budget then returns
+   `unsat` on the same solver, so an exhausted budget leaves the oracle usable;
+4. **the process-group file, twice**, which recorded the pid of the `setsid` wrapper rather than the
+   job. `setsid` forks when the caller is a process-group leader, and **its own argv contains the
+   python command line**, so a `ps` resolution taken seconds after launch matches the wrapper. Both
+   times the monitor reported a healthy job dead — once after gathering the full log, the surviving
+   processes, the checkpoint and the kernel log, which is the only reason it did not enter the
+   record as a crash. The fix is the one `CLAUDE.md` already prescribes and I reached past: **the
+   job writes its own pid and then `exec`s**, so the file cannot hold a wrapper.
+
+A fifth, smaller: `parts_run.frames --refuses-with` builds and asks 24 stages and **logs nothing
+while it does**, so C3 sat at 99 % CPU with an empty log for twenty minutes. It takes a `log`
+parameter it never calls. Phase D should fix it before using that path in a loop.
+
+### R2.6 — The accounting convention that would have manufactured a disagreement
+
+Comparing our `e(S)` against his Table 1 reads **552 against his 564** — and both are right. The
+shared rotation centre is an L-side vertex in our arena (the S-side copy is forbidden), so the 12
+centre-to-S edges are booked as cross edges here, while **he counts the S-subgraph as 136 vertices
+including the centre**. His decomposition `2442 = 1860 + 564 + 12 + 6` is our
+`1860 + 552 + 12 (centre) + 12 (reference) + 6 (auxiliary)`. The audit now compares `e_S_his`, and
+the convention is written into the function rather than into a comment somewhere else. **A false
+`differs` is as damaging as a false `agrees`**, and this one was waiting inside the S-side audit.
+
+### R2.7 — What phase C did NOT do, stated as such
+
+- **`--verify-checkpoint` is not wired.** A corrupted or hand-edited checkpoint would restore
+  unverified correction sets, and an unverified correction set is the one direction that could make
+  a lower bound unsound (a *stale* `Y` cannot: fewer constraints admit more candidates, and every
+  candidate is verified by an ask before it is recorded). Our correction sets are verified by
+  construction, so this matters only for a checkpoint that has been moved or edited. Not done.
+- **The Table 2/3 shading is not extracted**, so the stable/unstable partition is **unattested**.
+  The ranges do not depend on it, and every orbit row carries its status measured on *our* level
+  (`stable` / `unstable-constant-count` / `unstable-varying-count`), which is a statement about our
+  object either way. `parts_audit.table_shading` refuses through §E3's path rather than guessing.
+- **Tables 3–7 are transcribed only as far as the A-column check needs**; Table 4's `deg` column is
+  ambiguous in the layout dump and was not hand-typed, because a mis-parsed column is exactly the
+  error the audit exists to catch.
+
