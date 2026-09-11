@@ -120,6 +120,7 @@ import Proofs.HadwigerNelson.SeamCert
 import Proofs.HadwigerNelson.ValuationLaw
 import Proofs.HadwigerNelson.TwoColourResidue
 import Proofs.HadwigerNelson.SquareClass
+import Proofs.HadwigerNelson.Instances.CompositumFive
 
 /-!
 # Proofs

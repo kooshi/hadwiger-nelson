@@ -1056,3 +1056,67 @@ rewritten. "Code lines" means non-blank lines outside comments and docstrings; "
     have broken the proof, and a deletion audit would have scored it load-bearing although the truth does not need
     it. It is the same kind of side condition D16 removed. The fix costs two lines, and its two callers drop an
     argument.
+
+### R3 The mutation audit (§8 trap 8, §M2's extensions): 20 of 20 as expected
+
+The harness (`mutate.py`, kept in the session scratchpad, not committed) applied each mutation to the committed file at
+`4250187`. For each, it elaborated the file with `lake env lean -DautoImplicit=false`, restored it from git, and checked
+the restore with `git diff --quiet`. It refuses to start on a dirty tree and fails on a mutation whose target is not
+found. Total: 50 s wall.
+
+| id | mutation | expected | got | first message |
+|---|---|---|---|---|
+| T8.1 | delete the lifting lemma's hypothesis | break | break | unknown identifier `h` |
+| T8.2 | delete `h2` from the 2-adic splitting | break | break | unknown identifier `h2` |
+| T8.3 | delete `hψσ` from `map_mul_self_eq_one_of_mem_normOne_of_conj_eq` | break | break | unknown identifier `hψσ` |
+| T8.4 | delete `[CharP k 2]` from the first lemma | break | break | failed to synthesize an instance |
+| T8.5 | delete `h3` from the `χ ≥ 4` lemma | break | break | unknown identifier `h3` |
+| M2.1 | replace the `D ⊆ insert 2 D` step by a direct equation | break | break | type mismatch |
+| M2.2 | delete `hU` from the `χ ≥ 4` lemma | break | break | unknown identifier `hU` |
+| M2.3 | specialize the root iff at `m := 0` and derive "class 0 puts `√n` in every field" (D16) | green | green | — |
+| X.1 | delete `[IsReduced k]` from the first lemma | break | break | failed to synthesize an instance |
+| X.2 | delete `hl` from `normOneColoringTwo` | break | break | unknown identifier `hl` |
+| X.3 | delete `hσσ` from the valuation form | break | break | unknown identifier `hσσ` |
+| X.4 | delete `hS` from the plane form | break | break | unknown identifier `hS` |
+| X.5 | delete `hs : s ≠ 0` from `sqrt_mem_of_mul_eq_sq_mul` | break | break | unknown identifier `hs` |
+| X.6 | delete `h11` from `seamField_le_fieldOfClasses` | break | break | unknown identifier `h11` |
+| X.7 | delete `h2` from the local splitting | break | break | unknown identifier `h2` |
+| X.8 | delete `h3` from the bundled headline | break | break | unknown identifier `h3` |
+| X.9 | delete `hF` from `four_le_chromaticNumber_planeOver` | break | break | unknown identifier `hF` |
+| X.10 | delete `ha` from `sqClass_mul` | break | break | unknown identifier `ha` |
+| C.1 | **control:** add an unused hypothesis to `planeOver_seamField`, which nothing calls | green | green | the unused-variable linter warns |
+| C.2 | **control:** add an unused hypothesis to `colorable_two_cycleGraph_four_of_gaussResidue`, which nothing calls | green | green | the unused-variable linter warns |
+
+**What this audit can and cannot see.**
+- **It detects unused hypotheses.** Fifteen of the eighteen breaks are "unknown identifier", which proves only that the
+  proof names the binder. It does not prove that the truth needs the binder; `hn` in `isSquare_of_sqClass_eq_zero`
+  would have scored the same way (R2).
+- **Necessity comes from the reds and a counterexample for each remaining binder:**
+  - `CharP k 2`: the `ZMod 3` red.
+  - `hψσ`: the `F4` red.
+  - `h2` in the splitting: the `[7]` red.
+  - the lifting lemma's hypothesis: the `𝔽₂²` red.
+  - `hs`: with `s = 0`, `0 · 2 = 0 · 3` and `√0, √2 ∈ ℚ(√2)`, but `√3 ∉ ℚ(√2)`.
+  - `ha` in `sqClass_mul`: `sqClass (0 · 2) = 0 ≠ sqClass 2`.
+  - `hU`, `h3`, `h11`: `ℚ(√3, √11) ⊄ ℚ(√2)`, a hand fact that is not in the kernel.
+
+### R4 Phase C — item 1 landed; item 2 not attempted, by choice
+
+- **The condition held.** Phase A used 29 of its 180 predicted lines and Phase B 229 of 430, so the optional phase
+  ran.
+- **Item 1, Heule-510 in the compositum: landed** in a new instance module, `Instances/CompositumFive.lean`. It is not
+  in `SquareClass`, which stays a leaf with no Heule-510 data behind it. It is 76 code lines (stop rule: half a day)
+  and compiled on the first attempt.
+  - **The general step is stated for any valid `√7`-free certificate**: `UDCert.chromaticNumber_le_planeOver_of_sevenFree`,
+    through `Q4.eval_mem_of_mem_sevenFree` (the eight-component analogue of `SeamCert`'s bridge), with Heule-510 as its
+    named inhabitant.
+  - **The risk §8 named did not bite.** `UDCert.point` is `Pt.toPlane`, whose coordinates are `Q4.eval` over the
+    denominator, exactly as `SeamCert.point_mem_seamPlane` already used them.
+  - **`√5` enters through `sqrt_mem_of_mul_eq_sq_mul`** at `14 · 70 = 14² · 5`, the next-lemma test §M2 predicted.
+  - **What the kernel now holds:** `ℚ(√3,√11,√14)` and `ℚ(√3,√11,√70)` pass the 2-adic test (`map_twoAdic_fourteen_le`,
+    `map_twoAdic_seventy_le`), and the plane over their compositum needs five colours
+    (`five_le_chromaticNumber_planeOver_fourteen_sup_seventy`). So a combining rule
+    "`χ(A²), χ(B²) ≤ 4` implies `χ((AB)²) ≤ c`" for test-passing fields needs `c ≥ 5`. The factors' own `χ ≤ 4` is
+    still FS-37's.
+- **Item 2, de Grey's factors identified with the general theorem's pieces: not attempted.** It would restate, as a
+  32-case analysis, an identification `independent_check.py` already makes, and nothing consumes it.

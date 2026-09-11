@@ -1247,6 +1247,52 @@ pair at any colour count it admits — replacing the four measured instances of 
 #print axioms finitePlane11_forces_eq
 #print axioms finitePlane19_forces_eq
 
+/-! ## FS-36 — two colours from inertia, and the 2-adic splitting of multiquadratic fields
+
+`TwoColourResidue`: Theorem A's two-colour case in its ring, valuation and plane forms, the colouring as data, and
+the Gaussian-integer model. `SquareClass`: the plane over a real subfield, square classes and their 2-adic images,
+the Galois connection between class groups and real fields, the splitting, the field-level decomposition, and de
+Grey's field worked. -/
+
+#print axioms exists_addMonoidHom_zmod_two_apply_one_ne_zero
+#print axioms map_mul_self_eq_one_of_mem_normOne_of_conj_eq
+#print axioms map_eq_one_of_mem_normOne_of_conj_eq
+#print axioms normOneColoringTwo
+#print axioms colorable_two_of_normOne_of_conj_eq
+#print axioms colorable_two_of_valuationSubring_of_conj_eq
+#print axioms colorable_two_unitDistance_induce_of_valuationSubring
+#print axioms colorable_two_cycleGraph_four_of_gaussResidue
+
+#print axioms four_le_chromaticNumber_planeOver
+#print axioms SquareClass.inf_comap_sup_inf_comap_eq
+#print axioms SquareClass.isSquare_of_sqClass_eq_zero
+#print axioms SquareClass.exists_sqClass_eq
+#print axioms SquareClass.le_inf_spanThreeTwo_sup_inf_spanThreeTen
+#print axioms SquareClass.inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen
+#print axioms SquareClass.minusOne_not_mem_map_inf_comap
+#print axioms SquareClass.map_twoAdic_classesOfRadicands_le_iff
+#print axioms SquareClass.sqrt_mem_iff_of_sqClass_eq
+#print axioms SquareClass.sqrt_mem_of_mul_eq_sq_mul
+#print axioms SquareClass.gc_fieldOfClasses_classesOfField
+#print axioms SquareClass.fieldOfRadicands_eq_fieldOfClasses
+#print axioms SquareClass.fieldOfClasses_eq_sup
+#print axioms SquareClass.seamField_le_fieldOfClasses_inf_comap
+#print axioms SquareClass.fieldOfClasses_inf_comap_le_fieldOfRadicands
+#print axioms SquareClass.fieldOfRadicands_le_sup
+#print axioms SquareClass.four_le_chromaticNumber_planeOver_fieldOfClasses_inf_comap
+#print axioms SquareClass.multiquadratic_decomposition
+#print axioms SquareClass.fieldOfRadicands_deGrey_le_sup
+#print axioms SquareClass.map_twoAdic_deGreyTwo_le
+#print axioms SquareClass.map_twoAdic_deGreyTen_le
+
+#print axioms Q4.eval_mem_of_mem_sevenFree
+#print axioms UDCert.point_mem_planeOver_of_sevenFree
+#print axioms UDCert.chromaticNumber_le_planeOver_of_sevenFree
+#print axioms map_twoAdic_fourteen_le
+#print axioms map_twoAdic_seventy_le
+#print axioms sqrt_five_mem_fourteen_sup_seventy
+#print axioms five_le_chromaticNumber_planeOver_fourteen_sup_seventy
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
