@@ -1,29 +1,29 @@
 # Questions the literature posed, and this project answered
 
-*Created 2026-09-09 on Kooshi's instruction. **A running ledger, amended whenever another one
-closes** — the same maintenance rule as `BIBLIOGRAPHY.md` and `CLAUDE.md` § Frontier.*
+*This file holds current state only: each update rewrites the affected row in place, and the history is in
+git (`git log -p -- CLOSED-QUESTIONS.md`). It is linked from `CLAUDE.md` § The mission.*
 
-**Why this file exists.** This project's publication policy defers write-ups by default
-(`CLAUDE.md`, standing since 2026-08-04). The bar was amended on 2026-09-08 to a specific shape:
-*a result that answers a question the literature has independently and repeatedly posed clears it,
-whatever its size.* That amendment turns "which questions have we actually answered?" into the
-governing question for what gets written, and the answer was scattered across a ledger, a
-bibliography and ninety plan files. It is here now.
+**Why this file exists.** Write-ups are deferred by default (`CLAUDE.md` § The mission). One of the things
+that clears the publication bar is *a result that answers a question the literature has independently and
+repeatedly posed, whatever its size* — so "which posed questions have we answered?" governs what gets
+written. This file is the answer.
 
-**What goes in.** A row belongs here when (a) somebody outside this project **posed the question in
-writing**, and (b) we have an answer. Not "we proved something nobody happened to have proved" —
-that is the whole ledger. **Posed, in print or in a public archive, by someone else.**
+**What goes in.** A row belongs here when (a) someone outside this project **posed the question in writing**,
+in print or in a public archive, and (b) we have an answer — or, in §3, are unusually well placed to find
+one. An observation, a table presented without comment, or a result nobody asked for does not qualify,
+however novel our explanation of it; the ledger in `CLAUDE.md` holds those.
 
-**What every row must carry, and why.** The question **verbatim**, its author and date, our answer,
-where the proof lives, whether the kernel checked it, **and what prior art constrains the claim**.
-That last column is not modesty; it is the thing this project has been wrong about most often
-(`CLAUDE.md` § Grokkings G49, G50 — six independent derivations of one reduction across five
-decades, and four of our own milestones reconstructing a 2010 draft that was one search away).
-A row with an empty prior-art column has not been checked, and says so.
+**What every row carries.** The question **verbatim**, its author and date, our answer, where the proof
+lives, whether the kernel checked it, **and the prior art that constrains the claim**. That last column is
+the one this project has been wrong about most often (`CLAUDE.md` G49, G50: the reduction everything here
+rests on was derived independently in seven lineages that barely cite one another). A row with an empty
+prior-art column has not been checked, and says so.
 
 ---
 
 ## §1 — Closed
+
+*Each row states exactly what is answered; §1.3 is answered on its necessary side only.*
 
 ### 1.1 The chromatic number of the plane over `ℚ(√3, √11)`
 
@@ -31,110 +31,147 @@ A row with an empty prior-art column has not been checked, and says so.
 `chromaticNumber_seamPlane`, zero `sorry`, axioms exactly `[propext, Classical.choice, Quot.sound]`).
 Ledger row 57.
 
-**This one question was posed independently at least seven times across fifty years by people who do
-not cite one another**, which is why it is first and why it is the reason the publication bar moved.
+**Posed or named as open six times across fifty years, and bracketed by Madore.** The three oldest postings
+(rows 1, 2, 4) do not cite one another; the three from 2018 on cite Madore's bracket, and rows 5 and 6 share
+an author. This is the one result that has cleared the publication bar.
 
 | # | who, when | verbatim |
 |---|---|---|
 | 1 | **Benda & Perles**, circulated **1976**, published 2000; recorded in `[Soifer2024]` ch. 11 as **Open Problem 11.6** | *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic extension of `ℚ²`."* |
 | 2 | **`[Moorhouse2010]`** §1 (unpublished draft, 3 March 2010) | *"We have not determined the exact value of `χ(K²)` in this case."* — having named `ℚ(√3,√11)` as the smallest number field whose plane holds a Moser spindle, and proved `χ ≥ 4` |
-| 3 | **`[Madore2015]`** Prop. 4.6 (arXiv:1509.07023) | proves `4 ≤ χ(ℚ(√3,√11)²) ≤ 5` and leaves it there — **the bracket stood eleven years** |
+| 3 | **`[Madore2015]`** Prop. 4.6 (arXiv:1509.07023) | proves `4 ≤ χ(ℚ(√3,√11)²) ≤ 5` and leaves the gap, which stood for eleven years |
 | 4 | **`[CranstonRabern2015]`** (Combinatorica) | *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`? What about its chromatic number?"* |
-| 5 | **`[ExooIsmailescu2019]`** (Discrete Comput. Geom. 64) | asks it three lines above its Madore citation |
-| 6 | **`[Polymath16threads]`**, thread 4, **2 May 2018** | *"Madore proved that `ℚ[√3,√11] × ℚ[√3,√11]` can be 5-colored. As Dustin asked in one of his posts, it would be nice to decide if the chromatic number of this subfield is 5"* |
+| 5 | **`[ExooIsmailescu2019]`** (arXiv May 2018; Discrete Comput. Geom.), concluding section | *"One interesting question is whether there exists a 5-chromatic unit distance graph which can be embedded in `Q[√3, √11] × Q[√3, √11]`."* |
+| 6 | **`[Polymath16threads]`**, third thread, Dan Ismailescu, **2 May 2018** | *"Madore proved that `ℚ[√3,√11] × ℚ[√3,√11]` can be 5-colored. As Dustin asked in one of his posts, it would be nice to decide if the chromatic number of this subfield is 5."* |
 | 7 | **`[Aggarwal2025]`** (MIT PRIMES) | names *"computing … `χ(K^d)` for certain fields `K`, particularly when `K = Q(√3,√11)`"* as the open case |
 
-**Our answer.** Four, exactly. The upper half is an explicit residue colouring modulo a
-conjugation-fixed prime above 2; the lower half is the Moser spindle exhibited as an identity in the
-order, with no `Real.sqrt` anywhere.
+**Our answer.** Four, exactly. The upper half is an explicit residue colouring modulo a conjugation-fixed
+prime above 2; the lower half is the Moser spindle exhibited as an identity in the order, with no
+`Real.sqrt` anywhere. That settles rows 2–7; row 1 asks for every algebraic extension of `ℚ²`, and this is
+one field of it.
 
-**Also closed by it:** `[CranstonRabern2015]`'s *second* question outright, and their first is
-bracketed `76/21 ≤ χ_f(K²) ≤ 4`.
+**Also closed by it:** `[CranstonRabern2015]`'s second question outright. Their first is bracketed
+`76/21 ≤ χ_f(K²) ≤ 4` (§3).
 
-**Prior art that constrains the claim.** `[Madore2015]`'s `4 ≤ χ ≤ 5` is the closest anyone came.
-The residue mechanism is not new — Fischer 1990, Moorhouse 2010, Manturov 2012 and Madore 2015 each
-derived a version — and the Polymath16 wiki sketched the recipe in 2018. **What is new is the exact
-value and the kernel proof.**
+**Prior art that constrains the claim.** `[Madore2015]`'s bracket is the closest anyone came. The residue
+mechanism is not new: the reduction from a field plane to a finite residue plane was derived in seven lineages
+(`CLAUDE.md` § Where the problem stands — among them `[Fischer1990]`, `[Moorhouse2010]`, `[Manturov2012]`,
+`[Madore2015]`, and `[Polymath16wiki]`, which sketched the recipe in 2018). `[Polymath16wikiR2]`, a Polymath16
+wiki page described second-hand as attempting the rigidity argument for the `ℚ(√−3)` analogue of the same
+mechanism and stopping mid-argument, is **not obtained or read**, and FS-20 must read it. **What is new is the
+exact value and the kernel proof.**
 
-**Searched for a contradicting claim** on 2026-09-08 and again 2026-09-09 (all four Madore citations
-opened; the 47 citations of the paper that posed it walked; two citation databases cross-checked).
-None found.
+**Searched for a contradicting claim** on 2026-09-08 and 2026-09-09: all four citations of `[Madore2015]`
+opened, the 47 citations of `[ExooIsmailescu2019]` walked, two citation databases cross-checked. None found.
 
-**Status: written up as `plans/STUB-theorem-B-writeup.md` (FS-20). Not published.**
+**Status:** the manuscript is FS-20 (rank 1, `plans/STUB-theorem-B-writeup.md`), not yet written; it is
+blocked on FS-27 §2 and on obtaining `[Johnson2006]` and `[Fischer1990b]`. Kooshi released this result, and
+only this one, from the write-up deferral.
 
 ---
 
 ### 1.2 The general form of the residue colouring
 
-**Theorem A** — a graph *drawn* in an abelian group, edge differences in a subgroup and non-zero
-under a homomorphism out of it, is `|G|`-colourable. No metric, no field, no ring, no valuation, no
-Cayley structure, and the homomorphism may be **partial**. Kernel-checked
-(`Proofs/HadwigerNelson/ResidueColouring.lean`, `colorable_of_residue`).
+**Theorem A** — a graph *drawn* in an abelian group, edge differences in a subgroup and non-zero under a
+homomorphism out of it, is `|G|`-colourable. No metric, field, ring, valuation or Cayley structure, and the
+homomorphism may be **partial**. Kernel-checked (`Proofs/HadwigerNelson/ResidueColouring.lean`,
+`colorable_of_residue`). Ledger row 57.
 
 > **`[Madore2015]`**, Prop. 3.9, on needing a subgroup that is not a ring and doing the coset
 > construction by hand: *"which the author has not found the courage to try to formulate under the
 > most general auspices."*
 
-**Our answer.** That formulation, and the kernel checked it.
+**Our answer.** That formulation, kernel-checked.
 
 **Prior art that constrains the claim.** His Prop. 3.2 *is* the valuation-subring form, so
-`colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours. The general
-form — the step he declined — is ours. The delimitation is written into ledger row 57 and must
-survive into any manuscript.
+`colorable_unitDistance_induce_of_valuationSubring` is his theorem, not ours, and the unit argument is
+`[Fischer1990]` Thm 1. The general form — the step Madore declined — is ours. The delimitation is written into
+ledger row 57 and must survive into any manuscript. **Not proved:** that a number field with a
+conjugation-fixed prime supplies the valuation subring with residue field of size `N(𝔭)` (`CLAUDE.md` G35).
 
-**Status: not written up.**
+**Status:** the headline of FS-20's manuscript (§1.1); not yet written.
 
 ---
 
 ### 1.3 Which distances can carry a four-colour compulsion over `K`
 
-**The 2-adic law** (ledger row 59, kernel-checked, `ValuationLaw.lean` and `ResidueColouring.lean` §4):
-over `K`, a pair forced monochromatic at four colours lies at a distance **inside** the prime above 2,
-and a pair forced distinct lies at a distance **outside** it.
+**The 2-adic law** (ledger row 59, kernel-checked, `Proofs/HadwigerNelson/ValuationLaw.lean` and
+`ResidueColouring.lean` §4): over `K`, a pair forced monochromatic at four colours lies at a distance
+**inside** the prime 𝔭 above 2, and a virtual edge (a pair forced distinct) at a distance **outside** it.
 
-> **`[Heule2021]`** (*Odd-distance virtual edges in unit-distance graphs*, Geombinatorics 31(2))
-> states a reciprocal duality — if an odd `d` is a virtual edge then so is `1/d` — and
-> **`[Parts2020a]`** records a finite counterexample and writes that *"a more accurate formulation
-> of the statement and its proof are of certain interest."*
+> **`[Heule2021]`**, as quoted in `[PartsOdd2022]` §4: *"if an odd distance `d` is a `k`-virtual edge of a
+> subset `S` of the Euclidean plane, then distance `1/d` is a `k`-virtual edge in `S` as well."*
+>
+> **`[PartsOdd2022]`** §4 (arXiv:2206.12632, June 2022), after noting that the distances `3^a` and `3^−a`
+> are 4-virtual edges in `ℚ(√−3, √−11)`: *"But does this duality work in the general case?"* He gives a
+> finite counterexample at `d = 5`, reports that Heule *"meant not a finite graph, but larger objects like
+> `ℚ(√−3, √−11)`"*, and concludes: *"But even in this case, doubts remain about the correctness of the
+> statement. Therefore, a more accurate formulation of the statement and its proof are of certain
+> interest."*
 
-**Our answer.** The valuation formulation is that statement on the necessary side: `v_𝔭(1/d) =
-−v_𝔭(d)`, so the condition is **invariant under `d ↦ 1/d`** — which is why the duality could only
-ever have been stated for odd distances, and why Parts's finite counterexample does not touch it
-(the condition is necessary, not sufficient).
+**Our answer — the necessary half.** `ℚ(√−3, √−11)`, read as points of the plane, lies inside `K²`, so the
+law applies to Heule's object. It is the accurate formulation on the necessary side, with its proof: a
+virtual edge over `K` at four colours lies at 𝔭-adic valuation zero, and `v_𝔭(1/d) = −v_𝔭(d)`, so the
+condition is **invariant under `d ↦ 1/d`**. The odd integers are exactly the integer distances of valuation
+zero, which is why the duality was stated for odd `d`; and Parts's finite counterexample does not touch the
+law, which is necessary and not sufficient. **Open: the duality itself** — whether valuation zero suffices
+for a virtual edge in some finite `K`-object (ledger row 59).
 
-**It also explains two published tables that their authors present as unexplained observations:**
-all seven rows of `[Parts2020a]`'s Table 1, and `[Heule2019]`'s §5 *"Observed patterns of points in
-`Q[√3,√11] × Q[√3,√11]`"*.
+**It also explains two published tables that their authors present as observations** (not questions, so not
+rows here): the two columns of `[Parts2020a]`'s Table 1, each distance barred from the other column (two
+rows' `√` are unverified against the PDF, with the same valuation either way); and `[Heule2019]` §5,
+*"Observed patterns of points in `Q[√3,√11] × Q[√3,√11]`"*.
 
-**Prior art that constrains the claim, and it is substantial.** `[Ducz2026]` (10 June 2026 —
-**three months before we proved it**) gives the identification half in coordinates: two points of
-the Moser lattice share a colour iff `N + M ≡ 0 (mod 4)` where `‖z‖² = (N + M√33)/6`. Checked here:
-his congruence reproduces **ten for ten** of the data our law explains. **What survives is
-delimited**: the field-level statement over `K²` (rank 8, not his rank-4 ring), the valuation
-formulation, the **compulsion** consumers (the step from "this colouring identifies these pairs" to
-"no proper four-colouring of any `K`-object can force the others"), and the kernel proof. The `8/3`
-instance is older still — Polymath16 blog, **9 May 2018**, due to Jannis Harder.
+**Prior art that constrains the claim, and it is substantial.** `[Ducz2026]` (10 June 2026, three months
+before the law was proved here) gives the identification half in coordinates: two points of the Moser lattice
+share a colour iff `N + M ≡ 0 (mod 4)` where `‖z‖² = (N + M√33)/6`, and his congruence reproduces ten for ten
+of the data the law explains. **Ours:** the field-level statement over `K²` (rank 8, not his rank-4 ring), the
+valuation formulation, the **compulsion** consumers (from "this colouring identifies these pairs" to "no
+proper four-colouring of any `K`-object can force the others"), and the kernel proof. The observed pattern is
+older still: `[Heule2019]`, `[PartsOdd2022]` §1, `[Ardal2009]` (a mono-pair at distance 8), and first
+`[Polymath16threads]`, second thread, Jannis Harder, **28 April 2018**: *"The graph `V + V + H` not only
+precludes monochromatic triples, but forces the point `(8/3, 0)` to have the same color as the origin."*
+`[Heule2021]` itself is **not obtained**; its statement is known only through `[PartsOdd2022]`'s quotation.
 
-**Status: not written up. The delimitation above is the hard part of writing it.**
+**Status:** not written up; the deferral stands for it, and `BIBLIOGRAPHY.md` lists `[Heule2021]` as
+blocking any write-up of row 59. The delimitation above is the hard part of writing it.
 
 ---
 
 ### 1.4 Does `5/3` receive the same colour as `0` in every five-colouring?
 
-> **`[Polymath16threads]`**, verbatim: *"Does `5/3` receive the same color as `0` in every
-> 5-coloring of `R`? These two points are always monochromatic for homomorphic colorings, and if
-> this behavior persists for general colorings, then a spindling argument implies `χ ≥ 6`."*
+> **Philip Gibbs**, `[Polymath16threads]`, third thread, **2 May 2018**: *"Form `Z` from the unit modulus
+> numbers `ω^a η^b ζ^c` with `a = 0,1,2,3,4,5, b = −2,−1,0,1,2, c = −2,−1,0,1,2`. Then take the graph
+> `Z ⊕ Z ⊕ Z`. Is the point 5/3 always the same colour as the origin for all 5-colourings in this graph? If
+> not, how about using `ζ₂ = (−3+i√247)/16` instead of `ζ`"* — where `ω = (1+i√3)/2`, `η = (√33+i√3)/6`,
+> `ζ = (−1+i√15)/4`.
 
-**Our answer: no, and the reason is a congruence.** M60's distance law (ledger row 55,
-kernel-checked at `p = 11`): over a field where 11 is usable — which includes `K` and every field
-the descent ever used — a pair forced equal at five colours needs `11 ∣ d²`, and `(5/3)² ≡ 4 ≢ 0
-(mod 11)`. So the behaviour cannot persist and their spindling argument cannot fire there.
+Half an hour earlier he gave the motive: `5/3` *"is already a multiple of 5 in the ring `ℤ[ω₁, ω₃]` so it
+will be the same colour as the origin in any homomorphic 5-colouring"*, and a positive answer would make it a
+spindle distance for a sixth colour. Dustin Mixon restated the question opening the fourth thread (5 May
+2018), and Gibbs proposed spindling on `5/3` again on 29 May 2018. No answer appears in the eighteen threads
+(every mention of `5/3`, plain and LaTeX, read 2026-09-10).
 
-**Why it matters beyond the negative:** they had the right *shape* — the design target this project
-now calls FS-6 — and no way to filter the distance. The residue law is that filter, and it says
-where to look instead.
+**Our answer: no, for both graphs, and the reason is a congruence.** Both are drawn over fields where the
+prime 11 is usable: `Z ⊕ Z ⊕ Z` has coordinates in `ℚ(√3, √5, √11)` with denominators built from 2 and 3, and
+the `ζ₂` variant in `ℚ(√3, √11, √247)`, where 247 ≡ 5 is a square mod 11. By the distance law of ledger row 55,
+a pair forced equal at five colours in such a graph has `11 ∣ d²`, while `(5/3)² = 25/9 ≡ 4 (mod 11)`. So the
+five-colourings pulled back from the plane at 11 separate `5/3` from the origin; since those colourings exist,
+the answer is not vacuous.
 
-**Status: not written up.**
+**Kernel status: a hand argument.** The kernel's form of the law (`not_forces_of_distSq`, for certificates
+over the `√7`-free tower with `11 ∤ D`) takes an integer squared distance, and `(5/3)² = 25/9` is not one;
+stating it for a rational squared distance whose denominator is prime to 11 is a small generalization, not yet
+made. No certificate of either graph has been built, and the kernel's field tower has no `√247`.
+
+**Prior art that constrains the claim.** The premise that `5/3` is monochromatic under every homomorphic
+colouring is `[Fischer1990]`'s `k·G = 0` obstruction at `k = 5`. The distance law is ours (ledger row 55).
+
+**Why it matters beyond the negative.** They had the right shape — the design target this project calls FS-6
+(`CLAUDE.md` G48: a pair forced equal at five colours, then spindled) — and no filter on the distance. The
+residue law is that filter: over a field where 11 is usable, look only at `11 ∣ d²`.
+
+**Status:** not written up.
 
 ---
 
@@ -142,73 +179,89 @@ where to look instead.
 
 > **`[Moorhouse2010]`** Table 6.1 leaves `χ(𝔽₁₃²) ∈ {5, 6}`.
 
-**Our answer: 5.** Measured at the 2026-09-06 pivot (`tools/fplane.py`, `data/fplane/`), *without
-knowing it was open* — the paper was found two days later. **Verified colouring plus a solver
-refusal; not kernel-checked.** Promoting it is a day's work on the M58 template, which already
-carries `χ(UD(𝔽₁₁,2)) = 5` with no solver at all.
+**Our answer: 5.** Measured at the 2026-09-06 pivot, before the paper was found: four colours refused by the
+solver, a five-colouring found and verified (`plans/M58-field-sieve.md`, its table of finite-plane values).
+**No record of the measurement is on disk** — `data/fplane/` holds the plane at 11 but not at 13 — and nothing
+is kernel-checked. Promoting it needs the five-colouring decided as a 169-entry table, as at 11, and a
+refutation certificate for four colours of its own: the plane at 11 borrows Heule-510's certified refusal
+through a ring homomorphism, and no ring homomorphism carries Heule-510's coordinates to `𝔽₁₃`, since 5 is
+not a square mod 13.
 
-**Status: not written up, and not kernel-checked. The weakest row in this file.**
+**Prior art that constrains the claim:** not searched for separately; `[Moorhouse2010]`'s bracket is the only
+source on record.
+
+**Status:** not written up and not kernel-checked; the weakest row here.
 
 ---
 
 ## §2 — Answered in one direction, or with a caveat that must travel
 
-### 2.1 Type-M constructions with other rotations *(new, 2026-09-09, M62)*
+### 2.1 Type-M constructions with other rotations
 
-> **`[Parts2020a]`** §4, verbatim: *"Working constructions of type M with other rotations are not
-> known yet."* Every 5-chromatic graph of the record's family ever built uses one rotation.
+> **`[Parts2020a]`** §4, verbatim: *"Working constructions of type M with other rotations are not known
+> yet."* Every published construction of the record's family uses one rotation, `ρ₁₅ = (7 + i√15)/8`.
 
-**What we have: a candidate list where the literature has none.** The rotation admitting a cross
-edge between two radii is forced to adjoin `√D` with `D` computable in `K`, so the enumeration is
-exact and finite. On one 873-point Moser-lattice base: **1,336 rotation classes escape `K`, of
-which 412 admit the ≥ 2 cross-edge kinds Parts calls essential** — and the record's own rotation is
-among them, carrying both of its known kinds, ranked 58th. Forty-six seconds
-(`tools/typem.py`, `data/m62/rotations-moser-r2.05.json`).
+**What we have: a candidate list where the literature has none.** A rotation carrying cross edges between
+radii `a` and `b` must adjoin `√D` with `D = ab − k²` and `k = (a + b − 1)/2`, all in `K`; when `D` is a square
+in `K` the union stays in `K²` and Theorem B four-colours it. So the enumeration is exact and finite. On one
+873-point Moser-lattice base, **1,336 rotation classes escape `K`, and 412 admit the ≥ 2 cross-edge kinds Parts
+calls essential** — the record's own rotation among them, carrying both of its known kinds. Forty-six seconds,
+no floating point in any verdict (`tools/typem.py`, `data/m62/rotations-moser-r2.05.json`).
 
-**The caveat that must travel: admissibility is necessary, not sufficient.** No claim is made that
-any of the 411 others yields a 5-chromatic object; that is the search, and it has not been run. The
-count is also a property of *that base's* radius spectrum and does not transfer.
+**The caveats that must travel.** Admissibility is necessary, not sufficient: no claim is made that any of the
+other 411 yields a 5-chromatic object, and that is the search. The count belongs to that base's radius
+spectrum; the list has not been re-run on Parts's own base (his §5.6 closed form, 1,603 points,
+`typem.parts_lattice`). On that base the record's rotation admits seven radius families, and Parts uses two.
 
-**Also, and independently:** the record's rotation admits **seven** radius families and Parts uses
-**two** — his subtype classification counts how much of the *second* kind is used and never
-considers a third.
+**Status:** unconsumed — consuming the list is FS-30 (rank 2, `plans/STUB-consume-rotation-list.md`). Not
+written up.
 
-**Status: phase A of M62. Not written up.**
+### 2.2 *(retired — not a posed question)*
 
-### 2.2 The clique-versus-chromatic gap on finite Euclidean planes
-
-`[Krebs2022]` states a criterion for `χ > ω` that **no citing paper reproduces** and that we have
-not obtained. Our G24/G40/G44 material is about exactly this. **Not closed — listed here so it is
-not mistaken for closed**, and because obtaining that page is the single most wanted item in the
-literature for this project.
+The clique-versus-chromatic gap on finite Euclidean planes is not a row. `[Krebs2022]`, read in full, poses no
+question about it; its `χ > ω` content is Prop. 6.1 (`χ ≥ ω + 1` when `ω ∤ qⁿ`), weaker than what the kernel
+holds at every usable prime — it gives `χ ≥ 4` at `p = 11`, where `χ = 5` is kernel-checked. How large the gap
+is stays open and ours to work (`CLAUDE.md` G44), outside this ledger; the finite-plane values the literature
+did pose are §1.5 and §3. The number is kept so that it is not reused.
 
 ---
 
-## §3 — Adjacent, open, and cheap for us
+## §3 — Adjacent and open
 
-*Questions posed by others that we have NOT answered but are unusually well placed to.*
+*Questions others posed in writing that we have not answered but are unusually well placed to.*
 
-- **`χ(𝔽₁₇²) ∈ {5,6,7}`** — `[Moorhouse2010]` Table 6.1, still open, **never touched here**. 289
-  vertices against the 23-plane's 529. A `6` there would answer the range question of M61's "first
-  digit". *(17 ≡ 1 mod 4, so it is never a usable prime — this bears on the range, not on the sieve.)*
-- **`χ_f(K²) = 4` exactly** — `[CranstonRabern2015]`'s first question. Our bracket is `76/21 ≤ χ_f ≤ 4`.
-  `[MatolcsiEtAl2025]`'s amenability argument uses the full Euclidean group; the subgroup preserving
-  `K²` is metabelian, hence amenable, and dense in it. **If their Følner step survives the
-  restriction, the question closes.** Not attempted.
-- **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a more general polygonal tiling could reach it;
-  `[SokolovVoronov2025]` answers no. Already closed *by them*, recorded so we do not re-close it.
+- **The minimum order of a 5-chromatic unit-distance graph.** `[ExooIsmailescu2019]`, concluding section:
+  *"What is the minimum order of a 5-chromatic unit distance graph in the plane?"* The record is
+  `[Parts2020a]`'s 509 vertices. M62 is the search to beat it (paused for M63); M63 has reproduced Parts's
+  reduction stage on every attested number, and M64 explained his overcompression obstruction (ledger
+  row 62). Best object here: 559 vertices, census-certified.
+- **The smallest field whose plane needs five colours.** `[ExooIsmailescu2019]`, right after the question of
+  §1.1 row 5: *"More generally, what is the smallest subfield of E2 that requires 5 colors?"* `ℚ(√3,√11)` does
+  not (Theorem B). The fields known here to need exactly five — `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
+  `ℚ(√3,√11,√23)` (ledger rows 47, 52–53) — all have degree 8. Any field needing five must break the 2-adic
+  wall (`CLAUDE.md` G1, G35), which screens candidates by congruence; whether a field of smaller degree needs
+  five has not been examined here.
+- **`χ(𝔽₁₇²) ∈ {5, 6, 7}`** — `[Moorhouse2010]` Table 6.1; open, and never touched here (289 vertices, against
+  the 529 of the plane at 23). A 6 would answer the first digit (`CLAUDE.md` G48: is any finite plane exactly
+  6-chromatic?), though `17 ≡ 1 (mod 4)` is never a usable prime, so it bears on no field's sieve.
+- **`χ_f(K²) = 4` exactly?** — `[CranstonRabern2015]`'s first question (§1.1 row 4); our bracket is
+  `76/21 ≤ χ_f ≤ 4`. `[MatolcsiEtAl2025]`'s amenability argument uses the full Euclidean group; the subgroup
+  preserving `K²` is metabelian, hence amenable, and dense in it. If their Følner step survives the
+  restriction, the question closes. Not attempted.
+- *Closed by others, listed so it is not re-closed:* **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
+  more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no.
 
 ---
 
 ## §4 — The deferral, stated so this file cannot be mistaken for a publication plan
 
-Everything above is **deferred**. The standing policy (`CLAUDE.md`) defers all write-ups and
-upstreaming; the amended trigger fires on exactly two things — **χ(ℝ²) ≥ 6 or its refutation**, and
-**a result answering a question the literature has independently and repeatedly posed**. §1.1 is the
-one row that has fired it, and its manuscript is stubbed at `plans/STUB-theorem-B-writeup.md`.
+Everything here except §1.1 and §1.2, which are FS-20's manuscript, is **deferred**. The standing policy
+(`CLAUDE.md` § The mission) defers write-ups and upstreaming; the bar clears on χ(ℝ²) ≥ 6 or its refutation,
+on Kooshi's call for a certified 5-chromatic object of our own, and on a result answering a question the
+literature has independently and repeatedly posed — which has fired once, for §1.1.
 
 **A row entering §1 is not authorisation to write it up.** It is Kooshi's call, every time.
 
-**Maintenance:** amend at every milestone close that closes or partially closes a posed question,
-and whenever a prior-art pass finds that a row's question was posed somewhere new — the count in
-§1.1 went from one to seven that way, and that count is the row's whole argument.
+**Maintenance.** Rewrite a row in place at every milestone close that answers or partly answers a posed
+question, and whenever a prior-art pass finds a new posing of a row's question or new prior art that
+constrains it — §1.1's case rests on its count of postings.

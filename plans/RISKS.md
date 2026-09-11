@@ -1,5 +1,12 @@
 # RISKS — the standing register of what could stop the descent
 
+> **Retired 2026-09-10 — this register is no longer maintained.** It tracked what could stop the batch
+> descent. On 2026-09-05 Theorem B (χ(ℚ(√3,√11)²) = 4) proved that a descent whose points stay in
+> ℚ(√3,√11) cannot finish; M53 was halted, this file was last edited that day, and no milestone since has run
+> the descent. The header's rule that every milestone close re-reads every row no longer holds. Current state
+> lives in `CLAUDE.md` § Frontier and `plans/FRONTIER-STUBS.md`; the rows below are kept unchanged as the
+> record.
+
 *Created 2026-09-03 on Kooshi's direction ("let's document the important ones and keep track of
 them"), from the honest assessment at M52's cull. Maintained like the Frontier: every milestone
 close re-reads every row, updates its status and its last measurement, and adds what the milestone

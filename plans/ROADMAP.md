@@ -5,7 +5,7 @@
 > tangents beside them. That era ended when M53 was halted on 2026-09-05 and the field-wall theorem redirected
 > the whole programme into the finite-plane / field-sieve / algebraic-derivation arc. Its last dated entry is
 > **M61 (closed 2026-09-08)**; it records nothing of FS-18 (the library read), the mascot challenge
-> (ledger rows 58–59), FS-19 through FS-25, or the choice of **M62 = FS-6**. Its own header rule — *"update
+> (ledger rows 58–59), FS-19 through FS-25, or the choice of **FS-6 as the next milestone**. Its own header rule — *"update
 > triggers: every iteration commit, every work-order close, every tangent finding — the same day"* — has
 > therefore not been met since 2026-09-08, and a board nobody updates is worse than no board because it reads
 > as current.

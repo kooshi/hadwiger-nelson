@@ -6,6 +6,10 @@ forty-six theory frames of `plans/STANDING-QUESTIONS.md`, and the `§R` sections
 re-derived and numerically re-checked by hand before this file was written — **and its first sketch was wrong in
 a way worth recording**; see §2.1.*
 
+*Citations of the form CLAUDE.md:NNNN refer to `CLAUDE.md` as it stood on 2026-09-09 (four of the five land
+on their cited text at commit `48553c4`). That file has since been rewritten to current state only, so the
+numbers no longer point at the cited text; follow the ledger row or grokking named beside each.*
+
 ---
 
 ## 0. Why this exists — for a reader with no memory of the project
@@ -304,5 +308,5 @@ the grokking or ledger row it came from is amended in place with its new status;
 failure mode of §1.
 
 **Bearing on χ(ℝ²) ≥ 6:** E1 is real (it makes G48 fire at unsolved primes, which is the mechanism the whole
-FS-6 design target rests on); E2 and E3 are structural; E4, E5, E6 are consolidation. **M62 (FS-6) remains the
+FS-6 design target rests on); E2 and E3 are structural; E4, E5, E6 are consolidation. **FS-6 remains the
 ranked rank-1 milestone for the hunt itself.**

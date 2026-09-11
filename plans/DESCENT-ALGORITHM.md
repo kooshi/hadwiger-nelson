@@ -1,5 +1,11 @@
 # The batch descent — the algorithm, self-contained
 
+> **Halted 2026-09-05; this is not a live plan.** The method stopped when Theorem B (χ(ℚ(√3,√11)²) = 4)
+> proved that a descent whose points stay in ℚ(√3,√11) cannot end — the last section, *The wall — a theorem*,
+> records why, and `CLAUDE.md` G34, G36 and G37 carry the understanding forward. The file remains the
+> algorithm's reference statement. Current state lives in `CLAUDE.md` § Frontier and
+> `plans/FRONTIER-STUBS.md`.
+
 *Written 2026-08-26 (mid-M51), on Kooshi's instruction that the method be documented to
 paper standard before any paper exists. This is the reference statement of the loop that
 M49 §R8–R10 discovered, M50 turned into a batch engine, and M51 runs at scale. The

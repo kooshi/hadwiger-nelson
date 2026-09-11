@@ -152,8 +152,7 @@ this milestone, since they need exactly this reading.
 plainly, as every stub here must. It is ranked on three other grounds: it is the prerequisite that stops G49
 firing a fourth time; it is what the paper (FS-20) needs before submission; and the vocabulary work is what
 makes any future result of this project *findable* by the people who have been asking its questions for fifty
-years. **M62 (FS-6, the design target in a 5-sealed field) remains the ranked rank-1 milestone for the hunt
-itself and is untouched by this.**
+years. **The hunt itself — M63, M62, and FS-6 (the design target in a 5-sealed field), ranked in `plans/FRONTIER-STUBS.md` — is untouched by this.**
 
 ---
 

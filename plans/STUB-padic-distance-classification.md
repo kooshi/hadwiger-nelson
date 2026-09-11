@@ -80,7 +80,7 @@ structural explanation of the residue method's blindness above four; (c) it is a
 machinery in the kernel already, and it answers the number-field analogue of a completely-solved rational
 problem — the shape G46 says to prefer over an object search.
 
-**It should NOT displace FS-6 (M62).** The 6-hunt's design target is unaffected by any of this.
+**It should NOT displace FS-6.** The 6-hunt's design target is unaffected by any of this.
 
 ## 6. Cost
 

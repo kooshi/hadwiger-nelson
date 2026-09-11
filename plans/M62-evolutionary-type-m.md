@@ -2,7 +2,7 @@
 
 *Minted 2026-09-09 on Kooshi's go ("we're going to find the world record 5 chromatic graph … it's a
 rehearsal for the real hunt"). Numbering note: FS-6 had been chosen as M62 at the M61 close; the
-milestone that RUNS first takes the number, so **FS-6 becomes M63** and this is M62. FS-6 is this
+milestone that RUNS first takes the number, so this is M62 and **FS-6 takes a later number** (M63 went to the Parts reproduction). FS-6 is this
 milestone's sequel by design — same search, one colour up, over a 5-sealed field.*
 
 **Mission in one line.** Beat 509 — the smallest known 5-chromatic unit-distance graph — with an

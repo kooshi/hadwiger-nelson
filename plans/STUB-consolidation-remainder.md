@@ -112,5 +112,4 @@ paper items before FS-20 opens, then §3's item D alone in the main tree, then �
 **Cost:** §1 is a day with the bridging lemma. §2(a) is an afternoon, §2(b) is an hour's reading. §3's item D is
 half a day and one full rebuild. §4 is an afternoon.
 
-**Bearing on χ(ℝ²) ≥ 6: none, and this stub says so.** **M62 (FS-6) remains the ranked rank-1 milestone for the
-hunt itself.**
+**Bearing on χ(ℝ²) ≥ 6: none, and this stub says so.** **The hunt itself continues in M63, M62 and FS-6, ranked in `plans/FRONTIER-STUBS.md`.**

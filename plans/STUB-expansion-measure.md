@@ -69,7 +69,7 @@ something an exact solver does not.
 ## §3 — Bearing on χ(ℝ²) ≥ 6
 
 **Indirect, and it must be said so.** This is a measure for a search loop, not a construction. Its
-value is that M62/FS-6's own angle is an expansion strategy, and today it has no way to tell a
+value is that M62's own angle is an expansion strategy, and today it has no way to tell a
 working expansion from a stalled one.
 
 ## §4 — Instruments and addresses

@@ -1,5 +1,11 @@
 # STANDING QUESTIONS — the durable ledger of theory, ideas, and refutations from the descent campaigns
 
+> **No longer maintained (2026-09-10).** This was the descent era's theory ledger and then, through M61, the
+> registry of theory frames T1–T46; no T-number has been minted since, and the header's rule that entries are
+> updated as they mature or die no longer holds. It stays because its IDs (T13, T25, Q8, …) are cited across
+> `plans/`, and it remains the registry for them. Current understanding lives in `CLAUDE.md` § Grokkings;
+> open questions are ranked in `plans/FRONTIER-STUBS.md`.
+
 *Created 2026-08-24 at the M50 close, on Kooshi's direction: nothing discussed, theorized, or
 questioned in that long milestone may be lost, and it must live outside M50's own file. This is
 the standing shape-space for the descent era, maintained like `plans/SHAPES-OF-SIX.md`: updated

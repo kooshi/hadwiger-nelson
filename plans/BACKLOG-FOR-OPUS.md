@@ -109,8 +109,8 @@ from census data, so the union's extension at five colours is a theorem — the 
 compulsion among the fabric". Spec: the two-spindle full-fabric union of M54 is the natural object; the hypotheses are decidable
 on the edge list. The ν = number-of-spindles law (T25) is a derivation — leave it.
 
-### B9. M62's instruments, prepared but not interpreted — `plans/STUB-family-keeping-thickening.md` §H
-M62 is the next derivation milestone and stays mine (its §S, its passes, its close). Its phase-A COMPUTATIONS are spec-shaped and
+### B9. FS-6's instruments, prepared but not interpreted — `plans/STUB-family-keeping-thickening.md` §H
+FS-6 is the next derivation milestone and stays mine (its §S, its passes, its close). Its phase-A COMPUTATIONS are spec-shaped and
 can be built and run now, results left in `data/` for me:
 (i) **the forced-distance table** — on every held object over a 5-sealed field (Heule-510 and its closure, W and its F₂₄₇ cross
 lattice at depths 1–2, the two-core union), every pair with residue norm 0 at 11 (`fpcompel.py filter --pairs` reports the norm;
@@ -135,7 +135,7 @@ budget). Records and README rows; no interpretation.
   The autopsy is mine.
 
 ## LEAVE — derivation, judgment, or no spec yet
-* **M62 itself** (FS-6 re-aimed, `plans/STUB-family-keeping-thickening.md` §H): the subplan's derivations, the modeling passes, the
+* **FS-6 itself** (re-aimed by G48, `plans/STUB-family-keeping-thickening.md` §H): the subplan's derivations, the modeling passes, the
   reading of B9's numbers, the close. Mine.
 * **FS-9 topological bounds, FS-10 Nullstellensatz certificates**: reading rooms — no recognition yet, so nothing checkable to build
   (G46's corollary). Reading the literature and writing what a checkable statement WOULD be is welcome; building is not.

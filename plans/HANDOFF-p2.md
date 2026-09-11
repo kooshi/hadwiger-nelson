@@ -3,6 +3,10 @@
 *Written 2026-09-09 by de Bruijn, for a reader with no memory of this work. Branch
 `consolidate/p2`, worktree `/home/kooshi/source/lean-wt-p2`.*
 
+*Citations of the form CLAUDE.md:NNNN refer to `CLAUDE.md` as of commit `8c3267f` (2026-09-09). That file has
+since been rewritten to current state only, so the numbers no longer point at the cited text; follow the
+grokking named beside each.*
+
 ---
 
 ## 1. What landed
