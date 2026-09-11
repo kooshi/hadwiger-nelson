@@ -809,6 +809,7 @@ here.*
 | 4 | how many admissible rotations refuse four colours at all? | **DEFERRED to G's opening gate**, with the cheap half taken in C5. The collinear law is one parameter for every rotation whose sine leaves K. Full rotation generality is declined until G's census shows more than one rotation passes (M63 §S.5) |
 | 5 | can "{M} grows at fixed \|M\| in a rule-driven iteration" be met by a rung relaxation alone? | **DECIDED by the product owner:** the clause now requires a fixed rung and added vertices (M63 §S.1 2c) |
 | measurements M1–M3 | state 3–4's accumulators; his stated rule on his move | M1–M2 **re-derived and adopted** (M63 §S.2 #9). M3 **recorded, not re-derived**: it bears only on D's diagnostic, which never gates |
+| second card | requested 2026-09-11 before this subplan was reported, on three questions: whether any of the seven proposed drops is load-bearing for F or G; whether phase E's "start below his accumulator" test is the strongest well-posed one; and whether the roadmap C–G is the wrong frame for "reproduce or beat" | **not delivered before the report.** When it lands it is answered here, and its record file is committed by path — an unanswered card is a gap in this table, not a silence |
 
 ---
 
