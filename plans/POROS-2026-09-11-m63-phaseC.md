@@ -50,6 +50,7 @@ a fact about *our* stage may be a defect in *his* table (card 2).
 - `plans/POROS-2026-09-10-*.md`, `POROS-2026-09-08-mascot.md` (my own track record) — read against: what landed and what the engineer corrected — surprised: no; landed: the fixed-point defect (M62 §R11), §2 and §5.6 unread (§R12, §R19), the closure equality and the free rung lattice (M64 §R10); corrected against me: "3 of the 6 involutions" is 3 of 7 (M64:453-455), and my tail-truncation hunch fired its falsifier (M64:352-354)
 - `plans/FRONTIER-STUBS.md` rows M63 and FS-35 — read against: a current-state mirror of the plans — surprised: no
 - `tools/parts_stage.py:45-127`, `tools/parts_faces.py:465-538, 671-756` — read against: stage = one deletable side against a frozen companion; rung = subgroup of Aut(A) — surprised: no; `Stage.__init__` refuses any side but L or S, "L and S are minimized separately against a frozen companion" (parts_stage.py:46-48), so a joint stage is unwritable today
+- Phase C planner's second report, 2026-09-11 — read against: card 1 adopted and its frame settled — surprised: yes; the relative frame is not one frame but a double coset Stab(W_L)\G/Stab(W_S), giving at most TWO inequivalent joint problems (12 and 6, two cosets of size 12) and four for the M6B stage, so card 1 is two runs and not one; and card 1's positive control is derivable rather than needing a run, since any refusing proper subset of the record with both halves deletable would give a side below 374 or 136 against his published minimality; also measured there: the joint stage is 577 vertices and 576 atoms, his M6B L refuses with S141 in 12 of 24 frames and never with S136, and the S stage's order-3 rung closes at 142 where M64 §R10 had only ">= 139"
 - Product owner's flag, 2026-09-11: `tools/parts_verify.py` rewrote the tracked `data/m62/parts-ref11-verified.json` (date stamp only) — read against: none of my commands write tracked files — surprised: no; I ran no `tools/` script; every command so far read, or wrote into the scratch directory
 
 ## Hunch ledger
@@ -68,7 +69,7 @@ hunch: the-tail-is-in-his-282
   basis: derived
   falsifier: the body minima alone give 282 orbits, or a tail minimum's L-edge count lies outside his attested 1920-1930
   registered: 2026-09-11
-  status: open — the count half holds (282 for all 3,264, planner 2026-09-11, so the body alone is at most 270); the edge-range half is running on the planner's side. P9 is moot by mechanism, not only by count: the stage has 24 off-centre connection edges (W's auxiliary fill is 12) but every one of the 3,264 minima realises exactly 18, through one 6-subset of the auxiliary orbit shared by all, and deleting atoms no minimum uses leaves the level unchanged (planner 2026-09-11)
+  status: confirmed (by: the planner's re-derivation, 2026-09-11 — 282 minima up to Aut(A), our A equal to his v403e2112 literally, the tail minima at 1925-1926 L-edges, inside his attested 1920-1930, and the fewest-edge members' stabiliser 2 matching his "1 (2)"; so his printed 375 range column is the defect and our stage is his). Earlier note: P9 is moot by mechanism, not only by count: the stage has 24 off-centre connection edges (W's auxiliary fill is 12) but every one of the 3,264 minima realises exactly 18, through one 6-subset of the auxiliary orbit shared by all, and deleting atoms no minimum uses leaves the level unchanged (planner 2026-09-11)
 
 hunch: the-recorded-path-has-one-expansion
   claim: his M6A L path is a rung relaxation (1 to 2), one named expansion with a rung change (2 to 3, parts:804-810), and a rung relaxation on the same working graph (3 to 4, since A ⊆ W gives |W4| >= 412 > 406); so A406 = v406e2082 and A412 = v412e2106 each lie, up to a group element, inside A403 = v403e2112 plus the full orbits (0,0,0,4), (0,0,6,6), (4,0,0,0), and A406 lies inside A412 (rung-2 minima of W3 at size 374 are rung-1 minima of the same W at the same size)
@@ -106,6 +107,10 @@ hunch: 509-is-still-the-record
   status: open — a web search on 2026-09-11 ("smallest 5-chromatic unit distance graph fewer than 509 vertices new record") returned a generated summary saying the 509-vertex Parts graph remains the smallest known as of August 2026, beside arXiv:2608.04542 (Haugland, August 2026); that paper is not read here, so this stays a held claim addressed to the phase's prior-art gate
 
 ## Cards
+
+*Ranks are file-wide and in the order the cards were written, not in order of what is live: cards 1–5
+are adopted or answered, and of those only card 1's run is still outstanding. **This turn's lead is card
+6**, the ask-cost regime, with card 7 behind it; both went to the planner on its second consult.*
 
 *Card 1 sent to the phase C planner (`a08bd9467b4d58bc3`) in full before its skeleton, cards 2–4 by
 pointer. Dispositions reported by the planner on 2026-09-11, provisional until the product owner
@@ -193,6 +198,30 @@ question: does-a-rung-relaxation-satisfy-the-growth-clause
 relaxation alone does not count, and his 78 → 1,092 stays a replay-control comparison. The planner has
 the change. The M3 priority and degree rankings went to the planner as diagnostics to re-derive before
 use.
+
+question: is-the-drop-argument-conditional-on-a-regime-F-and-G-leave
+  evidence: the gap audit proposes dropping seven items — the cheap Y statistics (component profile, alpha, the 2^m induced-matching bound), P4-P7, the 8-4-2-1 accelerator, the symmetry-setting pendants, the per-lever measurement and the parallel level sweep — argued from ask costs measured on the two FROZEN-COMPANION stages: L451, 11,942 colourable at 0.006 s and 4,741 refusing at 0.02 s; S166, 13,176 at 0.009 s and 3,076 at 0.108 s (the two reduction records), against his own 1 and 10 s (parts:643-644). On this project's own type-M objects with no frozen companion the same asks cost 10-15 s refusing and up to 2.8 s colourable, with one refusing ask killed at 17 minutes (M62 §R23), and M62 §R22 derives that the variable is slack over the nearest refutation, not size. The joint stage is the first object in this milestone with no frozen side: 577 vertices, 576 atoms. The dropped items are exactly the cost-control ones, including M63 §E's level forecast, whose 2^m bound is what REFUSES a level before any ask.
+  expected: a drop argued from a measured regime carries that regime as its condition
+  ask: what do a full-W refusing ask and a handful of near-optimal asks cost on the joint stage, and do they stay within an order of magnitude of the frozen-companion stages?
+  if within an order of magnitude: the drops stand for C to E, with the measured regime recorded as their condition and re-tested at F's first expanded W and at G's first non-rho15 arena
+  if they rise tenfold or more: the 8-4-2-1 accelerator, the 2^m level forecast and the parallel sweep are exactly the instruments F and G need, so they are kept rather than dropped, and card 1's run needs its resume path in fact and not only as hygiene
+  answered by: run — about twenty asks on the joint stage as built, before the drops go to the product owner
+  cost: minutes, and a by-product of building the joint stage anyway
+  hunch: the pin and the incremental solver carry most of the speed, so costs rise but stay under a second; I would not bet past 60%
+  falsifier: joint-stage asks at the frozen-companion costs (about 0.02 s refusing), or above one second
+  rank: 6
+
+question: which-held-out-problem-tests-the-loop-hardest
+  evidence: the product owner requires at least one held-out run starting below his accumulator. The planner proposes the S side from a rung-2-symmetric 138-vertex minimum, whose containment of any 136-minimum is forbidden by M64's closure gap. But the S stage is this milestone's tuning case (M63 §R1's decisive experiment, A166 to 136 with 8 minima), so it is no longer held out, and its companion is a frozen L-graph, the companion type already exercised. Unrun, in Table 1, and on the base: the 8/3 mono-pair, A375 to M367 with 27 minima and Table 5's own ranges, whose companion C is an edge — which M63 §3 calls the sharpest of the held-out set, because it exercises the companion abstraction, the piece most likely to be modelled as a special case. His v367e1822 is a single published minimum and M63 §1(vi) confirms it is on the base.
+  expected: one run that is held out, starts below A, and exercises a companion type nothing has exercised
+  ask: should E's required run be the 8/3 mono-pair started from his single published minimum v367e1822, with the S-138 run kept as the expansion-mechanism control?
+  if yes: E tests held-out generalization, the edge companion and expansion at once, against three attested targets — 367 vertices, 27 minima up to the group, and A = 375 with Table 5's ranges
+  if the S-138 run stays the required one: E tests expansion on the tuning case with an already-exercised companion, and the held-out requirement is carried only by the other runs, which do not start below A
+  answered by: Planner (de Bruijn, phase C), with the product owner's acceptance in hand
+  cost: one decision; the mono-pair run is one reduction plus expansions, comparable to the S runs
+  hunch: the mono-pair from v367e1822 is strictly stronger, and the S-138 run is worth keeping as the control, because its obstruction is derived
+  falsifier: the mono-pair cannot start from a single minimum because the expansion rule's reserve needs an accumulator that one minimum does not supply
+  rank: 7
 
 ## Measurements
 

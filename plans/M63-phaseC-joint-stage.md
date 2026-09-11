@@ -657,6 +657,19 @@ C4b below, if the product owner approves the extra run; otherwise it is F(b)'s f
 | c4.2 | `pin_is_sound` on the joint stage over `A412 ∪ ρ·g⁻¹(A166)` | `pin-agrees-everywhere` |
 | c4.3 | the joint stage with every S atom forced kept by assumption, against the L-only stage on the same working graph, over 20 seeded random L selections | `joint-degenerates-to-L`: identical verdicts |
 
+**C4.0 — the cost probe, and it gates the seven proposed drops** (Poros card 6, adopted). Every one of
+the drops in M63 §S.3 is argued from ask costs measured on stages with a **frozen companion** (0.006–0.11 s).
+The joint stage is this milestone's first object with **no** frozen side, and on this project's own
+companion-free objects the same asks ran 10–15 s refusing, with one killed at 17 minutes (M62 §R23); M62
+§R22 derives that the variable is slack over the nearest refutation, not size. So before the drops take
+effect, measure — as a by-product of building the stage, minutes: one refusing ask on the full working
+graph, the phase-1 population, and a handful of near-optimal asks.
+
+| outcome | consequence |
+|---|---|
+| within an order of magnitude of the frozen-companion stages | the drops stand **for C–E only**, with the measured regime recorded as their condition, and are re-tested at F's first expanded working graph and G's first non-`ρ₁₅` arena |
+| ten-fold or worse | **keep** the cost-control items — his 8-4-2-1 batching, the induced-matching level guard, the parallel sweep, the cheap `Y` statistics — because they are exactly what F and G will need, and the resume path is needed in fact rather than as hygiene |
+
 **The run** (predictions committed first; announced to the product owner before launch if its forecast
 exceeds 15 minutes; checkpointed):
 
@@ -688,6 +701,10 @@ compute.*
 ---
 
 ## §3 — Order of work, compute, and stop rules
+
+**The shortest path to the joint run comes first**, because C4a and C4b are the only items that can end
+the milestone with the goal already met: the `LS` side, the ask wall and exact resume, and the minimum of
+the driver needed to launch and checkpoint. Everything else follows while the run goes.
 
 1. **C5**, with its controls (an hour or two; seconds of compute).
 2. **C1.1–C1.5** with their self-tests (half a day; the resume control is ~3 minutes).
@@ -739,6 +756,7 @@ here.*
 | P-C4.1 | **the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is exactly 509 vertices.** Planner 0.60; Poros 0.65 | a joint refusing selection of ≤ 508 vertices |
 | P-C4.2 | if 509: every minimum found splits as `(374, 136)` | a minimum split `(375, 135)` or `(373, 137)` |
 | P-C4.3 | cost: phase 1 < 60 s; bound closed within 90 minutes; ≥ 1,500 correction sets | outside any of these |
+| P-C4.0 | the joint stage's asks rise above the frozen-companion stages but stay **under a second** — the pin and the incremental solver carry most of the speed (Poros's hunch, at 60%) | a refusing ask at ~0.02 s (no rise at all), or above one second |
 | P-C4.4 | **C4b**, the second relative frame, also closes at 509 vertices. Registered at 0.5 and no higher: nothing proved relates the two cosets, which is the reason to run it | a joint minimum there below or above 509 |
 | P-C5.1 | the explicit law reproduces the L451 fingerprint and the record's 2,442 edges at no measurable cost | any difference |
 
@@ -809,7 +827,9 @@ here.*
 | 4 | how many admissible rotations refuse four colours at all? | **DEFERRED to G's opening gate**, with the cheap half taken in C5. The collinear law is one parameter for every rotation whose sine leaves K. Full rotation generality is declined until G's census shows more than one rotation passes (M63 §S.5) |
 | 5 | can "{M} grows at fixed \|M\| in a rule-driven iteration" be met by a rung relaxation alone? | **DECIDED by the product owner:** the clause now requires a fixed rung and added vertices (M63 §S.1 2c) |
 | measurements M1–M3 | state 3–4's accumulators; his stated rule on his move | M1–M2 **re-derived and adopted** (M63 §S.2 #9). M3 **recorded, not re-derived**: it bears only on D's diagnostic, which never gates |
-| second card | requested 2026-09-11 before this subplan was reported, on three questions: whether any of the seven proposed drops is load-bearing for F or G; whether phase E's "start below his accumulator" test is the strongest well-posed one; and whether the roadmap C–G is the wrong frame for "reproduce or beat" | **not delivered before the report.** When it lands it is answered here, and its record file is committed by path — an unanswered card is a gap in this table, not a silence |
+| 6 (rank 1, second turn) | are the seven drops conditional on a regime F and G leave? | **ADOPTED as C4.0.** Re-derived: the costs behind the drops are all from frozen-companion stages, and the joint stage is the first without one. The drops now carry their regime as a stated condition and are re-tested when the regime changes |
+| 7 | phase E's below-the-accumulator run | **ADOPTED, and it swaps the roles** (M63 §S.4 phase E): the 8/3 mono-pair from his published 367-vertex minimum becomes the required run — it is genuinely held out, it starts below his accumulator, and it exercises the edge companion, which M63 §3 calls the sharpest of the held-out set — while the S-side 138-vertex start becomes the mechanism control, since the S reduction was spent as the calibration (§R1) |
+| its answer on the roadmap | not carded | **two items adopted into phase F** (M63 §S.4): re-test his "a bigger disk gave nothing" negative, which he measured inside his own loop at his own speed and which is cheap at 150× — and a radius is exactly what hid Heule-510's own points from M62's arena; and carry the certification budget explicitly. Its ordering point is adopted in §3: the joint runs come first in wall-clock order, because they are the only items that can end the milestone with the goal met |
 
 ---
 
@@ -827,6 +847,7 @@ here.*
 | Checkpoints are JSON, not pickle | keep the existing pickle | readable by an outside reader, and diffable when a resume is questioned | high |
 | The shading is read from the raster, and trusted only through the arithmetic control | report ranges only and call the partition unattested | §3 makes the partition a hard gate, and his definition of stable is not the single-valued range; a raster read with a control that knows the answer for every fill cell is cheap | medium — if the table layout defeats the cell boxes, the partition is reported unattested |
 | C2's cheap `Y` statistics (M63 §4 phase C) are proposed for dropping | compute them (~1 h) | they size his explicit enumeration, which we do not run (M63 §S.3 C-5, awaiting approval) | medium |
+| **Every proposed drop carries its regime as a condition** and is re-tested when the regime changes (C4.0) | drop them outright, or keep them all | the arguments are measured on frozen-companion stages; F and G leave that regime, and the dropped items are precisely the cost-control ones (Poros card 6) | high |
 
 ---
 

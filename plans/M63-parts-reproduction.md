@@ -84,6 +84,11 @@ re-derived here unless said otherwise.
 approval needed because later work removed the object it was about), **drop?** (a drop that needs the
 product owner's explicit approval). Row ids are stable for citation.*
 
+**Every `drop?` row is conditional on phase C4.0's measurement** (Poros card 6, adopted): the arguments
+rest on ask costs from stages with a frozen companion, and the joint stage is the first without one. If
+the joint stage's asks rise ten-fold, the cost-control rows — B-8, B-11, B-12, C-5, D-6 and X-7's guard —
+come back for F and G.
+
 | id | promise (address) | status | evidence, or the argument | goes to |
 |---|---|---|---|---|
 | G-1 | `\|M\|` at 136 / 375 / 374 / 376 (§3 rank 1) | partly | 136 §R1; 375 M64 run, S.2 #1 | 374, 376 → D |
@@ -110,6 +115,7 @@ product owner's explicit approval). Row ids are stable for citation.*
 | B-8 | cyclic implication chain for mono-sets | drop? | an encoding alternative to the clique companion; asks cost ≤ 0.11 s (S.2 #11), nothing to accelerate; E revisits if the triple's asks are slow | — |
 | B-9 | one-time CNF | done | `parts_reduce.Oracle` | — |
 | B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | partly | refusal §R1; both-side criticality unchecked | C4's positive control |
+| B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | drop? | phase 1 is 450–576 asks at 0.006–0.11 s, under a minute; his batching answers a 10 s refusing ask. **Conditional on C4.0** | — |
 | B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100× | — |
 | C-1 | degree 2 by `hyperedges_run.py` on M62's arena (§4 C) | retired | `reduce_stage` harvests every degree lazily (sizes 1–10 stored, M64 §R3); M62's arena is off the path (M62 §R23) | — |
 | C-2 | degree ≥ 3 harvested | done | same | — |
@@ -227,12 +233,16 @@ Acceptance:
 - [ ] Reduction generalization on his published accumulators: L M6B 374 at rung 2 (78, `v406e2076`); L
   M6C 374 (76, `v400e2034`); S M6B (141, 4, `v172e804`) and M6C (150, 28, `v167e772`); the 8/3 mono-pair
   (367, 27, `v375e1862`); the √3 triple (221, 120, `v238e1131`).
-- [ ] **Loop generalization, starting below his accumulator:** first, the S side from a rung-2-symmetric
-  138-vertex minimum (M64 §R10), whose containment of any 136-minimum is forbidden by the closure gap, so
-  the frozen loop must expand to reach 136 — report `A` against `v166e774` and `|{M}|` against 8. Second,
-  the 8/3 mono-pair from a rung-symmetric start above 367. The product owner's shape (start from
-  `v136e564` alone) is kept as a third run; it is weaker because `|M|` is already 136 there, so it tests only
-  growth of `{M}`.
+- [ ] **Loop generalization, starting below his accumulator — the required run is the 8/3 mono-pair**
+  (Poros card 7): start from his published 367-vertex minimum `v367e1822` and let the frozen loop run. It
+  is genuinely held out, it starts below his accumulator, and its companion is **an edge**, which M63 §3
+  calls the sharpest of the held-out set because it exercises the companion abstraction rather than a
+  second type-M half. Three attested targets: `|M| = 367`, 27 minima up to the named group, and
+  `A = v375e1862` with Table 5's ranges.
+- [ ] **The mechanism control, not the held-out run:** the S side from a rung-2-symmetric 138-vertex
+  minimum (M64 §R10), whose containment of any 136-minimum is forbidden by the closure gap, so the loop
+  must expand to reach 136. It is a control because the S reduction was spent as this milestone's
+  calibration (§R1), so no S number is held out any longer.
 - [ ] A written human judgement over the frozen rows, and no aggregate verdict.
 
 *Cost:* 3–4 engineer-days; compute several hours in light jobs.
@@ -250,7 +260,11 @@ Acceptance:
   `A166 ∪ A172 ∪ A167`, frames found; (c) S reduced against one L minimum per profile class of the 1,092,
   and L against the 8 S classes; (d) other connection orbits at `ρ₁₅` — M62 §R20's `(0,0,2,6) + (24,0,0,0)`
   subtype at 18 edges, and `(20,0,0,4)`, `(16,0,6,2)` (FS-30's cheap lead); (e) the loop continued past
-  his stopping point from a larger reserve; (f) symmetric seeds from the rung lattice.
+  his stopping point from a larger reserve; (f) symmetric seeds from the rung lattice; **(g) his own
+  negative on the disk radius** — *"expanding the base graph and increasing the radius of the disk did not
+  lead to new results in our case"* (§5.6) — which he measured **inside his own loop, under his own
+  stopping rule, at about 100 laptop hours**; at 150× his reduction speed it is cheap to re-test, and a
+  radius is exactly what hid 37 of Heule-510's own points from M62's arena (§R22).
 
 *Cost:* open-ended; an experiment is 1 h – 1 day of compute; a certificate about a day.
 
