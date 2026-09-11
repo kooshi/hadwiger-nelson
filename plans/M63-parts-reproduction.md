@@ -102,10 +102,10 @@ phase D's expansion rule, that the cost argument never touched.
 | id | promise (address) | status | evidence, or the argument | goes to |
 |---|---|---|---|---|
 | G-1 | `\|M\|` at 136 / 375 / 374 / 376 (§3 rank 1) | partly | 136 §R1; 375 M64 run, S.2 #1 | 374, 376 → D |
-| G-2 | `{M}` ranges and the stable/unstable partition (§3 rank 2) | partly | L375 ranges differ in two orbits, attributed to his column (S.2 #4). **The partition is not in his text**: "stable" means *the same non-empty vertex set in every minimum* (§6 of his paper) and is marked only by gray shading, and a single-valued range does not imply it — our `(2,0,2,4)` is 10 in every minimum with a varying vertex set. §3(c)'s "31 stable orbits" read the ranges and is therefore unproven | C2 (shading, partition), C3 (column) |
-| G-3 | edge counts decomposed (§3 rank 3) | partly | 509 = 1860+564+12+6 §1(i); S136 564–567 §R1; L375 1920–1930 S.2 #4 | C2 commits L375; 374/376 → D |
+| G-2 | `{M}` ranges and the stable/unstable partition (§3 rank 2) | partly | L375 ranges differ in two orbits, attributed to his column (S.2 #4). **The partition is not in his text**: "stable" means *the same non-empty vertex set in every minimum* (§6 of his paper) and is marked only by gray shading, and a single-valued range does not imply it — our `(2,0,2,4)` is 10 in every minimum with a varying vertex set. §3(c)'s "31 stable orbits" read the ranges and is therefore unproven. **C2/C3 settled the ranges and left the partition unattested** (§R2.4c): three complete levels audited, and his printed 375 column is strictly narrower than BOTH the M6A and the M6B level in the same two cells — so the column is a property of neither run. Every orbit row now carries a status measured on our own level (`stable` / `unstable-constant-count` / `unstable-varying-count`), which is the honest form of the partition; his gray-shading marker is not extracted | the partition: a scoped shading extraction, or D |
+| G-3 | edge counts decomposed (§3 rank 3) | **done for three rows** | audited as `Comparison` rows, low AND high endpoint each: S136 **564–567**, L375 **1920–1930**, M6B 375 **1916–1926**, all agreeing (§R2.4c). The decomposition is always whole — `e(L)`, `e(S)`, centre-cross, and off-centre cross by radius family — and `e_S_his` books the twelve centre-to-S edges to the S side as he does, without which the S row would have read 552 against 564 (§R2.6) | 374/376 → D |
 | G-4 | `{M}` grows at fixed `M` (§3 rank 4) | not done | now two clauses: the replay comparison 78 → 1,092 (S.1 2a) and the tightened rule-driven clause (S.1 2c) | D |
-| G-5 | `\|{M}\|`, `\|A\|` reported (§3 rank 5) | partly | S 8 / 166 §R1; L375 282 / 403 S.2 #1–2; **gateable now**, the convention measured on both sides | C2; 374/376 → D |
+| G-5 | `\|{M}\|`, `\|A\|` reported (§3 rank 5) | **done for three rows** | under his convention (the stabiliser of the reduced part, companion free): **8 / 166**, **282 / 403**, **66 / 403**, each matching his Table 1 and each with `A` equal to his published accumulator LITERALLY, not merely up to the group. All three levels closed under the counting group, so these count orbits contained rather than orbits meeting (§O6, §R2.4c). Reported, never gated | 374/376 → D |
 | G-6 | held-out set (§3): S M6A, 8/3 mono-pair, √3 triple, L M6B/M6C | partly | S M6A reduction was spent as the calibration (§R1) | E (required, S.1 #3) |
 | A-1 | 43 files parse to their filenames (§4 A) | done | 40/43 exact plus three findings, §1; `parts-ref11-verified.json` | — |
 | A-2 | every lattice graph inside `Base(2.6)` | done | §1(vi) | — |
@@ -160,14 +160,14 @@ phase D's expansion rule, that the cost argument never touched.
 | X-1 | no verdict word for optimality (§E) | done | `Bound` | — |
 | X-2 | a count carries its method | done | `Count` | — |
 | X-3 | `\|{M}\|` names its group | partly | the type exists; every record writes "as-found frames" | C1 |
-| X-4 | comparisons carry their mode | partly | `Comparison` exists and is self-tested; nothing emits rows | C2 |
+| X-4 | comparisons carry their mode | **done** | `parts_audit.audit_level` emits them, stamped `TUNING - not evidence`, each with its attestation count; and **absence is never a blank** — a field his table does not attest, or one our level is too truncated to support, prints as `not-compared` with the reason. The S166 audit's 14 `not-compared` orbit rows are that rule working (§R2.4c) | — |
 | X-5 | the freeze is a commit (`require_frozen`) | **repaired and exercised** | two defects fixed (a hex digest of a hex digest; an `.items()` diff that raises on a nested list); `_freeze_control` plants all five cases in a scratch git repository and all five fire | D commits the freeze itself |
 | X-6 | the per-iteration line | not done | — | D |
 | X-7 | a level forecast before entry, and refusal of an unboundable level | drop? as specified | its premise is his candidate list, which implicit hitting set does not build. Replacement in D: a pre-level forecast from the measured per-minimum cost and a *stated* level-size assumption, with `max_minima` and the wall as the refusals (both implemented, reported as truncation) | D (replacement) |
-| X-8 | artifact schema: `fp`, `canonical_fp`, `fp_base`, per-member profile, stamps | partly | stage/base fingerprints and provenance present; per-member profiles, canonical fingerprints, config hash absent | C1 |
+| X-8 | artifact schema: `fp`, `canonical_fp`, `fp_base`, per-member profile, stamps | **done** | schema 2 (`parts_run.finish_record`) carries `problem_sha256`, `config_sha256`, `stage_identity`, `A_fp` per half, `A_canonical_fp_L` (the minimum over the 24 group images), `minima_fp`, per-member `member_profiles`, the atom labels as `(half, tuple)` so a reader can map atoms without rebuilding the stage, the registered predictions, a greppable `headline`, `launches` and `provenance`. On disk in the C3 and `.v2` records | — |
 | M64-1 | phase E / P9 (18 connection edges) | retired | vacuous (S.2 #5); the tail question is C3 | — |
 | M64-2 | phase F: expansion as an integer program over profiles | not done | one candidate rule among others, scored, never gated | D |
-| M64-3 | conjugacy of `Aut(A)`'s involutions (P7's second half) | not done | minutes, no solver | C2 |
+| M64-3 | conjugacy of `Aut(A)`'s involutions (P7's second half) | **done, and it confirms the prediction** | `parts_audit.involution_classes`: L's `Aut(A)` (order 12) has 6 conjugacy classes, of which **three are involution classes of sizes 3, 3, 1** — and M64 §R10's seven stored order-2 rung values are **three 375s, three 376s, one ≥377**, a multiset partitioning exactly as the classes do, which is what "the excess is a class function" requires. S: one involution class of size 3, and all three rungs read 138. **The row-to-class pairing itself is not computed**, so this is multiset agreement, not a proof of which row sits in which class | the pairing, if D wants it |
 | M64-4 | rungs not searched to their minima | partly | §R10 made 15/16 L and 4/6 S rungs exact from `Y`; the S order-3 rung closed at 142 in planning (S.2 #14); open: one L rung (≥ 377) and one S involution (≥ 138) | C2 |
 | M64-5 | separate obligation/experience passes | recorded | M64 closed; M63 phase C runs all three | — |
 | M64-6 | P5, idealness of `Y` | drop? | needs a complete `Y`; off the record path | — |
@@ -1327,6 +1327,65 @@ critical, so every group splits to the bottom. **The sharpened, zero-ask form go
 the stored `Y`, what fraction of eight-subsets *of the non-necessary atoms* has a `Y`-independent
 union, under the natural order and under an order built inside a maximum independent set of `Y`, and
 what does it look like at group sizes 2 and 4? That is answerable with no solver at all.
+
+### R2.4c — The three audits, and what the M6B level says about his printed column
+
+*Artifacts: `data/m62/m63-audit-{S166,L451,M6B403}.json`, mode `tuning`, no aggregate verdict.*
+
+| row | S166 | L451 | M6B403 |
+|---|---|---|---|
+| `\|M\|` vertices | **136 = 136** | **375 = 375** | **375 = 375** |
+| edges, low | **564 = 564** | **1920 = 1920** | **1916 = 1916** |
+| edges, high | **567 = 567** | **1930 = 1930** | **1926 = 1926** |
+| `\|A\|` | **166 = 166**, `A-equal` literally | **403 = 403**, `A-equal` | **403 = 403**, `A-equal` |
+| `\|{M}\|` up to `Aut(A)`, companion free | **8 = 8** (order 6) | **282 = 282** (order 12) | **66 = 66** (order 6) |
+| his own minimum is one of ours | 6 images | 12 images | 6 images |
+| fewest-edge member's stabiliser | 1 — his *"1"* | 2 — his *"1 (2)"* | 2 — his *"1 (2)"* |
+| level closed under the counting group | true | true | true |
+
+**Every attested scalar of three independent rows of his Table 1 agrees**, each level certified
+complete with zero undecided asks. The S-side edge row is the one the accounting convention of
+R2.6 would have broken: it reads 564 only because `e_S_his` books the twelve centre-to-S edges to
+the S side as he does.
+
+**P-C2.1 is met on six of its seven clauses and honestly NOT-COMPARED on the seventh.** Table 4's
+M6A ranges were never transcribed, so the S166 audit reports **0 of 14 orbit rows compared, 14
+not-compared** rather than an empty differing-list that would read as agreement. That is the
+silent-omission trap this instrument was designed against, caught by the design rather than by me.
+
+**P-C2.2 is met exactly as registered:** of 35 compared orbit rows on L451, exactly `(2,0,6,4)`
+and `(10,0,2,4)` differ and nothing else does.
+
+#### The "M6A&B" column: UNDECIDED by the registered rule, and narrower than both runs
+
+| orbit | his printed 375 column | our M6A level (282) | our M6B level (66) |
+|---|---|---|---|
+| `(2,0,6,4)` | **0 – 4** | 0 – 6 | **2 – 6** |
+| `(10,0,2,4)` | **8 – 12** | 6 – 12 | **6 – 10** |
+
+The decision rule registered before the run (subplan §C3) says: *an M6B member with
+`(2,0,6,4) ≥ 5` ⟹ neither reading; the column is undecided and the numbers are reported.* **An M6B
+member reaches 6.** So:
+
+- **P-C3.1 MET on every clause** — 375 vertices, **66** up to `Aut(A)`, union equal to his
+  `v403e2106` literally, edges 1916–1926, fewest-edge stabiliser 2.
+- **P-C3.2 FALSIFIED** — its falsifier was exactly "an M6B member with `(2,0,6,4) ≥ 5`".
+- **Poros's registered prediction FALSIFIED** — the printed column is not the M6B run's own ranges;
+  M6B reads 2–6 and 6–10 against the printed 0–4 and 8–12.
+- **The column is therefore UNDECIDED between M6A's, M6B's and the shared profiles** — and the
+  reason is sharper than "undecided": **the printed column is strictly narrower than BOTH complete
+  levels, in the same two cells.** It is not the union (0–6, 6–12), not the intersection (2–6,
+  8–10), and not either run.
+
+**The tension worth carrying to D, because it is not resolved here.** His *counts* reproduce
+exactly — 8, 282 and **66**, on three independent rows, under the convention §R1 measured — while
+his *ranges* on these two orbits are narrower than the complete levels those very counts describe.
+If his `{M}` were our `{M}`, both would agree. Two readings survive: a **printing defect in the
+range column**, which is the economical one given Table 3's `A` column carries two proven typos and
+Tables 5 and 7 do not sum to their captions; or **his enumeration stopping early** (§5.5's threshold
+clause), which his matching counts argue against. **A defect landing on the same two cells for two
+different subtypes is a property of the column, not of either run** — which is what §S.2 #4
+concluded from the M6A side alone, now with a second independent witness.
 
 ### R2.5 — Four instruments, one failure shape
 
