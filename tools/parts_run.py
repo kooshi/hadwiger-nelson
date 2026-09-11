@@ -264,8 +264,8 @@ def announcement(stage, config, rows, row, out, ckpt):
         f"{stage.deletable.bit_count()}, atoms {n_atoms}, pin {len(stage.pin)}, law cos "
         f"{config['problem']['cross_law']['cos']})",
         f"frames     S frame: coset {row['coset']} of {len(rows)}, element "
-        f"{'identity (the stored frame)' if config['problem']['S']['frame']['is_stored_frame'] else ''}"
-        f" image of {tuple(FREE_POINT)} is {tuple(config['problem']['S']['frame']['is'])}"
+        f"{'the identity (the stored frame)' if config['problem']['S']['frame']['is_stored_frame'] else 'NOT the stored frame'}"
+        f", named by its image of {tuple(FREE_POINT)}: {tuple(config['problem']['S']['frame']['is'])}"
         + (f"; coset(s) {others} are DIFFERENT problems (at most {len(rows)} inequivalent; the "
            f"converse is not claimed)" if others else ""),
         f"forecast   phase 1 ~ {ph1:.0f} s ({n_atoms} asks at the L451 refusing mean of 0.02 s); the "
@@ -383,6 +383,55 @@ def cmd_frames(args):
               f"qualifying {len(r['qualifying'])}")
 
 
+def compare_records(a: dict, b: dict) -> dict:
+    """c1.7: a regenerated record against the stored one.
+
+    `regenerated-identical` proves that the committed driver computes the same level from the same
+    stage. It does NOT prove the stored record was right (§O8). And the two failure modes are not
+    the same: a differing **Y** is EXPECTED and reported, because the harvest order is a launch
+    artifact -- a fresh solver may return a different model for the same colourable ask, and the
+    shrink starts from that model -- while a differing **level** is a defect. The verdict names
+    which."""
+    ours = {tuple(sorted(m)) for m in a.get("minima", [])}
+    theirs = {tuple(sorted(m)) for m in b.get("minima", [])}
+    fields = {
+        "stage_fingerprint": (a.get("stage_fingerprint"), b.get("stage_fingerprint")),
+        "bound": (a.get("bound"), b.get("bound")),
+        "M_vertices": (a.get("M_vertices"), b.get("M_vertices")),
+        "verdict": (a.get("verdict"), b.get("verdict")),
+        "level_size": (len(ours), len(theirs)),
+        "A_atoms": (a.get("A_atoms"), b.get("A_atoms")),
+        "A": (sorted(a.get("A", [])), sorted(b.get("A", []))),
+    }
+    bad = [k for k, (x, y) in fields.items() if x != y]
+    if ours != theirs:
+        bad.append("minima")
+    Y = (a.get("hypergraph", {}).get("correction_sets"),
+         b.get("hypergraph", {}).get("correction_sets"))
+    Ysets = ({tuple(c) for c in a.get("hypergraph", {}).get("sets", [])},
+             {tuple(c) for c in b.get("hypergraph", {}).get("sets", [])})
+    return {
+        "verdict": "regenerated-identical" if not bad else
+                   "regenerated-differs:" + ",".join(bad),
+        "fields_compared": sorted(fields) + ["minima"],
+        "differing": bad,
+        "minima_only_in_new": len(ours - theirs), "minima_only_in_stored": len(theirs - ours),
+        "Y": {"new": Y[0], "stored": Y[1], "identical": Ysets[0] == Ysets[1],
+              "only_in_new": len(Ysets[0] - Ysets[1]), "only_in_stored": len(Ysets[1] - Ysets[0]),
+              "gated": False,
+              "note": "reported, never gated: the harvest is a launch artifact (§O2). A control "
+                      "demanding an identical Y would assert something false about correct code."},
+        "asks": {"new": a.get("asks", {}).get("colourable", {}).get("n"),
+                 "stored": b.get("asks", {}).get("colourable", {}).get("n")},
+    }
+
+
+def cmd_compare(args):
+    out = compare_records(json.load(open(args.new)), json.load(open(args.stored)))
+    print(json.dumps(out, indent=1))
+    return out
+
+
 def _self_test():
     """Controls: the naming point is free; the frame refusal fires and lists its cosets; the coset
     numbering is stable; the joint working graph is the one M63 §S.2 #8 measured."""
@@ -458,6 +507,10 @@ def main():
     f.add_argument("--contains")
     f.add_argument("--refuses-with", dest="refuses_with")
     f.set_defaults(f=cmd_frames)
+    c = sub.add_parser("compare")
+    c.add_argument("--new", required=True)
+    c.add_argument("--stored", required=True)
+    c.set_defaults(f=cmd_compare)
     a = ap.parse_args()
     if a.selftest:
         sys.exit(0 if _self_test() else 1)
