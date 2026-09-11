@@ -194,6 +194,14 @@ two orders of magnitude. **M62 §R22's measured law is slack over the nearest re
   measured where the loop *ends* — near the global optimum, where the instance is tightest. Registered as
   **P-D0b**: refusing asks at the 374 level cost materially more than at the 375 level on the same kind of
   stage. If that fires, the wrong forecasts are the ones for the loop's last and longest iterations.
+- **Corroboration from the small half, measured today under load** (the S-expansion engineer, on the
+  32-core desktop at load ~6, sharing with phase C's three reductions and its own four): the `A166`
+  baseline against the frozen `L374` regenerated at **12,532 colourable @ 0.0111 s and 3,033 refusing
+  @ 0.1352 s**, level closed, zero undecided; and **four expanded stages at 542–557 vertices and 168–183
+  atoms read 0.0096–0.0119 s colourable and 0.113–0.189 s refusing**. **So a frozen-companion stage stays
+  in the cheap regime as its working graph grows, and the refusing mean moved by well under 2×** — which
+  is the first direct evidence for P-D0a, on the side D does not run, and it is why D0 confirms rather
+  than gambles.
 
 **Price an iteration in correction sets, not in asks.** Harvesting dominates: on the L451 run each
 correction set cost about **17 colourable asks and 2 refusing ones** — ~0.16 s at L451's rates and ~6 s at
@@ -550,6 +558,7 @@ def run_loop(base, start_record: str, *, rule: str, companion, max_iterations: i
 it 7  rung 1  rule ours  W 421  |M| 375 (+0)  |{M}| 312 (+30)  |A| 406 (+3)  Y: d1 318 d2 161 d3 64
       cand 14 ranked, top freed 9/6 new   target 374   corr 1.4k @0.16s
       asks 11.2k @0.007s / 4.1k @0.021s   STALL 0/6   ckpt …loop-L.ckpt.json 18 s ago  [f47e1f3·a19c4d21]
+      kill-safe: a relaunch redoes this iteration's ranking (~40 s) + the reduction since its checkpoint
 ```
 
 ### D5 — our own record
@@ -642,6 +651,27 @@ def edge_atoms(stage) -> "Stage":
  "predictions": [], "provenance": {}}
 ```
 
+And the map, whose whole purpose is that **a ranking nobody has thought of yet is scorable from this file
+alone** — so it stores *labels and costs*, never scores (§E1):
+
+```json
+{"kind": "m63-map", "schema": 1, "producer": "tools/parts_run.py:run_map",
+ "headline": "A412 menu under reading (b), 57 candidates: 39 no, 4 yes, 2 unknown, 12 not run [random block complete]",
+ "note": "no score is stored. Any ranking over these candidates is scored from this file by read-off;
+          uniform random's expectation is a hypergeometric over the yes/no/unknown counts.",
+ "menu": {"admission_reading": "b-literal-internal", "count": 57, "shoulder_included": true,
+          "outside_his_disk": [[18, 0, 0, 6]], "provisional": []},
+ "density": {"yes": 4, "no": 39, "unknown": 2, "not_run": 12,
+             "note": "three-way and never two: an `unknown` is not a `no`"},
+ "entries": [{"candidate": {"vertices": 12, "orbits": {"(8,0,0,4)": 12}, "provenance": "reserve"},
+              "block": "random", "block_index": 3,
+              "asked_at_target": 373, "verdict": "no",
+              "M": null, "M_set": null, "freed": 7,
+              "flags": ["outside-his-disk"],
+              "asks": {}, "correction_sets": 812, "cpu_seconds": 154.0}],
+ "predictions": [], "provenance": {}}
+```
+
 ### Planted controls, each with the verdict it must flip
 
 | control | plant | must read |
@@ -658,6 +688,7 @@ def edge_atoms(stage) -> "Stage":
 | d4.1 | a starting record carrying `A_sample` | `level-truncated`; the loop refuses to start |
 | d4.2 | a loop killed mid-iteration and resumed | `loop-resume-identical` on the history and every completed iteration's minima |
 | d4.3 | `stall_limit` iterations with all three quantities unchanged | verdict `stalled`, never `complete` |
+| d4.4 | **an `A`-dependent choice re-resolved after an expansion** — run two iterations at a rung named `order:2`, and compare the group elements resolved at iteration 1 against those at iteration 2 | `rung-pinned`: identical element lists. If they differ, `rung-drifted:<iteration>` and the run stops — `Aut(A)` grew with `A` and the loop silently changed problems (§O2). The same control covers any pinned image or frame |
 | d5.1 | our `L374 ∪ ρS136` | 509 vertices, 2,442 edges, `1860 + 564 + 12 + 6`, refusing |
 | d6.1 | the edge sweep built over the L-only index space (§1(d)'s real bug) | `edge-sweep-wrong-graph`: the pre-ask assertion 509 / 2,442 fails |
 | d6.2 | a pin-triangle edge offered to the sweep | refused, `pin-edge-protected` |
@@ -971,6 +1002,11 @@ and end every commit with the two attribution lines.
 - [ ] **The helpful density is reported first** (§3.2(2)), for each half separately; P-D3, P-D3b and P-D12
   scored.
 - [ ] The `A403` map ran **only after** the rule's attempt; **d6.4 fires** at the core count used.
+- [ ] **The map artifact carries what makes it re-scorable** (§E1): no stored score; `block` and
+  `block_index` per entry; `asked_at_target` per entry; a **three-way** density with `not_run` beside it;
+  the admission reading named; outside-his-disk and provisional entries flagged.
+- [ ] **No rendering presents a one-sided bound as a minimum** (§E2), and the four refusal texts of §E3
+  are asserted as golden strings by the self-tests.
 - [ ] The `no_filter_random` sample run, with its enumeration named — or dropped under §3.2's stated cut,
   and said so.
 - [ ] Exchange-class vector and per-rung closure bound at each replayed state plus our 375 level; FS35-1
@@ -1204,6 +1240,29 @@ raise the minimum — the L side reads 375 at rung 1 and 376 at three of its inv
 is essential: a different `C` is a different key property. *Same cross-law* is essential for the same
 reason. None is decoration.
 
+**And the hypotheses have a practical form that will bite before the theory does.** The S-expansion
+engineer hit it today: its per-candidate control chose *"the group image of the record's small half with
+the smallest name that lies inside `A`"*, and because an expansion makes `A` larger, **more images fit** —
+twelve of twenty-four at one candidate against six at the baseline — so the rule silently selected a
+different image, which is a different problem that does not refuse. The control failed loudly and stopped
+that candidate rather than poisoning the batch. The general statement, and it is this plan's to carry:
+
+> **Anything chosen by a rule that reads `A` changes meaning when `A` grows.**
+
+**So every `A`-dependent choice is pinned by value at the baseline, never re-resolved per iteration.**
+Three of them are live in this phase, and the third is the dangerous one:
+- the **companion's frame** — pinned by its image of `(2,0,4,2)`, which phase C's naming convention
+  already does;
+- the **image of any reference object** used in a control — pinned to the one the *baseline* `A` contains;
+- the **rung**. A rung is a subgroup of `Aut(A)`, and **`Aut(A)` changes when `A` grows**, so `--rung
+  order:2` names one group before an expansion and possibly another after it. The loop therefore carries
+  its rung as an **explicit list of group elements**, resolved once, and `O2`'s *"same rung"* hypothesis
+  becomes a checkable property of the run rather than an assumption about it. Rung 1 is immune, which is
+  why the reproduction path is safe and F's symmetric seeds are not.
+
+It is also the same fact as §3.3 from a second direction: a capped level gives a smaller `A`, so a rule
+reading it proposes expansions the true `A` never offered and withholds ones it did.
+
 ### O3 — A target preserves completeness on success and yields a one-sided bound on failure
 
 > **Claim.** Asking `reduce_stage` at target `t` (is there a refusing selection of weight ≤ `t`?) is sound
@@ -1296,6 +1355,130 @@ returned object with a degree-3 vertex is a bug (milliseconds per candidate), an
 below 1,016 is a failure rather than a record**. That is exactly the failure an edge sweep is prone to —
 dropping an edge whose loss is masked by a stale incumbent — caught by an assertion rather than by a
 reviewer. *Credit: Poros, 2026-09-11; the centre caveat and the 1,016/1,018 split are this pass's.*
+
+---
+
+## §E — The experience-modelling pass (WORKFLOW step 5, `debruijn-experience-modeling`, run fresh)
+
+*Four consumers, and they want different things: the **implementer**, who inherits instruments; the
+**product owner**, reviewing a run they did not launch; **whoever needs the machine** and must decide
+whether killing a multi-hour job is safe; and the **reader of the record**, who was not here. The pass
+asks one question of every surface — what does the system know here that the reader will not have?*
+
+### E1 — Five things the system knows and no artifact in my skeleton said
+
+1. **That a score was not stored, and why that is the point.** The map exists so a ranking invented later
+   is scorable without re-running — but only if the file holds **labels and costs**, not the scores of
+   the rankings we happened to think of. A reader who finds `his_move_rank` and nothing else will assume
+   the stored scores are all there are. **Corrected:** the map stores per-candidate verdicts and costs,
+   carries an explicit `note` saying any ranking is a read-off from it, and `his_move_rank` is labelled a
+   diagnostic rather than a result.
+2. **Which block an entry came from — the difference between an unbiased map and a biased one.** A reader
+   seeing 30 of 57 entries cannot tell a random 30 (unbiased for every ranking) from the top 30 by his
+   degree order (biased for exactly the comparison the map exists to make). **Corrected:** every entry
+   carries `block` and `block_index`, and the headline says whether the random block is complete.
+3. **Whether an entry was asked at a target.** `no` under target `t` means *"cannot reach `t`"*, not
+   *"no improvement is possible"* — a one-sided bound wearing a verdict. **Corrected:** every entry
+   carries `asked_at_target`.
+4. **That an `unknown` is not a `no`.** With conflict-slice budgets, `unknown` is reachable, and a
+   two-way density silently folds undecided candidates into refusals — inflating every ranking's apparent
+   precision. **Corrected:** the density is **three-way and never two**, and `not_run` is a fourth field
+   so a truncated map cannot be read as a complete one.
+5. **Whether a kill is safe right now, and what it costs.** Phase C's progress line gives the
+   checkpoint's age; a loop needs more, because an iteration spans an expansion ranking the checkpoint
+   does not cover. **Corrected:** the per-iteration line ends with `kill-safe:` naming exactly what a
+   relaunch redoes.
+
+### E2 — The verdict vocabulary, extended, with the one confusion that matters
+
+Phase C's closed list, plus phase D's: `no-selection-at-target`, `unknown-at-target`, `level-truncated`,
+`stalled`, `map-entry-impossible`, `map-identity-agrees`, `map-parallel-identical`,
+`edge-sweep-impossible`, `edge-sweep-wrong-graph`, `pin-edge-protected`, `centre-critical`,
+`rule-read-his-data`, `no-op-expansion`, `proxy-cannot-separate`, `batch-agrees`, `rungs-agree`,
+`contains-a-known-minimum`, `provisional`.
+
+**No word means "clean"** — phase C's rule — and phase D adds a second: **no rendering may present a
+one-sided bound as a minimum.** That is the confusion this phase is most likely to ship, because the
+target knob makes one-sided bounds the *common* outcome of a sweep rather than an exotic one. So
+`Bound.render()` on a targeted failure reads
+
+```
+no refusing selection of ≤ 373 (lower bound 374, rung 1, 0 undecided)
+```
+
+and the word *minimum* is unreachable in that branch by construction, not by discipline.
+
+### E3 — Refusal texts, pinned as golden strings
+
+Following phase C's genre — what happened in the reader's vocabulary, in which space the judgement was
+made, and what to do next, pasteable. The self-tests assert the rendered text, because the message is the
+product:
+
+```
+loop refused to start: the record data/m62/m63-joint-….json carries `A_sample`, not `A`.
+  Its level was capped at 64 minima, so its union is a sample of the accumulator and not the
+  accumulator. The loop's state variable is the union of ALL minima at the size.
+  Exhaust the level first:  --max-minima 0 --phase2-wall 7200 --checkpoint <path>
+  Or raise the rung, which keeps a complete level at a smaller one:  --rung order:2
+```
+
+```
+refused to render a targeted search as a minimum.
+  This run asked "is there a refusing selection of ≤ 373?" and the answer was no.
+  That is a lower bound of 374, not a minimum of 374: an untargeted run may still find
+  a smaller selection that this one never enumerated.
+  Ask for the minimum:  drop --target
+```
+
+```
+map refused to report a density: 2 of 57 entries are `unknown-at-target`.
+  An undecided candidate is not a refused one, and folding them together would inflate
+  every ranking's precision. Decide them or report the three-way split.
+  Raise the budget on those two:  --slice-conflicts 400000 --wall-ask 1800 --only 17,42
+```
+
+```
+edge sweep returned an impossible object: vertex (0,0,0,0) has degree 3.
+  Every vertex critical in the 509 has degree ≥ 4 in any refusing edge-subgraph (plan §O6),
+  so this object cannot refuse four colours and the sweep has a bug — most likely an edge
+  dropped against a stale incumbent. The run is abandoned, not reported.
+```
+
+### E4 — The escalation, now in two currencies
+
+Phase C's §E5 template covers a vertex count below 509. Phase D adds the **edge** currency, and it needs
+two lines phase C's does not, because the objection is different — a reader's first thought on hearing
+"we removed edges" is that the drawing is no longer unit-distance:
+
+```
+An edge minimisation returned <E> edges on 509 vertices, below the published 2406.
+  problem     the assembled record, edges as atoms, pin edges fixed
+  bound       <Bound.render()>        exact / one-sided: <which>
+  floor       ≥ 1016 by the degree argument (1018 with the centre's criticality, control d6.8)
+  still UD    every edge kept is a unit pair; a unit-distance graph does not require every
+              unit pair to be an edge — the convention [deGreyParts2023] fn.2 itself uses
+  geometry    exact unit-distance re-check: <pass/fail, how many edges>
+  refutation  CaDiCaL <version>, LRAT proof <path>, checked by <tool>: <result>
+  prior state 2442 in [Parts2020a]; 2406 in [deGreyParts2023] fn.2, by a NON-exhaustive discard
+  NOT yet done: the Lean kernel certificate (phase F). This is not a record until that lands.
+```
+
+### E5 — What the record must not make the reader compute
+
+A reviewer reads the head and stops, so the map and the loop records open with `headline` and `density`
+and only then the per-entry table. Three things are stated rather than left derivable: **the reading of
+his admission rule** that produced the menu (without it the count 57 is uninterpretable), **whether the
+random block completed** (without it no precision estimate is meaningful), and **which entries are
+`provisional`** under the unverified cross-edge column. Each is a fact the system holds at write time and
+the reader cannot recover at read time.
+
+### E6 — Three corrections this pass made to my own skeleton
+
+1. The map schema stored no `block`, so a truncated map would have been uninterpretable — and truncation
+   is the *expected* outcome if D0 reads expensive, which makes this the likeliest artifact to ship.
+2. The density was two-way, which would have folded `unknown` into `no` and inflated every ranking.
+3. The per-iteration line ended at the checkpoint's age, which answers "is a kill safe?" but not "what
+   does it cost?" — the two questions whoever needs the machine actually holds.
 
 ---
 

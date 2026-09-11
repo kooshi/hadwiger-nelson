@@ -774,6 +774,160 @@ def base_group_perms(base):
             for g in T.parts_group()]
 
 
+# ===================================================================== the rung lattice (M64 §R10)
+def _atom_orbits(rung: Rung, n: int):
+    """The orbits of `rung` on the atoms, as index lists. An H-invariant selection is a union of
+    these, which is the whole content of §R10(b)."""
+    seen, out = set(), []
+    for a in range(n):
+        if a in seen:
+            continue
+        orb = sorted({p[a] for p in rung.perms} | {a})
+        seen |= set(orb)
+        out.append(orb)
+    return out
+
+
+def rung_lattice(base, stage, rec, *, verify_ask=None, group_perm=None, log=print) -> dict:
+    """For every subgroup `H` of `Aut(A)`: the weight-minimum hitting set of the STORED `Y` over
+    the `H`-orbits (M64 §R10(b)).
+
+    **It costs no colouring ask.** An `H`-invariant selection is a union of `H`-orbits, and it
+    refuses iff it hits every correction set -- and a correction set is a property of the base
+    problem, not of the rung. So `Y`, harvested once at rung 1, is the complete constraint system
+    for every subgroup at once.
+
+    The value is a LOWER bound, because `Y` is harvested lazily and fewer constraints mean a
+    smaller minimum. When `verify_ask` is given, one refusal ask on the witness closes it to an
+    equality whenever the witness refuses (§R10's own control).
+
+    Reproduces `data/m62/m64-rung-lattice.json`, whose producer was a scratch script (M64-9)."""
+    from pysat.formula import WCNF
+    from pysat.examples.rc2 import RC2
+    G = group_perm or base_group_perms(base)
+    aut = stage_symmetry(base, stage, G)
+    n = len(stage.atoms)
+    weight = [m.bit_count() for m in stage.atoms]
+    Y = [list(c) for c in rec["hypergraph"]["sets"]]
+    minima = [frozenset(m) for m in rec["minima"]]
+    rows, n_sat, n_unsat = [], 0, 0
+    for H in subgroups(aut):
+        orbs = _atom_orbits(H, n)
+        of = {a: i for i, o in enumerate(orbs) for a in o}
+        w = WCNF()
+        for c in Y:
+            w.append(sorted({of[a] + 1 for a in c}))
+        for i, o in enumerate(orbs):
+            w.append([-(i + 1)], weight=sum(weight[a] for a in o))
+        with RC2(w) as rc:
+            model = rc.compute()
+        kept = [i for i in range(len(orbs)) if model[i] > 0]
+        bound = sum(weight[a] for i in kept for a in orbs[i])
+        attained = None
+        if verify_ask is not None:
+            atoms = sorted(a for i in kept for a in orbs[i])
+            v = verify_ask(atoms)
+            attained = (v == "unsat")
+            n_unsat += attained; n_sat += (not attained)
+        rows.append({"order": H.order, "orbits": len(orbs), "bound": bound,
+                     "attained": attained, "vertices": bound + stage.side_fixed,
+                     "excess": bound - min(len(m) and sum(weight[a] for a in m) for m in minima)
+                     if minima else None,
+                     "invariant_minima_at_base": sum(1 for m in minima if H.invariant(m))})
+    base_atoms = min(sum(weight[a] for a in m) for m in minima) if minima else None
+    for r in rows:
+        r["excess"] = None if base_atoms is None else r["bound"] - base_atoms
+    return {"aut_A_order": aut.order, "base_level_atoms": base_atoms,
+            "base_level_vertices": None if base_atoms is None else base_atoms + stage.side_fixed,
+            "rungs": rows, "verified": verify_ask is not None,
+            "note": "bound = weighted minimum hitting set over the HARVESTED Y (a subset of the "
+                    "true Y, hence a lower bound); 'attained' means the witness was verified to "
+                    "refuse, which closes it to an equality.",
+            "producer": "tools/parts_faces.py:rung_lattice"}
+
+
+def orbit_closure(base, stage, rec, *, group_perm=None) -> dict:
+    """For every subgroup `H`: `min |cl_H(M)|` over the level's members (M64 §R5), the solver-free
+    UPPER bound on the rung-`H` minimum -- and an equality when minimised over inclusion-minimal
+    refusers rather than minimum-size ones (§R10(a)).
+
+    Reproduces `data/m62/m64-orbit-closure.json` (M64-9)."""
+    G = group_perm or base_group_perms(base)
+    aut = stage_symmetry(base, stage, G)
+    weight = [m.bit_count() for m in stage.atoms]
+    minima = [frozenset(m) for m in rec["minima"]]
+    size = min(sum(weight[a] for a in m) for m in minima) if minima else None
+    rows = []
+    for H in subgroups(aut):
+        dist, best, inv = Counter(), None, 0
+        for m in minima:
+            cl = set()
+            for p in H.perms:
+                cl |= {p[a] for a in m}
+            w = sum(weight[a] for a in cl)
+            dist[w] += 1
+            best = w if best is None else min(best, w)
+            inv += (len(cl) == len(m))
+        rows.append({"order": H.order, "invariant_minima": inv, "min_closure": best,
+                     "closure_excess": None if size is None else best - size,
+                     "upper_bound_on_M_H": best,
+                     "closure_distribution": {str(k): v for k, v in sorted(dist.items())}})
+    return {"level_size": size, "minima": len(minima), "aut_A_order": aut.order, "rungs": rows,
+            "theorem": "R upward closed and H <= Aut(A): every h(M) refuses, so cl_H(M) = "
+                       "U_h h(M) is an H-invariant refuser. Hence min_M |cl_H(M)| is an upper "
+                       "bound on the rung-H minimum, computable with no solver, and it is an "
+                       "EQUALITY when the minimum is taken over inclusion-minimal refusers "
+                       "(M64 section R10 a).",
+            "producer": "tools/parts_faces.py:orbit_closure"}
+
+
+def _reproduce_m64(verify=True):
+    """c1.8: regenerate M64's two scratch-produced artifacts and compare rung by rung.
+
+    Verdicts are `reproduces-m64` or `differs-from-m64:<side>:<rung index>`; nothing here says
+    "clean"."""
+    import json as _json, os as _os, sys as _sys, time as _time
+    _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+    import parts_repro as P, parts_stage as PS, parts_vtx as V, parts_reduce as RED
+    ROOT = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    D = _os.path.join(ROOT, "data", "m62", "parts-ref11", "JP", "Large")
+    t0 = _time.time()
+    B = P.Base(P.PARTS_R)
+    G = base_group_perms(B)
+    stored_rl = _json.load(open(_os.path.join(ROOT, "data", "m62", "m64-rung-lattice.json")))
+    stored_oc = _json.load(open(_os.path.join(ROOT, "data", "m62", "m64-orbit-closure.json")))
+    out, fails = {}, []
+    for side, Lf, Sf, rf in (("L", "v451e2400.vtx", "v136e564.vtx", "m63-L451-reduction.json"),
+                             ("S", "v374e1860.vtx", "v166e774.vtx", "m63-S166-reduction.json")):
+        st = PS.Stage(B, V.load_lattice(_os.path.join(D, Lf)), V.load_lattice(_os.path.join(D, Sf)),
+                      side=side, rung=1)
+        rec = _json.load(open(_os.path.join(ROOT, "data", "m62", rf)))
+        ask = None
+        if verify:
+            orc = RED.Oracle(st, wall=600.0)
+            ask = lambda kept: orc.ask(kept)[0]
+        rl = rung_lattice(B, st, rec, verify_ask=ask, group_perm=G)
+        oc = orbit_closure(B, st, rec, group_perm=G)
+        out[side] = {"rung_lattice": rl, "orbit_closure": oc}
+        for k, ours, theirs in (("rung_lattice", rl["rungs"], stored_rl[side]["rungs"]),
+                                ("orbit_closure", oc["rungs"], stored_oc[side]["rungs"])):
+            if len(ours) != len(theirs):
+                fails.append(f"differs-from-m64:{side}:{k}:count {len(ours)} vs {len(theirs)}")
+                continue
+            for i, (a, b) in enumerate(zip(ours, theirs)):
+                keys = [x for x in b if x in a and x not in ("attained",)]
+                bad = [x for x in keys if a[x] != b[x]]
+                if bad:
+                    fails.append(f"differs-from-m64:{side}:{k}:rung {i} on {bad} "
+                                 f"(ours {[a[x] for x in bad]}, stored {[b[x] for x in bad]})")
+        print(f"  {side}: {len(rl['rungs'])} rungs, aut order {rl['aut_A_order']}, "
+              f"base level {rl['base_level_vertices']} vertices  [{_time.time()-t0:.0f}s]")
+    print("\n" + ("reproduces-m64" if not fails else "\n".join(fails)))
+    return out, fails
+
+
 if __name__ == "__main__":
     if "--self-test" in sys.argv:
         _self_test()
+    elif "--reproduce-m64" in sys.argv:
+        _reproduce_m64(verify="--no-verify" not in sys.argv)
