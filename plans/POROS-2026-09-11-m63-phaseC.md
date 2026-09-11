@@ -265,6 +265,38 @@ question: what-does-a-capped-joint-level-leave-as-the-loops-state
   falsifier: the plan already names the capped union a sample rather than A
   rank: 9
 
+**Fate of card 9 — adopted by the planner, 2026-09-11, and its falsifier did not fire.** The plan called
+the capped union a sample nowhere, and phase F(a) read *"if C4 reads 509, run the rule-driven loop on the
+joint level set"* — a loop starting from a capped union, a sample standing in for the state variable. Now:
+a capped record writes `A_sample` and no `A` field at all; no loop may start from one; F(a) must first
+exhaust the level or check completeness by M64 §0(ix)'s affine-hull control, with the hull predicted from
+ask-derived correction sets. Both side notes adopted: his §5.6 symmetry guess becomes a free check in C2
+against his own fifteen rows, surviving into G's fresh arenas where no stage exists yet; and the √3 timing
+provenance becomes a caveat on B-11's drop, so a timing compared with his 0.2 s must say whether the
+five-vertex assignment was on.
+
+## Handover — what the next Poros inherits
+
+**Cards.** Nine written; eight adopted by the planner, card 3 answered by the product owner, card 5
+answered as recommended. Fates are beside each card above, and in the phase's own record §7.
+
+**Open, and in this order.** (i) Card 1's two runs — the joint reduction over A412 ∪ ρ·g(A166), in **two**
+inequivalent relative frames (double cosets, planner's correction), which is the only item that can end
+the milestone with the goal met; its answer decides whether phase D's loop is needed for the record at
+all. (ii) C4.0, the joint stage's own ask costs, on which four remaining drops are conditional
+(`P-C4.0`, my hunch at 60%). (iii) Card 8's run — whether his §5.10 indicators rank the orbits his own
+move used. (iv) Three ledger hunches still open: the joint minimum at 509 (prior, ~35% on fewer), the
+reserve condition (a pre-registered exact test passed, awaiting the engineer's re-derivation), and
+whether 509 is still the record, which the prior-art gate settles.
+
+**The process lesson, the planner's, worth carrying to D.** Its gap audit was built by walking the plan's
+promises, so it inherited the plan's blind spots; three of my nine cards found something the table
+asserted without carrying (the S side already spent as the calibration, 8-4-2-1 absent entirely, and
+§5.10's second role). The consequence it drew is not "ask the advisor more" but **audit the source, not
+the plan** — and the matching one on my side is that all three came from reading his paper against a
+question the plan had not asked, which is the cheapest reading available to whoever is not holding the
+plan.
+
 ## Measurements
 
 *Scripts in the scratch directory; each reads his `.vtx` files through `tools/parts_vtx.load_lattice`,
