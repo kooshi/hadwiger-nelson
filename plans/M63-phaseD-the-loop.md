@@ -259,9 +259,13 @@ anything rests on it.**
    | **(b) literal, internal** — *"when added to the graph `A`"*, so the added orbit's own edges count | `A ∪ O` | **59 / 57 / 11** (Poros P5) |
    | **(c) literal, plus cross-edges to the frozen companion** | `A ∪ O ∪ C` | 59 / 57 / 12 — **unverified**: the advisor's own control failed, its cross-edge call returning 54 edges between `v374e1860` and `v136e564` against the record's 18 |
 
-   **A candidate admitted only under (c) is flagged `provisional` in the menu and in the map**, and stays
-   so until phase C's implementer confirms the committed cross-edge law. It affects the menu's edges and
-   not its shape: (c) adds nothing on the large half and one orbit on the small.
+   **The caveat on (c) is lifted for the large half, by a squeeze that needs no run.** Reading (b) counts
+   no cross edges, so `(b) ≤ (c)`; the correction only *removes* cross edges, so
+   `corrected-(c) ≤ raw-(c)`; and on the large half `raw-(c) = (b)` already, cross-degree having promoted
+   nothing. Hence `(b) ≤ corrected-(c) ≤ raw-(c) = (b)`: **57 at `A412` and 59 at `A403` are exact, and
+   the small half is 12.** The 54 decomposes as **18 real + 36 centre-bookkeeping** against the stage's
+   `30 = 18 + 12`, so it was a convention difference about which side owns the shared centre, not a
+   defect in the law. **Size the sweep at 57; nothing waits on a re-run.**
 
    **Reading (b) is the better reading of his sentence** — the engineer's grammar is right and the
    advisor withdrew (a). **The menu is therefore 57 on the large half and 11–12 on the small, about 69
@@ -662,6 +666,8 @@ def edge_atoms(stage) -> "Stage":
 | d6.5 | **free, the unsampled member (§M):** the **identity candidate** — expand by nothing, reduce at the incumbent | reproduces the unexpanded level exactly (`map-identity-agrees`). It validates the whole map pipeline against a level already on disk, and costs one entry |
 | d6.6 | **free, a derived control (§M):** any map entry whose `\|M\|` is **larger** than the unexpanded level's | impossible — expansion enlarges the atom set, so the old selection is still available and the minimum is non-increasing at a fixed rung. A larger `\|M\|` is `map-entry-impossible`, a bug and never a finding |
 | d6.7 | the edge-atom stage built on the record | 509 vertices, 2,442 edges, **and its atom count equals the edge count**; the exact edge minimum is reported beside the greedy upper bound |
+| d6.8 | **one ask:** is the record minus its shared centre four-colourable? | `centre-critical`. C4.1 proved all 508 *atoms* critical and the centre is never an atom, so this is the hypothesis §O6's floor is missing — it raises the floor from 1,016 to 1,018, and an answer of "not colourable" would mean the record is not vertex-minimal, which is a loud finding |
+| d6.9 | **an assertion on every object the sweep returns**, milliseconds each: minimum degree ≥ 4, and edge count ≥ the §O6 floor | a degree-3 vertex or a count below the floor reads `edge-sweep-impossible` — a bug, never a record. It fires on exactly the failure an edge sweep is prone to, an edge dropped whose loss is masked by a stale incumbent |
 
 ---
 
@@ -839,7 +845,8 @@ companion and so are a direct test of §1(b)'s assumption.
 | P-D4 | `{M}` grows at fixed `\|M\|` and fixed rung in at least one rule-driven iteration that added vertices | no such iteration | 0.60 |
 | P-D5 | D1.b returns 374 with `A = v412e2106` as a set; `\|{M}\|` equals 1,092 under **none** of the three conventions | it equals 1,092 under one | 0.50 |
 | P-D6 | `Σ(lo + hi) = 2·\|M\|` holds on our 375 and both 374 levels; our 376 level reproduces his deficit of 3 | the identity fails on a 374 level, or our 376 level reaches 752 (then his column has a typo) | 0.50 |
-| P-D7 | the greedy edge sweep discards **more than 36** edges from the 509 | 36 or fewer | 0.75 |
+| P-D7 | the **exact** edge minimum of the 509 is **below 2,406** — i.e. his non-exhaustive 36-edge discard was not optimal | the exact minimum is 2,406 or above, which would make his greedy pass optimal after all | 0.80 |
+| P-D7b | the exact edge minimum lies **strictly above** §O6's floor of 1,016–1,018 — the floor is honest but far from tight | it lands at or below the floor, which would mean the floor is the answer and the sweep has nothing to find | 0.90 |
 | P-D8 | the two routes to D1.c agree exactly | they differ | 0.90 |
 | P-D9 | the exchange-class vector changes at every one of D1's three replayed states | constant across two consecutive states | 0.80 |
 | P-D10 | the targeted decision (D0.5) makes a failed candidate cost **< 1/3** of a full reduction | no material saving | 0.75 |
@@ -968,7 +975,13 @@ and end every commit with the two attribution lines.
   and said so.
 - [ ] Exchange-class vector and per-rung closure bound at each replayed state plus our 375 level; FS35-1
   closed; P-D6 and P-D9 scored.
-- [ ] The edge sweep run, **d6.1, d6.2, d6.3 firing**, P-D7 scored; escalated the same hour if > 36.
+- [ ] The edge sweep run **as an edge-atom stage** (§M collapse 1), reporting **the exact edge minimum**
+  with its bound closed, and the greedy 1-minimal count beside it as a cheap upper bound. **d6.1, d6.2,
+  d6.3, d6.7, d6.8, d6.9 fire.** P-D7 scored; escalated the same hour if the count beats 2,406.
+- [ ] The §O6 degree floor stated with its hypothesis — 1,016 as proved, 1,018 once d6.8 answers — and
+  every returned object checked against it.
+- [ ] The record says in one sentence that an edge-minimal subgraph is still a unit-distance graph
+  (§O4(3)), since that is the reader's first objection.
 
 **Close**
 - [ ] M63 §R3 written; §S.3's D rows updated in place; every §4 prediction scored by name.
@@ -1135,6 +1148,154 @@ Each was reachable in the skeleton as first written, and the first and third wer
   continuation is `run_loop` with a joint stage; G swaps the cross law, already a `Stage` parameter; and
   the edge minimisation applies to *any* stage, including whatever object F produces. Nothing in the
   model is specific to the L side or to `ρ₁₅`.
+
+---
+
+## §O — The obligation-modelling pass (WORKFLOW step 5, `debruijn-obligation-modeling`, run fresh)
+
+*What phase D must **prove**, what it may only **test**, and what it **assumes**. Every proof is short
+because the statement was chosen to make it short, and each is written out so an implementer can check it
+rather than trust it. Nothing here is Lean: these are hand obligations over a Python instrument, and the
+discipline is the same — a claim with no local obligation behind it is a `sorry` wearing prose.*
+
+### O0 — The partition
+
+| prove (here, by hand) | test (a planted control) | assume (named, and named again in every record) |
+|---|---|---|
+| non-increase under expansion (O2); the target's soundness (O3); upward closure for edge atoms (O4); what a cap destroys (O5); the degree floor (O6) | every control of §2; the identity candidate; the two parallel/serial agreements | CaDiCaL is a correct oracle; the base, group and cross-law are fixed; **his published minimality of 374 and 136**, which O6 leans on through phase C's C4.1; and that phase C's `reduce_stage` is correct, which D inherits rather than re-proves |
+
+### O1 — The loop has no measure, the improvements are bounded, and the two are not in tension
+
+M63 §O(3) established the absence. Phase D sharpens it in both directions.
+
+**Why there is no measure, derived rather than observed.** `|W|` is unbounded above, since expansion adds
+vertices. `{M}` grows and shrinks as `W` changes. And the obvious rescue fails: **this is not a monotone
+map on a lattice, so Knaster–Tarski does not apply** — `A ↦ ⋃{M}(A ∪ Δ)` is not monotone in `A`, which is
+exactly what overcompression says (M64 §R5: the minimal asymmetric graph is usually not a subgraph of the
+minimal symmetric one). A fixed-point iteration with no monotonicity has no guaranteed fixed point and no
+measure, and **that is a fact about the problem, not a gap in the plan**.
+
+**What replaces it — a budget and a verdict, not a measure.** `stalled` after `stall_limit` unchanged
+iterations; `max_iterations`; and the per-iteration line so a human sees the three quantities move.
+
+**What IS bounded, and it is worth stating because nobody has:** the loop only ever accepts an improving
+incumbent (O3 makes the target the incumbent), so at a fixed rung the sequence of incumbents is a strictly
+decreasing sequence of positive integers, bounded below by the published `v5 ≥ 28` (§PA(d)). **So a run
+starting at 375 can improve at most 347 times.** That bounds the *improvements*, never the iterations —
+which is precisely the shape of the difficulty, and the honest sentence for the record.
+
+### O2 — Expansion cannot make the minimum worse, at a fixed rung
+
+> **Claim.** Let `W' = W ∪ Δ` with the same companion `C`, the same rung `H` and the same cross-law. Then
+> `w*(W') ≤ w*(W)`, and every minimum of `W` is still a feasible selection in `W'`.
+>
+> *Proof.* Let `S` be a selection of `W`'s atoms with `R_W(S)`. The atoms of `W` are still atoms of `W'`
+> (`H` acts on the enlarged deletable set; the old orbits are unchanged and `Δ` contributes new ones), so
+> `S` is a selection of `W'`. And `W'[S ∪ fixed] ∪ C = W[S ∪ fixed] ∪ C` **as graphs**, because the
+> vertices of `Δ` are not in `S` and are therefore not induced. So `R_{W'}(S)` holds with the same weight,
+> the feasible set only grows, and the minimum is non-increasing. ∎
+
+**This is control d6.6's proof**: a map entry reporting a *larger* `|M|` than the unexpanded level is
+impossible, so it is a bug and never a finding.
+
+**Hypothesis audit — delete each once, and confirm it was load-bearing.** *Same rung* is essential:
+`H ↦ M_H` is order-preserving on the subgroup lattice (M64 §R10(c)), so raising the rung can strictly
+raise the minimum — the L side reads 375 at rung 1 and 376 at three of its involutions. *Same companion*
+is essential: a different `C` is a different key property. *Same cross-law* is essential for the same
+reason. None is decoration.
+
+### O3 — A target preserves completeness on success and yields a one-sided bound on failure
+
+> **Claim.** Asking `reduce_stage` at target `t` (is there a refusing selection of weight ≤ `t`?) is sound
+> in both outcomes.
+>
+> *Success.* The search returns `w* ≤ t` and enumerates the level at `w*`. The target removed only
+> candidates of weight `> t ≥ w*`, which are not at weight `w*`, so **M63 §O(1c)'s completeness invariant
+> is untouched** and `{M}` is complete at `w*`. The pruning is beat-the-incumbent pruning, which §O(2)
+> already proved sound.
+> *Failure.* The MaxSAT lower bound over the harvested `Y` exceeds `t`. Since `Y ⊆ Y*` gives
+> `mhs(Y) ≤ mhs(Y*)`, we learn `w* > t` — a **lower bound of `t + 1`, and nothing else**. There is no
+> level, no `A`, and no upper bound. ∎
+
+**The step easy to get wrong, written down so it is not:** a failure is only a failure **if no ask came
+back `unknown`**. With an undecided ask the run has not refuted the target, it has run out of budget —
+verdict `unknown-at-target`, the bound stays open, and **"no improvement exists" may not be said**. This
+is the same discipline `Bound.undecided` already enforces, applied to the target.
+
+**And the reporting obligation that follows:** a record produced under a target carries
+`Bound(lower, None, rung, undecided)` and **must not render with the word *minimum***. A one-sided bound
+that reads like a minimum is exactly the verdict-word failure the milestone bans.
+
+### O4 — Edges as atoms: upward closure holds, and three things do not carry
+
+> **Claim.** For a fixed vertex set `V` and companion `C`, `R_E(S) := (V, S) ∪ C refuses four colours` is
+> **upward closed** in `S ⊆ E`.
+>
+> *Proof.* Let `S ⊆ S'` and suppose `R_E(S)`. A proper four-colouring of `(V, S') ∪ C` is in particular a
+> map on `V` proper on every edge of `S' ⊇ S`, hence proper on `(V, S) ∪ C` — so if `(V, S')` were
+> colourable, `(V, S)` would be, contradicting `R_E(S)`. ∎
+
+So M63 §O carries **verbatim**: MCS/MUS duality, phase 1 (a singleton correction set is a *critical edge*),
+the hitting-set formulation, the completeness invariant and its lexicographic measure, the sandwich that
+closes the bound. **The minimum hitting set over edge atoms is the exact edge minimum.**
+
+**Three things that do NOT carry, and each is a soundness obligation rather than a detail.**
+
+1. **`|M| = w* + 1` is a vertex-side identity** (the shared centre is the one fixed deletable-side vertex).
+   For edges the objective is the edge count with no `+1`, and a record that applies the vertex formula to
+   an edge run is off by one.
+2. **The pin must be in `fixed`, and this is soundness, not speed.** §5.9's symmetry break is valid
+   because pinning the present members of a clique to distinct colours is WLOG — which requires those
+   vertices to be *pairwise adjacent in the graph being asked*. Delete a pin edge and the triangle is not
+   a triangle, the break is no longer WLOG, and asks silently return `unsat` for a colourable graph.
+   Phase C met the same hazard on the vertex side and its fix is the precedent (`pin_is_sound`).
+3. **The object stays a unit-distance graph, and the plan says so once.** A unit-distance graph requires
+   every *edge* to be a unit pair, never that every unit pair be an edge — so a refusing edge-subgraph on
+   the same points is still a unit-distance witness. That is the convention `[deGreyParts2023]`'s own
+   footnote uses when it discards 36, and stating it pre-empts the reader's objection that the drawing has
+   been damaged.
+
+### O5 — What a capped level destroys, stated as what it makes unsound
+
+The **bound survives** a cap (the hitting set over `Y ⊆ Y*` is a lower bound; any verified selection is an
+upper bound). What dies is everything downstream of completeness:
+
+> **Claim.** If `{M}_capped ⊊ {M}` then `necessary({M}_capped) ⊇ necessary({M})`, and the containment is
+> generally strict.
+> *Proof.* `necessary` is the intersection over the level; intersecting over fewer sets can only grow it. ∎
+
+So a capped level makes the look-ahead proxy **over-report necessity** — it would claim atoms are forced
+that are not, and rank expansions by a quantity inflated in an unstated direction. Likewise
+`A_capped ⊆ A`, the exchange classes and affine hull are unsound (M64 §0(ix) computes them from a complete
+level by hypothesis), and the reserve built from `A_capped` is non-monotone in **both** directions, so
+candidates both vanish and appear. **Together these are the proof that §3.3's halt is the right response
+and a taint label was not**: there is no direction in which a sampled `A` errs consistently.
+
+### O6 — A free degree floor on the edge minimum, and the one hypothesis it is missing
+
+> **Claim.** Let `G` be the 509 and let `H ⊆ G` be any refusing subgraph on the *same* vertex set. Then
+> every vertex `v` that is **critical in `G`** has `deg_H(v) ≥ 4`.
+>
+> *Proof.* `v` critical means `G − v` is four-colourable. `H − v ⊆ G − v` on the same vertices, so `H − v`
+> is four-colourable. If `deg_H(v) ≤ 3`, at most three colours are forbidden at `v`, so a fourth is free
+> and the colouring extends to all of `H` — contradicting that `H` refuses. ∎
+
+**The bound, and the hypothesis I must not skip.** Phase C's C4.1 established that all **508 atoms** of the
+record are critical — but **the shared centre is never an atom**, so its criticality is *not* among what
+C4.1 proved. Hence, rigorously today:
+
+`2·e(H) = Σ_v deg_H(v) ≥ 508 × 4 + deg_H(centre) ≥ 2032`, so **`e_min ≥ 1016`**,
+
+and **`e_min ≥ 1018` once one ask confirms the centre is critical too** (is `G − centre` four-colourable?).
+That ask is control **d6.8**, it costs one colourable ask, and it is the difference between a floor that
+cites a hypothesis and one that assumes it.
+
+**What the floor is worth.** It is far below the published `e5 ≤ 2406`, so it closes nothing — but it is a
+floor nobody has stated, it costs nothing, and it makes the sweep **self-checking in two ways**: any
+returned object with a degree-3 vertex is a bug (milliseconds per candidate), and **any reported edge count
+below 1,016 is a failure rather than a record**. That is exactly the failure an edge sweep is prone to —
+dropping an edge whose loss is masked by a stale incumbent — caught by an assertion rather than by a
+reviewer. *Credit: Poros, 2026-09-11; the centre caveat and the 1,016/1,018 split are this pass's.*
 
 ---
 
