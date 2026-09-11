@@ -161,6 +161,24 @@ Fired per candidate, before its reduction (`tools/parts_probe.py control`):
 **c8 and c9 are invariant across all fourteen candidates by D1**, so a change in either between runs
 is an instrument fault and not geometry: **the sweep halts and reports.**
 
+**It fired, on the first sweep, and the fault was the control's own.** Candidate `(12,2,2,0)` reported
+`FAIL the record's own selection refuses four colours: sat`. The cause is worth keeping, because it
+is the same class of error as the cross-edge one: **`v136e564` is not a subset of `v166e774`, so the
+control tests a group image of it, and an expansion makes `A` larger, so MORE images fit inside —
+twelve of twenty-four at this candidate against six at the baseline.** The first version chose "the
+image inside `A` with the smallest name", so a larger `A` silently chose a *different* image; and
+applying a group element to the small half alone, with the companion left where it was, is a
+different problem (`parts_run` §O4), which does not refuse. Fixed by **pinning the image to the one
+the baseline `v166e774` contains**, which every expansion contains too, so the control asks the same
+question every run — the only thing that lets a change in its answer mean anything. Re-run after the
+fix: *"6 of 24 (inside this A: 12); pinned to (-7,1,1,-1)"*, refuses, all controls green.
+
+**A second lesson from the same failure: c9 is vacuous unless c8 passes**, because every subset of a
+four-colourable selection is four-colourable — so c9 read "ok, 135 checked" underneath a failing c8.
+It now prints `[VACUOUS: the selection itself is colourable]` in that case. A control that passes for
+free while its partner fails is exactly the fail-open shape `CLAUDE.md` § "Make the gate fail" warns
+about, and it was found by making the gate fail rather than by reading the code.
+
 **The baseline.** Phase C is regenerating the unexpanded reduction (`v166e774` against `v374e1860`)
 as I write. Its attested values are `|M| = 136`, level 8 up to `Aut(A)` (48 as found), edges 564–567,
 `A` equal to his `v166e774` as a set. If the regeneration disagrees with the stored record, that

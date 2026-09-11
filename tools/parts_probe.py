@@ -254,9 +254,22 @@ def cmd_control(args):
     candidates is an instrument fault, not geometry: the sweep halts.
 
     `v136e564` is not a subset of `v166e774` as stored (M63 §1(iv): six vertices outside), so the
-    control uses the group image of the record's S half that the accumulator does contain -- six of
-    the twenty-four elements supply one -- chosen by the smallest element name, so it is the same
-    image every run."""
+    control uses a group image of the record's S half that the accumulator contains -- six of the
+    twenty-four elements supply one.
+
+    **THE IMAGE IS PINNED BY THE BASELINE ACCUMULATOR, NEVER BY THE EXPANDED ONE**, and the first
+    version of this control was wrong about exactly that. An expansion makes `A` larger, so MORE
+    images fit inside it -- twelve of twenty-four at `(12,2,2,0)` against six at `A166` -- and
+    choosing "the image inside `A` with the smallest name" therefore chooses a DIFFERENT image for
+    some candidates. Applying a group element to the S half alone, with the companion left where it
+    was, is a different problem (`parts_run` §O4), so the new image does not refuse and the control
+    fails for a reason that has nothing to do with the candidate. Pinning the image to the one the
+    baseline `v166e774` contains is what makes the control's answer the SAME QUESTION every run,
+    which is the only thing that lets a change in it mean an instrument fault.
+
+    A second lesson from the same failure: the single-deletion check is VACUOUS unless the refusal
+    check passes, because every subset of a four-colourable selection is four-colourable. It is
+    reported as conditional, and a run where the refusal fails is a failure whatever it says."""
     import parts_run as PR
     import parts_stage as PS
     A = load(args.A)
@@ -265,21 +278,28 @@ def cmd_control(args):
     base = P.Base(P.PARTS_R)
     G = PR.Group(base)
     Aset = set(A)
-    imgs = sorted((G.names[i], i) for i in range(len(G)) if G.image(i, ref) <= Aset)
+    pin_src = set(load(args.frame_from))
+    imgs = sorted((G.names[i], i) for i in range(len(G)) if G.image(i, ref) <= pin_src)
     if not imgs:
         raise SystemExit(f"no group image of {os.path.basename(args.ref)} lies inside "
-                         f"{os.path.basename(args.A)}: the control cannot be set up, and a stage "
-                         f"that does not contain the record's own selection is not over his object")
+                         f"{os.path.basename(args.frame_from)}: the control cannot be set up, and "
+                         f"a stage that does not contain the record's own selection is not over "
+                         f"his object")
     name, gi = imgs[0]
     sel = sorted(G.image(gi, ref))
+    if not set(sel) <= Aset:
+        raise SystemExit(f"the image pinned by {os.path.basename(args.frame_from)} is not inside "
+                         f"{os.path.basename(args.A)}, which cannot happen for an expansion of it")
     stage = PS.Stage(base, L, A, side="S", rung=1, pin=True)
     n = stage.A.n
     nv = stage.present.bit_count()
     ne = len(stage.A.induced(stage.present))
     want_v = len(L) + len(Aset - {(0, 0, 0, 0)}) if (0, 0, 0, 0) in Aset else len(L) + len(A)
     print(stage.describe())
-    print(f"  images of {os.path.basename(args.ref)} inside A: {len(imgs)} of {len(G)}; "
-          f"using the one named {name}")
+    inside_A = sum(1 for i in range(len(G)) if G.image(i, ref) <= Aset)
+    print(f"  images of {os.path.basename(args.ref)} inside "
+          f"{os.path.basename(args.frame_from)}: {len(imgs)} of {len(G)} (inside this A: "
+          f"{inside_A}); pinned to the one named {name}")
     ok = [nv == want_v]
     print(f"  {'ok  ' if ok[-1] else 'FAIL'} stage vertex count {nv} == {len(L)} + "
           f"{nv - len(L)} (L + S without the shared centre); {ne} edges")
@@ -304,7 +324,8 @@ def cmd_control(args):
     solver.delete()
     ok.append(not bad)
     print(f"  {'ok  ' if ok[-1] else 'FAIL'} every single-vertex deletion of it is four-colourable "
-          f"({len(sample)} checked{', ' + str(len(bad)) + ' REFUSED' if bad else ''})")
+          f"({len(sample)} checked{', ' + str(len(bad)) + ' REFUSED' if bad else ''})"
+          f"{'' if v == 'unsat' else '  [VACUOUS: the selection itself is colourable]'}")
     print(f"\n{'ALL CONTROLS FIRED' if all(ok) else 'FAILED -- the sweep halts'}")
     sys.exit(0 if all(ok) else 1)
 
@@ -400,6 +421,9 @@ def main():
     c.add_argument("--L", required=True)
     c.add_argument("--A", required=True, help="the S side: an accumulator, expanded or not")
     c.add_argument("--ref", default="v136e564.vtx", help="the record's own S half")
+    c.add_argument("--frame-from", dest="frame_from", default="v166e774.vtx",
+                   help="the accumulator that PINS which group image of --ref is used; the "
+                        "baseline, never the expanded one, or the control changes its own question")
     c.add_argument("--sample", type=int, default=0, help="0 = every single-vertex deletion")
     c.set_defaults(f=cmd_control)
     a = ap.parse_args()
