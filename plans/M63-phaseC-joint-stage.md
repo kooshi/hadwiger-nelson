@@ -52,7 +52,9 @@ Everything here is measured and has an address. Read M63 §S.2 in full first; th
 - **Rung fixtures, measured in planning** (the S166 stage, companion `v374e1860`, `Aut(A)` of order 6 with
   element orders 1, 2, 2, 2, 3, 3):
   - the full order-6 rung: 31 atoms, closed at 142 vertices, 1 minimum, 39 correction sets, 17.6 s;
-  - the order-3 rung: 55 atoms, closed at 142 vertices, **21 minima**, 129 correction sets, **67 s**.
+  - the order-3 rung: 55 atoms, closed at 142 vertices, **21 minima**, 129 correction sets, **67 s**;
+  - one order-2 rung (which of the three involutions is not yet mapped to M64's rows): 86 atoms, closed
+    at 138 vertices, 2 minima, 186 correction sets, 114 s.
 - **Four defects the code has today** (S.2 #12):
   - `require_frozen` crashes on first use;
   - `parts_verify.py` rewrites a tracked file;
@@ -134,9 +136,17 @@ class CrossLaw:
     c = 7/8, where c·p = k is `cross_edges_rho15_fast`'s p = 4(a + b − 1)/7.
 
     A rotation whose sine lies in K lies in K(i), where Theorem B four-colours every union: refused, not
-    supported. A cosine outside K needs a different derivation (FS-30 step 2): not implemented."""
-    name: str
-    cos: tuple                       # an element of K in typem's 4-slot form
+    supported. A cosine outside K needs a different derivation (FS-30 step 2): not implemented.
+
+    **The law does not see the sine at all**, so ρ and its complex conjugate give the same adjacency —
+    which is the adjacency face of complex conjugation being one of the base group's Galois elements
+    (M62 §R19(1)). That is why `cos` is the whole datum."""
+    cos: tuple                       # an element of K in typem's 4-slot form -- the law's only datum
+
+    @property
+    def name(self) -> str:
+        """Derived from `cos` ("collinear(7/8)", spelled "rho15" at that value), never stored beside it:
+        a stored name is a second copy of the law that drifts from it."""
 
     @staticmethod
     def collinear(cos: "Fraction | tuple") -> "CrossLaw":
@@ -153,11 +163,34 @@ class CrossLaw:
 
 ```python
 # tools/parts_stage.py
+Half = Literal["L", "S"]
+
 class Stage:
-    def __init__(self, base, L_tuples, S_tuples, side: Literal["L", "S", "LS"] = "S", rung=1, pin=True,
+    def __init__(self, base, L_tuples, S_tuples, side: str = "S", rung=1, pin=True,
                  rung_maps=None, cross_law: "T.CrossLaw | None" = None, pin_triangle=PIN_TRIANGLE):
-        """`cross_law` defaults to `CrossLaw.rho15()`; `describe()` names it and every record's config
-        carries it. (`side="LS"` is C4.)"""
+        """`side` is the SPELLING of `self.reduce`, the set of halves whose vertices may be deleted:
+        "L" → {"L"}, "S" → {"S"}, "LS" → {"L","S"} (C4). The deletable set is then one expression —
+        the union of the chosen halves minus the shared centre — instead of a conditional per side, and
+        the joint stage stops being a third case.
+
+        **A vertex of a stage is a pair `(half, tuple)`**, never a bare lattice tuple: on a joint stage
+        the same lattice point is a different vertex in each half. Every atom label, every minimum,
+        every profile and every group image carries the half.
+
+        The shared centre is never deletable. That is the type-M construction's own constraint (the two
+        halves share the rotation centre), it is what makes `|M| = weight + 1`, and a search that allows
+        its deletion is a different stage and says so.
+
+        `cross_law` defaults to `CrossLaw.rho15()`; `describe()` names it and every record's config
+        carries it."""
+
+    def identity(self) -> str:
+        """**What a resume may be resumed onto, and what `stage_fingerprint` is not.** The old
+        fingerprint hashes the present graph only, so an L stage and an LS stage over the same working
+        graph share it, and so do two rungs of one stage — a checkpoint would be accepted onto a
+        different search. `identity()` hashes the graph, the deletable set (with halves), the atom
+        partition, the pin vertices and the law's `cos`. `stage_fingerprint` stays as it is, because
+        the stored records carry it."""
 ```
 
 Planted controls (in `typem.self_test` or a new `parts_stage` self-test section):
@@ -205,20 +238,41 @@ into the docstrings:
 **C1.2 Exact resume.**
 
 ```python
+@dataclass
+class ReductionState:
+    """**The checkpoint and the record are one object at two times** (§M). A checkpoint is this state
+    with `status = "in-progress"`; the record is `state.finish()`, which adds only derived views — `A`,
+    the canonical counts, the member profiles, the bound. Two schemas would be two things to keep in
+    agreement, and `blocked` was already a second copy of the minima: it is derived here, as
+    `minima ∪ undecided`, and never stored.
+
+    `problem_sha256` identifies WHAT is being searched — the stage's `identity()` and the problem half
+    of the config. `config_sha256` covers the budgets too. **A resume is refused on a problem mismatch
+    and permitted on a budget change**, because a wall and a cap are properties of a launch, not of the
+    search: raising the wall is exactly how one continues a truncated run."""
+    problem_sha256: str
+    status: str                       # "in-progress" | "complete" | "truncated-at-wall" | "truncated-at-budget"
+    pin: dict
+    phase1: dict[int, str]            # atom -> "critical" | "droppable" | "unknown"
+    corr: list[list[int]]             # correction sets, in harvest order
+    minima: list[list[int]]
+    undecided: list[list[int]]        # candidates an ask could not decide THIS launch
+    w_star: int | None
+    iteration: int
+    asks: dict
+    launches: list[dict]              # one entry per launch: budgets, machine, git commit, seconds
+
 def reduce_stage(stage, *, wall_ask: float | None = 600.0, max_minima: int = 0, phase2_wall: float = 0.0,
                  checkpoint: str | None = None, config: dict | None = None, log=print,
                  _stop_after: int | None = None) -> dict:
     """Phases 1 and 2, returning the record — never a bare number.
 
-    RESUME. If `checkpoint` names an existing file the run continues from it EXACTLY. The file carries
-    the stage fingerprint and the config hash it was written under, and is REFUSED on either mismatch
-    (`checkpoint-stage-mismatch`, `checkpoint-config-mismatch`). It holds:
-    - the pin verdict;
-    - phase 1's per-atom verdicts;
-    - every correction set, in harvest order;
-    - every recorded minimum and blocking clause, w*, `undecided_candidates`;
-    - the iteration counter and both ask populations.
-    A relaunch therefore re-asks nothing that was decided.
+    RESUME. If `checkpoint` names an existing file the run continues from it EXACTLY. The file is
+    REFUSED when `stage.identity()` or the problem hash differs (`checkpoint-problem-mismatch`), and
+    accepted when only budgets differ. On resume the `undecided` list is CLEARED back into the candidate
+    pool — an ask that a 60-second wall could not decide is exactly what a longer wall should re-ask —
+    and phase-1 atoms recorded `unknown` are re-asked too.
+    A relaunch therefore re-asks nothing that was decided, and everything that was not.
 
     The checkpoint is JSON, written atomically (temp file + `os.replace`): after phase 1, after any new
     minimum or correction set once ≥ 30 s have passed since the last write, and at exit.
@@ -275,10 +329,16 @@ python3 tools/parts_run.py --self-test
 def load_side(name: str) -> list[tuple[int, int, int, int]]:
     """A `.vtx` file from `data/m62/parts-ref11/JP/Large/` by basename, through `parts_vtx.load_lattice`."""
 
-def frames(base, S_tuples, *, contains=None, refuses_with_L=None) -> list[int]:
-    """Indices h of the order-24 group (`parts_faces.base_group_perms` order) with h(S) ⊇ `contains`,
-    or with `refuses_with_L ∪ ρ·h(S)` refusing four colours. The stored frame (the identity) is listed
-    first whenever it qualifies. The caller picks; the config records the pick."""
+def frames(base, S_tuples, *, contains=None, refuses_with_L=None) -> list[dict]:
+    """The group elements h with h(S) ⊇ `contains`, or with `refuses_with_L ∪ ρ·h(S)` refusing four
+    colours, **grouped into the double cosets that make them inequivalent** (§M): applying h to S alone
+    is a new problem, applying it to both halves is the same problem, so the problems are
+    `Stab(W_L) \\ G / Stab(S)`. The stored frame (the identity, index 0 — confirmed) is listed first
+    whenever it qualifies.
+
+    **A group element is named by its image of `(2, 0, 4, 2)`**, whose orbit the group acts on freely
+    (24 distinct images, measured). An index into `parts_group()`'s order is an enumeration accident and
+    would silently change meaning if that order ever moved; the image cannot."""
 
 def rung_maps_for(base, stage, spec: str) -> list[dict] | None:
     """'1' → None. 'stab' → the stage's whole stabiliser. 'order:K' → the unique subgroup of that order,
@@ -298,10 +358,14 @@ def run_reduce(args) -> dict:
 {
  "kind": "m63-reduction", "schema": 2,
  "producer": "tools/parts_run.py:run_reduce",
- "config": {"L": "v451e2400.vtx", "S": "v136e564.vtx", "S_frame": "stored | h=<index>", "side": "L",
-            "rung": "1", "cross_law": "rho15", "base_r": 2.6, "pin": true, "wall_ask": 600.0,
-            "max_minima": 0, "phase2_wall": 0.0},
- "config_sha256": "…",
+ "config": {"problem": {"L": {"source": "v451e2400.vtx", "fp": "…"},
+                        "S": {"source": "v136e564.vtx", "fp": "…",
+                              "frame": {"image_of": [2, 0, 4, 2], "is": [2, 0, 4, 2], "coset": 1,
+                                        "found_by": "stored"}},
+                        "side": "L", "rung": {"order": 1, "elements": [[2, 0, 4, 2]]},
+                        "cross_law": {"cos": "7/8"}, "base_r": 2.6, "pin": true},
+            "budgets": {"wall_ask": 600.0, "max_minima": 0, "phase2_wall": 0.0}},
+ "+problem_sha256": "…", "config_sha256": "…", "+stage_identity": "…",
  "verdict": "reduced", "bound": {"lower": 374, "upper": 374, "rung": 1, "undecided": 0},
  "bound_render": "minimum 374 over all selections",
  "M_vertices": 375,
@@ -349,35 +413,54 @@ def orbit_closure(base, stage, rec) -> dict:
 ### C2 — the audit instrument, `tools/parts_audit.py` (new)
 
 ```python
+**His tables are data, not call-site arguments** (§M). Typing `his_edges=(1920, 1930)` where an audit is
+called is precisely where a number gets nudged toward agreement. So his Table 1 is transcribed once, with
+his own index `graphs.txt` supplying each row's files, into `data/m62/parts-table1.json`:
+
+```json
+{"kind": "parts-table1", "source": "[Parts2020a] Table 1 (p. 767) + JP/Large/graphs.txt",
+ "rows": {"L-M6A-375": {"type": "L-subgraph", "subtype": "M6A", "sym": [1, 2], "M": 375,
+                        "edges": [1920, 1930], "A": 403, "set": 282,
+                        "M_file": "v375e1920.vtx", "A_file": "v403e2112.vtx",
+                        "columns": ["table2:375_m6ab_set"],
+                        "attestation": {"M": 2, "edges": 1, "A": 2, "set": 1}}, "…": {}}}
+```
+
+A column may be attributed to **more than one row** — Table 2's "375 M6A&B" is one range column for runs
+of 282 and 66 minima — and the transcription says so rather than choosing. That ambiguity is C3's whole
+question, and it is now a field rather than a footnote.
+
+```python
 @dataclass(frozen=True)
 class AuditSpec:
-    """What of HIS is compared, named once per level set. Every field is optional because his tables do
-    not attest every number for every row; an absent field produces no row rather than a guessed one."""
+    """Which of his rows this level set is compared against, and nothing else. Everything compared comes
+    from the transcription, so a call site cannot invent a target."""
     name: str                                   # "S166", "L451", "M6B403", "joint-A412-A166"
-    side: str                                   # "L" | "S" | "LS"
-    his_A: str | None                           # accumulator file
-    his_members: tuple[str, ...]                # published minima files expected in the level
-    his_column: tuple[str, str] | None          # (json path, column key), e.g. ("parts-table2-orbit-fillings.json", "375_m6ab_set")
-    his_M_vertices: int | None
-    his_edges: tuple[int, int] | None           # the side's own edges: e(L) or e(S), never the union
-    his_count: int | None                       # |{M}|, compared ONLY under the convention "Aut(A), companion moving"
-    his_sym: tuple[int, int | None] | None      # Table 1's "1 (2)" = (1, 2)
-    attestation: dict[str, int]                 # how many times the paper states each compared number
+    his_row: str | None                         # a key of parts-table1.json, e.g. "L-M6A-375"
+    extra_columns: tuple[str, ...] = ()         # further columns to compare, e.g. a second attribution
 
 @dataclass(frozen=True)
 class OrbitRow:
+    """`status` is DERIVED from the three measurements, never stored beside them: `absent` when hi = 0,
+    `stable` when the vertex set is constant, `unstable-constant-count` when lo = hi with a varying
+    vertex set (L451's (2,0,2,4)), `unstable-varying-count` when lo < hi."""
     label: tuple[int, int, int, int]
     size: int
     lo: int
     hi: int
     vertex_set_constant: bool                   # the same vertices in every member
-    status: str                                 # "stable" | "unstable-constant-count" | "unstable-varying-count" | "absent"
     his_range: tuple[int, int] | None
     his_shaded_stable: bool | None              # from the shading; None when not extracted or not applicable
 
-def canonical_counts(base, minima_tuples, W_tuples, C_tuples) -> dict:
-    """|{M}| under three named conventions — Aut(A) with the companion moving (his, measured on both
-    sides), Aut(A) ∩ Aut(C), and the base group — each a `SetSize`.
+    @property
+    def status(self) -> str: ...
+
+def canonical_counts(base, minima_vertices, stage) -> dict:
+    """|{M}| under three named conventions, each a `SetSize`. **The convention that is his**, measured on
+    both sides (8 on S, 282 on L), states in one sentence: *the stabiliser of the reduced part, with the
+    frozen part free to move along*. For a one-sided stage that is `Stab(W_reduced)`; for the joint stage
+    it is the diagonal `Stab(W_L) ∩ Stab(W_S)`. The other two are that group intersected with the
+    companion's stabiliser, and the whole base group.
 
     Also reports `closed_under_AutA`. That held on both M63 stages but is NOT guaranteed: Aut(A) is not a
     symmetry of the stage when the companion is not invariant. A level that is not closed makes the first
@@ -395,9 +478,16 @@ def orbit_rows(base, minima_tuples, his_column=None, shading=None) -> list[Orbit
     range does NOT imply it: L451's (2,0,2,4) is 10 in every minimum with a varying vertex set. So that
     orbit is `unstable-constant-count` and can never be `stable`."""
 
-def edge_profile(stage, minima_atoms, side) -> dict:
-    """The multiset of the side's own edge counts, its range, and the stabiliser orders of the
-    fewest-edge members (his parenthetical)."""
+def edge_decomposition(stage, selection) -> dict:
+    """Always the whole decomposition, never one number: e(L), e(S), and the off-centre cross edges by
+    RADIUS FAMILY (reference at |u|² = 4, auxiliary at the conjugate-ring pair, any other family the law
+    produces). His Table 1 quotes e(L) for an L row, e(S) for an S row and the union for an M-type row,
+    and his subtype name IS the auxiliary count — so one function serves every row and the reader can
+    see which term was compared."""
+
+def edge_profile(stage, minima_atoms) -> dict:
+    """Over a level: the multiset of decompositions, the range of the compared term, and the stabiliser
+    orders of the fewest-edge members (his parenthetical, e.g. "1 (2)")."""
 
 def table_shading(pdf: str, page: int, table: str, *, dpi: int = 200, gray=(224, 224, 224)) -> dict:
     """Cell backgrounds of his Table 2 (page 25) or Table 3 (page 26), read by rasterising with
@@ -477,6 +567,12 @@ ranges leave Table 2's 375 column in two orbits only: `(2,0,6,4)` reaches 6 agai
 `(10,0,2,4)` reaches down to 6 against his 8. The column is headed "M6A&B", and his M6B 375 run has 66
 minima with `A = v403e2106`.
 
+**The frame matters here more than anywhere.** `Stab(v403e2106)` has order 6 and `Stab(v141e594)` is
+trivial, so the M6B problem has **four** inequivalent relative frames (four double cosets of size 6), and
+his `v375e1916` refuses in **twelve** of the 24 frames — that is two of the four. So two of the four are
+live, they are different problems, and the run records which one it used. If the first does not return
+66, the second is run before the column is called undecided.
+
 **The run** (after C2 exists, predictions committed first):
 
 ```
@@ -508,20 +604,18 @@ TUNING.
 
 ### C4 — the joint stage and the record-bearing run
 
-```python
-# tools/parts_stage.py
-class Stage:
-    """… side "LS": both halves deletable except the shared centre — Poros's card 1. [Parts2020a] never
-    reduced jointly: Table 1's M-type rows have blank A and {M}. A joint result is a RECORD-HUNTING
-    number, compared with his tables on |M| and edges only, never as a reproduction row (M63 §6).
+The joint stage is `side="LS"`, i.e. `reduce = {"L","S"}` — no third code path (§M). Under `rung_maps`
+the same group element acts on both halves at once, which is sound because every element of the order-24
+group preserves unit distance and both polynomial conditions of the cross-edge law over K (M62 §R19(1)).
+`side_fixed` is 1 for every side: the shared centre. The pin is conditional on presence, so pin vertices
+may be deleted, as they already are on the L side.
 
-    Under `rung_maps` the same group element acts on both halves at once. That is sound because every
-    element of the order-24 group preserves unit distance and the cross-edge law's two polynomial
-    conditions over K (M62 §R19(1))."""
-```
-
-`side_fixed` is 1 for every side (the centre). The pin is conditional on presence, so pin vertices may be
-deleted, as they already are on the L side.
+**The joint problem has more than one relative frame, and they are not equivalent.** Applying a group
+element to the S half alone gives another joint problem; applying one to both halves gives the same
+problem. So the inequivalent frames are the double cosets `Stab(W_L) \\ G / Stab(W_S)`, and **there are
+exactly two here** (measured: `|Stab(A412)| = 12`, `|Stab(g⁻¹A166)| = 6`, two double cosets of size 12).
+One contains the record. **The other is a second joint problem of the same cost that no one has run** —
+C4b below, if the product owner approves the extra run; otherwise it is F(b)'s first item.
 
 **C4 planted controls:**
 
@@ -553,6 +647,11 @@ python3 tools/parts_run.py reduce --L v412e2106.vtx --S v166e774.vtx --S-frame c
     report. The Lean certificate is phase F's.
 - *Forecast:* phase 1 under a minute (576 asks); closing the bound 20–90 minutes on one core; ≥ 1,500
   correction sets. It is unmeasured at 576 atoms, which is why the checkpoint is mandatory.
+
+**C4b — the second relative frame** (one more run of the same shape, `--S-frame coset:2`). It is a
+different joint problem over the same two accumulators, and its minimum is unrelated to the record's by
+anything proved so far. Same stop rule. *Recommended; the product owner's call, since it doubles C4's
+compute.*
 
 ---
 
@@ -715,3 +814,77 @@ here.*
   dicts it took seconds.
 - **Talk to Poros** if a card would help. Poros is the advisor sibling, and its address arrives with the
   implementation brief. Re-derive anything it measured before relying on it.
+
+---
+
+## §M — The domain-modelling pass (WORKFLOW step 5, `debruijn-domain-modeling`, run fresh)
+
+*Applied to phase C's objects: the joint stage, the reduction record and its checkpoint, the audit
+instrument, and the cross-edge law. Four collapses, four corrections — two of which are bugs the skeleton
+would otherwise have shipped — and two measurements the pass needed before it could choose.*
+
+### The cut it was run on
+
+| intrinsic to the problem | incidental, and it had crept into the skeleton |
+|---|---|
+| a stage is *a working graph, a frozen part, and a set of deletable vertices* | "L", "S", "LS" as three cases, with the joint stage a third code path |
+| a type-M vertex is *a half and a lattice point* | a bare lattice tuple, which collapses the two halves the moment both are deletable |
+| a run's state is *what has been decided so far* | a checkpoint schema and a record schema, to be kept in agreement by hand |
+| a group element is *its action* | its index in `typem.parts_group()`'s enumeration order |
+| his published numbers are *transcribed data with attestations* | arguments typed at the call site where the audit runs |
+| the cross-edge law is *the cosine* | a cosine and a name stored beside it |
+
+### The four collapses
+
+1. **`side` is the set of halves that may be deleted.** `"LS"` is a spelling, not a case. The deletable
+   set becomes one expression — the chosen halves minus the shared centre — and the joint stage stops
+   being special. With it, **a vertex is `(half, tuple)`**: on a joint stage the same lattice point is two
+   different vertices, so every atom label, minimum, profile and group image carries its half.
+2. **The checkpoint and the record are one state at two times.** `finish()` adds only derived views. And
+   `blocked` was a second copy of the minima — it is `minima ∪ undecided`, derived.
+3. **His tables are a transcription** (`data/m62/parts-table1.json`, built from Table 1 and his own
+   `graphs.txt`), and `AuditSpec` shrinks to a row id. A column may be attributed to two rows, which is
+   exactly the "375 M6A&B" question, so the attribution is a field and C3 decides it with data.
+4. **Derived things stop being stored:** `OrbitRow.status` from its three measurements, `CrossLaw.name`
+   from `cos`.
+
+### The four corrections, two of them bugs caught before implementation
+
+1. **`stage_fingerprint` does not identify a search.** It hashes the present graph, so an L stage and an
+   LS stage over one working graph share it — and so do two rungs. The resume control this subplan
+   already specified (a checkpoint from the order-6 rung offered to the order-3 rung) would have been
+   *accepted*, silently resuming one search onto another. Hence `Stage.identity()`, over the graph, the
+   deletable set, the atom partition, the pin and the law.
+2. **A budget is not part of the problem.** Resume is refused on a problem mismatch and permitted on a
+   budget change; on resume the undecided candidates go back into the pool, because re-asking with a
+   longer wall is exactly what continuing a truncated run means. Freezing the two together would have
+   made a wall-truncated run unresumable.
+3. **A frame is named by its action.** An index into `parts_group()`'s order is an enumeration accident.
+   The orbit of `(2,0,4,2)` is free — 24 distinct images, measured — so a group element is named by its
+   image of that point, and a record stays readable if the enumeration ever moves. (The identity is index
+   0, confirmed.)
+4. **"The frame" is not one frame.** Applying a group element to the S half alone is a different problem;
+   applying it to both is the same problem. So the inequivalent relative frames are the double cosets
+   `Stab(W_L) \\ G / Stab(W_S)`. **Measured: two for the joint stage** (orders 12 and 6, two cosets of
+   size 12), **four for the M6B stage** (orders 6 and 1), of which his own minimum refuses in two. That
+   turned a detail into C4b and into C3's frame rule.
+
+### What the model now refuses to represent
+
+A bare tuple as a joint-stage vertex; a `blocked` list that can disagree with the minima; a resume across
+different atom partitions; a frame or a subgroup as an integer index; one of his values typed at a call
+site; an orbit status stored beside the measurements it follows from; a law with a name that can drift
+from its cosine. Each was reachable in the skeleton as first written.
+
+### Seams checked
+
+- **Adversarial member:** a checkpoint that matches the fingerprint and belongs to another search
+  (correction 1); a truncated run whose continuation needs a longer wall (correction 2).
+- **Unsampled member:** a level with a nonempty undecided list — its count method must be
+  `bounded-below` and the completeness invariant must not be claimed; a joint stage with every S atom
+  held fixed, which must reproduce the one-sided stage exactly (control c4.3).
+- **Non-vacuity:** the joint stage's positive control is an instance whose answer is known in advance —
+  the record itself must come back as the unique minimum (c4.1).
+- **Next lemma for free:** D's expansion is `W_{n+1} = A_n ∪ Δ` over vertex sets, with no restatement; E's
+  companions attach as extra structure rather than as a fourth side; G swaps the law and the base without
+  touching either.
