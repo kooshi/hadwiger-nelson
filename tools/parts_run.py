@@ -136,7 +136,17 @@ def frames(base, G, L_tuples, S_tuples, contains=None, refuses_with_L=None, log=
             if contains is not None and not set(contains) <= img:
                 continue
             if refuses_with_L is not None:
-                st = PS.Stage(base, refuses_with_L, sorted(img), side="L", rung=1, pin=False)
+                # USE THE PIN. Measured 2026-09-11 on a cold refusing ask, same stage, same
+                # solver, the pin the only difference: 3.07 s with it against 190.6 s without --
+                # **62x**, which is most of the "thousandfold" §R2.4 first read as warm-up. This
+                # search asked 24 cold refusing questions with `pin=False` and took forty minutes;
+                # with the pin it is about a minute. §5.9's pin is three unit clauses and no new
+                # variables, and it may never change an answer (`Stage.pin_is_sound`).
+                try:
+                    st = PS.Stage(base, refuses_with_L, sorted(img), side="L", rung=1, pin=True)
+                except ValueError:
+                    # the pin triangle is not on this L side; a companion graph need not carry it
+                    st = PS.Stage(base, refuses_with_L, sorted(img), side="L", rung=1, pin=False)
                 v = PS.refuses(st, list(range(len(st.atoms))))
                 done += 1
                 log(f"    element {done}/{sum(len(x) for x in cosets)} of coset {k} "
