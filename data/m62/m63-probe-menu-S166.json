@@ -1,0 +1,4443 @@
+{
+ "kind": "m63-probe-menu",
+ "A": "v166e774.vtx",
+ "companion": "v374e1860.vtx",
+ "threshold": 4,
+ "base_r": 2.6,
+ "base": {
+  "points": 4513,
+  "orbits": 229,
+  "unit_edges": 38730
+ },
+ "rows": [
+  {
+   "label": [
+    12,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    1.0,
+    1.0
+   ],
+   "deg_into": 6,
+   "deg_plus": 8,
+   "deg_all": 9,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o12_0_0_0.vtx",
+   "n_vertices": 172,
+   "n_edges_internal": 816,
+   "n_added": 6
+  },
+  {
+   "label": [
+    0,
+    0,
+    6,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.7923,
+    2.5243
+   ],
+   "deg_into": 8,
+   "deg_plus": 8,
+   "deg_all": 8,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o0_0_6_6.vtx",
+   "n_vertices": 178,
+   "n_edges_internal": 852,
+   "n_added": 12
+  },
+  {
+   "label": [
+    12,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "present": 6,
+   "absent": 18,
+   "radii": [
+    0.2918,
+    1.9786
+   ],
+   "deg_into": 6,
+   "deg_plus": 6,
+   "deg_all": 6,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o12_2_2_0.vtx",
+   "n_vertices": 184,
+   "n_edges_internal": 870,
+   "n_added": 18
+  },
+  {
+   "label": [
+    0,
+    0,
+    8,
+    0
+   ],
+   "size": 6,
+   "present": 3,
+   "absent": 3,
+   "radii": [
+    1.1547,
+    1.1547
+   ],
+   "deg_into": 4,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o0_0_8_0.vtx",
+   "n_vertices": 169,
+   "n_edges_internal": 786,
+   "n_added": 3
+  },
+  {
+   "label": [
+    2,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.5774,
+    0.5774
+   ],
+   "deg_into": 2,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o2_0_0_2.vtx",
+   "n_vertices": 178,
+   "n_edges_internal": 810,
+   "n_added": 12
+  },
+  {
+   "label": [
+    10,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.0,
+    1.0
+   ],
+   "deg_into": 1,
+   "deg_plus": 3,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o10_0_0_2.vtx",
+   "n_vertices": 178,
+   "n_edges_internal": 798,
+   "n_added": 12
+  },
+  {
+   "label": [
+    2,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.1685,
+    1.1423
+   ],
+   "deg_into": 2,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o2_0_4_2.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 834,
+   "n_added": 24
+  },
+  {
+   "label": [
+    4,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.4253,
+    0.9051
+   ],
+   "deg_into": 2,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o4_0_2_2.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 846,
+   "n_added": 24
+  },
+  {
+   "label": [
+    6,
+    2,
+    8,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.242,
+    1.8594
+   ],
+   "deg_into": 2,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o6_2_8_0.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 834,
+   "n_added": 24
+  },
+  {
+   "label": [
+    6,
+    4,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6589,
+    2.5654
+   ],
+   "deg_into": 3,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o6_4_6_0.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 858,
+   "n_added": 24
+  },
+  {
+   "label": [
+    12,
+    0,
+    2,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6958,
+    2.1888
+   ],
+   "deg_into": 4,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o12_0_2_6.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 870,
+   "n_added": 24
+  },
+  {
+   "label": [
+    12,
+    2,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8671,
+    2.1404
+   ],
+   "deg_into": 4,
+   "deg_plus": 4,
+   "deg_all": 4,
+   "admitted": true,
+   "admitted_by": [
+    "into",
+    "plus",
+    "all"
+   ],
+   "file": "data/m62/m63-probe-S166-o12_2_6_0.vtx",
+   "n_vertices": 190,
+   "n_edges_internal": 840,
+   "n_added": 24
+  },
+  {
+   "label": [
+    0,
+    2,
+    10,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.7321,
+    1.7321
+   ],
+   "deg_into": 3,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    4,
+    8,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2361,
+    2.2361
+   ],
+   "deg_into": 3,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    10,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.5275,
+    1.5275
+   ],
+   "deg_into": 2,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -13,
+    -1,
+    -1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6417,
+    1.9929
+   ],
+   "deg_into": 1,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    1,
+    3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.028,
+    1.9
+   ],
+   "deg_into": 2,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    0,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3592,
+    1.5766
+   ],
+   "deg_into": 2,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    7,
+    1,
+    1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.242,
+    1.8594
+   ],
+   "deg_into": 1,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.7366,
+    1.5676
+   ],
+   "deg_into": 1,
+   "deg_plus": 3,
+   "deg_all": 3,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    2,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.2641,
+    0.8414
+   ],
+   "deg_into": 0,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.7908,
+    1.1241
+   ],
+   "deg_into": 0,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.1547,
+    1.1547
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    14,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.0817,
+    2.0817
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.291,
+    1.291
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -19,
+    -1,
+    -3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1247,
+    2.2699
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -11,
+    -1,
+    -1,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1247,
+    2.2699
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -5,
+    -1,
+    -1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5275,
+    1.5275
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8337,
+    1.4041
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    4,
+    0,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.8335,
+    2.1537
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6246,
+    1.7156
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.4574,
+    1.4574
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    5,
+    1,
+    1,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7914,
+    2.2636
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    5,
+    3,
+    9,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.444,
+    2.432
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.5006,
+    1.2358
+   ],
+   "deg_into": 0,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.7825,
+    1.7792
+   ],
+   "deg_into": 0,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    2,
+    12,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7914,
+    2.2636
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    7,
+    3,
+    3,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8671,
+    2.1404
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.7171,
+    1.0735
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    10,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1125,
+    2.1045
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.028,
+    1.9
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    2,
+    0,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1125,
+    2.1045
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    11,
+    1,
+    1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3128,
+    2.068
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    2,
+    10,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.444,
+    2.432
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3128,
+    2.068
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3592,
+    1.5766
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.7923,
+    2.5243
+   ],
+   "deg_into": 2,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    19,
+    1,
+    1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6589,
+    2.5654
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    22,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.8335,
+    2.1537
+   ],
+   "deg_into": 1,
+   "deg_plus": 2,
+   "deg_all": 2,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    0,
+    8
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2361,
+    2.2361
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.7454,
+    0.7454
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.291,
+    1.291
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.7321,
+    1.7321
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    0,
+    8
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.582,
+    2.582
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2361,
+    2.2361
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.5426,
+    2.4574
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -21,
+    -1,
+    -1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9864,
+    2.5493
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -17,
+    -1,
+    -1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7914,
+    2.2636
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -15,
+    -1,
+    -1,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.2175,
+    2.4887
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -11,
+    -1,
+    -3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6875,
+    1.867
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -9,
+    -1,
+    -1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5502,
+    1.744
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -7,
+    -1,
+    -1,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0817,
+    2.0817
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.2585,
+    1.6913
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9577,
+    1.4812
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    4,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.933,
+    2.0916
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    4,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9864,
+    2.5493
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    1,
+    7,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.5426,
+    2.4574
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    3,
+    5,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4242,
+    1.818
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    3,
+    9,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6958,
+    2.1888
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    5,
+    3,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3155,
+    2.5765
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.2918,
+    1.9786
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6246,
+    1.7156
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    10,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.3767,
+    2.5544
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    12,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.191,
+    2.2909
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9791,
+    1.2637
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9509,
+    2.0238
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    8,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.7923,
+    2.5243
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    4,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7484,
+    2.3685
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    8,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.3369,
+    2.2847
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    10,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9509,
+    2.0238
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6876,
+    1.3226
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    2,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.0675,
+    1.5544
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    2,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6685,
+    2.3565
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    4,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6034,
+    2.4005
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    5,
+    1,
+    7,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.3767,
+    2.5544
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.5544,
+    2.034
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    10,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6034,
+    2.5975
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    0,
+    12,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.2809,
+    2.3389
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    2,
+    0,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1964,
+    1.8293
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    6,
+    4,
+    0,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.519,
+    2.4773
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8505,
+    1.8101
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    8,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6685,
+    2.3565
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    2,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9135,
+    1.8406
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    2,
+    10,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4724,
+    2.1728
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    9,
+    1,
+    1,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.8108,
+    2.415
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1669,
+    1.6243
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8337,
+    1.4041
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    12,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.444,
+    2.432
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    2,
+    8,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1613,
+    2.1308
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    2,
+    12,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7365,
+    2.4913
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    10,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3391,
+    2.2326
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    13,
+    1,
+    3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1252,
+    2.3946
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4242,
+    1.818
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1669,
+    1.6243
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.191,
+    2.2909
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    12,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6589,
+    2.5654
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    2,
+    0,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1252,
+    2.3946
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    15,
+    1,
+    1,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4583,
+    2.3061
+   ],
+   "deg_into": 0,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4341,
+    2.1471
+   ],
+   "deg_into": 1,
+   "deg_plus": 1,
+   "deg_all": 1,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    0,
+    4
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    1.1055,
+    1.1055
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    0,
+    8
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    2.2111,
+    2.2111
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    12,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    1.7321,
+    1.7321
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    16,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    2.3094,
+    2.3094
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    0.3333,
+    0.3333
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    0.6667,
+    0.6667
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    1.3333,
+    1.3333
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    1.6667,
+    1.6667
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    24,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    2.0,
+    2.0
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    28,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "present": 0,
+   "absent": 6,
+   "radii": [
+    2.3333,
+    2.3333
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    4,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.5282,
+    1.6829
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    6,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.3133,
+    1.4188
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    8,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.0492,
+    2.2602
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    10,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.8906,
+    1.9961
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    0,
+    14,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.468,
+    2.5735
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    14,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2361,
+    2.2361
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    4,
+    12,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.582,
+    2.582
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.6667,
+    1.6667
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    6,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.8819,
+    0.8819
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    10,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.453,
+    1.453
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    14,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.0276,
+    2.0276
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    8,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.2019,
+    1.2019
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    12,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.7638,
+    1.7638
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    16,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.3333,
+    2.3333
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    4,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.5815,
+    2.2482
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    0,
+    8
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.3094,
+    2.3094
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    12,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.8559,
+    1.8559
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    16,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.4037,
+    2.4037
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    4,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.2482,
+    2.5815
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.8559,
+    1.8559
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    14,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.1858,
+    2.1858
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.1241,
+    1.7908
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.4907,
+    1.4907
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    0,
+    8
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.4267,
+    2.4267
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    16,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.5166,
+    2.5166
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.0276,
+    2.0276
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    0.2092,
+    2.1241
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.5986,
+    1.5986
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.0,
+    2.0
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    22,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    1.9149,
+    1.9149
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    22,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.4721,
+    2.4721
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    24,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2852,
+    2.2852
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    26,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.2361,
+    2.2361
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    28,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.582,
+    2.582
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    30,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "present": 0,
+   "absent": 12,
+   "radii": [
+    2.5604,
+    2.5604
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -23,
+    -1,
+    -3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3155,
+    2.5765
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -21,
+    -1,
+    -5,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3245,
+    2.4579
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -17,
+    -1,
+    -5,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0071,
+    2.3032
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -17,
+    -1,
+    -3,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.4182,
+    2.5467
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -15,
+    -1,
+    -3,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.972,
+    1.972
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -13,
+    -1,
+    -3,
+    7
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1668,
+    2.4437
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    -8,
+    -2,
+    -2,
+    8
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.5166,
+    2.5166
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9869,
+    2.1917
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1309,
+    1.9576
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    2,
+    12,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.519,
+    2.4773
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    0,
+    4,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9403,
+    2.3832
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    1,
+    3,
+    5,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5053,
+    2.595
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    2,
+    8
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9296,
+    2.5053
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    0,
+    4,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.0937,
+    2.2419
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    0,
+    8
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3482,
+    2.4804
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    8,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3995,
+    1.6115
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    12,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.904,
+    2.0648
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    2,
+    16,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.441,
+    2.5684
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    4,
+    2,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7719,
+    2.1014
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    4,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9509,
+    2.2545
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    2,
+    4,
+    10,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.267,
+    2.533
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    3,
+    1,
+    5,
+    5
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6987,
+    2.2263
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    3,
+    3,
+    7,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3949,
+    2.121
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    3,
+    3,
+    11,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7682,
+    2.5136
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    2,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.4096,
+    1.9753
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    6,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8596,
+    2.5463
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    0,
+    14,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5053,
+    2.595
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    2,
+    10,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5725,
+    1.9363
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    2,
+    14,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1149,
+    2.3978
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    4,
+    4,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6836,
+    2.3211
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    4,
+    4,
+    8,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9582,
+    2.5274
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    0,
+    2,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5233,
+    2.058
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.4097,
+    1.6495
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    8,
+    2,
+    14,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0415,
+    2.5925
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    9,
+    3,
+    5,
+    1
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.818,
+    2.4032
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    4,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3649,
+    2.3859
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    0,
+    6,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.8671,
+    2.1404
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    10,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.5905,
+    1.8815
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.0343,
+    1.3069
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.0479,
+    1.7358
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    12,
+    0,
+    8,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.0012,
+    2.4716
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    0,
+    4,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5905,
+    2.5218
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.6141,
+    2.2012
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    14,
+    2,
+    8,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.1735,
+    2.4177
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    2,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9115,
+    2.3598
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.3696,
+    1.947
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    0,
+    10,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6034,
+    2.4005
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.474,
+    2.3089
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    16,
+    2,
+    6,
+    0
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    0.9441,
+    2.449
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.708,
+    2.0479
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.5002,
+    1.8781
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    18,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6163,
+    2.2728
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6875,
+    1.867
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    2,
+    6
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1572,
+    2.5629
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    4,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.7484,
+    2.3685
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    20,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.6958,
+    2.1888
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    22,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0071,
+    2.3032
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    22,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    1.9296,
+    2.5053
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    24,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0174,
+    2.1698
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    24,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.0244,
+    2.4521
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    26,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3155,
+    2.5765
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    26,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.1668,
+    2.4437
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  },
+  {
+   "label": [
+    28,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "present": 0,
+   "absent": 24,
+   "radii": [
+    2.3482,
+    2.4804
+   ],
+   "deg_into": 0,
+   "deg_plus": 0,
+   "deg_all": 0,
+   "admitted": false,
+   "admitted_by": []
+  }
+ ]
+}
