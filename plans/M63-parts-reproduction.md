@@ -84,7 +84,7 @@ re-derived here unless said otherwise.
 approval needed because later work removed the object it was about), **drop?** (a drop that needs the
 product owner's explicit approval). Row ids are stable for citation.*
 
-**Every `drop?` row is conditional on phase C4.0's measurement** (Poros card 6, adopted): the arguments
+**Every `drop?` row is conditional on phase C4.0's measurement** (Poros card 6; **approved in exactly that conditional form by the product owner on 2026-09-11**, each row keeping its condition and its re-test): the arguments
 rest on ask costs from stages with a frozen companion, and the joint stage is the first without one. If
 the joint stage's asks rise ten-fold, the cost-control rows — B-8, B-11, D-6 and X-7's guard — come back
 for F and G. **C-5 and B-12 are no longer drops at all** (Poros card 8): they carry a second role, in
@@ -195,7 +195,8 @@ Acceptance:
 - [ ] C4: the joint stage's positive control (the 509 returns exactly itself — a derived expectation, not
   a hope); the joint run on `A412 ∪ ρ·g⁻¹(A166)` to a closed optimum, predictions committed first,
   checkpointed; **if ≤ 508 vertices, stop and report to the product owner the same hour.** C4b, the
-  second relative frame (the joint problem has at most two, and only one holds the record), if approved.
+  second relative frame (the joint problem has at most two, and only one holds the record) — approved,
+  running after C4a closes, with a report first if C4a passes three hours or does not close.
 - [ ] C5: `CrossLaw` controls fire; the L451 stage fingerprint is unchanged under the explicit law.
 - [ ] The audit rows assigned to C updated in place here; §R2 written; Poros's record committed.
 
@@ -245,6 +246,8 @@ Acceptance:
   planted control that flips (a wrong length; a triple that is not forced).
 - [ ] Held-out predictions committed after the freeze and before any held-out run; every row a frozen
   `Comparison`.
+- [ ] **The held-out list excludes the M6B 375 row in writing.** Phase C3 spent it (approved 2026-09-11),
+  the audit marks it SPENT, and **M6B 374 at rung 2 stays held out**.
 - [ ] Reduction generalization on his published accumulators: L M6B 374 at rung 2 (78, `v406e2076`); L
   M6C 374 (76, `v400e2034`); S M6B (141, 4, `v172e804`) and M6C (150, 28, `v167e772`); the 8/3 mono-pair
   (367, 27, `v375e1862`); the √3 triple (221, 120, `v238e1131`).
@@ -285,8 +288,9 @@ Acceptance:
 
 *Cost:* open-ended; an experiment is 1 h – 1 day of compute; a certificate about a day.
 
-**Phase G — other bases and the sieve's rotations.** Purpose: Kooshi's second direction (S.1). **Recommended
-as its own milestone** at M63's close (four-part decision in S.5), carried here so the roadmap is whole.
+**Phase G — other bases and the sieve's rotations.** Purpose: Kooshi's second direction (S.1). **Approved
+2026-09-11 as its own milestone**, numbered at M63's close; its row stays here so the sequence is whole.
+How it relates to M62 and FS-30 is settled at that close, not now.
 Acceptance:
 - [ ] Rotations re-sieved on the §5.6 lattice's own radius spectrum; the full admissible list persisted.
 - [ ] A cross-edge law per rotation class — the collinear law when `cos θ ∈ K` (C5's parameter), a new

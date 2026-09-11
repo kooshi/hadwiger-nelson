@@ -640,6 +640,9 @@ zero parameters are free. That is the same shape as M63 §R1's S166 calibration.
 that tests the loop is 374 at rung 2 (78 minima), and it stays untouched for E. Its rows are stamped
 TUNING.
 
+**Approved 2026-09-11 (§A.1 #3) with two conditions, both on the implementer:** the audit marks this row
+**SPENT**, and phase E's held-out list excludes it **in writing** while keeping M6B 374 at rung 2.
+
 ### C4 — the joint stage and the record-bearing run
 
 The joint stage is `side="LS"`, i.e. `reduce = {"L","S"}` — no third code path (§M). Under `rung_maps`
@@ -710,8 +713,8 @@ python3 tools/parts_run.py reduce --L v412e2106.vtx --S v166e774.vtx --S-frame c
 
 **C4b — the second relative frame** (one more run of the same shape, `--S-frame coset:2`). It is a
 different joint problem over the same two accumulators, and its minimum is unrelated to the record's by
-anything proved so far. Same stop rule. *Recommended; the product owner's call, since it doubles C4's
-compute.*
+anything proved so far. Same stop rule. **Approved 2026-09-11 (§A.1 #2), to run after C4a has closed; if
+C4a exceeds three hours or does not close, report before launching this one.**
 
 ---
 
@@ -722,15 +725,22 @@ the milestone with the goal already met: the `LS` side, the ask wall and exact r
 the driver needed to launch and checkpoint. Everything else follows while the run goes.
 
 1. **C5**, with its controls (an hour or two; seconds of compute).
-2. **C1.1–C1.5** with their self-tests (half a day; the resume control is ~3 minutes).
-3. **C1.6–C1.8**: `parts_run.py`, then the two regenerations (~20 minutes on one core, in the background as
-   a process group, **announced first**), then the M64 producers.
-4. **C4**: the stage and its controls; **commit §4's C4 predictions**; announce; launch the joint run in
-   the background (one core).
-5. **C2**, while the joint run goes, since its computations are light: the instrument, the shading,
-   Tables 5–7, the re-verification, the involution classes, then the open rungs (minutes each, one core).
-6. **C3**: commit its predictions, run it, audit it.
-7. **Close:**
+2. **C1.1 (the ask wall) and C1.2 (exact resume)**, with their self-tests — the resume control is the
+   S166 stage at its order-3 rung, ~3 minutes.
+3. **The minimum of `parts_run.py`** needed to build the joint stage, launch it and checkpoint it.
+4. **C4's three controls** (c4.1's derived positive control first — it is minutes and its answer is known).
+5. **Commit §4's predictions, run `--dry-run`, send that text as the announcement, and LAUNCH C4a** in
+   the background as a process group, one core. *The controls and the predictions come before the
+   launch, never after.*
+6. **While it runs** (its computations are light, so this respects one-heavy-job): C1.3–C1.8 with their
+   self-tests, then the two regenerations (~20 minutes, announced), then the M64 producers; then **C2** —
+   the instrument, the shading (**capped at about two engineer-hours**, after which the partition is
+   reported unattested through §E3's refusal path and the product owner is told a scoped agent could take
+   it), Tables 5–7, the re-verification, the involution classes, the open rungs; then **C3**: commit its
+   predictions, run it, audit it.
+7. **C4b after C4a has closed** — one heavy job at a time. **If C4a exceeds three hours or does not
+   close, report before launching C4b.**
+8. **Close:**
    - write M63 §R2;
    - update M63 §S.3's C rows in place, and §S.2 where a number moved;
    - commit `plans/POROS-2026-09-11-m63-phaseC.md` by path if it changed;
@@ -808,7 +818,9 @@ here.*
 - [ ] **C2:**
   - [ ] c2.1–c2.9 fire.
   - [ ] The S166 and L451 audits are written.
-  - [ ] The shading is extracted (or refused, with the reason).
+  - [ ] The shading is extracted, **or the two-engineer-hour cap is reached** and the partition is
+    reported unattested through §E3's refusal path, with the product owner told that a scoped agent
+    could take it. The ranges do not depend on it either way.
   - [ ] Tables 5–7 are checked.
   - [ ] `Y` is re-verified.
   - [ ] The involution classes are reported.
@@ -821,7 +833,8 @@ here.*
   - [ ] The joint run reaches a closed optimum, or reports its open interval with the checkpoint intact.
   - [ ] The verdict is recorded whichever way it comes out.
   - [ ] The stop rule is honoured.
-  - [ ] **C4b** (if approved): the second relative frame, same shape, same stop rule.
+  - [ ] **C4b**: the second relative frame, same shape, same stop rule — after C4a closes, and with a
+    report first if C4a ran past three hours or did not close.
 - [ ] **§4:** every prediction is scored in M63 §R2.
 - [ ] **Close:**
   - [ ] M63 §S.3's C rows are updated in place.
@@ -864,7 +877,7 @@ here.*
 | Resume promises the level, not the post-resume harvest | promise identical `Y` | a fresh solver may return a different model for the same colourable ask; promising `Y` would make the control fail on correct code | high |
 | Checkpoints are JSON, not pickle | keep the existing pickle | readable by an outside reader, and diffable when a resume is questioned | high |
 | The shading is read from the raster, and trusted only through the arithmetic control | report ranges only and call the partition unattested | §3 makes the partition a hard gate, and his definition of stable is not the single-valued range; a raster read with a control that knows the answer for every fill cell is cheap | medium — if the table layout defeats the cell boxes, the partition is reported unattested |
-| C2's cheap `Y` statistics (M63 §4 phase C) are proposed for dropping | compute them (~1 h) | they size his explicit enumeration, which we do not run (M63 §S.3 C-5, awaiting approval) | medium |
+| C2's cheap `Y` statistics are **not** dropped after all (M63 §S.3 C-5) | drop them, as this table first said | they carry a second role my drop argument missed — they are his §5.10 indicators, the only published device that ranks an expansion, which phase D needs (Poros card 8) | high |
 | **Every proposed drop carries its regime as a condition** and is re-tested when the regime changes (C4.0) | drop them outright, or keep them all | the arguments are measured on frozen-companion stages; F and G leave that regime, and the dropped items are precisely the cost-control ones (Poros card 6) | high |
 
 ---
