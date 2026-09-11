@@ -1244,5 +1244,38 @@ A joint reduction returned <V> vertices (<A> atoms), below the 509 record.
 
 ## §A — The product owner's approval
 
-*Empty until the review. The implementer does not start before a line appears here naming the commit
-that recorded the approval, the decisions approved, and any item the product owner redirected.*
+**APPROVED 2026-09-11 by the product owner (the main session), recorded by the commit that added this
+section.** The subplan stands as written except where §A.2 redirects it. Implementation may start.
+
+### A.1 — The five decisions the planner put to me, each in four parts
+
+| # | the choice | the alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| 1 | **The six conditional drops are approved as conditional drops** — B-4 (pendant companions), B-8 (the cyclic implication chain), B-11 (each §5.9 lever measured against a recorded trace), D-6 (the level in parallel), X-7-as-specified (replaced in D), M64-6 (idealness of `Y`). Each keeps its audit row, its stated condition, and its C4.0 re-test | keep them all, at the cost of days spent on accelerators for asks that run in 0.006–0.11 s | each is superseded by a mechanism we now hold, or priced against his ask costs rather than ours; and Poros's card 6 already converted them from decisions into conditions, so the regime that justifies them is written down and re-tested where it changes | high — the condition is what makes it safe |
+| 2 | **C4b is approved** — the second relative frame is run | leave it to F(b) | it is a joint problem nobody has ever run, at the same cost as C4a, with an even-odds registered prediction, and the goal is the record; F would run it anyway, later | high |
+| 3 | **C3 may spend the M6B 375 row** | leave every M6B number to E | it reduces his published accumulator with his published companion and has no free parameter, so it is a calibration of the same shape as §R1's S166; and it is the only thing that can say what Table 2's "M6A&B" column is, which gate rank 2 depends on. **Condition:** the audit marks that row SPENT, and E's held-out list excludes it in writing while keeping M6B 374 at rung 2 | high |
+| 4 | **Phase G is its own milestone**, numbered at M63's close; its roadmap row stays here so the sequence is whole | G as M63's last phase | different product (constructions at rotations `[Parts2020a]` §4 calls unknown), its own prior-art question, and no reproduction discipline; M63's closure does not depend on it. How G relates to M62 and FS-30 is settled at M63's close, not now | medium — if F lands a record quickly and G's census is an afternoon, folding in its first step is harmless |
+| 5 | **F before E, with the planner's condition adopted: the freeze commit precedes both** | E before F | Kooshi's goal is the record, and E does not gate F; the freeze-first condition removes the only real risk, which is F's learning editing the configuration E is judged under. E's runs are light and may interleave under the one-heavy-job rule | high |
+
+### A.2 — Two redirections and one cap
+
+1. **Launch the joint run as early as it is safe, not fourth in §3's order.** C4a and C4b are the only
+   items that can end the milestone with the goal met, and the run is the long pole. So: C5, then C1.1
+   (the ask wall), C1.2 (exact resume) and the minimum of `parts_run.py` needed to launch and checkpoint,
+   then C4's three controls, then **commit the §4 predictions, announce with `--dry-run`, and launch**.
+   C1.3–C1.8, C2 and C3 follow while the run goes. *Unchanged:* the controls and the predictions come
+   before the launch, never after.
+2. **C4b runs after C4a has closed**, one heavy job at a time. If C4a exceeds three hours or does not
+   close, report before launching C4b.
+3. **The shading extraction is capped at about two engineer-hours.** Past that, stop, report the partition
+   unattested through §E3's refusal path, and tell the product owner: a scoped agent can take it as a
+   subphase if it is worth more time. Everything else in C2 is unaffected, because the ranges do not
+   depend on the shading.
+
+### A.3 — What the review credited
+
+The joint test as phase C's record-bearing experiment (Poros card 1, re-derived here before adoption);
+282 by Burnside before it was counted (card 2), which retired M64's P9 as vacuous; the four
+domain-pass corrections, of which `stage_fingerprint` not identifying a search would have let a
+checkpoint resume one search onto another; O9, which turns the joint positive control's answer into a
+derived expectation; and §L's lesson that an audit built from a plan inherits the plan's blind spots.
