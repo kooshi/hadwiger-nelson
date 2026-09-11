@@ -242,8 +242,6 @@ cannot see.
 
 **Estimates**, each against its phase in §8:
 
-| phase | content | code lines | time |
-|---|---|---|---|
 | phase | content | code lines, probed where marked | time |
 |---|---|---|---|
 | A | `TwoColourResidue.lean`: the two char-2 lemmas, the square-root-of-one step, the three forms, the model's two facts, two reds | about 45 (everything but the valuation and plane forms probed, §M2) | two to three hours |
@@ -990,3 +988,24 @@ aloud), D21 (`planeOver` in the root namespace) and D22 (no abbreviation for a p
   Submodule.mem_span_pair]` still turns membership into a finite existential, and `decide` unfolds
   `TwoAdicSqClass.two` and its siblings itself. If it does not, add them to the `simp only` list.
 - **The `ARCHITECTURE.md` rows still say "Skeleton (FS-36)".** Remove that at the close (§9 item 5).
+
+## §R — Results (WORKFLOW steps 7–10)
+
+*The implementer's running record, written at each phase boundary. §1–§11 are the plan as approved and are not
+rewritten. "Code lines" means non-blank lines outside comments and docstrings; "added" is against the skeleton at
+`6338951`.*
+
+### R1 Phase A — `TwoColourResidue.lean`: landed
+
+- Every leaf closed on §M2's routes. The three forms, the colouring's properness, the model's two facts and both reds
+  compile with no message (`lake env lean -DautoImplicit=false`: exit 0, 2.2 s wall).
+- **Code lines:** 71 in the skeleton, 100 now, **29 added**. P1 (≤ 180) holds; §4 estimated about 45.
+- **P6 holds:** `eq_one_of_mul_self_eq_one_of_charTwo` is one line through `frobenius_inj`.
+- **The stop rule was not approached:** the dual-functional lemma is six lines.
+- **Small deviations, none in a statement:**
+  - `normOneColoringTwo`'s properness is five lines: `cosetResidue_eq_iff`, `cosetResidue_apply_of_mem`, a `change` that
+    exposes `l (ψ ⟨…⟩)`, then `map_eq_one_of_mem_normOne_of_conj_eq` and `hl`.
+  - The model's norm-one leaf wraps the probe's `decide` in `intro v w … revert v w`, because the theorem's binders are
+    strict-implicit.
+  - `normOneColoringTwo_apply` gained a docstring.
+- Review note 2 (the duplicated header row of §4's estimates table) is fixed.
