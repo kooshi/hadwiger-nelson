@@ -253,17 +253,37 @@ anything rests on it.**
    *"a base orbit is included in `R` if, when added to the graph `A`, the degree of some of its vertices
    is at least 4"*.
 
-   | reading | degree measured in | menu: `v403e2112` / `v412e2106` / `v166e774` |
+   | reading | degree measured in | `v403e2112` / `v412e2106` / `v166e774` |
    |---|---|---|
-   | **strict** — an absent vertex's unit neighbours **into `A`** | `A` alone | **49 / 49 / 6** (this is what I re-derived, and what Poros's card 1 counted) |
-   | **literal** — *"when added to the graph `A`"*, so the orbit's own internal edges count, and so do cross-edges to the frozen other half | `A ∪ orbit` | **larger**; measured on the small half as **12**, about 15 with the shoulder. The large half is being re-derived |
+   | **(a) strict** — an absent vertex's unit neighbours **into `A`** | `A` alone | **49 / 49 / 6** — re-derived here; what Poros's card 1 counted |
+   | **(b) literal, internal** — *"when added to the graph `A`"*, so the added orbit's own edges count | `A ∪ O` | **59 / 57 / 11** (Poros P5) |
+   | **(c) literal, plus cross-edges to the frozen companion** | `A ∪ O ∪ C` | 59 / 57 / 12 — **unverified**: the advisor's own control failed, its cross-edge call returning 54 edges between `v374e1860` and `v136e564` against the record's 18 |
 
-   **The literal reading is the better reading of his sentence**, and D must not bake in either: the
-   candidate count enters the plan only as `|menu|`. **Two consequences to carry.** (i) If the large half
-   scales like the small one, the sweep is materially bigger — **which changes core-hours and not design**
-   (§3.2). (ii) The *closed-list* claim — that none of the 46 orbits outside his disk qualifies — was
-   computed under the **strict** rule, so the literal rule may admit some of them, and that would be
-   **material outside his own search area worth reducing against**.
+   **A candidate admitted only under (c) is flagged `provisional` in the menu and in the map**, and stays
+   so until phase C's implementer confirms the committed cross-edge law. It affects the menu's edges and
+   not its shape: (c) adds nothing on the large half and one orbit on the small.
+
+   **Reading (b) is the better reading of his sentence** — the engineer's grammar is right and the
+   advisor withdrew (a). **The menu is therefore 57 on the large half and 11–12 on the small, about 69
+   in all and about 71 carrying the shoulder: +25% over the strict count, not the doubling that was
+   feared, so §3.2's affordability argument is unchanged.** Size the sweep at **57**. The count still
+   enters the plan only as `|menu|`.
+
+   **Two things that did not move.** (i) **The closed list survives every reading**: zero orbits outside
+   his `r = 2` disk are admitted under (a), (b) or (c), on all three accumulators — the claim is now
+   robust to the rule rather than resting on one narrow reading, and P-D14 is scored **negative before
+   the phase opens**. (ii) The advisor's pre-registered argument that reading (b) is *not a filter* —
+   that it would admit ≥ 10 orbits touching `A` nowhere — **fired its own falsifier at 0**, so every
+   orbit (b) adds already attaches to `A`, and the two readings differ only where an attaching vertex
+   reaches degree 4 with help from its own orbit-mates.
+
+   **On the void column (c), a reconciliation rather than a hunt.** The stage's own accounting is
+   consistent: it reports the record at 509 vertices and 2,442 edges with 30 connection edges, and
+   because the shared centre is counted on the L side, the S half's centre edges appear among the
+   connection edges — `e(L) + e(S∖centre) + (centre edges + 18 off-centre) = 2,442` reproduces his
+   `1860 + 564 + 12 + 6` exactly. So the factor of 3 is in the advisor's separate cross-edge call, not
+   in the stage, and the sweep should take its edges from the stage (§M collapse 1) rather than from
+   that call.
 
    **Top candidates, strict reading:** `(8,0,0,4)` at degree 10 with 12 of 12 absent on the large half;
    `(0,0,6,6)` at degree 8 with 12 of 12 absent on the small half — *the same orbit his own recorded L
@@ -276,6 +296,17 @@ anything rests on it.**
    also at radius exactly `√5`**. **So the first material his own construction excluded sits at `√5` on
    both halves**, and it is absent from his base entirely. *(No field-theoretic consequence is claimed
    here — the lattice and its field are unchanged; the radius is a fact about his truncation.)*
+
+   **And the obvious deflation fails, which turns the coincidence into a reading.** If `√5` were simply
+   the first orbit radius past his cut, the pair would be an artefact of where he drew the line. It is
+   not: the 46 excluded orbits begin at 2.00708, and **thirteen of them sit closer to his boundary than
+   `√5` = 2.23607 while scoring below 3** (Poros P6). So **degree into the accumulator is not monotone
+   in radius**, the best excluded scorer on each half sits further out rather than nearest, and the two
+   halves agree independently. **Consequence for phase F:** his published negative — *"expanding the
+   base graph and increasing the radius of the disk did not lead to new results in our case"* — is a
+   fact about his **filter**, not about his **disk**, because radius was never the quantity that
+   ordered admissibility. F(g)'s radius half therefore closes for a reason rather than for want of a
+   measurement.
 
    **The two halves' neighbourhoods are asymmetric**, at degree ≥ 3: **9** orbits around `v166e774`
    (6 eligible + 3 shoulder) against about **72** around `v412e2106`; at degree ≥ 1, **78** of the small
@@ -392,13 +423,29 @@ def score_his_device(base, A_tuples, companion, candidates, *, log=print) -> dic
 ```python
 @dataclass(frozen=True)
 class Candidate:
-    """One proposed expansion: what it adds, why it was proposed, and what it cost to price.  Named by
-    ORBITS, never by a vertex list, because his §5.6 expansion is stated in orbits and an orbit name
-    survives a change of frame."""
-    fills: tuple[tuple[int, int, int, int], ...]    # partially filled base orbits, completed
-    adds: tuple[tuple[int, int, int, int], ...]     # whole base orbits from the reserve
-    n_new: int                                      # vertices added; his perturbation strength
-    provenance: str                                 # "partial-fill" | "reserve" | "many-then-trim" | "stall-escape"
+    """One proposed expansion: **the vertices it adds**, and where the proposal came from.
+
+    **`fills` and `adds` were one thing wearing two names** (§M collapse 3).  His prose distinguishes
+    *completing a partially filled orbit* from *adding a reserve orbit*, but the object added is a set
+    of base vertices not currently in `A` either way, and every consumer treated the two identically.
+    The distinction is provenance, and provenance is already a field.
+
+    `vertices` is in the base's own lattice tuples, and the constructor REFUSES an empty set: an
+    expansion that adds nothing is his own recorded no-op (*"filling orbit (4,0,0,0)"*, already 6 of 6
+    in `A403`), and it is now unrepresentable rather than filtered (control d3.1 becomes a constructor
+    test).  The orbits are recoverable through `base.of`, so naming by orbit is a rendering and not a
+    second copy of the datum."""
+    vertices: frozenset[tuple[int, int, int, int]]
+    provenance: str          # "partial-fill" | "reserve" | "many-then-trim" | "stall-escape" | "identity"
+
+    @property
+    def n_new(self) -> int:
+        """Derived, never stored — his perturbation strength is `len(self.vertices)`."""
+
+    @property
+    def orbits(self) -> dict:
+        """`{orbit label: how many of its members this candidate adds}`, for rendering and for the
+        map's per-orbit columns."""
 
 def reserve(base, A_tuples, *, min_degree: int = 4) -> list[tuple]:
     """His §5.6 reserve `R`: an orbit joins it *"if, when added to the graph A, the degree of some of
@@ -514,8 +561,15 @@ def assemble_record(base, L_minimum, S_minimum, *, cross_law=None) -> dict:
 
 ```python
 def outcome_map(base, start_record, companion, *, menu=None, target=None, jobs=1, log=print) -> dict:
-    """**D's scoring surface** (§3.2): the outcome of EVERY single-orbit move in the closed menu,
-    instead of a ranking judged against his one recorded move.
+    """**D's scoring surface** (§3.2): `step` evaluated at EVERY candidate in the menu, instead of a
+    ranking judged against his one recorded move.
+
+    **It is the loop's own step function, tabulated** (§M collapse 2) — `[step(state, c) for c in
+    menu]`, never a parallel implementation.  A separate one could drift from the loop and would then
+    be measuring something the loop does not do, which is the whole failure this surface exists to
+    avoid.  The rule is a *policy over the same step*: the map evaluates all of it, the loop evaluates
+    it in the rule's order until its budget runs out.  Scoring is then well defined because both sides
+    are literally the same function.
 
     For each candidate: expand, then `reduce_stage(..., target=incumbent-1)`.  A candidate that cannot
     reach the target is refuted cheaply and labelled `no`; a candidate that reaches it is labelled
@@ -536,22 +590,32 @@ def look_ahead_quantities(level, base, stage) -> dict:
     planning on his four published columns and did NOT fire (§1(e)2); this re-derives that and extends
     it to the closure bound, which needs a level set at each state and so could not be tested before D1."""
 
-def edge_sweep(stage, *, order="radial", protect_pin=True, log=print) -> dict:
-    """**Greedy 1-minimal edge subset of a fixed vertex set** — the reduction machinery with edges as
-    atoms.  `[deGreyParts2023]` fn. 2 says the 509 *"is not edge-critical … We were able to discard 36
-    edges, but we didn't perform an exhaustive search"*, so the published edge record at 509 vertices is
-    **2,406**, and this is a record-bearing run at one pass (§PA(e)).
+def edge_atoms(stage) -> "Stage":
+    """**The edge sweep is not a second instrument: it is the same stage with edges as its atoms**
+    (§M collapse 1, and it is this pass's largest finding).
 
-    One selector per edge over the stage's CNF; an ask with selector `e` false asks whether `G − e` is
-    four-colourable.  `sat` ⟹ `e` is critical; `unsat` ⟹ removable, and it is removed permanently, so a
-    pass returns a 1-minimal set — the quantity comparable with his 36.
+    `Stage` already models *a working graph, a frozen part, and a set of deletable units*, and
+    `reduce_stage` already computes the minimum-weight hitting set over those units.  An edge is a
+    deletable unit.  `R(S) := W with edge set S refuses four colours` is **upward closed** for exactly
+    the reason the vertex version is — adding edges cannot make a graph easier to colour — so M63 §O
+    carries verbatim: the MCS/MUS duality, phase 1, the correction sets, the completeness invariant,
+    the bound, exact resume, the wall, the verdict vocabulary and the record schema all come for free.
 
-    **The pin's three edges are protected:** §5.9's symmetry break is sound only while its triangle is
-    a triangle.  The answer is 1-minimal among edges outside the pin triangle, and the record says so.
+    **Three consequences.**
+      * The deliverable is no longer a greedy 1-minimal set but **the exact edge minimum** of the 509 —
+        which is precisely what `[deGreyParts2023]` fn. 2 says was never computed (*"we didn't perform
+        an exhaustive search"*), and it is the same machinery, not a new one.
+      * **The pin stops being a special case.**  §5.9's symmetry break is sound only while its triangle
+        is a triangle, so the pin's three edges go in `fixed` — where the shared centre already lives —
+        instead of being protected by a flag.
+      * **My failed probe's bug becomes unrepresentable.**  It hand-rolled a second CNF over a
+        hand-rolled index space and silently built a 374-vertex graph where the stage said 509 (§1(d)).
+        With edges drawn from `stage.A.induced(stage.present)` as the stage's own atoms, there is no
+        second index space to get wrong.  Control d6.1 survives as a regression test, not as a guard
+        against a live failure mode.
 
-    Vertex numbering is the stage's `range(2n)`, edges from `stage.A.induced(stage.present)`.  Reading
-    `A.E_int`/`A.E_cross` raw mixes two index spaces and silently builds a different graph — control
-    d6.1 is that exact bug (§1(d))."""
+    Greedy remains available as a *cheap upper bound* to report beside the exact answer, and his 36 is
+    the number to beat on either."""
 ```
 
 ### The artifact schema
@@ -594,7 +658,10 @@ def edge_sweep(stage, *, order="radial", protect_pin=True, log=print) -> dict:
 | d6.1 | the edge sweep built over the L-only index space (§1(d)'s real bug) | `edge-sweep-wrong-graph`: the pre-ask assertion 509 / 2,442 fails |
 | d6.2 | a pin-triangle edge offered to the sweep | refused, `pin-edge-protected` |
 | d6.3 | the swept graph re-checked by a fresh solver sharing no CNF code | still refuses four colours |
-| d6.4 | the map run with `jobs=8` against `jobs=1` on the same six candidates | identical verdicts and identical levels: `map-parallel-identical` |
+| d6.4 | the map run with `jobs=16` against `jobs=1` on the same six candidates | identical verdicts and identical levels: `map-parallel-identical` |
+| d6.5 | **free, the unsampled member (§M):** the **identity candidate** — expand by nothing, reduce at the incumbent | reproduces the unexpanded level exactly (`map-identity-agrees`). It validates the whole map pipeline against a level already on disk, and costs one entry |
+| d6.6 | **free, a derived control (§M):** any map entry whose `\|M\|` is **larger** than the unexpanded level's | impossible — expansion enlarges the atom set, so the old selection is still available and the minimum is non-increasing at a fixed rung. A larger `\|M\|` is `map-entry-impossible`, a bug and never a finding |
+| d6.7 | the edge-atom stage built on the record | 509 vertices, 2,442 edges, **and its atom count equals the edge count**; the exact edge minimum is reported beside the greedy upper bound |
 
 ---
 
@@ -683,8 +750,13 @@ the result is reusable where loop runs are not.
 
    Report any truncation as `Count(k, "truncated", of=|menu|, selected_by=…)` naming the block.
 4. **The shoulder is included**, which makes the candidate list independent of where his threshold is
-   drawn (§1(e)3), and **every candidate outside his `r = 2` disk is flagged as such in the map** — those
-   are the first material his own construction excluded.
+   drawn (§1(e)3), and **every candidate outside his `r = 2` disk is flagged as such in the map**.
+   **In particular `(18,0,0,6)` is swept on the large half despite scoring 3** (Poros card 6, adopted;
+   its sibling `(0,4,8,0)` is already in the small half's fourteen). These two are the *only* excluded
+   material on either half that comes within one of his own threshold, both at radius exactly `√5`, and
+   they are the first reduction ever run against material his own base excluded. One run out of 57, and
+   it is the cheapest available test of the claim phase F's radius item rests on. **Expected inert** —
+   the value is closing the question, not a find (P-D15).
 5. **Parallelism, and what it wants.** The candidates are independent runs, so this is the one place in
    the phase where cores turn directly into wall clock (unlike the level loop before its first optimum).
    **Ask: 16 cores**, leaving the 32-core desktop's remainder for the joint runs (2) and the small-half
@@ -774,7 +846,8 @@ companion and so are a direct test of §1(b)'s assumption.
 | P-D11 | the small-half menu returns 136 on every candidate | any candidate below 136 | 0.65 |
 | P-D12 | **the product owner's hunch, registered so the sweep scores it rather than assuming it:** the large half's helpful-move density (per candidate) exceeds the small half's | the small half's density equals or exceeds the large half's — which would say his four states of work on the large half exhausted it, and the untouched half is the opportunity | 0.60 |
 | P-D13 | under the **literal** reading of his admission rule the large half's menu grows by roughly the factor the small half's did (6 → 12) | it grows by less than 1.3× or more than 3× | 0.55 |
-| P-D14 | at least one candidate **outside his `r = 2` disk** qualifies under the literal reading — i.e. his own truncation excluded admissible material | none qualifies | 0.60 |
+| P-D14 | ~~at least one candidate outside his `r = 2` disk qualifies under the literal reading~~ — **scored NEGATIVE before the phase opened** (Poros P5: zero outside-disk orbits qualify under any of the three readings, on all three accumulators). The closed list is robust to the reading, not an artefact of the strict one | — | — |
+| P-D15 | the two excluded `√5` orbits, swept despite scoring 3, are **inert**: neither lowers `\|M\|` nor grows `{M}` | either one improves the object — which would make his own truncation the thing that capped the record | 0.80 |
 
 ---
 
@@ -957,6 +1030,21 @@ edges, and `e5 ≤ 2406` is in print. **Proposed replacement:**
 Also named by this row and not yet keys: `[Pritikin1998]` (JCTB 73, `v7 > 6197`, `v5 > 12`) and
 `[GwynStavrianos2022]` (Geombinatorics 32(1), 2022).
 
+### X.3 — M63 §S.4 phase F(g): the disk-radius re-test can be struck, and his negative explained instead
+
+**As written**, F(g) is *"his own negative on the disk radius — 'expanding the base graph and increasing
+the radius of the disk did not lead to new results in our case' — which he measured inside his own loop
+… at 150× his reduction speed it is cheap to re-test."*
+
+**It no longer needs a re-test, because the question is answered without one** (§1(e)3): under all three
+readings of his admission rule, **zero** orbits outside his `r = 2` disk qualify, on all three
+accumulators; and the deflation was tested — thirteen excluded orbits sit *closer* to his boundary than
+the `√5` pair and all score lower, so **admissibility is not ordered by radius**. His negative is
+therefore a fact about his **filter**, not about his **disk**. **Proposed:** strike the radius half of
+F(g), keep the base-graph half (`⊕ⁿHᵐ`), and record the explanation in its place. Phase D still sweeps
+the one `√5` orbit on each half (P-D15), so the claim is tested at two runs rather than re-measured at a
+radius sweep.
+
 ---
 
 ## §P — Poros's cards, and their fates
@@ -970,6 +1058,8 @@ committed by this phase. Consulted twice before this subplan was committed. Ever
 | **2** (rank 2) | has anyone ever expanded the S half? | **ADOPTED, and overtaken by events:** the product owner launched it as a scoped run the same day (§3.5). D consumes the result and states both branches in advance rather than re-deriving it |
 | **3** (rank 3) | what does a capped level leave as the loop's state? | **ADOPTED in the stricter form** (§3.3): a halt, not a taint. Its non-monotone-reserve derivation is kept as the reason, and its rung escape is adopted as what makes the strictness free |
 | **5** (rank 5) | which accumulator does the first sweep run on, and does its first candidate run alone and timed? | **BOTH ADOPTED** (§3.2): the sweep runs on `A412`, because a sweep on `A403` computes the answer clause 2(b) judges the rule by and cannot be un-computed; and the first candidate runs alone and timed, because parallel runs contaminate the one cost datum four audit drops and every forecast here rest on. Its note is adopted too: *"the large half is where the room is"* is search-space **size**, not density, so it enters as **P-D12**, a hunch the sweep scores, and not as evidence |
+| **6** (rank 6) | should the two `√5` orbits enter the sweeps despite scoring 3? | **ADOPTED** (§3.2 item 4). `(18,0,0,6)` joins the large half's sweep; `(0,4,8,0)` is already in the small half's. One run out of 57, and the only excluded material within one of his threshold on either half. Its **P6 deflation test is adopted as a reading**: thirteen excluded orbits sit closer to his cut and score lower, so degree is not monotone in radius and his radius negative is a fact about his *filter* (§1(e)3) |
+| **P5** — the census dispute | which reading of his admission rule, and does the menu grow? | **RESOLVED, and the plan takes (b)**: 57 on `v412e2106`, 59 on `v403e2112`, 11 on `v166e774`; menu ≈ 69, +25% rather than a doubling, so §3.2's pricing stands and the sweep is sized at 57. The advisor withdrew its own reading when its pre-registered tie-breaker fired at 0. **Column (c) is not used**: its cross-edge control failed at 54 against the record's 18. **Reconciled here rather than left as a lead** — the stage reports `L-L 1860 + S-S 552 + cross 30`, with 12 of the 30 at the shared centre and **18 off-centre**, reproducing his `1860 + 564 + 12 + 6` exactly. The stage is sound; the discrepancy is in the advisor's separate call |
 | its answer to my Q1 | the ablation is unpowered, not circular; the map is the cheaper way to run it | **ADOPTED**, including the fifth arm: `no_filter_random` measures his reserve filter, which no other arm varies, so a tie would otherwise read as "our ranking does nothing" when the truth might be "the filter does everything" |
 | its answer to my Q3 | three things §§5.5–5.11 carry that no plan did | **ALL THREE ADOPTED**: the incumbent cutoff becomes **D0.5**, his second strategy becomes `many_then_trim`, and §5.11's "several tens" ceiling is §3.2's frame |
 | its correction on the identity | a deficit cannot come from a bigger class, so it is not a transcription control | **ADOPTED**, and §1(e)2 rewritten. My "free transcription control" was wrong |
@@ -979,6 +1069,72 @@ committed by this phase. Consulted twice before this subplan was committed. Ever
 | inherited — the necessary-atom rule | | **ADOPTED as D3's proxy, corrected**: necessary means *in every minimum of a complete level* (336), not *a singleton in the harvested `Y`* (312); and its scoring of his move is a consequence of D1, not free. The advisor withdrew "free" on being shown this |
 | inherited — card 6 (drops carry their regime) | | **ADOPTED as D0**, with the four returning items and their uses named in §1(c) |
 | inherited — M3 (his priorities do not select his move) | | **carried as §3.2's premise**, re-derived by `reserve()` before any use |
+
+---
+
+## §M — The domain-modelling pass (WORKFLOW step 5, `debruijn-domain-modeling`, run fresh)
+
+*Applied to phase D's five objects: the loop's state, a candidate expansion, the outcome map, a
+reduction asked at a target, and the edge sweep. **Five collapses, three of which delete a code path
+the skeleton would otherwise have shipped**, and three free controls that fell out of the seam hunt.*
+
+### The cut it was run on
+
+| intrinsic to the problem | incidental, and it had crept into the skeleton |
+|---|---|
+| an **atom** is a deletable unit; a stage is a working graph, a frozen part, and its atoms | atoms are *vertices*, and edges need their own instrument |
+| a **candidate** is a set of base vertices not currently in `A` | `fills` and `adds` as separate fields, because his prose separates them |
+| the **map** is the loop's own step function tabulated over the menu | a second function that evaluates candidates |
+| a reduction is asked **relative to an incumbent** | "close the optimum" as the normal mode and a target as an exotic one |
+| the **menu** is the admissible set under a *named reading* of his rule | a constant, 55 |
+
+### The five collapses
+
+1. **The edge sweep is the vertex reduction with edges as atoms** — the pass's largest finding, and it
+   deletes an instrument. `R(S) := W with edge set S refuses four colours` is upward closed for the same
+   one-line reason the vertex version is, so **M63 §O carries verbatim** and the whole apparatus — `Y`,
+   phase 1, the hitting set, the completeness invariant, the bound, resume, the wall, the verdicts, the
+   record schema — arrives free. **Three consequences:** the deliverable becomes the **exact** edge
+   minimum rather than a greedy 1-minimal set, which is exactly what `[deGreyParts2023]` says was never
+   computed; the pin's three edges become `fixed` rather than a `protect_pin` flag, where the shared
+   centre already lives; and **my failed probe's bug becomes unrepresentable**, since there is no second
+   CNF and no second index space to get wrong.
+2. **The outcome map is `step` tabulated**, never a parallel implementation — otherwise it can drift and
+   measure something the loop does not do, which is the one failure this surface exists to prevent. The
+   rule is then a *policy over the same step*: the map evaluates all of it, the loop evaluates it in the
+   rule's order until the budget ends. That is why scoring is well defined.
+3. **`fills` and `adds` are one thing.** A candidate is the vertex set it adds; the distinction is
+   provenance, which is already a field. `n_new` and the orbit breakdown become derived properties, and
+   the empty candidate becomes unrepresentable — so his own recorded no-op is a constructor error rather
+   than something a filter must catch.
+4. **A target is an incumbent, not a mode.** Every reduction after the first has one; "close the
+   optimum" is the case with no incumbent yet. This is his §5.5 read as written, and it makes
+   `no-selection-at-target` the *normal* outcome of a failed candidate rather than an exotic verdict.
+5. **The menu carries its reading.** Given the dispute at §1(e)3, `reserve(…, rule=)` takes the reading
+   and every artifact records which one produced its count — so "49 or 57" is a field, not an argument.
+
+### What the model now refuses to represent
+
+A candidate that adds nothing; a candidate that stores its own size; an edge sweep with its own CNF,
+its own index space or its own verdict words; a map computed by code the loop does not run; a menu whose
+count does not say which reading produced it; a targeted record rendered with the word *minimum* in it.
+Each was reachable in the skeleton as first written, and the first and third were live bugs.
+
+### Seams checked, and three free controls that fell out
+
+- **Unsampled member — the empty candidate.** Expand by nothing and reduce at the incumbent: it must
+  reproduce the unexpanded level exactly. It validates the entire map pipeline against a level already
+  on disk, at one entry. **Control d6.5.**
+- **Adversarial member — an entry that gets worse.** Expansion enlarges the atom set, so the old
+  selection survives and the minimum is non-increasing at a fixed rung. **A map entry with a larger
+  `|M|` is therefore impossible, and is a bug rather than a finding. Control d6.6.**
+- **Non-vacuity.** The map's instrument is exercised on a candidate whose answer is known before it is
+  trusted; the identity candidate is that instance, and it is on `A412`, so it leaks nothing into the
+  reproduction clause.
+- **Next lemma for free.** E's held-out runs are `run_loop` with another companion; F's joint
+  continuation is `run_loop` with a joint stage; G swaps the cross law, already a `Stage` parameter; and
+  the edge minimisation applies to *any* stage, including whatever object F produces. Nothing in the
+  model is specific to the L side or to `ρ₁₅`.
 
 ---
 
