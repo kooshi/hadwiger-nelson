@@ -431,7 +431,7 @@ def orbit_closure(base, stage, rec) -> dict:
 | c1.4 | a stub oracle answering `unsat` on the empty selection | verdict `companion-suffices`, no bound emitted |
 | c1.5 the freeze | a scratch `git init` repository: (a) no file; (b) a committed file then edited; (c) a committed file with a config differing in a nested list; (d) committed and equal; (e) present but never committed | (a) "no freeze registered"; (b) "uncommitted edits"; (c) the dotted key named; (d) returns the sha; (e) "not in git history". **As shipped, all five crash** |
 | c1.6 | `parts_verify.main()` twice into a scratch output path | the second run prints `unchanged: not rewritten`; the mtime is unchanged |
-| c1.7 regeneration | `parts_run.py reduce` for S166 (`--L v374e1860.vtx --S v166e774.vtx --side S`) and L451 (`--L v451e2400.vtx --S v136e564.vtx --side L`), written **beside** the stored records as `…-reduction.v2.json` | `regenerated-identical` on stage fingerprint, minima set, bound and `A`; `Y` compared and reported (identity expected, but the harvest is solver-order-dependent, so a difference is reported with both sizes, not failed). **The stored records are never overwritten** (M64 §6.6) |
+| c1.7 regeneration | `parts_run.py reduce` for S166 (`--L v374e1860.vtx --S v166e774.vtx --reduce S`) and L451 (`--L v451e2400.vtx --S v136e564.vtx --reduce L`), written **beside** the stored records as `…-reduction.v2.json` | `regenerated-identical` on stage fingerprint, minima set, bound and `A`; `Y` compared and reported (identity expected, but the harvest is solver-order-dependent, so a difference is reported with both sizes, not failed). **The stored records are never overwritten** (M64 §6.6) |
 | c1.8 | `rung_lattice` and `orbit_closure` on the stored records | `reproduces-m64` rung by rung, or `differs-from-m64:<rung>` |
 
 ### C2 — the audit instrument, `tools/parts_audit.py` (new)
@@ -609,7 +609,7 @@ live, they are different problems, and the run records which one it used. If the
 ```
 python3 tools/parts_run.py frames --L v403e2106.vtx --S v141e594.vtx --refuses-with v375e1916.vtx
 python3 tools/parts_run.py reduce --L v403e2106.vtx --S v141e594.vtx --S-frame <stored if listed, else the first>
-        --side L --rung 1 --checkpoint data/m62/ckpt/m63-M6B403.ckpt.json --out data/m62/m63-M6B403-reduction.json
+        --reduce L --rung 1 --checkpoint data/m62/ckpt/m63-M6B403.ckpt.json --out data/m62/m63-M6B403-reduction.json
 ```
 
 Then `audit_level` with the spec `M6B403`:
@@ -641,7 +641,7 @@ group preserves unit distance and both polynomial conditions of the cross-edge l
 `side_fixed` is 1 for every side: the shared centre. The pin is conditional on presence, so pin vertices
 may be deleted, as they already are on the L side.
 
-**The joint problem has more than one relative frame, and they are not equivalent.** Applying a group
+**The joint problem has more than one relative frame, and they need not be equivalent.** Applying a group
 element to the S half alone gives another joint problem; applying one to both halves gives the same
 problem. So frames in one double coset of `Stab(W_L) \\ G / Stab(W_S)` give isomorphic problems (§O4
 proves that direction; the converse is **not** claimed), and there are **at most two inequivalent
@@ -662,7 +662,7 @@ exceeds 15 minutes; checkpointed):
 
 ```
 python3 tools/parts_run.py reduce --L v412e2106.vtx --S v166e774.vtx --S-frame contains:v136e564.vtx
-        --side LS --rung 1 --max-minima 64 --wall-ask 600
+        --reduce LS --rung 1 --max-minima 64 --wall-ask 600
         --checkpoint data/m62/ckpt/m63-joint-A412-A166.ckpt.json --out data/m62/m63-joint-A412-A166.json
 ```
 
