@@ -118,6 +118,8 @@ import Proofs.HadwigerNelson.ResidueColouring
 import Proofs.HadwigerNelson.FieldWall4
 import Proofs.HadwigerNelson.SeamCert
 import Proofs.HadwigerNelson.ValuationLaw
+import Proofs.HadwigerNelson.TwoColourResidue
+import Proofs.HadwigerNelson.SquareClass
 
 /-!
 # Proofs
