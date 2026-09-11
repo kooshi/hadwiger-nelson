@@ -318,11 +318,30 @@ def require_frozen(config: dict, *, freeze_path: str = FREEZE_PATH, repo: str = 
 **C1.6 The committed driver.** `tools/parts_run.py` (new)
 
 ```
-python3 tools/parts_run.py reduce --L FILE --S FILE --side {L,S,LS}
-        [--S-frame stored | contains:FILE | refuses-with:FILE]  [--rung 1 | stab | order:K | H<K>#<I>]
-        [--max-minima N] [--phase2-wall SEC] [--wall-ask SEC] [--checkpoint PATH] --out PATH
+python3 tools/parts_run.py reduce --L FILE --S FILE --reduce {L,S,LS} --out PATH
+        [--S-frame stored | contains:FILE | refuses-with:FILE | coset:N]
+        [--rung 1 | stab | order:K] [--max-minima N] [--phase2-wall SEC] [--wall-ask SEC]
+        [--checkpoint PATH]   # defaults to <out>.ckpt.json, so nobody forgets one
+        [--dry-run]           # print and stop: see below
 python3 tools/parts_run.py frames --L FILE --S FILE [--contains FILE | --refuses-with FILE]
 python3 tools/parts_run.py --self-test
+```
+
+`--reduce`, not `--side`: "side" is not English for both halves, and the domain pass made the parameter
+a set (§M). `Stage.side` survives as the spelling, for the records already on disk.
+
+**`--dry-run` is the surface that makes the 15-minute rule mechanical.** It builds the stage, prints what
+the run will be, and stops — so the text you paste into the announcement is generated rather than
+composed:
+
+```
+stage      reduce {L,S}   L 412 + S 165 = 577 vertices, 2904 edges (36 connection)   576 atoms at rung 1
+identity   9c1f…  (graph 1c9e…, deletable 576, atoms 576, pin 3, law cos 7/8)
+frames     S frame: coset 1 of 2, element = identity (image of (2,0,4,2) is (2,0,4,2)); the other coset
+           is a DIFFERENT problem (C4b)
+forecast   phase 1 ~ 6 s (576 asks at the L451 mean); the level unmeasured at this size, 20-90 min
+           ASSUMING the L451 ask means hold; checkpoint data/m62/ckpt/… (resumable, budgets may change)
+writes     data/m62/m63-joint-A412-A166.json
 ```
 
 ```python
@@ -330,7 +349,13 @@ def load_side(name: str) -> list[tuple[int, int, int, int]]:
     """A `.vtx` file from `data/m62/parts-ref11/JP/Large/` by basename, through `parts_vtx.load_lattice`."""
 
 def frames(base, S_tuples, *, contains=None, refuses_with_L=None) -> list[dict]:
-    """The group elements h with h(S) ⊇ `contains`, or with `refuses_with_L ∪ ρ·h(S)` refusing four
+    """Printed as one line per double coset, each naming a representative by its image of (2,0,4,2),
+    whether the stored frame lies in it, and which requested property its members have. **The default
+    `--S-frame stored` refuses rather than picks** when the stored frame does not qualify: it prints the
+    qualifying cosets and the flag to choose one. A frame chosen silently is a run nobody can reproduce.
+    """
+
+    Selection semantics: the group elements h with h(S) ⊇ `contains`, or with `refuses_with_L ∪ ρ·h(S)` refusing four
     colours, **grouped into the double cosets that make them inequivalent** (§M): applying h to S alone
     is a new problem, applying it to both halves is the same problem, so the problems are
     `Stab(W_L) \\ G / Stab(S)`. The stored frame (the identity, index 0 — confirmed) is listed first
@@ -1045,3 +1070,115 @@ evidence about the column's source, never proof of it.
 | c2.9 Table 6 | the `A`-column checker agrees where his table agrees | a systematic transcription error — **which is why Tables 5 and 7, known to disagree, are run in the same pass: the three together exercise both polarities** |
 | c4.1 joint positive | the joint search finds a known answer (O9) | whether a bigger joint problem is searched correctly |
 | c4.3 degeneracy | the joint stage reduces to the one-sided stage | whether the joint atoms are weighted right — covered by c4.1's 508 |
+
+---
+
+## §E — The experience-modelling pass (WORKFLOW step 5, `debruijn-experience-modeling`, run fresh)
+
+*The consumers are three: the phase D/E/F implementer, who inherits these instruments; the product owner,
+reviewing a run they did not launch; and the person who has to kill a multi-hour job and restart it. The
+pass asks one question of every surface — what does the system know here that the reader will not have?*
+
+### E1 — Four things the system knows and no artifact currently says
+
+1. **Whether a number was checked or merely absent.** The skeleton said an unattested field "produces no
+   row rather than a guessed one". That is silent omission: a reviewer cannot tell *agrees* from *never
+   compared*. **Corrected:** the audit prints a row for every field of his transcribed row, with status
+   `agrees` / `differs` / `not-compared — his table does not attest it` / `not-compared — our level is
+   truncated`. Absence is never a blank.
+2. **Which registered prediction a run scores.** A record carries `predictions: [{"id": "P-C4.1",
+   "registered": "…", "measured": "…", "relation": "agrees|differs"}]`, so the reviewer ticks §4 instead
+   of reconstructing it. Still no aggregate and still no `reproduced` field.
+3. **Whether a kill is safe right now.** Every progress line ends with the checkpoint's path and the age
+   of its last write. A watcher who needs the machine can then stop the job knowing what a relaunch
+   redoes.
+4. **What a run answered, in one greppable line.** Each record carries a `headline` — a rendering, never
+   a judgement: `joint minimum 509 vertices (508 atoms) over A412 ∪ ρ·g⁻¹(A166), frame coset 1 of 2,
+   level bounded-below at 64 minima, 0 undecided [tuning]`.
+
+### E2 — The progress line of a long run
+
+M63's own incident is the specification: a phase that logged only on events was silent for five minutes
+at 99.5 % CPU and was indistinguishable from a wedge. Time-gated, every 20 s:
+
+```
+joint  it 412   LB 503 -> w* ?   minima 0   Y 1174 (min size 1)   undecided 0
+       asks 9331 colourable @0.004s / 388 refusing @0.11s   elapsed 21m   ETA 25-70m ASSUMING the
+       remaining LB climb matches the last 10 min   ckpt m63-joint….ckpt.json written 14 s ago
+```
+
+Every element earns its place: the rising lower bound is the only evidence of progress before the first
+optimum; both ask populations appear separately because they differ by 25×; the ETA carries its
+assumption in the same breath; and the checkpoint's age is what makes the job killable.
+
+### E3 — The refusal genre, with the texts pinned as golden strings
+
+Every refusal says **what happened in the reader's vocabulary**, **in which space the judgement was
+made**, and **what to do next, pasteable**. The self-tests assert the exact rendered text, because the
+message is the product and not the API behind it:
+
+```
+checkpoint refused: it belongs to a different search.
+  its problem   rung 6 orbits, 31 atoms, reduce {S}   identity 4b17…
+  this problem  rung 3 orbits, 55 atoms, reduce {S}   identity 8ee0…
+  A checkpoint may be resumed onto the same problem with different budgets, never onto another
+  problem. Start a fresh run:  --checkpoint data/m62/ckpt/<new name>.ckpt.json
+```
+
+```
+freeze refused: data/m62/m63-freeze.json has uncommitted edits.
+  A freeze that can be edited after the fact is not a freeze.
+  git add data/m62/m63-freeze.json && git commit -m "freeze the M63 configuration"
+```
+
+```
+frame refused: the stored frame of v166e774 does not satisfy `contains v136e564`.
+  Qualifying frames, by double coset (representative named by its image of (2,0,4,2)):
+    coset 1  (0,4,2,0)   6 elements   contains v136e564
+    coset 2  (2,0,4,2)   6 elements   does not
+  Choose one:  --S-frame coset:1
+```
+
+```
+shading unreliable: 2 fill cells contradict his caption ("Filled orbits are highlighted in gray").
+  (6,2,4,0) in column 375: value 24, orbit size 24, cell NOT shaded
+  (0,0,2,2) in column 374: value 6, orbit size 12, cell shaded
+  The stable/unstable partition is therefore NOT gated from the shading; the ranges still are.
+```
+
+**No verdict word means clean**, and the closed list is the one in §2 C1.3 plus the audit's
+`agrees` / `differs` / `not-compared…` / `shading-unreliable` / `regenerated-identical` /
+`regenerated-differs:<field>` / `resume-identical` / `checkpoint-problem-mismatch` /
+`joint-stage-omits-a-side` / `joint-degenerates-to-L` / `not-minimal` / `not-a-correction-set` /
+`antichain-violated` / `closed_under_AutA: false`.
+
+### E4 — The audit record reads head-first
+
+A reviewer reads the head and stops. So the record opens with `summary` — the mode (`TUNING` until D's
+freeze), the rows that differ, the rows not compared and why, the controls that fired, and the headline —
+and only then the full per-orbit table. Progressive disclosure, with the detail one field away rather
+than one file away.
+
+### E5 — The escalation template, because a record below 509 is a product event
+
+If C4 or C4b returns ≤ 508 vertices, the implementer sends this, within the hour, rather than composing
+one:
+
+```
+A joint reduction returned <V> vertices (<A> atoms), below the 509 record.
+  problem     <L file> ∪ ρ·<S file>, frame coset <n> of <m>, reduce {L,S}, rung 1
+  identity    <stage identity>          config <config_sha256>
+  bound       <Bound.render()>          undecided <n>
+  level       <Count.render()>
+  geometry    exact unit-distance re-check: <pass/fail, how many edges>
+  refutation  CaDiCaL <version>, LRAT proof <path>, checked by <tool>: <result>
+  artifact    <record path>   checkpoint <path>   commit <sha>
+  NOT yet done: the Lean kernel certificate (phase F). This is not a record until that lands.
+```
+
+### E6 — Three corrections this pass made to my own skeleton
+
+1. `--side` became `--reduce`, because the flag names a set of halves and "side" reads as one.
+2. An unattested field now prints as `not-compared`, where the skeleton omitted the row.
+3. `--dry-run` was added, so the 15-minute announcement is generated by the tool that knows the forecast
+   rather than composed by the person who wants to start the run.
