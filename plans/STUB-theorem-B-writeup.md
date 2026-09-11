@@ -1,5 +1,12 @@
 # FS-20 — The paper: one reduction, six lineages, and the first exact value past the Moser obstruction
 
+> **Read before this milestone opens (Kooshi, 2026-09-11).** `~/source/fermats-last-theorem/HADWIGER-NELSON-DETAILED.md`
+> (commit `e87f426e`, local only — keep it unpushed) analyses Anthropic's Lean proof of Fermat's Last Theorem
+> for this project. Its useful part is the verification packaging: a final check whose output is pinned with
+> `#guard_msgs`, and the comparator Challenge/Solution setup with `run.sh`, which `CLAUDE.md` § The mission
+> already says any write-up adopts. Its other suggestion — a separate Lean library seeded from our
+> Mathlib-only modules — is decided at the same time. Read it once, then bring Kooshi a recommendation on both.
+
 *(pre-subplan stub; **rewritten 2026-09-08** after `[Madore2015]` was found and the exact claim was searched)*
 
 *Minted at the FS-18 close on Kooshi's firing of the write-up trigger. **Re-scoped the same day**, twice. First

@@ -32,6 +32,14 @@ The hex-shell distances `√3` and `2` (`3, 4 ≢ 0, 1` modulo every prime `≥ 
 compulsion over any field whose plane at a usable prime is 5-colourable. That is the compulsion-level
 content of "5-sealed" (M58), one gadget at a time.
 
+**The squared distance need not be an integer.** A pair stored with `t · distSq = s · D²` — real squared
+distance `s / t` — is drawn at a quadrance `q` with `t · q = s` (`UDCert.drawing_quad_of_distSq_ratio`), so a
+forced pair needs `s = 0` in the target ring and a virtual edge needs `s = t`
+(`UDCert.not_forces_of_distSq_ratio`, `UDCert.not_separated_of_distSq_ratio`; pairs checked in bulk by
+`UDCert.PairsAtRatio`). Neither refutation asks anything of `t`: if `t` reduces to `0` the stored identity
+forces `s` to as well, so the hypotheses cannot all hold. The integer law is the face `t = 1`, and is derived
+from it here.
+
 ## What a consumer may conclude, and what not
 
 Every theorem here is about a graph `G` with a homomorphism into a Cayley graph coloured by ONE table with
@@ -251,41 +259,96 @@ theorem coord_distSq (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) {i j : 
   push_cast
   simpa only [coe_coord_fst, coe_coord_snd, Int.cast_mul] using hp
 
-/-- **The distance law.** A pair stored at squared distance `r · D²` is drawn at quadrance `r`. -/
+/-- `coord_distSq` at a rational squared distance `s / t`: a pair stored with `t · distSq = s · D²` in `Q4`
+satisfies `t · (Δx·Δx + Δy·Δy) = s · D²` inside the subring. -/
+theorem coord_distSq_ratio (c : UDCert n) {S : Subring Q4} (hS : c.CoordsIn S) {i j : Fin n} {s t : ℤ}
+    (hp : (t : Q4) * (c.verts i).distSq (c.verts j) = ((s * (c.denom * c.denom) : ℤ) : Q4)) :
+    (t : S) * (((c.coord hS i).1 - (c.coord hS j).1) * ((c.coord hS i).1 - (c.coord hS j).1) +
+      ((c.coord hS i).2 - (c.coord hS j).2) * ((c.coord hS i).2 - (c.coord hS j).2)) =
+      ((s * (c.denom * c.denom) : ℤ) : S) := by
+  apply Subtype.ext
+  simp only [Pt.distSq, FastSq.sq_eq] at hp
+  push_cast
+  simpa only [coe_coord_fst, coe_coord_snd, Int.cast_mul] using hp
+
+/-- **The distance law at a rational squared distance.** A pair stored with `t · distSq = s · D²` — real
+squared distance `s / t` — is drawn at a quadrance `q` with `t · q = s`. Nothing is asked of `t`: the
+identity holds in `R` whatever `t` reduces to. -/
+theorem drawing_quad_of_distSq_ratio (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S)
+    {u : R} (hu : u * c.denom = 1) {i j : Fin n} {s t : ℤ}
+    (hp : (t : Q4) * (c.verts i).distSq (c.verts j) = ((s * (c.denom * c.denom) : ℤ) : Q4)) :
+    (t : R) * quad (c.drawing φ hS u i - c.drawing φ hS u j) = (s : R) := by
+  have hφ := congrArg φ (c.coord_distSq_ratio hS hp)
+  rw [map_mul, map_intCast, map_intCast] at hφ
+  rw [c.drawing_quad φ hS u i j]
+  push_cast at hφ
+  linear_combination u ^ 2 * hφ + (s : R) * (u * c.denom + 1) * hu
+
+/-- **The distance law.** A pair stored at squared distance `r · D²` is drawn at quadrance `r`: the face
+`t = 1` of `drawing_quad_of_distSq_ratio`. -/
 theorem drawing_quad_of_distSq (c : UDCert n) {S : Subring Q4} (φ : S →+* R) (hS : c.CoordsIn S) {u : R}
     (hu : u * c.denom = 1) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) :
     quad (c.drawing φ hS u i - c.drawing φ hS u j) = (r : R) := by
-  rw [c.drawing_quad φ hS u i j, c.coord_distSq hS hp, map_intCast]
-  push_cast
-  linear_combination (r : R) * (u * c.denom + 1) * hu
+  have h := c.drawing_quad_of_distSq_ratio φ hS hu (i := i) (j := j) (s := r) (t := 1)
+    (by rwa [Int.cast_one, one_mul])
+  rwa [Int.cast_one, one_mul] at h
+
+/-- **A pair at a rational squared distance `s / t` is never forced equal** at `k` colours when `s` is not
+`0` in `R`, whenever the plane over `R` has an aperiodic `k`-colouring. A forced pair is drawn at quadrance
+`0`, so `s = t · 0 = 0` in `R`. There is no hypothesis on `t`, and none is lost: if `t` reduces to `0` the
+stored identity already makes `s` reduce to `0`, so the hypotheses cannot all hold. Read as a residue, this
+is the law `s / t ≢ 0` whenever `t` is a unit of `R`. -/
+theorem not_forces_of_distSq_ratio [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
+    (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
+    (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col) {i j : Fin n} {s t : ℤ}
+    (hp : (t : Q4) * (c.verts i).distSq (c.verts j) = ((s * (c.denom * c.denom) : ℤ) : Q4))
+    (hs : (s : R) ≠ 0) :
+    ¬ Forces (edgeGraph n c.edges) k i j := by
+  intro h
+  have h0 := h.quad_sub_eq_zero col ha (c.drawingHom φ hS hu hv)
+  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 0 at h0
+  have hq := c.drawing_quad_of_distSq_ratio φ hS hu hp
+  rw [h0, mul_zero] at hq
+  exact hs hq.symm
+
+/-- **A pair at a rational squared distance `s / t` is never a virtual edge** at `k` colours when `s ≠ t` in
+`R`, whenever the plane over `R` has a `k`-colouring coinciding at every non-edge difference. A virtual edge
+is drawn at quadrance `1`, so `s = t` in `R`. -/
+theorem not_separated_of_distSq_ratio [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
+    (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
+    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesAtNonedges (unitQuadrance R) col)
+    {i j : Fin n} {s t : ℤ}
+    (hp : (t : Q4) * (c.verts i).distSq (c.verts j) = ((s * (c.denom * c.denom) : ℤ) : Q4))
+    (hst : (s : R) ≠ t) :
+    ¬ Separated (edgeGraph n c.edges) k i j := by
+  intro h
+  have h1 := h.quad_sub_eq_one col hc (c.drawingHom φ hS hu hv)
+  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 1 at h1
+  have hq := c.drawing_quad_of_distSq_ratio φ hS hu hp
+  rw [h1, mul_one] at hq
+  exact hst hq.symm
 
 /-- **A pair whose squared distance is not `0` in `R` is never forced equal** at `k` colours, whenever the
-plane over `R` has an aperiodic `k`-colouring. -/
+plane over `R` has an aperiodic `k`-colouring. The face `t = 1` of `not_forces_of_distSq_ratio`. -/
 theorem not_forces_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
     (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col) {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) (hr : (r : R) ≠ 0) :
-    ¬ Forces (edgeGraph n c.edges) k i j := by
-  intro h
-  have := h.quad_sub_eq_zero col ha (c.drawingHom φ hS hu hv)
-  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 0 at this
-  rw [c.drawing_quad_of_distSq φ hS hu hp] at this
-  exact hr this
+    ¬ Forces (edgeGraph n c.edges) k i j :=
+  c.not_forces_of_distSq_ratio φ hS hu hv col ha (s := r) (t := 1) (by rwa [Int.cast_one, one_mul]) hr
 
 /-- **A pair whose squared distance is not `1` in `R` is never a virtual edge** at `k` colours, whenever the
-plane over `R` has a `k`-colouring coinciding at every non-edge difference. -/
+plane over `R` has a `k`-colouring coinciding at every non-edge difference. The face `t = 1` of
+`not_separated_of_distSq_ratio`. -/
 theorem not_separated_of_distSq [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
     (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesAtNonedges (unitQuadrance R) col)
     {i j : Fin n} {r : ℤ}
     (hp : (c.verts i).distSq (c.verts j) = ((r * (c.denom * c.denom) : ℤ) : Q4)) (hr : (r : R) ≠ 1) :
-    ¬ Separated (edgeGraph n c.edges) k i j := by
-  intro h
-  have := h.quad_sub_eq_one col hc (c.drawingHom φ hS hu hv)
-  change quad (c.drawing φ hS u i - c.drawing φ hS u j) = 1 at this
-  rw [c.drawing_quad_of_distSq φ hS hu hp] at this
-  exact hr this
+    ¬ Separated (edgeGraph n c.edges) k i j :=
+  c.not_separated_of_distSq_ratio φ hS hu hv col hc (s := r) (t := 1) (by rwa [Int.cast_one, one_mul])
+    (by rwa [Int.cast_one])
 
 /-- `not_forces_of_distSq` for a pair listed in a `PairsAt` certificate. -/
 theorem not_forces_of_pairsAt [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
@@ -302,6 +365,73 @@ theorem not_separated_of_pairsAt [Nontrivial R] (c : UDCert n) {S : Subring Q4} 
     {ps : List (Fin n × Fin n)} {r : ℤ} (hps : c.PairsAt ps r = true) {i j : Fin n} (hmem : (i, j) ∈ ps)
     (hr : (r : R) ≠ 1) : ¬ Separated (edgeGraph n c.edges) k i j :=
   c.not_separated_of_distSq φ hS hu hv col hc ((c.pairsAt_iff ps r).mp hps (i, j) hmem) hr
+
+end UDCert
+
+/-! ### Pairs at a rational squared distance
+
+`UDCert.PairsAt` (`PairDist.lean`) certifies pairs at an integer squared distance `r`; the check below
+certifies them at `s / t`. It lives here, beside its only consumers, rather than beside `PairsAt`, because
+`PairDist.lean` sits upstream of more of the library than this module does. -/
+
+/-- **The geometric bridge at a rational squared distance.** An exact identity `t · distSq = s · D²` in `Q4`
+says the plane points are exactly `√(s / t)` apart; `dist_toPlane_eq_sqrt` is the case `t = 1`. -/
+theorem dist_toPlane_eq_sqrt_div {p q : Pt} {D s t : ℤ} (hD : D ≠ 0) (ht : t ≠ 0)
+    (h : (t : Q4) * p.distSq q = ((s * (D * D) : ℤ) : Q4)) :
+    dist (p.toPlane D) (q.toPlane D) = Real.sqrt ((s : ℝ) / t) := by
+  have hD' : (D : ℝ) ≠ 0 := Int.cast_ne_zero.mpr hD
+  have ht' : (t : ℝ) ≠ 0 := Int.cast_ne_zero.mpr ht
+  have hev : (t : ℝ) * ((Q4.eval p.x - Q4.eval q.x) ^ 2 + (Q4.eval p.y - Q4.eval q.y) ^ 2) =
+      (s : ℝ) * ((D : ℝ) * D) := by
+    have := congrArg Q4.eval h
+    rw [map_mul, map_intCast, eval_distSq, map_intCast] at this
+    push_cast at this
+    exact this
+  have hnorm : Complex.normSq (p.toPlane D - q.toPlane D) = (s : ℝ) / t := by
+    simp only [Complex.normSq_apply, Complex.sub_re, Complex.sub_im, Pt.toPlane]
+    field_simp
+    linear_combination hev
+  rw [Complex.dist_eq, Complex.norm_def, hnorm]
+
+namespace UDCert
+
+variable {n : ℕ}
+
+/-- Every listed pair's stored squared distance satisfies `t · distSq = s · denom²`: the pair sits at real
+squared distance `s / t`. `PairsAt ps r` is the case `t = 1` in content. A decidable identity in `Q4`, so a
+wrong pair cannot pass. -/
+def PairsAtRatio (c : UDCert n) (ps : List (Fin n × Fin n)) (s t : ℤ) : Bool :=
+  ps.all fun p =>
+    decide ((t : Q4) * (c.verts p.1).distSq (c.verts p.2) = ((s * (c.denom * c.denom) : ℤ) : Q4))
+
+/-- The `Prop` reading of `PairsAtRatio`, so downstream proofs never destructure a `List.all`. -/
+theorem pairsAtRatio_iff (c : UDCert n) (ps : List (Fin n × Fin n)) (s t : ℤ) :
+    c.PairsAtRatio ps s t = true ↔
+      ∀ p ∈ ps, (t : Q4) * (c.verts p.1).distSq (c.verts p.2) = ((s * (c.denom * c.denom) : ℤ) : Q4) := by
+  simp [PairsAtRatio]
+
+/-- **Soundness.** A passing `PairsAtRatio` with `t ≠ 0` certifies every listed pair at real distance
+`√(s / t)` in the plane. -/
+theorem pairsAtRatio_sound (c : UDCert n) (hd : c.denom ≠ 0) {ps : List (Fin n × Fin n)} {s t : ℤ}
+    (ht : t ≠ 0) (hv : c.PairsAtRatio ps s t = true) :
+    ∀ p ∈ ps, dist (c.point p.1) (c.point p.2) = Real.sqrt ((s : ℝ) / t) :=
+  fun p hp => dist_toPlane_eq_sqrt_div hd ht ((c.pairsAtRatio_iff ps s t).mp hv p hp)
+
+/-- `not_forces_of_distSq_ratio` for a pair listed in a `PairsAtRatio` certificate. -/
+theorem not_forces_of_pairsAtRatio [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
+    (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
+    (col : (unitQuadrance R).Coloring (Fin k)) (ha : Aperiodic col) {ps : List (Fin n × Fin n)} {s t : ℤ}
+    (hps : c.PairsAtRatio ps s t = true) {i j : Fin n} (hmem : (i, j) ∈ ps) (hs : (s : R) ≠ 0) :
+    ¬ Forces (edgeGraph n c.edges) k i j :=
+  c.not_forces_of_distSq_ratio φ hS hu hv col ha ((c.pairsAtRatio_iff ps s t).mp hps (i, j) hmem) hs
+
+/-- `not_separated_of_distSq_ratio` for a pair listed in a `PairsAtRatio` certificate. -/
+theorem not_separated_of_pairsAtRatio [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
+    (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
+    (col : (unitQuadrance R).Coloring (Fin k)) (hc : CoincidesAtNonedges (unitQuadrance R) col)
+    {ps : List (Fin n × Fin n)} {s t : ℤ} (hps : c.PairsAtRatio ps s t = true) {i j : Fin n}
+    (hmem : (i, j) ∈ ps) (hst : (s : R) ≠ t) : ¬ Separated (edgeGraph n c.edges) k i j :=
+  c.not_separated_of_distSq_ratio φ hS hu hv col hc ((c.pairsAtRatio_iff ps s t).mp hps (i, j) hmem) hst
 
 end UDCert
 

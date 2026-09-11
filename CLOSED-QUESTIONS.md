@@ -159,10 +159,16 @@ a pair forced equal at five colours in such a graph has `11 ∣ d²`, while `(5/
 five-colourings pulled back from the plane at 11 separate `5/3` from the origin; since those colourings exist,
 the answer is not vacuous.
 
-**Kernel status: a hand argument.** The kernel's form of the law (`not_forces_of_distSq`, for certificates
-over the `√7`-free tower with `11 ∤ D`) takes an integer squared distance, and `(5/3)² = 25/9` is not one;
-stating it for a rational squared distance whose denominator is prime to 11 is a small generalization, not yet
-made. No certificate of either graph has been built, and the kernel's field tower has no `√247`.
+**Kernel status: kernel-checked for the first graph, as a statement about all of its certificates; a hand
+argument for the second.** `UDCert.not_forces_five_thirds_11` (`Instances/ResidueObstruction11.lean`): no
+certificate over the `√7`-free tower with `11 ∤ D` forces a pair at squared distance `25/9` equal at five
+colours (and `not_separated_five_thirds_11`: nor separates one). It goes through the law at a rational squared
+distance `s/t` (`UDCert.not_forces_of_distSq_ratio`, `ResidueObstruction.lean`), which needs only `s ≢ 0`; the
+integer law is its `t = 1` face. The hypotheses have a model: Heule-510, which has 139 pairs at exactly `5/3`
+(an exact search of its table; the kernel certifies one, `(19, 59)`, as `heule510_pairsAtRatio_five_thirds`) and
+is 5-colourable, so "forced at five colours" is a live question there. `Z ⊕ Z ⊕ Z` is an instance of the
+theorem's quantifier; no certificate of it has been built. The `ζ₂` variant needs `√247`, which the kernel's
+field tower lacks, so it stays a hand argument.
 
 **Prior art that constrains the claim.** The premise that `5/3` is monochromatic under every homomorphic
 colouring is `[Fischer1990]`'s `k·G = 0` obstruction at `k = 5`. The distance law is ours (ledger row 55).

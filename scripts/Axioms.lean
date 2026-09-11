@@ -980,7 +980,8 @@ pairs at distance √3, nor at distance 2. -/
 -- and by one table coinciding at non-edges separates only edges (arity floor ≥ 3); the quadrance of a drawn
 -- difference is the residue of the stored squared distance; at 11: the sealing plane is pairwise free at
 -- five colours (floor in {3,4,5}), and no √7-free certificate with 11 ∤ D separates a √3- or distance-2
--- pair or forces a distance-5 pair equal at five colours.
+-- pair or forces a distance-5 pair equal at five colours. The law also holds at a rational squared distance
+-- s/t (only s ≢ 0 is needed), which answers Polymath16's 5/3 question for every such certificate.
 #print axioms Forces.image
 #print axioms forces_iff_eq_of_aperiodic
 #print axioms separated_iff_adj_of_coincides
@@ -994,6 +995,15 @@ pairs at distance √3, nor at distance 2. -/
 #print axioms UDCert.not_separated_sqrt3_11
 #print axioms UDCert.not_separated_two_11
 #print axioms UDCert.not_forces_five_11
+#print axioms UDCert.drawing_quad_of_distSq_ratio
+#print axioms UDCert.not_forces_of_distSq_ratio
+#print axioms UDCert.not_separated_of_distSq_ratio
+#print axioms UDCert.pairsAtRatio_sound
+#print axioms UDCert.not_forces_of_pairsAtRatio_11
+#print axioms UDCert.not_separated_of_pairsAtRatio_11
+#print axioms UDCert.not_forces_five_thirds_11
+#print axioms UDCert.not_separated_five_thirds_11
+#print axioms heule510_pairsAtRatio_five_thirds
 
 -- M35: the clique face of the bridge and the hexagonal-shell pigeonhole
 #print axioms mono_pair_of_clique

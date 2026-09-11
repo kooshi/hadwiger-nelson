@@ -327,7 +327,7 @@ Colourings built from arithmetic rather than found: additive colourings, residue
 | `SeamCert` | Theorem B delivered to certificates: the √5- and √7-free subring `Q4.seamFree` and `UDCert.colorable_four_of_seamFree`. | `FieldWall4`, `UnitQuadrance` | 31 | FS-27 |
 | `ValuationLaw` | The 2-adic law of four-colour compulsions over ℚ(√3,√11): `residueColouring_eq_iff_psiA_zero`, `not_forces_of_residue_ne_zero`, `not_separated_of_residue_eq_zero`, and the rows of `[Parts2020a]` Table 1 (`not_separated_dist_eight_thirds` and its siblings). | `FieldWall4` | 59 | 2026-09-09 |
 | `Lift` | Lower bounds pull back along an injective drawing (`add_one_le_chromaticNumber_plane_of_lift`); the first-order obstruction `stressPairing_eq_zero_of_lift`. | `UnitQuadrance` | 54 | M59 |
-| `ResidueObstruction` | Compulsions map forward (`Forces.image`, `Separated.image`); one aperiodic table decides a Cayley graph's pair compulsions (`forces_iff_eq_of_aperiodic`); the distance law `Forces.quad_sub_eq_zero`. | `Lift`, `Arity`, `PairDist` | 55 | M60 |
+| `ResidueObstruction` | Compulsions map forward (`Forces.image`, `Separated.image`); one aperiodic table decides a Cayley graph's pair compulsions (`forces_iff_eq_of_aperiodic`); the distance law `Forces.quad_sub_eq_zero`, for certificates at an integer or rational squared distance (`not_forces_of_distSq_ratio`, `PairsAtRatio`). | `Lift`, `Arity`, `PairDist` | 55 | M60 |
 | `LocalGlobal` | `addCayleyMap`, the periodic quotient `unitQuadrance_colorable_of_quotient`, `card_le_chromaticNumber_mul_indepNum`, and the tightness mechanism `Forces.isEmpty_ringHom_of_spindle_radicand`. | `ResidueObstruction` | 56 | M61 |
 | `PlaneRotation` | Rotations of the quadrance plane (`rotHom`, `quarterTurnHom`) and plane freedom `finitePlane_forces_iff`; the tightness mechanism with colourability as its hypothesis (`Forces.isEmpty_ringHom_of_spindle_radicand_of_colorable`). | `LocalGlobal` | 56, 60 | FS-25 |
 
@@ -439,7 +439,7 @@ Concrete objects: witnesses, certificates, carriers, and the models that show a 
 | `Instances/LiftObstruction131` | The 1581's merged image at 131 has no lift modulo 131²: `merged131_no_lift`, `merged131_no_drawing`. | `Lift` | 54 | M59 |
 | `Instances/LiftObstruction11` | The 5-critical core of `finitePlane 11` has no lift modulo 11²: `core11_no_lift`. | `Lift` | 54 | M59 |
 | `Instances/LiftObstruction19` | The 5-critical core of `finitePlane 19` has no lift modulo 19²: `core19_no_lift`. | `Lift` | 54 | M59 |
-| `Instances/ResidueObstruction11` | `finitePlane11_forces_iff`, `finitePlane11_separated_iff`, `not_separated_sqrt3_11`, `not_separated_two_11`. | `ResidueObstruction`, `Instances/FinitePlane11`, `Instances/HexShell` | 55 | M60 |
+| `Instances/ResidueObstruction11` | `finitePlane11_forces_iff`, `finitePlane11_separated_iff`, `not_separated_sqrt3_11`, `not_separated_two_11`; `not_forces_five_thirds_11` (Polymath16's 5/3 question, modelled on Heule-510). | `ResidueObstruction`, `Instances/FinitePlane11`, `Instances/HexShell` | 55 | M60 |
 | `Instances/LocalGlobal19` | `chromaticNumber_finitePlane19_le_five` (a 19-entry periodic table), `finitePlane3_forces_iff`, `Forces.isEmpty_ringHom_of_spindle_radicand_11`. | `LocalGlobal`, `Instances/ResidueObstruction11`, `Instances/OneDefectSpec` | 56 | M61 |
 | `Instances/PlaneFreedom` | The four measured primes re-derived from `finitePlane_forces_iff`: `finitePlane7_colorable_four`, `finitePlane19_forces_eq`. | `PlaneRotation`, `Instances/LocalGlobal19` | 60 | FS-25 |
 

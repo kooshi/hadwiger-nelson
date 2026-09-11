@@ -22,8 +22,8 @@
 #
 # Counts to hold, because a silent change in them is this gate's own failure mode (FS-28 D1,
 # where a shadowed match arm dropped witnessed 8 -> 1 and still printed a plausible report):
-#   declarations=6222  refutations-skipped=231  sites=215
-#   vacuous=0 stale=0 declared=3 witnessed=12 generic=198 unknown=2
+#   declarations=6249  refutations-skipped=239  sites=217
+#   vacuous=0 stale=0 declared=3 witnessed=12 generic=200 unknown=2
 
 # --- These two ARE the Hadwiger-Nelson problem. Whether a proper 5- or 6-colouring of the plane
 # exists is exactly what this repository is trying to settle, so 'prove an inhabitant' here is not

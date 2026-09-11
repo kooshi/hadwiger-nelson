@@ -14,6 +14,10 @@ The certified 5-colouring table of `UD(𝔽₁₁, 2)` (`finitePlane11Colouring`
 * so **no such certificate separates a `√3`-pair or a distance-2 pair at five colours** (`3, 4 ≢ 0, 1`),
   the two gadgets `six_le_chromaticNumber_plane_of_forced_pairs` needs — each impossible on its own over
   a field where `11` is usable (Heule's `ℚ(√3, √5, √11)`, `K(√5)`, `K(√247)`, …);
+* **no such certificate forces a pair at distance `5/3` equal at five colours, or separates one**
+  (`(5/3)² = 25/9`, and `25 ≢ 0, 9`) — Philip Gibbs's 2018 question on the Polymath16 blog, answered
+  for every certificate of his graph without building one (`not_forces_five_thirds_11`), and modelled on
+  Heule-510, which has pairs at exactly `5/3` and is 5-colourable, so the question is live there;
 
 and for the plane itself: `Forces` is equality, `Separated` is adjacency, and the arity floor at five
 colours lies in `{3, 4, 5}` — the finite plane that seals those fields has no pair compulsion of its own,
@@ -30,7 +34,8 @@ and `arityFloor_finitePlane11_le_five` are statements about the finite graph `fi
 
 What is NOT claimed: anything about certificates outside the `√7`-free subring, about fields where the
 plane at every usable prime refuses five colours (de Grey's, at `131`), or about the field-level statement
-(every unit vector is `𝔭`-integral) — that stays the hand argument of M58.
+(every unit vector is `𝔭`-integral) — that stays the hand argument of M58. Nor the `√247` variant of Gibbs's
+question (`ζ₂ = (−3+i√247)/16`): its coordinates are outside the tower, so no certificate here can hold them.
 -/
 
 set_option maxRecDepth 100000
@@ -155,6 +160,52 @@ theorem not_forces_five_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZM
     ¬ Forces (edgeGraph n c.edges) 5 i j :=
   c.not_forces_of_pairsAt_11 hS hu hv hps hmem (by decide)
 
+/-- **The distance law at `11` at a rational squared distance, forced half**: a pair listed at squared
+distance `s / t` with `s ≢ 0 (mod 11)` is never forced equal at five colours. Nothing is asked of `t`
+(`not_forces_of_distSq_ratio` says why). -/
+theorem not_forces_of_pairsAtRatio_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
+    (hu : u * c.denom = 1) (hv : c.Valid = true) {ps : List (Fin n × Fin n)} {s t : ℤ}
+    (hps : c.PairsAtRatio ps s t = true) {i j : Fin n} (hmem : (i, j) ∈ ps) (hs : (s : ZMod 11) ≠ 0) :
+    ¬ Forces (edgeGraph n c.edges) 5 i j :=
+  c.not_forces_of_pairsAtRatio Q4.sevenFree.res11 hS hu hv finitePlane11Colouring.toColoring
+    finitePlane11_aperiodic hps hmem hs
+
+/-- **… separated half**: a pair listed at squared distance `s / t` with `s ≢ t (mod 11)` is never a virtual
+edge at five colours. -/
+theorem not_separated_of_pairsAtRatio_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
+    (hu : u * c.denom = 1) (hv : c.Valid = true) {ps : List (Fin n × Fin n)} {s t : ℤ}
+    (hps : c.PairsAtRatio ps s t = true) {i j : Fin n} (hmem : (i, j) ∈ ps) (hst : (s : ZMod 11) ≠ t) :
+    ¬ Separated (edgeGraph n c.edges) 5 i j :=
+  c.not_separated_of_pairsAtRatio Q4.sevenFree.res11 hS hu hv finitePlane11Colouring.toColoring
+    finitePlane11_coincides hps hmem hst
+
+/-- **No `√7`-free certificate with `11 ∤ D` forces a pair at distance `5/3` equal at five colours**:
+`(5/3)² = 25/9` and `25 ≢ 0 (mod 11)` (as a residue, `25 · 9⁻¹ ≡ 4`).
+
+This is the negative answer to Philip Gibbs's question on the Polymath16 blog (third thread, 2 May 2018):
+is the point `5/3` the same colour as the origin in every 5-colouring of `Z ⊕ Z ⊕ Z`, where `Z` is the set
+of unit-modulus numbers `ω^a η^b ζ^c` (`ω = (1+i√3)/2`, `η = (√33+i√3)/6`, `ζ = (−1+i√15)/4`)? Those
+coordinates lie in `ℚ(√3, √5, √11)` with denominators built from `2` and `3`, so every certificate of that
+graph, with `5/3` and the origin among its listed points, meets the hypotheses.
+
+**Scope.** Gibbs's graph is an instance of this theorem's quantifier; no certificate of it is built here.
+His second variant replaces `ζ` by `ζ₂ = (−3+i√247)/16`, whose `√247` lies outside the tower `Q4`, so for
+that graph the same congruence is still a hand argument (`CLOSED-QUESTIONS.md` §1.4). The model is
+Heule-510's pair `(19, 59)` below. -/
+theorem not_forces_five_thirds_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
+    (hu : u * c.denom = 1) (hv : c.Valid = true) {ps : List (Fin n × Fin n)}
+    (hps : c.PairsAtRatio ps 25 9 = true) {i j : Fin n} (hmem : (i, j) ∈ ps) :
+    ¬ Forces (edgeGraph n c.edges) 5 i j :=
+  c.not_forces_of_pairsAtRatio_11 hS hu hv hps hmem (by decide)
+
+/-- **… nor is such a pair a virtual edge** (`25 ≢ 9 (mod 11)`): over these certificates the distance `5/3`
+carries no pair compulsion of either kind at five colours. -/
+theorem not_separated_five_thirds_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
+    (hu : u * c.denom = 1) (hv : c.Valid = true) {ps : List (Fin n × Fin n)}
+    (hps : c.PairsAtRatio ps 25 9 = true) {i j : Fin n} (hmem : (i, j) ∈ ps) :
+    ¬ Separated (edgeGraph n c.edges) 5 i j :=
+  c.not_separated_of_pairsAtRatio_11 hS hu hv hps hmem (by decide)
+
 end UDCert
 
 /-! ### Spec: the API on real certificates -/
@@ -209,5 +260,44 @@ example : ¬ Aperiodic finitePlane3Colouring := by decide
 #guard (4 : ZMod 11) ≠ 1 ∧ (4 : ZMod 11) ≠ 0
 #guard (12 : ZMod 11) = 1
 #guard (25 : ZMod 11) ≠ 0 ∧ (25 : ZMod 11) ≠ 1
+-- Gibbs's `5/3`, stored as `25/9`: blocked both ways (`25 ≢ 0` and `25 ≢ 9`), with residue `4`. And the red
+-- that pins the hypothesis as load-bearing: at `11/3` (`121/9`) the numerator vanishes and the theorem is silent.
+#guard (25 : ZMod 11) ≠ 0 ∧ (25 : ZMod 11) ≠ 9 ∧ (25 : ZMod 11) * 9⁻¹ = 4
+#guard (121 : ZMod 11) = 0
+
+/-! ### The model: the `5/3` law at Heule-510
+
+`not_forces_five_thirds_11` quantifies over certificates, so it needs an inhabitant, and a live one:
+`Forces` is vacuously true on a graph that refuses five colours, so the model must be 5-colourable.
+Heule-510 is (`heule510_colorable_five`), and it has pairs at exactly `5/3`: 139 of them by an exact search
+of its table, of which the kernel certifies the first, `(19, 59)`. -/
+
+/-- **Heule-510's pair `(19, 59)` is at squared distance exactly `25/9`**: `9 · distSq = 25 · 96²`. -/
+theorem heule510_pairsAtRatio_five_thirds : heule510.PairsAtRatio [(19, 59)] 25 9 = true := by
+  decide +kernel
+
+-- The check refuses a wrong ratio: the pair is not at squared distance `5/3`.
+example : heule510.PairsAtRatio [(19, 59)] 5 3 = false := by decide +kernel
+
+/-- The pair really is `5/3` apart in `ℂ`, through `pairsAtRatio_sound`. -/
+example : dist (heule510.point 19) (heule510.point 59) = 5 / 3 := by
+  have h := heule510.pairsAtRatio_sound (by decide) (by decide) heule510_pairsAtRatio_five_thirds
+    (19, 59) (List.mem_singleton_self _)
+  rwa [show ((25 : ℤ) : ℝ) / ((9 : ℤ) : ℝ) = (5 / 3) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)] at h
+
+/-- **The `5/3` law on a live object**: in the 5-colourable Heule-510 — not Gibbs's graph, of which no
+certificate is built here — the pair `(19, 59)` at distance `5/3` is not forced to share a colour at five
+colours. -/
+example : ¬ Forces (edgeGraph 510 heule510.edges) 5 19 59 :=
+  heule510.not_forces_five_thirds_11 heule510_coordsIn_sevenFree heule510_denom_inv heule510_valid
+    heule510_pairsAtRatio_five_thirds (List.mem_singleton_self _)
+
+/-- … nor forced apart. -/
+example : ¬ Separated (edgeGraph 510 heule510.edges) 5 19 59 :=
+  heule510.not_separated_five_thirds_11 heule510_coordsIn_sevenFree heule510_denom_inv heule510_valid
+    heule510_pairsAtRatio_five_thirds (List.mem_singleton_self _)
+
+/-- The model is live: Heule-510 is 5-colourable, so the `Forces` refuted above is not vacuously true. -/
+example : (edgeGraph 510 heule510.edges).Colorable 5 := heule510_colorable_five
 
 end HadwigerNelson
