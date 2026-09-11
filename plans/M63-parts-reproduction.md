@@ -1480,6 +1480,28 @@ is settled for them is the file side — each sums exactly to its caption — wh
 defect to the printed column without saying which cells carry it. Phase D can have the two
 transcriptions cheaply now that the checker has a passing positive control.
 
+**A free check the transcription bought, and it is lopsided.** His §5.6 guesses that *"for a
+triples a good approximation will be provided by graphs with symmetries of order 3 or 6; for pairs
+with symmetries of order 2 or 4"*. Scored against his own fifteen result rows (no solver, no base
+— `parts_audit.his_symmetry_guess`):
+
+| his guess | score on his own rows | misses |
+|---|---|---|
+| **pairs**: order 2 or 4 | **7 / 7** | none — every mono- and non-mono-pair row he published has symmetry 2 or 4 |
+| **triples**: order 3 or 6 | **2 / 5** | `√7` (sym 1), `√3` (sym 1), `1/√3` (sym 1) |
+
+So the half of his heuristic that is exact is the half about **pairs**, and the triples half is
+wrong for the majority of his own published triples — including the `√3` triple, which is phase
+E's row. A miss is not an error in his paper: the guess is about **where to look**, and looking at
+order 3 first costs only the search that finds order 1 anyway.
+
+**Where this matters is G, and only G.** M64 §R10's rung lattice supersedes the guess wherever a
+stage and its `Y` already exist — every rung's minimum is then free from `Y`, with no guessing —
+which is everywhere in C–E. It does **not** supersede it in phase G's fresh arenas, where no stage
+has been built and a guess is all there is. There the measured reading is: **trust it for pairs,
+do not trust it for triples**, and prefer building `Y` early enough that the rung lattice can
+replace it.
+
 ### R2.5 — Six instruments, and the sixth is the one that stops the lesson being wrong
 
 Five instruments failed in this phase by saying **"nothing to see" when what they meant was "I
