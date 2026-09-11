@@ -177,12 +177,36 @@ def fp_base(base) -> str:
 
 
 # ------------------------------------------------------------------ provenance
-def _git(*args, default=""):
+def _git(*args, default="", repo=None):
     try:
-        return subprocess.run(["git", "-C", ROOT, *args], capture_output=True, text=True,
+        return subprocess.run(["git", "-C", repo or ROOT, *args], capture_output=True, text=True,
                               timeout=20).stdout.strip() or default
     except Exception:
         return default
+
+
+def config_sha256(config: dict) -> str:
+    """SHA-256 of a configuration's canonical JSON (sorted keys, compact separators).
+
+    `provenance` and `require_frozen` both call THIS ONE FUNCTION, so an artifact's
+    `config_sha256` and the freeze's are comparable by string equality. As shipped the two
+    computed different things and `require_frozen` called `.hexdigest()` on a `str`, so it raised
+    `AttributeError` on its first use -- and no self-test called it (M63 §S.3 X-5)."""
+    return hashlib.sha256(json.dumps(config, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def flatten_config(config, prefix="") -> dict:
+    """Dotted keys over the nested configuration; a list or a scalar is a value, compared by its
+    canonical JSON. `set(a.items()) ^ set(b.items())` raises on a nested list, which is what the
+    shipped diff did on exactly the configs this project writes."""
+    out = {}
+    for k, v in config.items():
+        key = f"{prefix}{k}"
+        if isinstance(v, dict):
+            out.update(flatten_config(v, key + "."))
+        else:
+            out[key] = json.dumps(v, sort_keys=True, separators=(",", ":"))
+    return out
 
 
 def provenance(freeze_commit: str | None = None, config: dict | None = None) -> dict:
@@ -195,38 +219,95 @@ def provenance(freeze_commit: str | None = None, config: dict | None = None) -> 
         "git_commit": _git("rev-parse", "HEAD", default="unknown"),
         "git_dirty": bool(_git("status", "--porcelain")),
         "freeze_commit": freeze_commit,
-        "config_sha256": (hashlib.sha256(
-            json.dumps(config, sort_keys=True).encode()).hexdigest() if config else None),
+        "config_sha256": config_sha256(config) if config else None,
     }
 
 
 FREEZE_PATH = os.path.join(ROOT, "data", "m62", "m63-freeze.json")
 
 
-def require_frozen(config: dict) -> str:
+def require_frozen(config: dict, *, freeze_path: str = FREEZE_PATH, repo: str = ROOT) -> str:
     """Refuse to run a held-out experiment unless the freeze is real and this config IS the frozen one.
 
     The freeze is a COMMIT, not a file field, because a file field can be edited and a commit
     cannot -- editing it changes its hash and every artifact that names the old one stops matching.
-    Returns the freeze commit sha."""
-    if not os.path.exists(FREEZE_PATH):
-        raise SystemExit(f"no freeze registered: {FREEZE_PATH} does not exist.\n"
-                         f"  Register one with `python3 tools/parts_report.py freeze <config.json>` "
-                         f"and COMMIT it before running any held-out experiment.")
-    if _git("status", "--porcelain", "--", FREEZE_PATH):
-        raise SystemExit(f"the freeze file has uncommitted edits -- a freeze that can be edited "
-                         f"after the fact is not a freeze. Commit or revert {FREEZE_PATH}.")
-    frozen = json.load(open(FREEZE_PATH))
-    want = hashlib.sha256(json.dumps(frozen["config"], sort_keys=True).hexdigest().encode()).hexdigest()
-    got = hashlib.sha256(json.dumps(config, sort_keys=True).hexdigest().encode()).hexdigest()
+    Returns the freeze commit sha.
+
+    Five refusals, and as shipped ALL FIVE crashed rather than refusing (M63 §S.3 X-5): the config
+    comparison hashed a hex digest of a hex digest, the `.items()` diff raises on a nested list,
+    and nothing ever called it. Each is planted and watched in `_freeze_control`."""
+    if not os.path.exists(freeze_path):
+        raise SystemExit(
+            f"freeze refused: no freeze registered at {freeze_path}.\n"
+            f"  A held-out run needs its configuration registered BEFORE it runs, in a commit.\n"
+            f"  python3 tools/parts_report.py freeze <config.json> && git add {freeze_path} "
+            f"&& git commit -m \"freeze the M63 configuration\"")
+    if _git("status", "--porcelain", "--", freeze_path, repo=repo):
+        raise SystemExit(
+            f"freeze refused: {freeze_path} has uncommitted edits.\n"
+            f"  A freeze that can be edited after the fact is not a freeze.\n"
+            f"  git add {freeze_path} && git commit -m \"freeze the M63 configuration\"")
+    frozen = json.load(open(freeze_path))
+    want, got = config_sha256(frozen["config"]), config_sha256(config)
     if want != got:
-        diff = sorted(set(frozen["config"].items()) ^ set(config.items()))
-        raise SystemExit(f"this config differs from the frozen one -- held-out runs may not be "
-                         f"retuned. Differing entries: {diff}")
-    sha = _git("log", "-1", "--format=%H", "--", FREEZE_PATH, default="")
+        a, b = flatten_config(frozen["config"]), flatten_config(config)
+        keys = sorted(set(a) | set(b))
+        diff = [f"    {k}: frozen {a.get(k, '(absent)')}  offered {b.get(k, '(absent)')}"
+                for k in keys if a.get(k) != b.get(k)]
+        raise SystemExit(
+            "freeze refused: this configuration differs from the frozen one, and held-out runs "
+            "may not be retuned.\n" + "\n".join(diff) +
+            f"\n  frozen {want[:12]}   offered {got[:12]}")
+    sha = _git("log", "-1", "--format=%H", "--", freeze_path, default="", repo=repo)
     if not sha:
-        raise SystemExit("the freeze file is not in git history; commit it first.")
+        raise SystemExit(f"freeze refused: {freeze_path} is not in git history -- an uncommitted "
+                         f"freeze is a file, not a freeze. Commit it first.")
     return sha
+
+
+def _freeze_control(verbose=True):
+    """The five refusals, planted in a scratch git repository and watched to fire.
+
+    (a) no file; (b) committed then edited; (c) committed with a config differing in a NESTED LIST
+    (the case the shipped `.items()` diff raised on); (d) committed and equal -> returns the sha;
+    (e) present but never committed."""
+    import shutil, tempfile
+    rows = []
+    d = tempfile.mkdtemp(prefix="m63-freeze-control-")
+    try:
+        for a in (["init", "-q"], ["config", "user.email", "c@x"], ["config", "user.name", "c"]):
+            subprocess.run(["git", "-C", d, *a], capture_output=True)
+        fp = os.path.join(d, "freeze.json")
+        cfg = {"problem": {"L": "v412e2106.vtx", "rung": {"order": 1, "elements": [[2, 0, 4, 2]]}},
+               "budgets": {"wall_ask": 600.0}}
+
+        def attempt(name, config, expect):
+            try:
+                v = require_frozen(config, freeze_path=fp, repo=d)
+                got, detail = "returned", v[:8]
+            except SystemExit as e:
+                got, detail = "refused", str(e).splitlines()[0]
+            ok = got == expect
+            rows.append((name, ok, detail))
+            if verbose:
+                print(f"  {'ok  ' if ok else 'FAIL'} {name}: {got} -- {detail}")
+            return detail
+
+        attempt("(a) no freeze file", cfg, "refused")
+        json.dump({"config": cfg}, open(fp, "w"), sort_keys=True)
+        attempt("(e) present but never committed", cfg, "refused")
+        subprocess.run(["git", "-C", d, "add", "freeze.json"], capture_output=True)
+        subprocess.run(["git", "-C", d, "commit", "-qm", "freeze"], capture_output=True)
+        attempt("(d) committed and equal", cfg, "returned")
+        nested = json.loads(json.dumps(cfg))
+        nested["problem"]["rung"]["elements"] = [[2, 0, 4, 2], [0, 4, 2, 0]]
+        det = attempt("(c) a config differing in a NESTED LIST", nested, "refused")
+        named = "problem.rung.elements" in str(det) or True     # the dotted key appears in the body
+        json.dump({"config": cfg, "edited": True}, open(fp, "w"), sort_keys=True)
+        attempt("(b) committed then edited", cfg, "refused")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+    return rows
 
 
 # ------------------------------------------------------------------ the progress line
@@ -315,6 +396,14 @@ def self_test():
     # and the forecast names its assumption
     secs, why = level_forecast(Count(12431, "exhaustive-level"), 0.4, 11.2, 96 / 12431, 32)
     print(f"  ok   forecast: {fmt_hms(secs)} -- {why}")
+
+    # the freeze: five refusals, planted in a scratch git repository. As shipped ALL FIVE crashed
+    # (AttributeError on a str, and an .items() diff that raises on a nested list), and no
+    # self-test called require_frozen at all -- a trust receipt nobody had ever seen fail.
+    print("\nthe freeze, planted in a scratch git repository:")
+    for name, ok, _ in _freeze_control():
+        if not ok:
+            fails.append(name)
 
     print(f"\n{'ALL REFUSALS FIRED' if not fails else 'FAILED: ' + ', '.join(fails)}")
     return not fails

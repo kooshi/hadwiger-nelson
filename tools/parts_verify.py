@@ -24,9 +24,15 @@ import parts_repro as P
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def main():
+def main(out=None):
+    """Verify every object, and **rewrite the artifact only when a verified fact has changed.**
+
+    As shipped this rewrote its own tracked JSON on every run, because the payload carries a
+    `generated` date -- so merely LOOKING at the archive dirtied the working tree, and it did
+    (M63 §S.3 H-1). The date is not a verified fact about his files; `files` and `base_radius`
+    are, and they are what the comparison is over."""
     t0 = time.time()
-    out = os.path.join(ROOT, "data", "m62", "parts-ref11-verified.json")
+    out = out or os.path.join(ROOT, "data", "m62", "parts-ref11-verified.json")
     B = P.Base(P.PARTS_R)
     print(f"[{time.time()-t0:6.1f}s] base r={P.PARTS_R}: {len(B.pts)} points / {len(B.orbits)} orbits",
           flush=True)
@@ -78,16 +84,25 @@ def main():
         print(f"[{time.time()-t0:6.1f}s] {name:>16}  {sp['n']} = L {len(sp['L'])} + S {len(sp['S'])} "
               f"- shared {len(sp['shared'])}, off-lattice {len(sp['off_lattice'])}", flush=True)
 
-    json.dump({"kind": "parts-ref11-verified", "base_radius": P.PARTS_R,
-               "generated": time.strftime("%Y-%m-%d"), "files": res},
-              open(out, "w"), indent=1)
     good = sum(1 for r in res.values() if r["verdict"] in ("matches-filename", "type-m-split"))
     print(f"\n[{time.time()-t0:6.1f}s] {good}/{len(res)} objects reproduce their filename exactly")
     for n, r in sorted(res.items()):
         if r["verdict"] not in ("matches-filename", "type-m-split"):
             print(f"   {n}: {r['verdict']}  {r}")
+    payload = {"kind": "parts-ref11-verified", "base_radius": P.PARTS_R,
+               "generated": time.strftime("%Y-%m-%d"), "files": res}
+    prior = json.load(open(out)) if os.path.exists(out) else None
+    if (prior is not None and prior.get("base_radius") == payload["base_radius"]
+            and prior.get("files") == json.loads(json.dumps(res))):
+        print(f"unchanged: not rewritten ({out})")
+        return payload
+    tmp = out + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(payload, f, indent=1)
+    os.replace(tmp, out)
     print("wrote", out)
+    return payload
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1] if len(sys.argv) > 1 else None)
