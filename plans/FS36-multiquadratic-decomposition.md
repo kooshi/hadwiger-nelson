@@ -184,7 +184,7 @@ cannot see.
 | `Instances/FinitePlane11.lean`, `UnitQuadrance.lean` | Phase C only: `chromaticNumber_heule510`, `heule510_coordsIn_sevenFree`, `Q4.sevenFree`, `Q4.sevenFree.toQ3` |
 | Mathlib, **measured** by the planning probe or the domain pass | `Submodule.mem_sup`, `Submodule.mem_map_of_mem`, `Submodule.map_le_iff_le_comap`, `Submodule.mem_span_pair`, `Submodule.subset_span`, `Submodule.map_span`, `Finsupp.linearCombination`, `Finsupp.comapDomain`, `Nat.factorization_mul`, `Nat.Prime.factorization`, `Nat.sq_mul_squarefree`, `GaloisConnection.l_sup`, `Module.forall_dual_apply_eq_zero_iff` (needs `Module.Projective`), `ZMod.algebra k 2` (needs `CharP k 2`), `frobenius_inj` (`Mathlib/Algebra/CharP/Reduced.lean`), `Subfield.closure_le`, `Real.sqrt_mul`, `Real.sqrt_mul_self`, `SimpleGraph.chromaticNumber_mono_of_hom`, `SimpleGraph.induceHomOfLE`, `SimpleGraph.cycleGraph` (import `Mathlib.Combinatorics.SimpleGraph.CycleGraph`), `StarRing (ℤ√d)` (so `starRingEnd GaussianInt`) |
 | Mathlib, **not found** | "even factorization ⟹ `IsSquare`" in that shape (`exact?` failed): go through `Nat.sq_mul_squarefree` |
-| Mathlib, **friction found** | `IsReduced (ZMod 2)` needs two things `FieldWall4`'s import closure lacks. First, the import `Mathlib.Algebra.Field.ZMod`, where `Field (ZMod p)` is declared: without it the trace shows `NormedField.toField` as the only candidate. Second, `Fact (Nat.Prime 2)` in scope. Then `isReduced_of_noZeroDivisors` fires. Found by tracing the instance search, after a first guess — the `Fact` alone — failed |
+| Mathlib, **friction found** | `IsReduced (ZMod 2)` needs the import `Mathlib.Algebra.Field.ZMod`, where `Field (ZMod p)` is declared and which `FieldWall4`'s closure lacks: without it the trace shows `NormedField.toField` as the only candidate. `Fact (Nat.Prime 2)` is a global instance. Found by tracing the instance search after a first guess (a local `Fact`) failed; the experience pass confirmed that the named model needs no local instance |
 | Mathlib, **names found by the obligation pass** (§M2, probed) | `Squarefree.natFactorization_le_one`, `ZMod.natCast_eq_zero_iff`, `Nat.eq_of_factorization_eq`, `Nat.factorization_pow`, `Finsupp.induction` (cases `zero` and `single_add`), `Finsupp.linearCombination_single`, `ZModModule.add_self`, `Real.sqrt_ne_zero'`, `natCast_mem`, `SubfieldClass.ratCast_mem`, `frobenius_def`, `ZMod.algebra` (in `Mathlib.Algebra.Algebra.ZMod`, now imported), `CharP.nontrivial_of_char_ne_one` (its argument is `v`), `not_forall` (in place of the deprecated `push_neg`) |
 
 ---
@@ -203,16 +203,22 @@ cannot see.
 | D4 | **Square classes as `Nat.Primes →₀ ZMod 2`**; the 2-adic group as `ZMod 2 × ZMod 2 × ZMod 2` in coordinates `(−1, 5, 2)`; localization defined on primes by `p mod 8` | (i) `ℚˣ` modulo squares with 2-adic squares through Hensel's lemma in `ℚ₂`; (ii) `ℕ →₀ ZMod 2`; (iii) `ℕ+` as the carrier of radicands | The prime basis is the classical basis. The mod-8 table is the classical fact (Hensel), which no consumer needs proved; the docstring says the table is a table. (ii) has directions no natural number populates, which breaks `exists_sqClass_eq`. (iii) is D12 | medium-high after the domain pass |
 | D5 | **Two new leaves; no edit to `ResidueColouring`** | put the two-colour theorems in `ResidueColouring.lean` beside Theorem A | a declaration added there rebuilds `FieldWall4`, `SeamCert`, `ValuationLaw` and everything that imports them | high |
 | D6 | The milestone runs as **FS-36**; its carry-forward is **FS-37** | number it M65 | small consolidation-sized items run under their FS number (FS-24 landed ledger row 61); M63 is open with M62 behind it, so an M-number would misstate the queue | high |
-| D7 | **The splitting needs `[2] ∈ W` and nothing else**, through two lemmas: "a splitting of the image lifts" (`inf_comap_sup_inf_comap_eq`) and "every subgroup of `ℚ₂^×/(ℚ₂^×)²` holding `[2]` splits along the two blocks" (`le_inf_blockTwo_sup_inf_blockTen`) | (i) the handoff's two-case proof; (ii) the planning skeleton's hypotheses, `U₁ ≤ W.map f` plus `[3] ∈ W` | The planning skeleton's hypotheses were stronger than the truth. Outside both blocks lie only `[5]` and `[−1]`, and `[2]` carries each into `blockTen`. `[3]` and `[11]` are needed only for "each piece contains `ℚ(√3,√11)`". `independent_check.py` §5 checks the local lemma on all 16 subgroups, and finds the ones that do not split to be exactly `{1,5}`, `{1,7}` and `{1,3,5,7}` | high |
+| D7 | **The splitting needs `[2] ∈ W` and nothing else**, through two lemmas: "a splitting of the image lifts" (`inf_comap_sup_inf_comap_eq`) and "every subgroup of `ℚ₂^×/(ℚ₂^×)²` holding `[2]` splits along the two blocks" (`le_inf_spanThreeTwo_sup_inf_spanThreeTen`) | (i) the handoff's two-case proof; (ii) the planning skeleton's hypotheses, `U₁ ≤ W.map f` plus `[3] ∈ W` | The planning skeleton's hypotheses were stronger than the truth. Outside both blocks lie only `[5]` and `[−1]`, and `[2]` carries each into `spanThreeTen`. `[3]` and `[11]` are needed only for "each piece contains `ℚ(√3,√11)`". `independent_check.py` §5 checks the local lemma on all 16 subgroups, and finds the ones that do not split to be exactly `{1,5}`, `{1,7}` and `{1,3,5,7}` | high |
 | D8 | The credit line of §PA(b), in `SquareClass.lean`'s docstring and in any ledger row | the main session's *"a corollary of the project's 2-adic criterion, stated and proved by ChatGPT…"* | "the project's" claims a criterion whose mechanism is `[Fischer1990]`'s and `[Madore2015]`'s; naming it by where it is written avoids that, and the line carries the search's negative | high |
-| D9 | **`sqrtField ⊣ kummerClasses`, a Galois connection** between square-class groups and real subfields | ad-hoc lemmas `sqrtField_mono`, `sqrtField_sup`, `mqField_le_sqrtField_span` (the planning skeleton) | One structure gives monotonicity, sums and `⊥` for free. The skeleton's `sqrtField_sup` is already `gc.l_sup` in one line, and `sqrtField_eq_sup` is one `rw` after it. It needs no independence of square roots, and it costs the same two leaves (`exists_sqClass_eq`, `isSquare_of_sqClass_eq_zero`). `kummerClasses F` is also the object the handoff's `V₂(F)` is: `(kummerClasses F).map loc2` | high |
+| D9 | **`fieldOfClasses ⊣ classesOfField`, a Galois connection** between square-class groups and real subfields | ad-hoc lemmas `fieldOfClasses_mono`, `fieldOfClasses_sup`, `fieldOfRadicands_le_fieldOfClasses_span` (the planning skeleton) | One structure gives monotonicity, sums and `⊥` for free. The skeleton's `fieldOfClasses_sup` is already `gc.l_sup` in one line, and `fieldOfClasses_eq_sup` is one `rw` after it. It needs no independence of square roots, and it costs the same two leaves (`exists_sqClass_eq`, `isSquare_of_sqClass_eq_zero`). `classesOfField F` is also the object the handoff's `V₂(F)` is: `(classesOfField F).map twoAdic` | high |
 | D10 | The two-colour theorem's carrier is **an additive functional `k →+ ZMod 2`** | (i) a quotient `k ⧸ H` by an index-2 subgroup; (ii) a ring hom `A →+* ZMod 2` (Theorem A at `G = ZMod 2`); (iii) Fischer's route — restrict `ψ` to the subring generated by unit vectors, whose image is `𝔽₂` | (i) needs `Fintype (k ⧸ H)` and a cardinality computation where `ZMod 2` has `ZMod.card`. (ii) cannot reach `ℚ(√5)`: its residue field `𝔽₄` has no ring hom to `𝔽₂`, so the functional being *additive* is the content. (iii) needs a codomain restriction to the prime subfield, heavier in Lean than the dual-space lemma | high |
 | D11 | The hypothesis is **pointwise `ψ (σ z) = ψ z`** — conjugation in the inertia group — split from characteristic two: first `ψ u · ψ u = 1` with no hypothesis on the residue ring (`map_mul_self_eq_one_of_mem_normOne_of_conj_eq`), then `ψ u = 1` in a reduced ring of characteristic two | (i) Mathlib's `AddSubgroup.inertia`, which needs a group action for a single involution; (ii) `ψ.comp (σ.restrict …) = ψ` as an equation of ring homs; (iii) one lemma straight to `ψ u = 1` | The pointwise form matches `ResidueColouring` §4's `hker`, which puts the three hypotheses on a visible ladder: none gives `\|k\|` colours; kernel-stable gives the valuation law; inertia gives two colours. The split names the step a residue-`𝔽₃` argument, with square roots `±1`, would reuse | high |
 | D12 | **No `0 ∉ D` hypothesis anywhere**: `sqClass 0 = 0` is a junk value made harmless by `√0 = 0`; radicands stay in `ℕ` | `ℕ+` as the carrier | Mathlib's factorization API lives on `ℕ` with `≠ 0` side conditions. `ℕ+` would cast twice in every field statement. And the planning skeleton's `hD : 0 ∉ D` was never used | medium-high |
-| D13 | **No `pieceTwo` / `pieceTen` definitions**: a piece is written `W ⊓ U.comap loc2`, with its lemmas parametrized by the plane `U` | two named definitions with mirrored lemmas (the planning skeleton: six near-duplicates) | The duplication was a role left unnamed — "the classes localizing into a plane" — and Mathlib's `⊓`/`comap` vocabulary is that role with its API attached. A reader-facing abbreviation is the experience pass's decision | medium |
+| D13 | **No `pieceTwo` / `pieceTen` definitions**: a piece is written `W ⊓ U.comap twoAdic`, with its lemmas parametrized by the plane `U` | two named definitions with mirrored lemmas (the planning skeleton: six near-duplicates) | The duplication was a role left unnamed — "the classes localizing into a plane" — and Mathlib's `⊓`/`comap` vocabulary is that role with its API attached. A reader-facing abbreviation is the experience pass's decision | medium |
 | D14 | `TwoColourResidue` imports `FieldWall4` for its red | a red in Mathlib's `GaloisField 2 2` | `F4`'s facts are `decide`s. The nontrivial cube roots of one in `GaloisField 2 2` need cardinality arguments. And `F4` with Frobenius *is* Theorem B's residue field — the red says exactly why the hypothesis matters | medium |
-| D15 | **`kummerClasses`'s carrier requires `n ≠ 0`** | the domain pass's carrier without it | its closure proofs then use the witnesses `1` and `a · b` and never the junk value `sqClass 0 = 0`; the connection's forward direction gets `n ≠ 0` for free from `exists_sqClass_eq` | high — probed |
+| D15 | **`classesOfField`'s carrier requires `n ≠ 0`** | the domain pass's carrier without it | its closure proofs then use the witnesses `1` and `a · b` and never the junk value `sqClass 0 = 0`; the connection's forward direction gets `n ≠ 0` for free from `exists_sqClass_eq` | high — probed |
 | D16 | **The arithmetic under the connection is one symmetric lemma with no side condition**, `sqrt_mem_iff_of_sqClass_eq : sqClass n = sqClass m → (√n ∈ F ↔ √m ∈ F)` | the one-directional form with `m ≠ 0`, which the probe compiled | equal classes decide membership for every pair, zero included: class `0` means a square or zero, whose root is rational. The side condition was the proof's convenience, not the truth, and dropping it costs the cases `n = 0` and `m = 0` | medium-high — the core case is probed; the two zero cases are not |
+| D17 | **A parallel naming family that reads aloud**: `fieldOfRadicands`, `fieldOfClasses`, `classesOfField`, `classesOfRadicands`; `twoAdic : SqClass →ₗ TwoAdicSqClass` with the named classes `TwoAdicSqClass.two`, `.three`, `.five`, `.ten`, `.minusOne`; `spanThreeTwo`, `spanThreeTen`; `planeOver` | the planning names `mqField`, `sqrtField`, `kummerClasses`, `classGroup`, `loc2`, `LocTwo`, `locPrime`, `minusOne`, `blockTwo`, `blockTen`, `fieldPlane` | The read-aloud gate's reader holds only the statement text, and the old names told them nothing without a docstring. "block" was coined vocabulary, which G49 says hides prior art. `classGroup` collides with Mathlib's `ClassGroup`, the ideal class group FS-37 will meet. The "X of Y" family predicts its own names: `fieldOfRadicands_eq_fieldOfClasses` reads as its statement | medium-high |
+| D18 | **The simp set is `sqClass_zero`, `sqClass_one`, `sqClass_sq`, `mem_planeOver`**; `sqClass_apply` stays by name | tagging `sqClass_apply` as well, which Mathlib does for many `_apply` lemmas | With both `sqClass_apply` and `sqClass_sq` tagged, the critical pair `sqClass (b²) p` is not joinable: one side reduces to `0`, the other sticks at `2 * ↑(b.factorization p)`, since no default simp lemma knows `(2 : ZMod 2) = 0`. The class-level lemmas keep consumers at the class level | high |
+| D19 | **The two-colouring is exposed as data**, `normOneColoringTwo` with `normOneColoringTwo_apply` (`@[simp]`), taking the functional `l` explicitly; the `Colorable 2` forms derive from it | only the `Colorable 2` theorems | FS-19 (the 𝔭-adic distance classification) must evaluate the colouring to ask which pairs share a colour. `ResidueColouring` exposes `normOneColoring` for exactly that reason, so the parallel is predictable. The functional is not canonical, which is why it is an argument | medium |
+| D20 | **`multiquadratic_decomposition` is kept, docstring-marked as the read-aloud form**, with proofs to use its parts | deleting the five-way conjunction as an API smell | its only consumer is the paper's read-aloud gate, for which one theorem matching the handoff's sentence is the point. It costs nothing (it is assembled from its parts), and the docstring routes proof consumers away | medium-high |
+| D21 | **`planeOver` and its three lemmas sit in the root `HadwigerNelson` namespace**; the square-class vocabulary sits in `HadwigerNelson.SquareClass` | everything in `SquareClass` | the plane over a subfield is not about square classes. FS-37 will want `planeOver F` for arbitrary fields, and `FieldWall4` exports `seamPlane` to the root for the same reason | medium-high |
+| D22 | **No reader-facing abbreviation for a piece**: it stays `W ⊓ U.comap twoAdic` | an abbreviation such as `piece U W` | the Mathlib expression reads aloud as "the classes of `W` landing in `U`" and carries its API; a new name is one more thing a reader must decompress. The one-line eight-case lemma and the frobenius wrapper become `private` for the same reason (no consumer outside their file) | medium |
 
 ---
 
@@ -230,7 +236,7 @@ cannot see.
 | `√2 · √10 = 2 · √5` | **3 lines, compiled** (probe Q7) |
 | `exact?` on "even factorization ⟹ square" | **not found** |
 | `Algebra (ZMod 2) k` from `CharP k 2` | `exact ZMod.algebra k 2` |
-| the reshaped skeleton's one- and two-line proofs | **compile**: the 2-adic splitting from its two lemmas; the four-colour test on any piece; `sqrtField_sup` from the Galois connection; `sqrtField_eq_sup` by one `rw`; `fieldPlane seamField = seamPlane` by `rfl`; the bundled headline from its parts |
+| the reshaped skeleton's one- and two-line proofs | **compile**: the 2-adic splitting from its two lemmas; the four-colour test on any piece; `fieldOfClasses_sup` from the Galois connection; `fieldOfClasses_eq_sup` by one `rw`; `planeOver seamField = seamPlane` by `rfl`; the bundled headline from its parts |
 
 **Estimates**, each against its phase in §8:
 
@@ -239,8 +245,8 @@ cannot see.
 | phase | content | code lines, probed where marked | time |
 |---|---|---|---|
 | A | `TwoColourResidue.lean`: the two char-2 lemmas, the square-root-of-one step, the three forms, the model's two facts, two reds | about 45 (everything but the valuation and plane forms probed, §M2) | two to three hours |
-| B1 | `SquareClass.lean` §1–§4: the lifting lemma, the `sqClass` API, `loc2` on primes, the block facts, the pointwise and local splittings, the class-group image lemma | about 80 (all probed but the image lemma) | half a day |
-| B2 | §5–§7: the generator lemma, `mqField_mono`, the membership iff, the radical identity, `kummerClasses`, the connection, `mqField_eq_sqrtField_classGroup`, the planes, `seamField_le_mqField`, the headline | about 90 (the connection, the iff's core case, the radical identity, the planes and `seamField_le_mqField` probed) | half a day |
+| B1 | `SquareClass.lean` §1–§4: the lifting lemma, the `sqClass` API, `twoAdic` on primes, the block facts, the pointwise and local splittings, the class-group image lemma | about 80 (all probed but the image lemma) | half a day |
+| B2 | §5–§7: the generator lemma, `fieldOfRadicands_mono`, the membership iff, the radical identity, `classesOfField`, the connection, `fieldOfRadicands_eq_fieldOfClasses`, the planes, `seamField_le_fieldOfRadicands`, the headline | about 90 (the connection, the iff's core case, the radical identity, the planes and `seamField_le_fieldOfRadicands` probed) | half a day |
 | B3 | §8 de Grey's field, and the spec | about 50 | two hours |
 | C (optional) | `K(√14) · K(√70)` holds Heule-510 in the kernel (§8) | ≤ 150 | half a day |
 
@@ -259,11 +265,12 @@ what each statement is; the file says it exactly. Names are provisional until th
 
 | name | the statement, in words | proof, at leaf size |
 |---|---|---|
-| `eq_one_of_mul_self_eq_one_of_charTwo` | in a reduced ring of characteristic 2, `x · x = 1` forces `x = 1` | `frobenius_inj`, or `(x + 1)² = 0` then reducedness (probe Q5) |
+| `eq_one_of_mul_self_eq_one_of_charTwo` (**private**) | in a reduced ring of characteristic 2, `x · x = 1` forces `x = 1` | `frobenius_inj`, or `(x + 1)² = 0` then reducedness (probe Q5) |
 | `exists_addMonoidHom_zmod_two_apply_one_ne_zero` | a ring of characteristic 2 has an additive map to `ZMod 2` nonzero at `1` | `letI := ZMod.algebra k 2`; vector spaces are projective; `Module.forall_dual_apply_eq_zero_iff` at `v = 1 ≠ 0` |
 | `map_mul_self_eq_one_of_mem_normOne_of_conj_eq` | if conjugation fixes every residue, a norm-one element's residue squares to `1` — no hypothesis on the residue ring | `← map_mul`, rewrite `ψ (σ u) = ψ u` backwards, `u · σ u = 1` |
 | `map_eq_one_of_mem_normOne_of_conj_eq` | …and in a reduced ring of characteristic 2 it is `1` | **written**: the two lemmas above |
-| `colorable_two_of_normOne_of_conj_eq` | ring form: a graph drawn in `L` with integral norm-one edge differences is 2-colourable | `colorable_of_residue` with `l ∘ ψ` for the functional `l`; `rw [ZMod.card]` |
+| `normOneColoringTwo`, `normOneColoringTwo_apply` | **the two-colouring as data** (D19), through an explicit functional `l`; its value is `l` of the coset residue (`@[simp]`, `rfl`) | the colouring function is **written**; its properness is the leaf: `cosetResidue_eq_iff`, then `map_eq_one_of_mem_normOne_of_conj_eq` and `hl` |
+| `colorable_two_of_normOne_of_conj_eq` | ring form: a graph drawn in `L` with integral norm-one edge differences is 2-colourable | **written**: `exists_addMonoidHom_zmod_two_apply_one_ne_zero`, then `normOneColoringTwo`'s `.colorable` |
 | `colorable_two_of_valuationSubring_of_conj_eq` | valuation form: integrality is free | the ring form plus `normOne_subset_valuationSubring` |
 | `colorable_two_unitDistance_induce_of_valuationSubring` | **the headline**: plane form, mirroring Theorem A | copy `colorable_unitDistance_induce_of_valuationSubring`'s proof |
 
@@ -276,33 +283,35 @@ what each statement is; the file says it exactly. Names are provisional until th
 | 2 | `sqClass_zero`, `sqClass_one`, `sqClass_mul`, `sqClass_prime` | the junk value stated; multiplicative on nonzero naturals; a prime's class is its basis vector |
 | 2 | `isSquare_of_sqClass_eq_zero` | a nonzero natural with trivial class is a perfect square |
 | 2 | `exists_sqClass_eq` | every class is a nonzero natural's class |
-| 2 | `classGroup` | the span of the classes of a set of radicands |
+| 2 | `classesOfRadicands` | the span of the classes of a set of radicands |
 | 2 | `sqClass_apply`, `sqClass_sq` | the coordinate formula, **written** as `rfl`; a square's class is 0 |
-| 3 | `LocTwo`, `locPrime`, `loc2`, `loc2_sqClass_prime` | `(ZMod 2)³` in coordinates `(−1, 5, 2)`; the table on primes; its linear extension; agreement on primes |
-| 3 | `minusOne`, `blockTwo`, `blockTen` | `[−1]`; the planes `{1,3,2,6}` and `{1,3,10,14}` |
-| 3 | `minusOne_not_mem_blockTwo`, `…_blockTen` | neither plane holds `[−1]` |
-| 3 | `mem_blockTwo_or_mem_blockTen_or_add_two_mem_blockTen` | every class is in a block, or in `blockTen` after adding `[2]` — the eight cases, by `decide` |
-| 3 | `le_inf_blockTwo_sup_inf_blockTen` | every local subgroup holding `[2]` splits along the two blocks |
-| 3 | `loc2_sqClass_three`, `loc2_sqClass_eleven` | both localize to `[3]` |
-| 4 | `inf_comap_blockTwo_sup_inf_comap_blockTen` | **the 2-adic splitting**: a square-class group holding `[2]` is the sum of its two pieces — **written** from the two lemmas |
+| 3 | `TwoAdicSqClass`, `twoAdicOfPrime`, `twoAdic`, `twoAdic_sqClass_prime` | `(ZMod 2)³` in coordinates `(−1, 5, 2)`; the table on primes; its linear extension; agreement on primes |
+| 3 | `TwoAdicSqClass.two`, `.three`, `.five`, `.ten`, `.minusOne`; `spanThreeTwo`, `spanThreeTen` | the named 2-adic classes; the subgroups `{1,3,2,6}` and `{1,3,10,14}` |
+| 3 | `minusOne_not_mem_spanThreeTwo`, `…_blockTen` | neither plane holds `[−1]` |
+| 3 | `mem_spanThreeTwo_or_mem_spanThreeTen_or_add_two_mem` (**private**) | every class is in one of the spans, or in `spanThreeTen` after adding `[2]` — the eight cases, by `decide` |
+| 3 | `le_inf_spanThreeTwo_sup_inf_spanThreeTen` | every local subgroup holding `[2]` splits along the two blocks |
+| 3 | `twoAdic_sqClass_three`, `twoAdic_sqClass_eleven` | both localize to `[3]` |
+| 4 | `inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen` | **the 2-adic splitting**: a square-class group holding `[2]` is the sum of its two pieces — **written** from the two lemmas |
 | 4 | `minusOne_not_mem_map_inf_comap` | a piece cut by a plane avoiding `[−1]` passes the test — **written** |
 | 4 | `sqClass_mem_inf_comap` | a class in `W` localizing into `U` lies in the piece — **written** |
-| 4 | `map_loc2_classGroup_le_iff` | a class group's image lies in a plane iff every radicand's class does |
-| 5 | `mqField`, `sqrtField`, `kummerClasses` | `ℚ(√d : d ∈ D)`; `mqField` of the naturals whose class lies in `W`; the classes of the **nonzero** naturals whose roots lie in `F` (D15) |
-| 5 | `sqrt_mem_mqField`, `mqField_mono` | the generators, **written**; monotonicity in the radicand set |
+| 4 | `map_twoAdic_classesOfRadicands_le_iff` | a class group's image lies in a plane iff every radicand's class does |
+| 5 | `fieldOfRadicands`, `fieldOfClasses`, `classesOfField` | `ℚ(√d : d ∈ D)`; `fieldOfRadicands` of the naturals whose class lies in `W`; the classes of the **nonzero** naturals whose roots lie in `F` (D15) |
+| 5 | `sqrt_mem_fieldOfRadicands`, `fieldOfRadicands_mono` | the generators, **written**; monotonicity in the radicand set |
 | 5 | `sqrt_mem_iff_of_sqClass_eq` | equal classes carry membership of the root, both ways, with no side condition (D16) |
 | 5 | `sqrt_mul_sqrt_eq` | `a · b = s² · c` gives `√a · √b = s · √c` |
-| 5 | `gc_sqrtField_kummerClasses` | **the Galois connection** |
-| 5 | `sqrtField_sup` | the field of a sum is the compositum — **written** as `gc.l_sup` |
-| 5 | `mqField_eq_sqrtField_classGroup` | `ℚ(√D)` is the field of its square-class group |
-| 5 | `sqrtField_eq_sup` | the decomposition for a group holding `[2]` — **written** |
-| 6 | `fieldPlane`, `fieldPlane_seamField` | `{z : ℂ \| z.re ∈ F ∧ z.im ∈ F}`; at `seamField` it *is* `seamPlane` — **written**, `rfl` |
-| 6 | `mem_fieldPlane`, `seamField_le_mqField` | membership, **written** as `Iff.rfl`; `seamField` lies in `mqField {3, 11}`, the field generated by `√3` and `√11` |
-| 6 | `four_le_chromaticNumber_fieldPlane`, `seamField_le_sqrtField` | a plane over a field containing `ℚ(√3,√11)` needs four colours; `[3], [11] ∈ W` puts `ℚ(√3,√11)` in `sqrtField W` |
-| 7 | `mqField_le_sup` | **every real multiquadratic field lies in the compositum of the fields of `classGroup (insert 2 D)`'s two pieces** — no hypothesis |
-| 7 | `four_le_chromaticNumber_fieldPlane_sqrtField_inf_comap` | with `3, 11 ∈ D`, each piece cut by a plane through `[3]` has a plane needing four colours |
+| 5 | `gc_fieldOfClasses_classesOfField` | **the Galois connection** |
+| 5 | `fieldOfClasses_sup` | the field of a sum is the compositum — **written** as `gc.l_sup` |
+| 5 | `fieldOfRadicands_eq_fieldOfClasses` | `ℚ(√D)` is the field of its square-class group |
+| 5 | `fieldOfClasses_eq_sup` | the decomposition for a group holding `[2]` — **written** |
+| 6 | `planeOver`, `planeOver_seamField` | `{z : ℂ \| z.re ∈ F ∧ z.im ∈ F}`; at `seamField` it *is* `seamPlane` — **written**, `rfl` |
+| 6 | `mem_planeOver`, `seamField_le_fieldOfRadicands` | membership, **written** as `Iff.rfl`; `seamField` lies in `fieldOfRadicands {3, 11}`, the field generated by `√3` and `√11` |
+| 6 | `four_le_chromaticNumber_planeOver`, `seamField_le_fieldOfClasses` | a plane over a field containing `ℚ(√3,√11)` needs four colours; `[3], [11] ∈ W` puts `ℚ(√3,√11)` in `fieldOfClasses W` |
+| 7 | `fieldOfRadicands_le_sup` | **every real multiquadratic field lies in the compositum of the fields of `classesOfRadicands (insert 2 D)`'s two pieces** — no hypothesis |
+| 7 | `four_le_chromaticNumber_planeOver_fieldOfClasses_inf_comap` | with `3, 11 ∈ D`, each piece cut by a plane through `[3]` has a plane needing four colours |
 | 7 | `multiquadratic_decomposition` | **the handoff's statement, bundled for reading aloud** — **written** from its parts |
-| 8 | `mqField_deGrey_le` and the two `minusOne_not_mem_map_classGroup_…` lemmas | de Grey's field in `ℚ(√2,√3,√11,√35) · ℚ(√3,√10,√11,√35)`; both factors pass the test |
+| 8 | `fieldOfRadicands_deGrey_le_sup`, `map_twoAdic_deGreyTwo_le`, `map_twoAdic_deGreyTen_le` | de Grey's field in `ℚ(√2,√3,√11,√35) · ℚ(√3,√10,√11,√35)`; each factor's 2-adic classes lie in a subgroup avoiding `[−1]`, and an `example` draws the four-colour test from each |
+
+*After the experience pass (§M3), `planeOver`, `mem_planeOver`, `planeOver_seamField` and `four_le_chromaticNumber_planeOver` sit in §0 of the file, in the root `HadwigerNelson` namespace (D21).*
 
 **Elaboration status.**
 - **Planning skeleton (committed at `ab300bd`):** `./scripts/build.sh` OK on 170 batches, rebuilding
@@ -314,6 +323,9 @@ what each statement is; the file says it exactly. Names are provisional until th
 - **After the obligation pass (§M2):** `./scripts/build.sh` OK on 170 batches, rebuilding `TwoColourResidue` in 1.5 s,
   `SquareClass` in 1.9 s and `Proofs` in 1.4 s (3 min 20 s wall; log `build/gate/build/20260911T174316Z-2333696.log`);
   `tools/check_architecture.py` PASS.
+- **After the experience pass (§M3), the shape handed to the implementer:** `./scripts/build.sh` OK on 170 batches,
+  rebuilding `TwoColourResidue` in 1.6 s, `SquareClass` in 1.9 s and `Proofs` in 1.4 s (3 min 21 s wall; log
+  `build/gate/build/20260911T175812Z-2359781.log`); `tools/check_architecture.py` PASS (138 of 138 rows).
 
 ---
 
@@ -321,15 +333,15 @@ what each statement is; the file says it exactly. Names are provisional until th
 
 | declaration | the check that would fail if it drifted | where |
 |---|---|---|
-| `locPrime` | `#guard`s at 2, 3, 5, 7, 11, 17 | `SquareClass` §9 |
+| `twoAdicOfPrime` | `#guard`s at 2, 3, 5, 7, 11, 17 | `SquareClass` §9 |
 | `sqClass` | `sqClass 12 = sqClass 3` | §9 |
-| `loc2` | `loc2 (sqClass 35) = (1, 1, 0)` — `[5] + [−1] = [3]` | §9 |
-| `blockTwo` | `[6] ∈ blockTwo`, `[10] ∉ blockTwo` | §9 |
-| `mqField` | `√5 ∈ mqField {2, 10}` | §9 |
-| `fieldPlane` | `(√3, 1) ∈ fieldPlane seamField` | §9 |
+| `twoAdic` | `twoAdic (sqClass 35) = (1, 1, 0)` — `[5] + [−1] = [3]` | §9 |
+| `spanThreeTwo` | `[6] ∈ spanThreeTwo`, `[10] ∉ spanThreeTwo` | §9 |
+| `fieldOfRadicands` | `√5 ∈ fieldOfRadicands {2, 10}` | §9 |
+| `planeOver` | `(√3, 1) ∈ planeOver seamField` | §9 |
 | `inf_comap_sup_inf_comap_eq`'s hypothesis | **red**: in `𝔽₂²` the diagonal meets both axes in `0` | §9 |
-| the splitting's `[2] ∈ W` | **red**: `classGroup {7}` does not split — `[7] = [−1]` lies in neither block. **Model**: de Grey's field (§8 of the file, and the `example` applying `mqField_le_sup` at `{3, 5, 7, 11}`) | §8, §9 |
-| the two-colour theorems, all forms | **model**: the ring form *applied* — `ℤ[i]`, its nontrivial conjugation `starRingEnd GaussianInt`, the residue `a + bi ↦ a + b (mod 2)`, and the 4-cycle drawn at `0, 1, 1+i, i`. Its two leaves are the model's facts: the residue ignores conjugation, and the square's edges are unit vectors | `TwoColourResidue` §4 |
+| the splitting's `[2] ∈ W` | **red**: `classesOfRadicands {7}` does not split — `[7] = [−1]` lies in neither block. **Model**: de Grey's field (§8 of the file, and the `example` applying `fieldOfRadicands_le_sup` at `{3, 5, 7, 11}`) | §8, §9 |
+| the two-colour theorems, all forms | **model**: the named theorem `colorable_two_cycleGraph_four_of_gaussResidue` applies the ring form to `ℤ[i]`, with its nontrivial conjugation `starRingEnd GaussianInt`, the residue `a + bi ↦ a + b (mod 2)`, and the 4-cycle drawn at `0, 1, 1+i, i`. Its two leaves are the model's facts: the residue ignores conjugation, and the square's edges are unit vectors. It carries no local instance | `TwoColourResidue` §4 |
 | `hψσ` | **red**: in `F4` with Frobenius, `Ω · Ω² = 1` and `Ω ≠ 1` — Theorem B's own residue field | §4 |
 | `CharP k 2` | **red**: in `ZMod 3`, `2 · 2 = 1` and `2 ≠ 1` | §4 |
 
@@ -362,7 +374,7 @@ on `z` and on its conjugate. Then every unit-distance graph drawn in `L` is 2-co
 - **Why the characteristic-two hypothesis is not decoration:** the `ZMod 3` red.
 - **Why the functional is additive:** the `ℚ(√5)` remark in the docstring (D10).
 
-### `mqField_le_sup`, with `four_le_chromaticNumber_fieldPlane_sqrtField_inf_comap` and `minusOne_not_mem_map_inf_comap`
+### `fieldOfRadicands_le_sup`, with `four_le_chromaticNumber_planeOver_fieldOfClasses_inf_comap` and `minusOne_not_mem_map_inf_comap`
 
 *For every set `D` of natural numbers, with `W` the square-class group of `D ∪ {2}`, the field `ℚ(√d : d ∈ D)` lies
 in the compositum of the fields of `W`'s classes localizing into `{1,3,2,6}` and of those localizing into
@@ -374,14 +386,14 @@ neither field's square classes contain `[−1]` in their 2-adic image.*
   - **Containment:** the kernel carries it, and more generally — the containment needs no `K`.
   - **`≥ 4`:** the kernel carries it, from `[3], [11]`.
   - **The test's hypothesis:** the kernel carries it; it is stated on the generating classes, which is exactly what
-    the test reads, since the completion of `ℚ(√W)` at 2 is `ℚ₂(√loc2(W))`.
+    the test reads, since the completion of `ℚ(√W)` at 2 is `ℚ₂(√twoAdic(W))`.
   - **`≤ 4`:** the kernel does **not** carry it — that is the test itself at the field level (FS-37).
-- **Against `A, B ⊆ F(√2)`:** the pieces are subgroups of `W`, so their fields lie in `sqrtField W`, by
-  `gc_sqrtField_kummerClasses.monotone_l`. Worth one `example` in the spec.
-- **One reading trap:** `LocTwo` is a coordinate model of `ℚ₂^×/(ℚ₂^×)²` whose correctness is Hensel's lemma, not a
-  kernel theorem. `locPrime`'s docstring says so, and the read-aloud must too.
+- **Against `A, B ⊆ F(√2)`:** the pieces are subgroups of `W`, so their fields lie in `fieldOfClasses W`, by
+  `gc_fieldOfClasses_classesOfField.monotone_l`. Worth one `example` in the spec.
+- **One reading trap:** `TwoAdicSqClass` is a coordinate model of `ℚ₂^×/(ℚ₂^×)²` whose correctness is Hensel's lemma, not a
+  kernel theorem. `twoAdicOfPrime`'s docstring says so, and the read-aloud must too.
 
-### `mqField_deGrey_le`, with its two `minusOne_not_mem_map_classGroup_…` lemmas
+### `fieldOfRadicands_deGrey_le_sup`, with its two `minusOne_not_mem_map_classGroup_…` lemmas
 
 *De Grey's coordinate field `ℚ(√3,√5,√7,√11)` lies in `ℚ(√2,√3,√11,√35) · ℚ(√3,√10,√11,√35)`, and the square
 classes generating each factor have no `[−1]` in their 2-adic span.*
@@ -411,10 +423,10 @@ against the committed definitions. The orders below follow it.
 - **Order:**
   1. the lifting lemma (the probe's Q1b argument, with `Submodule.mem_sup` applied to the image);
   2. `sqClass_zero`, `sqClass_one`, `sqClass_mul`, `sqClass_prime`;
-  3. `loc2_sqClass_prime`, `loc2_sqClass_three`, `loc2_sqClass_eleven`;
+  3. `twoAdic_sqClass_prime`, `twoAdic_sqClass_three`, `twoAdic_sqClass_eleven`;
   4. the block facts (`Submodule.mem_span_pair` and a four-case `decide`);
-  5. the local splitting (case analysis on the eight elements of `LocTwo`: in a block, or `[5]` / `[−1]`, which
-     `[2]` carries into `blockTen`).
+  5. the local splitting (case analysis on the eight elements of `TwoAdicSqClass`: in a block, or `[5]` / `[−1]`, which
+     `[2]` carries into `spanThreeTen`).
 - **Stop rule:** if `Finsupp.comapDomain` fights for more than 60 lines, redefine `sqClass` through
   `Finsupp.onFinset n.primeFactors`, and record the change.
 
@@ -423,15 +435,15 @@ against the committed definitions. The orders below follow it.
 - **Order:**
   1. `isSquare_of_sqClass_eq_zero` via `Nat.sq_mul_squarefree` (a squarefree natural with all exponents even is 1);
   2. `exists_sqClass_eq` (the product of the support's primes, by `Finset.induction`);
-  3. `kummerClasses`'s three closure fields (`√a · √b = √(ab)`; `c : ZMod 2` by cases);
-  4. `gc_sqrtField_kummerClasses`:
+  3. `classesOfField`'s three closure fields (`√a · √b = √(ab)`; `c : ZMod 2` by cases);
+  4. `gc_fieldOfClasses_classesOfField`:
      - (→) a class in `W` is some `n`'s class, and `√n` is a generator;
      - (←) a generator `√n` with `sqClass n = sqClass m` and `√m ∈ F` has `n · m = s²`, so `√n = s / √m`, with
        `m = 0` or `n = 0` trivial;
-  5. `mqField_eq_sqrtField_classGroup` (both directions through the connection);
+  5. `fieldOfRadicands_eq_fieldOfClasses` (both directions through the connection);
   6. the planes;
-  7. `mqField_le_sup` (from `mqField_eq_sqrtField_classGroup` at `insert 2 D`, monotonicity, and
-     `sqrtField_eq_sup`);
+  7. `fieldOfRadicands_le_sup` (from `fieldOfRadicands_eq_fieldOfClasses` at `insert 2 D`, monotonicity, and
+     `fieldOfClasses_eq_sup`);
   8. the `χ ≥ 4` lemma.
 - **Stop rule:** if B2 passes 250 lines or a day, land B1 and B3 (B3 does not need B2) and report B2 **not landed**,
   naming the lemma that resisted.
@@ -444,15 +456,15 @@ facts through `Submodule.map_span`.
 ### Phase C — optional, only if A and B landed under their prices
 
 Two items, independent:
-1. **Heule-510 into the compositum, in the kernel.** Put Heule-510 into `fieldPlane (mqField {3, 11, 14, 70})`:
-   - `Q4.eval` of a `√7`-free element lies in `mqField {3, 5, 11}`;
-   - `√5 = √70 / √14` lies in `mqField {3, 11, 14, 70}`;
+1. **Heule-510 into the compositum, in the kernel.** Put Heule-510 into `planeOver (fieldOfRadicands {3, 11, 14, 70})`:
+   - `Q4.eval` of a `√7`-free element lies in `fieldOfRadicands {3, 5, 11}`;
+   - `√5 = √70 / √14` lies in `fieldOfRadicands {3, 11, 14, 70}`;
    - conclude `5 ≤ χ` from `chromaticNumber_heule510` through a graph homomorphism.
 
    This makes the handoff's item 2 a kernel fact: two fields passing the test whose compositum's plane needs five
    colours. **Stop rule:** half a day. **Risk:** how `heule510.point` relates to `Pt.toPlane` in `ℂ`.
-2. **De Grey's factors are the pieces, in the kernel.** `sqrtField (classGroup {2,3,5,7,11} ⊓ blockTwo.comap loc2) =
-   mqField {2, 3, 11, 35}`, and the same for `blockTen`. The `≥` direction is four membership checks. The `≤`
+2. **De Grey's factors are the pieces, in the kernel.** `fieldOfClasses (classesOfRadicands {2,3,5,7,11} ⊓ spanThreeTwo.comap twoAdic) =
+   fieldOfRadicands {2, 3, 11, 35}`, and the same for `spanThreeTen`. The `≥` direction is four membership checks. The `≤`
    direction is a 32-case analysis on the classes of `{2,3,5,7,11}`. **Stop rule:** two hours.
 
 ### Traps
@@ -460,17 +472,16 @@ Two items, independent:
 1. `σ.restrict A A hσ` — copy the coercion pattern from `ResidueColouring.map_mul_conj_eq_zero_iff`.
 2. `Module (ZMod 2) k` does not exist until you make it: `letI := ZMod.algebra k 2`. Vector spaces are projective
    through `Module.Projective.of_free` and `Module.Free.of_divisionRing`.
-3. **`IsReduced (ZMod 2)` needs the import `Mathlib.Algebra.Field.ZMod` and `Fact (Nat.Prime 2)` in scope** (found at the
-   domain pass by tracing the instance search; §2). The module imports the file, and the model example supplies the
-   fact with a local `haveI : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩`. Do not replace it with a global `instance`: an
-   instance is a permanent speech act into every future search.
+3. **`IsReduced (ZMod 2)` needs the import `Mathlib.Algebra.Field.ZMod`** (found at the domain pass by tracing the
+   instance search; §2). The module imports it. `Fact (Nat.Prime 2)` is a global instance, so a consumer at
+   `k = ZMod 2` needs nothing more: the named model carries no local instance.
 4. `Real.sqrt (n : ℝ)` needs `Nat.cast_nonneg` at every `Real.sqrt_mul`.
 5. `lake env lean` without `-DautoImplicit=false` auto-binds stray identifiers: green there is not green.
 6. **`tools/fplane.py usable` tests radicands one at a time.** `--rads 22,33` wrongly passes at 11. Do not use it for
    groups with two radicands divisible by the same prime (`VERIFICATION.md` §3).
 7. **The skeleton's written proofs lean on leaves.**
-   - `inf_comap_blockTwo_sup_inf_comap_blockTen`'s `simpa [loc2_sqClass_prime Nat.prime_two, locPrime]` needs
-     `loc2_sqClass_prime` to state `locPrime p` exactly.
+   - `inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen`'s `simpa [twoAdic_sqClass_prime Nat.prime_two, twoAdicOfPrime]` needs
+     `twoAdic_sqClass_prime` to state `twoAdicOfPrime p` exactly.
    - `multiquadratic_decomposition`'s `Submodule.subset_span (Set.mem_insert _ _)` needs `(1, 1, 0)` first in both
      block spans.
 
@@ -486,10 +497,10 @@ Two items, independent:
    green.
 9. **Headline docstrings state what is not proved** (the §R2 gap; `χ ≤ 4` for the pieces). A docstring that implies
    more fails the read-aloud.
-10. **`Subfield.subset_closure` cannot infer its set through `mqField` or `sqrtField`** when an anonymous constructor
-    supplies the membership, so use `sqrt_mem_mqField`, which names the image. (Inside the connection's proof the
+10. **`Subfield.subset_closure` cannot infer its set through `fieldOfRadicands` or `fieldOfClasses`** when an anonymous constructor
+    supplies the membership, so use `sqrt_mem_fieldOfRadicands`, which names the image. (Inside the connection's proof the
     expected type is fixed by the hypothesis, and `⟨n, hv, rfl⟩` works.)
-11. **An anonymous constructor cannot see through `fieldPlane` or `seamPlane`**: go through `mem_fieldPlane` and
+11. **An anonymous constructor cannot see through `planeOver` or `seamPlane`**: go through `mem_planeOver` and
     `FieldWall4.mem_seamPlane_iff`.
 12. **`simp` does not rewrite an `if` whose condition is an equality of subtypes** after `ext ⟨q, hq⟩`; split with
     `by_cases h : p = q` first (§M2, `sqClass_prime`).
@@ -507,8 +518,36 @@ Two items, independent:
 
 1. `./scripts/build.sh` green.
 2. Zero `sorry` in both modules (`rg -n sorry Proofs/HadwigerNelson/TwoColourResidue.lean Proofs/HadwigerNelson/SquareClass.lean`).
-3. Every headline registered in `scripts/Axioms.lean` under a new section. `./scripts/axioms.sh` reads the standard
-   three for each, and its count moves by exactly the number registered.
+3. Every public declaration below is registered in `scripts/Axioms.lean` under a new section, and
+   `./scripts/axioms.sh` reads the standard three for each. Its count moves by exactly the number registered.
+   - `TwoColourResidue`:
+     - `exists_addMonoidHom_zmod_two_apply_one_ne_zero`
+     - `map_mul_self_eq_one_of_mem_normOne_of_conj_eq`
+     - `map_eq_one_of_mem_normOne_of_conj_eq`
+     - `normOneColoringTwo`
+     - `colorable_two_of_normOne_of_conj_eq`
+     - `colorable_two_of_valuationSubring_of_conj_eq`
+     - `colorable_two_unitDistance_induce_of_valuationSubring`
+     - `colorable_two_cycleGraph_four_of_gaussResidue`
+   - `SquareClass`, root namespace: `four_le_chromaticNumber_planeOver`.
+   - `SquareClass`, namespace `SquareClass.`:
+     - `inf_comap_sup_inf_comap_eq`
+     - `isSquare_of_sqClass_eq_zero`
+     - `exists_sqClass_eq`
+     - `le_inf_spanThreeTwo_sup_inf_spanThreeTen`
+     - `inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen`
+     - `minusOne_not_mem_map_inf_comap`
+     - `map_twoAdic_classesOfRadicands_le_iff`
+     - `sqrt_mem_iff_of_sqClass_eq`
+     - `gc_fieldOfClasses_classesOfField`
+     - `fieldOfRadicands_eq_fieldOfClasses`
+     - `fieldOfClasses_eq_sup`
+     - `fieldOfRadicands_le_sup`
+     - `four_le_chromaticNumber_planeOver_fieldOfClasses_inf_comap`
+     - `multiquadratic_decomposition`
+     - `fieldOfRadicands_deGrey_le_sup`
+     - `map_twoAdic_deGreyTwo_le`
+     - `map_twoAdic_deGreyTen_le`
 4. `./scripts/vacuity.sh` and `./scripts/vacuity.sh --self-test` green. Read the digest's count changes and put the
    new counts into `CLAUDE.md` § The gate.
 5. `python3 tools/check_architecture.py` PASS, with the two rows' "Skeleton (FS-36)" removed and the row column set
@@ -528,7 +567,7 @@ Two items, independent:
    > characteristic-2 ring that conjugation does not move two-colours every unit-distance graph over its valuation
    > subring (`colorable_two_unitDistance_induce_of_valuationSubring`); a square-class group holding [2] is the sum of
    > two pieces whose 2-adic images avoid [−1], so every real multiquadratic field lies, once √2 is adjoined, in the
-   > compositum of two fields that pass the four-colour test (`mqField_le_sup`) — each holding a Moser spindle when
+   > compositum of two fields that pass the four-colour test (`fieldOfRadicands_le_sup`) — each holding a Moser spindle when
    > the field contains ℚ(√3,√11); de Grey's field lies in ℚ(√2,√3,√11,√35)·ℚ(√3,√10,√11,√35). [hand] For real
    > multiquadratic F, χ(F²) = 2 iff no odd square class is ≡ 3 (mod 4). **Credit:** the decomposition is ChatGPT's
    > (OpenAI, with Kooshi, 2026-09-11). **Prior art:** the mechanism is Woodall's, `[Fischer1990]` Thm 8,
@@ -571,7 +610,7 @@ Two items, independent:
 | P4 | the Galois connection needs nothing Kummer-theoretic beyond `exists_sqClass_eq` and the square lemma | any appeal to the linear independence of square roots |
 | P5 | no existing module is edited except `Proofs.lean`, `ARCHITECTURE.md` and `scripts/Axioms.lean` | any other edit |
 | P6 | `frobenius_inj` closes `eq_one_of_mul_self_eq_one_of_charTwo` in ≤ 3 lines | a longer proof |
-| P7 | the local splitting closes by case analysis on the eight elements of `LocTwo` in ≤ 25 lines | a longer proof, or a proof that needs a dimension argument |
+| P7 | the local splitting closes by case analysis on the eight elements of `TwoAdicSqClass` in ≤ 25 lines | a longer proof, or a proof that needs a dimension argument |
 
 ---
 
@@ -865,6 +904,87 @@ theorem exists_addMonoidHom_zmod_two_apply_one_ne_zero (k : Type*) [Ring k] [Cha
   (s := 14)`, since `14 · 70 = 14² · 5`. So Phase C's first item starts from a stated lemma rather than a
   derivation.
 
-## §M3 — Experience-modeling pass
+## §M3 — Experience-modeling pass (2026-09-11)
 
-*(to be written by the pass)*
+*A fresh invocation of `debruijn-experience-modeling`, scoped to FS-36.*
+
+**What it did:**
+- designed the surface four consumers meet;
+- renamed the skeleton;
+- validated the result from a cold import.
+
+**§1–§11 above use the final names.** §M1 and §M2 are records and keep the names of their time; the table below maps
+them.
+
+### The consumers, and what each holds at the moment of use
+
+| consumer | holds | what it needed from the surface |
+|---|---|---|
+| **the paper's read-aloud gate** (FS-20) | the statement text, nothing else | names that say what each object is, and docstrings that say what is *not* proved |
+| **FS-37** (field-level criteria) and **FS-19** (the 𝔭-adic distance classification) | Mathlib's number-field vocabulary; a need to evaluate colourings on pairs | no collision with Mathlib's `ClassGroup`; the four-colour test stated on a field's square classes; the two-colouring as data |
+| **automation** (`simp`, `exact?`) | the tagged set; statement shapes | a confluent simp set; statements in the shapes the common goals take |
+| **the gates** (`vacuity.sh`, `scripts/Axioms.lean`, `ARCHITECTURE.md`, `tools/check_architecture.py`) | declarations by name | a named inhabitant for the model; a registration list; row text naming real identifiers |
+
+### The renames
+
+| planning and §M1–§M2 name | final name |
+|---|---|
+| `mqField`, `sqrtField`, `kummerClasses`, `classGroup` | `fieldOfRadicands`, `fieldOfClasses`, `classesOfField`, `classesOfRadicands` |
+| `LocTwo`, `loc2`, `locPrime` | `TwoAdicSqClass`, `twoAdic`, `twoAdicOfPrime` |
+| `minusOne`, the literals `(0,0,1)`, `(1,1,0)`, `(0,1,0)`, `(0,1,1)` | `TwoAdicSqClass.minusOne`, `.two`, `.three`, `.five`, `.ten` |
+| `blockTwo`, `blockTen` | `spanThreeTwo`, `spanThreeTen` |
+| `fieldPlane`, `mem_fieldPlane`, `fieldPlane_seamField`, `four_le_chromaticNumber_fieldPlane` | `planeOver`, `mem_planeOver`, `planeOver_seamField`, `four_le_chromaticNumber_planeOver` — moved to the root `HadwigerNelson` namespace |
+| `gc_sqrtField_kummerClasses`, `sqrtField_sup`, `sqrtField_eq_sup`, `mqField_eq_sqrtField_classGroup` | `gc_fieldOfClasses_classesOfField`, `fieldOfClasses_sup`, `fieldOfClasses_eq_sup`, `fieldOfRadicands_eq_fieldOfClasses` |
+| `sqrt_mem_mqField`, `mqField_mono`, `seamField_le_mqField`, `seamField_le_sqrtField`, `mqField_le_sup` | `sqrt_mem_fieldOfRadicands`, `fieldOfRadicands_mono`, `seamField_le_fieldOfRadicands`, `seamField_le_fieldOfClasses`, `fieldOfRadicands_le_sup` |
+| `le_inf_blockTwo_sup_inf_blockTen`, `inf_comap_blockTwo_sup_inf_comap_blockTen`, `minusOne_not_mem_blockTwo`/`…Ten` | `le_inf_spanThreeTwo_sup_inf_spanThreeTen`, `inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen`, `minusOne_not_mem_spanThreeTwo`/`…Ten` |
+| `mem_blockTwo_or_mem_blockTen_or_add_two_mem_blockTen` | `mem_spanThreeTwo_or_mem_spanThreeTen_or_add_two_mem`, now **private** |
+| `loc2_sqClass_prime`, `loc2_sqClass_three`, `loc2_sqClass_eleven`, `map_loc2_classGroup_le_iff` | `twoAdic_sqClass_prime`, `twoAdic_sqClass_three`, `twoAdic_sqClass_eleven`, `map_twoAdic_classesOfRadicands_le_iff` |
+| `four_le_chromaticNumber_fieldPlane_sqrtField_inf_comap` | `four_le_chromaticNumber_planeOver_fieldOfClasses_inf_comap` |
+| `mqField_deGrey_le`; `minusOne_not_mem_map_classGroup_two_three_eleven_thirtyFive`, `…_three_ten_eleven_thirtyFive` | `fieldOfRadicands_deGrey_le_sup`; `map_twoAdic_deGreyTwo_le`, `map_twoAdic_deGreyTen_le`, now stating *which* subgroup avoiding `[−1]` the classes lie in. The four-colour test itself is drawn in an `example` |
+| `eq_one_of_mul_self_eq_one_of_charTwo` | unchanged, now **private** |
+| the model `example` | the named theorem `colorable_two_cycleGraph_four_of_gaussResidue` |
+| — | **new**: `normOneColoringTwo` and `normOneColoringTwo_apply` (D19) |
+
+### Decisions
+
+D17 (the naming family), D18 (the simp set), D19 (the colouring as data), D20 (the bundled headline kept for reading
+aloud), D21 (`planeOver` in the root namespace) and D22 (no abbreviation for a piece; two private helpers). Each is in
+§3 with its alternative, its reason and its confidence.
+
+### Validation as the user
+
+- **The new-import test** (`build/probe-sqclass/Probe6.lean`: a cold file importing only the two modules; 3.8 s wall,
+  20 s CPU on the desktop).
+  - The four goals of the simp set close by bare `simp`.
+  - The named Gaussian model elaborates at `k = ZMod 2` with no local instance.
+  - `exact?` returns the intended lemma for each of six common goals, and every suggestion is pasteable:
+    - `exact inf_comap_spanThreeTwo_sup_inf_comap_spanThreeTen h2`
+    - `exact gc_fieldOfClasses_classesOfField`
+    - `exact fieldOfRadicands_eq_fieldOfClasses D`
+    - `exact map_twoAdic_classesOfRadicands_le_iff.mpr h`
+    - `exact four_le_chromaticNumber_planeOver hF`
+    - `exact (sqrt_mem_iff_of_sqClass_eq (id (Eq.symm h))).mp hm`
+- **The simp set's confluence, checked by hand.** The critical pairs of `sqClass_zero`, `sqClass_one` and
+  `sqClass_sq` with Mathlib's `zero_pow` and `one_pow` join (`sqClass (0²)`, `sqClass (1²)`). Adding `sqClass_apply`
+  would create the unjoinable pair `sqClass (b²) p` (D18).
+- **No deprecation aliases.** The renamed declarations exist only in these two skeleton modules, and a scan of
+  `Proofs/` found no other file naming them. "Deprecate, never delete" protects consumers, and there are none.
+- **One uninformative probe, recorded as such.** The "stale name" check in `Probe6.lean` wrapped the old name in
+  `first | … | trivial`, which swallows the unknown-identifier error it meant to show. It is not evidence. Lean's own
+  "unknown identifier" is the breakdown surface for a stale name, and no custom surface is needed.
+- **The read-aloud, re-run on the final names** (§7).
+  `fieldOfRadicands D ≤ fieldOfClasses (classesOfRadicands (insert 2 D) ⊓ spanThreeTwo.comap twoAdic) ⊔ …` reads as
+  "the field of the radicands `D` lies in the compositum of the field of the classes of `D ∪ {2}` whose 2-adic image
+  lies in the span of `[3]` and `[2]`, and …". That matches §7's paragraph without consulting a docstring.
+
+### What the implementer must know about the surface
+
+- **`normOneColoringTwo`'s linter warnings are expected.** `hσ`, `hψσ`, `hl` and `hnorm` are used only in its
+  properness proof, so the skeleton may draw unused-variable warnings; they go quiet when that leaf is proved.
+- **Keep `sqClass_apply` out of the simp set** (D18). A proof that wants coordinates writes `simp [sqClass_apply, …]`.
+- **`planeOver` lives in the root namespace.** `open HadwigerNelson` brings it; `open HadwigerNelson.SquareClass` does
+  not.
+- **The `decide` proofs in §M2 now meet named classes.** `simp only [spanThreeTwo, spanThreeTen,
+  Submodule.mem_span_pair]` still turns membership into a finite existential, and `decide` unfolds
+  `TwoAdicSqClass.two` and its siblings itself. If it does not, add them to the `simp only` list.
+- **The `ARCHITECTURE.md` rows still say "Skeleton (FS-36)".** Remove that at the close (§9 item 5).
