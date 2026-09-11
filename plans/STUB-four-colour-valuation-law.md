@@ -72,7 +72,7 @@ Four works touch this law and none of them draws its consequence.
   reproduces ten for ten of the data below.
 * **`[Heule2021]`**, *Odd-distance virtual edges in unit-distance graphs*, Geombinatorics 31(2) (2021) —
   **asks for this theorem in print.** He states that if an odd `d` is a `k`-virtual edge of a subset of the plane
-  then so is `1/d`, meaning it of *"larger objects like `ℚ(√3,√11)`"*; `[PartsOdd2022]` §4 reports a finite
+  then so is `1/d`, meaning it of *"larger objects like `ℚ(√−3,√−11)`"*; `[PartsOdd2022]` §4 reports a finite
   counterexample and writes that *"a more accurate formulation of the statement and its proof are of certain
   interest."* Our law is that formulation on the necessary side: `v_𝔭(1/d) = −v_𝔭(d)`, so **the condition is
   invariant under `d ↦ 1/d`**, the odd integers are exactly the integer case of `v_𝔭(d) = 0`, and a finite
