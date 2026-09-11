@@ -50,9 +50,18 @@ tightened the same day on Poros's card 5). One sentence per claim, each a test t
    Reducing his published `A` to his `M` tests only reduction, so at least one held-out run must start
    **below** his accumulator and reach his `|M|` with the frozen loop.
 4. **Beat.** Headline: a unit-distance graph with **fewer than 509 vertices** that refuses four colours.
-   Secondary: **509 vertices with fewer than 2,442 edges**, his own tie-break (`[Parts2020a]` §1, *"it is
+   Secondary: **509 vertices with fewer than 2,406 edges**, his own tie-break (`[Parts2020a]` §1, *"it is
    customary to choose among these the graph with the fewest edges"*). **Either is called a record only
    once certified in the Lean kernel** (`UDCert` plus the LRAT chain, exact geometry).
+
+   *Corrected 2026-09-11 by the product owner: this bar first read "fewer than 2,442 edges", which was
+   **already beaten in print** — `[deGreyParts2023]` discards 36 edges from the 509 and the published state
+   is **2,406** (phase D's planner, §X.1). The 2,442 figure is the record as `[Parts2020a]` published it,
+   not the state of the art. Two consequences, both good: an edge sweep of the 509 has a **known non-zero
+   answer**, so it is a positive control as well as a record attempt; and his discard was a non-exhaustive
+   greedy pass, so the exact edge minimum at 509 vertices is unrun by anyone (phase D, D6). Edge removal
+   can never make a vertex removable — if `G − v` is 4-colourable so is `(G − e) − v` — so no edge sweep
+   can cost the vertex claim or phase C's C4.1 control.*
 
 ### S.2 — What phase C's planning measured (2026-09-11)
 
