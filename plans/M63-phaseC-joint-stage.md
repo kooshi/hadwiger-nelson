@@ -376,7 +376,7 @@ def run_reduce(args) -> dict:
  "+member_profiles": {"orbits": [[2, 0, 6, 4], "…"], "rows": [[4, 6, 6, 8], "…"]},
  "A": ["…"], "+A_fp": "fp_tuples(A)", "+A_canonical_fp": "fp_tuples(min image of A)",
  "hypergraph": {"degree_1": 312, "correction_sets": 703, "sets": ["…"], "by_size": {}, "note": "…"},
- "asks": {"colourable": {}, "refusing": {}, "undecided": 0, "+wall_s": 600.0},
+ "asks": {"colourable": {}, "refusing": {}, "undecided": 0, "+wall_s": 600.0, "+phase1_unknown": []},
  "+undecided_candidates": [],
  "stage_fingerprint": "…", "base_fingerprint": "…", "seconds": 605.0, "provenance": {}
 }
@@ -499,11 +499,18 @@ def table_shading(pdf: str, page: int, table: str, *, dpi: int = 200, gray=(224,
     Returns, per orbit row, the label cell's shading (his 'stable' marker, 'in the first column of Tables
     2 and 3') and each fill cell's shading (his 'filled' marker)."""
 
-def shading_control(shading, table_json, base) -> dict:
-    """The arithmetic control, which needs no belief about the extraction: a fill cell is shaded iff its
-    value equals its orbit's size ('Filled orbits are highlighted in gray'). Any disagreement lists the
-    cells and makes the extraction `shading-unreliable`; no stable/unstable verdict is then emitted from
-    it.
+def shading_control(shading, table_json, base, level=None) -> dict:
+    """TWO controls, because the first is necessary and not sufficient (§O7).
+
+    (i) On HIS data: a fill cell is shaded iff its value equals its orbit's size ('Filled orbits are
+    highlighted in gray'). Any disagreement lists the cells and makes the extraction
+    `shading-unreliable`; no stable/unstable verdict is then emitted from it. This catches a
+    misread gray and a column misalignment, but not a row misalignment in the label column alone.
+
+    (ii) On OUR data, when `level` is given: a shaded label means stable, and stable implies a constant
+    count, so a shaded label whose orbit's count VARIES in our level is a contradiction — either the
+    shading refers to a different column of Table 2, or our level is not the one that column describes.
+    That is the half with teeth, and it is what makes the partition a gate rather than a transcription.
 
     Table 2 has FOUR {M} columns and ONE first column, so its label shading refers to some column. Test
     the shading against each column's single-valued pattern and report which it is consistent with. Only
@@ -612,8 +619,9 @@ may be deleted, as they already are on the L side.
 
 **The joint problem has more than one relative frame, and they are not equivalent.** Applying a group
 element to the S half alone gives another joint problem; applying one to both halves gives the same
-problem. So the inequivalent frames are the double cosets `Stab(W_L) \\ G / Stab(W_S)`, and **there are
-exactly two here** (measured: `|Stab(A412)| = 12`, `|Stab(g⁻¹A166)| = 6`, two double cosets of size 12).
+problem. So frames in one double coset of `Stab(W_L) \\ G / Stab(W_S)` give isomorphic problems (§O4
+proves that direction; the converse is **not** claimed), and there are **at most two inequivalent
+problems here** (measured: `|Stab(A412)| = 12`, `|Stab(g⁻¹A166)| = 6`, two double cosets of size 12).
 One contains the record. **The other is a second joint problem of the same cost that no one has run** —
 C4b below, if the product owner approves the extra run; otherwise it is F(b)'s first item.
 
@@ -888,3 +896,152 @@ from its cosine. Each was reachable in the skeleton as first written.
 - **Next lemma for free:** D's expansion is `W_{n+1} = A_n ∪ Δ` over vertex sets, with no restatement; E's
   companions attach as extra structure rather than as a fourth side; G swaps the law and the base without
   touching either.
+
+---
+
+## §O — The obligation-modelling pass (WORKFLOW step 5, `debruijn-obligation-modeling`, run fresh)
+
+*What phase C must prove, what it may only test, and what it assumes. The proofs are short because the
+statements were chosen to make them short; each is written out so an implementer can check it rather than
+trust it.*
+
+### O0 — The partition
+
+| prove (here, by hand) | test (a planted control) | assume (named, and named again in every record) |
+|---|---|---|
+| monotonicity on the joint stage (O1); resume soundness (O2); the three undecided sites (O3); the double-coset direction (O4); free-orbit naming (O5); the expected answer of the joint positive control (O9) | every control of §2; the two regenerations; the shading's two halves | CaDiCaL is a correct oracle; PySAT's `interrupt()` is honest (**c1.3 tests it**); the base and group are fixed (`fp_base`); the arena is equivariant under the order-24 group (derived, M62 §R19(1)); **his published minimality of 374 and 136**, which O9's control leans on |
+
+### O1 — Monotonicity survives the joint stage, so everything M63 §O proved carries
+
+`R(S) := W[S ∪ fixed] ∪ C refuses four colours` is **upward closed** in `S`, because an induced subgraph
+of a 4-colourable graph is 4-colourable. *The proof never mentions which vertices are deletable.* So
+making both halves deletable changes nothing in M63 §O: the MCS/MUS duality, phase 1's soundness, the
+hitting-set formulation, the completeness invariant and its lexicographic measure all hold verbatim, and
+`|M| = w* + 1` because the shared centre is the reduced part's only fixed vertex.
+
+**What does not carry, and must not be quietly assumed:** the atom partition at a rung above 1 is still
+unsound in the sense M63 §O(2) proved (it loses minima), and the joint level's closure under a symmetry
+group is still a measured fact, not a theorem (O6).
+
+### O2 — Exact resume, and the one line that makes it true
+
+Split the run's state into **problem facts** and **launch facts**:
+
+| decided fact | problem or launch? |
+|---|---|
+| the pin verdict; phase 1's `critical`/`droppable` verdicts; each correction set (verified by a model); each recorded minimum and `w*` | **problem** — the 4-colourability of a fixed finite graph is determined, so a verdict does not depend on when it was asked |
+| a candidate the wall could not decide; a phase-1 atom the wall could not decide; the budgets themselves | **launch** |
+
+> **Claim.** A relaunch that (i) refuses unless `stage.identity()` and `problem_sha256` match, (ii)
+> restores the problem facts, (iii) **returns every launch fact to the pool** — undecided candidates
+> unblocked, unknown phase-1 atoms re-asked — and (iv) continues, ends with the same `(E, w*, method)` as
+> one uninterrupted run under the union of the budgets.
+>
+> *Proof.* By (i) the search space and the weights are the same. By (ii) and the table above, every
+> restored fact is a fact about that space. The level loop rebuilds its MaxSAT instance each iteration
+> from `(Y, blocked)` with `blocked = E ∪ U`; after (iii) `U = ∅`, so the instance is exactly the one an
+> uninterrupted run would hold at that point, and M63 §O(1c)'s preservation argument applies unchanged.
+> Termination is the same lexicographic measure with `|U|` added to the first component: each iteration
+> grows `E`, `Y` or `U`, and all three are bounded. ∎
+
+**What resume does not promise:** the correction sets harvested *after* the resume point. A fresh
+incremental solver may return a different model for the same colourable ask, and the shrink starts from
+that model. **The level is a problem fact; the harvest order is a launch artifact.** Any control that
+demands an identical `Y` across an interruption is asserting something false about correct code.
+
+**One residual risk, priced:** a corrupted checkpoint would restore unverified correction sets and could
+make the lower bound unsound. Hence `--verify-checkpoint`, which re-asks a sample on load; off by
+default, on whenever a checkpoint has been moved or edited.
+
+### O3 — An undecided ask at each of its three sites
+
+| site | treated as | why it is sound | what it costs |
+|---|---|---|---|
+| **phase 1**, `ask(All − {a})` | *not critical* | a degree-1 hyperedge is only added on `sat`; omitting a true hyperedge shrinks `Y`, and `mhs(Y) ≤ mhs(Y*)` is a lower bound either way | the atom stays deletable; the unknowns are listed in `asks.phase1_unknown` |
+| **the shrink** | *still needed* | the shrink starts from a set that IS a correction set and only removes an element when the remainder is verified colourable, so the result is always a correction set — possibly not minimal | the set is flagged `minimal: unknown`, and the antichain control must tolerate it rather than fail |
+| **the level loop**, candidate `h` | *neither a minimum nor a correction set* | blocking `h` may remove an unrecorded R-true set of weight `w*`, so **the completeness invariant is lost** and the count method becomes `bounded-below`; the BOUND stays sound, because the MaxSAT optimum over `Y ⊆ Y*` is a lower bound regardless | `h` is recorded in `undecided_candidates`, and `Bound.undecided = |U|` |
+
+**`Bound.undecided` counts candidates, not asks.** A phase-1 unknown threatens no claim, so it is reported
+separately; a level candidate does, and it is what must keep `Bound.closed` false.
+
+### O4 — Frames in one double coset give the same problem; the converse is not claimed
+
+> **Claim.** If `h' = a·h·b` with `a ∈ Stab(W_L)` and `b ∈ Stab(W_S)`, the joint problems `(W_L, h·W_S)`
+> and `(W_L, h'·W_S)` are isomorphic by a weight-preserving bijection of selections, so they have the
+> same minimum and corresponding level sets.
+>
+> *Proof.* Apply `a` diagonally to both halves. It is an automorphism of the arena (it preserves unit
+> distance and both polynomial conditions of the cross-edge law over `K`, M62 §R19(1)), it fixes `W_L`,
+> and it sends `h·W_S` to `a·h·W_S = h'·b⁻¹·W_S = h'·W_S`. Selections map across bijectively with their
+> weights, and `R` is preserved. ∎
+
+**The converse is false as a claim and unproven as a fact**: two different double cosets may still give
+isomorphic problems. So the honest sentence is *"at most two inequivalent joint problems"*, and C4b
+measures rather than assumes. Any report saying "there are two joint problems" is overclaiming.
+
+### O5 — A group element is named by its image of a free point
+
+> **Claim.** If `Stab(x)` is trivial then `g ↦ g·x` is injective on `G`, so `g·x` names `g`.
+> *Proof.* `g·x = g'·x ⟹ g'⁻¹g ∈ Stab(x) = {1}`. ∎
+
+Measured: `(2,0,4,2)` has 24 distinct images under the order-24 group, so its stabiliser is trivial.
+**Obligation on the instrument:** assert `|{g·x : g ∈ G}| == |G|` before naming anything that way, and
+refuse the naming if the base or the group ever changes so that it fails.
+
+### O6 — What a count "up to H" means when the level may not be closed
+
+Counting `|{M}|` up to `H` is the number of `H`-**orbits meeting** the level, and that equals the number
+of orbits **contained** in it only when the level is `H`-closed. For his convention — the stabiliser of
+the reduced part, with the frozen part free to move — closure is **measured** on both M63 stages and is
+**not** a theorem: `g ∈ Stab(W_L)` gives `g(M) ∪ g(C)` refusing, not `g(M) ∪ C`. So `canonical_counts`
+reports `closed_under_H`, and a count taken where it is false says "orbits meeting the level".
+
+### O7 — The shading needs two controls, because the arithmetic one is necessary and not sufficient
+
+His caption gives an independent ground truth for the **fill** cells (shaded ⟺ filled ⟺ value = orbit
+size), which catches a misread gray and a column misalignment. It cannot catch a row misalignment in the
+**label** column, which is the column the partition is read from. The second control uses *our* level:
+**stable implies a constant count**, so a shaded label whose orbit's count varies in our level is a
+contradiction — either the shading refers to another of Table 2's four `{M}` columns, or our level is not
+the one that column describes. Both outcomes are findings; neither is silent.
+
+### O8 — What the regeneration control does and does not prove
+
+`regenerated-identical` proves that the committed driver computes the same level from the same stage. It
+does **not** prove the stored record was right. And its two failure modes are not the same: a differing
+`Y` with an equal level is expected (O2's launch artifact), while a differing **level** is a defect. The
+control names which.
+
+### O9 — The joint positive control's answer is a theorem, given his minimality
+
+> **Claim.** Over `W = v374e1860 ∪ ρ·v136e564` with both halves deletable, the only refusing selection is
+> the whole of it, so the minimum is 508 atoms (509 vertices) with exactly one minimum.
+>
+> *Proof.* Let `(L', S') ⊆ (L374, S136)` refuse. By upward closure `(L', S136)` refuses, so `|L'| ≥ 374`
+> by the minimality of 374 against `S136`; and `(L374, S')` refuses, so `|S'| ≥ 136` by the minimality of
+> 136 against `L374`. Hence `L' = L374` and `S' = S136`. ∎
+
+So c4.1 is a control with a **derived** expected answer, which is what a positive control should be. If it
+comes back otherwise, either one of his two minimality claims is wrong or our stage is not his object —
+and both are loud findings rather than a tuning nudge. It also discharges M63 §4 phase B's unchecked
+control, that every single-vertex deletion of the record is colourable.
+
+### O10 — The column attribution is a report, not a choice
+
+For a candidate profile set `P`, the printed column is *consistent with* `P` when, orbit by orbit, the
+range over `P` equals the printed range. C3 computes consistency for four candidates — M6A's profiles,
+M6B's, their union, their intersection — and **reports every consistent one**. Two may be consistent at
+once; the instrument must not pick. And a range is a coarse invariant of a profile set, so consistency is
+evidence about the column's source, never proof of it.
+
+### O11 — What each control proves, and what it would still miss
+
+| control | certifies | blind to |
+|---|---|---|
+| c1.1 resume | the relaunch reproduces the level | whether the level is right (c1.7, c2.\*) |
+| c1.3 wall | the wall interrupts and the bound opens | whether 600 s is the right wall |
+| c1.5 freeze | all five refusals fire | whether the frozen config is the one D should have frozen |
+| c1.7 regeneration | the driver computes the stored level | whether the stored level was right |
+| c2.9 Table 6 | the `A`-column checker agrees where his table agrees | a systematic transcription error — **which is why Tables 5 and 7, known to disagree, are run in the same pass: the three together exercise both polarities** |
+| c4.1 joint positive | the joint search finds a known answer (O9) | whether a bigger joint problem is searched correctly |
+| c4.3 degeneracy | the joint stage reduces to the one-sided stage | whether the joint atoms are weighted right — covered by c4.1's 508 |
