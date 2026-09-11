@@ -1009,3 +1009,50 @@ rewritten. "Code lines" means non-blank lines outside comments and docstrings; "
     strict-implicit.
   - `normOneColoringTwo_apply` gained a docstring.
 - Review note 2 (the duplicated header row of §4's estimates table) is fixed.
+
+### R2 Phase B — `SquareClass.lean` (B1, B2 and B3): landed
+
+- **One pass, one commit.** All three sub-phases were written from §M2's routes and compiled together, so they share a
+  commit. The per-section counts below keep the phase split.
+- **The first compile** gave five errors from two causes. Both were fixed without touching a statement:
+  - `norm_num` does not prove `Nat.Prime 7` or `Nat.Prime 11` without `Mathlib.Tactic.NormNum.Prime`, which the module
+    now imports;
+  - `Set.image_subset` is now `Set.image_mono`.
+
+  Four `simpa using F.one_mem`-shaped closers also drew the unnecessary-`simpa` linter; they are now `simp`. The second
+  compile gave exit 0 and no messages.
+- **Code lines:** 172 in the skeleton, 401 now, 229 added. **P2 (≤ 430) holds**, counted either way. §4 estimated about
+  220 added.
+
+  | phase | sections | code lines now |
+  |---|---|---|
+  | — | §0 `planeOver` | 9 |
+  | B1 | §1–§4 | 126 |
+  | B2 | §5–§7 | 143 |
+  | B3 | §8 | 50 |
+  | spec | §9 | 54 |
+- **P3 holds, narrowly.** Counting proof lines, `isSquare_of_sqClass_eq_zero` (19) is the longest leaf. Next come the
+  `[7]` red (18), then `sqrt_mem_iff_of_sqClass_eq` and `fieldOfRadicands_deGrey_le_sup` (17 each). The longest
+  declaration is the bundled headline (23), and most of that is statement.
+- **P4 holds.** The connection cites `exists_sqClass_eq` and `sqrt_mem_iff_of_sqClass_eq`, which cites
+  `isSquare_of_sqClass_eq_zero`. Nothing appeals to the independence of square roots.
+- **P7 holds:** the local splitting is a two-line `decide` over the eight classes plus an eleven-line lift.
+- **D16's two zero cases**, unprobed at planning, close in four lines: `a = 0` by `simp`; `b = 0` makes `a` a perfect
+  square with a natural root.
+- **Statement changes, recorded openly** (the main session's review note 1). Nothing in the approved skeleton was
+  weakened.
+  - **`multiquadratic_decomposition` now carries every clause of the handoff's sentence**: `ℚ(√3,√11) ⊆ A, B`;
+    `A, B ⊆ ℚ(√(D ∪ {2}))`; `ℚ(√D) ⊆ A ⊔ B`; `χ ≥ 4` for both planes; the test on both pieces. The clauses are grouped
+    in pairs, with `A` and `B` bound by `let`. It is strictly stronger than the approved statement.
+  - **Two parts were named for it**, parametrized by the plane `U` (D13, D22):
+    - `seamField_le_fieldOfClasses_inf_comap`, the `K ⊆ A` clause, which the `χ ≥ 4` lemma now cites;
+    - `fieldOfClasses_inf_comap_le_fieldOfRadicands`, the `A ⊆ F(√2)` clause. The spec's example now covers both
+      pieces.
+  - **One API lemma was added**, `sqrt_mem_of_mul_eq_sq_mul`: `a · b = s² · c` with `s ≠ 0` puts `√c` in every field
+    holding `√a` and `√b`. B3 and the `√5` spec example use it, and Phase C's first item would start from it.
+  - **Two private helpers** compute `twoAdic (sqClass 10)` and `twoAdic (sqClass 35)`.
+  - **`isSquare_of_sqClass_eq_zero` lost its `n ≠ 0` hypothesis.** This was found while designing the mutation audit.
+    The statement is true at `0`, since `0 = 0 · 0`, but the proof used the hypothesis. Deleting it would therefore
+    have broken the proof, and a deletion audit would have scored it load-bearing although the truth does not need
+    it. It is the same kind of side condition D16 removed. The fix costs two lines, and its two callers drop an
+    argument.
