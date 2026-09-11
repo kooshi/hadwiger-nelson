@@ -67,7 +67,7 @@ contributions, exposition, and the M58–M61 sieve arc. What clears the bar:
   `leanprover/comparator` (statement equivalence, axiom whitelist, kernel replay; its nanoda run is the
   independent-kernel publication gate).
 
-`ARCHITECTURE.md` holds the module DAG and the milestone roadmap; `plans/` holds per-milestone subplans and
+`ARCHITECTURE.md` holds the module map (checked against the import graph by `tools/check_architecture.py`) and the roadmap through M20; `plans/` holds per-milestone subplans and
 stubs. **The bibliography is explicit and maintained (Kooshi, 2026-09-06): `BIBLIOGRAPHY.md`.** Every
 external work this project cites, reproduces, depends on, or corrects is an entry there — added the day it
 is first used, with what of ours rests on it, where our copy is (`~/source/library/`), and how much of it has

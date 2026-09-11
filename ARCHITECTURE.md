@@ -1,744 +1,679 @@
 # Architecture — the Hadwiger–Nelson problem in Lean 4
 
 > How many colours does the plane need so that no two points at distance exactly 1 share one?
-> Nelson, 1950. Bounded in `[4,7]` that same year; de Grey moved the floor to 5 in 2018. This
-> workspace formalizes the floor and then tries to raise it.
+> Nelson, 1950; bounded in `[4, 7]` that year; de Grey moved the floor to 5 in 2018. This repository
+> kernel-checks the whole classical interval, **5 ≤ χ(ℝ²) ≤ 7**, on axioms exactly
+> `[propext, Classical.choice, Quot.sound]`, and hunts above it.
+
+This file describes the code as it stands: the statement (§ 1), how the two certified computations are
+built and why (§ 2), the module map read off the import graph (§ 3), where the roadmap lives (§ 4),
+trust (§ 5), the defences against proving the wrong theorem (§ 6), and the standing limits (§ 7). What
+the results mean and what to work on next is `CLAUDE.md` § Frontier. The file is rewritten in place and
+its history is in git; the last version before the 2026-09-10 rewrite is commit `fcbee06`.
 
 ## 1. The statement
 
-Everything aims at one declaration, phrased against Mathlib so it is citable rather than bespoke:
-
 ```lean
-/-- The unit-distance graph on a metric space: `x ~ y` exactly when `dist x y = 1`. -/
-def unitDistanceGraph (V : Type*) [MetricSpace V] : SimpleGraph V :=
-  SimpleGraph.fromRel fun x y => dist x y = 1
+-- UnitDistance.lean
+def unitDistance (V : Type*) [MetricSpace V] : SimpleGraph V where
+  Adj x y := dist x y = 1
 
-theorem chromaticNumber_plane_ge_five :
-    5 ≤ (unitDistanceGraph (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+-- Instances/Interval.lean
+theorem chromaticNumber_plane_interval :
+    5 ≤ (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ∧
+      (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7
 ```
 
-`SimpleGraph.chromaticNumber : ℕ∞` is `⨅ n ∈ {n | G.Colorable n}, n`, and
-`chromaticNumber_le_iff_colorable : G.chromaticNumber ≤ n ↔ G.Colorable n` turns the goal into
-`¬ Colorable 4`, i.e. **no function `ℝ² → Fin 4` avoids monochromatic unit-distance pairs**.
+The lower half is `chromaticNumber_plane_ge_five` (`Instances/DeGrey/Bound.lean`, proved again from two
+unrelated witnesses as `chromaticNumber_plane_ge_five_510` and `chromaticNumber_plane_ge_five_553`); the
+upper half is `chromaticNumber_plane_le_seven` (`Instances/Seven.lean`). `SimpleGraph.chromaticNumber` is
+valued in `ℕ∞`, and `chromaticNumber_le_iff_colorable` turns a lower bound into `¬ Colorable k`: **no
+function ℝ² → Fin k avoids monochromatic unit-distance pairs.**
 
-Getting this statement right is the highest-stakes decision in the project. The characteristic
-failure of machine-written Lean is proving the wrong theorem efficiently, and here the wrong
-theorem is easy to write and looks identical: an `≠ 1` where `= 1` belongs, a `≤` for a `<`, a
-graph whose `Adj` is vacuous, a quantifier over the empty set. § 6 is the defence.
+Three generalizations carry the rest of the library, each stated once:
+
+- **The plane as ℂ.** Most theorems work over `unitDistance ℂ`. `chromaticNumber_plane_eq_complex`
+  (`Reduction.lean`) is an equality, proved by an isometry, so nothing is lost crossing it.
+- **Other forbidden distances.** `distanceGraph V D` for any set `D` (`DistanceGraph.lean`), with
+  `unitDistance_eq_distanceGraph_singleton`.
+- **Other coordinate rings.** `unitQuadrance R` over any commutative ring and its instance
+  `finitePlane p` at `ZMod p` (`UnitQuadrance.lean`). A plane over a number field is an induced subgraph
+  of `unitDistance ℂ` (`seamPlane` in `FieldWall4.lean`).
+
+Getting the statement right is the highest-stakes decision in the project. The characteristic failure of
+machine-written Lean is proving the wrong theorem efficiently, and here the wrong theorem is easy to
+write and looks identical: `≠ 1` for `= 1`, `≤` for `<`, a graph whose `Adj` is vacuous, a quantifier over
+an empty type. § 6 is the defence.
 
 ## 2. The shape of the argument
 
 ```
-                    chromaticNumber_plane_ge_five
-                                │
-              ¬ Colorable 4 (unitDistanceGraph ℝ²)
-                                │   restrict a plane colouring to a finite witness
-                    ¬ Colorable 4 (deGrey.graph)
-                    ╱                           ╲
-     every listed edge has length 1        the abstract graph has no 4-colouring
-     ── exact field arithmetic ──          ── verified LRAT checker ──
-     Q(√3,√5,√7,√11) as ℤ-tower           Std.Tactic.BVDecide.LRAT.check_sound
+                        chromaticNumber_plane_ge_five
+                                     │
+        restrict a colouring of the plane to a finite drawing   (UnitDistance, Reduction)
+                                     │
+                 ¬ Colorable 4 (edgeGraph 1581 deGreyRot.edges)
+                 ╱                                          ╲
+   every listed edge has length 1                  no proper 4-colouring exists
+   exact arithmetic in Q4 = ℚ(√3,√5,√7,√11)        a refutation checker the kernel runs
+   deGreyRot_valid                                 deGreyRot_not_colorable_four
 ```
 
-Two certified computations, joined by one reduction. Neither computation is trusted on its own
-say-so, and the two failure modes are independent: bad geometry means the "graph" is not a
-unit-distance graph (caught by the field arithmetic); bad combinatorics means it is 4-colourable
-(caught by the checker, which cannot certify a satisfiable formula).
+Two certified computations, joined by one reduction. Neither is trusted on its own say-so, and their
+failure modes are independent: bad geometry means the graph is not a unit-distance graph, and the exact
+arithmetic refuses it; bad combinatorics means the graph is 4-colourable, and the checker cannot certify
+a satisfiable formula. Every lower bound in the repository has this shape. Upper bounds replace the
+refutation by a colouring the kernel checks proper: a periodic table on the plane (`Brick.lean`), a
+residue map on a number-field plane (`ResidueColouring.lean`, `FieldWall4.lean`), or a table on a finite
+plane pulled back along a ring homomorphism (`UnitQuadrance.lean`).
 
 ### 2.1 Geometry — why exact arithmetic, and which field
 
-De Grey's coordinates are built from √3 and √11 (the seed points), √15 (rotation by
-`2·arcsin(1/4)`: `cos = 7/8`, `sin = √15/8`), and √7 (rotations by `π/2 ± arcsin(1/8)`:
-`cos = ∓1/8`, `sin = 3√7/8`). So every vertex lives in the **multiquadratic field
-ℚ(√3,√5,√7,√11)** — degree 16 over ℚ, with basis `{√(∏S) : S ⊆ {3,5,7,11}}`.
-
-We represent it as an **iterated quadratic extension with ℤ leaves**, all coordinates carrying one
-global denominator `scale`:
+De Grey's coordinates are built from √3 and √11 (the seed points), √15 (rotation by `2·arcsin(1/4)`:
+`cos = 7/8`, `sin = √15/8`) and √7 (rotations by `π/2 ± arcsin(1/8)`: `cos = ∓1/8`, `sin = 3√7/8`).
+Every vertex therefore lives in the **multiquadratic field ℚ(√3,√5,√7,√11)** — degree 16 over ℚ, basis
+`{√(∏S) : S ⊆ {3,5,7,11}}` — represented as an iterated quadratic extension with ℤ leaves and one global
+denominator per certificate (`Field/Quadratic.lean`):
 
 ```lean
-structure Adjoin (d : ℕ) (K : Type) where   -- K[√d]
+structure Adjoin (d : ℕ) (K : Type*) where   -- K[√d]
   re : K
-  im : K                                     -- coefficient of √d
+  im : K                                      -- the coefficient of √d
 
-abbrev Q4 := Adjoin 11 (Adjoin 7 (Adjoin 5 (Adjoin 3 ℤ)))
+abbrev Q4 : Type := Adjoin 11 (Adjoin 7 (Adjoin 5 (Adjoin 3 ℤ)))
 ```
 
-ℤ leaves, not ℚ: the Lean kernel accelerates `Nat`/`Int` with GMP, but `Rat` multiplication routes
-through `Nat.gcd`, which it does not. A rational representation would make the geometry check
-unreducible in the kernel; an integer one keeps it in reach.
+**ℤ leaves, not ℚ.** The kernel accelerates `Nat` and `Int` with GMP, but `Rat` multiplication routes
+through `Nat.gcd`, which it does not. A rational tower would put the geometry check out of the kernel's
+reach.
 
-The load-bearing observation, and the reason this stays cheap: **we never need the embedding
-`Q4 → ℝ` to be injective.** We only need it to be a *ring homomorphism*. A vertex list that
-happened to name one plane point twice would be harmless — the reduction restricts a plane
-colouring along the map, so extra edges only make the graph harder to colour, and a spurious
-"edge" between two names for the same point would fail the `distSq = 1` check anyway. This deletes
-the entire number-theoretic burden (linear independence of the 16 basis monomials over ℚ) from the
-proof. One `Real.sq_sqrt` per generator is the whole story.
+**The embedding `Q4 → ℝ` is never claimed injective; it is only a ring homomorphism** (`Q4.eval`). A
+vertex list that names one plane point twice is harmless: the reduction restricts a plane colouring along
+the map, extra edges only make a graph harder to colour, and a spurious "edge" between two names for one
+point fails `distSq = 1` anyway. That deletes the linear independence of the sixteen basis monomials from
+the proof — one `Real.sq_sqrt` per generator is the whole of the number theory. It is also why
+`Motion.lean` cancels scale factors as natural numbers (`NatCancel`) rather than in `Q4`, which is not
+known here to be a domain.
 
-### 2.2 Combinatorics — why LRAT, and what it costs
+Where a theorem needs more than a ring homomorphism, it buys exactly that:
 
-`k`-colourability of a graph on `Fin n` becomes a CNF over `n·k` variables (`x_{v,c}` at index
-`v*k+c`):
+- **Real distinctness of given values**: integer interval bounds on literals (`Field/Approx.lean`,
+  `index_eq_of_eval_eq`), still with no injectivity claim.
+- **Linear independence**: proved locally, for the radicals a theorem uses — `sqrt_indep` over
+  `{1, √3, √11, √33}` (`Ladder.lean`), `sqrt5_indep` by a mod-5 descent (`Quadrature.lean`).
+- **Another field**: its own order, not a larger tower. Theorem B works in `ℤ[ω, i, T]` with
+  `T = (1+√33)/2`, built from one generic quadratic layer `Quad` (`FieldWall4.lean`); certificates reach
+  it through the √5- and √7-free subring `Q4.seamFree` (`SeamCert.lean`).
+- **A finite plane**: a certificate reduces into any ring, given a subring holding its coordinates, a ring
+  homomorphism out of it and an inverse of the denominator (`UDCert.drawing_adj`); at `p = 11` through
+  `Q4.sevenFree`, the √7-free elements.
 
-- one **at-least-one-colour** clause per vertex, `⋁_c x_{v,c}`;
-- for each edge and colour, `¬x_{u,c} ∨ ¬x_{w,c}`.
+**Packed geometry** (`Packed.lean`). A squared distance depends only on a difference, and these graphs
+have few distinct differences — 133 for de Grey's 7,877 edges, 66 and 82 for Heule's two witnesses. The
+check pays two squarings in `Q4` once per difference and one big-integer subtraction per edge over packed
+coordinates (`UDCert.valid_of_diffWitness`): de Grey's geometry costs 55.9 CPU seconds in two modules,
+against 246.2 in nine unpacked. The number of differences grows with the construction (it doubles when
+the construction doubles); what stays stable is the ratio, about 118 edges per difference.
 
-At-most-one clauses are deliberately omitted: the edge clauses already force the colour sets of
-adjacent vertices to be disjoint, so any satisfying assignment yields a proper colouring by
-choosing an arbitrary colour per vertex. Fewer clauses, same theorem — and the direction we must
-prove is only `Colorable k → Sat cnf`, whose contrapositive is what we want.
+### 2.2 Combinatorics — why a kernel-run LRAT checker
 
-Unsatisfiability comes from `Std.Tactic.BVDecide.LRAT`, shipped **verified** in Lean core:
+`k`-colourability of a graph on `Fin n` becomes a CNF over `n·k` variables (`coloringCNF`,
+`Sat/Encoding.lean`): one at-least-one-colour clause per vertex, and `¬x_{u,c} ∨ ¬x_{w,c}` for each edge
+and colour. At-most-one clauses are omitted: the edge clauses already make adjacent vertices' colour sets
+disjoint, so a satisfying assignment yields a proper colouring by choosing one colour per vertex, and the
+only direction consumed is `Colorable k → Sat`. CaDiCaL, bundled with the toolchain, is an untrusted
+oracle; the DIMACS it reads is printed from the Lean definition (`scripts/Dimacs.lean`, via
+`Std.Sat.CNF.dimacs`).
 
-```lean
-def check (lratProof : Array IntAction) (cnf : CNF Nat) : Bool
-theorem check_sound : check lratProof cnf → cnf.Unsat
-```
+**Core's verified checker cannot be run by the kernel.** `Std.Tactic.BVDecide.LRAT.check` ships with
+`check_sound`, but on the smallest unsatisfiable CNF with a one-action certificate, `decide +kernel`
+sticks inside `Formula.performRupAdd`: `DefaultClause.ofArray` builds a `Std.HashMap`, whose bucket index
+computes on `USize`, whose width is an `@[extern] opaque`. Only `native_decide` evaluates it, and that is a
+trust purchase (§ 5). It is ingested in `Sat/Lrat.lean` and used only by the Moser spindle's cross-check
+routes.
 
-CaDiCaL (bundled at `$(lean --print-prefix)/bin/cadical`) is an untrusted oracle proposing the
-certificate. The residual trust question is only *how the `Bool` is evaluated* — kernel `decide`
-or `native_decide`. See § 5.
+**So the checker is this repository's own** (`Sat/Mask.lean`, `Sat/ClauseTable.lean`,
+`Sat/MaskCheck.lean`). Every clause a refutation touches — the formula's and the solver's derived ones —
+lives in one emitted literal table, re-checked against the formula Lean computes (`agreesWithCNF`). A
+certificate is hint lists only: clause ids are consumed densely, so the checker's whole state is a
+watermark. `maskCheck_sound` is proved for every decoder, so the certificate's packing is untrusted as a
+matter of type. A certificate is cut into segments, each an implication from one watermark to the next,
+which compose only if they chain, and which elaborate in parallel. Measured: about 1.35 ms of kernel time
+per hint entry, and a segment's memory peak of about 3.4 GB + 0.81 GB per certificate chunk.
 
-#### 2.2.1 The colour-cube split is dead, and so was the native fallback — measured 2026-07-29/30
+The certificates in the tree:
 
-**§ 2.3 below is superseded.** Everything in it about the split being "mandatory" is about solver
-tractability and is still true; everything about the split being a *route to a checked proof* is false,
-and so is § 5's long-standing assumption that χ(ℝ²) ≥ 5 would ship carrying a native-evaluation axiom.
+| Witness | What is refuted | Size | Where |
+|---|---|---|---|
+| de Grey's 1581, 4 colours | one 791-vertex copy's forcing; the other copy is the same refutation moved by `deGrey_rotation` | 18,441,901 hint entries, 1,222 segments, 15.0 CPU hours | `Instances/DeGrey/HalfA/` |
+| Heule's 510 and 553, 4 colours | the whole graph, one triangle's colours pinned | 1,413,841 and 1,104,106 propagation steps, 82 segments each | `Instances/Heule510/Cnf/`, `Instances/Heule553/Cnf/` |
+| Mycielski-47, 5 colours | the whole graph | 387,065 propagation steps, 16 segments | `Instances/Mycielski/Cnf/` |
+| the 122-point carrier, 4 colours | the pair-augmented edge list | 7,892 derived clauses, 16 segments | `Instances/Core122/Cnf/` |
+| the 23-vertex gap core, 6 colours | the core's constraint graph | 219 derived clauses, 2 segments | `Instances/Core23/Cnf/` |
 
-Measured in full on the desktop (32 cores), all 1,024 depth-5 cubes solved to UNSAT:
+Two levers shape every certificate, both measured on Heule's witnesses: **pinning one triangle's colours**
+(sound by a palette permutation, `exists_perm_apply_eq`; 20× there, 160× at six colours on the gap core),
+and **racing solver configurations on the trimmed hint count** (a further 10.5×).
 
-| | |
+**Composition beats monolithic search at scale.** A gadget (`Gadget.lean`) turns a refutation into a
+checked property of a few port vertices, and properties compose by intersection, widening and transport
+along vertex maps. De Grey's proof is three gadgets on three vertices (`Instances/DeGrey/Forcing.lean`):
+one refutation, the same refutation transported by a rotation, and the joining edge. The monolithic
+instance does not finish under any solver setup tried (six configurations with proof logging, six
+without, and a 64-cube split): two loosely coupled copies joined at one vertex defeat clause learning,
+while handing a human a two-line argument.
+
+### 2.3 The colour-cube split — sound, useful to the solver, dead as a certificate route
+
+`not_colorable_of_cubes` (`Sat/Encoding.lean`): fix the colours of a vertex list `W`; the `k^|W|`
+sub-instances cover the original, and the proof is one line, since a colouring induces its own cube. It
+exists because a monolithic CaDiCaL run on de Grey's full instance — 6,324 variables, 33,089 clauses, eight
+configurations raced — did not finish in 10 minutes and had already emitted 2.0 GB of partial LRAT.
+
+As a route to a checked proof it is dead at de Grey's scale, by measurement: all 1,024 depth-5 cubes
+solved to UNSAT carry 3.06 × 10⁹ hint entries (1.50 × 10⁹ after trimming), projected at 563 CPU hours
+against a 40-hour threshold, as about 4 GB of certificate literals. `native_decide` does not rescue it:
+the obstacle is data volume, not trust — compiled evaluation checks a term the elaborator must accept
+first, and Lean does not elaborate certificate data at that scale. Deeper splits are worse (7.16× the
+hints per three more pinned vertices). The numbers are in `plans/M06-chi-ge-five.md` § 0, which
+supersedes `plans/spike-kernel-lrat.md` § 4's sampled 1.30 × 10⁷ (wrong by 115×).
+
+Cubes survive where their count is small: the Moser spindle's nine-cube route
+(`Instances/SpindleBound.lean`), and composed objects whose cube cover is itself a kernel pigeonhole.
+
+### 2.4 The kernel facts the layout depends on
+
+The general cost model is `CLAUDE.md` § The kernel's cost model. These are the parts that fix this
+repository's shape:
+
+- **Reduction steps are the cost; bit width is not.** GMP-backed `Nat` arithmetic and bitwise operations
+  are free at thousands of bits, so certificates pack many values into few big `Nat` literals, and tables
+  are emitted as literals rather than accumulated during a kernel evaluation.
+- **Geometry is chunked.** The unpacked edge check runs at about 0.17 s per edge with memory linear in
+  the chunk; one `List.all` over 7,877 edges was still running at 5 minutes and 8.5 GB. Validity is a
+  conjunction of chunks (`valid_of_chunks`), and packing (§ 2.1) removed most of the work.
+- **Doc strings are environment data.** Editing a declaration or a `/-- -/` or `/-! -/` doc string
+  rebuilds every dependent module; editing a `--` comment in place does not (measured; `CLAUDE.md`
+  § Building). Upstream of a certificate family, a doc string edit costs hours (§ 3.10, § 4).
+- **Memory, not time, sets the build width.** A certificate segment peaks at about 3.4 GB + 0.81 GB per
+  chunk. Build only through `scripts/build.sh`.
+
+## 3. Module map — the import graph
+
+The library is **1,627 `.lean` files** under `Proofs/`: 74 theory modules (`Proofs/HadwigerNelson/*.lean`, `Field/` and `Sat/`), the scaffold `Proofs/Basic.lean`, 61 instance modules named one per row below, and **1,491 files in eight generated certificate families** (§ 3.9). The descriptions are written by hand; the **Imports** column, the counts, the layer table and §§ 3.9–3.10 were generated from the `import` lines, not from memory. **Imports** lists each module's direct imports inside `Proofs`, exactly as its header states them (Mathlib and `Std` imports omitted; a run of numbered siblings is written `Rows00…07`); `scripts/build_order.py` computes the same graph and is what `scripts/build.sh` builds from. **Row** is the `CLAUDE.md` § The novel-results ledger row whose result the module holds (rows name their modules or theorems) or, for a model module, the row it models; `—` means infrastructure, or a module older than the ledger. **When** is the milestone that created the module.
+
+`Proofs.lean`, the flat import surface, imports 120 modules: every module below except the 16 emitted data modules reached through their aggregates (`Core122/Aug`, `Core122/Base`, `Core23/Edges`, `DeGrey/Diffs`, `DeGrey/Edges`, `DeGrey/Table`, `DeGrey/Valid`, `Heule510/Diffs`, `Heule510/Edges`, `Heule510/Table`, `Heule510/Valid`, `Heule553/Diffs`, `Heule553/Edges`, `Heule553/Table`, `Heule553/Valid`, `SpindleLrat`), and none of the generated families.
+
+**The layers are acyclic**: each theory layer imports only from the layers above it in this table, apart from the 2 theory modules that import an instance module for a concrete object (§ 3.10). Generated families sit between a witness's data modules and its bound, so they import from and are imported by § 3.8.
+
+| Layer | Imports modules from |
 |---|---|
-| hint entries, complete | **3.06 × 10⁹** raw, **1.50 × 10⁹** after backward trimming |
-| kernel cost per hint entry, measured on a real cube's real table | **1.35 ms** |
-| **projected processor time** | **563 hours**, against a 40-hour abandon threshold |
-| the same certificate as embedded Lean data | **~4 GB of packed `Nat` literals** |
+| § 3.1 Foundations | Mathlib and Std only |
+| § 3.2 SAT and the checker | § 3.1 Foundations |
+| § 3.3 Colouring theory | § 3.1 Foundations, § 3.2 SAT and the checker |
+| § 3.4 Seam-field geometry | § 3.1 Foundations, § 3.3 Colouring theory |
+| § 3.5 Where a compulsion can live | § 3.1 Foundations, § 3.2 SAT and the checker, § 3.3 Colouring theory, § 3.4 Seam-field geometry |
+| § 3.6 Arithmetic colourings and planes | § 3.1 Foundations, § 3.3 Colouring theory, § 3.4 Seam-field geometry, § 3.5 Where a compulsion can live |
+| § 3.7 Cell family and bricks | § 3.1 Foundations |
+| § 3.8 Instances | § 3.1 Foundations, § 3.2 SAT and the checker, § 3.3 Colouring theory, § 3.5 Where a compulsion can live, § 3.6 Arithmetic colourings and planes, § 3.7 Cell family and bricks, § 3.9 generated families |
 
-`plans/spike-kernel-lrat.md` § 4 recorded the same total as 1.30 × 10⁷ — it sampled and extrapolated,
-and it was wrong by 115×.
+### 3.1 Foundations: the statement, graph presentations, exact geometry
 
-**And `native_decide` does not rescue it**, which is the correction with teeth. The obstacle is not
-trust, it is **data volume**: compiled evaluation checks a certificate the elaborator has to accept
-first, and the spike already measured that Lean will not elaborate certificate data at that scale. So
-the route this project planned around from M03 to M05 was never open in either form.
+The reduction every bound uses, the edge-list presentation certificates arrive in, and the exact coordinate tower.
 
-Deeper splits are strictly worse (7.16× more total hints per three extra pinned vertices), monolithic
-does not finish in six configurations, at-most-one clauses do not help, and enlarging the point set adds
-disconnected copies. See `plans/M06-chi-ge-five.md` § 0.
-
-### 2.2.2 What replaced it: de Grey's own decomposition
-
-`deGrey.edges` decomposes **exactly** — two 791-vertex copies of one point set, sharing exactly one
-vertex (14) and joined by exactly one edge (11–802), 3938 + 3938 + 1 = 7877 — and SAT confirms the
-forcing that makes the construction work:
-
-| vertex 14 pinned to colour 0; its copy's endpoint at | 0 | 1 | 2 | 3 |
+| Module | What it holds | Imports | Row | When |
 |---|---|---|---|---|
-| copy A (vertex 11) | **SAT** | UNSAT | UNSAT | UNSAT |
-| copy B (vertex 802) | **SAT** | UNSAT | UNSAT | UNSAT |
+| `Basic` | Scaffold sanity module at `Proofs/Basic.lean`: `two_add_two` confirms the toolchain and Mathlib are wired. | — | — | scaffold |
+| `UnitDistance` | The unit-distance graph of any metric space (`unitDistance`), its isometry invariance (`chromaticNumber_unitDistance_congr`), and the finite-drawing reduction `add_one_le_chromaticNumber_unitDistance`. | — | — | M01 |
+| `EdgeList` | `edgeGraph n E`, the presentation every certificate uses (`edgeGraph_adj`), and the reduction at that shape (`add_one_le_chromaticNumber_unitDistance_edgeList`). | `UnitDistance` | — | M01 |
+| `DistanceGraph` | `distanceGraph V D` for a set of forbidden distances; `unitDistance_eq_distanceGraph_singleton`, `chromaticNumber_unitDistance_le_distanceGraph`, `add_one_le_chromaticNumber_distanceGraph_edgeList`. | `EdgeList` | 44 | M49 |
+| `Field/Quadratic` | One quadratic layer `Adjoin d K`, the tower `Q4 = ℚ(√3,√5,√7,√11)` with sixteen ℤ leaves, and `Q4.eval`, a ring homomorphism to ℝ never claimed injective (§ 2.1). | — | — | M02 |
+| `Field/Approx` | Integer interval bounds for `Q4.eval` on literals, so given field values are certified distinct as reals without injectivity (`index_eq_of_eval_eq`, `pairwise_ne_of_sepChain`). | `Field/Quadratic` | — | M16 |
+| `Certificate` | `Pt` and `UDCert n` (exact points, an edge list, one denominator), the decidable `Valid` with `valid_sound`, chunked validity `valid_of_chunks`, and `add_one_le_chromaticNumber_of_valid`. | `Field/Quadratic`, `EdgeList` | — | M02 |
+| `PairDist` | `UDCert.PairsAt`: a pair list certified at one class distance √r (`UDCert.pairsAt_sound`), the form the pigeonhole carriers and the residue distance law state their pairs in. | `Certificate` | — | M34 |
+| `Motion` | Exact plane similarities cleared of their denominator (rotations, reflections, translations, composition); a copy placed by a motion inherits validity with no per-edge check (`UDCert.validOn_map_of_motion`, `UDCert.validOn_map_of_scaling`). | `Certificate` | — | M09, M11 |
+| `Assembly` | Many placed copies as one certificate: intra-copy edges come from the base check and only seams are checked (`valid_of_cross`); geometry and colouring transport share one map, `embed`. | `Motion`, `EdgeList` | — | M12 |
+| `AssemblyDiagnose` | `#eval`-only: which seam failed, by copy and base vertex. | `Assembly` | — | M12 |
+| `Packed` | Packed coordinates, one squared norm per distinct edge difference and one subtraction per edge (`DiffWitness`, `UDCert.valid_of_diffWitness`); `Packable.pack_inj` keeps the packing injective. | `Certificate` | — | M08 |
+| `PackedDiagnose` | `#eval`-only geometry faults; `firstFault_eq_none_iff` ties the report to the check. | `Packed` | — | M08 |
 
-So every proper 4-colouring gives both ends of the joining edge the shared vertex's colour, which the
-joining edge forbids. **Two certificates instead of 1,024**, 34.2 × 10⁶ hint entries instead of
-1.50 × 10⁹, and one refutation per copy covers three colour cases because relabelling colours is free.
-**~23 hours of processor time and ~410 MB of source** — inside the threshold, 44× cheaper, and the proof
-is now de Grey's argument rather than a brute-force search.
+### 3.2 SAT encoding, the kernel-run refutation checker, and the composite
 
-The check is split into 2,265 **segments** — each an implication between watermarks, so they elaborate
-in parallel. The segment size is set by *memory*: peak ≈ 3.4 GB + 0.81 GB per certificate chunk, and 24
-concurrent 57-chunk segments took the machine down before that was measured.
+The combinatorial half (§ 2.2) and the module where it meets the geometry. `Sat/Mask`, `Sat/ClauseTable` and `Sat/MaskCheck` sit upstream of every certificate family and are settled (§ 3.10).
 
-#### 2.2.3 And the second certificate was redundant — M09
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Sat/Encoding` | `coloringCNF k n E` (at-least-one-colour and edge clauses, no at-most-one), `not_colorable_of_unsat`, the cube cover `not_colorable_of_cubes`, palette pinning `exists_perm_apply_eq`. | `EdgeList` | — | M03 |
+| `Sat/Lrat` | Ingestion of core's verified LRAT checker: `unsat_of_check`, axiom-clean itself, since whatever evaluates its hypothesis makes the trust purchase (§ 5); `badCubes` names a misfiled cube. | `Sat/Encoding` | — | M03 |
+| `Sat/Mask` | Clauses and partial assignments as one bitmask type; unit propagation with `propagate_conflict_sound` and `propagate_prop_sound`. | — | — | M05 |
+| `Sat/ClauseTable` | Every clause a refutation touches, emitted as a chunked literal and re-checked against the formula Lean computes (`agreesWithCNF`, `justified_of_agreesWithCNF`). | `Sat/Mask` | — | M05 |
+| `Sat/MaskCheck` | The checker the kernel can run: hint lists over a watermark, cut into chaining segments (`runSegment_sound`), and `maskCheck_sound`, proved for every decoder. | `Sat/ClauseTable` | — | M05, M06 |
+| `Sat/Diagnose` | `#eval`-only rendering of a failed check, downstream of the checker so rewriting it re-checks no certificate. | `Sat/MaskCheck` | — | M07 |
+| `Pattern` | Colour patterns, one per partition of the positions (first-occurrence numbering): `samePattern`, `exists_mem_canonPatterns`. Mathlib only. | — | — | M11 |
+| `Gadget` | `Gadget k n m E p`: a checked colouring property of port vertices, at any colour count, composable by intersection, widening and `transport`; the terminal check `survivors` and `not_colorable_of_gadget`. | `Sat/Encoding`, `Pattern` | — | M09, M11 |
+| `Reduction` | Where geometry meets refutation: `chromaticNumber_plane_eq_complex` (an equality, by isometry) and `UDCert.add_one_le_chromaticNumber_plane_of_valid`, with its `…_of_unsat` and `…_of_cubes` forms. | `Certificate`, `Sat/Encoding` | — | M03 |
 
-The two copies are not merely isomorphic, they are **congruent**: the second is the image of the first
-under one rotation about `(−2, 0)`, by `(cos, sin) = (31/32, −3√7/32)`, which fixes the shared vertex
-(it *is* the centre) and carries vertex 11 to vertex 802. So the second copy's forcing property is the
-first copy's, transported — and so is its geometry.
+### 3.3 Colouring theory: forcing, fans, criticality, arity
 
-| | M06 | M09 |
-|---|---|---|
-| certificates | 2 | **1** |
-| hint entries the kernel re-runs | 34,169,571 | **18,441,901** |
-| generated modules | 2,265 | **1,222** |
-| source | 393 MB | **213 MB** |
-| processor time | 27.8 h | **15.0 h** + 95 CPU s for the rotation |
+Statements about every proper colouring of a graph at once (forced pairs, virtual edges, fans, the arity of a compulsion), none of them using plane geometry beyond `DistanceGraph`.
 
-The rotation is checked, not assumed: 791 exact coordinate identities in `ℚ(√3,√5,√7,√11)`. Nothing
-is emitted for it — the index map is a closed form, because `dedup` puts the first copy at indices
-`0–790`.
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Forcer` | `Forces G k p q` (every proper colouring paints the pair alike) and the spindle that closes it: `not_colorable_of_spindled_forcer`, `Forces.of_gadget`, `rhombus_forces`, `spindleEdges`. | `Gadget` | — | M13 |
+| `ForcerDiagnose` | `#eval`-only: which side condition refused a spindled candidate. | `Forcer` | — | M13 |
+| `Fan` | `Fan` (the pivot is painted like some partner) and `Separated` (a virtual edge); `not_colorable_of_spindled_fan`, `fan_iff_not_colorable`; a forced pair is the width-one fan. | `Forcer` | — | M14 |
+| `FanMono` | Deletion never creates a fan: `edgeGraph_mono`, `Fan.of_subset`, `not_fan_of_subset`. | `Fan` | — | M17 |
+| `Critical` | A fan is one removable vertex (`fan_univ_iff`, `colorable_delete_iff_exists_isolating`); `colorable_succ_of_colorable_delete`; the packed criticality certificate `no_fan_of_packed`. | `Fan` | — | M15 |
+| `CriticalDiagnose` | `#eval`-only: why a criticality certificate was refused. | `Critical` | — | M15 |
+| `NarrowFan` | The narrow-fan certificate (classed distances, one separating colouring per class, real distinctness from `Field/Approx`): `NarrowCert.check`, `NarrowCert.sound`. | `Field/Approx`, `Certificate`, `Critical`, `Fan` | — | M16 |
+| `NarrowFanDiagnose` | `#eval`-only fault walk whose honesty is a theorem: `firstFault_none_iff_check`. | `NarrowFan` | — | M16 |
+| `Coverage` | A fan is exactly compulsory colour coverage of N(p) ∪ Q: `fan_iff_coverage`. | `Fan` | 4 | M18 |
+| `CoverageMono` | The coverage ratchet `CoverAtLeast`, monotone under adding edges, widening the class and lowering the level: `fan_iff_coverAtLeast`. | `Coverage` | 3 | M19 |
+| `Greedy` | Greedy colouring, absent from Mathlib: `SimpleGraph.colorable_of_degree_lt`. | — | 7 | M18 |
+| `Fractional` | `fractionalChromaticNumber` and the certificate-to-bound theorems `le_fractionalChromaticNumber_of_weights`, `fractionalChromaticNumber_mono_of_hom`. Mathlib only. | — | — | M10 |
+| `FractionalSpec` | Validation on the graph that discriminates the definition: `C5_fractional`, χ_f(C₅) = 5/2. | `Fractional` | — | M10 |
+| `IndepSearch` | The pruned kernel-run search for a heavy independent set (`noHeavy_sound`) and its plane consumer `le_fractionalChromaticNumber_unitDistance_edgeList`. | `EdgeList`, `Fractional` | — | M10 |
+| `SpareColour` | The spare-colour lemma: a `k`-colourable graph has no pair compulsion at `k + 1` colours (`not_forces_of_colorable`, `not_separated_of_colorable`). | `Fan` | 45 | M51 |
+| `EntropyFloor` | A `k`-colourable graph with at least `k·n` vertices has at least `2^n` proper `(k+1)`-colourings (`two_pow_le_card_coloring`), and the screen `not_colorable_of_card_coloring_lt`. | `SpareColour` | — | M51 |
+| `Palette` | Compulsions depend on the palette's size, not on `Fin k`: `Forces.of_equiv`, `Separated.of_equiv`, `not_forces_of_coloring_ne`, for colourings valued in a group or a residue field. | `Fan` | — | FS-24 |
+| `Arity` | The arity floor: a compulsion as a partial colouring that does not extend; `arityFloor`, `arityFloor_eq_zero_iff`, `arityFloor_le_of_degree`, `arityFloor_le_of_embedding`. | `Coverage`, `Pattern` | 42, 43 | M45, M48 |
+| `Homogeneous` | Transport of a pair compulsion along an isometry: `transport_pair_of_isometry`, `Separated.planeIn`, `Forces.planeIn`. | `Arity`, `DistanceGraph` | 43 | M48 |
+| `Limit` | The limit lemma: bounded-size drawings within every ε of unit length force χ (`add_one_le_chromaticNumber_unitDistance_of_bounded_family`). | `UnitDistance`, `Reduction` | 41 | M44 |
+| `Mascot` | The Moser recipe's threshold: `not_forces_of_drawing` (a host with no k-clique draws no minimal forcing gadget), `not_forces_of_unit_drawing` (k ≥ 4), `exists_forces_of_unit_drawing_three`. | `Forcer`, `DistanceGraph` | 58 | 2026-09-09 |
 
-**The geometry cost is unchanged, and the table above must not be read as saying otherwise.**
-`deGreyRot`'s second half is derived from its first plus the rotation, but the `deGrey_valid` it
-sources from still checks all 7,877 distances — that edge list is frozen upstream of the surviving
-certificate. What the rotation deleted is the *certificate*. The derivation earns its keep at M11,
-where a placed copy's coordinates are defined by the motion rather than listed and the check becomes
-`rfl`.
+### 3.4 Seam-field geometry: two circles, gluing, and the exact closures
 
-## 2.3 The colour-cube split — mandatory, not an optimization *(superseded: see § 2.2.1)*
+Unit-distance structure over ℂ built from the hexagonal step ζ₆ and the seam rotation σ = (√3 + i√33)/6; the three closures are each exactly 4-chromatic.
 
-**Measured, 2026-07-23, 32-core box.** A monolithic CaDiCaL run on the full 6324-variable /
-33089-clause instance (8 configurations raced: `--unsat`, default, `--plain`, `--sat`, two seeds
-each) **did not terminate within 10 minutes, and the partial LRAT was already 2.0 GB.** Extrapolating
-a certificate of that order into Lean is hopeless for the kernel and painful even for
-`native_decide` (LRAT-Catcher reports ~9 GB resident for a 628 MB certificate). So the split below
-is load-bearing, not a wall-clock nicety.
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `TwoCircle` | Every unit-distance graph on the circles of radius 1 and 1/√3 about a point is 3-colourable (`colorable_three_induce`); the seam rotation has infinite order (`seam_pow_ne_one`). | `UnitDistance` | 1, 2 | M19 |
+| `ClassGeometry` | The 120° class: in-class degree ≤ 2, so no class confines a fan (`not_fan_classOnlyGraph`); a unit triangle lies on a circle iff r² = 1/3 (`exists_unit_triangle_iff`); `rot3_unit_triangle`. | `Fan`, `Greedy` | 5, 6 | M18 |
+| `Compulsion` | The 120° compulsion `no_mono_outer_triple` and the one-pivot cap `chromaticNumber_concentric` (= 4). | `TwoCircle`, `ClassGeometry` | 9, 10 | M20 |
+| `Strip` | The strip automaton over literal tables: `twostep_card` (×12 per column) and `window_extends`. | — | 11 | M20 |
+| `Coupled` | Two unit-separated pivots: each circle-pair intersection is {point, mirror} under `reflAcross` (`outer_inter_outer` and its three siblings); `four_le_chromaticNumber_of_system_subset`. | `Compulsion` | 14 | M21 |
+| `Glue` | The general gluing classification `sphere_inter_sphere` with the mirror `reflAxis`; the certified near-relation `zeta6_mul_seam_pow_nine_ne_one`. | `Coupled` | 17, 18 | M22 |
+| `PartnerLattice` | Depth-one completeness: `Glue.eq_gluePoint_of_dist_pair`, `Glue.finite_two_unit_neighbors`. | `Glue` | 45 | M50 |
+| `Triangle` | The pivot triangle and its metapivot: self-gluing, ten shared points (`ncard_system_inter_system`), rigid outer chords, `rot_hexagon`, `seam_hexagon`. | `Glue` | 20 | M23 |
+| `Ladder` | The matched ladder pair is exactly 4-chromatic (`chromaticNumber_ladderPair`), every chord family classified; `sqrt_indep` over {1, √3, √11, √33}. | `Triangle` | 22 | M24 |
+| `MetaLadder` | The four-ladder object is exactly 4-chromatic (`chromaticNumber_fourLadder`), via √3·ζ₁₂ = 1 + ζ₆ and the mod-9 `adjacent_kill`. | `Ladder` | 23 | M25 |
+| `Hexagram` | The hexagram (six pivots at 1/√3 about the metapivot, seven ladders) is exactly 4-chromatic (`chromaticNumber_hexagram`), with a rot6-equivariant colouring. | `MetaLadder` | 24 | M26 |
+| `FieldWall` | The Moser twist is a seam-group word: `moserTwist_mul_seam_sq` (ρσ² = −1). | `TwoCircle` | 25 | M30 |
+| `Quadrature` | The 2-adic kill engine: `sqrt5_indep` by a mod-5 descent, `sqrt15_split`, `sqrt_indep₈`, `quadrature_rho15`. | `Ladder` | 28 | M32 |
+| `Copy` | The spindle rotation at any pair distance (`spindleRot`, `self_chord_iff`) and copy unions (`copyUnion`, `chromaticNumber_copyUnion_le`). | `Quadrature`, `FieldWall`, `DistanceGraph` | 46 | M52 |
 
-CaDiCaL is single-threaded. Rather than race one monolithic run, split the search:
+### 3.5 Where a compulsion can live: pigeonholes, spindles, critical sets, absorption
 
-```lean
-theorem not_colorable_of_cubes (W : List (Fin n))
-    (h : ∀ φ : Fin W.length → Fin k, ¬ ∃ c : Coloring, ∀ i, c W[i] = φ i) : ¬ Colorable k G
-```
+Compulsion theorems that use the gluing classification of § 3.4, and the pieces a compulsion cannot see.
 
-— trivial to prove (a colouring induces its own cube), `k^|W|` independent CaDiCaL runs, and each
-subproblem is much easier.
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Pigeonhole` | The bridge from class avoidance to colourability of the augmented edge list (`mono_pair_of_not_colorable_append`), `mono_pair_of_clique`, the `transmuter`, `not_colorable_iff_covers`. | `EdgeList`, `Critical`, `Instances/Triangle` | 31, 32 | M34 |
+| `OneDefect` | The spindle theorem `not_colorable_of_forced_equal` (a forced-equal pair at any distance ≥ 1/2) and `add_one_le_chromaticNumber_unitDistance_of_one_defect`. | `Homogeneous`, `Glue`, `Pigeonhole`, `Gadget` | 44 | M49 |
+| `CriticalSet` | `CriticalSet G k` and where a compulsion can live: `criticalSet_subset_inter_neighborSet_of_forces`, `criticalSet_subset_union_neighborSet_of_separated`, `encard_criticalSet_le_two_of_forces`. | `Critical`, `PartnerLattice` | 48 | M54 |
+| `Absorb` | Absorption: `Extends G A k` (every colouring of the piece extends), `extends_of_repaint`, `extends_of_hubs`, `extends_symCopy`. | `CriticalSet`, `SpareColour` | 49 | M55 |
 
-**What the split does *not* buy, measured 2026-07-27 (M03 de-risk).** An earlier version of this
-section hoped that many small certificates might be kernel-reducible where one large one is not.
-That is false: `LRAT.check` does not kernel-reduce **at any size** — see § 5. The split's
-justification is solver tractability, certificate size, and 32× wall-clock. Two multipliers on top:
+### 3.6 Arithmetic colourings, field planes, finite planes
 
-- **Colour symmetry.** Max clique in a plane unit-distance graph is 3 (four mutually
-  unit-distant points would be a regular tetrahedron), and these graphs are full of unit
-  triangles. Fixing one triangle to colours `0,1,2` is sound via a permutation of `Fin 4` and
-  cuts the space by `4! = 24`.
-- **Certificate trimming.** `Lean.Meta.Tactic.BVDecide.LRAT.Trim` ships in the toolchain.
+Colourings built from arithmetic rather than found: additive colourings, residue maps at a prime (Theorems A and B), and the finite planes `finitePlane p` that number-field planes map into.
 
-## 3. Module DAG (leaf-first)
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Additive` | Fischer's additive colourings: `additiveColoring`, `not_forces_of_addMonoidHom`, `addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul`. | `Fan`, `Palette` | 50 | M56 |
+| `AdditiveRigid` | `IsAdditive`, `AdditivelyRigid`, `forces_of_additivelyRigid`, `six_le_chromaticNumber_plane_of_additivelyRigid`. | `Additive`, `OneDefect` | 51 | M57 |
+| `UnitQuadrance` | `unitQuadrance R` over any commutative ring and `finitePlane p`; `unitQuadrance.map` (a ring homomorphism is a graph homomorphism); `UDCert.drawing_adj` (a certificate reduced into a ring); `add_one_le_chromaticNumber_unitQuadrance`. | `Certificate`, `EdgeList` | 53 | M58 |
+| `ResidueColouring` | Theorem A: `colorable_of_residue` (a graph drawn in an abelian group, edge differences in a subgroup and nonzero under a homomorphism out of it); `normOne_subset_valuationSubring`, `colorable_unitDistance_induce_of_valuationSubring`, `normOneColoring`; the general residue law `map_mul_conj_eq_zero_iff`. | `Additive`, `Palette`, `UnitQuadrance` | 57, 59 | Thm A |
+| `FieldWall4` | Theorem B: `chromaticNumber_seamPlane`, χ(ℚ(√3,√11)²) = 4, by residue maps onto 𝔽₄ in an order built from `Quad` and a parity descent; `not_forces_five_of_subset_seamPlane`. | `Ladder`, `ResidueColouring`, `SpareColour`, `FieldWall`, `Instances/SpindleBound` | 57 | Thm B |
+| `SeamCert` | Theorem B delivered to certificates: the √5- and √7-free subring `Q4.seamFree` and `UDCert.colorable_four_of_seamFree`. | `FieldWall4`, `UnitQuadrance` | 31 | FS-27 |
+| `ValuationLaw` | The 2-adic law of four-colour compulsions over ℚ(√3,√11): `residueColouring_eq_iff_psiA_zero`, `not_forces_of_residue_ne_zero`, `not_separated_of_residue_eq_zero`, and the rows of `[Parts2020a]` Table 1 (`not_separated_dist_eight_thirds` and its siblings). | `FieldWall4` | 59 | 2026-09-09 |
+| `Lift` | Lower bounds pull back along an injective drawing (`add_one_le_chromaticNumber_plane_of_lift`); the first-order obstruction `stressPairing_eq_zero_of_lift`. | `UnitQuadrance` | 54 | M59 |
+| `ResidueObstruction` | Compulsions map forward (`Forces.image`, `Separated.image`); one aperiodic table decides a Cayley graph's pair compulsions (`forces_iff_eq_of_aperiodic`); the distance law `Forces.quad_sub_eq_zero`. | `Lift`, `Arity`, `PairDist` | 55 | M60 |
+| `LocalGlobal` | `addCayleyMap`, the periodic quotient `unitQuadrance_colorable_of_quotient`, `card_le_chromaticNumber_mul_indepNum`, and the tightness mechanism `Forces.isEmpty_ringHom_of_spindle_radicand`. | `ResidueObstruction` | 56 | M61 |
+| `PlaneRotation` | Rotations of the quadrance plane (`rotHom`, `quarterTurnHom`) and plane freedom `finitePlane_forces_iff`; the tightness mechanism with colourability as its hypothesis (`Forces.isEmpty_ringHom_of_spindle_radicand_of_colorable`). | `LocalGlobal` | 56, 60 | FS-25 |
 
-```
-Mathlib ─┐
-         ├─► HadwigerNelson/UnitDistance.lean      graph on a metric space; χ transfer   [M01]
-         │
-Std.Sat ─┤
-         ├─► HadwigerNelson/Field/Quadratic.lean   Adjoin d K, CommRing, eval : K →+* ℝ  [M02]
-         │        └─► HadwigerNelson/Certificate.lean   Pt, distSq, UDCert, Valid, sound [M02]
-         │                 ├─► HadwigerNelson/Instances/Spindle.lean  spindle geometry   [M02]
-         │                 ├─► HadwigerNelson/Motion.lean   exact plane similarities      [M09/M11]
-         │                 │        rotations, reflections, translations; composition; NatCancel
-         │                 │        └─► HadwigerNelson/Assembly.lean   many placed copies, one   [M12]
-         │                 │                 certificate; intra-copy edges free, seams checked
-         │                 │                 └─► HadwigerNelson/AssemblyDiagnose.lean  #eval-only:
-         │                 │                          which seam failed, by copy and base vertex
-         │                 └─► HadwigerNelson/Packed.lean   digit packing; DiffWitness    [M08]
-         │                          └─► HadwigerNelson/PackedDiagnose.lean   #eval-only faults
-         │
-         ├─► HadwigerNelson/Pattern.lean   port colourings, one per partition       [M11]
-         │        (depends on Mathlib alone — a candidate for upstreaming)
-         │
-         ├─► HadwigerNelson/Sat/Encoding.lean   colouringCNF, Colorable → Sat, cubes     [M03]
-         │        ├─► HadwigerNelson/Sat/Lrat.lean   certificate ingestion, trust boundary [M03]
-         │        └─► HadwigerNelson/Gadget.lean   colouring constraints, at any number  [M09/M11]
-         │                 of colours; composition; the terminal check over partitions
-         │                 └─► HadwigerNelson/Forcer.lean   a forced pair, and the spindle  [M13]
-         │                          │        that closes it — both rungs' shared argument
-         │                          └─► HadwigerNelson/ForcerDiagnose.lean   which side    [M13]
-         │                                   condition refused a candidate (#eval only)
-         │
-         ├─► HadwigerNelson/Sat/Mask.lean   clauses/assignments as bitmasks; propagate   [M05]
-         │        └─► HadwigerNelson/Sat/ClauseTable.lean   literal chunk table; agreement
-         │                 └─► HadwigerNelson/Sat/MaskCheck.lean   decoder, checker, segments  [M05/M06]
-         │
-         │
-         └─► HadwigerNelson/Reduction.lean          UDCert + Unsat ⟹ bound on χ          [M03]
-                  ├─► Instances/SpindleBound.lean       χ ≥ 4, three routes              [M03]
-                  │        └─► Instances/SpindleLrat.lean   certificates — generated     [M03]
-                  └─► Instances/DeGrey/Table.lean    1581 points, its OWN module     [M04]
-                           └─► Instances/DeGrey/Edges.lean   45 chunks; edges := halfA ++ halfB ++ cross
-                                    └─► Instances/DeGrey/Diffs.lean   133 differences, packed   [M08]
-                                             └─► Instances/DeGrey/Valid.lean   one decide, one citation
-                                             └─► Instances/DeGrey.lean   the claims, the reduction
-                                                      └─► Instances/DeGrey/Split.lean   the two copies  [M06]
-                                                      │        └─► HalfA/  table + 1222 segments
-                                                      └─► Instances/DeGrey/Rotation.lean   791 identities [M09]
-                                                               └─► Instances/DeGrey/Rotated.lean
-                                                                        │   deGreyRot: half B derived
-                                                                        └─► Instances/DeGrey/Forcing.lean
-                                                                                 three gadgets
-                                                                                 └─► DeGrey/Bound.lean
-                                                                                         χ(R^2) >= 5
+### 3.7 The cell family and brick colourings
 
-     Sat/Diagnose.lean   #eval-only fault rendering — deliberately DOWNSTREAM of the        [M07]
-                         checker, so rewriting a diagnostic does not re-check 27.8 h
-     Instances/Heule510.lean, Heule553.lean   two published witnesses, re-certified         [M07]
-              ├─► Heule5xx/{Table,Edges,Diffs,Valid}.lean   geometry, 4 modules each      [M08]
-              ├─► Heule5xx/Cnf/{Table00..03,Table,Seg000..081,Cert}.lean   one certificate
-              │        (imports Heule5xx/Edges, NOT the aggregate: geometry must never sit
-              │         upstream of a certificate, or changing it re-checks every segment)
-              └─► Heule5xx/Bound.lean   chromaticNumber_plane_ge_five_510 / _553
+Colourings constant on lattice cells or on bricks: the upper-bound machinery, and the family whose floor is seven.
 
-     Field/Approx.lean   integer interval bounds for Q4.eval on literals — exact field       [M16]
-                         values compared AS REALS in the kernel, from decidable generator
-                         bounds (l² ≤ d·s² ≤ h²); no injectivity of eval anywhere
-     NarrowFan.lean      the narrow-fan certificate: classed distances, separating           [M16]
-                         colourings, per-class hints; `sound` turns one kernel Bool into
-                         "no equidistant partner list is a fan at this pivot"
-     NarrowFanDiagnose.lean   #eval-only fault walk, DOWNSTREAM, each stage guarded by       [M16]
-                         exactly the conjunct `check` tests; firstFault_none_iff_check
-     Instances/DeGrey/Narrow{630,633,1420,1423}.lean   generated certificates, one per       [M16]
-                         pivot that carries a five-colour fan; headline theorems
-                         deGrey_no_narrow_fan_*
-     FanMono.lean        deletion never creates a fan: edgeGraph_mono lifts list inclusion   [M17]
-                         to the graph order, Fan.of_subset lifts the fan, not_fan_of_subset
-                         restricts a separating colouring to every sub-candidate — the
-                         theorems the hunt's growth-only design rests on. Kept OUT of
-                         Fan.lean so the settled certificate chain is not re-checked.
-     Greedy.lean         greedy colouring, apparently missing from Mathlib: every degree     [M18]
-                         below k makes a finite graph k-colourable
-                         (SimpleGraph.colorable_of_degree_lt); upstreaming candidate
-     ClassGeometry.lean  the 120° class's plane-level structure over ℂ: the chord bound      [M18]
-                         (two circles share ≤ 2 points ⟹ in-class degree ≤ 2), the
-                         triangle identity (unit triangle on a class ⟺ r² = 1/3, and the
-                         equidistant point is the centroid), the 120° rotation rot3 (ℤ/3
-                         orbits are unit triangles; displacement = √3 · radius), and
-                         not_fan_classOnlyGraph: no class confines a fan by itself
-     Coverage.lean       fan_iff_coverage: a fan is exactly compulsory colour coverage of    [M18]
-                         N(p) ∪ Q — the reduction that turns confinement into the minCov
-                         gradient tools/coverage.py measures; the rainbow floor
-     CoverageMono.lean   the coverage ratchet: CoverAtLeast (every proper k-colouring        [M19]
-                         shows ≥ m colours on N(p) ∪ Q) is monotone under adding edges,
-                         widening the class, and lowering the level; at m = k it is the
-                         fan (fan_iff_coverAtLeast) — lower bounds survive construction,
-                         upper bounds must be re-witnessed, which is the instrument's
-                         asymmetry as a theorem
-     Compulsion.lean     the 120° compulsion (outer triples never mono under 3 colours)      [M20]
-                         and the one-pivot cap: chromaticNumber ({p} ∪ circles) = 4
-     Strip.lean          the tube automaton: table decides (×12 identity, purification,       [M20]
-                         mono obstruction) and the window-extension theorem, computable
-     TwoCircle.lean      the two-circle theorem: every unit-distance graph on the two        [M19]
-                         circles (radius 1 and 1/√3) about a point is 3-colourable —
-                         chords step 60°/120°/seam where seam = (√3 + i√33)/6 has
-                         infinite order (its trace's square is 1/3, no algebraic
-                         integer), so labels live on the strip ℤ/6 × ℤ and an explicit
-                         j-independent colouring is proper; the local barrier: no
-                         cover-set-internal gadget beats the rainbow floor
-     Instances/
-       DeGreyBalanced    de Grey's graph admits a balanced proper 5-colouring — class       [M19]
-       .lean             sizes [317, 316, 316, 316, 316], the pigeonhole optimum; the
-                         witness packed as one Nat literal, everything decided by the
-                         kernel; the density-obstruction negative, certified
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Coset` | Colourings constant on the nearest-point cells of the triangular lattice: `coset_chromatic_eq_seven`, `seven_le_card_of_cell_constant`, `eight_le_card_of_cell_constant`, `twelve_le_card_of_cell_constant`, `seven_le_card_shell4`, `no_coset_seven_on_gap`, `exists_unit_pair_corner`. Mathlib only. | — | 34–36, 39 | M37–M42 |
+| `Brick` | Periodic brick colourings and their boundary-tight certificate: `Brick.check`, `check_pos`, `Brick.sound`. | `UnitDistance` | 32, 33 | M35, M36 |
+| `BrickDistance` | A passing brick certificate colours `distanceGraph ℂ D` for the distances its guards avoid (`Brick.colorable_distanceGraph`, `Brick.chromaticNumber_distanceGraph_le`). | `Brick`, `DistanceGraph` | 61 | FS-24 |
 
-Proofs.lean          — flat public surface
-tools/               — UNTRUSTED generators (Python): graph construction, DIMACS, cube split
-```
+### 3.8 Instances
+
+Concrete objects: witnesses, certificates, carriers, and the models that show a theory module's hypotheses can be met. Everything a reader re-checks lives here or in § 3.9.
+
+#### The Moser spindle (rung A)
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/Triangle` | M01's model of its own hypotheses: the unit triangle (`three_le_chromaticNumber_plane`) and the adjacency and non-adjacency examples for `unitDistance`. | `EdgeList` | — | M01 |
+| `Instances/Spindle` | The Moser spindle's certificate, 7 points of ℚ(√3) and 11 edges: `moserSpindle_valid`. | `Certificate` | — | M02 |
+| `Instances/SpindleLrat` | Generated LRAT certificates for the spindle, one monolithic and nine cubes (emitted by `scripts/EmitLrat.lean`). | — | — | M03 |
+| `Instances/SpindleBound` | χ(ℝ²) ≥ 4 three ways: `four_le_chromaticNumber_plane` (kernel `decide`) beside the two certificate routes that make the repository's only trust purchases (§ 5); `moserSpindle_not_colorable_three_spindled`. | `Instances/Spindle`, `Instances/SpindleLrat`, `Reduction`, `Sat/Lrat`, `Forcer` | — | M03, M13 |
+
+#### De Grey's graph and Heule's two witnesses (rung B)
+
+`Table`, `Edges` and `Diffs` are emitted data; `Valid` decides the geometry; the aggregate module states the claims.
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/DeGrey/Table` | Emitted: the 1581 vertices as one literal. | `Certificate` | — | M04 |
+| `Instances/DeGrey/Edges` | Emitted: the certificate and the 7877 edges in 45 chunks, ordered `halfA ++ halfB ++ cross`. | `Instances/DeGrey/Table` | — | M04 |
+| `Instances/DeGrey/Diffs` | Emitted: the 133-difference witness. | `Instances/DeGrey/Edges`, `Packed` | — | M08 |
+| `Instances/DeGrey/Valid` | `deGrey_valid`: every edge at exact unit distance. | `Instances/DeGrey/Diffs` | — | M04, M08 |
+| `Instances/DeGrey` | The geometry claims: `deGrey_unit_distances`, `deGrey_bound_of_not_colorable`. | `Instances/DeGrey/Valid`, `Reduction` | — | M04 |
+| `Instances/DeGrey/Split` | The two 791-point copies, sharing vertex 14 and joined by edge 11–802 (`deGrey_halfA_subset`, `deGrey_cross_mem`); upstream of all of `DeGrey/HalfA/` (§ 4). | `Instances/DeGrey/Edges`, `Sat/Encoding` | — | M06 |
+| `Instances/DeGrey/Rotation` | `deGrey_rotation`: 791 exact coordinate identities carrying the first copy onto the second about (−2, 0). | `Instances/DeGrey`, `Instances/DeGrey/Split`, `Motion` | — | M09 |
+| `Instances/DeGrey/Rotated` | `deGreyRot`, the graph with its second copy derived from the first; `deGreyRot_valid`. | `Instances/DeGrey/Rotation` | — | M09 |
+| `Instances/DeGrey/Forcing` | The three gadgets on vertices 14, 11 and 802: one refutation, the same refutation transported by the rotation, and the joining edge (definitions only). | `Instances/DeGrey/HalfA/Cert`, `Instances/DeGrey/Rotated`, `Gadget` | — | M06, M09 |
+| `Instances/DeGrey/Bound` | `deGreyRot_not_colorable_four` and `chromaticNumber_plane_ge_five`. | `Instances/DeGrey/Forcing` | — | M06 |
+| `Instances/DeGrey/Controls` | Committed negative controls: `deGrey_forcing_alone_admits`, `halfA_table_refuses_halfB_cnf`, `not_valid_comp_of_not_injective`. | `Instances/DeGrey/HalfA/Table`, `Instances/DeGrey/Forcing`, `Sat/Diagnose` | — | M07, M09 |
+| `Instances/DeGrey/Narrow630` | Emitted narrow-fan certificate at pivot 630: `deGrey_no_narrow_fan_630`. | `NarrowFan`, `Instances/DeGrey/Edges` | — | M16 |
+| `Instances/DeGrey/Narrow633` | The same at pivot 633: `deGrey_no_narrow_fan_633`. | `NarrowFan`, `Instances/DeGrey/Edges` | — | M16 |
+| `Instances/DeGrey/Narrow1420` | The same at pivot 1420: `deGrey_no_narrow_fan_1420`. | `NarrowFan`, `Instances/DeGrey/Edges` | — | M16 |
+| `Instances/DeGrey/Narrow1423` | The same at pivot 1423: `deGrey_no_narrow_fan_1423`. | `NarrowFan`, `Instances/DeGrey/Edges` | — | M16 |
+| `Instances/DeGreyBalanced` | A balanced proper 5-colouring, class sizes [317, 316, 316, 316, 316]: `deGrey_balanced`, `deGrey_colorable_five`. | `Instances/DeGrey` | 8 | M19 |
+| `Instances/Heule510/Table` | Emitted: the 510 vertices. | `Certificate` | — | M07 |
+| `Instances/Heule510/Edges` | Emitted: the certificate and 2504 edges in 14 chunks. | `Instances/Heule510/Table` | — | M07 |
+| `Instances/Heule510/Diffs` | Emitted: the 66-difference witness. | `Instances/Heule510/Edges`, `Packed` | — | M08 |
+| `Instances/Heule510/Valid` | `heule510_valid`. | `Instances/Heule510/Diffs` | — | M07, M08 |
+| `Instances/Heule510` | The geometry claims: `heule510_unit_distances`, `heule510_bound_of_not_colorable`. | `Instances/Heule510/Valid`, `Reduction` | — | M07 |
+| `Instances/Heule510/Bound` | `heule510_not_colorable_four`, `chromaticNumber_plane_ge_five_510`. | `Instances/Heule510/Cnf/Cert`, `Gadget`, `Instances/Heule510` | — | M07 |
+| `Instances/Heule510/Critical` | Five-vertex-critical, so no five-colour fan: `heule510_vertex_critical`, `heule510_no_five_fan`. | `Instances/Heule510/Critical/Rows00…07` | — | M15 |
+| `Instances/Heule553/Table` | Emitted: the 553 vertices. | `Certificate` | — | M07 |
+| `Instances/Heule553/Edges` | Emitted: the certificate and 2722 edges in 16 chunks. | `Instances/Heule553/Table` | — | M07 |
+| `Instances/Heule553/Diffs` | Emitted: the 82-difference witness. | `Instances/Heule553/Edges`, `Packed` | — | M08 |
+| `Instances/Heule553/Valid` | `heule553_valid`. | `Instances/Heule553/Diffs` | — | M07, M08 |
+| `Instances/Heule553` | The geometry claims: `heule553_unit_distances`, `heule553_bound_of_not_colorable`. | `Instances/Heule553/Valid`, `Reduction` | — | M07 |
+| `Instances/Heule553/Bound` | `heule553_not_colorable_four`, `chromaticNumber_plane_ge_five_553`. | `Instances/Heule553/Cnf/Cert`, `Gadget`, `Instances/Heule553` | — | M07 |
+| `Instances/Heule553/Critical` | Five-vertex-critical: `heule553_vertex_critical`, `heule553_no_five_fan`, and `chromaticNumber_heule553` (= 5). | `Instances/Heule553/Bound`, `Instances/Heule553/Critical/Rows00…08` | — | M15 |
+
+#### Calibration objects
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/Mycielski` | The 47-vertex Mycielski graph defined in Lean, with `mycielski47_colorable_six` guarding that the sixth colour is used. | `Gadget` | — | M12 |
+| `Instances/Mycielski/Bound` | `mycielski47_not_colorable_five`, the first five-colour refutation. | `Instances/Mycielski`, `Instances/Mycielski/Cnf/Cert` | — | M12 |
+| `Instances/CoreSpindle/Weights` | Emitted weights and search plan for the 63-vertex core-and-spindle graph. | `IndepSearch` | — | M10 |
+| `Instances/CoreSpindle/Cert` | Emitted certificate, 63 vertices and 216 edges: `coreSpindle_valid`. | `Certificate` | — | M10 |
+| `Instances/CoreSpindle/Search` | The weight bound decided: `coreSpindle_noHeavy`. | `Instances/CoreSpindle/Weights`, `Instances/CoreSpindle/Cert` | — | M10 |
+| `Instances/CoreSpindle/Bound` | χ_f(ℝ²) ≥ 65/18 (`fractionalChromaticNumber_plane_ge`) and `four_le_chromaticNumber_plane_fractional`. | `Instances/CoreSpindle/Search`, `Reduction` | — | M10 |
+| `Instances/CoreSpindle/Diagnose` | `findHeavy_isNone`: the failure report agrees with the check. | `Instances/CoreSpindle/Bound` | — | M10 |
+
+#### Pigeonhole carriers and the six-target
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/Core9` | The nine-point √3-pair carrier `core9_pigeonhole` with its inhabitant `core9_colorable_three`; `core9_plane` is vacuous (§ 6). | `PairDist`, `Pigeonhole` | 31 | M34 |
+| `Instances/Core122/Base` | Emitted certificate, 122 vertices and 421 edges: `core122_valid`. | `Certificate` | 31 | M34 |
+| `Instances/Core122/Aug` | The augmented edge list the certificate refutes: 421 unit edges and the 40 distance-2 pairs. | `Instances/Core122/Base` | 31 | M34 |
+| `Instances/Core122` | The distance-2 carrier `core122_pigeonhole` with its inhabitant `core122_colorable_four` (by Theorem B); `core122_plane` is vacuous (§ 6). | `Instances/Core122/Cnf/Cert`, `Gadget`, `PairDist`, `Pigeonhole`, `SeamCert` | 31 | M34, FS-27 |
+| `Instances/HexShell` | The closed hex shell is a K₇ of the {1, √3, 2}-distance graph (`hexShell_pigeonhole`, `seven_le_chromaticNumber_hexShell_distances`); the six-target `add_one_le_chromaticNumber_plane_of_forced_pairs` and `six_le_chromaticNumber_oneTwo_of_forced_sqrt3`. | `PairDist`, `Pigeonhole`, `DistanceGraph` | 32, 43, 61 | M35, M48, FS-24 |
+| `Instances/Core23/Edges` | The 23 addresses of the G* gap core and the constraint graph derived from them by one norm filter. | — | 39 | M42 |
+| `Instances/Core23` | `core23_not_colorable_six` and `core23_colorable_seven` (χ = 7 at ω = 4), carried to the plane as `seven_le_card_gap`. | `Instances/Core23/Edges`, `Instances/Core23/Cnf/Cert`, `Gadget`, `Coset` | 39 | M42 |
+
+#### Upper bounds and the interval
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/Seven` | `sevenBrick` and `chromaticNumber_plane_le_seven`. | `Brick` | 33 | M36 |
+| `Instances/Nine` | `nineBrick`, `plane_colorable_nine`, `chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine`. | `Brick`, `BrickDistance` | 32, 61 | M35 |
+| `Instances/Interval` | `chromaticNumber_plane_interval` (5 ≤ χ(ℝ²) ≤ 7) and `isEmpty_coloring_plane_four`. | `Instances/DeGrey/Bound`, `Instances/Seven`, `Reduction` | 31, 33 | M36 |
+
+#### Models of theory-module hypotheses
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/AritySpec` | Models for the arity floor: `p5_arityFloor` (a five-vertex graph whose floor is 3), `tri_arityFloor`, `k4_arityFloor_zero`. | `Arity`, `Homogeneous`, `Sat/Encoding` | 42 | M45 |
+| `Instances/LimitSpec` | Models of the limit lemma, including the red `collapsed_drawing_satisfies_one_tolerance`. | `Limit`, `Instances/Triangle` | 41 | M44 |
+| `Instances/OneDefectSpec` | The Moser bound through the abstract spindle theorem: `four_le_chromaticNumber_plane_of_rhombus`. | `OneDefect`, `PairDist` | 44 | M49 |
+
+#### Finite planes
+
+| Module | What it holds | Imports | Row | When |
+|---|---|---|---|---|
+| `Instances/FinitePlane11` | `chromaticNumber_finitePlane11` (= 5, no solver), `chromaticNumber_heule510` (= 5), `five_le_chromaticNumber_finitePlane131`. | `UnitQuadrance`, `Instances/Heule510/Bound` | 53 | M58 |
+| `Instances/LiftObstruction131` | The 1581's merged image at 131 has no lift modulo 131²: `merged131_no_lift`, `merged131_no_drawing`. | `Lift` | 54 | M59 |
+| `Instances/LiftObstruction11` | The 5-critical core of `finitePlane 11` has no lift modulo 11²: `core11_no_lift`. | `Lift` | 54 | M59 |
+| `Instances/LiftObstruction19` | The 5-critical core of `finitePlane 19` has no lift modulo 19²: `core19_no_lift`. | `Lift` | 54 | M59 |
+| `Instances/ResidueObstruction11` | `finitePlane11_forces_iff`, `finitePlane11_separated_iff`, `not_separated_sqrt3_11`, `not_separated_two_11`. | `ResidueObstruction`, `Instances/FinitePlane11`, `Instances/HexShell` | 55 | M60 |
+| `Instances/LocalGlobal19` | `chromaticNumber_finitePlane19_le_five` (a 19-entry periodic table), `finitePlane3_forces_iff`, `Forces.isEmpty_ringHom_of_spindle_radicand_11`. | `LocalGlobal`, `Instances/ResidueObstruction11`, `Instances/OneDefectSpec` | 56 | M61 |
+| `Instances/PlaneFreedom` | The four measured primes re-derived from `finitePlane_forces_iff`: `finitePlane7_colorable_four`, `finitePlane19_forces_eq`. | `PlaneRotation`, `Instances/LocalGlobal19` | 60 | FS-25 |
+
+### 3.9 Generated certificate families
+
+Emitted by `tools/` (untrusted) and never edited by hand. Every `Cnf/` and `HalfA/` family has one shape: each `TableNN` chunk imports `Sat/ClauseTable`; `Table` imports the chunks, the edge list the formula is computed from, and `Sat/MaskCheck`; each `SegNNN` imports `Table` and is one implication between watermarks; `Cert` imports the segments and chains them. The `Critical/` families are the rows of a packed criticality certificate.
+
+| Family | Files | Count | Imports from outside the family | Consumed by |
+|---|---|---|---|---|
+| `Instances/DeGrey/HalfA/` | `Table00…15`, `Table`, `Seg000…1221`, `Cert` | 1,240 | `Instances/DeGrey/Split`, `Sat/ClauseTable`, `Sat/MaskCheck` | `Instances/DeGrey/Controls`, `Instances/DeGrey/Forcing` |
+| `Instances/Heule510/Cnf/` | `Table00…03`, `Table`, `Seg000…081`, `Cert` | 88 | `Instances/Heule510/Edges`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/MaskCheck` | `Instances/Heule510/Bound` |
+| `Instances/Heule553/Cnf/` | `Table00…03`, `Table`, `Seg000…081`, `Cert` | 88 | `Instances/Heule553/Edges`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/MaskCheck` | `Instances/Heule553/Bound` |
+| `Instances/Heule510/Critical/` | `Rows00…07` | 8 | `Critical`, `Instances/Heule510/Edges` | `Instances/Heule510/Critical` |
+| `Instances/Heule553/Critical/` | `Rows00…08` | 9 | `Critical`, `Instances/Heule553/Edges` | `Instances/Heule553/Critical` |
+| `Instances/Mycielski/Cnf/` | `Table00`, `Table`, `Seg000…015`, `Cert` | 19 | `Instances/Mycielski`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/MaskCheck` | `Instances/Mycielski/Bound` |
+| `Instances/Core122/Cnf/` | `Table00…15`, `Table`, `Seg000…015`, `Cert` | 34 | `Instances/Core122/Aug`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/MaskCheck` | `Instances/Core122` |
+| `Instances/Core23/Cnf/` | `Table00`, `Table`, `Seg000…001`, `Cert` | 5 | `Instances/Core23/Edges`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/MaskCheck` | `Instances/Core23` |
+
+### 3.10 Layout rules the graph encodes
+
+- **Upstream of a certificate, an edit costs hours.** These 24 modules are ancestors of at least one generated family, so changing a declaration or a doc string in any of them rebuilds certificates (a `--` comment does not; `CLAUDE.md` § Building): `Certificate`, `Critical`, `EdgeList`, `Fan`, `Field/Quadratic`, `Forcer`, `Gadget`, `Instances/Core122/Aug`, `Instances/Core122/Base`, `Instances/Core23/Edges`, `Instances/DeGrey/Edges`, `Instances/DeGrey/Split`, `Instances/DeGrey/Table`, `Instances/Heule510/Edges`, `Instances/Heule510/Table`, `Instances/Heule553/Edges`, `Instances/Heule553/Table`, `Instances/Mycielski`, `Pattern`, `Sat/ClauseTable`, `Sat/Encoding`, `Sat/Mask`, `Sat/MaskCheck`, `UnitDistance`. Settle them before a long generated build.
+- **Geometry never sits upstream of a certificate.** Each family's `Table` imports only the edge list its formula is computed from (`Heule510/Edges`, `Heule553/Edges`, `Core122/Aug`, `Core23/Edges`, `Instances/Mycielski`, and for de Grey `DeGrey/Split`, which imports only `DeGrey/Edges` and `Sat/Encoding`), never a `Diffs`, `Valid` or aggregate module, so re-certifying geometry re-checks no segment.
+- **Diagnostics are downstream.** None of the `#eval`-only modules is an ancestor of a certificate family, so rewriting one re-checks nothing: `AssemblyDiagnose`, `PackedDiagnose`, `Sat/Diagnose` (imported only by `Instances/DeGrey/Controls`), `ForcerDiagnose`, `CriticalDiagnose`, `NarrowFanDiagnose`, `Instances/CoreSpindle/Diagnose`.
+- **Theory modules that import an instance**, each for a concrete object its proof uses: `FieldWall4` imports `Instances/SpindleBound`, `Pigeonhole` imports `Instances/Triangle`. `FieldWall4` uses the spindle's edge list and the kernel-decided `moserSpindle_not_colorable_three`, not the certificate routes, and axioms are counted per declaration, so the import buys nothing (§ 5).
+- **A dangling citation.** The doc strings of `DistanceGraph` and `Homogeneous` cite `Instances/OneTwo`, the intended home of a certified {1, 2} six-forcer; that certificate was priced and deferred (ledger row 44) and the module does not exist.
 
 ## 4. Roadmap
 
-Leaf-first, one milestone at a time, green manifold at every step. Subplans in `plans/`.
+This file carried the roadmap for milestones M01–M20. **From M21 onward the roadmap is `CLAUDE.md`
+§ Frontier** — the state of the art, the novel-results ledger and the ranked paths forward — **and
+`plans/FRONTIER-STUBS.md`**, which is authoritative: every candidate milestone as a full stub, ranked, with
+its bearing on χ(ℝ²) ≥ 6 stated. Subplans are `plans/M<nn>-*.md`, and the stub rule is `WORKFLOW.md`
+§ Plan. Nothing after M20 is tracked here.
 
-| # | Milestone | Terminal test |
+What M01–M20 delivered:
+
+| # | What landed | Headline |
 |---|---|---|
-| **M01** ✅ | **The statement.** `unitDistanceGraph`; transfer from a finite witness to `χ(ℝ²)`. No data, no SAT. | `chromaticNumber_ge_of_not_colorable_finite` green; the statement reads correctly against the informal claim; a concrete model of the hypotheses exhibited. |
-| **M02** ✅ | **Exact geometry.** Quadratic tower + `eval` ring hom + `UDCert` and its soundness. | *Landed 2026-07-27.* Moser spindle's 7 points / 11 edges certified by kernel `decide`, axioms `[propext, Quot.sound]`. Measured 0.16 s/edge — no cost from Mathlib's hierarchy. |
-| **M03** ✅ | **The SAT bridge, and χ ≥ 4.** `colouringCNF`, `Colorable → Sat`, LRAT ingestion, cube cover. | *Landed 2026-07-28.* Spindle non-3-colourable **three ways** — brute-force `decide +kernel`, one LRAT certificate, and nine cube certificates — all agreeing. `4 ≤ χ(ℝ²)` proved through the brute-force route: axioms exactly `[propext, Classical.choice, Quot.sound]`. The certificate routes carry 10 native axioms across 5 declarations, each named in its docstring and cross-checked by the gate. lean4checker green on all 13 modules. |
-| **M04** ✅ | **de Grey's graph as certified data.** 1581 vertices, 7877 edges, geometry verified in Lean. | *Landed 2026-07-28.* `deGrey_valid` — all 7877 edges at exact squared distance `768²`, kernel-decided in 158 chunks, axioms `[propext, Quot.sound]`: **no native evaluation in the geometry at all**. `deGrey_bound_of_not_colorable` leaves exactly one hypothesis between here and `χ(ℝ²) ≥ 5`. lean4checker green on all 33 modules. Lean guards 1581 and 7877; the paper's **397** counts an intermediate set that never reaches Lean and is checked by `tools/degrey.py`'s output only. |
-| **M05** ✅ | **The kernel-checkable certificate checker.** Big-integer refutation checker, its soundness proof, and the packed certificate format. | *Landed 2026-07-29 (`plans/M05-kernel-checker.md`).* `maskCheck_sound` — a refutation checker whose two hypotheses are closed `Bool`s the **kernel** decides, axioms exactly `[propext, Classical.choice, Quot.sound]`, zero `sorry`. Soundness is proved for **every** decoder, so the certificate's packing is untrusted as a matter of type. Negative controls committed and *watched to fail*: a satisfiable formula is refused, a clause citing itself is refused, and mutating the conflict test or deleting the watermark guard breaks the soundness proofs rather than the checker's answer. The remaining work is throughput at de Grey's scale, projected at **5.4–9.0 h processor time, ~30–50 min wall over 96 independent cubes**; that measurement belongs to M06, which is where a real certificate first arrives. |
-| **M06** ✅ | **χ(ℝ²) ≥ 5.** ~~Cube split at depth 5 (1024 cubes)~~ — **the cube split is dead; see below.** de Grey's own decomposition instead: two forcing lemmas, one certificate each. | *Landed 2026-07-30 (`plans/M06-chi-ge-five.md`).* **`chromaticNumber_plane_ge_five` — the plane needs five colours — depends on axioms exactly `[propext, Classical.choice, Quot.sound]`.** Zero native purchases, zero `sorry`, linters clean. Two kernel-checked refutations, 34.2 × 10⁶ propagation steps across 2,265 segment modules: **27.8 hours of processor time, 2.8 hours of wall clock over twelve jobs**, 396 MB of source and 297 MB of compiled modules. The cube split the roadmap specified was measured dead (§ 2.2.1) and de Grey's own two-copy decomposition replaced it at 44× less cost. `lean4checker` covers everything the geometry and the proof structure rest on; **it does not cover the two certificates**, because replaying them repeats every kernel reduction single-threaded — see § 5. |
-| **M07** ✅ | **Shrinking.** Re-verify smaller witnesses on the same infrastructure; automate vertex-deletion search. | *Landed 2026-07-30 (`plans/M07-shrinking.md`).* **`χ(ℝ²) ≥ 5` re-proved from witnesses of 510 and 553 vertices**, against de Grey's 1581 — axioms exactly `[propext, Classical.choice, Quot.sound]`, one certificate each, no decomposition. **1,413,841 and 1,104,106 propagation steps against M06's 34,169,571** — ~1 hour of processor time for both against 27.8 for one, and 23 MB of source against 396 MB. Two levers, both measured: naming one triangle's colours is worth **20×**, racing triangle × configuration × seed on *trimmed hint count* another **10.5×**. de Grey's own graph was measured **not to shrink** — its forcing halves are vertex-critical, so it goes 1581 → 1577 and stops. The smaller certificates are what finally make the independent-kernel replay affordable (§ 5). |
-| **M08** ✅ | **Structure-aware geometry.** Difference-vector certificates: one squared length per *distinct edge difference*, and one big-integer subtraction per edge over packed coordinates. | *Landed 2026-07-31 (`plans/M08-structure-aware-geometry.md`).* All three witnesses re-certified through `DiffWitness`; `deGrey_valid`, `heule510_valid`, `heule553_valid` unchanged in statement. de Grey's geometry: **246.2 → 55.9 CPU s and 9 modules → 2**, memory per edge 4.55 → 0.27 MB. The roadmap's premise that the expensive term becomes *flat* in graph size was **measured false** — the difference count doubles when the construction doubles; what is stable is the ratio, ~118 : 1. Two instincts measured wrong and recorded: a flat giant-`Nat` table is free in the kernel and quadratic in the elaborator, and lane width is not free either. The milestone did **not** invalidate M06's certificates — de Grey's reach the vertex table without passing through his geometry — and the emitter now keeps every certificate's import closure free of geometry permanently. |
-| **M09** ✅ | **Gadget algebra.** Graphs with designated vertex sets and *proven* colouring properties, plus composition lemmas — so search runs over properties rather than vertices. Colour-permutation symmetry lands here too. | *Landed 2026-07-31 (`plans/M09-gadget-algebra.md`).* A gadget is a `Bool` on port colourings plus the proof every proper colouring satisfies it; gadgets **intersect**, **widen**, **transport** along vertex maps, and arrive from an edge, a refutation, or another gadget. `not_colorable_of_gadget` replaces both `not_colorable_of_forcing` and `not_colorable_of_triangle_pinned`, and all three witnesses now go through it. **de Grey's second copy is derived, not asserted**: `deGrey_rotation` checks 791 exact coordinate identities and the second half's *geometry* and *colouring property* both follow — **half B's certificate deleted, 1,043 modules, 180 MB and 12.8 hours gone**, replaced by 95 CPU s. Colour symmetry is now one lemma at any number of ports, and the plan's claim that "the 4 is load-bearing" was **measured false**: stated relationally it needs no bound on the colour count at all.|
-| **M10** ✅ | **Fractional bounds.** Fractional chromatic number machinery, and the best bound a finite dual certificate reaches at a size the kernel can check. ~~the 383/102 record~~ — **that target was measured wrong three ways** (see below). | *Landed 2026-08-01 (`plans/M10-fractional-bounds.md`).* **`χ_f(ℝ²) ≥ 65/18 ≈ 3.6111`**, axioms exactly `[propext, Classical.choice, Quot.sound]`, from a 63-point graph re-derived from Fisher and Ullman's core-and-spindle construction. Better than every *finite-graph* bound in Cranston–Rabern 2015, whose best was 1732/481 ≈ 3.6008 from a linear program with over 25,000 constraints — at a sixth the size, because the dual is separated by a SAT oracle instead of by enumerating maximal independent sets. No new certificate format: weights plus a **pruned kernel-run search**, 390,625 nodes against the graph's 10⁹-odd independent sets, 3.5 CPU min. `χ(ℝ²) ≥ 4` re-derived from the fractional bound alone — a third independent route to M03's rung. **Explicitly not a route to 6.** |
-| **M11** ✅ | **The search instrument.** Everything the hunt needs, built before the hunt starts. Inventory in `plans/M11-search-instrument.md`. | *Landed 2026-08-01.* **Eight of ten inventory items; two carried, and one of those as planned.** The gadget algebra is indexed by the colour count — `K₅` refuted at four and surviving at five, both committed — and `Proper` is stated over any colour type at all. The terminal check ranges over **one colouring per colour-partition of the interface**, measured at **53–72×**, which moves the ceiling from seven interface vertices to **ten at five colours (4.3 min)**; at eight it previously did not finish. `Motion` is now a similarity rather than a rotation-about-a-point, so translations and reflections exist at all, compositions are `Motion.trans`, and a copy whose coordinates are *defined* as the image costs **nothing** to certify — against 791 identities and 95 s for de Grey's frozen table. Three tools: `profile.py` (a subgraph's whole port property), `minimise.py`, and `scan.py`, which **recovers de Grey's 791-point split in 3.6 s from the coordinates alone** and hands back both the motion and the vertex map. Axioms exactly `[propext, Classical.choice, Quot.sound]` throughout; 112 clean. **Not built: orbit construction, and a gadget catalogue from the literature** — though the *producer* landed, and with it the first gadget here that is neither an edge nor a certificate. |
-| **M12** ✅ | **Candidate construction.** The rest of what the hunt needs. | *Landed 2026-08-01 (`plans/M12-candidate-construction.md`).* **`mycielski47_not_colorable_five` — the first statement in this project about *five*-colourings — on axioms exactly `[propext, Classical.choice, Quot.sound]`**, from a 47-vertex graph **defined in Lean rather than emitted**, refuted in 387,065 propagation steps: the number subplanning predicted before the module existed, to the digit. Its partner `mycielski47_colorable_six` is an existence claim in the opposite direction, derived from Mycielski's construction, guarding that the sixth colour is actually used. `Assembly` certifies many placed copies for the price of their seams — necessary, not optional: computed coordinates cost **0.33 CPU s/edge against 7.1 ms** for emitted ones, so the symbolic route is what makes the representation viable at all. `tools/construct.py` **rebuilds the Moser spindle from primitives**, checked by isomorphism; `tools/field.py` collapses arithmetic that was copy-pasted five times. **One search step: ~17 ms.** Axioms 120 clean. **Not landed: de Grey's seed set from primitives, an orbit primitive in the tool, and any gadget catalogue** — § 0(e) measured that one cannot be *harvested*, and this milestone did not construct one either. |
-| **M13** ✅ | **Re-finding χ ≥ 5 with the search.** The calibration: a search instrument that cannot re-discover the witness for the rung below is not credible for the rung above. | *Landed 2026-08-01 (`plans/M13-refind-five.md`).* **de Grey's construction is exactly four primitive moves** — `spindle(delete₂(spindle(orbit(S, hex₁₂), (0,0), (2,0))), (−2,0), (2,0))` — and `tools/construct.py` now rebuilds his committed 1581-point table from 39 seed points, **matching point for point in the exact field**, asserted by `regen-check`. Two stub claims were measured false: rotation about an arbitrary centre is *not* a needed primitive (both his rotations are spindles about a vertex, at radicands 15 and 63 = 9·7 — which is why √15 and √7 are in the field), and the deletion is *not* load-bearing (793 points force the same pair). **`Forces` and `not_colorable_of_spindled_forcer`** state the argument both known rungs share, over any graph and any colour count; the Moser spindle is re-derived through it as a **fourth** independent route, by deciding a four-vertex rhombus and placing it twice. Axioms 130 clean. **The search did not re-find χ ≥ 5, and the reason is measured, not guessed: all 39 of de Grey's seed points are irredundant**, so a search that grows has no gradient — every proper subset of the answer scores exactly zero. |
-| **M14** | **Seed optimization: the fan.** M13 searched for a *forced pair* — two points every proper 4-colouring paints alike — and found none anywhere. M14 measured why: de Grey's own construction has no forced pair until its last step. What it has is a **fan** — a pivot and a handful of partners such that every proper 4-colouring paints the pivot like *at least one* of them. His 397-point configuration has one of width 3; every configuration M13 searched has **none at all**, at any pivot, at any spindle-able distance, and the test says so in 0.6 s where M13's forced-pair sweep spent 51 s to report nothing. `Forces` is the width-one case. Evidence in `plans/M14-seed-optimization.md`. | `Proofs/HadwigerNelson/Fan.lean` — the property, the ladder, three producers, and the closing lemma, with `Forces` re-derived as its width-one rung. Plus a seed-quality score that discriminates. |
-| **M15** | **The hunt — and what a fan actually is.** Rung D. Subplanning found the identity that reshapes the search: M14's *fan* sits at a pivot, at **any** width, exactly when deleting that pivot leaves a graph still needing the colour it needed. **The fan is vertex redundancy.** Three measured consequences — the existence test drops a colour and gets 7.6× cheaper, one call retires a whole pivot instead of one per distance class, and the **shrunk** five-chromatic witnesses are five-vertex-**critical**, so no five-colour fan sits anywhere in them — while de Grey's own *unshrunk* 1581-point graph carries one at **four** pivots (630, 633, 1420, 1423, two rotation-symmetric pairs, confirming M07's independent count). **The M07 shrinking search removed exactly what the route to six needs.** Evidence in `plans/M15-the-hunt.md`. | `Proofs/HadwigerNelson/Critical.lean` — the correspondence and the packed certificate — plus `heule510_no_five_fan` and `heule553_no_five_fan` on axioms exactly `[propext, Classical.choice, Quot.sound]`, from 1,063 explicit four-colourings and no SAT certificate at all. Honest report on the hunt itself: **not found** — every candidate carries a fan and none has it confined to a single distance class, which is what the closing move needs. Narrowing is M16. |
-| **M16** ✅ | **Narrowing.** M15 made a fan's *existence* free and left its *narrowness* untouched; M16 asked the narrowness question of the only four five-colour fans in existence (de Grey's pivots 630, 633, 1420, 1423). Subplanning answered it in **1.5 seconds**: one separating colouring rejects 81% of distance classes at once, so the sweep the stub priced in hours is ~8 solver calls per pivot. **None of the four fans is confined to a single distance class — at any width, at any of the 1,340 classes per pivot — and the closable width-2 geometry (`r² = ½`) is empty of vertices.** Evidence in `plans/M16-narrowing.md`. | *Landed 2026-08-02.* **`deGrey_no_narrow_fan_{630,633,1420,1423}`** — for every real `r`, no partner list avoiding the pivot and all at distance `r` carries a five-colour fan — each on axioms exactly `[propext, Classical.choice, Quot.sound]`, from 5–8 explicit 5-colourings per pivot, the class partition bound by exact `distSq`, and the classes' *real*-distinctness certified by **integer interval arithmetic** (`Field/Approx.lean`) rather than any injectivity claim about `Q4.eval` — the instrument rung D's geometry reading will reuse. Kernel cost ~2 min / 22 GB peak per pivot. The route to χ ≥ 6 through the four known fans is closed; a narrow fan must be *constructed* (M17). |
-| **M17** ✅ | **Constructing narrow fans — the growth-family hunt.** M16 closed the narrowing route through every existing witness; M17 asked whether growth can *build* a confined fan. Two structural findings first: **deletion provably never creates one** (a separating colouring restricts to every sub-candidate — a theorem, so the stub's deletion arm died before any search), and in any union of two 4-refuting copies **every vertex carries a five-colour fan** (M15's identity), so existence is free and confinement is the entire question. The instrument: an all-pivots sweep sharing one colouring pool across the whole candidate (3,000 points in ~300 s), driving a recipe algebra of five constructors whose ledger is independently re-derivable. Evidence in `plans/M17-constructing-narrow-fans.md`. | *Landed 2026-08-02.* `FanMono.lean` (`edgeGraph_mono`, `Fan.of_subset`, `not_fan_of_subset`) on axioms exactly `[propext, Classical.choice, Quot.sound]`. **The hunt: 68 candidates — 28 fan-pivot doublings, 11 seam glues, 18 translation glues, 5 orbits, 6 second-generation doublings — 171,472 pivots, 557 M class-tests, every one `separated`, zero deferred.** Honest result: **not found**. The gradient that survives: `r² = 1/3` resists pool rejection in every family and generation (17,259 of 35,727 calls). Credibility: the control re-finds all **25** four-colour confined fans of de Grey's 397-point configuration (13 at `r²=4`, **12 previously-unrecorded at `r²=4/9`**). |
-| **M18** ✅ | **The 120° class.** The first milestone whose objective is structure nobody had named: turn M17's resisting histogram into kernel-checked mathematics. The class at `r² = 1/3` is the unique class whose spindle rotation has finite odd order (120°, order 3), the unique class that can carry unit triangles (circumradius² of the unit triangle is exactly 1/3 — `exists_unit_triangle_iff`), and its ℤ/3 closure partitions it into rainbow triangles (`rot3_unit_triangle`). **No class ever confines a fan by itself** (`not_fan_classOnlyGraph`: two circles share ≤ 2 points ⟹ in-class degree ≤ 2 ⟹ 3-colourable by a greedy lemma Mathlib turned out not to have ⟹ a 4th colour frees the pivot) — confinement is an interplay theorem, always. And **fan ⟺ compulsory coverage** (`fan_iff_coverage`): `p` is fanned by `Q` iff every proper colouring puts all k colours on `N(p) ∪ Q` — so "distance to confinement" is a measurable number, `minCov`. Evidence in `plans/M18-the-120-degree-class.md`. | *Landed 2026-08-03.* Three modules (`Greedy`, `ClassGeometry`, `Coverage`), 15 public theorems, all on axioms exactly `[propext, Classical.choice, Quot.sound]` — no `native_decide`, no kernel-scale data. Instruments: `tools/coverage.py` (minCov via colour-symmetric forbidding levels, witnessed bounds) and `tools/classstat.py` (in-class census + violation reporter — the lemmas' empirical mirror over 2.6 M class keys, green). **Measured: both ℤ/3 closures sit at `minCov = 3` of 5 — the rainbow floor exactly, the neighbourhood contributing nothing — and the full 4,615-pivot sweep of a closure finds `minCov ≤ 3` everywhere.** The resist join splits M17's histogram into two mechanisms: in-class colour budget (1/3's triangles, r²=3's paths) and what was then read as **ambient near-forcing at structureless √33 classes** — M19's §0 dissolved that reading (pool margins were solver sampling bias; the √33 family's true identity is geometric, the cross-chord seam of the two-circle theorem). Corrected en route: the odd-cycle-uniqueness claim (pentagons exist at plane level at `r² = (5±√5)/10`; the coordinate field, not the plane, excludes them — sin 72° is not multiquadratic). |
-| **M19** ✅ | **The two-circle theorem, the coverage ratchet, and the colourings as objects.** The flat histogram was a theorem waiting to be stated: **every unit-distance graph on the two circles (radius 1 and 1/√3) about a point is 3-colourable** (`TwoCircle.colorable_three_induce`/`_comap`) — unit chords step 60° (outer) and 120° (inner), cross chords step by `seam = (√3 + i√33)/6`, which has **infinite order** (its trace √3/3 squares to 1/3, which is no algebraic integer), so every orbit carries unique ℤ/6 × ℤ labels and an explicit j-independent strip colouring is proper. The √33 resistance family was the seam's geometry all along. **The local barrier**: no cover-set-internal gadget ever beats the rainbow floor — the 4,615 + 1,558-pivot flat measurement retro-dicted; the boundary stated with care (external extension-forcing is *not* excluded — M20's question). Plus `CoverAtLeast` (the ratchet: coverage lower bounds are monotone under construction; at level k it is the fan) and the kernel-certified **balanced 5-colouring of de Grey's graph** ([317, 316×4], pigeonhole-optimal) — the χ=5-lens density negative. Evidence: `plans/M19-coverage-driven-construction.md`. | *Landed 2026-08-04.* Three modules, zero purchases, all on the standard three axioms. §0's honest retractions: mechanism (b)'s "near-forcing" was CDCL sampling bias (three pre-registered hypotheses refuted with controls — transmission, periodicity, the rotation ghost); the pools' density floor was the solver's taste (balance SAT at exact pigeonhole, both scales — closure at s = 936 too); pool statistics measure the sampler, not the space. Gadget battery E0–E2 all minCov = 3, exactly as the theorem predicts. Instruments: `colorstat.py` (pools as objects, bias caveat recorded), `balance.py` (cardinality bounds + witness emission), `coverage.py --pool-out`. |
-| **M20** ✅ | **The extension problem: the compulsion, the cap, and the automaton.** The two-circle theorem's boundary examined and sharpened into theorems. **The 120° compulsion** (`Compulsion.no_mono_outer_triple`): an outer 120°-triple — pairwise non-adjacent — is never monochromatic under 3 colours; the seam-image unit triangle (σ = seam/√3 = ⟨1/6, √11/6⟩, its rot3-orbit) is rainbow and refuses. **The one-pivot cap** (`chromaticNumber_concentric`): {p} ∪ both circles is exactly 4-chromatic — nine points force the 4th colour; the 5th provably needs multi-pivot structure. **The strip automaton** (`Strip.lean`): the two-circle graph splits into two tubes; per tube the finite theory is kernel-decided against literal tables (purification, mono obstruction, 4-avoidance, the exact ×12 growth identity) and the **window-extension theorem** makes every ≥2-column proper window extend to the whole tube, computably. Barrier docstring corrected (the pivot itself forces the 4th colour — never "outside the circles"). Evidence: `plans/M20-the-extension-problem.md`. | *Landed 2026-08-05.* Two new modules, zero purchases, all on the standard three axioms; pair-quantified decides measured 130× costlier than the table pattern and banned by rule. §0: the **extension profile** instrument (`tools/extend.py`, controls both ways — the certified-confined pivot reads EMPTY, 1,000/1,000 sampled kills) read the plain closure's profiles **FULL at all three enumerable representative pivots (66,732/66,732 patterns extend)**; the E-battery re-scored by pattern-killing found **zero kills in 1,684 resolved verdicts** (no-verdict residue honestly held); the clamp census confirmed the mechanism (gadget-added points touch ≤ 3 cover-set members). Incidents named and fixed: the uncapped-enumeration OOM (cap now mandatory), the forkserver global-mutation trap, the set-order pin misread (checker bug, zero wrong verdicts). |
+| M01 | The statement: `unitDistance` and the finite-drawing reduction | `add_one_le_chromaticNumber_unitDistance` |
+| M02 | Exact geometry: the ℤ-leaf tower, `UDCert`, the Moser spindle certified | `moserSpindle_valid` |
+| M03 | The SAT bridge; χ(ℝ²) ≥ 4 three ways (rung A) | `four_le_chromaticNumber_plane` |
+| M04 | De Grey's graph, 1581 vertices and 7877 edges, as certified data | `deGrey_valid` |
+| M05 | The kernel-run refutation checker | `maskCheck_sound` |
+| M06 | χ(ℝ²) ≥ 5 through de Grey's two-copy decomposition, after the cube split was measured dead | `chromaticNumber_plane_ge_five` |
+| M07 | The same bound from Heule's 510 and 553 at about 1/25 the cost; de Grey's graph does not shrink | `chromaticNumber_plane_ge_five_510` |
+| M08 | Packed geometry, one norm per distinct difference | `UDCert.valid_of_diffWitness` |
+| M09 | The gadget algebra; de Grey's second copy derived by a rotation, deleting a certificate | `not_colorable_of_gadget`, `deGrey_rotation` |
+| M10 | χ_f(ℝ²) ≥ 65/18 from a 63-vertex graph and a pruned kernel search | `fractionalChromaticNumber_plane_ge` |
+| M11 | The search instrument: colour-generic gadgets, one pattern per partition, similarities | `exists_mem_canonPatterns` |
+| M12 | Candidate construction; the first five-colour refutation | `mycielski47_not_colorable_five` |
+| M13 | De Grey's construction as four primitive moves; forced pairs | `not_colorable_of_spindled_forcer` |
+| M14 | The fan, the property his seed configuration has | `not_colorable_of_spindled_fan` |
+| M15 | A fan is a removable vertex; Heule's witnesses are vertex-critical | `heule510_no_five_fan` |
+| M16 | No known five-colour fan is confined to one distance | `deGrey_no_narrow_fan_630` |
+| M17 | Deletion never creates a fan; the growth-family hunt exhausted | `not_fan_of_subset` |
+| M18 | The 120° class; fan ⟺ compulsory coverage; greedy colouring | `fan_iff_coverage` |
+| M19 | The two-circle theorem; the coverage ratchet; de Grey's balanced 5-colouring | `colorable_three_induce` |
+| M20 | The 120° compulsion, the one-pivot cap, the strip automaton | `chromaticNumber_concentric` |
 
-M01–M06 constitute rung B and are the publishable unit. M07–M14 is rung C, and M15 onward is rung D.
+M01–M06 are rung B, with rung A (χ(ℝ²) ≥ 4) landing at M03; M07–M17 built the search instrument
+(rung C); M18 onward is the hunt.
 
-**From M21 onward the live roadmap moved to `CLAUDE.md` § Frontier (paths forward), with every
-future milestone maintained as a detailed pre-subplan stub in `plans/` — the stub rule in
-`WORKFLOW.md` § Plan.** The construction-ladder trilogy (M24 pair, M25 four-ladder, M26 hexagram,
-all χ = 4 exactly on the standard three axioms) closed the seam-field arc; M27–M29 were demoted
-2026-08-09 (banners in their stubs say why), and the programme jumped fields: M30–M32 carry the
-same exactness method into the rotation group where de Grey's 5-chromatic graph lives.
-
-**M14 was inserted 2026-08-01**, after M13 landed, and the hunt moved to M15. The reason is a *measurement*, not a
-preference: M13's search examined 33 universes up to 679 points, found **no forced pair and left no pivot
-unsettled**, and the branching factor is **378 spindle moves from a 43-point configuration** — so depth 3 is 54
-million nodes at 51 s each, about **87 CPU-years**. Worse than the rate, the target is **unreachable**: de Grey's
-route begins at 39 *hand-chosen* points, and a search whose moves only add points (orbit, spindle, union) can
-never produce a hand-chosen subset. More compute buys nothing against an unreachable target, so M14 attacks the
-seed-choice problem itself.
-
-**M13 was inserted 2026-08-01**, after M12 landed, and it is a calibration rather than a new
-capability. M12's instrument re-finds the **Moser spindle — rung A's own witness — at depth 1 in
-under a second**, verified isomorphic to the committed one; and over 1,961 distinct graphs in 358 s
-it finds nothing needing five colours, then **exhausts with an empty frontier**. Spindle-from-seeds is
-a small closed family, so more compute buys nothing. The rule the insertion encodes: *a search that
-cannot re-discover the witness for the rung below is not credible for the rung above.* The primitives
-it adds are named by de Grey's construction rather than guessed — orbit under a finite group,
-deletion, and rotation about an arbitrary centre — because his is the one route known to reach χ ≥ 5,
-and a search that cannot express it has not been shown to search the right space. Finding a different
-route is the win; being able to walk his is the calibration.
-
-**M12 was split from the hunt on 2026-08-01**, the day M11 landed, and the reason is worth stating
-because it is a rule rather than a scheduling preference. A search that stops to build a tool is a
-search that stops — but the sharper problem is that a tool built *during* a stall is shaped by the
-stall rather than by the problem, which is how a search comes to find what a bug allowed. So
-everything we can name in advance is built in advance, and whatever gets built during the hunt is
-then genuinely novel by construction.
-
-Splitting it surfaced two gaps neither M11 nor its three modeling passes had noticed. **Nothing in
-this repository constructs a candidate graph** — four generators, four hard-coded constructions, and
-an M11 instrument that only ever *consumes* a graph. And **no theorem here has ever been about
-five-colourings**: `coloringCNF 5` and `Colorable 5` appear zero times, so the cost of the question
-rung D actually asks is unmeasured, in a project where refutation cost has already been measured
-*non-monotone* in graph size. That measurement is M12's first item.
-
-**M11's own miss, recorded.** Its terminal test read "every tool in that inventory built and
-measured"; eight of ten were. Orbit construction was deferred deliberately (§ 1 of the subplan says
-so, before any work started) and a gadget catalogue transcribed from the literature was not built at
-all, because the papers whose gadgets we would transcribe do not distribute data — the same wall M10
-hit. What ships instead is the catalogue the instrument produces.
-
-**M10's target was wrong, and the roadmap said so for a week.** "The 383/102 record" is Exoo and
-Ismailescu's 2017 bound: a 73-vertex graph published in *Geombinatorics*, which does not distribute
-data, so the witness cannot be independently re-derived — and it has been overtaken three times
-since, most recently by `χ_f(ℝ²) ≥ 4` (Matolcsi–Ruzsa–Varga–Zsámboki, arXiv 2311.10069), which goes
-through the *geometric* fractional chromatic number and amenability of the plane's isometry group,
-an argument no finite weighted graph can imitate. Certifying 383/102 would therefore have been
-certifying neither the record nor anything re-derivable. What M10 ships instead is stated exactly:
-the best bound a finite dual certificate reaches at a size the kernel can check.
-
-**M11 was inserted 2026-08-01**, splitting the old M11 in two. The reason is a blocker found while
-answering a question about symmetry: **the gadget algebra is written at four colours throughout, and
-χ(ℝ²) ≥ 6 requires refuting *five*-colourings.** Everything under it — the encoder, the reduction,
-the colour-symmetry lemma — is already general in the colour count; `Gadget.lean` alone is not. A hunt
-started before that is a hunt asking the wrong question, and the cost model changes with it: the
-composition's terminal check goes from `4^m` to `5^m`, and the colour-symmetry saving that M09
-deliberately deferred goes from 24× to 120×.
-
-**Reordered 2026-07-29**, after `plans/spike-kernel-lrat.md` and `plans/spike-geometry-scaling.md`.
-Three changes, each forced by a measurement rather than a preference:
-
-* **The checker moved from "tracked open work" to M05, ahead of the headline.** It was written off as
-  needing its own soundness proof; core's generic `lratChecker` already kernel-reduces with an
-  axiom-clean soundness theorem, so what is missing is throughput, and the big-integer design is
-  measured at 430× core's. Ahead of the headline because the packed certificate format is shared work
-  either way, so doing it first means rung B ships once and the trust ledger never grows 1024 entries
-  only to have them removed.
-* **Structure-aware geometry became its own milestone (M08)** rather than an optimisation inside the
-  hunt. At 0.045 s/edge a 10⁵–10⁷-edge candidate costs hours to days of geometry *each*, which is
-  fatal for a search. **The "flat in graph size" claim this bullet used to make is false** and M08
-  measured it so: the distinct-difference count doubles when the construction doubles, and what is
-  stable is the *ratio* — ~118 : 1 across de Grey's whole build. The cost stays linear in graph size
-  with a constant an order of magnitude smaller, which is the difference between days and hours per
-  candidate rather than between linear and constant. It also did not have to change the edge list's
-  shape: the difference indices ride alongside as a separate list.
-* **Gadget algebra became its own milestone (M09)** rather than a bullet inside the hunt. It is the
-  actual bet on rung D: de Grey, Exoo–Ismailescu and Parts all reason over gadgets with colouring
-  properties, informally. Making composition a theorem is what turns the search space from vertices
-  into properties, and it is the one advantage here that is not shared with everyone who already
-  tried and stalled. **It paid before the hunt started**: de Grey's second certificate — 12.8 hours
-  and 1,043 modules — turned out to be his first one transported along a rotation.
-
-**One cost of the freeze, recorded rather than paid.** `Instances/DeGrey/Split.lean` sits upstream of
-1,222 certificate modules, and its prose still names `not_colorable_of_forcing`, a theorem M09 deleted
-in favour of the general composition. Correcting a comment there costs ~15 hours of kernel time, so it
-is not corrected. The theorem it should name is `HadwigerNelson.not_colorable_of_gadget`.
+**Stale prose left in place: `Instances/DeGrey/Split.lean`.** The module sits upstream of all 1,240 files
+of `Instances/DeGrey/HalfA/`, about 15 CPU hours of kernel checking, and its prose predates M09 in two
+places. Its module doc string (lines 14–17) and the doc string of `deGrey_cross_mem` describe the argument
+as two forcing lemmas proved from certificates, the pre-M09 shape; since M09 it is one certificate,
+transported by `deGrey_rotation` and composed as gadgets. Doc strings are environment data, so correcting
+them rebuilds that whole family, and they are not corrected. A `--` comment (lines 53–58) names
+`not_colorable_of_forcing`, which M09 deleted in favour of `not_colorable_of_gadget`. By the measured rule
+in `CLAUDE.md` § Building, an in-place edit of a `--` line that keeps the line count rebuilds only
+`Split.lean` itself; that has not been measured on this file.
 
 ## 5. Trust
 
-The de Bruijn criterion, operationalized. Audited by `scripts/Axioms.lean` at every milestone.
+The de Bruijn criterion, operationalized: everything here reduces to what the kernel checked plus what
+was explicitly chosen to trust. `scripts/Axioms.lean` audits the public surface through
+`scripts/axioms.sh` at every milestone; the current count is in `CLAUDE.md` § Trust ledger.
 
 | Entry | Status |
 |---|---|
 | `propext`, `Classical.choice`, `Quot.sound` | accepted silently |
 | `sorryAx` | the gate fails on it |
-| `<decl>._native.native_decide.ax_N_M` | **purchase — recorded below, per declaration** |
+| `<decl>._native.native_decide.ax_N_M` | **a purchase, listed below per declaration** |
 
-**Grep for the right name.** At toolchain v4.32.0, `native_decide` mints a *per-declaration* axiom
-and `Lean.ofReduceBool` does **not** appear in `#print axioms` at all:
+**Grep for the right name.** At toolchain v4.32.0, `native_decide` mints a per-declaration axiom, and
+`Lean.ofReduceBool` does not appear in `#print axioms` at all:
 
 ```
 'foo' depends on axioms: [propext, Classical.choice, Quot.sound, foo._native.native_decide.ax_1_1]
-axiom foo._native.native_decide.ax_1_1 : decide (…) = true
 ```
 
-An audit that looks only for `Lean.ofReduceBool` passes a native purchase in silence. Found
-2026-07-27; the audit now greps for `native_decide.ax`.
+An audit that looks only for `Lean.ofReduceBool` passes a native purchase in silence; the audit greps for
+`native_decide.ax`.
 
-### The purchases, as of M04
+### The purchases
 
-Five declarations, all in `Instances/SpindleBound.lean`, all buying the same thing: the evaluation
-of `LRAT.check` on a CaDiCaL certificate.
+Five declarations, all in `Instances/SpindleBound.lean`, all buying one thing: evaluation of core's
+`LRAT.check` on a CaDiCaL certificate for the Moser spindle. Re-verified on 2026-09-10 with
+`rg "native_decide" Proofs`: exactly ten `by native_decide` terms, at lines 82 and 131–139 of that file;
+every other match is prose (the explanation in `Sat/Lrat.lean`, a doc string in
+`Instances/DeGrey/Bound.lean`).
 
 | Declaration | Axioms bought | Why |
 |---|---|---|
 | `moserSpindle_cnf_unsat` | `ax_1_1` | route B, the monolithic certificate |
-| `moserSpindle_not_colorable_three_lrat` | (inherits) | route B's conclusion |
-| `moserSpindleCubes_unsat` | `ax_1_1` … `ax_1_9` | route C, one per cube |
-| `moserSpindle_not_colorable_three_cubes` | (inherits) | route C's conclusion |
-| `four_le_chromaticNumber_plane_certified` | (inherits) | route C composed with the geometry |
+| `moserSpindle_not_colorable_three_lrat` | inherited | route B's conclusion |
+| `moserSpindleCubes_unsat` | `ax_1_1` … `ax_1_9` | route C, one certificate per cube |
+| `moserSpindle_not_colorable_three_cubes` | inherited | route C's conclusion |
+| `four_le_chromaticNumber_plane_certified` | inherited | route C composed with the geometry |
 
-**M04 added no purchases.** The geometry of de Grey's 1581-vertex graph — the larger of the two
-computations the project rests on — is entirely kernel-checked: `deGrey_valid` reports `[propext,
-Quot.sound]`. Every native axiom in the project is still one of the ten below.
+They are kept as cross-checks of the encoder: `four_le_chromaticNumber_plane` proves the same bound by
+`decide +kernel` over all `3^7` colourings and buys nothing. **No headline theorem buys anything.** Every
+refutation of rung B and beyond goes through `maskCheck_sound`, whose hypotheses are closed `Bool`s the
+kernel decides, and the audit's only purchases are these five.
 
-**M05 added no purchases either, and it is the milestone that makes the remaining ten removable.**
-Nine declarations from `Sat/{Mask,ClauseTable,MaskCheck}.lean` are now in the audit's clean section,
-`maskCheck_sound` among them. Nothing above depends on them yet — M06 is where the ten purchases
-below are meant to disappear, and until that lands they are still in the ledger.
+**Two ledgers, compared by the gate.** Each purchasing declaration's doc string opens with
+`**Trust purchase: native evaluation.**` — the source-side ledger, `grep -rn "Trust purchase" Proofs/` —
+and each is audited under the `PURCHASED` banner in `scripts/Axioms.lean`, the environment-side ledger.
+`scripts/axioms.sh` extracts both and fails on any disagreement, and fails if the audit output lacks
+either banner, so an audit that could not elaborate cannot read as a pass.
 
-**M09 added no purchases either, and the one it most mattered for is `deGrey_rotation`** — 791 exact
-coordinate identities that are now the sole evidence for de Grey's second copy. A native purchase
-there would move the construction's central fact out of the kernel's reach; it reports exactly
-`[propext, Classical.choice, Quot.sound]`.
+### Why a purchase would sit on the worst possible claim
 
-**M06 added no purchases, and the headline has none.** `chromaticNumber_plane_ge_five` depends on
-exactly `[propext, Classical.choice, Quot.sound]`. The ten purchases below are still in the ledger
-because the Moser spindle's certificate routes still exist as cross-checks of the encoder — they buy a
-bound that `four_le_chromaticNumber_plane` also proves without them, which is the point of proving it
-three ways.
+The bound rests on two computations, and they are not equally checkable by a human:
 
-**And the sentence this section carried from M03 to M05 was wrong.** It said χ(ℝ²) ≥ 5 would ship
-carrying one native-evaluation axiom per certificate-backed declaration, as though the choice were
-kernel-versus-compiler. It was not: at the scale the cube split needed, the certificate is ~4 GB of
-embedded data and **Lean will not elaborate it either way** (§ 2.2.1). Compiled evaluation checks a
-term the elaborator has to accept first. What made the milestone possible was not the checker and not
-the trust position — it was finding a proof 44× smaller.
+- **Every listed edge is exactly one unit long.** If this were wrong it would be detectable: compute three
+  edges in any computer-algebra system. It is kernel-checked anyway.
+- **No `k`-colouring of the graph exists.** If this were wrong it would not be detectable by inspection:
+  it quantifies over `4^1581` colourings, a 952-digit number.
 
-**The headline bound buys nothing.** `four_le_chromaticNumber_plane` goes through route A —
-`decide +kernel` over all `3 ^ 7` colourings — and reports exactly `propext, Classical.choice,
-Quot.sound`. The certificate routes exist beside it as cross-checks, and every one of them is a
-theorem route A also proves. That will not be true at M05, where route C is the only route.
+A certificate is what makes the second claim checkable at all, by turning "no colouring exists anywhere in
+that space" into a finite chain of elementary deductions. Checking that chain with compiled code rather
+than the kernel gives back much of what the certificate was for. That is why a native purchase is a
+footnote for a known theorem and the entire objection for a new one, and why no certificate of rung B or
+later carries one.
 
-**Two ledgers, and the gate compares them.** Each purchasing declaration opens its docstring with
-`**Trust purchase: native evaluation.**` (the source-side ledger, `grep -rn "Trust purchase"
-Proofs/`), and each is listed under the `PURCHASED` banner in `scripts/Axioms.lean` (the
-environment-side ledger). `scripts/axioms.sh` extracts both and fails on any disagreement — a
-purchase with no docstring warning, or a docstring warning about a purchase no longer made.
+### What compiled evaluation trusts
 
-Independently re-checked: `scripts/lean4checker.sh` replays `Proofs` through lean4checker's separate
-kernel. Green at M04 — which means de Grey's 7877 exact distance identities have been recomputed by a
-second kernel implementation, not just the one that built them.
+Lean lets a definition's compiled behaviour differ from the definition itself (`@[implemented_by]`,
+`@[extern]`), so native evaluation can return an answer the definition contradicts, anywhere in the
+dependency chain; the kernel only unfolds definitions and cannot be misled that way. Beyond that hole:
+the code generator, the C toolchain, the runtime and its GMP bindings, and the CPU — none written to be a
+proof checker.
 
-**Scale is the limit, and M07 is what moves it.** Replaying a certificate repeats every propagation
-step, single-threaded, in one process that cannot be split. At M06's **34.2 × 10⁶** steps — **18.4 ×
-10⁶ after M09 deleted the second certificate** — that is another ~15 hours, and it has never been run
-to completion here — so for the de Grey witness, the
-independent-kernel claim covers the geometry, the soundness proofs and the composition, and *not*
-those steps. State it that way and no other way. At M07's **1.4 × 10⁶** steps the same replay finishes, and
-**it has been run**: 2026-07-31, 214 modules OK — 100 for the 510-vertex witness, 101 for the 553, and
-the 13 shared modules beneath them. So for those two witnesses the independent-kernel claim covers
-**everything this repository contributes**, propagation steps included. Mathlib is trusted as built,
-which is the same scope the M04 claim had. That is the main thing the smaller witnesses buy, and the
-reason they are in the repository rather than being a footnote about a smaller number.
+### Independent replay
 
-**But the independent replay cannot see a native purchase, and the claim must not be stated as if it
-could.** `native_decide` records its result as an **axiom**, and an axiom is accepted by every kernel
-by definition — that is what an axiom is. So lean4checker verifies everything *except* the native
-steps, which it takes on faith. "Replayed through an independent kernel" is therefore a claim about
-the kernel-checked part only. Say it that way.
+`lean4checker` replays modules through a second kernel (`scripts/lean4checker.sh`). It is a publication
+gate, not a milestone gate (`CLAUDE.md` § Trust ledger), and it cannot re-check a native purchase: a
+purchase is recorded as an axiom, and every kernel accepts axioms. It has replayed de Grey's geometry
+(his 7,877 distance identities recomputed by a second kernel) and the proof structure around his
+certificate, but never the certificate itself (18.4 × 10⁶ steps, single-threaded), and the two Heule
+witnesses' complete chains at M07 (214 modules, propagation steps included). Modules beneath all three
+witnesses, `Gadget.lean` among them, have changed since, so **no replay covers the current tree.**
 
-### Why the purchase sits on the worst possible claim
+### Not trusted, and not on the critical path
 
-The project rests on two computations, and they are not equally checkable by a human:
-
-* **Every listed edge is exactly one unit long.** If this is wrong it is *detectable* — pick three
-  edges, compute them in any computer-algebra system, and the error surfaces. Errors here do not hide.
-  This half is kernel-clean anyway.
-* **No `k`-colouring of this graph exists.** If this is wrong it is *not* detectable. It quantifies
-  over `4^1581` possibilities — a 952-digit number. There is no spot check, no partial verification,
-  no eyeball.
-
-A certificate is precisely what makes the second claim checkable at all: it converts "no colouring
-exists anywhere in that space" into "here is a finite chain of elementary deductions ending in a
-contradiction". Checking that chain with a compiled program rather than the kernel gives back a good
-part of what the certificate was for. **The native purchase lands on the one claim no human can
-verify by inspection** — which is why it is a footnote for a known theorem and the entire objection
-for a new one, and why M05 exists.
-
-### What compiled evaluation actually trusts
-
-Not just "more code" — there is a concrete hole. Lean permits a definition's *compiled* behaviour to
-differ from the definition itself (`@[implemented_by]`, `@[extern]`); that is a legitimate feature. It
-means native evaluation can return an answer the definition contradicts, anywhere in the dependency
-chain. The kernel cannot be misled that way, because it only unfolds definitions. Beyond that hole:
-the code generator, the C toolchain, the runtime and its GMP bindings, and the CPU — none written to
-be a proof checker.
-
-**The audit can stop auditing, and did.** At M04 `scripts/Axioms.lean` named a declaration that a
-regenerated file no longer defined. Under `set -e` the failing command substitution aborted
-`axioms.sh` with *no output and no visible failure*, so a piped invocation read as a pass. The
-script now captures the status explicitly and reports it. A trust receipt that fails open is worse
-than none, and this is the second instance of that failure mode in this project (the first: the
-two-ledger comparison at M03, documented above as running when it did not).
-
-Two `Bool`s carry the weight, and each has a kernel route and a native route:
-
-1. **`UDCert.Valid deGrey`** — 7877 edge checks over a 16-dimensional ℤ-algebra. **Measured
-   (2026-07-23): kernel-feasible, but only in chunks.** ~0.17 s/edge and memory roughly linear in
-   the chunk size; a single `List.all` over all 7877 edges was still running at 5 minutes and 8.5 GB
-   when aborted, while 514 edges take 87 s and ~0.85 GB. M04 therefore splits the check into ~16–32
-   independent slices, which parallelise. No trust is spent — the chunks' conjunction is the whole
-   theorem. Two representation findings fed this: indexed lookup costs the same as pre-resolved
-   endpoint pairs (the tower arithmetic dominates, not the lookup), and multiplying by the radicand
-   as a *scalar* rather than a ring element is a measured 1.67×.
-2. **`LRAT.check π cnf`** — the certificate check. **Settled, 2026-07-27: it does not
-   kernel-reduce, and the size of the certificate is irrelevant.** Measured on
-   `⟨#[[(0, true)], [(0, false)]]⟩`, the smallest unsatisfiable CNF there is, with a one-action
-   certificate: `decide` is stuck immediately (the elaborator will not unfold `@[irreducible]`
-   well-founded definitions, and `Array.anyM.loop` is one); `decide +kernel` gets much further —
-   it reduces `Array.any`, the `@[no_expose]` `Decidable (∃ v, VarMem v f)` instance, and
-   `compactLratChecker` on trivial input — then sticks inside `Formula.performRupAdd` after ~40 s;
-   `native_decide` succeeds instantly. Core's own `bv_decide` uses native evaluation for the same
-   step, so this is the state of the art rather than a gap in our setup.
-
-   **Superseded at M05, 2026-07-29.** That paragraph said χ(ℝ²) ≥ 5 would carry a native-evaluation
-   axiom, because the kernel-only route needed a checker written to reduce plus its own soundness
-   proof — "a milestone-sized undertaking, tracked as open work and not attempted". It was a milestone,
-   it is M05, and it is done: `HadwigerNelson.maskCheck_sound` reports exactly `[propext,
-   Classical.choice, Quot.sound]`, and its two hypotheses are closed `Bool`s the kernel decides. The
-   shipped `LRAT.check` is still unreducible for the reason above; the project no longer routes through
-   it. **The remaining question is throughput, not trust**, and M06 is where it gets answered.
-
-`lean4checker` (independent kernel, via elan) re-checks at each milestone boundary.
-
-Not trusted, and not on the critical path: `tools/*` (generators), CaDiCaL, the float grid used to
-propose candidate edge pairs. Every claim they make is re-derived in Lean from the emitted data.
+`tools/` (generators and instruments), CaDiCaL, and every float computation used to propose candidates.
+Every claim they make is re-derived in Lean from emitted data, so a generator bug can only produce data the
+kernel refuses. The statement-level check that catches a true theorem over an empty domain is
+`scripts/vacuity.sh` (`CLAUDE.md` § The gate).
 
 ## 6. Defences against proving the wrong theorem
 
-A green checkmark certifies exactly the statement written. The specific ways this project could
-produce a meaningless one, and the specific countermeasure for each:
+A green checkmark certifies exactly the statement written. The specific ways this repository could produce
+a meaningless one, and the countermeasure for each:
 
 | Failure | Defence |
 |---|---|
-| `unitDistanceGraph` has vacuous `Adj` (e.g. `fromRel` collapsing) | `example : (unitDistanceGraph ℂ).Adj 0 1` proved; a non-adjacency proved too |
-| CNF encoding subtly wrong, making *any* graph "unsatisfiable" | ✅ M03: spindle proved non-3-colourable by `decide +kernel` **and** by LRAT **and** by nine cube certificates, all agreeing; `exists_sat_coloringCNF_four` shows the same encoder **satisfiable** at four colours, from a real colouring |
-| Encoder checked only against itself | ✅ M03: the spec `#guard`s in `Instances/SpindleBound.lean` evaluate the formula on **hand-written** assignments, not ones built by the module's own `ofColoring` |
-| Certificate checker that accepts everything | ✅ M03: committed negative controls — a certificate filed against the wrong cube fails, and no certificate refutes the satisfiable four-colour formula. ✅ M05, at the checker we wrote ourselves: a **satisfiable** formula that the clause table genuinely agrees with is refused, with the fault pinned by `#guard_msgs`; so is a clause citing itself as its own justification |
-| A hypothesis of the checker's soundness theorem is decorative | ✅ M05: dropping the non-tautology hypothesis makes `propagate_prop_sound` **false**, and the countermodel is committed as an `example : ¬ …`. A build failure cannot establish this; only a countermodel can |
-| The checker's answer and its diagnosis drift apart | ✅ M05: the `Bool` is *defined* as "the diagnostic reports no fault", so they are one computation. M04's arrangement — two functions related by a proved lemma — is the weaker version of this |
-| The five-colour question is asked at four colours by accident | ✅ M12: `mycielski47_not_colorable_five` is paired with `mycielski47_colorable_six`, an *existence* claim in the opposite direction — and the six-colouring is derived from Mycielski's construction, with a guard that the **sixth colour is actually used**, so a 6-colouring that is secretly a 5-colouring goes red |
-| A generated graph is not the graph the construction describes | ✅ M12: the Mycielski witness is *defined* in Lean, not emitted, and every rung of the ladder is pinned (2/1, 5/5, 11/20, 23/71, 47/236); an index-bound guard makes the `Fin` embedding a proved no-op rather than a silent vertex-merge |
-| A placed copy is certified for a copy that was never placed there | ✅ M12: `Assembly` derives every copy's coordinates from the base and the motion rather than reading emitted ones, so the geometry and the colouring transport are the *same map*, `Assembly.embed`. The demo assembly's validity is proved twice — by reduction and through `valid_of_cross` — so the payoff theorem is not the only witness to its own claim |
-| The seams of an assembled candidate fail silently | ✅ M12: `AssemblyDiagnose` renders which seam failed *by copy and base vertex*, with the squared distance found beside the one a unit edge would have, and both directions are pinned with `#guard_msgs` — an empty report for a good seam, a named copy for a bad one |
-| The "spindle a forcer and the colour count goes up" argument is a story rather than a theorem | ✅ M13: `not_colorable_of_spindled_forcer` is that argument, over **any** graph and any colour count — and the Moser spindle is re-derived through it as a *fourth* independent route, by deciding a four-vertex rhombus and placing it twice rather than deciding all seven vertices. The mutation audit is recorded: dropping the shared pivot, the joining edge, or the forcing each breaks the proof, and weakening "every colouring agrees" to "some colouring agrees" cannot be closed |
-| A candidate's placement is not a placement, so a "copy" is a different graph | ✅ M13: the spindled edge list is **defined** as the two placed copies plus the joining edge (`spindleEdges`), so each placement is a homomorphism structurally and the joining edge is the last element by construction — no membership search, which at a 791-point forcer would have been 31 million kernel comparisons. The one remaining per-edge obligation is that a placement does not collapse an edge to a loop, and `ForcerDiagnose` names the edge and the vertex it lands on |
-| The search reports "found nothing" when it actually could not run | ✅ M13: the backbone oracle's invariant is `confirmed ⊆ BB ⊆ confirmed ∪ candidates ∪ unknown`, so the answer is exact **exactly when `unknown` is empty**; `unknown` is returned as a set rather than a flag and its count is printed on every run. The shrink says "irredundant" only after a certifying single-point sweep over every survivor |
-| The packed certificate format is silently trusted | ✅ M05: the decoder is a **parameter** of the checker and soundness is proved for every function of its type, so a decoding bug is a failed check by construction, not by review |
-| A cube certificate silently attached to the wrong cube | ✅ M03: the cube list is supplied literally and tied to `allCubes` by `rfl`, so a misfile is a type error naming the cube as a readable literal; `#eval badCubes …` reports every wrong *and* every missing index |
-| A certificate segment attached at the wrong watermark, so the 2265-segment chain silently skips work | ✅ M06: segment *k* concludes at the watermark segment *k+1* assumes, so the composition **typechecks only if they chain** — the emitter's only arithmetic is checked by the elaborator, and a mismatch names both segments |
-| The two forcing lemmas proved about the wrong graph — e.g. a half that is not a subgraph | ✅ M06: the halves are *contiguous segments* of `deGrey.edges` by construction, so the inclusions are `List.mem_append_left`; and the shape of the split (3938 + 3938 + 1, one shared vertex, the joining edge in neither half) is asserted by `#guard` on every build |
-| The colour-symmetry step used to "prove" more than it can | ✅ M06: relabelling requires an **injection**, and that hypothesis is what the theorem consumes; a merging relabel does not apply. The SAT-satisfiable case (endpoint at the shared vertex's own colour) is recorded beside the lemma as the reason it is an equality and not something stronger |
-| The whole bound rests on one graph, so one systematic error sinks it | ✅ M07: `χ(ℝ²) ≥ 5` is proved from **three** graphs sharing no vertex, no edge and no certificate — de Grey's 1581, and Heule's 510 and 553. What they share is this project's *encoding* and its *checker*, which is precisely what no theorem here can validate; a fault in either would have to certify three unrelated graphs |
-| The CNF encoding of "no 4-colouring" is subtly wrong, so every theorem is about the wrong formula | ✅ M07: `coloringCNF 4 553 E` is **clause-for-clause identical** to Heule's independently authored `553-4.cnf`. Two encoders written without reference to each other, agreeing exactly |
-| A certificate silently attached to the wrong witness | ✅ M07: was a *procedure* (regenerate and watch it go red), now an obligation — `halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false`, kernel-decided on every build. `agreesWithCNF` alone is consistent with a table that matches everything, which would certify anything; the pair is what makes either mean something |
-| A negative control that perturbs nothing, and therefore guards nothing | ✅ M07: the geometry control moves a vertex and demands the check name its edges. Written first as "move vertex 0 to the origin", it silently *passed* — in both new witnesses vertex 0 **is** the origin. Now vertex 1 is collapsed onto vertex 0, and the failure of the first version is recorded beside it |
-| The difference table's *keys* are wrong, so the geometry certifies a different graph | ✅ M08: the key list is walked **against the certificate's own edge list**, in lockstep, and a length disagreement is a `false` with a named position — never a `zip` that truncates. The committed control puts a key on a unit-length difference that is not that edge's, and the check names the edge |
-| The packing collapses two distinct points, so the geometry check proves nothing | ✅ M08: `Packable.pack_inj` is proved, and its digit bound is *known load-bearing* — the two counterexamples that break it at `M = 4` are committed as `#guard`s beside the lemma. Every certificate check re-verifies the bound for every vertex |
-| The Python generator and Lean silently disagree about the packing convention | ✅ M08: both assert the same 301-digit constant — the packing of the point whose thirty-two digits are `1 … 32` in lane order. Lane width, lane order inside the tower, and `x`-before-`y` are fixed by that one number, and a generator that disagrees fails before it writes any data |
-| The two tables are the same length but a different shape, so an index means two things | ✅ M08: `packOk` compares the split pivots node by node; a reshape is a `shape` fault, and the control that reshapes the packed table is committed |
-| The rotation is asserted rather than checked, so the "second copy" is a different graph | ✅ M09: `deGrey_rotation` decides 791 exact coordinate identities in `ℚ(√3,√5,√7,√11)` — every point of the first copy against its claimed partner. The index map is a closed form, so there is no emitted table to be wrong; and `31² + (3√7)² = 32²` is checked as a field of `Motion`, without which `Motion.distSq_eq` is *false* and the committed countermodel says so |
-| The transported gadget is attached to the wrong ports, so it constrains the wrong vertices | ✅ M09: `Gadget.transport` takes the port images as **pointwise equations** — for de Grey, `φ 14 = 14` and `φ 11 = 802`. A wrong image is a type error at the composition, not a silently different theorem |
-| The composition "refutes" whatever it is handed | ✅ M09, sharpened at M11: dropping the joining edge leaves exactly one surviving pattern — *vertex 14, vertex 11 and vertex 802 all one colour* — and `deGrey_forcing_alone_admits` is that as a **theorem**, kernel-decided on every build. The same control at spec scale is `K₅` minus an edge, with the rendered survivor list pinned by `#guard_msgs` |
-| A transported gadget collapses an edge, making a colouring "proper" that is not | ✅ M09: `Gadget.transport`'s hypothesis is `Adj`, which carries distinctness, so a collapsing map cannot satisfy it. For de Grey that distinctness is `deGreyPhiNat_inj`, proved by `omega` from the closed form — no data to check |
-| The scale factor is cancelled unsoundly, since `Q4` is not known to be a domain | ✅ M09: it is cancelled as a **natural number** via `NatCancel`, true of the tower because its leaves are `ℤ` and every level is componentwise. Nothing anywhere assumes `Q4` has no zero divisors |
-| The pruned search skips a subtree it has not bounded, so a heavy independent set is never seen | ✅ M10: the prune's own hypothesis is what the PRUNE case of `noHeavy_sound` consumes. Weakening it from `wt + rem ≤ D` to `wt ≤ D` makes the soundness proof **stop compiling**, at that one step and no other; removing either remaining hypothesis also fails |
-| The weights are certified against a mask that invents edges, so genuinely independent sets are skipped | ✅ M10: `nbrMask_and_two_pow_eq_zero` proves fidelity in the one direction that matters — a set bit is a listed pair. An *under*-reporting mask is sound (the search explores sets that are not independent and answers `false` more often); an over-reporting one cannot pass |
-| The weight bound's diagnosis disagrees with the bound itself | ✅ M10: `findHeavy_isNone` is a **theorem** — the diagnostic reports nothing exactly when the check says `true`. And the set it reports is re-checked for independence and weight by `#guard`s that have never heard of the search |
-| The fractional chromatic number silently defined as the ordinary one | ✅ M10: `C5_fractional` pins `χ_f(C₅) = 5/2` — **not an integer** — proved in both directions, the upper one by an explicit 2-fold 5-colouring that is also the model showing nothing above is vacuous. Its negative control is that the independence bound `2` is attained, so a certificate at `1` would be false |
-| The terminal check ranges over one colouring per partition, so a colouring it never enumerated slips through | ✅ M11: soundness is *not* a property of the enumeration alone — it needs a proper colouring to stay proper when its colours are renamed. `not_colorable_of_gadget` relabels the colouring by `σ⁻¹` and hands *that* to `sound`; deleting the relabelling breaks the proof at exactly that step, watched |
-| The enumeration of colour-partitions silently skips one | ✅ M11: pinned in **both** directions at four ports and five colours — no two representatives are the same partition, and `∀ q, (canonPatterns 5 4).any (samePattern · q)` is decided over all 625 patterns. Making the enumeration unable to open a fresh colour breaks the proof in both branches *and* both rendered-output controls |
-| A "motion" that is not one, so a placed copy is a different graph | ✅ M11: three similarity laws, and **each has its own countermodel** — a stretch (`col₁`), a projection onto a line (`col₂`), a shear (`orth`) — each an `example : ¬ ∀ …` stating the theorem with exactly that law deleted. A build failure could not establish any of this |
-| Two `Q4`-distinct distances that are secretly the same real, merging two classes the certificate separates with *different* colourings | ✅ M16: the class values' **real** pairwise-distinctness is kernel-certified by integer interval arithmetic (`sepChain` + `index_eq_of_eval_eq`) — sorted values, adjacent intervals strictly disjoint, generator bounds checked by squaring — with no injectivity claim about `Q4.eval` anywhere. The mutation is refuted, not just unproved: weakening the disjointness to `≤` admits `[1, 1]` and the committed countermodel breaks the index lemma |
-| Two same-class vertices citing *different* separating colourings, un-proving exactly the union step the headline needs | ✅ M16: the colouring hint is **per class, not per vertex** — the mistake is unrepresentable in the certificate's shape |
-| A sweep that cannot say "confined" reporting a clean negative | ✅ M16: `narrow.py`'s known-hit control runs the identical sweep loop on de Grey's own 397-point opening configuration at four colours and must report exactly one confined class — `r² = 4` at the origin, his construction's actual fan. The injected never-answering oracle must yield all-DEFERRED and a NO VERDICT line, and the per-pivot report is self-auditing: categories must sum to the class count |
-| A placed copy's geometry asserted rather than derived | ✅ M11: `UDCert.validOn_map_of_scaling` derives it from *one* hypothesis about the map — that it multiplies every squared distance by a constant — with **no per-vertex and no per-edge check**. The copy's coordinates are `rfl`-equal to the image, so there is nothing to assert |
-| Vertex list degenerate (all points equal / empty) | vertex count and edge count asserted by `#guard`; a `#eval` of several distances |
-| Wrong direction of the bridge (proving `Sat → Colorable`) | the reduction only ever consumes `Colorable → Sat`; stated with `¬` on the outside and read aloud |
-| `χ ≥ 5` stated as `χ > 5`, `≤`, or over `ℕ` with truncation | statement in `ℕ∞`, cross-checked against `chromaticNumber_le_iff_colorable`, plus a deliberately-failing variant kept in a comment |
-| Certificate from a *different* CNF than the one we reason about | the CNF is defined once in Lean; the DIMACS handed to CaDiCaL is printed **from that Lean definition** via `Std.Sat.CNF.dimacs`, not re-derived in Python |
-
-That last row is a hard rule: **the Python side never authors the CNF.** It authors candidate
-geometry only.
+| `unitDistance` has a vacuous `Adj` | `example : (unitDistance ℂ).Adj 0 1` and a non-adjacency `example`, in `Instances/Triangle.lean` (M01) |
+| `χ ≥ 5` stated as `χ > 5`, as `≤`, or over a truncating `ℕ` | the statement is in `ℕ∞`, read through `chromaticNumber_le_iff_colorable`, and read aloud against the informal claim |
+| The bridge proved in the wrong direction (`Sat → Colorable`) | only `Colorable → Sat` is ever consumed, stated with `¬` outside |
+| A theorem true over an empty domain, so it says nothing | `scripts/vacuity.sh` demands an inhabitant or a declared emptiness for every structure-valued hypothesis; each carrier ships its inhabitant (`core9_colorable_three`, `core122_colorable_four`, `core23_colorable_seven`); `core9_plane` and `core122_plane` are vacuous, say so, and support nothing, because `isEmpty_coloring_plane_four` makes the emptiness a theorem |
+| A hypothesis made free by an empty domain | `finitePlane_forces_iff` takes colourability of the plane as a hypothesis, and `finitePlane3_not_colorable_two` ships beside it as the case where the statement without it is false |
+| A generalized theorem silently changing what an old name means | the pre-generalization type of each cited name is pinned by a compiled type ascription, and a mutated pin was watched to fail (FS-24) |
+| The CNF encoding wrong, making any graph "unsatisfiable" | the spindle refuted three ways that agree, and `exists_sat_coloringCNF_four` shows the same encoder satisfiable at four colours from a real colouring (M03); `coloringCNF 4 553 E` is clause-for-clause identical to Heule's independently authored `553-4.cnf` (M07) |
+| The encoder checked only against itself | the spec `#guard`s in `Instances/SpindleBound.lean` evaluate the formula on hand-written assignments (M03) |
+| A certificate from a different CNF than the one reasoned about | the CNF is defined once in Lean and the DIMACS handed to CaDiCaL is printed from that definition (`scripts/Dimacs.lean`); **the Python side never authors a CNF**, only candidate geometry |
+| A checker that accepts everything | committed negative controls: a certificate filed against the wrong cube fails, no certificate refutes the satisfiable four-colour formula (M03), and the mask checker refuses a satisfiable formula the clause table agrees with and a clause citing itself, each fault pinned by `#guard_msgs` (M05) |
+| A hypothesis of the checker's soundness is decorative | dropping the non-tautology hypothesis makes `propagate_prop_sound` false, and the countermodel is committed as an `example : ¬ …` (M05) |
+| The checker's answer and its diagnosis drift apart | the `Bool` is defined as "the diagnostic reports no fault", one computation read two ways (`maskCheck`, `Gadget.survivors`); where a check and its report are separate functions, their agreement is a theorem (`findHeavy_isNone`, `firstFault_none_iff_check`). Two functions related only by a separately proved lemma is the weaker arrangement, and is not used for new checks |
+| The packed certificate format silently trusted | the decoder is a parameter of the checker and soundness is proved for every function of its type (M05) |
+| A cube certificate attached to the wrong cube | the cube list is a literal tied to `allCubes` by `rfl`, so a misfile is a type error naming the cube; `#eval badCubes …` reports every wrong and missing index (M03) |
+| A segment attached at the wrong watermark, so the chain skips work | segment k concludes at the watermark segment k+1 assumes, so the composition typechecks only if they chain (M06) |
+| A certificate attached to the wrong witness | `halfA_table_refuses_halfB_cnf : halfATable.agreesWithCNF halfBCnf = false`, kernel-decided on every build (M07) |
+| The forcing argument proved about the wrong graph | the copies are contiguous segments of `deGrey.edges` by construction, the inclusions are `List.mem_append_left`, and the split's shape (3938 + 3938 + 1, one shared vertex) is `#guard`ed (M06) |
+| Colour symmetry used to prove more than it can | relabelling requires an injection, which is the hypothesis the theorem consumes (M06) |
+| One systematic error sinks the bound | χ(ℝ²) ≥ 5 is proved from three graphs sharing no vertex, edge or certificate; what they share is the encoding and the checker, and a fault there would have to certify three unrelated graphs (M07) |
+| The difference table's keys wrong, certifying a different graph | the keys are walked in lockstep against the certificate's own edge list; a length disagreement is a named `false`, never a truncating `zip` (M08) |
+| The packing collapses two points | `Packable.pack_inj` is proved, and the two counterexamples showing its digit bound is load-bearing are committed as `#guard`s (M08) |
+| The generator and Lean disagree about the packing convention | `tools/emit_diffs.py` and `Packed.lean` both assert the packing of one fixed point, whose thirty-two digits are 1…32 in lane order; that one number fixes lane width, lane order and coordinate order (M08) |
+| The rotation asserted rather than checked | `deGrey_rotation` decides 791 exact coordinate identities, and `31² + (3√7)² = 32²` is checked as a field of `Motion` (M09) |
+| A transported gadget attached to the wrong ports | `transport` takes the port images as pointwise equations, so a wrong image is a type error (M09) |
+| The composition refutes whatever it is handed | dropping the joining edge leaves exactly one surviving pattern, and `deGrey_forcing_alone_admits` is that as a theorem (M09, M11) |
+| A transported gadget collapses an edge | the transport hypothesis is `Adj`, which carries distinctness; for de Grey it is `deGreyPhiNat_inj` (M09) |
+| A scale factor cancelled unsoundly | it is cancelled as a natural number through `NatCancel`; nothing assumes `Q4` has no zero divisors (M09) |
+| The pruned search skips a subtree it has not bounded | weakening the prune's hypothesis breaks `noHeavy_sound` at exactly that step (M10) |
+| The weight bound certified against a mask that invents edges | `nbrMask_and_two_pow_eq_zero`: a set bit is a listed pair (M10) |
+| The fractional chromatic number silently the ordinary one | `C5_fractional` pins χ_f(C₅) = 5/2, not an integer, in both directions (M10) |
+| The terminal check's one colouring per partition lets a colouring slip through | `not_colorable_of_gadget` relabels the colouring before handing it on, and deleting the relabelling breaks the proof at that step (M11) |
+| The partition enumeration skips one | pinned in both directions at four ports and five colours, all 625 patterns decided (M11) |
+| A "motion" that is not one | each of the three similarity laws has its own committed countermodel (M11) |
+| Two `Q4`-distinct distances that are the same real, merging two classes | real distinctness is certified by integer interval arithmetic (`sepChain`, `index_eq_of_eval_eq`): sorted values whose adjacent intervals are strictly disjoint, with no injectivity claim about `Q4.eval` (M16) |
+| Same-class vertices citing different separating colourings | the colouring hint is per class, not per vertex, so the mistake is unrepresentable (M16) |
+| The five-colour question asked at four by accident | `mycielski47_not_colorable_five` is paired with `mycielski47_colorable_six`, an existence claim guarding that the sixth colour is used (M12) |
+| A generated graph that is not the construction it describes | the Mycielski witness is defined in Lean, not emitted (M12); the gap core's edges are derived from its 23 addresses by one norm filter (M42) |
+| A placed copy certified for a copy never placed | coordinates are derived from the base and the motion, so geometry and colouring transport are the same map, `embed` (M12) |
+| The seams of an assembly fail silently | `AssemblyDiagnose` names the failing seam by copy and base vertex, pinned by `#guard_msgs` in both directions (M12) |
+| "Spindle a forcer and the colour count rises" is a story | `not_colorable_of_spindled_forcer` is that argument over any graph and colour count, and the Moser spindle is re-derived through it from a four-vertex rhombus (M13) |
+| A placement that is not a placement | `spindleEdges` is defined as the two placed copies plus the joining edge, so each placement is a homomorphism structurally (M13) |
+| A degenerate vertex list (all points equal, or empty) | vertex and edge counts asserted by `#guard`, and several distances evaluated |
+| A geometry check that accepts everything, or a negative control that perturbs nothing | committed `#guard`s collapse vertex 1 onto vertex 0 and demand the check fail naming exactly the edges at vertex 1, in `Instances/Heule510.lean`, `Instances/Heule553.lean` and `Instances/CoreSpindle/Bound.lean`; vertex 1 rather than 0, because in those witnesses vertex 0 is the origin and moving it moves nothing (M07) |
 
 ## 7. Honest failure modes
 
-Stated up front, per doctrine, and to be reported as-is:
+Standing limits, stated as they are. The live register of what could stop the hunt is `plans/RISKS.md`,
+and the ranked obstacles are in `CLAUDE.md` § Frontier.
 
-- **The search re-finds rung A's witness and cannot reach rung B's.** Measured at M12 after landing:
-  blind breadth-first search over the constructor's moves finds the **Moser spindle at depth 1 in
-  under a second** (verified isomorphic), and in 358 s over 1,961 distinct graphs finds **nothing
-  needing five colours** — then *exhausts*, frontier empty. Spindle-from-seeds is a small closed
-  family, not a space wanting more budget. Since de Grey's witness is itself an orbit construction,
-  the missing move is plausibly the orbit primitive, which `construct.py` does not have.
-- **Nothing this project owns forces any port property at five colours — measured at M12, and it is
-  the hardest thing on this list.** Zero of 48 non-adjacent port sets across four graphs, and of
-  16,657 exact distance classes the only one that constrains a pair is the unit distance itself.
-  The four-colour control fires (5 of 5 patterns refuted on a graph with no 4-colouring), so this is
-  a fact and not a broken probe. The cause is structural: a graph comfortably `k`-colourable imposes
-  nothing on scattered points, and every graph here is comfortably 5-colourable — de Grey's included,
-  which is exactly 5-chromatic. **So a five-colour gadget catalogue cannot be harvested, only
-  constructed**, and how tight a configuration must be before it forces anything at five colours is
-  unmeasured. If it is beyond what a constructor reaches, M12 lands its instrument and says so.
-- **Five colours costs one to two orders of magnitude more than four**, measured at M12: 227× on one
-  fixed 47-vertex graph, 10–30× at matched size and matched criticality. The levers survive —
-  naming a triangle's colours is worth 8.5–53×, and a triangle is the largest clique the plane
-  permits — but M07's configuration race does **not** reproduce at gadget scale (1.00×). And all of
-  this is measured on *proxies*: no 6-chromatic unit-distance graph exists to measure, structure
-  buys orders of magnitude, so the figures are probably pessimistic for real candidates. That is a
-  belief, not a measurement, and it is written here as one.
-- **The 6-chromatic witness may not exist, or may be astronomically large.** χ could be 5, 6, or 7.
-  Polymath16 and strong SAT researchers stalled at exactly this point. Rung D is a genuine gamble;
-  rungs A–C are not, which is why the ratchet is built the way it is.
-- **~~The witness is de Grey's 1581-vertex graph, and a smaller one would not obviously be cheaper.~~**
-  **Measured at M07, and the doubt was right in kind and wrong in size.** Both effects are real:
-  a smaller graph *is* less constrained and harder per vertex — Heule's 510-vertex witness costs
-  **28% more** propagation steps than his 553-vertex one — but that is swamped by the effect of
-  leaving de Grey's construction at all. His graph has **no monolithic refutation** (six solver
-  configurations with proof logging, six without, and a 64-cube split: none terminate), because two
-  loosely-coupled copies joined at one vertex is exactly the shape that defeats a CDCL solver while
-  handing a human a two-line argument. Heule's minimised graphs refute in **two seconds**. Net:
-  1,413,841 steps against 34,169,571, so **smaller was 24× cheaper**, for reasons that have little to
-  do with size. What remains true, and is the part to carry to rung D: **refutation cost is not
-  monotone in graph size**, and optimising for "a solver can chew through it" optimises a route that
-  is already dead one rung up.
-- **The certificate check is not kernel-reducible *as shipped*, and M05 replaced it.** The shipped
-  `LRAT.check` is blocked by exactly one thing — `Std.HashMap` inside `DefaultClause.ofArray`, whose
-  bucket indexing computes on `USize`, whose width is an `@[extern] opaque` the kernel cannot unfold.
-  `Sat/MaskCheck.lean` is the replacement: proved sound, kernel-decidable, axiom-clean. **What remains
-  is a cost risk, not a trust risk.** The projection is 5.4–9.0 hours of processor time across 96
-  independent cubes; it is a *projection*, from a per-step cost model measured on synthetic data, and
-  the two numbers it rests on that are still unmeasured are the real distribution of learned-clause
-  lengths and whether a better cube split exists. Both push the total, and only one direction is
-  bounded: if the split is worse than greedy-by-degree suggests, this grows. The abandon threshold is
-  restated in `plans/M05-kernel-checker.md` § 1 — projected processor time over ~40 hours, or a
-  re-checker on 4 cores that cannot finish overnight.
-  **An earlier version of this bullet quoted 0.35 ms/step and 1.26 hours. Both were wrong** — measured
-  without the clause-table lookup, which is where the time actually goes. Do not quote them again.
-- **~~The gadget algebra is written at four colours, and rung D needs five.~~** **Fixed at M11.** The
-  colour count is now the first index of `Gadget`, `Proper` is stated over an arbitrary colour type,
-  and `K₆` at five colours is a committed spec witness. Recorded as a **miss**, because it was not
-  noticed during M09's three modeling passes: every witness in this repository refutes 4-colourings,
-  so nothing in the milestone's own work pushed on the number, and a design nobody exercises at the
-  next value is a design nobody has checked.
-- **The gadget algebra has been exercised on constructions that already existed, not on a search.**
-  M09's composition theorem covers de Grey's two-copy argument and Heule's triangle argument, and it
-  deleted a certificate. That is evidence it is the right shape, not evidence it scales. **The cost is
-  now measured rather than projected** (`plans/M11-search-instrument.md` § 0): the terminal check runs
-  over one colouring per colour-partition of the interface, at ~2–3 ms each, which puts the ceiling at
-  **ten interface vertices at five colours — 4.3 minutes.** Without that restriction the ceiling is
-  seven, and eight does not finish at all. Ten is enough for the compositions we can currently
-  imagine and it is not obviously enough for the ones a search will propose; that gap is the honest
-  statement of the risk.
-- **No theorem in this project has ever been about a five-colouring, so the cost of rung D's actual
-  question is unmeasured.** Found 2026-08-01 while splitting M12 out of the hunt: `coloringCNF 5`
-  and `Colorable 5` appear **zero** times across the repository. M11 made the question askable and
-  committed one spec witness that exercises the colour index — the complete graph on five vertices,
-  refuted at four colours and surviving at five — but nothing has been refuted at five. Every step
-  count, certificate size and processor-hour figure recorded here is a four-colour figure, and the
-  one thing already established about this cost is that it is **not monotone in graph size** (M07:
-  Heule's 510-vertex witness costs 28% more than his 553-vertex one). At five colours the regime
-  changes again in a direction nobody here has sampled, and the satisfiable direction — which is a
-  search's inner loop — is equally unmeasured. It is M12's first item for that reason.
-- **Our marginal edge at rung D is unproven at this scale.** Persistence, verified modular
-  composition, and no fatigue in a gadget search are real advantages, but nobody has demonstrated
-  they are enough here.
+- **χ(ℝ²) ≥ 6 may be false, or its witness astronomically large.** χ could be 5, 6 or 7; strong SAT
+  researchers and Polymath16 stalled at exactly this point. Rung D is a gamble; the rungs below it are not,
+  which is why the ratchet is built this way.
+- **Refutation cost is not monotone in graph size, and five colours cost far more than four.** Heule's
+  510-vertex witness costs 28% more than his 553-vertex one, and de Grey's 1581 has no monolithic
+  refutation at all. At five colours the cost was 227× the four-colour cost on one fixed 47-vertex graph
+  and 10–30× at matched size. What a 6-chromatic candidate would cost is unmeasured, because none exists.
+- **Certificate size decides what reaches the kernel.** The fine-tail cell core at `p = 1/7` was priced at
+  about 800,000 LRAT lines per cube and declined; Exoo and Ismailescu's {1, 2} six-forcer was priced at
+  about 50 million hints and deferred, which is why `Instances/OneTwo` does not exist (§ 3.10).
+- **Field-level statements rest on hand arguments.** Two steps are not in the kernel: that a number field
+  with a conjugation-fixed prime supplies a valuation subring with residue field of size N(𝔭) (ledger
+  row 57), and the integrality of unit vectors at the primes above `p` behind the finite-plane bound
+  (row 52). The kernel holds both theorems only through an explicit subring and ring homomorphism
+  (`colorable_unitDistance_induce_of_valuationSubring`, `UDCert.drawing_adj`).
+- **No independent replay covers the current tree** (§ 5).
+- **A tools-side negative measures its enumeration** (`CLAUDE.md` § Grokkings, G21). Rows of the ledger
+  marked [tools] are measurements with controls, not theorems, and nothing in `tools/` is trusted.
+- **Our marginal edge at rung D is unproven.** Persistence, verified modular composition and a search that
+  does not tire are real advantages; nobody has shown they are enough here.
