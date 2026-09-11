@@ -500,15 +500,25 @@ class RungCensus:
 def stage_symmetry(base, stage, group_perm):
     """The subgroup of the base group preserving the stage's atom set, as atom permutations.
 
-    `group_perm` is a list of lattice-tuple -> lattice-tuple maps (one per base group element)."""
-    atup = [tuple(l[1]) for l in stage.atom_labels]
-    ix = {t: i for i, t in enumerate(atup)}
-    A = set(atup)
+    `group_perm` is a list of lattice-tuple -> lattice-tuple maps (one per base group element).
+
+    **An atom is keyed by `(half, tuple)`, not by the tuple alone.** On a joint stage (M63 C4,
+    `side="LS"`) the same lattice point is an atom of each half, so a tuple-keyed index would
+    collide and silently identify the two. The group acts DIAGONALLY -- the same element on both
+    halves -- which is what makes an element of the order-24 group an automorphism of the whole
+    type-M arena (M62 §R19(1)). On a one-sided stage the half is constant and this is the old
+    computation exactly."""
+    alab = [(l[0], tuple(l[1])) for l in stage.atom_labels]
+    ix = {t: i for i, t in enumerate(alab)}
+    A = set(alab)
+    if len(ix) != len(alab):
+        raise ValueError("two atoms share a (half, tuple) label; the stage's atoms are not a "
+                         "partition of distinct vertices")
     out = []
     for g in group_perm:
-        if {g[t] for t in A} != A:
+        if {(h, g[t]) for h, t in A} != A:
             continue
-        out.append(tuple(ix[g[atup[a]]] for a in range(len(atup))))
+        out.append(tuple(ix[(alab[a][0], g[alab[a][1]])] for a in range(len(alab))))
     return Rung(tuple(out), name="Aut(A)")
 
 
@@ -729,7 +739,15 @@ def analyse(base, stage, rec, ask=None, log=print):
 
 
 def _orbit_map(base, stage):
-    lab = [tuple(base.label[base.of[tuple(l[1])]]) for l in stage.atom_labels]
+    """Atom -> the orbit coordinate its profile is counted in.
+
+    On a one-sided stage that is his orbit label, and the profiles are the ones M64 recorded. On a
+    JOINT stage the half is the distinguishing datum -- the same orbit is filled independently in
+    each half -- so the coordinate is `(half, label)` and the record's `profiles.orbits` says so
+    by carrying two-part labels."""
+    joint = len(getattr(stage, "reduce", {stage.side})) > 1
+    lab = [((l[0], tuple(base.label[base.of[tuple(l[1])]])) if joint
+            else tuple(base.label[base.of[tuple(l[1])]])) for l in stage.atom_labels]
     return lambda a: lab[a]
 
 

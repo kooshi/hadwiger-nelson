@@ -35,6 +35,7 @@ the gluing classification (`Glue.lean`) and the 2-adic wall criterion (`plans/FI
 from __future__ import annotations
 import argparse, json, math, sys, time
 from collections import defaultdict
+from dataclasses import dataclass
 from fractions import Fraction as Fr
 from pathlib import Path
 
@@ -1102,6 +1103,153 @@ def parts_group():
                     seen[key] = h; nxt.append(h)
         frontier = nxt
     return list(seen.values())
+
+
+def kinv(x):
+    """1/x in K, exactly. Two conjugations: over sqrt11 into F = Q(sqrt3), then over sqrt3 into Q."""
+    a, b, c, d = x
+    if x == Z:
+        raise ZeroDivisionError("no inverse of 0 in K")
+    A, B = (a, b), (c, d)                                  # x = A + B*sqrt11, A,B in F
+    # N = A^2 - 11 B^2 in F
+    N = (A[0]*A[0] + 3*A[1]*A[1] - 11*(B[0]*B[0] + 3*B[1]*B[1]),
+         2*A[0]*A[1] - 22*B[0]*B[1])
+    n = N[0]*N[0] - 3*N[1]*N[1]                            # norm of N down to Q
+    # 1/x = (A - B sqrt11) * conj_3(N) / n
+    C = (N[0], -N[1])
+    def fmul(u, v): return (u[0]*v[0] + 3*u[1]*v[1], u[0]*v[1] + u[1]*v[0])
+    P, Q = fmul(A, C), fmul((-B[0], -B[1]), C)
+    return (P[0]/n, P[1]/n, Q[0]/n, Q[1]/n)
+
+
+def kdiv(x, y):
+    return kmul(x, kinv(y))
+
+
+def kstr(x) -> str:
+    """A K element as text: '7/8', '17/6 + 1/6*sqrt33'. The spelling records use."""
+    if x[1] == 0 and x[2] == 0 and x[3] == 0:
+        return str(x[0])
+    return " + ".join(f"{v}{nm}" for v, nm in zip(x, ("", "*sqrt3", "*sqrt11", "*sqrt33")) if v != 0) or "0"
+
+
+def kelem(v) -> tuple:
+    """A Fraction, int, str or 4-slot tuple as a K element."""
+    if isinstance(v, (tuple, list)):
+        if len(v) != 4:
+            raise ValueError(f"a K element has four slots (1, sqrt3, sqrt11, sqrt33); got {v!r}")
+        return tuple(Fr(t) for t in v)
+    return (Fr(v), Fr(0), Fr(0), Fr(0))
+
+
+@dataclass(frozen=True)
+class CrossLaw:
+    """The cross-edge law between `L` and `rho*S` for a rotation rho = c + i*s whose sine leaves K.
+
+    **Derivation, valid for every such rotation and not only rho15** (M63 phase C, C5).
+    |u - rho v|^2 = 1  <=>  Re(rho * conj(u) v) = k,  with k = (|u|^2 + |v|^2 - 1)/2. Write
+    conj(u)v = p + i q (p, q in K) and s = sigma*sqrt(D) with sqrt(D) not in K. Then
+    c*p - sigma*sqrt(D)*q = k splits over the basis {1, sqrt(D)}:
+
+        q = 0          -- u and v are collinear with the centre, and
+        c*p = k.
+
+    The centre needs no separate case: conj(0)v = 0 gives q = 0 and c*0 = 0 = k exactly when
+    |v|^2 = 1, which is the edge |0 - rho v| = |v| = 1. rho15 is c = 7/8, where c*p = k is
+    `cross_edges_rho15_fast`'s p = 4(a + b - 1)/7.
+
+    A rotation whose sine lies in K lies in K(i), where Theorem B four-colours every union:
+    REFUSED by `collinear`, structurally. A cosine outside K needs a different derivation
+    (FS-30 step 2) and is not implemented.
+
+    **The law does not see the sine at all**, so rho and its complex conjugate give the same
+    adjacency -- the adjacency face of complex conjugation being one of the base group's Galois
+    elements (M62 sectionR19(1)). That is why `cos` is the whole datum.
+
+    **Collinearity is decided EXACTLY, not by a float ray key.** If u, v in K^2 are collinear with
+    the origin then v = lambda*u with lambda = x_v/x_u (or y_v/y_u) IN K, since both coordinates
+    lie in K -- so dividing a point by its first nonzero coordinate is a canonical exact key for
+    its line, and it folds antipodes together automatically (u and -u give the same key). The
+    committed `cross_edges_rho15_fast` keys rays on rounded floats and by SIGNED direction, so it
+    can in principle split a line at a rounding boundary and cannot see an antipodal pair at all;
+    `edges` is the law without either gap, and control c5.1 compares the two."""
+
+    cos: tuple                       # an element of K in typem's 4-slot form -- the law's only datum
+
+    @property
+    def name(self) -> str:
+        """Derived from `cos`, never stored beside it: a stored name is a second copy of the law
+        that drifts from it."""
+        return "rho15" if self.cos == (Fr(7, 8), Fr(0), Fr(0), Fr(0)) else f"collinear({kstr(self.cos)})"
+
+    @staticmethod
+    def collinear(cos) -> "CrossLaw":
+        """The law for a rotation of the given cosine. Refuses when the rotation does not leave K.
+
+        Two refusals, both structural: a cosine with 1 - cos^2 <= 0 is not a rotation of the plane
+        at all, and a cosine with 1 - cos^2 a square in K puts rho in K(i), where **Theorem B**
+        (`Proofs/HadwigerNelson/FieldWall4.lean`, chromaticNumber_seamPlane) four-colours every
+        unit-distance graph drawn over K -- so the union it builds can never refuse four colours
+        and a search over it would quantify over an empty set."""
+        c = kelem(cos)
+        if c == Z:
+            raise ValueError("cos = 0 degenerates the law: c*p = k forces k = 0 and every p, "
+                             "which is not a cross-edge condition. Not supported.")
+        D = ksub(ONE, kmul(c, c))                       # sin^2
+        if kfloat(D) <= 0:
+            raise ValueError(f"cos = {kstr(c)} has 1 - cos^2 = {kstr(D)} <= 0: not a plane rotation")
+        if k_is_square(D):
+            raise ValueError(
+                f"cos = {kstr(c)} has sin^2 = {kstr(D)} a SQUARE in K, so the rotation lies in "
+                f"K(i) and the whole union is drawn over K = Q(sqrt3, sqrt11). Theorem B "
+                f"four-colours it, so no such union can refuse four colours. Refused.")
+        return CrossLaw(cos=c)
+
+    @staticmethod
+    def rho15() -> "CrossLaw":
+        """`collinear(7/8)`, the one rotation every published type-M construction uses."""
+        return CrossLaw.collinear(Fr(7, 8))
+
+    def line_key(self, p):
+        """The exact canonical key of the line through the origin and `p`; None at the origin."""
+        x, y = p
+        if x == Z and y == Z:
+            return None
+        return (ONE, kdiv(y, x)) if x != Z else (Z, ONE)
+
+    def joins(self, pu, pv, nu, nv) -> bool:
+        """The law itself, on one ordered pair, in exact K arithmetic and nothing else."""
+        p, q = conj_mul(pu, pv)
+        if q != Z:
+            return False
+        return kmul(self.cos, p) == kscale(ksub(kadd(nu, nv), ONE), Fr(1, 2))
+
+    def edges(self, pts, norms=None):
+        """The (L-index, S-index) cross edges over a point list, both orderings of every pair.
+
+        Exact lines propose; the law disposes. The relation is symmetric (conj(v)u is the complex
+        conjugate of conj(u)v, so q = 0 and p are unchanged), so both (i, j) and (j, i) appear --
+        which is what `Arena` reads as the (L, S) block."""
+        norms = norms or [norm2(p) for p in pts]
+        lines = defaultdict(list)
+        centre = None
+        for i, p in enumerate(pts):
+            k = self.line_key(p)
+            if k is None:
+                centre = i
+            else:
+                lines[k].append(i)
+        E = []
+        if centre is not None:
+            for j in range(len(pts)):
+                if j != centre and self.joins(pts[centre], pts[j], norms[centre], norms[j]):
+                    E.append((centre, j)); E.append((j, centre))
+        for idx in lines.values():
+            for i in idx:
+                for j in idx:
+                    if self.joins(pts[i], pts[j], norms[i], norms[j]):
+                        E.append((i, j))
+        return sorted(set(E))
 
 
 def parts_orbits(pts, group=None):
