@@ -552,6 +552,13 @@ def reverify_hypergraph(stage, rec, *, sample: int = 100, seed: int = 0) -> dict
 
     Count methods: 'sampled' for the minimality half, 'exhaustive' for the antichain."""
 
+def his_symmetry_guess(table1_json) -> dict:
+    """A free check, since Table 1 is transcribed anyway (Poros, note to card 9): his §5.6 guesses that
+    *"for a triples a good approximation will be provided by graphs with symmetries of order 3 or 6; for
+    pairs with symmetries of order 2 or 4"*. Score it against his own fifteen result rows' symmetry
+    column. M64 §R10's rung lattice supersedes the guess wherever a stage and its `Y` exist — everywhere
+    in C–E — but **not** where no stage exists yet, which is exactly phase G's fresh arenas."""
+
 def involution_classes(base, stage) -> dict:
     """Conjugacy classes of the stage's Aut(A), and which class each rung-live involution lies in (M64 P7,
     its unchecked half)."""
@@ -684,6 +691,14 @@ python3 tools/parts_run.py reduce --L v412e2106.vtx --S v166e774.vtx --S-frame c
   - then up to 64 minima at w*, as `Count(k, "bounded-below")` (the joint level at 509 has at least the
     ~13k raw L-minima of `A412` against `S136`, so exhausting it is D's or F's decision, not C's);
   - for every minimum found, its split `(|L'|, |S'|)`;
+  - **the union of a capped level is a SAMPLE and is never `A`** (Poros card 9). His `A` is the union of
+    *all* minima at the size, and it is the loop's state variable; a level stopped at 64 has no stated
+    order behind it — our implicit hitting set states none, where his §5.7 at least orders deleted sets
+    by decreasing size — so nothing bounds which members a cap holds. A capped record therefore writes
+    `A_sample` and **no `A` field at all**, and no loop may start from it. A loop that needs this level
+    runs it to exhaustion first, or checks completeness by M64 §0(ix)'s affine-hull control **with the
+    hull predicted from correction sets derived by ask**, never from the level set itself — that
+    circularity is why M64's P10 went unscored;
   - both ask populations, and the correction-set census.
 - **Stop rule.** If w* ≤ 507 atoms (**≤ 508 vertices**):
   - stop, and report to the product owner the same hour;
@@ -830,6 +845,8 @@ here.*
 | 6 (rank 1, second turn) | are the seven drops conditional on a regime F and G leave? | **ADOPTED as C4.0.** Re-derived: the costs behind the drops are all from frozen-companion stages, and the joint stage is the first without one. The drops now carry their regime as a stated condition and are re-tested when the regime changes |
 | 7 | phase E's below-the-accumulator run | **ADOPTED, and it swaps the roles** (M63 §S.4 phase E): the 8/3 mono-pair from his published 367-vertex minimum becomes the required run — it is genuinely held out, it starts below his accumulator, and it exercises the edge companion, which M63 §3 calls the sharpest of the held-out set — while the S-side 138-vertex start becomes the mechanism control, since the S reduction was spent as the calibration (§R1) |
 | 8 | is his published expansion-ranking device the one D should register? | **ADOPTED into D, and it un-drops two audit rows.** Re-derived from the extraction: §5.6's third strategy ranks candidate expansions *"by numerical indicators (see 5.10)"*, and §5.10's are the free-vertex count, the small-degree hyperedge counts and the maximum independent set of the degree-2 hyperedge graph — which is exactly the C-5 row I proposed dropping, and P6 is the prediction about them. My drop argument saw only their sizing role. C-5 and B-12 now go to phase D; his device is scored on his own move before D registers any rule. Poros's own candidate — rank an expansion by how many necessary atoms it frees — is recorded there as unverified |
+| 9 | what does a capped joint level leave as the loop's state? | **ADOPTED, and its falsifier did not fire** — the plan did *not* call the capped union a sample. C4's record now writes `A_sample` and no `A`, and phase F(a) may not start a loop from a capped level without exhausting it or checking completeness from ask-derived correction sets. The card audits its own card 1, whose "answered by" line proposed the cap |
+| its two notes | not carded | **both adopted.** His §5.6 symmetry guess is scored against his own fifteen rows as a free check in C2, with the point that M64 §R10 supersedes it only where a stage and its `Y` already exist — not in G. And his attested 0.2 s for √3 triples was measured **with** the five-vertex assignment, so the lever is part of that number's provenance, not only a speed knob: B-11's drop now carries that caveat for E's √3 row |
 | its answer on the roadmap | not carded | **two items adopted into phase F** (M63 §S.4): re-test his "a bigger disk gave nothing" negative, which he measured inside his own loop at his own speed and which is cheap at 150× — and a radius is exactly what hid Heule-510's own points from M62's arena; and carry the certification budget explicitly. Its ordering point is adopted in §3: the joint runs come first in wall-clock order, because they are the only items that can end the milestone with the goal met |
 
 ---

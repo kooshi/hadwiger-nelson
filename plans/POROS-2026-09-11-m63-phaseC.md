@@ -52,6 +52,7 @@ a fact about *our* stage may be a defect in *his* table (card 2).
 - `tools/parts_stage.py:45-127`, `tools/parts_faces.py:465-538, 671-756` — read against: stage = one deletable side against a frozen companion; rung = subgroup of Aut(A) — surprised: no; `Stage.__init__` refuses any side but L or S, "L and S are minimized separately against a frozen companion" (parts_stage.py:46-48), so a joint stage is unwritable today
 - Phase C planner's second report, 2026-09-11 — read against: card 1 adopted and its frame settled — surprised: yes; the relative frame is not one frame but a double coset Stab(W_L)\G/Stab(W_S), giving at most TWO inequivalent joint problems (12 and 6, two cosets of size 12) and four for the M6B stage, so card 1 is two runs and not one; and card 1's positive control is derivable rather than needing a run, since any refusing proper subset of the record with both halves deletable would give a side below 374 or 136 against his published minimality; also measured there: the joint stage is 577 vertices and 576 atoms, his M6B L refuses with S141 in 12 of 24 frames and never with S136, and the S stage's order-3 rung closes at 142 where M64 §R10 had only ">= 139"
 - Phase C planner's third report, 2026-09-11 — read against: cards 6 and 7 answered with reasons — surprised: yes; card 6 caught a gap in the audit itself (the 8-4-2-1 accelerator was named among the drops in its report to the product owner while its table carried no row for it at all, now row B-12), which is the second time this phase a card found something the table asserted without carrying; and it corrected my card 6 evidence — the 2^m induced-matching bound is NOT our pipeline's "refused before any ask" guard, since that guard was written for his explicit candidate list and the implicit hitting set never builds one, so X-7 is a re-scope rather than a drop and its replacement forecast lives in phase D
+- Phase C planner's fourth report, 2026-09-11 — read against: card 8 either adopted or refused — surprised: yes; it un-drops two audit rows (C-5, the §5.10 indicators, whose sizing role is superseded while its ranking role was never seen; and B-12, 8-4-2-1, on my unverified necessary-atom construction, its phase-1 half staying conditional), restates P6 as "do the indicators rank the orbits his move used above the rest", and leaves the drop list at four cost-control rows plus idealness. It also names the mechanism of its own three misses: the audit was built by walking the plan's promises, so it inherited the plan's blind spots, and what caught all three was reading his paper for a purpose the plan had not named
 - Product owner's flag, 2026-09-11: `tools/parts_verify.py` rewrote the tracked `data/m62/parts-ref11-verified.json` (date stamp only) — read against: none of my commands write tracked files — surprised: no; I ran no `tools/` script; every command so far read, or wrote into the scratch directory
 
 ## Hunch ledger
@@ -246,6 +247,23 @@ question: is-his-published-expansion-ranking-device-the-one-D-should-register
   hunch: the indicators separate his four from the rest better than degree does, being about the constraint structure rather than the geometry; held at about 50%, since M64 §R9 measured that summaries at this level can wash out a real coupling
   falsifier: his four orbits do not all rank in the top half under any single §5.10 indicator
   rank: 8
+
+**Fate of card 8 — adopted by the planner, 2026-09-11.** C-5 and B-12 leave the drop list, P6 is
+restated as the ranking question rather than retired, and phase D now scores HIS device before
+registering anything of ours, with the card's if/then written in. My necessary-atom construction is
+recorded in D as mine and unverified.
+
+question: what-does-a-capped-joint-level-leave-as-the-loops-state
+  evidence: card 1's own "answered by" line says reduce_stage "bounded to closing the optimum with a small max_minima", and the planner adopted that as C4.0/C4a. But A is his loop's state variable and is defined as the union of ALL minima (parts:437-439), and his §5.5 permits stopping a step when its candidate count exceeds a threshold (parts:496-497) — which is why M63 §3(b) calls his {M} "complete-or-truncated and he does not say which" and his 1092 un-gateable. His §5.7 documents the enumeration ORDER, deleted sets "ordered by decreasing number of vertices" (parts:567-569), so a truncated run of his carries a stated bias; our implicit hitting set has no stated order, so a capped level is a sample of {M} with nothing bounding which members it holds. The joint level may be large: the L level alone is 3,264 and the S level 48.
+  expected: the audit carries §5.7 in its sizing role, his explicit enumeration superseded by the implicit hitting set, and the cap as a budget knob
+  ask: if C4a caps the joint level, is that capped union used as A anywhere downstream, and if it is, what bounds its bias?
+  if the value only: the artifact says so — the run answers "is the minimum below 509", its union is a SAMPLE and never A, and no loop may start from it
+  if the loop will continue from it: the level is run to exhaustion, or its completeness is checked by the control M64 §0(ix) describes, with the predicted affine hull coming from correction sets derived by ask rather than from the level set itself, since that circularity is why M64's P10 went unscored
+  answered by: Planner (de Bruijn, phase C)
+  cost: one line in the plan, or one completeness check per capped level
+  hunch: the value only for C4a, and F's continuation is where a capped union would silently become the state
+  falsifier: the plan already names the capped union a sample rather than A
+  rank: 9
 
 ## Measurements
 

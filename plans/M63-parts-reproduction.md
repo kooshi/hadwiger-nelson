@@ -117,7 +117,7 @@ phase D's expansion rule, that the cost argument never touched.
 | B-9 | one-time CNF | done | `parts_reduce.Oracle` | — |
 | B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | partly | refusal §R1; both-side criticality unchecked | C4's positive control |
 | B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | **not done — NO LONGER A DROP** | it prices a candidate expansion in tens of asks instead of a full reduction (delete eight necessary atoms at once; a refusal frees all eight), which is the shape D's look-ahead needs. Its phase-1 role remains unnecessary at the measured costs, and that half stays conditional on C4.0 | **D** |
-| B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100× | — |
+| B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100×. **Caveat for E's √3 row** (Poros): his attested 0.2 s there was measured *with* the five-vertex assignment, which he reports at ~10× and which fails for the 1/√3 triple — so that lever is part of the number's provenance, and a timing compared with his must say whether it was on | E (the √3 row) |
 | C-1 | degree 2 by `hyperedges_run.py` on M62's arena (§4 C) | retired | `reduce_stage` harvests every degree lazily (sizes 1–10 stored, M64 §R3); M62's arena is off the path (M62 §R23) | — |
 | C-2 | degree ≥ 3 harvested | done | same | — |
 | C-3 | every hyperedge re-verified by an independent rebuild; no hyperedge contains another | not done | correction sets are verified by construction only | C2 |
@@ -271,7 +271,9 @@ Acceptance:
 - [ ] Headline or secondary record certified — or the menu below exhausted and reported with its
   enumerations.
 - [ ] Each experiment's prediction and cost committed before it runs: (a) if C4 read 509, the rule-driven
-  loop on the joint level set; (b) larger joint accumulators — his L files of all three subtypes against
+  loop on the joint level set — **which first requires that level exhausted, or its completeness checked
+  from ask-derived correction sets**, because the union of a capped level is a sample and not the loop's
+  state variable (Poros card 9); (b) larger joint accumulators — his L files of all three subtypes against
   `A166 ∪ A172 ∪ A167`, frames found; (c) S reduced against one L minimum per profile class of the 1,092,
   and L against the 8 S classes; (d) other connection orbits at `ρ₁₅` — M62 §R20's `(0,0,2,6) + (24,0,0,0)`
   subtype at 18 edges, and `(20,0,0,4)`, `(16,0,6,2)` (FS-30's cheap lead); (e) the loop continued past
