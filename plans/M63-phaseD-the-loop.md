@@ -1497,6 +1497,85 @@ one command, never two moments — a failed commit leaves the index staged for w
 
 ---
 
+## §H — Handoff notes
+
+**Addresses.**
+- His archive: `data/m62/parts-ref11/JP/Large/`, with his own index `graphs.txt`.
+- Stored reduction records: `data/m62/m63-L451-reduction.json` (375 level, 3,264 minima) and
+  `m63-S166-reduction.json` (136 level, 48 minima). M64's artifacts: `data/m62/m64-*.json`.
+- His Table 2 transcribed: `data/m62/parts-table2-orbit-fillings.json` (four `{M}` columns).
+- The paper: `~/source/library/pdf/arXiv-2010.12665-parts-509-minimization.pdf`, `pdftotext -layout`.
+  The lower-bound paper: `~/source/library/pdf/arXiv-2303.14714-degrey-parts-lower-bounds.pdf`.
+- **The contract is the committed code at HEAD**, not any plan: `tools/parts_run.py --help`,
+  `parts_reduce.Oracle.ask` / `reduce_stage` / `ReductionState`, `parts_stage.Stage`.
+
+**Stage constructors that are known-good.**
+- L451: `Stage(Base(2.6), load_lattice(v451e2400), load_lattice(v136e564), side="L", rung=1, pin=True)`,
+  fingerprint `0700718c70107448b8658a630c5456ee`.
+- S166: `Stage(Base(2.6), load_lattice(v374e1860), load_lattice(v166e774), side="S")`.
+- The record: `Stage(Base(2.6), load_lattice(v374e1860), load_lattice(v136e564), side="LS")` →
+  509 vertices, 2,442 edges, 508 atoms, fingerprint `f4686c0240ff…`.
+
+**Six API facts that cost me time, so they need not cost it again.**
+1. `Base` has **`tups`** (lattice tuples) and **`pts`** (K-points); there is no `keys`.
+2. **`Base.of` maps a tuple to an orbit INDEX (int)**, while **`orbits_meeting_disk` returns orbit LABEL
+   TUPLES**. Comparing one against the other matches nothing *and raises no error* — it silently reported
+   every vertex as outside his disk. Convert through `Base.label` (index → `(a,b,c,d)`) first.
+3. `typem.unit_edges_fast` returns a **2-tuple**; the edge list is one of its parts, 38,730 on `Base(2.6)`.
+4. **A stage numbers vertices over `range(2n)`, L first and S second**, and the induced edge list is
+   `stage.A.induced(stage.present)`. Reading `A.E_int` / `A.E_cross` raw mixes two index spaces — this is
+   §1(d)'s failed probe and control d6.1.
+5. `reduce_stage` returns the record with a **live `state` object** under `"state"`; pop it before
+   serialising (`parts_run.finish_record` does).
+6. Applying a group element to a whole minimum set is fast on the tuple dicts and times out point by
+   point (phase C's §H, confirmed).
+
+**Numbers measured in planning, each to be re-derived by committed code before anything rests on it.**
+`Base(2.6)`: 229 orbits, 4,513 points, 38,730 unit edges. Reserve menus: 49 / 49 / 6 strict,
+59 / 57 / 11–12 literal. Necessary atoms on the L451 level: **336**, against `Y`'s harvested degree-1
+layer of **312**. The record's edges: `L-L 1860 + S-S 552 + cross 30`, the 30 being 12 at the shared
+centre and **18 off-centre**.
+
+**People.**
+- Advisor: **Poros, `adbf37e0e65defce4`**; its record is `plans/POROS-2026-09-11-m63-phaseD.md`, which is
+  **untracked on disk** — §7's close commits it by path. Six cards, all with fates in §P. Re-derive
+  anything it measures before relying on it; that rule caught two of its claims and one of mine.
+- The small half's expansion is being run by **`aa10420df4950eda9`**, outside this plan; §3.5 states both
+  branches of its outcome. At the time of writing, two of fourteen candidates are inert on the minimum.
+- **My scratch probes are not in the repository** and should not be looked for; the numbers above are the
+  record, exactly as phase C handed its own over.
+
+**The git rule on this branch, learned the hard way (§E5a): `git add` and `git commit` are one command,
+never two moments.** A failed commit leaves the index staged for whoever commits next, and `git add
+<path>` does not protect you when someone else's commit is the one that fires.
+
+---
+
 ## §A — The product owner's approval
 
-*Pending. Implementation may not start until this section records it.*
+**APPROVED 2026-09-11 by the product owner (the main session), recorded by the commit that added this
+section. Implementation may start.**
+
+### A.1 — The four decisions, approved
+
+| # | the decision | condition attached |
+|---|---|---|
+| 1 | **The outcome map replaces the ablation** as the scoring surface for the expansion rule (§3.2) | none. *The owner's reason for approving:* the ablation's power **is** the density of helpful moves, which nobody had measured, so it could have tied at zero or at everything — and the map is that measurement. One computation that also scores rankings invented afterwards beats four campaigns that score only the four we thought of |
+| 2 | **The secondary record bar moves to fewer than 2,406 edges** (§X.1) | **already applied**: the owner edited `plans/M63-parts-reproduction.md` §S.1 in place and committed it, recording both consequences — the edge sweep has a known non-zero answer, and the exact edge minimum at 509 vertices is unrun by anybody |
+| 3 | **The exact edge minimisation belongs to phase D** (D6) | **the condition stands as offered**: if D0's cost probe reads at companion-free rates, it moves to phase F. What made it cheap enough for D is that it is the same stage with edges as atoms rather than a new instrument (§M collapse 1) |
+| 4 | **Sixteen cores for the sweep** (§3.2) | **capped**: the total across *all* agents stays at or under **24 of the 32**; **phase C's joint runs are untouched and keep priority**; and **the implementer checks the load at launch rather than assuming it** — the small-half probe may still be holding four slots when D starts |
+
+### A.2 — Also approved, and applied by the product owner in files this phase may not touch
+
+- **§X.3, phase F item (g)**: the radius half is struck, the base-graph half (`⊕ⁿHᵐ`) kept, and the
+  explanation put in its place — the question is answered without a run, and phase D still tests it at
+  two runs through the `√5` orbits.
+- **§X.2**: the `[deGreyParts2023]` row is added to `BIBLIOGRAPHY.md`.
+
+### A.3 — What the review credited
+
+The catch that our stated secondary target was already beaten in print, *"the single most valuable thing
+in your report — we could have 'achieved' something that exists"*; the handling of the git hazard, writing
+the mismatch into the plan so `git log` does not read as a lie rather than rewriting history under three
+live agents, with the rule drawn from it going to every agent on the branch; and reporting a failed probe
+of my own and keeping it as a planted control rather than deleting it.
