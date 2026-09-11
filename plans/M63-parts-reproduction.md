@@ -185,9 +185,10 @@ Acceptance:
   rungs closed; `Y` re-verified (sampled, stated).
 - [ ] C3: the M6B 375 level set on `v403e2106` with `S141`, predictions committed first; the "M6A&B"
   column's meaning decided or reported undecided with its numbers.
-- [ ] C4: the joint stage's positive control (the 509 returns exactly itself); the joint run on
-  `A412 ∪ ρ·g⁻¹(A166)` to a closed optimum, predictions committed first, checkpointed; **if ≤ 508
-  vertices, stop and report to the product owner the same hour.**
+- [ ] C4: the joint stage's positive control (the 509 returns exactly itself — a derived expectation, not
+  a hope); the joint run on `A412 ∪ ρ·g⁻¹(A166)` to a closed optimum, predictions committed first,
+  checkpointed; **if ≤ 508 vertices, stop and report to the product owner the same hour.** C4b, the
+  second relative frame (the joint problem has at most two, and only one holds the record), if approved.
 - [ ] C5: `CrossLaw` controls fire; the L451 stage fingerprint is unchanged under the explicit law.
 - [ ] The audit rows assigned to C updated in place here; §R2 written; Poros's record committed.
 
