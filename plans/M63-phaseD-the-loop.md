@@ -1077,7 +1077,7 @@ edges, and `e5 ≤ 2406` is in print. **Proposed replacement:**
 > `library/pdf/arXiv-2303.14714-degrey-parts-lower-bounds.pdf` | **read in full (2026-09-11) — four pages** |
 
 Also named by this row and not yet keys: `[Pritikin1998]` (JCTB 73, `v7 > 6197`, `v5 > 12`) and
-`[GwynStavrianos2022]` (Geombinatorics 32(1), 2022).
+Gwyn–Stavrianos, *Geombinatorics* 32(1) (2022) — named only, not held, no key minted.
 
 ### X.3 — M63 §S.4 phase F(g): the disk-radius re-test can be struck, and his negative explained instead
 
