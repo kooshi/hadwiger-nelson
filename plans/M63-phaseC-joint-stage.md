@@ -869,6 +869,22 @@ here.*
 
 ---
 
+## §L — One process lesson, for phase D's planner
+
+**Audit the source, not the plan.** This phase's gap audit was built by walking the milestone's own
+promises, so it inherited the milestone's blind spots. Three of the advisor's nine cards found something
+the table asserted without carrying, and **all three came from reading `[Parts2020a]` against a question
+the plan had not asked**: that the S-side reduction had been spent as the calibration and was no longer
+held out; that the 8-4-2-1 batching had no row at all; and that §5.10's indicators have a second role —
+ranking an expansion — which is the only published device phase D needs.
+
+The advisor reads it as the division of labour working, and it is. The refinement worth carrying is that
+the bias is in the instrument: an audit derived from a plan can only find what the plan already names.
+**D's audit should be built from his §§5.5–5.11 outward**, with the plan's promises checked against it,
+rather than the reverse.
+
+---
+
 ## §H — Handoff notes
 
 - **Data addresses:**
