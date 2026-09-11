@@ -115,7 +115,7 @@ phase D's expansion rule, that the cost argument never touched.
 | B-7 | five-vertex pin for the √3 triple | not done | — | E |
 | B-8 | cyclic implication chain for mono-sets | drop? | an encoding alternative to the clique companion; asks cost ≤ 0.11 s (S.2 #11), nothing to accelerate; E revisits if the triple's asks are slow | — |
 | B-9 | one-time CNF | done | `parts_reduce.Oracle` | — |
-| B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | partly | refusal §R1; both-side criticality unchecked | C4's positive control |
+| B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | **done** | c4.1's phase-1 census over the record with BOTH halves deletable reads 508 critical / 0 droppable / 0 unknown — every single-vertex deletion on either side is colourable — and the level is the record itself, uniquely (§R2.2) | — |
 | B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | **not done — NO LONGER A DROP** | it prices a candidate expansion in tens of asks instead of a full reduction (delete eight necessary atoms at once; a refusal frees all eight), which is the shape D's look-ahead needs. Its phase-1 role remains unnecessary at the measured costs, and that half stays conditional on C4.0 | **D** |
 | B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100×. **Caveat for E's √3 row** (Poros): his attested 0.2 s there was measured *with* the five-vertex assignment, which he reports at ~10× and which fails for the 1/√3 triple — so that lever is part of the number's provenance, and a timing compared with his must say whether it was on | E (the √3 row) |
 | C-1 | degree 2 by `hyperedges_run.py` on M62's arena (§4 C) | retired | `reduce_stage` harvests every degree lazily (sizes 1–10 stored, M64 §R3); M62's arena is off the path (M62 §R23) | — |
@@ -147,12 +147,12 @@ phase D's expansion rule, that the cost argument never touched.
 | O-2 | `exact-at-rung`; the rung travels with the number | done | `Bound.render` | — |
 | O-3 | per-iteration `(\|M\|, \|{M}\|, \|A\|)`, `stalled` as a verdict, stall feeds expansion | not done | `parts_report.iteration_line` exists, unused | D |
 | O-4 | kernel certificate declined for M63 | standing | for the reproduced 509 (S.1 #1); reversed for any beat (S.1 #4) | F |
-| O-5 | vacuity verdicts `base-fails` / `no-reduction` / `companion-suffices` | partly | `base-fails` done; `no-reduction` labels the wrong branch; `companion-suffices` absent | C1 |
+| O-5 | vacuity verdicts `base-fails` / `no-reduction` / `companion-suffices` | **done** | `companion-suffices` added and fired on a stub oracle (c1.4); `no-reduction` moved to the branch it names (`w* = total weight`), where c4.1 then landed on it | — |
 | X-1 | no verdict word for optimality (§E) | done | `Bound` | — |
 | X-2 | a count carries its method | done | `Count` | — |
 | X-3 | `\|{M}\|` names its group | partly | the type exists; every record writes "as-found frames" | C1 |
 | X-4 | comparisons carry their mode | partly | `Comparison` exists and is self-tested; nothing emits rows | C2 |
-| X-5 | the freeze is a commit (`require_frozen`) | not done — **broken** | crashes on first use (S.2 #12), never exercised | C1 fixes; D commits the freeze |
+| X-5 | the freeze is a commit (`require_frozen`) | **repaired and exercised** | two defects fixed (a hex digest of a hex digest; an `.items()` diff that raises on a nested list); `_freeze_control` plants all five cases in a scratch git repository and all five fire | D commits the freeze itself |
 | X-6 | the per-iteration line | not done | — | D |
 | X-7 | a level forecast before entry, and refusal of an unboundable level | drop? as specified | its premise is his candidate list, which implicit hitting set does not build. Replacement in D: a pre-level forecast from the measured per-minimum cost and a *stated* level-size assumption, with `max_minima` and the wall as the refusals (both implemented, reported as truncation) | D (replacement) |
 | X-8 | artifact schema: `fp`, `canonical_fp`, `fp_base`, per-member profile, stamps | partly | stage/base fingerprints and provenance present; per-member profiles, canonical fingerprints, config hash absent | C1 |
@@ -164,14 +164,14 @@ phase D's expansion rule, that the cost argument never touched.
 | M64-6 | P5, idealness of `Y` | drop? | needs a complete `Y`; off the record path | — |
 | M64-7 | P10, the free completeness control | not done | first meaningful on a level set produced after its classes | C2, C3 |
 | M64-8 | `m63-profiles-{S,L}.json` without a producer | retired | superseded by `m64-faces.json` (producer `parts_faces.analyse`); kept untouched | — |
-| M64-9 | `m64-rung-lattice.json`, `m64-orbit-closure.json` produced by scratch scripts | not done | — | C1 |
-| M64-10 | both reduction records without a committed driver | not done | — | C1 |
+| M64-9 | `m64-rung-lattice.json`, `m64-orbit-closure.json` produced by scratch scripts | **done** | `parts_faces.rung_lattice` / `orbit_closure`; `--reproduce-m64` rebuilds both sides with verification asks and reports `reproduces-m64`, 16 L rungs and 6 S rungs, 67 s (§R2) | — |
+| M64-10 | both reduction records without a committed driver | **done** | `tools/parts_run.py`; both records regenerate `regenerated-identical` as `.v2.json` beside the originals (c1.7, §R2) | — |
 | FS35-1 | the look-ahead's two quantities along his recorded path | partly | exchange classes from his four published ranges (M64 §0 ix); closure bounds need a level set at each state | D |
-| H-1 | `parts_verify.py` dirties the tree on every run | not done | S.2 #12 | C1 |
-| H-2 | checkpoint without resume | not done | S.2 #12 | C1 |
-| H-3 | no ask wall | not done | S.2 #12 | C1 |
+| H-1 | `parts_verify.py` dirties the tree on every run | **done** | it rewrites only when `files` or `base_radius` moves; c1.6 ran it twice into a scratch path, second run `unchanged: not rewritten`, mtime identical, `git status` clean | — |
+| H-2 | checkpoint without resume | **done** | `ReductionState` + `load_checkpoint`; c1.1 kills the S166 order-3 rung at iteration 58 of 82 and the relaunch reproduces the level exactly (§R2) | — |
+| H-3 | no ask wall | **done, by a different mechanism** | CaDiCaL implements no `interrupt()` at all (P-C1.2 falsified); the budget is a conflict-slice loop under a time wall, and c1.3 shows `unknown` is neither impossible nor automatic (§R2.3) | — |
 | H-4 | rotation lists truncated and sieved on the wrong lattice | not done | S.2 #13 | G |
-| H-5 | `Stage` hard-wires `ρ₁₅` | not done | `parts_stage.py:57` | C5 (the parameter); G (the laws) |
+| H-5 | `Stage` hard-wires `ρ₁₅` | **done for the parameter** | `typem.CrossLaw`, `Stage(cross_law=…)`; c5.1 the law reproduces the committed one edge for edge (126), c5.3 another cosine gives a different edge set, c5.4 an in-K rotation is refused naming Theorem B | G (the laws at `cos θ ∉ K`) |
 
 ### S.4 — The roadmap, C onward
 
