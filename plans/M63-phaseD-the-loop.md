@@ -1472,6 +1472,21 @@ random block completed** (without it no precision estimate is meaningful), and *
 `provisional`** under the unverified cross-edge column. Each is a fact the system holds at write time and
 the reader cannot recover at read time.
 
+### E5a — A provenance note, because `git log` on this file reads wrongly without it
+
+**This section's 183 lines were committed by `8ecc22f`, a phase C commit about something else**
+("M64's two scratch-produced artifacts get committed producers"). The cause is a shared git index and
+it is worth knowing, because two agents are committing on one branch: my commit of this pass aborted on
+a malformed message *after* `git add` had already staged the file, the staged file stayed in the index,
+and phase C's next `git commit` — correctly staging only its own paths — committed everything the index
+held, including this file. **Nothing was lost and nothing of phase C's was disturbed**, but the pass's
+content and the message describing it are in different commits, so the honest record is here rather than
+in `git log`.
+
+**The rule that follows, for anyone committing on a shared branch:** `git add` and `git commit` must be
+one command, never two moments — a failed commit leaves the index staged for whoever commits next, and
+`git add <path>` is not the protection it looks like when someone else's commit is the one that fires.
+
 ### E6 — Three corrections this pass made to my own skeleton
 
 1. The map schema stored no `block`, so a truncated map would have been uninterpretable — and truncation
