@@ -1,5 +1,16 @@
 # FS-30 — Consume the rotation list. Nothing has.
 
+> **SEQUENCED 2026-09-11 by Kooshi, as the direct sequel of M63's record phase:** *"After we match or
+> beat it, the next high value tweaks are different base graphs, and the additional ~400 rotation angles
+> that were discovered previously, which should hopefully let us go even smaller."* So this stub is no
+> longer a standalone reading room. It is the next step of the record hunt: rerun M63's loop — the one
+> that reproduces or beats `[Parts2020a]`'s 509 — on **other base graphs** and at the **412 admissible
+> rotations** (`data/m62/rotations-moser-r2.05.json`; 396 multi-family classes on the other base,
+> `data/m62/rotations-r2.05.json`), aimed below whatever M63 lands. The M63 roadmap carries it as the
+> phase after the record (`plans/M63-parts-reproduction.md`). Two consequences for M63's own
+> instruments: the rotation and the base should be **parameters, not constants**, wherever that is
+> cheap; and M63's freeze still pins `ρ₁₅` and radius 2.6 for everything compared with his tables.
+
 *Minted 2026-09-10 at Kooshi's direction. The wind-egg Poros named in the M62 review
 (`plans/POROS-2026-09-10-m62.md`): **M62's §R1 calls the 412-rotation list "the derivation" and
 nothing reads it.** Read `plans/M62-evolutionary-type-m.md` §R1, §M1.0 and §M2.1 first.*
