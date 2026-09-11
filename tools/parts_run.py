@@ -119,6 +119,16 @@ def frames(base, G, L_tuples, S_tuples, contains=None, refuses_with_L=None, log=
     A, B = G.stab(L_tuples), G.stab(S_tuples)
     cosets = G.double_cosets(A, B)
     rows = []
+    # REPORT FROM INSIDE. With `refuses_with` this builds a stage and asks a refusal for every
+    # one of the 24 elements, which on an M6B-sized pair is twenty minutes -- and as first
+    # written it logged nothing at all, so phase C3 sat at 99% CPU with an empty log and no way
+    # to tell work from a wedge (M63 §R2.5, the fifth instrument of the same shape). The
+    # parameter was there; the calls were not.
+    t0, done = time.time(), 0
+    if refuses_with_L is not None:
+        log(f"  frame search: {len(cosets)} double cosets over {sum(len(c) for c in cosets)} "
+            f"elements, one stage build and one refusal ask each "
+            f"(|Stab(W_L)| = {len(A)}, |Stab(S)| = {len(B)})")
     for k, c in enumerate(cosets, 1):
         qual = []
         for i in c:
@@ -127,7 +137,11 @@ def frames(base, G, L_tuples, S_tuples, contains=None, refuses_with_L=None, log=
                 continue
             if refuses_with_L is not None:
                 st = PS.Stage(base, refuses_with_L, sorted(img), side="L", rung=1, pin=False)
-                if PS.refuses(st, list(range(len(st.atoms)))) != "unsat":
+                v = PS.refuses(st, list(range(len(st.atoms))))
+                done += 1
+                log(f"    element {done}/{sum(len(x) for x in cosets)} of coset {k} "
+                    f"{tuple(G.names[i])}: {v}  [{time.time()-t0:.0f}s]")
+                if v != "unsat":
                     continue
             qual.append(i)
         rows.append({"coset": k, "size": len(c), "rep": list(G.names[c[0]]),
