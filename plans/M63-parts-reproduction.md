@@ -113,7 +113,7 @@ phase D's expansion rule, that the cost argument never touched.
 | A-4 | `v374e1860` vs Table 3's `M` column | done | §1(iii), four in-range differences | — |
 | A-5 | `v136e564` vs Table 4 M6A | done | §1(iv) | — |
 | A-6 | `v412e2106` vs Table 3's `A` column | done | P1, §1(ii) | — |
-| A-7 | Table 5 (−16) and Table 7 (+3) `A` columns vs `v375e1862`, `v289e1389` | **partly — settled on the file side** | each `A` file sums EXACTLY to its own caption (375, 238, 289), so both discrepancies live in his printed per-row columns and not in his data — the same shape as Table 3's, whose file has 412 against a column summing to 402. Table 6, the positive control, agrees throughout. **The row-by-row comparison is NOT-COMPARED**: the printed per-row columns were never transcribed, and the checker says so rather than inventing a target (§R2.4d) | the per-row transcription, if D wants it |
+| A-7 | Table 5 (−16) and Table 7 (+3) `A` columns vs `v375e1862`, `v289e1389` | **partly — file side settled for all three, row-by-row done for Table 6** | each `A` file sums EXACTLY to its own caption (375, 238, 289), so both discrepancies live in his printed per-row columns and not in his data — the same shape as Table 3's, whose file has 412 against a column summing to 402. **c2.9 fired**: Table 6's column transcribed row by row against `v238e1131` gives **zero differing rows**, so the checker can agree and not merely differ. Tables 5 and 7 remain **NOT-COMPARED** row by row — their columns were never transcribed, and the checker says so rather than inventing a target (§R2.4d) | the two remaining transcriptions → D, now cheap: the checker has a passing positive control |
 | A-8 | the invariance group of the three off-base files | retired | §1(vi) bounded it out: none is on the path or in the held-out set | — |
 | B-1 | key property with a frozen-side companion (§4 B) | done | `parts_stage.Stage` | — |
 | B-2 | mono-pair companion (an edge) | not done | — | E |
@@ -1465,10 +1465,20 @@ conjugacy class, three identical closed values.
 
 So the −16 and +3 live in his **printed per-row columns**, not in his data — the same shape as
 Table 3's `A` column, whose file has 412 against a column summing to 402 and whose two typos §1(ii)
-localised. **The row-by-row comparison is NOT-COMPARED**: the printed per-row columns were not
-transcribed, and `check_A_column` reports that with the file's fillings rather than inventing a
-target. Table 6 remains the positive control it was chosen to be — the one column whose printed sum
-matches — and its file agrees with it.
+localised.
+
+**c2.9 FIRES, and it is the control that matters most here.** Table 6 is the one `A` column whose
+printed sum matches its caption, which is exactly why the plan chose it as the positive control: a
+checker that has only ever been pointed at columns known to disagree has not been shown able to
+*agree*. Transcribed row by row (23 orbits, two side-by-side halves, printed sum 238) and compared
+against his own `v238e1131`: **zero differing rows, `A-column-agrees`.** So when the same checker
+reports a difference elsewhere, that is a statement about the column and not about the checker.
+
+**Tables 5 and 7 stay NOT-COMPARED row by row**: their printed per-row columns were not
+transcribed, and `check_A_column` reports the file's fillings rather than inventing a target. What
+is settled for them is the file side — each sums exactly to its caption — which localises the
+defect to the printed column without saying which cells carry it. Phase D can have the two
+transcriptions cheaply now that the checker has a passing positive control.
 
 ### R2.5 — Six instruments, and the sixth is the one that stops the lesson being wrong
 
