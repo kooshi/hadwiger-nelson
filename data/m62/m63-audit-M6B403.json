@@ -1,0 +1,852 @@
+{
+ "kind": "m63-audit",
+ "schema": 1,
+ "producer": "tools/parts_audit.py:audit_level",
+ "spec": {
+  "name": "M6B403",
+  "his_row": "L-M6B-375",
+  "side": "L"
+ },
+ "mode": "tuning",
+ "summary": {
+  "headline": "L reduction of v403e2106.vtx against v141e594.vtx (frame coset 1 of 4): reduced, minimum 374 over all selections, |M| = 375 vertices, level 360 [exhaustive-level], 0 undecided [tuning]",
+  "rows_differing": [],
+  "rows_not_compared": [],
+  "orbit_rows_differing": [
+   [
+    2,
+    0,
+    6,
+    4
+   ],
+   [
+    10,
+    0,
+    2,
+    4
+   ]
+  ],
+  "level_complete": true,
+  "count_method": "exhaustive-level",
+  "spent": "C3"
+ },
+ "comparisons": [
+  {
+   "what": "|M| (vertices)",
+   "ours": 375,
+   "his": 375,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "|M| (vertices)               ours    375   his    375  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "edges, low endpoint",
+   "ours": 1916,
+   "his": 1916,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "edges, low endpoint          ours   1916   his   1916  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "edges, high endpoint",
+   "ours": 1926,
+   "his": 1926,
+   "attestation": 1,
+   "relation": "agrees",
+   "render": "edges, high endpoint         ours   1926   his   1926  delta +0   agrees   (stated once; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "|A| (vertices)",
+   "ours": 403,
+   "his": 403,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "|A| (vertices)               ours    403   his    403  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "|{M}| up to Aut(A), companion free",
+   "ours": 66,
+   "his": 66,
+   "attestation": 1,
+   "relation": "agrees",
+   "render": "|{M}| up to Aut(A), companion free ours     66   his     66  delta +0   agrees   (stated once; reported, not gated)  ** TUNING - not evidence **"
+  }
+ ],
+ "counts": {
+  "Stab(reduced part), companion free -- HIS convention": {
+   "order": 6,
+   "count": {
+    "count": {
+     "n": 66,
+     "method": "symmetry-collapsed",
+     "of": 360
+    },
+    "up_to": "Stab(reduced part), companion free -- HIS convention"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  },
+  "Stab(reduced) n Stab(companion)": {
+   "order": 1,
+   "count": {
+    "count": {
+     "n": 360,
+     "method": "symmetry-collapsed",
+     "of": 360
+    },
+    "up_to": "Stab(reduced) n Stab(companion)"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  },
+  "the whole order-24 base group": {
+   "order": 6,
+   "count": {
+    "count": {
+     "n": 66,
+     "method": "symmetry-collapsed",
+     "of": 360
+    },
+    "up_to": "the whole order-24 base group"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  }
+ },
+ "accumulator": {
+  "his_file": "v403e2106.vtx",
+  "his_n": 403,
+  "ours_n": 403,
+  "literal_equal": true,
+  "ours_not_his": [],
+  "his_not_ours": [],
+  "group_elements_mapping_ours_onto_his": 6,
+  "relation": "A-equal",
+  "capped": false
+ },
+ "orbit_rows": [
+  {
+   "orbit": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "size": 1,
+   "lo": 1,
+   "hi": 1,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    1,
+    1
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    2,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "lo": 24,
+   "hi": 24,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    24,
+    24
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    2,
+    2
+   ],
+   "size": 12,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    2,
+    0,
+    6,
+    4
+   ],
+   "size": 24,
+   "lo": 2,
+   "hi": 6,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": [
+    0,
+    4
+   ],
+   "relation": "differs",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    12,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    4,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "lo": 4,
+   "hi": 4,
+   "vertex_set_constant": false,
+   "status": "unstable-constant-count",
+   "his_range": [
+    4,
+    4
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    4,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "lo": 24,
+   "hi": 24,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    24,
+    24
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    4,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    4,
+    0
+   ],
+   "size": 6,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    2,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    2,
+    0,
+    8,
+    2
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    8,
+    0,
+    2,
+    2
+   ],
+   "size": 24,
+   "lo": 24,
+   "hi": 24,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    24,
+    24
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "lo": 24,
+   "hi": 24,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    24,
+    24
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    8,
+    0,
+    6,
+    2
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    2,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "lo": 10,
+   "hi": 10,
+   "vertex_set_constant": false,
+   "status": "unstable-constant-count",
+   "his_range": [
+    10,
+    10
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    10,
+    0,
+    4,
+    2
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    8,
+    0,
+    4,
+    4
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    4,
+    0,
+    10,
+    2
+   ],
+   "size": 24,
+   "lo": 2,
+   "hi": 6,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": [
+    2,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    10,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    12,
+    0,
+    0,
+    0
+   ],
+   "size": 6,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    8,
+    0
+   ],
+   "size": 6,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    4,
+    0,
+    0,
+    4
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    10,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "lo": 6,
+   "hi": 10,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": [
+    8,
+    12
+   ],
+   "relation": "differs",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    2,
+    8,
+    0
+   ],
+   "size": 24,
+   "lo": 6,
+   "hi": 10,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": [
+    6,
+    10
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    2,
+    6,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    14,
+    0,
+    0,
+    2
+   ],
+   "size": 12,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    2,
+    6
+   ],
+   "size": 12,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    14,
+    0,
+    2,
+    4
+   ],
+   "size": 24,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    0,
+    10,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    12,
+    0
+   ],
+   "size": 6,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    6,
+    6
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    4,
+    4,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": [
+    12,
+    12
+   ],
+   "relation": "agrees",
+   "his_shaded_stable": null
+  }
+ ],
+ "edge_profile": {
+  "term": "e_L_his",
+  "multiset": {
+   "1916": 3,
+   "1917": 12,
+   "1918": 24,
+   "1919": 36,
+   "1920": 42,
+   "1921": 36,
+   "1922": 45,
+   "1923": 72,
+   "1924": 63,
+   "1925": 24,
+   "1926": 3
+  },
+  "range": [
+   1916,
+   1926
+  ],
+  "fewest_edge_members": 3,
+  "fewest_edge_stabiliser_orders": [
+   2
+  ],
+  "his_parenthetical_reading": "2"
+ },
+ "edge_decomposition_of_first_minimum": {
+  "e_L": 1925,
+  "e_S": 582,
+  "cross_centre": 12,
+  "cross_by_family": {
+   "reference": 12,
+   "auxiliary": 6
+  },
+  "cross_off_centre": 18,
+  "total": 2537,
+  "e_S_his": 594,
+  "e_L_his": 1925,
+  "subtype_reading": "M6"
+ },
+ "stage_fingerprint": "9d3b9fce95e1247fbc7c38ef6f56e9dd",
+ "stage_identity": "ff893b2b3175de06c86a0eccf8b5ce90027dfe4ede15b972722abca710ea7ab8",
+ "base_fingerprint": "3946d036a2525ae8c679275ed10e27c1",
+ "provenance": {
+  "generated": "2026-09-11T23:46:14",
+  "machine": "local",
+  "cores": 32,
+  "git_commit": "88c6b8f94e5c275a90378f120b868c88d96c28ed",
+  "git_dirty": true,
+  "freeze_commit": null,
+  "config_sha256": null
+ },
+ "membership": {
+  "his_file": "v375e1916.vtx",
+  "images_in_the_level": 6,
+  "images_inside_A": 6,
+  "of": 24,
+  "relation": "his-member-is-ours"
+ }
+}

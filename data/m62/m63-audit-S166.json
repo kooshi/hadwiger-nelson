@@ -1,0 +1,391 @@
+{
+ "kind": "m63-audit",
+ "schema": 1,
+ "producer": "tools/parts_audit.py:audit_level",
+ "spec": {
+  "name": "S166",
+  "his_row": "S-M6A-136",
+  "side": "S"
+ },
+ "mode": "tuning",
+ "summary": {
+  "headline": "minimum 135 over all selections",
+  "rows_differing": [],
+  "rows_not_compared": [],
+  "orbit_rows_differing": [],
+  "level_complete": true,
+  "count_method": "exhaustive-level",
+  "spent": "R1"
+ },
+ "comparisons": [
+  {
+   "what": "|M| (vertices)",
+   "ours": 136,
+   "his": 136,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "|M| (vertices)               ours    136   his    136  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "edges, low endpoint",
+   "ours": 564,
+   "his": 564,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "edges, low endpoint          ours    564   his    564  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "edges, high endpoint",
+   "ours": 567,
+   "his": 567,
+   "attestation": 1,
+   "relation": "agrees",
+   "render": "edges, high endpoint         ours    567   his    567  delta +0   agrees   (stated once; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "|A| (vertices)",
+   "ours": 166,
+   "his": 166,
+   "attestation": 2,
+   "relation": "agrees",
+   "render": "|A| (vertices)               ours    166   his    166  delta +0   agrees   (stated twice; reported, not gated)  ** TUNING - not evidence **"
+  },
+  {
+   "what": "|{M}| up to Aut(A), companion free",
+   "ours": 8,
+   "his": 8,
+   "attestation": 1,
+   "relation": "agrees",
+   "render": "|{M}| up to Aut(A), companion free ours      8   his      8  delta +0   agrees   (stated once; reported, not gated)  ** TUNING - not evidence **"
+  }
+ ],
+ "counts": {
+  "Stab(reduced part), companion free -- HIS convention": {
+   "order": 6,
+   "count": {
+    "count": {
+     "n": 8,
+     "method": "symmetry-collapsed",
+     "of": 48
+    },
+    "up_to": "Stab(reduced part), companion free -- HIS convention"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  },
+  "Stab(reduced) n Stab(companion)": {
+   "order": 2,
+   "count": {
+    "count": {
+     "n": 24,
+     "method": "symmetry-collapsed",
+     "of": 48
+    },
+    "up_to": "Stab(reduced) n Stab(companion)"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  },
+  "the whole order-24 base group": {
+   "order": 6,
+   "count": {
+    "count": {
+     "n": 8,
+     "method": "symmetry-collapsed",
+     "of": 48
+    },
+    "up_to": "the whole order-24 base group"
+   },
+   "closed_under": true,
+   "reading": "orbits contained in the level"
+  }
+ },
+ "accumulator": {
+  "his_file": "v166e774.vtx",
+  "his_n": 166,
+  "ours_n": 166,
+  "literal_equal": true,
+  "ours_not_his": [],
+  "his_not_ours": [],
+  "group_elements_mapping_ours_onto_his": 6,
+  "relation": "A-equal",
+  "capped": false
+ },
+ "orbit_rows": [
+  {
+   "orbit": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "size": 1,
+   "lo": 1,
+   "hi": 1,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    12,
+    2,
+    2,
+    0
+   ],
+   "size": 24,
+   "lo": 3,
+   "hi": 3,
+   "vertex_set_constant": false,
+   "status": "unstable-constant-count",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    2,
+    0,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    4,
+    0
+   ],
+   "size": 6,
+   "lo": 6,
+   "hi": 6,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    2,
+    4,
+    0
+   ],
+   "size": 24,
+   "lo": 14,
+   "hi": 16,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    8,
+    0
+   ],
+   "size": 6,
+   "lo": 3,
+   "hi": 3,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    0,
+    4,
+    6
+   ],
+   "size": 24,
+   "lo": 7,
+   "hi": 9,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    2,
+    6,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    0,
+    2,
+    6
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    2,
+    4,
+    6
+   ],
+   "size": 24,
+   "lo": 24,
+   "hi": 24,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    6,
+    0,
+    0,
+    6
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    4,
+    0,
+    0
+   ],
+   "size": 6,
+   "lo": 4,
+   "hi": 5,
+   "vertex_set_constant": false,
+   "status": "unstable-varying-count",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  },
+  {
+   "orbit": [
+    0,
+    4,
+    4,
+    0
+   ],
+   "size": 12,
+   "lo": 12,
+   "hi": 12,
+   "vertex_set_constant": true,
+   "status": "stable",
+   "his_range": null,
+   "relation": "not-compared -- his table does not attest it",
+   "his_shaded_stable": null
+  }
+ ],
+ "edge_profile": {
+  "term": "e_S_his",
+  "multiset": {
+   "564": 6,
+   "565": 6,
+   "566": 24,
+   "567": 12
+  },
+  "range": [
+   564,
+   567
+  ],
+  "fewest_edge_members": 6,
+  "fewest_edge_stabiliser_orders": [
+   1
+  ],
+  "his_parenthetical_reading": "1"
+ },
+ "edge_decomposition_of_first_minimum": {
+  "e_L": 1860,
+  "e_S": 555,
+  "cross_centre": 12,
+  "cross_by_family": {
+   "reference": 12,
+   "auxiliary": 6
+  },
+  "cross_off_centre": 18,
+  "total": 2445,
+  "e_S_his": 567,
+  "e_L_his": 1860,
+  "subtype_reading": "M6"
+ },
+ "stage_fingerprint": "5f927abee3ee5a093e2600200eb315cc",
+ "stage_identity": "3ce4c5851477bed2601e77597c5c5220e7dd7ffb268c56398169ead5eb628580",
+ "base_fingerprint": "3946d036a2525ae8c679275ed10e27c1",
+ "provenance": {
+  "generated": "2026-09-11T23:44:12",
+  "machine": "local",
+  "cores": 32,
+  "git_commit": "dd016cb480df7f61201ff4a52395b6e09de614cd",
+  "git_dirty": true,
+  "freeze_commit": null,
+  "config_sha256": null
+ },
+ "membership": {
+  "his_file": "v136e564.vtx",
+  "images_in_the_level": 6,
+  "images_inside_A": 6,
+  "of": 24,
+  "relation": "his-member-is-ours"
+ }
+}
