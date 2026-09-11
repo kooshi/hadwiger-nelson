@@ -113,7 +113,7 @@ phase D's expansion rule, that the cost argument never touched.
 | A-4 | `v374e1860` vs Table 3's `M` column | done | §1(iii), four in-range differences | — |
 | A-5 | `v136e564` vs Table 4 M6A | done | §1(iv) | — |
 | A-6 | `v412e2106` vs Table 3's `A` column | done | P1, §1(ii) | — |
-| A-7 | Table 5 (−16) and Table 7 (+3) `A` columns vs `v375e1862`, `v289e1389` | not done | §1(ii) "untested" | C2 |
+| A-7 | Table 5 (−16) and Table 7 (+3) `A` columns vs `v375e1862`, `v289e1389` | **partly — settled on the file side** | each `A` file sums EXACTLY to its own caption (375, 238, 289), so both discrepancies live in his printed per-row columns and not in his data — the same shape as Table 3's, whose file has 412 against a column summing to 402. Table 6, the positive control, agrees throughout. **The row-by-row comparison is NOT-COMPARED**: the printed per-row columns were never transcribed, and the checker says so rather than inventing a target (§R2.4d) | the per-row transcription, if D wants it |
 | A-8 | the invariance group of the three off-base files | retired | §1(vi) bounded it out: none is on the path or in the held-out set | — |
 | B-1 | key property with a frozen-side companion (§4 B) | done | `parts_stage.Stage` | — |
 | B-2 | mono-pair companion (an edge) | not done | — | E |
@@ -168,7 +168,7 @@ phase D's expansion rule, that the cost argument never touched.
 | M64-1 | phase E / P9 (18 connection edges) | retired | vacuous (S.2 #5); the tail question is C3 | — |
 | M64-2 | phase F: expansion as an integer program over profiles | not done | one candidate rule among others, scored, never gated | D |
 | M64-3 | conjugacy of `Aut(A)`'s involutions (P7's second half) | **done, and it confirms the prediction** | `parts_audit.involution_classes`: L's `Aut(A)` (order 12) has 6 conjugacy classes, of which **three are involution classes of sizes 3, 3, 1** — and M64 §R10's seven stored order-2 rung values are **three 375s, three 376s, one ≥377**, a multiset partitioning exactly as the classes do, which is what "the excess is a class function" requires. S: one involution class of size 3, and all three rungs read 138. **The row-to-class pairing itself is not computed**, so this is multiset agreement, not a proof of which row sits in which class | the pairing, if D wants it |
-| M64-4 | rungs not searched to their minima | partly | §R10 made 15/16 L and 4/6 S rungs exact from `Y`; the S order-3 rung closed at 142 in planning (S.2 #14); open: one L rung (≥ 377) and one S involution (≥ 138) | C2 |
+| M64-4 | rungs not searched to their minima | **done — every rung of both stages is now exact** | the L rung `H2#6` (225 orbits) closes at **377**, confirming `≥ 377` as an equality; all three S order-2 involutions close at **138** with 2 minima each, confirming `≥ 138`; the S order-3 rung closed at **142** incidentally via c1.1's resume control. P-C2.6 met on both clauses (§R2.4d) | — |
 | M64-5 | separate obligation/experience passes | recorded | M64 closed; M63 phase C runs all three | — |
 | M64-6 | P5, idealness of `Y` | drop? | needs a complete `Y`; off the record path | — |
 | M64-7 | P10, the free completeness control | not done | first meaningful on a level set produced after its classes | C2, C3 |
@@ -1387,10 +1387,93 @@ clause), which his matching counts argue against. **A defect landing on the same
 different subtypes is a property of the column, not of either run** — which is what §S.2 #4
 concluded from the M6A side alone, now with a second independent witness.
 
-### R2.5 — Four instruments, one failure shape
+### R2.4d — His own minima are inside his own column, and the rungs that closed
 
-Four instruments failed in this phase, each caught by its owner, and **all four said "nothing to
-see" when what they meant was "I could not see"**:
+**The check that would have settled the range question outright, and did not.** His published
+375-vertex minima, against his printed 375 column, zero solver — the method §1(iii) used on
+Table 3's `M` column:
+
+| his file | vertices | orbits outside his printed column | `(2,0,6,4)` | `(10,0,2,4)` |
+|---|---|---|---|---|
+| `v375e1920` (M6A) | 375 | **0** | **4** (printed 0–4) | **8** (printed 8–12) |
+| `v375e1916` (M6B) | 375 | **0** | **4** | **8** |
+
+So **the column does not contradict his own files**; it is narrower than both complete levels while
+still containing the members he published.
+
+**And that datum does NOT rank the three readings below — it removes a contradiction without
+discriminating** (Poros, card 18, adopted). The two disputed cells are **one fact, not two**: the
+conservation law ties `(2,0,6,4) + (10,0,2,4) = 12`, which every range here satisfies (his 0–4 ↔
+8–12, our M6A 0–6 ↔ 6–12, our M6B 2–6 ↔ 6–10), so a member at 4 is at 8 *by arithmetic*. His
+published minima are one point on that line, and 4 is a common value in our own level. Read as
+"his files are consistent with his column" it is worth having; read as support for any one of the
+three readings it is worth nothing.
+
+**Poros's card 17 proposed that this closes to one reading**, by: our levels are complete, a
+complete level is unique for a stage, his `A` equals ours literally and his counts equal ours, so
+his `{M}` is ours and the printed range must be a defect — *and* that argument **refutes** early
+stopping rather than disfavouring it, since a truncated enumeration is a proper subset and must
+count strictly fewer, which his does not. **Steps 1, 4 and 5 are accepted; step 2 is not
+closable here.** "The same stage" rests on `A` matching literally, and the missing datum is his
+companion: our L451 stage is `v451e2400` against `v136e564`, his is *"a frozen S-graph"* he does
+not name for that row. There is nothing of his to fingerprint — his archive publishes vertex
+lists, not stages — so no fingerprint comparison exists to settle it.
+
+**Three readings therefore survive, and D inherits all three:** a printing defect in the column;
+**mixed provenance** — a column computed from an earlier or partial state printed beside a count
+from the final one, which the boundary coincidence fits and which his own "M6A&B" heading (one
+column already serving two runs) makes unexotic; or a stage difference surviving all four attested
+agreements. **What phase C establishes is narrower and stands on its own: the column describes
+neither complete level, and the early-stop explanation is refuted by the counts.**
+
+**The open rungs (M64-4).** All three S involutions close at **138 vertices** (137 atoms + the
+shared centre), 2 minima each, confirming M64's `≥ 138`; and the S order-3 rung was already closed
+at **142** incidentally by c1.1's resume control. The L rung is re-running: **the first attempt
+reported "BELOW the stored lower bound — refutes the duality or rung-independence", and it refutes
+nothing.** My script filtered the subgroups to the one whose orbit count matches the open row
+(225) but passed that *filtered* index to a lookup over the **unfiltered** list of order-2
+subgroups, so it built a 232-atom rung, got its correct answer of 375 vertices, and compared it
+against the 225-atom rung's bound. The S side was immune only because all three of its order-2
+subgroups have 86 orbits, so the two indexings coincide. **A control that fires loudly on a
+mismatched pairing is as dangerous as one that cannot fire** — a sixth instrument, and the first of
+this phase whose failure was noisy rather than silent.
+
+**Re-run with the index resolved in the same list the lookup uses, and asserted against the stored
+row's orbit count before the run: `H2#6`, 225 atoms = the stored row's 225, minimum 376 atoms =
+377 vertices, 600 minima, 99 s. M64's `≥ 377` is CONFIRMED AS AN EQUALITY.** So every rung of both
+stages is now exact:
+
+| rung | M64 said | closed at | how |
+|---|---|---|---|
+| L, order 2, 225 orbits | ≥ 377 | **377** | this run |
+| S, order 2, 86 orbits (all three) | ≥ 138 | **138** each, 2 minima each | this run |
+| S, order 3, 55 orbits | ≥ 139 | **142** | incidentally, by c1.1's resume control |
+
+**P-C2.6 is MET on both its clauses** ("the open L rung closes at its lower bound, 377; the open S
+involution closes at 138"). M64 §R10's rung lattice is now closed everywhere it was open, and the
+S-side result also confirms the class-function reading of R2.4d: three involutions in one
+conjugacy class, three identical closed values.
+
+**A-7, the `A` columns of Tables 5–7, settled on the file side.** Each of his `A` files sums
+*exactly* to its own caption:
+
+| table | his `A` file | file total | caption | his PRINTED column sums to |
+|---|---|---|---|---|
+| 5 | `v375e1862` | **375** | 375 | 391 (**+16**) |
+| 6 | `v238e1131` | **238** | 238 | 238 (agrees) |
+| 7 | `v289e1389` | **289** | 289 | 292 (**+3**) |
+
+So the −16 and +3 live in his **printed per-row columns**, not in his data — the same shape as
+Table 3's `A` column, whose file has 412 against a column summing to 402 and whose two typos §1(ii)
+localised. **The row-by-row comparison is NOT-COMPARED**: the printed per-row columns were not
+transcribed, and `check_A_column` reports that with the file's fillings rather than inventing a
+target. Table 6 remains the positive control it was chosen to be — the one column whose printed sum
+matches — and its file agrees with it.
+
+### R2.5 — Six instruments, and the sixth is the one that stops the lesson being wrong
+
+Five instruments failed in this phase by saying **"nothing to see" when what they meant was "I
+could not see"**, each caught by its owner:
 
 1. the ask wall that could not fire and reported nothing (R2.3);
 2. the exception raised inside a timer thread, printed and swallowed, while the work continued;
@@ -1407,9 +1490,23 @@ see" when what they meant was "I could not see"**:
    record as a crash. The fix is the one `CLAUDE.md` already prescribes and I reached past: **the
    job writes its own pid and then `exec`s**, so the file cannot hold a wrapper.
 
-A fifth, smaller: `parts_run.frames --refuses-with` builds and asks 24 stages and **logs nothing
-while it does**, so C3 sat at 99 % CPU with an empty log for twenty minutes. It takes a `log`
-parameter it never calls. Phase D should fix it before using that path in a loop.
+5. `parts_run.frames --refuses-with` builds and asks 24 stages and **logs nothing while it does**,
+   so C3 sat at 99 % CPU with an empty log for forty minutes. It took a `log` parameter it never
+   called. Fixed and committed.
+
+**The sixth failed the opposite way, and it is the one that keeps the lesson honest.** The
+open-rung script filtered the subgroups to the one whose orbit count matched the open row and then
+passed that *filtered* index to a lookup over the **unfiltered** list, so it ran one rung and
+compared the answer against a different rung's bound — printing **"BELOW the stored lower bound —
+refutes the duality or rung-independence"**, a loud claim about a theorem, from a two-line index
+mismatch. Re-run correctly it confirms the bound as an equality.
+
+**A control that fires loudly on a mismatched pairing is as dangerous as one that cannot fire.**
+Without this entry the list reads as *make your checks noisy*, and that is the wrong lesson: five
+of these were silent and one was loud, and all six were wrong about the same thing — **what they
+were actually comparing**. The rule that covers all six is not "be loud" but *say what was
+compared against what, and assert the pairing before believing the verdict* — which is why the
+corrected script asserts the built rung's orbit count against the stored row **before** it runs.
 
 ### R2.6 — The accounting convention that would have manufactured a disagreement
 
