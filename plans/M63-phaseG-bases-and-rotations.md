@@ -686,8 +686,11 @@ manufactures. Three things follow, now in the plan:
   test to a per-base admission gate.
 
 Together with §6.2's brute-force prefix recount, these are the replacement for
-`contains-a-known-minimum`, and the phase's admission checklist for a new base is now: prefix recount ·
-monotone sandwich · transported answer · planted fault · non-vacuity ask.
+`contains-a-known-minimum`, and the phase's admission checklist for a new base is now: **symmetry closure
+(a gate that refuses, never warns — §11.6)** · prefix recount · monotone sandwich · transported answer ·
+planted fault · non-vacuity ask. The first four all guard defects biased in the same direction — toward a
+census that looks productive — which is the worst bias available to a survey whose entire output is
+eliminations.
 
 ### C6 — the law's error runs in *both* directions, and I had only named one
 
@@ -844,7 +847,23 @@ moves which pairs are diagonal requires.
 2. **Screening cost falls accordingly**: P-G5 is **one** ask, not four, and the same collapse applies to
    every row of §3.3.
 
-**The caveat travels with it**: on a base that is *not* centrally symmetric, or not closed under both
-Galois flips, the variants are genuinely different rotations and the key must carry the sign. Every base in
-§4.2 rows 1–3 is closed under all of them; rows 4–6 must be checked rather than assumed, and the check is
-one line (apply each symmetry to the point set and require zero images outside).
+**Why the collapse is exact and not approximate.** `cos²` determines `|cos|` and `sin² = 1 − cos²`, so
+its fibre is exactly `{c + is, c − is, −c + is, −c − is} = {±ρ, ±ρ̄}` — **precisely the orbit of the three
+base symmetries and nothing coarser.** So on a base carrying all three, the key can neither split one
+rotation into two (it is a function of the pair) nor merge two rotations from different orbits. That the
+edge count survives a re-decomposition (`2×18 + 30` against `2×33 + 0`, both totalling 126) is the cheapest
+possible confirmation that the two arenas are one object.
+
+**The failure direction, and it is why this is a gate rather than a checklist line.** Where a base does
+*not* carry all three symmetries, `cos²` **over-merges and never under-merges**: it can report two
+genuinely distinct rotations as one, never one as two. The resulting defect is that **the census tests one
+representative, records an elimination, and the untested sibling is eliminated without ever being built —
+a silent false elimination**, pointing in the same direction as the dropped-edge bug of §11.4 and C6:
+toward a census that looks productive. The key's failure mode, the law's failure mode and the dropped-edge
+failure mode now all point that way, which is the argument for **one gate instead of three checklist
+lines**:
+
+> **Before a new base is trusted, assert its closure under negation, under complex conjugation, and under
+> `√33 ↦ −√33` — applying each symmetry to the point set and requiring zero images outside — and REFUSE
+> the run rather than warn.** §4.2 rows 1–3 are closed under all three; rows 4–6 are the gate's first
+> customers and must be checked rather than assumed.
