@@ -735,7 +735,17 @@ so proving *"no ordered pair of the 552 works"* proves it for any subset. The ar
 | ~~each listed pattern is achievable~~ | 552 SATs | **not load-bearing** |
 
 > **So the entire solver-dependent core is TWENTY UNSAT claims, each on a 25,567-vertex HALF instance —
-> not on the 51,133-vertex arena, and not a proof log.** The achievability claim was verified anyway for the
+> not on the 51,133-vertex arena, and not a proof log.**
+>
+> **And all twenty are now confirmed on independent solver codebases, each with a PAIRED positive control on
+> the same code path.** Claim 1 (the 19 circle patterns are all of them): UNSAT on **four** codebases —
+> CaDiCaL 1.5.3 (36.5 s uncontended), CaDiCaL 1.9.5 (340.3 s under load), Glucose 4.2 (87.6 s), Minisat 2.2
+> (90.9 s) — with the control that **18** of the 19 blocks must be SAT *and return the dropped pattern*,
+> confirmed at drop indices 0, 7 and 18, identical each time. Claims 2–20 (per-pattern off-diagonal
+> exhaustion): **Glucose 4.2 confirms 19 of 19, no disagreements**, 3.5 s to ~300 s each — with the control
+> that circle pattern 0 at **15** of its 16 blocks came back **SAT in 2.7 s returning exactly the dropped
+> pattern**. So on each code path a refusal sits beside a matching acceptance: the refusals are exhaustion,
+> not scaffolding. The achievability claim was verified anyway for the
 > 19 circle patterns, each exhibited by a proper colouring checked edge-by-edge against the 272,232-edge
 > base list, but **nothing rests on it.**
 

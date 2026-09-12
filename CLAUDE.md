@@ -661,6 +661,21 @@ convince someone who trusts none of this and reads none of the Python:
 - **Read the final statement aloud against the informal claim.** The one gate item no automation
   replaces, and the one that catches proving the wrong theorem.
 - **Report the hunt honestly.** "Searched X, found nothing" is a result and goes in the write-up.
+- **Write the certificate for the REVIEWER early — it is an instrument, not a chore, and it tells you which
+  of your evidence is load-bearing.** Measured 2026-09-12: an agent building the reviewer-facing bundle for a
+  refutation noticed, only while writing it, that its 552 exhibited colourings were **not load-bearing at
+  all** — the argument needed its pattern list to be a *superset* of the achievable patterns, never a set of
+  achievable ones, since a spurious extra pattern can only make the final check harder to pass. That
+  retired a third of its evidence and shrank the solver-dependent core from one claim about a
+  51,133-vertex object to **twenty claims about 25,567-vertex halves** — a different *kind* of artifact,
+  because twenty half-instance refutations are individually within reach of proof logging where one whole-
+  object refutation was not. **The question that did the work is cheap and repeatable: *what must someone who
+  trusts none of this actually check?*** Its discoverer declined the credit for insight and named the
+  question instead, which is the version that reproduces. Ask it while the evidence is still being gathered,
+  not at the write-up, or you will pay for evidence nothing rests on.
+- **Order a verification's steps by marginal evidential value, never by narrative order.** Same session, twice:
+  a verification script was written so its *least* informative step ran first, leaving the checks that decided
+  the question queued behind slow ones that could not.
 
 ## What compute actually helps
 
