@@ -369,3 +369,68 @@ circle — and phase H2's entire refutation ran through that interface, its trus
 about exactly those patterns. **If that holds, growing the base past the endpoint bound is a free design
 lever this family has never used**, since every object in it appears to have stopped at the bound. Whether
 that is true of the record and of phase H2 is being measured rather than assumed.
+
+---
+
+## §6 — The cross-edge law, independently derived (2026-09-12)
+
+Record: `plans/M63-phaseH3-crossedges.md`; evidence `build/m63-phaseH3-crossedge/`. Derived without being
+shown the advisor's numbers, and it **confirms them exactly** — then adds the quantity that actually decides
+these objects.
+
+| | raw: centre / diagonal / **off-diag** | monochromatic: total / **off-diag** |
+|---|---|---|
+| `n = 4`, the record, Parts's lattice | 126 = 60 / 30 / **36** | 30 / **0** |
+| `n = 16`, `ρ₆₃`, Parts's lattice | 126 = 60 / 30 / **36** | 54 / **24** |
+| `n = 2`, Parts's **shaped** lattice | 60 = 60 / 0 / **0** | 0 / **0** |
+| **`n = 2`, shape-free** | **252 = 120 / 60 / 72** | **84 / 24** |
+
+**252 of 252 confirmed by direct exact distance, 0 invented**, and a brute force over 231,361 ordered pairs
+using *only* the direct distance returned identical edges with 0 missed — the derived half checked against a
+measured half, which is the discipline the refusal-is-the-suspect-verdict rule demands.
+
+**The headline: `n = 2` carries exactly as many monochromatic off-diagonal cross edges as `ρ₆₃` — 24 — at
+37.5% of its radius.** Its *share* is lower (24/84 against 24/54) only because its diagonal is twice as
+large, which is the one-thing-may-differ rule applied correctly to our own result. All three known-answer
+gates passed, including the third I asked be found: Parts's shaped lattice at `cos θ = 3/4` returns
+60 = 60+0+0 at both cuts, reproducing phase H2's kill of `n = 2` exactly.
+
+G52's `d² = σ − (σ−1)/cos θ` is **correct**, with an unstated scope now supplied: `sin θ ∉ K` and `u,v ∈ K²`.
+The endpoint bound is a **consequence** of the law, not an assumption — which bears directly on the
+commissioned question of whether it governs a base's extent.
+
+### The two results that may outrank the object
+
+The programme says the derivations matter an order of magnitude more than the objects, and this phase has
+produced two candidate mechanisms, one of which **predicted out of sample**:
+
+1. **A base-free counting law.** `ν·V = n d²` with `V = g² + gH + nH²` — the **principal form of
+   discriminant `1 − 4n`**, the family's own radicand — and count per kind `Sh(n d²/V)`. **It reproduced
+   `ρ₆₃`'s rational family `100/9 ↔ 64/9` before the agent looked it up.**
+2. **A 2-adic budget criterion.** `v_𝔭(d²) = 2v_𝔭(g−h) + v_𝔭(n) − v_𝔭(V)`, where `v_𝔭(n) = 2v₂(n)` is the
+   **member's entire budget — 2 at `n = 2`, 8 at `n = 16`.** It reproduces `ρ₆₃`'s 24 family-by-family, and
+   *proves* no **rational** off-diagonal kind at `n = 2` can be monochromatic, while the base realises
+   irrational ones that are.
+
+**Commissioned: take both to the family.** Which members `n` can carry monochromatic off-diagonal cross
+edges, and how many — a base-free screen of the decisive quantity, which is the kind of result this project
+ranks above an object search. With the discipline that it must **retrodict all four known members** before
+being extended, and a prediction registered on an unexamined member before looking, or it is a curve fit.
+
+### Reconciliations and defects
+
+- **Index 256 and 4096 are both right** — different ambient modules (`ℤ[√3,√11,√33]` against `O_K`, index 4
+  per coordinate). **16,309 confirmed exactly**, now by a third route. And independently: **Parts's lattice
+  is rank 4, not rank 8** — the shape halves the rank rather than thinning it, which is the fact the whole
+  point-count prediction rests on.
+- **Two defects, both flattering, exactly as G21 predicts.** The mutation harness broke **itself** through
+  Python's bytecode cache — same size, same mtime second — and would have left mutated arithmetic running;
+  only the restore check caught it. **This is the "loads two versions and identifies them by name" archetype
+  wearing `(size, mtime)` as its costume**, and it is going into the record as that. And a first shape-free
+  run returned **0 cross edges** from an unscaled lattice — a zero that reads as *"`n = 2` is dead"* — refused
+  by the free two-sided control that centre edges must equal twice the unit vectors. **Third false zero
+  caught today by printing a population beside a verdict.**
+- **An image check passed at one parameter and failed at another**: the `K`-box found 2 of 2 measured kinds
+  at `n = 4` and **0 of 6** at `n = 16`. Nothing in the answer rests on it; it bounds only the census of
+  *unrealised* kinds. Reported rather than widened, which is right — widening a box until it agrees is how a
+  check stops being one.
