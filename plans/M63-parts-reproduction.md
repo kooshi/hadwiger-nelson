@@ -1766,3 +1766,117 @@ by the footnote.
   ambiguous in the layout dump and was not hand-typed, because a mis-parsed column is exactly the
   error the audit exists to catch.
 
+---
+
+## §R3 — Phase D: what ran, what it produced, and what it did not
+
+*Written across two agents (the phase D implementer and its successor), 2026-09-11. Current state
+only. The phase's own plan is `plans/M63-phaseD-the-loop.md`, whose §R3.x holds the first agent's
+detail; this section is the milestone-level record. **Items still running carry `[RUNNING]` and what
+is known so far, never a projection.***
+
+### R3.a — The edge record attempt, and the chain a number must pass before it is one
+
+**The object.** A greedy 1-minimal edge pass over the assembled 509-vertex record dropped **163 of
+2,442 edges**, leaving **2,279 edges on 509 vertices** — against `[deGreyParts2023]` footnote 2's
+published **2,406**, itself reached by a non-exhaustive discard of 36. One ask hit its budget and
+its edge was **kept**, which is the conservative direction: the object can only be larger than
+necessary, never non-refusing. The pass is **order-dependent by nature**, so this is an upper bound
+and **never "the minimum"**.
+
+**The exact edge minimum is now bracketed: `1831 ≤ e_min ≤ 2279`.** The floor is the completed
+individually-critical census — 1,831 of 2,442 edges are individually critical, and a singleton
+correction set *is* a critical edge, so the count is rigorous. The gap between the two is the
+hitting set nobody has run.
+
+**The verification chain, and why "a fresh solver" was not enough.** The pass re-asks its own object
+with a fresh solver — but with the symmetry break still on, so *fresh solver* and *unpinned* were
+two different claims. The pin is the one device in this chain with a prior failure in its own
+history (an unconditional version produced a 373-vertex L-subgraph, one below the world record,
+before a control caught it). So `tools/parts_edge_verify.py` re-derives the claim from the object
+alone, sharing no code with the search:
+
+| leg | what it removes |
+|---|---|
+| an **unpinned** CNF — no selectors, no symmetry break, nothing conditional | our own argument for the pin's soundness. **Measured: 109 s on the calibration object** |
+| a **separate process and a different CaDiCaL** (the toolchain's 2.1.2 binary reading a file off disk) | the in-process solver's state, and its version |
+| an **LRAT proof replayed by a checker written here** | CaDiCaL's own word |
+| **exact geometry re-derived from the coordinates**, the cross edges from `CrossLaw`'s *stated* derivation rather than from the edge builder | a circular check of the builder against itself |
+| the **§O6 degree floor** recomputed from the kept edge list | an edge dropped against a stale incumbent |
+
+**Calibrated on a known positive first.** The untouched 509/2,442 object returns
+`verified-refusing-edge-subgraph`: geometry 1,860 L-L + 30 L-S + 552 S-S exactly, minimum degree 4,
+unsat in 109 s, a 653 MB proof replayed in 71 s over **1,472,347 RUP steps** with zero unsupported
+steps, and both colourability controls firing.
+
+**And the checker has been broken on purpose.** Five planted faults — a deleted hint, a flipped
+literal, the empty clause removed, and **the proof checked against a different instance** — all five
+caught. They are stored **in the artifact**, not merely in a log, because they are part of the claim.
+
+**`[RUNNING]`** the same chain on the 2,279-edge object; its geometry (1,732 + 30 + 517) and degree
+floor have passed and the unpinned refutation is in progress. **Until the Lean kernel certificate
+lands (phase F) the honest words are "a certified refusing object below the published edge count,
+not yet a record"** (§S.1 #4).
+
+### R3.b — Acceptance clause 2(b): the rule, frozen, and its held-out attempt
+
+**The state is right.** Our 375-level accumulator is **403 vertices and equals his `v403e2112`
+literally** — zero differing vertices either way, re-derived from our own record rather than read
+from his file. Its complete level has **336 necessary atoms**, against `Y`'s harvested degree-1
+layer of **312**: two different objects, and the distinction is what the look-ahead rests on.
+
+**The rule is frozen in commit `6158162`**, before any scored run, and the refusal was exercised
+both ways — the frozen configuration passes, a configuration with one parameter changed is refused
+by name. The freeze states **in advance** what happens if the held-out map is signal-free: the rule
+is then scored by one bit on one held-out row and no map stands behind it.
+
+**`[RUNNING]`. Iteration 1 returned `unchanged`**: three candidates ranked by the rule, each asked as
+a decision at 374 vertices, all three refused — `(6,2,8,0):12`, `(0,0,2,2):6`, `(10,0,0,2):6`, at
+107 s, 84 s and 62 s. The per-candidate cost at this accumulator is **four times cheaper** than the
+A412 sweep's 249 s mean.
+
+**The look-ahead proxy is degenerate too, and that is a second finding rather than a repeat of the
+first.** It reads **0 freed of 336 necessary atoms** on every single orbit tried — including on an
+orbit his own recorded move used. The map had no *outcome* variance; this is no *predictor*
+variance, so the rule falls back to his admission-degree order wherever the proxy cannot separate.
+
+**What the zero does and does not say** (Poros's objection, adopted and worth carrying): an atom is
+necessary because deleting it makes the graph colourable, so to *free* it the graph without it must
+refuse — and **in that graph every edge from the new material to that atom has vanished with it**.
+The proxy therefore watches only the *singleton* correction sets, which is the harder of two routes.
+So: **no single orbit frees a necessary atom; whether any widens a non-singleton correction set is
+unmeasured, and that is the cheaper route.** The first half is measured, the second is not, and
+leaving the second implicit is how the claim gets over-read later.
+
+### R3.c — His own move as a calibration bed, and two statistics that died before costing anything
+
+His recorded four-orbit move from `A403` is the one labelled positive anyone holds for a set-valued
+expansion, so it is the bed on which a set-valued ranking is calibrated *before* the expensive rung.
+Two rival solver-free statistics over the 215 small correction sets, with a new vertex *serving* an
+atom when it meets four of that atom's neighbours inside the accumulator:
+
+| statistic | his move | 2,000 random four-subsets | percentile |
+|---|---|---|---|
+| union coverage | 12 | mean 4.5, max 60 | **0.80** |
+| overlap | 0 | mean 0.0, max 12 | **0.00** |
+
+**Both die.** Overlap is degenerate — almost everything scores zero, so his zero carries no
+information. Union is directionally right and far too weak: **one random four-subset in five beats
+his own recorded move**, and a statistic like that cannot find a needle among 635,376. Under the
+*faithful* quantifier — widening a correction set needs compensation for **all** of it, not one
+member — the statistic is **identically zero**, random maximum included, so union is dead on its
+merits rather than on an operationalisation error. **So the set-valued rung is his craft rather than
+ours**, said here rather than discovered afterwards.
+
+Neither statistic touched the frozen rule: both are computed from his labelled move, and letting
+either steer the running rule would be exactly the contamination the freeze exists to prevent.
+
+### R3.d — The pin receipt was vacuous above rung 1, and is not any more
+
+`Stage.pin_is_sound` identified pin atoms by each atom's lowest set bit. At rung 1 an atom is one
+vertex; above it an atom is an orbit, so the control found no pin atoms and returned a benign
+verdict **while checking nothing** — both of 2026-09-11's order-3 runs printed exactly that. Fixed,
+and the control that fails on the shipped code is planted beside it: at the order-3 rung, 150 atoms,
+**0 pin atoms by the shipped rule and 2 by the fixed one**. No number is retracted — the break
+itself is sound — but a receipt that fails open is worse than none.
+
