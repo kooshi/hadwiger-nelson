@@ -301,3 +301,71 @@ the only object in this family whose refusal was produced rather than inherited.
 measured to deepen this family for the axis measured not to.** Held as a concern, not a prediction —
 degeneracy 7 does not refute 5-chromaticity. **Phase H2's `n = 16` base's degeneracy settles it**, and that
 run is commissioned; if it is also 7 the concern is struck entirely.
+
+---
+
+## §5 — The module is built and independently confirmed (2026-09-12)
+
+Record: `plans/M63-phaseH3-module.md`; tool `tools/shapefree.py` (`--self-test`, six sections, all green);
+evidence under `build/m63-phaseH3/`. The arithmetic engineer reached index 16 / 256 and **16,309** through
+two index routines sharing no code with the advisor's — hand-written integer Hermite reduction and
+`sympy.hermite_normal_form` — so that number now has two independent derivations.
+
+### The module, with every population attached
+
+| lattice | index | points inside `R = 4/√7` | unit shell | `\|p\|² = 2` shell |
+|---|---|---|---|---|
+| **generated base** (span of the 60 unit vectors) | 256 | **16,309** | 60 | **60** |
+| maximal group-closed | 16 | 260,401 | 60 | 60 |
+| no congruence at all | 1 | 4,120,577 | 60 | 60 |
+| Parts's own, same radius | — | **499** | 30 | **0** |
+
+**Both shells hit the arithmetic ceiling already at 16,309** — density buys nothing on either, which is why
+the 260,401-point object would have been pure cost. Every one of the 60 circle points is **mixed** (nonzero
+in both slot halves), which is the sharpest statement of why Parts scores 0.
+
+**Scoring:** P-H3-1 **met** (16,309 in [12,000, 22,000]; the raw pre-congruence count 4,120,577 against my
+model's 4,099,300 is **+0.52%**, so the volume model is good to half a percent). P-H3-2 **met** (499 in
+[430, 580], and **0 of 499** on the circle). P-H3-3a **met** and extended: the shape is ζ₆-stable and **not**
+`i`-stable, so the shape-free module's rotation group is `⟨ζ₁₂⟩` and its symmetry group is order **48**, not
+Parts's 24. P-H3-3b **not met for closure, met for the ring and for generation** — his congruences are
+Gibbs's ring conditions (verified multiplicatively closed over 3,418,801 products, where the weaker module
+fails) and are exactly the generation conditions.
+
+### The finding that changes the outlook
+
+**"Unit vectors available: 60" is misleading in the flattering direction.** Sixty exist; at the endpoint
+bound a circle point has **2** of them as in-arena neighbours. The mechanism: **26 are inside on the first
+embedding and 2 at all four.** The record and phase H2's object score **5–7 of 30** by the identical
+measurement. Radius 2.0 gives 8–10; radius 2.5 gives all 60 at **56×** the points.
+
+**So two instruments sharing nothing now agree the object is thin** — the advisor's degeneracy 7 → 7 and
+mean arena degree 7.38 against 21.30, and this 2 of 60 against 5–7 of 30.
+
+### The mechanism behind it, which is the phase's real trade and was never written down
+
+**Parts's shape is exactly the condition that makes `|p|²` land in `ℚ(√33)`.** That is *why* his disk cut
+carries **two** conjugate conditions and the shape-free one carries **four**. The shape is therefore not a
+notational habit but **a device for making the disk cut cheaper**, and dropping it doubles the conjugate
+constraints — which is precisely "26 inside on one embedding, 2 at all four".
+
+> **Stated as a trade: dropping the shape buys twice the nominal circle points and twice the nominal unit
+> vectors, and pays for it in realised connectivity at fixed radius.**
+
+This belongs in the phase's findings whether the phase succeeds or fails. Out for verification.
+
+### The question now outranking everything, and the lever it may open
+
+The arithmetic engineer's own top ask: **the endpoint bound `1/|sin θ|` governs cross-edge ENDPOINTS, and it
+may not govern the base's extent at all.** If a base may exceed it, both thinness findings are facts about a
+radius nobody has to respect. Commissioned: what radius the record's 374-vertex base and phase H2's base
+actually occupy relative to their own bounds, and a derivation of what does bound a base.
+
+**And the reason the answer may be worth more than a corrected ratio.** By Theorem B the base lies in `K²`
+and is **four-colourable however large it grows**, so base material can never force on its own and the
+refusal must come through cross edges. Material beyond the endpoint bound therefore adds **no cross edges**
+but **constrains which four-colourings the base admits**, cutting the set of patterns it can present on the
+circle — and phase H2's entire refutation ran through that interface, its trust core being twenty claims
+about exactly those patterns. **If that holds, growing the base past the endpoint bound is a free design
+lever this family has never used**, since every object in it appears to have stopped at the bound. Whether
+that is true of the record and of phase H2 is being measured rather than assumed.
