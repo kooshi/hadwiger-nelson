@@ -1,0 +1,23 @@
+{
+ "companion": "v136e564.vtx",
+ "kind": "m63-row",
+ "note": "the M63 phase E held-out row: our 375-level accumulator (403 vertices, equal to Parts's v403e2112). Registered 2026-09-12, AFTER the 2026-09-11 freeze and after that row's runs, because the freeze pins neither the cross-edge law nor the base and may not be re-frozen -- re-freezing would change what the already-scored rows were judged under. Every value here is derived by tools/parts_rule.py:_start_state and row_state from the committed record and base, not typed.",
+ "producer": "tools/parts_rule.py:register-row",
+ "record": "data/m62/m63-L451-reduction.json",
+ "registered": "2026-09-12",
+ "row": {
+  "A_fp": "6b13c5060a46aa39dfea0da6a5d93afc",
+  "A_vertices": 403,
+  "base_fp": "3946d036a2525ae8c679275ed10e27c1",
+  "base_r": 2.6,
+  "companion_fp": "e75b50b61f42e5d566c16605fa95ab72",
+  "cross_law": {
+   "cos": "7/8",
+   "name": "rho15"
+  },
+  "incumbent_weight": 374,
+  "row_id": "A403",
+  "stage_fingerprint": "0700718c70107448b8658a630c5456ee"
+ },
+ "schema": 1
+}

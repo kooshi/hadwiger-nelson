@@ -445,12 +445,103 @@ def cost_probe(base, L_file, S_file, known_min_file, *, runs=3, near=20, log=pri
 PRIMARY = "|M| strictly below the incumbent"
 SECONDARY = "{M} strictly larger at fixed |M| and fixed rung"
 
+# His one recorded successful expansion, as orbit labels (`[Parts2020a]` §5.6; M63 §S.2 #9). It
+# lives HERE rather than in `parts_diag` because the map's own report says which of these four
+# orbits its candidate set could test, and a report that states that from a hand-written sentence
+# instead of from the candidate set is a claim the artifact cannot check.
+HIS_RECORDED_MOVE = [(0, 0, 0, 4), (0, 0, 6, 6), (0, 0, 2, 2), (0, 0, 2, 6)]
+
+
+# ============================================================ the known-answer anchor, three-valued
+@dataclass(frozen=True)
+class AnchorAbsent:
+    """A **declared** absence of the known-answer anchor, carrying the reason.
+
+    The anchor is three-valued and never two (`plans/M63-phaseG-bases-and-rotations.md` §A5):
+
+        present           a known minimum of the UNEXPANDED stage, checked by two asks;
+        declared absent   THIS object -- printed every run and written into every entry;
+        missing           fatal, and the default, so an unguarded run cannot happen by omission.
+
+    The two-valued shape it replaces is this project's characteristic failure. `check_invariants`
+    wrote the anchor block only `if anchor is not None`, so a run with a passing anchor and a run
+    with none produced the SAME verdict string -- `restriction-identity-holds` -- and an unguarded
+    run was indistinguishable from a guarded one in its own artifact. Two of the three callers
+    passed nothing.
+
+    The reason is required and is checked for substance: a declaration whose reason is blank is the
+    silent default wearing a declaration's clothes."""
+    reason: str
+
+    MIN_REASON = 24
+
+    def __post_init__(self):
+        if not isinstance(self.reason, str) or len(self.reason.strip()) < self.MIN_REASON:
+            raise ValueError(
+                f"an anchor absence must be DECLARED with a reason of at least "
+                f"{self.MIN_REASON} characters saying why this run has no known minimum to check "
+                f"against; got {self.reason!r}. A blank reason is the silent default again.")
+
+    def to_json(self) -> dict:
+        return {"state": "declared-absent", "reason": self.reason,
+                "consequence": "the fourth invariant did not run, and |M| renders as a bound"}
+
+
+ANCHOR_MISSING = "anchor-missing"        # the sentinel default: supplied by nobody, fatal on use
+
+
+def resolve_anchor(anchor_tuples, *, where: str):
+    """The three-valued resolution, in one place so every caller fails the same way.
+
+    Returns `(tuples_or_None, declaration_or_None)`. Raises on the missing case, which is the
+    default, so a caller that says nothing about the anchor cannot run."""
+    if anchor_tuples is ANCHOR_MISSING:
+        raise SystemExit(
+            f"A5: {where} was given no anchor and no declaration.\n"
+            f"  The known-answer anchor is three-valued: pass a known minimum of the unexpanded\n"
+            f"  stage, or pass `parts_loop.AnchorAbsent(\"<why this run has none>\")`, which is\n"
+            f"  recorded in every entry and printed every run. Omitting it is fatal ON PURPOSE:\n"
+            f"  with the anchor silently off, the verdict read `restriction-identity-holds`\n"
+            f"  either way and |M|'s upper half was unproven (plans/M63-phaseG §A5).")
+    if isinstance(anchor_tuples, AnchorAbsent):
+        return None, anchor_tuples
+    if anchor_tuples is None:
+        raise SystemExit(
+            f"A5: {where} was passed `anchor_tuples=None`.\n"
+            f"  `None` was the silent-off path and is no longer accepted. Pass a known minimum,\n"
+            f"  or declare the absence: `parts_loop.AnchorAbsent(\"<why>\")`.")
+    return anchor_tuples, None
+
+
+def m_bound(incumbent: int, *, anchored: bool) -> tuple:
+    """`|M|` for a candidate the primary decision REFUSED, and how much of it is proved.
+
+    `no-selection-at-target` proves the LOWER half only: no selection of `incumbent - 1` atoms
+    survives, so `|M| >= incumbent + 1` vertices. The UPPER half is the anchor's and nothing
+    else's -- a known minimum of weight `incumbent` still refusing in THIS expanded stage is what
+    exhibits `incumbent + 1` as attained.
+
+    So with the anchor declared absent the value is returned as the STRING `">=N"`. That is
+    deliberate: a number half of which is unproven must not print like a number, and arithmetic on
+    it raises rather than quietly computing with a bound (`totality_discipline`, fail loud)."""
+    lo = incumbent + 1
+    if anchored:
+        return lo, {"lower": lo, "upper": lo, "exact": True,
+                    "lower_from": "the primary refusal at target = incumbent - 1",
+                    "upper_from": "the known-minimum anchor, which still refuses in this stage"}
+    return f">={lo}", {"lower": lo, "upper": None, "exact": False,
+                       "lower_from": "the primary refusal at target = incumbent - 1",
+                       "upper_from": None,
+                       "note": "the anchor was declared absent, so nothing here exhibits a "
+                               "refusing selection of this weight: the upper half is UNPROVED "
+                               "and |M| is a bound, not a value"}
+
 
 def expanded(A_tuples, cand) -> list:
     return sorted(set(A_tuples) | set(cand.vertices))
 
 
-def check_invariants(base, A_tuples, companion, cand, stage, reference, *, anchor=None) -> dict:
+def check_invariants(base, A_tuples, companion, cand, stage, reference, *, anchor) -> dict:
     """Per-entry invariants, cheapest first. They catch *right machinery, wrong graph*; the target
     and rung echoed in the record catch *right graph, wrong question*.
 
@@ -465,8 +556,22 @@ def check_invariants(base, A_tuples, companion, cand, stage, reference, *, ancho
     4. the known-answer anchor, two asks: a known minimum of the UNEXPANDED stage must still
        refuse here, and minus one atom must be colourable. Its answer is invariant under every
        expansion, so if it ever varies between candidates that is the instrument, not the
-       geometry."""
-    out = {"verdict": "restriction-identity-holds", "checks": []}
+       geometry.
+
+    `anchor` is three-valued and has NO default (§A5): a list of atom indices, or an
+    `AnchorAbsent` declaration, and nothing else. The anchor block is written in EVERY return,
+    including the early ones, so a reader never has to infer the anchor's state from a silence --
+    which is exactly what the old `if anchor is not None` made them do."""
+    if isinstance(anchor, AnchorAbsent):
+        anchor_block = anchor.to_json()
+    elif isinstance(anchor, (list, tuple)) and anchor:
+        anchor_block = {"state": "present-not-yet-asked", "vertices": len(anchor)}
+    else:
+        raise SystemExit(
+            f"A5: check_invariants needs a known minimum or an `AnchorAbsent` declaration; "
+            f"got {type(anchor).__name__}. There is no silent-off anchor any more.")
+    out = {"verdict": "restriction-identity-holds", "ok": True, "checks": [],
+           "anchor": anchor_block}
 
     def edge_labels(st):
         return {tuple(sorted(e)) for e in (
@@ -477,12 +582,14 @@ def check_invariants(base, A_tuples, companion, cand, stage, reference, *, ancho
     fp = R.fp_tuples(sorted(companion))
     if fp != reference["companion_fp"]:
         out["verdict"] = "companion-drifted"
+        out["ok"] = False
         out["checks"].append(f"companion fingerprint {fp[:8]} != {reference['companion_fp'][:8]}")
         return out
     keep = set(reference["vertex_labels"])
     restricted = {e for e in edge_labels(stage) if e[0] in keep and e[1] in keep}
     if restricted != reference["edges"]:
         out["verdict"] = "restriction-identity-broken"
+        out["ok"] = False
         out["checks"].append(
             f"{len(restricted)} edges in the restriction against {len(reference['edges'])} in the "
             f"unexpanded stage; only-here {len(restricted - reference['edges'])}, "
@@ -492,25 +599,31 @@ def check_invariants(base, A_tuples, companion, cand, stage, reference, *, ancho
     got = stage.present.bit_count()
     if got != want:
         out["verdict"] = "restriction-identity-broken"
+        out["ok"] = False
         out["checks"].append(f"{got} vertices against the expected {want} = "
                              f"{reference['n_vertices']} + {cand.n_new}")
         return out
     out["checks"] = [f"companion {fp[:8]}", f"restriction {len(restricted)} edges",
                      f"vertices {got} = {reference['n_vertices']} + {cand.n_new}"]
-    if anchor is not None:
-        v1 = PS.refuses(stage, anchor)
-        v2 = PS.refuses(stage, anchor[:-1])
-        out["anchor"] = {"known_minimum": v1, "minus_one": v2,
-                         "verdict": "contains-a-known-minimum" if (v1 == "unsat" and v2 == "sat")
-                                    else "known-minimum-absent"}
-        if out["anchor"]["verdict"] != "contains-a-known-minimum":
-            out["verdict"] = "restriction-identity-broken"
+    if isinstance(anchor, AnchorAbsent):
+        # DECLARED absent: the identity half holds, the fourth invariant did not run, and the
+        # verdict SAYS SO. A guarded run and an unguarded one no longer share a verdict string.
+        out["verdict"] = "restriction-identity-holds-anchor-declared-absent"
+        return out
+    v1 = PS.refuses(stage, anchor)
+    v2 = PS.refuses(stage, anchor[:-1])
+    out["anchor"] = {"state": "present", "known_minimum": v1, "minus_one": v2,
+                     "verdict": "contains-a-known-minimum" if (v1 == "unsat" and v2 == "sat")
+                                else "known-minimum-absent"}
+    if out["anchor"]["verdict"] != "contains-a-known-minimum":
+        out["verdict"] = "restriction-identity-broken"
+        out["ok"] = False
     return out
 
 
-def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, anchor_tuples=None,
-                    ckpt_dir, secondary=True, wall_ask=600.0, slice_conflicts=RED.SLICE_CONFLICTS,
-                    log=print) -> dict:
+def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference,
+                    anchor_tuples=ANCHOR_MISSING, ckpt_dir, secondary=True, wall_ask=600.0,
+                    slice_conflicts=RED.SLICE_CONFLICTS, log=print) -> dict:
     """One map entry: the primary decision, then -- only if the primary says inert -- the secondary.
 
     `incumbent` is the best known WEIGHT (atoms), so `|M| = incumbent + 1` vertices. The primary
@@ -521,9 +634,19 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
     phase 1 and the correction sets are graph facts and survive the change of objective, while the
     search facts are discarded (`parts_reduce.reduce_stage`'s restriction rule).
 
+    `anchor_tuples` is three-valued and its default is FATAL (§A5): a known minimum of the
+    unexpanded stage, or an `AnchorAbsent(reason)` declaration which is logged on every call and
+    written into every entry. It was `None` by default, and two of the three callers took that
+    default, so an unguarded run and a guarded one produced the same verdict string.
+
     **No score is computed here.** The entry stores labels and costs so that a ranking nobody has
     thought of yet is scorable from the file alone."""
     t0 = time.process_time()
+    anchor_tuples, anchor_declaration = resolve_anchor(
+        anchor_tuples, where=f"sweep_candidate({cand.name(base)})")
+    if anchor_declaration is not None:
+        # Printed EVERY run, per §A5: a declaration nobody sees is the silent default again.
+        log(f"    ANCHOR DECLARED ABSENT: {anchor_declaration.reason}")
     W = expanded(A_tuples, cand)
     stage = PS.Stage(base, W, sorted(companion), side="L", rung=1, pin=True)   # ALWAYS pinned
     name = cand.name(base)
@@ -535,12 +658,13 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
     # first run of this function. Drop the non-atoms, and CHECK they are exactly the stage's fixed
     # vertices rather than assuming it: a tuple missing for any other reason means the anchor is
     # not inside this stage, which is the thing the anchor exists to detect.
-    anchor_atoms = None
-    if anchor_tuples is not None:
+    anchor_atoms = anchor_declaration                # the declaration travels as the anchor value
+    if anchor_declaration is None:
         fixed_t = {t for _, t in stage.vertex_labels(stage.fixed)}
         stray = [t for t in anchor_tuples if t not in lab and t not in fixed_t]
         if stray:
             return {"candidate": cand.to_json(base), "name": name, "verdict": "not_run",
+                    "anchor": {"state": "present-but-not-in-this-stage", "stray": len(stray)},
                     "note": f"the anchor has {len(stray)} vertices that are neither atoms nor "
                             f"fixed in this stage, e.g. {stray[:3]}: it is not inside this stage"}
         anchor_atoms = sorted(lab[t] for t in anchor_tuples if t in lab)
@@ -548,9 +672,9 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
     entry = {"candidate": cand.to_json(base), "name": name,
              "stage_identity": stage.identity(), "stage_fingerprint": stage.fingerprint(),
              "atoms": len(stage.atoms), "vertices": stage.present.bit_count(),
-             "invariants": inv, "asked_at_target": incumbent - 1,
+             "invariants": inv, "anchor": inv["anchor"], "asked_at_target": incumbent - 1,
              "rung_used": stage.rung, "incumbent": incumbent}
-    if inv["verdict"] != "restriction-identity-holds":
+    if not inv["ok"]:
         entry["verdict"] = "not_run"
         entry["note"] = f"invariants failed ({inv['verdict']}); no ask was made"
         return entry
@@ -576,11 +700,16 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
     if p["verdict"] == "reduced":
         entry["verdict"] = "yes"                    # it BEAT the incumbent -- escalate
         entry["M"] = p["M_vertices"]
+        entry["M_bound"] = {"lower": p["M_vertices"], "upper": p["M_vertices"], "exact": True,
+                            "lower_from": "the reduction's own refutation below its selection",
+                            "upper_from": "the reduction's own selection, exhibited in M_set"}
         entry["M_set"] = p.get("M_set")
         entry["minima"] = p.get("minima")
     elif p["verdict"] == "no-selection-at-target":
         entry["verdict"] = "no"
-        entry["M"] = incumbent + 1                  # free: >= by the refutation, <= by the anchor
+        # >= by the refutation, <= BY THE ANCHOR AND NOTHING ELSE. With the anchor declared absent
+        # the upper half is unproven and this renders as the string ">=N" rather than as a number.
+        entry["M"], entry["M_bound"] = m_bound(incumbent, anchored=anchor_declaration is None)
     else:
         entry["verdict"] = "unknown"
         entry["note"] = f"primary returned {p['verdict']}; an undecided candidate is NOT a refused one"
@@ -753,6 +882,67 @@ def plan_blocks(base, cands, census, *, reading=ADOPTED_READING, seed=20260911, 
     return jobs
 
 
+def his_move_standing(base, A_tuples, entries) -> dict:
+    """Which of `HIS_RECORDED_MOVE`'s four orbits this map could test, **computed from the
+    candidate set** rather than asserted.
+
+    The field this replaces was a hand-written sentence claiming all four orbits were absent by
+    construction. Two of them -- `(0,0,0,4)` and `(0,0,6,6)` -- were live partial-fill candidates
+    in the A412 map, were tested singly, and came back inert; that is a sharper result and it is
+    the evidence that his expansion worked as a COMBINATION rather than as four independent moves.
+    The artifact was corrected by hand in commit `3e343e5`; the producer was not, so the artifact
+    no longer regenerated from committed code. Computing it fixes both, and it stays true on a
+    base where his orbits do not exist at all -- which is where this producer is going next."""
+    A = set(A_tuples)
+    seen = {}
+    for e in entries:
+        for k, v in (e.get("candidate", {}).get("orbits") or {}).items():
+            seen.setdefault(tuple(int(x) for x in k.strip("()").split(",")), []).append(
+                {"name": e.get("name"), "adds": v, "verdict": e.get("verdict"),
+                 "M_set_grew": e.get("M_set_grew"),
+                 "provenance": e.get("candidate", {}).get("provenance")})
+    rows, tested, absent = [], [], []
+    for o in sorted(HIS_RECORDED_MOVE):
+        oi = base.by_label.get(o)
+        if oi is None:
+            rows.append({"orbit": list(o), "standing": "not-an-orbit-of-this-base"})
+            absent.append(o)
+            continue
+        members = [base.tups[i] for i in base.orbits[oi]]
+        here = [c for c in seen.get(o, []) if c["adds"]]
+        row = {"orbit": list(o), "members": len(members),
+               "in_A": sum(1 for t in members if t in A)}
+        if here:
+            row["standing"] = "tested-in-this-map"
+            row["candidates"] = here
+            tested.append(o)
+        elif row["in_A"] == len(members):
+            row["standing"] = "complete-in-this-accumulator"
+            row["why_absent"] = ("every member is already in A, so completing it adds nothing: "
+                                 "his own recorded no-op, and `menu_census` skips it")
+            absent.append(o)
+        else:
+            row["standing"] = "not-a-candidate-in-this-map"
+            row["why_absent"] = "partially absent from A but not admitted to the menu"
+            absent.append(o)
+        rows.append(row)
+    return {
+        "orbits": rows,
+        "tested_singly": [list(o) for o in tested],
+        "absent": [list(o) for o in absent],
+        "reading": (
+            f"{len(tested)} of his four recorded orbits are live single-orbit candidates here and "
+            f"{len(absent)} are not. A single-orbit `no` on one of his four is NOT a contradiction "
+            f"of his move: he added the four as a SET, and the set is tested by "
+            f"`tools/parts_diag.py hismove`, never by this map."
+            if tested else
+            "none of his four recorded orbits is a live single-orbit candidate here, so this map "
+            "says nothing about his move either way. A reader finding his move missing from this "
+            "map is seeing that, not an omission."),
+        "computed_from": "the candidate set and A, not from a hand-written sentence",
+    }
+
+
 def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuples, entries_dir,
             ckpt_dir, jobs=1, seed=20260911, secondary=True, wall_ask=600.0, scoring_role,
             limit=0, log=print) -> dict:
@@ -765,6 +955,15 @@ def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuple
     from concurrent.futures import ProcessPoolExecutor
     os.makedirs(entries_dir, exist_ok=True)
     os.makedirs(ckpt_dir, exist_ok=True)
+    # Resolve the anchor ONCE, here, before any worker starts: a map that cannot be anchored must
+    # die at the plan and not after eighty-nine candidates (§A5, missing-and-fatal).
+    _at, _decl = resolve_anchor(anchor_tuples, where="run_map")
+    anchor_state = (_decl.to_json() if _decl is not None
+                    else {"state": "present", "vertices": len(_at),
+                          "asks": "a known minimum of the unexpanded stage must still refuse "
+                                  "here, and minus one atom must be colourable"})
+    log(f"  anchor: {anchor_state['state']}"
+        + (f" -- {_decl.reason}" if _decl is not None else f" ({len(_at)} vertices)"))
     _W.update(base=base, A=sorted(A_tuples), companion=sorted(companion), incumbent=incumbent,
               reference=build_reference(base, A_tuples, companion), anchor=anchor_tuples,
               entries=entries_dir, ckpt=ckpt_dir, secondary=secondary, wall_ask=wall_ask)
@@ -807,10 +1006,8 @@ def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuple
                                                     "shoulder")},
             "note": "his degree test governs the RESERVE; his §5.6 exempts partially filled "
                     "orbits from it, and `fill_only` counts those a degree-built menu would miss"},
-        "his_move_absent_by_construction":
-            "this accumulator already CONTAINS his own recorded expansion, so the four orbits his "
-            "move used are not in the candidate set at all. A reader finding his move missing from "
-            "this map is seeing that, not an omission.",
+        "anchor": anchor_state,
+        "his_recorded_move": his_move_standing(base, A_tuples, out),
         "density": density(menu_entries),
         "shoulder": {"n": len(sh_entries), "density": density(sh_entries),
                      "note": "reported as its own result with its own enumeration, NEVER folded "
@@ -951,6 +1148,116 @@ def _self_test(log=print):
         len([t for t in L374 if t in labA]) == len(L374) - 1,
         f"{len([t for t in L374 if t in labA])} atoms for {len(L374)} vertices")
 
+    # --- A5: the anchor is THREE-VALUED, and its absence is declared rather than defaulted.
+    #
+    # The failure this replaces: `check_invariants` wrote the anchor block only `if anchor is not
+    # None`, `sweep_candidate` defaulted `anchor_tuples=None`, and two of the three callers took
+    # that default -- so a run with a passing anchor and a run with none both ended at
+    # `restriction-identity-holds` and were indistinguishable in their own artifact.
+    #
+    # THE UNINFORMATIVE OUTCOME, named before the controls are believed: a refusal that fires for
+    # some OTHER reason (a signature change, an import error) would pass a "did it raise?" test
+    # while proving nothing, and a pair of verdict strings would look distinguishing even if
+    # EVERY path returned the same string. So each refusal is matched on its message, and each is
+    # paired with the arm that must NOT fire -- `A5 accepts` below. Both arms are reachable:
+    # `resolve_anchor` is the first statement of `sweep_candidate` and returns for a good anchor.
+    def must_exit(name, fn, needle):
+        try:
+            fn()
+        except BaseException as e:                       # SystemExit is not an `Exception`
+            ok = needle in str(e)
+            log(f"  {'ok  ' if ok else 'FAIL'} {name}  ({type(e).__name__}: {str(e)[:66]})")
+            if not ok:
+                fails.append(name)
+            return
+        log(f"  FAIL {name}: it was ACCEPTED")
+        fails.append(name)
+
+    ident = Candidate(frozenset(), "identity")
+    must_exit("A5 an omitted anchor is FATAL, not a silent off",
+              lambda: sweep_candidate(base, A412, S136, ident, incumbent=374,
+                                      reference={}, ckpt_dir="/nonexistent", log=lambda *a: None),
+              "A5")
+    must_exit("A5 the old silent-off value `None` is refused by name",
+              lambda: sweep_candidate(base, A412, S136, ident, incumbent=374, reference={},
+                                      anchor_tuples=None, ckpt_dir="/nonexistent",
+                                      log=lambda *a: None),
+              "silent-off path")
+    must_raise("A5 a declaration with no reason is refused (a blank reason is the default again)",
+               lambda: AnchorAbsent(""), "at least")
+    must_raise("A5 a declaration with a token reason is refused",
+               lambda: AnchorAbsent("no anchor"), "at least")
+    decl = AnchorAbsent("a self-test stage, which has no bootstrap and so no known minimum")
+    got_t, got_d = resolve_anchor(L374, where="control")
+    got_t2, got_d2 = resolve_anchor(decl, where="control")
+    chk("A5 accepts: a real anchor resolves to tuples, a declaration to itself "
+        "(so the two refusals above are discriminating, not blanket)",
+        got_t is L374 and got_d is None and got_t2 is None and got_d2 is decl)
+
+    ref412 = build_reference(base, A412, S136)
+    inv_absent = check_invariants(base, A412, S136, ident, st412, ref412, anchor=decl)
+    inv_present = check_invariants(base, A412, S136, ident, st412, ref412,
+                                   anchor=sorted(labA[t] for t in L374 if t in labA))
+    chk("A5 a declared-absent anchor is RECORDED in the invariants, with its reason",
+        inv_absent["anchor"]["state"] == "declared-absent"
+        and decl.reason in inv_absent["anchor"]["reason"])
+    chk("A5 the two runs no longer share a verdict string "
+        "(this equality was the whole failure)",
+        inv_absent["verdict"] != inv_present["verdict"],
+        f"{inv_absent['verdict']!r} vs {inv_present['verdict']!r}")
+    chk("A5 a declared absence still PASSES the identity half (it is a declaration, not a fault)",
+        inv_absent["ok"] is True and inv_absent["verdict"].endswith("anchor-declared-absent"))
+    chk("A5 the present anchor really ran its two asks and found the known minimum",
+        inv_present["anchor"]["state"] == "present"
+        and inv_present["anchor"]["verdict"] == "contains-a-known-minimum"
+        and inv_present["anchor"]["known_minimum"] == "unsat"
+        and inv_present["anchor"]["minus_one"] == "sat", str(inv_present["anchor"]))
+
+    # |M| renders as a BOUND when the anchor is absent, because its upper half is the anchor's.
+    mv, mb = m_bound(374, anchored=True)
+    mu, mub = m_bound(374, anchored=False)
+    chk("A5 with the anchor present |M| is a number, and both halves name their source",
+        mv == 375 and mb["exact"] and mb["upper"] == 375 and mb["upper_from"])
+    chk("A5 with the anchor absent |M| renders as a BOUND and the upper half is None",
+        mu == ">=375" and mub["exact"] is False and mub["upper"] is None)
+    try:
+        mu - 1
+        chk("A5 arithmetic on an unproved |M| fails loud rather than computing", False)
+    except TypeError:
+        chk("A5 arithmetic on an unproved |M| fails loud rather than computing", True,
+            "`'>=375' - 1` raises TypeError")
+
+    # --- his recorded move: computed from the candidate set, never asserted
+    hm = his_move_standing(base, A412, [
+        {"name": "(0,0,0,4):3", "verdict": "no", "M_set_grew": "no",
+         "candidate": {"orbits": {"(0, 0, 0, 4)": 3}, "provenance": "partial-fill"}},
+        {"name": "(0,0,6,6):6", "verdict": "no", "M_set_grew": "no",
+         "candidate": {"orbits": {"(0, 0, 6, 6)": 6}, "provenance": "partial-fill"}}])
+    stand = {tuple(r["orbit"]): r["standing"] for r in hm["orbits"]}
+    chk("his-move standing: the two orbits the map DID test are reported as tested",
+        stand[(0, 0, 0, 4)] == "tested-in-this-map"
+        and stand[(0, 0, 6, 6)] == "tested-in-this-map", str(stand))
+    chk("his-move standing: the other two are absent because they are COMPLETE in A412",
+        stand[(0, 0, 2, 2)] == "complete-in-this-accumulator"
+        and stand[(0, 0, 2, 6)] == "complete-in-this-accumulator", str(stand))
+    chk("his-move standing is DISCRIMINATING: with no entries, nothing reads as tested",
+        all(r["standing"] != "tested-in-this-map"
+            for r in his_move_standing(base, A412, [])["orbits"]))
+    # The shipped artifact must still be what this producer emits. The failure this catches
+    # happened: `data/m62/m63-map-A412.json`'s his-move field was corrected BY HAND (commit
+    # 3e343e5) because the producer's sentence was false, and the producer was left emitting the
+    # false one -- so the artifact no longer regenerated from committed code, which is this
+    # milestone's own rule. A hand-edit of either side now goes red here.
+    mp = os.path.join(ROOT, "data", "m62", "m63-map-A412.json")
+    if os.path.exists(mp):
+        shipped = json.load(open(mp))
+        chk("the shipped A412 map's his-move field is what this producer computes from its "
+            "own entries (a hand-edit of either side goes red)",
+            shipped.get("his_recorded_move") ==
+            his_move_standing(base, A412, shipped["entries"]),
+            "recompute it with: python3 tools/parts_loop.py map --A v412e2106.vtx "
+            "--companion v136e564.vtx --incumbent 373 --scoring-role in-sample")
+
     # --- card 15: an `unknown` is never folded into a `no`, and the RATE is what must honour it
     planted = [{"verdict": "yes"}, {"verdict": "no"}, {"verdict": "unknown"},
                {"verdict": "not_run"}]
@@ -994,6 +1301,11 @@ def main():
     m.add_argument("--anchor", default="v374e1860.vtx",
                    help="a known minimum of the UNEXPANDED stage; the per-candidate known-answer "
                         "anchor, two asks and no plant")
+    m.add_argument("--declare-no-anchor", dest="no_anchor", metavar="REASON",
+                   help="run with NO known-answer anchor, declaring why in one sentence. The "
+                        "reason is printed every run and written into every entry, and |M| then "
+                        "renders as a bound (>=N) because its upper half is unproven. On a new "
+                        "base run the bootstrap first: census -> screen -> bootstrap -> map")
     m.add_argument("--incumbent", type=int, required=True,
                    help="the best known WEIGHT in atoms, so |M| = incumbent + 1 vertices")
     m.add_argument("--jobs", type=int, default=1)
@@ -1034,7 +1346,8 @@ def main():
     elif a.cmd == "map":
         A = V.load_lattice(os.path.join(REF11, a.A))
         comp = V.load_lattice(os.path.join(REF11, a.companion))
-        anchor = V.load_lattice(os.path.join(REF11, a.anchor))
+        anchor = (AnchorAbsent(a.no_anchor) if a.no_anchor
+                  else V.load_lattice(os.path.join(REF11, a.anchor)))
         orc = EdgeOracle(base, comp)
         cen = menu_census(base, A, orc)
         cands = menu_candidates(base, A, cen, shoulder=a.shoulder)

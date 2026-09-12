@@ -35,10 +35,69 @@ import parts_stage as PS
 import parts_vtx as V
 import parts_faces as F
 import parts_loop as PL
+import typem as T
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REF11 = os.path.join(ROOT, "data", "m62", "parts-ref11", "JP", "Large")
 READING = PL.ADOPTED_READING
+
+# The loop runs UNANCHORED, and says so in every entry (`plans/M63-phaseG-bases-and-rotations.md`
+# §A5). This used to be `anchor_tuples=None`, which the sweep read as "no anchor" and reported as
+# `restriction-identity-holds` -- the same verdict an anchored run produces.
+#
+# It is a declaration and not a shrug: the loop's starting level IS a complete set of minima of
+# the unexpanded stage (`parts_faces.LevelSet.minima`, each of `ls.size` atoms), so an anchor
+# could be taken from it. Doing so adds two asks per candidate to a run whose configuration and
+# cost model are frozen, which is a retune of a frozen experiment and not this module's call. The
+# consequence is carried honestly instead: every `no` in this loop reports |M| as `">=N"`.
+# The freeze decision is three-valued too, for the same reason the anchor is: `--require-frozen`
+# was `action="store_true"`, so a run that said nothing about the freeze checked nothing and its
+# artifact looked exactly like a checked one's.
+FREEZE_MISSING = "freeze-decision-missing"
+FREEZE_REQUIRE = "freeze-required"
+
+
+class Unfrozen:
+    """A DECLARED unfrozen run, carrying the reason, stamped into the artifact.
+
+    A tuning run, a rehearsal or a repair is a perfectly good reason not to check the freeze.
+    Saying nothing is not."""
+
+    MIN_REASON = 24
+
+    def __init__(self, reason: str):
+        if not isinstance(reason, str) or len(reason.strip()) < self.MIN_REASON:
+            raise ValueError(
+                f"an unfrozen run must be DECLARED with a reason of at least {self.MIN_REASON} "
+                f"characters; got {reason!r}. A blank reason is `store_true` again.")
+        self.reason = reason
+
+
+def resolve_freeze(freeze, cfg, row, *, log=print) -> dict:
+    """Require the freeze, or record a declared-unfrozen run. Saying nothing is fatal."""
+    if freeze is FREEZE_MISSING:
+        raise SystemExit(
+            "this run made no decision about the freeze.\n"
+            "  Pass --require-frozen, which checks the rule against the committed freeze and the\n"
+            "  row against its registration, or --declare-unfrozen \"<why>\", whose reason is\n"
+            "  printed and written into the artifact. The flag used to default to OFF, so an\n"
+            "  unchecked run and a checked one produced indistinguishable artifacts.")
+    if freeze is not FREEZE_REQUIRE and not isinstance(freeze, Unfrozen):
+        raise SystemExit(f"unknown freeze decision {freeze!r}; one of FREEZE_REQUIRE, "
+                         f"Unfrozen(reason), or the fatal default")
+    if isinstance(freeze, Unfrozen):
+        log(f"  FREEZE NOT CHECKED (declared): {freeze.reason}")
+        return {"state": "declared-unfrozen", "reason": freeze.reason, "row": row,
+                "consequence": "no claim in this artifact is a held-out claim"}
+    rec = R.require_frozen(cfg, row=row)
+    log(f"  freeze commit {rec['freeze_commit'][:12]}; row {row['row_id']}: {rec['reading']}")
+    return {"state": "frozen", **rec}
+
+
+NO_ANCHOR = PL.AnchorAbsent(
+    "the loop is unanchored by design: its starting level supplies minima of the unexpanded stage "
+    "(LevelSet.minima), but adding the anchor's two asks per candidate would change the cost model "
+    "of a FROZEN run, so |M| is reported as a bound here and the anchored surface is the map")
 
 
 # ==================================================================== D3: the look-ahead
@@ -261,6 +320,52 @@ def frozen_config(*, rule="ours", n_new_max=24, batch=8, stall_limit=3, budget=3
     }
 
 
+def _start_state(base, rec: dict, companion_file: str):
+    """The loop's starting state, in ONE place, so `register-row` registers exactly what the loop
+    runs rather than a second derivation of it that can drift from it.
+
+    Returns `(stage0, A_tuples, incumbent, level_set)`. `incumbent` is a WEIGHT in atoms, so
+    `|M| = incumbent + 1` vertices."""
+    if "A" not in rec or rec.get("A_sample"):
+        raise SystemExit("d4.1: this starting record carries no complete A (or carries a sample). "
+                         "The loop's state variable is the union of ALL minima; a sampled A "
+                         "invents and hides candidates, because the reserve is non-monotone in "
+                         "both directions (§3.3).")
+    ls = F.LevelSet.from_record(rec)
+    ls.require_complete("the loop's starting level")
+    stage0 = PS.Stage(base, V.load_lattice(os.path.join(REF11, "v451e2400.vtx")),
+                      V.load_lattice(os.path.join(REF11, "v136e564.vtx")),
+                      side="L", rung=1, pin=True)
+    if stage0.fingerprint() != rec["stage_fingerprint"]:
+        raise SystemExit("the starting record was not produced by the stage this loop rebuilt")
+    A_tuples = sorted({tuple(stage0.atom_labels[i][1]) for i in rec["A"]} |
+                      {tuple(stage0.keys[stage0.A.centre])})
+    return stage0, A_tuples, ls.size, ls
+
+
+def row_state(row_id: str, stage0, A_tuples, incumbent: int, base, companion_tuples) -> dict:
+    """The row this run actually starts from, **derived from the objects in hand**.
+
+    The freeze carries `held_out_state`, `incumbent_weight` and `target` -- prose and a number
+    about one starting state -- inside its config hash, while the runtime incumbent comes from
+    the starting RECORD. So a frozen run on any other row passed `require_frozen` by hash
+    equality while its receipt asserted the frozen row's state. This function is the replacement
+    for that string: `parts_report.require_frozen` takes it, checks it, and puts it in the
+    receipt, and a row that contradicts the freeze must carry its own committed registration.
+
+    It also carries §S.5's two pins -- `cross_law` and the base -- which the 2026-09-11 freeze
+    does not and may not be edited to include."""
+    return {"row_id": row_id,
+            "incumbent_weight": incumbent,
+            "A_vertices": len(A_tuples),
+            "A_fp": R.fp_tuples(sorted(A_tuples)),
+            "companion_fp": R.fp_tuples(sorted(companion_tuples)),
+            "stage_fingerprint": stage0.fingerprint(),
+            "cross_law": {"name": stage0.cross_law.name, "cos": T.kstr(stage0.cross_law.cos)},
+            "base_fp": R.fp_base(base),
+            "base_r": base.r}
+
+
 def step(base, A_tuples, companion, cands, *, incumbent, rule, ctx, budget, reference,
          anchor_tuples, ckpt_dir, wall_ask=600.0, log=print) -> dict:
     """One iteration: rank, then spend the expensive evaluation on the top `budget` candidates.
@@ -302,7 +407,8 @@ def step(base, A_tuples, companion, cands, *, incumbent, rule, ctx, budget, refe
 
 
 def run_loop(base, start_record: str, *, companion_file, rule="ours", config=None,
-             checkpoint=None, out=None, wall_ask=600.0, jobs=1, ckpt_dir=None, log=print) -> dict:
+             checkpoint=None, out=None, wall_ask=600.0, jobs=1, ckpt_dir=None,
+             freeze=FREEZE_MISSING, row_id="A403", log=print) -> dict:
     """The loop, from a starting reduction RECORD rather than from a graph.
 
     Refuses a starting record carrying `A_sample` and no `A` (control d4.1): the loop's state
@@ -311,28 +417,21 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
     most one ranking, and the log line says so."""
     cfg = config or frozen_config(rule=rule)
     rec = json.load(open(start_record))
-    if "A" not in rec or rec.get("A_sample"):
-        raise SystemExit("d4.1: this starting record carries no complete A (or carries a sample). "
-                         "The loop's state variable is the union of ALL minima; a sampled A "
-                         "invents and hides candidates, because the reserve is non-monotone in "
-                         "both directions (§3.3).")
-    ls = F.LevelSet.from_record(rec)
-    ls.require_complete("the loop's starting level")
-    stage0 = PS.Stage(base, V.load_lattice(os.path.join(REF11, "v451e2400.vtx")),
-                      V.load_lattice(os.path.join(REF11, "v136e564.vtx")),
-                      side="L", rung=1, pin=True)
-    if stage0.fingerprint() != rec["stage_fingerprint"]:
-        raise SystemExit("the starting record was not produced by the stage this loop rebuilt")
-    A_tuples = sorted({tuple(stage0.atom_labels[i][1]) for i in rec["A"]} |
-                      {tuple(stage0.keys[stage0.A.centre])})
+    stage0, A_tuples, incumbent, ls = _start_state(base, rec, companion_file)
     necessary = sorted(tuple(stage0.atom_labels[i][1]) for i in ls.necessary())
-    incumbent = ls.size                                   # WEIGHT in atoms; |M| = weight + 1
     companion = V.load_lattice(os.path.join(REF11, companion_file))
     # `Y`'s degree-1 layer is stored as a COUNT, not a list -- and it is 312 against the level's
     # 336 necessary atoms. The two are different objects: `Y` is harvested lazily and is a subset,
     # so a look-ahead reading it would under-count what an expansion has to free (§1(e)1).
     log(f"  start: |A| {len(A_tuples)}  |M| {incumbent + 1} vertices  |{{M}}| {len(ls.minima)}  "
         f"necessary {len(necessary)} (Y's degree-1 layer: {rec['hypergraph']['degree_1']})")
+
+    # The freeze decision, THREE-VALUED and resolved before any expensive work: require it, or
+    # declare this run unfrozen with a reason that lands in the artifact. Neither is fatal --
+    # `--require-frozen` was `action="store_true"`, so the check defaulted to off and an
+    # unchecked run and a checked one produced the same artifact.
+    row = row_state(row_id, stage0, A_tuples, incumbent, base, companion)
+    receipt = resolve_freeze(freeze, cfg, row, log=log)
 
     oracle = PL.EdgeOracle(base, companion, log=log)
     census = PL.menu_census(base, A_tuples, oracle, log=log)
@@ -384,7 +483,7 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
                       tuple(map(tuple, state["history"])))
         r = step(base, A_tuples, companion, pool, incumbent=state["incumbent"], rule=rule, ctx=ctx,
                  budget=cfg["candidates_evaluated_per_iteration"], reference=reference,
-                 anchor_tuples=None, ckpt_dir=ckpt_dir, wall_ask=wall_ask, log=log)
+                 anchor_tuples=NO_ANCHOR, ckpt_dir=ckpt_dir, wall_ask=wall_ask, log=log)
         state["iteration"] = it
         state["history"].append([it, r["verdict"], state["incumbent"] + 1, state["n_new_max"],
                                  round(time.time() - t0, 1)])
@@ -393,7 +492,18 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
         if r["verdict"] == "improved":
             verdict = "improved"
             state["accepted"] = r["accepted"]["name"]
-            state["incumbent"] = r["accepted"]["M"] - 1
+            mv = r["accepted"]["M"]
+            if not isinstance(mv, int):
+                # §A5: an unanchored refusal reports |M| as the STRING ">=N", and a bound may
+                # never become the next incumbent. An accepted candidate always carries an exact
+                # |M| (the reduction exhibits its own selection), so reaching this is a bug in the
+                # entry, not a bound legitimately arriving -- and it must say so, not TypeError.
+                raise SystemExit(
+                    f"A5: the accepted candidate {state['accepted']} reports |M| = {mv!r}, which "
+                    f"is a BOUND and not a value. An accepted (`reduced`) candidate exhibits its "
+                    f"own selection, so its |M| is exact; a bound here means the entry came from "
+                    f"the refused path and the loop must not adopt it as an incumbent.")
+            state["incumbent"] = mv - 1
             break
         if r["verdict"] == "grew":
             state["stall"] = 0
@@ -416,6 +526,7 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
            "start": {"A": len(A_tuples), "M_vertices": incumbent + 1,
                      "M_set": len(ls.minima), "necessary": len(necessary)},
            "iterations": state["history"], "state": state,
+           "row": row, "freeze_receipt": receipt,
            "clause_2b": ("MET -- the loop reached |M| <= 374 from our 375-level accumulator"
                          if verdict == "improved" else
                          f"NOT MET -- the loop ended `{verdict}` with the budget it had"),
@@ -484,6 +595,38 @@ def _self_test(log=print):
     chk("the freeze anticipates a signal-free map",
         "one bit" in cfg["if_the_held_out_map_is_signal_free"])
     chk("the freeze bans self-scoring", any("atoms-freed" in b for b in cfg["bans"]))
+
+    # --- the freeze decision is THREE-VALUED, like the anchor. `--require-frozen` was
+    # `action="store_true"`, so a run that said nothing checked nothing and produced an artifact
+    # indistinguishable from a checked run's.
+    #
+    # THE UNINFORMATIVE OUTCOME: "it raised" proves nothing if it raised for another reason, so
+    # each refusal is matched on its own message; and a pair of refusals proves nothing if the
+    # ACCEPT arm is broken, so the declared arm is asserted to return with its reason intact.
+    fake_row = {"row_id": "control", "incumbent_weight": 1}
+    try:
+        resolve_freeze(FREEZE_MISSING, cfg, fake_row, log=lambda *a: None)
+        chk("a run that says nothing about the freeze is FATAL", False)
+    except SystemExit as e:
+        chk("a run that says nothing about the freeze is FATAL",
+            "no decision about the freeze" in str(e) and "--declare-unfrozen" in str(e))
+    try:
+        Unfrozen("tuning")
+        chk("an unfrozen run with a token reason is refused", False)
+    except ValueError as e:
+        chk("an unfrozen run with a token reason is refused", "at least" in str(e))
+    u = resolve_freeze(Unfrozen("a rehearsal of the loop's plumbing, scored against nothing"),
+                       cfg, fake_row, log=lambda *a: None)
+    chk("ACCEPT ARM: a declared-unfrozen run returns, carrying its reason into the artifact",
+        u["state"] == "declared-unfrozen" and "rehearsal" in u["reason"] and u["row"] == fake_row)
+    chk("the descriptive fields are OUT of the compared rule hash, so hash equality no longer "
+        "certifies a starting state",
+        all(k not in R.rule_portion(cfg) for k in R.ROW_DESCRIPTIVE)
+        and all(k in cfg for k in R.ROW_DESCRIPTIVE),
+        f"excluded {list(R.ROW_DESCRIPTIVE)}")
+    chk("the rule portion is still almost all of the config (the exclusion is surgical)",
+        len(R.rule_portion(cfg)) == len(cfg) - len(R.ROW_DESCRIPTIVE),
+        f"{len(R.rule_portion(cfg))} of {len(cfg)} keys")
     log(f"  {'ALL CONTROLS FIRE' if not fails else 'FAILURES: ' + ', '.join(fails)}")
     return not fails
 
@@ -503,8 +646,25 @@ def main():
                    help="where the PER-CANDIDATE checkpoints go; defaults to a loop-specific "
                         "directory, because the candidate names collide with the A412 sweep's")
     l.add_argument("--wall-ask", type=float, default=600.0)
-    l.add_argument("--require-frozen", action="store_true")
+    l.add_argument("--require-frozen", action="store_true",
+                   help="check the RULE against the committed freeze and the ROW against its "
+                        "committed registration, and stamp the receipt into the artifact")
+    l.add_argument("--declare-unfrozen", dest="unfrozen", metavar="REASON",
+                   help="run without checking the freeze, declaring why in one sentence. The "
+                        "reason is printed and written into the artifact. Exactly one of this "
+                        "and --require-frozen is required: the flag used to default to off")
+    l.add_argument("--row-id", dest="rowid", default="A403",
+                   help="which row this run starts from; its registration lives at "
+                        "data/m62/m63-rows/<row-id>.json")
     l.add_argument("--out")
+    rr = sub.add_parser("register-row", help="register a row's ACTUAL starting state, derived "
+                                             "from the record and the base, so a frozen run on "
+                                             "it can be checked without re-freezing")
+    rr.add_argument("--record", default="data/m62/m63-L451-reduction.json")
+    rr.add_argument("--companion", default="v136e564.vtx")
+    rr.add_argument("--row-id", dest="rowid", required=True)
+    rr.add_argument("--note", required=True,
+                    help="what this row is and when it was registered, in one sentence")
     a = ap.parse_args()
     if a.selftest:
         return 0 if _self_test() else 1
@@ -514,15 +674,32 @@ def main():
                    "producer": "tools/parts_rule.py:frozen_config"}, open(a.out, "w"), indent=1)
         print(f"  wrote {a.out}; commit it BEFORE the scored run")
         return 0
+    if a.cmd == "register-row":
+        base = P.Base(P.PARTS_R)
+        rec = json.load(open(a.record))
+        stage0, A_tuples, incumbent, _ls = _start_state(base, rec, a.companion)
+        comp = V.load_lattice(os.path.join(REF11, a.companion))
+        row = row_state(a.rowid, stage0, A_tuples, incumbent, base, comp)
+        path = R.row_path(a.rowid)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        json.dump({"kind": "m63-row", "schema": 1,
+                   "producer": "tools/parts_rule.py:register-row",
+                   "note": a.note, "record": a.record, "companion": a.companion,
+                   "registered": time.strftime("%Y-%m-%d"), "row": row},
+                  open(path, "w"), indent=1, sort_keys=True)
+        print(f"  wrote {path}\n  COMMIT IT before the run it registers:\n"
+              f"    git add {path} && git commit -m \"register row {a.rowid}\"")
+        return 0
     if a.cmd == "loop":
         cfg = frozen_config(rule=a.rule)
-        if a.require_frozen:
-            sha = R.require_frozen(cfg)
-            print(f"  freeze commit {sha}")
+        if a.require_frozen and a.unfrozen:
+            ap.error("--require-frozen and --declare-unfrozen are exclusive")
+        freeze = (Unfrozen(a.unfrozen) if a.unfrozen
+                  else (FREEZE_REQUIRE if a.require_frozen else FREEZE_MISSING))
         base = P.Base(P.PARTS_R)
         r = run_loop(base, a.record, companion_file=a.companion, rule=a.rule, config=cfg,
                      checkpoint=a.checkpoint, out=a.out, wall_ask=a.wall_ask,
-                     ckpt_dir=a.ckptdir)
+                     ckpt_dir=a.ckptdir, freeze=freeze, row_id=a.rowid)
         print(f"\n  {r['verdict'].upper()}: {r['clause_2b']}")
         return 0
     ap.print_help()
