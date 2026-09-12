@@ -770,6 +770,40 @@ anyone wants them** — not a log of the arena solve.
 
 ---
 
+## §6j — The field invariants, computed (pari/gp 2.17.4, installed 2026-09-12)
+
+Kooshi installed `pari` at the product owner's request. First results, each closing something that had
+been held open or asserted without a ground:
+
+| quantity | value | what it closes |
+|---|---|---|
+| **`h(K(i))`**, `K(i) = ℚ(√3,√11,i)`, degree 8 | **1** | **the counting formula's unchecked hypothesis.** `[BaakeGrimm2003]`'s shell formula carries a class-number condition that the prior-art gate flagged and bounded but could not evaluate. With `h = 1` every ideal is principal, so the condition holds and **the formula is usable predictively**, not only retrospectively |
+| roots of unity of `K(i)` | order **12** | **confirms the advisor against the product owner.** I hypothesised the relevant torsion was `⟨ζ₆⟩`; it corrected me to `⟨ζ₁₂⟩` (a CM field, Kronecker, with `√2 ∉ K(i)` ruling out `ζ₈` and `ζ₂₄`). Independently verified here |
+| unit rank of `K(i)` | 3 | `= r₁ + r₂ − 1 = 0 + 4 − 1`, consistent with signature `[0,4]` |
+| **`h(K)`**, `K = ℚ(√3,√11)` | **1** | the real quartic field is also principal — so no class-group obstruction anywhere in the sieve's base field |
+| `disc K` | 17,424 | and the trace-form Gram determinant equals it, which is the instrument's own control |
+| 2 in `K` | **2 primes**, each `e = 2, f = 1` | 2 is ramified with residue field `𝔽₂` in `K` itself; Theorem B's `𝔽₄` lives one field up, in `K(i)` |
+| 11 in `K` | **2 primes** | |
+| 3 in `K` | **1 prime** (totally ramified) | |
+| 2 in `K(i)` | **2 primes** | the two primes Theorem B's residue colouring uses; residue degrees pending a slower run |
+
+**`h(K(i)) = h(K) = 1` is the best available outcome** and it matters beyond closing a footnote: it means a
+module's shell count is determined by **ideal factorisation and the unit group alone**, with no class-group
+correction — so the count is a computable arithmetic function of `n`, and the design screen can run on
+arithmetic rather than on lattice enumeration.
+
+**What remains for the instrument, dispatched as its own work order.** The **ceiling**: a module point with
+`|p|² = n` and denominator dividing `d` gives `(a,b) = d·p ∈ O_K²` with `a² + b² = d²n`, so **every such
+module's shell injects into `Sh(d²n) = #{(a,b) ∈ O_K² : a² + b² = d²n}`** — an arithmetic upper bound on
+what *any* denominator-`d` module in this field can achieve at `n`, with no lattice built. That is the
+precise form of the "no ceiling" answer from §2: there is no ceiling **over all denominators**, and a sharp
+one **at each denominator**. Its controls are the six measured counts (§6c), every one of which the ceiling
+must dominate, and the known `n = 2` case, where Parts's lattice scores **0** while `(12,12)` satisfies
+`144 + 144 = 288 = 144·2` — so the ceiling there is **positive and the gap is exactly what a different
+module could win.**
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
