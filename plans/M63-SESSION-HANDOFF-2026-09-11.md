@@ -363,6 +363,38 @@ and build the multi-orbit union ladder. Everything above is the cost of trusting
   flatters the conclusion and the completed window does not** — the same direction as the flattering-defect
   pattern, caught by its author and applied to itself. The finding is unchanged: four formulations, each
   cutting the work by a large factor, none cutting the time.
+
+**CLOSED, 2026-09-12 — both records now exist, and the queue's first item is done.**
+- **The progress-log fix landed**: `|A|` is maintained incrementally instead of re-unioning every minimum
+  every five. **~5× demonstrated** (0.016–0.021 s/iteration against 0.089 immediately before) and that
+  *understates* it, since the "before" window sat at ~15,000 minima and the "after" at ~24,000 where the old
+  union would have cost more. **Cumulative against the original engine: ~65×.** The maintained aggregate is
+  **checked, not trusted** — `finish()` compares it against full recomputation and raises on mismatch, with
+  the drift planted for real and seen to fire. The reasoning is worth keeping: *a running aggregate that
+  drifts makes every logged `|A|` wrong while the record stays right, which is the failure that hides
+  longest, because the artifact keeps agreeing with itself.*
+- **D1b is CLOSED**: `reduced`, minimum 373, **\|M\| = 374 vertices, level 26,724, `exhaustive-level`, 0
+  undecided**, Y = 530. **Its final launch closed it in 43.9 s** — the same work that had run four hours
+  without closing. This record had never been written before tonight.
+- **`hismove` is CLOSED**: `HIS MOVE → yes`. **The calibration is no longer log-attested only**, so every
+  document citing it now cites a record.
+- Both carry `hitset_engine` in their launch budgets, and D1b's record shows it against the two new launches
+  and `(none recorded)` against the original — a reader can see which solve produced which part.
+
+**Two predictions scored, by the product owner:**
+- **`P8-revised` (800–1600 correction sets; observed 530) is NOT SCORABLE AS REGISTERED** — not "not met".
+  The closing run used a **different hitting-set engine** from the one the prediction was registered under,
+  and the correction-set count is a property of **the search path, not of the problem**: the two engines
+  agree on the bound at every iteration (151/151) but on the *chosen set* only 6 times in 151, so they ask
+  different candidates and harvest different families. 530 against 800–1600 may say something about the
+  engine and nothing about the graph. **Record the number with this reason; do not let it read as a
+  falsified prediction about the mathematics.** Re-registering it against the new engine is cheap now that a
+  close costs 44 s.
+- **`P-D5` (does `\|{M}\|` equal 1,092 under the canonical conventions) is NOT DECIDED** — the record states
+  its count is "as found", and canonical counts belong to the audit. **But it is now runnable, and it is a
+  real attested-number check that has been pending all milestone:** the closed level is 26,724 raw, and its
+  canonical count under the named convention is what compares against Parts's published 1,092 for this row.
+  That is one audit pass on an existing record, no solver.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
