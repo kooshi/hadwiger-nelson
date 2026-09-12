@@ -887,6 +887,15 @@ and blind to any cost living outside the component. A second cost of the same sh
 log, was invisible to the sharp instrument and would have been caught by the weak one. **State what the old
 instrument saw that the new one does not, at the moment you swap them**, or the gap is discovered by luck.
 
+**And when you put a measured number into a decision, carry what it MEASURES, never just its value.** Three
+rulings in one night rested on a number that was measuring something adjacent: a per-*ask solve* rate used as
+a per-*candidate* cost (wrong by 30×); a **contended-wall** timing used as a quiet-CPU cost (1.59×); and a
+**mid-window** ratio used as a completed-window one (16× against 7×). None was a wrong measurement — each was
+a right measurement of a different quantity, which is why none of them looked wrong. **A number in a ruling
+travels with its units, its conditions and its population, or the ruling is about something else.** The
+repair when it happens: re-derive the decision from the corrected figure out loud, because a ruling that
+survives its bad evidence needs new grounds, not a quiet pass.
+
 **The same rule has a second half, and its author broke it within two hours of writing it down.** Having
 recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
 prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a

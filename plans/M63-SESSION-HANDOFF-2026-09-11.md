@@ -486,8 +486,15 @@ was seen red on the old code before being called fixed.**
 
 **RULING (product owner, 2026-09-12): wire the available anchor into the loop and `hismove`.** The starting
 level's `LevelSet.minima` are minima of the unexpanded stage, so an anchor **is** available on Parts's base
-and is simply unused. Two asks per candidate, ~0.2 s on a 412-vertex stage, against a close that now costs
-44 s. **It cannot change an answer, only cost** — so it cannot invalidate a frozen comparison, and it must be
+and is simply unused. **CORRECTED 2026-09-12: my 0.2 s was wrong by 30×** — it was the D0 probe's per-*ask solve* rate, and the
+anchor's first ask is a full 374-atom UNSAT proof. **Measured: 6.46 s per candidate**, 6.2 of it that proof;
+sharing a solver across the two asks saves 0.07 s, so the cost is the proof and not the setup. **The ruling
+survives on the count, not the ask:** the loop evaluates at most `budget × max_iterations` = **18
+candidates**, so the anchor costs about **116 s for an entire run** — 14% per candidate, under two minutes
+per run, against a 44 s close. **Neither ask may be dropped**: the first alone passes on a stage that refuses
+everything, the second alone on a stage that colours everything. If 14% ever matters on a much larger sweep,
+**the lever is the candidate count, not the anchor.** The measured figure now lives in the docstring, the log
+line and the artifact's `controls` block, so nobody re-derives the ruling from my bad number. **It cannot change an answer, only cost** — so it cannot invalidate a frozen comparison, and it must be
 registered as a **control, never a rule parameter**, i.e. it does not enter the rule hash. Phase E
 established that checks 1–3 are internal consistency and **this is the only one comparing against a truth
 outside the pipeline**; leaving it off where it is available is the exact pattern this queue exists to end.
