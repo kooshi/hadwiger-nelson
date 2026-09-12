@@ -618,6 +618,75 @@ structural instead of hopeful — and it was reseeding that manufactured the fal
 
 ---
 
+## §6g — Why nineteen: `1 + 6·3`, and the patterns are centrally symmetric (added 2026-09-12)
+
+**The orbit hypothesis landed, and the answer is better than the hypothesis.** `ζ₆` verified an automorphism
+of the base **from scratch**: norm preserved on all **25,567** points, the disk mapped **bijectively** onto
+itself, **order 6**, **centre fixed**, and the 30 circle points **permuted**. It maps the 19-pattern set
+into itself. But the orbits are **not** `1 + 3·6`:
+
+> **19 = 1 + six orbits of size 3.**
+
+Orbit size 3 means each of the 18 two-colour patterns has a **stabiliser of order 2**, and the stabilising
+element is `ζ₆³ = −1`: **every achievable pattern is invariant under the half-turn.** So "nineteen" is no
+longer a solver output — it is `1 + 6·3` with a group-theoretic reason, and the reason is **central
+symmetry**. (Compare G9: the 791-point forcer's forced pairs are *"five of them antipodal — forced central
+symmetry"*. Same phenomenon, different object.)
+
+**The arithmetic then closes from three independent directions**, which is what makes the structure
+believable rather than the count. There are exactly **6 distinct centre-coloured 10-sets**, each carrying
+**3** patterns (one per second colour): `6 × 3 = 18`. Of the **15** unordered pairs of 10-sets, **6 are
+disjoint** → 12 ordered → `× 6` admissible colour choices = **72** — **exactly** the discordant-pair count
+measured by brute force *before* any of this structure was known. **Three routes, one number.**
+
+**And §6f's sharp criterion, evaluated: it FAILS explicitly.** The six 10-sets have 6 disjoint pairs, so
+they are **not** an intersecting family. The six sets show a visible pairing structure — sets 0,1 share two
+elements; 2,3 share four; 4,5 share four — **which is the next thing worth understanding on a future base**,
+since the criterion is a condition on exactly this object.
+
+## §6h — The two hazards found inside the instrument, and the second route
+
+**A module-identity trap, found by the agent in its own scratch directory.** It contained a file named
+`struct.py`, and `import struct` inside it resolved to **that file rather than Python's standard library**
+— *"a check that loads two versions of something and identifies them BY NAME"*, which `CLAUDE.md` records
+as the sharp form of that failure, sitting underneath **every measurement reported in this phase**. Nothing
+crashed and the SAT answers are self-certifying, but *"it probably did not matter"* is not a check. The
+verification therefore re-runs from a **clean directory**, and its **first act is to re-derive the lattice
+and the entire unit-edge set from scratch and compare set-wise** against what was built earlier. **If those
+disagree, everything in §6e–§6g is void.**
+
+**A control of its own that had gone blind, caught by the two-sided form and repaired.** With half the
+off-diagonal constraints removed, **0** pairs passed — the same as with all of them — so the difference was
+zero and the check could no longer discriminate. The repair is a **ladder**, and it shows the check alive:
+`0 constraints → 18,432 pairs; 1 → 6,144; 2 → 4,224; 3 → 2,688; 6 → 768; 12 → 0`. **Twelve constraints
+already suffice**, which is exactly why weakening to "half" taught nothing. Alongside it: predicted pair
+count `18,432` = counted `18,432`; the disequality test returns True on **200/200** synthetic pairs built
+to satisfy all 36 constraints; a pattern paired with itself correctly fails; and all six colour-relabellings
+give 0, consistent with the pattern set being closed under relabelling.
+
+**Six solver codebases on the one load-bearing UNSAT.** The completeness claim — *all 19 blocks leave no
+room* — is being re-run on **Cadical195, Glucose42, Minisat22, Lingeling, MapleCM and Mergesat3**, the 19
+patterns re-enumerated from scratch with Glucose4 to see whether a different solver finds the same set, all
+19 off-diagonal exhaustion UNSATs re-checked, and a **DRAT proof** written. Positive control carried: **with
+18 of the 19 blocks it must come back SAT**, or the code path cannot discriminate.
+
+**A second verdict route sharing almost nothing with the first.** For each of the **552** achievable
+interface patterns, hand the pattern to the solver as 67 unit clauses and ask whether the *other* half can
+dodge it; all 552 refusing is equivalent to the arena refusing. That replaces the enumeration of the second
+half's patterns **and** the pair comparison with direct solver calls on complete 25,567-vertex halves. **The
+two routes share only the completeness of the 552**, which is the thing six solvers are checking. 552
+solves, 32-way, about six minutes.
+
+**Status of the verdict itself.** The enumeration route says the arena is **not four-colourable**. It is
+being held as **a result in waiting, not a result**, precisely because it is the refusal direction — the
+suspect one for an object whose novelty lives in a derived law. **If it survives all of the above**, then
+since the record's field `K(√15)` is 5-sealed and every witness this project holds and can screen is
+5-sealed, `ρ₆₃`'s arena would be **the first five-chromatic unit-distance graph in a 6-open field** — the
+platform G48's mechanism requires, and FS-22's field reached by a different route. **That sentence is
+conditional on the verdict and on the void-check above, and must not be stated otherwise.**
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
