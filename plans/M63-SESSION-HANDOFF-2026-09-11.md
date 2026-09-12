@@ -694,6 +694,45 @@ one-off constructors, not loops.
 
 ---
 
+## §10 — THE BASE QUESTION IS ANSWERED: YES (2026-09-12, `5b257cd`)
+
+**The field contains the point Parts's lattice lacks.**
+
+```
+u = ( 1/3 − √3/2 − √11/6 ,  1/3 + √3/2 + √11/6 )      radius 2.061113
+```
+
+Its squared norm is **exactly `7/3 + √33/3`** — precisely the value the new angle requires — verified by the
+**independent** expansion rather than by the law that generated the census (rational part 1, radical part 0).
+All four arithmetic conjugates of its radius are positive, so a disk cut of the kind this project uses would
+admit it. Arithmetic half likewise yes and in abundance: **30,610** live radius sums in the searched grid for
+the new angle (78,866 for the record's, for scale) — a cross pair is a point and a scalar multiple of it, and
+pushing that scalar 2-adically close to 1 drives the valuation positive.
+
+**STATE THIS NARROWLY, and do not let it drift upward:**
+- **Last night's certificate is a fact about `[Parts2020a]`'s lattice, not about the angle.** On any base
+  containing that point the four-colouring cannot fire, at **either** prime.
+- **The rotation is UN-ELIMINATED, not alive.** The filter is one-sided: firing proves four-colourable,
+  silence proves nothing.
+- **The earlier result stands unchanged**: on Parts's lattice, at every radius, that arena is four-colourable
+  by a colouring checked edge by edge.
+- **No base exists.** One must be built: a lattice containing that point, closed under the three symmetries
+  the census needs, carrying two families at this angle, with enough unit-distance structure to refuse four
+  colours. None of that is done.
+
+**The seventh flattering defect of the arc, and its finder caught it against its own result.** A widened
+sweep of 781,284 realisable distances returned *"zero live families for the new angle, nine for the
+record's"* — which reads as a strong negative. **It is an artefact**: the generator restricted one coordinate
+to a sub-family that cannot express the witness above, so the sweep could not represent the object it was
+searching for. **A zero from an instrument that cannot see its target is indistinguishable from a real zero.**
+The constructed witness outranks it; both are in the record.
+
+**THE NEXT QUESTION, and it is a different kind of work:** *is there a lattice in this field containing that
+point, closed under the three base symmetries, carrying two families at this angle?* **That would be the
+first base this project builds FOR a rotation rather than inherits.**
+
+---
+
 ## §9 — Two measured facts that could stop being true, for whoever takes the next base
 
 *In the framing of the agent that measured them.*
