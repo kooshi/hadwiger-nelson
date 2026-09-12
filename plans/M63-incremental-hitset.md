@@ -26,6 +26,16 @@ correction-set family is large (C4a: 1,989 sets, 18.1 s per solve) *or* a level 
 atoms it is 0.2%, and D1b's own climb to its optimum is 95% oracle. Every earlier cost argument in this
 milestone was calibrated on stages of the third kind.
 
+**And the incumbent has already refuted itself, on disk, unread.** `build/m63d/D1b.log`'s launch
+header carries a pre-registered forecast: *"the L451 level at 450 atoms took 605 s over 16,683 asks, so
+20-90 min ASSUMING those ask means hold here."* The assumption **held** -- the refusing mean came in at
+0.0093 s, better than L451's implied 0.036 s per ask -- and the forecast is wrong by **2.5x the upper
+end and climbing**: 3.77 h at 20,027 iterations, 0.546 s per ask against L451's 0.036 s, at *fewer*
+atoms with *faster* asks. A forecast that named its assumption, had the assumption confirmed, and missed
+anyway, because it counted **asks**. That is the same error as the 27/73 by elimination, and it is
+stronger evidence than any replay of mine: it is the incumbent's own launch note failing against the
+incumbent's own log. (Found by Poros, card 4.)
+
 **The direct method, since the point was that nobody had measured it.** The S166 row is a whole fresh
 run of the real, unmodified `reduce_stage`, with the MaxSAT class wrapped in a timer that adds no
 behaviour — chosen over instrumenting a live job precisely because a resumed run would execute edited
@@ -52,6 +62,23 @@ iterations); what grows is the level `E`. The rebuild constructs one blocking cl
 and the SAT calls are a constant 374 at every iteration. **Four fifths of the enumeration wall is Python
 formula construction that never reaches a SAT call.** The consequence matters for what to build: in this
 regime *any* engine that stops rebuilding wins, and the core reuse is beside the point.
+
+**The law this implies, which forecasts where a ratio cannot.** Both mechanisms are O(|E|) per
+iteration, so the enumeration phase is quadratic in the size of the level:
+
+    enumeration wall-clock  ~  c . w* . |E|^2 / 2
+
+Fitting `elapsed = a + b.i^2` to two D1b ticks (i = 294 and i = 19,602) gives b = 3.36e-5, and the
+**held-out** points land within about 1%: i = 8,998 predicts 2,845 s against 2,861 observed (-0.6%),
+i = 12,177 predicts 5,108 against 5,171 (-1.2%), i = 17,308 predicts 10,194 against 10,312 (-1.1%). A
+linear fit is off by 56% and 108% at the same points. *Range of validity, stated:* below about i = 5,000
+the quadratic over-predicts by 13-16%, where the constant term and the oracle still matter -- the law
+describes the hitting-set component, and total runtime is oracle + component, which is exactly why §1's
+table splits by size. The completed levels on disk that calibrate it: |E| = 48, 82, 96, 360, 3,264, and
+D1b at 19,853 and rising.
+
+Adding each blocking clause **once** is precisely what turns |E|^2 into |E|, which is why the fix's
+0.1-0.2 ms per iteration is flat in |E| rather than merely smaller. (Law: Poros, card 5.)
 
 ## 3. Three engines, and the honest verdict is regime-dependent
 
@@ -154,10 +181,16 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   formula construction, the win does not depend on which of the two is chosen.
 - **Optimum-finding at large `Y` (C4a-scale) — do NOT adopt plain incremental**: measured 2.5× slower.
   Use `batch-adapt` (2.5× on the cold solve) until §8 settles the decision engine there.
-- **Target-refuted runs** (`--target`, which exit before any optimum) live wholly in the optimum-finding
-  regime and gain little or nothing from this work. **If phases F and G run mostly targeted decisions
-  rather than full level enumerations, the headline win does not apply to them** — worth settling before
-  integration.
+- **Phase G's dominant cost is exactly this regime, and the law above prices it.**
+  `plans/M63-phaseG-bases-and-rotations.md` says the accumulator a new base or rotation needs is *"the
+  complete level, ~10^4 s with no known ceiling"*, that *"the census is not the expensive part and never
+  was — the expense is P-G7"*, and that P-G7 is **"unpriced until phase F's ladder lands; do not start it
+  on a guess."** So: **manufacturing a first accumulator is quadratic in the level size under the
+  incumbent engine and linear under this one.** At D1b's current level that is 3.8 h against roughly two
+  minutes of oracle; at |E| = 10^5 it is about **four days against about eleven minutes**. A targeted run
+  that *refutes* exits cheaply anyway, and one that *succeeds* still enumerates the level at `w*` — so the
+  success branch, the one that yields a record candidate, pays the quadratic too. (I had hedged that
+  targeted runs might gain nothing; Poros checked the phase-G plan and the hedge was wrong.)
 
 ## 8. Not done, and what each would take
 
@@ -166,8 +199,12 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   a bound near 450 is expensive to build. Whether it wins over the full 1,566 — where batch reaches ~20 s
   per iteration — is unsettled. Result to be appended here.
 - **Integration into `reduce_stage`** — deliberately not done: two live runs were executing that file. A
-  ten-line change at a configuration freeze, plus the decision in §5.2. A resumed run rebuilds the engine
-  from its checkpoint, which the constructor already supports.
+  ten-line change at a configuration freeze, plus the decision in §5.2. Two details that will bite
+  whoever does it: (a) there are **three** append sites, not two — `state.blocked` is a *property* unioning
+  `minima` **and** `undecided`, so the undecided branch must also reach `block()`, and it does not look
+  like a blocking site; (b) a resumed run rebuilds the engine from its checkpoint and pays one cold solve,
+  which is the path the `adapt` flag exists for, and P-G7 runs are long enough to be killed. (Both from
+  Poros.)
 - **Registering the self-test** in `scripts/regen-check.sh` beside the other twelve — one line, left
   alone because that gate is shared and other writers are active.
 - **Weights above rung 1** cannot be read from a checkpoint; the module refuses rather than guessing.

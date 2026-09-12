@@ -291,6 +291,16 @@ class IncumbentHittingSet(_Engine):
         self.S.add_clause(clause)
 
     def _ensure_totalizer(self, ub):
+        """Count the KEPT atoms, to `ub`.
+
+        The cheaper-looking encoding counts the DROPPED atoms instead -- "keep at most b" is "drop
+        at least n - b", and the optimum drops only 73 of 576 where it keeps 503, so the counter
+        would be a fraction of the size. **It does not work, and the self-test caught it within a
+        minute of trying:** a totalizer is ONE-SIDED. Assuming `-rhs[k]` enforces `sum <= k`, but
+        asserting `rhs[m-1]` does not force the sum UP to `m`, so a lower bound on the dropped count
+        cannot be asserted against this encoding at all. A two-sided cardinality encoding would be
+        needed, and is not what `ITotalizer` is. Recorded here because the idea is a good one and
+        the next reader will have it too."""
         from pysat.card import ITotalizer
         if self.tot is None:
             self.tot = ITotalizer(lits=[a + 1 for a in range(self.n)], ubound=ub, top_id=self.n)
@@ -666,18 +676,25 @@ def _self_test():
             "vertices", "unit weights" in str(e), str(e).splitlines()[0][:70])
 
     # --- blocking clauses: the level-enumeration regime -------------------------
-    eb2 = ENGINES["incremental"](weights, corr=fam)
+    # Poros card 6. As first written this control let EACH engine block ITS OWN optimum, so the
+    # two clause streams could diverge legitimately and the comparison tested nothing; and the
+    # bounds can sit at w* for every iteration, in which case two constant sequences agree no
+    # matter what the engines do. Both are fixed: one stream is fed to both engines, and the
+    # sequence is required to MOVE before the agreement counts for anything.
     ea2 = ENGINES["batch"](weights, corr=fam)
+    eb2 = ENGINES["incremental"](weights, corr=fam)
     sa, sb = [], []
-    for _ in range(25):
+    for _ in range(40):
         oa, ob = ea2.optimum(), eb2.optimum()
         if oa is None or ob is None:
             break
         sa.append(oa.weight); sb.append(ob.weight)
-        ea2.block(oa.kept); eb2.block(ob.kept)
+        ea2.block(oa.kept); eb2.block(oa.kept)      # the SAME clause to both
     cb = compare(sa, sb)
     chk("blocking clauses too: the two engines agree while enumerating a level",
         cb["ok"] and cb["compared"] >= 20, f"{cb['verdict']} over {cb['compared']} iterations")
+    chk("...and that control is not vacuous: the level exhausts and the bound MOVES",
+        len(set(sa)) > 1, f"{len(set(sa))} distinct bounds, {sa[0]} -> {sa[-1]}")
 
     print(f"\n{'ALL CONTROLS FIRED' if not fails else 'FAILED: ' + ', '.join(fails)}")
     return not fails
