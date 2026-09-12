@@ -120,8 +120,10 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
 8. **`[Parts2020a]`'s 509-vertex record is reproduced and partly explained** (M62–M64). His base graph is his
    §5.6 closed form: 1,603 points in 92 orbits under his order-24 group ⟨ζ₆⟩ ⋊ Gal(K/ℚ), in which complex
    conjugation is itself a Galois element (`typem.parts_lattice`); our ρ₁₅ cross-edge law returns his two
-   connecting orbits with his edge counts. Extended to radius 2.44 (3,433 points, 179 orbits) the base
-   contains Heule-510 exactly (2,504 of 2,504 edges, none extra). The record is specified by his Tables 3–4
+   connecting orbits with his edge counts. Extended to radius 2.44 (3,433 points, 179 orbits) the
+   **arena** — base together with its rotated copy — contains Heule-510 exactly (2,504 of 2,504 edges, none
+   extra), split 375 base-side and 136 copy-side with the shared centre counted in both; **the base alone
+   cannot**, since it lies in K² and χ(K²) = 4 (row 57). The record is specified by his Tables 3–4
    (374 + 136 vertices sharing the centre; `data/m62/parts509-orbit-fillings.json`). His reduction stage is
    reproduced on every attested number, with complete level sets, about 150× faster than his implementation
    (M63). A descent cannot reach the record (his §6; nine certified 1-minimal descents land at 582–609), and

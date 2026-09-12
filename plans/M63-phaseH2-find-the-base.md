@@ -193,8 +193,19 @@ The structural reason it bit: his lattice is a congruence lattice whose coordina
 
 ## §9 — What NOT to do
 
-- **Do not pursue sixfold symmetry.** A `ζ₆`-closed module containing `u` has **rank 8 and ~1.9 × 10⁸
-  points**. Every base this route can build is `ζ₆`-asymmetric; that is a deliberate loss, stated as one.
+- **Do not close `ζ₆` around `u` ITSELF** — that module has **rank 8 and ~1.9 × 10⁸ points**, measured.
+  **This is a fact about `u`, not about sixfold symmetry, and the distinction is the mission** (product
+  owner's correction, 2026-09-12; an earlier version of this line banned the route outright and would have
+  forbidden the best idea in the file). `ζ₆` is precisely what *fills* a circle — a circle's `K`-points are
+  an orbit of the norm-one group of `K(i)`, whose generator is `ζ₆` — so it is why his lattice holds **30**
+  and last night's deliberately-`ζ₆`-asymmetric module holds **8**. **The live question, adopted from
+  `plans/M63-phaseH-a-base-for-a-rotation-RUN.md` §H12: not the cheapest module containing `u`, but the
+  coarsest `ζ₆`- and Galois-closed module containing SOME point of the circle `|p|² = (7+√33)/3`** — vary
+  the representative, not the module, and price each before building it (Gram matrix under the trace form
+  → covolume → predicted cut as volume/covolume, calibrated against `Λ_parts`'s 3,433 at radius 2.44).
+  `u` itself has denominators 2, 3 and 6, which is *why* it generates a fine lattice; another point of the
+  same circle need not. **If no representative is affordable, that is a finding about the rotation** —
+  *`ρ₁₅`'s circle is cheap to fill and this one is not* — and not a failed search.
 - **Do not pay for radius** (§6, endpoint bound).
 - **Do not re-open the joint-reduction route**, the small-half probe, or edge-thinning of his object. All
   closed with reasons: the joint route was proved worth at most five vertices; thinning his graph is a
