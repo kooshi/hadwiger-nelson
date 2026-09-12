@@ -182,6 +182,23 @@ the observation that his greedy discard of 36 was nowhere near optimal.
    needs its own adapted wording; `data/m62/m63-sweep-protocol.json` is a **frozen pre-registration and must
    NOT be edited** — a freeze records what was believed before the outcomes were read, and retro-editing one
    destroys its only property while leaving it looking intact.
+5. **THE CALIBRATION GATE HAS PASSED** (2026-09-11 23:15, log-attested, record pending). `tools/parts_diag.py
+   hismove` ran Parts's own recorded expansion — four orbits, 30 vertices at once — as a single candidate at
+   his incumbent of 375, and returned **`OPTIMUM FOUND: weight 373 (kept 373 atoms) at iteration 209`** in
+   **188 s**, zero undecided asks: **374 vertices against 375, so it reduces.** Both controls fired first
+   (`pin-agrees-everywhere`, 12 checks; the stage passed *base keeps the property, companion alone does
+   not*). **So the apparatus reproduces his recorded step**, the frozen rule's failure to choose his four
+   orbits is a **ranking** failure and not an apparatus failure, and **every inertness result on the large
+   half — the 89-candidate map included — stands as a fact about expansion rather than about our pipeline.**
+   The formal record is written only at `finish()`, which is why the job is being left to complete its level
+   enumeration rather than killed.
+6. **The cost of a reduction at this scale is the ENUMERATION, not the optimisation** — the same run found
+   its optimum in 188 s and has spent **79 minutes** enumerating the level, at 11,700 minima and climbing.
+   Two orders of magnitude. **Consequence for the rotation census and for every future cost model:** a run
+   that only needs to know *whether* a configuration admits a refusing selection can stop at the optimum; a
+   run that needs the accumulator `A = ⋃{M}` — the loop's actual state variable, and the thing **a new base
+   has none of** — must pay the whole enumeration. A census priced at optimum cost but needing accumulators
+   is wrong by a factor of a hundred.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
