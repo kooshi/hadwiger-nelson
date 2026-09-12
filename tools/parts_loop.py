@@ -527,10 +527,24 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
     W = expanded(A_tuples, cand)
     stage = PS.Stage(base, W, sorted(companion), side="L", rung=1, pin=True)   # ALWAYS pinned
     name = cand.name(base)
-    inv = check_invariants(base, A_tuples, companion, cand, stage, reference,
-                           anchor=None if anchor_tuples is None else
-                           sorted({tuple(l[1]): i for i, l in enumerate(stage.atom_labels)}[t]
-                                  for t in anchor_tuples))
+    lab = {tuple(l[1]): i for i, l in enumerate(stage.atom_labels)}
+    # THE SHARED CENTRE IS IN EVERY PUBLISHED MINIMUM AND IS NEVER AN ATOM. A published minimum is
+    # a list of VERTICES; the stage's atoms are its DELETABLE vertices, and the centre is the one
+    # vertex of the reduced half that is never deletable (`Stage.side_fixed`). Indexing the atom
+    # map by the anchor's tuples therefore raises `KeyError: (0, 0, 0, 0)` -- which it did, on the
+    # first run of this function. Drop the non-atoms, and CHECK they are exactly the stage's fixed
+    # vertices rather than assuming it: a tuple missing for any other reason means the anchor is
+    # not inside this stage, which is the thing the anchor exists to detect.
+    anchor_atoms = None
+    if anchor_tuples is not None:
+        fixed_t = {t for _, t in stage.vertex_labels(stage.fixed)}
+        stray = [t for t in anchor_tuples if t not in lab and t not in fixed_t]
+        if stray:
+            return {"candidate": cand.to_json(base), "name": name, "verdict": "not_run",
+                    "note": f"the anchor has {len(stray)} vertices that are neither atoms nor "
+                            f"fixed in this stage, e.g. {stray[:3]}: it is not inside this stage"}
+        anchor_atoms = sorted(lab[t] for t in anchor_tuples if t in lab)
+    inv = check_invariants(base, A_tuples, companion, cand, stage, reference, anchor=anchor_atoms)
     entry = {"candidate": cand.to_json(base), "name": name,
              "stage_identity": stage.identity(), "stage_fingerprint": stage.fingerprint(),
              "atoms": len(stage.atoms), "vertices": stage.present.bit_count(),
@@ -540,7 +554,7 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
         entry["verdict"] = "not_run"
         entry["note"] = f"invariants failed ({inv['verdict']}); no ask was made"
         return entry
-    new_atoms = sorted(i for i, l in enumerate(stage.atom_labels) if tuple(l[1]) in cand.vertices)
+    new_atoms = sorted(i for t, i in lab.items() if t in cand.vertices)
     if len(new_atoms) != cand.n_new:
         entry["verdict"] = "not_run"
         entry["note"] = (f"{len(new_atoms)} new atoms for {cand.n_new} new vertices: the candidate "
@@ -589,12 +603,32 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
                              config=cfg, log=log, wall_ask=wall_ask,
                              slice_conflicts=slice_conflicts)
         s.pop("state")
+        # **The secondary is a DECISION that becomes an ENUMERATION the moment it fires** (Poros
+        # card 20). When it succeeds it closes its restricted level -- 1,692 new minima on the
+        # first candidate -- and those new minima are exactly what the next accumulator is built
+        # from. So §3.3's rule ("a capped level halts the loop; no loop may start from a capped
+        # union") applies to the SECONDARY level too, and it was written for the primary. A
+        # partial set of new minima silently becoming the loop's state variable is the same
+        # failure one level down, and worse there, because it corrupts the accumulator rather
+        # than a report.
+        meth = (s.get("M_set") or {}).get("count", {}).get("method")
+        complete = (meth in ("exhaustive-level", "symmetry-collapsed")
+                    and not s["asks"]["undecided"])
         entry["secondary"] = {"verdict": s["verdict"], "bound": s["bound_render"],
                               "correction_sets": s["hypergraph"]["correction_sets"],
                               "asks": s["asks"], "cpu_seconds": s["cpu_seconds"],
-                              "new_minima": len(s.get("minima", []))}
+                              "new_minima": len(s.get("minima", [])),
+                              "level_method": meth, "level_complete": complete}
         entry["M_set_grew"] = {"reduced": "yes", "no-selection-at-target": "no"}.get(
             s["verdict"], "unknown")
+        if entry["M_set_grew"] == "yes" and not complete:
+            # It grew -- that much is sound, one witness suffices -- but the COUNT and the new
+            # material are partial, so neither may feed an accumulator.
+            entry["M_set_grew"] = "yes-but-level-truncated"
+            entry["secondary"]["note"] = (
+                "the restricted level did not close, so the new minima are a SAMPLE. Growth is "
+                "established (one witness is enough) but the count is a lower bound and this "
+                "entry may not seed a loop iteration -- §3.3's rule, applied to the secondary.")
         if s["verdict"] == "reduced":
             entry["new_minima_witness"] = s.get("minima", [])[:4]
     entry["cpu_seconds"] = round(time.process_time() - t0, 2)
@@ -639,14 +673,34 @@ def build_reference(base, A_tuples, companion):
 _W = {}                    # worker globals, inherited across fork rather than pickled per task
 
 
+def _init_worker(payload):
+    """Populate `_W` in a worker that did NOT inherit it.
+
+    **Python 3.14 changed the default multiprocessing start method on Linux from `fork` to
+    `forkserver`**, so a worker re-imports this module and sees an EMPTY `_W` -- the first launch
+    of the sweep died on `KeyError: 'base'` for exactly that reason. `run_map` now asks for a fork
+    context explicitly (safe here: no threads, and the parent holds a 4,513-point base that would
+    otherwise be pickled twelve times), and this initializer is the belt to that brace, so the
+    sweep survives a future default change or a platform without fork."""
+    if not _W:
+        _W.update(payload)
+        if _W.get("base") is None:
+            _W["base"] = P.Base(P.PARTS_R)
+
+
 def _run_one(job):
     block, bi, cand = job
     name = cand.name(_W["base"])
     path = os.path.join(_W["entries"], f"entry-{name.replace('/', '_')}.json")
-    if os.path.exists(path):                      # exact resume: an answered candidate is not re-asked
+    if os.path.exists(path):
         e = json.load(open(path))
-        e["resumed"] = True
-        return e
+        # Exact resume: an ANSWERED candidate is never re-asked. A `not_run` is not an answer --
+        # it is an invariant failure or a crash, and inheriting one would make a bug permanent
+        # across every relaunch after its fix. `unknown` IS an answer about a budget, but a
+        # relaunch is exactly how one raises a budget, so it is retried too.
+        if e.get("verdict") in ("yes", "no"):
+            e["resumed"] = True
+            return e
     logp = os.path.join(_W["entries"], f"log-{name.replace('/', '_')}.txt")
     with open(logp, "w") as lf:
         def log(*a):
@@ -728,7 +782,11 @@ def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuple
             log(f"    [{len(out)}/{len(work)}] {out[-1]['name']}: {out[-1].get('verdict')}  "
                 f"[{time.time()-t0:.0f}s]")
     else:
-        with ProcessPoolExecutor(max_workers=jobs) as ex:
+        import multiprocessing as _mp
+        payload = {k: (None if k == "base" else v) for k, v in _W.items()}
+        ctx = _mp.get_context("fork")          # see `_init_worker`: 3.14 defaults to forkserver
+        with ProcessPoolExecutor(max_workers=jobs, mp_context=ctx,
+                                 initializer=_init_worker, initargs=(payload,)) as ex:
             for e in ex.map(_run_one, work):
                 out.append(e)
                 log(f"    [{len(out)}/{len(work)}] {e['name']}: {e.get('verdict')}"
@@ -880,6 +938,18 @@ def _self_test(log=print):
     chk("the fill-only candidates are flagged as such",
         sum(1 for c in cands if "fill-only" in c.flags) == b["fill_only"],
         f"{sum(1 for c in cands if 'fill-only' in c.flags)} flagged")
+
+    # --- the anchor: a published minimum is a list of VERTICES, and the shared centre is never an
+    #     atom. Indexing the atom map by it raised `KeyError: (0, 0, 0, 0)` on the first real run.
+    labA = {tuple(l[1]): i for i, l in enumerate(st412.atom_labels)}
+    fixedA = {t for _, t in st412.vertex_labels(st412.fixed)}
+    notatom = [t for t in L374 if t not in labA]
+    chk("the anchor's non-atoms are EXACTLY the shared centre, which is fixed and never deletable",
+        notatom == [(0, 0, 0, 0)] and set(notatom) <= fixedA,
+        f"{len(notatom)} of {len(L374)} anchor vertices are not atoms: {notatom}")
+    chk("the anchor maps to |M|-1 atoms once the centre is dropped",
+        len([t for t in L374 if t in labA]) == len(L374) - 1,
+        f"{len([t for t in L374 if t in labA])} atoms for {len(L374)} vertices")
 
     # --- card 15: an `unknown` is never folded into a `no`, and the RATE is what must honour it
     planted = [{"verdict": "yes"}, {"verdict": "no"}, {"verdict": "unknown"},

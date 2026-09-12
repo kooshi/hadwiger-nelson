@@ -108,7 +108,25 @@ class EdgeStage:
                 f"the §5.9 pin triangle contributes {len(self.pin_edges)} edges, not 3: its three "
                 f"vertices are not pairwise adjacent in this graph, so pinning them to distinct "
                 f"colours is NOT without loss of generality. Pass pin=False to run unpinned.")
-        self.fixed_edges = set(self.pin_edges) if pin else set()
+        # **The pin is CONDITIONAL on its own three edges, not paid for by freezing them.**
+        #
+        # Freezing them is sound and was the first design, but it silently narrows the question:
+        # the optimum then found is the minimum over edge-subgraphs CONTAINING THE PIN TRIANGLE,
+        # which is >= the unrestricted edge minimum, and reporting it as "the exact edge minimum
+        # of the 509" would be a conditional minimum wearing an unconditional name (Poros card
+        # 18). That is the characteristic failure this repository's standard names, and it would
+        # reach a published number rather than an internal map.
+        #
+        # The repair costs nothing and is the device `parts_stage.Stage.cnf` already uses for a
+        # deletable pin VERTEX: make the three unit clauses conditional on the three pin edges
+        # being present. When all three are kept the triangle is a triangle, its three vertices
+        # take three distinct colours in every proper colouring, and fixing which is WLOG -- the
+        # full symmetry break, and its 62x. When any is dropped the clauses are vacuous and the
+        # ask is simply unpinned and slower. Sound in both branches, unrestricted in scope, and
+        # fast in the overwhelming majority of asks, since a minimum edge-subgraph drops 36-ish
+        # edges of 2442.
+        self.fixed_edges = set()
+        self.pin_conditional = bool(pin)
         self.deletable = [i for i in range(len(self.edges)) if i not in self.fixed_edges]
         self.atoms = [1 << i for i in self.deletable]
         self.atom_labels = [["E", list(self.label(self.edges[i][0])[1]
@@ -142,17 +160,20 @@ class EdgeStage:
                 for c in range(k):
                     cls.append([-s, -var(iu, c), -var(iw, c)])
         if self.pin_on:
+            # conditional on the triangle's three edges being present (see __init__)
+            guard = [-sel[pos[i]] for i in self.pin_edges]
             for j, w in enumerate(self.pin):
-                cls.append([var(loc[w], j)])
+                cls.append(guard + [var(loc[w], j)])
         return cls, sel, top, loc
 
     def pin_is_sound(self, trials=6, rng=None):
         """Plant the bug the pin can cause and watch the control fire.
 
-        The hazard is specific to an edge stage: if a pin EDGE were deletable, a selection
-        dropping it would be asked with the triangle broken and the unit clauses still in force,
-        and a colourable graph would come back `unsat`. So the control drops random edge sets and
-        requires the pinned and unpinned verdicts to agree."""
+        The hazard is specific to an edge stage: with an UNCONDITIONAL pin, a selection dropping a
+        pin edge is asked with the triangle broken and the unit clauses still in force, and a
+        colourable graph comes back `unsat`. So the control drops random edge sets -- **including
+        the pin's own edges, which is the case that matters and the one a fixed-pin design could
+        not even express** -- and requires the pinned and unpinned verdicts to agree."""
         import random
         rng = rng or random.Random(0)
         if not self.pin_on:
@@ -162,25 +183,33 @@ class EdgeStage:
         c2, s2, _, _ = bare.cnf()
         self._sel, bare._sel = s1, s2
         allA = list(range(len(self.atoms)))
-        # the bare stage has three MORE atoms (the pin edges); map by edge index
-        bpos = {e: j for j, e in enumerate(bare.deletable)}
+        pinA = [a for a, i in enumerate(self.deletable) if i in set(self.pin_edges)]
         rows = []
         for t in range(trials):
             drop = set(rng.sample(allA, min(3 + 4 * t, len(allA) - 1)))
+            if t % 2:                      # every other trial DROPS A PIN EDGE, on purpose
+                drop.add(pinA[t % len(pinA)])
             kept = [x for x in allA if x not in drop]
-            kept_e = [self.deletable[x] for x in kept] + sorted(self.fixed_edges)
             a = refuses(self, kept)
-            b = refuses(bare, [bpos[e] for e in kept_e])
-            rows.append({"dropped": len(drop), "with_pin": a, "without_pin": b, "agree": a == b})
+            b = refuses(bare, kept)        # same atom indexing now: no edge is frozen
+            rows.append({"dropped": len(drop), "dropped_a_pin_edge": bool(drop & set(pinA)),
+                         "with_pin": a, "without_pin": b, "agree": a == b})
         bad = [r for r in rows if not r["agree"]]
         return {"verdict": "pin-changes-answers" if bad else "pin-agrees-everywhere",
-                "checked": len(rows), "disagreements": bad[:4]}
+                "checked": len(rows), "rows": rows,
+                "dropped_a_pin_edge_in": sum(1 for r in rows if r["dropped_a_pin_edge"]),
+                "disagreements": bad[:4],
+                "note": "behavioural, and NOT discriminating on its own: exhibiting an "
+                        "unconditional pin's unsoundness needs a selection colourable only with "
+                        "two pin vertices equal, which random drops do not find. The structural "
+                        "guard -- the conditional CNF has no unit clause -- is what discriminates."}
 
     # --------------------------------------------------------------- reporting surface
     @property
     def side_fixed(self) -> int:
         """The FIXED EDGE count, not a vertex constant: `e(M) = w* + side_fixed`. The vertex side's
-        `+1` is the shared centre and has no meaning here (§O4.1)."""
+        `+1` is the shared centre and has no meaning here (§O4.1). With a conditional pin nothing
+        is frozen, so this is zero and `e(M) = w*` exactly."""
         return len(self.fixed_edges)
 
     def fingerprint(self):
@@ -309,17 +338,58 @@ def _self_test(log=print):
     chk("d6.7 the edge stage is 509 vertices and 2442 edges",
         len(est.present_vertices) == 509 and len(est.edges) == 2442,
         f"{len(est.present_vertices)} vertices, {len(est.edges)} edges")
-    chk("d6.7 its atoms are edges: 2442 = 2439 deletable + 3 pinned",
-        len(est.atoms) == 2439 and est.side_fixed == 3,
+    chk("d6.7 every edge is an atom: 2442 deletable, 0 frozen, so w* IS the edge count",
+        len(est.atoms) == 2442 and est.side_fixed == 0,
         f"{len(est.atoms)} atoms + {est.side_fixed} fixed")
-    chk("d6.7 every atom weighs exactly one edge (so w* + 3 is the edge count)",
+    chk("d6.7 every atom weighs exactly one edge",
         all(m.bit_count() == 1 for m in est.atoms))
 
-    # d6.2 -- a pin edge may not be offered to the sweep
-    chk("d6.2 pin-edge-protected: the three pin edges are fixed, never atoms",
-        set(est.pin_edges) == est.fixed_edges and
-        not (set(est.pin_edges) & set(est.deletable)),
-        f"pin edges {est.pin_edges}")
+    # d6.2, in the form card 18 forced. Freezing the pin edges was sound but narrowed the
+    # question to subgraphs CONTAINING the triangle -- a conditional minimum that would have been
+    # reported as the exact edge minimum. The pin is now conditional on its own three edges, so
+    # the search is UNRESTRICTED, and the control is no longer "the pin edges are protected" but
+    # "dropping a pin edge is SAFE".
+    chk("d6.2 the pin edges ARE deletable, so the optimum is the unrestricted edge minimum",
+        set(est.pin_edges) <= set(est.deletable) and not est.fixed_edges,
+        f"pin edges {est.pin_edges} are atoms; nothing frozen")
+    unc = est.pin_is_sound()
+    chk("d6.2 the pin agrees with an unpinned stage on selections that DROP a pin edge",
+        unc["verdict"] == "pin-agrees-everywhere" and
+        any(r["dropped_a_pin_edge"] for r in unc.get("rows", [])) is not None,
+        f"{unc['verdict']} ({unc.get('checked')} checks)")
+
+    # d6.2's DISCRIMINATING control, and the honest story of why it is structural.
+    #
+    # The behavioural plant -- restore the unconditional pin and watch the agreement check go red
+    # -- was written first and DID NOT FIRE. That is worth recording rather than deleting: the
+    # unconditional pin is unsound in principle (it forbids colourings in which two pin vertices
+    # share a colour, which is only WLOG while the edge between them is present, and on the
+    # VERTEX side that bug reported a 373-vertex subgraph one below the world record on
+    # 2026-09-10) but exhibiting it needs a selection that is colourable ONLY with two pin
+    # vertices equal, and random drops do not find one. A behavioural control that cannot be made
+    # to fail is not a control.
+    #
+    # So the guard is STRUCTURAL and deterministic: the conditional CNF contains NO unit clause at
+    # all -- edge clauses have length 3 or 2, vertex clauses 4, guarded pin clauses 4 -- while an
+    # unconditional pin is exactly three unit clauses. That plant fires every time.
+    cls0, _, _, _ = est.cnf()
+    units = [c for c in cls0 if len(c) == 1]
+    chk("d6.2 the conditional CNF has NO unit clause: every pin clause is guarded",
+        not units, f"{len(units)} unit clauses")
+
+    class _UnconditionalPin(EdgeStage):
+        """The bug, restored verbatim: the pin as three unconditional unit clauses."""
+        def cnf(self, k=4):
+            cls, sel, top, loc = EdgeStage.cnf(self, k)
+            for j, w in enumerate(self.pin):
+                cls.append([loc[w] * k + j + 1])
+            return cls, sel, top, loc
+    bad_cls, _, _, _ = _UnconditionalPin(vst).cnf()
+    bad_units = [c for c in bad_cls if len(c) == 1]
+    chk("d6.2 CONTROL: the planted unconditional pin IS caught, as three unit clauses",
+        len(bad_units) == 3, f"{len(bad_units)} unit clauses in the planted version")
+    chk("d6.2 CONTROL: and the behavioural check is reported as NOT discriminating here",
+        True, "random drops do not exhibit the unsoundness; the structural guard is what does")
 
     # d6.1 -- the planted negative: an edge stage over the WRONG graph fails before any ask
     wrong = PS.Stage(base, V.load_lattice(os.path.join(REF11, "v374e1860.vtx")),
@@ -365,15 +435,24 @@ def centre_critical(base=None, log=print) -> dict:
     criticality is the one hypothesis §O6's floor is missing. An answer of "not colourable" would
     mean the record is NOT vertex-minimal, which is a loud finding rather than a detail."""
     base = base or P.Base(P.PARTS_R)
-    st = record_stage(base)
-    keep = st.present & ~(1 << st.A.centre)
-    sub = PS.Stage(base, [t for t in st.vertex_labels(keep & ((1 << st.A.n) - 1))
-                          and [x[1] for x in st.vertex_labels(keep) if x[0] == "L"]],
-                   [x[1] for x in st.vertex_labels(keep) if x[0] == "S"], side="LS", rung=1,
-                   pin=False)
-    v = PS.refuses(sub, list(range(len(sub.atoms))))
+    vst = record_stage(base)
+    # Deleting a VERTEX asks the same question as deleting every edge at it, because an isolated
+    # vertex can always be coloured. So this is the edge stage with the centre's edges dropped --
+    # NOT a rebuilt vertex stage. Two reasons, and the first bit on the first run:
+    #   * `typem.Arena` locates the rotation centre as the point at the origin and raises
+    #     `StopIteration` if it is absent, so a stage without the centre cannot be built at all;
+    #   * the ask must be UNPINNED. §5.9's triangle has the centre as one of its three vertices,
+    #     so dropping the centre's edges breaks the triangle and the symmetry break stops being
+    #     without loss of generality -- the exact hazard §O4(2) is about, arriving from the other
+    #     side.
+    est = EdgeStage(vst, pin=False)
+    c = vst.A.centre
+    kept = [a for a, i in enumerate(est.deletable) if c not in est.edges[i]]
+    dropped = len(est.deletable) - len(kept)
+    v = refuses(est, kept)
     out = {"verdict": "centre-critical" if v == "sat" else "centre-NOT-critical",
-           "ask": v, "vertices": sub.present.bit_count(),
+           "ask": v, "vertices": len(est.present_vertices) - 1,
+           "centre_edges_dropped": dropped, "pinned": False,
            "floor": 1018 if v == "sat" else 1016,
            "note": ("the centre is critical too, so every one of the 509 vertices is, and the §O6 "
                     "floor rises from 1016 to 1018" if v == "sat" else
@@ -426,6 +505,28 @@ def main():
                "deletable": len(est.atoms), "fixed_edges": est.side_fixed,
                "lower_bound_on_e_min": len(crit) + est.side_fixed,
                "published_upper_bound": 2406, "published_original": 2442,
+               # POROS'S FORCED INEQUALITY, asserted rather than read off afterwards. Their
+               # 36-edge reduction is itself a refusing subgraph, so it contains every critical
+               # edge, so c <= 2442 - 36 = 2406. A count above that means either this instrument
+               # is wrong or their footnote is -- a CONTROL against published prior art, free,
+               # and a calibration of a brand-new instrument against something external.
+               "external_calibration": {
+                   "claim": "c <= 2406, because [deGreyParts2023]'s 36-edge reduction is itself "
+                            "a refusing subgraph and therefore contains every critical edge",
+                   "c": len(crit) + est.side_fixed, "bound": 2406,
+                   "verdict": ("calibration-holds" if len(crit) + est.side_fixed <= 2406
+                               else "calibration-FAILED"),
+                   "if_failed": "either this instrument is wrong or their footnote is; it is a "
+                                "control and not a finding either way",
+                   "fork": ("c = 2406 exactly: every individually-removable edge is one of their "
+                            "36, and since they report the 36 JOINTLY removable, the exact edge "
+                            "minimum IS 2406 and the question closes -- their non-exhaustive "
+                            "search was exhaustive after all"
+                            if len(crit) + est.side_fixed == 2406 else
+                            "c < 2406: there are individually-removable edges they missed, the "
+                            "minimum lies in [c, 2406], and the gap is the hitting set's to "
+                            "close. It does not collapse on its own -- individually removable is "
+                            "not jointly removable, so c is a floor and not the answer")},
                "degree_floor": cc, "asks": orc.stats(),
                "cpu_seconds": round(time.process_time() - t0, 1),
                "droppable_edges": [[list(est.label(est.edges[est.deletable[a_]][0])[1]),

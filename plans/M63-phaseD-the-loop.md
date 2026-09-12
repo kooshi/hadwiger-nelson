@@ -1579,3 +1579,412 @@ in your report — we could have 'achieved' something that exists"*; the handlin
 the mismatch into the plan so `git log` does not read as a lie rather than rewriting history under three
 live agents, with the rule drawn from it going to every agent on the branch; and reporting a failed probe
 of my own and keeping it as a planted control rather than deleting it.
+
+---
+
+## §R3 — What phase D ran, what fired, and every registered prediction scored
+
+*Written by the phase D implementer, 2026-09-11. Current state only: a corrected claim replaces the
+claim, and the story of the correction is in the commit messages. **Items still running at the time of
+writing are marked `[RUNNING]` and carry what is known so far**, never a projection.*
+
+### R3.0 — The headline, in four lines
+
+- **No record.** Nothing reached 373 vertices on the large half, so nothing assembles below 509. The
+  exact edge minimisation is `[RUNNING]`; its lower bound is already far below the published 2,406,
+  which is a reason to finish the computation and **not a number to report**.
+- **Acceptance clause 2(c)'s phenomenon is observed**: expanding by one orbit produced **1,692 new
+  minima at fixed `|M| = 374` and fixed rung 1**, every one using the new material. **The clause is
+  not yet met**: the candidate came from the sweep's seeded random block, not from our expansion
+  rule, and the clause's full form requires the rule to have chosen the move. Those two sentences
+  belong adjacent wherever this is summarised.
+- **The replay controls were not well posed, and now are.** His companion changes as his loop runs;
+  see R3.4. This is the phase's most portable finding.
+- **The cost regime is cheap** (R3.1), so nothing in §5's order of work was re-planned.
+
+### R3.1 — D0, the cost probe, and the two predictions it scores
+
+CPU seconds (user + sys), minimum of three runs, **desktop, 32 cores, load average 9.0 with seven
+other solver jobs running**. `data/m62/m63-D0-cost-probe.json`, `…-L451.json`.
+
+| stage | cold refusing | near-optimal refusing | near-optimal colourable |
+|---|---|---|---|
+| `A412` against `S136` (minimum 374) | 9.41 s | **0.138 s** | 0.055 s |
+| `A451` against `S136` (minimum 375) | 4.62 s | **0.144 s** | 0.036 s |
+| *the joint stage, for scale* | — | *1.758 s* | *0.170 s* |
+
+**Verdict: the cheap regime, by a factor of thirteen.** §2's branch (*"near the joint stage's rates →
+stop and report; every forecast is wrong"*) does **not** fire. The edge minimisation stays in D.
+
+- **P-D0a MET.** Refusing asks ≤ 0.15 s CPU; measured 0.138 and 0.144.
+- **P-D0b FALSIFIED**, decisively. Predicted ≥ 3× more expensive at the 374 level than the 375
+  level; **measured ratio 0.96** — the tighter stage is marginally *cheaper* warm. Poros's matching
+  hunch `the-last-iterations-are-the-expensive-ones` dies with it. **What survives, stated
+  precisely:** the *cold* asks do split that way, 9.41 s against 4.62 s, so tightness shows in a
+  cold solver and vanishes once it is warm. A prediction that dies leaving a mechanism standing is
+  worth more than one that passes.
+- **Holding one oracle, measured rather than asserted:** cold 9.41 s against warm 0.138 s on the same
+  stage and the same question is **68×**.
+- **Control d1.3 fires on both stages, free and with no plant** (`contains-a-known-minimum`): each
+  contains a published minimum of his, which refuses, and which minus one vertex is colourable.
+
+### R3.2 — D0.5, the target knob, and a derivation that was right and then incomplete
+
+Built as an optional `target=` on `reduce_stage`; `target=None` is the previous behaviour byte for
+byte. Phase C's implementer approved it with four conditions, all met (commit `7f8fb88`).
+
+**Control d0.1 fires both ways** on a stage whose answer is known in advance (the S half's order-6
+rung, minimum 142 vertices, one minimum): `target=141` returns the identical level; `target=140`
+returns `no-selection-at-target` with lower bound exactly 141.
+
+**P-D10 scored, and the registered form was wrong for an instructive reason.** Registered: a targeted
+failure costs < 1/3 of a full reduction. Measured on that rung: **22.0 s against 24.2 s, 91%**. The
+mechanism is a derivation, not a measurement:
+
+> **The target's saving is exactly the level enumeration, and nothing else.** The MaxSAT lower bound
+> must climb to `w*` before it can exceed `w* − 1`, so the entire harvest is paid either way.
+
+So the saving is large when the level is large and nil when it is a singleton — and that rung has one
+minimum. **Poros's correction (card 16), adopted:** when the secondary decision fires it *enumerates*
+the restricted level, and the expanded level splits exactly as old ⊔ new, so the pair enumerates the
+new part while an untargeted run enumerates old ⊔ new. **The saving is therefore `old / (old + new)`,
+measured per candidate**, not the near-total the first derivation implied. It still earns its keep,
+and it is what makes clause 2(c) observable at all.
+
+**A defect the control caught.** As first written the refuted record rendered as
+`141 <= minimum <= 165` — honest as an interval and containing the one word the milestone bans there.
+`Bound` now carries an optional `target`, and the word *minimum* is unreachable in that branch **by
+construction**. A targeted bound is also never `closed`, even at `lower == upper`.
+
+### R3.3 — The menu census, and a class of candidate the plan's menu was missing
+
+Solver-free, all 229 base orbits, degrees read from the **assembled stage**. On `A412`:
+
+| reading of his admission sentence | reserve | partially occupied | fill-only | **menu** | shoulder at 3 |
+|---|---|---|---|---|---|
+| (a) strict | 49 | 17 | 5 | 54 | 20 |
+| **(b) literal-internal — adopted** | **57** | **17** | **5** | **62** | **26** |
+| (c) literal plus cross | 57 | 17 | 5 | 62 | 26 |
+
+- **The fills exemption is real and the menu moved 57 → 62.** His degree test governs membership of
+  the *reserve*; §5.6 gives partially filled orbits their own priority and no degree test, and two of
+  the four orbits in his one recorded move were fills. Five fill-only candidates are invisible to a
+  degree-built menu. Found by the small-half probe on a side where it is vacuous, and flagged to this
+  side where it is not.
+- **Poros's 49 and 57 reproduce exactly.** Its shoulder count of 23 does not: that was measured under
+  the reading it withdrew, and the number is **26**.
+- **P-D14 stays negative**: zero orbits outside his `r = 2` disk are admissible under *any* reading,
+  so the closed-list claim is robust to the reading rather than an artefact of the strict one.
+- **P-D13 scored NEGATIVE.** Predicted the large half's menu grows by roughly the factor the small
+  half's did (6 → 12, i.e. ×2); falsifier "less than 1.3× or more than 3×". Measured **49 → 57 =
+  ×1.16**, below the falsifier's floor.
+
+**The sweep is therefore 62 + 26 = 88 candidates, plus the identity control = 89 jobs.**
+
+### R3.4 — THE COMPANION FINDING: his partner graph changes as his loop runs
+
+**The most portable result of the phase, and it corrects an acceptance item rather than an
+implementation.**
+
+Reducing his `v451e2400` against his `v136e564` at the order-3 rung returns **376 vertices — his
+attested number exactly**, closed, zero undecided, 63 CPU seconds. But **82 minima against his 96**, an
+accumulator of **433 against his 451** (short by 18, with nothing of ours outside his), and an L-edge
+range of **1908–1947 against his 1890–1947** (top exact, bottom short by 18).
+
+**The count convention does not explain it:** all three of `canonical_counts`'s conventions return 82,
+each with a trivial stabiliser, and the direction is wrong anyway since quotienting lowers a count.
+
+**The rung does not explain it either, and the object that settled that was already on disk.** Poros
+measured the stabiliser of his own published `v376e1890` — the sparsest 376 minimum, sitting exactly
+at the 1890 bottom of his range — at order **3**, and the base group has only two order-3 elements,
+hence one order-3 subgroup. So his state 1 is the order-3 rung, and so is ours. *(Calibrated first:
+the same computation returns 2 for `v375e1920`, which is his own printed parenthetical, and 12 for
+`v403e2112`, which is phase C's §S.2 #2.)*
+
+**The decisive run, 50 seconds:** `v376e1890 ∪ ρ·g(v136e564)` is **colourable in 24 of 24 frames**. It
+refuses against our companion in none. So our level is **not** incomplete — it contains every
+order-3-invariant selection that refuses against *this* companion — and his row used another.
+
+**The companion hunt, eight published small halves × 24 frames, positive control first:**
+
+```
+CONTROL  v375e1920 + v136e564   refuses 12 of 24   -- GREEN
+         v136e564 (136)          0 of 24
+         v141e594 (141)          0 of 24
+         v150e639 (150)          0 of 24
+         v159e646 (159)          0 of 24
+         v166e774 (166)         24 of 24   <<<  HIS COMPANION
+```
+
+**`v166e774` is the small side's ACCUMULATOR, not one of his minimal small halves** — and that is
+precisely what his alternating loop implies: at state 1 the small side had not yet been reduced, so
+the partner was its accumulator; by state 2 it had been, which is exactly why *that* row reproduced for
+us literally, down to the identical 403-vertex accumulator. The 24-of-24 rather than 12-of-24 is
+itself informative: the accumulator is symmetric enough that orientation stops mattering.
+
+> **The correction, in its general form:** *the companion is whatever his loop held at that moment,
+> and it changes as the loop runs.* Comparing our numbers against a row of his table without
+> reconstructing that state is comparing two different problems.
+
+**Independent confirmation from a probe launched to test the dead hypothesis, and kept as a result:**
+the **complete order-2 and order-6 rung census** of that stage — where M64 §R10 had only partial values
+— contains no rung returning 96 minima with a 451-vertex accumulator. Two order-2 rungs give 376 with
+**1,302** minima and accumulator 431; two give 375 with 40; one order-6 rung gives 376 with 14.
+`build/m63d/rungprobe.json`.
+
+**D1.a re-run against the identified companion: `[RUNNING]`** (`m63-D1a-A451-rung3-vs-A166.json`). If
+it returns 376 with 96 minima and the accumulator equal to his 451, that row reproduces **in full** and
+the 82-against-96 gap was never a defect but a wrong pairing — which is worth more in the record than a
+gap avoided.
+
+### R3.5 — D1.b, the 374 level
+
+`[RUNNING]`, past its optimum: **`w* = 373`, so `|M| = 374` vertices — his attested number** — with
+zero undecided asks and 7,666 minima enumerated so far against his 1,092. **P-D5** (*`|{M}|` equals
+1,092 under none of the three conventions*) is scored at the close; the raw count already exceeds
+1,092 sevenfold, and R3.4 says a cross-row comparison of `|{M}|` is only meaningful once the row's
+companion is pinned.
+
+### R3.6 — D5, our own 509, and D6's edge minimisation
+
+**D5 lands, control d5.1 fires.** The assembled `L374 ∪ ρS136` is **509 vertices and 2,442 edges** and
+**refuses four colours**, with the decomposition reconciling to his `1860 + 564 + 12 + 6`: the stage
+books the twelve centre-to-S edges to the L side and so reads `1860 + 552 + 30`, of which **18 cross
+edges are off the centre** — his 18 exactly.
+
+**The edge minimisation is the same reduction with edges as atoms** (§M collapse 1), so `reduce_stage`
+needed no change at all. Three things did not carry and each is handled: the `+1` is a vertex identity
+and the edge constant is the fixed-edge count; the object stays a unit-distance graph (such a graph
+requires every *edge* to be a unit pair, never that every unit pair be an edge — the convention
+`[deGreyParts2023]` fn. 2 itself uses); and the pin, below.
+
+**Card 18, and it is the fifth instance of a pattern worth naming.** Freezing the three symmetry-break
+edges is sound but makes the optimum *the minimum over edge-subgraphs containing that triangle* —
+a conditional minimum that would have been published as an unconditional one. **The repair: the three
+unit clauses are conditional on their own three edges being present.** Triangle intact ⟹ three distinct
+colours in every proper colouring ⟹ fixing which is WLOG ⟹ the full break and its 62×. Any pin edge
+dropped ⟹ the clauses are vacuous and the ask is simply unpinned. **Sound in both branches,
+unrestricted in scope**, fast on all but a vanishing fraction of asks, and `side_fixed = 0` so `w*` *is*
+the edge count with no constant to get wrong.
+
+**Poros's forced inequality, installed as an assertion before the number existed:** their 36-edge
+reduction is itself a refusing subgraph, so it contains every individually critical edge, so
+**`c ≤ 2406`**. A count above that means our instrument or their footnote is wrong — **a control, never
+a finding**, and it stops the run.
+
+**§O6's degree floor** is an assertion rather than a remark: every vertex critical in the 509 has
+degree ≥ 4 in every refusing edge-subgraph, so `e_min ≥ 1016`, and `≥ 1018` once d6.8 confirms the
+centre. Any returned object with a degree-3 vertex reads `edge-sweep-impossible`.
+
+**Phase 1 `[RUNNING]`:** at 506 of 2,442 answered, **378 critical and 128 individually removable**. If
+that rate holds the lower bound lands far below the published 2,406. **That is a reason to finish the
+computation and not a number to report** — individually removable is not jointly removable, so the
+count is a floor and the hitting set is what closes the gap.
+
+### R3.7 — D6, the outcome map
+
+`[RUNNING]`, 89 jobs at 12 workers. **The frozen protocol** (`data/m62/m63-sweep-protocol.json`,
+committed **before the first candidate's outcome was read**) fixes the seven rankings and that all
+seven are reported rather than the best; the primary and secondary outcome variables; the ban on
+grading any predictor against itself; the in-sample / held-out roles with the split's weakness stated;
+the product owner's pre-declared full-level subset with its seed; the block order and seed; and that
+the shoulder is its own result with its own enumeration.
+
+**The first candidate, alone and timed** — `(6,2,8,0)` adding 12 vertices, a 559-vertex working graph:
+
+| question | answer | CPU |
+|---|---|---|
+| primary — beat 374 vertices? (target 372) | **`no-selection-at-target`**, lower bound 373, 0 undecided | 133.2 s |
+| secondary — did `{M}` grow? | **`reduced`: minimum 373 keeping a new atom — 1,692 new minima** | 186.3 s |
+
+**Card 16 answered by measurement: the ratio is 1.4**, not the 2× I asserted nor the 20× feared. Scored
+as Poros scores it — **half measured**: this candidate *grew*, so the restricted search found an optimum
+rather than certifying non-existence, and the expensive polarity is settled by the first non-growing
+candidate. **The product owner's pre-declared subset therefore goes unused**, and stays in the frozen
+protocol as the record of what we would have done.
+
+**Why the secondary is cheap at all — worth a line because a later phase would rediscover it by
+getting it backwards:** a restricted run and a plain run over one stage share every **graph** fact
+(phase 1's census, the correction sets) and no **search** fact, so the second question inherits the
+whole harvest and discards only the minima, `w*`, the undecided list and the counter.
+
+**The full transfer lattice**, derived independently here and by the small-half probe and Poros:
+
+| artifact | travels | why |
+|---|---|---|
+| a decided ask | **both ways, verbatim** | colourability of `S ∪ C` depends on `S` and `C` alone |
+| a refusing selection (an incumbent) | upward | `W'[S] ∪ C = W[S] ∪ C` when `S ⊆ atoms(W)` |
+| non-criticality | upward | a superset of a refusing selection refuses |
+| criticality | **downward only** | new material substitutes for the atom |
+| a correction set | **downward only** | importing one upward can exclude a genuine record |
+
+**Card 20, adopted:** the secondary is a decision that *becomes an enumeration the moment it fires*, and
+its new minima are exactly what the next accumulator is built from — so §3.3's "a capped level halts the
+loop" applies to the **secondary** level too. Implemented: a secondary whose level did not close reads
+`yes-but-level-truncated` — growth is established, one witness suffices, but the count is a lower bound
+and the entry may not seed a loop iteration.
+
+### R3.8 — The pattern, and the defects the controls caught
+
+**Poros's pattern, five for five: an optimisation that is correct about *cost* can be silently wrong
+about *meaning*, and each instance is invisible in the number it produces.** (1) a degenerate outcome
+inviting a softer substitute; (2) the target knob hiding the secondary outcome; (3) a wall hit reading
+as a refusal; (4) the identity control falling through to an *empty* restriction, silently reverting
+the cheap decision to the full enumeration — **found by looking for it rather than by being told**; (5)
+the pin narrowing the edge minimum to a conditional one, the first instance to reach a publishable
+number.
+
+**Defects found and fixed, each by a control or by its own output:**
+
+| defect | how it surfaced | status |
+|---|---|---|
+| the edge oracle assumed every edge touching the companion half had one endpoint in the base half | died on the companion's own 564 internal edges | fixed |
+| the restriction-identity control filtered the larger stage's integer edge pairs through the smaller stage's bitmask | **the control exists to catch this class and failed on it**, 1515 against 2442 | fixed; 2442 = 2442, and discriminating at 2414 |
+| the anchor mapping indexed the atom map by a published minimum's vertices | `KeyError: (0,0,0,0)` — the shared centre is in every minimum and is never an atom | fixed, with the non-atoms checked to be exactly the fixed vertices |
+| a `not_run` entry was inherited by the resume | would have made a bug permanent across every relaunch after its fix | fixed: only `yes`/`no` resume |
+| `ProcessPoolExecutor` workers saw an empty state | **Python 3.14 changed the default start method on Linux from `fork` to `forkserver`**, so workers re-import and never inherit; the symptom (`KeyError: 'base'`) points nowhere near the cause | fixed with an explicit fork context plus an initializer. **This belongs with the environment notes, not this milestone: it will bite every multiprocessing user in this repository under the new interpreter** |
+| **d6.2's behavioural plant did not fire** | restoring the unconditional pin left the agreement check green | **replaced, not patched.** Exhibiting that unsoundness needs a selection colourable *only* with two pin vertices equal, which random drops do not find. The guard is now structural and deterministic — the conditional CNF has **no** unit clause, the unconditional one has exactly three — and the record states the behavioural check is **not discriminating here** rather than keeping a tick it did not earn |
+
+**Three counts, three eighteens and a coincidence resolved:** 18 vertices missing from our accumulator,
+18 edges missing at the low endpoint — both explained by the wrong companion, not by a rung.
+
+### R3.9 — A defect in an inherited control: `pin_is_sound` is vacuous at every rung above 1
+
+**Diagnosis.** `parts_stage.Stage.pin_is_sound` identifies the atoms carrying a pin vertex by each
+atom's **lowest set bit**. At rung 1 an atom is one vertex and that is right. At any higher rung an
+atom is a symmetry orbit, and a pin vertex need not be its lowest-numbered member — so the control
+finds no pin atoms, returns the benign verdict `pin-is-fixed`, and **checks nothing**. Measured:
+
+```
+rung 1:  450 atoms   pin atoms by LOWEST bit 2   by ANY bit 2   -> control RUNS
+rung 3:  150 atoms   pin atoms by LOWEST bit 0   by ANY bit 2   -> control SILENTLY SKIPS
+```
+
+**Scope.** Both of today's order-3 runs printed `pin control: pin-is-fixed (0 checks)`; the rung-1 run
+printed `pin-agrees-everywhere (12 checks)`. **The symmetry break is still sound** — `Stage.cnf` makes
+the pin clause conditional on the atom's presence, which is the mechanism, not the control — so no
+number is retracted. But a trust receipt that fails open is worse than none, which is this
+repository's own rule.
+
+**The fix, for whoever owns `tools/parts_stage.py` after phase C closes** (reported rather than
+edited, because phase C is mid-close in that file):
+
+```python
+# in Stage.pin_is_sound, replace
+pin_atoms = [ai for ai, m in enumerate(self.atoms)
+             if ((m & -m).bit_length() - 1) in self.pin]
+# with
+pin_atoms = [ai for ai, m in enumerate(self.atoms)
+             if any((m >> v) & 1 for v in self.pin)]
+```
+
+**And the planted control that fails on the current code**, which is the part that matters: build the
+`A451`/`S136` stage at `rung_maps` of order 3, assert `pin_is_sound()["checked"] > 0`. On today's code
+it is 0 and the assertion fires; with the fix it is positive. A control that has not been seen to fail
+is not known to work.
+
+### R3.10 — Predictions scored
+
+| # | verdict |
+|---|---|
+| P-D0a | **MET** — refusing asks 0.138 / 0.144 s, under the 0.15 s bar |
+| P-D0b | **FALSIFIED** at ratio 0.96 against a predicted ≥ 3; the cold-ask form survives |
+| P-D10 | **FALSIFIED as registered** (91%, not < 1/3) and **replaced by a derivation**: the saving is the level enumeration, refined by card 16 to `old/(old+new)` per candidate |
+| P-D13 | **NEGATIVE** — the menu grew ×1.16 (49 → 57), below the falsifier's 1.3 floor |
+| P-D14 | **NEGATIVE**, as scored before the phase opened; re-derived here under all three readings |
+| P-D5, P-D6, P-D7, P-D7b, P-D8, P-D9, P-D2, P-D3, P-D3b, P-D4, P-D12, P-D15 | `[open at the time of writing]` — each waits on a run in flight |
+| P-D1 | **not run** — D2, his §5.10 indicators, is not implemented (R3.11) |
+| P-D11 | the small half's menu belongs to the scoped probe, not to this phase |
+
+### R3.11 — What phase D did NOT do, stated as such
+
+- **D2, his own published ranking device, is not implemented.** §5's order of work puts it after the
+  replays, and the replays were overtaken by R3.4's companion finding, which had to be settled first
+  because it decides what a replay comparison *means*. **P-D1 is unscored.**
+- **D3's `look_ahead`, `many_then_trim` and the ranking, and therefore the rule's freeze commit and
+  D4's loop run, are not implemented.** Acceptance clause 2(b) — the rule reaching `|M| ≤ 374` from our
+  375-level accumulator — is **not met and not attempted**.
+- **The `A403` held-out map is not run**, which follows: it may only be computed after the rule is
+  frozen, and there is no frozen rule.
+- **`look_ahead_quantities` (FS35-1) is not run.**
+- **d4.1–d4.4, d2.1, d3.2, d3.3, d3.4, d6.3, d6.4, d6.6, d6.8** are unexercised, being controls on the
+  parts above.
+
+
+---
+
+## §X.4 — `plans/M63-parts-reproduction.md` §S.1 clause 2(a): exact replacement text
+
+*Requested by the product owner, 2026-09-11, to be applied at the phase boundary once phase C has
+closed. Phase D may not edit that file; this is the text, ready to paste.*
+
+**As written:**
+
+> **(a) Replay, as a control only:** reduce his `A412` at rung 1 and at the rung-2 subgroup and
+> compare with his 1,092 and 78 under the named count convention (S.2). States 3–4 turned out to be
+> one reduction of `A412` at two rungs, which is exactly why this is a control and not the proof.
+
+**Proposed replacement:**
+
+> **(a) Replay, as a control only — and each row names the companion his loop held at that moment.**
+> Reduce his `A412` at rung 1 and at the rung-2 subgroup and compare with his 1,092 and 78 under the
+> named count convention (S.2). States 3–4 turned out to be one reduction of `A412` at two rungs,
+> which is exactly why this is a control and not the proof.
+>
+> **The companion is a per-row parameter of his table, not a constant** (phase D §R3.4). His loop
+> alternates, so the small object it holds changes as it runs: at state 1 the small side had not been
+> reduced and the partner was its **accumulator** `v166e774`; by state 2 it had been, and the partner
+> was the minimum `v136e564`. Measured — his sparsest 376-vertex minimum `v376e1890` is **colourable
+> against `v136e564` in all 24 frames and refuses against `v166e774` in all 24**, while four other
+> published small halves refuse in none. Reducing `A451` against `v136e564` therefore returns his
+> `|M| = 376` but 82 minima against his 96 and an accumulator of 433 against his 451: **a different
+> problem, not a defect.**
+>
+> **So:** `|M|` is comparable across rows; **`|{M}|` and `A` are comparable only once that row's
+> companion is identified**, and a row reported without one states the vertex count alone and says
+> the companion is unidentified. The general form, which is what travels: *the companion is whatever
+> his loop held at that moment, and it changes as the loop runs; comparing our numbers against a row
+> of his table without reconstructing that state is comparing two different problems.*
+
+## §X.5 — `plans/M63-parts-reproduction.md` §S.4, phase D's first acceptance bullet: exact replacement
+
+**As written:**
+
+> - [ ] Replay controls, tuning mode, the named convention: 376 at the order-3 rung on `A451` (his 96,
+>   `A = v451e2400`, 1890–1947 edges); 374 at rung 1 on `A412` (1,092; `A = v412e2106`; 1860–1884; P8
+>   scored); 374 at the rung-2 subgroup (78; `A406 = v406e2082` up to the group; 1868–1884), computed
+>   both as the invariant part of the rung-1 level and by a direct rung-2 reduction, which must agree.
+
+**Proposed replacement:**
+
+> - [ ] Replay controls, tuning mode, the named convention, **each row against the companion his loop
+>   held at that state** (§S.1 2(a); phase D §R3.4): 376 at the order-3 rung on `A451` **against the S
+>   accumulator `v166e774`** (his 96, `A = v451e2400`, 1890–1947 edges) — against `v136e564` the same
+>   reduction returns 376 with 82 minima and `A = 433`, which is a different problem and is recorded
+>   as such; 374 at rung 1 on `A412` **against `v136e564`** (1,092; `A = v412e2106`; 1860–1884; P8
+>   scored); 374 at the rung-2 subgroup (78; `A406 = v406e2082` up to the group; 1868–1884), computed
+>   both as the invariant part of the rung-1 level and by a direct rung-2 reduction, which must agree.
+>   **A row whose companion is not identified reports `|M|` alone**, and `|{M}|` and `A` read
+>   `not-compared` with that reason.
+
+## §X.6 — An environment note that outlives this milestone: Python 3.14's start method
+
+*For `CLAUDE.md` § Toolchain or the environment memory, not for a milestone plan — it will bite every
+multiprocessing user in this repository, and its symptom points nowhere near its cause.*
+
+> **Python 3.14 changed the default multiprocessing start method on Linux from `fork` to
+> `forkserver`.** A worker therefore **re-imports the module** instead of inheriting the parent's
+> memory, so any state a parent puts in a module-level global is **empty in the worker** — and the
+> symptom is a `KeyError` on a key the parent plainly holds, which points at the dictionary rather
+> than at the process model. Measured 2026-09-11 on `ProcessPoolExecutor` (`KeyError: 'base'` on a
+> sweep whose parent had just built the object). **Two fixes, and prefer the first where the payload
+> is large:** pass `mp_context=multiprocessing.get_context("fork")` (safe with no threads, and it
+> avoids pickling a 4,513-point base twelve times), and/or supply an `initializer` that rebuilds the
+> state from picklable arguments, which also survives a platform without `fork`.
+
+## §X.7 — `tools/parts_stage.py`: `pin_is_sound` is vacuous at every rung above 1
+
+The diagnosis, the one-line fix and **the planted control that fails on the current code** are in
+§R3.9. Reported rather than edited because phase C is mid-close in that file. No number is retracted:
+the symmetry break itself is sound, because `Stage.cnf` makes the pin clause conditional on the atom's
+presence — it is the *control* that was checking nothing while printing a benign verdict.
