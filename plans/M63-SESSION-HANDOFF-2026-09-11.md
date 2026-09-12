@@ -351,6 +351,18 @@ and build the multi-orbit union ladder. Everything above is the cost of trusting
   it should give roughly another **4×**. Not fixed because two runs are executing that file. **The rule: a
   cost that grows with the level need not live in the solver, and removing the dominant one merely promotes
   the next of the same shape — this one was hiding in a diagnostic nobody profiles.**
+  **DO NOT READ THE CURRENT PRODUCTION TIMINGS AS THE ENGINE'S.** D1b at 0.154 s and `hismove` at 0.115 s
+  per iteration are **end-to-end** figures in which the hitting-set solve is now **~0.2 ms** — the oracle is
+  ~0.028 s and the progress-log union ~0.11 s amortised. **The runs currently spend more time in a log
+  message than in the solver.** Take the queued fix before quoting any of these numbers as characterising
+  the new engine, or the engine will be blamed for a diagnostic's cost.
+  **And one figure was revised downward against its author's own interest:** the decision engine's headline
+  is now **7.0× slower than batch** on C4a's completed 600-iteration window (1,710.2 s against 245.9 s, on
+  639 solver calls against 273,216), replacing a mid-window snapshot that read **16×**. Batch's per-iteration
+  cost accelerates across a window while the decision engine's is roughly flat, so **a mid-run snapshot
+  flatters the conclusion and the completed window does not** — the same direction as the flattering-defect
+  pattern, caught by its author and applied to itself. The finding is unchanged: four formulations, each
+  cutting the work by a large factor, none cutting the time.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
