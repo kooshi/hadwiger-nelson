@@ -493,8 +493,11 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
 * **G43 — The residue plane seals fields. [kernel over rings; field level gated as G35; prior art
   `[Moorhouse2010]`]** At a usable prime the residue map is a homomorphism into UD(𝔽_q, 2), so
   χ(F²) ≤ χ(UD(𝔽_q, 2)) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For F ⊇ K,
-  6-open ⟺ wall broken ∧ 11 inert: de Grey's field, K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
-  11-inert but keeps the wall. A composite ideal cannot beat the best prime without refuting Hedetniemi's
+  6-open ⟺ wall broken ∧ 11 inert: K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
+  11-inert but keeps the wall. **De Grey's field is NOT 6-open** — corrected 2026-09-11, where this entry
+  contradicted ledger row 52. It is K(√5) = K(√15), and 15 ≡ 4 (mod 11) **is** a square, so 11 **splits**,
+  stays usable, and the field is **5-sealed** — which is exactly what row 52's χ(ℚ(√3,√5,√11)²) = 5 says.
+  A contradiction between two halves of this file is worse than either half being wrong alone. A composite ideal cannot beat the best prime without refuting Hedetniemi's
   conjecture (Moorhouse §9). The shadow sieve: an object's direction residues seal every graph built from
   those directions.
 * **G44 — Kloosterman control. [derived + measured; ω facts prior art]** UD(𝔽_p, 2) has eigenvalues

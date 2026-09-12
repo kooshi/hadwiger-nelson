@@ -303,8 +303,21 @@ the edit. They are scattered above; this is the order to do them in, and the ord
    keeps asserting a starting state that is false for every row but one.
 5. **`tools/parts_loop.py` line 810** (§4): the producer still emits the his-move field its artifact no
    longer carries, so the artifact does not regenerate from committed code. Fix, regenerate, confirm match.
-6. **`tools/typem.py`: seven `kfloat(...)` comparisons acting as verdicts**, not one. Say which of the seven
-   decide an outcome and which merely order a list — sorting by a float is harmless, admitting by one is not.
+6. **`tools/typem.py`: FOUR call sites decide an outcome, and one of them is not a `kfloat` call at all** —
+   so every audit that grepped `kfloat` missed it. They are line 184 (admissibility), line 1199
+   (`CrossLaw.collinear` refusing a rotation), **`parts_lattice`'s float disk test** (base membership — the
+   one no grep found), and `cross_edges_rho15_fast`'s `round(x/m, 9)` ray keys, **which is the only one that
+   can miss edges outright**. Line 139 decides Moser-base membership and line 212 decides family *identity*
+   (it can inflate a count); line 245 is display; 445/741/1009 are radius cuts in builders phase G does not
+   use. **Priority note: the defect has NOT bitten.** An exact regeneration measured **zero** sign flips out
+   to radius 3.5 (14,569 points, 804 radii, smallest margin 1.46 × 10⁻⁶ — nine orders above double
+   precision), zero points gained or lost by the disk cuts, and zero edges missed or invented. **No standing
+   count is an undercount from the float, including the 412.** So this is hygiene against a live hazard, not
+   remediation of damaged results — do it, but it does not gate anything.
+   The exact replacement already exists and is committed: `tools/typem_exact.py` (`273b2da`), whose `ksign`
+   decides the sign by taking norms down the tower with no loop, no precision knob and no fallback path, and
+   whose self-test shows the float test wrong on **74 of 122** engineered near-zero probes where the exact
+   test is wrong on none.
 
 **Then, and only then, the two things that actually chase the record:** screen the one new rotation (minutes),
 and build the multi-orbit union ladder. Everything above is the cost of trusting what they return.
