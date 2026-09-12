@@ -1335,6 +1335,13 @@ def main():
     a = ap.parse_args()
     if a.selftest:
         sys.exit(0 if _self_test() else 1)
+    # Validate the anchor DECLARATION before the base is built: the base costs about a minute,
+    # and a refusal that costs a minute teaches people to skip the flag that produces it.
+    if getattr(a, "no_anchor", None):
+        try:
+            AnchorAbsent(a.no_anchor)
+        except ValueError as e:
+            ap.error(str(e))
     base = P.Base(P.PARTS_R)
     if a.cmd == "census":
         A = V.load_lattice(os.path.join(REF11, a.A))

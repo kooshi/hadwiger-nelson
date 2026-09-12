@@ -694,6 +694,13 @@ def main():
         cfg = frozen_config(rule=a.rule)
         if a.require_frozen and a.unfrozen:
             ap.error("--require-frozen and --declare-unfrozen are exclusive")
+        # Refuse at the command line, before the base is built: `run_loop` refuses too, but a
+        # minute of base construction before a refusal teaches people to skip the flag.
+        if not a.require_frozen and not a.unfrozen:
+            ap.error("give --require-frozen or --declare-unfrozen \"<why this run is not "
+                     "scored>\". Neither is not an option: the flag used to default to off, so a "
+                     "run that checked nothing produced an artifact indistinguishable from one "
+                     "that did.")
         freeze = (Unfrozen(a.unfrozen) if a.unfrozen
                   else (FREEZE_REQUIRE if a.require_frozen else FREEZE_MISSING))
         base = P.Base(P.PARTS_R)
