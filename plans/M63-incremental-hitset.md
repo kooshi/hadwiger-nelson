@@ -394,10 +394,30 @@ in a log message**, and it accounts for essentially the whole unexplained remain
 rebuild gone it is now the dominant non-oracle cost, and removing it should take D1b from 0.144 s to
 roughly the oracle's own ~0.03 s, another ~4×.
 
-**Deliberately not fixed here.** Two runs are executing `parts_reduce.py` right now, and a resumed run
-executes whatever is on disk — the same reason the integration waited. The fix is small (keep the union
-incrementally, or only recompute it when a minimum adds an atom, which by the table above is almost never:
-|A| moves 402 → 405 across 20,000 minima). It belongs in the next window when nothing is running.
+**FIXED, and the ~4× is demonstrated rather than projected.** `|A|` is now maintained incrementally
+(a resume pays the full union once, where the old code paid it per log line). Measured on hismove across
+three consecutive windows under the fixed code: **0.016–0.021 s per iteration**, against **0.089 s**
+immediately before the fix — about **5×**, and the comparison *understates* it because the "before" window
+sat at ~15,000 minima where the union costs ~390 ms, while the "after" windows sat at ~24,000 where it
+would have cost ~645 ms. Against the original engine's ~1.2 s per iteration the cumulative figure is
+about **65×**.
+
+The maintained aggregate is **checked, not trusted**: `finish()` compares it once against the full
+recomputation and raises if they differ, because a running aggregate that drifts would make every logged
+`|A|` wrong while the record stayed right — the failure mode that hides longest, since the artifact keeps
+agreeing with itself. The check was **watched failing**: planting the drift (dropping the update) produced
+`the maintained |A| (0) disagrees with the recomputed union (133)`, and correct code passes the same run.
+
+**Both stopped jobs then completed under the fixed code**, which is what the fix was for:
+
+| | result | 
+|---|---|
+| D1b | **closed**: `reduced`, minimum 373, **|M| = 374 vertices, level 26,724, exhaustive-level, 0 undecided**, Y = 530. The final launch closed it in **43.9 s**. This record had never been written. |
+| hismove | **closed**: `HIS MOVE -> yes`. The calibration several documents cite was log-attested only until now. |
+
+Both records carry `hitset_engine: "incremental, enumeration phase only"` in their launch budgets, and
+D1b's record shows it against the new launches and `(none recorded)` against the original — the engine is
+visible to a reader exactly as intended.
 
 *General form, worth more than the instance:* a cost that grows with the level does not have to live in
 the solver. Removing the dominant one simply promoted the next one of the same shape, and the next one was

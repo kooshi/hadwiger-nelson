@@ -511,6 +511,15 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
     target_lb = None                   # set only by the target break, and it IS the lower bound
     last_tick, last_ckpt = time.time(), time.time()
     engine = None                      # the enumeration-phase hitting-set engine; see below
+    # `|A|` IS MAINTAINED, NOT RECOMPUTED. The progress line below used to union every minimum
+    # found so far, every 5 minima. That is O(|E| . w*) per log line, so LINEAR in the level and
+    # therefore QUADRATIC cumulatively -- the same shape as the hitting-set rebuild this loop just
+    # stopped paying, hiding in a diagnostic. Measured on D1b's own family: 132 ms at 5,000 minima,
+    # 258 ms at 10,000, 557 ms at 20,733, which is 111 ms per iteration amortised and was the
+    # LARGEST single term in a production iteration once the rebuild was gone.
+    a_union = set()
+    for _m in state.minima:            # a resume pays this once, where the old code paid it per log
+        a_union.update(_m)
     while True:
         state.iteration += 1
         it = state.iteration
@@ -583,11 +592,11 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                 log(f"  OPTIMUM FOUND: weight {state.w_star} (kept {len(h)} atoms) at iteration {it}"
                     f"  [{time.time()-t0:.0f}s]")
             state.minima.append(h)
+            a_union.update(h)
             if engine is not None:
                 engine.block(h)
             if len(state.minima) % 5 == 0 or len(state.minima) == 1:
-                log(f"    minima {len(state.minima)}  |A| "
-                    f"{len(set().union(*(set(x) for x in state.minima)))} atoms  "
+                log(f"    minima {len(state.minima)}  |A| {len(a_union)} atoms  "
                     f"Y {len(state.corr)}  [{time.time()-t0:.0f}s]")
             if max_minima and len(state.minima) >= max_minima:
                 log(f"  stopping at max_minima={max_minima}: the level is TRUNCATED")
@@ -645,6 +654,14 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
               "bounded-below" if state.undecided else
               "truncated-at-wall" if truncated_wall else "truncated-at-budget")
     Aatoms = sorted(set().union(*(set(x) for x in E))) if E else []
+    # The running aggregate is CHECKED against the full recomputation once, here, rather than
+    # trusted. A maintained union that silently drifts would make every `|A|` in the log wrong
+    # while the record stayed right -- the failure mode that hides longest, because the artifact
+    # keeps agreeing with itself.
+    if set(Aatoms) != a_union:
+        raise AssertionError(
+            f"the maintained |A| ({len(a_union)}) disagrees with the recomputed union "
+            f"({len(Aatoms)}): the incremental aggregate has drifted and every logged |A| is wrong")
     # A target-refuted run has NO level and therefore no `A` and no `|M|`: it knows one number, a
     # lower bound. Emitting an empty `A` would hand a loop a state variable that is a lie.
     A_field = ({} if refuted else
