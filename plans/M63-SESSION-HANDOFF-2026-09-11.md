@@ -395,6 +395,36 @@ and build the multi-orbit union ladder. Everything above is the cost of trusting
   real attested-number check that has been pending all milestone:** the closed level is 26,724 raw, and its
   canonical count under the named convention is what compares against Parts's published 1,092 for this row.
   That is one audit pass on an existing record, no solver.
+
+**`P-D5` is now MET — a prediction pending the whole milestone, closed with no solver.** The audit needed
+only the closed level and `parts_audit.canonical_counts`, which already defined all three conventions.
+**2,309 / 26,724 / 2,309 — none of them 1,092.** Registered at 0.50 as *"equals 1,092 under none of the
+three"*; the falsifier did not fire. All three report `closed_under: True` with reading "orbits contained in
+the level", so the function's own caveat (a count taken where closure fails counts orbits merely *meeting*
+the level) does not apply.
+
+**What that disagreement is and is not.** It is a **measured `Comparison` that reads not-matched with its
+reason**, never a defect and never a reproduction failure:
+- `\|M\| = 374` **matches his row exactly** — the vertex count is the convention-free quantity and it agrees.
+- `\|{M}\|` does not, under any named convention. Two independent reasons already on record make that
+  expected rather than alarming: **the companion is a per-row parameter of his table** (§S.1 clause 2(a)), so
+  `\|{M}\|` is comparable only once that row's companion is identified; and **the counting convention itself
+  was fitted** on the spent S M6A row, which is why phase E classifies `\|{M}\|` as *semi-held-out
+  everywhere*. The live rival — `Aut(A)` against the full base group — has still been separated on no row.
+- **So the honest three-part split stands and now has its hard instance:** vertex counts solid;
+  accumulators solid and convention-free (set equality admits no counting group); **counts of minima
+  convention-dependent, and here measurably not his.**
+
+**NEW REGISTRATION, made by the product owner and deliberately NOT fitted to the observed 530.** Since
+`P8-revised` cannot be scored across an engine change, its successor is a **ratio** prediction, which is
+engine-comparable by construction:
+
+> **`P-Y1`** — on any one stage run to closure under **both** engines, the incremental engine's harvested
+> correction-set count will be **30–70%** of the batch engine's, with the level identical as a set and the
+> bound identical at every iteration. **Confidence 0.6.** **Falsifier:** a ratio outside 20–90%, or any
+> difference in the level or the bound sequence. Registered 2026-09-12 **before any such paired run exists**;
+> a close now costs 44 s, so this is one cheap experiment. It is a claim about **the path**, which is the
+> only thing an engine may legitimately change.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
