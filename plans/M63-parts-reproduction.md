@@ -1582,6 +1582,65 @@ argument that a descent cannot reach the record rests on the *spread* of a distr
 1-minimal descents at 582–609, eleven standard deviations from 509 — not on any clock. No pin
 changes it.
 
+**And the lever has a ceiling, which bounds what any later phase can hope for from it** (Poros,
+card 19's amendment, sharpened here). The palette group of a proper 4-colouring is `S₄`, order 24.
+A rainbow `k`-clique pin fixes `k` colours and leaves `(4 − k)!`:
+
+| pin | leaves | kills |
+|---|---|---|
+| the centre alone (`k = 1`) | `3! = 6` | 4 |
+| **the rainbow triangle (`k = 3`)** | **`1! = 1`** | **all 24** |
+| a hypothetical `K₄` (`k = 4`) | `0! = 1` | all 24 — **no more** |
+
+**So the triangle already trivialises the palette group, and no pin of any kind — clique or not —
+can break more palette symmetry than it does.** That it is also the largest clique available is a
+separate fact and ours: **four plane points are never pairwise unit-distant** (ledger row 58,
+`Mascot.not_forces_of_unit_drawing`), so there is no `K₄` to tempt anyone in the first place. Two
+independent reasons not to go looking for a bigger pin.
+
+**What is left, therefore, is not symmetry but placement and problem structure** — his §5.9 says
+*"The choice of Q significantly affects the speed"*, and his five-vertex assignment for `√3`
+triples is not a clique pin at all, which is why it can fix five vertices. **This is the same
+conclusion as "the residual ~10× may not transfer", reached from the geometry instead of from the
+measurement**: the palette half of the lever is exhausted and portable, the guidance half is
+arena-specific. And it sharpens **B-11 for phase E**: his five-vertex trick works for the `√3`
+triple and *not* for `1/√3`, so E's `√3` row inherits both its speed and its provenance caveat.
+
+### R2.4f — If this session ends before the verdicts: exactly what is running and what to do
+
+*Written while the runs are live, because a handoff composed after the fact is a handoff nobody
+can act on. Everything phase C produced is committed; only the two joint verdicts and three
+ask-cost rows are outstanding.*
+
+| job | what it is | log | checkpoint | how to resume |
+|---|---|---|---|---|
+| **C4a** | the record-bearing run: `A412 ∪ ρ·g⁻¹(A166)`, `--reduce LS`, rung 1, `--max-minima 64` | `build/gate/m63/c4a.log` | `data/m62/ckpt/m63-joint-A412-A166.ckpt.json` | re-issue the same `parts_run.py reduce` command with the same `--checkpoint`; budgets may change, the problem may not |
+| **C4b** | the second relative frame, `--S-frame coset:2` | `build/gate/m63/c4b.log` | `…-coset2.ckpt.json` | same |
+| **cold-vs-cold** | card 14's attribution table, 5 of 8 rows done | `build/gate/m63/coldcold.log` | none (re-runnable in ~25 min) | re-run the scratch probe; the three missing rows are joint `pin=False` and both M6B rows |
+
+**What a resume redoes at worst** (§O2, measured): the in-flight ask, one in-progress
+correction-set shrink, and up to 30 s of completed level iterations. Never a restart. A checkpoint
+that has been moved or edited should be resumed with `--verify-checkpoint N`, which re-asks `N`
+restored correction sets and refuses rather than continuing on an unverified one.
+
+**What remains to be done when a verdict lands**, in order:
+
+1. **Score P-C4.1 – P-C4.4** in R2.1's table against the rows as registered in the subplan §4 —
+   the minimum in vertices, the `(374, 136)` split if 509, the cost clauses, and C4b's frame.
+2. **If either run returns ≤ 508 vertices: STOP.** Send the product owner §E5's template within
+   the hour, *then* run the exact-geometry re-check of one minimum and a CaDiCaL refusal with an
+   LRAT proof. **The geometry and the refusal come before the word "record"**, and the Lean
+   certificate is phase F's, not phase C's.
+3. Update **§S.3's C4 rows** and R2.1, write the headline into R2.2, and commit.
+4. **Commit `plans/POROS-2026-09-11-m63-phaseC.md` by path** — the close requires it and it is the
+   only file of mine still uncommitted, deliberately, because the advisor is still writing to it.
+5. Poros's **cards 13, 16 and 18** are deliberately deferred behind the verdicts: the
+   frame-isomorphism test, the shared-formula frame search, and the companion-sensitivity run.
+   None gates the close; each is a phase D input.
+
+**The stop rule is armed in both runs' configuration and in this record**, so it survives the
+session that launched them.
+
 ### R2.5 — Six instruments, and the sixth is the one that stops the lesson being wrong
 
 Five instruments failed in this phase by saying **"nothing to see" when what they meant was "I
