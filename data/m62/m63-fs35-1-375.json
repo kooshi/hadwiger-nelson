@@ -1,0 +1,166 @@
+{
+ "kind": "m63-fs35-1",
+ "schema": 1,
+ "producer": "tools/parts_diag.py:fs35",
+ "state": "our 375 level (A403, companion v136e564, rung 1)",
+ "exchange_classes": [
+  [
+   [
+    [
+     2,
+     0,
+     6,
+     4
+    ],
+    [
+     10,
+     0,
+     2,
+     4
+    ]
+   ],
+   12
+  ],
+  [
+   [
+    [
+     4,
+     0,
+     10,
+     2
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   12
+  ]
+ ],
+ "affine_dim": 2,
+ "hull": "hull holds 29, Prof 27, 2 in the hull and not realised",
+ "atom_classes": {
+  "necessary": 336,
+  "in_observed_pairs": 48,
+  "residual": 18,
+  "unused": 0,
+  "arithmetic": "336 + 24 + 14 of 18 = 374"
+ },
+ "orbit_closure": [
+  {
+   "order": 1,
+   "invariant_minima": 3264,
+   "min_closure": 374,
+   "closure_excess": 0,
+   "upper_bound_on_M_H": 374
+  },
+  {
+   "order": 2,
+   "invariant_minima": 40,
+   "min_closure": 374,
+   "closure_excess": 0,
+   "upper_bound_on_M_H": 374
+  },
+  {
+   "order": 2,
+   "invariant_minima": 0,
+   "min_closure": 376,
+   "closure_excess": 2,
+   "upper_bound_on_M_H": 376
+  },
+  {
+   "order": 2,
+   "invariant_minima": 0,
+   "min_closure": 376,
+   "closure_excess": 2,
+   "upper_bound_on_M_H": 376
+  },
+  {
+   "order": 2,
+   "invariant_minima": 40,
+   "min_closure": 374,
+   "closure_excess": 0,
+   "upper_bound_on_M_H": 374
+  },
+  {
+   "order": 2,
+   "invariant_minima": 40,
+   "min_closure": 374,
+   "closure_excess": 0,
+   "upper_bound_on_M_H": 374
+  },
+  {
+   "order": 2,
+   "invariant_minima": 0,
+   "min_closure": 376,
+   "closure_excess": 2,
+   "upper_bound_on_M_H": 376
+  },
+  {
+   "order": 2,
+   "invariant_minima": 0,
+   "min_closure": 378,
+   "closure_excess": 4,
+   "upper_bound_on_M_H": 378
+  },
+  {
+   "order": 3,
+   "invariant_minima": 0,
+   "min_closure": 384,
+   "closure_excess": 10,
+   "upper_bound_on_M_H": 384
+  },
+  {
+   "order": 4,
+   "invariant_minima": 0,
+   "min_closure": 378,
+   "closure_excess": 4,
+   "upper_bound_on_M_H": 378
+  },
+  {
+   "order": 4,
+   "invariant_minima": 0,
+   "min_closure": 378,
+   "closure_excess": 4,
+   "upper_bound_on_M_H": 378
+  },
+  {
+   "order": 4,
+   "invariant_minima": 0,
+   "min_closure": 378,
+   "closure_excess": 4,
+   "upper_bound_on_M_H": 378
+  },
+  {
+   "order": 6,
+   "invariant_minima": 0,
+   "min_closure": 384,
+   "closure_excess": 10,
+   "upper_bound_on_M_H": 384
+  },
+  {
+   "order": 6,
+   "invariant_minima": 0,
+   "min_closure": 390,
+   "closure_excess": 16,
+   "upper_bound_on_M_H": 390
+  },
+  {
+   "order": 6,
+   "invariant_minima": 0,
+   "min_closure": 390,
+   "closure_excess": 16,
+   "upper_bound_on_M_H": 390
+  },
+  {
+   "order": 12,
+   "invariant_minima": 0,
+   "min_closure": 390,
+   "closure_excess": 16,
+   "upper_bound_on_M_H": 390
+  }
+ ],
+ "seconds": 27.8
+}

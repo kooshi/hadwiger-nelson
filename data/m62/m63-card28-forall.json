@@ -1,0 +1,52 @@
+{
+ "kind": "m63-card28",
+ "schema": 1,
+ "producer": "tools/parts_diag.py:card28",
+ "question": "does his own four-orbit move score as an outlier on union coverage, on overlap, or on neither, against random four-subsets of the menu?",
+ "criterion": "a new vertex v SERVES an atom a when |N(v) n N(a) n A| >= 4; a correction set C counts when EVERY member of C is served by some vertex of the added set",
+ "quantifier": "forall",
+ "his_move": [
+  [
+   0,
+   0,
+   0,
+   4
+  ],
+  [
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   0,
+   0,
+   2,
+   2
+  ],
+  [
+   0,
+   0,
+   2,
+   6
+  ]
+ ],
+ "menu": 64,
+ "small_correction_sets": 215,
+ "mean_served_per_orbit": 0.0,
+ "union": 0,
+ "overlap": 0,
+ "samples": 2000,
+ "seed": 20260911,
+ "random_union_mean": 0.0,
+ "random_union_max": 0,
+ "random_overlap_mean": 0.0,
+ "random_overlap_max": 0,
+ "union_percentile": 0.0,
+ "overlap_percentile": 0.0,
+ "verdict": "outlier-on-neither",
+ "reading": "overlap is DEGENERATE -- random four-subsets average zero and nothing can score below zero, so it discriminates nothing. Union is directionally right and too weak to pre-register: about one random four-subset in five beats his own recorded move. So both statistics die cheaply and the set-valued rung is HIS craft rather than ours.",
+ "caveat": "the statistic is sparse -- the mean orbit serves about one of the small correction sets -- so these are small-number comparisons with a wide interval. Enough to kill overlap and to decline union; not enough to call union uninformative in principle.",
+ "may_not_feed_the_frozen_rule": "computed from his labelled move; it is pre-registered for a SUCCESSOR rule and did not touch the running one, whose freeze predates it",
+ "seconds": 77.3
+}
