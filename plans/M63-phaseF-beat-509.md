@@ -488,11 +488,26 @@ families, wall-breaking radicand and 6-openness, never by cross-edge count**, be
 keeps a rotation inside `ℚ(√3,√11)` where Theorem B four-colours it.
 
 **The controls that transfer, and the one that does not.** Transferring: the restriction identity; the pin
-soundness check at rung 1; the three-state verdict with `unknown` never folded into a negative; exact
-geometry on every edge; regenerated-identical artifacts. **Not transferring, and this is a fail-open risk
-worth naming:** `contains-a-known-minimum` — the anchor control that fired free on all 89 map entries —
-**has no known minimum on a new base**, so it silently degrades to checking nothing. Its replacements, both
-required before a new input is accepted:
+soundness check at rung 1; the three-state verdict with `unknown` never folded into a negative;
+regenerated-identical artifacts. **"Exact geometry on every edge" transfers only in the weak sense, and the
+distinction decides whether this list is honest:** the stage's geometry is BUILT by `typem.unit_edges_fast`
+plus `CrossLaw.edges` in exact arithmetic, and **a builder being exact is not a check**. The check is an
+independent re-derivation from the *stated* law, and the only implementation of that in this repository is
+`tools/parts_edge_verify.py` leg 4 — whose own docstring names the circularity it exists to avoid ("rather
+than by calling the committed edge builder, which would be circular") and which is welded into an
+object-level verifier for the 509. Phase E lifts it to stage level and calibrates it against the anchor
+(`plans/M63-phaseE-held-out.md` E9.5), **which can only be done while an object with a known answer still
+exists**; until that lands, this row claims less than it appears to.
+
+**Not transferring, and the risk is PRESENT TENSE rather than future:** `contains-a-known-minimum` has no
+known minimum on a new base, so it silently degrades to checking nothing — and **it is already off at two of
+its three call sites today**, `parts_rule.run_loop` (`parts_rule.py:387`) and `parts_diag.hismove`
+(`parts_diag.py:196`), both hard-coded to `anchor_tuples=None`, with `check_invariants` returning the same
+pass verdict either way. The "fired free on all 89 map entries" count is right for `run_map` and is also the
+complete list. Its two replacements below are both **internal consistency** checks — they share the CNF
+builder and the geometry with the thing they check — so they restore coverage of "every deletion" in a
+stronger form than the anchor had, and restore **none** of the external-truth property that made the anchor
+valuable. Both are required before a new input is accepted:
 
 1. **a non-vacuity ask** — the arena, whole, refuses four colours (one ask, per rotation, on a base sized
    by item 6); without it every later negative is about an empty question;
