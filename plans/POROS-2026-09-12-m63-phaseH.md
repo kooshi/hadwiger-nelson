@@ -23,6 +23,8 @@ an agent to distrust a correct monotone argument for feeling too familiar.
 
 ---
 
+*Ten cards, of which two are open: PH-9 (rank 1, the live turn) and PH-5. The rest carry their fate.*
+
 ## Evidence inventory
 
 - `plans/M63-phaseH-a-base-for-a-rotation.md`, the handoff, 317 lines — read against: six requirements whose `PROVED` / `INHERITED` stamps each survive a second reading — surprised: yes; **H1 is stated one prime stronger than the certificate it is derived from** (PH-2), and **F1 is a falsifier that cannot fire and whose firing would be good news** (PH-1)
@@ -34,6 +36,8 @@ an agent to distrust a correct monotone argument for feeling too familiar.
 - `tools/typem.py:1128-1160`, `parts_lattice` — read against: §4's phrase "`parts_lattice`'s four generators" — surprised: yes; there are no generators in the source. It is a congruence lattice (`(a−b), (a−c), (a−d)` even, `a−b+c+d ≡ 0 mod 4`) cut by an exact totally-real disk, and its coordinates confine it to a **4-dimensional ℚ-subspace** of the 8-dimensional `K²` (PH-3)
 - the witness `u` of §3, re-derived rather than lifted — read against: §3's instruction not to trust the numbers — surprised: no; `|u|² = 7/3 + (1/3)√33` exactly, and `φ(u) = (0,0)` at **both** primes, so it is inside the colouring's domain and the certificate stays applicable when it is added
 - the same file, `cross.equal_radius_ordered` across all eleven classes — read against: `ρ₁₅` being the only class carrying the equal-radius kind that `u` would supply — surprised: yes, and it corrected me; **two** classes carry one, both have a `d² = 0` representative, and the second (`cos = 5/16 - 3/16√33`, 18 pairs, 54 monochromatic cross edges at prime 239) is `sat` (PH-8)
+- the engineer's stage-1 table (committed `94fdddc`), four arenas at three radii plus a no-`u` control — read against: a larger base being a richer base, per H6's 8.3-edges-per-point proxy — surprised: yes; the cross-edge set is **the same 104 edges at every radius**, so `r = 2.4495` adds 12,596 points and 77,546 unit edges and not one cross edge (PH-9)
+- `CLAUDE.md` line 124, the M62–M64 paragraph — read against: consistency with the kernel rows in the same file — surprised: yes; it says **the base** contains Heule-510 where `plans/M62-evolutionary-type-m.md:1361` says **the arena**, and the literal reading contradicts `chromaticNumber_seamPlane` four rows below it (PH-10)
 - `data/m62/rotations-exact-moser-r2.05.json` — read against: whether a second base is already censused and might already realise a live kind — surprised: unread (I list it as a standing finding; it is a census of rotations, not a residue screen, so it cannot decide the question on its own)
 
 ---
@@ -214,7 +218,7 @@ question: which-rotations-are-the-right-comparison-for-a-base-that-has-acquired-
   hunch: the narrower — `u` supplies an equal-radius kind and nothing else
   falsifier: the second equal-radius class turning out not to carry a `d² = 0` representative, making
     `ρ₁₅` the only one and the comparison n = 1
-  rank: 1
+  rank: 9
   status: answered — the narrower, and the falsifier did not fire
 
 **Two corrections to myself, in order of how much they matter.**
@@ -454,3 +458,116 @@ hunch: defeating-the-certificate-is-far-from-sufficient
    does, but the argument that `Δ` holds all three nonzero classes runs through the centre family, and
    on a base that is *not* a superset of `parts_lattice` that step needs redoing rather than reusing.
    RS-5's caveat 4, still standing, now with a second consumer.
+
+---
+
+## PH-9 — padding is measured worthless, and the design knob is a representation number
+
+question: what-does-the-budget-buy-now-that-radius-buys-nothing
+  evidence: the engineer's stage-1 table — the cross-edge set is **the same 104 edges at every radius**,
+    so `r = 2.4495` adds 12,596 points and 77,546 unit edges and **not one cross edge**; `104 = 60`
+    centre `+ 36` inherited off-diagonal `+ 8` diagonal, against `ρ₁₅`'s `126 = 60 + 36 + 30`
+  expected: a larger base is a richer base, per H6's proxy of 8.3 unit edges per point
+  ask: with radius buying nothing, what is the quantity a bigger budget should be spent on?
+  if it is the diagonal circle: the target is how many module points lie on one fixed circle — a
+    representation number of a quadratic form, not a module rank, and the choice of representative on
+    that circle is the free parameter nobody has varied
+  if it is unit-edge density: H6's proxy stands and the route is a denser module at the endpoint bound
+  answered by: derivation on the engineer's own numbers
+  cost: nil
+  hunch: the circle — `ρ₁₅`'s 30 diagonal edges are 30 lattice points on `|p|² = 4`, and `4 = 2²` is
+    heavily represented by his form while `(7+√33)/3` is not
+  falsifier: every point of the circle generating a closure of covolume within a small factor of `u`'s,
+    which would make the circle intrinsically expensive and the rotation structurally poorer
+  rank: 1
+  status: open — the addressee is the engineer
+
+**The structural half, which is not a correlation.** The arena minus its `φ`-monochromatic cross edges at
+the *weakest* prime is four-colourable **by an explicit certificate**. So the distance from a proof of
+colourability is `min` over primes of the monochromatic cross count:
+
+| arena | monochromatic cross, per prime | distance to a colourability proof | verdict |
+|---|---|---|---|
+| `ρ₁₅` on `Λ_parts` | 30 / 30 | **30 edges** | UNSAT |
+| `5/16 − 3/16√33` on `Λ_parts` | 18 / 54 | **18 edges** | SAT |
+| the rank-7 base with `u` | 32 / 8 | **8 edges** | SAT |
+
+Monotone on `n = 3`, so weak as a predictor — but the statement behind it is not statistical: **every
+refusal must be carried by those 8 pairs**, since every four-colouring of the rest extends. Eight pairs,
+on vertices of degree 5 to 9, is a very thin thing to hang a refusal on.
+
+**The bijection that turns this into a design knob.** The diagonal cross edges are in bijection with the
+base's points on the circle `|p|² = 1/(2 − 2cos θ)`. `ρ₁₅`'s circle is `|p|² = 4` and Parts's lattice puts
+**30** points on it; `u`'s circle is `|p|² = (7+√33)/3` and the rank-7 closure puts **8** on it — `u`'s
+orbit under negation and the two flips, nothing more. So the quantity to maximise is *how many points of
+a finitely generated module lie on one fixed circle*, which is the **representation number of a totally
+positive element by the module's norm form** — classical, computable, and governed by class numbers and
+splitting rather than by anything this phase has been varying.
+
+**Why `ρ₁₅` has 30 and the closure has 8, mechanically.** A circle's `K`-points are an orbit of the
+norm-one group of `K(i)` — the Moser ring's unit group `⟨ζ₆, η⟩` (G8). **Multiplication by `ζ₆` is what
+fills a circle**, and `Λ_parts` is `ζ₆`-closed by construction (his order-24 group), which is exactly why
+his circle is full. The rank-7 closure deliberately is not.
+
+**The inversion, and it is the handoff.** The engineer priced `ζ₆`-closure of a module containing `u` at
+~1.9·10⁸ points and dropped it, correctly. But the count is `volume / covolume`, the volume is now known
+to be worth nothing beyond the endpoint bound (`r^8` scaling puts `r = 2.1246` at 0.32× of `r = 2.44`,
+still hopeless), and **the covolume depends on which point of the circle you close around.** `u` has
+denominators 2, 3, 6 and generates a fine lattice. So the question is not *the cheapest module containing
+`u`* but:
+
+> **the coarsest `ζ₆`-and-Galois-closed module containing *some* point of the circle `|p|² = (7+√33)/3`.**
+
+That is a different search from the one the phase has run — it varies the representative rather than the
+module — and it is priced before it is built: compute the closure's covolume from its Gram matrix under
+the trace form and predict the cut as `volume / covolume`, with `Λ_parts` at 3,433 as the calibration.
+If no representative is affordable, that is the answer to PH-8's question stated as arithmetic: **`ρ₁₅`'s
+circle is cheap to fill and this one is not**, which is a finding about the rotation rather than a failed
+search.
+
+**And it retires a heuristic the measurements already killed.** My own PH-8 guess — that the refusing
+class's seam endpoints would be the richer ones — was refuted by the engineer on the bed I supplied:
+`ρ₁₅`'s equal-radius endpoints have unit degree 11–13 against the colourable class's 28–29, the opposite
+direction, on a lattice of mean degree 16.6. Local seam density anti-correlates with refusal on both
+instances that exist. Recorded as killed; the circle's *size* is a different quantity from its endpoints'
+*degree*, and only the first is still standing.
+
+---
+
+## PH-10 — a sentence in the Frontier contradicts the repository's own headline theorem
+
+question: can-the-base-contain-a-five-chromatic-graph
+  evidence: `CLAUDE.md` line 124 — "Extended to radius 2.44 (3,433 points, 179 orbits) **the base**
+    contains Heule-510 exactly (2,504 of 2,504 edges, none extra)"; against ledger row 57
+    (`chromaticNumber_seamPlane`, `χ(K²) = 4`, kernel-checked), `parts_lattice(r) ⊂ K²` at every radius
+    (RS-1), and ledger row 53 (`chromaticNumber_heule510 = 5`, kernel-checked)
+  expected: the Frontier's claims are consistent with the kernel results in the same file
+  ask: does `parts_lattice(2.44)` contain Heule-510 as a unit-distance subgraph, or does the arena?
+  if the base: Theorem B is false, which the kernel forbids
+  if the arena: the Frontier sentence is a wording fault that reads as a refutation of the repository's
+    headline theorem, and it should be fixed in place
+  answered by: the record — `plans/M62-evolutionary-type-m.md`
+  cost: nil
+  rank: 10
+  status: answered — the arena, and the Frontier says "base"
+
+`plans/M62-evolutionary-type-m.md:1361` reads **"At `r = 2.44` the arena contains Heule-510 exactly"**,
+and line 845 records the split: the base holds **375 of 375** of Heule-510's *in-field* points, the
+remaining 136 sit on the rotated copy (RS-3; `375 + 136 − 1` shared centre `= 510`). `CLAUDE.md` § Frontier
+says **base** where its source says **arena**.
+
+Read literally it asserts that a subgraph of `K²` is 5-chromatic, which contradicts `chromaticNumber_
+seamPlane` — a theorem in the same file, four rows down. This project's own failure mode G30(1) is *an
+escape clause whose interpretation contradicts what is already proven about the objects*; here it is a
+summary rather than an escape clause, and the cost is the same: the next agent that checks a claim against
+what is proved either loses the time I lost, or draws the wrong conclusion about which of the two is
+wrong. **Fix: "the arena contains Heule-510 exactly", with the 375/136 split named.** One line, and it
+belongs in the phase's closing commit rather than a later tidy.
+
+It also bears on PH-8 directly, which is why I went looking: `ρ₁₅`'s refusal is **inherited** — its arena
+contains a graph already certified 5-chromatic before type M was applied to it. So the phase's positive
+reference set is not one instance whose mechanism is understood; it is one instance whose refusal has a
+known external cause, beside one negative. **No type-M arena has ever been shown to *produce*
+5-chromaticity rather than to *contain* it**, and that sentence belongs in the phase report, because it
+is the honest scope of "working constructions of type M with other rotations are not known yet".
+

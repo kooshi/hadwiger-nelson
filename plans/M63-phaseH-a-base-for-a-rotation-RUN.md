@@ -429,3 +429,71 @@ radius-free four-colouring that killed it on Parts's lattice is genuinely gone o
 What is now *also* known is that removing that obstruction is not close to enough — on the only bed
 that exists, a rotation can carry the equal-radius kind, defeat the certificate at both primes, and
 still be four-coloured in seconds.
+
+---
+
+## §H12 — How far this base was from a colourability proof: **8 edges** (PH-9, verified here)
+
+*The advisor's PH-9, checked rather than accepted. Run on the `r² = 113/25` base.*
+
+**The structural statement.** Delete from an arena every cross edge whose two endpoints have the same
+residue at one prime. What is left has all its cross-edge residue differences nonzero, so `δ = (0,0)`
+is free and the certificate fires: **colour both copies by `φ` and the arena is four-coloured.** So
+the distance between an arena and an explicit proof of four-colourability is exactly
+
+> **`min` over the two primes of the monochromatic cross-edge count.**
+
+**Measured, with the control that makes it non-vacuous:**
+
+| prime | monochromatic cross edges | after deleting them, `φ/φ` is proper on | monochromatic | control: keeping them |
+|---|---|---|---|---|
+| 17 | 32 | 70,056 arena edges | **0** | exactly 32 monochromatic, as it must be |
+| 239 | **8** | 70,080 arena edges | **0** | exactly 8, as it must be |
+
+**So this base was never more than 8 edges from provably four-colourable**, and those 8 hang on
+vertices of unit degree 6. The record's rotation stands at **30**; the colourable reference at 18.
+That is the honest reading of "SAT in 2.1 seconds": not that the base failed, but that it never had
+more than eight edges of margin.
+
+**The bijection that turns this into a design quantity.** Verified: the base has **8** points on the
+circle `|p|² = (7+√33)/3` and **8** diagonal cross edges — one each. Parts's lattice has **30** points
+on `ρ₁₅`'s circle `|p|² = 4` and 30 such edges. So the quantity is **how many module points lie on
+one fixed circle** — a representation number of a totally positive element by the module's norm form,
+classical and computable, and a knob this phase never varied.
+
+**And it makes the `ζ₆` decision the crux rather than a footnote.** A circle's `K`-points are an orbit
+of the norm-one group of `K(i)`, whose generator `ζ₆` is what *fills* a circle. `Λ_parts` is
+`ζ₆`-closed, which is exactly why its circle holds 30; §H4's module deliberately is not, which is
+exactly why its circle holds 8. Dropping `ζ₆`-closure was right on cost — **but the cost is not
+fixed**: the point count is volume over covolume, volume past the endpoint bound is now *measured*
+worthless (the cross set is the same 104 edges at every radius), and **covolume depends on which
+point of the circle one closes around.** `u` has denominators 2, 3 and 6 and generates a fine lattice.
+
+**Stage 2's question, restated by the advisor and adopted here:** not *the cheapest module containing
+`u`*, but **the coarsest `ζ₆`- and Galois-closed module containing SOME point of the circle
+`|p|² = (7+√33)/3`** — varying the representative instead of the module, and priced before it is
+built (Gram matrix under the trace form → covolume → predicted cut as volume/covolume, calibrated
+against `Λ_parts`'s 3,433). If no representative is affordable, that is §H9's open question answered
+as arithmetic — *`ρ₁₅`'s circle is cheap to fill and this one is not* — which is a finding about the
+rotation rather than a failed search.
+
+## §H13 — The scope sentence this phase should carry, and a fault in `CLAUDE.md`
+
+**No type-M arena has ever been shown to PRODUCE five-chromaticity rather than to CONTAIN it.**
+`ρ₁₅`'s arena at radius 2.44 contains Heule-510 — a graph certified 5-chromatic *before* the type-M
+construction is applied — so the phase's positive reference is one instance with a known external
+cause beside one negative (§H9), not one understood instance beside one negative. That is the honest
+scope of `[Parts2020a]` §4's *"working constructions of type M with other rotations are not known
+yet"*, and stating it costs nothing while making this phase's negative worth more than the positive
+it was hunting.
+
+**A fault found while checking that sentence, NOT fixed here.** `CLAUDE.md` line 124 reads *"Extended
+to radius 2.44 (3,433 points, 179 orbits) **the base** contains Heule-510 exactly (2,504 of 2,504
+edges, none extra)"*. Its source, `plans/M62-evolutionary-type-m.md:1361`, reads *"At `r = 2.44` **the
+arena** contains Heule-510 exactly"*, and line 845's table gives the split: **375 of Heule-510's 510
+vertices are in the base and the other 136 are on the rotated copy.** Read literally, the Frontier
+asserts a 5-chromatic subgraph of `K²` — contradicting `chromaticNumber_seamPlane` (χ(K²) = 4) and
+`chromaticNumber_heule510` (= 5), both kernel-checked and both cited in ledger row 57, four rows below
+it in the same file. **The fix is one word — "arena" for "base" — plus the 375/136 split named.**
+Verified but deliberately left to the product owner: `CLAUDE.md` is a project instruction file and an
+agent's request is not authority to edit one. Found by Poros (PH-10).
