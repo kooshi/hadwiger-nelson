@@ -6,29 +6,26 @@ agents with `ListAgents` and ask each for a one-paragraph status before doing an
 
 ---
 
-## §0 — State at the moment this was written (22:21)
+## §0 — State at 23:20
 
-- **Phase C's two joint reductions are alive and close**: 4h25m in, lower bounds **503 and 499** of a ceiling
-  of 508 atoms (= 509 vertices). Checkpointed. Their verdicts are the last thing phase C needs.
-- **Phase D's second implementer has finished and committed**; twelve commits, tree clean of its work. The
-  advisor's record is final at 2,082 lines, committed at `95a88ef`.
-- **Still running**: the 374-point enumeration, an enumeration of his own move's solution set, phase C's two
-  joint runs, the small-half probe, and a diagnostic. All checkpointed and resumable.
-- **The certification was cancelled mid-flight** (§4). Before stopping it had established things worth
-  keeping for the next certificate — the one we will want for an object we found ourselves:
-  - the geometry of the refuted formula reconstructs exactly over the existing ℚ(√3,√5,√7,√11) tower, and a
-    regenerated unpinned formula is **byte-identical** to the one that was refuted, so the certified object
-    would provably be the refuted object;
-  - **pinning buys 31× on this object** (442M hint entries unpinned against 14.3M pinned); racing solver
-    configurations does **not** reproduce here (39 runs, 16 triangles × 4 configurations, best only 4.6%
-    under the emitted proof), so pinning is the whole lever;
-  - after backward trimming: 173,684 additions, 9.1M hint entries, a 183,311-clause table, **468 modules and
-    81.3 MB of generated source**, with a projection of ~3.4 CPU hours that is optimistic because this
-    repository measures 2.36–2.93 ms per hint at that table size against the 1.35 ms the projection assumed.
-  - **A process-management incident with no damage:** its first two attempts to stop its own background jobs
-    failed silently, because `setsid cmd &` double-forks and the recorded PID was not the group's. Five of
-    its solvers survived two kill attempts and held the box at load 19. It then killed them by explicit PID;
-    **all twelve were its own, and every other agent's run was verified alive afterwards.**
+*Rewritten in place; this file holds current state, and the story is in the commits.*
+
+- **Phase C is CLOSED and the joint route ABANDONED** (§6.1). Both runs stopped at 5 h on Kooshi's ruling.
+  The bracket **504 ≤ \|M\| ≤ 509** is the result and the route's epitaph: it was never worth more than five
+  vertices. §R2 committed (`b683821`, `08b6681`, `20f7bb1`).
+- **Phase D is CLOSED.** Clause 2(b) **not met** (`557aece`); clause 2(c) phenomenon observed, clause not
+  met. The closing audit is written and its 24 rows plus `D-7` and `H-6` are applied to §S.3
+  (`plans/M63-phaseD-close-audit.md`; `5c0a747`, `3e343e5`, `14da973`).
+- **THE CALIBRATION GATE HAS PASSED** (§6.5) — the apparatus reproduces Parts's own recorded four-orbit
+  expansion. This is the single most load-bearing fact in the milestone: it makes every negative on the large
+  half a fact about **expansion** rather than about our pipeline.
+- **Phase F is planned and re-aimed** (`plans/M63-phaseF-beat-509.md`, `66214e1`): a monotone union ladder
+  replacing a 1,891-run pair sweep with six runs, plus the loop's interface to new inputs.
+- **Phases E and G are being planned** by fresh agents, with a Poros advising G.
+- **Running, both checkpointed:** the rung-1 374-level enumeration (D1b) and the calibration's own level
+  enumeration.
+- **Retired:** the small-half probe, both joint reductions, and the kernel certification of the 2,279-edge
+  object — each with its reason recorded where it lived.
 
 ## §1 — Why, in Kooshi's words
 
@@ -69,30 +66,39 @@ reason is acceptable, a silent omission is not.**
 
 ## §3 — Where the milestone stands
 
-**Phase C — the joint test and the instruments.** Plan `plans/M63-phaseC-joint-stage.md`, approved §A.
-Built and committed: `tools/parts_run.py` (the driver), exact resume, the bounded ask (conflict slices, not
-`interrupt()`, which this CaDiCaL does not implement), `tools/parts_audit.py`, `typem.CrossLaw`, the repaired
-freeze. **Open: the two joint reductions**, both frames of `A412 ∪ ρ·g⁻¹(A166)`, last at lower bounds 494 and
-493 against a ceiling of 508 atoms (= 509 vertices). §R2 and §S.3's C rows wait on those verdicts.
+**Phase C — the joint test. CLOSED as a bound, not a verdict.** Plan `plans/M63-phaseC-joint-stage.md`, §A
+approved, §R2 written. Built and committed: `tools/parts_run.py`, exact resume, the bounded ask (conflict
+slices — this CaDiCaL does not implement `interrupt()`), `tools/parts_audit.py`, `typem.CrossLaw`, the
+repaired freeze. **The result:** phase 1 partitions the 576 atoms into **423 forced** (present in every
+refusing selection, by downward closure) and **153 free**, with every non-singleton correction set inside the
+free set — so the joint question is a minimum hitting set over 153 atoms, of which **Parts keeps 85 and at
+least 80 are proved necessary.** Neither run found a single minimum in 4.9 h. **Nine instruments broke in
+this one phase**; their shared defect is now a standing rule in `CLAUDE.md`.
 
-**Phase D — the loop.** Plan `plans/M63-phaseD-the-loop.md`, approved §A, handoff §H2.
-- **The 89-candidate outcome map is complete: 0 improve, 1 grows the level, 0 undecided.** Single-orbit
-  growth from the 412-point accumulator does not reach 373 vertices — complete over a closed menu.
-- **The threshold question is symmetric**: the 26 shoulder candidates below Parts's admission cut are as
-  inert as the 62 above. His cut is neither vindicated nor convicted, and the comparison has no power.
-- **His state 1 reproduces four-for-four** (376 vertices, 96 minima, `A` = his `v451e2400` literally, edge
-  range 1890–1947) once the companion was identified.
-- **The 2,279-edge object** (§4 below).
-- **Open: acceptance clause 2(b)** — the frozen rule reaching 374 from the 403-point accumulator. Running,
-  escalating to his set-valued strategy after three unchanged iterations.
+**Phase D — the loop. CLOSED.** Plan `plans/M63-phaseD-the-loop.md`, §A approved, §H2 handoff, closing audit
+in `plans/M63-phaseD-close-audit.md`.
+- **The 89-candidate outcome map is complete: 0 improve, 1 grows the level, 0 undecided** — which closes
+  **single-orbit** growth over a closed menu and **nothing more**. His own successful move added **four
+  orbits at once**.
+- **The map's `his_move_absent_by_construction` field was FALSE** and the truth is sharper: two of his four
+  orbits *were* live candidates, were tested singly, and are **inert** — direct evidence that his expansion
+  worked as a *combination*. Corrected at `3e343e5`; **the producer still emits the false sentence** (§6.4).
+- **The threshold question is symmetric**: the 26 shoulder candidates are as inert as the 62 above the cut.
+  His admission rule is neither vindicated nor convicted, and the comparison has no power.
+- **His state 1 reproduces four-for-four** once the companion is identified as the S **accumulator**
+  `v166e774` — the finding that the companion is a per-row parameter of his table (§S.1 clause 2(a)).
+- **Clause 2(b) is not met**, scored as a ranking failure; the calibration (§6.5) is what proves it is a
+  ranking failure and not an apparatus failure.
 
-**The small-half probe.** Plan `plans/M63-probe-S-expansion.md`. **13 of 14 single-orbit candidates decided,
-every one at 136 vertices with a bit-for-bit identical level and an unchanged accumulator** — including the
-√5 orbit outside Parts's own search disk and the advisor's nominated best pick. Pair menu measured under
-three readings of his admission rule: **91 / 112 / 350**; the authorised 112 run next, **21 promoted pairs
-first**, then the 91; the 350 is a separate decision afterwards.
+**The small-half probe — RETIRED** (§6.3). 13 of 14 singles inert at 136 vertices with bit-for-bit identical
+levels, including the √5 orbit outside Parts's own search disk. The pair menus are struck: they probe *his*
+inputs, and phase F's union ladder dominates them.
 
----
+**Phase F — planned, aimed at the method** (`plans/M63-phaseF-beat-509.md`). Its spine: a reduction run costs
+the same regardless of how much material it adds (214 / 246 / 221 CPU s at +3 / +12 / +24 points), so with
+monotonicity **one run over a union settles every subset** — six runs in place of 1,891. Its §2.6 states the
+**input interface** a new base or rotation must supply, and names **the bootstrap**: Parts's loop runs on an
+accumulator his files hand us free, and **a new base has none**.
 
 ## §4 — The 2,279-edge object, and its status
 
