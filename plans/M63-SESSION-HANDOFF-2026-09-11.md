@@ -264,6 +264,38 @@ the observation that his greedy discard of 36 was nowhere near optimal.
     the loop emits — **and it would have applied to phase D's 89-candidate map**, which is the evidence
     behind "single-orbit expansion is closed". A check that can validate existing evidence retroactively is
     worth more than one that only guards future runs.
+
+---
+
+## §6a — WHEN THE TWO JOBS LAND: the ordered queue
+
+*Five items are blocked on the same condition — `tools/` cannot be edited while `parts_run`/`parts_diag`
+hold it open, because Python 3.14's `forkserver` re-imports an edited module in any worker spawned after
+the edit. They are scattered above; this is the order to do them in, and the order matters.*
+
+1. **Let `hismove` write its record first.** The calibration verdict exists only at `finish()`; everything
+   downstream cites it. Do not kill it to start the queue.
+2. **Integrate the hitting-set engine — ENUMERATE ONLY** (approved, scoped, written at `bfe4ff9`). Leave
+   optimum-finding on the existing code: nothing wins there, so there is no risk worth taking. The safety
+   argument belongs in the integration commit — in the enumeration phase the iteration count is the size of
+   the level, a property of the *problem* and not of the engine, which is what makes the differing-chosen-set
+   caveat provably harmless there. **The engine goes in the launch budgets and NOT in the problem hash**: it
+   invalidates nothing already checkpointed and only makes the future path different. Acceptance is
+   pre-registered — re-run the M6B403 stage (360-member level, 375 vertices, 87 s) and require
+   `regenerated-identical`.
+3. **The anchor** (§9): make it required at every call site, or make its absence a printed, recorded field.
+   Today `check_invariants` writes the anchor block only `if anchor is not None` and the verdict reads
+   `restriction-identity-holds` either way, so off is indistinguishable from on.
+4. **The freeze** (§10): per-row registration, **never a re-freeze** — re-freezing silently changes what the
+   already-scored rows were judged under. And move the descriptive fields out of the hash, or the receipt
+   keeps asserting a starting state that is false for every row but one.
+5. **`tools/parts_loop.py` line 810** (§4): the producer still emits the his-move field its artifact no
+   longer carries, so the artifact does not regenerate from committed code. Fix, regenerate, confirm match.
+6. **`tools/typem.py`: seven `kfloat(...)` comparisons acting as verdicts**, not one. Say which of the seven
+   decide an outcome and which merely order a list — sorting by a float is harmless, admitting by one is not.
+
+**Then, and only then, the two things that actually chase the record:** screen the one new rotation (minutes),
+and build the multi-orbit union ladder. Everything above is the cost of trusting what they return.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
