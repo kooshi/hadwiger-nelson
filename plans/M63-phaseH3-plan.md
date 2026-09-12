@@ -508,3 +508,98 @@ Heule-510/553 and de Grey's 1581 both carry it, so those cannot embed at any pos
    order-**48** group, so the pattern count is the cost driver and is unknown. **Report the price before
    spending it.**
 4. **Encode the 4-core, not the raw arena.**
+
+---
+
+## §8 — The endpoint bound does not govern the base, and growing it is provably free (2026-09-12)
+
+The commissioned question came back with a derivation, two measurements that reframe the family, and a
+theorem. Record: `plans/M63-phaseH3-module.md` §§5b–5d.
+
+### The derivation
+
+Collinearity forces `t² + s² − 2cos θ·t·s = 1`, positive definite, hence `t ≤ 1/|sin θ|`. **That is the
+bound's entire content: no point beyond it is an ENDPOINT of any cross edge.** It says nothing about the
+base's extent. Finiteness comes from the four-conjugate cut at every radius, and by Theorem B the base is
+four-colourable however large it grows. **So what bounds the base is compute, and nothing else.**
+
+### What the two existing objects actually do
+
+| | relation to its own endpoint bound |
+|---|---|
+| `[Parts2020a]`'s 374-vertex base | **went past it, by 1.222×** — his outermost orbit reaches 2.5243 against a bound of 2.0656 |
+| phase H2's `n = 16` base | **stopped exactly at it** — `576·256/63` *is* `144·(32/√63)²`, and 25,567 reproduced independently |
+
+**And the sharper half: Parts's base is not a disk cut at all.** It is a selection of 37 + 14 orbits, which
+reframes every "radius" comparison this project has made about his object. Reported with its ambiguity left
+standing rather than collapsed — **12 of 509 vertices certainly beyond the bound, at most 27**, the certain
+twelve coming from one orbit all of whose 24 members are present, so no choice of fillings avoids them.
+
+### The theorem — phase H3's second family-level result
+
+> **Every proper four-colouring of a larger base restricts to one of the smaller, so the colourings of the
+> larger are a SUBSET. Therefore the set of interface patterns the base can present on the circle is
+> monotone NON-INCREASING as the base grows, while the circle count is fixed. The refutation gets strictly
+> easier and can never get harder.**
+
+The counting compulsion (G53) is the special case: `L = min |B(h)|` is monotone non-decreasing, so
+`2L > circle count` moves the right way and never back. **This converts "grow past the bound" from a hopeful
+lever into a free one, and it is provable rather than measured.** It also means pricing the solve only at
+the bound prices the *hardest* version of the problem — the instance's difficulty is driven by the interface
+pattern count, and that count **falls** with radius.
+
+### The corollary nobody saw coming, and it is about the family
+
+**The circle sits at `√(1 − 1/(4n))` of the endpoint bound — 93.5% at `n = 2`, 96.8% at `n = 4`, 99.2% at
+`n = 16`.** So **the circle is essentially on the arena boundary in every member of this family, by
+construction.** Circle points are starved of neighbours because they sit at the rim, and growing past the
+bound is the only thing that feeds them. That is a statement about the family, not about `n = 2`.
+
+### The growth curve, and what is now being priced
+
+| radius | base points | arena | circle degree, of 60 available |
+|---|---|---|---|
+| **1.5119** (the bound) | **16,309** | 32,618 | **2** |
+| **1.7** | **41,953** | 83,906 | **4–6** |
+| 2.0 | 150,769 | 301,538 | 8–10 |
+| 2.5 | 898,069 | 1,796,138 | 60 — saturation, derivable from `\|q+s\| ≤ √2+1` |
+
+**Both the bound row and the 1.7 row are commissioned for pricing.** The 1.7 row is **the record's own
+realised connectivity** (its circle points carry 5–7) at an arena 1.64× phase H2's. If the pattern count
+there is enough smaller to pay for the vertices, that is the instance to solve.
+
+### What this does to the phase's two thinness findings
+
+**Both survive as measurements and lose their force as verdicts.** The advisor's 7.38-against-21.30 and the
+2-of-60 usable neighbours are facts about a radius nobody has to respect. Neither may rank the object; both
+are reported with the radius attached.
+
+### The shape trade, verified and quantified
+
+Each conjugate condition beyond the first costs **~2.0–2.6×** in realised connectivity, independently —
+step factors 2.50×, 2.60×, 2.00× imposing them one at a time, a clean geometric decay, with the
+two-embedding objects' single extra condition at 2.23× inside the same range.
+
+> **Dropping the shape buys 2× nominal — 60 circle points, 60 unit vectors — and pays two extra conjugate
+> conditions, ≈2.3² ≈ 5.3×, in realised connectivity at fixed radius-relative-to-bound. Net ≈2.6× worse.**
+
+Predicted circle degree `6.20 × 2/5.3 = 2.34` against measured **2.00** — the dominant effect, not the whole
+of it, and stated as such.
+
+### Two defects the engineer found in its own work
+
+It read the orbit-fillings JSON's `degree` field as the orbit size (it is the *graph* degree; the centre's
+row reads `degree 30, filling 1`), which made its first full/partial verdict meaningless — **caught and
+recomputed before the table was reported**, a defect whose result would have flattered nobody. And it
+corrected its own script's claim that first-embedding degree *"matches the Euclidean prediction"* to
+**low by 13–25%, because the unit vectors are not uniformly distributed in direction** — keeping the ratio,
+which is the measured thing, and discarding the absolute. **A right measurement of the wrong quantity is
+this milestone's signature failure; catching one in your own output is the version that counts.**
+
+### An inherited number under check
+
+Phase H2's log reports `FREE CIRCLE: … unit degree in r=5 cut: min 30 max 30` — a **radius-5** measurement
+two lines before that arena is built at 4.0316, where the shipped artifact's circle-point degrees are
+`{5:6, 6:12, 7:12}`. The theorem is fine; the number is a property of a radius the arena does not use. **Out
+for a propagation check** — with the caution that **30 legitimately appears throughout phase H2's record as
+the COUNT of circle points**, and only 30-used-as-a-degree is the defect.
