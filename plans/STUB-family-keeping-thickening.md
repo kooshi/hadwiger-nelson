@@ -76,6 +76,17 @@ runs on de Grey's field first.
 Medium. It is the only place M57's principle could apply; a negative closes the principle at five colours as a design
 route and hands the question back to FS-2 (what carries forcing without rigidity).
 
+**A route this target does NOT have, measured 2026-09-11 (M63 phase G).** A rotation of Parts's type joins only
+points collinear with its centre, so the admissible rotations enumerate exactly over the base's lines rather than
+being sampled from a sieve. Run exactly on his §5.6 base and on a second base: **26 candidate rotations, 6 surviving
+the 2-adic filter — and not one of the survivors is 6-open.** Every one sits in a field where the prime 11 stays
+usable, which is precisely the condition that seals a field at five colours (G43, G48). **So the six-level design
+target is not reachable by choosing a different rotation of this type on this lattice** — the rotation degree of
+freedom is exhausted, and a 6-open field has to come from somewhere else (a new base lattice, or a spindle over a
+forced pair as G48 describes). This is a genuine narrowing of FS-6's search space, not a failed experiment: it
+removes an option that looked free. Recorded from `plans/M63-phaseG-bases-and-rotations.md`; the filter rests on a
+field-level gap this project has not closed, so each elimination is a **testable prediction, not a proof**.
+
 ---
 
 ## §H. Handoff for the session that opens M62 (written 2026-09-08 at the M61 close, on Kooshi's "FS-6 it is", before his compaction)
