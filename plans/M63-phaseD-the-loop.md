@@ -2113,3 +2113,40 @@ A corollary worth carrying, because it is what made the silence look like death:
 period is not evidence of a crash when a single ask may legitimately run to its wall.** Compare the
 gap against the per-ask budget before concluding anything — 7 minutes of silence under a 600-second
 per-ask wall is a slow question, not a dead process.
+
+### R3.12 — Two predictions registered DURING phase D, before the runs that decide them
+
+*Registered here, in a commit, before the deciding run produced its number. Both are Poros's,
+adopted; the discipline is that a mismatch predicted in advance is a confirmation and a mismatch
+found afterwards is an excuse.*
+
+**P-D16 — our `H2#4` low edge endpoint is 1860, and his published 1868 is wrong or truncated.**
+Registered before D1.c reached `H2#4`. The argument is forced and needs no solver:
+
+1. His two M6A rows are **one working graph at two rungs** (`A406 ⊆ g(A412)`), so they share a
+   companion, whatever it is.
+2. `v374e1860` is in his **rung-1** level — it is that row's low endpoint and the file exists.
+3. It is `⟨g₂₃⟩`-invariant with stabiliser **exactly 2**, which is also what his own `1 (2)`
+   parenthetical claims for that row's fewest-edge member: his table and the measurement agree.
+4. His **rung-2** level is the same problem restricted to `⟨g₂₃⟩`-invariant selections at the same
+   weight, and `v374e1860` satisfies that restriction.
+
+So `v374e1860` must be in his rung-2 level and **his rung-2 range must start at 1860. He publishes
+1868–1884.** The argument is robust to *which* companion he used, since it needs only the *same* one
+in both rows. **Three causes, not split:** a truncated level (then his `|{M}| = 78` and
+`A = v406e2082` are lower bounds, not counts, which reaches every rung-2 row); a companion differing
+between adjacent *states* rather than merely between rows; or a typo (he has two demonstrated
+already, and 1868 against 1860 is one digit in an otherwise exact row).
+
+**Falsifier: our `H2#4` low endpoint coming out at 1868**, which would break the invariance argument
+and mean the fault is ours after all. **Why it is registered rather than reported:** when D1.c lands,
+"our range is eight low again" would otherwise read as a second wrong companion, and that reading
+would be wrong.
+
+**P-D17 — a methodological hazard phase E meets on every held-out row.** Comparing *seven* of our
+runs against *one* of his numbers gives seven chances to match by accident. It already happened: the
+`H2#0` row returned 78, his attested count exactly, and `H2#0` is **not his rung**. The discipline
+that removes it is to compare only against the run identified as his; what makes that **cheap** is
+§R3.4 and P9 together — **the companion is a rule and the rung is a stabiliser computation, so both
+are pinned BEFORE any run rather than argued after.** The capability closes the hazard that motivated
+it.
