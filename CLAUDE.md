@@ -16,8 +16,10 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 90,000 characters** (Claude Code's limit is 150,000, and the two imports
-above add about 40,000).
+**Size budget: keep this file under 150,000 characters** (Kooshi, 2026-09-11: the budget is on *this file
+itself*, not on the file plus the two imports above — there is a lot here worth remembering). The budget is
+a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
+comes out whether or not there is room for it.
 
 ## The mission
 
