@@ -1217,6 +1217,57 @@ contains the record, so the record's own 508-atom selection is a near-optimal as
 known in advance — it refuses — and the record minus one atom is colourable. Both fired, on a stage
 built independently of c4.1's.
 
+### R2.2b — C4a and C4b: NO VERDICT, a rigorous partial bound, and a halt
+
+**Both runs terminated at five hours without closing, within seven seconds of each other, and
+neither wrote its record.** Logs end mid-iteration with no verdict line and no traceback.
+
+| | C4a (frame coset 1) | C4b (frame coset 2) |
+|---|---|---|
+| last iteration | 1576 | 1455 |
+| **lower bound reached** | **503** of the 508 ceiling | **500** of 508 |
+| correction sets `Y` | 1,998 | 1,877 |
+| asks | 32,357 colourable @0.0425 s / 7,559 refusing @0.4678 s | 29,295 @0.0429 s / 6,714 @0.5151 s |
+| **undecided** | **0** | **0** |
+| elapsed | 18,228 s | 17,990 s |
+| log stops | 22:57:55 | 22:57:48 |
+| last checkpoint | 22:57:15 | 22:57:24 |
+
+**Two independent single-threaded processes, launched five minutes apart, dying within seven
+seconds of each other** points at a common external cause, not two coincidental failures. No OOM,
+kill or segfault in the kernel log; 15 GB of 125 in use. **Halted and reported rather than
+diagnosed or retried**, per the standing rule. Both checkpoints are intact and 30–40 s old, so a
+resume redoes at most that plus one in-flight ask and one shrink.
+
+**WHAT IS ESTABLISHED ANYWAY, and it is not nothing.** The lower bound from a hitting set over the
+harvested `Y` is rigorous at every instant (`mhs(Y) ≤ mhs(Y*)`, §O(1b)), and both runs had **zero
+undecided asks**, so nothing is conditional on a budget. Therefore, over `A412 ∪ ρ·g⁻¹(A166)`:
+
+> **No joint selection of 503 atoms or fewer refuses four colours** — so the joint minimum in
+> frame 1 is **at least 504 vertices**, and at most 509 (c4.1's derived ceiling, since the record
+> itself is a refusing selection inside this working graph). **The joint minimum lies in
+> [504, 509] vertices.** In frame 2 the same argument gives **at least 501**.
+
+So the record could not have been beaten by more than five vertices on this material, and the
+question C4 exists to answer — *is it 509 or fewer* — is narrowed to a five-vertex window but
+**not answered**. P-C4.1 is **unresolved**, not falsified.
+
+**Prediction scoring, for the clauses that are decidable:**
+
+- **P-C4.3 — SPLIT.** "phase 1 < 60 s" is **falsified** (85 s). "the bound closes within 90
+  minutes" is **falsified** decisively (five hours, not closed). "≥ 1,500 correction sets" is
+  **met** (1,998 and 1,877).
+- **P-C4.1, P-C4.2, P-C4.4 — UNRESOLVED.** No minimum was ever recorded (`minima 0` in both), so
+  the level was never reached and the split and the frame-2 comparison have nothing to score
+  against. They must not be read as falsified.
+- **The stop rule never came into play**: nothing at or below 508 atoms was ever found.
+
+**The ninth instrument, and it is mine.** The product owner's four-hour reporting point passed
+without a report, because I was waiting on **exit** waiters and had no turn in between. *A waiter
+can only tell me a thing has ended; it can never tell me a thing is late.* A time-based obligation
+needs a timer, not an exit-waiter — and this is the same family as the other eight: an instrument
+that could not report the thing actually needed.
+
 ### R2.3 — The ask budget is a conflict budget, and why that is a finding
 
 The subplan specified `solve_limited(expect_interrupt=True)` with a `threading.Timer` calling
