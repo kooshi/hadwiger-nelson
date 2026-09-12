@@ -260,6 +260,9 @@ Acceptance:
   **If they do not**, then no published device predicts his own recorded move: D's rule is ours alone,
   scorable only by outcome, and the record says that plainly. Discharges P6 in its useful form.
   *(≈ 6,000 asks, tens of minutes at the measured costs.)*
+  **Moved to the clause 2(b) follow-on, 2026-09-11** (§S.3 rows C-5 and P6): phase D never implemented
+  the indicators — its replays were overtaken by the companion finding, and the rule was frozen and run
+  without them — so his device is still untested and P-D1 is unscored.
 - [ ] **A candidate rule of our own, offered by Poros and unverified:** rank an expansion by **how many
   currently necessary atoms it frees** — an atom is necessary exactly when it is a singleton correction
   set, and an expansion helps when the new material covers what such an atom covered alone. Priced in
