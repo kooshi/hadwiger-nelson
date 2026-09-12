@@ -1569,11 +1569,20 @@ by the footnote.
 
 ### R2.7 — What phase C did NOT do, stated as such
 
-- **`--verify-checkpoint` is not wired.** A corrupted or hand-edited checkpoint would restore
-  unverified correction sets, and an unverified correction set is the one direction that could make
-  a lower bound unsound (a *stale* `Y` cannot: fewer constraints admit more candidates, and every
-  candidate is verified by an ask before it is recorded). Our correction sets are verified by
-  construction, so this matters only for a checkpoint that has been moved or edited. Not done.
+- ~~`--verify-checkpoint` is not wired.~~ **Now wired, opt-in, with a two-sided control.** It
+  guards the only direction that can make a lower bound **unsound**: a *stale* `Y` cannot (fewer
+  constraints admit more candidates, and every candidate is verified by an ask before it is
+  recorded), but an unverified **correction set** can, because it adds a constraint that is not
+  true, so `mhs(Y)` may exceed the truth and the optimality claim fails. Ours are read off an
+  actual colouring and so are verified by construction — a checkpoint that has been moved, edited
+  or corrupted can restore one that never was. On load with the flag, `N` restored correction sets
+  are re-asked: deleting `C` must leave the graph colourable, or the resume is **refused** and the
+  failing sets are named. **Strictly opt-in** (`verify_checkpoint = 0` skips the block entirely),
+  deliberately, so the default resume path is byte-for-byte what C4a and C4b would get while they
+  are live. **The control fires both ways** on the S166 order-6 rung: the clean checkpoint is
+  accepted (*"5 of 38 restored correction sets re-asked, all colourable on deletion"*), and one
+  with a **droppable-alone atom planted as a singleton correction set** — which it is not, since
+  deleting it alone keeps the property — is refused, naming the planted set.
 - **The Table 2/3 shading is not extracted**, so the stable/unstable partition is **unattested**.
   The ranges do not depend on it, and every orbit row carries its status measured on *our* level
   (`stable` / `unstable-constant-count` / `unstable-varying-count`), which is a statement about our
