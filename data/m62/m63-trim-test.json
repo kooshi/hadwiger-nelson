@@ -1,0 +1,38 @@
+{
+ "kind": "m63-trim-test",
+ "schema": 1,
+ "producer": "tools/parts_diag.py:trimtest",
+ "question": "does many_then_trim's trim remove vertices his own recorded move needs?",
+ "min_final_degree": 3,
+ "his_move_vertices": 30,
+ "survive_single_pass": 30,
+ "survive_fixed_point": 30,
+ "trim_passes": 0,
+ "by_orbit": {
+  "[0, 0, 2, 2]": {
+   "in_his_move": 6,
+   "survives_trim": 6
+  },
+  "[0, 0, 6, 6]": {
+   "in_his_move": 12,
+   "survives_trim": 12
+  },
+  "[0, 0, 0, 4]": {
+   "in_his_move": 6,
+   "survives_trim": 6
+  },
+  "[0, 0, 2, 6]": {
+   "in_his_move": 6,
+   "survives_trim": 6
+  }
+ },
+ "degree_histogram": {
+  "4": 15,
+  "6": 9,
+  "8": 6
+ },
+ "verdict": "trim-preserves-his-move",
+ "reading": "if the trim preserves all 30, the binding constraint is the ordering or the cap and a bigger knob would have found it; if it removes any, then `many_then_trim` cannot express his own recorded move AT ANY CAP, which is a fact about his second published strategy rather than about our implementation of it",
+ "monotonicity_note": "adding vertices can never raise w*, and his 30 give w* = 373, so EVERY superset of them reaches 374 -- which is why the rule's failure is omission and why over-proposing can cost only time, never correctness",
+ "seconds": 75.2
+}

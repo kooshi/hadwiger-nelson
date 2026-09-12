@@ -209,6 +209,75 @@ def hismove(*, wall_ask=600.0, log=print) -> dict:
     return out
 
 
+def trimtest(*, min_final_degree=3, log=print) -> dict:
+    """**Can his own second published strategy even express his own recorded move?** (Poros card 30.)
+
+    The forced part first, because it settles the category of the rule's failure. Adding vertices
+    can never raise `w*`; his 30 vertices give `w* = 373`; **therefore every superset of those 30
+    also reaches 374**, whatever else it carries. The frozen rule's 48-vertex proposal is not a
+    superset — it omits `(0,0,0,4)` and `(0,0,6,6)` — so what it added was never harmful, only
+    insufficient. **The failure is omission, not a bad choice**, and over-proposing can only ever
+    cost time, never correctness.
+
+    That leaves three candidate binding constraints — the ordering, the cap, or **the trim**. This
+    tests the third, and it is the one that could be structural: `many_then_trim` strips new
+    vertices whose final degree into the enlarged graph stays below `min_final_degree`. If it
+    strips vertices his move needs, then **that strategy cannot reproduce his move at any cap**,
+    and his own second published device joins the other two that fail to select his own recorded
+    move.
+
+    Seconds, no solver, and it touches nothing frozen: a diagnostic on a published move."""
+    t0 = time.time()
+    base, st, rec, A = _state(log=log)
+    comp = V.load_lattice(os.path.join(REF11, "v136e564.vtx"))
+    orc = PL.EdgeOracle(base, comp, log=lambda *a: None)
+    Aset = set(A)
+    add = frozenset(t for o in HIS_MOVE
+                    for t in (base.tups[i] for i in base.orbits[base.by_label[o]])
+                    if t not in Aset)
+    W = Aset | add
+    deg = {t: orc.deg(t, W - {t}, PR.READING) for t in add}
+    single = {t for t in add if deg[t] >= min_final_degree}
+    keep = set(add)
+    passes = 0
+    while True:
+        W2 = Aset | keep
+        drop = {t for t in keep if orc.deg(t, W2 - {t}, PR.READING) < min_final_degree}
+        if not drop:
+            break
+        keep -= drop
+        passes += 1
+    by_orbit = {}
+    for t in add:
+        lab = base.label[base.of[t]]
+        row = by_orbit.setdefault(str(list(lab)), {"in_his_move": 0, "survives_trim": 0})
+        row["in_his_move"] += 1
+        row["survives_trim"] += int(t in keep)
+    survives = len(keep) == len(add)
+    out = {"kind": "m63-trim-test", "schema": 1, "producer": "tools/parts_diag.py:trimtest",
+           "question": "does many_then_trim's trim remove vertices his own recorded move needs?",
+           "min_final_degree": min_final_degree, "his_move_vertices": len(add),
+           "survive_single_pass": len(single), "survive_fixed_point": len(keep),
+           "trim_passes": passes, "by_orbit": by_orbit,
+           "degree_histogram": {str(k): sum(1 for t in add if deg[t] == k)
+                                for k in sorted(set(deg.values()))},
+           "verdict": ("trim-preserves-his-move" if survives else
+                       "TRIM-REMOVES-VERTICES-HIS-MOVE-NEEDS"),
+           "reading": ("if the trim preserves all 30, the binding constraint is the ordering or "
+                       "the cap and a bigger knob would have found it; if it removes any, then "
+                       "`many_then_trim` cannot express his own recorded move AT ANY CAP, which "
+                       "is a fact about his second published strategy rather than about our "
+                       "implementation of it"),
+           "monotonicity_note": ("adding vertices can never raise w*, and his 30 give w* = 373, "
+                                 "so EVERY superset of them reaches 374 -- which is why the "
+                                 "rule's failure is omission and why over-proposing can cost "
+                                 "only time, never correctness"),
+           "seconds": round(time.time() - t0, 1)}
+    log(f"  his 30 vertices: {len(single)} survive a single trim pass, {len(keep)} survive to a "
+        f"fixed point ({passes} passes) -> {out['verdict']}")
+    return out
+
+
 def fs35(*, log=print) -> dict:
     """FS-35's two quantities at our 375 state, both solver-free."""
     t0 = time.time()
@@ -232,7 +301,7 @@ def fs35(*, log=print) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd")
-    for name in ("card28", "fs35", "hismove"):
+    for name in ("card28", "fs35", "hismove", "trimtest"):
         p = sub.add_parser(name)
         p.add_argument("--out")
         if name == "card28":
@@ -243,6 +312,8 @@ def main():
         r = card28(mode="forall" if a.forall else "exists")
     elif a.cmd == "hismove":
         r = hismove()
+    elif a.cmd == "trimtest":
+        r = trimtest()
     elif a.cmd == "fs35":
         r = fs35()
     else:
