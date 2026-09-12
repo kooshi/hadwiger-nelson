@@ -221,6 +221,26 @@ the observation that his greedy discard of 36 was nowhere near optimal.
    enumeration, the cost work lands exactly where the rotation phase needs it. **The optimisation phase is
    NOT landed** — three formulations, one measured reason — and stopping there rather than trying a fourth
    at midnight on a contended box was the advisor's call and is the right one.
+
+9. **THE KNOWN-MINIMUM GUARD IS OPT-IN WITH A SILENT DEFAULT-OFF, and it is off at two of three call sites**
+   (verified 2026-09-11 23:42, from phase E's planner). `parts_loop.sweep_candidate` declares
+   `anchor_tuples=None`; only `parts_loop.py:769` passes an anchor. **`parts_rule.py:387` and
+   `parts_diag.py:196` pass nothing** — the second of those is the `hismove` calibration itself. So the
+   repository-wide claim *"every reduction is guarded by a known-minimum control"* **is not true today.**
+   - **What this does NOT overturn: the calibration result stands.** Its output *is* a known-answer check —
+     it landed on **374 vertices, Parts's own recorded outcome**, which is the strongest form of the very
+     assurance the anchor provides — and its pin control (`pin-agrees-everywhere`, 12 checks) and its
+     stage property check (*base keeps the property, companion alone does not*) both fired and are in the
+     log. What is true is that it ran with **one fewer control than anyone reading the code would assume.**
+   - **What it does mean is worse than a missing check.** A guard that is opt-in and defaults to off is the
+     same family as a guard that cannot run: it is silent exactly when absent. **Fix: make the anchor
+     required at every call site, or make its absence a printed, recorded field in every run record** — so
+     an anchorless run says so in its own artifact rather than looking identical to an anchored one.
+   - **Blocked, and why:** `parts_diag` and `parts_rule` are both in the live jobs' import chain, and Python
+     3.14's `forkserver` re-imports an edited module in any worker spawned after the edit. **Fix it when the
+     two jobs land, before any new run.**
+   - **And on new ground it cannot be supplied at all** — a new base has no known minimum. So phase E is the
+     last place the anchor can be calibrated, which is the same one-way door as §X.2's geometry check.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
