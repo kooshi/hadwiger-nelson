@@ -457,7 +457,27 @@ the plan says so. **If none does, that is written down BEFORE the run**, and E3 
 run it again with `--rule his_degree` and confirm the outcome is identical. That converts a null from a
 failure report into a derivation.
 
-**Cost** minutes each, single core. **Blocks** E3's interpretation and every `|{M}|` prediction.
+**E-pre.3 — Does E3b's starting state exist at all?** §7 item 1 of the first draft left this open and
+Poros turned it into a decision (his answer to press item (a), adopted whole). Stated as a constraint it
+stops being a search: `W ⊆ A375` refuses and contains **no** minimum `M_i` exactly when `W` omits at least
+one atom of each `M_i`, which is the clause `⋁_{a ∈ M_i} ¬select(a)` — **27 clauses**, one per minimum, on
+the instance `reduce_stage` already builds. Run the reduction of `A375` with those clauses added. Then
+either:
+
+- **no refusing selection** — every refusing selection of `A375` contains one of the 27 minima, **E3b is
+  impossible inside his accumulator**, and §S.1 clause 3 is reported **NOT MET** honestly; or
+- **a minimal `W` with `min(W) ≥ 368`** — which **is** E3b's starting state, delivered with its own minimum
+  already computed.
+
+One run, two answers, neither wasted, and it is a **decision** rather than a level — the cheap side of
+§1.6's split. Two things that sharpen it: the deletions must live entirely in the **free** atoms, since
+phase C's partition (423 forced by downward closure, 153 free) means deleting a forced atom makes the
+remainder colourable outright; and this is **not obviously possible**, because a `W` of E3b's kind needs
+`A375`'s refusing family to have minimal elements at **more than one weight**, and nothing measured so far
+says it does. That is precisely why it is a pre-run decision rather than a scheduled row's discovery.
+
+**Cost** minutes each, single core. **Blocks** E3's interpretation, every `|{M}|` prediction, and whether
+E3b exists.
 
 ### E0 — Close the rung-1 374 level (a REPLAY, not a held-out row)
 
@@ -753,7 +773,16 @@ predicate and the same cross law.
 | f4 | **one spurious edge among the NEW vertices only** | yes — "take edges from the assembled stage, never from a relation computed on the base" produced three faults in three agents in one afternoon | **nothing fires** |
 | f5 | **the shared centre made deletable** | yes — it is a one-character change in a mask | vertex count or the anchor's stray-vertex path fires |
 | f6 | **`anchor_tuples=None`** (not a fault — the shipped default in the frozen loop) | it is live in committed code | **nothing fires; the record reads as a pass** |
-| f7 | **target off by one** (`target = incumbent` instead of `incumbent − 1`) | yes — the target knob was added in phase D | **nothing fires**; the run returns `inert` for a candidate that would have improved |
+| f7 | **target off by one in the TIGHT direction** (`target = incumbent − 2` instead of `incumbent − 1`) | yes — the target knob was added in phase D | **nothing fires**, and the loop reports `inert` for a candidate that **does** improve. *The plan first planted the lax direction (`incumbent`) and that plant cannot demonstrate the claim* — see below |
+
+**Why f7's direction was inverted in the first draft** (Poros's answer to press item (b); verified here at
+`tools/parts_reduce.py:544`). The target break reads
+`if target is not None and state.w_star is None and wh > target`, where `wh` is the MaxSAT optimum over the
+harvested `Y` — a rigorous **lower** bound on `w*` — and it fires only *before* an optimum is found. So a
+**too-lax** target (larger) can never fire it: `w* ≤ incumbent ≤ target`, the search runs to the true `w*`,
+and **the verdict is correct**, merely slower. It is a **too-tight** target that answers its own question
+truthfully — `no-selection-at-target` — which the loop then reads as *"did not improve"*. **That is the
+off-by-one that produces a false inert**, and it is at least as realistic as the one first planted.
 
 Each fault is run on **one** known row (E2's stage is the cheapest: 373 atoms, a literal containment, a
 two-ask anchor), and the outcome recorded as **killed** or **survived**.
@@ -767,7 +796,7 @@ two-ask anchor), and the outcome recorded as **killed** or **survived**.
 | R1 | **extra material in `W`** | the anchor is **monotone**: if a known minimum refuses inside `W` it refuses inside every `W' ⊇ W`. `check_invariants`'s own docstring states the blindness as a feature — *"its answer is invariant under every expansion"*. Only the `minus_one` leg can fall, and it tests exactly **one** atom (the last in the anchor's order) | the vertex-count check catches *accidental* extra; **wrong** extra is caught only by exact geometry on every edge of the assembled stage, one exact pass, `O(V²)` |
 | R2 | **anything about the material an expansion ADDS** | the restriction identity compares only edges among the **unexpanded** vertices; the anchor lies entirely in the unexpanded part | promote the restriction identity to a **construction identity**: recompute the whole edge set from the stated law and compare, at the cost of one more stage build |
 | R3 | **the counting layer** — which group `up_to` used, and whether the level is complete | no check reads either; `|{M}|` is a report, and a capped level is a sample | a per-row **Burnside cross-check** (`raw / up_to` against the orbit-count formula under the declared group — already done once at 282, never asserted), plus making `LevelSet.require_complete` a **run** guard and not only a loop guard |
-| R4 | **the question asked** — target, rung, side | they are **echoed** into the record, never verified against an intention | re-reduce the returned `M` and require it returns **itself** with zero droppable (idempotence). A too-lax target returns a non-minimal object, which idempotence catches |
+| R4 | **the question asked** — target, rung, side | they are **echoed** into the record, never verified against an intention | **two, because the draft's catcher was wrong in both directions.** Idempotence catches neither: in the lax direction there is **no error to catch** (the verdict is correct), and in the tight direction a target-refuted run has **no object to re-reduce** — `parts_reduce.py:616` is explicit that *"a target-refuted run has NO level and therefore no `A` and no `|M|`"*. What works: **(i) the registration diff** — mechanically diff the record's echoed `target`/`rung`/`side` against §6 decision 9's per-row registration, which is being built anyway and needs only to be named as R4's catcher and run; **(ii) a one-unit tripwire on every loop negative** — a `no-selection-at-target` record carries `target_lb`, the bound at which the break fired, and **`target_lb == target + 1` means the candidate was refuted by exactly one unit**, which is precisely the population a too-tight target would misreport. Re-asking only those at `target + 1` is a cheap standing check on every `inert` the loop emits, and it would have applied to phase D's 89-candidate map |
 | R5 | **a consistently wrong problem** | every oracle-free relation — equivariance, monotonicity, idempotence — holds when both runs are wrong the same way | **nothing internal.** Only an external anchor or an independent re-derivation of the geometry (E9.5) |
 | R6 | **the anchor being absent at all** | `anchor=None` is a silent skip | a one-line change: a named verdict `anchor-not-supplied`, carried in the record and printed. **A fail-open becomes a fail-loud** |
 | R7 | **a fault in the code BOTH SIDES of check 2 share** | `check_invariants` compares the stage against a `reference` that `build_reference` builds from the same base, the same unit-edge predicate and the same cross law. A bug in any of the three corrupts both sides identically and the restriction identity still holds | the anchor (plant f0 demonstrates it), and on new ground E9.5's lifted geometry check |
@@ -823,6 +852,17 @@ rows"*; it is:
 agree with.** Copy its three controls verbatim, because they are the right ones: a known positive the
 instrument must agree with; a negative proving the path can return `SAT` at all; and an independent
 single-vertex deletion.
+
+**Its dependency is narrower than §4's order implies, and its real exposure is not ordering** (Poros's
+answer to press item (c)). Calibration needs only a stage where the anchor *also* fires — one containing a
+published minimum — and E2's qualifies, since `v367e1822 ⊆ A375` literally. So E9.5 depends on **E1 plus
+one stage build**, not on the row sequence, and if E1 lands early E9.5 should move up. The exposure is that
+half a day of engineering sitting in front of rows about to return interesting numbers is exactly the item
+deferred *"just until after E3"* — and ordering cannot prevent that. **Visibility can:** *"the lifted
+geometry check ran and agreed with the anchor on a row where both fire"* is an item in the acceptance list
+§X.1 drafts for §S.4 and a named line in E10's written judgement, so deferring it is a **visible unmet
+acceptance item at the close** rather than a quiet omission — the same discipline the phase applies to
+every other unmet clause.
 
 **The recommendation to phase G, in one line:** the anchor's successor is the **non-vacuity ask plus this
 lifted geometry check** (phase F §2.6 names both halves); the metamorphic relations cover the bookkeeping
@@ -899,7 +939,7 @@ phase E as planned** and is named here as the cheapest available upgrade, for th
 | P-E13 | E7 returns `\|M\| = 221` | 0.8 | E7(a) |
 | P-E14 | E7's `A` column agrees with Table 6 row by row, zero differing rows (phase C's `c2.9` already showed the checker can agree here) | 0.7 | E7(b) |
 | P-E15 | E8's loop expands before reaching 136, and does reach 136 | 0.6 | E8 |
-| P-E16 | **faults f4, f6 and f7 survive every control** (E9.2) | 0.9 | E9 |
+| P-E16 | **faults f4, f6 and f7 survive every control** (E9.2) — **and f7 is the TIGHT direction, `target = incumbent − 2`**. The draft's lax plant (`target = incumbent`) would also have "survived", but for the wrong reason: nothing was broken, so a survival there teaches nothing. The tight plant survives while the loop genuinely misreports an improving candidate as `inert` | 0.9 | E9 |
 | P-E17 | plant **f0** (a base point off the unit circle) passes checks 1–3 and is killed by the **anchor alone** | 0.85 | E9 |
 | P-E19 | plant **f1** (a different published companion half of the same size) does **NOT** fire on every anchor — residue (d) demonstrated rather than argued | 0.55 | E9 |
 | P-E20 | **E-pre.1:** on all six reduction rows `Aut(A)` and the whole base group coincide, so **no row separates the live ambiguity** and every `|{M}|` agreement is against the companion-fixed rival only | 0.6 | E-pre.1, solver-free |
@@ -1106,6 +1146,11 @@ Acceptance:
   anchor and the restriction identity, each recorded killed or survived, **plus a written residue** -- the
   fault classes the guard cannot see even when green, each with the cheapest thing that would catch it.
   `anchor=None` gains a named verdict `anchor-not-supplied` so the fail-open becomes a fail-loud.
+- [ ] **THE HEADLINE DELIVERABLE: the lifted geometry check ran and AGREED with the anchor on a row where
+  both fire**, and killed the planted geometric fault. `parts_edge_verify` leg 4 -- the only non-circular
+  re-derivation of a graph from the STATED law that this repository owns -- lifted out of its object-level
+  verifier to stage level. It can never be calibrated after phase E, because after phase E there is no
+  object whose answer we know.
 - [ ] A written human judgement over the frozen rows, and no aggregate verdict: no pass rate, no
   summable field in the artifact, no "broadly reproduces".
 
