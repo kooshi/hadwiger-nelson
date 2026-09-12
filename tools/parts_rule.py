@@ -302,7 +302,7 @@ def step(base, A_tuples, companion, cands, *, incumbent, rule, ctx, budget, refe
 
 
 def run_loop(base, start_record: str, *, companion_file, rule="ours", config=None,
-             checkpoint=None, out=None, wall_ask=600.0, jobs=1, log=print) -> dict:
+             checkpoint=None, out=None, wall_ask=600.0, jobs=1, ckpt_dir=None, log=print) -> dict:
     """The loop, from a starting reduction RECORD rather than from a graph.
 
     Refuses a starting record carrying `A_sample` and no `A` (control d4.1): the loop's state
@@ -336,7 +336,18 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
     cands = PL.menu_candidates(base, A_tuples, census, reading=READING)
     census_rank = {c.name(base): i for i, c in enumerate(cands)}
     reference = PL.build_reference(base, A_tuples, companion)
-    ckpt_dir = os.path.join(ROOT, "data", "m62", "ckpt")
+    # The loop's per-candidate checkpoints need their OWN directory. `parts_loop.sweep_candidate`
+    # names a checkpoint after the candidate's ORBITS -- `m63-map-(0,0,2,2):6.ckpt.json` -- and the
+    # A412 sweep already wrote 89 files under those very names. The same orbit at a different
+    # accumulator is a DIFFERENT search, so a shared directory would hand the loop the map's
+    # checkpoints. `parts_reduce.load_checkpoint` refuses them by problem hash rather than resuming
+    # (the refusal is an exception, not a log line), so the hazard was fatal rather than silent --
+    # but a run that dies on its first candidate is still a run that does not happen.
+    #
+    # This is plumbing and not the rule: it changes WHERE bytes are written and nothing the rule
+    # computes, which is why it is a post-freeze edit and why the freeze's own hash is untouched.
+    ckpt_dir = ckpt_dir or os.path.join(ROOT, "data", "m62", "ckpt", "loop-A403")
+    os.makedirs(ckpt_dir, exist_ok=True)
 
     state = {"iteration": 0, "A": [list(t) for t in A_tuples], "incumbent": incumbent,
              "stall": 0, "n_new_max": cfg["escalation_schedule"][0], "history": [], "rung": 1}
@@ -485,6 +496,9 @@ def main():
     l.add_argument("--companion", default="v136e564.vtx")
     l.add_argument("--rule", default="ours")
     l.add_argument("--checkpoint")
+    l.add_argument("--ckpt-dir", dest="ckptdir",
+                   help="where the PER-CANDIDATE checkpoints go; defaults to a loop-specific "
+                        "directory, because the candidate names collide with the A412 sweep's")
     l.add_argument("--wall-ask", type=float, default=600.0)
     l.add_argument("--require-frozen", action="store_true")
     l.add_argument("--out")
@@ -504,7 +518,8 @@ def main():
             print(f"  freeze commit {sha}")
         base = P.Base(P.PARTS_R)
         r = run_loop(base, a.record, companion_file=a.companion, rule=a.rule, config=cfg,
-                     checkpoint=a.checkpoint, out=a.out, wall_ask=a.wall_ask)
+                     checkpoint=a.checkpoint, out=a.out, wall_ask=a.wall_ask,
+                     ckpt_dir=a.ckptdir)
         print(f"\n  {r['verdict'].upper()}: {r['clause_2b']}")
         return 0
     ap.print_help()

@@ -312,6 +312,11 @@ def verify(kept_atoms, *, scratch, controls=True, lrat=True, label="object", log
         out["lrat"] = check_lrat(cnf, proof, log=log)
         log(f"  lrat       {out['lrat']['verdict']}  {out['lrat']['rup_steps_checked']} steps  "
             f"{out['lrat']['seconds']}s")
+        # The checker is new code carrying a publishable claim, so its five planted faults travel
+        # IN THE ARTIFACT and not merely in a log (the product owner's ruling, 2026-09-11): a
+        # checker nobody has broken on purpose is the failure pattern this phase has hit five
+        # times, and the plants are part of the claim rather than a note about it.
+        out["lrat_planted_faults"] = lrat_controls(scratch, log=log)
 
     if controls:
         c = {}
@@ -339,11 +344,13 @@ def verify(kept_atoms, *, scratch, controls=True, lrat=True, label="object", log
             out["degree_floor"]["verdict"] == "floor-respected",
             out["refutation"]["status"] == "unsat",
             (not lrat) or out.get("lrat", {}).get("verdict") == "LRAT-PROOF-REPLAYED",
-            (not controls) or out["controls"]["verdict"] == "controls-fire"]
+            (not controls) or out["controls"]["verdict"] == "controls-fire",
+            (not lrat) or out.get("lrat_planted_faults", {}).get("verdict") == "every-plant-fires"]
     out["verdict"] = "verified-refusing-edge-subgraph" if all(legs) else "VERIFICATION-INCOMPLETE"
     out["legs"] = {"unpinned_cnf": True, "fresh_process_and_solver": True,
                    "exact_geometry": legs[0], "degree_floor": legs[1],
-                   "cadical_unsat": legs[2], "lrat_replayed": legs[3], "controls": legs[4]}
+                   "cadical_unsat": legs[2], "lrat_replayed": legs[3], "controls": legs[4],
+                   "lrat_checker_fails_on_planted_faults": legs[5]}
     out["not_the_minimum"] = ("a greedy 1-minimal pass is order-dependent; this is an edge-reduced "
                               "object at an exact count and an UPPER bound on the edge minimum, "
                               "never the minimum, which is a hitting set and a different question")
