@@ -933,3 +933,17 @@ immediately" from the measured half and applied it to an arena whose novelty liv
 half, where the law at a new parameter was tied to nothing. **Before trusting either verdict, ask which half
 of the object produced it**, and note the corollary a plan there got backwards: *being built by the law is
 the reason the law needs checking, not the reason it does not.*
+
+**A check must read the value the code SHIPS, never a copy of it.** A control certifying the safety margin of
+a float gate asserted against a hardcoded `1e-7` rather than the gate's own default, so it would have kept
+certifying that margin after someone made the real default lossy — **a check reporting about code that is not
+the code that runs.** It now reads the default out of the signature, and every derived quantity with it.
+
+**And the failure path's FORMATTING is part of the check.** The same control's message rendered a failing
+ratio of 0.60 as `1×` — a display rounding turning a red into something that reads like a pass. **A check's
+output is the check**, and the last transformation before a human sees it is inside the trust boundary.
+
+**Best form of all: make the control able to report that it has become uninformative.** Under a planted
+mutation the repaired control went red *and* announced that its fine-grained plant could no longer
+distinguish anything. A control that can say "I can no longer tell" is strictly better than one that can only
+say pass or fail, because the third state is the one this file's oldest failure mode hides in.
