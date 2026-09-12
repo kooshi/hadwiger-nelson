@@ -328,8 +328,11 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
     necessary = sorted(tuple(stage0.atom_labels[i][1]) for i in ls.necessary())
     incumbent = ls.size                                   # WEIGHT in atoms; |M| = weight + 1
     companion = V.load_lattice(os.path.join(REF11, companion_file))
+    # `Y`'s degree-1 layer is stored as a COUNT, not a list -- and it is 312 against the level's
+    # 336 necessary atoms. The two are different objects: `Y` is harvested lazily and is a subset,
+    # so a look-ahead reading it would under-count what an expansion has to free (§1(e)1).
     log(f"  start: |A| {len(A_tuples)}  |M| {incumbent + 1} vertices  |{{M}}| {len(ls.minima)}  "
-        f"necessary {len(necessary)} (Y's degree-1 layer: {len(rec['hypergraph']['degree_1'])})")
+        f"necessary {len(necessary)} (Y's degree-1 layer: {rec['hypergraph']['degree_1']})")
 
     oracle = PL.EdgeOracle(base, companion, log=log)
     census = PL.menu_census(base, A_tuples, oracle, log=log)
