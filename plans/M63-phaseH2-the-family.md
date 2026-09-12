@@ -243,6 +243,13 @@ residue field, the prime of `F(i)` **splits**, it is not conjugation-fixed, no b
 field is 6-open. **So ramified behaves exactly like split, the screen is correct, and G43's criterion is
 better stated as "11 has residue degree 2" — "inert" being the squarefree-`d` wording of the same thing.**
 
+**And the last gap, closed by the advisor: ramification cannot interfere anywhere in the argument**, because
+the reduction never needs the *points* to be integral — only the **differences** — and a difference of norm 1
+has valuation 0 whatever the ramification index is. So `e` plays no role at any step, which is exactly why the
+table collapses to `f`. The advisor's own accounting of its flag is worth keeping: *it was about a missing
+justification, not a wrong value* — the row said "no" as a guess and the derivation confirms "no", so nothing
+moves except that the column now has a ground.
+
 **Its recurrence, quantified by the planner and checked here with one exception he did not have:** 11
 divides the squarefree radicand exactly when `n ≡ 3 (mod 11)` — `n = 3, 14, 25, 36, 47, 58, 69, 80, 102,
 113, 124, 135` at `n ≤ 140` — **except when `11²` divides `4n−1`**, which happens first at `n = 91`
@@ -334,17 +341,18 @@ prediction for an uncounted module does not.
   **60** points at `|p|² = 5`. So members off gate A are **not** eliminated by §4 — they are merely
   denied the free circle, and must buy circle count and unit attachment separately, which is PH2-9's 81×
   factor. The original mission's shape survives *for them*, now with a reason it is expensive.
-- **`n = 2`: the obstruction is THINNESS, and it is measured.** Corrected from the product owner's first
-  guess, which was wrong twice over. The shell *inside* Parts's lattice is empty — 0 of 3,433 — but the
-  circle is far from empty in the field, and it is **better material than the phase's own angle**:
-  `2 = 1² + 1²`, so `(1,1)` sits on it at denominator **1**, and **180** points of that circle have a
-  unit-distance neighbour already in Parts's lattice, four of them at denominator 1, each adjacent to
-  `(1,0)` — against the phase's angle managing 72 glue points at cheapest denominator 42. **So `n = 2` is
-  alive, 6-open, and cheaper than the record**, and the thing that probably kills it is that its endpoint
-  bound of 1.5119 contains only **499** lattice points, so its entire cross-edge-bearing arena is about
-  1,000 vertices — against a 509-vertex record that was *reduced* from a 3,433-point base. **And thinness
-  cannot be bought with radius**: material past the endpoint bound carries no cross edge and is absorbed
-  (G40). That is one measurable column, not a search. (Poros, PH2-10.)
+- **`n = 2` is DEAD by derivation, and the route to that verdict was wrong twice before it was right.**
+  First guess (product owner): *the circle is empty* — wrong, `2 = 1²+1²` puts `(1,1)` on it at denominator
+  **1**, and **180** of its points have a unit neighbour already in Parts's lattice, four at denominator 1
+  adjacent to `(1,0)`, against the phase's own angle managing 72 at cheapest denominator 42 (Poros). Second
+  guess (product owner, from the screening agent's measurement): *thinness* — its arena is 499 points with
+  **2,634** unit edges and mean degree **10.56** against the record's 1,771 / 12,810 / 14.47, thin on two
+  axes, and thinness cannot be bought with radius. True, but not the reason. **The actual verdict, measured
+  law-free from first principles (Poros): `n = 2` has 60 cross edges and every one of them is a CENTRE
+  edge. Zero diagonal, zero off-diagonal — stable as the cut grows from 1.5119 to 2.0 (499 → 1,603 base
+  points, still 60).** So its arena is two copies of a four-colourable graph glued at one vertex plus the
+  centre star, which §6b proves four-colourable outright. **`n = 2` is not the discriminating case for
+  anything**, and it was never the near-miss it looked like.
 - **Nothing here shows any member PRODUCES five-chromaticity.** No type-M arena ever has: the record's
   refusal is **inherited**, since its arena contains Heule-510, a graph certified 5-chromatic *before* the
   construction is applied (PH-10). The reference class for "this works" is **n = 1**, not n = 2.
@@ -410,6 +418,77 @@ shared points. So that literature gave a shelling formula and could not have giv
 and **the field half of this phase is ours with no citation to fear.** The next room for it is not
 crystallography but rational points on the norm-one torus (the Pell conic); the 6-openness half rests on
 this project's own sieve and has no literature at all.
+
+---
+
+## §6b — The matching-only arenas are settled by a THEOREM, not a solver (added 2026-09-12)
+
+**The product owner proposed that "a type-M arena needs two kinds of cross edge" is really "it needs one
+kind that is not a matching", leaning on G14 (*a matching carries no colour pressure*). The advisor refuted
+the load-bearing step and proved the correct conditional form.**
+
+**What is false:** *"a matching cannot force"* is **not a theorem**. Two four-colourable graphs joined by a
+perfect matching need **not** be four-colourable — if the matched pairs realise every ordered pair of
+colours, no relabelling of the second copy escapes. G14's scope does not reach a rotated copy sharing a
+centre, and the general claim is false outright.
+
+**What is true, and it is better.** The two halves are the *same* graph on the same index list (G46's data-
+layout fact), so any arena colouring may be tried as `(C on the base, π∘C on the copy)` for a permutation
+`π` of the four colours. Then:
+
+- **the centre star is provably FREE**, not merely "absorbed" by G40. The shared centre forces `π` to fix
+  its own colour; a centre cross edge needs `π(C(v)) ≠ C(0)` for a unit vector `v`; and `C(v) ≠ C(0)`
+  already holds inside the base, so `π(C(v)) = C(0)` would force `C(v) = C(0)` — contradiction. **Every `π`
+  fixing the centre's colour satisfies the entire centre family at once.**
+- **the diagonal matching reduces to a condition on colour classes, not on points:** `π` must move every
+  colour that occurs on the circle.
+
+> **Theorem (advisor, 2026-09-12).** An arena whose only non-centre cross structure is the diagonal matching
+> is **four-colourable as soon as the base has one proper four-colouring in which no circle point takes the
+> centre's colour** — then take `π` to be a three-cycle on the other three colours.
+
+**This replaces an arena solve with a cheap search on the base**, and it is **conditional**: the hypothesis
+can fail, and then the twist family is exhausted and nothing is decided — *silence is not evidence*. **And
+the residue colouring can never be the witness** when the circle is an even multiple of the unit shell,
+because it sends every circle point to the centre's own colour. The witness must be a four-colouring of a
+kind this project has never enumerated.
+
+**Measured consequence already in hand.** The solver agent asked exactly this question on `ρ₆₃`'s base and
+it is **UNSAT in 20 s** — no proper four-colouring of that base avoids the centre's colour on all 30 circle
+points. `ρ₆₃` also carries 36 off-diagonal edges, so the theorem does not apply to it; what the UNSAT says
+is that the twist family cannot colour its arena, which is PH2-7's conclusion reached by measurement. **For
+a matching-only member the same question is the whole answer, and it costs about 20 seconds.**
+
+## §6c — One formula reproduces every count three agents measured, and the target list closes at two
+
+**The circle count is exactly the base's shell count at `|p|² = n`.** Nothing else — no radius, no cosine,
+no field. Enumerated from the congruence conditions directly:
+
+| `n` | 2 | 4 | 9 | 12 | 16 | 20 |
+|---|---|---|---|---|---|---|
+| count | **0** | **30** | **54** | **42** | **30** | **60** |
+| measured independently by | advisor | control (the record) | planner | planner | planner | screening agent |
+
+**Six for six across three agents**, and it supersedes both earlier forms of the condition: not "`n` is a
+perfect square" (the advisor's) and not "`n` is a square in `K`" (the product owner's), but **`n = k²·m`
+with `k ∈ ℤ` and `m` a squared distance the base already realises** — `12 = 4·3` and `20 = 4·5` are free
+for that reason, and `2` is not free at all.
+
+**And the affordable 6-open targets are exactly two.** Every `n` whose power of 2 is **odd** has an empty
+circle over Parts's lattice — now **30 of 30** values checked, upgrading a hunch to a measured law — and
+6-openness forces `n` even. So a 6-open member with a non-empty circle needs `4 | n`, and at `n ≤ 31` that
+leaves **`{16, 20}` and nothing else.** The other four 6-open members below 31 (`2, 10, 22, 24`) are empty
+for a 2-adic reason **no radius and no refinement of this lattice can fix.** The search space for this phase
+is two objects.
+
+## §6d — Why the verdict now computing is the milestone's real test
+
+The record's refusal is **inherited**: its arena contains Heule-510, a graph certified five-chromatic
+*before* the type-M construction is applied (PH-10). `ρ₆₃`'s rotation differs, so its arena almost certainly
+does **not** contain that graph. **`ρ₆₃` is therefore the first arena of the record's exact shape whose
+refusal could not be inherited** — which makes the computation in flight the milestone's real test rather
+than one candidate among several, and makes a *four-colourable* verdict there informative rather than
+disappointing.
 
 ---
 

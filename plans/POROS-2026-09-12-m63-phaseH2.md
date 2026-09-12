@@ -31,7 +31,7 @@ finding.
 
 ---
 
-*Eleven cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
+*Twelve cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
 PH2-1, PH2-9 and PH2-2 together** (ranks 1–3) — the target is free, and the two circles differ everywhere except on it. PH2-4 is
 a separate turn addressed to the product owner because it changes the product. The remaining five exist
 because this is a phase ledger the next session reads cold, not a single turn, and each carries its own fate
@@ -690,6 +690,65 @@ whoever writes the next census:
 it means no one has looked. Its live risk is thinness and is unchanged (PH2-10): 499 `Λ_parts` points inside
 its 1.5119 endpoint bound. And the ordering against `ρ₆₃` is unchanged and rests on value of information,
 not on cost — `ρ₆₃`'s solver answer re-ranks `n = 2`, and `n = 2`'s does not re-rank `ρ₆₃`.
+
+---
+
+## PH2-12 — cross edges without an edge law, so the one ungated control in the phase is discharged
+
+question: can-the-cross-edge-count-be-had-without-trusting-the-law
+  evidence: the planner named the independent `K[x]/(x²−D)` recount at `cos = 31/32` as the one control
+    that matters most, because the 126 came from a law at a parameter where it was tied to nothing, and
+    `CLAUDE.md`'s measured/derived asymmetry says a wrong law **invents** edges, makes a refusal arrive
+    cheap, and looks exactly like success
+  expected: that the recount needs the phase's own machinery re-implemented a second way
+  ask: is there a route to the cross-edge set that uses no law at all?
+  if there is: the control is discharged by construction rather than by agreement between two
+    implementations of the same idea, and the same route prices every other member for free
+  if there is not: the recount stays a second implementation and the risk stays correlated
+  answered by: derivation, then my own exact arithmetic
+  cost: two minutes of compute
+  rank: 12
+  status: answered — there is, and it reproduces every number
+
+**The route, and it is shorter than the law.** `|p − Rq|² = |p|² + |q|² − 2(cos θ ⟨p,q⟩ + sin θ (p×q))`,
+and `sin θ ∉ K` (PH2-8), so the cross condition **splits into two exact identities in `K`**:
+
+> `p × q = 0`  and  `|p|² + |q|² − 2cos θ ⟨p,q⟩ = 1`.
+
+No law, no fitted parameter, nothing inherited. **FS-30's collinearity fact — that a rotation of this kind
+joins only points collinear with the centre — falls out as a consequence rather than an assumption**, which
+is the same shape as G46: the object's own arithmetic carried a fact the plan's vocabulary had a separate
+name for.
+
+| parameter | base | total | centre | off-diagonal | diagonal |
+|---|---|---|---|---|---|
+| `cos = 7/8` (`ρ₁₅`, **the control**) | `Λ(2.44)`, 3,433 | **126** | 60 | 36 | **30** |
+| `cos = 31/32` (**`ρ₆₃`**) | `Λ(4.0316)`, 25,567 | **126** | 60 | **36** | **30** |
+| `cos = 39/40` (`n = 20`) | `Λ(4.4722)`, 38,785 | **120** | 60 | **0** | **60** |
+| `cos = 3/4` (`n = 2`) | `Λ(1.5119)`, 499 | **60** | 60 | 0 | 0 |
+
+The control had to return the record's `126 = 60 + 36 + 30` and did, so **the recount at `ρ₆₃`'s parameter is
+an independent confirmation of the planner's law where it was untied**, and a refusal there will not rest on
+invented edges. The risk is retired by a method that cannot share the law's failure mode, which is stronger
+than two implementations agreeing.
+
+**And the count is one quantity, not four.** The circle count is exactly the base's **shell count at
+`\|p\|² = n`**, enumerated straight from the congruence (`P = ab + cd = 0`, `S = 144n`) with no radius
+involved: `n = 2 → 0`, `4 → 30`, `9 → 54`, `12 → 42`, `16 → 30`, `20 → 60` — **six for six against three
+agents' independent measurements.** It is automatically non-empty when `n = t²·m` and the base has a norm-`m`
+shell (`12 = 4·3`, `20 = 4·5`), which **corrects my own PH2-10 "perfect square" condition** to the broader
+exact one.
+
+**The classification that follows, and it is complete.** Every `n` with `v₂(n)` odd has an **empty** shell
+over `Λ_parts` — 30 of 30 values, upgrading PH2-10's hunch — and 6-openness forces `n` even, so a 6-open
+member with a non-empty circle needs `4 \| n`. At `n ≤ 31` that is exactly **`{16, 20}`**; `n = 2, 10, 22,
+24` are empty for a 2-adic reason that no radius and no refinement of this lattice can fix.
+
+**The consumer: `n = 20` dominates the planned radius-12 test.** Identical shape (centre star plus a
+matching, zero off-diagonal, both measured above), **60** matching edges against 42, and **6-open** where
+`n = 12`'s radicand 47 is a residue mod 11 and is therefore **5-sealed** — so `n = 12`'s refusing branch
+buys at most a new 5-chromatic object rather than a rung. 38,785 points against 14,029, comparable to
+`ρ₆₃`'s 25,567.
 
 ---
 
