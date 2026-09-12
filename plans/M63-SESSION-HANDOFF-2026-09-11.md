@@ -321,6 +321,30 @@ the edit. They are scattered above; this is the order to do them in, and the ord
 
 **Then, and only then, the two things that actually chase the record:** screen the one new rotation (minutes),
 and build the multi-orbit union ladder. Everything above is the cost of trusting what they return.
+
+**UPDATE, 2026-09-12 00:05 — items 2 and part of 6 are DONE; a new one takes their place.**
+- **The engine is integrated and in production**, enumerate-only, all three append sites, engine in the
+  launch budgets and not in the problem hash. **~8× measured on D1b** (0.144 s/iteration against ~1.2 s) and
+  still improving as the solver warms. Its cold solve on resume returned optimum **373, matching the
+  checkpoint's stored value** — independent agreement with the incumbent's own recorded answer.
+- **The pre-registered gate FIRED on the first run** (`regenerated-differs:bound`) and was right to: the
+  level was identical as a set, `M_vertices` equal and the bound string character-identical, differing only
+  by the *presence* of two fields phase D added to `Bound` after that record was stored. **The comparator was
+  not relaxed to make the gate pass** — a schema-matching record was used instead and read
+  `regenerated-identical`, and that second stage was the better target anyway: at rung 3 its atoms are
+  orbits of weight 3, exercising the weighted path a unit-weight stage never touches.
+- **The forfeited out-of-sample test has a stronger replacement, not a weaker one.** Its partial scores
+  +1.0% inside the 5% falsifier but is an extrapolation beyond the fitted range and is *not* the registered
+  test. What replaces it: the law's **derivative** is measurable from a checkpoint at as many points as
+  wanted, on a quiet box — six prefixes give cost linear in level size, so **the integral is quadratic by
+  construction rather than by curve-fitting.**
+- **NEW, and the general form is worth more than the instance: removing the quadratic exposed a second one
+  of identical shape.** About 0.09 s per iteration was unexplained; it is the **progress log**, which unions
+  every minimum found so far every 5 minima — 557 ms at 20,733 minima, 111 ms per iteration amortised,
+  linear in level size and hence cumulatively quadratic. It is now the dominant non-oracle cost and removing
+  it should give roughly another **4×**. Not fixed because two runs are executing that file. **The rule: a
+  cost that grows with the level need not live in the solver, and removing the dominant one merely promotes
+  the next of the same shape — this one was hiding in a diagnostic nobody profiles.**
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
