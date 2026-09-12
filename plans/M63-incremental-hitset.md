@@ -89,7 +89,7 @@ with it is a defect in my transcription and the replay would show it.
 |---|---|---|---|
 | `batch` | today: fresh `WCNF` + fresh `RC2` per solve | 51.6 s per 1,500 → **hours** at full length | 245.9 s |
 | `incremental` | one `RC2`, cores and relaxations carried | **3.5 s total, 186×**, 0.22 GB | 282.5 s at it 400 — **0.4×, it LOSES** |
-| `incumbent` | decision: "is there a hitting set ≤ the incumbent?", one cardinality constraint, ~1 SAT call per iteration | **2.7 s total**, 19,823 calls | **loses badly**: 662 s by it 400, against batch's 41.2 s |
+| `incumbent` | decision: "is there a hitting set ≤ the incumbent?", one cardinality constraint, ~1 SAT call per iteration | **2.7 s total**, 19,823 calls | **loses badly**: **1,710.2 s** for the same 600 iterations batch does in 245.9 s — **7.0× slower** on 639 SAT calls against 273,216 |
 | `incumbent`, counter over the 153 **free** atoms only | the same, with the counter shrunk ~40× by the forced atoms (`kept_total = forced + kept_free`) | — | **does not win either**: >265 s CPU without reaching it 200, against batch's 2.6 s (a floor read off process accounting, not a completed run — see §8) |
 
 **Four formulations have now cut the work and not the time, and that is the finding.** Incremental RC2
@@ -406,8 +406,11 @@ in a diagnostic nobody would profile.
 ## 8. Not done, and what each would take
 
 - **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
-  engine on C4a reached iteration 400 in **662 s** against batch's 41.2 s, doing 437 SAT calls against
-  180,780 — the clearest single statement of the mechanism in this document. Shrinking the cardinality
+  engine completed C4a's 600-iteration window in **1,710.2 s** against batch's **245.9 s** — **7.0×
+  slower on 639 SAT calls against 273,216**, a matched like-for-like comparison and the clearest single
+  statement of the mechanism in this document (the mid-window point, 662 s against 41.2 s at iteration
+  400, is steeper still because batch's cost is accelerating across the window while the decision
+  engine's is roughly flat per iteration). Shrinking the cardinality
   encoding onto the 153 free atoms (the fix the dropped-atom idea was reaching for, in the form that can
   actually be encoded) did not rescue it either: **>265 s of CPU without reaching iteration 200**,
   where batch needs 2.6 s. *Provenance of that number, since it is weaker than the others:* the run was
