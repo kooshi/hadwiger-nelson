@@ -332,9 +332,11 @@ def refuses(stage, kept, solver=None):
 def _law_controls(B, D):
     """C5's controls: the cross-edge law as a parameter, and the two stages it must not move.
 
-    c5.1 the law reproduces `cross_edges_rho15_fast` on the whole base -- the committed float-ray
-         version is the incumbent, and this is the only thing that says the exact-line rewrite
-         changed no edge;
+    c5.1 the law reproduces the RETIRED float-ray keying on the whole base -- that keying was the
+         incumbent, and this is the only thing that says the exact-line rewrite changed no edge.
+         It is reimplemented inside the control because `cross_edges_rho15_fast` now IS
+         `CrossLaw.edges`; comparing that to the law would compare a function to itself and could
+         never fail, which is a control that has not been tested by passing;
     c5.2 the L451 stage's fingerprint is unchanged under the explicit law;
     c5.3 a DIFFERENT admissible cosine gives a different edge set -- without this, c5.1 would pass
          for a law that ignores its own parameter;
@@ -350,9 +352,37 @@ def _law_controls(B, D):
     law = T.CrossLaw.rho15()
     chk("c5.3 name is derived from the cosine", law.name == "rho15" and
         T.CrossLaw.collinear(Fr(3, 4)).name == "collinear(3/4)")
-    old, new = set(T.cross_edges_rho15_fast(B.pts)), set(law.edges(B.pts))
-    chk("c5.1 law-matches-rho15", old == new,
-        f"{len(new)} ordered cross edges; only-fast {len(old - new)}, only-law {len(new - old)}")
+    def _retired_ray_law(pts, norms=None):
+        """The incumbent, preserved here as the independent oracle for c5.1: candidates proposed by
+        grouping points into rays keyed on `round(x/m, 9)` of a float unit vector, then disposed
+        exactly in K. Its two gaps both DROP edges (a line split at a rounding boundary; a signed
+        key that cannot see an antipodal pair), so a disagreement here is read as the exact law
+        FINDING an edge this missed, never as the exact law inventing one."""
+        norms = norms or [T.norm2(p) for p in pts]
+        rays = defaultdict(list)
+        for i, p in enumerate(pts):
+            x, y = T.kfloat(p[0]), T.kfloat(p[1])
+            if x == 0 and y == 0:
+                continue
+            m = (x * x + y * y) ** 0.5
+            rays[(round(x / m, 9), round(y / m, 9))].append(i)
+        centre = next(k for k, p in enumerate(pts) if p == (T.Z, T.Z))
+        E = []
+        for j in range(len(pts)):
+            if norms[j] == T.ONE:
+                E.append((centre, j)); E.append((j, centre))
+        for idx in rays.values():
+            for i in idx:
+                for j in idx:
+                    want = T.kscale(T.ksub(T.kadd(norms[i], norms[j]), T.ONE), Fr(4, 7))
+                    p, q = T.conj_mul(pts[i], pts[j])
+                    if q == T.Z and p == want:
+                        E.append((i, j))
+        return sorted(set(E))
+
+    old, new = set(_retired_ray_law(B.pts)), set(law.edges(B.pts))
+    chk("c5.1 law-matches-the-retired-ray-keying", old == new,
+        f"{len(new)} ordered cross edges; only-ray {len(old - new)}, only-law {len(new - old)}")
     other = set(T.CrossLaw.collinear(Fr(3, 4)).edges(B.pts))
     chk("c5.3 law-is-not-ignored", other != new, f"collinear(3/4) gives {len(other)} edges")
     try:

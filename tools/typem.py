@@ -33,7 +33,7 @@ UNTRUSTED like everything in tools/: the theorems it instantiates are Theorem B 
 the gluing classification (`Glue.lean`) and the 2-adic wall criterion (`plans/FIELD-WALL-THEOREM.md`).
 """
 from __future__ import annotations
-import argparse, json, math, sys, time
+import argparse, functools, json, math, sys, time
 from collections import defaultdict
 from dataclasses import dataclass
 from fractions import Fraction as Fr
@@ -60,8 +60,88 @@ def kmul(x, y):
             a*h + d*e + b*g + c*f)
 
 def kfloat(x):
+    """The float VALUE of a K element. Never a verdict: use `ksign`/`kcmp` to decide anything."""
     a, b, c, d = x
     return float(a) + float(b)*math.sqrt(3) + float(c)*math.sqrt(11) + float(d)*math.sqrt(33)
+
+# ---------------------------------------------------------------- the exact sign, by the tower
+# An element of K is (a, b, c, d) meaning a + b*sqrt3 + c*sqrt11 + d*sqrt33, all Fractions.
+#
+# WHY THIS EXISTS. `kfloat` sums four doubles; near zero the rounding decides the sign. A verdict
+# taken from it can DROP a candidate in silence -- and a cross-edge law that misses edges yields an
+# easier graph, yields a colouring, and reads as a SOUND ELIMINATION. The failure is therefore
+# invisible in exactly the direction that flatters a survey. Every verdict below is exact.
+#
+# METHOD: norms down the tower Q < F = Q(sqrt3) < K. For x = A + B*sqrt11 with A, B in F of
+# opposite sign, both sides of the comparison are positive and may be squared, so
+# sign(x) = sign(A) * sign(A^2 - 11 B^2); likewise sign(a + b sqrt3) = sign(a) * sign(a^2 - 3b^2)
+# one level down. The sub-norm vanishes only if sqrt11 lies in F (or sqrt3 in Q), so it never
+# vanishes and there is no loop, no precision knob, no fallback path, and no rare branch.
+#
+# This is the definition `typem_exact.ksign` was written as and imports from here; one predicate,
+# one place. Its measured control lives in `typem_exact.py --self-test` section 1.
+
+
+def _sgn(q) -> int:
+    return (q > 0) - (q < 0)
+
+
+def f_sign(A) -> int:
+    """Exact sign of A = a + b*sqrt3 with a, b in Q, given as the pair (a, b)."""
+    a, b = A
+    if b == 0:
+        return _sgn(a)
+    if a == 0:
+        return _sgn(b)
+    sa, sb = _sgn(a), _sgn(b)
+    if sa == sb:
+        return sa
+    t = a * a - 3 * b * b
+    if t == 0:                                        # => sqrt3 = |a/b| in Q. Impossible.
+        raise ArithmeticError(f"a^2 = 3b^2 with b != 0 makes sqrt3 rational: {A!r}")
+    return sa * _sgn(t)
+
+
+def ksign(x) -> int:
+    """Exact sign (-1, 0, +1) of a + b*sqrt3 + c*sqrt11 + d*sqrt33. No floating point anywhere."""
+    a, b, c, d = x
+    A, B = (a, b), (c, d)                             # x = A + B*sqrt11 with A, B in F
+    sA, sB = f_sign(A), f_sign(B)
+    if sB == 0:
+        return sA
+    if sA == 0:
+        return sB
+    if sA == sB:
+        return sA
+    A2 = (A[0] * A[0] + 3 * A[1] * A[1], 2 * A[0] * A[1])
+    B2 = (B[0] * B[0] + 3 * B[1] * B[1], 2 * B[0] * B[1])
+    Tt = (A2[0] - 11 * B2[0], A2[1] - 11 * B2[1])
+    sT = f_sign(Tt)
+    if sT == 0:                                       # => sqrt11 in Q(sqrt3). Impossible.
+        raise ArithmeticError(f"A^2 = 11B^2 with B != 0 puts sqrt11 in Q(sqrt3): {x!r}")
+    return sA * sT
+
+
+def kcmp(x, y) -> int:
+    """Exact three-way comparison of two K elements."""
+    return ksign(ksub(x, y))
+
+
+def kle_rat(x, q) -> bool:
+    """Exact `x <= q` for x in K and q a rational -- the exact form of a disk cut."""
+    return ksign(ksub(x, (Fr(q), Fr(0), Fr(0), Fr(0)))) <= 0
+
+
+def kpair(a, b):
+    """The canonical unordered pair {a, b}, ordered EXACTLY.
+
+    `kfloat(a) <= kfloat(b)` puts two radii whose floats collide into TWO keys for one unordered
+    pair, which INFLATES a family count -- the one float defect here that adds rather than drops."""
+    return (a, b) if kcmp(a, b) <= 0 else (b, a)
+
+
+ksort_key = functools.cmp_to_key(kcmp)
+"""A sort key ordering K elements exactly. Use wherever the ORDER is itself a verdict."""
 
 # ---------------------------------------------------------------- exact squareness, by the tower
 def q_is_square(q: Fr) -> bool:
@@ -128,15 +208,19 @@ def norm2(p):
 
 
 def build_base(radius: float, span: int = 4):
-    """Every Moser-lattice point inside the radius, deduplicated EXACTLY by its K-coordinates."""
-    r2 = radius * radius
+    """Every Moser-lattice point inside the radius, deduplicated EXACTLY by its K-coordinates.
+
+    The disk cut is EXACT: `kfloat(norm2(p)) <= r2 + 1e-12` decided membership on a float sum, so a
+    point within float error of the boundary could be admitted or dropped by rounding. `r2x` is the
+    caller's radius squared as an exact rational, and `kle_rat` compares against it in K."""
+    r2x = Fr(radius) * Fr(radius)                       # exact: the caller's radius, squared
     seen: dict = {}
     for a in range(-span, span + 1):
         for b in range(-span, span + 1):
             for c in range(-span, span + 1):
                 for d in range(-span, span + 1):
                     p = lattice_point(a, b, c, d)
-                    if kfloat(norm2(p)) <= r2 + 1e-12:
+                    if kle_rat(norm2(p), r2x):
                         seen.setdefault(p, (a, b, c, d))
     pts = sorted(seen.keys(), key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
     return pts, [seen[p] for p in pts]
@@ -174,14 +258,14 @@ def sieve(pts, verbose=True):
     mult = defaultdict(int)
     for nn in norms:
         mult[nn] += 1
-    radii = sorted(mult, key=kfloat)
+    radii = sorted(mult, key=ksort_key)            # exact: a float tie would order two radii at random
     by_D = defaultdict(list)
     admits = rejected_inK = no_rotation = 0
     for a in radii:
         for b in radii:
             w = mult[a] * mult[b]
             D, N, k = radicand(a, b)
-            if kfloat(D) < 0:
+            if ksign(D) < 0:                           # EXACT: D < 0 means no real rotation.
                 no_rotation += w; continue
             if k_is_square(D):
                 rejected_inK += w                      # Theorem B kills it
@@ -208,8 +292,11 @@ def sieve(pts, verbose=True):
 
 
 def radius_families(entries):
-    """Distinct unordered radius pairs {|u|^2, |v|^2} in this class — Parts's cross-edge 'kinds'."""
-    return {(a, b) if kfloat(a) <= kfloat(b) else (b, a) for a, b, _ in entries}
+    """Distinct unordered radius pairs {|u|^2, |v|^2} in this class — Parts's cross-edge 'kinds'.
+
+    Canonicalised EXACTLY. Under `kfloat(a) <= kfloat(b)` two radii whose floats collide yield two
+    keys for one unordered pair and the kind count inflates."""
+    return {kpair(a, b) for a, b, _ in entries}
 
 # ====================================================================== controls (M62 §M2.6)
 def self_test():
@@ -429,8 +516,9 @@ def seam_generators():
 
 
 def build_seam_base(radius: float, span: int = 5):
+    """Seam-lattice points inside the radius. The disk cut is EXACT (see `build_base`)."""
     g = seam_generators()
-    r2 = radius * radius
+    r2x = Fr(radius) * Fr(radius)
     seen = {}
     rng = range(-span, span + 1)
     for a in rng:
@@ -442,7 +530,7 @@ def build_seam_base(radius: float, span: int = 5):
                     y = kadd(kadd(kscale(g[0][1], a), kscale(g[1][1], b)),
                              kadd(kscale(g[2][1], c), kscale(g[3][1], d)))
                     p = (x, y)
-                    if kfloat(norm2(p)) <= r2 + 1e-12:
+                    if kle_rat(norm2(p), r2x):
                         seen.setdefault(p, (a, b, c, d))
     pts = sorted(seen, key=lambda p: (kfloat(norm2(p)), kfloat(p[0]), kfloat(p[1])))
     return pts, [seen[p] for p in pts]
@@ -467,33 +555,22 @@ def unit_edges_fast(pts):
 
 
 def cross_edges_rho15_fast(pts, norms=None):
-    """The rho15 law (M62 §R1): q' = 0 (collinear with the centre) and p' = 4(a+b-1)/7. Proposed by
-    grouping points into rays on floats, disposed exactly in K."""
-    import numpy as np
-    from collections import defaultdict
-    n = len(pts)
-    norms = norms or [norm2(p) for p in pts]
-    F = [(kfloat(p[0]), kfloat(p[1])) for p in pts]
-    rays = defaultdict(list)
-    for i, (x, y) in enumerate(F):
-        if x == 0 and y == 0:
-            continue
-        m = (x*x + y*y) ** 0.5
-        rays[(round(x/m, 9), round(y/m, 9))].append(i)
-    centre = next(k for k, p in enumerate(pts) if p == (Z, Z))
-    E = []
-    # the centre is on no ray: |0 - rho v| = |v|, so it meets every point of norm 1 both ways
-    for j in range(n):
-        if norms[j] == ONE:
-            E.append((centre, j)); E.append((j, centre))
-    for _, idx in rays.items():
-        for i in idx:
-            for j in idx:
-                want = kscale(ksub(kadd(norms[i], norms[j]), ONE), Fr(4, 7))
-                p, q = conj_mul(pts[i], pts[j])
-                if q == Z and p == want:
-                    E.append((i, j))
-    return sorted(set(E))
+    """The rho15 law (M62 §R1): q' = 0 (collinear with the centre) and p' = 4(a+b-1)/7.
+
+    **Now one line: it IS `CrossLaw.rho15().edges`.** It used to be a second copy of the law that
+    proposed candidates by grouping points into rays keyed on `round(x/m, 9)` of a float unit
+    vector. That key had two gaps, both of which DROP edges:
+
+      * two points on one exact line could round to different keys and never be compared, and
+      * a SIGNED direction key puts u and -u in different buckets, so an antipodal pair -- which
+        the law admits whenever |u|^2 + |v|^2 < 1 makes the target negative -- was unreachable.
+
+    A missed cross edge gives an easier graph, gives a colouring, and reads as a sound elimination,
+    so this is the one site here whose failure mode flatters the survey. `CrossLaw.line_key`
+    divides by the first nonzero coordinate IN K: an exact canonical key for the line that folds
+    antipodes together by construction. Keeping two implementations of one law was the real
+    defect; there is now one."""
+    return CrossLaw.rho15().edges(pts, norms)
 
 
 # ====================================================================== the shrink (M62 §M5.3)
@@ -729,8 +806,11 @@ def c13_generators():
 
 
 def build_c13_base(depth: int = 8, radius: float = 2.5):
+    """Heule's C_{1/3} base. The disk cut is EXACT (see `build_base`); this builder has no caller
+    today but `plans/M63-phaseG-bases-and-rotations.md` row 3 schedules it as a phase-G base, so it
+    must not inherit a float boundary."""
     gens = c13_generators()
-    r2 = radius * radius
+    r2x = Fr(radius) * Fr(radius)
     seen = {(Z, Z)}
     frontier = {(Z, Z)}
     for _ in range(depth):
@@ -738,7 +818,7 @@ def build_c13_base(depth: int = 8, radius: float = 2.5):
         for p in frontier:
             for g in gens:
                 q = (kadd(p[0], g[0]), kadd(p[1], g[1]))
-                if q not in seen and kfloat(norm2(q)) <= r2 + 1e-12:
+                if q not in seen and kle_rat(norm2(q), r2x):
                     seen.add(q); new.add(q)
         frontier = new
         if not frontier:
@@ -1042,8 +1122,8 @@ def parts_lattice(r: float = 2.0):
     1,603 points in 92 orbits, and eighteen of his nineteen published orbit labels are canonical
     representatives of it (the nineteenth, (0,0,6,6), sits outside radius 2 and is admitted only by
     his 'falls ... partially on a disk' clause)."""
-    L = (12.0 * r) ** 2
-    R33, R3, R11 = 33 ** 0.5, 3 ** 0.5, 11 ** 0.5
+    L = (12.0 * r) ** 2                                 # float: only for the SEARCH BOUNDS below
+    Lx = Fr(144) * Fr(r) * Fr(r)                        # exact: the disk cut itself
     A = int(L ** 0.5) + 2
     B = int((L / 33) ** 0.5) + 2
     C = int((L / 3) ** 0.5) + 2
@@ -1055,8 +1135,16 @@ def parts_lattice(r: float = 2.0):
                 for d in range(-Dm, Dm + 1):
                     if (a - b) % 2 or (a - c) % 2 or (a - d) % 2 or (a - b + c + d) % 4:
                         continue
-                    if ((a + b*R33) ** 2 + (c*R3 + d*R11) ** 2 <= L + 1e-9 and
-                        (a - b*R33) ** 2 + (c*R3 - d*R11) ** 2 <= L + 1e-9):
+                    # EXACT totally-real disk cut. Expanding the two conjugate conditions,
+                    #   (a +- b*sqrt33)^2 + (c*sqrt3 +- d*sqrt11)^2 = S +- 2*P*sqrt33
+                    # with S = a^2 + 33b^2 + 3c^2 + 11d^2 and P = ab + cd, both integers. Both hold
+                    # iff S + 2|P|sqrt33 <= L, i.e. L >= S and (L - S)^2 >= 132 P^2 -- all integer
+                    # arithmetic, no radical ever evaluated. The old test built the radicals as
+                    # doubles and allowed a 1e-9 slack, so the boundary was decided by rounding.
+                    S = a*a + 33*b*b + 3*c*c + 11*d*d
+                    P = a*b + c*d
+                    gap = Lx - S
+                    if gap >= 0 and gap * gap >= 132 * P * P:
                         out.append((a, b, c, d))
     pts = [((Fr(a, 12), Fr(0), Fr(0), Fr(b, 12)), (Fr(0), Fr(c, 12), Fr(d, 12), Fr(0)))
            for (a, b, c, d) in out]
@@ -1196,7 +1284,7 @@ class CrossLaw:
             raise ValueError("cos = 0 degenerates the law: c*p = k forces k = 0 and every p, "
                              "which is not a cross-edge condition. Not supported.")
         D = ksub(ONE, kmul(c, c))                       # sin^2
-        if kfloat(D) <= 0:
+        if ksign(D) <= 0:                               # EXACT: a float sign here refuses a rotation
             raise ValueError(f"cos = {kstr(c)} has 1 - cos^2 = {kstr(D)} <= 0: not a plane rotation")
         if k_is_square(D):
             raise ValueError(

@@ -18,7 +18,9 @@ every control here asserts that edges are NOT MISSED, not merely that none are i
 
 WHAT IS HERE
   * `ksign` — the exact sign of a + b√3 + c√11 + d√33, decided by norms down the tower ℚ ⊂ ℚ(√3) ⊂ K.
-    No floats, no interval refinement, no precision parameter, O(1) rational operations.
+    No floats, no interval refinement, no precision parameter, O(1) rational operations. It now
+    LIVES IN `typem.py` beside `kfloat`, where the verdicts it fixes are taken, and is re-exported
+    here; this module keeps its measured control (§1).
   * exact bases — `parts_lattice_exact` (his §5.6 denominator-12 lattice) and `moser_ball_exact`,
     with the disk membership decided exactly instead of by a float with a 1e-9 slack.
   * the angle census — the rotations with cos θ ∈ K that carry any cross edge, enumerated over the
@@ -48,6 +50,8 @@ import typem as T                                     # READ-ONLY. Never edited 
 from typem import Z, ONE, kadd, ksub, kneg, kscale, kmul, kdiv, kinv, kfloat, k_is_square, kstr
 
 # ============================================================ §1  THE EXACT SIGN PREDICATE
+# Derivation, rationale and control. The CODE is in `typem.py` (imported below); it is stated here
+# because this is where the alternative was weighed and where the measured control lives.
 # An element of K is (a, b, c, d) meaning a + b√3 + c√11 + d√33, all Fractions — typem's shape.
 #
 # METHOD: norms down the tower, two levels, closed form.
@@ -76,50 +80,12 @@ from typem import Z, ONE, kadd, ksub, kneg, kscale, kmul, kdiv, kinv, kfloat, k_
 # radicands this sieve meets that is tens of bits; `Fraction` comparison is exact at any size.
 
 
-def _sgn(q) -> int:
-    return (q > 0) - (q < 0)
-
-
-def f_sign(A) -> int:
-    """Exact sign of A = a + b√3, a, b ∈ ℚ, given as the pair (a, b)."""
-    a, b = A
-    if b == 0:
-        return _sgn(a)
-    if a == 0:
-        return _sgn(b)
-    sa, sb = _sgn(a), _sgn(b)
-    if sa == sb:
-        return sa
-    t = a * a - 3 * b * b
-    if t == 0:                                        # ⟹ √3 = |a/b| ∈ ℚ. Impossible.
-        raise ArithmeticError(f"a² = 3b² with b ≠ 0 makes √3 rational: {A!r}")
-    return sa * _sgn(t)
-
-
-def ksign(x) -> int:
-    """Exact sign (−1, 0, +1) of a + b√3 + c√11 + d√33. No floating point anywhere."""
-    a, b, c, d = x
-    A, B = (a, b), (c, d)                             # x = A + B√11 with A, B ∈ ℚ(√3)
-    sA, sB = f_sign(A), f_sign(B)
-    if sB == 0:
-        return sA
-    if sA == 0:
-        return sB
-    if sA == sB:
-        return sA
-    # A² − 11B², in F
-    A2 = (A[0] * A[0] + 3 * A[1] * A[1], 2 * A[0] * A[1])
-    B2 = (B[0] * B[0] + 3 * B[1] * B[1], 2 * B[0] * B[1])
-    Tt = (A2[0] - 11 * B2[0], A2[1] - 11 * B2[1])
-    sT = f_sign(Tt)
-    if sT == 0:                                       # ⟹ √11 ∈ ℚ(√3). Impossible.
-        raise ArithmeticError(f"A² = 11B² with B ≠ 0 puts √11 in ℚ(√3): {x!r}")
-    return sA * sT
-
-
-def kcmp(x, y) -> int:
-    """Exact three-way comparison of two K elements."""
-    return ksign(ksub(x, y))
+# The predicate itself now lives in `typem.py`, beside `kfloat`, because that is the module whose
+# verdicts it had to fix -- `sieve`, `CrossLaw.collinear`, `parts_lattice` and the rho15 edge law
+# all call it, and a second copy here would be free to drift from the one they use. This module is
+# still where its MEASURED control lives (section 1 of --self-test): 122 engineered near-zero
+# probes on which the float test is wrong 74 times and `ksign` wrong none.
+from typem import _sgn, f_sign, ksign, kcmp, kpair
 
 
 def kpos(x) -> bool:  return ksign(x) > 0
@@ -145,11 +111,6 @@ class KOrder:
 
     def __hash__(self):
         return hash(self.x)
-
-
-def kpair(a, b):
-    """The canonical unordered pair {a, b}, ordered EXACTLY."""
-    return (a, b) if kcmp(a, b) <= 0 else (b, a)
 
 
 # ============================================================ §2  THE FLOAT CONTROL
@@ -687,17 +648,50 @@ def self_test(quick=False) -> bool:
         if quick:
             break
 
-    _hdr("§6  the edge-MISSING direction: the committed float ray-keying, measured")
+    _hdr("§6  the edge-MISSING direction: two independent laws, and the ray keying that is gone")
     print("      A law that misses edges gives an easier graph, gives a colouring, and reads as a")
     print("      sound elimination. So the control asserts edges are NOT MISSED, not merely that")
     print("      none are invented.")
+    print("      `typem.cross_edges_rho15_fast` USED to propose candidates by grouping points into")
+    print("      rays keyed on round(x/m, 9) of a float unit vector; it now IS `CrossLaw.edges`.")
+    print("      So this section does two jobs: it checks this module's independent law against")
+    print("      typem's, and it re-runs the RETIRED keying on the input that exposes its gap, so")
+    print("      that the defect keeps a control which actually fires.")
     for spec, want in (("parts:2", 126), ("parts:2.44", 126), ("moser:2.05", 66)):
         _, _, bp, _ = build_base(spec)
         exact_e = set(census_edges(bp, (Fr(7, 8), Fr(0), Fr(0), Fr(0))))
         fast_e = set(T.cross_edges_rho15_fast(bp))
-        check(f"{spec}: the committed float-KEYED fast law (round(x/m, 9), signed rays) misses "
-              f"{len(exact_e - fast_e)} and invents {len(fast_e - exact_e)} of {len(exact_e)}",
+        check(f"{spec}: this module's law and typem's agree — misses "
+              f"{len(exact_e - fast_e)}, invents {len(fast_e - exact_e)} of {len(exact_e)}",
               exact_e == fast_e and len(exact_e) == want)
+
+    # The retired keying, reimplemented HERE so it cannot quietly stop being tested, against the
+    # law's own solution set. 4t² - 7tv + 4v² = 4 has the rational point (t, v) = (31/61, -32/61):
+    # opposite signs, so the two points are ANTIPODAL, and |u|² + |v|² = 1985/3721 < 1, which is
+    # what lets an antipodal pair join at all. A SIGNED ray key puts them in different buckets and
+    # can never compare them; the exact line key folds antipodes together by construction.
+    def _retired_ray_keys(pts):
+        keys = []
+        for x, y in ((kfloat(p[0]), kfloat(p[1])) for p in pts):
+            m = (x * x + y * y) ** 0.5
+            keys.append(None if m == 0 else (round(x / m, 9), round(y / m, 9)))
+        return keys
+    _q = lambda v: (Fr(v), Fr(0), Fr(0), Fr(0))
+    u_a = (_q(Fr(31, 61)), _q(0)); v_a = (_q(Fr(-32, 61)), _q(0))
+    nu_a, nv_a = norm2(u_a), norm2(v_a)
+    p_a, q_a = T.conj_mul(u_a, v_a)
+    want_a = kscale(ksub(kadd(nu_a, nv_a), ONE), Fr(4, 7))
+    check("the antipodal pair (31/61, 0), (-32/61, 0) really does satisfy the ρ₁₅ law "
+          f"(q = 0 and p = {kstr(p_a)})", q_a == Z and p_a == want_a)
+    ka, kb = _retired_ray_keys([u_a, v_a])
+    check(f"the RETIRED signed ray keys separate them ({ka} vs {kb}), so it could not have found "
+          "the edge", ka != kb)
+    law_a = T.CrossLaw.rho15()
+    check("the exact line key puts them on one line, so the edge is found",
+          law_a.line_key(u_a) == law_a.line_key(v_a))
+    found_a = set(T.cross_edges_rho15_fast([(Z, Z), u_a, v_a]))
+    check(f"and `cross_edges_rho15_fast` now returns that edge ({sorted(found_a)})",
+          (1, 2) in found_a and (2, 1) in found_a)
     pts, _ = parts_lattice_exact(Fr(2))
 
     _hdr("§7  rotation classes are counted up to the base's OWN symmetries, verified not assumed")
