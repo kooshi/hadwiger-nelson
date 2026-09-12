@@ -1292,3 +1292,213 @@ The joint test as phase C's record-bearing experiment (Poros card 1, re-derived 
 domain-pass corrections, of which `stage_fingerprint` not identifying a search would have let a
 checkpoint resume one search onto another; O9, which turns the joint positive control's answer into a
 derived expectation; and §L's lesson that an audit built from a plan inherits the plan's blind spots.
+
+---
+
+## §R2 — The joint stage: what the two runs establish, and what they do not
+
+*Written 2026-09-11 by the phase C closer (a fresh agent; the implementer who built the phase had
+finished). Snapshot time **03:41 UTC (next day)**, on the machine (the 32-core desktop). **Both runs were still
+running when this was written and were deliberately left running** — a bound is the result, and the
+verdicts can be collected later from the checkpoints. The reproduction plan's own §R2 covers everything
+else phase C did; this section covers only C4a and C4b. §A above is the product owner's and is untouched.*
+
+### R2.0 — The headline, with its limits in the same breath
+
+**Neither joint run has closed, and what they have proved is a bracket rather than a minimum: inside
+Parts's own two accumulators, in the relative frame that holds his record, no subgraph refusing four
+colours has fewer than 504 vertices.** His 509 can be beaten there by at most five vertices — and after
+4.8 hours the search has not beaten it by one, having found no refusing selection at all below the whole
+working graph. The second relative frame (C4b) stands at 500 and has no upper bound below its own 577.
+
+**What this does NOT establish**, each stated so it cannot be quietly dropped:
+
+1. **Not that 509 is optimal.** The window {504, …, 509} is open, and the run stopping here is a
+   statement about four hours of compute, not about the graph.
+2. **Not anything about graphs outside these two accumulators.** The joint stage can only delete; the
+   record is beaten by *adding* material his loop never held, which is phase F's expansion and is
+   untouched by this bound.
+3. **Not a reproduction row** (§5 rule 1). It is compared with his tables on `|M|` and edges only.
+4. **Nothing about edges.** The bound is on vertices; the edge question at 509 is phase D's.
+5. **Not an isomorphism claim between the two frames.** §O4 proves one direction only, and R2.4b below
+   reports a coincidence, not a proof.
+6. **The lower bound is rigorous modulo one unaudited step**: correction sets are verified by
+   construction and never independently rebuilt (gap-audit row C-3, still open). Every one of the 423
+   singletons was re-derived here from the checkpoint and matches the phase-1 census exactly, which is a
+   check on the singletons and not on the 1,522 larger sets.
+
+### R2.1 — The state of both runs, off their checkpoints
+
+| | **C4a** — the record's frame | **C4b** — the second frame |
+|---|---|---|
+| command | `--S-frame contains:v136e564.vtx` | `--S-frame coset:2` |
+| frame | coset 1 of 2, element named by its image of `(2,0,4,2)`: `(2,0,-4,2)` | coset 2 of 2, image `(-5,-1,3,1)` |
+| working graph | 577 vertices (L 412 + S 165), 2,904 edges, 36 connection | identical counts, different edge set (fp `6e86c22f` against `1c9ebec1`) |
+| atoms | 576 at rung 1 (the shared centre is never deletable) | 576 |
+| phase 1 | **85 s**; 423 critical / 153 droppable-alone / 0 unknown | **106 s**; 423 / 153 / 0 |
+| status | `in-progress`, iteration 1,523, wall 17,197 s (4.78 h) | `in-progress`, iteration 1,408, wall 16,953 s (4.71 h) |
+| lower bound | **LB 503 atoms** (first reached at 15,344 s) | **LB 499 atoms** (first reached at 12,969 s) |
+| minima found | **0** | **0** |
+| undecided asks | **0** — no ask hit the 600 s wall or the conflict budget | **0** |
+| correction sets | 1,945 (423 singletons + 1,522 larger, sizes 2–15) | 1,830 (423 + 1,408, sizes 2–11) |
+| asks | 31,023 colourable, 7,259 refusing | 28,184 colourable, 6,457 refusing |
+| **bracket, in vertices** | **504 ≤ minimum ≤ 509** | **500 ≤ minimum ≤ 577** |
+
+- Logs `build/gate/m63/c4a.log`, `c4b.log`; checkpoints `data/m62/ckpt/m63-joint-A412-A166.ckpt.json`
+  and `…-coset2.ckpt.json`, both saving every 30 s. The records `data/m62/m63-joint-A412-A166*.json` do
+  not exist yet: they are written at `finish()`, so **a run that has not closed has no record**, which is
+  the schema working as designed.
+- **C4a's upper bound of 509 is earned, not assumed.** `--S-frame contains:` refuses to run unless the
+  chosen frame's image of `A166` contains `v136e564`, so the record is literally a selection of this
+  working graph, and R2.2 measured that selection refusing and the same selection minus one atom
+  colourable. **C4b has no such anchor**: nothing is known to refuse in that frame except the whole
+  working graph, so its upper bound is 577 and its window is 78 vertices wide, not 6.
+
+### R2.1b — The sharper form: both problems are a hitting set over 153 atoms
+
+An atom whose lone deletion makes the graph colourable is in **every** refusing selection — downward
+closure of colourability, `parts_reduce.phase1`'s own argument, no search involved. So phase 1 did not
+merely count: it **partitioned** the 576 atoms into 423 forced and 153 free, and re-deriving this from the
+checkpoints confirms the partition is exactly what the loop is using — the 423 singleton correction sets
+are precisely the 423 critical atoms, and **not one of the 1,522 (C4a) / 1,408 (C4b) larger correction
+sets touches a forced atom**, as minimality requires.
+
+The consequence is that the whole joint question is small, and can be stated in one line:
+
+> Every refusing selection keeps all 423 forced atoms and the shared centre — 424 vertices — and the only
+> question is how many of the **153 free atoms** it must also keep. Parts's record keeps **85** of them.
+> **C4a has proved that at least 80 are needed; C4b, at least 76.**
+
+So C4a has closed 80 of the 85, and the open window is whether 80, 81, 82, 83 or 84 free atoms can carry
+the refusal. That is the honest size of what is left, and it is also why the remaining compute is
+expensive: the easy part of the bound is long finished.
+
+### R2.2 — Every registered prediction of C4, scored individually
+
+*Scored against §4 as registered. "Not decided" is the verdict when the run has not produced the
+quantity — preferred over any reading that stretches a bound into a minimum.*
+
+| # | registered | measured | verdict |
+|---|---|---|---|
+| **P-C4.0** | the joint stage's asks rise above the frozen-companion stages but stay **under a second** (Poros, 0.60) | already falsified at C4.0 on quiet CPU, min of three: full working graph **5.73 s**, the record's own selection **8.74 s**, phase-1 refusing population **1.758 s**. The two runs add a third and much larger population — **71,000 asks** — whose running means stay under a second (C4a 0.0415 s colourable / **0.4647 s** refusing; C4b 0.0431 / **0.5186**), but whose *instantaneous* refusing cost, differenced between ticks, crosses one second in **4 of 12** windows in C4a (peak 1.25 s) and **2 of 12** in C4b (peak 1.38 s) | **NOT MET (falsified)** — and now on two independent populations. *Caveat recorded rather than buried:* the run figures are wall-clock on a box carrying five heavy jobs, where the registered comparison was quiet CPU; the honest CPU numbers are in `mean_cpu_s`, which only the final record carries |
+| **P-C4.1** | the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is **exactly 509 vertices** (planner 0.60, Poros 0.65) | no optimum after 4.78 h: **LB 503 atoms = 504 vertices**, upper bound 509 (the record, verified as a selection of this graph). The answer lies in {504, 505, 506, 507, 508, **509**} | **NOT DECIDED** — the prediction survives, in a window of six values, and the falsifier (a refusing selection ≤ 508 vertices) has not fired |
+| **P-C4.2** | if 509, every minimum found splits as `(374, 136)` | **no minima exist to split** — `minima 0` in both runs. The nearest evidence is the phase-1 partition, which splits the forced atoms **333 L / 90 S** and the free atoms **78 L / 75 S**; his record's split is (373 L deletable + centre, 136 S) | **NOT DECIDED**, and undecidable while P-C4.1 is: the quantity does not exist yet |
+| **P-C4.3** | cost: phase 1 **< 60 s**; the bound **closes within 90 minutes**; **≥ 1,500** correction sets | phase 1 **85 s** (C4a) and **106 s** (C4b) — outside. The bound has not closed in **4.8 h**, more than three times the registered budget — outside. Correction sets **1,945** and **1,830** — inside | **NOT MET (falsified)**, two clauses of three. **This one is decided now and cannot be rescued by a later verdict**: the 90-minute clause is already false whatever the runs go on to find |
+| **P-C4.4** | C4b, the second relative frame, also closes at **509** (registered at 0.5, no higher) | no optimum after 4.71 h: **LB 499 atoms = 500 vertices**, and no upper bound below the working graph's own 577. Window {500, …, 577} | **NOT DECIDED**, and further from decidable than C4a: four fewer bound units and no incumbent |
+
+### R2.3 — Where the four hours actually went, which nobody registered
+
+The log's own accounting settles it, and it overturns the assumption under every cost argument this phase
+had: **the colouring oracle is 27% of the run.**
+
+| | C4a | C4b |
+|---|---|---|
+| wall | 17,197 s | 16,953 s |
+| in the SAT oracle (both populations, summed from its own timers) | 4,589 s — **27.0%** | 4,538 s — **27.1%** |
+| everything else | 12,412 s over 1,523 iterations — **8.2 s per iteration** | 12,213 s over 1,408 — **8.7 s** |
+| that per-iteration cost, early (t < 1,100 s, `|Y|` ≈ 450) | **0.54 s** | 0.69 s |
+| the same, late (t > 15,000 s, `|Y|` ≈ 1,900) | **13–18 s** | 20–27 s |
+
+`Oracle.ask` times the whole solve including its conflict-budget slices and `get_model()`, so the 27% is
+not an artifact of a narrow timer. By elimination the remaining 73% is the **per-iteration MaxSAT
+hitting-set solve**, which `reduce_stage` rebuilds from scratch every iteration — a fresh `WCNF` over all
+of `Y` plus 576 soft clauses and a fresh `RC2` — and whose cost has grown **25–40×** while `Y` grew 4×.
+Checkpointing (50 KB every 30 s) and the correction-set shrink's own bookkeeping cannot account for
+minutes per iteration, and the shrink's asks are already inside the 27%.
+
+**Why this matters beyond this run.** Every cost-control decision in this phase — the six conditional
+drops, Poros's card 6, the tenfold dial, §S.3's B-8, B-11, D-6 and X-7 — was argued from **per-ask cost**.
+Per-ask cost is a quarter of this run and falling as a share. The lever that would actually move phases D,
+F and G is an **incremental hitting-set solve**: `Y` only ever grows, and each iteration adds exactly one
+clause to an otherwise identical problem, which is the textbook case for warm-starting rather than
+rebuilding. That is a candidate to be measured, not a promise — and the measurement that would settle it
+is two lines (time the `RC2` block separately and log it beside the ask populations), which is worth
+adding before phase D's first long run rather than after.
+
+*What would confirm the attribution directly rather than by elimination:* a `py-spy dump` on a live run,
+or the two-line instrumentation above. Neither was run here — attaching to a live checkpointing run was
+judged not worth the risk of disturbing it.
+
+### R2.4 — The two relative frames have the same phase-1 census, atom for atom
+
+Not registered, noticed while reading the checkpoints, and stated as an observation rather than a
+conclusion:
+
+| | C4a (coset 1) | C4b (coset 2) |
+|---|---|---|
+| forced / free, whole stage | **423 / 153** | **423 / 153** |
+| forced / free, L side (411 atoms) | **333 / 78** | **333 / 78** |
+| forced / free, S side (165 atoms) | **90 / 75** | **90 / 75** |
+| working graph | 577 vertices, 2,904 edges, 36 connection | 577, 2,904, 36 |
+
+Four independent counts agree exactly across two problems that §O4 only ever claimed were *possibly*
+inequivalent. Two readings, and the cheap one is probably right:
+
+- **The sober reading.** The two halves are internally identical in both frames and only the 36 connection
+  edges differ, so most criticality is carried by each half's own structure; equal connection-edge counts
+  buying equal censuses is unsurprising. The lower bounds already differ (503 against 499) and so do the
+  correction-set profiles, so the two searches are certainly not running the same computation.
+- **The reading worth testing.** If the two joint stages are isomorphic as stages — same graph, same
+  deletable partition — then C4b's answer is **determined** by C4a's, P-C4.4 is decided by C4a alone, and
+  the second run is spending a core on a duplicate. §O4 rules out any *group* element realising it, since
+  the frames sit in different double cosets, so such an isomorphism would have to be non-geometric — which
+  this project has met before (grokking G27, the Galois flip that is an automorphism of de Grey's 1581
+  with no plane self-isometry).
+
+**This sharpens Poros's card 13 (the frame-isomorphism test), already deferred behind the verdicts, and
+gives it a prior it did not have.** Cost to settle: a canonical form of each joint stage with the
+deletable set as a vertex colour. Neither `pynauty` nor `networkx` is installed on this machine, so it is
+an install plus a few minutes of single-core work, not a free check — which is why it was not run here.
+
+### R2.5 — Paste-ready text for the reproduction plan (NOT applied)
+
+*`plans/M63-parts-reproduction.md` was being edited by the product owner while this section was written,
+so nothing was applied to it. The text below is kept here so it survives this session.*
+
+**(a) §S.4, the Phase C acceptance block, the `C4` bullet — replace in full:**
+
+```
+- [~] C4: the joint stage's positive control fired in its strongest form — the 509 returns exactly itself
+  (508 critical atoms, exactly one minimum, 0 droppable, §R2.2). **The two joint runs did NOT close.**
+  After 4.8 h each (2026-09-11 22:41, the machine, five heavy jobs sharing the machine) neither has found a
+  single minimum, so the result is a rigorous bracket and not a value: C4a, the frame holding the record,
+  **504 ≤ |M| ≤ 509 vertices**; C4b, the second relative frame, **500 ≤ |M| ≤ 577**. The `≤ 508` stop rule
+  never fired and stays armed in both runs. Both checkpoint every 30 s and resume exactly, and were left
+  running; collecting the verdicts is phase D's first act. C4b was launched four minutes after C4a rather
+  than after it closed (§A.2 #2), so the two ran concurrently and the three-hour report did not happen.
+  Full scoring: `plans/M63-phaseC-joint-stage.md` §R2.
+```
+
+**(b) §R2.1, the four pending prediction rows — replace in place:**
+
+```
+| P-C4.1 | the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is exactly 509 vertices (planner 0.60, Poros 0.65) | no optimum after 4.78 h; rigorous lower bound **503 atoms = 504 vertices**, incumbent upper bound 509 (the record is a selection of this working graph and refuses) | **not decided** — window {504, …, 509}; the falsifier (≤ 508) has not fired |
+| P-C4.2 | if 509, every minimum found splits as (374, 136) | `minima 0`: no minimum exists to split. Phase 1 splits the forced atoms 333 L / 90 S and the free atoms 78 L / 75 S | **not decided**, and undecidable while P-C4.1 is |
+| P-C4.3 | phase 1 < 60 s; the bound closes within 90 minutes; ≥ 1,500 correction sets | phase 1 **85 s** / **106 s**; the bound has not closed in **4.8 h**; correction sets **1,945** / **1,830** | **FALSIFIED**, two clauses of three — and decided now: no later verdict can rescue the 90-minute clause |
+| P-C4.4 | C4b, the second relative frame, also closes at 509 (0.5, no higher) | no optimum after 4.71 h; lower bound **499 atoms = 500 vertices**, no upper bound below the working graph's 577 | **not decided** — window {500, …, 577} |
+```
+
+**(c) §S.3 has no row keyed to C4** — the gap audit's only joint-stage row is B-10, which C4a's positive
+control already discharged. If the joint stage is to have a row, this is the one it should have:
+
+```
+| C4-1 | the joint minimum over his two accumulators, both halves deletable (phase C4) | **partly — bracketed, not closed** | two runs of 4.8 h each, neither reaching an optimum: C4a (the record's frame) **504 ≤ |M| ≤ 509 vertices**, C4b (the second frame) **500 ≤ |M| ≤ 577**, both from the MaxSAT bound over harvested correction sets, `minima 0`, `undecided 0`. The problem is a minimum hitting set over **153 free atoms** (423 of 576 are forced by phase 1, and his record keeps 85 of the 153, against ≥ 80 proved) | D (collect the verdicts from the checkpoints) |
+```
+
+### R2.6 — Open, with what each one would take
+
+1. **The two verdicts.** Both runs are alive and checkpointed; resuming costs at worst the in-flight ask,
+   one correction-set shrink and 30 s of iterations (§O2). On the trend of the last 4,000 s, C4a needs
+   roughly 1–4 more hours to lift its bound the remaining five units, and then as long again for a
+   candidate at that weight to refuse; C4b is four units further back. **Neither is safe to promise.**
+2. **P-C4.1, P-C4.2, P-C4.4 are unscored** and stay unscored until an optimum exists. P-C4.0 and P-C4.3
+   are decided and will not move.
+3. **The frame-isomorphism test** (R2.4, Poros card 13): install a canonical-form tool, colour by the
+   deletable set, compare. Decides P-C4.4 outright if the answer is yes.
+4. **The MaxSAT attribution** (R2.3): two lines of instrumentation in `reduce_stage`, then a decision on
+   an incremental hitting-set solve before phase D's long runs.
+5. **Correction sets are still verified by construction only** (gap-audit C-3). The 423 singletons were
+   re-derived here against the phase-1 census; the 1,522 larger sets were not.
+6. **The cost figures are wall-clock on a contended machine.** Five heavy jobs shared the machine throughout,
+   so every per-ask number here is an upper bound on its quiet cost, and the `mean_cpu_s` fields in the
+   final records are the numbers to quote once they exist.
