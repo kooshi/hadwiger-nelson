@@ -1067,6 +1067,19 @@ travels with its units, its conditions and its population, or the ruling is abou
 repair when it happens: re-derive the decision from the corrected figure out loud, because a ruling that
 survives its bad evidence needs new grounds, not a quiet pass.
 
+**And the sharp, checkable form of that rule, extracted 2026-09-12 after the same error's FOURTH instance in
+one milestone: when two numbers are compared, exactly ONE thing may differ between them.** The two instances
+that produced it are worth keeping because they are one error wearing two faces. A brief claimed its new
+rotation gave *"twice the record's circle count and twice its unit-neighbour count"* — but the doubling came
+from dropping a coordinate restriction, not from the rotation, and the unit shell **does not depend on the
+rotation at all**. A product owner scored an off-diagonal **raw count** against `24/54`, which is a share of
+the **monochromatic** cross edges under a particular colouring — a different denominator. **Both differed in
+two things and credited one, and in both cases the other thing was the change being advocated, so the error
+flattered the work.** The check costs seconds and ends the unit-shell case immediately: **write both numbers
+as fractions with the denominators spelled out in words.** Not one of the four instances was a wrong
+measurement — each was a right measurement of a different quantity, which is exactly why none of them looked
+wrong to the person who made it.
+
 **The same rule has a second half, and its author broke it within two hours of writing it down.** Having
 recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
 prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a
