@@ -1,0 +1,2360 @@
+{
+ "kind": "m63-probe-pair-candidates",
+ "n": 112,
+ "group1_promoted": 21,
+ "group2_pairs_of_singles": 91,
+ "rows": [
+  {
+   "pair": [
+    [
+     -13,
+     -1,
+     -1,
+     5
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-om13_m1_m1_5-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     2,
+     2
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o0_0_2_2-o2_0_4_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     0,
+     0,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o0_0_8_0.vtx",
+   "n_vertices": 181,
+   "added": 15,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     0,
+     2,
+     10,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o0_2_10_0.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     0,
+     4,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o0_4_8_0.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 888
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     2,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o2_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 888
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o2_0_4_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 912
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o4_0_2_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o6_2_8_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 912
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o6_4_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 936
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o10_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o12_0_0_0.vtx",
+   "n_vertices": 184,
+   "added": 18,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o12_0_2_6.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 948
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o12_2_2_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 966
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     6,
+     6
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_6_6-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 918
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     0,
+     2,
+     10,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o0_2_10_0.vtx",
+   "n_vertices": 181,
+   "added": 15,
+   "n_edges_internal": 822
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     0,
+     4,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o0_4_8_0.vtx",
+   "n_vertices": 181,
+   "added": 15,
+   "n_edges_internal": 822
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     2,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o2_0_0_2.vtx",
+   "n_vertices": 181,
+   "added": 15,
+   "n_edges_internal": 822
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o2_0_4_2.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 858
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o4_0_2_2.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 858
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o6_2_8_0.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 846
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o6_4_6_0.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o10_0_0_2.vtx",
+   "n_vertices": 181,
+   "added": 15,
+   "n_edges_internal": 810
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o12_0_0_0.vtx",
+   "n_vertices": 175,
+   "added": 9,
+   "n_edges_internal": 828
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o12_0_2_6.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o12_2_2_0.vtx",
+   "n_vertices": 187,
+   "added": 21,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_0_8_0-o12_2_6_0.vtx",
+   "n_vertices": 193,
+   "added": 27,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     0,
+     4,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o0_4_8_0.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 852
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     2,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o2_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 840
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o2_0_4_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o4_0_2_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o6_2_8_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o6_4_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 888
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o10_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 852
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o12_0_0_0.vtx",
+   "n_vertices": 184,
+   "added": 18,
+   "n_edges_internal": 846
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o12_0_2_6.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 900
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o12_2_2_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 900
+  },
+  {
+   "pair": [
+    [
+     0,
+     2,
+     10,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_2_10_0-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     2,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o2_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 846
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o2_0_4_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o4_0_2_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o6_2_8_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o6_4_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     7,
+     1,
+     1,
+     5
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o0_4_8_0-o7_1_1_5.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o10_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 834
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o12_0_0_0.vtx",
+   "n_vertices": 184,
+   "added": 18,
+   "n_edges_internal": 852
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o12_0_2_6.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o12_2_2_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 906
+  },
+  {
+   "pair": [
+    [
+     0,
+     4,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o0_4_8_0-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     1,
+     1,
+     3,
+     5
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o1_1_3_5-o2_0_4_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 918
+  },
+  {
+   "pair": [
+    [
+     1,
+     1,
+     3,
+     5
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o1_1_3_5-o4_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     2,
+     0,
+     4,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o2_0_4_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     2,
+     2,
+     0,
+     4
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_0_2-o2_2_0_4.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     0,
+     0,
+     4
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_0_2-o4_0_0_4.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 852
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o4_0_2_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 906
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     0,
+     6,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_0_2-o4_0_6_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o6_2_8_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o6_4_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     8,
+     0,
+     6,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_0_2-o8_0_6_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o10_0_0_2.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 846
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o12_0_0_0.vtx",
+   "n_vertices": 184,
+   "added": 18,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o12_0_2_6.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 906
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o12_2_2_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 906
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_0_2-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     2,
+     4
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_2_4-o4_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     4,
+     0,
+     0,
+     4
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_4_2-o4_0_0_4.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o4_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 954
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o6_2_8_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o6_4_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 918
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     8,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_0_4_2-o8_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 912
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o12_0_0_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 876
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o12_0_2_6.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o12_2_2_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     2,
+     0,
+     4,
+     2
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o2_0_4_2-o12_2_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     2,
+     2,
+     0,
+     4
+    ],
+    [
+     4,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_2_0_4-o4_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     2,
+     2,
+     0,
+     4
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o2_2_0_4-o6_4_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 942
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o6_2_8_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o6_4_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     7,
+     1,
+     1,
+     5
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o4_0_2_2-o7_1_1_5.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 918
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     8,
+     0,
+     0,
+     4
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o4_0_2_2-o8_0_0_4.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     8,
+     0,
+     2,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o4_0_2_2-o8_0_2_2.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o12_0_0_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 888
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o12_0_2_6.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 942
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o12_2_2_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 942
+  },
+  {
+   "pair": [
+    [
+     4,
+     0,
+     2,
+     2
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o4_0_2_2-o12_2_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 912
+  },
+  {
+   "pair": [
+    [
+     6,
+     0,
+     10,
+     0
+    ],
+    [
+     6,
+     2,
+     8,
+     0
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o6_0_10_0-o6_2_8_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     6,
+     0,
+     10,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o6_0_10_0-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 888
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     6,
+     4,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o6_4_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 942
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 858
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o12_0_0_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 900
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o12_0_2_6.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 954
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o12_2_2_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 966
+  },
+  {
+   "pair": [
+    [
+     6,
+     2,
+     8,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_2_8_0-o12_2_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     6,
+     4,
+     6,
+     0
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_4_6_0-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     6,
+     4,
+     6,
+     0
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_4_6_0-o12_0_0_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 900
+  },
+  {
+   "pair": [
+    [
+     6,
+     4,
+     6,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_4_6_0-o12_0_2_6.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 1002
+  },
+  {
+   "pair": [
+    [
+     6,
+     4,
+     6,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_4_6_0-o12_2_2_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 954
+  },
+  {
+   "pair": [
+    [
+     6,
+     4,
+     6,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o6_4_6_0-o12_2_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 924
+  },
+  {
+   "pair": [
+    [
+     7,
+     1,
+     1,
+     5
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o7_1_1_5-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     8,
+     0,
+     6,
+     2
+    ],
+    [
+     10,
+     0,
+     0,
+     2
+    ]
+   ],
+   "group": 1,
+   "file": "m63-probe-P1-o8_0_6_2-o10_0_0_2.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 870
+  },
+  {
+   "pair": [
+    [
+     10,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     0,
+     0,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o10_0_0_2-o12_0_0_0.vtx",
+   "n_vertices": 184,
+   "added": 18,
+   "n_edges_internal": 840
+  },
+  {
+   "pair": [
+    [
+     10,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o10_0_0_2-o12_0_2_6.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     10,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o10_0_0_2-o12_2_2_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 894
+  },
+  {
+   "pair": [
+    [
+     10,
+     0,
+     0,
+     2
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o10_0_0_2-o12_2_6_0.vtx",
+   "n_vertices": 202,
+   "added": 36,
+   "n_edges_internal": 864
+  },
+  {
+   "pair": [
+    [
+     12,
+     0,
+     0,
+     0
+    ],
+    [
+     12,
+     0,
+     2,
+     6
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_0_0_0-o12_0_2_6.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 912
+  },
+  {
+   "pair": [
+    [
+     12,
+     0,
+     0,
+     0
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_0_0_0-o12_2_2_0.vtx",
+   "n_vertices": 190,
+   "added": 24,
+   "n_edges_internal": 930
+  },
+  {
+   "pair": [
+    [
+     12,
+     0,
+     0,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_0_0_0-o12_2_6_0.vtx",
+   "n_vertices": 196,
+   "added": 30,
+   "n_edges_internal": 882
+  },
+  {
+   "pair": [
+    [
+     12,
+     0,
+     2,
+     6
+    ],
+    [
+     12,
+     2,
+     2,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_0_2_6-o12_2_2_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 966
+  },
+  {
+   "pair": [
+    [
+     12,
+     0,
+     2,
+     6
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_0_2_6-o12_2_6_0.vtx",
+   "n_vertices": 214,
+   "added": 48,
+   "n_edges_internal": 960
+  },
+  {
+   "pair": [
+    [
+     12,
+     2,
+     2,
+     0
+    ],
+    [
+     12,
+     2,
+     6,
+     0
+    ]
+   ],
+   "group": 2,
+   "file": "m63-probe-P2-o12_2_2_0-o12_2_6_0.vtx",
+   "n_vertices": 208,
+   "added": 42,
+   "n_edges_internal": 954
+  }
+ ]
+}
