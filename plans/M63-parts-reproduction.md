@@ -1900,6 +1900,46 @@ So: **no single orbit frees a necessary atom; whether any widens a non-singleton
 unmeasured, and that is the cheaper route.** The first half is measured, the second is not, and
 leaving the second implicit is how the claim gets over-read later.
 
+### R3.b2 — The failure is omission, the binding constraint is the cap, and that inverts a judgement
+
+*Poros's card 30, its derivation forced and its hunch then falsified by its own falsifier.*
+
+**Forced, and it settles the category.** Adding vertices can never raise `w*`. His 30 vertices give
+`w* = 373`. **Therefore every superset of those 30 reaches 374**, whatever else it carries. The
+frozen rule's 48-vertex proposal is not a superset — it omits `(0,0,0,4)` and `(0,0,6,6)` — so what
+it added was never *harmful*, only *insufficient*. The failure is **omission**, and it follows that
+**over-proposing can cost time but never correctness**.
+
+**Which inverts a judgement this milestone had recorded.** His stall escape — *"increasing the
+number of new vertices introduced in the expansion stage"* — was written off as *"a knob and not a
+criterion"*. That is right as a complaint about it being a **measure** and wrong as a dismissal:
+under monotonicity **the knob is the mechanism that works and the ranking is the luxury**. His own
+§5.11 ceiling of "several tens of redundant vertices" is the budget that made the knob unusable for
+him, and it is a budget we are already twice past.
+
+**Three candidate binding constraints, and the measurement kills the structural one.** The ordering,
+the cap of six orbits, or the **trim** — only the trim could have been structural, since
+`many_then_trim` strips new vertices of low final degree and a strategy that strips vertices his
+move needs could never reproduce it *at any cap*. Measured (`tools/parts_diag.py:trimtest`):
+
+| | |
+|---|---|
+| his 30 vertices surviving a single trim pass | **30** |
+| surviving to a fixed point | **30**, in 0 passes |
+| their degrees into the enlarged graph | **4 (×15), 6 (×9), 8 (×6)** — against a threshold of 3 |
+
+**`trim-preserves-his-move`.** So the trim is not the constraint and is not even close; the advisor's
+hunch died on the falsifier it had itself registered. **The binding constraint is the cap of six
+interacting with the ordering** — his four orbits are all in the ranked menu, two of them made the
+top six and two did not. And since over-proposing is free on correctness, the rule the successor
+should write is *propose as much as you can afford to reduce, and rank only to choose under budget*
+— not a better ranking.
+
+**One run worth stating as a run rather than as three observations:** **no published device of his
+selects his own recorded move** — not §5.6's priority sentence, not the reserve's degree order
+(Poros M3), and not that degree order at the set-valued rung (here). That is a finding about the
+paper, and it is the strongest available justification for scoring a reproduction by outcome.
+
 ### R3.c — His own move as a calibration bed, and two statistics that died before costing anything
 
 His recorded four-orbit move from `A403` is the one labelled positive anyone holds for a set-valued
