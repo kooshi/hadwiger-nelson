@@ -717,6 +717,25 @@ state one cleanup away from unrecoverable is not recoverable. Put checkpoints ou
 name the **resume command** in the subplan beside the checkpoint's path — a checkpoint nobody knows how to
 resume from is a file, not a recovery.
 
+**A run that blocks something is presumed killable** (Kooshi, 2026-09-12). When a live job stands in the way
+of anything — an edit to a module it imports, a core another task needs, a fix it would invalidate — weigh
+**the value of the run against the value of what it blocks, and the default is to kill the run.** The burden
+of proof is on keeping it, never on stopping it. Because every long run checkpoints (above), **the cost of
+being wrong is the time to redo, never the result** — so weigh the cost of being wrong, not the hours
+already spent. Three shapes met in one night, each of which looked like a reason to wait and was not:
+- **The run is blocking its own replacement.** Two reductions spent hours on an operation a new engine did
+  186× faster, and `tools/` could not be edited while they held it open — so "wait for them to finish" made
+  the slow path self-perpetuating. Look for that circularity by name: *is the thing I am waiting on the
+  thing preventing the fix?*
+- **The run is producing records under code you are about to fix.** Finishing banks results from the broken
+  version and forces the redo anyway — and those records are the ones a later reader trusts.
+- **The fix makes the redo cheaper than the run being protected.** Then waiting costs twice.
+
+Two obligations when you do it. **Capture the run's state into the record before signalling** — a verdict
+written only at `finish()` is lost, and the log is not the record. And **name what the kill forfeits, out
+loud**: one such kill cost a registered out-of-sample prediction, and a forfeited instrument must not
+disappear quietly merely because the decision was otherwise right.
+
 **Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so a live
 process resumes mid-token. Launch long runs from a snapshot copy (`cp scripts/x.sh build/x-snapshot.sh`;
 `build/` is gitignored).
