@@ -514,6 +514,15 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   question's shape before any search; the search then produces predicted instances, and the controls correct
   scope. Rank stubs accordingly: a finite exact computation plus a named theorem beats an object search; a
   stub with no recognition yet is a reading room. The recognition sentence is the prior-art query (G49).
+  **And read the construction's own data layout, not only the plan's vocabulary for it** (2026-09-12). The
+  result that closed M63's rotation screen — a radius-free, base-free elimination — is a *corollary of
+  Theorem B applied to an object nobody had pointed it at*, and what produced it was four lines of
+  `Arena.__init__`: the rotated half carries the **same index set and the same internal edge list** as the
+  original, so one colouring covers both halves at once. **The layout was carrying a mathematical fact the
+  plan's vocabulary had no word for.** That is a cheaper and more repeatable habit than "look for theorems":
+  when a plan and an implementation describe the same object, the implementation is the one that cannot
+  round off. Its discoverer declined the credit for depth and named this instead, which is why it is written
+  as a habit rather than as an achievement.
 * **G47 — The compulsion face of sealing. [kernel]** Compulsions map forward along homomorphisms; on a Cayley
   graph a forced pair needs a period of every colouring. No finite plane at p ≡ 3 (mod 4) has a forced pair
   at a colour count it admits (row 60); at 11 its virtual edges are exactly its edges (kernel; measured at 3,

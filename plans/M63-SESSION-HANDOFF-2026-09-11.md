@@ -579,6 +579,25 @@ M62 §R22's carry-over sentence is fixed in place; `−7/8` is struck from the c
 worth more spend:** the filter fires at only one of the two primes per class — mathematically sufficient,
 since one valid colouring is a proof, and the certificate does not depend on the derivation.
 
+**IMPLEMENTATION DETAIL THAT DECIDES WHETHER THIS SHIPS AS A THEOREM OR A COINCIDENCE.** The criterion is
+**per radius sum**. So the filter's *input* is the base's list of `σ` values, and its *output* is a claim
+about **every base whose `σ` list sits inside that one**. **If a verdict prints without its `σ` list, the
+next base re-runs the filter instead of inheriting it** — and the base-free half of the result is lost in the
+artifact even though it remains true in the mathematics. Print the `σ` list with every verdict.
+
+**Do not over-read what produced this** (the discoverer's own correction, and it declined credit for depth).
+The `σ` criterion is a **corollary of Theorem B applied to an object nobody had pointed it at**, and the move
+that found it was reading four lines of `Arena.__init__` — the rotated half carries the same index set and
+the same internal edge list as the original, so one colouring covers both. **The construction's data layout
+was carrying a mathematical fact the plan's vocabulary had no word for.** Recorded in `CLAUDE.md` G46 as a
+habit rather than an achievement.
+
+**And an honest limit on the rule that caught the diagonal control.** The unplanned diagonal table was
+recognised *as* a control because this milestone now demands the uninformative outcome be named in advance —
+but that rule found value in a place it was not aimed at, and **it will not do so reliably.** A control
+nobody predicted is noticed only when someone is looking at the *shape* of the results rather than their
+content, and no rule can schedule that.
+
 ## §6c — THE FLOAT VERDICTS ARE RETIRED (2026-09-12, `8b59db6`) — the queue is clear
 
 **Six sites in `tools/typem.py` now decide exactly**, and `ksign` moved *into* `typem.py` beside `kfloat`
