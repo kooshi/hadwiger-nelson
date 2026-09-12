@@ -55,6 +55,7 @@ untouched: **the S half of the 509 is Heule's, reduced once and never expanded, 
 - `data/m62/m64-phaseD-layers.json` — read against: FS-35 §1(3)'s claim that `Y`'s degree-1 and degree-2 layers are *"stored per run"* — surprised: yes; the file holds nine profile rows and a `smallest_layer_that_excludes`, not a layer census. The layers may be inside the 9.5 MB reduction record; **unchecked here**
 - my probe `scratchpad/poros-phaseD/out.txt` (§Measurements P1) — read against: material outside his disk that passes his own reserve rule — surprised: yes, in the negative direction and then in a better one: **zero** outside orbits reach his threshold on any accumulator, and the live menu is 49 / 49 / 6
 - the phase D planner's opening message, 2026-09-11 (`a2a15ba6914ca0d30`) — read against: three questions with candidate answers — surprised: yes; its own preferred scoring surface (b), *"rank correlation against outcome over MANY candidate expansions"*, **presupposes the outcome map card 1 proposes to build** — as do its (a) and (c). All three are consumers of ground truth, not alternatives to it
+- the phase D implementer's D1.a report, 2026-09-11 (`a0ff3ca8b76d21ad9`) — read against: the replay control reproducing his state-1 row (376 vertices, 96 minima, `A = v451e2400`, edges 1890–1947), since it reduces **his own** published accumulator against **his own** published companion with no free parameter — surprised: yes; `|M|` agrees exactly while `|{M}|` reads 82 against 96 and the accumulator 433 against 451, short by **18** with nothing of ours outside his, and the edge range's low endpoint short by **18** too. Its proposed explanation (our rung is larger than his, so his state 1 is an order-2 rung) is refuted by P8 in thirty seconds of group theory on a file we already hold, which is the second time this phase that the deciding object was in the record while a multi-core probe was being launched at the question
 
 ## Hunch ledger
 
@@ -124,8 +125,20 @@ to me; card 2 was pulled forward by the product owner and is that engineer's who
 its nine-candidate form. Card 5 went to the planner on its own, after the product owner made the
 49-candidate L sweep phase D's first implementation item — it is here because one of its branches is a
 one-way door; it was adopted in both halves. Card 6 went to both engineers at once, because it asks one
-run of each. Fates are the phases' to write beside each card; the planner reports cards 1, 2, 3, 5, the
-three §§5.5–5.11 items and both corrections as having fates in its own §P.*
+run of each. **Cards 7, 8 and 9** went to the **phase D implementer** (`a0ff3ca8b76d21ad9`), a third
+addressee, and are below in their own section — card 7 because the product owner named the map's
+over-reading risk and card 1 is what created it, card 8 because its design consequence (what the
+singleton sweep writes to disk) cannot be taken retroactively, card 9 because the fifth arm the
+plan funds to test my own hunch would not have tested it, and **card 10** to both engineers at once
+after the S engineer corrected card 8's pair pricing — it asks which of three nested pair menus the
+sweeps use, and carries two corrections to my own cards. **Cards 11, 12 and 14** went to the S
+engineer as its sweep ran (the promoted set's disk status; whether run time tracks anything but size;
+whether cost tracks added edges), and **card 13** to the implementer (the target knob making the
+declared secondary outcome unobservable). Cards 10, 11 and 12 are answered, each answer killing or
+scoping something of mine: two readings dead on the radius axis, the closed list scoped to singles,
+and three separate corrections to the menu figure 57.* Fates are the phases' to write beside
+each card; the planner reports cards 1, 2, 3, 5, 6, the three §§5.5–5.11 items and both corrections as
+having fates in its own §P.*
 
 question: is-the-depth-one-expansion-menu-enumerable-at-our-speed
   evidence: P1 (mine, 90 s, one core, re-derivable): `Base(2.6)` has 229 orbits, 183 meeting his `r = 2`
@@ -202,6 +215,1015 @@ question: may-a-capped-iteration-propose-or-only-report
   falsifier: a proof that `reserve(A') ⊆ reserve(A)` whenever `A' ⊆ A`, which would make the cap sound in
     one direction and a propagating label sufficient
   rank: 3
+
+## Cards 7–25 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`) and the S engineer
+(`aa10420df4950eda9`), 2026-09-11
+
+*Prompted by the product owner naming the map's over-reading risk before the sweep runs. Card 1 argued
+for the map, so its failure modes are mine to name.*
+
+question: is-the-map-scored-on-the-data-that-built-it
+  evidence: four ways in. (i) Trying `k` rankings against one 57-point map and reporting the best
+    inflates the best by selection alone. (ii) If the outcome is degenerate every ranking scores alike
+    and nothing can be said of any — the S half is 7 of 14 decided, all inert at 136 with the identical
+    48 minima — and G21 says a negative then measures the enumeration, not the rankings. (iii) The
+    salvage move when the primary outcome is all-zero is to substitute a softer one, and the softest to
+    hand — **atoms freed** — IS one of the candidate rankings, so it would be scored against itself.
+    (iv) A rule invented after seeing the map is hypothesis generation, not evidence.
+  expected: the map is ground truth, so scoring against it is safe
+  ask: are the ranking list and the outcome variable frozen in a commit before the first candidate's
+    outcome is read?
+  if yes: the `A412` map is the training set and the `A403` map — computed after the frozen rule's
+    attempt, as cards 1 and 5 already require — is a held-out test at no extra cost; report every arm's
+    full curve, never the best arm
+  if no: the sweep yields a map that cannot score anything, and its only honest use is as the
+    enumeration it is — still worth having, and it should be said in those words
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one commit before the first run
+  hunch: the outcome is degenerate on the L half too, and (iii) is the failure that actually happens,
+    because substituting a softer outcome feels like salvage rather than a design change
+  falsifier: any single-orbit candidate on the L half lowering `|M|`
+  rank: 7
+
+*Caveat sent with it: `A403` and `A412` are nearly the same object, so their maps are correlated and the
+split is weak; it costs nothing, so take it, but the genuinely held-out test stays phase E's 8/3
+mono-pair.*
+
+question: what-does-an-all-inert-singleton-sweep-close
+  evidence: **his one recorded successful expansion was a four-set** — orbits `(0,0,0,4)` and
+    `(0,0,6,6)` plus the other halves of `(0,0,2,2)` and `(0,0,2,6)` (parts:808-810; M63 §S.2 #9) — and
+    every sweep now running is singletons. Seven of the S half's fourteen are decided, all inert at 136
+    with the identical 48 minima and an unchanged accumulator. His §5.11 ceiling (*"usually limited to
+    several tens"*, parts:724-729) and his tens-of-hours reductions are a reason he would bundle orbits
+    into one expensive reduction, so the four-set may be his cost regime rather than a structural fact;
+    both readings are live, which is what makes this a question.
+  expected: a singleton sweep answers "can this half be expanded"
+  ask: does an all-inert singleton sweep close the half, or only its singletons — and is the pair rung
+    entered on the S half, where `C(14,2) = 91` runs is about 15 core-hours?
+  if singles only: the S negative is reported with that scope, the pair rung becomes the cheapest
+    remaining beat attempt anywhere, and the singleton sweep's artifacts are kept resumable so a pair
+    run reuses them rather than redoing them
+  if the half is closed: state the argument, because nothing measured supports it and his own recorded
+    move contradicts it
+  answered by: Implementer, and the S-expansion engineer
+  cost: one scope sentence now; 91 runs later if entered
+  hunch: singles are inert on both halves and pairs are where the answer is; his four-set is the
+    evidence, and it is the best reason to expect what the S half is already showing
+  falsifier: a single orbit lowering `|M|` on either half
+  rank: 8
+
+**Reading, and it sharpens card 1 rather than undercutting it.** Pairs on the S half are 91 and
+enumerable; pairs on the L half are `C(57,2) = 1,596` and are not. **Enumeration dies exactly one rung
+up, on the L half — which is precisely where a ranking rule must be trusted.** So the map's argument is
+not that it finds the move but that it is the only ground truth against which the depth-2 rule can be
+scored at depth 1.
+
+question: does-the-L-sweep-run-its-shoulder-in-full
+  evidence: my hunch `the-filter-is-the-rule` says the reserve gate (229 orbits → 57) may carry most of
+    his rule's content, and the plan answers it with a fifth arm sampling orbits that fail the gate.
+    **That arm is a straw control:** under the strict reading the L degrees run
+    `{0:48, 1:56, 2:33, 3:23, 4:18, 5:13, 6:12, 7:2, 8:2, 9:1, 10:1}`, so a uniform sample below the
+    gate is drawn overwhelmingly from degrees 0 and 1 — useless for a trivial reason — and would
+    confirm "the filter does something" while saying nothing about where the cut belongs. The
+    implementer proposed instead regressing density on degree *within* 4–10, but that measures **is
+    degree a good ranking**, not **is the gate a good filter**: density flat across 4–10 and zero at
+    ≤ 3 would mean degree is useless above the gate while the gate does everything, so "flat ⟹ the cut
+    is arbitrary" is an invalid inference. The instrument for a threshold is a comparison *at* it.
+  expected: the gate question is answered by sampling below the gate
+  ask: does the L sweep run its degree-3 shoulder in full, making the gate question a comparison at the
+    threshold rather than a sample below it?
+  if yes: about 23 extra runs — a 40% larger sweep — buy a complete, nearly balanced comparison at the
+    cut (23 at degree 3 against 18 at degree 4, both complete rather than sampled), and the hunch
+    becomes answerable rather than merely registered
+  if no: the gate question is reported as untested, which is honest and cheap, and the fifth arm is
+    dropped rather than shipped as a straw control that would read as evidence
+  answered by: Implementer (de Bruijn, phase D)
+  cost: about 23 runs, or one sentence
+  hunch: the gate carries more of the rule than any ranking within it does
+  falsifier: density at degree 3 matching density at degrees 4–10
+  rank: 9
+
+**A correction to my own P4, sent with card 9.** That histogram, and its shoulder counts of 3 on the S
+side and 23 on the L side, were measured under the **strict** reading — the one I withdrew. Under the
+adopted reading (b) the degrees shift upward, so **both the eligible set and the shoulder need
+recomputing**, and "23 at degree 3" must not be carried as a number. The 57 / 59 / 12 menu counts are
+under reading (b) and stand.
+
+**Three per-entry invariants offered for the sweep** (the implementer's own check — vertex count plus
+recomputed edges — catches a mis-frame but not a wrong companion). (1) *The companion fingerprint is
+constant across a sweep*, by construction; assert it against one stored value, free. (2) **The
+restriction identity, the one to plant if only one:** an expanded stage contains the unexpanded stage
+as an induced subgraph on the original vertices, so its induced edge set restricted to the original
+atoms and the companion must equal the unexpanded stage's exactly — adding vertices cannot change edges
+among existing ones. This catches a wrong companion *and* a wrong frame, because both alter cross edges
+among the *original* vertices, which is exactly where a vertex-count check is blind; one set comparison,
+no solver. (3) *The known-answer anchor*, one ask: a known minimum of the unexpanded stage must still
+refuse, and minus any vertex must be colourable — invariant under every expansion, so any variation is
+the instrument. None of the three catches *right graph, wrong question* (a target knob asking ≤ 373 when
+it should ask ≤ 374); for that the artifact must echo the target and rung it actually used against the
+config hash.
+
+question: which-of-three-pair-menus-is-the-sweeps-menu
+  evidence: **the S engineer's correction to card 8, accepted:** admission is relative to the
+    accumulator, so for distinct orbits the absent set of `O₂` is unchanged by adding `O₁` while every
+    degree into `A ∪ O₁` is ≥ the degree into `A` — sequential admission therefore strictly contains
+    pairs-of-singles, and **my 91 and 1,596 are lower bounds, not counts**. But three menus are nested,
+    not two. **(a)** both orbits from `menu(A)`: 91 on the S half, `C(57,2) = 1596` on the L half.
+    **(b)** sequential with recomputation: the engineer's, ≥ 91, possibly > 200. **(c)** simultaneous
+    admission (some vertex reaches degree 4 in `A ∪ O₁ ∪ O₂`): larger still, and the only one admitting
+    a pair whose members each fail alone and qualify together — which (b) can never reach, since
+    neither orbit can go first. **His own text favours (a)**: *"Graph R … is updated after several
+    successful iterations"* (parts:516-517) — after iterations, not after each orbit — so within one
+    expansion step the candidate set is fixed and a k-orbit move draws k orbits from one `R`.
+    **Empirical tie-breaker, from measurements already on the record: all four orbits of his one
+    recorded move were in `menu(A403)`** — `(0,0,0,4)` and `(0,0,6,6)` at degree 6, `(0,0,2,2)` and
+    `(0,0,2,6)` at degree 4 (predecessor's M3; my P1 ranks 8, 45, 47).
+  expected: the pair menu is pairs of singles
+  ask: does the pair sweep use his fixed-reserve menu of 91, the recomputed sequential one, or
+    simultaneous admission?
+  if his fixed-R menu: 91 runs, and (b)'s extra members are reported as an untested widening rather
+    than run
+  if the recomputed one: the cost doubles or worse and the sweep is no longer reproducing his rule —
+    fine as a beat attempt, but it must not be labelled reproduction
+  answered by: Engineer (S half, `aa10420df4950eda9`), with the phase D implementer for the L half
+  cost: one decision; 91 runs against perhaps 200
+  hunch: (a) is his rule and (b) is the better search, so the honest artifact runs (a) first and
+    reports (b)'s extra members separately — then a negative on 91 is a statement about *his* rule
+  falsifier: an orbit in his recorded move that was below threshold against `A403`
+  rank: 10
+
+**A second widening, orthogonal to the engineer's, and unmeasured.** His sentence gives **two**
+expansion modes: *"filling in the partially occupied base orbits of graph `A` and (or) adding new
+vertices from reserve graph `R`"* (parts:513-515). The degree-≥ 4 test is stated **only for membership
+of `R`** — the *additions*; a **fill** of an already-partially-occupied orbit is subject to no degree
+test in the text, only to its own priority (*"especially to orbits with a small number of vertices
+(6 or 12)"*, parts:522-524). **Two of his four move-orbits were fills.** If fills are exempt, the menu
+gains every partially occupied orbit below threshold — 16 orbits were partially occupied at `A403`
+(predecessor's M3), of which only some clear degree 4. Not measured here; it is one line in the census
+the S engineer is already running.
+
+**A correction to my own card 8, derived by the S engineer and accepted.** Card 8 told the implementer
+to keep the singleton sweep's artifacts resumable and listed *"stage, harvested correction sets,
+level"*. **The correction sets are exactly the item that must not be imported:** a refusing selection
+in a pair stage may satisfy none of them through the second orbit, so importing one as a
+keep-at-least-one constraint could exclude a genuine record, and the sound repair widens each set and
+weakens it. What is safely resumable is the **colourability cache** — a selection's colourability
+depends on the selection and the companion alone, never on `W` — and **non-criticality**, which
+transfers upward while criticality does not. Both were the savings anyway; the correction sets were
+never the expensive part.
+
+question: does-promotion-reach-outside-his-disk
+  evidence: my P5 closed list — no orbit outside his `r = 2` disk reaches the admission threshold under
+    any of the three readings — was computed **against the bare accumulator only**. Promotion is
+    exactly the mechanism that could break it: the S engineer measures the S pair menu at **112 = 91 +
+    21**, the 21 bringing in **14 distinct orbits** that fail against the bare accumulator and qualify
+    once one orbit is present, and reports that **both degree-3 shoulder orbits are promoted to full
+    admission**. One S shoulder orbit is `(0,4,8,0)`, both radii exactly √5, outside his disk (P4, P6).
+    The 46 excluded orbits split 11 with `abcd ≠ 0` and 35 with `abcd = 0` (P7).
+  expected: the closed list is a statement about the material — it is a statement about singles
+  ask: does any promoted orbit lie outside his `r = 2` disk, and is `(0,4,8,0)` among the promoted?
+  if yes: material his own base excluded is reachable as the second half of a pair; the closed-list
+    finding is scoped to singles here, and the pair sweep becomes the first search in this project that
+    can leave his disk at all
+  if no: the closed list survives promotion as well as all three readings, and F(g)'s radius half is
+    closed against pairs too — a stronger statement than I have made
+  answered by: Engineer (S half) — one line from the promoted set it already holds
+  cost: a lookup
+  hunch: yes, and `(0,4,8,0)` specifically — its own finding is that promotion favours orbits attaching
+    poorly to the accumulator, and outside-disk orbits are peripheral by definition
+  falsifier: the promoted set lying entirely inside the disk
+  rank: 11
+
+**Fate of card 10 — answered by the S engineer, 2026-09-11, better than it was asked.** It does not
+choose: (a) ⊆ (b), so it runs **112** and reports **21 promoted** and **91 pairs-of-singles** with
+separate enumerations, which yields a statement about *his* rule and a labelled widening from one
+sweep, for about four core-hours. It accepts the textual argument for (a) and the empirical
+tie-breaker. **(c) measures 350** — 238 beyond (b), of which **203 have both orbits below threshold
+alone**. Those 203 are a class his algorithm *structurally cannot reach*, under either his fixed
+reserve or sequential recomputation, since neither orbit can go first: **(c) is not a wider version of
+his search but a different one, so no result from the 203 can enter a reproduction claim** — which is
+also what makes them the most interesting group on the merits. **The fills widening measures empty on
+the S side** (two partially occupied orbits, both already clearing degree 4) and is live on the L side,
+where 16 were partially occupied at `A403`. **Consequence for my own number: 57 is an undercount for a
+second, independent reason** — it applied the degree test to every orbit including partially occupied
+ones — so after the reading correction (49 → 57) and the pair-count correction, the menu figure needs a
+third recomputation and must not be carried as 57.
+
+question: is-time-to-decide-tracking-anything-but-size
+  evidence: eight of fourteen S singles decided, all inert, the accumulator bit-for-bit identical each
+    time; two still running, one of them `(0,0,6,6)`, over an hour at the record threshold. But
+    `(0,0,6,6)` adds 12 absent vertices (gap 30 → 42) and is **not** the largest addition:
+    `(12,0,2,6)`, `(12,2,6,0)` and `(6,4,6,0)` each add 24 (gap → 54), `(12,2,2,0)` adds 18.
+  expected: run time is a cost and it tracks the gap
+  ask: of the decided candidates, do the per-candidate gaps and CPU times show that size explains which
+    runs are slow?
+  if size explains it: nothing here; record time as a cost column and move on
+  if it does not: time-to-decide is tracking proximity to the boundary rather than problem size, and
+    belongs in the map as a per-candidate **flag for a second look**
+  answered by: Engineer (S half), from its own run log
+  cost: a lookup
+  hunch: size does not explain it — a +12 candidate outlasting three +24 candidates is the wrong way
+    round
+  falsifier: the +24 candidates turning out to be the slow ones
+  rank: 12
+
+**The trap card 12 sits next to, stated so it is not walked into.** Card 7 predicted that a degenerate
+primary outcome would invite substituting a softer one, and eight-for-eight inert with identical
+accumulators **is** that case, arrived on schedule. Solver time is the nearest graded signal to hand
+and must **not** become the outcome variable: `CLAUDE.md`'s own ledger (row 13) records that SAT pool
+statistics measure the solver rather than the colouring space, and time moves with load, seed, clause
+order and the incumbent on a box at load 9. Record it, flag on it, never rank on it. The graded outcome
+that is safe is combinatorial — `|{M}|` and the level's structure — and on the S side it is flat, which
+is the *strongest* form of the negative and should be reported as such: not "no improvement" but **"the
+level did not move at all, eight times"**.
+
+**Fate of card 11 — answered by the S engineer, 2026-09-11. Yes, and it scopes my own finding.** Of
+the 14 orbits promoted only as a pair's second member, **one lies outside his `r = 2` disk:
+`(0,4,8,0)`, both radii exactly √5**, promoted to full admission by `(12,0,2,6)` and by `(0,2,10,0)`.
+**So the honest form of P5/P6 is: *no single orbit outside his disk qualifies, and pairs are how you
+get there*** — the closed list is a statement about singles, and the pair sweep is the first search in
+this project that can leave his disk. `(0,4,8,0)` is now tested twice: alone through the degree-3
+shoulder, where it is below threshold, and as a promoted second member, which is the form with a real
+chance.
+
+hunch: promotion-is-enriched-in-outside-disk-material
+  claim: the promoted set is enriched in orbits outside his `r = 2` disk, because promotion favours
+    orbits that attach poorly to the accumulator and outside-disk orbits are peripheral by definition
+  basis: derived
+  falsifier: the promoted set's outside-disk share matching or falling below the base's
+  registered: 2026-09-11
+  status: killed (by: the S engineer's lookup — 1 of 14 promoted against 46 of 229 in the base, 7%
+    against 20%, mildly *depleted*. The conclusion card 11 drew was right for a different reason)
+
+hunch: promoted-pairs-are-spatially-close
+  claim: promoted pairs are closer together than pairs in general — similar radii, neighbouring
+    angular sectors — which would make promotion predictable rather than merely measured
+  basis: derived
+  falsifier: promoted pairs no closer than pairs in general
+  registered: 2026-09-11
+  status: killed on the radius half (by: median small-radius difference 0.757 across the 46 promoted
+    pairs against 0.613 across all 112 — promoted pairs are slightly *farther* apart). The angular
+    half is untested and is not claimed either way
+
+**The diagnosis for both, and it is the part worth keeping.** Both predictions ordered things by
+radius — after P6 had established, and I had written down, that *degree into the accumulator is not
+monotone in radius*, which was the whole reason his published disk negative turned out to be about his
+filter rather than his disk. Outside-the-disk is a statement about an orbit's smaller Galois-conjugate
+radius; peripheral-to-`A166` is a statement about degree into a 166-point set; they are close to
+unrelated, and I had already proved that to myself. **Radius is not the geometry that governs anything
+on this problem, and two dead predictions on one axis is where I stop predicting on it.** No
+replacement mechanism is offered: the obvious one, that promotion tracks inter-orbit adjacency, is true
+by definition rather than a finding. The S engineer's own regularity — promotions come overwhelmingly
+from the *weak* candidates, `(4,0,2,2)` bringing six while the four strongest bring none — stands
+unexplained, and is worth more unexplained than wrapped in a story I have twice got wrong.
+
+question: does-the-target-knob-make-clause-2c-unobservable
+  evidence: the implementer derived that **the target's entire saving is the level enumeration** — the
+    lower bound must climb to `w*` before it can exceed `w* − 1`, so the harvest is paid in full
+    (measured 22.0 CPU s against 24.2 on a one-minimum control, 91%, against a registered forecast of
+    under a third). The consequence it did not draw: an **inert** candidate is one with `w* =`
+    incumbent, i.e. `|M|` unchanged — exactly the population in which phase D's clause 2(c) lives
+    (`{M}` grows at fixed `|M|` and fixed rung after the rule added vertices, M63 §S.1 2c) and exactly
+    the declared *secondary* outcome of card 7's frozen list. A targeted run returns
+    `no-selection-at-target` and never enumerates the level, so `{M}` is never computed where it could
+    have grown. The S engineer's sweep is **untargeted** and therefore holds every level — which is why
+    it can say the accumulator is bit-for-bit identical eight times, a statement a targeted run cannot
+    make.
+  expected: the target knob is a cost optimisation orthogonal to what the sweep measures
+  ask: with the knob on, where does the sweep observe `{M}` growth at fixed `|M|` — the declared
+    secondary outcome, and clause 2(c)?
+  if nowhere: the sweep answers `|M|` only, its map is binary **by construction**, card 7's degeneracy
+    becomes a certainty rather than a risk, and clause 2(c) must be observed in the loop proper and
+    said so in the plan
+  if on a subset: name the subset and what selects it, because a binary primary outcome cannot
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one decision before the sweep runs
+  hunch: run targeted for the primary and pay the full level on a **pre-declared** subset — the two √5
+    orbits, the shoulder comparison, and any candidate whose harvest differs materially from the
+    unexpanded stage's, that last being free from the harvest already paid. Pre-declared because a
+    subset chosen after the outcomes are read is card 7's failure through a side door
+  falsifier: a way to read `{M}` off a targeted run that I have not seen
+  rank: 13
+
+**Fate of card 12 — answered by the S engineer, 2026-09-11, and the hunch was understated.** Spearman
+between added vertices and CPU is **−0.738** over eight decided candidates; the slowest run is the
+second-smallest addition, and five of the six slowest slots are held by 24-vertex additions at the
+*bottom*. Its own honest weakening: n = 8 with one influential point, so the defensible claim is
+**size does not predict cost on this sample and certainly not upward**. Correction sets track CPU at
++0.786, near-tautological. **The consequence, which is the finding:** phase D's forecasts size runs by
+the gap (the L451 anchor, gap 76 at 605 s), and gap is uninformative about cost across 33–54 on the one
+side where it has been tested — so the model must be re-measured before it sizes 57, not inherited.
+
+question: does-cost-track-added-edges-rather-than-added-vertices
+  evidence: decomposing the engineer's own table. `(12,0,0,0)` is slow for two independent reasons:
+    18,522 asks against 14,002–16,722, **25% more**; and 64 ms per ask against 45–55 ms, with a
+    middling refusing mean of 0.149 s, so netting the refusing asks out leaves roughly **60 ms per
+    colourable ask against 41–55 ms**. More asks *and* harder colouring — a denser addition, not a
+    larger one. And that orbit is not generic: **both its radii are exactly 1, so it is the six points
+    at unit distance from the shared centre** — the unit hexagon about the pinned origin, bringing at
+    least twelve edges (six to the centre, six around the ring) from six vertices, before any edge into
+    the rest of `A166`. The table carries added *vertices* and no column for added *edges*, which the
+    stage already knows.
+  expected: cost tracks problem size, as added vertices or as the gap
+  ask: does the added-edge count order the eight CPU times where added vertices does not?
+  if it does: the sweep's cost model is edges rather than vertices, forecasts re-base on a quantity
+    available before any run, and "smaller additions cost more" stops being unexplained — small orbits
+    near the centre are dense, large orbits far out are sparse
+  if it does not: the inversion stays unexplained and stays flagged, and n = 8 with one influential
+    point is the right weight to give it
+  answered by: Engineer (S half) — one column from stages already built
+  cost: a lookup, no solver
+  hunch: edges order it, and the outlier is the densest possible addition rather than a fluke
+  falsifier: added edges correlating no better with CPU than added vertices does
+  rank: 14
+
+**A second, weaker flag on the same candidate, to check only if the edge column fails.** The stage's
+default pin triangle is `((0,0,0,0), (12,0,0,0), (6,0,6,0))` (`parts_stage.Stage.__init__`), and the
+anomalous candidate is the orbit **labelled** `(12,0,0,0)`. Different vertices in the doubled index
+space — the pin is L-side, the candidate adds S-side — so no collision and no fault claimed. But the
+pin exists to break symmetry and is worth 62–63× by the implementer's measurement, and adding a
+rotation-symmetric hexagon about the pinned centre is the one move that could partially restore a
+symmetry the pin was breaking, inflating the ask count on exactly that candidate. Discriminator: one
+re-run with a different pin triangle. If the anomaly moves, per-candidate costs are not comparable
+across the sweep.
+
+**Fate of card 14 — answered by the S engineer, 2026-09-11; the hunch splits and the cost model
+dies.** Over nine decided candidates, Spearman against CPU: added vertices **−0.284**, added edges
+**−0.353**, edges per added vertex **−0.043**, asks +0.650. The gap is flat too (33–54 against CPU
+669–1180). Checked here before accepting: per-ask cost runs 44.9–63.7 ms and ask counts 14,002–18,522,
+so both factors move and neither tracks any pre-run quantity. **Nothing computable before a run
+forecasts it.** The ninth point moved the vertex coefficient from −0.738 to −0.284, which is the best
+illustration of why the weakened claim was the right one.
+
+hunch: cost-tracks-added-edges
+  claim: the sweep's cost model is added edges rather than added vertices, so forecasts can re-base on
+    a quantity available before any run and "smaller additions cost more" stops being unexplained
+  basis: derived
+  falsifier: added edges correlating no better with CPU than added vertices does
+  registered: 2026-09-11
+  status: killed (by: the S engineer's measurement — edges −0.353 against vertices −0.284, no
+    improvement, and density flat at −0.043. What the miss cost: one lookup the engineer was already
+    positioned to make, and it retired a wrong cost model before phase D sized a sweep on it)
+
+hunch: the-slow-outlier-is-the-densest-addition
+  claim: `(12,0,0,0)` is slow because it is the unit hexagon about the shared centre — the densest six
+    vertices in the base — and not because of a fluke
+  basis: derived
+  falsifier: its edges per added vertex lying in the range of the other candidates
+  registered: 2026-09-11
+  status: confirmed (by: 8.0 edges per added vertex against 2.5–4.0 for every other candidate, twice
+    the densest other, with six cross edges to the companion because every one of its points is at
+    distance 1 from the shared centre; and its cost decomposing into 25% more asks *and* slower asks)
+
+**So density explains *which* candidate is anomalous and orders *none* of the others.** The right
+statement is that the outlier is explained and the ordering is not.
+
+**The pin flag — the S engineer declined the re-run, correctly, and replaced my instrument.** Its
+reason is the one I should have applied myself: time is already a flagged cost column and never a
+ranking key, so resolving whether per-candidate costs are strictly comparable buys nothing this probe
+reports. **Its cheaper discriminator beats my re-run outright:** measure the stage's automorphism order
+per candidate with the committed symmetry function — no solver — since the hypothesis is exactly that
+a symmetric hexagon about the pinned centre restores a symmetry the pin was breaking. If that order
+matches the others, the idea dies for free. Passed to the implementer for whenever the pair phase wants
+per-candidate forecasts.
+
+**Consequence for card 5, which was mine.** Timing the first candidate alone still establishes the
+*regime* (is a refusing ask 0.02 s or 4 s) and remains worth the wall clock; it does **not** give a
+per-candidate forecast and must not be used as one. Budget the sweep as candidates × mean with ~2×
+headroom (observed spread 1.76×), never as a schedule of predicted costs, and do not order the runs
+cheapest-first — there is no cheapest-first to compute.
+
+question: is-a-timeout-counted-as-an-inert-candidate
+  evidence: nothing pre-run predicts cost (above), so the 57-candidate sweep must run under a wall. The
+    machinery has one (C1.1) returning `undecided`. But the map's primary outcome is **binary** — `|M|`
+    improved or not — and a candidate that exhausts a wall has not been shown inert. Card 1's prize is
+    the base rate; folding `undecided` into inert biases it **downward**, and the candidates most
+    likely to exhaust a wall are those nearest the boundary, which are exactly the ones worth finding.
+    The S engineer's nine-for-nine identical levels are safe only because that sweep is untargeted and
+    every run closed; a targeted sweep under a wall has no such guarantee.
+  expected: the wall is a cost control, orthogonal to what the map records
+  ask: does the map carry three outcome states — improved, inert, undecided — with undecided never
+    folded into inert?
+  if three: the base rate is reported over **decided** candidates with the undecided count beside it,
+    and a wall hit is a scheduling fact rather than a mathematical one
+  if two: every wall hit reads as evidence of inertness, the base rate is biased in the one direction
+    that matters, and the bias is invisible in the artifact
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one column, and one line in the base-rate arithmetic
+  hunch: the artifact probably already carries the verdict word while the base-rate arithmetic does not
+    honour it — different places in the code, and only the second one matters
+  falsifier: the base-rate computation already excluding undecided candidates
+  rank: 15
+
+**Fate of card 13 — adopted by the implementer, 2026-09-11, with a better fix than mine.** `{M}`
+growth at fixed `|M|` is a **decision**, not an enumeration, so it is observable on *every* candidate
+and the pre-declared subset disappears. Its derivation, checked here step by step: for
+`S ⊆ atoms(W)`, `W'[S] ∪ C = W[S] ∪ C`, so every minimum of `W` survives in `W'` and every minimum of
+`W'` using no new atom is a minimum of `W`; hence **`{M}` grew ⟺ some refusing selection of weight
+`≤ w*` contains an atom of `Δ`** — one extra hard clause at `target = w*`. **The premise is free:** the
+first decision returning `no-selection-at-target` at `w* − 1` gives `w*(W') ≥ w*`, and monotonicity
+gives `≤`, so inertness is established rather than assumed. Unclaimed bonus: a positive answer is
+**constructive** — the witness is an explicit new minimum using the new material, which is the object
+the loop's next iteration wants.
+
+question: is-the-second-decision-2x-or-a-second-certification
+  evidence: by the implementer's own mechanism — the bound must climb before it can exceed the
+    target — the restricted decision must drive the **Δ-constrained** lower bound above `w*`, and the
+    correction sets that certified the unrestricted bound `≥ w*` need not certify the constrained
+    bound `≥ w*+1`: every `w*`-weight selection *containing* a new atom must be refuted, and those are
+    selections the first run had no reason to visit. **Its own transfer lattice states the split** — a
+    restricted run and a plain run share every *graph* fact and no *search* fact — so the inherited
+    harvest is real while the **additional** harvest the constrained certification needs is
+    unmeasured. And the common case is the expensive polarity: on the S half nine of nine candidates
+    have bit-for-bit identical levels, so `{M}` did not grow and non-existence must be certified every
+    time.
+  expected: the second decision costs about what the first did
+  ask: on the S half's nine decided candidates, where the answer is known to be "no growth" and the
+    level is known, what does the restricted decision actually cost?
+  if about 1×: the 2× estimate holds, clause 2(c) is observable on every candidate, and card 13's
+    subset is gone for good
+  if a large fresh harvest: the second decision is a second certification, the pre-declared subset
+    returns, and it must be declared in the freeze commit **before** any outcome is read — a subset
+    chosen after the costs are known is selected by the cost, which is card 7's failure in a third
+    costume
+  answered by: run — the restricted decision on nine stages already built, against a known answer
+  cost: nine decisions on the cheap side; a calibrated bed rather than a forecast
+  hunch: closer to 2× than to 20×, since the inherited correction sets are the bulk — but not past
+    60%, and the polarity is the expensive one
+  falsifier: a restricted decision costing more than the unrestricted run it follows
+  rank: 16
+
+### P8 — the stabiliser of his own published 376 minimum kills the rung explanation (30 s, no solver)
+
+*The implementer's D1.a reduced `v451e2400` against `v136e564` at the order-3 rung and got `|M|` = 376
+(his exactly), but `|{M}|` = 82 against his 96, accumulator 433 against his 451 — short by **18**, with
+nothing of ours outside his — and L-edge range 1908–1947 against his 1890–1947, the low endpoint short
+by **18**. Its reading: our rung is strictly larger than his, so his state 1 sits at an order-2 rung;
+a 45-core-minute sweep of seven order-2 and three order-6 rungs was launched. The record already held
+the object that decides it — his own fewest-edge 376 minimum `v376e1890.vtx`, at exactly the low
+endpoint our level does not reach.*
+
+```
+group element orders: [1, 2 x15, 3 x2, 6 x6]   ->  exactly two order-3 elements,
+                                                   hence a UNIQUE order-3 subgroup
+v376e1890 : stabiliser order = 3  (element orders 1, 3, 3)
+v451e2400 : stabiliser order = 12
+v375e1920 : stabiliser order = 2
+v403e2112 : stabiliser order = 12
+```
+
+**Calibrated against two facts established by others before being believed:** the same computation
+returns **2** for `v375e1920`, exactly his printed parenthetical in `1 (2)` at the 375 row, and **12**
+for `v403e2112`, which is §S.2 #2's stabiliser.
+
+**What it kills.** His sparsest 376 minimum *is* order-3-invariant, under the unique order-3 subgroup —
+so his state 1 is the order-3 rung and so is ours. And no **larger** rung can be his, since a bigger
+group cannot fix a set whose stabiliser has order 3. The order-2 and order-6 rungs cannot carry
+`v376e1890` at a symmetry above 3. **The rung explanation is dead and the two 18s are not a rung
+artefact.**
+
+question: does-his-sparsest-376-refuse-against-our-companion
+  evidence: P8 above. `v376e1890` is his fewest-edge 376 minimum, at exactly the low endpoint 1890
+    that the implementer's level (1908–1947) does not reach, and it is **literally** inside his
+    `v451e2400`, which is that stage's `W` (§1(v)). So if it refuses against our companion in our
+    frame it is a legal selection of our stage at weight 376 and our level should contain it. The two
+    live hypotheses are the ones phase C already met: **the companion** (§S.2 #7 — *the subtype is a
+    property of the pair*; his M6B L refuses with `S141` and never with `S136`) and **the frame**
+    (§1(v) — containment holds only up to the group; six of 24 elements map `v136e564` inside
+    `v166e774`).
+  expected: the level is closed and zero-undecided, so it holds every order-3-invariant minimum
+  ask: does `v376e1890 ∪ ρ·g(v136e564)` refuse four colours, over the 24 frames `g`?
+  if it refuses in our frame: the level is **incomplete despite reporting closed** — far more serious
+    than a rung difference, and it reaches every number this phase has produced
+  if it refuses in another frame only: the stage's frame is the fault, the 18 missing vertices are the
+    ones that frame reaches, and §1(v)'s warning has fired a second time
+  if it refuses in no frame: his 376 level used a **different S companion**, the 14 missing minima are
+    exactly those needing it, and his Table 1 L rows do not all share one S — a finding about his paper
+  answered by: run — 24 refusal asks on a graph already built, seconds at the measured cost
+  cost: seconds, against 45 core-minutes for the rung sweep on a box at load 9
+  hunch: it refuses in no frame and the companion is the explanation, because §S.2 #7 found exactly
+    this on the M6B side and nobody has checked whether it holds across his L rows too
+  falsifier: it refuses in our own frame
+  rank: 17
+
+**The consequence either way:** if the companion explains it, then *"reduce his `A` and compare with
+his `|{M}|`"* is not well posed unless the companion is pinned **per row** — and phase C pinned the
+375 row's by measurement, not from his text. That makes the companion a per-row parameter of the whole
+comparison table, which corrects how phase D's replay controls are specified rather than just this one
+number.
+
+**Fate of card 17 — answered by the implementer, 2026-09-11: the companion, as hunched.**
+`v376e1890` is a rung-3 selection of our stage (125 whole atoms, 0 partial — order-3-invariant,
+exactly as P8 predicted), is **not** among our 82 minima, and `v376e1890 ∪ ρ·g(v136e564)` is
+**colourable in 24 of 24 frames**. So the level is complete and correctly excludes it — the alarming
+branch did not fire — and **his 376 row used a different S companion**. Adopted as a correction to
+D1's acceptance rather than a note: **`|M|` is comparable across his rows; `|{M}|` and the accumulator
+are comparable only once that row's companion is identified.** The two 18s now have a candidate
+explanation rather than a coincidence, and the companion hunt tests it — run with a positive control
+(`v375e1920 + S136` must refuse in some frame) before any negative is believed. The 45-core-minute
+rung sweep is kept as the first complete order-2 / order-6 census on that stage, with the record
+stating what it was launched as.
+
+### Registered before the edge phase-1 count exists
+
+The implementer's edge instrument is green (the assembled 509 reconciles with `1860 + 564 + 12 + 6`;
+the §O6 degree floor fires on a planted degree-3 vertex) and its phase 1 is running: 2,439 asks, since
+a singleton correction set **is** a critical edge, so the count `c` is a rigorous floor on the edge
+minimum.
+
+- **Forced: `c ≤ 2,406`.** `[deGreyParts2023]`'s 36-edge reduction is itself a refusing subgraph, so it
+  contains every critical edge. **`c > 2,406` would be a fault in the instrument or in their footnote,
+  never a finding** — a free external calibration of a new instrument against published prior art, and
+  it belongs in the artifact as an assertion.
+- **`c = 2,406` exactly ⟹ the question closes today:** every individually-removable edge is one of
+  their 36, and they report the 36 jointly removable, so the exact edge minimum is 2,406.
+- **`c < 2,406` ⟹** there are individually-removable edges they missed; the minimum lies in
+  `[c, 2406]` and the gap is the hitting-set phase's, because individually removable is not jointly
+  removable.
+- **My expectation, 65%: `c < 2,406`** — they state they did not search exhaustively. Falsifier:
+  `c = 2,406`.
+
+question: is-the-edge-minimum-unrestricted-or-pin-conditional
+  evidence: the three pin edges are fixed as non-deletable because deleting one makes the symmetry
+    break unsound (it would return `unsat` for a colourable graph). Sound and necessary — but the
+    optimum the instrument computes is then the minimum over edge-subgraphs **containing the pin
+    triangle**, which is ≥ the unrestricted edge minimum. The *criticality census* is unaffected: a
+    non-pin deletion leaves the triangle intact, so each of the 2,439 tests is sound and `c ≤ 2,406`
+    still holds, criticality being a property of `G`. **The optimum is what narrows.** And the
+    comparison with 2,406 is apples-to-apples only if their object contains that triangle, which
+    cannot be checked — the footnote publishes the count, not the graph.
+  expected: the instrument computes the exact edge minimum of the 509
+  ask: is the edge minimum this instrument computes the unrestricted one, or the minimum over
+    subgraphs containing the pin triangle?
+  if pin-conditional: the headline says so in those words, and the unrestricted number needs a re-pin
+    on a triangle present in the candidate, or an unpinned run paying the symmetry cost — priced, and
+    declined in writing if too dear
+  if unrestricted: the argument is shown, because a refusing subgraph omitting a pin edge is outside
+    the search space by construction
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one sentence, or one priced alternative
+  hunch: pin-conditional, and the gap is probably zero in fact and unproven in principle
+  falsifier: an argument that every minimum edge-subgraph must contain that particular triangle
+  rank: 18
+
+**Fifth instance of the pattern, and the first to reach a publishable number.** The pin is worth
+62–63×, is correct about cost, and silently narrows what the optimum *means* — the same shape as the
+degenerate outcome (card 7), the target knob (13), the wall (15) and the empty restriction the
+implementer found itself. The difference: the previous four affected a map we build for ourselves,
+while this one affects a number that would be written up as *the exact edge minimum of the 509-vertex
+graph*. **A conditional minimum reported as an unconditional one is the characteristic failure this
+repository's own standard names.**
+
+**Fates of cards 16 and 18 — the implementer, 2026-09-11.** **Card 16 measured at 1.4×** on the first
+sweep candidate, back to back on one checkpoint (primary 133.2 s, secondary 186.3 s) — but on the
+**cheap** polarity: that candidate *grew*, so the restricted search found an optimum instead of
+certifying non-existence. My caution was about the other branch, which is unmeasured; the hunch is
+**partially confirmed (cheap branch), open (expensive branch)**, and the first non-growing candidate
+settles it. The pre-declared subset goes unused and stays in the frozen protocol as the record of what
+would have been done. **Card 18 repaired better than either of my proposals:** the three pin unit
+clauses become *conditional on the three pin edges being present* — all three kept ⟹ the triangle is a
+triangle ⟹ three distinct colours ⟹ fixing which is WLOG ⟹ the full 62×; any dropped ⟹ the clauses are
+vacuous ⟹ the ask is merely unpinned. Sound in both branches, **unrestricted in scope**, and firing on
+a vanishing fraction since a minimum drops ~36 of 2,442. `side_fixed = 0`, so `w*` is the edge count
+with no constant to mistake. The control inverts with it: not *"the pin edges are protected"* but
+**"dropping a pin edge is safe"**, with the unconditional version restored as a negative that must
+read `pin-changes-answers`.
+
+**A reading note for the artifact.** The first candidate's two rows — *"no selection at target 373"*
+beside *"minimum 373 keeping a new atom"* — read as a contradiction until one holds that the shared
+centre is never deletable, so `|M| = weight + 1` and weight 373 is `|M| = 374`. It stopped me for a
+moment; it will stop a reader. Say it once in the frozen protocol.
+
+question: does-his-success-criterion-still-discriminate-at-our-scale
+  evidence: his successful-iteration test is *"A changed — either `|M|` fell or `{M}` grew"*
+    (parts:500-504), and his own recorded growth event was 78 → 1,092 at fixed `|M|`, treated as the
+    notable outcome of an entire iteration. **Candidate one of 57 grows the level by 1,692** at fixed
+    `|M| = 374`, against his attested 1,092 for the unexpanded level (not yet reproduced here) — the
+    level more than doubles on the first thing tried. Meanwhile the S half is ten for ten with
+    bit-for-bit identical levels, so the halves differ in kind and not only in degree.
+  expected: `{M}` growth is the rare, informative secondary outcome — the non-degenerate signal card 7
+    feared we would lack
+  ask: across the sweep, what fraction of candidates grow `{M}`, and does his success criterion
+    therefore fire on nearly all of them?
+  if nearly all grow: his criterion is **vacuous at our scale** — it can neither rank nor choose, so
+    the loop has no stated criterion for its move and defining one becomes a phase D deliverable
+    rather than an inherited constant
+  if growth is rare: it is the graded, combinatorial, non-circular outcome the map needs, card 7's
+    degeneracy worry closes, and growth size is the natural ranking key — subject to being *validated*
+    against `|M|` outcomes rather than assumed to be progress
+  answered by: run — the sweep itself answers it as a by-product; a column already being computed
+  cost: nothing new
+  hunch: nearly all grow; 1,692 on the first try is not how a rare event behaves
+  falsifier: fewer than half the candidates growing `{M}`
+  rank: 19
+
+**The half of card 19 that is not about counting.** Growth is his criterion for *success*; nothing
+shows it is *progress*. A bigger accumulator makes the next stage bigger and dearer, and his §5.11
+ceiling (*"usually limited to several tens"*) is the wall that behaviour runs into — so a rule ranking
+by growth may be ranking by how fast it exhausts its own budget. Same shape as FS-35's re-aim, which
+saw that termination was never his problem and stagnation was; the mirror is that **growth is not the
+opposite of stagnation, and neither measures getting closer to a smaller graph.** If nearly everything
+grows, the loop needs a criterion separating useful growth from expensive growth, and nobody has one —
+including him. **And one consequence for the map's use rather than its construction:** it evaluates 57
+candidates against a *fixed* accumulator, so the moment one is accepted the menu changes. The map is
+sound for choosing the loop's **first** move and not its second, which belongs beside the map rather
+than being discovered when the second iteration disagrees with it.
+
+**The target's saving is smaller than its derivation said, and the correction is mine as much as
+theirs.** The mechanism — *"the target's saving is exactly the level enumeration, and nothing else"* —
+is precise and I accepted it. But when the secondary **fires** it does not merely decide: it
+enumerates, returning all 1,692 new minima. By the monotonicity theorem the expanded level splits
+exactly as old ⊔ new, so the two-question pair enumerates the *new* part while an untargeted run would
+enumerate both. **The saving is the old part only** — and on candidate one the old part (his attested
+1,092, not reproduced here) is *smaller* than the new. A minority of the enumeration, not the
+near-total implied. Not a reason to change the design, which still saves the old part and delivers
+clause 2(c) on every candidate; but the forecast should read **saving = old / (old + new), measured
+per candidate**, and card 19's hunch says that fraction is systematically unfavourable.
+
+question: does-the-halt-on-capped-level-rule-cover-the-secondary
+  evidence: when the secondary fires it **enumerates** the restricted level — 1,692 new minima on
+    candidate one — and those new minima are precisely what the next accumulator is built from (the
+    implementer's own words). So the secondary is a level enumeration whenever it fires; its size is
+    unbounded a priori (twelve new points gave 1,692, a 24-point orbit could give more); and card 19's
+    hunch says it fires nearly always. The rule *"a capped level halts the loop, and no loop may start
+    from a capped union"* was written for the **primary** level, where the predecessor's card 9 closed
+    it.
+  expected: the secondary is a decision, so the capped-level rule does not reach it
+  ask: does "a capped level halts the loop" apply to the secondary's restricted level, and what is its
+    wall?
+  if it applies: the secondary needs its own cap and halt, and a capped secondary may never feed an
+    accumulator — stated in the same sentence as the primary's rule so the two cannot drift apart
+  if it does not: a **partial** set of new minima can silently become the loop's state variable, which
+    is the failure card 9 closed one level up — and worse here, because it corrupts the accumulator
+    rather than a report
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one rule and one wall
+  hunch: it does not currently apply, because the secondary was designed as a decision and became an
+    enumeration only at the moment it fired — which is how a rule written for one object misses its
+    twin
+  falsifier: the code already capping and halting on the restricted level
+  rank: 20
+
+**Two operational notes from the implementer, both worth keeping.** (i) The sweep's first launch died
+on `KeyError: 'base'` because **Python 3.14 changed the default process start method on Linux from
+fork to forkserver**, so workers re-imported the module and never saw the parent's state. That will
+bite every multiprocessing user in this repository under the new interpreter, and the symptom points
+nowhere near the cause — it belongs with the environment notes, not in this milestone's plan. (ii) The
+`d6.2` behavioural plant **did not fire**: exhibiting the unsoundness needs a selection colourable
+only with two pin vertices equal, which random drops do not find. It was replaced by a structural,
+deterministic guard (no unit clause in one encoding, exactly three in the other) and the record says
+the behavioural check is **not discriminating here** rather than keeping a tick it did not earn.
+**Second control this phase replaced rather than kept on false pretences** — the first was my own
+cross-edge check, which failed loudly and turned out to be mine.
+
+question: does-the-cnf-use-the-same-broken-atom-identification
+  evidence: the implementer found that `Stage.pin_is_sound` identifies pin-carrying atoms by each
+    atom's **lowest set bit** — correct when an atom is one vertex, wrong at every rung above trivial,
+    where an atom is an orbit and a pin vertex need not be its lowest member. At rung 3 it finds zero
+    and returns the benign `pin-is-fixed`, checking nothing; **both of today's order-3 runs printed
+    it**, one being D1.a, whose 82-against-96 started card 17. Its reassurance — no number retracted,
+    because the break is sound, the clause being conditional on presence in `Stage.cnf` — is an
+    assertion about a **different function** than the one found broken.
+  expected: the conditional encoding is independent of the broken identification
+  ask: does `Stage.cnf` identify the atoms its pin clauses are conditional on by the same
+    lowest-set-bit rule?
+  if independent: the receipt failed open and nothing else did; the one-line fix and the planted
+    control are the whole repair
+  if the same rule: the rung-3 runs were either **unpinned** (sound, but the 62× was never obtained
+    there, so every cost number measured at that rung — D1.a's 63 CPU seconds included — was measured
+    without it) or **unconditionally pinned** (unsound, and the rung-3 numbers need re-deriving)
+  answered by: record — one read of `Stage.cnf`
+  cost: minutes
+  hunch: independent, since the conditional device was described as already existing for a deletable
+    pin vertex, so it predates today
+  falsifier: a shared helper computing pin atoms for both
+  rank: 21
+
+**A direction-of-error bound, derived, which contains the worst case without a run.** An unsound pin
+can only **remove** colourings, never add them — it fixes three colours, ruling some proper colourings
+out of the search and none in. So **every colourable verdict is safe regardless**, which covers card
+17 entirely: its conclusion rests on 24 of 24 asks returning *colourable*, so the companion result
+stands whatever the read says. Only **refusing** verdicts could be spurious, and a spurious refusal
+would add a member to a level and could pull a minimum down — while both observed numbers move the
+other way (82 against his 96, fewer not more; `|M| = 376`, matching exactly rather than low). The
+evidence on disk is therefore consistent with soundness and the one conclusion that could have been at
+risk is immune by the direction of the error. This bounds the damage; it does not establish there is
+none, so the read still has to happen.
+
+**Card 20's disposition, recorded because the framing matters.** Implemented rather than noted, with
+both rules in one sentence so twins cannot drift apart: a secondary whose restricted level did not
+close now reads `yes-but-level-truncated` — growth established, since one witness suffices, count a
+lower bound, **and the entry may not seed a loop iteration**. The implementer also noted the risk was
+**latent rather than live** (the secondary runs uncapped, so it exhausts unless an individual ask times
+out, and every entry on disk carries its undecided count, making completeness computable after the
+fact). That is the more honest framing and worth keeping in those words: a fix closing a door nobody
+walked through is worth less than one that rescues something, and saying which costs nothing.
+
+**Fate of card 21 — answered by me, with a grep I should have run instead of asking.** `Stage.cnf`
+is **correct at every rung**, and the defect is confined to the control. Lines 176–181 build `of` by
+walking **every** set bit of each atom (`mm &= mm - 1` clears the lowest each pass), so the
+lowest-set-bit expression at line 179 is the standard bit-*iteration* idiom, not a representative, and
+`of` is a complete vertex→atom map. Line 205 then takes `ai = of.get(v)` for each pin **vertex**, so
+the conditional literal `-sel[ai]` names the atom that actually contains it, wherever it sits in the
+mask; absent from every atom means fixed, and the clause is unconditional, which is right.
+`pin_is_sound` line 218 tests `((m & -m).bit_length() - 1) in self.pin` — the lowest bit only. **So no
+numbers move at any rung**, the second branch closes too (the pin clauses *were* emitted at rung 3, so
+the 62× was genuinely obtained and the rung-3 costs stand), and my direction-of-error bound is a belt
+nobody needs. **The one-line fix is the CNF's own construction:**
+`[ai for ai, m in enumerate(self.atoms) if any((m >> v) & 1 for v in self.pin)]`.
+And the comment at 197–203 raises the stakes rather than lowering them: **this exact unsoundness was
+live, on a run reporting a 373-vertex L-subgraph — one below the world record — and `pin_is_sound` is
+what caught it.** A receipt that once caught a record-breaking false positive and has since been blind
+above the trivial rung is the strongest argument there is for the rule that found it.
+
+**The reproduction, and where the rest stood at the time of writing.** Against `v166e774` his state 1
+returns **376, 96, `A = v451e2400` literally, and edges 1890–1947** — all four attested numbers, both
+endpoints exact, closed, zero undecided, 139 s, and 96 under all three counting conventions. **The
+three symptoms were one cause**: the 14 missing minima, the 18 missing points and the 18-edge-short
+range bottom were one wrong pairing seen from three directions. The sweep stood at 22 of 89, every
+candidate "cannot beat 374"; the edge census at 1,200 of 2,442 with **330 individually removable**,
+steady near 27%.
+
+question: which-edge-deliverable-is-this-phase-buying
+  evidence: extrapolating 330 of 1,200, about **670 of 2,442 edges are individually removable**, so
+    `c ≈ 1,770` and the exact minimum lies in roughly **[1,770, 2,406]** — a window of some 630 edges.
+    My 65% call resolves on the low branch, but the *margin* is the finding: **~670 individually
+    removable against only 36 known jointly removable** (`[deGreyParts2023]`). That gap is the entire
+    difficulty, and it means the exact minimum is a hard hitting-set instance rather than a sweep.
+    Meanwhile a **greedy 1-minimal pass** — test each edge in the current graph, drop it if refusal
+    survives, repeat — costs a few thousand asks at the measured rates and yields a certified refusing
+    subgraph with an exact edge count: an *upper* bound, directly comparable with 2,406.
+  expected: "the exact edge minimum" is one deliverable at one price
+  ask: is the phase buying the exact minimum, or a greedy 1-minimal upper bound, and does it know they
+    differ by orders of magnitude in cost?
+  if greedy first: a few thousand asks plausibly beats the published 2,406 outright — a record on his
+    own tie-break, bankable before the implementer's context runs out
+  if exact only: it may not finish, and the phase ends with a floor near 1,770 and no object, which is
+    a real result but not the one the acceptance implies
+  answered by: Implementer (de Bruijn, phase D)
+  cost: one decision; a few thousand asks for the greedy pass
+  hunch: greedy first, exact as a stretch — an upper bound you can certify beats a floor you cannot
+    close, and they are not alternatives, since greedy also seeds the hitting set
+  falsifier: the hitting set closing the 630-edge window cheaply
+  rank: 22
+
+hunch: the-companion-is-the-other-sides-accumulator
+  claim: his companion at each row is **the other side's accumulator at that point in his alternating
+    loop**, not that side's minimum — state 1 reproduces against the S accumulator `A166` while the
+    375 row reproduced against the S minimum `S136`, so the companion is not merely per-row but may
+    follow a rule
+  basis: measured
+  falsifier: a remaining row reproducing against a companion that is neither the other side's
+    accumulator nor its minimum at that state, or state 1 also reproducing against `S136`
+  registered: 2026-09-11
+  status: open — the remaining rows test it for free. If it holds, phase E can **name** each row's
+    companion in advance instead of searching for it; if it fails, the companion is ad hoc and every
+    held-out row costs a search first, which is a cost fact phase E needs before it starts
+
+### P9 — his involution is the same one in every published 374 row (30 s, no solver)
+
+*The implementer's order-2 row returned `|M| = 374` with **78 minima, his attested number exactly**,
+but a 402-vertex accumulator against his 406 and an edge range shifted low by eight, and read it as
+"the same signature as before". **It is not.** At state 1 the level count did not land (82 against 96);
+here it does. A wrong companion gives a **subset** level — fewer minima, smaller accumulator, which is
+state 1 exactly. An **equal-sized** level with a smaller accumulator is a different phenomenon. My own
+hypothesis was that "the order-2 rung" is ambiguous, since there are fifteen involutions in the
+order-24 group and seven in the stage's order-12 stabiliser — unlike order 3, which P8 showed is a
+unique subgroup. Measured before sending:*
+
+```
+v374e1868  (M6A rung 2)      stab order  2   fixing [0, 23]
+v374e1864  (M6B rung 2)      stab order  2   fixing [0, 23]
+v374e1872  (M6C rung 2)      stab order  2   fixing [0, 23]
+v374e1860  (the RECORD's L)  stab order  2   fixing [0, 23]
+v406e2082  (his rung-2 A)    stab order 12   fixing [0,2,4,6,10,12,13,15,16,18,21,23]
+v412e2106  (his rung-1 A)    stab order 12   fixing [0,2,4,6,10,12,13,15,16,18,21,23]
+```
+
+**The ambiguity hypothesis is dead:** every published 374 minimum, across all three subtypes and both
+his rung-1 and rung-2 rows, is fixed by exactly `⟨g23⟩`. **So his rung is recoverable from his own
+files by a stabiliser computation with no solver** — and paired with the companion rule, *both*
+parameters of his loop are readable off his published objects. That is worth more to whoever takes
+clause 2(b) than to this row. Calibration: both accumulators give order 12 with *identical* fixing
+sets, matching `v451e2400` and `v403e2112` from P8 — **accumulators are order-12-invariant while
+their members are order-2 or order-3**, the orbit-closure story from another direction.
+
+question: is-the-records-own-L-in-our-rung-2-level
+  evidence: P9 — `v374e1860`, the record's own L half, is invariant under exactly the involution his
+    rung-2 rows use, and carries 1,860 edges, while his rung-2 range starts at **1,868**. So **his
+    rung-2 level omits an order-2-invariant 374-vertex refuser with fewer edges than anything in it**,
+    and the implementer reports our range shifted low by eight, which reaches 1,860.
+  expected: an order-2-invariant 374 refuser lies in his order-2 level
+  ask: is `v374e1860` among the 78 minima our rung-2 run returned?
+  if yes: our 78 and his 78 are different sets of the same size, ours containing the record's own L
+    and his not — completing the "same count, smaller accumulator" puzzle and making the companion the
+    difference here too, by a route that does not need the counts to differ
+  if no: the equality of counts needs another explanation, and two levels coinciding while their
+    accumulators differ would be a fault rather than a companion
+  answered by: record — one membership test against the level already on disk
+  cost: seconds
+  hunch: yes
+  falsifier: `v374e1860` absent from our level
+  rank: 23
+
+hunch: the-order-2-rung-is-ambiguous
+  claim: "the order-2 rung" names one of seven involutions in the stage's order-12 stabiliser, so the
+    implementer's rung-2 row may simply be a different subgroup from his — a wrong-rung explanation
+    rather than a wrong-companion one
+  basis: derived
+  falsifier: his published rung-2 minima all sharing one involution
+  registered: 2026-09-11
+  status: killed (by: P9 — all four published 374 minima are fixed by exactly `⟨g23⟩`, the same
+    involution, across three subtypes and two rungs. What the miss cost: nothing; formed and tested
+    in one step, and it converted into the useful finding that his rung is recoverable without a
+    solver)
+
+**Fate of card 23 — answered solver-free and *forced*, 2026-09-11, and it corrected the implementer
+twice.** If the record's own L half is invariant under a rung's group and is a union of that rung's
+atoms, it is a feasible weight-373 selection; since `w* = 373` it is a minimum; so an exhaustive level
+at that rung must contain it. Measured over the seven order-2 rungs: `v374e1860` is invariant and a
+union of atoms at **`H2#4 = ⟨g₂₃⟩` and at none of the other six**. **And the row reported to me as
+"374 with 78 minima, his attested number exactly" was `H2#0 = ⟨g₁₅⟩`, not his rung** — so that 78 was
+a coincidence of count between two different problems. The correction that stopped it becoming a claim
+was the separation insisted on in P9: at state 1 the count did *not* match and the level was a subset;
+here the count matched and the rung was wrong. Two phenomena that both look like "nearly reproduces"
+from a distance.
+
+question: why-does-his-rung-2-range-start-at-1868
+  evidence: his two M6A rows are **one working graph at two rungs** (M63 §4, §S.2 #9:
+    `A406 ⊆ g(A412)`), so they share a companion, whatever it is. `v374e1860` is in his **rung-1**
+    level (it is that row's low endpoint, and the file exists); it is `⟨g₂₃⟩`-invariant with
+    stabiliser **exactly** 2 (P9) — which is also what his own `1 (2)` notation claims for that row's
+    fewest-edge member, so his table and the measurement agree; his **rung-2** level is the same
+    problem restricted to `⟨g₂₃⟩`-invariant selections at the same weight; `v374e1860` satisfies the
+    restriction. **So it must lie in his rung-2 level and that range must start at 1860. He publishes
+    1868–1884.** The argument needs only that both rows share a companion, not which.
+  expected: his two rows at one working graph are mutually consistent
+  ask: is his 1868 a truncated level, a different companion, or a typo?
+  if truncated: his `|{M}| = 78` and `A = v406e2082` are **lower bounds, not counts** — and M63 §3(b)
+    already flags his `{M}` as complete-or-truncated with no statement either way, which reaches every
+    rung-2 comparison in the table
+  if a different companion: his rung-1 and rung-2 rows do not share one, contradicting the
+    one-working-graph-two-rungs reading and sharpening the companion rule to vary between adjacent
+    **states**
+  if a typo: two are already demonstrated (M63 §1(ii), Table 3's `A` column), 1868 against 1860 is one
+    digit, and the row is otherwise exact
+  answered by: run — D1.c at `H2#4` produces our low endpoint, **forced to 1860** by the same
+    invariance argument; the comparison with his 1868 is then a known mismatch with three candidate
+    causes
+  cost: nothing new — it is the run already being walked towards
+  hunch: typo or truncation, not split further; what is confident is that it is **not our fault**,
+    which is exactly what a mismatch at D1.c would otherwise be read as
+  falsifier: our `H2#4` low endpoint coming out at 1868, which would break the invariance argument and
+    mean something is wrong on our side after all
+  rank: 24
+
+**Registered before D1.c reaches `H2#4`: our low endpoint will be 1860.** That is the value of card 24
+— when the run lands, 1860-against-1868 is a prediction confirmed rather than a reproduction failure.
+Without it, the natural reading of "our range is eight low again" is that we have the wrong companion a
+second time, and that reading would be wrong.
+
+**The methodological half, for the handoff.** The `H2#0` coincidence is an instance of what phase E
+meets on every held-out row: **a check comparing seven of our runs against one of his numbers has
+seven chances to match by accident.** The count 78 landing on the wrong rung is exactly that, and it
+nearly became a claim. The discipline that removes it — compare only against the run identified as his
+— is made *cheap* by P9: the rung is a stabiliser computation and the companion is the rule, so the
+pinning is available **before** any run rather than argued after. The capability removes the hazard
+that motivated it.
+
+### The sweep's verdict, and two of my hunches scored against it
+
+**Card 16's expensive branch, measured over 56 candidates, inverts.** Certifying non-existence:
+primary mean 210.6 s, secondary mean **28.9 s**, median ratio **0.1**, max 0.5. Correction sets 472.7
+against 479.4 — **six** fresh ones. So the branch I flagged as the worry is the cheap one, by twenty.
+Mechanism: requiring a new atom *adds weight*, so the constrained bound clears the target almost
+immediately on the inherited `Y`. The expensive case is **enumerating when a solution exists** — the
+1.4× and the `old/(old+new)` correction — so both halves are one mechanism rather than two
+observations. My caution was right in form and the world went the other way.
+
+hunch: the-expensive-polarity-needs-a-fresh-harvest
+  claim: certifying that no `Δ`-using selection exists at `w*` needs correction sets the first run had
+    no reason to harvest, so the second decision is a second certification rather than a cheap rider
+  basis: derived
+  falsifier: the restricted decision certifying non-existence at a small fraction of the primary's cost
+  registered: 2026-09-11
+  status: killed (by: 56 candidates, median ratio 0.1 and six fresh correction sets. Right in form,
+    wrong in outcome, and in the favourable direction)
+
+hunch: nearly-all-candidates-grow
+  claim: `{M}` growth fires on nearly every candidate, so his success criterion is vacuous at our scale
+  basis: derived
+  falsifier: fewer than half the candidates growing `{M}`
+  registered: 2026-09-11
+  status: killed (by: **1 of 58 grew**. The first candidate was *the* one, and I promoted structure
+    seen once — a named failure, and mine. The implementer's added reason failed the same way, from
+    the same single point. **The second half survives untouched:** growth is his criterion for success
+    and nothing makes it a criterion for progress)
+
+**What the falsification gives back, and it is stronger than "inert".** A minimum has weight exactly
+`w*`, so using a new atom means dropping an old one. Growth failing on 57 of 58, and on 10 of 10 on
+the S half, says **the added material is essentially never in *any* optimal solution** — not merely
+insufficient to improve, but unused — and the two halves agree independently on different
+accumulators. **That is evidence for card 8:** if no single orbit is ever used by an optimum, whatever
+made his four-orbit move work comes from the combination, which is the promotion phenomenon the S
+engineer measured. Singles being unused makes pairs the only place an answer could live rather than
+merely the next rung.
+
+question: what-scores-a-ranking-when-the-map-has-no-variance
+  evidence: **0 of 58 improve, 1 of 58 grows.** Card 1 argued for the map as the ground truth against
+    which rankings are scored; with no variance in either outcome every ranking ties at zero and the
+    map scores nothing. What it establishes is clean and complete — single-orbit expansion from `A412`
+    does not reach 373, every per-entry invariant firing, zero undecided asks — but that is an
+    **answer**, not a scoring surface. Clause 2(b) still requires a registered rule, and the fresh
+    agent taking it will open this map expecting ground truth and find a column of zeros.
+  expected: the map would carry enough variance to rank per-orbit devices
+  ask: with the map signal-free, what scores the rule clause 2(b) requires — the pair sweep, the
+    `A403` map, or one bit from the held-out row?
+  if the `A403` map: it is the only place a positive is known to exist nearby, since his own recorded
+    move reached 374 from that state — so it discriminates whether singles are inert **at that state**
+    or inert **in general**, which is the difference between a tuning failure and a fact about singles
+  if nothing does: say so in the handoff — the rule is scored by outcome on one held-out row, which is
+    one bit, and the acceptance should say that plainly rather than imply a map stands behind it
+  answered by: Implementer (de Bruijn, phase D), in the handoff, and whoever takes clause 2(b)
+  cost: one paragraph now; the `A403` map is already scheduled
+  hunch: the `A403` map, and singles are inert there too — closing card 8 affirmatively and making a
+    single-orbit ranking the wrong object entirely
+  falsifier: any single orbit improving from `A403`
+  rank: 25
+
+**Card 1, judged against its own outcome.** Its argument was that a 55-candidate map beats ranking
+against his one recorded move, because one move is one bit. **The map returned less than one bit.**
+That does not make it a mistake — it answered its own question completely, and a complete negative
+over 89 candidates is worth more than a partial positive — but its *second* purpose is dead and the
+next agent should be told in advance rather than discover it. The `A403` map changes purpose with it:
+no longer a held-out test for a rule, but the discriminator for whether the inertness of singles is a
+property of that state or of singles as such.
+
+**A representation note worth carrying past this phase.** The shared centre and the two-sided index
+space have now produced three faults in three agents within one afternoon: my cross-edge control
+reading 54 against the record's 18 (base relation instead of the stage's induced edges); the S
+engineer's frozen-image control; and the implementer's edge oracle assuming every S-indexed edge has
+one L endpoint, which met the companion's own 564 internal edges. Three independent minds, three
+different ways, one representation. That is no longer carelessness — **the doubled index space with a
+side-owned shared vertex is treacherous**, and the standing rule that falls out of it is the one that
+caught mine: *take edges from the stage, never from a relation computed on the base.*
+
+**The pattern worth naming, since this is its third instance.** Card 7: a degenerate primary outcome
+invites substituting a softer one. Card 13: the target knob makes the secondary outcome unobservable.
+Card 15: a wall hit reads as a negative. **Each is an optimisation that is correct about cost and
+silently wrong about meaning, and each is invisible in the number it produces.** If there is a fourth
+it will be in the same family — something that makes a run cheaper by not computing the thing the map
+was for — which is worth one pass over the sweep's design, asking that question of every shortcut in
+it.
+
+**Cost revision, in my own direction of error.** If the implementer's large-half forecast holds — 2–5
+minutes of harvest against 20–90 minutes of level enumeration — then 57 harvests is about **five
+core-hours**, not the 8–70 I priced card 1 at. My estimate was pessimistic by roughly an order of
+magnitude, and the target knob is why. Not banked until the cost probe lands.
+
+### P7 — is `abcd = 0` his small-orbit priority in disguise? No (15 s, no solver)
+
+*Formed and tested in one step, before being sent to anyone, so it influenced nothing.* His §5.6 says
+*"We noticed that all useful orbits satisfy the relation `abcd = 0`"* (parts:535). I guessed this was a
+cost artifact like the disk radius — that `abcd ≠ 0` is equivalent to orbit size 24, the most expensive
+size to add under his §5.11 ceiling. On `Base(2.6)`:
+
+| | size 1 | size 6 | size 12 | size 24 |
+|---|---|---|---|---|
+| `abcd = 0` | 1 | 14 | 59 | **113** |
+| `abcd ≠ 0` | 0 | 0 | 0 | **42** |
+
+**One direction holds, the other fails.** Every `abcd ≠ 0` orbit has size 24, so his discarded class
+lies entirely inside the most expensive size — but 113 of the 155 size-24 orbits satisfy `abcd = 0`, so
+the heuristic discards 42 while keeping 113 equally expensive ones and **is not the size rule
+restated**. Against the disk: `abcd ≠ 0` splits 31 inside / 11 outside, `abcd = 0` splits 152 / 35 —
+mild enrichment outside, nothing to build on. What survives is weaker: his rule never cost him a cheap
+orbit, so it was low-regret under his ceiling whatever its basis, and **the basis remains
+unexplained** — which makes the four `abcd ≠ 0` orbits in the S engineer's promoted set a sharper test
+than my reading would have framed them.
+
+hunch: abcd-is-the-size-rule-in-disguise
+  claim: his *"all useful orbits satisfy `abcd = 0`"* is his small-orbit priority restated, because
+    `abcd ≠ 0` is equivalent to orbit size 24 — making it the third of his published heuristics (after
+    the disk radius and the four-orbit bundle) to be an artifact of a cost regime we are 150× outside
+  basis: derived
+  falsifier: size-24 orbits with `abcd = 0`
+  registered: 2026-09-11
+  status: killed (by: P7 — 113 of the 155 size-24 orbits satisfy `abcd = 0`, so the conditions are
+    not equivalent and the heuristic discards 42 orbits while keeping 113 of the same cost. Only
+    `abcd ≠ 0 ⟹ size 24` survives. What the miss cost: nothing — formed and tested in one step, and
+    the three-cost-artifacts pattern was never asserted to anyone)
+
+hunch: his-successful-moves-are-sets-not-singletons
+  claim: single-orbit expansions are inert on both halves, and the useful expansions are sets — his one
+    recorded success was a four-set, and the S half's first seven singletons are inert with an
+    unchanged level
+  basis: read
+  falsifier: any single orbit lowering `|M|` on either half
+  registered: 2026-09-11
+  status: open
+
+---
 
 ## Measurements
 
