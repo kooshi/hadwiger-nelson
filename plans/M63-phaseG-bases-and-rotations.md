@@ -867,3 +867,173 @@ lines**:
 > `√33 ↦ −√33` — applying each symmetry to the point set and requiring zero images outside — and REFUSE
 > the run rather than warn.** §4.2 rows 1–3 are closed under all three; rows 4–6 are the gate's first
 > customers and must be checked rather than assumed.
+
+---
+
+## §12 — Filter 4, run: the screen of the new rotation
+
+*Registered 2026-09-12, **before** the run, by the implementing session. Scored in §12.3.*
+
+### 12.1 — What is being asked
+
+Filter 4 (§2) on the two wall-breaking rotation classes of `data/m62/rotations-exact-parts-r2.44.json`,
+which are the only two the cascade leaves alive on Parts's own lattice:
+
+* **the positive control** — `cos θ = ±7/8`, the record's own rotation `ρ₁₅`, whose arena is known to
+  contain Heule-510 and must therefore refuse four colours;
+* **the experiment** — `cos θ = ±11/32 ± 3/32·√33`, four angles that are **one rotation** up to the
+  base's verified symmetries (§11.6), radicand `(303 ∓ 33√33)/512`, in **no** rational square class.
+
+The ask is the whole arena `L ∪ ρS` at a stated radius, with every unit edge on both sides and every
+cross edge the law admits — no selection, no reduction. **The verdict is about that arena and no other**
+(§2 filter 4).
+
+### 12.2 — Registered predictions
+
+| # | prediction | confidence | why |
+|---|---|---|---|
+| **P-G12a** | The cross-edge calibration reproduces the committed census exactly: at `cos = 7/8`, **126 = 60 centre + 36 off-diagonal + 30 diagonal** at radius 2.0 **and** 2.44; at `cos = −7/8`, **126 = 60 + 66 + 0** | high | it is the same committed law (`typem.CrossLaw`) over the same committed lattice |
+| **P-G12b** | **`ρ₁₅`'s arena at radius 2.44 refuses four colours (UNSAT)** — the pipeline's positive control (P-G3) | high | that arena contains Heule-510 |
+| **P-G12c** | **The new rotation's arena does NOT refuse four colours (SAT)** at radius 2.44 | **0.65** | P-G5's reasoning, unchanged: it carries 36 ordered off-diagonal cross edges and **no** diagonal family, against `ρ₁₅`'s 36 + 30, so the two halves touch along one family only. **A refusal is the phase's headline result** |
+| **P-G12d** | Every **wall-standing** class on this base is SAT at radius 2.44 (9 of 9) — the wall theory's negative control (P-G2, at class rather than angle granularity) | high | filter 2's theorem, modulo G35's field-level gate. **An UNSAT here falsifies either the tooling or G35** |
+| **P-G12e** | The `unit_edges_fast` float radius cut drops **no** edge on either lattice: the exact edge set under a `1 + 10⁻³` proposal is **identical** to the shipped `1 + 10⁻⁷` one | high | the coordinates are exact and `kfloat` is accurate to ~10⁻¹⁵ at these magnitudes, twelve orders inside the margin. **This is the control the SAT half of the verdict needs**: a dropped edge makes a graph easier, makes it colourable, and reads as a sound elimination |
+| **P-G12f** | The four angles of the new class give **isomorphic** arenas, by an explicit base symmetry carrying one cross-edge set onto the other | high | §11.6's derivation. Checked as a permutation, not as equal counts |
+
+**The asymmetry that governs what may be concluded.** A missing edge can only make a graph easier to
+colour. So an **UNSAT is robust** to every edge-dropping defect and may be believed at once; a **SAT is
+not**, and is reported as an elimination only of the stated arena, with P-G12e discharged.
+
+
+### 12.3 — Scored, 2026-09-12
+
+*`python3 tools/phaseg_screen.py --radius 2.44 --classes all --wall 3600 --prefix 700
+--out data/m62/m63-phaseG-screen-r2.44.json`, desktop (32 cores), single core, 1,892 s wall with two
+other jobs on the box. Artifact: `data/m62/m63-phaseG-screen-r2.44.json`. **The headline is not a
+solver verdict** — two of the controls became the result.*
+
+#### The calibration, first
+
+`typem.CrossLaw` over `typem.parts_lattice(2.44)`, both signs of the record's own rotation:
+
+| cos θ | ordered cross edges | census convention (pairs `(i,i)`) | by KIND (equal radii or not) |
+|---|---|---|---|
+| `+7/8` | **126** | 60 centre + 36 off-diagonal + **30 diagonal** | 36 at `σ = 17/3`, `d² = 1/3` · 30 at `σ = 8`, `d² = 0` |
+| `−7/8` | **126** | 60 centre + **66** off-diagonal + 0 diagonal | 36 at `σ = 17/3`, `d² = 11` · 30 at `σ = 8`, `d² = 16` |
+
+Both rows reproduce `data/m62/rotations-exact-parts-r2.44.json` digit for digit, and the derived
+identity `66 = 36 + 30` holds. **The control refused the run once before it passed, and the catch is
+the useful part:** the committed census's `diag` column counts pairs `(i, i)` — the same base point in
+both copies — and **that count is not invariant under the base's own symmetries.** Negating the S copy
+carries `(u, u)` to the antipodal pair `(u, −u)`: same radii, same kind. So one arena seen twice reads
+`diag = 30` at `+7/8` and `diag = 0` at `−7/8`. **§3.3's `diag` column must be read as "pairs `(i,i)`",
+never as "the equal-radius family"**, and its rank-2 description *"different adjacency … no diagonal"*
+is a labelling artefact. The invariant reading — 36 at distinct radii, 30 at equal radii — is identical
+at the two signs, and `C5` exhibits the isomorphism itself: `L: identity, S: negation`.
+
+#### The verdicts, all eleven rotation classes, arena radius 2.44 (6,865 vertices)
+
+| class `cos θ` | wall | cross edges (centre / distinct-radius / equal-radius) | solver | radius-free certificate |
+|---|---|---|---|---|
+| `±7/8` — **ρ₁₅, the record's own** | breaks | 126 = 60 / 36 / **30** | **UNSAT**, 12.2 s | none, and none is possible |
+| `±11/32 ± 3/32√33` — **the new rotation** | breaks | 96 = 60 / 36 / 0 | SAT, 6.8 s | **YES**, δ = 0 at `sqrt33_2adic(239)` |
+| `−23/8 + 3/8√33` | stands | 96 = 60 / 36 / 0 | SAT | YES, δ = 0 at `(17)` |
+| `−5/33√33` | stands | 108 = 60 / 48 / 0 | SAT | YES, δ = 0 at `(17)` |
+| `−7/8 + 1/24√33` | stands | 96 = 60 / 36 / 0 | SAT | YES, δ = 0 at `(17)` |
+| `−9/8 + 1/24√33` | stands | 108 = 60 / 48 / 0 | SAT | YES, δ = 0 at `(17)` |
+| `−13/16 − 1/48√33`, `−29/32 + 3/32√33`, `23/32 − 9/32√33`, `31/64 − 15/64√33`, `5/16 − 3/16√33` | stands | 84–114 | SAT | filter silent |
+
+**The result, stated at the level its proof supports.** The new rotation's arena is **four-colourable
+at every radius on this lattice**, by an explicit colouring — `φ` on the L copy, `φ` on the S copy,
+where `φ` is Theorem B's residue colouring at the prime `√33 ↦ sqrt33_2adic(239)` — **checked edge by
+edge on all 57,228 arena edges, zero monochromatic**. The solver's SAT at 2.44 agrees and is the weaker
+statement. Radius-freeness is not an extrapolation: the endpoint bound `1/|sin θ| = 2.1246` is verified
+exactly against a furthest cross-edge endpoint at radius 1.9961, so **no larger radius realises a new
+cross edge**, and the sweep below confirms it as geometry.
+
+#### The radius sweep — the radius-free claim, measured
+
+`--radius 2.6` and `--radius 3.0` reproduce the certificate. Cross-edge sets are **identical as
+geometry** (not merely equal in count) at all three radii, and the colouring stays proper as the base
+grows:
+
+| radius | points | unit edges | ρ₁₅ cross | new-rotation cross | monochromatic unit edges | free δ, new rotation |
+|---|---|---|---|---|---|---|
+| 2.44 | 3,433 | 28,566 | 126 | 96 | **0** at both primes | `(0,0)` at `(239)` |
+| 2.6 | 4,513 | 38,730 | 126, same set | 96, same set | **0** at both primes | `(0,0)` at `(239)` |
+| 3.0 | 7,879 | 73,350 | 126, same set | 96, same set | **0** at both primes | `(0,0)` at `(239)` |
+
+#### Predictions scored
+
+| # | prediction | verdict |
+|---|---|---|
+| **P-G12a** | the cross-edge calibration reproduces the committed census | **met**, after the control refused once on a convention mismatch (above) |
+| **P-G12b / P-G3** | `ρ₁₅`'s arena at 2.44 is UNSAT | **met** — UNSAT in 12.2 s |
+| **P-G12c / P-G5** | the new rotation does **not** refuse four colours at 2.44 (0.65) | **met, and superseded by a stronger statement**: four-colourable at *every* radius, by a checked colouring rather than a solver |
+| **P-G12d / P-G2** | every wall-standing class is SAT at 2.44 | **met** — 9 of 9 |
+| **P-G12e** | the `unit_edges_fast` float cut drops no edge | **met** — identical exact edge sets at proposal margins `1+10⁻³`, `1+10⁻²` and `1+5·10⁻²`; the widest added 73,950 candidate pairs and changed nothing. The self-test on the control fired (a `0.999` proposal drops all 28,566) |
+| **P-G12f** | the four angles of the new class are one rotation | **met** — explicit base symmetries `L:s3 S:−s3`, `L:s3 S:s3`, `L:id S:−id` carry the cross-edge sets onto one another |
+
+#### The cross-edge law, checked independently (the coordinator's correction, and §11's RS-2)
+
+A wrong law **invents** edges, which makes a refusal cheaper and looks like success — the opposite
+failure direction from the measured unit edges. So `E_cross` is recounted by an arithmetic sharing no
+step with the law: `|u − ρv|²` expanded in `K[x]/(x² − D)`, `D = 1 − cos²θ`, requiring the `x`
+coefficient to vanish and the rational part to equal 1. It never forms `conj(u)v`, never tests
+collinearity, never uses `k = (|u|² + |v|² − 1)/2`. Results, per class: every claimed cross edge
+re-verified; a full float-proposed / exactly-disposed sweep of **1,706,239 ordered pairs** at margin
+`2·10⁻²` agreeing exactly with the law for both wall-breaking classes; and the structural identity that
+makes the sweep belt-and-braces — the `x` coefficient comes out as `2[uₓv_y − u_yvₓ]`, in which **cos θ
+cancels**, so "the radical part vanishes" is collinearity with the centre, for every rotation at once,
+derived rather than assumed (checked on 4,000 sampled pairs against two unrelated cosines).
+
+**Known weakness, stated rather than left to be found:** the exhaustive float-free prefix recount over
+the first 700 points exercised only the 60 centre edges for most classes, because points are sorted by
+radius and the off-diagonal endpoints lie past index 700. The full sweep is what covers the rest, and
+it was run only for the two wall-breaking classes. For the nine wall-standing classes the drop
+direction rests on the structural identity, not on an exhaustive recount.
+
+#### The filter this produced, and what it is worth (§11, RS-6)
+
+The elimination is **base-free once stated on the radius sums**, and this form was verified against
+every kind of every class with zero mismatches. For a collinear cross pair at squared radii `a`, `b`
+the law fixes `p = k/cos θ`, so with `σ = a + b`
+
+```
+d² = |u − v|² = σ − (σ − 1)/cos θ ,
+```
+
+and the kind is `φ`-monochromatic exactly when `v_𝔭(d²) > 0`. Checks: `ρ₁₅`'s equal-radius kind
+`σ = 8` gives `d² = 0`; its auxiliary kind `σ = 17/3` gives `d² = 1/3`, a `𝔭`-adic unit; the centre
+family `σ = 1` gives `d² = 1` for every rotation; the `−7/8` antipodal kind `σ = 8` gives `d² = 16`.
+So:
+
+> **Let `F` have a conjugation-fixed prime `𝔭` above 2 with residue field `𝔽₄`, and let `ρ` be a
+> rotation with `cos θ ∈ F`, `sin θ ∉ F`. If every radius sum `σ` realised by a collinear pair of the
+> base satisfies `v_𝔭(σ − (σ−1)/cos θ) = 0`, the type-M arena `L ∪ ρS` is four-colourable — for every
+> base drawn in `F²`, at every radius.**
+
+It is **one-sided**: firing proves four-colourable, silence proves nothing. It is silent on `ρ₁₅` at
+both primes, which is forced — that arena is 5-chromatic — and that silence is the filter's positive
+control. **What it proves is M62 §R20's symmetric half: the reference (equal-radius) kind is
+essential.** `[Parts2020a]` §4's own sentence is the other half and is not proved here; state kinds by
+radius, not by his first/second numbering.
+
+**An unplanned control that could have failed, and did not.** The new class is free at `(239)` and its
+Galois conjugate free at `(17)`. That diagonal is forced: `√3 ↦ −√3` sends `√33 ↦ −√33`, fixes the
+lattice (the disk cut is the totally-real one), preserves squared distances, and **swaps the two 2-adic
+embeddings** `S ≡ ±17 (mod 256)`. Both classes free at one prime, or one free at both, would have meant
+an error in the census, the base's Galois structure or `sqrt33_2adic`. It cross-checks three components
+at once and nobody planted it.
+
+#### What the verdict does not cover
+
+1. **Other bases.** A different `K²`-base could realise radius sums this lattice does not, and the
+   criterion would have to be re-run on its σ-spectrum. The σ lists are in the artifact for exactly
+   that reuse.
+2. **Bases not drawn in `K²`.** Theorem B's colouring is unavailable there; nothing here applies.
+3. **Rotations with `cos θ ∉ K`.** Filter 0's scope cut, still unenumerated (P-G6).
+4. **Constructions that are not type M** — more than two copies, or copies about different centres.
+5. **The five classes where the filter is silent** rest on filter 2 (a theorem, modulo G35's
+   field-level gate) plus a SAT at radius 2.44 only, which is a statement about that arena.
+6. `ρ₁₅` is the **only** rotation class on this lattice with `cos θ ∈ K` still alive — subject to
+   items 3 and 5.
