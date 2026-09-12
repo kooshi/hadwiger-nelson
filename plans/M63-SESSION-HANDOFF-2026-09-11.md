@@ -333,11 +333,17 @@ and build the multi-orbit union ladder. Everything above is the cost of trusting
   not relaxed to make the gate pass** — a schema-matching record was used instead and read
   `regenerated-identical`, and that second stage was the better target anyway: at rung 3 its atoms are
   orbits of weight 3, exercising the weighted path a unit-weight stage never touches.
-- **The forfeited out-of-sample test has a stronger replacement, not a weaker one.** Its partial scores
+- **The forfeited out-of-sample test was TRADED, not upgraded** — I first wrote "stronger replacement, not
+  a weaker one" and that was wrong; the engineer corrected it against its own interest. Its partial scores
   +1.0% inside the 5% falsifier but is an extrapolation beyond the fitted range and is *not* the registered
-  test. What replaces it: the law's **derivative** is measurable from a checkpoint at as many points as
-  wanted, on a quiet box — six prefixes give cost linear in level size, so **the integral is quadratic by
-  construction rather than by curve-fitting.**
+  test. The replacement: the law's **derivative**, measurable from a checkpoint at as many points as wanted
+  on a quiet box — six prefixes give cost linear in level size, so **the integral is quadratic by
+  construction rather than by curve-fitting.** **The honest accounting:** that is stronger on *shape* and
+  weaker on *coverage*. Every one of the six is a component measurement on a recorded family, so it **cannot
+  see a cost living outside the hitting-set solve** — and the second quadratic is exactly such a cost, which
+  the derivative method would never have found and the forfeited whole-run wall-clock test would have. A
+  weak instrument that saw everything was traded for a strong one that sees one thing, and production
+  surfaced the difference within minutes by luck rather than by design.
 - **NEW, and the general form is worth more than the instance: removing the quadratic exposed a second one
   of identical shape.** About 0.09 s per iteration was unexplained; it is the **progress log**, which unions
   every minimum found so far every 5 minima — 557 ms at 20,733 minima, 111 ms per iteration amortised,

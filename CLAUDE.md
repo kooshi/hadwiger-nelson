@@ -850,3 +850,20 @@ it is indistinguishable from one that works, which is this file's oldest failure
 disguise. The paired form, measured the same evening: seven errors between two readers, four the engineer's
 and three the advisor's, **every one found by reading code rather than by arguing** — because each asked the
 right question rigorously of the other's instrument and never of their own.
+
+**Pre-decide how you will respond to your own gate failing — before it fails, on someone else's number.**
+Measured 2026-09-11: an engineer's pre-registered comparator went red on its own integration, and the honest
+diagnosis was also exactly the diagnosis a motivated person would reach for whether or not it were true. It
+did not widen the comparator. Asked why, it declined the credit and gave the mechanism: it had already
+written the argument against itself one commit earlier, when a *different* planted fault failed to fire and
+it had to decide whether to rewrite a check until it agreed. Having once reasoned that **a check you tune
+until it agrees with you has stopped being a check**, the second case was already settled. So this is
+sequencing rather than virtue, and it is cheap: settle the policy while the number under dispute is not
+yours.
+
+**And when you replace a broad instrument with a sharp one, you lose coverage you were not measuring.** The
+same evening, a whole-run wall-clock test was traded for a six-point component measurement that established
+a cost law's *shape* by construction instead of by curve-fitting — strictly better on the thing it measures,
+and blind to any cost living outside the component. A second cost of the same shape, hiding in a progress
+log, was invisible to the sharp instrument and would have been caught by the weak one. **State what the old
+instrument saw that the new one does not, at the moment you swap them**, or the gap is discovered by luck.
