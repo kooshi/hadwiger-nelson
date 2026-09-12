@@ -369,7 +369,12 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   missing edge yields an easier graph, which yields a colouring, which reads as a *sound elimination*. So an
   elimination carries an exact quantifier or it is not an elimination; and where the phase also has a
   positive product, **the count of eliminations is the outcome to be least satisfied with** — it is the
-  cheapest thing to manufacture by accident.
+  cheapest thing to manufacture by accident. **The mechanism is selection, and it is general.** A defect
+  whose result displeases gets investigated within the hour; a defect whose result pleases is congratulated
+  and kept. Across one night, five independent defects in three phases of M63 — the four above, plus a
+  solver engine present in the code and in neither document whose bounds ran **high** — were every one
+  flattering. Expect it: **audit the results you like at the same rate as the ones you do not**, and when
+  an artifact and its written record disagree, suspect the newest thing in the file first.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
