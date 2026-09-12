@@ -434,3 +434,77 @@ being extended, and a prediction registered on an unexamined member before looki
   at `n = 4` and **0 of 6** at `n = 16`. Nothing in the answer rests on it; it bounds only the census of
   *unrealised* kinds. Reported rather than widened, which is right — widening a box until it agrees is how a
   check stops being one.
+
+---
+
+## §7 — The depth concern is struck, and solver work is commissioned (2026-09-12)
+
+The advisor benchmarked phase H3's candidate against phase H2's object and concluded the phase proposed the
+shallowest thing in the family. **I challenged the comparison class**: phase H2's object is not the relevant
+benchmark, the **509-vertex record** is — it is five-chromatic, it is the canonical object, and its depth had
+never been measured. It measured it, on `[Parts2020a]`'s own published vertex files, every file carrying its
+edge count so each graph shipped its own known-answer control. **All six passed.**
+
+| his file | vertices | edges | **degeneracy** |
+|---|---|---|---|
+| the record's base, four subtype variants | 374 | 1,860 / 1,864 / 1,868 / 1,872 ✓ | **7** each |
+| the rotated half | 136 | 564 ✓ | 5 |
+| **the record itself** | **509** | **2,442 ✓** | **7** |
+
+> **A five-chromatic unit-distance graph in this family exists at degeneracy 7. It is the record.**
+
+Not 9, not "≤ 9 possibly less" — **7**, on every variant and on the assembled arena. **The concern is struck
+entirely**, its ledger entry bannered rather than deleted. Rebuilt:
+
+| | base deg | arena deg | mean arena degree | off-diagonal | five-chromatic? |
+|---|---|---|---|---|---|
+| **the record, `n = 4`** | **7** | **7** | 9.60 | 36 | **yes** |
+| **phase H3, `n = 2`** | **7** | ~7 | 7.38 | **72** | **unknown** |
+| phase H2's object, `n = 16` | 13 | — | 21.30 | 36 | yes |
+
+**So the phase is neither a deficit nor a rout: a candidate at exactly the record's depth carrying twice the
+record's off-diagonal cross-edge pressure.** Phase H2's 13 is the outlier, bought with 2.67× the radius.
+
+**By the rule I stated in advance — *"if the record comes in at 7, I commission it immediately"* — solver
+work is commissioned.** A pre-committed trigger, fired on someone else's number.
+
+### The mechanism of the advisor's miss, which it named rather than excused
+
+Both of its misses took the comparison class **from the document in front of it** rather than from the
+question — one inherited the brief's module definition, this one inherited phase H2's object because phase
+H2's record was what it had just read. `CLAUDE.md` already warns that a record you have just read is a
+high-weight pattern. **The fix that worked both times was someone recomputing a number the frame said was
+already known.**
+
+### A free 23% off the solver instance
+
+Four-colourability is decided by the **4-core**, so the raw lattice is the wrong thing to encode.
+
+| | vertices | 4-core |
+|---|---|---|
+| phase H3's arena | 32,617 | **25,201** |
+| the record's base (control) | 374 | **374** |
+
+**The control is what makes the reduction interpretable**: the record's base has nothing to peel, while the
+shape-free lattice carries a long low-degree tail including **264 isolated vertices**. That tail is exactly
+what dragged the *mean* degree to 7.37 — so **the degeneracy carried what it measures and the mean degree did
+not**, cashing the caveat that was attached to the mean when it was first quoted.
+
+### One residual, at a fraction of the old weight
+
+`plans/M63-phaseH2-the-family.md` §6d holds that the record's refusal is **inherited** while phase H2's is
+**produced**. If that stands, the only *produced* refusal in this family sits at degeneracy 13 and the only
+degeneracy-7 five-chromatic object inherited its refusal. **Unchecked, and not the advisor's claim.** It is
+step 1 of the solver brief — and it may be nearly free here, since `ℚ(√3,√7,√11)` contains no `√5` while
+Heule-510/553 and de Grey's 1581 both carry it, so those cannot embed at any position or orientation.
+
+### What is commissioned
+
+1. **Produced or inherited** — the embedding check, field argument first.
+2. **The general, non-additive twist verdict**, warm-started from one of the twelve additive colourings —
+   buying back the forfeit the advisor named rather than let disappear.
+3. **The interface reduction, PRICED BEFORE PAID.** Phase H2: 30 circle points, 19 colour patterns, 552
+   interface patterns, 20 claims on 25,567-vertex halves, 20.03 core-hours. Here: **60** circle points and an
+   order-**48** group, so the pattern count is the cost driver and is unknown. **Report the price before
+   spending it.**
+4. **Encode the 4-core, not the raw arena.**
