@@ -1,0 +1,187 @@
+{
+ "proofs": [
+  {
+   "name": "C1_circle_completeness",
+   "desc": "with the centre pinned and all 19 circle patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 40.4,
+   "cnf_MB": 19.4,
+   "drat_MB": 24.4,
+   "clauses": 1267917
+  },
+  {
+   "name": "C2_pattern00",
+   "desc": "with the centre and circle pattern 0 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 7.3,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.0,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern01",
+   "desc": "with the centre and circle pattern 1 pinned and its 264 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 23.8,
+   "cnf_MB": 19.5,
+   "drat_MB": 20.4,
+   "clauses": 1268192
+  },
+  {
+   "name": "C2_pattern02",
+   "desc": "with the centre and circle pattern 2 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 9.2,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.8,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern03",
+   "desc": "with the centre and circle pattern 3 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 10.2,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.1,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern04",
+   "desc": "with the centre and circle pattern 4 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 5.0,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.3,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern05",
+   "desc": "with the centre and circle pattern 5 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 7.9,
+   "cnf_MB": 19.4,
+   "drat_MB": 17.9,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern06",
+   "desc": "with the centre and circle pattern 6 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 4.6,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.2,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern07",
+   "desc": "with the centre and circle pattern 7 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 9.0,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.2,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern08",
+   "desc": "with the centre and circle pattern 8 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 10.2,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.8,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern09",
+   "desc": "with the centre and circle pattern 9 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 4.8,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.9,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern10",
+   "desc": "with the centre and circle pattern 10 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 4.4,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.0,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern11",
+   "desc": "with the centre and circle pattern 11 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 7.4,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.0,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern12",
+   "desc": "with the centre and circle pattern 12 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 7.7,
+   "cnf_MB": 19.4,
+   "drat_MB": 17.5,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern13",
+   "desc": "with the centre and circle pattern 13 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 8.8,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.2,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern14",
+   "desc": "with the centre and circle pattern 14 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 4.4,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.1,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern15",
+   "desc": "with the centre and circle pattern 15 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 8.8,
+   "cnf_MB": 19.4,
+   "drat_MB": 17.9,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern16",
+   "desc": "with the centre and circle pattern 16 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 4.7,
+   "cnf_MB": 19.4,
+   "drat_MB": 16.7,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern17",
+   "desc": "with the centre and circle pattern 17 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 8.7,
+   "cnf_MB": 19.4,
+   "drat_MB": 18.6,
+   "clauses": 1267944
+  },
+  {
+   "name": "C2_pattern18",
+   "desc": "with the centre and circle pattern 18 pinned and its 16 off-diagonal patterns blocked, the base half is unsatisfiable",
+   "verdict": "UNSAT",
+   "secs": 10.9,
+   "cnf_MB": 19.4,
+   "drat_MB": 19.1,
+   "clauses": 1267944
+  }
+ ],
+ "total_secs": 198.2,
+ "total_drat_MB": 362.1,
+ "note": "each .cnf is self-contained (base half + the pinned/blocked clauses); each .drat is its DRAT refutation; re-check with any DRAT checker"
+}
