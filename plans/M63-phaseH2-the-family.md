@@ -176,11 +176,34 @@ unit degree 1 rather than 30 of degree 30.
 ```
 *(rows failing gate A omitted from this table; see §6. Complete for `n ≤ 140`.)*
 
-**One gate-D row is a guess, not a reading.** At `n = 36` the radicand is `143 = 11·13`, so 11 divides it
-and **ramifies** — neither inert nor split — and G43's criterion (*wall broken ∧ 11 inert*) is **silent on
-ramification**. The table marks it "not 6-open" because the screen tested `d % 11 ≠ 0`, which is a
-convention and not a theorem. Whether a ramified 11 can give 6-openness is **open**, and the same question
-will recur at every `n` whose radicand is divisible by 11. Flagged by Poros against its own table.
+**The gate-D ramification question, raised by Poros against its own table and now CLOSED by derivation
+(product owner, 2026-09-12) — the convention was right, and for a reason.** At `n = 36` the radicand is
+`143 = 11·13`, so 11 **ramifies** in `F = K(√d)` — neither inert nor split — and G43's criterion (*wall
+broken ∧ 11 inert*) is silent on that case. The screen tested `d % 11 ≠ 0`, which was a convention. The
+derivation, from two theorems already held:
+
+| type in `F/K` | `e` | `f` | residue field | `q mod 4` | is `i` in it? | usable? | verdict |
+|---|---|---|---|---|---|---|---|
+| split | 1 | 1 | `𝔽₁₁` | 3 | no | **yes** | 5-sealed |
+| **ramified** | 2 | 1 | `𝔽₁₁` | 3 | no | **yes** | **5-sealed** |
+| inert | 1 | 2 | `𝔽₁₂₁` | 1 | **yes** | no | **6-open** |
+
+**Sealing depends on the residue DEGREE `f` alone, through `q = 11^f mod 4`.** G35's usable primes are
+exactly the conjugation-fixed primes of `F(i)`, which is to say those whose residue field does **not**
+contain `i`, i.e. `q ≡ 3 (mod 4)`. Split and ramified both have `f = 1`, leaving `q = 11 ≡ 3`, so `i` is
+absent, the prime of `F(i)` above it stays conjugation-fixed, G43's bound `χ ≤ χ(UD(𝔽₁₁,2)) = 5` applies,
+and the field is sealed. Only **inert** gives `f = 2` and `q = 121 ≡ 1 (mod 4)`: then `i` **is** in the
+residue field, the prime of `F(i)` **splits**, it is not conjugation-fixed, no bound is delivered, and the
+field is 6-open. **So ramified behaves exactly like split, the screen is correct, and G43's criterion is
+better stated as "11 has residue degree 2" — "inert" being the squarefree-`d` wording of the same thing.**
+
+**Its recurrence, quantified by the planner and checked here with one exception he did not have:** 11
+divides the squarefree radicand exactly when `n ≡ 3 (mod 11)` — `n = 3, 14, 25, 36, 47, 58, 69, 80, 102,
+113, 124, 135` at `n ≤ 140` — **except when `11²` divides `4n−1`**, which happens first at `n = 91`
+(`363 = 3·11²`, squarefree part **3**), where 11 is *unramified* and the member instead dies on gate B,
+since `3 ∈ K`. One member in eleven, with one exception in that eleven. **Offered for attack rather than
+asserted:** it rests on reading G35's usability as exactly "the residue field omits `i`", and if that
+reading is wrong the whole column moves.
 
 **Ranked by cost, cost being the arena radius the endpoint bound demands:**
 
