@@ -307,6 +307,16 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   spindle at distance d adjoins √(4d² − 1) and forces the next colour only if that radicand breaks the
   relevant wall, which every even d does for the 2-adic one. Haugland's heptagonal construction closes with
   the same ρ₁₅ = (7 + i√15)/8, because the radicand depends only on the forced distance.
+  **Completed 2026-09-12 — the "detunes" are one classified family, and it is the spindle itself.**
+  `2d²(1 − cos θ) = 1` gives `cos θ = (2n − 1)/(2n)` with `n = d²`, which is the **only** rational cosine
+  putting the spindle distance at integer `n` (`plans/M63-phaseH2-the-family.md` §3), and `sin θ =
+  √(4n−1)/(2n)`. Both detunes above are members: **`n = 3` IS the Moser twist** (`cos θ = 5/6`, 33.557°,
+  radicand 11) and **`n = 4` IS ρ₁₅** (`cos θ = 7/8`, 28.955°, radicand 15). So the family is a **ladder,
+  each rung failing for the reason the next fixes**: `n = 3`'s radicand lies in `K`, so the Moser spindle
+  can never reach five; `n = 4` breaks the wall but its field is 5-sealed, so the record can never reach
+  six; `n = 16` (`ρ₆₃`, radicand `63 → 7`) is the cheapest member that is wall-breaking **and** 6-open.
+  **Prior art:** the angle family is `[PartsOdd2022]` §3's `m₁ = m₂`, `r = 1` slice; ours is the
+  characterisation, the field screen, and unit distance.
 * **G8 — The direction group. [measured]** ⟨ζ₁₂, σ, √ρ₁₅ = (√15 + i)/4, √ρ₆₃ = (3√7 + i)/8⟩ closes all 67 of
   the 1581's edge directions at exponent ≤ 6. `[Polymath16wiki]` derived the Moser ring's unit group ⟨ζ₆, η⟩
   with η = (√33 + i√3)/6 = iσ⁻¹ and η² = ρ — the index-2 subgroup {ζ₁₂^a σ^b : a + b even} of ours. **Open,

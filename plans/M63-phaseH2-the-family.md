@@ -114,6 +114,52 @@ control. Growing the arena past it adds points and no cross edges.
 
 ---
 
+## §3a — The family IS this project's spindle construction (added 2026-09-12)
+
+Not a new theorem — a **re-description**, and its value is that it imports a kernel-checked theorem as the
+refutation route and explains where `4n − 1` comes from.
+
+**Spindling** a pair forced equal at distance `d` rotates a copy of the gadget so that the two far endpoints
+land at **distance 1**: `2d²(1 − cos θ) = 1`, hence `cos θ = (2d² − 1)/(2d²)`. With `n = d²` that is
+**exactly §3's family**, `sin θ = √(4n − 1)/(2n)`, and the spindle adjoins `√(4d² − 1) = √(4n − 1)` — the
+family's radicand, the quantity every gate in §5 is computed from.
+
+So **the diagonal cross edge and the spindle's closing edge are the same edge**, and a type-M construction at
+`ρ_n` is the spindle over the pair (centre, circle point) at distance `√n`. This project held both
+descriptions and never connected them. The check that it is the same family, not a similar one:
+
+| `n` | `d` | `cos θ` | angle | radicand | what it is | `CLAUDE.md` G7 records |
+|---|---|---|---|---|---|---|
+| **3** | `√3` | 5/6 | 33.557° = 30° **+ 3.557°** | 11 | **the Moser twist** | *"the Moser twist 3.557° off 30°"* |
+| **4** | 2 | 7/8 | 28.955° = 30° **− 1.045°** | 15 | **`ρ₁₅`, the record** | *"ρ₁₅ 1.045° off 30°"* |
+| **16** | 4 | 31/32 | 14.362° | 63 → 7 | the candidate | — |
+
+**Both of G7's recorded "detunes off a crystal angle" are this family at `n = 3` and `n = 4`**, to three
+decimal places, and G7's own sentence — *"a spindle at distance `d` … forces the next colour only if
+`√(4d² − 1)` breaks the relevant wall"* — is the family's radicand. The agreement is exact because it is
+one construction, not two.
+
+**The family is therefore a ladder, one rung per colour, and each rung fails for the reason the next fixes:**
+
+| `n` | radicand | squarefree | in `K`? | wall broken? | rung | why it stops there |
+|---|---|---|---|---|---|---|
+| 3 | 11 | 11 | **yes** | no | **χ ≥ 4** | the Moser spindle's own rotation is **field-internal**, so it can never reach five |
+| 4 | 15 | 15 | no | **yes** | **χ ≥ 5** | the first wall-breaking member — the record — but its field is **5-sealed**, so it can never reach six |
+| 16 | 63 | **7** | no | **yes** | **χ ≥ 6?** | the cheapest member that is wall-breaking **and** 6-open |
+
+**What this buys, concretely.** A circle point taking the centre's colour in **every** proper four-colouring
+is a **pair forced equal at four colours** (`Forces`), at distance 4, and ledger row 44's
+`not_colorable_of_forced_equal` — kernel-checked — says a forced-equal pair at any `d ≥ 1/2` refutes
+`k`-colourability. So **one forced circle point refutes the arena through a theorem already proved**, making
+the object an illustration of the mechanism rather than the evidence for it. Row 59's valuation law
+**permits** it: a four-colour forced pair needs positive valuation at the prime above 2, and the distance
+here is 4. Under test as of 2026-09-12: over 12 seeded colourings of one half, **exactly 10 of the 30 circle
+points** took the centre's colour every time, and a colouring with **none** of them doing so is **UNSAT**.
+Whether any single point is *forced* — and whether those twelve colourings are genuinely distinct rather
+than twelve walks into one basin — is the live question.
+
+---
+
 ## §4 — The free circle: why `n` should be a square
 
 **Theorem (module closure).** If `n = k²` for some `k` that is a **multiplier of the module** `M` — that
