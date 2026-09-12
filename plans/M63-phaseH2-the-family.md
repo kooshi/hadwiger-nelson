@@ -88,13 +88,31 @@ So the candidate rotations are
 > a hexagonal core plus rotated rotors at `m₁ = m₂ = 8` with odd `r` in 1…15, whose `r = 1` case is our
 > `n = 64`).
 >
-> **What is therefore ours, stated narrowly:** (i) the *characterisation* — that a rational integer
-> diagonal radius forces **exactly** this family, an if-and-only-if he does not state; (ii) the **field
-> screen** over it, gates B/C/D, which is where he stops (his only remark in that direction is that the
-> parameters give *"a rich set of different options for embedding a graph into extensions of the field
-> ℚ"*); and (iii) **unit distance**. His construction is an **odd-distance** graph over lengths {1,3,5,7},
-> and type M is a unit-distance notion — so `[Parts2020a]` §4's *"working constructions of type M with
-> other rotations are not known yet"* **stands unrefuted**, by his own two papers.
+> **A SECOND and earlier source, found by M63 phase H3's gate (2026-09-12), and it takes more than his
+> does.** `[Polymath16wikiMain]` (2018) states the family directly — *"the complex numbers of unit modulus
+> `ω_t := exp(i·arccos(1 − 1/(2t)))` for various natural numbers `t`, particularly the Loeschian numbers
+> `1,3,4,7,9,12,…`"* — **and attaches the spindle reading in words**: *"these numbers arise naturally as
+> the apex angle of a `√t, √t, 1` isosceles triangle, and the distances `√t` are the distances that arise
+> in the triangular lattice."* So **the identification of the family with the spindle is the wiki's, not
+> ours.** The same page lists de Grey's 20,425-vertex graph as living in `ℤ[ω₁, ω₃, ω₄, ω₁₆]`, and
+> `ω₁₆ = exp(i·arccos(31/32))` is `ρ₆₃` — **this phase's rotation is a generator of de Grey's own ring.**
+>
+> **What is therefore ours, stated narrowly and without softening what holds:** (i) the **radicand form** —
+> that the adjoined quantity is `√(4n−1)`, which is what makes the family screenable at all; (ii) the
+> **field screen** over it, gates B/C/D, which is where both sources stop (Parts's only remark in that
+> direction is that the parameters give *"a rich set of different options for embedding a graph into
+> extensions of the field ℚ"*, and the wiki's rings are catalogued without a screen); (iii) **6-openness**
+> as the selection criterion; (iv) **dropping the restriction to Loeschian `t`** — the wiki's own list is
+> Loeschian, i.e. the squared distances the triangular lattice realises, and **2 is not Loeschian** while
+> 3, 4 and 16 are, which is an independent second reason `n = 2` appears in nobody's census; and (v)
+> **unit distance**. Parts's construction is an **odd-distance** graph over lengths {1,3,5,7}, and type M
+> is a unit-distance notion — so `[Parts2020a]` §4's *"working constructions of type M with other
+> rotations are not known yet"* **stands unrefuted**, by his own two papers and by the wiki.
+>
+> **One claim survives that the rulings above did not list, and it is small: the if-and-only-if.** Neither
+> source states that a rational integer diagonal radius forces **exactly** this family and nothing else.
+> That is ours — but it is one step from `cos θ = 1 − 1/(2t)` with `t` the squared spindle distance, which
+> the wiki writes down, so it should be carried as a remark and never as the headline.
 >
 > **The consequence for how this phase is valued: the unworked ground is the FIELD, not the angle.** The
 > reason to want `n = 16` was never that its angle is unused — that is now demonstrably in print — but

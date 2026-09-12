@@ -285,6 +285,19 @@ candidate material for FS-20.
   `ℚ(√3,√11,√23)` (ledger rows 47, 52–53) — all have degree 8. Any field needing five must break the 2-adic
   wall (`CLAUDE.md` G1, G35), which screens candidates by congruence; whether a field of smaller degree needs
   five has not been examined here.
+- **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
+  Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
+  unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
+  admits a 5-chromatic single-distance graph? Every single-distance graph in the Eisenstein integers and
+  Gaussian integers is 2-chromatic. David Speyer suggests looking at `ℤ[(1+√−71)/2]` next."* **We have not
+  answered it.** It is the **ring-shaped sibling** of `[ExooIsmailescu2019]`'s smallest-*subfield* question
+  listed above, and sharper for our purposes in one specific way: *"a single-distance graph **in** a ring"*
+  is the full-module framing — every point of the ring, not a lattice generated from chosen unit vectors —
+  which is the framing M63 phase H3 adopts and which, by that phase's prior-art gate
+  (`plans/M63-phaseH3-prior-art.md` §PA.2), **no published construction has ever used**. Speyer's own next
+  case, `ℤ[(1+√−71)/2]`, appears never to have been tried. Two searches found no published answer; the
+  wiki's "Code and data" Dropbox has never been opened here and is where a private attempt would sit.
+
 - **`χ(𝔽₁₇²) ∈ {5, 6, 7}`** — `[Moorhouse2010]` Table 6.1; open, and never touched here (289 vertices, against
   the 529 of the plane at 23). A 6 would answer the first digit (`CLAUDE.md` G48: is any finite plane exactly
   6-chromatic?), though `17 ≡ 1 (mod 4)` is never a usable prime, so it bears on no field's sieve.
