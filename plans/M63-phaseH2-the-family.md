@@ -548,6 +548,76 @@ same quantity, and the two cheap ones were asking for values far above the one t
 
 ---
 
+## §6f — RIGIDITY: the circle admits exactly 19 colour patterns (added 2026-09-12)
+
+**The anomaly was not a bug.** A pattern-blocking enumeration reported the instance exhausted after only 19
+blocked patterns, which looked impossible. A **fresh standalone solver**, rebuilt from the file with the
+same 19 blocking clauses, also returns UNSAT. So:
+
+> **With the centre pinned to one colour, the 30 radius-4 circle points admit exactly NINETEEN distinct
+> colour patterns across ALL proper four-colourings of the 25,567-vertex base.**
+
+Nineteen, on 30 vertices that are an **independent set** — where four colours on 30 free vertices would
+allow `4³⁰ ≈ 10¹⁸`. And the structure is algebraic:
+
+- **every one of the 19 uses at most TWO colours on the whole circle** — the centre's colour plus at most
+  one other;
+- the census is `{centre alone} × 1`, `{centre, a} × 6`, `{centre, b} × 6`, `{centre, c} × 6`;
+- **18 of the 19 have exactly 10** circle points at the centre's colour; the nineteenth has **all 30**.
+
+The `1 + 6 + 6 + 6` shape is almost certainly an orbit structure under the lattice's six-fold rotation
+(**untested — it would turn a measurement into a derivation**), and the two-colour restriction is what
+*"every circle point carries the centre's residue"* (§6, G52) looks like from the colouring side.
+
+**`L = 10` exactly, and the two-sided control passed.** Re-run standalone with no `pysat` and no
+incrementality, writing a CNF and invoking the solver binary: `≤8` UNSAT, `≤9` UNSAT, **`≤10` SAT** (0.7 s),
+`≤11` SAT. So the informative *and* the uninformative outcomes were both reachable, the cardinality encoding
+is **not** the story, and the lattice is. The earlier 20-second UNSAT is subsumed rather than re-run: *"no
+circle point takes the centre's colour"* is `|S| = 0`, and `L ≥ 10` covers it — established twice by
+different routes.
+
+**§6e's criterion is a corollary, and the sharp form also fails — by explicit witnesses, not by a near-miss.**
+The exact diagonal criterion is: *the achievable circle-pattern set contains no **fully discordant** pair.*
+With the set now known exactly, this is a finite check: **72 of the 361 ordered pairs are fully discordant.**
+So the diagonal route is not closed by `1/3` against `1/2` — it is closed by 72 explicit witnesses.
+
+**And the two-colour structure gives §6e's construction its exact content.** If `f` uses `{0, a}` on the
+circle and `g` uses `{0, b}`, then full discordance holds **iff `a ≠ b` and the two centre-coloured 10-sets
+are disjoint** — precisely §6e's `B(f) ∩ B(g) = ∅`. Six ordered colour pairs × 36 pattern pairs = 216
+candidates, of which exactly **72** have disjoint 10-sets. **So `B(f) ∩ B(g) = ∅` is not merely sufficient
+here; it is the whole diagonal obstruction.**
+
+> **THE DESIGN TARGET, in its sharp and final form.** Refutation by the diagonal family requires the
+> achievable circle-pattern set to admit **no** fully discordant pair. Since colour relabelling always
+> supplies `a ≠ b`, that reduces to a small explicit combinatorial condition: **the six centre-coloured
+> 10-sets must form an INTERSECTING family.** For `ρ₆₃` they do not. This is a condition on **six
+> ten-element subsets of a thirty-element set** — finite, tiny, and checkable on any candidate base in
+> seconds, which replaces every softer objective this phase has had.
+
+**Controls, since the enumeration is now load-bearing.** All 19 models read back and verified proper against
+the agent's own **272,262-edge** base list, not the CNF. **Control A (completeness):** dropping any single
+blocking clause returns **exactly** the dropped pattern — tested at indices 0, 7, 18, SAT and identical each
+time — and all 19 together leave UNSAT. **Control B (the paired form):** a **planted** pattern built by
+shifting two entries of a real one is **refused**, while the **faithful** real pattern is **accepted** — so
+the refusal came from unrealisability and not from the scaffolding.
+
+**Where the verdict sits.** The arena's four-colourability now hinges **entirely** on the **36 off-diagonal
+constraints**, given one of those 72 diagonal-compatible pattern pairs. The remaining work is to enumerate,
+for each of the 19 circle patterns, every achievable pattern on the 36 off-diagonal interface vertices. If
+those counts are small — and 19 on the circle says to expect it — **the verdict falls out of a complete
+enumeration with no solver trust in the UNSAT direction at all**: a finite table of patterns each certified
+by a proper colouring, plus a finite pair check. **That is a far better artifact than a cube split's
+refutation**, and it is exactly what `CLAUDE.md` § "The standard of evidence above rung B" demands — *the
+artifact is the certificate plus the checker, never the search.* The 32-core cube split is now the fallback
+rather than the plan.
+
+**Method note worth keeping.** Use **pattern-blocking, never reseeding**, to sample distinct colourings: a
+reseed *asks* the solver to disagree with itself, a block *forbids* it from agreeing. Difference becomes
+structural instead of hopeful — and it was reseeding that manufactured the false "exactly 10" invariant
+(§6e).
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
