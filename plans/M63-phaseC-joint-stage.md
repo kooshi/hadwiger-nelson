@@ -1396,8 +1396,8 @@ had: **the colouring oracle is 27% of the run.**
 | wall | 17,197 s | 16,953 s |
 | in the SAT oracle (both populations, summed from its own timers) | 4,589 s — **27.0%** | 4,538 s — **27.1%** |
 | everything else | 12,412 s over 1,523 iterations — **8.2 s per iteration** | 12,213 s over 1,408 — **8.7 s** |
-| that per-iteration cost, early (t < 1,100 s, `|Y|` ≈ 450) | **0.54 s** | 0.69 s |
-| the same, late (t > 15,000 s, `|Y|` ≈ 1,900) | **13–18 s** | 20–27 s |
+| that per-iteration cost, early (t < 1,100 s, `Y` at ~450 sets) | **0.54 s** | 0.69 s |
+| the same, late (t > 15,000 s, `Y` at ~1,900 sets) | **13–18 s** | 20–27 s |
 
 `Oracle.ask` times the whole solve including its conflict-budget slices and `get_model()`, so the 27% is
 not an artifact of a narrow timer. By elimination the remaining 73% is the **per-iteration MaxSAT
