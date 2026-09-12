@@ -676,7 +676,41 @@ one-off constructors, not loops.
 
 ## §8 — First moves after a compaction
 
-1. `ListAgents`, then ask each live agent for a one-paragraph status. Do not assume anything about their
-   state from this file.
-2. Close phases C and D before starting anything new.
-3. Do not re-open a ruling in §5 without a measurement that contradicts it.
+*Rewritten 2026-09-12 — the original text told a successor to close phases C and D, which are long closed.*
+
+1. **`ListAgents` first, then ask each live agent for a one-paragraph status.** Assume nothing about their
+   state from this file. **And audit the machine with `ps -eo pid,pgid,etime,args --no-headers`, never with a
+   PID list** — a PID list only shows what you already knew about, which cost me a false "two jobs running"
+   three times over.
+2. **Phases C, D, E, F and G are planned or closed, and the whole fix queue (§6a) is DONE.** Nothing is
+   blocked on a running job. The next moves that chase the record are the **multi-orbit union ladder** and
+   **new base lattices** — the rotation degree of freedom on this lattice is closed (§6e).
+3. **Do not re-open a ruling in §5 or §6 without a measurement that contradicts it** — and note that several
+   of my own rulings were overturned tonight *by* measurements, each recorded with what changed and why.
+4. **Read `CLAUDE.md` § "Make the gate fail" before writing any control.** It grew by seven rules tonight,
+   every one from a real failure in this milestone, and the newest are the most useful: bound a plant on both
+   sides; mutate the constant, not only the logic; a check must read the value the code ships; and ask which
+   half of an object — measured or derived — produced the verdict you are about to trust.
+
+---
+
+## §9 — Two measured facts that could stop being true, for whoever takes the next base
+
+*In the framing of the agent that measured them.*
+
+- **The float-gate headroom transfers, but it is NOT a theorem.** The proposal gate clears the worst
+  true-edge deviation by ~10⁸ *because coordinates on these bases are small*; **larger coordinates inflate
+  float error linearly.** `typem_exact` §6b's **1,000× floor** is what catches that, and it catches it **as a
+  red self-test rather than as missing edges** — which is the whole reason the control measures the *margin*
+  instead of the outcome. A control measuring "zero missed today" would have gone silent here.
+- **`parts_base` keeps its float disk cut, deliberately.** No callers, and its own docstring says it is wrong
+  for any base claim for a *larger* reason: it prunes intermediate sums at the final radius. **If anyone
+  reaches for it, that pruning bug matters more than the float.**
+
+**And the migration's own checkers are committed rather than left in `/tmp`.** They answered a one-time
+question — that converting the float verdicts changed no number — which cannot be asked again, since the
+float versions no longer exist in the tree. But *"every number unchanged, demonstrated four ways"* is
+load-bearing for everything downstream, and **a claim whose only checker lives on a machine that will be
+rebooted is a claim with no checker**: it degrades to "an agent said so in a commit message", which is the
+standard of evidence this repository exists to refuse. The baseline is retrievable — `git cat-file -e
+071ec4a:tools/typem.py` succeeds — so the comparison is reconstructible rather than nominally so.
