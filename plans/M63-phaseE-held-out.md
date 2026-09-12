@@ -796,10 +796,45 @@ two-ask anchor), and the outcome recorded as **killed** or **survived**.
 | R1 | **extra material in `W`** | the anchor is **monotone**: if a known minimum refuses inside `W` it refuses inside every `W' ⊇ W`. `check_invariants`'s own docstring states the blindness as a feature — *"its answer is invariant under every expansion"*. Only the `minus_one` leg can fall, and it tests exactly **one** atom (the last in the anchor's order) | the vertex-count check catches *accidental* extra; **wrong** extra is caught only by exact geometry on every edge of the assembled stage, one exact pass, `O(V²)` |
 | R2 | **anything about the material an expansion ADDS** | the restriction identity compares only edges among the **unexpanded** vertices; the anchor lies entirely in the unexpanded part | promote the restriction identity to a **construction identity**: recompute the whole edge set from the stated law and compare, at the cost of one more stage build |
 | R3 | **the counting layer** — which group `up_to` used, and whether the level is complete | no check reads either; `|{M}|` is a report, and a capped level is a sample | a per-row **Burnside cross-check** (`raw / up_to` against the orbit-count formula under the declared group — already done once at 282, never asserted), plus making `LevelSet.require_complete` a **run** guard and not only a loop guard |
-| R4 | **the question asked** — target, rung, side | they are **echoed** into the record, never verified against an intention | **two, because the draft's catcher was wrong in both directions.** Idempotence catches neither: in the lax direction there is **no error to catch** (the verdict is correct), and in the tight direction a target-refuted run has **no object to re-reduce** — `parts_reduce.py:616` is explicit that *"a target-refuted run has NO level and therefore no `A` and no `|M|`"*. What works: **(i) the registration diff** — mechanically diff the record's echoed `target`/`rung`/`side` against §6 decision 9's per-row registration, which is being built anyway and needs only to be named as R4's catcher and run; **(ii) a one-unit tripwire on every loop negative** — a `no-selection-at-target` record carries `target_lb`, the bound at which the break fired, and **`target_lb == target + 1` means the candidate was refuted by exactly one unit**, which is precisely the population a too-tight target would misreport. Re-asking only those at `target + 1` is a cheap standing check on every `inert` the loop emits, and it would have applied to phase D's 89-candidate map |
+| R4 | **the question asked** — target, rung, side | they are **echoed** into the record, never verified against an intention | **two, because the draft's catcher was wrong in both directions.** Idempotence catches neither: in the lax direction there is **no error to catch** (the verdict is correct), and in the tight direction a target-refuted run has **no object to re-reduce** — `parts_reduce.py:616` is explicit that *"a target-refuted run has NO level and therefore no `A` and no `|M|`"*. What works: **(i) the registration diff** — mechanically diff the record's echoed `target`/`rung`/`side` against §6 decision 9's per-row registration, which is being built anyway and needs only to be named as R4's catcher and run; **(ii) ~~a one-unit tripwire on every loop negative~~ — STRUCK, with the retraction recorded below, because it is a tautology that flags everything and separates nothing.** R4's catcher is **the registration diff alone**, and that is enough: it compares against a *committed intention* rather than against a quantity the design pins |
 | R5 | **a consistently wrong problem** | every oracle-free relation — equivariance, monotonicity, idempotence — holds when both runs are wrong the same way | **nothing internal.** Only an external anchor or an independent re-derivation of the geometry (E9.5) |
 | R6 | **the anchor being absent at all** | `anchor=None` is a silent skip | a one-line change: a named verdict `anchor-not-supplied`, carried in the record and printed. **A fail-open becomes a fail-loud** |
 | R7 | **a fault in the code BOTH SIDES of check 2 share** | `check_invariants` compares the stage against a `reference` that `build_reference` builds from the same base, the same unit-edge predicate and the same cross law. A bug in any of the three corrupts both sides identically and the restriction identity still holds | the anchor (plant f0 demonstrates it), and on new ground E9.5's lifted geometry check |
+
+**A candidate catcher, proposed twice, measured, and STRUCK — recorded because a killed hunch stays in the
+ledger with what killed it.** The advisory pass proposed a *one-unit tripwire*: a `no-selection-at-target`
+record carries `target_lb`, and `target_lb == target + 1` was read as marking a candidate refuted by
+exactly one unit — the population a too-tight target would misreport. **It is a structural identity, not an
+observation, and it discriminates nothing.** The algebra: for an expansion `W' = W ∪ D`, every refusing
+selection of `W` survives in `W'`, so `w*(W') ≤ incumbent`; `wh` is a lower bound on `w*(W')`, so
+`wh ≤ incumbent`; and the break fires at the *first* `wh > target = incumbent − 1`, which is therefore
+`wh = incumbent` exactly. **Every inert candidate of an expansion sweep returns `target_lb = target + 1` by
+construction** — and the too-tight fault (`target = incumbent − 2`) breaks at `wh = incumbent − 1`, which
+is *also* `target + 1`, so the tripwire cannot even separate the fault it was built for. Measured on the
+artifact it was claimed to apply to, `data/m62/m63-map-A412.json`, **all 89 entries**: verdict
+`no-selection-at-target` 89/89, incumbent 373 on every entry, lower bound **373 on every entry**, so
+`target_lb − target = 1` for 89 of 89. *Kept only with its scope stated: the tripwire is meaningful for a
+targeted reduction whose target is **not** derived from a surviving incumbent — which is neither the loop
+path nor phase D's map.*
+
+**And what the strike leaves behind is worth more than what it removed.** The loop's negatives carry **no
+margin information at all, by construction**: every inert candidate returns the identical bound, so *"how
+close was this candidate?"* is unanswerable from the 89-candidate map and no re-reading of it can recover a
+gradient. That makes **three independent instruments now reading flat on single-orbit expansion** — the
+look-ahead proxy (0 freed on every orbit tried, §S.3 B-12), the shoulder-against-cut comparison (*"neither
+vindicated nor convicted, and the comparison has no power"*), and now the target bound, flat by design.
+Three flat instruments on one question is not three coincidences; it is a structural fact about what the
+measurement **can** return, and it is the honest frame for phase D's map: **one bit per candidate, and no
+gradient was ever available to extract.** That is a better sentence for the record than *"our proxy was
+uninformative"*, because it says the informativeness was never on offer.
+
+**A reporting defect found in the same reading, and it is E's to fix if the map is regenerated.**
+`primary.bound` is stored as an **English sentence** — *"no refusing selection of <= 372 over all
+selections (lower bound 373, rung 1, 0 undecided)"* — in **89 of 89** entries, even though `Bound` is a
+structured dataclass with `lower`, `upper`, `rung`, `undecided` and `target` as fields (verified: the
+`bound` value is a `str` in all 89). Any check over these records must parse prose with a regular
+expression, which is how a field quietly changes meaning between runs. **Store the structured `Bound`
+beside the rendered string.**
 
 **The residue in one sentence, which is what travels to phase G** (Poros's formulation, adopted because it
 is better than mine): **checks 1–3 are internal consistency — the pipeline compared against itself. Check 4

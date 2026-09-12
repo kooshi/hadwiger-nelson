@@ -775,3 +775,55 @@ and I would not move it. Two refinements:
   the acceptance list §X.1 drafts for §S.4, and into E10's written judgement. Then deferring it is a
   visible unmet acceptance item at the close rather than a quiet omission — which is the same discipline
   the phase applies to every other unmet clause.
+
+
+---
+
+## §9 — I retract my own catcher, and the retraction is the better finding
+
+*Written 2026-09-11 after the plan was committed with it. The one-unit tripwire I proposed twice, and
+which the product owner called the best item in its message, is **structurally degenerate**. It flags
+every candidate and it cannot distinguish the fault it was built for. Measured on the committed artifact,
+not argued.*
+
+**The measurement.** `data/m62/m63-map-A412.json`, all 89 entries: `primary.verdict` is
+`no-selection-at-target` **89 of 89**; `incumbent` is 373 on every entry; `asked_at_target` is 372 on
+every entry; the lower bound parsed out of `primary.bound` is **373 on every entry**. So
+`target_lb − target = 1` for **89 of 89**.
+
+**The mechanism, which is why it is a tautology and not a coincidence.** For an expansion `W' = W ∪ D`,
+every refusing selection of `W` survives in `W'`, so `w*(W') ≤ incumbent`. `wh` is a lower bound on
+`w*(W')`, hence `wh ≤ incumbent`. The break fires at the first `wh > target = incumbent − 1`, i.e. at
+`wh = incumbent` exactly. **Every inert candidate in an expansion sweep returns `target_lb = target + 1`,
+by construction.** And a too-tight target (`incumbent − 2`) breaks at `wh = incumbent − 1`, which is
+*also* `target + 1`. So the tripwire flags everything and separates nothing.
+
+**What I got wrong, mechanically.** I read `target_lb == target + 1` off one entry and treated a
+structural identity as a discriminating observation — a pattern seen once and promoted, which is the
+failure this identity's own ledger rule exists to prevent, committed by the person who spent the evening
+catching it in others. I registered no falsifier for it. Had I asked "what would a *non*-one margin look
+like, and is it reachable here?", the answer would have come out in one line of algebra before the
+proposal, not after.
+
+**So R4's catcher is the registration diff alone** — the record's echoed `target`, `rung` and `side`
+compared against the per-row registration — and that one does work, because it compares against a
+committed intention rather than against a quantity the design pins. The tripwire should be struck from
+the plan, or kept only with its scope stated: it is meaningful for a **targeted reduction whose target is
+not derived from a surviving incumbent**, which is not the loop path and not phase D's map.
+
+**And the finding that replaces it is worth more than the catcher was.** The loop's negatives carry **no
+margin information at all, by construction**: every inert candidate returns the identical bound, so *"how
+close was this candidate?"* is unanswerable from the 89-candidate map, and no re-reading of it can
+recover a gradient. That makes **three independent instruments now reading flat on single-orbit
+expansion** — the look-ahead proxy (0 freed on every orbit tried, §S.3 B-12), the shoulder-against-cut
+comparison (*"neither vindicated nor convicted, and the comparison has no power"*, handoff §3), and now
+the target bound, flat by design. Three flat instruments on one question is a structural fact about what
+this measurement *can* return, not three coincidences — and it is the honest frame for phase D's map:
+**one bit per candidate, and no gradient was ever available to extract.**
+
+**One reporting defect found in passing.** `primary.bound` is stored as an English sentence — *"no
+refusing selection of <= 372 over all selections (lower bound 373, rung 1, 0 undecided)"* — in 89 of 89
+entries, although `Bound` is a structured dataclass with `lower`, `upper`, `rung`, `undecided` and
+`target` as fields. Any later check over these records must parse prose with a regular expression, which
+is how a field silently changes meaning between runs. If the map is ever regenerated, the structured
+`Bound` should be stored beside the rendered string.
