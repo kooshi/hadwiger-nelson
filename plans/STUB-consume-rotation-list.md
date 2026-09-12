@@ -15,6 +15,16 @@
 (`plans/POROS-2026-09-10-m62.md`): **M62's §R1 calls the 412-rotation list "the derivation" and
 nothing reads it.** Read `plans/M62-evolutionary-type-m.md` §R1, §M1.0 and §M2.1 first.*
 
+> **PARTLY SUPERSEDED 2026-09-11 by `plans/M63-phaseG-bases-and-rotations.md`, which is this stub's
+> subplan.** Two corrections to the text below, both checkable: **(1)** step 2's *"the cross-edge law must
+> be re-derived per rotation … generalising it is the first code task"* **is done** — `typem.CrossLaw`
+> with `Stage(cross_law=…)` and controls c5.1/c5.3/c5.4 (M63 phase C). What is unbuilt is the law for
+> rotations whose **cosine** leaves `K`, and phase G §1.4 derives it. **(2)** The 412 figure counts square
+> classes of radicands over all radius pairs on the **Moser** lattice, not rotations: one class holds
+> several distinct angles, 91 of the 150 persisted classes contain no `cos ∈ K` angle at all, and the
+> exact angle census on Parts's own lattice returns **26 candidate angles, of which 6 survive the 2-adic
+> wall** (phase G §1.2, §3). Read the phase G plan before planning from this stub.
+
 ## What exists, and why it is not yet a result
 
 `tools/typem.py rotations` enumerates, with **no floating point in any verdict**, the rotations that
