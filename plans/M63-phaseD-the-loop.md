@@ -2150,3 +2150,102 @@ that removes it is to compare only against the run identified as his; what makes
 §R3.4 and P9 together — **the companion is a rule and the rung is a stabiliser computation, so both
 are pinned BEFORE any run rather than argued after.** The capability closes the hazard that motivated
 it.
+
+---
+
+## §R3.13 — Final numbers, and every registered prediction scored by name
+
+*Written at the close. Two jobs were still running and are handed over with their checkpoints:
+the greedy edge pass and the 374-level enumeration. Everything else is final.*
+
+### The two sentences that must stay adjacent
+
+> **Single-orbit growth from the 412-point accumulator does not reach 373 vertices: zero of 64,
+> complete for that question, with no undecided asks.**
+>
+> **The expansion rule is scored on the held-out map at the 403-point accumulator, which asks a
+> different question — reach 374, not 373 — and that map is not yet run. On it a success is NOT
+> known to exist: his own recorded move used FOUR orbits at once, and whether any one of those
+> four pieces alone suffices is precisely the open measurement.**
+
+Without the second, a later reader concludes the rule cannot be scored at all. Without its last
+clause, a later reader finding zero there concludes something went wrong rather than that a
+question was answered. *(The second sentence is the product owner's ruling; its final clause is a
+correction to it, accepted 2026-09-11.)*
+
+### The sweep, as it stands at 64 of 89
+
+| | |
+|---|---|
+| verdicts | **64 `no`, 0 `yes`, 0 `unknown`, 0 `not_run`** |
+| `{M}` grew | **1 of 64** |
+| every candidate's `\|M\|` | 374, exactly as `O2`'s non-increase argument requires |
+| restriction identity | **held on all 64** |
+| known-answer anchor | **`contains-a-known-minimum` on all 64** |
+| undecided asks | **0 primary, 0 secondary** |
+| cost | mean **249 s** per candidate, 12 workers |
+| blocks covered | control 1, random 31 (complete), his-degree-order 29, shoulder 3 |
+
+**The random block is complete**, so the density is unbiased for every ranking no matter where the
+remainder is cut — which is the whole reason the blocks exist.
+
+### Card 16's two branches, and the inversion
+
+| branch | n | primary | secondary | ratio |
+|---|---|---|---|---|
+| certify **no** minimum uses the new material | 62 | 211 s | 29 s | **median 0.06** |
+| **find** one (the level grew) | 1 | 133 s | 186 s | **1.40** |
+
+**The branch Poros was right to flag is the cheap one, by a factor of twenty**, and the mechanism is
+the transfer lattice: the secondary harvests almost nothing new (479 correction sets against the
+primary's 473, a difference of six), because *requiring* a new atom adds weight and clears the
+target at once. The expensive case is not certification but **enumeration**, which is exactly the
+1.40 and exactly the `old/(old+new)` correction to my own derivation. Both halves, one mechanism.
+
+### D1.c, at the rung identified as his
+
+Seven order-2 rungs run; **`H2#4 = ⟨g₂₃⟩` is his**, identified solver-free (§R3.12, P-D17).
+
+| | his | ours at `H2#4` |
+|---|---|---|
+| `\|M\|` | 374 | **374** |
+| `\|{M}\|` | 78 | **78** |
+| `A` | `v406e2082` (406) | 402, **not** equal up to the group |
+| L-edges | 1868–1884 | **1860**–1874 |
+
+**P-D16 CONFIRMED**: our low endpoint is **1860**, registered in a commit before the run reached
+that rung, against his published 1868. So his rung-2 row is a truncated level, a differently
+partnered one, or a typo — three causes, not split, and *not* our error. The equal count with a
+smaller accumulator is a **third** phenomenon, distinct from §R3.4's subset level: two different
+level sets of the same size.
+
+### Every prediction, scored
+
+| # | verdict |
+|---|---|
+| **P-D0a** | **MET** — refusing asks 0.138 / 0.144 s against a 0.15 s bar |
+| **P-D0b** | **FALSIFIED** — ratio 0.96 against a predicted ≥ 3. The cold-ask form survives (9.41 s against 4.62 s) |
+| **P-D10** | **FALSIFIED as registered** (91%, not < 1/3), and **replaced by a derivation**: the saving is the level enumeration, refined to `old/(old+new)` per candidate |
+| **P-D13** | **NEGATIVE** — the menu grew ×1.16 (49 → 57), below the falsifier's 1.3 floor |
+| **P-D14** | **NEGATIVE**, re-derived under all three readings: zero outside-disk orbits qualify |
+| **P-D3b** | **FALSIFIED** — the density is **degenerate at zero**, so the in-sample map cannot discriminate rankings on the primary outcome. A negative measures its enumeration (G21), and this one measures it completely |
+| **P-D3** | **UNSCOREABLE on the in-sample map** — every ranking ties at zero. It moves to the held-out map, unrun |
+| **P-D4** | **PHENOMENON OBSERVED, CLAUSE NOT MET** — `{M}` grew at fixed `\|M\|` and fixed rung with vertices added, once in 64; but the candidate came from the random block, not from a rule |
+| **P-D12** | **NOT DECIDED** — both halves read zero on the primary. On the secondary the large half is 1 in 64 and the small half 0 in ten-plus, which favours the hunch far too weakly to call |
+| **P-D16** | **CONFIRMED** — low endpoint 1860, registered before the run |
+| **P-D17** | **CONFIRMED BY INSTANCE** — the `H2#0` row returned his 78 at the wrong rung and was nearly reported as a match |
+| **P-D1, P-D2, P-D5, P-D6, P-D7, P-D7b, P-D8, P-D9, P-D11, P-D15** | **NOT SCORED** — each waits on work §R3.11 records as not done, or on a run handed over |
+
+### Handed over running, with resumable state
+
+- **The greedy edge pass** — at 718 of 2,442 having dropped **75**, already past the 36
+  `[deGreyParts2023]` report in total. **It is not an object and not a number until it completes
+  and a fresh solver sharing no state re-verifies it, and the §O6 floor passes.** Checkpointed at
+  `data/m62/ckpt/m63-edge-greedy.ckpt.json`; relaunching the same command resumes exactly.
+- **The individually-critical edge census** — 1,222 of 2,442, 890 critical and 332 removable, then
+  wedged on one very slow ask inside its 600-second per-ask wall. Its checkpoint holds the census
+  so far. Its count is a **floor** on the edge minimum, never a record.
+- **The 374-level enumeration** (D1.b) — past its optimum at `w* = 373`, so `\|M\| = 374`, his
+  attested number, with **zero undecided**; 9,170 minima and still enumerating against his 1,092.
+  **P-D5 is unscoreable until it closes**, and §R3.4 says a cross-row `\|{M}\|` comparison needs
+  that row's companion pinned first.
