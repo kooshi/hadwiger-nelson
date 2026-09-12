@@ -1,0 +1,106 @@
+{
+ "kind": "m63-edge-verify",
+ "schema": 1,
+ "producer": "tools/parts_edge_verify.py:verify",
+ "label": "greedy509",
+ "vertices": 509,
+ "edges": 2279,
+ "started_from": 2442,
+ "published_upper_bound": 2406,
+ "published_original": 2442,
+ "pin": "NONE -- the CNF carries no symmetry break and no selector variable",
+ "geometry": {
+  "verdict": "every-kept-edge-is-an-exact-unit-pair",
+  "checked": 2279,
+  "by_class": {
+   "L-L": 1732,
+   "L-S": 30,
+   "S-S": 517
+  },
+  "failures": [],
+  "n_failures": 0,
+  "arithmetic": "exact, in Q(sqrt3, sqrt11) 4-slot Fractions; no floating point",
+  "cross_edge_note": "the L-S class is re-derived from CrossLaw's stated derivation, not by calling the committed edge builder"
+ },
+ "degree_floor": {
+  "verdict": "floor-respected",
+  "edges": 2279,
+  "floor": 1018,
+  "vertices": 509,
+  "min_degree": 4,
+  "degree_below_4": [],
+  "isolated": [],
+  "sum_of_degrees": 4558
+ },
+ "cnf": {
+  "path": "/tmp/claude-1000/-home-kooshi-source-lean-dir/461b308c-55b7-48c5-b5df-641026e31b79/scratchpad/impl-phaseD2/greedy509.cnf",
+  "vars": 2036,
+  "clauses": 9625,
+  "vertices": 509,
+  "edges": 2279,
+  "pinned": false,
+  "selectors": 0
+ },
+ "refutation": {
+  "status": "unsat",
+  "seconds": 1249.98,
+  "solver": "cadical 2.1.2 (the toolchain binary, a separate process)",
+  "proof": "/tmp/claude-1000/-home-kooshi-source-lean-dir/461b308c-55b7-48c5-b5df-641026e31b79/scratchpad/impl-phaseD2/greedy509.lrat",
+  "proof_bytes": 3681556586
+ },
+ "lrat": {
+  "verdict": "LRAT-PROOF-REPLAYED",
+  "original_clauses": 9625,
+  "rup_steps_checked": 7699212,
+  "deletion_lines": 914358,
+  "rat_steps_unsupported": 0,
+  "empty_clause_derived": true,
+  "seconds": 423.3,
+  "checker": "tools/parts_edge_verify.py:check_lrat, RUP with hints, written for this verification and sharing no code with CaDiCaL or pysat"
+ },
+ "lrat_planted_faults": {
+  "solver": "unsat",
+  "p0_honest": "LRAT-PROOF-REPLAYED",
+  "p1_hint_deleted": "LRAT-CHECK-FAILS",
+  "p2_literal_flipped": "LRAT-CHECK-FAILS",
+  "p3_empty_clause_removed": "LRAT-CHECK-FAILS",
+  "p4_wrong_problem": "LRAT-CHECK-FAILS",
+  "verdict": "every-plant-fires"
+ },
+ "controls": {
+  "c2_minus_one_kept_edge": {
+   "status": "sat",
+   "seconds": 0.37,
+   "solver": "cadical 2.1.2 (the toolchain binary, a separate process)",
+   "proof": null,
+   "proof_bytes": null
+  },
+  "c3_minus_one_vertex": {
+   "status": "sat",
+   "seconds": 0.45,
+   "solver": "cadical 2.1.2 (the toolchain binary, a separate process)",
+   "proof": null,
+   "proof_bytes": null
+  },
+  "c3_vertex": [
+   12,
+   0,
+   -4,
+   0
+  ],
+  "verdict": "controls-fire"
+ },
+ "verdict": "verified-refusing-edge-subgraph",
+ "legs": {
+  "unpinned_cnf": true,
+  "fresh_process_and_solver": true,
+  "exact_geometry": true,
+  "degree_floor": true,
+  "cadical_unsat": true,
+  "lrat_replayed": true,
+  "controls": true,
+  "lrat_checker_fails_on_planted_faults": true
+ },
+ "not_the_minimum": "a greedy 1-minimal pass is order-dependent; this is an edge-reduced object at an exact count and an UPPER bound on the edge minimum, never the minimum, which is a hitting set and a different question",
+ "not_yet_a_record": "M63 \u00a7S.1 #4: a beat is called a record only once certified in the Lean kernel (UDCert plus the LRAT chain on exact geometry). Until then this is a number, not a record."
+}
