@@ -92,6 +92,21 @@ import parts_vtx as V
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SLICE_CONFLICTS = 100_000          # ~1 s on this machine; the first slice decides a normal ask
 
+# The closed verdict vocabulary. Phase C pinned the words in prose; phase D mints the tuple, so a
+# typo is a crash rather than a new verdict nobody notices. **No word here means "clean"** -- each
+# names what happened, and three of the eight name a bound that is NOT a minimum.
+VERDICTS = (
+    "reduced",                  # a closed minimum at the stage's rung
+    "no-reduction",             # the optimum is the whole working graph: nothing was removable
+    "base-fails",               # the working graph does not keep the key property
+    "companion-suffices",       # the EMPTY selection already refuses: the setup is wrong
+    "pin-unsound",              # the symmetry break changes answers
+    "truncated-before-optimum",  # a budget ended the search before any optimum was found
+    "no-selection-at-target",   # asked "is there a refusing selection of weight <= t?" -- no.
+                                # A LOWER BOUND of t+1 and nothing else: no level, no A, no minimum
+    "unknown-at-target",        # the same question, but an ask hit its budget: nothing is refuted
+)
+
 
 class Oracle:
     """One incremental solver over the stage's one-time CNF, counting its asks by outcome.
@@ -328,8 +343,28 @@ CHECKPOINT_UNVERIFIED = """checkpoint refused: {n} of {k} sampled correction set
 
 def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkpoint=None,
                  config=None, log=print, slice_conflicts=SLICE_CONFLICTS, _stop_after=None,
-                 tick=20.0, verify_checkpoint=0):
+                 tick=20.0, verify_checkpoint=0, target=None):
     """Phases 1 and 2, returning the record -- never a bare number.
+
+    TARGET (M63 phase D, D0.5). `target` turns the search from *close the optimum* into a
+    **decision**: is there a refusing selection of weight <= `target`?  It is `[Parts2020a]`
+    §5.5's own cutoff -- *"it is enough to check only the subgraphs whose order does not exceed
+    the order of the minimum graph M found at the previous iteration"* -- and without it every
+    FAILED candidate expansion costs a full reduction.
+
+      * the level loop stops as soon as the MaxSAT lower bound exceeds `target`; the verdict is
+        `no-selection-at-target` and the record carries a ONE-SIDED `Bound(lb, total, rung)` with
+        no level, no `A` and no `M_vertices`;
+      * if any ask came back `unknown` the target was NOT refuted, only unfinished: the verdict is
+        `unknown-at-target` and "no improvement exists" may not be said (§O3);
+      * on success the behaviour is unchanged and the level at `w*` is enumerated as today, because
+        the target pruned only candidates of weight `> target >= w*`, which are not at `w*`. The
+        completeness invariant is therefore untouched -- this is the beat-the-incumbent pruning
+        M63 §O(2) already proved sound.
+
+    `target=None` is today's behaviour exactly, and it is a BUDGET rather than a problem: it lives
+    in `state.launches[-1]["budgets"]`, outside `problem_hash`, so a checkpoint written under one
+    target resumes under another.
 
     RESUME. If `checkpoint` names an existing file the run continues from it EXACTLY. The file is
     REFUSED when the stage's identity or the problem hash differs, and accepted when only budgets
@@ -359,7 +394,7 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
     state.status = "in-progress"
     state.launches.append({"started": time.strftime("%Y-%m-%dT%H:%M:%S"),
                            "budgets": {"wall_ask": wall_ask, "max_minima": max_minima,
-                                       "phase2_wall": phase2_wall,
+                                       "phase2_wall": phase2_wall, "target": target,
                                        "slice_conflicts": slice_conflicts},
                            "machine": os.uname().nodename,
                            "git_commit": R._git("rev-parse", "HEAD", default="unknown")})
@@ -383,6 +418,9 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
             f"re-asked, all colourable on deletion")
 
     def finish(verdict, note=None, **extra):
+        if verdict not in VERDICTS:
+            raise ValueError(f"{verdict!r} is not in the closed verdict vocabulary {VERDICTS}; a "
+                             f"new outcome is a design decision, not a new string")
         state.asks = orc.stats()
         state.launches[-1]["seconds"] = round(time.time() - t0, 1)
         state.launches[-1]["cpu_seconds"] = round(time.process_time() - cpu0, 1)
@@ -431,6 +469,7 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
         state.save(checkpoint)
 
     truncated_wall = False
+    target_lb = None                   # set only by the target break, and it IS the lower bound
     last_tick, last_ckpt = time.time(), time.time()
     while True:
         state.iteration += 1
@@ -459,6 +498,15 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                 f"  undecided {len(state.undecided)}   asks {s['colourable']['n']} colourable "
                 f"@{s['colourable']['mean_s']}s / {s['refusing']['n']} refusing "
                 f"@{s['refusing']['mean_s']}s  [{time.time()-t0:.0f}s]  ckpt {age}")
+        # His §5.5 incumbent cutoff. `wh` is the MaxSAT optimum over the harvested `Y`, hence a
+        # rigorous LOWER bound on `w*`; once it passes the target, no refusing selection of weight
+        # <= target can exist and the question is answered NEGATIVELY. Only before an optimum is
+        # found: after one, the level loop's own `w*` test is the right stop.
+        if target is not None and state.w_star is None and wh > target:
+            target_lb = wh
+            log(f"  lower bound {wh} > target {target}: NO refusing selection of weight "
+                f"<= {target} exists  [{time.time()-t0:.0f}s]")
+            break
         if state.w_star is not None and wh > state.w_star:
             log(f"  next candidate weighs {wh} > {state.w_star}: the level is complete"
                 f"  [{time.time()-t0:.0f}s]")
@@ -500,32 +548,48 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
 
     E = state.minima
     capped = bool(max_minima and len(E) >= max_minima)
-    complete = (state.w_star is not None) and not truncated_wall and not capped and not state.undecided
+    refuted = target_lb is not None
+    complete = ((state.w_star is not None) and not truncated_wall and not capped
+                and not state.undecided and not refuted)
     state.status = ("complete" if complete else
+                    "refuted-at-target" if refuted else
                     "truncated-at-wall" if truncated_wall else "truncated-at-budget")
-    if state.w_star is None:
+    if refuted:
+        # An undecided ask means the budget ran out, NOT that the target was refuted (§O3).
+        verdict = "unknown-at-target" if state.undecided else "no-selection-at-target"
+    elif state.w_star is None:
         verdict = "truncated-before-optimum"
     elif state.w_star >= total_weight:
         verdict = "no-reduction"
     else:
         verdict = "reduced"
-    bound = R.Bound(lower=state.w_star or 0, upper=state.w_star or total_weight, rung=stage.rung,
-                    undecided=len(state.undecided))
+    if refuted:
+        bound = R.Bound(lower=target_lb, upper=total_weight, rung=stage.rung,
+                        undecided=len(state.undecided), target=target)
+    else:
+        bound = R.Bound(lower=state.w_star or 0, upper=state.w_star or total_weight,
+                        rung=stage.rung, undecided=len(state.undecided))
     method = ("exhaustive-level" if complete else
               "bounded-below" if state.undecided else
               "truncated-at-wall" if truncated_wall else "truncated-at-budget")
     Aatoms = sorted(set().union(*(set(x) for x in E))) if E else []
+    # A target-refuted run has NO level and therefore no `A` and no `|M|`: it knows one number, a
+    # lower bound. Emitting an empty `A` would hand a loop a state variable that is a lie.
+    A_field = ({} if refuted else
+               {"A_sample": Aatoms} if capped else {"A": Aatoms})
     rec = finish(verdict,
                  bound=R.asdict(bound), bound_render=bound.render(),
-                 M_vertices=None if state.w_star is None else state.w_star + stage.side_fixed,
-                 M_set=R.asdict(R.SetSize(
+                 target=target, target_refuted=refuted,
+                 M_vertices=None if (refuted or state.w_star is None)
+                            else state.w_star + stage.side_fixed,
+                 M_set=None if refuted else R.asdict(R.SetSize(
                      R.Count(len(E), method, of=None if method in ("exhaustive-level", "bounded-below")
                              else len(E)),
                      up_to="as found (the companion fixed); canonical counts are the audit's")),
                  minima=[sorted(x) for x in E],
                  undecided_candidates=[sorted(x) for x in state.undecided],
-                 A_atoms=len(Aatoms),
-                 **({"A": Aatoms} if not capped else {"A_sample": Aatoms}),
+                 A_atoms=None if refuted else len(Aatoms),
+                 **A_field,
                  hypergraph={"degree_1": len(crit), "correction_sets": len(state.corr),
                              "sets": sorted((sorted(c) for c in state.corr), key=lambda c: (len(c), c)),
                              "harvest": R.asdict(R.Count(len(state.corr), "harvested")),
@@ -536,6 +600,12 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                                          for k in sorted({len(c) for c in state.corr})}},
                  phase1_unknown=unk,
                  stage_fingerprint=stage.fingerprint(), stage_identity=stage.identity())
+    if refuted:
+        rec["A_note"] = (
+            f"asked as a DECISION at target {target} and answered no: the lower bound is "
+            f"{target_lb} and there is no level, no A and no |M|. This is a ONE-SIDED bound -- an "
+            f"untargeted run may still find a selection smaller than {target_lb}. It may not be "
+            f"called a minimum, and no loop may start from it.")
     if capped:
         rec["A_note"] = ("the level was CAPPED at max_minima, so the union of the minima found is a "
                          "SAMPLE of A and not A: his A is the union of ALL minima at the size, and "

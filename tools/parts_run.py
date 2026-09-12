@@ -273,7 +273,8 @@ def build(args, log=print):
             "cross_law": {"cos": T.kstr(stage.cross_law.cos), "name": stage.cross_law.name},
             "base_r": P.PARTS_R, "base_fp": R.fp_base(base), "pin": not args.no_pin},
         "budgets": {"wall_ask": args.wall_ask, "max_minima": args.max_minima,
-                    "phase2_wall": args.phase2_wall, "slice_conflicts": args.slice_conflicts}}
+                    "phase2_wall": args.phase2_wall, "slice_conflicts": args.slice_conflicts,
+                    "target": getattr(args, "target", None)}}
     return base, G, stage, config, rows, row, gi
 
 
@@ -298,7 +299,10 @@ def announcement(stage, config, rows, row, out, ckpt):
         f"measures and may refute",
         f"budgets    wall_ask {config['budgets']['wall_ask']} s (conflict slices of "
         f"{config['budgets']['slice_conflicts']}), max_minima {config['budgets']['max_minima']}, "
-        f"phase2_wall {config['budgets']['phase2_wall']}",
+        f"phase2_wall {config['budgets']['phase2_wall']}"
+        + (f", TARGET {config['budgets']['target']} -- this is a DECISION, not a minimisation: a "
+           f"negative answer is a lower bound of {config['budgets']['target'] + 1} and nothing "
+           f"more" if config['budgets'].get('target') is not None else ""),
         f"checkpoint {ckpt}  (resumable; budgets may change on a relaunch, the problem may not)",
         f"writes     {out}",
     ])
@@ -317,7 +321,8 @@ def run_reduce(args, log=print):
     rec = RED.reduce_stage(stage, wall_ask=args.wall_ask, max_minima=args.max_minima,
                            phase2_wall=args.phase2_wall, checkpoint=ckpt, config=config, log=log,
                            slice_conflicts=args.slice_conflicts,
-                           verify_checkpoint=getattr(args, "verify_checkpoint", 0))
+                           verify_checkpoint=getattr(args, "verify_checkpoint", 0),
+                           target=getattr(args, "target", None))
     out = finish_record(base, G, stage, config, rec, args)
     tmp = args.out + ".tmp"
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
@@ -518,6 +523,10 @@ def main():
     r.add_argument("--S-frame", dest="S_frame", default="stored")
     r.add_argument("--rung", default="1")
     r.add_argument("--max-minima", type=int, default=0)
+    r.add_argument("--target", type=int, default=None,
+                   help="[Parts2020a] §5.5's incumbent cutoff: ask whether a refusing selection of "
+                        "weight <= TARGET exists, instead of closing the optimum. A negative "
+                        "answer is a ONE-SIDED lower bound and is never a minimum.")
     r.add_argument("--phase2-wall", type=float, default=0.0)
     r.add_argument("--wall-ask", type=float, default=600.0)
     r.add_argument("--slice-conflicts", type=int, default=RED.SLICE_CONFLICTS)

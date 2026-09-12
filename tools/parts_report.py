@@ -75,24 +75,40 @@ class Bound:
 
     `rung` is the order of the OUTPUT symmetry group the search was restricted to. At rung 1 a
     closed bound is the true minimum of the working graph; at any higher rung it is the minimum
-    over selections invariant under that group, which provably need not contain the true minimum."""
+    over selections invariant under that group, which provably need not contain the true minimum.
+
+    `target` (M63 phase D) marks a bound produced by a DECISION -- *is there a refusing selection
+    of weight <= target?* -- answered no. That is a one-sided bound and nothing else: an untargeted
+    search may still find something smaller than `lower`. **The word "minimum" is unreachable in
+    that branch of `render` by construction**, because the target knob makes one-sided bounds the
+    common outcome of a sweep rather than an exotic one, and a one-sided bound that reads like a
+    minimum is exactly the verdict-word failure this module exists to prevent. Measured: without
+    this branch the same bound rendered as `141 <= minimum <= 165`, which is honest as an interval
+    and still contains the word."""
     lower: int
     upper: int
     rung: int
     undecided: int = 0
+    target: int | None = None
 
     def __post_init__(self):
         if self.lower > self.upper:
             raise ValueError(f"lower {self.lower} exceeds upper {self.upper}")
         if self.rung < 1:
             raise ValueError("rung is the order of a group and is at least 1")
+        if self.target is not None and self.lower <= self.target:
+            raise ValueError(f"a target-refuted bound has lower {self.lower} > target "
+                             f"{self.target}; a lower bound at or below the target refutes nothing")
 
     @property
     def closed(self) -> bool:
-        return self.lower == self.upper and self.undecided == 0
+        return self.lower == self.upper and self.undecided == 0 and self.target is None
 
     def render(self) -> str:
         scope = "over all selections" if self.rung == 1 else f"over rung-{self.rung}-symmetric selections"
+        if self.target is not None:
+            return (f"no refusing selection of <= {self.target} {scope} "
+                    f"(lower bound {self.lower}, rung {self.rung}, {self.undecided} undecided)")
         if self.closed:
             return f"minimum {self.lower} {scope}"
         u = f", {self.undecided} undecided" if self.undecided else ""
@@ -392,6 +408,23 @@ def self_test():
     print(f"  {'ok  ' if ok else 'FAIL'} a rung-3 minimum never reads as THE minimum")
     if not ok:
         fails.append("rung scope")
+
+    # phase D's second load-bearing control: a ONE-SIDED bound from a targeted decision must not
+    # contain the word "minimum" at all. Without the `target` branch the same numbers rendered as
+    # `141 <= minimum <= 165`, which is a true interval wearing the word that means something else.
+    tb = Bound(374, 411, 1, target=373)
+    ok = "minimum" not in tb.render() and "no refusing selection of <= 373" in tb.render()
+    print(f"  {'ok  ' if ok else 'FAIL'} a targeted refusal never contains the word 'minimum'"
+          f"   {tb.render()}")
+    if not ok:
+        fails.append("targeted bound renders as a minimum")
+    ok = not tb.closed
+    print(f"  {'ok  ' if ok else 'FAIL'} a targeted refusal is never `closed`, even at lower==upper"
+          f"   {Bound(374, 374, 1, target=373).closed}")
+    if not ok:
+        fails.append("targeted bound reads closed")
+    must_raise("a targeted bound whose lower bound does not exceed its target",
+               lambda: Bound(373, 411, 1, target=373))
 
     # and the forecast names its assumption
     secs, why = level_forecast(Count(12431, "exhaustive-level"), 0.4, 11.2, 96 / 12431, 32)
