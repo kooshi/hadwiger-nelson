@@ -454,6 +454,44 @@ form and the one that cannot be fitted to a number already seen:
 > **Honest note on ratios:** a *ratio* prediction only discriminates under a **full-engine** integration,
 > which does not exist. Under enumerate-only the discriminating quantity is the enumeration-phase harvest
 > alone — `Y` at close minus `Y` at the optimum, 55 of 528 on D1b.
+
+---
+
+## §6b — THE CONTROL REPAIRS ARE DONE (2026-09-12)
+
+**Queue items 3, 4 and 5 are closed.** 83 controls green across three modules, zero failures, and **each fix
+was seen red on the old code before being called fixed.**
+- **The anchor is three-valued**: present / `AnchorAbsent(reason)` printed and written into every entry with
+  a reason of substance required / **missing is fatal**. `None` is refused by name. The declared-absent run
+  ends at `restriction-identity-holds-anchor-declared-absent`, so **the two runs no longer share a string**,
+  and `entry["M"]` renders as `">=N"` whenever the anchor is absent, with arithmetic on it raising.
+- **The freeze**: the falsehood was **demonstrated against HEAD** — a run at `incumbent_weight = 373` was
+  *accepted* while its receipt named the wrong row. Now hashes the **rule portion only**, requires the run's
+  actual starting state (missing is fatal), refuses a contradicting row unless registered under
+  `data/m62/m63-rows/`, and returns a receipt carrying the row. §S.5's `cross_law` and `fp_base` live in that
+  registration; an unregistered row's receipt says **RECORDED, NOT PINNED** rather than implying a pin.
+  `--declare-unfrozen "<why>"` exists and **saying nothing is fatal**. The freeze file itself is untouched.
+- **The producer field is now COMPUTED, not restated**, so it stays true on a base where his orbits do not
+  exist — and the computation independently reproduces the hand correction. Both A412 artifacts regenerate
+  to themselves, every entry, count, density and `config_sha256` identical.
+
+**Two more instances for the catalogue, both the night's theme:**
+- **A refusal in `require_frozen` had never been reachable.** Its "not in git history" branch sits behind the
+  dirty check, and an untracked file is *dirty* — so the control labelled *"present but never committed"* was
+  firing the **edited** branch under another name. Passing for the wrong reason. Now distinguished, with a
+  new control that reaches the history branch.
+- **The fix was about to reintroduce its own falsehood one run-shape over**: on the truncated
+  first-candidate artifact the computed field called two of his orbits inadmissible when they are in the
+  menu and merely unreached. Caught by a fourth control **before either artifact shipped**.
+
+**RULING (product owner, 2026-09-12): wire the available anchor into the loop and `hismove`.** The starting
+level's `LevelSet.minima` are minima of the unexpanded stage, so an anchor **is** available on Parts's base
+and is simply unused. Two asks per candidate, ~0.2 s on a 412-vertex stage, against a close that now costs
+44 s. **It cannot change an answer, only cost** — so it cannot invalidate a frozen comparison, and it must be
+registered as a **control, never a rule parameter**, i.e. it does not enter the rule hash. Phase E
+established that checks 1–3 are internal consistency and **this is the only one comparing against a truth
+outside the pipeline**; leaving it off where it is available is the exact pattern this queue exists to end.
+**Still open:** `parts_diag.py` has no `--self-test`, so its declaration has no control of its own.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
