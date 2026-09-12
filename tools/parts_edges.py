@@ -311,6 +311,77 @@ def assemble_record(base=None) -> dict:
             "fingerprint": st.fingerprint(), "identity": st.identity()}
 
 
+def greedy_1minimal(est, *, wall_ask=600.0, checkpoint=None, floor=1016, log=print) -> dict:
+    """A certified refusing edge-subgraph with an EXACT edge count: an upper bound on `e_min`.
+
+    **Why this exists beside the exact minimisation, and why it runs first** (Poros card 22). The
+    exact minimum is a minimum hitting set over a window that phase 1 puts at roughly 630 edges
+    wide, and it may not close. A greedy 1-minimal pass is ~2,442 asks and yields an OBJECT: a
+    graph that provably refuses four colours, whose edge count is directly comparable with
+    `[deGreyParts2023]`'s 2,406. An upper bound you can certify beats a floor you cannot close,
+    and the two are not alternatives -- the greedy result also seeds the hitting set.
+
+    The pass is order-dependent by nature: a different order gives a different 1-minimal set and
+    possibly a different count. The order used is recorded, and the count is what it is -- never
+    called *the* minimum, which is what the hitting set computes.
+
+    An `unknown` ask KEEPS the edge. That is the conservative direction: it can only leave the
+    object larger, never make it non-refusing, so the result stays a valid upper bound."""
+    orc = RED.Oracle(est, wall=wall_ask)
+    n = len(est.atoms)
+    state = {"kept": list(range(n)), "dropped": [], "i": 0, "unknown": []}
+    if checkpoint and os.path.exists(checkpoint):
+        state = json.load(open(checkpoint))
+        log(f"  resuming: {state['i']}/{n} examined, {len(state['dropped'])} dropped")
+    kept = set(state["kept"])
+    t0, last = time.time(), time.time()
+    v0, _ = orc.ask(sorted(kept), wall=None)
+    if v0 != "unsat":
+        raise SystemExit("the starting edge set does not refuse: nothing to minimise")
+    for i in range(state["i"], n):
+        trial = sorted(kept - {i})
+        v, _ = orc.ask(trial)
+        if v == "unsat":                      # still refuses, so this edge is redundant HERE
+            kept = set(trial)
+            state["dropped"].append(i)
+        elif v == "unknown":
+            state["unknown"].append(i)        # kept, conservatively: the bound stays valid
+        state["i"] = i + 1
+        if time.time() - last > 20.0 or i + 1 == n:
+            last = time.time()
+            log(f"    greedy {i+1}/{n}  dropped {len(state['dropped'])}  "
+                f"edges now {len(kept)}  [{time.time()-t0:.0f}s]")
+            if checkpoint:
+                state["kept"] = sorted(kept)
+                json.dump(state, open(checkpoint + ".tmp", "w"))
+                os.replace(checkpoint + ".tmp", checkpoint)
+    kept = sorted(kept)
+    # the object must be re-verified by a FRESH solver sharing no state with the search (d6.3)
+    fresh = refuses(EdgeStage(est.v, pin=est.pin_on), kept)
+    fc = est.floor_check(kept, floor)
+    return {"kind": "m63-edge-greedy", "schema": 1,
+            "producer": "tools/parts_edges.py:greedy_1minimal",
+            "edges": len(kept) + est.side_fixed, "dropped": len(state["dropped"]),
+            "started_from": len(est.atoms) + est.side_fixed,
+            "published_upper_bound": 2406, "published_original": 2442,
+            "their_discard": 36, "ours_discard": len(state["dropped"]),
+            "beats_published": len(kept) + est.side_fixed < 2406,
+            "d6.3_fresh_solver_reverifies": fresh,
+            "verdict": ("edge-sweep-impossible" if fc["verdict"] != "floor-respected"
+                        else "greedy-1-minimal" if fresh == "unsat" else "NOT-REFUSING"),
+            "floor_check": fc, "undecided_kept": len(state["unknown"]),
+            "order": "the stage's own edge order (radial vertex order); a different order gives a "
+                     "different 1-minimal set -- this is an UPPER bound, never the minimum",
+            "asks": orc.stats(), "seconds": round(time.time() - t0, 1),
+            "dropped_edges": [[list(est.label(est.edges[est.deletable[a]][0])[1]),
+                               list(est.label(est.edges[est.deletable[a]][1])[1])]
+                              for a in state["dropped"]],
+            "kept_edges_fp": R.fp_edges(len(est.present_vertices),
+                                        [est.edges[est.deletable[a]] for a in kept]),
+            "still_unit_distance": "every edge kept is a unit pair; a unit-distance graph does not "
+                                   "require every unit pair to be an edge"}
+
+
 def _self_test(log=print):
     fails = []
 
@@ -475,6 +546,10 @@ def main():
                         "on the edge minimum, and against the published 2406 that is most of the "
                         "question at a few minutes' cost.")
     s.add_argument("--target", type=int, default=None)
+    s.add_argument("--greedy", action="store_true",
+                   help="a greedy 1-minimal pass: ~2442 asks for a CERTIFIED refusing subgraph "
+                        "with an exact edge count, directly comparable with the published 2406. "
+                        "An upper bound you can certify beats a floor you cannot close.")
     a = ap.parse_args()
     if a.selftest:
         sys.exit(0 if _self_test() else 1)
@@ -490,7 +565,18 @@ def main():
            "budgets": {"wall_ask": a.wall_ask, "target": a.target}}
     ck = a.checkpoint or (a.out + ".ckpt.json")
     t0 = time.process_time()
-    if a.phase1_only:
+    if a.greedy:
+        out = greedy_1minimal(est, wall_ask=a.wall_ask, checkpoint=ck, floor=floor)
+        out["headline"] = (
+            f"greedy 1-minimal edge pass on the 509: {out['edges']} edges "
+            f"(dropped {out['dropped']} of {out['started_from']}), re-verified by a fresh solver: "
+            f"{out['d6.3_fresh_solver_reverifies']}. Published: 2442 in [Parts2020a], 2406 in "
+            f"[deGreyParts2023] fn.2 by a NON-exhaustive discard of 36. "
+            f"{'BEATS the published 2406' if out['beats_published'] else 'does NOT beat 2406'}. "
+            f"This is an UPPER bound from one order, not the minimum.")
+        out["degree_floor"] = cc
+        out["provenance"] = R.provenance(config=cfg)
+    elif a.phase1_only:
         orc = RED.Oracle(est, wall=a.wall_ask)
         state = RED.load_checkpoint(ck, est, cfg) or RED.ReductionState(
             stage_identity=est.identity(), problem_sha256=RED.problem_hash(est, cfg),
