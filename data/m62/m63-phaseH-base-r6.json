@@ -1,0 +1,205 @@
+{
+ "kind": "m63-phaseH-base",
+ "r2": "6",
+ "with_u": true,
+ "t0": "2026-09-12 08:38:21",
+ "generator_image": {
+  "module_rank": 7,
+  "zero_coordinates": [
+   7
+  ],
+  "u_coordinates_on_basis": [
+   4,
+   -1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "u_in_module": true,
+  "parts_only_rank": 4,
+  "parts_only_zero_coordinates": [
+   1,
+   2,
+   4,
+   7
+  ],
+  "u_in_parts_module": false,
+  "zeta6_u_y_sqrt33_slot": "-1/12",
+  "zeta6_u_in_module": false
+ },
+ "points": 20517,
+ "symmetries": {
+  "negation": 0,
+  "s3": 0,
+  "s11": 0,
+  "s3s11": 0
+ },
+ "parts_subset": {
+  "parts_points": 3505,
+  "missing": 0
+ },
+ "u_in_base": true,
+ "unit_edge_control": {
+  "crosscheck": {
+   "subsample": 1400,
+   "edges": 490,
+   "identical": true
+  },
+  "margins": [
+   {
+    "margin": 0.001,
+    "candidates": 30081807,
+    "edges": 112538,
+    "equals_shipped": true
+   },
+   {
+    "margin": 0.01,
+    "candidates": 30578191,
+    "edges": 112538,
+    "equals_shipped": true
+   }
+  ],
+  "edges": 112538
+ },
+ "unit_edges": 112538,
+ "u_unit_degree": 9,
+ "u_orbit_degrees": [
+  9,
+  9,
+  9,
+  9,
+  9,
+  9,
+  9,
+  9
+ ],
+ "cross_new": {
+  "centre": 60,
+  "diag": 8,
+  "offdiag_ordered": 36,
+  "equal_radius_ordered": 8,
+  "non_equal_radius_ordered": 36,
+  "total": 104,
+  "kinds": [
+   {
+    "radii": [
+     "5/6 + 1/18*sqrt33",
+     "2 + 2/9*sqrt33"
+    ],
+    "equal_radii": false,
+    "ordered_pairs": 24,
+    "sigma": "17/6 + 5/18*sqrt33",
+    "d_squared": "3/2 + -1/6*sqrt33",
+    "mono": {
+     "17": true,
+     "239": false
+    }
+   },
+   {
+    "radii": [
+     "19/18 + 1/6*sqrt33",
+     "43/18 + 5/18*sqrt33"
+    ],
+    "equal_radii": false,
+    "ordered_pairs": 12,
+    "sigma": "31/9 + 4/9*sqrt33",
+    "d_squared": "1/3",
+    "mono": {
+     "17": false,
+     "239": false
+    }
+   },
+   {
+    "radii": [
+     "7/3 + 1/3*sqrt33",
+     "7/3 + 1/3*sqrt33"
+    ],
+    "equal_radii": true,
+    "ordered_pairs": 8,
+    "sigma": "14/3 + 2/3*sqrt33",
+    "d_squared": "0",
+    "mono": {
+     "17": true,
+     "239": true
+    }
+   }
+  ],
+  "monochromatic_kinds_per_prime": {
+   "17": 2,
+   "239": 1
+  }
+ },
+ "recount_new": {
+  "claimed": 104,
+  "reverified": 104,
+  "selftest_survivors": 60
+ },
+ "certificate_new": {
+  "fired": null,
+  "report": [
+   {
+    "prime": "sqrt33_2adic(17)",
+    "non_integral": 0,
+    "mono_unit_edges": 0,
+    "unit_edges": 112538,
+    "distance_two_pair_monochromatic": true,
+    "usable": true,
+    "Delta": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "monochromatic_cross": 32,
+    "free_delta": []
+   },
+   {
+    "prime": "sqrt33_2adic(239)",
+    "non_integral": 0,
+    "mono_unit_edges": 0,
+    "unit_edges": 112538,
+    "distance_two_pair_monochromatic": true,
+    "usable": true,
+    "Delta": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "monochromatic_cross": 8,
+    "free_delta": []
+   }
+  ]
+ },
+ "sat_new": {
+  "verdict": "sat",
+  "vertices": 41033,
+  "seconds": 43.3
+ }
+}
