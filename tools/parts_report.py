@@ -90,6 +90,7 @@ class Bound:
     rung: int
     undecided: int = 0
     target: int | None = None
+    restricted: str | None = None
 
     def __post_init__(self):
         if self.lower > self.upper:
@@ -106,6 +107,11 @@ class Bound:
 
     def render(self) -> str:
         scope = "over all selections" if self.rung == 1 else f"over rung-{self.rung}-symmetric selections"
+        if self.restricted:
+            # A minimum over a RESTRICTED selection space is not the minimum, for the same reason a
+            # rung-3 minimum is not: the restriction may exclude the true optimum. The scope travels
+            # with the number, always.
+            scope = f"{scope} {self.restricted}"
         if self.target is not None:
             return (f"no refusing selection of <= {self.target} {scope} "
                     f"(lower bound {self.lower}, rung {self.rung}, {self.undecided} undecided)")

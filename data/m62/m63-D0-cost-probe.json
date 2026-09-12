@@ -1,0 +1,67 @@
+{
+ "kind": "m63-cost-probe",
+ "schema": 1,
+ "producer": "tools/parts_loop.py:cost_probe",
+ "stage": "stage: reduce {L}   L 412 + S 135 = 547 vertices, 2694 edges (36 connection)   atoms 411 at rung 1   law rho15   fp 7184fbd621c9",
+ "stage_identity": "6f97bcbd20f2a00e5c920761195af8c73e4c04fd26f401a3acdb7970f45095a5",
+ "L": "v412e2106.vtx",
+ "S": "v136e564.vtx",
+ "known_minimum": "v374e1860.vtx",
+ "atoms": 411,
+ "known_minimum_atoms": 373,
+ "load_at_start": "6.87",
+ "machine": "local",
+ "cores": 32,
+ "cold_refusing_cpu_s": 9.4051,
+ "d1.3": {
+  "verdict": "contains-a-known-minimum",
+  "known_minimum_refuses": "unsat",
+  "minus_one_atom": "sat"
+ },
+ "phase1": {
+  "asks": 411,
+  "cpu_s": 53.18,
+  "mean_cpu_s": 0.12939
+ },
+ "near_refusing": {
+  "asks": 20,
+  "cpu_s": 2.76,
+  "mean_cpu_s": 0.13797
+ },
+ "near_colourable": {
+  "asks": 20,
+  "cpu_s": 1.1,
+  "mean_cpu_s": 0.05504
+ },
+ "asks": {
+  "colourable": {
+   "n": 360,
+   "mean_s": 0.0818,
+   "mean_cpu_s": 0.0812,
+   "total_cpu_s": 29.24
+  },
+  "refusing": {
+   "n": 93,
+   "mean_s": 0.3999,
+   "mean_cpu_s": 0.3973,
+   "total_cpu_s": 36.95
+  },
+  "undecided": 0,
+  "budget": {
+   "wall_s": 600.0,
+   "slice_conflicts": 100000,
+   "slices_used": 411,
+   "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+  }
+ },
+ "load_at_end": "7.07",
+ "provenance": {
+  "generated": "2026-09-12T00:36:20",
+  "machine": "local",
+  "cores": 32,
+  "git_commit": "d108ddf4f54c98b0f21097cafeec4323543226a1",
+  "git_dirty": true,
+  "freeze_commit": null,
+  "config_sha256": "8dc1a5d13eb0ca359f6991cee36968d6b50bd62338c8e617c7ecf1c8d2e1369e"
+ }
+}

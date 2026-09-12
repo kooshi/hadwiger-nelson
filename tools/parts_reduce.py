@@ -343,7 +343,7 @@ CHECKPOINT_UNVERIFIED = """checkpoint refused: {n} of {k} sampled correction set
 
 def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkpoint=None,
                  config=None, log=print, slice_conflicts=SLICE_CONFLICTS, _stop_after=None,
-                 tick=20.0, verify_checkpoint=0, target=None):
+                 tick=20.0, verify_checkpoint=0, target=None, require_any=None):
     """Phases 1 and 2, returning the record -- never a bare number.
 
     TARGET (M63 phase D, D0.5). `target` turns the search from *close the optimum* into a
@@ -365,6 +365,32 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
     `target=None` is today's behaviour exactly, and it is a BUDGET rather than a problem: it lives
     in `state.launches[-1]["budgets"]`, outside `problem_hash`, so a checkpoint written under one
     target resumes under another.
+
+    REQUIRE_ANY (M63 phase D, and it is what makes `{M}` growth observable under a target).
+    `require_any` is a set of atoms of which the selection must keep at least one -- one extra
+    hard clause on the same instance. Its use:
+
+      Let `W' = W u D` with the same companion and rung, and suppose the candidate is INERT,
+      `w*(W') = w*(W) = w*`. For `S subset atoms(W)` we have `W'[S] u C = W[S] u C` as graphs, so
+      every minimum of `W` survives in `W'`, and every minimum of `W'` using no new atom is a
+      minimum of `W`. Hence
+
+          {M} GREW  <=>  a refusing selection of weight <= w* keeps at least one atom of D.
+
+      That is a DECISION -- `reduce_stage(W', target=w*, require_any=D)` -- not a level
+      enumeration, so the secondary outcome costs about as much as the primary instead of twenty
+      times it. Enumerating under the restriction gives exactly the NEW members of the level.
+
+    **The checkpoint rule, which is soundness and not convenience.** A restricted run and a plain
+    run over one stage share every GRAPH fact -- phase 1's census and the correction sets are
+    properties of the graph, not of the objective -- and share no SEARCH fact, because a
+    restricted run's minima are a subset of the true level and inheriting them into a plain run
+    would report a level missing members. So on a change of `require_any` a resumed run inherits
+    `phase1` and `corr` and DISCARDS `minima`, `w_star`, `undecided` and the iteration counter.
+    That is what lets the second decision reuse the whole harvest the first one paid for.
+
+    A bound produced under a restriction carries `restricted=`, so it can never render as the
+    minimum -- for the same reason a rung-3 minimum cannot.
 
     RESUME. If `checkpoint` names an existing file the run continues from it EXACTLY. The file is
     REFUSED when the stage's identity or the problem hash differs, and accepted when only budgets
@@ -391,10 +417,21 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
     state = load_checkpoint(checkpoint, stage, config, log=log) or ReductionState(
         stage_identity=stage.identity(), problem_sha256=problem_hash(stage, config),
         problem_line=stage.problem_line())
+    # A change of restriction keeps the GRAPH facts and discards the SEARCH facts (see the
+    # docstring). Loud, because silently keeping a restricted level would report a level that is
+    # missing members and nothing downstream could tell.
+    _cur_ra = sorted(require_any) if require_any else None
+    _prev_ra = state.launches[-1].get("budgets", {}).get("require_any") if state.launches else None
+    if state.launches and _prev_ra != _cur_ra:
+        log(f"  restriction changed ({_prev_ra} -> {_cur_ra}): keeping {len(state.phase1)} phase-1 "
+            f"verdicts and {len(state.corr)} correction sets (graph facts, still true), discarding "
+            f"{len(state.minima)} minima and w* {state.w_star} (search facts of another objective)")
+        state.minima, state.undecided, state.w_star, state.iteration = [], [], None, 0
     state.status = "in-progress"
     state.launches.append({"started": time.strftime("%Y-%m-%dT%H:%M:%S"),
                            "budgets": {"wall_ask": wall_ask, "max_minima": max_minima,
                                        "phase2_wall": phase2_wall, "target": target,
+                                       "require_any": _cur_ra,
                                        "slice_conflicts": slice_conflicts},
                            "machine": os.uname().nodename,
                            "git_commit": R._git("rev-parse", "HEAD", default="unknown")})
@@ -481,6 +518,8 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
             w.append([-(a + 1) for a in b])               # exclude this exact optimum / undecided
         for a in allA:
             w.append([-(a + 1)], weight=weight[a])        # minimise total kept weight
+        if require_any:
+            w.append([a + 1 for a in require_any])        # keep at least one of these (see above)
         with RC2(w) as rc:
             model = rc.compute()
         if model is None:
@@ -563,12 +602,13 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
         verdict = "no-reduction"
     else:
         verdict = "reduced"
+    restr = ("keeping at least one of the newly added atoms" if require_any else None)
     if refuted:
         bound = R.Bound(lower=target_lb, upper=total_weight, rung=stage.rung,
-                        undecided=len(state.undecided), target=target)
+                        undecided=len(state.undecided), target=target, restricted=restr)
     else:
         bound = R.Bound(lower=state.w_star or 0, upper=state.w_star or total_weight,
-                        rung=stage.rung, undecided=len(state.undecided))
+                        rung=stage.rung, undecided=len(state.undecided), restricted=restr)
     method = ("exhaustive-level" if complete else
               "bounded-below" if state.undecided else
               "truncated-at-wall" if truncated_wall else "truncated-at-budget")
@@ -579,7 +619,7 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                {"A_sample": Aatoms} if capped else {"A": Aatoms})
     rec = finish(verdict,
                  bound=R.asdict(bound), bound_render=bound.render(),
-                 target=target, target_refuted=refuted,
+                 target=target, target_refuted=refuted, require_any=_cur_ra,
                  M_vertices=None if (refuted or state.w_star is None)
                             else state.w_star + stage.side_fixed,
                  M_set=None if refuted else R.asdict(R.SetSize(
