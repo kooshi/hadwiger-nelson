@@ -156,6 +156,59 @@ def card28(*, samples=2000, degree=4, mode="exists", log=print) -> dict:
     return out
 
 
+def hismove(*, wall_ask=600.0, log=print) -> dict:
+    """**Point the apparatus at the one known positive**, which is the oldest rule in this
+    repository and the one that decides how to read every negative around it.
+
+    The frozen rule's loop reached its set-valued rung and returned `no` on a 48-vertex,
+    six-orbit expansion — which contains the missing halves of `(0,0,2,2)` and `(0,0,2,6)` but
+    **not** `(0,0,0,4)` and `(0,0,6,6)`, so it is not a superset of his recorded move and cannot
+    contradict it. What that negative *cannot* distinguish is:
+
+      * a **ranking** failure — our apparatus is sound and the rule simply did not choose his set;
+      * an **apparatus** failure — our state, companion or stage does not reproduce his step at
+        all, in which case every negative on this half is a fact about our pipeline.
+
+    So: run **his own four orbits** as one candidate, at the same incumbent, through the same
+    `sweep_candidate` the rule used. `reduced` says the apparatus reproduces his recorded move and
+    the rule's failure is a ranking failure. `no-selection-at-target` says the apparatus does not,
+    and that is the more important finding of the two.
+
+    **This is a diagnostic and never a gate** (M63 §S.1 2(b), *"Diagnostic, never a gate: where the
+    move his files imply ranks under the rule"*). It is run AFTER the frozen rule's attempt and
+    cannot feed it: the rule is frozen in commit `6158162`, which predates this function."""
+    t0 = time.time()
+    base, st, rec, A = _state(log=log)
+    comp = V.load_lattice(os.path.join(REF11, "v136e564.vtx"))
+    Aset = set(A)
+    verts = frozenset(t for o in HIS_MOVE
+                      for t in (base.tups[i] for i in base.orbits[base.by_label[o]])
+                      if t not in Aset)
+    cand = PL.Candidate(verts, "reserve", frozenset({"his-recorded-move", "four-orbits"}))
+    ls = F.LevelSet.from_record(rec)
+    incumbent = ls.size
+    log(f"  his move as one candidate: {cand.name(base)} — {cand.n_new} vertices, "
+        f"incumbent {incumbent + 1}")
+    ck = os.path.join(ROOT, "build", "m63d2", "ckpt-hismove")
+    os.makedirs(ck, exist_ok=True)
+    ref = PL.build_reference(base, A, comp)
+    e = PL.sweep_candidate(base, A, comp, cand, incumbent=incumbent, reference=ref,
+                           anchor_tuples=None, ckpt_dir=ck, secondary=True, wall_ask=wall_ask,
+                           log=log)
+    out = {"kind": "m63-his-move", "schema": 1, "producer": "tools/parts_diag.py:hismove",
+           "his_move": [list(o) for o in HIS_MOVE], "vertices_added": cand.n_new,
+           "incumbent_weight": incumbent, "asked_at_target": incumbent - 1,
+           "entry": e, "verdict": e.get("verdict"), "M_set_grew": e.get("M_set_grew"),
+           "reading": ("`yes` means the apparatus reproduces his recorded step and the frozen "
+                       "rule's failure is a RANKING failure; `no` means the apparatus does not "
+                       "reproduce it, and every negative measured on this half is then a fact "
+                       "about our pipeline rather than about single- or set-valued expansion"),
+           "not_a_gate": "diagnostic only; the rule is frozen in 6158162, which predates this run",
+           "seconds": round(time.time() - t0, 1)}
+    log(f"  HIS MOVE -> {out['verdict']}  (grew: {out['M_set_grew']})")
+    return out
+
+
 def fs35(*, log=print) -> dict:
     """FS-35's two quantities at our 375 state, both solver-free."""
     t0 = time.time()
@@ -179,7 +232,7 @@ def fs35(*, log=print) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd")
-    for name in ("card28", "fs35"):
+    for name in ("card28", "fs35", "hismove"):
         p = sub.add_parser(name)
         p.add_argument("--out")
         if name == "card28":
@@ -188,6 +241,8 @@ def main():
     a = ap.parse_args()
     if a.cmd == "card28":
         r = card28(mode="forall" if a.forall else "exists")
+    elif a.cmd == "hismove":
+        r = hismove()
     elif a.cmd == "fs35":
         r = fs35()
     else:
