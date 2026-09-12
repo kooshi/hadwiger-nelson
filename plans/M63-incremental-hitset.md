@@ -358,6 +358,51 @@ records now carry, so any future regeneration of it fails the comparator for rea
 with the run. Regenerating it (`m63-M6B403-reduction.v2.json` beside it, never overwriting) would retire a
 gate failure that will otherwise be rediscovered by whoever next touches that stage.
 
+## 7c. In production — and removing the first quadratic cost exposed a second one
+
+Both stopped jobs were resumed under the new engine and both went straight into the enumeration phase
+(each checkpoint already carried `w* 373`), so the engine was built from the stored family on the first
+iteration — D1b from 21,261 clauses in 2.2 s, its cold solve returning **optimum 373, matching the
+checkpoint's stored `w*`**, which is an independent cross-check that the engine agrees with the
+incumbent's own recorded answer.
+
+| | old engine, late in the run | new engine, resumed |
+|---|---|---|
+| D1b | ~1.2 s per iteration | **0.144 s** (139 iterations in 20 s) |
+| hismove | — | **0.089 s** (225 iterations in 20 s) |
+
+About **8×** end to end on D1b, and still improving as the fresh solver warms (the refusing-ask mean was
+1.30 s cold on the first ticks and had fallen to 0.0508 s twenty seconds later, against the old warm value
+of 0.0093 s).
+
+**But the arithmetic did not close, and chasing the gap found a second quadratic.** At 0.144 s per
+iteration with the oracle at ~0.05 s and the hitting set at ~0.0002 s, about **0.09 s per iteration was
+unexplained**. It is this line, in the progress log:
+
+    log(f"    minima {len(state.minima)}  |A| "
+        f"{len(set().union(*(set(x) for x in state.minima)))} atoms  ...")
+
+which unions **every minimum found so far**, every 5 minima. Measured on D1b's own family:
+
+| \|E\| | 5,000 | 10,000 | 20,733 |
+|---|---|---|---|
+| cost of the union | 132 ms | 258 ms | **557 ms** |
+| amortised per iteration | 26 ms | 52 ms | **111 ms** |
+
+Linear in |E|, therefore **cumulatively quadratic in |E| — the same shape as the cost this work removed,
+in a log message**, and it accounts for essentially the whole unexplained remainder. With the hitting-set
+rebuild gone it is now the dominant non-oracle cost, and removing it should take D1b from 0.144 s to
+roughly the oracle's own ~0.03 s, another ~4×.
+
+**Deliberately not fixed here.** Two runs are executing `parts_reduce.py` right now, and a resumed run
+executes whatever is on disk — the same reason the integration waited. The fix is small (keep the union
+incrementally, or only recompute it when a minimum adds an atom, which by the table above is almost never:
+|A| moves 402 → 405 across 20,000 minima). It belongs in the next window when nothing is running.
+
+*General form, worth more than the instance:* a cost that grows with the level does not have to live in
+the solver. Removing the dominant one simply promoted the next one of the same shape, and the next one was
+in a diagnostic nobody would profile.
+
 ## 8. Not done, and what each would take
 
 - **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
