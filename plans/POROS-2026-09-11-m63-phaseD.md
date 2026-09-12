@@ -216,7 +216,7 @@ question: may-a-capped-iteration-propose-or-only-report
     one direction and a propagating label sufficient
   rank: 3
 
-## Cards 7–25 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`) and the S engineer
+## Cards 7–26 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`) and the S engineer
 (`aa10420df4950eda9`), 2026-09-11
 
 *Prompted by the product owner naming the map's over-reading risk before the sweep runs. Card 1 argued
@@ -1158,6 +1158,58 @@ over 89 candidates is worth more than a partial positive — but its *second* pu
 next agent should be told in advance rather than discover it. The `A403` map changes purpose with it:
 no longer a held-out test for a rule, but the discriminator for whether the inertness of singles is a
 property of that state or of singles as such.
+
+### P-D16 confirmed, and the high endpoint prunes card 24's causes
+
+**At `H2#4 = ⟨g₂₃⟩`, the rung P9 identified as his, our low edge endpoint is 1860 against his
+published 1868 — the registered prediction, confirmed — and the row also returns `|M| = 374` and
+`|{M}| = 78`, both his attested numbers, this time at the right rung.** Registering it in advance was
+worth what card 24 said: *"our range is eight low again"* would otherwise have read as a second wrong
+companion, and that reading would have been wrong.
+
+| | his | ours at `H2#4` |
+|---|---|---|
+| `\|M\|` | 374 | 374 |
+| `\|{M}\|` | 78 | **78** |
+| `A` | `v406e2082` (406) | 402, **not** equal up to the group |
+| L-edges | 1868–1884 | **1860**–1874 |
+
+**Both endpoints, not one.** The low end is 8 lower and the **high end is 10 lower**, so the spans
+differ (16 against 14) and this is *not* a uniform shift. **Our level contains a member his lacks (at
+1860) and his contains one ours lacks (at 1884): two sets of 78 that are incomparable, neither inside
+the other** — a fourth distinct phenomenon after the subset level at state 1 and the equal-count
+accumulator gap. It prunes card 24's three causes:
+
+- **a single typo is nearly out** — it would need two, at both endpoints, by different amounts;
+- **truncation of the same problem is ruled out** — truncation only removes, so it could never give
+  him a denser member than our exhaustive level holds;
+- **a companion strictly containing ours** would extend his range *both* ways (low ≤ 1860); one
+  contained in ours would keep his range *inside* ours (high ≤ 1874). Neither fits, so **his companion
+  is incomparable with `S136`** — which also excludes `A166`, a superset up to the group.
+
+**So card 24's "three causes, unsplit" now reads: two ruled out, one live, one residual.** Live: his
+companion is a different **frame**, `ρ·g(S136)` for some `g` other than ours — a genuinely different
+problem, related by a group element but not identical, whose level happens to have the same size,
+which fits every observation including the coincident 78. Residual: a different object entirely.
+
+question: which-frame-is-his-rung-2-companion
+  evidence: the endpoint analysis above, from the confirmed row. His level provably lacks
+    `v374e1860`, so whatever his companion is, that union must be **colourable** against it.
+  expected: the three causes stay unsplit until more data
+  ask: for which of the 24 frames `g` is `v374e1860 ∪ ρ·g(S136)` colourable?
+  if a few: those are the candidate frames; run the rung-2 reduction at `H2#4` against each and
+    compare with 1868–1884 and `v406e2082`
+  if all 24 refuse: the frame story dies too, his companion is a different object entirely, and the
+    companion rule needs re-stating
+  answered by: run — 24 refusal asks, the card-17 instrument pointed at a new question
+  cost: seconds
+  hunch: a small number survive and one reproduces his row exactly
+  falsifier: all 24 refusing
+  rank: 26
+
+**Queued, not demanded.** The phase D implementer reached the end of its budget at this point; card 26
+is seconds of compute but not seconds of context, and the handoff is worth more. The narrowing above
+stands whether or not anyone runs it.
 
 **A representation note worth carrying past this phase.** The shared centre and the two-sided index
 space have now produced three faults in three agents within one afternoon: my cross-edge control
