@@ -205,6 +205,22 @@ the observation that his greedy discard of 36 was nowhere near optimal.
    run that needs the accumulator `A = ⋃{M}` — the loop's actual state variable, and the thing **a new base
    has none of** — must pay the whole enumeration. A census priced at optimum cost but needing accumulators
    is wrong by a factor of a hundred.
+
+7. **CROSS-PHASE LINK NOBODY OWNS: P-G7 is no longer unpriced.** `plans/M63-phaseG-bases-and-rotations.md`
+   says in **four** places that manufacturing a new base's first accumulator is *"unpriced until phase F's
+   ladder lands"* — lines 440, 446, 502, 594. Meanwhile the hitting-set work derived a cost law from the
+   incumbent's own log: **enumeration is quadratic in the level size**, fitting held-out points to ~1% where
+   a linear fit is off by 56%. Manufacturing an accumulator **is** a complete level enumeration, so that law
+   prices P-G7 — conditionally, since it was fitted on Parts's base and a new base is a different regime.
+   **Neither agent could have made this connection: they were in different phases.** Reconcile when the
+   hitting-set engineer's own report lands, and do not edit the phase G plan before then — its author has
+   closed and the engineer may sharpen the law.
+8. **And the enumeration regime is the one the new engine WINS.** The measured split is phase- and
+   size-dependent, not a constant: ~99.6% oracle at 55 atoms, ~95% oracle finding D1b's optimum, ~73%
+   hitting set finding C4a's, **~99% hitting set enumerating D1b's level**. Since a bootstrap is an
+   enumeration, the cost work lands exactly where the rotation phase needs it. **The optimisation phase is
+   NOT landed** — three formulations, one measured reason — and stopping there rather than trying a fourth
+   at midnight on a contended box was the advisor's call and is the right one.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
