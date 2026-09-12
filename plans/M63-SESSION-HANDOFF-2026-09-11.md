@@ -166,7 +166,22 @@ the observation that his greedy discard of 36 was nowhere near optimal.
    correction. No number is retracted: the symmetry break itself is sound because the pin clause is
    conditional on the atom's presence; only the control was blind. **Standing lesson: a ruling made from a
    plan's prose about code is a ruling about the prose.**
-3. **The probe**: last verdict, then the 112 pairs (21 promoted first), then a decision on the 350.
+3. **The probe is RETIRED** (2026-09-11, with the joint route — it expands *his* small half). 13 of 14
+   singles inert; the last two were stopped 8× past the probe's own registered budget, falsifying its P7.
+   The 112 pairs and the 350-pair menu are **not** to be run: they are the dominated instrument the phase F
+   plan replaces with a monotone union ladder, and they probe his inputs either way. Checkpoints survive if
+   this is ever reversed.
+4. **BLOCKED ON THE CALIBRATION JOB — fix `tools/parts_loop.py` line 810 the moment it lands.** The line
+   emits a field claiming all four orbits of Parts's recorded move were untestable; **two of them were
+   tested singly and are inert**, which is stronger evidence than the claim it replaces (two orbits that
+   work as a *set* do nothing alone). The artifact `data/m62/m63-map-A412.json` is corrected (`3e343e5`),
+   **but the producer is not, so the artifact no longer regenerates from committed code** — which breaks
+   this milestone's own rule. Not fixed yet because `tools/parts_diag.py hismove` imports that module and
+   Python 3.14's `forkserver` re-imports it in any worker spawned after an edit; that job gates the next
+   phase. **After the fix: regenerate and confirm the artifact matches.** `data/m62/m63-map-A412-first.json`
+   needs its own adapted wording; `data/m62/m63-sweep-protocol.json` is a **frozen pre-registration and must
+   NOT be edited** — a freeze records what was believed before the outcomes were read, and retro-editing one
+   destroys its only property while leaving it looking intact.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
