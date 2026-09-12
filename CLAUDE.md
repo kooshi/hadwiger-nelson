@@ -982,8 +982,19 @@ would have shown it. The cheap half of the lesson, and the one that finds checks
 harness reconstructs its "before" tree from git and imports a module by name — so the reconstructed module
 binds to **today's** copy of its dependency if that reaches `sys.modules` first, and the comparison silently
 becomes one tree against itself **while printing ALL MATCH**. Assert the provenance of every module a
-reconstruction loads, and **provoke that assertion** to confirm it fires. The general form: **a check moved
-to a new context is a new check** and owes its negative control again.
+reconstruction loads, and **provoke that assertion** to confirm it fires — pre-load the wrong version
+deliberately and confirm the harness **refuses** rather than agrees. **The sharp form is not "moved to a new
+context" in the abstract; it is: a check that loads two versions of something and identifies them BY NAME.**
+Module caches, class registries, singletons, environment lookups — anything with a global namespace.
+
+**And do not cite that catch as evidence the rule works.** Its finder declined exactly that: it had been
+forced to reason about module identity hours earlier, on a task that happened to load two copies in one
+process, and archiving carried the reasoning along for free — *"I got it because the original task happened
+to have the same shape."* **An instance found by prior context is not evidence that a rule reproduces.**
+Someone archiving a script that only ever loaded one tree has no such prior, will not notice, and gets a
+harness printing `ALL MATCH` while comparing today against today. That is the argument **for** writing the
+rule down rather than against it: **it does not reproduce from care, only from the negative control being
+mandatory.**
 
 **And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose
 control docstring already said *"a control that passes without its failure mode being reachable has not been
