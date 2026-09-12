@@ -1322,13 +1322,22 @@ count; at 10²–10³ a cold worker discards a state worth more than the paralle
 was attached to every proposed drop as one dial; each row turns out to have its own quantity, and
 three of those are now measured.*
 
-> **THE GOVERNING REASON, as ruled by the product owner on 2026-09-11.** The dial is recorded as
-> **NOT FIRING** — like for like, cold and pinned against cold and pinned, the joint stage costs
-> about **2×** the frozen-companion stages, nowhere near tenfold (§R2.4). **The four cost-control
-> rows still return for D, F and G, and each returns on its own per-row ground below, not on the
-> dial.** The alternative weighed was letting them lapse, which is the literal reading of the
-> approval's condition and the wrong outcome: the condition was a proxy and the per-row needs are
-> real. *A row that returns for a reason that turned out false is a row nobody can defend later.*
+> **THE GOVERNING REASON, as ruled by the product owner on 2026-09-11. These are TWO findings and
+> a later phase can misuse the second, so they are stated apart** (Poros's phrasing note, adopted):
+>
+> 1. **The dial was MEASURED AND FOUND NOT TO GOVERN.** Card 15's table below is what carries the
+>    decision: each gated row's need traces to its own quantity, and none of them is per-ask cost
+>    on the object the condition was measured on. This is what retires the dial.
+> 2. **Separately, the dial did not fire.** Like for like — cold and pinned against cold and
+>    pinned — the joint stage costs about **2×** the frozen-companion stages, nowhere near tenfold
+>    (§R2.4). This removes the dial; it is not the reason the rows are kept.
+>
+> **The four cost-control rows still return for D, F and G, each on its own per-row ground below.**
+> The alternative weighed was letting them lapse, which is the literal reading of the approval's
+> condition and the wrong outcome: the condition was a proxy and the per-row needs are real.
+> *A row that returns for a reason that turned out false is a row nobody can defend later.*
+> **What must not be read here:** that the rows were wanted anyway and the measurement was
+> decoration. The measurement is what removed the dial; the table is what kept the rows.
 
 | gated row | what its need is actually governed by | current reading | verdict |
 |---|---|---|---|
@@ -1539,6 +1548,39 @@ which is everywhere in C–E. It does **not** supersede it in phase G's fresh ar
 has been built and a guess is all there is. There the measured reading is: **trust it for pairs,
 do not trust it for triples**, and prefer building `Y` early enough that the rung lattice can
 replace it.
+
+### R2.4e — Does the 62× pin reach outside this phase? Two different pins say: much less than it looks
+
+*Poros's card 19 asks whether M62's recorded costs sit on an inflated baseline, since §5.9's pin
+arrived with this milestone. The cheap half is a grep, and it changes the question.*
+
+**There are TWO pins in this codebase and they are not the same lever:**
+
+| builder | what it pins | clauses | used by |
+|---|---|---|---|
+| `parts_stage.Stage.cnf` | the §5.9 **rainbow triangle**, conditional on presence | **3** | every M63 stage |
+| `typem.cnf_for`, `typem.side_cnf`, `typem.patterns` | **the centre only**, one colour | **1** | `m62_run`, `m62_descent`, `growsearch`, `m62_subtypes`, `five_dial` |
+| `mkstate.py` | a triangle **and** the centre | 3 + 1 | the pre-M63 state builders |
+| `symstate.py` | the centre only | 1 | — |
+
+**So the M62-era ask paths were not unpinned — they pinned the centre.** My 62× is *triangle
+against **nothing***, because `Stage(pin=False)` emits no unit clause at all. The transferable
+quantity is *triangle against **centre***, which is a different and smaller thing: a rainbow
+triangle fixes three colours and kills all 24 palette permutations; a centre pin fixes one and
+kills 4, leaving 6. **On palette symmetry alone the transferable factor is ~6×, not 62×** — the
+remaining ~10× in my measurement is whatever the extra two unit clauses buy in search guidance,
+which is real but is exactly the part that need not transfer to another arena.
+
+**So card 19's conditional should be stated at the right size**: M62's costs are not obviously on
+a 60×-inflated baseline; they are on a baseline weaker by at most the residual palette factor plus
+an unmeasured guidance term. **The settling run is Poros's, with one correction — it must be
+triangle-against-centre on an M62-era object, not triangle-against-nothing**, or it measures the
+wrong difference and inflates the answer exactly as the naive reading does. That run is phase D's.
+
+**Untouched either way, and worth saying because it is the load-bearing M62 conclusion:** §R23's
+argument that a descent cannot reach the record rests on the *spread* of a distribution — nine
+1-minimal descents at 582–609, eleven standard deviations from 509 — not on any clock. No pin
+changes it.
 
 ### R2.5 — Six instruments, and the sixth is the one that stops the lesson being wrong
 
