@@ -844,7 +844,39 @@ the one format this repository can check **in the Lean kernel** — which would 
 and the standard `CLAUDE.md` § "The standard of evidence above rung B" actually asks for. Regeneration is
 minutes; *running* the kernel check is a separate and possibly large cost (row 40 priced kernel promotion at
 ~800,000 LRAT lines per cube on another object and declined it), so the two decisions are separate and only
-the first is being taken now. **This is the first refutation in this repository whose entire solver-dependent core
+the first is being taken now.
+
+**DONE, 2026-09-12 (product owner).** All twenty regenerated as **text LRAT** with
+`cadical --lrat=true --no-binary`, six at a time — about two minutes of wall clock, ~385 s of CPU:
+
+| | |
+|---|---|
+| refutations | **20 of 20**, every one exit code **20 (UNSAT)**; no other exit code observed |
+| each ends in the empty clause with its hints | **20 of 20**, by reading the last line of every file |
+| **negative control on that check** | a faithful file is **accepted** and a copy with its final line truncated is **refused** — so the check discriminates rather than passing everything |
+| size | **1.07 GB** over 20 files (41–127 MB each) against 0.35 GB of DRAT — **3.02×**, as expected since LRAT carries explicit hints |
+| the largest | `C1_circle_completeness`, the one claim four codebases were pointed at: 77 s, 127 MB |
+
+**What this establishes and what it does not.** It puts the entire solver-dependent core in the one format
+this repository can check **in the Lean kernel**, which it could not before. It does **not** mean they have
+been kernel-checked — that run is deliberately not made and its cost is unmeasured. The honest status:
+**twenty refutations, in a kernel-checkable format, each internally checked by its producer
+(`--checkproof=3`), none independently verified.**
+
+**A durability fact to know before relying on the bundle: `/tmp` here is `tmpfs`.** The 1.8 GB of instances
+and proofs is in **RAM** and vanishes on reboot. So the two small reviewer-facing files are committed —
+`data/m62/m63-phaseH2-rho63-certificate.json` (151 KB, whose own key list includes
+`claims_a_reviewer_must_verify`, `not_load_bearing` and `argument`) and `…-proof-manifest.json` (5 KB,
+indexing all 20 with what each asserts) — while the proofs are left **regenerable** rather than stored, per
+this project's rule that measurement artifacts are provenance and never the certificate. **Regeneration:**
+`cadical --lrat=true --no-binary <instance>.cnf <instance>.lrat` over the 20 named in the manifest, the
+instances rebuilt from `tools/typem.py` at the arena parameters the certificate records.
+
+**And the process note, because it is the third instance today.** This edit failed its exact-match assertion
+twice before landing, both times because the product owner wrote a **multi-line** anchor as a single line.
+The other two instances were the same cause. **The habit that works is not "check the anchor" — it is
+`s.find()` the first few words, print the actual bytes, and build the replacement from what the file
+contains.** Reading beats remembering, and this is now the third scar with the same shape. **This is the first refutation in this repository whose entire solver-dependent core
 ships as re-checkable proof**, and it is only possible because the superset argument (§6i) moved the load off
 one 51,133-vertex refutation onto twenty 25,567-vertex ones. The agent generated it on its own authority
 rather than waiting for mine, correctly: its brief said to keep the proof if it was cheap, and 4.8 minutes is
