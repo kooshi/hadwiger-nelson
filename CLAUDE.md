@@ -226,15 +226,16 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 *A mirror of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order** (Kooshi, 2026-09-10: *"the next session will be 100% repro of his algo. The
-session after that will be introducing our new angle on it"*):
-1. **M63 — reproduce `[Parts2020a]`'s minimization algorithm end to end** (FS-33,
-   `plans/M63-parts-reproduction.md`). The reduction stage is reproduced; **open at phases C–E** — the
-   correction-set hypergraph work, the held-out runs, the outer loop, the intermediate symmetry rungs.
-2. **M62 — the evolutionary type-M search** (`plans/M62-evolutionary-type-m.md`; paused for M63). Beat the
-   509-vertex record with a search whose genome, feasibility filter and fitness come from this project's
-   theorems; its arena base is `typem.parts_lattice`, and its phases D and E are not run. It is the rehearsal
-   for FS-6, the same search one colour up.
+**Open milestones, in order.** **M63 phase H2 closed 2026-09-12** with a five-chromatic unit-distance graph
+in a **6-open** field (row 64), so the sixth colour's only known mechanism has a platform for the first time.
+The live continuation is **phase H3 — drop the shape** (`plans/M63-phaseH3-drop-the-shape.md`, specified and
+unstarted): the obstruction limiting every object of this kind is neither fineness, radius nor field but **two
+coordinate-slot conditions inherited from `[Parts2020a]`**, and dropping them at `n = 2` offers twice the
+record's circle count and twice its unit-neighbour count in the same unsealed field at **73% of its radius**.
+Then **FS-6**, promoted, since the arithmetic bar on a five-colour forced pair (`11 ∣ d²`) does not apply in
+`K(√7)`. `plans/FRONTIER-STUBS.md` carries the full re-ranking and the caution that phase H2 decided **one
+object**. **M62** — the evolutionary type-M search (`plans/M62-evolutionary-type-m.md`) — stays paused behind
+M63.
 
 **Ranked stubs:**
 

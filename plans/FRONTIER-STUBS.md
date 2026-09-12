@@ -34,6 +34,41 @@ introducing our new angle on it."*
 
 ## Ranked stubs
 
+> **RE-RANKED 2026-09-12 at M63 phase H2's close. This block states the current order and supersedes the
+> numeric column below it, which is left in place so no row's text is lost.** One thing changed the ranking:
+> **a five-chromatic unit-distance graph now exists in a 6-open field** (ledger row 64) — 51,133 vertices at
+> `ρ₆₃` in `ℚ(√3,√7,√11)`, refusal *produced* rather than inherited. Every previous witness this project can
+> screen is 5-sealed, so the only known mechanism for the sixth colour had no platform. It has one.
+>
+> **Current order:**
+> 1. **Phase H3 — drop the shape** (`plans/M63-phaseH3-drop-the-shape.md`, new). The obstruction limiting
+>    every object of this kind is neither the lattice's fineness, radius, nor field but **two coordinate-slot
+>    conditions inherited from `[Parts2020a]`**; dropping them at `n = 2` offers twice the record's circle
+>    count *and* twice its unit-neighbour count in the same unsealed field at **73% of its radius**. Highest
+>    bearing, days, specified and unstarted.
+> 2. **FS-6 the six-level design target** — **promoted from 4.** Unchanged in content; what changed is that
+>    G48's mechanism now has an object to stand on, and the arithmetic bar that blocks it (a five-colour
+>    forced pair needs `11 ∣ d²`) **does not apply in `K(√7)`**, where 11 has residue degree 2.
+> 3. **FS-20 the paper** — **demoted from 1 on urgency, not value.** Still the publication trigger, still
+>    blocked on the same two items; but phase H2 added material a write-up would want to include, so writing
+>    now would be writing early.
+> 4. **FS-22 √7 phase pinning** — **largely ANSWERED and demoted from 10.** Its question was whether a
+>    construction could be made to land in `ℚ(√3,√7,√11)`. One does, reached by a different route (the
+>    rotation family at `n = 16`, not the Moser twist substitution), and the field's 6-openness is now
+>    confirmed by direct computation rather than cited. What remains of it is only whether *his* route also
+>    lands there, which is a curiosity now that the field is occupied.
+> 5. **FS-30 consume the rotation list** — **demoted from 2; its central question is CLOSED.** The rotations
+>    are classified by one integer and screened by four gates we already hold. Two live remainders, both
+>    recorded: `moser_ball_exact` enumerates an infinite set with its `span` default silently *being* the
+>    answer, so the stored census is a property of span 4 and **its regeneration is unrun**; and the
+>    withdrawn claim "nothing on either base is 6-open" is replaced by an explicit list of seven 6-open
+>    members at `n ≤ 32`.
+> 6. Everything else keeps its previous order.
+>
+> **The honest caution on all of the above:** phase H2 decided **one object**. The criterion it produced —
+> that refutation by the diagonal family needs six ten-element sets to form an intersecting family — applies
+> to every base, and **nothing shows a base satisfying it exists.**
+
 | rank | stub | the question | bearing on χ ≥ 6 | cost | status |
 |---|---|---|---|---|---|
 | 1 | **FS-20 the paper** — `plans/STUB-theorem-B-writeup.md` | One reduction, derived independently in seven lineages that barely cite one another, each stopping where `[Madore2015]` Prop. 3.9 declines to formulate the general case — **Theorem A is that formulation** — with χ(ℚ(√3,√11)²) = 4 closing Madore's 4 ≤ χ ≤ 5 and settling a question posed or named as open at least six times (`CLOSED-QUESTIONS.md` §1.1 — Moorhouse §1, Cranston–Rabern, Exoo–Ismailescu's conclusion, Polymath16; for Benda–Perles Open Problem 11.6 it settles one field of the family asked about). The novelty check is complete: nothing anywhere contradicts the value. **Naming is a first-class deliverable** (the release from the write-up deferral covers this result only). Blockers: FS-27 §2 (read `[Polymath16wikiR2]`, which attempts Theorem B's argument; give Theorem A's headline form a worked example), `[Johnson2006]` (the Geombinatorics digital archive) and `[Fischer1990b]` (interlibrary loan, Congressus Numerantium 72) — the request list is the library's notes | none; ranked on the publication trigger | 4–6 days writing; no compute, no new Lean | minted 2026-09-08 on Kooshi's trigger |

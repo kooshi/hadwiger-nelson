@@ -1,3 +1,15 @@
+> **SUPERSEDED 2026-09-12, and by its own mission rather than by abandonment.** This brief asked for a
+> lattice with ~30 points on the circle `|p|² = (7+√33)/3`. That target is **retired**: the count is free by
+> construction and is the one coordinate on which good and bad objects agree, while the quantities an object
+> pays for differ 30-fold. What replaced it, and the answer to the question this file actually asked, is in
+> **`plans/M63-phaseH2-the-family.md`** — read §1, §6l and §6k. In short: the rotations are a classified
+> one-integer family which *is* the spindle construction; the obstruction is `[Parts2020a]`'s **coordinate
+> shape**, not the count; **~30 on this very circle IS arithmetically reachable** (36 at denominator 12) and
+> is **0 under his shape as a theorem**; and a five-chromatic object was built at another member of the
+> family, in a 6-open field. The live continuation is `plans/M63-phaseH3-drop-the-shape.md`. **Kept, not
+> deleted**, because its §5 prior-art gate, §7 generator-image trap and §8 falsifiers were all load-bearing
+> and three of them fired.
+
 # Find the base — the next session's only mission
 
 *Written 2026-09-12 at Kooshi's instruction: **"the next session will be dedicated to finding our new base,
