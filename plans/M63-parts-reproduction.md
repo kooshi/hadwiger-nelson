@@ -154,6 +154,7 @@ phase D's expansion rule, that the cost argument never touched.
 | C-3 | every hyperedge re-verified by an independent rebuild; no hyperedge contains another | not done | correction sets are verified by construction only | C2 |
 | C-4 | hyperedge counts carry their enumeration | done | `Count(…, "harvested")` | — |
 | C-5 | the cheap statistics: non-isolated count, component profile, `α`, the `2^m` induced-matching bound, `α + \|free\|` test | **not done — NO LONGER A DROP** | they have a second role my drop argument missed (Poros card 8): the free-vertex count, the small-degree hyperedge counts and `α` of the degree-2 graph **are** §5.10's numerical indicators, and §5.6's third strategy ranks candidate expansions by them — the only published device that ranks an expansion, which is what D needs. Their *sizing* role is still superseded | **D** |
+| C4-1 | the joint minimum over his two accumulators, both halves deletable (phase C4) | **partly — bracketed, not closed** | two runs of ~4.9 h each, neither reaching an optimum: C4a (the record's frame) **504 ≤ \|M\| ≤ 509 vertices**, C4b (the second frame) **500 ≤ \|M\| ≤ 577**, both from the MaxSAT bound over harvested correction sets, `minima 0`, `undecided 0`. The problem is a minimum hitting set over **153 free atoms** (423 of 576 are forced by phase 1, and his record keeps 85 of the 153, against ≥ 80 proved) | D (collect the verdicts from the checkpoints) |
 | D-1 | enumerate the whole optimal level (§4 D) | done | `reduce_stage`, `exhaustive-level` | — |
 | D-2 | dedup by the input group before verifying | retired for type M | `Aut(W ∪ C)` is trivial (S.2 #1); the 12-fold multiplicity is `Aut(A)` with the companion moving, not a symmetry of the stage, so images must still be verified. D may measure "propose images as candidates" on the `A412` level | D (measurement only) |
 | D-3 | `A = ⋃{M}` | done | §R1, S.2 #2 | — |
@@ -223,11 +224,15 @@ Acceptance:
   rungs closed; `Y` re-verified (sampled, stated).
 - [ ] C3: the M6B 375 level set on `v403e2106` with `S141`, predictions committed first; the "M6A&B"
   column's meaning decided or reported undecided with its numbers.
-- [ ] C4: the joint stage's positive control (the 509 returns exactly itself — a derived expectation, not
-  a hope); the joint run on `A412 ∪ ρ·g⁻¹(A166)` to a closed optimum, predictions committed first,
-  checkpointed; **if ≤ 508 vertices, stop and report to the product owner the same hour.** C4b, the
-  second relative frame (the joint problem has at most two, and only one holds the record) — approved,
-  running after C4a closes, with a report first if C4a passes three hours or does not close.
+- [~] C4: the joint stage's positive control fired in its strongest form — the 509 returns exactly itself
+  (508 critical atoms, exactly one minimum, 0 droppable, §R2.2). **The two joint runs did NOT close.**
+  After 4.9 h each (2026-09-11 22:47, the machine, five heavy jobs sharing the machine) neither has found a
+  single minimum, so the result is a rigorous bracket and not a value: C4a, the frame holding the record,
+  **504 ≤ \|M\| ≤ 509 vertices**; C4b, the second relative frame, **500 ≤ \|M\| ≤ 577**. The `≤ 508` stop
+  rule never fired and stays armed in both runs. Both checkpoint every 30 s and resume exactly, and were
+  left running; collecting the verdicts is phase D's first act. C4b was launched four minutes after C4a
+  rather than after it closed (§A.2 #2), so the two ran concurrently and the three-hour report did not
+  happen. Full scoring: `plans/M63-phaseC-joint-stage.md` §R2.
 - [ ] C5: `CrossLaw` controls fire; the L451 stage fingerprint is unchanged under the explicit law.
 - [ ] The audit rows assigned to C updated in place here; §R2 written; Poros's record committed.
 
@@ -1178,10 +1183,10 @@ committed, the announcement, the launch — then everything else while the run g
 | P-C1.2 | PySAT's `cadical153` honours `interrupt()` | it raises `NotImplementedError('Limited solve is currently unsupported by CaDiCaL')` — from inside the timer thread, where the exception is printed and swallowed while the ask runs on | **FALSIFIED, and worse than its own falsifier.** The registered falsifier was "the 1 ms wall returns unsat"; the truth is that the wall does not return at all. Replaced by a conflict-budget loop (R2.3) |
 | P-C4.0 | the joint stage's asks rise above the frozen-companion stages but **stay under a second** (Poros, 0.60) | quiet, min of three, CPU: full working graph **5.73 s** refusing, the record's own selection **8.74 s** refusing, the record minus one atom 0.008 s; phase-1 population 0.170 s colourable / **1.758 s** refusing against 0.006–0.009 / 0.02–0.108 | **FALSIFIED on the expensive population** (16–88× and seconds, not tenths), **met on the cheap one** (20–28×, still under a second) |
 | P-C5.1 | the explicit law reproduces the L451 fingerprint and the record's 2,442 edges at no measurable cost | fingerprint `0700718c70107448b8658a630c5456ee` unchanged; the record stage rebuilds at 509 / 2,442; 126 ordered cross edges on the base under both laws | **met** |
-| P-C4.1 | the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is exactly 509 vertices (planner 0.60, Poros 0.65) | *pending — C4a* | *pending* |
-| P-C4.2 | if 509, every minimum found splits as (374, 136) | *pending — C4a* | *pending* |
-| P-C4.3 | phase 1 < 60 s; the bound closes within 90 minutes; ≥ 1,500 correction sets | phase 1: **85 s** (576 asks) — outside the registered 60 s | *partly scored; the rest pending* |
-| P-C4.4 | C4b, the second relative frame, also closes at 509 (0.5, no higher) | *pending — C4b* | *pending* |
+| P-C4.1 | the joint minimum over `A412 ∪ ρ·g⁻¹(A166)` is exactly 509 vertices (planner 0.60, Poros 0.65) | no optimum after 4.9 h; rigorous lower bound **503 atoms = 504 vertices**, incumbent upper bound 509 (the record is a selection of this working graph and refuses) | **not decided** — window {504, …, 509}; the falsifier (≤ 508) has not fired |
+| P-C4.2 | if 509, every minimum found splits as (374, 136) | `minima 0`: no minimum exists to split. Phase 1 splits the forced atoms 333 L / 90 S and the free atoms 78 L / 75 S | **not decided**, and undecidable while P-C4.1 is |
+| P-C4.3 | phase 1 < 60 s; the bound closes within 90 minutes; ≥ 1,500 correction sets | phase 1 **85 s** / **106 s**; the bound has not closed in **4.9 h**; correction sets **1,966** / **1,846** | **FALSIFIED**, two clauses of three — and decided now: no later verdict can rescue the 90-minute clause |
+| P-C4.4 | C4b, the second relative frame, also closes at 509 (0.5, no higher) | no optimum after 4.8 h; lower bound **499 atoms = 500 vertices**, no upper bound below the working graph's 577 | **not decided** — window {500, …, 577} |
 | P-C2.1 … P-C2.7 | the S166 and L451 audits, the shading, Tables 5–7, `Y`, the open rungs, the involution class | *pending — C2* | *pending* |
 | P-C3.1, P-C3.2 | the M6B level and the "M6A&B" column | *pending — C3* | *pending* |
 
