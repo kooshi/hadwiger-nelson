@@ -595,7 +595,9 @@ here; it is the whole diagonal obstruction.**
 > seconds, which replaces every softer objective this phase has had.
 
 **Controls, since the enumeration is now load-bearing.** All 19 models read back and verified proper against
-the agent's own **272,262-edge** base list, not the CNF. **Control A (completeness):** dropping any single
+the agent's own base unit-edge list, not the CNF. **(That list was first described as
+"272,262 edges"; corrected — it is a **272,262-entry list covering 272,232 distinct base unit edges plus
+30 redundant repeats**. See §6h.)** **Control A (completeness):** dropping any single
 blocking clause returns **exactly** the dropped pattern — tested at indices 0, 7, 18, SAT and identical each
 time — and all 19 together leave UNSAT. **Control B (the paired form):** a **planted** pattern built by
 shifting two entries of a real one is **refused**, while the **faithful** real pattern is **accepted** — so
@@ -654,6 +656,31 @@ crashed and the SAT answers are self-certifying, but *"it probably did not matte
 verification therefore re-runs from a **clean directory**, and its **first act is to re-derive the lattice
 and the entire unit-edge set from scratch and compare set-wise** against what was built earlier. **If those
 disagree, everything in §6e–§6g is void.**
+
+**The void-check came back CLEAN, and it is reported as a finding rather than a formality:** re-derived from
+scratch in a directory where `import struct` resolves to the standard library, **25,567 lattice points and
+272,232 unit edges — the identical SET**, compared element-wise rather than by count. **The shadowing hazard
+changed nothing. Nothing in this phase is void.**
+
+**And a discrepancy the product owner held on, resolved from the artifacts.** Two of the agent's messages
+gave the edge count as **272,262** and **272,232** — differing by **exactly 30**, which is the circle count,
+the diagonal-edge count and the norm-1 shell size in this object, so the last coincidence to wave through.
+**The fault was in the prose and the 30 was genuinely structural.** `edges.txt` holds 544,590 lines:
+`272,232` base + `272,232` copy + `126` cross. **Thirty of the cross lines are the redundant ones** — those
+whose copy endpoint is the shared centre, written `(i, centre)` — and those `i` are exactly the 30 norm-1
+points, so `{i, centre}` is *already* a base unit edge. **That is why the difference is 30 and why it is the
+shell count: it IS the shell.** A properness filter of "both endpoints below `n`" therefore collected
+272,232 base lines **plus** those 30, giving a **272,262-entry list over 272,232 distinct edges** (15 with
+`i < centre` so the ordered tuple matches the base line, 15 with `i > centre` so it is reversed — which is
+also where a 15-versus-30 split seen earlier came from). Compared as **unordered pairs**, the distinct set
+is exactly 272,232 and identical to the base edge set **in both directions**, so nothing missing and nothing
+spurious; the properness check tests `colour[a] == colour[b]`, which is order-independent, so it is
+unaffected and in fact covers every base edge at least once plus 30 re-checks.
+
+> **The transferable lesson, and it is small and general: a LIST LENGTH is not a SET SIZE, and the gap is
+> exactly the redundancy you designed in.** What made it findable was **printing both numbers from the
+> artifacts instead of restating them** — the same discipline that broke the false "exactly 10" invariant
+> two hours earlier.
 
 **A control of its own that had gone blind, caught by the two-sided form and repaired.** With half the
 off-diagonal constraints removed, **0** pairs passed — the same as with all of them — so the difference was
