@@ -2322,3 +2322,38 @@ frame story dies and the companion rule needs re-stating.
 **And the correction to carry:** P-D16's line should read **two causes ruled out, one live, one
 residual** — not "three causes, unsplit", which is how it stands in §R3.12 and §R3.13. The
 narrowing holds whether or not anyone runs the test.
+
+### R3.14 — The sweep, complete at 89, and three more predictions scored
+
+*Supersedes §R3.13's interim counts. `data/m62/m63-map-A412.json`, 1,801 s on 12 workers.*
+
+| | menu | shoulder (degree 3) |
+|---|---|---|
+| `yes` / `no` / `unknown` / `not_run` | **0 / 63 / 0 / 0** | **0 / 26 / 0 / 0** |
+| helpful rate | **0.0** | **0.0** |
+| `{M}` grew | **1 of 63** (0.0159) | **0 of 26** |
+
+**The admission-threshold question is answered, and the answer is symmetric.** Poros's card 9 had
+the shoulder replace the straw `no_filter_random` arm precisely so the gate could be tested *at* the
+cut rather than far below it: 26 complete just below against the eligible set just above. **Both
+sides read zero.** So lowering his cut from 4 to 3 admits nothing useful — **his threshold is not
+demonstrably misplaced**, and equally the comparison cannot discriminate, because a comparison
+between two zeros has no power. That is the honest reading: the gate question is *answered for
+single orbits* and *untested as a ranking question*, and the reason is the same degeneracy that
+killed the map's second purpose (§H2.8).
+
+- **P-D15 CONFIRMED.** The two excluded `√5` orbits were predicted inert — neither lowering `|M|`
+  nor growing `{M}`. `(18,0,0,6)` sits in the shoulder block and **all 26 shoulder candidates are
+  inert on both outcomes.** So the first reduction ever run against material his own base excluded
+  returns nothing, which closes phase F(g)'s radius question at the object level as well as by the
+  filter argument. *The value was the closure, not a find* — exactly as registered.
+- **P-D3b FALSIFIED**, final: the density is degenerate at zero over the complete menu.
+- **P-D3 UNSCOREABLE** on this map, final: every ranking ties.
+- **P-D12 NOT DECIDED**, final: both halves read zero on the primary.
+
+**What the complete negative is worth, stated so it is not read as a failure.** It closes
+single-orbit growth from `A412` over a **closed menu under a stated reading**, with every
+per-entry invariant firing on all 89 and **not one undecided ask**. G21's rule — a negative measures
+its enumeration — is satisfied unusually well here: the enumeration is complete, the instrument was
+calibrated against a known positive, and the one candidate that did grow proves the secondary
+outcome was observable rather than structurally absent.
