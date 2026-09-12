@@ -2357,3 +2357,22 @@ per-entry invariant firing on all 89 and **not one undecided ask**. G21's rule �
 its enumeration — is satisfied unusually well here: the enumeration is complete, the instrument was
 calibrated against a known positive, and the one candidate that did grow proves the secondary
 outcome was observable rather than structurally absent.
+
+### R3.15 — The edge census COMPLETED, superseding §R3.13's "wedged at 1,222"
+
+**1,831 individually critical edges, 609 individually removable, 2 undecided**, of 2,442.
+`data/m62/m63-edge-phase1-509.json`.
+
+- **Floor on the exact edge minimum: `e_min ≥ 1831`**, against the published upper bound of 2,406
+  and the original 2,442. A **floor**, never a record and never an object.
+- **The 2 undecided asks do not weaken it.** An undecided ask is recorded as *not* critical, which
+  can only *shrink* the count, so the floor is understated rather than overstated — the safe
+  direction, and the reason the bound survives them.
+- **Poros's forced inequality holds: `calibration-holds`, 1831 ≤ 2406.** Installed as an assertion
+  before the number existed, so a violation would have stopped the run as an instrument fault
+  rather than being read as a discovery.
+- **Its registered fork resolves on the low branch, by a wide margin.** 609 edges are individually
+  removable against the 36 `[deGreyParts2023]` report as jointly removable. So they missed a great
+  many individually removable edges, **the exact minimum lies in a 575-edge window `[1831, 2406]`,
+  and the gap is the hitting set's to close** — it does not collapse on its own, because
+  individually removable is not jointly removable. Poros's 65% call, correct.
