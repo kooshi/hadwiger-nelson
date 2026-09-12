@@ -1846,6 +1846,10 @@ reconciling, **UNSAT unpinned in 1,250 s**, a **3.68 GB** LRAT proof replayed in
 colourability controls firing. The unpinned leg costs **1,250 s here against 109 s on the full
 2,442-edge object** — the right direction, since an edge-reduced graph is a tighter instance.
 
+**Refuted twice, independently.** A second unpinned run of the same DIMACS in its own process with
+**no proof logging at all** returned UNSAT in **20 m 33 s**, which also answers the question it was
+started to answer: writing 3.7 GB of proof is **not** the bottleneck — the instance is simply hard.
+
 **Until the Lean kernel certificate lands (phase F) the honest words are "a certified refusing
 object below the published edge count, not yet a record"** (§S.1 #4).
 
@@ -1861,10 +1865,27 @@ both ways — the frozen configuration passes, a configuration with one paramete
 by name. The freeze states **in advance** what happens if the held-out map is signal-free: the rule
 is then scored by one bit on one held-out row and no map stands behind it.
 
-**`[RUNNING]`. Iteration 1 returned `unchanged`**: three candidates ranked by the rule, each asked as
-a decision at 374 vertices, all three refused — `(6,2,8,0):12`, `(0,0,2,2):6`, `(10,0,0,2):6`, at
-107 s, 84 s and 62 s. The per-candidate cost at this accumulator is **four times cheaper** than the
-A412 sweep's 249 s mean.
+**The frozen rule does not reach 374, through five iterations and its own set-valued rung.**
+Iterations 1–3 each ranked 29 single-orbit candidates and evaluated the top three — all refused at
+the target, at 107 s, 84 s and 62 s for the first three and cheap resumes after. At the third stall
+the escalation fired exactly as frozen and `many_then_trim` proposed **48 vertices across six
+orbits**; that too returned `no`, in 139 s, with the bound closing at 374 and 375. **Clause 2(b) is
+NOT MET by the frozen rule.**
+
+**But the apparatus is sound, and that is what the diagnostic settles.** The six-orbit set contains
+the missing halves of `(0,0,2,2)` and `(0,0,2,6)` but **not** `(0,0,0,4)` and `(0,0,6,6)`, so it is
+not a superset of his recorded move and its negative could not distinguish a *ranking* failure from
+an *apparatus* failure. Run as one candidate through the same `sweep_candidate` the rule used, **his
+own four orbits (30 vertices) reach `w* = 373` — `|M| = 374` vertices — with zero undecided asks**
+(`tools/parts_diag.py:hismove`, `LB 373 = w* 373`). So:
+
+- **our state, companion and stage reproduce his recorded step exactly**, and every negative measured
+  on this half is a fact about expansion rather than about our pipeline;
+- **the frozen rule's failure is a RANKING failure**, and it is localised: the rule had the material
+  — four of his six chosen orbits sit in the menu it ranked, and two of them are in the set it
+  proposed — and did not assemble his four;
+- **a positive provably exists at this state**, so if the held-out single-orbit map is also
+  signal-free, the reading is the strong one Poros named: *singles are inert where a four-set works*.
 
 **The look-ahead proxy is degenerate too, and that is a second finding rather than a repeat of the
 first.** It reads **0 freed of 336 necessary atoms** on every single orbit tried — including on an
