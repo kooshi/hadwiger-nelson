@@ -511,7 +511,7 @@ confidence with the one fact that would change it.*
 | D1 | **Enumerate rotations by `cos θ` over the base's lines** | re-sieve radicands by radius pairs, as phase G's acceptance says | the sieve keys on square classes, and one class provably holds several angles (§1.2, demonstrated on the record's own class); the census keys on the angle, needs no squareness tests, costs 8.5 s for three bases against 45.6 s for one sieve, and its output is exactly what `CrossLaw` consumes | **high** — it reproduces the committed law's edge count exactly on two bases (126 = 126, 66 = 66) |
 | D2 | **The 2-adic wall is an eliminator, not a preference** | use it to sort a candidate list, as FS-30's stub reads | a rotation whose field keeps the wall has a 4-colourable plane; sorting it lower still spends a solver call on it. As a filter it removes 20 of 26 candidates for microseconds | **high** for the mechanism (kernel, Theorem B at `K`); **medium** for the general field statement, which rests on G35's stated gate — closing that gate promotes this from "predicted SAT" to "proved 4-colourable" |
 | D3 | **6-openness is a strategic tag, not a filter** | apply all three of FS-30's criteria as co-equal rankers | 6-openness is what FS-6 needs for a **χ ≥ 6** gadget; this phase's product is a smaller **5-chromatic** graph, and filtering on it would discard the record's own rotation (`K(√15)` is 5-sealed). Applied as a tag it produced a real finding anyway (§3.4 #2) | **high** |
-| D4 | **Implement the `cos ∉ K` law in this phase** | defer it until a `cos ∈ K` rotation refuses, as M63 §S.5 decided | §1.4 turns it from an open derivation into two linear equations. The reason to do it now is §3.4 #1: the `cos ∈ K` list on his lattice is **one** new class, which is thin ground for a phase | **medium** — if the four sign variants of that class all go SAT quickly, this becomes the phase's main line rather than a second act |
+| D4 | **Derive the `cos ∉ K` law now (§1.4, done) and implement it only if the six `cos ∈ K` candidates all screen SAT** | (a) implement it unconditionally this phase; (b) defer the derivation too, as M63 §S.5 decided | **Revised 2026-09-11 after the advisor's correction (§11).** The derivation is written and costs nothing more. Implementing it is a different purchase, and his point stands: every construction anyone has built lives in the `cos ∈ K` family, and nothing yet shows a `q ≠ 0` rotation carries two kinds at one angle. **But the family is not empty** (§11.3), and the question is a census costing minutes (P-G6), not a derivation — so the trigger is P-G6's count, not a hunch | **medium-high** — if P-G6 returns any `cos ∉ K` angle with ≥ 2 kinds *and* a wall-breaking radicand, this becomes the phase's main line |
 | D5 | **Run filter 4 on the rotations filter 2 already condemned** | skip them, since they are proved dead | 20 cheap SAT calls buy the wall theory's only end-to-end negative control on new ground. A check that only ever confirms what it already believes is not a check | **high** |
 | D6 | **Standard arena radius = max(1/\|sin θ\|, 2.44)** | use `1/\|sin θ\|` exactly, as the acceptance says | the bound guarantees the **seam** is complete, not that the halves are big enough to force; 2.44 is the radius at which this lattice provably contains a known 5-chromatic object, so it keeps every rotation comparable with a known positive | **medium** — if ask cost at 2.44 proves prohibitive for some angle, drop to the bound and say so in the verdict |
 | D7 | **The census never enumerates a level set** | reduce each surviving rotation to its minimum and count minima, as the reduction stage does | measured, 2026-09-11: 188 s to the optimum against 79+ minutes and counting to enumerate the level on one instance. The census asks "does this refuse", which is one call | **high** |
@@ -720,3 +720,92 @@ which is exactly why its quantifiers have to survive a referee.
   Theorem B four-colours everything. **The cost ranking and the arithmetic ranking therefore agree**: the
   census is cheap exactly where it is worth running, and per-rotation base sizing is a selection instrument
   rather than an overhead. One concrete instance from §3.3: the rank-5/6 angle needs radius **1.02**.
+
+---
+
+## §11 — The advisor's correction, and an independent agreement worth recording
+
+*Poros, 2026-09-11, withdrawing his own card C4 and replacing it. He derived, from the code rather than
+from this plan, the same necessary condition §1.1 derives from the cross-edge identity — and the two
+instruments were then compared. **They agree exactly, from different code paths**, which is the strongest
+evidence either of us has that the census is right.*
+
+### 11.1 — The same condition, twice, by two routes
+
+He argues: a radius pair `(a, b)` can carry a type-M cross edge only if **`ab` is a square in `K`**, since
+`q = 0` forces `p² = ab` with `p ∈ K`. That is §1.1's collinearity condition stated on radii instead of on
+points — *`v = λu` with `λ ∈ K`* and *`ab` a square in `K`* are the same requirement — and the sieve at
+`tools/typem.py:181` never tests it, working from the radius spectrum alone.
+
+**Where the two instruments overlap, they return the same numbers:**
+
+| quantity | his route (radius pairs + `k_is_square`) | this plan's route (lines of the base) |
+|---|---|---|
+| the record's class: stored families → edge-capable | 7 → **3** | 7 → **3** |
+| of those, how many are `cos = 7/8` | **2**, the third a different angle in the same field | **2**, the third near `0.8039` in the same field |
+| `ρ₁₅`'s 126 ordered cross edges, decomposed | 60 centre (radius 1) + 36 conjugate pair `(17 ∓ √33)/6` + 30 at radius 4 | 60 centre + 2 × 18 off-diagonal + 30 diagonal |
+
+**The decomposition matches digit for digit**, and both were checked against control c5.1's committed edge
+count. Two independent derivations, two implementations, one answer.
+
+His complementary counts over the stored file — **131 of 1,058 stored families are edge-capable (12.4%),
+and 32 of 150 classes clear the "≥ 2 families" bar** — sit consistently beside §1.2's (59 of 150 classes
+have ≥ 1 collinear family, 91 have none). **His estimate that "412 admissible classes" is nearer 90 once
+families are counted correctly belongs in any write-up**, and supersedes the number FS-30 carries.
+
+### 11.2 — What it retires: FS-30's second lead is dead
+
+FS-30 and M62 §R1 both carry: *"The record's own rotation admits SEVEN radius families and Parts uses TWO
+… Five unused cross-edge kinds sit at the rotation the record is already built on."* **There are zero
+unused kinds at `ρ₁₅`.** The seven are seven radius pairs sharing a *field*; three can carry an edge; two
+of those are `ρ₁₅`'s own, and Parts uses **both**. The "cheaper lead in the same file" that FS-30 offers as
+*"days, not weeks"* does not exist.
+
+**Scope of the kill, stated narrowly:** what dies is the *seven-families* framing and the five-unused-kinds
+sentence. The **orbit-level** lead is untouched and still live — more orbit pairs to connect *within* the
+two realized kinds, M62 §R20's `(0,0,2,6) + (24,0,0,0)` at 18 cross edges and the rest. Only the claim
+that unused *kinds* exist is false.
+
+### 11.3 — Where I do not follow him, and it changes only the schedule
+
+He concludes that the `cos ∉ K` law *"is not reachable from the sieve's own derivation"* and would not be
+implemented *"until something shows it is non-empty"*. **The first half is right about the sieve and the
+second half is wrong about the family**, and the distinction matters enough to write down:
+
+> **The `cos ∉ K` family is provably non-empty.** For *any* pair `u, v` with `conj(u)v = p + iq`, `q ≠ 0`,
+> the rotation `ρ = (k + i√D)/w` carries that pair at unit distance; its cosine is
+> `(kp + q√D)/ab ∉ K` precisely because `q ≠ 0`. Such pairs are the overwhelming majority on every base.
+> What is **unknown** is whether any single such rotation carries **two kinds**, which is what makes a
+> type-M construction possible.
+
+So this is not a derivation question and not an emptiness question — it is a **census** question, priced at
+minutes (P-G6), and the honest schedule is his in effect and mine in reason: **derive now (done, §1.4),
+implement when P-G6 says the set is non-trivial.** D4 is revised accordingly.
+
+### 11.4 — Two risks he found in the input, both adopted
+
+1. **Neither rotation file is reproducible from committed code.** The keys `type_m_admissible`,
+   `record_rotation` and `max_families` appear nowhere in the repository outside the JSON, and the
+   committed `cmd_rotations` cannot reproduce even the sibling file (it would write
+   `classes_leaving_K = 1336` where that file says 2042). **The phase's input is an orphan artifact.**
+   Consequence, adopted: **treat both files as provenance, never as data, and tune no threshold against
+   them.** The re-sieve is happening anyway (§9 item 1), and it should carry its own regeneration command.
+2. **A float sign test sits inside a verdict**: `typem.py:185`, `if kfloat(D) < 0: no_rotation += w`, on an
+   exact `K` element, while the artifact's own `claim_scope` states that floats appear *"only in the radius
+   cut and in sort keys"* — so **the claim_scope is wrong**, and the error direction is silent and drops
+   candidates. `radius_families` canonicalises with `kfloat` too.
+   **And the same hazard is in my own census**, named here rather than left for someone else to find: it
+   cuts `|cos| < 1` with `abs(kfloat(c)) >= 1.0`. The exact test is the sign of `1 − c²` in `K`, decidable
+   exactly, and the committed tool must use it. A float may propose; it may never decide.
+
+### 11.5 — The re-sieve gets a second job for free
+
+Adopted into §9's item 1: the re-sieve on the §5.6 lattice should, in **one pass**, emit **both** units —
+
+* **rotations**, grouped by the exact cosine `c = k/p`, with their true (edge-capable) kind counts: the
+  unit for the geometric census and for `CrossLaw`;
+* **radicand square classes**, with the wall and 11-inertness: the unit for the arithmetic ranking, because
+  the wall and 6-openness depend only on the field and not on the angle.
+
+**A class is a field, not a rotation** — his sentence, and it is the cleanest statement of §1.2's whole
+finding. The original sieve cost 45.6 s; this costs the same and answers both questions.
