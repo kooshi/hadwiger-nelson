@@ -284,6 +284,63 @@ prediction for an uncounted module does not.
   Gate A buys the diagonal family and says nothing about the rest.
 - **The 4-colour filter fires one way only.** A member surviving gates A–D is **un-eliminated, not
   alive** — one argument against it can no longer be made, and nothing more. **Silence is not evidence.**
+- **"DEFEATS THE FOUR-COLOUR CERTIFICATE" IS RETIRED AS A SIGNAL — it is automatic** (screening agent,
+  2026-09-12, derivation plus measurement). The certificate's colouring is a group homomorphism into a
+  four-element field of characteristic two, and a free circle is `t ×` the unit shell, so **every circle
+  point carries the centre's residue whenever `t` is even** — and a colour twist cannot repair it, because
+  the shared centre pins the twist. Measured: the circle residues all equal the centre's, and **0 of 24**
+  twists work at either prime. **The record itself has `t = 2`, so its certificate is defeated for the
+  same free reason.** Every value in the phase's "distance to a colourability proof" table — the record's
+  30, the colourable reference's 18, stage 1's 8 — is therefore a reading of a quantity that is free
+  wherever the circle is free. Anything earlier in this file, in the mission brief, or in any report of
+  mine that offered "the certificate is defeated at both primes" as evidence **was offering nothing.**
+
+---
+
+## §6a — What to measure instead: the NON-FREE residual (added 2026-09-12)
+
+With the certificate signal retired (§6) and the circle count demoted (§2), the screening agent took the
+cross-edge decomposition apart rather than celebrating that it reproduced the record's, and what is left is
+the first quantity in this phase that is not free.
+
+**The `126 = 60 + 36 + 30` decomposition, by how much of it is forced:**
+
+| part | count | forced by | is the cosine involved? |
+|---|---|---|---|
+| centre edges | **60** | `2 × 30` for **every** rotation — the shared centre and the unit shell | **no** |
+| diagonal | **30** | the free circle, gate A | **no** |
+| off-diagonal | **36** | nothing — this is the law-exposed part | **yes** |
+
+So 90 of the 126 are a **free two-sided control** and only 36 carry information. All 126 were re-derived by a
+second independent implementation: **0 invented edges**, so the law is sound *and* complete at the new
+parameter. **And the two objects genuinely differ where it counts:** the record's 36 sit on **one**
+conjugate radius pair, `ρ₆₃`'s on **three**, including a rational pair the record has no analogue of.
+
+**`n = 20` demotes the circle count by instance, not by argument.** It has **twice** the record's circle
+(60 points) and its decomposition is `120 = 60 + 0 + 60` — **zero** off-diagonal cross edges. Its entire
+cross structure is a centre star plus a perfect matching, and a matching carries no colour pressure (G14).
+**The quantity this phase was built to maximise points the wrong way**, and this instance also confirms the
+126 is not an artefact of one pipeline.
+
+**The proposed objective, replacing the circle count:** the **off-diagonal share of the monochromatic
+cross edges** — the part of the certificate's defeat that is *not* free. On the phase's own
+distance-to-colourability metric `ρ₆₃` scores **54** against the record's 30 and stage 1's 8; but the
+record's 30 are **entirely** the forced diagonal kind, losing not one off-diagonal edge, whereas **24 of
+`ρ₆₃`'s 54 are off-diagonal.** So `ρ₆₃` is the first arena in this phase whose certificate defeat is not
+free, and 24 is the number to carry forward. **Caveat, stated by the agent that proposed it:** on the only
+positive instance anyone holds, that metric's leader is the free quantity, so the new objective is a
+better-motivated guess and not a validated one.
+
+**Prior art on the field question: none, and structurally none.** In coincidence-site theory a coincidence
+rotation of a module is by definition `α/ᾱ` with `α` in the module's **own** ring, so it lies in the
+module's own field and **generates no extension at all** (the square lattice's lie in `ℚ(i)`, the
+hexagonal's in `ℚ(√−3)`). "Which extension does this rotation adjoin" is only a meaningful question when
+the rotation is **not** a coincidence rotation of the base — **which is exactly the type-M case**, and it
+is why the rotated copy meets the base in one vertex and the construction needs cross *edges* rather than
+shared points. So that literature gave a shelling formula and could not have given a field classification,
+and **the field half of this phase is ours with no citation to fear.** The next room for it is not
+crystallography but rational points on the norm-one torus (the Pell conic); the 6-openness half rests on
+this project's own sieve and has no literature at all.
 
 ---
 

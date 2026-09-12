@@ -538,8 +538,23 @@ abstract: §2 "Analysis" construction passages, §3 "Synthesis" in full includin
 and "Generalization options", Table 1, and §4's counterexample. **Everything below is from the paper's own
 text.***
 
-**Q1 — which rotation does it actually use?** The string `arccos` occurs **exactly twice**, and **neither is
-`31/32`**; the strings `31/32` and `127/128` occur **zero** times.
+**Q1 — which rotation does it actually use?** The token `arccos` occurs **exactly twice** in the extracted
+text, and **both occurrences are accounted for below — so there is no third angle anywhere in the paper**,
+and in particular `arccos(31/32)` is not in it.
+
+> **The sound ground and the unsound one, recorded because the unsound one was mine.** My first report gave
+> two grounds, and one of them is worthless: I also argued that *"the strings `31/32` and `127/128` occur
+> zero times"*. **That is not evidence.** `pdftotext` renders this paper's stacked fractions as debris — the
+> family formula comes out `arccos 12m1 m` and the explicit angle as `exp(i 2 arccos 6 )H` — so the same
+> search returns **zero for `5/6` and `7/8` as well**, and `5/6` **is** in the paper as its only explicit
+> angle. A fraction search on this PDF cannot distinguish absent from present. **The `arccos`-count argument
+> is sufficient on its own** and is the one to rely on: two occurrences, both identified, therefore no third
+> angle whatever the fractions render as. Caught by the product owner re-running my own extraction.
+> **This is the milestone's recurring defect — an absence measured by an instrument that cannot see the
+> present case — and here it was the gate's own author who shipped it, after writing §PA.7 about exactly
+> that.** It cost nothing only because the second ground happened to be the strong one. The habit that would
+> have caught it is one line: **before believing a zero, run the same query against a case you know is
+> present.**
 
 1. **The general family formula** (§3): `ρ(r) = exp(i·arccos( (m₁² + m₂² − r²) / (2 m₁ m₂) ))`, with the
    side condition `|m₁ − m₂| < r < |m₁ + m₂|` and `r` the length of the rotation edge. **This is the law of
@@ -583,3 +598,80 @@ survives in another:
 - **Survives:** the same at *unit* distance is still not known, by his own statement two years earlier and
   nothing found since. **The novel object, if this phase produces one, is a unit-distance construction at a
   rotation other than `ρ₁₅` — and its field, not its angle, is where the unworked ground is.**
+
+---
+
+## §PA.11 — What lives only in this gate's context
+
+*Written at the product owner's ask, because this file is the only memory of the gate that crosses to the
+next reader, and "I looked there and it was empty" is a finding they should not have to re-buy.*
+
+### The question that is now the unworked ground: does the coincidence-site literature name the field a rotation generates?
+
+**No — and structurally it cannot, which is better news than a missing citation.** In that literature a
+coincidence rotation of a module `M` is by definition one with `M ∩ RM` of finite index, and for a planar
+module it is parametrised as `R = α/ᾱ` with `α` **in the module's own ring** — so **a coincidence rotation
+lies in the module's own field and generates no extension at all.** The square lattice's coincidence
+rotations lie in `ℚ(i)`, the hexagonal lattice's in `ℚ(√−3)`, and in general in the multiplier ring's field,
+which `[PleasantsBaakeRoth1996]` is described as taking to be "an order in an imaginary quadratic field" in
+the non-generic case. **The question "which extension does this rotation adjoin" is only meaningful when the
+rotation is NOT a coincidence rotation of the base — which is exactly our situation**, since
+`ρ_n ∈ ℚ(√−(4n−1))` lies outside `ℚ(√−3)` unless `4n−1` is three times a square.
+
+**So the type-M architecture is precisely the non-coincidence case, and that is why the room paid a formula
+and not a classification.** The rotated copy meets the base in almost nothing — one vertex — which is why
+the construction needs cross *edges* rather than shared points, and why the coincidence index `Σ`, which
+measures how much of the rotated copy coincides, is measuring the quantity that is trivial here. **Retire
+the CSL room for the rotation question**; it remains the right room for shelling (`[BaakeGrimm2003]`), which
+is what it actually gave us. **The field question is ours, and there is no citation to fear.**
+[derived, from the parametrisation and the `ℤ[i]`/`ℤ[ζ₆]` cases; the multiplier-ring sentence is
+`[PleasantsBaakeRoth1996]`'s as reported in the survey, **not read at the source**.]
+
+**The room I would enter next, for whoever picks this up.** Not crystallography. The field half of the
+family is the question *"which imaginary quadratic fields carry a norm-one element of denominator `2n`"*,
+whose classical home is **rational points on the norm-one torus / the Pell conic**, not coincidence theory.
+The query I would run is `norm one torus rational points imaginary quadratic field prescribed denominator`
+together with `Pell conic rational parametrisation`. **The 6-openness half has no literature at all** — it is
+this project's own sieve (G43, G37), so that half is unworkable ground rather than unworked.
+
+### A pleasing agreement neither route was aimed at
+
+Parts's only explicit angle, `arccos(5/6)`, is the family at `n = 3`, i.e. `ω₃ = (5+i√11)/6` — a **Moser
+lattice generator**. Independently, Poros's field screen **kills `n = 3`**, because `sin θ = √11/6` lies in
+`K` and then `chromaticNumber_seamPlane` four-colours the whole arena. **So the family's dead members are
+exactly the field-internal ones, and the one angle the literature writes down explicitly is one of them.**
+Two routes agreeing on a member neither was pointed at, which is worth more than either alone.
+
+### Searches that returned something I judged marginal — with the judgement, so it can be overturned
+
+| what came back | why I did not pursue it | when it would matter |
+|---|---|---|
+| *Composition of Binary Quadratic Forms over Number Fields*, arXiv:1712.00741 | Gauss composition over a base ring — the machinery *behind* the ideal ↔ representation correspondence, adding nothing to `[BaakeGrimm2003]`'s formula. **Not opened** | if the **class-group correction** for our sub-order failure (§PA.3 link 3) ever needs to be written explicitly rather than measured |
+| *Sums of squares of integer-multiple of an integral element on real bi-quadratic fields*, arXiv:2112.14489; *Pythagoras numbers of orders in biquadratic fields*, arXiv:2105.08860 | **Our field type exactly** (real biquadratic), but about representability and Pythagoras numbers, not counting | if the **existence** question over a specific sub-order comes up — these are the only papers found on our field type |
+| *Sums of integral squares in complex bi-quadratic fields and in CM fields*, arXiv:2103.05322 | Grepped by the norm-form reader: **does not mention Nagell or counting at all** | probably never |
+| Nowak, *A summation formula in algebraic number fields and applications, I*, J. Number Theory 1990 | A mean-value/Piltz-divisor result, not an exact count; **ScienceDirect blocked the fetch** | only if the *error term* in `[Schaal1965]`'s mean law becomes load-bearing |
+| Masri, *Kronecker's solution of Pell's equation for CM fields*, Ann. Inst. Fourier 2013 | **A near-miss worth recording so nobody re-chases it**: the title matches three of our keywords, but it is about CM values of Hilbert modular functions and Kronecker limit formulae, not counting solutions of `z·z̄ = α`. Its hypothesis — CM fields with elementary abelian 2-group Galois group — is satisfied by ours exactly, which is what makes it look relevant | never, on present evidence |
+| *The Gauss Circle Problem and Fourier Quasicrystals* (2024) | Surfaced only inside Semantic Scholar's **polluted** citation list for `[Schaal1965]`, so its relevance is unevidenced — **but its title is the bridge between our two literatures**, which is the one thing this gate found to be missing | if anyone wants the two lineages' actual connection rather than my observation that they have none |
+
+### Papers I decided not to open, and why — the reason is the part that carries
+
+- **Moody–Weiss, *On shelling E8 quasicrystals*, J. Number Theory 47 (1994) 405–412.** The **only published
+  shelling proof over a non-cyclotomic base** (the icosian ring, a maximal order over `ℚ(√5)`). Skipped
+  because `[BaakeGrimm2003]`'s Remark already covers our case. **Reopen it if `h(K(i)) ≠ 1`** — it is then
+  the one place a transferable technique exists, and it becomes the top fetch ask rather than the fourth.
+- **Pleasants, *Designer quasicrystals: cut-and-project sets with pre-assigned properties*** (CRM Monograph
+  Series 13, AMS 2000, 95–141). **The one title in that entire literature about designing a module to
+  specification, which is literally this phase's activity.** The text could not be obtained. **This is the
+  omission I most regret and it should be an explicit fetch ask**, flagged on its title alone — which by
+  this project's own rule means it stays flagged and uncharacterised, not dismissed.
+- **Morita–Sakamoto (1998 *J. Phys. A*, 2000 *Comm. Algebra*).** Special cases subsumed by
+  `[BaakeGrimm2003]`, but they handle the **window** — the correction when passing from the dense module to
+  an actual discrete cut-and-project set. Skipped because our bases are modules, not cut-and-project sets.
+  **Reopen if a base is ever specified by a window.**
+- **Weiss, *On shelling icosahedral quasicrystals*** (2000). Three-space, rank six. Skipped.
+- **The Hermitian-lattice thread** (Hashimoto–Ibukiyama, Schiemann, Coulangeon). Deprioritised for a
+  structural reason rather than a budget one: our form is **rank one** Hermitian over the CM field, whereas
+  that literature treats rank ≥ 2 over imaginary quadratic fields; at rank one the problem collapses to the
+  relative norm equation and hence to the ideal count already in hand. **Medium confidence, one query
+  spent** — if someone wants a fourth room, this is the cheapest one left and the argument against it is
+  mine, not a paper's.

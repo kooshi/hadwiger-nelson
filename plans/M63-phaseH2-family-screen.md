@@ -231,7 +231,190 @@ of it teaches nothing about whether their arenas refuse four colours.
 
 ---
 
-## §8 — What I did not do
+## §9 — `ρ₆₃` (`n = 16`): the independent recount, and it agrees edge for edge
+
+Run as a **control on the planner's object, not a duplicate of it.** Every number below was produced by my
+own enumeration, my own unit-edge construction and my own re-derivation of the cross-edge law.
+
+| quantity | mine | planner's | verdict |
+|---|---|---|---|
+| base points at radius **4.04** | **25,843** | 25,843 | identical |
+| base points at the exact bound `32/√63 = 4.03175` | **25,567** | — | mine cuts at the bound, hence the 276-point gap — **not a disagreement** |
+| circle points on `\|p\|² = 16` | **30**, and *exactly* `4·S₁` — no extras, no omissions | 30, each `4×` a unit vector | identical |
+| unit degree of a circle point, in the radius-5 cut (`Λ_parts(5)` = 60,691) | **min 30, max 30** | — | matches the Cayley prediction `\|S₁\| = 30` |
+| unit edges per point | **10.647** (272,232 / 25,567) | 10.65 | identical |
+| cross edges | **126 = 60 centre + 36 off-diagonal + 30 diagonal** | 126 = 60 + 36 + 30 | identical |
+| of those, independently re-derived | **126 / 126, 0 invented** | — | see below |
+
+**The re-derivation did not use `CrossLaw`.** For every claimed edge `(u,v)` I recomputed, from the raw
+coordinates, the collinearity condition `q = u_x v_y − u_y v_x = 0` and the length condition
+`|u|² + |v|² − 2·cos·(u_x v_x + u_y v_y) = 1`. Both are pure `K` arithmetic — **no `√7` is ever
+evaluated**, because the sine cancels once `q = 0` — so an invented edge could not survive. All 126 pass,
+including the 36 that are law-exposed and the 90 the planner correctly identified as free.
+
+**And the law is complete, not merely sound.** `|u − ρv|² = 1` expands to `c·p − σ√D·q = k` with
+`p, q, k ∈ K` and `√D ∉ K`; since `{1, √D}` is a `K`-basis of `K(√D)`, the two components must vanish
+separately, forcing `q = 0` and `c·p = k`. So **no cross edge can be missed either**, and the 126 is the
+complete count at any radius.
+
+---
+
+## §10 — Why `126 = 60 + 36 + 30` at two different angles is mostly forced, and where it genuinely differs
+
+Reproducing the record's exact decomposition is the single most flattering thing a derived law can output,
+so it was taken apart rather than celebrated.
+
+- **The 60 centre edges are forced for every rotation in the family.** A centre cross edge needs
+  `|0 − ρv| = |v| = 1`, a condition in which **the cosine does not appear at all**. So it is `2·|S₁| = 60`
+  at every angle. Carries no information.
+- **The 30 diagonal edges are forced by gate A.** Both circles are `t·S₁` — `t = 2` for the record, `t = 4`
+  for `ρ₆₃` — so both count `|S₁| = 30`. Structural, not coincidence.
+- **Only the 36 off-diagonal edges are law-exposed, and there the two objects differ.** Measured radius
+  classes of the off-diagonal endpoints:
+
+| | off-diagonal radius pairs |
+|---|---|
+| `ρ₁₅` (record) | **one** conjugate pair: `17/6 ∓ √33/6` ↔ `17/6 ± √33/6` |
+| `ρ₆₃` | **three** pairs: `100/9 ↔ 64/9`, and `187/18 ∓ 11√33/18 ↔ 86/9 ∓ 10√33/9` |
+
+So `36 = 36` is an agreement of **count at different structure** — three radius families where the record
+has one, including a *rational* pair (`100/9 ↔ 64/9`) the record has no analogue of.
+
+**Two controls that make the 126 believable rather than suspicious.**
+1. **`ρ₁₅`'s own law on `ρ₆₃`'s 25,567-point lattice still gives exactly `126 = 60 + 36 + 30`** — a base
+   **14× larger** than the one the record was measured on. That confirms the endpoint bound empirically:
+   the record's cross-edge set does not grow when its base does, so the two 126s are comparable objects
+   and not two truncations.
+2. **`n = 20` on the same pipeline gives `120 = 60 + 0 + 60`.** The count is **not** constant across the
+   family, so 126 is not an artifact of my construction.
+
+**And control 2 reverses the ranking that circle count alone would give.** `n = 20` has **twice** the
+record's circle (60 points) and **zero off-diagonal cross edges** — its entire cross structure is a centre
+star plus a perfect matching, which G14 and the advisor's PH2-7 both say carries no colour pressure. So on
+this evidence `ρ₆₃` outranks `n = 20` decisively, and the circle count — the quantity the phase was built
+to maximise — points the **wrong way**. That is PH2-2's lesson, now measured on a fresh member.
+
+---
+
+## §11 — "Defeats the four-colour certificate at both primes" is automatic, and therefore evidence of nothing
+
+**This is the sharpest result here, and it is a derivation.** The residue colouring of Theorem B is a group
+homomorphism from the module into `𝔽₄`, a field of **characteristic 2**. A free circle is `t·S₁`. Hence
+
+> `residue(t·v) = t·residue(v) = 0` whenever `t` is **even** —
+> so **every circle point carries the centre's residue**, and every diagonal cross edge is monochromatic.
+
+And a twist `π` cannot repair it: the centre is shared between the two halves, so `π` must fix the centre's
+colour, so it fixes the circle's colour too, so `C(p) = π(C(p))` on all 30 diagonal edges.
+
+**Measured at both primes, on the `ρ₆₃` base:**
+
+| | prime with `S ≡ 145 (mod 256)` | prime with `S ≡ 111 (mod 256)` |
+|---|---|---|
+| residue colouring proper on the base? | **0** monochromatic unit edges of 272,232 | **0** of 272,232 |
+| centre residue | `(0,0)` | `(0,0)` |
+| the 30 circle residues | **`{(0,0)}`** — all equal to the centre's | **`{(0,0)}`** |
+| the 30 unit-vector residues | all three nonzero classes | all three nonzero classes |
+| twists `(C, π∘C)` satisfying all 126 cross edges | **0 of 24** | **0 of 24** |
+
+The first row is the free geometry check of G36 passing, which independently validates the base: a
+misplaced point would show as a monochromatic unit edge, and there are none.
+
+**The consequence for how this phase reads its own results.** `ρ₁₅` has `t = 2`, also even — so **the
+record's certificate is defeated for exactly the same free reason**, and so is every free-circle member's.
+"Defeats the four-colour argument at both primes" therefore **cannot distinguish a promising arena from a
+hopeless one**; it is a property of `t` being even, available before any base exists. Stage 1's base
+achieving it was not progress, and `ρ₆₃` achieving it is not progress. It should be retired as a signal and
+replaced by the question of what colouring *outside* the twist family does — which is what the solver is
+for.
+
+**The third row is also the reason no cheap repair exists.** The centre cannot simply be recoloured: its 30
+unit neighbours already carry all three nonzero residues, so no fourth colour is free at the centre.
+
+---
+
+## §12 — The solver
+
+Handed the **whole** `ρ₆₃` arena to CaDiCaL as a satisfiability question — `2 × 25,567 − 1 = 51,133`
+vertices (the centre is shared), `2 × 272,232 + 126 = 544,590` edges, encoded as **204,536 variables and
+2,536,291 clauses** (`/tmp/claude-1000/screen-h2/arena.cnf`).
+
+**Registered before launching, with both outcomes reachable.** *Prediction: SATISFIABLE — the arena is
+four-colourable.* Grounds: both halves are individually four-colourable by Theorem B (the base lies in
+`K²`, and the rotated half is graph-isomorphic to it), and they are joined by only **126** edges touching
+at most ~133 of the 51,133 vertices. The uninformative-versus-informative split is genuine here because the
+instance is the same size and shape either way, and the solver decides it rather than my construction.
+
+**Which verdict is suspect.** The base edges are **measured** but *complete* — they are differences in the
+exact norm-1 shell `S₁`, and the Cayley property makes that exhaustive, so no edge can be missing. The
+cross edges are **derived**, and §9 shows the law is both sound (126/126 re-derived) and complete (the
+`{1,√D}` basis argument). So for once neither direction has the usual asymmetry — but the object's novelty
+still lives in the derived half, so **a refusal (UNSAT) would be the suspect verdict** and would need the
+126 edges re-audited before it is reported as a five-chromatic object.
+
+**Status at the time of writing: still running**, 200 s of CPU, 406 MB, 2.34 M clauses irredundant and
+153 k learned, no verdict. Not yet a cost statement — the record's own arena refutes in about ten seconds at
+3,433 points, and this is 51,133 vertices, so a long run is expected either way and its length carries no
+information about the answer. **Whoever inherits this should re-launch or resume rather than infer from the
+absence of a verdict.**
+`/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical --sat /tmp/claude-1000/screen-h2/arena.cnf`
+
+**A constructive shortcut was tried first and failed, and the failure is informative.** Recolour each of the
+30 base circle points off the centre's residue and leave the copy as the residue colouring: every cross-edge
+kind would then be satisfied. It does not work — **all 30 circle points are stuck at both primes**, because a
+circle point `4v`'s unit neighbours are `4v + u` with residue `residue(u)`, and those cover all three nonzero
+classes, so no colour is free. The same obstruction kills every colouring built from the residue map composed
+with a base automorphism or a colour twist: `residue(4x) = 0` regardless. **So the arena's colourability is
+genuinely a solver question and not a construction question.**
+
+---
+
+## §13 — The phase's own distance-to-colourable metric, measured — and `ρ₆₃` nearly doubles the record
+
+The brief's §2 defines the distance between a candidate and a *proof that it fails* as the number of cross
+edges whose endpoints share a residue: delete those and the residue colouring four-colours the arena. Higher
+is better. Measured, at both primes, on one pipeline:
+
+| arena | cross edges lost at prime 145 | at prime 111 | **metric (min)** | of which **forced-free** (diagonal) | **informative residual** |
+|---|---|---|---|---|---|
+| stage 1's base (the phase's own rotation) | 32 | 8 | **8** | — | — |
+| **`ρ₁₅`, the record** | 30 | 30 | **30** | **30** | **0** |
+| **`ρ₆₃` (`n = 16`)** | **54** | **54** | **54** | 30 | **24** |
+
+**Two readings, and the second is the one that is new.**
+
+1. **On the phase's own yardstick `ρ₆₃` leads decisively** — 54 against the record's 30 and stage 1's 8.
+2. **The record's 30 are *entirely* the forced diagonal kind; it loses not a single off-diagonal edge.** So
+   the metric, evaluated on the only positive instance anyone holds, is measuring the free quantity of §11
+   and nothing else — the same failure mode as the circle count. **`ρ₆₃` is the first arena in this phase
+   whose certificate defeat is not free:** 24 of its 54 losses are off-diagonal, the law-exposed kind, where
+   the record and stage 1 have zero.
+
+That residual of 24 is the quantity I would put in place of the circle count as the phase's objective. It is
+the part that no `t`-even member gets for nothing.
+
+---
+
+## §14 — Answering the two questions I was sent to answer
+
+**`n = 2`: dead, and cheaply.** Prediction registered and met (§4). Thin on two axes, no circle over this
+lattice, and the circle it has in the field needs a finer module — recorded, not pursued.
+
+**`ρ₆₃` (`n = 16`): un-eliminated, and now for a reason that is not free.** My recount agrees with the
+planner's object edge for edge, including the 36 law-exposed cross edges and the 90 free ones, with **0
+invented** under an independent re-derivation. It is denser than the record's fabric (10.65 unit edges per
+point against 8.32), its field `ℚ(√3,√7,√11)` is 6-open, and it scores 54 on the phase's own metric against
+the record's 30. **Nothing above shows it refuses four colours**, and the solver has not returned.
+
+**The two sentences the brief asked to be carried, restated where they bite.** *A rotation that survives a
+screen is un-eliminated, not alive* — `ρ₆₃` has survived four gates and one metric, and the metric's leader
+on the only positive instance is a free quantity. *Silence is not evidence* — and §11 upgrades that: at every
+free-circle member with `t` even, the four-colour filter is defeated **by construction**, so its silence there
+is not even silence about the object. It is silence about `t`.
+
+---
+
+## §15 — What I did not do
 
 - No cross-edge enumeration at `ρ₆₃` is included in this file; it was launched separately and its numbers
   belong beside it, not here. **Checkpoints:** `/tmp/claude-1000/screen-h2/ckpt/`.
