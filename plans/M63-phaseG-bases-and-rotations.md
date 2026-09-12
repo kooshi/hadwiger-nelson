@@ -437,13 +437,13 @@ and its cost is stated conditionally.*
 | **P-G4** | Going to radius 3.0 on his lattice adds candidate angles but **no** new wall-breaking ones (the count stays at 6) | radius adds radii, and the wall is a condition on the square class; measured stable 2.00 → 2.44. **Genuinely uncertain — 0.5** | seconds for the census | the artifact |
 | **P-G5** | The new rotation class (rank 3–6) **does not** refuse four colours on the first arena tried, at 0.65 | it carries 18 off-diagonal pairs and **no** diagonal or centre edges, against `ρ₁₅`'s 18 + 30 + 60. Cross material is not the ranking criterion, but zero diagonal edges means the two halves touch only along one family | **1 ask**, not 4 — the four rows are one rotation up to base symmetry (§11.6) | the log. **A refusal here is the phase's headline result** |
 | **P-G6** | The general (`cos ∉ K`) census on `parts_lattice(2.00)` returns **fewer than 60 angles with ≥ 2 kinds**, against the 412 radicand classes the old list reports | §1.2: a class holds several angles and most angles hold one kind | `O(n²)` exact pairs: ~2–5 min at 1,603 points, priced on a 500-point prefix first | the artifact |
-| **P-G7** | If a rotation survives filter 4, manufacturing its **first accumulator** costs at least as much as the largest ladder rung that closed on his base (phase F's P-F14), and **this is the phase's dominant cost, not the census** | a new base or rotation has no published accumulator; the only way to get one is a closed reduction of a large arena | **unpriced until phase F's ladder lands**; do not start it on a guess | phase F's F1 curve |
+| **P-G7** | If a rotation survives filter 4, manufacturing its **first accumulator** costs at least as much as the largest ladder rung that closed on his base (phase F's P-F14), and **this is the phase's dominant cost, not the census** | a new base or rotation has no published accumulator; the only way to get one is a closed reduction of a large arena | **PRICED, 2026-09-11, from data already on disk** (`plans/M63-incremental-hitset.md`): enumeration is **quadratic in the number of equally-good answers** under the current code and **linear** under the new engine — about **four days against eleven minutes** at a plausible size. The law fits three held-out points to ~1% where a straight line is off by 56–108%. Fitted on Parts's base, so a new base is an extrapolation, not a measurement | phase F's F1 curve |
 | **P-G8** | Every base in §4.2 rows 1–3 has `cos = 7/8` with ≥ 2 kinds in its census | if it does not, the base cannot host the known construction and the base builder is wrong | seconds per base | the artifact |
 
 **The cost of the whole phase, honestly.** Filters 0–3 over every angle on every base in §4.2 rows 1–3:
 **minutes, single core.** Filter 4 over everything that reaches it: **26 asks on his lattice, ~30 minutes**;
 similar per new base. **The census is not the expensive part and never was.** The expense is P-G7 — the
-first accumulator for any rotation that survives — and it is unpriced. Phase G's original estimate of
+first accumulator for any rotation that survives — and it is now priced — see P-G7: quadratic today, linear under the new hitting-set engine, four days against eleven minutes. Phase G's original estimate of
 *"the laws and the census 2–3 days; one to two weeks"* is right in total and wrong in distribution: the
 census is an afternoon, and the two weeks are one surviving rotation's bootstrap.
 
@@ -499,7 +499,7 @@ ladder prices. Two consequences this plan commits to:
 
 1. **The census does not depend on it.** Filters 0–4 need no accumulator, no level set and no loop. A
    census over hundreds of rotations is affordable *because* it stops at a single refusal question.
-2. **The cost of *adopting* a rotation is the bootstrap, not the census** (P-G7), and it is unpriced until
+2. **The cost of *adopting* a rotation is the bootstrap, not the census** (P-G7), and it is **priced as of 2026-09-11** — four days under the current code against eleven minutes under the new engine, conditional on that engine being integrated. It was unpriced until
    the ladder lands. **This plan does not extrapolate the flat-cost measurement** (214 / 246 / 221 CPU
    seconds at 3 / 12 / 24 added points): that flatness is measured only to 24 added vertices on an
    instance with a bound already climbed, and manufacturing a first accumulator is the opposite regime.
@@ -591,7 +591,7 @@ Acceptance:
       arithmetic layer over K, since a rotation's radicand is generally not rational.
 
 *Cost:* the census is an afternoon, not two weeks; the two weeks are one surviving rotation's first
-accumulator (phase F's ladder prices it, and it is unpriced until that lands).
+accumulator (priced instead by the hitting-set cost law, 2026-09-11: quadratic today, linear under the new engine).
 ```
 
 ---
