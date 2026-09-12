@@ -6,9 +6,24 @@ agents with `ListAgents` and ask each for a one-paragraph status before doing an
 
 ---
 
-## §0 — State at 23:20
+## §0 — State at 2026-09-12 10:40, after the session halted on a halt
 
-*Rewritten in place; this file holds current state, and the story is in the commits.*
+*This file holds current state; the story is in the commits. **Read §0a next** — it is the shortest path
+back in.*
+
+### §0a — Where to restart, in one paragraph
+
+**Everything through phase H stage 1 is done and committed. Nothing is running. No agent holds unrecorded
+work** (the two files the dying agent was mid-edit on were committed by the product owner at the regroup).
+**The live question is a single design quantity:** a base survives the four-colour certificate in proportion
+to **how many of its points lie on one fixed circle** — a representation number of a totally positive element
+by the module's norm form. Parts's lattice has **30** such points and refuses; the first base built *for* the
+new rotation has **8** and is colourable; the one other class with such a kind has **18** and is colourable.
+**So the next question is not "does a base exist" — it is "can a module in this field put 30-ish points on
+that circle".** Phase H's `RUN` file §H12 has the bijection; `plans/M63-phaseH-a-base-for-a-rotation.md` is
+the standing brief; `plans/POROS-2026-09-12-m63-phaseH.md` is the advisor's ledger, cards PH-1..PH-9.
+
+*Below: the state as of the night's work, kept because each line names where its evidence lives.*
 
 - **Phase C is CLOSED and the joint route ABANDONED** (§6.1). Both runs stopped at 5 h on Kooshi's ruling.
   The bracket **504 ≤ \|M\| ≤ 509** is the result and the route's epitaph: it was never worth more than five
