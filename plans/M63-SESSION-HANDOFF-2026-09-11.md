@@ -11,17 +11,21 @@ agents with `ListAgents` and ask each for a one-paragraph status before doing an
 *This file holds current state; the story is in the commits. **Read §0a next** — it is the shortest path
 back in.*
 
-### §0a — Where to restart, in one paragraph
+### §0a — STOP: the next session has ONE mission, and it has its own file
 
-**Everything through phase H stage 1 is done and committed. Nothing is running. No agent holds unrecorded
-work** (the two files the dying agent was mid-edit on were committed by the product owner at the regroup).
-**The live question is a single design quantity:** a base survives the four-colour certificate in proportion
-to **how many of its points lie on one fixed circle** — a representation number of a totally positive element
-by the module's norm form. Parts's lattice has **30** such points and refuses; the first base built *for* the
-new rotation has **8** and is colourable; the one other class with such a kind has **18** and is colourable.
-**So the next question is not "does a base exist" — it is "can a module in this field put 30-ish points on
-that circle".** Phase H's `RUN` file §H12 has the bijection; `plans/M63-phaseH-a-base-for-a-rotation.md` is
-the standing brief; `plans/POROS-2026-09-12-m63-phaseH.md` is the advisor's ledger, cards PH-1..PH-9.
+**Read `plans/M63-phaseH2-find-the-base.md` — whole, first, instead of this file.** Kooshi, 2026-09-12:
+*"the next session will be dedicated to finding our new base, and only that."* That brief is self-contained
+and states the mission, the exact target, what is proved versus inherited versus unknown, the mandatory
+prior-art gate, five cheap falsifiers, and what not to do.
+
+**The mission in one sentence:** find a module in ℚ(√3,√11) with roughly **30 points on the circle
+`\|p\|² = (7+√33)/3`** — because that count equals the number of usable cross edges, and it is the whole
+distance between a candidate base and a proof that it fails. His lattice has **30** on its own circle and
+refuses four colours; the base built last night has **8** and is colourable; the only other instance has
+**18** and is colourable.
+
+**Nothing is running. No agent holds unrecorded work.** Everything through phase H stage 1 is committed.
+This file remains the record of the arc that produced the mission — read it for *why*, not for *what next*.
 
 *Below: the state as of the night's work, kept because each line names where its evidence lives.*
 
