@@ -649,12 +649,97 @@ question: is-the-62x-pin-off-anywhere-else
   falsifier: triangle against centre on an M62-era object below 3x, or at the 60x the original framing would have predicted
   rank: 19
 
+**THE VERDICT IS THAT THERE IS NO VERDICT, 2026-09-11.** Both joint runs terminated at about five
+hours — 18,228 s and 17,990 s, **within seven seconds of each other in wall clock**, launched minutes
+apart — without closing and without writing a record. Logs end mid-iteration: no verdict line, no
+traceback, checkpoints 30–40 s old. The implementer **halted and reported rather than diagnosing or
+retrying**, which is the standing rule and the right call for two independent processes dying together.
+
+**What stands anyway, and it is worth more than a null.** The hitting-set lower bound over a harvested
+`Y` is rigorous at every instant, and **both runs had zero undecided asks**, so nothing is conditional
+on a budget: **no joint selection of 503 atoms or fewer refuses four colours** (frame 1; 500 in frame 2),
+`Y` at 1,998 and 1,877. With c4.1's derived ceiling of 508 atoms, **the joint minimum in frame 1 lies in
+[504, 509] vertices** — so **the record could not have been beaten by more than five vertices on this
+material**. My hunch (exactly 509, 65%) is neither confirmed nor refuted; the space it could be wrong in
+is now five vertices wide. The bound's trajectory — 440 at 127 s, 457, 468/469 at 66 min, 503 at five
+hours, still climbing against a ceiling of 508 — is the shape of a run converging slowly from below,
+which is consistent with a minimum at or near the ceiling but does not evidence it. **Scoring, the
+implementer's:** P-C4.1, P-C4.2 and P-C4.4 are **unresolved, not falsified** — no minimum was recorded,
+so the level was never reached; P-C4.3 splits (phase 1 at 85 s falsifies "< 60 s"; "closes within 90
+minutes" falsified decisively; "≥ 1,500 correction sets" met at 1,998 and 1,877). **And card 10 is why
+this costs 40 seconds rather than five hours:** the checkpoints are intact and the resume path was
+killed on purpose before the driver existed.
+
+**The ninth instrument, the implementer's own:** the four-hour reporting point passed without a report,
+because it was waiting on **exit** waiters and had no turn in between. *A waiter can only say a thing has
+ended; it can never say a thing is late.* Same family as the other eight. **The construction that fixes
+it, offered hypothetically: arm the deadline as its own job** — a process that sleeps until the reporting
+point and then reports — so lateness is an event with its own notifier rather than the absence of one.
+
+question: does-the-environment-impose-a-five-hour-lifetime
+  evidence: two independent single-threaded processes, launched minutes apart, terminated within seven seconds of each other at 18,228 s and 17,990 s — one wall-clock instant, both about five hours old. Logs end mid-iteration with no verdict line and no traceback, and both checkpoints are 30-40 s old, so each was healthy until the instant it stopped: the signature of an external SIGKILL rather than an internal fault, and not memory, since each held 273 MB on a 125 GB box. M62 §R16 records a precedent in this repository — "the machine was cleared" — that was never explained either.
+  expected: a long run ends by closing, by its stop rule, or by a fault that leaves a traceback
+  ask: does a trivial canary, launched through the identical path and doing nothing but survive, also die at about five hours?
+  if it dies: the environment caps a background job's lifetime; every future long run must be chunked below that cap with resume between chunks — F's loops and G's rotation census included — and the relaunch becomes a chunking decision rather than a retry
+  if it survives: the cap is not in the launch path, the two deaths need another explanation before five more hours are spent on them, and the canary has cost nothing
+  answered by: Product owner (the main session), with the implementer running it — a sleeper through the same launcher, watched alongside whatever else runs
+  cost: zero compute; it is a sleeping process
+  hunch: an environment cap, at 60% — two independent processes at one instant with no traceback is an external signal, and five hours is a round number of the kind that lives in session and cgroup limits rather than in this workload
+  falsifier: a canary alive at six hours under the identical launch path
+  rank: 20
+
+**Card 20 stood down within the hour, and my hunch is killed by a disclosed fact rather than by a
+measurement: the product owner killed both runs** — one `SIGTERM` to each of two verified process
+groups, seconds apart, at 22:57. That is the whole of the simultaneity. There is no environment
+lifetime cap, and M62 §R16's "the machine was cleared" precedent does not apply.
+
+**The mechanism of the miss, which is mine and is a rule for the next Poros.** My reasoning was right in
+every particular except the one fact I could not see, and the fact was cheap: **my evidence inventory had
+no row for what the OTHER ACTORS did in the window.** The process's environment includes the people and
+agents acting on it, so a simultaneous unexplained termination has, as its first candidate, an
+intervention — and its first instrument is **one question to the actors**, not a canary. The implementer
+halted on the same evidence and built the same shape; the fact had been disclosed to one of us only.
+**Rule: when an external cause is live, the first inventory item is the other actors' actions in the
+window, and the cheapest reading is to ask them.** The canary would have cost nothing in compute and a
+day in framing — it would have made the relaunch a chunking problem against a phenomenon with a
+disclosed cause.
+
+**Kooshi's ruling, and the frame correction that goes with it.** The joint route is **abandoned**:
+shrinking both halves is not worth its cost unless it can be *proven* to beat the frozen-half route,
+which produced a vertex-critical graph, and no such proof exists — so slower is simply worse. The
+checkpoints are not to be resumed. **The wider correction: the product is reproducing his METHOD so it
+can reach objects he never did, and the joint route had drifted into optimising HIS SPECIFIC OBJECT.**
+
+**Card 1 scored honestly, as the phase's rank-1 card.** What it bought: the cheapest test of whether the
+record needed a loop at all, run before any loop was built, and a rigorous result that survives the
+route's closure — **no joint selection of 503 atoms or fewer refuses, zero undecided, so the minimum is
+in [504, 509] vertices and the record could never have been beaten by more than five vertices on this
+material.** An abandoned route with a proved ceiling is a closed question, not a sunk cost. What it
+missed, and this is the axis I should have checked: **"can the record be beaten on his own material" is a
+question about his OBJECT, while the product is the method that reaches objects he never made.** My own
+idiom — test the proposal against the goal in one sentence — was applied to the goal as stated ("reproduce
+or beat") and not to the product behind it. **For the next Poros: when a goal names an object, ask which
+axis the object sits on before ranking a card that optimises it.**
+
+**Carried here at the implementer's request, for phase D to read** (it was stood down before it could
+edit this into §R2): *arm the deadline as its own job — a process that sleeps until the reporting point
+and then reports — so lateness becomes an event with a notifier instead of the absence of one.* And the
+sentence that unifies all nine instrument failures of this phase: **each of them needed a positive signal
+for the thing that did not happen.**
+
 hunch: P-C4.0-joint-ask-costs-stay-under-a-second
   claim: on the joint stage the ask costs rise above the frozen-companion regime (0.006 s colourable, 0.02-0.11 s refusing) but stay under one second, at 60%
   basis: prior
   falsifier: a joint-stage refusing population averaging under half a second, or above one second
   registered: 2026-09-11
   status: killed (by: the implementer's in-run measurement, 2026-09-11 — the joint stage's refusing population averages 0.27 s over 322 asks and its colourable population 0.029 s over 1,231, so the low half of the falsifier fired; the isolated C4.0 figures, 0.170 and 1.758 s on a fresh oracle, are 6x higher, and the mechanism is the incremental solver keeping its learned clauses. What the miss cost: card 11's six-hour forecast for C4a, wrong in the over-cautious direction, and answered before it could change a decision, since C4a was already running)
+
+hunch: the-five-hour-deaths-are-an-environment-cap
+  claim: the environment caps a background job's lifetime at about five hours, so both joint runs were killed by it, at 60%
+  basis: derived
+  falsifier: a canary alive at six hours under the identical launch path
+  registered: 2026-09-11
+  status: killed (by: disclosure, 2026-09-11 — the product owner killed both runs, one SIGTERM to each of two verified process groups, seconds apart, at 22:57; no canary was needed and none was run. What the miss cost: nothing spent, since the implementer stood the card down within the hour; the mechanism is recorded above — my inventory had no row for the other actors' actions, and one question would have settled what a canary was designed to measure)
 
 hunch: the-printed-375-column-is-the-M6B-run
   claim: Table 2's 375 "M6A&B" range column is the M6B run's own ranges rather than the union of the M6A and M6B runs, so the M6B level set's ranges match the printed column exactly, including (2,0,6,4) at 0-4 and (10,0,2,4) at 8-12, while our M6A level set's tail sits outside it
@@ -665,25 +750,61 @@ hunch: the-printed-375-column-is-the-M6B-run
 
 ## Handover — what the next Poros inherits
 
-**Cards.** Nine written; eight adopted by the planner, card 3 answered by the product owner, card 5
-answered as recommended. Fates are beside each card above, and in the phase's own record §7.
+*Rewritten at the phase's close, 2026-09-11. Twenty cards, all with fates; ten hunches, all scored.*
 
-**Open, and in this order.** (i) Card 1's two runs — the joint reduction over A412 ∪ ρ·g(A166), in **two**
-inequivalent relative frames (double cosets, planner's correction), which is the only item that can end
-the milestone with the goal met; its answer decides whether phase D's loop is needed for the record at
-all. (ii) C4.0, the joint stage's own ask costs, on which four remaining drops are conditional
-(`P-C4.0`, my hunch at 60%). (iii) Card 8's run — whether his §5.10 indicators rank the orbits his own
-move used. (iv) Three ledger hunches still open: the joint minimum at 509 (prior, ~35% on fewer), the
-reserve condition (a pre-registered exact test passed, awaiting the engineer's re-derivation), and
-whether 509 is still the record, which the prior-art gate settles.
+**The route's verdict.** The joint reduction — my card 1, the phase's rank-1 and its record-bearing
+experiment — is **abandoned on Kooshi's ruling**, and its result stands anyway: **no joint selection of
+503 atoms or fewer refuses four colours, zero undecided, so the minimum lies in [504, 509] vertices and
+the record could never have been beaten by more than five vertices on his own material.** A closed
+question, not a sunk cost. The checkpoints are not to be resumed.
 
-**The process lesson, the planner's, worth carrying to D.** Its gap audit was built by walking the plan's
-promises, so it inherited the plan's blind spots; three of my nine cards found something the table
-asserted without carrying (the S side already spent as the calibration, 8-4-2-1 absent entirely, and
-§5.10's second role). The consequence it drew is not "ask the advisor more" but **audit the source, not
-the plan** — and the matching one on my side is that all three came from reading his paper against a
-question the plan had not asked, which is the cheapest reading available to whoever is not holding the
-plan.
+**The frame correction, which outranks the verdict.** The product is reproducing his **method**, so it
+can reach objects he never made; the joint route had drifted into optimising **his specific object**.
+Both my card 1 and M63 §0 say the method is the product, and my card drifted from it while passing the
+goal as literally stated. **For the next Poros: when a goal names an object, ask which axis the object
+sits on before ranking a card that optimises it.**
+
+**What phase C established, beyond the bracket.**
+- **His printed 375 range column describes NEITHER complete level** — narrower than both, in the same two
+  cells — and the early-stop explanation is **refuted**, since a truncated enumeration is a proper subset
+  and must count strictly fewer, while his counts reproduce exactly (282 at stabiliser order 12, 66 at
+  order 6, 8 on the S side). Three readings survive: a printing defect, mixed provenance inside one
+  column, or a stage difference that survives four attested agreements (card 17's open joint).
+- **The §5.9 rainbow-triangle pin is worth 62× against no pin, replicated to 1.6%**, and ~6× against the
+  centre pin the pre-M63 paths use, which is the only part that transfers. **It is maximal among clique
+  pins**: four plane points are never pairwise unit-distant (ledger row 58), so no larger clique exists
+  and the rest is placement and problem-structure assignments.
+- **The cost dial that gated seven drops neither fires nor governs** — 1.9–2.2× cold-pinned, 3–13× warm,
+  and card 15's table shows no gated row depends on per-ask cost. The rows return on per-row grounds.
+  **Do not read that as "the rows were wanted anyway": it was measured.**
+- **Nine instrument failures in one phase, eight silent and one falsely loud.** The unifying sentence:
+  **each needed a positive signal for the thing that did not happen.** The construction, carried here at
+  the implementer's request for phase D: *arm the deadline as its own job — a process that sleeps until
+  the reporting point and then reports — so lateness is an event with a notifier rather than the absence
+  of one.*
+
+**What goes to phase D, as cards with their fates blank.** Card 13 (are the two relative frames one
+problem — an isomorphism test, not agreeing invariants; the two runs reached different bounds, 503 and
+500, which is weak evidence either way). Card 16 (one guarded formula with per-configuration switches;
+five hours of not closing is its argument, and it re-prices G's rotation census, which card 4 costed a
+hundredfold too low). Card 18 (how much a stage depends on which companion is frozen — and in one branch
+it says whether the joint problem nearly decomposes). Card 19 as amended (triangle against **centre** on
+an M62-era object; 6× is owed by palette symmetry, the rest is guidance that may not transfer). Card 8's
+run (do his §5.10 indicators rank the orbits his own move used). Card 12's zero-ask packing question
+(what fraction of groups drawn from the **non-necessary** atoms has a Y-independent union). And B-8 with
+B-11 re-read **together** when E builds its √3 stage, since his five-vertex assignment is both the speed
+and the provenance caveat there.
+
+**Hunches still open:** the reserve condition (a pre-registered exact test passed; awaiting the
+engineer's re-derivation, since my scratch script is neither a derivation nor a replication) and whether
+509 is still the record (held, pending the prior-art gate; a search summary cites arXiv:2608.04542,
+unread here).
+
+**Two method rules this phase minted, both from my own misses.** *The inventory must carry what the other
+actors did in the window* — a simultaneous unexplained termination's first candidate is an intervention,
+and its first instrument is one question to them, not a canary. And *a prediction registered before the
+deciding numbers land cannot be retrofitted* — four of my hunches died by measurement here, and the
+scoring held because each was written down first.
 
 ## Measurements
 
