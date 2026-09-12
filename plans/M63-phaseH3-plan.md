@@ -72,7 +72,7 @@ the shape" means: **Parts's shape is itself exactly ζ₆-stable.** Multiplying 
 `ζ₆ = (1 + i√3)/2` sends `p₁ ↦ (p₁ − √3 p₂)/2` and `p₂ ↦ (√3 p₁ + p₂)/2`; with `p₁ ∈ ℚ(√33)` and
 `p₂ ∈ √3ℚ ⊕ √11ℚ`, `√3 p₂ ∈ ℚ ⊕ √33ℚ` and `√3 p₁ ∈ √3ℚ ⊕ √11ℚ`, so both slots return to where they
 started. **So the shape is not an accident of how he writes coordinates — it is a ζ₆-submodule of `K²` of
-index four in the denominator-12 one.** Dropping it therefore cannot break ζ₆-closure; it can only enlarge.
+rank four inside the rank-eight denominator-12 one — half the ℚ-dimension, not a finite index.** Dropping it therefore cannot break ζ₆-closure; it can only enlarge.
 **Scoring:** met if the closure analysis confirms the shape is ζ₆-stable and the congruences are necessary
 as well as sufficient; not met if either half fails — and the second half failing is the useful outcome,
 because a merely-sufficient congruence is a free place to look for a smaller module.
@@ -147,3 +147,65 @@ point at `n = 2` is strictly below `24/54 = 0.444`; not met if it is at or above
 count is zero, which is a *different* finding and ends the phase rather than scoring this prediction.
 **Both outcomes reachable** — the quantity is a count over an enumeration with no constraint tying it to
 either side, and the two known members of the family already sit at 0.000 and 0.444, bracketing the range.
+
+---
+
+## §3 — The prior-art gate landed (2026-09-12)
+
+Full record: `plans/M63-phaseH3-prior-art.md`. **The ground is not taken, but the idea is prior art, and it
+sharpens the phase rather than weakening it.**
+
+### What is not taken
+
+No published five-chromatic construction uses a full field-plane vertex set — all six checked at the source
+(de Grey, Heule, Parts, Exoo–Ismailescu, Voronov et al., Haugland) generate from a finite list of unit
+vectors. The coincidence-site-lattice literature excludes our object **by definition** rather than by
+oversight: `[BaakeZeiner2017]` §6 admits only submodules of the *same rank*, and `[BaakeGrimm2004]` only
+*similarity* submodules. Ours halves the rank and lowers the symmetry; that literature has no word for it.
+
+### What is prior art, and it is the interesting half
+
+**The exact move was proposed on the Polymath16 blog on 19 April 2018 by Lior Silberman** — *"take points
+each of whose coordinates is a point in the field"* — naming both obstacles (multiple real embeddings;
+density making finiteness non-obvious), proposing lattice reduction as the fix, and saying *"I'll try
+implementing this later."* **He never returned to it, and nothing follows it in 1,689,442 characters across
+eighteen threads.** The full module is present in that corpus, studied as an infinite object by colouring
+theory, and **never truncated to a disc and handed to a solver.** That is the gap this phase is in.
+
+### The reframing, and it is not ours either
+
+Parts's coordinate shape says exactly that his points lie in the **quartic CM field `ℚ(√−3,√−11)`** — the
+Moser lattice's own field. The shape-free module lies in `ℚ(√3,√11,i)`. **So "dropping the shape" IS
+"adjoining `i`" — adjoining the quarter turn.** That restatement is **David Speyer's**, 25 April 2018, with
+the explicit basis `(a + b√−3 + c√−11 + d√33)/(2·3^k)`. That it was invisible here is a G49 vocabulary
+failure and is recorded as one against us.
+
+**Its structural consequence, now sent to the arithmetic engineer as a live question:** Parts's shape cannot
+be `i`-stable, since multiplying by `i` swaps the coordinate slots and `ℚ(√33)` is barred from the imaginary
+one. If the shape-free module *is* `i`-stable it is closed under `ζ₁₂`, and its symmetry group is order
+**48** against his **24** — which would double the orbit rung and is not something to inherit by assumption.
+
+### Two overclaims of ours that come out
+
+Ruled on and handed back to the prior-art agent to fix in place:
+1. **The spindle reading of the rotation family is on the Polymath16 wiki (2018)**, attached in words to
+   `ω_t = exp(i·arccos(1 − 1/(2t)))` as *"the apex angle of a √t, √t, 1 isosceles triangle"*. `CLAUDE.md`
+   G7 claims it as ours. It comes out. **What survives as ours: the radicand form, the field screen,
+   6-openness, and dropping the Loeschian restriction.**
+2. **`ρ₆₃` is the wiki's `ω₁₆` and already appears in de Grey's `ℤ[ω₁,ω₃,ω₄,ω₁₆]`.** Ledger row 64 does not
+   say so. It will. The rotation is not new either; **what stays ours in that row is the screen that
+   selected it, the 6-openness, and the produced refusal.**
+
+### A second, independent reason `n = 2` was never examined
+
+**The wiki's own rotation list is restricted to Loeschian `t`, and 2 is not Loeschian** — 3, 4 and 16 are.
+This converges with, rather than contradicts, the phase's premise: two unrelated conventions both skip
+exactly this rung.
+
+### Registered consequence for P-H3-2
+
+The prior-art agent re-derived *"0 circle points under the shape at `n = 2`"* by **Hasse local norms** — 2
+splits in `ℚ(√33)`, `ℚ₂(√−3)` is unramified, so 2 has odd valuation and is not a local norm. That route
+shares nothing with phase H2's derivation of the same fact, so **the two are a free two-sided positive
+control on each other**, and the zero in P-H3-2 is now a theorem about the field rather than a count on one
+lattice. The *denominator* in P-H3-2 (about 506 points) is still a measurement and still scores.
