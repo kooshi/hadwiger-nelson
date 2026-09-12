@@ -1,0 +1,570 @@
+{
+ "kind": "typem-exact-angle-census",
+ "tool": "tools/typem_exact.py",
+ "command": "python3 tools/typem_exact.py census --base moser:2.05",
+ "base": {
+  "spec": "moser:41/20",
+  "description": "Moser lattice \u2124\u27e81,\u03b6\u2086,\u03c9\u2083,\u03b6\u2086\u03c9\u2083\u27e9 ball, exact radius cut, radius 41/20",
+  "points": 873,
+  "lines": 304,
+  "unit_norm_points": 18,
+  "centre_cross_edges": 36,
+  "symmetries": {
+   "negation": true,
+   "s3": false,
+   "s11": false,
+   "s3s11": false
+  }
+ },
+ "truncated": false,
+ "cap": null,
+ "counts": {
+  "cosines_in_K": 410,
+  "rotations": 308,
+  "leaving_K": 284,
+  "two_or_more_kinds": 20,
+  "rotation_classes": 10,
+  "wall_breaking": 1,
+  "six_open": 0,
+  "wall_undecided": 0
+ },
+ "wall_error": null,
+ "classes": [
+  {
+   "cos": [
+    "-7/8",
+    "0",
+    "0",
+    "0"
+   ],
+   "cos_str": "-7/8",
+   "cos_float": -0.875,
+   "variants": [
+    "-7/8",
+    "7/8"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-7/8",
+     "kinds": 2,
+     "offdiag_ordered": 30,
+     "diag": 0,
+     "total_edges": 66
+    },
+    {
+     "cos": "7/8",
+     "kinds": 2,
+     "offdiag_ordered": 12,
+     "diag": 18,
+     "total_edges": 66
+    }
+   ],
+   "radicand": [
+    "15/64",
+    "0",
+    "0",
+    "0"
+   ],
+   "radicand_str": "15/64",
+   "wall_breaks": true,
+   "eleven_inert_both": false,
+   "eleven": "split+split",
+   "six_open": false,
+   "kind_list": [
+    [
+     "17/6 + -1/6*sqrt33",
+     "17/6 + 1/6*sqrt33"
+    ],
+    [
+     "4",
+     "4"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "5/16",
+    "0",
+    "0",
+    "-3/16"
+   ],
+   "cos_str": "5/16 + -3/16*sqrt33",
+   "cos_float": -0.7646054962258804,
+   "variants": [
+    "5/16 + -3/16*sqrt33",
+    "-5/16 + 3/16*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 3,
+   "per_variant": [
+    {
+     "cos": "5/16 + -3/16*sqrt33",
+     "kinds": 3,
+     "offdiag_ordered": 30,
+     "diag": 0,
+     "total_edges": 66
+    },
+    {
+     "cos": "-5/16 + 3/16*sqrt33",
+     "kinds": 3,
+     "offdiag_ordered": 24,
+     "diag": 6,
+     "total_edges": 66
+    }
+   ],
+   "radicand": [
+    "-33/128",
+    "0",
+    "0",
+    "15/128"
+   ],
+   "radicand_str": "-33/128 + 15/128*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": false,
+   "eleven": "ram+ram",
+   "six_open": false,
+   "kind_list": [
+    [
+     "29/6 + -5/6*sqrt33",
+     "4/3"
+    ],
+    [
+     "1/3",
+     "17/6 + -1/6*sqrt33"
+    ],
+    [
+     "7/6 + 1/6*sqrt33",
+     "7/6 + 1/6*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "2",
+    "0",
+    "0",
+    "-1/2"
+   ],
+   "cos_str": "2 + -1/2*sqrt33",
+   "cos_float": -0.8722813232690143,
+   "variants": [
+    "2 + -1/2*sqrt33",
+    "-2 + 1/2*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "2 + -1/2*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 36,
+     "diag": 0,
+     "total_edges": 72
+    },
+    {
+     "cos": "-2 + 1/2*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 24,
+     "diag": 12,
+     "total_edges": 72
+    }
+   ],
+   "radicand": [
+    "-45/4",
+    "0",
+    "0",
+    "2"
+   ],
+   "radicand_str": "-45/4 + 2*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "6 + -2/3*sqrt33",
+     "2 + 1/3*sqrt33"
+    ],
+    [
+     "2 + 1/3*sqrt33",
+     "2 + 1/3*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-5/4",
+    "0",
+    "0",
+    "3/44"
+   ],
+   "cos_str": "-5/4 + 3/44*sqrt33",
+   "cos_float": -0.8583252740996798,
+   "variants": [
+    "-5/4 + 3/44*sqrt33",
+    "5/4 + -3/44*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-5/4 + 3/44*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 24,
+     "diag": 0,
+     "total_edges": 60
+    },
+    {
+     "cos": "5/4 + -3/44*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 24,
+     "diag": 0,
+     "total_edges": 60
+    }
+   ],
+   "radicand": [
+    "-63/88",
+    "0",
+    "0",
+    "15/88"
+   ],
+   "radicand_str": "-63/88 + 15/88*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "7/6 + 1/6*sqrt33",
+     "11/3"
+    ],
+    [
+     "56/3 + -8/3*sqrt33",
+     "11/3"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-5/4",
+    "0",
+    "0",
+    "1/12"
+   ],
+   "cos_str": "-5/4 + 1/12*sqrt33",
+   "cos_float": -0.771286446121831,
+   "variants": [
+    "-5/4 + 1/12*sqrt33",
+    "5/4 + -1/12*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-5/4 + 1/12*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 28,
+     "diag": 0,
+     "total_edges": 64
+    },
+    {
+     "cos": "5/4 + -1/12*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 28,
+     "diag": 0,
+     "total_edges": 64
+    }
+   ],
+   "radicand": [
+    "-19/24",
+    "0",
+    "0",
+    "5/24"
+   ],
+   "radicand_str": "-19/24 + 5/24*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "1",
+     "43/6 + -5/6*sqrt33"
+    ],
+    [
+     "9/2 + -1/2*sqrt33",
+     "3/2 + 1/6*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "7/64",
+    "0",
+    "0",
+    "-9/64"
+   ],
+   "cos_str": "7/64 + -9/64*sqrt33",
+   "cos_float": -0.6984541221694103,
+   "variants": [
+    "7/64 + -9/64*sqrt33",
+    "-7/64 + 9/64*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "7/64 + -9/64*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 12,
+     "diag": 6,
+     "total_edges": 54
+    },
+    {
+     "cos": "-7/64 + 9/64*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 18,
+     "diag": 0,
+     "total_edges": 54
+    }
+   ],
+   "radicand": [
+    "687/2048",
+    "0",
+    "0",
+    "63/2048"
+   ],
+   "radicand_str": "687/2048 + 63/2048*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "19/6 + -1/2*sqrt33",
+     "19/6 + -1/2*sqrt33"
+    ],
+    [
+     "4/3",
+     "17/6 + -1/6*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-13/16",
+    "0",
+    "0",
+    "1/48"
+   ],
+   "cos_str": "-13/16 + 1/48*sqrt33",
+   "cos_float": -0.6928216115304577,
+   "variants": [
+    "-13/16 + 1/48*sqrt33",
+    "13/16 + -1/48*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-13/16 + 1/48*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 36,
+     "diag": 0,
+     "total_edges": 72
+    },
+    {
+     "cos": "13/16 + -1/48*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 12,
+     "diag": 24,
+     "total_edges": 72
+    }
+   ],
+   "radicand": [
+    "125/384",
+    "0",
+    "0",
+    "13/384"
+   ],
+   "radicand_str": "125/384 + 13/384*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "7/2 + -1/2*sqrt33",
+     "17/6 + -1/6*sqrt33"
+    ],
+    [
+     "9/2 + -1/2*sqrt33",
+     "9/2 + -1/2*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-7/8",
+    "0",
+    "0",
+    "1/24"
+   ],
+   "cos_str": "-7/8 + 1/24*sqrt33",
+   "cos_float": -0.6356432230609155,
+   "variants": [
+    "-7/8 + 1/24*sqrt33",
+    "7/8 + -1/24*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-7/8 + 1/24*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 32,
+     "diag": 0,
+     "total_edges": 68
+    },
+    {
+     "cos": "7/8 + -1/24*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 32,
+     "diag": 0,
+     "total_edges": 68
+    }
+   ],
+   "radicand": [
+    "17/96",
+    "0",
+    "0",
+    "7/96"
+   ],
+   "radicand_str": "17/96 + 7/96*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": false,
+   "eleven": "split+split",
+   "six_open": false,
+   "kind_list": [
+    [
+     "6 + -1*sqrt33",
+     "5/2 + -1/6*sqrt33"
+    ],
+    [
+     "23/2 + -11/6*sqrt33",
+     "9/2 + -1/2*sqrt33"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-3/4",
+    "0",
+    "0",
+    "1/12"
+   ],
+   "cos_str": "-3/4 + 1/12*sqrt33",
+   "cos_float": -0.27128644612183095,
+   "variants": [
+    "-3/4 + 1/12*sqrt33",
+    "3/4 + -1/12*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-3/4 + 1/12*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 36,
+     "diag": 0,
+     "total_edges": 72
+    },
+    {
+     "cos": "3/4 + -1/12*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 36,
+     "diag": 0,
+     "total_edges": 72
+    }
+   ],
+   "radicand": [
+    "5/24",
+    "0",
+    "0",
+    "1/8"
+   ],
+   "radicand_str": "5/24 + 1/8*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": true,
+   "eleven": "inert+inert",
+   "six_open": false,
+   "kind_list": [
+    [
+     "6 + -1*sqrt33",
+     "3/2 + -1/6*sqrt33"
+    ],
+    [
+     "19/6 + -1/2*sqrt33",
+     "1"
+    ]
+   ]
+  },
+  {
+   "cos": [
+    "-1",
+    "0",
+    "0",
+    "1/6"
+   ],
+   "cos_str": "-1 + 1/6*sqrt33",
+   "cos_float": -0.0425728922436619,
+   "variants": [
+    "-1 + 1/6*sqrt33",
+    "1 + -1/6*sqrt33"
+   ],
+   "n_variants": 2,
+   "kinds": 2,
+   "per_variant": [
+    {
+     "cos": "-1 + 1/6*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 24,
+     "diag": 0,
+     "total_edges": 60
+    },
+    {
+     "cos": "1 + -1/6*sqrt33",
+     "kinds": 2,
+     "offdiag_ordered": 24,
+     "diag": 0,
+     "total_edges": 60
+    }
+   ],
+   "radicand": [
+    "-11/12",
+    "0",
+    "0",
+    "1/3"
+   ],
+   "radicand_str": "-11/12 + 1/3*sqrt33",
+   "wall_breaks": false,
+   "eleven_inert_both": false,
+   "eleven": "ram+ram",
+   "six_open": false,
+   "kind_list": [
+    [
+     "23/3 + -4/3*sqrt33",
+     "1"
+    ],
+    [
+     "1/3",
+     "7/2 + -1/2*sqrt33"
+    ]
+   ]
+  }
+ ],
+ "seconds": 1.4,
+ "claim_scope": "EXACT: every verdict \u2014 the disk membership, the collinearity, the cosine, |cos| < 1, and the Theorem-B squareness \u2014 is decided in K by exact rational arithmetic. Floats appear only in display columns. NOTHING IS TRUNCATED: every rotation class is listed. The reporting unit is a rotation UP TO THE BASE'S VERIFIED SYMMETRIES, not an angle: `variants` names the angles that collapse. SCOPE: rotations with cos \u03b8 \u2208 K only; cos \u03b8 \u2209 K needs the two-equation law and is not enumerated here. A listed class ADMITS cross edges of \u2265 2 kinds on this base at this radius; that is necessary for a type-M construction and NOT sufficient. No claim is made that any of them yields a 5-chromatic graph."
+}
