@@ -817,16 +817,27 @@ artifact it was claimed to apply to, `data/m62/m63-map-A412.json`, **all 89 entr
 targeted reduction whose target is **not** derived from a surviving incumbent — which is neither the loop
 path nor phase D's map.*
 
-**And what the strike leaves behind is worth more than what it removed.** The loop's negatives carry **no
-margin information at all, by construction**: every inert candidate returns the identical bound, so *"how
-close was this candidate?"* is unanswerable from the 89-candidate map and no re-reading of it can recover a
-gradient. That makes **three independent instruments now reading flat on single-orbit expansion** — the
-look-ahead proxy (0 freed on every orbit tried, §S.3 B-12), the shoulder-against-cut comparison (*"neither
-vindicated nor convicted, and the comparison has no power"*), and now the target bound, flat by design.
-Three flat instruments on one question is not three coincidences; it is a structural fact about what the
-measurement **can** return, and it is the honest frame for phase D's map: **one bit per candidate, and no
-gradient was ever available to extract.** That is a better sentence for the record than *"our proxy was
-uninformative"*, because it says the informativeness was never on offer.
+**And what the strike leaves behind is worth more than what it removed — stated with its quantifiers,
+because two of the three readings are about one state and only one is about the measurement.** (G30 failure
+mode 2: a claim whose quantifier does not match what was measured.)
+
+> The loop's targeted negatives carry no margin information **by construction**, so no re-reading of an
+> expansion sweep can recover a gradient — this is **design, not data**, and the algebra holds for any
+> expansion of any state on any base, because a surviving incumbent caps `wh` and the first crossing is
+> therefore at the incumbent. Beside it, two instruments read flat **at the `A403`/`A412` state, with one
+> companion**: the look-ahead proxy (0 freed necessary atoms on every orbit tried, §S.3 B-12) and the
+> shoulder-against-cut comparison (*"neither vindicated nor convicted, and the comparison has no power"*).
+> **Phase D's map is therefore one bit per candidate, and the gradient was never on offer.**
+
+The last clause is the structural half and it is the half that saves someone an afternoon; it is a better
+sentence for the record than *"our proxy was uninformative"*, because it says the informativeness was never
+available rather than that we failed to find it. **Why the empirical half may generalise is an argument
+made in advance, not a third measurement**, and it is cited as such: the freeze states that *"a column of
+zeros at A403 is the STRONGER outcome: it sits beside a demonstrated four-orbit success from the same
+state, making 'single-orbit expansion never works, even where a four-set does' a fact about single moves
+rather than about that state."* That argument was committed before the outcome was read, which is what
+gives it standing — and it is still an argument, so it belongs beside the count of instruments and never
+inside it.
 
 **A reporting defect found in the same reading, and it is E's to fix if the map is regenerated.**
 `primary.bound` is stored as an **English sentence** — *"no refusing selection of <= 372 over all
