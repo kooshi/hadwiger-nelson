@@ -1988,3 +1988,128 @@ The diagnosis, the one-line fix and **the planted control that fails on the curr
 §R3.9. Reported rather than edited because phase C is mid-close in that file. No number is retracted:
 the symmetry break itself is sound, because `Stage.cnf` makes the pin clause conditional on the atom's
 presence — it is the *control* that was checking nothing while printing a benign verdict.
+
+---
+
+## §H2 — Handoff to the successor
+
+*The product owner ruled on 2026-09-11 that phase D stops before the expansion rule, and that
+acceptance clause 2(b) goes to a fresh agent with a full context budget — because the rule is scored
+against the map this phase produced, so building the rule first would be backwards. This section is
+what that agent has instead of this conversation. Written as a deliverable, not as a postscript.*
+
+### H2.1 — Start here, in this order
+
+1. **`§R3` above** — what ran, what fired, every prediction scored, and §R3.11's list of what was not
+   done. Read §R3.4 (the companion) before touching any replay comparison; it changes what one means.
+2. **`data/m62/m63-sweep-protocol.json`** — the evaluation protocol, frozen in commit `50b5f4c`
+   **before the first candidate's outcome was read**. It is not documentation: it is the thing that
+   makes any ranking claim honest afterwards, and it binds you as it bound me.
+3. **The contract is the committed code at HEAD**, as always — `tools/parts_loop.py`,
+   `tools/parts_edges.py`, and phase C's `parts_reduce` / `parts_stage` / `parts_run` / `parts_report`.
+
+### H2.2 — What is on disk, and what each artifact means
+
+| artifact | what it is, and the one thing not to misread |
+|---|---|
+| `m63-D0-cost-probe{,-L451}.json` | the ask regime on both L stages. **Cheap by 13× against the joint stage**, which is why §5's order of work stood |
+| `m63-sweep-protocol.json` | the frozen protocol. **The pre-declared full-level subset in it went UNUSED** — the secondary question turned out to cost 1.4× the primary, so it ran on every candidate. It stays in the file as the record of what we would have done, which is what makes it evidence rather than ceremony |
+| `m63-map-A412.json` + `m63-map-A412/entry-*.json` | the outcome map. **`scoring_role` is `in-sample`.** Its *density* is a measurement and is evidence; **no ranking claim read off it is evidence**. One entry per candidate, resumable: a `yes`/`no` entry is never re-asked, a `not_run` or `unknown` always is |
+| `m63-D1a-A451-rung3.json` | the replay against the **wrong** companion (`S136`). Kept deliberately: it is correct about its own question and is the object §R3.4's finding is made of |
+| `m63-D1a-A451-rung3-vs-A166.json` | the same replay against the companion his loop actually held. **All four attested numbers exact** |
+| `m63-D1b-A412-rung1.json` | the 374 level at rung 1 |
+| `m63-edge-phase1-509.json` | the individually-critical edge census. Its count is a **rigorous floor** on the edge minimum and **not a record** |
+| `m63-edge-greedy-509.json` | a **certified refusing edge-subgraph** with an exact count, re-verified by a fresh solver. An **upper** bound from one order; never *the* minimum |
+| `build/m63d/rungprobe.json`, `d1c.json`, `companion_hunt.json` | the complete order-2/order-6 rung census, the rung-2 replay rows, and the companion hunt. Untracked scratch with committed producers alongside; promote if wanted |
+
+### H2.3 — The five rules that cost this phase real time to learn
+
+1. **Take edges from the assembled stage, never from a relation on the base.** A base relation does
+   not know which side a shared point is on. Three agents, three different faults, one afternoon.
+2. **The shared centre is in every published minimum and is never an atom.** Any code mapping a
+   published vertex list onto atom indices must drop it — and check that what it dropped is exactly
+   the fixed set.
+3. **The transfer lattice** (§R3.7): a decided ask travels both ways; a refusing selection and
+   non-criticality travel **up**; criticality and correction sets travel **down only**. Importing a
+   correction set upward can exclude a genuine record.
+4. **Anything chosen by a rule that reads `A` changes meaning when `A` grows.** Pin every
+   `A`-dependent choice by value at a named baseline.
+5. **An optimisation correct about *cost* can be silently wrong about *meaning*** (§R3.8, five
+   instances). Ask it of every shortcut, including the ones you inherit from here.
+
+### H2.4 — Clause 2(b), and how to do it without poisoning the map
+
+The clause: *a rule, registered and committed before it runs, starting from our 375-level accumulator
+with no knowledge of his orbits, chooses the expansion, and the loop reaches `|M| ≤ 374` on the L
+side.*
+
+- **Develop the rule against the `A412` map. Score it on the `A403` map, and only after the freeze
+  commit.** The `A412` map is in-sample by declaration; using it for both is the mirror this phase
+  was built to avoid.
+- **`A412` already contains his recorded expansion**, so the four orbits his move used are absent from
+  the in-sample candidate set *by construction*. That is the best property of the split and it is
+  stated on the artifact; do not read the absence as an omission.
+- **The map is sound for choosing the loop's FIRST move and not its second** — it evaluates candidates
+  against a fixed accumulator, and accepting one moves the menu. A second iteration needs its own map
+  or a rule that does not assume one.
+- **His success criterion may not discriminate at our scale.** Candidate one grew the level by 1,692.
+  If most candidates grow, *"the accumulator changed"* fires on nearly everything and ranks nothing,
+  and **defining a criterion becomes a deliverable rather than an inherited constant**. The sweep's
+  `M_set_grew` column answers this; read it before designing the rule. And note the deeper form:
+  **growth is his criterion for success and nothing makes it a criterion for progress** — a larger
+  accumulator makes the next stage larger and dearer, which is his own §5.11 ceiling.
+- **Never score a predictor against itself.** Atoms-freed is a ranking and may not be an outcome
+  column; the frozen protocol bans it. The temptation arrives precisely when the primary outcome comes
+  back all-zero.
+
+### H2.5 — What is not done, and what it would take
+
+| item | why not | what it needs |
+|---|---|---|
+| **D2, his §5.10 indicators** (P-D1 unscored) | overtaken by §R3.4: a replay comparison's *meaning* had to be settled first | the three quantities on ~14 candidates of `A403`; `LevelSet.free` on a complete level |
+| **D3's `look_ahead`, `many_then_trim`, `rank`, and the freeze commit** | context budget; and it is scored against the map, which was still running | `parts_faces.LevelSet.necessary()` on the **complete** 374 level (336 against `Y`'s 312 — re-derive it), then the freeze |
+| **D4's loop and clause 2(b)** | follows D3 | `run_loop` from a starting *record*; controls d4.1–d4.4, of which **d4.4 (the rung re-resolved after an expansion) is the dangerous one** |
+| **The `A403` held-out map** | may only run after the rule is frozen | one `map` invocation with `--scoring-role held-out` |
+| **FS35-1's two quantities** | solver-free, minutes, simply not reached | `parts_faces.exchange_classes` and `orbit_closure` at each replayed state |
+| **The exact edge minimum** | the hitting set over a ~630-edge window may not close cheaply | `parts_edges.py sweep` without `--phase1-only`, seeded by the greedy result |
+| **The pin-control fix** | phase C owns the file and was mid-close | §R3.9: the one-line change **and the planted control that fails on today's code** |
+
+### H2.6 — Compute and courtesies
+
+Process groups with a pgid file, `kill -TERM -<pgid>` only, never by matching a command line.
+Announce anything over fifteen minutes with `--dry-run`'s text. Check the load at launch rather than
+assuming it; the ceiling across all agents was 24 of 32. `git add` and `git commit` are **one
+command**, never two moments — a failed commit leaves the index staged for whoever commits next.
+And **Python 3.14 defaults to `forkserver` on Linux** (§X.6): pass an explicit fork context or an
+initializer, or your workers will see an empty module global and blame the dictionary.
+
+### H2.7 — A monitoring check owes the same negative control as a correctness check
+
+*Added at the close, because it nearly produced a false crash report and it is not about Parts.*
+
+The house rule is *"on any unexplained process crash, HALT and report — do not diagnose, retry, or
+work past it."* Phase D came within one step of reporting an unexplained crash **that had not
+happened**, on the strength of two checks that were incapable of answering:
+
+1. **The recorded process-group file named the wrong process.** `setsid nohup cmd & echo $!` records
+   the **wrapper's** pid; `setsid` then forks, so the job runs under a different pid and its own new
+   group. An audit built on those files reported four jobs "exited" while three were visibly still
+   writing output. The consequence is worse than a wrong status: **`kill -TERM -<pgid>` aimed at that
+   number reaches the wrong group or nothing**, which is the failure this project has already paid
+   for. **Take the pgid from the live process table after launch** — `ps -o pgid= -p <the real pid>`,
+   found by argv — never from the shell that started the job.
+2. **A hastily written liveness one-liner printed `GONE`** in the same output in which a direct
+   process listing showed the job alive at 99.3% of a core with eighteen minutes on the clock.
+
+So, the rule, which generalises this repository's existing *"make the gate fail, and watch it
+fail"*: **a monitoring check owes the same negative control as a correctness check — kill something
+on purpose and confirm the check notices.** An unverified liveness check is the same species as the
+pin receipt that printed a benign verdict while examining nothing (§R3.9) and the control that fell
+through to an empty restriction (§R3.8): all three returned confident, benign-looking answers while
+measuring nothing, and in each case the danger was not the wrong number but the *unearned
+reassurance*.
+
+A corollary worth carrying, because it is what made the silence look like death: **a long quiet
+period is not evidence of a crash when a single ask may legitimately run to its wall.** Compare the
+gap against the per-ask budget before concluding anything — 7 minutes of silence under a 600-second
+per-ask wall is a slow question, not a dead process.
