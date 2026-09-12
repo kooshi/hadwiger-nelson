@@ -1,0 +1,36 @@
+{
+ "config": {
+  "admission_reading": "b-literal-internal",
+  "bans": [
+   "no ranking is scored against an outcome it also predicts (atoms-freed)",
+   "every arm reported in full, never the best",
+   "three outcome states -- improved, inert, undecided -- and a wall hit is never folded into inert",
+   "no loop iteration started from a truncated level"
+  ],
+  "candidates_evaluated_per_iteration": 3,
+  "definition": "rank by look_ahead.freed per vertex added, ties broken by his decreasing admission-degree order, restricted to candidates of at most n_new_max vertices; on a stall raise n_new_max (his own escape) and re-rank; at the last rung propose his second strategy, many_then_trim",
+  "escalation_schedule": [
+   12,
+   40
+  ],
+  "held_out_state": "our 375-level accumulator, 403 vertices, which equals his v403e2112 literally (zero differing vertices, re-derived 2026-09-11)",
+  "if_the_held_out_map_is_signal_free": "then the rule is scored by outcome on ONE held-out row -- one bit -- and no map stands behind it. That is written here BEFORE the run so it is anticipated rather than salvaged. A column of zeros at A403 is the STRONGER outcome: it sits beside a demonstrated four-orbit success from the same state, making 'single-orbit expansion never works, even where a four-set does' a fact about single moves rather than about that state.",
+  "incumbent_weight": 374,
+  "look_ahead_batch": 8,
+  "many_then_trim": {
+   "final_degree_is_a_fixed_point": true,
+   "min_final_degree": 3,
+   "orbits": 6
+  },
+  "max_iterations": 6,
+  "n_new_max": 24,
+  "outcome": "clause 2(b) is met only by |M| <= 374; {M} growth at fixed |M| and fixed rung in an iteration that added vertices is clause 2(c) and is recorded separately",
+  "rule": "ours",
+  "seed": 20260911,
+  "stall_limit": 3,
+  "target": "the primary decision asks target = incumbent - 1 = 373 atoms, i.e. |M| <= 374 vertices, which is exactly clause 2(b)"
+ },
+ "frozen_at": "2026-09-11",
+ "kind": "m63-freeze",
+ "note": "COMMIT THIS FILE before any held-out run."
+}
