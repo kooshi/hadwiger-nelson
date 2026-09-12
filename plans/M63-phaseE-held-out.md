@@ -43,7 +43,10 @@ becomes the thing that licenses phase G. Three consequences shape this plan:
    (`CLAUDE.md` § Make the gate fail). **So the sentence "every reduction is guarded by the anchor" is not
    true today, and this plan does not write it.** §2's **E9** characterises the guard while ground truth
    still exists: planted faults, a measured killed/survived table, and a **written residue** — the fault
-   classes it cannot see even when green.
+   classes it cannot see even when green. **And E9.5 is this phase's headline deliverable** (§A ruling 3):
+   the only non-circular geometry re-derivation this repository owns is welded to the 509, and calibrating
+   it *means* running it where the anchor also fires. It is a one-way door — after phase E there is no
+   object whose answer we know.
 2. **The sharpest row is the one whose companion is an edge.** Most rows pair a large half of a type-M
    graph against a small half of the same kind. The `8/3` mono-pair does not: its companion graph is a
    single edge. It exercises the *companion abstraction*, which is exactly the piece phase G leans on
@@ -66,7 +69,28 @@ configuration is frozen at commit `6158162`), and not a place where a disagreeme
 
 ## §A — Product-owner review
 
-*(empty; the product owner records approval, conditions and any struck rows here before anything runs)*
+**Three rulings, 2026-09-11, during planning.**
+
+1. **E3b is APPROVED, and E3 is re-labelled.** *"A row seeded with his own minimum returns `|M| = 367` at
+   iteration zero, so 'reach his `|M|`' is vacuous: it reports a pass while checking nothing. That is this
+   project's signature failure, and we have catalogued five instances of it tonight alone. Run E3b with a
+   start whose minimum is strictly above 367, and re-label the original row as discharging clause 2(c), not
+   2(b) — the vacuity is not a reason to drop the row, only to stop it claiming something it cannot
+   support."*
+2. **`his_indicators` is OUT OF SCOPE for phase E, with the reason recorded so it is not re-opened.**
+   *"Whether his own published ranking device selects his own recorded move is a real fact about his method,
+   and the method is the product since tonight's correction. But phase E's entire value is that it runs a
+   **frozen** configuration against problems nobody tuned on; implementing a new ranking device inside it is
+   exactly the contamination the freeze exists to prevent. It goes to the expansion work, where ranking
+   lives."*
+3. **E9.5 is phase E's HEADLINE DELIVERABLE, not an addendum.** *"'A builder being exact is not a check.'
+   Phase F's §2.6 lists exact geometry among the controls that transfer to new ground, and it does not — the
+   only non-circular re-derivation we own is welded to the 509, and it can never be calibrated after phase
+   E, because after phase E there is no object whose answer we know. That is a one-way door. It is the
+   single artifact the rotation work consumes, and if it is not built now it cannot be built at all."*
+   The §X.2 amendment to phase F's plan is **the product owner's to apply**, not this plan's.
+
+*Still open for the product owner: §7's remaining items.*
 
 ---
 
@@ -348,9 +372,20 @@ the `A403` + four-orbit stage found its optimum in 188 s and enumerated in 79 mi
 **A row that only needs `|M|` is never scheduled as if it needed the level.**
 
 **`max_minima` is a per-row decision made in advance, not at hour six** (Poros, card 17). A capped level is
-a `Count` with method `truncated-at-budget`, which is a **floor**: against his 27 or his 120 it can only
-say `≥`. Each row's cap is registered in §3 with its predicted value, because deciding a cap once the cost
-is in the room is deciding with the cost in the room.
+a `Count` with method `truncated-at-budget`; **a row whose cap binds reports `|{M}|` as `not-compared` with
+the cap as its reason, never as a `≥`** (§3). Each row's cap is registered with its predicted value, because
+deciding a cap once the cost is in the room is deciding with the cost in the room.
+
+**And the level stage is priced on the RAW level, not on the canonical count** (Poros, card 22 — he
+conceded the forecast and then found the formula behind it was on the wrong quantity, which is the more
+useful correction). The enumeration walks every minimum; the canonical count is what a *group* collapses
+them to afterwards. Measured ratios: `S166` 48 raw → 8 canonical (6×); `L451` **3,264** raw → 282 (11.6×);
+`M6B403` 360 → 66 (5.5×). So `L451` enumerated **3,264** minima in 605 s, not 282, and the forecast below
+holds with *more* headroom than claimed; E7 at 120 canonical is roughly 660–1,400 raw, still inside the
+`L451` envelope. **A forecast stated on the canonical count is off by 5–12× the moment phase G inherits it
+for a base whose group order differs.** The rule: *level cost scales with `canonical × group order ÷ mean
+stabiliser`* — and **E-pre.1 already computes the group that estimate needs**, before any row runs, which
+makes that computation do double duty.
 
 ### 1.7 — What the freeze actually freezes, and the per-row registration that fixes it
 
@@ -734,6 +769,7 @@ two-ask anchor), and the outcome recorded as **killed** or **survived**.
 | R3 | **the counting layer** — which group `up_to` used, and whether the level is complete | no check reads either; `|{M}|` is a report, and a capped level is a sample | a per-row **Burnside cross-check** (`raw / up_to` against the orbit-count formula under the declared group — already done once at 282, never asserted), plus making `LevelSet.require_complete` a **run** guard and not only a loop guard |
 | R4 | **the question asked** — target, rung, side | they are **echoed** into the record, never verified against an intention | re-reduce the returned `M` and require it returns **itself** with zero droppable (idempotence). A too-lax target returns a non-minimal object, which idempotence catches |
 | R5 | **a consistently wrong problem** | every oracle-free relation — equivariance, monotonicity, idempotence — holds when both runs are wrong the same way | **nothing internal.** Only an external anchor or an independent re-derivation of the geometry (E9.5) |
+| R6 | **the anchor being absent at all** | `anchor=None` is a silent skip | a one-line change: a named verdict `anchor-not-supplied`, carried in the record and printed. **A fail-open becomes a fail-loud** |
 | R7 | **a fault in the code BOTH SIDES of check 2 share** | `check_invariants` compares the stage against a `reference` that `build_reference` builds from the same base, the same unit-edge predicate and the same cross law. A bug in any of the three corrupts both sides identically and the restriction identity still holds | the anchor (plant f0 demonstrates it), and on new ground E9.5's lifted geometry check |
 
 **The residue in one sentence, which is what travels to phase G** (Poros's formulation, adopted because it
@@ -741,7 +777,6 @@ is better than mine): **checks 1–3 are internal consistency — the pipeline c
 is the only check that compares against a truth from OUTSIDE the pipeline, namely a vertex list Parts
 published.** So on ground truth the apparatus has exactly one external check, and on a new base it has none;
 what survives is internal consistency, which by construction cannot detect a fault in shared code.
-| R6 | **the anchor being absent at all** | `anchor=None` is a silent skip | a one-line change: a named verdict `anchor-not-supplied`, carried in the record and printed. **A fail-open becomes a fail-loud** |
 
 **Poros's opening hunch, scored** (his card 2): he guessed the anchor is *"nearly blind to the stage being
 too big"* — **right, and provably so, not nearly** (R1). He guessed it is *"completely blind to the
@@ -870,8 +905,35 @@ phase E as planned** and is named here as the cheapest available upgrade, for th
 | P-E20 | **E-pre.1:** on all six reduction rows `Aut(A)` and the whole base group coincide, so **no row separates the live ambiguity** and every `|{M}|` agreement is against the companion-fixed rival only | 0.6 | E-pre.1, solver-free |
 | P-E21 | **E-pre.2:** `look_ahead.freed` reads **0 on every candidate** of the mono-pair menu, so `rule="ours"` and `rule="his_degree"` emit the identical ordering on E3 | 0.75 | E-pre.2, minutes |
 | P-E22 | **E9.5:** the lifted stage-level geometry check and the anchor **agree** on the row where both run, and the lifted check kills plant f0 | 0.85 | E9.5 |
-| P-E23 | at least one row's registered `max_minima` cap binds, so its `|{M}|` is reported as a **floor** (`≥`) and not as a value | 0.3 | E2, E4–E7 |
-| P-E18 | across the six held-out reduction rows, **at least one `\|{M}\|` disagrees while its `\|M\|` agrees** — the convention, not the reduction | 0.5 | E2, E4–E7 |
+| P-E23 | at least one row's registered `max_minima` cap binds | 0.3 | E2, E4–E7 |
+| P-E18 | across the six held-out reduction rows, **at least one `\|{M}\|` disagrees while its `\|M\|` agrees** | 0.5 | E2, E4–E7 |
+| P-E18a–c | **and if one does, its attribution is one of exactly three, each registered below with its discriminator** (Poros, card 21 — adopted; it closes the only post-hoc route left) | — | E2, E4–E7 |
+
+**P-E18's three attributions, registered in advance with what distinguishes each.** The first draft wrote
+P-E18 as *"the convention, not the reduction"*, and **that attribution is not available if P-E20 holds**: if
+`Aut(A)` and the whole base group coincide on every row, the live ambiguity cannot produce any discrepancy
+at all, and the only convention ambiguity left — `Aut(A)` against companion-fixed — is wrong by **5.5× to
+11.6×** on the rows measured, not by a near miss. A disagreement would then have to be attributed to
+something never named in advance, which is the inductive escape clause in its textbook form (G30 failure
+mode 1). **And the cause this milestone has itself measured twice was missing from the list: his printed
+numbers.** §S.3 A-7 — *"each `A` file sums EXACTLY to its own caption … both discrepancies live in his
+printed per-row columns and not in his data"*; §S.3 G-2 — *"his printed 375 column is strictly narrower
+than BOTH the M6A and the M6B level in the same two cells, so the column is a property of neither run."*
+
+| # | attribution | what distinguishes it, decidable after the fact |
+|---|---|---|
+| P-E18a | **the counting convention** | the disagreement is a clean multiple in the 5.5–11.6× band, **and** one of the audit's other group keys holds his number |
+| P-E18b | **an incomplete level** | `Count.method` is not `exhaustive-level`, or `max_minima` bound |
+| P-E18c | **his printed number** | our level is closed under the declared group, **all three** of the audit's group keys miss his value, and `A = ⋃{M}` still equals his published accumulator file literally — the exact pattern A-7 found twice |
+
+P-E18c has precedent in this milestone and is the one that will look least attractive to reach for
+afterwards, which is exactly why it is written down first.
+
+**And a bound cap makes a row `not-compared`, never a `≥`** (Poros, card 23, adopted). A floor is not a
+comparison: *"≥ 27"* against his 27 renders as satisfied and is not agreement. `Count` already refuses to
+hide a truncation — `truncated-at-budget` must name its population — so the fix is in the reporting rule
+rather than in the type: **a row whose cap binds reports `\|{M}\|` as `not-compared`, with "the cap bound at
+N" as the reason**, exactly the treatment an unidentified companion already gets.
 
 **A ban restated from the freeze:** no ranking is scored against an outcome it also predicts. P-E5 is a
 statement about the **menu**, not about the ranking, and it may not be used to score the ranking.
@@ -897,7 +959,7 @@ forecast).
 | 1 | **E1** the companion constructors + c-E1.1…c-E1.5, and the `Comparison` companion field | engineering; < 1 min compute | yes — it is mostly typing | **everything**; E2–E8 and E-pre.2 cannot start |
 | 2 | **E-pre.2** the look-ahead proxy over the mono-pair menu | tens of asks, **minutes**, **neither** | yes | E3's interpretation and its control arm |
 | 3 | **E9.1–E9.4** control characterisation on E2's stage | ~12 asks, **< 15 min** | yes | the residue statement, which is what travels to phase G |
-| 3b | **E9.5** lift leg 4 to stage level and calibrate it against the anchor | half a day engineering, ~6 asks | yes | **phase G** — and it can never be done after E |
+| 3b | **E9.5** lift leg 4 to stage level and calibrate it against the anchor — **the phase's headline deliverable** (§A ruling 3) | half a day engineering, ~6 asks | yes | **phase G** — and it can never be done after E. If the schedule slips, this is the item that does **not** slip |
 | 4 | **register §3 and the per-row registrations** in one commit | zero | — | **every held-out run** |
 | 5 | **E2(a)** mono-pair decision | 5–10 min, **optimum** | yes | E3 |
 | 6 | **E3** the required loop run (+ the `his_degree` control arm if E-pre.2 reads flat) | 1–2.5 h, **optimum per iteration**; doubled with the arm | one at a time; it is the phase | clause 3 |
@@ -962,8 +1024,8 @@ checkpoint path — a checkpoint nobody knows how to resume from is a file, not 
 | 9 | **A second registration, per row, committed before that row runs** — starting object, companion constructor and fingerprint, stage fingerprint and `fp_base`, rung, counting group **and the artifact its number is read from**, `wall_ask`, `max_minima`, predicted values — in the shape of `data/m62/m63-sweep-protocol.json` | rely on the freeze commit `6158162` alone, as §5 of the first draft of this plan did | checked in the code: `require_frozen` has **one** caller, behind a flag that is **default off**, and the frozen file pins no `wall_ask`, `max_minima`, `rung`, `cross_law` or `fp_base`. *"The configuration is frozen"* is true of one row in seven. Re-freezing would destroy the existing freeze's only property; a second, per-row registration adds one without touching it | **high** — it is a reading of the committed file, not a preference |
 | 10 | **Lift `parts_edge_verify` leg 4 to a stage-level geometry check and calibrate it in phase E** (E9.5) | leave it for phase G, where it is actually needed | calibrating it **means** running it where the anchor also fires and confirming they agree. After phase E there is no anchor to agree with, so a check first used on new ground is a check nobody has ever seen succeed against a known answer. It is also the only **external** control that survives — phase F §2.6's two proposed replacements are both internal consistency | **high** — the one deliverable phase G will consume |
 | 11 | **E3 takes a `--rule his_degree` control arm if the look-ahead proxy reads flat** | run E3 once under `ours` and report the outcome | `_rank_ours`'s own docstring says it *"degrades to his where it has no information"*, and audit row B-12 measured the proxy at **0 of 336** on every orbit tried. Without the arm, a null on E3 would be written up as *"our rule failed"* when the honest reading is *"our rule was never in the room"* | **high** — the arm costs one extra loop run and converts a null into a derivation |
-| 12 | **RECOMMENDED, AND IT IS THE PRODUCT OWNER'S CALL:** reclassify E3 as the clause-2(c) row it is, **and add E3b** (a start whose minimum is strictly above 367) as the clause-2(b) row | keep E3 as the clause-2(b) row and note the caveat in prose — it buys a day and leaves §S.1 clause 3 discharged by a reading that is met at iteration zero | the whole point of phase E under the corrected product is a **warranty**, and a warranty with a vacuous clause in it is worth less than one with an honestly unmet clause. E3b costs ~1–2.5 h and reuses E3's machinery entirely | **high on the mathematics** (`\|M\| = 367` at iteration zero, at any rung), **medium on the scope call** — if the product owner reads §S.1 #3 as satisfied by the whole Table 5 row rather than by its `\|M\|` clause, the requirement wanted something else and E3 alone discharges it |
-| 13 | **`his_indicators` is named as the cheapest upgrade and NOT scheduled** | implement it inside phase E, so a flat proxy has a published baseline to lose to | it is solver-free and genuinely cheap, and it is also **phase D's unfinished business** (audit row C-5, P-D1 unscored), not phase E's. Scheduling it here would grow the phase that gates the milestone's close | **medium** — if E-pre.2 reads flat *and* the product owner wants E's one bit to mean more than *"his degree order did nothing"*, this becomes the best hour in the phase |
+| 12 | **APPROVED by the product owner, 2026-09-11 (§A ruling 1).** reclassify E3 as the clause-2(c) row it is, **and add E3b** (a start whose minimum is strictly above 367) as the clause-2(b) row | keep E3 as the clause-2(b) row and note the caveat in prose — it buys a day and leaves §S.1 clause 3 discharged by a reading that is met at iteration zero | the whole point of phase E under the corrected product is a **warranty**, and a warranty with a vacuous clause in it is worth less than one with an honestly unmet clause. E3b costs ~1–2.5 h and reuses E3's machinery entirely | **high on the mathematics** (`\|M\| = 367` at iteration zero, at any rung), **medium on the scope call** — if the product owner reads §S.1 #3 as satisfied by the whole Table 5 row rather than by its `\|M\|` clause, the requirement wanted something else and E3 alone discharges it |
+| 13 | **`his_indicators` is OUT OF SCOPE for phase E — RULED, 2026-09-11 (§A ruling 2), and recorded here so it is not re-opened** | implement it inside phase E, so a flat proxy has a published baseline to lose to | the product owner's reason is stronger than the one this plan first gave (*"it is phase D's unfinished business"*): **phase E's entire value is that it runs a frozen configuration against problems nobody tuned on, and adding a ranking device inside it is exactly the contamination the freeze exists to prevent.** It goes to the expansion work, where ranking lives | **high**, now that it is ruled |
 
 ---
 
@@ -993,12 +1055,13 @@ checkpoint path — a checkpoint nobody knows how to resume from is a file, not 
 6. **Whether phase E may consume a reserve row.** If the product owner wants a second edge-companion
    instance, `mono-8/√3` is ready. I did not schedule it: it would spend a held-out row for a replication
    rather than for a new question.
-7. **§6 decision 12 — whether §S.1 clause 3 is discharged by E3 or needs E3b.** This is a scope and
-   acceptance question, not a measurement, and it belongs to the product owner. **Default if nothing is
-   said:** E3b runs, because reporting a clause as met when it is met at iteration zero is the failure this
-   milestone exists to avoid.
-8. **Whether this planner or the implementer writes the five bibliography rows** (§PA.4, drafted at §X.3)
-   and the phase F §2.6 amendment (§X.2). Both are files with other writers tonight.
+7. ~~**§6 decision 12 — whether §S.1 clause 3 is discharged by E3 or needs E3b.**~~ **RULED, §A ruling 1:
+   E3b runs and E3 is re-labelled to clause 2(c).**
+8. ~~**Whether this planner or the implementer writes the five bibliography rows.**~~ **Done** — the five
+   rows of §PA.4 are in `BIBLIOGRAPHY.md` § A, the `[SeguraEtAl2016]` alias is in § A′, and
+   `python3 tools/bib_audit.py` reads *"every cited work resolves to a row or a recorded alias"* with its
+   three self-test controls all firing. **The §X.2 amendment to phase F's plan is the product owner's**,
+   per §A ruling 3.
 
 ---
 

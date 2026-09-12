@@ -45,7 +45,7 @@ the second was asked for.
 - `plans/M63-SESSION-HANDOFF-2026-09-11.md` §6.5 and §6.6 — read against: the two facts I was briefed on should be attested at an address — surprised: no; both confirmed, and the cost ratio is 188 s against 79 minutes and climbing
 - `tools/parts_rule.py:_rank_ours` and the `RULES` table at line 202 — read against: a ranking with a live first sort key — surprised: yes; with the proxy flat it is provably `his_degree` (card 8)
 - `data/m62/*.json`, 82 committed records — read against: there should be no record for any of E's six reduction rows — surprised: no; none exists, the rows are genuinely unrun, and `m63-M6B403-reduction.json` is the spent M6B 375 row
-- `plans/M63-phaseE-held-out.md`, the plan this record advises — read against: nothing yet — surprised: unread; it does not exist yet, so every card below is about the material E must plan against and this section is to be re-read when the draft lands
+- `plans/M63-phaseE-held-out.md`, the plan this record advises, 1,083 lines — read against: cards 1-20 either adopted with a reason or refused with a reason, and no card silently absorbed — surprised: no on adoption (§P scores them and §6 gives thirteen four-part decisions), yes on two residual joints: the cost argument concedes correctly but reasons on the wrong quantity, and P-E18's attribution clause is inconsistent with P-E20 (cards 21, 22)
 
 ---
 
@@ -598,3 +598,180 @@ Stated so it can be scored later.
 **Already settled by me, needing nothing:** card 13 was overstated and is corrected in place (the counting
 convention has two independent confirmations, not zero; what survives is that the *live* rival — `Aut(A)`
 against the full base group — has been separated on no row ever run).
+
+
+---
+
+## §7 — Read against the draft, 2026-09-11
+
+The plan landed at 1,083 lines with a §P scoring the cards, thirteen four-part decisions in §6, and six
+things it could not settle in §7. Cards 1-20 are adopted or refused with a reason; none was absorbed in
+silence. It corrected me once, with evidence, and that correction is right (below). Two joints are still
+soft, and one of them is the kind this identity exists to catch.
+
+**Where it corrected me, and it is right.** Residue entry (d), the companion's identity: I claimed the
+anchor is blind to a wrong companion. It is not — §S.2 #7 measured `v375e1916` refusing with `S141` in
+12 of 24 frames and with `S136` in **none**, so a wrong companion can kill the anchor's refusal. My claim
+holds only for the fingerprint check taken alone. The plan kept my registered prediction for the plant
+anyway (P-E19, 0.55) because a *frame-compatible* wrong companion may still pass, which is the half of
+the claim that survives.
+
+**Card 21 — P-E18's attribution clause is unavailable if P-E20 resolves as predicted, and the cause
+this milestone has actually observed is not on the list.**
+This is the one I would not let through. Two registered predictions are logically coupled and the plan
+does not say so:
+
+- **P-E20** (0.6): on all six reduction rows `Aut(A)` and the whole base group **coincide**, so no row
+  separates the live ambiguity.
+- **P-E18** (0.5): at least one `|{M}|` disagrees while its `|M|` agrees — *"the convention, not the
+  reduction"*.
+
+If P-E20 is true, the `Aut(A)`-against-full-group ambiguity cannot produce any discrepancy, and the only
+convention ambiguity left is `Aut(A)` against companion-fixed — confirmed three times, and wrong by a
+factor of **5.5× to 11.6×** on the rows measured, not by a near miss. So **under P-E20, P-E18's stated
+attribution is not available**, and a disagreement would have to be attributed to something the plan has
+not named. That is precisely the inductive escape clause: a branch that is itself a guess, inconsistent
+with what is already held.
+
+**And the cause this milestone has repeatedly measured is missing from the list: his printed numbers.**
+`§S.3 A-7` — *"each `A` file sums EXACTLY to its own caption … both discrepancies live in his printed
+per-row columns and not in his data"*, with Table 3's file at 412 against a column summing to 402.
+`§S.3 G-2` — *"his printed 375 column is strictly narrower than BOTH the M6A and the M6B level in the
+same two cells — so the column is a property of neither run."* Three of four `A` columns do not check.
+
+So a `|{M}|` disagreement has **at least three live attributions**, and only one is on the plan's list:
+
+| attribution | what distinguishes it, decidable after the fact |
+|---|---|
+| the counting convention | the disagreement is a clean multiple in the 5.5–11.6× band, and the audit's other group keys hold his number |
+| an incomplete level | `Count.method` is not `exhaustive-level`, or `max_minima` bound |
+| **his printed number** | our level is closed under the declared group, the audit's three keys all miss his value, and `A = ⋃{M}` still equals his published accumulator file literally — the pattern A-7 already found twice |
+
+The third is the one with precedent in this milestone, and it is the one that will look least attractive
+to reach for, which is exactly why it should be registered now. **Suggested: P-E18 is split into its
+three attributions, each with its discriminator, written before the run.**
+
+**Card 22 — the cost disagreement: the plan's conclusion is right and its formula is on the wrong
+quantity.** §4 rebuts my card 17 with numbers and wins: *"`S166` closed a complete level with 8 minima
+in 587 s and `L451` one with 282 minima in 605 s … Phase E's rows carry 4, 27, 28, 76, 78 and 120
+minima."* I concede the conclusion — 10-40 minutes per level is the right forecast and my ~5× was wrong.
+
+But **8, 282, 4, 27, 120 are canonical counts, and the enumeration walks the RAW level.** The measured
+ratios: `S166` 48 raw to 8 canonical (6×); `L451` 3,264 to 282 (11.6×); `M6B403` 360 to 66 (5.5×). So
+`L451` enumerated **3,264** minima in 605 s, not 282 — which is why the forecast holds, and holds with
+more room than the plan claims. Applied properly, E7 at 120 canonical is roughly **660-1,400 raw**, still
+inside the `L451` envelope.
+
+The conclusion survives; the formula does not, and a formula stated on the canonical count is off by
+5-12× the moment phase G inherits it for a base whose group order differs. **One clause fixes it: the
+level stage is priced on the raw level size, which is the canonical count times the declared group's
+order divided by the average stabiliser — and E-pre.1 computes exactly the group needed to estimate it,
+before any row runs.**
+
+**Card 23 — a bound cap makes a row `|M|`-only, not a `≥` comparison.** P-E23 (0.3) says a bound
+`max_minima` makes `|{M}|` *"reported as a floor (`≥`) and not as a value"*. A floor is not a comparison:
+`≥ 27` against his 27 renders as satisfied and is not agreement. `Count` already refuses to hide this
+(`truncated-at-budget` must name its population), so the fix is in the reporting rule, not the type:
+**a row whose cap binds reports `|{M}|` as `not-compared`, with "the cap bound at N" as the reason** —
+the same treatment the plan already gives an unidentified companion.
+
+**What I am not pressing on, having read it.** §6 decisions 4, 9, 10 and 11 (the named `anchor-not-supplied`
+verdict, the per-row registration, lifting leg 4, the `his_degree` control arm) are the four that carry the
+phase, and each is argued from a reading of the code rather than a preference. Decision 12 is correctly
+escalated rather than settled. §7's six open items are honest, and item 3 — that a stall at
+`max_iterations = 6` is unanswerable without breaking the freeze, and a continuation run must be labelled
+and reported separately — is the right call and the one most likely to be eroded later.
+
+
+---
+
+## §8 — The three soft parts the engineer asked me to press, answered
+
+*It committed the plan at `2608d17`, scored all twenty cards in its §P, corrected me three times, and asked
+for a targeted reading of three places rather than a sweep. Taking them in its order.*
+
+### (a) Is E3b's construction reachable? — decidable by ONE run, and the run also builds the state
+
+The question: does a set exist that hits all 27 minima of `A375` whose complement still refuses?
+
+**State it as a constraint and it stops being a search.** `W ⊆ A375` refuses and contains no minimum
+`M_i` exactly when `W` omits at least one atom of each `M_i` — that is the clause
+`⋁_{a ∈ M_i} ¬select(a)`, one clause per minimum, **27 clauses** on the instance `reduce_stage` already
+builds. So:
+
+> Run the reduction of `A375` with those 27 clauses added. Either it returns **no refusing selection**,
+> and then *every* refusing selection of `A375` contains one of the 27 minima — E3b is impossible inside
+> his accumulator, and clause 3 is honestly NOT MET; or it returns a minimal `W` with `min(W) ≥ 368`,
+> which **is** E3b's starting state, delivered with its own minimum already computed.
+
+One run, two answers, neither wasted, and it is a **decision** rather than a level — the cheap kind, on
+the plan's own split. It belongs beside E-pre.1 and E-pre.2 as **E-pre.3**, because it decides whether a
+scheduled row exists before the phase commits to it, which is what the other two pre-runs are for.
+
+Two structural remarks that sharpen it:
+
+- **The deletions must avoid the forced atoms.** Phase C's partition — *"423 forced (present in every
+  refusing selection, by downward closure) and 153 free"* — means deleting a forced atom makes the
+  remainder colourable outright. So the hitting set lives entirely in the free atoms, and whether one
+  exists there is exactly what the 27 clauses decide.
+- **Why this is not obviously possible, which is why it is worth deciding rather than asserting.** The 27
+  are the minimal refusing selections *at weight 366*. A `W` of the kind E3b wants must contain a
+  minimal refusing selection of weight **≥ 367** — i.e. `A375`'s refusing family must have minimal
+  elements at more than one weight. Nothing measured so far says it does. The engineer is right that
+  "clause 3 reported NOT MET" is a bigger call than the plan made it; the good news is that it is now a
+  **pre-run** call costing one decision, not a discovery made after a row has been scheduled.
+
+### (b) R4's catcher is wrong for both directions of the fault, and f7's direction is inverted
+
+Read at `tools/parts_reduce.py:544`:
+
+```
+if target is not None and state.w_star is None and wh > target:
+    target_lb = wh; break      # NO refusing selection of weight <= target
+```
+
+`wh` is the MaxSAT optimum over the harvested hypergraph — a rigorous **lower** bound on `w*` — and the
+break fires only *before* an optimum is found. Therefore:
+
+- **Too-lax target** (larger, the plan's f7: `incumbent` for `incumbent − 1`): `w* ≤ incumbent ≤ target`,
+  so the break never fires, the search runs to the true `w*`, and the verdict is **correct**. It costs
+  time and nothing else. **f7's stated expectation — *"returns `inert` for a candidate that would have
+  improved"* — has the direction wrong**; a too-lax target cannot produce a false `inert`.
+- **Too-tight target** (smaller, `incumbent − 2`): the run answers *its own question* truthfully —
+  `no-selection-at-target` — and the loop reads that as "did not improve". **This is the off-by-one that
+  produces a false `inert`**, and it is at least as realistic as the one planted.
+
+So R4's catcher fails on both sides. Idempotence cannot catch the lax case because there is no error to
+catch, and it cannot catch the tight case because a target-refuted run has **no object to re-reduce** —
+the docstring is explicit: *"A target-refuted run has NO level and therefore no `A` and no `|M|`."*
+
+**Two catchers that do work, both already half-built:**
+
+1. **The registration diff.** The record echoes `target`, `rung` and `side`; §6 decision 9's per-row
+   registration states them. Mechanically diffing the two is R4's real catcher, and it is being built
+   anyway for another reason — it only needs naming as R4's and running.
+2. **A one-unit tripwire on the loop's negatives.** A `no-selection-at-target` record carries
+   `target_lb`, the bound at which the break fired. **When `target_lb == target + 1` the candidate was
+   refuted by exactly one unit** — precisely the population a too-tight target would misreport. Re-asking
+   only those at `target + 1` is a cheap standing check on every `inert` the loop ever emits.
+
+**Suggested plant swap:** replace f7 with `target = incumbent − 2`, whose expected answer is *"nothing
+fires, and the loop reports `inert` for a candidate that improves"* — the claim f7 makes but cannot
+demonstrate.
+
+### (c) Sequencing E9.5 — the order is right; the exposure is not ordering
+
+The plan already puts E9.5 at item 3b, before the registration commit at item 4. That is the right order
+and I would not move it. Two refinements:
+
+- **Its dependency is narrower than the schedule implies.** Calibration needs a stage where the anchor
+  *also* fires, i.e. one containing a published minimum. E2's stage qualifies — `v367e1822 ⊆ A375` — so
+  E9.5 depends on E1 plus one stage build, **not** on the row sequence. If E1 lands early, E9.5 can move
+  up, and it should.
+- **The exposure is that it is silently tradeable.** Half a day of engineering sitting in front of rows
+  that are about to return interesting numbers is the item that gets deferred "just until after E3", and
+  after phase E there is no anchor left to calibrate against. Ordering cannot prevent that; **visibility
+  can.** Put *"the lifted geometry check ran and agreed with the anchor on a row where both fire"* into
+  the acceptance list §X.1 drafts for §S.4, and into E10's written judgement. Then deferring it is a
+  visible unmet acceptance item at the close rather than a quiet omission — which is the same discipline
+  the phase applies to every other unmet clause.
