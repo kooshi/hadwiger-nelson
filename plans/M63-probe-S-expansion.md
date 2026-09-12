@@ -295,6 +295,53 @@ how a search leaves his disk at all. Separately, four promoted orbits — `(1,1,
 his own *"all useful orbits satisfy `abcd = 0`"* discards; they are legitimate points of his base.
 The pair sweep therefore tests two of his published search heuristics as a by-product.
 
+## 7d — The pair phase, registered before it runs
+
+*Written with nine of fourteen singles decided, every one inert with a bit-for-bit identical
+accumulator. If the last five change that picture, these are re-registered before anything launches
+and the change is recorded here rather than quietly absorbed.*
+
+**The run plan.** 112 candidates, four concurrent, single-core, niced, as a process group with its
+pgid in a file; phase D's sweep takes priority if the core ceiling binds. **Group 1 — the 21 pairs
+whose second orbit is admitted only once the first is present — runs first**, on the product owner's
+reasoning that promoted orbits are precisely the material that attaches well to *something* rather
+than to the bare accumulator, and because if the sweep is ever cut short the informative runs are
+already done. **Group 2 — the 91 pairs-of-singles — is his fixed-reserve rule exactly**, so its
+outcome is reported with its own enumeration and a negative on it alone is a statement about *his*
+rule. The two base rates are never pooled.
+
+**What each run writes**, since the pair phase was asked to leave resumable state: the record with
+its closed bound, full level, correction-set hypergraph and atom labels as lattice points, plus a
+retained checkpoint. **What may be soundly reused from a single's state** (derived, §5): the
+colourability of any specific selection, which is absolute; and non-criticality, which transfers
+upward. **Correction sets may not be imported as they stand** — a refusing selection in a pair stage
+can satisfy none of them through the second orbit, so an unwidened import could exclude a record.
+
+| id | prediction | confidence |
+|---|---|---|
+| PP1 | Every run returns `\|M\| ≤ 136`, and no level shrinks (D1) | certain — a violation is a bug |
+| PP2 | **At least one of the 112 returns `\|M\| ≤ 135`**, i.e. an assembled 508 | **15%** |
+| PP3 | At least one run is a *successful iteration* in his sense — `\|M\| = 136` but the accumulator changes, some added vertex entering a minimum | 35% |
+| PP4 | Given any non-inert outcome at all, it is in group 1 (the 21 promoted) rather than group 2 | 50% |
+| PP5 | Every pair containing `(0,4,8,0)`, the `√5` orbit outside his search disk, is inert | 85% |
+| PP6 | No pre-run quantity — added vertices, added edges, edges per vertex, gap — orders the CPU times, replicating the singles' flatness | 75% |
+| PP7 | Every pair containing one of the four `abcd ≠ 0` orbits is inert, so his *"all useful orbits satisfy abcd = 0"* survives its first test | 85% |
+| PP8 | Every run closes with an exhausted level and zero undecided asks, as all fourteen singles did | 80% |
+
+**Why PP2 is 15% rather than the singles' 25%.** Against it: nine single-orbit expansions have
+produced literally nothing — not a smaller minimum, not a larger level, not one added vertex in any
+minimum — on material selected by his own admission rule, and the small half is adjacency-poor
+(139 of 217 orbits do not touch it at all). For it: a pair is a genuinely different rung, his one
+recorded successful move was **four** orbits at once, and 21 of these pairs use material his
+single-orbit rule cannot reach. The rung argument is why this is not near zero; the nine-fold null
+is why it is below the singles' figure.
+
+**What a clean 112-for-112 negative would and would not say.** It would close single- *and*
+pair-orbit moves on the small half against his own base, which together with the singles is the
+first systematic statement anyone has made about that half's expansion. It would **not** say the
+small half is at its floor: his recorded move is a four-orbit move, and nothing here tests three or
+four at once.
+
 ## 8 — Outcomes
 
 *Filled in as each run lands. Every candidate gets a row, inert ones included, with what made it
