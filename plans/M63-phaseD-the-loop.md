@@ -2249,3 +2249,40 @@ level sets of the same size.
   attested number, with **zero undecided**; 9,170 minima and still enumerating against his 1,092.
   **P-D5 is unscoreable until it closes**, and §R3.4 says a cross-row `\|{M}\|` comparison needs
   that row's companion pinned first.
+
+### H2.8 — What the map does and does not do, now that its density is known
+
+*Added at the close, because the successor will open the map expecting a scoring surface and find
+a column of zeros. Poros's card 25, raised against its own card 1, and adopted.*
+
+**The map answered its own question completely and its second purpose is dead.** Card 1's argument
+for building it was that scoring a rule against Parts's one recorded move is one bit. The map came
+back with **less than one bit**: 0 of 64 improve, 1 of 64 grows, so **every ranking ties and the map
+scores nothing**. That is not a mistake — a complete negative over a closed menu, with every
+per-entry invariant firing and zero undecided asks, is worth more than a partial positive — but it
+is an **answer**, not a scoring surface, and the distinction must not be rediscovered.
+
+**What the zeros mean, and it is stronger than "inert."** A minimum has weight exactly `w*`, so a
+minimum *using* a new atom must *drop* an old one. Growth failing in 63 of 64 therefore says the
+added material is **essentially never in any optimal solution** — not merely insufficient to
+improve, but **unused**. The small half's probe reports the same on its own accumulator, ten for
+ten, independently. Two halves, two accumulators, one conclusion.
+
+**And that is evidence for the multi-orbit reading.** If no single orbit is ever used by an optimum,
+whatever made his four-orbit move work comes from the *combination* — which is the promotion
+phenomenon the small-half probe measured, where orbits attaching poorly to the accumulator attach
+well to one another. **Singles being unused makes pairs the only place an answer could live**, rather
+than merely the next rung up.
+
+**So the `A403` held-out map changes purpose.** It is no longer primarily a scoring surface for a
+rule. It is **the discriminator between two readings**: are singles inert *at that state*, or inert
+*as such*? That is the difference between a tuning failure and a fact about single-orbit expansion,
+and it is the question worth the compute.
+
+**The consequence for clause 2(b), stated plainly so the acceptance is not read as stronger than it
+is:** if the `A403` map is also signal-free, then **a registered rule is scored by outcome on one
+held-out row — one bit — and no map stands behind it.** Say that in the acceptance rather than imply
+otherwise. The honest alternatives at that point are the pair rung (over 1,596 on this half, not
+enumerable; 112 on the small half, and measured there) or a rule whose object is a *set* of orbits
+rather than one, which is what `many_then_trim` was specified for and what his own recorded move
+actually was.
