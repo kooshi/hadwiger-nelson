@@ -319,9 +319,23 @@ the four 6-open radicals `CLAUDE.md` G37 already names (*"7, 13, 79, 127, …"*)
 the **first** one named. Two members of this family land in two of the four fields the project had already
 written down as 6-open, which is the strongest external check the family has.
 
-**A measured 2-adic law, not proved:** `v₂(n)` odd ⟹ the shell is empty over Parts's lattice — all 30 such
-`n ≤ 120` are empty, and every `n ≡ 2 (mod 4)` with it. That is what kills `n = 2, 6, 8, 10` and it is the
-arithmetic reason the cheap end of the family has nothing on this base.
+**The 2-adic emptiness law, DERIVED and its converse CORRECTED (pari, 2026-09-12).** The measured version
+said: `v₂(n)` odd ⟹ the shell is empty over Parts's lattice. **That direction is right** — 666 of 666 cases
+over `n ≤ 2000`. **The converse is false**, at `n = 17` and `n = 29`: both odd, both with an empty circle,
+because 17 and 29 split in `ℚ(√33)` into primes that are **inert** in `ℚ(√−3,√−11)`. **The corrected law:
+the shell is empty iff some prime of `ℚ(√33)` that is inert in `ℚ(√−3,√−11)` divides `(144n)` to odd
+order.**
+
+**And the mechanism, which is the useful part: `2` is RAMIFIED in `K` (`e = 2`) and SPLIT in `ℚ(√33)`
+(`e = 1`).** In `K` every exponent above 2 is doubled, hence always even, so the parity obstruction **can
+never fire** — which is why the unconstrained ceiling is non-zero at every `n ≤ 32`. In `ℚ(√33)` the
+exponent is `4 + v₂(n)` on the nose, and an odd `v₂(n)` kills it. **Parts's coordinate shape moves the
+counting problem from the first field into the second.** Both fields have an inert prime above 2 with
+residue field `𝔽₄`; only the ramification index differs.
+
+**A free tightening of gate A, removing a per-member check:** wall-breaking is **exactly `n` even**. `4n−1`
+is odd, so its squarefree part is `≡ 4n−1 (mod 8)` — **3** for odd `n`, **7** for even `n` — and the class
+`≡ 5 (mod 8)` never occurs in this family at all, so the G35/G37 wording discrepancy cannot touch any row.
 
 **The count has a closed formula, and it is prior art.** The prior-art gate located it in the
 **quasicrystal** literature — coincidence site modules, `[BaakeGrimm2003]` — and verified it at six points
@@ -937,6 +951,111 @@ exactly G48's mechanism and FS-6's platform.
 The intersecting-family criterion (§6f) is a criterion for **every** base; **nothing here shows a base
 satisfying it exists**, and *"un-eliminated is not alive"* applies to **the family**, not merely to this
 member.
+
+---
+
+## §6l — THE OBSTRUCTION IS PARTS'S COORDINATE SHAPE, and the brief's own target is reachable
+
+*The arithmetic instrument, built on pari after `h(K) = h(K(i)) = 1` made it possible
+(`plans/M63-phaseH2-arithmetic.md`, 660 lines). The ceiling exists and is **sharp** — attained by the full
+module `(1/d)O_K²` — but the unconstrained ceiling is not the useful screen, and **finding out why is the
+result.***
+
+**Impose Parts's SHAPE — `p₁ ∈ ℚ(√33)`, `p₂ ∈ √3·ℚ ⊕ √11·ℚ` — and the count reproduces every measured
+value exactly, with no lattice built and no radius argued:**
+
+| `n` | 2 | 4 | 9 | 12 | 16 | 20 |
+|---|---|---|---|---|---|---|
+| measured on his lattice | 0 | **30** | **54** | **42** | **30** | **60** |
+| shape-constrained count | **0** | **30** | **54** | **42** | **30** | **60** |
+| **unconstrained ceiling** | **60** | 60 | 108 | 84 | 60 | **240** |
+
+**Six for six.** And **his congruences mod 2 and mod 4 cost nothing** on any shell measured — *the entire
+shortfall is the shape.* So the quantity this phase spent a day circling is neither the denominator, nor the
+radius, nor the field: **it is two coordinate-slot conditions.**
+
+**`n = 2`, the discriminator, quantified: the gap is 60.** His lattice scores **0**; a denominator-12 point
+set can score **60**, with **60** unit vectors available as neighbours against his 30, because `(1/12)O_K²`
+is a module and closure gives them free. All sixty solutions classify into five coordinate patterns and
+**not one has his shape** — which is why the count is 0 rather than merely low. One of the sixty is
+`p = (1,1)`, at denominator **1**, sitting in `O_K²` itself and excluded for the single reason that `1 ∉
+√3·ℚ ⊕ √11·ℚ`.
+
+**The 6-open target list rises from two to seven.** Over `n ≤ 32` the family has seven 6-open members —
+**2, 10, 16, 20, 22, 24, 32**. Parts's shape leaves **two** with a non-empty circle (16 and 20, reproducing
+§6c exactly); **the ceiling leaves all seven**, the five he excludes having ceilings 60, 240, 60, 84, 60
+(`n = 10` the largest). **Stated at its own scope, as its author insisted:** those are five values of `n`
+where the field arithmetic permits a circle and *his coordinate shape* forbids one. **They are not five
+candidate objects. Nobody has built an arena for any of them.**
+
+**And the original brief's own target is ARITHMETICALLY REACHABLE.** On the circle
+`|p|² = (7+√33)/3`, where §2 wanted ~30 points:
+
+| denominator `d` | 3 | 6 | 9 | **12** | **15** | 18 | 24 |
+|---|---|---|---|---|---|---|---|
+| ceiling | 12 | 36 | 28 | **36** | **108** | 84 | 36 |
+| under Parts's shape | 0 | 0 | 0 | **0** | **0** | 0 | 0 |
+
+**~30 is reachable (36 at denominator 12, 108 at 15) and unreachable under his shape — and that zero is a
+THEOREM, not an observation:** in `ℚ(√33)`, `(7+√33) = 𝔮₁·𝔮₂³` at the two primes above 2, **both exponents
+odd**, and multiplying by `d²` adds `2v₂(d)` to each and **cannot change a parity.** So the mission as
+originally briefed was never impossible — **it was impossible inside his coordinate shape**, and the phase
+spent its day discovering that the shape, not the count, was the object.
+
+**The caveat its author could not discharge, and it is the whole risk:** the ceiling counts points on a
+circle. **It does not know whether a set attaining it can also be group-closed, finite under an exact disk
+cut, and joined by the cross-edge law.** Dropping the shape changes the cut concretely — his `|p|²` always
+lands in `ℚ(√33)`, which is why his cut has **two** conjugate conditions, while a shape-free module has
+**four**.
+
+## §6m — Two blocked questions answered, one of them about Theorem B itself
+
+**(a) Is `101 − 11√33` a sum of two squares in `K`? YES** — the question the advisor could not settle by
+hand, which decides whether the antipodal family of cross edges exists at all. `K(i)/K` is quadratic so
+Hasse applies and `nfhilbert` settles it instantly; global symbol `+1`, every local symbol `+1`. Two
+witnesses, verified in a second independent exact routine with a negative control:
+
+```
+( (11 − 4√3 − √33)/2 )² + ( (11 + 4√3 − √33)/2 )² = 101 − 11√33
+( (5 − 3√33)/2 )²      + ( (7 − √33)/2 )²         = 101 − 11√33
+```
+
+The second lies **entirely in `ℚ(√33)`**, so it is already a sum of two squares in the subfield. **The
+antipodal family is not excluded by this obstruction.**
+
+**(b) Theorem B's hypothesis, confirmed independently of our own Lean proof.** Two primes above 2 in
+`K(i)`, each `e = 2, f = 2`, **residue field `𝔽₄`** — which is exactly what `chromaticNumber_seamPlane`
+rests on, and until now our kernel proof was the only thing asserting it. Each prime of `K` above 2 is
+**inert** in `K(i)/K`, which also makes `K(i)/K` unramified at every finite prime. And two primes above 11
+in `ℚ(√3,√7,√11)`, each `e = 2, f = 2`, **residue field `𝔽₁₂₁`** — with `−1` a square in `𝔽₁₂₁` and not in
+`𝔽₁₁`, so that prime's `i`-extension **splits** and delivers no bound: **6-open, confirmed**, for the field
+the family reaches at both `n = 2` and `n = 16`. A hand derivation agreed at every step and `Σ e·f = 8` in
+both fields.
+
+## §6n — The control that would have passed, and the plant that reported blindness
+
+**A silent integer overflow, caught only by an independently written naive enumerator.** The fast
+enumerator packed four coordinates into one `int64` at base `2²²` — that is `2⁸⁸` — collapsing every square
+to one key. It reported `Sh(1) = 9` against the true 4 and made `Sh(m)` monotone in `m`. **Note the
+direction: it made counts TOO LARGE, which for a *ceiling* reads as safely conservative and would have
+passed a domination check against all six measured counts.** The only thing that caught it was a second
+implementation written to be slow and obvious.
+
+**A two-sided plant fired its LOWER bound and reported that it had gone blind.** Shrinking the
+trace-ellipsoid radius by 10% changed nothing at `m = 288`, because the ellipsoid is only a superset device
+and the binding constraint is the coordinate box `σ_k(a)² ≤ m`. Moved to the box, it passes both bounds at
+four values of `m`. **A one-sided `planted < guarded` would have passed in silence** — which is the exact
+case `CLAUDE.md` predicts and the first time that bound has fired here.
+
+**Out-of-sample agreement:** formula and enumeration agree at **60 consecutive** values, of which
+`n = 33…60` were computed **after** the formulas were fixed and played no part in fitting them. The Gram
+determinant came out 17,424 = `disc K`, matching an independent computation.
+
+**Three of the instrument's own claims were wrong, all the same shape** — a pattern verified on one
+sub-family and stated for the whole: the formula's equality condition (`4 | m` is sufficient, necessary only
+when the count is non-zero) — **and that one had been attributed to a run its author had not read**, whose
+buffered output the kill then destroyed; denominator saturation (false for odd `d`: at `n = 1`, `d = 3`
+gives 4 where `d = 6` gives 60); and the α-circle ceiling ("36" held only for `d` of odd part 3).
 
 ---
 
