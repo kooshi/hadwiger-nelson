@@ -906,4 +906,10 @@ region the apparatus cannot enter is not a prediction, it is a formality that wi
 fails. And the honest test for whether "the prediction was mis-specified" is a diagnosis or an escape:
 **the evidence for the mis-specification must predate the result** — here the 90% split was in the run's own
 recorded numbers before the prediction was written, so it is checkable rather than convenient. Writing a
-rule down does not install it.
+rule down does not install it. **And the rule is symmetric: a control going RED is not evidence
+either, until you can name what a wrong-reason red would have looked like.** Three plants in one night fired
+for the wrong reason — one on an out-of-range index that died *before* reaching the guard it was written to
+test, inside a control built to catch exactly that class. The repair that works is a **pair**: the stub that
+must fail beside a faithful stub that must **pass**, so a reader can tell the refusal came from the cause and
+not from the scaffolding. Where the uninformative outcome cannot be named, **a red control is not yet
+evidence** — it is an unexplained failure that happens to agree with you.
