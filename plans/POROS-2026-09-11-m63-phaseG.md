@@ -128,6 +128,30 @@ cosine in hand rather than inferred.
 true kind counts; keep the existing square-class merge on `D` for the radicand classes, which is what the
 2-adic wall and 6-openness read. The same loop emits both, and the original sieve ran in 45.6 s.
 
+**Where `cos_sq` must NOT be used: inside the enumerator.** Added 2026-09-11 after de Bruijn's closing
+precision, because this section read alone is a trap. `cos²`'s fibre is exactly the orbit `{±ρ, ±ρ̄}` of
+the three base symmetries — which is why the collapse from angles to rotations is exact — but that is a
+fact **about a base that carries those symmetries**. An enumerator that groups by `cos_sq` has already
+assumed the closure, and can then never report that a base lacks it. The layering, which is the engineer's
+and is right:
+
+- **the enumerator emits angles** — a tool reporting six wall-breaking angles on Parts's lattice at radius
+  2.44 is working correctly, and "the answer is two" is not a correction to it;
+- **the symmetry gate asserts** closure under negation, under conjugation and under `√33 ↦ −√33`, and
+  **refuses the run** rather than warning;
+- **the reporting layer groups** angles into rotations by `cos_sq`, only after that gate has passed, and
+  the headline count is rotations.
+
+Both numbers are correct at their own granularity and the implementer needs both. Collapsing them in the
+enumerator is the same defect as the other three this phase guards — silent, and biased toward a tidier
+count than the evidence supports.
+
+**And the calibration rule that falls out of the 126.** The *total* is the invariant; the split into
+diagonal and off-diagonal pairs is not (`60 + 2×18 + 30` against `60 + 2×33 + 0`). So a mismatch in the
+split with a matching total tells you which variant was enumerated — information, not an error — while a
+mismatch in the **total** is the calibration failure. Assert on the total; read the split.
+
+
 ## Evidence inventory
 
 - `plans/STUB-consume-rotation-list.md` (FS-30) — read against: the rotation list is unconsumed and generalising the cross-edge law is the first code task — **surprised: yes**; the roadmap's H-5 row says the law is already a parameter with three controls, so the stub is stale on its own first task
