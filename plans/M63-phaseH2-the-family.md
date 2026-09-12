@@ -94,8 +94,15 @@ control. Growing the arena past it adds points and no cross edges.
 
 ## §4 — The free circle: why `n` should be a square
 
-**Theorem (module closure).** If `n = k²` for some `k ∈ K`, then `k·S ⊆ {p ∈ M : |p|² = n}`, where
-`S` is the module's norm-1 shell. Hence the circle carries **at least `|S|` points**, and the unit
+**Theorem (module closure).** If `n = k²` for some `k` that is a **multiplier of the module** `M` — that
+is, `k·M ⊆ M`, which is automatic for `k ∈ ℤ` and **must be checked otherwise** — then
+`k·S ⊆ {p ∈ M : |p|² = n}`, where `S` is the module's norm-1 shell.
+
+*Corrected 2026-09-12: the first version said "for some `k ∈ K`", which is false. The planner found the
+counterexample from the other side: at `n = 12`, `k = 2√3` is a square root in `K` but multiplying by it
+**swaps Parts's two coordinate slots**, so 0 of his 30 unit vectors land inside. (His circle at `n = 12` is
+nonetheless nonempty — `2·(norm-3 shell)` puts **42** points there — by the `k ∈ ℤ` form applied to `m = 3`.)
+So the usable form of gate A is the integer one, and everything beyond it goes through §5a.* Hence the circle carries **at least `|S|` points**, and the unit
 neighbours of `k·v` are `k·v + S` — all module points. So each circle point carries **unit degree `|S|`**
 once the arena reaches radius `|k| + 1`.
 
@@ -172,8 +179,12 @@ planner caught the exponent, and the ruling moved with the number.
 
 **Three observations that are the phase's product.**
 
-1. **The record is the unique cheapest live member.** Every smaller member dies, and the two that die
-   below it — `n = 1` and `n = 3` — die by **Theorem B**, a theorem of ours. That is a small structural
+1. **The record is the cheapest live member — cheapest only, NOT unique.** Every smaller member dies, and
+   the two that die below it — `n = 1` and `n = 3` — die by **Theorem B**, a theorem of ours. *Corrected
+   2026-09-12: the first version of this line said "unique", which was a claim about all members made from
+   a table filtered to gate-A rows. Gate A is sufficient, not necessary (§6), and the screening agent found
+   `n = 20` 6-open with **60** circle points — twice the record's — via `2·(norm-5 shell)`. Verified. See
+   §5a for the general gate and the real queue.* That is a small structural
    explanation of `[Parts2020a]` §4's *"working constructions of type M with other rotations are not known
    yet"*: at the cheap end there is nothing else to find.
 2. **`n = 12` and `n = 16` need no new base.** They need Parts's own lattice grown to radius 3.50 and
@@ -183,6 +194,46 @@ planner caught the exponent, and the ruling moved with the number.
    has been pointing at (*"Parts's four-colour construction with the Moser twist in place of his √5 step
    lands in ℚ(√3,√7,√11), a 6-open field"*, currently ranked 10th). Two independent routes arriving at one
    field is the reason to raise it.
+
+---
+
+## §5a — The general gate, and the real queue (added 2026-09-12, replacing §5's filter)
+
+Gate A was a special case. **The general gate is: `n` lies in the value set of the module's norm form** —
+exhaustively enumerable as a finite integer problem, with no radius to argue about, since a point of norm
+`n` is automatically inside radius `√n`. On Parts's lattice, `|p|² = n` holds iff
+
+```
+P = ab + cd = 0        and        S = a² + 33b² + 3c² + 11d² = 144n
+```
+
+and gate A is the sub-case `n = k²·m` with `k ∈ ℤ` and `m` already in the value set: then
+`k·(norm-m shell) ⊆ (norm-n shell)`, free. Verified for every `(k, m)` visible in the radius-2.44 cut.
+
+**The queue: 6-open members with a NONEMPTY circle over Parts's own lattice, `n ≤ 120`**, shell count in
+brackets — exhaustive over the integer problem above, not over a radius cut:
+
+> **16 (30), 20 (60), 44 (30), 60 (84), 64 (30), 76 (60), 108 (66), 112 (60)**
+
+Eight members, not two. **`n = 16` is still the cheapest** (endpoint bound 4.032 against `n = 20`'s 4.500),
+so §1's ordering survives, but `n = 20` carries twice the circle points and its radicand **79** is one of
+the four 6-open radicals `CLAUDE.md` G37 already names (*"7, 13, 79, 127, …"*). `n = 16`'s radicand is 7,
+the **first** one named. Two members of this family land in two of the four fields the project had already
+written down as 6-open, which is the strongest external check the family has.
+
+**A measured 2-adic law, not proved:** `v₂(n)` odd ⟹ the shell is empty over Parts's lattice — all 30 such
+`n ≤ 120` are empty, and every `n ≡ 2 (mod 4)` with it. That is what kills `n = 2, 6, 8, 10` and it is the
+arithmetic reason the cheap end of the family has nothing on this base.
+
+**The count has a closed formula, and it is prior art.** The prior-art gate located it in the
+**quasicrystal** literature — coincidence site modules, `[BaakeGrimm2003]` — and verified it at six points
+on this project's own field, where it reproduced our measured **30** and **18** out of sample. Two cautions
+that came with it, both the gate's own corrections: the formula is **exact on the ring of integers and
+false on a sub-order**, and *every base this milestone builds is a sub-order*, so it **over-promises** circle
+points on exactly the objects being built — a candidate base must be **counted, never predicted**. And it
+carries a class-number hypothesis for `ℚ(√3,√11,i)` that nobody has checked; the four numbers the gate hands
+the mission are exhaustive measurements rather than formula predictions, so they stand regardless, but a
+prediction for an uncounted module does not.
 
 ---
 
