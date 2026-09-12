@@ -409,3 +409,85 @@ the φ-monochromatic family is the **reference/diagonal** one at `|u|² = 4` (`d
 family at `(17±√33)/6` is a 𝔭-adic unit (`d² = 1/3`). So it proves **auxiliary-only ⟹ SAT** — the
 *symmetric* half M62 §R20 added, and **not** `[Parts2020a]` §4's own sentence, on which it is silent.
 `[Parts2020a]` is unread here, so state the kinds by radius rather than by his first/second numbering.
+
+---
+
+## RS-7 — the rotation died of a missing lattice point, and the criterion inverts into a design target
+
+*Written after the engineer's closing numbers (eleven classes, radius 2.44; ρ₁₅ UNSAT in 12.2 s, the new
+rotation SAT in 6.8 s with an explicit colouring on all 57,228 arena edges; five of eleven classes
+certificate-carrying; zero mismatches against the σ form at both primes).*
+
+question: why-is-the-new-rotation-dead-on-this-lattice
+  evidence: the engineer reports **zero diagonal kinds** for `cos = 11/32 + 3/32·√33`, and the diagonal
+    kind is the one with `d² = 0`, which is φ-monochromatic at every prime and would have silenced the
+    filter outright
+  expected: the diagonal kind is excluded at this angle by the endpoint bound, i.e. by the rotation
+  ask: is the diagonal kind geometrically impossible at this angle, or merely absent from this lattice?
+  if impossible: the elimination is about the rotation and §4's new bases cannot revive it
+  if merely absent: the elimination is about the base, and the criterion run backwards names the point a
+    new base must contain
+  answered by: derivation
+  cost: nil
+  rank: 6
+  status: answered — merely absent, and it is the live question the phase inherits
+
+**The diagonal kind needs a base point at squared norm `1/(2 − 2cos θ)`.** At this angle that is
+**`(7 + √33)/3 ≈ 4.24819`**, radius **2.0611**, and it is admissible twice over:
+
+| quantity | value | verdict |
+|---|---|---|
+| spindle squared radius `1/(2 − 2cos θ)` | `(7 + √33)/3` = 4.24819 | — |
+| endpoint bound `1/sin²θ` | 4.51382 | **inside** — §1.3 does not exclude it |
+| base radius² at 2.44 | 5.9536 | **inside** |
+| Galois conjugate `(7 − √33)/3` | 0.41848 > 0 | the totally-real disk cut would admit it |
+
+In the lattice's own integers, `norm² = (S + 2P√33)/144` with `S = a² + 33b² + 3c² + 11d²`,
+`P = ab + cd`, so the point exists iff **`S = 336, P = 24`** has a solution under the congruences at
+typem.py:1136. The engineer's zero-diagonal count says it does not. **That is the whole reason the
+rotation is dead**, and it is a fact about `parts_lattice`, not about the angle.
+
+**So the certificate's scope is exactly what RS-6's σ form says and no more:** every base whose
+σ-spectrum is contained in this one. `parts_lattice` misses `σ = (14 + 2√33)/3`, and a base that hits it
+is not covered.
+
+**The inversion, which is the deliverable.** Given `cos θ` alone, before any base exists:
+
+> `Σ_live(cos θ) = { σ : v_𝔭(σ − (σ−1)/cos θ) > 0 at **both** primes above 2 }`
+
+— both, because one free prime kills. Each live `σ` names the radius pair a base must contain: `a`, `b`
+are the roots of `x² − σx + ((σ−1)/(2cos θ))²`. **§4.2 row 4's "a base designed for a chosen angle — a
+day of design per angle" is therefore an arithmetic condition evaluable in microseconds**, and "a good
+base for a rotation" stops being §4.1's heuristic (*rich on rays*) and becomes a necessary condition with
+a proof behind it: **realises a live σ at both primes.** The diagonal `σ = 1/(1 − cos θ)` is only its
+cheapest member.
+
+**A boundary to state before someone else trips on it.** Four of the five certificate-carrying classes
+are wall-standing, but the new rotation **breaks** the 2-adic wall and is still certified 4-colourable.
+That is not a contradiction with G1 or G35. Wall-breaking is a property of `K(√(sin²θ))`, where the
+*rotated* copy lives; the arena is coloured by the residues of the **base** points, which stay in `K`
+whatever the rotation does. So:
+
+> **Wall-breaking is necessary and visibly not sufficient, and the diagonal family is the mechanism by
+> which a wall-breaking rotation's arena escapes the base's own four-colouring.**
+
+First named mechanism for the gap between *the field breaks the wall* and *the object uses it*.
+
+**On the engineer's self-reported control weakness** (the float-free prefix recount exercised only the
+centre edges for most classes; the full 1,706,239-pair sweep ran only for the two wall-breaking ones):
+it is bounded, and smaller than he stated. §1.1's split of `Re(ρ·conj(u)v) = k` over the `K`-basis
+`{1, s}` is valid precisely because filter 1 guarantees `s ∉ K`, and it **forces** `q = 0` — so a
+non-collinear pair *cannot* be a cross edge, as a theorem. Completeness of the edge list therefore
+reduces to completeness of the collinear enumeration, which uses exact line keys and is exhaustive over
+pairs per line. The sweep is a control on an implementation, not the ground of the claim. Proportionate:
+sweep **one** wall-standing class, and record that the collinearity theorem does the work.
+
+hunch: a-live-sigma-is-the-base-design-criterion
+  claim: a rotation is alive on a base iff the base realises some σ with v_𝔭(σ − (σ−1)/cos θ) > 0 at both
+    primes above 2; the diagonal σ = 1/(1 − cos θ) is the cheapest such σ
+  basis: derived
+  address: RS-6's d² = σ − (σ−1)/cos θ, plus "one free prime suffices to four-colour"
+  falsifier: a base and rotation with no live σ whose arena nonetheless refuses four colours
+  registered: 2026-09-12
+  status: open — necessary is proved; whether a live σ is ever *sufficient* is untested, and ρ₁₅ is the
+    only positive instance anyone holds

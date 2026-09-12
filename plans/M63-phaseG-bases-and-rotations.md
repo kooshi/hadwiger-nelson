@@ -1037,3 +1037,73 @@ at once and nobody planted it.
    field-level gate) plus a SAT at radius 2.44 only, which is a statement about that arena.
 6. `ρ₁₅` is the **only** rotation class on this lattice with `cos θ ∈ K` still alive — subject to
    items 3 and 5.
+
+### 12.4 — What actually killed the new rotation, and the design target it inverts into (RS-7)
+
+*Added 2026-09-12 after the screen closed, on the advisor's card RS-7. It narrows §12.3's scope
+sentence and turns the night's negative into a target.*
+
+**The rotation did not die of its own arithmetic. It died because `parts_lattice` is missing one
+point.** The family that would defeat the certificate is the equal-radius one, `d² = 0`, which needs a
+base point at squared norm `1/(2 − 2cos θ)`. At `cos θ = 11/32 + 3/32√33` that is
+
+```
+|u|² = (7 + √33)/3 ≈ 4.24819 ,   radius ≈ 2.0611 .
+```
+
+Both of the reasons it could have been excluded are absent: it is **inside the endpoint bound**
+(`1/sin²θ = 4.51382`), so a diagonal pair at this angle is geometrically admissible; and it is
+**inside radius 2.44** with positive Galois conjugate `(7 − √33)/3 ≈ 0.41848`, so the totally-real
+disk cut would have admitted such a point had one existed. In the lattice's own coordinates it is the
+integer system
+
+```
+S = a² + 33b² + 3c² + 11d² = 336 ,    P = ab + cd = 24 ,
+```
+
+under the denominator-12 congruences. **Verified directly, with its own positive control:** the same
+search returns **30** solutions for the record's rotation (`S = 576`, `P = 0` — exactly the 30
+diagonal points the census reports) and **0** for the new rotation at either sign (`S = 336`,
+`P = ±24`). So the instrument finds solutions when they exist, and there is none here.
+
+**Therefore §12.3's scope sentence is narrowed to the one the σ form already gives.** The certificate
+covers every base whose **σ-spectrum is contained in this one**, not every base in `K²`.
+`parts_lattice` misses `σ = 2(7 + √33)/3 = (14 + 2√33)/3`, and a base that hits it is not covered.
+
+**Inverted, this is the design target, and it replaces §4.2 row 4's "a day of design per angle" with
+an arithmetic condition costing microseconds.** Given `cos θ` alone, before any base exists, the
+radius sums that keep a rotation alive are
+
+```
+Σ_live(cos θ)  =  { σ : v_𝔭(σ − (σ−1)/cos θ) > 0 at BOTH primes above 2 }
+```
+
+— **both**, because one free prime is enough to kill — and each live `σ` names the radius pair a base
+must contain outright: `a` and `b` are the roots of `x² − σx + ((σ−1)/(2cos θ))²`. (Checked: at
+`cos = 7/8`, `σ = 17/3` returns `(17 ± √33)/6`, the record's own auxiliary radii.) The equal-radius
+family is only the cheapest member, `σ = 1/(1 − cos θ)` giving `d² = 0`; any `σ` whose `d²` is
+`𝔭`-adically positive at both primes does the same job.
+
+**So "a good base for a rotation" has a definition with a proof behind it**, replacing §4.1's *rich on
+rays* heuristic: **a base is alive for a rotation only if it realises a live σ at both primes above 2.**
+Necessary, not sufficient.
+
+**And the gap between breaking the wall and using it now has a mechanism.** Four of §12.3's five
+certificate-carrying classes are wall-standing, but **the new rotation breaks the 2-adic wall and is
+still certified four-colourable** — which is not a contradiction with G1 or G35. Breaking the wall is a
+statement about `K(√(sin²θ))`, the field the *rotated* copy lives in; the arena is coloured by the
+residues of the **base** points, which stay in `K` whatever the rotation does. A wall-breaking
+rotation's arena escapes the base's own four-colouring **only if its seam actually uses the
+wall-breaking, and it does that exactly through a `φ`-monochromatic cross kind.** Wall-breaking is
+necessary and visibly not sufficient; the equal-radius family is the mechanism. **This is the first
+named mechanism for the gap between "the field breaks the wall" and "the object uses it", and it
+deserves a grokking at the milestone's close.**
+
+**Correction to §12.3's stated weakness, which overstated it.** The prefix recount and the full sweep
+are controls on §1.1's collinearity theorem, not substitutes for it. The split of
+`Re(ρ·conj(u)v) = k` over the `K`-basis `{1, s}` is valid precisely because filter 1 guarantees
+`s ∉ K`, and it **forces** `q = 0`: a non-collinear pair cannot be a cross edge, as a theorem. So the
+edge list's completeness reduces to the completeness of the collinear enumeration — exact line keys,
+exhaustive over pairs on each line — and the 1.7M-pair sweep would catch an implementation bug in the
+line keying or the pair loop, which is not what the claim rests on. **The proportionate remedy** is to
+sweep one wall-standing class rather than nine, and to say that the collinearity theorem does the work.
