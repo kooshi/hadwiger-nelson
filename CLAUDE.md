@@ -546,6 +546,22 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   touches a live milestone, blocks that milestone's opening until scanned. An abstract is not a reading. Walk
   the citation graph of the paper that *posed* the question; cross-check citations in two databases; mine
   every read paper's references into the bibliography the same day; mark reading per section.
+* **G52 — Breaking the wall is necessary and visibly not sufficient; the equal-radius family is the
+  mechanism. [measured + reading, one instance with a positive control]** A rotation whose radicand breaks
+  the 2-adic wall can still be **four-colourable**, and this is not a contradiction: breaking the wall is a
+  property of the field the **rotated copy** lives in, while the residue colouring reads the **base** points,
+  which never leave the original field. So a wall-breaking rotation escapes the colouring only if its seam
+  actually **uses** the wall-breaking — and it uses it through one family: cross edges joining two base
+  points the colouring gives the same colour, which requires the base to realise a specific **radius sum**.
+  Whether a cross edge is invisible depends on that sum alone, via `d² = σ − (σ−1)/cos θ` — no radius, no
+  lattice. **This is the first named mechanism for the gap between "the field breaks the wall" (G1, G35) and
+  "the object uses it".** Measured on M63 phase G's new rotation: it breaks the wall, and dies anyway because
+  `[Parts2020a]`'s lattice cannot realise the live radius sum — the Diophantine system has **no** solution
+  there, while the identical search returns **30** at his own angle, exactly its census. **Read the scope
+  exactly: this is a fact about that lattice, not about that angle.** Inverted, it is a **design target**: the
+  cosine alone names the live radius sums before any base exists, each handing back the two radii a base must
+  contain as roots of a quadratic, at **both** primes — one free prime is enough to kill. **Necessary is
+  proved; sufficient is untested, and the record's own rotation is the only positive instance held.**
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
