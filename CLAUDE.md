@@ -1004,12 +1004,19 @@ not, so the search could not represent the object it was searching for. **Before
 family, write down the generator's image and check the target is inside it.** Third instance of this shape in
 one milestone — and note that a working positive control does not distinguish a false zero from a real one.
 
-**And check which way "more material" runs before assuming it tightens.** Here adding vertices or edges
-almost always makes refusal *easier* — but for the residue certificate the direction **inverts**: growing a
-base only **adds** to the set of colour differences, and the certificate needs a value **outside** that set,
-so more material makes it **harder** to fire. **Once a base contains the witness, the elimination cannot be
-recovered by enlarging the base.** An engineer carrying the usual intuition will spend hours re-checking
-something that cannot bite.
+**Do not mistake a one-sided filter for an inverted monotonicity** — a correction to this entry, made by an
+advisor against the product owner who wrote it. It is *true* that once a base contains the witness, growing
+it cannot recover the four-colouring: more material only adds to the set of colour differences and the
+certificate needs a value outside it. It is **false** that this inverts the usual direction. Adding material
+makes a graph harder to colour; adding material makes a *sufficient condition for colourability* harder to
+fire. **Those are the same statement about the same quantity, seen once directly and once through a
+one-sided filter.** The cost of the wrong framing is specific and was measured: **an agent told to expect an
+inversion spends its attention hunting one, and misses what is genuinely unusual here** — that this filter
+can be defeated by **breaking its applicability rather than its conclusion**. That matters most exactly when
+you are *designing* the object the filter will judge: a constructed base can "survive" by making the check
+inapplicable, and a `not-applicable` returned on the same footing as a silence is a pass nobody earned.
+**Whenever a one-sided filter judges something you are building, enumerate the ways to make it inapplicable
+before the ways to make it fail.**
 
 **And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose
 control docstring already said *"a control that passes without its failure mode being reachable has not been
