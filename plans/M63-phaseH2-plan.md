@@ -106,6 +106,12 @@ Consequently the phase's two requirements are **two shell counts of the same mod
 > **30**; the new circle has **none** in any module of that coarseness, and its best point outside
 > carries **1**.
 
+**Module degree, not arena degree, and the distinction is not cosmetic.** The circle sits at `√n` while the
+endpoint bound sits at `2n/√(4n−1)`, a ratio of `√(1 − 1/(4n))` — 96.8% at `n = 4`, 99.2% at `n = 16` — so
+the circle is essentially on the arena boundary and an arena cut there delivers **5–7**, not 30 (measured on
+the record and on `ρ₆₃`'s shipped edge list). Full degree needs the base grown to radius `|k| + 1`. The
+comparison against 1 survives at either scope; the number 30 belongs to the uncut module.
+
 **30 against 1, not 14 against 1** — the earlier 14 double-counted a tangency and was measured inside a
 cut that truncates the neighbourhood of a radius-2 point. A vertex of unit degree 1 carrying one cross
 edge has degree 2, and by absorption (`CLAUDE.md` G40, `Proofs/HadwigerNelson/Absorb.lean`) it carries
@@ -211,7 +217,7 @@ inherited degree. Screening only perfect squares **hides four of the six 6-open 
 
 | criterion | what it buys |
 |---|---|
-| **`n` is a square in `K`** (`n = t²`, `t ∈ K`) | the circle is `t ×` (the unit shell). If also `t ∈ O_Λ` (§3.4), **every norm-1 point of the module is a circle point, with the module's full Cayley degree** — free, and rich |
+| **`n` is a square in `K`** (`n = t²`, `t ∈ K`) | the circle is `t ×` (the unit shell). If also `t ∈ O_Λ` (§3.4), **every norm-1 point of the module is a circle point, with the module's full Cayley degree** — free, and rich. *Realised* degree needs the base grown to radius `\|t\|+1`; at the endpoint bound it is 5–7 |
 | **the module merely realises `\|p\|² = n`** | the circle is non-empty; its count is a representation number and its degree is whatever the module gives. Cheaper to *have*, worth much less |
 
 With `n = 1/(2 + 2cos θ)` in place of `1/(2 − 2cos θ)` the same table describes the antipodal family;
@@ -407,7 +413,8 @@ the advisor's (`PH2-4`) and none of which is the circle count:
 1. **Its circle is free and rich.** `|p|² = 16 = 4²` and `4 ∈ ℤ ⊆ O_Λ`, so the circle is the radius-4
    shell of Parts's own lattice and contains `4 × (its 30 norm-1 points)` automatically — so ≥ 30
    equal-radius cross edges whose endpoints carry the **module's full Cayley degree 30**, not the
-   degree 1 of an isolated adjoined point (§2c).
+   degree 1 of an isolated adjoined point (§2c). *Realised in the arena as built, which cuts at the
+   endpoint bound 4.0316, that degree is **5–7**; 30 needs radius 5.*
 2. **Its field is 6-open.** The radicand's squarefree part is **7**, and `K(√7)` is one of the fields
    `CLAUDE.md` G43/G37 names 6-open (wall broken, 11 inert). That is `FS-22`'s field
    (`plans/STUB-sqrt7-phase-pinning.md`). `ρ₁₅`'s field `K(√15)` is **5-sealed**, so a success at
@@ -1143,7 +1150,7 @@ letting it pass**; the brief's §5.2 says so and the code does not do it.
 | **the brief's §8.1** (bound the shell count from above; *"if the ceiling is below ~18 the mission is over"*) | **Struck.** The ceiling does not exist (§2a: 36 points at denominator 12, and unbounded in general), so the falsifier's informative outcome is unreachable. Do not spend literature time on it — §8 below reassigns the prior-art search |
 | **the brief's §8.2** (build a base at 20–24 circle points) | **Demoted below E4.** It varies the quantity §2 demotes, on a circle §2(c) shows is poor at any count. E3a answers the same question (*what count suffices?*) on the one instance that refuses, for a fraction of the cost |
 | **the brief's §8.4 / `PH-3`** (does negation closure move the count?) | **Answered NO, on arithmetic, before any run.** The antipodal circle is `|p|² = 1/(2 + 2cos θ) = (43 − 3√33)/97`. Parts's lattice cannot hold a single one of its points: its squared norms are all `(S + 2P√33)/144` for integers `S, P`, and `S = 144·43/97` is not an integer. The circle *is* non-empty in `K²` — the planner constructed a witness, §10 has it — but `N_{ℚ(√33)/ℚ}(2 + 2cos θ) = 1552/256 = 97/16`, so **97 is forced into every representative's coordinate denominators** (the advisor's `PH2-3`, and the planner's witness has denominator **194 = 2·97**, independently). The advisor also measured **0 of 3,433** lattice points with a unit neighbour on that circle, against 72 on the diagonal one. Rank it below the gate |
-| **building a base for the stage-1 rotation at all** | **Demoted below `ρ₆₃` (E4) and below `n = 2` (E4b).** §2(c,d): that rotation's circle lies on no cheap shell, its circle points reach unit degree **1** where the record's reach **30**, the module that fills it best has **zero** unit vectors, its achievable count on a module of Parts's coarseness is **capped at 18** and lifting that cap costs **81×** the arena, and — decisively — **its field is the 5-sealed `K(√(sin²θ))`, so even a success there is a five-chromatic object and not a rung toward χ ≥ 6.** `ρ₆₃`'s circle is free, rich and **6-open**; `n = 2`'s is empty but sits at radius 1.41 in the same 6-open field with a rational witness. Spend the session's solver-heavy slot on `ρ₆₃`. *This is the plan's largest departure from the brief; the product owner has since re-aimed the phase the same way, independently* |
+| **building a base for the stage-1 rotation at all** | **Demoted below `ρ₆₃` (E4) and below `n = 2` (E4b).** §2(c,d): that rotation's circle lies on no cheap shell, its circle points reach unit degree **1** where the record's reach **30** in the module and **5–7** in the arena as built, the module that fills it best has **zero** unit vectors, its achievable count on a module of Parts's coarseness is **capped at 18** and lifting that cap costs **81×** the arena, and — decisively — **its field is the 5-sealed `K(√(sin²θ))`, so even a success there is a five-chromatic object and not a rung toward χ ≥ 6.** `ρ₆₃`'s circle is free, rich and **6-open**; `n = 2`'s is empty but sits at radius 1.41 in the same 6-open field with a rational witness. Spend the session's solver-heavy slot on `ρ₆₃`. *This is the plan's largest departure from the brief; the product owner has since re-aimed the phase the same way, independently* |
 | the joint-reduction route, the small-half probe, edge-thinning of the record as a *product* | closed with reasons before this phase; do not reopen (brief §9) |
 
 ---

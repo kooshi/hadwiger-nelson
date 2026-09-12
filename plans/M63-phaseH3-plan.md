@@ -673,3 +673,62 @@ programme's standard is that the mechanism is stated and proved for a class.
 
 **Four of these are about the family and not about `n = 2`** — which, if the object does not refute, is what
 this phase will have been for.
+
+---
+
+## §10 — The propagation audit: three magnitudes moved, zero conclusions (2026-09-12)
+
+Phase H2's radius-5 degree measurement **did** propagate — eleven sites across four of its plan files, three
+of them load-bearing. `CLAUDE.md` is **clean**: ledger row 64, G52 and G53 use 30 only as a *count* (30
+circle points, 30 unit vectors, `L/count = 10/30`), never as a degree.
+
+| load-bearing site | what it decided |
+|---|---|
+| **Gate A's row** in the screening table | one of the four gates that selected `n = 16`: *"≥ 30 points at full unit degree, free"* |
+| **the advisor's PH2-2/PH2-3 contrast**, *"degree 30 against 1"* | that the circle *count* is not the discriminator between good and bad circles |
+| **the ranking row** demoting the briefed rotation | *"its circle points reach unit degree 1 where the record's reach 30"* |
+
+> **Every comparison's direction survives — 5–7 still dominates 1 — so no gate verdict and no ranking moves.
+> Three magnitudes changed and zero conclusions.** That is the good outcome of a propagation audit, and it
+> is stated plainly rather than hidden or inflated.
+
+**A judgement call, upheld:** the engineer *kept* the module-degree statements and added the arena value
+beside them rather than replacing. Right, and the principle generalises — **the claims were not false, their
+scope labels were ambiguous.** This project's rule that a corrected claim replaces the claim governs claims
+that are *wrong*; deleting a true statement to fix a label is over-correction and loses information. Both
+quantities now stand, each naming which it is.
+
+### Two things the audit produced that outrank the audit
+
+**1. The free-circle theorem's hypothesis has never been satisfied by anything.** Its condition — *"once the
+arena reaches radius `|k| + 1`"* — was already correct, and is now marked load-bearing with the reason
+nothing meets it: the circle sits at `√(1 − 1/(4n))` of the endpoint bound, so full degree at `n = 16` would
+need radius **5** against a bound of **4.0316**. **A correct theorem whose hypothesis no object in the family
+has ever met** says the free-degree promise has been decorative throughout — more useful than any corrected
+number.
+
+**2. The mean-degree comparison driving this phase's risk assessment was measuring the bulk.** Of phase H2's
+25,567 base vertices, **8,208 (32.1%) sit at full degree 30, mean 21.29** — and its *circle* points are at
+**`{5:6, 6:12, 7:12}`**. Its solver record's *"every interior point has degree exactly 30"* was true with
+"interior" doing quiet work for the other two thirds; it now states the distribution.
+
+**So 7.38 against 21.30 compared the wrong quantity.** What decides a cross-edge argument is the **circle
+points'** degree:
+
+| | circle degree | circle points | off-diagonal | arena |
+|---|---|---|---|---|
+| phase H2's verified object | **5 / 6 / 7** | 30 | 36 | 51,133 |
+| phase H3 at the endpoint bound | **2** | 60 | **72** | 32,617 |
+| **phase H3 at radius 1.7** | **4–6** | 60 | **72** | 83,906 |
+
+**At radius 1.7 this object is at rough parity with phase H2's on circle connectivity, with twice the circle
+points and twice the off-diagonal cross edges, for 1.64× the vertices.**
+
+**This is the fifth instance in this milestone of a right measurement of a quantity adjacent to the
+decision, and I amplified this one myself** — I carried 7.38-against-21.30 into two reports. The weight is
+off, the corrected comparison is with the solver engineer, and the mean appears only with its caveat.
+
+**What it does not settle, stated rather than assumed:** whether twice the cross-edge structure at
+comparable circle degree is *better* than phase H2's or merely different — more circle points also means
+more interface patterns to kill. **That trade is what the pricing measures**, so it is being priced rather
+than argued.

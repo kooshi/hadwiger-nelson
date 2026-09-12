@@ -163,7 +163,9 @@ the module's norm-1 shell. **Confirmed, and sharper than stated:** `shell(4)` is
 
 **But `n = t²` is only sufficient.** `n = 20` is not a perfect square, and its circle over Parts's lattice
 carries **60 points at denominator 1** — twice the record's — because `20 = 4·5` and the norm-5 shell has 60
-points, so `2·(norm-5 shell)` lies on `|p|² = 20`, in the module, at full unit degree. Likewise
+points, so `2·(norm-5 shell)` lies on `|p|² = 20`, in the module, at the module's full unit degree
+*(realised only once the arena is grown to radius `√n + 1`; at the endpoint bound the circle sits at
+`√(1 − 1/(4n))` of it — 98.7% here — and its points keep 5–7 of the 30)*. Likewise
 `shell(44) = 2·shell(11)`, `shell(60) = 2·shell(15)`.
 
 **The correct gate is "`n` is in the value set of the module's norm form",** enumerated exhaustively to

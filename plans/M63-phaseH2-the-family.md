@@ -31,8 +31,10 @@ Three independent findings, all from 2026-09-12, listed in the order that makes 
    group is infinite. The multiple-of-6 prediction is confirmed and **trivial**, a free group action, and is
    really a multiple of **12** for a `ζ₁₂`-closed module, `ζ₁₂` being the roots of unity of `K(i)`.)
 2. **The count is the one coordinate on which the good and bad circles AGREE.** Measured on one lattice:
-   the record's circle has points of unit degree **30** and denominator **1**; the phase's circle, **1** and
-   **42**. Both counts are unbounded. (The first figure was published as 14 and **retracted by its own
+   the record's circle has points of unit degree **30 in the module** and denominator **1**; the phase's
+   circle, **1** and **42**. (**Module degree, not arena degree.** §4's theorem delivers full degree only
+   once the arena reaches radius `|k| + 1 = 3`; the record's arena cuts at `8/√15 = 2.066`, where its circle
+   points measure **5–7**. The contrast with 1 survives; the magnitude is a property of the module.) Both counts are unbounded. (The first figure was published as 14 and **retracted by its own
    author** on re-check — a double-counted tangency inside a truncating cut. 30 is the module's norm-1
    shell count, which §4 explains: it is not a coincidence that the corrected figure is exactly `|S|`. The
    contrast strengthens; both originally printed numbers were wrong.) A quantity two objects share cannot explain why one refuses four
@@ -190,7 +192,12 @@ counterexample from the other side: at `n = 12`, `k = 2√3` is a square root in
 nonetheless nonempty — `2·(norm-3 shell)` puts **42** points there — by the `k ∈ ℤ` form applied to `m = 3`.)
 So the usable form of gate A is the integer one, and everything beyond it goes through §5a.* Hence the circle carries **at least `|S|` points**, and the unit
 neighbours of `k·v` are `k·v + S` — all module points. So each circle point carries **unit degree `|S|`**
-once the arena reaches radius `|k| + 1`.
+once the arena reaches radius `|k| + 1`. **That condition is load-bearing and no arena built in this
+milestone meets it.** The circle sits at `√n`, the endpoint bound at `2n/√(4n−1)`, so their ratio is
+`√(1 − 1/(4n))` — **96.8% at `n = 4` and 99.2% at `n = 16`: the circle is essentially ON the arena boundary
+for every member of the family.** Arenas cut at the endpoint bound therefore give circle points **5–7** of
+the 30, not 30 (measured on the record and on `ρ₆₃`'s shipped edge list alike). Full degree at `n = 16`
+needs radius 5 against the bound's 4.0316.
 
 **Measured on Parts's lattice** (rebuilt here, 3,433 points at radius 2.44, gate below):
 
@@ -204,7 +211,7 @@ once the arena reaches radius `|k| + 1`.
 **So the record's "30 circle points" are literally its doubled unit vectors.** Its cross-edge count equals
 its unit-shell count *by identity*, not by coincidence, and the reason is that `4 = 2²`. The phase's angle
 sits off that diagonal — `α` is not a square in `K` — which is precisely why its circle gave 8 points of
-unit degree 1 rather than 30 of degree 30.
+unit degree 1 rather than 30 of module degree 30 (5–7 once the arena is cut at the endpoint bound).
 
 **Integer shells of Parts's lattice, exactly:** `|p|² = 1 → 30`, `2 → 0`, `3 → 42`, `4 → 30`, `5 → 60`,
 `6 → 0`, `7 → 0`, `8 → 0`, `10 → 0`.
@@ -215,7 +222,7 @@ unit degree 1 rather than 30 of degree 30.
 
 | gate | test | the theorem |
 |---|---|---|
-| **A** | `n` is a square in `K` | §4 — the circle then contains `k·S`: ≥ 30 points at full unit degree, free |
+| **A** | `n` is a square in `K` | §4 — the circle then contains `k·S`: ≥ 30 points, free. Their **full** unit degree needs the arena grown to radius `\|k\|+1`; at the endpoint bound it is 5–7 |
 | **B** | `sin θ ∉ K` | else the **whole arena** lies in `K²` and `chromaticNumber_seamPlane` (χ(K²) = 4, kernel-checked, ledger row 57) four-colours **every possible base**. No count can help |
 | **C** | `4n−1`'s square class odd and ≡ 5, 7 (mod 8) | the 2-adic wall (G35, G37); else no fifth colour is possible at all |
 | **D** | `11` inert, with C | the field is **6-open** (G43) — the only known mechanism for χ ≥ 6 |
@@ -304,7 +311,8 @@ planner caught the exponent, and the ruling moved with the number.
    explanation of `[Parts2020a]` §4's *"working constructions of type M with other rotations are not known
    yet"*: at the cheap end there is nothing else to find.
 2. **`n = 12` and `n = 16` need no new base.** They need Parts's own lattice grown to radius 3.50 and
-   4.03, where gate A hands them 30 circle points at full unit degree for free. **The phase's briefed
+   4.03, where gate A hands them 30 circle points for free (at unit degree 5–7; full degree 30 needs
+   radius `\|k\|+1`, i.e. 4.5 and 5). **The phase's briefed
    mission — find a new lattice — is obsolete for this route.**
 3. **`n = 16`'s field is `ℚ(√3,√7,√11)`**, which is exactly the field this repository's own **FS-22** stub
    has been pointing at (*"Parts's four-colour construction with the Moser twist in place of his √5 step
