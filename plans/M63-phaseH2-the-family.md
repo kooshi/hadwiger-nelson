@@ -31,8 +31,11 @@ Three independent findings, all from 2026-09-12, listed in the order that makes 
    group is infinite. The multiple-of-6 prediction is confirmed and **trivial**, a free group action, and is
    really a multiple of **12** for a `ζ₁₂`-closed module, `ζ₁₂` being the roots of unity of `K(i)`.)
 2. **The count is the one coordinate on which the good and bad circles AGREE.** Measured on one lattice:
-   the record's circle has points of unit degree **14** and denominator **1**; the phase's circle, **1** and
-   **42**. Both counts are unbounded. A quantity two objects share cannot explain why one refuses four
+   the record's circle has points of unit degree **30** and denominator **1**; the phase's circle, **1** and
+   **42**. Both counts are unbounded. (The first figure was published as 14 and **retracted by its own
+   author** on re-check — a double-counted tangency inside a truncating cut. 30 is the module's norm-1
+   shell count, which §4 explains: it is not a coincidence that the corrected figure is exactly `|S|`. The
+   contrast strengthens; both originally printed numbers were wrong.) A quantity two objects share cannot explain why one refuses four
    colours and the other does not. (Poros, PH2-2.)
 3. **The diagonal cross-edge family is a perfect matching, and inside a large sufficient family its whole
    contribution saturates at four conditions** — "the colour permutation must move every colour occurring
@@ -144,6 +147,12 @@ unit degree 1 rather than 30 of degree 30.
 ```
 *(rows failing gate A omitted from this table; see §6. Complete for `n ≤ 140`.)*
 
+**One gate-D row is a guess, not a reading.** At `n = 36` the radicand is `143 = 11·13`, so 11 divides it
+and **ramifies** — neither inert nor split — and G43's criterion (*wall broken ∧ 11 inert*) is **silent on
+ramification**. The table marks it "not 6-open" because the screen tested `d % 11 ≠ 0`, which is a
+convention and not a theorem. Whether a ramified 11 can give 6-openness is **open**, and the same question
+will recur at every `n` whose radicand is divisible by 11. Flagged by Poros against its own table.
+
 **Ranked by cost, cost being the arena radius the endpoint bound demands:**
 
 | | `n` | arena radius | × the record | field |
@@ -151,9 +160,15 @@ unit degree 1 rather than 30 of degree 30.
 | new 5-chromatic object | **4** | 2.066 | 1.00× | **the record itself** |
 | | **12** | 3.501 | **1.69×** | `K(√47)`, 5-sealed |
 | | 36 | 6.021 | 2.91× | `K(√143)`, 5-sealed |
-| a rung toward χ ≥ 6 | **16** | 4.032 | **1.95×** | **`K(√7) = ℚ(√3,√7,√11)`, 6-open** |
+| a rung toward χ ≥ 6 | **16** | 4.032 | **1.95×** | **`K(√7) = ℚ(√3,√7,√11)`, 6-open** — ≈25,000 base points, ≈50,000 arena vertices |
 | | 44 | 6.652 | 3.22× | `K(√7)`, 6-open |
 | | 64 | 8.016 | 3.88× | `K(√255)`, 6-open |
+
+**The cost law, because getting it wrong changes the ruling.** Parts's lattice is a **rank-4** module cut
+by a bound on all conjugates, so its point count grows like **`r⁴`**, not `r²` and not `r⁸`: 1,603 at
+radius 2.0 and 3,433 at 2.44 fixes the exponent. So `n = 16` costs ≈25,000 base points and ≈50,000 arena
+vertices — **affordable**. An `r⁸` estimate put it at 358,000 and had it filed as a later milestone; the
+planner caught the exponent, and the ruling moved with the number.
 
 **Three observations that are the phase's product.**
 
@@ -177,11 +192,17 @@ unit degree 1 rather than 30 of degree 30.
   **60** points at `|p|² = 5`. So members off gate A are **not** eliminated by §4 — they are merely
   denied the free circle, and must buy circle count and unit attachment separately, which is PH2-9's 81×
   factor. The original mission's shape survives *for them*, now with a reason it is expensive.
-- **`n = 2` is un-eliminated and its circle is empty on Parts's lattice.** `|p|² = 2` holds 0 points there
-  (measured), yet `(1,1)` is a `K`-point of norm 2, so the circle is nonempty in the field. `n = 2` is
-  wall-broken and 6-open with an arena radius of only **1.512 — 73% of the record's** — so it remains the
-  most attractive unscreened member and the one most likely to be hiding its reason for failing. Its
-  reason is not §4.
+- **`n = 2`: the obstruction is THINNESS, and it is measured.** Corrected from the product owner's first
+  guess, which was wrong twice over. The shell *inside* Parts's lattice is empty — 0 of 3,433 — but the
+  circle is far from empty in the field, and it is **better material than the phase's own angle**:
+  `2 = 1² + 1²`, so `(1,1)` sits on it at denominator **1**, and **180** points of that circle have a
+  unit-distance neighbour already in Parts's lattice, four of them at denominator 1, each adjacent to
+  `(1,0)` — against the phase's angle managing 72 glue points at cheapest denominator 42. **So `n = 2` is
+  alive, 6-open, and cheaper than the record**, and the thing that probably kills it is that its endpoint
+  bound of 1.5119 contains only **499** lattice points, so its entire cross-edge-bearing arena is about
+  1,000 vertices — against a 509-vertex record that was *reduced* from a 3,433-point base. **And thinness
+  cannot be bought with radius**: material past the endpoint bound carries no cross edge and is absorbed
+  (G40). That is one measurable column, not a search. (Poros, PH2-10.)
 - **Nothing here shows any member PRODUCES five-chromaticity.** No type-M arena ever has: the record's
   refusal is **inherited**, since its arena contains Heule-510, a graph certified 5-chromatic *before* the
   construction is applied (PH-10). The reference class for "this works" is **n = 1**, not n = 2.
@@ -237,3 +258,12 @@ PH2-1 … PH2-9); the correction narrowing the matching argument to "a large suf
 **planner's**; the shell-count bound and the measurement that a divisor formula errs **optimistically**
 are the **prior-art agent's**. The uniqueness proof of §3, the endpoint-bound generalisation, gate A and
 §4's identity are the product owner's, as is the vacuous pass in §7.
+
+**Three of the advisor's own numbers were corrected during the phase, every one of them in the direction
+that flattered the record's side** — the `r⁸` pricing of `ρ₆₃` (caught by the planner; the ruling moved
+with it), the claim that `n = 16` was the unique 6-open member at radius ≤ 8 (refuted by the advisor's own
+printed table, which listed `n = 64` at radius exactly 8 — caught by the planner), and the unit degree 14
+(caught by the advisor itself on re-check; the true value is 30). The advisor recorded all three against
+itself within an hour of writing a card about the same bias in other people's instruments. That is G21
+operating exactly as the grokking describes, and the reason the corrections are in this file rather than
+lost is that two readers were looking at one table.
