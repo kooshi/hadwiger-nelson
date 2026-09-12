@@ -259,6 +259,14 @@ reduction, and even then the first question asked of it is "is there a refusing 
 | 4 | **the non-vacuity ask**: does the whole arena `L ∪ ρS` refuse four colours? | one SAT call; SAT (the cheap verdict) ~1 s, UNSAT 10–50 s at this scale (M62 §R20, §R22) | **that this arena is 4-colourable, so no selection of it is 5-chromatic.** A proof about the arena | nothing about the rotation on a *larger* base. Adding `L`-side material can only tighten, so a SAT at radius 2.44 does not close the rotation — it closes that arena. State the radius in the verdict, every time |
 | 5 | the reduction loop | hours, and it needs a first accumulator (§6) | — | — |
 
+**Why the cascade's own premise can be trusted, stated here because a reader who doubts the census will
+doubt the filter first.** The condition every filter rests on — that a cross edge joins two points
+collinear with the centre, equivalently that `ab` is a square in `K` — was **derived twice, from different
+starting points, and implemented twice, over different objects**: from the cross-edge identity, enumerated
+over the base's *lines* (§1.1, this plan), and from the radius spectrum with `k_is_square`, enumerated over
+*radius pairs* (the advisor, §11.1). The two agree digit for digit on every quantity they share, including
+the decomposition of `ρ₁₅`'s 126 committed cross edges.
+
 **Two consequences worth stating plainly.**
 
 1. **Filters 1–3 are proof-grade and cost microseconds.** A rotation eliminated there is eliminated by a
