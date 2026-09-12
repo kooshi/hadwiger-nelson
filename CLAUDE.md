@@ -642,6 +642,15 @@ system LLVM, so any native/C compile fails unless you use the system clang plus 
 external needs installing. It is single-threaded: use `tools/portfolio.sh` (a configuration race) and
 colour-cube splits (one run per cube) to use the cores.
 
+**Python is 3.14, and its multiprocessing default changed.** On Linux the default start method is now
+`forkserver`, not `fork` (measured here: 3.14.6, `get_start_method()` → `forkserver`). A worker therefore
+**re-imports the module** instead of inheriting the parent's memory, so state a parent leaves in a
+module-level global is **empty in the worker**, and the symptom is a `KeyError` on a key the parent plainly
+holds — which points at the dictionary, nowhere near the process model. Pass
+`mp_context=multiprocessing.get_context("fork")` (safe with no threads, and it avoids pickling a large
+shared object once per worker), or give the pool an `initializer` that rebuilds the state from picklable
+arguments, which also survives a platform without `fork`.
+
 **Two machines.** A desktop (32 cores, 128 GB) and a laptop (12 cores, 31 GB). `nproc` disagreeing with a
 number in a plan is the hardware moving, not an error — **ask which machine before treating a core or memory
 count as fact**, and ask to swap to the desktop when a step wants it (the SAT solving does). Timings compare
