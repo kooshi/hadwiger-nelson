@@ -446,3 +446,71 @@ make this the first refutation in this project whose entire solver-dependent cor
 proof. **Cost to be measured on one instance when the machine is quiet, not estimated**, and reported as a
 number.
 
+## 14. THE VERDICT
+
+> ## The ρ₆₃ arena is NOT four-colourable.
+>
+> χ(arena) ≥ 5, on 51,133 vertices and 544,530 edges, in the field ℚ(√3,√7,√11).
+
+Reached **twice, by two routes**, which agree:
+
+| route | method | result |
+|---|---|---|
+| **A — enumeration** | complete the 552 achievable interface patterns; check all 304,704 ordered pairs against the 66 coupling constraints | **0 pairs pass** ⟹ not four-colourable |
+| **B — cube-and-conquer** | hand each of the 552 interface patterns to the solver as 67 unit clauses and ask whether the other complete 25,567-vertex half can dodge it | **552 of 552 UNSAT**, no missing results, 20.03 core-hours |
+
+Route B replaces route A's second-half enumeration *and* the pair comparison with direct solver calls on
+complete half instances. The two share only the completeness of the 552 — which is exactly the dependency
+that four independent solver codebases were pointed at (§13).
+
+**Per-cube census** (route B): min 30.9 s, p25 118.8 s, median 131.2 s, p75 146.4 s, max 276.2 s.
+
+**A refusal is the suspect verdict here, and this is its audit.** The arena's edges come from two sources
+with opposite error modes: the base's unit edges are *measured* (a Cayley graph on the exactly computed
+norm-1 shell — complete by identity, no float anywhere, and a missed edge would only make colouring
+*easier*), while the 126 cross edges are *derived from a rotation law at a new parameter*, where an
+**invented** edge makes a refutation arrive faster and cheaper and looks exactly like success. So:
+
+- All 126 cross edges were re-derived from raw coordinates by **two independent implementations** — the
+  screening agent's and mine, mine using the exact K-identity `u_x v_y − u_y v_x = 0` and
+  `cos·(u_x v_x + u_y v_y) = (|u|²+|v|²−1)/2` with √7 never evaluated. **126/126 both times, 0 invented**,
+  with 26/26 lattice-perturbed negative controls correctly refused.
+- The whole arena edge set matched the independently generated CNF **exactly** (§1).
+- **The refutation genuinely needs the law-derived edges** — the 30 diagonal constraints alone leave 18,432
+  pattern pairs alive — so this exposure is real and not rhetorical. But it is **bounded**:
+
+| robustness measurement | result |
+|---|---|
+| off-diagonal constraints actually needed (greedy) | **4 of 36** |
+| does dropping any *single* one of the 36 break the refutation? | **no — 0 of 36 drops break it** |
+
+So even if one of the 36 law-derived off-diagonal edges were spurious, the verdict stands. That does not
+cover a *systematic* fault in the law, which is why two independent re-derivations of all 126 carry the rest.
+
+**Proof artifact — kept.** Measured on the quiet machine: the complete proof set for the 20 load-bearing
+refutations costs **~4.8 minutes and ~0.37 GB**. Generated and retained under
+`/tmp/claude-1000/solver-h2/proofs/` as 20 self-contained `.cnf` files each with its `.drat` refutation,
+plus `manifest.json` (verdict, time, sizes, and a sentence saying what each one asserts). Any DRAT checker
+re-checks them without this project's code. **This is the first refutation in this project whose entire
+solver-dependent core ships as re-checkable proof** — possible only because the superset argument (§10)
+moved the load from one 51,133-vertex refutation onto twenty 25,567-vertex ones.
+
+## 15. A pre-registered prediction of mine that FAILED
+
+I predicted — **before** the full numbers, and flagged it as a prediction precisely so it could be scored —
+that the cube cost would concentrate on the degenerate all-one-colour circle pattern, so that "hardness
+tracks that pattern's degeneracy, not the rotation". **The complete census refutes it:**
+
+| population | n | median |
+|---|---|---|
+| degenerate all-one-colour pattern | 264 | **127.3 s** |
+| the other 18 patterns | 288 | **136.5 s** |
+
+The degenerate pattern is **slightly easier than average**, not harder. Per-pattern medians run 82.1 s
+(pattern 0) to 171.2 s (pattern 3), with no structure that singles out the degenerate one. My reading came
+from a **partial sample** — at the time, only patterns 0 and 1 had completed, and pattern 0 happens to be
+the *easiest* of all nineteen, which manufactured the contrast I then explained. **Third instance in this
+phase of the same error: a statistic computed on an unrepresentative subpopulation and read as a property
+of the whole.** The deflationary *conclusion* survives in a weaker form — nothing in the cost distribution
+is evidence about ρ₆₃ specifically — but the mechanism I offered for it was wrong.
+

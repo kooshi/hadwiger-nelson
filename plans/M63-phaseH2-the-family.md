@@ -804,6 +804,73 @@ module could win.**
 
 ---
 
+## §6k — THE VERDICT: the `ρ₆₃` arena is not four-colourable
+
+> **χ(ρ₆₃ arena) ≥ 5.** 51,133 vertices, 544,530 edges, in `ℚ(√3,√7,√11)`. Established **twice, by routes
+> sharing only one dependency.**
+
+| route | method | result |
+|---|---|---|
+| **A — enumeration** | all 552 achievable interface patterns; all 304,704 ordered pairs against the 66 constraints | **0 pairs pass** |
+| **B — cube-and-conquer** | each of the 552 patterns handed to the solver as 67 unit clauses; can the other complete 25,567-vertex half dodge it? | **552 of 552 UNSAT**, no missing results, **20.03 core-hours** |
+
+Route B replaces A's second-half enumeration **and** its pair comparison with direct solver calls, so the two
+share only **the completeness of the 552** — which is precisely the dependency four independent solver
+codebases were pointed at (§6i). Per-cube cost: min 30.9 s, median 131.2 s, max 276.2 s.
+
+**The suspect-verdict exposure, BOUNDED rather than flagged.** A refusal is the fragile direction here
+because the object's novelty lives in law-derived cross edges. The refutation genuinely **does** need them —
+the 30 diagonal constraints alone leave **18,432** pattern pairs alive — so this is not an artefact of
+density. But **only 4 of the 36 off-diagonal constraints are needed** (greedy), and **dropping any single one
+of the 36 does not break the refutation: 0 of 36 drops break it.** So **no single spurious law-derived edge
+can have produced this verdict.** A *systematic* fault in the law is not covered by that, which is what the
+two independent re-derivations of all 126 cross edges are for — 126/126 each, **0 invented**, with 26/26
+perturbed negative controls correctly refusing.
+
+**The proof artifact, and it is a first here.** The complete DRAT proof set for the **20** load-bearing
+refutations costs **4.8 minutes and 0.37 GB** on a quiet machine — 20 self-contained CNF files, each with its
+refutation, plus a manifest saying what each asserts, **re-checkable by any DRAT checker without touching
+this project's code.** **This is the first refutation in this repository whose entire solver-dependent core
+ships as re-checkable proof**, and it is only possible because the superset argument (§6i) moved the load off
+one 51,133-vertex refutation onto twenty 25,567-vertex ones. The agent generated it on its own authority
+rather than waiting for mine, correctly: its brief said to keep the proof if it was cheap, and 4.8 minutes is
+cheap.
+
+**A pre-registered prediction of the agent's FAILED, and it scored it against itself.** It predicted the cube
+cost would concentrate on the degenerate all-one-colour pattern, so that hardness tracked that pattern's
+degeneracy rather than the rotation. **The complete census says the degenerate pattern's median is 127.3 s
+against 136.5 s for the other 18 — slightly EASIER than average, not harder**, with per-pattern medians from
+82.1 s to 171.2 s and nothing singling it out. The cause: it read a **partial** sample in which only patterns
+0 and 1 had finished, and pattern 0 happens to be the easiest of all nineteen, which manufactured the
+contrast it then explained. **That is the THIRD instance in this phase of one error — a statistic on an
+unrepresentative subpopulation read as a property of the whole** (the others: the "exactly 10" invariant from
+twelve reseeded samples of one colouring, and the contention factor inferred from a mixed cube population).
+The deflationary conclusion survives in its weaker form — **nothing in the cost distribution is evidence
+about `ρ₆₃`** — but the mechanism offered for it was wrong, and **registering it as a prediction in advance is
+the only reason it is scoreable rather than quietly forgotten.** The product owner had already relayed the
+wrong mechanism to Kooshi as a finding; corrected.
+
+**What it is.** Not a size record, and no write-up may read that way: 51,133 vertices against 509, and
+reduction is another milestone's machinery. **The result is the FIELD.** `ℚ(√3,√7,√11) = K(√7)` is **6-open**
+(G43), where de Grey's field, the 509-vertex record's, and the M53 witnesses' are all **5-sealed**. And the
+refusal is **produced, not inherited**: no known five-chromatic witness can embed at any position or
+orientation (isometry-invariant squared distances; §6h), and the base half alone four-colours in 0.35 s, so
+the five-chromaticity cannot come from the base at all.
+
+**What it enables, and this is the strategic point.** Over a field where 11 is *usable*, a five-colour forced
+pair requires `11 ∣ d²` and a five-colour virtual edge requires `d² ≡ 1 (mod 11)` (row 55, G47) — which is
+what bars a `√3` or distance-2 gadget everywhere the sieve reaches. In `K(√7)` the prime 11 has **residue
+degree 2**, so it is **not usable** and **that obstruction lifts.** So this is the first object in this
+project inside which one can look for a five-colour forced pair *without* the 11-obstruction — which is
+exactly G48's mechanism and FS-6's platform.
+
+**The ceiling, unchanged and stated by the agent that produced the verdict.** This decides **one object**.
+The intersecting-family criterion (§6f) is a criterion for **every** base; **nothing here shows a base
+satisfying it exists**, and *"un-eliminated is not alive"* applies to **the family**, not merely to this
+member.
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
