@@ -425,6 +425,35 @@ engine-comparable by construction:
 > difference in the level or the bound sequence. Registered 2026-09-12 **before any such paired run exists**;
 > a close now costs 44 s, so this is one cheap experiment. It is a claim about **the path**, which is the
 > only thing an engine may legitimately change.
+
+**`P-Y1` SCORED: FALSIFIED — and the falsification is the product owner's specification, not the engines.**
+Observed ratio **100.0%** against a band of 30–70%, falsifier outside 20–90%.
+- **Why it could not have come out otherwise:** the harvest happens overwhelmingly during
+  *optimum-finding*, and the enumerate-only switch leaves that phase on **byte-identical code**. On D1b the
+  harvest ran 473 sets at the optimum to 528 at close, so **~90% of any harvest predates the switch.** A
+  ratio near 1 was forced by construction and the band was unreachable however the engines behave.
+  **I registered a prediction whose informative outcome the apparatus could not enter** — two hours after
+  writing the rule that says to check exactly that. `CLAUDE.md` now carries the rule's second half.
+- **Why this is a diagnosis and not an escape**, which matters because "mis-specified" is the move a
+  motivated person makes: **the 90% split is from D1b's own recorded numbers and predates `P-Y1`.** The test
+  for any such claim is that its evidence must predate the result.
+- **The surviving clauses came back STRONGER than registered, unasked:** not merely "level identical as a
+  set" but **identical ask counts to the unit — 1,527 + 375 on both arms.** The two runs did the same work
+  iteration for iteration — the strongest available evidence that the switch perturbs nothing.
+- The stage was too small to show any speed-up (level 82, 59.3 s against 58.8 s), consistent with everything
+  else tonight: **the win is a function of level size, and at 82 there is nothing to win.**
+
+**`P-Y2`, registered to replace it — it predicts IDENTITY rather than a band**, which is both the strongest
+form and the one that cannot be fitted to a number already seen:
+
+> **`P-Y2`** — an **enumerate-only** engine switch changes **nothing but wall-clock**. On any stage run to
+> closure under both arms: the level identical as a set, the bound identical at every iteration, the ask
+> counts identical **to the unit**, and the harvested correction-set count identical. **Confidence 0.85**
+> (one stage already shows ask counts matching to the unit). **Falsifier: any difference in any of the four,
+> on any stage.** This makes the integration's own safety argument falsifiable, which is what it lacked.
+> **Honest note on ratios:** a *ratio* prediction only discriminates under a **full-engine** integration,
+> which does not exist. Under enumerate-only the discriminating quantity is the enumeration-phase harvest
+> alone — `Y` at close minus `Y` at the optimum, 55 of 528 on D1b.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
