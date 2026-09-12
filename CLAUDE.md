@@ -695,6 +695,12 @@ diagnose, retry, or work past it — working past one is how a filesystem event 
 ~15 minutes persists its progress at natural acceptance points (a verdict, a wave, an accepted deletion) and
 resumes from that state after a kill; a long phase whose state lives only in a process's memory is a bug.
 The subplan answers, in writing: *if this process dies at any instant, what does the relaunch redo?*
+**And the checkpoint must not live where another agent is told to clean.** `build/` is described in this
+file as regenerable scratch, and an agent tidying up after itself deleted a tree under it on 2026-09-11
+while a live job's only resume file sat in a sibling directory (`build/m63d2/ckpt-hismove/`). Recoverable
+state one cleanup away from unrecoverable is not recoverable. Put checkpoints outside the scratch tree, and
+name the **resume command** in the subplan beside the checkpoint's path — a checkpoint nobody knows how to
+resume from is a file, not a recovery.
 
 **Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so a live
 process resumes mid-token. Launch long runs from a snapshot copy (`cp scripts/x.sh build/x-snapshot.sh`;
@@ -807,3 +813,13 @@ because it is believed. So make a check's failure path louder than its success p
 pipeline swallow an exit status the gate depends on, and give every discriminating claim a partner that goes
 red — a certificate filed against the wrong problem, a vertex moved off the unit circle, a satisfiable
 formula handed to the checker.
+
+**The unifying rule, from nine instruments that broke inside one phase** (M63 phase C, 2026-09-11; eight
+failed by silence, one by false alarm): **every check needs a positive signal for the thing that did not
+happen.** The nine were a wall that could not fire, an exception swallowed in a timer thread, a control that
+asked the same question twice and so could never bite, a pid file that caught a wrapper twice, a silent
+forty-minute search, a control announcing a refutation from an index mismatch, a trust receipt returning a
+benign verdict while checking nothing, a `grep` that killed its own shell, and a four-hour deadline armed as
+an exit-waiter. Each was quiet exactly when it had something to report, because each was built to react to
+an event instead of to assert an absence — and **an exit-waiter can tell you a thing has ended, never that
+it is late.**
