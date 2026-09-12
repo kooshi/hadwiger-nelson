@@ -367,6 +367,30 @@ classes, so no colour is free. The same obstruction kills every colouring built 
 with a base automorphism or a colour twist: `residue(4x) = 0` regardless. **So the arena's colourability is
 genuinely a solver question and not a construction question.**
 
+**Handed to the dedicated solver agent**, which is taking over with cube-and-conquer across 32 cores. Its
+exit of the monolithic process is expected and is not a crash. Artifacts produced for it, each a measurement
+in its own right:
+
+| fact | value | why it matters |
+|---|---|---|
+| arena edge list, `2n` index space | `/tmp/claude-1000/screen-h2/arena_edges.txt`, **544,590** edges | lets a model be verified against the graph rather than the encoding |
+| metadata | `/tmp/claude-1000/screen-h2/arena_meta.json` | centre, circle points, unit vectors, cross edges, interface, degrees |
+| **the interface** | only **97** base vertices are touched by the 126 cross edges | the entire coupling between two independently four-colourable halves; the real branching frontier |
+| the genuine coupling | **96** constraints = 30 diagonal + 36 off-diagonal + 30 copy-centre | 30 of the 126 collapse onto base unit edges and are redundant duplicates |
+| degree | a **plateau**: 8,239 vertices at the maximum 30, then 36/192/228/408 at 29/28/27/26 | the Cayley identity again — every interior module point has degree exactly `\|S₁\|`, so "highest degree" is not a discriminator |
+| maximum clique | a **triangle**, and this is a theorem not a search | four plane points are never pairwise unit-distant (`Mascot.lean`, ledger row 58), so 24× is the whole symmetry break available; one through the centre is `(12783, 12677, 14417)` |
+| monolithic hardness at kill | 533 s, **134,238** conflicts, ~250 conflicts/s, 410 MB, not converging | a cost observation, not a hint about the answer |
+
+**One encoding subtlety, recorded because it is the kind of thing a later reader gets wrong.** The centre is
+shared, so the copy-centre index `38350` is *not a vertex*; its four variables are declared and never
+constrained. Consequently the copy's own centre edges do **not** arrive through the copy-internal edge list —
+those clauses mention the free variable and are vacuous — they arrive as the 30 cross edges `(org, n+j)`.
+
+**And an asymmetry for anyone tempted to shrink the instance.** A sub-object is valid evidence in **one
+direction only**: an UNSAT sub-instance proves the whole arena UNSAT, while a SAT sub-instance proves
+**nothing**, because colourings of a subgraph need not extend. So the UNSAT direction may be pursued on the
+interface's neighbourhood closure and the SAT direction may not.
+
 ---
 
 ## §13 — The phase's own distance-to-colourable metric, measured — and `ρ₆₃` nearly doubles the record
