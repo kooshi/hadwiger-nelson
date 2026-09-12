@@ -120,7 +120,8 @@
     6
    ]
   ],
-  "reading": "2 of his four recorded orbits are live single-orbit candidates here and 2 are not. A single-orbit `no` on one of his four is NOT a contradiction of his move: he added the four as a SET, and the set is tested by `tools/parts_diag.py hismove`, never by this map.",
+  "in_menu_not_reached": 0,
+  "reading": "2 of his four recorded orbits were tested singly here; 2 are not candidates at all. A single-orbit `no` on one of his four is NOT a contradiction of his move: he added the four as a SET, and the set is tested by `tools/parts_diag.py hismove`, never by this map.",
   "computed_from": "the candidate set and A, not from a hand-written sentence"
  },
  "density": {
@@ -20418,10 +20419,10 @@
   }
  ],
  "provenance": {
-  "generated": "2026-09-12T05:35:19",
+  "generated": "2026-09-12T06:00:29",
   "machine": "local",
   "cores": 32,
-  "git_commit": "d8f6f60b91d5a6d34906f06ec197d05fb441f184",
+  "git_commit": "071ec4a147fc8279c501d0707277b3cd5aa75438",
   "git_dirty": true,
   "freeze_commit": null,
   "config_sha256": "7c5bbd482a5c891b25dde86ed40667fb84e15656ec7373004fdbb3d63cdc8fb2"

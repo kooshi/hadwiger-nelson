@@ -20,7 +20,93 @@
   },
   "note": "his degree test governs the RESERVE; his \u00a75.6 exempts partially filled orbits from it, and `fill_only` counts those a degree-built menu would miss"
  },
- "his_move_absent_by_construction": "A412 already contains the other halves of (0,0,2,2) and (0,0,2,6), so those two of the four orbits his recorded move used are complete here and are not candidates. The other two, (0,0,0,4) and (0,0,6,6), ARE live partial-fill candidates in the menu; this file is the first candidate run alone and timed, so its two entries are the identity and (6,2,8,0):12 and neither of his orbits appears in them. Both were swept in data/m62/m63-map-A412.json, where both came back inert. His move as a SET is tested at A403, not here.",
+ "anchor": {
+  "state": "present",
+  "vertices": 374,
+  "asks": "a known minimum of the unexpanded stage must still refuse here, and minus one atom must be colourable"
+ },
+ "his_recorded_move": {
+  "orbits": [
+   {
+    "orbit": [
+     0,
+     0,
+     0,
+     4
+    ],
+    "members": 6,
+    "in_A": 3,
+    "standing": "in-the-menu-but-not-among-this-run's-entries",
+    "why_absent": "admitted to the menu and NOT inadmissible: this run did not reach it (a truncated run, `--limit`)"
+   },
+   {
+    "orbit": [
+     0,
+     0,
+     2,
+     2
+    ],
+    "members": 12,
+    "in_A": 12,
+    "standing": "complete-in-this-accumulator",
+    "why_absent": "every member is already in A, so completing it adds nothing: his own recorded no-op, and `menu_census` skips it"
+   },
+   {
+    "orbit": [
+     0,
+     0,
+     2,
+     6
+    ],
+    "members": 12,
+    "in_A": 12,
+    "standing": "complete-in-this-accumulator",
+    "why_absent": "every member is already in A, so completing it adds nothing: his own recorded no-op, and `menu_census` skips it"
+   },
+   {
+    "orbit": [
+     0,
+     0,
+     6,
+     6
+    ],
+    "members": 12,
+    "in_A": 6,
+    "standing": "in-the-menu-but-not-among-this-run's-entries",
+    "why_absent": "admitted to the menu and NOT inadmissible: this run did not reach it (a truncated run, `--limit`)"
+   }
+  ],
+  "tested_singly": [],
+  "absent": [
+   [
+    0,
+    0,
+    0,
+    4
+   ],
+   [
+    0,
+    0,
+    2,
+    2
+   ],
+   [
+    0,
+    0,
+    2,
+    6
+   ],
+   [
+    0,
+    0,
+    6,
+    6
+   ]
+  ],
+  "in_menu_not_reached": 2,
+  "reading": "none of his four recorded orbits was TESTED here, but 2 of them are in this map's menu and were simply not reached (a truncated run). That is not evidence about his move in either direction, and it is not an inadmissibility either.",
+  "computed_from": "the candidate set and A, not from a hand-written sentence"
+ },
  "density": {
   "yes": 0,
   "no": 2,
@@ -49,7 +135,7 @@
   },
   "note": "reported as its own result with its own enumeration, NEVER folded into the menu's base rate: it answers whether his admission cut at degree 4 is in the right place, not how often a move helps"
  },
- "seconds": 471.9,
+ "seconds": 0.0,
  "jobs": 1,
  "seed": 20260911,
  "entries": [
@@ -120,7 +206,8 @@
    },
    "cpu_seconds": 138.21,
    "block": "control",
-   "block_index": 0
+   "block_index": 0,
+   "resumed": true
   },
   {
    "candidate": {
@@ -1790,14 +1877,15 @@
    ],
    "cpu_seconds": 330.72,
    "block": "random",
-   "block_index": 0
+   "block_index": 0,
+   "resumed": true
   }
  ],
  "provenance": {
-  "generated": "2026-09-12T01:07:23",
+  "generated": "2026-09-12T06:01:42",
   "machine": "local",
   "cores": 32,
-  "git_commit": "7391d3c5cf5e261cefbdbd8fd9afc22a2c03d0c3",
+  "git_commit": "071ec4a147fc8279c501d0707277b3cd5aa75438",
   "git_dirty": true,
   "freeze_commit": null,
   "config_sha256": "7c5bbd482a5c891b25dde86ed40667fb84e15656ec7373004fdbb3d63cdc8fb2"

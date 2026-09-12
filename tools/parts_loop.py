@@ -882,7 +882,7 @@ def plan_blocks(base, cands, census, *, reading=ADOPTED_READING, seed=20260911, 
     return jobs
 
 
-def his_move_standing(base, A_tuples, entries) -> dict:
+def his_move_standing(base, A_tuples, entries, cands=()) -> dict:
     """Which of `HIS_RECORDED_MOVE`'s four orbits this map could test, **computed from the
     candidate set** rather than asserted.
 
@@ -901,6 +901,14 @@ def his_move_standing(base, A_tuples, entries) -> dict:
                 {"name": e.get("name"), "adds": v, "verdict": e.get("verdict"),
                  "M_set_grew": e.get("M_set_grew"),
                  "provenance": e.get("candidate", {}).get("provenance")})
+    # A TRUNCATED run (`--limit`) has fewer entries than candidates, and "absent from the
+    # entries" then means something quite different from "absent from the menu". Reading the
+    # menu off the entries alone would report an orbit his move used as inadmissible when it was
+    # merely not reached -- the same class of false claim this field was rewritten to stop
+    # making. `cands` is the menu; `entries` is what this run got to.
+    menu = set()
+    for c in cands:
+        menu.update(c.orbits(base))
     rows, tested, absent = [], [], []
     for o in sorted(HIS_RECORDED_MOVE):
         oi = base.by_label.get(o)
@@ -921,24 +929,46 @@ def his_move_standing(base, A_tuples, entries) -> dict:
             row["why_absent"] = ("every member is already in A, so completing it adds nothing: "
                                  "his own recorded no-op, and `menu_census` skips it")
             absent.append(o)
+        elif o in menu:
+            row["standing"] = "in-the-menu-but-not-among-this-run's-entries"
+            row["why_absent"] = ("admitted to the menu and NOT inadmissible: this run did not "
+                                 "reach it (a truncated run, `--limit`)")
+            absent.append(o)
         else:
             row["standing"] = "not-a-candidate-in-this-map"
-            row["why_absent"] = "partially absent from A but not admitted to the menu"
+            row["why_absent"] = ("partially absent from A and not admitted to the menu"
+                                 if cands else
+                                 "partially absent from A; no candidate set was supplied, so "
+                                 "whether the menu admits it is UNKNOWN here")
             absent.append(o)
         rows.append(row)
+    n_menu = sum(1 for r in rows
+                 if r["standing"] == "in-the-menu-but-not-among-this-run's-entries")
+    n_gone = len(absent) - n_menu
+    if tested:
+        reading = (
+            f"{len(tested)} of his four recorded orbits were tested singly here; {n_gone} are not "
+            f"candidates at all"
+            + (f" and {n_menu} are in the menu but were not reached by this run" if n_menu else "")
+            + ". A single-orbit `no` on one of his four is NOT a contradiction of his move: he "
+              "added the four as a SET, and the set is tested by `tools/parts_diag.py hismove`, "
+              "never by this map.")
+    elif n_menu:
+        reading = (
+            f"none of his four recorded orbits was TESTED here, but {n_menu} of them are in this "
+            f"map's menu and were simply not reached (a truncated run). That is not evidence "
+            f"about his move in either direction, and it is not an inadmissibility either.")
+    else:
+        reading = (
+            "none of his four recorded orbits is a candidate here at all, so this map says "
+            "nothing about his move either way. A reader finding his move missing from this map "
+            "is seeing that, not an omission.")
     return {
         "orbits": rows,
         "tested_singly": [list(o) for o in tested],
         "absent": [list(o) for o in absent],
-        "reading": (
-            f"{len(tested)} of his four recorded orbits are live single-orbit candidates here and "
-            f"{len(absent)} are not. A single-orbit `no` on one of his four is NOT a contradiction "
-            f"of his move: he added the four as a SET, and the set is tested by "
-            f"`tools/parts_diag.py hismove`, never by this map."
-            if tested else
-            "none of his four recorded orbits is a live single-orbit candidate here, so this map "
-            "says nothing about his move either way. A reader finding his move missing from this "
-            "map is seeing that, not an omission."),
+        "in_menu_not_reached": n_menu,
+        "reading": reading,
         "computed_from": "the candidate set and A, not from a hand-written sentence",
     }
 
@@ -1007,7 +1037,7 @@ def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuple
             "note": "his degree test governs the RESERVE; his §5.6 exempts partially filled "
                     "orbits from it, and `fill_only` counts those a degree-built menu would miss"},
         "anchor": anchor_state,
-        "his_recorded_move": his_move_standing(base, A_tuples, out),
+        "his_recorded_move": his_move_standing(base, A_tuples, out, cands),
         "density": density(menu_entries),
         "shoulder": {"n": len(sh_entries), "density": density(sh_entries),
                      "note": "reported as its own result with its own enumeration, NEVER folded "
@@ -1243,6 +1273,16 @@ def _self_test(log=print):
     chk("his-move standing is DISCRIMINATING: with no entries, nothing reads as tested",
         all(r["standing"] != "tested-in-this-map"
             for r in his_move_standing(base, A412, [])["orbits"]))
+    # A truncated run must not report an orbit as inadmissible merely because it was not
+    # reached. Same class of false claim this field was rewritten to stop making.
+    trunc = {tuple(r["orbit"]): r["standing"]
+             for r in his_move_standing(base, A412, [], cands)["orbits"]}
+    chk("his-move standing separates `not in the menu` from `not reached by a truncated run`",
+        trunc[(0, 0, 0, 4)] == "in-the-menu-but-not-among-this-run's-entries"
+        and trunc[(0, 0, 6, 6)] == "in-the-menu-but-not-among-this-run's-entries", str(trunc))
+    chk("and with no candidate set supplied it says the menu is UNKNOWN rather than guessing",
+        "UNKNOWN" in next(r["why_absent"] for r in his_move_standing(base, A412, [])["orbits"]
+                          if tuple(r["orbit"]) == (0, 0, 0, 4)))
     # The shipped artifact must still be what this producer emits. The failure this catches
     # happened: `data/m62/m63-map-A412.json`'s his-move field was corrected BY HAND (commit
     # 3e343e5) because the producer's sentence was false, and the producer was left emitting the
@@ -1254,7 +1294,7 @@ def _self_test(log=print):
         chk("the shipped A412 map's his-move field is what this producer computes from its "
             "own entries (a hand-edit of either side goes red)",
             shipped.get("his_recorded_move") ==
-            his_move_standing(base, A412, shipped["entries"]),
+            his_move_standing(base, A412, shipped["entries"], cands),
             "recompute it with: python3 tools/parts_loop.py map --A v412e2106.vtx "
             "--companion v136e564.vtx --incumbent 373 --scoring-role in-sample")
 
