@@ -107,10 +107,10 @@ phase D's expansion rule, that the cost argument never touched.
 
 | id | promise (address) | status | evidence, or the argument | goes to |
 |---|---|---|---|---|
-| G-1 | `\|M\|` at 136 / 375 / 374 / 376 (§3 rank 1) | partly | 136 §R1; 375 M64 run, S.2 #1 | 374, 376 → D |
+| G-1 | `\|M\|` at 136 / 375 / 374 / 376 (§3 rank 1) | **done for all four** | 136 §R1; 375 M64 run, S.2 #1; **376** at the order-3 rung on `A451` and **374** at rung 1 on `A412` (§R3), the 374 level past its optimum with zero undecided asks | the 374 level's `\|{M}\|` closes in D/E |
 | G-2 | `{M}` ranges and the stable/unstable partition (§3 rank 2) | partly | L375 ranges differ in two orbits, attributed to his column (S.2 #4). **The partition is not in his text**: "stable" means *the same non-empty vertex set in every minimum* (§6 of his paper) and is marked only by gray shading, and a single-valued range does not imply it — our `(2,0,2,4)` is 10 in every minimum with a varying vertex set. §3(c)'s "31 stable orbits" read the ranges and is therefore unproven. **C2/C3 settled the ranges and left the partition unattested** (§R2.4c): three complete levels audited, and his printed 375 column is strictly narrower than BOTH the M6A and the M6B level in the same two cells — so the column is a property of neither run. Every orbit row now carries a status measured on our own level (`stable` / `unstable-constant-count` / `unstable-varying-count`), which is the honest form of the partition; his gray-shading marker is not extracted | the partition: a scoped shading extraction, or D |
 | G-3 | edge counts decomposed (§3 rank 3) | **done for three rows** | audited as `Comparison` rows, low AND high endpoint each: S136 **564–567**, L375 **1920–1930**, M6B 375 **1916–1926**, all agreeing (§R2.4c). The decomposition is always whole — `e(L)`, `e(S)`, centre-cross, and off-centre cross by radius family — and `e_S_his` books the twelve centre-to-S edges to the S side as he does, without which the S row would have read 552 against 564 (§R2.6) | 374/376 → D |
-| G-4 | `{M}` grows at fixed `M` (§3 rank 4) | not done | now two clauses: the replay comparison 78 → 1,092 (S.1 2a) and the tightened rule-driven clause (S.1 2c) | D |
+| G-4 | `{M}` grows at fixed `M` (§3 rank 4) | **observed, but not under a rule** | the phenomenon fired once in 63 on the `A412` sweep — `{M}` grew at fixed `\|M\|` and fixed rung with vertices added — but that candidate came from the sweep's random block, so **clause 2(c), which requires a RULE to have added them, is not met**. The replay comparison 78 → 1,092 (S.1 2a) is a separate clause and waits on the 374 level closing | E |
 | G-5 | `\|{M}\|`, `\|A\|` reported (§3 rank 5) | **done for three rows** | under his convention (the stabiliser of the reduced part, companion free): **8 / 166**, **282 / 403**, **66 / 403**, each matching his Table 1 and each with `A` equal to his published accumulator LITERALLY, not merely up to the group. All three levels closed under the counting group, so these count orbits contained rather than orbits meeting (§O6, §R2.4c). Reported, never gated | 374/376 → D |
 | G-6 | held-out set (§3): S M6A, 8/3 mono-pair, √3 triple, L M6B/M6C | partly | S M6A reduction was spent as the calibration (§R1) | E (required, S.1 #3) |
 | A-1 | 43 files parse to their filenames (§4 A) | done | 40/43 exact plus three findings, §1; `parts-ref11-verified.json` | — |
@@ -131,7 +131,7 @@ phase D's expansion rule, that the cost argument never touched.
 | B-8 | cyclic implication chain for mono-sets | drop? | an encoding alternative to the clique companion; asks cost ≤ 0.11 s (S.2 #11), nothing to accelerate; E revisits if the triple's asks are slow | — |
 | B-9 | one-time CNF | done | `parts_reduce.Oracle` | — |
 | B-10 | controls: `v374e1860 ∪ ρS136` refuses; single deletions colourable | **done** | c4.1's phase-1 census over the record with BOTH halves deletable reads 508 critical / 0 droppable / 0 unknown — every single-vertex deletion on either side is colourable — and the level is the record itself, uniquely (§R2.2) | — |
-| B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | **not done — NO LONGER A DROP** | it prices a candidate expansion in tens of asks instead of a full reduction (delete eight necessary atoms at once; a refusal frees all eight), which is the shape D's look-ahead needs. Its phase-1 role remains unnecessary at the measured costs, and that half stays conditional on C4.0 | **D** |
+| B-12 | the 8-4-2-1 batching of phase 1 (§2, his §5.8) | **done, in its look-ahead role** | `parts_rule.look_ahead` deletes eight necessary atoms at once from the enlarged graph and a refusal frees all eight — sound because the property is upward closed. Measured: **630 asks, 41 s per candidate**, against ~250 s for a full evaluation. Its phase-1 role remains unnecessary at the measured costs | — |
 | B-11 | each lever measured against a recorded trace | drop? | priced against his 10 s asks; ours are 0.006–0.11 s; revisit in F/G if asks grow 100×. **Caveat for E's √3 row** (Poros): his attested 0.2 s there was measured *with* the five-vertex assignment, which he reports at ~10× and which fails for the 1/√3 triple — so that lever is part of the number's provenance, and a timing compared with his must say whether it was on | E (the √3 row) |
 | C-1 | degree 2 by `hyperedges_run.py` on M62's arena (§4 C) | retired | `reduce_stage` harvests every degree lazily (sizes 1–10 stored, M64 §R3); M62's arena is off the path (M62 §R23) | — |
 | C-2 | degree ≥ 3 harvested | done | same | — |
@@ -141,13 +141,13 @@ phase D's expansion rule, that the cost argument never touched.
 | D-1 | enumerate the whole optimal level (§4 D) | done | `reduce_stage`, `exhaustive-level` | — |
 | D-2 | dedup by the input group before verifying | retired for type M | `Aut(W ∪ C)` is trivial (S.2 #1); the 12-fold multiplicity is `Aut(A)` with the companion moving, not a symmetry of the stage, so images must still be verified. D may measure "propose images as candidates" on the `A412` level | D (measurement only) |
 | D-3 | `A = ⋃{M}` | done | §R1, S.2 #2 | — |
-| D-4 | `A`'s growth curve and a stall stop | not done | — | D |
+| D-4 | `A`'s growth curve and a stall stop | **done** | `parts_rule.run_loop` carries the per-iteration history and a stall counter feeding his own escape (raise the vertex budget and re-rank); `stalled` is a verdict, not a success. Exercised on the held-out state | — |
 | D-5 | S level to exhaustion | done | §R1 | — |
 | D-6 | the level in parallel | drop? | levels close in minutes on one core; revisit in F/G | — |
-| E-1 | expansion: partial orbits first, then the reserve `R` (§4 E) | not done | Poros M3: his stated priorities are not decisive on his own move | D |
+| E-1 | expansion: partial orbits first, then the reserve `R` (§4 E) | **done** | `parts_loop.menu_candidates` (fills first, then the reserve in his decreasing-degree order) and `parts_rule.many_then_trim` (his SECOND published strategy, which no earlier plan carried). His stated priorities remain non-decisive on his own move (Poros M3), which is why the ranking is ours and frozen | — |
 | E-2 | L and S alternating against a frozen companion | not done | — | D (L loop); F (joint) |
 | E-3 | the rung set by pendants | retired | B-4 | — |
-| E-4 | stall escape by more new vertices | not done | — | D |
+| E-4 | stall escape by more new vertices | **done** | his own escape, as an explicit schedule of vertex budgets in the frozen config; at the last rung it reaches `many_then_trim`, the set-valued move. The schedule is frozen in commit `6158162` rather than tuned during the run | — |
 | E-5 | the four-state path | partly | state 2 met (S.2 #1–2); states 1, 3, 4 as replay controls | D |
 | E-6 | state 1 from its input (Heule-529's `L393`) | retired | not held; state 1's *output* is checked by reducing `A451` at the order-3 rung (D). `G529` is public at `github.com/marijnheule/CNP-SAT` (`[Heule2019]`) if ever wanted | — |
 | P1 | Table 3's `A` sums to 402 | met | §1(ii) | — |
@@ -160,7 +160,7 @@ phase D's expansion rule, that the cost argument never touched.
 | P8 | one iteration `A412 → 374` ≈ 3.5 h ±2× | not done | it assumed 2–4 s asks; measured 0.006/0.02 s (S.2 #11). Revised forecast registered in D: 20–90 min single core for ~13k raw minima | D |
 | O-1 | the completeness invariant (§O 1) | done | `reduce_stage` | — |
 | O-2 | `exact-at-rung`; the rung travels with the number | done | `Bound.render` | — |
-| O-3 | per-iteration `(\|M\|, \|{M}\|, \|A\|)`, `stalled` as a verdict, stall feeds expansion | not done | `parts_report.iteration_line` exists, unused | D |
+| O-3 | per-iteration `(\|M\|, \|{M}\|, \|A\|)`, `stalled` as a verdict, stall feeds expansion | **partly** | `parts_rule.run_loop` logs a per-iteration line with the verdict, `\|M\|`, the vertex budget and the stall counter, and checkpoints per iteration; `stalled` is a verdict. **The richer line of §E** — `\|{M}\|` and `\|A\|` deltas, `Y`'s shape, both ask populations, the checkpoint's age — is not wired, and `parts_report.iteration_line` is still unused | E |
 | O-4 | kernel certificate declined for M63 | standing | for the reproduced 509 (S.1 #1); reversed for any beat (S.1 #4) | F |
 | O-5 | vacuity verdicts `base-fails` / `no-reduction` / `companion-suffices` | **done** | `companion-suffices` added and fired on a stub oracle (c1.4); `no-reduction` moved to the branch it names (`w* = total weight`), where c4.1 then landed on it | — |
 | X-1 | no verdict word for optimality (§E) | done | `Bound` | — |
@@ -181,7 +181,7 @@ phase D's expansion rule, that the cost argument never touched.
 | M64-8 | `m63-profiles-{S,L}.json` without a producer | retired | superseded by `m64-faces.json` (producer `parts_faces.analyse`); kept untouched | — |
 | M64-9 | `m64-rung-lattice.json`, `m64-orbit-closure.json` produced by scratch scripts | **done** | `parts_faces.rung_lattice` / `orbit_closure`; `--reproduce-m64` rebuilds both sides with verification asks and reports `reproduces-m64`, 16 L rungs and 6 S rungs, 67 s (§R2) | — |
 | M64-10 | both reduction records without a committed driver | **done** | `tools/parts_run.py`; both records regenerate `regenerated-identical` as `.v2.json` beside the originals (c1.7, §R2) | — |
-| FS35-1 | the look-ahead's two quantities along his recorded path | partly | exchange classes from his four published ranges (M64 §0 ix); closure bounds need a level set at each state | D |
+| FS35-1 | the look-ahead's two quantities along his recorded path | **partly — closed at our 375 state** | `tools/parts_diag.py:fs35` on the complete 375 level: **two exchange classes**, affine dimension 2 of 4, sixteen rungs with closure bounds, atom classes reconciling as 336 + 24 + 14 of 18 = 374 (`data/m62/m63-fs35-1-375.json`). **The replayed 374 and 376 states are not done** — each needs its own stage rebuilt at its own rung, and the 374 level is still enumerating, so **P-D9 (the vector changes at every state) is unscored** | E |
 | H-1 | `parts_verify.py` dirties the tree on every run | **done** | it rewrites only when `files` or `base_radius` moves; c1.6 ran it twice into a scratch path, second run `unchanged: not rewritten`, mtime identical, `git status` clean | — |
 | H-2 | checkpoint without resume | **done** | `ReductionState` + `load_checkpoint`; c1.1 kills the S166 order-3 rung at iteration 58 of 82 and the relaunch reproduces the level exactly (§R2) | — |
 | H-3 | no ask wall | **done, by a different mechanism** | CaDiCaL implements no `interrupt()` at all (P-C1.2 falsified); the budget is a conflict-slice loop under a time wall, and c1.3 shows `unknown` is neither impossible nor automatic (§R2.3) | — |
@@ -1262,15 +1262,27 @@ rows is computed **across the warm/cold seam**, the very seam this section estab
 to three orders of magnitude. The missing cell — a cold refusing ask on a frozen-companion stage —
 was never measured, and I asserted its absence away.
 
-**THE MEASUREMENT LANDED, AND THE CONDITION DOES NOT FIRE.** Cold, fresh solver, minimum of three,
-CPU seconds, quiet box — five of eight rows (the joint unpinned and both M6B rows are still
-running and cannot change what follows):
+**THE MEASUREMENT LANDED, AND THE CONDITION DOES NOT FIRE.** Cold, fresh solver, minimum of three
+(one rep on the two M6B rows), CPU seconds, quiet box — **all eight rows, complete**:
 
 | stage, one cold refusing ask | **pin on** | **pin off** | the pin is worth |
 |---|---|---|---|
 | L451, frozen companion | **3.07 s** | 190.60 s | **62×** |
 | S166, frozen companion | **3.58 s** | 224.67 s | **63×** |
-| joint `A412 ∪ ρ·g⁻¹(A166)` | **6.66 s** | *(running)* | — |
+| **joint `A412 ∪ ρ·g⁻¹(A166)`** | **6.66 s** | 259.00 s | **39×** |
+| M6B, frozen companion | **6.60 s** | 248.82 s | **38×** |
+
+**The pin is worth 38–63× across four independent stages** — the claim first recorded as "62× and
+63× on two" is widened in base and loosened in precision. **And the spread is itself evidence for
+the split §R2.4e derives from the geometry**: a portable palette component (~6× by symmetry
+arithmetic, since a rainbow triangle trivialises `S₄` where a centre pin leaves 6) plus an
+**arena-specific guidance component**, which is exactly the part that should vary between stages.
+It does, by a factor of 1.7 across these four.
+
+**One reading that changes nothing but corrects an assumption**: M6B is a frozen-companion stage
+and costs **6.60 s** pinned, against L451's 3.07 s and beside the joint stage's 6.66 s. So "has a
+frozen companion" is not what sets the cost — **size is** — and the joint stage sits alongside a
+one-sided stage of similar size rather than above it.
 
 **Like for like — cold against cold, pinned against pinned — the joint stage is 1.9–2.2× the
 frozen-companion stages.** Not sixteen-fold, not eighty-eight-fold: about two. And warm against
@@ -1712,8 +1724,22 @@ checks and the planted unconditional-pin bug is caught. So the rung minima (142,
 not in doubt; **the receipt for them is.** That distinction is the whole entry: *a control that
 cannot run must not emit a word that reads like a pass.*
 
-**Not fixed here, deliberately** — phase D carries the diagnosis and the fix for whoever owns the
-file next. The fix is one line: test `m & pin_mask` rather than the atom's lowest bit.
+**Not fixed by phase C, deliberately** — my remaining budget was directed at the verdicts, so the
+repair went onward rather than being squeezed in. **It has since landed: another agent fixed it at
+`13454c3`**, testing the atom's intersection with the pin rather than its lowest bit.
+
+**Its control is the part worth keeping**, and it is a better control than the one that was there.
+The existing rung-1 plant is *behavioural* — restore the unconditional pin clause, watch
+`pin-changes-answers` — and it could never have caught this, because at rung 1 the shipped rule
+and the fixed rule agree exactly. The new control runs **both rules side by side at the order-3
+rung, where they give 0 pin atoms against 2**: it fails on the shipped code and passes on the
+fixed code, it is solver-free and deterministic, and it discriminates precisely where the old one
+was blind. *That is the shape this phase kept needing — a control that separates the two things a
+verdict word was conflating.*
+
+**Nothing above is retracted by the fix.** The runs named still had no pin receipt when they ran,
+and their minima still stand on the mechanism rather than on the receipt. A later reader should
+take this entry as history with its repair recorded, not as a live defect to chase.
 
 ### R2.6 — The accounting convention that would have manufactured a disagreement
 
