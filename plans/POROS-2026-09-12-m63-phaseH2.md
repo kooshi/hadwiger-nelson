@@ -31,7 +31,7 @@ finding.
 
 ---
 
-*Ten cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
+*Eleven cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
 PH2-1, PH2-9 and PH2-2 together** (ranks 1–3) — the target is free, and the two circles differ everywhere except on it. PH2-4 is
 a separate turn addressed to the product owner because it changes the product. The remaining five exist
 because this is a phase ledger the next session reads cold, not a single turn, and each carries its own fate
@@ -253,12 +253,38 @@ Wall broken iff `4n − 1 ≡ 7 (mod 8)` iff **`n` even**; 6-open iff additional
 | **64** | `127/128` | **8** | 255 | 255 | **YES** | **YES** | **YES** | the second 6-open member |
 | 76, 108, 112 | — | 8.7 … 10.6 | — | 303, 431, 447 | YES | YES | YES | the next 6-open members |
 
-**A uniqueness claim of mine was wrong, and my own table contained the refutation.** I wrote "the unique
-6-open member at radius ≤ 8"; `n = 64` sits at radius **exactly 8** and is 6-open, and my sweep printed it
-as such. The planner caught it. The correct statement is **`n = 16` is the unique 6-open member at radius
-≤ 4, and `n = 64` at radius 8 is the second** — which matters, because it means the queue has a second shot
-rather than one. This is `CLAUDE.md`'s own rule biting me: *when an artifact and its written record
-disagree, suspect the newest thing in the file* — the artifact was right and my prose was new.
+**A uniqueness claim of mine was wrong TWICE, and the second time was in the repair.** I first wrote "the
+unique 6-open member at radius ≤ 8"; `n = 64` sits at radius exactly 8 and is 6-open, and my own sweep had
+printed it. The planner caught it and I repaired it to "radius ≤ 4" — **also false**: re-indexing by `n`
+rather than by `√n`, the 6-open members with `n ≤ 31` are **n = 2, 10, 16, 20, 22, 24**, of which
+**three (n = 2, 10, 16) sit at radius ≤ 4.** Both errors have one cause, and it is the same restriction
+PH2-10 already caught in a different sentence: **I swept only Loeschian `n`**, which silently excluded every
+6-open member whose circle is not a hexagonal shell — five of the six. Correcting the parenthetical did not
+propagate to the claim built on it, which is the durable lesson here: *a wrong restriction produces more
+than one wrong claim, and fixing the one you noticed does not fix the others.*
+
+**The statement with no radius in it at all**, because radius is not what a base pays — `radius⁴ / covolume`
+is, and the free-circle condition is exactly what makes the circle cost nothing:
+
+> Among `cos θ = (2n−1)/(2n)`: **the circle is free iff `n = t²` with `t ∈ ℤ`** (then `t·v` is a circle
+> point for every unit vector `v`, so the count is ≥ `|S|` on any base, with no design); **the field is
+> 6-open iff `n` is even and `squarefree(4n−1)` is a non-residue mod 11.** The two conditions are
+> independent. **`n = 16` (`t = 4`) is the smallest `n` meeting both, and `n = 64` (`t = 8`) is the next.**
+> Members meeting only 6-openness — `n = 2, 10, 20, 22, 24` at `n ≤ 31` — are **live design targets, not
+> free ones**, and `n = 2` is the cheapest circle of the entire family (integer witness `(1,1)`).
+
+**And the ramified gap is not a rarity.** `11` divides the radicand at `n = 3, 14, 25` — **3 of the first
+31** — so G43's inert-versus-split criterion is silent on about a tenth of the family, not on a curiosity.
+
+**One alarm of mine, raised and then resolved in both directions.** The planner measured `ρ₆₃`'s cross set
+as `126 = 60 centre + 36 off-diagonal + 30 equal-radius` — *the record's exact decomposition at a new
+parameter*, which is the single most flattering output a derived law can produce, and `CLAUDE.md`'s
+measured-versus-derived asymmetry says a refusal built on invented edges reads as success. But **90 of the
+126 are forced by `|S| = 30` alone and need no law**: the centre family is exactly `2|S|` (the shared centre
+`0` joins `Rv` for each unit `v`, and `p` joins `R0 = 0` for each unit `p`), and the equal-radius family is
+exactly `|S|` when `n = t²`. **Only the 36 off-diagonal edges are law-dependent.** So the coincidence is
+explained rather than suspicious, and his gating control sharpens: predict 60 and 30 from `|S|` *before* the
+recount as a two-sided control, and recount **36**, not 126.
 
 **And a third case the rule does not cover.** At `n = 36` the radicand is `143 = 11 · 13`, so **11 divides
 it and ramifies** rather than being inert or split. G43's criterion is stated for inert-versus-split and is
@@ -274,7 +300,8 @@ silent here; I have marked it `no` above, which is a guess, not a reading. One l
 3. **A product question, which is the product owner's.** `ρ₁₅`'s field `K(√15)` is **5-sealed** and
    FS-30 records that nothing on either of the phase's bases is 6-open. So **a success in phase H2 delivers
    a new 5-chromatic object — the M62 record goal — and not a rung toward `χ ≥ 6`.** `n = 16` is the unique
-   6-open member at radius ≤ **4**, its rotation is already one of G8's generators, and its field is already
+   6-open member **whose circle is free** (see the corrected statement below), its rotation is already one of
+   G8's generators, and its field is already
    ranked as FS-22. **Its price, corrected twice by the planner and re-derived here:** `Λ_parts` has `ℤ`-rank
    **4**, not 8 (my predecessor's own PH-3 — it sits in a 4-dimensional `ℚ`-subspace of `K²`), so its cut
    scales as `r⁴`, not `r⁸`. I priced it at `r⁸`: ≈ 52×, ≈ 179,000 points, ≈ 358,000 vertices. **Wrong.**
@@ -527,14 +554,34 @@ it to.** That could have failed and did not, and it is the only out-of-sample ch
 arithmetic has had. Worth one line to confirm the two 18s are the same mechanism rather than a coincidence;
 if they are, the brief's own table is evidence *for* the bound and *against* the objective built on it.
 
-**What I got wrong and where it came from.** I told the prior-art agent that the Hilbert-modular rooms
-"will hand you a formula driven by the ideal factorisation of α". They hand over a **genus average and a
-bound, not a count**: for *binary* forms the Siegel–Weil average is an Eisenstein series but an individual
-class is not, so the count is not a local quantity and principality intervenes. He measured it — `f(3) = 4`
-against a divisor prediction of 36, and `f/4` not multiplicative across 3 and 4 — and the correction is
-his. **The consequence for the phase is the one direction that matters: a divisor formula predicting circle
-counts is wrong in the OPTIMISTIC direction**, so any plan that prices a module's circle count from a
-formula rather than by exhaustive count will promise points it does not have.
+**What I got wrong, and then what he got wrong, and the second repair is the useful one.** I told the
+prior-art agent that the Hilbert-modular rooms "will hand you a formula driven by the ideal factorisation
+of α". He measured it false — `f(3) = 4` against a divisor prediction of 36, and `f/4` not multiplicative
+across 3 and 4 — and then **corrected his own refutation**: his module was `O_k + i·O_k`, a **non-maximal
+order**, not the ring of integers of `K(i)`. On the maximal order (discriminant `2⁸·3⁴·11⁴`, matching the
+conductor–discriminant prediction) the formula is **exact at every point he tested**: 12, 12, 36, 12 against
+predictions 12, 12, 36, 12. So the standing statement is:
+
+> **exact on the maximal order; false on a sub-order**, where principality and the partial intersection of
+> the `μ₁₂`-orbits with the sub-order break it; and the **bound**
+> `count ≤ |U_M| · ∏_{split 𝔭} (v_𝔭 + 1)`, zero unless `v_𝔭` is even at every inert 𝔭, **survives for every
+> module.** The out-of-sample 18 above stands.
+
+**And the warning survives with its target sharpened, which is why this matters to the phase rather than to
+the bibliography: a sub-order is exactly what every base in this milestone is.** `Λ_parts` is a rank-4
+congruence lattice, not a ring of integers. So on the objects this phase actually builds, **a divisor
+formula predicting circle counts is wrong in the OPTIMISTIC direction** and only an exhaustive count is
+safe — and the reason is now named (non-maximality) instead of being attributed to the theorem.
+
+**The formula is prior art, in the room I asked him to raise, and the find is his.** Baake & Grimm, *A note
+on shelling*, Discrete Comput. Geom. **30** (2003) 573–589 (arXiv:math/0203025): Theorem 1 and Corollary 1
+give the central shelling count as `N · ∏_{split} (v + 1)`, zero unless every inert prime occurs to an even
+power, and the Remark after the proof extends it verbatim to a totally complex extension of a totally real
+field **whenever the class number is one**, with prefactor the number of units on the unit circle — our case
+with `N = 12`, agreeing with the `μ₁₂` I derived from Kronecker. **One hypothesis to check before the phase
+leans on it: is `h(ℚ(√3,√11,i)) = 1`?** The Remark requires it and neither of us has read it; a theorem
+invoked with its hypotheses unchecked is this suite's own named smell. Recorded as an open item, not as a
+tool.
 
 ---
 
@@ -598,6 +645,51 @@ cross edge and is absorbed (G40), so thinness cannot be bought with radius — o
 which is the covolume trade. **`n = 2` is alive, 6-open, cheap, and probably too thin — and "probably too
 thin" is measurable**: the unit-edge count inside radius 1.5119, reported beside the circle count. That
 column costs the screener nothing and it decides the member.
+
+---
+
+## PH2-11 — `n = 2` was never in phase G's census, and the reason it was excluded is why it now looks good
+
+question: was-n-equals-2-already-tested
+  evidence: `data/m62/m63-phaseG-screen-r2.44.json`, the `cos` field of all eleven classes, read exactly:
+    `−7/8`, `−11/32 − (3/32)√33`, `−13/16 − (1/48)√33`, `−23/8 + (3/8)√33`, `−29/32 + (3/32)√33`,
+    `−(5/33)√33`, `−7/8 + (1/24)√33`, `−9/8 + (1/24)√33`, `23/32 − (9/32)√33`, `31/64 − (15/64)√33`,
+    `5/16 − (3/16)√33`. `n = 2` requires `cos θ = ±3/4`
+  expected: the prior-art agent's registered prediction, either way — if `n = 2` is in the census it is a
+    closed row and his result is a reproduction; if not it is the phase's new top item
+  ask: is `cos θ = ±3/4` among phase G's eleven rotation classes?
+  if present: `n = 2` is already screened and the arithmetic case for it must be reconciled with a
+    recorded verdict
+  if absent: the member with a 6-open field and an integer point on its circle was never tested, and the
+    reason it was skipped is itself the finding
+  answered by: the record
+  cost: nil
+  rank: 11
+  status: answered — **absent**, and the exclusion is diagnosable
+
+**`±3/4` is not there.** Exactly **one** of the eleven classes has a rational cosine — `−7/8`, which is
+`ρ₁₅` at the sign representative PH-8 established as the meaningful one — and no other member of the family
+appears at all. **`n = 2` was never tested.**
+
+**Why it was skipped, which is the part worth keeping.** The census was *enumerated on `Λ_parts`*, and I
+measured `Λ_parts`'s shell at `\|p\|² = 2` to be **0 of 3,433** (PH2-10). A rotation whose circle is empty
+over the enumerating base produces no equal-radius kind there and never becomes a candidate. So the single
+member of the family whose field is **6-open** and whose circle carries an **integer** point, `(1,1)`, was
+excluded by the base the list was computed on.
+
+**That is FS-30's own recorded fault firing a second time, on a second object.** FS-30 already says of the
+rotation list that *"the list was computed on the wrong base"*. Here the same base-dependence did not merely
+mis-count a rotation, it **omitted one** — and omission leaves no row to audit. The durable form, for
+whoever writes the next census:
+
+> An enumeration conditioned on a base cannot report what that base cannot see, and its silences are
+> invisible. Enumerate the *parameter* first — here `cos θ = (2n−1)/(2n)` is one integer — and screen bases
+> against it second, never the reverse.
+
+**Scope, stated so this does not oversell.** Absence from the census is not evidence that `n = 2` works;
+it means no one has looked. Its live risk is thinness and is unchanged (PH2-10): 499 `Λ_parts` points inside
+its 1.5119 endpoint bound. And the ordering against `ρ₆₃` is unchanged and rests on value of information,
+not on cost — `ρ₆₃`'s solver answer re-ranks `n = 2`, and `n = 2`'s does not re-rank `ρ₆₃`.
 
 ---
 
