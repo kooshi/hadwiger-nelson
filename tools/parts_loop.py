@@ -513,6 +513,57 @@ def resolve_anchor(anchor_tuples, *, where: str):
     return anchor_tuples, None
 
 
+def anchor_from_level(stage0, minima) -> list:
+    """A known-answer anchor taken from the starting level's own minima.
+
+    **This is the only one of the four invariants that compares against a truth from outside the
+    pipeline** (phase E: checks 1-3 are internal consistency). Wherever a complete level is in
+    hand, one is available for free, and leaving the one external check switched off because the
+    caller has no published `.vtx` file is exactly the silence this whole item is about.
+
+    Why it is sound in the EXPANDED stage, and why it costs an answer nothing: colourability of a
+    selection depends on the selection and the companion ALONE -- the working graph never enters
+    (this module's note 1). So both asks -- the minimum still refuses, minus one atom is
+    colourable -- have the same answers in every expansion of the stage that produced the level,
+    and a candidate whose answers differ is reporting on the instrument, not the geometry. It
+    therefore **cannot change a verdict, only cost**.
+
+    The cost, MEASURED on the A403 sweep stage (538 vertices, 402 atoms; desktop, min of 3):
+    **6.46 s per candidate**, not the 0.2 s first quoted from the D0 probe -- that figure is a
+    per-ask SOLVE rate and the anchor's first ask is a 374-atom UNSAT proof, 6.2 s of the 6.46.
+    Sharing one solver across the two asks saves 0.07 s and is not worth doing. What makes it
+    cheap is not the ask but the count: the loop evaluates at most `budget x max_iterations` = 18
+    candidates, so the anchor costs about **116 s for an entire loop run**. Neither ask can be
+    dropped -- the first alone passes on a stage that refuses everything, the second alone on a
+    stage that colours everything.
+
+    **A control, never a rule parameter.** It enters no ranking, no target and no frozen config,
+    so it does not touch the rule hash; `parts_rule` records it under `controls`, beside the
+    rule rather than inside it.
+
+    The minimum is chosen deterministically (the lexicographically least), so a relaunch anchors
+    on the same one. A published minimum is a list of VERTICES, so the stage's fixed centre is
+    included and the atom count is checked against the level's size rather than assumed -- the
+    centre being an atom somewhere would silently make `anchor[:-1]` the wrong second ask."""
+    if not minima:
+        raise SystemExit(
+            "A5: this level has no minima, so no anchor can be taken from it. That is a fact "
+            "about the record, not a reason to run unanchored by default -- declare the absence "
+            "with `AnchorAbsent(reason)` if it is really what you mean.")
+    chosen = min(minima, key=sorted)
+    centre = tuple(stage0.keys[stage0.A.centre])
+    tuples = sorted({tuple(stage0.atom_labels[i][1]) for i in chosen} | {centre})
+    lab0 = {tuple(l[1]): i for i, l in enumerate(stage0.atom_labels)}
+    n_atoms = sum(1 for t in tuples if t in lab0)
+    if n_atoms != len(chosen):
+        raise SystemExit(
+            f"A5: the anchor drawn from this level maps to {n_atoms} atoms of the stage that "
+            f"produced it, for a minimum of {len(chosen)}. The centre is expected to be the one "
+            f"non-atom; if it is an atom here, `anchor[:-1]` is not 'the minimum minus one atom' "
+            f"and the second ask means something else.")
+    return tuples
+
+
 def m_bound(incumbent: int, *, anchored: bool) -> tuple:
     """`|M|` for a candidate the primary decision REFUSED, and how much of it is proved.
 
@@ -1242,6 +1293,47 @@ def _self_test(log=print):
         and inv_present["anchor"]["verdict"] == "contains-a-known-minimum"
         and inv_present["anchor"]["known_minimum"] == "unsat"
         and inv_present["anchor"]["minus_one"] == "sat", str(inv_present["anchor"]))
+
+    # A5: an anchor can be DRAWN from a level, so the one external check is available wherever a
+    # complete level is. Round-tripped on real data: st374's atoms ARE the published 374-vertex
+    # minimum minus the centre, so drawing an anchor from "all of them" must return the published
+    # vertex list exactly -- which is what tests the centre handling and the atom-count guard.
+    all374 = [frozenset(range(len(st374.atom_labels)))]
+    drawn = anchor_from_level(st374, all374)
+    chk("A5 an anchor drawn from a level round-trips to the published minimum, centre included",
+        drawn == sorted(L374),
+        f"{len(drawn)} vertices, {len(st374.atom_labels)} atoms + the centre")
+    chk("A5 the drawn anchor is the one the two asks already accepted above",
+        sorted(labA[t] for t in drawn if t in labA) ==
+        sorted(labA[t] for t in L374 if t in labA))
+    must_exit("A5 a level with no minima yields no anchor, and does not fall back to unanchored",
+              lambda: anchor_from_level(st374, []), "A5")
+    two = [frozenset(range(len(st374.atom_labels))),
+           frozenset(range(1, len(st374.atom_labels) + 1))]
+    chk("A5 the choice of minimum is deterministic, so a relaunch anchors on the same one",
+        anchor_from_level(st374, two) == anchor_from_level(st374, list(reversed(two))))
+    # and the guard must BITE. The first plant here was an out-of-range atom index, which died
+    # on `IndexError` inside the stage BEFORE reaching the guard -- a control firing for the
+    # wrong reason, which is the thing this whole item is about. The situation the guard actually
+    # names is a stage whose fixed centre is ALSO an atom, and no real stage can be made to show
+    # it, so the plant is a stub of exactly the two attributes the function reads.
+    class _StubStage:
+        def __init__(self, atom_tuples, centre):
+            self.atom_labels = [("L", t) for t in atom_tuples]
+            self.keys = {0: centre}
+
+            class _A:
+                pass
+            self.A = _A()
+            self.A.centre = 0
+
+    stub_ok = _StubStage([(1,), (2,), (3,)], (9,))
+    chk("A5 the guard's stub is faithful: with the centre a non-atom it passes, so the plant "
+        "below is the centre and not the stub",
+        anchor_from_level(stub_ok, [frozenset({0, 1})]) == [(1,), (2,), (9,)])
+    stub_bad = _StubStage([(1,), (2,), (9,)], (9,))
+    must_exit("A5 the atom-count guard bites when the centre is itself an atom",
+              lambda: anchor_from_level(stub_bad, [frozenset({0, 1})]), "maps to 3 atoms")
 
     # |M| renders as a BOUND when the anchor is absent, because its upper half is the anchor's.
     mv, mb = m_bound(374, anchored=True)

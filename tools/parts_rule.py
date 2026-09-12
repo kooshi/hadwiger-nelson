@@ -41,15 +41,20 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REF11 = os.path.join(ROOT, "data", "m62", "parts-ref11", "JP", "Large")
 READING = PL.ADOPTED_READING
 
-# The loop runs UNANCHORED, and says so in every entry (`plans/M63-phaseG-bases-and-rotations.md`
-# §A5). This used to be `anchor_tuples=None`, which the sweep read as "no anchor" and reported as
-# `restriction-identity-holds` -- the same verdict an anchored run produces.
+# THE LOOP IS ANCHORED, on its own starting level (`plans/M63-phaseG-bases-and-rotations.md` §A5).
+# It used to pass `anchor_tuples=None`, which the sweep read as "no anchor" while still reporting
+# `restriction-identity-holds` -- the verdict an anchored run produces.
 #
-# It is a declaration and not a shrug: the loop's starting level IS a complete set of minima of
-# the unexpanded stage (`parts_faces.LevelSet.minima`, each of `ls.size` atoms), so an anchor
-# could be taken from it. Doing so adds two asks per candidate to a run whose configuration and
-# cost model are frozen, which is a retune of a frozen experiment and not this module's call. The
-# consequence is carried honestly instead: every `no` in this loop reports |M| as `">=N"`.
+# The anchor is a CONTROL and never a rule parameter: it enters no ranking, no target and no
+# frozen config, so the rule hash is untouched (asserted in `_self_test`). It cannot change an
+# answer, only cost, so it cannot invalidate a frozen comparison -- and it is the ONLY one of the
+# four invariants that checks against a truth from outside the pipeline.
+#
+# The cost was quoted at 0.2 s per candidate when the ruling was made, and that was wrong by 30x:
+# measured on the A403 sweep stage it is 6.46 s, almost all of it one 374-atom UNSAT proof. The
+# ruling stands on the count rather than the ask -- this loop evaluates at most
+# `candidates_evaluated_per_iteration x max_iterations` = 18 candidates, so the anchor costs about
+# 116 s for a whole run.
 # The freeze decision is three-valued too, for the same reason the anchor is: `--require-frozen`
 # was `action="store_true"`, so a run that said nothing about the freeze checked nothing and its
 # artifact looked exactly like a checked one's.
@@ -94,10 +99,6 @@ def resolve_freeze(freeze, cfg, row, *, log=print) -> dict:
     return {"state": "frozen", **rec}
 
 
-NO_ANCHOR = PL.AnchorAbsent(
-    "the loop is unanchored by design: its starting level supplies minima of the unexpanded stage "
-    "(LevelSet.minima), but adding the anchor's two asks per candidate would change the cost model "
-    "of a FROZEN run, so |M| is reported as a bound here and the anchored surface is the map")
 
 
 # ==================================================================== D3: the look-ahead
@@ -433,6 +434,15 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
     row = row_state(row_id, stage0, A_tuples, incumbent, base, companion)
     receipt = resolve_freeze(freeze, cfg, row, log=log)
 
+    # The known-answer anchor, drawn from this level's own minima. A CONTROL, recorded beside the
+    # rule and never inside it -- `row_state` does not carry it either, so a registered row is
+    # not re-identified by a control that can be strengthened later.
+    anchor = PL.anchor_from_level(stage0, ls.minima)
+    log(f"  anchor: {len(anchor)} vertices from this level's own minima -- a control, not a rule "
+        f"parameter; it cannot change a verdict, only cost (~6.5 s per candidate, ~"
+        f"{cfg['candidates_evaluated_per_iteration'] * cfg['max_iterations'] * 6.5:.0f} s "
+        f"for this run at most)")
+
     oracle = PL.EdgeOracle(base, companion, log=log)
     census = PL.menu_census(base, A_tuples, oracle, log=log)
     cands = PL.menu_candidates(base, A_tuples, census, reading=READING)
@@ -483,7 +493,7 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
                       tuple(map(tuple, state["history"])))
         r = step(base, A_tuples, companion, pool, incumbent=state["incumbent"], rule=rule, ctx=ctx,
                  budget=cfg["candidates_evaluated_per_iteration"], reference=reference,
-                 anchor_tuples=NO_ANCHOR, ckpt_dir=ckpt_dir, wall_ask=wall_ask, log=log)
+                 anchor_tuples=anchor, ckpt_dir=ckpt_dir, wall_ask=wall_ask, log=log)
         state["iteration"] = it
         state["history"].append([it, r["verdict"], state["incumbent"] + 1, state["n_new_max"],
                                  round(time.time() - t0, 1)])
@@ -527,6 +537,18 @@ def run_loop(base, start_record: str, *, companion_file, rule="ours", config=Non
                      "M_set": len(ls.minima), "necessary": len(necessary)},
            "iterations": state["history"], "state": state,
            "row": row, "freeze_receipt": receipt,
+           "controls": {"anchor": {
+               "source": "the lexicographically least minimum of this loop's own starting level",
+               "vertices": len(anchor), "atoms": len(anchor) - 1,
+               "asks": "the minimum still refuses in the expanded stage; minus one atom is "
+                       "colourable. Both answers are invariant under expansion, because "
+                       "colourability depends on the selection and the companion alone",
+               "in_the_rule_hash": False,
+               "cost": "6.46 s per candidate measured on the A403 sweep stage (538 vertices, "
+                       "402 atoms; min of 3), almost all of it the first ask's 374-atom UNSAT "
+                       "proof; at most 18 candidates per run, so about 116 s for a whole loop",
+               "note": "a control, never a rule parameter: it enters no ranking, no target and "
+                       "no frozen config, and it cannot change a verdict, only cost"}},
            "clause_2b": ("MET -- the loop reached |M| <= 374 from our 375-level accumulator"
                          if verdict == "improved" else
                          f"NOT MET -- the loop ended `{verdict}` with the budget it had"),
@@ -627,6 +649,24 @@ def _self_test(log=print):
     chk("the rule portion is still almost all of the config (the exclusion is surgical)",
         len(R.rule_portion(cfg)) == len(cfg) - len(R.ROW_DESCRIPTIVE),
         f"{len(R.rule_portion(cfg))} of {len(cfg)} keys")
+
+    # --- the anchor is a CONTROL and never a rule parameter. The ruling that wired it into the
+    # loop rests on exactly this: it cannot invalidate a frozen comparison because it enters no
+    # ranking, no target and no frozen config. Pinned by value, so any edit that lets it (or
+    # anything else) leak into the rule goes red here and not at the next held-out run.
+    RULE_SHA = "a2113b8f796e2288e0d336e96ebc2839016b1bc485fed3688375b73da4344405"
+    chk("the anchor does not enter the rule hash, which is byte-for-byte what it was before it "
+        "was wired in", R.config_sha256(R.rule_portion(cfg)) == RULE_SHA,
+        R.config_sha256(R.rule_portion(cfg))[:16])
+    chk("and that hash is the committed freeze's own, so the pin is not a private constant",
+        R.config_sha256(R.rule_portion(
+            json.load(open(os.path.join(ROOT, "data", "m62", "m63-freeze.json")))["config"]))
+        == RULE_SHA)
+    chk("no anchor word appears anywhere in the frozen config",
+        "anchor" not in json.dumps(cfg).lower())
+    # the pin must be DISCRIMINATING: a rule change has to move it, or it is pinning nothing
+    chk("the rule hash is discriminating: changing a rule field moves it",
+        R.config_sha256(R.rule_portion(frozen_config(n_new_max=25))) != RULE_SHA)
     log(f"  {'ALL CONTROLS FIRE' if not fails else 'FAILURES: ' + ', '.join(fails)}")
     return not fails
 

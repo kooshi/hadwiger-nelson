@@ -54,14 +54,12 @@ REF11 = os.path.join(ROOT, "data", "m62", "parts-ref11", "JP", "Large")
 RECORD = os.path.join(ROOT, "data", "m62", "m63-L451-reduction.json")
 HIS_MOVE = PL.HIS_RECORDED_MOVE          # M63 §S.2 #9; one copy, in the module that reports it
 
-# This diagnostic runs UNANCHORED and declares it (`plans/M63-phaseG-bases-and-rotations.md` §A5).
-# It was `anchor_tuples=None`, which the sweep read as "no anchor" and recorded as
-# `restriction-identity-holds` -- the verdict an anchored run produces. The declaration is written
-# into the entry and printed on every run, and |M| here reports as a bound.
-NO_ANCHOR = PL.AnchorAbsent(
-    "a one-shot diagnostic at the loop's own state, run unanchored for the same reason the loop "
-    "is: the anchor's two asks per candidate are not in the frozen run's cost model, and this "
-    "function exists to reproduce that run's conditions, not to improve on them")
+# This diagnostic is ANCHORED on its own level's minima, like the loop it reproduces
+# (`plans/M63-phaseG-bases-and-rotations.md` §A5). It was `anchor_tuples=None`, which the sweep
+# read as "no anchor" while still recording `restriction-identity-holds` -- the verdict an
+# anchored run produces. Two asks against a truth outside the pipeline, and this function's whole
+# job is to decide whether a negative is about the apparatus: an unanchored apparatus check is
+# the one shape of it that cannot answer that.
 SEED = 20260911
 
 
@@ -201,13 +199,17 @@ def hismove(*, wall_ask=600.0, log=print) -> dict:
     ck = os.path.join(ROOT, "build", "m63d2", "ckpt-hismove")
     os.makedirs(ck, exist_ok=True)
     ref = PL.build_reference(base, A, comp)
+    anchor = PL.anchor_from_level(st, ls.minima)
+    log(f"  anchor: {len(anchor)} vertices from this level's own minima (a control: it cannot "
+        f"change the verdict, only cost)")
     e = PL.sweep_candidate(base, A, comp, cand, incumbent=incumbent, reference=ref,
-                           anchor_tuples=NO_ANCHOR, ckpt_dir=ck, secondary=True,
+                           anchor_tuples=anchor, ckpt_dir=ck, secondary=True,
                            wall_ask=wall_ask, log=log)
     out = {"kind": "m63-his-move", "schema": 1, "producer": "tools/parts_diag.py:hismove",
            "his_move": [list(o) for o in HIS_MOVE], "vertices_added": cand.n_new,
            "incumbent_weight": incumbent, "asked_at_target": incumbent - 1,
            "entry": e, "verdict": e.get("verdict"), "M_set_grew": e.get("M_set_grew"),
+           "anchor": e.get("anchor"),
            "reading": ("`yes` means the apparatus reproduces his recorded step and the frozen "
                        "rule's failure is a RANKING failure; `no` means the apparatus does not "
                        "reproduce it, and every negative measured on this half is then a fact "
