@@ -943,7 +943,21 @@ the code that runs.** It now reads the default out of the signature, and every d
 ratio of 0.60 as `1×` — a display rounding turning a red into something that reads like a pass. **A check's
 output is the check**, and the last transformation before a human sees it is inside the trust boundary.
 
-**Best form of all: make the control able to report that it has become uninformative.** Under a planted
-mutation the repaired control went red *and* announced that its fine-grained plant could no longer
-distinguish anything. A control that can say "I can no longer tell" is strictly better than one that can only
-say pass or fail, because the third state is the one this file's oldest failure mode hides in.
+**Bound a plant's effect on BOTH sides, and the control reports for free when it has gone blind.** A
+control that can say *"I can no longer tell"* beats one that can only say pass or fail, because that third
+state is where this file's oldest failure mode hides — but **"give controls a third state" is the outcome,
+not the mechanism, and the mechanism is what reproduces.** Assert the two-sided form:
+
+```
+0 < (guarded_result − planted_result) < threshold
+```
+
+The **lower** bound fails when the plant has stopped firing at all; the **upper** bound fails when it fires
+too much. Measured 2026-09-12: under a mutation that made the shipped value identical to the planted one, the
+difference collapsed to zero and the lower bound caught it — where the natural one-sided form
+(`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
+only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
+
+**And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
+is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
+would have shown it. The cheap half of the lesson, and the one that finds checks pointed at the wrong code.
