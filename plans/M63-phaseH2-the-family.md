@@ -827,10 +827,24 @@ can have produced this verdict.** A *systematic* fault in the law is not covered
 two independent re-derivations of all 126 cross edges are for — 126/126 each, **0 invented**, with 26/26
 perturbed negative controls correctly refusing.
 
-**The proof artifact, and it is a first here.** The complete DRAT proof set for the **20** load-bearing
-refutations costs **4.8 minutes and 0.37 GB** on a quiet machine — 20 self-contained CNF files, each with its
-refutation, plus a manifest saying what each asserts, **re-checkable by any DRAT checker without touching
-this project's code.** **This is the first refutation in this repository whose entire solver-dependent core
+**The proof artifact, and it is a first here — with its limitation stated exactly.** The complete DRAT proof
+set for the **20** load-bearing refutations costs **3.3 minutes** to produce; the proofs are **0.35 GB** and
+the shipped bundle is **807 MB**, because each of the 20 CNF files repeats the base half. Twenty
+self-contained instances, each with its refutation, plus a manifest saying what each asserts, **re-checkable
+by any DRAT checker without touching this project's code.** **But they were GENERATED here and NOT CHECKED
+here** — there is no DRAT checker on this machine and `drat-trim` is not packaged for it. What *is* true is
+weaker and worth stating precisely: CaDiCaL 2.1.2's `--checkproof` defaults to **3 (both DRAT and LRAT)**, so
+the producer checked itself as it went, which is not independent verification.
+
+**And the upgrade that closes it, found while auditing the above:** the shipped CaDiCaL supports
+**`--lrat=true`**, and **this project already owns a kernel-reducible LRAT checker** (M05, built precisely
+because core's own cannot be kernel-evaluated). So regenerating the 20 refutations as **LRAT** puts them in
+the one format this repository can check **in the Lean kernel** — which would make this not merely
+"re-checkable by any DRAT checker" but **kernel-checkable by our own pipeline**, a materially stronger claim
+and the standard `CLAUDE.md` § "The standard of evidence above rung B" actually asks for. Regeneration is
+minutes; *running* the kernel check is a separate and possibly large cost (row 40 priced kernel promotion at
+~800,000 LRAT lines per cube on another object and declined it), so the two decisions are separate and only
+the first is being taken now. **This is the first refutation in this repository whose entire solver-dependent core
 ships as re-checkable proof**, and it is only possible because the superset argument (§6i) moved the load off
 one 51,133-vertex refutation onto twenty 25,567-vertex ones. The agent generated it on its own authority
 rather than waiting for mine, correctly: its brief said to keep the proof if it was cheap, and 4.8 minutes is

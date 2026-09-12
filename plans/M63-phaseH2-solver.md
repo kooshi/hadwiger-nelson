@@ -514,3 +514,33 @@ phase of the same error: a statistic computed on an unrepresentative subpopulati
 of the whole.** The deflationary *conclusion* survives in a weaker form — nothing in the cost distribution
 is evidence about ρ₆₃ specifically — but the mechanism I offered for it was wrong.
 
+### 14a. Two honest qualifications on the proof artifact
+
+**The proofs were generated here but NOT checked here.** No DRAT checker (`drat-trim` or equivalent) is
+installed on this machine, and `cadical`'s own proof options do not constitute an independent check. So the
+correct claim is *"20 DRAT refutations exist and are re-checkable by any standard checker"*, **not** *"20
+refutations have been verified"*. Checking them is a separate step and should be done on a machine with a
+checker before the result is claimed externally. **A proof I produced and did not check is not a checked
+proof.**
+
+**The bundle is 807 MB, not 0.35 GB.** The DRAT logs total 0.35 GB; the 20 self-contained CNF files add
+~0.39 GB because each repeats the same 1,267,897-clause base half (19.4 MB each). A leaner bundle ships the
+base half **once** plus 20 small delta files of pinned/blocked clauses — about 20 MB plus the DRAT — and is
+what a reviewer should be handed.
+
+## 16. Artifact locations
+
+Scratch (regenerable, outside `build/`): `/tmp/claude-1000/solver-h2/`
+
+| file | what it is |
+|---|---|
+| `certificate.json` | the whole combinatorial certificate, 150 KB — coupling, 19 patterns, orbits, 10-sets, 552 interface patterns, census, the argument, the claims to verify |
+| `graph.json`, `edges.txt` | my independent rebuild: lattice, 126 cross edges, all 544,530 arena edges in arena vertex ids |
+| `patterns.json`, `offpats.json`, `orbit.json` | the 19 circle patterns, the 552 interface patterns, the ζ₆ orbit decomposition and the six 10-sets |
+| `results/NNNN.json` | 552 cube verdicts with timings — also the resume checkpoints |
+| `proofs/` + `proofs/manifest.json` | 20 CNF + DRAT pairs for the trust core, with what each asserts |
+| `verify/independent.log`, `verify/recheck.log` | the independent-codebase confirmations |
+| `mine.cnf`, `half.cnf` | my own arena CNF (verified identical to the screening agent's) and the base half |
+
+**Resume command** for the cube route: `cd /tmp/claude-1000/solver-h2 && xargs -a cubelist.txt -n 2 -P 32
+python3 cube_worker.py` — skips any cube whose `results/NNNN.json` exists.
