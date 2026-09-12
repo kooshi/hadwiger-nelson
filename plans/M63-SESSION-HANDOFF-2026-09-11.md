@@ -241,6 +241,29 @@ the observation that his greedy discard of 36 was nowhere near optimal.
      two jobs land, before any new run.**
    - **And on new ground it cannot be supplied at all** — a new base has no known minimum. So phase E is the
      last place the anchor can be calibrated, which is the same one-way door as §X.2's geometry check.
+
+10. **THE FREEZE PINS LESS THAN EVERY DOCUMENT CLAIMS, AND ITS RECEIPT CAN ASSERT A FALSEHOOD** (verified
+    2026-09-11 23:55, from phase E's advisor). Two separate defects:
+    - **A settled decision was never implemented.** `§S.5` records as a *decision* that the freeze pins
+      `cross_law = collinear(7/8)` and `fp_base(Base(2.6))` inside the config hash. **`data/m62/m63-freeze.json`
+      contains neither** — zero occurrences of each. And `require_frozen` has **one** caller
+      (`tools/parts_rule.py:519`) behind `--require-frozen`, which is `action="store_true"`, i.e. **default
+      off**. "Run under a frozen configuration" has been doing far less work than every document asserts.
+    - **The worse half: the receipt can be false.** `held_out_state` ("our 375-level accumulator, 403
+      vertices"), `incumbent_weight: 374` and `target` are inside the hash but are **descriptive** — the
+      runtime incumbent is `ls.size` from the starting record (`parts_rule.py:329`). So a frozen run on any
+      *other* row **passes `require_frozen` by hash equality while its own artifact asserts the wrong
+      starting state.** A missing check leaves a reader with less than they thought; a receipt asserting a
+      false starting state leaves them with something worse than nothing, and it is unrecoverable after the
+      fact.
+    - **Fix by per-row registration, NOT by re-freezing** — re-freezing now would silently change what the
+      already-scored rows were judged under. Blocked on the live jobs like the other `tools/` fixes.
+11. **A standing catcher worth building, and it applies retroactively.** A `no-selection-at-target` record
+    already carries `target_lb`; `target_lb == target + 1` marks exactly the candidates a too-tight target
+    misreports as `inert`. Re-asking only those at `target + 1` is a cheap standing check on every `inert`
+    the loop emits — **and it would have applied to phase D's 89-candidate map**, which is the evidence
+    behind "single-orbit expansion is closed". A check that can validate existing evidence retroactively is
+    worth more than one that only guards future runs.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
