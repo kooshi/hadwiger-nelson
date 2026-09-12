@@ -101,6 +101,18 @@ only moved that proof around.** It is irreducible to date, measured four indepen
 answers the natural objection that 153 binary variables is small for an exact solver. It is, and it is
 still where the time goes.
 
+**What this negative actually excludes, stated at the level it was measured** (G21: a negative measures
+its enumeration). All four formulations prove the lower bound in the *same proof system* — a
+resolution/core argument extracted by a CDCL solver — and differ only in how the search through it is
+arranged. So the finding is **no SAT-based formulation wins the optimisation phase**, and the room none
+of the four entered is the one that owns the object: a minimum-weight hitting set over a family of sets
+**is a set-covering integer program**, whose classical method is branch-and-bound over the LP relaxation,
+certifying optimality by a *dual* object — an LP bound plus cuts — rather than by extracting cores one at
+a time. Set covering's LP relaxation is often tight, and where it is, the bound that costs a CDCL solver
+187 ms per call is one simplex solve. `scipy.optimize.milp` (HiGHS) is already installed on this machine,
+so entering that room costs a fresh session and no provisioning. (Poros, final card; G46's move — name the
+object in the discipline that owns it, and let that discipline decide the question's shape.)
+
 **Incrementality is not a uniform win, and saying so was the point of measuring.** In the
 optimum-finding phase the accumulated relaxation machinery makes each of its few calls enormously more
 expensive: over C4a's first 600 iterations it used **257× fewer SAT calls and 2.5× more CPU**. That is
@@ -190,7 +202,7 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   ~19,000 iterations in 2.7 s (`incumbent`) against hours. Since §2 shows four fifths of that regime is
   formula construction, the win does not depend on which of the two is chosen.
 - **Optimum-finding at large `Y` (C4a-scale) — NOT LANDED.** Four formulations tried, none beats batch
-  (§3). The best available option is `batch-adapt`, a one-flag change measured at **2.5×** on the cold
+  (§3), and all four are SAT-based: the integer-programming room is unentered, not closed. The best available option is `batch-adapt`, a one-flag change measured at **2.5×** on the cold
   solve — real, and an order of magnitude short of what the enumeration phase got. A fresh session on an
   idle box should treat the irreducible 153-atom bound proof as the target, not the surrounding machinery.
 - **Phase G's dominant cost is exactly this regime, and the law above prices it.**
