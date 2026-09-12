@@ -1133,6 +1133,16 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
+**And a mutation harness must verify its own RESTORE** (2026-09-12). One broke *itself* through CPython's
+bytecode cache: the cache's identity for a source file is `(size, mtime in whole seconds)`, so a **same-size
+mutation written inside one second** left the interpreter executing **mutated bytecode against a restored
+source** — every plant "passing" while the arithmetic under test was wrong. **This is the archetype above
+wearing a costume**: a check that loads two versions of something and identifies them by name, where the
+name is `(size, mtime)` and the registry is the interpreter. What caught it was the harness **re-running its
+controls after the restore and asserting the guarded state comes back**; nothing about reading the harness
+would have shown it. So: restore, then re-verify, and treat a same-size edit inside one second as the case
+your caching cannot see.
+
 **And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
 is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
 would have shown it. The cheap half of the lesson, and the one that finds checks pointed at the wrong code.
