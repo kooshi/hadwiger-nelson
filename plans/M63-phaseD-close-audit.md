@@ -200,9 +200,9 @@ explicit approval; everything else is an assignment, not a request.*
 | 21 | the exact edge minimum — the hitting set over the 448-edge window `[1831, 2279]` | **F** |
 | 22 | promote `build/m63d/d1c.json` and the companion hunt to committed producers and artifacts (§D.4) | **2(b) follow-on** — it is the evidence under a confirmed prediction and under §S.1 2(a) |
 | 23 | P-D11 and the small-half fold-in | **the probe**, which is still running; fold in at its close |
-| **D1** | **drop?** D-2's rider, "propose images as candidates on the `A412` level" — the closed menu's zero removes its motivation, and the live question is multi-orbit | **proposed drop** |
-| **D2** | **drop?** M64-3's row-to-class pairing — a stabiliser computation on his own published file answers the rung question directly, so the pairing has no consumer | **proposed retired** |
-| **D3** | **drop?** control d3.2 as a *control* — the proxy cannot separate anything because it reads zero everywhere; the measurement replaces it, and keeping a control that cannot fire is the failure mode this milestone names | **proposed retired, measurement recorded in its place** |
+| **D1** | D-2's rider, "propose images as candidates on the `A412` level" — the closed menu's zero removes its motivation, and the live question is multi-orbit | **DROPPED**, approved 2026-09-11 (§F) |
+| **D2** | M64-3's row-to-class pairing — a stabiliser computation on his own published file answers the rung question directly, so the pairing has no consumer | **RETIRED**, approved 2026-09-11 (§F) |
+| **D3** | control d3.2 as a *control* — the proxy cannot separate anything because it reads zero everywhere; the measurement replaces it, and keeping a control that cannot fire is the failure mode this milestone names | **RETIRED**, the measurement in its place, approved 2026-09-11 (§F) |
 
 ---
 
@@ -275,8 +275,12 @@ new row H-6 (§A.2), and note in the handoff that the fix landed before the ruli
 reasons behind the ruling are not damaged — no number is retracted, and the fix is one line plus a control
 that fails on the code it replaces.
 
-*Flagged rather than acted on: the brief told me to mark X.7 open-and-ruled, and the evidence says
-otherwise. The product owner decides which record is right; I have changed nothing.*
+*Flagged rather than acted on: the brief told me to mark X.7 open-and-ruled, and the evidence said
+otherwise. **Resolved the same day — X.7 is closed and row H-6 is accepted** (§F), on timestamps the
+product owner checked rather than took on trust: the fix `13454c3` at 21:32:37 against the freeze
+`6158162` at 21:03:54, twenty-nine minutes earlier and touching only `data/m62/m63-freeze.json`. The
+ruling's reasoning fell with its premise — the freeze never covered tool code, so a control repaired
+after it was never outside what phase E is judged under.*
 
 ### D.6 — Phase D delivered four things its plan never promised
 
@@ -313,3 +317,27 @@ what stands behind it" — which is exactly what the freeze anticipated in writi
 
 *An idle owning agent beside a running job is the healthy state here; nothing in this audit required going
 near the process table, and nothing was signalled.*
+
+---
+
+## §F — Rulings, 2026-09-11
+
+*Every decision this audit put to the product owner was taken the same day, and both further pushbacks
+were accepted. Recorded here so the agent applying §A does not re-derive them.*
+
+| item | ruling |
+|---|---|
+| §D.5 — X.7 | **Closed; new row H-6 accepted.** Checked against the timestamps rather than taken on trust: the fix is `13454c3` at 21:32:37, the freeze `6158162` at 21:03:54 — twenty-nine minutes earlier — and the freeze touched only `data/m62/m63-freeze.json`, never `tools/parts_stage.py`. The handoff's ruling was wrong on its premise **and** on its reasoning. The product owner is correcting the handoff, noting that the fix landed before the ruling was written |
+| §D.1(1) — P-D2 | **"NOT MET at the budget it was given", not falsified**; the wording in §D.1 stands. Scoring it falsified would claim a refutation the run never performed — the registered form said twelve iterations and the frozen schedule allowed six |
+| §C — D1, D2, D3 | **All three approved**: D-2's propose-images rider dropped, M64-3's row-to-class pairing retired, control d3.2 retired with its measurement in its place. Approved on the stated ground — each lost its consumer to a **measurement** rather than to fatigue, which is the first kind of drop and not the kind an audit exists to catch |
+| §C item 22 — the scratch artifacts | **Promote both**, `build/m63d/d1c.json` and `companion_hunt.json`. The standard is that the artifact is the certificate and the checker, never the search; the claim is safe but the evidence under a confirmed prediction may not live in a gitignored directory |
+| §D.3 — ban 9 | **A knowing deviation, not a violation** — crossed and rolled back on the product owner's instruction, with the committed route measurement the thing that survives |
+
+**Both pushbacks accepted.** §D.7: the outcome map is not a scoring surface, so anything downstream reading
+"score the rule against the map" becomes *"score by outcome on one held-out row, and say that one bit is
+what stands behind it"* — a degenerate density means every ranking ties and precision@k is undefined.
+§D.1(2): phase D's §R3.11 gets the one-line pointer, not a rewrite of another agent's results section.
+
+**Application.** A separate agent applies §A's rows into `plans/M63-parts-reproduction.md` together with
+these rulings. **This audit is closed**; the open work is §C's assignments, which belong to E, F, the
+clause 2(b) follow-on and the probe.
