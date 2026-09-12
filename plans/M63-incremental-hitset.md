@@ -242,6 +242,55 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   success branch, the one that yields a record candidate, pays the quadratic too. (I had hedged that
   targeted runs might gain nothing; Poros checked the phase-G plan and the hedge was wrong.)
 
+## 7b. The approved integration, written down so it survives this session
+
+*Approved by the product owner 2026-09-12, scoped as below. **Blocked until the two running reductions
+land** — not on caution about the code, but because a resumed run executes whatever is on disk while the
+checkpoint's hashes cover the PROBLEM and not the engine, so a mid-run swap splices two trajectories into
+one checkpoint and yields a record that is uninterpretable even if the new code is perfect. Testing does
+not remove that. Written here because sessions die and the plans are the memory.*
+
+**Scope: the level-enumeration phase only.** Leave optimum-finding on the existing code. This takes
+essentially the whole win, and it is the one regime where the differing-chosen-set caveat (§5.2) is
+*provably* harmless rather than merely reported — **the iteration count there is the size of the level,
+which is a property of the problem and not of the engine** (D1b: ~19,400 of ~19,300 iterations end in a
+new minimum, ~55 in a new correction set). That sentence belongs in the integration commit message, not
+just in a reviewer's head. In the optimum-finding phase nothing here wins (§3), so there is no risk worth
+taking.
+
+**The four code details.**
+
+1. There are **three** append sites, not two. `ReductionState.blocked` is a *property* unioning `minima`
+   **and** `undecided`, so the undecided branch must also reach `block()` — and it does not look like a
+   blocking site.
+2. A resumed run rebuilds the engine from the checkpoint and pays one cold solve. That is the path the
+   `adapt` flag exists for, and P-G7 runs are long enough to be killed.
+3. **Record the engine in `state.launches[-1]["budgets"]`**, beside the wall and the target. An engine
+   change invalidates nothing already in a checkpoint — the bounds are identical — it only makes the
+   future path different, which is exactly what a reader needs told. It must NOT go in `problem_hash`:
+   it is a launch fact, not a problem change.
+4. Keep `parts_reduce`'s clause order. `BatchHittingSet` reproduces it deliberately.
+
+**The acceptance test, pre-registered.** Re-run a stage that has a committed schema-2 record, end to end,
+under the new engine, and require the existing comparator to read `regenerated-identical`:
+
+    python3 tools/parts_run.py reduce --L v403e2106.vtx --S v141e594.vtx --reduce L --rung 1 \
+        --S-frame refuses-with:v375e1916.vtx --out build/<scratch>/m6b403.v3.json
+    python3 tools/parts_run.py compare --new build/<scratch>/m6b403.v3.json \
+        --stored data/m62/m63-M6B403-reduction.json
+
+Stored answer: `reduced`, minimum 374, **|M| = 375 vertices, level 360, method `exhaustive-level`**, 87.2 s.
+This is the right stage because its level is large enough to exercise the enumeration path and it closes
+in about ninety seconds. **Why this test and not my replays:** it checks the **closed answer** — the level
+as a set — which the replays could not, since they compare bound sequences on a recorded clause stream.
+And `compare_records` already distinguishes a differing **level** (a defect) from a differing **harvest**
+(expected, a launch artifact), so the trajectory change of §5.2 cannot fool it. `data/m62/m63-L451-reduction.json`
+is the larger level (3,264) but predates schema 2 and carries no `config`, so the committed driver cannot
+regenerate it.
+
+**Definition of done:** `regenerated-identical`, the enumeration phase measurably faster on the same
+stage, the engine visible in the launch record, and §5b's registered prediction scored.
+
 ## 8. Not done, and what each would take
 
 - **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
