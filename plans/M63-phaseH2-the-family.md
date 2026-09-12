@@ -847,21 +847,44 @@ minutes; *running* the kernel check is a separate and possibly large cost (row 4
 the first is being taken now.
 
 **DONE, 2026-09-12 (product owner).** All twenty regenerated as **text LRAT** with
-`cadical --lrat=true --no-binary`, six at a time — about two minutes of wall clock, ~385 s of CPU:
+`cadical -q --lrat --no-binary --unsat --seed=0` — **verbatim the flags `scripts/regen-check.sh` already
+runs**, so the artifact matches the house pipeline rather than approximating it. 16-way, **406 solver-seconds**,
+about two minutes of wall clock:
 
 | | |
 |---|---|
 | refutations | **20 of 20**, every one exit code **20 (UNSAT)**; no other exit code observed |
 | each ends in the empty clause with its hints | **20 of 20**, by reading the last line of every file |
 | **negative control on that check** | a faithful file is **accepted** and a copy with its final line truncated is **refused** — so the check discriminates rather than passing everything |
-| size | **1.07 GB** over 20 files (41–127 MB each) against 0.35 GB of DRAT — **3.02×**, as expected since LRAT carries explicit hints |
+| size | **1,001.2 MB** over 20 files (40–119 MB each), **11,821,459 lines** total, ~265 MB gzipped — against 358 MB of binary DRAT | 
 | the largest | `C1_circle_completeness`, the one claim four codebases were pointed at: 77 s, 127 MB |
 
-**What this establishes and what it does not.** It puts the entire solver-dependent core in the one format
-this repository can check **in the Lean kernel**, which it could not before. It does **not** mean they have
-been kernel-checked — that run is deliberately not made and its cost is unmeasured. The honest status:
-**twenty refutations, in a kernel-checkable format, each internally checked by its producer
-(`--checkproof=3`), none independently verified.**
+**What this establishes and what it does not — CORRECTED by the agent that generated them, against the
+product owner, who overstated it.** I wrote that this puts the core *"in the one format this repository can
+check in the Lean kernel"*. **That is wrong, and two steps sit between.** First, **Lean core's own LRAT
+checker does not kernel-reduce at all** — structurally, not by scale: `DefaultClause.ofArray` routes every
+clause through the only `Std.HashMap` in the LRAT tree, bucket indexing computes on `USize`, and its width
+bottoms out in an `@[extern] opaque`, so the kernel has no delta rule and every `USize` operation is
+permanently stuck. Core's checker therefore buys a **native-evaluation axiom per certificate**, even a
+two-clause one. Second, **the kernel-reducible checker M05 built consumes a packed `Nat` encoding, not
+LRAT** (`Sat/MaskCheck.lean`, whose own docstring says it is smaller than what core's `LRAT.check`
+consumes); **LRAT is the UPSTREAM format that encoding is derived from.** So the defensible sentence is
+**"in the format this project's conversion pipeline takes as input"**, and the status remains **generated,
+not checked** — no checker is installed on this machine.
+
+**This is the second time today the product owner reached for the stronger sentence about this same
+artifact and had to be pulled back by the same agent** — first *"re-checkable DRAT"* for what was generated
+and unchecked, now *"kernel-checkable"* for what is one conversion short of it. `CLAUDE.md` states the
+underlying fact plainly and I had even quoted it to that agent in the preceding message. **A bias with a
+consistent direction, on a claim whose weaker form I already held, is worth more attention than a
+one-off error.**
+
+**And the number that prices the step nobody should take yet.** Each refutation is **585,000–614,000 LRAT
+lines**. Ledger row 40 priced kernel promotion at roughly **800,000 LRAT lines per cube** on a different
+object and this project **declined** it. So **one** of these is ~0.75× that declined unit, and **all twenty
+together are ~15×** it. **Generating the format was cheap; kernel-checking it is not.** The decision is left
+open and flagged **inside the manifest**, so whoever opens the bundle in a month meets the cost before they
+meet the temptation.
 
 **A durability fact to know before relying on the bundle: `/tmp` here is `tmpfs`.** The 1.8 GB of instances
 and proofs is in **RAM** and vanishes on reboot. So the two small reviewer-facing files are committed —

@@ -544,3 +544,60 @@ Scratch (regenerable, outside `build/`): `/tmp/claude-1000/solver-h2/`
 
 **Resume command** for the cube route: `cd /tmp/claude-1000/solver-h2 && xargs -a cubelist.txt -n 2 -P 32
 python3 cube_worker.py` — skips any cube whose `results/NNNN.json` exists.
+
+## 17. The proof set regenerated as LRAT, and one correction to why
+
+The 20 refutations were regenerated in **text LRAT** using the flags this repository already uses in
+`scripts/regen-check.sh` — `cadical -q --lrat --no-binary --unsat --seed=0` — so the artifact matches the
+house pipeline exactly rather than approximating it.
+
+| | DRAT (binary) | **LRAT (text)** |
+|---|---|---|
+| total size | 358 MB | **1,001.2 MB** |
+| total lines | — | **11,821,459** |
+| per refutation | 16–24 MB | 40–119 MB, **585,000–614,000 lines** |
+| solver time, all 20 | 3.3 min | **406 s (6.8 min)**, 2 min wall at 16-way |
+| gzipped, for transport | — | ~**260 MB** (3.9× on a sample) |
+
+All 20 verdicts UNSAT, exit code 20 each.
+
+**The correction.** It is not quite right that LRAT is *"the one format this repository can check inside the
+Lean kernel"*. Two steps sit in between, and `Sat/Lrat.lean` is emphatic about the first:
+
+1. **Lean core's own LRAT checker does not kernel-reduce** — structurally, not by scale.
+   `DefaultClause.ofArray` builds every clause through the only `Std.HashMap` in the LRAT tree; hash-bucket
+   indexing computes on `USize`; its width is `System.Platform.numBits`, which bottoms out in an
+   `@[extern] opaque`, so the kernel has no delta rule and every `USize` operation is permanently stuck.
+   Core's checker therefore buys a **native-evaluation axiom**, for every certificate including a
+   two-clause one.
+2. **The kernel-reducible checker M05 built consumes a packed `Nat` encoding**, not LRAT —
+   `Sat/MaskCheck.lean`, whose docstring says it is "smaller than the format core's `LRAT.check`
+   consumes". LRAT is the **upstream** format that encoding is derived from.
+
+So generating LRAT **is** the right cheap half — it is exactly what the house pipeline ingests, and the
+instances had to be on disk to do it — but the honest claim is *"in the format this project's conversion
+pipeline takes as input"*, **not** *"in the format the kernel consumes"*. The proofs remain
+**generated, not checked**: no LRAT or DRAT checker is installed here.
+
+**The number that prices the step nobody should take yet.** Each refutation is **585,000–614,000 LRAT
+lines**. `CLAUDE.md` ledger row 40 priced kernel promotion at roughly **800,000 LRAT lines per cube** on a
+different object, and this project **declined** it. So **one** of these is ~0.75× that declined unit, and
+**all twenty together are ~15× it**. Generating the format is cheap; kernel-checking it is not, and the
+decision is deliberately left open for a later milestone.
+
+### 17a. The bundle, 807 MB → 19.5 MB
+
+The duplication is fixed: `bundle/` ships the 1,267,897-clause base half **once** as
+`base_half_body.cnf` (19.4 MB, no header) plus 20 small `delta_<name>.cnf` files — **19.5 MB total**
+excluding the LRAT, against 807 MB when each CNF repeated the base half.
+
+Reassembly is guarded rather than trusted. `bundle/reconstitute.sh <name>` rebuilds an instance from the
+base body plus its delta and **verifies it against a SHA-256 recorded in `meta_<name>.json`**, so a
+reviewer who reassembles wrongly is told so instead of checking the wrong formula. Proven to discriminate,
+as a pair: with one extra clause planted in a delta the guard **refused** and printed both hashes; with the
+delta restored the faithful partner **passed**. `bundle/manifest.json` carries the verdict, the argument,
+what is *not* needed (achievability), the format and flags, the per-refutation sizes and line counts, and
+the kernel-cost note above.
+
+The earlier DRAT set under `proofs/` is superseded but left in place; its 20 CNFs are byte-identical to what
+`reconstitute.sh` rebuilds.
