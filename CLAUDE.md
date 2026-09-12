@@ -996,6 +996,21 @@ harness printing `ALL MATCH` while comparing today against today. That is the ar
 rule down rather than against it: **it does not reproduce from care, only from the negative control being
 mandatory.**
 
+**A positive control proves an instrument finds things OF THE SHAPE ITS GENERATOR CAN REPRESENT, and says
+nothing about shapes it excludes.** A sweep of 781,284 candidates returned a decisive zero for a new
+parameter and nine hits for the known one — **with its positive control passing**, which is exactly what made
+it dangerous: the known witness *was* expressible in the generator's restricted shape and the new one was
+not, so the search could not represent the object it was searching for. **Before believing any zero over a
+family, write down the generator's image and check the target is inside it.** Third instance of this shape in
+one milestone — and note that a working positive control does not distinguish a false zero from a real one.
+
+**And check which way "more material" runs before assuming it tightens.** Here adding vertices or edges
+almost always makes refusal *easier* — but for the residue certificate the direction **inverts**: growing a
+base only **adds** to the set of colour differences, and the certificate needs a value **outside** that set,
+so more material makes it **harder** to fire. **Once a base contains the witness, the elimination cannot be
+recovered by enlarging the base.** An engineer carrying the usual intuition will spend hours re-checking
+something that cannot bite.
+
 **And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose
 control docstring already said *"a control that passes without its failure mode being reachable has not been
 tested by passing"* was asked how it knew, and declined the credit — it had written a control that could not
