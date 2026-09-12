@@ -564,6 +564,18 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   cosine alone names the live radius sums before any base exists, each handing back the two radii a base must
   contain as roots of a quadratic, at **both** primes — one free prime is enough to kill. **Necessary is
   proved; sufficient is untested, and the record's own rotation is the only positive instance held.**
+  **Sharpened 2026-09-12, and it removes this entry's apparent filter.** Where the cross edges come from a
+  *free* circle — the circle being `t ×` the unit shell for an integer `t` (`plans/M63-phaseH2-the-family.md`
+  §4) — the certificate's defeat is **automatic whenever `t` is even**: `φ` is a homomorphism into a
+  characteristic-2 residue field, so every circle point carries the centre's residue, and the shared centre
+  pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime). **The
+  record has `t = 2`.** So *"this object defeats the residue certificate"* is not evidence about the object,
+  and the phase's whole distance-to-colourability table (30, 18, 8) reads a free quantity. The live quantity
+  is the **off-diagonal** share of the monochromatic cross edges — the part forced by neither the centre nor
+  the circle: the record's share is **0 of 30**, `ρ₆₃`'s is **24 of 54**. And the free-circle condition is
+  wider than a perfect square: `|p|² = n` is free iff `n = k²·m` with `k ∈ ℤ` and `m` a squared distance the
+  lattice **already realises** (so `4 = 2²·1`, `16 = 4²·1` and `12 = 2²·3` are free, and `2` is not) — `k`
+  must be a **multiplier of the module**, which is automatic for `k ∈ ℤ` and false for `k = 2√3`.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each

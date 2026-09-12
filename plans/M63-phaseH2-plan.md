@@ -249,17 +249,28 @@ base pays; `radius⁴ / covolume` is, and the free-circle condition is exactly w
 nothing:
 
 > Among `cos θ = (2n − 1)/(2n)`:
-> — **the circle is FREE iff `n = t²` with `t ∈ ℤ`**, because then `t·v` is a circle point for every
->   unit vector `v` by module closure, so the count is `≥ |S|` on **any** base, with no design at all;
+> — **the circle is FREE on a module `Λ` iff `n = m²·s` for some `m ∈ ℤ` and some squared norm `s`
+>   that `Λ` actually realises** — because `m·(the shell at s) ⊆ (the shell at m²s)` by module closure
+>   alone. The count is then `≥ (Λ's shell count at s)`, with no design at all;
 > — **the field is 6-OPEN iff `n` is even and `squarefree(4n−1)` is a non-residue mod 11.**
 > The two conditions are **independent**. **`n = 16` is the smallest `n` meeting both; `n = 64` is the
 > next.** The members meeting only 6-openness — `n = 2, 10, 20, 22, 24` at `n ≤ 31` — are **live design
 > targets, not free ones.** And the record's own `n = 4` is wall-breaking but **11-split, hence
 > 5-sealed**, so `ρ₁₅` can only ever deliver a five-chromatic object, never a rung toward χ ≥ 6.
 
-`t ∈ ℤ`, **not** `t ∈ K`: for `t ∈ K \ ℤ` the module must additionally be closed under multiplication
-by `t`, which costs exactly what `λ`-closure costs (`PH2-5`). At `n ≤ 31` it makes no difference — only
-16 qualifies either way — but it bites at larger `n`, and §3.1 and E1 handle it.
+**Two corrections are folded into that line and both matter.** *(i)* The multiplier must be an
+**integer**, not merely an element of `K`: for `t ∈ K \ ℤ` the module must additionally be closed under
+multiplication by `t`, which costs exactly what `λ`-closure costs (`PH2-5`). This corrects an
+over-strong form — `n = k²` for `k ∈ K` — that appeared in both the product owner's ruling and the
+planner's first draft; the counterexample is `n = 12 = (2√3)²`, where `2√3 ∈ K` but multiplication by
+`√3` **swaps Parts's two coordinate slots** (measured: 399 of 400 sampled points leave the shape), so
+`2√3 × (his 30 unit vectors)` lands **0 of 30** inside his lattice. *(ii)* But the condition above is
+**wider than a perfect square**, and that is the planner's own retraction: `12 = 2²·3`, his lattice has
+a **42-point shell at `|p|² = 3`**, and doubling it lands **42** points on `|p|² = 12` — free, on his own
+lattice, no completion needed. So **"free" is not "`n` is a perfect square"; it is "`n/m²` is a norm the
+module already realises for some integer `m`."** The record is `4 = 2²·1` off the unit shell;
+`ρ₆₃` is `16 = 4²·1`; `n = 9 = 3²·1` (and its measured 54 exceeds the forced 30, so other points sit
+there too); `n = 2` is **not** free because `2 = 1²·2` and his lattice has **0** at norm 2.
 
 **And one methodological note, recorded because it is the reason the statement above has no radius in
 it.** The advisor claimed uniqueness *"at radius ≤ 8"*, was corrected to *"≤ 4"*, and **that was also
@@ -356,13 +367,32 @@ the advisor's (`PH2-4`) and none of which is the circle count:
    (`plans/STUB-sqrt7-phase-pinning.md`). `ρ₁₅`'s field `K(√15)` is **5-sealed**, so a success at
    `ρ₁₅`-like angles delivers a new 5-chromatic object; a success here is the only item in this phase
    that could be a rung toward χ ≥ 6.
-3. **The project already knows this rotation.** `√ρ₆₃ = (3√7 + i)/8` is one of the four generators of
-   de Grey's edge-direction group (`CLAUDE.md` G8) — so the angle is *already implicated in the
-   unit-distance problem*, and the honest novelty claim is narrower than "a new angle": **no type-M
-   base-plus-rotated-copy construction at any `n ≠ 4` is in print, as far as this repository knows.**
-   `arccos(31/32)` is the second angle in `[PartsOdd2022]`'s 6-chromatic **odd-distance** graph — a
-   different problem, on the hexagonal lattice (`plans/M63-phaseG-bases-and-rotations.md` line 125).
-   §8 is the branch that settles whether the narrower claim holds.
+3. **The angle is not the novelty, and the field is — settled by the prior-art gate, which read
+   `[PartsOdd2022]` in full.** **The one-integer family is prior art**: it is the `m₁ = m₂ = m, r = 1`
+   slice of his §3 formula `ρ(r) = exp(i·arccos((m₁² + m₂² − r²)/(2m₁m₂)))`, which is the law of
+   cosines on the two radii and the rotation edge, and at `m₁ = m₂ = m, r = 1` gives
+   `cos θ = (2m² − 1)/(2m²)` — exactly the free-circle subfamily `n = m²`. **He also builds a base
+   joined to rotated copies at other rotations**: his `G306`, a hexagonal core plus rotated rotors at
+   `m₁ = m₂ = 8` with odd `r ∈ 1..15`, whose `r = 1` case **is our `n = 64`**. So: **what survives as
+   ours is the *characterisation* (that a rational integer diagonal radius forces exactly this family
+   — an iff he does not state), the field screen over it, and UNIT DISTANCE.** His construction is an
+   odd-distance graph over lengths `{1,3,5,7}`, and type M is a unit-distance notion, so
+   `[Parts2020a]` §4's *"working constructions of type M with other rotations are not known yet"*
+   **stands unrefuted by his own two papers.** *The re-weighting matters more than the shrink:*
+   **the unworked ground is the field, not the angle.** The reason to want `n = 16` was never that its
+   angle is unused — that is now demonstrably in print — but that `√7` lands in a field this project's
+   own sieve calls **6-open**.
+   **A false attribution in this project's records, now corrected in both places it appeared:**
+   `plans/M63-phaseG-bases-and-rotations.md` said that paper *uses* `arccos(31/32)`. **It does not
+   contain that value.** `arccos` occurs exactly twice in it — once in the general formula, once as
+   `arccos(5/6)` — so there is no third angle. `31/32` is *derivable* from his formula at
+   `m₁ = m₂ = 4, r = 1` and he never writes it. The one explicit angle, `arccos(5/6)`, is **our
+   `n = 3`** — which is `ω₃`, a generator of the Moser lattice itself, and which the §3 screen kills
+   because `sin θ = √11/6` lies in `K`. *Pleasing consistency: the family's dead members are the ones
+   that are field-internal.*
+   And `√ρ₆₃ = (3√7 + i)/8` is one of the four generators of de Grey's edge-direction group
+   (`CLAUDE.md` G8), so the rotation is already implicated in the unit-distance problem from a second,
+   independent direction.
 
 **Settled before you start: none of the new members is in phase G's census, so none of this is a
 reproduction of that screen.** Checked against `data/m62/m63-phaseG-screen-r2.44.json` directly — its
@@ -533,10 +563,30 @@ a√3 + 3b√11`, which lands in the `y`-space, and `√3·(c√3 + d√11) = 3c
 ```
 
 **is**, and it contains `Λ_parts`, hence its 30 norm-1 points, hence `ℤ[√3] ⊆ O_{Λ′}`. So `Λ′` makes
-**every `n = m²` and every `n = 3m²` a free circle** — verified for `n = 12`: `2√3 × (the 30 norm-1
-points)` gives **30 distinct points, all of squared norm exactly 12**, where the same product lands
-**0 of 30** inside `Λ_parts`. **Price `Λ′` first** (G4); it is one named module and it is the cheapest
-way to test whether `O_Λ ⊋ ℤ` matters in practice.
+every `n = m²` and every `n = 3m²` a free circle — verified for `n = 12`: `2√3 × (the 30 norm-1 points)`
+gives **30 distinct points, all of squared norm exactly 12**, where the same product lands **0 of 30**
+inside `Λ_parts`.
+
+**Priced by the planner, and the answer is that `Λ′` is not the route.** Under G4's instrument (all
+figures exact, covolume in conjugate coordinates):
+
+| module | rank | covolume | cut prediction |
+|---|---|---|---|
+| `Λ_parts` | 4 | **0.407407** | — (rank 4, scales `r⁴`; 3,433 at 2.44) |
+| `Λ′ = Λ_parts + √3·Λ_parts` | **8** | **1.493827** | **≈ 1.5 million points** at radius 3.51 |
+
+`Λ′` is full-rank, so it pays `r⁸`, and at the radius `n = 12` needs it is **≈ 58× larger than `ρ₆₃`'s
+whole base.** Unaffordable. **And it is not needed anyway** — the corrected free-circle condition (§3)
+makes `n = 12` free on `Λ_parts` itself through its norm-3 shell. So `Λ′` is recorded as **priced and
+rejected**, and E1's remaining value is the multiplier ring itself, not this candidate.
+
+**A control that passes, and it validates §3.2's formula on the one row anyone can check.** The
+formula's first factor is `|U_M| = |{ζ ∈ μ₁₂ : ζM = M}|`. Measured by applying `ζ₁₂ = (√3+i)/2` to each
+basis vector and testing membership: **`|U| = 6` for `Λ_parts`** — exactly the 6 the formula needs to
+give `6 × 5 = 30` on `|p|² = 4`, which is the record's measured count. **And `|U| = 6` for `Λ′` too**,
+so the Galois completion buys **no** `ζ₁₂`-closure and no factor-of-2 in any shell count. *Both outcomes
+were reachable: a `Λ_parts` value other than 6 would have refuted either the formula or the instrument,
+and a `Λ′` value of 12 would have made the completion worth its covolume.*
 
 **Prediction.** `O_Λ ⊇ ℤ` certainly, and `O_{Λ′} ⊇ ℤ[√3]` by the argument above. Planner's prior at
 **0.6** that `O_{Λ_parts} = ℤ` exactly (his lattice's
@@ -817,32 +867,65 @@ trap 1), and here a dropped point is a silently lost margin.
 would make the session spend its remainder there. Here is the gate, and here is the reason the planner
 thinks the honest fallback is a different item.*
 
-**`n = 12`** — `cos θ = 23/24`, circle `|p|² = 12`, radius 3.4641, radicand `47` (`47 ≡ 7 mod 8`, wall
-**breaks**; `47 ≡ 3 mod 11`, a QR, so 11 **splits** → **5-sealed**). Two facts measured here that make
-it worse than its radius suggests:
+**`n = 12` — measured in full, because the planner registered a condition for changing its mind and
+then met it. The ruling survives; its grounds changed completely. §10.6 scores the registration.**
 
-1. **Its circle is NOT free on Parts's lattice.** `12 = (2√3)²` *is* a square in `K`, but `2√3 ∉
-   O_{Λ_parts}` (E1's measurement: `2√3 × (the 30 norm-1 points)` lands **0 of 30**). So `n = 12` is a
-   **design** target needing the Galois completion `Λ′`, not a free one — the same class of work as
-   `n = 2`, at 2.4× the radius.
-2. **It is 5-sealed**, so even a win there is a new five-chromatic object and **no rung toward χ ≥ 6.**
+`cos θ = 23/24`, circle `|p|² = 12`, radius 3.4641, endpoint bound 3.5008, radicand `47`. Measured on
+`parts_lattice(3.51)`, desktop, with the `ρ₁₅` control reproduced in the same process:
 
-**So the planner's recommendation, offered against the product owner's framing as invited:** if `ρ₆₃`
-returns **SAT** with its cross-edge recount clean, then what the phase has learned is a statement about
-the **recipe** — *a dense base (10.65 edges/point against the record's 8.32), a free circle at full
-Cayley degree, and a 6-open field are together insufficient* — and **no other member of the family is
-worth a solver slot on that evidence**, `n = 12` least of all, since it is strictly poorer on both
-counts above. **The right use of the remainder is then E2 and E3: what does the one known refusal
-actually use?** That is the mechanism question, it runs on committed objects, and it is the only thing
-that would tell you what a *fourth* requirement even looks like.
+| | **n = 12** (`cos 23/24`) | **n = 16** (`ρ₆₃`, `cos 31/32`) |
+|---|---|---|
+| base points | **14,689** (r⁴ prediction 14,701 — **0.08% off**) | 25,843 |
+| norm-1 shell | 30 | 30 |
+| circle shell | **42** | 30 |
+| unit edges per point | **10.07** | **10.65** (the record: 8.32) |
+| cross edges | **102 = 60 centre + 0 off-diagonal + 42 equal-radius** | **126 = 60 + 36 + 30** |
+| non-centre kinds | **1** | **2** |
+| certificate | defeated at both primes | defeated at both primes |
+| field | `sin²θ = 47/576`; wall **breaks**, 11 **splits** → **5-SEALED** | wall breaks, 11 inert → **6-OPEN** |
 
-**The trigger, stated so it can be checked rather than argued:** spend the remainder on another member
-of the family **only if `ρ₆₃` returns UNSAT** — in which case the next member to build is the cheapest
-**free** one, `n = 64` at radius 8, as a second instance of a working recipe — **or if `ρ₆₃`'s recount
-of the 36 law-dependent cross edges fails**, in which case the `ρ₆₃` verdict is void, nothing has been
-learned, and `n = 12` is no better placed than it was. *Confidence: medium. The one fact that would
-change it is `n = 12`'s norm-1 and norm-12 shell counts on `Λ′` coming back far richer than `ρ₆₃`'s 30
-and 30 — which §3.2's formula can evaluate in seconds, so **evaluate it before accepting this ruling**.*
+**Both of the planner's original premises are retracted.** *(i)* *"Its circle is not free"* — **wrong**,
+and wrong in a way that improved the mathematics: `12 = 2²·3`, his lattice has a **42-point shell at
+`|p|² = 3`**, and doubling it lands **42 of 42** on `|p|² = 12`. Free, on his own lattice, no completion
+needed. The product owner caught this; the corrected general condition is now §3's. *(ii)* *"It needs
+the Galois completion, so it is the same class of work as `n = 2`"* — **wrong for the same reason**, and
+the completion is priced and rejected anyway (E1: covolume 1.4938, ≈1.5 million points at this radius).
+
+**And the surviving premise is not what decides it either.** What decides it is a quantity the planner
+never registered: **`n = 12` has ZERO off-diagonal cross edges.** Its only non-centre kind is the
+diagonal. On the only object anyone has measured, that configuration is four-colourable —
+`plans/M62-evolutionary-type-m.md` §R9: *reference-family-only → SAT, auxiliary-family-only → SAT, both
+→ UNSAT* — and `[Parts2020a]` §4 says in print *"the existence of triangles of the second kind is
+essential"*.
+
+**The ruling, re-derived from the corrected figures rather than passed quietly.**
+
+1. **`ρ₆₃` still holds the solver slot first**, and now for a third reason on top of 6-openness and the
+   advisor's value-of-information argument: **it is the only one of the two that has both kinds.**
+2. **`n = 12` is re-purposed, not skipped.** It is **not** a χ ≥ 6 candidate — 5-sealed, so even a
+   refusal there is a five-chromatic object. But it is **the cheapest clean test of the one inherited
+   assumption this entire phase carries**: `H4`, *"a type-M arena needs two kinds"*, which `PH-1` and
+   `PH-2` both stamp **inherited from one measurement on one object, not proved**, and about which
+   `PH-1` says explicitly *"a base whose only non-centre kind is the diagonal is the **minimal
+   surviving configuration** — do not discard a one-kind base without asking it."* **`n = 12` IS that
+   base.** It exists on his own lattice, it is 43% smaller than `ρ₆₃`'s, its circle is 40% richer, and
+   nobody has ever asked it. **If it refuses, `H4` is refuted and the two-kind requirement falls. If it
+   is four-colourable, `H4` gets its second data point and its first on a base other than his.** Either
+   way it is a result, and it costs one solver call on 29,378 vertices.
+   *Prediction, registered: **SAT**, at 0.8 — `H4` is inherited from `[Parts2020a]`'s own sentence and
+   from M62 §R20's orbit-subset census, and 42 diagonal edges with no second kind is exactly the
+   configuration §R9 measured as colourable. Both outcomes reachable: the object exists, is affordable,
+   and has no prior verdict anywhere. Controls: the `ρ₁₅` UNSAT in the same process tree, and the
+   independent recount — here only **42** of the 102 edges are law-dependent, since the 60 centre edges
+   are forced by `2|S| = 60` with no cosine entering.*
+3. **The trigger for spending the remainder elsewhere.** If `ρ₆₃` returns **SAT** with a clean recount,
+   the phase has learned something about the **recipe** — *dense fabric, free full-degree circle, both
+   kinds, 6-open field, still four-colourable* — and the remainder goes to **E2 and E3**, the mechanism
+   question, not to another member of the family. If `ρ₆₃` returns **UNSAT**, the next build is the
+   cheapest other **free** member. If `ρ₆₃`'s recount of its 36 law-dependent edges **fails**, its
+   verdict is void and nothing has been learned. *Confidence: high on the ordering; medium on
+   `n = 12`'s value — and higher than before, because the deciding quantity is now a count on disk
+   rather than a field-theoretic argument.*
 
 ### E5 — the λ-sweep, pre-screened and priced
 
@@ -1046,15 +1129,21 @@ brief's own 30 and 18 out-of-sample. **Add `[BaakeGrimm2003]` to `BIBLIOGRAPHY.m
 rests on it, where our copy is, and how much has been read per section, and keep
 `python3 tools/bib_audit.py` green.**
 
-**One question it could not close, and it matters to E4's novelty claim.** *Has anyone in print built a
-base-plus-rotated-copy graph at a rotation other than `ρ₁₅`?* `[Parts2020a]` says in his own words
-**"working constructions of type M with other rotations are not known yet"**, and nothing the gate
-searched contradicts him — but the **Polymath16 corpus and the crystallography literature were not
-searched exhaustively for a construction rather than an angle**, and `[PartsOdd2022]`'s `arccos(31/32)`
-(which *is* `ρ₆₃`) is a construction on the hexagonal lattice for the **odd-distance** problem that the
-gate did not open. **Recorded as: unrefuted, not confirmed.** If E4 lands, that gap is the one a
-reviewer will find first — close it before the claim is written, and read `[PartsOdd2022]` §§2–3 rather
-than characterising it from its abstract (`CLAUDE.md` G50).
+**The novelty question is now closed, and the answer shrinks the claim — §3 target reason 3 has the
+full statement.** The gate read `[PartsOdd2022]` in full: **the one-integer family is his §3 formula's
+`m₁ = m₂, r = 1` slice, and he builds base-plus-rotated-copies at other rotations** (his `G306` at
+`m₁ = m₂ = 8, r = 1` **is our `n = 64`**) — for the **odd-distance** problem, over lengths `{1,3,5,7}`.
+Type M is a unit-distance notion, so `[Parts2020a]` §4's *"working constructions of type M with other
+rotations are not known yet"* **stands unrefuted by his own two papers**, and what is ours is the
+iff-characterisation, the field screen, and unit distance. **Write the claim in that narrow form from
+the start.**
+
+**And one methodological note the gate recorded against its own report**, worth carrying because it is
+this plan's §5 trap 1 in a different costume: part of its argument was that the strings `"31/32"` and
+`"127/128"` occur zero times in the PDF. **That is unsound** — the same extraction returns zero for
+`"5/6"` and `"7/8"`, both of which *are* in the paper, as stacked fractions. The sound form is the
+`arccos` count: exactly two occurrences, both accounted for. **An absence measured by an instrument
+that cannot see the present case is not an absence.**
 
 The branches, kept for the record and for anything the gate is asked next:
 
@@ -1249,6 +1338,39 @@ measurement.*
   lattice, and it has sat unread through three advisory ledgers. It carries no residue screen, so it
   cannot decide anything alone — but if this phase ever wants a second base, or a check that the
   criterion behaves on a base that is not `Λ_parts`, it is on disk and it is free.
+
+### 10.6 — A pre-registered condition, scored honestly, including its mis-specification
+
+*Recorded in full because the product owner asked for the registration to be completed rather than left
+as a deferred line, and because how it came out is more instructive than a clean pass would have been.*
+
+**What was registered**, in E4c before any of the numbers existed: *"Confidence: medium. The one fact
+that would change it is `n = 12`'s norm-1 and norm-12 shell counts on `Λ′` coming back far richer than
+`ρ₆₃`'s 30 and 30 — evaluate it before accepting this ruling."*
+
+**What was measured:** norm-1 **30**, circle shell **42** — and on `Λ_parts` itself, not on `Λ′`.
+Richer by 40% on the circle, equal on the unit shell, on a base **43% smaller** (14,689 against 25,843)
+with comparable density (10.07 against 10.65 unit edges per point).
+
+**Score: the condition FIRED, weakly — and the ruling stands on grounds that were not registered.**
+That is not a pass. The honest reading has three parts:
+
+1. **The condition was reachable and it fired.** 42 > 30. It was not a formality; the apparatus entered
+   the region it named.
+2. **It was pointed at the wrong quantity.** What actually decides `n = 12` is its **off-diagonal
+   cross-edge count of zero** — a third number the registration never named. The registration measured
+   two quantities that turned out not to be decisive, and the decision survives on one registered
+   nowhere.
+3. **The evidence for that mis-specification predates the result, which is the test that separates a
+   diagnosis from an excuse.** `plans/M62-evolutionary-type-m.md` §R9's measurement — *one family only
+   is SAT, both families is UNSAT* — was in the planner's hands **before** the condition was written,
+   and is cited in this plan's own E3a as a prediction basis. The planner had the deciding fact in
+   front of it and left it out of the condition. Checkable, and the planner's error, not the
+   apparatus's.
+
+**The durable form, for whoever writes the next registration:** *name the quantity that would make you
+act differently, not the quantities you happen to be measuring.* A condition written over the two
+numbers already in front of you will fire on the wrong evidence and read as a finding.
 
 ### 10.5 — One fault found and deliberately not fixed
 
