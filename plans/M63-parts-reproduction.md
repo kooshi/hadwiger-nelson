@@ -1256,12 +1256,36 @@ rows is computed **across the warm/cold seam**, the very seam this section estab
 to three orders of magnitude. The missing cell — a cold refusing ask on a frozen-companion stage —
 was never measured, and I asserted its absence away.
 
-What can be said before the measurement lands:
+**THE MEASUREMENT LANDED, AND THE CONDITION DOES NOT FIRE.** Cold, fresh solver, minimum of three,
+CPU seconds, quiet box — five of eight rows (the joint unpinned and both M6B rows are still
+running and cannot change what follows):
 
-- **warm against warm**, both already on record, does *not* obviously clear tenfold: joint in-run
-  0.023 / 0.27 against frozen-companion in-run 0.006–0.009 / 0.02–0.108 is about 3× cheap and
-  3–13× expensive — straddling the threshold;
-- **cold against cold** is the comparison the condition needs, and is under measurement.
+| stage, one cold refusing ask | **pin on** | **pin off** | the pin is worth |
+|---|---|---|---|
+| L451, frozen companion | **3.07 s** | 190.60 s | **62×** |
+| S166, frozen companion | **3.58 s** | 224.67 s | **63×** |
+| joint `A412 ∪ ρ·g⁻¹(A166)` | **6.66 s** | *(running)* | — |
+
+**Like for like — cold against cold, pinned against pinned — the joint stage is 1.9–2.2× the
+frozen-companion stages.** Not sixteen-fold, not eighty-eight-fold: about two. And warm against
+warm was already about 3× cheap, 3–13× expensive. **So on neither honest pairing does the tenfold
+threshold clear**, and the 16–88× that appeared to fire it was the warm/cold seam plus the pin,
+never a property of the joint stage.
+
+**And card 14's fork is settled against the warm-up reading: the "third regime" is the missing
+pin.** §5.9's pin is worth **62× and 63× on two independent stages** — a replicated number, against
+his own reported ~10× for his levers — and my 186–229 s came from `frames`, which built with
+`pin=False`, while C4.0's 5.7 s had it on. Poros's falsifier (*cold-with-pin and cold-without-pin
+within a factor of two*) did not fire; they differ by sixty-two. Warm-up is real but second-order
+here: cold-and-pinned (3.07 s) against warm-in-run (0.02–0.11 s) is ~30–150×, and cold-and-unpinned
+against warm is the ~2,000× I first attributed wholly to warm-up.
+
+**What this does to the drop decision, stated plainly because it reverses a recorded conclusion.**
+The product owner recorded *"the conditional mechanism has fired; B-8, B-11, D-6 and X-7's guard
+come back for D, F and G"*. On the corrected measurement **the mechanism does not fire**. Combined
+with R2.4b — where no gated row's need is governed by per-ask cost anyway — the position is:
+*the dial does not fire, and it would not have governed those rows if it had.* The rows should
+return or not on the per-row grounds in R2.4b's table, which is where D, F and G should read them.
 
 **And the "third regime" above is not yet attributable to warm-up** (Poros, card 14). The two
 numbers that produced it differ in the **pin** as well as the stage: `frames` builds its stages
