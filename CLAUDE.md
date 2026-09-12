@@ -913,3 +913,14 @@ test, inside a control built to catch exactly that class. The repair that works 
 must fail beside a faithful stub that must **pass**, so a reader can tell the refusal came from the cause and
 not from the scaffolding. Where the uninformative outcome cannot be named, **a red control is not yet
 evidence** — it is an unexplained failure that happens to agree with you.
+
+**A measured half and a derived half fail in OPPOSITE directions, and one rule cannot cover both.** Where a
+graph's edges are *measured* — a float proposes candidate pairs, exact arithmetic decides each — the only
+possible error is a **missed** edge, which makes colouring easier, so **a refusal is robust and a colourable
+verdict is suspect**. Where edges are *derived from a law*, the error is an **invented** edge, which makes
+the graph denser, makes a refusal arrive faster and cheaper, and **looks exactly like success** — so there
+**a refusal is the suspect verdict.** M63 phase G, 2026-09-12: the product owner ruled "believe a refusal
+immediately" from the measured half and applied it to an arena whose novelty lives entirely in the derived
+half, where the law at a new parameter was tied to nothing. **Before trusting either verdict, ask which half
+of the object produced it**, and note the corollary a plan there got backwards: *being built by the law is
+the reason the law needs checking, not the reason it does not.*

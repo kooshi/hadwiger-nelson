@@ -500,6 +500,46 @@ established that checks 1–3 are internal consistency and **this is the only on
 outside the pipeline**; leaving it off where it is available is the exact pattern this queue exists to end.
 **Still open:** `parts_diag.py` has no `--self-test`, so its declaration has no control of its own.
 
+---
+
+## §6d — THE ROTATION SCREEN: four rulings, and my asymmetry was half wrong (2026-09-12)
+
+1. **CORRECTED — "believe a refusal immediately" covers only the MEASURED half.** The base's unit edges are
+   measured (float proposes, exact decides), so the only error is a missed edge and a refusal is robust.
+   **The cross edges are derived from a law**, where the error is an *invented* edge — denser graph, faster
+   refusal, looks like success. **The new rotation's whole novelty is in the derived half, and at the new
+   cosine that law is tied to nothing.** So: **a refusal at the new rotation is not believable until the
+   cross-edge law at that cosine is independently checked**, and that check goes on the critical path rather
+   than after something survives. It is cheaper than §7.2 prices it — one formal square-root symbol, not the
+   full field. **The plan's §4.3 has it backwards:** being built by the law is why the law needs checking.
+2. **The residue screen runs FIRST**, ahead of any solver call — 18 exact tests, microseconds, and a hit
+   ends the screen with a **radius-free** theorem (eliminated on every base in that field at every radius)
+   rather than a radius-bounded verdict. One-sided: firing proves colourable, silence proves nothing. Needs
+   its own positive signal — zero monochromatic unit edges over all 3,433 base points, plus a distance-2
+   pair that *does* read monochromatic as the negative control — and both primes above 2 tried separately.
+3. **`−7/8` is NOT a second rotation: it is Parts's arena relabelled.** The lattice is invariant under
+   negation, so mapping the second copy to its negative is an exact graph isomorphism. **126 is therefore
+   forced there and a check asserting only "126 edges" cannot fail.** Do not spend an ask on it; keep it as
+   a decomposition check that *can* fail — assert the three components separately **and** that
+   **33 = 18 + 15** (2·33 + 0 + 60 = 2·18 + 30 + 60). §3.3 row 2 calls it *"LIVE … no published construction
+   uses it"* — **it is the published construction**, and screening it would risk reporting the record as a
+   new finding. §11.6's sign-pairing argument applies to rows 1–2 as well as 3–6.
+4. **No ask is needed for the base alone, ever.** Parts's lattice lies in ℚ(√3,√11) at every radius and our
+   own kernel-checked **Theorem B four-colours that whole plane** — so the base is colourable at any radius
+   for free, and **any refusal the screen returns is necessarily carried by the cross edges.** This also
+   closes the worry that every arena might refuse for a reason unrelated to rotation.
+
+**Two things to know.** Sixty of Parts's 126 cross edges join the centre to the 30 points at distance 1,
+and **those exist at every rotation whatsoever** — nearly half the calibration's headline number is a
+constant of the base. And **report the seam size beside the radius**, never the radius alone: at some
+candidate angles the seam is 18 pairs inside radius 1.02, so the arena is two nearly-separate lattices
+joined through a small core and a colourable verdict there is a weak elimination by construction.
+
+**Correction owed elsewhere:** M62 §R22's *"§R20's exhaustive subtype law is therefore untouched by the
+enlargement"* is sound for the 21 **refusing** rows and unsound for the 11 **colourable** ones — the same
+asymmetry, written backwards, in a sentence a write-up would quote. Harmless today because Theorem B covers
+the row that mattered.
+
 ## §6c — THE FLOAT VERDICTS ARE RETIRED (2026-09-12, `8b59db6`) — the queue is clear
 
 **Six sites in `tools/typem.py` now decide exactly**, and `ksign` moved *into* `typem.py` beside `kfloat`
