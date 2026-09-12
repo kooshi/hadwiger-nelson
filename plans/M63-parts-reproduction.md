@@ -93,10 +93,16 @@ re-derived here unless said otherwise.
 approval needed because later work removed the object it was about), **drop?** (a drop that needs the
 product owner's explicit approval). Row ids are stable for citation.*
 
-**Every `drop?` row is conditional on phase C4.0's measurement** (Poros card 6; **approved in exactly that conditional form by the product owner on 2026-09-11**, each row keeping its condition and its re-test): the arguments
-rest on ask costs from stages with a frozen companion, and the joint stage is the first without one. If
-the joint stage's asks rise ten-fold, the cost-control rows — B-8, B-11, D-6 and X-7's guard — come back
-for F and G. **C-5 and B-12 are no longer drops at all** (Poros card 8): they carry a second role, in
+**The `drop?` condition was DISCHARGED BY MEASUREMENT on 2026-09-11, and it did NOT fire.** It was
+approved in conditional form (Poros card 6): the drop arguments rested on ask costs from stages
+with a frozen companion, and the joint stage was the first without one, so the rows were to come
+back if its asks rose tenfold. **C4.0 measured it like for like — cold and pinned against cold and
+pinned — and the joint stage costs about 2× the frozen-companion stages** (6.66 s against 3.07 and
+3.58), with warm-against-warm at ~3× and 3–13×. The tenfold threshold clears on neither pairing;
+the 16–88× first reported was a cold figure against a warm baseline, plus a missing pin worth 62×
+(§R2.4). **The cost-control rows B-8, B-11, D-6 and X-7's guard nevertheless RETURN for D, F and
+G — on the per-row grounds in §R2.4b, never on the dial**, because no gated row's need was
+governed by per-ask cost in the first place (Poros card 15). Product owner's ruling, 2026-09-11. **C-5 and B-12 are no longer drops at all** (Poros card 8): they carry a second role, in
 phase D's expansion rule, that the cost argument never touched.
 
 | id | promise (address) | status | evidence, or the argument | goes to |
@@ -1315,6 +1321,14 @@ count; at 10²–10³ a cold worker discards a state worth more than the paralle
 *Poros's card 15, answered by derivation over quantities already measured — no asks. The condition
 was attached to every proposed drop as one dial; each row turns out to have its own quantity, and
 three of those are now measured.*
+
+> **THE GOVERNING REASON, as ruled by the product owner on 2026-09-11.** The dial is recorded as
+> **NOT FIRING** — like for like, cold and pinned against cold and pinned, the joint stage costs
+> about **2×** the frozen-companion stages, nowhere near tenfold (§R2.4). **The four cost-control
+> rows still return for D, F and G, and each returns on its own per-row ground below, not on the
+> dial.** The alternative weighed was letting them lapse, which is the literal reading of the
+> approval's condition and the wrong outcome: the condition was a proxy and the per-row needs are
+> real. *A row that returns for a reason that turned out false is a row nobody can defend later.*
 
 | gated row | what its need is actually governed by | current reading | verdict |
 |---|---|---|---|
