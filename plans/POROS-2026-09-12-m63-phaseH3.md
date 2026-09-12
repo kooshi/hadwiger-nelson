@@ -618,7 +618,8 @@ its degeneracy is also 7 then the whole thinness line dies and PH3-15 should be 
 | PH3-12 | *my* "√3-scaled copy" explanation | **retracted by me** |
 | PH3-13 | realised unit degree 10.56 → 7.37 | **refutes** the brief's "twice the unit-neighbour count" |
 | PH3-14 | "smaller **and** unsealed" | **refuted** — merely smaller (36%), and 7.1× is an area ratio across modules of different rank |
-| PH3-15 | too thin to refuse four colours | **weakened, then HARDENED**: degeneracy 7 clears the bar, but phase H2's object measures **13** and depth in this family tracks radius alone — stated as the phase's leading risk |
+| PH3-18 | the record's own base and arena | **degeneracy 7 both** — PH3-15 STRUCK; the candidate sits at the record's depth with 2× its off-diagonal edges; hand the solver the 25,201-vertex 4-core |
+| PH3-15 | too thin to refuse four colours | **STRUCK by PH3-18** (was: weakened, then hardened: degeneracy 7 clears the bar, but phase H2's object measures **13** and depth in this family tracks radius alone — benchmarked against the wrong object) |
 | PH3-16 | P-H3-5's threshold (product owner's retraction) and the pair it belongs to | **recorded**; the rule is *when two numbers are compared, exactly one thing may differ between them* |
 | PH3-17 | the §6b question | **SAT**, twelve explicit additive witnesses in seconds where three solver configurations failed for ten minutes; **no twist of any clears the 72**, so the off-diagonal edges are load-bearing and nothing is decided |
 
@@ -704,11 +705,16 @@ values my earlier slow peel returned — and the point count lands on 25,567 wit
 `R = 1.5119` it is 7 whether the lattice holds 499 points or 16,309 — dropping the shape multiplies the
 material by **33** and adds **nothing** to the depth. Radius alone takes it 7 → 9 → 13.
 
+**[SUPERSEDED — see PH3-18. This entry's conclusion is STRUCK: I benchmarked against the wrong object.]**
+
 **So the concern is upheld and I state it as the phase's leading risk, in the product owner's words.**
 Phase H3 proposes the **smallest radius in the whole live family**, and radius is the only variable
-measured to deepen these graphs. Its candidate's degeneracy is **7** — the same 7 carried by the 499-point
-object that `M63-phaseH2-the-family.md` §6 declared dead — against **13** for the one object in this family
-whose four-colour refusal was *produced* rather than inherited. **The phase's headline advantage, its 73%
+measured to deepen these graphs. Its candidate's degeneracy is **7**, against **13** for phase H2's object.
+*(An earlier draft of this sentence added "the same 7 carried by the 499-point object §6 declared dead".
+**Struck, at the product owner's correction and rightly:** that object was declared dead because it has
+**zero circle points**, a parity fact about Parts's coordinate slots, and not because of its depth — so
+the rhetorical force of "the same as the dead one" was unearned by a true number. PH3-18 then made it
+doubly wrong.)* **The phase's headline advantage, its 73%
 radius, is the same number as its leading risk.**
 
 **What this does NOT say, and the line matters.** Degeneracy 7 clears the necessary bar (a 5-chromatic
@@ -859,4 +865,74 @@ not going to finish inside its 40-minute budget in any case, and the machine is 
 engineer — but the forfeit is real and it is the next thing to run, **with a warm start from one of the
 twelve rather than from nothing**, because a solver that could not four-colour this base unaided will not
 do better on a harder instance cold.
+
+
+## PH3-18 — PH3-15 is **STRUCK**: the record's own base is degeneracy 7, and so is its five-chromatic arena
+
+**The product owner's challenge, and it was correct.** PH3-15 set phase H3's degeneracy 7 against phase
+H2's 13 and called the phase shallow. **Phase H2's object is not the benchmark — `[Parts2020a]`'s
+509-vertex record is**: it is five-chromatic, it is the cheapest such object anyone holds, and its base is
+374 of the 1,603 points at radius 2, so measuring the *enclosing lattice* at that radius (my 9) was
+measuring the wrong graph.
+
+**Measured, from his own published vertex lists** (`data/m62/parts-ref11/JP/Large/*.vtx`, parsed exactly
+by `tools/parts_vtx.py`). **Every filename carries its edge count, so each graph ships its own
+known-answer control, and all six passed:**
+
+| his file | vertices | edges (expected) | **degeneracy** |
+|---|---|---|---|
+| `v374e1860.vtx` — the record's base, subtype M6A | 374 | 1,860 ✓ | **7** |
+| `v374e1864.vtx` — M6B | 374 | 1,864 ✓ | **7** |
+| `v374e1868.vtx` — M6A | 374 | 1,868 ✓ | **7** |
+| `v374e1872.vtx` — M6C | 374 | 1,872 ✓ | **7** |
+| `v136e564.vtx` — the rotated half | 136 | 564 ✓ | 5 |
+| **`v509e2442.vtx` — the record itself** | **509** | **2,442 ✓** | **7** |
+
+**A five-chromatic unit-distance graph in this family exists at degeneracy 7. It is the record.** My
+concern is therefore **struck entirely, not softened** — there is no depth deficit, because the depth in
+question is exactly the depth of the object the whole family is named for.
+
+**The comparison, rebuilt against the right benchmark:**
+
+| | base degeneracy | arena degeneracy | mean arena degree | off-diagonal cross edges | five-chromatic? |
+|---|---|---|---|---|---|
+| **the record, `n = 4`** | **7** | **7** | 9.60 | 36 | **yes** |
+| **phase H3's candidate, `n = 2`** | **7** | ~7 | 7.38 | **72** | unknown |
+| phase H2's object, `n = 16` | 13 | — | 21.30 | 36 | yes |
+
+**So the phase is not a deficit and not a rout — it is a candidate at the record's own depth carrying
+twice the record's off-diagonal cross-edge pressure.** Phase H2's 13 is the outlier in the table, bought
+with 2.67× the radius, and reading the phase against it was reading it against the most massive object in
+the family rather than the canonical one.
+
+**Mechanism of my miss, because it is the same one as PH3-6.** Both times I took the comparison class from
+the document in front of me rather than from the question. PH3-6 inherited the brief's module; this
+inherited phase H2's object, because phase H2's record is what I had just read. `CLAUDE.md`'s own warning
+covers it exactly: *a record you have just read is a high-weight pattern.* **The fix that worked both times
+was someone recomputing a number the frame said was already known** — mine in PH3-6, the product owner's
+here.
+
+**The one residual, stated at a fraction of PH3-15's weight and flagged as unverified by me.**
+`M63-phaseH2-the-family.md` §6d states that the record's refusal is **inherited** rather than produced,
+its arena containing a graph certified five-chromatic beforehand, while phase H2's `n = 16` object's
+refusal is **produced**. If that holds, then the only *produced* refusal in this family sits at degeneracy
+13 and the only degeneracy-7 five-chromatic object in it inherited its refusal. **I have not checked the
+inheritance claim and it is not mine.** It is a reason to be curious, not a reason to withhold solver time,
+and it does not restore PH3-15.
+
+### The actionable consequence: hand the solver the 4-core, not the lattice
+
+Four-colourability is decided by the **4-core** (a vertex of degree ≤ 3 is always colourable last), so the
+raw lattice is the wrong object to encode.
+
+| | vertices | 4-core | 5-core | 6-core | 7-core |
+|---|---|---|---|---|---|
+| phase H3's arena | 32,617 | **25,201** | 19,825 | 14,473 | 1,585 |
+| the record's base (control) | 374 | **374** | 350 | 340 | 265 |
+
+**A 23% free reduction** on the instance, and the control shows why it exists here and not there: the
+record's base has nothing to peel, while the shape-free lattice carries a long low-degree tail (264
+vertices of degree zero among them). That tail is what dragged the *mean* degree to 7.37 and it is exactly
+the statistic I warned about while quoting it. **The degeneracy was the measure that carried what it
+measured; the mean degree was not.**
 

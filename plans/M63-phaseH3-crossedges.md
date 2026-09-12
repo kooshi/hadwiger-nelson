@@ -335,3 +335,188 @@ not reach — that instrument is not yet fit for it and needs either a wider box
 enumeration the form `V = g² + gH + nH²` invites (all primes dividing `n d²` split in
 `K(√(1−4n))/K`, so the kinds correspond to ideals of bounded support; at `n = 2` there are at most
 `21 × 21 × 9 = 3969` of them).
+
+
+---
+
+# Extension — the two laws taken to the family (commissioned 2026-09-12)
+
+## §7 — The budget criterion, sharpened into a two-case theorem
+
+`V = n(g−h)² + gh` (the same form, regrouped). The prime `𝔭` above 2 has residue field `𝔽₂`, so a
+`𝔭`-unit is `≡ 1 (mod 𝔭)`. For coprime `g, h` there are exactly two cases:
+
+> **CASE A — `g` and `h` are both `𝔭`-units.** Then `gh` is a `𝔭`-unit so `v_𝔭(V) = 0`, and
+> `g ≡ h ≡ 1 (mod 𝔭)` forces `e = v_𝔭(g−h) ≥ 1`. So `v_𝔭(d²) = 2e + v_𝔭(n) > 0`:
+> **case A is monochromatic for EVERY `n`, odd `n` included.**
+>
+> **CASE B — exactly one of `g, h` is divisible by `𝔭`.** Then `e = 0` and
+> `v_𝔭(d²) = v_𝔭(n) − v_𝔭(V)`, so it is monochromatic iff `v_𝔭(gh) < v_𝔭(n)` —
+> **which needs `n` even**, since `v_𝔭(n) = 2v₂(n) = 0` for odd `n`.
+
+**So the answer to "do the even members separate from the odd ones sharply?" is NO, and the reason
+is structural: the 2-adic budget governs case B only, and case A bypasses it entirely.** The budget
+`v_𝔭(n)` is not the whole criterion — it is the criterion for one of two mechanisms.
+
+## §8 — P-XE-1, registered BEFORE the measurement
+
+`n = 3` is odd, so `v_𝔭(3) = 0` and **case B is unavailable**. Every monochromatic off-diagonal kind
+there must therefore be case A, which forces `v_𝔭(V) = 0`, hence `v_𝔭(m) = v_𝔭(144·3/V) = 8`, hence
+`v_𝔭(A) = v_𝔭(m g²) = 8` and likewise for `B`. Since `|u|² = A/144` and `v_𝔭(144) = 8`:
+
+> **P-XE-1 — at `n = 3`, in the shape-free unit-span base inside `R = 6/√11 = 1.8091`, BOTH radii of
+> every monochromatic off-diagonal cross edge have 2-adic valuation exactly ZERO.**
+
+**Scoring.** *Met* if there is at least one monochromatic off-diagonal family and every one has
+`v_𝔭(|u|²) = v_𝔭(|v|²) = 0`. *Not met* if any monochromatic off-diagonal family has a radius of
+nonzero valuation. **Not decided** if `n = 3` has no monochromatic off-diagonal cross edge at all —
+that is the uninformative outcome and it is named in advance.
+
+**Both outcomes are reachable, and the check is that the predicted region is not forced by the
+apparatus:** at the two even members already measured the monochromatic radii have *nonzero*
+valuation — `n = 2`'s are `v_𝔭 = 2` (radii `4/3 ± 2√11/9`) and `n = 16`'s are `v_𝔭 = 4` and `12`
+(radii `64/9, 100/9`). So "valuation 0" is a region the measurement demonstrably need not land in,
+and the uninformative outcome (no monochromatic family) is reachable too — `n = 2` on Parts's shaped
+lattice had no off-diagonal cross edge of any sort.
+
+
+## §9 — The screen across the family, and the honest verdict on it
+
+Run over `n = 1..300`, exhaustively for **rational** kinds (the eigenvalue bound `g² + h² ≤ 2nd²`
+makes that a finite explicit box), classifying each by §7:
+
+| `n` | rational off-diag kinds | monochromatic | case A | case B | first monochromatic |
+|---|---|---|---|---|---|
+| 1 | 3 | 1 | 1 | 0 | `t = −1`, `V = 3`, `m = 48` |
+| **2** | 8 | **0** | 0 | 0 | — |
+| **3** | 4 | **2** | **2** | 0 | `t = 5/3`, `V = 27`, `m = 16` |
+| **4** | 10 | 2 | 0 | 2 | `t = 2`, `V = 6`, `m = 96` |
+| 6 | 22 | 2 | 2 | 0 | `t = 3`, `V = 27`, `m = 32` |
+| 7 | 6 | 2 | 2 | 0 | `t = 7/5`, `V = 63`, `m = 16` |
+| 12 | 16 | 4 | 0 | 4 | `t = 3/2`, `V = 18`, `m = 96` |
+| **16** | 14 | 6 | 0 | 6 | `t = 2`, `V = 18`, `m = 128` |
+| 24 | 10 | 4 | 0 | 4 | `t = 4/3`, `V = 36`, `m = 96` |
+
+**40 of the first 300 members** carry a rational monochromatic off-diagonal kind:
+`1, 3, 4, 6, 7, 12, 16, 24, 30, 39, 40, 48, 51, 52, 60, 70, 72, 84, 88, 96, 112, 115, 120, 126, 132,
+135, 144, 160, 168, 180, 192, 198, 216, 220, 231, 232, 240, 259, 264, 286`.
+
+### §9a — **The screen does not work as a screen, and `n = 2` is the proof**
+
+The commission asked for a screen: *which members cannot carry the quantity.* **It is neither an
+upper nor a lower bound on what a base realises, and it fails in both directions on members we have
+measured.**
+
+- **It UNDER-reports.** The table gives `n = 2` **zero** rational monochromatic kinds — and the
+  shape-free base realises **24 monochromatic off-diagonal cross edges** there, on an *irrational*
+  case-A kind with `V = 9`. **A zero in that column is not an elimination**, and the standing
+  counterexample is the very member this phase is about.
+- **It OVER-reports.** At `n = 4` it lists two rational monochromatic kinds (`t = 2, 1/2`), and
+  Parts's lattice realises **none of them** — its only off-diagonal family is the separated
+  irrational pair `t = (17 ± √33)/16`.
+
+So the 40-member list is **a floor on arithmetic availability, not a screen on members**, and no
+member may be eliminated from it. What survives as a law is §7 — which classifies any *given* kind
+correctly — not the rational enumeration of kinds, which is the same generator-image problem §4c
+records, now firing on the family instead of on one member.
+
+### §9b — What DOES retrodict: all twelve measured families, exactly
+
+Sharpening §7: in case A, `g` and `h` are `𝔭`-units, so `v_𝔭(|u|²) = v_𝔭(|v|²) = v_𝔭(n)`.
+
+| member / base | family | `v_𝔭(d²)` | `v_𝔭(|u|²)`, `v_𝔭(|v|²)` | case | verdict |
+|---|---|---|---|---|---|
+| `n = 2` shape-free | ×24 | 4 | 2, 2 `= v_𝔭(2)` | **A** | MONO ✅ |
+| `n = 2` shape-free | ×24, ×24 | 0 | 0, 6 / 6, 0 | B | separated ✅ |
+| `n = 16` Parts | ×12, ×12 | 4 | 4, 12 / 12, 4 | B (`v_𝔭(gh) = 4 < 8`) | MONO ✅ |
+| `n = 16` Parts | ×6, ×6 | 0 | 0, 20 / 20, 0 | B (`v_𝔭(gh) = 10 ≥ 8`) | separated ✅ |
+| `n = 4` Parts | ×18, ×18 | 0 | 12, 0 / 0, 12 | B (`v_𝔭(V) = v_𝔭(n)`) | separated ✅ |
+
+**Twelve of twelve.** And the structural point the commission's question 2 was reaching for comes out
+inverted: **`n = 2`'s 24 monochromatic edges are case A and `n = 16`'s are case B — two different
+mechanisms delivering the same count.** The 2-adic budget explains `n = 16`; it explains nothing
+about `n = 2`, which gets its monochromatic family from the mechanism the budget does not govern.
+
+
+## §10 — The bytecode archetype: a check that identified two versions of itself BY NAME
+
+*Written up at the product owner's request as an instance of a failure mode `CLAUDE.md` already
+names, in a costume it has not yet recorded.*
+
+`CLAUDE.md` states the archetype as **"a check that loads two versions of something and identifies
+them BY NAME"** — module caches, class registries, singletons, environment lookups — and gives
+archiving a checker as the example. **Here it wore a different costume: the name was not a module
+path but the pair `(file size, mtime in whole seconds)`, and the thing doing the identifying was
+CPython itself.**
+
+**The mechanism, exactly.** The mutation harness writes a fault into `kf.py`, runs the controls in a
+subprocess, then restores the original bytes. One plant replaced `a3 = 2 * d` with `a3 = 3 * d` —
+**the same number of bytes**. Python validates a cached `.pyc` against the source's `(mtime seconds,
+size)`; both writes landed inside one second and the size never changed, so the interpreter judged
+the cache current and **executed the mutated bytecode against the restored source**. The restored
+run read 2 of 12 controls red while `kf.py` on disk was byte-for-byte the original.
+
+**What caught it.** Not the plants — every plant had already "passed". The harness ends by restoring
+the file and **re-running the controls one more time, asserting the guarded state comes back**. That
+final assertion is the only reason the session did not continue on a corrupted arithmetic layer
+while believing its controls were green. It is the two-sided discipline applied to the harness
+itself: the plants check that a fault *fires*, the restore check that the absence of a fault
+*reverts* — and only the second can see a cache that has stopped tracking the file.
+
+**The generalisation worth carrying:** *a mutation harness must verify its own restore, and a
+same-size mutation is the case that defeats timestamp-based caching.* Fixed by removing
+`__pycache__` and setting `PYTHONDONTWRITEBYTECODE=1` on every invocation — and the fix is itself
+checked, because the restore assertion now passes.
+
+**And the sibling catch, the third of the day.** The first shape-free run printed `total 0` cross
+edges. A zero is the flattering direction — it reads as *"`n = 2` is dead"*, which is what the phase
+half expected. What refused it was a **population printed beside the verdict**: the centre star
+exists for every rotation by construction, so `centre = 2 × (unit vectors)` is free, two-sided, and
+non-negotiable; `0 ≠ 120` stopped the run being believed. The cause was mundane — the lattice
+enumerator returns scaled points `x = 12p` and the law was handed those directly — but the point is
+that no amount of suspicion found it and one printed invariant did.
+
+
+## §11 — P-XE-1 scored: **MET**, and it landed on the radii too
+
+The shape-free unit-span base at `n = 3`, cut at `R = 6/√11 = 1.8091`: **67,909 points**, 60 unit
+vectors, 84 circle points. Both free controls passed (centre `120 = 2 × 60`, diagonal `84 = 84`).
+
+> **300 cross edges = 120 centre + 84 diagonal + 96 off-diagonal**, `300/300` confirmed by direct
+> exact distance, **0 invented**; four off-diagonal families, **two of them monochromatic (24 edges)**.
+
+| family | radii | `v_𝔭(d²)` | `v_𝔭(\|u\|²)`, `v_𝔭(\|v\|²)` | edges |
+|---|---|---|---|---|
+| `t = 5/3` | `1`, `25/9` | 4 | **0, 0** | 12 |
+| `t = 3/5` | `25/9`, `1` | 4 | **0, 0** | 12 |
+| `t = 3/2` | `4/3`, `3` | 0 | 4, 0 | 36 |
+| `t = 2/3` | `3`, `4/3` | 0 | 0, 4 | 36 |
+
+**`v_𝔭 = 0` on both radii of both monochromatic families — P-XE-1 MET.** And the prediction was
+sharper than its own statement: §9's screen had listed `n = 3`'s monochromatic kind as `t = 5/3`,
+`V = 27`, `m = 16`, radius sum `σ = 34/9` — **the measurement returns `t = 5/3` with radii `1` and
+`25/9`, i.e. `σ = 34/9` exactly.** The law named the family, its rotation parameter and both its
+radii before the base was built.
+
+That is the second out-of-sample landing for these laws, after the counting law returned `ρ₆₃`'s
+rational family `100/9 ↔ 64/9`.
+
+### §11a — One observation registered as an observation, not a finding
+
+**Three members now measured carry exactly 24 monochromatic off-diagonal cross edges** — `n = 2`
+(case A, two families of 12), `n = 3` (case A, two families of 12), `n = 16` (case B, four families
+of 6). **This is almost certainly small-number coincidence and is recorded so it cannot later be
+mistaken for a law**: the family sizes differ (12 against 6), the mechanisms differ (A against B),
+and 12 and 6 are the `ζ₆`-orbit sizes the base's symmetry group supplies anyway. It would take a
+fourth member with a different orbit structure to make it interesting, and nothing here predicts it.
+
+### §11b — Scope, restated because the numbers are getting attractive
+
+`n = 3` is the **Moser twist**, `4n − 1 = 11`, so its radicand lies in `K` and the 2-adic wall is not
+broken: by phase H2's gate C it can never reach five colours, whatever its cross-edge structure. Its
+value here is exactly and only as a **test of the law** — a member with an odd `n` and therefore zero
+2-adic budget, where case A had to carry any monochromatic edge or nothing would. It did.
+
+**And un-eliminated is still not alive.** 24 monochromatic off-diagonal constraints at `n = 2` is not
+a refusal of four colours, at `n = 3` it is provably not one, and nothing in §7–§11 is a colouring
+claim.

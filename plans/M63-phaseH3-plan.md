@@ -603,3 +603,73 @@ two lines before that arena is built at 4.0316, where the shipped artifact's cir
 `{5:6, 6:12, 7:12}`. The theorem is fine; the number is a property of a radius the arena does not use. **Out
 for a propagation check** — with the caution that **30 legitimately appears throughout phase H2's record as
 the COUNT of circle points**, and only 30-used-as-a-degree is the defect.
+
+---
+
+## §9 — The family screen did not land; the theorem under it did (2026-09-12)
+
+### First, a correction to my own framing in §6
+
+I called *"`n = 2` carries exactly as many monochromatic off-diagonal cross edges as `ρ₆₃` — 24"* the
+phase's headline. **The count at `n = 2` stands as a measurement. The EQUALITY does not carry the weight I
+put on it**, and the engineer flagged it against itself: the two arise by **different mechanisms**, the
+family sizes differ (12 against 6), and 12 and 6 are the `ζ₆`-orbit sizes anyway. Registered by it as an
+observation with its reason for being coincidence stated alongside — **a pattern recorded so it cannot later
+be mistaken for a law**, which is worth more than a pattern quietly dropped. The weight is struck.
+
+### The screen: NOT LANDED, and reported as such
+
+Commissioned to eliminate members of the family base-free. Over `n = 1..300`, 40 members carry a rational
+monochromatic kind — **but the instrument fails in both directions on members already measured**:
+
+- **Under-reports.** `n = 2` scores **zero** and realises **24**, on an *irrational* case-A kind with
+  `V = 9`. **The counterexample is this phase's own member.**
+- **Over-reports.** `n = 4` lists two monochromatic kinds; Parts's lattice realises **none**.
+
+It is a **floor on arithmetic availability, not a screen on members**, and it is the same generator-image
+failure this milestone has now hit four times, firing on the family instead of on a base. **No member may be
+eliminated from that list**, and the record says so rather than shipping a half-working screen.
+
+### What survives, and it is stronger than the screen would have been
+
+**A two-case theorem, with `V = n(g−h)² + gh` and the prime above 2 having residue field `𝔽₂`:**
+
+- **Case A** — `g, h` both `𝔭`-units. Then `v_𝔭(V) = 0`, and `g ≡ h (mod 𝔭)` forces `e = v_𝔭(g−h) ≥ 1`, so
+  `v_𝔭(d²) = 2e + v_𝔭(n) > 0`: **monochromatic for every `n`, odd included.**
+- **Case B** — one of them divisible by `𝔭`. **Monochromatic iff `v_𝔭(gh) < v_𝔭(n)` — needs `n` even.**
+
+**So my question — does `v₂(n)` as the budget make even and odd members separate? — is answered NO**, because
+case A bypasses the budget entirely. The sharp form is better than the separation I hoped for:
+**`n = 2`'s 24 are case A and `n = 16`'s are case B — two different mechanisms reaching the same count.**
+
+**Retrodiction: all twelve measured families at `n = 2, 4, 16`, exactly**, including the case-A signature
+`v_𝔭(|u|²) = v_𝔭(|v|²) = v_𝔭(n)`.
+
+### Two out-of-sample landings, which is the evidence this project ranks highest
+
+1. `ρ₆₃`'s rational family `100/9 ↔ 64/9`, **reproduced before being looked up.**
+2. **P-XE-1, registered before measuring**, on `n = 3` — odd, so case B is unavailable, so both radii of every
+   monochromatic off-diagonal edge must have `v_𝔭 = 0`, a region the apparatus need not enter since `n = 2`
+   and `n = 16` sit at 2 and 4. Measured on 67,909 points: **300 = 120 + 84 + 96, all 300 confirmed, 0
+   invented**, two monochromatic families, **both at `v_𝔭 = 0, 0`. MET.** And **the screen named the family
+   in advance** — `t = 5/3`, `σ = 34/9` — with the measurement returning `t = 5/3` and radii `1` and `25/9`.
+   **The law named the rotation parameter and both radii before the base existed.**
+
+**Scope, kept attached:** 24 monochromatic off-diagonal constraints is not a refusal of four colours, and at
+`n = 3` it provably cannot be, since `4n − 1 = 11` leaves the 2-adic wall unbroken. **Nothing here is a
+colouring claim.** Commissioned: the two-case result written as a clean theorem — hypotheses, conclusion,
+scope, and what it does *not* say — in the register a Lean formalisation could be built from, since the
+programme's standard is that the mechanism is stated and proved for a class.
+
+### Running tally of this phase's family-level results
+
+| | |
+|---|---|
+| the two-case classification of monochromatic cross-edge kinds | retrodicts 12/12, two out-of-sample landings |
+| **the monotonicity theorem** — the interface pattern set only shrinks as the base grows | derived (§8) |
+| **the circle sits at `√(1 − 1/(4n))` of the endpoint bound in every member** | derived (§8) |
+| the base-free counting law `ν·V = n d²` over the principal form of discriminant `1 − 4n` | derived (§6) |
+| the shape trade: 2× nominal against ≈5.3× in realised connectivity, net ≈2.6× worse | measured (§8) |
+
+**Four of these are about the family and not about `n = 2`** — which, if the object does not refute, is what
+this phase will have been for.

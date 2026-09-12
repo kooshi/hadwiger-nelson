@@ -39,6 +39,15 @@ unit vectors exist; at the endpoint-bound radius `4/√7` a circle point has **2
 neighbours. The record's circle points score **5–7 of 30** by the identical measurement, so `n = 2` is worse
 by about six in proportion. Recovering the full 60 needs radius 2.5, at **56×** the point count.
 
+**The endpoint bound does not govern the base, and the family has barely used that.** Derived (§5b): the
+bound constrains *cross-edge endpoints*; base growth adds no cross edges but is **monotone-helpful** for the
+refutation, because `L` in G53's counting compulsion is a minimum over a shrinking set of colourings.
+Phase H2's base is **exactly** the bound cut (25,567, reproduced); the record's base goes **past** it —
+12 of its 509 vertices certainly, up to 27, with its outermost orbit at **1.22×** the bound. Matching the
+record's realised connectivity at `n = 2` costs radius 1.7 and **41,953** base points. And the shape is a
+**device for halving the conjugate conditions**: each condition beyond the first costs ~2.0–2.6× in realised
+connectivity, measured independently, so dropping the shape buys 2× nominal and pays ≈5.3×.
+
 **And one correction to the phase's frame, from the prior-art gate and confirmed here:** the shape-free
 module is stable under multiplication by `i`, so its rotation group is `⟨ζ₁₂⟩` of order **12** and its full
 symmetry group is order **48**, not Parts's 24. The generated base at index 256 is closed under it too.
@@ -307,6 +316,166 @@ unit-neighbour count"* as a reason to expect it to.
 
 ---
 
+## §5b — Does the endpoint bound govern the BASE? No. Measured on both published objects.
+
+**The derivation first, since the question was asked as one.** Two points at radii `t` and `s`, collinear
+with the rotation centre, carry a cross edge exactly when `t² + s² − 2cos θ·t·s = 1`. That form is positive
+definite for `|cos θ| < 1`, and maximising `t` on it gives `t ≤ 1/|sin θ|`. **That is the entire content of
+the endpoint bound: no point beyond it is an endpoint of any cross edge.** It says nothing whatever about
+which points may be in the base.
+
+**What does bound the base: nothing but compute.** Four steps, each already held:
+
+1. **Finiteness** is supplied by the four-conjugate cut at *every* radius, not by the endpoint bound.
+2. **Base material beyond the bound adds no cross edges** — the derivation above.
+3. **Base material can never force on its own.** By Theorem B (`chromaticNumber_seamPlane`, kernel-checked)
+   the base lies in `K²` and is four-colourable however large it grows.
+4. **But base growth is monotone-helpful for the refutation, and this is the operative point.** In G53's
+   counting compulsion, with `B(h) = {circle v : h(v) = h(0)}` over proper four-colourings `h` of the base
+   and `L = min |B(h)|`, the criterion is `2L > (circle count)`. Every proper colouring of a larger base
+   **restricts** to a proper colouring of the smaller one, so growing the base takes the minimum over a
+   **subset**: `L` is monotone **non-decreasing**. The circle count is fixed, because every circle point is
+   inside the bound — `√n / (2n/√(4n−1)) = √(1 − 1/(4n)) < 1` for every `n`. And at the crude level a
+   supergraph of a non-four-colourable graph is still non-four-colourable, so growth can never destroy a
+   refusal. **Growing the base past the endpoint bound moves the criterion strictly the right way and can
+   never move it back. It costs solver time and nothing else.**
+
+**A corollary of that same ratio, which explains every low degree in this file.** The diagonal circle sits at
+`√(1 − 1/(4n))` of the endpoint-bound radius — **93.5%** at `n = 2`, **96.8%** at `n = 4`, **99.2%** at
+`n = 16`. **The circle is essentially ON the arena boundary in every member of the family, by construction.**
+Low circle-point degree at the bound is therefore a property of the family, not a defect of any base.
+
+### Has the family ever used the lever?
+
+| object | its endpoint bound | what its base actually occupies |
+|---|---|---|
+| **phase H2, `n = 16`** | 4.031621 | **exactly the bound.** `screen-h2/rho63.py` line 53 sets `Ln,Ld = 576*256,63`; the log reads `Lambda_parts(4.0316) = 25567`, matching `arena_meta.json`'s `n`. Reproduced with my own machinery: **25,567**. It did not grow past it |
+| **`[Parts2020a]`, the 509-vertex record** | 2.065591 | **past it, slightly.** His base is not a disk cut at all — it is a selection of 37 + 14 orbits, and its outermost orbit reaches **2.5243 = 1.222×** the bound |
+
+**Quantified, with the ambiguity stated rather than resolved away.** His tables give each orbit's *filling*
+but not *which* members are taken, so beyond-bound membership is a range, not a number:
+
+| side | vertices **certainly** beyond the bound | **possibly** beyond |
+|---|---|---|
+| L (374) | 0 | 6 |
+| **S (136)** | **12** | 21 |
+
+The certain 12 come from orbit `(0,2,4,6)`, which has **24** members of which 12 lie beyond the bound and
+**all 24 are present** — so no choice of members avoids them. The L-side orbit `(0,0,6,6)` is the outermost
+of all (2.5243) and is exactly half-filled (6 of 12) with exactly 12 of its members beyond, so nothing can
+be concluded about it from the table. *(This is the orbit `tools/typem.py`'s docstring already flags as
+sitting outside radius 2 and admitted only by his "falls … partially on a disk" clause; nobody had connected
+it to the endpoint bound.)*
+
+> **So: 12 of 509 vertices certainly, at most 27, and the outermost reaches 1.22× the bound. The lever
+> exists, the record touched it by a few percent, phase H2 did not touch it at all, and nobody has used it
+> deliberately.**
+
+**A defect in my own instrument, found while doing this.** My first pass read the orbit-fillings JSON's
+`degree` field as the orbit size and declared orbits full or partial from `filling ≥ degree`. **`degree` is
+the graph degree** — the centre's row is `degree 30, filling 1` — so the test was meaningless and produced
+fillings "exceeding" orbit sizes. Orbit sizes are now recomputed from the labels under the order-24 group,
+which is what the corrected table above rests on.
+
+### The growth curve for `n = 2`, in points and in realised degree
+
+Generated base (index 256), four-conjugate cut, arena ≈ 2× base:
+
+| radius | `R²` | base points | arena | circle-point unit degree, of 60 |
+|---|---|---|---|---|
+| **1.511858** (the bound) | 16/7 | **16,309** | 32,618 | **2** |
+| 1.7 | 2.89 | 41,953 | 83,906 | 4–6 |
+| 2.0 | 4 | 150,769 | 301,538 | 8–10 |
+| 2.25 | 81/16 | 387,109 | 774,218 | 12–16 |
+| **2.5** | 25/4 | **898,069** | 1,796,138 | **60** |
+
+The saturation at 2.5 is derivable, not lucky: `|q + s| ≤ √2 + 1 = 2.4142` at **every** embedding, since
+`|q|² = 2` and `|s|² = 1` are rational and so are their own conjugates. **Radius `√2 + 1` is exactly where
+the degree becomes free**, and it costs 55× the bound's point count.
+
+**The useful row is 1.7:** 41,953 base points and circle degree 4–6, which is the record's and phase H2's
+5–7, at **1.64×** phase H2's arena. That is what matching their realised connectivity costs.
+
+---
+
+## §5c — The shape as a device for making the disk cut cheap, and the trade it hides
+
+The product owner's proposed mechanism, tested rather than adopted, and **confirmed**.
+
+Parts's shape is exactly the condition that puts `|p|²` in `ℚ(√33)`, which has **two** real embeddings; a
+shape-free `|p|²` lands in `K`, which has **four**. So the shape is not a notational habit — **it is a device
+that halves the number of conjugate conditions the disk cut imposes.**
+
+| object | conjugate conditions | degree, first embedding only | degree, all | cost of the rest |
+|---|---|---|---|---|
+| record, `n = 4` | 2 | 13.80 | 6.20 | **2.23×** |
+| phase H2, `n = 16` | 2 | 13.80 | 6.20 | **2.23×** |
+| this phase, `n = 2` | **4** | 26.00 | **2.00** | **13.00×** |
+
+**Control: is the cost per-condition, or one all-or-nothing effect?** Imposing the embeddings one at a time
+on the `n = 2` object, averaged over every subset of that size containing the identity embedding:
+
+| conditions imposed | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|
+| mean circle-point degree | 26.00 | 10.40 | 4.00 | 2.00 |
+| step factor | — | **2.50×** | **2.60×** | **2.00×** |
+
+A clean geometric decay, with the two-embedding objects' single extra condition (2.23×) sitting inside the
+same range. **Each conjugate condition beyond the first costs about 2.0–2.6× in realised connectivity, and
+they act independently.**
+
+> **The trade, stated exactly. Dropping the shape buys 2× in nominal counts — 60 circle points against 30,
+> 60 unit vectors against 30 — and pays two extra conjugate conditions, ≈ 2.3² ≈ 5.3×, in realised
+> connectivity at fixed radius-relative-to-bound. Net: about 2.6× worse.** Predicted absolute degree
+> `6.20 × 2 / 5.3 = 2.34` against measured **2.00** — the mechanism is the dominant effect, not the whole of
+> it. *(Measured realised fraction: 20.7% for the record, 3.3% here.)*
+
+**An overclaim of mine, corrected here rather than quietly.** My measurement script printed that the
+first-embedding degree *"matches the Euclidean prediction"*. It does not: 13.80 against 16.8 at `n = 4`,
+26.00 against 34.9 at `n = 2`, 13.80 against 15.9 at `n = 16` — low by 13–25%, because the unit vectors are
+not uniformly distributed in direction. What is true, and is what the mechanism rests on, is that the
+first-embedding count **is** the purely Euclidean quantity and the *ratio* to the all-embedding count is the
+conjugate cost. The ratio is the measured thing; the Euclidean absolute value is not.
+
+---
+
+## §5d — A conflation inside phase H2's own record
+
+`screen-h2/rho63.log` reports, under the heading `FREE CIRCLE`:
+
+```
+[0s] FREE CIRCLE: 30 pts on |p|^2=16 ; unit degree in r=5 cut: min 30 max 30 (Cayley predicts 30)
+```
+
+**That is measured in a radius-5 cut. The arena is built at 4.0316**, two lines later. Measured directly on
+the shipped artifact — counting base-side unit edges of the 30 circle-point indices in
+`screen-h2/arena_edges.txt` — the circle points' degree in the object that was actually solved is
+**`{5: 6, 6: 12, 7: 12}`**, matching my independent recomputation exactly. *(Method note: that edge file
+lists each edge once, and the shared centre reads 60 because 30 of its listed neighbours are cross edges to
+the copy's unit vectors, which are emitted as base-index pairs since the copy centre is the same vertex. The
+circle points' cross edges go to copy indices and are not counted here.)*
+
+The free-circle theorem is not wrong and the arena is not wrong. **The degree 30 is a property of a radius
+the arena does not use**, and it has been carried in the record beside the arena's own numbers.
+
+**Propagation audit, and it did propagate.** `CLAUDE.md` is **clean** — ledger row 64, G52 and G53 use 30
+only as a *count* (30 circle points, 30 unit vectors), never as a degree. The phase-H2 plan files are not:
+the number was read as a property of the object at **ten** sites across four files, including three that are
+load-bearing — gate A's row in the screening table that selected `n = 16`; the advisor's card PH2-2/PH2-3
+contrast *"degree 30 against 1"* that argued the circle count is not the discriminator; and the ranking row
+that demoted the briefed rotation. **Every comparison's direction survives** (5–7 still dominates 1); only
+the magnitude was the module's rather than the arena's. All ten are corrected in place, each now naming
+which quantity it means and giving the arena-as-built value beside the module one.
+
+**Measured on phase H2's shipped edge list, for the corrections to cite:** of its 25,567 base vertices,
+**8,208 (32.1%)** have the full degree 30, the mean is **21.29**, and the 30 circle points have **5, 6 or
+7**. *(Its own solver record said "every interior point has degree exactly 30" — true, with "interior"
+doing quiet work for the two thirds of the base that are not.)* It is the
+same failure this file's §5a describes — a quantity measured under one constraint and read under another —
+and it is why the product owner's instinct to distrust a radius-dependent number was right.
+
+---
+
 ## §6 — Predictions scored
 
 ### The product owner's, from `plans/M63-phaseH3-plan.md` §0
@@ -428,17 +597,20 @@ run is `implA.py` at 20 s and `orbits48.py` at about 4 minutes.
    shells in full (60 unit vectors, 60 circle points).** The arena is base plus rotated copy sharing the
    centre, so about **32,600** vertices — smaller than phase H2's 51,133, and `32.7×` Parts's own 499 at the
    same radius. That is the object the phase should cost.
-2. **Settle the in-arena degree before the cross-edge enumeration, not after.** Two unit neighbours per
-   circle point inside the endpoint bound, against the record's 5–7 of 30, is the number most likely to
-   decide the phase, and it is cheap to re-ask at any radius. Report the **pair** (point count, in-arena
-   degree) beside every candidate radius, because they move in opposite directions: radius 2 gives 8–10 of
-   60, radius 2.5 gives 60 of 60 at 56× the points.
+2. **Build past the endpoint bound — it is a free design lever and this family has barely used it.** §5b
+   derives that the bound governs cross-edge endpoints only, that `L` in G53's counting compulsion is
+   monotone non-decreasing under base growth, and that nothing else bounds the base. Phase H2 stopped
+   exactly at the bound; the record went past it by 12 of 509 vertices. **Radius 1.7 buys the record's own
+   realised connectivity (degree 4–6 against 5–7) for 41,953 base points, an arena 1.64× phase H2's.**
+   Report the **pair** (point count, realised degree) beside every candidate radius.
 3. **Do not use the index-4 or index-16 closed modules as bases.** They are denser and group-closed and
    they are not generated by their unit vectors, so the extra points carry no edge from the origin. They
    remain interesting as objects — nobody has built anything on the index-4 one — but not as bases.
-4. **Re-ask phase H2's `n = 16` object under the order-48 group** if its base is ever taken shape-free; its
+4. **Correct phase H2's record**: its `FREE CIRCLE` degree of 30 is measured in a radius-5 cut, while its
+   arena is the radius-4.0316 cut where the same degree is 5–7 (§5d, measured on its own shipped artifact).
+5. **Re-ask phase H2's `n = 16` object under the order-48 group** if its base is ever taken shape-free; its
    orbit-level selection was computed at order 24, which is the right group only for Parts's shape.
-5. **When cross-edge counts are reported, say which quantity.** `CLAUDE.md` G52's *"the record's share is
+6. **When cross-edge counts are reported, say which quantity.** `CLAUDE.md` G52's *"the record's share is
    0 of 30"* and *"`ρ₆₃`'s is 24 of 54"* are shares of the **monochromatic** cross edges under the residue
    colouring, not raw counts of cross edges by kind. Nothing in this file reports either; the distinction is
    recorded here so the next instrument does not conflate them.
