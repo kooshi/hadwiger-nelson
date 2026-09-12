@@ -423,6 +423,36 @@ visible to a reader exactly as intended.
 the solver. Removing the dominant one simply promoted the next one of the same shape, and the next one was
 in a diagnostic nobody would profile.
 
+## 7d. Two predictions the closed record settles — and one it provably cannot
+
+**P-D5 — CONFIRMED as registered.** Registered at 0.50 as *"`|{M}|` equals 1,092 under none of the three
+conventions"*, falsifier *"it equals 1,092 under one"*, pending all milestone because the quotient
+conventions needed the level closed. The level closed tonight, so the audit ran
+(`parts_audit.canonical_counts` on `data/m62/m63-D1b-A412-rung1.json`, no solver):
+
+| convention | group order | \|{M}\| | `closed_under` |
+|---|---|---|---|
+| Stab(reduced part), companion free — **his** | 12 | **2,309** | True |
+| Stab(reduced) ∩ Stab(companion) | 1 | **26,724** | True |
+| the whole order-24 base group | 12 | **2,309** | True |
+
+None is 1,092; the falsifier did not fire. All three read `closed_under: True` with reading *"orbits
+contained in the level"*, so the function's own caveat — that a count taken where closure fails counts
+orbits merely *meeting* the level — does not apply.
+
+**P8-revised — NOT SCORABLE AS REGISTERED, which is different from "not met".** It predicted 800–1,600
+correction sets and the closed run has **530**. But the correction-set count is a property of the **search
+path**, not of the graph: the two engines agree on the bound **151 times in 151** and on the chosen set
+only **6 times in 151**, so they ask different candidates and harvest different families. 530 against
+800–1,600 may be entirely about the engine. Recording it as falsified would put a false finding about the
+mathematics into the record. It is re-registerable against the new engine cheaply now that a close costs
+44 s.
+
+**Why one is scorable and the other is not, stated so the distinction is principled rather than
+convenient:** the level is a property of the **problem** — the completeness invariant fixes which minima
+exist, and the engine changes only which is found when — while the harvest is a property of the **path**.
+That is the same argument that makes the enumerate-only integration safe (§7b), used a second time.
+
 ## 8. Not done, and what each would take
 
 - **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
