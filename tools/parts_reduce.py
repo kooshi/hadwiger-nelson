@@ -84,6 +84,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import parts_hitset as HS
 import parts_repro as P
 import parts_report as R
 import parts_stage as PS
@@ -432,7 +433,8 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                            "budgets": {"wall_ask": wall_ask, "max_minima": max_minima,
                                        "phase2_wall": phase2_wall, "target": target,
                                        "require_any": _cur_ra,
-                                       "slice_conflicts": slice_conflicts},
+                                       "slice_conflicts": slice_conflicts,
+                                       "hitset_engine": "incremental, enumeration phase only"},
                            "machine": os.uname().nodename,
                            "git_commit": R._git("rev-parse", "HEAD", default="unknown")})
     orc = Oracle(stage, wall=wall_ask, slice_conflicts=slice_conflicts)
@@ -508,25 +510,49 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
     truncated_wall = False
     target_lb = None                   # set only by the target break, and it IS the lower bound
     last_tick, last_ckpt = time.time(), time.time()
+    engine = None                      # the enumeration-phase hitting-set engine; see below
     while True:
         state.iteration += 1
         it = state.iteration
-        w = WCNF()
-        for c in state.corr:
-            w.append([a + 1 for a in c])                  # kept-set must hit every correction set
-        for b in state.blocked:
-            w.append([-(a + 1) for a in b])               # exclude this exact optimum / undecided
-        for a in allA:
-            w.append([-(a + 1)], weight=weight[a])        # minimise total kept weight
-        if require_any:
-            w.append([a + 1 for a in require_any])        # keep at least one of these (see above)
-        with RC2(w) as rc:
-            model = rc.compute()
-        if model is None:
+        # ENUMERATE-ONLY (M63; `plans/M63-incremental-hitset.md` §7b). Once an optimum exists the
+        # loop is enumerating a level, and there the per-iteration rebuild IS the cost: `Y` is
+        # frozen while `E` grows, and four fifths of the rebuild is Python assembling a formula
+        # whose size grows with `E` -- 0.637 s of a 0.791 s solve at 19,572 minima, against 0.061 s
+        # actually solving. An engine that keeps its solver state makes that flat: measured 19,045
+        # bounds in 3.5 s against hours, with the bound sequence identical.
+        #
+        # **Why only here.** A different engine returns a different minimum-weight selection of the
+        # SAME weight, so it changes which candidate is asked next. In this phase that is provably
+        # harmless, because the iteration count is the size of the level -- a property of the
+        # problem, not of the engine (measured: ~19,400 of ~19,300 iterations end in a new minimum
+        # and ~55 in a new correction set). Before an optimum exists no such argument is available,
+        # and no engine measured beats the rebuild there anyway, so that path is untouched.
+        if engine is None and state.w_star is not None:
+            engine = HS.IncrementalHittingSet(weight, corr=state.corr, blocked=state.blocked,
+                                              require_any=require_any)
+        if engine is not None:
+            o = engine.optimum()
+            hw = None if o is None else (list(o.kept), o.weight)
+        else:
+            w = WCNF()
+            for c in state.corr:
+                w.append([a + 1 for a in c])              # kept-set must hit every correction set
+            for b in state.blocked:
+                w.append([-(a + 1) for a in b])           # exclude this exact optimum / undecided
+            for a in allA:
+                w.append([-(a + 1)], weight=weight[a])    # minimise total kept weight
+            if require_any:
+                w.append([a + 1 for a in require_any])    # keep at least one of these (see above)
+            with RC2(w) as rc:
+                model = rc.compute()
+            hw = None
+            if model is not None:
+                _h = sorted(a for a in allA if model[a] > 0)
+                hw = (_h, sum(weight[a] for a in _h))
+        if hw is None:
             log(f"  level exhausted after {len(state.minima)} minima  [{time.time()-t0:.0f}s]")
             break
-        h = sorted(a for a in allA if model[a] > 0)
-        wh = sum(weight[a] for a in h)
+        h, wh = hw
         if time.time() - last_tick > tick:
             last_tick = time.time()
             s = orc.stats()
@@ -557,6 +583,8 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                 log(f"  OPTIMUM FOUND: weight {state.w_star} (kept {len(h)} atoms) at iteration {it}"
                     f"  [{time.time()-t0:.0f}s]")
             state.minima.append(h)
+            if engine is not None:
+                engine.block(h)
             if len(state.minima) % 5 == 0 or len(state.minima) == 1:
                 log(f"    minima {len(state.minima)}  |A| "
                     f"{len(set().union(*(set(x) for x in state.minima)))} atoms  "
@@ -567,11 +595,15 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
         elif v == "sat":
             c, minimal = minimal_correction(orc, allA, kept_from_model(orc, mdl), log=log, tick=tick)
             state.corr.append(c)
+            if engine is not None:
+                engine.add_correction(c)
         else:
             # An undecided candidate is neither a minimum nor a correction set. Blocking it keeps
             # the loop going, but it may remove an unrecorded R-true selection of weight w*, so the
             # completeness invariant is LOST and the count method becomes bounded-below (§O3).
             state.undecided.append(h)
+            if engine is not None:
+                engine.block(h)          # `state.blocked` unions minima AND undecided: third site
             log(f"    UNDECIDED candidate at weight {wh} (ask hit the budget): blocked and "
                 f"recorded; the level is now bounded-below")
         if checkpoint and time.time() - last_ckpt > 30.0:

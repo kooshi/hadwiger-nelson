@@ -204,6 +204,44 @@ must be re-derived before anyone spends a week on it.
 and that price rests entirely on this law. A law that has only ever been checked against the middle of
 the one run it was fitted to deserves one out-of-sample test, and the ruling has handed us one for free.
 
+## 5c. The registered prediction was forfeited — scored as a partial, and replaced by a better test
+
+**The cost, stated plainly.** The product owner stopped both running jobs so integration could proceed
+(Kooshi's rule: never keep an exponentially longer task running when something will catch up in seconds
+— and the ruling to wait was circular, since the jobs were blocking the work that replaces them). D1b
+therefore never reaches the closure the §5b prediction was registered against. **That test is forfeited
+and cannot be recovered**, and it was a good instrument.
+
+**The partial the registered form permits.** D1b stopped at iteration 20,932 (20,742 minima, 14,711 s).
+The law was fitted at i = 294 and i = 19,602, so the kill point is an **extrapolation beyond its fitted
+range**: it predicts 14,854 s against 14,711 s observed, **+1.0%**, inside the 5% falsifier. That is a
+real check and it is *not* the registered one, which required the level to close.
+
+**The replacement, which is stronger than what was lost.** The forfeited test measured the *integral* at
+one point. The law's *derivative* — cost per iteration as a function of level size — is measurable
+directly from a checkpoint at as many points as one likes, and now on a **quiet** box, which the original
+run never was. Measured at six prefixes of D1b's own family:
+
+| \|E\| | 0 | 2,500 | 5,000 | 10,000 | 15,000 | 20,733 |
+|---|---|---|---|---|---|---|
+| cost of one solve (s, CPU) | 0.010 | 0.093 | 0.218 | 0.364 | 0.600 | 0.862 |
+
+Linear in |E| at **4.22e-5 s per blocked clause**, so the integral is quadratic *by construction* rather
+than by curve-fitting — the shape is now established independently of the run that was stopped.
+
+**And it corrects a number I published.** Integrating the measured derivative gives a quadratic
+coefficient of **2.11e-5 (CPU, quiet box)** against the **3.36e-5 (wall, six heavy jobs)** fitted from the
+run — a **1.59× wall-and-contention factor**. So §7's "about four days" is a *contended-wall* figure; the
+quiet-CPU equivalent is **about 2.5 days**. The contrast that matters (days against minutes) is untouched,
+but the number now carries its provenance, and the honest form quotes the coefficient with the conditions
+it was measured under.
+
+**Does the quadratic branch still need a live validation?** No, and this is why: it is the *old* engine's
+cost curve, which becomes historical at integration, and it is now pinned by six direct measurements of
+its derivative rather than by one endpoint. Anyone reasoning about pre-integration runs — the stored
+records, the two abandoned joint runs — should use the derivative table above and the 1.59× factor, not a
+re-run.
+
 ## 6. What is NOT the lever — measured and rejected
 
 On C4a's recorded family, same instance, optimum 503 every time:
@@ -237,7 +275,8 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   was — the expense is P-G7"*, and that P-G7 is **"unpriced until phase F's ladder lands; do not start it
   on a guess."** So: **manufacturing a first accumulator is quadratic in the level size under the
   incumbent engine and linear under this one.** At D1b's current level that is 3.8 h against roughly two
-  minutes of oracle; at |E| = 10^5 it is about **four days against about eleven minutes**. A targeted run
+  minutes of oracle; at |E| = 10^5 it is about **four days against about eleven minutes** — where the
+  four days is a *contended-wall* figure and the quiet-CPU equivalent is about 2.5 days (§5c). A targeted run
   that *refutes* exits cheaply anyway, and one that *succeeds* still enumerates the level at `w*` — so the
   success branch, the one that yields a record candidate, pays the quadratic too. (I had hedged that
   targeted runs might gain nothing; Poros checked the phase-G plan and the hedge was wrong.)
@@ -290,6 +329,34 @@ regenerate it.
 
 **Definition of done:** `regenerated-identical`, the enumeration phase measurably faster on the same
 stage, the engine visible in the launch record, and §5b's registered prediction scored.
+
+### 7b.1 What the gate actually did — it fired, and the firing was not the integration
+
+**Run 1, the M6B403 stage: `regenerated-differs:bound`.** The level was identical as a set (360 against
+360, none only in either), `M_vertices` 375, `A`, `A_atoms`, `verdict` and `stage_fingerprint` all equal,
+and the rendered bound string character-identical. **Only the `bound` dict differed, and only by the
+PRESENCE of two keys**: the new record carries `target: null` and `restricted: null`, which the stored one
+lacks. Proved to predate this work, three ways rather than asserted:
+
+1. `target` and `restricted` are fields of the `Bound` dataclass in `parts_report.py`, added by phase D —
+   so **every** run today emits them, integrated or not;
+2. the integration diff touches neither `Bound` nor `finish()` (checked against the diff, not by memory);
+3. every stored record written **after** phase D carries both keys (the two D1a rung-3 records) and every
+   record written **before** it carries neither (M6B403, L451, S166, most probes).
+
+So the gate fired on the stored record's **age**. The response was *not* to relax the comparator — that is
+the one move that would make the gate worthless — but to re-run it against a record whose schema matches.
+
+**Run 2, the D1a order-3 stage: `regenerated-identical`.** All eight compared fields equal, the full
+82-member level identical as a set, and the harvest differing by two sets (195 against 197), which the
+comparator reports and explicitly does not gate. This stage is the better acceptance target for a second
+reason discovered only by running it: **it is rung 3, so its atoms are orbits of weight 3** and it
+exercises the *weighted* path of the integrated engine, which the unit-weight M6B403 stage never touches.
+
+**Left for someone else's call:** the M6B403 record is a schema-2 record missing two fields that schema-2
+records now carry, so any future regeneration of it fails the comparator for reasons having nothing to do
+with the run. Regenerating it (`m63-M6B403-reduction.v2.json` beside it, never overwriting) would retire a
+gate failure that will otherwise be rediscovered by whoever next touches that stage.
 
 ## 8. Not done, and what each would take
 
