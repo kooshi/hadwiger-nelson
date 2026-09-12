@@ -692,6 +692,64 @@ def self_test(quick=False) -> bool:
     found_a = set(T.cross_edges_rho15_fast([(Z, Z), u_a, v_a]))
     check(f"and `cross_edges_rho15_fast` now returns that edge ({sorted(found_a)})",
           (1, 2) in found_a and (2, 1) in found_a)
+
+    _hdr("§6b  the unit-edge law's PROPOSAL gate: headroom measured, not assumed")
+    print("      `typem.unit_edges_fast` lets a float decide which pairs are ever tested exactly: a")
+    print("      KD-tree query at radius 1 + slack proposes, and K disposes. The two directions are")
+    print("      NOT symmetric. Too wide only costs time. Too TIGHT silently DROPS unit pairs — an")
+    print("      easier graph, hence a colouring, hence a reading of 'sound elimination'. Nothing")
+    print("      measured this gate before 2026-09-12: it was correct by luck, not by test.")
+    print("      What is asserted is the HEADROOM, not 'zero missed today'. A count of zero on the")
+    print("      bases whose answer we already know says nothing about the next base; the gate is")
+    print("      safe only while it stays orders above the worst float deviation of a TRUE pair.")
+    # SHIP is READ FROM THE FUNCTION, never restated here: a headroom check that asserts against a
+    # constant of its own would keep certifying 1e-7 after someone changed the gate to something
+    # lossy, which is a check reporting about code that is not the code that ships.
+    import inspect as _inspect
+    SHIP = _inspect.signature(T.unit_edges_fast).parameters["slack"].default
+    WIDE, FLOOR = max(1e-3, SHIP * 1e4), 1000.0   # WIDE is a widening whatever the gate becomes
+    check(f"the shipped proposal gate is read from `unit_edges_fast` itself, not restated: "
+          f"slack = {SHIP:.1e}", isinstance(SHIP, float) and SHIP > 0)
+    moser_pts = None
+    for spec, oracle in (("moser:2.05", True), ("parts:2", not quick), ("parts:2.44", False)):
+        _, _, bp, _ = build_base(spec)
+        if spec == "moser:2.05":
+            moser_pts = bp
+        S = {tuple(sorted(e)) for e in T.unit_edges_fast(bp)[0]}
+        W = {tuple(sorted(e)) for e in T.unit_edges_fast(bp, slack=WIDE)[0]}
+        check(f"{spec} ({len(bp)} pts): widening the gate {WIDE / SHIP:,.0f}× proposes no unit pair "
+              f"the shipped gate missed — shipped {len(S)}, wide {len(W)}, MISSED {len(W - S)}",
+              S == W)
+        dev = max((abs(((kfloat(bp[i][0]) - kfloat(bp[j][0])) ** 2 +
+                        (kfloat(bp[i][1]) - kfloat(bp[j][1])) ** 2) ** 0.5 - 1.0) for i, j in W),
+                  default=0.0)
+        ratio = SHIP / dev if dev > 0.0 else float("inf")
+        rs = f"{ratio:,.0f}" if ratio >= 10 else f"{ratio:.2f}"   # never round a failure up to "1"
+        check(f"  the worst true-edge float deviation is {dev:.3e}, so the gate clears it by "
+              f"{rs}× — the floor this check enforces is {FLOOR:,.0f}×",
+              dev > 0.0 and SHIP >= FLOOR * dev)
+        if oracle:
+            check(f"  the exact O(n²) builder, which shares no code with the KD-tree, agrees "
+                  f"({len(S)} pairs)", S == {tuple(sorted(e)) for e in T.unit_edges(bp)})
+        else:
+            print(f"       (O(n²) oracle skipped here — {len(bp)}² exact tests; the widened gate "
+                  f"and the headroom floor above are what carry this base)")
+
+    # This control's own failure mode, shown reachable, at two scales. The measurement above is
+    # one-sided: no NON-edge comes within ~1e-2 of distance 1, so widening the gate is free. But
+    # true unit pairs DO spread over ~1e-15 of float error, so a gate inside that band drops some
+    # of them — and that band is exactly what the headroom floor is protecting. The fine plant
+    # matters more than the gross one: a control that only fires when everything breaks has not
+    # been shown to notice the realistic failure, which is a handful of edges quietly missing.
+    good = T.unit_edges_fast(moser_pts)[0]
+    fine = T.unit_edges_fast(moser_pts, slack=4e-16)[0]
+    gross = T.unit_edges_fast(moser_pts, slack=-1e-9)[0]
+    check(f"PLANTED, fine: a gate of 1 + 4e-16 — still WIDER than the unit distance — already drops "
+          f"{len(good) - len(fine)} of {len(good)} unit pairs on moser:2.05, so this section "
+          f"notices a partial loss and not only a wholesale one",
+          0 < len(good) - len(fine) < len(good) // 10)
+    check(f"PLANTED, gross: a gate tightened below 1 drops {len(good) - len(gross)} of {len(good)}, "
+          f"so the wiring is live end to end", len(gross) < len(fine) < len(good))
     pts, _ = parts_lattice_exact(Fr(2))
 
     _hdr("§7  rotation classes are counted up to the base's OWN symmetries, verified not assumed")

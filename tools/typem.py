@@ -539,12 +539,24 @@ def build_seam_base(radius: float, span: int = 5):
 # ====================================================================== fast exact edge building
 # Float PROPOSE, exact DISPOSE -- the house pattern. O(n^2) Fraction arithmetic is unaffordable at
 # 7k points; a KD-tree proposes and K decides. No float ever reaches a verdict.
-def unit_edges_fast(pts):
+def unit_edges_fast(pts, slack: float = 1e-7):
+    """Exact unit pairs of `pts`: a KD-tree proposes, K disposes. No float reaches a verdict.
+
+    `slack` sets the float query radius to 1 + slack. It is a PROPOSAL gate, and the two directions
+    are not symmetric. Too WIDE only costs time, because every proposed pair is then tested exactly.
+    Too TIGHT silently DROPS unit pairs -- and a missing edge gives an easier graph, which gives a
+    colouring, which reads as a sound elimination. So this is a float choosing which pairs are ever
+    looked at, and it is the one parameter here whose error is invisible and flattering.
+
+    It is therefore a parameter rather than a literal: `typem_exact.py --self-test` section 6b
+    MEASURES the headroom on every base in use (the worst float deviation of a true unit pair
+    against this gate) instead of assuming it, and plants a tightened gate to prove the check can
+    still fire. Pass a different value only to exercise that control."""
     from scipy.spatial import cKDTree
     import numpy as np
     F = np.array([[kfloat(p[0]), kfloat(p[1])] for p in pts])
     tree = cKDTree(F)
-    cand = tree.query_pairs(1.0 + 1e-7, output_type='ndarray')
+    cand = tree.query_pairs(1.0 + slack, output_type='ndarray')
     keep = []
     for i, j in cand:
         i, j = int(i), int(j)
