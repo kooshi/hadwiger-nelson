@@ -178,6 +178,32 @@ A different argmin changes *which* minimum is found when, not *how many there ar
 measurement does carry to the phase — to within the 0.3% of iterations that harvest instead. In the
 optimum-finding phase no such argument is available, and none is claimed.
 
+## 5b. A registered prediction, made before its outcome exists
+
+The product owner has ruled that the two running jobs finish under the incumbent engine rather than
+being stopped for unintegrated code. That makes D1b a **held-out test of the law in §2**, on a total the
+law was not fitted to — every validation above is at points *inside* the run.
+
+Registered 2026-09-11 at 23:45, with D1b at iteration 20,663 / 20,473 minima / 3.99 h (the law predicts
+14,477 s against 14,363 s observed, **+0.8%**):
+
+| if the level closes at iteration | the law predicts |
+|---|---|
+| 21,000 | 14,949 s = 4.15 h |
+| 22,000 | 16,395 s = 4.55 h |
+| 24,000 | 19,488 s = 5.41 h |
+| 26,000 | 22,850 s = 6.35 h |
+| 30,000 | 30,381 s = 8.44 h |
+
+**Falsifier:** the law is wrong if the observed total misses its prediction at the realised iteration
+count by more than **5%**. It holds three held-out interior points to about 1%, so 5% is loose; a miss
+past that means the quadratic is the wrong shape near the end of a level and the phase-G price in §7
+must be re-derived before anyone spends a week on it.
+
+**Why this is worth a line rather than a shrug:** §7 prices a step the phase-G plan calls unpriceable,
+and that price rests entirely on this law. A law that has only ever been checked against the middle of
+the one run it was fitted to deserves one out-of-sample test, and the ruling has handed us one for free.
+
 ## 6. What is NOT the lever — measured and rejected
 
 On C4a's recorded family, same instance, optimum 503 every time:
