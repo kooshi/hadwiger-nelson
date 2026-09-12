@@ -216,7 +216,7 @@ question: may-a-capped-iteration-propose-or-only-report
     one direction and a propagating label sufficient
   rank: 3
 
-## Cards 7–29 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`), its successor
+## Cards 7–30 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`), its successor
 (`a3389460bed228dfe`) and the S engineer (`aa10420df4950eda9`), 2026-09-11
 
 *Prompted by the product owner naming the map's over-reading risk before the sweep runs. Card 1 argued
@@ -1422,6 +1422,63 @@ but: **no single orbit frees a necessary atom; whether any widens a non-singleto
 unmeasured, and that is the cheaper of the two routes.** The first half is measured; the second is
 what nobody has looked at, and leaving it implicit is how it gets read later as the stronger claim.
 
+### Clause 2(b) is not met — and his own four orbits reach 374 in our pipeline
+
+*The successor ran the frozen rule five iterations from `A403`: three iterations ranking 29
+single-orbit candidates and evaluating the top three each, all refusing; then the frozen escalation
+fired and `many_then_trim` proposed **48 vertices across six orbits**, which also refused, bound
+closed, 139 s. **Clause 2(b) is reported as not met.** Then the measurement that separates two
+readings: his own four orbits (30 vertices) through the **same** `sweep_candidate` give
+**`LB 373 = w* 373`**.*
+
+**Three consequences.** (i) Our state, companion and stage reproduce his recorded step exactly, so
+**every negative measured on this half is about expansion, not about our pipeline** — including all
+the zeros. (ii) The rule's failure is *localised*: it had the material and did not assemble it.
+(iii) **Card 25's hedge is closed by measurement** — a positive provably exists at this state, so if
+the held-out single-orbit map is signal-free the reading is unambiguously the strong one: *singles
+are inert even where a four-set works*, a fact about singles rather than about a barren state.
+
+question: ordering-cap-or-trim
+  evidence: **forced.** Adding vertices cannot raise `w*`; his 30 vertices give `w* = 373`;
+    **therefore any superset of those 30 succeeds**, whatever else it carries. The rule's 48 vertices
+    are *not* a superset — they omit `(0,0,0,4)` and `(0,0,6,6)` — and failed. So the failure is pure
+    **omission**: the material the rule chose was not harmful but insufficient. All four of his orbits
+    were in the ranked menu; two were proposed and two were not; by his degree order the omitted pair
+    sat at ranks 6/7 and 33/34 of 49 in the earlier measurement at this state (M3, a
+    differently-computed menu, so the ranks are indicative). **And `many_then_trim` trims new vertices
+    to final degree ≥ 3, while his `(0,0,0,4)` contributes only 3 of its 6 vertices and M3 found only
+    3 of its 6 absent vertices at degree ≥ 4** — low-degree new vertices are exactly what a trim
+    removes.
+  expected: a better ordering is what the rule needed
+  ask: is the binding constraint the ordering, the cap of six, or the trim — and does the trim remove
+    vertices his own move needs?
+  if the trim: `many_then_trim` can **never** reproduce his move at any cap, and his own second
+    published strategy cannot express his own recorded solution
+  if the cap: the fix is a bigger knob rather than a better ordering, and the report should say the
+    ranking was never the binding constraint
+  if the ordering: name one that puts his four in the top six, given that his own does not
+  answered by: run — apply the trim step to his own 30 vertices and report what survives; seconds, no
+    solver, and it touches nothing frozen, being a diagnostic on a published move
+  cost: seconds
+  hunch: the trim, and the cap second — both ahead of the ordering
+  falsifier: his 30 vertices passing the trim unchanged
+  rank: 30
+
+**The inversion this forces on FS-35.** Its re-aim dismissed his stall escape — *"increasing the
+number of new vertices introduced in the expansion stage"* — as *"a knob and not a criterion"*. Right
+as a complaint about it being a *measure*; wrong as a dismissal. **Under monotonicity, over-proposing
+can never be wrong on correctness, only on cost — so the knob is the mechanism that works and the
+ranking is the luxury.** His §5.11 ceiling of "several tens of redundant vertices" is the budget that
+made the knob unusable for him, and we are already twice past it. The rule to write may simply be
+*propose as much as you can afford to reduce; rank only to choose under budget*.
+
+**A run worth stating as one finding rather than three observations: no published device of his
+selects his own recorded move.** Not the §5.6 priority sentence, not the reserve degree order (both
+M3), and not the degree order at the **set-valued** rung — the successor's own correction, since
+`many_then_trim` took the top six by his admission degree and his four were not among them. That is a
+finding about the paper, and it is the strongest available justification for why a reproduction had
+to be scored by outcome rather than by whether a rule ranks his move first.
+
 **A representation note worth carrying past this phase.** The shared centre and the two-sided index
 space have now produced three faults in three agents within one afternoon: my cross-edge control
 reading 54 against the record's 18 (base relation instead of the stage's induced edges); the S
@@ -1485,6 +1542,107 @@ hunch: his-successful-moves-are-sets-not-singletons
   falsifier: any single orbit lowering `|M|` on either half
   registered: 2026-09-11
   status: open
+
+---
+
+hunch: the-trim-removes-what-his-move-needs
+  claim: `many_then_trim`'s trim to final degree ≥ 3 strips vertices his own move requires, so that
+    strategy cannot express his recorded solution at any cap — his `(0,0,0,4)` contributes only 3 of
+    6 vertices and M3 found only 3 of its 6 absent vertices at degree ≥ 4
+  basis: derived
+  falsifier: his 30 vertices passing the trim unchanged
+  registered: 2026-09-11
+  status: killed (by: the successor's trim test, `data/m62/m63-trim-test.json` — **all 30 survive, in
+    0 passes**, at degrees 4 (×15), 6 (×9) and 8 (×6) against a threshold of 3; not close).
+    **This is the clean kind of death, unlike card 28's:** the test was well specified in advance and
+    it fired exactly. Both examples sit in this one phase and are more instructive together than
+    either alone — see the handover
+
+---
+
+## Handover — what the next Poros inherits
+
+*Written at the phase D close, 2026-09-11, at the successor's request and committed by it. Read
+`plans/POROS-2026-09-11-m63-phaseC.md` first if you have not: my predecessor's nine cards are the
+ground this phase stood on.*
+
+### The state in five lines
+
+**Clause 2(b) is not met and is reported as not met.** The frozen rule ran five iterations from
+`A403`, ranked 29 single-orbit candidates, escalated to `many_then_trim` at 48 vertices over six
+orbits, and failed — while **his own four orbits (30 vertices) reach 374 through the same machinery**,
+`w* = 373`, zero undecided. So the apparatus is sound and every negative measured on this half is
+about expansion, not about the pipeline. The big sweep is a complete negative: **0 of 58 improve, 1 of
+58 grows**. The S half is **10 of 10 inert with bit-for-bit identical levels**. The greedy edge object
+is past the published 2,406 and is **a number, not a record**, until the kernel says otherwise.
+
+### Open, in this order
+
+1. **Card 29** — the ∀-form service test, 75 s solver-free, queued with its derivation. My criterion
+   was stated for singletons and does not extend to pairs by ∃; union may have been declined on my
+   error. **Must not touch the frozen rule.**
+2. **Card 26** — which frame is his rung-2 companion: 24 refusal asks, decisive, using card 17's
+   instrument. Two of the three causes for his 1868 are already ruled out.
+3. **The `A403` single-orbit map** — purpose now settled: it discriminates *inert at that state* from
+   *inert as such*, and **its reading is unambiguous** because a positive provably exists there.
+4. **The pair rung** — the S half's 112 (91 pairs-of-singles + 21 promoted, reported separately); the
+   L half's is not enumerable. The zeros make pairs the only place an answer could live.
+5. **The exact edge minimum** — a hitting set over a window of roughly 630 edges, against the greedy
+   object's certified count. Different deliverables, orders of magnitude apart in price.
+
+### The two things the successor asked be carried, and they are the right two
+
+**The omission/monotonicity argument, and what it implies for rule design.** Adding vertices cannot
+raise `w*`. So if a set of new material succeeds, *every superset of it succeeds*. The rule's failure
+was therefore **omission** — its choices were not harmful, they were incomplete — and
+**over-proposing can cost time but never correctness.** The rule to write is *propose as much as you
+can afford to reduce, and rank only to choose under budget*: **a bigger knob, not a better ranking.**
+This inverts FS-35's dismissal of his stall escape as "a knob and not a criterion" — right as a
+complaint about it being a measure, wrong as a dismissal — and his §5.11 ceiling of "several tens of
+redundant vertices" is precisely the budget that made the knob unusable for him and that we are twice
+past.
+
+**The discipline that caught it: point the instrument at the one labelled positive before believing
+anything it says about the negatives.** His four-orbit move is the only labelled positive anyone
+holds. Card 28 scored two rival statistics against it and killed both for 75 seconds *before* the
+expensive rung; card 30 ran his own move through the same evaluator and turned "the rule failed" into
+"the rule omitted", which is a different finding with a different fix.
+
+### Process, for whoever advises next
+
+- **Ask what is already on disk before anyone launches a probe.** Twice this phase the deciding
+  object was in the repository while a multi-core run was being aimed at the question: a
+  disk-enumeration function that existed, documented the exact comparison to make, and had never been
+  called; and his own published 376-vertex minimum, whose stabiliser killed a rung hypothesis in 30
+  seconds and saved a 45-core-minute sweep. It is now a project-level note beside G46.
+- **The cost-versus-meaning pattern, five instances.** A degenerate outcome inviting a softer
+  substitute; a target knob skipping exactly the quantity the secondary needed; a wall hit reading as
+  a negative; an empty restriction reverting to full enumeration; and a symmetry break narrowing a
+  published minimum into a conditional one. **Each was correct about cost and silently wrong about
+  meaning, and each was invisible in the number it produced.** Ask it of every shortcut.
+- **Falsifier quality is the thing to get right, and this phase has both examples.** Card 30's fired
+  exactly and killed a live hypothesis. Card 28's — *"at the median on both"* — **passed while the
+  hypothesis died**, because a statistic one random draw in five beats cannot discriminate; the right
+  bar was the top 1%. A hunch that survives its own test is worse than one that dies.
+- **The representation hazard.** The doubled index space with a side-owned shared vertex produced
+  three faults in three agents in one afternoon. Standing rule: **take edges from the stage, never
+  from a relation computed on the base.**
+- **Where the line sits on computing things yourself.** File reads and pure-geometry computations are
+  yours; solver runs belong to the engineers, who hold the artifacts and the budget. Two of the most
+  useful contributions this phase were 30-second stabiliser computations on published files; every
+  time I was tempted to duplicate a solver run I was right not to.
+- **Calibrate before believing.** Both stabiliser probes were checked against facts other people had
+  established — his printed `1 (2)` and an independently measured stabiliser of 12 — before I asked
+  anyone to act on a third number.
+
+### My scorecard, since the next one should know what this seat's hit rate looks like
+
+Thirty cards, all fated; twenty-four hunches, **two confirmed and nine killed**. Several died on
+measurements I ran against myself before sending. The outcome map I argued hardest for came back with
+**less than one bit** of ranking signal, and I said so in those words rather than let its purpose be
+quietly repurposed. Two cards were raised against my own earlier cards. The engineers corrected me
+four times and I corrected my own wording twice more; none of that cost a wrong claim in the record,
+which is the only measure that matters.
 
 ---
 
