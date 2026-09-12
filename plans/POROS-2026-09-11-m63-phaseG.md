@@ -251,7 +251,31 @@ question: how-many-admissible-classes-have-cos-theta-in-K
   cost: minutes
   hunch: nobody has computed it; it appears in no artifact I found
   falsifier: a field in the rotation JSON, or a count in any plan, that already reports it
-  rank: 10
+  rank: 11
+
+question: do-all-menu-downstream-consumers-honour-the-cap
+  evidence: the capped-accumulator boundary was ruled on 2026-09-11 -- complete level required for
+    any claim ABOUT {M} (CLAUDE.md ledger row 62's rung-minimum, acceptance clause 2c's "{M} grew"),
+    not required for the menu, whose loss under a cap is breadth and not soundness; both Poros and
+    de Bruijn checked those two consumers and NEITHER audited the rest downstream of the menu
+  expected: the two named consumers are the only ones whose correctness needs the level exhausted
+  ask: is there a consumer downstream of the expansion menu whose correctness, not merely its
+    yield, needs the level exhausted?
+  if none: a budgeted bootstrap with a declared cap is legal for the menu role, and a new base
+    becomes affordable without relaxing anything else
+  if some: that consumer silently inherits a sample as a level set, which is the anchor's failure
+    one layer down and worse, because it corrupts the accumulator rather than a report -- and the
+    bootstrap must not run under a cap until it is fixed
+  answered by: human -- the owner the coordinator assigns; the audit is a read of every caller
+    downstream of the menu, not a run
+  cost: a reading, hours; it gates every capped bootstrap that follows
+  hunch: the two named consumers are the only ones, because the refusal bound comes from the
+    optimisation and everything else on the menu path consumes candidates rather than counts
+  falsifier: one menu-downstream caller that reads a level count, a level membership, or an
+    accumulator size into a verdict rather than into a proposal
+  rank: 2
+  status: OPEN and deliberately not closed tonight. Carried here because a question that lives only
+    in a context window dies at the next compaction.
 
 question: which-of-three-purchases-does-the-census-make-per-rotation
   evidence: `tools/parts_loop.py:609` quotes §3.3 — "a capped level halts the loop; no loop may
@@ -270,7 +294,7 @@ question: which-of-three-purchases-does-the-census-make-per-rotation
   hunch: the plan will price the screen and need the accumulator, because the accumulator is the
     loop's state variable and the loop is what "reproduce the METHOD" means
   falsifier: a cost model naming the tier per rotation with the level's cost carried separately
-  rank: 2
+  rank: 3
 
 question: does-the-new-base-path-refuse-to-run-without-an-anchor
   evidence: `parts_loop.py:583` — `entry["M"] = incumbent + 1  # free: >= by the refutation,
@@ -288,7 +312,7 @@ question: does-the-new-base-path-refuse-to-run-without-an-anchor
   cost: an hour
   hunch: it runs, and the silent path is already live in two callers rather than a future risk
   falsifier: a guard on the None path that raises or records
-  rank: 3
+  rank: 4
 
 question: what-does-an-elimination-prove-about-a-rotation
   evidence: roadmap row 13 — the files hold the **top 150 of 412** and **top 200 of 396**, sieved
@@ -303,7 +327,7 @@ question: what-does-an-elimination-prove-about-a-rotation
     failure mode G21 exists for, and the eliminated classes will have to be re-run to say anything
   answered by: human — de Bruijn, in the headline sentence, written before the census runs
   cost: none
-  rank: 6
+  rank: 7
 
 question: is-the-census-measuring-the-rotation-or-the-law
   evidence: the elimination test is "the full base is 4-colourable, so every subgraph is, so the
@@ -319,8 +343,11 @@ question: is-the-census-measuring-the-rotation-or-the-law
     all-pairs check at small radius for each new law
   cost: hours, and it is the cheap half of the cheap/sound trade
   hunch: registered above — a dropped edge reads as a sound elimination
+  disposition: elevated 2026-09-11 by the coordinator from a phase-G note to a STANDING
+    requirement — the defect is biased toward making a survey look productive, which is the worst
+    shape a defect can take in a survey whose entire output is eliminations
   falsifier: c5.1 invoked per law in the census path
-  rank: 4
+  rank: 5
 
 question: what-control-fires-when-the-apparatus-is-broken-on-a-new-base
   evidence: the known-answer anchor needs a known minimum and a new base has none; the restriction
@@ -339,7 +366,7 @@ question: what-control-fires-when-the-apparatus-is-broken-on-a-new-base
   answered by: human — de Bruijn
   cost: two asks per stage, plus a per-base planted fault of the kind the edge verification already
     runs
-  rank: 5
+  rank: 6
 
 question: does-the-flatness-datum-reach-a-rotation-census
   evidence: `plans/POROS-2026-09-11-m63-phaseF.md` line 25 — p50 185 s, p90 269 s, max 418 s, ratio 2.26 over 266 timed entries; and the 3/12/24-point flatness was measured across added points on ONE fixed stage
@@ -352,7 +379,7 @@ question: does-the-flatness-datum-reach-a-rotation-census
   if no: the plan names what it measured the census's cost on, per tier
   answered by: human — de Bruijn, in the cost model
   cost: none
-  rank: 7
+  rank: 8
 
 question: does-the-rotation-file-carry-what-the-ranking-needs
   evidence: FS-30 requires ranking by distinct radius families, the 2-adic wall-breaking radicand
@@ -367,7 +394,7 @@ question: does-the-rotation-file-carry-what-the-ranking-needs
     and the ranking's cost joins the bootstrap's in the plan
   answered by: the record (delegated read, in flight)
   cost: minutes
-  rank: 9
+  rank: 10
 
 question: does-the-re-sieve-enumerate-rotations-or-fields
   evidence: R1 — 131 of 1,058 stored radius families are edge-capable, 32 of 150 classes keep two,
@@ -403,7 +430,7 @@ question: is-the-phase-input-provenance-or-data
     producer is gone; the 412 in particular should not appear in a headline until it is re-derived
   answered by: human — de Bruijn
   cost: none
-  rank: 8
+  rank: 9
 
 ## What I did not ask, and why
 
