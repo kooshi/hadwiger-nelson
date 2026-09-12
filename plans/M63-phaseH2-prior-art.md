@@ -527,3 +527,59 @@ four-colour filter fires one way only, and so does a literature negative.
   `K(√(202 − 22√33))`, with 97 recurring three times. Had `sin θ` been in `K`, the whole arena would be
   four-coloured by `chromaticNumber_seamPlane` and **the mission would be over by a theorem already in this
   repository** — which is why the sentence should not live in one agent's context.
+
+---
+
+## §PA.10 — `[PartsOdd2022]` opened: does the same author already use this rotation?
+
+*Added 2026-09-12 at the product owner's ask, after the planner flagged this as the gap a reviewer finds
+first. The paper is held (`library/pdf/arXiv-2206.12632.pdf`) and was read, not characterised from its
+abstract: §2 "Analysis" construction passages, §3 "Synthesis" in full including the general family formula
+and "Generalization options", Table 1, and §4's counterexample. **Everything below is from the paper's own
+text.***
+
+**Q1 — which rotation does it actually use?** The string `arccos` occurs **exactly twice**, and **neither is
+`31/32`**; the strings `31/32` and `127/128` occur **zero** times.
+
+1. **The general family formula** (§3): `ρ(r) = exp(i·arccos( (m₁² + m₂² − r²) / (2 m₁ m₂) ))`, with the
+   side condition `|m₁ − m₂| < r < |m₁ + m₂|` and `r` the length of the rotation edge. **This is the law of
+   cosines** on the triangle with sides `m₁`, `m₂`, `r` — the side condition is the triangle inequality, and
+   it matches his own construction exactly (`m₁ = m₂ = 8`, and "the rotation edges can be of any odd length
+   from 1 to 15", i.e. `0 < r < 16`).
+2. **One explicit numeric angle**, in §4's counterexample graph `G2035`: **`arccos(5/6)`**. And `5/6` is our
+   own family at **`n = 3`**, i.e. `ρ = (5 + i√11)/6` — **which is `ω₃`, one of the Moser lattice's own
+   generators** (`BIBLIOGRAPHY.md` § E). So the one rotation he writes down explicitly is a member of the
+   family, and it is one this project already uses.
+
+**A record to correct, and it is not mine to edit:** `plans/M63-phaseG-bases-and-rotations.md` (around
+line 125) records `[PartsOdd2022]` as *using* `arccos(31/32)`. **The paper does not contain that value.**
+`31/32` is *derivable* from his formula at `m₁ = m₂ = 4, r = 1`, but he neither writes nor uses it. Flagged
+for whoever owns that file.
+
+**Q2 — does he build a base-plus-rotated-copy, or only use the angle? He builds one — at other rotations —
+but under a different edge relation, so his own sentence survives.** His construction is
+`G306 = F(m₁,n₁) ⊕ (m₁H + ρ(r)·R(m₂,n₂))`: a core on the hexagonal lattice `L` plus rotated "rotors" sharing
+a frame, joined by rotation edges — **structurally the same architecture as type M**. With his main
+parameters `m₁ = m₂ = 8` and `r` odd in `1…15`, the case **`r = 1` is exactly our family at `n = 64`**
+(`cos θ = 127/128`). **But `G306` is an odd-distance graph, not a unit-distance graph**: its edge relation is
+"the distance is an odd integer", and he uses lengths `{1,3,5,7}`. Type M is a *unit-distance* notion, so
+**`[Parts2020a]`'s "working constructions of type M with other rotations are not known yet" stands
+unrefuted.**
+
+**Q3 — does he state the one-integer family? Not as a classification, but its PARENT is in print, and that
+is prior art on this phase's central structural claim.** His five-parameter `ρ(r)` above is strictly more
+general than `cos θ = (2n−1)/(2n)`: **ours is his `m₁ = m₂`, `r = 1` slice** (`cos θ = (2m² − 1)/(2m²)` with
+`n = m²`). He does not specialise it, does not remark that `r = 1` and equal radii give a one-integer family,
+and does not classify the resulting fields — his only sentence in that direction is that the parameters give
+*"a rich set of different options for embedding a graph into extensions of the field ℚ"*. **So the field
+question — which radicands `4n−1` arise and which are 6-open — is unworked ground, while the angle formula is
+not.**
+
+**What this does to the phase's claim, stated so it cannot be oversold.** It shrinks in one specific way and
+survives in another:
+- **Shrinks:** "nobody has built a base joined to a rotated copy at another rotation" is **false** — Parts
+  did, in 2022, in the more general form, and at `r = 1` in our own family at `n = 64`. Any write-up must
+  present `cos θ = (2n−1)/(2n)` as the specialisation of his published formula, not as a new classification.
+- **Survives:** the same at *unit* distance is still not known, by his own statement two years earlier and
+  nothing found since. **The novel object, if this phase produces one, is a unit-distance construction at a
+  rotation other than `ρ₁₅` — and its field, not its angle, is where the unworked ground is.**

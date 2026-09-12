@@ -79,6 +79,28 @@ So the candidate rotations are
 ρ_n = ( (2n−1) + i·√(4n−1) ) / (2n) ,     diagonal circle |p|² = n ,     radicand 4n−1
 ```
 
+> **PRIOR ART, and it must be stated before the family is (added 2026-09-12, after `[PartsOdd2022]` was
+> read in full).** This family is **not new**. It is the `m₁ = m₂ = m`, `r = 1` slice of `[PartsOdd2022]`
+> §3's published formula `ρ(r) = exp(i·arccos((m₁² + m₂² − r²)/(2m₁m₂)))`, which is the **law of cosines**
+> on the two radii and the rotation edge, with the side condition `|m₁−m₂| < r < |m₁+m₂|` being the
+> triangle inequality. At `m₁ = m₂ = m, r = 1` it gives `cos θ = (2m²−1)/(2m²)` — **exactly our gate-A
+> subfamily `n = m²`**. He also **builds** a base joined to rotated copies at other rotations (his `G306`,
+> a hexagonal core plus rotated rotors at `m₁ = m₂ = 8` with odd `r` in 1…15, whose `r = 1` case is our
+> `n = 64`).
+>
+> **What is therefore ours, stated narrowly:** (i) the *characterisation* — that a rational integer
+> diagonal radius forces **exactly** this family, an if-and-only-if he does not state; (ii) the **field
+> screen** over it, gates B/C/D, which is where he stops (his only remark in that direction is that the
+> parameters give *"a rich set of different options for embedding a graph into extensions of the field
+> ℚ"*); and (iii) **unit distance**. His construction is an **odd-distance** graph over lengths {1,3,5,7},
+> and type M is a unit-distance notion — so `[Parts2020a]` §4's *"working constructions of type M with
+> other rotations are not known yet"* **stands unrefuted**, by his own two papers.
+>
+> **The consequence for how this phase is valued: the unworked ground is the FIELD, not the angle.** The
+> reason to want `n = 16` was never that its angle is unused — that is now demonstrably in print — but
+> that `√7` lands in a field this project's own sieve calls 6-open. Every ranking in §5 should be read
+> that way.
+
 - **`n = 4` is `ρ₁₅ = (7 + i√15)/8`, the 509-vertex record's own rotation.**
 - **`n = 16` is `ρ₆₃ = (31 + 3i√7)/32`**, and `CLAUDE.md` G8 records `√ρ₆₃ = (3√7 + i)/8` as one of the
   generators closing all 67 of de Grey's edge-direction classes. Verified exactly:
