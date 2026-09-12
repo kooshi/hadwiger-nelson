@@ -132,11 +132,24 @@ the observation that his greedy discard of 36 was nowhere near optimal.
 
 ## §6 — Outstanding, in order
 
-1. **Close phase C**: collect the two joint verdicts, score P-C4.0–P-C4.4, write §R2's verdict rows and
-   headline, update §S.3's C rows, commit the advisor's record, report. A fresh closer may be needed — that
-   implementer is at ~830k tokens.
-2. **Close phase D**: clause 2(b)'s outcome, §R3, §S.3's D rows. **Then apply its §X.4–X.7 replacement texts
-   to `plans/M63-parts-reproduction.md` §S — those are the product owner's to apply, not the implementer's.**
+1. **Close phase C** — **a fresh closer is running as of 22:35**, briefed to collect the two joint verdicts,
+   score P-C4.0–P-C4.4 individually, write §R2's verdict rows and headline, and hand back §S.3's C rows as
+   text rather than editing the master plan (one writer per file). It holds a standing ruling: **a bound is
+   a result** — if the runs have not closed by about 08:00 it reports the bound reached, marks P-C4.1–4.3
+   not decided, and leaves the jobs alive to be collected later.
+2. **Close phase D** — mostly done. Clause 2(b) is scored **not met** (`557aece`) and §R3 is written;
+   **§S.3's D rows remain.** The §X.4–X.7 texts are **applied, 2026-09-11, by the product owner**: §X.4 into
+   §S.1 clause 2(a) and §X.5 into §S.4's phase D acceptance bullet (both the companion-per-row correction),
+   and §X.6 into `CLAUDE.md` § Toolchain as a standing environment note — **re-measured here before it was
+   written down** (Python 3.14.6, `get_start_method()` → `forkserver`), because an unverified environment
+   fact in the project's standing instructions is exactly the kind of thing that gets believed later.
+   **§X.7 is the one still open**: `pin_is_sound` in `tools/parts_stage.py` is a vacuous control at every
+   rung above 1 — diagnosis, one-line fix and a planted control that fails on the current code are in phase
+   D §R3.9. **Ruling: it is fixed as part of the freeze commit, not now.** Two reasons — the two joint
+   reductions are running against that file, and the freeze is the configuration phase E is judged under,
+   so a control repaired after it would be repaired outside what E tests. No number is retracted: the
+   symmetry break itself is sound because the pin clause is conditional on the atom's presence; only the
+   control was blind.
 3. **The probe**: last verdict, then the 112 pairs (21 promoted first), then a decision on the 350.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.

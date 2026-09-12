@@ -32,9 +32,25 @@ tightened the same day on Poros's card 5). One sentence per claim, each a test t
    edges and refuse four colours, checked by SAT on exact geometry. No Lean certificate is required for
    reproducing a known object (§O(4) stands).
 2. **The algorithm reproduced.**
-   - **(a) Replay, as a control only:** reduce his `A412` at rung 1 and at the rung-2 subgroup and compare
-     with his 1,092 and 78 under the named count convention (S.2). States 3–4 turned out to be one
-     reduction of `A412` at two rungs, which is exactly why this is a control and not the proof.
+   - **(a) Replay, as a control only — and each row names the companion his loop held at that moment.**
+     Reduce his `A412` at rung 1 and at the rung-2 subgroup and compare with his 1,092 and 78 under the
+     named count convention (S.2). States 3–4 turned out to be one reduction of `A412` at two rungs, which
+     is exactly why this is a control and not the proof.
+
+     **The companion is a per-row parameter of his table, not a constant** (phase D §R3.4). His loop
+     alternates, so the small object it holds changes as it runs: at state 1 the small side had not been
+     reduced and the partner was its **accumulator** `v166e774`; by state 2 it had been, and the partner
+     was the minimum `v136e564`. Measured — his sparsest 376-vertex minimum `v376e1890` is **colourable
+     against `v136e564` in all 24 frames and refuses against `v166e774` in all 24**, while four other
+     published small halves refuse in none. Reducing `A451` against `v136e564` therefore returns his
+     `|M| = 376` but 82 minima against his 96 and an accumulator of 433 against his 451: **a different
+     problem, not a defect.**
+
+     **So:** `|M|` is comparable across rows; **`|{M}|` and `A` are comparable only once that row's
+     companion is identified**, and a row reported without one states the vertex count alone and says the
+     companion is unidentified. The general form, which is what travels: *the companion is whatever his
+     loop held at that moment, and it changes as the loop runs; comparing our numbers against a row of his
+     table without reconstructing that state is comparing two different problems.*
    - **(b) The expansion step:** a rule, registered and committed before it runs, starting from our
      375-level accumulator (which equals his `A403`) with no knowledge of his orbits, chooses the
      expansion, and the loop reaches `|M| ≤ 374` on the L side.
@@ -220,10 +236,14 @@ run is announced before launch if its forecast exceeds 15 minutes.
 
 **Phase D — the loop, with a rule that finds its own moves.** Purpose: S.1 #1 and #2.
 Acceptance:
-- [ ] Replay controls, tuning mode, the named convention: 376 at the order-3 rung on `A451` (his 96,
-  `A = v451e2400`, 1890–1947 edges); 374 at rung 1 on `A412` (1,092; `A = v412e2106`; 1860–1884; P8
-  scored); 374 at the rung-2 subgroup (78; `A406 = v406e2082` up to the group; 1868–1884), computed both as
-  the invariant part of the rung-1 level and by a direct rung-2 reduction, which must agree.
+- [ ] Replay controls, tuning mode, the named convention, **each row against the companion his loop held
+  at that state** (§S.1 2(a); phase D §R3.4): 376 at the order-3 rung on `A451` **against the S accumulator
+  `v166e774`** (his 96, `A = v451e2400`, 1890–1947 edges) — against `v136e564` the same reduction returns
+  376 with 82 minima and `A = 433`, which is a different problem and is recorded as such; 374 at rung 1 on
+  `A412` **against `v136e564`** (1,092; `A = v412e2106`; 1860–1884; P8 scored); 374 at the rung-2 subgroup
+  (78; `A406 = v406e2082` up to the group; 1868–1884), computed both as the invariant part of the rung-1
+  level and by a direct rung-2 reduction, which must agree. **A row whose companion is not identified
+  reports `|M|` alone**, and `|{M}|` and `A` read `not-compared` with that reason.
 - [ ] **His own published ranking device is scored first** (Poros card 8). §5.6's third strategy ranks
   candidate expansions by §5.10's numerical indicators — the free-vertex count, the small-degree
   hyperedge counts, and the size of the maximum independent set of the degree-2 hyperedge graph. Run it
