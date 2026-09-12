@@ -714,6 +714,52 @@ conditional on the verdict and on the void-check above, and must not be stated o
 
 ---
 
+## §6i — The trust core is 20 UNSATs on HALF instances, and achievability is not load-bearing
+
+**A logical simplification, not a better measurement, found while building the reviewer-facing bundle.** The
+refutation does **not** need the 552 interface patterns to be *achievable* — only to be a **superset** of
+the achievable ones. A spurious extra pattern can only make the pair check **harder** to pass, never easier,
+so proving *"no ordered pair of the 552 works"* proves it for any subset. The argument:
+
+1. any proper four-colouring `C` of the arena gives `f(v) = C(v)` and `g(v) = C(Rv)`, both proper
+   four-colourings of the **base**, with `f(centre) = g(centre)` and the 66 disequalities (§6e);
+2. after the colour permutation pinning the centre, `f`'s and `g`'s interface patterns both lie in the
+   listed **552** — this is what the completeness UNSATs establish;
+3. **no ordered pair of the 552 satisfies all 66 disequalities** — a finite table scan.
+
+| claim | count | trusts |
+|---|---|---|
+| the 19 circle patterns are **all** of them | **1 UNSAT** | a solver |
+| per circle pattern, its listed off-diagonal patterns are all of them | **19 UNSATs** | a solver |
+| no ordered pair of the 552 works | a finite scan | **nothing** |
+| ~~each listed pattern is achievable~~ | 552 SATs | **not load-bearing** |
+
+> **So the entire solver-dependent core is TWENTY UNSAT claims, each on a 25,567-vertex HALF instance —
+> not on the 51,133-vertex arena, and not a proof log.** The achievability claim was verified anyway for the
+> 19 circle patterns, each exhibited by a proper colouring checked edge-by-edge against the 272,232-edge
+> base list, but **nothing rests on it.**
+
+That is a materially better artifact than the "finite certified table" of §6f: the certified-row property
+turns out to be a convenience rather than a dependency, and the independent re-checking is therefore aimed
+at exactly the right twenty statements rather than at a sample. `certificate.json` (150 KB, regenerable)
+holds the arena's parameters, the coupling decomposition, the 30 circle points and 36 off-diagonal vertices,
+the 66 pairs, the 19 patterns with their `ζ₆` orbit sizes, the six 10-sets with their disjoint pairs, all 552
+interface patterns, and the census.
+
+**A process failure and its forfeit, named rather than absorbed.** The agent over-subscribed the machine —
+**35 heavy processes on 16 physical cores**, about 2.2× over, everything roughly 2× slower — breaking this
+file's *one heavy job at a time*. Two strays contributed: an accidental `O(n²)` scan, and **a `setsid`-created
+group its kill had missed because it killed the wrapper's group instead of the child's** — which is the
+*exact* trap `background-jobs-process-group` records (*take the pgid from the live process table after launch,
+never from the shell that started it*), recurring after being written down. It pruned to two jobs on priority
+grounds and **named what the prune forfeited**, per this file's obligation: **solvers 4–6 of 6** (Lingeling,
+MapleCM, Mergesat3) on a claim three codebases had already confirmed, and the **DRAT proof**, which had
+reached 23 MB and was still growing. Both are re-runnable, and since the trust core is twenty half-instance
+UNSATs rather than one arena refutation, **proof logs for those twenty are the right artifact to generate if
+anyone wants them** — not a log of the arena solve.
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
