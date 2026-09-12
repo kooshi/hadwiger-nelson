@@ -453,6 +453,40 @@ convenient:** the level is a property of the **problem** — the completeness in
 exist, and the engine changes only which is found when — while the harvest is a property of the **path**.
 That is the same argument that makes the enumerate-only integration safe (§7b), used a second time.
 
+## 7e. P-Y1 — falsified as registered, and the falsification is about the PREDICTION'S MODEL
+
+Registered (not fitted to any number of mine): *on one stage run to closure under both engines, the
+incremental engine's harvested correction-set count will be 30–70% of the batch engine's, with the level
+identical as a set and the bound identical at every iteration.* Confidence 0.6, falsifier a ratio outside
+20–90% or any difference in the level or bound. Run paired on the D1a order-3 stage, batch from a
+pre-integration copy of `parts_reduce.py` in a scratch tool directory so that `tools/` was not disturbed:
+
+| | batch | incremental |
+|---|---|---|
+| harvested correction sets | 195 | **195 — ratio 100.0%** |
+| level as a set | 82 | **82, identical**, none only in either |
+| bound | `minimum 375 over rung-3-symmetric selections` | **identical** |
+| asks | 1,527 + 375 | **1,527 + 375** |
+| seconds | 59.3 | 58.8 |
+
+**FALSIFIED on the ratio clause** (100% is outside 20–90%), **and the cause is the scope of the
+integration rather than the behaviour of the engines.** The harvest happens overwhelmingly in the
+*optimum-finding* phase, which enumerate-only leaves on byte-identical code; the engine takes over only
+once `w*` exists. On D1b the harvest went **473 sets at the optimum to 528 at close**, so about **90% of
+any harvest predates the switch**. A ratio near 1 was forced by construction and the 30–70% band was
+unreachable regardless of how the engines behave.
+
+**The remaining clauses came back stronger than registered.** Not merely "the level identical as a set"
+but **identical ask counts to the unit** (1,527 + 375 both sides): on this stage the two runs did the
+same work iteration for iteration, which is the strongest available evidence that the enumerate-only
+switch perturbs nothing. The stage is also too small to show the performance win (level 82, where the
+union costs ~2 ms and the rebuild is trivial) — 59.3 s against 58.8 s, exactly as the size story predicts.
+
+**What a discriminating re-registration looks like**, since the point is a claim that can fail: the ratio
+must be taken over the **enumeration-phase harvest alone** (`Y` at close minus `Y` at the optimum — 55 of
+528 on D1b), or against a full-engine integration rather than an enumerate-only one. As written the
+quantity is ~90% determined by code both arms share.
+
 ## 8. Not done, and what each would take
 
 - **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
