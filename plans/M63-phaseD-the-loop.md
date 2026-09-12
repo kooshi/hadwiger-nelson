@@ -682,7 +682,7 @@ alone** — so it stores *labels and costs*, never scores (§E1):
 | d1.3 | **free, no plant:** each replay stage contains a known minimum of his — ask that selection, and it minus one atom | `contains-a-known-minimum`: refusing, then colourable. It checks the stage is built over the object we think it is, at two asks and no plant. Phase C found the same control on the joint stage; **D runs it on all three replays** |
 | d2.1 | `indicators` on a stage whose `Y` does not cover it, with `ask=None` | refuses, naming the missing coverage; never a silent partial |
 | d3.1 | a candidate whose orbit is already full in `A` | absent from `candidates()`; `no-op-expansion` if forced |
-| d3.2 | a candidate freeing zero necessary atoms beside one freeing many | `look_ahead` separates them; equal scores read `proxy-cannot-separate` |
+| d3.2 | a candidate freeing zero necessary atoms beside one freeing many | `look_ahead` separates them; equal scores read `proxy-cannot-separate`. **RETIRED as a control, approved 2026-09-11** — *a measurement removed its consumer, not fatigue*: the proxy reads **0 freed on every candidate tried**, including an orbit his own recorded move used, so `proxy-cannot-separate` is the measured state of the instrument rather than a verdict any plant can produce. The measurement stands in its place, and keeping a control that cannot fire is the failure mode this milestone names (`plans/M63-phaseD-close-audit.md` §B.4, §C row D3) |
 | d3.3 | an 8-batch of atoms individually known critical | the batch verdict agrees with the eight individual verdicts: `batch-agrees` |
 | d3.4 | `ctx` offered one of his files | `rule-read-his-data`, and the run aborts |
 | d4.1 | a starting record carrying `A_sample` | `level-truncated`; the loop refuses to start |
@@ -719,6 +719,17 @@ case a second code path through the most delicate part of the phase, and phase C
 paid for that lesson with `"LS"`.
 
 ### 3.2 — What the expansion rule is scored on: the complete outcome map of a closed menu
+
+**Correction, 2026-09-11, governing every "§3.2 is the scoring surface" reference in this file: the map is
+not a scoring surface.** Its outcomes came back degenerate — the helpful density is **zero** over the
+complete 89-candidate menu — so every ranking ties, precision@k is undefined over a column of zeros, and no
+ranking can be graded against it. **The frozen rule is scored by outcome on one held-out row, and that one
+bit is what stands behind it** — which is what the freeze committed to in writing, in advance, for exactly
+this case, so this is the text catching up with a commitment already made. The map keeps its other role,
+and it is the larger one: it is an **answer** — single-orbit growth from `A412` is closed over a complete
+menu, every per-entry invariant firing and not one undecided ask (§R3.7, §H2.8;
+`plans/M63-phaseD-close-audit.md` §D.7). Item 2 below anticipated this outcome; the design below stands
+except where it assumes a discriminating density.
 
 **The world we are in, stated plainly.** Of his three published devices, two were scored in planning and
 **neither selects his recorded move** (Poros M3: the small-partial-orbit priority leaves a four-way choice
@@ -1897,6 +1908,8 @@ is not known to work.
 | P-D11 | the small half's menu belongs to the scoped probe, not to this phase |
 
 ### R3.11 — What phase D did NOT do, stated as such
+
+*Superseded from D3 onward by the master plan's §R3.a–R3.e and by `plans/M63-phaseD-close-audit.md`: the rule, the loop and the freeze were built by the successor; what remains not done is listed there.*
 
 - **D2, his own published ranking device, is not implemented.** §5's order of work puts it after the
   replays, and the replays were overtaken by R3.4's companion finding, which had to be settled first
