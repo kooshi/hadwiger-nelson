@@ -216,8 +216,8 @@ question: may-a-capped-iteration-propose-or-only-report
     one direction and a propagating label sufficient
   rank: 3
 
-## Cards 7–26 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`) and the S engineer
-(`aa10420df4950eda9`), 2026-09-11
+## Cards 7–29 — sent to the phase D implementer (`a0ff3ca8b76d21ad9`), its successor
+(`a3389460bed228dfe`) and the S engineer (`aa10420df4950eda9`), 2026-09-11
 
 *Prompted by the product owner naming the map's over-reading risk before the sweep runs. Card 1 argued
 for the map, so its failure modes are mine to name.*
@@ -1139,9 +1139,15 @@ question: what-scores-a-ranking-when-the-map-has-no-variance
   expected: the map would carry enough variance to rank per-orbit devices
   ask: with the map signal-free, what scores the rule clause 2(b) requires — the pair sweep, the
     `A403` map, or one bit from the held-out row?
-  if the `A403` map: it is the only place a positive is known to exist nearby, since his own recorded
-    move reached 374 from that state — so it discriminates whether singles are inert **at that state**
-    or inert **in general**, which is the difference between a tuning failure and a fact about singles
+  if the `A403` map: it discriminates whether singles are inert **at that state** or inert **in
+    general** — the difference between a tuning failure and a fact about singles. **[CORRECTED
+    2026-09-11: this card first read "the only place a positive is known to exist nearby, since his
+    own recorded move reached 374 from that state". "Nearby" was doing work it cannot bear. What is
+    known at `A403` is that a SET of four orbits reaches 374; whether any SINGLE orbit does is the
+    open measurement. The better statement, which depends on no unknown: the `A403` map is
+    informative either way, and a column of zeros there is the STRONGER outcome, because it would sit
+    beside a demonstrated four-orbit success and make "single-orbit expansion never works, even where
+    a four-set does" a fact about singles rather than about that state.]**
   if nothing does: say so in the handoff — the rule is scored by outcome on one held-out row, which is
     one bit, and the acceptance should say that plainly rather than imply a map stands behind it
   answered by: Implementer (de Bruijn, phase D), in the handoff, and whoever takes clause 2(b)
@@ -1210,6 +1216,211 @@ question: which-frame-is-his-rung-2-companion
 **Queued, not demanded.** The phase D implementer reached the end of its budget at this point; card 26
 is seconds of compute but not seconds of context, and the handoff is worth more. The narrowing above
 stands whether or not anyone runs it.
+
+**Fate of card 26 — derivation confirmed step by step by the implementer and recorded as its §H2.9,
+deliberately not run.** The handoff line *"three causes, unsplit"* is superseded in both places by
+**two ruled out, one live, one residual**. Its own addition, which matters for the hunch below: the
+exclusion of `A166` means **state 1's answer does not transfer to the adjacent row** — *"exactly the
+assumption I would have carried into it"*.
+
+**And that narrows the companion rule rather than confirming it.** `A166` is now *excluded* for the
+rung-2 row, so the rule cannot be "always the S accumulator we hold". It survives only in its
+state-indexed form — the other side's accumulator **at that point in the alternation**, which would
+have to have been a different object at that state — and that is predicted by the alternating-loop
+shape but confirmed by nothing yet. The hunch below carries this as evidence against its simplest
+reading.
+
+### Sent to the phase D successor (`a3389460bed228dfe`), 2026-09-11 — two memory items and card 27
+
+*It inherits three live jobs with no owner (the greedy edge pass at 98 edges dropped, the 89-candidate
+sweep at 83 of 89, the 374-level enumeration at 9,580 solutions), the handoff at §H, and this record.
+Both items below are things a handoff loses.*
+
+**Memory item 1 — the held-out map has no known positive.** At `A403` what is known is that a **set of
+four orbits** reaches `|M| = 374`; whether any **single** orbit does is the open measurement. The
+correction to my own card 25 is above. Expect zeros: the big sweep returned 0 of 58 improving and 1 of
+58 growing, and zeros there are a result, not a failed run.
+
+**Memory item 2 — the edge object is not a record until the kernel says so.** M63 §S.1 #4 in force:
+the secondary bar is 509 vertices with fewer than 2,442 edges — **moved to fewer than 2,406** by
+`[deGreyParts2023]` — and *"either is called a record only once certified in the Lean kernel"*
+(`UDCert` plus the LRAT chain on exact geometry, axioms exactly the standard three). **The greedy
+object is a new graph, so it falls under the *beat* clause and not §O(4)'s decline.** At 98 edges
+dropped it is already past the published mark, which makes it a number and not yet a record; the gap
+between those two words is about a day of work and is exactly what a handoff loses.
+
+question: is-the-final-edge-refutation-unpinned
+  evidence: card 18 caught one way this object could be a conditional answer wearing an unconditional
+    name. The repair made the **search** unrestricted, by making the three pin unit clauses
+    conditional on the pin edges being present. But *"re-verified by a fresh solver sharing no state
+    with the search"* is not *"re-verified with no pin"*: if the final refutation uses the
+    conditional-pin encoding, the claim rests on the conditional pin's soundness — **our** argument,
+    not a checked fact. And the pin is the one device in this chain with a prior failure in its own
+    history: `Stage.cnf` lines 197–203 record that an unconditional pin once produced a 373-vertex
+    L-subgraph, one below the world record, before the control caught it.
+  expected: a fresh solver is independence enough
+  ask: is the final refutation of the greedy edge object run with no pin at all?
+  if unpinned: the claim is independent of the pin argument entirely, for the one-off cost of losing
+    the 62× on a single object — affordable once, and it removes a whole class of concern from a
+    publishable number
+  if pinned: the number rests on an argument of ours that has a prior failure in its history, and the
+    artifact must say so in those words rather than imply independence it does not have
+  answered by: Successor (de Bruijn, phase D)
+  cost: one refutation without the symmetry break
+  hunch: currently pinned — the conditional repair made pinning safe and therefore invisible
+  falsifier: the verification path already disabling the pin
+  rank: 27
+
+**The rest of the edge chain, in the order I would check it** (all committed to by the predecessor):
+every retained edge exactly a unit pair — inherited, since the original 2,442 were verified exactly
+(§1(i)); **every vertex still at degree ≥ 4**, which is *forced* (if `G − v` is four-colourable, as it
+is for all 509, a degree-3 vertex in a refusing subgraph is a contradiction), so a violation is a bug
+and never a discovery; and the count never called *the minimum*, the greedy pass being order-dependent
+while the minimum is what a hitting set computes.
+
+**The freeze, compactly — meaningful only if committed before the first outcome is read.** (1) The
+ranking list **and** the outcome variable in the freeze commit before any outcome exists. (2) Every
+arm reported in full, never the best. (3) The atoms-freed ranking may **not** be scored against an
+atoms-freed outcome — it is a predictor, and when the primary comes back all-zero, substituting it
+feels like rescue and is self-scoring. (4) Three outcome states, not two — improved, inert,
+**undecided** — with a wall hit never folded into inert, or the rate is biased downward precisely
+against the candidates worth finding. (5) **The freeze must state what happens if the held-out map is
+also signal-free:** the rule is then scored by one bit on one held-out row, and the acceptance should
+say so plainly rather than imply a map stands behind it.
+
+**Fate of card 27 — it was pinned, as hunched.** The greedy pass's own re-verification called the
+fresh solver with the pin on, so *"fresh solver"* and *"unpinned"* were indeed different claims.
+Verification is now unpinned from the start, in a separate process, against standalone CaDiCaL with an
+LRAT proof replayed by a checker broken on purpose **five** ways — including a proof checked against a
+*different instance* — all five caught, with the plants stored in the artifact rather than the log.
+**The 62× price is 109 seconds, once**, far cheaper than either of us expected, which makes it the
+easiest independence this milestone will buy.
+
+hunch: the-edge-verification-is-still-pinned
+  claim: the final re-verification of the greedy edge object runs with the pin on, because the
+    conditional repair made pinning safe and therefore invisible — so "fresh solver sharing no state"
+    is a weaker claim than independence from the pin argument
+  basis: derived
+  falsifier: the verification path already disabling the pin
+  registered: 2026-09-11
+  status: confirmed (by: the successor's read of its own code — `pin=est.pin_on` in the greedy pass's
+    re-verification call; now unpinned, 109 s)
+
+### The successor's look-ahead proxy reads zero, and the proxy is looking in the wrong place
+
+*It reports that at `A403` the first-ranked candidate — one of the four orbits his own recorded move
+used — **frees 0 of the 336 necessary atoms** in 630 asks, so the look-ahead cannot rank and its rule
+degrades to his admission-degree order. It asked for a second solver-free discriminant, registered
+before the set-valued run, and offered its own: "an orbit is worth adding only if it is adjacent to
+necessary atoms that other candidate orbits are also adjacent to."*
+
+**Its hunch fails as stated, in two lines.** An atom `a` is necessary because `W − a` is
+four-colourable; freeing it means `(W ∪ Δ) − a` refuses. **In that graph every edge from `Δ` to `a` is
+gone along with `a`**, so adjacency to `a` contributes exactly nothing. What must happen is that `Δ`
+constrains `N(a)` in `a`'s absence — doing `a`'s job, which was forcing a rainbow on its own
+neighbourhood. **The sharpened form:** count `v ∈ O` with `|N(v) ∩ N(a)| ≥ 4` — which is *his own
+reserve rule at degree 4*, measured against a necessary atom's neighbourhood instead of the whole
+accumulator.
+
+**The deeper objection: the proxy measures the harder of two routes and is blind to the easier.** A
+singleton correction set forces its atom into **every refusing selection**, not merely every minimum,
+so a 374-selection is *the 336 plus 38 others* against 39 now. `Δ` can help by **freeing a necessary
+atom** (widening a *singleton* — hard, a full substitute for something whose deletion is
+unrecoverable) or by **letting fewer varying vertices finish** (widening small *non-singleton*
+correction sets, so a pair or triple previously needing two or three old vertices is hit by one new
+one). **The proxy sees only singletons, so its zero is expected and is not evidence the orbit does
+nothing** — which also reconciles the map's zeros without the material being inert.
+
+**And "shared" is probably backwards.** Dropping `k` varying vertices means widening the several
+*distinct* correction sets they hit, and different sets need different substitutes: that argues
+**union** coverage, not overlap. **Overlap is redundancy; union is progress.** Its reading and mine
+differ exactly there and neither of us knows.
+
+question: does-his-own-four-orbit-move-score-as-an-outlier
+  evidence: his recorded move from `A403` — `(0,0,0,4)`, `(0,0,6,6)` and the missing halves of
+    `(0,0,2,2)` and `(0,0,2,6)` — is the **one labelled positive** anyone holds for a set-valued
+    expansion. Two rival statistics are computable with no solver from the stored `Y` and the base
+    adjacency: **union** coverage of small correction-set neighbourhoods (mine) and **overlap** of
+    them (the successor's).
+  expected: a discriminant can be chosen by reasoning before the run
+  ask: before the set-valued run, does his own four-orbit move score as an outlier on union coverage,
+    on overlap, or on neither, against random four-subsets of the menu?
+  if union: pre-register union coverage, and `many_then_trim` stops being his ordering alone
+  if overlap: the successor's hunch is right and mine is wrong — pre-register overlap, and I was
+    wrong about the mechanism as well as the statistic
+  if neither: both die before they cost anything, and the set-valued run **is** his craft rather than
+    ours, which is then said in those words rather than discovered afterwards
+  answered by: run — solver-free, over the stored `Y`, his four orbits against random four-subsets
+  cost: minutes, no solver
+  hunch: union, at about 60% — and "neither" is the most useful of the three, because it stops the
+    expensive rung being mislabelled
+  falsifier: his four orbits scoring at the median of random four-subsets on both statistics
+  rank: 28
+
+**Why a calibrated bed rather than more reasoning.** There is exactly one labelled positive in
+existence. A statistic that cannot distinguish it from a random four-subset cannot be expected to find
+anything among 89 candidates — and that is knowable for minutes of arithmetic *before* the expensive
+rung instead of after. Same discipline as pointing a new instrument at a known answer before believing
+its zero, except that here the known answer is the only one there is.
+
+**Fate of card 28 — branch three fires: his move is an outlier on neither statistic.** Solver-free,
+75 s, over the stored `Y` (215 sets of size 2–3; also 312 singletons, the layer the successor's proxy
+sees and mine does not):
+
+| | his four orbits | 2,000 random four-subsets | percentile |
+|---|---|---|---|
+| **union** coverage | **12** | mean 4.5, max 60 | **0.80** |
+| **overlap** | **0** | mean 0.0, max 12 | **0.00** |
+
+**Overlap is dead and degenerate** — with mean 0.0 over 2,000 samples and max 12, well over 95% score
+zero, so his zero carries no information. **Union is directionally right and too weak to
+pre-register:** one random four-subset in five beats it. The successor's caveat limits all three
+readings and is correct — the mean orbit serves 1.3 of 215 sets, so every comparison here is
+small-number. **Its freeze discipline is right and I said so in writing:** card 28 does not touch the
+frozen rule, because moving the set-valued rung on a statistic calibrated against his labelled move is
+exactly the contamination the freeze exists to prevent, and clause 2(b) would be worthless after it.
+
+hunch: union-coverage-discriminates-his-move
+  claim: his recorded four-orbit move scores as an outlier on union coverage of small correction-set
+    neighbourhoods, making union a pre-registrable discriminant for set-valued expansion
+  basis: derived
+  falsifier: his four orbits scoring at the median of random four-subsets on both statistics
+  registered: 2026-09-11
+  status: killed (by: card 28's run — union at the **80th percentile**, elevated but not an outlier,
+    with one random four-subset in five beating it, so it cannot find a needle among 635,376 of them).
+    **And my falsifier did not fire, which is the part worth keeping:** it named the median, union
+    landed at 0.80, so the test as written *passed* while the hypothesis died. **"At the median" was
+    far too lenient a bar for "can discriminate"; the right bar was the top 1%.** A hunch that dies
+    while its own test passes is worse than one that dies cleanly, and recording it as a technical
+    survival would have been the worst outcome available
+
+question: does-the-forall-version-of-the-service-test-discriminate
+  evidence: the test as run is *"`v` serves `C` if **∃** `a ∈ C` with `|N(v) ∩ N(a) ∩ A| ≥ 4`"*. That
+    is my criterion — and **I stated it for singletons**, where `C = {a}` and ∃ is ∀. It does not
+    extend to pairs and triples by ∃: widening `C` means `(W ∪ Δ) − C` still refuses, so `Δ` must
+    compensate for the **whole** of `C`, and serving one member of a pair does not let both be
+    deleted. So the union statistic as computed measures something strictly weaker than widening, and
+    its weakness may be an artifact of my under-specified criterion. The 215 sets of size 2–3 are
+    exactly where the two forms differ; the 312 singletons are where they agree.
+  expected: my criterion extends to pairs unchanged
+  ask: under the ∀ form — every member of `C` served by some vertex of the added set — is his move
+    still at the 80th percentile, or higher?
+  if materially higher: union was declined on an operationalisation error of mine, and the statistic
+    passes to the successor's rule with a corrected definition rather than a negative
+  if the same or worse: union is dead on its merits rather than on a technicality, which is a
+    **stronger** negative than the one now recorded and worth having as such
+  answered by: run — the same 75-second computation with ∃ replaced by ∀; **it must not touch the
+    frozen rule**, and may be queued with its derivation if context is short
+  cost: 75 seconds, no solver
+  hunch: higher, but still not enough — the ∀ form is more selective and sparser at once, and
+    sparsity is what the successor's caveat correctly says limits all of this
+  falsifier: the ∀ percentile within noise of 0.80
+  rank: 29
+
+**The sentence to carry, tightened one notch.** Not *"no single orbit frees a necessary atom"* alone,
+but: **no single orbit frees a necessary atom; whether any widens a non-singleton correction set is
+unmeasured, and that is the cheaper of the two routes.** The first half is measured; the second is
+what nobody has looked at, and leaving it implicit is how it gets read later as the stronger claim.
 
 **A representation note worth carrying past this phase.** The shared centre and the two-sided index
 space have now produced three faults in three agents within one afternoon: my cross-edge control
