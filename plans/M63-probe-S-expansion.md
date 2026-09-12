@@ -230,6 +230,71 @@ the side was never expanded. A clean negative across 14 candidates would therefo
 **closing** the single-orbit question for the small half rather than sampling it, and that is the
 result this probe most probably produces.
 
+## 7b — The fills exemption, measured (a row, not a remark)
+
+**The question, which is Poros's and which I had missed.** His §5.6 describes *two* expansion modes
+— *"filling in the partially occupied base orbits of graph `A` and (or) adding new vertices from
+reserve graph `R`"* (`parts:513-515`) — and the degree-≥ 4 test is stated **only for membership of
+`R`**, that is, only for the *additions*. A **fill** of an already partially-occupied orbit is given
+its own priority instead (*"priority should be given to partially filled base orbits, and especially
+to orbits with a small number of vertices (6 or 12)"*, `parts:522-524`) and no degree test at all.
+Two of the four orbits in his one recorded move were fills. So a menu built on the degree test alone
+may be missing every partially-occupied orbit below threshold.
+
+**Measured on `A166`: the exemption admits nothing.** The accumulator has exactly **two**
+partially-occupied orbits, and both already clear the degree test on their own:
+
+| orbit | present / absent | max degree into `A` | already in the menu? |
+|---|---|---|---|
+| `(0,0,8,0)` | 3 / 3 | 4 | yes |
+| `(12,2,2,0)` | 6 / 18 | 6 | yes |
+
+So on the small half the fourteen candidates already contain every fill available, and the fills
+reading changes no number in this probe. **It is recorded as its own row because it is emphatically
+not vacuous elsewhere:** the large half's `A403` has **sixteen** partially-occupied orbits, only some
+of which clear degree 4, and a sweep menu there built on the degree test alone is under-counted. A
+later reader working the large half needs to find this, which is why it is a section and not a
+sentence.
+
+## 7c — The pair menu, measured before the pair phase
+
+Three nested definitions of an admissible *pair*, all measured without a solver
+(`data/m62/m63-probe-pair-menu.json`, `…-pair-menus.json`):
+
+| menu | what admits a pair `{O₁, O₂}` | count |
+|---|---|---|
+| (a) his fixed reserve | both orbits drawn from the menu as it stands | **91** |
+| (b) sequential | the menu recomputed after `O₁` is added | **112** |
+| (c) simultaneous | some vertex reaches degree 4 in `A ∪ O₁ ∪ O₂` | **350** |
+
+(a) is the better reading of *his* rule — `R` is *"updated after several successful iterations"*
+(`parts:516-517`), so within one expansion step the candidate set is fixed — and Poros's empirical
+tie-breaker settles it: all four orbits of his recorded move were already in `menu(A403)`. Since (a)
+is a subset of (b), the sweep runs **112** and reports **21 promoted** and **91 pairs-of-singles**
+separately, so a negative on the 91 remains a statement about his rule. (c) is past the product
+owner's 200-run line and is deferred to a decision with the 112's base rate in hand.
+
+**What promotion is made of** — 14 distinct orbits are promoted only as a pair's second member, and
+the promoting is done overwhelmingly by the *weak* candidates (`(4,0,2,2)` promotes six;
+`(2,0,0,2)`, `(2,0,4,2)`, `(10,0,0,2)` four each) while the four highest-degree candidates promote
+nothing. Orbits that attach poorly to the accumulator attach well to each other. Two readings of
+that were put to me and **both are contradicted by the measurement, so they are recorded as dead**:
+
+- *"the promoted set should be enriched in the material his disk excluded"* — it is not. Exactly
+  **one** of the 14, `(0,4,8,0)` at both radii `√5`, lies outside his radius-2 disk; 1 of 14 is
+  **below** the 46-of-229 base rate, so promotion is if anything mildly depleted in outside material.
+- *"promoted pairs should be spatially close, peripheral clustering with peripheral"* — they are not.
+  Median difference in small radius is **0.757** across the promoted pairs against **0.613** across
+  all 112, so promoted pairs are slightly *farther* apart than pairs in general.
+
+**What does survive, and it scopes a prior finding.** No single orbit outside his radius-2 disk
+reaches the threshold under any reading — but `(0,4,8,0)` reaches *full* admission once `(12,0,2,6)`
+or `(0,2,10,0)` is present. So the closed-list result is a statement about **singles**, and pairs are
+how a search leaves his disk at all. Separately, four promoted orbits — `(1,1,3,5)`, `(7,1,1,5)`,
+`(-13,-1,-1,5)`, `(2,0,2,4)`'s neighbours among them — have **all four coordinates non-zero**, which
+his own *"all useful orbits satisfy `abcd = 0`"* discards; they are legitimate points of his base.
+The pair sweep therefore tests two of his published search heuristics as a by-product.
+
 ## 8 — Outcomes
 
 *Filled in as each run lands. Every candidate gets a row, inert ones included, with what made it
