@@ -90,7 +90,7 @@ with it is a defect in my transcription and the replay would show it.
 | `batch` | today: fresh `WCNF` + fresh `RC2` per solve | 51.6 s per 1,500 → **hours** at full length | 245.9 s |
 | `incremental` | one `RC2`, cores and relaxations carried | **3.5 s total, 186×**, 0.22 GB | 282.5 s at it 400 — **0.4×, it LOSES** |
 | `incumbent` | decision: "is there a hitting set ≤ the incumbent?", one cardinality constraint, ~1 SAT call per iteration | **2.7 s total**, 19,823 calls | **loses badly**: 662 s by it 400, against batch's 41.2 s |
-| `incumbent`, counter over the 153 **free** atoms only | the same, with the counter shrunk ~40× by the forced atoms (`kept_total = forced + kept_free`) | — | **does not win either**: >265 s CPU without reaching it 200, against batch's 2.6 s |
+| `incumbent`, counter over the 153 **free** atoms only | the same, with the counter shrunk ~40× by the forced atoms (`kept_total = forced + kept_free`) | — | **does not win either**: >265 s CPU without reaching it 200, against batch's 2.6 s (a floor read off process accounting, not a completed run — see §8) |
 
 **Four formulations have now cut the work and not the time, and that is the finding.** Incremental RC2
 uses **257×** fewer SAT calls than batch on C4a's window and 2.5× more CPU. Presolving to the 153 free
@@ -248,7 +248,13 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
   engine on C4a reached iteration 400 in **662 s** against batch's 41.2 s, doing 437 SAT calls against
   180,780 — the clearest single statement of the mechanism in this document. Shrinking the cardinality
   encoding onto the 153 free atoms (the fix the dropped-atom idea was reaching for, in the form that can
-  actually be encoded) did not rescue it either: >265 s of CPU without reaching iteration 200. What remains untried is attacking the bound proof itself
+  actually be encoded) did not rescue it either: **>265 s of CPU without reaching iteration 200**,
+  where batch needs 2.6 s. *Provenance of that number, since it is weaker than the others:* the run was
+  killed by its own 600 s wall and its progress output was lost inside a `tail` buffer, so 265 s is a
+  floor read off process accounting rather than a figure the tool printed — my own instrumentation
+  failing in the exact "the measurement did not happen" shape this file keeps warning about. It is
+  reported as a floor because that is what it is; the load-bearing figure for this engine is the
+  unshrunk variant's 662 s at iteration 400 against batch's 41.2 s, which the tool did print. What remains untried is attacking the bound proof itself
   rather than the machinery around it: a different exact method for weighted minimum hitting set (an
   ILP/branch-and-bound, or a MaxSAT solver that is not core-guided from below), on an idle box.
 - **Integration into `reduce_stage`** — deliberately not done: two live runs were executing that file. A
