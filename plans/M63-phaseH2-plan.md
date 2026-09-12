@@ -206,12 +206,12 @@ which is the sub-family where the circle is a *`K`-rational rescaling* of the un
 **strong** condition and it is what makes a circle free. But `n ∈ ℤ` with `n` **not** a square is still a
 perfectly good member — its circle is just an ordinary shell of whatever module realises it, with no
 inherited degree. Screening only perfect squares **hides four of the six 6-open members below radius
-5.6**, which is the generator-image error of §3.1 committed at the top of the plan. So the screen has
+5.6**, which is the generator-image error of §3.4 committed at the top of the plan. So the screen has
 **two** criteria and they are different:
 
 | criterion | what it buys |
 |---|---|
-| **`n` is a square in `K`** (`n = t²`, `t ∈ K`) | the circle is `t ×` (the unit shell). If also `t ∈ O_Λ` (§3.1), **every norm-1 point of the module is a circle point, with the module's full Cayley degree** — free, and rich |
+| **`n` is a square in `K`** (`n = t²`, `t ∈ K`) | the circle is `t ×` (the unit shell). If also `t ∈ O_Λ` (§3.4), **every norm-1 point of the module is a circle point, with the module's full Cayley degree** — free, and rich |
 | **the module merely realises `\|p\|² = n`** | the circle is non-empty; its count is a representation number and its degree is whatever the module gives. Cheaper to *have*, worth much less |
 
 With `n = 1/(2 + 2cos θ)` in place of `1/(2 − 2cos θ)` the same table describes the antipodal family;
@@ -319,6 +319,52 @@ measured predictions, `12` and `36`. **It could have failed and did not.**
    [measured in the gate]. The lever is `ζ₁₂`-closure, which costs **no 3-adic depth** — not more
    denominator. That is a cheaper route to the count than anything in the brief, and it is still not the
    binding constraint (§2c).
+
+### §3.3 — The shell count, in its exact enumerable form, and the complete affordable list
+
+§3.2's formula prices a shell from arithmetic. **On Parts's lattice you can also just count it, exactly
+and with no radius involved**, straight from his congruence — and this is the instrument to use, because
+it is a closed finite computation with no float and no cut:
+
+```
+p = ((a + b√33)/12 , (c√3 + d√11)/12) ,   so  |p|² = (S + 2P√33)/144
+     S = a² + 33b² + 3c² + 11d² ,  P = ab + cd
+|p|² = n  rational   ⟺   P = 0  and  S = 144n
+congruences: (a−b), (a−c), (a−d) all even, and a − b + c + d ≡ 0 (mod 4)
+```
+
+**Verified against every circle count anyone in this phase has measured — six for six**, by the advisor
+and independently here:
+
+| `n` | 1 | **2** | 3 | **4** | 5 | 6 | **9** | 10 | **12** | **16** | **20** | 22 | 24 | 28 | 64 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| shell | 30 | **0** | 42 | **30** | 60 | 0 | **54** | 0 | **42** | **30** | **60** | 0 | 0 | 60 | 30 |
+
+**The complete list of affordable 6-open targets, and it is exactly two.** Combining the wall test, the
+11-inertness test and the shell count above, over `n ≤ 31`:
+
+| `n` | radicand (squarefree) | 11 | shell at `\|p\|² = n` | verdict |
+|---|---|---|---|---|
+| 2 | 7 | inert | **0** | empty — no circle on this lattice |
+| 10 | 39 | inert | **0** | empty |
+| **16** | 63 (**7**) | **inert** | **30** | **LIVE — `ρ₆₃`, Target A** |
+| **20** | 79 | **inert** | **60** | **LIVE — the one-kind test, E4c** |
+| 22 | 87 | inert | **0** | empty |
+| 24 | 95 | inert | **0** | empty |
+
+> **At `n ≤ 31` the 6-open members with a non-empty circle over Parts's lattice are exactly `{16, 20}`.**
+
+**No divisibility rule decides this, and the way that was established is worth more than the rule.**
+The advisor first gave the mechanism as *"a 6-open member with a non-empty circle needs `4 | n`"*. The
+conclusion `{16, 20}` is right, but the rule is not: **`n = 24` is divisible by 4 and its shell is
+empty.** On being shown that, the advisor traced it further and the account is now: the filter it had
+actually measured was *`v₂(n)` odd ⟹ empty* — and `v₂(24) = 3` is odd, which `4 | n` cannot see — **and
+even `v₂(n)` even is only one-sided**, since `n = 17` and `n = 29` have `v₂ = 0` and empty shells. So
+**screen on the shell count itself**, which is the closed finite computation above and costs
+milliseconds. Its own note on the episode, kept because it is this repository's rule turned on its
+author: *a one-sided filter judged an object I was designing around, and I reported its output as a
+classification.* `{16, 20}` survived only because it was read off the shell table rather than off the
+rule.
 
 **Two targets follow, and they are different jobs.**
 
@@ -428,7 +474,7 @@ So `ρ₆₃`'s base is on the order of **25,000 points and a 50,000-vertex aren
 arena, not the 52× an `r⁸` estimate gives. The solver on this box refused a 6,865-vertex arena in
 10.7 s and four-coloured a 41,034-vertex one in 43.3 s. **This is an ordinary-sized job.**
 
-### §3.1 — The generator's image, written down before any enumeration
+### §3.4 — The generator's image, written down before any enumeration
 
 Required by the brief's §7 and by `CLAUDE.md` (*"before believing any zero over a family, write down
 the generator's image and check the target is inside it"*). Three enumerations appear in this plan;
@@ -548,7 +594,7 @@ lattice's own congruence conditions rather than by enumerating points. Then enum
 with `|t|` and all its conjugates inside a workable cut radius, and screen each through G3's columns:
 `sin θ ∉ K`, wall-breaking, 11-inert, endpoint bound, and the count of points at `|p|² = t²`.
 
-**Why this and not the integer sweep.** §3.1's middle row. `ℤ ⊆ O_Λ` is why `t = 2, 3, 4, …` work at
+**Why this and not the integer sweep.** §3.4's middle row. `ℤ ⊆ O_Λ` is why `t = 2, 3, 4, …` work at
 all, and the integer sweep is the sub-family `t ∈ ℤ`. If `O_Λ = ℤ` then **the integer table of §3 is the
 complete free-circle family on his lattice and that is a clean, final, base-free statement about the
 monoculture.** If `O_Λ ⊋ ℤ` there are members nobody has enumerated. Either answer is a result.
@@ -757,7 +803,22 @@ cheaper and **looks exactly like success**. Being built by the law is the reason
 not the reason it does not. Also not done: the symmetry gate, `C0` containment, the `σ` spectrum per
 kind, the arena, and the ask.
 
-**But you only have to recount 36 of the 126, and the other 90 are a free two-sided control** (the
+> **DISCHARGED, 2026-09-12, before this plan was handed over.** The advisor recounted ρ₆₃'s cross
+> edges **from first principles with no edge law at all** and reproduced **126 = 60 + 36 + 30** exactly.
+> Method, so the implementer can check it rather than trust it: `sin θ` is irrational over `K`, so
+> `|p − Rq|² = |p|² + |q|² − 2(cos θ·⟨p,q⟩ + sin θ·(p × q)) = 1` **splits into two exact equations in
+> `K`** — `p × q = 0` and `|p|² + |q|² − 2cos θ·⟨p,q⟩ = 1` — with nothing fitted and nothing inherited;
+> collinearity with the centre falls out as a *consequence* rather than being assumed. Points are
+> bucketed by direction, then both identities tested exactly in the basis `(1, √3, √11, √33)`.
+> **The `cos = 7/8` control had to return 126 = 60 + 36 + 30 and did**, so the `cos = 31/32` run is an
+> independent confirmation at a parameter where the law was tied to nothing. 49 s on
+> `Λ(4.0316)`, 25,567 points — the base count differs from 25,843 only by the cut radius (4.0316
+> against 4.04), and the cross count is radius-independent by the endpoint bound.
+> **So the 36 off-diagonal edges are real, and an UNSAT at ρ₆₃ would not be built on invented edges.**
+> Re-run it anyway as part of the gate — a discharged control that nobody re-ran is a claim — but
+> budget it as a confirmation, not a risk.
+
+**You only have to recount 36 of the 126, and the other 90 are a free two-sided control** (the
 advisor, after the planner flagged that reproducing the record's exact decomposition at a new parameter
 is the most flattering output a derived law can give). **90 of the 126 are forced by `|S| = 30` alone
 and involve no law, no parameter and no cosine:**
@@ -813,53 +874,29 @@ verdict**. The cross edges are **derived from a law at a new parameter**, so the
 Before trusting either, ask which half produced it. Being built by the law is the reason the law needs
 checking, not the reason it does not.
 
-### E4b — `n = 2`: the one place "find the base" still applies, at the cheapest radius of all
+### E4b — `n = 2`: **RETIRED, measured dead.** Do not run it
 
-**Rank 4b — run it if E4 returns SAT, or in parallel on spare cores since it needs no solver until the
-end.** *Cost: the screen is minutes; the base design is the open part.*
+*Kept with its reason rather than deleted, per this project's deprecate-never-delete rule, because the
+route was live for several hours and the reason it died is reusable.*
 
-`cos θ = 3/4`. Circle `|p|² = 2`, radius **1.4142**; endpoint bound **1.5119**, so the entire cross set
-lives inside radius 1.512 — **cheaper than the brief's own base and far cheaper than `ρ₆₃`'s.** Radicand
-**7**: wall-breaking, 11-inert, the same **6-open** field `K(√7)` as `ρ₆₃`. `sin²θ = 7/16` is not a
-square in `K`, so `PH2-8`'s screen passes.
+`cos θ = 3/4`, circle `|p|² = 2`, radius 1.4142, radicand 7, so the **6-open** field `K(√7)` — and its
+circle carries the *rational* point `(1, 1)`. On promise it looked like the cheapest member in the
+family. **It is dead, on two independent measurements:**
 
-**Parts's lattice has 0 points at `|p|² = 2`, and 2 is not a square in `K`, so there is no free shell.**
-But the circle is non-empty in `K²` with a *rational* witness, `p = (1, 1)` — `1² + 1² = 2`. It is
-absent from his lattice only because his coordinates confine `y` to `ℚ√3 ⊕ ℚ√11` (`PH-3`). **This is
-the brief's mission, intact, re-aimed at a circle that is 2 instead of `(7+√33)/3` and a field that is
-6-open instead of 5-sealed.**
+1. **Its circle is empty on Parts's lattice, for a 2-adic reason that no radius fixes.** The shell count
+   at `|p|² = 2` is **0** — verified twice, by the advisor and independently here from his congruence
+   (§3.3). And the emptiness is systematic, not particular: **every `n` whose power of 2 is odd has an
+   empty circle over this lattice** — 30 of 30 values checked.
+2. **Its arena carries no non-centre cross edge at all.** The advisor's law-free recount:
+   `Λ(1.5119)`, 499 points → **60 cross edges, every one a centre edge**, zero off-diagonal and zero
+   diagonal, and stable from radius 1.5119 to 2.0 (499 → 1,603 points). So the arena is *two copies of
+   a four-colourable graph glued at one vertex, plus a centre star.* **There is nothing there to
+   test.**
 
-**The design problem, stated as the two shell counts of §2(c).** Find a ℤ-module in `K²`, closed under
-negation and the two Galois flips, whose **norm-1 shell is large** (that is the unit-distance structure,
-by `addCayleyMap`) and whose **norm-2 shell is large** (that is the margin). Both are shell counts of
-one module, so price the pair, not either alone. Starting points, cheapest first:
-1. **`ℤ²`** — norm-1 shell 4, norm-2 shell 4 (`(±1,±1)`). Poor but nonzero, and a calibration point.
-2. **`ℤ² + (the hexagonal wheel)`** — the wheel `{(0,0), (±1,0), (±1/2, ±√3/2)}` supplies 6 norm-1
-   points; ask whether the sum's norm-2 shell grows and at what covolume (G4's pricer).
-3. **a Minkowski-sum fabric built around `(1,1)` rather than adjoining it** — the structural lesson of
-   §2(b,c): stage 1 adjoined a circle point to a fabric and got degree 1; build the fabric so the
-   circle point is *in* it and it carries the full Cayley degree.
-4. **the multiplier-ring route** — if E1 finds `√2 ∉ O_Λ` for every rich Λ you try, then `n = 2`'s
-   circle can never be a scaled unit shell and its points will always be adjoined; say so, because that
-   is the same verdict §2 reached for the stage-1 rotation and it would be the *second* instance of the
-   pattern rather than the first.
-
-**Report the thinness column beside the circle count, because it is what decides this item and it
-needs no solver.** `Λ_parts(1.5119)` holds **499** points, so the cross-edge-bearing arena is ≈**1,000
-vertices**. **Give the unit-edge count inside radius 1.5119 and its per-point figure, and compare it to
-`ρ₆₃`'s 10.65 per point.** If `n = 2` comes in at a fraction of that, it is thin for a *measured*
-reason and can be ranked honestly instead of on its radius. And note §3.2's formula says its circle
-count *equals the record's* (60 on `(1/3)·O_L`), so **the circle is not what is wrong with `n = 2`** —
-one more instance of the count not being the constraint.
-
-**Prediction.** Planner at **0.5**, honestly a coin flip, that a module exists with norm-1 shell ≥ 12
-and norm-2 shell ≥ 12 at a cut of ≤ 50,000 points. *Both outcomes reachable: the pricer decides it
-before anything is built, and either answer is a statement about `K`'s shell arithmetic rather than
-about a search.*
-**Controls (two-sided).** The pricer's G4 controls, plus: any module you propose must be **checked to
-contain `(1,1)` and its symmetry orbit**, and the circle count must be read from the **enumerated cut**,
-not from the design intent — `enumerate_ball` is float-Cholesky and can silently drop a point (§5
-trap 1), and here a dropped point is a silently lost margin.
+**The transferable lesson, which is the plan's §2 thesis arriving a third time:** `n = 2` had the
+cheapest radius, the simplest witness, and a 6-open field, and it was still empty — because *promise
+measured on the circle says nothing about what the base realises.* The shell count is the instrument
+(§3.3); the rational witness `(1,1)` was never in his lattice and never could be.
 
 ### E4c — the named fallback, and why it is NOT another member of the family
 
@@ -868,7 +905,7 @@ would make the session spend its remainder there. Here is the gate, and here is 
 thinks the honest fallback is a different item.*
 
 **`n = 12` — measured in full, because the planner registered a condition for changing its mind and
-then met it. The ruling survives; its grounds changed completely. §10.6 scores the registration.**
+then met it. The ruling survives; its grounds changed completely. §10.5 scores the registration.**
 
 `cos θ = 23/24`, circle `|p|² = 12`, radius 3.4641, endpoint bound 3.5008, radicand `47`. Measured on
 `parts_lattice(3.51)`, desktop, with the `ρ₁₅` control reproduced in the same process:
@@ -902,22 +939,148 @@ essential"*.
 
 1. **`ρ₆₃` still holds the solver slot first**, and now for a third reason on top of 6-openness and the
    advisor's value-of-information argument: **it is the only one of the two that has both kinds.**
-2. **`n = 12` is re-purposed, not skipped.** It is **not** a χ ≥ 6 candidate — 5-sealed, so even a
-   refusal there is a five-chromatic object. But it is **the cheapest clean test of the one inherited
-   assumption this entire phase carries**: `H4`, *"a type-M arena needs two kinds"*, which `PH-1` and
-   `PH-2` both stamp **inherited from one measurement on one object, not proved**, and about which
-   `PH-1` says explicitly *"a base whose only non-centre kind is the diagonal is the **minimal
-   surviving configuration** — do not discard a one-kind base without asking it."* **`n = 12` IS that
-   base.** It exists on his own lattice, it is 43% smaller than `ρ₆₃`'s, its circle is 40% richer, and
-   nobody has ever asked it. **If it refuses, `H4` is refuted and the two-kind requirement falls. If it
-   is four-colourable, `H4` gets its second data point and its first on a base other than his.** Either
-   way it is a result, and it costs one solver call on 29,378 vertices.
+2. **The one-kind test is worth running — but run it at `n = 20`, not `n = 12`.** The test itself is
+   the cheapest clean probe of the only inherited assumption this entire phase carries: `H4`, *"a
+   type-M arena needs two kinds"*, which `PH-1` and `PH-2` both stamp **inherited from one measurement
+   on one object, not proved**, and about which `PH-1` says explicitly *"a base whose only non-centre
+   kind is the diagonal is the **minimal surviving configuration** — do not discard a one-kind base
+   without asking it."* Both `n = 12` and `n = 20` **are** that base. The advisor's improvement, adopted:
+
+   | | `n = 12` (`cos 23/24`) | **`n = 20` (`cos 39/40`)** |
+   |---|---|---|
+   | cross edges (law-free recount) | 102 = 60 centre + 0 off-diag + **42** diagonal | **120 = 60 centre + 0 off-diag + 60 diagonal** |
+   | base points | 14,689 | 38,785 at radius 4.4722 |
+   | radicand | 47 → a residue mod 11 → **5-SEALED** | 79 → a non-residue → **6-OPEN** |
+   | prize if it refuses | a new five-chromatic object | **a rung toward χ ≥ 6** |
+
+   **Identical graph shape, 43% more matching edges, and the only one of the two whose refusing branch
+   is worth anything beyond a record.** Its cost is comparable to `ρ₆₃`'s. Keep `n = 12` only as the
+   cheap rehearsal if `n = 20`'s size is a problem, and say which you ran.
    *Prediction, registered: **SAT**, at 0.8 — `H4` is inherited from `[Parts2020a]`'s own sentence and
-   from M62 §R20's orbit-subset census, and 42 diagonal edges with no second kind is exactly the
+   from M62 §R20's orbit-subset census, and a diagonal matching with no second kind is exactly the
    configuration §R9 measured as colourable. Both outcomes reachable: the object exists, is affordable,
    and has no prior verdict anywhere. Controls: the `ρ₁₅` UNSAT in the same process tree, and the
-   independent recount — here only **42** of the 102 edges are law-dependent, since the 60 centre edges
-   are forced by `2|S| = 60` with no cosine entering.*
+   independent recount — where only the **60 diagonal** edges are law-dependent, since the 60 centre
+   edges are forced by `2|S|` with no cosine entering.*
+
+   **And the test is sharper than a yes/no, because the advisor has reduced it.** With both halves the
+   same graph, an arena colouring can be tried as `(C, π∘C)`; the **centre star is then provably free**
+   for any `π` fixing the centre's colour, and the diagonal matching reduces to *"`π` must move every
+   colour occurring on the circle"*. So:
+
+   > **A diagonal-only arena is four-colourable as soon as the base has ONE proper four-colouring in
+   > which no circle point takes the centre's colour.**
+
+   **No residue or additive colouring can be that witness.** The circle points at `n = 12` and `n = 20`
+   are `2w`, and `φ` is additive with `φ(2w) = 0` — the centre's own residue — so every residue
+   colouring, and by `CLAUDE.md` G41 every *additive* colouring, fails the condition. **So the one-kind
+   question is not settled by derivation; it is reduced from an arena solve to a base colouring with
+   one extra constraint**, whose witness must come from outside the additive family (`FS-2`'s
+   territory). Smaller, but still a search.
+
+   **So run it as TWO complementary halves, and never build the 77,570-vertex arena at all.** The
+   advisor's `PH2-13`, adopted whole; the second half is three orders of magnitude smaller than the
+   first and neither makes the other redundant.
+
+   | half | object | instrument | a hit means |
+   |---|---|---|---|
+   | **hunt the colouring** — *load-bearing, plan around this* | the base alone, 38,785 vertices, **60 unit clauses** | one solver call | the arena is four-colourable, **and is never built** |
+   | **hunt the pigeonhole** — *speculative, hope for this* | a carrier at distance `2√5`, **size unknown** | ledger row 31's machinery, pointed at a new distance | the arena **refuses**, and you hold the small early compulsion |
+
+   **The second half rests on a restatement, and the restatement is sound.** *"No circle point wears
+   the centre's colour"* is verbatim *"no monochromatic pair between the centre and its circle at
+   distance `2√5`"* — and `v_𝔭(4·5) = v_𝔭(4) > 0`, so that distance lies in the **positive-valuation
+   class**. **Verified here at both primes: `d² = 20` returns residue `(0,0)` at both, exactly as
+   `d² = 2² = 4` does, while `d² = 5` alone is a unit — so it is the factor 4 doing the work.** That is
+   the **same mechanism** as the distance-2 pigeonhole this project already holds in the kernel with a
+   **122-vertex carrier** (`Proofs/HadwigerNelson/Instances/Core122.lean:130`, `core122_pigeonhole`,
+   inhabited by `core122_colorable_four` at `:188`; ledger row 31, grokking G16), and whose `√3` sibling
+   concentrates to **nine** vertices (`Instances/Core9.lean:111`).
+
+   **THE MECHANISM TRANSFERS; THE CARRIER'S SIZE DOES NOT. Do not read a cheap sure thing here.** The
+   advisor's own correction to `PH2-13`, adopted, and the planner has one kernel theorem to add to it:
+
+   - **Why the two existing carriers are small is geometry specific to their distances.** Distance 2 is
+     the **tangential** case — the pair has *exactly one* common unit-neighbour, its midpoint — and the
+     122-vertex carrier is built around that. `√3` concentrates to nine because it is the one distance
+     whose equilateral triangle has unit circumradius (G16), so its pair has a *whole circle* of common
+     neighbours. **At `2√5 = 4.4721` the endpoints are more than 2 apart, so they share NO common
+     unit-neighbour at all** (verified: midpoint at `√5 = 2.2361` from each end, and the two unit
+     circles do not meet). **There is no two-edge path and no special triangle** — any carrier must
+     route through paths of length ≥ 3.
+   - **And the kernel already constrains such a carrier, harder than "it may not be small".**
+     `criticalSet_eq_empty_of_forces_of_two_lt_dist` (`Proofs/HadwigerNelson/CriticalSet.lean:319`;
+     ledger row 48, G39) says that for a unit-drawn graph, a pair **forced equal at a distance greater
+     than 2 has an EMPTY critical set**. So a `2√5` carrier must be **everywhere vertex-redundant** —
+     no vertex whose deletion matters — where the distance-2 carrier was allowed up to two critical
+     vertices (`encard_criticalSet_le_two_of_forces`, `:326`). **That is a strictly harder object than
+     the one row 31 holds**, and it is a theorem rather than a prior.
+   - **So the `10²` figure that stood here is withdrawn.** It was the size of the *existing* carriers at
+     *other* distances, never an estimate for this one. **Size unknown, and the honest prior is "larger,
+     possibly much larger".**
+
+   **And that theorem is not only a constraint on the object — it is a free rejection test and a warning
+   about the instrument. Both are load-bearing for whoever runs this half.** Index convention, checked
+   at the source: `Forces G k p q` means *every* `k`-colouring agrees (`Forcer.lean:40`), the theorem
+   takes `Forces G (k+1) u v` and returns `CriticalSet G k = ∅`, and
+   `CriticalSet G k = {c | (G.deleteIncidenceSet c).Colorable k}` (`CriticalSet.lean:72`). A carrier
+   forcing a pair at **four** colours is the case `k + 1 = 4`, so `k = 3`. Therefore:
+
+   1. **A free first filter — reject before you ever test forcing.** *If any single vertex's deletion
+      makes a candidate carrier **3-colourable**, that candidate cannot be forcing a pair at `2√5`.*
+      That is one 3-colourability check per vertex and **no forcing test at all**, so the expensive
+      question is never asked of a candidate the cheap question can throw out. **Run this first.**
+   2. **A warning that would otherwise cost a night of debugging.** A **vertex-minimal 4-chromatic
+      graph has every vertex critical** in exactly this sense — deleting any one leaves it
+      3-colourable. So **a `2√5` carrier can never be vertex-minimal**, and therefore **any reduction
+      that preserves the forcing MUST stall before minimality — by the theorem, not by a bug.** Both
+      existing carriers were found by concentration at distances where critical vertices are *permitted*
+      (up to two at distance 2, `encard_criticalSet_le_two_of_forces`; a whole circle of common
+      neighbours at `√3`). At `2√5` that route terminates early **by necessity**. **An implementer who
+      runs the reducer and watches it stop short is looking at a correct stall, not a broken tool.**
+
+   **So the honest state of the speculative half is sharper than "larger and structurally constrained":
+   the object is non-minimal by theorem, the instrument that found its two predecessors cannot reach it,
+   and the cheap test for it is a rejection rather than a search.** That is more actionable than the size
+   estimate it replaced. Credit: the advisor, `PH2-13`'s second correction; the theorem citation is the
+   planner's, both uses of it are the advisor's.
+   **Trap, and it is declared in that file:** consume **`core122_pigeonhole`**, never `core122_plane` —
+   the latter is marked `VACUITY DECLARED` at `Core122.lean:151` because there are no four-colourings of
+   the plane, so it supports nothing.
+
+   **Two implementation notes that keep the first half genuinely cheap — write both in, or the
+   implementer pays for one and skips the other.** *(i)* Colour classes are interchangeable, so **fix
+   the centre's colour without loss of generality**; the 60 constraints are then literally unit clauses
+   (*"this circle point ≠ colour 0"*) and no four-way case split is needed. *(ii)* **Verify a returned
+   colouring against a freshly enumerated edge list, not against the solver's input.** The base's edges
+   are *measured* — a float proposes, exact arithmetic disposes — so the only possible fault is a
+   **missed** edge, which makes colouring *easier* and would flatter exactly this "found". Re-enumerating
+   kills that risk and costs nothing.
+
+   **And the first half is the one verdict in this entire phase you can believe on sight.** A returned
+   colouring is a **certificate checkable in linear time** — walk the edge list once. No solver trust,
+   no LRAT replay, no axiom purchase. Every other verdict in this milestone is a refusal, and refusals
+   are the expensive and suspect direction. **This is the one place where "found" is the believable
+   direction**, and that is worth more than the cost saving.
+
+   **The pigeonhole half would pay twice if it lands**, which is why it is worth attempting *after* the
+   colouring hunt rather than instead of it. A carrier forcing a monochromatic `2√5` pair between a
+   centre and its circle **is** the small, enumerable, early compulsion that `CLAUDE.md` § "The open
+   structural question" asks whether every forcer must carry — and unlike an arena verdict it is a
+   statement about a **class** rather than about one object. If it exists it is the more publishable
+   half of the phase.
+
+   **But the ordering is the reverse of the prize.** The branch whose positive is **self-certifying**
+   goes first and is the one to plan around; the branch that would answer the structural question is
+   the one to **hope for**. An earlier draft of this item had those reversed, on a carrier-size prior
+   that the two bullets above retract.
+
+   **Acceptance for this item, stated so the first ambiguous answer cannot read as a result. EXACTLY TWO
+   outcomes conclude anything:** *a colouring found* (the arena is four-colourable; `H4` gets its second
+   data point) and *a carrier found* (the arena refuses; `H4` is refuted and the pigeonhole is the
+   product). **A carrier hunt that finds nothing proves nothing** — the family of carriers is not
+   enumerated. **A solver timeout proves nothing.** Everything else is silence, and **silence is not
+   evidence**: the four-colour filter fires one way only.
 3. **The trigger for spending the remainder elsewhere.** If `ρ₆₃` returns **SAT** with a clean recount,
    the phase has learned something about the **recipe** — *dense fabric, free full-degree circle, both
    kinds, 6-open field, still four-colourable* — and the remainder goes to **E2 and E3**, the mechanism
@@ -1339,7 +1502,7 @@ measurement.*
   cannot decide anything alone — but if this phase ever wants a second base, or a check that the
   criterion behaves on a base that is not `Λ_parts`, it is on disk and it is free.
 
-### 10.6 — A pre-registered condition, scored honestly, including its mis-specification
+### 10.5 — A pre-registered condition, scored honestly, including its mis-specification
 
 *Recorded in full because the product owner asked for the registration to be completed rather than left
 as a deferred line, and because how it came out is more instructive than a clean pass would have been.*
@@ -1372,7 +1535,7 @@ That is not a pass. The honest reading has three parts:
 act differently, not the quantities you happen to be measuring.* A condition written over the two
 numbers already in front of you will fire on the wrong evidence and read as a finding.
 
-### 10.5 — One fault found and deliberately not fixed
+### 10.6 — One fault found and deliberately not fixed
 
 `CLAUDE.md` line 124 reads *"Extended to radius 2.44 (3,433 points, 179 orbits) **the base** contains
 Heule-510 exactly"*. Its source, `plans/M62-evolutionary-type-m.md:1361`, reads **"the arena"**, and
