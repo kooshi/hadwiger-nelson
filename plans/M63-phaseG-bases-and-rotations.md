@@ -427,7 +427,7 @@ and its cost is stated conditionally.*
 | **P-G2** | **Every wall-standing candidate angle's arena is 4-colourable: 20 of 20 SAT at r = 2.44.** This is the wall theory's negative control, not a formality | filter 2's theorem, modulo G35's gate | 20 asks; SAT is the cheap verdict (~1 s each measured at this scale), budget 20 min | the ask log, three-way (`SAT` / `UNSAT` / `undecided at cap`, never two-way) |
 | **P-G3** | **`ρ₁₅`'s own arena at r = 2.44 refuses four colours (UNSAT).** The positive control, and it is already known: that arena contains Heule-510 exactly | M62 §R22 measured UNSAT in 10.5 s on the 510-vertex selection | one ask, ~10–60 s | the log |
 | **P-G4** | Going to radius 3.0 on his lattice adds candidate angles but **no** new wall-breaking ones (the count stays at 6) | radius adds radii, and the wall is a condition on the square class; measured stable 2.00 → 2.44. **Genuinely uncertain — 0.5** | seconds for the census | the artifact |
-| **P-G5** | The new rotation class (rank 3–6) **does not** refuse four colours on the first arena tried, at 0.65 | it carries 18 off-diagonal pairs and **no** diagonal or centre edges, against `ρ₁₅`'s 18 + 30 + 60. Cross material is not the ranking criterion, but zero diagonal edges means the two halves touch only along one family | 4 asks (the four sign/conjugate variants), ~1–5 min | the log. **A refusal here is the phase's headline result** |
+| **P-G5** | The new rotation class (rank 3–6) **does not** refuse four colours on the first arena tried, at 0.65 | it carries 18 off-diagonal pairs and **no** diagonal or centre edges, against `ρ₁₅`'s 18 + 30 + 60. Cross material is not the ranking criterion, but zero diagonal edges means the two halves touch only along one family | **1 ask**, not 4 — the four rows are one rotation up to base symmetry (§11.6) | the log. **A refusal here is the phase's headline result** |
 | **P-G6** | The general (`cos ∉ K`) census on `parts_lattice(2.00)` returns **fewer than 60 angles with ≥ 2 kinds**, against the 412 radicand classes the old list reports | §1.2: a class holds several angles and most angles hold one kind | `O(n²)` exact pairs: ~2–5 min at 1,603 points, priced on a 500-point prefix first | the artifact |
 | **P-G7** | If a rotation survives filter 4, manufacturing its **first accumulator** costs at least as much as the largest ladder rung that closed on his base (phase F's P-F14), and **this is the phase's dominant cost, not the census** | a new base or rotation has no published accumulator; the only way to get one is a closed reduction of a large arena | **unpriced until phase F's ladder lands**; do not start it on a guess | phase F's F1 curve |
 | **P-G8** | Every base in §4.2 rows 1–3 has `cos = 7/8` with ≥ 2 kinds in its census | if it does not, the base cannot host the known construction and the base builder is wrong | seconds per base | the artifact |
@@ -520,7 +520,7 @@ confidence with the one fact that would change it.*
 
 | rank | decision | options | recommendation | if you say nothing |
 |---|---|---|---|---|
-| **must decide before work starts** | **Does a 5-chromatic object at a *new rotation* count as a result even if it is larger than 509?** | (a) only sub-509 counts; (b) any object at a rotation nobody has used is a finding, reported with its size | **(b)**, and it is the honest reading of `[Parts2020a]` §4: he says working constructions at other rotations are **not known**, not that small ones are not known. A 900-vertex object at rank-3's rotation answers a question in print; a 520-vertex object at `ρ₁₅` answers nothing | **(b)** — the phase reports any refusing object at a new rotation as a finding, and separately whether it beats 509 |
+| **RULED 2026-09-11** | **Does a 5-chromatic object at a *new rotation* count as a result even if it is larger than 509?** | (a) only sub-509 counts; (b) any object at a rotation nobody has used is a finding, reported with its size | **(b), ruled by the product owner.** `[Parts2020a]` §4 says working constructions at other rotations are **not known**, not that small ones are not known; the publication bar includes *"a result that answers a question the literature has independently and repeatedly posed, whatever its size"*; §PA1 found that question asked in print twice and answered by nobody; and such an object is the warranty on the **method**, which is the product. **Binding on the report: state the finding in its own right and answer the record question separately — never blended**, so a reader after the record number does not have to disentangle it from a different claim | — |
 | decide when convenient | **Build the one-radicand exact-arithmetic layer (A2) now or at the first surviving candidate?** | (a) now, half a day, before the census; (b) when something survives | **(a)** — it is the soundness check's own prerequisite (§6.2), so deferring it means the first new object is checked by the law that built it | **(b)** — the census runs without it and nothing is lost but ordering |
 | decide when convenient | **Read `[PartsOdd2022]`'s construction section (half a day) before or after the census?** | (a) before; (b) after | **(b)** — it is the only other published type-M-shaped rotation (`arccos(31/32)`), so it bears on the write-up and on P-G5's prior, but it cannot change the census | **(b)** |
 | know, do not decide | **Nothing on either base is 6-open** (§3.4 #2) | — | it belongs in FS-6's stub, whose design target this narrows | recorded here; FS-6's stub updated at the phase close |
@@ -809,3 +809,34 @@ Adopted into §9's item 1: the re-sieve on the §5.6 lattice should, in **one pa
 
 **A class is a field, not a rotation** — his sentence, and it is the cleanest statement of §1.2's whole
 finding. The original sieve cost 45.6 s; this costs the same and answers both questions.
+
+### 11.6 — The six wall-breaking rows are **two** rotations, and the census's reporting unit must say so
+
+*Caught while reading the advisor's §R2 snippet, whose rotation key is `cos²` rather than `cos`. His
+reasoning is right and §3.3's table, which is correct as a list of **angles**, is missing the grouping.*
+
+Rotation by `π − θ` is `−ρ̄`. This base is closed under **negation** (`ζ₆³ = −1`), under **complex
+conjugation** (the Galois flip `√3, √11 ↦ −√3, −√11` *is* the geometric reflection, M62 §R19(1)) and under
+**`√33 ↦ −√33`** (the remaining Galois element of the order-24 group). For any base symmetry `g`,
+`g(ρ·v) = ρ^g·g(v)`, so `g` carries the arena of `ρ` onto the arena of `ρ^g`. Therefore:
+
+> **The four sign-and-conjugate variants of a rotation give isomorphic arenas**, and §3.3's six
+> wall-breaking rows are **two rotations up to base symmetry: `ρ₁₅`, and one new one.**
+
+**The arithmetic confirms it in my own control's numbers**, which is why this is a grouping error and not a
+contradiction: at `cos = +7/8` the census reads `2 × 18 + 30 + 60 = 126`, and at `cos = −7/8`
+`2 × 33 + 0 + 60 = 126` — **the same total by a different decomposition**, exactly as an isomorphism that
+moves which pairs are diagonal requires.
+
+**Two consequences, both binding on the implementation:**
+
+1. **The census's reporting unit is "rotation up to base symmetry", never "angle".** Reporting four
+   negatives that are one negative would be a false count in the phase's headline sentence — the same
+   class of error §1.2 catches in the stored file, arriving from the other direction.
+2. **Screening cost falls accordingly**: P-G5 is **one** ask, not four, and the same collapse applies to
+   every row of §3.3.
+
+**The caveat travels with it**: on a base that is *not* centrally symmetric, or not closed under both
+Galois flips, the variants are genuinely different rotations and the key must carry the sign. Every base in
+§4.2 rows 1–3 is closed under all of them; rows 4–6 must be checked rather than assumed, and the check is
+one line (apply each symmetry to the point set and require zero images outside).
