@@ -1839,10 +1839,15 @@ steps, and both colourability controls firing.
 literal, the empty clause removed, and **the proof checked against a different instance** — all five
 caught. They are stored **in the artifact**, not merely in a log, because they are part of the claim.
 
-**`[RUNNING]`** the same chain on the 2,279-edge object; its geometry (1,732 + 30 + 517) and degree
-floor have passed and the unpinned refutation is in progress. **Until the Lean kernel certificate
-lands (phase F) the honest words are "a certified refusing object below the published edge count,
-not yet a record"** (§S.1 #4).
+**The 2,279-edge object passes all six legs** (`data/m62/m63-edge-verify-509.json`): geometry exact
+on all 2,279 edges (1,732 L-L + 30 L-S + 517 S-S), minimum degree 4 with the degree sum 4,558
+reconciling, **UNSAT unpinned in 1,250 s**, a **3.68 GB** LRAT proof replayed in 423 s over
+**7,699,212 RUP steps** with zero unsupported steps, all five planted faults caught, and both
+colourability controls firing. The unpinned leg costs **1,250 s here against 109 s on the full
+2,442-edge object** — the right direction, since an edge-reduced graph is a tighter instance.
+
+**Until the Lean kernel certificate lands (phase F) the honest words are "a certified refusing
+object below the published edge count, not yet a record"** (§S.1 #4).
 
 ### R3.b — Acceptance clause 2(b): the rule, frozen, and its held-out attempt
 
