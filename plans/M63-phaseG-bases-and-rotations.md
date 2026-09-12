@@ -1107,3 +1107,91 @@ edge list's completeness reduces to the completeness of the collinear enumeratio
 exhaustive over pairs on each line — and the 1.7M-pair sweep would catch an implementation bug in the
 line keying or the pair loop, which is not what the claim rests on. **The proportionate remedy** is to
 sweep one wall-standing class rather than nine, and to say that the collinearity theorem does the work.
+
+### 12.5 — The base question, registered before the run
+
+*Asked by the product owner, 2026-09-12, on RS-7: **does any constructible base in `K²` contain a live
+radius sum for the new angle?** It is the difference between explaining the monoculture and
+re-confirming it on one lattice. §12.4 proved the new rotation dead **on `parts_lattice`**; this asks
+whether the death is the lattice's or the angle's.*
+
+**The parametrisation the question reduces to, derived here.** A collinear cross pair is `(u, λu)`
+with `λ ∈ K`. The law `cos θ · p = k` becomes, with `a = |u|²`,
+
+```
+a (λ² − 2 cos θ · λ + 1) = 1 ,     so     a = 1/(λ² − 2 cos θ · λ + 1) ,
+d² = |u − λu|² = (1 − λ)² a .
+```
+
+`λ = 1` is the equal-radius family (`d² = 0`), `λ = 0` the centre family (`a = 1`). Equivalently, read
+from a point rather than from `λ`: **a ray through a `K`-point of squared norm `n` carries a cross edge
+at this rotation iff `1/n − sin²θ` is a square in `K`**, and then `λ = cos θ ± √(1/n − sin²θ)`.
+
+So the question is two questions, and they are asked separately because they can have different
+answers:
+
+| # | question | what a YES means |
+|---|---|---|
+| **Q1, arithmetic** | is there `λ ∈ K` with `v_𝔭(d²) > 0` at **both** primes above 2? | live radius sums exist for this angle **in the field**, so §12.4's death is not the angle's arithmetic |
+| **Q2, realisability** | is some such `a = 1/(λ² − 2cos θ·λ + 1)` the squared norm of an actual `K`-point (equivalently a sum of two squares in `K`), and does a lattice this project builds realise one? | a base on which the residue certificate is **silent** can be built, so the rotation is **not eliminated**, only un-eliminated — the filter is one-sided |
+
+**Registered predictions.**
+
+| # | prediction | confidence |
+|---|---|---|
+| **P-G13a** | **Q1 is YES.** `v_𝔭(d²) = 2v_𝔭(1−λ) − v_𝔭((1−λ)² + 2λ(1−cos θ))`, and making `1 − λ` 𝔭-adically small at both primes drives it positive, so live radius sums should be easy to find in `K` | **0.9** |
+| **P-G13b** | **Q2 is YES** — some live `a` is a genuine squared norm in `K²` | **0.75** |
+| **P-G13c** | **no lattice this project already builds** (`parts_lattice` at any radius, the Moser lattice, the seam lattice) realises a live radius sum at this angle | 0.6 — §12.4 shows the one that matters most is missing from `parts_lattice` |
+
+**What a YES to Q1 and Q2 does and does not say.** It says the elimination's scope is exactly
+`parts_lattice`'s radius-sum spectrum, and that the new rotation is **un-eliminated**, not alive: the
+filter is one-sided, so silence proves nothing. A base realising a live radius sum still has to be
+built, still has to carry two kinds, and still has to refuse four colours. **Stop and report before
+going past Q2** (the product owner's instruction).
+
+### 12.6 — The base question, answered: **YES**, and the point is exhibited
+
+*Run 2026-09-12. **Both halves answered; the product owner's stop-and-report trigger is met.***
+
+**Q1 — arithmetic: YES, in abundance.** `v_𝔭(d²) = 2v_𝔭(1−λ) − v_𝔭((1−λ)² + 2λ(1−cos θ))`, so making
+`1 − λ` 𝔭-adically small drives it positive. A grid over `λ = p/q + (e/2^k)√33` (`q ≤ 24`,
+`|p| ≤ 48`) returns **30,610 live λ for the new rotation** and 78,866 for `ρ₁₅`. P-G13a **met**.
+
+**Q2 — realisability: YES, and constructed.** The equal-radius family at the new angle needs a
+`K`-point of squared norm `1/(2 − 2cos θ) = (7 + √33)/3`. §12.4 showed `parts_lattice` has none. **It
+exists in `K²`:**
+
+```
+u  =  ( 1/3 − √3/2 − √11/6 ,  1/3 + √3/2 + √11/6 )  ≈  (−1.08546, 1.75213)
+|u|²  =  7/3 + (1/3)√33  =  1/(2 − 2cos θ)          exactly, radius 2.061113
+```
+
+Checked exactly, and the unit-distance check is the **independent** `K[x]/(x² − D)` expansion, not the
+law: `|u − ρu|²` has rational part **1** and radical part **0**. Its own difference is `0`, so the pair
+is `φ`-monochromatic at **both** primes above 2 — a live radius sum. All four Galois conjugates of the
+radius are positive (`(7 ± √33)/3 = 4.2482, 0.4185`), so a totally-real disk cut admits it.
+P-G13b **met**; P-G13c **met** (no lattice this project builds realises it).
+
+**What this does and does not say, stated narrowly.**
+
+* It says **§12.3's certificate is a fact about `parts_lattice`'s radius-sum spectrum, not about the
+  angle.** On a base containing `u`, the residue certificate **cannot fire**, at either prime.
+* It does **not** say the rotation works. The filter is one-sided: firing proves four-colourable,
+  **silence proves nothing.** The rotation is **un-eliminated, not alive.**
+* A base still has to be built — a lattice in `K²` containing `u`, closed under the symmetries the
+  census's class key needs (§11.6's gate), carrying **two** kinds at this angle, and with enough
+  unit-distance structure to refuse four colours. None of that is done.
+* **§12.3 stands unchanged**: on `parts_lattice`, at every radius, the new rotation's arena is
+  four-colourable by a colouring checked edge by edge.
+
+**A failure of my own instrument, recorded because its reading was the wrong way round.** A widened
+norm sweep (781,284 squared norms) returned *"0 live kinds for the new rotation, 9 for `ρ₁₅`"*, which
+reads as a strong negative. It is an artefact: the generator's **second coordinate was restricted to
+`ℚ + ℚ√3`**, and the witness above needs a `√11` component there, so the sweep could not contain it.
+The focused test, which carries a constructed witness, is the one to believe. **A sweep that cannot
+represent the object it is looking for reports a zero indistinguishable from a real one** — the same
+shape as the night's other near-misses, and the reason a constructed witness outranks any sweep.
+
+**The next question, and it is not this one.** Not *"which other rotations die"* but **"is there a
+lattice in `K²` containing `u`, closed under the three base symmetries, carrying two kinds at this
+angle?"** That is the first base this project would build for a rotation rather than inheriting.
