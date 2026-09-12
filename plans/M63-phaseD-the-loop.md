@@ -2286,3 +2286,39 @@ otherwise. The honest alternatives at that point are the pair rung (over 1,596 o
 enumerable; 112 on the small half, and measured there) or a rule whose object is a *set* of orbits
 rather than one, which is what `many_then_trim` was specified for and what his own recorded move
 actually was.
+
+### H2.9 — P-D16's three causes narrow to one live reading, and a decisive 24-ask test is queued
+
+*Poros's card 26, from our own confirmed row. Derived, not run — the test is seconds of compute but
+this phase was out of context, so it is handed over with its derivation intact.*
+
+**Read BOTH endpoints, not one.** His 1868–1884 against our 1860–1874: the low end is 8 lower and
+the high end is **10** lower, so the spans differ (16 against 14) and **this is not a uniform
+shift**. Therefore **our level contains a member his lacks (at 1860) and his contains one ours lacks
+(at 1884)**: two sets of 78 that are **incomparable**, neither inside the other. That is a *fourth*
+distinct phenomenon, after §R3.4's subset level and §R3.13's equal-count-smaller-accumulator, and it
+prunes P-D16's three causes to one:
+
+| cause | status |
+|---|---|
+| **a single typo** | **nearly out** — it would need *two*, at both endpoints, differing by different amounts |
+| **a truncated level of the same problem** | **ruled out** — truncation only removes members, so it could never give him a denser member (1884) than our *exhaustive* level holds |
+| **a companion strictly containing ours** | **ruled out** — a larger companion makes refusal easier, so his level would contain ours and his low endpoint would be ≤ 1860 |
+| **a companion contained in ours** | **ruled out** — his level would sit inside ours and his high endpoint would be ≤ 1874 |
+| **a companion INCOMPARABLE with `S136`** | **LIVE.** This also excludes `A166`, which contains `S136` up to the group — so the state-1 answer does **not** transfer to this row |
+| a different object entirely | residual |
+
+**So the live reading is a different FRAME**: his companion is plausibly `ρ·g(S136)` for some group
+element `g` other than ours — a genuinely different problem, related to ours by a group element but
+not identical, whose level happens to have the same size. That fits every observation, including the
+coincident 78.
+
+**The queued test, decisive, 24 asks with the instrument §R3.4 already built:** for which of the 24
+frames `g` is `v374e1860 ∪ ρ·g(S136)` **colourable**? His level provably lacks `v374e1860`, so only
+those frames are candidates; run the `H2#4` reduction against each and compare with 1868–1884 and
+`v406e2082`. *If a few survive*, one plausibly reproduces his row exactly. *If all 24 refuse*, the
+frame story dies and the companion rule needs re-stating.
+
+**And the correction to carry:** P-D16's line should read **two causes ruled out, one live, one
+residual** — not "three causes, unsplit", which is how it stands in §R3.12 and §R3.13. The
+narrowing holds whether or not anyone runs the test.
