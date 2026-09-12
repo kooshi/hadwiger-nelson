@@ -316,7 +316,8 @@ def run_reduce(args, log=print):
     log(announcement(stage, config, rows, row, args.out, ckpt))
     rec = RED.reduce_stage(stage, wall_ask=args.wall_ask, max_minima=args.max_minima,
                            phase2_wall=args.phase2_wall, checkpoint=ckpt, config=config, log=log,
-                           slice_conflicts=args.slice_conflicts)
+                           slice_conflicts=args.slice_conflicts,
+                           verify_checkpoint=getattr(args, "verify_checkpoint", 0))
     out = finish_record(base, G, stage, config, rec, args)
     tmp = args.out + ".tmp"
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
@@ -521,6 +522,10 @@ def main():
     r.add_argument("--wall-ask", type=float, default=600.0)
     r.add_argument("--slice-conflicts", type=int, default=RED.SLICE_CONFLICTS)
     r.add_argument("--checkpoint")
+    r.add_argument("--verify-checkpoint", dest="verify_checkpoint", type=int, default=0,
+                   metavar="N", help="re-ask N restored correction sets on load and REFUSE the "
+                                     "resume if any fails; off by default, on for any checkpoint "
+                                     "that has been moved or edited")
     r.add_argument("--prediction", action="append")
     r.add_argument("--no-pin", action="store_true")
     r.add_argument("--dry-run", action="store_true")

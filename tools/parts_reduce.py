@@ -79,7 +79,7 @@ refuses, asked before phase 1) is new, and `no-reduction` now labels the branch 
 shipped it sat on `w_star is None`, which is the truncated case.
 """
 from __future__ import annotations
-import argparse, hashlib, json, os, sys, time
+import argparse, hashlib, json, os, random, sys, time
 from collections import defaultdict
 from dataclasses import dataclass, field
 
@@ -314,9 +314,21 @@ def minimal_correction(orc, allA, T, log=None, tick=20.0):
     return left, minimal
 
 
+CHECKPOINT_UNVERIFIED = """checkpoint refused: {n} of {k} sampled correction sets do not verify.
+  A correction set C is a claim that deleting C loses the property, i.e. that A - C is
+  COLOURABLE. Ours are read off an actual colouring, so they are verified by construction -- but a
+  checkpoint that has been moved, edited or corrupted can restore a set that was never verified,
+  and an unverified correction set is the ONE direction that makes the lower bound unsound: it
+  adds a constraint that is not true, so mhs(Y) can exceed the truth and the optimality claim
+  fails. (A STALE Y cannot do this: fewer constraints admit more candidates, and every candidate
+  is verified by an ask before it is recorded.)
+  The failing sets: {bad}
+  Do not resume from this file. Start a fresh run."""
+
+
 def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkpoint=None,
                  config=None, log=print, slice_conflicts=SLICE_CONFLICTS, _stop_after=None,
-                 tick=20.0):
+                 tick=20.0, verify_checkpoint=0):
     """Phases 1 and 2, returning the record -- never a bare number.
 
     RESUME. If `checkpoint` names an existing file the run continues from it EXACTLY. The file is
@@ -352,6 +364,23 @@ def reduce_stage(stage, *, wall_ask=600.0, max_minima=0, phase2_wall=0.0, checkp
                            "machine": os.uname().nodename,
                            "git_commit": R._git("rev-parse", "HEAD", default="unknown")})
     orc = Oracle(stage, wall=wall_ask, slice_conflicts=slice_conflicts)
+
+    # OPT-IN, and it touches nothing on the default path: `verify_checkpoint = 0` skips this
+    # entirely, so a normal resume behaves exactly as before. Turn it on for any checkpoint that
+    # has been moved, edited, or produced by a run you did not watch (§O2's residual risk).
+    if verify_checkpoint and state.corr:
+        rng = random.Random(0)
+        sample = rng.sample(state.corr, min(verify_checkpoint, len(state.corr)))
+        bad = []
+        for c in sample:
+            v, _ = orc.ask([a for a in allA if a not in set(c)], wall=None)
+            if v != "sat":                      # A - C must be COLOURABLE for C to be a correction set
+                bad.append(sorted(c))
+        if bad:
+            raise SystemExit(CHECKPOINT_UNVERIFIED.format(
+                n=len(bad), k=len(sample), bad="; ".join(str(b) for b in bad[:4])))
+        log(f"  checkpoint verified: {len(sample)} of {len(state.corr)} restored correction sets "
+            f"re-asked, all colourable on deletion")
 
     def finish(verdict, note=None, **extra):
         state.asks = orc.stats()
