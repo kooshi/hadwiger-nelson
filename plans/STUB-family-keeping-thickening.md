@@ -78,8 +78,8 @@ route and hands the question back to FS-2 (what carries forcing without rigidity
 
 **A route this target does NOT have, measured 2026-09-11 (M63 phase G).** A rotation of Parts's type joins only
 points collinear with its centre, so the admissible rotations enumerate exactly over the base's lines rather than
-being sampled from a sieve. Run exactly on his §5.6 base and on a second base: **26 candidate rotations, 6 surviving
-the 2-adic filter — and not one of the survivors is 6-open.** Every one sits in a field where the prime 11 stays
+being sampled from a sieve. Run exactly on his §5.6 base and on a second base: **26 candidate rotations, six angles surviving
+the 2-adic filter — two rotations once counted up to the base's symmetry — and not one survivor is 6-open.** Every one sits in a field where the prime 11 stays
 usable, which is precisely the condition that seals a field at five colours (G43, G48). **So the six-level design
 target is not reachable by choosing a different rotation of this type on this lattice** — the rotation degree of
 freedom is exhausted, and a 6-open field has to come from somewhere else (a new base lattice, or a spindle over a
