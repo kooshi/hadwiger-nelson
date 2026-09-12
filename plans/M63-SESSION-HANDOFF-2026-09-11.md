@@ -540,6 +540,45 @@ enlargement"* is sound for the 21 **refusing** rows and unsound for the 11 **col
 asymmetry, written backwards, in a sentence a write-up would quote. Harmless today because Theorem B covers
 the row that mattered.
 
+---
+
+## §6e — THE SCREEN RETURNED A DERIVATION, NOT A VERDICT (2026-09-12, advisor's account; engineer's own report pending)
+
+**The new rotation is four-colourable, and it was killed by a theorem rather than a solver.** Mechanism:
+this project already owns an explicit four-colouring of the whole plane over ℚ(√3,√11) (Theorem B,
+`chromaticNumber_seamPlane`), and the lattice both halves are built from lies in that field at every radius.
+The code gives the rotated copy **the same index set and the same internal edges** as the original
+(`tools/typem.py:466-468`), so **one colouring lays on both halves at once** — and the arena is properly
+coloured unless some cross edge joins two base points the colouring gives the same colour. For the new
+rotation, at one of the two primes above 2, none does. Explicit certificate, checked edge by edge.
+
+**The elimination is radius-free AND base-free, which is why this is a derivation rather than a screen.**
+Whether a cross edge is invisible to the colouring depends on **one number** — `σ`, the sum of the two
+endpoints' squared radii — through **`d² = σ − (σ−1)/cos θ`**. No radius in it, no lattice in it. **So the
+elimination holds for every base drawn in that field, at every radius.** Checked against four cases computed
+independently of the formula, including the 126-decomposition rows. The endpoint bound the plan already
+derives turns out to have exactly one job: guaranteeing a bigger radius introduces no new value of `σ`.
+
+**APPROVED: promote the `σ` criterion into the cascade as a proof-grade filter, ahead of the solver.** It
+costs one arithmetic test per rotation — cheaper than the 2-adic wall test now at filter 2 — and it changes
+the phase's product from *"six rotations screened on one lattice"* to *"the arithmetic that kills a rotation
+on any base"*, which is what the programme ranks above objects. Confidence **high**: four independent checks
+with an explicit certificate underneath that does not rest on the derivation.
+
+**An unplanned control that could have failed, and passed.** The results table is **diagonal** — one rotation
+colourable at one prime, its conjugate at the other — and that pattern is *forced* by the field's symmetry
+swapping the two primes, so a non-diagonal table would have signalled a defect. A free cross-check on three
+things at once, and nobody planted it.
+
+**For any write-up, the advisor's disagreement with the engineer, and the advisor is right:** the mechanism
+proves the **symmetric** half that M62 §R20 added, **not** the half Parts stated — the filter is silent
+precisely on his. The half we can prove is ours.
+
+**Also ruled:** §4.3's sentence that the exact-arithmetic layer is unneeded is **reversed** in the plan text;
+M62 §R22's carry-over sentence is fixed in place; `−7/8` is struck from the candidate list. **Open and not
+worth more spend:** the filter fires at only one of the two primes per class — mathematically sufficient,
+since one valid colouring is a proof, and the certificate does not depend on the derivation.
+
 ## §6c — THE FLOAT VERDICTS ARE RETIRED (2026-09-12, `8b59db6`) — the queue is clear
 
 **Six sites in `tools/typem.py` now decide exactly**, and `ksign` moved *into* `typem.py` beside `kfloat`
