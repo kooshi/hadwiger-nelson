@@ -886,3 +886,15 @@ a cost law's *shape* by construction instead of by curve-fitting — strictly be
 and blind to any cost living outside the component. A second cost of the same shape, hiding in a progress
 log, was invisible to the sharp instrument and would have been caught by the weak one. **State what the old
 instrument saw that the new one does not, at the moment you swap them**, or the gap is discovered by luck.
+
+**The same rule has a second half, and its author broke it within two hours of writing it down.** Having
+recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
+prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a
+quantity that a change to one phase could not move, because ~90% of it is produced in the *other* phase, on
+byte-identical code. A ratio near 1 was forced by construction. **So: confirm that BOTH outcomes are
+reachable — the one that would teach you nothing and the one you are predicting.** A prediction whose target
+region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it
+fails. And the honest test for whether "the prediction was mis-specified" is a diagnosis or an escape:
+**the evidence for the mis-specification must predate the result** — here the 90% split was in the run's own
+recorded numbers before the prediction was written, so it is checkable rather than convenient. Writing a
+rule down does not install it.
