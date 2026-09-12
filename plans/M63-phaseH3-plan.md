@@ -96,3 +96,54 @@ step whose cost I am least willing to trim.
 | 3 | advisor, restarted for this phase | Poros | launched |
 | 4 | cross-edge enumeration at `cos θ = 3/4` (brief §6 step 4) | — | blocked on 1 |
 | 5 | solver, via phase H2's interface reduction (brief §6 step 5) | — | blocked on 4 |
+
+---
+
+## §2 — Addendum, still before any measurement landed (product owner, same sitting)
+
+### A correction to the natural misreading of P-H3-1
+
+P-H3-1 says the shape-free arena is bigger than **Parts's**. It does **not** say bigger than phase H2's, and
+the two comparisons point opposite ways. Setting them side by side so neither can be quoted alone:
+
+| object | base vertices | arena radius |
+|---|---|---|
+| `[Parts2020a]`'s 509-vertex record | 374 | 2.0656 |
+| his full denominator-12 lattice at radius 2 | 1,603 | 2 |
+| phase H2's verified `n = 16` object | 25,567 | 4.0316 |
+| **phase H3 predicted, `n = 2` shape-free** | **≈ 16,000** | **1.5119** |
+
+So the honest sentence is: **smaller than phase H2's object in both vertices and radius, and about 43× the
+record's vertex count at 73% of its radius.** "A smaller object" is false in every sense except radius.
+
+### The step I think should move earlier, and why
+
+The brief's §6 orders the work module-first (step 3) and cross-edges-second (step 4). **Part of step 4 does
+not need the module at all**, and it is the step most likely to kill the phase.
+
+G52's sharpened form says the live quantity for an object of this kind is not the circle count but the
+**off-diagonal** share of the monochromatic cross edges — the part forced by neither the shared centre nor
+the circle. The record's share is **0 of 30**; phase H2's `ρ₆₃` is **24 of 54**, and its refusal came through
+**36 off-diagonal constraints**. The brief's own §3 concedes *"nothing says `n = 2` has any."*
+
+And G52's other half is that **the cosine alone names the live radius sums, before any base exists**:
+`d² = σ − (σ−1)/cos θ`, no radius and no lattice. So *"does `cos θ = 3/4` admit an off-diagonal cross edge
+that a denominator-12 module of `K²` can realise?"* is answerable **now**, in parallel with the module
+build, and a negative answer ends the phase in an hour rather than after an arena is assembled and solved.
+
+**Decision: run it in parallel rather than in sequence.** The alternative weighed was the brief's own order,
+which buys a module to enumerate over and so needs no base-free derivation — but it pays for the module
+first and learns the decisive fact last. Confidence **high** that the reordering is right; **medium** that
+the base-free derivation is clean enough to be decisive on its own, which is why it ships with the `n = 4`
+and `n = 16` reproductions as known-answer gates rather than standing alone.
+
+### P-H3-5 — registered before that work runs
+
+**I predict `cos θ = 3/4` admits off-diagonal cross edges, but fewer per circle point than `ρ₆₃`.** Grounds:
+`ρ₆₃`'s off-diagonal share is 24 of 54 at `cos θ = 31/32`, a cosine very close to 1, where the rotated copy
+lies almost on top of the base and near-coincidences are plentiful; `cos θ = 3/4` is the coarsest rotation
+in the whole live family and moves the copy furthest. **Scoring:** met if the off-diagonal count per circle
+point at `n = 2` is strictly below `24/54 = 0.444`; not met if it is at or above; **not decided** if the
+count is zero, which is a *different* finding and ends the phase rather than scoring this prediction.
+**Both outcomes reachable** — the quantity is a count over an enumeration with no constraint tying it to
+either side, and the two known members of the family already sit at 0.000 and 0.444, bracketing the range.
