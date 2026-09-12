@@ -977,3 +977,17 @@ only as "the fault is detected" cannot report that it is no longer capable of de
 **And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
 is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
 would have shown it. The cheap half of the lesson, and the one that finds checks pointed at the wrong code.
+
+**Archiving a checker can break it in exactly the way it was built to detect.** A committed equivalence
+harness reconstructs its "before" tree from git and imports a module by name — so the reconstructed module
+binds to **today's** copy of its dependency if that reaches `sys.modules` first, and the comparison silently
+becomes one tree against itself **while printing ALL MATCH**. Assert the provenance of every module a
+reconstruction loads, and **provoke that assertion** to confirm it fires. The general form: **a check moved
+to a new context is a new check** and owes its negative control again.
+
+**And the honest account of where these rules come from: they are scars, not foresight.** The engineer whose
+control docstring already said *"a control that passes without its failure mode being reachable has not been
+tested by passing"* was asked how it knew, and declined the credit — it had written a control that could not
+fire earlier the same evening, and noticed only when it tried to plant a fault in it. **The habit that
+produces the principle is planting faults routinely, not reasoning about controls carefully.** Reasoning
+finds the controls you thought about; planting finds the ones you did not.
