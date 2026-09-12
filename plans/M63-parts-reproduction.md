@@ -1897,6 +1897,35 @@ ours**, said here rather than discovered afterwards.
 Neither statistic touched the frozen rule: both are computed from his labelled move, and letting
 either steer the running rule would be exactly the contamination the freeze exists to prevent.
 
+### R3.e — Every prediction registered for phase D, scored by name
+
+*The register is `plans/M63-phaseD-the-loop.md` §4. A prediction that cannot be scored says so and
+says what it waits on; none is quietly dropped.*
+
+| # | what was predicted | verdict |
+|---|---|---|
+| P-D0a | L-side refusing asks stay ≤ 0.15 s | **MET** — 0.138 / 0.144 s |
+| P-D0b | refusing asks at the 374 level cost ≥ 3× those at 375 | **FALSIFIED** — ratio 0.96; the cold-ask form survives |
+| P-D1 | his §5.10 indicators do not rank all four of his move's orbits in the top half | **NOT RUN** — D2 is not implemented |
+| P-D2 | the frozen rule reaches `\|M\| ≤ 374` within 12 iterations | **`[RUNNING]` — not met so far**: iterations 1 and 2 both `unchanged`, three candidates each, all refused at the target |
+| P-D3 | the rule's precision@3 beats uniform random on the `A403` map | **UNSCOREABLE so far** — the held-out map may only run after the rule's attempt, and on the in-sample map every ranking ties at zero |
+| P-D3b | the menu's helpful density is neither 0 nor ≥ 40 of 49 | **FALSIFIED** — degenerate at zero over the complete 89-candidate menu |
+| P-D4 | `{M}` grows at fixed `\|M\|` and fixed rung in a rule-driven iteration | **PHENOMENON OBSERVED, CLAUSE NOT MET** — once in 63, from the random block rather than from a rule |
+| P-D5 | D1.b returns 374, and `\|{M}\|` equals 1,092 under none of the three conventions | **`[RUNNING]`** — 374 confirmed with zero undecided; the raw count is past 12,000 against his 1,092, so the *equality* is already out under the raw convention, and the quotient conventions need the level closed |
+| P-D6 | the `Σ(lo + hi) = 2·\|M\|` identity holds on our 375 and both 374 levels | **NOT RUN** |
+| P-D7 | the **exact** edge minimum of the 509 is below 2,406 | **CONFIRMED** — a certified refusing edge-subgraph at **2,279** puts `e_min ≤ 2279 < 2406`, so his non-exhaustive 36-edge discard was not optimal |
+| P-D7b | the exact edge minimum lies strictly above §O6's floor of 1,016–1,018 | **CONFIRMED** — the completed critical-edge census gives `e_min ≥ 1831`, far above the degree floor, so the floor is honest and nowhere near tight |
+| P-D8 | the two routes to D1.c agree exactly | **NOT SCORED** |
+| P-D9 | the exchange-class vector changes at every one of D1's three replayed states | **UNSCORED** — computed at our 375 state only (two classes); each replayed state needs its own stage at its own rung |
+| P-D10 | the targeted decision makes a failed candidate cost < 1/3 of a full reduction | **FALSIFIED as registered** (91%), and replaced by a derivation: the saving is the level enumeration |
+| P-D11 | the small-half menu returns 136 on every candidate | **not this phase's** — the scoped probe's |
+| P-D12 | the large half's helpful density exceeds the small half's | **NOT DECIDED** — both read zero on the primary |
+| P-D13 | the literal reading grows the large menu by roughly the small half's factor | **NEGATIVE** — ×1.16, below the falsifier's 1.3 floor |
+| P-D14 | at least one candidate outside his `r = 2` disk qualifies | **NEGATIVE**, scored before the phase opened and re-derived under all three readings |
+| P-D15 | the two excluded `√5` orbits are inert | **CONFIRMED** — and all 26 shoulder candidates with them |
+| P-D16 | our `H2#4` low edge endpoint is 1,860 against his published 1,868 | **CONFIRMED**, registered in a commit before the run reached that rung |
+| P-D17 | comparing seven of our runs against one of his numbers invites an accidental match | **CONFIRMED BY INSTANCE** — the `H2#0` row returned his 78 at the wrong rung |
+
 ### R3.d — The pin receipt was vacuous above rung 1, and is not any more
 
 `Stage.pin_is_sound` identified pin atoms by each atom's lowest set bit. At rung 1 an atom is one
