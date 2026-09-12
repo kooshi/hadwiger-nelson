@@ -492,6 +492,49 @@ registered as a **control, never a rule parameter**, i.e. it does not enter the 
 established that checks 1–3 are internal consistency and **this is the only one comparing against a truth
 outside the pipeline**; leaving it off where it is available is the exact pattern this queue exists to end.
 **Still open:** `parts_diag.py` has no `--self-test`, so its declaration has no control of its own.
+
+## §6c — THE FLOAT VERDICTS ARE RETIRED (2026-09-12, `8b59db6`) — the queue is clear
+
+**Six sites in `tools/typem.py` now decide exactly**, and `ksign` moved *into* `typem.py` beside `kfloat`
+(one predicate, one place; `typem_exact.py` imports it). **Every number unchanged, demonstrated four ways**
+— base-vs-patched in one process (every *ordered* point list identical, so stored `.vtx` indices are
+untouched), the calibration edge-for-edge at both radii, all 43 reference files re-verifying, and **the
+509-vertex record object rebuilding with CaDiCaL UNSAT and an LRAT replay of 1,472,347 steps, all four of
+its planted faults firing.**
+
+**The ray-key site was NOT a rounding bug, and this is the finding.** `cross_edges_rho15_fast` was a
+**second copy of the edge law** whose keys were *signed* directions — so a point and its antipode land in
+different buckets and **can never be compared at all.** A structural blind spot, not a precision margin;
+the rational point `(31/61, −32/61)` is a case where the old code returns no edge and the exact line key
+returns both orderings. **Fixed by deleting the duplicate**, not by tightening a tolerance. Two laws that
+are supposed to agree, one of which nobody re-derives, is the shape to watch for.
+
+**Why the defect hid, stated exactly:** `ksign` agrees with 200-digit arithmetic on 100,000 inputs where
+`kfloat` fails 10 — and **on *uniformly random* inputs `kfloat` fails none.** A defect reachable only near a
+boundary is invisible to any test that samples the space evenly.
+
+**My triage was wrong twice, both in the dangerous direction:**
+- I said lines 445/741 were "builders phase G does not use". **`build_c13_base` is scheduled as a phase-G
+  base** (that plan's row 3). Fixed anyway; zero callers today, so no number could move.
+- **A seventh site I never named:** `unit_edges_fast` (L545) picks which pairs get the exact test using a
+  KD-tree at float radius `1.0 + 1e-7`. **Too tight a radius drops unit edges** — the elimination-flattering
+  direction. Measured 0 missed and 0 invented at both radii (11,286 and 28,566 edges), safe by ~8 orders —
+  **but no control anywhere checks it, so it is safe by luck rather than by test.**
+
+**APPROVED (product owner): add the `unit_edges_fast` control** — compare it against the exact `unit_edges`
+on each base, a few minutes of compute. "Correct but untested" on the one routine that can silently drop
+edges is not a state this milestone may carry onto a new base.
+
+**It broke a control and repaired it rather than letting it pass vacuously.** `parts_stage.py` c5.1 was *"the
+only thing that says the exact-line rewrite changed no edge"*, and the change would have made it compare a
+function to itself — **unable ever to fail.** The retired ray keying is reimplemented inside the control so
+it has something real to compare against. Same for `typem_exact.py` §6, which no longer claimed to measure a
+law that had been deleted.
+
+**Left deliberately, with the measurement:** float *sort* keys in five builders fix vertex indices, and
+changing them would renumber vertices and invalidate every stored `.vtx`. Ties measured: **zero** on every
+base in use. **Cost accepted:** the exact cross-edge law is 2.9× slower and base building 1.35×; both are
+one-off constructors, not loops.
 4. **Record the edge object** in the ledger as a measurement with its bracket. No certificate.
 5. **Phase E** (held-out problems, required for the close) and **phase F** (beat), per `§S.4`.
 6. **Milestone G**: other base graphs and the ~412 admissible rotations (`plans/STUB-consume-rotation-list.md`,
