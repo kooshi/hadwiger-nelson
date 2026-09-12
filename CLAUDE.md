@@ -610,6 +610,21 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   agent's scratchpad (a shared temp directory is a covert channel), brief both identically, give the advisor
   the record and a written expectation, rule prior art shared. Records: `plans/COXETER-2026-09-08-mascot.md`,
   `plans/POROS-2026-09-08-mascot.md`.
+  **Extended 2026-09-12 with the mechanism, which is not carefulness — it is a COST WINDOW.** In one phase
+  three agents exchanged about twenty messages: four of the advisor's constructions were retracted, three of
+  the planner's catches landed on the advisor, one of the planner's own registrations was mis-specified, the
+  prior-art agent refuted something and then corrected its own refutation — and the final plan contains none
+  of those errors. **Every one of those retractions was free**: all three were writing documents, nothing was
+  committed, no solver time had been paid, nothing had been claimed outside the room, and no implementer held
+  anything. The cost of being wrong was one reply. So: **fast public error is the cheapest instrument
+  available, but only while retraction is free, and in that window it should be spent rather than rationed.**
+  Once retraction is expensive — after a commit, after a paid run, after a statement to a third party — the
+  same speed produces **escalation** instead of correction, because the cost of being wrong has become the
+  cost of having *been* wrong. **Front-load the disagreement into the window before anything is paid for.**
+  And the tell that makes this checkable rather than aspirational: **count the retractions in that window.
+  Zero is not agreement — it means the disagreement has not started yet and will arrive later at full
+  price.** Its author declined the credit and named the sequencing instead: having been wrong twice that
+  evening on the same kind of step made the third one cheap to see.
 
 ## Whose work this is
 

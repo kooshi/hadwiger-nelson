@@ -31,7 +31,7 @@ finding.
 
 ---
 
-*Twelve cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
+*Thirteen cards, and my own gate warns that this is a spray. I accept the warning and answer it: **the turn is
 PH2-1, PH2-9 and PH2-2 together** (ranks 1–3) — the target is free, and the two circles differ everywhere except on it. PH2-4 is
 a separate turn addressed to the product owner because it changes the product. The remaining five exist
 because this is a phase ledger the next session reads cold, not a single turn, and each carries its own fate
@@ -739,16 +739,82 @@ agents' independent measurements.** It is automatically non-empty when `n = t²�
 shell (`12 = 4·3`, `20 = 4·5`), which **corrects my own PH2-10 "perfect square" condition** to the broader
 exact one.
 
-**The classification that follows, and it is complete.** Every `n` with `v₂(n)` odd has an **empty** shell
-over `Λ_parts` — 30 of 30 values, upgrading PH2-10's hunch — and 6-openness forces `n` even, so a 6-open
-member with a non-empty circle needs `4 \| n`. At `n ≤ 31` that is exactly **`{16, 20}`**; `n = 2, 10, 22,
-24` are empty for a 2-adic reason that no radius and no refinement of this lattice can fix.
+**The classification that follows — with my own stated reason corrected, because I gave a one-sided filter
+as though it classified.** I wrote that a 6-open member with a non-empty circle "needs `4 | n`". **`4 | n` is
+necessary and not sufficient**, as the planner caught: `n = 24` is divisible by 4 and its shell is empty. The
+filter I actually measured is `v₂(n)` odd ⟹ empty (30 of 30 values), so non-emptiness needs `v₂(n)` **even**
+— and `v₂(24) = 3` is odd, which `4 | n` cannot see. **And even that is only one-sided:** `n = 17` and
+`n = 29` have `v₂ = 0`, even, and empty shells. So **no divisibility rule decides this**, and the screen must
+test the shell count itself — a closed finite computation in milliseconds.
+
+My conclusion survives because I read it off the shell table and not off the rule: among the 6-open `n ≤ 31`,
+the shells are `2 → 0`, `10 → 0`, `16 → 30`, `20 → 60`, `22 → 0`, `24 → 0`, so the affordable targets are
+exactly **`{16, 20}`**. The planner enumerated the shells independently and agrees on all fifteen values he
+checked. **The lesson is `CLAUDE.md`'s own: a one-sided filter judged an object I was designing around, and
+I reported its output as a classification** — the failure mode that file names, committed by someone who had
+quoted it at two colleagues the same evening.
 
 **The consumer: `n = 20` dominates the planned radius-12 test.** Identical shape (centre star plus a
 matching, zero off-diagonal, both measured above), **60** matching edges against 42, and **6-open** where
 `n = 12`'s radicand 47 is a residue mod 11 and is therefore **5-sealed** — so `n = 12`'s refusing branch
 buys at most a new 5-chromatic object rather than a rung. 38,785 points against 14,029, comparable to
 `ρ₆₃`'s 25,567.
+
+---
+
+## PH2-13 — the base-side question is cheap, and its cheapness is the wrong reason to run it
+
+question: how-expensive-is-the-base-side-colouring-question
+  evidence: the planner's follow-up — *"is 'does the base admit a proper four-colouring with no circle
+    point on the centre's colour' cheap to decide at `n = 20`? It is one solver call on the base alone
+    with 60 unit clauses, which would make the whole one-kind test a base-side question and never need the
+    77,570-vertex arena"*
+  expected: a cost answer
+  ask: what does each branch of that solver call actually cost, and which of its outcomes can be believed?
+  if both branches are cheap: the item moves up the queue and the arena is never built
+  if one branch is expensive or untrustworthy: the item splits into two halves with different instruments,
+    and the expensive half has a smaller object available
+  answered by: derivation, against `CLAUDE.md`'s measured/derived asymmetry and ledger row 31
+  cost: nil
+  rank: 13
+  status: answered — cheap, and the *reason* to run it is that one branch is self-certifying
+
+**Yes, and better than cheap, for a reason that outranks the cost.** If the call returns a colouring, that
+colouring is a **certificate checkable in linear time** — walk the edge list once. No solver trust, no LRAT,
+no axiom purchase. **It is the safest verdict available anywhere in this phase**, and it is the one place in
+the milestone where "found" is the trustworthy direction rather than the suspect one.
+
+**Two implementation notes that keep it cheap.** Colour classes are interchangeable, so fix the centre's
+colour without loss; the 60 constraints are then genuinely **unit clauses** ("this circle point ≠ colour 0")
+and no four-way case split is needed. And **verify the returned colouring against a freshly enumerated edge
+list, not against the solver's input** — the base's edges are *measured*, so the only possible fault is a
+**missed** edge, which makes colouring easier and would flatter a "found"; re-enumerating removes exactly
+that risk, and a linear-time check costs nothing.
+
+**But do not run the other branch at that size.** "No such colouring exists" on 38,785 vertices is both
+expensive and the direction where a missed edge flatters you. **The cheap way into that branch is a
+pigeonhole hunt on a small carrier, and this repository already owns the machinery**, because of a
+restatement that makes the object three orders of magnitude smaller:
+
+> *"No circle point wears the centre's colour"* is verbatim *"no monochromatic pair between the centre and
+> its circle at distance `2√5`"* — and `v_𝔭(4·5) = v_𝔭(4) > 0`, so that distance lies in the
+> positive-valuation class. **Same mechanism as the distance-2 pigeonhole** this project holds with a
+> 122-vertex kernel carrier (row 31, `core122_pigeonhole`; G16), whose `√3` sibling concentrates to nine.
+
+So the queue item is **two complementary halves, not one expensive call**: a base-side solver hunting the
+colouring, whose positive is self-certifying and whose object is half the arena; and a carrier hunt for the
+pigeonhole at `2√5` on a ~10²-vertex object using existing machinery. They are not redundant — a colouring
+found means the arena is four-colourable and the arena is never built; a carrier found means the arena
+refuses **and** hands over the small early compulsion `CLAUDE.md`'s open structural question asks whether
+every forcer must carry.
+
+**One trap in the machinery, declared in its own file and worth naming here because an implementer meets
+both symbols together:** `core122_plane` is marked `VACUITY DECLARED` at `Core122.lean:151` — there are no
+four-colourings of the plane, so it supports nothing. Consume `core122_pigeonhole`, never `core122_plane`.
+
+**Scope, since the planner is carrying my reduction as a conditional and should keep doing so.** Exactly two
+outcomes conclude anything: *colouring found* and *carrier found*. A carrier hunt that finds nothing proves
+nothing; a solver that times out proves nothing. Everything else is silence, and silence is not evidence.
 
 ---
 
@@ -846,6 +912,50 @@ hunch: the-count-of-circle-points-is-divisible-by-six-and-not-twelve
   status: confirmed (by: the free action; and on independent data — my glue sets are `ζ₆`-stable and
     come out 72 and 450, both divisible by 6, with 450 **not** divisible by 12, which is `Λ_parts` being
     `ζ₆`- and not `ζ₁₂`-closed, as its order-24 group says)
+
+---
+
+## Closing note — the one method finding of this phase, with the precondition that makes it reproduce
+
+*Not a card: it has no evidence line in the record, because the record IS the evidence. Written because the
+useful half of this phase came from a mechanism that will not survive being remembered as a mood.*
+
+**What happened.** Three agents advised each other across about twenty messages. The scoreboard, stated
+because it is the finding: **four of my constructions retracted** (an `r⁸` cost model that was `r⁴`; a
+uniqueness claim wrong twice, the second time in its own repair; a one-sided filter reported as a
+classification; a carrier size inferred from two objects at other distances). **Three catches of the
+planner's on me**, two of which I then pushed further than he had. **One measured refutation of the
+prior-art agent's that he then corrected himself**, narrowing it from a theorem to a sub-order. **And a
+final plan in which not one of those errors survives.**
+
+**Why it worked, and it is not that anybody was careful.** Every one of those retractions was **free**. All
+three of us were writing documents. Nothing was committed, no solver slot had been paid for, no claim had
+been made to anyone outside the room, and no artifact had been handed to an implementer. **The cost of
+being wrong was one reply.**
+
+**So the rule, with its precondition, stated so it survives deleting every exemplar above:**
+
+> **Two minds correcting each other retract cheaply only while neither has shipped.** Where retraction is
+> free — nothing committed, nothing run, nothing claimed outward — fast public error is the cheapest
+> instrument available, and it should be spent rather than rationed. Where retraction has become expensive
+> — after a commit, after a paid run, after a statement to a third party — **the same speed produces
+> escalation instead of correction**, because the cost of being wrong has become the cost of having *been*
+> wrong. So front-load the disagreement into the window before anything is paid for, and treat that window
+> as a **resource to spend**, not a phase to get through.
+
+**And the tell that makes it checkable rather than aspirational: count the retractions in that window.**
+Zero is not agreement. Zero means the disagreement has not started yet, and it will arrive later at full
+price. Seven between three agents in one evening, on a plan that shipped clean, is the window being used.
+
+**This is a second instance, not a new rule.** `CLAUDE.md` already records *settle the policy while the
+number under dispute is not yours* — from an engineer whose pre-registered comparator went red on its own
+integration and who did not widen it, because it had already reasoned the question through one commit
+earlier on someone else's fault. Same mechanism, different surface: **sequencing, not virtue.** Which is
+also the honest account of my own third catch — having been wrong twice the same evening on the same kind
+of step made the third cheap to see, and written as an instrument someone carries it does not reproduce.
+
+**Second instances are what turn a scar into a rule**, so it is written here rather than left in a message
+that dies with the session.
 
 ---
 
