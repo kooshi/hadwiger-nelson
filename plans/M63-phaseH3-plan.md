@@ -209,3 +209,24 @@ splits in `ℚ(√33)`, `ℚ₂(√−3)` is unramified, so 2 has odd valuation 
 shares nothing with phase H2's derivation of the same fact, so **the two are a free two-sided positive
 control on each other**, and the zero in P-H3-2 is now a theorem about the field rather than a count on one
 lattice. The *denominator* in P-H3-2 (about 506 points) is still a measurement and still scores.
+
+### A ruling on the one live reading debt
+
+The cross-check surfaced **Zhuravlev, *Sums of squares over the Fibonacci ○-ring* (2007)** — by its title a
+sums-of-two-squares count over the integers of `ℚ(√5)`, a **real quadratic** base, which is the case the
+Baake–Zeiner survey's own inventory says nobody has done. It is uncharacterised (Russian original,
+translation behind a paywall), and G50 says an unread title touching a live milestone blocks that
+milestone's opening. **Ruling: it does not block phase H3, and here is the test it fails.**
+
+This phase needs point counts on `|p|² = n` in a module of `K² = ℚ(√3,√11)²`, and it gets them by **exact
+enumeration under a four-conjugate cut** — not from any formula borrowed from the literature. Zhuravlev's
+base field is real quadratic where ours is biquadratic, and nothing of ours would rest on his count even if
+it is exactly what the title says. **So it is a debt against a future write-up's attribution, not against
+this phase's execution**, and it is recorded as one rather than discharged by being ignored. The
+alternative weighed was chasing the translation now, which buys attribution we do not yet need at the cost
+of the phase's opening hour. Confidence **high** — it flips only if the phase's counting turns out to need a
+closed form rather than an enumeration, in which case this is the first place to look.
+
+**And the finding that matters more than the paper:** it was reached only because the cross-check was run
+properly. The first pass reported agreement between two databases and the agreement was an artifact of a
+shared upstream record. Now installed in `CLAUDE.md` G49.
