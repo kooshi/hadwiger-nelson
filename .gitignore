@@ -13,5 +13,11 @@ tools/*.json
 *.cnf
 *.lrat
 
+# Resume state for long reductions — not evidence, and large (one file reached 29.6 MB and grows with
+# the iteration count). The evidence artifact is the run's `--out` result file, which IS tracked; a
+# checkpoint exists so a killed job restarts where it stopped. Small per-probe checkpoints committed
+# before this rule stay tracked rather than being removed from history.
+data/m62/ckpt/
+
 # Python bytecode from tools/
 __pycache__/
