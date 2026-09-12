@@ -110,7 +110,10 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    11 ∣ d², then spindled — the spindle removes exactly the sealing prime and lands in a 6-open field by
    construction. This is FS-6, the sequel of M62.
 4. **Existing witnesses hold nothing to extract.** De Grey's 1581 at five colours has no compulsion at arity 2
-   or 3 (complete sweeps) and arity floor 4 or 5; a χ ≥ 6 gadget must be constructed, not found (G31).
+   or 3 (complete sweeps) and arity floor 4 or 5; a χ ≥ 6 gadget must be constructed, not found (G31). The
+   null is **stronger than it reads**: his field is 6-open (G43), so no arithmetic bar — not row 55's, which
+   is scoped to the √7-free tower — explains the absence. A 6-open platform has carried a five-chromatic
+   object since 2018 and yielded no five-colour compulsion at arity ≤ 3.
 5. **An in-field descent cannot end.** Points of ℚ(√3,√11) do intermediate kills and never the last one; the
    endgame needs a wall-breaking adjunction into a 6-open field (G34, G36, G37).
 6. **Linear instruments are blind to 5–7.** Additive colourings, the fractional number, Hoffman and ϑ all stop
@@ -121,7 +124,9 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    member** — `cos θ = (2n−1)/(2n)`, which is the spindle at distance `√n`; `n = 3` is the Moser twist,
    `n = 4` the record, `n = 16` is `ρ₆₃`, whose arena is **5-chromatic in the 6-open field `ℚ(√3,√7,√11)`**,
    produced rather than inherited (row 64). The two members cheaper than the record die by **Theorem B**,
-   which is why no other rotation was ever made to work. **A 6-open platform now exists for G48.**
+   which is why no other rotation was ever made to work. **The platform is not the first, it is the smallest
+   and the first built to order**: de Grey's own field is 6-open (G43), so G48's bar has been liftable since
+   2018; `ℚ(√3,√7,√11)` is degree 8 against his degree 16, and the screen reached it rather than found it.
 9. **`[Parts2020a]`'s 509-vertex record is reproduced and partly explained** (M62–M64). His base graph is his
    §5.6 closed form: 1,603 points in 92 orbits under his order-24 group ⟨ζ₆⟩ ⋊ Gal(K/ℚ), in which complex
    conjugation is itself a Galois element (`typem.parts_lattice`); our ρ₁₅ cross-edge law returns his two
@@ -193,7 +198,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 35 | **Coarse cells, arbitrary labels**: for 1/2 < p < 1 any colouring constant on the cells needs 7 colours (the first shell is a 7-clique of the constraint graph). The floor is subsumed by `[SokolovVoronov2025]`. | `Coset.lean` (`seven_le_card_of_cell_constant`, `cell_chromatic_eq_seven`) | M38 |
 | 36 | **Scale is not monotone**: 1/2 < p < 3/5 needs 8 and 3/8 < p < 2/5 needs 7 again; the classical scale is a local optimum (the dual-variable form is `[deGreyParts2022]`, `[Parts2023]`; the eight is ours). | `Coset.lean` (`eight_le_card_of_cell_constant`, `seven_le_card_fine`) | M39 |
 | 37 | [tools] **Gap atlas**: one graph per band; χ = 9 on p ∈ (1/2, 0.6547) and 12 on (0.4804, 1/2); every band down to p = 0.2236 needs ≥ 7 while ω falls to 3–5; G\* = (0.4330, 0.4804) has ω = 4, χ = 7; the deep pocket (1/3, 0.3464) has χ ≥ 8; no coset 7-colouring exists below the classical window (G24). | `tools/celllat.py` | M40 |
-| 38 | [tools] **Gradient hunt**: all five clique-free cell cores factor as pigeonhole × kill (G26); a non-geometric Klein four-group of automorphisms of the 1581 yields three new 5-chromatic witnesses (G27); no pair compulsion at five colours on twelve composed objects. | `tools/gradient.py` | M41 |
+| 38 | [tools] **Gradient hunt**: all five clique-free cell cores factor as pigeonhole × kill (G15, five of five in the finite lab; G26 no longer carries this claim); a non-geometric Klein four-group of automorphisms of the 1581 yields three new 5-chromatic witnesses (G27); no pair compulsion at five colours on twelve composed objects. | `tools/gradient.py` | M41 |
 | 39 | **Gap atlas, kernel side**: `exists_unit_pair_corner`; `seven_le_card_shell4` (3/28 < p² < 1/9); `twelve_le_card_of_cell_constant` (3/13 < p² < 1/4); `no_coset_seven_on_gap`; `core23_not_colorable_six` with `core23_colorable_seven`, so the 23-vertex G\* core has χ = 7 at ω = 4; `Coset.seven_le_card_gap`. | `Coset.lean` §GapBands, `Instances/Core23*` | M42 |
 | 40 | [tools] **The fine tail**: χ(G(p)) = 7 exactly on both flanks of p = 1/7; nineteen further bands ≥ 7; kernel promotion priced (~800,000 LRAT lines per cube) and declined. The whole family is ≥ 7 at every scale by `[Voronov2023]` Thm 1.1 and `[SokolovVoronov2025]`. | `tools/celllat.py` | M43 |
 | 41 | **Limit lemma**: non-k-colourable graphs of bounded size, drawn in one compact region with every edge within ε of 1 for every ε, give χ ≥ k + 1 (`add_one_le_chromaticNumber_unitDistance_of_bounded_family`); at a single ε the hypothesis is free (`collapsed_drawing_satisfies_one_tolerance`). [tools] A certified unit-distance defect meter, and the first explicit points ν(0.2792) ≤ 23 … ν(0.1494) ≤ 160. | `Limit.lean`, `tools/embed.py`, `tools/verify_defect.py` | M44 |
@@ -206,7 +211,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 48 | **Critical-set localization** (G39): a forced-equal pair confines the critical set to N(p) ∩ N(q), a virtual edge to N(p) ∪ N(q); in the plane at most two critical vertices, none beyond distance 2 (`encard_criticalSet_le_two_of_forces`, `criticalSet_eq_empty_of_forces_of_two_lt_dist`), generalized to edge-length sets and metric spaces, where the count ≤ 2 does not survive. [tools] Two 5-chromatic objects with no critical vertex; the smaller (2,229 points) has no pair compulsion at five colours. | `CriticalSet.lean`, `tools/five_dial.py` | M54 |
 | 49 | **Absorption** (G40): `Extends`, `extends_of_repaint`, `extends_of_hubs`, `extends_symCopy`. [tools] ν = 2 exactly on the two-spindle objects; a depth-two F₂₄₇ cross thickening frees 238 critical vertices, all on the copy side. | `Absorb.lean`, `tools/absorb_dial.py` | M55 |
 | 50 | **The additive yardstick** (G41): `additiveColoring`, `not_forces_of_addMonoidHom`, `addMonoidHom_apply_eq_of_sub_eq_nsmul`; the additive spindle theorem (its chord lies in 4Λ). [tools] Exoo–Ismailescu's G's colouring space is exactly its additive family; no 5-chromatic witness has an additive 4-colouring. **Prior art:** the framework and the 1/k obstruction (no additive k-colouring, k ≤ 10, of a wall-broken plane) are `[Fischer1990]` Thm 10(ii). | `Additive.lean`, `tools/additive.py` | M56 |
-| 51 | **Additive rigidity** (G42): `AdditivelyRigid`, `forces_of_additivelyRigid`, `six_le_chromaticNumber_plane_of_additivelyRigid`. [tools] Only Exoo–Ismailescu's G is rigid; every unit-distance object held is Kempe-open by orders of magnitude. | `AdditiveRigid.lean`, `tools/additive_rigid.py` | M57 |
+| 51 | **Additive rigidity** (G42): `AdditivelyRigid`, `forces_of_additivelyRigid`, `six_le_chromaticNumber_plane_of_additivelyRigid`. [tools] Only Exoo–Ismailescu's G is rigid, and only **with its cheats** (the gauge includes its non-unit edges); every unit-distance object held is Kempe-open by orders of magnitude. | `AdditiveRigid.lean`, `tools/additive_rigid.py` | M57 |
 | 52 | [hand + tools] **The finite-plane bound and the first exact wall-broken planes**: a field with a prime of residue field 𝔽_q, q ≡ 3 (mod 4), has χ(F²) ≤ χ(UD(𝔽_q,2)); χ(UD(𝔽₁₁,2)) = 5, so χ(ℚ(√3,√5,√11)²) = χ(ℚ(√3,√11,√247)²) = 5. **Prior art:** the bound is `[Moorhouse2010]` §8.2/§10.3, `[Manturov2012]` Thms 17–19 and `[Madore2015]` Cor. 3.4; the value at 11 is Moorhouse's Table 6.1. | `tools/fplane.py`, `reference/Chat-analysis/` | 2026-09-06 |
 | 53 | **The field sieve** (G43, G44): `unitQuadrance R`, `unitQuadrance.map` (the bound as functoriality), `UDCert.drawing_adj`; **`chromaticNumber_finitePlane11`** (= 5, no solver) and **`chromaticNumber_heule510`** (= 5). [derived] Kloosterman eigenvalues make every plane at p ≡ 3 (mod 4) from 59 up refuse five; over ℚ(√3,√11), 6-open ⟺ wall broken ∧ 11 inert. **Prior art:** ω and ω ≠ χ on finite planes (`[Krebs2022]`, `[LorenzZimmermann2023]`, `[SchneiderSilva2013]`); `[Vinh2006]` restates the spectral bound without a factor 2, which our kernel value at 19 contradicts. | `UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, `tools/fplane.py` | M58 |
 | 54 | **The lift** (G45): `add_one_le_chromaticNumber_plane_of_lift`; `stressPairing_eq_zero_of_lift` (in any ring with π² = 0 a lift forces every self-stress to pair to zero with the defect); no lift modulo 131², 11² or 19² for the 1581's merged image and the 5-critical cores of UD(𝔽₁₁,2) and UD(𝔽₁₉,2). [tools] The hub scan: 3,739 exact depth-one hubs of the 1581 at 131. | `Lift.lean`, `Instances/LiftObstruction{11,19,131}.lean`, `tools/fplift.py` | M59 |
@@ -218,7 +223,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 60 | **Plane freedom**: rotations by circle points are automorphisms of `unitQuadrance R` (`rotHom`, `quarterTurnHom`); over a field where −1 is not a square a vector and its quarter turn span the plane; so **over ZMod p with p ≡ 3 (mod 4), `Forces ↔ x = y` whenever the plane is k-colourable** (`finitePlane_forces_iff`) — without colourability the statement is false (`finitePlane3_not_colorable_two`). Prime fields only; the virtual-edge half is proved only at 11. | `PlaneRotation.lean`, `Instances/PlaneFreedom.lean` | 2026-09-09 |
 | 61 | **Statements at their proofs' level**: the six-target is colour-generic (`seven_le_chromaticNumber_plane_of_forced_pairs`: two six-colour gadgets give χ ≥ 7) and distance-set-generic, and over {1, 2} one √3 gadget suffices (`six_le_chromaticNumber_oneTwo_of_forced_sqrt3`); a passing brick certificate colours `distanceGraph ℂ D` (`chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine`); the old names are pinned by compiled type ascriptions. | `Instances/HexShell.lean`, `BrickDistance.lean` | FS-24 |
 | 62 | **Overcompression is an orbit-closure gap**: for an upward-closed refusal family and H ≤ Aut(A), the rung-H minimum equals min \|cl_H(M)\| over inclusion-minimal refusers M, so every symmetry rung is a hitting-set problem over H-orbits against the correction-set hypergraph Y, with no colouring ask. [tools] On `[Parts2020a]`'s L stage: 375 vertices / 3,264 minima at the trivial rung; a dead involution gives 376 with containment 0 of 1,302 — his §6 sentence reproduced at 375 and 376; S-side rungs cost 8 vertices where L's cost 1; Y accounts for every exclusion. **Prior art:** the symmetry gap of symmetric integer programming (`[HerrRehnSchurmann2013]`), idealness, semilinear sets, MUS/MCS enumeration (arXiv:2412.13606 — our 336 necessary atoms are its backbone). | `tools/parts_faces.py`, `tools/parts_reduce.py`, `data/m62/m64-*.json` | M64 |
-| 64 | [tools] **A five-chromatic unit-distance graph in a 6-OPEN field, from a classified new rotation** (M63 phase H2). The type-M rotations are classified by one integer — `cos θ = (2n−1)/(2n)`, diagonal circle at `\|p\|² = n`, radicand `4n−1` — which is the **spindle** construction at distance `√n`, so `n = 3` is the Moser twist, `n = 4` is `ρ₁₅` (the 509-vertex record) and `n = 16` is `ρ₆₃ = (31+3i√7)/32`, already a G8 generator. Screened by four gates we hold (free circle; `sin θ ∉ K` else Theorem B four-colours every base; the 2-adic wall; 11's residue degree), the record is the **cheapest** live member and the two below it die by **Theorem B**. **At `n = 16`: `χ ≥ 5` on 51,133 vertices / 544,530 edges in `ℚ(√3,√7,√11)`**, established twice — a complete 552-pattern enumeration with **0 of 304,704** admissible pairs, and **552/552 UNSAT** cube-and-conquer in 20.03 core-hours — sharing only the completeness of the 552, confirmed on **four** independent solver codebases with paired positive controls, and shipped as **0.35 GB of DRAT** (807 MB bundled, each instance repeating the base half) covering the whole 20-claim trust core — **the first here, but GENERATED and not CHECKED**: no DRAT checker exists on this machine, so what holds is only that CaDiCaL's own `--checkproof` was on. **Regenerated as text LRAT** with `scripts/regen-check.sh`'s own flags: all 20 exit UNSAT, all 20 end in the empty clause with a negative control proving that check discriminates, **1,001.2 MB over 11.8 M lines**, 406 solver-seconds. **Status: generated, not checked** — and the format is **the input to this project's conversion pipeline, NOT one the kernel consumes**: core's LRAT checker cannot kernel-reduce at all (`USize` width is an `@[extern] opaque`, so it buys a native axiom per certificate) and M05's kernel-reducible checker takes a packed `Nat` encoding derived from LRAT. **Kernel-checking is priced and declined for now**: at 585–614 k lines each, one is ~0.75× the per-cube volume row 40 declined and all twenty are ~15× it. Shipped as a **19.5 MB** bundle (base half once plus 20 deltas) whose `reconstitute.sh` verifies each rebuild against a SHA-256 and is proven to refuse a planted clause; the durable commits are the 151 KB certificate and 5 KB manifest at `data/m62/m63-phaseH2-rho63-*.json`. **The refusal is produced, not inherited**: no known witness embeds at any position or orientation (isometry-invariant squared distances), and the base half alone four-colours in 0.35 s. **The result is the field, not the size** — `K(√7)` is 6-open where de Grey's, the record's and the M53 witnesses' fields are all 5-sealed, so 11 is not usable there and row 55's bar on five-colour forced pairs **lifts**: G48's mechanism has a platform. **Not kernel-certified; one object.** [tools] Also: the circle count is the base's norm-`n` shell count and is **free** when `n = k²m` with `k ∈ ℤ` and `m` a realised distance; the 30 circle points admit exactly **19** colour patterns in `1 + 6·3` orbits under `ζ₆`, every one half-turn invariant; and `h(K) = h(K(i)) = 1` with `μ(K(i)) = ⟨ζ₁₂⟩` (pari). | `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH2-solver.md`, `plans/M63-phaseH2-plan.md`, `plans/POROS-2026-09-12-m63-phaseH2.md` | M63 phase H2 |
+| 64 | [tools] **A five-chromatic unit-distance graph in a 6-OPEN field, from a classified new rotation** (M63 phase H2). The type-M rotations are classified by one integer — `cos θ = (2n−1)/(2n)`, diagonal circle at `\|p\|² = n`, radicand `4n−1` — which is the **spindle** construction at distance `√n`, so `n = 3` is the Moser twist, `n = 4` is `ρ₁₅` (the 509-vertex record) and `n = 16` is `ρ₆₃ = (31+3i√7)/32`, already a G8 generator. Screened by four gates we hold (free circle; `sin θ ∉ K` else Theorem B four-colours every base; the 2-adic wall; 11's residue degree), the record is the **cheapest** live member and the two below it die by **Theorem B**. **At `n = 16`: `χ ≥ 5` on 51,133 vertices / 544,530 edges in `ℚ(√3,√7,√11)`**, established twice — a complete 552-pattern enumeration with **0 of 304,704** admissible pairs, and **552/552 UNSAT** cube-and-conquer in 20.03 core-hours — sharing only the completeness of the 552, confirmed on **four** independent solver codebases with paired positive controls, and shipped as **0.35 GB of DRAT** (807 MB bundled, each instance repeating the base half) covering the whole 20-claim trust core — **the first here, but GENERATED and not CHECKED**: no DRAT checker exists on this machine, so what holds is only that CaDiCaL's own `--checkproof` was on. **Regenerated as text LRAT** with `scripts/regen-check.sh`'s own flags: all 20 exit UNSAT, all 20 end in the empty clause with a negative control proving that check discriminates, **1,001.2 MB over 11.8 M lines**, 406 solver-seconds. **Status: generated, not checked** — and the format is **the input to this project's conversion pipeline, NOT one the kernel consumes**: core's LRAT checker cannot kernel-reduce at all (`USize` width is an `@[extern] opaque`, so it buys a native axiom per certificate) and M05's kernel-reducible checker takes a packed `Nat` encoding derived from LRAT. **Kernel-checking is priced and declined for now**: at 585–614 k lines each, one is ~0.75× the per-cube volume row 40 declined and all twenty are ~15× it. Shipped as a **19.5 MB** bundle (base half once plus 20 deltas) whose `reconstitute.sh` verifies each rebuild against a SHA-256 and is proven to refuse a planted clause; the durable commits are the 151 KB certificate and 5 KB manifest at `data/m62/m63-phaseH2-rho63-*.json`. **The refusal is produced, not inherited**: no known witness embeds at any position or orientation (isometry-invariant squared distances), and the base half alone four-colours in 0.35 s. **The result is the field, not the size** — `K(√7)` is 6-open, so 11 is not usable there and row 55's bar on five-colour forced pairs does not apply: G48's mechanism has a platform. **Not the FIRST such platform, corrected 2026-09-12**: de Grey's own field ℚ(√3,√5,√7,√11) is 6-open (G43, measured from `tools/degrey_cert.json`; `data/fplane/map.md` has said so since M58), as is K(√5,√7,√247). The 5-sealed ones are the record's K(√15) = K(√5), the M53 witnesses' K(√247) and K(√23), and Heule-510/553's ℚ(√3,√5,√11). What is new is a platform at **half the degree** (8 against 16), reached **by the screen** rather than found, carrying an object whose refusal is produced. **Not kernel-certified; one object.** [tools] Also: the circle count is the base's norm-`n` shell count and is **free** when `n = k²m` with `k ∈ ℤ` and `m` a realised distance; the 30 circle points admit exactly **19** colour patterns in `1 + 6·3` orbits under `ζ₆`, every one half-turn invariant; and `h(K) = h(K(i)) = 1` with `μ(K(i)) = ⟨ζ₁₂⟩` (pari). | `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH2-solver.md`, `plans/M63-phaseH2-plan.md`, `plans/POROS-2026-09-12-m63-phaseH2.md` | M63 phase H2 |
 | 63 | **Two colours from inertia, and the 2-adic splitting of multiquadratic fields**: a residue map into a reduced characteristic-2 ring that conjugation does not move two-colours every unit-distance graph over its valuation subring (`colorable_two_unitDistance_induce_of_valuationSubring`); a square-class group holding [2] is the sum of two pieces whose 2-adic images avoid [−1], so every real multiquadratic field lies, once √2 is adjoined, in the compositum of two fields that pass the four-colour test (`fieldOfRadicands_le_sup`) — each holding a Moser spindle when the field contains ℚ(√3,√11); de Grey's field lies in ℚ(√2,√3,√11,√35)·ℚ(√3,√10,√11,√35); ℚ(√3,√11,√14) and ℚ(√3,√11,√70) pass the test and their compositum's plane needs five colours (`five_le_chromaticNumber_planeOver_fourteen_sup_seventy`), so, granted the factors' hand χ ≤ 4, no combining rule for test-passing fields gives four. **Not proved:** χ ≤ 4 for any piece (FS-37). [hand] For real multiquadratic F, χ(F²) = 2 iff no odd square class is ≡ 3 (mod 4). **Credit:** the decomposition is ChatGPT's (OpenAI, with Kooshi, 2026-09-11). **Prior art:** the mechanism is Woodall's, `[Fischer1990]` Thm 8, `[Moorhouse2010]` Thm 7.1, `[Madore2015]` Prop. 3.9; the multiquadratic iff is unchecked against `[AxenovichEtAl2014]` and `[Johnson2006]`. | `TwoColourResidue.lean`, `SquareClass.lean`, `Instances/CompositumFive.lean` | FS-36 |
 
 ### Paths forward, ranked
@@ -227,7 +232,8 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
 **Open milestones, in order.** **M63 phase H2 closed 2026-09-12** with a five-chromatic unit-distance graph
-in a **6-open** field (row 64), so the sixth colour's only known mechanism has a platform for the first time.
+in a **6-open** field (row 64) — **not the first** such platform, since de Grey's own field is 6-open (G43),
+but the smallest and the first reached by design rather than found.
 The live continuation is **phase H3 — drop the shape** (`plans/M63-phaseH3-drop-the-shape.md`, specified and
 unstarted): the obstruction limiting every object of this kind is neither fineness, radius nor field but **two
 coordinate-slot conditions inherited from `[Parts2020a]`**, and dropping them at `n = 2` offers twice the
@@ -357,13 +363,19 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   argument composes a disjunctive class-level compulsion on fabric ("every 4-colouring puts some forbidden
   pattern somewhere") with a thin kill web refuting each placement; instance meters cannot see the
   disjunction. The composition builds 5-chromatic objects by design (row 31), and `[Heule2019]` §6.2
-  describes Heule's graphs this way. Open: whether every χ ≥ 5 argument must factor so.
+  describes Heule's graphs this way. In the finite lab it is **five of five**: every clique-free 1-minimal
+  cell-family core (23, 28, 53, 66, 117 vertices) factors, with Act One a monochromatic pair on a small
+  non-edge class. Open: whether every χ ≥ 5 argument must factor so — the one registered falsifier, M43's
+  non-factoring fine tail, was itself withdrawn (a G21 instance), so universality has never been tested
+  against a counterexample here.
 * **G16 — The distance-2 pigeonhole. [kernel carriers + measured]** The seam fabric cannot 4-colour without a
   monochromatic distance-2 pair once it has seam depth ≥ 2 or radial extent past a fabric shell
   (r² = 2 − √33/9 on de Grey's fabric). The reason: 2 lies in the prime above 2, so Theorem B's colouring
   makes every positive-valuation distance monochromatic (row 59). The carrier is 122 vertices; the √3-pair
   sibling concentrates to nine, because √3 is the one distance whose equilateral triangle has unit
-  circumradius. Every kill of it needs a wall-breaking root (ρ₁₅ adjoins √15).
+  circumradius — but it is an **assembly product**: only the full 1581 carries it, onset at the √21 shell
+  where cross-system material enters, and Heule's shrinking discarded it. Every kill of it needs a
+  wall-breaking root (ρ₁₅ adjoins √15).
 * **G17 — Globality lives only at the top rung. [measured]** The fan onset (χ ≥ 5 itself) arrives at the
   last vertex; every sub-rung compulsion measured has a small carrier (3-cover at 49 vertices, the distance-2
   pigeonhole at 122).
@@ -401,8 +413,11 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
 * **G23 — Refining is not a route down. [kernel + measured]** The cell family's requirement is not monotone
   in scale; the classical scale is a local optimum (dual form: `[deGreyParts2022]`).
 * **G24 — The gap law. [kernel forcing half + measured]** Below the classical window the cell family needs ≥ 7
-  at every scale (`[Voronov2023]`, `[SokolovVoronov2025]`) while ω falls to 3–5 and every certified
-  relaxation to about 4 — the plane's own pathology (ω = 3, relaxations low, χ = 7) in finite
+  at every scale (`[Voronov2023]`, `[SokolovVoronov2025]`) while ω falls to 3–5, the certified
+  Hoffman/spectral bracket to ≈ 4.1 (3.56 at p = 1/7) and the fractional relaxation only to χ_f ≤ 48/7 at
+  G\* (α(12×12) = 21) — **the step to seven is integrality**, not a low relaxation: the exactly certified
+  χ_f are 130/23 at the 23-core, 501/74 at the 53-core and ≈ 4.83796 at the 117-core. The plane's own
+  pathology (ω = 3, relaxations below χ, χ = 7) in finite
   kernel-checkable objects, the smallest the 23-vertex core with χ = 7 at ω = 4. Open: the deep pocket's
   χ ≥ 8 in the kernel; a relaxation that sees the gap.
 * **G25 — The forcing ladder is recursive. [reading]** For the objects held, χ ≥ 4 is holonomy of
@@ -482,7 +497,9 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   6-open, then the last kills. The spindles a K-descent can run (ρ₁₅, 8/3) land in 5-sealed fields. K-fabric
   grown to four-colour rigidity supplies its own wall-breaking angle (forced pairs at 8/3 spindle through
   √247). Over K the 6-open single radicals are the odd squarefree d ≡ 5, 7 (mod 8) that are non-residues
-  mod 11 (7, 13, 79, 127, …).
+  mod 11 (7, 13, 79, 127, …). **This does not contradict G35's "≡ 7 (mod 8)"**, which is the test on the
+  field's *square classes*, not on the radicand: 3 is already in K, so d ≡ 5 breaks the wall through the
+  class 3d ≡ 7 (mod 8). Hence 13 joins 7, 79, 127.
 * **G38 — The linear method's thresholds. [hand theorem; Fischer's framework]** Colouring by cosets of a
   subgroup avoiding the reduced norm-one group gives 2, 3 or 4 colours and then nothing below 7. With
   conjugation in inertia the reduced group is {±1}, so ℚ(√N)² with N ≡ 5 (mod 8) is bipartite
@@ -506,18 +523,24 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   16-pair residue sits at depth 3, beyond any additive four-colouring.
 * **G42 — Additive rigidity is closure, and the family dies before it closes. [kernel + measured]** Rigidity
   needs every two-colour Kempe subgraph of every admissible hom connected (gauge γ = Σ(components − 1)).
-  Only Exoo–Ismailescu's G has γ = 0; K-unit parts are 4-colourable; wall-broken thickening can erase the
+  Only Exoo–Ismailescu's G has γ = 0 **with its cheats** — the gauge is measured on the graph including its
+  non-unit cheat edges, never on the unit-distance graph alone; K-unit parts are 4-colourable; wall-broken thickening can erase the
   family (W plus 63 F₂₄₇ points), while de Grey's half-spindle closure keeps it. Forcing does not need
   rigidity (the seed's 252-cheat subset forces with > 5,000 colourings).
 * **G43 — The residue plane seals fields. [kernel over rings; field level gated as G35; prior art
   `[Moorhouse2010]`]** At a usable prime the residue map is a homomorphism into UD(𝔽_q, 2), so
   χ(F²) ≤ χ(UD(𝔽_q, 2)) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For F ⊇ K,
   6-open ⟺ wall broken ∧ 11 inert: K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
-  11-inert but keeps the wall. **De Grey's field is NOT 6-open** — corrected 2026-09-11, where this entry
-  contradicted ledger row 52. It is K(√5) = K(√15), and 15 ≡ 4 (mod 11) **is** a square, so 11 **splits**,
-  stays usable, and the field is **5-sealed** — which is exactly what row 52's χ(ℚ(√3,√5,√11)²) = 5 says.
-  A contradiction between two halves of this file is worse than either half being wrong alone. A composite ideal cannot beat the best prime without refuting Hedetniemi's
-  conjecture (Moorhouse §9). The shadow sieve: an object's direction residues seal every graph built from
+  11-inert but keeps the wall. **De Grey's field IS 6-open, and so is K(√5,√7,√247)** — his coordinates span
+  ℚ(√3,√5,√7,√11), measured: the 1581 vertices have ℚ-span rank **16 of 16** over `tools/degrey_cert.json`,
+  matching `tools/degrey.py`'s docstring (√7 enters by the rotations through π/2 ± arcsin(1/8)). Frobenius at
+  11 is trivial on √5 and nontrivial on √7, so the residue field is 𝔽₁₂₁ and **no prime below 131 is usable**
+  — which is what `tools/fplane.py`'s field table, its self-test control and the committed
+  `data/fplane/map.md` have said since M58. **Row 52 is about the proper subfield ℚ(√3,√5,√11) and never
+  about de Grey's field**; reading it as the field is what made this entry briefly claim the opposite. The
+  5-sealed witnesses are Heule-510/553 — ℚ-span rank **8**, ℚ(√3,√5,√11), no √7 content at all, where row 52's
+  bound is exactly tight against `chromaticNumber_heule510` = 5. A composite ideal cannot beat the best prime
+  without refuting Hedetniemi's conjecture (Moorhouse §9). The shadow sieve: an object's direction residues seal every graph built from
   those directions.
 * **G44 — Kloosterman control. [derived + measured; ω facts prior art]** UD(𝔽_p, 2) has eigenvalues
   −K(1, c/4), so Weil and Hoffman force χ > 5 from p = 59 (exact spectrum): small planes are SAT questions,
@@ -554,7 +577,11 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   spindle's √11 removes 3; √15 and √247 remove 2). So the six-level is one question — does a 5-sealed field
   carry a pair forced equal at five colours, necessarily at 11 ∣ d²? — whose spindle (√43, √131, 5√7, √10, …)
   lands in a 6-open field by construction. The first digit (is any finite plane exactly 6-chromatic) is
-  decoupled and integrality-carried.
+  decoupled and integrality-carried. **The conjecture the mechanism was minted to serve, restated so it can
+  be pushed back on** (FS-15, opened at the M61 close): *χ(F²) equals its best local bound wherever that
+  bound is ≤ 6* — attained at all six fields where χ is known, twice predicted before the forcer was built —
+  whose **bold form is χ(ℝ²) = 7**. *Falsifier: a wall-broken, 5-sealed field whose plane is 4-colourable by
+  a colouring local at no prime.*
 * **G49 — The prior-art gate. [method, measured]** Recognition is half the rule; the other half is a search
   at the milestone's opening (WORKFLOW step 3a): in the discipline's words, never ours; under two disciplines;
   for the question as well as the method; outside arXiv. Past misses came from checking at the close,

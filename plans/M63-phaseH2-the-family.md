@@ -721,10 +721,19 @@ solves, 32-way, about six minutes.
 **Status of the verdict itself.** The enumeration route says the arena is **not four-colourable**. It is
 being held as **a result in waiting, not a result**, precisely because it is the refusal direction — the
 suspect one for an object whose novelty lives in a derived law. **If it survives all of the above**, then
-since the record's field `K(√15)` is 5-sealed and every witness this project holds and can screen is
-5-sealed, `ρ₆₃`'s arena would be **the first five-chromatic unit-distance graph in a 6-open field** — the
-platform G48's mechanism requires, and FS-22's field reached by a different route. **That sentence is
-conditional on the verdict and on the void-check above, and must not be stated otherwise.**
+`ρ₆₃`'s arena is a five-chromatic unit-distance graph in a 6-open field — the platform G48's mechanism
+requires, and FS-22's field reached by a different route.
+
+> **CORRECTED 2026-09-12 — it is NOT the FIRST such graph.** This paragraph said it would be, on the premise
+> that "every witness this project holds and can screen is 5-sealed". **De Grey's field is 6-open.** His
+> coordinates span ℚ(√3,√5,√7,√11) — measured, ℚ-span rank 16 of 16 over `tools/degrey_cert.json`, matching
+> `tools/degrey.py`'s own docstring — and Frobenius at 11 is trivial on √5 but nontrivial on √7, so the
+> residue field is 𝔽₁₂₁ and no prime below 131 is usable. `tools/fplane.py`'s field table, its self-test
+> control and the committed `data/fplane/map.md` have all said `de Grey Q(√3,√5,√7,√11) → 6-open` since M58.
+> The 5-sealed witnesses are the record's K(√15) = K(√5), the M53 witnesses' K(√247) and K(√23), and
+> Heule-510/553's ℚ(√3,√5,√11) (rank 8 — no √7 content at all). What survives: a **new** object at a **new**
+> rotation whose refusal is **produced, not inherited**, in a 6-open field of **half the degree** (8 against
+> de Grey's 16), reached by the screen rather than found.
 
 ---
 
@@ -935,7 +944,9 @@ wrong mechanism to Kooshi as a finding; corrected.
 
 **What it is.** Not a size record, and no write-up may read that way: 51,133 vertices against 509, and
 reduction is another milestone's machinery. **The result is the FIELD.** `ℚ(√3,√7,√11) = K(√7)` is **6-open**
-(G43), where de Grey's field, the 509-vertex record's, and the M53 witnesses' are all **5-sealed**. And the
+(G43), where the 509-vertex record's field and the M53 witnesses' are **5-sealed**. (**Corrected 2026-09-12:**
+this sentence also named de Grey's field as 5-sealed. It is not — ℚ(√3,√5,√7,√11) is 6-open; see the
+correction box above. His is a 6-open field of degree 16; `K(√7)` is degree 8.) And the
 refusal is **produced, not inherited**: no known five-chromatic witness can embed at any position or
 orientation (isometry-invariant squared distances; §6h), and the base half alone four-colours in 0.35 s, so
 the five-chromaticity cannot come from the base at all.
