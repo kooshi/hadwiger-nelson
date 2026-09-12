@@ -1,0 +1,19 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2754 edges (36 connection)   atoms 423 at rung 1   law rho15   fp 29af5f152dfb)
+    phase1 48/423  critical 33  droppable-alone 15  [20s]
+    phase1 141/423  critical 113  droppable-alone 28  [40s]
+    phase1 232/423  critical 188  droppable-alone 44  [60s]
+    phase1 342/423  critical 278  droppable-alone 64  [81s]
+    phase1 423/423  critical 339  droppable-alone 84  [89s]
+  phase1: 339 critical / 84 droppable-alone of 423 atoms  [101s]
+    it 15: LB 350  minima 0  Y 353 (min size 1)  undecided 0   asks 677 colourable @0.0848s / 113 refusing @0.5334s  [121s]  ckpt 20s ago
+    it 28: LB 357  minima 0  Y 366 (min size 1)  undecided 0   asks 880 colourable @0.0738s / 140 refusing @0.5384s  [144s]  ckpt 9s ago
+    it 53: LB 365  minima 0  Y 391 (min size 1)  undecided 0   asks 1287 colourable @0.0606s / 196 refusing @0.4233s  [165s]  ckpt 30s ago
+    it 83: LB 369  minima 0  Y 421 (min size 1)  undecided 0   asks 2113 colourable @0.0418s / 267 refusing @0.3461s  [185s]  ckpt 18s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [204s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(10,0,4,2):12.ckpt.json: phase1 423 decided, 454 correction sets, 0 minima, w* None, iteration 116; 0 undecided candidates returned to the pool
+  restriction changed (None -> [26, 29, 36, 41, 180, 195, 234, 235, 382, 387, 392, 397]): keeping 423 phase-1 verdicts and 454 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2754 edges (36 connection)   atoms 423 at rung 1   law rho15   fp 29af5f152dfb)
+  phase1: 339 critical / 84 droppable-alone of 423 atoms  [9s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [9s]

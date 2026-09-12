@@ -1,0 +1,19 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2766 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 4ba30baf807d)
+    phase1 60/435  critical 41  droppable-alone 19  [20s]
+    phase1 163/435  critical 125  droppable-alone 38  [41s]
+    phase1 256/435  critical 203  droppable-alone 53  [61s]
+    phase1 380/435  critical 300  droppable-alone 80  [81s]
+    phase1 435/435  critical 339  droppable-alone 96  [90s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [105s]
+    it 14: LB 350  minima 0  Y 352 (min size 1)  undecided 0   asks 528 colourable @0.1274s / 123 refusing @0.4579s  [127s]  ckpt 22s ago
+    it 36: LB 360  minima 0  Y 374 (min size 1)  undecided 0   asks 924 colourable @0.087s / 168 refusing @0.3742s  [147s]  ckpt 12s ago
+    it 73: LB 367  minima 0  Y 411 (min size 1)  undecided 0   asks 1643 colourable @0.0556s / 252 refusing @0.2835s  [168s]  ckpt 1s ago
+    it 107: LB 371  minima 0  Y 445 (min size 1)  undecided 0   asks 2410 colourable @0.0428s / 336 refusing @0.2371s  [188s]  ckpt 22s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [198s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(5,1,7,5):24.ckpt.json: phase1 435 decided, 466 correction sets, 0 minima, w* None, iteration 128; 0 undecided candidates returned to the pool
+  restriction changed (None -> [11, 12, 19, 20, 57, 60, 69, 72, 105, 112, 114, 120, 315, 321, 322, 329, 362, 365, 374, 377, 414, 415, 422, 423]): keeping 435 phase-1 verdicts and 466 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2766 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 4ba30baf807d)
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [12s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [12s]

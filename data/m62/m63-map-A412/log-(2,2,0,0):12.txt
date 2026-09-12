@@ -1,0 +1,22 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2742 edges (36 connection)   atoms 423 at rung 1   law rho15   fp a52031eceebc)
+    phase1 25/423  critical 19  droppable-alone 6  [20s]
+    phase1 115/423  critical 95  droppable-alone 20  [40s]
+    phase1 207/423  critical 163  droppable-alone 44  [60s]
+    phase1 261/423  critical 199  droppable-alone 62  [81s]
+    phase1 364/423  critical 285  droppable-alone 79  [101s]
+    phase1 423/423  critical 330  droppable-alone 93  [106s]
+  phase1: 330 critical / 93 droppable-alone of 423 atoms  [125s]
+    it 25: LB 346  minima 0  Y 354 (min size 1)  undecided 0   asks 617 colourable @0.1108s / 142 refusing @0.4964s  [145s]  ckpt 20s ago
+    it 51: LB 356  minima 0  Y 380 (min size 1)  undecided 0   asks 983 colourable @0.0794s / 199 refusing @0.4055s  [165s]  ckpt 9s ago
+    it 82: LB 363  minima 0  Y 411 (min size 1)  undecided 0   asks 1384 colourable @0.0639s / 267 refusing @0.3371s  [185s]  ckpt 29s ago
+    it 112: LB 369  minima 0  Y 441 (min size 1)  undecided 0   asks 2027 colourable @0.0482s / 334 refusing @0.3006s  [205s]  ckpt 19s ago
+    it 153: LB 372  minima 0  Y 482 (min size 1)  undecided 0   asks 2938 colourable @0.0373s / 439 refusing @0.2461s  [225s]  ckpt 9s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [234s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(2,2,0,0):12.ckpt.json: phase1 423 decided, 497 correction sets, 0 minima, w* None, iteration 168; 0 undecided candidates returned to the pool
+  restriction changed (None -> [155, 174, 180, 183, 191, 192, 231, 232, 238, 241, 247, 268]): keeping 423 phase-1 verdicts and 497 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2742 edges (36 connection)   atoms 423 at rung 1   law rho15   fp a52031eceebc)
+  phase1: 330 critical / 93 droppable-alone of 423 atoms  [9s]
+    it 5: LB 373  minima 0  Y 501 (min size 1)  undecided 0   asks 78 colourable @0.0789s / 11 refusing @2.7085s  [36s]  ckpt 27s ago
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [49s]

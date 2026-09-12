@@ -1,0 +1,69 @@
+{
+ "candidate": {
+  "vertices": [],
+  "n_new": 0,
+  "orbits": {},
+  "provenance": "identity",
+  "flags": [],
+  "name": "identity"
+ },
+ "name": "identity",
+ "stage_identity": "6f97bcbd20f2a00e5c920761195af8c73e4c04fd26f401a3acdb7970f45095a5",
+ "stage_fingerprint": "7184fbd621c9b8708b038aa0b9dd9af1",
+ "atoms": 411,
+ "vertices": 547,
+ "invariants": {
+  "verdict": "restriction-identity-holds",
+  "checks": [
+   "companion e75b50b6",
+   "restriction 2694 edges",
+   "vertices 547 = 547 + 0"
+  ],
+  "anchor": {
+   "known_minimum": "unsat",
+   "minus_one": "sat",
+   "verdict": "contains-a-known-minimum"
+  }
+ },
+ "asked_at_target": 372,
+ "rung_used": 1,
+ "incumbent": 373,
+ "primary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 372 over all selections (lower bound 373, rung 1, 0 undecided)",
+  "M_vertices": null,
+  "correction_sets": 461,
+  "asks": {
+   "colourable": {
+    "n": 2658,
+    "mean_s": 0.0224,
+    "mean_cpu_s": 0.0222,
+    "total_cpu_s": 59.12
+   },
+   "refusing": {
+    "n": 358,
+    "mean_s": 0.1787,
+    "mean_cpu_s": 0.1775,
+    "total_cpu_s": 63.55
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 3014,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 127.6
+ },
+ "verdict": "no",
+ "M": 374,
+ "M_set_grew": "no",
+ "secondary": {
+  "verdict": "not-asked",
+  "note": "the identity candidate adds no material, so {M} cannot grow: every minimum of W' uses no new atom and is a minimum of W. Asking it would drop the restriction and enumerate the full level."
+ },
+ "cpu_seconds": 138.21,
+ "block": "control",
+ "block_index": 0
+}

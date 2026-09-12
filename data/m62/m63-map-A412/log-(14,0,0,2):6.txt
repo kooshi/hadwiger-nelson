@@ -1,0 +1,20 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 418 + S 135 = 553 vertices, 2712 edges (36 connection)   atoms 417 at rung 1   law rho15   fp 9d96a05975dd)
+    phase1 22/417  critical 15  droppable-alone 7  [20s]
+    phase1 119/417  critical 96  droppable-alone 23  [40s]
+    phase1 208/417  critical 169  droppable-alone 39  [61s]
+    phase1 274/417  critical 223  droppable-alone 51  [81s]
+    phase1 369/417  critical 303  droppable-alone 66  [101s]
+    phase1 417/417  critical 339  droppable-alone 78  [108s]
+  phase1: 339 critical / 78 droppable-alone of 417 atoms  [123s]
+    it 12: LB 347  minima 0  Y 350 (min size 1)  undecided 0   asks 538 colourable @0.1148s / 101 refusing @0.7865s  [147s]  ckpt 23s ago
+    it 27: LB 356  minima 0  Y 365 (min size 1)  undecided 0   asks 753 colourable @0.099s / 131 refusing @0.6778s  [169s]  ckpt 12s ago
+    it 57: LB 364  minima 0  Y 395 (min size 1)  undecided 0   asks 1215 colourable @0.0707s / 199 refusing @0.4882s  [189s]  ckpt 1s ago
+    it 97: LB 370  minima 0  Y 435 (min size 1)  undecided 0   asks 1993 colourable @0.0495s / 294 refusing @0.3529s  [209s]  ckpt 21s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [227s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(14,0,0,2):6.ckpt.json: phase1 417 decided, 459 correction sets, 0 minima, w* None, iteration 121; 0 undecided candidates returned to the pool
+  restriction changed (None -> [10, 72, 73, 337, 350, 407]): keeping 417 phase-1 verdicts and 459 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 418 + S 135 = 553 vertices, 2712 edges (36 connection)   atoms 417 at rung 1   law rho15   fp 9d96a05975dd)
+  phase1: 339 critical / 78 droppable-alone of 417 atoms  [10s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [10s]

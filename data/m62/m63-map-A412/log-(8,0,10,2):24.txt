@@ -1,0 +1,18 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2754 edges (36 connection)   atoms 435 at rung 1   law rho15   fp f1bde6c39ac5)
+    phase1 104/435  critical 75  droppable-alone 29  [20s]
+    phase1 216/435  critical 169  droppable-alone 47  [40s]
+    phase1 324/435  critical 258  droppable-alone 66  [60s]
+    phase1 435/435  critical 339  droppable-alone 96  [70s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [79s]
+    it 23: LB 355  minima 0  Y 361 (min size 1)  undecided 0   asks 700 colourable @0.0685s / 142 refusing @0.3393s  [100s]  ckpt 21s ago
+    it 43: LB 361  minima 0  Y 381 (min size 1)  undecided 0   asks 1066 colourable @0.0552s / 183 refusing @0.312s  [120s]  ckpt 10s ago
+    it 89: LB 370  minima 0  Y 427 (min size 1)  undecided 0   asks 1951 colourable @0.0364s / 289 refusing @0.2223s  [140s]  ckpt 0s ago
+    it 117: LB 372  minima 0  Y 455 (min size 1)  undecided 0   asks 2561 colourable @0.0313s / 365 refusing @0.2055s  [161s]  ckpt 20s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [164s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(8,0,10,2):24.ckpt.json: phase1 435 decided, 462 correction sets, 0 minima, w* None, iteration 124; 0 undecided candidates returned to the pool
+  restriction changed (None -> [0, 1, 2, 3, 28, 32, 33, 37, 63, 64, 73, 74, 360, 361, 370, 371, 397, 401, 402, 406, 431, 432, 433, 434]): keeping 435 phase-1 verdicts and 462 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2754 edges (36 connection)   atoms 435 at rung 1   law rho15   fp f1bde6c39ac5)
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [6s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [6s]

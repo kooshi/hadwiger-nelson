@@ -1,0 +1,8 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2754 edges (36 connection)   atoms 435 at rung 1   law rho15   fp a07616dcb637)
+    phase1 72/435  critical 49  droppable-alone 23  [20s]
+    phase1 217/435  critical 169  droppable-alone 48  [43s]
+    phase1 360/435  critical 288  droppable-alone 72  [63s]
+    phase1 435/435  critical 339  droppable-alone 96  [67s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [79s]
+    it 18: LB 350  minima 0  Y 356 (min size 1)  undecided 0   asks 610 colourable @0.0731s / 131 refusing @0.3748s  [99s]  ckpt 20s ago

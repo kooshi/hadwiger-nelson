@@ -1,0 +1,132 @@
+{
+ "candidate": {
+  "vertices": [
+   [
+    0,
+    -4,
+    0,
+    0
+   ],
+   [
+    0,
+    -2,
+    0,
+    -6
+   ],
+   [
+    0,
+    -2,
+    0,
+    6
+   ],
+   [
+    0,
+    2,
+    0,
+    -6
+   ],
+   [
+    0,
+    2,
+    0,
+    6
+   ],
+   [
+    0,
+    4,
+    0,
+    0
+   ]
+  ],
+  "n_new": 6,
+  "orbits": {
+   "(0, 4, 0, 0)": 6
+  },
+  "provenance": "reserve",
+  "flags": [],
+  "name": "(0,4,0,0):6"
+ },
+ "name": "(0,4,0,0):6",
+ "stage_identity": "c4fa11cce3a2ccb52618397b1d8ed08ecc3aca7c2b35f9c9029630b2e6535c05",
+ "stage_fingerprint": "a686032761461b850ca54a0712789fed",
+ "atoms": 417,
+ "vertices": 553,
+ "invariants": {
+  "verdict": "restriction-identity-holds",
+  "checks": [
+   "companion e75b50b6",
+   "restriction 2694 edges",
+   "vertices 553 = 547 + 6"
+  ],
+  "anchor": {
+   "known_minimum": "unsat",
+   "minus_one": "sat",
+   "verdict": "contains-a-known-minimum"
+  }
+ },
+ "asked_at_target": 372,
+ "rung_used": 1,
+ "incumbent": 373,
+ "primary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 372 over all selections (lower bound 373, rung 1, 0 undecided)",
+  "M_vertices": null,
+  "correction_sets": 466,
+  "asks": {
+   "colourable": {
+    "n": 3035,
+    "mean_s": 0.0299,
+    "mean_cpu_s": 0.0297,
+    "total_cpu_s": 90.2
+   },
+   "refusing": {
+    "n": 382,
+    "mean_s": 0.2437,
+    "mean_cpu_s": 0.2421,
+    "total_cpu_s": 92.48
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 3415,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 190.4
+ },
+ "verdict": "no",
+ "M": 374,
+ "secondary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 373 over all selections keeping at least one of the newly added atoms (lower bound 374, rung 1, 0 undecided)",
+  "correction_sets": 467,
+  "asks": {
+   "colourable": {
+    "n": 31,
+    "mean_s": 0.1181,
+    "mean_cpu_s": 0.1173,
+    "total_cpu_s": 3.64
+   },
+   "refusing": {
+    "n": 7,
+    "mean_s": 2.2861,
+    "mean_cpu_s": 2.2705,
+    "total_cpu_s": 15.89
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 36,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 19.7,
+  "new_minima": 0
+ },
+ "M_set_grew": "no",
+ "cpu_seconds": 223.0,
+ "block": "his-degree-order",
+ "block_index": 5
+}

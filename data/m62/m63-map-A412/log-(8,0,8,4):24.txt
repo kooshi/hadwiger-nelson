@@ -1,0 +1,18 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2766 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 0f13a6a0fc82)
+    phase1 68/435  critical 46  droppable-alone 22  [20s]
+    phase1 192/435  critical 146  droppable-alone 46  [40s]
+    phase1 296/435  critical 235  droppable-alone 61  [60s]
+    phase1 435/435  critical 339  droppable-alone 96  [73s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [84s]
+    it 19: LB 351  minima 0  Y 357 (min size 1)  undecided 0   asks 588 colourable @0.0788s / 133 refusing @0.4132s  [105s]  ckpt 21s ago
+    it 34: LB 358  minima 0  Y 372 (min size 1)  undecided 0   asks 856 colourable @0.0634s / 166 refusing @0.405s  [125s]  ckpt 9s ago
+    it 77: LB 367  minima 0  Y 415 (min size 1)  undecided 0   asks 1682 colourable @0.0396s / 262 refusing @0.2837s  [145s]  ckpt 29s ago
+    it 121: LB 372  minima 0  Y 459 (min size 1)  undecided 0   asks 2596 colourable @0.0298s / 375 refusing @0.2221s  [166s]  ckpt 19s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [171s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(8,0,8,4):24.ckpt.json: phase1 435 decided, 469 correction sets, 0 minima, w* None, iteration 131; 0 undecided candidates returned to the pool
+  restriction changed (None -> [6, 7, 8, 9, 57, 60, 61, 62, 71, 72, 73, 76, 358, 361, 362, 363, 372, 373, 374, 377, 425, 426, 427, 428]): keeping 435 phase-1 verdicts and 469 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2766 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 0f13a6a0fc82)
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [8s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [8s]

@@ -1,0 +1,168 @@
+{
+ "candidate": {
+  "vertices": [
+   [
+    -8,
+    0,
+    0,
+    -4
+   ],
+   [
+    -8,
+    0,
+    0,
+    4
+   ],
+   [
+    -4,
+    -2,
+    -4,
+    2
+   ],
+   [
+    -4,
+    -2,
+    4,
+    -2
+   ],
+   [
+    -4,
+    2,
+    -4,
+    -2
+   ],
+   [
+    -4,
+    2,
+    4,
+    2
+   ],
+   [
+    4,
+    -2,
+    -4,
+    -2
+   ],
+   [
+    4,
+    -2,
+    4,
+    2
+   ],
+   [
+    4,
+    2,
+    -4,
+    2
+   ],
+   [
+    4,
+    2,
+    4,
+    -2
+   ],
+   [
+    8,
+    0,
+    0,
+    -4
+   ],
+   [
+    8,
+    0,
+    0,
+    4
+   ]
+  ],
+  "n_new": 12,
+  "orbits": {
+   "(8, 0, 0, 4)": 12
+  },
+  "provenance": "reserve",
+  "flags": [],
+  "name": "(8,0,0,4):12"
+ },
+ "name": "(8,0,0,4):12",
+ "stage_identity": "1b3303f2bf5beb3d76e5c93c361f4e3210a590449ceffc8c1ec97360679f669d",
+ "stage_fingerprint": "64979ee1468cbb9e5a0d92616aac399f",
+ "atoms": 423,
+ "vertices": 559,
+ "invariants": {
+  "verdict": "restriction-identity-holds",
+  "checks": [
+   "companion e75b50b6",
+   "restriction 2694 edges",
+   "vertices 559 = 547 + 12"
+  ],
+  "anchor": {
+   "known_minimum": "unsat",
+   "minus_one": "sat",
+   "verdict": "contains-a-known-minimum"
+  }
+ },
+ "asked_at_target": 372,
+ "rung_used": 1,
+ "incumbent": 373,
+ "primary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 372 over all selections (lower bound 373, rung 1, 0 undecided)",
+  "M_vertices": null,
+  "correction_sets": 467,
+  "asks": {
+   "colourable": {
+    "n": 3491,
+    "mean_s": 0.0406,
+    "mean_cpu_s": 0.0404,
+    "total_cpu_s": 140.91
+   },
+   "refusing": {
+    "n": 419,
+    "mean_s": 0.4166,
+    "mean_cpu_s": 0.4137,
+    "total_cpu_s": 173.36
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 3908,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 321.3
+ },
+ "verdict": "no",
+ "M": 374,
+ "secondary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 373 over all selections keeping at least one of the newly added atoms (lower bound 374, rung 1, 0 undecided)",
+  "correction_sets": 501,
+  "asks": {
+   "colourable": {
+    "n": 972,
+    "mean_s": 0.03,
+    "mean_cpu_s": 0.0298,
+    "total_cpu_s": 28.97
+   },
+   "refusing": {
+    "n": 127,
+    "mean_s": 0.4191,
+    "mean_cpu_s": 0.4164,
+    "total_cpu_s": 52.88
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 1097,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 82.6,
+  "new_minima": 0
+ },
+ "M_set_grew": "no",
+ "cpu_seconds": 416.56,
+ "block": "his-degree-order",
+ "block_index": 0
+}

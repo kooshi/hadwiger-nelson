@@ -1,0 +1,20 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2742 edges (36 connection)   atoms 423 at rung 1   law rho15   fp 9b901ed78f77)
+    phase1 56/423  critical 40  droppable-alone 16  [21s]
+    phase1 155/423  critical 125  droppable-alone 30  [43s]
+    phase1 270/423  critical 215  droppable-alone 55  [64s]
+    phase1 380/423  critical 307  droppable-alone 73  [84s]
+    phase1 423/423  critical 339  droppable-alone 84  [87s]
+  phase1: 339 critical / 84 droppable-alone of 423 atoms  [102s]
+    it 18: LB 351  minima 0  Y 356 (min size 1)  undecided 0   asks 569 colourable @0.1019s / 119 refusing @0.5061s  [122s]  ckpt 20s ago
+    it 33: LB 360  minima 0  Y 371 (min size 1)  undecided 0   asks 747 colourable @0.0903s / 150 refusing @0.4712s  [142s]  ckpt 9s ago
+    it 50: LB 365  minima 0  Y 388 (min size 1)  undecided 0   asks 969 colourable @0.081s / 184 refusing @0.4342s  [163s]  ckpt 29s ago
+    it 76: LB 368  minima 0  Y 414 (min size 1)  undecided 0   asks 1555 colourable @0.0598s / 240 refusing @0.3564s  [183s]  ckpt 20s ago
+    it 120: LB 372  minima 0  Y 458 (min size 1)  undecided 0   asks 2530 colourable @0.042s / 363 refusing @0.2551s  [204s]  ckpt 10s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [207s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(0,0,6,2):12.ckpt.json: phase1 423 decided, 464 correction sets, 0 minima, w* None, iteration 126; 0 undecided candidates returned to the pool
+  restriction changed (None -> [44, 48, 50, 52, 203, 204, 217, 218, 368, 370, 376, 380]): keeping 423 phase-1 verdicts and 464 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 424 + S 135 = 559 vertices, 2742 edges (36 connection)   atoms 423 at rung 1   law rho15   fp 9b901ed78f77)
+  phase1: 339 critical / 84 droppable-alone of 423 atoms  [13s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [13s]

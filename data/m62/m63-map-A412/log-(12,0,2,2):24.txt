@@ -1,0 +1,19 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2802 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 1938d8de8354)
+    phase1 98/435  critical 71  droppable-alone 27  [21s]
+    phase1 192/435  critical 144  droppable-alone 48  [41s]
+    phase1 326/435  critical 252  droppable-alone 74  [61s]
+    phase1 435/435  critical 333  droppable-alone 102  [73s]
+  phase1: 333 critical / 102 droppable-alone of 435 atoms  [83s]
+    it 30: LB 350  minima 0  Y 362 (min size 1)  undecided 0   asks 823 colourable @0.0681s / 164 refusing @0.2724s  [105s]  ckpt 22s ago
+    it 68: LB 365  minima 0  Y 400 (min size 1)  undecided 0   asks 1330 colourable @0.0499s / 244 refusing @0.2229s  [126s]  ckpt 13s ago
+    it 108: LB 369  minima 0  Y 440 (min size 1)  undecided 0   asks 2273 colourable @0.0342s / 345 refusing @0.181s  [146s]  ckpt 3s ago
+    it 151: LB 372  minima 0  Y 483 (min size 1)  undecided 0   asks 3407 colourable @0.0263s / 459 refusing @0.1537s  [167s]  ckpt 23s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [171s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(12,0,2,2):24.ckpt.json: phase1 435 decided, 492 correction sets, 0 minima, w* None, iteration 160; 0 undecided candidates returned to the pool
+  restriction changed (None -> [20, 21, 23, 24, 48, 52, 53, 58, 136, 146, 148, 159, 275, 286, 287, 297, 375, 380, 384, 388, 410, 411, 413, 414]): keeping 435 phase-1 verdicts and 492 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2802 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 1938d8de8354)
+  phase1: 333 critical / 102 droppable-alone of 435 atoms  [6s]
+    it 4: LB 373  minima 0  Y 495 (min size 1)  undecided 0   asks 91 colourable @0.0808s / 10 refusing @1.8858s  [26s]  ckpt 20s ago
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [39s]

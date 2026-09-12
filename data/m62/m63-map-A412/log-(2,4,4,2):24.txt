@@ -1,0 +1,23 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2742 edges (36 connection)   atoms 435 at rung 1   law rho15   fp cadbae559b9d)
+    phase1 32/435  critical 25  droppable-alone 7  [20s]
+    phase1 130/435  critical 101  droppable-alone 29  [40s]
+    phase1 176/435  critical 136  droppable-alone 40  [60s]
+    phase1 276/435  critical 214  droppable-alone 62  [81s]
+    phase1 340/435  critical 265  droppable-alone 75  [101s]
+    phase1 435/435  critical 339  droppable-alone 96  [113s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [133s]
+    it 12: LB 349  minima 0  Y 350 (min size 1)  undecided 0   asks 521 colourable @0.1274s / 120 refusing @0.6755s  [153s]  ckpt 20s ago
+    it 24: LB 355  minima 0  Y 362 (min size 1)  undecided 0   asks 663 colourable @0.1166s / 144 refusing @0.6308s  [174s]  ckpt 10s ago
+    it 32: LB 359  minima 0  Y 370 (min size 1)  undecided 0   asks 770 colourable @0.1183s / 160 refusing @0.6086s  [194s]  ckpt 0s ago
+    it 41: LB 362  minima 0  Y 379 (min size 1)  undecided 0   asks 882 colourable @0.1194s / 179 refusing @0.5771s  [215s]  ckpt 20s ago
+    it 49: LB 364  minima 0  Y 387 (min size 1)  undecided 0   asks 993 colourable @0.1154s / 196 refusing @0.587s  [236s]  ckpt 10s ago
+    it 74: LB 370  minima 0  Y 412 (min size 1)  undecided 0   asks 1477 colourable @0.0877s / 252 refusing @0.4777s  [256s]  ckpt 0s ago
+    it 103: LB 372  minima 0  Y 441 (min size 1)  undecided 0   asks 2022 colourable @0.0697s / 327 refusing @0.3944s  [277s]  ckpt 20s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [288s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(2,4,4,2):24.ckpt.json: phase1 435 decided, 462 correction sets, 0 minima, w* None, iteration 124; 0 undecided candidates returned to the pool
+  restriction changed (None -> [65, 66, 79, 80, 103, 106, 110, 115, 160, 161, 186, 187, 247, 248, 273, 274, 319, 324, 328, 331, 354, 355, 368, 369]): keeping 435 phase-1 verdicts and 462 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2742 edges (36 connection)   atoms 435 at rung 1   law rho15   fp cadbae559b9d)
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [11s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [11s]

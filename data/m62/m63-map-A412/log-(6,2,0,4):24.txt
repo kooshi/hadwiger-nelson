@@ -1,0 +1,18 @@
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2742 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 2712b821f689)
+    phase1 82/435  critical 64  droppable-alone 18  [20s]
+    phase1 217/435  critical 169  droppable-alone 48  [41s]
+    phase1 341/435  critical 264  droppable-alone 77  [61s]
+    phase1 435/435  critical 339  droppable-alone 96  [69s]
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [79s]
+    it 25: LB 356  minima 0  Y 363 (min size 1)  undecided 0   asks 735 colourable @0.069s / 146 refusing @0.306s  [99s]  ckpt 21s ago
+    it 41: LB 363  minima 0  Y 379 (min size 1)  undecided 0   asks 898 colourable @0.0654s / 179 refusing @0.3235s  [121s]  ckpt 11s ago
+    it 66: LB 368  minima 0  Y 404 (min size 1)  undecided 0   asks 1393 colourable @0.0505s / 235 refusing @0.2805s  [141s]  ckpt 1s ago
+    it 94: LB 372  minima 0  Y 432 (min size 1)  undecided 0   asks 2005 colourable @0.0407s / 302 refusing @0.2453s  [161s]  ckpt 21s ago
+  lower bound 373 > target 372: NO refusing selection of weight <= 372 exists  [177s]
+  resuming from /home/kooshi/source/lean-dir/data/m62/ckpt/m63-map-(6,2,0,4):24.ckpt.json: phase1 435 decided, 456 correction sets, 0 minima, w* None, iteration 118; 0 undecided candidates returned to the pool
+  restriction changed (None -> [80, 82, 95, 97, 128, 133, 137, 142, 147, 156, 159, 162, 272, 275, 278, 287, 292, 297, 301, 306, 335, 337, 354, 356]): keeping 435 phase-1 verdicts and 456 correction sets (graph facts, still true), discarding 0 minima and w* None (search facts of another objective)
+  pin control: pin-agrees-everywhere (12 checks)
+  base keeps the property, companion alone does not (stage: reduce {L}   L 436 + S 135 = 571 vertices, 2742 edges (36 connection)   atoms 435 at rung 1   law rho15   fp 2712b821f689)
+  phase1: 339 critical / 96 droppable-alone of 435 atoms  [10s]
+  lower bound 374 > target 373: NO refusing selection of weight <= 373 exists  [10s]

@@ -1,0 +1,240 @@
+{
+ "candidate": {
+  "vertices": [
+   [
+    -14,
+    -2,
+    -2,
+    2
+   ],
+   [
+    -14,
+    -2,
+    2,
+    -2
+   ],
+   [
+    -14,
+    2,
+    -2,
+    -2
+   ],
+   [
+    -14,
+    2,
+    2,
+    2
+   ],
+   [
+    -10,
+    0,
+    -6,
+    -4
+   ],
+   [
+    -10,
+    0,
+    -6,
+    4
+   ],
+   [
+    -10,
+    0,
+    6,
+    -4
+   ],
+   [
+    -10,
+    0,
+    6,
+    4
+   ],
+   [
+    -4,
+    -2,
+    -8,
+    -2
+   ],
+   [
+    -4,
+    -2,
+    8,
+    2
+   ],
+   [
+    -4,
+    2,
+    -8,
+    2
+   ],
+   [
+    -4,
+    2,
+    8,
+    -2
+   ],
+   [
+    4,
+    -2,
+    -8,
+    2
+   ],
+   [
+    4,
+    -2,
+    8,
+    -2
+   ],
+   [
+    4,
+    2,
+    -8,
+    -2
+   ],
+   [
+    4,
+    2,
+    8,
+    2
+   ],
+   [
+    10,
+    0,
+    -6,
+    -4
+   ],
+   [
+    10,
+    0,
+    -6,
+    4
+   ],
+   [
+    10,
+    0,
+    6,
+    -4
+   ],
+   [
+    10,
+    0,
+    6,
+    4
+   ],
+   [
+    14,
+    -2,
+    -2,
+    -2
+   ],
+   [
+    14,
+    -2,
+    2,
+    2
+   ],
+   [
+    14,
+    2,
+    -2,
+    2
+   ],
+   [
+    14,
+    2,
+    2,
+    -2
+   ]
+  ],
+  "n_new": 24,
+  "orbits": {
+   "(10, 0, 6, 4)": 24
+  },
+  "provenance": "reserve",
+  "flags": [],
+  "name": "(10,0,6,4):24"
+ },
+ "name": "(10,0,6,4):24",
+ "stage_identity": "cbe7c674a506be68ad2cbe760ff056272c85ac6f3374cb3434204b0ebf227004",
+ "stage_fingerprint": "ba554c9ece66e0c50dbf0406e42470d1",
+ "atoms": 435,
+ "vertices": 571,
+ "invariants": {
+  "verdict": "restriction-identity-holds",
+  "checks": [
+   "companion e75b50b6",
+   "restriction 2694 edges",
+   "vertices 571 = 547 + 24"
+  ],
+  "anchor": {
+   "known_minimum": "unsat",
+   "minus_one": "sat",
+   "verdict": "contains-a-known-minimum"
+  }
+ },
+ "asked_at_target": 372,
+ "rung_used": 1,
+ "incumbent": 373,
+ "primary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 372 over all selections (lower bound 373, rung 1, 0 undecided)",
+  "M_vertices": null,
+  "correction_sets": 471,
+  "asks": {
+   "colourable": {
+    "n": 2823,
+    "mean_s": 0.0371,
+    "mean_cpu_s": 0.0368,
+    "total_cpu_s": 104.0
+   },
+   "refusing": {
+    "n": 411,
+    "mean_s": 0.2368,
+    "mean_cpu_s": 0.2352,
+    "total_cpu_s": 96.66
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 3232,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 207.3
+ },
+ "verdict": "no",
+ "M": 374,
+ "secondary": {
+  "verdict": "no-selection-at-target",
+  "bound": "no refusing selection of <= 373 over all selections keeping at least one of the newly added atoms (lower bound 374, rung 1, 0 undecided)",
+  "correction_sets": 471,
+  "asks": {
+   "colourable": {
+    "n": 1,
+    "mean_s": 0.0078,
+    "mean_cpu_s": 0.0077,
+    "total_cpu_s": 0.01
+   },
+   "refusing": {
+    "n": 1,
+    "mean_s": 15.0436,
+    "mean_cpu_s": 14.9407,
+    "total_cpu_s": 14.94
+   },
+   "undecided": 0,
+   "budget": {
+    "wall_s": 600.0,
+    "slice_conflicts": 100000,
+    "slices_used": 0,
+    "mechanism": "conf_budget + solve_limited slices; cadical153 does not implement interrupt() (measured 2026-09-11)"
+   }
+  },
+  "cpu_seconds": 15.1,
+  "new_minima": 0
+ },
+ "M_set_grew": "no",
+ "cpu_seconds": 238.12,
+ "block": "his-degree-order",
+ "block_index": 11
+}
