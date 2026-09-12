@@ -1679,6 +1679,42 @@ were actually comparing**. The rule that covers all six is not "be loud" but *sa
 compared against what, and assert the pairing before believing the verdict* — which is why the
 corrected script asserts the built rung's orbit count against the stored row **before** it runs.
 
+**A SEVENTH, self-inflicted and cheap to state:** a `grep '[g]it commit'` used to clear one hung
+process matched the shell wrapper whose *command line contained that string* — my own running
+shell — and killed it mid-command. `CLAUDE.md` has a standing rule for exactly this and I reached
+past it. Both joint runs were verified alive afterwards **by explicit PID rather than by pattern**,
+which is the only form of that check worth making.
+
+**AN EIGHTH, and it is the worst kind — a trust receipt that FAILED OPEN.** Diagnosed by phase D
+and confirmed here by reading `Stage.pin_is_sound`, not by a run:
+
+```python
+pin_atoms = [ai for ai, m in enumerate(self.atoms)
+             if ((m & -m).bit_length() - 1) in self.pin]   # the LOWEST SET BIT of the atom
+```
+
+At rung 1 an atom is one vertex, so the lowest set bit *is* that vertex and the control works — it
+is what fires `pin-agrees-everywhere (12 checks)` and what catches the planted bug. **At any rung
+above 1 an atom is an ORBIT**, and a pin vertex is found only if it happens to be the
+lowest-numbered member of its orbit. Usually it is not, `pin_atoms` comes back empty, and the
+function returns **`pin-is-fixed` — a benign-sounding verdict, from a control that checked
+nothing.**
+
+**Where that verdict was recorded in this phase, and what it should have said instead:** c1.1's
+resume control (S166 at the order-3 rung), the three S order-2 rung closures, the S order-3 rung,
+the L order-2 `H2#6` closure, and the `--verify-checkpoint` control's stage. In every one of those
+the honest entry is *the pin control did not run here*, not *the pin control passed here*.
+
+**What is NOT in question is the symmetry break itself.** It is the same presence-conditional
+mechanism repaired earlier — `[-sel[ai], var(loc[v], j)]`, never an unconditional unit clause —
+and it is genuinely exercised at rung 1 on these same stages, where `pin_is_sound` runs its 12
+checks and the planted unconditional-pin bug is caught. So the rung minima (142, 138×3, 377) are
+not in doubt; **the receipt for them is.** That distinction is the whole entry: *a control that
+cannot run must not emit a word that reads like a pass.*
+
+**Not fixed here, deliberately** — phase D carries the diagnosis and the fix for whoever owns the
+file next. The fix is one line: test `m & pin_mask` rather than the atom's lowest bit.
+
 ### R2.6 — The accounting convention that would have manufactured a disagreement
 
 Comparing our `e(S)` against his Table 1 reads **552 against his 564** — and both are right. The
