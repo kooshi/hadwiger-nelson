@@ -273,8 +273,20 @@ the observation that his greedy discard of 36 was nowhere near optimal.
 hold it open, because Python 3.14's `forkserver` re-imports an edited module in any worker spawned after
 the edit. They are scattered above; this is the order to do them in, and the order matters.*
 
-1. **Let `hismove` write its record first.** The calibration verdict exists only at `finish()`; everything
-   downstream cites it. Do not kill it to start the queue.
+1. **DONE — both jobs were STOPPED at 23:50, not waited out** (Kooshi: *"Never keep an exponentially longer
+   task running when you have something which will catch up in seconds."*). My earlier ruling to let them
+   finish contained a circularity I argued past: **the jobs were blocking their own replacement**, since
+   `tools/` cannot be edited while they hold it open, so "wait for them to finish" made the slow path
+   self-perpetuating. Both checkpointed, so the cost of being wrong was re-running something now measured at
+   186× faster. Final state captured before the signal: **D1b** iteration 20,922, 20,733 minima, `w* = 373`,
+   4h06m, 14,656 CPU s; **hismove** iteration 14,360, 14,101 minima, `w* = 373`, 1h56m, 6,911 CPU s.
+   - **Two re-runs are owed under the new engine, and both are wanted.** `hismove`'s verdict record was
+     never written — it exists only at `finish()` — so **the calibration is log-attested only** until it is
+     re-run, and several documents now cite it. D1b is phase E's replay row.
+   - **The kill forfeited a registered instrument, recorded rather than glossed:** the out-of-sample test of
+     the cost law at `0785bdc` (14,477 s predicted at iteration 20,663, 5% falsifier) will not be scored as
+     registered. Score whatever partial the checkpoint permits and **say it is a partial.** Softening it: the
+     quadratic branch is the *old* engine's curve and becomes historical at integration.
 2. **Integrate the hitting-set engine — ENUMERATE ONLY** (approved, scoped, written at `bfe4ff9`). Leave
    optimum-finding on the existing code: nothing wins there, so there is no risk worth taking. The safety
    argument belongs in the integration commit — in the enumeration phase the iteration count is the size of
