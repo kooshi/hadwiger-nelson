@@ -835,3 +835,15 @@ benign verdict while checking nothing, a `grep` that killed its own shell, and a
 an exit-waiter. Each was quiet exactly when it had something to report, because each was built to react to
 an event instead of to assert an absence — and **an exit-waiter can tell you a thing has ended, never that
 it is late.**
+
+**And the rule the one above does not reach: state the uninformative outcome and confirm it is REACHABLE,
+before believing a control's pass or proposing a discriminator.** "Break it and watch it go red" assumes the
+break can fire. Twice in one evening it could not (M63 phase E, 2026-09-11), and the two cases were the same
+error with opposite signs: **a planted fault that could never fire** (a target loosened in the direction the
+search ignores, so nothing was broken and its survival taught nothing), and **a discriminator that could
+never discriminate** (two candidate attributions it could not separate). Both passed review; both were found
+only by opening the module. **A control whose failure mode is unreachable has not been tested by passing** —
+it is indistinguishable from one that works, which is this file's oldest failure mode wearing its best
+disguise. The paired form, measured the same evening: seven errors between two readers, four the engineer's
+and three the advisor's, **every one found by reading code rather than by arguing** — because each asked the
+right question rigorously of the other's instrument and never of their own.
