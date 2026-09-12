@@ -290,20 +290,32 @@ class IncumbentHittingSet(_Engine):
     def _on_hard(self, clause):
         self.S.add_clause(clause)
 
-    def _ensure_totalizer(self, ub):
-        """Count the KEPT atoms, to `ub`.
+    def _forced(self):
+        """Atoms a singleton correction set forces kept. They are in EVERY hitting set."""
+        return {c[0] for c in self.corr if len(c) == 1}
 
-        The cheaper-looking encoding counts the DROPPED atoms instead -- "keep at most b" is "drop
-        at least n - b", and the optimum drops only 73 of 576 where it keeps 503, so the counter
-        would be a fraction of the size. **It does not work, and the self-test caught it within a
-        minute of trying:** a totalizer is ONE-SIDED. Assuming `-rhs[k]` enforces `sum <= k`, but
-        asserting `rhs[m-1]` does not force the sum UP to `m`, so a lower bound on the dropped count
-        cannot be asserted against this encoding at all. A two-sided cardinality encoding would be
-        needed, and is not what `ITotalizer` is. Recorded here because the idea is a good one and
-        the next reader will have it too."""
+    def _ensure_totalizer(self, ub):
+        """Count only the atoms not already forced, to `ub`.
+
+        The counter is the bottleneck, not the solving: over all 576 atoms to a bound near 503 it is
+        close to a full sorting network, and every SAT call drags it. But 423 of those atoms are
+        forced kept by singleton correction sets, so `kept_total = forced + kept_free` exactly, and
+        `kept_total <= w` is `kept_free <= w - forced` -- a counter over **153** literals reaching
+        **80** instead of 576 reaching 503. Atoms forced later stay inside the counter, which only
+        makes it larger than necessary, never wrong.
+
+        The cheaper-looking variant counts the DROPPED atoms ("keep at most b" is "drop at least
+        n - b", and the optimum drops only 73). **It does not work, and the self-test caught it
+        within a minute of trying:** a totalizer is ONE-SIDED. Assuming `-rhs[k]` enforces
+        `sum <= k`, but asserting `rhs[m-1]` does not force the sum UP to `m`, so a lower bound on
+        the dropped count cannot be asserted against this encoding at all. Recorded because the idea
+        is a good one and the next reader will have it too."""
         from pysat.card import ITotalizer
         if self.tot is None:
-            self.tot = ITotalizer(lits=[a + 1 for a in range(self.n)], ubound=ub, top_id=self.n)
+            self.free = sorted(set(range(self.n)) - self._forced())
+            self.offset = self.n - len(self.free)
+            self.tot = ITotalizer(lits=[a + 1 for a in self.free], ubound=max(ub, 0),
+                                  top_id=self.n)
         elif ub > self.tot.ubound:
             self.tot.increase(ubound=ub)
         for cl in self.tot.cnf.clauses[self._tot_added:]:
@@ -313,10 +325,19 @@ class IncumbentHittingSet(_Engine):
     def _solve(self):
         w = self.bound
         while w <= self.n:
-            self._ensure_totalizer(w)
+            if self.tot is None:
+                self._ensure_totalizer(0)          # fixes `free` and `offset` once
+            k = w - self.offset                    # kept among the free atoms
             self.calls += 1
             self.sat_calls += 1
-            if self.S.solve(assumptions=[-self.tot.rhs[w]]):
+            if k >= len(self.free):
+                ok = self.S.solve()                # the bound constrains nothing
+            elif k < 0:
+                ok = False                         # fewer kept than the forced atoms: impossible
+            else:
+                self._ensure_totalizer(k)
+                ok = self.S.solve(assumptions=[-self.tot.rhs[k]])
+            if ok:
                 self.bound = w
                 return _kept(self.S.get_model(), self.n)
             w += 1

@@ -89,7 +89,17 @@ with it is a defect in my transcription and the replay would show it.
 |---|---|---|---|
 | `batch` | today: fresh `WCNF` + fresh `RC2` per solve | 51.6 s per 1,500 → **hours** at full length | 245.9 s |
 | `incremental` | one `RC2`, cores and relaxations carried | **3.5 s total, 186×**, 0.22 GB | 282.5 s at it 400 — **0.4×, it LOSES** |
-| `incumbent` | decision: "is there a hitting set ≤ the incumbent?", one cardinality constraint, ~1 SAT call per iteration | **2.7 s total**, 19,823 calls | slower early (32.1 s by it 200); see §8 |
+| `incumbent` | decision: "is there a hitting set ≤ the incumbent?", one cardinality constraint, ~1 SAT call per iteration | **2.7 s total**, 19,823 calls | **loses badly**: 662 s by it 400, against batch's 41.2 s |
+| `incumbent`, counter over the 153 **free** atoms only | the same, with the counter shrunk ~40× by the forced atoms (`kept_total = forced + kept_free`) | — | **does not win either**: >265 s CPU without reaching it 200, against batch's 2.6 s |
+
+**Four formulations have now cut the work and not the time, and that is the finding.** Incremental RC2
+uses **257×** fewer SAT calls than batch on C4a's window and 2.5× more CPU. Presolving to the 153 free
+atoms cuts calls **6×** and time by nothing. The decision formulation cuts them ~**500×** and is 16×
+slower. Shrinking its cardinality encoding ~**40×** does not rescue it. One mechanism explains all four:
+**the cost is the difficulty of the bound proof over the 153 free atoms, and every formulation so far has
+only moved that proof around.** It is irreducible to date, measured four independent ways — which also
+answers the natural objection that 153 binary variables is small for an exact solver. It is, and it is
+still where the time goes.
 
 **Incrementality is not a uniform win, and saying so was the point of measuring.** In the
 optimum-finding phase the accumulated relaxation machinery makes each of its few calls enormously more
@@ -179,8 +189,10 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
 - **Level enumeration — adopt, large win, either non-rebuilding engine.** 186× (`incremental`) or
   ~19,000 iterations in 2.7 s (`incumbent`) against hours. Since §2 shows four fifths of that regime is
   formula construction, the win does not depend on which of the two is chosen.
-- **Optimum-finding at large `Y` (C4a-scale) — do NOT adopt plain incremental**: measured 2.5× slower.
-  Use `batch-adapt` (2.5× on the cold solve) until §8 settles the decision engine there.
+- **Optimum-finding at large `Y` (C4a-scale) — NOT LANDED.** Four formulations tried, none beats batch
+  (§3). The best available option is `batch-adapt`, a one-flag change measured at **2.5×** on the cold
+  solve — real, and an order of magnitude short of what the enumeration phase got. A fresh session on an
+  idle box should treat the irreducible 153-atom bound proof as the target, not the surrounding machinery.
 - **Phase G's dominant cost is exactly this regime, and the law above prices it.**
   `plans/M63-phaseG-bases-and-rotations.md` says the accumulator a new base or rotation needs is *"the
   complete level, ~10^4 s with no known ceiling"*, that *"the census is not the expensive part and never
@@ -194,10 +206,13 @@ off after the first solve. The path it helps is a **resume**, which pays exactly
 
 ## 8. Not done, and what each would take
 
-- **The decision engine on C4a's full family** was still running when this was written; it is slower than
-  batch over the first 200 iterations (32.1 s against 2.6 s), because the totalizer over 576 literals to
-  a bound near 450 is expensive to build. Whether it wins over the full 1,566 — where batch reaches ~20 s
-  per iteration — is unsettled. Result to be appended here.
+- **The optimisation phase is not landed, and the reason is measured rather than guessed.** The decision
+  engine on C4a reached iteration 400 in **662 s** against batch's 41.2 s, doing 437 SAT calls against
+  180,780 — the clearest single statement of the mechanism in this document. Shrinking the cardinality
+  encoding onto the 153 free atoms (the fix the dropped-atom idea was reaching for, in the form that can
+  actually be encoded) did not rescue it either: >265 s of CPU without reaching iteration 200. What remains untried is attacking the bound proof itself
+  rather than the machinery around it: a different exact method for weighted minimum hitting set (an
+  ILP/branch-and-bound, or a MaxSAT solver that is not core-guided from below), on an idle box.
 - **Integration into `reduce_stage`** — deliberately not done: two live runs were executing that file. A
   ten-line change at a configuration freeze, plus the decision in §5.2. Two details that will bite
   whoever does it: (a) there are **three** append sites, not two — `state.blocked` is a *property* unioning

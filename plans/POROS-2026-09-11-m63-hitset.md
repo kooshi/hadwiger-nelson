@@ -13,39 +13,30 @@ turned out to be **unsound in the flattering direction**; card 7's argument was 
 converts a component measurement into a phase forecast; card 3's falsified forecast went into §1 above the
 replays. **Two of my claims were wrong and are corrected in place**: I over-generalised the phase split
 from D1b (card 1, corrected), and I raised a phases-F/G worry the record already answers (card 4,
-withdrawn). Card 8 is the one question still open at the time of writing.
+withdrawn), and three more of mine were killed by their own falsifiers the same night (card 9). The ledger
+closes at eight hunches, **four confirmed and four killed, none open**. The optimisation phase is reported
+as **not landed** — four formulations, one measured reason — which is the honest result and the one this
+project's standard asks for; card 9 states the scope of that negative, which is narrower and more useful
+than "no engine wins".
 
 ---
 
 ## evidence inventory
 
-- `plans/M63-incremental-hitset.md` (23:16) — read against: the four questions Kooshi named — surprised: yes
-  (it answers three of them already, and omits an engine its own code ships)
-- `tools/parts_hitset.py` (23:21, still being edited) — read against: "one incremental engine plus an
-  equivalence check" — surprised: yes (**three** engines; the third, `IncumbentHittingSet`, is a different
-  diagnosis and is in neither document nor the self-test)
-- `tools/parts_reduce.py` `reduce_stage` lines 511–585 — read against: "two phases, optimisation then
-  enumeration" — surprised: yes (**one** loop; `w_star` is set at the first `unsat` and the same solve
-  continues — there is no separate enumeration code path)
-- `tools/parts_reduce.py` `_resume_control` lines 749–806 — read against: "the project gates on trajectory"
-  — surprised: yes (it already gates on the LEVEL only and says in terms that a fresh solver may return a
-  different model; this materially de-fangs the plan's §7.1)
-- `build/m63d/D1b.log` — read against: the plan's D1b row (2.1% oracle, 0.61 s/iteration) — surprised: yes,
-  twice (the split is sharper than claimed, **and** the log's own header carries a pre-registered forecast
-  that this run has already falsified)
-- `data/m62/m63-L451-reduction.json`, `m63-M6B403-reduction.json`, `m63-D1a-A451-rung3.json` — read against:
-  "level sizes are comparable across stages" — surprised: yes (82, 360, 3,264, and D1b at 19,447 **and
-  still running**: the level size is the free variable nobody is tracking)
-- `tools/parts_hitset.py` `_self_test` lines 549–655 — read against: "the controls discriminate" — surprised:
-  yes (they do, with one exception — the blocking-clause control, which is the regime that matters)
-- `plans/M63-phaseC-joint-stage.md` §R2.3 — **unread** (I have the plan's characterisation of it, not the
-  text). Standing finding; it is where the 27/73 by-elimination attribution was minted.
+- `plans/M63-incremental-hitset.md` (23:16) — read against: the four questions Kooshi named — surprised: yes; it answers three already, and omits an engine its own code ships
+- `tools/parts_hitset.py` (23:21, being edited as I read) — read against: one incremental engine plus an equivalence check — surprised: yes; **three** engines, and the third is a different diagnosis, in neither document and in no control
+- `tools/parts_reduce.py` `reduce_stage` lines 511–585 — read against: two phases, optimisation then enumeration — surprised: yes; **one** loop, `w_star` set at the first refusal, no separate enumeration code path
+- `tools/parts_reduce.py` `_resume_control` lines 749–806 — read against: the project gates on trajectory identity — surprised: yes; it gates on the LEVEL only and says in terms that a fresh solver may return a different model, which de-fangs the plan's §7.1
+- `build/m63d/D1b.log` — read against: the plan's D1b row, 2.1% oracle and 0.61 s per iteration — surprised: yes, twice; the split is sharper than claimed, and the log's own header carries a pre-registered forecast this run has already falsified
+- `data/m62/m63-L451-reduction.json`, `m63-M6B403-reduction.json`, `m63-D1a-A451-rung3.json` — read against: level sizes comparable across stages — surprised: yes; 82, 360, 3,264, and D1b at 19,447 and still running — the level size is the free variable nobody tracks
+- `tools/parts_hitset.py` `_self_test` lines 549–655 — read against: the controls discriminate — surprised: yes; they do, with one exception, and the exception is the regime the module exists for
+- `plans/M63-phaseG-bases-and-rotations.md` lines 421, 432, 437, 625 — read against: nothing; I raised a question I should have read the answer to — surprised: yes; it names the complete level as the accumulator and P-G7 as the phase's dominant cost, explicitly unpriced
+- `plans/M63-phaseC-joint-stage.md` §R2.3, where the 27/73 by-elimination attribution was minted — read against: nothing yet — surprised: unread
 
 ---
 
 ## card 1 — which phase the cost is in, measured on the incumbent, from a file that already existed
 
-```markdown
 question: which-phase-carries-the-cost
   evidence: build/m63d/D1b.log tick lines. Optimum at iteration 127, t=120 s. At it 294 / t=126 s the
     running ask means give total oracle time 2954*0.0191 + 550*0.1145 = 119.4 s of 126 s elapsed.
@@ -59,18 +50,16 @@ question: which-phase-carries-the-cost
   answered by: the record — the log above, already on disk
   cost: zero
   rank: 1
-```
 
-**Answer: enumeration, overwhelmingly, and the split is much sharper than 27/73.**
+**Answer, at D1b: enumeration, overwhelmingly, and the split is far sharper than 27/73.**
 
 | phase | iterations | wall | oracle | oracle share |
 |---|---|---|---|---|
 | phase1 + climb to the optimum | 1 → 294 | 0 → 126 s | 119.4 s | **~95%** |
 | level enumeration | 294 → 19,637 | 126 → 13,083 s | 128.6 s | **~1%** |
 
-Two consequences, and they cut in opposite directions.
-
-**CORRECTED, by the engineer, and the correction is right.** I generalised from D1b, where `Y` is small.
+**CORRECTED, by the engineer, and the correction is right — "at D1b" is load-bearing.** I generalised from
+one stage, and D1b is the stage where `Y` happens to be small.
 The true statement is that the hitting set is the wall whenever **either** `|Y|` is large **or** a level is
 being enumerated, and these are *two mechanisms*:
 
@@ -81,7 +70,10 @@ being enumerated, and these are *two mechanisms*:
 | D1b, enumerating | 528 | 0.664 s | **~99%** | formula construction over 19,447 blocking clauses |
 
 So "the cost is in enumeration" is false in general; "the cost is in enumeration *at D1b*" is what my
-evidence supported. The engineer's two-mechanism statement is the correct one and is now in its §2.
+evidence supported. The engineer's two-mechanism statement is the correct one and is now in its §2, and it
+leaves the optimisation regime genuinely open — card 8.
+
+Two consequences follow, one standing and one withdrawn.
 
 1. **For Kooshi's worry, the answer is the reassuring one.** He feared the cost lived in enumeration while
    the engine was aimed at optimisation. In fact the loop has no such split — `reduce_stage` is a single
@@ -103,9 +95,8 @@ evidence supported. The engineer's two-mechanism statement is the correct one an
 
 ## card 2 — the cost law, which is better than the speedup ratio, and is confirmed to 1%
 
-```markdown
 question: what-is-the-cost-law
-  evidence: fitting elapsed(i) = a + b*i^2 to D1b's tick lines at i=294 (126 s) and i=19,602 (13,041 s)
+  evidence: build/m63d/D1b.log, fitting elapsed(i) = a + b*i^2 to its tick lines at i=294 (126 s) and i=19,602 (13,041 s)
     gives b = 3.362e-5, a = 123 s. Held-out interior points: i=12,177 predicted 5,108 s, OBSERVED 5,171 s;
     i=17,308 predicted 10,194 s, OBSERVED 10,312 s. A linear model fitted to the same two endpoints
     predicts 8,072 s at i=12,177 against 5,171 observed.
@@ -118,8 +109,7 @@ question: what-is-the-cost-law
   cost: zero
   hunch: quadratic, because the loop rebuilds every blocking clause every iteration
   falsifier: an interior point the quadratic misses by more than the linear model does
-  rank: 1
-```
+  rank: 2
 
 **The quadratic model fits two held-out interior points to ~1%; the linear model is off by 56%.**
 
@@ -156,18 +146,17 @@ elements per iteration) or `RC2`'s 374-call climb traversing a growing formula. 
 iteration and both give the quadratic. The fitted coefficient, 180 ns per literal, is the right order for
 the rebuild and fast for 374 solver passes, which is why I lean to the rebuild — but that is a hunch.
 
-```markdown
 hunch: the-cost-is-the-rebuild-not-the-climb
   claim: a majority of D1b's 0.664 s/iteration is spent constructing the WCNF and loading it into a fresh
     solver, before any SAT call runs
-  basis: measured (the 1.8e-7 s/literal coefficient) + read (reduce_stage line 517)
+  basis: measured
   falsifier: timing WCNF construction alone at a recorded 19k-minima prefix and finding it well under 0.1 s
   registered: 2026-09-11
-  status: CONFIRMED (by the engineer running exactly that falsifier, at a 19,572-minima D1b prefix:
+  status: confirmed (by replication — the engineer ran exactly the pre-registered falsifier on a fresh
+    object, a 19,572-minima D1b prefix:
     build the WCNF 0.637 s = 81%, RC2 init 0.094 s = 12%, actual search 0.061 s = 8%, total 0.791 s, SAT
     calls a constant 374. The engineer's §2 had asserted the climb without excluding the rebuild and now
     carries two mechanisms, one per phase.)
-```
 
 The coefficient predicted this before the measurement: 180 ns per literal is a Python list comprehension
 and a clause append, not 374 solver passes. It matters for the **story**, not the fix: the plan's §2 and the module docstring both tell the mechanism
@@ -222,10 +211,10 @@ The engine changes the arithmetic from |E|² to |E|, which is the difference bet
 finish and one that can — **that is the real product claim, and the plan does not make it**. But it does
 not answer the prior question:
 
-```markdown
 question: how-big-is-this-level
-  evidence: D1b at 19,447 minima and rising linearly in iterations; L451 closed at 3,264; M6B403 at 360;
-    D1a-rung3 at 82. No stage record carries a level-size forecast.
+  evidence: build/m63d/D1b.log at 19,447 minima and rising linearly in iterations, against
+    data/m62/m63-L451-reduction.json 3,264, m63-M6B403-reduction.json 360, m63-D1a-A451-rung3.json 82.
+    No stage record carries a level-size forecast.
   expected: level sizes of the same order across stages of the same rung
   ask: does anything bound |E| for a rung-1 stage, or is a level enumeration an unbounded ask that has so
     far been bounded only by which stages happened to be small?
@@ -235,8 +224,7 @@ question: how-big-is-this-level
     parameter
   answered by: the engineer / the M63 record -- does Parts's loop need all of E, or a sample of it?
   cost: a reading, not a run
-  rank: 2
-```
+  rank: 5
 
 I flag rather than press this: it is outside the engineer's brief and belongs to whoever owns phases F
 and G. But the quadratic law makes it answerable in advance for the first time, which is new.
@@ -305,7 +293,6 @@ construction**, keeping the non-firing version as a stated blind spot. That is e
 
 One gap, and it is in the regime the whole module exists for.
 
-```markdown
 question: does-the-blocking-control-discriminate
   evidence: tools/parts_hitset.py lines 643-653. `sa`/`sb` collect `o.weight` only, for 25 iterations,
     on a 40-atom / 120-set random instance; the chk asserts `cb["ok"] and cb["compared"] >= 20`. There is
@@ -316,10 +303,9 @@ question: does-the-blocking-control-discriminate
   if nothing: the control is the "a constant sequence would agree trivially" failure the self-test's own
     docstring names, in the one regime that matters, and the real invariant is untested
   if something: say what, because I cannot see it
-  answered by: the engineer
+  answered by: human — the engineer who wrote the module
   cost: reading 10 lines
-  rank: 1
-```
+  rank: 4
 
 The sharper point: the two engines **block different sets** (`ea2.block(oa.kept); eb2.block(ob.kept)`, and
 the plan measures argmin agreement at 6/151), so after the first divergence they are enumerating different
@@ -382,7 +368,7 @@ Two places the argument does **not** reach, which should be stated rather than l
 
 ---
 
-## card 8 — the optimisation phase, which is the one thing still open
+## card 8 — the optimisation phase: the question I asked, and the answer that killed my hunch
 
 The engineer's own summary after cards 1–7: *"no engine I have wins the optimisation phase"* — plain
 incremental RC2 is **0.4×–2.5× slower** over C4a's first 600 iterations despite 257× fewer SAT calls, and
@@ -390,9 +376,8 @@ presolving to the 153 free atoms cuts calls 6× and time not at all (81 calls, 1
 15.77 s). Kooshi's instinct that 153 binaries in 15 s smells of an algorithmic mismatch was right, and the
 presolve negative is its confirmation: the 153-variable bound proof is genuinely where the time goes.
 
-```markdown
 question: does-the-decision-formulation-win-the-optimisation-phase
-  evidence: C4a's optimisation phase, batch: ~504 iterations x ~504 SAT calls ~= 254,000 calls, 15.77 s
+  evidence: plans/M63-incremental-hitset.md §6, C4a's optimisation phase, batch: ~504 iterations x ~504 SAT calls ~= 254,000 calls, 15.77 s
     per solve, of which the hard part is proving no hitting set weighs less than w (187 ms per call over
     the 153 free atoms, by the engineer's own presolve measurement). The SAME ladder from 0 to 503 is
     re-proved every iteration.
@@ -408,8 +393,7 @@ question: does-the-decision-formulation-win-the-optimisation-phase
   cost: minutes
   hunch: it wins by roughly a factor of the optimum
   falsifier: a timed C4a replay in which the decision engine is not materially faster than 15.77 s
-  rank: 1
-```
+  rank: 3
 
 **The mechanism, which is why I expect a win.** The expensive work is proving a *lower bound*, and
 core-guided RC2 re-derives the whole ladder 0 → 503 on every iteration. The decision formulation proves
@@ -438,26 +422,123 @@ Three riders, in decreasing confidence:
 
 ---
 
+## card 9 — where I was wrong, and the dispatch
+
+**Card 8's hunch is refuted, and my rider 2 was wrong for a structural reason I should have known.**
+
+*The hunch.* The fixed decision engine was timed on C4a's recorded family and is **losing badly**: 32.1 s
+against batch's 2.6 s at iteration 200, and past 8 minutes of CPU before iteration 400, where batch needs
+41 s. My call-count arithmetic was right — ~1 call per iteration, 231 calls by iteration 200 — and
+irrelevant, for the third time in this session: **the cost is per-call difficulty, not call count.** Each
+of those few calls drags a totalizer over 576 literals built out to a bound near 503, which is close to a
+full sorting network, so "each weight level proven UNSAT once" is true and each such proof is now far
+harder than RC2's core-guided equivalent.
+
+*The rider.* I proposed counting the **dropped** atoms (73) rather than the kept (503), to shrink that
+encoding. The engineer implemented it and the self-test went red in a minute. **A totalizer is one-sided:**
+assuming `-rhs[k]` enforces `sum ≤ k`, but asserting `rhs[m-1]` does *not* force the sum up to `m` — the
+implication runs one way only, so a *lower* bound on the dropped count cannot be asserted against that
+encoding at all. It needs a two-sided cardinality encoding, which `ITotalizer` is not. I should have
+checked the encoding's direction before proposing it; I reasoned about the *size* of the counter and never
+about which way its implications point. The engineer reverted it and recorded the reason in the method's
+docstring, on the correct grounds that the next reader will have the same idea.
+
+**The pattern across all three failures is one sentence, and it is the finding of the optimisation half:**
+every formulation tried — plain incremental (0.4×), presolve to the free atoms (1.0×), the decision
+formulation (far worse) — cut the *number* of solver calls, by 257×, 6× and 500× respectively, and **none
+cut the time**, because the 153-variable bound proof is irreducible and each formulation merely moved it.
+Three independent attempts hitting one wall for one measured reason is a result, and a better one than a
+fourth attempt would be.
+
+**Dispatch.** My rule is that the engagement ends when the next move is obvious to the domain's own
+discipline, and it is: report the asymmetry — *the enumeration phase is won two ways over and prices
+P-G7; the optimisation phase resists three formulations for one measured reason* — and stop. Two heavy
+jobs are on a contended box at midnight, and a fourth formulation tonight is depth on the nearest solid
+ground while the frontier waits. I recommend the engineer stops hunting.
+
+**The idea I left as a stub was run within the hour, and it lost too.** The engineer implemented exactly
+the construction — the counter over the ~153 free atoms at `ubound ≈ 80`, with `kept_total ≤ w` rewritten
+as `kept_free ≤ w − forced` — and measured it on C4a's 600-iteration window, where batch takes 245.9 s:
+**2 min 24 s of CPU without reaching iteration 200**, where batch needs 2.6 s. The killer I named did not
+bite (atoms forced later stay inside the counter, which only makes it larger than necessary and never
+wrong); it died on its main claim. Self-test green through the change, 18 controls.
+
+So the finding is **four** formulations, and stated as a table it is the whole optimisation half:
+
+| formulation | what it cut | by | time |
+|---|---|---|---|
+| incremental RC2 | SAT calls | 257× | **0.4×** — slower |
+| presolve to the free atoms | SAT calls | 6× | **1.0×** — unchanged |
+| decision + incremental totalizer | SAT calls | ~500× | far worse |
+| the same, counter shrunk to the free atoms | encoding size | ~40× | far worse |
+
+**Four independent attempts cut a proxy and not one cut the time.** The 153-variable bound proof is
+irreducible and every formulation so far has only moved it. That is a mechanism, measured four ways, and
+it is a better artifact than a fifth attempt.
+
+### The scope of the negative, which is the last thing I owe this record
+
+`CLAUDE.md` G21: *a negative measures its enumeration*, and a verdict is a statement about what was
+enumerated. What these four exclude is not "no engine wins the optimisation phase" but the sharper and
+more useful claim:
+
+> **No SAT-based formulation wins it.** All four prove the lower bound by the same proof system — a
+> resolution/core argument extracted by a CDCL solver — and differ only in how the search through that
+> system is arranged. They cut calls, relaxation machinery and encoding size; none of them changed the
+> proof system, and the proof is the cost.
+
+The room none of the four entered is the one that owns the object. **A minimum-weight hitting set over a
+family of sets is a set-covering integer program**, its classical method is branch-and-bound over the LP
+relaxation, and it certifies optimality by a *dual* object — an LP bound with cuts — rather than by
+exhaustively extracting cores. That is a different proof system, not a fifth arrangement of this one, and
+it is the move `CLAUDE.md` G46 prescribes: name the object in the discipline that owns it and let that
+discipline decide the question's shape. Set covering's LP relaxation is often tight, and where it is, the
+bound that costs a CDCL solver 187 ms per call is a single simplex solve.
+
+I am **not** proposing this be run tonight, and I am not reopening the hunt: the enumeration phase is won,
+which is what P-G7 needs. I am saying the negative should be reported with its enumeration named, because
+"no engine wins" and "no SAT-based engine wins, and the integer-programming room was not entered" are
+different claims, and only the second is what was measured. Whoever picks up the optimisation phase should
+start in that room, not with a fifth MaxSAT arrangement.
+
 ## hunch ledger
 
-```markdown
 hunch: the-cost-is-the-rebuild-not-the-climb
   claim: most of D1b's 0.664 s/iteration is WCNF construction and solver loading, not SAT search
-  basis: measured (1.8e-7 s per literal, fitted) + read (parts_reduce.py:517)
+  basis: measured
   falsifier: timing WCNF construction alone at a 19k-minima prefix and finding it well under 0.1 s
   registered: 2026-09-11
-  status: confirmed (by the engineer running the falsifier at a 19,572-minima prefix: WCNF build 0.637 s
+  status: confirmed (by replication of the pre-registered falsifier on a fresh 19,572-minima prefix, run
+    by the engineer: WCNF build 0.637 s
     = 81%, RC2 init 0.094 s = 12%, search 0.061 s = 8%; SAT calls constant at 374)
 
 hunch: the-decision-formulation-wins-the-optimisation-phase
   claim: the fixed IncumbentHittingSet beats batch's 15.77 s on C4a's recorded optimisation prefix by
     roughly a factor of the optimum, because each weight level is proven UNSAT once per RUN rather than
     once per ITERATION
-  basis: derived (254,000 calls against ~1,007, with the hard UNSAT proofs going 503*504 -> 503) +
-    measured (the engineer's presolve negative: 187 ms per call over the 153 free atoms is irreducible)
+  basis: derived
   falsifier: a timed C4a replay in which the decision engine is not materially faster than 15.77 s
   registered: 2026-09-11
-  status: open -- card 8
+  status: killed (by: the pre-registered falsifier, a timed C4a replay, the same night) -- 32.1 s
+    against batch's 2.6 s at iteration 200, and
+    past 8 min CPU before iteration 400 where batch needs 41 s. The call count behaved exactly as derived
+    (231 calls by iteration 200, ~1 per iteration) and it did not matter. Mechanism of the miss: I costed
+    the number of calls when the measured cost is the difficulty of each call -- the same error the
+    engineer's own presolve negative had already demonstrated, which I had read and did not apply to my
+    own proposal. Cost: one C4a replay of box time.
+
+hunch: counting-dropped-atoms-shrinks-the-encoding
+  claim: a totalizer over the negated literals capped near 73 encodes the same constraint as one over 576
+    literals to 503, in a fraction of the clauses
+  basis: derived
+  falsifier: an implementation whose equivalence check goes red, or which is not materially smaller
+  registered: 2026-09-11
+  status: killed (by: the engineer's implementation, whose self-test went red within a minute) -- a
+    totalizer is ONE-SIDED: assuming -rhs[k] enforces
+    sum <= k, but asserting rhs[m-1] does not force the sum up to m, so a lower bound on the dropped count
+    cannot be asserted against that encoding at all. Mechanism of the miss: I reasoned about the counter's
+    SIZE and never about which way its implications point. The right side to count was right; the
+    encoding cannot express it.
 
 hunch: enumeration-cost-is-quadratic-in-level-size
   claim: enumeration wall-clock ~ c * w* * |E|^2 / 2
@@ -468,29 +549,46 @@ hunch: enumeration-cost-is-quadratic-in-level-size
     5,171 observed; i=17,308 predicted 10,194 s against 10,312 observed; linear predicts 8,072 s at the
     first, an error of 56%)
 
+hunch: shrinking-the-counter-to-the-free-atoms-wins-the-optimisation-phase
+  claim: a cardinality constraint over the ~153 FREE atoms at ubound ~80, rather than 576 atoms to ~503,
+    is ~40x smaller and makes the decision formulation beat batch on C4a
+  basis: derived
+  falsifier: a timed C4a replay in which the shrunk decision engine is not materially faster than batch
+  registered: 2026-09-11
+  status: killed (by: the pre-registered falsifier, a timed C4a 600-iteration replay run by the engineer
+    within the hour) -- 2 min 24 s of CPU without reaching iteration 200, where batch needs 2.6 s and
+    completes the window in 245.9 s. The caveat I named (the forced set growing, forcing a rebuild) did
+    NOT bite: later-forced atoms stay inside the counter, which only makes it larger than necessary and
+    never wrong. So the hunch died on its main claim, not its caveat. Mechanism of the miss: for the
+    fourth time in one session I costed a proxy -- encoding size here, call count before -- when the
+    measured cost is the difficulty of the bound proof itself, which none of the four formulations touched.
+
 hunch: the-blocking-control-cannot-go-red
   claim: the self-test's blocking-clause control compares two sequences that are constant at w* by
     construction, so it excludes nothing
-  basis: read (tools/parts_hitset.py:643-653)
+  basis: read
   falsifier: an argument, or a run, showing the two weight sequences can differ while both engines are
     correct -- which would also mean one of them is wrong
   registered: 2026-09-11
-  status: open -- put to the engineer
+  status: confirmed (by: tools/parts_hitset.py _self_test lines 643-653, re-read by the engineer, which
+    found it WORSE than claimed --
+    each engine blocked its OWN optimum, so the two clause streams could diverge legitimately and the
+    comparison tested nothing even in principle). It now feeds one stream to both engines and requires
+    the bound to MOVE: 6 distinct values, 49 -> 54.
 
 hunch: target-refuted-runs-get-nothing-from-this
   claim: a reduce_stage call with a `target` exits at `wh > target` before any optimum, so it lives in the
     95%-oracle phase and the incremental engine buys it single-digit percent
-  basis: read (parts_reduce.py:541-548) + measured (D1b's pre-optimum phase, 95% oracle)
+  basis: read
   falsifier: phases F and G turn out to run uncapped level enumerations rather than target decisions
   registered: 2026-09-11
-  status: KILLED, by the falsifier, within the hour -- plans/M63-phaseG-bases-and-rotations.md:625 names
+  status: killed (by: plans/M63-phaseG-bases-and-rotations.md, read) -- line 625 names
     the accumulator as the complete level with no known ceiling, :421 and :437 make P-G7 the only
     reduction-loop consumer and the phase's dominant cost, and a targeted run that SUCCEEDS enumerates
     its level anyway (m63-map-A412 log: "the level is complete [187s]"). Cost of the miss: one message
     raising a worry the record answers. Mechanism of the miss: I put a question to a person when the
     cheapest addressee was the record -- my own <record_first> rule, missed on the axis where the frame
     had already been set by the brief.
-```
 
 ---
 
@@ -511,8 +609,15 @@ hunch: target-refuted-runs-get-nothing-from-this
    time goes. Incrementality wins the enumeration regime outright. It **loses** the optimisation regime
    (0.4×–2.5× slower). The engine that should win that one — a decision formulation asking *"is there a
    hitting set this light?"* once per iteration instead of re-deriving the whole bound ladder — exists in
-   the code and, as of this writing, **has not been timed against the incumbent** (card 8). That is the
-   one measurement still standing between "the wall is down" and "the wall is down in one of two regimes."
+   the code, was timed against the incumbent on my ask, and **lost badly** — 32.1 s against 2.6 s at
+   iteration 200 — and so did the shrunk-counter version I left as a stub, which the engineer ran within
+   the hour (cards 8 and 9). So the honest statement is: **the wall is down in one of two regimes.** Four
+   formulations have now cut a proxy — solver calls by 257×, 6× and ~500×, encoding size by ~40× — and
+   **not one cut the time**, for one measured reason: the 153-variable bound proof is irreducible and each
+   formulation only moved it. That is a not-landed with a mechanism, which is the rarer and more useful
+   kind. Its scope, which card 9 states and the report should: what is excluded is every *SAT-based*
+   formulation, all four sharing one proof system; the integer-programming room that owns set covering was
+   not entered, and that is where the next person should start.
 3. **Which phase?** Both, by different mechanisms, and my first answer was too clean. The enumeration
    phase is ~99% hitting set and is what the engine fixes; the optimisation phase is oracle-bound when the
    correction-set family is small and hitting-set-bound when it is large. Your worry — that an engine
