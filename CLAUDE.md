@@ -754,13 +754,25 @@ arguments, which also survives a platform without `fork`.
 PHYSICAL cores, 32 threads** (2 per core), 64 MiB L3 in two instances, 128 GB RAM — `nproc` says **32** and
 that is the *thread* count. **Corrected 2026-09-12**, where this file had said "32 cores": an agent sizing a
 job from it reasoned that 32 concurrent solvers on 16 cores must be contending, killed a running job and
-relaunched at half width. **Measured on 552 SAT cubes of one instance: 32-way median 120.6 s per cube against
-16-way 122.8 s — statistically identical, so no measurable contention penalty and half the throughput
-thrown away.** Its own diagnosis of the error is the transferable part: it took the **first** cube's 11.28 s
-as an uncontended baseline and inferred a contention factor from it — one sample, and a solver-found pattern
-rather than an enumerated one, so a measurement of a different population (see § "carry what it MEASURES").
-Two lessons, each with its scope: **say physical cores when sizing memory-hungry work**, and **on this
-machine and this workload SMT is close to free, so measure contention before conceding it.** `nproc` disagreeing with a
+relaunched at half width. Restoring 32-way was right — observed
+throughput **12.6 cubes/min** against the ~8/min sixteen workers give — but **the two figures first reported
+here (32-way 120.6 s against 16-way 122.8 s, "statistically identical") are STRUCK**: they compared a mixed
+cube population against a pure one. Restricted to one difficulty class, the same data reads 32-way **105.1 s**
+(n=43), 16-way **126.6 s** (n=32), 32-way again **129.2 s** (n=117) — **two runs at the SAME width differing
+by as much as the width effect being claimed.** So the honest statement is that **the width effect is not
+distinguishable from run-to-run variation in this data**, and only "no *large* contention penalty" survives.
+
+**The mechanism this produced is worth more than either number, because it is the answer to why writing a
+rule down does not install it.** The agent had just been credited with instancing *"a number carries what it
+measures"* and then broke it again **at the first opportunity, inside the act of correcting the first
+break** — comparing "the numbers from before" against "the numbers from after" without checking that the two
+cube ranges had the same difficulty mix. What caught it was **not vigilance about populations**: it was **the
+cost model failing an arithmetic check** — 32 workers at ~125 s should yield 15 cubes/min, far more than it
+was seeing, which forced the look. **So the reproducible instrument is to keep a PREDICTED throughput beside
+the measured one and reconcile them whenever they disagree.** A prediction that can be divided back out of a
+rate is a population check that runs itself; a caution about populations is a caution. Third lesson, with its
+scope: **say physical cores when sizing memory-hungry work**, and **derive a rate from your own numbers and
+check it against the observed one before believing either.** `nproc` disagreeing with a
 number in a plan is the hardware moving, not an error — **ask which machine before treating a core or memory
 count as fact**, and ask to swap to the desktop when a step wants it (the SAT solving does). Timings compare
 only within one machine: per-operation ratios carry across, wall-clock totals and safe job counts do not.
