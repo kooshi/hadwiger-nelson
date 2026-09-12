@@ -586,6 +586,24 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   wider than a perfect square: `|p|² = n` is free iff `n = k²·m` with `k ∈ ℤ` and `m` a squared distance the
   lattice **already realises** (so `4 = 2²·1`, `16 = 4²·1` and `12 = 2²·3` are free, and `2` is not) — `k`
   must be a **multiplier of the module**, which is automatic for `k ∈ ℤ` and false for `k = 2√3`.
+* **G53 — The counting compulsion, and the refutation criterion it defines. [derived; one provisional
+  measurement]** For a type-M arena — base `B` plus its rotated copy sharing the centre, joined by cross
+  edges — any proper `k`-colouring `C` yields two proper `k`-colourings of `B` alone, `f(v) = C(v)` and
+  `g(v) = C(Rv)`, because the copy is isometric and carries the same internal edge list (G46). The shared
+  centre forces `f(0) = g(0)`, and each **diagonal** cross edge `(v, Rv)` forces `f(v) ≠ g(v)`. So with
+  `B(h) = {circle v : h(v) = h(0)}`, the sets `B(f)` and `B(g)` are **disjoint**, and with
+  `L = min_h |B(h)|` over proper `k`-colourings of the base:
+  **`2L > (circle count)` ⟹ the arena is not `k`-colourable** — a property of the **base alone**, no arena
+  solve. **Not** confined to colour-twist colourings; uses only the diagonal edges; **sufficient, never
+  necessary.** This is a **counting** compulsion, a shape this project's vocabulary lacked: not *"this pair
+  is forced"* (`Forces`, arity 2) nor *"this k-set is covered"* (`Fan`) but *"at least `L` of these `n`
+  points share one designated point's colour"*. It subsumes the two obvious cheap routes as the extreme
+  cases — a forced pair is `L = count`, an intersecting family is `2L > count` — and it explains why both
+  fail on `ρ₆₃`, where `L/count = 10/30 = 1/3` (provisional, under two-sided re-verification) and no circle
+  point is forced (all 30 tested, all satisfiable, SAT answers and so self-certifying). **The design target
+  it defines — maximise `L / (circle count)`, refute above `1/2` — is the first objective in M63 phase H2
+  that a free construction cannot supply**, the circle count being free (§2 of
+  `plans/M63-phaseH2-the-family.md`) and the residue certificate's defeat being free (G52).
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each

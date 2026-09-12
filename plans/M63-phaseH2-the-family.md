@@ -492,6 +492,62 @@ disappointing.
 
 ---
 
+## §6e — The counting compulsion: the phase's first objective that is NOT free (added 2026-09-12)
+
+**How it arrived, because the route matters.** The solver agent reported that over 12 seeded colourings of
+`ρ₆₃`'s base, exactly 10 of the 30 circle points took the centre's colour **every time** — a candidate
+lattice invariant. The product owner asked for one control: *different seeds do not prove different
+colourings.* The control killed the number. Re-run with **pattern-blocking** (each round forbids the exact
+30-point pattern just seen, so the next colouring differs by construction), one colouring put **all 30**
+circle points at the centre's colour and *"at least 11"* is satisfiable in 0.1 s. **The twelve identical
+readings were one colouring sampled twelve times.**
+
+**What survives is a one-sided bound, and it is the useful shape.** *"At most 9"* is **UNSAT**, so
+
+> **every proper four-colouring of the base puts at least `L = 10` of the 30 circle points at the centre's
+> colour.** A **floor**, not an invariant. *(Provisional: being re-verified two-sidedly on a standalone
+> solver, since an incremental-solver anomaly is under investigation — see §7. "At most 10" must come back
+> SAT or the cardinality encoding is the story rather than the lattice.)*
+
+**And the floor is a refutation criterion, fully general.** Let `C` be **any** proper four-colouring of the
+arena; put `f(v) = C(v)` and `g(v) = C(Rv)` for `v` in the base. Both are proper four-colourings of the
+base, because the copy is isometric and carries the same internal edge list (G46). Then:
+
+1. `R0 = 0`, so **`f(0) = g(0)`** — the shared centre;
+2. each diagonal cross edge `(v, Rv)` gives **`f(v) ≠ g(v)`** at every circle point — the free circle;
+3. with `B(h) = {circle v : h(v) = h(0)}`, any `v ∈ B(f) ∩ B(g)` gives `f(v) = f(0) = g(0) = g(v)`,
+   contradicting 2.
+
+So `B(f)` and `B(g)` are **disjoint**, hence `|B(f)| + |B(g)| ≤` the circle count, and
+
+> **`2L > circle count` ⟹ the arena is NOT four-colourable** — with `L` a property of the **base alone**,
+> no arena solve required.
+
+**Scope, exactly.** It is **not** confined to the colour-twist family `(C, π∘C)` — `f` and `g` above are
+arbitrary and independent, which is precisely the objection the planner raised against PH2-7 and this
+construction escapes it. It uses **only** the diagonal cross edges, so the off-diagonal ones can only help.
+It is **sufficient and not necessary**: `2L ≤ count` decides nothing, and silence is not evidence.
+
+**Why both cheap routes closed, in one sentence.** The one-vertex route needs `L = count`; the
+intersecting-family route needs `2L > count`; `ρ₆₃` measures `L/count = 1/3`. All three are readings of the
+same quantity, and the two cheap ones were asking for values far above the one the object has.
+
+**Both cheap routes, closed with evidence rather than left unmeasured:**
+- **No circle point is forced.** All 30 tested individually — each query asks for a colouring with the
+  centre at colour 0 and that circle point **not** at colour 0 — and **all 30 are satisfiable** (0.15–1.9 s
+  each). So `Forces` is **not inhabited** here at distance 4, and row 44's `not_colorable_of_forced_equal`
+  cannot be applied to this arena. These are **SAT** answers and therefore self-certifying, so they survive
+  the incremental anomaly.
+- **The achievable centre-coloured sets are not an intersecting family.** Two disjoint ones exhibited:
+  `{111, 2289, 3513, 6332, 12496, 13070, 19234, 22053, 23277, 25455}` and
+  `{107, 2211, 3559, 6316, 12506, 13060, 19250, 22007, 23355, 25459}`.
+
+> **THE PHASE'S OBJECTIVE, replacing the circle count:** maximise **`L / (circle count)`**. Refutation above
+> **1/2**; `ρ₆₃` sits at **1/3**. This is the first quantity in this phase that **a free construction cannot
+> hand over** — the circle count is free (§2), the certificate's defeat is free (§6), and `L` is neither.
+
+---
+
 ## §7 — Controls, and one live failure of the product owner's own
 
 - **The known-answer gate ran first and passed**: Parts's lattice rebuilt to 3,433 points at radius 2.44
