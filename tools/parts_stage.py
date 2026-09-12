@@ -214,8 +214,17 @@ class Stage:
         import random
         rng = rng or random.Random(0)
         n = self.A.n
+        # **By ANY member, never by the lowest set bit** (M63 phase D §R3.9, fixed 2026-09-11).
+        # At rung 1 an atom is one vertex and the two agree. At any higher rung an atom is a
+        # symmetry orbit, and a pin vertex need not be its lowest-numbered member -- so the
+        # lowest-bit test found NO pin atoms at rung 3, returned the benign verdict
+        # `pin-is-fixed`, and checked nothing while printing a pass. Measured before the fix:
+        # rung 1, 450 atoms, 2 pin atoms by either test, control RUNS; rung 3, 150 atoms, 0 by
+        # lowest bit and 2 by any bit, control SILENTLY SKIPS. No number was retracted -- the
+        # symmetry break itself is sound, because `cnf` makes the pin clause conditional on the
+        # atom's presence -- but a trust receipt that fails open is worse than none.
         pin_atoms = [ai for ai, m in enumerate(self.atoms)
-                     if ((m & -m).bit_length() - 1) in self.pin]
+                     if any((m >> v) & 1 for v in self.pin)]
         if not pin_atoms:
             return {"verdict": "pin-is-fixed", "note": "every pin vertex is in the frozen part, so "
                                                        "the pin cannot restrict the search"}
@@ -414,7 +423,37 @@ def _self_test():
         Stage.cnf = real
     print(f"  with the bug planted: {bad['verdict']}  ({bad['checked']} checks, "
           f"{len(bad['disagreements'])} disagreements shown)")
-    ok = good["verdict"] == "pin-agrees-everywhere" and bad["verdict"] == "pin-changes-answers"
+
+    # --- the control that FAILED ON THE SHIPPED CODE (M63 phase D §R3.9, added 2026-09-11) ------
+    #
+    # The control above runs at rung 1, where an atom is a single vertex. At any higher rung an
+    # atom is a symmetry ORBIT, and the shipped `pin_is_sound` identified pin atoms by each atom's
+    # LOWEST SET BIT -- so at rung 3 it found none, returned the benign `pin-is-fixed`, and checked
+    # nothing while printing a pass. Both of 2026-09-11's order-3 runs printed exactly that.
+    #
+    # So the plant here is not a bug restored: it is the SHIPPED RULE, run beside the fixed one on
+    # a stage where they differ. Solver-free and deterministic, which is what makes it discriminate
+    # -- the behavioural plant at rung 1 could not have exhibited this at all.
+    import parts_run as PRUN                      # inside the function: parts_run imports us
+    G = PRUN.Group(B)
+    maps, cfg = PRUN.rung_maps_for(B, st, G, "order:3")
+    st3 = Stage(B, V.load_lattice(os.path.join(D, "v451e2400.vtx")),
+                V.load_lattice(os.path.join(D, "v136e564.vtx")), side="L", rung_maps=maps)
+    shipped = [ai for ai, m in enumerate(st3.atoms)
+               if ((m & -m).bit_length() - 1) in st3.pin]        # the rule as shipped
+    fixed = [ai for ai, m in enumerate(st3.atoms)
+             if any((m >> v) & 1 for v in st3.pin)]              # the rule as fixed
+    r3 = st3.pin_is_sound(trials=1)
+    print(f"  rung {cfg['order']}: {len(st3.atoms)} atoms, pin atoms by LOWEST bit "
+          f"{len(shipped)} (the shipped rule), by ANY bit {len(fixed)} (fixed) -> "
+          f"{r3['verdict']} ({r3['checked']} checks)")
+    rung_ok = (len(shipped) == 0 < len(fixed) and r3["checked"] > 0
+               and r3["verdict"] == "pin-agrees-everywhere")
+    if not rung_ok:
+        print("  RUNG CONTROL DID NOT FIRE -- either the fix is absent or this stage no longer "
+              "distinguishes the two rules, and the receipt is worthless either way")
+
+    ok = rung_ok and good["verdict"] == "pin-agrees-everywhere" and bad["verdict"] == "pin-changes-answers"
     print("\n" + ("CONTROL FIRES" if ok else "CONTROL DID NOT FIRE — the check is worthless"))
     return ok
 
