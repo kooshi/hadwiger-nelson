@@ -750,7 +750,17 @@ holds — which points at the dictionary, nowhere near the process model. Pass
 shared object once per worker), or give the pool an `initializer` that rebuilds the state from picklable
 arguments, which also survives a platform without `fork`.
 
-**Two machines.** A desktop (32 cores, 128 GB) and a laptop (12 cores, 31 GB). `nproc` disagreeing with a
+**Two machines.** A desktop and a laptop (12 cores, 31 GB). The desktop has **16
+PHYSICAL cores, 32 threads** (2 per core), 64 MiB L3 in two instances, 128 GB RAM — `nproc` says **32** and
+that is the *thread* count. **Corrected 2026-09-12**, where this file had said "32 cores": an agent sizing a
+job from it reasoned that 32 concurrent solvers on 16 cores must be contending, killed a running job and
+relaunched at half width. **Measured on 552 SAT cubes of one instance: 32-way median 120.6 s per cube against
+16-way 122.8 s — statistically identical, so no measurable contention penalty and half the throughput
+thrown away.** Its own diagnosis of the error is the transferable part: it took the **first** cube's 11.28 s
+as an uncontended baseline and inferred a contention factor from it — one sample, and a solver-found pattern
+rather than an enumerated one, so a measurement of a different population (see § "carry what it MEASURES").
+Two lessons, each with its scope: **say physical cores when sizing memory-hungry work**, and **on this
+machine and this workload SMT is close to free, so measure contention before conceding it.** `nproc` disagreeing with a
 number in a plan is the hardware moving, not an error — **ask which machine before treating a core or memory
 count as fact**, and ask to swap to the desktop when a step wants it (the SAT solving does). Timings compare
 only within one machine: per-operation ratios carry across, wall-clock totals and safe job counts do not.
