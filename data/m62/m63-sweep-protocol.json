@@ -1,0 +1,60 @@
+{
+ "kind": "m63-sweep-protocol",
+ "schema": 1,
+ "producer": "hand-written, M63 phase D implementer, 2026-09-11",
+ "purpose": "The evaluation protocol for phase D's expansion sweep, FROZEN IN THIS COMMIT BEFORE THE FIRST CANDIDATE'S OUTCOME IS READ. It exists because a map that scores the rule fitted to it is a mirror, not a measurement (Poros card 7; the product owner's ruling of 2026-09-11). Everything a later reader would otherwise suspect of having been chosen after the results is written down here first.",
+
+ "outcome_variables": {
+  "primary": "|M| strictly below the incumbent, i.e. the targeted decision at incumbent-1 returns `reduced`",
+  "secondary": "{M} strictly larger at fixed |M| and fixed rung, i.e. the restricted decision at target=incumbent with require_any = the newly added atoms returns `reduced`",
+  "banned_as_an_outcome": "atoms freed, and every other quantity used by any ranking below. A predictor may never be graded on itself; the temptation arrives precisely when the primary comes back all-zero and substituting the softest available measure feels like rescuing the experiment rather than changing its design (Poros card 7, item iii)."
+ },
+
+ "rankings_to_be_scored": [
+  {"name": "ours", "definition": "look_ahead freed-necessary-atoms per vertex added, ties broken by his decreasing admission-degree order, restricted to candidates of at most n_new_max vertices"},
+  {"name": "his_degree", "definition": "[Parts2020a] §5.6's own offering order: the reserve in decreasing admission degree"},
+  {"name": "his_indicators", "definition": "[Parts2020a] §5.10's three numerical indicators - free vertices, small-degree hyperedge counts, and the independence number of the degree-2 hyperedge graph - reported SEPARATELY and never combined, because he states no combining rule and an invented one would be ours wearing his name"},
+  {"name": "his_priority", "definition": "[Parts2020a] §5.6's first sentence: partially filled orbits first, and among them orbits of 6 or 12 vertices first"},
+  {"name": "n_new_asc", "definition": "fewest added vertices first - his perturbation strength, read as a ranking"},
+  {"name": "n_new_desc", "definition": "most added vertices first"},
+  {"name": "random", "definition": "uniform over the menu; its expected score at budget k is a hypergeometric read-off from the map's density and needs no runs at all"}
+ ],
+ "scoring_rule": "precision@k against the map's labels, every ranking reported in full and never only the best. Reporting the best of seven against one 57-to-88-point map inflates the best by selection alone, so all seven curves appear or none does.",
+
+ "in_sample_vs_held_out": {
+  "A412": {"role": "in-sample", "reason": "past his recorded stopping point, so its candidates are beat attempts touching no reproduction claim. The rule may be developed against it. Its HELPFUL DENSITY is a measurement - a property of the menu, not of any ranking - and stands as evidence; no RANKING claim read off it is evidence."},
+  "A403": {"role": "held-out", "reason": "the state acceptance clause 2(b) judges the frozen rule from. Computed only AFTER the freeze commit that fixes the rule, and the only surface on which `our ranking beats uniform random` may be claimed."},
+  "known_weakness": "A412 is A403 plus two orbits and two half-orbit fills, so the two maps are correlated and this train/test split is weak. It costs nothing, so it is taken; the genuinely held-out test is phase E's 8/3 mono-pair run."
+ },
+
+ "pre_declared_full_level_subset": {
+  "why": "The product owner's ruling on card 13, kept even though the derivation appears to make it unnecessary. {M} growth turns out to be a DECISION rather than a level enumeration, so it can be asked on every candidate - but the claim that this costs about as much as the primary is an assertion, not a derivation (Poros card 16: the restricted decision must certify that NO smallest solution uses the new material, and the evidence certifying the unrestricted bound need not certify that). The first candidate measures the ratio. If it is cheap, this subset goes unused, which is a clean outcome. If it is expensive, the subset is already declared and the claim is safe. Choosing it after the costs are known would be selection by another name.",
+  "membership": [
+   "every candidate whose primary verdict is `yes` - automatically, and they are few",
+   "the identity candidate (the map's own control d6.5)",
+   "the top 5 candidates under the frozen rule `ours`",
+   "a seeded uniform sample of 5 of the remainder, seed 20260911"
+  ],
+  "claim_scope": "acceptance clause 2(c) may be claimed only from this subset, or from the full per-candidate secondary decision if the measured ratio permits running it everywhere."
+ },
+
+ "menu": {
+  "admission_reading": "b-literal-internal",
+  "why_this_reading": "his sentence reads `if, when added to the graph A, the degree of some of its vertices is at least 4`, which counts the added orbit's own edges. The strict reading (degree into A alone) is reported beside it in every artifact; the counts are 49 strict and 57 literal on A412.",
+  "fills_exemption": "his degree test governs membership of the RESERVE. §5.6 gives partially filled orbits their own priority sentence and no degree test at all, and two of the four orbits in his one recorded successful move were fills. So the menu is reserve UNION fills, and the fill-only members are labelled.",
+  "counts_on_A412": {"reserve": 57, "partially_occupied": 17, "fill_only": 5, "menu": 62, "shoulder_at_degree_3": 26, "total_candidates": 88},
+  "his_move_absent_by_construction": "A412 already contains his own recorded expansion, so the four orbits his move used are not in this candidate set at all. A reader finding his move missing from the A412 map is seeing that, not an omission."
+ },
+
+ "block_order": {
+  "seed": 20260911,
+  "blocks": ["control (the identity candidate)", "random (a seeded uniform half of the menu)", "his-degree-order (the remainder)", "shoulder (degree exactly 3)"],
+  "why": "a sweep truncated in any RANKING's order measures that ranking on a sample it selected, which is the bias the map exists to avoid. Cut anywhere in block 1 and the density and every ranking's precision stay unbiased; block 2 still front-loads value by his own criterion."
+ },
+
+ "shoulder_is_its_own_result": "The 26 degree-3 candidates answer whether his admission cut at degree 4 is in the right place - a comparison AT the threshold (26 just below against 18 just above, both complete rather than sampled) rather than a sample far from it. It is reported with its own enumeration and is NEVER folded into the menu's base rate. It replaces the `no_filter_random` arm, which would have been drawn overwhelmingly from degrees 0 and 1 and would have confirmed `the filter does something` while saying nothing about where the cut belongs (Poros card 9).",
+
+ "three_way_density": "yes / no / unknown / not_run, and the rate is over DECIDED candidates only. An undecided candidate is a fact about a budget, not about the graph; the candidates likeliest to exhaust a wall are those nearest the boundary, so folding them into refusals biases the base rate downward in the one direction that matters, invisibly (Poros card 15).",
+
+ "escalation": "Anything at or below 373 vertices on the L half - which would assemble to 508 or fewer with the frozen small half - stops the sweep and is reported to the product owner within the hour, with exact-arithmetic geometry and an LRAT refutation, on phase C's §E5 template. The word `record` is not used before a Lean kernel certificate, which is phase F's."
+}

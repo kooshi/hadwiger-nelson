@@ -308,9 +308,8 @@ def menu_candidates(base, A_tuples, census, *, reading=ADOPTED_READING, min_degr
     fills, res, sh = [], [], []
     for x in census["rows"]:
         lab = tuple(x["orbit"])
-        verts = frozenset(t for t in base.orbit_points(lab) if t not in A) \
-            if hasattr(base, "orbit_points") else frozenset(
-                base.tups[i] for i in base.orbits[base.by_label[lab]] if base.tups[i] not in A)
+        verts = frozenset(base.tups[i] for i in base.orbits[base.by_label[lab]]
+                          if base.tups[i] not in A)
         flags = set()
         if x["outside_his_disk"]:
             flags.add("outside-his-disk")
@@ -573,7 +572,19 @@ def sweep_candidate(base, A_tuples, companion, cand, *, incumbent, reference, an
         entry["note"] = f"primary returned {p['verdict']}; an undecided candidate is NOT a refused one"
 
     # --- the secondary decision, on inert candidates only: did {M} grow?
-    if secondary and entry["verdict"] == "no":
+    #
+    # `new_atoms` MUST be non-empty. For the identity candidate it is empty, `require_any` is then
+    # falsy, the added clause disappears, and the "restricted" decision silently becomes the
+    # UNRESTRICTED one at target = incumbent -- which enumerates the entire level and answers a
+    # question nobody asked, at the cost the target exists to avoid. It is also vacuous: with no
+    # new material {M} cannot grow, by the same identity that makes the secondary a decision.
+    if secondary and entry["verdict"] == "no" and not new_atoms:
+        entry["M_set_grew"] = "no"
+        entry["secondary"] = {"verdict": "not-asked", "note":
+                              "the identity candidate adds no material, so {M} cannot grow: "
+                              "every minimum of W' uses no new atom and is a minimum of W. "
+                              "Asking it would drop the restriction and enumerate the full level."}
+    elif secondary and entry["verdict"] == "no":
         s = RED.reduce_stage(stage, target=incumbent, require_any=new_atoms, checkpoint=ck,
                              config=cfg, log=log, wall_ask=wall_ask,
                              slice_conflicts=slice_conflicts)
@@ -607,6 +618,152 @@ def density(entries: list) -> dict:
             "grew_rate": None if not grew_dec else round(grew / grew_dec, 4),
             "note": "the rate is over DECIDED candidates; an `unknown` is a fact about a budget "
                     "and is never a `no`. Three-way and never two."}
+
+
+def build_reference(base, A_tuples, companion):
+    """The unexpanded stage, as the fixed thing every candidate is checked against."""
+    st = PS.Stage(base, sorted(A_tuples), sorted(companion), side="L", rung=1, pin=True)
+
+    def edge_labels(s):
+        return {tuple(sorted(e)) for e in (
+            (("L" if u < s.A.n else "S", s.keys[u % s.A.n]),
+             ("L" if v < s.A.n else "S", s.keys[v % s.A.n]))
+            for u, v in s.A.induced(s.present))}
+    return {"companion_fp": R.fp_tuples(sorted(companion)),
+            "vertex_labels": set(st.vertex_labels(st.present)),
+            "edges": edge_labels(st),
+            "n_vertices": st.present.bit_count(), "atoms": len(st.atoms),
+            "stage_identity": st.identity(), "stage_fingerprint": st.fingerprint()}
+
+
+_W = {}                    # worker globals, inherited across fork rather than pickled per task
+
+
+def _run_one(job):
+    block, bi, cand = job
+    name = cand.name(_W["base"])
+    path = os.path.join(_W["entries"], f"entry-{name.replace('/', '_')}.json")
+    if os.path.exists(path):                      # exact resume: an answered candidate is not re-asked
+        e = json.load(open(path))
+        e["resumed"] = True
+        return e
+    logp = os.path.join(_W["entries"], f"log-{name.replace('/', '_')}.txt")
+    with open(logp, "w") as lf:
+        def log(*a):
+            print(*a, file=lf, flush=True)
+        try:
+            e = sweep_candidate(_W["base"], _W["A"], _W["companion"], cand,
+                                incumbent=_W["incumbent"], reference=_W["reference"],
+                                anchor_tuples=_W["anchor"], ckpt_dir=_W["ckpt"],
+                                secondary=_W["secondary"], wall_ask=_W["wall_ask"], log=log)
+        except Exception as ex:                   # a crash is a `not_run`, never a silent `no`
+            e = {"candidate": cand.to_json(_W["base"]), "name": name, "verdict": "not_run",
+                 "note": f"{type(ex).__name__}: {ex}"}
+            print(f"EXCEPTION {type(ex).__name__}: {ex}", file=lf, flush=True)
+    e["block"], e["block_index"] = block, bi
+    with open(path + ".tmp", "w") as f:
+        json.dump(e, f, indent=1)
+    os.replace(path + ".tmp", path)
+    return e
+
+
+def plan_blocks(base, cands, census, *, reading=ADOPTED_READING, seed=20260911, log=print):
+    """Two blocks, and the reason is that "most valuable first" silently biases the map.
+
+    A sweep truncated in any RANKING's order measures that ranking on a sample it selected, which
+    is precisely the bias the map exists to avoid. So block 1 is a seeded uniform-random half of
+    the menu -- cut short at any point it still gives an unbiased density and an unbiased
+    precision estimate for EVERY ranking -- and block 2 is the remainder in his own decreasing
+    degree order, so the most valuable candidates by his criterion are answered next. Block 3 is
+    the degree-3 shoulder, which is a separate question (is his cut in the right place?) and is
+    never folded into the map's base rate."""
+    import random
+    deg = {tuple(x["orbit"]): x["degree"][reading] for x in census["rows"]}
+    adm = lambda c: max((deg.get(k, 0) for k in c.orbits(base)), default=0)
+    menu = [c for c in cands if "shoulder" not in c.flags]
+    sh = sorted((c for c in cands if "shoulder" in c.flags),
+                key=lambda c: sorted(c.orbits(base)))
+    rng = random.Random(seed)
+    order = list(range(len(menu)))
+    rng.shuffle(order)
+    half = len(order) // 2
+    b1 = [menu[i] for i in order[:half]]
+    b2 = sorted((menu[i] for i in order[half:]), key=lambda c: (-adm(c), sorted(c.orbits(base))))
+    jobs = ([("control", 0, Candidate(frozenset(), "identity"))] +
+            [("random", i, c) for i, c in enumerate(b1)] +
+            [("his-degree-order", i, c) for i, c in enumerate(b2)] +
+            [("shoulder", i, c) for i, c in enumerate(sh)])
+    log(f"  blocks: control 1 (the identity candidate, d6.5), random {len(b1)}, "
+        f"his-degree-order {len(b2)}, shoulder {len(sh)} (seed {seed}); a truncation is reported "
+        f"with the block that produced it")
+    return jobs
+
+
+def run_map(base, A_tuples, companion, cands, census, *, incumbent, anchor_tuples, entries_dir,
+            ckpt_dir, jobs=1, seed=20260911, secondary=True, wall_ask=600.0, scoring_role,
+            limit=0, log=print) -> dict:
+    """`step` tabulated over the menu, in parallel, resumable per candidate.
+
+    **No score is stored.** The file holds labels and costs so that a ranking nobody has thought
+    of yet is scorable from it alone, and `scoring_role` states whether numbers read off it are
+    in-sample (the rule may be developed against them) or held out (the only surface on which a
+    beats-random claim may be made)."""
+    from concurrent.futures import ProcessPoolExecutor
+    os.makedirs(entries_dir, exist_ok=True)
+    os.makedirs(ckpt_dir, exist_ok=True)
+    _W.update(base=base, A=sorted(A_tuples), companion=sorted(companion), incumbent=incumbent,
+              reference=build_reference(base, A_tuples, companion), anchor=anchor_tuples,
+              entries=entries_dir, ckpt=ckpt_dir, secondary=secondary, wall_ask=wall_ask)
+    work = plan_blocks(base, cands, census, seed=seed, log=log)
+    if limit:
+        work = work[:limit]
+        log(f"  LIMITED to the first {len(work)} jobs of the plan: the density below is a "
+            f"truncation and names the blocks it covers")
+    t0, out = time.time(), []
+    log(f"  {len(work)} candidates, {jobs} workers, incumbent {incumbent} atoms "
+        f"(|M| = {incumbent + 1} vertices); target {incumbent - 1}")
+    if jobs <= 1:
+        for j in work:
+            out.append(_run_one(j))
+            log(f"    [{len(out)}/{len(work)}] {out[-1]['name']}: {out[-1].get('verdict')}  "
+                f"[{time.time()-t0:.0f}s]")
+    else:
+        with ProcessPoolExecutor(max_workers=jobs) as ex:
+            for e in ex.map(_run_one, work):
+                out.append(e)
+                log(f"    [{len(out)}/{len(work)}] {e['name']}: {e.get('verdict')}"
+                    f"{' GREW' if e.get('M_set_grew') == 'yes' else ''}  [{time.time()-t0:.0f}s]")
+    menu_entries = [e for e in out if e.get("block") != "shoulder"]
+    sh_entries = [e for e in out if e.get("block") == "shoulder"]
+    return {
+        "kind": "m63-map", "schema": 1, "producer": "tools/parts_loop.py:run_map",
+        "headline": (f"{len(out)} candidates on the accumulator, incumbent {incumbent + 1} "
+                     f"vertices: " + ", ".join(f"{k} {v}" for k, v in density(menu_entries).items()
+                                               if k in ("yes", "no", "unknown", "not_run"))),
+        "scoring_role": scoring_role,
+        "outcome_variables": {"primary": PRIMARY, "secondary": SECONDARY,
+                              "note": "frozen before the first outcome was read; atoms-freed is a "
+                                      "PREDICTOR and appears in no outcome column"},
+        "menu": {"admission_reading": ADOPTED_READING, "counts": {
+            k: census[ADOPTED_READING][k] for k in ("reserve", "fills", "fill_only", "menu",
+                                                    "shoulder")},
+            "note": "his degree test governs the RESERVE; his §5.6 exempts partially filled "
+                    "orbits from it, and `fill_only` counts those a degree-built menu would miss"},
+        "his_move_absent_by_construction":
+            "this accumulator already CONTAINS his own recorded expansion, so the four orbits his "
+            "move used are not in the candidate set at all. A reader finding his move missing from "
+            "this map is seeing that, not an omission.",
+        "density": density(menu_entries),
+        "shoulder": {"n": len(sh_entries), "density": density(sh_entries),
+                     "note": "reported as its own result with its own enumeration, NEVER folded "
+                             "into the menu's base rate: it answers whether his admission cut at "
+                             "degree 4 is in the right place, not how often a move helps"},
+        "seconds": round(time.time() - t0, 1), "jobs": jobs, "seed": seed,
+        "entries": sorted(out, key=lambda e: (e.get("block", ""), e.get("block_index", 0))),
+        "provenance": R.provenance(config={"A_fp": R.fp_tuples(A_tuples),
+                                           "companion_fp": R.fp_tuples(sorted(companion)),
+                                           "incumbent": incumbent, "seed": seed}),
+    }
 
 
 # ============================================================ self-test
@@ -712,6 +869,42 @@ def _self_test(log=print):
     chk("the fills exemption is not vacuous on the large half",
         b["fills"] > 0, f"{b['fills']} partially occupied orbits, {b['fill_only']} below threshold")
 
+    # --- the menu turns into candidates, and every candidate adds vertices A does not have
+    cands = menu_candidates(base, A412, cen, shoulder=3)
+    Aset = set(A412)
+    chk("every candidate adds only ABSENT vertices, and adds at least one",
+        all(c.n_new > 0 and not (c.vertices & Aset) for c in cands), f"{len(cands)} candidates")
+    chk("the candidate count is the menu plus the shoulder",
+        len(cands) == b["menu"] + b["shoulder"],
+        f"{len(cands)} = {b['menu']} menu + {b['shoulder']} shoulder")
+    chk("the fill-only candidates are flagged as such",
+        sum(1 for c in cands if "fill-only" in c.flags) == b["fill_only"],
+        f"{sum(1 for c in cands if 'fill-only' in c.flags)} flagged")
+
+    # --- card 15: an `unknown` is never folded into a `no`, and the RATE is what must honour it
+    planted = [{"verdict": "yes"}, {"verdict": "no"}, {"verdict": "unknown"},
+               {"verdict": "not_run"}]
+    d = density(planted)
+    chk("d15 the base rate is over DECIDED candidates: an undecided is not a refusal",
+        d["helpful_rate"] == 0.5 and d["decided"] == 2 and d["unknown"] == 1,
+        f"rate {d['helpful_rate']} over {d['decided']} decided, {d['unknown']} undecided")
+    d2 = density([{"verdict": "yes"}, {"verdict": "no"}, {"verdict": "no"}])
+    chk("d15 control positive: with no undecided the rate is the naive one",
+        d2["helpful_rate"] == round(1 / 3, 4), str(d2["helpful_rate"]))
+
+    # --- the blocks: random first, and the identity candidate is planted as the map's own control
+    work = plan_blocks(base, cands, cen, log=lambda *a: None)
+    blocks = [b_ for b_, _, _ in work]
+    chk("d6.5 the identity candidate is planted first, as block `control`",
+        blocks[0] == "control" and work[0][2].n_new == 0)
+    chk("the random block precedes his degree order (a truncation stays unbiased)",
+        blocks.index("random") < blocks.index("his-degree-order"))
+    chk("the shoulder is its own block, never folded into the menu",
+        blocks.count("shoulder") == b["shoulder"] and blocks[-1] == "shoulder")
+    chk("every candidate appears exactly once across the blocks",
+        len(work) == len(cands) + 1 and
+        len({c.name(base) for _, _, c in work}) == len(cands) + 1, f"{len(work)} jobs")
+
     log(f"\n{'ALL CONTROLS FIRED' if not fails else 'FAILED: ' + ', '.join(fails)}  "
         f"[{time.time()-t0:.0f}s]")
     return not fails
@@ -725,6 +918,31 @@ def main():
     c.add_argument("--A", default="v412e2106.vtx")
     c.add_argument("--companion", default="v136e564.vtx")
     c.add_argument("--out")
+    m = sub.add_parser("map")
+    m.add_argument("--A", default="v412e2106.vtx")
+    m.add_argument("--companion", default="v136e564.vtx")
+    m.add_argument("--anchor", default="v374e1860.vtx",
+                   help="a known minimum of the UNEXPANDED stage; the per-candidate known-answer "
+                        "anchor, two asks and no plant")
+    m.add_argument("--incumbent", type=int, required=True,
+                   help="the best known WEIGHT in atoms, so |M| = incumbent + 1 vertices")
+    m.add_argument("--jobs", type=int, default=1)
+    m.add_argument("--seed", type=int, default=20260911)
+    m.add_argument("--shoulder", type=int, default=3)
+    m.add_argument("--scoring-role", dest="role", required=True,
+                   choices=["in-sample", "held-out"],
+                   help="in-sample: the base rate is a measurement and the rule may be developed "
+                        "against it, but no ranking claim may be read off it. held-out: the only "
+                        "surface on which a beats-random claim may be made")
+    m.add_argument("--no-secondary", action="store_true")
+    m.add_argument("--limit", type=int, default=0,
+                   help="run only the first N jobs of the block plan. Used for the FIRST "
+                        "candidate alone and timed, before any parallel launch: parallel runs "
+                        "contaminate the one cost datum every forecast rests on.")
+    m.add_argument("--wall-ask", type=float, default=600.0)
+    m.add_argument("--entries")
+    m.add_argument("--out", required=True)
+    m.add_argument("--dry-run", action="store_true")
     p = sub.add_parser("cost-probe")
     p.add_argument("--L", default="v412e2106.vtx")
     p.add_argument("--S", default="v136e564.vtx")
@@ -743,6 +961,38 @@ def main():
         out["A"] = a.A
         out["companion"] = a.companion
         out["provenance"] = R.provenance(config={"A": a.A, "companion": a.companion})
+    elif a.cmd == "map":
+        A = V.load_lattice(os.path.join(REF11, a.A))
+        comp = V.load_lattice(os.path.join(REF11, a.companion))
+        anchor = V.load_lattice(os.path.join(REF11, a.anchor))
+        orc = EdgeOracle(base, comp)
+        cen = menu_census(base, A, orc)
+        cands = menu_candidates(base, A, cen, shoulder=a.shoulder)
+        ent = a.entries or os.path.join(ROOT, "data", "m62", os.path.basename(a.out)[:-5])
+        if a.dry_run:
+            work = plan_blocks(base, cands, cen)
+            print(f"map        {a.A} against {a.companion}, incumbent {a.incumbent} atoms "
+                  f"(|M| = {a.incumbent + 1} vertices), target {a.incumbent - 1}")
+            print(f"menu       {cen[ADOPTED_READING]['menu']} under {ADOPTED_READING} "
+                  f"({cen[ADOPTED_READING]['fill_only']} fill-only, which his degree test misses) "
+                  f"+ {cen[ADOPTED_READING]['shoulder']} shoulder at degree 3 = {len(cands)}")
+            print(f"jobs       {len(work)} including the identity control; {a.jobs} workers")
+            print(f"role       {a.role}")
+            print(f"forecast   at the D0 rates (0.055 s colourable / 0.138 s refusing, measured "
+                  f"under load 9) a candidate is phase 1 at ~55 s plus 800-1600 correction sets "
+                  f"at ~1.2 s: 17-33 min each, so {len(work)} candidates is "
+                  f"{len(work)*17//60}-{len(work)*33//60} core-hours, "
+                  f"{len(work)*17//60//max(a.jobs,1)}-{len(work)*33//60//max(a.jobs,1)} h on "
+                  f"{a.jobs} cores. The secondary decision adds an UNMEASURED factor; the first "
+                  f"candidate measures it.")
+            print(f"entries    {ent}/  (one file per candidate; an answered candidate is never "
+                  f"re-asked, so a kill costs at most the candidates in flight)")
+            print(f"writes     {a.out}")
+            return
+        out = run_map(base, A, comp, cands, cen, incumbent=a.incumbent, anchor_tuples=anchor,
+                      entries_dir=ent, ckpt_dir=os.path.join(ROOT, "data", "m62", "ckpt"),
+                      jobs=a.jobs, seed=a.seed, secondary=not a.no_secondary,
+                      wall_ask=a.wall_ask, scoring_role=a.role, limit=a.limit)
     elif a.cmd == "cost-probe":
         out = cost_probe(base, a.L, a.S, a.km, runs=a.runs, near=a.near)
     else:
