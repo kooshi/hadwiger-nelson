@@ -827,3 +827,51 @@ entries, although `Bound` is a structured dataclass with `lower`, `upper`, `rung
 `target` as fields. Any later check over these records must parse prose with a regular expression, which
 is how a field silently changes meaning between runs. If the map is ever regenerated, the structured
 `Bound` should be stored beside the rendered string.
+
+
+---
+
+## §10 — The evening's methodological finding, stated for a stranger
+
+*Added at the close. The two retractions tonight were the same error with opposite signs, and the pair
+generalises further than either half. Written to be usable by someone who knows nothing about this
+milestone.*
+
+**A plant and a discriminator are the same object seen from two sides, and both owe the same question
+before they are believed: what does the uninformative outcome look like, and can it happen?**
+
+- The planted fault `f7` set a target too **lax**. A lax target cannot trip the break, so the control
+  could not have fired — the plant would have been recorded as "survived every control" at 0.9
+  confidence, and the survival would have been read as evidence about the guard when it was evidence
+  about the plant.
+- The one-unit tripwire asked whether `target_lb == target + 1`. The design forces that on every inert
+  candidate, so the discriminator could not have discriminated — it would have been recorded as flagging
+  a meaningful population when it flags all of them.
+
+Both were about to produce a **confident record**, which is what makes them worse than an absent check:
+an absent check leaves a reader with less than they thought, and a dead one leaves them with something
+that looks like more.
+
+**Why the project's existing rule did not catch either.** `CLAUDE.md` already requires that a check be
+*seen to fail* before it is believed. `f7` would have passed that test — a fault was planted, a control
+was run, an outcome was recorded. The missing step is one earlier than the rule reaches: **the plant
+itself could not have made the control fire.** The rule needs its predecessor:
+
+> Before believing a control's pass, or proposing a discriminator, state the uninformative outcome and
+> confirm it is reachable. A control whose failure mode is unreachable has not been tested by passing,
+> and a discriminator whose null is unreachable has not discriminated by firing.
+
+**And the asymmetry that produced both misses, which is the transferable part.** Each of us applied the
+question rigorously to the other's instrument and never to our own: the engineer wrote a seven-row table
+asking exactly "what would this control fail to catch?" about somebody else's guard, and wrote a residue
+catcher without asking it of that; I demanded a reachable failure of its plant and proposed a
+discriminator without checking mine could discriminate. **The question is cheap and it is the one nobody
+asks of the thing they just built** — which is the entire case for a second reader, and the reason the
+second reader must be pointed at their own output too (`<turn_the_cut_on_yourself>`).
+
+**The companion lesson, and it accounts for every finding tonight:** *prose about code is not code.*
+Seven errors were found between two readers this evening — four of the engineer's, three of mine — and
+**every one was found by opening a module rather than by arguing**: the freeze's coverage, the anchor's
+call sites, the target break's direction, the ranking's sort key, the counting artifacts, the map's
+margin, the bound stored as a sentence. None was subtle once the file was open. A plan's sentence about
+what its code does is a hypothesis with the standing of any other.
