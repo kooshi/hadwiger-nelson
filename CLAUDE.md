@@ -362,7 +362,14 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   enumeration and conditioning, and both belong in the headline sentence. At registration, say whether the
   acceptance test is also necessary. Point every new instrument at a known positive before believing its
   zero; assert on the written artifact, never on the list that produced it; a control the instrument cannot
-  see is not a control.
+  see is not a control. **And where a phase's output is eliminations, its defects are not random — they all
+  point one way.** Four found in a single phase (M63 phase G, 2026-09-11): an edge law that drops an edge, an
+  over-merged equivalence key, a float sign test inside an exact verdict, and a truncated input with no
+  producer. Every one silent, and every one **biased toward making the survey look productive**, because a
+  missing edge yields an easier graph, which yields a colouring, which reads as a *sound elimination*. So an
+  elimination carries an exact quantifier or it is not an elimination; and where the phase also has a
+  positive product, **the count of eliminations is the outcome to be least satisfied with** — it is the
+  cheapest thing to manufacture by accident.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
