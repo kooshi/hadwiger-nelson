@@ -291,6 +291,10 @@ def validate_level(m: int, circle, N: int = 4) -> dict:
             circ_ring.add((z[0] % A, z[1] % A, z[2] % B, z[3] % B))
     return dict(
         ring=f"(ℤ/{M})[ω,π]/(π²−2π−2)", level=m,
+        scope="this tests the LATTICE description of 𝔓^m, and the norm and circle over it, GIVEN the presentation "
+              "R = (ℤ/2^N)[ω,π]/(π²−2π−2). That presentation — π = 1+√3 is Eisenstein over ℤ₂[ω], so O = ℤ₂[ω][π] is "
+              "the ring of integers of ℚ₂(√3,ζ₃) with 𝔓 = (π), 𝔓² = (2) and residue field 𝔽₄ — is FS-38 §S3's "
+              "[hand 1] and is NOT tested here (Poros, 2026-09-13)",
         pi_squared_ok=(R.mul((0, 0, 1, 0), (0, 0, 1, 0)) == (2, 0, 2, 0)),
         ideal_size=len(ideal), ideal_expected=M ** 4 // 4 ** m, ideal_matches_lattice=(ideal == claimed),
         norm_mismatches=norm_mismatch,
@@ -325,7 +329,32 @@ def circle_is_group(m: int, circle) -> dict:
     S = set(circle)
     closed = all(level_mul(m, z, w) in S for z in circle for w in circle)
     inv = all(level_mul(m, z, level_conj(m, z)) == (1 % level_mods(m)[0], 0, 0, 0) for z in circle)
-    return dict(products_checked=len(circle) ** 2, closed_under_multiplication=closed, conj_is_inverse=inv)
+    conj_onto = {level_conj(m, z) for z in circle} == S
+    onto = all({level_mul(m, z, s) for z in circle} == S for s in circle)
+    return dict(products_checked=len(circle) ** 2, closed_under_multiplication=closed, conj_is_inverse=inv,
+                conj_maps_circle_onto_circle=conj_onto, every_unit_maps_circle_onto_circle=onto,
+                reads="every generator of the orbit group is a graph automorphism fixing 0: multiplication by s ∈ S_m "
+                      "permutes the connection set (s·S_m = S_m as SETS, checked for every s), and so does "
+                      "conjugation — the three written conditions Poros asked for, first two of three")
+
+
+def derived_virtual_edges(m: int):
+    """Poros's law, derived 2026-09-13 and registered as a prediction before the levels above 6 were measured: if
+    every difference of depth ≥ 4 is forced, then for `s ∈ S_m` and `δ ∈ 𝔓⁴`, `C(s+δ) ≠ C(δ) = C(0)`, so every
+    element of `S_m + 𝔓⁴` is a virtual edge — and `S_m + 𝔓⁴` is exactly the preimage of `S₄` under reduction to
+    level 4, of size `24·4^(m−4)`: 24, 96, 384, 1536, 6144 at m = 4..8. MORE virtual edges than this is a compulsion
+    the depth-4 forcing does not explain (phase D's first object); FEWER contradicts the forcing and is a HALT."""
+    if m < 4:
+        return None
+    S4 = set(level_circle(4))
+    mods = level_mods(m)
+    out = set()
+    i = 0
+    for tup in itertools.product(*[range(x) for x in mods]):
+        if (tup[0] % 4, tup[1] % 4, tup[2] % 4, tup[3] % 4) in S4:
+            out.add(i)
+        i += 1
+    return out
 
 
 def fibre_edges(m: int, circle) -> int:
@@ -474,6 +503,26 @@ class Asker:
     def multi_gap(self, v: int, gammas):
         """Several colours absent from `N[v]` at once — the ask whose UNSAT shows the refusal outcome is reachable."""
         return self.ask([var(v, 0, self.k)] + [-var(w, g, self.k) for w in self.cay.nbrs(v) for g in gammas])
+
+
+def clique_assumptions(cay: Cay, k: int):
+    """A clique through the origin, pinned to distinct colours — sound by palette symmetry, and the difference between
+    a control that answers in seconds and one that does not answer at all. (Measured 2026-09-13: the global
+    colour-absence control at 19 ran past ten minutes without this and returns in seconds with it.)"""
+    S = cay.circle
+    adj = {s: {r for r in S if r != s and tuple((s[i] - r[i]) % cay.mods[i] for i in range(len(cay.mods))) in set(S)}
+           for s in S}
+    best = []
+    for s in S:
+        for r in adj[s]:
+            cand = [s, r]
+            if len(cand) > len(best):
+                best = cand
+            break
+        if best:
+            break
+    verts = [0] + [cay.index(s) for s in best]
+    return [var(v, i, k) for i, v in enumerate(verts) if i < k]
 
 
 def second_opinion(cay: Cay, k: int, extra_edge, engine: str = SECOND_ENGINE) -> bool:
@@ -679,6 +728,8 @@ def cmd_forced(a):
     fs = list(state["free_string"])
     ss = list(state["sep_string"])
     fs[0] = ss[0] = "."
+    edge_diffs = {cay.index(s) for s in S}
+    derived = derived_virtual_edges(m)
     agg = hashlib.sha256()
     A = Asker(cay, k, verbose=True)
     # the fan gap, with its planted control
@@ -687,7 +738,16 @@ def cmd_forced(a):
         ask="a proper 4-colouring with one colour absent from N[0] (FanGap; vertex 0 by vertex-transitivity, the "
             "colour by palette symmetry)",
         verdict=("gap found — " + VERIFIED) if gsat else ("no gap — " + REFUSED),
-        second_engine=None, planted_control=None)
+        second_engine=None, planted_control=None,
+        derivation=("at levels ≤ 5 this is not an independent claim: a gap at level m pulls up along the level maps "
+                    "to a gap at level 5 (`FanGap.comap`), one gap on a Cayley graph gives `Slack` by translation, "
+                    "`Slack` makes every pair free (D0.2 (a)), and level 5 has a forced pair — so the whole column "
+                    "rests on ONE solver claim, the level-5 refusal, and becomes kernel when K3's LRAT is checked "
+                    "(Poros, FS-38 §S3 P-A3). Above 5 it is an independent consistency check on the solver, with the "
+                    "planted control as its positive."
+                    if m <= 5 else
+                    "above level 5 this is an independent consistency check on the solver, with the planted control "
+                    "as the positive showing the SAT outcome is reachable on this object (FS-38 §S3 P-A3)"))
     if not gsat:
         # the uninformative outcome must be REACHABLE on this object: plant it
         csat, cmodel = A.ask([])
@@ -720,6 +780,10 @@ def cmd_forced(a):
             fs[d] = "R"
             nref += 1
         if a.separated:
+            if d in edge_diffs:
+                ss[d] = "E"      # separated by PROPERNESS — a theorem, no solver asked (Poros's legend request)
+                state["asked"] += 1
+                continue
             ssat, scol = A.coincide(d)
             if ssat:
                 ss[d] = "c"
@@ -763,7 +827,10 @@ def cmd_forced(a):
                             second_engine=(SECOND_ENGINE if agree is not None else None),
                             second_encoding="P_m + edge (0, δ) is not 4-colourable",
                             second_agrees=agree,
-                            palette_control_all_refused=(not any(pal))))
+                            palette_control_all_refused=(not any(pal)),
+                            palette_control_reads="a HALT, not a measurement: pinning C 0 = 0, C δ = 1 loses nothing "
+                                                  "by colour permutation, so a SAT at another colour after an UNSAT "
+                                                  "at 1 is impossible for a correct solver and encoding (Poros)"))
     # orbit consistency: the verdicts must be constant on orbits
     incons = []
     if not use_orbits:
@@ -793,6 +860,10 @@ def cmd_forced(a):
               "M56's \"depth 3\" is depth 6 here; depth = m is the zero of level m",
         representation=val, multiplication=mul, circle_group=grp, fibre_edges=fibre_edges(m, S),
         orbits=dict(count=len(reps), representatives=reps[:64],
+                    sizes_sum_over_nonzero=int(sum(1 for i in range(1, cay.n))),
+                    sizes=[int(sum(1 for x in orb if x == orb[r])) for r in reps],
+                    sizes_total=int(sum(sum(1 for x in orb if x == orb[r]) for r in reps)),
+                    transferred_refusals_keep_the_word=REFUSED,
                     derivation="multiplication by s ∈ S_m (a unit, N(s) = 1) and conjugation are graph automorphisms "
                                "fixing 0; S_m is a group (checked in full), so S·δ ∪ S·δ̄ is a whole orbit"),
         fan_gap=gap_block,
@@ -802,16 +873,36 @@ def cmd_forced(a):
                                                     "'R' " + REFUSED,
                     by_depth=by_depth, refused_differences=refused,
                     orbit_consistent=(not incons) if not use_orbits else "by construction (orbit representatives)"),
-        separated=dict(asked=(len(todo) if a.separated else 0),
-                       sep_string="".join(ss) if a.separated else None,
-                       legend="'.' the zero difference, 'c' a verified colouring identifies the pair (no virtual "
-                              "edge), 'S' " + REFUSED + " (a virtual edge on the solver's word)"),
+        separated=dict(
+            asked=(len(todo) if a.separated else 0),
+            sep_string="".join(ss) if a.separated else None,
+            legend="'.' the zero difference, 'E' an EDGE — separated by properness, a theorem, no solver asked, "
+                   "'c' a verified colouring identifies the pair (no virtual edge), 'S' " + REFUSED +
+                   " (a virtual edge beyond the edges, on the solver's word)",
+            edges=int(sum(1 for c in ss if c == "E")),
+            non_adjacent_refused=int(sum(1 for c in ss if c == "S")),
+            identified=int(sum(1 for c in ss if c == "c")),
+            virtual_edges_total=int(sum(1 for c in ss if c in "ES")),
+            derived_count=(len(derived) if derived is not None else None),
+            derived_expected=(24 * 4 ** (m - 4) if m >= 4 else None),
+            derived_law="S_m + 𝔓⁴ = the preimage of S₄ under reduction to level 4, size 24·4^(m−4) — every element "
+                        "is a virtual edge GIVEN the depth-≥-4 forcing (Poros, derived and registered before the "
+                        "levels above 6 were measured)",
+            measured_equals_derived=(None if derived is None or not a.separated else
+                                     sorted(i for i in range(cay.n) if ss[i] in "ES") == sorted(derived)),
+            reads="more than the derived set would be a compulsion the depth-4 forcing does not explain (phase D's "
+                  "first object); fewer would contradict the forcing and is a HALT"),
         models=dict(verified=state["models_verified"], aggregate_sha256=agg.hexdigest(),
                     per_depth_example_free=state["examples"], per_depth_example_same=state["sep_examples"],
                     note="every model was verified against every edge of the graph as built before being counted; the "
                          "aggregate hash identifies THIS run's set (solver models are not reproducible across "
                          "engines), the per-depth examples are the re-checkable evidence"),
         seconds=round(time.time() - t0, 1), peak_gb=round(peak_gb(), 2),
+        positive_control_note="the tower has NO internal positive for the refusal path below level 5 — K₄ and "
+                              "K₄ □ K₄'s Latin squares are pairwise free — so the `forced` ask's refusal path is "
+                              "exercised on an EXTERNAL hand-checkable positive (the diamond at three colours, in "
+                              "`self-test`) beside the same object at four. Level 6 is where both of P-A2's outcomes "
+                              "are seen on one population: 15 refused and 4,080 free of 4,095 differences.",
         claim_scope="'free' = a colouring verified here on every edge, so the pair is NOT forced. 'refused' = one "
                     "solver's UNSAT, re-asked on a second engine and a second encoding where affordable, and still "
                     "UNTRUSTED: nothing here is a theorem. 'no gap' is the same UNSAT with the same word, with the "
@@ -869,12 +960,14 @@ def cmd_gap(a):
         ask["verified"] = bool(verify_proper(cay, model)[0] and gv)
     # the controls: at 11 the SAT outcome is observed, so what needs showing is that a REFUSAL is reachable here
     c3, _ = A.multi_gap(0, [1, 2, 3])
-    c_all, _ = A.ask([-var(x, k - 1, k) for x in range(cay.n)])
+    cq = clique_assumptions(cay, k)
+    c_all, _ = A.ask([-var(x, k - 1, k) for x in range(cay.n)] + cq)
     controls = [
         dict(name="three colours absent from N[(0,0)] at once", expect="refused", got=("sat" if c3 else "unsat"),
              fired=(not c3), reads="the refusal outcome is reachable on this code path and this object"),
-        dict(name="one colour absent everywhere (= (k−1)-colour the plane)", expect="refused",
-             got=("sat" if c_all else "unsat"), fired=(not c_all),
+        dict(name="one colour absent everywhere (= (k−1)-colour the plane), with a clique through the origin pinned "
+                  "to distinct colours (sound by palette symmetry, and without it the ask does not return)",
+             expect="refused", got=("sat" if c_all else "unsat"), fired=(not c_all), clique_pins=len(cq),
              reads="a gap ask that forbids a colour globally must refuse — χ(UD(𝔽_p,2)) = k"),
     ]
     for c in controls:
@@ -1148,10 +1241,18 @@ def cmd_recolour(a):
     present = sorted({int(col1[w]) for w in base.nbrs(target)} | {int(col1[target])})
     lvl2 = build_plane(p, 2)
     q = p * p
+    pre = dict(circle_level2=lvl2.deg, circle_level2_expected=p * base.deg,
+               circle_lifts_with_uniform_fibres=(lvl2.deg == p * base.deg),
+               note="Poros's pre-registered expectation, written before this file existed: |S₂| = p·|S₁| = "
+                    f"{p * base.deg} at {p}")
     pull = np.array([int(table[(x % p)][(y % p)]) for x in range(q) for y in range(q)], dtype=np.int16)
     okp, nbad, ex = verify_proper(lvl2, pull)
     if not okp:
         raise SystemExit(f"HALT: the pulled-back colouring is not proper on UD(ℤ/{q},2) ({nbad} edges, e.g. {ex})")
+    col2_gaps = gap_census(lvl2, pull.reshape(q, q), k)[1]
+    gap_verts2 = sorted({v for v, _ in col2_gaps})
+    base_gap_res = {(x // p, x % p) for x in verts}
+    lifted_only = all(((v // q) % p, (v % q) % p) in base_gap_res for v in gap_verts2)
     tx, ty = target // p, target % p
     lift = ((tx + p * a.lift_shift) % q, ty % q)
     u = lvl2.index(lift)
@@ -1179,13 +1280,24 @@ def cmd_recolour(a):
                          gapped_vertices=[[v // p, v % p] for v in verts],
                          target=[tx, ty], target_own_colour=int(col1[target]), target_gaps=gaps,
                          target_neighbour_colours=sorted({int(col1[w]) for w in base.nbrs(target)})),
+               circle_lift=pre,
                pullback=dict(rule="col₂(x, y) = table[x mod 11][y mod 11] (the reduction ℤ/121 → ℤ/11 is a ring hom, "
                                  "so this is a pullback along a graph homomorphism)",
-                             proper_on_all_edges=True),
+                             proper_on_all_edges=True, gapped_vertices=len(gap_verts2),
+                             gapped_vertices_expected=len(verts) * p * p,
+                             gapped_vertices_are_exactly_the_lifted_base_gaps=bool(
+                                 len(gap_verts2) == len(verts) * p * p and lifted_only),
+                             expectation="Poros, pre-registered: 3·121 = 363 gapped vertices — the three base gaps "
+                                         "lifted, and nothing else"),
                repaint=dict(lift=[int(lift[0]), int(lift[1])], lift_index=u, painted_colour=gamma,
                             proper_on_all_edges=bool(ok2), improper_edges=nbad2,
                             fibre_size=len(fibre), fibre_colours=fibre_colours,
-                            fibre_non_constant=(len(fibre_colours) > 1)),
+                            fibre_non_constant=(len(fibre_colours) > 1),
+                            separates_the_lifted_pair=bool(all(rep[x] != rep[u] for x in fibre if x != u)),
+                            separates_reads="the repainted colouring gives the lifted vertex a colour no fibre-mate "
+                                            "has, so no pair inside the fibre is forced equal at five colours: the "
+                                            "level-2 plane at 11 is NOT 1-continuous — FS-38 stub P2's record "
+                                            "instance (Poros's third pre-registered expectation)"),
                controls=controls, seconds=round(time.time() - t0, 1),
                claim_scope="the repainted colouring is verified here proper on every one of the edges listed, and "
                            "non-constant on the 121-point fibre over the gapped residue — so no colouring of "

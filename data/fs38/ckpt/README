@@ -1,0 +1,8 @@
+Checkpoints live here while a level is in flight and are removed when its record is written, so an empty
+directory is the normal state. A level that dies mid-run leaves `forced-p2-k4-m<M>.json` here; resume with
+
+    python3 tools/fs38_tower.py forced --m <M> --resume
+
+which re-reads the partial verdict strings and asks only the differences still marked '?'. Never put a
+checkpoint under `build/` or `/tmp`: `build/` is described in CLAUDE.md as regenerable scratch and an agent
+tidying up after itself deleted a live job's only resume file there on 2026-09-11.

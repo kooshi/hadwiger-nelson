@@ -1,0 +1,116 @@
+{
+ "kind": "fs38-fan-gap",
+ "p": 11,
+ "k": 5,
+ "n": 121,
+ "degree": 12,
+ "edges": 726,
+ "table_source": {
+  "record": "data/fplane/chi-p11.json",
+  "kernel": "Instances/FinitePlane11.lean finitePlane11Table",
+  "record_and_kernel_agree": true
+ },
+ "table_proper": true,
+ "table_rows": [
+  "01402014032",
+  "24130141301",
+  "43201434030",
+  "30124140214",
+  "23213403043",
+  "10142124130",
+  "21430243403",
+  "14212414020",
+  "40321343213",
+  "32012402024",
+  "20241321340"
+ ],
+ "gapped_pairs": 3,
+ "gapped_vertices": 3,
+ "per_vertex": [
+  {
+   "vertex": [
+    2,
+    4
+   ],
+   "own_colour": 1,
+   "neighbour_colours": [
+    0,
+    3,
+    4
+   ],
+   "gaps": [
+    2
+   ]
+  },
+  {
+   "vertex": [
+    7,
+    8
+   ],
+   "own_colour": 0,
+   "neighbour_colours": [
+    1,
+    2,
+    4
+   ],
+   "gaps": [
+    3
+   ]
+  },
+  {
+   "vertex": [
+    9,
+    6
+   ],
+   "own_colour": 0,
+   "neighbour_colours": [
+    1,
+    2,
+    4
+   ],
+   "gaps": [
+    3
+   ]
+  }
+ ],
+ "sat_ask": {
+  "question": "a proper 5-colouring with one colour absent from N[(0,0)]",
+  "verdict": "gap found \u2014 verified colouring (every edge re-checked here)",
+  "gap_colours_in_the_found_colouring": [
+   1
+  ],
+  "colouring_rows": [
+   "03421434212",
+   "20342120321",
+   "41031213012",
+   "12103421303",
+   "31414012130",
+   "04120304243",
+   "13041030312",
+   "24304203031",
+   "12030420342",
+   "41204041203",
+   "32140302120"
+  ],
+  "verified": true
+ },
+ "controls": [
+  {
+   "name": "three colours absent from N[(0,0)] at once",
+   "expect": "refused",
+   "got": "unsat",
+   "fired": true,
+   "reads": "the refusal outcome is reachable on this code path and this object"
+  },
+  {
+   "name": "one colour absent everywhere (= (k\u22121)-colour the plane), with a clique through the origin pinned to distinct colours (sound by palette symmetry, and without it the ask does not return)",
+   "expect": "refused",
+   "got": "unsat",
+   "fired": true,
+   "clique_pins": 3,
+   "reads": "a gap ask that forbids a colour globally must refuse \u2014 \u03c7(UD(\ud835\udd3d_p,2)) = k"
+  }
+ ],
+ "seconds": 0.1,
+ "claim_scope": "the census is an exact enumeration over the COMMITTED table (the kernel's literal, read back from the source): every listed (vertex, colour) is a colour absent from that vertex's closed neighbourhood, which is what `FanGap` names and what the kernel decides by 12 lookups. The SAT ask carries a colouring verified here on every edge. No refusal is recorded as a fact."
+}
