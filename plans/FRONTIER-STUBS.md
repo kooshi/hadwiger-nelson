@@ -34,19 +34,33 @@ introducing our new angle on it."*
 
 ## Ranked stubs
 
-> **RE-RANKED 2026-09-12 at M63 phase H2's close. This block states the current order and supersedes the
-> numeric column below it, which is left in place so no row's text is lost.** One thing changed the ranking:
+> **RE-RANKED 2026-09-12 at M63 phase H3's close. This block states the current order and supersedes the
+> numeric column below it, which is left in place so no row's text is lost.** Two things set the ranking:
 > **a five-chromatic unit-distance graph now exists in a 6-open field** (ledger row 64) — 51,133 vertices at
-> `ρ₆₃` in `ℚ(√3,√7,√11)`, refusal *produced* rather than inherited. Every previous witness this project can
-> screen is 5-sealed, so the only known mechanism for the sixth colour had no platform. It has one.
+> `ρ₆₃` in `ℚ(√3,√7,√11)`, refusal *produced* rather than inherited; every previous witness this project can
+> screen is 5-sealed, so the only known mechanism for the sixth colour had no platform, and now has one. And
+> **phase H3 closed its own successor** (ledger row 65), which removes the top row rather than adding one.
 >
 > **Current order:**
-> 1. **Phase H3 — drop the shape** (`plans/M63-phaseH3-drop-the-shape.md`, new). The obstruction limiting
->    every object of this kind is neither the lattice's fineness, radius, nor field but **two coordinate-slot
->    conditions inherited from `[Parts2020a]`**; dropping them at `n = 2` offers twice the record's circle
->    count *and* twice its unit-neighbour count in the same unsealed field at **73% of its radius**. Highest
->    bearing, days, specified and unstarted.
-> 2. **FS-6 the six-level design target** — **promoted from 4.** Unchanged in content; what changed is that
+> 1. **FS-6 the six-level design target** — **promoted to the top**, since the direction that outranked it is
+>    closed.
+>
+> **CLOSED AS A DIRECTION, 2026-09-12 — dropping `[Parts2020a]`'s coordinate shape** (was rank 1;
+> `plans/M63-phaseH3-drop-the-shape.md`, bannered; record `plans/M63-phaseH3-plan.md`). **The object is
+> four-colourable at every radius, by derivation**, and the reason generalises into a base-free screen:
+> the additive-pair route is **ARENA-AT-RISK** when `4 ∤ n` and **ARENA-IMMUNE** when `4 | n`. Run over
+> Parts's **shaped** lattice, every member he can realise with a nonempty circle is either **odd** — at risk,
+> and dead anyway to the 2-adic wall — or **`4 | n` and immune**. **So dropping the shape reaches only
+> members this route kills.** `n = 16` is the cheapest 6-open immune member, nothing lies below it (4, 8, 12
+> are 5-sealed), and it is realisable **shaped** at 25,567 points, which *is* phase H2's object. **Every
+> member worth having was already reachable on Parts's lattice; the shape-free construction has no target.**
+> The premise it was chartered to test is nevertheless **confirmed** — at `n = 4`, the record's own rotation,
+> dropping the shape takes monochromatic off-diagonal cross edges **0 → 144**. **Residual, priced not
+> pursued:** `n = 10` (`K(√13)`, 6-open, `4 ∤ 10`) is at risk and **uncomputed** at ~6.6 M points, past the
+> present Python tooling, where truncation biases toward a false "four-colourable". **Un-computed is not a
+> verdict**, and it changes no ranking. Six family-level results survive in ledger row 65.
+>
+> 2. **FS-6's own detail, unchanged in content** — **promoted from 4.** Unchanged in content; what changed is that
 >    G48's mechanism now has an object to stand on, and the arithmetic bar that blocks it (a five-colour
 >    forced pair needs `11 ∣ d²`) **does not apply in `K(√7)`**, where 11 has residue degree 2.
 > 3. **FS-20 the paper** — **demoted from 1 on urgency, not value.** Still the publication trigger, still

@@ -1,3 +1,11 @@
+> **SUPERSEDED 2026-09-12 — RUN AND CLOSED. The object is dead and so is the direction.** The shape-free
+> `n = 2` arena is **four-colourable at every radius, by derivation**, and dropping the shape reaches only
+> members that a single base-free screen kills. **Read `plans/M63-phaseH3-plan.md` for the verdict and the
+> six family-level results that survive; read this file only for the brief as it was written.** Its §2 table
+> is wrong in the flattering direction on two rows: the doublings it credits to `n = 2` belong to dropping
+> the shape (the unit shell does not depend on `n` at all), and "7.1× smaller in arena radius" is 2.67× in
+> radius — 7.1 is its square. Per WORKFLOW: deprecate, never delete.
+
 # Phase H3 stub — drop the shape: a 6-open arena at squared radius 2
 
 *Written 2026-09-12 at phase H2's close, under WORKFLOW's stub rule: full mission context in plain
