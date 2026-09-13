@@ -1293,6 +1293,91 @@ Grey's field worked. -/
 #print axioms sqrt_five_mem_fourteen_sup_seventy
 #print axioms five_le_chromaticNumber_planeOver_fourteen_sup_seventy
 
+/-! ## FS-38 — the fan gap: a free colour at the image kills every pair compulsion through it
+
+`FanGap.lean`: the gap, slackness, the shared gap and fusability; the repaint over an independent set and its three
+uses (the pair theorem, the arity-`k` fan filter, the double repaint); both hereditary properties and their hom forms;
+the Cayley transports; the base-edge transport and the ring-hom corollaries for every commutative ring; the general
+arity-3 floor; and the three controls that refute the weakened statements. `Instances/FanGap11.lean`: the two tables'
+`decide`s, `Slack` and `PairwiseFusable` at `11`, both `iff`s for every graph mapping into the plane, the tower
+`ZMod (11 ^ m)`, the completions `ℤ_[11]` and `Adjoin 11 ℤ_[11]`, the certificate forms and Heule-510.
+`Instances/FanGap19.lean`: the derived properness of the kernel's own 19-colouring, its gap, `Slack` and the
+forces half at `19` (no virtual-edge half — FS-38 §S8 decision 10). -/
+
+#print axioms FanGap.comap
+#print axioms exists_fanGap_iff_not_coverAtLeast
+#print axioms pullbackRepaint
+#print axioms pullbackRepaint_apply_of_mem
+#print axioms pullbackRepaint_apply_of_not_mem
+#print axioms repaintAt
+#print axioms repaintAt_apply_self
+#print axioms repaintAt_apply_of_ne
+#print axioms not_forces_of_fanGap
+#print axioms not_fan_of_fanGap
+#print axioms not_separated_of_sharedGap
+#print axioms not_separated_of_fusable
+#print axioms Fan.image
+#print axioms Slack.of_hom
+#print axioms Slack.forces_eq
+#print axioms Slack.forces_iff
+#print axioms Slack.forces_eq_of_hom
+#print axioms Slack.forces_iff_of_hom
+#print axioms Fusable.of_hom
+#print axioms fusable_of_not_separated
+#print axioms PairwiseFusable.of_hom
+#print axioms PairwiseFusable.separated_iff_adj
+#print axioms PairwiseFusable.separated_iff_adj_of_hom
+#print axioms three_le_arityFloor_of_forces_eq_of_separated_adj
+#print axioms FanGap.translate
+#print axioms slack_addCayley_of_fanGap
+#print axioms fusable_of_hom_to_base
+#print axioms Slack.unitQuadrance_of_ringHom
+#print axioms PairwiseFusable.unitQuadrance_of_ringHom
+#print axioms unitQuadrance_forces_eq_of_ringHom
+#print axioms unitQuadrance_exists_hom_to_base
+#print axioms unitQuadrance_fusable_of_sharedGap_base
+#print axioms UDCert.forces_eq_of_slack
+#print axioms UDCert.separated_iff_adj_of_fusable
+
+-- The controls: each derives `False` from a weakened statement, so a hypothesis the plan calls
+-- load-bearing is certified to be load-bearing rather than merely used.
+#print axioms not_forces_of_fanGap_needs_ne
+#print axioms fanGap_needs_ne_own_colour
+#print axioms not_separated_of_sharedGap_needs_nonadjacent
+
+#print axioms finitePlane11_fanGap
+#print axioms finitePlane11_not_fanGap_zero
+#print axioms finitePlane11_slack
+#print axioms finitePlane11_doubleGap_proper
+#print axioms finitePlane11DoubleGapColoring
+#print axioms finitePlane11_sharedGap
+#print axioms finitePlane11_sharedGap_corrupt_refused
+#print axioms finitePlane11_pairwiseFusable
+#print axioms forces_eq_of_hom_finitePlane11
+#print axioms forces_iff_of_hom_finitePlane11
+#print axioms separated_iff_adj_of_hom_finitePlane11
+#print axioms zmodPow11_forces_eq
+#print axioms padicInt11_forces_eq
+#print axioms padicInt11_separated_iff_adj
+#print axioms adjoin11PadicRes
+#print axioms adjoin11_padicInt11_forces_eq
+#print axioms UDCert.forces_eq_11
+#print axioms UDCert.separated_iff_adj_11
+#print axioms heule510_forces_eq
+#print axioms heule510_forces_iff
+#print axioms heule510_separated_iff_adj
+#print axioms three_le_arityFloor_heule510
+#print axioms heule510_residue_zero_eq_475
+
+#print axioms finitePlane19QuotColouring_proper
+#print axioms finitePlane19QuotColoring
+#print axioms finitePlane19_fanGap
+#print axioms finitePlane19_not_fanGap_zero
+#print axioms finitePlane19_slack
+#print axioms forces_eq_of_hom_finitePlane19
+#print axioms zmodPow19_forces_eq
+#print axioms padicInt19_forces_eq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

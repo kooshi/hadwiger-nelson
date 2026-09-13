@@ -740,3 +740,169 @@ zero-annotation path is the instance wrapper.
 `three_le_arityFloor_heule510` close from public names alone with no `unfold`. The next-prime recipe is stated above in
 five names and mentions no prime. Every "Try this" a reader would paste — the instance wrappers — elaborates in the
 build. Unrequested bytes refused: no `Bool` twin of `FanGap` (decidability suffices), no notation, no typeclass.
+
+---
+
+## §R1. The kernel, read aloud against the claims (phases K1 and K2, 2026-09-13)
+
+*Written by the implementing engineer. Phase K3's results and the tools-side records live in
+`plans/FS38-tower-records.md`, not here. Every statement below is `sorry`-free and on the standard three axioms.*
+
+### R1.1 The general theorems, read aloud (`Proofs/HadwigerNelson/FanGap.lean`, 0 `sorry`)
+
+**§S2 D0.1, the repaint.** *Claimed:* "for `f : G →g P`, a colouring `C` of `P`, an independent `U ⊆ V(G)` and a
+colour `γ` absent from `N_P(f u)` for every `u ∈ U`, the map `γ` on `U` and `C ∘ f` off `U` is a proper colouring of
+`G`; graph-level, no finiteness, no surjectivity, and `γ ≠ C (f u)` is not needed." *The statement says:*
+`pullbackRepaint (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k) (hind : G.IsIndepSet U)
+(hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k)` — `Set.piecewise`, four cases on membership, no
+`Fintype`, no `Nontrivial`, no hypothesis relating `γ` to `C (f u)`. *Not claimed:* nothing about `U` beyond
+independence, and nothing about `f` beyond being a homomorphism.
+
+**§S2 D0.2, the fan-gap theorem.** *Claimed:* "`f : G →g P`, `FanGap C (f u) γ`, `u ≠ u'` ⟹ `¬ Forces G k u u'`;
+no case split on `f u = f u'`, no forces-freeness hypothesis on `P`." *The statement says:* exactly that —
+`not_forces_of_fanGap (f : G →g P) (h : FanGap C (f u) γ) (hne : u ≠ u') : ¬ Forces G k u u'`. The two branches are
+`C (f u) ≠ C (f u')` (the pullback separates) and `=` (the singleton repaint separates). *Not claimed:* nothing when
+`u = u'` — and that is not slack, it is false, since a vertex is forced equal to itself (control C1 below).
+
+**§S2 D0.2 (a), slackness is forces-freeness.** `Slack.forces_iff (h : Slack G k) : Forces G k u u' ↔ u = u'`, with
+`Slack.forces_iff_of_hom (h : Slack P k) (f : G →g P)` as the consumer form. The brief's "forces-free `P`" premise is
+gone, and its absence is a theorem rather than an omission: `P` itself is slack, so `P` is forces-free.
+**No `Colorable` premise appears, and none is missing:** `Slack G k` exhibits a `k`-colouring at every vertex, so it
+*implies* `G.Colorable k` on a nonempty vertex type; the vacuous corner (no colourings, every pair forced) cannot
+satisfy the hypothesis.
+
+**§S2 D0.3, the arity-`k` filter.** `not_fan_of_fanGap (h : FanGap C (f p) γ) (hQ : ∀ q ∈ Q, q ≠ p ∧ C (f q) ≠ γ) :
+¬ Fan G k p Q`. *Read aloud:* a fan dies when some gapped colouring puts every partner's image off the gap colour.
+*Not claimed, and the scope is the point:* a fan one of whose partners lands on `γ` in every gapped colouring of `P`
+**survives**, so G15's wide-class pigeonholes are untouched. The hypothesis is on the list `Q`, per colouring.
+
+**§S2 D0.4, the double repaint.** *Claimed:* "one colouring with the same `γ` absent from both closed neighbourhoods
+of `f u` and `f u'`, and `¬ G.Adj u u'`, gives `¬ Separated G k u u'`." *The statement says:*
+`not_separated_of_sharedGap (h : SharedGap C (f u) (f u') γ) (hadj : ¬ G.Adj u u') : ¬ Separated G k u u'`, the repaint
+over `{u, u'}` whose independence is exactly `hadj`. The composite iff ships as
+`PairwiseFusable.separated_iff_adj (h : PairwiseFusable G k) : Separated G k u u' ↔ G.Adj u u'`, with the `_of_hom`
+form for consumers. **The shipped shape is §M3's `Fusable`, not §S2's `DoubleSlack`,** and that settles the one point
+Poros and the planner disputed at subplanning: `DoubleSlack` needed `P.Colorable k` (edgeless `P` at `k = 0` makes
+`DoubleSlack` vacuous, `Separated` true for want of colourings and `Adj` false), while `Fusable P k v w` — *some*
+colouring coincides at the pair or shares a gap at it — **carries its own colouring per pair**, so the premise is
+implied rather than assumed. Neither statement was weakened to close.
+
+**Transports, each read as "no arithmetic, no prime".** `FanGap.comap` (a gap at the image is a gap upstairs);
+`Slack.of_hom`, `Fusable.of_hom`, `PairwiseFusable.of_hom` (heredity under any homomorphism, **no surjectivity**);
+`FanGap.translate` and `slack_addCayley_of_fanGap` (on a Cayley graph of any abelian group, ONE gapped vertex is
+slackness everywhere); `unitQuadrance_exists_hom_to_base` and `unitQuadrance_fusable_of_sharedGap_base` (over EVERY
+commutative ring, one shared-gap table at the base edge `((0,0), (1,0))` makes every edge fusable, by translation then
+rotation by the conjugate of `w − v`); `Slack.unitQuadrance_of_ringHom` and `PairwiseFusable.unitQuadrance_of_ringHom`
+(the finite-plane bound as functoriality, so the tower and the completions are **instances, not induction steps**);
+`UDCert.forces_eq_of_slack` and `UDCert.separated_iff_adj_of_fusable` (the certificate forms, M58's hypotheses
+exactly, every pair, with no "images distinct"). `three_le_arityFloor_of_forces_eq_of_separated_adj` is the general
+form of M60's `three_le_arityFloor_of_aperiodic_coincides` — G30 §6, a theorem where an instance had been recorded.
+`Fan.image` and `exists_fanGap_iff_not_coverAtLeast` are the record's vocabulary, the latter tying a gap to the
+failure of `CoverAtLeast P k v [] (k − 1)` in both directions.
+
+### R1.2 The instances at 11, read aloud (`Instances/FanGap11.lean`, 0 `sorry`)
+
+*Claimed (§S2 D0.5):* "with `Slack` and pairwise fusability of `UD(𝔽₁₁, 2)` at five colours, for every graph `G` with a
+homomorphism into the plane: `Forces G 5 u u' ↔ u = u'` and `Separated G 5 u u' ↔ G.Adj u u'` — the whole arity-2
+compulsion structure of the sealing plane pulls back." *The statements say* exactly that
+(`forces_iff_of_hom_finitePlane11`, `separated_iff_adj_of_hom_finitePlane11`), resting on two `decide`s over two
+121-entry tables: `finitePlane11_fanGap` (colour `2` absent from `N[(2, 4)]` in the certified table) and
+`finitePlane11_sharedGap` (colour `4` absent from `N[(0,0)] ∪ N[(1,0)]` in the SAT-found table, whose properness is
+decided over all `121²` pairs). The instances: `zmodPow11_forces_eq` (every level `ZMod (11 ^ m)`, `m ≠ 0`),
+`padicInt11_forces_eq` and `padicInt11_separated_iff_adj` (`ℤ_[11]`, through Mathlib's `PadicInt.toZMod`),
+`adjoin11_padicInt11_forces_eq` (`Adjoin 11 ℤ_[11]`), `UDCert.forces_eq_11` and `UDCert.separated_iff_adj_11` (every
+`Valid` `√7`-free certificate with `11 ∤ D`), and Heule-510's three theorems plus `three_le_arityFloor_heule510`.
+`heule510_residue_zero_eq_475` puts vertices `0` and `475` in the same residue class, so the pair M60's residue law
+was silent about is refuted here, and `(19, 59)` — the `5/3` pair where M60 and this agree — is the control.
+
+**What is NOT claimed, restated so it cannot be read past.** (i) The **field-level sentence** — that no finite
+unit-distance graph over a field with a usable prime of residue degree one above 11 carries a five-colour pair
+compulsion — needs M58/M60's hand step (translate a vertex to the origin; then every coordinate is `𝔭`-integral) and
+is **not formalized**; it is row 57's open gap. (ii) Nothing about a field whose planes at usable primes refuse five
+colours — de Grey's at 131, the `ρ₆₃` arena's `K(√7)` at 83: by definition of 6-open no 5-colourable residue target
+exists, so these theorems have no hypothesis to take there, and the measured nulls on those objects stay measured.
+(iii) **Arity 2 only.** (iv) Nothing about `𝔭` above 2, where the level-one object is `K₄` and has no gap at all.
+
+### R1.3 The instances at 19 (`Instances/FanGap19.lean`, 0 `sorry`) — and a FALSE statement in the skeleton
+
+`finitePlane19QuotColouring_proper` is **derived, not decided**, as §M2 designed it (an edge's difference lies on the
+circle, so its projection along `(1,1)` is nonzero and lands in `circ19D`, where `circ19Table` never repeats) — a
+`361²`-pair `decide` avoided. Then `finitePlane19_fanGap`, `finitePlane19_slack`, `forces_eq_of_hom_finitePlane19`,
+`zmodPow19_forces_eq`, `padicInt19_forces_eq`. No virtual-edge half at 19 (§S8 decision 10, unchanged).
+
+**The finding.** The skeleton's gap witness at 19 was **false**, and `decide +kernel` refuted it:
+`projAlong (1,1) w = 1·w.2 − 1·w.1 = y − x`, **not** `x + y`, which both the module docstring ("at `x + y = 4`") and
+the skeleton's vertex `(4, 0)` assumed. `(4, 0)` lies in the class `y − x = −4 = 15`, where the colour is `1` and the
+ten neighbour classes carry `{0, 2, 3, 4}` — **all five colours on the closed neighbourhood, no gap at all.**
+Enumerating all nineteen classes, **exactly two are gapped**: class `4` (own colour `4`, gap `1`) and class `10` (own
+colour `3`, gap `1`). So the witness is not generic and the coordinate is load-bearing. The vertex is now `(0, 4)`
+(class `4`) for the gap and for its red alike; **nothing was weakened** — `finitePlane19_slack` is the same statement,
+because the Cayley transport is translation-invariant — and the module doc now states the projection, names both
+gapped classes, and records that `(4, 0)` has no gap. The advisor had independently reported the same misreading
+("at (4,0) its colour is 4"), which is the reading for the *class* 4 and not for that vertex; two readers made one
+error, and only the kernel caught it.
+
+### R1.4 The negative controls, with the kernel's exact complaint
+
+*Sharpened beyond what §M2 asked: instead of watching a proof break when a hypothesis is deleted, each weakened
+**statement** is refuted by a concrete model, so what is recorded is falsity and not unprovability. The three are
+**library content** at the end of `FanGap.lean` (a commit message is not a record — CLAUDE.md, row 65), so the build
+re-runs them; each concludes `False`, which is why `vacuity.sh`'s refutations-skipped count moves by three.*
+
+| # | the weakening | what happens |
+|---|---|---|
+| C1 | `not_forces_of_fanGap` without `u ≠ u'` | **statement false**: `not_forces_of_fanGap_needs_ne` derives `False` from it at one vertex, no edges, two colours (a vertex is forced equal to itself, and a gap does not change that). As a proof-break: `Unknown identifier hne.symm`. |
+| C2 | `FanGap` without its first conjunct `γ ≠ C v` | **statement false**: `fanGap_needs_ne_own_colour` derives `False` at two vertices, no edges, **one** colour — where the gap colour is forced to be the vertex's own, so the repaint changes nothing. As a def-change: the `Decidable` instance fails the kernel's type check and four `⟨…⟩`/`rcases` sites stop being inductive. |
+| C3 | `not_separated_of_sharedGap` without `¬ G.Adj u u'` | **statement false**: `not_separated_of_sharedGap_needs_nonadjacent` derives `False` at `K₂` with three colours (an edge shares a gap and is separated by every colouring). As a proof-break: `Unknown identifier hadj` at the independence step. |
+| — | the faithful partner | `example : ¬ Forces (⊥ : SimpleGraph (Fin 2)) 2 0 1` through `not_forces_of_fanGap` **passes**, so the three refusals are about the deleted hypotheses and not about the scaffolding. |
+| C4 | `finitePlane11DoubleGapTable` entry `(0, 1)`: `2 → 0` | the **properness** `decide` refuses: *"Tactic `decide` proved that the proposition `∀ {u v}, (finitePlane 11).Adj u v → finitePlane11DoubleGapColouring u ≠ finitePlane11DoubleGapColouring v` is false"* — `(0,0) ~ (0,1)` becomes monochromatic. |
+| C5 | `finitePlane11DoubleGapTable` entry `(0, 0)`: `0 → 4` | properness stays **green** (the gap colour was absent from `N(0,0)`, so the corrupted table is still proper — the advisor checked all 726 edges), the `#guard` fires, and **both** `FanGap` `decide`s refuse: at `(0,0)` by `γ ≠ C v`, at `(1,0)` because `(0,0)` is its neighbour. |
+
+**A correction to the file, made on the advisor's reading.** `finitePlane11_sharedGap_corrupt_refused` closes from
+`FanGap`'s first conjunct alone (`hSG.1.1 h00.symm`): it never runs a table `decide`, and the corrupted table is still
+a proper colouring. Its docstring called it "the M04 corrupted-table control" and now calls it what it is — a red on
+the **definition** — and points at C4/C5, which are the reds on the `decide`s.
+
+**An instrument lesson from the advisor's own retraction, worth more than the correction.** The advisor's
+independent check of the 19 colouring reported the same wrong vertex, and its properness control *could not*
+catch it: `circ19D` is symmetric under negation, so the colouring built from `x + y` is ALSO proper on all
+3,610 edges and has the SAME two gapped classes — only the vertex labels differ. **A control that passes for
+both candidate readings discriminates neither** (G21's shape, on a control rather than on a search): the
+properness check was pointed at a property both functionals share, and the discriminating question — which
+functional does the *definition* compute — was never asked of the definition. Both readers had encoded the
+docstring's summary instead of `projAlong`'s body. What caught it was `decide`, on a statement neither reader
+doubted. G46's habit ("read the construction's own data layout, not the plan's vocabulary for it") applies to
+a *docstring* exactly as it does to a plan.
+
+### R1.5 The gate, with every count that moved
+
+| gate | reading |
+|---|---|
+| `./scripts/build.sh` | **OK — 170 of 170 batches**, 6 modules rebuilt, 3m36s. The only warnings are the `declaration uses 'sorry'` lines of `TwoAdicTower.lean` (24), `Instances/TwoAdicFour.lean` (3) and `Instances/TwoAdicFive.lean` (10) — phase K3's, untouched here. |
+| `grep -n sorry` on the three modules | **zero**, all three. |
+| `./scripts/axioms.sh` | **OK — 914 clean, 10 axiom-free, 5 declared purchases**, the same five native purchases as before (all M03's Moser-spindle certificate routes), "purchase ledgers agree", and *no record appeared, disappeared or changed its axioms* other than the 68 FS-38 records added to the audit. Every one of the 68 is `[propext, Classical.choice, Quot.sound]` except `unitQuadrance_exists_hom_to_base`, which is `[propext, Quot.sound]`. **Count moved 846 → 914** because the audit now names FS-38's surface; the digest prints `RECORDED COUNT IS STALE — update CLAUDE.md § Trust ledger: 846 clean → 914`, which is phase C's edit, deliberately not made here. |
+| `./scripts/vacuity.sh` | **FAIL, and not on anything in this phase.** `declarations 6261 → 6405`, `refutations-skipped 242 → 262`, `sites 220 → 259`, `witnessed 12 → 14`, `generic 203 → 238`, `unknown 2 → 4`, `vacuous=0 stale=0 declared=3`. The two new UNKNOWNs are **`twoAdicFive_forces_delta` and `twoAdicFive_forces_of_ker`** — phase K3's `sorry` leaves in `Instances/TwoAdicFive.lean`, a file created by the skeleton commits and never edited here, so the gate was already red at the tip `31702dc` before this phase began. Their inhabitant is a 4-colouring of `twoAdicPlane 5`, which is K3's to ship; adding them to `scripts/vacuity-baseline.txt` would be K3's judgement to record and is deliberately NOT made here. **Every site this phase introduced is green:** two WITNESSED (`finitePlane11DoubleGapColoring` by `finitePlane11_colorable_five`, `finitePlane19QuotColoring` by itself) and 35 GENERIC (the parametric colouring binders of `FanGap.lean` and the hom wrappers — the caller's obligation). The three refutation controls are counted in `refutations-skipped`, by design. |
+| `./scripts/vacuity.sh --self-test` | **OK — every one of the seven planted controls fired, and the two silent ones stayed silent**, including the load-bearing `UNKNOWN planted_unknown_prop`. |
+| `lake lint` | **OK — "Linting passed for Proofs."**, exit 0, run under the same `systemd-run` memory cap. |
+
+### R1.7 What this phase did not do
+
+Phase K3 (`TwoAdicTower.lean`, `Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean` — 37 `sorry` leaves) and
+phase T (`tools/fs38_tower.py` and the `data/fs38/` records) are other agents'; nothing here touches them, and the
+`doublegap-p11-k5.json` record that produced `finitePlane11DoubleGapTable` is still to be committed by phase T — the
+table in the module is untrusted data whose only check is the two `decide`s, which is the arrangement §S6 asked for.
+The field-level sentence of D0.5 stays a hand step (row 57). `CLAUDE.md`, `plans/FRONTIER-STUBS.md`,
+`CLOSED-QUESTIONS.md` and `BIBLIOGRAPHY.md` are phase C's, unedited here — including the two stale counts this phase
+moved (the axiom ledger's 846 → 914 and the gate's declaration/site counts above), which phase C must carry over
+rather than read as a failure.
+
+### R1.6 Decisions implementation forced, and one it did not
+
+| # | decision | alternative weighed | why | confidence |
+|---|---|---|---|---|
+| 1 | The gap witness at 19 is `(0, 4)`, not the skeleton's `(4, 0)` | leave the statement and report it unprovable | the skeleton's statement is **false**, not hard: `(4, 0)`'s closed neighbourhood carries all five colours. `(0, 4)` is the same class the docstring's reading intended, so the theorem's content is unchanged and `finitePlane19_slack` is untouched | high — `decide` settles both directions, and the nineteen-class enumeration says exactly two classes are gapped |
+| 2 | `SharedGap` gets **no** `Decidable` instance; `finitePlane11_sharedGap` is `⟨by decide +kernel, by decide +kernel⟩` | mint `instance : Decidable (SharedGap …)` so one `decide` reads the whole conjunction | an instance is a permanent utterance into every future search (DEBRUIJN `global_speech_acts`) and one table does not need it; two `decide`s through `FanGap`'s own instance cost 22 lookups and read the same | high — if a later prime wants `decide` on `SharedGap` directly, the instance is two lines then |
+| 3 | The three negative controls are **library theorems** that refute the weakened statements, not scratch files that watch a proof break | keep them in `build/fs38-k/controls/` and cite them from the commit message | a gitignored file is not a record (row 65's lesson, verbatim), and a refutation is stronger evidence than an elaboration failure: it says the hypothesis is *needed*, not merely *used*. The cost is three declarations and `refutations-skipped +3` | high |
+| 4 | `scripts/vacuity-baseline.txt` is **not** edited, so the vacuity gate stays red on K3's two sites | add the two K3 sites to the baseline and report the gate green | the baseline is the ledger of unresolved emptiness, and it "only ever SHRINKS"; a site whose inhabitant is another phase's deliverable is that phase's entry to make. Reporting a red I did not cause is honest; silencing it is the failure mode this project's gates exist to prevent | high |
+| 5 | Not taken: no statement in `FanGap.lean` was restated, strengthened or weakened | §M3's shapes were already the strongest the proofs support | the obligation pass had priced every leaf; the only shape changes are seventeen `:= by sorry` bodies becoming `:=` terms. The one point that could have been weakened — dropping `P.Colorable k` — was already settled by §M3's move from `DoubleSlack` to `Fusable`, which makes the premise implied rather than assumed | high |
+
