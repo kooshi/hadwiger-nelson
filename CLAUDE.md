@@ -1145,6 +1145,18 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
+**A cost measured on a FAILING run understates a succeeding one — and the tell is that the cheap steps are
+the failures** (2026-09-12). A reduction walk was costed at **24% expensive probes**; measured on a walk that
+was actually progressing it is **~75%**. The 24% came from a walk that had already fallen into the cheap
+satisfiable regime, where each step is answered in a millisecond because the object has stopped refusing.
+
+> **A successful walk is the expensive walk.**
+
+It inverts the natural intuition — that a run going well is a run going fast — and it is exactly how a pilot's
+cost model understates the real thing by 3×. **Before costing an iterative process from a sample, check which
+regime the sample's CHEAP steps were in**, because the cheap ones are the population that will not be there
+when it works.
+
 **A caveat you write and then step over is WORSE than one you never wrote** (2026-09-12). An advisor wrote
 *"this exhausts the additive twist family, not the twist family"* and then, in the same report, *"the 72
 off-diagonal edges are measurably load-bearing"* — the second sentence silently dropping the qualifier the
