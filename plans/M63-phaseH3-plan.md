@@ -882,3 +882,89 @@ Out for checking rather than asserted. The reasoning to verify or break: the are
 period**; the shape-free module grows like `r⁸`, so `n = 16` shape-free at its own bound is of order **40
 million points**; and its circle sits at radius 4, so no smaller radius reaches it at all. If that holds,
 **the phase's target choice survives the engineer's own finding.**
+
+---
+
+## §13 — THE VERDICT: the object is four-colourable, at every radius, by derivation (2026-09-12)
+
+Record: `plans/M63-phaseH3-solver.md`; certificate and standalone re-checker at `build/m63-phaseH3-solver/`.
+**The phase's object is dead.** There was nothing to refute, so no sweep was priced and no core-hours were
+spent — **the whole solver question cost under two minutes, because the answer was a derivation and not a
+search.**
+
+### How
+
+A four-colouring of the arena is exactly a pair `(f, g)` of proper four-colourings of the **base** with
+`f(0) = g(0)`, `f(v) ≠ g(v)` on the 60 diagonal cross edges and `f(u) ≠ g(v)` on the 72 off-diagonal ones —
+**132 constraints on 121 interface vertices** (the 120 centre cross edges verified redundant). Searching `f`
+and `g` **independently** over the additive family returns **576 passing pairs of 124,416, in 1.7 s.**
+
+**And it is radius-independent by derivation:** additive colourings are homomorphisms on the whole lattice,
+so they survive arbitrary growth, and the cross edges are pinned at 252 by the endpoint bound. Exercised at
+**32,617 / 83,905 / 301,537** vertices — **0 monochromatic edges each.**
+
+### Why it was missed, and the error in the chain is mine
+
+The advisor searched **twists** (`g = π∘f`) and found none works. **Correct — and zero of the 576 is a
+twist.** `g` need not be a permutation of `f`. **Third instance in this milestone of a generator whose image
+excluded the target with its positive control passing, and the most expensive**: it kept the phase alive an
+extra day. **The advisor stated its scope every time** — *"this exhausts the additive twist family, not the
+twist family"* — **and I amplified it into "the 72 off-diagonal edges are measurably load-bearing", twice, in
+reports. Load-bearing against twists is not load-bearing.**
+
+### The four commissioned asks
+
+| ask | answer |
+|---|---|
+| produced or inherited | **Vacuous** — a four-colourable graph has no five-chromatic subgraph. The field derivation is recorded anyway: every held witness but phase H2's own is excluded by needing `√5`, `√23` or `√247`, and the record's own file measures `√5 ×153, √15 ×78, √55 ×91, √165 ×73` while its 374-vertex base is pure `K` |
+| general twist verdict | **Superseded** — a non-twist four-colouring exists, so the twist question decides nothing. No solver warm-started; none needed |
+| interface pattern count | **≥ 3.83 × 10²¹** at the bound, **≥ 6.55 × 10⁴** at radius 1.7 — a certified lower bound from one colouring, no solver |
+| priced cost | **Zero.** The reduction was never affordable at the bound — nineteen orders past phase H2's 552 — and there is now nothing to reduce |
+
+**The monotonicity lever is real and enormous, and this is its first measurement: `10²¹ → 10⁴` for a 2.6×
+base.** Right lever, wrong object — the additive colourings survive every radius.
+
+### The phase's product: a base-free, radius-free, solver-free family screen
+
+The registered prediction *"dropping the shape multiplies the colourings, and that is what glues it"* was
+**NOT MET** — `n = 4` shape-free has the **same** 144 and **0 of 124,416** clear even the diagonal. The
+actual mechanism is a theorem: **the colour group is 2-torsion, so if the circle `|p|² = n` lies in `2L`,
+every additive colouring sends it to the centre's colour and the route dies.** Hence:
+
+> **The additive-pair route is open exactly when `4 ∤ n`, and killed exactly when `4 | n`** — clean on all 19
+> members `n ≤ 20`, with circle counts ranging 60–336 and the verdict **never tracking them**.
+
+This is G52's *"automatic whenever `t` is even"* reached from the colouring side. **And it decides what comes
+next: every 6-open member FS-30 lists — 16, 20, 44, 60, 64, 76, 108, 112 — is `≡ 0 mod 4` and immune.**
+
+> **Phase H3 picked the cheapest member of precisely the class this route can kill.**
+
+The cheapest untested 6-open member in the **open** class is **`n = 10`**, in `K(√39) = K(√13)`, at roughly
+**6.6 million points** shape-free — beyond the present Python tooling, not absurd compiled. `n = 6` and
+`n = 14` are 5-sealed.
+
+**Scope, unchanged:** `4 ∤ n` means only that this route is **not blocked**. Each such member still needs its
+own off-diagonal check. **Un-eliminated is not alive.**
+
+### Two disagreements out for resolution, neither affecting the verdict
+
+1. **144 against 72** additive four-colourings of the base — the solver engineer against the advisor, exactly
+   double in every bucket, which smells of a quotient taken once too often or once too few. The solver ruled
+   out the fatal correlation (a base missing edges would inflate the homomorphism count *and* manufacture a
+   colouring) with a **field-blind brute force over 1.06 billion arena pairs** returning exactly the
+   constructed edge set. Sent to the advisor to resolve, not defend.
+2. **"Interface pattern count 1" for phase H2's object and for the record**, against phase H2's own recorded
+   **552**. Those cannot be the same quantity, and the 552 is explicitly a **superset**. Out for
+   clarification — **and if they reconcile, the number is worth more than this phase's object**, since it
+   separates the two refuting objects from the dead one by twenty-one orders of magnitude and is computable
+   **from the base alone, no arena and no solver.** Two positives against one negative is a hypothesis, not
+   a criterion, and it will be recorded as one.
+
+### The artifact
+
+**47 KB certificate** plus a standalone `recheck.py` that reads only that file, rebuilds the base from
+scratch at any radius, and reports — **proven to discriminate as a pair**: one flipped basis image gives
+7,980 monochromatic edges and NOT PROPER, the restore gives 0 and proper. **A reviewer checks three things
+and runs no solver**: that 60 vectors have `|z|² = 1`, that 252 pairs are at distance 1 under `ρ₂` and none
+outside, and that a 132-row table scan has no clash. **Nothing is kernel-checked and no proof log exists,
+because no solver produced one** — stated in those words.

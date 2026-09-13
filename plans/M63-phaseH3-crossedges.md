@@ -29,6 +29,16 @@ The two quantities the product owner asked to be kept apart, side by side and la
 and twice its raw off-diagonal count, at 37.5% of the radius and 64% of the base size.** Its
 *share* is lower (24/84 = 0.286 against 24/54 = 0.444) because its diagonal is twice as large.
 
+### The phase's premise, confirmed at the record's OWN rotation
+
+**At `n = 4` — `cos θ = 7/8`, the rotation every published type-M construction uses — dropping the
+coordinate shape turns 36 raw off-diagonal cross edges into 312, and 0 monochromatic ones into 144.**
+Same rotation, same endpoint bound, same denominator; the only change is that the base is the ℤ-span
+of its 60 unit vectors (195,961 points, rank 8) instead of Parts's shaped lattice (3,433 points,
+rank 4). **That is the cleanest available demonstration that the shape, and not the rotation, was the
+obstruction** — the claim this phase was chartered to test, now measured at the one rotation where
+a like-for-like comparison exists. Full result in §14.4.
+
 **Un-eliminated is not alive.** 24 monochromatic off-diagonal constraints is not a refusal of four
 colours, and nothing here says the arena is 5-chromatic. What died is the reading that dropping the
 shape at `n = 2` buys only a circle: it buys an off-diagonal structure where Parts's lattice has none.
@@ -45,8 +55,8 @@ edge is `|u − ρv| = 1` with `u, v ∈ B`. Reading `K²` as `K(i)` and writing
 |u − ρv|² = |u|² + |v|² − 2(c·p + s·q).
 ```
 
-For the family `cos θ = (2n−1)/(2n)`, `sin θ = √(4n−1)/(2n)`, the sine leaves `K` (gate D of phase
-H2 — if it did not, Theorem B four-colours the whole arena). So `p, q, c ∈ K` while `s ∈ √D·K`,
+For the family `cos θ = (2n−1)/(2n)`, `sin θ = √(4n−1)/(2n)`, the sine leaves `K` (**gate B** of
+phase H2 §5 — if it did not, Theorem B four-colours the whole arena). So `p, q, c ∈ K` while `s ∈ √D·K`,
 `D = 4n−1`, and the equation **splits over the basis `{1, √D}`**:
 
 - **(i) `q = 0`** — `u` and `v` are collinear with the centre;
@@ -397,9 +407,16 @@ makes that a finite explicit box), classifying each by §7:
 | **16** | 14 | 6 | 0 | 6 | `t = 2`, `V = 18`, `m = 128` |
 | 24 | 10 | 4 | 0 | 4 | `t = 4/3`, `V = 36`, `m = 96` |
 
-**40 of the first 300 members** carry a rational monochromatic off-diagonal kind:
-`1, 3, 4, 6, 7, 12, 16, 24, 30, 39, 40, 48, 51, 52, 60, 70, 72, 84, 88, 96, 112, 115, 120, 126, 132,
-135, 144, 160, 168, 180, 192, 198, 216, 220, 231, 232, 240, 259, 264, 286`.
+**40 of the first 300 members** carry a rational monochromatic off-diagonal kind — **but this list
+predates the gate-B filter and four entries are struck** (§13): `1, 3, 7, 135` all have
+`√(4n−1) ∈ K`, so `ρ_n ∈ K(i)`, the arena lies in `K²`, and Theorem B four-colours it. **The 36
+valid entries are**
+
+`4, 6, 12, 16, 24, 30, 39, 40, 48, 51, 52, 60, 70, 72, 84, 88, 96, 112, 115, 120, 126, 132, 144,
+160, 168, 180, 192, 198, 216, 220, 231, 232, 240, 259, 264, 286`.
+
+Of the members where the screen found a **case-A** kind — `1, 3, 6, 7, 30, 39` — **gate B leaves only
+`6, 30, 39`**; the other three are struck.
 
 ### §9a — **The screen does not work as a screen, and `n = 2` is the proof**
 
@@ -549,7 +566,8 @@ separation.*
 
 **(H1) is not a convenience.** If it fails, `ρ_n ∈ K(i)`, the whole arena lies in `K²`, and Theorem B
 (`chromaticNumber_seamPlane`, kernel-checked) four-colours it; every statement below would then be
-about a structure that can carry nothing. It is phase H2's gate D.
+about a structure that can carry nothing. It is **gate B** of `plans/M63-phaseH2-the-family.md` §5
+(gate C is the 2-adic wall, gate D is 11's residue degree).
 
 ## §12.2 Lemma (the split)
 
@@ -719,13 +737,22 @@ v = (5/6,  1 − √11/6)     det(u,v) =  1 − √11/6    law A says: False
    all satisfy (H1), verified by the same predicate with both outcomes exhibited. The three gates,
    §0's answer, §12's theorem and its two-case proof stand unchanged.
 
-**Why I did not catch it earlier, stated because the mechanism matters more than the apology.** I
-wrote in §11b that `n = 3`'s radicand `11` lies in `K` and attributed the consequence to **gate C**
-(the 2-adic wall), concluding only that `n = 3` "can never reach five colours" — true, and it made
-the member look *safe to use as a test* precisely because I had explained away its defect. It is
-**gate D** (`sin θ ∉ K`) that fails, and gate D does not merely make a member useless as an object,
-**it makes my law inapplicable to it.** I had the fact, wrote it down, and filed it under the wrong
-consequence. **A hypothesis is not checked by being mentioned.**
+**Why I did not catch it earlier — and checking the gate letters made the account sharper, not
+softer.** `n = 3` fails **two** of phase H2's four gates. It fails **gate C** (the 2-adic wall:
+`4n−1 = 11`, square class `≡ 3 (mod 8)`), and it fails **gate B** (`sin θ ∉ K`). In §11b I wrote down
+the radicand and attributed the consequence to gate C — **which is correct**, and which is exactly
+the problem: it fully answered the question *"is anything wrong with `n = 3`?"* with *"yes, it can
+never reach five colours"*, and that answer made the member look **safe to use as a test**, since a
+member that is dead as an object costs nothing to compute on. Having a true and sufficient-sounding
+reason, I never asked whether a **second** gate also failed — and the second one was not about the
+member at all, it was about **my instrument**: gate B is the hypothesis my own law needs.
+
+So the mechanism is not mis-filing. It is this: **a true explanation that fully accounts for the
+observation will stop you looking for a second one, and the second one may be the one about your
+own apparatus.** The rule that generalises, which is the one I would keep:
+**a hypothesis is not checked by being mentioned** — and a member that fails one gate should be
+checked against *all* of them before it is used as a test, precisely because the first failure makes
+it feel already understood.
 
 
 # §14 — The follow-up, with the sample corrected to ONE
@@ -865,3 +892,66 @@ lattice does not show them.
 **Scope, unchanged.** None of this is a colouring claim. 144 monochromatic off-diagonal constraints
 at `n = 4` is not a refutation of four colours, and `n = 4`'s field `K(√15)` is 5-sealed (G43), so
 that member cannot reach six whatever its cross-edge structure. Un-eliminated is not alive.
+
+
+# §15 — Is `n = 2` still the right target? **Yes, and by a factor of 400.**
+
+*Checked rather than trusted, as asked. Every step of the coordinator's reasoning verified, and the
+one number it left open — the runner-up's cost — computed.*
+
+**Step 1: the arena radius increases with `n`.** `R² = 4n²/(4n−1)`, and
+`d(R²)/dn = 8n(2n−1)/(4n−1)² > 0` for `n ≥ 1`; verified strictly increasing over `n = 1..200`.
+So a member's cost is monotone in `n` and there is no cheap large member hiding anywhere.
+
+**Step 2: `n = 2` is the cheapest member of the family that exists at all.** `n = 1` has a *smaller*
+radius (`R = 1.1547` against `1.5119`) — but `4n−1 = 3` and `√3 ∈ K`, so `n = 1` **fails gate B**
+and its arena lies in `K²`. Among gate-B-valid members, **`n = 2` is the minimum, period.**
+
+**Step 3: the cost law, calibrated on two measured points rather than assumed.** The shape-free base
+grows like `(R²)⁴` (four conjugate disks, rank-8 module). Anchoring at the measured `n = 2` count of
+16,309 predicts **198,013** at `n = 4` against the **195,961 measured** — **+1.0%**. That is a
+calibrated instrument, not an estimate.
+
+**Step 4: the 6-open members and what they cost.** Gates B (`sin θ ∉ K`), C (wall broken) and D (11
+inert) give, for `n ≤ 200`, the 6-open list `2, 10, 16, 20, 22, 24, 32, 38, 42, 44, 46, 54, 60, …`:
+
+| `n` | `R` | shape-free base | relative to `n = 2` |
+|---|---|---|---|
+| **2** | **1.512** | **16,309** (measured) | **1×** |
+| 10 | 3.203 | ~6,610,000 | **405×** |
+| 16 | 4.032 | ~41,700,000 | 2,557× |
+| 20 | 4.500 | ~101,000,000 | 6,164× |
+| 22 | 4.717 | ~147,000,000 | 8,984× |
+| 24 | 4.925 | ~207,000,000 | 12,675× |
+
+**Verdict: the claim holds, and `n = 16`'s ~41.7 million confirms the coordinator's "order of 40
+million" independently.** One correction to the framing, and it is a mild one: **`n = 2` is not the
+*only* affordable 6-open member, it is cheaper than the next one by 405×.** `n = 10` at ~6.6 million
+points is out of reach of this Python enumeration (the `n = 4` build took 9 minutes for 196k points;
+6.6 million would be days) but is **not** absurd for a compiled implementation. So the honest
+statement is:
+
+> **`n = 2` is the unique 6-open member affordable with the present tooling, and the only one within
+> two orders of magnitude of affordability. The phase's target choice survives.**
+
+**And `n = 4`'s 144 monochromatic off-diagonal edges do not make it a better target**, six times
+richer though it is: `4n−1 = 15`, so its field is `K(√15) = K(√5)` — Heule's field, **5-sealed**
+(G43, row 52). It fails gate D and can never reach six. Its value is exactly what §14.4 used it for:
+the like-for-like demonstration that the shape was the obstruction.
+
+# §16 — The struck reframing, in my words
+
+The follow-up's *"two members sharing a mechanism exactly, and a third arriving by a different one"*
+rested on `n = 2` and `n = 3` both being case A with two families of 12. **`n = 3` is void (§13), so
+at the moment that was written the case-A sample was ONE member.** I am striking that reading, and
+with it the "three members at 24" observation of §11a, whose third instance was the void one.
+
+**What replaces it, by a valid route:** `n = 4` shape-free carries case A with exactly two families
+of 12 — **24** — so the case-A sample is **two members again**, both gate-B-valid, both with `V` the
+full odd part, both matching the derivation of §14.2. And `n = 4` carries **case B as well**, which
+kills the dichotomy the follow-up was reaching for.
+
+**One thing that must not be inherited from the old reading:** `n = 16` showing case B only is a fact
+about **Parts's rank-4 lattice**, not about the member. **Nothing measured says `n = 16` lacks
+case-A cross edges** — its shape-free arena is ~41.7 million points and was never built. Any future
+sentence of the form *"`n = 16` is a case-B member"* is unsupported.
