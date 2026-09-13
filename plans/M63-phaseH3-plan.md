@@ -809,3 +809,76 @@ this object doubles the live quantity. **It does not — it equals it.** Caught 
 > it is another reader recomputing the number.** Four of the six are mine. The instrument that works is not
 > care and not the written rule — it is a second party with the standing to recompute and the instruction to
 > do it.
+
+---
+
+## §12 — A landing struck, and the phase's premise confirmed at the record's own rotation (2026-09-12)
+
+### The strike, and it was mine to carry
+
+**P-XE-1 is VOID — untested, neither met nor unmet.** It tested the two-case theorem out of sample at
+`n = 3`, where `4n − 1 = 11` and **`√11 ∈ K` by definition of the field** — so hypothesis `(H1)`,
+`√(4n−1) ∉ K`, fails at the very member chosen to test a theorem whose load-bearing hypothesis it is. The
+condition does not split there; law A is strictly stronger than the truth and enumerates a subset, and law B
+demands the `√D`-part vanish, which is meaningless when `√D ∈ K` — **which is exactly why the two "agreed
+300 of 300".** Demonstrated rather than inferred: from `u = (1,0)` alone, four non-collinear pairs at exact
+unit distance that law A calls False.
+
+**I had already carried that landing into this record and into a report as one of two out-of-sample
+successes. It is struck.** And the engineer struck it itself, on its own instrument, against its own
+interest.
+
+**The mechanism, now installed in `CLAUDE.md`:** it *had written the fact down* — that `n = 3`'s radicand
+lies in `K` — and **filed it under the wrong gate**, as *"so this member can never reach five colours"* (a
+fact about the **member**) when the operative consequence was *"so my law does not apply here"* (a fact about
+the **instrument**). **The same true sentence under the wrong heading becomes a note instead of a blocker.**
+
+Consequences, bounded: the §9 screen needs an `(H1)` filter it lacked — `(H1)` fails for
+`n ∈ {1, 3, 7, 19, 25, 37, 61, 69, 91, 127, 135, 169, 217, 223, 271}`, four inside its 40-member list.
+**`n = 2`, `n = 4` and `n = 16` are unaffected; the gates, §0 and §12 stand.** And §11's reframing rested on
+`n = 3`, so **the case-A sample was one, not two** — restored to two below, by a valid route.
+
+### The premise, confirmed at the rotation everyone has used
+
+> **At `n = 4` — the 509-vertex record's own member — dropping the shape turns 36 raw off-diagonal cross
+> edges into 312, and 0 monochromatic ones into 144.**
+
+Measured on 195,961 shape-free points: `492 = 120 + 60 + 312`, **492 of 492 confirmed, 0 invented**.
+**Zero to a hundred and forty-four, at the rotation the record itself uses, by dropping a coordinate
+restriction.** That is the cleanest possible demonstration that **the shape and not the rotation was the
+obstruction** — which is the claim phase H3 was chartered to test, now confirmed at a member chosen for
+being *unlike* this phase's own.
+
+And a replacement out-of-sample landing, better than the void one: **P-XE-3 computed `Sh(64) = 12` while the
+base was still enumerating**, predicting a count at a member picked for being unlike the training cases.
+
+### `24` half-derives, and is still not called a theorem
+
+**P-XE-4 NOT MET — the informative outcome.** `Sh(32) = 12` exactly, so the 12 is a property of the **kind**,
+not of the base. The mechanism: `Sh(m) = 12·∏local(v_𝔮(m))`; the primes above 2 are **inert** in `K(i)/K`
+(factor 1) and a prime over 3 **splits** (factor > 1), so **`Sh(m) = 12` exactly when `m` is a pure power of
+2** — measured 6/6 on `2⁴…2⁹`, and 7/7 returning 36 or 60 once a 3-part is present. Case A forces `V` odd,
+so `V | 9·odd(n)`, and `m = nD²/V` is a 2-power **iff `V` is the full odd part**; then `Sh(m) = 12`, two
+orderings, **24 — derived.** **What is NOT proved is that case A forces `V` maximal**: a case-A kind with
+`V = 3` would give 72. **Two for two observed, no proof, and it is not called a theorem.**
+
+### The dichotomy dissolves — it was incomparable bases
+
+**`n = 4` carries BOTH mechanisms**: 24 case-A and 120 case-B. So *"two even members, two different
+mechanisms"* was an artifact of comparing unlike things — `n = 2` and `n = 4` measured shape-free,
+`n = 16`'s case-B-only reading taken on Parts's **rank-4** lattice. **Nothing says `n = 16` lacks case-A
+edges; only that Parts's lattice does not show them.** The three-way 24 is now fully explained *as*
+coincidence with both sides derived: `n = 2` is `2 × 12` fully realised, `n = 16` is `4 × (12/2)`, halved by
+a rank-4 base.
+
+### The question this opens, and why the target probably survives
+
+`n = 2` shape-free carries **24** monochromatic off-diagonal edges where `n = 4` shape-free carries **144** —
+six times richer. But **`n = 4`'s field `K(√15) = K(√5)` is 5-sealed** and can never reach six, which is the
+programme's target. **So: is `n = 2` the unique member that is both 6-open and affordable shape-free?**
+
+Out for checking rather than asserted. The reasoning to verify or break: the arena radius `2n/√(4n−1)`
+**increases with `n`** (1.512, 1.809, 2.066, … 4.032), so **`n = 2` is the cheapest member of the family,
+period**; the shape-free module grows like `r⁸`, so `n = 16` shape-free at its own bound is of order **40
+million points**; and its circle sits at radius 4, so no smaller radius reaches it at all. If that holds,
+**the phase's target choice survives the engineer's own finding.**

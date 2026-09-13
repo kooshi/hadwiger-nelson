@@ -672,3 +672,196 @@ The second is the stronger: a law that names the rotation parameter *and* both r
 any construction is doing work no curve fit could do. Both landings are consistent with §12.6(1) —
 they predicted what a base **would** realise and were right, which is evidence for the law and *not*
 evidence that the realisation gap has closed.
+
+
+---
+
+# §13 — **CORRECTION: P-XE-1 is VOID. It was tested at `n = 3`, where (H1) fails.**
+
+*Found while answering the follow-up, by reading my own §12.1 against my own §11.*
+
+**`n = 3` has `4n − 1 = 11`, and `√11 ∈ K` by definition of `K = ℚ(√3,√11)`.** So `sin θ = √11/6 ∈ K`,
+`ρ₃ ∈ K(i)`, and **(H1) — the hypothesis I had just finished arguing is load-bearing — fails at the
+very member I chose to test the theorem on.**
+
+**What that does to the computation.** With `ρ₃ ∈ K(i)`, `|u − ρ₃v|²` is a single equation over `K`
+and **does not split**. My law A imposes two conditions (collinear *and* the `K`-part equation), so
+it is **strictly stronger than the truth** and enumerates a *subset* of the cross edges. Law B failed
+identically, because it evaluates `|u − ρv|²` in a formal `K(√D)` and demands the `√D`-part vanish —
+which is meaningless when `√D ∈ K`. That is why the two "agreed 300/300": they were testing the same
+wrong condition.
+
+**Demonstrated, not inferred.** From the single point `u = (1,0)` at `n = 3`, four **non-collinear**
+pairs with `|u − ρ₃v|² = 1` exactly:
+
+```
+v = (−1/6, −√11/6)        det(u,v) = −√11/6        law A says: False
+v = (0, −√11/3)           det(u,v) = −√11/3        law A says: False
+v = (5/6, −1 − √11/6)     det(u,v) = −1 − √11/6    law A says: False
+v = (5/6,  1 − √11/6)     det(u,v) =  1 − √11/6    law A says: False
+```
+
+**Consequences, stated in full:**
+
+1. **P-XE-1 is VOID — not met, not "not decided", but untested.** The `n = 3` numbers
+   (`300 = 120 + 84 + 96`) are a *lower bound* on that arena's cross edges, computed under a
+   hypothesis that fails. §11 stands only as a record of what was run.
+2. **The follow-up's reframing loses its premise.** It rested on *"two members sharing a mechanism
+   exactly"* — `n = 2` and `n = 3` both case A with two families of 12. **`n = 3` is void, so the
+   case-A sample is ONE member.** `24` is not a two-member agreement; it is one measurement and one
+   invalid one.
+3. **§9's screen needs an (H1) filter it did not have.** (H1) fails exactly when `squarefree(4n−1) ∈
+   {1, 3, 11, 33}`; over `n ≤ 300` that is
+   **`n = 1, 3, 7, 19, 25, 37, 61, 69, 91, 127, 135, 169, 217, 223, 271`**. Four of them —
+   **1, 3, 7, 135** — are in the 40-member list of §9, which therefore has **36** valid entries.
+   Of the case-A members the screen found (`1, 3, 6, 7, 30, 39`), only **`6, 30, 39`** survive.
+4. **Nothing else is affected.** `n = 2` (`√7 ∉ K`), `n = 4` (`√15 ∉ K`) and `n = 16` (`√63 = 3√7 ∉ K`)
+   all satisfy (H1), verified by the same predicate with both outcomes exhibited. The three gates,
+   §0's answer, §12's theorem and its two-case proof stand unchanged.
+
+**Why I did not catch it earlier, stated because the mechanism matters more than the apology.** I
+wrote in §11b that `n = 3`'s radicand `11` lies in `K` and attributed the consequence to **gate C**
+(the 2-adic wall), concluding only that `n = 3` "can never reach five colours" — true, and it made
+the member look *safe to use as a test* precisely because I had explained away its defect. It is
+**gate D** (`sin θ ∉ K`) that fails, and gate D does not merely make a member useless as an object,
+**it makes my law inapplicable to it.** I had the fact, wrote it down, and filed it under the wrong
+consequence. **A hypothesis is not checked by being mentioned.**
+
+
+# §14 — The follow-up, with the sample corrected to ONE
+
+## §14.1 Predictions, registered before the runs
+
+**The honest starting point: the case-A sample is one member (`n = 2`), not two.** `n = 3` is void
+(§13) and `n = 16` is case B. So question 1 — *is `24` a case-A constant?* — currently rests on a
+**sample of one**, and I will not call anything a constant from that. What follows is an attempt to
+decide whether the `12` is a property of the KIND or of the BASE, plus a second valid member.
+
+**The only two members cheap enough to build and valid under (H1) are `n = 2` (done) and `n = 4`**
+(base grows like `n⁴`; `n = 6` would be ~900,000 points). `n = 4`'s **shape-free** arena has never
+been built — only Parts's shaped lattice at `n = 4` has been measured — so it is genuinely out of
+sample.
+
+> **P-XE-4 (the mechanism of the 12).** The count `12` at `n = 2`'s case-A family is a property of
+> the **base** — the index-4096 unit-vector span — and not of the kind. Concretely: the kind has
+> `m = 32`, and I predict **`Sh(32) > 12` over the full `(1/12)O_K²` module**, so that the base is
+> realising only part of what the kind permits. *Met* if `Sh(32) > 12`; *not met* if `Sh(32) = 12`,
+> which would make `12` a property of the kind and make a case-A constant plausible. Both reachable:
+> `Sh` has returned 4, 12, 36, 60, 84, 108 and 240 at other arguments in this file.
+
+> **P-XE-2 (question 2, on `n = 4` shape-free).** The `n = 4` shape-free base carries **at least one
+> monochromatic off-diagonal family**. Grounds: §3a lists two rational monochromatic case-B kinds at
+> `n = 4` (`t = 2, 1/2`, `V = 6`, `m = 96`, radii `2/3` and `8/3`), and `Sh(96) = 36 > 0`, so the full
+> module realises them — the open part is whether the index-4096 span does. *Met* if ≥ 1; *not met* if
+> 0. **Both reachable, and the zero is not hypothetical: Parts's shaped lattice at `n = 4` carries
+> zero monochromatic off-diagonal edges**, measured in gate 1.
+
+> **P-XE-3 (question 1, on `n = 4` shape-free).** If the `n = 4` shape-free base carries any **case-A**
+> family, those families number exactly two (one unordered kind in its two orderings) and total
+> **24** edges. *Met* if case A is present and totals 24; *not met* if present and ≠ 24; **not
+> decided** if `n = 4` carries no case-A family at all — which the rational screen expects, since it
+> finds only case-B kinds there, so the uninformative outcome is the likely one and is named in
+> advance.
+
+**On question 2's framing.** The follow-up reasons that odd members are dead anyway, so the
+interesting population is the even ones. **That is now stronger than when it was written**: the odd
+members with case-A kinds that §9 found — `1, 3, 7` — are *all three* excluded by (H1) outright, not
+merely dead for refutation. Of the case-A members the screen can see, only `6, 30, 39` survive, and
+**the screen cannot answer question 2 anyway**, because it under-reports: it scores `n = 2` at zero
+case-A kinds while the base realises one. A sample of even members can only come from building them.
+
+
+## §14.2 P-XE-4 scored **NOT MET** — and the coincidence half-dissolves into a derivation
+
+`Sh(32) = 12` **exactly**, and the index-4096 base realises all 12. So the `12` is a property of the
+**kind**, not of the base, and P-XE-4 is **not met** — the more informative outcome, because it
+means the number is derivable.
+
+**The derivation.** Phase H2's divisor formula gives `Sh(m) = 12 · ∏_𝔮 local(v_𝔮(m))` for `4 | m`,
+where the leading `12 = |μ(K(i))|`, the two primes above 2 are **inert** in `K(i)/K` and contribute
+`local(even) = 1`, and a prime `𝔮 | 3` **splits** and contributes `v_𝔮(m) + 1 > 1`. Hence
+
+> **`Sh(m) = 12` exactly when `m` is a pure power of 2** (for `4 | m`).
+
+Measured, six for six on powers of 2 and seven for seven against the alternative:
+`Sh(16) = Sh(32) = Sh(64) = Sh(128) = Sh(256) = Sh(512) = 12`, while
+`Sh(12) = Sh(48) = Sh(96) = Sh(192) = 36` and `Sh(144) = Sh(288) = Sh(576) = 60`.
+
+**Now close the loop with case A.** Case A forces `v_𝔭(V) = 0`, i.e. `V` **odd**, so `V` divides the
+odd part of `nD² = 144n`, which is `9·odd(n)`. And `m = nD²/V` is a pure power of 2 **iff `V` takes
+that odd part in full**, `V = 9·odd(n)`. Therefore:
+
+> **Sub-result.** For a case-A kind with `V = 9·odd(n)`, the count over the full module is
+> `Sh(m) = 12` per ordering, i.e. **24 for the unordered kind** — *derived*, not observed.
+> `n = 2` realises exactly this: `V = 9`, `m = 288/9 = 32 = 2⁵`, `Sh(32) = 12`, two orderings, **24**.
+
+**What is NOT derived, and it is the whole remaining question:** *whether case A forces `V` to be the
+full odd part.* A case-A kind with `V = 3` at `n = 2` would give `m = 96`, `Sh(96) = 36`, and **72**
+edges — not 24. Nothing above excludes it; the `n = 2` measurement simply found no such kind, and
+**the sample is one member.** So: **`24` is not a case-A constant. It is the case-A count when `V` is
+maximal, and that is a theorem; whether `V` must be maximal is open.**
+
+## §14.3 And the three-way `24` is now fully explained — as a coincidence, with both sides derived
+
+- **`n = 2`:** one case-A kind, `V = 9` maximal, `m = 32`, `Sh(32) = 12`, **2 orderings × 12 = 24**,
+  and the base realises all of it.
+- **`n = 16`:** four case-**B** orderings on Parts's lattice at **6 each = 24**. Their `m = 64`, so the
+  full-module count is `Sh(64) = 12` per ordering — **Parts's rank-4 lattice realises exactly half**.
+
+So one 24 is `2 × 12` fully realised and the other is `4 × (12/2)` halved by a rank-4 base. **Same
+number, different case, different family count, different realisation fraction.** The caution
+registered in §11a was right and is now discharged with a reason rather than a hedge — and the third
+instance that made the pattern look strong, `n = 3`, is void (§13).
+
+
+## §14.4 `n = 4` shape-free: P-XE-2 **MET**, P-XE-3 **MET**
+
+The `n = 4` shape-free unit-span base, cut at `R = 8/√15 = 2.0656`: **195,961 points**, 60 unit
+vectors, **60 circle points** (Parts's shaped lattice has 30). Both free controls green.
+
+> **492 cross edges = 120 centre + 60 diagonal + 312 off-diagonal**, `492/492` confirmed by direct
+> exact distance, **0 invented**; **18 off-diagonal families, 8 of them monochromatic (144 edges)**.
+
+**P-XE-2 MET** — 144 monochromatic off-diagonal edges, against the zero that Parts's shaped lattice
+at the same `n` and the same rotation carries. **Dropping the shape at the record's own member turns
+36 raw off-diagonal edges into 312, and 0 monochromatic ones into 144.**
+
+**P-XE-3 MET, and it was derived rather than fitted.** The case-A families are
+`t = 2 ± √3`, radii `8/9 ∓ 4√3/9`, with `v_𝔭(|u|²) = v_𝔭(|v|²) = 4 = v_𝔭(4)` — the case-A signature
+of §12.5 — **two families, 12 edges each, 24 in total.** And §14.2's derivation named the 12 in
+advance: case A forces `V` odd, here `V = 9 = 9·odd(4)`, so `m = 4·144/9 = 64`, a pure power of 2,
+so `Sh(64) = 12` — a value computed while this base was still being enumerated.
+
+*(The case-A/case-B split is read off a signature that is exactly equivalent, not merely suggestive:
+`v_𝔭(|u|²) − v_𝔭(|v|²) = 2(v_𝔭(g) − v_𝔭(h))`, and in case B exactly one of `g, h` is divisible by
+`𝔭`, so the two valuations are equal **iff** case A. Every case-B row in the run has an unequal pair
+— `6,2`, `2,6`, `12,0`, `0,12`, `10,0`, `0,10` — and every case-A row reads `4,4`.)*
+
+### §14.5 Answers to the two questions
+
+**Q1 — is `24` a case-A constant?** **It now has two valid members and a derivation, and it is still
+not a constant.** `n = 2`: `V = 9`, `m = 32`, `Sh = 12`, 24. `n = 4`: `V = 9`, `m = 64`, `Sh = 12`,
+24. **What is proved** is §14.2: *when `V` is the full odd part of `nD²`, `m` is a pure power of 2,
+`Sh(m) = 12`, and the unordered kind carries 24.* **What is observed, two for two, is that case A
+takes `V` maximal** — and that is the step with no proof. A case-A kind with `V = 3` would give 72,
+and nothing yet excludes one. **So: it derives conditionally, and the condition survives two
+members. It is not yet a theorem, and I will not call it one.**
+
+**Q2 — is `n = 2` unusual in being even with case-A edges? No, and the dichotomy dissolves.**
+`n = 4` shape-free carries **both** mechanisms: 24 case-A edges *and* 120 case-B edges. So the
+"two even members, two different mechanisms" reading was an artifact of **comparing incomparable
+bases** — `n = 2` and `n = 4` are measured shape-free, while `n = 16`'s case-B-only reading is on
+Parts's **rank-4** lattice, which realises a strict subset. `n = 16` shape-free would be ~30 million
+points and was not built, so **nothing here says `n = 16` lacks case-A edges** — only that Parts's
+lattice does not show them.
+
+| member | base | case A | case B | mono off-diagonal |
+|---|---|---|---|---|
+| `n = 2` | shape-free, 16,309 | **24** | 0 | 24 |
+| `n = 4` | shape-free, 195,961 | **24** | 120 | **144** |
+| `n = 4` | Parts's, 3,433 | 0 | 0 | **0** |
+| `n = 16` | Parts's, 25,567 | 0 | 24 | 24 |
+
+**Scope, unchanged.** None of this is a colouring claim. 144 monochromatic off-diagonal constraints
+at `n = 4` is not a refutation of four colours, and `n = 4`'s field `K(√15)` is 5-sealed (G43), so
+that member cannot reach six whatever its cross-edge structure. Un-eliminated is not alive.
