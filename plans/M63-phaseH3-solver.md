@@ -341,9 +341,13 @@ the live members split:
 
 **Un-eliminated is not alive:** `4 ∤ n` means only that this one route is *not blocked*, never that
 such an arena is four-colourable. It was checked and found so at `n = 2`; `n = 6, 10, 14, 18` are
-untested, and each needs its own off-diagonal check. The cheapest untested 6-open one is **`n = 10`**
-(`4n − 1 = 39`, `K(√39) = K(√13)`, 6-open by G43); `n = 6` is `K(√23)` and `n = 14` is `K(√55) =
-K(√5)`, both 5-sealed.
+untested, and each needs its own off-diagonal check.
+
+**WARNING on this paragraph's vocabulary — see §9.** An earlier draft called `4 ∤ n` "the open class"
+and named `n = 10` as the cheapest untested 6-open member in it. **That reads as a recommendation and
+is the opposite of the truth**: `4 ∤ n` is the class this route *kills*, so `n = 10` is predicted
+dead, not promising. The classes are renamed **ARENA-AT-RISK** (`4 ∤ n`) and **ARENA-IMMUNE**
+(`4 | n`) in §9, and the ranked answer is there.
 
 ---
 
@@ -447,9 +451,118 @@ anything.
 | **`recheck.py`** | **standalone re-checker; reads only the certificate** |
 | `screen.py` | the base-free family screen over `n` (§4b) |
 | `reconcile.py` | quantities (a) and (b) of §3a, with the `≤ 552` known-answer check |
+| `shapedscreen.py` | the same screen over Parts's shaped lattice (§9a) |
 | `REGISTER.md` | the `n = 4` prediction, registered before the run |
 
 Runtimes, desktop, uncontended: base at the bound **2.4 s**; cross edges **0.3 s**; pair search
 **1.7 s**; billion-pair brute force **8.2 s**; the radius-1.7 seven-billion-pair check **54 s**. The
 entire phase-H3 solver question cost **under two minutes of compute**, against phase H2's 20.03
 core-hours — because the answer was a derivation and not a search.
+
+---
+
+## §9 — A vocabulary collision of mine, the correction, and the headline it changes
+
+**The product owner is right and his reading of the screen is the correct one. My phrase was the
+error, and it was a bad one because it collided with this project's existing vocabulary.**
+
+I wrote *"the cheapest untested 6-open member in the open class is `n = 10`"*, which reads as a
+recommendation. **It is not one. `n = 10` is predicted DEAD.** In the screen, *"the route is open"*
+means the attack is available — the arena is **at risk of being four-colourable** — which is the
+opposite of what "open" means everywhere else here, where **6-open is good**. That is option 2 **and**
+option 3 of his three: the phrase means something different from what it says, *and* the
+recommendation built on it is wrong.
+
+**Renamed, once and for all, so it cannot be read the other way:**
+
+| old | **new** | meaning |
+|---|---|---|
+| "route open" (`4 ∤ n`) | **ARENA-AT-RISK** | additive pairs *can* clear the diagonal; the arena may be four-colourable, and at `n = 2` it is |
+| "route killed" (`4 \| n`) | **ARENA-IMMUNE** | every additive colouring sends the whole circle to the centre's colour; this attack cannot touch the arena |
+
+**The screen itself is confirmed, not inverted.** `n = 2` is ARENA-AT-RISK and measured
+four-colourable; `n = 16` is ARENA-IMMUNE and is the one member verified five-chromatic. `n = 10` is
+ARENA-AT-RISK and is therefore a **bad** target, ranked with `n = 2`, not against it.
+
+### §9a — What the shaped lattice does, and it is the phase's real headline
+
+I ran the identical screen over **Parts's shaped lattice** (`shapedscreen.py`, 0.1 s):
+
+| `n` | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| circle points, **shaped** | 30 | **0** | 42 | 30 | 60 | **0** | 60 | **0** | 54 | **0** | 30 | 42 | 60 | **0** | 84 | 30 | **0** | **0** | 60 | 60 |
+| verdict | risk | — | risk | **imm** | risk | — | risk | — | risk | — | risk | **imm** | risk | — | risk | **imm** | — | — | risk | **imm** |
+
+> **On Parts's shaped lattice, every member with a nonempty circle and an at-risk verdict is ODD —
+> and odd `n` fails the 2-adic wall outright (`4n − 1 ≡ 3 mod 8`), so it is dead by Theorem B before
+> any colouring question is asked. Every EVEN member the shaped lattice can realise has `4 | n` and is
+> ARENA-IMMUNE.**
+
+**Free known-answer check:** restricted to `n ≤ 20`, the shaped members that are both realisable and
+6-open are **16 and 20** — exactly FS-30's census list `16, 20, 44, 60, 64, 76, 108, 112` truncated to
+that range, reproduced here by machinery that never saw it.
+
+**So §2e's retracted intuition was right about the shape and wrong about the mechanism.** The shape is
+not what supplies rigidity through the *number* of additive colourings (that number is 144 either
+side). **The shape is what decides which circles exist at all, and the circles it admits are exactly
+the immune ones.**
+
+> ### The corrected headline
+>
+> **Dropping the shape buys access to precisely the members this route kills.** The shape-free
+> construction's entire novel reach is `n ≡ 2 (mod 4)` and odd `n`: the odd ones die to the 2-adic
+> wall, and the `n ≡ 2 (mod 4)` ones are ARENA-AT-RISK — at `n = 2`, measurably four-colourable.
+
+### §9b — The ranked answer, and the product owner's bleak headline does not hold
+
+*Among members that are 6-open **and** ARENA-IMMUNE, which is cheapest?* Fields taken from this
+project's own `tools/fplane.py` rather than my arithmetic — 6-open means 11 is not a usable prime:
+
+| `n` | `4n − 1` | squarefree part | first usable primes | verdict |
+|---|---|---|---|---|
+| 4 | 15 | 15 | **11**, 131, 239 | 5-sealed |
+| 8 | 31 | 31 | **11**, 83, 167 | 5-sealed — *and the shaped lattice has no circle there* |
+| 12 | 47 | 47 | **11**, 107, 167 | 5-sealed |
+| **16** | 63 | **7** | 83, 131, 167 | **6-open** |
+| 20 | 79 | 79 | 107, 227, 359 | 6-open |
+
+**So `n = 16` is the cheapest 6-open ARENA-IMMUNE member, and there is nothing below it.** That much
+of the product owner's arithmetic is confirmed.
+
+**But the conclusion drawn from it does not follow, and the reason is that immune members never
+needed the shape dropped.** `n = 16` is realisable on **Parts's shaped lattice** — 30 circle points —
+at **25,567 points**, which is phase H2's verified object. The 41.7 million figure is the cost of the
+*shape-free* version of a member that is already cheap in its shaped form, and nobody has a reason to
+build it.
+
+> **Not "the cheap 6-open members are killed and the immune ones are unaffordable." Rather: every
+> member worth having was already reachable on Parts's lattice, and dropping the shape reaches only
+> members that are dead. The shape-free construction has no target.**
+
+### §9c — The sub-bound radius lever, priced rather than eyeballed
+
+It is worth **6–23%**, not orders of magnitude. Measured as the largest conjugate radius any
+cross-edge endpoint actually attains, against the endpoint bound:
+
+| object | bound | max endpoint radius | fraction | cost of truncating there (`r⁸`) |
+|---|---|---|---|---|
+| `n = 16`, phase H2's shaped | 4.0316 | **4.0000** | 99.2% | **0.939** |
+| `n = 4`, the record's shaped | 2.0656 | 2.0000 | 96.8% | 0.772 |
+| `n = 2`, shape-free | 1.5119 | 1.4888 | 98.5% | 0.885 |
+| `n = 4`, shape-free | 2.0656 | 2.0654 | 100.0% | 0.999 |
+
+At `n = 16` shape-free that turns 41.7 M into 39.2 M. **The lever is real, measured, and worthless**
+— and it is now measured rather than eyeballed, which was the ask.
+
+### §9d — `n = 10`, and the honest status of the one thing I could not compute
+
+`n = 10` is **ARENA-AT-RISK** (its 240 circle points are none of them in `2L`), so the screen predicts
+it dead exactly as `n = 2` is. **Whether the additive pair actually succeeds there is NOT computed**,
+because it needs the off-diagonal cross edges, which need the full endpoint-bound disk at
+`R = 20/√39 = 3.2026` — **about 6.6 million points**, past what this Python tooling does in a
+sensible time; §9c shows truncation saves nothing, and a truncated base would *drop* constraints,
+which biases toward a false "four-colourable" and is therefore the wrong direction to cut corners in.
+
+**It does not change any ranking**: at-risk or confirmed-dead, `n = 10` is not a target. Recorded as
+an open item rather than quietly dropped. **Un-eliminated is not alive, and un-computed is not a
+verdict.**

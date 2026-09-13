@@ -1079,3 +1079,71 @@ generator).
 
 > **The advisor is also an agent whose errors are cheapest to find while nothing has been paid for. Zero
 > retractions from it would not have meant it was right.**
+
+---
+
+## §16 — CLOSE: the direction dies with the object (2026-09-12)
+
+### The contradiction I flagged was a vocabulary collision, resolved by computing
+
+The solver's phrase **"the open class"** meant *the attack is available* — **the exact opposite of "6-open",
+which in this project is good.** The screen is **not** inverted: `4 ∤ n` is the class the route **kills**, my
+ledger row was right, and its `n = 10` recommendation was built on the collision. Renamed so it cannot be
+misread: **ARENA-AT-RISK** (`4 ∤ n`) and **ARENA-IMMUNE** (`4 | n`), with the old wording left behind a
+banner. **It resolved this by running the screen, not by re-reading its own prose**, which is what I asked
+for and the only thing that could have settled it.
+
+### The real verdict, and it is sharper than the bleak one I expected
+
+The same screen run over `[Parts2020a]`'s **shaped** lattice — 0.1 s — is the phase's actual finding:
+
+> **Every member his lattice realises with a nonempty circle is either ODD — at risk, but dead anyway, since
+> odd `n` fails the 2-adic wall — or `4 | n` and IMMUNE.**
+
+Shaped circle counts: `n = 2, 6, 8, 10, 14, 17, 18` are **empty**; realisable are 1, 3, 4, 5, 7, 9, 11, 12,
+13, 15, 16, 19, 20, of which exactly **4, 12, 16, 20** are immune.
+
+> **So dropping the shape buys access to precisely the members this route kills.** Its entire novel reach is
+> `n ≡ 2 (mod 4)` and odd `n` — the odd ones dead to the wall, the `n ≡ 2 (mod 4)` ones at risk, and at
+> `n = 2` measurably four-colourable.
+
+**Free known-answer check:** the realisable-and-6-open members at `n ≤ 20` come out as **16 and 20** —
+FS-30's census truncated to that range, **reproduced by machinery that never saw it.**
+
+### My "bleaker conclusion" was wrong, and in the instructive direction
+
+I predicted *"the cheap 6-open members are killed and the immune ones are unaffordable."* **The arithmetic
+held; the conclusion did not.** Fields from `tools/fplane.py` rather than from anyone's memory:
+
+| `n` | `4n−1` | first usable primes | verdict |
+|---|---|---|---|
+| 4 | 15 | **11**, 131, 239 | 5-sealed |
+| 8 | 31 | **11**, 83, 167 | 5-sealed (and shaped has no circle) |
+| 12 | 47 | **11**, 107, 167 | 5-sealed |
+| **16** | 63 → 7 | 83, 131, 167 | **6-open** |
+| 20 | 79 | 107, 227, 359 | 6-open |
+
+**`n = 16` is the cheapest 6-open immune member and nothing lies below it** — both escapes I named were
+checked and closed. **But immune members never needed the shape dropped:** `n = 16` is realisable on the
+**shaped** lattice at **25,567 points**, which *is* phase H2's verified object. The 41.7 M is the cost of
+shape-free-ing a member already cheap in its shaped form.
+
+> **Every member worth having was already reachable on Parts's lattice, and dropping the shape reaches only
+> members that are dead. The shape-free construction has no target.**
+
+### Two residuals, priced and not pursued
+
+1. **`n = 10`** — `K(√39) = K(√13)`, **6-open**, `4 ∤ 10`, 240 circle points, none in `2L`, so **at risk**.
+   **Whether the additive pair actually succeeds there is NOT computed**: it needs the off-diagonal cross
+   edges over the full disk at `R = 3.2026`, ~6.6 M points, past the present Python tooling. **Truncation
+   saves nothing and biases toward a false "four-colourable"** — a truncated base *drops* constraints, which
+   is the wrong direction to cut corners in. **Un-computed is not a verdict**, and it changes no ranking.
+2. **The sub-bound radius lever: worth 6–23%, not orders.** Largest conjugate radius any cross-edge endpoint
+   attains, against the bound — `n = 16` shaped **99.2%**, `n = 4` shaped 96.8%, `n = 2` shape-free 98.5%,
+   `n = 4` shape-free 100.0%. At `n = 16` shape-free that is 41.7 M → 39.2 M. **Real, measured, worthless** —
+   and measured rather than eyeballed, which was the ask.
+
+### Phase H3 is closed
+
+**Object: dead.** **Direction: closed.** **Family: six results richer** (ledger row 65). The phase spent
+**no solver time on a sweep**, because every verdict that mattered turned out to be a derivation.
