@@ -90,3 +90,80 @@ side of that line we are on — **not** to produce a schedule.
 | 1 | free-deletion census + incremental ask cost on `ρ₆₃` | `lean-dir` | launched |
 | 2 | survey the descent engine: what asks it supports, how fast, what its data model is | `~/source/descent-engine` | launched |
 | 3 | scope the engine work order | — | blocked on 1 and 2 |
+
+---
+
+## §7 — The engine survey landed, and it found the evidence against this plan (2026-09-12)
+
+Survey: `~/source/descent-engine/SURVEY-2026-09-12-interface-reduction.md`.
+
+### What exists
+
+**Nine Rust crates, 56,945 lines, eleven completed work orders, last commit 2026-09-02 — finished software,
+not scaffolding.** The release binary's own control suite ran **269 controls, 269 passed, 5.9 s** on this
+desktop today; about a fifth of all source is control suites, shipped inside the binary because the target
+machine has no build tools. Standards and code agree almost everywhere; three drifts listed, none a
+correctness problem.
+
+**Two asks exist and only one is our shape.** The one the repo is named for fixes a 214-vertex colouring and
+asks whether it extends to a candidate pool — irrelevant, since our arena has no fixed colouring. The
+relevant one, *"does this graph admit a proper 5-colouring"*, lives in `descent-cull` and `descent-enum`, and
+**is not incremental across probes by deliberate design** — a fresh CaDiCaL per probe, after measurement.
+Measured here: **0.601 µs per clause loaded**; cold first solve **~1.4 s** against **1.2 ms** warm on a
+1,008-vertex stage, an **832×** ratio; whole-graph refutation probes on a 1,981-vertex object averaged
+**114 s**.
+
+**The data model is already right.** A vertex deletion **never extracts a subgraph and never moves an
+index** — every edge carries the groups it depends on and fails a presence predicate. And a
+distinguished-subset abstraction exists: `Projection` in `descent-fmt`, an ascending column list the class
+key gathers and the blocking clause names, **built because a seed deletion broke a prefix assumption in
+August.** Two catches: `descent-cull` passes the identity projection and so always refutes over the whole
+graph, and no command line names an arbitrary block today.
+
+**The decisive absence: the largest bare graph ever enumerated or culled here is 1,981 vertices.** The
+175,642-variable instance that looks comparable is the pool model with narrow colour lists — a materially
+easier question — and must not be quoted as evidence about this object. Reported as an absence rather than
+extrapolated past, which is the survey's most useful move.
+
+### The finding that argues against this plan, and it is ours
+
+> **"No cold re-solves" is the one premise this repository has already tested and lost.**
+
+A walk that never re-solves cold needs one long-lived solver whose edges can vanish without rebuilding —
+every deletable vertex behind a selector literal. **That encoding exists (`--encoding guarded`) and was
+measured three times, all against: 1.6× slower per conflict; undecided at 900 s on a control the plain
+encoding decided in 294.5 s; 1.65× the processor time to decide one fewer group.** And the palette-breaking
+order cannot be fixed for a solver outliving the standing set — choosing it per probe was worth 2.1–2.9×.
+
+**The scope cuts both ways and is the reason to measure rather than the answer.** Every one of those was a
+**hard refutation under a conflict budget**; this walk mostly asks *"find a colouring whose interface pattern
+is new"* on a base **known colourable by a kernel theorem**. Incremental solving under assumptions behaves
+differently on satisfiable and unsatisfiable regimes, and all three measurements are from the wrong one.
+**But it is the only evidence that exists, this project took it on its own instances, and it points the wrong
+way.**
+
+**Commissioned, on the survey's own recommendation: the three numbers that decide the architecture** — one
+cold plain solve on the base half, one warm solve under presence assumptions after a deletion, and **the same
+after a hundred deletions**, that third being the point, since a long-lived solver's failure mode is
+degradation rather than first-probe cost. **No number anywhere in that repository answers them.**
+
+### Two things I settled for both agents
+
+**1. The walk runs on the HALVES — 25,567, not 51,133.** An arena four-colouring is a **pair** `(f,g)` of
+half-colourings agreeing at the centre and disagreeing across the cross edges; the rotated half is isometric
+and carries the same internal edge list, so the arena is never solved as one object. Every cost in the survey
+roughly halves, and the `u16` index ceiling gains 2.5× headroom instead of 22%.
+
+**Flagged regardless: that ceiling SATURATES SILENTLY rather than refusing**, which is this project's oldest
+named failure mode — a check reporting nothing when it cannot run. One line, worth fixing before anything
+runs at scale.
+
+**2. The per-deletion ask may not be a refutation at all** — sent to both agents as a structure to check, not
+a measurement to adopt. Phase H2 established its verdict twice: **(a)** 552 interface patterns with **0 of
+304,704** pairs admissible, combinatorial on **31 vertices**; **(b)** 552 half-refutations, **20.03
+core-hours**. **The 552 is a SUPERSET and only ever needs to be one**, so **(a) alone suffices and (b) was
+confirmation.** If that survives a deletion, the ask is *recompute the superset, re-run a 31-vertex pair
+check* — **and the whole cost lives in maintaining the superset**, a different engineering problem from the
+one the survey scoped, and probably a better one. **Timing the refutation instead would be a right
+measurement of the wrong thing — the error this milestone hit six times.** Both agents are to report **both**
+costs, labelled, and never let one stand in for the other.
