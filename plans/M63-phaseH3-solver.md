@@ -201,18 +201,58 @@ independently takes any colour outside `c(N(w))`. So
 
 | object | `\|W\|` | interface degrees | free colours per vertex | **patterns ≥** |
 |---|---|---|---|---|
-| **phase H2's `ρ₆₃`** | 67 | `5:6, 6:12, 7:12, 14:12, 15:6, 16:12, 30:7` | `1: 67` | **1** |
-| **the record's lattice, `n = 4`** | 67 | `5:6, 6:12, 7:12, 10:36, 30:1` | `1: 67` | **1** |
+| **phase H2's `ρ₆₃`** | 67 | `5:6, 6:12, 7:12, 14:12, 15:6, 16:12, 30:7` | `1: 67` | **1** — *no local freedom; see §3a, its true count is 552* |
+| **the record's lattice, `n = 4`** | 67 | `5:6, 6:12, 7:12, 10:36, 30:1` | `1: 67` | **1** — *same caveat* |
 | **phase H3 at the endpoint bound** | 121 | `2:60, 6:36, 12:24, 60:1` | `1:61, 2:40, 3:20` | **3.83 × 10²¹** |
 | **phase H3 at radius 1.7** | 121 | `4:48, 6:12, 10:36, 14:24, 60:1` | `1:105, 2:16` | **6.55 × 10⁴** |
+
+### §3a — Reconciling the "1" against phase H2's recorded 552, and the instrument is ONE-SIDED
+
+**The product owner's guess was that 552 is a superset and my 1 is an achievable count. That is not
+it, and the real distinction is sharper.** Measured rather than adopted:
+
+| quantity | definition | `ρ₆₃` | record | H3 bound | H3 at 1.7 | H3 `n = 4` shape-free |
+|---|---|---|---|---|---|---|
+| **(a)** local-freedom product | hold the base fixed **outside** `W` at one colouring and recolour interface vertices independently (legal: `W` is an independent set) — a **lower bound** | **1** | **1** | **≥ 3.83e21** | **≥ 6.55e4** | **≥ 4.1e3** |
+| **(b)** additive-family patterns | distinct interface patterns realised **across** the additive family, centre pinned — a lower bound from **global** recolourings | **12** | **12** | 132 | 132 | 144 |
+| **true count** | over **all** proper base four-colourings | **552** (phase H2, enumerated) | — | — | — | — |
+
+**Known-answer check:** (b) must be `≤ 552` on `ρ₆₃`, and it is — **12 ≤ 552**.
+
+> **So (a) and 552 are not the same quantity, and the difference is LOCAL versus GLOBAL freedom, not
+> superset versus achievable.** My instrument asks *"can an interface vertex be recoloured on its
+> own?"*; phase H2's 552 counts *whole-base colourings*. On `ρ₆₃` no interface vertex has any local
+> freedom — every one has three colours in its neighbourhood — and yet 552 whole-base colourings
+> present 552 distinct interface patterns.
+
+**The consequence, and it is a demotion I am making against my own §3.** The instrument is
+**one-sided**: it can certify that the pattern count is astronomically large, and it can **never**
+certify that it is small. **A value of 1 is the instrument saying nothing — it is not evidence of
+rigidity.** The comparison that survives is between quantities of the same kind:
+
+> **phase H2's object: 552 achievable interface patterns, exactly, enumerated. Phase H3 at the
+> endpoint bound: at least 3.83 × 10²¹.** Nineteen orders, a true count against a valid lower bound
+> on the same quantity — that comparison is sound, and it is the one that says the phase-H2 reduction
+> was never affordable here.
+
+**Do not promote it to a criterion, and here is the measurement that stops you.** The `n = 4`
+shape-free object has (a) `≥ 4.1 × 10³` — also far past 552, so also unaffordable by the phase-H2
+route — and it is **not** killed by the additive pair (0 of 124,416). **So "large interface pattern
+count" and "four-colourable by an additive pair" are independent properties**, and neither implies
+the other. A quantity separating two positives from one negative was a hypothesis; a third object now
+separates the two properties from each other.
+
+**What it is good for, stated at its real size:** a cheap one-sided **kill test** for the phase-H2
+reduction — compute (a) from a single base colouring in milliseconds, and if it exceeds the solver
+budget, do not build the arena. It rules candidates out. It cannot rule any candidate in.
 
 **Read three things off that table.**
 
 1. **The reduction was never affordable at the endpoint bound**, by nineteen orders of magnitude
    against phase H2's 552. The instrument says so in milliseconds, before any solver is launched.
-2. **It retrodicts phase H2 and the record at exactly 1** — every interface vertex's colour is
-   *forced* by its neighbourhood there. That rigidity is why 19 circle patterns and 552 interface
-   patterns existed at all, and it is measured, not assumed.
+2. **It returns exactly 1 on phase H2 and on the record** — every interface vertex's colour is
+   forced by its neighbourhood *locally*. **That is the instrument going silent, not a measurement of
+   rigidity**: their true counts are 552 and unmeasured. §3a is the reconciliation and the demotion.
 3. **The monotonicity lever is real and enormous.** `3.83 × 10²¹ → 6.55 × 10⁴` for a **2.6×** base —
    a collapse of **seventeen orders of magnitude**. The product owner's note said the lever was
    *"derived and never exercised; direction known, magnitude unknown."* **The magnitude is now
@@ -406,6 +446,7 @@ anything.
 | **`certificate-h3-fourcolouring.json`** | **the reviewer's artifact, 47 KB** |
 | **`recheck.py`** | **standalone re-checker; reads only the certificate** |
 | `screen.py` | the base-free family screen over `n` (§4b) |
+| `reconcile.py` | quantities (a) and (b) of §3a, with the `≤ 552` known-answer check |
 | `REGISTER.md` | the `n = 4` prediction, registered before the run |
 
 Runtimes, desktop, uncontended: base at the bound **2.4 s**; cross edges **0.3 s**; pair search

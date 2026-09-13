@@ -968,3 +968,51 @@ scratch at any radius, and reports — **proven to discriminate as a pair**: one
 and runs no solver**: that 60 vectors have `|z|² = 1`, that 252 pairs are at distance 1 under `ρ₂` and none
 outside, and that a 132-row table scan has no clash. **Nothing is kernel-checked and no proof log exists,
 because no solver produced one** — stated in those words.
+
+---
+
+## §14 — The reconciliation, and my promotion hypothesis is killed (2026-09-12)
+
+**My guess was wrong and the engineer measured rather than adopting it.** The `1`-against-`552` gap is not
+superset-versus-achievable. It is **local versus global freedom**:
+
+| quantity | `ρ₆₃` | record | H3 @ bound | H3 @ 1.7 | `n = 4` shape-free |
+|---|---|---|---|---|---|
+| **(a)** local-freedom product — hold the base fixed *outside* the interface, recolour its vertices independently (lower bound) | **1** | **1** | ≥ 3.83e21 | ≥ 6.55e4 | ≥ 4.1e3 |
+| **(b)** distinct interface patterns across the additive family (lower bound) | 12 | 12 | 132 | 132 | 144 |
+| **true count** over all proper base four-colourings | **552** | — | — | — | — |
+
+Known-answer check passes: **(b) = 12 ≤ 552** on `ρ₆₃`.
+
+> **So the instrument is one-sided: it can certify "astronomically large" and can NEVER certify "small". A
+> value of 1 is the instrument going silent, not evidence of rigidity.**
+
+On `ρ₆₃` no interface vertex has local freedom — every one already sees three colours — while 552 whole-base
+colourings still present 552 distinct patterns. **This is this file's oldest named failure mode, caught in a
+headline number I was one message from promoting to a design criterion.** The "retrodicts phase H2 at exactly
+1" reading is struck.
+
+**What survives is apples-to-apples and still decides the phase:** phase H2's object has **exactly 552**
+achievable interface patterns, enumerated; phase H3 at the bound has **at least 3.83 × 10²¹** of the same
+quantity. **A true count against a valid lower bound on the same quantity — nineteen orders** — which is
+what says the phase-H2 reduction was never affordable here.
+
+**And a third object kills the promotion outright.** `n = 4` shape-free has (a) ≥ 4.1 × 10³ — also far past
+552, also unaffordable by the phase-H2 route — **and is not killed by the additive pair (0 of 124,416).**
+
+> **Large interface pattern count and additive-pair four-colourability are INDEPENDENT properties.**
+
+So it is no longer a hypothesis separating two positives from one negative: a third object separates the two
+*properties* from each other. **My "worth more than the object" reading is dead**, and it was killed in the
+right way — by an object chosen to test it, not by an argument.
+
+**Its real size, stated at that size:** a cheap **one-sided kill test** for whether the phase-H2 interface
+reduction is affordable on a candidate, computable in **milliseconds** from a single base colouring. **It
+rules candidates out. It can never rule one in.**
+
+### On the 72, the sentence that survives
+
+The advisor's twist result and mine agree on what the off-diagonal edges do: **they cut 14,400
+diagonal-clearing combinations down to 576.** They do real work. **They simply do not cut it to zero, and
+the twist family could not see the survivors.** *"Load-bearing against twists is not load-bearing"* is the
+sentence to keep.
