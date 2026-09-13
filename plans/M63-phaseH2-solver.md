@@ -34,7 +34,7 @@ edge can be missing either.
 Structure confirmed independently of the generator: base lattice **n = 25,567** points, centre index
 **12783**, **272,232** unit edges, unit shell **30** vectors, so the base is a Cayley graph on the exact
 norm-1 shell. **30 is the interior degree and the maximum, not the typical one:** measured on the shipped
-edge list, **8,208 of 25,567 vertices (32.1%)** reach it, the mean is **21.29**, and the **30 circle points
+edge list, **8,239 of 25,567 vertices (32.2%)** reach it, the mean is **21.2956**, and the **30 circle points
 have degree 5, 6 or 7** — they sit at 99.2% of the cut radius, so the cut takes most of their
 neighbourhood.
 

@@ -708,7 +708,7 @@ has ever met** says the free-degree promise has been decorative throughout — m
 number.
 
 **2. The mean-degree comparison driving this phase's risk assessment was measuring the bulk.** Of phase H2's
-25,567 base vertices, **8,208 (32.1%) sit at full degree 30, mean 21.29** — and its *circle* points are at
+25,567 base vertices, **8,239 (32.2%) sit at full degree 30, mean 21.2956** — and its *circle* points are at
 **`{5:6, 6:12, 7:12}`**. Its solver record's *"every interior point has degree exactly 30"* was true with
 "interior" doing quiet work for the other two thirds; it now states the distribution.
 

@@ -468,7 +468,7 @@ the magnitude was the module's rather than the arena's. All ten are corrected in
 which quantity it means and giving the arena-as-built value beside the module one.
 
 **Measured on phase H2's shipped edge list, for the corrections to cite:** of its 25,567 base vertices,
-**8,208 (32.1%)** have the full degree 30, the mean is **21.29**, and the 30 circle points have **5, 6 or
+**8,239 (32.2%)** have the full degree 30, the mean is **21.2956**, and the 30 circle points have **5, 6 or
 7**. *(Its own solver record said "every interior point has degree exactly 30" — true, with "interior"
 doing quiet work for the two thirds of the base that are not.)* It is the
 same failure this file's §5a describes — a quantity measured under one constraint and read under another —

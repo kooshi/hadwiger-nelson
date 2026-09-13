@@ -370,3 +370,136 @@ The specific thing to check is whether some absorption instance exists that `Abs
 state and I therefore did not look for — the module's own docstring says every instance there is one
 construction, the repaint lemma, and a cleverer choice of piece colouring is exactly the free parameter
 I did not vary.
+
+---
+
+## §10 — The reducibility recognition: the prior art, and the pricing verdict
+
+*Commissioned at the phase H4 close: `Absorb.lean`'s absorption is a private name for a classical
+technique, and the question is whether the classical machinery reaches further on this object.*
+**It does not, and the reason is arithmetic rather than effort. Recommendation: stop.**
+
+### §10.1 — The prior-art gate (WORKFLOW step 3a)
+
+Searched in the literature's vocabulary and never in ours — *D-reducible*, *C-reducible*, *reducible
+configuration*, *ring colouring*, *Kempe chain reducibility*, *Birkhoff diamond* — and under a second
+discipline's names for the same object: *degree-choosable*, *Gallai tree*, *precolouring extension*,
+*graph-colouring preprocessing / reduction rules / dominated vertex removal*.
+
+**The recognition is correct, and it is exact.** A configuration is a vertex set `S`; its **ring** is
+the cycle `R` of vertices surrounding it; it is **D-reducible** when every proper four-colouring of the
+ring extends into the configuration. Written on a general graph with `R = N(S)∖S`, that is
+**`Extends G (V∖S) 4` verbatim** — so `extends_of_extensionOrder` and the 4-core peel are the
+degeneracy corner of a machine built between 1913 and 1996 (`[Steinberger2010]`, now a bibliography row
+with the quotations this section rests on).
+
+**The second discipline gives the sharp boundary, and we did not have it.** Borodin (1977) and
+Erdős–Rubin–Taylor (1979), independently: **a connected graph is degree-choosable iff it is not a
+Gallai tree** — a graph each of whose blocks is a complete graph or an odd cycle. Applied to
+absorption: given a colouring of `G − S`, each `v ∈ S` holds a list of size
+`≥ 4 − |N(v)∖S|`, and the list colouring exists whenever `4 − d_out(v) ≥ deg_S(v)`, i.e.
+
+> **every free-by-degree deletion at four colours needs a vertex of degree ≤ 4** — degree ≤ 3 by the
+> greedy argument `Absorb.lean` states, and degree exactly 4 by Borodin/ERT provided the piece is not a
+> Gallai tree. **That is the exact boundary; there is nothing past it that degree alone can buy.**
+
+**`ρ₆₃`'s minimum degree is 6.** So the sharp classical theorem gives zero on this object too, with two
+whole degrees of margin, and §1's zero is not an artefact of `Absorb.lean` stopping early.
+
+**What the search did NOT find, recorded as a finding.** No application of reducibility off the plane.
+Every hit — Appel–Haken, Robertson–Sanders–Seymour–Thomas, Steinberger, the 2024 gauge-theory
+reformulation, the Kempe-locking literature — is planar throughout. This is not a gap we can walk into:
+§10.3 says why.
+
+### §10.2 — Would it fire on this object? Priced exactly, no solver
+
+**(a) Singletons are dead by a two-line theorem, not by measurement.** `{v}` is D-reducible iff every
+proper four-colouring of `G[N(v)]` uses at most three colours. But any graph on ≥ 4 vertices has a
+surjective proper four-colouring — take any proper colouring and split a class with two vertices, which
+is always proper, until four classes are non-empty. **So `{v}` is D-reducible iff `deg(v) ≤ 3`**, and
+the 4-core peel is not an approximation to singleton D-reducibility, it *is* singleton D-reducibility.
+
+**(b) Every member of a configuration must have at most 3 neighbours outside it.** If some `v ∈ S` has
+`d_out(v) ≥ 4` and `G[R]` admits a proper four-colouring giving four of those neighbours four distinct
+colours, `v` has no free colour and `S` is not D-reducible. *(Proviso, stated because it is the one soft
+step: it assumes such a ring colouring exists. `G[R]` here is a small unit-distance graph, and the link
+of any vertex in a plane unit-distance graph has maximum degree 2 — two neighbours of `v` are adjacent
+only at 60° — so the local structure is a union of paths and cycles and is as flexible as a graph gets.)*
+
+**(c) That necessary condition alone kills every configuration small enough to matter.** From (b),
+`|N(v) ∩ S| ≥ deg(v) − 3` for every `v ∈ S`; if `|S| ≤ m` then `deg_S(v) ≤ m − 1`, so every member has
+`deg(v) ≤ m + 2`. Peel the graph to the fixed point of *"delete `v` when `|N(v) ∩ C| < deg(v) − 3`"*
+started from `C = {v : deg(v) ≤ m + 2}`; every admissible `S` survives the peel, so an empty fixed point
+is a proof of non-existence. Measured exactly on the arena:
+
+| `m` | candidates after the degree filter | after the closure |
+|---|---|---|
+| **14** (the classical ceiling) | 16,428 of 51,133 | **0 — no configuration of this size exists** |
+| **20** | 29,376 | **0** |
+| **27** | — | **0** |
+| 28 | 51,132 | 51,132 |
+
+> **No configuration of 27 or fewer vertices exists anywhere in the `ρ₆₃` arena.** Appel–Haken and
+> Robertson–Sanders–Seymour–Thomas used rings of size **≤ 14**; Steinberger went to **16**.
+
+**(d) And the rings are two orders of magnitude too big.** Measured directly:
+
+| configuration | ring |
+|---|---|
+| a single vertex | 6 (minimum) to 60, median 20 — and singletons are dead by (a) |
+| the closed neighbourhood `N[v]`, the most compact non-singleton available | **77 minimum** (at `\|S\| = 7`), median 249, maximum 840 |
+| greedy ring-minimising growth to `\|S\| = 28`, the smallest size (c) permits, over 40 minimum-degree seeds | **161 best, 175 median, 196 worst** — and the best still has a member with `d_out = 11`, so it does not even satisfy (b) |
+| the same growth at `\|S\|` = 7 / 14 / 21 / 28 | ring 42 / 82 / 128 / 165 |
+
+**The cost, in the literature's own units.** `[Steinberger2010]`: *"the cost of testing a configuration
+for reducibility increases roughly by four-fold with its ring-size"*, and a ring-16 configuration takes
+*"a few minutes"*. A ring of size 14 has 199,291 colourings up to colour permutation; a ring of 77 has
+about **2 × 10³⁵**. At four-fold per ring unit, the cheapest configuration this object can support costs
+about **4⁶¹ ≈ 5 × 10³⁶** times a few minutes. **This is not an engineering gap.**
+
+### §10.3 — C-reducibility does not rescue it, and the reason is the one thing that needs planarity
+
+The brief's working assumption was that *"the reducibility half of that theory does not need
+planarity"*. **Half of that is right and the half we would need is not.** D-reducibility is
+planarity-free as a definition — it is our `Extends`. C-reducibility's extra power comes from the
+*consistent set of colourings*: a Kempe-chain argument shows that if a ring colouring extends to the
+exterior then one of finitely many sets of ring colourings, **independent of the exterior graph**, all
+extend to it. That independence is bought in exactly one step, which `[Steinberger2010]` §2 writes out:
+
+> *"Because `G` is planar, each `V_i` is a subset of the same component of `R∖V_j` for all `j ≠ i`."*
+
+The Kempe classes cut out on the ring form a **non-crossing** family, and his *signed path arrangements*
+are the bookkeeping of that fact. Off the plane the classes can interleave arbitrarily, so the
+disjunction in the Kempe implication must be taken over **all** partitions rather than the laminar ones
+— more universally-quantified cases, each needing its own good outcome. **Non-planar C-reducibility is
+therefore strictly harder than planar C-reducibility, not merely more expensive**, and it is harder in
+the direction that matters.
+
+### §10.4 — Verdict, and what would revive it
+
+**Retire the direction for `ρ₆₃`.** Not "expensive" — the smallest admissible configuration has ≥ 28
+vertices and a ring of ~160 where the entire classical literature stops at 16, and the singleton case
+is dead by theorem. Nothing here is worth building, and the reduction does not need it.
+
+**What is kept, because it is cheap and reusable:**
+1. The **exact boundary**, and a screen sharper than "minimum degree" — *which I got wrong first and
+   the check caught*. Free-by-degree deletion at four colours needs a connected piece all of whose
+   vertices have degree ≤ 4 **and which is not a Gallai tree**. `ρ₆₃`'s minimum degree is 6, so it fails
+   at the first clause. I then wrote that `[Parts2020a]`'s base, whose minimum degree is 4, would
+   therefore benefit — **and it does not**: measured, its 18–24 degree-≤ 4 vertices are **pairwise
+   non-adjacent**, so every candidate piece is a single vertex, and a single vertex **is** a Gallai
+   tree. *(Controls: the instrument calls `C₄` not a Gallai tree, and `K₃`, `P₃` and `K₁` Gallai trees.)*
+   **So the screen is not "minimum degree ≤ 4" but "do the degree-≤ 4 vertices touch each other in a
+   piece containing an even cycle?"** — a much rarer condition, and it is zero on both objects this
+   project holds. That is the reusable line, and it is worth more than the version I first wrote.
+2. The recognition itself, with its vocabulary: `Absorb.lean`'s `Extends` is D-reducibility, and the
+   translation belongs in `BIBLIOGRAPHY.md` § E when the write-up comes.
+3. **Do not describe reducibility as planarity-free again.** The D half is; the C half is not, and the
+   quotation above is the citation.
+
+**What would revive it:** an object whose degree-≤ 4 vertices form a connected piece that is not a
+Gallai tree (where the degree-choosability theorem bites — and note that minimum degree ≤ 4 is *not*
+enough, as Parts's base shows), or
+one with genuine small separators — a ring of ≤ 16 cutting off more than one vertex. `ρ₆₃` has neither:
+its smallest cut that isolates anything is the 6-neighbourhood of a minimum-degree vertex, and that
+isolates exactly one vertex, which is the case (a) already settles.

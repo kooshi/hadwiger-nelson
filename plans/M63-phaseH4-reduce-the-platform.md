@@ -343,3 +343,80 @@ that holds.
 
 **Minor correction folded in:** phase H2's "8,208 at degree 30" is **8,239** — the 8,208 counted a
 272,262-entry list with its 30 repeats.
+
+---
+
+## §10 — Reducibility: recognised exactly, and CLOSED by 61 orders of magnitude (2026-09-12)
+
+Record: `plans/M63-phaseH4-freecensus.md` §10. Bibliography updated with `[Steinberger2010]`, Appel–Haken,
+Robertson–Sanders–Seymour–Thomas, Borodin, Erdős–Rubin–Taylor and two Cranston–Rabern surveys;
+`tools/bib_audit.py` green.
+
+### The recognition was exact
+
+**D-reducible IS `Extends`, verbatim** — a configuration `S`, ring `R = N(S) ∖ S`, D-reducible when every
+proper four-colouring of the ring extends into it. **Our 4-core peel is the degeneracy corner of a machine
+built between 1913 and 1996.**
+
+And the second discipline handed over a boundary we did not have: **Borodin (1977) and
+Erdős–Rubin–Taylor (1979) — a connected graph is degree-choosable iff it is not a Gallai tree** — so
+free-by-degree deletion at four colours needs `deg ≤ 4`, not `≤ 3`.
+
+**Singletons are dead by a two-line theorem rather than a measurement:** any graph on ≥ 4 vertices has a
+*surjective* proper four-colouring (split a class), so `{v}` is D-reducible **iff `deg(v) ≤ 3`**. The 4-core
+peel is not an approximation to singleton D-reducibility — **it is singleton D-reducibility.**
+
+### The verdict, and it is arithmetic
+
+| the classical machinery | `ρ₆₃` |
+|---|---|
+| ring size ≤ 14 (Appel–Haken, RSST), ≤ 16 (Steinberger) | **no configuration of ≤ 27 vertices exists anywhere** — exact closure, not a search |
+| cost **×4 per unit of ring size**; ring 16 ≈ "a few minutes" | smallest non-singleton ring **77**; at the smallest permitted size (28) the best greedy ring is **161** |
+| 199,291 ring colourings at ring 14 | ≈ **2 × 10³⁵** at ring 77 — about **4⁶¹** times a few minutes |
+
+**Closed, and the closure is exact rather than a failed search.**
+
+### My planarity claim was half wrong, and it was the half that mattered
+
+I briefed that *"the reducibility half of that theory does not need planarity."* **True of D. False of C — and C was the whole point**, since C-reducibility is the systematic version of the "cleverer piece colouring" the census named as its unvaried free parameter.
+
+C-reducibility's power comes from **consistent sets of colourings**, and Steinberger §2 buys that in one
+step: *"Because `G` is planar, each `V_i` is a subset of the same component of `R ∖ V_j` for all `j ≠ i`."*
+The Kempe classes on the ring form a **non-crossing** family, and his "signed path arrangements" are that
+fact's bookkeeping. **Off the plane the disjunction runs over ALL partitions instead of the laminar ones —
+so non-planar C-reducibility is STRICTLY HARDER, not merely more expensive.**
+
+**§PA negative, recorded as a finding:** no application of reducibility off the plane exists in the
+literature, and §10.3 says why that is an obstruction rather than an opening.
+
+### A claim of its own that the check refuted, and the correction is worth more
+
+It wrote that the Gallai-tree refinement would bite on Parts's base, whose minimum degree is 4. **It does
+not:** the 18–24 degree-≤ 4 vertices there are **pairwise non-adjacent**, so every candidate piece is a
+single vertex, and a single vertex **is** a Gallai tree. Controls fired (`C₄` is not a Gallai tree; `K₃`,
+`P₃`, `K₁` are). **So the reusable screen is not "minimum degree ≤ 4" but "do the degree-≤ 4 vertices touch
+each other in a piece containing an even cycle?"** — rarer, and **zero on both objects we hold.**
+
+### Correction folded in
+
+Phase H2's `8,208 (32.1%)` at full unit degree 30 is **`8,239 (32.2%)`**, fixed in place in all three live
+locations with no correction trail.
+
+---
+
+## §11 — A claim of mine to the product owner's own report, corrected before it cost anything
+
+I told Kooshi that a compulsion sweep of this object *"does not depend on the reduction finishing."*
+**That is wrong.** De Grey's swept object is 1,581 vertices — **1.25 M pairs**. Ours is 51,133 —
+**1.31 BILLION pairs, about 1,046×.** At even a millisecond per pair that is 363 hours. **The sweep as I
+described it is not affordable and does depend on the reduction.**
+
+**What rescues it is one of this project's own theorems rather than more compute.** Ledger row 59: the
+residue colouring identifies two `K`-points **iff** their distance lies in the prime above 2, so **a
+forced-monochromatic pair needs `v_𝔭(d) > 0`** and a virtual edge needs `v_𝔭(d) = 0`. That is an **exact,
+cheap, arithmetic pre-filter** on the pair population, applied before any solver sees anything — and G39
+confines a forced pair's critical set to `N(p) ∩ N(q)`, which filters again.
+
+> **So the sweep is affordable — but as *arithmetic filter first, solver second*, not as a sweep.** Stated
+> here because the corrected version is the one to run, and because the uncorrected version was one
+> authorisation away from costing a fortnight.
