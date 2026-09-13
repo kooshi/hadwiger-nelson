@@ -47,6 +47,10 @@ def finitePlane19QuotColoring : (finitePlane 19).Coloring (Fin 5) :=
 theorem finitePlane19_fanGap : FanGap finitePlane19QuotColoring (4, 0) 1 := by
   sorry
 
+/-- Red: a present colour is refused as a gap (`0` is on `N(4, 0)`). -/
+theorem finitePlane19_not_fanGap_zero : ¬ FanGap finitePlane19QuotColoring (4, 0) 0 := by
+  sorry
+
 theorem finitePlane19_slack : Slack (finitePlane 19) 5 :=
   slack_addCayley_of_fanGap finitePlane19_fanGap
 
@@ -56,7 +60,7 @@ variable {V : Type*} {G : SimpleGraph V}
 
 theorem forces_eq_of_hom_finitePlane19 (f : G →g finitePlane 19) {u u' : V} (h : Forces G 5 u u') :
     u = u' :=
-  Slack.forces_eq finitePlane19_slack f h
+  finitePlane19_slack.forces_eq_of_hom f h
 
 end Hom
 

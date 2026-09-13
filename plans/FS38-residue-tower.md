@@ -678,3 +678,65 @@ one entry of the shared-gap table (the `decide` refuses); `#print axioms` on eve
 **Applied to the skeleton** (this commit; build re-run): `twoAdicLevelHom` re-indexed; the eight stones added as
 leaves with their statements; `twoAdicFive_not_forces_of_ne`'s and `twoAdicFour_not_slack`'s docstrings name
 `twoAdicLevelHom 3`; `finitePlane19QuotColouring_proper`'s docstring names its derivation.
+
+---
+
+## §M3. Experience-modeling pass (`debruijn-experience-modeling`, fresh invocation, 2026-09-13)
+
+**The users, inhabited.** (1) The implementer of an instance module, holding `f : G →g finitePlane 11` and a goal
+`Forces G 5 u u' ↔ u = u'`: wants one name to cite and dot-notation that reads. (2) The reader of the record (row 66,
+G54, the report), who cites names for a stranger: wants the theorem about the graph itself, not the homomorphism
+bookkeeping. (3) The next prime — someone with a 5-colouring of `UD(𝔽_p, 2)` for `p = 23, 31, …` should the
+undecided planes fall: wants a recipe that never mentions `11`. (4) `exact?`, holding a goal `u = u'` with `f` and
+`h : Forces G 5 u u'` in context: finds a lemma only if its conclusion is the goal and its side goals close from
+context — so the instance wrappers (`forces_eq_of_hom_finitePlane11 f h`) are what it returns; `Slack.forces_eq_of_hom
+finitePlane11_slack f h` it cannot, since `finitePlane11_slack` is a library constant, not a hypothesis. (5) `simp`,
+holding exactly the tagged set: the Eisenstein invariances and the rfl-apply lemmas of the graph homs.
+
+**Reframes taken (applied to the skeleton in this commit).**
+1. **One convention for both hereditary properties: the graph-alone theorem is primary, the hom form is `_of_hom`.**
+   `Slack.forces_eq`/`Slack.forces_iff` are now statements about a slack graph `G` itself; `Slack.forces_eq_of_hom`/
+   `Slack.forces_iff_of_hom` take `h : Slack P k` and `f : G →g P` (one line each through `Slack.of_hom`). `self_forces_iff`
+   is gone — it was the primary statement wearing a qualifier. The ∀-pairs property is named, so it gets the same shape:
+   `PairwiseFusable P k := ∀ v w, Fusable P k v w`, `PairwiseFusable.of_hom`, `PairwiseFusable.separated_iff_adj`
+   (graph-alone; Poros's suggestion), `PairwiseFusable.separated_iff_adj_of_hom`. Consumers read
+   `finitePlane11_slack.forces_iff_of_hom f` and `finitePlane11_pairwiseFusable.separated_iff_adj_of_hom f`; the record
+   reads "a slack graph has no forced pair; a pairwise-fusable graph has no virtual non-edge; both pass to every graph
+   mapping into it".
+2. **The base-edge transport is a theorem about every `unitQuadrance R`, not about `11`** (G30 §6): for any commutative
+   ring, an edge `v ~ w` is carried onto `((0,0), (1,0))` by translation then rotation by the conjugate of `w − v`
+   (`unitQuadrance_exists_hom_to_base`), so one shared-gap table at the base edge makes every edge fusable
+   (`unitQuadrance_fusable_of_sharedGap_base`). `finitePlane11_exists_hom_to_base` is deleted; the 11 module assembles
+   `finitePlane11_pairwiseFusable` from the general lemma and M60's coincidences. The recipe for the next prime is then:
+   a table with a gap (`decide`) → `slack_addCayley_of_fanGap`; a table with a shared gap at the base edge (`decide`) →
+   `unitQuadrance_fusable_of_sharedGap_base`; the plane's own coincidences → `fusable_of_not_separated`. `FanGap.lean`
+   imports `PlaneRotation` for `rotHom`.
+3. **`simp` normal forms.** The invariances rewrite toward "no `ω`, no conjugation, no ring hom inside a form":
+   `EisMod.norm_omegaMul`, `norm_conj`, `norm_map`, `trace_omegaMul_omegaMul`, `trace_conj_conj`, `trace_map` are `@[simp]`;
+   `omegaMul_map` is stated as `Prod.map φ φ (omegaMul z) = omegaMul (Prod.map φ φ z)` (map inward, `ω` outward) so that
+   `trace_omegaMul_omegaMul` fires next; `castDown_dbl` pushes the cast inward. Each strips one constructor from the
+   argument of a form, so the set terminates. The rfl lemmas `twoAdicOmegaHom_apply`, `twoAdicLevelHom_apply`,
+   `repaintAt_apply_self` are `@[simp]` too; the conditional apply lemmas stay untagged (simp uses them when the
+   membership is in context).
+4. **Two reds added** where a consumer would first mistrust a table: `finitePlane11_sharedGap_corrupt_refused` (the
+   base table with `(0, 0)` overwritten by the gap colour is refused as a shared gap — the M04 "corrupted table" pattern)
+   and `finitePlane19_not_fanGap_zero` (a present colour refused at 19).
+
+**Names, cold-read.** `FanGap` (the record's fan vocabulary; the docstring says "not frozen" for the stranger),
+`Slack`, `SharedGap`, `Fusable`, `PairwiseFusable`, `repaintAt`, `pullbackRepaint`: each reads as its one-line contract.
+`castDown`, `dbl`, `normForm`, `EisMod`, and the `twoAdic*` prefix: one vocabulary. Instance names follow the record's
+`<conclusion>_of_hom_<target>` and `<object>_<conclusion>` patterns and the `_11` suffix of M60. The convention is a
+contract: `X.of_hom`, `X.<conclusion>`, `X.<conclusion>_of_hom` for both hereditary properties.
+
+**Argument order.** The homomorphism first, the property second (`Slack.of_hom f h`, `FanGap.comap f h`), matching
+Mathlib's `Coloring.comap f C`, so dot-notation reads `h.of_hom f`, `h.comap f`. Statements the instances cite are
+never stated on the wrong side of an iff: `Forces ↔ =` and `Separated ↔ Adj`, with the `→` halves named (`forces_eq`).
+
+**Breakdown surface.** A consumer whose table lacks a gap sees `decide` refuse `FanGap …` — the honest failure, at the
+span of the claim. The reds pin it. No tactic, no notation, no `autoParam` is minted: the domain owns none, and the
+zero-annotation path is the instance wrapper.
+
+**Validated as the user.** API-only proof: `heule510_forces_iff`, `heule510_separated_iff_adj`,
+`three_le_arityFloor_heule510` close from public names alone with no `unfold`. The next-prime recipe is stated above in
+five names and mentions no prime. Every "Try this" a reader would paste — the instance wrappers — elaborates in the
+build. Unrequested bytes refused: no `Bool` twin of `FanGap` (decidability suffices), no notation, no typeclass.

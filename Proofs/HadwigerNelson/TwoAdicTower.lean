@@ -58,15 +58,19 @@ def omegaMul : EisMod n →+ EisMod n where
   map_zero' := by simp
   map_add' x y := by ext <;> simp <;> ring
 
+@[simp]
 theorem norm_omegaMul (z : EisMod n) : norm (omegaMul z) = norm z := by
   sorry
 
+@[simp]
 theorem trace_omegaMul_omegaMul (z w : EisMod n) : trace (omegaMul z) (omegaMul w) = trace z w := by
   sorry
 
+@[simp]
 theorem norm_conj (z : EisMod n) : norm (conj z) = norm z := by
   sorry
 
+@[simp]
 theorem trace_conj_conj (z w : EisMod n) : trace (conj z) (conj w) = trace z w := by
   sorry
 
@@ -80,16 +84,20 @@ theorem omegaMul_injective : Function.Injective (omegaMul : EisMod n → EisMod 
 variable {n' : ℕ}
 
 /-- The norm commutes with a ring homomorphism applied to both components. -/
+@[simp]
 theorem norm_map (φ : ZMod n →+* ZMod n') (z : EisMod n) : norm (Prod.map φ φ z) = φ (norm z) := by
   sorry
 
+@[simp]
 theorem trace_map (φ : ZMod n →+* ZMod n') (z w : EisMod n) :
     trace (Prod.map φ φ z) (Prod.map φ φ w) = φ (trace z w) := by
   sorry
 
-/-- `ω`-multiplication commutes with a ring homomorphism applied to both components. -/
+/-- `ω`-multiplication commutes with a ring homomorphism applied to both components — oriented with the map inward
+and `ω` outward, so that `trace_omegaMul_omegaMul` fires next. -/
+@[simp]
 theorem omegaMul_map (φ : ZMod n →+* ZMod n') (z : EisMod n) :
-    omegaMul (Prod.map φ φ z) = Prod.map φ φ (omegaMul z) := by
+    Prod.map φ φ (omegaMul z) = omegaMul (Prod.map φ φ z) := by
   sorry
 
 end EisMod
@@ -118,6 +126,7 @@ def dbl (m : ℕ) : ZMod (2 ^ (m / 2)) →+ ZMod (2 ^ ((m + 1) / 2)) where
     sorry
 
 /-- Doubling commutes with reduction: both sides are `2·x̃` read modulo `2^⌈m/2⌉`, and `2^⌈m/2⌉ ∣ 2^{⌊m/2⌋+1}`. -/
+@[simp]
 theorem castDown_dbl (m : ℕ) (x : ZMod (2 ^ ((m + 1) / 2))) :
     castDown (m + 1) (dbl (m + 1) x) = dbl m (castDown m x) := by
   sorry
@@ -187,6 +196,8 @@ def twoAdicOmegaHom (m : ℕ) : twoAdicPlane m →g twoAdicPlane m where
   map_rel' := by
     sorry
 
+@[simp] theorem twoAdicOmegaHom_apply (m : ℕ) (z : TwoAdicLevel m) : twoAdicOmegaHom m z = twoAdicOmega m z := rfl
+
 /-! ### The level maps -/
 
 /-- The reduction `O/𝔓^{m+1} → O/𝔓^m`: `castDown (m + 1)` on the `A`-component, `castDown m` on the `B`-component. -/
@@ -218,6 +229,9 @@ def twoAdicLevelHom (m : ℕ) : twoAdicPlane (m + 2) →g twoAdicPlane (m + 1) w
   toFun := twoAdicLevelMap (m + 1)
   map_rel' := by
     sorry
+
+@[simp] theorem twoAdicLevelHom_apply (m : ℕ) (z : TwoAdicLevel (m + 2)) :
+    twoAdicLevelHom m z = twoAdicLevelMap (m + 1) z := rfl
 
 /-! ### Level one is the clique, and it has no gap -/
 

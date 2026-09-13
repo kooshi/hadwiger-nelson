@@ -12,7 +12,7 @@ colours on the twelve neighbours of `(2, 4)` (own colour `1`, neighbours `{0, 3,
 vertex has a gapped colouring (`finitePlane11_slack`). **The shared gap**: a second table (`finitePlane11DoubleGapTable`,
 found by SAT, `data/fs38/doublegap-p11-k5.json`) has colour `4` absent from `N[(0,0)] ∪ N[(1,0)]`; translation and
 rotation (`rotHom`) carry every edge onto that one, and M60's coincidences cover the non-adjacent pairs, so every pair
-of the plane is fusable (`finitePlane11_fusable`).
+of the plane is fusable (`finitePlane11_pairwiseFusable`).
 
 **What follows, for every graph `G` with a homomorphism into the plane** (`FanGap.lean`): `Forces G 5 u u' ↔ u = u'`
 and `Separated G 5 u u' ↔ G.Adj u u'` — the plane's whole arity-2 compulsion structure at five colours pulls back. The
@@ -87,15 +87,18 @@ def finitePlane11DoubleGapColoring : (finitePlane 11).Coloring (Fin 5) :=
 theorem finitePlane11_sharedGap : SharedGap finitePlane11DoubleGapColoring (0, 0) (1, 0) 4 := by
   sorry
 
-/-- Every edge `v ~ w` is carried onto the base edge by an endomorphism: translate by `−v`, then rotate by the
-conjugate of `d = w − v` (`rotHom` by `d` sends `(1, 0)` to `d`; its inverse sends `d` to `(1, 0)`). -/
-theorem finitePlane11_exists_hom_to_base {v w : ZMod 11 × ZMod 11} (h : (finitePlane 11).Adj v w) :
-    ∃ σ : finitePlane 11 →g finitePlane 11, σ v = (0, 0) ∧ σ w = (1, 0) := by
+/-- Red: the base table with `(0, 0)` overwritten by the gap colour is refused as a shared gap (the M04 "corrupted
+table" control, on this table). -/
+theorem finitePlane11_sharedGap_corrupt_refused :
+    ¬ ∃ C : (finitePlane 11).Coloring (Fin 5),
+      (∀ v, v ≠ (0, 0) → C v = finitePlane11DoubleGapColouring v) ∧ C (0, 0) = 4 ∧
+        SharedGap C (0, 0) (1, 0) 4 := by
   sorry
 
 /-- **Every pair of `UD(𝔽₁₁, 2)` is fusable at five colours**: adjacent pairs by the shared gap transported
-(`fusable_of_hom_to_base`), the rest by M60's coincidences (`finitePlane11_separated_iff` read as `¬ Separated`). -/
-theorem finitePlane11_fusable : ∀ v w, Fusable (finitePlane 11) 5 v w := by
+(`unitQuadrance_fusable_of_sharedGap_base`), the rest by M60's coincidences (`finitePlane11_separated_iff` read as
+`¬ Separated`). -/
+theorem finitePlane11_pairwiseFusable : PairwiseFusable (finitePlane 11) 5 := by
   sorry
 
 /-! ### Every graph mapping into the plane -/
@@ -106,16 +109,16 @@ variable {V : Type*} {G : SimpleGraph V}
 
 theorem forces_eq_of_hom_finitePlane11 (f : G →g finitePlane 11) {u u' : V} (h : Forces G 5 u u') :
     u = u' :=
-  Slack.forces_eq finitePlane11_slack f h
+  finitePlane11_slack.forces_eq_of_hom f h
 
 theorem forces_iff_of_hom_finitePlane11 (f : G →g finitePlane 11) {u u' : V} :
     Forces G 5 u u' ↔ u = u' :=
-  Slack.forces_iff finitePlane11_slack f
+  finitePlane11_slack.forces_iff_of_hom f
 
 /-- **Virtual edges are edges** for every graph mapping into the plane at `11`. -/
 theorem separated_iff_adj_of_hom_finitePlane11 (f : G →g finitePlane 11) {u u' : V} :
     Separated G 5 u u' ↔ G.Adj u u' :=
-  separated_iff_adj_of_fusable finitePlane11_fusable f
+  finitePlane11_pairwiseFusable.separated_iff_adj_of_hom f
 
 end Hom
 
@@ -158,7 +161,7 @@ theorem UDCert.forces_eq_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : Z
 theorem UDCert.separated_iff_adj_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
     (hu : u * c.denom = 1) (hv : c.Valid = true) {i j : Fin n} :
     Separated (edgeGraph n c.edges) 5 i j ↔ (edgeGraph n c.edges).Adj i j :=
-  c.separated_iff_adj_of_fusable Q4.sevenFree.res11 hS hu hv finitePlane11_fusable
+  c.separated_iff_adj_of_fusable Q4.sevenFree.res11 hS hu hv finitePlane11_pairwiseFusable
 
 /-! ### Heule-510: the measured null of M63 phase H4, as a theorem -/
 

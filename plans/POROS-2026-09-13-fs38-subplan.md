@@ -44,7 +44,7 @@ Each item read against an expectation written before the reading; the address is
 
 - Brief §1 Lemma A (a fan gap downstairs frees the whole fibre upstairs), re-derived from `Forcer.lean:41` and `Fan.lean:79` — read against: correct as stated, graph-level, no finiteness — surprised: no; the repaint is proper because a homomorphism sends N(u) into N(f u), and u′ ≠ u keeps its pulled-back colour
 - Brief §1 Lemma B and A′ — read against: correct, with every hypothesis used — surprised: yes; the "forces-free P" hypothesis is redundant (a gap at v separates v from every x ≠ v by the same repaint — the planner's finding, confirmed here), and A′'s "whenever f is surjective" is never used (gaps pull back along any hom, and the induction needs no surjectivity)
-- `Forces.image` (`ResidueObstruction.lean:64`), `unitQuadrance.map` (`UnitQuadrance.lean:82`) — read against: compulsions map forward; the cast ZMod (p^{m+1}) → ZMod (p^m) is a hom on `Nontrivial` alone — surprised: no; fibres carry no edge since a² + b² ≡ 0 (mod p^{2m}) is never 1 (mod p^{m+1})
+- `Forces.image` (`ResidueObstruction.lean:64`), `unitQuadrance.map` (`UnitQuadrance.lean:82`) — read against: compulsions map forward; the cast ZMod (p^{m+1}) → ZMod (p^m) is a hom on `Nontrivial` alone — surprised: no at the time; amended after the obligation pass: fibres carry no edge for every level m ≥ 1, since a² + b² ≡ 0 (mod p^{2m}) is never 1 (mod p^{m+1}) — false at m = 0 (everything is 0 mod 1), where level 0 is one vertex with no edge and level 1 is K₄, so the level hom P₁ → P₀ does not exist; the kernel refused the m = 0 instance of `twoAdicLevelHom` before either reader did (planner, §M2)
 - Brief §1 Corollary 1 (the tower at 11 pairwise free at every level) — read against: an induction along the casts — surprised: no as a statement; yes as a role: with the merged lemma it is an INSTANCE (P_m has a hom to P₁), not a step toward Corollary 2
 - Brief §1 "Scope (a)", the kernel form of Corollary 2 — read against: the certificate graph mapped straight into `finitePlane 11` — surprised: yes; the brief routes through a ring R over ZMod 11 (`Adjoin 11 (ZMod (11^j))`), a level computed in `tools/`, and "drawn images DISTINCT in R" — none of which the merged lemma needs; the direct form is `∀ i ≠ j, ¬ Forces (edgeGraph n c.edges) 5 i j` for every Valid √7-free certificate with 11 ∤ D (`drawing_adj`, `UnitQuadrance.lean:235`, composed with `unitQuadrance.map`); converged independently with the planner
 - Brief §1 "every 5-sealed field containing ℚ(√3,√11) has 11 usable of degree one", against `data/fplane/map.md` — read against: true for the multiquadratic table — surprised: yes, on the scope only; every 5-sealed row lists 11 first (K(√5), K(√23), K(√247), K(√5,√247), Heule's field), and the reason is arithmetic (a degree-one prime over K needs 3 and 11 both residues, i.e. p ≡ 11 (mod 12) and p a non-residue mod 11: 11, 83, 107, … with every plane from 59 up refusing five); but the brief says "every field", and a non-multiquadratic F ⊇ K may have a usable prime of residue degree 3 at 23–47 whose plane is undecided
@@ -176,7 +176,7 @@ hunch: K-fabric-can-force-depth-4
   status: open (the two-sided form of the brief's "small-chunk effect"; M56's precedent — the additive family also over-forces exactly depth 4, P1′ — is a second reading, not evidence)
 
 hunch: no-gap-at-2-below-level-6-is-a-theorem-of-the-level-5-refutation
-  claim: "no 4-colouring of P_m has a fan gap" for m ≤ 5 follows from the kernel-checked forcing at level 5 by three kernel lemmas — a gap at level m pulls back along the level map to every lift at level 5 (`FanGap.comap`), one gap on a Cayley graph gives slackness by translation, slackness gives pairwise freedom (D0.2 (a)), and P₅ has a forced pair (K3's LRAT); so the planner's P-A3 is a corollary of P-A2 at levels ≤ 5, needs no solver and no planted control there, and above level 5 is implied by P-A2 at that level
+  claim: "no 4-colouring of P_m has a fan gap" for m ≤ 5 follows from the kernel-checked forcing at level 5 by three kernel lemmas — a gap at level m ≥ 1 pulls back along the level map (a hom only from level 1 up — §M2) to every lift at level 5 (`FanGap.comap`), one gap on a Cayley graph gives slackness by translation, slackness gives pairwise freedom (D0.2 (a)), and P₅ has a forced pair (K3's LRAT); so the planner's P-A3 is a corollary of P-A2 at levels ≤ 5, needs no solver and no planted control there, and above level 5 is implied by P-A2 at that level
   basis: derived
   falsifier: a verified gapped 4-colouring of some P_m, m ≤ 5 — which would refute the LRAT-checked forcing, i.e. the kernel
   registered: 2026-09-13
@@ -344,12 +344,12 @@ of χ(ℝ²) ≤ 5, and the record still names no route to one.
 Requested of the brief (the product owner): six — the de Grey fit; Lemma B's redundant hypothesis (the planner's);
 the ring-R kernel form; "every field"; "(b) nothing touches Separated"; "the 2-adic law" unqualified. Between the
 planner and Poros: one — the planner withdrew de Grey's distance-4 pairs from its §S as the tower's retrodiction on
-reading item A above (its count: 1); Poros retracted two, publicly: one on reading the planner's §S3 — "𝔓-integrality of
+reading item A above (its count: 1); Poros retracted three, publicly: one on reading the planner's §S3 — "𝔓-integrality of
 translated COORDINATES" at 2 is false (x = (z + z̄)/2 is not integral there; the complex number z is), which is why the
 2-adic object is the complex form Cay(O/𝔓^m, S_m) and not `unitQuadrance (O_K/𝔭^m)` (its count: 1), and one on reading the skeleton — the request to drop `hc : P.Colorable k` from
-`separated_iff_adj_of_doubleSlack`, which an edgeless P at k = 0 shows is needed (its count: 2). Requested of the
-brief: seven (the six above plus the tower-as-a-step). Three retractions in two directions — a category error, a unit slip, a
-redundant-hypothesis call that was itself wrong — is the G51 window doing its job; the modeling passes are where any
+`separated_iff_adj_of_doubleSlack`, which an edgeless P at k = 0 shows is needed; and one on the obligation pass — "no fibre edges at any level" and the gap-pull-up chain both silently assumed level ≥ 1, and the kernel refused the m = 0 hom (its count: 3). Requested of the
+brief: seven (the six above plus the tower-as-a-step). Four retractions in two directions — a category error, a unit slip, a
+redundant-hypothesis call that was itself wrong, a level bound the kernel enforced — is the G51 window doing its job; the modeling passes are where any
 rest arrives, and a pass that changes a statement is read here again. Poros's own, private, before anything was sent: two — the 791-half first read as
 K-fabric from G1 and killed against `tools/degrey.py`; a line-periodic "instrument broken" verdict that was a
 mis-specified expectation, killed against `periodic-below-71.json`.

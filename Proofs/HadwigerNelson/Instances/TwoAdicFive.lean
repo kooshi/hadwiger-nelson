@@ -72,7 +72,7 @@ theorem twoAdicFive_forces_iff' {x y : TwoAdicLevel 5} :
     Forces (twoAdicPlane 5) 4 x y ↔ twoAdicLevelMap 4 (y - x) = 0 := by
   sorry
 
-/-- **No gap at level five** — a forced pair forbids slackness (`Slack.self_forces_iff`). -/
+/-- **No gap at level five** — a forced pair forbids slackness (`Slack.forces_iff`). -/
 theorem twoAdicFive_not_slack : ¬ Slack (twoAdicPlane 5) 4 := by
   sorry
 

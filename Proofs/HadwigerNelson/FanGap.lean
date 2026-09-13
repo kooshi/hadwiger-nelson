@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.ResidueObstruction
 import Proofs.HadwigerNelson.CoverageMono
+import Proofs.HadwigerNelson.PlaneRotation
 
 /-!
 # The fan gap: a free colour at the image kills every pair compulsion through it
@@ -66,6 +67,10 @@ adjacent pairs share the gap of one table transported by translation and rotatio
 def Fusable (P : SimpleGraph W) (k : ℕ) (v w : W) : Prop :=
   ∃ C : P.Coloring (Fin k), C v = C w ∨ ∃ γ : Fin k, SharedGap C v w γ
 
+/-- **Pairwise fusable**: every pair is. The second hereditary property (`Slack` is the first); it kills virtual
+non-edges as slackness kills forced pairs. -/
+def PairwiseFusable (P : SimpleGraph W) (k : ℕ) : Prop := ∀ v w, Fusable P k v w
+
 /-- **Gaps pull back** (the brief's A′): the neighbours of `u` map into the neighbours of `f u`. -/
 theorem FanGap.comap (f : G →g P) {C : P.Coloring (Fin k)} {u : V} {γ : Fin k}
     (h : FanGap C (f u) γ) : FanGap (C.comap f) u γ := by
@@ -107,6 +112,7 @@ noncomputable def repaintAt (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ 
   pullbackRepaint f C {u} γ (Set.pairwise_singleton _ _) (by
     sorry)
 
+@[simp]
 theorem repaintAt_apply_self (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
     (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : repaintAt f C u γ hgap u = γ := by
   sorry
@@ -154,17 +160,20 @@ theorem Fan.image (f : G →g P) {p : V} {Q : List V} (h : Fan G k p Q) : Fan P 
 theorem Slack.of_hom (f : G →g P) (h : Slack P k) : Slack G k := by
   sorry
 
-/-- **Corollary (a) of D0.2**: over a slack target, forced equal is equal. The brief's Lemma B without its first
-hypothesis — forces-freeness of `P` is a consequence of its slackness, not a premise. -/
-theorem Slack.forces_eq (h : Slack P k) (f : G →g P) {u u' : V} (hf : Forces G k u u') : u = u' := by
+/-- **Corollary (a) of D0.2**: a slack graph has no forced pair — forced equal is equal. The brief's Lemma B without
+its first hypothesis: forces-freeness is a consequence of slackness, not a premise. -/
+theorem Slack.forces_eq (h : Slack G k) {u u' : V} (hf : Forces G k u u') : u = u' := by
   sorry
 
-theorem Slack.forces_iff (h : Slack P k) (f : G →g P) {u u' : V} : Forces G k u u' ↔ u = u' := by
+theorem Slack.forces_iff (h : Slack G k) {u u' : V} : Forces G k u u' ↔ u = u' := by
   sorry
 
-/-- A slack graph is itself forces-free (`f = id`). -/
-theorem Slack.self_forces_iff (h : Slack P k) {x y : W} : Forces P k x y ↔ x = y := by
-  sorry
+/-- The hom form, for the instances: a graph mapping into a slack target has no forced pair. -/
+theorem Slack.forces_eq_of_hom (h : Slack P k) (f : G →g P) {u u' : V} (hf : Forces G k u u') : u = u' :=
+  (Slack.of_hom f h).forces_eq hf
+
+theorem Slack.forces_iff_of_hom (h : Slack P k) (f : G →g P) {u u' : V} : Forces G k u u' ↔ u = u' :=
+  (Slack.of_hom f h).forces_iff
 
 /-- Fusability pulls back along homomorphisms: a coincidence pulls back, and so do both gaps (`FanGap.comap`). -/
 theorem Fusable.of_hom (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u')) : Fusable G k u u' := by
@@ -175,12 +184,19 @@ theorem Fusable.of_hom (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u')) 
 theorem fusable_of_not_separated {v w : W} (h : ¬ Separated P k v w) : Fusable P k v w := by
   sorry
 
-/-- **Virtual edges are edges (D0.4).** Over a target every pair of which is fusable, for every graph mapping into it a
-pair separated by every `k`-colouring is adjacent. One hypothesis; it carries its own colouring, so no colourability or
-`k ≥ 1` premise is needed. -/
-theorem separated_iff_adj_of_fusable (h : ∀ v w, Fusable P k v w) (f : G →g P) {u u' : V} :
+theorem PairwiseFusable.of_hom (f : G →g P) (h : PairwiseFusable P k) : PairwiseFusable G k :=
+  fun u u' => Fusable.of_hom f (h (f u) (f u'))
+
+/-- **Virtual edges are edges (D0.4).** In a pairwise-fusable graph, a pair separated by every `k`-colouring is
+adjacent. One hypothesis; it carries its own colouring, so no colourability or `k ≥ 1` premise is needed. -/
+theorem PairwiseFusable.separated_iff_adj (h : PairwiseFusable G k) {u u' : V} :
     Separated G k u u' ↔ G.Adj u u' := by
   sorry
+
+/-- The hom form, for the instances: a graph mapping into a pairwise-fusable target has no virtual non-edge. -/
+theorem PairwiseFusable.separated_iff_adj_of_hom (h : PairwiseFusable P k) (f : G →g P) {u u' : V} :
+    Separated G k u u' ↔ G.Adj u u' :=
+  (PairwiseFusable.of_hom f h).separated_iff_adj
 
 /-- **No pair compulsion and colourable ⟹ arity floor at least `3`** — the general form of
 `three_le_arityFloor_of_aperiodic_coincides` (`ResidueObstruction.lean`), whose proof uses only these three facts through
@@ -230,13 +246,26 @@ theorem Slack.unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T) (h : Slac
     Slack (unitQuadrance R) k :=
   Slack.of_hom (unitQuadrance.map φ) h
 
-theorem fusable_unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T)
-    (h : ∀ v w, Fusable (unitQuadrance T) k v w) (u v : R × R) : Fusable (unitQuadrance R) k u v :=
-  Fusable.of_hom (unitQuadrance.map φ) (h _ _)
+theorem PairwiseFusable.unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T)
+    (h : PairwiseFusable (unitQuadrance T) k) : PairwiseFusable (unitQuadrance R) k :=
+  PairwiseFusable.of_hom (unitQuadrance.map φ) h
 
 theorem unitQuadrance_forces_eq_of_ringHom [Nontrivial T] (φ : R →+* T) (h : Slack (unitQuadrance T) k)
     {u v : R × R} (hf : Forces (unitQuadrance R) k u v) : u = v :=
-  Slack.forces_eq h (unitQuadrance.map φ) hf
+  h.forces_eq_of_hom (unitQuadrance.map φ) hf
+
+/-- **The base-edge transport, for every ring.** An edge `v ~ w` of `unitQuadrance R` is carried onto the base edge
+`((0, 0), (1, 0))` by translation by `−v` followed by rotation by the conjugate of `d = w − v` (`rotHom` by `d` sends
+`(1, 0)` to `d`; its inverse sends `d` to `(1, 0)`). Nothing here is about a prime. -/
+theorem unitQuadrance_exists_hom_to_base {v w : R × R} (h : (unitQuadrance R).Adj v w) :
+    ∃ σ : unitQuadrance R →g unitQuadrance R, σ v = (0, 0) ∧ σ w = (1, 0) := by
+  sorry
+
+/-- **One shared-gap table at the base edge makes every edge fusable** — the recipe for any plane, at any prime. -/
+theorem unitQuadrance_fusable_of_sharedGap_base {C : (unitQuadrance R).Coloring (Fin k)} {γ : Fin k}
+    (h₀ : SharedGap C (0, 0) (1, 0) γ) {v w : R × R} (hvw : (unitQuadrance R).Adj v w) :
+    Fusable (unitQuadrance R) k v w :=
+  fusable_of_hom_to_base h₀ (fun _ _ h => unitQuadrance_exists_hom_to_base h) hvw
 
 variable {n : ℕ}
 
@@ -246,14 +275,14 @@ on its distance and no "images distinct" (M60's residue law refuted only the pai
 theorem UDCert.forces_eq_of_slack [Nontrivial R] (c : UDCert n) {S : Subring Q4} (φ : S →+* R)
     (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
     (h : Slack (unitQuadrance R) k) {i j : Fin n} (hf : Forces (edgeGraph n c.edges) k i j) : i = j :=
-  Slack.forces_eq h (c.drawingHom φ hS hu hv) hf
+  h.forces_eq_of_hom (c.drawingHom φ hS hu hv) hf
 
 /-- The certificate form of "virtual edges are edges". -/
 theorem UDCert.separated_iff_adj_of_fusable [Nontrivial R] (c : UDCert n) {S : Subring Q4}
     (φ : S →+* R) (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
-    (h : ∀ v w, Fusable (unitQuadrance R) k v w) {i j : Fin n} :
+    (h : PairwiseFusable (unitQuadrance R) k) {i j : Fin n} :
     Separated (edgeGraph n c.edges) k i j ↔ (edgeGraph n c.edges).Adj i j :=
-  HadwigerNelson.separated_iff_adj_of_fusable h (c.drawingHom φ hS hu hv)
+  h.separated_iff_adj_of_hom (c.drawingHom φ hS hu hv)
 
 end Ring
 
