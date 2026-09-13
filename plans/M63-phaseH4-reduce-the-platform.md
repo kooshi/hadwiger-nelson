@@ -500,3 +500,72 @@ number that actually decides the final size.** Sixteen hours of sequential wall 
 before knowing where the knee is. With **outcomes pre-registered**, the **batch-size lever exercised** (larger
 while accepts are cheap, shrinking as the knee approaches), and the rate **reported as a curve, since the
 knee's location is the deliverable.**
+
+---
+
+## §13 — DIRECTION CHANGE: abandon shrinking, grow instead (Kooshi, 2026-09-12)
+
+> *"I think we should abandon the shrinking path anyway. Going to 6 means we need to make the object as
+> rigid as possible, which means growing. While we're measuring it, check its additive colorings and gauge
+> and whatnot to see how far off we might be."*
+
+**Accepted, and the reasoning is sharper than "growing helps".**
+
+**Reaching six goes through additive rigidity, and this project holds the theorem in the kernel:**
+`forces_of_additivelyRigid` and `six_le_chromaticNumber_plane_of_additivelyRigid` (ledger row 51) — an
+additively rigid object **forces a pair**, and a forced pair at five colours spindles to `χ ≥ 6`. Rigidity is
+therefore **upstream** of the other routes rather than an alternative to them: it *produces* the forced pair
+that row 43's and G48's mechanisms need.
+
+**And rigidity is a CLOSURE property.** The gauge `γ = Σ(components − 1)` counts **disconnected** two-colour
+Kempe subgraphs, so **more edges close it and fewer edges open it.**
+
+> **Shrinking moved the one dial that matters in exactly the wrong direction.** A minimal refuting subgraph
+> is a size record; it is not a step toward six.
+
+That also retires the question this phase was opened on. **Whether this object beats the 509-vertex record
+is no longer worth the sixteen sequential hours to find out** — 509 is a size record in a 5-sealed field
+that can never reach six.
+
+### What the kill forfeits, named rather than left to disappear
+
+- **The knee location** — where the accept rate breaks — and with it the minimal object's size. **The
+  question of beating 509 goes UNANSWERED rather than answered negatively.**
+- The probe's pre-registered outcomes, now unneeded.
+
+**What it does not forfeit:** the reduction machinery is built, gate-green and **checkpointed**, with its
+resume command written down — confirmation requested that resuming would not cost a rebuild, **while that
+knowledge is cheap rather than in a month.** The `u16` correctness fix stays; it was to shipped code, not to
+the reduction.
+
+**Banked from the pilot, because it outlives the direction:** 99.25% accept over 400, flat; **60 solver asks
+bought 400 deletions — batches drive cost, not deletions**; ~3,800 asks at batch 8 against ~1,550 at batch
+64; **a successful walk is the expensive walk**; and the unquotable extrapolation, kept as unquotable with
+its reason attached.
+
+### The new main line: one dial, two curves
+
+The family-keeping measurement is promoted from a side question and gains its second half:
+
+> **As the object grows, does the gauge `γ` fall faster than the additive family dies?**
+
+The two move **against** each other, and that tension is precisely what
+`plans/STUB-family-keeping-thickening.md` was minted to dial. Growth follows its derivation **D1**: new
+points must be **in-lattice** or **new-direction**, never **rational of order divisible by 5**.
+
+**Its own P2 is registered against us and its author expected the principle to fail:** *no
+in-lattice-plus-new-direction thickening reaches `γ̄` below half its value before its family falls below
+100*, medium confidence. **Never tested on this field. Now being scored on our object.**
+
+### The honest size of the target, stated up front
+
+**G42: Exoo–Ismailescu's `G` is the only object here with `γ = 0`, and only WITH its cheats** — the gauge is
+measured on a graph **including its non-unit edges**, never on the unit-distance graph alone. And *"every
+unit-distance object held is Kempe-open by orders of magnitude."*
+
+> **No pure unit-distance graph in this project has ever been rigid.** So the deliverable is **how far off we
+> are, in orders of magnitude** — and if the honest answer is that the target has never been reached by any
+> unit-distance object, that is the headline rather than a footnote.
+
+**A gauge that falls is one obstruction receding, not rigidity achieved. Un-eliminated is not alive**, and
+the gap G42 measures is orders of magnitude, not a margin.
