@@ -420,3 +420,83 @@ confines a forced pair's critical set to `N(p) ∩ N(q)`, which filters again.
 > **So the sweep is affordable — but as *arithmetic filter first, solver second*, not as a sweep.** Stated
 > here because the corrected version is the one to run, and because the uncorrected version was one
 > authorisation away from costing a fortnight.
+
+---
+
+## §12 — The pilot: 99.25% accept, flat — and the number NOT to quote (2026-09-12)
+
+Checkpoint, log and the 552-pattern acceptance instance at `~/source/descent-engine/scratch/h2pilot/`, with
+the resume command beside them.
+
+| | |
+|---|---|
+| attempted | **400** |
+| accepted / rejected | **397 / 3** |
+| solver asks | **60** — batches drive cost, not deletions |
+| cost | **15.0 minutes, one core** |
+| per-100 windows | **99%, 100%, 99% — no decline** |
+| opening control | refuted in 63.0 s **before anything was spent** |
+
+Order is a **seeded uniform Fisher–Yates shuffle with a different seed** from the nested-prefix result — an
+independent draw, not a replay.
+
+**The 75-of-100 and the 99.25% are not in conflict; they measure different things.** A nested prefix stops
+at its first rejection. This loop **bisects, refuses the boundary vertex permanently, and continues** —
+rejections being permanent by monotonicity is exactly what lets one forward pass complete.
+
+**Full pass, from this:** at batch 8, ~3,800 asks ≈ **16 core-hours** — and **the walk is sequential, so that
+is ~16 hours of WALL CLOCK and does not divide by the core count.** Batch size is an unexercised lever: at
+99% accept, batch 64 would cost ~1,550 asks ≈ 6.4 core-hours.
+
+### The number not to quote, flagged by the engineer before anyone asked
+
+The harness prints *"final size ≈ 258 of 25,567"*. **It is unquotable.** A linear extrapolation of a rate
+measured over **1.6%** of the candidates, and **it cannot hold**: the reduction terminates at a minimal
+refuting subgraph, so the accept rate **must** fall to zero. Early on almost nothing is needed — mean degree
+21.3, minimum degree 6, massively redundant. **The pilot measured the redundant regime; the critical one has
+not been entered.**
+
+> **And it is exactly the number that would answer a question Kooshi asked today — whether this object can
+> beat the 509-vertex record. A number that happens to answer the question you were asked is the one to
+> distrust hardest.** It was volunteered rather than extracted, which is why it will not reach a report.
+
+### The process miss, owned
+
+I asked for the outcomes to be written down in advance; they were not. **Both were genuinely reachable —
+three rejections landed — but "both were reachable" is weaker than "I said in advance which would mean
+what", and only the weaker claim is available.** Pre-registration exists to prevent exactly that. Required
+for the probe.
+
+### The cost finding, now in `CLAUDE.md`
+
+Scattered runs show **~75% expensive probes against ascending's 24%** — and the 24% came from a walk that had
+**already fallen into the cheap satisfiable regime.**
+
+> **A successful walk is the expensive walk.**
+
+A cost measured on a failing run understates a succeeding one, here by 3×, and the tell is that **the cheap
+steps are the failures.**
+
+### Also landed
+
+- **The `u16` work order, gate green** — 273 tests, 269 in-binary controls, clippy at `-D warnings`. **Three
+  of four saturations DELETED rather than guarded**, so the bad case is unrepresentable instead of checked,
+  with three new refusals covering the boundaries a type cannot, **each shipping a faithful partner that must
+  pass** so a reader can tell the refusal came from the width and not the scaffolding. Both planted and
+  watched red. It ran past twenty minutes because the type rippled through 15 files across six crates — named
+  rather than left to stand. **Filed, not fixed:** `descent-fmt` has no in-binary control file, so two of the
+  refusals are unit tests that do not ship; a courier-machine operator hitting the width refusal cannot run
+  its control. Pre-existing, one crate's work.
+- **The engineer killed its own three in-flight walks** the moment a correction of mine arrived — capturing
+  their state first — because they were producing records under a superseded question. This project's own
+  kill rule, applied by an agent to itself. It kept what they were worth: the ascending flip **reproduced
+  exactly at step 30**, and the expensive-probe rate above.
+
+### Authorised
+
+**The probe only: accept rate at 5,000 and 10,000 attempts, resumed from the checkpoint.** Still ~99% at
+10,000 makes the full pass near-certain; **a knee before then locates the critical regime, which is the
+number that actually decides the final size.** Sixteen hours of sequential wall clock is too much to spend
+before knowing where the knee is. With **outcomes pre-registered**, the **batch-size lever exercised** (larger
+while accepts are cheap, shrinking as the knee approaches), and the rate **reported as a curve, since the
+knee's location is the deliverable.**
