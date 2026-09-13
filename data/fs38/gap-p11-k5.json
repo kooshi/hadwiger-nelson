@@ -76,6 +76,7 @@
  "sat_ask": {
   "question": "a proper 5-colouring with one colour absent from N[(0,0)]",
   "verdict": "gap found \u2014 verified colouring (every edge re-checked here)",
+  "conflict_budget": 20000000,
   "gap_colours_in_the_found_colouring": [
    1
   ],
@@ -96,19 +97,22 @@
  },
  "controls": [
   {
-   "name": "three colours absent from N[(0,0)] at once",
+   "name": "one colour absent everywhere (= (k\u22121)-colour the plane), with a clique through the origin pinned to distinct colours (sound by palette symmetry; without the pins the ask did not return in ten minutes at 19)",
    "expect": "refused",
-   "got": "unsat",
-   "fired": true,
-   "reads": "the refusal outcome is reachable on this code path and this object"
-  },
-  {
-   "name": "one colour absent everywhere (= (k\u22121)-colour the plane), with a clique through the origin pinned to distinct colours (sound by palette symmetry, and without it the ask does not return)",
-   "expect": "refused",
+   "required": true,
    "got": "unsat",
    "fired": true,
    "clique_pins": 3,
-   "reads": "a gap ask that forbids a colour globally must refuse \u2014 \u03c7(UD(\ud835\udd3d_p,2)) = k"
+   "reads": "THE reachability control: the refusal outcome is reachable on this code path and this object, because \u03c7(UD(\ud835\udd3d_p,2)) = k"
+  },
+  {
+   "name": "three colours absent from N[(0,0)] at once",
+   "expect": "prime-dependent, not required",
+   "required": false,
+   "got": "unsat",
+   "fired": null,
+   "directed_edges_inside_the_circle": 24,
+   "reads": "informational, NOT a control: it refuses cheaply only when the circle induces an edge \u2014 \u03c9 = 3 iff 3 is a square mod p (`[Krebs2022]`), so 24 directed edges inside the circle at 11 and ZERO at 19. At 19, forbidding three colours on an INDEPENDENT neighbourhood is a hard question in its own right (measured: the single-gap ask alone takes 27 s there against milliseconds at 11), and reading its outcome as a control would be reading the prime, not the instrument"
   }
  ],
  "seconds": 0.1,

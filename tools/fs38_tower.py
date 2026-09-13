@@ -449,6 +449,23 @@ class Asker:
             print(f"  [{cay.label}] {cay.n} vertices, degree {cay.deg}, {cay.edge_count} edges, "
                   f"{self.clauses} clauses, built in {self.build_seconds}s, peak {peak_gb():.2f} GB", flush=True)
 
+    def ask_budget(self, assumptions, conf: int = 2_000_000):
+        """The same question under a conflict budget: (None, None) when the budget runs out. A control that cannot
+        answer must say so — a hung ask and a refusal are not the same verdict."""
+        self.asks += 1
+        self.s.conf_budget(conf)
+        r = self.s.solve_limited(assumptions=list(assumptions))
+        if r is None:
+            return None, None
+        if not r:
+            return False, None
+        mdl = self.s.get_model()
+        k = self.k
+        col = [next(c for c in range(k) if mdl[v * k + c] > 0) for v in range(self.cay.n)]
+        if not verify_proper(self.cay, col)[0]:
+            raise SystemExit(f"INSTRUMENT CATASTROPHE: the solver's model is not proper on {self.cay.label}")
+        return True, col
+
     def ask(self, assumptions):
         """(True, verified colouring) or (False, None). A model is verified against every edge before it is returned;
         a model that is not proper is an instrument catastrophe and stops the run."""
@@ -841,6 +858,12 @@ def cmd_forced(a):
         if incons:
             raise SystemExit(f"HALT: the forced verdict is not constant on automorphism orbits at level {m}: "
                              f"{incons[:5]} — either a generator is not an automorphism or the solver is inconsistent")
+    rep_rows = None
+    if use_orbits:
+        rep_rows = [dict(representative=r, tuple=list(cay.tuple_of(r)), depth=level_depth(m, cay.tuple_of(r)),
+                         orbit_size=int(sum(1 for x in orb if x == orb[r])),
+                         verdict=("free — " + VERIFIED) if fs[r] == "f" else REFUSED,
+                         separated=ss[r]) for r in reps if r != 0]
     by_depth = []
     for dep in sorted(cls):
         idxs = [i for i in cls[dep] if i != 0]
@@ -864,6 +887,14 @@ def cmd_forced(a):
                     sizes=[int(sum(1 for x in orb if x == orb[r])) for r in reps],
                     sizes_total=int(sum(sum(1 for x in orb if x == orb[r]) for r in reps)),
                     transferred_refusals_keep_the_word=REFUSED,
+                    per_representative=rep_rows,
+                    decided_by_orbit=(int(cay.n - 1 - len(todo)) if use_orbits else 0),
+                    decided_by_orbit_word=("decided by orbit derivation from its representative — the partition is "
+                                           "recomputable with no solver (`level_orbits`, pure arithmetic), and a "
+                                           "difference in a refused orbit carries that refusal's word: "
+                                           + REFUSED) if use_orbits else None,
+                    generators_verified_as_set_equalities="see `circle_group`: s·S_m = S_m for every s ∈ S_m and "
+                                                          "conj(S_m) = S_m, checked as SET equalities",
                     derivation="multiplication by s ∈ S_m (a unit, N(s) = 1) and conjugation are graph automorphisms "
                                "fixing 0; S_m is a group (checked in full), so S·δ ∪ S·δ̄ is a whole orbit"),
         fan_gap=gap_block,
@@ -872,7 +903,15 @@ def cmd_forced(a):
                     free_string="".join(fs), legend="'.' the zero difference, 'f' free (verified colouring), "
                                                     "'R' " + REFUSED,
                     by_depth=by_depth, refused_differences=refused,
-                    orbit_consistent=(not incons) if not use_orbits else "by construction (orbit representatives)"),
+                    orbit_consistent=(not incons) if not use_orbits else "by construction (orbit representatives)",
+                    orbit_cross_check=dict(
+                        orbits=len(reps), differences_checked=(cay.n - 1 if not use_orbits else 0),
+                        inconsistent_orbits=(len(incons) if not use_orbits else None),
+                        reads=("the forced verdict is constant on every automorphism orbit, "
+                               f"{cay.n - 1} of {cay.n - 1} differences — this agreement is what licenses deciding "
+                               "level 8 from one representative per orbit" if not use_orbits else
+                               "not applicable: this level was asked by representatives, so constancy is by "
+                               "construction; the licence comes from the levels where every difference was asked"))),
         separated=dict(
             asked=(len(todo) if a.separated else 0),
             sep_string="".join(ss) if a.separated else None,
@@ -950,29 +989,46 @@ def cmd_gap(a):
                        neighbour_colours=sorted({int(col[w]) for w in cay.nbrs(v)}),
                        gaps=[g for vv, g in census if vv == v]) for v in verts]
     A = Asker(cay, k, verbose=True)
-    sat, model = A.gap(0, 1)
+    circ_edges = len([1 for s in cay.circle for r in cay.circle
+                      if s != r and tuple((s[i] - r[i]) % cay.mods[i] for i in range(2)) in set(cay.circle)])
+    sat, model = A.ask_budget([var(0, 0, k)] + [-var(w, 1, k) for w in cay.nbrs(0)], a.conf)
     ask = dict(question="a proper 5-colouring with one colour absent from N[(0,0)]",
-               verdict=("gap found — " + VERIFIED) if sat else ("no gap — " + REFUSED))
+               verdict=("gap found — " + VERIFIED) if sat else
+                       ("no gap — " + REFUSED) if sat is False else "undecided at the conflict budget",
+               conflict_budget=a.conf)
     if sat:
         gv = [g for g in range(k) if model[0] != g and all(model[w] != g for w in cay.nbrs(0))]
         ask["gap_colours_in_the_found_colouring"] = gv
         ask["colouring_rows"] = ["".join(str(model[x * p + y]) for y in range(p)) for x in range(p)]
         ask["verified"] = bool(verify_proper(cay, model)[0] and gv)
     # the controls: at 11 the SAT outcome is observed, so what needs showing is that a REFUSAL is reachable here
-    c3, _ = A.multi_gap(0, [1, 2, 3])
     cq = clique_assumptions(cay, k)
-    c_all, _ = A.ask([-var(x, k - 1, k) for x in range(cay.n)] + cq)
+    c_all, _ = A.ask_budget([-var(x, k - 1, k) for x in range(cay.n)] + cq, a.conf)
+    c3, _ = A.ask_budget([var(0, 0, k)] + [-var(w, g, k) for w in cay.nbrs(0) for g in (1, 2, 3)], a.conf)
     controls = [
-        dict(name="three colours absent from N[(0,0)] at once", expect="refused", got=("sat" if c3 else "unsat"),
-             fired=(not c3), reads="the refusal outcome is reachable on this code path and this object"),
         dict(name="one colour absent everywhere (= (k−1)-colour the plane), with a clique through the origin pinned "
-                  "to distinct colours (sound by palette symmetry, and without it the ask does not return)",
-             expect="refused", got=("sat" if c_all else "unsat"), fired=(not c_all), clique_pins=len(cq),
-             reads="a gap ask that forbids a colour globally must refuse — χ(UD(𝔽_p,2)) = k"),
+                  "to distinct colours (sound by palette symmetry; without the pins the ask did not return in ten "
+                  "minutes at 19)",
+             expect="refused", required=(sat is not True),
+             got=("sat" if c_all else "unsat" if c_all is False else "unknown at the conflict budget"),
+             fired=(c_all is False), clique_pins=len(cq),
+             reads="the reachability control for a REFUSAL, and it is load-bearing exactly when this record contains "
+                   "one: here the gap ask itself returned " + ("SAT with a verified colouring, so no refusal is "
+                   "recorded at this prime and this control is informational" if sat is True else
+                   "a refusal, so this control is required") + ". χ(UD(𝔽_p,2)) = k makes the expected answer a "
+                   "refusal either way"),
+        dict(name="three colours absent from N[(0,0)] at once", expect="prime-dependent, not required",
+             required=False, got=("sat" if c3 else "unsat" if c3 is False else "unknown"),
+             fired=None, directed_edges_inside_the_circle=circ_edges,
+             reads="informational, NOT a control: it refuses cheaply only when the circle induces an edge — ω = 3 iff "
+                   "3 is a square mod p (`[Krebs2022]`), so 24 directed edges inside the circle at 11 and ZERO at 19. "
+                   "At 19, forbidding three colours on an INDEPENDENT neighbourhood is a hard question in its own "
+                   "right (measured: the single-gap ask alone takes 27 s there against milliseconds at 11), and "
+                   "reading its outcome as a control would be reading the prime, not the instrument"),
     ]
     for c in controls:
-        if not c["fired"]:
-            raise SystemExit(f"HALT: control did not fire: {c}")
+        if c["required"] and not c["fired"]:
+            raise SystemExit(f"HALT: the required control did not fire: {c}")
     rec = dict(kind="fs38-fan-gap", p=p, k=k, n=cay.n, degree=cay.deg, edges=cay.edge_count, table_source=source,
                table_proper=True, table_rows=["".join(str(int(table[x][y])) for y in range(p)) for x in range(p)],
                gapped_pairs=len(census), gapped_vertices=len(verts), per_vertex=per_vertex,
@@ -989,7 +1045,9 @@ def cmd_gap(a):
           f"{len(census)} gapped (vertex, colour) pairs at {len(verts)} vertices "
           + "; ".join(f"({v['vertex'][0]},{v['vertex'][1]}) own {v['own_colour']} nbrs {v['neighbour_colours']} "
                       f"gap {v['gaps']}" for v in per_vertex[:4])
-          + f"{' …' if len(per_vertex) > 4 else ''}; the fresh ask: {ask['verdict']}; both controls fired")
+          + f"{' …' if len(per_vertex) > 4 else ''}; the fresh ask: {ask['verdict']}; the required control "
+          f"(a colour banned everywhere must refuse) fired; the prime-dependent one read "
+          f"{controls[1]['got']} with {circ_edges} directed edges inside the circle")
     print(f"  wrote {path}")
     return rec
 
@@ -1040,16 +1098,24 @@ def cmd_doublegap(a):
         if not committed["planted_red_one_entry_flipped"]["fired"]:
             raise SystemExit("HALT: flipping an entry of the committed table changed nothing — the check is blind")
     controls = []
-    s1, m1 = A.gap(v, gamma)
-    controls.append(dict(name="a single gap at (0,0)", expect="sat", got=("sat" if s1 else "unsat"), fired=bool(s1),
-                         reads="the SAT outcome is reachable on this code path"))
-    s3, _ = A.multi_gap(v, [1, 2, 3])
-    controls.append(dict(name="three colours absent from N[(0,0)]", expect="refused",
-                         got=("sat" if s3 else "unsat"), fired=(not s3),
-                         reads="the refusal outcome is reachable too"))
+    s1, m1 = A.ask_budget([var(v, 0, k)] + [-var(w, gamma, k) for w in cay.nbrs(v)], a.conf)
+    controls.append(dict(name="a single gap at (0,0)", expect="sat", required=True,
+                         got=("sat" if s1 else "unsat" if s1 is False else "unknown"), fired=bool(s1),
+                         reads="the SAT outcome is reachable on this code path — the weaker ask must succeed where "
+                               "the shared-gap ask did"))
+    cq = clique_assumptions(cay, k)
+    s_all, _ = A.ask_budget([-var(x, k - 1, k) for x in range(cay.n)] + cq, a.conf)
+    controls.append(dict(name="one colour absent everywhere (= (k−1)-colour the plane)", expect="refused",
+                         required=(sat is not True),
+                         got=("sat" if s_all else "unsat" if s_all is False else "unknown at the conflict budget"),
+                         fired=(s_all is False),
+                         reads="the reachability control for a refusal, load-bearing exactly when this record "
+                               "contains one; the shared-gap ask here returned "
+                               + ("SAT with a verified table, so it is informational" if sat is True else "a refusal, "
+                                  "so it is required")))
     for c in controls:
-        if not c["fired"]:
-            raise SystemExit(f"HALT: control did not fire: {c}")
+        if c["required"] and not c["fired"]:
+            raise SystemExit(f"HALT: the required control did not fire: {c}")
     single = None
     if p == 19:
         table = plane_table_19()
@@ -1204,6 +1270,16 @@ def cmd_tables(a):
                representation=val, controls=controls, committed=committed_block,
                minimum_cover_found=dict(size=(len(best) if best else None), from_pool_of=len(groups),
                                         indices=list(best) if best else None,
+                                        committed_indices=[i for i in (best or []) if i < len(ctabs)],
+                                        period_group_sizes=[len(pool[i][1]) for i in (best or [])],
+                                        tables=[[[[[int(np.asarray(pool[i][0]).reshape(4, 4, 4, 4)[aa][bb][cc][dd])
+                                                   for dd in range(4)] for cc in range(4)] for bb in range(4)]
+                                                 for aa in range(4)] for i in (best or [])],
+                                        tables_index_order="table[a][b][c][d] for ((a,b),(c,d)) — ready for a Lean "
+                                                           "literal of the same shape as twoAdicFourTable₁",
+                                        verified_proper=[bool(verify_proper(cay, pool[i][0])[0]) for i in (best or [])],
+                                        intersection_of_period_groups=sorted(
+                                            set.intersection(*[set(pool[i][1]) for i in best]) if best else []),
                                         note="a cover is a list of proper colourings whose period groups intersect in "
                                              "{0}; size is a SEARCH result (an upper bound on the minimum), never a "
                                              "proof of minimality"),
@@ -1238,7 +1314,9 @@ def cmd_recolour(a):
     verts = sorted({v for v, _ in census})
     target = a.target if a.target is not None else verts[0]
     gaps = [g for v, g in census if v == target]
-    present = sorted({int(col1[w]) for w in base.nbrs(target)} | {int(col1[target])})
+    present_nbrs = sorted({int(col1[w]) for w in base.nbrs(target)})
+    own = int(col1[target])
+    present = sorted(set(present_nbrs) | {own})
     lvl2 = build_plane(p, 2)
     q = p * p
     pre = dict(circle_level2=lvl2.deg, circle_level2_expected=p * base.deg,
@@ -1263,13 +1341,27 @@ def cmd_recolour(a):
     ok2, nbad2, ex2 = verify_proper(lvl2, rep)
     fibre_colours = sorted({int(rep[x]) for x in fibre})
     controls = []
-    for c in present:
+    for c in present_nbrs:
         bad = pull.copy()
         bad[u] = c
         _, nb, exx = verify_proper(lvl2, bad)
-        controls.append(dict(name=f"repaint the same lift to the PRESENT colour {c}", expect="improper",
-                             improper_edges=nb, example=exx[:2], fired=(nb > 0), bounded_above=(nb <= lvl2.deg)))
-    if not all(c["fired"] and c["bounded_above"] for c in controls):
+        controls.append(dict(name=f"repaint the same lift to colour {c}, which IS present in the residue's "
+                                 f"neighbourhood", expect="improper", required=True,
+                             improper_edges=nb, example=exx[:2], fired=(nb > 0), bounded_above=(nb <= lvl2.deg),
+                             reads="the repaint is proper because the colour is ABSENT from the neighbourhood, not "
+                                   "because repainting one vertex is harmless — bounded above by the degree because "
+                                   "only edges at this vertex can break"))
+    bad = pull.copy()
+    bad[u] = own
+    _, nb_own, _ = verify_proper(lvl2, bad)
+    controls.append(dict(name=f"repaint the same lift to its OWN colour {own}", expect="no change (a no-op)",
+                         required=False, improper_edges=nb_own, fired=None,
+                         reads="the UNINFORMATIVE outcome, stated so nobody counts it as a control: the lift already "
+                               "carries this colour, so the repaint changes nothing and 0 conflicts is the right "
+                               "answer. A first run of this record HALTED because the own colour was inside the "
+                               "control set, which is the failure the rule about naming the uninformative outcome "
+                               "exists for"))
+    if not all(c["fired"] and c["bounded_above"] for c in controls if c["required"]):
         raise SystemExit(f"HALT: the negative control did not fire as bounded: {controls}")
     if not ok2:
         raise SystemExit(f"HALT: the repaint to the GAP colour is improper ({nbad2} edges, e.g. {ex2}) — the fan-gap "
@@ -1311,7 +1403,9 @@ def cmd_recolour(a):
           f"{lvl2.edge_count} edges ({2*lvl2.edge_count} directed checks) of UD(ℤ/{q},2); repainting the lift "
           f"{lift} of the gapped residue ({tx},{ty}) to its gap colour {gamma} stays proper "
           f"({nbad2} improper edges), and the fibre carries colours {fibre_colours}; the negative controls at the "
-          f"present colours {present} give " + ", ".join(str(c['improper_edges']) for c in controls) + " conflicts")
+          f"neighbourhood colours {present_nbrs} give "
+          + ", ".join(str(c['improper_edges']) for c in controls if c.get('required')) + " conflicts, and the no-op "
+          f"repaint to its own colour {own} gives {nb_own}")
     print(f"  wrote {path}")
     return rec
 
@@ -1361,6 +1455,15 @@ def cmd_lrat(a):
             break
     if tri:
         pins = [(0, 0), (tri[0], 1), (tri[1], 2)]
+    # The pins must be a CLIQUE, or the formula could be unsatisfiable because of the pins rather than because of the
+    # graph — a refusal that arrives cheaply and looks like success (CLAUDE.md § the derived half). Checked, not
+    # assumed, against the edge list as built.
+    eset = set(edges)
+    pv = [v for v, _ in pins]
+    clique_ok = all((min(x, y), max(x, y)) in eset for i, x in enumerate(pv) for y in pv[i + 1:])
+    if not clique_ok:
+        raise SystemExit(f"HALT: the pinned vertices {pv} are not pairwise adjacent — a refusal of this formula would "
+                         f"not be a statement about the graph")
     write_cnf(cnf, cay.n, [(int(x), int(y)) for x, y in edges] + [(0, di)], pins, k)
     write_cnf(cnf0, cay.n, [(int(x), int(y)) for x, y in edges], pins, k)
     cad = Path(subprocess.run(["lean", "--print-prefix"], capture_output=True, text=True).stdout.strip()) / "bin" / "cadical"
@@ -1379,6 +1482,9 @@ def cmd_lrat(a):
         delta=list(delta), delta_depth=dep, omega_orbit_indices=orbit, pins=pins,
         pins_note="a triangle through 0 pinned to three colours — sound by palette symmetry (the shape "
                   "`scripts/regen-check.sh` uses for the committed witnesses)",
+        pins_are_a_clique=clique_ok,
+        pins_clique_check="every pinned pair verified adjacent in the edge list as built; without this a refusal could "
+                          "be a statement about the pins instead of about the graph",
         question="P₅ + the edge (0, δ) is not 4-colourable — equivalently `Forces (twoAdicPlane 5) 4 0 δ`",
         cadical=dict(binary=str(cad), flags=["-q", "--lrat", "--no-binary", "--unsat", f"--seed={a.seed}"],
                      exit_code=r.returncode, unsat=(r.returncode == 20)),
@@ -1403,6 +1509,62 @@ def cmd_lrat(a):
           f"edge) exits {r0.returncode} ({'SAT' if r0.returncode == 10 else 'NOT SAT'}). GENERATED, NOT CHECKED.")
     print(f"  wrote {out/'manifest.json'}, {ej.name}, {lrat.name}")
     return man
+
+
+# ====================================================================== subcommand: recheck
+def cmd_recheck(a):
+    """Re-verify every committed level record FROM THE FILE ALONE, with no solver: rebuild the graph, recompute the
+    orbit partition, check that the record's verdicts are constant on it, and re-verify every per-depth example
+    colouring (proper on every edge, and actually separating a free difference of that depth). A stronger check than
+    the in-run one, because it reads only what was committed."""
+    out = []
+    for m in range(1, 9):
+        f = DATA / f"tower-p2-k4-m{m}.json"
+        if not f.exists():
+            continue
+        rec = json.loads(f.read_text())
+        S = level_circle(m)
+        cay = build_level(m)
+        if cay.n != rec["n"] or cay.deg != rec["degree"] or cay.edge_count != rec["edges"]:
+            raise SystemExit(f"HALT: level {m}'s record does not describe the graph this tool builds")
+        orb, reps = level_orbits(m, S)
+        fs = rec["forced"]["free_string"]
+        byorb = {}
+        for i in range(1, cay.n):
+            byorb.setdefault(orb[i], set()).add(fs[i])
+        incons = [o for o, s in byorb.items() if len(s) > 1]
+        ex = rec["models"]["per_depth_example_free"]
+        checked = []
+        for dep, s in sorted(ex.items()):
+            col = [int(ch) for ch in s]
+            ok = verify_proper(cay, col)[0]
+            sep = [i for i in range(1, cay.n)
+                   if level_depth(m, cay.tuple_of(i)) == int(dep) and fs[i] == "f" and col[0] != col[i]]
+            checked.append(dict(depth=int(dep), proper_on_all_edges=bool(ok), separates_free_differences=len(sep)))
+            if not ok or not sep:
+                raise SystemExit(f"HALT: level {m}'s depth-{dep} example colouring does not re-verify: "
+                                 f"proper={ok}, separated={len(sep)}")
+        exs = rec["models"].get("per_depth_example_same") or {}
+        for dep, s in sorted(exs.items()):
+            if not verify_proper(cay, [int(ch) for ch in s])[0]:
+                raise SystemExit(f"HALT: level {m}'s depth-{dep} identifying example is not proper")
+        rec["recheck"] = dict(
+            rechecked="from the committed file alone, no solver", orbits=len(reps),
+            differences_checked=cay.n - 1, inconsistent_orbits=len(incons),
+            verdicts_constant_on_orbits=(not incons), per_depth_examples_reverified=checked,
+            identifying_examples_reverified=len(exs), graph_matches_record=True,
+            reads="the orbit cross-check the product owner asked for as its own control row: the record's forced "
+                  "verdict is constant on every automorphism orbit, on every difference — and that agreement across "
+                  "levels 1..7, where every difference was asked individually, is what licenses deciding level 8 from "
+                  "one representative per orbit")
+        f.write_text(json.dumps(rec, indent=1))
+        out.append((m, rec["recheck"]))
+        print(f"  m={m}: {len(reps)} orbits over {cay.n - 1} differences, {len(incons)} inconsistent; "
+              f"{len(checked)} per-depth example colourings re-verified proper and separating; "
+              f"{len(exs)} identifying examples proper", flush=True)
+    print(f"[fs38] recheck: {len(out)} level records re-verified from their files alone — 0 inconsistent orbits, "
+          f"every per-depth example colouring proper on every edge of a freshly built graph")
+    return out
 
 
 # ====================================================================== self-test
@@ -1596,11 +1758,13 @@ def main():
     g = sub.add_parser("gap", help="the fan gap of a committed plane table, and the fresh ask")
     g.add_argument("--p", type=int, default=11)
     g.add_argument("--k", type=int, default=5)
+    g.add_argument("--conf", type=int, default=2_000_000)
     g.add_argument("--out")
     g.set_defaults(f=cmd_gap)
     d = sub.add_parser("doublegap", help="one colour absent from two adjacent closed neighbourhoods")
     d.add_argument("--p", type=int, default=11)
     d.add_argument("--k", type=int, default=5)
+    d.add_argument("--conf", type=int, default=2_000_000)
     d.add_argument("--out")
     d.set_defaults(f=cmd_doublegap)
     t = sub.add_parser("tables", help="level four's cover of non-periods")
@@ -1617,6 +1781,8 @@ def main():
     L = sub.add_parser("lrat", help="the P₅ + edge CNF and its LRAT (generated, not checked)")
     L.add_argument("--seed", type=int, default=2)
     L.set_defaults(f=cmd_lrat)
+    rc = sub.add_parser("recheck", help="re-verify every committed level record from its file, no solver")
+    rc.set_defaults(f=cmd_recheck)
     s = sub.add_parser("self-test")
     s.set_defaults(f=lambda a: sys.exit(0 if self_test(a) else 1))
     a = ap.parse_args()

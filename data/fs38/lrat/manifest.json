@@ -1,0 +1,79 @@
+{
+ "kind": "fs38-lrat-manifest",
+ "level": 5,
+ "colours": 4,
+ "n": 1024,
+ "base_edges": 24576,
+ "added_edge": [
+  0,
+  512
+ ],
+ "delta": [
+  4,
+  0,
+  0,
+  0
+ ],
+ "delta_depth": 4,
+ "omega_orbit_indices": [
+  512,
+  64,
+  576
+ ],
+ "pins": [
+  [
+   0,
+   0
+  ],
+  [
+   16,
+   1
+  ],
+  [
+   144,
+   2
+  ]
+ ],
+ "pins_note": "a triangle through 0 pinned to three colours \u2014 sound by palette symmetry (the shape `scripts/regen-check.sh` uses for the committed witnesses)",
+ "pins_are_a_clique": true,
+ "pins_clique_check": "every pinned pair verified adjacent in the edge list as built; without this a refusal could be a statement about the pins instead of about the graph",
+ "question": "P\u2085 + the edge (0, \u03b4) is not 4-colourable \u2014 equivalently `Forces (twoAdicPlane 5) 4 0 \u03b4`",
+ "cadical": {
+  "binary": "/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical",
+  "flags": [
+   "-q",
+   "--lrat",
+   "--no-binary",
+   "--unsat",
+   "--seed=2"
+  ],
+  "exit_code": 20,
+  "unsat": true
+ },
+ "negative_control": {
+  "question": "the same formula WITHOUT the added edge",
+  "exit_code": 10,
+  "sat": true,
+  "reads": "P\u2085 itself is 4-colourable, so the refusal is about the edge and not about the formula being broken"
+ },
+ "lrat": {
+  "file": "lrat/p5-plus-edge.lrat",
+  "lines": 1339,
+  "bytes": 55729,
+  "ends_in_empty_clause": true,
+  "last_line": "100664 0 100446 100330 99707 100137 977 0"
+ },
+ "cnf": {
+  "file": "build/fs38-t/p5-plus-edge.cnf (NOT committed \u2014 regenerable from the edge list)",
+  "variables": 4096,
+  "clauses": 99335
+ },
+ "sha256": {
+  "p5-plus-edge.cnf": "ed119bd553e46e5597f0cf00c6972ac50899677709c312e3faab1e94ba58744e",
+  "p5-plus-edge.lrat": "2c72a7090f74902d106aff55c45381f8753615c2241b886316a2e237fb80e058",
+  "p5-plus-edge-edges.json": "b7c018cb9a570f204278fc66c1903da4b79d9c28075e9a95762509303c3625d7"
+ },
+ "status": "GENERATED, NOT CHECKED \u2014 no LRAT/DRAT checker exists on this machine (CLAUDE.md row 64's precedent). What holds: cadical exited 20 on the formula with the edge and 10 without it, and the proof's last line is the empty clause. Consuming it in Lean is FS-38 phase K3's, through `tools/emit_mask.py`.",
+ "regenerate": "python3 tools/fs38_tower.py lrat",
+ "seconds": 0.4
+}

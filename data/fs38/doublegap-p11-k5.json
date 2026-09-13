@@ -1,0 +1,89 @@
+{
+ "kind": "fs38-double-gap",
+ "p": 11,
+ "k": 5,
+ "n": 121,
+ "degree": 12,
+ "edges": 726,
+ "base_edge": {
+  "v": [
+   0,
+   0
+  ],
+  "w": [
+   1,
+   0
+  ],
+  "shared_neighbours": 2,
+  "shared_neighbour_points": [
+   [
+    6,
+    3
+   ],
+   [
+    6,
+    8
+   ]
+  ],
+  "closed_neighbourhood_size": 22
+ },
+ "ask": {
+  "question": "a proper 5-colouring with colour 4 absent from N[(0,0)] \u222a N[(1,0)]",
+  "verdict": "found \u2014 verified colouring (every edge re-checked here)"
+ },
+ "found": {
+  "gamma": 4,
+  "rows": [
+   "01023401232",
+   "10232142320",
+   "04341023201",
+   "32010132410",
+   "23104321043",
+   "31013410134",
+   "40324141323",
+   "13431014210",
+   "32340123401",
+   "23404231013",
+   "30142320104"
+  ],
+  "verified_proper_on_all_edges": true,
+  "colour_absent_on_closed_neighbourhood": true,
+  "closed_neighbourhood_size": 22
+ },
+ "committed_table": {
+  "source": "Instances/FanGap11.lean finitePlane11DoubleGapTable",
+  "proper": true,
+  "improper_edges": 0,
+  "shared_gap_colours": [
+   4
+  ],
+  "gapped_pairs": 10,
+  "matches_this_run": false,
+  "planted_red_one_entry_flipped": {
+   "still_proper": false,
+   "still_has_shared_gap": true,
+   "fired": true
+  }
+ },
+ "single_gaps": null,
+ "controls": [
+  {
+   "name": "a single gap at (0,0)",
+   "expect": "sat",
+   "required": true,
+   "got": "sat",
+   "fired": true,
+   "reads": "the SAT outcome is reachable on this code path \u2014 the weaker ask must succeed where the shared-gap ask did"
+  },
+  {
+   "name": "one colour absent everywhere (= (k\u22121)-colour the plane)",
+   "expect": "refused",
+   "required": false,
+   "got": "unsat",
+   "fired": true,
+   "reads": "the reachability control for a refusal, load-bearing exactly when this record contains one; the shared-gap ask here returned SAT with a verified table, so it is informational"
+  }
+ ],
+ "seconds": 0.2,
+ "claim_scope": "a found table is a colouring verified here proper on every edge with the named colour absent on every vertex of the two closed neighbourhoods \u2014 that is `DoubleSlack`'s witness at the base edge, and by translation and rotation (row 60) at every edge. A 'none' would be one solver's UNSAT and is written as refused. The committed literal is re-verified here, with a flipped entry as the planted red."
+}

@@ -1,0 +1,142 @@
+{
+ "kind": "fs38-recolour",
+ "p": 11,
+ "k": 5,
+ "level": 2,
+ "ring": "\u2124/121",
+ "n": 14641,
+ "degree": 132,
+ "edges": 966306,
+ "directed_edge_checks": 1932612,
+ "base": {
+  "table_source": "Instances/FinitePlane11.lean finitePlane11Table",
+  "gapped_vertices": [
+   [
+    2,
+    4
+   ],
+   [
+    7,
+    8
+   ],
+   [
+    9,
+    6
+   ]
+  ],
+  "target": [
+   2,
+   4
+  ],
+  "target_own_colour": 1,
+  "target_gaps": [
+   2
+  ],
+  "target_neighbour_colours": [
+   0,
+   3,
+   4
+  ]
+ },
+ "circle_lift": {
+  "circle_level2": 132,
+  "circle_level2_expected": 132,
+  "circle_lifts_with_uniform_fibres": true,
+  "note": "Poros's pre-registered expectation, written before this file existed: |S\u2082| = p\u00b7|S\u2081| = 132 at 11"
+ },
+ "pullback": {
+  "rule": "col\u2082(x, y) = table[x mod 11][y mod 11] (the reduction \u2124/121 \u2192 \u2124/11 is a ring hom, so this is a pullback along a graph homomorphism)",
+  "proper_on_all_edges": true,
+  "gapped_vertices": 363,
+  "gapped_vertices_expected": 363,
+  "gapped_vertices_are_exactly_the_lifted_base_gaps": true,
+  "expectation": "Poros, pre-registered: 3\u00b7121 = 363 gapped vertices \u2014 the three base gaps lifted, and nothing else"
+ },
+ "repaint": {
+  "lift": [
+   13,
+   4
+  ],
+  "lift_index": 1577,
+  "painted_colour": 2,
+  "proper_on_all_edges": true,
+  "improper_edges": 0,
+  "fibre_size": 121,
+  "fibre_colours": [
+   1,
+   2
+  ],
+  "fibre_non_constant": true,
+  "separates_the_lifted_pair": true,
+  "separates_reads": "the repainted colouring gives the lifted vertex a colour no fibre-mate has, so no pair inside the fibre is forced equal at five colours: the level-2 plane at 11 is NOT 1-continuous \u2014 FS-38 stub P2's record instance (Poros's third pre-registered expectation)"
+ },
+ "controls": [
+  {
+   "name": "repaint the same lift to colour 0, which IS present in the residue's neighbourhood",
+   "expect": "improper",
+   "required": true,
+   "improper_edges": 55,
+   "example": [
+    [
+     1576,
+     1577
+    ],
+    [
+     1456,
+     1577
+    ]
+   ],
+   "fired": true,
+   "bounded_above": true,
+   "reads": "the repaint is proper because the colour is ABSENT from the neighbourhood, not because repainting one vertex is harmless \u2014 bounded above by the degree because only edges at this vertex can break"
+  },
+  {
+   "name": "repaint the same lift to colour 3, which IS present in the residue's neighbourhood",
+   "expect": "improper",
+   "required": true,
+   "improper_edges": 22,
+   "example": [
+    [
+     1577,
+     1978
+    ],
+    [
+     1030,
+     1577
+    ]
+   ],
+   "fired": true,
+   "bounded_above": true,
+   "reads": "the repaint is proper because the colour is ABSENT from the neighbourhood, not because repainting one vertex is harmless \u2014 bounded above by the degree because only edges at this vertex can break"
+  },
+  {
+   "name": "repaint the same lift to colour 4, which IS present in the residue's neighbourhood",
+   "expect": "improper",
+   "required": true,
+   "improper_edges": 55,
+   "example": [
+    [
+     1577,
+     1578
+    ],
+    [
+     1577,
+     1698
+    ]
+   ],
+   "fired": true,
+   "bounded_above": true,
+   "reads": "the repaint is proper because the colour is ABSENT from the neighbourhood, not because repainting one vertex is harmless \u2014 bounded above by the degree because only edges at this vertex can break"
+  },
+  {
+   "name": "repaint the same lift to its OWN colour 1",
+   "expect": "no change (a no-op)",
+   "required": false,
+   "improper_edges": 0,
+   "fired": null,
+   "reads": "the UNINFORMATIVE outcome, stated so nobody counts it as a control: the lift already carries this colour, so the repaint changes nothing and 0 conflicts is the right answer. A first run of this record HALTED because the own colour was inside the control set, which is the failure the rule about naming the uninformative outcome exists for"
+  }
+ ],
+ "seconds": 1.4,
+ "claim_scope": "the repainted colouring is verified here proper on every one of the edges listed, and non-constant on the 121-point fibre over the gapped residue \u2014 so no colouring of UD(\u2124/121,2) can be pulled back from level one alone, and the level-2 plane is NOT 1-continuous (FS-38 stub P2's record instance). Exact arithmetic, no solver, no theorem: the kernel form is `pullbackRepaint` in `FanGap.lean`."
+}
