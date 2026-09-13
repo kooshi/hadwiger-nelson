@@ -1145,6 +1145,14 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
+**To compare POLICIES, replay them over a recorded decision sequence rather than re-running** (2026-09-12).
+A batch-size lever estimated at ~2.9× measured **2.31×** when every policy was replayed over one pilot's own
+accept/reject log — one run, one population, exactly one thing differing — **with the control that the replay
+reproduces the original run's exact cost.** Re-running instead would have compared two populations and one
+policy at once, which is this file's most-repeated error. It also showed the *adaptive* policy slightly
+**worse** than the best fixed one until the accept rate falls, which a second run would likely have hidden in
+noise.
+
 **A cost measured on a FAILING run understates a succeeding one — and the tell is that the cheap steps are
 the failures** (2026-09-12). A reduction walk was costed at **24% expensive probes**; measured on a walk that
 was actually progressing it is **~75%**. The 24% came from a walk that had already fallen into the cheap

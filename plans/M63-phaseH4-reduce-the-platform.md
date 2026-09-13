@@ -569,3 +569,73 @@ unit-distance object held is Kempe-open by orders of magnitude."*
 
 **A gauge that falls is one obstruction receding, not rigidity achieved. Un-eliminated is not alive**, and
 the gap G42 measures is orders of magnitude, not a margin.
+
+---
+
+## §14 — The reduction closed out, and the engine runs the RIGHT way for growth (2026-09-12)
+
+### Resumability: tested, not asserted
+
+**The checkpoint was resumed rather than declared resumable.** It loaded `accepted=981 rejected=4
+cursor=985`, ran one further attempt, saved `accepted=982 cursor=986`. **Restarting costs one opening
+control (~60 s) and no rebuild of anything.** State at the kill: **985 attempted, 981 accepted, 4 rejected**;
+adaptive batching had climbed to **b = 128** and taken one halving on a rejection, the policy behaving as
+designed.
+
+**Two things came free with that test.**
+
+1. **The registered end-of-run negative control fired and passed** — deleting 5,000 extra candidates returned
+   **SATISFIABLE in 0.05 s**. So the acceptance test still discriminates, and **the 99% accept rate was a
+   property of the object rather than of a broken instrument.** That validates the whole pilot retroactively.
+2. **A defect in the engineer's own harness**: on a *resumed* run the summary divides cumulative accepted by
+   this-invocation attempted, printing `accept_rate=982.000` and `final size ≈ −25,015,433`. Windows and
+   checkpoint are correct; **the summary line and its projection must be ignored on any resume.** Its own
+   description is the right one: *"same species as the unquotable 258 — a number that would read as a finding
+   to anyone who did not know how it was computed."* **Two such numbers from one harness in one day.**
+
+### The batch lever, measured without a confound
+
+**Every policy replayed over the pilot's own recorded accept/reject sequence, rather than run a second
+time** — one run, one population, exactly one thing differing — **with the control that the replay reproduces
+the pilot's exact 60 asks.** The lever is worth **2.31×, not the ~2.9× estimated, and it saturates at 64.**
+And **adaptive is slightly WORSE than fixed 64** at a 99% accept rate (2.14×): the halving and re-climb are
+pure overhead until the rate falls. **Installed in `CLAUDE.md`** — a second run would have compared two
+populations and one policy at once, and would likely have buried the adaptive result in noise.
+
+### Addition versus deletion, answered from the code
+
+> **The engine is asymmetric, and it runs the RIGHT way for the new direction.**
+
+- **Solver layer: addition is native.** `SubsetSolver::admit` adds each new variable's clauses and every edge
+  to an already-admitted variable **on a live solver**, idempotent and order-free, **keeping everything
+  learned.** And it is structural rather than lucky: **CaDiCaL can only add clauses, never remove them** — so
+  **deletion was the awkward direction**, the one needing the presence-literal trick, and it is the one being
+  abandoned.
+- **Data-model layer: growth IS a rebuild** — `GroupGraph` and `enumerate::Stage` have **zero `&mut self`
+  methods between them**, each freezing its edges at construction. **But the rebuild is not the cost:** parse
+  plus construct plus emit the full 1,267,897-clause formula measures **0.12–0.13 s** against solves of
+  15–70 s — **about 0.2% of one ask.**
+
+**Three things for a growth work order:**
+1. `admit` lives in the pool/halo model, not the bare-graph one, so a growth loop needs an `admit`-shaped
+   method of its own. Small; its design is already written down and controlled.
+2. **The `u16` ceiling becomes LIVE under growth** — 2.5× headroom at 25,567, edges unbounded, added points
+   walking toward it. **As of today it refuses loudly instead of emitting a formula for a different graph** —
+   and the engineer named that as **luck, not foresight**: *"which I did not anticipate when I flagged it."*
+   Same shape as this file's rule that an instance found by prior context is not evidence a rule reproduces.
+3. **The number it refused to guess.** Everything measured today was a **fixed clause set with varying
+   assumptions**; growth adds **permanent** clauses, and the memory model was fitted on fixed clause sets.
+   *"Addition is cheap per operation"* is answered. **"Does a growing instance stay cheap over thousands of
+   additions" is UNMEASURED, and it is the first number a growth work order should take.**
+
+### Sequencing
+
+**Not commissioned yet.** The family-keeping-and-gauge measurement decides whether growth is worth pursuing
+at all — if the gauge does not fall faster than the additive family dies, there is nothing to build. **Measure
+before building, which is the rule this phase has now been taught twice.**
+
+### Housekeeping
+
+`CLAUDE.md` is at **146,433 of its 150,000-character budget**. Several of today's entries are candidates for
+compression at the next close; the budget is a ceiling and never a licence, and superseded text should come
+out whether or not there is room.
