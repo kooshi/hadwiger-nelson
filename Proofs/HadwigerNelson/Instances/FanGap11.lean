@@ -37,11 +37,11 @@ open SimpleGraph
 
 /-- **The gap**: colour `2` is absent from `N[(2, 4)]` in the certified table — twelve lookups. -/
 theorem finitePlane11_fanGap : FanGap finitePlane11Colouring.toColoring (2, 4) 2 := by
-  sorry
+  decide +kernel
 
 /-- Red: a colour that IS on the neighbourhood is refused as a gap (`0` is on `N(2, 4)`). -/
 theorem finitePlane11_not_fanGap_zero : ¬ FanGap finitePlane11Colouring.toColoring (2, 4) 0 := by
-  sorry
+  decide +kernel
 
 /-- **`UD(𝔽₁₁, 2)` is slack at five colours.** -/
 theorem finitePlane11_slack : Slack (finitePlane 11) 5 :=
@@ -77,15 +77,17 @@ def finitePlane11DoubleGapColouring (v : ZMod 11 × ZMod 11) : Fin 5 :=
 theorem finitePlane11_doubleGap_proper :
     ∀ {u v : ZMod 11 × ZMod 11}, (finitePlane 11).Adj u v →
       finitePlane11DoubleGapColouring u ≠ finitePlane11DoubleGapColouring v := by
-  sorry
+  decide +kernel
 
 /-- The shared-gap colouring, bundled with its properness — the inhabitant the vacuity gate reads. -/
 def finitePlane11DoubleGapColoring : (finitePlane 11).Coloring (Fin 5) :=
   Coloring.mk finitePlane11DoubleGapColouring finitePlane11_doubleGap_proper
 
 /-- **The shared gap at the base edge**: colour `4` is absent from both closed neighbourhoods — `22` lookups. -/
-theorem finitePlane11_sharedGap : SharedGap finitePlane11DoubleGapColoring (0, 0) (1, 0) 4 := by
-  sorry
+theorem finitePlane11_sharedGap : SharedGap finitePlane11DoubleGapColoring (0, 0) (1, 0) 4 :=
+  -- One `decide` per closed neighbourhood, through `FanGap`'s own instance: `SharedGap` is left
+  -- without a `Decidable` instance of its own, so nothing global is minted for this one table.
+  ⟨by decide +kernel, by decide +kernel⟩
 
 /-- Red: the base table with `(0, 0)` overwritten by the gap colour is refused as a shared gap (the M04 "corrupted
 table" control, on this table). -/
@@ -93,13 +95,17 @@ theorem finitePlane11_sharedGap_corrupt_refused :
     ¬ ∃ C : (finitePlane 11).Coloring (Fin 5),
       (∀ v, v ≠ (0, 0) → C v = finitePlane11DoubleGapColouring v) ∧ C (0, 0) = 4 ∧
         SharedGap C (0, 0) (1, 0) 4 := by
-  sorry
+  rintro ⟨C, -, h00, hSG⟩
+  exact hSG.1.1 h00.symm
 
 /-- **Every pair of `UD(𝔽₁₁, 2)` is fusable at five colours**: adjacent pairs by the shared gap transported
 (`unitQuadrance_fusable_of_sharedGap_base`), the rest by M60's coincidences (`finitePlane11_separated_iff` read as
 `¬ Separated`). -/
 theorem finitePlane11_pairwiseFusable : PairwiseFusable (finitePlane 11) 5 := by
-  sorry
+  intro v w
+  by_cases hadj : (finitePlane 11).Adj v w
+  · exact unitQuadrance_fusable_of_sharedGap_base finitePlane11_sharedGap hadj
+  · exact fusable_of_not_separated fun hS => hadj (finitePlane11_separated_iff.mp hS)
 
 /-! ### Every graph mapping into the plane -/
 
@@ -183,7 +189,7 @@ theorem three_le_arityFloor_heule510 : 3 ≤ arityFloor (edgeGraph 510 heule510.
 /-- The pair M60 was silent on: vertices `0` and `475` have the SAME residue (`(0, 0)`), so their squared distance is
 `≡ 0 (mod 11)` and the residue law says nothing. -/
 theorem heule510_residue_zero_eq_475 : heule510Reduce11 0 = heule510Reduce11 475 := by
-  sorry
+  decide +kernel
 
 example : ¬ Forces (edgeGraph 510 heule510.edges) 5 0 475 :=
   fun h => absurd (heule510_forces_eq h) (by decide)
