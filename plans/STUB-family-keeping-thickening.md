@@ -76,7 +76,22 @@ runs on de Grey's field first.
 Medium. It is the only place M57's principle could apply; a negative closes the principle at five colours as a design
 route and hands the question back to FS-2 (what carries forcing without rigidity).
 
-**A route this target does NOT have, measured 2026-09-11 (M63 phase G).** A rotation of Parts's type joins only
+> **§7's narrowing below is WITHDRAWN 2026-09-12 (M63 phase H2), and the search space is WIDER than it
+> says.** It rested on `tools/typem_exact.moser_ball_exact`, which cuts on **one conjugate only**, so "the
+> Moser lattice inside radius r" is an **infinite** set and the `span = 4` default silently *was* the answer.
+> **6-open rotations DO exist on `[Parts2020a]`'s own lattice**: the usable angles are classified by one
+> integer, `cos θ = (2n−1)/(2n)` with diagonal circle `|p|² = n`, and the 6-open members with a nonempty
+> circle over his lattice at `n ≤ 120` are **16, 20, 44, 60, 64, 76, 108, 112**. One of them — `n = 16`,
+> `ρ₆₃`, in `ℚ(√3,√7,√11)` — now carries a **five-chromatic arena whose refusal is produced rather than
+> inherited** (ledger row 64). So *"the rotation degree of freedom is exhausted"* and *"a 6-open field has to
+> come from somewhere else"* are both false. **`ℚ(√3,√7,√11)` is a SECOND field for this stub's slot** — the
+> original text calls de Grey's *"the one field we hold that is both 6-open and family-keeping"*, and the
+> 6-open half now has a competitor at **half the degree** (8 against 16). **Whether it is family-keeping is
+> unmeasured and is the cheap question this stub should ask first.** Phase H3 (row 65) then closed the
+> shape-free route without touching any of this. The superseded text is kept, per WORKFLOW: deprecate,
+> never delete.
+
+**A route this target does NOT have, measured 2026-09-11 (M63 phase G) — SUPERSEDED, see the banner above.** A rotation of Parts's type joins only
 points collinear with its centre, so the admissible rotations enumerate exactly over the base's lines rather than
 being sampled from a sieve. Run exactly on his §5.6 base and on a second base: **26 candidate rotations, six angles surviving
 the 2-adic filter — two rotations once counted up to the base's symmetry — and not one survivor is 6-open.** Every one sits in a field where the prime 11 stays
