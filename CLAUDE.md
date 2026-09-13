@@ -1133,16 +1133,26 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
-**A hypothesis is not checked by being MENTIONED** (2026-09-12). An engineer proved a two-case theorem whose
-load-bearing hypothesis it had just finished arguing for — `√(4n−1) ∉ K`, without which the arena lies in
-`K²` and Theorem B four-colours it — then tested the theorem out of sample at `n = 3`, where `4n−1 = 11` and
-`√11 ∈ K` **by definition of the field**. The prediction was void, not met. **And it had written the fact
-down**: that `n = 3`'s radicand lies in `K` was in its notes, **filed under the wrong gate** — recorded as
-"so this member can never reach five colours", a fact about the *member*, when the operative consequence was
-"so my law does not apply here", a fact about the *instrument*. **The same true sentence under the wrong
-heading becomes a note instead of a blocker.** So a hypothesis is checked only by being *evaluated at the
-instance*, and the cheap habit is to re-read every hypothesis against the test case immediately before
-believing an out-of-sample result — which is precisely when the result is most wanted and least examined.
+**A TRUE explanation that fully accounts for the observation will stop you looking for a second one — and
+the second one may be the one about your own apparatus** (2026-09-12). An engineer proved a two-case theorem
+whose load-bearing hypothesis it had just finished arguing for — `√(4n−1) ∉ K`, without which the arena lies
+in `K²` and Theorem B four-colours it — then tested the theorem out of sample at `n = 3`, where `4n−1 = 11`
+and `√11 ∈ K` **by definition of the field**. The prediction was void, not met, and the two independent laws
+"agreed 300 of 300" precisely because **both were inapplicable**.
+
+**Its first account of the miss was that it had mis-filed the fact. That account was wrong, and wrong in the
+direction that flattered it** — a confession can flatter, because *"I filed it under the wrong heading"* is
+tidier and more forgivable than what actually happened. `n = 3` fails **two** gates: the 2-adic wall, **and**
+`sin θ ∉ K`. It had noticed the first, attributed the consequence to it, and **been correct** — *"this member
+can never reach five colours"* is true. **That is the trap: a true and sufficient-sounding reason fully
+answered "is anything wrong with `n = 3`?", which made the member look SAFE to compute on** — a member dead
+as an object costs nothing to test with — so it never asked whether a *second* gate also failed. The first
+failure was about the member; the second was about its own instrument.
+
+**The habit, and it is cheap: a candidate that fails one gate must be checked against ALL of them before
+being used as a test case, precisely because the first failure makes it feel already understood.** And
+re-read every hypothesis against the test instance immediately before believing an out-of-sample result,
+which is exactly when the result is most wanted and least examined.
 
 **And a mutation harness must verify its own RESTORE** (2026-09-12). One broke *itself* through CPython's
 bytecode cache: the cache's identity for a source file is `(size, mtime in whole seconds)`, so a **same-size
