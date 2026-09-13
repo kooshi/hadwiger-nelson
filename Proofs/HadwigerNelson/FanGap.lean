@@ -364,6 +364,52 @@ theorem fusable_of_hom_to_base {v₀ w₀ : W} {C : P.Coloring (Fin k)} {γ : Fi
   have h2 : FanGap C (σ w) γ := by rw [hw]; exact h₀.2
   exact ⟨C.comap σ, Or.inr ⟨γ, h1.comap σ, h2.comap σ⟩⟩
 
+/-! ### The hypotheses are load-bearing: three weakened statements, refuted
+
+Each control below takes a WEAKENED form of a theorem above as a hypothesis and derives `False` from it, so what is
+recorded is not "the proof broke" but "the statement is false" — with a concrete model of the weakened hypotheses in
+which the conclusion fails. `#print axioms` on them is the standard three; they cost three `decide`s on two-element
+types. The faithful partner beneath them must PASS, so a reader can tell the refusals come from the deleted hypothesis
+and not from the scaffolding. -/
+
+/-- The pair theorem needs `u ≠ u'`: a vertex is forced equal to itself, and a gap does not change that.
+One vertex, no edges, two colours. -/
+theorem not_forces_of_fanGap_needs_ne
+    (bad : ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P)
+      {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}, FanGap C (f u) γ → ¬ Forces G k u u') :
+    False :=
+  bad (G := (⊥ : SimpleGraph Unit)) (P := (⊥ : SimpleGraph Unit)) Hom.id
+    (C := Coloring.mk (fun _ : Unit => (0 : Fin 2)) (by simp)) (u := ()) (u' := ())
+    (γ := 1) ⟨by decide, by simp⟩ fun _ => rfl
+
+/-- `FanGap` needs its first conjunct `γ ≠ C v`: without it the repaint gives `u` the colour it already had, so it
+separates nothing. Two vertices, no edges, ONE colour — where the gap colour is forced to be the vertex's own. -/
+theorem fanGap_needs_ne_own_colour
+    (bad : ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P)
+      {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k},
+      (∀ w, P.Adj (f u) w → C w ≠ γ) → u ≠ u' → ¬ Forces G k u u') : False :=
+  bad (G := (⊥ : SimpleGraph (Fin 2))) (P := (⊥ : SimpleGraph (Fin 2))) Hom.id
+    (C := Coloring.mk (fun _ : Fin 2 => (0 : Fin 1)) (by simp)) (u := 0) (u' := 1)
+    (γ := 0) (by simp) (by decide) fun _ => Subsingleton.elim _ _
+
+/-- The double repaint needs `¬ G.Adj u u'`: an edge can share a gap and is separated by every colouring.
+`K₂` at three colours. -/
+theorem not_separated_of_sharedGap_needs_nonadjacent
+    (bad : ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P)
+      {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k},
+      SharedGap C (f u) (f u') γ → ¬ Separated G k u u') : False :=
+  bad (G := (⊤ : SimpleGraph (Fin 2))) (P := (⊤ : SimpleGraph (Fin 2))) Hom.id
+    (C := Coloring.mk (fun i : Fin 2 => if i = 0 then (0 : Fin 3) else 1)
+      (by intro v w h; fin_cases v <;> fin_cases w <;> simp_all))
+    (u := 0) (u' := 1) (γ := 2) ⟨⟨by decide, by decide⟩, ⟨by decide, by decide⟩⟩
+    (Separated.of_adj (by decide))
+
+/-- The faithful partner: with `u ≠ u'` present, the pair theorem does its work on the same shape of model — so the
+first refusal above is about the hypothesis, not about the apparatus. -/
+example : ¬ Forces (⊥ : SimpleGraph (Fin 2)) 2 0 1 :=
+  not_forces_of_fanGap Hom.id (C := Coloring.mk (fun i : Fin 2 => i) (by simp)) (u := 0) (u' := 1)
+    (γ := 1) ⟨by decide, by simp⟩ (by decide)
+
 /-! ### Rings and certificates -/
 
 section Ring

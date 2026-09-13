@@ -89,8 +89,13 @@ theorem finitePlane11_sharedGap : SharedGap finitePlane11DoubleGapColoring (0, 0
   -- without a `Decidable` instance of its own, so nothing global is minted for this one table.
   ⟨by decide +kernel, by decide +kernel⟩
 
-/-- Red: the base table with `(0, 0)` overwritten by the gap colour is refused as a shared gap (the M04 "corrupted
-table" control, on this table). -/
+/-- Red on `FanGap`'s FIRST conjunct: a colour equal to the vertex's own is refused as a gap even when it is absent
+from every neighbour. The base table with `(0, 0)` overwritten by `4` is still a proper colouring — `4` was absent from
+`N(0, 0)` — so what refuses it is `γ ≠ C v` alone, and this red exercises the DEFINITION and not the table. The
+table's own `decide`s are tested separately: changing entry `(0, 1)` from `2` to `0` makes the edge `(0,0) ~ (0,1)`
+monochromatic and the properness `decide` refuses; changing `(0, 0)` to `4` leaves properness green and makes both
+`FanGap` `decide`s refuse — at `(0, 0)` by this conjunct, at `(1, 0)` because `(0, 0)` is its neighbour
+(FS-38 §R1, run 2026-09-13). -/
 theorem finitePlane11_sharedGap_corrupt_refused :
     ¬ ∃ C : (finitePlane 11).Coloring (Fin 5),
       (∀ v, v ≠ (0, 0) → C v = finitePlane11DoubleGapColouring v) ∧ C (0, 0) = 4 ∧
