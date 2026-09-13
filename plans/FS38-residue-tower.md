@@ -572,3 +572,109 @@ verified by an independent Python check and are `decide`d in K3.
 forms and their invariance lemmas, `castDown`, `dbl`, `normForm`, the circle as a fibre, `twoAdicOmega`/`twoAdicConj` as
 `prodMap`s, the level map as `prodMap` of `castDown`s. §S10's leaf list is superseded by the modules themselves; the
 count moves with the pass (`grep -c sorry`).
+
+---
+
+## §M2. Obligation-modeling pass (`debruijn-obligation-modeling`, fresh invocation, 2026-09-13)
+
+**The space.** No induction anywhere: every general leaf is a finite case analysis (a `by_cases` on membership, a
+`rcases` on a disjunction, a `Prod.ext`) and every instance leaf is `decide` over a finite type. The one recursion in
+sight — the tower's levels — never enters a proof: each statement is at one level or across one level map. So the
+recursor is `cases`, the local obligation of every theorem is one case of a repaint or one component of a form, and
+the pass's work is naming the stepping stones so the cases are two lines.
+
+**Partition.** *Prove*: the general theorems of `FanGap.lean`, the Eisenstein invariances and commutations, the
+level-map facts, the 19 properness (derived, below). *Test*: every `decide` — the two gaps at 11, the shared gap, the
+two table propernesses, the circle counts at 4 and 5, the cover, the kernel enumeration, the `K₄` control, the
+`#guard`s. *Assume*: nothing inside the kernel; [hand 1]/[hand 2] stay outside it (§S3).
+
+**A false leaf, caught (the pass's best product).** `twoAdicLevelHom (m) : twoAdicPlane (m + 1) →g twoAdicPlane m`
+is uninhabitable at `m = 0`: level 0 has one vertex and no edge, level 1 is `K₄`, and a homomorphism cannot send an
+edge to a loop — `addCayley_adj` demands `L u ≠ L v`, which fails exactly when `1 = 0` in `ZMod (2 ^ ⌈m/2⌉)`, i.e.
+at `m = 0`. **Statement changed:** `twoAdicLevelHom (m : ℕ) : twoAdicPlane (m + 2) →g twoAdicPlane (m + 1)` with
+`toFun := twoAdicLevelMap (m + 1)`; the additive map `twoAdicLevelMap` stays at every `m` (it is fine at 0), and
+`twoAdicLevelMap_mem_circle` stays at every `m` (level 0's circle is everything). The local obligation that carries
+`map_rel'`: **`twoAdicLevelMap_ne_zero_of_mem_circle`** — an element of `S_{m+2}` maps to a nonzero element of level
+`m + 1`, because its image lies on `S_{m+1}` by commutation and `(1, 0) ≠ (0, 0)` there (`Fact (1 < 2 ^ ((m+2)/2))`).
+That is "no fibre carries an edge", as a lemma. The consumer at level five uses `twoAdicLevelHom 3 : P₅ →g P₄`.
+
+**The stepping stones, named (added to the skeleton as leaves, so the descent is visible in the file):**
+
+| stone | statement | closes |
+|---|---|---|
+| `repaintAt f C u γ hgap` | the singleton repaint, `pullbackRepaint f C {u} γ (Set.pairwise_singleton _ _) _`, with `repaintAt_apply_self` and `repaintAt_apply_of_ne` | `not_forces_of_fanGap`, `not_fan_of_fanGap` in four lines each (no `Set.mem_singleton_iff` bookkeeping repeated) |
+| `EisMod.omegaMul_omegaMul_omegaMul` | `ω³ = id` (`ext; simp; ring`) | `twoAdicOmega_injective` (a left inverse), hence `ω u ≠ ω v` in `twoAdicOmegaHom.map_rel'` |
+| `EisMod.norm_map`, `EisMod.trace_map` | `norm (Prod.map φ φ z) = φ (norm z)`, `trace (Prod.map φ φ z) (Prod.map φ φ w) = φ (trace z w)` for a ring hom `φ` (`map_add`, `map_mul`, `map_sub`, `map_pow`, `map_ofNat`) | `normForm_twoAdicLevelMap`'s second component; `normForm_twoAdicOmega` via `omegaMul_map` |
+| `EisMod.omegaMul_map` | `omegaMul (Prod.map φ φ z) = Prod.map φ φ (omegaMul z)` (`map_neg`, `map_sub`) | the `castDown` inside `normForm` commutes with `ω` |
+| `castDown_dbl` | `castDown (m + 1) (dbl (m + 1) x) = dbl m (castDown m x)` — both sides are `2·x̃` read modulo `2^⌈m/2⌉`, and `2^⌈m/2⌉ ∣ 2^{⌊m/2⌋+1}` | `normForm_twoAdicLevelMap`'s first component; the only `val` lemma beside `dbl.map_add'` |
+| `dbl.map_add'` | `2·((x + y).val) = 2·x.val + 2·y.val` in `ZMod (2 ^ ⌈m/2⌉)`: `ZMod.val_add`, `Nat.mod_add_div`, and `((2 ^ (⌊m/2⌋ + 1) : ℕ) : ZMod (2 ^ ⌈m/2⌉)) = 0` by `ZMod.natCast_zmod_eq_zero_iff_dvd` and `pow_dvd_pow` (`omega` for the exponent inequality) | `dbl` itself |
+| `three_le_arityFloor_of_forces_eq_of_separated_adj` | `G.Colorable k → (∀ u v, Forces G k u v → u = v) → (∀ u v, Separated G k u v → G.Adj u v) → 3 ≤ arityFloor G k` — the general form of `three_le_arityFloor_of_aperiodic_coincides` (`ResidueObstruction.lean:185`), whose proof body uses only these three facts through `le_arityFloor_iff` and `two_le_arityFloor` (G30 §6: a theorem was available where an instance was recorded) | `three_le_arityFloor_heule510` in one line, and any future object with both iffs |
+| `finitePlane19QuotColouring_proper` **derived, not decided** | from `circ19_ker`, `circ19_image`, `circ19_proper` and `map_sub`: an edge's difference is on the circle, its projection is in `circ19D` and nonzero, so `circ19Table` differs — the argument inside `unitQuadrance_colorable_of_quotient`, replayed for this named colouring | a 361²-pair `decide` avoided |
+
+**Per-leaf shapes (the case table each proof transcribes).**
+- `FanGap.comap`: `⟨h.1, fun w hw => h.2 (f w) (f.map_rel hw)⟩` — `(C.comap f) x = C (f x)` is `rfl`.
+- `pullbackRepaint` properness: four cases on `x ∈ U`, `y ∈ U`; (in, in) is `hind hx hy (G.ne_of_adj hxy) hxy`;
+  (in, out) is `hgap x hx (f y) (f.map_rel hxy)` after `Set.piecewise_eq_of_mem/_of_not_mem`; (out, in) the same
+  with `hxy.symm`; (out, out) is `C.valid (f.map_rel hxy)`.
+- `not_forces_of_fanGap`: `by_cases hc : C (f u) = C (f u')`; if not, `hF (C.comap f)` contradicts; if so, `hF (repaintAt f C u γ h.2)`
+  reads `γ = C (f u')`, then `hc ▸ h.1`.
+- `not_separated_of_sharedGap`: `U = {u, u'}`, independence from `Set.pairwise_pair` (`hadj` and `hadj ∘ Adj.symm`), the
+  gap hypothesis by `Set.mem_insert_iff`/`mem_singleton_iff`; the two `apply_of_mem`s give `γ = γ`.
+- `not_separated_of_fusable`: `rcases` the disjunction; coincidence pulls back (`hS (C.comap f) hc`), the shared gap is
+  the previous theorem. `Fusable.of_hom`, `fusable_of_not_separated` (classical `not_forall`, `not_not`),
+  `separated_iff_adj_of_fusable` (`by_contra` + `Separated.of_adj`): two or three lines each.
+- `FanGap.translate`: `addCayleyTranslate_apply`, `add_sub_cancel`, `addCayley_adj_add_iff_right`; `slack_addCayley_of_fanGap`:
+  translate by `v − x` and `sub_sub_cancel`. `fusable_of_hom_to_base`: `hv.symm ▸ h₀.1`, `.comap σ`.
+- `exists_fanGap_iff_not_coverAtLeast`: split into `not_coverAtLeast_of_fanGap` (→: `coverColors` excludes `C v` and `γ`,
+  so its card is `≤ k − 2 < k − 1`, with `k ≥ 2` from `γ ≠ C v`) and `exists_fanGap_of_not_coverAtLeast` (←: a colouring
+  with `card < k − 1` leaves `coverColors ∪ {C v}` short of `univ`, so `Finset.eq_univ_iff_forall` yields the gap); a
+  helper `coverColors_nil` (the `Q = []` clause is `v ∈ []`, false). ~25 lines; a "should", the record's vocabulary only.
+- `finitePlane11_exists_hom_to_base`: `σ := (rotHom h').comp (addCayleyTranslate _ (−v))` with `d = w − v` on the circle
+  (`unitQuadrance_adj`), `h' : d.1 ^ 2 + (−d.2) ^ 2 = 1` (`neg_sq`); `σ v = rot 0 = 0`, `σ w = rot_{(a,−b)} (a, b) = (a² + b², 0) = (1, 0)`
+  by `rotHom_apply` and `linear_combination`.
+- `finitePlane11_fusable`: `by_cases` adjacency; adjacent → `fusable_of_hom_to_base finitePlane11_sharedGap …`; else
+  `fusable_of_not_separated (fun hS => h (finitePlane11_separated_iff.mp hS))`.
+- `twoAdicOmegaHom.map_rel'`: `addCayley_adj` both sides; `ω u ≠ ω v` by injectivity; `−ω u + ω v = ω (−u + v)` by
+  `map_neg`, `map_add`; membership by `twoAdicOmega_mem_circle`. `twoAdicLevelHom.map_rel'`: the same with
+  `twoAdicLevelMap_ne_zero_of_mem_circle` in place of injectivity.
+- `normForm_twoAdicOmega`, `normForm_twoAdicConj`, `normForm_twoAdicLevelMap`: `Prod.ext` then the stones.
+- `twoAdicFour_forces_iff`: bundle each table as `Coloring.mk col (twoAdicFourTables_proper col hmem)`; the cover
+  supplies `∀ d ≠ 0, ∃ c, ¬ Periodic c d`; `Forces.eq_of_forall_exists_not_periodic` (`LocalGlobal.lean:134`) closes →.
+- `twoAdicFive_forces_delta`: a colouring with `C 0 ≠ C δ` is a colouring of `P₅ ⊔ fromEdgeSet {s(0, δ)}` (`sup_adj`,
+  `fromEdgeSet_adj`, `Sym2.eq_iff`), refuted by the LRAT leaf. `twoAdicFive_forces_of_ker`: `rcases twoAdicFive_ker_eq hd`
+  into the four elements; `Forces.map _ (twoAdicOmegaHom 5)` with `map_zero` carries `δ` to `ωδ` to `ω²δ`.
+  `twoAdicFive_not_forces_of_ne`: `hF.image (twoAdicLevelHom 3)` lands in `P₄`, `twoAdicFour_forces_iff` says `0 = L d`.
+  `twoAdicFive_not_slack`: `Slack.self_forces_iff` against `δ ≠ 0`. `twoAdicFour_not_slack`: **one line** —
+  `fun h => twoAdicFive_not_slack (h.of_hom (twoAdicLevelHom 3))` (slackness pulls UP along the level hom).
+
+**`decide` budgets** (kernel, from the record's measured rates): the gap at 11, 121 adjacency checks — trivial; the
+shared-gap table's properness, 121² = 14,641 pairs — the same as `finitePlane11_colouring_proper`, seconds; the 19 gap,
+361 checks; the circle counts at 4 and 5, 256 and 1,024 `normForm` evaluations; the kernel enumeration at level five,
+1,024 `castHom` evaluations; the `K₄` control, 256 functions × 32 checks. **The two expensive ones:** each level-4
+table's properness as stated — `∀ u v, Adj u v → …` — is 65,536 pairs each evaluating `normForm` twice, ×5 tables
+≈ 650k form evaluations; **measure one table first** (Poros). If it exceeds a minute, restate through the circle as a
+literal: `twoAdicCircleFour : List (TwoAdicLevel 4)` (24 entries) with `mem_twoAdicCircle_four_iff` (256 evaluations,
+once), then properness as `∀ z, ∀ s ∈ list, col z ≠ col (z + s)` (5 × 256 × 24 = 30,720 lookups) bridged to `Adj` by
+`addCayley_adj` — M04's "emit big tables as literals" rule applied to the connection set. The cover is 255 × 5 × 256
+lookups with no form evaluation; fine as stated.
+
+**The one solver-dependent leaf.** `twoAdicFive_not_colorable_with_edge` decomposes as: (i) the computable equivalence
+`TwoAdicLevel 5 ≃ Fin 1024` (`finProdFinEquiv` twice — no literal needed); (ii) the edge list `E'` on `Fin 1024`
+emitted by `tools/fs38_tower.py lrat` (24,577 pairs, as a generated `Edges.lean`); (iii) `decide`: every listed pair is
+an edge of `P₅ ⊔ fromEdgeSet {s(0, δ)}` under the equivalence, and (completeness, so the CNF is the whole graph) every
+edge is listed — 24,577 + 1,024 × 48 checks; (iv) the pipeline's `¬ (edgeGraph 1024 E').Colorable 4` from the LRAT
+(`emit_mask.py`, `regen-check.sh`'s flags; the pins are the pipeline's, as for Heule-553); (v) the homomorphism
+`edgeGraph 1024 E' →g P₅ ⊔ edge` from (iii) and `Colorable.of_hom`. Completeness (iii, second half) is not needed for
+soundness — a subgraph's refusal refutes the whole — and is kept only as the check that the certificate is about the
+object named; drop it if its `decide` is the expensive part.
+
+**Adversarial validation the implementer runs at the close** (each must BREAK): delete `hne` from
+`not_forces_of_fanGap` (then `u = u'` and the repaint separates nothing); drop `γ ≠ C v` from `FanGap` (then
+`γ = C (f u)` and the repainted `u` matches `u'`); drop `hadj` from `not_separated_of_sharedGap` (independence of
+`{u, u'}` fails); shift the level hom back to `m + 1 → m` (the `m = 0` case is the counterexample found above); change
+one entry of the shared-gap table (the `decide` refuses); `#print axioms` on every public theorem of the six modules
+(`scripts/axioms.sh`), since a `sorry` three imports deep inherits silently.
+
+**Applied to the skeleton** (this commit; build re-run): `twoAdicLevelHom` re-indexed; the eight stones added as
+leaves with their statements; `twoAdicFive_not_forces_of_ne`'s and `twoAdicFour_not_slack`'s docstrings name
+`twoAdicLevelHom 3`; `finitePlane19QuotColouring_proper`'s docstring names its derivation.

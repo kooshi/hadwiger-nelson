@@ -30,6 +30,10 @@ def finitePlane19QuotColouring (v : ZMod 19 × ZMod 19) : Fin 5 :=
 
 #guard circ19Table 4 = 4
 
+/-- Proper — DERIVED, not decided: an edge's difference lies on the circle, so its projection along `(1, 1)` is nonzero
+(`circ19_ker`) and in `circ19D` (`circ19_image`), where `circ19Table` never repeats (`circ19_proper`); `map_sub` turns the
+projection of the difference into the difference of projections. The argument inside `unitQuadrance_colorable_of_quotient`,
+replayed for this named colouring. -/
 theorem finitePlane19QuotColouring_proper :
     ∀ {u v : ZMod 19 × ZMod 19}, (finitePlane 19).Adj u v →
       finitePlane19QuotColouring u ≠ finitePlane19QuotColouring v := by

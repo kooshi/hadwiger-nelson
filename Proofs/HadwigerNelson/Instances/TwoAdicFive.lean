@@ -56,7 +56,8 @@ theorem twoAdicFive_forces_of_ker {d : TwoAdicLevel 5} (hd : twoAdicLevelMap 4 d
     Forces (twoAdicPlane 5) 4 0 d := by
   sorry
 
-/-- Outside the kernel nothing is forced: pull a separating table of level four back along the level map. -/
+/-- Outside the kernel nothing is forced: `Forces.image` along `twoAdicLevelHom 3 : P₅ →g P₄` lands in level four,
+which is pairwise free. -/
 theorem twoAdicFive_not_forces_of_ne {d : TwoAdicLevel 5} (hd : twoAdicLevelMap 4 d ≠ 0) :
     ¬ Forces (twoAdicPlane 5) 4 0 d := by
   sorry
@@ -75,10 +76,9 @@ theorem twoAdicFive_forces_iff' {x y : TwoAdicLevel 5} :
 theorem twoAdicFive_not_slack : ¬ Slack (twoAdicPlane 5) 4 := by
   sorry
 
-/-- **No gap at level four either**: a gap at level four pulls back along `twoAdicLevelHom 4` to a gap at level five
-(`FanGap.comap`), one gap makes the Cayley graph slack (`slack_addCayley_of_fanGap`), and slackness contradicts the
-forced pair `(0, δ)`. Placed here, downstream of the LRAT, because that is its only proof; the same chain reaches every
-level `≤ 5`. -/
+/-- **No gap at level four either**: slackness pulls UP along the level hom `twoAdicLevelHom 3 : P₅ →g P₄`
+(`Slack.of_hom`), and level five is not slack. One line; placed here, downstream of the LRAT, because that is its only
+proof; the same chain reaches every level `≤ 5`. -/
 theorem twoAdicFour_not_slack : ¬ Slack (twoAdicPlane 4) 4 := by
   sorry
 

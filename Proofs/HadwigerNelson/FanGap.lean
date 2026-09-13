@@ -100,6 +100,21 @@ theorem pullbackRepaint_apply_of_not_mem (f : G →g P) (C : P.Coloring (Fin k))
     {x : V} (hx : x ∉ U) : pullbackRepaint f C U γ hind hgap x = C (f x) := by
   sorry
 
+/-- The singleton repaint: `C ∘ f` with `u` overwritten by a colour absent from `N(f u)`. The stepping stone for the
+pair and fan theorems. -/
+noncomputable def repaintAt (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
+    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k) :=
+  pullbackRepaint f C {u} γ (Set.pairwise_singleton _ _) (by
+    sorry)
+
+theorem repaintAt_apply_self (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
+    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : repaintAt f C u γ hgap u = γ := by
+  sorry
+
+theorem repaintAt_apply_of_ne (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
+    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) {x : V} (hx : x ≠ u) : repaintAt f C u γ hgap x = C (f x) := by
+  sorry
+
 /-! ### The three uses -/
 
 /-- **The fan-gap theorem (D0.2).** A gap at the image of `u` frees `u` from every other vertex: either `C ∘ f`
@@ -165,6 +180,15 @@ pair separated by every `k`-colouring is adjacent. One hypothesis; it carries it
 `k ≥ 1` premise is needed. -/
 theorem separated_iff_adj_of_fusable (h : ∀ v w, Fusable P k v w) (f : G →g P) {u u' : V} :
     Separated G k u u' ↔ G.Adj u u' := by
+  sorry
+
+/-- **No pair compulsion and colourable ⟹ arity floor at least `3`** — the general form of
+`three_le_arityFloor_of_aperiodic_coincides` (`ResidueObstruction.lean`), whose proof uses only these three facts through
+`le_arityFloor_iff` and `two_le_arityFloor`. Stated here rather than in `Arity.lean` (a new declaration there rebuilds
+its dependents). -/
+theorem three_le_arityFloor_of_forces_eq_of_separated_adj (hcol : G.Colorable k)
+    (hf : ∀ u v, Forces G k u v → u = v) (hs : ∀ u v, Separated G k u v → G.Adj u v) :
+    3 ≤ arityFloor G k := by
   sorry
 
 /-! ### Cayley graphs: one gap is every gap -/

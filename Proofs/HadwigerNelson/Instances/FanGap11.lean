@@ -173,8 +173,9 @@ theorem heule510_separated_iff_adj {i j : Fin 510} :
   separated_iff_adj_of_hom_finitePlane11 heule510Reduce11
 
 /-- No pair compulsion at five colours, and 5-colourable: the arity floor is at least `3`. -/
-theorem three_le_arityFloor_heule510 : 3 ≤ arityFloor (edgeGraph 510 heule510.edges) 5 := by
-  sorry
+theorem three_le_arityFloor_heule510 : 3 ≤ arityFloor (edgeGraph 510 heule510.edges) 5 :=
+  three_le_arityFloor_of_forces_eq_of_separated_adj heule510_colorable_five (fun _ _ h => heule510_forces_eq h)
+    (fun _ _ h => heule510_separated_iff_adj.mp h)
 
 /-- The pair M60 was silent on: vertices `0` and `475` have the SAME residue (`(0, 0)`), so their squared distance is
 `≡ 0 (mod 11)` and the residue law says nothing. -/

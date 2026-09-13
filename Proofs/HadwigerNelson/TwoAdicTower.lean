@@ -70,6 +70,28 @@ theorem norm_conj (z : EisMod n) : norm (conj z) = norm z := by
 theorem trace_conj_conj (z w : EisMod n) : trace (conj z) (conj w) = trace z w := by
   sorry
 
+/-- `ω³ = 1`: three applications of `omegaMul` are the identity — the source of its injectivity. -/
+theorem omegaMul_omegaMul_omegaMul (z : EisMod n) : omegaMul (omegaMul (omegaMul z)) = z := by
+  sorry
+
+theorem omegaMul_injective : Function.Injective (omegaMul : EisMod n → EisMod n) := by
+  sorry
+
+variable {n' : ℕ}
+
+/-- The norm commutes with a ring homomorphism applied to both components. -/
+theorem norm_map (φ : ZMod n →+* ZMod n') (z : EisMod n) : norm (Prod.map φ φ z) = φ (norm z) := by
+  sorry
+
+theorem trace_map (φ : ZMod n →+* ZMod n') (z w : EisMod n) :
+    trace (Prod.map φ φ z) (Prod.map φ φ w) = φ (trace z w) := by
+  sorry
+
+/-- `ω`-multiplication commutes with a ring homomorphism applied to both components. -/
+theorem omegaMul_map (φ : ZMod n →+* ZMod n') (z : EisMod n) :
+    omegaMul (Prod.map φ φ z) = Prod.map φ φ (omegaMul z) := by
+  sorry
+
 end EisMod
 
 /-! ### The additive group of a level -/
@@ -94,6 +116,11 @@ def dbl (m : ℕ) : ZMod (2 ^ (m / 2)) →+ ZMod (2 ^ ((m + 1) / 2)) where
   map_zero' := by simp
   map_add' x y := by
     sorry
+
+/-- Doubling commutes with reduction: both sides are `2·x̃` read modulo `2^⌈m/2⌉`, and `2^⌈m/2⌉ ∣ 2^{⌊m/2⌋+1}`. -/
+theorem castDown_dbl (m : ℕ) (x : ZMod (2 ^ ((m + 1) / 2))) :
+    castDown (m + 1) (dbl (m + 1) x) = dbl m (castDown m x) := by
+  sorry
 
 /-- **The norm form** `N(A + πB) = (N(A) + 2N(B)) + π·(Tr(A, B) + 2N(B))`, from `π² = 2 + 2π` and the rationality of
 `N` and `Tr` (their `ω`-components vanish): valued in the `A`-ring and the `B`-ring respectively. -/
@@ -144,6 +171,9 @@ theorem twoAdicOmega_mem_circle (m : ℕ) {z : TwoAdicLevel m} (h : z ∈ twoAdi
     twoAdicOmega m z ∈ twoAdicCircle m := by
   sorry
 
+theorem twoAdicOmega_injective (m : ℕ) : Function.Injective (twoAdicOmega m) := by
+  sorry
+
 theorem normForm_twoAdicConj (m : ℕ) (z : TwoAdicLevel m) : normForm m (twoAdicConj m z) = normForm m z := by
   sorry
 
@@ -175,10 +205,17 @@ theorem twoAdicLevelMap_mem_circle (m : ℕ) {z : TwoAdicLevel (m + 1)} (h : z �
     twoAdicLevelMap m z ∈ twoAdicCircle m := by
   sorry
 
-/-- **The level map is a graph homomorphism** `P_{m+1} →g P_m` — the tower's structure maps; no fibre carries an
-edge (a difference in `𝔓^m` has norm in `𝔓^{2m}`, never `1`). -/
-def twoAdicLevelHom (m : ℕ) : twoAdicPlane (m + 1) →g twoAdicPlane m where
-  toFun := twoAdicLevelMap m
+/-- **No fibre carries an edge**: a circle point of level `m + 2` reduces to a NONZERO point of level `m + 1` — its
+image lies on that level's circle, where `(1, 0) ≠ (0, 0)` because `2 ^ ((m + 2) / 2) ≥ 2`. (At level `0` the target ring
+is `ZMod 1` and this fails, which is why the level hom below starts one level up.) -/
+theorem twoAdicLevelMap_ne_zero_of_mem_circle (m : ℕ) {z : TwoAdicLevel (m + 2)}
+    (h : z ∈ twoAdicCircle (m + 2)) : twoAdicLevelMap (m + 1) z ≠ 0 := by
+  sorry
+
+/-- **The level map is a graph homomorphism** `P_{m+2} →g P_{m+1}` — the tower's structure maps. Indexed from level
+`1` upward: the map onto level `0` (one vertex, no edge) is no homomorphism, since `K₄` has edges. -/
+def twoAdicLevelHom (m : ℕ) : twoAdicPlane (m + 2) →g twoAdicPlane (m + 1) where
+  toFun := twoAdicLevelMap (m + 1)
   map_rel' := by
     sorry
 
