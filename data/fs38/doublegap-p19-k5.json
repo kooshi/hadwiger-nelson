@@ -1,0 +1,109 @@
+{
+ "kind": "fs38-double-gap",
+ "p": 19,
+ "k": 5,
+ "n": 361,
+ "degree": 20,
+ "edges": 3610,
+ "base_edge": {
+  "v": [
+   0,
+   0
+  ],
+  "w": [
+   1,
+   0
+  ],
+  "shared_neighbours": 0,
+  "shared_neighbour_points": [],
+  "closed_neighbourhood_size": 40
+ },
+ "ask": {
+  "question": "a proper 5-colouring with colour 4 absent from N[(0,0)] \u222a N[(1,0)]",
+  "verdict": "found \u2014 verified colouring (every edge re-checked here)"
+ },
+ "found": {
+  "gamma": 4,
+  "rows": [
+   "0214023401340134213",
+   "3023401342134213021",
+   "1401342130213021402",
+   "2342134213021402340",
+   "0134213021402340134",
+   "4213021402340134213",
+   "3021402340134213421",
+   "1402340134013421302",
+   "2340134213421302140",
+   "0134213021302140234",
+   "4213421402140234023",
+   "3421302340234013401",
+   "1302140134013421342",
+   "2140214013401302130",
+   "0234023421342140214",
+   "4013401342130234023",
+   "3421342130213023402",
+   "1302130214021401340",
+   "2140214023402342134"
+  ],
+  "verified_proper_on_all_edges": true,
+  "colour_absent_on_closed_neighbourhood": true,
+  "closed_neighbourhood_size": 40
+ },
+ "committed_table": null,
+ "single_gaps": {
+  "source": "Instances/LocalGlobal19.lean circ19Table \u2218 projAlong (1,1)",
+  "gapped_pairs": 38,
+  "gapped_vertices": 38,
+  "first": [
+   {
+    "vertex": [
+     0,
+     4
+    ],
+    "gap": 1
+   },
+   {
+    "vertex": [
+     0,
+     10
+    ],
+    "gap": 1
+   },
+   {
+    "vertex": [
+     1,
+     5
+    ],
+    "gap": 1
+   },
+   {
+    "vertex": [
+     1,
+     11
+    ],
+    "gap": 1
+   }
+  ],
+  "note": "the kernel's own 19-colouring, for K2's `finitePlane19_fanGap` (FS-38 \u00a7S8 decision 10 keeps only the forces half at 19)"
+ },
+ "controls": [
+  {
+   "name": "a single gap at (0,0)",
+   "expect": "sat",
+   "required": true,
+   "got": "sat",
+   "fired": true,
+   "reads": "the SAT outcome is reachable on this code path \u2014 the weaker ask must succeed where the shared-gap ask did"
+  },
+  {
+   "name": "one colour absent everywhere (= (k\u22121)-colour the plane)",
+   "expect": "refused",
+   "required": false,
+   "got": "unsat",
+   "fired": true,
+   "reads": "the reachability control for a refusal, load-bearing exactly when this record contains one; the shared-gap ask here returned SAT with a verified table, so it is informational"
+  }
+ ],
+ "seconds": 83.7,
+ "claim_scope": "a found table is a colouring verified here proper on every edge with the named colour absent on every vertex of the two closed neighbourhoods \u2014 that is `DoubleSlack`'s witness at the base edge, and by translation and rotation (row 60) at every edge. A 'none' would be one solver's UNSAT and is written as refused. The committed literal is re-verified here, with a flipped entry as the planted red."
+}

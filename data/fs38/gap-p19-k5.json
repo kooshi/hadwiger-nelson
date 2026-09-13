@@ -1,0 +1,659 @@
+{
+ "kind": "fs38-fan-gap",
+ "p": 19,
+ "k": 5,
+ "n": 361,
+ "degree": 20,
+ "edges": 3610,
+ "table_source": {
+  "kernel": "Instances/LocalGlobal19.lean circ19Table \u2218 projAlong (1,1)"
+ },
+ "table_proper": true,
+ "table_rows": [
+  "0432432104304321021",
+  "1043243210430432102",
+  "2104324321043043210",
+  "0210432432104304321",
+  "1021043243210430432",
+  "2102104324321043043",
+  "3210210432432104304",
+  "4321021043243210430",
+  "0432102104324321043",
+  "3043210210432432104",
+  "4304321021043243210",
+  "0430432102104324321",
+  "1043043210210432432",
+  "2104304321021043243",
+  "3210430432102104324",
+  "4321043043210210432",
+  "2432104304321021043",
+  "3243210430432102104",
+  "4324321043043210210"
+ ],
+ "gapped_pairs": 38,
+ "gapped_vertices": 38,
+ "per_vertex": [
+  {
+   "vertex": [
+    0,
+    4
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    0,
+    10
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    1,
+    5
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    1,
+    11
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    2,
+    6
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    2,
+    12
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    3,
+    7
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    3,
+    13
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    4,
+    8
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    4,
+    14
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    5,
+    9
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    5,
+    15
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    6,
+    10
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    6,
+    16
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    7,
+    11
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    7,
+    17
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    8,
+    12
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    8,
+    18
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    9,
+    0
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    9,
+    13
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    10,
+    1
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    10,
+    14
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    11,
+    2
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    11,
+    15
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    12,
+    3
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    12,
+    16
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    13,
+    4
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    13,
+    17
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    14,
+    5
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    14,
+    18
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    15,
+    0
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    15,
+    6
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    16,
+    1
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    16,
+    7
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    17,
+    2
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    17,
+    8
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    18,
+    3
+   ],
+   "own_colour": 4,
+   "neighbour_colours": [
+    0,
+    2,
+    3
+   ],
+   "gaps": [
+    1
+   ]
+  },
+  {
+   "vertex": [
+    18,
+    9
+   ],
+   "own_colour": 3,
+   "neighbour_colours": [
+    0,
+    2,
+    4
+   ],
+   "gaps": [
+    1
+   ]
+  }
+ ],
+ "sat_ask": {
+  "question": "a proper 5-colouring with one colour absent from N[(0,0)]",
+  "verdict": "gap found \u2014 verified colouring (every edge re-checked here)",
+  "conflict_budget": 2000000,
+  "gap_colours_in_the_found_colouring": [
+   1
+  ],
+  "colouring_rows": [
+   "0414040303032321214",
+   "2321212140403030303",
+   "4030323212321414140",
+   "1414040403032323212",
+   "0323212121414040323",
+   "4040403232121412141",
+   "1214140404030303232",
+   "0323232121414140403",
+   "4140403030323214141",
+   "3212141404030403032",
+   "0303232121214141404",
+   "4141404030303232121",
+   "3232121214140303230",
+   "0403032321212121414",
+   "2141404040303032321",
+   "3232321214141404030",
+   "1404040303212141214",
+   "2121414040304032323",
+   "3032323212121414040"
+  ],
+  "verified": true
+ },
+ "controls": [
+  {
+   "name": "one colour absent everywhere (= (k\u22121)-colour the plane), with a clique through the origin pinned to distinct colours (sound by palette symmetry; without the pins the ask did not return in ten minutes at 19)",
+   "expect": "refused",
+   "required": false,
+   "got": "unsat",
+   "fired": true,
+   "clique_pins": 1,
+   "reads": "the reachability control for a REFUSAL, and it is load-bearing exactly when this record contains one: here the gap ask itself returned SAT with a verified colouring, so no refusal is recorded at this prime and this control is informational. \u03c7(UD(\ud835\udd3d_p,2)) = k makes the expected answer a refusal either way"
+  },
+  {
+   "name": "three colours absent from N[(0,0)] at once",
+   "expect": "prime-dependent, not required",
+   "required": false,
+   "got": "unknown",
+   "fired": null,
+   "directed_edges_inside_the_circle": 0,
+   "reads": "informational, NOT a control: it refuses cheaply only when the circle induces an edge \u2014 \u03c9 = 3 iff 3 is a square mod p (`[Krebs2022]`), so 24 directed edges inside the circle at 11 and ZERO at 19. At 19, forbidding three colours on an INDEPENDENT neighbourhood is a hard question in its own right (measured: the single-gap ask alone takes 27 s there against milliseconds at 11), and reading its outcome as a control would be reading the prime, not the instrument"
+  }
+ ],
+ "seconds": 240.0,
+ "claim_scope": "the census is an exact enumeration over the COMMITTED table (the kernel's literal, read back from the source): every listed (vertex, colour) is a colour absent from that vertex's closed neighbourhood, which is what `FanGap` names and what the kernel decides by 12 lookups. The SAT ask carries a colouring verified here on every edge. No refusal is recorded as a fact."
+}

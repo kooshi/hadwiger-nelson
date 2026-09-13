@@ -76,7 +76,7 @@
  "sat_ask": {
   "question": "a proper 5-colouring with one colour absent from N[(0,0)]",
   "verdict": "gap found \u2014 verified colouring (every edge re-checked here)",
-  "conflict_budget": 20000000,
+  "conflict_budget": 2000000,
   "gap_colours_in_the_found_colouring": [
    1
   ],
@@ -99,11 +99,11 @@
   {
    "name": "one colour absent everywhere (= (k\u22121)-colour the plane), with a clique through the origin pinned to distinct colours (sound by palette symmetry; without the pins the ask did not return in ten minutes at 19)",
    "expect": "refused",
-   "required": true,
+   "required": false,
    "got": "unsat",
    "fired": true,
    "clique_pins": 3,
-   "reads": "THE reachability control: the refusal outcome is reachable on this code path and this object, because \u03c7(UD(\ud835\udd3d_p,2)) = k"
+   "reads": "the reachability control for a REFUSAL, and it is load-bearing exactly when this record contains one: here the gap ask itself returned SAT with a verified colouring, so no refusal is recorded at this prime and this control is informational. \u03c7(UD(\ud835\udd3d_p,2)) = k makes the expected answer a refusal either way"
   },
   {
    "name": "three colours absent from N[(0,0)] at once",

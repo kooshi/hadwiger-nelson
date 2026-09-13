@@ -1045,8 +1045,9 @@ def cmd_gap(a):
           f"{len(census)} gapped (vertex, colour) pairs at {len(verts)} vertices "
           + "; ".join(f"({v['vertex'][0]},{v['vertex'][1]}) own {v['own_colour']} nbrs {v['neighbour_colours']} "
                       f"gap {v['gaps']}" for v in per_vertex[:4])
-          + f"{' …' if len(per_vertex) > 4 else ''}; the fresh ask: {ask['verdict']}; the required control "
-          f"(a colour banned everywhere must refuse) fired; the prime-dependent one read "
+          + f"{' …' if len(per_vertex) > 4 else ''}; the fresh ask: {ask['verdict']}; the colour-banned-everywhere "
+          f"control ({'required here' if controls[0]['required'] else 'informational here, since no refusal is '
+                      'recorded at this prime'}) read {controls[0]['got']}; the prime-dependent ask read "
           f"{controls[1]['got']} with {circ_edges} directed edges inside the circle")
     print(f"  wrote {path}")
     return rec
