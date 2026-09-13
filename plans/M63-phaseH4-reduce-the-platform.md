@@ -13,7 +13,18 @@ is the cheapest member that is both 6-open and immune to the additive-pair attac
 **This phase shrinks it**, so that the six-colour design target (FS-6) has something small enough to search
 *inside* rather than merely to refute.
 
-## §2 — Why the obvious route is dead, stated with its arithmetic
+## §2 — WITHDRAWN 2026-09-12: this section's premise was a misused number
+
+> **The claim below is FALSE and was load-bearing for this phase. The 20.03 core-hours was never a
+> per-deletion cost — it was the census of a SECOND, RETIRED route (phase H2 established its verdict twice;
+> the surviving argument is 20 UNSAT claims, not 552 half-refutations).** Measured on this desktop, one
+> per-deletion answer is **50.6 s cold and 10.87 s warm**, so a full pass is **~77 core-hours warm, under
+> five hours on this machine** — four orders of magnitude cheaper than the section claims. **The naive loop
+> was never dead; I killed it with a number that measures something else**, which is the seventh instance of
+> that error in this milestone and the first to be load-bearing for a phase. Kept, not deleted, per the
+> project's rule. §7 and §8 carry the corrected picture.
+
+### The withdrawn text
 
 `[Parts2020a]`'s reduction is a loop: delete a vertex, re-ask *is it still five-chromatic*, keep or restore.
 **Phase H2 needed 20.03 core-hours for one such answer on this object.** There are ~25,567 deletable base
@@ -167,3 +178,82 @@ check* — **and the whole cost lives in maintaining the superset**, a different
 one the survey scoped, and probably a better one. **Timing the refutation instead would be a right
 measurement of the wrong thing — the error this milestone hit six times.** Both agents are to report **both**
 costs, labelled, and never let one stand in for the other.
+
+---
+
+## §8 — The three measurements land, and they overturn this phase's premise (2026-09-12)
+
+Harness `~/source/descent-engine/crates/descent-sat/examples/h2probe.rs`, raw log in that repo's
+`scratch/h2probe/`. Desktop, single-threaded, `nice -n 10`, with another agent's solver on one core
+throughout. It reproduced **25,567 vertices / 272,232 edges / 1,267,897 clauses / 31 delta-touched vertices**
+before measuring anything, and checked the edge-versus-at-most-one classification by exhaustion in both
+directions.
+
+| | |
+|---|---|
+| **M0** base half alone, nothing blocked | **SAT, 0.025 s** |
+| **M1** cold plain, one claim | **UNSAT, 50.6 s** |
+| **M2** guarded warm-up, all present | **UNSAT, 99.2 s and 103.3 s** — a 1.96× first-solve penalty |
+| **M3** 29 warm probes | **mean 10.87 s**, median **0.001 s**, 24.1% expensive (mean 44.8 s) |
+
+### The cost wall is gone, and it was never there
+
+**A full reduction pass is ~77 core-hours warm — under five hours on this desktop**, and about eleven even
+cold. **Four orders of magnitude cheaper than §2 assumed, and none of it from any new engine**: it came from
+the decomposition phase H2 already had.
+
+### The contrary evidence is retired, by mechanism rather than by verdict
+
+The long-lived presence-encoded solver is **4.65× cheaper per probe**, with the 1.96× first-solve penalty
+**repaid inside three probes**. And the prior evidence's first-solve half **transfers exactly** — it was not
+wrong. **It measured a single ask and never a walk**, and those are different quantities. That is a cleaner
+resolution than my framing, which was that the old numbers came from the wrong satisfiable/unsatisfiable
+regime — **and M0 refuted that framing**: satisfiable asks cost **25 ms**, every second of the 50.6 is spent
+proving UNSAT, and *"this deletion changed nothing"* is proved by **exhaustion**. **No reasoning about
+regimes would have produced that. The measurement did.**
+
+### Two errors of mine, corrected against the file
+
+1. **The interface is 66 vertices, not 31.** I conflated the genuine coupling with the counting criterion's
+   object — and **that criterion fails on this object anyway**: `L = 10` against a circle count of 30, one
+   third where more than one half is needed, with 72 ordered pairs surviving the diagonal-only check by
+   explicit witnesses. I carried 31 into two briefs and a committed plan.
+2. **The 20.03 core-hours misuse**, above — **seventh instance in this milestone, first to be load-bearing
+   for a phase.** What survives of my structural reading: the 552 patterns with 0 of 304,704 pairs admissible
+   (confirmed, with a discrimination ladder 18,432 → 6,144 → 4,224 → 2,688 → 768 → 0), and the superset
+   property (confirmed, the record's own §10 marking achievability "not load-bearing"). **Refined:** after
+   the superset simplification the solver core is **20 UNSAT claims, not 552.**
+
+### The wall that may have replaced it, and it is mathematical
+
+> **At deletion 30 the instance flipped to SAT and stayed there.** Twenty-nine deletions out of 25,567 were
+> enough to add a **twentieth** achievable circle pattern.
+
+The walk detects it in **22 ms**. But **the pattern superset is not robust to deletion on this object**, so a
+walk meets superset growth constantly rather than rarely — and **whether the refutation survives a superset
+that keeps climbing is what the reduction actually turns on.** Nothing measured yet answers it: that harness
+never runs the pair check and never restores a vertex.
+
+**Scope, stated rather than hedged:** one deletion order, **ascending index, which deletes a CLUMP rather
+than a scatter.** Twenty-nine index-adjacent lattice points are plausibly far more damaging than twenty-nine
+spread ones, so **step 30 is an upper bound on fragility, not a measurement of it.**
+
+> **Deletion order is now a first-class design variable.** It was on nobody's list an hour ago.
+
+### Commissioned
+
+1. **The scattered-order run, with the pair check and a vertex restore** — scoring superset growth against
+   *"does the refutation survive"* rather than *"did the superset grow"*, and giving a walk that can back out
+   a different cost model from one that cannot. **An hour, not a week.**
+2. **The `u16` fix** — four sites spelling `try_from(...).unwrap_or(u16::MAX)`, which above 65,535 emit **a
+   well-formed formula for a different graph, silently.** Cannot bite at 25,567; authorised anyway at twenty
+   minutes with a red-watch control per site. **The engineer declined to make the change unasked on a
+   reconnaissance brief — *"I do not treat a written endorsement as a lifted constraint"* — which cost one
+   round trip against a class of error that costs days. Right call.**
+3. **The free-deletion census, now the more valuable half.** If absorption certifies that every proper
+   four-colouring of `G − S` extends to `G`, and `S` holds no interface vertex, then `G` and `G − S` present
+   **exactly the same interface patterns** — the extension is the bijection. **So an absorption-certified
+   deletion should be superset-NEUTRAL where an arbitrary one demonstrably is not.** If that holds, **the
+   free deletions are not merely free, they are the only SAFE ones**, and the reduction splits into a
+   superset-neutral phase needing no solver and no fragility risk, then a much smaller solver-bound phase.
+   **Out for checking against `Absorb.lean`'s actual statements, not against my sentence.**
