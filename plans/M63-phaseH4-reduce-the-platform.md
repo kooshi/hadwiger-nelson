@@ -739,3 +739,105 @@ removes a constraint and makes the family TOO LARGE, so here a positive is the f
 refutation is the robust one** — the opposite of the usual asymmetry, and correctly identified. It verified
 all 96 against its own edge list (**0 monochromatic edges in 52,274,880 checks**); the cheap independent check
 is to rebuild the arena by another route and re-verify the stored homomorphisms against *that* edge list.
+
+---
+
+## §16 — The compulsion sweep: NOTHING, in either polarity — and my filter was self-defeating (2026-09-12)
+
+Record: `plans/M63-phaseH4-sweep.md`; instrument `tools/arena_sweep.py` (`--self-test` green, 8 controls);
+evidence `build/m63-phaseH4-sweep/` with resume commands; `data/fplane/spectral-p83.json`.
+
+### The verdict
+
+| | population | survivors |
+|---|---|---|
+| **forced pairs** | **1,307,266,278** — every pair | **0**, from model 80 |
+| **virtual edges** | **1,306,721,748** — every non-adjacent pair | **0**, at model 4,480 |
+
+**Certified by 4,480 exhibited proper five-colourings, each verified edge by edge. No solver UNSAT
+anywhere — the survivor set is a SUPERSET of the truth by construction, so no positive could have hidden.**
+
+**The stakes were maximal, not incremental:** `Forces.planeIn` with `not_colorable_of_forced_equal` means a
+single forced pair at **any** distance ≥ 1/2 would have been **χ(ℝ²) ≥ 6 outright**, and row 55's usual
+arithmetic bar genuinely does not apply in a 6-open field. **This was the first sweep in which a five-colour
+forced pair was arithmetically permitted at every distance.** It is empty.
+
+### And the emptiness is NOT about the field
+
+**Three more objects, five seconds each.** Heule-510 and Heule-553 sit in a **5-sealed** field — G48's
+*source* side, where the bar does apply — and also return **0 and 0**.
+
+> **Four objects, both sealing statuses, the same null. The emptiness is not a field effect.**
+
+That extends G31 from "existing witnesses hold nothing" to something stronger: **a produced, purpose-built
+object in an unsealed field is just as empty.**
+
+### My filter was invalid for two independent structural reasons
+
+**1. The field has no sealing prime, and this is a THEOREM rather than bad luck.** The five-colour residue
+law needs a **usable** prime whose finite plane is 5-colourable. Our field is multiquadratic, so every
+Frobenius has order ≤ 2 and "odd residue degree" collapses to "degree one"; `fplane.py usable` enumerates the
+entire supply — **83, 131, 167, 227, 479, 503, 563, …**, nothing below 83 — and at 83 the exact Kloosterman
+spectrum gives a Hoffman floor of **5.743**, so χ ≥ 6, with every larger one ≥ 6 by Weil (threshold q ≥ 98).
+
+> **A field is 5-sealed exactly when some usable prime's plane is 5-colourable — which IS the filter's
+> hypothesis. So "6-open" and "residue-filterable at five colours" are COMPLEMENTARY BY DEFINITION: any
+> object worth sweeping for χ ≥ 6 is un-filterable this way, necessarily.**
+
+**My filter proposal was self-defeating by construction**, and that is a general fact, not a fact about this
+object.
+
+**2. My base–base rescue fails at a named step.** `Forces` is monotone **upward** in the graph
+(`Forcer.Forces.mono`), so refuting a pair in `G[base]` says **nothing** about `G`. Refuting in `G` needs a
+proper colouring **of `G`**, and **any** one does the job equally — the residue colouring has no operational
+advantage even where it exists.
+
+### And the cost model I built the filter on was wrong by three orders of magnitude
+
+**I said 363 hours. It took about half an hour.**
+
+My figure assumed **one solver call per pair**. **This project's own instrument has never worked that way** —
+`rigidity.py` settled all 1.25 M pairs of the 1581 in **37 models and 30.2 s**. Actual cost here: 240 solver
+calls for a colouring pool (~8 min) plus **1,212 s of single-core sweeping**. **The filter was never needed,
+and I spent a message explaining to Kooshi why the sweep was unaffordable.**
+
+### The critical-vertex screen: applies as a theorem, inert here, and for a flattering reason
+
+De Grey's three critical vertices exist because his object is a **1-sum** — the whole coupling sits on one cut
+vertex plus one edge. Measured on ours: **every interface vertex carries exactly one cross edge, maximum
+cross-degree 1 across all 51,133.** **The screen that emptied his graph is inert here precisely because this
+object is better built.** No solver hours were bought to certify that null, and the agent said so.
+
+### Settled in passing, and it belongs in the ledger
+
+> **χ(arena) = 5 exactly.** Nothing on record had the upper half. CaDiCaL could not find a five-colouring in
+> 300 s; an explicit construction took **0.7 s**.
+
+### The live residual, and the design number
+
+**Arity 3 is NOT settled.** Swept on the **163 interface vertices only** — `1.6 × 10⁻⁷` of the space, **a
+choice and not a derivation** — 3,502,728 questions leave **337 candidates**. **The arity-2 null makes any of
+them irreducible if real.**
+
+**The design number this hands over:** deleting **66 of 544,530 edges** four-colours the arena (verified, with
+a paired control), so by the spare-colour lemma **the object's entire compulsion budget is 66 edges — 36
+off-diagonal once G52's free diagonal is removed.**
+
+> **Rank future bases on the compulsion budget, not on circle count.**
+
+### What it wants checked — not the null, the edge list under it
+
+**A missing unit edge makes colouring easier, produces more refutations, and reads as a CLEANER null.** It
+checked: six decades of tolerance return exactly **544,530 edges, 0 missing and 0 extra**, nearest non-edge
+**seven orders of magnitude** away. **But it checked in floating point, against coordinates rebuilt from a map
+read out of `recon.py`** — and if that map is not the one that produced the committed list, its geometry and
+its edge list are **two views of different objects that agree**, which is this repository's named
+module-identity failure. **The specific check to buy: an independent exact re-derivation of the 126 cross
+edges by code that is not `typem.CrossLaw`.**
+
+### Three failures it logged against itself
+
+A wall-clock flag that **was invalid and read as "unknown"** — a check reporting nothing when it cannot run,
+now loud. **P-SW-2 missed by 18×**, from transferring a per-model decay rate off a **32× smaller** object.
+And **three generator faults, each of which looked like a fact about the object and was a fact about the
+generator** — every one caught by **a count that plateaued.**
