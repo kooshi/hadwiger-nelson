@@ -257,3 +257,89 @@ spread ones, so **step 30 is an upper bound on fragility, not a measurement of i
    free deletions are not merely free, they are the only SAFE ones**, and the reduction splits into a
    superset-neutral phase needing no solver and no fragility risk, then a much smaller solver-bound phase.
    **Out for checking against `Absorb.lean`'s actual statements, not against my sentence.**
+
+---
+
+## §9 — The free-deletion census: ZERO, and the reason is one measured fact (2026-09-12)
+
+Record: `plans/M63-phaseH4-freecensus.md`; evidence `build/m63-phaseH4/`; checkpoints outside `build/`.
+
+> **Free deletions: 0 of 51,133.** Base-side 0 of 25,567, copy-side 0 of 25,566. **The arena's minimum degree
+> is 6, and the only absorption certificate that applies at four colours cannot see a vertex above degree 3.**
+
+Every certificate checked against the **Lean statements**, not the ledger's summary:
+
+| certificate | fires? |
+|---|---|
+| greedy absorption (`extends_of_extensionOrder`) — the 4-core peel | the only one that applies; **removes 0** |
+| `extends_symCopy` | cannot — the centre is fused and 36 of 66 couplings are off-diagonal. **And it MUST not fire, or the arena would be four-colourable** |
+| `extends_of_hubs` / `_matching` / `_hub_matching` | need the piece **3-colourable**; the radius-2 ball about the centre (451 vertices) is measured **not** 3-colourable |
+| non-adjacent domination (folklore, not in `Absorb.lean`) | **0 of 51,066** |
+
+**P-H4-1: met on the threshold, outside my band on the low side.** I predicted under 25%, expecting 5–15%;
+the answer is **0%**. Scored that way rather than claimed as a hit.
+
+**Controls, all before any `ρ₆₃` number:** Parts's **374 → 374** on all four variants, with his registered
+5/6/7-cores (350/340/265) reproduced through the same code path; phase H3's arena **32,617 → 25,201** plus
+four more registered values, **five exact**. And on the object itself the identical peeler removes 252 at
+`k = 7` and 24,780 at `k = 13` — so the instrument is not simply inert.
+
+### The superset-neutrality idea: proved, and empty
+
+`Extends G A 4` with `S ∩ I = ∅` gives `P(G) = P(G−S)` **exactly**, both halves from statements in
+`Absorb.lean`. **And it has no inhabitant on this object.** The no-solver phase does not exist here; **all
+25,500 non-interface base vertices need a solver.** A clean kill rather than a hopeful one.
+
+**The caution attached to it is worth more than the derivation.** Phase H3's 22.7% peel is **not**
+superset-neutral: it deletes **120 of 241 interface vertices, including all 60 circle points.** Its claim
+stands — that was about four-colourability, where the 4-core is exactly right — **it is the interface
+formulation the peel breaks, object by object.** I had been carrying that 23% as a free win in two places;
+**it is free for the wrong question.**
+
+### The ask cost, now from two harnesses sharing no code
+
+**≈46 CPU-seconds** (16 deletions across four strata, median 45.6 s, **all UNSAT**) against the engine's
+**50.6 s** — agreeing to within the measured contention factor. SAT answers cost **0.4–3 s**. **That is the
+number.**
+
+### Two findings that specify the loop
+
+- **Scattering is worth at least 2.5–3.4×**, a lower bound: random-shuffle nested prefixes survive to **75
+  accepted, rejected at 100**, against ascending order's **29 accepted, rejected at 30** — and the scattered
+  test blocks all 552 full patterns where the other is circle-level, so the comparison is conservative.
+- **Rescue by growing the pattern list is not cheap** — ≥79 new patterns and **576 CPU-s with the enumeration
+  not exhausted** — while **bisecting down after a rejection costs 0.4–3 s. So the loop bisects.**
+
+### What the census wants checked, pointed at its own result
+
+> *"My positive controls pass, which by this project's own rule is not evidence the zero is real."*
+
+The specific gap it named: `Absorb.lean` is **one construction, the repaint lemma**, and **a cleverer choice
+of piece colouring is exactly the free parameter it did not vary.**
+
+**That gap has a classical name, and this is a G46 recognition rather than a search: absorption IS
+reducibility.** A configuration is **D-reducible** when every colouring of its boundary ring extends into it —
+`Extends` with the boundary as the ring — and **C-reducible** widens that with **Kempe chain** interchanges
+before extending. Sixty years of machinery: Birkhoff's diamond, ring-colouring enumeration, the Appel–Haken
+and Robertson–Sanders–Seymour–Thomas catalogues. **The reducibility half of that theory does not need
+planarity** — planarity enters only in discharging, which we do not want. **C-reducibility is the systematic
+version of "a cleverer piece colouring", and it is mechanical.**
+
+**Commissioned as recognition-then-price, not construction:** search it in its own vocabulary (never ours —
+"absorption" appears in no paper), then answer whether it would fire on an object of minimum degree 6, where
+the relevant rings start at size 6 and ring-colouring counts grow fast. **If ring size 6 is already too
+expensive, or provably never fires at four colours off the plane, that is a finding that retires a
+direction.** The reduction is affordable without it, so its value is **a theorem we would own**, not an
+afternoon saved.
+
+### Commissioned: the loop, piloted
+
+Warm long-lived presence-encoded solver; **scattered** order with the choice stated; **restore and bisect**
+on rejection; **the pair check as the acceptance test**, so a deletion is scored on *"does the refutation
+survive"* and not on *"did the superset grow"*. **A few hundred deletions, reporting the ACCEPT RATE and a
+projected final size — about an hour against five for the full pass. The full run is not authorised until
+that rate is on the table**, since a loop whose accept rate collapses at 300 has a different answer from one
+that holds.
+
+**Minor correction folded in:** phase H2's "8,208 at degree 30" is **8,239** — the 8,208 counted a
+272,262-entry list with its 30 repeats.
