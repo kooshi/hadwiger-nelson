@@ -14,16 +14,16 @@ there is nothing to do, and otherwise **repainting `u` with `γ` inside `C ∘ f
 in `N(f u)`, where `γ` is absent — and separates them. The repaint over an independent set (`pullbackRepaint`) is the
 one construction; its three uses are the pair (`not_forces_of_fanGap`), the fan (`not_fan_of_fanGap`: the arity-`k`
 filter, which kills a fan exactly when every partner's image avoids the gap colour) and the **double repaint**
-(`not_separated_of_fanGap_of_fanGap`: one colour absent from both closed neighbourhoods of the images of a non-edge
+(`not_separated_of_sharedGap`: one colour absent from both closed neighbourhoods of the images of a non-edge
 makes the non-edge coincide, so it is no virtual edge).
 
-`Slack P k` (a gapped colouring at every vertex) and `DoubleSlack P k` (a shared gap at every edge) are **hereditary
-under homomorphisms into `P`** and, on a Cayley graph, follow from one gap by translation. Slackness alone makes every
+`Slack P k` (a gapped colouring at every vertex) and `Fusable P k v w` (a colouring coinciding at the pair or sharing a
+gap at it) are **hereditary under homomorphisms into `P`** and, on a Cayley graph, follow from one gap by translation. Slackness alone makes every
 graph mapping into `P` free of forced pairs (`Slack.forces_iff`) — so the record's forces-freeness hypothesis on the
 plane at `11` (`finitePlane_forces_iff`, by the quarter turn) is not needed where a gap exists; it stays the theorem that
-covers the gapless planes (`3` at three colours, the `2`-adic `K₄` at four). With `DoubleSlack` and the plane's own
-"virtual edges are edges" (`separated_iff_adj_of_coincides`), every virtual edge of every graph mapping into the plane
-is an actual edge (`separated_iff_adj_of_doubleSlack`).
+covers the gapless planes (`3` at three colours, the `2`-adic `K₄` at four). With every pair of the plane fusable — a
+shared gap at the edges, M60's coincidences (`separated_iff_adj_of_coincides`) elsewhere — every virtual edge of every
+graph mapping into the plane is an actual edge (`separated_iff_adj_of_fusable`).
 
 **Consumers.** `unitQuadrance R` for any ring `R` with a homomorphism to a slack `unitQuadrance S`
 (`Slack.unitQuadrance_of_ringHom`: the tower `ZMod (p ^ m)`, the completions `ℤ_[p]`, ramified integer rings), and the
@@ -54,9 +54,17 @@ instance [Fintype W] [DecidableRel P.Adj] (C : P.Coloring (Fin k)) (v : W) (γ :
 def Slack (P : SimpleGraph W) (k : ℕ) : Prop :=
   ∀ v, ∃ (C : P.Coloring (Fin k)) (γ : Fin k), FanGap C v γ
 
-/-- **Double slack**: every edge has a colouring with ONE colour absent from both closed neighbourhoods. -/
-def DoubleSlack (P : SimpleGraph W) (k : ℕ) : Prop :=
-  ∀ v w, P.Adj v w → ∃ (C : P.Coloring (Fin k)) (γ : Fin k), FanGap C v γ ∧ FanGap C w γ
+/-- **A shared gap**: one colour absent from both closed neighbourhoods `N[v]`, `N[w]` in one colouring. Decided on
+a table, transported along automorphisms, consumed by the double repaint and by `Fusable`. -/
+def SharedGap (C : P.Coloring (Fin k)) (v w : W) (γ : Fin k) : Prop :=
+  FanGap C v γ ∧ FanGap C w γ
+
+/-- **A fusable pair**: some colouring of `P` coincides at `v, w` or shares a gap at them. The one hypothesis the
+virtual-edge theorem needs, per pair; it supplies its own colouring, so the `k = 0` corner needs no extra premise. On
+the plane at `11` it is assembled by cases: non-adjacent or equal pairs coincide (M60's `finitePlane11_separated_iff`),
+adjacent pairs share the gap of one table transported by translation and rotation. -/
+def Fusable (P : SimpleGraph W) (k : ℕ) (v w : W) : Prop :=
+  ∃ C : P.Coloring (Fin k), C v = C w ∨ ∃ γ : Fin k, SharedGap C v w γ
 
 /-- **Gaps pull back** (the brief's A′): the neighbours of `u` map into the neighbours of `f u`. -/
 theorem FanGap.comap (f : G →g P) {C : P.Coloring (Fin k)} {u : V} {γ : Fin k}
@@ -73,23 +81,22 @@ theorem exists_fanGap_iff_not_coverAtLeast (v : W) :
 /-! ### The repaint -/
 
 open Classical in
-/-- **The repaint.** The pullback `C ∘ f`, repainted with `γ` on an independent set `U` whose images all have `γ`
-absent from their neighbourhoods. Proper: an edge inside `U` is excluded; an edge `x ~ y` with `x ∈ U`, `y ∉ U` has
-`f y ∈ N(f x)`, where `γ` is absent; an edge off `U` is the homomorphism. `γ ≠ C (f u)` is NOT needed here — only for
-the separations that consume it. Classical on `x ∈ U`: a reasoning object, never executed. -/
+/-- **The repaint.** The pullback `C ∘ f`, overwritten with `γ` on an independent set `U` whose images all have `γ`
+absent from their open neighbourhoods — Mathlib's `Set.piecewise`. Proper: an edge inside `U` is excluded by
+independence; an edge `x ~ y` with `x ∈ U`, `y ∉ U` has `f y ∈ N(f x)`, where `γ` is absent; an edge off `U` is the
+homomorphism. `γ ≠ C (f u)` is NOT needed here — only for the separations that consume it. -/
 noncomputable def pullbackRepaint (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
-    (hind : ∀ u ∈ U, ∀ u' ∈ U, ¬ G.Adj u u')
-    (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k) :=
-  Coloring.mk (fun x => if x ∈ U then γ else C (f x)) (by
+    (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k) :=
+  Coloring.mk (U.piecewise (fun _ => γ) (⇑C ∘ f)) (by
     sorry)
 
 theorem pullbackRepaint_apply_of_mem (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
-    (hind : ∀ u ∈ U, ∀ u' ∈ U, ¬ G.Adj u u') (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
+    (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
     {x : V} (hx : x ∈ U) : pullbackRepaint f C U γ hind hgap x = γ := by
   sorry
 
 theorem pullbackRepaint_apply_of_not_mem (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
-    (hind : ∀ u ∈ U, ∀ u' ∈ U, ¬ G.Adj u u') (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
+    (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
     {x : V} (hx : x ∉ U) : pullbackRepaint f C U γ hind hgap x = C (f x) := by
   sorry
 
@@ -112,8 +119,14 @@ theorem not_fan_of_fanGap (f : G →g P) {C : P.Coloring (Fin k)} {p : V} {Q : L
 /-- **The double repaint (D0.4).** One colour absent from both closed neighbourhoods of `f u` and `f u'`, and `u ≁ u'`:
 repainting `{u, u'}` with `γ` is proper and makes the pair coincide, so it is no virtual edge. The case `f u = f u'` is
 included (then a single gap already serves). -/
-theorem not_separated_of_fanGap_of_fanGap (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}
-    (hu : FanGap C (f u) γ) (hu' : FanGap C (f u') γ) (hadj : ¬ G.Adj u u') : ¬ Separated G k u u' := by
+theorem not_separated_of_sharedGap (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}
+    (h : SharedGap C (f u) (f u') γ) (hadj : ¬ G.Adj u u') : ¬ Separated G k u u' := by
+  sorry
+
+/-- A fusable image and a non-edge: the pair coincides in some colouring of `G` — pull back the coincidence, or
+double-repaint the shared gap. -/
+theorem not_separated_of_fusable (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u'))
+    (hadj : ¬ G.Adj u u') : ¬ Separated G k u u' := by
   sorry
 
 /-- **A fan's image is a fan** — `Forces.image`'s one-line proof, at every arity (Poros, FS-38). -/
@@ -138,16 +151,19 @@ theorem Slack.forces_iff (h : Slack P k) (f : G →g P) {u u' : V} : Forces G k 
 theorem Slack.self_forces_iff (h : Slack P k) {x y : W} : Forces P k x y ↔ x = y := by
   sorry
 
-theorem DoubleSlack.of_hom (f : G →g P) (h : DoubleSlack P k) : DoubleSlack G k := by
+/-- Fusability pulls back along homomorphisms: a coincidence pulls back, and so do both gaps (`FanGap.comap`). -/
+theorem Fusable.of_hom (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u')) : Fusable G k u u' := by
   sorry
 
-/-- **Virtual edges are edges (D0.4).** Over a doubly slack, `k`-colourable target whose own virtual edges are edges:
-for every graph mapping into it, a pair separated by every `k`-colouring is adjacent. Cases on the images: equal —
-pull back any colouring; distinct and non-adjacent — `Separated.image` would make them adjacent; adjacent — the double
-repaint. `hc` is not redundant: with `P` edgeless and `k = 0`, `DoubleSlack` is vacuous, `Separated G 0 u u'` holds for
-want of colourings, and `Adj` is false. -/
-theorem separated_iff_adj_of_doubleSlack (hd : DoubleSlack P k) (hc : P.Colorable k)
-    (hP : ∀ x y, Separated P k x y → P.Adj x y) (f : G →g P) {u u' : V} :
+/-- A pair no colouring separates is fusable (it coincides). This is how M60's `finitePlane11_separated_iff` feeds
+`Fusable` at the non-adjacent pairs. -/
+theorem fusable_of_not_separated {v w : W} (h : ¬ Separated P k v w) : Fusable P k v w := by
+  sorry
+
+/-- **Virtual edges are edges (D0.4).** Over a target every pair of which is fusable, for every graph mapping into it a
+pair separated by every `k`-colouring is adjacent. One hypothesis; it carries its own colouring, so no colourability or
+`k ≥ 1` premise is needed. -/
+theorem separated_iff_adj_of_fusable (h : ∀ v w, Fusable P k v w) (f : G →g P) {u u' : V} :
     Separated G k u u' ↔ G.Adj u u' := by
   sorry
 
@@ -172,9 +188,9 @@ end Cayley
 /-- **A shared gap at one base edge, transported.** If every edge `v ~ w` is carried onto the base edge `(v₀, w₀)` by
 some endomorphism `σ` (translate, then rotate), the base colouring pulls back along `σ` to a colouring with the shared
 gap at `v, w` — the gap lands on `σ⁻¹(N[v₀] ∪ N[w₀]) = N[v] ∪ N[w]`. Written this way round on purpose. -/
-theorem doubleSlack_of_hom_to_base {v₀ w₀ : W} {C : P.Coloring (Fin k)} {γ : Fin k}
-    (h₀ : FanGap C v₀ γ ∧ FanGap C w₀ γ)
-    (hσ : ∀ v w, P.Adj v w → ∃ σ : P →g P, σ v = v₀ ∧ σ w = w₀) : DoubleSlack P k := by
+theorem fusable_of_hom_to_base {v₀ w₀ : W} {C : P.Coloring (Fin k)} {γ : Fin k}
+    (h₀ : SharedGap C v₀ w₀ γ) (hσ : ∀ v w, P.Adj v w → ∃ σ : P →g P, σ v = v₀ ∧ σ w = w₀)
+    {v w : W} (hvw : P.Adj v w) : Fusable P k v w := by
   sorry
 
 /-! ### Rings and certificates -/
@@ -190,9 +206,9 @@ theorem Slack.unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T) (h : Slac
     Slack (unitQuadrance R) k :=
   Slack.of_hom (unitQuadrance.map φ) h
 
-theorem DoubleSlack.unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T)
-    (h : DoubleSlack (unitQuadrance T) k) : DoubleSlack (unitQuadrance R) k :=
-  DoubleSlack.of_hom (unitQuadrance.map φ) h
+theorem fusable_unitQuadrance_of_ringHom [Nontrivial T] (φ : R →+* T)
+    (h : ∀ v w, Fusable (unitQuadrance T) k v w) (u v : R × R) : Fusable (unitQuadrance R) k u v :=
+  Fusable.of_hom (unitQuadrance.map φ) (h _ _)
 
 theorem unitQuadrance_forces_eq_of_ringHom [Nontrivial T] (φ : R →+* T) (h : Slack (unitQuadrance T) k)
     {u v : R × R} (hf : Forces (unitQuadrance R) k u v) : u = v :=
@@ -209,12 +225,11 @@ theorem UDCert.forces_eq_of_slack [Nontrivial R] (c : UDCert n) {S : Subring Q4}
   Slack.forces_eq h (c.drawingHom φ hS hu hv) hf
 
 /-- The certificate form of "virtual edges are edges". -/
-theorem UDCert.separated_iff_adj_of_doubleSlack [Nontrivial R] (c : UDCert n) {S : Subring Q4}
+theorem UDCert.separated_iff_adj_of_fusable [Nontrivial R] (c : UDCert n) {S : Subring Q4}
     (φ : S →+* R) (hS : c.CoordsIn S) {u : R} (hu : u * c.denom = 1) (hv : c.Valid = true)
-    (hd : DoubleSlack (unitQuadrance R) k) (hc : (unitQuadrance R).Colorable k)
-    (hP : ∀ x y, Separated (unitQuadrance R) k x y → (unitQuadrance R).Adj x y) {i j : Fin n} :
+    (h : ∀ v w, Fusable (unitQuadrance R) k v w) {i j : Fin n} :
     Separated (edgeGraph n c.edges) k i j ↔ (edgeGraph n c.edges).Adj i j :=
-  HadwigerNelson.separated_iff_adj_of_doubleSlack hd hc hP (c.drawingHom φ hS hu hv)
+  HadwigerNelson.separated_iff_adj_of_fusable h (c.drawingHom φ hS hu hv)
 
 end Ring
 

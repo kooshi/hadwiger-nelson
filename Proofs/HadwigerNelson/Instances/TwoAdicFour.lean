@@ -81,9 +81,8 @@ theorem twoAdicFourTables_cover :
 theorem twoAdicFour_forces_iff {x y : TwoAdicLevel 4} : Forces (twoAdicPlane 4) 4 x y ↔ x = y := by
   sorry
 
-/-- Level four has no gap either (a corollary of level five's forced pair through `FanGap.comap` along the level map;
-stated here for the record, proved in `TwoAdicFive.lean`'s vocabulary). -/
-theorem twoAdicFour_not_slack : ¬ Slack (twoAdicPlane 4) 4 := by
-  sorry
+-- Level four has no gap either — but that is a corollary of level FIVE's forced pair (a gap at level 4 pulls back
+-- along the level map to level 5, one gap makes the Cayley graph slack, and slackness contradicts the forced pair), so
+-- it is stated downstream, in `Instances/TwoAdicFive.lean` (`twoAdicFour_not_slack`), where its only proof lives.
 
 end HadwigerNelson

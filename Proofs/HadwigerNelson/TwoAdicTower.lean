@@ -10,9 +10,11 @@ graph `P_m = Cay(O/𝔓^m, S_m)`, `S_m = {z : z·z̄ = 1}` — the COMPLEX form 
 the coordinates of a unit vector are not integral, only `z = x + iy` is.
 
 **The representation (FS-38 §S3, [hand 1]).** `O/𝔓^m ≅ (ℤ/2^⌈m/2⌉)[ω] ⊕ π·(ℤ/2^⌊m/2⌋)[ω]` as additive groups —
-`z = A + πB`, `A = a + bω`, `B = c + dω` — from `π² = 2 + 2π`; the norm is the integer form
-`N(z) = (a² − ab + b² + 2(c² − cd + d²)) + π·(2ac − ad − bc + 2bd + 2(c² − cd + d²))`. So the circle is a decidable
-predicate on a product of `ZMod`s and the graph is Mathlib's `addCayley` — no ring is built. The identification with the
+`z = A + πB`, `A = a + bω`, `B = c + dω` — from `π² = 2 + 2π`; the norm is a pair of
+Eisenstein forms, `N(A + πB) = (N(A) + 2N(B)) + π·(Tr(A, B) + 2N(B))` with `N(a + bω) = a² − ab + b²` and
+`Tr(A, B) = 2ac − ad − bc + 2bd`, the `ω`-components vanishing because both forms are rational. So the circle is the
+fibre of a ring-valued form over `(1, 0)` on a product of `ZMod`s, and the graph is Mathlib's `addCayley` — no ring is
+built for `O/𝔓^m` itself. The identification with the
 ring `O/𝔓^m` is a hand derivation recorded in the plan; validated at `m = 1..7` by `|S_m| = 3·2^{m−1}`, by two
 perturbations of the formula that break the count, and — the discriminating control — by coincidence with an
 independently built graph at levels `4` and `5`. Conjugation and multiplication by `ω` are additive automorphisms
@@ -28,41 +30,82 @@ namespace HadwigerNelson
 
 open SimpleGraph
 
+/-! ### Eisenstein integers modulo `n`, and their two forms -/
+
+/-- `(ℤ/n)[ω]`: the pair `(a, b)` for `a + bω`, `ω² = −1 − ω`. A plain product, so the additive group, the finite
+type and decidable equality come free; the ring structure is never needed — only the two forms below. -/
+abbrev EisMod (n : ℕ) : Type := ZMod n × ZMod n
+
+namespace EisMod
+
+variable {n : ℕ}
+
+/-- The norm `N(a + bω) = a² − ab + b²`. -/
+def norm (z : EisMod n) : ZMod n := z.1 ^ 2 - z.1 * z.2 + z.2 ^ 2
+
+/-- The trace form `Tr(z, w) = z·w̄ + z̄·w = 2ac − ad − bc + 2bd`, symmetric, with `Tr(z, z) = 2·N(z)`. -/
+def trace (z w : EisMod n) : ZMod n := 2 * z.1 * w.1 - z.1 * w.2 - z.2 * w.1 + 2 * z.2 * w.2
+
+/-- Conjugation `ω ↦ −1 − ω`: `(a, b) ↦ (a − b, −b)`. -/
+def conj : EisMod n →+ EisMod n where
+  toFun z := (z.1 - z.2, -z.2)
+  map_zero' := by simp
+  map_add' x y := by ext <;> simp <;> ring
+
+/-- Multiplication by `ω`: `(a, b) ↦ (−b, a − b)`. -/
+def omegaMul : EisMod n →+ EisMod n where
+  toFun z := (-z.2, z.1 - z.2)
+  map_zero' := by simp
+  map_add' x y := by ext <;> simp <;> ring
+
+theorem norm_omegaMul (z : EisMod n) : norm (omegaMul z) = norm z := by
+  sorry
+
+theorem trace_omegaMul_omegaMul (z w : EisMod n) : trace (omegaMul z) (omegaMul w) = trace z w := by
+  sorry
+
+theorem norm_conj (z : EisMod n) : norm (conj z) = norm z := by
+  sorry
+
+theorem trace_conj_conj (z w : EisMod n) : trace (conj z) (conj w) = trace z w := by
+  sorry
+
+end EisMod
+
 /-! ### The additive group of a level -/
 
-/-- `O/𝔓^m` as an additive group: `((a, b), (c, d))` for `(a + bω) + π(c + dω)`, `a, b` modulo `2^⌈m/2⌉` and `c, d`
-modulo `2^⌊m/2⌋`. -/
-abbrev TwoAdicLevel (m : ℕ) : Type :=
-  (ZMod (2 ^ ((m + 1) / 2)) × ZMod (2 ^ ((m + 1) / 2))) × (ZMod (2 ^ (m / 2)) × ZMod (2 ^ (m / 2)))
+/-- `O/𝔓^m` as an additive group: `(A, B)` for `A + πB`, `A ∈ (ℤ/2^⌈m/2⌉)[ω]`, `B ∈ (ℤ/2^⌊m/2⌋)[ω]` — an Eisenstein
+module of rank 2 with coefficient rings at two adjacent powers of 2. -/
+abbrev TwoAdicLevel (m : ℕ) : Type := EisMod (2 ^ ((m + 1) / 2)) × EisMod (2 ^ (m / 2))
 
 example : TwoAdicLevel 1 = ((ZMod 2 × ZMod 2) × (ZMod 1 × ZMod 1)) := rfl
 example : TwoAdicLevel 4 = ((ZMod 4 × ZMod 4) × (ZMod 4 × ZMod 4)) := rfl
 example : TwoAdicLevel 5 = ((ZMod 8 × ZMod 8) × (ZMod 4 × ZMod 4)) := rfl
 
-/-- The real part of the norm, `a² − ab + b² + 2(c² − cd + d²)`, on canonical representatives. -/
-def twoAdicNormRe (m : ℕ) (z : TwoAdicLevel m) : ℤ :=
-  let a : ℤ := z.1.1.val
-  let b : ℤ := z.1.2.val
-  let c : ℤ := z.2.1.val
-  let d : ℤ := z.2.2.val
-  a * a - a * b + b * b + 2 * (c * c - c * d + d * d)
+/-- The reduction from the `A`-ring of level `m` to its `B`-ring, `ℤ/2^⌈m/2⌉ → ℤ/2^⌊m/2⌋`. The same family, at `m + 1`,
+is the `A`-component of the level map `m + 1 → m`; at `m` it is the `B`-component. -/
+def castDown (m : ℕ) : ZMod (2 ^ ((m + 1) / 2)) →+* ZMod (2 ^ (m / 2)) :=
+  ZMod.castHom (pow_dvd_pow 2 (by omega : m / 2 ≤ (m + 1) / 2)) _
 
-/-- The `π`-part of the norm, `2ac − ad − bc + 2bd + 2(c² − cd + d²)`. -/
-def twoAdicNormPi (m : ℕ) (z : TwoAdicLevel m) : ℤ :=
-  let a : ℤ := z.1.1.val
-  let b : ℤ := z.1.2.val
-  let c : ℤ := z.2.1.val
-  let d : ℤ := z.2.2.val
-  2 * a * c - a * d - b * c + 2 * b * d + 2 * (c * c - c * d + d * d)
+/-- Doubling from the `B`-ring into the `A`-ring, `x ↦ 2·x̃`: well defined because `2·(x + 2^⌊m/2⌋ t) ≡ 2x` modulo
+`2^⌈m/2⌉` (`⌈m/2⌉ ≤ ⌊m/2⌋ + 1`). Additive, not multiplicative; the only place a representative (`ZMod.val`) is read. -/
+def dbl (m : ℕ) : ZMod (2 ^ (m / 2)) →+ ZMod (2 ^ ((m + 1) / 2)) where
+  toFun x := 2 * (x.val : ZMod (2 ^ ((m + 1) / 2)))
+  map_zero' := by simp
+  map_add' x y := by
+    sorry
 
-/-- **The circle `S_m`**: norm `≡ 1 (mod 𝔓^m)`, i.e. real part `≡ 1` modulo `2^⌈m/2⌉` and `π`-part `≡ 0` modulo
-`2^⌊m/2⌋`. -/
-def twoAdicCircle (m : ℕ) : Set (TwoAdicLevel m) :=
-  {z | twoAdicNormRe m z % ((2 : ℤ) ^ ((m + 1) / 2)) = 1 ∧ twoAdicNormPi m z % ((2 : ℤ) ^ (m / 2)) = 0}
+/-- **The norm form** `N(A + πB) = (N(A) + 2N(B)) + π·(Tr(A, B) + 2N(B))`, from `π² = 2 + 2π` and the rationality of
+`N` and `Tr` (their `ω`-components vanish): valued in the `A`-ring and the `B`-ring respectively. -/
+def normForm (m : ℕ) (z : TwoAdicLevel m) : ZMod (2 ^ ((m + 1) / 2)) × ZMod (2 ^ (m / 2)) :=
+  (EisMod.norm z.1 + dbl m (EisMod.norm z.2),
+   EisMod.trace (Prod.map (castDown m) (castDown m) z.1) z.2 + 2 * EisMod.norm z.2)
+
+/-- **The circle `S_m`**: the fibre of the norm form over `1 = 1 + π·0`. -/
+def twoAdicCircle (m : ℕ) : Set (TwoAdicLevel m) := {z | normForm m z = (1, 0)}
 
 instance (m : ℕ) : DecidablePred (· ∈ twoAdicCircle m) := fun z =>
-  inferInstanceAs (Decidable (twoAdicNormRe m z % ((2 : ℤ) ^ ((m + 1) / 2)) = 1 ∧
-    twoAdicNormPi m z % ((2 : ℤ) ^ (m / 2)) = 0))
+  inferInstanceAs (Decidable (normForm m z = (1, 0)))
 
 /-- **The level-`m` residue plane** `P_m = Cay(O/𝔓^m, S_m)`. -/
 def twoAdicPlane (m : ℕ) : SimpleGraph (TwoAdicLevel m) := addCayley (twoAdicCircle m)
@@ -84,20 +127,24 @@ theorem twoAdicCircle_five_card : (Finset.univ.filter (· ∈ twoAdicCircle 5)).
 
 /-! ### Symmetries -/
 
-/-- Conjugation `ω ↦ −1 − ω`, `π ↦ π`: `((a, b), (c, d)) ↦ ((a − b, −b), (c − d, −d))`. -/
-def twoAdicConj (m : ℕ) : TwoAdicLevel m →+ TwoAdicLevel m where
-  toFun z := ((z.1.1 - z.1.2, -z.1.2), (z.2.1 - z.2.2, -z.2.2))
-  map_zero' := by simp
-  map_add' x y := by ext <;> simp <;> ring
+/-- Conjugation on a level, componentwise (`π` is real). -/
+def twoAdicConj (m : ℕ) : TwoAdicLevel m →+ TwoAdicLevel m :=
+  EisMod.conj.prodMap EisMod.conj
 
-/-- Multiplication by the unit `ω`: `((a, b), (c, d)) ↦ ((−b, a − b), (−d, c − d))`. -/
-def twoAdicOmega (m : ℕ) : TwoAdicLevel m →+ TwoAdicLevel m where
-  toFun z := ((-z.1.2, z.1.1 - z.1.2), (-z.2.2, z.2.1 - z.2.2))
-  map_zero' := by simp
-  map_add' x y := by ext <;> simp <;> ring
+/-- Multiplication by the unit `ω` on a level, componentwise (`π` commutes with `ω`). -/
+def twoAdicOmega (m : ℕ) : TwoAdicLevel m →+ TwoAdicLevel m :=
+  EisMod.omegaMul.prodMap EisMod.omegaMul
+
+/-- The norm form is `ω`-invariant: `norm_omegaMul`, `trace_omegaMul_omegaMul`, and `castDown` commutes with the
+linear map `omegaMul`. -/
+theorem normForm_twoAdicOmega (m : ℕ) (z : TwoAdicLevel m) : normForm m (twoAdicOmega m z) = normForm m z := by
+  sorry
 
 theorem twoAdicOmega_mem_circle (m : ℕ) {z : TwoAdicLevel m} (h : z ∈ twoAdicCircle m) :
     twoAdicOmega m z ∈ twoAdicCircle m := by
+  sorry
+
+theorem normForm_twoAdicConj (m : ℕ) (z : TwoAdicLevel m) : normForm m (twoAdicConj m z) = normForm m z := by
   sorry
 
 theorem twoAdicConj_mem_circle (m : ℕ) {z : TwoAdicLevel m} (h : z ∈ twoAdicCircle m) :
@@ -112,12 +159,16 @@ def twoAdicOmegaHom (m : ℕ) : twoAdicPlane m →g twoAdicPlane m where
 
 /-! ### The level maps -/
 
-/-- The reduction `O/𝔓^{m+1} → O/𝔓^m`: both components cast down. -/
+/-- The reduction `O/𝔓^{m+1} → O/𝔓^m`: `castDown (m + 1)` on the `A`-component, `castDown m` on the `B`-component. -/
 def twoAdicLevelMap (m : ℕ) : TwoAdicLevel (m + 1) →+ TwoAdicLevel m :=
-  ((ZMod.castHom (pow_dvd_pow 2 (by omega : (m + 1) / 2 ≤ (m + 1 + 1) / 2)) (ZMod (2 ^ ((m + 1) / 2)))).toAddMonoidHom.prodMap
-    (ZMod.castHom (pow_dvd_pow 2 (by omega : (m + 1) / 2 ≤ (m + 1 + 1) / 2)) (ZMod (2 ^ ((m + 1) / 2)))).toAddMonoidHom).prodMap
-  ((ZMod.castHom (pow_dvd_pow 2 (by omega : m / 2 ≤ (m + 1) / 2)) (ZMod (2 ^ (m / 2)))).toAddMonoidHom.prodMap
-    (ZMod.castHom (pow_dvd_pow 2 (by omega : m / 2 ≤ (m + 1) / 2)) (ZMod (2 ^ (m / 2)))).toAddMonoidHom)
+  ((castDown (m + 1)).toAddMonoidHom.prodMap (castDown (m + 1)).toAddMonoidHom).prodMap
+    ((castDown m).toAddMonoidHom.prodMap (castDown m).toAddMonoidHom)
+
+/-- The norm form commutes with reduction: `castDown` is a ring hom and `dbl` commutes with it. -/
+theorem normForm_twoAdicLevelMap (m : ℕ) (z : TwoAdicLevel (m + 1)) :
+    normForm m (twoAdicLevelMap m z) =
+      (castDown (m + 1) (normForm (m + 1) z).1, castDown m (normForm (m + 1) z).2) := by
+  sorry
 
 /-- The circle reduces into the circle: `S_{m+1} → S_m`. -/
 theorem twoAdicLevelMap_mem_circle (m : ℕ) {z : TwoAdicLevel (m + 1)} (h : z ∈ twoAdicCircle (m + 1)) :

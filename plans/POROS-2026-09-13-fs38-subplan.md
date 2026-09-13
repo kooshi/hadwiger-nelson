@@ -65,6 +65,7 @@ Each item read against an expectation written before the reading; the address is
 - `plans/` grepped for any five-colour forced pair on a unit-distance object over a sealed field — read against: none — surprised: no; M49's "G16 forced at five" and M57's rigidity are the Exoo–Ismailescu {1,2}-distance seed with its cheats
 - The morning pass's hunch ledger (five hunches) and the stub's P1–P4 — read against: scorable now — surprised: yes; two hunches are killed by derivation and P1's second clause is refuted by the pilot; scored below
 - `plans/FS38-residue-tower.md` §PA and §S0–§S9 (the planner's subplan, uncommitted) — read against: every correction sent folded in, nothing new wrong, every prediction with both outcomes reachable — surprised: yes, three times: P-A3 (no gap at 2) is written as an independent prediction with a planted control when at levels ≤ 5 it is a theorem of K3's LRAT (above); D0.4 carries `P.Colorable k` beside `DoubleSlack`, which implies it (the redundant-hypothesis smell the plan's own decision 3 names); and §S3's "complex form, not the pairs form" corrected THIS pass's own unit slip about 𝔓-integrality at 2. Not surprising and worth keeping: the §PA bonus (χ_Bor of the unit-distance graph over ℚ₁₁(√11) is exactly 5) is sound once the coset extension is stated through the canonical fractional part rather than chosen representatives; D-2's fibre picture (`s̄ ↦ H(s̄)` equidistributed over the three order-2 subgroups of the V₄ fibre) predicts |N(x) ∩ N(x+δ)| = deg/3 at the top depth, which this pass measured at levels 5–7 before D-2 was written
+- The skeleton at 02d1fef (six modules, 48 `sorry` leaves, green through `./scripts/build.sh`), every declaration read against §S — read against: each statement is the §S statement, and every leaf sits downstream of what proves it — surprised: yes, once each way: `twoAdicFour_not_slack` is declared in `TwoAdicFour.lean` while its only proof (a gap at level 4 pulls back to level 5, slackness contradicts the LRAT-forced pair) lives in `TwoAdicFive.lean`, which imports it — a leaf upstream of its proof, sent to the planner; and `separated_iff_adj_of_doubleSlack` keeps `hc : P.Colorable k` with a correct reason (an edgeless P at k = 0 breaks the iff), so this pass's §S correction 2 was wrong and is withdrawn. Sound on reading: the LRAT leaf's shape, the kernel of the level map ({0, δ, ωδ, ω²δ}, four elements, decidable), the base-edge transport's direction, the certificate corollaries' hypotheses (M60's exactly), the level-one K₄ control
 - The conditions of the last reading — read against: the brief written in a fresh session after the derivation, the pilots hours old, this pass at moderate context depth with every primary opened — surprised: no; the one thing not re-run here is the 2-adic pilot's solver rows (levels 5–7), taken as the brief reports them
 
 ## The anomaly hunt's residue
@@ -343,11 +344,13 @@ of χ(ℝ²) ≤ 5, and the record still names no route to one.
 Requested of the brief (the product owner): six — the de Grey fit; Lemma B's redundant hypothesis (the planner's);
 the ring-R kernel form; "every field"; "(b) nothing touches Separated"; "the 2-adic law" unqualified. Between the
 planner and Poros: one — the planner withdrew de Grey's distance-4 pairs from its §S as the tower's retrodiction on
-reading item A above (its count: 1); Poros retracted one, publicly, on reading the planner's §S3 — "𝔓-integrality of
+reading item A above (its count: 1); Poros retracted two, publicly: one on reading the planner's §S3 — "𝔓-integrality of
 translated COORDINATES" at 2 is false (x = (z + z̄)/2 is not integral there; the complex number z is), which is why the
-2-adic object is the complex form Cay(O/𝔓^m, S_m) and not `unitQuadrance (O_K/𝔭^m)` (its count: 1). Requested of the
-brief: seven (the six above plus the tower-as-a-step). Two retractions in two directions on a category error and a
-unit slip is the disagreement starting, not finished; the skeleton is where the rest arrives. Poros's own, private, before anything was sent: two — the 791-half first read as
+2-adic object is the complex form Cay(O/𝔓^m, S_m) and not `unitQuadrance (O_K/𝔭^m)` (its count: 1), and one on reading the skeleton — the request to drop `hc : P.Colorable k` from
+`separated_iff_adj_of_doubleSlack`, which an edgeless P at k = 0 shows is needed (its count: 2). Requested of the
+brief: seven (the six above plus the tower-as-a-step). Three retractions in two directions — a category error, a unit slip, a
+redundant-hypothesis call that was itself wrong — is the G51 window doing its job; the modeling passes are where any
+rest arrives, and a pass that changes a statement is read here again. Poros's own, private, before anything was sent: two — the 791-half first read as
 K-fabric from G1 and killed against `tools/degrey.py`; a line-periodic "instrument broken" verdict that was a
 mis-specified expectation, killed against `periodic-below-71.json`.
 

@@ -14,7 +14,9 @@ import Proofs.HadwigerNelson.FanGap
   `Instances/TwoAdicFour.lean` separates; the pullback along `twoAdicLevelHom 4` separates it at level five.
 
 So `Forces (twoAdicPlane 5) 4 0 d ↔ twoAdicLevelMap 4 d = 0`. Corollary: no 4-colouring of any level `≤ 5` has a gap
-(a gap would pull up to level five and make it slack, hence pairwise free). **[hand 1]** identifies `twoAdicPlane 5`
+(a gap would pull up to level five and make it slack, hence pairwise free). **The solver-dependent surface is exactly one
+declaration**, `twoAdicFive_not_colorable_with_edge`; `twoAdicFive_forces_delta` is a one-liner from it (a colouring with
+`C 0 ≠ C δ` is a colouring of `P₅ ⊔ edge`). **[hand 1]** identifies `twoAdicPlane 5`
 with `Cay(O/𝔓⁵, S₅)`; **[hand 2]** would draw a K-certificate into it; neither is kernel (FS-38 §S3).
 -/
 
@@ -71,6 +73,13 @@ theorem twoAdicFive_forces_iff' {x y : TwoAdicLevel 5} :
 
 /-- **No gap at level five** — a forced pair forbids slackness (`Slack.self_forces_iff`). -/
 theorem twoAdicFive_not_slack : ¬ Slack (twoAdicPlane 5) 4 := by
+  sorry
+
+/-- **No gap at level four either**: a gap at level four pulls back along `twoAdicLevelHom 4` to a gap at level five
+(`FanGap.comap`), one gap makes the Cayley graph slack (`slack_addCayley_of_fanGap`), and slackness contradicts the
+forced pair `(0, δ)`. Placed here, downstream of the LRAT, because that is its only proof; the same chain reaches every
+level `≤ 5`. -/
+theorem twoAdicFour_not_slack : ¬ Slack (twoAdicPlane 4) 4 := by
   sorry
 
 end HadwigerNelson

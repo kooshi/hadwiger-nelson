@@ -11,7 +11,8 @@ Two `decide`s on two 121-entry tables. **The gap**: the certified 5-colouring `f
 colours on the twelve neighbours of `(2, 4)` (own colour `1`, neighbours `{0, 3, 4}`, gap `2`); by translation every
 vertex has a gapped colouring (`finitePlane11_slack`). **The shared gap**: a second table (`finitePlane11DoubleGapTable`,
 found by SAT, `data/fs38/doublegap-p11-k5.json`) has colour `4` absent from `N[(0,0)] ∪ N[(1,0)]`; translation and
-rotation (`rotHom`) carry every edge onto that one (`finitePlane11_doubleSlack`).
+rotation (`rotHom`) carry every edge onto that one, and M60's coincidences cover the non-adjacent pairs, so every pair
+of the plane is fusable (`finitePlane11_fusable`).
 
 **What follows, for every graph `G` with a homomorphism into the plane** (`FanGap.lean`): `Forces G 5 u u' ↔ u = u'`
 and `Separated G 5 u u' ↔ G.Adj u u'` — the plane's whole arity-2 compulsion structure at five colours pulls back. The
@@ -83,8 +84,7 @@ def finitePlane11DoubleGapColoring : (finitePlane 11).Coloring (Fin 5) :=
   Coloring.mk finitePlane11DoubleGapColouring finitePlane11_doubleGap_proper
 
 /-- **The shared gap at the base edge**: colour `4` is absent from both closed neighbourhoods — `22` lookups. -/
-theorem finitePlane11_doubleGap :
-    FanGap finitePlane11DoubleGapColoring (0, 0) 4 ∧ FanGap finitePlane11DoubleGapColoring (1, 0) 4 := by
+theorem finitePlane11_sharedGap : SharedGap finitePlane11DoubleGapColoring (0, 0) (1, 0) 4 := by
   sorry
 
 /-- Every edge `v ~ w` is carried onto the base edge by an endomorphism: translate by `−v`, then rotate by the
@@ -93,9 +93,10 @@ theorem finitePlane11_exists_hom_to_base {v w : ZMod 11 × ZMod 11} (h : (finite
     ∃ σ : finitePlane 11 →g finitePlane 11, σ v = (0, 0) ∧ σ w = (1, 0) := by
   sorry
 
-/-- **`UD(𝔽₁₁, 2)` is doubly slack at five colours.** -/
-theorem finitePlane11_doubleSlack : DoubleSlack (finitePlane 11) 5 :=
-  doubleSlack_of_hom_to_base finitePlane11_doubleGap fun _ _ h => finitePlane11_exists_hom_to_base h
+/-- **Every pair of `UD(𝔽₁₁, 2)` is fusable at five colours**: adjacent pairs by the shared gap transported
+(`fusable_of_hom_to_base`), the rest by M60's coincidences (`finitePlane11_separated_iff` read as `¬ Separated`). -/
+theorem finitePlane11_fusable : ∀ v w, Fusable (finitePlane 11) 5 v w := by
+  sorry
 
 /-! ### Every graph mapping into the plane -/
 
@@ -114,8 +115,7 @@ theorem forces_iff_of_hom_finitePlane11 (f : G →g finitePlane 11) {u u' : V} :
 /-- **Virtual edges are edges** for every graph mapping into the plane at `11`. -/
 theorem separated_iff_adj_of_hom_finitePlane11 (f : G →g finitePlane 11) {u u' : V} :
     Separated G 5 u u' ↔ G.Adj u u' :=
-  separated_iff_adj_of_doubleSlack finitePlane11_doubleSlack finitePlane11_colorable_five
-    (fun _ _ h => finitePlane11_separated_iff.mp h) f
+  separated_iff_adj_of_fusable finitePlane11_fusable f
 
 end Hom
 
@@ -158,8 +158,7 @@ theorem UDCert.forces_eq_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : Z
 theorem UDCert.separated_iff_adj_11 (c : UDCert n) (hS : c.CoordsIn Q4.sevenFree) {u : ZMod 11}
     (hu : u * c.denom = 1) (hv : c.Valid = true) {i j : Fin n} :
     Separated (edgeGraph n c.edges) 5 i j ↔ (edgeGraph n c.edges).Adj i j :=
-  c.separated_iff_adj_of_doubleSlack Q4.sevenFree.res11 hS hu hv finitePlane11_doubleSlack
-    finitePlane11_colorable_five (fun _ _ h => finitePlane11_separated_iff.mp h)
+  c.separated_iff_adj_of_fusable Q4.sevenFree.res11 hS hu hv finitePlane11_fusable
 
 /-! ### Heule-510: the measured null of M63 phase H4, as a theorem -/
 
