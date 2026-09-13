@@ -7,6 +7,8 @@ import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.UnitQuadrance
 import Proofs.HadwigerNelson.Lift
 import Proofs.HadwigerNelson.ResidueObstruction
+import Proofs.HadwigerNelson.FanGap
+import Proofs.HadwigerNelson.TwoAdicTower
 import Proofs.HadwigerNelson.LocalGlobal
 import Proofs.HadwigerNelson.Packed
 import Proofs.HadwigerNelson.PackedDiagnose
@@ -108,6 +110,10 @@ import Proofs.HadwigerNelson.Instances.ResidueObstruction11
 import Proofs.HadwigerNelson.Instances.LocalGlobal19
 import Proofs.HadwigerNelson.PlaneRotation
 import Proofs.HadwigerNelson.Instances.PlaneFreedom
+import Proofs.HadwigerNelson.Instances.FanGap11
+import Proofs.HadwigerNelson.Instances.FanGap19
+import Proofs.HadwigerNelson.Instances.TwoAdicFour
+import Proofs.HadwigerNelson.Instances.TwoAdicFive
 import Proofs.HadwigerNelson.Instances.Heule553
 import Proofs.HadwigerNelson.Instances.Heule553.Critical
 import Proofs.HadwigerNelson.Instances.Heule553.Bound

@@ -74,7 +74,7 @@ exists anywhere in the literature). FS-38 is the only move that changes the fram
 inside it, and it obeys G46: the object named in its own discipline — Cayley graphs over O/𝔭^m, the quadratic graph over a
 local field — brings that discipline's theorems and prior art with it.
 
-**The derivations already written** (`plans/STUB-residue-tower-rigidity.md` §3): D1 the tower and its homomorphisms in
+**The derivations already written** (`plans/FS38-residue-tower.md` §3): D1 the tower and its homomorphisms in
 the kernel's vocabulary (`unitQuadrance.map (ZMod.castHom …)`, d-continuity as `∀ v, Forces (P_m) k 0 (p^d • v)` through
 `forces_iff_forces_zero_sub`; a refutation is one non-periodic table, kernel; a forcing verdict is solver-side unless the
 level is decidable); D2 the transfer to a fabric (a fabric's colourings need not factor through P_m — the honest transfer
@@ -113,7 +113,7 @@ slack day; rank 4; not blocking FS-38.
 ## 5. Read order for the FS-38 session
 
 1. This file. 2. `plans/POROS-2026-09-13-wall-breaking.md` (the question cards and the hunch ledger — score them at the
-close). 3. `plans/STUB-residue-tower-rigidity.md` (the stub: context, D1–D4, phases, predictions, failure/jackpot clauses).
+close). 3. `plans/FS38-residue-tower.md` (the stub: context, D1–D4, phases, predictions, failure/jackpot clauses).
 4. `plans/M60-five-colour-residue-obstruction.md` §S and `Proofs/HadwigerNelson/ResidueObstruction.lean` (the origin
 reduction and the one-table decision that FS-38 lifts to ℤ/p^m). 5. `plans/M56-arithmetic-of-tightness.md` §R1 and
 `data/m53/rigidity-dial-it4.json` (the depth-3 fact the 2-adic bed must reproduce). 6. `Proofs/HadwigerNelson/Lift.lean`

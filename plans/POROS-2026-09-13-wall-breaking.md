@@ -204,7 +204,7 @@ question: is-any-finite-plane-exactly-six
 ## The ruling (a recommendation, in four parts, with its default)
 
 **The choice.** Open the next milestone on the rank-1 card: **the residue tower** — mint it as FS-38
-(`plans/STUB-residue-tower-rigidity.md`) and run it derivation-first on the certified 2-adic bed before the 11-adic
+(`plans/FS38-residue-tower.md`) and run it derivation-first on the certified 2-adic bed before the 11-adic
 test. Its stop rule is written into the stub: the 2-adic tower must reproduce M56's depth-3 fact before any 11-adic
 run; the 11-adic P₂ ask is one day; P₃ only on a forcing verdict at P₂.
 

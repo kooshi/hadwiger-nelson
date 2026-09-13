@@ -1,0 +1,501 @@
+# FS-38 — The residue tower: a fan gap at level one frees every pair above it (opened 2026-09-13; stub minted the same morning by the Poros wall-breaking pass, `plans/POROS-2026-09-13-wall-breaking.md`)
+
+> **Reading order for the implementer.** §PA and §S below are the plan; §M1–§M3 are the modeling passes; the skeleton is
+> listed in §S10 and lives in `Proofs/HadwigerNelson/FanGap.lean`, `TwoAdicTower.lean` and `Instances/FanGap11.lean`,
+> `Instances/FanGap19.lean`, `Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`. §1–§8 are the stub as minted;
+> §4–§6 of it are **superseded by §S** (the derivation D0 decided the stub's phases B/B′ before any run, and phase C is
+> replaced by the certificate instance test) and are kept only as the registered state the milestone opened against.
+> The product owner's brief that reshaped the stub is quoted where §S relies on it; its scratch lived in
+> `/tmp` and is not a record.
+
+*Read beside: `plans/M60-five-colour-residue-obstruction.md` (the origin reduction; `Forces` on a Cayley graph decided by one
+table), `plans/M61-local-global-tightness.md` §S5 (G48, the mechanism this stub tries to complete), `plans/M56-arithmetic-of-
+tightness.md` §R (the four-colour forcing at 2-adic depth 3 that this stub must reproduce before it may be believed),
+`plans/M59-finite-plane-lift.md` and `Proofs/HadwigerNelson/Lift.lean` (the level-p² plane, used there only as an obstruction),
+`plans/STUB-family-keeping-thickening.md` §H (i) (the forced-distance table at residue norm 0 — the instance test this stub's
+phase C runs), `BIBLIOGRAPHY.md` `[BardestaniMallahiKarai2015]` (the local-field object).*
+
+## 1. Mission context, in plain language
+
+The programme reads a number field F through the residue map at a prime 𝔭 of F(i) fixed by complex conjugation. At level one
+that map lands the unit-distance graph on F² in a finite object: at a prime above 2 with residue field 𝔽₄ it is the clique K₄
+(Theorem B's four colours), at a prime above p ≡ 3 (mod 4) it is the finite Euclidean plane UD(𝔽_p, 2). Every bound the
+programme holds is a level-one bound, and every "sealed" in the record means "sealed at level one".
+
+The forcing the programme needs is not at level one. The four-colour forced pairs from which every 5-forcer's spindle was
+built — de Grey's pair at distance 4, the antipodal pairs at 4/√3, T20's pairs at 8/3 and 8/√3 — sit at 2-adic depth: the
+dial on the descent's K-fabric reads 163 of 178 pairs forced at valuation 6, 8 of 11 at 8/√3, and **zero** at valuations 2
+and 4 (`data/m53/rigidity-dial-it4.json`); M56 measured the same fabric's true forced set as 171 pairs at depth 3 and none
+at depth 2, and recorded no mechanism (`plans/M56-arithmetic-of-tightness.md:409-410,728-733`). At 11 and five colours the
+record knows only level one, where the plane forces nothing (`finitePlane11_forces_iff`, kernel), and every five-colour
+sweep ever run — on the 1581, on Heule-510/553, on the two-core union, on the ρ₆₃ arena over 1.3 billion pairs — read zero
+on a *critical* 5-chromatic object, which is not where the four-colour pairs were ever found.
+
+**The object this stub names.** For 𝔭 with residue ring O/𝔭^m, the **level-m residue plane** is the Cayley graph
+P_m = Cay(O/𝔭^m, S_m), S_m the image of the norm-one group (for 𝔭 ∣ p unramified of degree one, O/𝔭^m = ℤ/p^m and
+P_m = UD(ℤ/p^m, 2) = `unitQuadrance (ZMod (p ^ m))`, a type that elaborates today). The maps P_{m+1} → P_m are graph
+homomorphisms (`unitQuadrance.map` along `ZMod (p^{m+1}) → ZMod (p^m)`), and their inverse limit is the unit-distance graph
+of the 𝔭-adic plane — the anisotropic quadratic graph over a local field of `[BardestaniMallahiKarai2015]`. A colouring of
+a level-m plane is **d-continuous** (d < m) if it is constant on the cosets of 𝔭^d/𝔭^m; the residue colouring is
+1-continuous by definition.
+
+**The question.** For (𝔭, k): what is the least level m such that every proper k-colouring of P_m is d-continuous for some
+d < m — and what d? In M60's vocabulary: at level m, is the origin forced equal to 𝔭^d·v for every v? A "yes" at (11, 5)
+for some m says that a fabric over a 5-sealed field, deep enough to see level m at 𝔭 ∣ 11, forces a pair at a distance d
+with 11 ∣ d² — the pair G48 needs — and its spindle is a 6-forcer in a 6-open field. A "no" at every affordable m says the
+residue mechanism cannot supply that pair.
+
+## 2. What we know
+
+| fact | trust | where |
+|---|---|---|
+| level one at 11 forces nothing at any colour count it admits, every p ≡ 3 (4) | kernel | `PlaneRotation.lean:184-190`, `ResidueObstruction11.lean` |
+| level one at 2 over K(i) is K₄: uniquely 4-colourable | by definition of Theorem B's residue map | `FieldWall4.lean` §7–§8 |
+| K-fabric at four colours: forced pairs at valuation 6 (163/178), 8/√3 (8/11), none at valuations 2, 4; F_true = 171 at depth 3, 0 at depth 2 | measured, complete sweeps | `data/m53/rigidity-dial-it4.json`; M56 §R |
+| the level-p² plane's residue map and the lift obstruction | kernel | `Lift.lean:19-22,217` |
+| the finite Borel chromatic number of the local plane is finite iff the form is anisotropic (−1 not a square in the completion) — the wall, on the Borel side | external, read | `BIBLIOGRAPHY.md:45` |
+| the tower P_m as a colouring object: **never named or computed here** | absence, grep 2026-09-13 | `plans/`, `Proofs/` |
+
+## 3. Derivations first (G46: the object in its discipline before any run)
+
+**D1 — the tower and its homomorphisms, in the kernel's vocabulary.** `unitQuadrance (ZMod (p ^ m))` is the level-m plane;
+`unitQuadrance.map (ZMod.castHom …)` is P_{m+1} → P_m. State d-continuity as `∀ v, Forces (P_m) k 0 (p^d • v)` through
+M60's origin reduction (`forces_iff_forces_zero_sub`), so that ONE table decides it: a k-colouring of P_m that is not
+periodic under some p^d·v refutes d-continuity at level m (`not_forces_zero_of_not_periodic`, kernel), and a forcing
+verdict at level m is "every k-colouring is p^d-periodic" — a refusal of the Separated ask, solver-side, kernel-promotable
+only through a certificate. The kernel half of a positive result is therefore the *lower* levels' refutations and the
+transfer; the forcing verdict itself is solver-side unless the level is small enough to decide.
+
+**D2 — from the tower to a fabric (the transfer).** A finite unit-distance graph in F² with coordinates integral at 𝔭 maps
+homomorphically to every P_m. If every k-colouring of P_m is d-continuous, then every k-colouring of the fabric that FACTORS
+through P_m identifies pairs at 𝔭-depth ≥ d — but a fabric's colourings need not factor. What the tower gives directly is
+weaker and exact: the fabric's colourings restricted to the fibres. The derivation to make: under what hypothesis on the
+fabric (a chunk containing a full set of representatives of P_m's vertices, joined as P_m is joined) does every k-colouring
+of the fabric induce a k-colouring of P_m? Answer sketch: a chunk that contains, for every edge of P_m, a lifted unit edge
+between lifts of its endpoints, with the lifts CONSISTENT (one lift per class), is an induced copy of P_m's quotient — that
+is the lift question of M59 turned around, and M59's obstruction (a residue configuration lifts only if it is a shadow)
+says such a chunk need not exist. So the honest transfer is compactness in the other direction: if the 𝔭-adic plane's
+k-colourings are all d-continuous, then some finite chunk forces every depth-d pair it contains (the colouring space of the
+local plane is compact, and "every finite chunk separates the pair" would yield a separating colouring of the whole plane).
+The size of that chunk is the design number, and phase C measures it on the 2-adic bed where the answer is known to be
+"about depth 3".
+
+**D3 — the two primes are opposite at level one, and the question is whether they meet above it.** At 2 the level-one
+object is a clique, so 1-continuity is trivially forced at level one and the interesting depth is where continuity FAILS
+to propagate upward (M56: the additive family over-forces depth 2; the truth forces depth 3). At 11 level one is pairwise
+free. If the tower at 11 never becomes continuous at five colours, the residue mechanism has no six-level; if it does at
+level m, the level names the depth and therefore the SIZE of the fabric a 6-forcer over a sealed field needs.
+
+**D4 — the prior-art gate (WORKFLOW 3a), before any run.** Search under the discipline's names: "finite Euclidean graphs
+over rings ℤ/p^r" (Medrano–Myers–Stark–Terras have a rings paper — recalled, not read, not in the bibliography), "unit
+distance graphs over ℤ/n", "chromatic number of Cayley graphs on ℤ/p^m × ℤ/p^m", "colourings of the p-adic plane /
+quadratic graphs over local fields" (Bardestani–Mallahi-Karai's object; do they compute Borel χ for anisotropic binary forms
+over ℚ_p, and is it p+1 or the level-one plane's value?). Record the result in §PA either way.
+
+## 4. Phases — SUPERSEDED BY §S6 (2026-09-13); kept as the stub's registered state
+
+| phase | what | cost | stop rule |
+|---|---|---|---|
+| PA | the prior-art gate (D4) | half an hour | finds a computed value of χ for the p-adic plane → read it before building |
+| A | **the 2-adic tower on the certified bed**: P_m over K(i) at four colours, m ≤ 8 (|P_m| = 4^m), by exact enumeration where small and SAT above; record, per m, the least d with every 4-colouring d-continuous | an afternoon | if no m ≤ 8 forces valuation-6 pairs while chunks do (M56), the frame is killed here and the stub closes as a negative |
+| B | **the 11-adic level two at five colours**: P₂ = UD(ℤ/121, 2), 14,641 vertices, degree 132; the Separated ask at the origin for each class of 11·v under the rotation group — a SAT model is a verified non-periodic table (kernel `¬Forces`); a refusal on every class is "1-continuous at level 2", solver-side | a day | refusal on every class → phase C; a model on any class → phase B′ (level 3, 1.77 M vertices, only if affordable) or close as "not continuous at the affordable levels" |
+| C | **the instance test**: B9 (i) of `plans/BACKLOG-FOR-OPUS.md` — the forced-distance table at residue norm 0 on Heule-510 ∪ its gen-1 closure and W ∪ its F₂₄₇ cross lattice, asked under the jackpot protocol; the size of the fabric that first forces, read against the level found in B | a day of CPU, existing instruments | any forced pair at 11 ∣ d² is HALT AND VERIFY (two encodings, the residue check, the spindle field computed) |
+| D | the derivation of the level from the structure of P_m (the connection set S_m over ℤ/p^m: p^{m−1}(p+1) points; the quotient P_m → P_{m−1} has fibres of size p²; is the fibre graph a clique, a matching, empty?) — the shape that makes A's and B's verdicts matters of course | two days | if the fibre structure alone decides continuity, the level is a theorem and the stub's question is closed by derivation for every p |
+
+## 5. Registered predictions — SUPERSEDED BY §S7 (P1 refuted in its second clause, P2 decided by derivation, P3 confirmed, P4 met with a caveat; the scoring is in §S7)
+
+| id | prediction | falsifier |
+|---|---|---|
+| P1 | at 2 over K(i), four colours: some level m ≤ 8 has every 4-colouring constant on valuation-6 cosets and some 4-colouring separating a valuation-4 pair — matching `data/m53/rigidity-dial-it4.json` | the tower separating valuation-6 pairs at every m ≤ 8 |
+| P2 | at 11, five colours, level 2: the first Separated ask returns a model (P₂ is not 1-continuous) — because level one is pairwise free and the fibres of P₂ → P₁ are sparse | a refusal on every class at level 2 |
+| P3 | the fibre graph of P_m → P_{m−1} at 11 is empty (no unit vector is ≡ 0 mod 𝔭, since x² + y² ≡ 0 has only the zero solution mod 11 — `quadrance_eq_zero_iff`), so continuity at 11 can only come from cycles through several fibres, never from a fibre's own edges — which is why P2 is expected to hold at level 2 and the interesting question is the growth of the least d with m | a nonempty fibre graph at 11 |
+| P4 | the prior-art gate finds the spectra of P_m over ℤ/p^r in the literature and no colouring value | a computed χ(P_m) in print |
+
+## 6. Failure and jackpot clauses — SUPERSEDED BY §S6's stop rules
+
+**Failure at A:** the 2-adic tower never forces at any affordable level → chunk forcing is not tower-continuity; the M56 fact
+belongs to another discipline (reconfiguration, FS-2); this stub closes as a clean negative and the Poros frame is killed
+in its ledger. **Failure at B/B′:** no continuity at 11 up to the affordable level → the residue mechanism cannot supply the
+six-level's pair through the tower; route A of `plans/PROGRAMME-ALGEBRAIC-PROOF.md` §3 is closed *at its mechanism*, and
+the bet moves toward "no six through sealed fields" — recorded as such, with the level reached. **Jackpot:** any forced
+pair at 11 ∣ d² on a fabric over a sealed field (phase C) is HALT AND VERIFY: two encodings, the residue check, the spindle
+radicand 4d² − 1, the spindle field's sieve (wall broken, 11 inert), then the spindled object's four-colour and
+five-colour asks — a refusal of five in a 6-open field is the programme's target object and is treated as a candidate
+until certified.
+
+## 7. Bearing on 6, honestly
+
+Medium-high as a frame, medium as work. It is the only stub that changes the programme's OBJECT (level one → the tower)
+rather than adding an instance inside it; it predicts the one four-colour fact the record measured and never explained;
+it is finite and cheap at 2; and at 11 it is two-sided. Its risk is the transfer (D2): continuity of the local plane's
+colourings gives forcing on some finite chunk by compactness, but the chunk's size is not bounded by the argument, and a
+fabric we can build may not reach it. Phase C measures that on the bed where the answer is known.
+
+## 8. Addresses
+
+`Proofs/HadwigerNelson/UnitQuadrance.lean` (`unitQuadrance`, `unitQuadrance.map`), `ResidueObstruction.lean` (the origin
+reduction, `not_forces_zero_of_not_periodic`), `Lift.lean` (`ZMod (p ^ 2)`, `residue`), `LocalGlobal.lean`
+(`quadrance_eq_zero_iff`, `addCayleyMap`, `unitQuadrance_colorable_of_quotient`), `tools/fplane.py` (the Cayley machinery,
+periodic quotients), `tools/fpcompel.py` (sets / filter / augment), `data/m53/rigidity-dial-it4.json`, `data/fplane/`.
+
+---
+
+## §PA. The prior-art gate (WORKFLOW 3a; run 2026-09-13 before the modeling passes)
+
+*Each object named for a stranger, searched under two disciplines, the result recorded either way. Every work
+found is a `BIBLIOGRAPHY.md` entry today with its read status; a title seen only in a search listing is marked so.*
+
+| object, in a stranger's words | discipline 1 · what was found | discipline 2 · what was found | verdict |
+|---|---|---|---|
+| **A proper k-colouring in which some vertex's neighbourhood misses a colour other than its own** — "a vertex that can be recoloured", "a non-frozen vertex" | **Graph recolouring / reconfiguration.** The notion is standard: a colouring is *frozen* when no single vertex can be recoloured, i.e. every vertex sees all k−1 other colours; the isolated vertices of the k-recolouring graph (`[BrewsterEtAl2020]`, arXiv 1712.00200, *frozen H-colourings*, abstract read; the k-colouring case is Cereceda–van den Heuvel–Johnson 2008, recalled, unverified, not added). Our "fan gap at v" is exactly "v is not frozen in C". | **Uniquely colourable graphs.** In a uniquely k-colourable graph every k-colouring is frozen (Harary–Hedetniemi–Robinson 1969, recalled); `[KlotzSander2017]` (abstract read): in a uniquely colourable Cayley graph the colour classes are cosets of a subgroup; `[Basic2026]` (listing + summary) answers their Problem 3.6. Our result is the opposite pole: a Cayley graph with *no* forced pair at all. | The per-vertex notion is folklore; its **use** — a gap in the target graph, pulled back along a homomorphism, kills every forced pair in the source — was not found stated anywhere. Negative recorded. |
+| **If G → P is a graph homomorphism and P has a k-colouring with a free colour at every vertex, then no two vertices of G are forced equal by all k-colourings** — "compulsion-freeness is hereditary under homomorphisms into slack targets" | Graph homomorphisms / cores: searched "homomorphism" + "uniquely colorable" + "forced"; nothing beyond "a homomorphic image of a uniquely colourable graph…" type facts (listings). | Reconfiguration: "frozen" is studied as a global property of one colouring, never as a property transported along a homomorphism. | **Not found.** The lemma is elementary; its absence from the literature is consistent with nobody having had the pair-compulsion question on a quotient plane. Negative recorded. |
+| **The Cayley graph of (ℤ/p^r)² on the unit circle {x² + y² = 1}** — "the finite Euclidean graph over the ring ℤ/p^r" | **Spectral graph theory of finite rings.** `[MMST1998]`, A. Medrano, P. Myers, H. M. Stark, A. Terras, *Finite Euclidean graphs over rings*, Proc. AMS 126(3) (1998) 701–710 — **listing only**: the AMS PDF returned 403 to a scripted fetch; every citing listing says the graphs over ℤ/p^r are non-Ramanujan for r ≥ 2 (spectra). A sequel on ℤ/2^r (`[AJC43-Z2r]`, Australas. J. Combin. 43, p. 295, author unverified, fetched as binary, **unread**). No listing mentions chromatic number, colourings, cliques, or the quotient maps ℤ/p^{r+1} → ℤ/p^r. | **Cayley graphs of abelian groups.** `[CervantesKrebs2023]` (held): a grep of both held PDFs for `p^2`, `prime power`, `Z_4`, `Z_8`, `Z_9` returns nothing — the matrix method is not applied to prime-power cyclic factors in those two papers (grep, not a read). | The tower's **spectra** are prior art (unread here); its **colourings** are not found. The stub's P4 ("spectra in print, no colouring value") is **met at the level of listings**, with the caveat that `[MMST1998]` itself is unread. |
+| **The unit-distance graph of the plane over a non-archimedean local field, anisotropic form** — "the quadratic graph over ℚ_p, p ≡ 3 (mod 4)" | **Descriptive set theory / harmonic analysis.** `[BardestaniMallahiKarai2015]` §3 (the anisotropic case, **read 2026-09-13**): their upper bound colours F^n by the ϖ-adic digits in positions −m..0, `c(x) = ({x_i}_m)_i` — a colouring **constant on cosets of a lattice, i.e. factoring through a finite quotient**, with q^{(m+1)n} colours; they remark χ_Bor(QG_{ℚ_p}) = O(p²) and *"in certain cases, one can attempt to quantify"*. So "continuity" (a colouring factoring through a finite level) is exactly their mechanism, in the crudest form. | **Finite-field geometry.** `[Moorhouse2010]` Table 6.1, `[Madore2015]` Prop. 3.2: the level-one bound χ(F²) ≤ χ(UD(𝔽_q, 2)) — the sharp form of the same mechanism, held and read. | Nobody asks whether the *sharp* level-one colouring has slack, or what the tower's colourings do. **Bonus, [hand], for the close's `CLOSED-QUESTIONS.md`:** their "quantify" remark has a clean instance — χ_Bor of the unit-distance graph over `F = ℚ₁₁(√11)` is **exactly 5**. Canonically (Poros): `c(x) := table([x₁] mod 𝔭, [x₂] mod 𝔭)` where `[·]` strips the canonical √11-adic fractional digits; adjacent points have an integral difference (unit vectors are integral, `−1` a non-square mod 11), hence equal fractional parts, so `c` is proper by the table's properness, and `[·]` is locally constant so `c` is locally constant, hence Borel. `≥ 5`: Heule-510 embeds as a unit-distance graph because the quadrance identity is polynomial and `3 = 5²`, `5 = 4²` in ℚ₁₁. Over ℚ₁₁ itself only `≤ 5` is established: no 5-chromatic unit-distance graph without √11 is held. |
+| **Does any unit-distance graph over a field whose plane at 11 is 5-colourable carry two points forced equal by every 5-colouring?** — the question itself | Polymath16 (2018-05-02, Gibbs; `CLOSED-QUESTIONS.md` §1.4): asked for the forced pair at 5/3 over Heule's field, never answered; M60 answered it for distances with 11 ∤ d². | Searched "forced monochromatic pair" / "5-chromatic unit distance" / "Heule" outside arXiv: nothing beyond the Polymath thread. | The question is the record's own and Polymath's; this milestone answers it **for every distance**. |
+
+**Search discipline note (G49).** The searches above used the disciplines' words (frozen, uniquely colourable, finite
+Euclidean graph over rings, quadratic graph over a local field), never this project's ("fan gap", "slack", "sealed").
+Two fetches failed (AMS 403; an AJC PDF returned as binary) and are marked unread rather than characterised from their
+abstracts (G50); the one held paper the gate needed read — Bardestani–Mallahi-Karai §3 — was read today.
+
+---
+
+## §S. The subplan (2026-09-13, de Bruijn as planner; advisor: Poros, `plans/POROS-2026-09-13-fs38-subplan.md`)
+
+### §S0. State on disk at opening
+
+- Repository: `main` at 4c4b11e, gate green; nothing running. The stub renamed to this file; references re-pointed;
+  `plans/FRONTIER-STUBS.md` row 1 marked *opened 2026-09-13* (no re-ranking until the close).
+- **Kernel facts this milestone builds on** (all on the standard three axioms): `Forces`/`Separated`/`Fan`
+  (`Forcer.lean:41`, `Fan.lean:79,71`); `Forces.image`, `Separated.image`, `addCayleyTranslate`,
+  `forces_iff_forces_zero_sub`, `not_forces_zero_of_not_periodic`, `Aperiodic`, `CoincidesAtNonedges`,
+  `forces_iff_eq_of_aperiodic`, `separated_iff_adj_of_coincides` (`ResidueObstruction.lean`);
+  `Forces.eq_of_forall_exists_not_periodic`, `rotHom`, `finitePlane_forces_iff` (`PlaneRotation.lean`);
+  `unitQuadrance`, `unitQuadrance.map`, `UDCert.drawingHom` (`UnitQuadrance.lean:251`);
+  the certified 5-colouring of `UD(𝔽₁₁,2)` as `finitePlane11Colouring`/`finitePlane11Coloring` with
+  `finitePlane11_aperiodic`, `finitePlane11_coincides`, `finitePlane11_forces_iff`, `finitePlane11_separated_iff`,
+  `three_le_arityFloor_finitePlane11` (`Instances/FinitePlane11.lean`, `Instances/ResidueObstruction11.lean`);
+  Heule-510's reduction `heule510Reduce11` and `heule510_colorable_five`; the 19-plane's periodic 5-colouring
+  `circ19Table ∘ projAlong (1,1)` (`Instances/LocalGlobal19.lean:49-56`); Mathlib's `PadicInt.toZMod : ℤ_[p] →+* ZMod p`
+  and `PadicInt.toZModPow`; `CoverAtLeast`/`coverColors` (`CoverageMono.lean:36`); `arityFloor` and
+  `three_le_arityFloor_of_aperiodic_coincides` (`Arity.lean`).
+- **Measured this morning by the product owner** (scratch `pilot11.py`, `pilot2.py`; reproduced by the planner and by
+  Poros today, so three runs of each): the three gapped vertices of the certified 11-table — `(2,4)` own colour 1,
+  neighbours `{0,3,4}`, gap 2; `(7,8)` own 0, `{1,2,4}`, gap 3; `(9,6)` own 0, `{1,2,4}`, gap 3; the level-2 repaint at
+  a lift of `(2,4)` proper on all 1,932,612 directed edge checks of `UD(ℤ/121,2)`, fibre non-constant, negative
+  control 55 conflicts. The 2-adic pilot's table (§2 of the brief) reproduced through level 5 in 1.4 s: no gap at
+  levels 1–5 (solver UNSAT, untrusted, **no positive control on the 2-adic object**), free at depths 0–3 (verified
+  colourings, 3 per depth at levels ≥ 4, all differences at levels ≤ 3), **forced at depth 4 at level 5** (3 of 3,
+  solver refusals, untrusted).
+- **Measured today by the planner** (scratch `<scratchpad>/fs38/planner/`, nothing committed; every number below is
+  re-produced by the implementer under controls before it is a record):
+  1. **The double gap at 11 is SAT**: a proper 5-colouring of `UD(𝔽₁₁,2)` with colour 4 absent from
+     `N[(0,0)] ∪ N[(1,0)]` (22 vertices; the two share exactly two neighbours), verified proper on all 726 edges and the
+     absence checked on all 22; single-gap positive control SAT; on the same code path "three colours absent from
+     `N[(0,0)]`" is UNSAT (the refusal outcome is reachable); a triple gap on a triangle's closed neighbourhoods is
+     SAT too. Poros reproduced it independently (colour 2, 0.01 s) with the control "forbid one colour everywhere =
+     four-colour the plane = UNSAT". **The certified table has no shared gap on any edge** (its two colour-3 gaps sit
+     at quadrance 8), so the kernel needs a second 121-entry literal.
+  2. **The double gap at 19 is SAT** (40 vertices, verified). The kernel's own periodic 19-colouring has single gaps
+     (at `x + y ∈ {4, 10}`, colour 1) but **fails `CoincidesAtNonedges` at shifts 7 and 12**; the solver's 361-entry
+     table's coincidence property is unverified (a format ambiguity in a quick check).
+  3. **Level 4 at 2 has no aperiodic 4-colouring**: forbidding periods one at a time went UNSAT after three —
+     `2√3`, `2√3·ω`, `2√3·(1+ω)` (depth 2, one ω-orbit; pilot basis `(0,0,0,2), (0,0,2,2), (0,0,2,0)`). So every
+     4-colouring of P₄ is periodic under one of those three, and the kernel form of P₄'s freeness is a **short list**
+     of tables, not one (≥ 2; exact count to be measured).
+  4. **LRAT prices** (cadical `-q --lrat --no-binary --unsat`, the flags of `scripts/regen-check.sh`): P₅ + edge
+     `(0, δ)` with δ of depth 4, four colours: UNSAT in 0.1 s, **4,068 LRAT lines** (696 KB); control without the edge
+     SAT. P₆ + depth-4 edge 6,680 lines, + depth-5 edge 9,659 lines, ~1 s each. The proofs are tiny; the pipeline's
+     cost is the clause table: P₅ has 24,576 edges (3.1× de Grey's 7,877), P₆ has 196,608 (25×).
+  5. **A ring-free representation of every level** validated against the pilot (§S3).
+  6. Heule-510 has **115 residue classes with ≥ 2 points** (510 points on 121 residues; `data/fplane/reduce-heule510-p11.json`);
+     the first same-residue pair is `(0, 475)` at residue `(0,0)`; the classes over the gapped residues are
+     `(2,4): {233, 248, 312, 313, 426, 441}`, `(7,8): {72, 79, 322}`, `(9,6): {123, 299, 306, 463, 470}`. M60's live
+     pair `(19, 59)` has residues `(0,1)` and `(2,1)` (distinct, non-adjacent) — the positive control on which M60 and
+     this milestone agree.
+- **Poros's findings today** (its record; not re-run by the planner): no common neighbourhood `N(0) ∩ N(δ)` in the
+  2-adic tower at levels 3–7 contains an odd cycle (all bipartite; `|N(0) ∩ N(δ)| = 2` at depth 0, `deg/3` at the top
+  depth), so the depth-4 forcing has **no local witness**; and `data/fplane/spectral-p83.json` has floor 6 at 83,
+  K(√7)'s first usable prime, with no six-colour ask on record (§S8, surfaced for the product owner).
+
+### §S1. Units — fixed once
+
+**Depth of a pair** `z, w ∈ K(i)` at a prime `𝔓` of `K(i)` above 2: `depth(z, w) := v_𝔓(z − w)`, with `𝔓² = (2)` so
+`v_𝔓(2) = 2`. For a rational squared distance `d²`, `v_𝔓(d²) = 2·v_𝔓(z − w)` (conjugation fixes 𝔓) and `v_𝔓(d²) = 2·v₂(d²)`,
+hence **`depth = v₂(d²)`**. Translation table for the record's three usages:
+
+| record | its unit | in depth |
+|---|---|---|
+| M53 `rigidity-dial-it4.json` `v2` = 6 / 4 / 2 | `v₂(d²)` | depth 6 (8/3, 8/√3, 8) / depth 4 (4, 4/√3, 4/3) / depth 2 (2, 2/√3, 2√3) |
+| M56 "depth 3 / depth 2" | `v₂(d²)/2` | depth 6 / depth 4 |
+| the handoff's "level 3" | M56's unit | depth 6 |
+| the tower's **level** `m` | the ring `O/𝔓^m` | a difference lives at level `m` with depth `< m`; depth `≥ m` is the zero of level `m` |
+
+K(i) has **two** primes above 2 (e = 2, f = 2, g = 2 over ℚ), swapped by √11 ↦ −√11; for `d² ∈ ℚ` or `ℚ·3` the two
+depths agree, for other `d² ∈ K` they can differ, and every fabric statement below reads "at either prime".
+
+### §S2. D0 — the fan-gap theorem, its corollaries, their exact hypotheses, and the hand gaps
+
+**Vocabulary.** `FanGap C v γ` — in the proper colouring `C` of `P`, colour `γ` is absent from the closed
+neighbourhood of `v`: `γ ≠ C v ∧ ∀ w, P.Adj v w → C w ≠ γ`. It is the negation of the record's coverage at level `k−1`:
+`(∃ C, ∃ γ, FanGap C v γ) ↔ ¬ CoverAtLeast P k v [] (k − 1)` (bridge lemma, `CoverageMono.lean:36`'s vocabulary; the
+reconfiguration literature's "v is not frozen in C"). `Slack P k` — every vertex has a gapped colouring.
+`DoubleSlack P k` — every **edge** `v ~ w` has a colouring with **one** colour absent from `N[v] ∪ N[w]`.
+
+**D0.1 The repaint (one definition, both uses).** For `f : G →g P`, `C : P.Coloring (Fin k)`, a set `U ⊆ V(G)` that is
+independent in `G`, and a colour `γ` absent from `N_P(f u)` for every `u ∈ U`: the map `x ↦ γ` on `U`, `x ↦ C (f x)` off
+`U`, is a proper colouring of `G`. *Proof.* An edge `x ~ y` with both ends in `U` is excluded; with `x ∈ U`, `y ∉ U`:
+`f y ∈ N(f x)` so `C (f y) ≠ γ`; with neither: `f` is a homomorphism. ∎ Graph-level; no finiteness, no surjectivity;
+`γ ≠ C (f u)` is **not** needed for properness.
+
+**D0.2 The fan-gap theorem (the brief's Lemmas A and B merged, no case split on `f u = f u'`, no forces-freeness
+hypothesis on `P`).** `f : G →g P`, `FanGap C (f u) γ`, `u ≠ u'` ⟹ `¬ Forces G k u u'`. *Proof.* If
+`C (f u) ≠ C (f u')`, `C ∘ f` separates. Otherwise repaint `U = {u}`: `C' u = γ ≠ C (f u) = C (f u') = C' u'`. ∎
+**Corollaries.** (a) `Slack P k` ⟹ for every `f : G →g P`: `Forces G k u u' → u = u'` (the brief's Lemma B without
+its first hypothesis — in particular `P` itself is forces-free: the brief's "forces-free" premise is **redundant**).
+(b) `FanGap.comap`: a gap at `f u` pulls back to a gap at `u` in `C ∘ f` (the brief's A′), so `Slack.of_hom` — slackness
+passes from `P` to every `G` with a homomorphism into `P`, **no surjectivity**. (c) On a Cayley graph one gapped
+vertex gives `Slack` by translation (`addCayleyTranslate`). (d) `Slack (unitQuadrance S) k` and `φ : R →+* S`
+(`S` nontrivial) give `Slack (unitQuadrance R) k` by `unitQuadrance.map` — so **the tower at 11 (`ZMod (11^m)`) and the
+completion (`ℤ_[11]`, via Mathlib's `PadicInt.toZMod`) are instances, not steps**: the brief's Corollary 1 needs no
+induction and its Corollary 2 needs no level and no "images distinct in R".
+
+**D0.3 The arity-k filter.** `f : G →g P`, `FanGap C (f p) γ`, and every partner `q ∈ Q` has `q ≠ p` and `C (f q) ≠ γ`
+⟹ `¬ Fan G k p Q`. (Repaint `{p}`; the fan needs some `q` with `C' q = C' p = γ`.) The pair theorem is the case
+`Q = [u']` together with the pullback case. **Scope:** a fan whose class `Q` has, in every gapped colouring of `P`, some
+partner's image on the gap colour **survives** — G15's wide-class pigeonholes are not touched (Poros E(ii)); the
+dichotomy G54 of the brief is therefore **one-directional**: gap ⟹ no forced pair is a theorem; no gap ⟹ forcing is
+an observation at 2 and 3 (the 2-adic K₄ and `UD(𝔽₃,2)` at three colours have no gap and do carry forced pairs).
+
+**D0.4 The double repaint (new today; Poros's card D, measured SAT).** `f : G →g P`, one colouring `C` with
+`FanGap C (f u) γ` and `FanGap C (f u') γ` (**the same** `γ`), `¬ G.Adj u u'` ⟹ `¬ Separated G k u u'` (repaint
+`U = {u, u'}`). With `DoubleSlack P k`, `P.Colorable k`, and `∀ x y, Separated P k x y → P.Adj x y` (the plane's own
+virtual edges are edges — M60's `separated_iff_adj_of_coincides` at 11): for every `f : G →g P`,
+**`Separated G k u u' ↔ G.Adj u u'`**. *Cases.* `f u = f u'`: pull back any colouring. Images distinct, non-adjacent:
+`Separated.image` would make them adjacent. Images adjacent: the double repaint. ∎ `DoubleSlack` is hereditary under
+homomorphisms (`FanGap.comap` twice) and, on `finitePlane p`, follows from **one** shared-gap table `C₀` at the base
+edge `((0,0),(1,0))`: for an edge `v ~ w` take the automorphism `σ` with `σ v = (0,0)`, `σ w = (1,0)` — translate by
+`−v`, then rotate by the conjugate of `d = w − v` (`rotHom` by `d` sends `(1,0)` to `d`, so its inverse sends `d` to
+`(1,0)`) — and **pull back**: `C₀ ∘ σ` has `γ` absent on `σ⁻¹(N[(0,0)] ∪ N[(1,0)]) = N[v] ∪ N[w]`. Written the other way
+round the gap lands on the wrong pair (Poros).
+
+**D0.5 Corollary 2, stated at its proofs' level.** Let `P = finitePlane 11` with `Slack P 5` and `DoubleSlack P 5`
+(two `decide`s on two 121-entry tables). Then for every graph `G` with a homomorphism into `P`:
+`Forces G 5 u u' ↔ u = u'` and `Separated G 5 u u' ↔ G.Adj u u'` — **the whole arity-2 compulsion structure of the
+sealing plane pulls back to every unit-distance graph over the field.** Instances, all kernel: every `Valid` `√7`-free
+tower certificate with `11 ∤ D` (through `drawingHom Q4.sevenFree.res11`; the same hypothesis as M60); Heule-510
+(`heule510Reduce11`), including the same-residue pair `(0, 475)` M60 was silent on and the `5/3` pair `(19, 59)` on
+which M60 and this agree; `unitQuadrance R` for every ring `R` with a hom to `ZMod 11` — `ZMod (11^m)` for every `m ≥ 1`,
+`ℤ_[11]`, `Adjoin 11 ℤ_[11]` (Heule's completion's integers, via `Adjoin.lift PadicInt.toZMod 0`). The same at 19 for the
+forces half (the kernel's own 19-colouring has gaps); the virtual-edge half at 19 needs a coinciding table (§S6 K3).
+**The hand gap, named:** the field-level sentence — *no finite unit-distance graph over a field `F` with a usable prime
+of residue degree one above 11 (or 19) carries a pair compulsion at five colours* — adds to the kernel statements exactly
+the step of M58/M60: translate one vertex to the origin, then every **coordinate** `x, y` is `𝔭`-integral because unit
+vectors are (`−1` is not a square mod 11, and 2 is a unit there), so the graph is such a certificate / maps into
+`unitQuadrance O_𝔭`. (At 2 the analogous step is about the **complex number** `z = x + iy`, not the coordinates — §S3
+[hand 2]; the two hand steps are not the same step.) That step is row 57's
+open gap and is **not** closed here. **Scope (Poros E(i)):** "usable of residue degree one above 11" — for multiquadratic
+`F ⊇ K` this is every 5-sealed field (residue degrees are 1 or 2, `q = p² ≡ 1 (mod 4)` is never usable, and every plane
+from 59 up refuses five), and **19 is never of degree one over K** (3 is a non-residue mod 19). It is not "every field":
+a non-multiquadratic field could be sealed by a degree-three prime at 23–47 whose plane is undecided.
+
+**D0.6 What this decides in the record.** G48's six-level question — does a 5-sealed field carry a pair forced equal
+at five colours, necessarily at `11 ∣ d²`? — is answered **no** for every such field (arity 2); FS-6's design target has
+no instance; its never-run central computation (B9 (i), the forced-distance table at residue norm 0) has a known answer,
+every entry refuted; FS-16's 51 residue-allowed-distance asks are answered — a five-colour virtual edge over such a field
+is a unit edge; the four measured five-colour nulls on sealed objects (Heule-510/553, the two-core union) become matters
+of course; **the nulls on 6-open objects (the 1581, the ρ₆₃ arena) are untouched** — no 5-colourable residue target
+exists for them, by definition of 6-open; and `not_colorable_of_fan` can never fire at five colours over such a field
+(separable partners must be adjacent, and adjacent partners are never in a fan of a proper colouring).
+**The sentence for the bearing on 6 (Poros):** over a field where 11 is usable of degree one, at five colours, G15's
+factorisation has a **free Act One** (six points in one residue class carry a monochromatic pair in every 5-colouring)
+and an **impossible Act Two** (a kill is a virtual edge, and a five-colour virtual edge is a unit edge) — so the whole of
+a 6-forcer's work moves into a 6-open extension, where no residue plane is five-colourable. That is stronger than "the
+mechanism has no instance": in-field, the mechanism's second act cannot exist.
+
+### §S3. D1 — the 2-adic law as registered predictions, with the representation measured
+
+**The object.** `O = ℤ₂[ω][√3]`, `ω² = −1 − ω`, `π = 1 + √3`, `𝔓 = (π)`, `𝔓² = (2)`, residue field `𝔽₄`; `O = ℤ₂[ω][π]`
+is the ring of integers of `ℚ₂(√3, ζ₃)` because `π` is Eisenstein over `ℤ₂[ω]` (`π² − 2π − 2 = 0`) — **[hand]**.
+`P_m := Cay(O/𝔓^m, S_m)`, `S_m = {z : z z̄ = 1}`, `|P_m| = 4^m`, `|S_m| = 3·2^{m−1}`; the object is the **complex form**
+(Theorem B's `K₄` at level one), not `unitQuadrance (O_K/𝔭^m)` — at 2 the coordinates `x, y` of a unit vector are not
+integral, only `z = x + iy` is, so the pairs form does not reduce (its level one is a 4-cycle).
+
+**The representation (kernel shape, validated today at m = 1..7 and against the pilot's graphs at m = 4, 5).**
+`O/𝔓^m ≅ (ℤ/2^⌈m/2⌉)[ω] ⊕ π·(ℤ/2^⌊m/2⌋)[ω]` as additive groups — `z = A + πB`, `A = a + bω`, `B = c + dω` — because
+`𝔓^{2j} = 2^j O` and `𝔓^{2j+1} = 2^{j+1}ℤ₂[ω] ⊕ π·2^j ℤ₂[ω]` (from `π² = 2 + 2π`). The norm is an explicit integer form:
+`N(A + πB) = (a² − ab + b² + 2(c² − cd + d²)) + π·(2ac − ad − bc + 2bd + 2(c² − cd + d²))`, so
+`S_m = {(a,b,c,d) : a² − ab + b² + 2(c² − cd + d²) ≡ 1 (mod 2^⌈m/2⌉) ∧ 2ac − ad − bc + 2bd + 2(c² − cd + d²) ≡ 0 (mod 2^⌊m/2⌋)}`.
+Conjugation `(a,b,c,d) ↦ (a − b, −b, c − d, −d)`; multiplication by `ω`: `(a,b,c,d) ↦ (−b, a − b, −d, c − d)` (preserves
+`S_m`; checked at m = 5); the level map `m + 1 → m` reduces `A` and `B` modulo the smaller powers; the pilot's basis
+`1, ω, √3, ω√3` is reached by `(a,b,c,d) ↦ (a + c, b + d, c, d)`. **Ring-free, decidable, uniform in `m`.** Two hand steps then stand side by side with the same trust shape, and
+the record must carry both (Poros): **[hand 1]** this explicit Cayley graph IS `Cay(O/𝔓^m, S_m)` (the derivation above);
+**[hand 2]** a K-certificate translated to the origin draws into it, because unit vectors of `K(i)` are `𝔓`-integral —
+row 57's gap, and the even-denominator obstacle (Heule's `D = 96`; K-certificates carry halves) that stops the record's
+`u * D = 1` drawing at 2. Neither is kernel. **Controls on the formula, run today:** the discriminating one is the
+coincidence with the pilot's graphs at levels 4 and 5 under `(a,b,c,d) ↦ (a+c, b+d, c, d)` (a different construction of
+the same object); the count `|S_m| = 3·2^{m−1}` is tuned-to and does not discriminate on its own — so it was perturbed:
+dropping the `2` in the real part gives 18 at `m = 3` and 24 at `m = 5`; dropping the `2` in the `π`-part gives 9 at
+`m = 2`, 18, 36, 72, 144 at `m = 3..6`. Both perturbations leave the count at some level; the formula is the only one of
+the three that holds the count at every level 1–7. Alternative weighed: `Adjoin 3 ((ℤ/2^j)[ω])` as a
+genuine `CommRing` — reaches only even levels, and the threshold level 5 is odd (§S8).
+
+**Registered predictions (both outcomes reachable; the pilot's numbers are the prior, not the record):**
+
+| id | prediction | if it holds | if it fails |
+|---|---|---|---|
+| P-A1 | at every level `m ≤ 8`, every difference of depth `≤ 3` is separated by some 4-colouring of `P_m` (all differences asked, verified models) | free at depth ≤ 3 is a record; with K3's tables it is kernel at levels 4 and 5 | a refusal at some depth-≤-3 difference (untrusted until a second solver agrees) kills the negative half and with it the only fabric transfer |
+| P-A2 | from level 5 on, **every** difference of depth `≥ 4` is forced (all differences asked; refusals on two solvers; the P₅ instance kernel through LRAT) | the 2-adic law's positive half is a record, kernel at level 5 | a verified separating colouring at some depth-≥-4 difference: the law is not "depth ≥ 4", record the true threshold per level |
+| P-A3 | no 4-colouring of any `P_m`, `m ≤ 8`, has a fan gap. **Not an independent prediction (Poros): at levels ≤ 5 it is a THEOREM of K3** — a gap at level `m` pulls back along the level map to a gap at every level `m' ≥ m` (`FanGap.comap`), one gap on a Cayley graph gives `Slack` by translation, `Slack` gives pairwise free (D0.2 (a)), and P₅ has a forced pair (the LRAT) — so no level ≤ 5 has a gap, kernel-grade. Above 5 the same chain makes it a corollary of P-A2 at that level. The T-phase `gap` subcommand is therefore a **consistency check on the solver** at levels 6–8, with the planted control (delete the edges from one vertex to one colour class; the ask must flip) as the solver's self-check | the 2-adic side of G54 ("2 has no gap") is kernel at levels ≤ 5 and solver-consistent above | a verified gapped colouring at any level contradicts P-A2 below it — one of the two instruments is wrong, HALT |
+| P-A4 | every 4-colouring of `P_m` has a nonzero period at every level `m ≥ 2` (measured at 4: one of three depth-2 elements; **measured at 2 today: all 576 Latin-square colourings of `K₄ □ K₄` are periodic**, so "some period is unavoidable" appears at level 2 already) | a structural input to phase D: "some period" below level 5, "all of depth ≥ 4" from level 5 | an aperiodic colouring at some level ≤ 4 — then one table suffices there |
+| P-A5 | the number of tables needed for P₄'s freeness is 2 or 3 | the kernel instance is that list | more — the kernel instance is a longer list; nothing else changes |
+| P-A6 (Poros's hunch, basis: derivation + M56) | for every `m ≥ 5` the forced set of `P_m` at four colours is exactly `{depth ≥ 4}` — which is `F_add`, the additive family's forced set: an additive 4-colouring is a hom `Λ → G` with `\|G\| = 4`, so it kills `4Λ ⊆ 𝔓⁴O` and factors through `O/4O = P₄` (M56's P1′, `plans/M56-arithmetic-of-tightness.md:405-412`, measured there and never derived; a two-line theorem) | the tower is **no sharper than the additive family** as a fabric instrument on the calibrated bed: the depth-6 forcing of U (the 16-pair non-additive residue M56 named) is invisible to it, because U's separating 4-colourings at depth 4 are exactly its non-additive ones, which factor through no level | a level `m ≤ 8` whose forced set differs from `{depth ≥ 4}` — a free depth-4 difference or a forced depth-3 one |
+
+**The reachability check on the uninformative outcome:** P-A1–P-A3 have positive controls on the same code path
+(P-A1: the refusals at depth 4; P-A2: the verified models at depth ≤ 3; P-A3: the planted gap) and P-A2's refusals get a
+second encoding or solver (Poros B/G) — a FORCED row is never written from one solver's UNSAT. **At level 5 the second
+encoding is the kernel itself**: the LRAT-checked refusal of `P₅ + edge` (K3) makes the level-5 forcing at depth 4
+**kernel**, not solver — a checked refutation beats a second CDCL run (Poros).
+
+### §S4. D2 — the transfer: what the tower bounds and what it does not
+
+1. **Freeness transfers, one way.** A K-fabric `G` with a homomorphism into `P_m` (the hand step: translate, then
+   𝔓-integrality) cannot force a pair whose image in `P_m` is separated (`Forces.image`). With P₄ pairwise free,
+   **no K-fabric forces a four-colour pair of depth ≤ 3 at either prime above 2** — the mechanism behind M53's
+   `0 of 6,669 / 5,470 / 767` at depth 2. Kernel-promotable through K3 (the tables) once a K-plane drawing into level 4
+   exists (§S8: priced, declined for this milestone).
+2. **Forcing does not transfer.** `P_m` forcing `(0, δ)` says nothing about any finite chunk: its colourings need not
+   factor through `P_m`. The measured K-fabric is **free at depth 4** (`16/3`: 0 of 2,145; `16`: 0) where the tower
+   forces it, and forced at depth 6 where the tower permits it. So the tower **bounds K-fabric forcing to depth ≥ 4;
+   the record's fabric forces at 6; depths 4–5 are unexplained** (Poros A). "Small-chunk effect" is a reading with a
+   falsifier: a K²-fabric forcing a four-colour pair at 4/3, 4, 4/√3 or 4√3 confirms it; a derivation that K-fabric can
+   never force depth 4 exposes the tower's depth-4 verdict as a continuous-colouring artifact.
+3. **What is not a retrodiction target.** De Grey's distance-4 and antipodal-4/√3 pairs (G9): his half lives in
+   `ℚ(√3,√5,√11)²`, the wall broken by 15 ≡ 7 (mod 8), no conjugation-fixed prime above 2 in `F(i)`, no hom into this
+   tower. (The brief's §2 read them as the tower's fit; withdrawn — Poros A, planner retraction 1.)
+4. **The compactness direction** (stub D2): if every 4-colouring of the local plane `O²` were continuous, some finite
+   chunk would force each forced pair; but continuity is exactly the open question and the tower's forcing at level 5
+   is a statement about colourings that already factor through level 5. No transfer is claimed from it.
+
+### §S5. Phase D — the derivation plan (a day, capped; a recorded stall is a result)
+
+Inputs on disk at the start: P₂ = K₄ □ K₄ (8 cliques; 576 colourings = Latin squares; prove it: the eight cliques are
+`{a + εv}` and `{a + ε(a + c)}` — the brief's (i)); adjacent fibres joined by two `K_{2,2}`'s (the brief's (ii)); every
+4-colouring of P₄ has a depth-2 period `2√3·u` (§S0 item 3); no common neighbourhood in levels 3–7 contains an odd cycle
+(Poros); the level-5 forcing has, by construction, no local witness.
+
+Questions, in order, each with its stall statement:
+- **D-1 (structure of the period sets).** For `m = 2, 3, 4`: which nonzero periods does every 4-colouring have? (P-A4;
+  at level 2 all 576 colourings are periodic — measured today; ask which periods, and whether they are depth-1 elements.) If the unavoidable periods
+  form the coset `𝔓^{m−2}·(units mod 𝔓)` at every `m ≤ 4`, state and prove it for `m = 2` by hand.
+- **D-2 (propagation).** Does "every 4-colouring of `P_{m+1}` factors through `P_m`" propagate from `m = 4` to all
+  `m ≥ 4` by a structural argument? **Input (P-A6):** the additive 4-colourings factor through `P₄` by exponent; the
+  question is whether every 4-colouring of `P_m`, `m ≥ 5`, is forced to agree with an additive one on `𝔓⁴`-cosets. Candidate: the fibre over `v` is a `V₄`-torsor; for each direction `s̄ ∈ S_m` the lifts
+  form a coset of an order-2 subgroup `H(s̄)`; `x` and `x + δ` share their neighbours over `s̄` iff `δ ∈ H(s̄)`; the
+  forcing of `(x, x + δ)` is then a property of the map `s̄ ↦ H(s̄)`. If the map's structure is the same at every level
+  `m ≥ 4` the propagation is a theorem; if not, say which level breaks it.
+- **D-3 (the dichotomy's other side).** Is "no gap at level one ⟹ no gap at any level" a theorem for a Cayley tower?
+  Gaps pull **up** (A′), not down. Below level 5 the question is settled by K3's chain (P-A3); at level `m ≥ 5` it is
+  settled by P-A2 at that level (a forced pair forbids every gap). The descent argument (a gap at level `m + 1` descends
+  when every colouring factors through `P_m` and `S_{m+1} → S_m` is onto — check onto-ness once: `|S_{m+1}| = 2|S_m|` with
+  fibres of size 2) is needed only to get gap-freedom at `m + 1` from level `m` without P-A2. Record; do not spend the
+  day on the general case.
+- **D-4 (why 11 is slack).** Is there a 5-colouring of `UD(𝔽₁₁,2)` in which **every** vertex is gapped (each
+  neighbourhood uses three colours)? One solver ask; if SAT, verify and keep the table — it is the strongest possible
+  form of slackness and a natural kernel literal. Not needed for any theorem.
+
+Stop rule: one day; the write-up is "derived: … / not derived, stalls at …".
+
+### §S6. Phases, costs, stop rules, and the instrument's shape
+
+| phase | what | cost (desktop, 16 physical cores; one heavy job at a time) | stop rule / acceptance |
+|---|---|---|---|
+| **K1 kernel, general** | `FanGap.lean`: `FanGap`, `Slack`, `DoubleSlack`, the repaint, D0.1–D0.4, `FanGap.comap`, `Slack.of_hom`, `DoubleSlack.of_hom`, the Cayley transports, the `unitQuadrance`/ring-hom corollary, `Fan.image`, the `CoverAtLeast` bridge | half a day | every `sorry` closed; the negative control (delete the gap hypothesis, confirm the proof breaks — G30 §6) done once |
+| **K2 kernel, 11 and 19** | `Instances/FanGap11.lean`: the gap `decide` (12 lookups), `Slack (finitePlane 11) 5`; the shared-gap table as a 121-entry literal (`decide` proper + absent on 22), `DoubleSlack (finitePlane 11) 5` by translation + `rotHom`; `Forces ↔ =` and `Separated ↔ Adj` for every `G →g finitePlane 11`; `ZMod (11^m)`, `ℤ_[11]`, `Adjoin 11 ℤ_[11]`; the certificate corollaries; **Heule-510** both iffs, `3 ≤ arityFloor` (5-colourable, no pair compulsion), the pair `(0, 475)` and the control `(19, 59)`; reds: a present colour refused as a gap, the level-one `K₄` at 2 (`addCayley` on `F4`'s units) has no gap (`decide` over 256 functions). `Instances/FanGap19.lean`: the gap in the kernel's own 19-colouring (10 lookups), `Slack`, `Forces ↔ =` for `G →g finitePlane 19`, `ZMod (19^m)`, `ℤ_[19]`; the double gap at 19 as a 361-entry literal **if** a coinciding table is also obtained (else the virtual-edge half at 19 is dropped with a note) | a day | vacuity green with the inhabitants named in-file; `finitePlane_forces_iff` kept (it covers 3 and 2) |
+| **K3 kernel, 2-adic (should)** | `TwoAdicTower.lean`: `twoAdicLevel m`, `normForm m`, `twoAdicPlane m`, conjugation and `ω`-multiplication as graph automorphisms, the level maps as graph homs, `#guard`s on `|S_m|`. `Instances/TwoAdicFour.lean`: the table list (literals), `Forces (twoAdicPlane 4) 4 x y ↔ x = y` via `Forces.eq_of_forall_exists_not_periodic` and one `decide` (255 × tables × 256). `Instances/TwoAdicFive.lean`: `Forces (twoAdicPlane 5) 4 0 d ↔ levelMap d = 0` — the forward direction from level 4 by pullback, the backward direction by **one LRAT refusal** of `P₅ + edge (0,(4,0,0,0))` through the existing pipeline (`emit_mask.py` on a 1024-vertex, 24,577-edge list; measure one segment's build memory first) and `Forces.map` along `ω`-multiplication for the other two depth-4 differences; the level-one `K₄` control | a day; the pipeline run is the risk | decline the LRAT half (keep the statement solver-only, `sorry`-free by dropping it) if one segment's build exceeds the cap or the run exceeds a day; the level-4 tables are kept regardless |
+| **T tools + records** | `tools/fs38_tower.py`: subcommands `build` (levels at 2 in the §S3 representation; `ZMod (p^m)²` at 11/19), `gap` (fan-gap ask with the planted control), `forced` (per-difference Separated asks — **all** differences, no sampling; refusals re-asked on a second solver or encoding), `doublegap` (the shared-gap ask at an edge), `tables` (aperiodic-cover search for level 4), `recolour` (the level-2 repaint record at 11 and 19), `lrat` (emit the P₅ + edge CNF and LRAT); records `data/fs38/tower-p2-k4-m<M>.json` (m ≤ 8; **65,536 vertices at m = 8 — measure memory at 7 first**; checkpoint per level under `data/fs38/ckpt/`, never `build/` or `/tmp`; resume command in the README), `data/fs38/gap-p11-k5.json`, `doublegap-p11-k5.json`, `doublegap-p19-k5.json`, `p4-tables.json`, `recolour-p11-level2.json`; `data/fs38/README.md` with one row per file and a "not recorded here" list. Controls: a planted fibre edge caught; every verified model re-checked by an independent function against every edge; the negative control of the brief at 11 (55 conflicts); the level-2 Latin-square count 576; UNSAT never written as a fact | half a day of engineering, an hour of runs below m = 8 | every headline names its population and trust word |
+| **D derivation** | §S5 | a day, capped | a recorded stall is a result |
+| **C close** | the documents listed in the brief §3: `CLAUDE.md` row 66 and G54 (one-directional, as §S2 D0.3 states it), G48 rewritten, G31 reread, § Paths forward + `plans/FRONTIER-STUBS.md` re-ranked (FS-6 demoted under a banner; **FS-16 closed**, not kept — the brief's "FS-16 kept" is withdrawn by D0.4); `CLOSED-QUESTIONS.md`: Polymath16 2018-05-02 answered no at every distance, and the [hand] χ_Bor = 5 over ℚ₁₁(√11); the Poros hunch ledger scored; `BIBLIOGRAPHY.md` entries (§PA); `data/fs38/README.md` | half a day | `CLAUDE.md` under 150,000 characters; current-state-only |
+
+**Order.** K1 → K2 → T (records, incl. the 11-adic level-2 repaint) → K3 → D → C. K1 and K2 are the headline and are
+not blocked by anything solver-side except the shared-gap table (ask it first; seconds).
+
+### §S7. The stub's predictions, scored; the brief's, registered
+
+| id | as registered | verdict today |
+|---|---|---|
+| stub P1 | tower at 2 forces valuation-6 and separates valuation-4 pairs at some `m ≤ 8` | **first clause holds, second REFUTED** by the pilot (depth 4 forced from level 5) — solver-side; P-A2 is its registered replacement |
+| stub P2 | P₂ at 11 is not 1-continuous (a Separated model at level 2) | **decided by derivation** (D0.2 + the gap): every level is pairwise free; the level-2 repaint is the record's instance |
+| stub P3 | the fibre graph at 11 is empty | **confirmed** (pilot: 0 fibre edges; the reason `a² + b² ≡ 0` has only the zero solution mod 11) |
+| stub P4 | prior art has spectra of `P_m` over ℤ/p^r and no colouring value | **met at the level of listings**; `[MMST1998]` unread (§PA) |
+| brief "the 2-adic tower forces exactly depth ≥ 4 from level 5, free at depth ≤ 3 at every level" | — | registered as P-A1/P-A2 with both outcomes reachable and a second solver on refusals |
+| retractions in the planning window | — | requested of the brief: **7** (Lemma B's forces-free hypothesis; the tower/ring-R detour to Corollary 2; the ramified level ring; "FS-16 stands"; de Grey's pairs as the tower's fit; "reproduces M56"; "every 5-sealed field" → residue degree one); planner: **1** (de Grey's pairs); Poros public: **1** ("𝔓-integrality of translated coordinates" at 2 — it is `z`, not the coordinates); Poros's proposed drop of `P.Colorable k` from D0.4's iff **declined**: with `P` edgeless and `k = 0`, `DoubleSlack` is vacuous, `Separated G 0 u u'` holds for want of colourings, and `Adj` is false |
+| new P-K1 | the shared-gap 121-entry table decides proper and doubly absent in the kernel | trivial to fail: a corrupted table is refused (planted red) |
+
+### §S8. Decisions settled at subplanning (house format: choice · alternative · why · confidence)
+
+| # | choice | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| 1 | Headline = D0.5: the residue plane's arity-2 compulsion structure at five colours (Forces ↔ =, Separated ↔ Adj) pulls back to every unit-distance graph over the field; the 2-adic law second | the brief's headline (Corollary 2 = no forced pair) alone | the double gap is measured SAT twice and the composite is a one-page theorem; it closes FS-16 as well as FS-6 | high — the one fact that would change it: a hole in D0.4's third case, which Poros and I both re-derived |
+| 2 | One repaint definition over an independent set `U`, with the pair, fan and double-repaint theorems as its three uses | three separate constructions | one properness proof, three consumers; the obligation pass has one induction-free lemma to close | high |
+| 3 | No forces-freeness hypothesis anywhere; `finitePlane_forces_iff` kept as the theorem that covers 3 and 2 | keep the brief's Lemma B shape (forces-free ∧ gapped) | the hypothesis is redundant (D0.2 (a)); a redundant hypothesis is G30 §6's smell | high |
+| 4 | The tower at 11, `ℤ_[11]`, `Adjoin 11 ℤ_[11]` and `ZMod (11^m)` as **instances** of the ring-hom corollary; no induction | the brief's Corollary 1 by induction on `m` | the induction proves a special case of a two-line corollary; `PadicInt.toZMod` makes the completion free | high |
+| 5 | Drop the ramified level ring `Adjoin 11 (ZMod (11^j))` and the "images distinct in R" kernel form | build it as the brief asked | strictly weaker than D0.5 and needs `tools/` to compute a level; nothing rests on it | high |
+| 6 | 2-adic kernel object = the ring-free explicit representation of §S3 (`addCayley` on a product of `ZMod`s with a decidable norm form), uniform in the level | `Adjoin 3 ((ℤ/2^j)[ω])` as a genuine `CommRing` (even levels only; a hand-built Eisenstein ring) | the threshold level 5 is odd; the graph is fully specified by group + connection set; the ring is used only in the [hand] identification, recorded | medium — if the domain pass finds the odd-level structure can be a genuine quotient ring cheaply, switch |
+| 7 | 2-adic kernel scope = P₄ freeness (tables) + P₅ forcing at depth 4 by one LRAT + the pullback iff; **no** K-plane drawing into the level ring | (a) also draw the K-plane (`oddDenom`/`psiA` generalised to level 4: the 2-adic root of −11 by Hensel, the localisation); (b) LRAT at level 6 | (a) is a 1–2 day modelling task on `ValuationLaw.lean`'s machinery with its own hand gap (𝔓-integrality) — priced, declined, an FS candidate; (b) P₆'s 196,608-edge clause table is 25× de Grey's — out of the pipeline's budget | medium — the one fact: if one P₅ segment's build memory exceeds the cap, the LRAT half is declined too |
+| 8 | Level-4 freeness as a **list** of tables with `Forces.eq_of_forall_exists_not_periodic` | one aperiodic table (`Aperiodic col`) | no aperiodic 4-colouring of P₄ exists (measured, §S0 item 3) | high |
+| 9 | Records under `data/fs38/`; the level-2 repaint at 11 reproduced as a record; all 2-adic runs to m = 8 with memory measured at 7 first | run straight to 8 | 65,536 vertices × 384 neighbours in Python lists is ~GB; the box has 128 GB but one heavy job at a time | high |
+| 10 | 19: the forces half in the kernel from the existing colouring; the virtual-edge half **dropped** with a one-line note ("needs a coinciding table") | chase the 361-entry coinciding table now | the gap `decide` is ten lookups; 19 is degree one only over fields without √3 (e.g. ℚ(√5,√11)), where no object of ours lives, so the virtual-edge half buys nothing today (Poros) | high |
+| 11 | `[MMST1998]` entered as listing-only/unread; no claim rests on it | characterise it from citing abstracts | G50: an abstract is not a reading | high |
+| 12 | Poros's 83 card (is `UD(𝔽₈₃,2)` six-colourable? floor 6, K(√7)'s first usable prime) is **surfaced to the product owner, default not run** | run it in T | it is outside this milestone's question and is the product owner's ranking call | — (not mine) |
+
+### §S9. Gap audit against the brief (every promise: planned / changed / dropped with reason)
+
+| brief item | status |
+|---|---|
+| `git mv` to `plans/FS38-residue-tower.md`; re-point references; mark the row opened | **done** |
+| §PA with two disciplines per object, negatives recorded, works into `BIBLIOGRAPHY.md` the same day | **done** (§PA; bibliography rows added with this commit) |
+| Kernel: Lemmas A, A′, B ring-free in a new leaf module | **planned, strengthened** (K1: one merged theorem; B's first hypothesis dropped) |
+| Kernel: the gap at 11 (`decide`) and at 19 | **planned** (K2; at 19 on the kernel's own colouring) |
+| Kernel: the tower corollary at `ZMod (11^m)` for all `m`, "the statement over any ring R with a hom to ZMod 11 is cleaner" | **planned as the ring-hom corollary + instances**, plus `ℤ_[11]` and `Adjoin 11 ℤ_[11]` (K2) |
+| Kernel: the certificate corollary with drawn images DISTINCT in R, at the ramified level ring | **changed**: replaced by the stronger `∀ i ≠ j, ¬ Forces` with no distinctness and no level ring (D0.5, decision 5) |
+| Instance test: a pair with `11 ∣ d²` M60 could not refute, and a positive control where both agree | **planned**: `(0, 475)` and `(19, 59)` on Heule-510 |
+| Every structure-hypothesis theorem ships its inhabitant | **planned** (the certified colourings are the inhabitants; the `K₄`-at-2 and present-colour reds) |
+| Kernel (priced): the 2-adic level-4 plane, one aperiodic table, the K-certificate drawing (`√11 ↦ ±√3`) | **changed**: level 4 as a table LIST (no aperiodic table exists); the drawing **declined with its price** (decision 7) |
+| Kernel (priced): the forcing half as `P₅ + edge` through the LRAT pipeline, declined if > a day | **priced at 4,068 LRAT lines and planned as a should** (K3), with the decline rule |
+| Tools: `fs38_tower.py`, records to m = 8 at 2, controls listed, UNSAT never a fact, the level-2 repaint at 11 as a record | **planned** (T), with a second solver on every refusal and the planted-gap control added |
+| Phase D candidates (i)–(iv) | **planned** (§S5) with Poros's negative (no local witness) as input |
+| Documents at the close (row 66, G54, G48, G31, re-rank, `CLOSED-QUESTIONS`, hunch ledger, bibliography, README) | **planned** (C), with two changes: FS-16 **closed** rather than kept; G54 stated one-directionally |
+| "Nothing here touches Separated; FS-16 stands" | **overturned** by D0.4 (measured SAT at 11 and 19) |
+| "de Grey's own forced pairs" as the tower's retrodiction | **dropped** (§S4 item 3) |
+| "reproduce M56's depth-3 fact" | **changed** to "bound K-fabric forcing to depth ≥ 4; depth 2 explained; depths 4–5 unexplained" (§S4) |
+| Units fixed once | **done** (§S1) |
+
+
+### §S10. The skeleton — every signature and full statement, `sorry` at every leaf, elaborating
+
+Built through `./scripts/build.sh` (never `lake build`): **`build: OK — 170 of 170 batches`** (2026-09-13, the final
+run after three one-line fixes: a self-referential name inside a `UDCert.` theorem body, two `noncomputable` markers on
+`PadicInt`-dependent definitions, and a NAMED `Fact (Nat.Prime 19)` instance so the root import does not collide with
+`PlaneFreedom`'s anonymous one). Registered in `Proofs.lean`; `scripts/build_order.py` reads imports and needs no
+telling. Six modules, 48 `sorry` leaves, listed by module with what closes each (the obligation pass, §M2, refines):
+
+| module | imports | declarations (leaf = `sorry`) |
+|---|---|---|
+| `Proofs/HadwigerNelson/FanGap.lean` | `ResidueObstruction`, `CoverageMono` | `FanGap` (def, decidable), `Slack`, `DoubleSlack` (defs); leaves: `FanGap.comap`, `exists_fanGap_iff_not_coverAtLeast`, `pullbackRepaint` (the `Coloring.mk` properness), `pullbackRepaint_apply_of_mem`, `…_of_not_mem`, `not_forces_of_fanGap`, `not_fan_of_fanGap`, `not_separated_of_fanGap_of_fanGap`, `Fan.image`, `Slack.of_hom`, `Slack.forces_eq`, `Slack.forces_iff`, `Slack.self_forces_iff`, `DoubleSlack.of_hom`, `separated_iff_adj_of_doubleSlack`, `FanGap.translate`, `slack_addCayley_of_fanGap`, `doubleSlack_of_hom_to_base`; closed by term: `Slack.unitQuadrance_of_ringHom`, `DoubleSlack.unitQuadrance_of_ringHom`, `unitQuadrance_forces_eq_of_ringHom`, `UDCert.forces_eq_of_slack`, `UDCert.separated_iff_adj_of_doubleSlack` |
+| `Proofs/HadwigerNelson/Instances/FanGap11.lean` | `FanGap`, `Instances/ResidueObstruction11`, `LocalGlobal`, `PlaneRotation`, `Mathlib…Padics.RingHoms` | leaves (`decide +kernel`): `finitePlane11_fanGap` (12 lookups), `finitePlane11_not_fanGap_zero` (red), `finitePlane11_doubleGap_proper` (121²), `finitePlane11_doubleGap` (22 lookups), `heule510_residue_zero_eq_475`; leaf (proof): `finitePlane11_exists_hom_to_base` (translate, then `rotHom` by the conjugate of `w − v`), `three_le_arityFloor_heule510`; closed by term: `finitePlane11_slack`, `finitePlane11_doubleSlack`, `forces_eq_of_hom_finitePlane11`, `forces_iff_of_hom_finitePlane11`, `separated_iff_adj_of_hom_finitePlane11`, `zmodPow11_forces_eq`, `padicInt11_forces_eq`, `padicInt11_separated_iff_adj`, `adjoin11PadicRes`, `adjoin11_padicInt11_forces_eq`, `UDCert.forces_eq_11`, `UDCert.separated_iff_adj_11`, `heule510_forces_eq`, `heule510_forces_iff`, `heule510_separated_iff_adj`, the two `example`s `¬ Forces … 5 0 475` and `¬ Forces … 5 19 59`; data: `finitePlane11DoubleGapTable` (121 entries, three `#guard`s) |
+| `Proofs/HadwigerNelson/Instances/FanGap19.lean` | `FanGap`, `Instances/LocalGlobal19`, `LocalGlobal`, Padics | leaves: `finitePlane19QuotColouring_proper` (`decide +kernel`, 361²), `finitePlane19_fanGap` (10 lookups); closed: `finitePlane19_slack`, `forces_eq_of_hom_finitePlane19`, `zmodPow19_forces_eq`, `padicInt19_forces_eq`. No virtual-edge half (decision 10) |
+| `Proofs/HadwigerNelson/TwoAdicTower.lean` | `ResidueObstruction`, `LocalGlobal` | `TwoAdicLevel` (abbrev; three `rfl` identities at levels 1, 4, 5), `twoAdicNormRe/Pi`, `twoAdicCircle` (decidable), `twoAdicPlane` (decidable adjacency), `twoAdicConj`, `twoAdicOmega` (additive homs, proved), `twoAdicLevelMap`; `example`s **passing**: `\|S_1\| = 3`, `\|S_2\| = 6`, `\|S_3\| = 12` by `decide`; leaves: `twoAdicCircle_four_card` (24), `twoAdicCircle_five_card` (48), `twoAdicOmega_mem_circle`, `twoAdicConj_mem_circle`, `twoAdicOmegaHom` (`map_rel'`), `twoAdicLevelMap_mem_circle`, `twoAdicLevelHom` (`map_rel'`), `twoAdicPlane_one_no_fanGap` (the level-one `K₄` control, `decide` over 256 functions) |
+| `Proofs/HadwigerNelson/Instances/TwoAdicFour.lean` | `TwoAdicTower`, `FanGap` | data: `twoAdicFourTable₁…₅` (the five 256-entry tables of `data/fs38/p4-tables.json`, two `#guard`s), `twoAdicFourTables`; leaves: `twoAdicFourTables_proper` (`decide`), `twoAdicFourTables_cover` (`decide`, 255 × 5 × 256), `twoAdicFour_forces_iff` (`Forces.eq_of_forall_exists_not_periodic` + `forces_iff_forces_zero_sub`), `twoAdicFour_not_slack` (from level five, §S3 P-A3) |
+| `Proofs/HadwigerNelson/Instances/TwoAdicFive.lean` | `Instances/TwoAdicFour`, `FanGap` | `twoAdicFiveDelta`, `twoAdicFiveDelta_ne_zero` (`decide`, closed); leaves: `twoAdicFiveDelta_mem_ker` (`decide`), `twoAdicFive_ker_eq` (`decide`), **`twoAdicFive_not_colorable_with_edge`** (the LRAT refusal through the M05 pipeline — K3's one solver-dependent leaf; if declined, this theorem and the two below it are removed, never left as `sorry`), `twoAdicFive_forces_delta`, `twoAdicFive_forces_of_ker` (the `ω`-orbit via `Forces.map (twoAdicOmegaHom 5)`), `twoAdicFive_not_forces_of_ne` (pullback of a level-four table along `twoAdicLevelHom 4`), `twoAdicFive_forces_iff`, `twoAdicFive_forces_iff'`, `twoAdicFive_not_slack` |
+
+**Inhabitants for the vacuity gate** (every theorem whose hypothesis is a structure): `finitePlane11Colouring.toColoring`,
+`finitePlane11DoubleGapColoring`, `finitePlane19QuotColoring` (the `Coloring` binders of the instance theorems);
+`FanGap.lean`'s theorems bind `C : P.Coloring (Fin k)` parametrically (`GENERIC`); the reds: `finitePlane11_not_fanGap_zero`
+and `twoAdicPlane_one_no_fanGap`. **Read aloud against §S2:** `not_forces_of_fanGap` is D0.2; `separated_iff_adj_of_doubleSlack`
+is D0.4 with `hc` kept; `UDCert.forces_eq_11`/`heule510_forces_eq` are D0.5's certificate and witness forms;
+`twoAdicFive_forces_iff` is §S3's law at its threshold.
+
+**Data files to commit with the implementation** (not yet under `data/fs38/`): `doublegap-p11-k5.json`,
+`doublegap-p19-k5.json`, `p4-tables.json` — regenerated by `tools/fs38_tower.py` and re-verified before they are records;
+the planner's scratch copies are provenance only.
