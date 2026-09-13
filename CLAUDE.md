@@ -1133,6 +1133,17 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
+**A hypothesis is not checked by being MENTIONED** (2026-09-12). An engineer proved a two-case theorem whose
+load-bearing hypothesis it had just finished arguing for — `√(4n−1) ∉ K`, without which the arena lies in
+`K²` and Theorem B four-colours it — then tested the theorem out of sample at `n = 3`, where `4n−1 = 11` and
+`√11 ∈ K` **by definition of the field**. The prediction was void, not met. **And it had written the fact
+down**: that `n = 3`'s radicand lies in `K` was in its notes, **filed under the wrong gate** — recorded as
+"so this member can never reach five colours", a fact about the *member*, when the operative consequence was
+"so my law does not apply here", a fact about the *instrument*. **The same true sentence under the wrong
+heading becomes a note instead of a blocker.** So a hypothesis is checked only by being *evaluated at the
+instance*, and the cheap habit is to re-read every hypothesis against the test case immediately before
+believing an out-of-sample result — which is precisely when the result is most wanted and least examined.
+
 **And a mutation harness must verify its own RESTORE** (2026-09-12). One broke *itself* through CPython's
 bytecode cache: the cache's identity for a source file is `(size, mtime in whole seconds)`, so a **same-size
 mutation written inside one second** left the interpreter executing **mutated bytecode against a restored
