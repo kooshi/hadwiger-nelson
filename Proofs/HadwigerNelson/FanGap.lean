@@ -73,15 +73,65 @@ def PairwiseFusable (P : SimpleGraph W) (k : ℕ) : Prop := ∀ v w, Fusable P k
 
 /-- **Gaps pull back** (the brief's A′): the neighbours of `u` map into the neighbours of `f u`. -/
 theorem FanGap.comap (f : G →g P) {C : P.Coloring (Fin k)} {u : V} {γ : Fin k}
-    (h : FanGap C (f u) γ) : FanGap (C.comap f) u γ := by
-  sorry
+    (h : FanGap C (f u) γ) : FanGap (C.comap f) u γ :=
+  ⟨h.1, fun w hw => h.2 (f w) (f.map_adj hw)⟩
 
 /-- The bridge to the record's coverage vocabulary: a gap at `v` in some colouring is exactly the failure of
 `CoverAtLeast P k v [] (k − 1)` — `C v` is never on `N(v)`, so the neighbourhood shows at most `k − 1` colours, and
 shows fewer iff some other colour is missing. -/
 theorem exists_fanGap_iff_not_coverAtLeast (v : W) :
     (∃ (C : P.Coloring (Fin k)) (γ : Fin k), FanGap C v γ) ↔ ¬ CoverAtLeast P k v [] (k - 1) := by
-  sorry
+  constructor
+  · rintro ⟨C, γ, hγ, hgap⟩ hcov
+    -- Two distinct colours exist, so `2 ≤ k`.
+    have hk : 2 ≤ k := by
+      have h1 : (γ : ℕ) ≠ ((C v : Fin k) : ℕ) := fun hh => hγ (Fin.ext hh)
+      have := γ.isLt
+      have := (C v).isLt
+      omega
+    -- Neither `γ` nor `C v` is shown on `N(v)`.
+    have hmem : ∀ c ∈ coverColors P v [] C, ∃ w, P.Adj v w ∧ C w = c := by
+      intro c hc
+      simp only [coverColors, Finset.mem_filter, Finset.mem_univ, true_and,
+        List.not_mem_nil, or_false] at hc
+      exact hc
+    have h1 : γ ∉ coverColors P v [] C := by
+      intro hc
+      obtain ⟨w, hw, hcw⟩ := hmem _ hc
+      exact hgap w hw hcw
+    have h2 : (C v : Fin k) ∉ coverColors P v [] C := by
+      intro hc
+      obtain ⟨w, hw, hcw⟩ := hmem _ hc
+      exact C.valid hw hcw.symm
+    have h3 : γ ∉ insert (C v) (coverColors P v [] C) := by
+      simp only [Finset.mem_insert, not_or]
+      exact ⟨hγ, h1⟩
+    have hcard : (insert γ (insert (C v) (coverColors P v [] C))).card
+        = (coverColors P v [] C).card + 2 := by
+      rw [Finset.card_insert_of_notMem h3, Finset.card_insert_of_notMem h2]
+    have hle : (insert γ (insert (C v) (coverColors P v [] C))).card ≤ k := by
+      simpa [Fintype.card_fin] using Finset.card_le_univ
+        (insert γ (insert (C v) (coverColors P v [] C)))
+    have := hcov C
+    omega
+  · intro h
+    simp only [CoverAtLeast, not_forall, not_le] at h
+    obtain ⟨C, hC⟩ := h
+    have hlt : (insert (C v) (coverColors P v [] C)).card < k := by
+      have := Finset.card_insert_le (C v) (coverColors P v [] C)
+      omega
+    have hex : ∃ γ : Fin k, γ ∉ insert (C v) (coverColors P v [] C) := by
+      by_contra hall
+      push Not at hall
+      have huniv : insert (C v) (coverColors P v [] C) = Finset.univ :=
+        Finset.eq_univ_iff_forall.mpr hall
+      rw [huniv, Finset.card_univ, Fintype.card_fin] at hlt
+      omega
+    obtain ⟨γ, hγ⟩ := hex
+    simp only [Finset.mem_insert, not_or] at hγ
+    refine ⟨C, γ, hγ.1, fun w hw hcw => hγ.2 ?_⟩
+    simp only [coverColors, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨w, Or.inl hw, hcw⟩
 
 /-! ### The repaint -/
 
@@ -93,33 +143,50 @@ homomorphism. `γ ≠ C (f u)` is NOT needed here — only for the separations t
 noncomputable def pullbackRepaint (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
     (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k) :=
   Coloring.mk (U.piecewise (fun _ => γ) (⇑C ∘ f)) (by
-    sorry)
+    intro x y hxy
+    by_cases hx : x ∈ U
+    · by_cases hy : y ∈ U
+      · exact absurd hxy (hind hx hy (G.ne_of_adj hxy))
+      · rw [Set.piecewise_eq_of_mem _ _ _ hx, Set.piecewise_eq_of_notMem _ _ _ hy]
+        exact fun heq => hgap x hx (f y) (f.map_adj hxy) heq.symm
+    · by_cases hy : y ∈ U
+      · rw [Set.piecewise_eq_of_notMem _ _ _ hx, Set.piecewise_eq_of_mem _ _ _ hy]
+        exact fun heq => hgap y hy (f x) (f.map_adj hxy.symm) heq
+      · rw [Set.piecewise_eq_of_notMem _ _ _ hx, Set.piecewise_eq_of_notMem _ _ _ hy]
+        exact C.valid (f.map_adj hxy))
 
+open Classical in
 theorem pullbackRepaint_apply_of_mem (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
     (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
     {x : V} (hx : x ∈ U) : pullbackRepaint f C U γ hind hgap x = γ := by
-  sorry
+  show U.piecewise (fun _ => γ) (⇑C ∘ f) x = γ
+  exact Set.piecewise_eq_of_mem _ _ _ hx
 
+open Classical in
 theorem pullbackRepaint_apply_of_not_mem (f : G →g P) (C : P.Coloring (Fin k)) (U : Set V) (γ : Fin k)
     (hind : G.IsIndepSet U) (hgap : ∀ u ∈ U, ∀ w, P.Adj (f u) w → C w ≠ γ)
     {x : V} (hx : x ∉ U) : pullbackRepaint f C U γ hind hgap x = C (f x) := by
-  sorry
+  show U.piecewise (fun _ => γ) (⇑C ∘ f) x = C (f x)
+  exact Set.piecewise_eq_of_notMem _ _ _ hx
 
 /-- The singleton repaint: `C ∘ f` with `u` overwritten by a colour absent from `N(f u)`. The stepping stone for the
 pair and fan theorems. -/
 noncomputable def repaintAt (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
     (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : G.Coloring (Fin k) :=
   pullbackRepaint f C {u} γ (Set.pairwise_singleton _ _) (by
-    sorry)
+    intro x hx w hw
+    rw [Set.mem_singleton_iff] at hx
+    subst hx
+    exact hgap w hw)
 
 @[simp]
 theorem repaintAt_apply_self (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
-    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : repaintAt f C u γ hgap u = γ := by
-  sorry
+    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) : repaintAt f C u γ hgap u = γ :=
+  pullbackRepaint_apply_of_mem _ _ _ _ _ _ rfl
 
 theorem repaintAt_apply_of_ne (f : G →g P) (C : P.Coloring (Fin k)) (u : V) (γ : Fin k)
-    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) {x : V} (hx : x ≠ u) : repaintAt f C u γ hgap x = C (f x) := by
-  sorry
+    (hgap : ∀ w, P.Adj (f u) w → C w ≠ γ) {x : V} (hx : x ≠ u) : repaintAt f C u γ hgap x = C (f x) :=
+  pullbackRepaint_apply_of_not_mem _ _ _ _ _ _ hx
 
 /-! ### The three uses -/
 
@@ -128,45 +195,76 @@ separates `u` from `u'`, or `C (f u) = C (f u')` and the repaint of `{u}` with `
 colour `C (f u') = C (f u) ≠ γ`. No case split on whether `f u = f u'`, no hypothesis on `P` beyond the one gap. -/
 theorem not_forces_of_fanGap (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}
     (h : FanGap C (f u) γ) (hne : u ≠ u') : ¬ Forces G k u u' := by
-  sorry
+  intro hF
+  by_cases hc : C (f u) = C (f u')
+  · have hrep := hF (repaintAt f C u γ h.2)
+    rw [repaintAt_apply_self, repaintAt_apply_of_ne f C u γ h.2 hne.symm] at hrep
+    exact h.1 (hrep.trans hc.symm)
+  · exact hc (hF (C.comap f))
 
 /-- **The arity-`k` filter (D0.3).** A fan at `p` over `Q` dies when some gapped colouring has every partner's image off
 the gap colour: repaint `{p}`, and no partner shows `γ`. A class with a partner on the gap colour in every gapped
 colouring survives — G15's wide pigeonholes are not touched. -/
 theorem not_fan_of_fanGap (f : G →g P) {C : P.Coloring (Fin k)} {p : V} {Q : List V} {γ : Fin k}
     (h : FanGap C (f p) γ) (hQ : ∀ q ∈ Q, q ≠ p ∧ C (f q) ≠ γ) : ¬ Fan G k p Q := by
-  sorry
+  intro hfan
+  obtain ⟨q, hq, hcq⟩ := hfan (repaintAt f C p γ h.2)
+  obtain ⟨hqp, hcγ⟩ := hQ q hq
+  rw [repaintAt_apply_self, repaintAt_apply_of_ne f C p γ h.2 hqp] at hcq
+  exact hcγ hcq.symm
 
 /-- **The double repaint (D0.4).** One colour absent from both closed neighbourhoods of `f u` and `f u'`, and `u ≁ u'`:
 repainting `{u, u'}` with `γ` is proper and makes the pair coincide, so it is no virtual edge. The case `f u = f u'` is
 included (then a single gap already serves). -/
 theorem not_separated_of_sharedGap (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}
     (h : SharedGap C (f u) (f u') γ) (hadj : ¬ G.Adj u u') : ¬ Separated G k u u' := by
-  sorry
+  intro hS
+  have hind : G.IsIndepSet ({u, u'} : Set V) :=
+    Set.pairwise_pair.mpr fun _ => ⟨hadj, fun ha => hadj ha.symm⟩
+  have hgap : ∀ x ∈ ({u, u'} : Set V), ∀ w, P.Adj (f x) w → C w ≠ γ := by
+    intro x hx w hw
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
+    rcases hx with rfl | rfl
+    · exact h.1.2 w hw
+    · exact h.2.2 w hw
+  have hco := hS (pullbackRepaint f C {u, u'} γ hind hgap)
+  rw [pullbackRepaint_apply_of_mem _ _ _ _ _ _ (by simp),
+    pullbackRepaint_apply_of_mem _ _ _ _ _ _ (by simp)] at hco
+  exact hco rfl
 
 /-- A fusable image and a non-edge: the pair coincides in some colouring of `G` — pull back the coincidence, or
 double-repaint the shared gap. -/
 theorem not_separated_of_fusable (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u'))
     (hadj : ¬ G.Adj u u') : ¬ Separated G k u u' := by
-  sorry
+  obtain ⟨C, hc | ⟨γ, hγ⟩⟩ := h
+  · exact fun hS => hS (C.comap f) hc
+  · exact not_separated_of_sharedGap f hγ hadj
 
 /-- **A fan's image is a fan** — `Forces.image`'s one-line proof, at every arity (Poros, FS-38). -/
 theorem Fan.image (f : G →g P) {p : V} {Q : List V} (h : Fan G k p Q) : Fan P k (f p) (Q.map f) := by
-  sorry
+  intro C
+  obtain ⟨q, hq, hcq⟩ := h (C.comap f)
+  exact ⟨f q, List.mem_map_of_mem hq, hcq⟩
 
 /-! ### Slackness is hereditary, and it is forces-freeness -/
 
 /-- Slackness passes from `P` to every graph with a homomorphism into `P` — no surjectivity. -/
 theorem Slack.of_hom (f : G →g P) (h : Slack P k) : Slack G k := by
-  sorry
+  intro v
+  obtain ⟨C, γ, hgap⟩ := h (f v)
+  exact ⟨C.comap f, γ, hgap.comap f⟩
 
 /-- **Corollary (a) of D0.2**: a slack graph has no forced pair — forced equal is equal. The brief's Lemma B without
 its first hypothesis: forces-freeness is a consequence of slackness, not a premise. -/
 theorem Slack.forces_eq (h : Slack G k) {u u' : V} (hf : Forces G k u u') : u = u' := by
-  sorry
+  by_contra hne
+  obtain ⟨C, γ, hgap⟩ := h u
+  exact not_forces_of_fanGap Hom.id hgap hne hf
 
 theorem Slack.forces_iff (h : Slack G k) {u u' : V} : Forces G k u u' ↔ u = u' := by
-  sorry
+  refine ⟨fun hf => h.forces_eq hf, ?_⟩
+  rintro rfl
+  exact fun _ => rfl
 
 /-- The hom form, for the instances: a graph mapping into a slack target has no forced pair. -/
 theorem Slack.forces_eq_of_hom (h : Slack P k) (f : G →g P) {u u' : V} (hf : Forces G k u u') : u = u' :=
@@ -177,12 +275,16 @@ theorem Slack.forces_iff_of_hom (h : Slack P k) (f : G →g P) {u u' : V} : Forc
 
 /-- Fusability pulls back along homomorphisms: a coincidence pulls back, and so do both gaps (`FanGap.comap`). -/
 theorem Fusable.of_hom (f : G →g P) {u u' : V} (h : Fusable P k (f u) (f u')) : Fusable G k u u' := by
-  sorry
+  obtain ⟨C, hc | ⟨γ, hγ⟩⟩ := h
+  · exact ⟨C.comap f, Or.inl hc⟩
+  · exact ⟨C.comap f, Or.inr ⟨γ, hγ.1.comap f, hγ.2.comap f⟩⟩
 
 /-- A pair no colouring separates is fusable (it coincides). This is how M60's `finitePlane11_separated_iff` feeds
 `Fusable` at the non-adjacent pairs. -/
 theorem fusable_of_not_separated {v w : W} (h : ¬ Separated P k v w) : Fusable P k v w := by
-  sorry
+  simp only [Separated, not_forall, not_not] at h
+  obtain ⟨C, hC⟩ := h
+  exact ⟨C, Or.inl hC⟩
 
 theorem PairwiseFusable.of_hom (f : G →g P) (h : PairwiseFusable P k) : PairwiseFusable G k :=
   fun u u' => Fusable.of_hom f (h (f u) (f u'))
@@ -191,7 +293,9 @@ theorem PairwiseFusable.of_hom (f : G →g P) (h : PairwiseFusable P k) : Pairwi
 adjacent. One hypothesis; it carries its own colouring, so no colourability or `k ≥ 1` premise is needed. -/
 theorem PairwiseFusable.separated_iff_adj (h : PairwiseFusable G k) {u u' : V} :
     Separated G k u u' ↔ G.Adj u u' := by
-  sorry
+  refine ⟨fun hS => ?_, Separated.of_adj⟩
+  by_contra hadj
+  exact not_separated_of_fusable Hom.id (h u u') hadj hS
 
 /-- The hom form, for the instances: a graph mapping into a pairwise-fusable target has no virtual non-edge. -/
 theorem PairwiseFusable.separated_iff_adj_of_hom (h : PairwiseFusable P k) (f : G →g P) {u u' : V} :
@@ -205,7 +309,19 @@ its dependents). -/
 theorem three_le_arityFloor_of_forces_eq_of_separated_adj (hcol : G.Colorable k)
     (hf : ∀ u v, Forces G k u v → u = v) (hs : ∀ u v, Separated G k u v → G.Adj u v) :
     3 ≤ arityFloor G k := by
-  sorry
+  refine le_arityFloor_iff.mpr fun m ⟨T, q, hcomp⟩ => ?_
+  have h2 : (2 : ℕ∞) ≤ m := le_arityFloor_iff.mp (two_le_arityFloor hcol) m ⟨T, q, hcomp⟩
+  by_contra hlt
+  have hm : m = 2 := by
+    have h2' : 2 ≤ m := by exact_mod_cast h2
+    have h3' : m < 3 := by exact_mod_cast not_le.mp hlt
+    omega
+  subst hm
+  have hT : Function.Injective T := hcomp.1.1
+  by_cases hq : q 0 = q 1
+  · obtain ⟨hne, hsep⟩ := (compels_two_eq hT hq).mp hcomp
+    exact hne (hs _ _ hsep)
+  · exact absurd (hT (hf _ _ ((compels_two_ne hT hq).mp hcomp))) (by decide)
 
 /-! ### Cayley graphs: one gap is every gap -/
 
@@ -216,12 +332,24 @@ variable {A : Type*} [AddCommGroup A] {S : Set A}
 /-- A gap at `v` translates to a gap at `v − t` in the translated colouring `x ↦ C (t + x)`. -/
 theorem FanGap.translate {C : (addCayley S).Coloring (Fin k)} {v : A} {γ : Fin k} (h : FanGap C v γ)
     (t : A) : FanGap (C.comap (addCayleyTranslate S t)) (v - t) γ := by
-  sorry
+  have he : t + (v - t) = v := by abel
+  refine ⟨?_, ?_⟩
+  · show γ ≠ C (t + (v - t))
+    rw [he]
+    exact h.1
+  · intro w hw
+    show C (t + w) ≠ γ
+    refine h.2 (t + w) ?_
+    have h2 := (addCayley_adj_add_iff_right (d := t)).mpr hw
+    rwa [he] at h2
 
 /-- **One gapped vertex makes a Cayley graph slack.** -/
 theorem slack_addCayley_of_fanGap {C : (addCayley S).Coloring (Fin k)} {v : A} {γ : Fin k}
     (h : FanGap C v γ) : Slack (addCayley S) k := by
-  sorry
+  intro x
+  refine ⟨C.comap (addCayleyTranslate S (v - x)), γ, ?_⟩
+  have ht := h.translate (v - x)
+  rwa [sub_sub_cancel] at ht
 
 end Cayley
 
@@ -231,7 +359,10 @@ gap at `v, w` — the gap lands on `σ⁻¹(N[v₀] ∪ N[w₀]) = N[v] ∪ N[w]
 theorem fusable_of_hom_to_base {v₀ w₀ : W} {C : P.Coloring (Fin k)} {γ : Fin k}
     (h₀ : SharedGap C v₀ w₀ γ) (hσ : ∀ v w, P.Adj v w → ∃ σ : P →g P, σ v = v₀ ∧ σ w = w₀)
     {v w : W} (hvw : P.Adj v w) : Fusable P k v w := by
-  sorry
+  obtain ⟨σ, hv, hw⟩ := hσ v w hvw
+  have h1 : FanGap C (σ v) γ := by rw [hv]; exact h₀.1
+  have h2 : FanGap C (σ w) γ := by rw [hw]; exact h₀.2
+  exact ⟨C.comap σ, Or.inr ⟨γ, h1.comap σ, h2.comap σ⟩⟩
 
 /-! ### Rings and certificates -/
 
@@ -259,7 +390,23 @@ theorem unitQuadrance_forces_eq_of_ringHom [Nontrivial T] (φ : R →+* T) (h : 
 `(1, 0)` to `d`; its inverse sends `d` to `(1, 0)`). Nothing here is about a prime. -/
 theorem unitQuadrance_exists_hom_to_base {v w : R × R} (h : (unitQuadrance R).Adj v w) :
     ∃ σ : unitQuadrance R →g unitQuadrance R, σ v = (0, 0) ∧ σ w = (1, 0) := by
-  sorry
+  rw [unitQuadrance_adj] at h
+  obtain ⟨hne, hq⟩ := h
+  set d : R × R := -v + w with hd
+  have hq' : d.1 ^ 2 + (-d.2) ^ 2 = 1 := by
+    simp only [hd, Prod.fst_add, Prod.snd_add, Prod.fst_neg, Prod.snd_neg]
+    linear_combination hq
+  refine ⟨(rotHom hq').comp (addCayleyTranslate (unitCircle R) (-v)), ?_, ?_⟩
+  · show rotHom hq' (-v + v) = (0, 0)
+    rw [neg_add_cancel, rotHom_apply]
+    simp
+  · show rotHom hq' d = (1, 0)
+    rw [rotHom_apply, Prod.ext_iff]
+    refine ⟨?_, ?_⟩
+    · show d.1 * d.1 - -d.2 * d.2 = 1
+      linear_combination hq'
+    · show -d.2 * d.1 + d.1 * d.2 = 0
+      ring
 
 /-- **One shared-gap table at the base edge makes every edge fusable** — the recipe for any plane, at any prime. -/
 theorem unitQuadrance_fusable_of_sharedGap_base {C : (unitQuadrance R).Coloring (Fin k)} {γ : Fin k}
