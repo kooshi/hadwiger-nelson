@@ -1227,6 +1227,13 @@ built independently of c4.1's.
 **Both runs terminated at five hours without closing, within seven seconds of each other, and
 neither wrote its record.** Logs end mid-iteration with no verdict line and no traceback.
 
+> **Record note (review 2026-09-13).** The per-iteration numbers in this subsection come from `build/gate/m63/c4a.log`,
+> `c4b.log` and a checkpoint under `data/m62/ckpt/`, none of which was committed (`build/` is gitignored; the checkpoint
+> directory is ignored since `5c752e5`), so the `[504, 509]` bracket is a reading of uncommitted logs and is not
+> re-checkable from `data/`. Separately: the `his_recorded_move` field that `3e343e5` found FALSE is corrected only in
+> `data/m62/m63-map-A412.json`; `m63-sweep-protocol.json` (a frozen pre-registration, deliberately unedited) and the producer
+> `tools/parts_loop.py` still carry the old text — `data/m62/README.md` marks them.
+
 | | C4a (frame coset 1) | C4b (frame coset 2) |
 |---|---|---|
 | last iteration | 1576 | 1455 |

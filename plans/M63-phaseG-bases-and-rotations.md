@@ -499,7 +499,7 @@ ladder prices. Two consequences this plan commits to:
 
 1. **The census does not depend on it.** Filters 0–4 need no accumulator, no level set and no loop. A
    census over hundreds of rotations is affordable *because* it stops at a single refusal question.
-2. **The cost of *adopting* a rotation is the bootstrap, not the census** (P-G7), and it is **priced as of 2026-09-11** — four days under the current code against eleven minutes under the new engine, conditional on that engine being integrated. It was unpriced until
+2. **The cost of *adopting* a rotation is the bootstrap, not the census** (P-G7), and it is **priced as of 2026-09-11** — four days under the current code (re-measured the same night as **2.5 days** on a quiet CPU — the contended-wall figure is kept here as first written) against eleven minutes under the new engine, conditional on that engine being integrated. It was unpriced until
    the ladder lands. **This plan does not extrapolate the flat-cost measurement** (214 / 246 / 221 CPU
    seconds at 3 / 12 / 24 added points): that flatness is measured only to 24 added vertices on an
    instance with a bound already climbed, and manufacturing a first accumulator is the opposite regime.

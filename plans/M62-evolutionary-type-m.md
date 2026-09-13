@@ -710,6 +710,9 @@ squared radii; 46 s):
 
 - 762,129 radius pairs → **125,232 REJECTED-IN-K by Theorem B**, 123,785 admitting no rotation.
 - 2,042 raw radicands → **1,336 rotation classes** after merging by square class.
+- **SUPERSEDED (review 2026-09-13):** this count conflated field classes with rotations and was computed on the wrong
+  lattice; the exact enumeration (`tools/typem_exact.py`, `data/m62/rotations-exact-moser-r2.05.json`, `plans/STUB-consume-rotation-list.md`)
+  gives 10 rotation classes with `cos ∈ K`, 1 wall-breaking, 0 six-open. The original row is kept below for the record.
 - **412 of the 1,336 are type-M admissible** (≥ 2 radius families — Parts's *"the existence of
   triangles of the second kind is essential"*). Max families in any class: **31**.
 - **The record's own rotation is in the enumeration and carries both of its known kinds**: the
@@ -779,7 +782,8 @@ rotated `ρS` side, which is outside `K` by construction.
 float-propose/exact-dispose; **126 cross edges** in exactly Parts's three families — 30 reference at
 radius 2, 36 auxiliary at `(17±√33)/6`, 60 at the centre):
 
-> **NON-VACUITY GATE: `k = 4` UNSAT in 18 seconds. The arena is 5-chromatic.** Reduction can start.
+> **NON-VACUITY GATE: the solver refused `k = 4` in 18 seconds (solver-only, no certificate) — the arena is a 5-chromatic
+> CANDIDATE.** Reduction can start. *(Wording corrected at review 2026-09-13: a bare UNSAT is never a fact here.)*
 
 ### §R4 — Phase C: the reduction, in flight
 

@@ -273,8 +273,12 @@ census of both Heule witnesses at four colours, every vertex, zero unknown.**
 
 | | vertices | edges | whole graph at `k = 4` | deletions that still refuse | **vertex-critical** |
 |---|---|---|---|---|---|
-| Heule-510 | 510 | 2,504 | UNSAT | **0 of 510** | **yes** |
-| Heule-553 | 553 | 2,722 | UNSAT | **0 of 553** | **yes** |
+| Heule-510 | 510 | 2,504 | solver refused | **0 of 510** | **yes (solver-only)** |
+| Heule-553 | 553 | 2,722 | solver refused | **0 of 553** | **yes (solver-only)** |
+
+*Trust note (review 2026-09-13): the 1,065 deletion asks are solver refusals with no certificate, and no record of them was
+committed under `data/` — the table is the only artifact. "Vertex-critical" here means "every single deletion was refused
+by the solver, zero unknown", not a kernel fact.*
 
 The project held this only by sampling on de Grey's 1581 (`G10`, and its two "proven critical" edges
 have no witnesses on disk) and for Heule-510's centre alone (M31).

@@ -152,6 +152,16 @@ if [[ -n "${DECL}" ]]; then
   rows "${DECL}" | sed 's/^/    /'
 fi
 
+# A declaration the scanner could not telescope was not classified at all; the scan reports how many.
+# Zero is the only acceptable count — anything else is a check that could not run (review 2026-09-13).
+UNTEL="$(grep -oE 'untelescoped=[0-9]+' <<< "${RAW}" | tail -1 | cut -d= -f2)"
+if [[ -z "${UNTEL}" || "${UNTEL}" != "0" ]]; then
+  echo "==> vacuity: FAIL — ${UNTEL:-no} declaration(s) could not be telescoped and were not classified:"
+  grep -E '^UNTELESCOPED ' <<< "${RAW}" | sed 's/^/      /' || true
+  kept
+  exit 1
+fi
+
 # VACUOUS and STALE are unconditional failures and are checked BEFORE the baseline, so no
 # baseline entry can ever suppress them.
 HARD="$(grep -E '^(VACUOUS|STALE) ' <<< "${RAW}" || true)"
@@ -170,6 +180,18 @@ if [[ -n "${HARD}" ]]; then
 fi
 
 if [[ "${1:-}" == "--baseline" ]]; then
+  # The baseline may only SHRINK (review 2026-09-13): regenerating it must never absorb a new UNKNOWN.
+  # Anything not already listed is a regression to fix or to declare, not to baseline.
+  if [[ -f "${BASELINE}" ]]; then
+    NEW="$(comm -23 <(grep -E '^UNKNOWN ' <<< "${RAW}" | sort -u) <(grep -E '^UNKNOWN ' "${BASELINE}" | sort -u) || true)"
+    if [[ -n "${NEW}" ]]; then
+      echo "==> vacuity: FAIL — --baseline refused: $(count "${NEW}") UNKNOWN site(s) are not in the current baseline,"
+      echo "    and a baseline only ever shrinks. Fix the statement or declare the emptiness in its docstring:"
+      rows "${NEW}" | sed 's/^/      /'
+      kept
+      exit 1
+    fi
+  fi
   { echo "# Vacuity baseline — every (verdict, declaration) not yet resolved."
     echo "# The gate fails on any UNKNOWN not listed here. This file only ever SHRINKS,"
     echo "# and its target is EMPTY. VACUOUS and STALE can never appear here by construction:"

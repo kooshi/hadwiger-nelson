@@ -82,7 +82,8 @@ this file's `psiOne`. Either prime colours; `psiZero` is the one used.
 The residue-colouring method is Woodall's (1973) and Fischer's (1990); Theorem B, the location of
 the wall at `2`, and this proof's outline are the write-up's. Ours is the formalization, the
 parity descent that replaces the valuation theory, and the reading of the Moser spindle as an
-identity in the order.
+identity in the order. The general valuation-ring argument this instantiates is `[Madore2015]`'s
+Proposition 3.2 — see `ResidueColouring.lean` § Attribution.
 -/
 
 namespace HadwigerNelson

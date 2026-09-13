@@ -433,12 +433,18 @@ def audit : CommandElabM Unit := liftTermElabM do
   let mut rows : Array Row := #[]
   let mut scanned : Nat := 0
   let mut refutations : Nat := 0
+  let mut untelescoped : Nat := 0
   for (n, ci) in env.constants.toList do
     if n.isInternal || !isOurs env n then continue
     scanned := scanned + 1
     if ← (try forallTelescopeReducing ci.type fun _ c => pure (c.isConstOf ``False) catch _ => pure false) then
       refutations := refutations + 1
-    let carriers ← try carriersOf ci.type catch _ => pure #[]
+    -- A declaration whose type cannot be telescoped is NOT silently skipped (review 2026-09-13): it is
+    -- counted and named, and `vacuity.sh` fails on a nonzero count — a check that cannot run fails loud.
+    let carriers ← try carriersOf ci.type catch e => do
+      logWarning m!"UNTELESCOPED {n}: carriersOf failed ({e.toMessageData}); declaration not classified"
+      untelescoped := untelescoped + 1
+      pure #[]
     for (τ, shown) in carriers do
       -- Probe FIRST, always: a carrier that is demonstrably empty must be reported as such even
       -- when it is generic, so classification can never let a real vacuity escape. `generic` is
@@ -479,7 +485,7 @@ def audit : CommandElabM Unit := liftTermElabM do
   -- Accounting, because an unexplained change in the site count is exactly the failure mode
   -- `D1` was: a silently disabled arm that still printed a plausible report.
   logInfo m!"=== SCANNED === declarations={scanned} refutations-skipped={refutations}"
-  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} generic={count .generic} unknown={count .unknown}"
+  logInfo m!"=== TOTALS === sites={rows.size} vacuous={count .vacuous} stale={count .stale} declared={count .declared} witnessed={count .witnessed} generic={count .generic} unknown={count .unknown} untelescoped={untelescoped}"
 
 end VacuityAudit
 

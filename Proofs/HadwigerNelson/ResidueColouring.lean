@@ -128,7 +128,9 @@ reports a mismatch against `↥?m`. `cosetResidue` is noncomputable: one coset r
 The residue-colouring method is Woodall's (1973) and Fischer's (1990); Theorem A is
 `plans/FIELD-WALL-THEOREM.md`'s. Ours is the formalization, and the observation that the number
 field, the prime and the valuation are three separable hypotheses of which the proof uses only the
-third, and only through `mem_or_inv_mem`.
+third, and only through `mem_or_inv_mem`. The valuation-ring form itself is `[Madore2015]`'s
+Proposition 3.2 (found after this module was written; `BIBLIOGRAPHY.md` records that his proof is
+the one formalized here), and the statement it generalizes is his Proposition 3.9.
 -/
 
 namespace HadwigerNelson
