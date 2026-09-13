@@ -542,9 +542,48 @@ def clique_assumptions(cay: Cay, k: int):
     return [var(v, i, k) for i, v in enumerate(verts) if i < k]
 
 
+class SecondOpinion:
+    """Every refusal re-asked on a different ENGINE and a different ENCODING.
+
+    The encoding matters more than the engine. The primary ask pins `C 0 = 0, C δ = 1` and leans on palette symmetry —
+    an argument, not a measurement. This one asks the `k(k−1)` ordered colour pairs separately: `C 0 = c ∧ C δ = c'`
+    for every `c ≠ c'`. All of them refusing is "no proper colouring gives the pair different colours" with **no appeal
+    to palette symmetry at all**, so the refusal no longer rests on that argument.
+
+    Built once per level rather than once per refusal: the earlier shape rebuilt the whole formula for each refused
+    difference, which at level 7 is 63 rebuilds of a 6.4 M-clause formula (~25 s each, nothing printed) and at level 8
+    would be a 50 M-clause formula per refusal. One build, then `k(k−1)` incremental solves each."""
+
+    def __init__(self, cay: Cay, k: int, engine: str = SECOND_ENGINE):
+        from pysat.solvers import Solver
+        self.cay, self.k, self.engine = cay, k, engine
+        t0 = time.time()
+        self.s = Solver(name=engine)
+        for v in range(cay.n):
+            self.s.add_clause([var(v, c, k) for c in range(k)])
+        for c1 in range(k):
+            for c2 in range(c1 + 1, k):
+                for v in range(cay.n):
+                    self.s.add_clause([-var(v, c1, k), -var(v, c2, k)])
+        for a, b in zip(cay.u.tolist(), cay.v.tolist()):
+            for c in range(k):
+                self.s.add_clause([-var(a, c, k), -var(b, c, k)])
+        self.build_seconds = round(time.time() - t0, 2)
+
+    def agrees(self, d: int) -> bool:
+        """True when every ordered colour pair refuses — the pair is forced, on the second engine and encoding."""
+        for c in range(self.k):
+            for c2 in range(self.k):
+                if c == c2:
+                    continue
+                if self.s.solve(assumptions=[var(0, c, self.k), var(d, c2, self.k)]):
+                    return False
+        return True
+
+
 def second_opinion(cay: Cay, k: int, extra_edge, engine: str = SECOND_ENGINE) -> bool:
-    """A refusal re-asked on a different ENGINE and a different ENCODING: instead of pinning `C 0 ≠ C d`, add the
-    edge `(0, d)` and ask plain colourability. Returns True when the second route also refuses."""
+    """The one-off form, kept for the self-test: add the edge `(0, d)` and ask plain colourability on the second
+    engine."""
     from pysat.solvers import Solver
     with Solver(name=engine) as s:
         for v in range(cay.n):
@@ -829,7 +868,12 @@ def cmd_forced(a):
             ss[i] = ss[r]
     # every refusal: a second engine, a second encoding, and the palette control
     refused = []
-    for d in [i for i in todo if fs[i] == "R"]:
+    ref_list = [i for i in todo if fs[i] == "R"]
+    SO = SecondOpinion(cay, k) if (ref_list and cay.n <= a.second_below) else None
+    if SO:
+        print(f"  second opinion: {SO.engine} built in {SO.build_seconds}s; {len(ref_list)} refusals to re-ask, "
+              f"{k * (k - 1)} ordered colour pairs each", flush=True)
+    for nth, d in enumerate(ref_list, 1):
         pal = []
         for c in range(2, k):
             s2, _ = A.free(d, colour=c)
@@ -837,12 +881,15 @@ def cmd_forced(a):
         if any(pal):
             raise SystemExit(f"HALT: palette symmetry broken at level {m}, difference {d}: pinning colour 1 refused "
                              f"while another colour succeeded ({pal})")
-        agree = second_opinion(cay, k, (0, d)) if cay.n <= a.second_below else None
+        agree = SO.agrees(d) if SO else None
+        if nth % 8 == 0 or nth == len(ref_list):
+            print(f"    refusals re-asked: {nth}/{len(ref_list)} [{time.time() - t0:.0f}s]", flush=True)
         refused.append(dict(index=d, tuple=list(cay.tuple_of(d)), depth=level_depth(m, cay.tuple_of(d)),
                             orbit=orb[d], orbit_size=sum(1 for x in orb if x == orb[d]),
                             verdict=REFUSED,
                             second_engine=(SECOND_ENGINE if agree is not None else None),
-                            second_encoding="P_m + edge (0, δ) is not 4-colourable",
+                            second_encoding=f"every one of the {k * (k - 1)} ordered colour pairs (C 0 = c, C δ = c′) "
+                                            f"refused separately — no appeal to palette symmetry",
                             second_agrees=agree,
                             palette_control_all_refused=(not any(pal)),
                             palette_control_reads="a HALT, not a measurement: pinning C 0 = 0, C δ = 1 loses nothing "
@@ -1136,10 +1183,14 @@ def cmd_doublegap(a):
                found=found, committed_table=committed, single_gaps=single, controls=controls,
                seconds=round(time.time() - t0, 1),
                claim_scope="a found table is a colouring verified here proper on every edge with the named colour "
-                           "absent on every vertex of the two closed neighbourhoods — that is `DoubleSlack`'s witness "
-                           "at the base edge, and by translation and rotation (row 60) at every edge. A 'none' would "
-                           "be one solver's UNSAT and is written as refused. The committed literal is re-verified "
-                           "here, with a flipped entry as the planted red.")
+                           "absent on every vertex of the two closed neighbourhoods — that is the witness of "
+                           "`SharedGap` at the base edge (`finitePlane11_sharedGap`), which "
+                           "`unitQuadrance_fusable_of_sharedGap_base` transports to every edge by translation and "
+                           "rotation (row 60) and `finitePlane11_pairwiseFusable` assembles, consumed by "
+                           "`PairwiseFusable.separated_iff_adj`. (The skeleton's `DoubleSlack` and "
+                           "`separated_iff_adj_of_doubleSlack` were renamed by the domain-modeling pass; these are "
+                           "the names that shipped.) A 'none' would be one solver's UNSAT and is written as refused. "
+                           "The committed literal is re-verified here, with a flipped entry as the planted red.")
     DATA.mkdir(parents=True, exist_ok=True)
     path = Path(a.out) if a.out else DATA / f"doublegap-p{p}-k{k}.json"
     path.write_text(json.dumps(rec, indent=1))
@@ -1749,7 +1800,7 @@ def main():
     f.add_argument("--m", type=int, required=True)
     f.add_argument("--orbits", action="store_true", help="ask one representative per automorphism orbit")
     f.add_argument("--all-below", type=int, default=20000, help="ask every difference when n is below this")
-    f.add_argument("--second-below", type=int, default=40000, help="second-engine re-ask when n is below this")
+    f.add_argument("--second-below", type=int, default=70000, help="second-engine re-ask when n is below this")
     f.add_argument("--separated", action="store_true", default=True)
     f.add_argument("--no-separated", dest="separated", action="store_false")
     f.add_argument("--ckpt-every", type=int, default=250)

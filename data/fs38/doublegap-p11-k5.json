@@ -85,5 +85,5 @@
   }
  ],
  "seconds": 0.2,
- "claim_scope": "a found table is a colouring verified here proper on every edge with the named colour absent on every vertex of the two closed neighbourhoods \u2014 that is `DoubleSlack`'s witness at the base edge, and by translation and rotation (row 60) at every edge. A 'none' would be one solver's UNSAT and is written as refused. The committed literal is re-verified here, with a flipped entry as the planted red."
+ "claim_scope": "a found table is a colouring verified here proper on every edge with the named colour absent on every vertex of the two closed neighbourhoods \u2014 that is the witness of `SharedGap` at the base edge (`finitePlane11_sharedGap`), which `unitQuadrance_fusable_of_sharedGap_base` transports to every edge by translation and rotation (row 60) and `finitePlane11_pairwiseFusable` assembles, consumed by `PairwiseFusable.separated_iff_adj`. (The skeleton's `DoubleSlack` and `separated_iff_adj_of_doubleSlack` were renamed by the domain-modeling pass; these are the names that shipped.) A 'none' would be one solver's UNSAT and is written as refused. The committed literal is re-verified here, with a flipped entry as the planted red."
 }

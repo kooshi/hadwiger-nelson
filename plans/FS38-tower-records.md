@@ -29,6 +29,18 @@ nothing at all below level 5 — and that no level has a fan gap.
 a refusal. "plant" is the gap ask's planted control: edges deleted from vertex 0 to one colour class, which must
 lie strictly between 0 and the degree.*
 
+*Two cautions about the seconds column, so nobody reads it as a cost law.* **Level 7's figure is the resumed
+segment only** — that run was killed twice (incident 1, and once deliberately to replace its second-opinion
+loop) and each record's clock starts at its last launch, so 43.3 s covers 133 asks plus all 63 refusal
+re-asks, not 16,383 asks. The full level-7 ask pass measured about 25 minutes across the segments. *And the
+refusal re-asks stopped being the dominant cost mid-phase*: the first design rebuilt the whole formula on the
+second engine once per refused difference — 63 rebuilds of a 6.4 M-clause formula at level 7, with nothing
+printed for twenty minutes — and it was replaced by one build per level plus `k(k−1)` assumption solves per
+refusal, which also **removed the palette-symmetry argument from every refusal** (each of the 12 ordered
+colour pairs is refused separately, so no relabelling is appealed to). Level 7's 63 refusals were re-asked in
+seconds. Comparing the two designs' timings would compare two different populations, so the honest statement
+is the one just made: the new shape is cheaper *and* it asks a stronger question.
+
 | level `m` | vertices | degree | edges | fan gap | free | refused | the refused set | virtual edges (E+S) | derived | plant | s | peak GB |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | 4 | 3 | 6 | none (R) | 3 | 0 | — | 3 = 3E + 0S | n/a | 1/3 | 0.2 | 0.05 |
@@ -37,18 +49,19 @@ lie strictly between 0 and the degree.*
 | 4 | 256 | 24 | 3072 | none (R) | 255 | 0 | — | 24 = 24E + 0S | 24 (equal) | 8/24 | 0.2 | 0.05 |
 | 5 | 1024 | 48 | 24576 | none (R) | 1020 | 3 | depth 4: 3 | 96 = 48E + 48S | 96 (equal) | 16/48 | 2.8 | 0.07 |
 | 6 | 4096 | 96 | 196608 | none (R) | 4080 | 15 | depth 4: 12, depth 5: 3 | 384 = 96E + 288S | 384 (equal) | 32/96 | 216.5 | 0.2 |
+| 7 | 16384 | 192 | 1572864 | none (R) | 16320 | 63 | depth 4: 48, depth 5: 12, depth 6: 3 | 1536 = 192E + 1344S | 1536 (equal) | 64/192 | 43.3 | 1.21 |
 
 ### The predictions, scored
 
 | id | as registered in §S3 | verdict | trust word |
 |---|---|---|---|
-| **P-A1** — every difference of depth ≤ 3 is separated by some 4-colouring, at every level `m ≤ 8`, all differences asked | <!--PA1--> | **met** | the free half is a **verified colouring** per difference; the record keeps one per depth class, re-verified from the file by `recheck` |
-| **P-A2** — from level 5 on, every difference of depth ≥ 4 is forced | <!--PA2--> | **met** | **refused (solver, untrusted)**, with a second engine, a second encoding and a palette re-ask behind every refusal; kernel only through K3's LRAT at level 5 |
-| **P-A3** — no 4-colouring of any `P_m`, `m ≤ 8`, has a fan gap | <!--PA3--> | **met** | at levels ≤ 5 it is ONE solver claim, not six: a gap pulls up the tower to level 5 and contradicts the forced pair there, so the whole column rests on the level-5 refusal. Above 5 it is an independent consistency check with the planted control as its positive |
+| **P-A1** — every difference of depth ≤ 3 is separated by some 4-colouring, at every level `m ≤ 8`, all differences asked | **met at levels 1–6 on the complete population** — every one of the 4,095 differences at level 6 asked individually, 4,080 free with a verified colouring, and 16,320 of 16,383 at level 7; level 8 pending by orbits | met so far, NOT yet at its registered range (which is `m ≤ 8`) | the free half is a **verified colouring** per difference; the record keeps one per depth class, re-verified from the file by `recheck` |
+| **P-A2** — from level 5 on, every difference of depth ≥ 4 is forced | **met at levels 5 and 6** — 3 of 3 refused at level 5, 15 of 15 at level 6 (depth 4: 12, depth 5: 3) and **63 of 63 at level 7** (48 + 12 + 3), with nothing outside depth ≥ 4 refused anywhere; level 8 pending | met so far, NOT yet at its registered range | **refused (solver, untrusted)**, with a second engine, a second encoding and a palette re-ask behind every refusal; kernel only through K3's LRAT at level 5 |
+| **P-A3** — no 4-colouring of any `P_m`, `m ≤ 8`, has a fan gap | **met at levels 1–7**: no fan gap at any of them; level 8 pending | met so far, NOT yet at its registered range | at levels ≤ 5 it is ONE solver claim, not six: a gap pulls up the tower to level 5 and contradicts the forced pair there, so the whole column rests on the level-5 refusal. Above 5 it is an independent consistency check with the planted control as its positive |
 | **P-A4** — every 4-colouring of `P_m` has a nonzero period at every level `m ≥ 2` | not re-measured here beyond level 4, where it is the `tables` fact: **no aperiodic 4-colouring of `P₄` exists** (the solver's, with its SAT control) | partial | the refusal is the solver's; the 576 Latin-square count at level 2 is exhaustive and exact |
 | **P-A5** — the number of tables needed for `P₄`'s freeness is 2 or 3 | **met at 2**: one of the five committed tables (period group of size 8) plus one further colouring, both verified proper, period groups intersecting in `{0}` | **met** | verified colourings; the minimum is a **search result** — an upper bound, never a proof of minimality |
-| **P-A6** (the advisor's hunch) — for every `m ≥ 5` the forced set is exactly `{depth ≥ 4}`, which is the additive family's forced set | <!--PA6--> | **met at every level measured** | the free half verified, the forced half the solver's |
-| **the virtual-edge law** — derived by the advisor mid-phase and registered before the levels above 6 were read: given the depth-≥-4 forcing, every element of `S_m + 𝔓⁴` (the preimage of `S₄`, size `24·4^(m−4)`) is a virtual edge | <!--VE--> | **met** | the counts are exact set comparisons; the `S` half of each count is the solver's |
+| **P-A6** (the advisor's hunch) — for every `m ≥ 5` the forced set is exactly `{depth ≥ 4}`, which is the additive family's forced set | **met at levels 5, 6 and 7**: the forced set is exactly `{depth ≥ 4}\{0}` — `4^(m−4) − 1` differences, 3, 15 and 63 | met at every level measured (5, 6, 7) | the free half verified, the forced half the solver's |
+| **the virtual-edge law** — derived by the advisor mid-phase and registered before the levels above 6 were read: given the depth-≥-4 forcing, every element of `S_m + 𝔓⁴` (the preimage of `S₄`, size `24·4^(m−4)`) is a virtual edge | **met at levels 4, 5, 6 and 7**: 24, 96, 384, 1,536 virtual edges, equal to the derived set **element for element**, with the level-6 split 96 edges + 288 non-adjacent refusals. Level 6 is the **out-of-sample hit**: the law was derived from level 5's 96 and written into the advisor's record at 18:29, and the level-6 file was opened at 18:31. Level 7 was the second test and **hit 1,536 exactly** (192 edges + 1,344 non-adjacent refusals); level 8's target is 6,144 | met, with level 6 out of sample | the counts are exact set comparisons; the `S` half of each count is the solver's |
 
 ### The controls, and what each was seen to catch
 
@@ -77,6 +90,12 @@ are load-bearing, are listed.*
    rather than hidden: level 7's aggregate model hash covers only the models produced after the resume (it is
    provenance, and solver models are not reproducible across engines anyway), and the per-depth example
    colourings — which are the actual evidence — are re-verified from the file by `recheck`.
+   **And it reached outside my own process**: the advisor's tree-watch monitor was a shell loop whose command
+   line contained `tools/fs38_tower.py` because it was counting that file's lines, and it died in the same
+   window (18:39:51–18:40:36). So the pattern reached a process belonging to another agent, which I did not
+   know existed — the strongest form of the rule, and the reason it is not "be careful with patterns" but
+   "never match on a command line at all". This is the memory file's **sixth** instance of the `pkill -f`
+   failure, not the fifth.
 2. **A record was written under one control rule and a sibling under another.** The fan-gap record at 11 was
    produced before the "required exactly when a refusal is recorded" rule replaced an unconditional
    `required: True`, so for a few minutes the two primes' records disagreed about what was load-bearing. Caught
