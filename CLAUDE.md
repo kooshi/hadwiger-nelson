@@ -1138,6 +1138,20 @@ difference collapsed to zero and the lower bound caught it — where the natural
 (`planted < guarded`) would have gone silent about having lost its power to discriminate. **A plant asserted
 only as "the fault is detected" cannot report that it is no longer capable of detecting anything.**
 
+**A caveat you write and then step over is WORSE than one you never wrote** (2026-09-12). An advisor wrote
+*"this exhausts the additive twist family, not the twist family"* and then, in the same report, *"the 72
+off-diagonal edges are measurably load-bearing"* — the second sentence silently dropping the qualifier the
+first had just installed. The product owner amplified the headline twice, and it kept a dead object alive an
+extra day. **The caveat is what made the headline look audited.** So: after writing a scope qualifier, re-read
+the summary sentence against it, because the qualifier's presence is exactly what stops a reader applying one.
+
+**And the cheapest generator-image check there is: count your generator's free parameters against the
+problem's.** The same search ran over `{(C, π∘C)}` — **one** free parameter — where the solution space was
+`{(f, g)}`, which has **two**; the image was a measure-zero slice (24 × 24 against 144²) and the answer lived
+outside it. **Third instance in one milestone of a decisive zero from a generator that could not represent
+its target, every one with its positive control passing.** A parameter count is seconds and catches the whole
+class.
+
 **A TRUE explanation that fully accounts for the observation will stop you looking for a second one — and
 the second one may be the one about your own apparatus** (2026-09-12). An engineer proved a two-case theorem
 whose load-bearing hypothesis it had just finished arguing for — `√(4n−1) ∉ K`, without which the arena lies
