@@ -639,3 +639,103 @@ before building, which is the rule this phase has now been taught twice.**
 `CLAUDE.md` is at **146,433 of its 150,000-character budget**. Several of today's entries are candidates for
 compression at the next close; the budget is a ceiling and never a licence, and superseded text should come
 out whether or not there is room.
+
+---
+
+## §15 — The gauge measured: our field IS family-keeping, and GROWING MAKES RIGIDITY WORSE (2026-09-12)
+
+Record: `plans/M63-phaseH4-familykeeping.md`; evidence `data/m63/`.
+
+### The positive half
+
+**`ℚ(√3,√7,√11)` is family-keeping.** The `ρ₆₃` arena keeps **96 ℤ/5-homomorphisms exactly** — 24 colour
+partitions — over its **63 distinct unit directions**, with **0 of 63 directions 5-divisible**. By **complete
+enumeration of all `5⁸ = 390,625` maps**, which *is* the whole space, **so there is no generator gap** — the
+failure mode that has produced three false zeros in this milestone cannot occur here.
+
+**The family dial, by construction stage:** `48 → 2,304 → 240 → 96` (base · plus copy · plus 30 diagonal
+cross edges · plus 36 off-diagonal), with `2,304 = 48²` exactly. **By radius: flat at 96 from `r = 4.000` to
+`r = 5.000`, provably** — growth adds no direction and not one cross edge. **Shape is de Grey's (never dies),
+not `F₂₄₇`'s (collapse).**
+
+**D1's classifier, predicted then measured, and derived rather than lucky:** adjoining the copy is
+**272,298 of 272,298** unit vectors new-direction (48 of 48 distinct), **0 killers**; radius growth is
+**63 of 63** in-lattice, **0 killers**. The derivation: `ρ` moves every `K`-point outside `K²`, so the two
+`ℚ`-spans meet only at 0, and a unit vector with `u/5` in the module would need norm `1/25` where every norm
+lies in `(1/144)ℤ[√33]`.
+
+> **So *"the one field we hold that is both 6-open and family-keeping"* is false. There are two, and ours is
+> at half the degree — 8 against 16.**
+
+### The negative half, and it refutes the direction I accepted four hours ago
+
+On the **pure unit-distance graph, no cheats**:
+
+| | |
+|---|---|
+| `γ̄` | **1,118.0** (γ = 107,328 over the family; 26,832 over its 24 partitions) |
+| two-colour Kempe subgraphs **disconnected** | **960 of 960 — not one connected**, the best splitting into 33 components |
+| `γ̄` as the arena grows 51,133 → 79,657 → 121,381 | **1,118.0 → 1,380.0 → 1,700.0** |
+| what the whole cross structure (126 edges of 544,530, **0.023%**) is worth | **2.4% of `γ̄`** |
+
+> **GROWING MAKES THE GAUGE WORSE — up 52%.** Kooshi's premise was *"going to 6 means we need to make the
+> object as rigid as possible, which means growing."* **The first half stands; the second is refuted by
+> measurement on this object.**
+
+**The mechanism, stated as a reading rather than a derivation:** the only thing that closes the gauge is
+**cross edges** — 0.023% of the edges moving `γ̄` by 2.4%, roughly **100× the per-edge effect of base
+edges** — and **cross edges are capped at 126 by the endpoint bound, which is proved.** Radius growth adds
+rim material, and phase H3 measured this family's rim to be thin, so it adds components faster than it
+connects them. **The lever that works cannot be grown; the lever that can be grown works backwards.**
+
+### FS-6's P2: MET, at a factor of twenty — first test outside `K(√247)`
+
+From base-plus-copy (family 2,304, `γ̄ = 1,146.0`), the D1-clean thickenings take the family **below 100**
+with `γ̄` having fallen **2.4%** against the **50%** P2 says it will not reach. **Its author registered it at
+medium confidence expecting the principle to fail. It failed, on a second field, by twenty times.**
+
+**By the stub's own §7, that hands the question to FS-2 — what carries forcing without rigidity.**
+
+### The honest size, which was stated before the numbers arrived
+
+**No pure unit-distance graph in this project has ever been Kempe-closed, or had even ONE connected
+two-colour subgraph.** The sole `γ = 0` object is Exoo–Ismailescu's `{1,2}`-graph gauged **with** its 423
+non-unit edges. **Ours is now the largest pure unit-distance object ever gauged here, and it is 100% open.**
+
+### Two structural findings worth more than the verdict
+
+1. **The arena's additive family FACTORS the same way its refutation does.** An additive `k`-colouring is a
+   **pair** `(f, g)` of base colourings satisfying the cross-edge disequalities — **the `k = 5` twin of the
+   object's own `k = 4` refutation certificate** — costing a rank-4 enumeration instead of rank-8. The same
+   decomposition at both colour counts is a fact about type-M arenas, not about this object.
+2. **The circle's multiplier kills `k = 4` and is harmless at `k = 5`**: `t ≡ 0 (mod 4)` gives `φ(tu) = 0` in
+   every group of order 4. **That is phase H3's `4 | n` screen reached from the additive side** — two routes
+   to one mechanism.
+
+### Controls, and one incident
+
+Eight controls, all seen to do something. **Known positive reproduced first** (Heule-510's 3,456 → 96,
+identical fingerprints); the object rebuilt to its certificate on five counts; **zero shown reachable on the
+same object** (`k = 4` gives 288 → 0); **two-sided plant** (adding direction `5u` → 0 homs with the
+5-divisibility counter reading 1; adding `3u` → 96 unchanged).
+
+**Incident, and it is a hazard `CLAUDE.md` names.** The **shared scratch directory** held another agent's
+`additive.py`, and this agent's scripts put it on the module path — the *"loads two versions and identifies
+them by name"* trap, with the registry being `sys.modules`. **It was caught only because the foreign module
+lacked the class needed; had it had one, every number would have been wrong while printing normally.** Now
+guarded by a provenance assertion, provoked and seen to refuse. **G51 already says to isolate each agent's
+scratchpad because a shared temp directory is a covert channel; this is that rule firing for a second
+reason.**
+
+### A prediction of its own, scored not met
+
+It predicted the full arena's family would be **zero**; it is **96**. Its heuristic treated the 36
+off-diagonal constraints as independent — they cut by **2.5×, not 10⁻⁴**.
+
+### What it wants checked, and the asymmetry is stated correctly
+
+**That 96 counts the right set — that no unit direction is missing.** On this instrument **a missed direction
+removes a constraint and makes the family TOO LARGE, so here a positive is the fragile verdict and a
+refutation is the robust one** — the opposite of the usual asymmetry, and correctly identified. It verified
+all 96 against its own edge list (**0 monochromatic edges in 52,274,880 checks**); the cheap independent check
+is to rebuild the arena by another route and re-verify the stored homomorphisms against *that* edge list.

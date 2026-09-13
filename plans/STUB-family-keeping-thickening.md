@@ -76,6 +76,26 @@ runs on de Grey's field first.
 Medium. It is the only place M57's principle could apply; a negative closes the principle at five colours as a design
 route and hands the question back to FS-2 (what carries forcing without rigidity).
 
+> **P2 IS SCORED AND MET, 2026-09-12 — the first test of this stub outside `K(√247)`, and it MET at a factor
+> of twenty.** On `ℚ(√3,√7,√11)`'s `ρ₆₃` arena: starting from base-plus-copy (family 2,304, `γ̄ = 1,146.0`),
+> the D1-clean thickenings take the family to **96** — below the 100 threshold — with `γ̄` having fallen
+> **2.4%** against the 50% P2 says it will not reach. **Off by a factor of twenty.**
+>
+> **And the field question is settled in this stub's favour while the stub's own target dies.** `ℚ(√3,√7,√11)`
+> **IS family-keeping** — 96 ℤ/5-homomorphisms exactly by complete enumeration of all `5⁸` maps (no generator
+> gap), **0 of 63 unit directions 5-divisible**, flat at 96 from radius 4.000 to 5.000. Shape is **de Grey's
+> (never dies), not `F₂₄₇`'s (collapse)**. So *"the one field we hold that is both 6-open and
+> family-keeping"* is **false — there are two, and ours is at half the degree (8 against 16).**
+>
+> **But the slot is filled and the thing the slot was for is still empty**, and the gauge moves the WRONG
+> WAY: on the **pure unit-distance graph, no cheats**, `γ̄ = 1,118.0`, with **960 of 960 two-colour Kempe
+> subgraphs disconnected — not one connected**, the best splitting into 33 components. **Growing makes it
+> worse: `γ̄` 1,118.0 → 1,380.0 → 1,700.0** as the arena goes 51,133 → 79,657 → 121,381 vertices. **No pure
+> unit-distance graph here has ever been Kempe-closed**; the sole `γ = 0` object is Exoo–Ismailescu's
+> `{1,2}`-graph gauged **with** its 423 non-unit edges. **Ours is now the largest pure unit-distance object
+> ever gauged here, and it is 100% open.** By this stub's own §7, that hands the question to **FS-2 — what
+> carries forcing without rigidity.**
+
 > **§7's narrowing below is WITHDRAWN 2026-09-12 (M63 phase H2), and the search space is WIDER than it
 > says.** It rested on `tools/typem_exact.moser_ball_exact`, which cuts on **one conjugate only**, so "the
 > Moser lattice inside radius r" is an **infinite** set and the `span = 4` default silently *was* the answer.

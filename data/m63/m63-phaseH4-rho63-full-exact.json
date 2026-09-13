@@ -1,0 +1,64 @@
+{
+ "kind": "h4-family-gauge-dial",
+ "cos": "31/32",
+ "k": 5,
+ "rows": [
+  {
+   "stage": "full",
+   "vertices": 51133,
+   "edges": 544530,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 54,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 96,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 96
+   },
+   "gamma_hom_cap": null,
+   "gamma_is_lower_bound": false,
+   "gamma": 107328,
+   "gamma_bar": 1118.0,
+   "loose_part": 104256,
+   "kempe_part": 3072,
+   "loose_vertices": 5256,
+   "pairs_total": 960,
+   "disconnected": 960,
+   "connected": 0,
+   "component_histogram": {
+    "33": 96,
+    "35": 192,
+    "47": 192,
+    "171": 96,
+    "175": 192,
+    "205": 192
+   },
+   "swaps": {
+    "built": 960,
+    "proper": 960,
+    "non_additive": 960,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 96,
+   "gamma_seconds": 71.7,
+   "phi_image_sizes": {
+    "4": 96
+   },
+   "r2": "1024/63",
+   "r2_float": 16.253968253968253,
+   "radius": 4.031621045431757,
+   "base_points": 25567,
+   "base_unit_edges": 272232,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  }
+ ],
+ "claim_scope": "Per (radius, stage): the arena's direction lattice on distinct edge directions, its rank, unit classes mod 5, units in 5*Lambda (exact), the admissible Z/k-hom count (exact enumeration at rank<=8), and the Kempe-closure gauge gamma over the complete family x colour pairs on that stage's edge list. Stages: base = base half only; pair = base + rotated copy, internal edges only (the 60 centre cross edges are duplicates of internal edges); diag = + the 30 diagonal cross edges; full = + the 36 off-diagonal ones. UNTRUSTED."
+}

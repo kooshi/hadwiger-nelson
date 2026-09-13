@@ -1,0 +1,124 @@
+{
+ "kind": "h4-family-gauge-dial",
+ "cos": "7/8",
+ "k": 4,
+ "rows": [
+  {
+   "stage": "base",
+   "vertices": 1771,
+   "edges": 12810,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 24,
+   "homs_exact": true,
+   "groups": {
+    "Z/4": 12,
+    "Z/2xZ/2": 12
+   },
+   "gamma": null,
+   "gamma_note": "skipped",
+   "r2": "64/15",
+   "r2_float": 4.266666666666667,
+   "radius": 2.065591117977289,
+   "base_points": 1771,
+   "base_unit_edges": 12810,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 3541,
+   "edges": 25620,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 288,
+   "homs_exact": true,
+   "groups": {
+    "Z/4": 144,
+    "Z/2xZ/2": 144
+   },
+   "gamma": null,
+   "gamma_note": "skipped",
+   "r2": "64/15",
+   "r2_float": 4.266666666666667,
+   "radius": 2.065591117977289,
+   "base_points": 1771,
+   "base_unit_edges": 12810,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 3541,
+   "edges": 25650,
+   "directions": 45,
+   "rank": 8,
+   "unit_classes_mod5": 39,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 0,
+   "homs_exact": true,
+   "groups": {
+    "Z/4": 0,
+    "Z/2xZ/2": 0
+   },
+   "gamma": null,
+   "gamma_note": "no admissible hom: gamma undefined",
+   "r2": "64/15",
+   "r2_float": 4.266666666666667,
+   "radius": 2.065591117977289,
+   "base_points": 1771,
+   "base_unit_edges": 12810,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 3541,
+   "edges": 25686,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 57,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 0,
+   "homs_exact": true,
+   "groups": {
+    "Z/4": 0,
+    "Z/2xZ/2": 0
+   },
+   "gamma": null,
+   "gamma_note": "no admissible hom: gamma undefined",
+   "r2": "64/15",
+   "r2_float": 4.266666666666667,
+   "radius": 2.065591117977289,
+   "base_points": 1771,
+   "base_unit_edges": 12810,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  }
+ ],
+ "claim_scope": "Per (radius, stage): the arena's direction lattice on distinct edge directions, its rank, unit classes mod 5, units in 5*Lambda (exact), the admissible Z/k-hom count (exact enumeration at rank<=8), and the Kempe-closure gauge gamma over the complete family x colour pairs on that stage's edge list. Stages: base = base half only; pair = base + rotated copy, internal edges only (the 60 centre cross edges are duplicates of internal edges); diag = + the 30 diagonal cross edges; full = + the 36 off-diagonal ones. UNTRUSTED."
+}

@@ -1,0 +1,21 @@
+[D1] base 25567 points, centre index 0 [2s]
+[D1] base unit edges 272232 (shell rule, exact, no float) [2s]
+[D1] cross edges 126 [29s]
+[D1] cross split: centre 60, diagonal 30, off-diagonal 36
+[D1] arena: 51133 vertices, 544530 edges [31s]
+base lattice: rank 4
+MOVE A (adjoin the copy): 272298 copy-incident unit vectors -> {'new-direction': 272298}; killers (5|m): 0
+MOVE A, distinct directions: 48 -> {'new-direction': 48}; killers: 0
+arena lattice at the bound: rank 8
+[grow r2=81/4] base 39829 points, centre index 0 [3s]
+[grow r2=81/4] base unit edges 440640 (shell rule, exact, no float) [3s]
+[grow r2=81/4] cross edges 126 [47s]
+[grow r2=81/4] cross split: centre 60, diagonal 30, off-diagonal 36
+[grow r2=81/4] arena: 79657 vertices, 881346 edges [50s]
+MOVE B to r2=81/4 (39829 base pts, cross 60+30+36): 63 distinct directions vs the bound's lattice -> {'in-lattice': 63}; killers: 0
+[grow r2=25] base 60691 points, centre index 0 [5s]
+[grow r2=25] base unit edges 693432 (shell rule, exact, no float) [6s]
+[grow r2=25] cross edges 126 [73s]
+[grow r2=25] cross split: centre 60, diagonal 30, off-diagonal 36
+[grow r2=25] arena: 121381 vertices, 1386930 edges [78s]
+MOVE B to r2=25 (60691 base pts, cross 60+30+36): 63 distinct directions vs the bound's lattice -> {'in-lattice': 63}; killers: 0

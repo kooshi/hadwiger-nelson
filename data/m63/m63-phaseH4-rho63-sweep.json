@@ -1,0 +1,1168 @@
+{
+ "kind": "h4-family-gauge-dial",
+ "cos": "31/32",
+ "k": 5,
+ "rows": [
+  {
+   "stage": "base",
+   "vertices": 1603,
+   "edges": 11286,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 2832,
+   "gamma_bar": 236.0,
+   "loose_part": 2664,
+   "kempe_part": 168,
+   "loose_vertices": 598,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "5": 12,
+    "12": 24,
+    "16": 24,
+    "31": 12,
+    "34": 24,
+    "43": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 0.1,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "4/1",
+   "r2_float": 4.0,
+   "radius": 2.0,
+   "base_points": 1603,
+   "base_unit_edges": 11286,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 3205,
+   "edges": 22572,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 5736,
+   "gamma_bar": 478.0,
+   "loose_part": 5328,
+   "kempe_part": 408,
+   "loose_vertices": 1006,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "10": 6,
+    "24": 12,
+    "31": 12,
+    "36": 12,
+    "49": 24,
+    "55": 24,
+    "62": 6,
+    "67": 12,
+    "86": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 0.3,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "4/1",
+   "r2_float": 4.0,
+   "radius": 2.0,
+   "base_points": 1603,
+   "base_unit_edges": 11286,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 3205,
+   "edges": 22572,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 5736,
+   "gamma_bar": 478.0,
+   "loose_part": 5328,
+   "kempe_part": 408,
+   "loose_vertices": 1006,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "10": 6,
+    "24": 12,
+    "31": 12,
+    "36": 12,
+    "49": 24,
+    "55": 24,
+    "62": 6,
+    "67": 12,
+    "86": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 0.2,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "4/1",
+   "r2_float": 4.0,
+   "radius": 2.0,
+   "base_points": 1603,
+   "base_unit_edges": 11286,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 3205,
+   "edges": 22572,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 5736,
+   "gamma_bar": 478.0,
+   "loose_part": 5328,
+   "kempe_part": 408,
+   "loose_vertices": 1006,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "10": 6,
+    "24": 12,
+    "31": 12,
+    "36": 12,
+    "49": 24,
+    "55": 24,
+    "62": 6,
+    "67": 12,
+    "86": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 0.2,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "4/1",
+   "r2_float": 4.0,
+   "radius": 2.0,
+   "base_points": 1603,
+   "base_unit_edges": 11286,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "base",
+   "vertices": 7879,
+   "edges": 73350,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 4872,
+   "gamma_bar": 406.0,
+   "loose_part": 4632,
+   "kempe_part": 240,
+   "loose_vertices": 1196,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "15": 12,
+    "18": 24,
+    "26": 24,
+    "53": 12,
+    "64": 24,
+    "66": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 1.0,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "9/1",
+   "r2_float": 9.0,
+   "radius": 3.0,
+   "base_points": 7879,
+   "base_unit_edges": 73350,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 15757,
+   "edges": 146700,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 9816,
+   "gamma_bar": 818.0,
+   "loose_part": 9264,
+   "kempe_part": 552,
+   "loose_vertices": 1962,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "30": 6,
+    "35": 12,
+    "52": 12,
+    "68": 12,
+    "81": 24,
+    "92": 24,
+    "106": 6,
+    "127": 12,
+    "132": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 2.4,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "9/1",
+   "r2_float": 9.0,
+   "radius": 3.0,
+   "base_points": 7879,
+   "base_unit_edges": 73350,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 15757,
+   "edges": 146700,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 9816,
+   "gamma_bar": 818.0,
+   "loose_part": 9264,
+   "kempe_part": 552,
+   "loose_vertices": 1962,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "30": 6,
+    "35": 12,
+    "52": 12,
+    "68": 12,
+    "81": 24,
+    "92": 24,
+    "106": 6,
+    "127": 12,
+    "132": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 2.3,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "9/1",
+   "r2_float": 9.0,
+   "radius": 3.0,
+   "base_points": 7879,
+   "base_unit_edges": 73350,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 15757,
+   "edges": 146700,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 9816,
+   "gamma_bar": 818.0,
+   "loose_part": 9264,
+   "kempe_part": 552,
+   "loose_vertices": 1962,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "30": 6,
+    "35": 12,
+    "52": 12,
+    "68": 12,
+    "81": 24,
+    "92": 24,
+    "106": 6,
+    "127": 12,
+    "132": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 2.3,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "9/1",
+   "r2_float": 9.0,
+   "radius": 3.0,
+   "base_points": 7879,
+   "base_unit_edges": 73350,
+   "cross": {
+    "centre": 60,
+    "diagonal": 0,
+    "off_diagonal": 0,
+    "total": 60
+   }
+  },
+  {
+   "stage": "base",
+   "vertices": 24991,
+   "edges": 265104,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 7368,
+   "gamma_bar": 614.0,
+   "loose_part": 7200,
+   "kempe_part": 168,
+   "loose_vertices": 1988,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "21": 24,
+    "29": 36,
+    "91": 12,
+    "97": 24,
+    "105": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 3.4,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "16/1",
+   "r2_float": 16.0,
+   "radius": 4.0,
+   "base_points": 24991,
+   "base_unit_edges": 265104,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 49981,
+   "edges": 530208,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 14808,
+   "gamma_bar": 1234.0,
+   "loose_part": 14400,
+   "kempe_part": 408,
+   "loose_vertices": 3226,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "41": 12,
+    "58": 18,
+    "120": 12,
+    "125": 24,
+    "126": 24,
+    "182": 6,
+    "194": 12,
+    "209": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 5.2,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "16/1",
+   "r2_float": 16.0,
+   "radius": 4.0,
+   "base_points": 24991,
+   "base_unit_edges": 265104,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 49981,
+   "edges": 530238,
+   "directions": 45,
+   "rank": 8,
+   "unit_classes_mod5": 39,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 240,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 240
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 14610,
+   "gamma_bar": 1217.5,
+   "loose_part": 14194,
+   "kempe_part": 416,
+   "loose_vertices": 4372,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "41": 18,
+    "53": 5,
+    "54": 4,
+    "55": 8,
+    "58": 10,
+    "120": 6,
+    "121": 6,
+    "124": 6,
+    "125": 12,
+    "175": 5,
+    "176": 4,
+    "190": 8,
+    "194": 10,
+    "209": 18
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 4.7,
+   "phi_image_sizes": {
+    "4": 240
+   },
+   "r2": "16/1",
+   "r2_float": 16.0,
+   "radius": 4.0,
+   "base_points": 24991,
+   "base_unit_edges": 265104,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 49981,
+   "edges": 530274,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 54,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 96,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 96
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 14472,
+   "gamma_bar": 1206.0,
+   "loose_part": 14136,
+   "kempe_part": 336,
+   "loose_vertices": 2526,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "41": 24,
+    "53": 12,
+    "55": 24,
+    "175": 12,
+    "189": 24,
+    "209": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 5.6,
+   "phi_image_sizes": {
+    "4": 96
+   },
+   "r2": "16/1",
+   "r2_float": 16.0,
+   "radius": 4.0,
+   "base_points": 24991,
+   "base_unit_edges": 265104,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "base",
+   "vertices": 39829,
+   "edges": 440640,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 8304,
+   "gamma_bar": 692.0,
+   "loose_part": 8088,
+   "kempe_part": 216,
+   "loose_vertices": 2408,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "17": 12,
+    "29": 24,
+    "30": 24,
+    "113": 36,
+    "114": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 7.0,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "81/4",
+   "r2_float": 20.25,
+   "radius": 4.5,
+   "base_points": 39829,
+   "base_unit_edges": 440640,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 79657,
+   "edges": 881280,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 16680,
+   "gamma_bar": 1390.0,
+   "loose_part": 16176,
+   "kempe_part": 504,
+   "loose_vertices": 3902,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "34": 6,
+    "57": 12,
+    "60": 12,
+    "130": 12,
+    "142": 24,
+    "143": 24,
+    "226": 18,
+    "227": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 9.7,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "81/4",
+   "r2_float": 20.25,
+   "radius": 4.5,
+   "base_points": 39829,
+   "base_unit_edges": 440640,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 79657,
+   "edges": 881310,
+   "directions": 45,
+   "rank": 8,
+   "unit_classes_mod5": 39,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 240,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 240
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 16598,
+   "gamma_bar": 1383.1666666666667,
+   "loose_part": 16120,
+   "kempe_part": 478,
+   "loose_vertices": 5318,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "33": 9,
+    "57": 18,
+    "59": 8,
+    "60": 10,
+    "130": 6,
+    "142": 24,
+    "221": 9,
+    "225": 8,
+    "226": 10,
+    "227": 18
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 12.7,
+   "phi_image_sizes": {
+    "4": 240
+   },
+   "r2": "81/4",
+   "r2_float": 20.25,
+   "radius": 4.5,
+   "base_points": 39829,
+   "base_unit_edges": 440640,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 79657,
+   "edges": 881346,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 54,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 96,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 96
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 16560,
+   "gamma_bar": 1380.0,
+   "loose_part": 16128,
+   "kempe_part": 432,
+   "loose_vertices": 3018,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "33": 12,
+    "57": 24,
+    "59": 24,
+    "221": 12,
+    "225": 24,
+    "227": 24
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 12.9,
+   "phi_image_sizes": {
+    "4": 96
+   },
+   "r2": "81/4",
+   "r2_float": 20.25,
+   "radius": 4.5,
+   "base_points": 39829,
+   "base_unit_edges": 440640,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "base",
+   "vertices": 60691,
+   "edges": 693432,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 10200,
+   "gamma_bar": 850.0,
+   "loose_part": 9864,
+   "kempe_part": 336,
+   "loose_vertices": 2882,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "21": 12,
+    "36": 24,
+    "39": 24,
+    "131": 24,
+    "142": 24,
+    "143": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 10.8,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "25/1",
+   "r2_float": 25.0,
+   "radius": 5.0,
+   "base_points": 60691,
+   "base_unit_edges": 693432,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 121381,
+   "edges": 1386864,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 20472,
+   "gamma_bar": 1706.0,
+   "loose_part": 19728,
+   "kempe_part": 744,
+   "loose_vertices": 4658,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "42": 6,
+    "71": 12,
+    "78": 12,
+    "164": 12,
+    "166": 24,
+    "181": 24,
+    "261": 12,
+    "284": 12,
+    "286": 6
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 35.3,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "25/1",
+   "r2_float": 25.0,
+   "radius": 5.0,
+   "base_points": 60691,
+   "base_unit_edges": 693432,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 121381,
+   "edges": 1386894,
+   "directions": 45,
+   "rank": 8,
+   "unit_classes_mod5": 39,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 240,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 240
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 20426,
+   "gamma_bar": 1702.1666666666667,
+   "loose_part": 19728,
+   "kempe_part": 698,
+   "loose_vertices": 6292,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "41": 9,
+    "71": 18,
+    "77": 8,
+    "78": 10,
+    "164": 6,
+    "166": 12,
+    "180": 12,
+    "261": 18,
+    "283": 8,
+    "284": 10,
+    "285": 9
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 28.4,
+   "phi_image_sizes": {
+    "4": 240
+   },
+   "r2": "25/1",
+   "r2_float": 25.0,
+   "radius": 5.0,
+   "base_points": 60691,
+   "base_unit_edges": 693432,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 121381,
+   "edges": 1386930,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 54,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 96,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 96
+   },
+   "gamma_hom_cap": 12,
+   "gamma_is_lower_bound": true,
+   "gamma": 20400,
+   "gamma_bar": 1700.0,
+   "loose_part": 19728,
+   "kempe_part": 672,
+   "loose_vertices": 3670,
+   "pairs_total": 120,
+   "disconnected": 120,
+   "connected": 0,
+   "component_histogram": {
+    "41": 12,
+    "71": 24,
+    "77": 24,
+    "261": 24,
+    "283": 24,
+    "285": 12
+   },
+   "swaps": {
+    "built": 120,
+    "proper": 120,
+    "non_additive": 120,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 12,
+   "gamma_seconds": 29.4,
+   "phi_image_sizes": {
+    "4": 96
+   },
+   "r2": "25/1",
+   "r2_float": 25.0,
+   "radius": 5.0,
+   "base_points": 60691,
+   "base_unit_edges": 693432,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  }
+ ],
+ "claim_scope": "Per (radius, stage): the arena's direction lattice on distinct edge directions, its rank, unit classes mod 5, units in 5*Lambda (exact), the admissible Z/k-hom count (exact enumeration at rank<=8), and the Kempe-closure gauge gamma over the complete family x colour pairs on that stage's edge list. Stages: base = base half only; pair = base + rotated copy, internal edges only (the 60 centre cross edges are duplicates of internal edges); diag = + the 30 diagonal cross edges; full = + the 36 off-diagonal ones. UNTRUSTED."
+}

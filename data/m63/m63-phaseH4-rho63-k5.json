@@ -1,0 +1,243 @@
+{
+ "kind": "h4-family-gauge-dial",
+ "cos": "31/32",
+ "k": 5,
+ "rows": [
+  {
+   "stage": "base",
+   "vertices": 25567,
+   "edges": 272232,
+   "directions": 15,
+   "rank": 4,
+   "unit_classes_mod5": 13,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 48,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 48
+   },
+   "gamma_hom_cap": null,
+   "gamma_is_lower_bound": false,
+   "gamma": 27360,
+   "gamma_bar": 570.0,
+   "loose_part": 26592,
+   "kempe_part": 768,
+   "loose_vertices": 2628,
+   "pairs_total": 480,
+   "disconnected": 480,
+   "connected": 0,
+   "component_histogram": {
+    "18": 96,
+    "19": 48,
+    "25": 96,
+    "89": 48,
+    "90": 96,
+    "103": 96
+   },
+   "swaps": {
+    "built": 480,
+    "proper": 480,
+    "non_additive": 480,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 48,
+   "gamma_seconds": 21.3,
+   "phi_image_sizes": {
+    "4": 48
+   },
+   "r2": "1024/63",
+   "r2_float": 16.253968253968253,
+   "radius": 4.031621045431757,
+   "base_points": 25567,
+   "base_unit_edges": 272232,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "pair",
+   "vertices": 51133,
+   "edges": 544464,
+   "directions": 30,
+   "rank": 8,
+   "unit_classes_mod5": 26,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 2304,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 2304
+   },
+   "gamma_hom_cap": 48,
+   "gamma_is_lower_bound": true,
+   "gamma": 55008,
+   "gamma_bar": 1146.0,
+   "loose_part": 53184,
+   "kempe_part": 1824,
+   "loose_vertices": 4944,
+   "pairs_total": 480,
+   "disconnected": 480,
+   "connected": 0,
+   "component_histogram": {
+    "35": 56,
+    "38": 28,
+    "50": 56,
+    "108": 40,
+    "115": 80,
+    "120": 80,
+    "178": 28,
+    "180": 56,
+    "205": 56
+   },
+   "swaps": {
+    "built": 480,
+    "proper": 480,
+    "non_additive": 480,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 48,
+   "gamma_seconds": 39.0,
+   "phi_image_sizes": {
+    "4": 2304
+   },
+   "r2": "1024/63",
+   "r2_float": 16.253968253968253,
+   "radius": 4.031621045431757,
+   "base_points": 25567,
+   "base_unit_edges": 272232,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "diag",
+   "vertices": 51133,
+   "edges": 544494,
+   "directions": 45,
+   "rank": 8,
+   "unit_classes_mod5": 39,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 240,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 240
+   },
+   "gamma_hom_cap": 48,
+   "gamma_is_lower_bound": true,
+   "gamma": 54164,
+   "gamma_bar": 1128.4166666666667,
+   "loose_part": 52466,
+   "kempe_part": 1698,
+   "loose_vertices": 4864,
+   "pairs_total": 480,
+   "disconnected": 480,
+   "connected": 0,
+   "component_histogram": {
+    "33": 9,
+    "34": 19,
+    "35": 56,
+    "47": 38,
+    "50": 18,
+    "108": 40,
+    "110": 40,
+    "113": 40,
+    "120": 80,
+    "171": 9,
+    "172": 19,
+    "176": 38,
+    "180": 18,
+    "205": 56
+   },
+   "swaps": {
+    "built": 480,
+    "proper": 480,
+    "non_additive": 480,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 48,
+   "gamma_seconds": 41.7,
+   "phi_image_sizes": {
+    "4": 240
+   },
+   "r2": "1024/63",
+   "r2_float": 16.253968253968253,
+   "radius": 4.031621045431757,
+   "base_points": 25567,
+   "base_unit_edges": 272232,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  },
+  {
+   "stage": "full",
+   "vertices": 51133,
+   "edges": 544530,
+   "directions": 63,
+   "rank": 8,
+   "unit_classes_mod5": 54,
+   "units_in_5L": 0,
+   "components": 1,
+   "homs": 96,
+   "homs_exact": true,
+   "groups": {
+    "Z/5": 96
+   },
+   "gamma_hom_cap": 48,
+   "gamma_is_lower_bound": true,
+   "gamma": 53664,
+   "gamma_bar": 1118.0,
+   "loose_part": 52128,
+   "kempe_part": 1536,
+   "loose_vertices": 5256,
+   "pairs_total": 480,
+   "disconnected": 480,
+   "connected": 0,
+   "component_histogram": {
+    "33": 48,
+    "35": 96,
+    "47": 96,
+    "171": 48,
+    "175": 96,
+    "205": 96
+   },
+   "swaps": {
+    "built": 480,
+    "proper": 480,
+    "non_additive": 480,
+    "additive": 0,
+    "undecided": 0
+   },
+   "colourings_used": 48,
+   "gamma_seconds": 27.6,
+   "phi_image_sizes": {
+    "4": 96
+   },
+   "r2": "1024/63",
+   "r2_float": 16.253968253968253,
+   "radius": 4.031621045431757,
+   "base_points": 25567,
+   "base_unit_edges": 272232,
+   "cross": {
+    "centre": 60,
+    "diagonal": 30,
+    "off_diagonal": 36,
+    "total": 126
+   }
+  }
+ ],
+ "claim_scope": "Per (radius, stage): the arena's direction lattice on distinct edge directions, its rank, unit classes mod 5, units in 5*Lambda (exact), the admissible Z/k-hom count (exact enumeration at rank<=8), and the Kempe-closure gauge gamma over the complete family x colour pairs on that stage's edge list. Stages: base = base half only; pair = base + rotated copy, internal edges only (the 60 centre cross edges are duplicates of internal edges); diag = + the 30 diagonal cross edges; full = + the 36 off-diagonal ones. UNTRUSTED."
+}
