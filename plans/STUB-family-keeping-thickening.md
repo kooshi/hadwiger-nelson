@@ -89,8 +89,11 @@ route and hands the question back to FS-2 (what carries forcing without rigidity
 >
 > **But the slot is filled and the thing the slot was for is still empty**, and the gauge moves the WRONG
 > WAY: on the **pure unit-distance graph, no cheats**, `γ̄ = 1,118.0`, with **960 of 960 two-colour Kempe
-> subgraphs disconnected — not one connected**, the best splitting into 33 components. **Growing makes it
-> worse: `γ̄` 1,118.0 → 1,380.0 → 1,700.0** as the arena goes 51,133 → 79,657 → 121,381 vertices. **No pure
+> subgraphs disconnected — not one connected**, the best splitting into 33 components. ~~**Growing makes it
+> worse**~~ — **WITHDRAWN: `γ` is EXTENSIVE.** `γ̄` 1,118.0 → 1,380.0 → 1,700.0 as the arena goes 51,133 →
+> 79,657 → 121,381 is **`γ̄ ~ n^0.485`, essentially `√n`**, so the **normalised** gauge **FALLS 35.9%** —
+> growth makes this object relatively more connected. What survives: `γ` must reach **zero** and `√n` is
+> increasing, so **growth alone does not reach rigidity**, which is far weaker than the withdrawn claim. **No pure
 > unit-distance graph here has ever been Kempe-closed**; the sole `γ = 0` object is Exoo–Ismailescu's
 > `{1,2}`-graph gauged **with** its 423 non-unit edges. **Ours is now the largest pure unit-distance object
 > ever gauged here, and it is 100% open.** By this stub's own §7, that hands the question to **FS-2 — what

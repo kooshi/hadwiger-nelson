@@ -678,9 +678,38 @@ On the **pure unit-distance graph, no cheats**:
 | `γ̄` as the arena grows 51,133 → 79,657 → 121,381 | **1,118.0 → 1,380.0 → 1,700.0** |
 | what the whole cross structure (126 edges of 544,530, **0.023%**) is worth | **2.4% of `γ̄`** |
 
-> **GROWING MAKES THE GAUGE WORSE — up 52%.** Kooshi's premise was *"going to 6 means we need to make the
-> object as rigid as possible, which means growing."* **The first half stands; the second is refuted by
-> measurement on this object.**
+> ~~**GROWING MAKES THE GAUGE WORSE — up 52%.**~~ **WITHDRAWN 2026-09-12, same evening, by Kooshi: *"growing
+> doesn't make rigidity worse. The gauge is just an upper bound, and scales with vertices."* He is right, and
+> this is the EIGHTH instance in this milestone of a number read without its units — the fifth of them mine,
+> and made hours after I installed the rule against it.**
+
+**`γ` is EXTENSIVE — it sums `(components − 1)` over every two-colour subgraph, so it scales with vertices by
+construction.** Reading its rise as a worsening credits to rigidity a change that belongs to size. The
+agent **reported the vertex counts alongside**, so the data was there and both of us still misread it —
+**printing the population beside the verdict is not enough; you have to DIVIDE.**
+
+**The arithmetic, done properly:**
+
+| vertices | `γ̄` | `γ̄ / n × 1000` |
+|---|---|---|
+| 51,133 | 1,118.0 | **21.86** |
+| 79,657 | 1,380.0 | **17.32** |
+| 121,381 | 1,700.0 | **14.01** |
+
+> **`γ̄ ~ n^0.485` — essentially `√n`, on two independent steps (0.475 and 0.495). The NORMALISED gauge falls
+> 35.9% while the object grows 2.37×.** Growth is making this object **relatively more connected**, not less.
+
+**What that does and does not license, stated separately because they point opposite ways.**
+- **For the object's relative health, growth wins**: component density falls like `1/√n`. Had `γ̄` scaled
+  like `n`, growth would be useless; at `√n` it is slowly gaining.
+- **For the target, `γ` must reach ZERO**, and `√n` is monotonically increasing — so **growth alone does not
+  reach rigidity under this scaling**, which is a different and much weaker statement than "growing makes it
+  worse". A power law never hits zero.
+- **And I do not know which of those bears on the design**, because *"the gauge is just an upper bound"* is a
+  claim about `γ` I have not verified: if `γ` overcounts — if some disconnected components are mergeable by
+  means the count does not see — then even the second bullet is too pessimistic. **`γ = 0 ⟺ rigid` is how
+  G42 states it; whether the computed `γ` is that quantity or an over-estimate of it is the open question,
+  and it decides the direction.**
 
 **The mechanism, stated as a reading rather than a derivation:** the only thing that closes the gauge is
 **cross edges** — 0.023% of the edges moving `γ̄` by 2.4%, roughly **100× the per-edge effect of base
