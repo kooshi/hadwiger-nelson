@@ -16,6 +16,14 @@
 dial 1,728 → 960 → 640 → 0, Heule-510's 3,456 → 96), §M1.6 (the dial's axis is the direction set), M56 §M1.7 (L7:
 1/5 ∈ Σ₀ of every plane), `CLAUDE.md` G42.*
 
+> **RE-RANKED 2026-09-13 (the Poros wall-breaking pass, `plans/POROS-2026-09-13-wall-breaking.md`).** Rank 2, behind
+> FS-38 (the residue tower). The next milestone number is NOT M62 — that number went to the type-M search; §H's `git mv`
+> line names a stale target and is superseded by whatever number the milestone takes when it runs. What this stub's
+> re-aim (G48) still owes is its own central computation, §H (i) — the forced-distance table at residue norm 0 on
+> Heule-510 ∪ its closure and W ∪ its cross lattice, asked as forced-EQUAL pairs — which was assigned to Opus as backlog
+> item B9 and never built; FS-38's phase C runs it, and the tower's level says how deep a fabric must be for it to read
+> anything but zero.
+
 ## 1. Mission context, in plain language
 
 M57's design principle — make every 5-colouring of a unit-distance chunk additive, so a 5Λ-pair is forced and a spindle
