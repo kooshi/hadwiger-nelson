@@ -715,11 +715,18 @@ number.
 **So 7.38 against 21.30 compared the wrong quantity.** What decides a cross-edge argument is the **circle
 points'** degree:
 
-| | circle degree | circle points | off-diagonal | arena |
-|---|---|---|---|---|
-| phase H2's verified object | **5 / 6 / 7** | 30 | 36 | 51,133 |
-| phase H3 at the endpoint bound | **2** | 60 | **72** | 32,617 |
-| **phase H3 at radius 1.7** | **4–6** | 60 | **72** | 83,906 |
+| | circle degree | circle points | off-diag, RAW | off-diag, **MONOCHROMATIC** | arena |
+|---|---|---|---|---|---|
+| phase H2's verified object | **5 / 6 / 7** | 30 | 36 | **24** (share 0.444) | 51,133 |
+| phase H3 at the endpoint bound | **2** | 60 | 72 | **24** (share 0.286) | 32,617 |
+| **phase H3 at radius 1.7** | **4–6** | 60 | 72 | **24** (share 0.286) | 83,906 |
+
+**Corrected after first being written with the raw column alone.** On the raw count this object is double;
+**on the quantity G52 calls live it is EQUAL, at a LOWER share** — lower only because its diagonal is twice
+as large. Which of share or count decides is genuinely open and is not being picked here: G52's text says
+*share* while its recorded figures (`0 of 30`, `24 of 54`) are counts against a total, and for a refutation
+what plausibly matters is the absolute number of constraints surviving the residue colouring. **Both are
+reported, labelled, and neither may be quoted alone.**
 
 **At radius 1.7 this object is at rough parity with phase H2's on circle connectivity, with twice the circle
 points and twice the off-diagonal cross edges, for 1.64× the vertices.**
@@ -732,3 +739,73 @@ off, the corrected comparison is with the solver engineer, and the mean appears 
 comparable circle degree is *better* than phase H2's or merely different — more circle points also means
 more interface patterns to kill. **That trade is what the pricing measures**, so it is being priced rather
 than argued.
+
+---
+
+## §11 — The mechanism is stated for the class (2026-09-12)
+
+`plans/M63-phaseH3-crossedges.md` §12, 671 lines. **This is the phase's most valuable artifact**, and the
+programme is explicit about why: the milestone that finds an object continues until the mechanism is stated
+and proved for a class, and the paper is the algebra with the object as its example.
+
+### A closed form that emerged while writing the theorem down, not before
+
+> `V = n(g−h)² + gh`, and then `|u|² = ng²/V`, `|v|² = nh²/V`, `σ = n(g²+h²)/V`, `δ² = n(g−h)²/V`
+
+**Four quantities homogeneous of degree 0, depending only on the kind**, replacing a working notation that
+collided two meanings of `d`. Verified **4,000 of 4,000** against the original law and against every measured
+family, with **the endpoint bound falling out as a corollary**. The engineer caught its own *"completing the
+square"* as being on the wrong variable, fixed it to the exact quadratic in `τ = h/g`, and controlled the
+result **20,000 of 20,000, zero violations** — a loose *phrasing* of a correct result, which is the class of
+error nobody else would ever have found, because the conclusion was right throughout.
+
+### Hypotheses surfaced that were being carried implicitly
+
+**`(H1) √(4n−1) ∉ K` is load-bearing, not a convenience** — without it the arena lies in `K²`, Theorem B
+four-colours it, and every statement in the section would be about a structure that can carry nothing. Also
+surfaced: **`h(K) = 1`** (used in the line-structure lemma) and that **coprimality is only a
+normalisation** — `t` fixes `(g,h)` up to a unit, `V` changes by a unit square, and every valuation and ratio
+is invariant. **Hypotheses you did not know you were using are the ones a formalisation discovers the
+expensive way.**
+
+### §12.6 states what it does NOT say
+
+Realisation gap first, with both failure directions named; then: not a colouring claim; one prime at a time;
+this `K` only; coprimality is normalisation. **And the qualification that makes the two out-of-sample
+landings a result rather than an overclaim: both predicted what a base WOULD realise and were right, which
+is evidence for the law and not evidence that the realisation gap has closed.**
+
+### The three-way 24 is now checkable, and it decomposes
+
+`n = 3` has since come in at **24 as well** — three members. **Still coincidence, and now for a reason that
+can be checked rather than asserted:**
+
+| member | 24 arises as | case |
+|---|---|---|
+| `n = 2` | two families of size 12 | **A** |
+| `n = 3` | two families of size 12 | **A** |
+| `n = 16` | four families of size 6 | **B** |
+
+**So it is not one coincidence among three: it is two members sharing a mechanism exactly, and a third
+arriving by a different one.** The engineer's own framing of the danger is the right one — *a recurrence
+that survives a third instance and still has no common mechanism is the kind that hardens into a law by
+repetition if nobody writes the reason down.* It is written down.
+
+**Commissioned, as the loose end that reframing opens:** is **24 a case-A constant** — does case A always
+give exactly two families of size 12? Two of two is not a law, but `12` is the generic `ζ₆`-orbit size and
+case A's defining condition leaves no free parameter once `O_K/𝔭 = 𝔽₂` forces `g ≡ h ≡ 1`, which is the
+shape of something derivable. **And is `n = 2` unusual in being EVEN with case-A edges?** Odd members can
+only be case A and are dead for refutation anyway (`4n − 1` leaves the wall unbroken), so the live
+population is the even members — where `n = 16` is case B and `n = 2` is case A. **Two even members, two
+mechanisms: either a dichotomy worth naming or a sample of size two.**
+
+### A sixth instance of the milestone's signature error, and the fourth is mine
+
+§10's table above originally carried the **raw** off-diagonal column alone, against phase H2's, implying
+this object doubles the live quantity. **It does not — it equals it.** Caught by the arithmetic engineer,
+**on the exact distinction I had told it to police two messages earlier.** Corrected in place above.
+
+> **The pattern is now the finding: writing the rule down demonstrably does not install it, and what installs
+> it is another reader recomputing the number.** Four of the six are mine. The instrument that works is not
+> care and not the written rule — it is a second party with the standing to recompute and the instruction to
+> do it.

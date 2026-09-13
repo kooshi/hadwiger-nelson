@@ -520,3 +520,155 @@ value here is exactly and only as a **test of the law** — a member with an odd
 **And un-eliminated is still not alive.** 24 monochromatic off-diagonal constraints at `n = 2` is not
 a refusal of four colours, at `n = 3` it is provably not one, and nothing in §7–§11 is a colouring
 claim.
+
+
+---
+
+# §12 — The mechanism, stated for the class
+
+*Written at the product owner's request in the register a Lean formalisation could be built from,
+because the programme says the milestone continues until the mechanism is stated and proved for a
+class. Notation is fixed here and supersedes the working notation earlier in this file, where `d`
+was used for both the denominator and the separation: **`D`** is the denominator, **`δ`** the
+separation.*
+
+## §12.1 Setting and hypotheses
+
+- `K = ℚ(√3, √11)`, totally real of degree 4, `h(K) = 1`, `disc K = 17424`.
+- `𝔭` a prime of `O_K` above 2. There are two; each has `e = 2`, `f = 1`, residue field `𝔽₂`.
+  `v_𝔭` is the normalised valuation, so **`v_𝔭(2) = 2`** and `v_𝔭(n) = 2·v₂(n)` for `n ∈ ℤ`.
+- `n ≥ 1` an integer. `ρ_n = cos θ + i·sin θ` with `cos θ = (2n−1)/(2n)`, `sin θ = √(4n−1)/(2n)`.
+- `D ≥ 1` an integer; `M = (1/D)·O_K²`, the denominator-`D` module of the plane over `K`.
+- An **arena** is a base `B ⊆ M` together with `ρ_n·B`, sharing the centre `0`. A **cross edge** is a
+  pair `(u, ρ_n v)` with `u, v ∈ B` and `|u − ρ_n v| = 1` exactly.
+- The **residue colouring** at `𝔭` identifies two `K`-points iff `v_𝔭(|u−v|²) > 0`
+  (`ValuationLaw.lean`, ledger row 59). A cross edge is **monochromatic** when its two *base-side*
+  points `u, v` are so identified.
+
+> **(H1)** `√(4n−1) ∉ K`, equivalently `sin θ ∉ K`.
+
+**(H1) is not a convenience.** If it fails, `ρ_n ∈ K(i)`, the whole arena lies in `K²`, and Theorem B
+(`chromaticNumber_seamPlane`, kernel-checked) four-colours it; every statement below would then be
+about a structure that can carry nothing. It is phase H2's gate D.
+
+## §12.2 Lemma (the split)
+
+For `u, v ∈ K²` and `n` satisfying (H1):
+
+> `|u − ρ_n v|² = 1`  ⟺  **(i)** `det(u,v) = 0`  **and**  **(ii)** `2cos θ·(u·v) = |u|² + |v|² − 1`.
+
+*Proof.* `|u − ρ_n v|² = |u|² + |v|² − 2(cos θ·(u·v) + sin θ·q)` with `q = −det(u,v)`. All of
+`|u|², |v|², u·v, q, cos θ` lie in `K`; by (H1), `{1, √(4n−1)}` is a `K`-basis of `K(√(4n−1))`, so
+the two components vanish independently. ∎
+
+## §12.3 Lemma (line structure) — uses `h(K) = 1`
+
+Let `u, v ∈ M` be nonzero with `det(u,v) = 0`. Every nonzero `x ∈ O_K²` is `c·x̂` with `x̂`
+**primitive** (the ideal `(x̂₁, x̂₂) = O_K`), because `h(K) = 1`. Then the points of `M` on the line
+`K·x̂` are **exactly** `{(g/D)·x̂ : g ∈ O_K}`.
+
+*Proof.* If `w ∈ O_K²` and `w = λx̂` with `λ ∈ K`, pick `a, b ∈ O_K` with `a x̂₁ + b x̂₂ = 1`; then
+`λ = a w₁ + b w₂ ∈ O_K`. ∎
+
+So `u = (g/D)x̂`, `v = (h/D)x̂` with `g, h ∈ O_K`, and the **kind** of the edge is `t = h/g ∈ K`.
+
+## §12.4 Proposition (the form, and the closed form for every quantity)
+
+Put `ν = |x̂|²` and
+
+> **`V := n(g−h)² + gh`**   `= n g² − (2n−1)gh + n h²`   `= g² + gH + nH²` with `H = h − g`,
+
+the **principal binary quadratic form of discriminant `1 − 4n`** — the family's own radicand. Then
+condition (ii) is `ν·V = n D²`, and *(all four verified against the original law at 4,000 random
+`(n, g, h)` with 0 disagreements, and against every measured family)*
+
+> `|u|² = n g²/V` ,  `|v|² = n h²/V` ,  `σ = |u|² + |v|² = n(g²+h²)/V` ,  `δ² = |u−v|² = n(g−h)²/V`.
+
+These four are **homogeneous of degree 0** in `(g,h)`, so they depend only on the kind `t` and not on
+the scaling — coprimality is needed only for §12.5, never for the radii. Two consequences:
+
+- **a line carries a cross edge only if `ν | n D²`**, so only if its primitive norm divides `nD²`;
+- **the cross edges of kind `t` biject with `{z ∈ O_K² : |z|² = nD²/V}`**, via `u = gz/D`, `v = hz/D`
+  — so their **count is `Sh(nD²/V)`**, computed with no base and no radius.
+
+**Corollary (the endpoint bound).** With `τ = h/g`, `|u|² = n/(nτ² − (2n−1)τ + n)`; the denominator
+is a quadratic in `τ` minimised at `τ = (2n−1)/(2n) = cos θ`, where it equals `(4n−1)/(4n)`. Hence
+`|u|² ≤ 4n²/(4n−1) = 1/sin²θ`, and the same for `|v|²` by `τ ↦ 1/τ`. Because `sin²θ ∈ ℚ`, the bound
+holds at **every** Galois conjugate simultaneously. **Material outside that disk carries no cross
+edge at all** — so the endpoint bound is a theorem about the law, not a modelling choice, and the
+record's 126 is indeed unchanged as its base grows from radius 2.0656 to 2.44 to 3.0.
+
+## §12.5 **Theorem (the two-case criterion)**
+
+Let `g, h ∈ O_K` be **coprime** (the ideal `(g,h) = O_K`), both nonzero, `g ≠ h`. Put
+`e = v_𝔭(g−h)` and `V = n(g−h)² + gh`. Then
+
+> `v_𝔭(δ²) = 2e + v_𝔭(n) − v_𝔭(V)`,
+
+and the cross edges of kind `t = h/g` are monochromatic iff that is `> 0`. Exactly two cases arise,
+since coprimality forbids `𝔭` dividing both:
+
+> **CASE A — `v_𝔭(g) = v_𝔭(h) = 0`.** Then `e ≥ 1` and `v_𝔭(V) = 0`, so
+> `v_𝔭(δ²) = 2e + v_𝔭(n) ≥ 2 > 0`: **monochromatic, for every `n`, odd `n` included.**
+> Moreover `v_𝔭(|u|²) = v_𝔭(|v|²) = v_𝔭(n)`.
+>
+> **CASE B — exactly one of `g, h` is divisible by `𝔭`.** Then `e = 0`, and the edges are
+> **monochromatic iff `v_𝔭(gh) < v_𝔭(n)`** — which requires **`n` even**, because
+> `v_𝔭(n) = 2v₂(n) = 0` for odd `n`.
+
+*Proof.* The displayed valuation is immediate from `δ² = n(g−h)²/V`.
+
+**Case A.** `O_K/𝔭 = 𝔽₂`, so a `𝔭`-unit is `≡ 1 (mod 𝔭)`; hence `g ≡ h ≡ 1` and `𝔭 | g − h`, i.e.
+`e ≥ 1`. Then `v_𝔭(n(g−h)²) = v_𝔭(n) + 2e ≥ 2 > 0 = v_𝔭(gh)`, so the valuation of the sum is the
+strict minimum: `v_𝔭(V) = 0`. Substituting gives `v_𝔭(δ²) = 2e + v_𝔭(n) ≥ 2`. For the radii,
+`v_𝔭(|u|²) = 2v_𝔭(g) + v_𝔭(n) − v_𝔭(V) = v_𝔭(n)`.
+
+**Case B.** Say `v_𝔭(g) > 0 = v_𝔭(h)`. Then `g − h ≡ −h ≢ 0 (mod 𝔭)`, so `e = 0`, and
+`v_𝔭(n(g−h)²) = v_𝔭(n)` while `v_𝔭(gh) = v_𝔭(g)`. If `v_𝔭(gh) < v_𝔭(n)` the minimum is strict and
+`v_𝔭(V) = v_𝔭(gh) < v_𝔭(n) = 2e + v_𝔭(n)`: monochromatic. If `v_𝔭(gh) > v_𝔭(n)` then
+`v_𝔭(V) = v_𝔭(n)` and `v_𝔭(δ²) = 0`: not monochromatic. If they are equal then `v_𝔭(V) ≥ v_𝔭(n)`
+and `v_𝔭(δ²) ≤ 0`: not monochromatic. ∎
+
+**The corollary that answers "do even and odd members separate?" — they do not.** The 2-adic budget
+`v_𝔭(n)` governs **case B alone**. Case A bypasses it and is monochromatic at every `n`. Measured:
+`n = 2`'s 24 monochromatic edges are **case A**, `n = 16`'s are **case B**.
+
+## §12.6 What the theorem does **NOT** say
+
+1. **It classifies a GIVEN kind. It does not say which kinds a base realises.** This is the gap that
+   sank the screen (§9a), and it fails in both directions: at `n = 4` the arithmetic permits
+   monochromatic kinds that Parts's lattice realises **none** of; at `n = 2` a rational enumeration of
+   kinds finds **none** while the shape-free base realises 24 on an irrational one.
+2. **It is not a colouring claim.** A monochromatic cross edge is one the *residue certificate* fails
+   to separate. **24 monochromatic off-diagonal constraints is not a refusal of four colours** — and
+   at `n = 3` it provably cannot be one, since `4n−1 = 11` leaves the 2-adic wall unbroken and
+   Theorem B four-colours anything drawn over `K`.
+3. **One prime at a time.** `𝔭` is one of the two primes above 2. Everything measured here agrees at
+   both, but the theorem is stated per prime.
+4. **The base must lie in `(1/D)O_K²` over this `K`.** Nothing is claimed for other fields, and
+   `h(K) = 1` is used in §12.3.
+5. **Coprimality is a normalisation.** `t` determines `(g,h)` up to a unit of `O_K`; `V` then changes
+   by a unit square, leaving every valuation and every ratio in §12.4 invariant.
+
+## §12.7 The evidence: two out-of-sample landings
+
+Placed here rather than in a methods section, because out-of-sample prediction is the strongest
+evidence this project recognises.
+
+> **(1) The counting law returned `ρ₆₃`'s rational family before it was looked up.** The base-free
+> table at `n = 16` lists `t = 5/4`, `V = 36`, `m = 64`, radii `64/9` and `100/9` — derived from the
+> cosine alone, no lattice. `plans/M63-phaseH2-the-family.md` records `ρ₆₃`'s off-diagonal edges as
+> sitting on three radius families *"including a rational pair (`100/9 ↔ 64/9`) the record has no
+> analogue of"*. Same pair.
+>
+> **(2) The criterion named `n = 3`'s family, its rotation parameter AND both radii before the base
+> existed — P-XE-1, registered in §8 and scored in §11.** `n = 3` is odd, so case B is unavailable and
+> any monochromatic edge must be case A, forcing `v_𝔭(|u|²) = v_𝔭(|v|²) = v_𝔭(3) = 0`. The screen
+> named the kind: `t = 5/3`, `V = 27`, radii `n g²/V = 1` and `n h²/V = 25/9`. The base was then built
+> — 67,909 points — and returned `300 = 120 + 84 + 96`, `300/300` confirmed, 0 invented, with
+> **two monochromatic families, `t = 5/3` and `t = 3/5`, radii `1` and `25/9`, both valuations 0.**
+
+The second is the stronger: a law that names the rotation parameter *and* both radii in advance of
+any construction is doing work no curve fit could do. Both landings are consistent with §12.6(1) —
+they predicted what a base **would** realise and were right, which is evidence for the law and *not*
+evidence that the realisation gap has closed.
