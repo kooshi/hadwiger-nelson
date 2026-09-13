@@ -874,6 +874,44 @@ docstring's summary instead of `projAlong`'s body. What caught it was `decide`, 
 doubted. G46's habit ("read the construction's own data layout, not the plan's vocabulary for it") applies to
 a *docstring* exactly as it does to a plan.
 
+### R1.4a The elaborated statements, printed rather than read off the source
+
+*The read-aloud done by the machine: `#check` on the headline names, so a hidden hypothesis or an implicit
+instance would show. Nothing is conditioned on colourability, on finiteness, or on a prime, where the claim
+says it is not.*
+
+```
+@not_forces_of_fanGap : ∀ {V W} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P)
+  {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}, FanGap C (f u) γ → u ≠ u' → ¬Forces G k u u'
+@not_separated_of_sharedGap : ∀ {V W} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P)
+  {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k},
+  SharedGap C (f u) (f u') γ → ¬G.Adj u u' → ¬Separated G k u u'
+@Slack.forces_iff : ∀ {V} {G : SimpleGraph V} {k : ℕ}, Slack G k → ∀ {u u' : V}, Forces G k u u' ↔ u = u'
+@PairwiseFusable.separated_iff_adj : ∀ {V} {G : SimpleGraph V} {k : ℕ},
+  PairwiseFusable G k → ∀ {u u' : V}, Separated G k u u' ↔ G.Adj u u'
+@forces_iff_of_hom_finitePlane11 : ∀ {V} {G : SimpleGraph V} (f : G →g finitePlane 11) {u u' : V},
+  Forces G 5 u u' ↔ u = u'
+@separated_iff_adj_of_hom_finitePlane11 : ∀ {V} {G : SimpleGraph V} (f : G →g finitePlane 11) {u u' : V},
+  Separated G 5 u u' ↔ G.Adj u u'
+@UDCert.forces_eq_11 : ∀ {n} (c : UDCert n), c.CoordsIn Q4.sevenFree → ∀ {u : ZMod 11}, u * ↑c.denom = 1 →
+  c.Valid = true → ∀ {i j : Fin n}, Forces (edgeGraph n c.edges) 5 i j → i = j
+@UDCert.separated_iff_adj_11 : ∀ {n} (c : UDCert n), c.CoordsIn Q4.sevenFree → ∀ {u : ZMod 11},
+  u * ↑c.denom = 1 → c.Valid = true →
+  ∀ {i j : Fin n}, Separated (edgeGraph n c.edges) 5 i j ↔ (edgeGraph n c.edges).Adj i j
+@heule510_forces_iff : ∀ {i j : Fin 510}, Forces (edgeGraph 510 heule510.edges) 5 i j ↔ i = j
+@heule510_separated_iff_adj : ∀ {i j : Fin 510},
+  Separated (edgeGraph 510 heule510.edges) 5 i j ↔ (edgeGraph 510 heule510.edges).Adj i j
+three_le_arityFloor_heule510 : 3 ≤ arityFloor (edgeGraph 510 heule510.edges) 5
+finitePlane19_slack : Slack (finitePlane 19) 5
+```
+
+Two readings to make explicit from the print. **Heule-510's two `iff`s are UNCONDITIONAL** — no certificate
+hypothesis survives in them, because `heule510Reduce11` already discharged M58's three at M60; so "the record's
+5-chromatic witness in a 5-sealed field has no forced pair and no virtual non-edge at five colours" is now a
+closed theorem about that graph, where the record had a measured null. And **`UDCert.forces_eq_11` quantifies
+over ALL pairs `i j`** with no condition on their distance, where M60's law had to know the residue of the
+squared distance — which is what makes the pair `(0, 475)`, invisible to M60, fall out here.
+
 ### R1.5 The gate, with every count that moved
 
 | gate | reading |
