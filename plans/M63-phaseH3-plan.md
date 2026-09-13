@@ -1016,3 +1016,66 @@ The advisor's twist result and mine agree on what the off-diagonal edges do: **t
 diagonal-clearing combinations down to 576.** They do real work. **They simply do not cut it to zero, and
 the twist family could not see the survivors.** *"Load-bearing against twists is not load-bearing"* is the
 sentence to keep.
+
+---
+
+## §15 — The count disagreement resolves, and the object is dead on both sides (2026-09-12)
+
+**Both counts were right and they counted different objects.** The advisor computed all three rather than
+defending either:
+
+| what is counted | number |
+|---|---|
+| **ordered** pairs `(f,g)` — homomorphisms `U → 𝔽₂²` | **144** (the solver's) |
+| **unordered** pairs `{f,g}` | **72** (the advisor's) |
+| distinct kernels = distinct partitions | 24, at **6** ordered pairs each |
+
+`144 = 24 × 6`, matching the solver's "24 orbits of size 6" exactly — 6 being the number of ordered bases of
+a two-dimensional `𝔽₂` space. **Three coordinates on one fact.** The advisor's error was ranging `g` over
+`f+1…255` instead of `0…255` — **neither of the structural suspects I named**, and not structural at all.
+
+**But it was not harmless downstream, and that is the half worth keeping.** For the one-colouring question
+only the partition matters and 72 and 144 agree. **For the arena the halves' colourings are compared by
+value, so ordered is the only correct convention** — and the twist search ran over a family indexed the
+wrong way. It did not corrupt *that* verdict, because a twist is labelling-invariant by construction, but it
+would have corrupted a search over independent pairs — **which is the search that then decided the phase.**
+
+> **A convention harmless for one question is not harmless for the next.**
+
+**Independent confirmation, agreeing exactly:** 96 of 20,736 against 576 of 124,416 — **both 1/216**, both
+with **0 twists**, the populations differing by the same factor 6. And a witness checked against all
+**120,420** arena edges — both halves' internal edges, the shared centre, all 60 diagonal and all 72
+off-diagonal cross edges — **0 violations**, classes `[4057, 4084, 4084, 4084]` per half. **The object is
+dead on both sides.**
+
+### What survives of "load-bearing", and its honest size
+
+> **The 72 off-diagonal cross edges are a symmetry-breaking constraint. They kill every *equivariant*
+> four-colouring — every one under which the two isomorphic halves carry the same partition — and no other
+> kind. The arena is four-colourable, but no four-colouring of it respects the symmetry between its halves.**
+
+A natural population with a name, so a real structural fact rather than a failed conjecture. **And worth very
+little, for a reason belonging in the same sentence: the equivariant family is exactly what the
+matching-only theorem is about, and that theorem's hypothesis failing is its own stated non-result. So the
+surviving claim says a sufficient condition is not met — which carries no information.** Calling it
+load-bearing was the error.
+
+### Two rules installed in `CLAUDE.md` from this
+
+1. **A caveat you write and then step over is worse than one you never wrote.** The advisor wrote *"this
+   exhausts the additive twist family, not the twist family"* and then *"the 72 are measurably
+   load-bearing"* in the same report; **I amplified the headline twice.** The caveat is what made the
+   headline look audited.
+2. **Count your generator's free parameters against the problem's.** The twist ansatz has **one** where the
+   problem has **two**; its image was a measure-zero slice (24 × 24 against 144²). **Third instance in one
+   milestone, every one with its positive control passing.** A parameter count takes seconds and catches the
+   whole class.
+
+### The advisor's closing accounting, and the sentence in it that matters most
+
+**Seven retractions caused, six made itself** — and **four of its six came from someone else recomputing a
+number its own frame said was settled** (mine on the benchmark, the solver's on the count and on the
+generator).
+
+> **The advisor is also an agent whose errors are cheapest to find while nothing has been paid for. Zero
+> retractions from it would not have meant it was right.**

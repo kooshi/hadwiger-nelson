@@ -936,3 +936,153 @@ vertices of degree zero among them). That tail is what dragged the *mean* degree
 the statistic I warned about while quoting it. **The degeneracy was the measure that carried what it
 measured; the mean degree was not.**
 
+
+## PH3-19 — 144 against 72: **the solver engineer is right, I used the wrong convention, and the invariant is 24**
+
+**Settled by computation, and neither count is arithmetically wrong — they count different objects.**
+
+| what is counted | number |
+|---|---|
+| **ordered** pairs `(f, g)` — i.e. homomorphisms `U → 𝔽₂²` | **144** ← the engineer's |
+| …of which `f = g` (a two-colouring) | **0** |
+| **unordered** pairs `{f, g}` with `f < g` | **72** ← mine |
+| **distinct kernels = distinct PARTITIONS of the vertex set** | **24** |
+| ordered pairs per partition | **6**, uniformly |
+
+**`144 = 24 × 6` is exactly the engineer's "24 orbits of size 6"**, and 6 is the number of ordered bases
+of a two-dimensional `𝔽₂`-space. So all three numbers are the same fact in three coordinates.
+
+**The error is mine and it is trivial: I ranged `g` over `f+1 … 255` instead of `0 … 255`.** Not a quotient
+taken once too often — an *unordered* enumeration where the object is *ordered*. The product owner's two
+named suspects (the module and the group order) were both wrong, and so was my own instinct that a factor
+of two must be structural.
+
+**But the convention error was not harmless downstream, and this is the part worth keeping.** For the §6b
+question — *one* colouring, and only its partition matters — 72 and 144 give the same answer, and mine was
+fine. For the **arena**, the two halves' colourings are compared *by value*, so the relative labelling
+between them matters and the **ordered** count is the only correct one. **I ran the twist search over a
+family indexed the wrong way.** It did not change that verdict (a twist is `g = π∘f`, which is
+labelling-invariant by construction), but it would have corrupted any search over independent pairs — which
+is exactly the search that then decided the phase. *A convention that is harmless for one question is not
+harmless for the next one.*
+
+**Circle-clearing, restated in all three conventions:** ordered **24**, unordered 12 (what I reported),
+partitions **4**.
+
+---
+
+## PH3-20 — The independent-pair search, run on my side: the object is **DEAD**, and our two measurements agree exactly
+
+**Searching `f` and `g` independently rather than as `(C, π∘C)`:**
+
+| | mine | the solver engineer's |
+|---|---|---|
+| ordered pairs searched | `144 × 144 = ` **20,736** | **124,416** |
+| pairs satisfying the whole interface | **96** | **576** |
+| …of which are twists | **0** | **0** |
+| passing fraction | **1/216** | **1/216** |
+
+**The two runs agree exactly.** Both populations and both hit counts differ by the same factor of **6** —
+the ordered-bases-per-partition factor of PH3-19 — so the engineer is indexing colourings with a six-fold
+redundancy mine does not have, and **the measured quantity, `1/216`, is identical.** There is no
+disagreement here to resolve.
+
+**I verified a witness on the whole object myself**: a passing pair re-checked against all 120,420 arena
+edges — both halves' internal edges, the shared centre, all 60 diagonal and all 72 off-diagonal cross
+edges, and the centre cross family — **0 violations**, colour classes `[4057, 4084, 4084, 4084]` on each
+half. **Phase H3's arena is four-colourable. The object is dead.**
+
+---
+
+## PH3-21 — Does any version of "the 72 are load-bearing" survive? **Yes, one — and it is exactly as strong as §6b already said, which is: not evidence**
+
+**The product owner's correction is accepted in full, and the error he names as his was one my scope note
+should have made impossible to draw.** I wrote *"this exhausts the additive twist family, not the twist
+family"* and then, in the same breath, *"the 72 off-diagonal cross edges are measurably load-bearing"* —
+**and the second sentence silently drops the qualifier the first one had just installed.** Writing the
+caveat and then writing the headline as if the caveat were not there is worse than omitting it, because
+the caveat makes the headline look audited. That is my share of it, and it is not small.
+
+**What survives, stated exactly.** My own search gives the characterisation for free:
+
+> Of the 96 passing pairs, **0 are twists** and **0 have `f` and `g` in the same partition** — and those
+> are the same statement, since two homomorphisms with equal kernels differ by an automorphism of `𝔽₂²`,
+> which is a colour permutation.
+
+The two halves of a type-M arena are **literally the same graph on the same index list** (G46's data-layout
+fact), so the half-to-half map is a graph isomorphism, and a twist is precisely a colouring under which
+that isomorphism is colour-preserving up to relabelling. Hence:
+
+> **The 72 off-diagonal cross edges are a symmetry-breaking constraint. They kill every *equivariant*
+> four-colouring of the arena — every one in which the two isomorphic halves carry the same partition —
+> and no other kind. The arena is four-colourable, but no four-colouring of it respects the symmetry
+> between its halves.**
+
+**That population is natural and it has a name** — the equivariant colourings — so the claim is a real
+structural fact rather than a failed conjecture. **And it is worth very little, for a reason that should be
+stated in the same breath.** The equivariant family is *exactly* the family `M63-phaseH2-the-family.md`
+§6b's theorem is about; §6b's hypothesis failing is §6b's own stated non-result (*"the twist family is
+exhausted and nothing is decided"*). **So the surviving claim says the sufficient condition in §6b is not
+met — which §6b already tells you carries no information.** Dressing that as "load-bearing" was the error.
+
+**The generator lesson, since this is the third instance in one milestone.** A positive control proves an
+instrument finds things **of the shape its generator can represent**. My generator's image was
+`{(C, π∘C)}`; the target lived in `{(f, g)}`; the generator's image is a **measure-zero slice** of the
+target space — 24 partitions × 24 permutations against `144²` — and **the instrument could not represent
+what it was searching for.** `CLAUDE.md` already says *before believing any zero over a family, write down
+the generator's image and check the target is inside it.* I did not, and the cheapest possible check would
+have caught it: **the twist ansatz has one free parameter where the problem has two.**
+
+---
+
+## Closing — the phase's verdict and the final accounting
+
+**The object is dead**, and by derivation rather than by one measurement: the additive colourings are
+homomorphisms on the **whole lattice**, so they survive arbitrary growth of the disk cut, while the cross
+edges are pinned at **252** by the endpoint bound. **The arena is four-colourable at every radius.** No
+amount of material rescues it. The product owner's monotonicity lever measured its first real number here
+(interface patterns `10²¹ → 10⁴` for a 2.6× base) — **right lever, wrong object.**
+
+**The phase's product is a screen, and it is the thing to carry forward** (the product owner's, recorded
+here, and **not verified by me**): *the additive-pair route is open exactly when `4 ∤ n` and killed exactly
+when `4 | n`* — and every 6-open member of the standing gate-A list (`n = 16, 44, 64, 108, 132`) is
+`≡ 0 (mod 4)`. **Phase H3 chose `n = 2`, the cheapest member of precisely the class this route can kill.**
+A one-line screen now stands between any future member and a day of work.
+
+### Final dispositions
+
+| # | subject | disposition |
+|---|---|---|
+| PH3-1 | the 60/0 split is the shape's doing | **upheld** |
+| PH3-2 | "twice the record's circle and unit-neighbour count" | **refuted** |
+| PH3-3 | P-H3-1's covolume derivation and band | **upheld**, measured 16,309 |
+| PH3-4 | "index four in the denominator-12 one" | **refuted** |
+| PH3-5 | closure versus generation in brief §6 step 1 | **refuted step**, 16× trap avoided |
+| PH3-6 | *my* "half a million vertices" | **retracted by me** |
+| PH3-7 | P-H3-5's scoring threshold | **refuted**; retracted by the product owner (PH3-16) |
+| PH3-8 | `n = 2` killed in phase H2, uncited | **upheld** |
+| PH3-9 | 72 off-diagonal cross edges | **upheld as a count**; its *significance* retracted (PH3-21) |
+| PH3-10 | P-H3-2 | **met** at 499 |
+| PH3-11 | "two of three free" | **upheld** |
+| PH3-12 | *my* "√3-scaled copy" | **retracted by me** |
+| PH3-13 | realised unit degree 10.56 → 7.37 | **upheld** as a measurement |
+| PH3-14 | "smaller **and** unsealed" | **refuted** |
+| PH3-15 | too thin to refuse four colours | **STRUCK by me**, on the product owner's challenge |
+| PH3-16 | the units rule | **recorded**, going to `CLAUDE.md` |
+| PH3-17 | the §6b question | **SAT**, 12 witnesses; scope over-read downstream |
+| PH3-18 | the record's own degeneracy | **7** — the benchmark I should have used |
+| PH3-19 | 144 against 72 | **my convention was wrong**; the invariant is **24** |
+| PH3-20 | the independent-pair search | **96 of 20,736, zero twists** — the object is **DEAD** |
+| PH3-21 | "the 72 are load-bearing" | **survives only as a symmetry-breaking fact, which is not evidence** |
+
+**Retractions I caused: seven.** **Retractions I made myself: six** — PH3-6, PH3-12, PH3-15 (struck
+entirely), PH3-19 (my count convention), PH3-21 (my claim's significance), and the scope-drop in PH3-17
+that let the load-bearing reading out.
+
+**The count is the point, and it cut both ways.** Four of my six self-retractions were caused by someone
+else recomputing a number my frame said was settled — the product owner on the benchmark, the solver
+engineer on the count and on the generator. **That is the cost window working in the direction it is
+supposed to and in the direction it is easier to forget: an advisor is also an agent whose errors are
+cheapest to find while nothing has been paid for.** Zero retractions from me would not have meant I was
+right.
+
