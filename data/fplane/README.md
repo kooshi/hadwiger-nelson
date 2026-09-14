@@ -55,5 +55,29 @@ They are not independent: a colouring equivariant under (g, τ) is equivariant u
 rows and the order-3 row.** What the record licenses: *no six-colouring of UD(𝔽₈₃, 2) has a rotational symmetry of order 7,
 12, 14, 21, 28, 42 or 84, nor one of order 2, 3, 4 or 6 with a τ outside the five listed classes* (the solver's refusals,
 untrusted); nothing about the five open rows, and nothing about six-colourability itself. The full-plane formulation's run
-(`equivariant-p83-k6.json`, one row at a time) is the second instrument and is recorded when it finishes; its first hard
-rows read unknown at 1,567 s and 3,625 s.
+(`equivariant-p83-k6.json`, one row at a time, the pre-patch code, 4 h 6 min wall on one core) is the second instrument: it
+agrees on 62 of 63 rows and **refutes (6, (3,2,1)) in 760 s where the quotient read unknown at the same budget** — its other
+four hard rows read unknown at 1,567 / 3,625 / 1,371 / 993 s. So the two formulations are different instruments, not one
+faster than the other: the quotient clears the easy rows in seconds and the full-plane form, with its redundant equivariance
+clauses, is the stronger refuter on a hard row (as at 23). **Standing after both: four rows open — (2, (2,2,1,1)),
+(2, (2,1,1,1,1)), (3, (3,1,1,1)), (4, (4,1,1)) — of which the first three are minimal and imply the fourth.**
+
+## The plane at 83 at six colours — the finding side by local search (FS-40 phase A′, 2026-09-14)
+
+`plane-colour-p83-k6.json` — the record of the Rust tabu-search colourer (`~/source/descent-engine/crates/plane-colour/`,
+commissioned 2026-09-14; its `rerun` field is the exact command; `vertex_index` and `edge_rule` travel in the file) at
+`p = 83, k = 6`: **not found**. 16 threads, seed 1, 600 s wall on the desktop, 78,334,976 iterations at 0.13 M/s aggregate,
+18 restarts. The best assignment leaves **17,272 of 289,338 edges monochromatic (5.97%)**, reached to within 0.5% in ten
+seconds and unchanged from 140 s to the deadline. **Re-verified here** with `fplane.ud_edges(83)` (289,338 edges, degree 84):
+the same 17,272; the six classes have sizes 1,174 / 1,141 / 1,128 / 1,152 / 1,160 / 1,134 (required average 1,148.2; ratio
+bound on any independent set 1,199.5) and carry 3,117 / 2,783 / 2,669 / 2,964 / 3,006 / 2,733 internal edges — an average
+same-class degree of 4.7–5.3 (internal edges per vertex 2.4–2.7). So the search finds classes of the size the spectrum
+permits and cannot make them independent; the tool's own controls (five colours at 11, 19 and four at 7 found in under a
+second; four at 11 not found with best conflicts ≥ 1; the verifier sweeps all 23.7 M vertex pairs from the definition) and
+our round trip of its 11 and 19 colourings through `ud_edges` are the reasons to read the plateau. **What it licenses:**
+nothing about six-colourability — a local search exhibits or does not; "not found" at this budget is a datum about the
+search, and the class structure is the reading (G21: the negative measures its enumeration). The next instrument on this
+side is a search for one independent set of size ≥ 1,149 (the necessary condition), and the certificate route is a refutation
+of that size with proof logs (χ ≥ 7). Caveat carried: ~8,100 moves/s per thread suggests the move evaluation is not
+O(degree); a faster search or a stronger algorithm (PartialCol, a hybrid evolutionary colourer) is the control on whether
+5.97% is the instance's floor or the search's.
