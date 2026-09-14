@@ -1,0 +1,20 @@
+{
+ "kind": "fs50-race",
+ "p": 11,
+ "n": 121,
+ "N": 32,
+ "encoding": "totalizer",
+ "cube": 0,
+ "pinned": [
+  0
+ ],
+ "excluded": 0,
+ "wall": 840.0,
+ "clauses": 8828,
+ "aux_vars": 840,
+ "encode_seconds": 0.009211301803588867,
+ "solve_seconds": 3.3478450775146484,
+ "verdict": "unsat",
+ "solver": "cadical 2.1.2 (the Lean toolchain's), -t wall",
+ "cnf": "p11-N32.cnf"
+}

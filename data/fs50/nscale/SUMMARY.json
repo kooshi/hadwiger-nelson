@@ -1,0 +1,72 @@
+{
+ "kind": "fs50-nscale-summary",
+ "machine": "desktop, one core per run, 2026-09-14, the advisor's pass (no compute) beside it",
+ "instance": "the monolith: origin pinned, totalizer, cadical -t 840",
+ "p11": {
+  "ratio_bound": 34.55,
+  "alpha": 28,
+  "refutations": {
+   "p11-N29": {
+    "verdict": "unsat",
+    "seconds": 32.2
+   },
+   "p11-N30": {
+    "verdict": "unsat",
+    "seconds": 17.1
+   },
+   "p11-N32": {
+    "verdict": "unsat",
+    "seconds": 3.3
+   },
+   "p11-N34": {
+    "verdict": "unsat",
+    "seconds": 0.7
+   },
+   "p11-N35": {
+    "verdict": "unsat",
+    "seconds": 0.5
+   },
+   "p11-N36": {
+    "verdict": "unsat",
+    "seconds": 0.3
+   }
+  },
+  "reading": "smooth: 0.3 s at N=36 down to 32 s at N=29 \u2014 resolution finds the refutation at every size at 121 vertices"
+ },
+ "p19": {
+  "ratio_bound": 99.5,
+  "alpha_ge": 76,
+  "refutations": {
+   "p19-N100": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N110": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N77": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N80": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N85": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N90": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   },
+   "p19-N95": {
+    "verdict": "unknown",
+    "seconds": 840.0
+   }
+  },
+  "reading": "undecided at 840 s at EVERY N from 77 to 110, including 100 and 110 above the ratio bound \u2014 at 361 vertices the spectral argument is already out of resolution's reach"
+ },
+ "p23": "see race23/SUMMARY.json n_scaling: undecided at every N from 110 to 140 (ratio bound 131.76)"
+}
