@@ -143,5 +143,39 @@ naming orbit 0 and the difference 10⁻¹⁶), the claim strengthened by one wit
 went red naming its site, the faithful certificate passed before and after, and the restore was
 re-verified.
 
+## Phase E at 83, priced before it is run
+
+Two measurements and one finding, all made while the block-form solve at 83 was still running.
+
+**The checker at 83 costs 31 seconds and 410 MB.** Measured on a synthetic certificate — no solver, junk
+blocks of the shape a real one will have (43 blocks, 165 slots, full rank 165, weights over 10⁶, Gram
+factors over 10⁸), so the timing is the checker's and nothing else's: the orbit structure and the 98,894
+canonical rows in 1.5 s, the two matrices' orbit sums in 13.0 s each, the multipliers and `N` in 0.6 s,
+and the file 33.7 MB (at rank 60: 20.6 s and 19.8 MB). **The stub's worry — 49k classes × 86 blocks might
+cost days — does not materialise**, for the reason section 7 of the derivation gives: the sums the
+identity needs are the weights' correlations, so the work is `m` products per block per ordered pair of
+circles, about 24 million steps, and never the 47 million-entry matrix.
+
+One change was needed to get there, and it is worth naming because it was invisible at 23. The identity
+check scanned every constraint row for every orbit — `O(orbits × rows)`, which is 2,724 steps at 11 and
+**4.9 billion at 83**. Every row has at most two coefficients, so indexing the rows by the orbit they
+touch makes it `O(orbits + rows)`. The 23 check went from 11.2 s to 5.1 s and both certificates verify
+identically; at 83 it is the difference between half a minute and a week.
+
+**The finding: the running block solve cannot feed a certificate.** `tools/fplane_sdp_blocks.py` writes
+`value`, `status` and metadata — its `solve()` returns the primal `y` and main() does not store it, and
+it never asks cvxpy for the dual matrices at all. So `sdp-p83-blocks.json`, when it lands, is **one float**:
+decisive for the reading (is the triple-level bound below 1,149?) and unusable as a certificate's input.
+The certificate at 83 needs its own solve, keeping the duals — `tools/fplane_cert_round.py --p 83 --blocks`,
+which sets the problem up in exactly the convention `fplane_cert_check.load_circulant` reads, caches the
+duals to `--dual-cache` so the rounding sweep never re-pays the solve, and is expected to want what the
+running one wants (≈ 26 GB, single-threaded, hours).
+
+That producer is controlled end to end at 11, where the answer is known: **N = 29.176927** from the block
+form against **29.176807** from the dense certificate and **29.176799** from the solver — CERTIFIED by the
+checker through the circulant path, in a 0.05 MB file, and evaluating correctly term by term at the
+verified 28-point maximum independent set (`--against data/fplane/alpha-p11.json`: `⟨Z1,Y⟩ = 1.1458`,
+`⟨Z2,M−Y⟩ = 0`, `Σλ·c = 0.0311`, `N − |S| = 1.1769`).
+
 Regenerate: `python3 tools/fplane_lp.py --self-test` (controls: `ϑ′` reproduced with no rows; 28 feasible at 11 and 76 at
 19 under every family; a planted `α` moves the bound, two-sided), then the three commands above.

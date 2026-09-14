@@ -949,13 +949,20 @@ def check(cert: dict, k: int | None = None, force_ldl: bool = False, out=sys.std
     rhs_const = -sum((m[i] * rows[i][3] for i in range(len(rows))), Fraction(0))
     if lhs_const != rhs_const:
         raise Refusal(f"the identity's constant term disagrees: left side {lhs_const}, right side {rhs_const}")
+    # index the rows by the orbit they touch, once.  Scanning every row for every orbit is
+    # O(orbits x rows) -- 49,447 x 98,860 at p = 83, five billion steps -- while every row has at
+    # most two coefficients, so the index costs O(rows) and the check below O(orbits + rows).
+    by_orbit = [[] for _ in range(K)]
+    for i, (_kind, _sense, coeffs_i, _rhs) in enumerate(rows):
+        if m[i] == 0:
+            continue
+        for kk, c in coeffs_i.items():
+            by_orbit[kk].append((i, c))
     for kk in range(K):
         lhs = Fraction(-t[kk])
         rhs = Fraction(s1[kk], d1) + Fraction(s2m[kk], d2) - Fraction(s2y[kk], d2)
-        for i, (_kind, _sense, coeffs_i, _rhs) in enumerate(rows):
-            c = coeffs_i.get(kk)
-            if c is not None and m[i] != 0:
-                rhs += m[i] * c
+        for (i, c) in by_orbit[kk]:
+            rhs += m[i] * c
         if lhs != rhs:
             u, v = B["rep"][kk]
             raise Refusal(f"identity fails at orbit {kk}, representative pair "
@@ -1278,8 +1285,21 @@ def evaluate_at_set(cert: dict, S: list, out=sys.stdout) -> bool:
     tr = sum((Fraction(t[k]) * y[k] for k in range(K)), Fraction(0))
     if tr != len(S):
         raise Refusal(f"trace Y = {tr} but the set has {len(S)} points")
-    Z1, d1 = load_psd(need(need(cert, "psd", "certificate"), "Z1", "certificate.psd"), n, "Z1", False, lambda _s: None)
-    Z2, d2 = load_psd(need(need(cert, "psd", "certificate"), "Z2", "certificate.psd"), n, "Z2", False, lambda _s: None)
+    z1o = need(need(cert, "psd", "certificate"), "Z1", "certificate.psd")
+    z2o = need(need(cert, "psd", "certificate"), "Z2", "certificate.psd")
+    if "circulant" in z1o:
+        # this display assembles the matrices, which is quadratic in the number of points; the four
+        # checks never do.  It is a reading aid, so it is offered only where assembling is cheap.
+        if p > 29:
+            raise Refusal(f"--against assembles the certificate's matrices to display the identity term "
+                          f"by term, and at p = {p} they have {n * n} entries. The four checks do not "
+                          f"assemble anything and are unaffected; re-run without --against.")
+        F = build_orbits_fast(p)
+        Z1, d1 = circulant_to_dense(z1o["circulant"], F)
+        Z2, d2 = circulant_to_dense(z2o["circulant"], F)
+    else:
+        Z1, d1 = load_psd(z1o, n, "Z1", False, lambda _s: None)
+        Z2, d2 = load_psd(z2o, n, "Z2", False, lambda _s: None)
     m = [as_frac(x, "multiplier") for x in need(cert, "multipliers", "certificate")]
     N = as_frac(need(cert, "N", "certificate"), "certificate.N")
     Yv = [y[orb[i]] for i in range(n * n)]
