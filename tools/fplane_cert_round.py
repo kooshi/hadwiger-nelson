@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
 import sys
 import time
@@ -52,8 +53,12 @@ import fplane_cert_check as C     # the checker's orbit construction, so the ind
 # --------------------------------------------------------------------------------------------
 
 
-def solve(B, solver="CLARABEL", verbose=False):
-    """The linear form, with the duals kept.  Returns (value, Z1, Z2) as float matrices."""
+def solve(B, solver="CLARABEL", verbose=False, opts=None):
+    """The linear form, with the duals kept.  Returns (value, Z1, Z2) as float matrices.
+
+    `opts` is passed through to the solver: at p = 23 and above the default first-order tolerance
+    (SCS: 1e-4) leaves a dual whose rounding costs more than the gap to the next integer, so the
+    caller tightens it and pays the iterations."""
     import cvxpy as cp
     n, K, k0 = B["n"], B["K"], B["k0"]
     orb, g_orbit, sub, t = B["orb"], B["g_orbit"], B["sub"], B["t"]
@@ -74,7 +79,7 @@ def solve(B, solver="CLARABEL", verbose=False):
             continue
         cons.append(y[k] <= y[B["g_orbit"][B["rep"][k][0]]])
     prob = cp.Problem(cp.Maximize(cp.sum(cp.multiply(np.array(t, dtype=float), y))), cons)
-    prob.solve(solver=solver, verbose=verbose)
+    prob.solve(solver=solver, verbose=verbose, **(opts or {}))
     return prob.value, prob.status, np.asarray(cY.dual_value), np.asarray(cMY.dual_value)
 
 
@@ -136,7 +141,7 @@ def score(B, rows, num1, d1, num2, d2):
     return N, mult
 
 
-def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra):
+def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra, psd=None):
     n = B["n"]
     import math
     cert = dict(
@@ -153,7 +158,7 @@ def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra):
         constraints=[dict(kind=a, sense=b, coeffs={str(x): str(y) for x, y in c.items()}, rhs=str(d))
                      for (a, b, c, d) in rows],
         multipliers=[str(x) for x in mult],
-        psd=dict(
+        psd=psd if psd is not None else dict(
             Z1=dict(blocks=[dict(U=None, gram=dict(den=str(d1),
                                                    num=[[int(x) for x in row] for row in num1]))]),
             Z2=dict(blocks=[dict(U=None, gram=dict(den=str(d2),
@@ -166,6 +171,262 @@ def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra):
     return cert
 
 
+# --------------------------------------------------------------------------------------------
+# the block form: the only one that fits at p = 83
+# --------------------------------------------------------------------------------------------
+
+
+def weight_vectors(m, j):
+    """The two real Fourier weights of index j over the m angles, as float arrays: cos and sin.
+
+    They are the producer's CHOICE, not a premise of the check -- U Z U^T is positive semidefinite
+    for any rational U -- but they are the choice that makes N small, because with them the block
+    U_j^T Y U_j is exactly the j-th Fourier block of a rotation-invariant Y, which is what the
+    relaxation's dual wants to be diagonal in.  At j = 0 and j = m/2 they are integers already."""
+    th = np.arange(m)
+    return np.cos(2 * np.pi * j * th / m), np.sin(2 * np.pi * j * th / m)
+
+
+def block_setup(F):
+    """The block maps of the SDP, in exactly the convention `fplane_cert_check.load_circulant` reads:
+    for each j, the (2C+1)x(2C+1) symmetric matrix U_j^T Y(y) U_j as a sparse linear map of y, and the
+    same for M(y).  Returns (js, maps_Y, maps_M, weights)."""
+    m, C, K = F["m"], F["C"], F["K"]
+    W = 2 * C + 1
+    nz, ro, rd, zorb, k0 = F["nz"], F["rot_orb"], F["rot_diff"], F["zorb"], F["k0"]
+    js = list(range(m // 2 + 1))
+    mapsY, mapsM, weights = [], [], []
+    for j in js:
+        a, b = weight_vectors(m, j)
+        o = 1.0 if j == 0 else 0.0
+        Aaa = np.array([float(np.dot(a, np.roll(a, -d))) for d in range(m)])
+        Aab = np.array([float(np.dot(a, np.roll(b, -d))) for d in range(m)])
+        Aba = np.array([float(np.dot(b, np.roll(a, -d))) for d in range(m)])
+        Abb = np.array([float(np.dot(b, np.roll(b, -d))) for d in range(m)])
+        Sa, Sb = float(a.sum()), float(b.sum())
+        weights.append((a, b, o))
+        out = []
+        for src in (ro, rd):
+            rows, cols, vals = [], [], []
+
+            def put(r, c, k, v):
+                if v:
+                    rows.append(r * W + c)
+                    cols.append(k)
+                    vals.append(v)
+
+            for ca in range(C):
+                for cb in range(C):
+                    base = nz(ca, cb, 0)
+                    for d in range(m):
+                        k = src[base + d]
+                        put(ca, cb, k, Aaa[d])
+                        put(ca, C + cb, k, Aab[d])
+                        put(C + ca, cb, k, Aba[d])
+                        put(C + ca, C + cb, k, Abb[d])
+            if o:
+                for cb in range(C):
+                    put(2 * C, cb, zorb[cb], o * Sa)
+                    put(cb, 2 * C, zorb[cb], o * Sa)
+                    put(2 * C, C + cb, zorb[cb], o * Sb)
+                    put(C + cb, 2 * C, zorb[cb], o * Sb)
+                put(2 * C, 2 * C, k0, o * o)
+            out.append(sp.csr_matrix((np.array(vals), (np.array(rows), np.array(cols))),
+                                     shape=(W * W, K)))
+        mapsY.append(out[0])
+        mapsM.append(out[1])
+    return js, mapsY, mapsM, weights
+
+
+def solve_blocks(F, rows, solver="SCS", verbose=False, opts=None):
+    """The same relaxation as `solve`, block-diagonalised, with the duals kept.  Returns
+    (value, status, [W_j], [V_j]) -- one dual matrix per block for Y and for M - Y."""
+    import cvxpy as cp
+    K, k0 = F["K"], F["k0"]
+    js, mapsY, mapsM, weights = block_setup(F)
+    W = 2 * F["C"] + 1
+    y = cp.Variable(K, nonneg=True)
+    cons = [y[k0] == 1]
+    for k in range(K):
+        if F["killed"][k]:
+            cons.append(y[k] == 0)
+    for (kind, _sense, coeffs, _rhs) in rows:
+        if kind == "le_diag":
+            neg = [x for x, c in coeffs.items() if c < 0][0]
+            pos = [x for x, c in coeffs.items() if c > 0][0]
+            cons.append(y[neg] <= y[pos])
+    cY, cM = [], []
+    for AY, AM in zip(mapsY, mapsM):
+        Yb = cp.reshape(AY @ y, (W, W), order="C")
+        Mb = cp.reshape(AM @ y, (W, W), order="C")
+        c1, c2 = (Yb >> 0), (Mb - Yb >> 0)
+        cons += [c1, c2]
+        cY.append(c1)
+        cM.append(c2)
+    prob = cp.Problem(cp.Maximize(cp.sum(cp.multiply(np.array(F["t"], dtype=float), y))), cons)
+    prob.solve(solver=solver, verbose=verbose, **(opts or {}))
+    return (prob.value, prob.status, [np.asarray(c.dual_value) for c in cY],
+            [np.asarray(c.dual_value) for c in cM], weights)
+
+
+def round_weights(a, b, wden):
+    return ([int(round(float(x) * wden)) for x in a], [int(round(float(x) * wden)) for x in b])
+
+
+def circulant_psd(F, Ws, weights, sgn, thr, den, wden):
+    """The wire form of one matrix: rounded weights and a rational Gram factor per block."""
+    blocks = []
+    scale = max(float(np.abs(Z).max()) for Z in Ws) or 1.0
+    for (Z, (a, b, o)) in zip(Ws, weights):
+        num, d = gram_round(sgn * Z, thr * scale, den)
+        ai, bi = round_weights(a, b, wden)
+        blocks.append(dict(a=ai, b=bi, o=int(round(o * wden)),
+                           gram=dict(den=str(d), num=[[int(x) for x in row] for row in num])))
+    return dict(circulant=dict(weight_den=str(wden), blocks=blocks))
+
+
+def score_blocks(F, rows, psd1, psd2):
+    quiet = lambda _s: None
+    rot1, d1 = C.load_circulant(psd1["circulant"], F, "Z1", False, quiet)
+    rot2, d2 = C.load_circulant(psd2["circulant"], F, "Z2", False, quiet)
+    s1, _ = C.orbit_sums_from_rot(F, rot1, d1)
+    s2y, s2m = C.orbit_sums_from_rot(F, rot2, d2)
+    return C.multipliers_from_sums(F, rows, s1, d1, s2y, s2m, d2)
+
+
+def main_blocks(a):
+    """Phase E's producer: the certificate at a prime where the matrix cannot be written out."""
+    t0 = time.time()
+    F = C.build_orbits_fast(a.p)
+    rows = C.canonical_constraints(F)
+    print(f"[blocks] p = {a.p}: {F['n']} points, {F['C']} circles, {F['NR']} rotation orbits, "
+          f"{F['K']} pair orbits, {sum(F['killed'])} killed, {len(rows)} canonical constraints "
+          f"({time.time() - t0:.1f} s)", flush=True)
+    cache = Path(a.dual_cache) if a.dual_cache else None
+    if cache is not None and cache.exists():
+        z = np.load(cache, allow_pickle=True)
+        val, status = float(z["val"]), str(z["status"])
+        Ws = [z[f"W{i}"] for i in range(int(z["nb"]))]
+        Vs = [z[f"V{i}"] for i in range(int(z["nb"]))]
+        weights = [(z[f"wa{i}"], z[f"wb{i}"], float(z[f"wo{i}"])) for i in range(int(z["nb"]))]
+        print(f"[blocks] the float bound, from the cache {cache}: {val:.6f} ({status}); the solve is "
+              f"skipped", flush=True)
+    else:
+        opts = {}
+        if a.eps is not None:
+            opts.update(eps_abs=a.eps, eps_rel=a.eps)
+        if a.max_iters is not None:
+            opts["max_iters"] = a.max_iters
+        t1 = time.time()
+        val, status, Ws, Vs, weights = solve_blocks(F, rows, solver=a.solver, verbose=a.verbose,
+                                                    opts=opts)
+        print(f"[blocks] the float bound: {val:.6f} ({status}, {a.solver}) in {time.time()-t1:.1f} s",
+              flush=True)
+        if cache is not None:
+            cache.parent.mkdir(parents=True, exist_ok=True)
+            d = dict(val=val, status=status, nb=len(Ws))
+            for i, (Wm, Vm, (wa, wb, wo)) in enumerate(zip(Ws, Vs, weights)):
+                d[f"W{i}"], d[f"V{i}"] = Wm, Vm
+                d[f"wa{i}"], d[f"wb{i}"], d[f"wo{i}"] = wa, wb, wo
+            np.savez_compressed(cache, **d)
+            print(f"[blocks] the duals cached in {cache} "
+                  f"({cache.stat().st_size / 1e6:.1f} MB)", flush=True)
+    seen = {}
+    ck = Path(a.ckpt) if a.ckpt else None
+    if ck is not None and ck.exists():
+        for line in ck.read_text().splitlines():
+            if line.strip():
+                r = json.loads(line)
+                seen[(r["s1"], r["s2"], r["thr"], r["den"], r["wden"])] = Fraction(r["N"])
+        print(f"[blocks] the checkpoint {ck} holds {len(seen)} scored candidate(s)", flush=True)
+
+    def record(key, N):
+        seen[key] = N
+        if ck is None:
+            return
+        ck.parent.mkdir(parents=True, exist_ok=True)
+        with ck.open("a") as fh:
+            fh.write(json.dumps(dict(p=a.p, s1=key[0], s2=key[1], thr=key[2], den=key[3],
+                                     wden=key[4], N=str(N), N_float=float(N))) + "\n")
+
+    thresholds = [float(x) for x in a.thresholds.split(",")]
+    denominators = [int(x) for x in a.denominators.split(",")]
+    wdens = [int(x) for x in a.weight_denominators.split(",")]
+
+    def try_candidate(key):
+        """Score one rounding, exactly, through the checker's own arithmetic.  Returns N or None."""
+        if key in seen:
+            return seen[key], "  (from the checkpoint)"
+        (s1, s2, thr, den, wd) = key
+        t1 = time.time()
+        psd1 = circulant_psd(F, Ws, weights, s1, thr, den, wd)
+        psd2 = circulant_psd(F, Vs, weights, s2, thr, den, wd)
+        try:
+            _m, N = score_blocks(F, rows, psd1, psd2)
+        except (ValueError, C.Refusal) as e:
+            print(f"[blocks]   {key}: no certificate ({e})", flush=True)
+            return None, ""
+        record(key, N)
+        return N, f"  ({time.time() - t1:.0f} s)"
+
+    # 1. the dual SIGN convention is the solver's, not ours: one cheap probe settles it.  Any sign
+    #    gives a SOUND certificate; only one gives a small N.
+    probe = {}
+    base_key = (thresholds[0], denominators[0], wdens[0])
+    for s1 in (1, -1):
+        for s2 in (1, -1):
+            N, tag = try_candidate((s1, s2) + base_key)
+            if N is None:
+                continue
+            probe[(s1, s2)] = N
+            print(f"[blocks]   dual signs ({s1:+d},{s2:+d}): N = {float(N):.6f}{tag}", flush=True)
+    if not probe:
+        print("[blocks] no sign convention produced a certificate at all")
+        return 1
+    (s1, s2) = min(probe, key=lambda k: probe[k])
+    print(f"[blocks] taking the dual signs ({s1:+d},{s2:+d})", flush=True)
+    # 2. the sweep, every candidate scored by the exact bound it proves
+    best = None
+    for thr in thresholds:
+        for den in denominators:
+            for wd in wdens:
+                key = (s1, s2, thr, den, wd)
+                N, tag = try_candidate(key)
+                if N is None:
+                    continue
+                if best is None or N < best[0]:
+                    best = (N, key)
+                    tag += "  <- best so far"
+                print(f"[blocks]   cut {thr:g}, gram denominator {den}, weight denominator {wd}: "
+                      f"N = {float(N):.6f}{tag}", flush=True)
+    if best is None:
+        print("[blocks] no candidate produced a certificate")
+        return 1
+    (N, (s1, s2, thr, den, wd)) = best
+    psd1 = circulant_psd(F, Ws, weights, s1, thr, den, wd)
+    psd2 = circulant_psd(F, Vs, weights, s2, thr, den, wd)
+    mult, N2 = score_blocks(F, rows, psd1, psd2)
+    if N2 != N:
+        raise SystemExit(f"[blocks] the winner re-scored to {N2}, not the {N} the sweep recorded")
+    print(f"[blocks] best exact N = {N} = {float(N):.6f}; alpha(UD(F_{a.p}, 2)) <= {math.floor(N)}",
+          flush=True)
+    extra = dict(float_bound=float(val), solver=a.solver, solver_status=status,
+                 dual_signs=[s1, s2], eigenvalue_cut=thr, gram_denominator=den,
+                 weight_denominator=wd, blocks=len(Ws), seconds=time.time() - t0)
+    cert = build_certificate(a.p, N, mult, F, rows, None, None, None, None, extra,
+                             psd=dict(Z1=psd1, Z2=psd2))
+    if a.out:
+        Path(a.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(a.out).write_text(json.dumps(cert))
+        print(f"[blocks] wrote {a.out} ({Path(a.out).stat().st_size / 1e6:.2f} MB)", flush=True)
+        print("[blocks] handing it to the checker (a separate program, standard library only):",
+              flush=True)
+        r = subprocess.run(["python3", "tools/fplane_cert_check.py", a.out,
+                            "--k", str(math.ceil(F["n"] / math.floor(N)) - 1)])
+        return r.returncode
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--p", type=int, required=True)
@@ -173,16 +434,68 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--denominators", default="1000,10000,100000,1000000,10000000,100000000")
     ap.add_argument("--thresholds", default="1e-9,1e-7,1e-6,1e-5,1e-4,1e-3")
+    ap.add_argument("--dual-cache", help="npz file holding the symmetrised float duals: written after "
+                                         "the solve, read instead of solving when it already exists")
+    ap.add_argument("--ckpt", help="JSON-lines file, one scored rounding candidate per line; a resume "
+                                   "skips every candidate already in it")
+    ap.add_argument("--eps", type=float, help="the solver's tolerance (SCS: eps_abs = eps_rel = eps)")
+    ap.add_argument("--max-iters", type=int, help="the solver's iteration cap")
+    ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--blocks", action="store_true",
+                    help="the circulant block form: the only one that fits at p = 83")
+    ap.add_argument("--weight-denominators", default="1000000",
+                    help="denominators for the rounded Fourier weights (block form only)")
     a = ap.parse_args()
+    if a.blocks:
+        return main_blocks(a)
     t0 = time.time()
     B = C.build_orbits(a.p)
     rows = C.canonical_constraints(B)
     n, K = B["n"], B["K"]
     print(f"[round] p = {a.p}: {n} points, {K} pair orbits, {sum(B['killed'])} killed, "
           f"{len(rows)} canonical constraints", flush=True)
-    val, status, Z1f, Z2f = solve(B, solver=a.solver)
-    print(f"[round] the float bound: {val:.6f} ({status}, {a.solver}) in {time.time()-t0:.1f} s", flush=True)
-    Z1f, Z2f = symmetrise(B, Z1f), symmetrise(B, Z2f)
+    cache = Path(a.dual_cache) if a.dual_cache else None
+    if cache is not None and cache.exists():
+        z = np.load(cache)
+        val, status, Z1f, Z2f = float(z["val"]), str(z["status"]), z["Z1"], z["Z2"]
+        if Z1f.shape != (n, n):
+            raise SystemExit(f"[round] {cache} holds {Z1f.shape} duals, not {n}x{n}: wrong p")
+        print(f"[round] the float bound, from the cache {cache}: {val:.6f} ({status}); "
+              f"the semidefinite solve is skipped", flush=True)
+    else:
+        opts = {}
+        if a.eps is not None:
+            opts.update(eps_abs=a.eps, eps_rel=a.eps) if a.solver == "SCS" else opts.update(tol_gap_abs=a.eps, tol_gap_rel=a.eps, tol_feas=a.eps)
+        if a.max_iters is not None:
+            opts["max_iters"] = a.max_iters
+        val, status, Z1f, Z2f = solve(B, solver=a.solver, verbose=a.verbose, opts=opts)
+        print(f"[round] the float bound: {val:.6f} ({status}, {a.solver}) in {time.time()-t0:.1f} s", flush=True)
+        Z1f, Z2f = symmetrise(B, Z1f), symmetrise(B, Z2f)
+        if cache is not None:
+            cache.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(cache, val=val, status=status, Z1=Z1f, Z2=Z2f)
+            print(f"[round] the duals cached in {cache} ({cache.stat().st_size / 1e6:.1f} MB): a resume "
+                  f"re-reads them instead of solving", flush=True)
+    # the checkpoint: every candidate ever scored, so a kill costs only the candidates in flight
+    seen = {}
+    ck = Path(a.ckpt) if a.ckpt else None
+    if ck is not None and ck.exists():
+        for line in ck.read_text().splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            seen[(r["s1"], r["s2"], r["thr"], r["den"])] = Fraction(r["N"])
+        print(f"[round] the checkpoint {ck} holds {len(seen)} scored candidate(s); they are not re-scored",
+              flush=True)
+
+    def record(s1, s2, thr, den, N, ranks):
+        seen[(s1, s2, thr, den)] = N
+        if ck is None:
+            return
+        ck.parent.mkdir(parents=True, exist_ok=True)
+        with ck.open("a") as fh:
+            fh.write(json.dumps(dict(p=a.p, s1=s1, s2=s2, thr=thr, den=den, N=str(N),
+                                     N_float=float(N), ranks=ranks)) + "\n")
     thresholds = [float(x) for x in a.thresholds.split(",")]
     denominators = [int(x) for x in a.denominators.split(",")]
     # 1. the dual SIGN convention is the solver's, not ours: settle it with one cheap probe rather
@@ -191,6 +504,12 @@ def main():
     probe = {}
     for sgn1 in (1, -1):
         for sgn2 in (1, -1):
+            key = (sgn1, sgn2, 1e-6, 10000)
+            if key in seen:
+                probe[(sgn1, sgn2)] = seen[key]
+                print(f"[round]   dual signs ({sgn1:+d},{sgn2:+d}) at denominator 10^4: N = "
+                      f"{float(seen[key]):.4f}  (from the checkpoint)", flush=True)
+                continue
             num1, d1 = gram_round(sgn1 * Z1f, 1e-6 * np.abs(Z1f).max(), 10000)
             num2, d2 = gram_round(sgn2 * Z2f, 1e-6 * np.abs(Z2f).max(), 10000)
             try:
@@ -198,6 +517,7 @@ def main():
             except ValueError:
                 continue
             probe[(sgn1, sgn2)] = N
+            record(sgn1, sgn2, 1e-6, 10000, N, [len(num1), len(num2)])
             print(f"[round]   dual signs ({sgn1:+d},{sgn2:+d}) at denominator 10^4: N = {float(N):.4f}",
                   flush=True)
     if not probe:
@@ -207,22 +527,41 @@ def main():
     print(f"[round] taking the dual signs ({s1:+d},{s2:+d})", flush=True)
     # 2. sweep the eigenvalue cut and the rounding denominator; every candidate is scored by its
     #    EXACT N, so the sweep compares proofs and not residuals.
-    best = None
+    best = None                      # (N, the candidate's key) -- the winner is re-scored once at the end
     for thr in thresholds:
         for den in denominators:
+            key = (s1, s2, thr, den)
+            if key in seen:
+                N = seen[key]
+                mark = "  <- best so far" if (best is None or N < best[0]) else ""
+                if mark:
+                    best = (N, key)
+                print(f"[round]   cut {thr:g}, denominator {den:>11}: N = {float(N):.6f}{mark}"
+                      f"  (from the checkpoint)", flush=True)
+                continue
             num1, d1 = gram_round(s1 * Z1f, thr * np.abs(Z1f).max(), den)
             num2, d2 = gram_round(s2 * Z2f, thr * np.abs(Z2f).max(), den)
             try:
-                N, mult = score(B, rows, num1, d1, num2, d2)
+                N, _mult = score(B, rows, num1, d1, num2, d2)
             except ValueError:
                 continue
+            record(s1, s2, thr, den, N, [len(num1), len(num2)])
             mark = ""
             if best is None or N < best[0]:
-                best = (N, mult, num1, d1, num2, d2, (s1, s2, thr, den))
+                best = (N, key)
                 mark = "  <- best so far"
             print(f"[round]   cut {thr:g}, denominator {den:>11}: ranks {len(num1):3d},{len(num2):3d}"
                   f"  N = {float(N):.6f}{mark}", flush=True)
-    N, mult, num1, d1, num2, d2, (s1, s2, thr, den) = best
+    if best is None:
+        print("[round] no candidate produced a certificate")
+        return 1
+    # re-score the winner: the sweep keeps only its N, so the matrices are rebuilt once, here
+    (_N, (s1, s2, thr, den)) = best
+    num1, d1 = gram_round(s1 * Z1f, thr * np.abs(Z1f).max(), den)
+    num2, d2 = gram_round(s2 * Z2f, thr * np.abs(Z2f).max(), den)
+    N, mult = score(B, rows, num1, d1, num2, d2)
+    if N != _N:
+        raise SystemExit(f"[round] the winner re-scored to {N}, not the {_N} the sweep recorded")
     import math
     print(f"[round] best exact N = {N} = {float(N):.6f}; alpha(UD(F_{a.p}, 2)) <= {math.floor(N)}",
           flush=True)
