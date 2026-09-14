@@ -132,6 +132,13 @@ That last line is the honest negative and the reason FS-17 stays open: five colo
 `α ≤ 105`, and the relaxation's own optimum is 108.55, so **no dual of the triple level can reach it**.
 What the certificate settles is the upper end of the bracket, from 131 (Hoffman) to 108.
 
+`--ldl` — the redundant exact `LDLᵀ` on the assembled 529 × 529 matrices, instead of accepting the Gram
+factors on sight — is **not affordable at 23**: it was still inside the first of the two matrices after
+36 minutes and was killed there (it costs 13.2 s at 11). It proves nothing the Gram form does not, since
+`BᵀB` is positive semidefinite for any rational `B` whatever; what it guards against is a bug in the
+assembly, and that guard runs at `p = 3, 7, 11` and in the planted faults. Take the absence of an `--ldl`
+run at 23 as a statement about the cost of that redundancy, not about the certificate.
+
 `--against data/fs50/alpha-p23-ge87.json` evaluates the identity at the verified 87-point set, term by
 term, after re-verifying it independent from the definition: `trace Y = 87`, `⟨Z1, Y⟩ = 21.4216`,
 `⟨Z2, M − Y⟩ = 0.0000`, `Σ λ·c = 0.1245`, `Σ ν·e = 0` and `N − |S| = 21.5462` — the slack showing how far
