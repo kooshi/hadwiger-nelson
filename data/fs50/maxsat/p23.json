@@ -1,0 +1,14 @@
+{
+ "kind": "fs50-maxsat",
+ "p": 23,
+ "n": 529,
+ "solver": "RC2 (pysat), cadical195 backend",
+ "adapt": true,
+ "exhaust": true,
+ "minz": true,
+ "verdict": "interrupted",
+ "seconds": 1228.0759227275848,
+ "cost_lower_bound": 378,
+ "alpha_upper_bound": 151,
+ "cores_extracted": 0
+}

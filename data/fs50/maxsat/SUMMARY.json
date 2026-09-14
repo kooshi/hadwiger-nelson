@@ -1,0 +1,17 @@
+{
+ "kind": "fs50-maxsat-summary",
+ "machine": "desktop, one core per run, 2026-09-14, the WO-18 implementation session building beside it",
+ "formulation": "hard clauses = the edges and the origin pinned; one unit soft clause per vertex; RC2 (pysat, core-guided, cadical195 backend) with adapt+exhaust+minz; the optimum is alpha on the solver's word, no checkable proof",
+ "results": {
+  "11": "alpha = 28 in 0.44 s (2.06 s without adapt/exhaust/minz) \u2014 sixty times faster than the cardinality-circuit refusal of 29 (28 s)",
+  "19": "interrupted at 1,402 s: upper bound alpha <= 110 (n - cost = 361 - 251), above the ratio bound 99.5",
+  "23": "interrupted at 1,228 s: upper bound alpha <= 151 (529 - 378), above the ratio bound 131.8"
+ },
+ "reading": "core-guided MaxSAT is fast where the instance is tiny and stalls at 19 and 23 before reaching even the spectral bound: each core lowers the bound by one and the cores slow as they go (about 5.6 s per core at 19 by the end); not the lever for the certificate; the cores_extracted field is a bookkeeping miss (0 recorded while the cost advanced)",
+ "files": [
+  "p11.json",
+  "p11-aem.json",
+  "p19.json",
+  "p23.json"
+ ]
+}
