@@ -77,5 +77,11 @@
  },
  "status": "GENERATED, NOT CHECKED \u2014 no LRAT/DRAT checker exists on this machine (CLAUDE.md row 64's precedent). What holds: cadical exited 20 on the formula with the edge and 10 without it, and the proof's last line is the empty clause. Consuming it in Lean is FS-38 phase K3's, through `tools/emit_mask.py`.",
  "regenerate": "python3 tools/fs38_tower.py lrat",
- "seconds": 0.4
+ "seconds": 0.4,
+ "kernel_certificate": {
+  "what": "the kernel-checked certificate is NOT this full 1,024-vertex instance but its refutation core: 125 vertices, 778 edges, 3,240 clauses, derived from this LRAT by backward reachability from the empty clause (861 of the 99,335 formula clauses reached), induced and re-solved with the flags above",
+  "where": "Proofs/HadwigerNelson/Instances/TwoAdicFive/Edges.lean + Instances/TwoAdicFive/Cnf/ (19 generated modules)",
+  "consumed_by": "Instances/TwoAdicFive.lean, twoAdicFive_not_colorable_with_edge (kernel; plans/FS38-residue-tower.md \u00a7R2.4)",
+  "this_lrat": "provenance: *.lrat is gitignored repository-wide and regenerates byte-identically from the committed edge list and these flags; no .gitignore exception is needed because the modules are the certificate"
+ }
 }
