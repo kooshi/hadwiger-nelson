@@ -51,8 +51,8 @@ by 19%; at 19, α ≥ 76 against 99.5; at 23, α ∈ [69, 131]. If the looseness
 | a k-colouring needs α ≥ ⌈n/k⌉ | **kernel** | `card_le_mul_of_colorable`, `card_le_chromaticNumber_mul_indepNum` (row 56) |
 | Hoffman: α(83) ≤ 1,199.46; the floor 6 | derived on exact character sums, floats to 1e-12 | `spectral-p83.json` |
 | ϑ = ϑ′ = Hoffman at 11, 19, 23, 83 (float LP) | computed 2026-09-14 (`fplane.py theta --below 84`) | this stub; row 56's "ϑ = Hoffman at eleven primes" |
-| α(11) = 28; α(19) ≥ 76; α(23) ∈ [69, 131], 106 undecided at 7,200 s | verified sets; the solver's refusal at 11 | `alpha-p11/19/23.json` |
-| greedy independent set at 83: 358 over 25 orders (≈ a random 84-regular graph's 363) | the engineer's measurement | `WO-18-independent-set.md` |
+| α(11) = 28; α(19) ≥ 76; α(23) ∈ [87, 131] (the engineer's WO-18 planning prototype, 2026-09-14, re-verified: `data/fs50/alpha-p23-ge87.json`), 106 undecided at 7,200 s | verified sets; the solver's refusal at 11 | `alpha-p11/19/23.json`, `data/fs50/` |
+| greedy independent set at 83: 358 over 25 orders (≈ a random 84-regular graph's 363); **the engineer's planning ladder (2026-09-14, one core): plane local search 492 in 30 s; rotation quotients exhausted at orders 84 / 42 / 28 = 505 / 589 / 533 exactly (origin included), the ladder peaking at 588–589 at orders 14, 21, 42; the line quotient exhausted at 7 × 83 = 581 — the best set held is 589, 49% of the ratio bound, against 66–81% at 11, 19, 23 where the search is near exact** | the engineer's measurements, the 490- and 87-point sets re-verified here | `WO-18-independent-set.md` §2.2 |
 | the colourer's best six classes: 1,128–1,174 vertices, same-class degree 4.7–5.3 | [C], re-verified here | `plane-colour-p83-k6.json` |
 | no six-colouring with a rotational symmetry outside four open classes; none found by local search on the whole plane or the three minimal quotients | the solver's refusals; "not found" | `equivariant-p83-k6*.json`, `plane-colour-p83-k6*.json` |
 | 42 independent lines of 83 points (directions of non-residue norm) | derived | `WO-18-independent-set.md` |
