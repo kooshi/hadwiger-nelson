@@ -1,4 +1,4 @@
-# FS-46 — Three colours over fields containing √3: GPT Astra's classification, and the conjecture's four-level (STUB, 2026-09-14; minted from GPT Astra's response to the conjecture write-up)
+# FS-46 — Three colours over fields containing √3: GPT Astra's classification in the kernel, and the conjecture's four-level (STUB, 2026-09-14; minted from GPT Astra's response; scoped to the kernel on Kooshi's instruction the same day — every result the advisor proved is kernel-checked)
 
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` §3 (the proof) and
 `VERIFICATION.md` row 4 (our read); `plans/STUB-chain-theorem.md` (FS-45, whose Theorem 4.1 — forced pairs give periods forming
@@ -70,10 +70,23 @@ period (row 58 + FS-45 D1), the finiteness of `R/3R`, the Hilbert-90 lifting, th
 `T = Frob^N(A)` meets the nilradical trivially because `Frob^N` is the identity on `A/J`), the product embedding, the product
 theorem, the floor. The two external inputs stay `[L]`.
 
-**D2 — the kernel pieces.** `forces_rhombus` (three colours, the apexes; row 58 has the drawing), `periodic_of_forces_isometries`
-(FS-45's chain lemma in its period form), the descent of a `3R`-periodic colouring to `addCayley (R ⧸ 3R) H` (`LocalGlobal.lean`'s
-`addCayleyMap` pattern), and the instance `chromaticNumber (UD 𝔽₃) = 3` with every vertex frozen. The product step and the floor
-are not kernel targets here.
+**D2 — the whole theorem in the kernel, leaf by leaf.** (a) `forces_rhombus` (three colours, the apexes; row 58 has the
+drawing) and `periodic_of_forces_isometries` (FS-45's chain lemma in its period form): every three-colouring of `planeOver F`
+is `3R`-periodic. (b) The descent of a `3R`-periodic colouring to `addCayley (R ⧸ 3R) H` (`LocalGlobal.lean`'s `addCayleyMap`
+pattern; `R = unitRing F` from FS-47), with `R ⧸ 3R` finite (`Module.Finite ℤ R` is what `dim ≤ [E : ℚ]` says). (c) The reduced
+quotient as a product of the residue fields at the stable primes above 3 — FS-47's Lemma 1.1 at `p = 3`, Mathlib's Chinese
+remainder for a finite commutative ring (`Ideal.quotientInfRingEquivPiQuotient`), and the Frobenius-power copy `T` (a
+Teichmüller argument, ~40 lines). (d) Hilbert 90 for finite fields in counting form: `b ↦ b / σ b` has kernel `𝔽_q^×`, so its
+image has `q + 1` elements and is the norm-one group (`Fintype.card` arithmetic; check whether Mathlib's `Hilbert90` covers the
+cyclic case first). (e) The product embedding: define the categorical product of simple graphs (Mathlib has only the box
+product, `SimpleGraph/Prod.lean`) and the homomorphism `∏ UD(𝔽_{q_j}) → addCayley (R ⧸ 3R) H`. (f) **El-Zahar–Sauer**: not in
+Mathlib; the 1985 proof is a bounded combinatorial argument and is priced as a formalization project of its own (1–2 weeks by
+an implementer, the paper read first). (g) **The floor `χ(UD(𝔽_{3^f})) ≥ 4` for odd `f ≥ 3`**: the Weil bound for Kloosterman
+sums is out of reach in Lean; the kernel form carries this leaf as an explicit hypothesis `hfloor`, discharged for `f = 3` by a
+refusal of `UD(𝔽₂₇)` (729 vertices, an LRAT core as FS-38 K3's) and for `f = 5` if affordable (59,049 vertices), and left as the
+one named hypothesis for general `f` — **unless** an elementary refusal exists, which is a derivation question in its own right
+(a 4-chromatic unit-distance configuration inside every `UD(𝔽_{3^f})`, `f` odd ≥ 3; none is known). The theorem's kernel
+statement is then `χ = 3 ↔ ∃ 𝔽₃-prime` with `hfloor` as the sole non-kernel leaf, and the record says so in those words.
 
 **D3 — the four-colour level, stated so it can fail.** For `√3 ∈ F` with no `𝔽₃`-prime, `χ(F²) ≥ 4`; the conjecture says `= 4`
 iff a stable dyadic prime has residue graph `K₄`, else `≥ 5`. The "`≥ 5`" half is FS-45's Theorem 6.1 for `F ⊇ K` (conditional
@@ -86,29 +99,35 @@ names. Name those as the questions this stub leaves.
 
 | phase | what | cost | stop rule |
 |---|---|---|---|
-| PA | `[ElZaharSauer1985]` fetched and read (the statement and its scope); `[Tardif2022]` checked against the paper; search "chromatic number of the plane over a number field three colours", "categorical product unit-distance", `[Fischer1990]` §3, `[Moorhouse2010]` §7, `[Madore2015]` §3 for the three-colour case; `[Soifer2024]` ch. 11 | half a day | a prior statement moves the credit line; the bibliography updated the same day |
-| A | D1: the proof in our notation, each step checked; the instances table extended to every field in `data/fplane/map.md` | a day | a written proof with two `[L]` leaves, or the step that does not close, named |
-| B | D2: the kernel pieces | 1–2 days | `forces_rhombus`, the period lemma, the descent; the `𝔽₃` instance |
-| C | the record: G48's proved range, row 58's consumer, the `ℚ(√3,√5)` test case into `FRONTIER-STUBS.md` | half an hour | gates green |
+| PA | `[ElZaharSauer1985]` fetched and read in full (its proof is what phase D formalizes); `[Tardif2022]` checked against the paper; search "chromatic number of the plane over a number field three colours", "categorical product unit-distance", `[Fischer1990]` §3, `[Moorhouse2010]` §7, `[Madore2015]` §3 for the three-colour case; `[Soifer2024]` ch. 11 | half a day | a prior statement moves the credit line; the bibliography updated the same day |
+| A | D1: the proof in our notation, each step checked; the instances table extended to every field in `data/fplane/map.md` (FS-48 does the biquadratic family) | a day | a written proof, or the step that does not close, named |
+| B | D2 (a)–(e): the rhombus period, the descent, the reduced quotient, Hilbert 90, the product embedding — after FS-45 and FS-47 | 3–5 days | `three_colorable_planeOver_imp_exists_three_colorable_factor` on the standard axioms |
+| C | D2 (g): `hfloor` discharged at `f = 3` by an LRAT core; `f = 5` priced | a day; solver hours | `not_colorable_three_finitePlane27` in the kernel |
+| D | D2 (f): El-Zahar–Sauer formalized, as its own work order with the paper as the specification | 1–2 weeks | `chromaticNumber_tensorProduct_ge_four`; if it stalls, the theorem ships with El-Zahar–Sauer as a second named hypothesis and the stub stays open on it |
+| E | the record: G48's proved range and G55's `[hand]` tag rewritten to kernel modulo `hfloor`; row 58's consumer; the open cases into `FRONTIER-STUBS.md` | half an hour | gates green; `CLAUDE.md` under 150,000 bytes |
 
 ## 5. Registered predictions
 
 | id | prediction | falsifier |
 |---|---|---|
-| P1 | El-Zahar–Sauer's theorem, read, covers finite products of finitely many factors by the two-factor case and induction, with no connectivity or looplessness hypothesis beyond simple graphs | a hypothesis the product `∏ UD(𝔽_{q_j})` does not meet |
+| P1 | El-Zahar–Sauer's theorem, read, covers finite products of finitely many factors by the two-factor case and induction, with no connectivity or looplessness hypothesis beyond simple graphs; its proof formalizes in under two weeks | a hypothesis the product `∏ UD(𝔽_{q_j})` does not meet; or a proof step that resists (then the leaf is named) |
 | P2 | PA finds no prior statement of Theorem 3.1 (the three-colour classification of number-field planes) | a statement in Fischer, Moorhouse, Madore or Benda–Perles — then the credit line names it |
 | P3 (hunch) | the four-colour level cannot be proved by any product theorem: Hedetniemi fails at five (`[Tardif2022]`) exactly where the argument would need it | a product theorem for the specific factors (Cayley graphs of `𝔽_q²`) at five colours |
 
 ## 6. Failure and jackpot clauses
 
 Failure: a step of D1 does not close under our read — then the theorem is demoted to a reading with the gap named, and the
-instances stand on their own proofs (Theorem B, the 18-vertex graph). Jackpot: none — the stub is a derivation.
+instances stand on their own proofs (Theorem B, the 18-vertex graph); or El-Zahar–Sauer or the floor does not formalize — then
+the theorem ships in the kernel with that leaf as a named hypothesis and the stub stays open on exactly that leaf. Jackpot:
+an elementary refusal of `UD(𝔽_{3^f})` for all odd `f ≥ 3` would remove the last non-kernel leaf and is a result in its own right.
 
 ## 7. Bearing on 6, honestly
 
 **None on six; medium as mechanism.** It is the second level of the conjecture proved by a general argument, it names the
 smallest open five-level test case (`ℚ(√3, √5)`), and it locates the boundary of the product method at exactly the colour count
-where Hedetniemi's conjecture first fails — which is a structural fact about why the ladder's higher rungs need forcers.
+where Hedetniemi's conjecture first fails — which is a structural fact about why the ladder's higher rungs need forcers. Cost,
+honestly: the kernel form is the most expensive of the advisor's results (1–2 weeks for El-Zahar–Sauer alone), and the floor
+leaf may not close at all.
 
 ## 8. Addresses
 

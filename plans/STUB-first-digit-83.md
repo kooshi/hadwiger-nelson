@@ -56,7 +56,7 @@ every field this project has built in.
 | phase | what | cost |
 |---|---|---|
 | A | the equivariant six-colouring ask at (83, 6); if SAT, verify on all 289,338 edges and keep the table | minutes |
-| B | if A misses: α ≥ 1,149 by cube-and-conquer on one hexagon's colourings; direct SAT with a pinned clique | a desktop-day per route, priced as FS-17's |
+| B | if A misses, **the independent set first** (GPT Astra's ordering, `reference/ChatGPT-local-global-tightness-conjecture/six-colour-research-directions.md` §2): an independent set of size ≥ 1,149 = ⌈6,889/6⌉ is a necessary condition for six, a positive certificate is a vertex list checked against the modular distance equation, and Hoffman's bound (float λ_min ≈ −17.709) allows at most ~1,199, so the target sits 4% under the ceiling — local search and SAT on the cardinality instance; a **certified** α ≤ 1,148 (cube-and-conquer with proof logs) is χ ≥ 7 with no colouring search; then direct SAT for the colouring with a pinned clique | a desktop-day per route, priced as FS-17's |
 | C | if six is found: the plane joins the kernel as a 6,889-entry table (or a symmetric one); the fan-gap census (84 lookups per vertex) | a day |
 
 ## 5. Registered predictions
@@ -65,6 +65,7 @@ every field this project has built in.
 |---|---|---|
 | P1 | UD(𝔽₈₃, 2) is six-colourable | low-medium — from nothing better than the floor's dip (71 → 7, 83 → 6, 107 → 7) and Hoffman sitting 1.4 below the truth at 11 and 19 |
 | P2 | no equivariant six-colouring exists (as at 23 for five) | medium |
+| P4 | an independent set of size ≥ 1,149 exists (the necessary condition is met) | low-medium — it sits 4% under Hoffman's ceiling; a certified miss is the cheapest route to χ ≥ 7 |
 | P3 | if a six-colouring exists, one with a fan gap exists | medium — the pattern at 7, 11, 19; the falsifier is a six-colourable plane all of whose six-colourings are gap-free |
 
 ## 6. Bearing on 6, honestly

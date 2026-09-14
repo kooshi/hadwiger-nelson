@@ -98,13 +98,13 @@ field-level fact in the kernel by a hand-sized argument, and the first kernel-ch
 The core's coordinates lie in `K`; the copies are rotated by powers of `w` over `K(√7)`; the drawing's unit edges are exact
 identities in the tower `ℚ(√3,√7,√11)`, which `UDCert` already covers.
 
-**D4 — the hand theorems into the record.** Theorems 1.2, 2.1, 6.1 and Corollary 6.2 enter `CLAUDE.md` as `[hand, GPT Astra]`
-with our read; a kernel form of Theorem 1.2 is deferred (it needs lying-over for the integral extension `R ⊆ R·O_E`; Mathlib
-has `Ideal.exists_ideal_over` — plausible, not this stub's).
+**D4 — the ring theorems are FS-47's.** Theorems 1.2, 2.1, 6.1 (general form) and Corollary 6.2 are kernel targets of
+`plans/STUB-unit-vector-ring-kernel.md` (Kooshi, 2026-09-14: every result the advisor proved is kernel-checked); this stub
+supplies the chain lemma they consume and the explicit instances.
 
-**D5 — the host consumer, stated and blocked.** `six_le_chromaticNumber_plane_of_separated_two`: from a certificate of the
-`{1, 2}` graph and a five-colour `Separated` pair at distance 2, `χ(ℝ²) ≥ 6`. Blocked on row 44's deferred certificate; the
-statement goes into the skeleton with its blocker named.
+**D5 — the host consumer is FS-49's.** `six_le_chromaticNumber_plane_of_separated_two` — from a certificate of the `{1, 2}`
+graph and a five-colour `Separated` pair at distance 2, `χ(ℝ²) ≥ 6` — lives in `plans/STUB-distance-two-gadget.md`, together
+with the search for the pair; the `Fin m`-indexed union this stub builds (D1) is what it reuses.
 
 ## 4. Phases
 
@@ -114,7 +114,7 @@ statement goes into the skeleton with its blocker named.
 | A | D1 in the kernel | 1–2 days | `not_colorable_chainUnion` with the spindle as a corollary; vacuity: the 18-vertex chain as the inhabitant |
 | B | D2 the 18-vertex instance | half a day | `four_le_chromaticNumber_planeOver` for `ℚ(√2,√3)`; `#eval` of the 33 edges |
 | C | D3: the pinned refusal of the 588-core as an LRAT; the eight-copy instance | a day (solver minutes; kernel replay at M34's per-cube cost) | `five_le_chromaticNumber_planeOver (K(√7))`; the union's five-colourability asked and verified (P2) |
-| D | the record: rows and grokkings rewritten in place; `CLOSED-QUESTIONS.md` only if PA finds the two- or three-colour classification posed | half a day | gates green; `CLAUDE.md` under 150,000 characters |
+| D | the record: rows and grokkings rewritten in place; `CLOSED-QUESTIONS.md` only if PA finds the two- or three-colour classification posed; FS-48's chains (`ℚ(√3,√5)` first) ride on phase B's certificate shape | half a day | gates green; `CLAUDE.md` under 150,000 bytes |
 
 ## 5. Registered predictions (both outcomes reachable)
 
