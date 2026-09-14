@@ -107,6 +107,12 @@ leaves.
    stated honestly, demote with a banner, never delete; § Paths forward mirrors the top of the table.
    Both files hold current state only: rewrite the affected text in place — no dated amendments,
    correction trails or superseded rankings — and leave the history to git and the milestone's plan.
+   **And sweep the milestone's own plan for unpursued conjectures** (Kooshi, 2026-09-14): grep it for
+   "conjecture" and "not claimed", and for each hit either mint a stub or record an explicit decline in
+   the close. The rule exists because M56's modeling pass wrote "Conjecture, NOT claimed: 1/p ∈ Σ₀(F²)
+   iff no conjugation-fixed prime of F(i) lies above p" inside a lemma paragraph on 2026-09-06, no stub was
+   ever minted, and an outside advisor proved it eight days later — the stub rule fires on candidates a
+   milestone *surfaces*, and a conjecture buried under a heading about something else is not surfaced.
 10. **Report what landed** — in the house format of **§ "How to report to the user"**: the milestone's
     name and purpose, the shape that actually shipped, every decision implementation forced or
     overturned (in its four parts, with the confidence you now hold after seeing it run), and what to
