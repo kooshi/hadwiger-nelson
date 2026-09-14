@@ -81,3 +81,10 @@ side is a search for one independent set of size ≥ 1,149 (the necessary condit
 of that size with proof logs (χ ≥ 7). Caveat carried: ~8,100 moves/s per thread suggests the move evaluation is not
 O(degree); a faster search or a stronger algorithm (PartialCol, a hybrid evolutionary colourer) is the control on whether
 5.97% is the instance's floor or the search's.
+
+**The three minimal symmetric rows by local search** (`plane-colour-p83-k6-m2-tau-2-2-1-1.json`, `…-m2-tau-2-1-1-1-1.json`,
+`…-m3-tau-3-1-1-1.json`; the Rust colourer's rotation quotient, 16 threads, 120 s each): **not found**, best 17,025 / 17,527 /
+17,874 monochromatic edges on the full plane (3,445 / 3,445 / 2,297 representatives), each re-verified here on the expanded
+assignment with `ud_edges(83)`. The symmetric searches plateau at the same ≈ 6% as the whole plane, so the open rows of the
+CDCL census are open on the finding side too; with the census's refusals this exhausts what the symmetric family can say
+without a proof.
