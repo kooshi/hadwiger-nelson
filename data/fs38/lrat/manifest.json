@@ -61,7 +61,9 @@
   "lines": 1339,
   "bytes": 55729,
   "ends_in_empty_clause": true,
-  "last_line": "100664 0 100446 100330 99707 100137 977 0"
+  "last_line": "100664 0 100446 100330 99707 100137 977 0",
+  "committed": false,
+  "why_not_committed": "`*.lrat` is ignored repository-wide (.gitignore:14) and this phase did not override that policy. The proof regenerates BYTE-IDENTICALLY from the committed edge list with the command below \u2014 verified here, same SHA-256 \u2014 so the manifest's checksum is the artifact and the file is scratch."
  },
  "cnf": {
   "file": "build/fs38-t/p5-plus-edge.cnf (NOT committed \u2014 regenerable from the edge list)",

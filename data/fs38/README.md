@@ -35,7 +35,7 @@ M56's "depth 3" is depth 6 here. `depth = m` is the zero of level `m`. Every rec
 | `doublegap-p19-k5.json` | the same ask at 19, with the kernel colouring's single-gap census beside it | the shared gap exists at 19 too; the kernel half is not taken (decision 10) | verified colouring | `python3 tools/fs38_tower.py doublegap --p 19` |
 | `p4-tables.json` | level four's cover: the five committed tables (`Instances/TwoAdicFour.lean`) re-verified proper with their period groups, the intersection of those groups, and the smallest cover this tool could find in a pool — **two tables suffice**, and both are emitted in the Lean literal's own `[a][b][c][d]` shape under `minimum_cover_found.tables` | `covers_every_nonzero_difference: true` is exactly the hypothesis of `Forces.eq_of_forall_exists_not_periodic`, so the **list** (no single table) is what makes level four pairwise free. The minimum is a **search result** — an upper bound on the minimum, never a proof of minimality | verified colourings; the "no aperiodic table" fact is the solver's | `python3 tools/fs38_tower.py tables` |
 | `recolour-p11-level2.json` | the level-2 repaint at 11: the certified table pulled back to `UD(ℤ/121,2)`, one lift of a gapped residue repainted to its gap colour, verified on every edge; the negative control repaints the same lift to each **present** colour | the repainted colouring is proper on every edge and separates the lifted vertex from all 120 of its fibre-mates — so no colouring of level two is pulled back from level one, and level two at 11 is **not 1-continuous** (FS-38 stub P2's instance). The kernel form is `pullbackRepaint` | exact arithmetic, no solver | `python3 tools/fs38_tower.py recolour` |
-| `lrat/p5-plus-edge-edges.json`, `lrat/p5-plus-edge.lrat`, `lrat/manifest.json` | the formula for "`P₅` plus the edge `(0, δ)` at depth 4 is not 4-colourable" and cadical's LRAT proof, with every checksum | cadical exited 20 on the formula with the edge and 10 without it, and the proof's last line is the empty clause. **Nothing more**: there is no LRAT or DRAT checker on this machine (CLAUDE.md row 64's precedent), so the proof is **generated, not checked**. Consuming it in Lean is phase K3's | **generated, not checked** | `python3 tools/fs38_tower.py lrat` |
+| `lrat/p5-plus-edge-edges.json`, `lrat/manifest.json` (the proof itself is **not committed** — see below) | the formula for "`P₅` plus the edge `(0, δ)` at depth 4 is not 4-colourable" and cadical's LRAT proof, with every checksum | cadical exited 20 on the formula with the edge and 10 without it, and the proof's last line is the empty clause. **Nothing more**: there is no LRAT or DRAT checker on this machine (CLAUDE.md row 64's precedent), so the proof is **generated, not checked**. Consuming it in Lean is phase K3's | **generated, not checked** | `python3 tools/fs38_tower.py lrat` |
 | `ckpt/` | resume files while a level is in flight; empty between runs | — | — | see `ckpt/README` |
 
 Every level record also carries a `recheck` block written by `python3 tools/fs38_tower.py recheck`, which re-verifies
@@ -99,9 +99,13 @@ evidence, and the per-depth examples are the evidence.
   rather than 65,535 solves — every difference decided, by the derivation and the controls in point 4 above.
   Memory was measured at level 7 first, as the phase's brief required, and the product owner approved the
   route before it ran.
-* **The CNF** for the level-5 LRAT: regenerable in a second from the committed edge list through
-  `tools/coloring.py`'s `write_cnf`, and its SHA-256 is in the manifest. Only the edge list and the proof are
-  committed.
+* **The level-5 LRAT proof itself, and its CNF.** `*.lrat` is ignored repository-wide (`.gitignore:14`), a
+  policy this phase did not override; and the CNF is a second's work from the edge list. What IS committed is
+  the **edge list** and the **manifest**, which carries the SHA-256 of all three files, the exact cadical flags
+  and seed, and the regenerating command. That is enough because the regeneration is **byte-identical**:
+  checked here — `python3 tools/fs38_tower.py lrat` reproduced the proof with the same SHA-256, which is the
+  same determinism `scripts/regen-check.sh` relies on for the committed witnesses (one thread, fixed seed).
+  A reader regenerates and compares against the manifest; nothing rests on a file that is absent.
 * **Any kernel claim.** No file here is checked by Lean. The fan gap at 11 and 19, the level-4 cover and the
   level-5 refusal become theorems only in the modules that consume them.
 * **The 2-adic law at the field level.** Nothing here draws a `K`-certificate into `P_m`; that is FS-38

@@ -209,6 +209,12 @@ Three sentences, each with its trust word, for the agents building the kernel si
   index it resumed from and the checkpoint path, so the number says what it measures and fifteen minutes of
   machine time buys nothing. The line between the two cases is whether the primary record discloses the
   resume, not whether a resume happened.
+* **Committing the LRAT proof file.** `*.lrat` is ignored repository-wide and the phase did not override that
+  policy; my first commit of the `lrat/` directory silently dropped the proof while the README said it was
+  there, which is the omission-not-miscount failure the record keeps naming. Repaired by checking the claim
+  that replaces it: the proof **regenerates byte-identically** (same SHA-256, one thread, the manifest's seed —
+  the determinism `scripts/regen-check.sh` already relies on), so the committed edge list plus the manifest's
+  checksum is the artifact, and the README and manifest now say so.
 * **A check of the LRAT proof.** There is no LRAT or DRAT checker on this machine (`CLAUDE.md` row 64's
   precedent). The artifact is **generated, not checked**; consuming it in Lean is phase K3's.
 * **The virtual-edge half at 19.** FS-38 §S8 decision 10 drops it; the shared gap at 19 is nevertheless
