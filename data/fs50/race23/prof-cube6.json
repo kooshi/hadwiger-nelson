@@ -1,0 +1,21 @@
+{
+ "kind": "fs50-race",
+ "p": 23,
+ "n": 529,
+ "N": 106,
+ "encoding": "totalizer",
+ "cube": 6,
+ "pinned": [
+  0,
+  11
+ ],
+ "excluded": 120,
+ "wall": 840.0,
+ "clauses": 150922,
+ "aux_vars": 4795,
+ "encode_seconds": 0.11693620681762695,
+ "solve_seconds": 840.0122473239899,
+ "verdict": "unknown",
+ "solver": "cadical 2.1.2 (the Lean toolchain's), -t wall",
+ "cnf": "prof-cube6.cnf"
+}

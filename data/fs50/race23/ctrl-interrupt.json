@@ -1,0 +1,21 @@
+{
+ "kind": "fs50-race",
+ "p": 23,
+ "n": 529,
+ "N": 106,
+ "encoding": "totalizer",
+ "cube": 12,
+ "pinned": [
+  0,
+  9
+ ],
+ "excluded": 264,
+ "wall": 3.0,
+ "clauses": 151066,
+ "aux_vars": 4795,
+ "encode_seconds": 0.07909965515136719,
+ "solve_seconds": 3.0342307090759277,
+ "verdict": "unknown",
+ "solver": "cadical 2.1.2 (the Lean toolchain's), -t wall",
+ "cnf": "/home/kooshi/.claude/jobs/b1507518/tmp/race23/ctrl-interrupt.cnf"
+}

@@ -1,0 +1,17 @@
+{
+ "kind": "fs50-race",
+ "p": 23,
+ "n": 529,
+ "N": 106,
+ "encoding": "totalizer",
+ "cube": 20,
+ "pinned": [
+  0,
+  50
+ ],
+ "excluded": 456,
+ "clauses": 151258,
+ "aux_vars": 4795,
+ "seconds": 0.09754037857055664,
+ "verdict": "unsat"
+}

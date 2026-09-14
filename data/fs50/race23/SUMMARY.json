@@ -1,0 +1,24 @@
+{
+ "kind": "fs50-race-summary",
+ "p": 23,
+ "N": 106,
+ "machine": "desktop, one core per run, 2026-09-14, the WO-18 planning session's prototypes running beside it",
+ "encodings_at_900s": "seqcounter, totalizer, mtotalizer, kmtotalizer, cardnetwrk, sortnetwrk on the monolith (origin pinned): every one still running when killed at the 900 s wall (the first version of the script wrote no record on that path \u2014 a defect fixed the same hour; the evidence for these six is the absence of a verdict at 900 s, not a record)",
+ "class_profile": "cube c = the origin and one point of quadrance class c pinned in, classes 1..c-1 excluded (sound by rotation transitivity on each class); totalizer; cadical 2.1.2 -t 840: cubes 0, 2, 3, 4, 6, 8, 10 UNKNOWN at 840 s; cube 12 UNSAT in 12.0 s (pysat Cadical195, the first batch) / 10.6 s; cube 20 UNSAT in 0.1 s",
+ "reading": "the orbit split alone does not tame the low classes; the difficulty cliff lies between class 10 (216 points excluded) and class 12 (264 excluded); the certificate at 23 needs a deeper split on the low cubes or a different formulation",
+ "controls": "alpha(11)=28 found and verified in 0.17 s; 29 refused in 28 s (totalizer; M61's seqcounter refusal took 101.9 s); a 3 s wall on cube 12 yields an 'unknown' record (the interrupt path is live)",
+ "files": [
+  "ctrl-interrupt.json",
+  "ctrl-p11-28.json",
+  "ctrl-p11-29.json",
+  "cube12.json",
+  "cube20.json",
+  "prof-cube0.json",
+  "prof-cube10.json",
+  "prof-cube2.json",
+  "prof-cube3.json",
+  "prof-cube4.json",
+  "prof-cube6.json",
+  "prof-cube8.json"
+ ]
+}
