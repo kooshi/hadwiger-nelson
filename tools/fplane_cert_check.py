@@ -366,6 +366,10 @@ def build_orbits_fast(p: int) -> dict:
             cb = classes[b]
             off = (a * C + b) * m
             for d in range(m):
+                # The third clause is redundant: S3 carries (u, v) to (-u, v - u), so an orbit whose
+                # pairs have Q(v - u) = 1 also contains a pair whose SECOND point has quadrance 1 --
+                # checked at p = 7, 11, 19, 23 and 83.  Kept because the derivation states the
+                # condition in all three forms and the clause costs one array lookup.
                 if ca == one or cb == one or diffq[off + d] == one:
                     killed[rot_orb[off + d]] = True
     for a in range(C):
@@ -1057,21 +1061,23 @@ def trivial_circulant_certificate(p: int) -> dict:
     m, C = F["m"], F["C"]
     W = 2 * C + 1
     wden = 1000
-    pats = [[wden] * m,
-            [wden if th % 2 == 0 else -wden for th in range(m)],
-            [wden - 7 * th for th in range(m)]]
-    def gram_i(i):
-        """(i+1) I over the denominator 2, so block i carries ((i+1)^2/4) I -- DIFFERENT matrices, so
-        that the control which swaps two blocks actually changes the sum.  With one matrix repeated a
-        swap is a no-op and the plant could never fire: a control whose failure mode is unreachable
-        has not been tested by passing."""
-        g = [[0] * W for _ in range(W)]
-        for r in range(W):
-            g[r][r] = i + 1
-        return dict(den="2", num=g)
+    # The weights must have BOTH a cosine and a sine part, and the matrices must couple the two kinds
+    # of slot.  Measured 2026-09-14 by mutating the shipped checker: with b = 0 and diagonal matrices,
+    # a cosine-sine correlation computed from the wrong vector is multiplied by zero and the control
+    # certifies happily -- and a control whose failure mode is unreachable has not been tested by
+    # passing.  The three blocks also carry DIFFERENT matrices, so that swapping two blocks' weights
+    # changes the sum; with one matrix repeated that plant is a no-op too.
+    pats = [([wden] * m, [0] * m),
+            ([wden if th % 2 == 0 else -wden for th in range(m)], [wden * (th % 3) for th in range(m)]),
+            ([wden - 7 * th for th in range(m)], [wden - 11 * th * th for th in range(m)])]
 
-    blocks = [dict(a=pat, b=[0] * m, o=wden if i == 0 else 0, gram=gram_i(i))
-              for i, pat in enumerate(pats)]
+    def gram_i(i):
+        """A dense rank-three rational factor, different for each block, whose Gram matrix has nonzero
+        cosine-sine entries."""
+        return dict(den="4", num=[[1 + (j * (i + 1) + r) % 5 for j in range(W)] for r in range(3)])
+
+    blocks = [dict(a=pa, b=pb, o=wden if i == 0 else 0, gram=gram_i(i))
+              for i, (pa, pb) in enumerate(pats)]
     psd1 = dict(circulant=dict(weight_den=str(wden), blocks=blocks))
     zero = [dict(a=[0] * m, b=[0] * m, o=0, gram=dict(den="1", num=[[0] * W]))]
     psd2 = dict(circulant=dict(weight_den=str(wden), blocks=zero))
@@ -1500,7 +1506,7 @@ def self_test(out=sys.stdout, shipped: str | None = None) -> bool:
 
     log("--- and the same on the circulant block form, whose failure modes are its own ---")
     c = _mutate(circ7)
-    c["psd"]["Z1"]["circulant"]["blocks"][1]["gram"]["num"][2][2] += 1
+    c["psd"]["Z1"]["circulant"]["blocks"][1]["gram"]["num"][1][2] += 1
     expect_refusal("12. one coefficient of a block's Gram factor altered", c, "identity fails at orbit")
     c = _mutate(circ7)
     c["psd"]["Z1"]["circulant"]["blocks"][0]["a"][3] += 1
