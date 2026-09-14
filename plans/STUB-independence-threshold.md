@@ -276,7 +276,7 @@ bordered by the origin's row `Y[0, u_c]·√(p+1)`-normalised; the two `(p−1)/
 alternating sums restricted to each circle type (the circles a given reflection meets — `c/Q(u)` a square — and the others).
 `M(y)` has the same form with `f^M_{cc′}(θ) = g(Q(u_c − u_{c′} ζ^θ))`. So the map from orbit variables to block entries is a
 sparse linear map with `p+1` nonzeros per entry — ≈ 24 M nonzeros at 83, built once — and `Y ⪰ 0 ⟺ every block ⪰ 0`.
-**Controls before 83:** the reduced solve at 11 and 23 must reproduce 29.18 and 108.55 to the solver's tolerance, and the
+**Controls before 83 (run 2026-09-14, green):** the reduced solve reproduces 29.1768 at 11 exactly and 108.5464 at 23 against the direct 108.5461 (`tools/fplane_sdp_blocks.py`; the same class counts 151 / 1,167 as the direct tool; 49,447 classes at 83), and the
 reduced true-set `Y_S` blocks must be PSD. The certificate at 83 then lives in the blocks (`U_b` = the Fourier vectors,
 rational after clearing `ℚ(ζ_{p+1})⁺` — or, simpler for the checker, the blocks are verified PSD and the identity is checked
 on the full orbit coefficients through the same map, which needs no algebraic numbers if the map's entries are kept as

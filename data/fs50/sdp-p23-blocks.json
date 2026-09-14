@@ -1,0 +1,12 @@
+{
+ "kind": "fplane-sdp-blocks",
+ "p": 23,
+ "n": 529,
+ "classes": 1167,
+ "killed": 144,
+ "value": 108.5463606286857,
+ "status": "optimal",
+ "solver": "SCS",
+ "seconds": 208.0099904537201,
+ "claim_scope": "a float reading of the block-diagonalised triple-level SDP (rotation-only DFT blocks; the reflection, swap and S3 as variable identifications); must reproduce fplane_sdp.py's direct value at 11 (29.18) and 23 (108.55); never a bound"
+}
