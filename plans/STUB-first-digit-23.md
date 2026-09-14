@@ -1,5 +1,12 @@
 # FS-17 — The first digit at 23: is UD(𝔽₂₃, 2) exactly 5-chromatic? (STUB, 2026-09-08; minted at the M61 close — M61's phase A, undecided)
 
+> **Re-described 2026-09-13 (FS-38 close; rank 6).** The plane at 23 is **slack** at five colours (λ_min = −7.96 against
+> −24/5 = −4.8; `plans/FS38-derivation.md` D-3), so FS-38's tightness screen does NOT decide this stub's question: slack
+> says gaps are permitted *if* a five-colouring exists, and whether one exists is exactly the question, untouched. What
+> it adds: if a five-colouring exists, P-D4 predicts one with a fan gap, and then every unit-distance graph over a field
+> that 23 seals is pairwise free at five colours by ledger row 66 (`Slack.forces_iff_of_hom`). The 6-open sibling is
+> FS-40 (`plans/STUB-first-digit-83.md`).
+
 > **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B3):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
 
 *Read beside: `plans/M61-local-global-tightness.md` §S2–§S4 and §R3 (what was tried and what it cost), `plans/STUB-finite-plane-cores.md`

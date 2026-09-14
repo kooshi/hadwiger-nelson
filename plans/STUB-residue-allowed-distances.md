@@ -1,5 +1,13 @@
 # FS-16 — The residue-allowed distances: where a five-colour virtual edge can live over a sealed field (STUB, 2026-09-07; minted at the M60 close)
 
+> **CLOSED 2026-09-13 by theorem, ledger row 66 (FS-38).** Over every field where 11 is usable of residue degree one, a
+> pair separated by every five-colouring of a unit-distance graph is a **unit edge**: the plane at 11 has a five-colouring
+> with one colour absent from `N[(0,0)] ∪ N[(1,0)]`, transported to every edge by translation and rotation, and a
+> shared gap repainted at a non-adjacent pair separates nothing (`separated_iff_adj_of_hom_finitePlane11`,
+> `UDCert.separated_iff_adj_11`, `heule510_separated_iff_adj`). So the question this stub asked — are any of the 51
+> theorem-admitted candidates at residue norm 1 virtual edges? — is answered: **none is**, and the residue-allowed
+> distances name nothing over such fields. M60's distance law survives as the level-one shadow of the theorem.
+
 > **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B5):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
 
 *Read beside: `plans/M60-five-colour-residue-obstruction.md` §S3, §R3, §R7 (the distance law and the M55 census); `Instances/ResidueObstruction11.lean`

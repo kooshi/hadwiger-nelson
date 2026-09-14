@@ -1,5 +1,16 @@
 # FS-6 — A family-keeping thickening: where M57's principle could bite (STUB, 2026-09-06, minted at the M57 close; restricted to de Grey's field the same day)
 
+> **DEMOTED 2026-09-13 — dead by theorem, ledger row 66 (FS-38, `plans/FS38-residue-tower.md` §S2 D0.5–D0.6).** The
+> target is a pair forced equal at five colours over a 5-sealed field at `11 ∣ d²`, then spindled. Over every 5-sealed
+> multiquadratic field containing ℚ(√3,√11) — each has 11 usable of residue degree one — the plane at 11 has a
+> five-colouring with a fan gap, and a gap at level one, repainted along the residue homomorphism, frees every pair above
+> it: `Forces G 5 u u' ↔ u = u'` for every unit-distance graph over the field (`forces_iff_of_hom_finitePlane11`,
+> `UDCert.forces_eq_11`; Heule-510 unconditionally). So the design target has **no instance**, and its never-run central
+> computation (§H (i), the forced-distance table at residue norm 0, backlog B9 (i)) has a known answer with every entry
+> refuted. Nothing here is deleted: the material route, the hub-scan enumerator and the de Grey half stand as records,
+> and what a 6-forcer's compulsions need is a 6-open field, where no residue plane is five-colourable and this
+> theorem is silent (`CLAUDE.md` G48, G54; the successor shapes are FS-40 and FS-42).
+
 > **NAMING 2026-09-10 (frontier-stubs sync).** This stub was chosen as M62 at the M61 close, but the number went
 > to the milestone that ran first — the evolutionary type-M search (`plans/M62-evolutionary-type-m.md`), of which
 > FS-6 is the sequel: the same search one colour up, over a 5-sealed field. FS-6 takes a milestone number when it

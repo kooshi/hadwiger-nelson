@@ -84,7 +84,7 @@ paths forward. Rewritten in place at every milestone close (WORKFLOW step 9); a 
 not update this section is not closed. The understanding the results add up to lives in § Grokkings, under
 the same rule.*
 
-*Last updated: 2026-09-13 — the backlog branch reviewed (eighteen readers; gate green on the tip) and its record corrected in place; M63 phase H4 open, its last measurement withdrawn at the tip.*
+*Last updated: 2026-09-13 — FS-38 closed (rows 66–67, G54): the fan gap frees every pair over a sealed field, and the 2-adic tower stabilises at level 4; the frontier re-ranked on the tight/slack classifier.*
 
 ### Where the problem stands
 
@@ -106,40 +106,37 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
 2. **The field sieve.** For fields containing ℚ(√3,√11): 6-open ⟺ the 2-adic wall is broken and 11 is inert.
    Every finite plane at p ≡ 3 (mod 4) from 59 up refuses five colours by its spectrum. Every field the
    descent ever used is 5-sealed (G43, G44).
-3. **The design target** (G48): a pair forced equal at five colours over a 5-sealed field, at a distance with
-   11 ∣ d², then spindled — the spindle removes exactly the sealing prime and lands in a 6-open field by
-   construction. This is FS-6, the sequel of M62.
-4. **Existing witnesses hold nothing to extract.** De Grey's 1581 at five colours has no compulsion at arity 2
-   or 3 (complete sweeps) and arity floor 4 or 5; a χ ≥ 6 gadget must be constructed, not found (G31). The
-   null is **stronger than it reads**: his field is 6-open (G43), so no arithmetic bar — not row 55's, which
-   is scoped to the √7-free tower — explains the absence. A 6-open platform has carried a five-chromatic
-   object since 2018 and yielded no five-colour compulsion at arity ≤ 3.
+3. **The design target has no instance** (G48, row 66): the six-level question — a pair forced equal at five colours over a
+   5-sealed field at 11 ∣ d², spindled into a 6-open field — is answered **no by theorem** over every 5-sealed
+   multiquadratic field ⊇ ℚ(√3,√11): the sealing plane at 11 has a five-colouring with a fan gap, and a gap at
+   level one, repainted along the residue map, frees every pair above it, so forced-equal pairs are single
+   vertices and virtual edges are unit edges, at every distance. FS-6 is dead; a 6-forcer's every compulsion
+   lives in a 6-open field, where no residue plane is five-colourable. The frame that replaces it is **tight
+   or slack** (G54): the residue plane forces pairs only where it is Hoffman-tight, and no 5-sealing plane is.
+4. **Existing witnesses hold nothing to extract — on sealed objects by theorem, on 6-open ones by
+   measurement.** Heule-510's arity-2 emptiness at five colours is kernel (row 66: `Forces ↔ =`,
+   `Separated ↔ Adj`, arity floor ≥ 3) and holds for every unit-distance graph over its field. De Grey's 1581
+   has no compulsion at arity 2 or 3 (complete sweeps) and arity floor 4 or 5, and the `ρ₆₃` arena reads 0 at
+   arity 2 — both in **6-open** fields, where no residue target exists, so those nulls stay measured and
+   unexplained: a χ ≥ 6 gadget must be constructed, not found (G31).
 5. **An in-field descent cannot end.** Points of ℚ(√3,√11) do intermediate kills and never the last one; the
    endgame needs a wall-breaking adjunction into a 6-open field (G34, G36, G37).
 6. **Linear instruments are blind to 5–7.** Additive colourings, the fractional number, Hoffman and ϑ all stop
    below the interval, and the finite planes' chromatic numbers are integrality-carried (G38, G41, G44, G48).
 7. **The cell family is closed in both directions** — no six-colouring, no bounded witness family — and its
    ≥ 7 floor is `[SokolovVoronov2025]`'s χ_poly(ℝ²) = 7 (G22, G24, G29).
-8. **The type-M rotations are a classified one-integer family, and the record is its cheapest live
-   member** — `cos θ = (2n−1)/(2n)`, which is the spindle at distance `√n`; `n = 3` is the Moser twist,
-   `n = 4` the record, `n = 16` is `ρ₆₃`, whose arena is **5-chromatic in the 6-open field `ℚ(√3,√7,√11)`**,
-   produced rather than inherited (row 64). The two members cheaper than the record die by **Theorem B**,
-   which is why no other rotation was ever made to work. **The platform is not the first, it is the smallest
-   and the first built to order**: de Grey's own field is 6-open (G43), so G48's bar has been liftable since
-   2018; `ℚ(√3,√7,√11)` is degree 8 against his degree 16, and the screen reached it rather than found it.
-9. **`[Parts2020a]`'s 509-vertex record is reproduced and partly explained** (M62–M64). His base graph is his
-   §5.6 closed form: 1,603 points in 92 orbits under his order-24 group ⟨ζ₆⟩ ⋊ Gal(K/ℚ), in which complex
-   conjugation is itself a Galois element (`typem.parts_lattice`); our ρ₁₅ cross-edge law returns his two
-   connecting orbits with his edge counts. Extended to radius 2.44 (3,433 points, 179 orbits) the
-   **arena** — base together with its rotated copy — contains Heule-510 exactly (2,504 of 2,504 edges, none
-   extra), split 375 base-side and 136 copy-side with the shared centre counted in both; **the base alone
-   cannot**, since it lies in K² and χ(K²) = 4 (row 57). The record is specified by his Tables 3–4
-   (374 + 136 vertices sharing the centre; `data/m62/parts509-orbit-fillings.json`). His reduction stage is
-   reproduced on every attested number, with complete level sets, about 150× faster than his implementation
-   (M63). A descent cannot reach the record (his §6; nine certified 1-minimal descents land at 582–609), and
-   **overcompression is an orbit-closure gap** (row 62). Best 1-minimal objects by symmetry rung: 624
-   (order 24), 576 (6), 558 (3), 582 (1); best object 559 vertices, census-certified. What is left of his
-   loop is the expansion step, which has no termination measure (FS-35).
+8. **The type-M rotations are a classified one-integer family** — `cos θ = (2n−1)/(2n)`, the spindle at
+   distance `√n`; `n = 3` is the Moser twist, `n = 4` the record, `n = 16` the `ρ₆₃` arena, **5-chromatic in the
+   6-open field `ℚ(√3,√7,√11)`**, produced rather than inherited (row 64). The two members below the record die
+   by Theorem B. Not the first 6-open platform (de Grey's own field is 6-open, G43) but the smallest, degree 8
+   against 16, and reached by the screen rather than found.
+9. **`[Parts2020a]`'s 509-vertex record is reproduced and partly explained** (M62–M64). His base is his §5.6
+   closed form (1,603 points, 92 orbits under an order-24 group); the radius-2.44 arena — base plus rotated
+   copy — contains Heule-510 exactly, while the base alone cannot (it lies in K² and χ(K²) = 4, row 57); his
+   reduction stage is reproduced on every attested number, ~150× faster; a descent cannot reach the record
+   (nine certified 1-minimal descents land at 582–609), and **overcompression is an orbit-closure gap**
+   (row 62). Best 1-minimal objects by symmetry rung 624 / 576 / 558 / 582; best object 559, census-certified.
+   What is left of his loop is the expansion step, which has no termination measure (FS-35).
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -147,10 +144,12 @@ independently in seven lineages that barely cite one another — Woodall → Ben
 Stark–Terras → Vinh → Schneider–Silva → Krebs → Lorenz–Zimmermann); `[Polymath16wiki]` — and all stop where
 Madore's Prop. 3.9 declines to formulate the general case. **Ours:** Theorem A's general form (that
 formulation); Theorem B, which closes Madore's 4 ≤ χ ≤ 5, answers Moorhouse §1, Cranston–Rabern's question and the question `[ExooIsmailescu2019]`'s conclusion asks, and settles one field of Benda–Perles Open Problem 11.6; the sieve; the lift theory; the compulsion transfer and distance law; the tightness mechanism;
-plane freedom at every prime p ≡ 3 (mod 4); every kernel certificate. **Not ours:** the finite-plane bound
+the fan-gap transport and its compulsion consumers (row 66); the tight/slack classifier of a residue plane's
+compulsions and its propagation up a tower (row 67, G54); plane freedom at every prime p ≡ 3 (mod 4); every
+kernel certificate. **Not ours:** the finite-plane bound
 and χ(𝔽₁₁²) = 5 (Moorhouse, Manturov, Madore); the unit argument and the 1/k obstruction (Fischer); ω and
 ω ≠ χ on finite planes (Vinh, Krebs, Schneider–Silva); the cell family's ≥ 7 floor (Sokolov–Voronov); the
-observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz); the two-colour mechanism over fields (Woodall, Fischer, Moorhouse, Madore); the multiquadratic decomposition (ChatGPT, credited in row 63).
+observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz); the two-colour mechanism over fields (Woodall, Fischer, Moorhouse, Madore); the multiquadratic decomposition (ChatGPT, credited in row 63); the ratio bound with its equality case and the Hoffman-colouring facts (Hoffman, Delsarte, Lovász, Blokhuis–Brouwer–Haemers); the non-frozen vertex (reconfiguration folklore).
 
 ### The novel-results ledger
 
@@ -215,7 +214,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 52 | [hand + tools] **The finite-plane bound and the first exact wall-broken planes**: a field with a prime above p ≡ 3 (mod 4) **of ODD residue degree** — equivalently residue field 𝔽_q with q ≡ 3 (mod 4) — has χ(F²) ≤ χ(UD(𝔽_q,2)); χ(UD(𝔽₁₁,2)) = 5, so χ(ℚ(√3,√5,√11)²) = χ(ℚ(√3,√11,√247)²) = 5. **The degree condition is the whole content and a larger field can LOSE a prime its subfield had**: de Grey's ℚ(√3,√5,√7,√11) contains ℚ(√3,√5,√11) yet 11 has residue degree 2 there, so **de Grey's first usable prime is 131** and this row's bound says nothing about his field (G43). Sealed at 4: K, K(√35). Sealed at 5: K(√5) = Heule's field, K(√23), K(√247), K(√5,√247). **Prior art:** the bound is `[Moorhouse2010]` §8.2/§10.3, `[Manturov2012]` Thms 17–19 and `[Madore2015]` Cor. 3.4; the value at 11 is Moorhouse's Table 6.1. | `tools/fplane.py`, `reference/Chat-analysis/` | 2026-09-06 |
 | 53 | **The field sieve** (G43, G44): `unitQuadrance R`, `unitQuadrance.map` (the bound as functoriality), `UDCert.drawing_adj`; **`chromaticNumber_finitePlane11`** (= 5, no solver) and **`chromaticNumber_heule510`** (= 5). [derived] Kloosterman eigenvalues make every plane at p ≡ 3 (mod 4) from 59 up refuse five; over ℚ(√3,√11), 6-open ⟺ wall broken ∧ 11 inert — **with the instances, whose deletion is what let the criterion be misapplied**: 6-open are de Grey's own field (first usable primes 131, 479), K(√7) (83), K(√13), K(√79), K(√127), K(√5,√7,√247); sealed at 5 are K(√5) (Heule's), K(√23), K(√247), K(√5,√247); at 4, K and K(√35). The standing map is `data/fplane/map.md`. **Prior art:** ω and ω ≠ χ on finite planes (`[Krebs2022]`, `[LorenzZimmermann2023]`, `[SchneiderSilva2013]`); `[Vinh2006]` restates the spectral bound without a factor 2, which our kernel value at 19 contradicts. | `UnitQuadrance.lean`, `Instances/FinitePlane11.lean`, `tools/fplane.py` | M58 |
 | 54 | **The lift** (G45): `add_one_le_chromaticNumber_plane_of_lift`; `stressPairing_eq_zero_of_lift` (in any ring with π² = 0 a lift forces every self-stress to pair to zero with the defect); no lift modulo 131², 11² or 19² for the 1581's merged image and the 5-critical cores of UD(𝔽₁₁,2) and UD(𝔽₁₉,2). [tools] The hub scan: 3,739 exact depth-one hubs of the 1581 at 131. | `Lift.lean`, `Instances/LiftObstruction{11,19,131}.lean`, `tools/fplift.py` | M59 |
-| 55 | **The residue obstruction** (G47): `Forces.image`, `Separated.image`; `forces_iff_eq_of_aperiodic`; the distance law (`Forces.quad_sub_eq_zero`, `Separated.quad_sub_eq_one`); `finitePlane11_forces_iff`, `finitePlane11_separated_iff`. **Over the √7-free tower with 11 ∤ D, a five-colour forced pair has 11 ∣ d² and a virtual edge d² ≡ 1 (mod 11), so neither a √3 nor a distance-2 gadget exists** (`not_separated_sqrt3_11`, `not_separated_two_11`) — and, by the same law at the rational squared distance 25/9 (`not_forces_of_distSq_ratio`, `not_forces_five_thirds_11`, modelled on Heule-510's 5/3 pairs), Polymath16's 2018 question "is 5/3 always coloured like 0?" has the answer no for every such certificate; the field-level reading, wherever 11 is usable, adds M58's hand reduction, and the √247 variant stays a hand argument (`CLOSED-QUESTIONS.md` §1.4). | `ResidueObstruction.lean`, `Instances/ResidueObstruction11.lean`, `tools/fpcompel.py` | M60 |
+| 55 | **The residue obstruction** (G47): `Forces.image`, `Separated.image`; `forces_iff_eq_of_aperiodic`; the distance law (`Forces.quad_sub_eq_zero`, `Separated.quad_sub_eq_one`); `finitePlane11_forces_iff`, `finitePlane11_separated_iff`. **Over the √7-free tower with 11 ∤ D, a five-colour forced pair has 11 ∣ d² and a virtual edge d² ≡ 1 (mod 11), so neither a √3 nor a distance-2 gadget exists** (`not_separated_sqrt3_11`, `not_separated_two_11`) — and at the rational squared distance 25/9 (`not_forces_of_distSq_ratio`, `not_forces_five_thirds_11`) Polymath16's 5/3 question has the answer no (`CLOSED-QUESTIONS.md` §1.4). **Subsumed by row 66**, which refutes every five-colour forced pair and every non-edge virtual edge over the same fields at every distance; the law stays as the level-one shadow. | `ResidueObstruction.lean`, `Instances/ResidueObstruction11.lean`, `tools/fpcompel.py` | M60 |
 | 56 | **Local–global tightness** (G48): `addCayleyMap`; `unitQuadrance_colorable_of_quotient`; `card_le_chromaticNumber_mul_indepNum`; **`Forces.isEmpty_ringHom_of_spindle_radicand`** (with `…_of_not_isSquare_neg_one` and `…_of_colorable` forms); `chromaticNumber_finitePlane19_le_five`. [tools] ϑ = Hoffman at eleven primes; no rotationally symmetric 5-colouring of UD(𝔽₂₃,2). **Prior art:** `addCayleyMap` is `[Moorhouse2010]` §4.2 and the periodic quotient an instance of `[CervantesKrebs2023]`; the mechanism is ours. | `LocalGlobal.lean`, `Instances/LocalGlobal19.lean`, `PlaneRotation.lean` | M61 |
 | 57 | **Theorems A and B.** **B:** `chromaticNumber_seamPlane`, χ(ℚ(√3,√11)²) = 4 — residue maps onto 𝔽₄ at the two primes above 2, a parity descent in place of valuation theory, and the Moser spindle as an identity in the order; `not_forces_five_of_subset_seamPlane`. **A:** `colorable_of_residue` — a graph drawn in an abelian group, edge differences in a subgroup A and nonzero under ψ : A →+ G, is \|G\|-colourable, with no metric, field or ring; `normOne_subset_valuationSubring`, `colorable_unitDistance_induce_of_valuationSubring`, `normOneColoring`. **Not proved:** that a number field with a conjugation-fixed prime supplies the valuation subring with residue field of size N(𝔭). **Prior art:** the valuation-subring form is `[Madore2015]` Prop. 3.2 and the unit argument `[Fischer1990]` Thm 1; Theorem A's general form is what Madore's Prop. 3.9 declines to formulate. **B answers** `[Moorhouse2010]` §1, `[CranstonRabern2015]` (so 76/21 ≤ χ_f(K²) ≤ 4) and `[ExooIsmailescu2019]`'s closing question, and settles one field of Benda–Perles Open Problem 11.6 (`[Soifer2024]` ch. 11), and closes `[Madore2015]` Prop. 4.6's 4 ≤ χ ≤ 5. | `FieldWall4.lean`, `ResidueColouring.lean` | 2026-09-08 |
 | 58 | **The Moser recipe's sharp threshold**: a host graph with no k-clique draws no minimal forcing gadget at k colours (`not_forces_of_drawing`); four plane points are never pairwise unit-distant, so for k ≥ 4 no k + 1 plane points carry a forced pair (`not_forces_of_unit_drawing`), while at k = 3 the drawn rhombus is the minimal gadget (`exists_forces_of_unit_drawing_three`). It says nothing about non-minimal constructions. | `Mascot.lean`, `plans/MASCOT-DERIVATION.md` | 2026-09-09 |
@@ -223,59 +222,46 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 | 60 | **Plane freedom**: rotations by circle points are automorphisms of `unitQuadrance R` (`rotHom`, `quarterTurnHom`); over a field where −1 is not a square a vector and its quarter turn span the plane; so **over ZMod p with p ≡ 3 (mod 4), `Forces ↔ x = y` whenever the plane is k-colourable** (`finitePlane_forces_iff`) — without colourability the statement is false (`finitePlane3_not_colorable_two`). Prime fields only; the virtual-edge half is proved only at 11. | `PlaneRotation.lean`, `Instances/PlaneFreedom.lean` | 2026-09-09 |
 | 61 | **Statements at their proofs' level**: the six-target is colour-generic (`seven_le_chromaticNumber_plane_of_forced_pairs`: two six-colour gadgets give χ ≥ 7) and distance-set-generic, and over {1, 2} one √3 gadget suffices (`six_le_chromaticNumber_oneTwo_of_forced_sqrt3`); a passing brick certificate colours `distanceGraph ℂ D` (`chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine`); the old names are pinned by compiled type ascriptions. | `Instances/HexShell.lean`, `BrickDistance.lean` | FS-24 |
 | 62 | **Overcompression is an orbit-closure gap**: for an upward-closed refusal family and H ≤ Aut(A), the rung-H minimum equals min \|cl_H(M)\| over inclusion-minimal refusers M, so every symmetry rung is a hitting-set problem over H-orbits against the correction-set hypergraph Y, with no colouring ask. [tools] On `[Parts2020a]`'s L stage: 375 vertices / 3,264 minima at the trivial rung; a dead involution gives 376 with containment 0 of 1,302 — his §6 sentence reproduced at 375 and 376; S-side rungs cost 8 vertices where L's cost 1; Y accounts for every exclusion. **Prior art:** the symmetry gap of symmetric integer programming (`[HerrRehnSchurmann2013]`), idealness, semilinear sets, MUS/MCS enumeration (arXiv:2412.13606 — our 336 necessary atoms are its backbone). | `tools/parts_faces.py`, `tools/parts_reduce.py`, `data/m62/m64-*.json` | M64 |
-| 64 | [tools] **A five-chromatic unit-distance graph in a 6-OPEN field, at a rotation the field screen selected** (M63 phase H2). The type-M rotations are classified by one integer — `cos θ = (2n−1)/(2n)`, diagonal circle at `\|p\|² = n`, radicand `4n−1` — which is the **spindle** construction at distance `√n`, so `n = 3` is the Moser twist, `n = 4` is `ρ₁₅` (the 509-vertex record) and `n = 16` is `ρ₆₃ = (31+3i√7)/32`. **The rotation is not new either, corrected 2026-09-12**: it is `ω₁₆` of `[Polymath16wikiMain]`'s own 2018 list, which also records de Grey's 20,425-vertex graph as living in `ℤ[ω₁, ω₃, ω₄, ω₁₆]` — so `ρ₆₃` is a generator of **de Grey's own ring**, and it is a G8 generator here for that reason. **What is ours in this row is the field screen that selected it, the 6-openness, and the produced refusal — nothing about the rotation.** Screened by four gates we hold (free circle; `sin θ ∉ K` else Theorem B four-colours every base; the 2-adic wall; 11's residue degree), the record is the **cheapest** live member and the two below it die by **Theorem B**. **At `n = 16`: `χ ≥ 5` on 51,133 vertices / 544,530 edges in `ℚ(√3,√7,√11)`**, established twice — a complete 552-pattern enumeration with **0 of 304,704** admissible pairs, and **552/552 UNSAT** cube-and-conquer in 20.03 core-hours — sharing only the completeness of the 552, the first claim confirmed on **four** independent solver codebases (CaDiCaL ×2, Glucose, Minisat) and the other nineteen on two (CaDiCaL, Glucose), with paired positive controls, and produced as **0.35 GB of DRAT** (807 MB bundled, each instance repeating the base half) covering the whole 20-claim trust core — **the first here, but GENERATED and not CHECKED**: no DRAT checker exists on this machine, so what holds is only that CaDiCaL's own `--checkproof` was on. **Regenerated as text LRAT** with `scripts/regen-check.sh`'s own flags: all 20 exit UNSAT, all 20 end in the empty clause with a negative control proving that check discriminates, **1,001.2 MB over 11.8 M lines**, 406 solver-seconds. **Status: generated, not checked** — and the format is **the input to this project's conversion pipeline, NOT one the kernel consumes**: core's LRAT checker cannot kernel-reduce at all (`USize` width is an `@[extern] opaque`, so it buys a native axiom per certificate) and M05's kernel-reducible checker takes a packed `Nat` encoding derived from LRAT. **Kernel-checking is priced and declined for now**: at 585–614 k lines each, one is ~0.75× the per-cube volume row 40 declined and all twenty are ~15× it. Bundled as **19.5 MB** (base half once plus 20 deltas) with a `reconstitute.sh` that verified each rebuild against a SHA-256 and refused a planted clause — **but the DRAT, LRAT and bundle lived in the session's `/tmp` and were never committed; they are gone** (review 2026-09-13). The durable commits are the 151 KB certificate and 5 KB manifest at `data/m62/m63-phaseH2-rho63-*.json`. **The refusal is produced, not inherited**: no known witness embeds at any position or orientation (isometry-invariant squared distances), and the base half alone four-colours in 0.35 s. **The result is the field, not the size** — `K(√7)` is 6-open, so 11 is not usable there and row 55's bar on five-colour forced pairs does not apply: G48's mechanism has a platform. **Not the FIRST such platform, corrected 2026-09-12**: de Grey's own field ℚ(√3,√5,√7,√11) is 6-open (G43; the coordinates span all sixteen basis slots of the tower over `Instances/DeGrey`'s certificate, and `data/fplane/map.md:20` has said so since M58), as is K(√5,√7,√247). The 5-sealed ones are the record's K(√15) = K(√5), the M53 witnesses' K(√247) and K(√23), and Heule-510/553's ℚ(√3,√5,√11). What is new is a platform at **half the degree** (8 against 16), reached **by the screen** rather than found, carrying an object whose refusal is produced. **The rotation, the angle family and the spindle identification are all prior art** (G7). **χ(arena) = 5 EXACTLY** (2026-09-12: nothing on record had the upper half; CaDiCaL was undecided at 300 s; an explicit construction took 0.7 s and was **verified proper on all 544,530 edges, 0 improper** — `plans/M63-phaseH4-reduce-the-platform.md` §R). **Not kernel-certified; one object.** [tools] Also: the circle count is the base's norm-`n` shell count and is **free** when `n = k²m` with `k ∈ ℤ` and `m` a realised distance; the 30 circle points admit exactly **19** colour patterns in `1 + 6·3` orbits under `ζ₆`, every one half-turn invariant; and `h(K) = h(K(i)) = 1` with `μ(K(i)) = ⟨ζ₁₂⟩` (pari). | `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH2-solver.md`, `plans/M63-phaseH2-plan.md`, `plans/POROS-2026-09-12-m63-phaseH2.md`, `plans/M63-phaseH4-reduce-the-platform.md` (the χ = 5 witness), `data/m62/README.md` | M63 phase H2 |
+| 64 | [tools] **A five-chromatic unit-distance graph in a 6-OPEN field, at a rotation the field screen selected** (M63 phase H2). The type-M rotations are classified by one integer — `cos θ = (2n−1)/(2n)`, diagonal circle at `\|p\|² = n`, radicand `4n−1` — the **spindle** at distance `√n`: `n = 3` is the Moser twist, `n = 4` is `ρ₁₅` (the 509-vertex record), `n = 16` is `ρ₆₃ = (31+3i√7)/32`, which is `ω₁₆` of `[Polymath16wikiMain]`'s 2018 list and a generator of de Grey's own ring `ℤ[ω₁, ω₃, ω₄, ω₁₆]` (hence of G8's set). **The rotation, the angle family and the spindle identification are prior art (G7); ours are the field screen that selected it, the 6-openness, and the produced refusal.** Screened by four gates we hold (free circle; `sin θ ∉ K`, else Theorem B four-colours every base; the 2-adic wall; 11's residue degree), the record is the cheapest live member and the two below it die by Theorem B. **At `n = 16`: `χ(arena) = 5` exactly, on 51,133 vertices / 544,530 edges in `ℚ(√3,√7,√11)`** — the lower half twice, a complete 552-pattern enumeration with **0 of 304,704** admissible pairs and **552/552 UNSAT** cube-and-conquer in 20.03 core-hours (four solver codebases on the first claim, two on the other nineteen, paired positive controls), the upper half an explicit colouring verified proper on all 544,530 edges (`plans/M63-phaseH4-reduce-the-platform.md` §R). Proof logs — 0.35 GB DRAT, 1,001 MB text LRAT over 11.8 M lines, all 20 UNSAT ending in the empty clause with a negative control discriminating — were **generated, never checked** (no DRAT or LRAT checker on this machine; LRAT is the pipeline's input, not the kernel's format; kernel-checking priced at ~15× the per-cube volume row 40 declined) and **never committed: they lived in `/tmp` and are gone**. The durable commits are the 151 KB certificate and 5 KB manifest at `data/m62/m63-phaseH2-rho63-*.json`. **The refusal is produced, not inherited**: no known witness embeds at any position or orientation, and the base half alone four-colours in 0.35 s. **The result is the field, not the size**: `K(√7)` is 6-open, so 11 is not usable there and row 55's bar does not apply — **not the first such platform** (de Grey's ℚ(√3,√5,√7,√11) is 6-open, G43, as is K(√5,√7,√247)), but one at half the degree, 8 against 16, reached by the screen rather than found. **Not kernel-certified; one object.** Also: the 30 circle points admit exactly 19 colour patterns in `1 + 6·3` orbits under `ζ₆`, every one half-turn invariant; `h(K) = h(K(i)) = 1` with `μ(K(i)) = ⟨ζ₁₂⟩` (pari). | `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH2-solver.md`, `plans/M63-phaseH2-plan.md`, `plans/POROS-2026-09-12-m63-phaseH2.md`, `plans/M63-phaseH4-reduce-the-platform.md`, `data/m62/README.md` | M63 phase H2 |
 | 63 | **Two colours from inertia, and the 2-adic splitting of multiquadratic fields**: a residue map into a reduced characteristic-2 ring that conjugation does not move two-colours every unit-distance graph over its valuation subring (`colorable_two_unitDistance_induce_of_valuationSubring` — its plane and valuation forms have **no instance over a real field yet**; the only inhabitant is the ring form on ℤ[i], deferred to FS-37); a square-class group holding [2] is the sum of two pieces whose 2-adic images avoid [−1], so every real multiquadratic field lies, once √2 is adjoined, in the compositum of two fields that pass the four-colour test (`fieldOfRadicands_le_sup`) — each holding a Moser spindle when the field contains ℚ(√3,√11); de Grey's field lies in ℚ(√2,√3,√11,√35)·ℚ(√3,√10,√11,√35); ℚ(√3,√11,√14) and ℚ(√3,√11,√70) pass the test and their compositum's plane needs five colours (`five_le_chromaticNumber_planeOver_fourteen_sup_seventy`), so, granted the factors' hand χ ≤ 4, no combining rule for test-passing fields gives four. **Not proved:** χ ≤ 4 for any piece (FS-37). [hand] For real multiquadratic F, χ(F²) = 2 iff no odd square class is ≡ 3 (mod 4). **Credit:** the decomposition is ChatGPT's (OpenAI, with Kooshi, 2026-09-11). **Prior art:** the mechanism is Woodall's, `[Fischer1990]` Thm 8, `[Moorhouse2010]` Thm 7.1, `[Madore2015]` Prop. 3.9; the multiquadratic iff is unchecked against `[AxenovichEtAl2014]` and `[Johnson2006]`. | `TwoColourResidue.lean`, `SquareClass.lean`, `Instances/CompositumFive.lean` | FS-36 |
-| 65 | [tools] **Dropping `[Parts2020a]`'s coordinate shape: the object dies, and the family gains six results** (M63 phase H3). His base confines a point of `K² = ℚ(√3,√11)²` to four of eight rational slots (`p₁ ∈ ℚ(√33)`, `p₂ ∈ √3ℚ ⊕ √11ℚ`) — equivalently, to the quartic CM field `ℚ(√−3,√−11)`, so **dropping the shape IS adjoining the quarter turn** (`[Polymath16blog]`, Speyer, 2018-04-25). Dropped at `n = 2` (`ρ₂ = (3+i√7)/4`, circle `\|p\|² = 2`, bound `4/√7`, field `ℚ(√3,√7,√11)`, 6-open), the base is the ℤ-span of its own **60** unit vectors — index 256, group-closed under order **48** not Parts's 24, **16,309** points, confirmed by three independent routes. **THE OBJECT IS FOUR-COLOURABLE, at every radius, by derivation**: an arena colouring is a **pair** `(f,g)` of base colourings meeting 132 interface constraints, and searching them **independently** over the additive family gives **576 of 124,416** in 1.7 s — **none a twist**, which is why a twist-only search had read it as live. Additive colourings are lattice homomorphisms and the cross edges are pinned at 252 by the bound, so growth cannot help (exercised at 32,617 / 83,905 / 301,537 vertices, 0 monochromatic each). **The screen this yields is the phase's product: the additive-pair route is open exactly when `4 ∤ n` and dead exactly when `4 \| n`** — the colour group is 2-torsion, so a circle inside `2L` takes the centre's colour — base-free, radius-free, solver-free, clean on all 19 members `n ≤ 20` with circle counts (60–336) **never tracking the verdict**. **Every 6-open member FS-30 lists (16, 20, 44, 60, 64, 76, 108, 112) is `≡ 0 (mod 4)` and immune: phase H3 picked the cheapest member of exactly the class this route kills.** Also: **(i)** the endpoint bound `1/\|sin θ\|` governs cross-edge **endpoints, not a base's extent** — Parts went **past** his by 1.222× (his base is a selection of 37+14 orbits, not a disk cut), phase H2 stopped exactly at his; **(ii)** **growing a base is provably monotone** — colourings of a larger base restrict to the smaller, so the interface pattern set only shrinks while the circle count is fixed (first measurement: `10²¹ → 10⁴` for a 2.6× base); **(iii)** the circle sits at `√(1−1/(4n))` of the bound — 93.5/96.8/99.2% at `n` = 2/4/16 — so **the circle is on the arena boundary in every member by construction**, and the free-circle theorem's hypothesis (radius `\|k\|+1`) **has never been satisfied by any object built**; **(iv)** a **two-case classification** of monochromatic cross-edge kinds over `V = n(g−h)² + gh`, with `\|u\|²,\|v\|²,σ,δ²` all homogeneous of degree 0 and the endpoint bound a corollary — case A (`g,h` both `𝔭`-units) monochromatic for every `n`, case B iff `v_𝔭(gh) < v_𝔭(n)`, needing `n` even; retrodicts 12/12 families, one out-of-sample landing (`Sh(64)=12` predicted mid-enumeration); **(v)** the shape trade measured — each conjugate condition beyond the first costs **2.0–2.6×** in realised connectivity, so dropping the shape buys 2× nominal and pays ≈5.3×, **net ≈2.6× worse at equal radius**; **(vi)** a **one-sided kill test** for whether phase H2's interface reduction is affordable, milliseconds from one base colouring — **it rules candidates out and can never rule one in**. **The premise is confirmed where it matters most:** at `n = 4`, the record's **own** rotation, dropping the shape takes raw off-diagonal cross edges **36 → 312** and monochromatic ones **0 → 144** (195,961 points, 492/492 confirmed, 0 invented) — **the shape, not the rotation, was the obstruction.** **Prior art:** the move is `[Polymath16blog]`, Silberman, 2018-04-19 — *"take points each of whose coordinates is a point in the field"*, both obstacles named, *"I'll try implementing this later"*, never returned to, nothing following it in 1.69 M characters across eighteen threads; the coincidence-site-module literature excludes the object **by definition** (`[BaakeZeiner2017]` §6 admits only same-rank submodules). **And the DIRECTION closes with the object**: run over Parts's **shaped** lattice the same screen shows every member he can realise with a nonempty circle is either **odd** (at risk, but dead anyway — odd `n` fails the 2-adic wall) or **`4 \| n`** (immune), so **dropping the shape reaches only members this route kills**; `n = 16` is the cheapest 6-open immune member, nothing lies below it (`n` = 4, 8, 12 are 5-sealed), and it is realisable **shaped** at 25,567 points — phase H2's own object. **Every member worth having was already reachable on Parts's lattice; the shape-free construction has no target.** Residual, priced not pursued: `n = 10` is at risk and **uncomputed** at ~6.6 M points; the sub-bound radius lever is worth **6–23%, not orders** (measured). **Nothing kernel-checked; no proof log, because no solver produced one.** | `plans/M63-phaseH3-plan.md`, `plans/M63-phaseH3-solver.md`, `plans/M63-phaseH3-crossedges.md`, `plans/M63-phaseH3-module.md`, `plans/M63-phaseH3-prior-art.md`, `plans/POROS-2026-09-12-m63-phaseH3.md` (the retraction ledger). **Its certificate and `recheck.py` were left under the gitignored `build/` and are not in the repository** (review 2026-09-13; `data/m62/README.md` § Not recorded here). | M63 phase H3 |
+| 65 | [tools] **Dropping `[Parts2020a]`'s coordinate shape: the object dies, the family gains six results, and the direction closes** (M63 phase H3). His base confines a point of `K²` to four of eight rational slots (`p₁ ∈ ℚ(√33)`, `p₂ ∈ √3ℚ ⊕ √11ℚ`) — the CM field `ℚ(√−3,√−11)` — so **dropping the shape IS adjoining the quarter turn** (`[Polymath16blog]`, Speyer, 2018-04-25). Dropped at `n = 2` (`ρ₂ = (3+i√7)/4`, circle `\|p\|² = 2`, field `ℚ(√3,√7,√11)`, 6-open) the base is the ℤ-span of its own 60 unit vectors (index 256, group order 48, 16,309 points, three independent routes) and **is four-colourable at every radius, by derivation**: an arena colouring is a pair `(f, g)` of base colourings meeting 132 interface constraints, searched independently over the additive family — 576 of 124,416 in 1.7 s, none a twist, which is why a twist-only search read it as live; additive colourings are lattice homomorphisms and the cross edges are pinned at 252, so growth cannot help (0 monochromatic at 32,617 / 83,905 / 301,537 vertices). **The screen is the product: the additive-pair route is open exactly when `4 ∤ n` and dead exactly when `4 \| n`** (the colour group is 2-torsion, so a circle inside `2L` takes the centre's colour) — base-free, radius-free, solver-free, clean on all 19 members `n ≤ 20`, circle counts never tracking the verdict — and **every 6-open member listed (16, 20, 44, 60, 64, 76, 108, 112) is `≡ 0 (mod 4)` and immune**. Also: (i) the endpoint bound `1/\|sin θ\|` governs cross-edge endpoints, not a base's extent (Parts went 1.222× past his); (ii) growing a base is monotone — colourings restrict, so the interface pattern set only shrinks (`10²¹ → 10⁴` for a 2.6× base); (iii) the circle sits at `√(1−1/(4n))` of the bound, on the arena boundary in every member, so the free-circle theorem's hypothesis has never been met by any object built; (iv) a two-case classification of monochromatic cross-edge kinds over `V = n(g−h)² + gh` (case A for every `n`; case B iff `v_𝔭(gh) < v_𝔭(n)`, needing `n` even), 12/12 families retrodicted, one out-of-sample landing; (v) each conjugate condition beyond the first costs 2.0–2.6× in realised connectivity, so dropping the shape nets ≈2.6× worse at equal radius; (vi) a one-sided kill test for phase H2's interface reduction, milliseconds from one base colouring — it rules out, never in. **The premise is confirmed where it matters**: at the record's own `n = 4`, dropping the shape takes monochromatic off-diagonal cross edges **0 → 144** (195,961 points, 492/492 confirmed, 0 invented) — the shape, not the rotation, was the obstruction. **And the direction closes**: on Parts's shaped lattice every member with a nonempty circle is odd (fails the 2-adic wall, dead by Theorem B) or `4 \| n` (immune), so the shape-free construction reaches only members this route kills; `n = 16` is the cheapest 6-open immune member (4, 8, 12 are 5-sealed) and is realisable shaped at 25,567 points — phase H2's own object. Residual, priced not pursued: `n = 10` (`K(√13)`, at risk) uncomputed at ~6.6 M points; the sub-bound radius lever is worth 6–23%. **Prior art:** the move is `[Polymath16blog]`, Silberman, 2018-04-19, never returned to; the coincidence-site-module literature excludes the object by definition (`[BaakeZeiner2017]` §6). **Nothing kernel-checked; no proof log.** Its certificate and `recheck.py` were left under the gitignored `build/` and are not in the repository (`data/m62/README.md` § Not recorded here). | `plans/M63-phaseH3-plan.md`, `plans/M63-phaseH3-solver.md`, `plans/M63-phaseH3-crossedges.md`, `plans/M63-phaseH3-module.md`, `plans/M63-phaseH3-prior-art.md`, `plans/POROS-2026-09-12-m63-phaseH3.md` | M63 phase H3 |
+| 66 | **The fan gap, and the arity-2 compulsion structure over sealed fields** (FS-38). A colour absent from a vertex's closed neighbourhood in some proper colouring of a target graph (`FanGap C v γ`), repainted at any vertex above it along a graph homomorphism, frees that vertex from every forced pair: `not_forces_of_fanGap` (no forces-freeness or colourability premise), `not_fan_of_fanGap` (a fan survives only if some partner's image sits on the gap colour in every gapped colouring), `not_separated_of_sharedGap` (one colour absent from both closed neighbourhoods, repainted at a non-adjacent pair); `Slack.forces_iff` (`Forces ↔ =`), `PairwiseFusable.separated_iff_adj` (`Separated ↔ Adj`) and their `_of_hom` forms; the transports `FanGap.comap`, `Slack.of_hom` (no surjectivity), `slack_addCayley_of_fanGap` (one gapped vertex is slackness everywhere on a Cayley graph), `unitQuadrance_fusable_of_sharedGap_base` (one shared-gap table at the base edge, by translation and `rotHom`), `Slack.unitQuadrance_of_ringHom`; `exists_fanGap_iff_not_coverAtLeast`; `three_le_arityFloor_of_forces_eq_of_separated_adj`. **Instances:** `UD(𝔽₁₁,2)` is slack and pairwise fusable at five colours — the certified table's gap at `(2,4)` and a second 121-entry table with colour 4 absent from `N[(0,0)] ∪ N[(1,0)]`, decided — so for every graph with a homomorphism into it **`Forces G 5 u u' ↔ u = u'` and `Separated G 5 u u' ↔ G.Adj u u'`** (`forces_iff_of_hom_finitePlane11`, `separated_iff_adj_of_hom_finitePlane11`): `ZMod (11^m)`, `ℤ_[11]`, `Adjoin 11 ℤ_[11]`, every `Valid` √7-free certificate with `11 ∤ D` (`UDCert.forces_eq_11`, `UDCert.separated_iff_adj_11` — every pair, no distance hypothesis), and **Heule-510 unconditionally** (`heule510_forces_iff`, `heule510_separated_iff_adj`, `three_le_arityFloor_heule510` — G31's measured null promoted, the pair `(0, 475)` M60 was silent on included). At 19 the forces half on the kernel's own periodic colouring (`finitePlane19_slack`; gapped classes `y − x ∈ {4, 10}`). **Consequences:** over every 5-sealed multiquadratic field ⊇ ℚ(√3,√11) — each has 11 usable of residue degree one — a five-colour forced pair is a single vertex and a five-colour virtual edge a unit edge, at every distance: G48's six-level question is answered **no** (arity 2), FS-6 has no instance, FS-16's 51 candidates are none of them virtual edges, and row 55's distance law is the level-one shadow of this. **Not claimed:** the field-level hand step of M58/M60 (row 57's gap); anything at arity ≥ 3; anything over a 6-open field, where no 5-colourable residue target exists. **Prior art:** a gapped vertex is the reconfiguration literature's non-frozen vertex (`[BrewsterEtAl2020]`, folklore); the transport along a homomorphism and its compulsion consumers were not found (plan §PA). | `FanGap.lean`, `Instances/FanGap11.lean`, `Instances/FanGap19.lean`, `data/fs38/` | FS-38 |
+| 67 | **The 2-adic tower stabilises at level 4** (FS-38). `P_m = Cay(O/𝔓^m, S_m)`, `O = ℤ₂[ω][√3]`, `𝔓² = (2)` — the local plane of ℚ(√3,√11)(i) above 2 at **four** colours, in a ring-free representation (`twoAdicPlane m`, an `addCayley` under two Eisenstein forms; that it is `Cay(O/𝔓^m, S_m)` is [hand], three independent constructions agreeing). **Kernel:** level 4 is pairwise free (`twoAdicFour_forces_iff`, five tables through the connection set); level 5 forces exactly the kernel of the level map — `Forces (twoAdicPlane 5) 4 0 d ↔ twoAdicLevelMap 4 d = 0` (`twoAdicFive_forces_iff`), the backward half from **one LRAT refusal replayed by the kernel** on the refutation's own 125-vertex, 778-edge core (`twoAdicFive_not_colorable_with_edge`; the pins' clique proved from the edge list) and the `ω`-orbit, the forward half by pullback; no level ≤ 5 has a fan gap (`twoAdicFive_not_slack`, `twoAdicFour_not_slack`, `twoAdicPlane_one_no_fanGap`). **Derived** [hand, `plans/FS38-derivation.md` D-2, Theorems D2-A/B]: every `P_m` is Hoffman-tight at four colours (`λ_min = −d/3`), so every 4-colouring is balanced, gap-free and periodic under `H_min`, the common kernel of the minimising characters; the minimisers stabilise at level 4 (45 characters, trivial common kernel), so for every `m ≥ 5` **every 4-colouring of `P_m` is pulled back from `P₄`** — the tower's colouring space is `P₄`'s 1,179,936 colourings — with `Forces ⟺ x − y ∈ 𝔓⁴` and `Separated ⟺ y − x ∈ S_m + 𝔓⁴`; the depth 4 has an arithmetic origin, a lattice certificate: four norm-one units `≡ 1 (mod 𝔓)` whose `t − 1` span has 2-adic elementary divisors 1, 2, 4, 4, so `𝔓⁴ ⊆ M` and `𝔓³ ⊄ M`. [tools] Measured at levels 1–8 under controls (the forced set exactly `{depth ≥ 4}`, 3/15/63/255 refusals on two engines, the free half verified colourings; the level-9 spectrum met out of sample); a 3-adic control met with no solver (every 3-colouring of `UD(ℤ/9,2)` is 3-periodic); the 11-adic tower slack, hence pairwise free, at every level [kernel, row 66]. **The classifier:** the sign of `λ_min + d/(k−1)` of the level-one plane — tight at 2 (k = 4) and 3 (k = 3), slack at 7, 11, 19, 23, 83 — and by the Weil bound no usable prime above 3 in the committed table is tight for any `k ≤ 7`. **The transfer is freeness only:** a K-fabric with a homomorphism into `P₄` cannot force a four-colour pair of depth ≤ 3 (the mechanism behind M53's zeros at depth 2), while the tower's forcing is an extremal property of the whole Cayley graph and says nothing about any finite chunk — M56's depth-6 fact stays unexplained, and P-D3 registers that no finite K²-graph forces depth 4. [hand 2], that a K-certificate draws into `P_m`, is row 57's gap, unchanged. **Prior art:** the ratio bound and its equality case (`[Hoffman1970]`, unpublished by him per `[Haemers2021]`; `[Delsarte1973]`, `[Lovasz1979]`, `[GodsilMeagher2016]`); "k-tight" is the literature's *Hoffman colorable*, and balance plus gap-freedom is Blokhuis–Brouwer–Haemers 2007 Prop. 2.3 (`[AbiadEtAl2025]`); `[MMST1998]` holds the spectra over `ℤ/p^r`; the Fourier periodicity, the tower propagation and the classifier were not found. | `TwoAdicTower.lean`, `Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`, `Instances/TwoAdicFive/`, `plans/FS38-derivation.md`, `plans/FS38-tower-records.md`, `data/fs38/` | FS-38 |
 
 ### Paths forward, ranked
 
 *A mirror of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **M63 phase H2 closed 2026-09-12** with a five-chromatic unit-distance graph
-in a **6-open** field (row 64) — **not the first** such platform, since de Grey's own field is 6-open (G43),
-but the smallest and the first reached by design rather than found.
-**Phase H3 closed 2026-09-12 with its object DEAD and the family six results richer** (row 65): dropping
-`[Parts2020a]`'s coordinate shape at `n = 2` gives a base that is four-colourable **at every radius, by
-derivation**, and the reason generalises — **the additive-pair route is open exactly when `4 ∤ n`**, while
-**every 6-open member we list is `≡ 0 (mod 4)`**, so the phase picked the cheapest member of exactly the
-class that route kills. The premise it was chartered to test is nevertheless **confirmed**: at the record's
-own rotation `n = 4`, dropping the shape takes monochromatic off-diagonal cross edges **0 → 144**.
-**The DIRECTION is closed too, and that is the phase's real result:** on Parts's shaped lattice every
-member with a nonempty circle that the route can kill is **odd**, and odd `n` fails the 2-adic wall outright
-(dead by Theorem B), while **every even member his lattice realises has `4 | n` and is immune**. So dropping
-the shape reaches only `n ≡ 2 (mod 4)` and odd `n` — **exactly the members this route kills.**
-**`n = 16` is the cheapest 6-open immune member and nothing lies below it** (`n` = 4, 8, 12 are 5-sealed,
-checked in `tools/fplane.py`) — and it is realisable on his **shaped** lattice at 25,567 points, which *is*
-phase H2's verified object. **Every member worth having was already reachable on Parts's lattice; the
-shape-free construction has no target.** One residual, priced not pursued: `n = 10` (`K(√13)`, 6-open,
-`4 ∤ 10`) is **at risk but UNCOMPUTED** at ~6.6 M points, past the present Python tooling.
-The Poros pass of 2026-09-13 re-ranked the set below: the live continuation is **FS-38, the residue tower**, with FS-6's mechanism second and its never-run instance test restored; `plans/FRONTIER-STUBS.md` is authoritative and carries the caution that phase H2 decided **one object** and phase H3 **one more**. **M62** — the evolutionary type-M search (`plans/M62-evolutionary-type-m.md`) — stays paused behind
-M63.
+**Open milestones, in order.** **FS-38 closed 2026-09-13** (rows 66–67, G54): the residue plane's arity-2
+compulsion structure at its sealing colour count pulls back to every graph over the field, and is trivial;
+where the plane is tight — at 2 with four colours — the tower stabilises at level 4. **M63** stands at phases
+H2–H3 closed (rows 64–65); **M62** stays paused behind it.
 
-**Ranked stubs** (re-ranked 2026-09-13 by the Poros wall-breaking pass, `plans/POROS-2026-09-13-wall-breaking.md`: every five-colour pair sweep ever run read zero on a *critical* 5-chromatic object, in sealed and 6-open fields alike, while the four-colour forced pairs the 5-forcers were built from were read off deep 4-colourable fabric at 2-adic depth 3 with no mechanism derived — the frame reads a prime at level one; the tower above it is the new top row):
+**Ranked stubs** (re-ranked 2026-09-13 at the FS-38 close; `plans/FRONTIER-STUBS.md` is authoritative):
 
 | rank | stub | the question | bearing on χ ≥ 6 |
 |---|---|---|---|
-| 1 | FS-38 the residue tower — `plans/FS38-residue-tower.md` | the level-m residue planes P_m = Cay(O/𝔭^m, S_m) (`unitQuadrance (ZMod (p ^ m))`): at which level does every k-colouring become constant on 𝔭^d-cosets — at 2 with four colours first (must reproduce M56's depth-3 forcing), then at 11 with five (UD(ℤ/121, 2), one Separated ask per coset class)? continuity at 11 names the depth and size of a fabric that forces a pair at 11 ∣ d²; no continuity closes route A at its mechanism | medium-high as a frame; two-sided |
-| 2 | FS-6 the six-level design target — `plans/STUB-family-keeping-thickening.md` | a pair forced equal at five colours over a 5-sealed field at 11 ∣ d², spindled into a 6-open field (G48); its central computation (the forced-distance table at residue norm 0, backlog B9 (i)) was never built and is FS-38's phase C | medium — the only known mechanism |
-| 3 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? five-colourable says 23 seals like 11 and 19; a refusal is the first plane exactly 6-chromatic and names 6-hosting fields by congruences | medium as a frame; the disproof-side digit |
-| 4 | FS-39 the bridge to the plane — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup_F χ(F²): de Bruijn–Erdős plus the algebraic-drawing lemma, invoked in prose since M58 and never stated or cited; T2 ⟹ χ(ℝ²) = 7 rests on it | none on a 6-forcer; high on every χ(ℝ²) sentence after M58 |
-| 5 | FS-20 the paper — `plans/STUB-theorem-B-writeup.md` | Theorem A as the formulation seven lineages stopped short of; blocked on FS-27 §2, `[Johnson2006]`, `[Fischer1990b]` | none; the publication trigger |
-| 6 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not; where FS-6's §7 hands its question | medium, mechanism only |
-| 7 | FS-16 residue-allowed distances — `plans/STUB-residue-allowed-distances.md` | the 51 undecided asks at residue norm 1 | low-medium |
+| 1 | FS-40 the first digit at 83 — `plans/STUB-first-digit-83.md` | is UD(𝔽₈₃,2) six-colourable? floor 6 (Hoffman 5.743); the first usable prime of the `ρ₆₃` arena's field K(√7), whose other usable primes have floor ≥ 8, so under the conjecture χ(K(√7)²) = 6 iff yes, else 7, and de Grey's field is 7 outright; the equivariant ask is minutes, the line-periodic route refused in all 42 directions, cube-and-conquer priced as FS-17's | medium — the one cheap computation whose answer changes what the conjecture predicts for the only 6-open field we built an object in |
+| 2 | FS-39 the bridge to the plane — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup_F χ(F²): de Bruijn–Erdős plus the algebraic-drawing lemma, invoked in prose since M58 and never stated or cited; T2 ⟹ χ(ℝ²) = 7 rests on it | none on a 6-forcer; high on every χ(ℝ²) sentence after M58 |
+| 3 | FS-41 `forces_of_tight` — `plans/STUB-forces-of-tight.md` | the kernel target phase D names: on a Cayley graph of a finite abelian group with λ_min = −d/(k−1), every k-colouring is balanced, H_min-periodic and gap-free; the 2-adic and 3-adic towers and the finite-plane table as instances, the level-4 spectrum as its `decide` base case, the four-element lattice certificate | medium, mechanism — the derivation the programme says matters more than objects |
+| 4 | FS-42 5-tight quotients of 6-open planes — `plans/STUB-tight-quotients.md` | a reading with its falsifier: the only constructive residue route to a five-colour forced pair that row 66 leaves open is a Cayley quotient Cay(F²/Λ, S̄) of a 6-open field's plane that is 5-colourable AND 5-tight — then Theorem D2-A forces pairs and G48's spindle gives a 6-forcer; the prime quotients are ≥ 6-chromatic, so the candidates are non-prime lattices Λ (composite ideals — Moorhouse §9's bar rests on the Hedetniemi conjecture `[Shitov2019]` refuted — and wall-broken 2-adic quotients); falsifier: the candidates' spectra, none 5-tight | medium-low; the next Poros pass's object |
+| 5 | FS-20 the paper — `plans/STUB-theorem-B-writeup.md` | Theorem A as the formulation seven lineages stopped short of, now with rows 57, 66, 67 to carry; blocked on FS-27 §2, `[Johnson2006]`, `[Fischer1990b]` | none; the publication trigger |
+| 6 | FS-17 the first digit at 23 — `plans/STUB-first-digit-23.md` | is UD(𝔽₂₃,2) exactly 5-chromatic? the plane is slack at five colours, so the tightness screen cannot decide it — slack says gaps are permitted if a colouring exists, and whether one exists is this stub's question, untouched | medium as a frame; the disproof-side digit |
+| 7 | FS-2 Kempe classes — `plans/STUB-kempe-classes.md` | what carries forcing when the additive family does not; M56's depth-6 fact, which the tower does not explain | medium, mechanism only |
 | 8 | FS-13 the finite planes' 6-critical cores — `plans/STUB-finite-plane-cores.md` | cube-and-conquer autopsy objects | low-medium |
-| 9 | FS-12 the hub scan as a design instrument — `plans/STUB-hub-scan-design.md` | a hub whose support is forced rainbow at five colours is a kill | medium-low |
+| 9 | FS-12 the hub scan as a design instrument — `plans/STUB-hub-scan-design.md` | a hub whose support is forced rainbow at five colours is a kill — re-read against `not_fan_of_fanGap`: over a sealed field a fan survives only if its support has a partner on the gap colour in every gapped colouring | medium-low |
 | 10 | FS-19 𝔭-adic classification of forbidden distances — `plans/STUB-padic-distance-classification.md` | `[Chow1993]` with v_𝔭(d²) | low-medium |
-| 11 | FS-37 the 2-adic criteria at the field level — `plans/STUB-field-level-criteria.md` | Theorem A's own gap: a passing field supplies the valuation subring | none; feeds FS-20 |
+| 11 | FS-37 the 2-adic criteria at the field level — `plans/STUB-field-level-criteria.md` | Theorem A's own gap: a passing field supplies the valuation subring; row 67's [hand 2] is the same gap at 2 | none; feeds FS-20 |
 | 12–13 | FS-27 consolidation remainder, FS-23 the knowledge web | the paper's blockers; the citation graph | none |
 | 14–16 | FS-30 consume the rotation list, FS-35 expansion look-ahead, FS-22 √7 phase pinning | largely answered by M63 phases G–H2; bookkeeping remainders | low |
 | 17–18 | FS-8 Haugland 7-adic check, FS-29 the overclaim check | a falsifier of an external claim; a gate's limit | low |
 | 19–21 | FS-9 topological bounds, FS-10 Nullstellensatz certificates, FS-5 bookkeeping | reading rooms and loose ends | low |
 
-**Closed as directions** (reasons in the grokkings): the cell family, in both directions (G29); extracting a
-gadget from an existing witness (G31); many spindles over one fabric (G40); designing in a finite plane and
-lifting (G45); an in-field descent (G34); reaching Parts's record by pure reduction (row 62;
+**Closed as directions** (reasons in the grokkings): the six-level design target over a sealed field (FS-6) and
+the residue-allowed distances (FS-16), both dead by theorem (row 66, G48); the cell family, in both directions
+(G29); extracting a gadget from an existing witness (G31); many spindles over one fabric (G40); designing in a
+finite plane and lifting (G45); an in-field descent (G34); reaching Parts's record by pure reduction (row 62;
 `plans/FS32-smus-reduction.md` §R3).
 
 ### The open structural question
@@ -294,7 +280,7 @@ a class family enumerated over present vertices misses it.
 entry carries a status: **[kernel]**, **[measured]** (tools-side, exact arithmetic or a controlled
 instrument), **[reading]** (an interpretation, believed and falsifiable), **[external]** (claimed in the
 literature, unchecked here), **[method]** (a working rule). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G53 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 **The theory in one paragraph.** The 4/5 wall is arithmetic. A unit-distance graph over K = ℚ(√3,√11) is
@@ -304,8 +290,13 @@ breaks the 2-adic wall; its forcing is a regional pigeonhole on the fabric compo
 leave K, invisible at the pair level. Past five colours the linear arithmetic goes blind and the finite
 residue planes take over: a field is 5-sealed when a usable small prime's plane is 5-colourable, the sealing
 plane carries no pair compulsion of its own, and a spindle over a forced pair removes exactly the prime that
-sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced equal at five colours over a
-5-sealed field at a distance with 11 ∣ d², spindled into a field that is 6-open by construction.
+sealed its fabric. That mechanism now has no instance: the sealing plane at 11 has a fan gap, and a gap at level one frees every
+pair above it (row 66), so over every 5-sealed field the five-colour compulsion structure at arity 2 is trivial —
+forced pairs are single vertices, virtual edges unit edges — and a residue plane forces pairs only where it is
+Hoffman-tight, which at five colours no sealing plane is (G54; at 2 with four colours the plane is tight and the
+tower forces from level 5, row 67). So a 6-forcer's every compulsion lives in a 6-open field, where no residue
+plane is five-colourable and the residue method is silent; what it can still name is a 5-colourable, 5-tight
+quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
 
 * **G1 — The field wall. [kernel]** The Moser twist is a seam-group word (ρσ² = −1), the seam group's
   countable closures are exactly 4-chromatic, and all of ℚ(√3,√11)² is 4-chromatic (Theorem B). A 5-forcer's
@@ -337,15 +328,13 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   `n = 4` breaks the wall but its field is 5-sealed, so the record can never reach six; `n = 16` (`ρ₆₃`,
   radicand `63 → 7`) is the cheapest member that is wall-breaking **and** 6-open.
   **Prior art, and it covers more than the angle.** `[Polymath16wikiMain]` (2018) states the family as
-  `ω_t = exp(i·arccos(1 − 1/(2t)))` **and attaches the spindle reading in words** — *"these numbers arise
-  naturally as the apex angle of a `√t, √t, 1` isosceles triangle"* — so **the identification of the family
-  with the spindle is theirs, not ours**; `[PartsOdd2022]` §3's `m₁ = m₂`, `r = 1` slice is the same family
-  from the other direction. **What is ours:** the radicand form `√(4n−1)` as the adjoined quantity, the
-  field screen over it, 6-openness as the selection criterion — and **dropping the restriction to Loeschian
-  `t`**, which is the sharpest of the four. The wiki's own list is *"particularly the Loeschian numbers
-  1, 3, 4, 7, 9, 12, …"*, the squared distances the triangular lattice realises; **2 is not Loeschian**
-  while 3, 4 and 16 are, so the restriction is an independent second reason — beside the census-image
-  failure of `plans/M63-phaseH2-prior-art.md` §PA.4 — that `n = 2` was never examined by anyone.
+  `ω_t = exp(i·arccos(1 − 1/(2t)))` **and attaches the spindle reading in words** (*"the apex angle of a
+  `√t, √t, 1` isosceles triangle"*), so the identification of the family with the spindle is theirs;
+  `[PartsOdd2022]` §3's `m₁ = m₂`, `r = 1` slice is the same family from the other direction. **Ours:** the
+  radicand form `√(4n−1)` as the adjoined quantity, the field screen over it, 6-openness as the selection
+  criterion — and **dropping the restriction to Loeschian `t`**: the wiki lists *"particularly the Loeschian
+  numbers 1, 3, 4, 7, 9, 12, …"*, and **2 is not Loeschian** while 3, 4 and 16 are, a second independent reason
+  (beside `plans/M63-phaseH2-prior-art.md` §PA.4's census-image failure) that `n = 2` was never examined.
 * **G8 — The direction group. [measured]** ⟨ζ₁₂, σ, √ρ₁₅ = (√15 + i)/4, √ρ₆₃ = (3√7 + i)/8⟩ closes all 67 of
   the 1581's edge directions at exponent ≤ 6. `[Polymath16wiki]` derived the Moser ring's unit group ⟨ζ₆, η⟩
   with η = (√33 + i√3)/6 = iσ⁻¹ and η² = ρ — the index-2 subgroup {ζ₁₂^a σ^b : a + b even} of ours. **Open,
@@ -372,7 +361,9 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
 * **G13 — The fan ladder. [kernel + measured]** Colour steps happen by confinement at a centre
   (`fan_iff_coverage`): two circles are 3-colourable and their centre forces a fourth; Heule-510's centre is
   fanned at four colours by the ambient web, which its own two-circle system provably cannot deliver. Fans
-  are not special to centres, and coverage is a k-set property invisible to pair sweeps.
+  are not special to centres, and coverage is a k-set property invisible to pair sweeps. The ladder's other
+  face is slack: a fan gap is exactly the failure of coverage at level k−1 (`exists_fanGap_iff_not_coverAtLeast`),
+  and one gap in a target colouring frees every pair above it (row 66).
 * **G14 — Width without degree does not force. [measured + derivation]** Same-word copies at unit-separated
   anchors couple through an O(n) translation matching, and at separation 1/√3 through nothing. A matching is
   1-regular and carries no colour pressure, even composed into forced-rainbow triangles.
@@ -410,19 +401,17 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   enumeration and conditioning, and both belong in the headline sentence. At registration, say whether the
   acceptance test is also necessary. Point every new instrument at a known positive before believing its
   zero; assert on the written artifact, never on the list that produced it; a control the instrument cannot
-  see is not a control. **And where a phase's output is eliminations, its defects are not random — they all
-  point one way.** Four found in a single phase (M63 phase G, 2026-09-11): an edge law that drops an edge, an
-  over-merged equivalence key, a float sign test inside an exact verdict, and a truncated input with no
-  producer. Every one silent, and every one **biased toward making the survey look productive**, because a
-  missing edge yields an easier graph, which yields a colouring, which reads as a *sound elimination*. So an
-  elimination carries an exact quantifier or it is not an elimination; and where the phase also has a
-  positive product, **the count of eliminations is the outcome to be least satisfied with** — it is the
-  cheapest thing to manufacture by accident. **The mechanism is selection, and it is general.** A defect
-  whose result displeases gets investigated within the hour; a defect whose result pleases is congratulated
-  and kept. Across one night, five independent defects in three phases of M63 — the four above, plus a
-  solver engine present in the code and in neither document whose bounds ran **high** — were every one
-  flattering. Expect it: **audit the results you like at the same rate as the ones you do not**, and when
-  an artifact and its written record disagree, suspect the newest thing in the file first.
+  see is not a control. **And where a phase's output is eliminations, its defects all point one way.** Four in
+  one phase (M63 phase G, 2026-09-11) — an edge law that drops an edge, an over-merged equivalence key, a float
+  sign test inside an exact verdict, a truncated input with no producer — every one silent and every one biased
+  toward making the survey look productive, because a missing edge yields an easier graph, a colouring, and a
+  "sound elimination". So an elimination carries an exact quantifier or it is not one, and where a phase also
+  has a positive product, **the count of eliminations is the outcome to be least satisfied with**. **The
+  mechanism is selection, and it is general**: a defect whose result displeases is investigated within the
+  hour; one whose result pleases is congratulated and kept — five independent defects in three phases of M63,
+  including a solver engine present in the code and in neither document whose bounds ran high, were every one
+  flattering. **Audit the results you like at the same rate as the ones you do not**, and when an artifact and
+  its written record disagree, suspect the newest thing in the file first.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
@@ -478,11 +467,20 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   (so far: graph theory → SAT → formal verification → Euclidean geometry → algebraic number theory → p-adic
   algebra → additive combinatorics → finite-field geometry; unentered: topology, FS-9; commutative algebra,
   FS-10).
-* **G31 — No unit-distance object we hold, built or found, carries a pair compulsion at its top rung. [kernel for the 1581's arity bracket; measured, complete at arity 2, for the four objects named]** **Extended 2026-09-12 from "existing witnesses" to everything we hold (four objects).** The `ρ₆₃` arena — **produced, purpose-built, in a 6-open field where row 55's arithmetic bar does NOT apply, so a five-colour forced pair was permitted at every distance for the first time** — has **0 forced pairs of 1,307,266,278 and 0 virtual edges of 1,306,721,748**, certified by 4,480 exhibited five-colourings with no solver UNSAT, the survivor set a superset of the truth. Heule-510 and Heule-553, in a **5-sealed** field, return 0 and 0 too. **Four objects, both sealing statuses, one null: the emptiness is not a field effect.** Its compulsion budget is **66 of 544,530 edges** (36 off-diagonal once G52's free diagonal is removed) — **rank candidate bases on that, never on circle count.** Open: **arity 3**, swept only on 163 interface vertices (`1.6e-7` of the space, a choice not a derivation), **337 candidates standing**; the arity-2 null makes any real one irreducible. **And a filter cannot help here, by a theorem: a field is 5-sealed exactly when some usable prime's plane is 5-colourable, which IS the residue filter's hypothesis — so "6-open" and "residue-filterable at five colours" are COMPLEMENTARY BY DEFINITION, and every object worth sweeping for χ ≥ 6 is un-filterable this way.** Also: `Forces` is monotone **upward** in the graph (`Forcer.Forces.mono`), so refuting a pair in a subgraph says nothing about the whole, and any proper colouring of the whole does the job equally. The original entry, **existing witnesses hold nothing to extract** [kernel + measured, complete]: De Grey's 1581 at five
-  colours has no forced pair (a corollary: forcing at χ allows ≤ 2 critical vertices, and this 1-sum has 3),
-  no virtual edge, and no compulsion at arity 3 or at arity 4 inside a neighbourhood, so its arity floor is
-  4 or 5; its gen-1 closure adds nothing. A χ ≥ 6 gadget must be constructed. Unswept: general 4-subsets,
-  other witnesses. External null: `[Heule2019]`'s graphs up to 100,000 vertices were all 5-colourable.
+* **G31 — No unit-distance object we hold, built or found, carries a pair compulsion at its top rung. [kernel on the sealed objects (row 66) and for the 1581's arity bracket; measured, complete at arity 2, on the 6-open ones]** **On sealed objects the arity-2 emptiness is a theorem**: Heule-510's `Forces ↔ =` and `Separated ↔ Adj` at five colours and its arity floor ≥ 3 are kernel, and hold for every unit-distance graph over any 5-sealed multiquadratic field ⊇ ℚ(√3,√11), because the sealing plane's fan gap frees every pair above it. **On 6-open objects it stays a measurement, unexplained.** The `ρ₆₃` arena — produced, purpose-built, in a 6-open field where row 55's bar does not apply, so a five-colour forced pair
+  was permitted at every distance — has **0 forced pairs of 1,307,266,278 and 0 virtual edges of
+  1,306,721,748**, certified by 4,480 exhibited five-colourings with no solver UNSAT, the survivor set a superset
+  of the truth; Heule-510 and Heule-553 return 0 and 0. Its compulsion budget is 66 of 544,530 edges (36
+  off-diagonal once G52's free diagonal is removed) — rank candidate bases on that, never on circle count. Open:
+  arity 3, swept only on 163 interface vertices (`1.6e-7` of the space), 337 candidates standing. No filter
+  can help on a 6-open object: a field is 5-sealed exactly when some usable prime's plane is 5-colourable,
+  which IS the residue filter's hypothesis, so "6-open" and "residue-filterable at five" are complementary by
+  definition. `Forces` is monotone upward in the graph (`Forcer.Forces.mono`), so refuting a pair in a
+  subgraph says nothing about the whole. De Grey's 1581 at five colours has no forced pair (forcing at χ allows
+  ≤ 2 critical vertices, and this 1-sum has 3), no virtual edge, and no compulsion at arity 3 or at arity 4
+  inside a neighbourhood, so its arity floor is 4 or 5; its gen-1 closure adds nothing. A χ ≥ 6 gadget must be
+  constructed. Unswept: general 4-subsets, other witnesses. External null: `[Heule2019]`'s graphs up to
+  100,000 vertices were all 5-colourable.
 * **G32 — The two-distance dial. [kernel + measured]** A pair forced equal at k colours is a
   (k+1)-chromatic graph with one non-unit edge, so μ(d) — the fewest d-edges of a non-5-colourable
   {1, d}-graph — is a dial whose value 1 is χ(ℝ²) ≥ 6, read by adding unit material to a forcer. Kills are
@@ -549,15 +547,13 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   χ(F²) ≤ χ(UD(𝔽_q, 2)) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For F ⊇ K,
   6-open ⟺ wall broken ∧ 11 inert: K(√7), K(√13), K(√79), K(√127) are 6-open; K(√35) is
   11-inert but keeps the wall. **De Grey's field IS 6-open, and so is K(√5,√7,√247)** — his coordinates span
-  ℚ(√3,√5,√7,√11), measured: the 1581 vertices have ℚ-span rank **16 of 16** over `tools/degrey_cert.json`,
-  matching `tools/degrey.py`'s docstring (√7 enters by the rotations through π/2 ± arcsin(1/8)). Frobenius at
-  11 is trivial on √5 and nontrivial on √7, so the residue field is 𝔽₁₂₁ and **no prime below 131 is usable**
-  — which is what `tools/fplane.py`'s field table, its self-test control and the committed
-  `data/fplane/map.md` have said since M58. **Row 52 is about the proper subfield ℚ(√3,√5,√11) and never
-  about de Grey's field**; reading it as the field is what made this entry briefly claim the opposite. The
-  5-sealed witnesses are Heule-510/553 — ℚ-span rank **8**, ℚ(√3,√5,√11), no √7 content at all, where row 52's
-  bound is exactly tight against `chromaticNumber_heule510` = 5. A composite ideal cannot beat the best prime
-  without refuting Hedetniemi's conjecture (Moorhouse §9). The shadow sieve: an object's direction residues seal every graph built from
+  ℚ(√3,√5,√7,√11) (ℚ-span rank **16 of 16** over `tools/degrey_cert.json`; √7 enters by the rotations through
+  π/2 ± arcsin(1/8)); Frobenius at 11 is trivial on √5 and nontrivial on √7, so the residue field is 𝔽₁₂₁ and
+  **no prime below 131 is usable** (`tools/fplane.py`, `data/fplane/map.md`, since M58). **Row 52 is about the
+  proper subfield ℚ(√3,√5,√11)**, never about de Grey's field. The 5-sealed witnesses are Heule-510/553 —
+  ℚ-span rank **8**, ℚ(√3,√5,√11), no √7 — where row 52's bound is exactly tight against
+  `chromaticNumber_heule510` = 5. Moorhouse §9's bar on a composite ideal beating the best prime rests on
+  Hedetniemi's conjecture, which `[Shitov2019]` refuted, so it is not a bar (FS-42). The shadow sieve: an object's direction residues seal every graph built from
   those directions.
 * **G44 — Kloosterman control. [derived + measured; ω facts prior art]** UD(𝔽_p, 2) has eigenvalues
   −K(1, c/4), so Weil and Hoffman force χ > 5 from p = 59 (exact spectrum): small planes are SAT questions,
@@ -574,31 +570,39 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   scope. Rank stubs accordingly: a finite exact computation plus a named theorem beats an object search; a
   stub with no recognition yet is a reading room. The recognition sentence is the prior-art query (G49).
   **And read the construction's own data layout, not only the plan's vocabulary for it** (2026-09-12). The
-  result that closed M63's rotation screen — a radius-free, base-free elimination — is a *corollary of
-  Theorem B applied to an object nobody had pointed it at*, and what produced it was four lines of
-  `Arena.__init__`: the rotated half carries the **same index set and the same internal edge list** as the
-  original, so one colouring covers both halves at once. **The layout was carrying a mathematical fact the
-  plan's vocabulary had no word for.** That is a cheaper and more repeatable habit than "look for theorems":
-  when a plan and an implementation describe the same object, the implementation is the one that cannot
-  round off. Its discoverer declined the credit for depth and named this instead, which is why it is written
-  as a habit rather than as an achievement.
-* **G47 — The compulsion face of sealing. [kernel]** Compulsions map forward along homomorphisms; on a Cayley
-  graph a forced pair needs a period of every colouring. No finite plane at p ≡ 3 (mod 4) has a forced pair
-  at a colour count it admits (row 60); at 11 its virtual edges are exactly its edges (kernel; measured at 3,
-  7, 19; prime fields only). So over a field where 11 is usable, forced at five colours ⟹ 11 ∣ d² and virtual
-  edge ⟹ d² ≡ 1 (mod 11) — the residue-allowed distances (2√3, 8/3, √23, …) are where a five-colour virtual
-  edge can live.
-* **G48 — The tightness mechanism. [kernel]** Over a field sealed at k by a usable prime 𝔭 whose plane is
-  k-colourable, a pair forced equal at k colours has 𝔭 ∣ d², its spindle adjoins √(4d² − 1) ≡ √−1 (mod 𝔭),
-  and every prime above p stops being usable: the forcer deletes exactly the local bound it beats (the Moser
-  spindle's √11 removes 3; √15 and √247 remove 2). So the six-level is one question — does a 5-sealed field
-  carry a pair forced equal at five colours, necessarily at 11 ∣ d²? — whose spindle (√43, √131, 5√7, √10, …)
-  lands in a 6-open field by construction. The first digit (is any finite plane exactly 6-chromatic) is
-  decoupled and integrality-carried. **The conjecture the mechanism was minted to serve, restated so it can
-  be pushed back on** (FS-15, opened at the M61 close): *χ(F²) equals its best local bound wherever that
-  bound is ≤ 6* — attained at all six fields where χ is known, twice predicted before the forcer was built —
-  whose **bold form is χ(ℝ²) = 7**. *Falsifier: a wall-broken, 5-sealed field whose plane is 4-colourable by
-  a colouring local at no prime.*
+  result that closed M63's rotation screen — a radius-free, base-free elimination — is a corollary of Theorem B
+  applied to an object nobody had pointed it at, and what produced it was four lines of `Arena.__init__`: the
+  rotated half carries the **same index set and the same internal edge list** as the original, so one colouring
+  covers both halves. **The layout was carrying a mathematical fact the plan's vocabulary had no word for.**
+  When a plan and an implementation describe the same object, the implementation is the one that cannot round
+  off — a cheaper and more repeatable habit than "look for theorems". Its discoverer declined the credit for
+  depth and named this instead.
+* **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]** Compulsions map forward along
+  homomorphisms; on a Cayley graph a forced pair needs a period of every colouring. The distance law this entry
+  carried — over a field where 11 is usable, forced at five colours ⟹ 11 ∣ d² and virtual edge ⟹ d² ≡ 1 (mod 11)
+  — is now the level-one shadow of the fan-gap theorem: over every such field `Forces ↔ =` and
+  `Separated ↔ Adj`, so a
+  five-colour forced pair is a single vertex and a virtual edge a unit edge at every distance, and the
+  residue-allowed distances name nothing. Unchanged: no finite plane at p ≡ 3 (mod 4) has a
+  forced pair at a colour count it admits (row 60), and at 11 its virtual edges are exactly its edges (kernel;
+  measured at 3, 7, 19; prime fields only).
+* **G48 — The tightness mechanism, and the six-level question answered no over sealed fields. [kernel]** Over a field
+  sealed at k by a usable prime 𝔭 whose plane is k-colourable, a pair forced equal at k colours has 𝔭 ∣ d², its
+  spindle adjoins √(4d² − 1) ≡ √−1 (mod 𝔭), and every prime above p stops being usable: the forcer deletes
+  exactly the local bound it beats (the Moser spindle's √11 removes 3; √15 and √247 remove 2). So the six-level
+  was one question — does a 5-sealed field carry a pair forced equal at five colours, necessarily at 11 ∣ d²? —
+  **answered NO by row 66** over every 5-sealed multiquadratic field ⊇ ℚ(√3,√11) (11 usable of residue degree
+  one there, and slack): the only pairs forced equal at five colours are single vertices, so
+  the mechanism has **no instance**, FS-6 is dead by theorem, and a 6-forcer's every compulsion lives in a 6-open
+  field, where no residue plane is five-colourable and this mechanism is silent. The spindle identity stands as
+  the reason 6-openness is forced on any 6-forcer, not as a route to one. The first digit (is any finite plane
+  exactly 6-chromatic) is decoupled and integrality-carried. **The conjecture the mechanism was minted to serve**
+  (FS-15): *χ(F²) equals its best local bound wherever that bound is ≤ 6* — attained at all six fields where χ is
+  known — whose **bold form is χ(ℝ²) = 7**. It **loses its constructive route** (a forced pair spindled into
+  6-openness) and keeps its predictions: under it χ(K(√7)²) is 6 iff UD(𝔽₈₃,2) is six-colourable and 7
+  otherwise, and de Grey's field, all of whose usable primes have spectral floor ≥ 8, is 7 outright (FS-40).
+  *Falsifiers: a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime; for the
+  six-question, a 5-colourable, 5-tight Cayley quotient of a 6-open plane (FS-42).*
 * **G49 — The prior-art gate. [method, measured]** Recognition is half the rule; the other half is a search
   at the milestone's opening (WORKFLOW step 3a): in the discipline's words, never ours; under two disciplines;
   for the question as well as the method; outside arXiv. Past misses came from checking at the close,
@@ -606,64 +610,69 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   reduction was derived independently at least six times, and the Polymath16 corpus (2018–2026) poses
   Theorem B's question while citing Fischer, Moorhouse and Vinh zero times.
   **And the two-database cross-check has a failure mode that looks exactly like agreement** (2026-09-12).
-  Two citation databases both returned **zero** citing works for the survey that would have settled whether
-  our object is known — and the agreement was worthless, because both records carried the same upstream
-  identifier and both were the *preprint*, while one of them held the **published** chapter separately, with
-  four citing works. **A zero from two databases sharing a source is one database's zero.** So the check is
-  not "ask two databases", it is *ask two databases and confirm they are not quoting the same record* —
-  compare identifiers and versions, not counts, and open the citing lists rather than reading their length.
-  Run that way it paid for itself immediately: it surfaced a 2007 paper counting sums of two squares over a
-  **real quadratic** base, which is the case the survey's own inventory says nobody has done.
+  Two citation databases both returned **zero** citing works for the survey that would have settled whether our
+  object is known — worthless, because both records carried the same upstream identifier and both were the
+  *preprint*, while one held the **published** chapter separately, with four citing works. **A zero from two
+  databases sharing a source is one database's zero**: compare identifiers and versions, not counts, and open
+  the citing lists. Run that way it surfaced a 2007 paper counting sums of two squares over a **real quadratic**
+  base — the case the survey's own inventory says nobody has done.
 * **G50 — Read what the search found. [method]** A held-but-unread paper, or a bibliography title whose guess
   touches a live milestone, blocks that milestone's opening until scanned. An abstract is not a reading. Walk
   the citation graph of the paper that *posed* the question; cross-check citations in two databases; mine
   every read paper's references into the bibliography the same day; mark reading per section.
 * **G52 — Breaking the wall is necessary and visibly not sufficient; the equal-radius family is the
-  mechanism. [measured + reading, one instance with a positive control]** A rotation whose radicand breaks
-  the 2-adic wall can still be **four-colourable**, and this is not a contradiction: breaking the wall is a
-  property of the field the **rotated copy** lives in, while the residue colouring reads the **base** points,
-  which never leave the original field. So a wall-breaking rotation escapes the colouring only if its seam
-  actually **uses** the wall-breaking — and it uses it through one family: cross edges joining two base
-  points the colouring gives the same colour, which requires the base to realise a specific **radius sum**.
-  Whether a cross edge is invisible depends on that sum alone, via `d² = σ − (σ−1)/cos θ` — no radius, no
-  lattice. **This is the first named mechanism for the gap between "the field breaks the wall" (G1, G35) and
-  "the object uses it".** Measured on M63 phase G's new rotation: it breaks the wall, and dies anyway because
-  `[Parts2020a]`'s lattice cannot realise the live radius sum — the Diophantine system has **no** solution
-  there, while the identical search returns **30** at his own angle, exactly its census. **Read the scope
-  exactly: this is a fact about that lattice, not about that angle.** Inverted, it is a **design target**: the
-  cosine alone names the live radius sums before any base exists, each handing back the two radii a base must
-  contain as roots of a quadratic, at **both** primes — one free prime is enough to kill. **Necessary is
-  proved; sufficient is untested, and the record's own rotation is the only positive instance held.**
-  **Sharpened 2026-09-12, and it removes this entry's apparent filter.** Where the cross edges come from a
-  *free* circle — the circle being `t ×` the unit shell for an integer `t` (`plans/M63-phaseH2-the-family.md`
-  §4) — the certificate's defeat is **automatic whenever `t` is even**: `φ` is a homomorphism into a
-  characteristic-2 residue field, so every circle point carries the centre's residue, and the shared centre
-  pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime). **The
-  record has `t = 2`.** So *"this object defeats the residue certificate"* is not evidence about the object,
-  and the phase's whole distance-to-colourability table (30, 18, 8) reads a free quantity. The live quantity
-  is the **off-diagonal** share of the monochromatic cross edges — the part forced by neither the centre nor
-  the circle: the record's share is **0 of 30**, `ρ₆₃`'s is **24 of 54**. And the free-circle condition is
-  wider than a perfect square: `|p|² = n` is free iff `n = k²·m` with `k ∈ ℤ` and `m` a squared distance the
-  lattice **already realises** (so `4 = 2²·1`, `16 = 4²·1` and `12 = 2²·3` are free, and `2` is not) — `k`
-  must be a **multiplier of the module**, which is automatic for `k ∈ ℤ` and false for `k = 2√3`.
+  mechanism. [measured + reading, one instance with a positive control]** A wall-breaking rotation can still be
+  four-colourable: breaking the wall is a property of the field the rotated copy lives in, while the residue
+  colouring reads the base points, which never leave the original field. A wall-breaking rotation escapes the
+  colouring only if its seam uses the wall-breaking, and it does so through one family — cross edges joining
+  two base points the colouring gives the same colour, which requires the base to realise a specific radius
+  sum, via `d² = σ − (σ−1)/cos θ` (no radius, no lattice). Measured on M63 phase G's rotation: it breaks the wall
+  and dies because `[Parts2020a]`'s lattice cannot realise the live radius sum (no solution, against 30 at his
+  own angle, exactly its census) — a fact about that lattice, not that angle. Inverted, a design target: the
+  cosine names the live radius sums before any base exists, at both primes; one free prime kills. Necessary is
+  proved; sufficient is untested, the record's rotation the only positive instance. **The apparent filter is
+  free where the circle is free**: with the circle `t ×` the unit shell for an integer `t`, the certificate's
+  defeat is automatic for even `t` (`φ` lands in a characteristic-2 residue field, so every circle point carries
+  the centre's residue, and the shared centre pins the twist — 0 of 24 twists at either prime), and the record
+  has `t = 2`; so "this object defeats the residue certificate" is not evidence about the object, and the live
+  quantity is the **off-diagonal** share of monochromatic cross edges (the record 0 of 30, `ρ₆₃` 24 of 54).
+  `|p|² = n` is free iff `n = k²·m` with `k ∈ ℤ` and `m` a squared distance the lattice already realises
+  (4, 16, 12 free; 2 not).
 * **G53 — The counting compulsion, and the refutation criterion it defines. [derived; one provisional
-  measurement]** For a type-M arena — base `B` plus its rotated copy sharing the centre, joined by cross
-  edges — any proper `k`-colouring `C` yields two proper `k`-colourings of `B` alone, `f(v) = C(v)` and
-  `g(v) = C(Rv)`, because the copy is isometric and carries the same internal edge list (G46). The shared
-  centre forces `f(0) = g(0)`, and each **diagonal** cross edge `(v, Rv)` forces `f(v) ≠ g(v)`. So with
-  `B(h) = {circle v : h(v) = h(0)}`, the sets `B(f)` and `B(g)` are **disjoint**, and with
-  `L = min_h |B(h)|` over proper `k`-colourings of the base:
-  **`2L > (circle count)` ⟹ the arena is not `k`-colourable** — a property of the **base alone**, no arena
-  solve. **Not** confined to colour-twist colourings; uses only the diagonal edges; **sufficient, never
-  necessary.** This is a **counting** compulsion, a shape this project's vocabulary lacked: not *"this pair
-  is forced"* (`Forces`, arity 2) nor *"this k-set is covered"* (`Fan`) but *"at least `L` of these `n`
-  points share one designated point's colour"*. It subsumes the two obvious cheap routes as the extreme
-  cases — a forced pair is `L = count`, an intersecting family is `2L > count` — and it explains why both
-  fail on `ρ₆₃`, where `L/count = 10/30 = 1/3` (provisional, under two-sided re-verification) and no circle
-  point is forced (all 30 tested, all satisfiable, SAT answers and so self-certifying). **The design target
-  it defines — maximise `L / (circle count)`, refute above `1/2` — is the first objective in M63 phase H2
-  that a free construction cannot supply**, the circle count being free (§2 of
-  `plans/M63-phaseH2-the-family.md`) and the residue certificate's defeat being free (G52).
+  measurement]** For a type-M arena — base `B` plus its rotated copy sharing the centre, joined by cross edges —
+  any proper `k`-colouring `C` yields two proper `k`-colourings of `B` alone, `f(v) = C(v)` and `g(v) = C(Rv)`
+  (the copy is isometric with the same internal edge list, G46). The shared centre forces `f(0) = g(0)` and each
+  **diagonal** cross edge `(v, Rv)` forces `f(v) ≠ g(v)`, so with `B(h) = {circle v : h(v) = h(0)}` the sets
+  `B(f)`, `B(g)` are disjoint, and with `L = min_h |B(h)|` over proper `k`-colourings of the base:
+  **`2L > (circle count)` ⟹ the arena is not `k`-colourable** — a property of the base alone, no arena solve;
+  not confined to colour-twist colourings; uses only the diagonal edges; sufficient, never necessary. A
+  **counting** compulsion, a shape the vocabulary lacked — not "this pair is forced" (`Forces`) nor "this k-set
+  is covered" (`Fan`) but "at least `L` of these `n` points share one designated point's colour" — with a forced
+  pair as `L = count` and an intersecting family as `2L > count`; it explains why both fail on `ρ₆₃`, where
+  `L/count = 10/30` (provisional, under two-sided re-verification) and no circle point is forced (all 30
+  satisfiable, self-certifying). **The design target it defines — maximise `L / (circle count)`, refute above
+  `1/2` — is the first objective in M63 phase H2 that a free construction cannot supply**, the circle count
+  and the residue certificate's defeat both being free (G52).
+* **G54 — Tight or slack: a residue plane's compulsions at k colours are classified by one sign. [kernel one
+  way; derived the other; the table computed]** Let `P` be the level-one plane at a usable prime, `d` its degree,
+  `λ_min` its least eigenvalue, `k` the colour count. **Slack** (`λ_min < −d/(k−1)`; Hoffman's α-bound exceeds
+  n/k): gaps are permitted, and where one exists — found at 7, 11, 19; 23 and 83 slack by the spectrum with no
+  colouring asked — **gap ⟹ free** is kernel (row 66). **Tight** (`λ_min = −d/(k−1)`, the
+  literature's Hoffman colorability): every k-colouring is balanced, gap-free and periodic under the common
+  kernel of the minimising characters, so **tight ⟹ forced by `H_min` ∧ gap-free** is derived (Theorem D2-A;
+  balance and gap-freedom are Blokhuis–Brouwer–Haemers's, the periodicity ours). The two directions have
+  different shapes, and the middle case — slack but gap-free — is logically open and unobserved (at 11 no 5-colouring has
+  every vertex gapped, on two engines). Both properties
+  **propagate up a tower** whose level maps carry `S_{m+1}` onto `S_m` with constant fibres (`λ_min/d` is
+  non-increasing under pullback), which is why the 2-adic tower is tight and the 11-adic tower slack at every
+  level. The table: tight at 3 (k = 3; the rhombus forces, row 58) and at 2 (k = 4; forced from level 5, row 67);
+  slack at 7 (k = 4) and at 11, 19, 23 (k = 5) and 83 (k = 6); by Weil, tightness at k needs
+  `(p+1)/(k−1) ≤ 2√p`, so no usable prime above 3 in the committed table is tight for any k ≤ 7 (p = 31 misses
+  4-tightness by 4.4·10⁻⁵, the last prime that could have). **What it says about six:** the residue mechanism
+  forces pairs only where the plane is tight, and no plane that seals a field at five is — so the only residue
+  route left to a five-colour forced pair is a **quotient** of a 6-open plane that is 5-colourable and 5-tight
+  (FS-42, a reading with its falsifier). The screen is a character sum, seconds per (field, k), and no
+  substitute for FS-17's ask.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
@@ -671,20 +680,18 @@ sealed its fabric. So a 6-forcer, by the only mechanism known, is a pair forced 
   the record and a written expectation, rule prior art shared. Records: `plans/COXETER-2026-09-08-mascot.md`,
   `plans/POROS-2026-09-08-mascot.md`.
   **Extended 2026-09-12 with the mechanism, which is not carefulness — it is a COST WINDOW.** In one phase
-  three agents exchanged about twenty messages: four of the advisor's constructions were retracted, three of
-  the planner's catches landed on the advisor, one of the planner's own registrations was mis-specified, the
-  prior-art agent refuted something and then corrected its own refutation — and the final plan contains none
-  of those errors. **Every one of those retractions was free**: all three were writing documents, nothing was
-  committed, no solver time had been paid, nothing had been claimed outside the room, and no implementer held
-  anything. The cost of being wrong was one reply. So: **fast public error is the cheapest instrument
-  available, but only while retraction is free, and in that window it should be spent rather than rationed.**
-  Once retraction is expensive — after a commit, after a paid run, after a statement to a third party — the
-  same speed produces **escalation** instead of correction, because the cost of being wrong has become the
-  cost of having *been* wrong. **Front-load the disagreement into the window before anything is paid for.**
-  And the tell that makes this checkable rather than aspirational: **count the retractions in that window.
-  Zero is not agreement — it means the disagreement has not started yet and will arrive later at full
-  price.** Its author declined the credit and named the sequencing instead: having been wrong twice that
-  evening on the same kind of step made the third one cheap to see.
+  three agents exchanged about twenty messages: four of the advisor's constructions were retracted, three of the
+  planner's catches landed on the advisor, one of the planner's registrations was mis-specified, the prior-art
+  agent refuted something and corrected its own refutation — and the final plan contains none of those errors.
+  **Every one of those retractions was free**: nothing committed, no solver time paid, nothing claimed outside
+  the room; the cost of being wrong was one reply. **Fast public error is the cheapest instrument available, but
+  only while retraction is free, and in that window it should be spent rather than rationed.** Once retraction
+  is expensive — after a commit, a paid run, a statement to a third party — the same speed produces escalation,
+  because the cost of being wrong has become the cost of having *been* wrong. **Front-load the disagreement
+  into the window before anything is paid for**, and **count the retractions in it: zero is not agreement, it
+  means the disagreement has not started yet and will arrive later at full price.** Its author declined the
+  credit and named the sequencing: having been wrong twice that evening on the same kind of step made the
+  third one cheap to see.
 
 ## Whose work this is
 
@@ -721,18 +728,15 @@ convince someone who trusts none of this and reads none of the Python:
 - **Read the final statement aloud against the informal claim.** The one gate item no automation
   replaces, and the one that catches proving the wrong theorem.
 - **Report the hunt honestly.** "Searched X, found nothing" is a result and goes in the write-up.
-- **Write the certificate for the REVIEWER early — it is an instrument, not a chore, and it tells you which
-  of your evidence is load-bearing.** Measured 2026-09-12: an agent building the reviewer-facing bundle for a
-  refutation noticed, only while writing it, that its 552 exhibited colourings were **not load-bearing at
-  all** — the argument needed its pattern list to be a *superset* of the achievable patterns, never a set of
-  achievable ones, since a spurious extra pattern can only make the final check harder to pass. That
-  retired a third of its evidence and shrank the solver-dependent core from one claim about a
-  51,133-vertex object to **twenty claims about 25,567-vertex halves** — a different *kind* of artifact,
-  because twenty half-instance refutations are individually within reach of proof logging where one whole-
-  object refutation was not. **The question that did the work is cheap and repeatable: *what must someone who
-  trusts none of this actually check?*** Its discoverer declined the credit for insight and named the
-  question instead, which is the version that reproduces. Ask it while the evidence is still being gathered,
-  not at the write-up, or you will pay for evidence nothing rests on.
+- **Write the certificate for the REVIEWER early — it is an instrument, not a chore, and it tells you which of your
+  evidence is load-bearing.** Measured 2026-09-12: an agent building the reviewer-facing bundle for a refutation
+  noticed, only while writing it, that its 552 exhibited colourings were **not load-bearing at all** — the
+  argument needed its pattern list to be a *superset* of the achievable patterns, never a set of achievable ones.
+  That retired a third of its evidence and shrank the solver-dependent core from one claim about a
+  51,133-vertex object to **twenty claims about 25,567-vertex halves**, individually within reach of proof
+  logging where the whole was not. **The question that did the work is cheap and repeatable: *what must someone
+  who trusts none of this actually check?*** Ask it while the evidence is still being gathered, or you will pay
+  for evidence nothing rests on.
 - **Order a verification's steps by marginal evidential value, never by narrative order.** Same session, twice:
   a verification script was written so its *least* informative step ran first, leaving the checks that decided
   the question queued behind slow ones that could not.
@@ -776,7 +780,7 @@ the emitted data. A generator bug can only produce data Lean refuses to certify.
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 846 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
+current audit reads 947 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
 holds none.
 
 | Entry | Status |
@@ -817,41 +821,33 @@ external needs installing. It is single-threaded: use `tools/portfolio.sh` (a co
 colour-cube splits (one run per cube) to use the cores.
 
 **Python is 3.14, and its multiprocessing default changed.** On Linux the default start method is now
-`forkserver`, not `fork` (measured here: 3.14.6, `get_start_method()` → `forkserver`). A worker therefore
-**re-imports the module** instead of inheriting the parent's memory, so state a parent leaves in a
-module-level global is **empty in the worker**, and the symptom is a `KeyError` on a key the parent plainly
-holds — which points at the dictionary, nowhere near the process model. Pass
-`mp_context=multiprocessing.get_context("fork")` (safe with no threads, and it avoids pickling a large
-shared object once per worker), or give the pool an `initializer` that rebuilds the state from picklable
-arguments, which also survives a platform without `fork`.
+`forkserver`, not `fork` (measured: 3.14.6), so a worker **re-imports the module** instead of inheriting the
+parent's memory, and state a parent leaves in a module-level global is **empty in the worker** — the symptom is
+a `KeyError` on a key the parent plainly holds, nowhere near the process model. Pass
+`mp_context=multiprocessing.get_context("fork")` (safe with no threads), or give the pool an `initializer` that
+rebuilds the state from picklable arguments, which also survives a platform without `fork`.
 
 **Two machines.** A desktop and a laptop (12 cores, 31 GB). The desktop has **16
 PHYSICAL cores, 32 threads** (2 per core), 64 MiB L3 in two instances, 128 GB RAM — `nproc` says **32** and
 that is the *thread* count. **Corrected 2026-09-12**, where this file had said "32 cores": an agent sizing a
 job from it reasoned that 32 concurrent solvers on 16 cores must be contending, killed a running job and
-relaunched at half width. Restoring 32-way was right — observed
-throughput **12.6 cubes/min** against the ~8/min sixteen workers give — but **the two figures first reported
-here (32-way 120.6 s against 16-way 122.8 s, "statistically identical") are STRUCK**: they compared a mixed
-cube population against a pure one. Restricted to one difficulty class, the same data reads 32-way **105.1 s**
-(n=43), 16-way **126.6 s** (n=32), 32-way again **129.2 s** (n=117) — **two runs at the SAME width differing
-by as much as the width effect being claimed.** So the honest statement is that **the width effect is not
+relaunched at half width. Restoring 32-way was right — observed throughput **12.6 cubes/min** against the ~8/min
+sixteen workers give — but within one difficulty class the per-cube times at ONE width vary by as much as any
+width effect (32-way 105.1 s and 129.2 s on two runs, 16-way 126.6 s), so **the width effect is not
 distinguishable from run-to-run variation in this data**, and only "no *large* contention penalty" survives.
 
 **The mechanism this produced is worth more than either number, because it is the answer to why writing a
 rule down does not install it.** The agent had just been credited with instancing *"a number carries what it
-measures"* and then broke it again **at the first opportunity, inside the act of correcting the first
-break** — comparing "the numbers from before" against "the numbers from after" without checking that the two
-cube ranges had the same difficulty mix. What caught it was **not vigilance about populations**: it was **the
-cost model failing an arithmetic check** — 32 workers at ~125 s should yield 15 cubes/min, far more than it
-was seeing, which forced the look. **So the reproducible instrument is to keep a PREDICTED throughput beside
-the measured one and reconcile them whenever they disagree.** A prediction that can be divided back out of a
-rate is a population check that runs itself; a caution about populations is a caution. Third lesson, with its
-scope: **say physical cores when sizing memory-hungry work**, and **derive a rate from your own numbers and
-check it against the observed one before believing either.** `nproc` disagreeing with a
-number in a plan is the hardware moving, not an error — **ask which machine before treating a core or memory
-count as fact**, and ask to swap to the desktop when a step wants it (the SAT solving does). Timings compare
-only within one machine: per-operation ratios carry across, wall-clock totals and safe job counts do not.
-Measure in **CPU seconds (user + sys), minimum of three runs**, and name the machine beside any number.
+measures"* and then broke it again inside the act of correcting the first break — comparing "the numbers from
+before" against "the numbers from after" without checking that the two cube ranges had the same difficulty
+mix. What caught it was **the cost model failing an arithmetic check** — 32 workers at ~125 s should yield 15
+cubes/min, far more than it was seeing. **So keep a PREDICTED throughput beside the measured one and reconcile
+them whenever they disagree**: a prediction that can be divided back out of a rate is a population check that
+runs itself. **Say physical cores when sizing memory-hungry work**; `nproc` disagreeing with a plan is the
+hardware moving — **ask which machine before treating a core or memory count as fact**, and ask to swap to the
+desktop when a step wants it (the SAT solving does). Timings compare only within one machine: per-operation
+ratios carry across, wall-clock totals and safe job counts do not. Measure in **CPU seconds (user + sys),
+minimum of three runs**, and name the machine beside any number.
 
 ### Building
 
@@ -915,6 +911,12 @@ written only at `finish()` is lost, and the log is not the record. And **name wh
 loud**: one such kill cost a registered out-of-sample prediction, and a forfeited instrument must not
 disappear quietly merely because the decision was otherwise right.
 
+**Kill by PID or process group, never by matching a command line.** `pkill -f <pattern>` matches the shell
+that runs it and every other process whose command line mentions the pattern — including another agent's
+monitor. Sixth recorded instance 2026-09-13 (FS-38 phase T): it killed
+the engineer's own level-7 run at 11,000 of 16,383 asks and the advisor's watcher in the same second (the
+checkpoint made it eleven minutes, not the run). `setsid` the job, write its pgid to a file, signal that.
+
 **Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so a live
 process resumes mid-token — it killed a 46-minute `lean4checker` run at M07 with `line 110: ull-library: command not found`, a message that looks like corruption and is nothing of the kind. Launch long runs from a snapshot copy (`cp scripts/x.sh build/x-snapshot.sh`;
 `build/` is gitignored).
@@ -950,6 +952,18 @@ hand-written module before starting a long generated build.
   pattern), never accumulate one during a kernel evaluation, and never build an index list with
   `List.range` + `List.map` (~0.83 ms per element). A `Nat` literal costs ~2.3 KB of olean against ~145
   bytes per plain literal node, so pack many values into few big `Nat`s.
+- **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`.** Measured
+  (FS-38 K3): `∀ e ∈ (778 pairs), e.1 ≠ e.2` on a bare import — no arithmetic, no graph — cost 31.9 GB and timed
+  out; `l.all f = true` on the real predicate cost 3.5 GB and 5 s. The `∀ x ∈ l` decision procedure is the cost;
+  state list checks through `List.all` and recover the per-element form with `List.all_eq_true`.
+- **A numeral at an unsimplified type index is paid per numeral, at elaboration, even in a definition with no
+  proof.** A 48-point literal at `ZMod (2 ^ ((5 + 1) / 2))` cost 32.9 GB and a heartbeat timeout; the same points
+  ascribed at `ZMod 8` cost 2.5 GB, and then a defeq wall on every access. Carry no literal at such a type;
+  evaluate the form per element.
+- **Feed the kernel the refutation's core, never the whole instance.** A certificate's clause table costs
+  `agreesWithCNF` over the entire formula: 853 s at a 33 GB peak for a 1,024-vertex instance whose proof reached
+  125 vertices; the core, extracted from the LRAT by backward reachability from the empty clause (861 of 99,335
+  clauses), proves the identical statement in 5.9 s. Extract the core first (recipe: `Instances/TwoAdicFive/Edges.lean`).
 
 ### Searching
 
@@ -989,8 +1003,8 @@ because a formalization that proves the *wrong* theorem is the characteristic fa
   `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
   not proved), which fail unconditionally before the baseline; `GENERIC` (parametric — the caller's
   obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
-  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6261 refutations-skipped=242
-  sites=220`, `vacuous=0 stale=0 declared=3 witnessed=12 generic=203 unknown=2`. The baseline's two entries,
+  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6484 refutations-skipped=265
+  sites=260`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=238 unknown=2`. The baseline's two entries,
   `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
   `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
   at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`.
@@ -1019,110 +1033,89 @@ goes red and names the culprit, then put it back. A check is not known to work u
 fail.
 
 Every check that has failed here failed the same way: **it reported nothing when it could not run** — a
-comparison of two purchase ledgers that was never actually performed; an audit that aborted under `set -e`
-with no output and read as a pass through a pipe; a mutation rig that re-read a stale file and scored it as
-a pass; negative controls the instrument could not see. A trust receipt that fails open is worse than none,
-because it is believed. So make a check's failure path louder than its success path, never let a shell
-pipeline swallow an exit status the gate depends on, and give every discriminating claim a partner that goes
-red — a certificate filed against the wrong problem, a vertex moved off the unit circle, a satisfiable
-formula handed to the checker.
+comparison of two purchase ledgers never actually performed; an audit that aborted under `set -e` with no output
+and read as a pass through a pipe; a mutation rig that re-read a stale file and scored it as a pass; negative
+controls the instrument could not see. A trust receipt that fails open is worse than none, because it is
+believed. So make a check's failure path louder than its success path, never let a shell pipeline swallow an
+exit status the gate depends on, and give every discriminating claim a partner that goes red — a certificate
+filed against the wrong problem, a vertex moved off the unit circle, a satisfiable formula handed to the checker.
 
 **The unifying rule, from nine instruments that broke inside one phase** (M63 phase C, 2026-09-11; eight
 failed by silence, one by false alarm): **every check needs a positive signal for the thing that did not
-happen.** The nine were a wall that could not fire, an exception swallowed in a timer thread, a control that
-asked the same question twice and so could never bite, a pid file that caught a wrapper twice, a silent
-forty-minute search, a control announcing a refutation from an index mismatch, a trust receipt returning a
-benign verdict while checking nothing, a `grep` that killed its own shell, and a four-hour deadline armed as
-an exit-waiter. Each was quiet exactly when it had something to report, because each was built to react to
-an event instead of to assert an absence — and **an exit-waiter can tell you a thing has ended, never that
-it is late.**
+happen.** A wall that could not fire, an exception swallowed in a timer thread, a control asking the same
+question twice, a pid file catching a wrapper twice, a silent forty-minute search, a control announcing a
+refutation from an index mismatch, a trust receipt returning a benign verdict while checking nothing, a `grep`
+that killed its own shell, a four-hour deadline armed as an exit-waiter — each quiet exactly when it had
+something to report, because each reacted to an event instead of asserting an absence, and **an exit-waiter can
+tell you a thing has ended, never that it is late.**
 
 **A waiter whose success condition is a file that a GOOD outcome prevents from existing** (2026-09-12). A
-sweep dumped its residual-candidate file only when the survivor list was non-empty; the count reached zero, so
-the file never appeared and every waiter on it read exactly like a hung run. Its sibling monitor had the same
-defect wearing the other costume — a `pgrep -f` liveness check that **matched its own command line**, so the
-process-gone branch could never fire. Neither cost anything; **neither could have told anyone the run had
-died.** So: **arm a waiter on a file the SUCCESS path always writes**, even if that file says "nothing found".
+sweep dumped its residual-candidate file only when the survivor list was non-empty; the count reached zero, the
+file never appeared, and every waiter on it read like a hung run. Its sibling monitor had the same defect in the
+other costume — a `pgrep -f` liveness check that matched its own command line, so the process-gone branch could
+never fire. **Arm a waiter on a file the SUCCESS path always writes**, even if that file says "nothing found".
 
 **And the rule the one above does not reach: state the uninformative outcome and confirm it is REACHABLE,
 before believing a control's pass or proposing a discriminator.** "Break it and watch it go red" assumes the
-break can fire. Twice in one evening it could not (M63 phase E, 2026-09-11), and the two cases were the same
-error with opposite signs: **a planted fault that could never fire** (a target loosened in the direction the
-search ignores, so nothing was broken and its survival taught nothing), and **a discriminator that could
-never discriminate** (two candidate attributions it could not separate). Both passed review; both were found
-only by opening the module. **A control whose failure mode is unreachable has not been tested by passing** —
-it is indistinguishable from one that works, which is this file's oldest failure mode wearing its best
-disguise. The paired form, measured the same evening: seven errors between two readers, four the engineer's
-and three the advisor's, **every one found by reading code rather than by arguing** — because each asked the
-right question rigorously of the other's instrument and never of their own.
+break can fire. Twice in one evening it could not (M63 phase E, 2026-09-11), the same error with opposite
+signs: a planted fault that could never fire (a target loosened in the direction the search ignores) and a
+discriminator that could never discriminate (two attributions it could not separate). Both passed review; both
+were found by opening the module. **A control whose failure mode is unreachable has not been tested by
+passing** — it is indistinguishable from one that works. The paired form, measured the same evening: seven
+errors between two readers, four the engineer's and three the advisor's, every one found by reading code rather
+than by arguing, because each asked the right question of the other's instrument and never of their own.
 
 **Pre-decide how you will respond to your own gate failing — before it fails, on someone else's number.**
 Measured 2026-09-11: an engineer's pre-registered comparator went red on its own integration, and the honest
-diagnosis was also exactly the diagnosis a motivated person would reach for whether or not it were true. It
-did not widen the comparator. Asked why, it declined the credit and gave the mechanism: it had already
-written the argument against itself one commit earlier, when a *different* planted fault failed to fire and
-it had to decide whether to rewrite a check until it agreed. Having once reasoned that **a check you tune
-until it agrees with you has stopped being a check**, the second case was already settled. So this is
-sequencing rather than virtue, and it is cheap: settle the policy while the number under dispute is not
-yours.
+diagnosis was exactly the one a motivated person would reach for. It did not widen the comparator, because it
+had already reasoned one commit earlier, on a different planted fault, that **a check you tune until it agrees
+with you has stopped being a check** — sequencing, not virtue, and cheap: settle the policy while the number
+under dispute is not yours.
 
-**And when you replace a broad instrument with a sharp one, you lose coverage you were not measuring.** The
-same evening, a whole-run wall-clock test was traded for a six-point component measurement that established
-a cost law's *shape* by construction instead of by curve-fitting — strictly better on the thing it measures,
-and blind to any cost living outside the component. A second cost of the same shape, hiding in a progress
-log, was invisible to the sharp instrument and would have been caught by the weak one. **State what the old
-instrument saw that the new one does not, at the moment you swap them**, or the gap is discovered by luck.
+**And when you replace a broad instrument with a sharp one, you lose coverage you were not measuring.** A
+whole-run wall-clock test was traded for a six-point component measurement that established a cost law's
+*shape* by construction — strictly better on what it measures, and blind to any cost outside the component. A
+second cost of the same shape, hiding in a progress log, was invisible to the sharp instrument and would have
+been caught by the weak one. **State what the old instrument saw that the new one does not, at the moment you
+swap them.**
 
 **And when you put a measured number into a decision, carry what it MEASURES, never just its value.** Three
-rulings in one night rested on a number that was measuring something adjacent: a per-*ask solve* rate used as
-a per-*candidate* cost (wrong by 30×); a **contended-wall** timing used as a quiet-CPU cost (1.59×); and a
-**mid-window** ratio used as a completed-window one (16× against 7×). None was a wrong measurement — each was
-a right measurement of a different quantity, which is why none of them looked wrong. **A number in a ruling
-travels with its units, its conditions and its population, or the ruling is about something else.** The
-repair when it happens: re-derive the decision from the corrected figure out loud, because a ruling that
-survives its bad evidence needs new grounds, not a quiet pass.
+rulings in one night rested on a number measuring something adjacent: a per-*ask solve* rate used as a
+per-*candidate* cost (wrong by 30×); a contended-wall timing used as a quiet-CPU cost (1.59×); a mid-window ratio
+used as a completed-window one (16× against 7×). None was a wrong measurement, which is why none looked wrong.
+**A number in a ruling travels with its units, its conditions and its population, or the ruling is about
+something else**; the repair is to re-derive the decision from the corrected figure out loud.
 
 **And the sharp, checkable form of that rule, extracted 2026-09-12 after the same error's FOURTH instance in
-one milestone: when two numbers are compared, exactly ONE thing may differ between them.** The two instances
-that produced it are worth keeping because they are one error wearing two faces. A brief claimed its new
-rotation gave *"twice the record's circle count and twice its unit-neighbour count"* — but the doubling came
-from dropping a coordinate restriction, not from the rotation, and the unit shell **does not depend on the
-rotation at all**. A product owner scored an off-diagonal **raw count** against `24/54`, which is a share of
-the **monochromatic** cross edges under a particular colouring — a different denominator. **Both differed in
-two things and credited one, and in both cases the other thing was the change being advocated, so the error
-flattered the work.** The check costs seconds and ends the unit-shell case immediately: **write both numbers
-as fractions with the denominators spelled out in words.** Not one of the four instances was a wrong
-measurement — each was a right measurement of a different quantity, which is exactly why none of them looked
-wrong to the person who made it.
+one milestone: when two numbers are compared, exactly ONE thing may differ between them.** A brief claimed a new
+rotation gave *"twice the record's circle count and twice its unit-neighbour count"* — the doubling came from
+dropping a coordinate restriction, and the unit shell does not depend on the rotation at all; a product owner
+scored an off-diagonal raw count against `24/54`, a share of the monochromatic cross edges under one colouring — a
+different denominator. **Both differed in two things and credited one, and the other thing was the change being
+advocated, so the error flattered the work.** The check costs seconds: **write both numbers as fractions with the
+denominators spelled out in words.** None of the four instances was a wrong measurement — each was a right
+measurement of a different quantity, which is why none looked wrong to its author.
 
 **The same rule has a second half, and its author broke it within two hours of writing it down.** Having
 recorded *"state the uninformative outcome and confirm it is reachable"*, the product owner registered a
 prediction (`P-Y1`, 2026-09-12) whose **informative** outcome was unreachable: a ratio band of 30–70% on a
-quantity that a change to one phase could not move, because ~90% of it is produced in the *other* phase, on
-byte-identical code. A ratio near 1 was forced by construction. **So: confirm that BOTH outcomes are
-reachable — the one that would teach you nothing and the one you are predicting.** A prediction whose target
-region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it
-fails. And the honest test for whether "the prediction was mis-specified" is a diagnosis or an escape:
-**the evidence for the mis-specification must predate the result** — here the 90% split was in the run's own
-recorded numbers before the prediction was written, so it is checkable rather than convenient. Writing a
-rule down does not install it. **And the rule is symmetric: a control going RED is not evidence
-either, until you can name what a wrong-reason red would have looked like.** Three plants in one night fired
-for the wrong reason — one on an out-of-range index that died *before* reaching the guard it was written to
-test, inside a control built to catch exactly that class. The repair that works is a **pair**: the stub that
-must fail beside a faithful stub that must **pass**, so a reader can tell the refusal came from the cause and
-not from the scaffolding. Where the uninformative outcome cannot be named, **a red control is not yet
-evidence** — it is an unexplained failure that happens to agree with you.
+quantity ~90% of which is produced in the *other* phase on byte-identical code, so a ratio near 1 was forced.
+**Confirm that BOTH outcomes are reachable — the one that would teach you nothing and the one you predict.** And
+the test of whether "mis-specified" is a diagnosis or an escape: **the evidence for the mis-specification must
+predate the result** (here the 90% split was in the run's own numbers before the prediction). **The rule is
+symmetric: a control going RED is not evidence either, until you can name what a wrong-reason red would look
+like** — three plants in one night fired for the wrong reason, one on an out-of-range index that died before
+reaching the guard it was written to test. The repair is a **pair**: the stub that must fail beside a faithful
+stub that must pass, so the refusal is seen to come from the cause and not the scaffolding.
 
 **A measured half and a derived half fail in OPPOSITE directions, and one rule cannot cover both.** Where a
-graph's edges are *measured* — a float proposes candidate pairs, exact arithmetic decides each — the only
-possible error is a **missed** edge, which makes colouring easier, so **a refusal is robust and a colourable
-verdict is suspect**. Where edges are *derived from a law*, the error is an **invented** edge, which makes
-the graph denser, makes a refusal arrive faster and cheaper, and **looks exactly like success** — so there
-**a refusal is the suspect verdict.** M63 phase G, 2026-09-12: the product owner ruled "believe a refusal
-immediately" from the measured half and applied it to an arena whose novelty lives entirely in the derived
-half, where the law at a new parameter was tied to nothing. **Before trusting either verdict, ask which half
-of the object produced it**, and note the corollary a plan there got backwards: *being built by the law is
-the reason the law needs checking, not the reason it does not.*
+graph's edges are *measured* — a float proposes, exact arithmetic decides — the only possible error is a
+**missed** edge, which makes colouring easier, so **a refusal is robust and a colourable verdict is suspect**.
+Where edges are *derived from a law*, the error is an **invented** edge, which makes refusals faster and cheaper
+and looks exactly like success — so there **a refusal is the suspect verdict.** M63 phase G, 2026-09-12: a
+ruling "believe a refusal immediately" from the measured half was applied to an arena whose novelty lived in the
+derived half. **Before trusting either verdict, ask which half of the object produced it**; being built by the
+law is the reason the law needs checking, not the reason it does not.
 
 **A check must read the value the code SHIPS, never a copy of it.** A control certifying the safety margin of
 a float gate asserted against a hardcoded `1e-7` rather than the gate's own default, so it would have kept
@@ -1133,10 +1126,18 @@ the code that runs.** It now reads the default out of the signature, and every d
 ratio of 0.60 as `1×` — a display rounding turning a red into something that reads like a pass. **A check's
 output is the check**, and the last transformation before a human sees it is inside the trust boundary.
 
-**Bound a plant's effect on BOTH sides, and the control reports for free when it has gone blind.** A
-control that can say *"I can no longer tell"* beats one that can only say pass or fail, because that third
-state is where this file's oldest failure mode hides — but **"give controls a third state" is the outcome,
-not the mechanism, and the mechanism is what reproduces.** Assert the two-sided form:
+**Bound a plant's effect on BOTH sides, and the control reports for free when it has gone blind.** A control
+that can say *"I can no longer tell"* beats one that can only pass or fail — but the mechanism, not the outcome,
+is what reproduces. Assert the two-sided form:
+
+```
+0 < (guarded_result − planted_result) < threshold
+```
+
+The lower bound fails when the plant has stopped firing; the upper when it fires too much. Measured 2026-09-12:
+under a mutation that made the shipped value identical to the planted one, the difference collapsed to zero
+and the lower bound caught it, where the one-sided `planted < guarded` would have gone silent about having
+lost its power to discriminate.
 
 ```
 0 < (guarded_result − planted_result) < threshold
@@ -1150,53 +1151,46 @@ only as "the fault is detected" cannot report that it is no longer capable of de
 
 **To compare POLICIES, replay them over a recorded decision sequence rather than re-running** (2026-09-12).
 A batch-size lever estimated at ~2.9× measured **2.31×** when every policy was replayed over one pilot's own
-accept/reject log — one run, one population, exactly one thing differing — **with the control that the replay
-reproduces the original run's exact cost.** Re-running instead would have compared two populations and one
-policy at once, which is this file's most-repeated error. It also showed the *adaptive* policy slightly
-**worse** than the best fixed one until the accept rate falls, which a second run would likely have hidden in
-noise.
+accept/reject log — one run, one population, one thing differing — with the control that the replay reproduces
+the original run's exact cost. Re-running would have compared two populations and one policy at once. The
+replay also showed the adaptive policy slightly worse than the best fixed one until the accept rate falls, which
+a second run would have hidden in noise.
 
 **A cost measured on a FAILING run understates a succeeding one — and the tell is that the cheap steps are
-the failures** (2026-09-12). A reduction walk was costed at **24% expensive probes**; measured on a walk that
-was actually progressing it is **~75%**. The 24% came from a walk that had already fallen into the cheap
-satisfiable regime, where each step is answered in a millisecond because the object has stopped refusing.
+the failures** (2026-09-12). A reduction walk was costed at **24% expensive probes**; on a walk actually progressing
+it is **~75%**. The 24% came from a walk already fallen into the cheap satisfiable regime, where each step is
+answered in a millisecond because the object has stopped refusing.
 
 > **A successful walk is the expensive walk.**
 
-It inverts the natural intuition — that a run going well is a run going fast — and it is exactly how a pilot's
-cost model understates the real thing by 3×. **Before costing an iterative process from a sample, check which
+It inverts the intuition that a run going well is a run going fast, and it is how a pilot's cost model
+understates the real thing by 3×. **Before costing an iterative process from a sample, check which
 regime the sample's CHEAP steps were in**, because the cheap ones are the population that will not be there
 when it works.
 
 **A caveat you write and then step over is WORSE than one you never wrote** (2026-09-12). An advisor wrote
 *"this exhausts the additive twist family, not the twist family"* and then, in the same report, *"the 72
-off-diagonal edges are measurably load-bearing"* — the second sentence silently dropping the qualifier the
-first had just installed. The product owner amplified the headline twice, and it kept a dead object alive an
-extra day. **The caveat is what made the headline look audited.** So: after writing a scope qualifier, re-read
-the summary sentence against it, because the qualifier's presence is exactly what stops a reader applying one.
+off-diagonal edges are measurably load-bearing"* — dropping the qualifier the first sentence had installed. The
+headline was amplified twice and kept a dead object alive an extra day. **The caveat is what made the headline
+look audited**: after writing a scope qualifier, re-read the summary sentence against it.
 
 **And the cheapest generator-image check there is: count your generator's free parameters against the
-problem's.** The same search ran over `{(C, π∘C)}` — **one** free parameter — where the solution space was
-`{(f, g)}`, which has **two**; the image was a measure-zero slice (24 × 24 against 144²) and the answer lived
-outside it. **Third instance in one milestone of a decisive zero from a generator that could not represent
-its target, every one with its positive control passing.** A parameter count is seconds and catches the whole
-class.
+problem's.** A search ran over `{(C, π∘C)}` — one free parameter — where the solution space `{(f, g)}` has two; the
+image was a measure-zero slice (24 × 24 against 144²) and the answer lived outside it. Third instance in one
+milestone of a decisive zero from a generator that could not represent its target, every one with its positive
+control passing. A parameter count is seconds and catches the whole class.
 
 **A TRUE explanation that fully accounts for the observation will stop you looking for a second one — and
 the second one may be the one about your own apparatus** (2026-09-12). An engineer proved a two-case theorem
-whose load-bearing hypothesis it had just finished arguing for — `√(4n−1) ∉ K`, without which the arena lies
-in `K²` and Theorem B four-colours it — then tested the theorem out of sample at `n = 3`, where `4n−1 = 11`
-and `√11 ∈ K` **by definition of the field**. The prediction was void, not met, and the two independent laws
-"agreed 300 of 300" precisely because **both were inapplicable**.
-
-**Its first account of the miss was that it had mis-filed the fact. That account was wrong, and wrong in the
-direction that flattered it** — a confession can flatter, because *"I filed it under the wrong heading"* is
-tidier and more forgivable than what actually happened. `n = 3` fails **two** gates: the 2-adic wall, **and**
-`sin θ ∉ K`. It had noticed the first, attributed the consequence to it, and **been correct** — *"this member
-can never reach five colours"* is true. **That is the trap: a true and sufficient-sounding reason fully
-answered "is anything wrong with `n = 3`?", which made the member look SAFE to compute on** — a member dead
-as an object costs nothing to test with — so it never asked whether a *second* gate also failed. The first
-failure was about the member; the second was about its own instrument.
+whose load-bearing hypothesis — `√(4n−1) ∉ K`, without which the arena lies in `K²` and Theorem B four-colours
+it — it had just argued for, then tested it out of sample at `n = 3`, where `4n−1 = 11` and `√11 ∈ K` **by
+definition of the field**. The prediction was void, not met, and two laws "agreed 300 of 300" because both were
+inapplicable. **Its first account of the miss — a mis-filed fact — was wrong in the direction that flattered
+it**: `n = 3` fails **two** gates, the 2-adic wall and `sin θ ∉ K`; it had noticed the first, attributed the
+consequence to it, been correct (*"this member can never reach five colours"* is true), and so **a true and
+sufficient-sounding reason made the member look SAFE to compute on** — dead as an object, free as a test
+case — and it never asked whether a second gate also failed. The first failure was about the member; the
+second was about its own instrument.
 
 **The habit, and it is cheap: a candidate that fails one gate must be checked against ALL of them before
 being used as a test case, precisely because the first failure makes it feel already understood.** And
@@ -1204,66 +1198,55 @@ re-read every hypothesis against the test instance immediately before believing 
 which is exactly when the result is most wanted and least examined.
 
 **And a mutation harness must verify its own RESTORE** (2026-09-12). One broke *itself* through CPython's
-bytecode cache: the cache's identity for a source file is `(size, mtime in whole seconds)`, so a **same-size
-mutation written inside one second** left the interpreter executing **mutated bytecode against a restored
-source** — every plant "passing" while the arithmetic under test was wrong. **This is the archetype above
-wearing a costume**: a check that loads two versions of something and identifies them by name, where the
-name is `(size, mtime)` and the registry is the interpreter. What caught it was the harness **re-running its
-controls after the restore and asserting the guarded state comes back**; nothing about reading the harness
-would have shown it. So: restore, then re-verify, and treat a same-size edit inside one second as the case
-your caching cannot see.
+bytecode cache, whose identity for a source file is `(size, mtime in whole seconds)`: a **same-size mutation
+written inside one second** left the interpreter executing mutated bytecode against a restored source — every
+plant "passing" while the arithmetic under test was wrong. The archetype above in a costume: a check that loads
+two versions and identifies them by name. What caught it was the harness **re-running its controls after the
+restore and asserting the guarded state comes back**. Restore, then re-verify.
 
 **And mutate the CONSTANT, not only the logic.** Mutating a function's *default value* rather than its *body*
 is what exposed a control asserting against a hardcoded copy of that value; nothing about reading the control
 would have shown it. The cheap half of the lesson, and the one that finds checks pointed at the wrong code.
 
 **Archiving a checker can break it in exactly the way it was built to detect.** A committed equivalence
-harness reconstructs its "before" tree from git and imports a module by name — so the reconstructed module
-binds to **today's** copy of its dependency if that reaches `sys.modules` first, and the comparison silently
-becomes one tree against itself **while printing ALL MATCH**. Assert the provenance of every module a
-reconstruction loads, and **provoke that assertion** to confirm it fires — pre-load the wrong version
-deliberately and confirm the harness **refuses** rather than agrees. **The sharp form is not "moved to a new
-context" in the abstract; it is: a check that loads two versions of something and identifies them BY NAME.**
-Module caches, class registries, singletons, environment lookups — anything with a global namespace.
+harness reconstructs its "before" tree from git and imports a module by name — so the reconstructed module binds
+to **today's** copy of its dependency if that reaches `sys.modules` first, and the comparison silently becomes
+one tree against itself **while printing ALL MATCH**. Assert the provenance of every module a reconstruction
+loads, and **provoke that assertion** — pre-load the wrong version deliberately and confirm the harness refuses.
+**The sharp form: a check that loads two versions of something and identifies them BY NAME** — module caches,
+class registries, singletons, environment lookups, anything with a global namespace.
 
-**And do not cite that catch as evidence the rule works.** Its finder declined exactly that: it had been
-forced to reason about module identity hours earlier, on a task that happened to load two copies in one
-process, and archiving carried the reasoning along for free — *"I got it because the original task happened
-to have the same shape."* **An instance found by prior context is not evidence that a rule reproduces.**
-Someone archiving a script that only ever loaded one tree has no such prior, will not notice, and gets a
-harness printing `ALL MATCH` while comparing today against today. That is the argument **for** writing the
-rule down rather than against it: **it does not reproduce from care, only from the negative control being
-mandatory.**
+**And do not cite that catch as evidence the rule works.** Its finder declined exactly that: it had been forced
+to reason about module identity hours earlier, on a task that happened to load two copies in one process, and
+archiving carried the reasoning along for free. **An instance found by prior context is not evidence that a
+rule reproduces.** Someone archiving a script that only ever loaded one tree gets a harness printing
+`ALL MATCH` while comparing today against today — the argument **for** writing the rule down: **it does not
+reproduce from care, only from the negative control being mandatory.**
 
 **Enumerate the PARAMETER first and screen the objects against it second, never the reverse** (2026-09-12,
 the third instance in one milestone). A census of rotations was enumerated *over a base*, so a rotation whose
-circle is empty over that base never became a candidate and left **no row to audit** — which is why a whole
-family of 6-open rotations went unrecorded while the census's headline read "none". **An omission is worse
-than a miscount**, because a miscount is a wrong number in a row you can check and an omission is a silent
-absence. Sibling defect, same file, same day: an enumerator whose cut is **one-sided on a dense set** has no
-well-defined answer at all, so its `span` parameter *is* the answer rather than a truncation of it — and the
-tell is that the totals never converge while the quantity of interest does. **When a generator takes a
-parameter, report the quantity at two values of it before believing either.**
+circle is empty over that base never became a candidate and left **no row to audit** — a whole family of 6-open
+rotations went unrecorded while the headline read "none". **An omission is worse than a miscount**: a miscount
+is a wrong number in a row you can check. Sibling defect, same file: an enumerator whose cut is one-sided on a
+dense set has no well-defined answer, so its `span` parameter *is* the answer — the tell is totals that never
+converge while the quantity of interest does. **When a generator takes a parameter, report the quantity at two
+values of it before believing either.**
 
 **A positive control proves an instrument finds things OF THE SHAPE ITS GENERATOR CAN REPRESENT, and says
-nothing about shapes it excludes.** A sweep of 781,284 candidates returned a decisive zero for a new
-parameter and nine hits for the known one — **with its positive control passing**, which is exactly what made
-it dangerous: the known witness *was* expressible in the generator's restricted shape and the new one was
-not, so the search could not represent the object it was searching for. **Before believing any zero over a
-family, write down the generator's image and check the target is inside it.** Third instance of this shape in
-one milestone — and note that a working positive control does not distinguish a false zero from a real one.
+nothing about shapes it excludes.** A sweep of 781,284 candidates returned a decisive zero for a new parameter and
+nine hits for the known one — **with its positive control passing**: the known witness *was* expressible in the
+generator's restricted shape and the new one was not. **Before believing any zero over a family, write down the
+generator's image and check the target is inside it** — a working positive control does not distinguish a false
+zero from a real one.
 
 **Do not mistake a one-sided filter for an inverted monotonicity** — a correction to this entry, made by an
-advisor against the product owner who wrote it. It is *true* that once a base contains the witness, growing
-it cannot recover the four-colouring: more material only adds to the set of colour differences and the
-certificate needs a value outside it. It is **false** that this inverts the usual direction. Adding material
-makes a graph harder to colour; adding material makes a *sufficient condition for colourability* harder to
-fire. **Those are the same statement about the same quantity, seen once directly and once through a
-one-sided filter.** The cost of the wrong framing is specific and was measured: **an agent told to expect an
-inversion spends its attention hunting one, and misses what is genuinely unusual here** — that this filter
-can be defeated by **breaking its applicability rather than its conclusion**. That matters most exactly when
-you are *designing* the object the filter will judge: a constructed base can "survive" by making the check
-inapplicable, and a `not-applicable` returned on the same footing as a silence is a pass nobody earned.
+advisor against the product owner who wrote it. Once a base contains the witness, growing it cannot recover the
+four-colouring (more material adds colour differences, and the certificate needs a value outside them); it is
+**false** that this inverts the usual direction — adding material makes a graph harder to colour and makes a
+*sufficient condition for colourability* harder to fire, the same statement seen once directly and once through
+a one-sided filter. The cost of the wrong framing was measured: an agent told to expect an inversion hunts one,
+and misses what is unusual here — the filter can be defeated by **breaking its applicability rather than its
+conclusion**, and a `not-applicable` returned on the same footing as a silence is a pass nobody earned.
 **Whenever a one-sided filter judges something you are building, enumerate the ways to make it inapplicable
 before the ways to make it fail.**
 
