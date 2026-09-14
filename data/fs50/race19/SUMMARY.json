@@ -1,0 +1,84 @@
+{
+ "kind": "fs50-race-summary",
+ "p": 19,
+ "N": 77,
+ "machine": "desktop, one core per run, 2026-09-14 (the WO-18 implementation session building beside it)",
+ "question": "is alpha(UD(F_19,2)) >= 77? (alpha >= 76 verified; 77 undecided at 800 s in M61) \u2014 every class cube refuted would pin alpha(19) = 76",
+ "class_profile": {
+  "0": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 0
+  },
+  "2": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 20
+  },
+  "3": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 40
+  },
+  "4": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 60
+  },
+  "5": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 80
+  },
+  "6": {
+   "verdict": "unknown",
+   "seconds": 840.0,
+   "excluded": 100
+  },
+  "8": {
+   "verdict": "unsat",
+   "seconds": 28.4,
+   "excluded": 140
+  },
+  "10": {
+   "verdict": "unsat",
+   "seconds": 0.2,
+   "excluded": 180
+  },
+  "12": {
+   "verdict": "unsat",
+   "seconds": 0.0,
+   "excluded": 220
+  },
+  "14": {
+   "verdict": "unsat",
+   "seconds": 0.0,
+   "excluded": 260
+  },
+  "16": {
+   "verdict": "unsat",
+   "seconds": 0.0,
+   "excluded": 300
+  },
+  "18": {
+   "verdict": "unsat",
+   "seconds": 0.0,
+   "excluded": 340
+  }
+ },
+ "reading": "cubes 0 (the monolith), 2, 3, 4, 5, 6 undecided at 840 s; cube 8 refuted in 28.4 s; cubes 10-18 in under 0.2 s; cube 7 not run; alpha(19) = 76 stays open on the low classes, the same cliff shape as at 23 one step earlier",
+ "files": [
+  "p19-cube0.json",
+  "p19-cube10.json",
+  "p19-cube12.json",
+  "p19-cube14.json",
+  "p19-cube16.json",
+  "p19-cube18.json",
+  "p19-cube2.json",
+  "p19-cube3.json",
+  "p19-cube4.json",
+  "p19-cube5.json",
+  "p19-cube6.json",
+  "p19-cube8.json"
+ ]
+}

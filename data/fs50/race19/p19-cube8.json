@@ -1,0 +1,21 @@
+{
+ "kind": "fs50-race",
+ "p": 19,
+ "n": 361,
+ "N": 77,
+ "encoding": "totalizer",
+ "cube": 8,
+ "pinned": [
+  0,
+  27
+ ],
+ "excluded": 140,
+ "wall": 840.0,
+ "clauses": 71831,
+ "aux_vars": 3098,
+ "encode_seconds": 0.0583040714263916,
+ "solve_seconds": 28.36439037322998,
+ "verdict": "unsat",
+ "solver": "cadical 2.1.2 (the Lean toolchain's), -t wall",
+ "cnf": "p19-cube8.cnf"
+}
