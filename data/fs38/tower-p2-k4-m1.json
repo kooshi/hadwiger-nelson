@@ -68,6 +68,10 @@
   ],
   "sizes_total": 4,
   "transferred_refusals_keep_the_word": "refused (solver, untrusted)",
+  "per_representative": null,
+  "decided_by_orbit": 0,
+  "decided_by_orbit_word": null,
+  "generators_verified_as_set_equalities": "see `circle_group`: s\u00b7S_m = S_m for every s \u2208 S_m and conj(S_m) = S_m, checked as SET equalities",
   "derivation": "multiplication by s \u2208 S_m (a unit, N(s) = 1) and conjugation are graph automorphisms fixing 0; S_m is a group (checked in full), so S\u00b7\u03b4 \u222a S\u00b7\u03b4\u0304 is a whole orbit"
  },
  "fan_gap": {
@@ -107,8 +111,10 @@
     "asked": 3,
     "free": 3,
     "refused": 0,
-    "not_separated": 0,
-    "separated": 0
+    "identified": 0,
+    "separated_by_adjacency": 3,
+    "separated_by_refusal": 0,
+    "virtual_edges": 3
    },
    {
     "depth": 1,
@@ -116,12 +122,20 @@
     "asked": 0,
     "free": 0,
     "refused": 0,
-    "not_separated": 0,
-    "separated": 0
+    "identified": 0,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    }
   ],
   "refused_differences": [],
-  "orbit_consistent": true
+  "orbit_consistent": true,
+  "orbit_cross_check": {
+   "orbits": 2,
+   "differences_checked": 3,
+   "inconsistent_orbits": 0,
+   "reads": "the forced verdict is constant on every automorphism orbit, 3 of 3 differences \u2014 this agreement is what licenses deciding level 8 from one representative per orbit"
+  }
  },
  "separated": {
   "asked": 3,
@@ -148,6 +162,32 @@
  },
  "seconds": 0.2,
  "peak_gb": 0.05,
+ "timing": {
+  "seconds_this_process": 0.2,
+  "peak_gb_this_process": 0.05,
+  "resumed_from_ask": null,
+  "checkpoint": null,
+  "reads": "a single process from the first ask to the last: the clock and the peak are the whole level's"
+ },
  "positive_control_note": "the tower has NO internal positive for the refusal path below level 5 \u2014 K\u2084 and K\u2084 \u25a1 K\u2084's Latin squares are pairwise free \u2014 so the `forced` ask's refusal path is exercised on an EXTERNAL hand-checkable positive (the diamond at three colours, in `self-test`) beside the same object at four. Level 6 is where both of P-A2's outcomes are seen on one population: 15 refused and 4,080 free of 4,095 differences.",
- "claim_scope": "'free' = a colouring verified here on every edge, so the pair is NOT forced. 'refused' = one solver's UNSAT, re-asked on a second engine and a second encoding where affordable, and still UNTRUSTED: nothing here is a theorem. 'no gap' is the same UNSAT with the same word, with the planted control showing the SAT outcome is reachable on this object. The graph is DERIVED from a norm form, so a refusal is the suspect verdict; the independent ring construction is the guard."
+ "claim_scope": "'free' = a colouring verified here on every edge, so the pair is NOT forced. 'refused' = one solver's UNSAT, re-asked on a second engine and a second encoding where affordable, and still UNTRUSTED: nothing here is a theorem. 'no gap' is the same UNSAT with the same word, with the planted control showing the SAT outcome is reachable on this object. The graph is DERIVED from a norm form, so a refusal is the suspect verdict; the independent ring construction is the guard.",
+ "recheck": {
+  "by_depth_schema_normalised": false,
+  "by_depth_schema": "per depth: `identified` ('c', a verified colouring gives the pair one colour), `separated_by_adjacency` ('E', separation by properness \u2014 a theorem), `separated_by_refusal` ('S', refused (solver, untrusted)), and `virtual_edges` = E + S. Recomputed here from `sep_string` so every file means the same thing by the same key \u2014 the earlier shape had one key named `separated` carrying the S count alone, which a reader summing across files would have read as E + S",
+  "rechecked": "from the committed file alone, no solver",
+  "orbits": 2,
+  "differences_checked": 3,
+  "inconsistent_orbits": 0,
+  "verdicts_constant_on_orbits": true,
+  "per_depth_examples_reverified": [
+   {
+    "depth": 0,
+    "proper_on_all_edges": true,
+    "separates_free_differences": 3
+   }
+  ],
+  "identifying_examples_reverified": 0,
+  "graph_matches_record": true,
+  "reads": "the orbit cross-check the product owner asked for as its own control row: the record's forced verdict is constant on every automorphism orbit, on every difference \u2014 and that agreement across levels 1..7, where every difference was asked individually, is what licenses deciding level 8 from one representative per orbit"
+ }
 }

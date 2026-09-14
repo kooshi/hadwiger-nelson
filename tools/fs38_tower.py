@@ -27,7 +27,13 @@ set of ring multiples — this tests the LATTICE claim, which the tuned-to count
     python3 tools/fs38_tower.py tables                              # level four's aperiodic cover (the committed five, re-verified)
     python3 tools/fs38_tower.py recolour                            # the level-2 repaint at 11 (ℤ/121), with its negative control
     python3 tools/fs38_tower.py lrat                                # the P₅ + edge CNF and its LRAT (generated, NOT checked)
+    python3 tools/fs38_tower.py recheck                             # re-verify every committed level record from its file, no solver
     python3 tools/fs38_tower.py self-test
+
+Every refusal is re-asked on a second ENGINE (glucose4) under a second ENCODING — `P_m` plus the edge `(0, δ)`, the
+edge guarded by a selector so one build serves every refusal — and, at the smaller levels, under a third: all `k(k−1)`
+ordered colour pairs separately, which appeals to no palette relabelling at all. `recheck` then re-verifies each
+record from the committed file alone.
 
 UNTRUSTED, like everything in `tools/`. Nothing here is a theorem; the kernel modules are the certificates."""
 from __future__ import annotations
@@ -568,10 +574,25 @@ class SecondOpinion:
         for a, b in zip(cay.u.tolist(), cay.v.tolist()):
             for c in range(k):
                 self.s.add_clause([-var(a, c, k), -var(b, c, k)])
+        self.next_sel = k * cay.n + 1
         self.build_seconds = round(time.time() - t0, 2)
 
-    def agrees(self, d: int) -> bool:
-        """True when every ordered colour pair refuses — the pair is forced, on the second engine and encoding."""
+    def agrees_edge(self, d: int) -> bool:
+        """The EDGE encoding, one solve per refusal: add the edge `(0, d)` guarded by a fresh selector, then solve
+        with the selector assumed false. Under that assumption the guarded clauses ARE the edge, so the question is
+        "is `P_m + edge (0, d)` 4-colourable?" — no pinning and no palette argument; other refusals' guarded clauses
+        stay satisfiable through their own selectors and cannot interfere. This replaces a per-refusal rebuild of the
+        whole formula (at level 8, a 50 M-clause build each) and a 12-solve colour-pair sweep whose solves are the
+        expensive UNSAT direction (~30 s each there, so 90 minutes for one level)."""
+        sel = self.next_sel
+        self.next_sel += 1
+        for c in range(self.k):
+            self.s.add_clause([-var(0, c, self.k), -var(d, c, self.k), sel])
+        return not self.s.solve(assumptions=[-sel])
+
+    def agrees_pairs(self, d: int) -> bool:
+        """The colour-pair encoding: every ordered pair `(C 0 = c, C δ = c′)`, `c ≠ c′`, refused separately. Stronger
+        as redundancy (it exercises `k(k−1)` independent questions) and affordable only at the smaller levels."""
         for c in range(self.k):
             for c2 in range(self.k):
                 if c == c2:
@@ -778,8 +799,10 @@ def cmd_forced(a):
     state = dict(level=m, population=population, free_string="?" * cay.n, sep_string="?" * cay.n,
                  refused=[], sep_refused=[], models_hash=hashlib.sha256().hexdigest(), examples={}, sep_examples={},
                  asked=0, models_verified=0)
+    resumed_at = None
     if a.resume and ck.exists():
         state = json.loads(ck.read_text())
+        resumed_at = state["asked"]
         print(f"  resumed from {ck}: {state['asked']} asks done", flush=True)
     fs = list(state["free_string"])
     ss = list(state["sep_string"])
@@ -872,7 +895,8 @@ def cmd_forced(a):
     SO = SecondOpinion(cay, k) if (ref_list and cay.n <= a.second_below) else None
     if SO:
         print(f"  second opinion: {SO.engine} built in {SO.build_seconds}s; {len(ref_list)} refusals to re-ask, "
-              f"{k * (k - 1)} ordered colour pairs each", flush=True)
+              f"the guarded-edge encoding each"
+              + (f", plus all {k * (k - 1)} ordered colour pairs" if cay.n <= a.pairs_below else ""), flush=True)
     for nth, d in enumerate(ref_list, 1):
         pal = []
         for c in range(2, k):
@@ -881,16 +905,23 @@ def cmd_forced(a):
         if any(pal):
             raise SystemExit(f"HALT: palette symmetry broken at level {m}, difference {d}: pinning colour 1 refused "
                              f"while another colour succeeded ({pal})")
-        agree = SO.agrees(d) if SO else None
+        agree = SO.agrees_edge(d) if SO else None
+        agree_pairs = (SO.agrees_pairs(d) if (SO and cay.n <= a.pairs_below) else None)
         if nth % 8 == 0 or nth == len(ref_list):
             print(f"    refusals re-asked: {nth}/{len(ref_list)} [{time.time() - t0:.0f}s]", flush=True)
         refused.append(dict(index=d, tuple=list(cay.tuple_of(d)), depth=level_depth(m, cay.tuple_of(d)),
                             orbit=orb[d], orbit_size=sum(1 for x in orb if x == orb[d]),
                             verdict=REFUSED,
                             second_engine=(SECOND_ENGINE if agree is not None else None),
-                            second_encoding=f"every one of the {k * (k - 1)} ordered colour pairs (C 0 = c, C δ = c′) "
-                                            f"refused separately — no appeal to palette symmetry",
+                            second_encoding="`P_m` plus the edge (0, δ) is not 4-colourable, asked on the second "
+                                            "engine with the edge guarded by a selector — no pinning, no palette "
+                                            "argument"
+                                            + (f"; and, where affordable, every one of the {k * (k - 1)} ordered "
+                                               f"colour pairs (C 0 = c, C δ = c′) refused separately"
+                                               if agree_pairs is not None else ""),
                             second_agrees=agree,
+                            second_agrees_edge_encoding=agree,
+                            second_agrees_colour_pairs=agree_pairs,
                             palette_control_all_refused=(not any(pal)),
                             palette_control_reads="a HALT, not a measurement: pinning C 0 = 0, C δ = 1 loses nothing "
                                                   "by colour permutation, so a SAT at another colour after an UNSAT "
@@ -919,8 +950,10 @@ def cmd_forced(a):
                              asked=sum(1 for i in idxs if i in todo_set),
                              free=sum(1 for i in idxs if fs[i] == "f"),
                              refused=sum(1 for i in idxs if fs[i] == "R"),
-                             not_separated=sum(1 for i in idxs if ss[i] == "c"),
-                             separated=sum(1 for i in idxs if ss[i] == "S")))
+                             identified=sum(1 for i in idxs if ss[i] == "c"),
+                             separated_by_adjacency=sum(1 for i in idxs if ss[i] == "E"),
+                             separated_by_refusal=sum(1 for i in idxs if ss[i] == "S"),
+                             virtual_edges=sum(1 for i in idxs if ss[i] in "ES")))
     rec = dict(
         kind="fs38-tower-2adic", prime=2, level=m, colours=k,
         object=f"P_{m} = Cay(O/𝔓^{m}, S_{m}), O = ℤ₂[ω][√3], the FS-38 §S3 representation (a,b,c,d) ↦ (a+bω) + π(c+dω)",
@@ -984,6 +1017,15 @@ def cmd_forced(a):
                          "aggregate hash identifies THIS run's set (solver models are not reproducible across "
                          "engines), the per-depth examples are the re-checkable evidence"),
         seconds=round(time.time() - t0, 1), peak_gb=round(peak_gb(), 2),
+        timing=dict(seconds_this_process=round(time.time() - t0, 1), peak_gb_this_process=round(peak_gb(), 2),
+                    resumed_from_ask=(resumed_at if resumed_at else None),
+                    checkpoint=(str(ck.relative_to(ROOT)) if resumed_at else None),
+                    reads=("this record was produced by a RESUMED process: the clock and the peak cover only the asks "
+                           f"after ask {resumed_at}, not the whole level, and the aggregate model hash covers only "
+                           "the models of this segment. The per-depth example colourings are the evidence and are "
+                           "re-verified from the file by `recheck`." if resumed_at else
+                           "a single process from the first ask to the last: the clock and the peak are the whole "
+                           "level's")),
         positive_control_note="the tower has NO internal positive for the refusal path below level 5 — K₄ and "
                               "K₄ □ K₄'s Latin squares are pairwise free — so the `forced` ask's refusal path is "
                               "exercised on an EXTERNAL hand-checkable positive (the diamond at three colours, in "
@@ -1600,7 +1642,29 @@ def cmd_recheck(a):
         for dep, s in sorted(exs.items()):
             if not verify_proper(cay, [int(ch) for ch in s])[0]:
                 raise SystemExit(f"HALT: level {m}'s depth-{dep} identifying example is not proper")
+        ss_rec = rec["separated"].get("sep_string")
+        normalised = False
+        if ss_rec:
+            cls = depth_classes(m)
+            newbd = []
+            for r in rec["forced"]["by_depth"]:
+                idxs = [i for i in cls[r["depth"]] if i != 0]
+                newbd.append(dict(depth=r["depth"], differences=r["differences"], asked=r["asked"], free=r["free"],
+                                  refused=r["refused"],
+                                  identified=sum(1 for i in idxs if ss_rec[i] == "c"),
+                                  separated_by_adjacency=sum(1 for i in idxs if ss_rec[i] == "E"),
+                                  separated_by_refusal=sum(1 for i in idxs if ss_rec[i] == "S"),
+                                  virtual_edges=sum(1 for i in idxs if ss_rec[i] in "ES")))
+            normalised = (newbd != rec["forced"]["by_depth"])
+            rec["forced"]["by_depth"] = newbd
         rec["recheck"] = dict(
+            by_depth_schema_normalised=normalised,
+            by_depth_schema="per depth: `identified` ('c', a verified colouring gives the pair one colour), "
+                            "`separated_by_adjacency` ('E', separation by properness — a theorem), "
+                            "`separated_by_refusal` ('S', " + REFUSED + "), and `virtual_edges` = E + S. Recomputed "
+                            "here from `sep_string` so every file means the same thing by the same key — the earlier "
+                            "shape had one key named `separated` carrying the S count alone, which a reader summing "
+                            "across files would have read as E + S",
             rechecked="from the committed file alone, no solver", orbits=len(reps),
             differences_checked=cay.n - 1, inconsistent_orbits=len(incons),
             verdicts_constant_on_orbits=(not incons), per_depth_examples_reverified=checked,
@@ -1801,6 +1865,8 @@ def main():
     f.add_argument("--orbits", action="store_true", help="ask one representative per automorphism orbit")
     f.add_argument("--all-below", type=int, default=20000, help="ask every difference when n is below this")
     f.add_argument("--second-below", type=int, default=70000, help="second-engine re-ask when n is below this")
+    f.add_argument("--pairs-below", type=int, default=20000,
+                   help="also sweep all k(k−1) ordered colour pairs when n is below this")
     f.add_argument("--separated", action="store_true", default=True)
     f.add_argument("--no-separated", dest="separated", action="store_false")
     f.add_argument("--ckpt-every", type=int, default=250)

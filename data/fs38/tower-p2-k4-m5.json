@@ -398,6 +398,10 @@
   ],
   "sizes_total": 1024,
   "transferred_refusals_keep_the_word": "refused (solver, untrusted)",
+  "per_representative": null,
+  "decided_by_orbit": 0,
+  "decided_by_orbit_word": null,
+  "generators_verified_as_set_equalities": "see `circle_group`: s\u00b7S_m = S_m for every s \u2208 S_m and conj(S_m) = S_m, checked as SET equalities",
   "derivation": "multiplication by s \u2208 S_m (a unit, N(s) = 1) and conjugation are graph automorphisms fixing 0; S_m is a group (checked in full), so S\u00b7\u03b4 \u222a S\u00b7\u03b4\u0304 is a whole orbit"
  },
  "fan_gap": {
@@ -437,8 +441,10 @@
     "asked": 768,
     "free": 768,
     "refused": 0,
-    "not_separated": 672,
-    "separated": 48
+    "identified": 672,
+    "separated_by_adjacency": 48,
+    "separated_by_refusal": 48,
+    "virtual_edges": 96
    },
    {
     "depth": 1,
@@ -446,8 +452,10 @@
     "asked": 192,
     "free": 192,
     "refused": 0,
-    "not_separated": 192,
-    "separated": 0
+    "identified": 192,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    },
    {
     "depth": 2,
@@ -455,8 +463,10 @@
     "asked": 48,
     "free": 48,
     "refused": 0,
-    "not_separated": 48,
-    "separated": 0
+    "identified": 48,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    },
    {
     "depth": 3,
@@ -464,8 +474,10 @@
     "asked": 12,
     "free": 12,
     "refused": 0,
-    "not_separated": 12,
-    "separated": 0
+    "identified": 12,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    },
    {
     "depth": 4,
@@ -473,8 +485,10 @@
     "asked": 3,
     "free": 0,
     "refused": 3,
-    "not_separated": 3,
-    "separated": 0
+    "identified": 3,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    },
    {
     "depth": 5,
@@ -482,8 +496,10 @@
     "asked": 0,
     "free": 0,
     "refused": 0,
-    "not_separated": 0,
-    "separated": 0
+    "identified": 0,
+    "separated_by_adjacency": 0,
+    "separated_by_refusal": 0,
+    "virtual_edges": 0
    }
   ],
   "refused_differences": [
@@ -500,8 +516,10 @@
     "orbit_size": 3,
     "verdict": "refused (solver, untrusted)",
     "second_engine": "glucose4",
-    "second_encoding": "P_m + edge (0, \u03b4) is not 4-colourable",
+    "second_encoding": "`P_m` plus the edge (0, \u03b4) is not 4-colourable, asked on the second engine with the edge guarded by a selector \u2014 no pinning, no palette argument; and, where affordable, every one of the 12 ordered colour pairs (C 0 = c, C \u03b4 = c\u2032) refused separately",
     "second_agrees": true,
+    "second_agrees_edge_encoding": true,
+    "second_agrees_colour_pairs": true,
     "palette_control_all_refused": true,
     "palette_control_reads": "a HALT, not a measurement: pinning C 0 = 0, C \u03b4 = 1 loses nothing by colour permutation, so a SAT at another colour after an UNSAT at 1 is impossible for a correct solver and encoding (Poros)"
    },
@@ -518,8 +536,10 @@
     "orbit_size": 3,
     "verdict": "refused (solver, untrusted)",
     "second_engine": "glucose4",
-    "second_encoding": "P_m + edge (0, \u03b4) is not 4-colourable",
+    "second_encoding": "`P_m` plus the edge (0, \u03b4) is not 4-colourable, asked on the second engine with the edge guarded by a selector \u2014 no pinning, no palette argument; and, where affordable, every one of the 12 ordered colour pairs (C 0 = c, C \u03b4 = c\u2032) refused separately",
     "second_agrees": true,
+    "second_agrees_edge_encoding": true,
+    "second_agrees_colour_pairs": true,
     "palette_control_all_refused": true,
     "palette_control_reads": "a HALT, not a measurement: pinning C 0 = 0, C \u03b4 = 1 loses nothing by colour permutation, so a SAT at another colour after an UNSAT at 1 is impossible for a correct solver and encoding (Poros)"
    },
@@ -536,13 +556,21 @@
     "orbit_size": 3,
     "verdict": "refused (solver, untrusted)",
     "second_engine": "glucose4",
-    "second_encoding": "P_m + edge (0, \u03b4) is not 4-colourable",
+    "second_encoding": "`P_m` plus the edge (0, \u03b4) is not 4-colourable, asked on the second engine with the edge guarded by a selector \u2014 no pinning, no palette argument; and, where affordable, every one of the 12 ordered colour pairs (C 0 = c, C \u03b4 = c\u2032) refused separately",
     "second_agrees": true,
+    "second_agrees_edge_encoding": true,
+    "second_agrees_colour_pairs": true,
     "palette_control_all_refused": true,
     "palette_control_reads": "a HALT, not a measurement: pinning C 0 = 0, C \u03b4 = 1 loses nothing by colour permutation, so a SAT at another colour after an UNSAT at 1 is impossible for a correct solver and encoding (Poros)"
    }
   ],
-  "orbit_consistent": true
+  "orbit_consistent": true,
+  "orbit_cross_check": {
+   "orbits": 32,
+   "differences_checked": 1023,
+   "inconsistent_orbits": 0,
+   "reads": "the forced verdict is constant on every automorphism orbit, 1023 of 1023 differences \u2014 this agreement is what licenses deciding level 8 from one representative per orbit"
+  }
  },
  "separated": {
   "asked": 1023,
@@ -576,8 +604,49 @@
   },
   "note": "every model was verified against every edge of the graph as built before being counted; the aggregate hash identifies THIS run's set (solver models are not reproducible across engines), the per-depth examples are the re-checkable evidence"
  },
- "seconds": 2.8,
+ "seconds": 3.0,
  "peak_gb": 0.07,
+ "timing": {
+  "seconds_this_process": 3.0,
+  "peak_gb_this_process": 0.07,
+  "resumed_from_ask": null,
+  "checkpoint": null,
+  "reads": "a single process from the first ask to the last: the clock and the peak are the whole level's"
+ },
  "positive_control_note": "the tower has NO internal positive for the refusal path below level 5 \u2014 K\u2084 and K\u2084 \u25a1 K\u2084's Latin squares are pairwise free \u2014 so the `forced` ask's refusal path is exercised on an EXTERNAL hand-checkable positive (the diamond at three colours, in `self-test`) beside the same object at four. Level 6 is where both of P-A2's outcomes are seen on one population: 15 refused and 4,080 free of 4,095 differences.",
- "claim_scope": "'free' = a colouring verified here on every edge, so the pair is NOT forced. 'refused' = one solver's UNSAT, re-asked on a second engine and a second encoding where affordable, and still UNTRUSTED: nothing here is a theorem. 'no gap' is the same UNSAT with the same word, with the planted control showing the SAT outcome is reachable on this object. The graph is DERIVED from a norm form, so a refusal is the suspect verdict; the independent ring construction is the guard."
+ "claim_scope": "'free' = a colouring verified here on every edge, so the pair is NOT forced. 'refused' = one solver's UNSAT, re-asked on a second engine and a second encoding where affordable, and still UNTRUSTED: nothing here is a theorem. 'no gap' is the same UNSAT with the same word, with the planted control showing the SAT outcome is reachable on this object. The graph is DERIVED from a norm form, so a refusal is the suspect verdict; the independent ring construction is the guard.",
+ "recheck": {
+  "by_depth_schema_normalised": false,
+  "by_depth_schema": "per depth: `identified` ('c', a verified colouring gives the pair one colour), `separated_by_adjacency` ('E', separation by properness \u2014 a theorem), `separated_by_refusal` ('S', refused (solver, untrusted)), and `virtual_edges` = E + S. Recomputed here from `sep_string` so every file means the same thing by the same key \u2014 the earlier shape had one key named `separated` carrying the S count alone, which a reader summing across files would have read as E + S",
+  "rechecked": "from the committed file alone, no solver",
+  "orbits": 32,
+  "differences_checked": 1023,
+  "inconsistent_orbits": 0,
+  "verdicts_constant_on_orbits": true,
+  "per_depth_examples_reverified": [
+   {
+    "depth": 0,
+    "proper_on_all_edges": true,
+    "separates_free_differences": 576
+   },
+   {
+    "depth": 1,
+    "proper_on_all_edges": true,
+    "separates_free_differences": 160
+   },
+   {
+    "depth": 2,
+    "proper_on_all_edges": true,
+    "separates_free_differences": 16
+   },
+   {
+    "depth": 3,
+    "proper_on_all_edges": true,
+    "separates_free_differences": 8
+   }
+  ],
+  "identifying_examples_reverified": 5,
+  "graph_matches_record": true,
+  "reads": "the orbit cross-check the product owner asked for as its own control row: the record's forced verdict is constant on every automorphism orbit, on every difference \u2014 and that agreement across levels 1..7, where every difference was asked individually, is what licenses deciding level 8 from one representative per orbit"
+ }
 }

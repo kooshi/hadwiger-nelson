@@ -56,13 +56,36 @@ evidence, and the per-depth examples are the evidence.
    explicit set of 65,536 ring multiples. Every level's record carries the comparison, and its `scope` field
    says what it does *not* test — the presentation itself (`π` Eisenstein over `ℤ₂[ω]`) is FS-38 §S3's
    `[hand 1]`. FS-38 §S3's own discriminating control, coincidence with the planning session's pilot graphs,
-   is unrunnable: that code died with the session's scratchpad.
+   is unrunnable — that code died with the session's scratchpad — and it has since been replaced twice over:
+   by the ring quotient here, and independently by **phase D**, which built the tower from the ring axioms in
+   its own code and reports its circle lists coinciding with these records' at levels 4 and 5, together with
+   `P₂ = K₄ □ K₄`'s eight cliques and its fibre structure (`plans/FS38-derivation.md`). Three constructions of
+   the same object, two of them not this tool.
 2. **The count `|S_m| = 3·2^(m−1)` is not a control.** §S3's perturbations fire only read as *halving* the
    coefficient of `N(B)` (`2 → 1`), which reproduces its numbers exactly. Read as *deleting* the term they
    cannot fire at all — the count stays `3·2^(m−1)` at every level 1..7 — and neither can a sign flip in `N`
    or in `Tr`. Four of six perturbations tried leave the count untouched. The self-test keeps the
    deleted-term row precisely so nobody reaches for the plant that cannot go red.
-3. **The orbit fields.** Multiplication by any `s ∈ S_m` (a unit, `N(s) = 1`) and conjugation are graph
+3. **The virtual-edge law.** Each level's `separated` block carries a `derived_count` beside the measured one.
+   The law (the advisor's, derived mid-phase from level 5 and registered before the higher levels were read):
+   *given* that every difference of depth ≥ 4 is forced, `C(s+δ) ≠ C(δ) = C(0)` for `s ∈ S_m` and `δ ∈ 𝔓⁴`, so
+   every element of `S_m + 𝔓⁴` — the preimage of `S₄` under reduction to level 4, of size `24·4^(m−4)` — is a
+   virtual edge. Measured: 24, 96, 384, 1536 at levels 4–7, equal to the derived set **element for element**.
+   More than the derived set would be a compulsion the depth-4 forcing does not explain; fewer would
+   contradict the forcing and halts the run.
+4. **The orbit fields, and what level 8 rests on.** At level 8 **255 orbit representatives were asked and all
+   65,535 nonzero differences are decided**, each carrying the word "decided by orbit derivation from its
+   representative" — a refusal transferred along an orbit keeps the refusal's own untrusted word. The control
+   is in `circle_group`: `s·S_m = S_m` as a **set** equality for every one of the 384 units, and
+   `conj(S_m) = S_m` likewise, so every generator of the orbit group is a graph automorphism fixing the
+   origin; `orbits.per_representative` lists each representative with its tuple, depth, orbit size and
+   verdict, and the partition itself is recomputable with no solver (`level_orbits`, pure arithmetic). What
+   licenses the route is not only that argument: **the route was re-run against levels where the complete answer
+   is known.** At levels 3, 4, 5 and 6 the representatives (7, 15, 31, 63) reproduce the answers of 63, 255, 1,023
+   and 4,095 individual asks — the same verdict strings, position for position, for forcedness and for
+   separation alike, 0 differing positions (`python3 tools/fs38_tower.py forced --m 6 --orbits --out <elsewhere>`, then compare
+   `free_string` and `sep_string` against the committed record). The orbit verdicts also agree with the
+   per-difference verdicts at every level 1–7, re-derived from the committed files by `recheck`. Multiplication by any `s ∈ S_m` (a unit, `N(s) = 1`) and conjugation are graph
    automorphisms fixing 0 — checked as *set* equalities `s·S_m = S_m` and `conj(S_m) = S_m`, not merely
    closure — so forcedness and separation are constant on orbits. Where every difference was asked
    individually that is a free cross-check (a disagreement inside an orbit halts the run); at level 8 it is
@@ -71,8 +94,11 @@ evidence, and the per-depth examples are the evidence.
 
 ## Not recorded here
 
-* **Level 8** (65,536 vertices, degree 384, 12.6 M edges) — see `plans/FS38-tower-records.md` § R-T for
-  whether it was run and at what cost; memory was measured at level 7 first, as the phase's brief required.
+* **All 65,535 individual asks at level 8.** The level IS recorded (65,536 vertices, degree 384, 12.6 M edges,
+  50,790,400 clauses, ~9 GB peak with the planted control's second solver), but by 255 orbit representatives
+  rather than 65,535 solves — every difference decided, by the derivation and the controls in point 4 above.
+  Memory was measured at level 7 first, as the phase's brief required, and the product owner approved the
+  route before it ran.
 * **The CNF** for the level-5 LRAT: regenerable in a second from the committed edge list through
   `tools/coloring.py`'s `write_cnf`, and its SHA-256 is in the manifest. Only the edge list and the proof are
   committed.
