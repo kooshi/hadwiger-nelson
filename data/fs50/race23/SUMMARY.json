@@ -20,5 +20,6 @@
   "prof-cube4.json",
   "prof-cube6.json",
   "prof-cube8.json"
- ]
+ ],
+ "n_scaling": "the monolith at 23 (origin pinned, totalizer, cadical -t 840) for N = 140, 130, 125, 120, 115, 110: EVERY ONE UNKNOWN at 840 s \u2014 including N = 140 and 130 and 125 and 120, all above the ratio bound 131.76 or within it, which refutes them on paper by the spectral argument; so the CDCL refutation cost is not a function of how close N is to the truth: resolution does not find the spectral argument at any size tried, and the certificate needs a proof system that carries it (records under nscale/)"
 }

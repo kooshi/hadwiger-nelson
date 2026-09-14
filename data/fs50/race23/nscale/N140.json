@@ -1,0 +1,20 @@
+{
+ "kind": "fs50-race",
+ "p": 23,
+ "n": 529,
+ "N": 140,
+ "encoding": "totalizer",
+ "cube": 0,
+ "pinned": [
+  0
+ ],
+ "excluded": 0,
+ "wall": 840.0,
+ "clauses": 150801,
+ "aux_vars": 4795,
+ "encode_seconds": 0.10231733322143555,
+ "solve_seconds": 840.0051374435425,
+ "verdict": "unknown",
+ "solver": "cadical 2.1.2 (the Lean toolchain's), -t wall",
+ "cnf": "N140.cnf"
+}
