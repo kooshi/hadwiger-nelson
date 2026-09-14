@@ -127,6 +127,7 @@ import Proofs.HadwigerNelson.ValuationLaw
 import Proofs.HadwigerNelson.TwoColourResidue
 import Proofs.HadwigerNelson.SquareClass
 import Proofs.HadwigerNelson.Instances.CompositumFive
+import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 
 /-!
 # Proofs

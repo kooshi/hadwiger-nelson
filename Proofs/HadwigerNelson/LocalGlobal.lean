@@ -197,6 +197,21 @@ theorem not_colorable_of_mul_lt [Fintype V] (hα : ∀ s : Finset V, G.IsIndepSe
     (h : k * a < Fintype.card V) : ¬ G.Colorable k :=
   fun hc => absurd (card_le_mul_of_colorable hα hc) (not_le.mpr h)
 
+/-- **From a bound on the independence number to a lower bound on the chromatic number.** If no
+independent set of a finite graph exceeds `a` points and `k · a` is fewer than the vertices, then `k`
+colours do not suffice and `χ(G) ≥ k + 1`. This is the consumer of an independence-number
+certificate: `not_colorable_of_mul_lt` supplies the refusal, `IsIndepSet.card_le_indepNum` turns the
+`indepNum` bound into the per-finset bound it wants, and
+`add_one_le_chromaticNumber_iff_not_colorable` does the `ℕ∞` arithmetic once.
+
+`data/fs50/cert-p11-N29.json` with `tools/fplane_cert_check.py` is the shape of certificate that
+discharges `h` outside the kernel; `Instances/IndependenceThreshold.lean` names the two instances
+FS-50 is after. -/
+theorem add_one_le_chromaticNumber_of_indepNum_le [Fintype V] (h : G.indepNum ≤ a)
+    (hk : k * a < Fintype.card V) : ((k + 1 : ℕ) : ℕ∞) ≤ G.chromaticNumber :=
+  add_one_le_chromaticNumber_iff_not_colorable.mpr
+    (not_colorable_of_mul_lt (fun _s hs => hs.card_le_indepNum.trans h) hk)
+
 /-- **The fractional face: `card ≤ χ · α`**, in `ℕ∞`. -/
 theorem card_le_chromaticNumber_mul_indepNum [Fintype V] :
     (Fintype.card V : ℕ∞) ≤ G.chromaticNumber * G.indepNum := by

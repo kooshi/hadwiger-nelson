@@ -1423,6 +1423,23 @@ checked against the edge list, the LRAT-backed refusal, and the forcing law. The
 #print axioms twoAdicFive_not_slack
 #print axioms twoAdicFour_not_slack
 
+/-! ## FS-50 phase D' — the consumer of a certified independence-number bound
+
+`add_one_le_chromaticNumber_of_indepNum_le` turns "no independent set exceeds `a` points" into
+"more than `k` colours are needed" whenever `k * a` is short of the vertex count. Its three
+instances name the finite Euclidean planes FS-50 measures; only the one at `11` has its hypothesis
+held, and by an exact rational certificate checked OUTSIDE the kernel
+(`data/fs50/cert-p11-N29.json`, `plans/FS50-certificate-soundness.md`), so nothing here buys any
+trust that these lines do not show. -/
+
+#print axioms add_one_le_chromaticNumber_of_indepNum_le
+#print axioms seven_le_chromaticNumber_finitePlane83_of_indepNum_le
+#print axioms six_le_chromaticNumber_finitePlane23_of_indepNum_le
+#print axioms five_le_chromaticNumber_finitePlane11_of_indepNum_le
+#print axioms six_mul_lt_card_finitePlane83
+#print axioms five_mul_lt_card_finitePlane23
+#print axioms four_mul_lt_card_finitePlane11
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
