@@ -1378,6 +1378,51 @@ forces half at `19` (no virtual-edge half — FS-38 §S8 decision 10). -/
 #print axioms zmodPow19_forces_eq
 #print axioms padicInt19_forces_eq
 
+/-! ### FS-38 phase K3 — the 2-adic tower, levels four and five
+
+`TwoAdicTower.lean`: the ring-free level, the two Eisenstein forms and their invariances, the circle counts,
+multiplication by `ω` and the level maps as graph homomorphisms, and level one as a gapless `K₄`.
+`Instances/TwoAdicFour.lean`: the five tables' properness through the circle literal, the cover, and pairwise
+freeness. `Instances/TwoAdicFive.lean`: the certificate's indexing checked against the graph, the pinned triangle
+checked against the edge list, the LRAT-backed refusal, and the forcing law. The clause table and its segment
+(`twoAdicFive_agrees`, `twoAdicFive_unsat`) are the pipeline's two kernel-decided `Bool`s; nothing here is native. -/
+
+#print axioms twoAdicCircle_four_card
+#print axioms twoAdicCircle_five_card
+#print axioms castDown_dbl
+#print axioms two_pow_succ_eq_zero
+#print axioms normForm_twoAdicOmega
+#print axioms normForm_twoAdicConj
+#print axioms normForm_twoAdicLevelMap
+#print axioms twoAdicLevelMap_ne_zero_of_mem_circle
+#print axioms twoAdicOmegaHom
+#print axioms twoAdicLevelHom
+#print axioms twoAdicPlane_one_no_fanGap
+#print axioms no_hom_twoAdicPlane_one_to_zero
+
+#print axioms mem_twoAdicCircleFour_iff
+#print axioms proper_of_shift_ne
+#print axioms twoAdicFourTables_proper
+#print axioms twoAdicFourTables_cover
+#print axioms twoAdicFour_forces_iff
+
+#print axioms twoAdicFiveColouring
+#print axioms twoAdicFiveDelta_mem_ker
+#print axioms twoAdicFive_ker_eq
+#print axioms twoAdicFiveEdges_adj
+#print axioms twoAdicFiveHom
+#print axioms twoAdicFive_agrees
+#print axioms twoAdicFive_unsat
+#print axioms twoAdicFiveEdgeGraph_not_colorable
+#print axioms twoAdicFive_not_colorable_with_edge
+#print axioms twoAdicFive_forces_delta
+#print axioms twoAdicFive_forces_of_ker
+#print axioms twoAdicFive_not_forces_of_ne
+#print axioms twoAdicFive_forces_iff
+#print axioms twoAdicFive_forces_iff'
+#print axioms twoAdicFive_not_slack
+#print axioms twoAdicFour_not_slack
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

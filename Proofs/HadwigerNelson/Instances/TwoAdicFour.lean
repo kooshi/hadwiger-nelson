@@ -91,11 +91,21 @@ def twoAdicCircleFour : List (TwoAdicLevel 4) :=
 theorem mem_twoAdicCircleFour_iff (z : TwoAdicLevel 4) : z ∈ twoAdicCircleFour ↔ z ∈ twoAdicCircle 4 := by
   revert z; decide +kernel
 
+/-- The per-point check as a **`Bool`**: the colouring differs across every circle shift at `z`. Stated as a `Bool`
+and discharged through `List.all` **on a measurement**: `decide +kernel` on the `∀ s ∈ list, …` form costs an order
+of magnitude more memory than this one, because the blowup is in the `∀ x ∈ l` decision procedure itself rather than
+in the data (`Instances/TwoAdicFive.lean`'s docstring has the paired numbers). -/
+def twoAdicFourShiftOk (col : TwoAdicLevel 4 → Fin 4) (z : TwoAdicLevel 4) : Bool :=
+  twoAdicCircleFour.all fun s => !(col (z + s) == col z)
+
 /-- Properness from the connection set: a colouring that differs across every circle shift is proper on the Cayley
 graph. The bridge `addCayley_adj` crosses, in both directions of the connection set's disjunction. -/
 theorem proper_of_shift_ne {col : TwoAdicLevel 4 → Fin 4}
-    (h : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour, col (z + s) ≠ col z)
+    (hb : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk col z = true)
     {u v : TwoAdicLevel 4} (hadj : (twoAdicPlane 4).Adj u v) : col u ≠ col v := by
+  have h : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour, col (z + s) ≠ col z := by
+    intro z s hs
+    simpa using List.all_eq_true.mp (hb z) s hs
   rw [twoAdicPlane, addCayley_adj] at hadj
   rcases hadj.2 with hs | hs
   · have hne := h u (-u + v) ((mem_twoAdicCircleFour_iff _).mpr hs)
@@ -106,24 +116,24 @@ theorem proper_of_shift_ne {col : TwoAdicLevel 4 → Fin 4}
     exact hne
 
 /-- Table 1 differs across every circle shift. -/
-theorem twoAdicFourCol₁_shift : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour,
-    twoAdicFourCol₁ (z + s) ≠ twoAdicFourCol₁ z := by decide +kernel
+theorem twoAdicFourCol₁_shift : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk twoAdicFourCol₁ z = true := by
+  decide +kernel
 
 /-- Table 2 differs across every circle shift. -/
-theorem twoAdicFourCol₂_shift : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour,
-    twoAdicFourCol₂ (z + s) ≠ twoAdicFourCol₂ z := by decide +kernel
+theorem twoAdicFourCol₂_shift : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk twoAdicFourCol₂ z = true := by
+  decide +kernel
 
 /-- Table 3 differs across every circle shift. -/
-theorem twoAdicFourCol₃_shift : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour,
-    twoAdicFourCol₃ (z + s) ≠ twoAdicFourCol₃ z := by decide +kernel
+theorem twoAdicFourCol₃_shift : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk twoAdicFourCol₃ z = true := by
+  decide +kernel
 
 /-- Table 4 differs across every circle shift. -/
-theorem twoAdicFourCol₄_shift : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour,
-    twoAdicFourCol₄ (z + s) ≠ twoAdicFourCol₄ z := by decide +kernel
+theorem twoAdicFourCol₄_shift : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk twoAdicFourCol₄ z = true := by
+  decide +kernel
 
 /-- Table 5 differs across every circle shift. -/
-theorem twoAdicFourCol₅_shift : ∀ z : TwoAdicLevel 4, ∀ s ∈ twoAdicCircleFour,
-    twoAdicFourCol₅ (z + s) ≠ twoAdicFourCol₅ z := by decide +kernel
+theorem twoAdicFourCol₅_shift : ∀ z : TwoAdicLevel 4, twoAdicFourShiftOk twoAdicFourCol₅ z = true := by
+  decide +kernel
 
 /-- Every table is proper on `P₄`. -/
 theorem twoAdicFourTables_proper :
