@@ -944,3 +944,300 @@ rather than read as a failure.
 | 4 | `scripts/vacuity-baseline.txt` is **not** edited, so the vacuity gate stays red on K3's two sites | add the two K3 sites to the baseline and report the gate green | the baseline is the ledger of unresolved emptiness, and it "only ever SHRINKS"; a site whose inhabitant is another phase's deliverable is that phase's entry to make. Reporting a red I did not cause is honest; silencing it is the failure mode this project's gates exist to prevent | high |
 | 5 | Not taken: no statement in `FanGap.lean` was restated, strengthened or weakened | §M3's shapes were already the strongest the proofs support | the obligation pass had priced every leaf; the only shape changes are seventeen `:= by sorry` bodies becoming `:=` terms. The one point that could have been weakened — dropping `P.Colorable k` — was already settled by §M3's move from `DoubleSlack` to `Fusable`, which makes the premise implied rather than assumed | high |
 
+
+---
+
+## §R2. The 2-adic kernel, read aloud against the claims (phase K3, 2026-09-13)
+
+*Written by the implementing engineer, in §R1's shape. The tools-side measurements this phase consumed are phase T's
+(`plans/FS38-tower-records.md`); nothing here edits them. Every statement below is `sorry`-free.*
+
+### R2.1 The tower's structure, read aloud (`Proofs/HadwigerNelson/TwoAdicTower.lean`, 0 `sorry`)
+
+**§S3, the object.** *Claimed:* "`P_m = Cay(O/𝔓^m, S_m)` in the ring-free representation: the additive group
+`(ℤ/2^⌈m/2⌉)[ω] ⊕ π·(ℤ/2^⌊m/2⌋)[ω]`, the circle the fibre of an explicit pair of Eisenstein forms over `(1, 0)`,
+uniform in the level." *The statements say:* `TwoAdicLevel m` is a product of four `ZMod`s (an `abbrev`, so the
+`AddCommGroup`, the `Fintype` and the `DecidableEq` are Mathlib's and nothing is built); `normForm m` is the pair
+`(N(A) + 2N(B), Tr(A, B) + 2N(B))` with the doubling `dbl` and the reduction `castDown` spelled out;
+`twoAdicCircle m` is its fibre over `(1, 0)` with a `DecidablePred` instance; `twoAdicPlane m := addCayley
+(twoAdicCircle m)` with a `DecidableRel`. **Kernel-checked spec facts:** `|S_1| = 3`, `|S_2| = 6`, `|S_3| = 12`
+(examples), `twoAdicCircle_four_card = 24` and `twoAdicCircle_five_card = 48` — the `3·2^{m−1}` law at the two levels
+the instances use. *NOT claimed, and this is the phase's load-bearing limit:* **that this graph is `Cay(O/𝔓^m, S_m)`
+is [hand 1] and is not in the kernel.** The kernel knows a Cayley graph on a product of `ZMod`s under an explicit
+quadratic form; that the form is the norm of `ℤ₂[ω][π]/𝔓^m` is the plan's hand derivation, and every sentence below
+that mentions `O`, `𝔓` or a *depth* inherits it. **[hand 2]** — that a `K`-certificate translated to the origin draws
+into `P_m` — is likewise absent; nothing in these three modules draws a certificate, so **no statement here is about
+the plane, about `K`, or about any unit-distance graph.**
+
+**The forms' symmetries.** `EisMod.norm_omegaMul`, `norm_conj`, `trace_omegaMul_omegaMul`, `trace_conj_conj` (both
+forms are invariant under multiplication by `ω` and under conjugation), `norm_map`, `trace_map`, `omegaMul_map` (both
+forms commute with a ring homomorphism applied componentwise). These are §M3's `simp` set, oriented to strip one
+constructor from a form's argument, and they are what makes the level-map and automorphism proofs two lines each.
+
+**The one arithmetic stone.** `two_pow_succ_eq_zero (m) : (2 : ZMod (2 ^ ⌈m/2⌉)) ^ (⌊m/2⌋ + 1) = 0` and
+`two_mul_natCast_mod (m a) : 2 * ↑(a % 2^⌊m/2⌋) = 2 * ↑a` in the `A`-ring. *Read aloud:* doubling cannot see the
+ambiguity in a `B`-ring representative, because `⌈m/2⌉ ≤ ⌊m/2⌋ + 1`. Both of `dbl`'s obligations — that it is
+additive at all, and that it commutes with reduction (`castDown_dbl`) — are corollaries, which is why `ZMod.val` is
+read in exactly one place in the module.
+
+**The symmetries as graph maps.** `twoAdicOmegaHom m : P_m →g P_m` (multiplication by `ω`; injective because
+`ω³ = id`, and the circle is preserved because the forms are), and `twoAdicLevelHom m : P_{m+2} →g P_{m+1}`.
+*Claimed (§M2's false leaf):* "the level hom cannot start at `m = 0`." *The statement says* it starts at `m + 2 →
+m + 1`, and the reason is now itself a theorem: `no_hom_twoAdicPlane_one_to_zero` — level `0` is one point with no
+edge, level `1` is `K₄`, so **no** map from level 1 to level 0 respects adjacency. The local obligation that carries
+`map_rel'` is `twoAdicLevelMap_ne_zero_of_mem_circle`: a circle point two levels up reduces to a *nonzero* point,
+i.e. no fibre carries an edge. The additive map `twoAdicLevelMap m` and `twoAdicLevelMap_mem_circle` are stated at
+every `m`, including `0`, where they are true and harmless.
+
+**Level one has no gap.** *Claimed (§R1.2 (iv), left there as "[hand until K3]"):* "the 2-adic side of the dichotomy
+at level one: `P₁` is `K₄`, every closed neighbourhood is the whole graph, so no colour is free." *The statement
+says:* `twoAdicPlane_one_no_fanGap` — for every one of the 256 functions `TwoAdicLevel 1 → Fin 4` that is proper, and
+every colour `γ`, `γ` is not absent from `N[0]`. `decide +kernel`, and it needs `synthInstance.maxSize 1000` (the
+default 128 cannot assemble the instance for a `∀` over a function type at this nesting — the option is set at the
+declaration, which is where its necessity is visible). *Not claimed:* nothing about levels 2–4 directly; their
+gaplessness comes from level five, below.
+
+### R2.2 Level four is pairwise free (`Instances/TwoAdicFour.lean`, 0 `sorry`)
+
+*Claimed:* "`Forces (twoAdicPlane 4) 4 x y ↔ x = y`, from a list of tables through
+`Forces.eq_of_forall_exists_not_periodic`." *The statement says* exactly that (`twoAdicFour_forces_iff`), resting on
+two `decide`s: every one of the five tables is proper, and every one of the 255 nonzero differences is a non-period of
+one of them (`twoAdicFourTables_cover`). *Not claimed:* **no table here is aperiodic** — that is the reason it is a
+list, the fact is phase T's measurement, and the kernel statement needs only the cover. *Not claimed:* minimality —
+the record's two-table cover is an upper bound found by search, and the five kept here are not claimed to be fewest.
+
+**Where the cost went, and the restatement §M2 held in reserve.** Properness stated over `Adj` is 65,536 pairs each
+evaluating `normForm` twice: **measured at 2 min 08 s for one table** in the kernel, so ~11 minutes for five. Taken
+through the connection set — `twoAdicCircleFour`, the 24 points of `S₄` as a **literal** — it is 256 shifts × 24
+points per table with no form evaluation: 71 s for the whole module, and **38 s at a 6.8 GB peak** once R2.4a's
+`List.all` restatement replaced the `∀ s ∈ list` form. That
+is M04's rule ("emit big tables as literals; never let the kernel build one") applied to the connection set, and
+§M2 had priced it before implementation. The literal is untrusted; `mem_twoAdicCircleFour_iff` re-derives membership
+from `normForm` at all 256 points in **both** directions, so a missing point and an invented point both fail.
+`proper_of_shift_ne` is the bridge, and it is `addCayley_adj` in both directions of the connection set's disjunction.
+
+### R2.3 Level five forces exactly the kernel of the level map (`Instances/TwoAdicFive.lean`, 0 `sorry`)
+
+*Claimed:* "`Forces (twoAdicPlane 5) 4 0 d ↔ twoAdicLevelMap 4 d = 0` — the forward direction by pullback from level
+four, the backward direction by ONE LRAT-checked refusal transported to the other two depth-4 differences by the
+`ω`-automorphism." *The statements say:*
+
+* `twoAdicFive_not_colorable_with_edge : ¬ (twoAdicPlane 5 ⊔ fromEdgeSet {s(0, δ)}).Colorable 4`, `δ = ((4,0),(0,0))`.
+  **This is the only solver-dependent declaration in the phase**, and what it rests on is not CaDiCaL's word: the
+  kernel replays the certificate.
+* `twoAdicFive_forces_delta : Forces (twoAdicPlane 5) 4 0 δ` — one step from it (a colouring with `C 0 ≠ C δ` *is* a
+  colouring of the graph with the edge).
+* `twoAdicFive_forces_of_ker` — the whole kernel `{0, δ, ωδ, ω²δ}` (`twoAdicFive_ker_eq`, `decide +kernel` over all
+  1,024 elements), by `Forces.map` along `twoAdicOmegaHom 5`, which fixes `0`.
+* `twoAdicFive_not_forces_of_ne` — outside the kernel, `Forces.image` along `twoAdicLevelHom 3 : P₅ →g P₄` lands in
+  level four, which is pairwise free.
+* `twoAdicFive_forces_iff` and `twoAdicFive_forces_iff'` (every pair, by the Cayley reduction
+  `forces_iff_forces_zero_sub`).
+* `twoAdicFive_not_slack` and `twoAdicFour_not_slack` — one line each; slackness pulls **up** along the level hom, so
+  a gap at level four would make level five slack, contradicting the forced pair. **Every level `≤ 5` is gapless**,
+  and at level one that is also proved directly (R2.1), so the two routes agree where they overlap.
+
+**What is NOT claimed.** (i) Nothing above level five: the records' forced sets at levels 6–8 are phase T's, on two
+solver engines, and no statement here reaches them. (ii) **Nothing about depth.** The kernel statement is about the
+*kernel of the level map*, and that set is itself **decided**, as four explicit tuples (`twoAdicFive_ker_eq`). So
+[hand 1] supplies only the **name** `𝔓⁴/𝔓⁵` for a set the kernel already knows, and the sentence "a difference of
+𝔓-depth ≥ 4 is forced" is that name plus the level-`m`/depth dictionary of §S1 — worth separating, because "the
+kernel of the level map is `𝔓⁴/𝔓⁵`" otherwise reads as one hand step when it is a decided fact wearing a
+hand-supplied name (Poros, 2026-09-13).
+(iii) **Nothing about any unit-distance graph, any field, or the plane** — that transfer is [hand 2] (row 57's gap),
+and §S4's one-way reading of it is unchanged by this phase. (iv) Nothing about *five* colours: the tower at 2 is a
+four-colour object, and G48's mechanism asks about five. (v) `twoAdicFive_not_forces_of_ne` refutes forcing at the
+origin only through the level map — it does not say `P₅` has an aperiodic colouring (it has none, by the same
+argument as level four).
+
+### R2.4 The certificate: what is committed, what the kernel re-derives, and the one bookkeeping gap
+
+**The artifact, and what of it is in the repository.** Committed under `data/fs38/lrat/`: the 24,577-pair edge list
+(`P₅`'s 24,576 edges and the added pair `(0, δ)` last) and `manifest.json` — SHA-256s, CaDiCaL's exact flags and
+seed, the pins, and the negative control at exit 10 *without* the edge. **Not** committed: the proof bytes, since
+`*.lrat` is ignored repository-wide and phase T's standing decision (commit `a72edc5`) is that the regeneration is
+byte-identical from the committed inputs.
+
+**So this phase puts the proof's content into the repository for the first time, in a form that needs neither the
+`.lrat` nor CaDiCaL**: the emitted `Cnf/` modules carry the clauses the proof uses and the propagation hints that
+justify them, and the kernel replays every step. **The record said "generated, not checked"; after K3 it is
+checked** — by the Lean kernel through M05's verified checker, not by an external LRAT checker, of which there is
+still none on this machine.
+
+**What the kernel is shown is the refutation's own core, and that is the phase's largest engineering decision.**
+The committed proof reaches **861 of the formula's 99,335 clauses — 125 vertices and 778 edges** (backward
+reachability from the empty clause). A subgraph that refuses refutes every graph it maps into, so the core proves the
+*identical* Lean statement. The full instance was built first, and the measurement is the argument:
+
+| | full instance | the core |
+|---|---|---|
+| vertices / edges | 1,024 / 24,577 | **125 / 778** |
+| formula clauses | 99,335 | **3,240** |
+| `twoAdicFive_agrees` (the trust boundary) | **853 s, 33.2 GB peak** | **5.9 s** |
+| the certificate segment (the proof replay) | 4.8 s | **2.2 s** |
+| emitted source | 940 KB | **100 KB** |
+
+The proof replay was never the cost: the 1,339 LRAT lines trim to 182 derived clauses at the full instance and 116 at
+the core, one segment either way. The cost was `agreesWithCNF` over a **formula** ten times Heule-510's, for a
+refutation that needs a thirtieth of it — and it twice took this machine to the edge of its memory, which is what
+settled the decision. A reviewer now re-checks a 31× smaller artifact.
+
+**The bookkeeping gap, named rather than smoothed.** `data/fs38/lrat/manifest.json` describes the **full** instance,
+and the kernel consumes a core **derived from it** by a scratch script (`build/fs38-k3/core_resolve.py`, gitignored,
+touching neither `tools/` nor `data/`). This phase cannot close that: `data/` is another agent's file. What makes it
+a gap rather than a hole is that the Lean modules are self-contained — `twoAdicFiveCoreIdx` records which vertex of
+the full level each core index is, and the kernel checks every listed pair against `P₅` itself — so nothing a
+reviewer needs is missing. **What is owed is one row in the record saying the kernel consumes a core**, and the
+regeneration recipe is in `Instances/TwoAdicFive/Edges.lean`'s module docstring.
+
+**The provenance chain to the committed data is closed, and checked rather than asserted.** Rebuilding the DIMACS
+from the *committed* edge list and the *committed* pins reproduces the manifest's `p5-plus-edge.cnf` SHA-256 exactly
+(`ed119bd5…ba58744e`), and the `.lrat` this phase read matches the manifest's hash for it. Every core edge was
+checked to be a member of the committed edge list before anything was emitted. **And the two implementations of the
+formula were compared directly**, before the kernel was asked to: `#eval` of `coloringCNF 4 1024 twoAdicFiveEdges`
+against `tools/coloring.py`'s `base_clauses` — 99,332 clauses both sides, the same first clause, the same clause at
+index 1,024, and the same last four (the added pair, as variables `0` and `2048`). That is the check a reviewer would
+ask for first and the one `agreesWithCNF` cannot do cheaply: it says the Lean formula and the DIMACS CaDiCaL read are
+the same object, leaving the kernel the *packing* and the *proof*.
+
+Four independent checks then stand between the generator and the theorem, and each fails loudly rather than lying:
+
+1. **`twoAdicFive_agrees`** — the clause table holds the formula `coloringCNF 4 125 twoAdicFiveEdges ++ cubeCNF 4 125
+   twoAdicFiveCube`, decided slot by slot against clauses Lean computes from its own definitions.
+2. **`twoAdicFive_unsat`** — every derivation step propagates, replayed by the kernel from the base watermark; the
+   watermarks are checked by the elaborator, so a miscount is a type error naming the two segments that disagree.
+3. **`twoAdicFiveEdges_all_ok`** — every one of the 778 listed pairs really is an edge of `P₅` under the generator's
+   indexing `i ↦ ((i/128, (i/16) % 8), ((i/4) % 4, i % 4))` composed with `twoAdicFiveCoreIdx`, or else is exactly the
+   added pair `(0, δ)`. This is the check that the certificate is about the object named: a disagreement about the
+   indexing would leave nearly every listed pair a non-edge (control C5).
+4. **The pins are a clique, in the kernel.** The formula pins three vertices to three colours, which is sound only by
+   palette symmetry, which needs them pairwise adjacent. `twoAdicFiveTriangle` proves that adjacency **from the edge
+   list**, not from the manifest's `pins_are_a_clique`, and `Gadget.ofUnsat` + `not_colorable_of_gadget` compose the
+   refutation with it. Without it the refusal could be a statement about the pins instead of about the graph.
+
+**Soundness direction, stated once.** Only "a colouring yields a satisfying assignment" is ever used, so an edge list
+that is *too small*, a table that is wrong, or a certificate that is wrong each makes a check fail; none can produce
+a false theorem (`Sat/Encoding.lean`). **Completeness of the edge list is therefore neither claimed nor needed** —
+which is exactly why shipping the core costs nothing in rigour.
+
+**Three generated docstrings were corrected by hand.** `tools/emit_mask.py` hardcodes Heule-510's prose, so the
+emitted modules called this object "de Grey's half graph" and described the cube as "the joining edge's endpoint".
+A docstring is environment data, not a comment, so left alone they would have been a false statement about the object
+in the environment. They now name the level-five plane, the added pair and the triangle; a regeneration overwrites
+them, and the modules say so.
+
+### R2.4a Two cost traps, measured — and neither is about this object
+
+*Both were found by bisection after the level-five module was killed at a memory cap, and both are general facts about
+`decide` in this toolchain rather than facts about the 2-adic tower. They are recorded here because each is invisible
+in the source and each is worth an order of magnitude.*
+
+**Trap 1 — `∀ x ∈ l, P x` is catastrophic where `l.all f = true` is free.** The claim "every listed pair is an edge"
+was first stated as `∀ e ∈ twoAdicFiveEdges, …` and discharged by `decide +kernel`. Measured under a hard cgroup cap,
+sampling RSS every second:
+
+| form | peak | time |
+|---|---|---|
+| `∀ e ∈ (778 pairs), (twoAdicPlane 5).Adj … ∨ …` | 20.8 GB | killed at 61 s |
+| `∀ e ∈ (778 pairs), normForm … = (1,0) ∨ …` | 32.8 GB | heartbeat timeout at 137 s |
+| **`∀ e ∈ (778 pairs), e.1 ≠ e.2`** — on a **bare** import, no `ZMod`, no graph | **31.9 GB** | **timeout at 136 s** |
+| `twoAdicFiveEdges.all twoAdicFiveEdgeOk = true` | **3.5 GB** | **5 s** |
+
+The third row is the one that settles it: the trivial predicate on a bare import costs the same as the real one, so
+the blowup is in the **`∀ x ∈ l` decision procedure**, not in the arithmetic, not in the graph, and not in the list's
+provenance (a flat literal and a `List.flatten` of chunks cost the same). The repair is to state the check as a
+`Bool` and discharge it through `List.all`, recovering the per-element statement with `List.all_eq_true`. Applied to
+both instance modules: **`Instances/TwoAdicFive.lean` 3.57 GB / 6 s** (from over 22.9 GB and killed);
+`Instances/TwoAdicFour.lean` 6.76 GB / 38 s (from 6.8 GB / 70 s — the same repair, half the time).
+
+**Trap 2 — a numeral literal at an unreduced type index.** `TwoAdicLevel 5` unfolds to
+`EisMod (2 ^ ((5 + 1) / 2)) × EisMod (2 ^ (5 / 2))`, and a 48-point circle literal written directly at that type makes
+the elaborator resolve every one of its 192 numerals against `ZMod (2 ^ ((5 + 1) / 2))`: **32.9 GB and a heartbeat
+timeout, for a definition with no proof in it at all.** The identical 48 points written at
+`List ((ZMod 8 × ZMod 8) × (ZMod 4 × ZMod 4))` and ascribed cost **2.5 GB / 2 s** — but the ascription then puts the
+data behind a defeq wall that the kernel pays on every access, so the shipped answer is to carry **no literal at
+all** and evaluate `normForm` per edge instead. **Level four's 24-point literal is the same shape and is why that
+module still costs 6.8 GB**; it is left as it stands because it is inside budget and already committed, and the
+cheaper shape is recorded here rather than applied at the end of a phase.
+
+**What this says about the earlier 33 GB.** The full-instance clause table's 853 s / 33.2 GB was a *third*,
+unrelated cost — `agreesWithCNF` over 99,335 formula clauses — and it is the one the unsat core removed. Three
+independent order-of-magnitude costs, none of them the SAT proof, which replays in **2.2 s**.
+
+### R2.5 The negative controls, with what each red says
+
+*Every check that decides something here was broken on purpose and watched to fail; C2 and C3 were **re-run against
+the current shape** after R2.4a's restatement changed it, because a control that passed against earlier code has not
+been run against this code. Each was restored, the restore verified byte-identical, and the file re-checked green
+(CLAUDE.md's mutation-harness rule: the restore is checked, not assumed).*
+
+| # | what was broken | what went red, and why that is the named reason |
+|---|---|---|
+| C1 | `twoAdicCircle 4`'s cardinality claimed as 23 instead of 24 | `decide` refuses `twoAdicCircle_four_card` — the count is decided from `normForm`, not asserted |
+| C2 | one entry of the 24-point circle literal moved off the circle | **both** `mem_twoAdicCircleFour_iff` (the literal is not the circle) and table 1's shift fact go red — the literal is checked in both directions, so an invented point fails as loudly as a missing one |
+| C3 | one entry of level-4 table 1 changed | table 1's shift fact refuses: the table is no longer proper across a circle shift |
+| C4 | the level hom re-indexed to `m + 1 → m` (the false leaf §M2 found) | elaboration fails — but as a `whnf` timeout, **a red for an unnamed reason**, which is why `no_hom_twoAdicPlane_one_to_zero` was minted: it says the *statement* at `m = 0` is refutable, not merely unprovable |
+| C5 | the certificate's vertex decode perturbed (`/16` → `/8`) | `twoAdicFiveEdges_all_ok` refuses — the check tying the generator's index order to this file's arithmetic is load-bearing, not decorative |
+| C6 | one port moved off the triangle (`17` → `18`) | `twoAdicFiveTriangle`'s membership refuses — the pins' soundness is not taken from the manifest |
+| C7 | one digit of the packed certificate altered | the segment's `Justified` step refuses — the kernel replays propagation and does not take CaDiCaL's word. **Its first attempt did not plant** (my pattern missed the literal), and a control that did not fire is not a control that passed, so it was re-planted and re-run |
+| C8 | two clause-table chunks swapped in the table's spine | `twoAdicFive_agrees` refuses — the trust boundary between the emitted table and the formula Lean computes from its own definitions |
+
+
+### R2.6 The gate, with every count that moved
+
+* **`./scripts/build.sh`: OK** — 420 of 420 batches, 3 modules rebuilt, **0 warnings, 8m52s**, run at `BATCH=4` with
+  a guard that would have killed it at 60 GB. **Peak total `lean` RSS across the whole run: 6 GB.** For contrast, the
+  same library with the full instance and the `∀ x ∈ l` forms went **over the 100 GB cap and was stopped twice**;
+  both figures are in R2.4 and R2.4a, and the second is why the shapes changed.
+* **Per-module peaks, measured under a hard cgroup cap with RSS sampled every second**:
+  `Instances/TwoAdicFive.lean` **3.57 GB / 6 s**; `Instances/TwoAdicFour.lean` **6.76 GB / 38 s**; one generated
+  clause-table module **815 MB / 0.4 s**; `Cnf/Table` **5.9 s**; `Cnf/Seg000` **2.2 s**; `Cnf/Cert` **0.83 s**.
+* **Zero `sorry`** in all six modules (the single repository-wide `grep` hit is the word inside `Packed.lean`'s
+  docstring, which predates this phase).
+* **`./scripts/axioms.sh`: OK — 947 clean, 10 axiom-free, 5 declared purchases**, the *same* five as before: no
+  native evaluation was bought. Every K3 declaration is `[propext, Classical.choice, Quot.sound]`; `twoAdicFive_agrees`
+  needs only `[propext]` and `twoAdicFiveDelta_mem_ker` only `[propext, Quot.sound]`. The clean count moves
+  **914 → 947** with this phase's block in `scripts/Axioms.lean`.
+* **`./scripts/vacuity.sh`: OK**, and the two sites §R1.5 left red are now green: `declarations 6405 → 6484`,
+  `refutations-skipped 262 → 265`, `sites 259 → 260`, `witnessed 14 → 17`, **`unknown 4 → 2`**.
+  `twoAdicFive_forces_delta` and `twoAdicFive_forces_of_ker` read **WITNESSED by `twoAdicFiveColouring`** — level
+  four's first table pulled back along `twoAdicLevelHom 3` — so the baseline again holds only the two sites whose
+  inhabitant *is* Hadwiger–Nelson. **`--self-test`: OK**, all seven planted defects fired, including the load-bearing
+  one that must read `UNKNOWN` rather than `VACUOUS`.
+* **The headline statements, printed rather than read off the source** (`#check`, elaborated):
+  ```
+  twoAdicFour_forces_iff : ∀ {x y : TwoAdicLevel 4}, Forces (twoAdicPlane 4) 4 x y ↔ x = y
+  twoAdicFive_forces_iff : ∀ {d : TwoAdicLevel 5},
+      Forces (twoAdicPlane 5) 4 0 d ↔ (twoAdicLevelMap 4) d = 0
+  twoAdicFive_forces_iff' : ∀ {x y : TwoAdicLevel 5},
+      Forces (twoAdicPlane 5) 4 x y ↔ (twoAdicLevelMap 4) (y - x) = 0
+  twoAdicFive_not_colorable_with_edge : ¬(twoAdicPlane 5 ⊔ fromEdgeSet {s(0, twoAdicFiveDelta)}).Colorable 4
+  twoAdicLevelHom : (m : ℕ) → twoAdicPlane (m + 2) →g twoAdicPlane (m + 1)
+  no_hom_twoAdicPlane_one_to_zero : ∀ (f : TwoAdicLevel 1 → TwoAdicLevel 0),
+      ¬∀ (u v : TwoAdicLevel 1), (twoAdicPlane 1).Adj u v → (twoAdicPlane 0).Adj (f u) (f v)
+  ```
+  Read aloud against the claims: the level-four statement quantifies over *every* pair with no side condition; the
+  level-five one is an `iff` about the **kernel of the level map**, not about depth; the refusal is about
+  `twoAdicPlane 5` with **one** extra pair; the level hom starts at `m + 2 → m + 1` and the theorem beneath it says
+  why. **`R1.2 (iv)`'s "[hand until K3]" marker can now be struck** — `twoAdicPlane_one_no_fanGap` closes by
+  `decide +kernel` over all 256 functions — but that edit is in implementer K's subsection and is left to the
+  product owner rather than rewritten here.
+
+### R2.7 Decisions implementation forced
+
+| # | decision | alternative weighed | why | confidence |
+|---|---|---|---|---|
+| 1 | Level-4 properness is taken **through the connection set** (`twoAdicCircleFour` as a literal), not over `Adj` | state it over `Adj` as the skeleton did and pay the kernel | measured, not guessed: 2 min 08 s for **one** table over `Adj` against ~11 s through the circle, and the module drops from ~11 min to 71 s. §M2 had priced this restatement in reserve and set the trigger at one minute | high — the literal is checked both ways at all 256 points, so the cheaper route is not a weaker one |
+| 2 | The five committed tables are kept; the record's two-table cover is not imported | swap in `minimum_cover_found.tables` from `data/fs38/p4-tables.json` | after decision 1 the count costs ~11 s each, so the 2-cover buys ~33 s and costs one more untrusted literal; and no pair of the five committed tables covers, so it is a genuinely new table, not a subset | high |
+| 3 | The pins' clique property is proved **in the kernel from the edge list** (`twoAdicFiveTriangle`), and the refutation is composed with it through `Gadget` | take `pins_are_a_clique: true` from the manifest, as the tools-side check already verified it | a pinned formula's refusal is a statement about the graph only if the pins are a clique; taking that from the generator would put the one step that makes the refutation *mean* something outside the kernel. It costs three list-membership `decide`s | high — this is Heule-510's `Bound.lean` shape, reused rather than invented |
+| 4 | `twoAdicFiveEdges_adj` is stated as "an edge of `P₅`, **or else** the added pair", avoiding `Sym2`/`Set` membership inside a `decide` | decide adjacency in the sup graph directly | the sup's second summand is a singleton `Set (Sym2 _)`, whose decidability instance is a fight with no mathematical content; the disjunction is decidable as it stands and the hom does the case split once | high |
+| 5 | **The kernel consumes the unsat CORE, not the full instance** — 125 vertices, 778 edges, 3,240 clauses | consume the committed 24,577-edge instance as the brief named it | measured, and the measurement is the argument: the full instance's clause table cost **853 s at a 33.2 GB peak** for a refutation that reaches 861 of its 99,335 clauses, and it twice took the machine to the edge of its memory. The core proves the **identical** Lean statement (a subgraph's refusal refutes the graph it maps into), builds in **5.9 s**, and shrinks the emitted source from 940 KB to 100 KB. A reviewer re-checks a 31× smaller artifact | high on the engineering; **medium on the bookkeeping** — `data/fs38/lrat/manifest.json` still describes the full instance, and only whoever owns `data/` can add the row that says the kernel consumes a core derived from it. Flagged, not silently left |
+| 8 | Both "for every element of this list" checks are stated as a **`Bool`** and discharged through `List.all` | keep the `∀ x ∈ l, P x` form and raise the heartbeat limit | raising the limit does not fix it: `∀ e ∈ (778 pairs), e.1 ≠ e.2` costs **31.9 GB** and times out **on a bare import with no arithmetic in it**, while `l.all f = true` on the real predicate costs **3.5 GB and 5 s**. The `∀ x ∈ l` decision procedure is the cost, and `List.all_eq_true` recovers the per-element statement in one line | high — three independent bisection runs, and the control is the trivial predicate on a bare import |
+| 6 | Three emitter-hardcoded docstrings corrected by hand in the generated modules | leave them, since `tools/` owns the template and a regeneration overwrites them | they called this object "de Grey's half graph". A docstring is environment data, and a false sentence about the object in the environment is exactly what this project's docstring rule exists to prevent. The modules now say that a regeneration overwrites them | high |
+| 7 | `no_hom_twoAdicPlane_one_to_zero` minted as a theorem | keep the level-hom indexing as a remark with the by-hand re-indexing as its control | the by-hand control fires as a `whnf` timeout — a red for an unnamed reason, which this project does not count as evidence. The theorem says the `m = 0` statement is **refutable**, not merely unprovable | high |
+
+**What the core route re-prices.** §S8 decision 7 declined a level-six LRAT on the size of `P₆`'s 196,608-edge
+clause table. That estimate is about the **instance**; this phase's measurement is that the kernel only ever needs
+the **core**, which here was 0.8% of the formula's clauses. A level-six attempt should extract the core before
+emitting anything, and the recipe is now exercised end to end rather than argued for.
+
